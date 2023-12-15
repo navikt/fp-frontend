@@ -1846,7 +1846,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@csstools/css-parser-algorithms@npm:^2.3.1":
+"@csstools/css-parser-algorithms@npm:^2.3.2":
   version: 2.3.2
   resolution: "@csstools/css-parser-algorithms@npm:2.3.2"
   peerDependencies:
@@ -1855,14 +1855,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@csstools/css-tokenizer@npm:^2.2.0":
+"@csstools/css-tokenizer@npm:^2.2.1":
   version: 2.2.1
   resolution: "@csstools/css-tokenizer@npm:2.2.1"
   checksum: ebd9f65b253037d3a575ded45dbe41c12e71d83d6aa8a6a3a9fc2427862a805678df2a825cd19cf36b587be93f5cb1bd0932bb5c362d227ed9533db35b1fc6fa
   languageName: node
   linkType: hard
 
-"@csstools/media-query-list-parser@npm:^2.1.4":
+"@csstools/media-query-list-parser@npm:^2.1.5":
   version: 2.1.5
   resolution: "@csstools/media-query-list-parser@npm:2.1.5"
   peerDependencies:
@@ -3114,7 +3114,7 @@ __metadata:
     react-hook-form: 7.49.2
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -3153,7 +3153,7 @@ __metadata:
     react-hook-form: 7.49.2
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -3188,7 +3188,7 @@ __metadata:
     react: 18.2.0
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -3224,7 +3224,7 @@ __metadata:
     react-hook-form: 7.49.2
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -3253,7 +3253,7 @@ __metadata:
     eslint: 8.55.0
     react: 18.2.0
     react-intl: 6.5.5
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -3290,7 +3290,7 @@ __metadata:
     react-hook-form: 7.49.2
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -3327,7 +3327,7 @@ __metadata:
     react-hook-form: 7.49.2
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -3363,7 +3363,7 @@ __metadata:
     react-hook-form: 7.49.2
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -3402,7 +3402,7 @@ __metadata:
     react-hook-form: 7.49.2
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -3441,7 +3441,7 @@ __metadata:
     react-hook-form: 7.49.2
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -3476,7 +3476,7 @@ __metadata:
     react-hook-form: 7.49.2
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -3514,7 +3514,7 @@ __metadata:
     react-hook-form: 7.49.2
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -3551,7 +3551,7 @@ __metadata:
     react-hook-form: 7.49.2
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -3591,7 +3591,7 @@ __metadata:
     react-hook-form: 7.49.2
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -3629,7 +3629,7 @@ __metadata:
     react-hook-form: 7.49.2
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -3664,7 +3664,7 @@ __metadata:
     react-hook-form: 7.49.2
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -3698,7 +3698,7 @@ __metadata:
     react-hook-form: 7.49.2
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -3729,7 +3729,7 @@ __metadata:
     react: 18.2.0
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -3869,7 +3869,7 @@ __metadata:
     react-test-renderer: 18.2.0
     rollup-plugin-sourcemaps: 0.6.3
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -3907,7 +3907,7 @@ __metadata:
     react-hook-form: 7.49.2
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -3971,7 +3971,7 @@ __metadata:
     react-intl: 6.5.5
     react-router-dom: 6.21.0
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -4010,7 +4010,7 @@ __metadata:
     react-intl: 6.5.5
     react-router-dom: 6.21.0
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -4054,7 +4054,7 @@ __metadata:
     react-intl: 6.5.5
     react-router-dom: 6.21.0
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -4089,7 +4089,7 @@ __metadata:
     react-hook-form: 7.49.2
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -4129,7 +4129,7 @@ __metadata:
     react-intl: 6.5.5
     react-router-dom: 6.21.0
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -4164,7 +4164,7 @@ __metadata:
     react-intl: 6.5.5
     react-router-dom: 6.21.0
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -4195,7 +4195,7 @@ __metadata:
     react: 18.2.0
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -4226,7 +4226,7 @@ __metadata:
     react: 18.2.0
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -4258,7 +4258,7 @@ __metadata:
     react: 18.2.0
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -4293,7 +4293,7 @@ __metadata:
     react-hook-form: 7.49.2
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -4325,7 +4325,7 @@ __metadata:
     react: 18.2.0
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -4355,7 +4355,7 @@ __metadata:
     react: 18.2.0
     react-hook-form: 7.49.2
     react-intl: 6.5.5
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -4391,7 +4391,7 @@ __metadata:
     react-hook-form: 7.49.2
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -4430,7 +4430,7 @@ __metadata:
     react-hook-form: 7.49.2
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -4466,7 +4466,7 @@ __metadata:
     react-hook-form: 7.49.2
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -4503,7 +4503,7 @@ __metadata:
     react-hook-form: 7.49.2
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -4539,7 +4539,7 @@ __metadata:
     react-hook-form: 7.49.2
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -4577,7 +4577,7 @@ __metadata:
     react-hook-form: 7.49.2
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -4614,7 +4614,7 @@ __metadata:
     react-hook-form: 7.49.2
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -4653,7 +4653,7 @@ __metadata:
     react-hook-form: 7.49.2
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -4689,7 +4689,7 @@ __metadata:
     react-hook-form: 7.49.2
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -4722,7 +4722,7 @@ __metadata:
     react: 18.2.0
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -4761,7 +4761,7 @@ __metadata:
     react-hook-form: 7.49.2
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -4795,7 +4795,7 @@ __metadata:
     react-hook-form: 7.49.2
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -4829,7 +4829,7 @@ __metadata:
     react-hook-form: 7.49.2
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -4863,7 +4863,7 @@ __metadata:
     react-hook-form: 7.49.2
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -4897,7 +4897,7 @@ __metadata:
     react-hook-form: 7.49.2
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -4932,7 +4932,7 @@ __metadata:
     react-hook-form: 7.49.2
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -4968,7 +4968,7 @@ __metadata:
     react-hook-form: 7.49.2
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -5004,7 +5004,7 @@ __metadata:
     react-hook-form: 7.49.2
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -5040,7 +5040,7 @@ __metadata:
     react-hook-form: 7.49.2
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -5075,7 +5075,7 @@ __metadata:
     react-hook-form: 7.49.2
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -5144,7 +5144,7 @@ __metadata:
     react-intl: 6.5.5
     react-router-dom: 6.21.0
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -5180,7 +5180,7 @@ __metadata:
     react-hook-form: 7.49.2
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -5208,7 +5208,7 @@ __metadata:
     react: 18.2.0
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -5241,7 +5241,7 @@ __metadata:
     react-hook-form: 7.49.2
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -5275,7 +5275,7 @@ __metadata:
     react-hook-form: 7.49.2
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -5308,7 +5308,7 @@ __metadata:
     react-hook-form: 7.49.2
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -5340,7 +5340,7 @@ __metadata:
     react: 18.2.0
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -5374,7 +5374,7 @@ __metadata:
     react-hook-form: 7.49.2
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -5408,7 +5408,7 @@ __metadata:
     react-hook-form: 7.49.2
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -5451,7 +5451,7 @@ __metadata:
     react-intl: 6.5.5
     react-router-dom: 6.21.0
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -5477,7 +5477,7 @@ __metadata:
     react-hook-form: 7.49.2
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -5545,7 +5545,7 @@ __metadata:
     react: 18.2.0
     react-intl: 6.5.5
     storybook: 7.6.4
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     typescript: 5.3.3
     vite: 5.0.9
     vitest: 1.0.4
@@ -9107,7 +9107,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/minimist@npm:^1.2.0, @types/minimist@npm:^1.2.2":
+"@types/minimist@npm:^1.2.0":
   version: 1.2.3
   resolution: "@types/minimist@npm:1.2.3"
   checksum: 666ea4f8c39dcbdfbc3171fe6b3902157c845cc9cb8cee33c10deb706cda5e0cc80f98ace2d6d29f6774b0dc21180c96cd73c592a1cbefe04777247c7ba0e84b
@@ -10733,29 +10733,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"camelcase-keys@npm:^7.0.0":
-  version: 7.0.2
-  resolution: "camelcase-keys@npm:7.0.2"
-  dependencies:
-    camelcase: ^6.3.0
-    map-obj: ^4.1.0
-    quick-lru: ^5.1.1
-    type-fest: ^1.2.1
-  checksum: b5821cc48dd00e8398a30c5d6547f06837ab44de123f1b3a603d0a03399722b2fc67a485a7e47106eb02ef543c3b50c5ebaabc1242cde4b63a267c3258d2365b
-  languageName: node
-  linkType: hard
-
 "camelcase@npm:^5.3.1":
   version: 5.3.1
   resolution: "camelcase@npm:5.3.1"
   checksum: e6effce26b9404e3c0f301498184f243811c30dfe6d0b9051863bd8e4034d09c8c2923794f280d6827e5aa055f6c434115ff97864a16a963366fb35fd673024b
-  languageName: node
-  linkType: hard
-
-"camelcase@npm:^6.3.0":
-  version: 6.3.0
-  resolution: "camelcase@npm:6.3.0"
-  checksum: 8c96818a9076434998511251dcb2761a94817ea17dbdc37f47ac080bd088fc62c7369429a19e2178b993497132c8cbcf5cc1f44ba963e76782ba469c0474938d
   languageName: node
   linkType: hard
 
@@ -11456,6 +11437,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"cosmiconfig@npm:^9.0.0":
+  version: 9.0.0
+  resolution: "cosmiconfig@npm:9.0.0"
+  dependencies:
+    env-paths: ^2.2.1
+    import-fresh: ^3.3.0
+    js-yaml: ^4.1.0
+    parse-json: ^5.2.0
+  peerDependencies:
+    typescript: ">=4.9.5"
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: a30c424b53d442ea0bdd24cb1b3d0d8687c8dda4a17ab6afcdc439f8964438801619cdb66e8e79f63b9caa3e6586b60d8bab9ce203e72df6c5e80179b971fe8f
+  languageName: node
+  linkType: hard
+
 "cross-env@npm:7.0.3":
   version: 7.0.3
   resolution: "cross-env@npm:7.0.3"
@@ -11690,13 +11688,6 @@ __metadata:
   version: 1.2.0
   resolution: "decamelize@npm:1.2.0"
   checksum: ad8c51a7e7e0720c70ec2eeb1163b66da03e7616d7b98c9ef43cce2416395e84c1e9548dd94f5f6ffecfee9f8b94251fc57121a8b021f2ff2469b2bae247b8aa
-  languageName: node
-  linkType: hard
-
-"decamelize@npm:^5.0.0":
-  version: 5.0.1
-  resolution: "decamelize@npm:5.0.1"
-  checksum: 7c3b1ed4b3e60e7fbc00a35fb248298527c1cdfe603e41dfcf05e6c4a8cb9efbee60630deb677ed428908fb4e74e322966c687a094d1478ddc9c3a74e9dc7140
   languageName: node
   linkType: hard
 
@@ -12192,7 +12183,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"env-paths@npm:^2.2.0":
+"env-paths@npm:^2.2.0, env-paths@npm:^2.2.1":
   version: 2.2.1
   resolution: "env-paths@npm:2.2.1"
   checksum: 65b5df55a8bab92229ab2b40dad3b387fad24613263d103a97f91c9fe43ceb21965cd3392b1ccb5d77088021e525c4e0481adb309625d0cb94ade1d1fb8dc17e
@@ -13185,12 +13176,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"file-entry-cache@npm:^7.0.0":
-  version: 7.0.1
-  resolution: "file-entry-cache@npm:7.0.1"
+"file-entry-cache@npm:^7.0.2":
+  version: 7.0.2
+  resolution: "file-entry-cache@npm:7.0.2"
   dependencies:
-    flat-cache: ^3.1.1
-  checksum: 3b5affa175cc246147ca394fa2ed719d306126a9259bef7b29c4024451d6671c82bf505600c37ec1398f80427c1fa91edb973b5d5228fd40590f797ce7a2401c
+    flat-cache: ^3.2.0
+  checksum: 283c674fc26bed1c44e74cf25c2640c813e222ea30a2536404b53511ca311d4a2502ee8145a01aecd12b9a910eb4162364776be27a9683e8447332054e9d712f
   languageName: node
   linkType: hard
 
@@ -13326,14 +13317,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"flat-cache@npm:^3.1.1":
-  version: 3.1.1
-  resolution: "flat-cache@npm:3.1.1"
+"flat-cache@npm:^3.2.0":
+  version: 3.2.0
+  resolution: "flat-cache@npm:3.2.0"
   dependencies:
     flatted: ^3.2.9
     keyv: ^4.5.3
     rimraf: ^3.0.2
-  checksum: 4958cfe0f46acf84953d4e16676ef5f0d38eab3a92d532a1e8d5f88f11eea8b36d5d598070ff2aeae15f1fde18f8d7d089eefaf9db10b5a587cc1c9072325c7a
+  checksum: e7e0f59801e288b54bee5cb9681e9ee21ee28ef309f886b312c9d08415b79fc0f24ac842f84356ce80f47d6a53de62197ce0e6e148dc42d5db005992e2a756ec
   languageName: node
   linkType: hard
 
@@ -13462,7 +13453,7 @@ __metadata:
     lint-staged: 15.2.0
     react-test-renderer: 18.2.0
     shelljs: 0.8.5
-    stylelint: 15.11.0
+    stylelint: 16.0.2
     stylelint-order: 6.0.4
     typescript: 5.3.3
     vite: 5.0.9
@@ -14426,6 +14417,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ignore@npm:^5.3.0":
+  version: 5.3.0
+  resolution: "ignore@npm:5.3.0"
+  checksum: 2736da6621f14ced652785cb05d86301a66d70248597537176612bd0c8630893564bd5f6421f8806b09e8472e75c591ef01672ab8059c07c6eb2c09cefe04bf9
+  languageName: node
+  linkType: hard
+
 "import-fresh@npm:^3.2.1, import-fresh@npm:^3.3.0":
   version: 3.3.0
   resolution: "import-fresh@npm:3.3.0"
@@ -14436,7 +14434,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"import-lazy@npm:^4.0.0, import-lazy@npm:~4.0.0":
+"import-lazy@npm:~4.0.0":
   version: 4.0.0
   resolution: "import-lazy@npm:4.0.0"
   checksum: 22f5e51702134aef78890156738454f620e5fe7044b204ebc057c614888a1dd6fdf2ede0fdcca44d5c173fd64f65c985f19a51775b06967ef58cc3d26898df07
@@ -14466,13 +14464,6 @@ __metadata:
   version: 4.0.0
   resolution: "indent-string@npm:4.0.0"
   checksum: 824cfb9929d031dabf059bebfe08cf3137365e112019086ed3dcff6a0a7b698cb80cf67ccccde0e25b9e2d7527aa6cc1fed1ac490c752162496caba3e6699612
-  languageName: node
-  linkType: hard
-
-"indent-string@npm:^5.0.0":
-  version: 5.0.0
-  resolution: "indent-string@npm:5.0.0"
-  checksum: e466c27b6373440e6d84fbc19e750219ce25865cb82d578e41a6053d727e5520dc5725217d6eb1cc76005a1bb1696a0f106d84ce7ebda3033b963a38583fb3b3
   languageName: node
   linkType: hard
 
@@ -16089,7 +16080,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"map-obj@npm:^4.0.0, map-obj@npm:^4.1.0":
+"map-obj@npm:^4.0.0":
   version: 4.3.0
   resolution: "map-obj@npm:4.3.0"
   checksum: fbc554934d1a27a1910e842bc87b177b1a556609dd803747c85ece420692380827c6ae94a95cce4407c054fa0964be3bf8226f7f2cb2e9eeee432c7c1985684e
@@ -16167,23 +16158,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"meow@npm:^10.1.5":
-  version: 10.1.5
-  resolution: "meow@npm:10.1.5"
-  dependencies:
-    "@types/minimist": ^1.2.2
-    camelcase-keys: ^7.0.0
-    decamelize: ^5.0.0
-    decamelize-keys: ^1.1.0
-    hard-rejection: ^2.1.0
-    minimist-options: 4.1.0
-    normalize-package-data: ^3.0.2
-    read-pkg-up: ^8.0.0
-    redent: ^4.0.0
-    trim-newlines: ^4.0.2
-    type-fest: ^1.2.2
-    yargs-parser: ^20.2.9
-  checksum: dd5f0caa4af18517813547dc66741dcbf52c4c23def5062578d39b11189fd9457aee5c1f2263a5cd6592a465023df8357e8ac876b685b64dbcf545e3f66c23a7
+"meow@npm:^12.1.1":
+  version: 12.1.1
+  resolution: "meow@npm:12.1.1"
+  checksum: a6f3be85fbe53430ef53ab933dd790c39216eb4dbaabdbef593aa59efb40ecaa417897000175476bc33eed09e4cbce01df7ba53ba91e9a4bd84ec07024cb8914
   languageName: node
   linkType: hard
 
@@ -16578,15 +16556,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nanoid@npm:^3.3.6":
-  version: 3.3.6
-  resolution: "nanoid@npm:3.3.6"
-  bin:
-    nanoid: bin/nanoid.cjs
-  checksum: 7d0eda657002738aa5206107bd0580aead6c95c460ef1bdd0b1a87a9c7ae6277ac2e9b945306aaa5b32c6dcb7feaf462d0f552e7f8b5718abfc6ead5c94a71b3
-  languageName: node
-  linkType: hard
-
 "nanoid@npm:^3.3.7":
   version: 3.3.7
   resolution: "nanoid@npm:3.3.7"
@@ -16753,7 +16722,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"normalize-package-data@npm:^3.0.0, normalize-package-data@npm:^3.0.2, normalize-package-data@npm:^3.0.3":
+"normalize-package-data@npm:^3.0.0, normalize-package-data@npm:^3.0.3":
   version: 3.0.3
   resolution: "normalize-package-data@npm:3.0.3"
   dependencies:
@@ -17739,12 +17708,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-safe-parser@npm:^6.0.0":
-  version: 6.0.0
-  resolution: "postcss-safe-parser@npm:6.0.0"
+"postcss-safe-parser@npm:^7.0.0":
+  version: 7.0.0
+  resolution: "postcss-safe-parser@npm:7.0.0"
   peerDependencies:
-    postcss: ^8.3.3
-  checksum: 06c733eaad83a3954367e7ee02ddfe3796e7a44d4299ccf9239f40964a4daac153c7d77613f32964b5a86c0c6c2f6167738f31d578b73b17cb69d0c4446f0ebe
+    postcss: ^8.4.31
+  checksum: dba4d782393e6f07339c24bdb8b41166e483d5e7b8f34174c35c64065aef36aadef94b53e0501d7a630d42f51bbd824671e8fb1c2b417333b08b71c9b0066c76
   languageName: node
   linkType: hard
 
@@ -17771,17 +17740,6 @@ __metadata:
   version: 4.2.0
   resolution: "postcss-value-parser@npm:4.2.0"
   checksum: 819ffab0c9d51cf0acbabf8996dffbfafbafa57afc0e4c98db88b67f2094cb44488758f06e5da95d7036f19556a4a732525e84289a425f4f6fd8e412a9d7442f
-  languageName: node
-  linkType: hard
-
-"postcss@npm:^8.4.28":
-  version: 8.4.31
-  resolution: "postcss@npm:8.4.31"
-  dependencies:
-    nanoid: ^3.3.6
-    picocolors: ^1.0.0
-    source-map-js: ^1.0.2
-  checksum: 1d8611341b073143ad90486fcdfeab49edd243377b1f51834dc4f6d028e82ce5190e4f11bb2633276864503654fb7cab28e67abdc0fbf9d1f88cad4a0ff0beea
   languageName: node
   linkType: hard
 
@@ -18046,13 +18004,6 @@ __metadata:
   version: 4.0.1
   resolution: "quick-lru@npm:4.0.1"
   checksum: bea46e1abfaa07023e047d3cf1716a06172c4947886c053ede5c50321893711577cb6119360f810cc3ffcd70c4d7db4069c3cee876b358ceff8596e062bd1154
-  languageName: node
-  linkType: hard
-
-"quick-lru@npm:^5.1.1":
-  version: 5.1.1
-  resolution: "quick-lru@npm:5.1.1"
-  checksum: a516faa25574be7947969883e6068dbe4aa19e8ef8e8e0fd96cddd6d36485e9106d85c0041a27153286b0770b381328f4072aa40d3b18a19f5f7d2b78b94b5ed
   languageName: node
   linkType: hard
 
@@ -18523,17 +18474,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"read-pkg-up@npm:^8.0.0":
-  version: 8.0.0
-  resolution: "read-pkg-up@npm:8.0.0"
-  dependencies:
-    find-up: ^5.0.0
-    read-pkg: ^6.0.0
-    type-fest: ^1.0.1
-  checksum: fe4c80401656b40b408884457fffb5a8015c03b1018cfd8e48f8d82a5e9023e24963603aeb2755608d964593e046c15b34d29b07d35af9c7aa478be81805209c
-  languageName: node
-  linkType: hard
-
 "read-pkg@npm:^3.0.0":
   version: 3.0.0
   resolution: "read-pkg@npm:3.0.0"
@@ -18554,18 +18494,6 @@ __metadata:
     parse-json: ^5.0.0
     type-fest: ^0.6.0
   checksum: eb696e60528b29aebe10e499ba93f44991908c57d70f2d26f369e46b8b9afc208ef11b4ba64f67630f31df8b6872129e0a8933c8c53b7b4daf0eace536901222
-  languageName: node
-  linkType: hard
-
-"read-pkg@npm:^6.0.0":
-  version: 6.0.0
-  resolution: "read-pkg@npm:6.0.0"
-  dependencies:
-    "@types/normalize-package-data": ^2.4.0
-    normalize-package-data: ^3.0.2
-    parse-json: ^5.2.0
-    type-fest: ^1.0.1
-  checksum: 0cebdff381128e923815c643074a87011070e5fc352bee575d327d6485da3317fab6d802a7b03deeb0be7be8d3ad1640397b3d5d2f044452caf4e8d1736bf94f
   languageName: node
   linkType: hard
 
@@ -18642,16 +18570,6 @@ __metadata:
     indent-string: ^4.0.0
     strip-indent: ^3.0.0
   checksum: fa1ef20404a2d399235e83cc80bd55a956642e37dd197b4b612ba7327bf87fa32745aeb4a1634b2bab25467164ab4ed9c15be2c307923dd08b0fe7c52431ae6b
-  languageName: node
-  linkType: hard
-
-"redent@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "redent@npm:4.0.0"
-  dependencies:
-    indent-string: ^5.0.0
-    strip-indent: ^4.0.0
-  checksum: 6944e7b1d8f3fd28c2515f5c605b9f7f0ea0f4edddf41890bbbdd4d9ee35abb7540c3b278f03ff827bd278bb6ff4a5bd8692ca406b748c5c1c3ce7355e9fbf8f
   languageName: node
   linkType: hard
 
@@ -19848,13 +19766,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"style-search@npm:^0.1.0":
-  version: 0.1.0
-  resolution: "style-search@npm:0.1.0"
-  checksum: 3cfefe335033aad6d47da0725cb48f5db91a73935954c77eab77d9e415e6668cdb406da4a4f7ef9f1aca77853cf5ba7952c45e869caa5bd6439691d88098d468
-  languageName: node
-  linkType: hard
-
 "stylelint-order@npm:6.0.4":
   version: 6.0.4
   resolution: "stylelint-order@npm:6.0.4"
@@ -19867,53 +19778,51 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint@npm:15.11.0":
-  version: 15.11.0
-  resolution: "stylelint@npm:15.11.0"
+"stylelint@npm:16.0.2":
+  version: 16.0.2
+  resolution: "stylelint@npm:16.0.2"
   dependencies:
-    "@csstools/css-parser-algorithms": ^2.3.1
-    "@csstools/css-tokenizer": ^2.2.0
-    "@csstools/media-query-list-parser": ^2.1.4
+    "@csstools/css-parser-algorithms": ^2.3.2
+    "@csstools/css-tokenizer": ^2.2.1
+    "@csstools/media-query-list-parser": ^2.1.5
     "@csstools/selector-specificity": ^3.0.0
     balanced-match: ^2.0.0
     colord: ^2.9.3
-    cosmiconfig: ^8.2.0
+    cosmiconfig: ^9.0.0
     css-functions-list: ^3.2.1
     css-tree: ^2.3.1
     debug: ^4.3.4
-    fast-glob: ^3.3.1
+    fast-glob: ^3.3.2
     fastest-levenshtein: ^1.0.16
-    file-entry-cache: ^7.0.0
+    file-entry-cache: ^7.0.2
     global-modules: ^2.0.0
     globby: ^11.1.0
     globjoin: ^0.1.4
     html-tags: ^3.3.1
-    ignore: ^5.2.4
-    import-lazy: ^4.0.0
+    ignore: ^5.3.0
     imurmurhash: ^0.1.4
     is-plain-object: ^5.0.0
     known-css-properties: ^0.29.0
     mathml-tag-names: ^2.1.3
-    meow: ^10.1.5
+    meow: ^12.1.1
     micromatch: ^4.0.5
     normalize-path: ^3.0.0
     picocolors: ^1.0.0
-    postcss: ^8.4.28
+    postcss: ^8.4.32
     postcss-resolve-nested-selector: ^0.1.1
-    postcss-safe-parser: ^6.0.0
+    postcss-safe-parser: ^7.0.0
     postcss-selector-parser: ^6.0.13
     postcss-value-parser: ^4.2.0
     resolve-from: ^5.0.0
     string-width: ^4.2.3
-    strip-ansi: ^6.0.1
-    style-search: ^0.1.0
+    strip-ansi: ^7.1.0
     supports-hyperlinks: ^3.0.0
     svg-tags: ^1.0.0
     table: ^6.8.1
     write-file-atomic: ^5.0.1
   bin:
     stylelint: bin/stylelint.mjs
-  checksum: 9835f8a3e3976a3b81a35569d08f5f4a9c3b5cff415f1345a505870afc0c3231acff27f119d937c5bb11fdbc98d554af564c2a648a52604280a59a11974fcbfc
+  checksum: 95b1dee4966245a546b07bbb17e37c6c69138a6264cef24668ce64cf3db118473496daec173d1abcdbe00f8eb0d11fd9e248051b5ac46728ccaab886309db11e
   languageName: node
   linkType: hard
 
@@ -20288,13 +20197,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"trim-newlines@npm:^4.0.2":
-  version: 4.1.1
-  resolution: "trim-newlines@npm:4.1.1"
-  checksum: 5b09f8e329e8f33c1111ef26906332ba7ba7248cde3e26fc054bb3d69f2858bf5feedca9559c572ff91f33e52977c28e0d41c387df6a02a633cbb8c2d8238627
-  languageName: node
-  linkType: hard
-
 "trim-repeated@npm:^1.0.0":
   version: 1.0.0
   resolution: "trim-repeated@npm:1.0.0"
@@ -20448,13 +20350,6 @@ __metadata:
   version: 0.8.1
   resolution: "type-fest@npm:0.8.1"
   checksum: d61c4b2eba24009033ae4500d7d818a94fd6d1b481a8111612ee141400d5f1db46f199c014766b9fa9b31a6a7374d96fc748c6d688a78a3ce5a33123839becb7
-  languageName: node
-  linkType: hard
-
-"type-fest@npm:^1.0.1, type-fest@npm:^1.2.1, type-fest@npm:^1.2.2":
-  version: 1.4.0
-  resolution: "type-fest@npm:1.4.0"
-  checksum: b011c3388665b097ae6a109a437a04d6f61d81b7357f74cbcb02246f2f5bd72b888ae33631b99871388122ba0a87f4ff1c94078e7119ff22c70e52c0ff828201
   languageName: node
   linkType: hard
 
