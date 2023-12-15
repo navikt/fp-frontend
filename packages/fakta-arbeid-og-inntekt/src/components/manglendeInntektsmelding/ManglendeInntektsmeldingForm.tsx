@@ -93,7 +93,7 @@ const ManglendeInntektsmeldingForm: FunctionComponent<OwnProps> = ({
         internArbeidsforholdRef: erEttArbeidsforhold ? arbeidsforholdForRad[0].internArbeidsforholdId : undefined,
         begrunnelse: formValues.begrunnelse!,
       };
-      lagreVurdering(params)
+      return lagreVurdering(params)
         .then(() => {
           oppdaterTabell(oldData =>
             oldData.map(data => {
