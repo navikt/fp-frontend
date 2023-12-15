@@ -181,7 +181,7 @@ const svangerskapspengerTilretteleggingForFrilanser = {
 const defaultArbeidOgInntekt = {
   arbeidsforhold: [
     {
-      arbeidsgiverIdent: '555864629',
+      arbeidsgiverIdent: '1',
       internArbeidsforholdId: '555864629-null',
     },
   ],

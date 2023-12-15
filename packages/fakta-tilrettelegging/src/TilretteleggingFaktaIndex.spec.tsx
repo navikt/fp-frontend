@@ -501,18 +501,17 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
 
     expect(await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver')).toBeInTheDocument();
 
-    expect(screen.getAllByText('Svangerskapspenger kan ikke beregnes')).toHaveLength(2);
+    expect(screen.getAllByText('Svangerskapspenger kan ikke beregnes')).toHaveLength(1);
     expect(
       screen.getAllByText(
         'Søker var ikke ansatt da behovet for tilrettelegging oppsto. Vurder om du skal kontakte arbeidsgiver ' +
           'eller søker for avklaring. Hvis du innvilger behandlingen nå, vil bruker få 0 kroner utbetalt.',
       ),
-    ).toHaveLength(2);
+    ).toHaveLength(1);
 
     await userEvent.click(screen.getAllByText('Skal ha svangerskapspenger for arbeidsforholdet')[0]);
 
     expect(await screen.findByText('Skal ikke ha svangerskapspenger')).toBeInTheDocument();
-    expect(screen.getByText('Svangerskapspenger kan ikke beregnes')).toBeInTheDocument();
   });
 
   it('skal vise infoboks når en velger at en 100% permisjon er gyldig og feilmelding om en bekrefter ved å velge arbeidsforhold på ny', async () => {
