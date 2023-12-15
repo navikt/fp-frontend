@@ -134,7 +134,7 @@ const ManglendeArbeidsforholdForm: FunctionComponent<OwnProps> = ({
       if (
         formValues.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING
       ) {
-        registrerArbeidsforhold({
+        return registrerArbeidsforhold({
           behandlingUuid,
           internArbeidsforholdRef: inntektsmelding.internArbeidsforholdId,
           arbeidsgiverNavn,
@@ -147,17 +147,16 @@ const ManglendeArbeidsforholdForm: FunctionComponent<OwnProps> = ({
         })
           .then(oppdater)
           .finally(() => formMethods.reset(formValues));
-      } else {
-        lagreVurdering({
-          behandlingUuid,
-          vurdering: formValues.saksbehandlersVurdering!,
-          begrunnelse: formValues.begrunnelse!,
-          arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
-          internArbeidsforholdRef: inntektsmelding.internArbeidsforholdId,
-        })
-          .then(oppdater)
-          .finally(() => formMethods.reset(formValues));
       }
+      return lagreVurdering({
+        behandlingUuid,
+        vurdering: formValues.saksbehandlersVurdering!,
+        begrunnelse: formValues.begrunnelse!,
+        arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
+        internArbeidsforholdRef: inntektsmelding.internArbeidsforholdId,
+      })
+        .then(oppdater)
+        .finally(() => formMethods.reset(formValues));
     },
     [inntektsmelding, oppdaterTabell],
   );
