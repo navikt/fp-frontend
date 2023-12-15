@@ -83,7 +83,8 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
 
         const visInfoAlert = af
           ? !erInnenforIntervall(arbeidsforhold.tilretteleggingBehovFom, af.fom, af.tom)
-          : alleIafAf.every(a => !erInnenforIntervall(arbeidsforhold.tilretteleggingBehovFom, a.fom, a.tom));
+          : alleIafAf.length > 0 &&
+            alleIafAf.every(a => !erInnenforIntervall(arbeidsforhold.tilretteleggingBehovFom, a.fom, a.tom));
 
         const stillingsprosentArbeidsforhold = af
           ? af.stillingsprosent
