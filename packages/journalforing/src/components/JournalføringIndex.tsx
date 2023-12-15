@@ -1,22 +1,25 @@
 import React, { FunctionComponent } from 'react';
-
-import { FlexContainer } from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { NavAnsatt } from '@navikt/fp-types';
 
-import OppgaveOversikt from '../typer/oppgaveOversiktTsType';
+import Oppgave from '../typer/oppgaveTsType';
 import OppgaveTabell from './oppgaver/OppgaveTabell';
 import JournalpostIndex from './journalpost/JournalpostIndex';
 import JournalførSubmitValue from '../typer/ferdigstillJournalføringSubmit';
 import ReserverOppgaveType from '../typer/reserverOppgaveType';
+import Journalpost from '../typer/journalpostTsType';
+
+import styles from './journalføringIndex.module.css';
 
 type OwnProps = Readonly<{
-  oppgaver: OppgaveOversikt[];
-  innhentAlleOppgaver: (param: { ident: string }) => Promise<OppgaveOversikt[] | undefined>;
+  oppgaver: Oppgave[];
   navAnsatt: NavAnsatt;
-  setValgtOppgave: (oppgave: OppgaveOversikt) => void;
+  velgOppgaveOgHentJournalpost: (oppgave: Oppgave) => void;
+  hentJournalpost: (journalpostId: string) => void;
   avbrytVisningAvJournalpost: () => void;
-  valgtOppgave?: OppgaveOversikt;
-  submitJournalføring: (data: JournalførSubmitValue) => void;
+  valgtOppgave?: Oppgave;
+  valgtJournalpost?: Journalpost;
+  submitJournalføring: (data: JournalførSubmitValue, erAlleredeJournalført: boolean) => void;
   reserverOppgave: (data: ReserverOppgaveType) => void;
   flyttTilGosys: (data: string) => void;
 }>;
@@ -26,36 +29,38 @@ type OwnProps = Readonly<{
  */
 const JournalføringIndex: FunctionComponent<OwnProps> = ({
   oppgaver,
-  innhentAlleOppgaver,
   navAnsatt,
   valgtOppgave,
-  setValgtOppgave,
+  valgtJournalpost,
+  velgOppgaveOgHentJournalpost,
   avbrytVisningAvJournalpost,
   submitJournalføring,
   reserverOppgave,
   flyttTilGosys,
 }) => (
-  <FlexContainer>
-    {!valgtOppgave && (
-      <OppgaveTabell
-        oppgaver={oppgaver}
-        setValgtOppgave={setValgtOppgave}
-        navAnsatt={navAnsatt}
-        reserverOppgave={reserverOppgave}
-      />
+  <>
+    <VerticalSpacer sixteenPx />
+    {!valgtJournalpost && (
+      <div className={styles.sentrertInnhold}>
+        <OppgaveTabell
+          oppgaver={oppgaver}
+          velgOppgaveOgHentJournalpost={velgOppgaveOgHentJournalpost}
+          navAnsatt={navAnsatt}
+          reserverOppgave={reserverOppgave}
+        />
+      </div>
     )}
-    {valgtOppgave && (
+    {valgtJournalpost && (
       <JournalpostIndex
         avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
         oppgave={valgtOppgave}
-        innhentAlleOppgaver={innhentAlleOppgaver}
+        journalpost={valgtJournalpost}
         navAnsatt={navAnsatt}
         submitJournalføring={submitJournalføring}
-        oppdaterValgtOppgave={setValgtOppgave}
         reserverOppgave={reserverOppgave}
         flyttTilGosys={flyttTilGosys}
       />
     )}
-  </FlexContainer>
+  </>
 );
 export default JournalføringIndex;

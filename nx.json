@@ -1,67 +1,30 @@
 {
-  "tasksRunnerOptions": {
-    "default": {
-      "runner": "nx/tasks-runners/default",
-      "options": {
-        "cacheableOperations": [
-          "test",
-          "tsc",
-          "eslint",
-          "build"
-        ]
-      }
-    }
-  },
   "namedInputs": {
-    "default": [
-      "{projectRoot}/**/*"
-    ],
-    "prod": [
-      "!{projectRoot}/**/*.spec.tsx"
-    ],
-    "production": [
-      "default"
-    ]
+    "default": ["{projectRoot}/**/*"],
+    "prod": ["!{projectRoot}/**/*.spec.tsx"],
+    "production": ["default"]
   },
   "targetDefaults": {
     "test": {
-      "inputs": [
-        "default",
-        "^prod",
-        "{workspaceRoot}/jest-config/jest.config.ts"
-      ],
-      "dependsOn": [
-        "build"
-      ]
+      "inputs": ["default", "^prod", "{workspaceRoot}/jest-config/jest.config.ts"],
+      "dependsOn": ["build"],
+      "cache": true
     },
     "tsc": {
-      "inputs": [
-        "default",
-        "{workspaceRoot}/tsconfig.json"
-      ],
-      "dependsOn": [
-        "build"
-      ]
+      "inputs": ["default", "{workspaceRoot}/tsconfig.json"],
+      "dependsOn": ["build"],
+      "cache": true
     },
     "eslint": {
-      "inputs": [
-        "default",
-        "{workspaceRoot}/eslint/*.js"
-      ],
-      "dependsOn": [
-        "build"
-      ]
+      "inputs": ["default", "{workspaceRoot}/eslint/*.js"],
+      "dependsOn": ["build"],
+      "cache": true
     },
     "build": {
-      "inputs": [
-        "prod"
-      ],
-      "dependsOn": [
-        "^build"
-      ],
-      "outputs": [
-        "{projectRoot}/dist"
-      ]
+      "inputs": ["prod"],
+      "dependsOn": ["^build"],
+      "outputs": ["{projectRoot}/dist"],
+      "cache": true
     }
   },
   "$schema": "./node_modules/nx/schemas/nx-schema.json"

@@ -1,0 +1,11 @@
+.container {
+  padding: 40px;
+}
+
+.card {
+  --ac-expansioncard-header-bg: var(--global-gray-200);
+  --ac-expansioncard-header-open-bg: var(--a-grayalpha-200);
+  --ac-expansioncard-bg: var(--a-grayalpha-100);
+  --ac-expansioncard-border-radius: 0;
+  --ac-expansioncard-border-color: var(--a-grayalpha-200);
+}

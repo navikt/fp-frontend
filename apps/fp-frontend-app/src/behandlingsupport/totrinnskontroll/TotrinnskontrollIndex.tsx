@@ -47,7 +47,7 @@ interface OwnProps {
   fagsakData: FagsakData;
   valgtBehandlingUuid: string;
   beslutterFormData?: any;
-  setBeslutterForData: (data?: any) => void;
+  setBeslutterFormData: (data?: any) => void;
 }
 
 /**
@@ -59,7 +59,7 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
   fagsakData,
   valgtBehandlingUuid,
   beslutterFormData,
-  setBeslutterForData,
+  setBeslutterFormData,
 }) => {
   const intl = useIntl();
   const [visBeslutterModal, setVisBeslutterModal] = useState(false);
@@ -127,7 +127,7 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
           alleKodeverk={alleKodeverk}
           createLocationForSkjermlenke={createLocationForSkjermlenke}
           beslutterFormData={beslutterFormData}
-          setBeslutterForData={setBeslutterForData}
+          setBeslutterFormData={setBeslutterFormData}
         />
       </SupportHeaderAndContent>
       {visBeslutterModal && (

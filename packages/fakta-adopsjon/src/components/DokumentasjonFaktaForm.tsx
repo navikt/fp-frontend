@@ -80,12 +80,11 @@ const DokumentasjonFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
       <div className={styles.container}>
         <Datepicker
           name="omsorgsovertakelseDato"
-          label={intl.formatMessage({
-            id:
-              erForeldrepengerFagsak && hasEktefellesBarnAksjonspunkt
-                ? 'DokumentasjonFaktaForm.Stebarnsadopsjon'
-                : 'DokumentasjonFaktaForm.Omsorgsovertakelsesdato',
-          })}
+          label={
+            erForeldrepengerFagsak && hasEktefellesBarnAksjonspunkt
+              ? intl.formatMessage({ id: 'DokumentasjonFaktaForm.Stebarnsadopsjon' })
+              : intl.formatMessage({ id: 'DokumentasjonFaktaForm.Omsorgsovertakelsesdato' })
+          }
           validate={[required, hasValidDate]}
           isReadOnly={readOnly}
           isEdited={editedStatus.omsorgsovertakelseDato}

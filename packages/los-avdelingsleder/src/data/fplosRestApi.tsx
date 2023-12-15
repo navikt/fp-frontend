@@ -8,7 +8,7 @@ import SakslisteAvdeling from '../typer/sakslisteAvdelingTsType';
 import SaksbehandlerAvdeling from '../typer/saksbehandlerAvdelingTsType';
 import OppgaverForAvdeling from '../typer/oppgaverForAvdelingTsType';
 import OppgaveForDato from '../typer/oppgaverForDatoTsType';
-import OppgaverManueltPaVent from '../typer/oppgaverManueltPaVentTsType';
+import BehandlingVentefrist from '../typer/behandlingVentefristTsType';
 import OppgaverForForsteStonadsdag from '../typer/oppgaverForForsteStonadsdagTsType';
 import OppgaverSomErApneEllerPaVent from '../typer/oppgaverSomErApneEllerPaVentTsType';
 import Reservasjon from '../typer/reservasjonTsType';
@@ -49,8 +49,8 @@ export const RestApiPathsKeys = {
   HENT_OPPGAVER_PER_FORSTE_STONADSDAG: new RestKey<OppgaverForForsteStonadsdag[], { avdelingEnhet: string }>(
     'HENT_OPPGAVER_PER_FORSTE_STONADSDAG',
   ),
-  HENT_OPPGAVER_MANUELT_PA_VENT: new RestKey<OppgaverManueltPaVent[], { avdelingEnhet: string }>(
-    'HENT_OPPGAVER_MANUELT_PA_VENT',
+  HENT_BEHANDLINGER_FRISTUTLOP: new RestKey<BehandlingVentefrist[], { avdelingEnhet: string }>(
+    'HENT_BEHANDLINGER_FRISTUTLOP',
   ),
   HENT_OPPGAVER_APNE_ELLER_PA_VENT: new RestKey<OppgaverSomErApneEllerPaVent[], { avdelingEnhet: string }>(
     'HENT_OPPGAVER_APNE_ELLER_PA_VENT',
@@ -175,14 +175,11 @@ export const endpoints = new RestApiConfigBuilder()
     RestApiPathsKeys.HENT_OPPGAVER_PER_DATO,
   )
   .withGet(
-    '/fplos/api/avdelingsleder/nøkkeltall/behandlinger-manuelt-vent-historikk',
-    RestApiPathsKeys.HENT_OPPGAVER_MANUELT_PA_VENT,
-  )
-  .withGet(
     '/fplos/api/avdelingsleder/nøkkeltall/behandlinger-første-stønadsdag',
     RestApiPathsKeys.HENT_OPPGAVER_PER_FORSTE_STONADSDAG,
   )
   .withGet('/fplos/api/avdelingsleder/nøkkeltall/åpne-behandlinger', RestApiPathsKeys.HENT_OPPGAVER_APNE_ELLER_PA_VENT)
+  .withGet('/fplos/api/avdelingsleder/nøkkeltall/frist-utløp', RestApiPathsKeys.HENT_BEHANDLINGER_FRISTUTLOP)
   .withGet('/fplos/api/avdelingsleder/reservasjoner', RestApiPathsKeys.RESERVASJONER_FOR_AVDELING)
   .withPost('/fplos/api/avdelingsleder/reservasjoner/opphev', RestApiPathsKeys.AVDELINGSLEDER_OPPHEVER_RESERVASJON)
 

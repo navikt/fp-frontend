@@ -18,7 +18,7 @@ import { getLanguageFromSprakkode } from '@navikt/ft-utils';
 import styles from './manueltVedtaksbrevPanel.module.css';
 
 const maxLength200 = maxLength(200);
-const maxLength5000 = maxLength(5000);
+const maxLength10000 = maxLength(10000);
 const minLength3 = minLength(3);
 
 interface OwnProps {
@@ -84,8 +84,8 @@ const ManueltVedtaksbrevPanel: FunctionComponent<OwnProps> = ({
       <TextAreaField
         name="brødtekst"
         label={intl.formatMessage({ id: 'VedtakForm.Innhold' })}
-        validate={[required, minLength3, maxLength5000, hasValidText]}
-        maxLength={5000}
+        validate={[required, minLength3, maxLength10000, hasValidText]}
+        maxLength={10000}
         readOnly={isReadOnly}
         // Må erstatte bindestrek kopiert inn fra Word med vanlig bindestrek
         parse={value => value.toString().replaceAll('‑', '-').replaceAll('\t', ' ')}

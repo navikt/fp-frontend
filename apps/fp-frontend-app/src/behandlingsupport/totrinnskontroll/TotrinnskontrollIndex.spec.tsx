@@ -115,7 +115,7 @@ describe('<TotrinnskontrollIndex>', () => {
             <TotrinnskontrollIndex
               fagsakData={new FagsakData(fagsak as Fagsak)}
               valgtBehandlingUuid={valgtBehandling.uuid}
-              setBeslutterForData={() => undefined}
+              setBeslutterFormData={() => undefined}
             />
           </MemoryRouter>
         </RestApiMock>{' '}

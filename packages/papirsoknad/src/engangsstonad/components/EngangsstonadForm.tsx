@@ -45,7 +45,6 @@ const transformValues = (values: FormValues, erFødsel: boolean, erAdopsjon: boo
 interface OwnProps {
   readOnly: boolean;
   soknadData: SoknadData;
-  fagsakPersonnummer: string;
   alleKodeverk: AlleKodeverk;
   onSubmitUfullstendigsoknad: () => Promise<any>;
   onSubmit: (values: any) => Promise<any>;
@@ -57,7 +56,6 @@ const EngangsstonadForm: FunctionComponent<OwnProps> = ({
   alleKodeverk,
   onSubmitUfullstendigsoknad,
   onSubmit,
-  fagsakPersonnummer,
 }) => {
   const erFødsel = soknadData.getFamilieHendelseType() === familieHendelseType.FODSEL;
   const erAdopsjon = soknadData.getFamilieHendelseType() === familieHendelseType.ADOPSJON;
@@ -80,7 +78,6 @@ const EngangsstonadForm: FunctionComponent<OwnProps> = ({
           soknadData={soknadData}
           readOnly={readOnly}
           alleKodeverk={alleKodeverk}
-          fagsakPersonnummer={fagsakPersonnummer}
           fodselsdato={fodselsdato}
           mottattDato={mottattDato}
         />
@@ -90,7 +87,6 @@ const EngangsstonadForm: FunctionComponent<OwnProps> = ({
           soknadData={soknadData}
           readOnly={readOnly}
           alleKodeverk={alleKodeverk}
-          fagsakPersonnummer={fagsakPersonnummer}
           fodselsdato={fodselsdato}
           mottattDato={mottattDato}
         />

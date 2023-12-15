@@ -8,8 +8,6 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import InnsynForm from './components/InnsynForm';
 import messages from '../i18n/nb_NO.json';
 
-import '@navikt/fp-prosess-felles/dist/style.css';
-
 const intl = createIntl(messages);
 
 interface OwnProps {

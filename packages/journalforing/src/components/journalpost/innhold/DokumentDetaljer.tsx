@@ -1,9 +1,9 @@
 import React, { FunctionComponent, useState, useCallback } from 'react';
-import { Label, Button, CheckboxGroup, Checkbox } from '@navikt/ds-react';
+import { FormattedMessage } from 'react-intl';
+import { Label, Button, CheckboxGroup, Checkbox, HStack, Spacer } from '@navikt/ds-react';
 import { hasValidText, required } from '@navikt/ft-form-validators';
 import { TabsAddIcon, PencilIcon } from '@navikt/aksel-icons';
 import { InputField, SelectField } from '@navikt/ft-form-hooks';
-import { FlexColumn, FlexRow } from '@navikt/ft-ui-komponenter';
 import JournalDokument from '../../../typer/journalDokumentTsType';
 import { listeMedTittler } from '../../../kodeverk/dokumentTittel';
 import { erKanalSomErÅpenForEndring } from '../../../kodeverk/journalKanal';
@@ -46,7 +46,7 @@ const DokumentDetaljer: FunctionComponent<OwnProps> = ({
     ? 'journalpostTittel'
     : `journalpostDokumenter.${docFieldIndex}.tittel`;
   const nyFaneKnapp = (
-    <FlexColumn className={styles.dokLenke}>
+    <div className={styles.knappKol}>
       <Button
         as="a"
         href={dokument.lenke}
@@ -55,91 +55,79 @@ const DokumentDetaljer: FunctionComponent<OwnProps> = ({
         variant="tertiary"
         icon={<TabsAddIcon aria-hidden className={styles.newTabIcon} />}
       />
-    </FlexColumn>
+    </div>
   );
   if (dokumentTittelStyresAvJournalpostTittel) {
     return (
       <div className={styles.dokContainer}>
-        <FlexRow>
-          {kanRedigeres && (
-            <FlexColumn className={styles.dokumentTittel}>
-              <InputField
-                name={inputFieldName}
-                validate={[required, hasValidText]}
-                readOnly={dokumentTittelStyresAvJournalpostTittel}
-                maxLength={200}
-              />
-            </FlexColumn>
-          )}
-          {nyFaneKnapp}
-        </FlexRow>
+        <div className={styles.dokumentTittel}>
+          <InputField
+            name={inputFieldName}
+            validate={[required, hasValidText]}
+            readOnly={dokumentTittelStyresAvJournalpostTittel}
+            maxLength={200}
+          />
+        </div>
+        <Spacer />
+        {nyFaneKnapp}
       </div>
     );
   }
   return (
     <div className={styles.dokContainer}>
-      <FlexRow>
-        {kanRedigeres && (
-          <FlexColumn className={styles.dokumentTittel}>
-            <FlexColumn className={styles.input}>
-              <FlexColumn className={styles.selectField}>
-                {harToggletFritekst && (
-                  <InputField
-                    name={`journalpostDokumenter.${docFieldIndex}.tittel`}
-                    validate={[required, hasValidText]}
-                    readOnly={false}
-                    maxLength={100}
-                  />
-                )}
-                {!harToggletFritekst && (
-                  <SelectField
-                    readOnly={false}
-                    name={`journalpostDokumenter.${docFieldIndex}.tittel`}
-                    label={undefined}
-                    validate={[required]}
-                    selectValues={tittler}
-                  />
-                )}
-              </FlexColumn>
-              <FlexColumn>
-                <CheckboxGroup
-                  legend="Brukt fritekst"
-                  hideLegend
-                  className={styles.checkbox}
-                  onChange={endreFritekstToggle}
-                  value={[harToggletFritekst]}
-                >
-                  <Checkbox value>Fritekst</Checkbox>
-                </CheckboxGroup>
-              </FlexColumn>
-            </FlexColumn>
-          </FlexColumn>
-        )}
-        {!kanRedigeres && (
-          <FlexColumn className={styles.dokumentTittel}>
-            <Label className={styles.dokLab}>{dokument.tittel}</Label>
-            {erKanalSomErÅpenForEndring(journalpost.kanal) && (
-              <Button
-                icon={<PencilIcon aria-hidden />}
-                className={styles.editButton}
-                onClick={toggleRedigering}
-                type="button"
-                variant="tertiary"
+      {kanRedigeres && (
+        <>
+          <HStack className={styles.dokumentTittel} gap="1">
+            {harToggletFritekst && (
+              <InputField
+                name={`journalpostDokumenter.${docFieldIndex}.tittel`}
+                validate={[required, hasValidText]}
+                readOnly={false}
+                className={styles.input}
+                maxLength={100}
               />
             )}
-          </FlexColumn>
-        )}
-        <FlexColumn className={styles.dokLenke}>
-          <Button
-            as="a"
-            href={dokument.lenke}
-            target="_blank"
-            rel="noreferrer"
-            variant="tertiary"
-            icon={<TabsAddIcon aria-hidden className={styles.newTabIcon} />}
-          />
-        </FlexColumn>
-      </FlexRow>
+            {!harToggletFritekst && (
+              <SelectField
+                readOnly={false}
+                name={`journalpostDokumenter.${docFieldIndex}.tittel`}
+                label={undefined}
+                validate={[required]}
+                className={styles.input}
+                selectValues={tittler}
+              />
+            )}
+          </HStack>
+          <HStack className={styles.checkbox}>
+            <CheckboxGroup
+              legend="Brukt fritekst"
+              hideLegend
+              onChange={endreFritekstToggle}
+              value={[harToggletFritekst]}
+            >
+              <Checkbox value>
+                <FormattedMessage id="Journal.Tittel.Fritekst" />
+              </Checkbox>
+            </CheckboxGroup>
+          </HStack>
+        </>
+      )}
+      {!kanRedigeres && (
+        <HStack className={styles.dokumentTittel}>
+          <Label>{dokument.tittel}</Label>
+          {erKanalSomErÅpenForEndring(journalpost.kanal) && (
+            <Button
+              icon={<PencilIcon aria-hidden />}
+              className={styles.editButton}
+              onClick={toggleRedigering}
+              type="button"
+              variant="tertiary"
+            />
+          )}
+        </HStack>
+      )}
+      <Spacer />
+      {nyFaneKnapp}
     </div>
   );
 };

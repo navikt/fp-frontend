@@ -42,12 +42,16 @@ describe('<JournalforingIndex>', () => {
     await userEvent.click(screen.getByText('Journalfør'));
     await waitFor(() => expect(journalfør).toHaveBeenCalledTimes(1));
 
-    expect(journalfør).toHaveBeenNthCalledWith(1, {
-      enhetId: '4108',
-      oppdaterTitlerDto: undefined,
-      journalpostId: '986547336994',
-      saksnummer: '125416597',
-    });
+    expect(journalfør).toHaveBeenNthCalledWith(
+      1,
+      {
+        enhetId: '4108',
+        oppdaterTitlerDto: undefined,
+        journalpostId: '986547336994',
+        saksnummer: '125416597',
+      },
+      false,
+    );
   });
 
   it('skal kunne journalføre på ny sak', async () => {
@@ -91,16 +95,20 @@ describe('<JournalforingIndex>', () => {
     await userEvent.click(screen.getByText('Journalfør'));
     await waitFor(() => expect(journalfør).toHaveBeenCalledTimes(1));
 
-    expect(journalfør).toHaveBeenNthCalledWith(1, {
-      enhetId: '4108',
-      oppdaterTitlerDto: undefined,
-      journalpostId: '986547336994',
-      opprettSak: {
-        aktørId: '98594685464858',
-        ytelseType: 'FP',
-        sakstype: Sakstype.FAGSAK,
+    expect(journalfør).toHaveBeenNthCalledWith(
+      1,
+      {
+        enhetId: '4108',
+        oppdaterTitlerDto: undefined,
+        journalpostId: '986547336994',
+        opprettSak: {
+          aktørId: '98594685464858',
+          ytelseType: 'FP',
+          sakstype: Sakstype.FAGSAK,
+        },
       },
-    });
+      false,
+    );
   });
 
   it('skal kunne journalføre på generell sak', async () => {
@@ -131,15 +139,19 @@ describe('<JournalforingIndex>', () => {
     await userEvent.click(screen.getByText('Journalfør'));
     await waitFor(() => expect(journalfør).toHaveBeenCalledTimes(1));
 
-    expect(journalfør).toHaveBeenNthCalledWith(1, {
-      enhetId: '4108',
-      oppdaterTitlerDto: undefined,
-      journalpostId: '986547336994',
-      opprettSak: {
-        aktørId: '98594685464858',
-        sakstype: Sakstype.GENERELL,
+    expect(journalfør).toHaveBeenNthCalledWith(
+      1,
+      {
+        enhetId: '4108',
+        oppdaterTitlerDto: undefined,
+        journalpostId: '986547336994',
+        opprettSak: {
+          aktørId: '98594685464858',
+          sakstype: Sakstype.GENERELL,
+        },
       },
-    });
+      false,
+    );
   });
 
   it('skal ikke kunne flytte oppgaven til gosys om det er allerede en gosys oppgave', async () => {

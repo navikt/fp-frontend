@@ -1,6 +1,6 @@
 import { defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react';
-import sourcemaps from 'rollup-plugin-sourcemaps';
+// import sourcemaps from 'rollup-plugin-sourcemaps';
 
 export default defineConfig({
   plugins: [
@@ -42,15 +42,21 @@ export default defineConfig({
         changeOrigin: false,
         secure: false,
       },
+      '/fpformidling/api': {
+        target: 'http://127.0.0.1:9000',
+        changeOrigin: false,
+        secure: false,
+      },
     },
   },
   build: {
-    rollupOptions: {
-      plugins: [sourcemaps()],
-      output: {
-        sourcemap: true,
-      },
-    },
+    sourcemap: true,
+    // rollupOptions: {
+    //   plugins: [sourcemaps()],
+    //   output: {
+    //     sourcemap: false,
+    //   },
+    // },
   },
   test: {
     environment: 'jsdom',

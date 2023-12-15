@@ -10,7 +10,6 @@ interface OwnProps {
   readOnly: boolean;
   soknadData: SoknadData;
   alleKodeverk: AlleKodeverk;
-  fagsakPersonnummer: string;
 }
 
 const EngangsstonadPapirsoknadIndex: FunctionComponent<OwnProps> = ({
@@ -19,7 +18,6 @@ const EngangsstonadPapirsoknadIndex: FunctionComponent<OwnProps> = ({
   readOnly,
   soknadData,
   alleKodeverk,
-  fagsakPersonnummer,
 }) => (
   <EngangsstonadForm
     onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
@@ -27,7 +25,6 @@ const EngangsstonadPapirsoknadIndex: FunctionComponent<OwnProps> = ({
     readOnly={readOnly}
     soknadData={soknadData}
     alleKodeverk={alleKodeverk}
-    fagsakPersonnummer={fagsakPersonnummer}
   />
 );
 

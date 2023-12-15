@@ -4,8 +4,12 @@ import userEvent from '@testing-library/user-event';
 import { composeStories } from '@storybook/react';
 import * as stories from './TilretteleggingFaktaIndex.stories';
 
-const { TilretteleggingMedVelferdspermisjon, HarOpphold, SokerVarIkkeAnsattDaBehovetForTilretteleggingOppsto } =
-  composeStories(stories);
+const {
+  TilretteleggingMedVelferdspermisjon,
+  HarOpphold,
+  SokerVarIkkeAnsattDaBehovetForTilretteleggingOppsto,
+  TilretteleggingMed100ProsentVelferdspermisjon,
+} = composeStories(stories);
 
 const lagNyDato = (nyDato: string) => {
   const backspace = [...Array(10)].reduce(prev => `${prev}{backspace}`, '');
@@ -49,7 +53,6 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
       kode: '5091',
       begrunnelse: 'Dette er en begrunnelse',
@@ -70,6 +73,7 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
               fom: '2020-03-17',
               kilde: 'SØKNAD',
               mottattDato: '2020-02-20',
+              overstyrtUtbetalingsgrad: 0,
               stillingsprosent: 50,
               type: 'DELVIS_TILRETTELEGGING',
             },
@@ -126,11 +130,9 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
   });
 
   it('skal validere at en må ferdigstille tilretteleggingsperiode som er lagt til', async () => {
-    const utils = render(<TilretteleggingMedVelferdspermisjon />);
+    const utils = render(<HarOpphold />);
 
-    expect(
-      await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
-    ).toBeInTheDocument();
+    expect(await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Periode med svangerskapspenger'));
 
@@ -142,11 +144,9 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
   });
 
   it('skal validere at en må ferdigstille oppholdsperiode som er lagt til', async () => {
-    const utils = render(<TilretteleggingMedVelferdspermisjon />);
+    const utils = render(<HarOpphold />);
 
-    expect(
-      await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
-    ).toBeInTheDocument();
+    expect(await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Opphold'));
 
@@ -182,6 +182,9 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
       await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
     ).toBeInTheDocument();
 
+    await userEvent.click(screen.getByText('Ja'));
+    await userEvent.click(screen.getByText('Oppdater'));
+
     const dato = screen.getAllByText('Fra og med')[0];
     await userEvent.type(dato, '{backspace}1');
     fireEvent.blur(dato);
@@ -197,6 +200,9 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
     expect(
       await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
     ).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Ja'));
+    await userEvent.click(screen.getByText('Oppdater'));
 
     const dato = screen.getAllByText('Fra og med')[0];
     await userEvent.type(dato, lagNyDato('16.03.2020'));
@@ -216,6 +222,9 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
       await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
     ).toBeInTheDocument();
 
+    await userEvent.click(screen.getByText('Ja'));
+    await userEvent.click(screen.getByText('Oppdater'));
+
     const dato = screen.getAllByText('Fra og med')[0];
     await userEvent.type(dato, lagNyDato('15.08.2020'));
     fireEvent.blur(dato);
@@ -231,6 +240,9 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
     expect(
       await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
     ).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Ja'));
+    await userEvent.click(screen.getByText('Oppdater'));
 
     await userEvent.click(screen.getByText('Periode med svangerskapspenger'));
 
@@ -265,6 +277,9 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
       await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
     ).toBeInTheDocument();
 
+    await userEvent.click(screen.getByText('Ja'));
+    await userEvent.click(screen.getByText('Oppdater'));
+
     await userEvent.click(screen.getAllByText('Slett periode')[1]);
 
     expect(await screen.findByText('17.03.2020 - 15.10.2020')).toBeInTheDocument();
@@ -278,6 +293,9 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
     expect(
       await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
     ).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Ja'));
+    await userEvent.click(screen.getByText('Oppdater'));
 
     await userEvent.click(screen.getByText('Opphold'));
 
@@ -338,6 +356,7 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
           tilretteleggingDatoer: [
             {
               fom: '2020-03-17',
+              overstyrtUtbetalingsgrad: 0,
               kilde: 'SØKNAD',
               mottattDato: '2020-02-20',
               stillingsprosent: 50,
@@ -494,5 +513,41 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
 
     expect(await screen.findByText('Skal ikke ha svangerskapspenger')).toBeInTheDocument();
     expect(screen.getByText('Svangerskapspenger kan ikke beregnes')).toBeInTheDocument();
+  });
+
+  it('skal vise infoboks når en velger at en 100% permisjon er gyldig og feilmelding om en bekrefter ved å velge arbeidsforhold på ny', async () => {
+    const lagre = vi.fn(() => Promise.resolve());
+
+    render(<TilretteleggingMed100ProsentVelferdspermisjon submitCallback={lagre} />);
+
+    expect(
+      await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
+    ).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Ja'));
+
+    expect(
+      await screen.findByText(
+        'Permisjonen på 100% er satt som gyldig, og dette fører til at søker ikke får svangerskapsenger for arbeidsforholdet.',
+      ),
+    ).toBeInTheDocument();
+
+    await userEvent.click(screen.getAllByText('Oppdater')[0]);
+
+    await userEvent.click(screen.getAllByText('Skal ha svangerskapspenger for arbeidsforholdet')[0]);
+
+    await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    expect(
+      await screen.findByText('Arbeidsforhold med gyldig permisjon på 100% kan ikke ha svangerskapspenger'),
+    ).toBeInTheDocument();
+
+    await userEvent.click(screen.getAllByText('Skal ha svangerskapspenger for arbeidsforholdet')[0]);
+
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
   });
 });

@@ -1,3 +1,4 @@
+import { FormkravMellomlagretDataType } from '@navikt/fp-prosess-formkrav';
 import { RestApiConfigBuilder, RestKey, createRequestApi } from '@navikt/fp-rest-api';
 import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
 import {
@@ -128,6 +129,7 @@ export const BehandlingApiKeys = {
   INNSYN_DOKUMENTER: new RestKey<Dokument[], void>('INNSYN_DOKUMENTER'),
   KLAGE_VURDERING: new RestKey<KlageVurdering[], void>('KLAGE_VURDERING'),
   SAVE_KLAGE_VURDERING: new RestKey<any, any>('SAVE_KLAGE_VURDERING'),
+  SAVE_FORMKRAV_VURDERING: new RestKey<void, FormkravMellomlagretDataType>('SAVE_FORMKRAV_VURDERING'),
   ANKE_VURDERING: new RestKey<AnkeVurdering, void>('ANKE_VURDERING'),
   SVANGERSKAPSPENGER_TILRETTELEGGING: new RestKey<FodselOgTilrettelegging, void>('SVANGERSKAPSPENGER_TILRETTELEGGING'),
   STONADSKONTOER_GITT_UTTAKSPERIODER: new RestKey<void, StonadskontoGittUttaksPerioderParams>(
@@ -243,6 +245,7 @@ export const behandlingEndepunkter = new RestApiConfigBuilder()
 
   // KLAGE
   .withRel('mellomlagre-klage', BehandlingApiKeys.SAVE_KLAGE_VURDERING)
+  .withRel('mellomlagre-formkrav-klage', BehandlingApiKeys.SAVE_FORMKRAV_VURDERING)
 
   // FP
   .withRel('lagre-stonadskontoer-gitt-uttaksperioder', BehandlingApiKeys.STONADSKONTOER_GITT_UTTAKSPERIODER)

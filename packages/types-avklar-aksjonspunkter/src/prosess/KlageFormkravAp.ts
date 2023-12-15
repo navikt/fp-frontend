@@ -14,6 +14,7 @@ type KlageFormkravBasic = {
     tilbakekrevingBehandlingType?: string;
   };
   vedtakBehandlingUuid?: string;
+  fritekstTilBrev?: string;
 };
 
 type KlageFormkravAp = KlageFormkravBasic &

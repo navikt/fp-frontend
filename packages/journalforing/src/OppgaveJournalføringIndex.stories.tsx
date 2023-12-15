@@ -7,7 +7,7 @@ import { NavAnsatt } from '@navikt/fp-types';
 import { fagsakStatus, fagsakYtelseType, familieHendelseType } from '@navikt/fp-kodeverk';
 import { requestApi, RestApiPathsKeys } from './data/fpfordelRestApi';
 import JournalforingIndex from './OppgaveJournalføringIndex';
-import OppgaveOversikt from './typer/oppgaveOversiktTsType';
+import Oppgave from './typer/oppgaveTsType';
 import Journalpost from './typer/journalpostTsType';
 import JournalKanal from './kodeverk/journalKanal';
 
@@ -15,11 +15,15 @@ import '@navikt/ds-css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
 import '@navikt/ft-form-hooks/dist/style.css';
 import OppgaveKilde from './kodeverk/oppgaveKilde';
+import JournalpostTilstand, { erEndeligJournalført } from './kodeverk/journalpostTilstand';
 
-const detaljertJournalpostMal = (medBruker: boolean): Journalpost =>
+const detaljertJournalpostMal = (medBruker: boolean, tilstand: JournalpostTilstand): Journalpost =>
   ({
     journalpostId: '986547336994',
     tittel: 'Inntektsmelding',
+    eksisterendeSaksnummer: erEndeligJournalført(tilstand) ? '125416597' : undefined,
+    tilstand,
+    journalførendeEnhet: erEndeligJournalført(tilstand) ? '4867' : undefined,
     kanal: JournalKanal.ALLTIN,
     bruker: medBruker
       ? {
@@ -115,9 +119,9 @@ const navAnsattDefault = {
 } as NavAnsatt;
 
 const Template: StoryFn<{
-  alleOppgaver?: OppgaveOversikt[];
+  alleOppgaver?: Oppgave[];
   navAnsatt: NavAnsatt;
-  detaljertJournalpost: Journalpost;
+  detaljertJournalpost: Journalpost | undefined;
   responsFraBrukerSøk: Journalpost | undefined;
 }> = ({ alleOppgaver, detaljertJournalpost, navAnsatt, responsFraBrukerSøk }) => {
   const responsHentBruker = responsFraBrukerSøk
@@ -149,7 +153,7 @@ const defaultOppgaver = [
     enhetId: '4016',
     beskrivelse: 'Inntektsmelding',
     reservertAv: 'X123456',
-    kilde: OppgaveKilde.GOSYS
+    kilde: OppgaveKilde.GOSYS,
   },
   {
     journalpostId: '245745871',
@@ -161,8 +165,7 @@ const defaultOppgaver = [
     enhetId: '4008',
     beskrivelse: 'Inntektsmelding',
     reservertAv: 'Y654321',
-    kilde: OppgaveKilde.LOKAL
-
+    kilde: OppgaveKilde.LOKAL,
   },
   {
     journalpostId: '345681257',
@@ -171,7 +174,7 @@ const defaultOppgaver = [
     ytelseType: 'FP',
     enhetId: '4008',
     beskrivelse: 'Søknad',
-    kilde: OppgaveKilde.GOSYS
+    kilde: OppgaveKilde.GOSYS,
   },
 ];
 
@@ -212,22 +215,36 @@ ViseOppgaverIListe.args = {
       kilde: OppgaveKilde.GOSYS,
     },
   ],
-  detaljertJournalpost: detaljertJournalpostMal(true),
+  detaljertJournalpost: detaljertJournalpostMal(true, JournalpostTilstand.MOTTATT),
   navAnsatt: navAnsattDefault,
-  responsFraBrukerSøk: detaljertJournalpostMal(true),
+  responsFraBrukerSøk: detaljertJournalpostMal(true, JournalpostTilstand.MOTTATT),
 };
 
 export const ViseOppgaverUtenBruker = Template.bind({});
 ViseOppgaverUtenBruker.args = {
   alleOppgaver: defaultOppgaver,
-  detaljertJournalpost: detaljertJournalpostMal(false),
+  detaljertJournalpost: detaljertJournalpostMal(false, JournalpostTilstand.MOTTATT),
   navAnsatt: navAnsattDefault,
-  responsFraBrukerSøk: detaljertJournalpostMal(true),
+  responsFraBrukerSøk: detaljertJournalpostMal(true, JournalpostTilstand.MOTTATT),
+};
+
+export const SøkeOppJournalpostSomLiggerPåAnnenSak = Template.bind({});
+SøkeOppJournalpostSomLiggerPåAnnenSak.args = {
+  alleOppgaver: [],
+  detaljertJournalpost: detaljertJournalpostMal(true, JournalpostTilstand.JOURNALFOERT),
+  navAnsatt: navAnsattDefault,
+};
+
+export const FinnerIkkeJournalpostVedSøkOgIngenOppgaver = Template.bind({});
+FinnerIkkeJournalpostVedSøkOgIngenOppgaver.args = {
+  alleOppgaver: [],
+  detaljertJournalpost: undefined,
+  navAnsatt: navAnsattDefault,
 };
 
 export const IngenOppgaver = Template.bind({});
 IngenOppgaver.args = {
   alleOppgaver: [],
   navAnsatt: navAnsattDefault,
-  responsFraBrukerSøk: detaljertJournalpostMal(true),
+  responsFraBrukerSøk: detaljertJournalpostMal(true, JournalpostTilstand.MOTTATT),
 };

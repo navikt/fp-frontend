@@ -49,7 +49,11 @@ const RisikoklassifiseringIndex: FunctionComponent<OwnProps> = ({
   const behandlingStatus = behandling?.status;
   const behandlingType = behandling?.type;
   const risikoAksjonspunkt = behandling?.risikoAksjonspunkt;
-  const kontrollresultat = behandling?.kontrollResultat;
+  const kontrollresultatBehandling = behandling?.kontrollResultat;
+
+  // Hvis behandlingen ikke har kontrollresultat viser vi gjeldende kontrollresultat på
+  // fagsaken (siste vedtatte førstegangssøknad) slik at vi kan vi se resultat også i revurderinger
+  const kontrollResultat = kontrollresultatBehandling || fagsak.kontrollResultat;
 
   const { selected: isRiskPanelOpen = false } = useTrackRouteParam<boolean>({
     paramName: 'risiko',
@@ -115,7 +119,7 @@ const RisikoklassifiseringIndex: FunctionComponent<OwnProps> = ({
   return (
     <RisikoklassifiseringSakIndex
       aksjonspunkt={risikoAksjonspunkt}
-      risikoklassifisering={kontrollresultat}
+      risikoklassifisering={kontrollResultat}
       isPanelOpen={isRiskPanelOpen}
       readOnly={readOnly}
       submitAksjonspunkt={submitAksjonspunkt}

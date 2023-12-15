@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo } from 'react';
+import React, { FunctionComponent, useEffect, useMemo } from 'react';
 import dayjs from 'dayjs';
 import { FormProvider, useForm } from 'react-hook-form';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
@@ -73,11 +73,12 @@ export const finnProsentSvangerskapspenger = (
   tilrettelegging: ArbeidsforholdTilretteleggingDato,
   stillingsprosentArbeidsforhold: number,
   velferdspermisjonprosent: number,
+  brukOverstyrtUtbetalingsgrad = true,
 ): number | undefined => {
   if (tilrettelegging.type === tilretteleggingType.HEL_TILRETTELEGGING) {
     return undefined;
   }
-  if (tilrettelegging.overstyrtUtbetalingsgrad) {
+  if (brukOverstyrtUtbetalingsgrad && tilrettelegging.overstyrtUtbetalingsgrad) {
     return tilrettelegging.overstyrtUtbetalingsgrad;
   }
 
@@ -140,6 +141,16 @@ const TilretteleggingForm: FunctionComponent<OwnProps> = ({
       },
     },
   });
+
+  useEffect(() => {
+    // Denne er nødvendig i tilfelle der en endrer en permisjons gyldighet
+    formMethods.reset({
+      [index]: {
+        ...tilrettelegging,
+        overstyrtUtbetalingsgrad: prosentSvangerskapspenger,
+      },
+    });
+  }, [prosentSvangerskapspenger]);
 
   const formValuesRecord = formMethods.watch();
   const formValues = formValuesRecord[index];
@@ -297,12 +308,18 @@ const TilretteleggingForm: FunctionComponent<OwnProps> = ({
               loading={false}
               onClick={formMethods.handleSubmit((values: FormValues) => lagreIForm(values))}
             >
-              <FormattedMessage id={erNyPeriode ? 'TilretteleggingForm.LeggTil' : 'TilretteleggingForm.Oppdater'} />
+              {erNyPeriode ? (
+                <FormattedMessage id="TilretteleggingForm.LeggTil" />
+              ) : (
+                <FormattedMessage id="TilretteleggingForm.Oppdater" />
+              )}
             </Button>
             <Button size="small" variant="secondary" onClick={avbryt} type="button">
-              <FormattedMessage
-                id={erNyPeriode ? 'TilretteleggingForm.AvsluttOgSlett' : 'TilretteleggingForm.Avbryt'}
-              />
+              {erNyPeriode ? (
+                <FormattedMessage id="TilretteleggingForm.AvsluttOgSlett" />
+              ) : (
+                <FormattedMessage id="TilretteleggingForm.Avbryt" />
+              )}
             </Button>
             {!erNyPeriode && (
               <>

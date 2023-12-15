@@ -190,10 +190,18 @@ const OppholdForm: FunctionComponent<OwnProps> = ({
               loading={false}
               onClick={formMethods.handleSubmit((values: FormValues) => lagreIForm(values))}
             >
-              <FormattedMessage id={erNyPeriode ? 'OppholdForm.LeggTil' : 'OppholdForm.Oppdater'} />
+              {erNyPeriode ? (
+                <FormattedMessage id="OppholdForm.LeggTil" />
+              ) : (
+                <FormattedMessage id="OppholdForm.Oppdater" />
+              )}
             </Button>
             <Button size="small" variant="secondary" onClick={avbryt} type="button">
-              <FormattedMessage id={erNyPeriode ? 'OppholdForm.AvsluttOgSlett' : 'OppholdForm.Avbryt'} />
+              {erNyPeriode ? (
+                <FormattedMessage id="OppholdForm.AvsluttOgSlett" />
+              ) : (
+                <FormattedMessage id="OppholdForm.Avbryt" />
+              )}
             </Button>
             {!erNyPeriode && (
               <>

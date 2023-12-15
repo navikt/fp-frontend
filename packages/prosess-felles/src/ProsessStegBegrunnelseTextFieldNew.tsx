@@ -62,7 +62,7 @@ const ProsessStegBegrunnelseTextField: FunctionComponent<OwnProps> & StaticFunct
         name="begrunnelse"
         label={text || intl.formatMessage({ id: getBegrunnelseTextCode(readOnly) })}
         validate={[requiredIfCustomFunctionIsTrueNew(isRequiredFn), minLength3, maxLength1500, hasValidText]}
-        maxLength={1500}
+        maxLength={2000}
         readOnly={readOnly}
         // Må erstatte bindestrek kopiert inn fra Word med vanlig bindestrek
         parse={value => value.toString().replaceAll('‑', '-')}

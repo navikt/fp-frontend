@@ -1,2 +1,4 @@
 *.jsx
 **/dist
+
+/.nx/cache

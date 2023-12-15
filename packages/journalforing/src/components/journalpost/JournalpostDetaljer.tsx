@@ -1,9 +1,8 @@
 import React, { FunctionComponent, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import { Alert, BodyLong, Button, Heading, Tag } from '@navikt/ds-react';
+import { Alert, BodyLong, Heading, VStack } from '@navikt/ds-react';
 
-import { FlexColumn, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Form } from '@navikt/ft-form-hooks';
 import { NavAnsatt } from '@navikt/fp-types';
 import VelgSakForm, { transformValues as transformValuesSak } from './innhold/VelgSakForm';
@@ -12,7 +11,7 @@ import JournalførSubmitValue, {
   DokumentTittelSubmitValue,
   OppdaterJournalførTittlerSubmitValue,
 } from '../../typer/ferdigstillJournalføringSubmit';
-import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
+import Oppgave from '../../typer/oppgaveTsType';
 import SakDetaljer from './innhold/SakDetaljer';
 import DokumentForm, {
   buildInitialValues as buildInitialValuesFlereDokumenter,
@@ -25,8 +24,19 @@ import JournalpostTittelForm from './innhold/JournalpostTittelForm';
 import ForhåndsvisBrukerRespons from '../../typer/forhåndsvisBrukerResponsTsType';
 import ReserverOppgaveType from '../../typer/reserverOppgaveType';
 import OppgaveKilde from '../../kodeverk/oppgaveKilde';
+import Reservasjonspanel from './innhold/Reservasjonspanel';
+import { erEndeligJournalført } from '../../kodeverk/journalpostTilstand';
+import JournalFagsak from '../../typer/journalFagsakTsType';
 
 const dokumentTittelSkalStyresAvJournalpost = (jp: Journalpost): boolean => jp.dokumenter?.length === 1;
+
+const finnSakMedSaksnummer = (saksnummer: string, saker: JournalFagsak[]): JournalFagsak => {
+  const match = saker.find(sak => sak.saksnummer === saksnummer);
+  if (!match) {
+    throw new Error(`Finner ikke sak med saksnummer ${saksnummer} i listen over journalpostens saker`);
+  }
+  return match;
+};
 
 const buildInitialValues = (journalpost: Journalpost): JournalføringFormValues => {
   const docs = journalpost.dokumenter || [];
@@ -74,14 +84,14 @@ const transformTittelValues = (
 const transformValues = (
   values: JournalføringFormValues,
   journalpost: Journalpost,
-  oppgave: OppgaveOversikt,
+  enhet?: string,
 ): JournalførSubmitValue => {
-  if (!oppgave.enhetId) {
+  if (!enhet) {
     throw Error('Kan ikke journalføre uten at enhet er satt');
   }
   return {
     journalpostId: journalpost.journalpostId,
-    enhetId: oppgave.enhetId,
+    enhetId: enhet,
     oppdaterTitlerDto: transformTittelValues(values, journalpost),
     ...transformValuesSak(values, journalpost),
   };
@@ -89,16 +99,15 @@ const transformValues = (
 
 type OwnProps = Readonly<{
   journalpost: Journalpost;
-  oppgave: OppgaveOversikt;
+  oppgave?: Oppgave;
   avbrytVisningAvJournalpost: () => void;
-  submitJournalføring: (params: JournalførSubmitValue) => void;
+  submitJournalføring: (params: JournalførSubmitValue, erAlleredeJournalført: boolean) => void;
   knyttJournalpostTilBruker: (params: OppdaterMedBruker) => void;
   forhåndsvisBruker: (fnr: string) => void;
   brukerTilForhåndsvisning?: ForhåndsvisBrukerRespons;
   lasterBruker: boolean;
   navAnsatt: NavAnsatt;
   reserverOppgave: (data: ReserverOppgaveType) => void;
-  oppdaterValgtOppgave: (oppgave: OppgaveOversikt) => void;
   flyttTilGosys: (data: string) => void;
 }>;
 
@@ -116,151 +125,101 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
   lasterBruker,
   reserverOppgave,
   navAnsatt,
-  oppdaterValgtOppgave,
   flyttTilGosys,
 }) => {
   const skalKunneEndreSøker = !journalpost.bruker;
-  const erLokalOppgave: boolean = oppgave.kilde === OppgaveKilde.LOKAL;
+  const erLokalOppgave: boolean = oppgave?.kilde === OppgaveKilde.LOKAL;
+  const skalBareKunneEndreSak = erEndeligJournalført(journalpost.tilstand);
 
   const saker = journalpost.fagsaker || [];
   const formMethods = useForm<JournalføringFormValues>({
     defaultValues: buildInitialValues(journalpost),
   });
   const submitJournal = useCallback((values: JournalføringFormValues) => {
-    submitJournalføring(transformValues(values, journalpost, oppgave));
+    if (erEndeligJournalført(journalpost.tilstand)) {
+      submitJournalføring(transformValues(values, journalpost, journalpost.journalførendeEnhet), true);
+    } else {
+      if (!oppgave) {
+        throw new Error('Prøver å journalføre en journalpost uten oppgave, ugyldig tilstand!');
+      }
+      submitJournalføring(transformValues(values, journalpost, oppgave.enhetId), false);
+    }
   }, []);
 
   const isSubmittable = formMethods.formState.isDirty;
 
-  const reserverOppgaveAction = useCallback(() => {
-    const reservasjonFor = !oppgave.reservertAv ? navAnsatt.brukernavn : '';
-    reserverOppgave({
-      journalpostId: oppgave.journalpostId,
-      reserverFor: reservasjonFor,
-    });
-    oppdaterValgtOppgave({ ...oppgave, reservertAv: reservasjonFor });
-  }, [reserverOppgave]);
-
   return (
     <Form<JournalføringFormValues> formMethods={formMethods} onSubmit={submitJournal}>
-      <JournalpostTittelForm journalpost={journalpost} />
-      <VerticalSpacer eightPx />
-      {oppgave.reservertAv && navAnsatt.brukernavn === oppgave.reservertAv && (
-        <FlexRow>
-          <FlexColumn>
-            <BodyLong>
-              <FormattedMessage id="Oppgavetabell.SakenErTattAv" />
-              <Tag size="small" variant="info-moderate" style={{ marginLeft: '0.5rem' }}>
-                <FormattedMessage id="Oppgavetabell.Meg" />
-              </Tag>
-              <Button variant="tertiary" size="small" onClick={reserverOppgaveAction} style={{ marginLeft: '0.5rem' }}>
-                <FormattedMessage id="Oppgavetabell.FjernMeg" />
-              </Button>
-            </BodyLong>
-          </FlexColumn>
-        </FlexRow>
-      )}
-      {oppgave.reservertAv && navAnsatt.brukernavn !== oppgave.reservertAv && (
-        <FlexRow>
-          <FlexColumn>
-            <BodyLong>
-              <FormattedMessage id="Oppgavetabell.SakenErTattAv" />
-              <Tag size="small" variant="neutral-moderate" style={{ marginLeft: '0.5rem' }}>
-                {oppgave.reservertAv}
-              </Tag>
-            </BodyLong>
-          </FlexColumn>
-        </FlexRow>
-      )}
-      {!oppgave.reservertAv && (
-        <FlexRow>
-          <FlexColumn>
-            <BodyLong>
-              <Button variant="tertiary" size="small" onClick={reserverOppgaveAction}>
-                <FormattedMessage id="Oppgavetabell.SettPåMeg" />
-              </Button>
-            </BodyLong>
-          </FlexColumn>
-        </FlexRow>
-      )}
-      <VerticalSpacer sixteenPx />
-      <BrukerAvsenderPanel
-        journalpost={journalpost}
-        hentForhåndsvisningAvSøker={forhåndsvisBruker}
-        skalKunneEndreSøker={skalKunneEndreSøker}
-        lasterBruker={lasterBruker}
-        brukerTilForhåndsvisning={brukerTilForhåndsvisning}
-        knyttSøkerTilJournalpost={knyttJournalpostTilBruker}
-      />
-      <VerticalSpacer twentyPx />
-      {oppgave.beskrivelse && (
-        <>
-          <FlexRow>
-            <FlexColumn>
-              <Heading size="small">
-                <FormattedMessage id="ValgtOppgave.Notat" />
-              </Heading>
-            </FlexColumn>
-          </FlexRow>
-          <FlexRow>
-            <FlexColumn>
-              <BodyLong>{oppgave.beskrivelse}</BodyLong>
-            </FlexColumn>
-          </FlexRow>
-          <VerticalSpacer twentyPx />
-        </>
-      )}
-      <VerticalSpacer sixteenPx />
-      <FlexRow>
-        <FlexColumn>
+      <VStack gap="5">
+        <JournalpostTittelForm journalpost={journalpost} readOnly={skalBareKunneEndreSak} />
+        {oppgave && <Reservasjonspanel oppgave={oppgave} reserverOppgave={reserverOppgave} navAnsatt={navAnsatt} />}
+        <BrukerAvsenderPanel
+          journalpost={journalpost}
+          hentForhåndsvisningAvSøker={forhåndsvisBruker}
+          skalKunneEndreSøker={skalKunneEndreSøker}
+          lasterBruker={lasterBruker}
+          brukerTilForhåndsvisning={brukerTilForhåndsvisning}
+          knyttSøkerTilJournalpost={knyttJournalpostTilBruker}
+        />
+        {oppgave?.beskrivelse && (
+          <>
+            <Heading size="small">
+              <FormattedMessage id="ValgtOppgave.Notat" />
+            </Heading>
+            <BodyLong>{oppgave.beskrivelse}</BodyLong>
+          </>
+        )}
+        <div>
           <Heading size="small">
             <FormattedMessage id="ValgtOppgave.Dokumenter" />
           </Heading>
-        </FlexColumn>
-      </FlexRow>
-      {journalpost.dokumenter && (
-        <>
-          <VerticalSpacer eightPx />
-          <DokumentForm
-            journalpost={journalpost}
-            dokumentTittelStyresAvJournalpostTittel={dokumentTittelSkalStyresAvJournalpost(journalpost)}
-          />
-          <VerticalSpacer thirtyTwoPx />
-        </>
-      )}
-      <FlexRow>
-        <FlexColumn>
+          {journalpost.dokumenter && (
+            <DokumentForm
+              journalpost={journalpost}
+              dokumentTittelStyresAvJournalpostTittel={dokumentTittelSkalStyresAvJournalpost(journalpost)}
+            />
+          )}
+        </div>
+        {journalpost.eksisterendeSaksnummer && (
+          <div>
+            <Heading size="small">
+              <FormattedMessage id="ValgtOppgave.TilknyttetSak" />
+            </Heading>
+            <SakDetaljer
+              sak={finnSakMedSaksnummer(journalpost.eksisterendeSaksnummer, saker)}
+              key={journalpost.eksisterendeSaksnummer}
+            />
+          </div>
+        )}
+        <div>
           <Heading size="small">
             <FormattedMessage id="ValgtOppgave.RelaterteSaker" />
           </Heading>
-        </FlexColumn>
-      </FlexRow>
-      <VerticalSpacer eightPx />
-      {skalKunneEndreSøker && (
-        <Alert variant="info">
-          <FormattedMessage id="ValgtOppgave.RelaterteSaker.ManglerSøker" />
-        </Alert>
-      )}
-      {saker.map(sak => (
-        <SakDetaljer sak={sak} key={sak.saksnummer} />
-      ))}
-      <VerticalSpacer thirtyTwoPx />
-      <FlexRow>
-        <FlexColumn>
+          {skalKunneEndreSøker && (
+            <Alert variant="info">
+              <FormattedMessage id="ValgtOppgave.RelaterteSaker.ManglerSøker" />
+            </Alert>
+          )}
+          {saker
+            .filter(sak => sak.saksnummer !== journalpost.eksisterendeSaksnummer)
+            .map(sak => (
+              <SakDetaljer sak={sak} key={sak.saksnummer} />
+            ))}
+        </div>
+        <div>
           <Heading size="small">
-            <FormattedMessage id="ValgtOppgave.KnyttTilSak" />
+            <FormattedMessage id={skalBareKunneEndreSak ? 'Journal.Sak.AnnenSak' : 'ValgtOppgave.KnyttTilSak'} />
           </Heading>
-        </FlexColumn>
-      </FlexRow>
-      <VerticalSpacer eightPx />
-      <VelgSakForm
-        isSubmittable={isSubmittable}
-        journalpost={journalpost}
-        avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
-        erKlarForJournalføring={!skalKunneEndreSøker}
-        erLokalOppgave={erLokalOppgave}
-        flyttTilGosys={flyttTilGosys}
-      />
+          <VelgSakForm
+            isSubmittable={isSubmittable}
+            journalpost={journalpost}
+            avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
+            erKlarForJournalføring={!skalKunneEndreSøker}
+            erLokalOppgave={erLokalOppgave}
+            flyttTilGosys={flyttTilGosys}
+          />
+        </div>
+      </VStack>
     </Form>
   );
 };

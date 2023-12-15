@@ -9,17 +9,18 @@ import messages from '../i18n/nb_NO.json';
 import FormkravKlageFormNfp from './components/FormkravKlageFormNfp';
 import FormkravKlageKa from './components/FormkravKlageKa';
 import AvsluttetBehandling from './types/avsluttetBehandlingTsType';
-
-import '@navikt/fp-prosess-felles/dist/style.css';
+import FormkravMellomlagretDataType from './types/FormkravMellomlagretDataType';
 
 const intl = createIntl(messages);
 
 interface OwnProps {
   klageVurdering?: KlageVurdering;
   avsluttedeBehandlinger: AvsluttetBehandling[];
+  lagreFormkravVurdering: (data: FormkravMellomlagretDataType) => Promise<void>;
 }
 
 const FormkravProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
+  behandling,
   klageVurdering = {},
   avsluttedeBehandlinger,
   aksjonspunkter,
@@ -29,16 +30,19 @@ const FormkravProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelPro
   alleKodeverk,
   formData,
   setFormData,
+  lagreFormkravVurdering,
 }) => (
   <RawIntlProvider value={intl}>
     {aksjonspunkter.some(a => a.definisjon === AksjonspunktCode.VURDERING_AV_FORMKRAV_KLAGE_NFP) && (
       <FormkravKlageFormNfp
+        behandlingUuid={behandling.uuid}
         klageVurdering={klageVurdering}
         submitCallback={submitCallback}
         readOnly={isReadOnly}
         readOnlySubmitButton={readOnlySubmitButton}
         alleKodeverk={alleKodeverk}
         avsluttedeBehandlinger={avsluttedeBehandlinger}
+        lagreFormkravVurdering={lagreFormkravVurdering}
         formData={formData}
         setFormData={setFormData}
       />

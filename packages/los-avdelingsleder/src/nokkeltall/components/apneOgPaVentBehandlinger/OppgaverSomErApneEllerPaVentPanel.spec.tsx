@@ -9,7 +9,7 @@ describe('<OppgaverSomErApneEllerPaVentPanel>', () => {
   // TODO echarts-testing
   it.skip('skal vise graffilter', async () => {
     const { getByLabelText } = render(<Default />);
-    expect(await screen.findByText('Status - åpne behandlinger')).toBeInTheDocument();
+    expect(await screen.findByText('Åpne behandlinger foreldrepenger fordelt på første uttaksdag fra søknad')).toBeInTheDocument();
 
     expect(getByLabelText('Førstegangsbehandling')).toBeChecked();
     expect(getByLabelText('Klage')).toBeChecked();

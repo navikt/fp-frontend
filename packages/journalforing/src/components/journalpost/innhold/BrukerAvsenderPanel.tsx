@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useMemo, ReactElement, useState, useCallback } from 'react';
-import { BodyShort, Heading, Search, Alert, Button, CopyButton } from '@navikt/ds-react';
+import { BodyShort, Heading, Search, Alert, Button, CopyButton, HStack, VStack } from '@navikt/ds-react';
 import { isValidFodselsnummer } from '@navikt/ft-utils';
-import { FlexColumn, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Buldings3Icon, FigureInwardIcon, SilhouetteIcon, FigureOutwardIcon } from '@navikt/aksel-icons';
 import { FormattedMessage, useIntl } from 'react-intl';
 import styles from './brukerAvsenderPanel.module.css';
@@ -32,36 +32,28 @@ const finnAvsenderBilde = (journalpost: Journalpost): ReactElement => {
 };
 
 const lagBrukerAvsenderRad = (navn: string, id: string, ikon: ReactElement, title?: string): ReactElement => (
-  <FlexColumn className={styles.kolBredde}>
+  <div className={styles.kolBredde}>
     {title && (
-      <FlexRow>
-        <FlexColumn>
-          <Heading size="small">
-            <FormattedMessage id={title} />
-          </Heading>
-        </FlexColumn>
-      </FlexRow>
+      <Heading size="small">
+        <FormattedMessage id={title} />
+      </Heading>
     )}
     <VerticalSpacer sixteenPx />
-    <FlexRow>
-      <FlexColumn className={styles.ikonKol}>{ikon}</FlexColumn>
-      <FlexColumn>
-        <FlexRow>
-          <FlexColumn>
-            <BodyShort>{navn}</BodyShort>
-          </FlexColumn>
-        </FlexRow>
-        <FlexRow>
-          <FlexColumn className={styles.kopiTekst}>
+    <HStack gap="2">
+      <div className={styles.ikonKol}>{ikon}</div>
+      <VStack>
+        <BodyShort>{navn}</BodyShort>
+        <HStack>
+          <div className={styles.kopiTekst}>
             <BodyShort>{id}</BodyShort>
-          </FlexColumn>
-          <FlexColumn className={styles.clipBoard}>
+          </div>
+          <div className={styles.clipBoard}>
             <CopyButton copyText={id} variant="action" />
-          </FlexColumn>
-        </FlexRow>
-      </FlexColumn>
-    </FlexRow>
-  </FlexColumn>
+          </div>
+        </HStack>
+      </VStack>
+    </HStack>
+  </div>
 );
 
 type OwnProps = Readonly<{
@@ -123,16 +115,12 @@ const BrukerAvsenderPanel: FunctionComponent<OwnProps> = ({
 
   return (
     <div className={styles.brukerAvsenderRad}>
-      <FlexColumn>
+      <div>
         {skalKunneEndreSøker && (
           <>
-            <FlexRow>
-              <FlexColumn>
-                <Heading size="small">
-                  <FormattedMessage id="ValgtOppgave.Bruker" />
-                </Heading>
-              </FlexColumn>
-            </FlexRow>
+            <Heading size="small">
+              <FormattedMessage id="ValgtOppgave.Bruker" />
+            </Heading>
             <VerticalSpacer sixteenPx />
             <Alert variant="warning">
               <BodyShort>
@@ -167,12 +155,11 @@ const BrukerAvsenderPanel: FunctionComponent<OwnProps> = ({
             </div>
           </>
         )}
-        {journalpost.bruker?.navn && (
-          <FlexRow>
-            {lagBrukerAvsenderRad(journalpost.bruker.navn, journalpost.bruker.fnr, brukerBilde, 'ValgtOppgave.Bruker')}
-          </FlexRow>
-        )}
-      </FlexColumn>
+      </div>
+
+      {journalpost.bruker?.navn && (
+        <>{lagBrukerAvsenderRad(journalpost.bruker.navn, journalpost.bruker.fnr, brukerBilde, 'ValgtOppgave.Bruker')}</>
+      )}
       {journalpost.avsender?.navn && (
         <>
           {lagBrukerAvsenderRad(

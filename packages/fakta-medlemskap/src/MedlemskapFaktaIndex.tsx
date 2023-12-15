@@ -7,8 +7,6 @@ import { createIntl } from '@navikt/ft-utils';
 import MedlemskapInfoPanel from './components/MedlemskapInfoPanel';
 import messages from '../i18n/nb_NO.json';
 
-import '@navikt/fp-fakta-felles/dist/style.css';
-
 const intl = createIntl(messages);
 
 interface OwnProps {

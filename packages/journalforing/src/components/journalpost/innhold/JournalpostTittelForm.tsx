@@ -1,9 +1,9 @@
 import React, { FunctionComponent, useState, useCallback } from 'react';
-import { Heading, Button, CheckboxGroup, Checkbox } from '@navikt/ds-react';
+import { Heading, Button, CheckboxGroup, Checkbox, HStack } from '@navikt/ds-react';
+import { FormattedMessage } from 'react-intl';
 import { PencilIcon } from '@navikt/aksel-icons';
 import { SelectField, InputField } from '@navikt/ft-form-hooks';
 import { hasValidText, required } from '@navikt/ft-form-validators';
-import { FlexColumn, FlexRow } from '@navikt/ft-ui-komponenter';
 import Journalpost from '../../../typer/journalpostTsType';
 import styles from './journalpostTittelForm.module.css';
 import { listeMedTittler } from '../../../kodeverk/dokumentTittel';
@@ -11,12 +11,13 @@ import { erKanalSomErÅpenForEndring } from '../../../kodeverk/journalKanal';
 
 type OwnProps = Readonly<{
   journalpost: Journalpost;
+  readOnly: boolean;
 }>;
 
 /**
  * JournalpostTittelForm - Inneholder tittel på journalpost og formkomponent for å endre denne
  */
-const JournalpostTittelForm: FunctionComponent<OwnProps> = ({ journalpost }) => {
+const JournalpostTittelForm: FunctionComponent<OwnProps> = ({ journalpost, readOnly }) => {
   const [kanRedigereTittel, setKanRedigereTittel] = useState(!journalpost.tittel);
   const [harToggletFritekst, setHarToggletFritekst] = useState(false);
   const toggleRedigering = useCallback(() => {
@@ -32,22 +33,22 @@ const JournalpostTittelForm: FunctionComponent<OwnProps> = ({ journalpost }) => 
     setHarToggletFritekst(!harToggletFritekst);
   }, [harToggletFritekst]);
   return (
-    <FlexRow>
+    <div className={styles.container}>
       {kanRedigereTittel && (
         <>
-          <FlexColumn className={styles.inputBoks}>
+          <HStack className={styles.inputBoks}>
             {harToggletFritekst && (
               <InputField
                 name="journalpostTittel"
                 validate={[required, hasValidText]}
-                readOnly={false}
+                readOnly={readOnly}
                 maxLength={200}
                 className={styles.inputField}
               />
             )}
             {!harToggletFritekst && (
               <SelectField
-                readOnly={false}
+                readOnly={readOnly}
                 name="journalpostTittel"
                 label={undefined}
                 className={styles.selectField}
@@ -55,34 +56,30 @@ const JournalpostTittelForm: FunctionComponent<OwnProps> = ({ journalpost }) => 
                 selectValues={tittler}
               />
             )}
-          </FlexColumn>
-          <FlexColumn>
+          </HStack>
+          <HStack>
             <CheckboxGroup
               legend="Brukt fritekst"
               hideLegend
               onChange={endreFritekstToggle}
               value={[harToggletFritekst]}
             >
-              <Checkbox value>Fritekst</Checkbox>
+              <Checkbox value>
+                <FormattedMessage id="Journal.Tittel.Fritekst" />
+              </Checkbox>
             </CheckboxGroup>
-          </FlexColumn>
+          </HStack>
         </>
       )}
       {!kanRedigereTittel && (
-        <FlexColumn className={styles.tittelRad}>
+        <HStack className={styles.inputBoks}>
           <Heading size="large">{journalpost.tittel}</Heading>
-          {erKanalSomErÅpenForEndring(journalpost.kanal) && (
-            <Button
-              icon={<PencilIcon aria-hidden />}
-              className={styles.editButton}
-              onClick={toggleRedigering}
-              type="button"
-              variant="tertiary"
-            />
+          {!readOnly && erKanalSomErÅpenForEndring(journalpost.kanal) && (
+            <Button icon={<PencilIcon aria-hidden />} onClick={toggleRedigering} type="button" variant="tertiary" />
           )}
-        </FlexColumn>
+        </HStack>
       )}
-    </FlexRow>
+    </div>
   );
 };
 export default JournalpostTittelForm;

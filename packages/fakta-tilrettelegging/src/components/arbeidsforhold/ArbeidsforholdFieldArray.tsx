@@ -34,9 +34,18 @@ const erInnenforIntervall = (tilretteleggingBehovFom: string, fomDato: string, t
 
 const finnSvpTagTekst = (skalBrukes: boolean, visInfoAlert: boolean) => {
   if (visInfoAlert && skalBrukes) {
-    return 'ArbeidsforholdFieldArray.SvpIkkeBeregnet';
+    return <FormattedMessage id="ArbeidsforholdFieldArray.SvpIkkeBeregnet" />;
   }
-  return skalBrukes ? 'ArbeidsforholdFieldArray.SkalHaSvp' : 'ArbeidsforholdFieldArray.SkalIkkeHaSvp';
+  return skalBrukes ? (
+    <FormattedMessage id="ArbeidsforholdFieldArray.SkalHaSvp" />
+  ) : (
+    <FormattedMessage id="ArbeidsforholdFieldArray.SkalIkkeHaSvp" />
+  );
+};
+
+const finnStillingsprosent = (aoiArbeidsforhold: AoIArbeidsforhold[], tilretteleggingBehovFom: string) => {
+  const aoiListe = aoiArbeidsforhold.filter(a => erInnenforIntervall(tilretteleggingBehovFom, a.fom, a.tom));
+  return aoiListe.reduce((sum, aoi) => sum + aoi.stillingsprosent, 0);
 };
 
 interface OwnProps {
@@ -71,13 +80,14 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
         );
 
         const af = finnArbeidsforhold(alleIafAf, arbeidsforhold.internArbeidsforholdReferanse);
-        const alleAf = alleIafAf.filter(a => a.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverReferanse);
 
         const visInfoAlert = af
           ? !erInnenforIntervall(arbeidsforhold.tilretteleggingBehovFom, af.fom, af.tom)
-          : alleAf.every(a => !erInnenforIntervall(arbeidsforhold.tilretteleggingBehovFom, a.fom, a.tom));
+          : alleIafAf.every(a => !erInnenforIntervall(arbeidsforhold.tilretteleggingBehovFom, a.fom, a.tom));
 
-        const stillingsprosentArbeidsforhold = af ? af.stillingsprosent : 100;
+        const stillingsprosentArbeidsforhold = af
+          ? af.stillingsprosent
+          : finnStillingsprosent(alleIafAf, arbeidsforhold.tilretteleggingBehovFom);
 
         const arbeidType = uttakArbeidTyper.find(type => type.kode === arbeidsforhold.uttakArbeidType);
 
@@ -116,7 +126,7 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
                       </FlexColumn>
                       <FlexColumn>
                         <Tag size="small" variant="neutral-moderate">
-                          <FormattedMessage id={finnSvpTagTekst(arbeidsforhold.skalBrukes, visInfoAlert)} />
+                          {finnSvpTagTekst(arbeidsforhold.skalBrukes, visInfoAlert)}
                         </Tag>
                       </FlexColumn>
                       {arbeidsforhold.skalBrukes && visInfoAlert && (

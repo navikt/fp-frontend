@@ -39,7 +39,7 @@ const Template: StoryFn<{ avdelinger?: Avdeling[]; navAnsatt: NavAnsatt }> = ({ 
     { key: RestApiPathsKeys.HENT_OPPGAVER_FOR_AVDELING.name, data: [] },
     { key: RestApiPathsKeys.HENT_OPPGAVER_PER_DATO.name, data: [] },
     { key: RestApiPathsKeys.HENT_OPPGAVER_APNE_ELLER_PA_VENT.name, data: [] },
-    { key: RestApiPathsKeys.HENT_OPPGAVER_MANUELT_PA_VENT.name, data: [] },
+    { key: RestApiPathsKeys.HENT_BEHANDLINGER_FRISTUTLOP.name, data: [] },
     { key: RestApiPathsKeys.HENT_OPPGAVER_PER_FORSTE_STONADSDAG.name, data: [] },
     { key: RestApiPathsKeys.RESERVASJONER_FOR_AVDELING.name, data: [] },
   ];

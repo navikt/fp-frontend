@@ -1,0 +1,33 @@
+{
+  "UtbetalingsdataPanel.Heading": "Søk i Infotrygd",
+  "UtbetalingsdataPanel.Sok": "Fødselsnummer",
+  "UtbetalingsdataPanel.UgyldigFnr": "Oppgitt fødselsnummer er ikke gyldig",
+  "UtbetalingsdataPanel.Resultat": "Søkeresultat:",
+
+  "VedtakPanel.Identdato": "Identdato",
+  "VedtakPanel.Dekningsgrad": "Dekningsgrad",
+  "VedtakPanel.Periode": "Periode",
+  "VedtakPanel.Arbeidskategori": "Arbeidskategori",
+  "VedtakPanel.OpphorFom": "Opphørsdato",
+  "VedtakPanel.FødselsdatoBarn": "Fødselsdato barn",
+  "VedtakPanel.Gradering": "Gradering",
+
+  "VedtakDetaljerPanel.Arbeidsforhold": "Arbeidsforhold",
+  "VedtakDetaljerPanel.Utbetalinger": "Utbetalinger",
+
+  "ArbeidsforholdPanel.Arbeidsgiver": "Arbeidsgiver",
+  "ArbeidsforholdPanel.Inntekt": "Inntekt",
+  "ArbeidsforholdPanel.Inntektsperiode": "Inntektsperiode",
+  "ArbeidsforholdPanel.Refusjon": "Refusjon",
+  "ArbeidsforholdPanel.IngenArbeidsforhold": "Ingen arbeidsforhold",
+  "ArbeidsforholdPanel.Ja": "Ja",
+  "ArbeidsforholdPanel.Nei": "Nei",
+
+  "UtbetalingerPanel.Periode": "Periode",
+  "UtbetalingerPanel.Utbetalingsgrad": "Utbetalingsgrad",
+  "UtbetalingerPanel.Dagsats": "Dagsats",
+  "UtbetalingerPanel.Refusjon": "Refusjon",
+  "UtbetalingerPanel.IngenUtbetalinger": "Ingen utbetalinger",
+  "UtbetalingerPanel.Ja": "Ja",
+  "UtbetalingerPanel.Nei": "Nei"
+}

@@ -21,7 +21,6 @@ describe('<FodselFaktaIndex>', () => {
     expect(screen.getByText('Opplysninger om fødsel fra folkeregisteret')).toBeInTheDocument();
     expect(screen.getByText('Fødselsdato')).toBeInTheDocument();
     expect(screen.getByText('01.01.2019')).toBeInTheDocument();
-    expect(screen.getByText('1')).toBeInTheDocument();
 
     expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 

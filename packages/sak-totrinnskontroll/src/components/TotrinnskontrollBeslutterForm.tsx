@@ -93,7 +93,7 @@ interface OwnProps {
   lagLenke: (skjermlenkeCode: string) => Location | undefined;
   onSubmit: (data: FormValues) => void;
   beslutterFormData?: any;
-  setBeslutterForData: (data?: any) => void;
+  setBeslutterFormData: (data?: any) => void;
 }
 
 /*
@@ -115,7 +115,7 @@ export const TotrinnskontrollBeslutterForm: FunctionComponent<OwnProps> = ({
   faktaOmBeregningTilfeller,
   lagLenke,
   beslutterFormData,
-  setBeslutterForData,
+  setBeslutterFormData,
 }) => {
   const erKlage = behandling && behandling.type === BehandlingType.KLAGE;
   const erAnke = behandling && behandling.type === BehandlingType.ANKE;
@@ -147,7 +147,7 @@ export const TotrinnskontrollBeslutterForm: FunctionComponent<OwnProps> = ({
       formMethods={formMethods}
       onSubmit={onSubmit}
       className={styles.container}
-      setDataOnUnmount={setBeslutterForData}
+      setDataOnUnmount={setBeslutterFormData}
     >
       {!readOnly && (
         <>

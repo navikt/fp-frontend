@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactElement, useCallback, useMemo } from 'react';
-import { Alert, BodyShort, Button } from '@navikt/ds-react';
-import { FlexColumn, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { Alert, BodyShort, Button, HStack } from '@navikt/ds-react';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
@@ -12,6 +12,7 @@ import JournalFagsak from '../../../typer/journalFagsakTsType';
 import JournalføringFormValues from '../../../typer/journalføringFormValues';
 import styles from './velgSakForm.module.css';
 import Sakstype from '../../../kodeverk/sakstype';
+import { erEndeligJournalført } from '../../../kodeverk/journalpostTilstand';
 
 const TOM_ARRAY: JournalFagsak[] = [];
 
@@ -89,8 +90,9 @@ export const transformValues = (
   };
 };
 
-const lagRadioOptions = (saksliste: JournalFagsak[], intl: IntlShape, fetTekst: any): RadioOption[] => {
-  const radioOptions = saksliste.map(sak => ({
+const lagRadioOptions = (journalpost: Journalpost, intl: IntlShape, fetTekst: any): RadioOption[] => {
+  const saker = journalpost.fagsaker || TOM_ARRAY;
+  const radioOptions = saker.map(sak => ({
     label: (
       <FormattedMessage
         id="Journal.Sak.Beskrivelse"
@@ -101,10 +103,18 @@ const lagRadioOptions = (saksliste: JournalFagsak[], intl: IntlShape, fetTekst: 
         }}
       />
     ),
+    disabled: sak.saksnummer === journalpost.eksisterendeSaksnummer,
     value: sak.saksnummer,
   }));
-  radioOptions.push({ label: <FormattedMessage id="Journal.Sak.Ny" />, value: LAG_NY_SAK });
-  radioOptions.push({ label: <FormattedMessage id="Journal.Sak.Generell" />, value: LAG_GENERELL_SAK });
+  radioOptions.push({ label: <FormattedMessage id="Journal.Sak.Ny" />, value: LAG_NY_SAK, disabled: false });
+  if (!erEndeligJournalført(journalpost.tilstand)) {
+    // Om den allerede er journalført kan den ikke legges på generell sak
+    radioOptions.push({
+      label: <FormattedMessage id="Journal.Sak.Generell" />,
+      value: LAG_GENERELL_SAK,
+      disabled: false,
+    });
+  }
   return radioOptions;
 };
 
@@ -129,14 +139,13 @@ const VelgSakForm: FunctionComponent<OwnProps> = ({
   flyttTilGosys,
 }) => {
   const intl = useIntl();
-  const saksliste = journalpost?.fagsaker || TOM_ARRAY;
-  const finnesSaker = saksliste && saksliste.length > 0;
+  const finnesSaker = journalpost.fagsaker && journalpost.fagsaker.length > 0;
   const formMethods = useFormContext<JournalføringFormValues>();
   const sakValg = formMethods.watch(radioFieldName);
   const skalOppretteSak = sakValg === LAG_NY_SAK;
   const skalFørePåGenerellSak = sakValg === LAG_GENERELL_SAK;
   const fetTekst = useCallback((chunks: any) => <b>{chunks}</b>, []);
-  const radioOptions = useMemo(() => lagRadioOptions(saksliste, intl, fetTekst), [saksliste]);
+  const radioOptions = useMemo(() => lagRadioOptions(journalpost, intl, fetTekst), [journalpost]);
 
   const flyttOppgaveTilGosysAction = useCallback(() => {
     flyttTilGosys(journalpost.journalpostId);
@@ -149,36 +158,38 @@ const VelgSakForm: FunctionComponent<OwnProps> = ({
           <FormattedMessage id="Journal.Sak.Ingen" />
         </BodyShort>
       )}
+      {erEndeligJournalført(journalpost.tilstand) && (
+        <>
+          <VerticalSpacer eightPx />
+          <Alert variant="info">
+            <FormattedMessage id="Journalpost.Søk.Forklaring" />
+          </Alert>
+          <VerticalSpacer eightPx />
+        </>
+      )}
       <>
-        <FlexRow>
-          <FlexColumn>
-            <RadioGroupPanel
-              disabled={!erKlarForJournalføring}
-              name={radioFieldName}
-              hideLegend
-              label={intl.formatMessage({ id: 'ValgtOppgave.RelaterteSaker' })}
-              validate={[required]}
-              radios={radioOptions}
-            />
-          </FlexColumn>
-        </FlexRow>
+        <RadioGroupPanel
+          disabled={!erKlarForJournalføring}
+          name={radioFieldName}
+          hideLegend
+          label={intl.formatMessage({ id: 'ValgtOppgave.RelaterteSaker' })}
+          validate={[required]}
+          radios={radioOptions}
+        />
         {skalOppretteSak && (
           <>
             <VerticalSpacer eightPx />
-            <FlexRow>
-              <FlexColumn>
-                <SelectField
-                  name={selectFieldName}
-                  validate={[required]}
-                  label={intl.formatMessage({ id: 'Journal.Sak.VelgYtelse' })}
-                  selectValues={ytelseSelectValg.map(valg => (
-                    <option key={valg.ytelse} value={valg.ytelse}>
-                      <FormattedMessage id={valg.beskrivelsekode} />
-                    </option>
-                  ))}
-                />
-              </FlexColumn>
-            </FlexRow>
+            <SelectField
+              className={styles.ytelseSelect}
+              name={selectFieldName}
+              validate={[required]}
+              label={intl.formatMessage({ id: 'Journal.Sak.VelgYtelse' })}
+              selectValues={ytelseSelectValg.map(valg => (
+                <option key={valg.ytelse} value={valg.ytelse}>
+                  <FormattedMessage id={valg.beskrivelsekode} />
+                </option>
+              ))}
+            />
             <VerticalSpacer twentyPx />
           </>
         )}
@@ -191,31 +202,23 @@ const VelgSakForm: FunctionComponent<OwnProps> = ({
           </>
         )}
         <VerticalSpacer fourtyPx />
-        <FlexRow className={styles.knappRad}>
-          <FlexColumn>
-            <Button size="small" variant="primary" disabled={!isSubmittable} type="submit">
-              <FormattedMessage id="ValgtOppgave.Journalfør" />
-            </Button>
-          </FlexColumn>
-          <FlexColumn>
-            <Button
-              size="small"
-              variant="secondary"
-              onClick={avbrytVisningAvJournalpost}
-              disabled={false}
-              type="button"
-            >
-              <FormattedMessage id="ValgtOppgave.Avbryt" />
-            </Button>
-          </FlexColumn>
+        <HStack className={styles.knappRad} gap="4">
+          <Button size="small" variant="primary" disabled={!isSubmittable} type="submit">
+            <FormattedMessage
+              id={erEndeligJournalført(journalpost.tilstand) ? 'Journal.Sak.AnnenSak' : 'ValgtOppgave.Journalfør'}
+            />
+          </Button>
+          <Button size="small" variant="secondary" onClick={avbrytVisningAvJournalpost} disabled={false} type="button">
+            <FormattedMessage id="ValgtOppgave.Avbryt" />
+          </Button>
           {erLokalOppgave && (
-          <FlexColumn className={styles.colMargin}>
-            <Button size="small" variant="primary" type="button" onClick={flyttOppgaveTilGosysAction}>
-              <FormattedMessage id="ValgtOppgave.Flytt.Til.Gosys" />
-            </Button>
-          </FlexColumn>
+            <div className={styles.colMargin}>
+              <Button size="small" variant="primary" type="button" onClick={flyttOppgaveTilGosysAction}>
+                <FormattedMessage id="ValgtOppgave.Flytt.Til.Gosys" />
+              </Button>
+            </div>
           )}
-        </FlexRow>
+        </HStack>
       </>
     </>
   );

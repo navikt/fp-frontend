@@ -21,7 +21,7 @@ const selectDocument =
       if (newWindow) {
         setTimeout(() => {
           newWindow.document.title = document.tittel || 'Dokument';
-        }, 500);
+        }, 1000);
       }
     }
   };

@@ -68,8 +68,8 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
     isQueryParam: true,
   });
 
-  const [meldingFormData, setMeldingForData] = useState();
-  const [beslutterFormData, setBeslutterForData] = useState();
+  const [meldingFormData, setMeldingFormData] = useState();
+  const [beslutterFormData, setBeslutterFormData] = useState();
 
   const fagsak = fagsakData.getFagsak();
   const behandling = fagsakData.getBehandling(behandlingUuid);
@@ -126,7 +126,12 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
         <Tabs.Tab
           className={styles.tab}
           value={SupportTabs.NOTATER}
-          icon={<DocPencilIcon title={intl.formatMessage({ id: 'BehandlingSupportIndex.Notatblokk' })} />}
+          icon={
+            <div className={styles.pencilSvgContainer}>
+              {fagsak.notater.length > 0 && <div className={styles.ulesteNotater}>{fagsak.notater.length}</div>}
+              <DocPencilIcon title={intl.formatMessage({ id: 'BehandlingSupportIndex.Notatblokk' })} />
+            </div>
+          }
         />
       </Tabs.List>
       <Tabs.Panel value={SupportTabs.TIL_BESLUTTER}>
@@ -135,7 +140,7 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
             fagsakData={fagsakData}
             valgtBehandlingUuid={behandling.uuid}
             beslutterFormData={beslutterFormData}
-            setBeslutterForData={setBeslutterForData}
+            setBeslutterFormData={setBeslutterFormData}
           />
         )}
       </Tabs.Panel>
@@ -145,7 +150,7 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
             fagsakData={fagsakData}
             valgtBehandlingUuid={behandling.uuid}
             beslutterFormData={beslutterFormData}
-            setBeslutterForData={setBeslutterForData}
+            setBeslutterFormData={setBeslutterFormData}
           />
         )}
       </Tabs.Panel>
@@ -165,7 +170,7 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
             fagsakData={fagsakData}
             valgtBehandlingUuid={behandling.uuid}
             meldingFormData={meldingFormData}
-            setMeldingForData={setMeldingForData}
+            setMeldingFormData={setMeldingFormData}
             hentOgSettBehandling={hentOgSettBehandling}
           />
         )}

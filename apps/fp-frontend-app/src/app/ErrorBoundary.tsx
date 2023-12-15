@@ -40,15 +40,17 @@ export class ErrorBoundary extends Component<OwnProps, State> {
       });
     });
 
-    errorMessageCallback(
-      [
-        error.toString(),
-        info.componentStack
-          .split('\n')
-          .map(line => line.trim())
-          .find(line => !!line),
-      ].join(' '),
-    );
+    const errorStrings = info.componentStack
+      ? [
+          error.toString(),
+          info.componentStack
+            .split('\n')
+            .map(line => line.trim())
+            .find(line => !!line),
+        ].join(' ')
+      : error.toString();
+
+    errorMessageCallback(errorStrings);
 
     // eslint-disable-next-line no-console
     console.error(error);

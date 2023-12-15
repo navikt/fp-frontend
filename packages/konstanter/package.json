@@ -1,33 +1,19 @@
 {
   "name": "@navikt/fp-konstanter",
-  "version": "1.0.0",
   "license": "MIT",
   "private": true,
-  "main": "./dist/index.umd.js",
-  "module": "./dist/index.es.js",
-  "types": "./dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "main": "index.ts",
+  "types": "index.ts",
   "scripts": {
     "tsc": "tsc --pretty",
     "eslint": "eslint \"src/**/*.ts*\" --color",
     "eslint:fix": "eslint --fix \"src/**/*.ts*\" --color",
     "prettier": "prettier --write src",
-    "dev": "vite build --mode development --watch",
-    "build": "vite build",
     "clean": "rm -rf ./dist ./node_modules"
   },
   "devDependencies": {
-    "eslint": "8.50.0",
-    "typescript": "5.2.2",
-    "vite": "4.4.10"
-  },
-  "exports": {
-    ".": {
-      "import": "./dist/index.es.js",
-      "require": "./dist/index.umd.js"
-    },
-    "./dist/style.css": "./dist/style.css"
+    "eslint": "8.55.0",
+    "typescript": "5.3.3",
+    "vite": "5.0.9"
   }
 }

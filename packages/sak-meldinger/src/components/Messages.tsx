@@ -15,7 +15,7 @@ import { UkjentAdresseMeldingIndex } from '@navikt/fp-sak-ukjent-adresse';
 import styles from './messages.module.css';
 
 const maxLength4000 = maxLength(4000);
-const maxLength6000 = maxLength(6000);
+const maxLength10000 = maxLength(10000);
 const minLength3 = minLength(3);
 
 export type FormValues = {
@@ -97,7 +97,7 @@ interface OwnProps {
   fagsakYtelseType: string;
   kanVeilede: boolean;
   meldingFormData?: any;
-  setMeldingForData: (data?: any) => void;
+  setMeldingFormData: (data?: any) => void;
   brukerManglerAdresse: boolean;
 }
 
@@ -116,7 +116,7 @@ const Messages: FunctionComponent<OwnProps> = ({
   fagsakYtelseType,
   kanVeilede,
   meldingFormData,
-  setMeldingForData,
+  setMeldingFormData,
   isKontrollerRevurderingApOpen,
   brukerManglerAdresse,
 }) => {
@@ -155,7 +155,7 @@ const Messages: FunctionComponent<OwnProps> = ({
     <Form
       formMethods={formMethods}
       onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
-      setDataOnUnmount={setMeldingForData}
+      setDataOnUnmount={setMeldingFormData}
     >
       <SelectField
         name="brevmalkode"
@@ -190,8 +190,8 @@ const Messages: FunctionComponent<OwnProps> = ({
           <TextAreaField
             name="fritekst"
             label={intl.formatMessage({ id: getFritekstMessage(brevmalkode) })}
-            validate={[required, erVarselOmRevurdering ? maxLength6000 : maxLength4000, minLength3, hasValidText]}
-            maxLength={erVarselOmRevurdering ? 6000 : 4000}
+            validate={[required, erVarselOmRevurdering ? maxLength10000 : maxLength4000, minLength3, hasValidText]}
+            maxLength={erVarselOmRevurdering ? 10000 : 4000}
             badges={[{ type: 'info', titleText: language }]}
           />
         </>
