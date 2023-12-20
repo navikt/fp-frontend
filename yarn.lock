@@ -7997,9 +7997,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-links@npm:7.6.4":
-  version: 7.6.4
-  resolution: "@storybook/addon-links@npm:7.6.4"
+"@storybook/addon-links@npm:7.6.6":
+  version: 7.6.6
+  resolution: "@storybook/addon-links@npm:7.6.6"
   dependencies:
     "@storybook/csf": ^0.1.2
     "@storybook/global": ^5.0.0
@@ -8009,7 +8009,7 @@ __metadata:
   peerDependenciesMeta:
     react:
       optional: true
-  checksum: 92e2bc81c818b9c3b4806167376fa61c323bbf705f5c5d94d5f1aee887bade7ee7631724fa13ba86a9f579d231ffb58ba0a01853056db0adf9293b6313e152a7
+  checksum: e88051c2a3194d17e162c6af6d4342b6a3fee92420d030131439b059e73579589200722622c4659b0a80f8a79bea29d3482e3d9c704c4411e09e214565bbc3f1
   languageName: node
   linkType: hard
 
@@ -13424,7 +13424,7 @@ __metadata:
     "@navikt/aksel-stylelint": 5.12.0
     "@sentry/cli": 2.23.0
     "@storybook/addon-essentials": 7.6.4
-    "@storybook/addon-links": 7.6.4
+    "@storybook/addon-links": 7.6.6
     "@storybook/builder-vite": 7.6.4
     "@storybook/cli": 7.6.4
     "@storybook/react": 7.6.4
