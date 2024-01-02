@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "@navikt/fp-storybook-utils": "workspace:*",
-    "@storybook/addon-actions": "7.6.4",
+    "@storybook/addon-actions": "7.6.7",
     "@storybook/react": "7.6.4",
     "@storybook/react-vite": "7.6.4",
     "@testing-library/react": "14.1.2",
