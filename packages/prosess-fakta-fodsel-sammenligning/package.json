@@ -40,7 +40,7 @@
     "@testing-library/user-event": "14.5.1",
     "cross-env": "7.0.3",
     "eslint": "8.55.0",
-    "storybook": "7.6.4",
+    "storybook": "7.6.7",
     "stylelint": "15.11.0",
     "typescript": "5.3.3",
     "vite": "5.0.9",
