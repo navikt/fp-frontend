@@ -51,25 +51,25 @@ export const endpoints = new RestApiConfigBuilder()
   .withPost('/fpsak/api/fagsak/sok', RestApiPathsKeys.SEARCH_FAGSAK)
   .withGet('/fplos/api/driftsmeldinger', RestApiPathsKeys.DRIFTSMELDINGER)
   .withGet('/fplos/api/saksbehandler/saksliste', RestApiPathsKeys.SAKSLISTE)
-  .withGet('/fplos/api/saksbehandler/oppgaver/reserverte', RestApiPathsKeys.RESERVERTE_OPPGAVER)
+  .withGet('/fplos/api/reservasjon/reserverte-oppgaver', RestApiPathsKeys.RESERVERTE_OPPGAVER)
   .withAsyncGet('/fplos/api/saksbehandler/oppgaver', RestApiPathsKeys.OPPGAVER_TIL_BEHANDLING, {
     maxPollingLimit: 1800,
   })
-  .withPost('/fplos/api/saksbehandler/oppgaver/opphev', RestApiPathsKeys.OPPHEV_OPPGAVERESERVASJON)
-  .withPost('/fplos/api/saksbehandler/oppgaver/forleng', RestApiPathsKeys.FORLENG_OPPGAVERESERVASJON)
-  .withPost('/fplos/api/saksbehandler/oppgaver/reservasjon/endre', RestApiPathsKeys.ENDRE_OPPGAVERESERVASJON)
-  .withPost('/fplos/api/saksbehandler/oppgaver/flytt', RestApiPathsKeys.FLYTT_RESERVASJON)
-  .withPost('/fplos/api/saksbehandler/oppgaver/reserver', RestApiPathsKeys.RESERVER_OPPGAVE)
-  .withPost('/fplos/api/saksbehandler/oppgaver/flytt/søk', RestApiPathsKeys.FLYTT_RESERVASJON_SAKSBEHANDLER_SOK)
+  .withPost('/fplos/api/reservasjon/opphev-reservasjon', RestApiPathsKeys.OPPHEV_OPPGAVERESERVASJON)
+  .withPost('/fplos/api/reservasjon/forleng', RestApiPathsKeys.FORLENG_OPPGAVERESERVASJON)
+  .withPost('/fplos/api/reservasjon/endre-varighet', RestApiPathsKeys.ENDRE_OPPGAVERESERVASJON)
+  .withPost('/fplos/api/reservasjon/flytt-reservasjon', RestApiPathsKeys.FLYTT_RESERVASJON)
+  .withPost('/fplos/api/reservasjon/reserver', RestApiPathsKeys.RESERVER_OPPGAVE)
+  .withPost('/fplos/api/reservasjon/flytt-reservasjon/søk', RestApiPathsKeys.FLYTT_RESERVASJON_SAKSBEHANDLER_SOK)
   .withGet('/fplos/api/saksbehandler/oppgaver/oppgaver-for-fagsaker', RestApiPathsKeys.OPPGAVER_FOR_FAGSAKER)
-  .withGet('/fplos/api/saksbehandler/oppgaver/reservasjon-status', RestApiPathsKeys.HENT_RESERVASJONSSTATUS)
+  .withGet('/fplos/api/reservasjon/reservasjon-status', RestApiPathsKeys.HENT_RESERVASJONSSTATUS)
   .withGet(
     '/fplos/api/saksbehandler/nøkkeltall/nye-og-ferdigstilte-oppgaver',
     RestApiPathsKeys.HENT_NYE_OG_FERDIGSTILTE_OPPGAVER,
   )
   .withGet('/fplos/api/saksbehandler/saksliste/saksbehandlere', RestApiPathsKeys.SAKSLISTE_SAKSBEHANDLERE)
   .withGet('/fplos/api/saksbehandler/oppgaver/antall', RestApiPathsKeys.BEHANDLINGSKO_OPPGAVE_ANTALL)
-  .withGet('/fplos/api/saksbehandler/oppgaver/behandlede', RestApiPathsKeys.BEHANDLEDE_OPPGAVER)
+  .withGet('/fplos/api/reservasjon/tidligere-reserverte', RestApiPathsKeys.BEHANDLEDE_OPPGAVER)
 
   .build();
 
