@@ -124,7 +124,7 @@
     "@navikt/ft-utils": "2.1.13",
     "@popperjs/core": "2.11.8",
     "@sentry/browser": "7.91.0",
-    "axios": "1.6.3",
+    "axios": "1.6.4",
     "classnames": "2.5.1",
     "core-js": "3.35.0",
     "dayjs": "1.11.10",
