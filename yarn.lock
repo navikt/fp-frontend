@@ -3819,7 +3819,7 @@ __metadata:
     "@navikt/fp-utbetalingsdata-is15": "workspace:*"
     "@navikt/fp-utils-test": "workspace:*"
     "@navikt/ft-fakta-beregning": 5.0.20
-    "@navikt/ft-fakta-beregning-redesign": 1.0.22
+    "@navikt/ft-fakta-beregning-redesign": 1.0.23
     "@navikt/ft-fakta-fordel-beregningsgrunnlag": 7.3.23
     "@navikt/ft-fakta-tilbakekreving-feilutbetaling": 2.2.20
     "@navikt/ft-form-hooks": 4.2.20
@@ -5569,9 +5569,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ft-fakta-beregning-redesign@npm:1.0.22":
-  version: 1.0.22
-  resolution: "@navikt/ft-fakta-beregning-redesign@npm:1.0.22::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-beregning-redesign%2F1.0.22%2F7e313c1fb30aaf45f7991a5fb98a09f4f72afdd7"
+"@navikt/ft-fakta-beregning-redesign@npm:1.0.23":
+  version: 1.0.23
+  resolution: "@navikt/ft-fakta-beregning-redesign@npm:1.0.23::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-beregning-redesign%2F1.0.23%2F260e44d041832add222d14d85eb1e9210a7885b0"
   dependencies:
     "@navikt/aksel-icons": 5.12.2
     "@navikt/ds-css": 5.12.2
@@ -5608,7 +5608,7 @@ __metadata:
     react-dom: 18.2.0
     react-hook-form: 7.43.9
     react-intl: 6.4.2
-  checksum: 03e30cae4c4dd4b7d5d54f4a57f90b59f7b62f52a63a324c607381c64ca41edb380edd4e9f4753af23a54efce8cefd737ab62bb3ab4b519d139a7d9cffa08aa5
+  checksum: 29d527d1e2fa51ca92faf573554b32d06d623546379d75c8b0c3130aeb385a63310ef32973142ed436ebeb32ebc4250497e6dbe6bc2fdb762d4ac89f8659a9aa
   languageName: node
   linkType: hard
 

@@ -98,7 +98,7 @@
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*",
     "@navikt/fp-utbetalingsdata-is15": "workspace:*",
     "@navikt/ft-fakta-beregning": "5.0.20",
-    "@navikt/ft-fakta-beregning-redesign": "1.0.22",
+    "@navikt/ft-fakta-beregning-redesign": "1.0.23",
     "@navikt/ft-fakta-fordel-beregningsgrunnlag": "7.3.23",
     "@navikt/ft-fakta-tilbakekreving-feilutbetaling": "2.2.20",
     "@navikt/ft-form-hooks": "4.2.20",
