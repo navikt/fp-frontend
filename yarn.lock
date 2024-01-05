@@ -3116,8 +3116,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -3155,8 +3155,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -3190,8 +3190,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -3226,8 +3226,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -3255,8 +3255,8 @@ __metadata:
     react-intl: 6.5.5
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -3292,8 +3292,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -3329,8 +3329,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -3365,8 +3365,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -3404,8 +3404,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -3443,8 +3443,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -3478,8 +3478,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -3516,8 +3516,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -3553,8 +3553,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -3593,8 +3593,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -3631,8 +3631,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -3666,8 +3666,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -3700,8 +3700,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -3731,8 +3731,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -3871,8 +3871,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -3909,8 +3909,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -3920,7 +3920,7 @@ __metadata:
   dependencies:
     eslint: 8.56.0
     typescript: 5.3.3
-    vite: 5.0.10
+    vite: 5.0.11
   languageName: unknown
   linkType: soft
 
@@ -3930,7 +3930,7 @@ __metadata:
   dependencies:
     eslint: 8.56.0
     typescript: 5.3.3
-    vite: 5.0.10
+    vite: 5.0.11
   languageName: unknown
   linkType: soft
 
@@ -3973,8 +3973,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -4012,8 +4012,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -4056,8 +4056,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -4091,8 +4091,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -4131,8 +4131,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -4166,8 +4166,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -4197,8 +4197,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -4228,8 +4228,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -4260,8 +4260,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -4295,8 +4295,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -4327,8 +4327,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -4357,8 +4357,8 @@ __metadata:
     react-intl: 6.5.5
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -4393,8 +4393,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -4432,8 +4432,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -4468,8 +4468,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -4505,8 +4505,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -4541,8 +4541,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -4579,8 +4579,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -4616,8 +4616,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -4655,8 +4655,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -4691,8 +4691,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -4724,8 +4724,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -4763,8 +4763,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -4797,8 +4797,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -4831,8 +4831,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -4865,8 +4865,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -4899,8 +4899,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -4934,8 +4934,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -4970,8 +4970,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -5006,8 +5006,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -5042,8 +5042,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -5077,8 +5077,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -5092,8 +5092,8 @@ __metadata:
     eslint: 8.56.0
     react: 18.2.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -5107,8 +5107,8 @@ __metadata:
     cross-env: 7.0.3
     eslint: 8.56.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -5146,8 +5146,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -5182,8 +5182,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -5210,8 +5210,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -5243,8 +5243,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -5277,8 +5277,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -5310,8 +5310,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -5342,8 +5342,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -5376,8 +5376,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -5410,8 +5410,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -5453,8 +5453,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -5479,8 +5479,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -5496,7 +5496,7 @@ __metadata:
     react-intl: 6.5.5
     react-router-dom: 6.21.1
     typescript: 5.3.3
-    vite: 5.0.10
+    vite: 5.0.11
   languageName: unknown
   linkType: soft
 
@@ -5510,7 +5510,7 @@ __metadata:
     "@navikt/ft-fakta-fordel-beregningsgrunnlag": 7.3.23
     "@navikt/ft-prosess-beregningsgrunnlag": 6.3.23
     typescript: 5.3.3
-    vite: 5.0.10
+    vite: 5.0.11
   languageName: unknown
   linkType: soft
 
@@ -5520,7 +5520,7 @@ __metadata:
   dependencies:
     "@navikt/fp-kodeverk": "workspace:*"
     typescript: 5.3.3
-    vite: 5.0.10
+    vite: 5.0.11
   languageName: unknown
   linkType: soft
 
@@ -5547,8 +5547,8 @@ __metadata:
     storybook: 7.6.7
     stylelint: 15.11.0
     typescript: 5.3.3
-    vite: 5.0.10
-    vitest: 1.1.1
+    vite: 5.0.11
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -5565,7 +5565,7 @@ __metadata:
     react: 18.2.0
     react-intl: 6.5.5
     typescript: 5.3.3
-    vite: 5.0.10
+    vite: 5.0.11
   languageName: unknown
   linkType: soft
 
@@ -7742,66 +7742,66 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sentry/cli-darwin@npm:2.23.2":
-  version: 2.23.2
-  resolution: "@sentry/cli-darwin@npm:2.23.2"
+"@sentry/cli-darwin@npm:2.24.0":
+  version: 2.24.0
+  resolution: "@sentry/cli-darwin@npm:2.24.0"
   conditions: os=darwin
   languageName: node
   linkType: hard
 
-"@sentry/cli-linux-arm64@npm:2.23.2":
-  version: 2.23.2
-  resolution: "@sentry/cli-linux-arm64@npm:2.23.2"
+"@sentry/cli-linux-arm64@npm:2.24.0":
+  version: 2.24.0
+  resolution: "@sentry/cli-linux-arm64@npm:2.24.0"
   conditions: (os=linux | os=freebsd) & cpu=arm64
   languageName: node
   linkType: hard
 
-"@sentry/cli-linux-arm@npm:2.23.2":
-  version: 2.23.2
-  resolution: "@sentry/cli-linux-arm@npm:2.23.2"
+"@sentry/cli-linux-arm@npm:2.24.0":
+  version: 2.24.0
+  resolution: "@sentry/cli-linux-arm@npm:2.24.0"
   conditions: (os=linux | os=freebsd) & cpu=arm
   languageName: node
   linkType: hard
 
-"@sentry/cli-linux-i686@npm:2.23.2":
-  version: 2.23.2
-  resolution: "@sentry/cli-linux-i686@npm:2.23.2"
+"@sentry/cli-linux-i686@npm:2.24.0":
+  version: 2.24.0
+  resolution: "@sentry/cli-linux-i686@npm:2.24.0"
   conditions: (os=linux | os=freebsd) & (cpu=x86 | cpu=ia32)
   languageName: node
   linkType: hard
 
-"@sentry/cli-linux-x64@npm:2.23.2":
-  version: 2.23.2
-  resolution: "@sentry/cli-linux-x64@npm:2.23.2"
+"@sentry/cli-linux-x64@npm:2.24.0":
+  version: 2.24.0
+  resolution: "@sentry/cli-linux-x64@npm:2.24.0"
   conditions: (os=linux | os=freebsd) & cpu=x64
   languageName: node
   linkType: hard
 
-"@sentry/cli-win32-i686@npm:2.23.2":
-  version: 2.23.2
-  resolution: "@sentry/cli-win32-i686@npm:2.23.2"
+"@sentry/cli-win32-i686@npm:2.24.0":
+  version: 2.24.0
+  resolution: "@sentry/cli-win32-i686@npm:2.24.0"
   conditions: os=win32 & (cpu=x86 | cpu=ia32)
   languageName: node
   linkType: hard
 
-"@sentry/cli-win32-x64@npm:2.23.2":
-  version: 2.23.2
-  resolution: "@sentry/cli-win32-x64@npm:2.23.2"
+"@sentry/cli-win32-x64@npm:2.24.0":
+  version: 2.24.0
+  resolution: "@sentry/cli-win32-x64@npm:2.24.0"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"@sentry/cli@npm:2.23.2":
-  version: 2.23.2
-  resolution: "@sentry/cli@npm:2.23.2"
+"@sentry/cli@npm:2.24.0":
+  version: 2.24.0
+  resolution: "@sentry/cli@npm:2.24.0"
   dependencies:
-    "@sentry/cli-darwin": 2.23.2
-    "@sentry/cli-linux-arm": 2.23.2
-    "@sentry/cli-linux-arm64": 2.23.2
-    "@sentry/cli-linux-i686": 2.23.2
-    "@sentry/cli-linux-x64": 2.23.2
-    "@sentry/cli-win32-i686": 2.23.2
-    "@sentry/cli-win32-x64": 2.23.2
+    "@sentry/cli-darwin": 2.24.0
+    "@sentry/cli-linux-arm": 2.24.0
+    "@sentry/cli-linux-arm64": 2.24.0
+    "@sentry/cli-linux-i686": 2.24.0
+    "@sentry/cli-linux-x64": 2.24.0
+    "@sentry/cli-win32-i686": 2.24.0
+    "@sentry/cli-win32-x64": 2.24.0
     https-proxy-agent: ^5.0.0
     node-fetch: ^2.6.7
     progress: ^2.0.3
@@ -7824,7 +7824,7 @@ __metadata:
       optional: true
   bin:
     sentry-cli: bin/sentry-cli
-  checksum: 97f32549fa1786d284f660590ceaef8197d009e09732c72e91af9a09b7c33ea445aead025674bdd9793b94a60a721c6809af4833fc1444e94f30a73fa4da27c7
+  checksum: 2c56b9c026571fd34278064c8fd41421de41a5b5c269d67bf80d15641f55be30f841ea87ebc1e152ebd202b8ecac718b91d985071a21a90e84bfa1eb1953834c
   languageName: node
   linkType: hard
 
@@ -9637,56 +9637,57 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitest/expect@npm:1.1.1":
-  version: 1.1.1
-  resolution: "@vitest/expect@npm:1.1.1"
+"@vitest/expect@npm:1.1.3":
+  version: 1.1.3
+  resolution: "@vitest/expect@npm:1.1.3"
   dependencies:
-    "@vitest/spy": 1.1.1
-    "@vitest/utils": 1.1.1
+    "@vitest/spy": 1.1.3
+    "@vitest/utils": 1.1.3
     chai: ^4.3.10
-  checksum: 5037c30a76becf7ba5f93b16c95d64cadf21e87b72d473a1595f4c201df6a0d60cb8d4a98a3446504c7314d94e1c7646d4d232b563345eb8446f67512b5a501a
+  checksum: 971492347e91af81a8c309bc6dff4369afe0f533ac73a73e4a568111ea0fa7d6dc45b69b209490ad588578fd905773e6bd4fcbe8d517ac7aeb57efb1e9c59083
   languageName: node
   linkType: hard
 
-"@vitest/runner@npm:1.1.1":
-  version: 1.1.1
-  resolution: "@vitest/runner@npm:1.1.1"
+"@vitest/runner@npm:1.1.3":
+  version: 1.1.3
+  resolution: "@vitest/runner@npm:1.1.3"
   dependencies:
-    "@vitest/utils": 1.1.1
+    "@vitest/utils": 1.1.3
     p-limit: ^5.0.0
     pathe: ^1.1.1
-  checksum: 1d955ca9c190ae01f7bf6f83ce970e310ac2c106a7efd86aa5d658d6ceba9a7411843f44dd3d3dc13953aaf3f9eadf6f8729fc2384116b60b80613a74847241a
+  checksum: a2875fab07c307aee5c7b3e4e821c2f36a561d86412edeb69f47daed10fa26fb5ba222841cf093372bce95a7384ff3a9302d69b3e594468aa565cbd5b2fe4316
   languageName: node
   linkType: hard
 
-"@vitest/snapshot@npm:1.1.1":
-  version: 1.1.1
-  resolution: "@vitest/snapshot@npm:1.1.1"
+"@vitest/snapshot@npm:1.1.3":
+  version: 1.1.3
+  resolution: "@vitest/snapshot@npm:1.1.3"
   dependencies:
     magic-string: ^0.30.5
     pathe: ^1.1.1
     pretty-format: ^29.7.0
-  checksum: 35664d8ee7468e662ea185e8cd4479e157b645fed12fcb897427fcc213745b1eafa717713dc8f8b8d557611cbbdcb3b47c075afdaaca28ed5f790539d69b392e
+  checksum: 731af9f71f57c0a4830a2e8c6c9c354fe80b7ad00d38cd19354aaa61c1e0353a3d09b427f2a69e81b5bccce4576e2c1e8a538bce3dfbbdc080126d23ee2edb14
   languageName: node
   linkType: hard
 
-"@vitest/spy@npm:1.1.1":
-  version: 1.1.1
-  resolution: "@vitest/spy@npm:1.1.1"
+"@vitest/spy@npm:1.1.3":
+  version: 1.1.3
+  resolution: "@vitest/spy@npm:1.1.3"
   dependencies:
     tinyspy: ^2.2.0
-  checksum: 8067b127dc7521a02315cb537726299d86cc74f95512edcee8adc45abd0e0c7dd69afd20f3de6c0976d3cd67ddd173302bb9a1e7df654f022a634fd50c7a6560
+  checksum: 592a9a2bad31c2655fdc6ae87f44b36bc25aafb7efd3a750228409ab4e98bff31888d806c29c6e7bfc029a5ee225f7dc998565115b4fa452429eaa579cc0eec7
   languageName: node
   linkType: hard
 
-"@vitest/utils@npm:1.1.1":
-  version: 1.1.1
-  resolution: "@vitest/utils@npm:1.1.1"
+"@vitest/utils@npm:1.1.3":
+  version: 1.1.3
+  resolution: "@vitest/utils@npm:1.1.3"
   dependencies:
     diff-sequences: ^29.6.3
+    estree-walker: ^3.0.3
     loupe: ^2.3.7
     pretty-format: ^29.7.0
-  checksum: fb552502757a3fa5405221c143e368c3d320162edd6385ffc23568d846c023fb2c861ed0b22edf6cabbe8ac16422012f5a5993de8abd6b50b1165101a52801a7
+  checksum: d345b8c862c51b734d9fe53397a125485797cae2a4c1630cea1235f3f0987df479c84ac958f5250e77892afdc12f6d863628d619fc1bb5e34c05c3fa8a86d289
   languageName: node
   linkType: hard
 
@@ -9880,7 +9881,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"acorn-walk@npm:^8.3.0":
+"acorn-walk@npm:^8.3.1":
   version: 8.3.1
   resolution: "acorn-walk@npm:8.3.1"
   checksum: 5c8926ddb5400bc825b6baca782931f9df4ace603ba1a517f5243290fd9cdb089d52877840687b5d5c939591ebc314e2e63721514feaa37c6829c828f2b940ce
@@ -13021,6 +13022,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"estree-walker@npm:^3.0.3":
+  version: 3.0.3
+  resolution: "estree-walker@npm:3.0.3"
+  dependencies:
+    "@types/estree": ^1.0.0
+  checksum: a65728d5727b71de172c5df323385755a16c0fdab8234dc756c3854cfee343261ddfbb72a809a5660fac8c75d960bb3e21aa898c2d7e9b19bb298482ca58a3af
+  languageName: node
+  linkType: hard
+
 "esutils@npm:^2.0.2":
   version: 2.0.3
   resolution: "esutils@npm:2.0.3"
@@ -13528,7 +13538,7 @@ __metadata:
   resolution: "fp-frontend@workspace:."
   dependencies:
     "@navikt/aksel-stylelint": 5.12.2
-    "@sentry/cli": 2.23.2
+    "@sentry/cli": 2.24.0
     "@storybook/addon-essentials": 7.6.7
     "@storybook/addon-links": 7.6.7
     "@storybook/builder-vite": 7.6.7
@@ -13571,11 +13581,11 @@ __metadata:
     stylelint: 15.11.0
     stylelint-order: 6.0.4
     typescript: 5.3.3
-    vite: 5.0.10
+    vite: 5.0.11
     vite-plugin-dts: 3.7.0
     vite-plugin-externalize-deps: 0.8.0
     vite-plugin-html: 3.2.1
-    vitest: 1.1.1
+    vitest: 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -21196,9 +21206,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-node@npm:1.1.1":
-  version: 1.1.1
-  resolution: "vite-node@npm:1.1.1"
+"vite-node@npm:1.1.3":
+  version: 1.1.3
+  resolution: "vite-node@npm:1.1.3"
   dependencies:
     cac: ^6.7.14
     debug: ^4.3.4
@@ -21207,7 +21217,7 @@ __metadata:
     vite: ^5.0.0
   bin:
     vite-node: vite-node.mjs
-  checksum: 0d036e8d9ec0ab604603b1ddc89e1a50d516ab87829e9f06e0f972e802199d0fda94fd85a59be17e0a63c18671dcb4fb5b473245f9c1fda6455356ed37195cf0
+  checksum: 077691a293fb4151267d7bb4ed322e3d4ce427bd06c02f7d08d7411f9fc96f98ada1aa0da172c02648b44680ba16c57a40b1aa9b98231f68ea5862a00dcdb1dd
   languageName: node
   linkType: hard
 
@@ -21262,9 +21272,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:5.0.10":
-  version: 5.0.10
-  resolution: "vite@npm:5.0.10"
+"vite@npm:5.0.11":
+  version: 5.0.11
+  resolution: "vite@npm:5.0.11"
   dependencies:
     esbuild: ^0.19.3
     fsevents: ~2.3.3
@@ -21298,7 +21308,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: a1c96be1dc8bafb981c0874813a6b783ee9c4cd235188d7dc746133972d8992fe85111b7402365fee698ffcb626cd31b39bf2f2523140e50b07b81ce3c0139d1
+  checksum: 262e41f25ce0cc5fc3c2065b1796f64ec115d3ac2d9625dbfb36d6628ba10e63684ef5515bb2ff1aa8e34c6f89e9c10e8211cb88f6c7f0da6869362851345437
   languageName: node
   linkType: hard
 
@@ -21342,16 +21352,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vitest@npm:1.1.1":
-  version: 1.1.1
-  resolution: "vitest@npm:1.1.1"
+"vitest@npm:1.1.3":
+  version: 1.1.3
+  resolution: "vitest@npm:1.1.3"
   dependencies:
-    "@vitest/expect": 1.1.1
-    "@vitest/runner": 1.1.1
-    "@vitest/snapshot": 1.1.1
-    "@vitest/spy": 1.1.1
-    "@vitest/utils": 1.1.1
-    acorn-walk: ^8.3.0
+    "@vitest/expect": 1.1.3
+    "@vitest/runner": 1.1.3
+    "@vitest/snapshot": 1.1.3
+    "@vitest/spy": 1.1.3
+    "@vitest/utils": 1.1.3
+    acorn-walk: ^8.3.1
     cac: ^6.7.14
     chai: ^4.3.10
     debug: ^4.3.4
@@ -21365,7 +21375,7 @@ __metadata:
     tinybench: ^2.5.1
     tinypool: ^0.8.1
     vite: ^5.0.0
-    vite-node: 1.1.1
+    vite-node: 1.1.3
     why-is-node-running: ^2.2.2
   peerDependencies:
     "@edge-runtime/vm": "*"
@@ -21389,7 +21399,7 @@ __metadata:
       optional: true
   bin:
     vitest: vitest.mjs
-  checksum: f0c827ae4ea230d7f9d9ff9227be0ee851add7fdfee2ee2c03fee49a75ddd14aacf8652fccd01d340075e2b9ef25153084d1bb21b47024864dbfb90cbaec46b4
+  checksum: 35087400a0e2b2f0f1f451d0da41abafd8c55112e143a2643286bf0d3d4567b057b40dc391c4b2a05a947edc48d981a6b8c961dc32c6642d84cd8d717bd168bc
   languageName: node
   linkType: hard
 
