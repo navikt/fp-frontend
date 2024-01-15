@@ -9327,14 +9327,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:18.2.47":
-  version: 18.2.47
-  resolution: "@types/react@npm:18.2.47"
+"@types/react@npm:18.2.48":
+  version: 18.2.48
+  resolution: "@types/react@npm:18.2.48"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: 49608f07f73374e535b21f99fee28e6cfd5801d887c6ed88c41b4dc701dbcee9f0c4d289d9af7b2b23114f76dbf203ffe2c9191bfb4958cf18dae5a25daedbd0
+  checksum: c9ca43ed2995389b7e09492c24e6f911a8439bb8276dd17cc66a2fbebbf0b42daf7b2ad177043256533607c2ca644d7d928fdfce37a67af1f8646d2bac988900
   languageName: node
   linkType: hard
 
@@ -13648,7 +13648,7 @@ __metadata:
     "@testing-library/react": 14.1.2
     "@testing-library/react-hooks": 8.0.1
     "@testing-library/user-event": 14.5.2
-    "@types/react": 18.2.47
+    "@types/react": 18.2.48
     "@types/react-collapse": 5.0.4
     "@types/react-dom": 18.2.18
     "@types/react-responsive": 8.0.8
@@ -13682,7 +13682,7 @@ __metadata:
     stylelint-order: 6.0.4
     typescript: 5.3.3
     vite: 5.0.11
-    vite-plugin-dts: 3.7.0
+    vite-plugin-dts: 3.7.1
     vite-plugin-externalize-deps: 0.8.0
     vite-plugin-html: 3.2.1
     vitest: 1.2.0
@@ -21314,9 +21314,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-plugin-dts@npm:3.7.0":
-  version: 3.7.0
-  resolution: "vite-plugin-dts@npm:3.7.0"
+"vite-plugin-dts@npm:3.7.1":
+  version: 3.7.1
+  resolution: "vite-plugin-dts@npm:3.7.1"
   dependencies:
     "@microsoft/api-extractor": 7.39.0
     "@rollup/pluginutils": ^5.1.0
@@ -21330,7 +21330,7 @@ __metadata:
   peerDependenciesMeta:
     vite:
       optional: true
-  checksum: e03373797cca2f8f2d906dc28977caad386dd19165ce7c54b2fc632d393b55d7bc642b0be618242cfa97dcec4ffdb4f5147f64dcfb822c96690af034c7bba062
+  checksum: bd6cd45d0b5efa1b3a1eea003f4c67c9811bfc222d7616f6def1cd5284a175733340ea3646234df4c55f5929dfcb8b97c3c1e5c9b73bbad4622f9a2a1042d7e7
   languageName: node
   linkType: hard
 
