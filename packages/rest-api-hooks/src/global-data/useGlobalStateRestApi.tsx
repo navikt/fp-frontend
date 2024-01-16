@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext, DependencyList } from 'react';
 
-import { RequestApi, RestKey } from '@navikt/fp-rest-api';
+import { RequestApi } from '@navikt/fp-rest-api';
 
 import { RestApiDispatchContext } from './RestApiContext';
 import RestApiState from '../RestApiState';
@@ -25,11 +25,7 @@ const defaultOptions = {
  * Hook som henter data fra backend og deretter lagrer i @see RestApiContext
  */
 const getUseGlobalStateRestApi = (requestApi: RequestApi) =>
-  function useGlobalStateRestApi<T, P>(
-    key: RestKey<T, P>,
-    params?: P,
-    options: Options = defaultOptions,
-  ): RestApiData<T> {
+  function useGlobalStateRestApi<T, P>(key: string, params?: P, options: Options = defaultOptions): RestApiData<T> {
     const allOptions = { ...defaultOptions, ...options };
 
     const [data, setData] = useState<RestApiData<T>>({
@@ -41,8 +37,8 @@ const getUseGlobalStateRestApi = (requestApi: RequestApi) =>
     const dispatch = useContext(RestApiDispatchContext);
 
     useEffect(() => {
-      if (dispatch && requestApi.hasPath(key.name) && !allOptions.suspendRequest) {
-        dispatch({ type: 'remove', key: key.name });
+      if (dispatch && requestApi.hasPath(key) && !allOptions.suspendRequest) {
+        dispatch({ type: 'remove', key });
 
         setData({
           state: RestApiState.LOADING,
@@ -51,9 +47,9 @@ const getUseGlobalStateRestApi = (requestApi: RequestApi) =>
         });
 
         requestApi
-          .startRequest<T, P>(key.name, params)
+          .startRequest<T, P>(key, params)
           .then((dataRes: { payload: T }) => {
-            dispatch({ type: 'success', key: key.name, data: dataRes.payload });
+            dispatch({ type: 'success', key, data: dataRes.payload });
             setData({
               state: RestApiState.SUCCESS,
               data: dataRes.payload,

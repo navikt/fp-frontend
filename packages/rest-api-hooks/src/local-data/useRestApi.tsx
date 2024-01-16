@@ -1,6 +1,6 @@
 import { useState, useEffect, DependencyList } from 'react';
 
-import { REQUEST_POLLING_CANCELLED, RequestApi, RestKey } from '@navikt/fp-rest-api';
+import { REQUEST_POLLING_CANCELLED, RequestApi } from '@navikt/fp-rest-api';
 
 import RestApiState from '../RestApiState';
 
@@ -35,13 +35,13 @@ const DEFAULT_STATE = {
  * blir oppdatert. Hook returnerer rest-kallets status/resultat/feil
  */
 const getUseRestApi = (requestApi: RequestApi) =>
-  function useRestApi<T, P>(key: RestKey<T, P>, params?: P, options: Options = defaultOptions): RestApiData<T> {
+  function useRestApi<T, P>(key: string, params?: P, options: Options = defaultOptions): RestApiData<T> {
     const allOptions = { ...defaultOptions, ...options };
 
     const [data, setData] = useState<RestApiData<T>>(DEFAULT_STATE);
 
     useEffect(() => {
-      if (requestApi.hasPath(key.name) && !allOptions.suspendRequest) {
+      if (requestApi.hasPath(key) && !allOptions.suspendRequest) {
         setData(oldState => ({
           state: RestApiState.LOADING,
           error: undefined,
@@ -49,7 +49,7 @@ const getUseRestApi = (requestApi: RequestApi) =>
         }));
 
         requestApi
-          .startRequest<T, P>(key.name, params, options.isCachingOn)
+          .startRequest<T, P>(key, params, options.isCachingOn)
           .then(dataRes => {
             setData({
               state: RestApiState.SUCCESS,
@@ -66,12 +66,12 @@ const getUseRestApi = (requestApi: RequestApi) =>
               });
             }
           });
-      } else if (!requestApi.hasPath(key.name)) {
+      } else if (!requestApi.hasPath(key)) {
         setData(DEFAULT_STATE);
       }
     }, [...allOptions.updateTriggers]);
 
-    if (!requestApi.hasPath(key.name) && allOptions.suspendRequest) {
+    if (!requestApi.hasPath(key) && allOptions.suspendRequest) {
       return DEFAULT_STATE;
     }
     return data;

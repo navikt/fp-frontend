@@ -1,6 +1,6 @@
 import { useState, useEffect, DependencyList, useRef } from 'react';
 
-import { RequestApi, RestKey } from '@navikt/fp-rest-api';
+import { RequestApi } from '@navikt/fp-rest-api';
 
 import RestApiState from '../RestApiState';
 
@@ -19,7 +19,7 @@ export interface RestApiData<T> {
 }
 
 export interface EndpointData {
-  key: RestKey<any, any>;
+  key: string;
   params?: any;
 }
 
@@ -67,18 +67,16 @@ const getUseMultipleRestApi = (requestApi: RequestApi) =>
           data: allOptions.keepData ? oldState.data : undefined,
         }));
 
-        const filteredEndpoints = endpoints.filter(e => requestApi.hasPath(e.key.name));
+        const filteredEndpoints = endpoints.filter(e => requestApi.hasPath(e.key));
 
-        Promise.all(
-          filteredEndpoints.map(e => requestApi.startRequest<T, P>(e.key.name, e.params, options.isCachingOn)),
-        )
+        Promise.all(filteredEndpoints.map(e => requestApi.startRequest<T, P>(e.key, e.params, options.isCachingOn)))
           .then(dataRes => {
             setData({
               state: RestApiState.SUCCESS,
               data: dataRes.reduce(
                 (acc, result, index) => ({
                   ...acc,
-                  [format(filteredEndpoints[index].key.name)]: result.payload,
+                  [format(filteredEndpoints[index].key)]: result.payload,
                 }),
                 {} as T,
               ),

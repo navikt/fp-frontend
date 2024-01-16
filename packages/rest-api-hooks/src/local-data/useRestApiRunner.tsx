@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 
-import { REQUEST_POLLING_CANCELLED, ErrorType, RequestApi, RestKey } from '@navikt/fp-rest-api';
+import { REQUEST_POLLING_CANCELLED, ErrorType, RequestApi } from '@navikt/fp-rest-api';
 
 import RestApiState from '../RestApiState';
 
@@ -25,11 +25,11 @@ const DEFAULT_STATE = {
  * Hook som gir deg ein funksjon til å starte restkall, i tillegg til kallets status/resultat/feil
  */
 const getUseRestApiRunner = (requestApi: RequestApi) =>
-  function useRestApiRunner<T, P>(key: RestKey<T, P>): RunnerOutput<T, P> {
+  function useRestApiRunner<T, P>(key: string): RunnerOutput<T, P> {
     const [data, setData] = useState<RestApiData<T>>(DEFAULT_STATE);
 
     const startRequest = useCallback((params?: P, keepData = false): Promise<T | undefined> => {
-      if (requestApi.hasPath(key.name)) {
+      if (requestApi.hasPath(key)) {
         setData(oldState => ({
           state: RestApiState.LOADING,
           data: keepData ? oldState.data : undefined,
@@ -37,7 +37,7 @@ const getUseRestApiRunner = (requestApi: RequestApi) =>
         }));
 
         return requestApi
-          .startRequest<T, P>(key.name, params)
+          .startRequest<T, P>(key, params)
           .then(dataRes => {
             setData({
               state: RestApiState.SUCCESS,

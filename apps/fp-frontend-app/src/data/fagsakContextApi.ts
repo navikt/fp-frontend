@@ -1,6 +1,6 @@
 import { Aktor, Dokument } from '@navikt/ft-types';
 
-import { RestApiConfigBuilder, createRequestApi, RestKey, Link } from '@navikt/fp-rest-api';
+import { RestApiConfigBuilder, createRequestApi, Link } from '@navikt/fp-rest-api';
 import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
 import {
   ForhåndsvisMeldingParams,
@@ -11,7 +11,6 @@ import {
   Behandling,
   AlleKodeverk,
   AlleKodeverkTilbakekreving,
-  InfotrygdVedtak,
 } from '@navikt/fp-types';
 
 type BehandlendeEnheter = {
@@ -44,32 +43,50 @@ export enum LinkCategory {
   BEHANDLING = 'BEHANDLING',
 }
 
-export const FagsakApiKeys = {
-  INIT_FETCH: new RestKey<InitDataFpSak, void>('INIT_FETCH'),
-  INIT_FETCH_FPTILBAKE: new RestKey<InitDataFpTilbake, void>('INIT_FETCH_FPTILBAKE'),
-  KODEVERK: new RestKey<AlleKodeverk, void>('KODEVERK'),
-  KODEVERK_FPTILBAKE: new RestKey<AlleKodeverkTilbakekreving, void>('KODEVERK_FPTILBAKE'),
-  SEARCH_UTBETALINGSDATA_IS15: new RestKey<InfotrygdVedtak, { searchString: string }>('SEARCH_UTBETALINGSDATA_IS15'),
-  SEARCH_FAGSAK: new RestKey<FagsakEnkel[], { searchString: string }>('SEARCH_FAGSAK'),
-  FETCH_FAGSAK: new RestKey<Fagsak, { saksnummer: string }>('FETCH_FAGSAK'),
-  FETCH_FAGSAKDATA_FPTILBAKE: new RestKey<FagsakDataFpTilbake, { saksnummer: string }>('FETCH_FAGSAKDATA_FPTILBAKE'),
-  NEW_BEHANDLING_FPSAK: new RestKey<Behandling, any>('NEW_BEHANDLING_FPSAK'),
-  NEW_BEHANDLING_FPTILBAKE: new RestKey<Behandling, any>('NEW_BEHANDLING_FPTILBAKE'),
-  AKTOER_INFO: new RestKey<Aktor, { aktoerId: string }>('AKTOER_INFO'),
-  ALL_DOCUMENTS: new RestKey<Dokument[], { saksnummer: string }>('ALL_DOCUMENTS'),
-  SAVE_TOTRINNSAKSJONSPUNKT: new RestKey<Behandling, any>('SAVE_TOTRINNSAKSJONSPUNKT'),
-  SUBMIT_MESSAGE: new RestKey<void, SubmitMessageParams>('SUBMIT_MESSAGE'),
-  LAGRE_NOTAT: new RestKey<void, { saksnummer: string; notat: string }>('LAGRE_NOTAT'),
-  KAN_TILBAKEKREVING_OPPRETTES: new RestKey<boolean, { saksnummer: string; uuid: string }>(
-    'KAN_TILBAKEKREVING_OPPRETTES',
-  ),
-  KAN_TILBAKEKREVING_REVURDERING_OPPRETTES: new RestKey<boolean, { uuid: string }>(
-    'KAN_TILBAKEKREVING_REVURDERING_OPPRETTES',
-  ),
-  PREVIEW_MESSAGE_TILBAKEKREVING: new RestKey<any, any>('PREVIEW_MESSAGE_TILBAKEKREVING'),
-  PREVIEW_MESSAGE_FORMIDLING: new RestKey<any, ForhåndsvisMeldingParams>('PREVIEW_MESSAGE_FORMIDLING'),
-  PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE: new RestKey<any, any>('PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE'),
-  ENDRE_SAK_MARKERING: new RestKey<void, { saksnummer: string; fagsakMarkering: string }>('ENDRE_SAK_MARKERING'),
+export enum FagsakApiKeys {
+  INIT_FETCH = 'INIT_FETCH',
+  INIT_FETCH_FPTILBAKE = 'INIT_FETCH_FPTILBAKE',
+  KODEVERK = 'KODEVERK',
+  KODEVERK_FPTILBAKE = 'KODEVERK_FPTILBAKE',
+  SEARCH_FAGSAK = 'SEARCH_FAGSAK',
+  FETCH_FAGSAK = 'FETCH_FAGSAK',
+  FETCH_FAGSAKDATA_FPTILBAKE = 'FETCH_FAGSAKDATA_FPTILBAKE',
+  NEW_BEHANDLING_FPSAK = 'NEW_BEHANDLING_FPSAK',
+  NEW_BEHANDLING_FPTILBAKE = 'NEW_BEHANDLING_FPTILBAKE',
+  AKTOER_INFO = 'AKTOER_INFO',
+  ALL_DOCUMENTS = 'ALL_DOCUMENTS',
+  SAVE_TOTRINNSAKSJONSPUNKT = 'SAVE_TOTRINNSAKSJONSPUNKT',
+  SUBMIT_MESSAGE = 'SUBMIT_MESSAGE',
+  LAGRE_NOTAT = 'LAGRE_NOTAT',
+  KAN_TILBAKEKREVING_OPPRETTES = 'KAN_TILBAKEKREVING_OPPRETTES',
+  KAN_TILBAKEKREVING_REVURDERING_OPPRETTES = 'KAN_TILBAKEKREVING_REVURDERING_OPPRETTES',
+  PREVIEW_MESSAGE_TILBAKEKREVING = 'PREVIEW_MESSAGE_TILBAKEKREVING',
+  PREVIEW_MESSAGE_FORMIDLING = 'PREVIEW_MESSAGE_FORMIDLING',
+  PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE = 'PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE',
+  ENDRE_SAK_MARKERING = 'ENDRE_SAK_MARKERING',
+}
+
+type ApiParamsAndResponse = {
+  [FagsakApiKeys.INIT_FETCH]: [void, InitDataFpSak];
+  [FagsakApiKeys.INIT_FETCH_FPTILBAKE]: [void, InitDataFpTilbake];
+  [FagsakApiKeys.KODEVERK]: [void, AlleKodeverk];
+  [FagsakApiKeys.KODEVERK_FPTILBAKE]: [void, AlleKodeverkTilbakekreving];
+  [FagsakApiKeys.SEARCH_FAGSAK]: [{ searchString: string }, FagsakEnkel[]];
+  [FagsakApiKeys.FETCH_FAGSAK]: [{ saksnummer: string }, Fagsak];
+  [FagsakApiKeys.FETCH_FAGSAKDATA_FPTILBAKE]: [{ saksnummer: string }, FagsakDataFpTilbake];
+  [FagsakApiKeys.NEW_BEHANDLING_FPSAK]: [any, Behandling];
+  [FagsakApiKeys.NEW_BEHANDLING_FPTILBAKE]: [any, Behandling];
+  [FagsakApiKeys.AKTOER_INFO]: [{ aktoerId: string }, Aktor];
+  [FagsakApiKeys.ALL_DOCUMENTS]: [{ saksnummer: string }, Dokument[]];
+  [FagsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT]: [any, Behandling];
+  [FagsakApiKeys.SUBMIT_MESSAGE]: [SubmitMessageParams, void];
+  [FagsakApiKeys.LAGRE_NOTAT]: [{ saksnummer: string; notat: string }, void];
+  [FagsakApiKeys.KAN_TILBAKEKREVING_OPPRETTES]: [{ saksnummer: string; uuid: string }, boolean];
+  [FagsakApiKeys.KAN_TILBAKEKREVING_REVURDERING_OPPRETTES]: [{ uuid: string }, boolean];
+  [FagsakApiKeys.PREVIEW_MESSAGE_TILBAKEKREVING]: [any, any];
+  [FagsakApiKeys.PREVIEW_MESSAGE_FORMIDLING]: [ForhåndsvisMeldingParams, any];
+  [FagsakApiKeys.PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE]: [any, any];
+  [FagsakApiKeys.ENDRE_SAK_MARKERING]: [{ saksnummer: string; fagsakMarkering: string }, void];
 };
 
 const fagsakEndepunkter = new RestApiConfigBuilder()
@@ -79,7 +96,6 @@ const fagsakEndepunkter = new RestApiConfigBuilder()
   // Generelle
   .withRel('kodeverk', FagsakApiKeys.KODEVERK)
   .withRel('tilbake-kodeverk', FagsakApiKeys.KODEVERK_FPTILBAKE)
-  .withRel('infotrygd-søk', FagsakApiKeys.SEARCH_UTBETALINGSDATA_IS15)
 
   // Fagsak
   .withRel('fagsak-full', FagsakApiKeys.FETCH_FAGSAK)
@@ -115,3 +131,12 @@ const fagsakEndepunkter = new RestApiConfigBuilder()
 export const requestFagsakApi = createRequestApi(fagsakEndepunkter);
 
 export const restFagsakApiHooks = RestApiHooks.initHooks(requestFagsakApi);
+
+export const usefagsakRestApi = <TYPE extends FagsakApiKeys>(key: TYPE, params?: ApiParamsAndResponse[TYPE][0]) =>
+  restFagsakApiHooks.useRestApi<ApiParamsAndResponse[TYPE][1], ApiParamsAndResponse[TYPE][0]>(key, params);
+
+const tesfsfdf = () => {
+  const t = usefagsakRestApi(FagsakApiKeys.INIT_FETCH);
+
+  return t;
+};
