@@ -20,7 +20,7 @@
     "@navikt/fp-papirsoknad-ui-komponenter": "workspace:*",
     "@navikt/fp-storybook-utils": "workspace:*",
     "@navikt/fp-types": "workspace:*",
-    "@navikt/ft-form-hooks": "4.2.21",
+    "@navikt/ft-form-hooks": "4.2.22",
     "@navikt/ft-form-validators": "2.1.14",
     "@navikt/ft-kodeverk": "2.2.14",
     "@navikt/ft-types": "2.2.14",
