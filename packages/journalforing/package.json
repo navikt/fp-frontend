@@ -26,7 +26,7 @@
     "@navikt/fp-rest-api": "workspace:*",
     "@navikt/fp-rest-api-hooks": "workspace:*",
     "@navikt/fp-types": "workspace:*",
-    "@navikt/ft-form-hooks": "4.2.21",
+    "@navikt/ft-form-hooks": "4.2.22",
     "@navikt/ft-form-validators": "2.1.14",
     "@navikt/ft-kodeverk": "2.2.14",
     "@navikt/ft-ui-komponenter": "2.1.21",
