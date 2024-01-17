@@ -5,7 +5,7 @@ import { BodyShort, Link } from '@navikt/ds-react';
 
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
-import { KodeverkMedNavn, RelatertTilgrensedYtelse } from '@navikt/fp-types';
+import { RelatertTilgrensedYtelse } from '@navikt/fp-types';
 
 import styles from './personYtelserTable.module.css';
 

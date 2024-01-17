@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Heading } from '@navikt/ds-react';
 
-import { InntektArbeidYtelse, KodeverkMedNavn } from '@navikt/fp-types';
+import { InntektArbeidYtelse } from '@navikt/fp-types';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import PersonYtelserTable from './PersonYtelserTable';

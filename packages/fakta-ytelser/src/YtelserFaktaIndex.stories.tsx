@@ -57,7 +57,7 @@ export default {
 const Template: StoryFn<{
   inntektArbeidYtelse: InntektArbeidYtelse;
 }> = ({ inntektArbeidYtelse }) => (
-  <YtelserFaktaIndex inntektArbeidYtelse={inntektArbeidYtelse} alleKodeverk={alleKodeverk as any} />
+  <YtelserFaktaIndex inntektArbeidYtelse={inntektArbeidYtelse} />
 );
 
 export const YtelserForHovedsøker = Template.bind({});
