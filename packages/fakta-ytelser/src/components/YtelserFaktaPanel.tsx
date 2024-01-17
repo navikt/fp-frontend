@@ -9,14 +9,10 @@ import PersonYtelserTable from './PersonYtelserTable';
 
 interface OwnProps {
   inntektArbeidYtelse: InntektArbeidYtelse;
-  relatertYtelseTyper: KodeverkMedNavn[];
-  relatertYtelseStatus: KodeverkMedNavn[];
 }
 
 const YtelserFaktaPanel: FunctionComponent<OwnProps> = ({
   inntektArbeidYtelse,
-  relatertYtelseTyper,
-  relatertYtelseStatus,
 }) => (
   <>
     <Heading size="small">
@@ -25,8 +21,6 @@ const YtelserFaktaPanel: FunctionComponent<OwnProps> = ({
     <VerticalSpacer eightPx />
     <PersonYtelserTable
       ytelser={inntektArbeidYtelse.relatertTilgrensendeYtelserForSoker}
-      relatertYtelseTyper={relatertYtelseTyper}
-      relatertYtelseStatus={relatertYtelseStatus}
     />
     {inntektArbeidYtelse.relatertTilgrensendeYtelserForAnnenForelder &&
       inntektArbeidYtelse.relatertTilgrensendeYtelserForAnnenForelder.length > 0 && (
@@ -38,8 +32,6 @@ const YtelserFaktaPanel: FunctionComponent<OwnProps> = ({
           <VerticalSpacer eightPx />
           <PersonYtelserTable
             ytelser={inntektArbeidYtelse.relatertTilgrensendeYtelserForAnnenForelder}
-            relatertYtelseTyper={relatertYtelseTyper}
-            relatertYtelseStatus={relatertYtelseStatus}
           />
         </>
       )}

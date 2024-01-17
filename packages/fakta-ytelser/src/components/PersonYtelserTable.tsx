@@ -6,14 +6,11 @@ import { BodyShort, Link } from '@navikt/ds-react';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 import { KodeverkMedNavn, RelatertTilgrensedYtelse } from '@navikt/fp-types';
-import { relatertYtelseType } from '@navikt/fp-kodeverk';
 
 import styles from './personYtelserTable.module.css';
 
 interface OwnProps {
   ytelser?: RelatertTilgrensedYtelse[];
-  relatertYtelseTyper: KodeverkMedNavn[];
-  relatertYtelseStatus: KodeverkMedNavn[];
 }
 
 const HEADER_TEXT_CODES = [
@@ -33,19 +30,19 @@ const formatDateToDDMMYYYY = (date: string): string => {
  *
  * Viser tilgrensede ytelser.
  */
-const PersonYtelserTable: FunctionComponent<OwnProps> = ({ ytelser, relatertYtelseTyper, relatertYtelseStatus }) => {
+const PersonYtelserTable: FunctionComponent<OwnProps> = ({ ytelser }) => {
   const intl = useIntl();
 
   const ytelseRows =
     ytelser &&
     ytelser
       .map(ytelse => {
-        const ytelseNavn = relatertYtelseTyper.filter(type => type.kode === ytelse.relatertYtelseType)[0].navn;
+        const ytelseNavn = ytelse.relatertYtelseNavn;
 
         const skalViseLenke =
-          ytelse.relatertYtelseType === relatertYtelseType.ENGANGSSTONAD ||
-          ytelse.relatertYtelseType === relatertYtelseType.FORELDREPENGER ||
-          ytelse.relatertYtelseType === relatertYtelseType.SVANGERSKAPSPENGER;
+          ytelse.relatertYtelseNavn === 'Engangsstonad' ||
+          ytelse.relatertYtelseNavn === 'Foreldrepenger' ||
+          ytelse.relatertYtelseNavn === 'Svangerskapspenger';
 
         if (ytelse.tilgrensendeYtelserListe.length === 0) {
           return [
@@ -63,12 +60,10 @@ const PersonYtelserTable: FunctionComponent<OwnProps> = ({ ytelser, relatertYtel
           const tilDato = formatDateToDDMMYYYY(ytelseInfo.periodeTilDato) || '';
           const fraDato = formatDateToDDMMYYYY(ytelseInfo.periodeFraDato) || '';
 
-          const statusNavn = relatertYtelseStatus.filter(status => status.kode === ytelseInfo.status)[0].navn;
-
           return {
             navn: innerIndex === 0 ? ytelseNavn : '',
             periode: `${fraDato} - ${tilDato}`,
-            status: statusNavn,
+            status: ytelseInfo.statusNavn,
             saksnummer: ytelseInfo.saksNummer,
             skalViseLenke,
           };

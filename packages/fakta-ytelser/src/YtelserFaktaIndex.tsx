@@ -19,11 +19,6 @@ const YtelserFaktaIndex: FunctionComponent<OwnProps> = ({ inntektArbeidYtelse, a
   <RawIntlProvider value={intl}>
     <YtelserFaktaPanel
       inntektArbeidYtelse={inntektArbeidYtelse}
-      relatertYtelseTyper={alleKodeverk[KodeverkType.RELATERT_YTELSE_TYPE]}
-      relatertYtelseStatus={[
-        ...alleKodeverk[KodeverkType.FAGSAK_STATUS],
-        ...alleKodeverk[KodeverkType.RELATERT_YTELSE_TILSTAND],
-      ]}
     />
   </RawIntlProvider>
 );

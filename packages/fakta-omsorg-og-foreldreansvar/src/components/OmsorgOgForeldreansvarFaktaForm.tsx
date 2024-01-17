@@ -64,7 +64,6 @@ interface PureOwnProps {
   readOnly: boolean;
   vilkarTypes: KodeverkMedNavn[];
   hasOpenAksjonspunkter: boolean;
-  relatertYtelseTypes: KodeverkMedNavn[];
   erAksjonspunktForeldreansvar: boolean;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   personoversikt: Personoversikt;
@@ -93,7 +92,6 @@ const OmsorgOgForeldreansvarFaktaForm: FunctionComponent<PureOwnProps> & StaticF
   vilkarTypes,
   hasOpenAksjonspunkter,
   soknad,
-  relatertYtelseTypes,
   erAksjonspunktForeldreansvar,
   alleMerknaderFraBeslutter,
   personoversikt,
@@ -126,7 +124,6 @@ const OmsorgOgForeldreansvarFaktaForm: FunctionComponent<PureOwnProps> & StaticF
           {!erAksjonspunktForeldreansvar && (
             <div className={styles.cols}>
               <RettighetFaktaPanel
-                relatertYtelseTypes={relatertYtelseTypes}
                 alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
               />
             </div>

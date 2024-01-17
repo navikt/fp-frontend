@@ -4085,73 +4085,6 @@
       "navn": "Endelig"
     }
   ],
-  "RelatertYtelseType": [
-    {
-      "kode": "SYKEPENGER",
-      "kodeverk": "RELATERT_YTELSE_TYPE",
-      "navn": "Sykepenger"
-    },
-    {
-      "kode": "SVANGERSKAPSPENGER",
-      "kodeverk": "RELATERT_YTELSE_TYPE",
-      "navn": "Svangerskapspenger"
-    },
-    {
-      "kode": "PSB",
-      "kodeverk": "RELATERT_YTELSE_TYPE",
-      "navn": "Pleiepenger sykt barn"
-    },
-    {
-      "kode": "OLP",
-      "kodeverk": "RELATERT_YTELSE_TYPE",
-      "navn": "Opplæringspenger"
-    },
-    {
-      "kode": "FRISINN",
-      "kodeverk": "RELATERT_YTELSE_TYPE",
-      "navn": "FRISINN"
-    },
-    {
-      "kode": "ENSLIG_FORSØRGER",
-      "kodeverk": "RELATERT_YTELSE_TYPE",
-      "navn": "Enslig forsørger"
-    },
-    {
-      "kode": "FORELDREPENGER",
-      "kodeverk": "RELATERT_YTELSE_TYPE",
-      "navn": "Foreldrepenger"
-    },
-    {
-      "kode": "ENGANGSSTØNAD",
-      "kodeverk": "RELATERT_YTELSE_TYPE",
-      "navn": "Engangsstønad"
-    },
-    {
-      "kode": "PPN",
-      "kodeverk": "RELATERT_YTELSE_TYPE",
-      "navn": "Pleiepenger nærstående"
-    },
-    {
-      "kode": "PÅRØRENDESYKDOM",
-      "kodeverk": "RELATERT_YTELSE_TYPE",
-      "navn": "Pårørendesykdom"
-    },
-    {
-      "kode": "DAGPENGER",
-      "kodeverk": "RELATERT_YTELSE_TYPE",
-      "navn": "Dagpenger"
-    },
-    {
-      "kode": "ARBEIDSAVKLARINGSPENGER",
-      "kodeverk": "RELATERT_YTELSE_TYPE",
-      "navn": "Arbeidsavklaringspenger"
-    },
-    {
-      "kode": "OMP",
-      "kodeverk": "RELATERT_YTELSE_TYPE",
-      "navn": "Omsorgspenger"
-    }
-  ],
   "HistorikkEndretFeltType": [
     {
       "kode": "FODSELSDATO",
@@ -4787,28 +4720,6 @@
       "kode": "TYPE_VERGE",
       "kodeverk": "HISTORIKK_ENDRET_FELT_TYPE",
       "navn": "Type verge"
-    }
-  ],
-  "RelatertYtelseTilstand": [
-    {
-      "kode": "ÅPEN",
-      "kodeverk": "RELATERT_YTELSE_TILSTAND",
-      "navn": "Åpen"
-    },
-    {
-      "kode": "LØPENDE",
-      "kodeverk": "RELATERT_YTELSE_TILSTAND",
-      "navn": "Løpende"
-    },
-    {
-      "kode": "IKKESTARTET",
-      "kodeverk": "RELATERT_YTELSE_TILSTAND",
-      "navn": "Ikke startet"
-    },
-    {
-      "kode": "AVSLUTTET",
-      "kodeverk": "RELATERT_YTELSE_TILSTAND",
-      "navn": "Avsluttet"
     }
   ],
   "PersonstatusType": [

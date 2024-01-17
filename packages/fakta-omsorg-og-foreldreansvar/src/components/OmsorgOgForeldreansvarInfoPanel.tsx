@@ -118,7 +118,6 @@ export const OmsorgOgForeldreansvarInfoPanel: FunctionComponent<PureOwnProps> = 
         erAksjonspunktForeldreansvar={erAksjonspunktForeldreansvar}
         readOnly={readOnly}
         vilkarTypes={alleKodeverk[KodeverkType.OMSORGSOVERTAKELSE_VILKAR_TYPE]}
-        relatertYtelseTypes={alleKodeverk[KodeverkType.RELATERT_YTELSE_TYPE]}
         hasOpenAksjonspunkter={hasOpenAksjonspunkter}
         alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
         soknad={soknad}

@@ -4,9 +4,7 @@ import { action } from '@storybook/addon-actions';
 
 import {
   opplysningAdresseType,
-  relatertYtelseTilstand,
   navBrukerKjonn,
-  relatertYtelseType,
   soknadType,
   AksjonspunktCode,
   aksjonspunktStatus,
@@ -80,12 +78,12 @@ const inntektArbeidYtelse = {
     {
       tilgrensendeYtelserListe: [
         {
-          status: relatertYtelseTilstand.LOPENDE,
+          statusNavn: 'Løpende',
           periodeFraDato: '2019-01-01',
           saksNummer: '2323',
         },
       ],
-      relatertYtelseType: relatertYtelseType.FORELDREPENGER,
+      relatertYtelseNavn: 'Foreldrepenger',
     },
   ],
 } as InntektArbeidYtelse;
