@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useCallback } from 'react';
 import { MenyEndreUtlandIndex, FormValues as EndreUtlandFormValues } from '@navikt/fp-sak-meny-endre-utland';
-import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
+import { FagsakApiKeys, useFagsakRestApiRunner } from '../../data/fagsakContextApi';
 
 interface OwnProps {
   saksnummer: string;
@@ -17,7 +17,7 @@ const EndreFagsakMarkeringMenyModal: FunctionComponent<OwnProps> = ({
   hentOgSettBehandling,
   lukkModal,
 }) => {
-  const { startRequest: endreSaksmerking } = restFagsakApiHooks.useRestApiRunner(FagsakApiKeys.ENDRE_SAK_MARKERING);
+  const { startRequest: endreSaksmerking } = useFagsakRestApiRunner(FagsakApiKeys.ENDRE_SAK_MARKERING);
 
   const endreFagsakMarkering = useCallback(
     (params: EndreUtlandFormValues) =>

@@ -11,7 +11,12 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Alert } from '@navikt/ds-react';
 import { useFpSakKodeverk } from '../../data/useKodeverk';
 import useVisForhandsvisningAvMelding, { ForhandsvisFunksjon } from '../../data/useVisForhandsvisningAvMelding';
-import { FagsakApiKeys, SubmitMessageParams, restFagsakApiHooks } from '../../data/fagsakContextApi';
+import {
+  FagsakApiKeys,
+  SubmitMessageParams,
+  useFagsakGlobalStateRestApiData,
+  useFagsakRestApiRunner,
+} from '../../data/fagsakContextApi';
 import FagsakData from '../../fagsak/FagsakData';
 import SettPaVentReadOnlyModal from './SettPaVentReadOnlyModal';
 import SupportHeaderAndContent from '../SupportHeader';
@@ -127,14 +132,12 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
   const fagsak = fagsakData.getFagsak();
   const valgtBehandling = fagsakData.getBehandling(valgtBehandlingUuid);
 
-  const initFetchData = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
+  const initFetchData = useFagsakGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
 
   const ventearsaker = useFpSakKodeverk(KodeverkType.VENT_AARSAK) || EMPTY_ARRAY;
   const revurderingVarslingArsak = useFpSakKodeverk(KodeverkType.REVURDERING_VARSLING_ÅRSAK);
 
-  const { startRequest: submitMessage, state: submitState } = restFagsakApiHooks.useRestApiRunner(
-    FagsakApiKeys.SUBMIT_MESSAGE,
-  );
+  const { startRequest: submitMessage, state: submitState } = useFagsakRestApiRunner(FagsakApiKeys.SUBMIT_MESSAGE);
 
   const submitCallback = useCallback(
     getSubmitCallback(

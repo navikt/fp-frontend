@@ -4,7 +4,7 @@ import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 import { Behandling } from '@navikt/fp-types';
 import useTrackRouteParam from '../app/useTrackRouteParam';
 import getAccessRights from '../app/util/access';
-import { FagsakApiKeys, restFagsakApiHooks } from '../data/fagsakContextApi';
+import { FagsakApiKeys, useFagsakGlobalStateRestApiData } from '../data/fagsakContextApi';
 import { requestBehandlingApi } from '../data/behandlingContextApi';
 import ErrorBoundary from '../app/ErrorBoundary';
 import FagsakData from '../fagsak/FagsakData';
@@ -51,8 +51,8 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
     setBehandlingUuid(behandlingUuid);
   }, [behandlingUuid]);
 
-  const kodeverk = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK);
-  const initFetchData = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
+  const kodeverk = useFagsakGlobalStateRestApiData(FagsakApiKeys.KODEVERK);
+  const initFetchData = useFagsakGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
 
   const fagsak = fagsakData.getFagsak();
   const rettigheter = useMemo(

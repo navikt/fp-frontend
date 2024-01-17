@@ -11,7 +11,7 @@ import ErrorFormatter from './feilhandtering/ErrorFormatter';
 import ErrorMessage from './feilhandtering/ErrorMessage';
 
 import { AVDELINGSLEDER_PATH, JOURNALFØRING_PATH, UTBETALINGSDATA_PATH } from '../paths';
-import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
+import { FagsakApiKeys, useFagsakGlobalStateRestApiData } from '../../data/fagsakContextApi';
 
 type QueryStrings = {
   errorcode?: string;
@@ -72,7 +72,7 @@ const Dekorator: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
 
-  const initFetch = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
+  const initFetch = useFagsakGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
   const { innloggetBruker: navAnsatt } = initFetch;
 
   const navigate = useNavigate();

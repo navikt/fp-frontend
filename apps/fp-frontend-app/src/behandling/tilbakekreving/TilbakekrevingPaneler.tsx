@@ -12,7 +12,7 @@ import ForeldelseProsessInitPanel from './prosessPaneler/ForeldelseProsessInitPa
 import TilbakekrevingProsessInitPanel from './prosessPaneler/TilbakekrevingProsessInitPanel';
 import VedtakTilbakekrevingProsessInitPanel from './prosessPaneler/VedtakTilbakekrevingProsessInitPanel';
 import FeilutbetalingFaktaInitPanel from './faktaPaneler/FeilutbetalingFaktaInitPanel';
-import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
+import { FagsakApiKeys, usefagsakRestApi } from '../../data/fagsakContextApi';
 import BehandlingPaVent from '../felles/modaler/paVent/BehandlingPaVent';
 
 interface OwnProps {
@@ -34,7 +34,7 @@ const TilbakekrevingPaneler: FunctionComponent<OwnProps> = ({
   opneSokeside,
   alleBehandlinger,
 }) => {
-  const { data: tilbakekrevingKodeverk } = restFagsakApiHooks.useRestApi(FagsakApiKeys.KODEVERK_FPTILBAKE);
+  const { data: tilbakekrevingKodeverk } = usefagsakRestApi(FagsakApiKeys.KODEVERK_FPTILBAKE);
 
   const fagsakBehandlingerInfo = useMemo(
     () =>

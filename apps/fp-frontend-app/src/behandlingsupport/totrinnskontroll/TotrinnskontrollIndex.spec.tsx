@@ -97,10 +97,10 @@ describe('<TotrinnskontrollIndex>', () => {
 
   it('skal vise modal når beslutter godkjenner', async () => {
     const data = [
-      { key: FagsakApiKeys.KODEVERK.name, global: true, data: kodeverk },
-      { key: FagsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: kodeverk },
-      { key: FagsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt } },
-      { key: FagsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT.name, data: undefined },
+      { key: FagsakApiKeys.KODEVERK, global: true, data: kodeverk },
+      { key: FagsakApiKeys.KODEVERK_FPTILBAKE, global: true, data: kodeverk },
+      { key: FagsakApiKeys.INIT_FETCH, global: true, data: { innloggetBruker: navAnsatt } },
+      { key: FagsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT, data: undefined },
     ];
 
     let axiosMock: MockAdapter;
@@ -137,9 +137,7 @@ describe('<TotrinnskontrollIndex>', () => {
     await userEvent.click(screen.getByText('Godkjenn vedtaket'));
 
     await waitFor(() =>
-      expect(
-        axiosMock.history.get.find(a => a.url === FagsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT.name)?.params,
-      ).toStrictEqual({
+      expect(axiosMock.history.get.find(a => a.url === FagsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT)?.params).toStrictEqual({
         behandlingUuid: '1234',
         saksnummer: '1',
         behandlingVersjon: 123,

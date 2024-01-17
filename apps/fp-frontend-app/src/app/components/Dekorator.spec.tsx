@@ -39,7 +39,7 @@ const intl = createIntl(messages);
 
 describe('<Dekorator>', () => {
   it('skal vise dekorator', async () => {
-    const data = [{ key: FagsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt } }];
+    const data = [{ key: FagsakApiKeys.INIT_FETCH, global: true, data: { innloggetBruker: navAnsatt } }];
 
     render(
       <MemoryRouter initialEntries={[`/fagsak/1/`]}>
@@ -55,7 +55,7 @@ describe('<Dekorator>', () => {
   });
 
   it('skal vise feilmeldinger', async () => {
-    const data = [{ key: FagsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt } }];
+    const data = [{ key: FagsakApiKeys.INIT_FETCH, global: true, data: { innloggetBruker: navAnsatt } }];
 
     const errors = [
       {

@@ -45,7 +45,7 @@ describe('<BehandlingSupportIndex>', () => {
   };
 
   it('skal vise historikk-panelet som default', async () => {
-    const data = [{ key: FagsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt } }];
+    const data = [{ key: FagsakApiKeys.INIT_FETCH, global: true, data: { innloggetBruker: navAnsatt } }];
 
     render(
       <RawIntlProvider value={intl}>

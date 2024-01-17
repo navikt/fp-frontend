@@ -1,7 +1,13 @@
 import { Aktor, Dokument } from '@navikt/ft-types';
 
 import { RestApiConfigBuilder, createRequestApi, Link } from '@navikt/fp-rest-api';
-import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
+import {
+  useGlobalStateRestApiData,
+  RestApiOptions,
+  getUseRestApi,
+  getUseRestApiRunner,
+  getUseGlobalStateRestApi,
+} from '@navikt/fp-rest-api-hooks';
 import {
   ForhåndsvisMeldingParams,
   FagsakEnkel,
@@ -11,6 +17,7 @@ import {
   Behandling,
   AlleKodeverk,
   AlleKodeverkTilbakekreving,
+  InfotrygdVedtak,
 } from '@navikt/fp-types';
 
 type BehandlendeEnheter = {
@@ -64,6 +71,7 @@ export enum FagsakApiKeys {
   PREVIEW_MESSAGE_FORMIDLING = 'PREVIEW_MESSAGE_FORMIDLING',
   PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE = 'PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE',
   ENDRE_SAK_MARKERING = 'ENDRE_SAK_MARKERING',
+  SEARCH_UTBETALINGSDATA_IS15 = 'SEARCH_UTBETALINGSDATA_IS15',
 }
 
 type ApiParamsAndResponse = {
@@ -87,6 +95,7 @@ type ApiParamsAndResponse = {
   [FagsakApiKeys.PREVIEW_MESSAGE_FORMIDLING]: [ForhåndsvisMeldingParams, any];
   [FagsakApiKeys.PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE]: [any, any];
   [FagsakApiKeys.ENDRE_SAK_MARKERING]: [{ saksnummer: string; fagsakMarkering: string }, void];
+  [FagsakApiKeys.SEARCH_UTBETALINGSDATA_IS15]: [{ searchString: string }, InfotrygdVedtak];
 };
 
 const fagsakEndepunkter = new RestApiConfigBuilder()
@@ -96,6 +105,7 @@ const fagsakEndepunkter = new RestApiConfigBuilder()
   // Generelle
   .withRel('kodeverk', FagsakApiKeys.KODEVERK)
   .withRel('tilbake-kodeverk', FagsakApiKeys.KODEVERK_FPTILBAKE)
+  .withRel('infotrygd-søk', FagsakApiKeys.SEARCH_UTBETALINGSDATA_IS15)
 
   // Fagsak
   .withRel('fagsak-full', FagsakApiKeys.FETCH_FAGSAK)
@@ -129,14 +139,24 @@ const fagsakEndepunkter = new RestApiConfigBuilder()
   .build();
 
 export const requestFagsakApi = createRequestApi(fagsakEndepunkter);
+const useRestApi = getUseRestApi(requestFagsakApi);
+const useRestApiRunner = getUseRestApiRunner(requestFagsakApi);
+const useGlobalStateRestApi = getUseGlobalStateRestApi(requestFagsakApi);
 
-export const restFagsakApiHooks = RestApiHooks.initHooks(requestFagsakApi);
+export const usefagsakRestApi = <TYPE extends FagsakApiKeys>(
+  key: TYPE,
+  params?: ApiParamsAndResponse[TYPE][0],
+  options?: RestApiOptions,
+) => useRestApi<ApiParamsAndResponse[TYPE][1], ApiParamsAndResponse[TYPE][0]>(key, params, options);
 
-export const usefagsakRestApi = <TYPE extends FagsakApiKeys>(key: TYPE, params?: ApiParamsAndResponse[TYPE][0]) =>
-  restFagsakApiHooks.useRestApi<ApiParamsAndResponse[TYPE][1], ApiParamsAndResponse[TYPE][0]>(key, params);
+export const useFagsakRestApiRunner = <TYPE extends FagsakApiKeys>(key: TYPE) =>
+  useRestApiRunner<ApiParamsAndResponse[TYPE][1], ApiParamsAndResponse[TYPE][0]>(key);
 
-const tesfsfdf = () => {
-  const t = usefagsakRestApi(FagsakApiKeys.INIT_FETCH);
+export const useFagsakGlobalStateRestApi = <TYPE extends FagsakApiKeys>(
+  key: TYPE,
+  params?: ApiParamsAndResponse[TYPE][0],
+  options?: RestApiOptions,
+) => useGlobalStateRestApi<ApiParamsAndResponse[TYPE][1], ApiParamsAndResponse[TYPE][0]>(key, params, options);
 
-  return t;
-};
+export const useFagsakGlobalStateRestApiData = <TYPE extends FagsakApiKeys>(key: TYPE) =>
+  useGlobalStateRestApiData<ApiParamsAndResponse[TYPE][1]>(key);

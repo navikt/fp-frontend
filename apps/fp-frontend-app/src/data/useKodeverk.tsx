@@ -3,14 +3,14 @@ import { BehandlingType } from '@navikt/ft-kodeverk';
 import { AlleKodeverk, KodeverkMedNavn, AlleKodeverkTilbakekreving } from '@navikt/fp-types';
 import { KodeverkType } from '@navikt/fp-kodeverk';
 
-import { FagsakApiKeys, restFagsakApiHooks } from './fagsakContextApi';
+import { FagsakApiKeys, useFagsakGlobalStateRestApiData } from './fagsakContextApi';
 
 /**
  * Hook som henter kodeverk knyttet til behandlingstype
  */
 export function useKodeverk(behandlingType?: string): AlleKodeverk | AlleKodeverkTilbakekreving {
-  const alleKodeverkFpSak = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK);
-  const alleKodeverkFpTilbake = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK_FPTILBAKE);
+  const alleKodeverkFpSak = useFagsakGlobalStateRestApiData(FagsakApiKeys.KODEVERK);
+  const alleKodeverkFpTilbake = useFagsakGlobalStateRestApiData(FagsakApiKeys.KODEVERK_FPTILBAKE);
 
   const erTilbakekreving =
     BehandlingType.TILBAKEKREVING === behandlingType || BehandlingType.TILBAKEKREVING_REVURDERING === behandlingType;
@@ -22,7 +22,7 @@ export function useKodeverk(behandlingType?: string): AlleKodeverk | AlleKodever
  * må @see useGlobalStateRestApi først brukes for å hente data fra backend
  */
 export function useFpSakKodeverk<T = KodeverkMedNavn>(kodeverkType: string): T[] {
-  const alleKodeverk = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK);
+  const alleKodeverk = useFagsakGlobalStateRestApiData(FagsakApiKeys.KODEVERK);
   // @ts-ignore Fiks
   return alleKodeverk[kodeverkType];
 }
@@ -32,7 +32,7 @@ export function useFpSakKodeverk<T = KodeverkMedNavn>(kodeverkType: string): T[]
  * må @see useGlobalStateRestApi først brukes for å hente data fra backend
  */
 export function useFpTilbakeKodeverk<T = KodeverkMedNavn>(kodeverkType: string): T[] {
-  const alleKodeverk = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK_FPTILBAKE);
+  const alleKodeverk = useFagsakGlobalStateRestApiData(FagsakApiKeys.KODEVERK_FPTILBAKE);
   // @ts-ignore Fiks
   return alleKodeverk ? alleKodeverk[kodeverkType] : undefined;
 }
@@ -61,8 +61,8 @@ export function useFpSakKodeverkMedNavn(kode: string, kodeverk: KodeverkType): K
  * må @see useGlobalStateRestApi først brukes for å hente data fra backend
  */
 export function useGetKodeverkFn() {
-  const alleFpSakKodeverk = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK);
-  const alleFpTilbakeKodeverk = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK_FPTILBAKE);
+  const alleFpSakKodeverk = useFagsakGlobalStateRestApiData(FagsakApiKeys.KODEVERK);
+  const alleFpTilbakeKodeverk = useFagsakGlobalStateRestApiData(FagsakApiKeys.KODEVERK_FPTILBAKE);
 
   return (kode: string, kodeverk: KodeverkType, behandlingType: string = BehandlingType.FORSTEGANGSSOKNAD) => {
     const kodeverkForType =

@@ -44,8 +44,8 @@ describe('<FagsakSearchIndex>', () => {
 
   it('skal søke opp fagsaker', async () => {
     const data = [
-      { key: FagsakApiKeys.KODEVERK.name, global: true, data: {} },
-      { key: FagsakApiKeys.SEARCH_FAGSAK.name, data: fagsaker },
+      { key: FagsakApiKeys.KODEVERK, global: true, data: {} },
+      { key: FagsakApiKeys.SEARCH_FAGSAK, data: fagsaker },
     ];
 
     const utils = render(
@@ -72,8 +72,8 @@ describe('<FagsakSearchIndex>', () => {
 
   it('skal gå til valgt fagsak', async () => {
     const data = [
-      { key: FagsakApiKeys.KODEVERK.name, global: true, data: {} },
-      { key: FagsakApiKeys.SEARCH_FAGSAK.name, data: fagsaker },
+      { key: FagsakApiKeys.KODEVERK, global: true, data: {} },
+      { key: FagsakApiKeys.SEARCH_FAGSAK, data: fagsaker },
     ];
 
     const utils = render(

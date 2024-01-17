@@ -4,7 +4,7 @@ import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import useGetEnabledApplikasjonContext from '../app/useGetEnabledApplikasjonContext';
 import ApplicationContextPath from '../app/ApplicationContextPath';
 import useBehandlingEndret from '../behandling/useBehandlingEndret';
-import { FagsakApiKeys, LinkCategory, requestFagsakApi, restFagsakApiHooks } from '../data/fagsakContextApi';
+import { FagsakApiKeys, LinkCategory, requestFagsakApi, usefagsakRestApi } from '../data/fagsakContextApi';
 import FagsakData from './FagsakData';
 
 const useHentFagsak = (
@@ -19,7 +19,7 @@ const useHentFagsak = (
   const [trigger, setTrigger] = useState(0);
   const oppdaterFagsak = useCallback(() => setTrigger(old => old + 1), []);
 
-  const { data: fagsak } = restFagsakApiHooks.useRestApi(
+  const { data: fagsak } = usefagsakRestApi(
     FagsakApiKeys.FETCH_FAGSAK,
     { saksnummer },
     {
@@ -29,7 +29,7 @@ const useHentFagsak = (
     },
   );
 
-  const { data: fagsakDataTilbake, state: fagsakDataTilbakeState } = restFagsakApiHooks.useRestApi(
+  const { data: fagsakDataTilbake, state: fagsakDataTilbakeState } = usefagsakRestApi(
     FagsakApiKeys.FETCH_FAGSAKDATA_FPTILBAKE,
     { saksnummer },
     {

@@ -7,7 +7,7 @@ import { NavAnsatt, AksessRettigheter, Behandling } from '@navikt/fp-types';
 import { KodeverkType } from '@navikt/fp-kodeverk';
 
 import useTrackRouteParam from '../../app/useTrackRouteParam';
-import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
+import { FagsakApiKeys, useFagsakGlobalStateRestApiData } from '../../data/fagsakContextApi';
 import { getRiskPanelLocationCreator } from '../../app/paths';
 import getAccessRights from '../../app/util/access';
 import FagsakData from '../../fagsak/FagsakData';
@@ -64,8 +64,8 @@ const RisikoklassifiseringIndex: FunctionComponent<OwnProps> = ({
   const navigate = useNavigate();
   const location = useLocation();
 
-  const alleKodeverk = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK);
-  const initFetchData = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
+  const alleKodeverk = useFagsakGlobalStateRestApiData(FagsakApiKeys.KODEVERK);
+  const initFetchData = useFagsakGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
   const navAnsatt = initFetchData.innloggetBruker;
   const rettigheter = useMemo(
     () => getAccessRights(navAnsatt, fagsak.status, behandlingStatus, behandlingType),

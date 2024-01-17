@@ -12,7 +12,7 @@ import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 import { FagsakProfilSakIndex } from '@navikt/ft-sak-fagsak-profil';
 import { AAREG_URL, AINNTEKT_URL, GOSYS_URL, getModiaUrl } from '@navikt/fp-konstanter';
 
-import { FagsakApiKeys, restFagsakApiHooks } from '../data/fagsakContextApi';
+import { FagsakApiKeys, useFagsakGlobalStateRestApiData } from '../data/fagsakContextApi';
 import { getLocationWithDefaultProsessStegAndFakta, pathToBehandling, pathToBehandlinger } from '../app/paths';
 import BehandlingMenuIndex from '../behandlingmenu/BehandlingMenuIndex';
 import RisikoklassifiseringIndex from './risikoklassifisering/RisikoklassifiseringIndex';
@@ -81,7 +81,7 @@ const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
   const fagsakStatusMedNavn = useFpSakKodeverkMedNavn(fagsak.status, KodeverkType.FAGSAK_STATUS);
   const fagsakYtelseTypeMedNavn = useFpSakKodeverkMedNavn(fagsak.fagsakYtelseType, KodeverkType.FAGSAK_YTELSE);
 
-  const { sakLinks } = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
+  const { sakLinks } = useFagsakGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
 
   const location = useLocation();
 

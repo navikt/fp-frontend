@@ -12,7 +12,7 @@ import useVisForhandsvisningAvMelding from '../../data/useVisForhandsvisningAvMe
 import { createLocationForSkjermlenke } from '../../app/paths';
 import { useKodeverk } from '../../data/useKodeverk';
 import BeslutterModalIndex from './BeslutterModalIndex';
-import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
+import { FagsakApiKeys, useFagsakRestApiRunner, useFagsakGlobalStateRestApiData } from '../../data/fagsakContextApi';
 import SupportHeaderAndContent from '../SupportHeader';
 
 type Values = {
@@ -71,12 +71,12 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
   const location = useLocation();
   const navigate = useNavigate();
 
-  const initFetchData = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
+  const initFetchData = useFagsakGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
   const { brukernavn, kanVeilede } = initFetchData.innloggetBruker;
 
   const alleKodeverk = useKodeverk(valgtBehandling?.type);
 
-  const { startRequest: godkjennTotrinnsaksjonspunkter } = restFagsakApiHooks.useRestApiRunner(
+  const { startRequest: godkjennTotrinnsaksjonspunkter } = useFagsakRestApiRunner(
     FagsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT,
   );
 

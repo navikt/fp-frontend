@@ -45,8 +45,8 @@ describe('<RisikoklassifiseringIndex>', () => {
 
   it('skal rendere komponent', async () => {
     const data = [
-      { key: FagsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt } },
-      { key: FagsakApiKeys.KODEVERK.name, global: true, data: {} },
+      { key: FagsakApiKeys.INIT_FETCH, global: true, data: { innloggetBruker: navAnsatt } },
+      { key: FagsakApiKeys.KODEVERK, global: true, data: {} },
     ];
 
     render(

@@ -56,9 +56,9 @@ describe('<MeldingIndex>', () => {
 
   it('skal vise messages når mottakere og brevmaler har blitt hentet fra server', async () => {
     const data = [
-      { key: FagsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: { navn: 'Peder' } } },
-      { key: FagsakApiKeys.KODEVERK.name, global: true, data: kodeverk },
-      { key: FagsakApiKeys.SUBMIT_MESSAGE.name, data: undefined },
+      { key: FagsakApiKeys.INIT_FETCH, global: true, data: { innloggetBruker: { navn: 'Peder' } } },
+      { key: FagsakApiKeys.KODEVERK, global: true, data: kodeverk },
+      { key: FagsakApiKeys.SUBMIT_MESSAGE, data: undefined },
     ];
 
     render(
@@ -83,9 +83,9 @@ describe('<MeldingIndex>', () => {
   // TODO FIX denne feilar av ein eller annan grunn
   it.skip('skal sette default tom streng ved forhåndsvisning dersom fritekst ikke er fylt ut', async () => {
     const data = [
-      { key: FagsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: { navn: 'Peder' } } },
-      { key: FagsakApiKeys.KODEVERK.name, global: true, data: kodeverk },
-      { key: FagsakApiKeys.PREVIEW_MESSAGE_FORMIDLING.name, data: {} },
+      { key: FagsakApiKeys.INIT_FETCH, global: true, data: { innloggetBruker: { navn: 'Peder' } } },
+      { key: FagsakApiKeys.KODEVERK, global: true, data: kodeverk },
+      { key: FagsakApiKeys.PREVIEW_MESSAGE_FORMIDLING, data: {} },
     ];
 
     let axiosMock: MockAdapter;
@@ -132,9 +132,9 @@ describe('<MeldingIndex>', () => {
 
   it('skal sende melding og så lukke modal', async () => {
     const data = [
-      { key: FagsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: { navn: 'Peder' } } },
-      { key: FagsakApiKeys.KODEVERK.name, global: true, data: kodeverk },
-      { key: FagsakApiKeys.SUBMIT_MESSAGE.name, data: undefined },
+      { key: FagsakApiKeys.INIT_FETCH, global: true, data: { innloggetBruker: { navn: 'Peder' } } },
+      { key: FagsakApiKeys.KODEVERK, global: true, data: kodeverk },
+      { key: FagsakApiKeys.SUBMIT_MESSAGE, data: undefined },
     ];
 
     let axiosMock: MockAdapter;
@@ -172,7 +172,7 @@ describe('<MeldingIndex>', () => {
     await waitFor(() => expect(axiosMock.history.get.length).toBe(1));
 
     await waitFor(() =>
-      expect(axiosMock.history.get.find(a => a.url === FagsakApiKeys.SUBMIT_MESSAGE.name)?.params).toStrictEqual({
+      expect(axiosMock.history.get.find(a => a.url === FagsakApiKeys.SUBMIT_MESSAGE)?.params).toStrictEqual({
         behandlingUuid: '1',
         arsakskode: undefined,
         fritekst: '',
@@ -183,9 +183,9 @@ describe('<MeldingIndex>', () => {
 
   it('skal sende melding og sette saken på vent hvis INNHENT_DOK', async () => {
     const data = [
-      { key: FagsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: { navn: 'Peder' } } },
-      { key: FagsakApiKeys.KODEVERK.name, global: true, data: kodeverk },
-      { key: FagsakApiKeys.SUBMIT_MESSAGE.name, data: undefined },
+      { key: FagsakApiKeys.INIT_FETCH, global: true, data: { innloggetBruker: { navn: 'Peder' } } },
+      { key: FagsakApiKeys.KODEVERK, global: true, data: kodeverk },
+      { key: FagsakApiKeys.SUBMIT_MESSAGE, data: undefined },
     ];
 
     let axiosMock: MockAdapter;
@@ -226,7 +226,7 @@ describe('<MeldingIndex>', () => {
     await waitFor(() => expect(axiosMock.history.get.length).toBe(1));
 
     await waitFor(() =>
-      expect(axiosMock.history.get.find(a => a.url === FagsakApiKeys.SUBMIT_MESSAGE.name)?.params).toStrictEqual({
+      expect(axiosMock.history.get.find(a => a.url === FagsakApiKeys.SUBMIT_MESSAGE)?.params).toStrictEqual({
         behandlingUuid: '1',
         arsakskode: undefined,
         brevmalkode: dokumentMalType.INNHENTE_OPPLYSNINGER,

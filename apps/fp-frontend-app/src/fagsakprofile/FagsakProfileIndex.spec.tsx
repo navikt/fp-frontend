@@ -56,9 +56,9 @@ describe('<FagsakProfileIndex>', () => {
 
   it('skal rendre komponent og vise alle behandlinger når ingen behandling er valgt', async () => {
     const data = [
-      { key: FagsakApiKeys.KODEVERK.name, global: true, data: alleKodeverk },
-      { key: FagsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: {} },
-      { key: FagsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt } },
+      { key: FagsakApiKeys.KODEVERK, global: true, data: alleKodeverk },
+      { key: FagsakApiKeys.KODEVERK_FPTILBAKE, global: true, data: {} },
+      { key: FagsakApiKeys.INIT_FETCH, global: true, data: { innloggetBruker: navAnsatt } },
     ];
 
     await act(async () => {
@@ -84,9 +84,9 @@ describe('<FagsakProfileIndex>', () => {
 
   it('skal ikke vise alle behandlinger når behandling er valgt', async () => {
     const data = [
-      { key: FagsakApiKeys.KODEVERK.name, global: true, data: alleKodeverk },
-      { key: FagsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: {} },
-      { key: FagsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt } },
+      { key: FagsakApiKeys.KODEVERK, global: true, data: alleKodeverk },
+      { key: FagsakApiKeys.KODEVERK_FPTILBAKE, global: true, data: {} },
+      { key: FagsakApiKeys.INIT_FETCH, global: true, data: { innloggetBruker: navAnsatt } },
     ];
 
     await act(async () => {

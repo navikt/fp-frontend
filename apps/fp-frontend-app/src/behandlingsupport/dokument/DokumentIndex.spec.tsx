@@ -37,7 +37,7 @@ describe('<DokumentIndex>', () => {
   ];
 
   it('skal vise liste med tre dokumenter', async () => {
-    const data = [{ key: FagsakApiKeys.ALL_DOCUMENTS.name, data: documents }];
+    const data = [{ key: FagsakApiKeys.ALL_DOCUMENTS, data: documents }];
 
     render(
       <RawIntlProvider value={intl}>

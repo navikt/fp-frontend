@@ -10,9 +10,9 @@ import HistorikkIndex from './HistorikkIndex';
 describe('<HistorikkIndex>', () => {
   it('skal prøve å hente historikk og så vise historikk-panel', async () => {
     const data = [
-      { key: FagsakApiKeys.INIT_FETCH_FPTILBAKE.name, global: true, data: {} },
-      { key: FagsakApiKeys.KODEVERK.name, global: true, data: {} },
-      { key: FagsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: {} },
+      { key: FagsakApiKeys.INIT_FETCH_FPTILBAKE, global: true, data: {} },
+      { key: FagsakApiKeys.KODEVERK, global: true, data: {} },
+      { key: FagsakApiKeys.KODEVERK_FPTILBAKE, global: true, data: {} },
     ];
 
     render(

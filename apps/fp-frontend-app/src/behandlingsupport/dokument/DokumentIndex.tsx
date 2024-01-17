@@ -8,7 +8,7 @@ import { hentDokumentLenke } from '@navikt/fp-konstanter';
 
 import { useIntl } from 'react-intl';
 import useBehandlingEndret from '../../behandling/useBehandlingEndret';
-import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
+import { FagsakApiKeys, usefagsakRestApi } from '../../data/fagsakContextApi';
 
 import '@navikt/ft-sak-dokumenter/dist/style.css';
 import SupportHeaderAndContent from '../SupportHeader';
@@ -55,7 +55,7 @@ const DokumentIndex: FunctionComponent<OwnProps> = ({ behandlingUuid, behandling
   const forrigeSaksnummer = usePrevious(saksnummer);
   const erBehandlingEndretFraUndefined = useBehandlingEndret(behandlingUuid, behandlingVersjon);
 
-  const { data: alleDokumenter = EMPTY_ARRAY, state } = restFagsakApiHooks.useRestApi(
+  const { data: alleDokumenter = EMPTY_ARRAY, state } = usefagsakRestApi(
     FagsakApiKeys.ALL_DOCUMENTS,
     { saksnummer },
     {

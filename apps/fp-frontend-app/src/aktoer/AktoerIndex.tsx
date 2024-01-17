@@ -7,7 +7,7 @@ import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { KodeverkType } from '@navikt/fp-kodeverk';
 
 import useTrackRouteParam from '../app/useTrackRouteParam';
-import { restFagsakApiHooks, FagsakApiKeys } from '../data/fagsakContextApi';
+import { FagsakApiKeys, useFagsakGlobalStateRestApiData, usefagsakRestApi } from '../data/fagsakContextApi';
 import { pathToFagsak } from '../app/paths';
 
 import '@navikt/ft-sak-aktor/dist/style.css';
@@ -21,9 +21,9 @@ const AktoerIndex: FunctionComponent = () => {
     parse: aktoerIdFromUrl => Number.parseInt(aktoerIdFromUrl, 10),
   });
 
-  const alleKodeverk = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK);
+  const alleKodeverk = useFagsakGlobalStateRestApiData(FagsakApiKeys.KODEVERK);
 
-  const { data, state } = restFagsakApiHooks.useRestApi(
+  const { data, state } = usefagsakRestApi(
     FagsakApiKeys.AKTOER_INFO,
     { aktoerId: selectedAktoerId },
     { keepData: true, suspendRequest: !selectedAktoerId, updateTriggers: [selectedAktoerId] },

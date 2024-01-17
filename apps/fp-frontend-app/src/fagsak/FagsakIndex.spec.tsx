@@ -80,10 +80,10 @@ describe('<FagsakIndex>', () => {
   // Se på hvorfor denne feiler
   it.skip('skal vise ventikon', async () => {
     const data = [
-      { key: FagsakApiKeys.KODEVERK.name, global: true, data: alleKodeverk },
-      { key: FagsakApiKeys.FETCH_FAGSAK.name, data: fagsak },
-      { key: FagsakApiKeys.INIT_FETCH_FPTILBAKE.name, global: true, data: {} },
-      { key: FagsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: alleKodeverk },
+      { key: FagsakApiKeys.KODEVERK, global: true, data: alleKodeverk },
+      { key: FagsakApiKeys.FETCH_FAGSAK, data: fagsak },
+      { key: FagsakApiKeys.INIT_FETCH_FPTILBAKE, global: true, data: {} },
+      { key: FagsakApiKeys.KODEVERK_FPTILBAKE, global: true, data: alleKodeverk },
     ];
 
     render(
@@ -101,12 +101,12 @@ describe('<FagsakIndex>', () => {
 
   it('skal hente alle behandlinger fra fpsak og fptilbake', async () => {
     const data = [
-      { key: FagsakApiKeys.KODEVERK.name, global: true, data: alleKodeverk },
-      { key: FagsakApiKeys.FETCH_FAGSAK.name, data: fagsak },
-      { key: FagsakApiKeys.INIT_FETCH_FPTILBAKE.name, global: true, data: {} },
-      { key: FagsakApiKeys.FETCH_FAGSAKDATA_FPTILBAKE.name, data: fagsakFpTilbake },
-      { key: FagsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: alleKodeverk },
-      { key: FagsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt } },
+      { key: FagsakApiKeys.KODEVERK, global: true, data: alleKodeverk },
+      { key: FagsakApiKeys.FETCH_FAGSAK, data: fagsak },
+      { key: FagsakApiKeys.INIT_FETCH_FPTILBAKE, global: true, data: {} },
+      { key: FagsakApiKeys.FETCH_FAGSAKDATA_FPTILBAKE, data: fagsakFpTilbake },
+      { key: FagsakApiKeys.KODEVERK_FPTILBAKE, global: true, data: alleKodeverk },
+      { key: FagsakApiKeys.INIT_FETCH, global: true, data: { innloggetBruker: navAnsatt } },
     ];
 
     await act(async () => {

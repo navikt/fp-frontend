@@ -67,16 +67,16 @@ const fagsak = {
 describe('BehandlingMenuIndex', () => {
   it('skal vise meny der alle menyhandlinger er synlige', async () => {
     const data = [
-      { key: FagsakApiKeys.INIT_FETCH_FPTILBAKE.name, global: true, data: {} },
+      { key: FagsakApiKeys.INIT_FETCH_FPTILBAKE, global: true, data: {} },
       {
-        key: FagsakApiKeys.INIT_FETCH.name,
+        key: FagsakApiKeys.INIT_FETCH,
         global: true,
         data: { innloggetBruker: navAnsatt, behandlendeEnheter: [] },
       },
-      { key: FagsakApiKeys.KODEVERK.name, global: true, data: {} },
-      { key: FagsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: {} },
-      { key: FagsakApiKeys.KAN_TILBAKEKREVING_OPPRETTES.name, data: false },
-      { key: FagsakApiKeys.KAN_TILBAKEKREVING_REVURDERING_OPPRETTES.name, data: false },
+      { key: FagsakApiKeys.KODEVERK, global: true, data: {} },
+      { key: FagsakApiKeys.KODEVERK_FPTILBAKE, global: true, data: {} },
+      { key: FagsakApiKeys.KAN_TILBAKEKREVING_OPPRETTES, data: false },
+      { key: FagsakApiKeys.KAN_TILBAKEKREVING_REVURDERING_OPPRETTES, data: false },
     ];
 
     render(

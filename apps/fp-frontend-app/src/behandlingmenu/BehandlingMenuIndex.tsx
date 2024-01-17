@@ -11,7 +11,7 @@ import { getMenytekst as getApneForEndringerMenytekst } from '@navikt/fp-sak-men
 import { getMenytekst as getEndreUtlandMenytekst } from '@navikt/fp-sak-meny-endre-utland';
 import { Behandling, BehandlingAppKontekst, Fagsak, VergeBehandlingmenyValg } from '@navikt/fp-types';
 
-import { FagsakApiKeys, restFagsakApiHooks } from '../data/fagsakContextApi';
+import { FagsakApiKeys, useFagsakGlobalStateRestApiData } from '../data/fagsakContextApi';
 import FagsakData from '../fagsak/FagsakData';
 import NyBehandlingMenyModal from './modaler/NyBehandlingMenyModal';
 import ApneForEndringerMenyModal from './modaler/ApneForEndringerMenyModal';
@@ -96,7 +96,7 @@ const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
   hentOgSettBehandling,
   oppdaterFagsak,
 }) => {
-  const initFetchData = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
+  const initFetchData = useFagsakGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
   const { innloggetBruker: navAnsatt } = initFetchData;
 
   const [valgtModal, setValgtModal] = useState<string | undefined>();

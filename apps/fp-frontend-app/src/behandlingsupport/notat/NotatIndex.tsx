@@ -4,7 +4,7 @@ import { Fagsak } from '@navikt/fp-types';
 import { NotatSakIndex } from '@navikt/fp-sak-notat';
 
 import { useIntl } from 'react-intl';
-import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
+import { FagsakApiKeys, useFagsakRestApiRunner, useFagsakGlobalStateRestApiData } from '../../data/fagsakContextApi';
 import SupportHeaderAndContent from '../SupportHeader';
 
 interface OwnProps {
@@ -14,13 +14,13 @@ interface OwnProps {
 
 const NotatIndex: FunctionComponent<OwnProps> = ({ fagsak, oppdaterFagsak }) => {
   const intl = useIntl();
-  const { startRequest: lagreNotat } = restFagsakApiHooks.useRestApiRunner(FagsakApiKeys.LAGRE_NOTAT);
+  const { startRequest: lagreNotat } = useFagsakRestApiRunner(FagsakApiKeys.LAGRE_NOTAT);
   const lagre = useCallback(
     (params: { saksnummer: string; notat: string }) => lagreNotat(params).then(() => oppdaterFagsak()),
     [],
   );
 
-  const initFetch = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
+  const initFetch = useFagsakGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
   const { innloggetBruker } = initFetch;
 
   return (

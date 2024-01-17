@@ -1,7 +1,7 @@
 import { BehandlingType } from '@navikt/ft-kodeverk';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
-import { FagsakApiKeys, restFagsakApiHooks } from './fagsakContextApi';
+import { FagsakApiKeys, useFagsakRestApiRunner } from './fagsakContextApi';
 
 type ForhandsvisData = {
   behandlingUuid?: string;
@@ -25,15 +25,13 @@ export type ForhandsvisFunksjon = (
 ) => void;
 
 const useVisForhandsvisningAvMelding = (behandlingType?: string): ForhandsvisFunksjon => {
-  const { startRequest: forhandsvisTilbakekrevingHenleggelse } = restFagsakApiHooks.useRestApiRunner(
+  const { startRequest: forhandsvisTilbakekrevingHenleggelse } = useFagsakRestApiRunner(
     FagsakApiKeys.PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE,
   );
-  const { startRequest: forhandsvisTilbakekreving } = restFagsakApiHooks.useRestApiRunner(
+  const { startRequest: forhandsvisTilbakekreving } = useFagsakRestApiRunner(
     FagsakApiKeys.PREVIEW_MESSAGE_TILBAKEKREVING,
   );
-  const { startRequest: forhandsvisMelding } = restFagsakApiHooks.useRestApiRunner(
-    FagsakApiKeys.PREVIEW_MESSAGE_FORMIDLING,
-  );
+  const { startRequest: forhandsvisMelding } = useFagsakRestApiRunner(FagsakApiKeys.PREVIEW_MESSAGE_FORMIDLING);
 
   const erTilbakekreving =
     BehandlingType.TILBAKEKREVING === behandlingType || BehandlingType.TILBAKEKREVING_REVURDERING === behandlingType;

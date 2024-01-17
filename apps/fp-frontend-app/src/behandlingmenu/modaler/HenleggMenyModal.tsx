@@ -5,7 +5,7 @@ import { BehandlingAppKontekst } from '@navikt/fp-types';
 import { MenyHenleggIndex } from '@navikt/fp-sak-meny-henlegg';
 
 import useVisForhandsvisningAvMelding from '../../data/useVisForhandsvisningAvMelding';
-import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
+import { FagsakApiKeys, useFagsakGlobalStateRestApiData } from '../../data/fagsakContextApi';
 import MenyKodeverk from '../MenyKodeverk';
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../../data/behandlingContextApi';
 
@@ -16,8 +16,8 @@ interface OwnProps {
 }
 
 const HenleggMenyModal: FunctionComponent<OwnProps> = ({ behandling, fagsakYtelseType, lukkModal }) => {
-  const alleFpSakKodeverk = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK);
-  const alleFpTilbakeKodeverk = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK_FPTILBAKE);
+  const alleFpSakKodeverk = useFagsakGlobalStateRestApiData(FagsakApiKeys.KODEVERK);
+  const alleFpTilbakeKodeverk = useFagsakGlobalStateRestApiData(FagsakApiKeys.KODEVERK_FPTILBAKE);
   const menyKodeverk = new MenyKodeverk(behandling?.type)
     .medFpSakKodeverk(alleFpSakKodeverk)
     .medFpTilbakeKodeverk(alleFpTilbakeKodeverk);

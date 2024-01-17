@@ -8,7 +8,7 @@ import { ForbiddenPage, UnauthorizedPage } from '@navikt/ft-sak-infosider';
 import { useRestApiError } from '@navikt/fp-rest-api-hooks';
 import { EventType } from '@navikt/fp-rest-api';
 
-import { FagsakApiKeys, restFagsakApiHooks } from '../data/fagsakContextApi';
+import { FagsakApiKeys, useFagsakGlobalStateRestApiData } from '../data/fagsakContextApi';
 import ErrorBoundary from './ErrorBoundary';
 import AppConfigResolver from './AppConfigResolver';
 import Home from './components/Home';
@@ -41,7 +41,7 @@ const AppIndex: FunctionComponent = () => {
   const [headerHeight, setHeaderHeight] = useState(0);
   const [crashMessage, setCrashMessage] = useState<string>();
 
-  const initFetch = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
+  const initFetch = useFagsakGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
   const navAnsatt = initFetch?.innloggetBruker;
 
   const location = useLocation();
@@ -87,7 +87,9 @@ const AppIndex: FunctionComponent = () => {
             />
             {shouldRenderHome && <Home headerHeight={headerHeight} navAnsatt={navAnsatt} />}
             {forbiddenErrors.length > 0 && <ForbiddenPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />}
-            {unauthorizedErrors.length > 0 && <UnauthorizedPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />}
+            {unauthorizedErrors.length > 0 && (
+              <UnauthorizedPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />
+            )}
           </>
         </AppConfigResolver>
       </ErrorBoundary>

@@ -24,7 +24,7 @@ import AktoerIndex from '../../aktoer/AktoerIndex';
 import FagsakSearchIndex from '../../fagsakSearch/FagsakSearchIndex';
 
 import styles from './home.module.css';
-import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
+import { FagsakApiKeys, restFagsakApiHooks, useFagsakRestApiRunner } from '../../data/fagsakContextApi';
 
 interface OwnProps {
   headerHeight: number;
@@ -71,7 +71,7 @@ const Home: FunctionComponent<OwnProps> = ({ headerHeight, navAnsatt }) => {
     startRequest: søkInfotrygVedtak,
     state: infotrygdVedtakState,
     data: infotrygdVedtak,
-  } = restFagsakApiHooks.useRestApiRunner(FagsakApiKeys.SEARCH_UTBETALINGSDATA_IS15);
+  } = useFagsakRestApiRunner(FagsakApiKeys.SEARCH_UTBETALINGSDATA_IS15);
 
   return (
     <div className={styles.content} style={{ margin: `${headerHeight}px auto 0` }}>

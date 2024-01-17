@@ -17,9 +17,9 @@ const { BekreftAdopsjon } = composeStories(stories);
 describe('<AppIndex>', () => {
   it.skip('skal vise hjem-skjermbilde', async () => {
     const data = [
-      { key: FagsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: { navn: 'Peder' } } },
-      { key: FagsakApiKeys.KODEVERK.name, global: true, data: {} },
-      { key: FagsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: {} },
+      { key: FagsakApiKeys.INIT_FETCH, global: true, data: { innloggetBruker: { navn: 'Peder' } } },
+      { key: FagsakApiKeys.KODEVERK, global: true, data: {} },
+      { key: FagsakApiKeys.KODEVERK_FPTILBAKE, global: true, data: {} },
     ];
 
     render(
@@ -35,9 +35,9 @@ describe('<AppIndex>', () => {
 
   it.skip('skal vise query-feilmelding', async () => {
     const data = [
-      { key: FagsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: { navn: 'Peder' } } },
-      { key: FagsakApiKeys.KODEVERK.name, global: true, data: {} },
-      { key: FagsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: {} },
+      { key: FagsakApiKeys.INIT_FETCH, global: true, data: { innloggetBruker: { navn: 'Peder' } } },
+      { key: FagsakApiKeys.KODEVERK, global: true, data: {} },
+      { key: FagsakApiKeys.KODEVERK_FPTILBAKE, global: true, data: {} },
     ];
 
     render(
