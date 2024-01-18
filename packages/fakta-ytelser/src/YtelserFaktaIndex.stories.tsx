@@ -1,8 +1,6 @@
 import React from 'react';
 import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
-import { relatertYtelseType, relatertYtelseTilstand } from '@navikt/fp-kodeverk';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { InntektArbeidYtelse } from '@navikt/fp-types';
 
 import YtelserFaktaIndex from './YtelserFaktaIndex';
@@ -23,23 +21,23 @@ const defaultInntektArbeidYtelse = {
   ],
   relatertTilgrensendeYtelserForSoker: [
     {
-      relatertYtelseType: relatertYtelseType.SVANGERSKAPSPENGER,
+      relatertYtelseNavn: 'Svangerskapspenger',
       tilgrensendeYtelserListe: [
         {
           periodeFraDato: '2019-02-03',
           periodeTilDato: '2019-02-04',
-          status: relatertYtelseTilstand.APEN,
+          statusNavn: 'Åpen',
           saksNummer: '12',
         },
       ],
     },
     {
-      relatertYtelseType: relatertYtelseType.SYKEPENGER,
+      relatertYtelseNavn: 'Sykepenger',
       tilgrensendeYtelserListe: [
         {
           periodeFraDato: '2019-02-05',
           periodeTilDato: '2019-02-06',
-          status: relatertYtelseTilstand.LOPENDE,
+          statusNavn: 'Løpende',
           saksNummer: '13',
         },
       ],
@@ -58,7 +56,7 @@ export default {
 const Template: StoryFn<{
   inntektArbeidYtelse: InntektArbeidYtelse;
 }> = ({ inntektArbeidYtelse }) => (
-  <YtelserFaktaIndex inntektArbeidYtelse={inntektArbeidYtelse} alleKodeverk={alleKodeverk as any} />
+  <YtelserFaktaIndex inntektArbeidYtelse={inntektArbeidYtelse} />
 );
 
 export const YtelserForHovedsøker = Template.bind({});
@@ -72,12 +70,12 @@ YtelserForHovedsøkerOgAnnenPart.args = {
     ...defaultInntektArbeidYtelse,
     relatertTilgrensendeYtelserForAnnenForelder: [
       {
-        relatertYtelseType: relatertYtelseType.DAGPENGER,
+        relatertYtelseNavn: 'Dagpenger',
         tilgrensendeYtelserListe: [
           {
             periodeFraDato: '2020-02-03',
             periodeTilDato: '2020-02-04',
-            status: relatertYtelseTilstand.AVSLUTTET,
+            statusNavn: 'Avsluttet',
             saksNummer: '123',
           },
         ],
@@ -91,7 +89,7 @@ UtenTilgrensedeYtelser.args = {
   inntektArbeidYtelse: {
     relatertTilgrensendeYtelserForSoker: [
       {
-        relatertYtelseType: relatertYtelseType.SVANGERSKAPSPENGER,
+        relatertYtelseNavn: 'Svangerskapspenger',
         tilgrensendeYtelserListe: [],
       },
     ],

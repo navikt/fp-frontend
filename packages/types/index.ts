@@ -57,7 +57,6 @@ export type { default as Dokument } from './src/dokumentTsType';
 export type { default as FaktaArbeidsforhold } from './src/faktaArbeidsforholdTsType';
 export type {
   default as InntektArbeidYtelse,
-  IAYInntektsmelding,
   RelatertTilgrensedYtelse,
 } from './src/inntektArbeidYtelseTsType';
 export type { default as KodeverkMedNavn } from './src/kodeverkMedNavnTsType';

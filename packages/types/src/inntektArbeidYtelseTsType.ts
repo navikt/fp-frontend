@@ -1,16 +1,11 @@
 export type RelatertTilgrensedYtelse = Readonly<{
-  relatertYtelseType: string;
+  relatertYtelseNavn: string;
   tilgrensendeYtelserListe: {
     periodeTilDato: string;
     periodeFraDato: string;
-    status: string;
+    statusNavn: string;
     saksNummer?: string;
   }[];
-}>;
-
-export type IAYInntektsmelding = Readonly<{
-  arbeidsgiverReferanse: string;
-  arbeidsgiverStartdato?: string;
 }>;
 
 type InntektArbeidYtelse = Readonly<{

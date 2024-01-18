@@ -15,8 +15,6 @@ enum KodeverkType {
   OVERFOERING_AARSAK_TYPE = 'OverføringÅrsak',
   PERSONSTATUS_TYPE = 'PersonstatusType',
   FAGSAK_STATUS = 'FagsakStatus',
-  RELATERT_YTELSE_TILSTAND = 'RelatertYtelseTilstand',
-  RELATERT_YTELSE_TYPE = 'RelatertYtelseType',
   FAGSAK_YTELSE = 'FagsakYtelseType',
   FORELDRE_TYPE = 'ForeldreType',
   FAMILIE_HENDELSE_TYPE = 'FamilieHendelseType',

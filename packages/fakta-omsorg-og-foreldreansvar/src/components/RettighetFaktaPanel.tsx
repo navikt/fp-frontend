@@ -2,9 +2,9 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { BodyShort } from '@navikt/ds-react';
 
-import { AksjonspunktCode, relatertYtelseTilstand, KodeverkType } from '@navikt/fp-kodeverk';
+import { AksjonspunktCode, KodeverkType } from '@navikt/fp-kodeverk';
 import { DateLabel, VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
-import { KodeverkMedNavn, RelatertTilgrensedYtelse, Soknad } from '@navikt/fp-types';
+import { RelatertTilgrensedYtelse, Soknad } from '@navikt/fp-types';
 
 import { useFormContext } from 'react-hook-form';
 import styles from './rettighetFaktaPanel.module.css';
@@ -12,7 +12,7 @@ import styles from './rettighetFaktaPanel.module.css';
 const getLopendeOrAvsluttetYtelser = (
   ytelse: RelatertTilgrensedYtelse,
 ): RelatertTilgrensedYtelse['tilgrensendeYtelserListe'] =>
-  ytelse.tilgrensendeYtelserListe.filter(y => y.status !== relatertYtelseTilstand.APEN);
+  ytelse.tilgrensendeYtelserListe.filter(y => y.statusNavn !== 'Åpen');
 
 export type FormValues = {
   ytelser: RelatertTilgrensedYtelse[];
@@ -20,7 +20,6 @@ export type FormValues = {
 };
 
 interface PureOwnProps {
-  relatertYtelseTypes: KodeverkMedNavn[];
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
 }
 
@@ -36,7 +35,6 @@ interface StaticFunctions {
  * RettighetFaktaPanel
  */
 const RettighetFaktaPanel: FunctionComponent<PureOwnProps> & StaticFunctions = ({
-  relatertYtelseTypes,
   alleMerknaderFraBeslutter,
 }) => {
   const intl = useIntl();
@@ -58,11 +56,11 @@ const RettighetFaktaPanel: FunctionComponent<PureOwnProps> & StaticFunctions = (
       >
         {ytelser.map(ytelse =>
           getLopendeOrAvsluttetYtelser(ytelse).map(y => (
-            <div className={styles.wrapper} key={`${ytelse.relatertYtelseType}-${y.periodeFraDato}`}>
+            <div className={styles.wrapper} key={`${ytelse.relatertYtelseNavn}-${y.periodeFraDato}`}>
               <BodyShort size="small" className={styles.iverksatt}>
                 <FormattedMessage
                   id="OmsorgOgForeldreansvarFaktaForm.YtelseIverksatt"
-                  values={{ ytelseType: relatertYtelseTypes.find(r => r.kode === ytelse.relatertYtelseType)?.navn }}
+                  values={{ ytelseType: ytelse.relatertYtelseNavn }}
                 />
                 <DateLabel dateString={y.periodeFraDato} />
               </BodyShort>

@@ -1,10 +1,9 @@
 {
   "relatertTilgrensendeYtelserForSoker": [
     {
-      "relatertYtelseType": "FORELDREPENGER",
+      "relatertYtelseNavn": "Foreldrepenger",
       "tilgrensendeYtelserListe": [
         {
-          "relatertYtelseType": "FORELDREPENGER",
           "periodeFraDato": "2023-06-09",
           "periodeTilDato": "2023-06-09",
           "status": "UBEH",
@@ -13,14 +12,13 @@
       ]
     },
     {
-      "relatertYtelseType": "ENGANGSSTØNAD",
+      "relatertYtelseNavn": "Engangsstønad",
       "tilgrensendeYtelserListe": []
     },
     {
-      "relatertYtelseType": "SYKEPENGER",
+      "relatertYtelseNavn": "Sykepenger",
       "tilgrensendeYtelserListe": [
         {
-          "relatertYtelseType": "SYKEPENGER",
           "periodeFraDato": "2022-09-09",
           "periodeTilDato": "2023-06-09",
           "status": "AVSLUTTET",
@@ -29,10 +27,9 @@
       ]
     },
     {
-      "relatertYtelseType": "DAGPENGER",
+      "relatertYtelseNavn": "Dagpenger",
       "tilgrensendeYtelserListe": [
         {
-          "relatertYtelseType": "DAGPENGER",
           "periodeFraDato": "2022-06-09",
           "periodeTilDato": "2023-03-17",
           "status": "LØPENDE",
@@ -41,51 +38,51 @@
       ]
     },
     {
-      "relatertYtelseType": "ARBEIDSAVKLARINGSPENGER",
+      "relatertYtelseNavn": "Arbeidsavklaringspenger",
       "tilgrensendeYtelserListe": []
     },
     {
-      "relatertYtelseType": "SVANGERSKAPSPENGER",
+      "relatertYtelseNavn": "Svangerskapspenger",
       "tilgrensendeYtelserListe": []
     },
     {
-      "relatertYtelseType": "OMP",
+      "relatertYtelseNavn": "Omsorgspenger",
       "tilgrensendeYtelserListe": []
     },
     {
-      "relatertYtelseType": "OLP",
+      "relatertYtelseNavn": "Opplæringspenger",
       "tilgrensendeYtelserListe": []
     },
     {
-      "relatertYtelseType": "PSB",
+      "relatertYtelseNavn": "Pleiepenger sykt barm",
       "tilgrensendeYtelserListe": []
     },
     {
-      "relatertYtelseType": "PPN",
+      "relatertYtelseNavn": "Pleiepenger nærstående",
       "tilgrensendeYtelserListe": []
     },
     {
-      "relatertYtelseType": "FRISINN",
+      "relatertYtelseNavn": "Frisinn",
       "tilgrensendeYtelserListe": []
     }
   ],
   "relatertTilgrensendeYtelserForAnnenForelder": [
     {
-      "relatertYtelseType": "FORELDREPENGER",
+      "relatertYtelseNavn": "Foreldrepenger",
       "tilgrensendeYtelserListe": []
     },
     {
-      "relatertYtelseType": "ENGANGSSTØNAD",
+      "relatertYtelseNavn": "Engangsstønad",
       "tilgrensendeYtelserListe": []
     }
   ],
   "innvilgetRelatertTilgrensendeYtelserForAnnenForelder": [
     {
-      "relatertYtelseType": "FORELDREPENGER",
+      "relatertYtelseNavn": "Foreldrepenger",
       "tilgrensendeYtelserListe": []
     },
     {
-      "relatertYtelseType": "ENGANGSSTØNAD",
+      "relatertYtelseNavn": "Engangsstønad",
       "tilgrensendeYtelserListe": []
     }
   ]

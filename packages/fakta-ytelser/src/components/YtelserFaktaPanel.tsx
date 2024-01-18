@@ -2,21 +2,17 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Heading } from '@navikt/ds-react';
 
-import { InntektArbeidYtelse, KodeverkMedNavn } from '@navikt/fp-types';
+import { InntektArbeidYtelse } from '@navikt/fp-types';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import PersonYtelserTable from './PersonYtelserTable';
 
 interface OwnProps {
   inntektArbeidYtelse: InntektArbeidYtelse;
-  relatertYtelseTyper: KodeverkMedNavn[];
-  relatertYtelseStatus: KodeverkMedNavn[];
 }
 
 const YtelserFaktaPanel: FunctionComponent<OwnProps> = ({
   inntektArbeidYtelse,
-  relatertYtelseTyper,
-  relatertYtelseStatus,
 }) => (
   <>
     <Heading size="small">
@@ -25,8 +21,6 @@ const YtelserFaktaPanel: FunctionComponent<OwnProps> = ({
     <VerticalSpacer eightPx />
     <PersonYtelserTable
       ytelser={inntektArbeidYtelse.relatertTilgrensendeYtelserForSoker}
-      relatertYtelseTyper={relatertYtelseTyper}
-      relatertYtelseStatus={relatertYtelseStatus}
     />
     {inntektArbeidYtelse.relatertTilgrensendeYtelserForAnnenForelder &&
       inntektArbeidYtelse.relatertTilgrensendeYtelserForAnnenForelder.length > 0 && (
@@ -38,8 +32,6 @@ const YtelserFaktaPanel: FunctionComponent<OwnProps> = ({
           <VerticalSpacer eightPx />
           <PersonYtelserTable
             ytelser={inntektArbeidYtelse.relatertTilgrensendeYtelserForAnnenForelder}
-            relatertYtelseTyper={relatertYtelseTyper}
-            relatertYtelseStatus={relatertYtelseStatus}
           />
         </>
       )}

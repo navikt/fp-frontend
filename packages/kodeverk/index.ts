@@ -57,8 +57,6 @@ export { default as periodeResultatType } from './src/periodeResultatType';
 export { default as personstatusType } from './src/personstatusType';
 export { default as region } from './src/region';
 export { default as relasjonsRolleType } from './src/relasjonsRolleType';
-export { default as relatertYtelseType } from './src/relatertYtelseType';
-export { default as relatertYtelseTilstand } from './src/relatertYtelseTilstand';
 export { default as sammenligningType } from './src/sammenligningType';
 export { default as sivilstandType } from './src/sivilstandType';
 export { default as soknadType } from './src/soknadType';
