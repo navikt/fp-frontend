@@ -1,7 +1,6 @@
 import React from 'react';
 import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { InntektArbeidYtelse } from '@navikt/fp-types';
 
 import YtelserFaktaIndex from './YtelserFaktaIndex';

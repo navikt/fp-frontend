@@ -4,7 +4,7 @@ import { BodyShort } from '@navikt/ds-react';
 
 import { AksjonspunktCode, KodeverkType } from '@navikt/fp-kodeverk';
 import { DateLabel, VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
-import { KodeverkMedNavn, RelatertTilgrensedYtelse, Soknad } from '@navikt/fp-types';
+import { RelatertTilgrensedYtelse, Soknad } from '@navikt/fp-types';
 
 import { useFormContext } from 'react-hook-form';
 import styles from './rettighetFaktaPanel.module.css';
