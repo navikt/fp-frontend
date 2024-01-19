@@ -52,10 +52,7 @@ export default defineConfig({
   build: {
     sourcemap: true,
     rollupOptions: {
-      plugins: [sourcemaps()],
-      output: {
-        sourcemap: false,
-      },
+      plugins: [sourcemaps({ exclude: /@sentry/ })],
     },
   },
   test: {
