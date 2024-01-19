@@ -1,14 +1,7 @@
 import React, { useCallback, useState, FunctionComponent, ReactElement, useEffect, useMemo } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
-import { Alert, Button, Heading } from '@navikt/ds-react';
-import {
-  AksjonspunktHelpTextHTML,
-  FlexColumn,
-  FlexContainer,
-  FlexRow,
-  OverstyringKnapp,
-  VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
+import { Alert, Button, HStack, Heading } from '@navikt/ds-react';
+import { AksjonspunktHelpTextHTML, OverstyringKnapp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import { UttakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -297,20 +290,14 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
 
   return (
     <>
-      <FlexContainer>
-        <FlexRow>
-          <FlexColumn>
-            <Heading size="small">
-              <FormattedMessage id="UttakPanel.Title" />
-            </Heading>
-          </FlexColumn>
-          {!isReadOnly && kanOverstyre && (!harÅpneAksjonspunkter || harOverstyrAp) && (
-            <FlexColumn>
-              <OverstyringKnapp onClick={toggleOverstyring} erOverstyrt={erOverstyrt} />
-            </FlexColumn>
-          )}
-        </FlexRow>
-      </FlexContainer>
+      <HStack gap="4">
+        <Heading size="small">
+          <FormattedMessage id="UttakPanel.Title" />
+        </Heading>
+        {!isReadOnly && kanOverstyre && (!harÅpneAksjonspunkter || harOverstyrAp) && (
+          <OverstyringKnapp onClick={toggleOverstyring} erOverstyrt={erOverstyrt} />
+        )}
+      </HStack>
       <VerticalSpacer twentyPx />
       {aksjonspunkter.length > 0 && harÅpneAksjonspunkter && (
         <>

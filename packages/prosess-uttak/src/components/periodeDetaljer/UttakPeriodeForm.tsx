@@ -1,10 +1,10 @@
 import React, { useCallback, ReactElement, FunctionComponent, useMemo, useEffect } from 'react';
-import { Alert, Button } from '@navikt/ds-react';
+import { Alert, Button, HStack } from '@navikt/ds-react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { Form, TextAreaField, RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, notDash, required } from '@navikt/ft-form-validators';
-import { ArrowBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { KodeverkType, oppholdArsakType, utsettelseArsakCodes, periodeResultatType } from '@navikt/fp-kodeverk';
 import {
@@ -316,6 +316,7 @@ const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
   const erOppfylt = formMethods.watch('erOppfylt');
   const graderingInnvilget = formMethods.watch('graderingInnvilget');
   const samtidigUttak = formMethods.watch('samtidigUttak');
+  const valgtInnvilgelsesÅrsak = formMethods.watch('periodeAarsak');
   const aktiviteter = formMethods.watch('aktiviteter');
   const førsteValgteStønadskonto = aktiviteter.length > 0 ? aktiviteter[0].stønadskontoType : undefined;
 
@@ -359,6 +360,8 @@ const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
         graderingInnvilget={graderingInnvilget}
         erSamtidigUttak={samtidigUttak}
         erTilknyttetStortinget={erTilknyttetStortinget}
+        erOppfylt={erOppfylt}
+        valgtInnvilgelsesÅrsak={valgtInnvilgelsesÅrsak}
       />
       {valgtPeriode.oppholdÅrsak === oppholdArsakType.UDEFINERT && (
         <UttakAktiviteterTabell
@@ -367,7 +370,7 @@ const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           aktiviteter={sorterteAktiviteter}
           erOppfylt={erOppfylt}
-          utsettelseType={valgtPeriode.utsettelseType}
+          valgtPeriode={valgtPeriode}
         />
       )}
       {erHovedsøkersPeriode && (
@@ -445,20 +448,14 @@ const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
               <VerticalSpacer sixteenPx />
             </>
           )}
-          <FlexContainer>
-            <FlexRow>
-              <FlexColumn>
-                <Button size="small" variant="primary" disabled={!formMethods.formState.isDirty}>
-                  <FormattedMessage id="UttakActivity.Oppdater" />
-                </Button>
-              </FlexColumn>
-              <FlexColumn>
-                <Button size="small" variant="secondary" onClick={lukkPeriodeVisning} type="button">
-                  <FormattedMessage id="UttakActivity.Avbryt" />
-                </Button>
-              </FlexColumn>
-            </FlexRow>
-          </FlexContainer>
+          <HStack gap="2">
+            <Button size="small" variant="primary" disabled={!formMethods.formState.isDirty}>
+              <FormattedMessage id="UttakActivity.Oppdater" />
+            </Button>
+            <Button size="small" variant="secondary" onClick={lukkPeriodeVisning} type="button">
+              <FormattedMessage id="UttakActivity.Avbryt" />
+            </Button>
+          </HStack>
         </>
       )}
     </Form>

@@ -1,8 +1,8 @@
 import React, { FunctionComponent, useMemo, useState, useCallback } from 'react';
 import { FormattedMessage, useIntl, IntlShape } from 'react-intl';
-import { Label, BodyShort } from '@navikt/ds-react';
+import { Label, BodyShort, HStack } from '@navikt/ds-react';
 
-import { FlexColumn, FlexContainer, FlexRow, Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
+import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 import { StonadskontoType, uttakArbeidType as uttakArbeidTypeKodeverk } from '@navikt/fp-kodeverk';
 import { AktivitetIdentifikator, AktivitetSaldo, ArbeidsgiverOpplysningerPerId, Stonadskonto } from '@navikt/fp-types';
 
@@ -125,20 +125,14 @@ const DisponibleStonadskontoerPanel: FunctionComponent<OwnProps> = ({
 
   return (
     <div className={styles.disponibeltUttak}>
-      <FlexContainer>
-        <FlexRow>
-          <FlexColumn>
-            <Label size="small">
-              <FormattedMessage id="TimeLineInfo.Stonadinfo.DisponibleStonadsdager" />
-            </Label>
-          </FlexColumn>
-          <FlexColumn>
-            <BodyShort size="small">
-              <FormattedMessage id="TimeLineInfo.Stonadinfo.Total" values={{ ukerVerdi: tilgjengeligeUker, b: bTag }} />
-            </BodyShort>
-          </FlexColumn>
-        </FlexRow>
-      </FlexContainer>
+      <HStack gap="4">
+        <Label size="small">
+          <FormattedMessage id="TimeLineInfo.Stonadinfo.DisponibleStonadsdager" />
+        </Label>
+        <BodyShort size="small">
+          <FormattedMessage id="TimeLineInfo.Stonadinfo.Total" values={{ ukerVerdi: tilgjengeligeUker, b: bTag }} />
+        </BodyShort>
+      </HStack>
       <div className={styles.tabs}>
         <ul role="tablist">
           {stønadskontoerMedNavn.map(konto => (

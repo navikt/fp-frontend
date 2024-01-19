@@ -2,9 +2,8 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import dayjs from 'dayjs';
-import { Detail, BodyShort, Modal, Button, Heading } from '@navikt/ds-react';
+import { Detail, BodyShort, Modal, Button, Heading, VStack, HStack } from '@navikt/ds-react';
 import { Datepicker, Form } from '@navikt/ft-form-hooks';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import { calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
@@ -63,32 +62,28 @@ const SplittPeriodeModal: FunctionComponent<OwnProps> = ({ fomDato, tomDato, sub
           </Heading>
         </Modal.Header>
         <Modal.Body>
-          <FlexContainer wrap>
-            <FlexRow wrap className={styles.marginTop}>
-              <FlexColumn>
-                <Detail>
-                  <FormattedMessage id="DelOppPeriodeModalImpl.Periode" />
-                </Detail>
-                <BodyShort size="small">
-                  {`${dayjs(fomDato.toString()).format(DDMMYYYY_DATE_FORMAT)} - ${dayjs(tomDato.toString()).format(
-                    DDMMYYYY_DATE_FORMAT,
-                  )}`}
-                </BodyShort>
-              </FlexColumn>
-            </FlexRow>
-            <FlexRow wrap className={styles.marginTop}>
-              <FlexColumn>
-                <Datepicker
-                  name="dato"
-                  label={<FormattedMessage id="DelOppPeriodeModalImpl.AngiTomDato" />}
-                  validate={[required, hasValidDate, validerInnenforIntervall(fomDato, tomDato, intl)]}
-                  defaultMonth={new Date(fomDato)}
-                  disabledDays={{ fromDate: dayjs(fomDato).toDate(), toDate: dayjs(tomDato).toDate() }}
-                />
-              </FlexColumn>
-              {dato && <FlexColumn className={styles.dager}>{numberOfDaysAndWeeks.formattedString}</FlexColumn>}
-            </FlexRow>
-          </FlexContainer>
+          <VStack gap="4">
+            <VStack gap="1">
+              <Detail>
+                <FormattedMessage id="DelOppPeriodeModalImpl.Periode" />
+              </Detail>
+              <BodyShort size="small">
+                {`${dayjs(fomDato.toString()).format(DDMMYYYY_DATE_FORMAT)} - ${dayjs(tomDato.toString()).format(
+                  DDMMYYYY_DATE_FORMAT,
+                )}`}
+              </BodyShort>
+            </VStack>
+            <HStack justify="space-between">
+              <Datepicker
+                name="dato"
+                label={<FormattedMessage id="DelOppPeriodeModalImpl.AngiTomDato" />}
+                validate={[required, hasValidDate, validerInnenforIntervall(fomDato, tomDato, intl)]}
+                defaultMonth={new Date(fomDato)}
+                disabledDays={{ fromDate: dayjs(fomDato).toDate(), toDate: dayjs(tomDato).toDate() }}
+              />
+              {dato && <div className={styles.dager}>{numberOfDaysAndWeeks.formattedString}</div>}
+            </HStack>
+          </VStack>
         </Modal.Body>
         <Modal.Footer>
           <Button size="small" variant="primary">
