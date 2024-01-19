@@ -3,7 +3,7 @@ import { MenyEndreBehandlendeEnhetIndex } from '@navikt/ft-sak-meny';
 import { BehandlingAppKontekst } from '@navikt/fp-types';
 
 import { FagsakApiKeys, useFagsakGlobalStateRestApiData } from '../../data/fagsakContextApi';
-import { BehandlingApiKeys, restBehandlingApiHooks } from '../../data/behandlingContextApi';
+import { BehandlingApiKeys, useBehandlingRestApiRunner } from '../../data/behandlingContextApi';
 
 interface OwnProps {
   behandling: BehandlingAppKontekst;
@@ -18,7 +18,7 @@ const EndreBehandlendeEnhetMenyModal: FunctionComponent<OwnProps> = ({
 }) => {
   const initFetchData = useFagsakGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
 
-  const { startRequest: nyBehandlendeEnhet } = restBehandlingApiHooks.useRestApiRunner(
+  const { startRequest: nyBehandlendeEnhet } = useBehandlingRestApiRunner(
     BehandlingApiKeys.BEHANDLING_NY_BEHANDLENDE_ENHET,
   );
 

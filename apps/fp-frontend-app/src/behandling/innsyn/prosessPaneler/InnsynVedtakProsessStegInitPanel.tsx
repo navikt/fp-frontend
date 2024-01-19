@@ -13,7 +13,7 @@ import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPane
 import IverksetterVedtakStatusModal from '../../felles/modaler/vedtak/IverksetterVedtakStatusModal';
 import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
 import useStandardProsessPanelProps from '../../felles/prosess/useStandardProsessPanelProps';
-import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
+import { BehandlingApiKeys, useBehandlingRestApiRunner } from '../../../data/behandlingContextApi';
 
 const getVedtakStatus = (behandling: Behandling): string => {
   const { aksjonspunkt, behandlingsresultat } = behandling;
@@ -89,9 +89,7 @@ const InnsynVedtakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPane
 
   const standardPanelProps = useStandardProsessPanelProps();
 
-  const { startRequest: forhandsvisMelding } = restBehandlingApiHooks.useRestApiRunner(
-    BehandlingApiKeys.PREVIEW_MESSAGE,
-  );
+  const { startRequest: forhandsvisMelding } = useBehandlingRestApiRunner(BehandlingApiKeys.PREVIEW_MESSAGE);
   const previewCallback = useCallback(
     hentForhandsvisCallback(forhandsvisMelding, fagsak, standardPanelProps.behandling),
     [standardPanelProps.behandling.versjon],

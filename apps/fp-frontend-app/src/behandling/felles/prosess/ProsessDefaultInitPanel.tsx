@@ -1,7 +1,6 @@
 import React, { ReactElement } from 'react';
 
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
-import { RestKey } from '@navikt/fp-rest-api';
 import { StandardProsessPanelProps } from '@navikt/fp-types';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 
@@ -10,7 +9,7 @@ import ProsessPanelInitProps from '../typer/prosessPanelInitProps';
 import useStandardProsessPanelProps from './useStandardProsessPanelProps';
 import useProsessMenyRegistrerer from './useProsessMenyRegistrerer';
 import ProsessPanelWrapper from './ProsessPanelWrapper';
-import { restBehandlingApiHooks } from '../../../data/behandlingContextApi';
+import { useBehandlingMultipleRestApi } from '../../../data/behandlingContextApi';
 
 export type OwnProps<PANEL_DATA> = {
   panelEndepunkter?: RestKey<any, any>[] | { key: RestKey<any, any>; params?: any }[];
@@ -68,14 +67,11 @@ const ProsessDefaultInitPanel = <PANEL_DATA,>({
     formatertePanelEndepunkter.length === 0 ||
     (status === vilkarUtfallType.IKKE_VURDERT && !harApentAksjonspunkt);
 
-  const { data: panelData, state: panelDataState } = restBehandlingApiHooks.useMultipleRestApi<PANEL_DATA, any>(
-    formatertePanelEndepunkter,
-    {
-      updateTriggers: [erPanelValgt, behandling.versjon, status, harApentAksjonspunkt],
-      suspendRequest: skalIkkeHenteData,
-      isCachingOn: true,
-    },
-  );
+  const { data: panelData, state: panelDataState } = useBehandlingMultipleRestApi(formatertePanelEndepunkter, {
+    updateTriggers: [erPanelValgt, behandling.versjon, status, harApentAksjonspunkt],
+    suspendRequest: skalIkkeHenteData,
+    isCachingOn: true,
+  });
 
   return (
     <ProsessPanelWrapper

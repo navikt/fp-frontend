@@ -3,7 +3,7 @@ import { MenyVergeIndex } from '@navikt/ft-sak-meny';
 import { VergeBehandlingmenyValg, Behandling, BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
 
 import { useLocation, useNavigate } from 'react-router-dom';
-import { BehandlingApiKeys, restBehandlingApiHooks } from '../../data/behandlingContextApi';
+import { BehandlingApiKeys, useBehandlingRestApiRunner } from '../../data/behandlingContextApi';
 import { getLocationWithDefaultProsessStegAndFakta, pathToBehandling } from '../../app/paths';
 
 interface OwnProps {
@@ -27,8 +27,8 @@ const VergeMenyModal: FunctionComponent<OwnProps> = ({ fagsak, behandling, setBe
     );
   };
 
-  const { startRequest: fjernVerge } = restBehandlingApiHooks.useRestApiRunner(BehandlingApiKeys.VERGE_FJERN);
-  const { startRequest: opprettVerge } = restBehandlingApiHooks.useRestApiRunner(BehandlingApiKeys.VERGE_OPPRETT);
+  const { startRequest: fjernVerge } = useBehandlingRestApiRunner(BehandlingApiKeys.VERGE_FJERN);
+  const { startRequest: opprettVerge } = useBehandlingRestApiRunner(BehandlingApiKeys.VERGE_OPPRETT);
 
   const fjernVergeFn =
     VergeBehandlingmenyValg.FJERN === vergeMenyvalg

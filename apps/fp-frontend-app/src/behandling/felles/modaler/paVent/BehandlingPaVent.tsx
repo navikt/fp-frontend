@@ -4,7 +4,7 @@ import { isAksjonspunktOpen } from '@navikt/ft-kodeverk';
 import { AlleKodeverk, AlleKodeverkTilbakekreving, Behandling } from '@navikt/fp-types';
 import { SettPaVentModalIndex, FormValues } from '@navikt/fp-modal-sett-pa-vent';
 import { AksjonspunktCode, KodeverkType } from '@navikt/fp-kodeverk';
-import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../../data/behandlingContextApi';
+import { BehandlingApiKeys, useBehandlingRestApiRunner } from '../../../../data/behandlingContextApi';
 
 interface BehandlingPaVentProps {
   behandling: Behandling;
@@ -24,7 +24,7 @@ const BehandlingPaVent: FunctionComponent<BehandlingPaVentProps> = ({
   const [skalViseModal, setVisModal] = useState(!skalIkkeViseModal && behandling.behandlingPaaVent);
   const skjulModal = useCallback(() => setVisModal(false), []);
 
-  const { startRequest: endrePaVent } = restBehandlingApiHooks.useRestApiRunner(BehandlingApiKeys.UPDATE_ON_HOLD);
+  const { startRequest: endrePaVent } = useBehandlingRestApiRunner(BehandlingApiKeys.UPDATE_ON_HOLD);
 
   useEffect(() => {
     if (!skalIkkeViseModal) {

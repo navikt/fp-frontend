@@ -9,7 +9,7 @@ import { KlageVurdering } from '@navikt/fp-types';
 
 import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
-import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
+import { BehandlingApiKeys, useBehandlingRestApiRunner } from '../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktCode.VURDERING_AV_FORMKRAV_KLAGE_NFP];
 
@@ -45,7 +45,7 @@ const FormKravFamOgPensjonProsessStegInitPanel: FunctionComponent<OwnProps & Pro
     [alleBehandlinger],
   );
 
-  const { startRequest: lagreFormkravVurdering } = restBehandlingApiHooks.useRestApiRunner(
+  const { startRequest: lagreFormkravVurdering } = useBehandlingRestApiRunner(
     BehandlingApiKeys.SAVE_FORMKRAV_VURDERING,
   );
 

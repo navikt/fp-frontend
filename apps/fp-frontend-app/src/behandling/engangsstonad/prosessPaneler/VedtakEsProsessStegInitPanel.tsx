@@ -29,7 +29,7 @@ import IverksetterVedtakStatusModal from '../../felles/modaler/vedtak/Iverksette
 import FatterVedtakStatusModal from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
 import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
 import useStandardProsessPanelProps from '../../felles/prosess/useStandardProsessPanelProps';
-import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
+import { BehandlingApiKeys, useBehandlingRestApiRunner } from '../../../data/behandlingContextApi';
 
 const hasOnlyClosedAps = (aksjonspunkter: Aksjonspunkt[], vedtakAksjonspunkter: Aksjonspunkt[]): boolean =>
   aksjonspunkter
@@ -170,9 +170,7 @@ const VedtakEsProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelIni
 
   const standardPanelProps = useStandardProsessPanelProps();
 
-  const { startRequest: forhandsvisMelding } = restBehandlingApiHooks.useRestApiRunner(
-    BehandlingApiKeys.PREVIEW_MESSAGE,
-  );
+  const { startRequest: forhandsvisMelding } = useBehandlingRestApiRunner(BehandlingApiKeys.PREVIEW_MESSAGE);
   const previewCallback = useCallback(
     getForhandsvisCallback(forhandsvisMelding, fagsak, standardPanelProps.behandling),
     [standardPanelProps.behandling.versjon],

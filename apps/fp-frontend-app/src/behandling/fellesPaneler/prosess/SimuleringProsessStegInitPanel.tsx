@@ -17,7 +17,11 @@ import useStandardProsessPanelProps from '../../felles/prosess/useStandardProses
 import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelMenyData from '../../felles/typer/prosessPanelMenyData';
 import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
-import { BehandlingApiKeys, requestBehandlingApi, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
+import {
+  BehandlingApiKeys,
+  requestBehandlingApi,
+  useBehandlingRestApiRunner,
+} from '../../../data/behandlingContextApi';
 
 const getForhandsvisFptilbakeCallback =
   (
@@ -57,7 +61,7 @@ const SimuleringProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelI
   arbeidsgiverOpplysningerPerId,
   ...props
 }) => {
-  const { startRequest: forhandsvisTilbakekrevingMelding } = restBehandlingApiHooks.useRestApiRunner(
+  const { startRequest: forhandsvisTilbakekrevingMelding } = useBehandlingRestApiRunner(
     BehandlingApiKeys.PREVIEW_TILBAKEKREVING_MESSAGE,
   );
 
@@ -80,10 +84,10 @@ const SimuleringProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelI
           d =>
             d.id === ProsessStegCode.VEDTAK && (d.status !== vilkarUtfallType.IKKE_VURDERT || d.harApentAksjonspunkt),
         );
-        return requestBehandlingApi.hasPath(BehandlingApiKeys.SIMULERING_RESULTAT.name) || !harVedtakspanel;
+        return requestBehandlingApi.hasPath(BehandlingApiKeys.SIMULERING_RESULTAT) || !harVedtakspanel;
       }}
       hentOverstyrtStatus={() =>
-        requestBehandlingApi.hasPath(BehandlingApiKeys.SIMULERING_RESULTAT.name)
+        requestBehandlingApi.hasPath(BehandlingApiKeys.SIMULERING_RESULTAT)
           ? vilkarUtfallType.OPPFYLT
           : vilkarUtfallType.IKKE_VURDERT
       }

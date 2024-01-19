@@ -45,7 +45,7 @@ const FeilutbetalingFaktaInitPanel: FunctionComponent<FaktaPanelInitProps & OwnP
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={FaktaPanelCode.FEILUTBETALING}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'TilbakekrevingFakta.FaktaFeilutbetaling' })}
-    skalPanelVisesIMeny={() => requestBehandlingApi.hasPath(BehandlingApiKeys.FEILUTBETALING_FAKTA.name)}
+    skalPanelVisesIMeny={() => requestBehandlingApi.hasPath(BehandlingApiKeys.FEILUTBETALING_FAKTA)}
     renderPanel={data => (
       <FeilutbetalingFaktaIndex
         fagsakYtelseTypeKode={fagsakYtelseTypeKode}

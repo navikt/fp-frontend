@@ -28,7 +28,7 @@ const UttakDokumentasjonFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> =
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={FaktaPanelCode.UTTAK_DOKUMENTASJON}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'UttakDokumentasjonFaktaInitPanel.FaktaUttakDokumentasjon' })}
-    skalPanelVisesIMeny={() => requestBehandlingApi.hasPath(BehandlingApiKeys.DOKUMENTASJON_VURDERING_BEHOV.name)}
+    skalPanelVisesIMeny={() => requestBehandlingApi.hasPath(BehandlingApiKeys.DOKUMENTASJON_VURDERING_BEHOV)}
     renderPanel={data => <UttakDokumentasjonFaktaIndex {...data} />}
   />
 );

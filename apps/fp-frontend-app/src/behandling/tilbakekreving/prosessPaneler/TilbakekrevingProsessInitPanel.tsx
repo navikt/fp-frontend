@@ -13,7 +13,7 @@ import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { Aksjonspunkt, AlleKodeverkTilbakekreving } from '@navikt/fp-types';
 import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
-import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
+import { BehandlingApiKeys, useBehandlingRestApiRunner } from '../../../data/behandlingContextApi';
 
 import '@navikt/ft-prosess-tilbakekreving/dist/style.css';
 
@@ -47,7 +47,7 @@ interface OwnProps {
 const TilbakekrevingProsessInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({ ...props }) => {
   const intl = useIntl();
 
-  const { startRequest: beregnBelop } = restBehandlingApiHooks.useRestApiRunner(BehandlingApiKeys.BEREGNE_BELØP);
+  const { startRequest: beregnBelop } = useBehandlingRestApiRunner(BehandlingApiKeys.BEREGNE_BELØP);
 
   return (
     <ProsessDefaultInitPanel<EndepunktPanelData>

@@ -1,6 +1,13 @@
 import { FormkravMellomlagretDataType } from '@navikt/fp-prosess-formkrav';
-import { RestApiConfigBuilder, RestKey, createRequestApi } from '@navikt/fp-rest-api';
-import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
+import { RestApiConfigBuilder, createRequestApi } from '@navikt/fp-rest-api';
+import {
+  RestApiOptions,
+  getUseGlobalStateRestApi,
+  getUseMultipleRestApi,
+  getUseRestApi,
+  getUseRestApiRunner,
+  useGlobalStateRestApiData,
+} from '@navikt/fp-rest-api-hooks';
 import {
   ArbeidOgInntektsmelding,
   Behandling,
@@ -67,96 +74,151 @@ type StonadskontoGittUttaksPerioderParams = {
   perioder: PeriodeSoker[];
 };
 
-export const BehandlingApiKeys = {
-  BEHANDLING: new RestKey<Behandling, { behandlingUuid: string }>('BEHANDLING'),
-  BEHANDLING_TILBAKE: new RestKey<Behandling, { behandlingUuid: string }>('BEHANDLING_TILBAKE'),
-  VERGE: new RestKey<Verge, void>('VERGE'),
-  BEREGNINGSGRUNNLAG: new RestKey<Beregningsgrunnlag, void>('BEREGNINGSGRUNNLAG'),
-  FERIEPENGEGRUNNLAG: new RestKey<Feriepengegrunnlag, void>('FERIEPENGEGRUNNLAG'),
-  FAMILIEHENDELSE: new RestKey<FamilieHendelseSamling, void>('FAMILIEHENDELSE'),
-  SOKNAD: new RestKey<Soknad, void>('SOKNAD'),
-  SOKNAD_ORIGINAL_BEHANDLING: new RestKey<Soknad, void>('SOKNAD_ORIGINAL_BEHANDLING'),
-  YTELSEFORDELING: new RestKey<Ytelsefordeling, void>('YTELSEFORDELING'),
-  OPPTJENING: new RestKey<Opptjening, void>('OPPTJENING'),
-  BEREGNINGRESULTAT_DAGYTELSE: new RestKey<{ 'beregningsresultat-dagytelse'?: BeregningsresultatDagytelse }, void>(
-    'BEREGNINGRESULTAT_DAGYTELSE',
-  ),
-  BEREGNINGSRESULTAT_DAGYTELSE_ORIGINAL_BEHANDLING: new RestKey<
+export enum BehandlingApiKeys {
+  BEHANDLING = 'BEHANDLING',
+  BEHANDLING_TILBAKE = 'BEHANDLING_TILBAKE',
+  VERGE = 'VERGE',
+  BEREGNINGSGRUNNLAG = 'BEREGNINGSGRUNNLAG',
+  FERIEPENGEGRUNNLAG = 'FERIEPENGEGRUNNLAG',
+  FAMILIEHENDELSE = 'FAMILIEHENDELSE',
+  SOKNAD = 'SOKNAD',
+  SOKNAD_ORIGINAL_BEHANDLING = 'SOKNAD_ORIGINAL_BEHANDLING',
+  YTELSEFORDELING = 'YTELSEFORDELING',
+  OPPTJENING = 'OPPTJENING',
+  BEREGNINGRESULTAT_DAGYTELSE = 'BEREGNINGRESULTAT_DAGYTELSE',
+  BEREGNINGSRESULTAT_DAGYTELSE_ORIGINAL_BEHANDLING = 'BEREGNINGSRESULTAT_DAGYTELSE_ORIGINAL_BEHANDLING',
+  FAMILIEHENDELSE_ORIGINAL_BEHANDLING = 'FAMILIEHENDELSE_ORIGINAL_BEHANDLING',
+  MEDLEMSKAP = 'MEDLEMSKAP',
+  INNTEKT_ARBEID_YTELSE = 'INNTEKT_ARBEID_YTELSE',
+  SIMULERING_RESULTAT = 'SIMULERING_RESULTAT',
+  TILBAKEKREVINGVALG = 'TILBAKEKREVINGVALG',
+  BEHANDLING_NY_BEHANDLENDE_ENHET = 'BEHANDLING_NY_BEHANDLENDE_ENHET',
+  HENLEGG_BEHANDLING = 'HENLEGG_BEHANDLING',
+  RESUME_BEHANDLING = 'RESUME_BEHANDLING',
+  BEHANDLING_ON_HOLD = 'BEHANDLING_ON_HOLD',
+  OPEN_BEHANDLING_FOR_CHANGES = 'OPEN_BEHANDLING_FOR_CHANGES',
+  UPDATE_ON_HOLD = 'UPDATE_ON_HOLD',
+  SAVE_AKSJONSPUNKT = 'SAVE_AKSJONSPUNKT',
+  SAVE_OVERSTYRT_AKSJONSPUNKT = 'SAVE_OVERSTYRT_AKSJONSPUNKT',
+  PREVIEW_MESSAGE = 'PREVIEW_MESSAGE',
+  PREVIEW_TILBAKEKREVING_MESSAGE = 'PREVIEW_TILBAKEKREVING_MESSAGE',
+  VERGE_OPPRETT = 'VERGE_OPPRETT',
+  VERGE_FJERN = 'VERGE_FJERN',
+  UTLAND_DOK_STATUS = 'UTLAND_DOK_STATUS',
+  ARBEIDSGIVERE_OVERSIKT = 'ARBEIDSGIVERE_OVERSIKT',
+  BEHANDLING_PERSONOVERSIKT = 'BEHANDLING_PERSONOVERSIKT',
+  ARBEID_OG_INNTEKT = 'ARBEID_OG_INNTEKT',
+  ARBEID_OG_INNTEKT_REGISTRER_ARBEIDSFORHOLD = 'ARBEID_OG_INNTEKT_REGISTRER_ARBEIDSFORHOLD',
+  ARBEID_OG_INNTEKT_LAGRE_VURDERING = 'ARBEID_OG_INNTEKT_LAGRE_VURDERING',
+  ARBEID_OG_INNTEKT_ÅPNE_FOR_NY_VURDERING = 'ARBEID_OG_INNTEKT_ÅPNE_FOR_NY_VURDERING',
+  INNSYN = 'INNSYN',
+  INNSYN_DOKUMENTER = 'INNSYN_DOKUMENTER',
+  KLAGE_VURDERING = 'KLAGE_VURDERING',
+  SAVE_KLAGE_VURDERING = 'SAVE_KLAGE_VURDERING',
+  SAVE_FORMKRAV_VURDERING = 'SAVE_FORMKRAV_VURDERING',
+  ANKE_VURDERING = 'ANKE_VURDERING',
+  SVANGERSKAPSPENGER_TILRETTELEGGING = 'SVANGERSKAPSPENGER_TILRETTELEGGING',
+  STONADSKONTOER_GITT_UTTAKSPERIODER = 'STONADSKONTOER_GITT_UTTAKSPERIODER',
+  FAKTA_ARBEIDSFORHOLD = 'FAKTA_ARBEIDSFORHOLD',
+  UTTAKSRESULTAT_PERIODER = 'UTTAKSRESULTAT_PERIODER',
+  UTTAK_STONADSKONTOER = 'UTTAK_STONADSKONTOER',
+  UTTAK_KONTROLLER_FAKTA_PERIODER_V2 = 'UTTAK_KONTROLLER_FAKTA_PERIODER_V2',
+  BEREGNINGSGRUNNLAG_BESTEBEREGNING = 'BEREGNINGSGRUNNLAG_BESTEBEREGNING',
+  DOKUMENTASJON_VURDERING_BEHOV = 'DOKUMENTASJON_VURDERING_BEHOV',
+  BEREGNINGRESULTAT_ENGANGSSTONAD = 'BEREGNINGRESULTAT_ENGANGSSTONAD',
+  BEREGNINGSRESULTAT_ENGANGSSTONAD_ORIGINAL_BEHANDLING = 'BEREGNINGSRESULTAT_ENGANGSSTONAD_ORIGINAL_BEHANDLING',
+  VEDTAKSBREV = 'VEDTAKSBREV',
+  BEREGNINGSRESULTAT = 'BEREGNINGSRESULTAT',
+  FEILUTBETALING_FAKTA = 'FEILUTBETALING_FAKTA',
+  FEILUTBETALING_AARSAK = 'FEILUTBETALING_AARSAK',
+  PERIODER_FORELDELSE = 'PERIODER_FORELDELSE',
+  VILKARVURDERINGSPERIODER = 'VILKARVURDERINGSPERIODER',
+  VILKARVURDERING = 'VILKARVURDERING',
+  BEREGNE_BELØP = 'BEREGNE_BELØP',
+  PREVIEW_VEDTAKSBREV = 'PREVIEW_VEDTAKSBREV',
+}
+
+type ApiParamsAndResponse = {
+  [BehandlingApiKeys.BEHANDLING]: [{ behandlingUuid: string }, Behandling];
+  [BehandlingApiKeys.BEHANDLING_TILBAKE]: [{ behandlingUuid: string }, Behandling];
+  [BehandlingApiKeys.VERGE]: [void, Verge];
+  [BehandlingApiKeys.BEREGNINGSGRUNNLAG]: [void, Beregningsgrunnlag];
+  [BehandlingApiKeys.FERIEPENGEGRUNNLAG]: [void, Feriepengegrunnlag];
+  [BehandlingApiKeys.FAMILIEHENDELSE]: [void, FamilieHendelseSamling];
+  [BehandlingApiKeys.SOKNAD]: [void, Soknad];
+  [BehandlingApiKeys.SOKNAD_ORIGINAL_BEHANDLING]: [void, Soknad];
+  [BehandlingApiKeys.YTELSEFORDELING]: [void, Ytelsefordeling];
+  [BehandlingApiKeys.OPPTJENING]: [void, Opptjening];
+  [BehandlingApiKeys.FAMILIEHENDELSE_ORIGINAL_BEHANDLING]: [void, FamilieHendelse];
+  [BehandlingApiKeys.BEREGNINGRESULTAT_DAGYTELSE]: [
+    void,
+    { 'beregningsresultat-dagytelse'?: BeregningsresultatDagytelse },
+  ];
+  [BehandlingApiKeys.BEREGNINGSRESULTAT_DAGYTELSE_ORIGINAL_BEHANDLING]: [
+    void,
     { 'beregningsresultat-dagytelse-original-behandling'?: BeregningsresultatDagytelse },
-    void
-  >('BEREGNINGSRESULTAT_DAGYTELSE_ORIGINAL_BEHANDLING'),
-  FAMILIEHENDELSE_ORIGINAL_BEHANDLING: new RestKey<FamilieHendelse, void>('FAMILIEHENDELSE_ORIGINAL_BEHANDLING'),
-  MEDLEMSKAP: new RestKey<Medlemskap, void>('MEDLEMSKAP'),
-  INNTEKT_ARBEID_YTELSE: new RestKey<InntektArbeidYtelse, void>('INNTEKT_ARBEID_YTELSE'),
-  SIMULERING_RESULTAT: new RestKey<SimuleringResultat, void>('SIMULERING_RESULTAT'),
-  TILBAKEKREVINGVALG: new RestKey<TilbakekrevingValg, void>('TILBAKEKREVINGVALG'),
-  BEHANDLING_NY_BEHANDLENDE_ENHET: new RestKey<void, NyBehandlendeEnhet>('BEHANDLING_NY_BEHANDLENDE_ENHET'),
-  HENLEGG_BEHANDLING: new RestKey<
+  ];
+  [BehandlingApiKeys.FAMILIEHENDELSE_ORIGINAL_BEHANDLING]: [void, FamilieHendelse];
+  [BehandlingApiKeys.MEDLEMSKAP]: [void, Medlemskap];
+  [BehandlingApiKeys.INNTEKT_ARBEID_YTELSE]: [void, InntektArbeidYtelse];
+  [BehandlingApiKeys.SIMULERING_RESULTAT]: [void, SimuleringResultat];
+  [BehandlingApiKeys.TILBAKEKREVINGVALG]: [void, TilbakekrevingValg];
+  [BehandlingApiKeys.BEHANDLING_NY_BEHANDLENDE_ENHET]: [NyBehandlendeEnhet, void];
+  [BehandlingApiKeys.HENLEGG_BEHANDLING]: [
+    { behandlingUuid: string; årsakKode: string; begrunnelse: string; behandlingVersjon: number },
     void,
-    { behandlingUuid: string; årsakKode: string; begrunnelse: string; behandlingVersjon: number }
-  >('HENLEGG_BEHANDLING'),
-  RESUME_BEHANDLING: new RestKey<Behandling, { behandlingUuid: string; behandlingVersjon: number }>(
-    'RESUME_BEHANDLING',
-  ),
-  BEHANDLING_ON_HOLD: new RestKey<
+  ];
+  [BehandlingApiKeys.RESUME_BEHANDLING]: [{ behandlingUuid: string; behandlingVersjon: number }, Behandling];
+  [BehandlingApiKeys.BEHANDLING_ON_HOLD]: [
+    { behandlingUuid: string; behandlingVersjon: number; frist: string; ventearsak: string },
     void,
-    { behandlingUuid: string; behandlingVersjon: number; frist: string; ventearsak: string }
-  >('BEHANDLING_ON_HOLD'),
-  OPEN_BEHANDLING_FOR_CHANGES: new RestKey<Behandling, { behandlingUuid: string; behandlingVersjon: number }>(
-    'OPEN_BEHANDLING_FOR_CHANGES',
-  ),
-  UPDATE_ON_HOLD: new RestKey<void, SettPaVentParams>('UPDATE_ON_HOLD'),
-  SAVE_AKSJONSPUNKT: new RestKey<Behandling, any>('SAVE_AKSJONSPUNKT'),
-  SAVE_OVERSTYRT_AKSJONSPUNKT: new RestKey<Behandling, any>('SAVE_OVERSTYRT_AKSJONSPUNKT'),
-  PREVIEW_MESSAGE: new RestKey<any, ForhåndsvisMeldingParams>('PREVIEW_MESSAGE'),
-  PREVIEW_TILBAKEKREVING_MESSAGE: new RestKey<Behandling, any>('PREVIEW_TILBAKEKREVING_MESSAGE'),
-  VERGE_OPPRETT: new RestKey<Behandling, any>('VERGE_OPPRETT'),
-  VERGE_FJERN: new RestKey<Behandling, any>('VERGE_FJERN'),
-  UTLAND_DOK_STATUS: new RestKey<{ dokStatus?: string }, void>('UTLAND_DOK_STATUS'),
-  ARBEIDSGIVERE_OVERSIKT: new RestKey<ArbeidsgiverOpplysningerWrapper, void>('ARBEIDSGIVERE_OVERSIKT'),
-  BEHANDLING_PERSONOVERSIKT: new RestKey<Personoversikt, void>('BEHANDLING_PERSONOVERSIKT'),
-  ARBEID_OG_INNTEKT: new RestKey<ArbeidOgInntektsmelding, void>('ARBEID_OG_INNTEKT'),
-  ARBEID_OG_INNTEKT_REGISTRER_ARBEIDSFORHOLD: new RestKey<void, ManueltArbeidsforhold>(
-    'ARBEID_OG_INNTEKT_REGISTRER_ARBEIDSFORHOLD',
-  ),
-  ARBEID_OG_INNTEKT_LAGRE_VURDERING: new RestKey<void, ManglendeInntektsmeldingVurdering>(
-    'ARBEID_OG_INNTEKT_LAGRE_VURDERING',
-  ),
-  ARBEID_OG_INNTEKT_ÅPNE_FOR_NY_VURDERING: new RestKey<void, { behandlingUuid: string; behandlingVersjon: number }>(
-    'ARBEID_OG_INNTEKT_ÅPNE_FOR_NY_VURDERING',
-  ),
-  INNSYN: new RestKey<Innsyn, void>('INNSYN'),
-  INNSYN_DOKUMENTER: new RestKey<Dokument[], void>('INNSYN_DOKUMENTER'),
-  KLAGE_VURDERING: new RestKey<KlageVurdering[], void>('KLAGE_VURDERING'),
-  SAVE_KLAGE_VURDERING: new RestKey<any, any>('SAVE_KLAGE_VURDERING'),
-  SAVE_FORMKRAV_VURDERING: new RestKey<void, FormkravMellomlagretDataType>('SAVE_FORMKRAV_VURDERING'),
-  ANKE_VURDERING: new RestKey<AnkeVurdering, void>('ANKE_VURDERING'),
-  SVANGERSKAPSPENGER_TILRETTELEGGING: new RestKey<FodselOgTilrettelegging, void>('SVANGERSKAPSPENGER_TILRETTELEGGING'),
-  STONADSKONTOER_GITT_UTTAKSPERIODER: new RestKey<void, StonadskontoGittUttaksPerioderParams>(
-    'STONADSKONTOER_GITT_UTTAKSPERIODER',
-  ),
-  FAKTA_ARBEIDSFORHOLD: new RestKey<FaktaArbeidsforhold[], void>('FAKTA_ARBEIDSFORHOLD'),
-  UTTAKSRESULTAT_PERIODER: new RestKey<UttaksresultatPeriode, void>('UTTAKSRESULTAT_PERIODER'),
-  UTTAK_STONADSKONTOER: new RestKey<UttakStonadskontoer, void>('UTTAK_STONADSKONTOER'),
-  UTTAK_KONTROLLER_FAKTA_PERIODER_V2: new RestKey<KontrollerFaktaPeriode[], void>('UTTAK_KONTROLLER_FAKTA_PERIODER_V2'),
-  BEREGNINGSGRUNNLAG_BESTEBEREGNING: new RestKey<UttakKontrollerAktivitetskrav[], void>(
-    'BEREGNINGSGRUNNLAG_BESTEBEREGNING',
-  ),
-  DOKUMENTASJON_VURDERING_BEHOV: new RestKey<DokumentasjonVurderingBehov[], void>('DOKUMENTASJON_VURDERING_BEHOV'),
-  BEREGNINGRESULTAT_ENGANGSSTONAD: new RestKey<BeregningsresultatEs, void>('BEREGNINGRESULTAT_ENGANGSSTONAD'),
-  BEREGNINGSRESULTAT_ENGANGSSTONAD_ORIGINAL_BEHANDLING: new RestKey<
+  ];
+  [BehandlingApiKeys.OPEN_BEHANDLING_FOR_CHANGES]: [{ behandlingUuid: string; behandlingVersjon: number }, Behandling];
+  [BehandlingApiKeys.UPDATE_ON_HOLD]: [SettPaVentParams, any];
+  [BehandlingApiKeys.SAVE_AKSJONSPUNKT]: [any, Behandling];
+  [BehandlingApiKeys.SAVE_OVERSTYRT_AKSJONSPUNKT]: [any, Behandling];
+  [BehandlingApiKeys.PREVIEW_MESSAGE]: [ForhåndsvisMeldingParams, any];
+  [BehandlingApiKeys.PREVIEW_TILBAKEKREVING_MESSAGE]: [any, Behandling];
+  [BehandlingApiKeys.VERGE_OPPRETT]: [any, Behandling];
+  [BehandlingApiKeys.VERGE_FJERN]: [any, Behandling];
+  [BehandlingApiKeys.UTLAND_DOK_STATUS]: [void, { dokStatus?: string }];
+  [BehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT]: [void, ArbeidsgiverOpplysningerWrapper];
+  [BehandlingApiKeys.BEHANDLING_PERSONOVERSIKT]: [void, Personoversikt];
+  [BehandlingApiKeys.ARBEID_OG_INNTEKT]: [void, ArbeidOgInntektsmelding];
+  [BehandlingApiKeys.ARBEID_OG_INNTEKT_REGISTRER_ARBEIDSFORHOLD]: [void, ManueltArbeidsforhold];
+  [BehandlingApiKeys.ARBEID_OG_INNTEKT_LAGRE_VURDERING]: [void, ManglendeInntektsmeldingVurdering];
+  [BehandlingApiKeys.ARBEID_OG_INNTEKT_ÅPNE_FOR_NY_VURDERING]: [
+    { behandlingUuid: string; behandlingVersjon: number },
+    void,
+  ];
+  [BehandlingApiKeys.INNSYN]: [void, Innsyn];
+  [BehandlingApiKeys.INNSYN_DOKUMENTER]: [void, Dokument[]];
+  [BehandlingApiKeys.KLAGE_VURDERING]: [void, KlageVurdering[]];
+  [BehandlingApiKeys.SAVE_KLAGE_VURDERING]: [any, any];
+  [BehandlingApiKeys.SAVE_FORMKRAV_VURDERING]: [FormkravMellomlagretDataType, void];
+  [BehandlingApiKeys.ANKE_VURDERING]: [void, AnkeVurdering];
+  [BehandlingApiKeys.SVANGERSKAPSPENGER_TILRETTELEGGING]: [void, FodselOgTilrettelegging];
+  [BehandlingApiKeys.STONADSKONTOER_GITT_UTTAKSPERIODER]: [StonadskontoGittUttaksPerioderParams, void];
+  [BehandlingApiKeys.FAKTA_ARBEIDSFORHOLD]: [void, FaktaArbeidsforhold[]];
+  [BehandlingApiKeys.UTTAKSRESULTAT_PERIODER]: [void, UttaksresultatPeriode];
+  [BehandlingApiKeys.UTTAK_STONADSKONTOER]: [void, UttakStonadskontoer];
+  [BehandlingApiKeys.UTTAK_KONTROLLER_FAKTA_PERIODER_V2]: [void, KontrollerFaktaPeriode[]];
+  [BehandlingApiKeys.BEREGNINGSGRUNNLAG_BESTEBEREGNING]: [void, UttakKontrollerAktivitetskrav[]];
+  [BehandlingApiKeys.DOKUMENTASJON_VURDERING_BEHOV]: [void, DokumentasjonVurderingBehov[]];
+  [BehandlingApiKeys.BEREGNINGRESULTAT_ENGANGSSTONAD]: [void, BeregningsresultatEs];
+  [BehandlingApiKeys.BEREGNINGSRESULTAT_ENGANGSSTONAD_ORIGINAL_BEHANDLING]: [
+    void,
     { 'beregningsresultat-engangsstonad'?: BeregningsresultatEs },
-    void
-  >('BEREGNINGSRESULTAT_ORIGINAL_BEHANDLING'),
-  VEDTAKSBREV: new RestKey<Vedtaksbrev, void>('VEDTAKSBREV'),
-  BEREGNINGSRESULTAT: new RestKey<BeregningsresultatTilbakekreving, void>('BEREGNINGSRESULTAT'),
-  FEILUTBETALING_FAKTA: new RestKey<FeilutbetalingFakta, void>('FEILUTBETALING_FAKTA'),
-  FEILUTBETALING_AARSAK: new RestKey<FeilutbetalingAarsak[], void>('FEILUTBETALING_AARSAK'),
-  PERIODER_FORELDELSE: new RestKey<FeilutbetalingPerioderWrapper, void>('PERIODER_FORELDELSE'),
-  VILKARVURDERINGSPERIODER: new RestKey<DetaljerteFeilutbetalingsperioder, void>('VILKARVURDERINGSPERIODER'),
-  VILKARVURDERING: new RestKey<VilkarsVurdertePerioderWrapper, void>('VILKARVURDERING'),
-  BEREGNE_BELØP: new RestKey<any, any>('BEREGNE_BELØP'),
-  PREVIEW_VEDTAKSBREV: new RestKey<any, any>('PREVIEW_VEDTAKSBREV'),
+  ];
+  [BehandlingApiKeys.VEDTAKSBREV]: [void, Vedtaksbrev];
+  [BehandlingApiKeys.BEREGNINGSRESULTAT]: [void, BeregningsresultatTilbakekreving];
+  [BehandlingApiKeys.FEILUTBETALING_FAKTA]: [void, FeilutbetalingFakta];
+  [BehandlingApiKeys.FEILUTBETALING_AARSAK]: [void, FeilutbetalingAarsak[]];
+  [BehandlingApiKeys.PERIODER_FORELDELSE]: [void, FeilutbetalingPerioderWrapper];
+  [BehandlingApiKeys.VILKARVURDERINGSPERIODER]: [void, DetaljerteFeilutbetalingsperioder];
+  [BehandlingApiKeys.VILKARVURDERING]: [void, VilkarsVurdertePerioderWrapper];
+  [BehandlingApiKeys.BEREGNE_BELØP]: [any, any];
+  [BehandlingApiKeys.PREVIEW_VEDTAKSBREV]: [any, any];
 };
 
 export const behandlingEndepunkter = new RestApiConfigBuilder()
@@ -265,5 +327,118 @@ export const behandlingEndepunkter = new RestApiConfigBuilder()
   .build();
 
 export const requestBehandlingApi = createRequestApi(behandlingEndepunkter);
+const useRestApi = getUseRestApi(requestBehandlingApi);
+const useRestApiRunner = getUseRestApiRunner(requestBehandlingApi);
+const useGlobalStateRestApi = getUseGlobalStateRestApi(requestBehandlingApi);
+const useMultipleRestApi = getUseMultipleRestApi(requestBehandlingApi);
 
-export const restBehandlingApiHooks = RestApiHooks.initHooks(requestBehandlingApi);
+export const useBehandlingRestApi = <TYPE extends BehandlingApiKeys>(
+  key: TYPE,
+  params?: ApiParamsAndResponse[TYPE][0],
+  options?: RestApiOptions,
+) => useRestApi<ApiParamsAndResponse[TYPE][1], ApiParamsAndResponse[TYPE][0]>(key, params, options);
+
+export const useBehandlingRestApiRunner = <TYPE extends BehandlingApiKeys>(key: TYPE) =>
+  useRestApiRunner<ApiParamsAndResponse[TYPE][1], ApiParamsAndResponse[TYPE][0]>(key);
+
+export const useBehandlingGlobalStateRestApi = <TYPE extends BehandlingApiKeys>(
+  key: TYPE,
+  params?: ApiParamsAndResponse[TYPE][0],
+  options?: RestApiOptions,
+) => useGlobalStateRestApi<ApiParamsAndResponse[TYPE][1], ApiParamsAndResponse[TYPE][0]>(key, params, options);
+
+export const useBehandlingGlobalStateRestApiData = <TYPE extends BehandlingApiKeys>(key: TYPE) =>
+  useGlobalStateRestApiData<ApiParamsAndResponse[TYPE][1]>(key);
+
+type Camelize<T extends string> = T extends `${infer A}_${infer B}` ? `${A}${Camelize<Capitalize<B>>}` : T;
+
+type CamelizeKeys<T extends object> = {
+  [key in keyof T as key extends string ? Camelize<Lowercase<key>> : key]: T[key];
+};
+
+type CreateMutable<Type extends BehandlingApiKeys> = {
+  [Property in keyof Type as Capitalize<Property & string>]: ApiParamsAndResponse[Type][1];
+};
+
+export const useBehandlingMultipleRestApi = <TYPE extends BehandlingApiKeys>(
+  endpointData: {
+    keyString: TYPE;
+    params?: ApiParamsAndResponse[TYPE][0];
+  }[],
+  options?: RestApiOptions,
+) => {
+  // Må utleda typane basert på TYPE og string til TYPE {
+  //    arbeidsgivereOversikt: ArbeidsgiverOpplysningerWrapper;
+  //    behandlingPersonoversikt: Personoversikt;
+  //  }
+
+  type Jau = CreateMutable<(typeof endpointData)[number]['keyString']>;
+
+  type TE = (typeof endpointData)[number]['keyString'];
+  type InputType = Record<TE, ApiParamsAndResponse[TE][1]>;
+
+  return useMultipleRestApi<Jau, ApiParamsAndResponse[TYPE][0]>(endpointData, options);
+};
+
+export const useTest = <TYPE extends BehandlingApiKeys>(
+  keyString: TYPE,
+  params?: ApiParamsAndResponse[TYPE][0],
+  options?: RestApiOptions,
+) => {
+  // Må utleda typane basert på TYPE og string til TYPE {
+  //    arbeidsgivereOversikt: ArbeidsgiverOpplysningerWrapper;
+  //    behandlingPersonoversikt: Personoversikt;
+  //  }
+  type InputType = Record<typeof keyString, ApiParamsAndResponse[TYPE][1]>;
+  type B = CamelizeKeys<InputType>;
+
+  return useMultipleRestApi<B, ApiParamsAndResponse[TYPE][0]>(endpointData, options);
+};
+
+const endepunkterSomSkalHentesEnGang = [
+  { key: BehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT },
+  { key: BehandlingApiKeys.BEHANDLING_PERSONOVERSIKT },
+];
+const test = () => {
+  type jau = Camelize<Lowercase<'TEST_ARBEIDSGIVERE_OVERSIKT'>>;
+  const t = useBehandlingMultipleRestApi(endepunkterSomSkalHentesEnGang);
+
+  type A = { TEST_ARBEIDSGIVERE_OVERSIKT: boolean };
+  type B = CamelizeKeys<A>; // type A = { "im_a_snake": boolean }
+
+  const adfs = useTest(BehandlingApiKeys.ARBEID_OG_INNTEKT);
+  adfs.data?.arbeidOgInntekt;
+
+  const tsdfs = useBehandlingMultipleRestApi([
+    { keyString: BehandlingApiKeys.VERGE },
+    { keyString: BehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT },
+  ]);
+  tsdfs.data;
+  console.log(t);
+};
+
+type TestingMapped<Type> = {
+  [Property in keyof Type]: Type;
+};
+
+type ArrayElement<A> = A extends readonly (infer T)[] ? T : never;
+
+type CreateMutableTest<Type extends BehandlingApiKeys> = {
+  [Property in keyof Type as Capitalize<Property & string>]: ApiParamsAndResponse[Type][1];
+};
+
+const testadsadf = <T>(): T => null as T;
+
+const testsd = () => {
+  const arrayOfO = [{ keyString: BehandlingApiKeys.VERGE }, { keyString: BehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT }];
+  const arrayOfOReformat = arrayOfO.map(f => f.keyString);
+
+  type TE = (typeof arrayOfO)[number]['keyString'];
+
+  type JAUSE = BehandlingApiKeys.VERGE | BehandlingApiKeys.ANKE_VURDERING;
+
+  type InputType = Record<JAUSE, ApiParamsAndResponse[JAUSE][1]>;
+
+  type Jau = CreateMutableTest<JAUSE>;
+  const t = testadsadf<InputType>();
+};

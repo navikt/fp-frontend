@@ -23,7 +23,7 @@ import FagsakGrid from './components/FagsakGrid';
 import { requestFagsakApi } from '../data/fagsakContextApi';
 import useHentFagsak from './useHentFagsak';
 import ErrorBoundary from '../app/ErrorBoundary';
-import { BehandlingApiKeys, requestBehandlingApi, restBehandlingApiHooks } from '../data/behandlingContextApi';
+import { BehandlingApiKeys, requestBehandlingApi, useBehandlingRestApiRunner } from '../data/behandlingContextApi';
 
 import '@navikt/ft-sak-visittkort/dist/style.css';
 
@@ -75,8 +75,8 @@ const FagsakIndex: FunctionComponent = () => {
     fagsakBehandling?.type === BehandlingType.TILBAKEKREVING ||
     fagsakBehandling?.type === BehandlingType.TILBAKEKREVING_REVURDERING;
 
-  const { startRequest: hentBehandling } = restBehandlingApiHooks.useRestApiRunner(BehandlingApiKeys.BEHANDLING);
-  const { startRequest: hentTilbakekrevingBehandling } = restBehandlingApiHooks.useRestApiRunner(
+  const { startRequest: hentBehandling } = useBehandlingRestApiRunner(BehandlingApiKeys.BEHANDLING);
+  const { startRequest: hentTilbakekrevingBehandling } = useBehandlingRestApiRunner(
     BehandlingApiKeys.BEHANDLING_TILBAKE,
   );
 

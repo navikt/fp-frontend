@@ -19,10 +19,14 @@ import {
 
 import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
-import { BehandlingApiKeys, requestBehandlingApi, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
+import {
+  BehandlingApiKeys,
+  requestBehandlingApi,
+  useBehandlingRestApiRunner,
+} from '../../../data/behandlingContextApi';
 
 const getStatusFromUttakresultat = (behandling: Behandling): string => {
-  const harLenke = requestBehandlingApi.hasPath(BehandlingApiKeys.UTTAKSRESULTAT_PERIODER.name);
+  const harLenke = requestBehandlingApi.hasPath(BehandlingApiKeys.UTTAKSRESULTAT_PERIODER);
   if (!harLenke) {
     return vilkarUtfallType.IKKE_VURDERT;
   }
@@ -73,7 +77,7 @@ const UttakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitPr
   ...props
 }) => {
   const intl = useIntl();
-  const { startRequest: oppdaterStønadskontoer } = restBehandlingApiHooks.useRestApiRunner(
+  const { startRequest: oppdaterStønadskontoer } = useBehandlingRestApiRunner(
     BehandlingApiKeys.STONADSKONTOER_GITT_UTTAKSPERIODER,
   );
   return (

@@ -18,7 +18,7 @@ import skalViseProsessPanel from '../../felles/prosess/skalViseProsessPanel';
 import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
 import useStandardProsessPanelProps from '../../felles/prosess/useStandardProsessPanelProps';
-import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
+import { BehandlingApiKeys, useBehandlingRestApiRunner } from '../../../data/behandlingContextApi';
 
 const getForhandsvisCallback =
   (
@@ -78,9 +78,7 @@ const VarselProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitP
 }) => {
   const lagringSideEffekter = getLagringSideeffekter(setSkalOppdatereEtterBekreftelseAvAp, opneSokeside);
 
-  const { startRequest: forhandsvisMelding } = restBehandlingApiHooks.useRestApiRunner(
-    BehandlingApiKeys.PREVIEW_MESSAGE,
-  );
+  const { startRequest: forhandsvisMelding } = useBehandlingRestApiRunner(BehandlingApiKeys.PREVIEW_MESSAGE);
 
   const standardPanelProps = useStandardProsessPanelProps();
 

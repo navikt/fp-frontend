@@ -10,7 +10,7 @@ import { AksjonspunktCode, isKlageAvvist } from '@navikt/fp-kodeverk';
 
 import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
-import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
+import { BehandlingApiKeys, useBehandlingRestApiRunner } from '../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktCode.VURDER_FORMKRAV_NK];
 
@@ -45,7 +45,7 @@ const FormKravKlageInstansProsessStegInitPanel: FunctionComponent<OwnProps & Pro
     [alleBehandlinger],
   );
 
-  const { startRequest: lagreFormkravVurdering } = restBehandlingApiHooks.useRestApiRunner(
+  const { startRequest: lagreFormkravVurdering } = useBehandlingRestApiRunner(
     BehandlingApiKeys.SAVE_FORMKRAV_VURDERING,
   );
 

@@ -3,7 +3,7 @@ import { MenyApneForEndringerIndex } from '@navikt/fp-sak-meny-apne-for-endringe
 import { BehandlingAppKontekst } from '@navikt/ft-types';
 import { Behandling } from '@navikt/fp-types';
 
-import { BehandlingApiKeys, restBehandlingApiHooks } from '../../data/behandlingContextApi';
+import { BehandlingApiKeys, useBehandlingRestApiRunner } from '../../data/behandlingContextApi';
 
 interface OwnProps {
   behandling: BehandlingAppKontekst;
@@ -12,9 +12,7 @@ interface OwnProps {
 }
 
 const ApneForEndringerMenyModal: FunctionComponent<OwnProps> = ({ behandling, setBehandling, lukkModal }) => {
-  const { startRequest: åpneForEndringer } = restBehandlingApiHooks.useRestApiRunner(
-    BehandlingApiKeys.OPEN_BEHANDLING_FOR_CHANGES,
-  );
+  const { startRequest: åpneForEndringer } = useBehandlingRestApiRunner(BehandlingApiKeys.OPEN_BEHANDLING_FOR_CHANGES);
 
   const opneBehandlingForEndringer = useCallback(() => {
     åpneForEndringer({

@@ -7,7 +7,7 @@ import { BehandlingAppKontekst } from '@navikt/fp-types';
 
 import { FagsakApiKeys, useFagsakGlobalStateRestApiData } from '../../data/fagsakContextApi';
 import MenyKodeverk from '../MenyKodeverk';
-import { BehandlingApiKeys, restBehandlingApiHooks } from '../../data/behandlingContextApi';
+import { BehandlingApiKeys, useBehandlingRestApiRunner } from '../../data/behandlingContextApi';
 
 interface OwnProps {
   behandling: BehandlingAppKontekst;
@@ -22,9 +22,7 @@ const SettPaVentMenyModal: FunctionComponent<OwnProps> = ({ behandling, hentOgSe
     .medFpSakKodeverk(alleFpSakKodeverk)
     .medFpTilbakeKodeverk(alleFpTilbakeKodeverk);
 
-  const { startRequest: settBehandlingPåVent } = restBehandlingApiHooks.useRestApiRunner(
-    BehandlingApiKeys.BEHANDLING_ON_HOLD,
-  );
+  const { startRequest: settBehandlingPåVent } = useBehandlingRestApiRunner(BehandlingApiKeys.BEHANDLING_ON_HOLD);
 
   const settBehandlingPåVentOgOppdaterBehandling = useCallback(
     (formValues: FormValues) => {

@@ -24,7 +24,7 @@ import AktoerIndex from '../../aktoer/AktoerIndex';
 import FagsakSearchIndex from '../../fagsakSearch/FagsakSearchIndex';
 
 import styles from './home.module.css';
-import { FagsakApiKeys, restFagsakApiHooks, useFagsakRestApiRunner } from '../../data/fagsakContextApi';
+import { FagsakApiKeys, useFagsakRestApiRunner } from '../../data/fagsakContextApi';
 
 interface OwnProps {
   headerHeight: number;

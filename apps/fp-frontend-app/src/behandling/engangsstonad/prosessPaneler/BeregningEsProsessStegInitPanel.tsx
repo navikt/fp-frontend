@@ -37,7 +37,7 @@ const BeregningEsProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanel
       prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.Beregning' })}
       skalPanelVisesIMeny={() => true}
       hentOverstyrtStatus={() =>
-        requestBehandlingApi.hasPath(BehandlingApiKeys.BEREGNINGRESULTAT_ENGANGSSTONAD.name)
+        requestBehandlingApi.hasPath(BehandlingApiKeys.BEREGNINGRESULTAT_ENGANGSSTONAD)
           ? vilkarUtfallType.OPPFYLT
           : vilkarUtfallType.IKKE_VURDERT
       }

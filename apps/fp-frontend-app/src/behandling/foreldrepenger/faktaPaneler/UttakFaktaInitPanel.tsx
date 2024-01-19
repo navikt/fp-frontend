@@ -62,7 +62,7 @@ const UttakFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = (
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'UttakInfoPanel.FaktaUttak' })}
     skalPanelVisesIMeny={() =>
       props.behandling.harSattEndringsdato &&
-      requestBehandlingApi.hasPath(BehandlingApiKeys.UTTAK_KONTROLLER_FAKTA_PERIODER_V2.name)
+      requestBehandlingApi.hasPath(BehandlingApiKeys.UTTAK_KONTROLLER_FAKTA_PERIODER_V2)
     }
     renderPanel={data => (
       <UttakFaktaIndex

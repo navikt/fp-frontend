@@ -13,7 +13,7 @@ import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPane
 import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
 import useStandardProsessPanelProps from '../../felles/prosess/useStandardProsessPanelProps';
 import FatterVedtakStatusModal from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
-import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
+import { BehandlingApiKeys, useBehandlingRestApiRunner } from '../../../data/behandlingContextApi';
 
 const lagForhandsvisCallback =
   (
@@ -98,9 +98,7 @@ const KlageresultatProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPan
 
   const lagringSideEffekter = getLagringSideeffekter(toggleFatterVedtakModal, setSkalOppdatereEtterBekreftelseAvAp);
 
-  const { startRequest: forhandsvisMelding } = restBehandlingApiHooks.useRestApiRunner(
-    BehandlingApiKeys.PREVIEW_MESSAGE,
-  );
+  const { startRequest: forhandsvisMelding } = useBehandlingRestApiRunner(BehandlingApiKeys.PREVIEW_MESSAGE);
   const previewCallback = useCallback(
     lagForhandsvisCallback(forhandsvisMelding, fagsak, standardPanelProps.behandling),
     [standardPanelProps.behandling.versjon],

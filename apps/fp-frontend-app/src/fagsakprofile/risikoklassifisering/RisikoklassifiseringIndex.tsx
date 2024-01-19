@@ -13,7 +13,7 @@ import getAccessRights from '../../app/util/access';
 import FagsakData from '../../fagsak/FagsakData';
 
 import '@navikt/ft-sak-risikoklassifisering/dist/style.css';
-import { BehandlingApiKeys, restBehandlingApiHooks } from '../../data/behandlingContextApi';
+import { BehandlingApiKeys, useBehandlingRestApiRunner } from '../../data/behandlingContextApi';
 
 const getReadOnly = (navAnsatt: NavAnsatt, rettigheter: AksessRettigheter, erPaaVent: boolean) => {
   if (erPaaVent) {
@@ -86,7 +86,7 @@ const RisikoklassifiseringIndex: FunctionComponent<OwnProps> = ({
     }
   }, [!!risikoAksjonspunkt, behandlingUuid, behandlingVersjon]);
 
-  const { startRequest: lagreRisikoklassifiseringAksjonspunkt } = restBehandlingApiHooks.useRestApiRunner(
+  const { startRequest: lagreRisikoklassifiseringAksjonspunkt } = useBehandlingRestApiRunner(
     BehandlingApiKeys.SAVE_AKSJONSPUNKT,
   );
 

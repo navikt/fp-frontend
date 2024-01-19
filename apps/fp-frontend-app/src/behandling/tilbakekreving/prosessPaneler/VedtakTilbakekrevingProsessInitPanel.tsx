@@ -15,7 +15,7 @@ import {
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
-import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
+import { BehandlingApiKeys, useBehandlingRestApiRunner } from '../../../data/behandlingContextApi';
 import FatterVedtakStatusModal from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
 
 import '@navikt/ft-prosess-tilbakekreving-vedtak/dist/style.css';
@@ -75,9 +75,7 @@ const VedtakTilbakekrevingProsessInitPanel: FunctionComponent<OwnProps & Prosess
 
   const lagringSideEffekter = getLagringSideeffekter(toggleFatterVedtakModal);
 
-  const { startRequest: forhandsvisVedtaksbrev } = restBehandlingApiHooks.useRestApiRunner(
-    BehandlingApiKeys.PREVIEW_VEDTAKSBREV,
-  );
+  const { startRequest: forhandsvisVedtaksbrev } = useBehandlingRestApiRunner(BehandlingApiKeys.PREVIEW_VEDTAKSBREV);
   const fetchPreviewVedtaksbrev = useCallback(
     (param: ForhandsvisData) => forhandsvisVedtaksbrev(param).then(forhandsvisDokument),
     [],

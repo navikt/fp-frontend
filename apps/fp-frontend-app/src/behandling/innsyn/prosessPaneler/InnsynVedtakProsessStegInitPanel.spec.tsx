@@ -70,8 +70,8 @@ describe('<InnsynVedtakProsessStegInitPanel>', () => {
 
   it('skal rendre komponent korrekt', async () => {
     const data = [
-      { key: BehandlingApiKeys.INNSYN.name, data: innsyn },
-      { key: BehandlingApiKeys.INNSYN_DOKUMENTER.name, data: [] },
+      { key: BehandlingApiKeys.INNSYN, data: innsyn },
+      { key: BehandlingApiKeys.INNSYN_DOKUMENTER, data: [] },
     ];
     render(
       <RawIntlProvider value={intl}>
@@ -97,9 +97,9 @@ describe('<InnsynVedtakProsessStegInitPanel>', () => {
   // TODO FIX denne feilar av ein eller annan grunn
   it.skip('skal vise forhåndsvisning av melding', async () => {
     const data = [
-      { key: BehandlingApiKeys.INNSYN.name, data: innsyn },
-      { key: BehandlingApiKeys.INNSYN_DOKUMENTER.name, data: [] },
-      { key: BehandlingApiKeys.PREVIEW_MESSAGE.name, data: undefined },
+      { key: BehandlingApiKeys.INNSYN, data: innsyn },
+      { key: BehandlingApiKeys.INNSYN_DOKUMENTER, data: [] },
+      { key: BehandlingApiKeys.PREVIEW_MESSAGE, data: undefined },
     ];
 
     let axiosMock = {} as MockAdapter;

@@ -9,7 +9,11 @@ import { ArbeidOgInntektsmelding, AksessRettigheter } from '@navikt/fp-types';
 
 import FaktaPanelInitProps from '../../felles/typer/faktaPanelInitProps';
 import FaktaDefaultInitPanel from '../../felles/fakta/FaktaDefaultInitPanel';
-import { BehandlingApiKeys, requestBehandlingApi, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
+import {
+  BehandlingApiKeys,
+  requestBehandlingApi,
+  useBehandlingRestApiRunner,
+} from '../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING];
 
@@ -36,16 +40,14 @@ const ArbeidOgInntektFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInit
 }) => {
   const intl = useIntl();
 
-  const { startRequest: registrerArbeidsforhold } = restBehandlingApiHooks.useRestApiRunner(
+  const { startRequest: registrerArbeidsforhold } = useBehandlingRestApiRunner(
     BehandlingApiKeys.ARBEID_OG_INNTEKT_REGISTRER_ARBEIDSFORHOLD,
   );
-  const { startRequest: lagreVurdering } = restBehandlingApiHooks.useRestApiRunner(
+  const { startRequest: lagreVurdering } = useBehandlingRestApiRunner(
     BehandlingApiKeys.ARBEID_OG_INNTEKT_LAGRE_VURDERING,
   );
-  const { startRequest: settBehandlingPåVent } = restBehandlingApiHooks.useRestApiRunner(
-    BehandlingApiKeys.BEHANDLING_ON_HOLD,
-  );
-  const { startRequest: åpneForNyVurdering } = restBehandlingApiHooks.useRestApiRunner(
+  const { startRequest: settBehandlingPåVent } = useBehandlingRestApiRunner(BehandlingApiKeys.BEHANDLING_ON_HOLD);
+  const { startRequest: åpneForNyVurdering } = useBehandlingRestApiRunner(
     BehandlingApiKeys.ARBEID_OG_INNTEKT_ÅPNE_FOR_NY_VURDERING,
   );
   const åpneForNyVurderingOgOppfriskBehandling = useCallback(() => {
@@ -74,7 +76,7 @@ const ArbeidOgInntektFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInit
       faktaPanelKode={FaktaPanelCode.ARBEID_OG_INNTEKT}
       faktaPanelMenyTekst={intl.formatMessage({ id: 'ArbeidOgInntektInfoPanel.Title' })}
       skalPanelVisesIMeny={() =>
-        requestBehandlingApi.hasPath(BehandlingApiKeys.ARBEID_OG_INNTEKT.name) &&
+        requestBehandlingApi.hasPath(BehandlingApiKeys.ARBEID_OG_INNTEKT) &&
         !props.behandling.aksjonspunkt.some(ap => AksjonspunktCode.AVKLAR_ARBEIDSFORHOLD === ap.definisjon)
       }
       renderPanel={data => (

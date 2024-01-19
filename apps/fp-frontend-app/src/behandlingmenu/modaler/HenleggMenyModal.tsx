@@ -7,7 +7,7 @@ import { MenyHenleggIndex } from '@navikt/fp-sak-meny-henlegg';
 import useVisForhandsvisningAvMelding from '../../data/useVisForhandsvisningAvMelding';
 import { FagsakApiKeys, useFagsakGlobalStateRestApiData } from '../../data/fagsakContextApi';
 import MenyKodeverk from '../MenyKodeverk';
-import { BehandlingApiKeys, restBehandlingApiHooks } from '../../data/behandlingContextApi';
+import { BehandlingApiKeys, useBehandlingRestApiRunner } from '../../data/behandlingContextApi';
 
 interface OwnProps {
   behandling: BehandlingAppKontekst;
@@ -27,9 +27,7 @@ const HenleggMenyModal: FunctionComponent<OwnProps> = ({ behandling, fagsakYtels
 
   const forhåndsvisHenleggBehandling = useVisForhandsvisningAvMelding(behandling?.type);
 
-  const { startRequest: henleggBehandling } = restBehandlingApiHooks.useRestApiRunner(
-    BehandlingApiKeys.HENLEGG_BEHANDLING,
-  );
+  const { startRequest: henleggBehandling } = useBehandlingRestApiRunner(BehandlingApiKeys.HENLEGG_BEHANDLING);
 
   const henleggBehandlingOgOppdaterBehandling = useCallback(
     (formValues: { årsakKode: string; begrunnelse: string; fritekst?: string }) =>

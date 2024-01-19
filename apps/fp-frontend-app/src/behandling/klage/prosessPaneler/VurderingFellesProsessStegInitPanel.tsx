@@ -14,7 +14,7 @@ import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPane
 import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
 import useStandardProsessPanelProps from '../../felles/prosess/useStandardProsessPanelProps';
 import KlageBehandlingModal from '../modaler/KlageBehandlingModal';
-import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
+import { BehandlingApiKeys, useBehandlingRestApiRunner } from '../../../data/behandlingContextApi';
 
 const lagForhandsvisCallback =
   (
@@ -106,17 +106,13 @@ const VurderingFellesProsessStegInitPanel: FunctionComponent<OwnProps & ProsessP
       )
     : undefined;
 
-  const { startRequest: forhandsvisMelding } = restBehandlingApiHooks.useRestApiRunner(
-    BehandlingApiKeys.PREVIEW_MESSAGE,
-  );
+  const { startRequest: forhandsvisMelding } = useBehandlingRestApiRunner(BehandlingApiKeys.PREVIEW_MESSAGE);
   const previewCallback = useCallback(
     lagForhandsvisCallback(forhandsvisMelding, fagsak, standardPanelProps.behandling),
     [standardPanelProps.behandling.versjon],
   );
 
-  const { startRequest: lagreKlageVurdering } = restBehandlingApiHooks.useRestApiRunner(
-    BehandlingApiKeys.SAVE_KLAGE_VURDERING,
-  );
+  const { startRequest: lagreKlageVurdering } = useBehandlingRestApiRunner(BehandlingApiKeys.SAVE_KLAGE_VURDERING);
   const lagreKlage = useCallback(lagKlageCallback(lagreKlageVurdering, standardPanelProps.behandling), [
     standardPanelProps.behandling.versjon,
   ]);

@@ -121,7 +121,7 @@ const BeregningFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps>
       overstyringApKoder={OVERSTYRING_AP_CODES}
       faktaPanelKode={FaktaPanelCode.BEREGNING}
       faktaPanelMenyTekst={intl.formatMessage({ id: 'BeregningInfoPanel.Title' })}
-      skalPanelVisesIMeny={() => requestBehandlingApi.hasPath(BehandlingApiKeys.BEREGNINGSGRUNNLAG.name)}
+      skalPanelVisesIMeny={() => requestBehandlingApi.hasPath(BehandlingApiKeys.BEREGNINGSGRUNNLAG)}
       renderPanel={data => (
         <BeregningFaktaIndexRedesign
           {...data}

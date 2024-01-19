@@ -9,7 +9,11 @@ import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { AlleKodeverkTilbakekreving } from '@navikt/fp-types';
 import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
-import { BehandlingApiKeys, restBehandlingApiHooks, requestBehandlingApi } from '../../../data/behandlingContextApi';
+import {
+  BehandlingApiKeys,
+  requestBehandlingApi,
+  useBehandlingRestApiRunner,
+} from '../../../data/behandlingContextApi';
 
 import '@navikt/ft-prosess-tilbakekreving-foreldelse/dist/style.css';
 
@@ -28,7 +32,7 @@ interface OwnProps {
 const ForeldelseProsessInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({ ...props }) => {
   const intl = useIntl();
 
-  const { startRequest: beregnBelop } = restBehandlingApiHooks.useRestApiRunner(BehandlingApiKeys.BEREGNE_BELØP);
+  const { startRequest: beregnBelop } = useBehandlingRestApiRunner(BehandlingApiKeys.BEREGNE_BELØP);
 
   return (
     <ProsessDefaultInitPanel<EndepunktPanelData>
@@ -39,7 +43,7 @@ const ForeldelseProsessInitPanel: FunctionComponent<OwnProps & ProsessPanelInitP
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Foreldelse' })}
       skalPanelVisesIMeny={() => true}
       hentOverstyrtStatus={() =>
-        requestBehandlingApi.hasPath(BehandlingApiKeys.PERIODER_FORELDELSE.name)
+        requestBehandlingApi.hasPath(BehandlingApiKeys.PERIODER_FORELDELSE)
           ? VilkarUtfallType.OPPFYLT
           : VilkarUtfallType.IKKE_VURDERT
       }

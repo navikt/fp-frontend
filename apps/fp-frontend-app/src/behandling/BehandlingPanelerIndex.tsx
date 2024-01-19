@@ -18,7 +18,11 @@ import { BehandlingType, FagsakYtelseType } from '@navikt/ft-kodeverk';
 import { NavigateFunction, useLocation, useNavigate } from 'react-router';
 import BehandlingPaVent from './felles/modaler/paVent/BehandlingPaVent';
 import StandardPropsProvider from './felles/utils/standardPropsStateContext';
-import { BehandlingApiKeys, restBehandlingApiHooks } from '../data/behandlingContextApi';
+import {
+  BehandlingApiKeys,
+  useBehandlingMultipleRestApi,
+  useBehandlingRestApiRunner,
+} from '../data/behandlingContextApi';
 import { getFaktaLocation, getLocationWithDefaultProsessStegAndFakta, getProsessStegLocation } from '../app/paths';
 import lazyWithRetry from './lazyUtils';
 import ErrorBoundary from '../app/ErrorBoundary';
@@ -100,11 +104,12 @@ const BehandlingPanelerIndex: FunctionComponent<OwnProps> = ({
 
   const [skalOppdatereEtterBekreftelseAvAp, setSkalOppdatereEtterBekreftelseAvAp] = useState(true);
 
-  const { startRequest: lagreAksjonspunkter, data: apBehandlingRes } = restBehandlingApiHooks.useRestApiRunner(
+  const { startRequest: lagreAksjonspunkter, data: apBehandlingRes } = useBehandlingRestApiRunner(
     BehandlingApiKeys.SAVE_AKSJONSPUNKT,
   );
-  const { startRequest: lagreOverstyrteAksjonspunkter, data: apOverstyrtBehandlingRes } =
-    restBehandlingApiHooks.useRestApiRunner(BehandlingApiKeys.SAVE_OVERSTYRT_AKSJONSPUNKT);
+  const { startRequest: lagreOverstyrteAksjonspunkter, data: apOverstyrtBehandlingRes } = useBehandlingRestApiRunner(
+    BehandlingApiKeys.SAVE_OVERSTYRT_AKSJONSPUNKT,
+  );
   useSetBehandlingVedEndring(setBehandling, skalOppdatereEtterBekreftelseAvAp, apBehandlingRes);
   useSetBehandlingVedEndring(setBehandling, skalOppdatereEtterBekreftelseAvAp, apOverstyrtBehandlingRes);
 
@@ -123,16 +128,20 @@ const BehandlingPanelerIndex: FunctionComponent<OwnProps> = ({
   const erFørstegangssøknadEllerRevurdering =
     behandling?.type === BehandlingType.FORSTEGANGSSOKNAD || behandling?.type === BehandlingType.REVURDERING;
 
-  const { data: opplysningsdata, state: opplysningsdataState } = restBehandlingApiHooks.useMultipleRestApi<
-    {
+  /*
+ {
       arbeidsgivereOversikt: ArbeidsgiverOpplysningerWrapper;
       behandlingPersonoversikt: Personoversikt;
     },
-    void
-  >(endepunkterSomSkalHentesEnGang, {
-    updateTriggers: [behandling?.versjon],
-    suspendRequest: !behandling || !erFørstegangssøknadEllerRevurdering,
-  });
+    void */
+
+  const { data: opplysningsdata, state: opplysningsdataState } = useBehandlingMultipleRestApi(
+    endepunkterSomSkalHentesEnGang,
+    {
+      updateTriggers: [behandling?.versjon],
+      suspendRequest: !behandling || !erFørstegangssøknadEllerRevurdering,
+    },
+  );
 
   if (
     !behandling ||
