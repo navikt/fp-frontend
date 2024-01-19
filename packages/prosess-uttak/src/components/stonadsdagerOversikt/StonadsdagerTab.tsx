@@ -1,8 +1,7 @@
 import React, { FunctionComponent, useCallback, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import classnames from 'classnames/bind';
-import { BodyShort, Detail } from '@navikt/ds-react';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
+import { BodyShort, Detail, VStack } from '@navikt/ds-react';
 
 import { StonadskontoType } from '@navikt/fp-kodeverk';
 import { Stonadskonto } from '@navikt/fp-types';
@@ -72,34 +71,26 @@ const StonadsdagerTab: FunctionComponent<OwnProps> = ({ stønadskonto, visDagerF
           onClick={velgKonto}
           aria-selected={aktiv}
         >
-          <FlexContainer>
-            <FlexRow>
-              <FlexColumn>
-                <Detail>
-                  <FormattedMessage
-                    id={kontonavnTekst}
-                    values={{
-                      uker: Math.floor(stønadskonto.maxDager / 5),
-                    }}
-                  />
-                </Detail>
-              </FlexColumn>
-            </FlexRow>
-            <FlexRow>
-              <FlexColumn>
-                <BodyShort size="small">
-                  <FormattedMessage
-                    id="TimeLineTab.Stonadinfo.UkerDager"
-                    values={{
-                      ukerVerdi: fordelteDager.uker,
-                      dagerVerdi: fordelteDager.dager,
-                      b: bTag,
-                    }}
-                  />
-                </BodyShort>
-              </FlexColumn>
-            </FlexRow>
-          </FlexContainer>
+          <VStack gap="1">
+            <Detail>
+              <FormattedMessage
+                id={kontonavnTekst}
+                values={{
+                  uker: Math.floor(stønadskonto.maxDager / 5),
+                }}
+              />
+            </Detail>
+            <BodyShort size="small">
+              <FormattedMessage
+                id="TimeLineTab.Stonadinfo.UkerDager"
+                values={{
+                  ukerVerdi: fordelteDager.uker,
+                  dagerVerdi: fordelteDager.dager,
+                  b: bTag,
+                }}
+              />
+            </BodyShort>
+          </VStack>
         </button>
       </li>
     </div>

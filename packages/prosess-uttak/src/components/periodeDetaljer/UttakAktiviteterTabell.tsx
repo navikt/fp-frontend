@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactElement, useMemo } from 'react';
 import { IntlShape, useIntl } from 'react-intl';
-import { BodyShort } from '@navikt/ds-react';
+import { BodyShort, HStack } from '@navikt/ds-react';
 import { SelectField, NumberField } from '@navikt/ft-form-hooks';
 import {
   hasValidDecimal,
@@ -11,10 +11,10 @@ import {
   notDash,
   required,
 } from '@navikt/ft-form-validators';
-import { FlexColumn, FlexContainer, FlexRow, Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
+import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 
 import { uttakPeriodeType, uttakArbeidType as UttakArbeidType } from '@navikt/fp-kodeverk';
-import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, PeriodeSokerAktivitet } from '@navikt/fp-types';
+import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, PeriodeSoker, PeriodeSokerAktivitet } from '@navikt/fp-types';
 
 import { UseFormGetValues, useFieldArray, useFormContext } from 'react-hook-form';
 import uttakArbeidTypeTekstCodes from '../../utils/uttakArbeidTypeCodes';
@@ -65,6 +65,17 @@ const sjekkOmUtbetalingsgradEr0OmAvslått =
     const harUtsettelse = !erOppfylt && (!utsettelseType || utsettelseType === '-');
     if (harUtsettelse && parseFloat(utbetalingsgrad) > 0) {
       return intl.formatMessage({ id: 'RenderUttakTable.MerEnNullUtaksprosent' });
+    }
+    return null;
+  };
+
+const sjekkOmUtbetalingsgradMårVæreHøyereEnn0 =
+  (intl: IntlShape, valgtPeriode: PeriodeSoker, erOppfylt: boolean) =>
+  (utbetalingsgrad: string): string | null => {
+    const kontoIkkeSatt = !valgtPeriode.periodeType && valgtPeriode.aktiviteter[0].stønadskontoType === '-';
+    const erUttak = valgtPeriode.utsettelseType === '-' && !kontoIkkeSatt;
+    if (erUttak && erOppfylt && parseFloat(utbetalingsgrad) <= 0) {
+      return intl.formatMessage({ id: 'ValidationMessage.HøyereEnn0NårInnvilgetUttak' });
     }
     return null;
   };
@@ -145,7 +156,7 @@ interface OwnProps {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   aktiviteter: PeriodeSokerAktivitet[];
   erOppfylt?: boolean;
-  utsettelseType: string;
+  valgtPeriode: PeriodeSoker;
 }
 
 const UttakAktiviteterTabell: FunctionComponent<OwnProps> = ({
@@ -154,7 +165,7 @@ const UttakAktiviteterTabell: FunctionComponent<OwnProps> = ({
   arbeidsgiverOpplysningerPerId,
   aktiviteter,
   erOppfylt,
-  utsettelseType,
+  valgtPeriode,
 }) => {
   const intl = useIntl();
 
@@ -165,6 +176,8 @@ const UttakAktiviteterTabell: FunctionComponent<OwnProps> = ({
   });
 
   const periodeTypeOptions = useMemo(() => lagPeriodeTypeOptions(periodeTyper), [periodeTyper]);
+
+  const { utsettelseType } = valgtPeriode;
 
   return (
     <div className={styles.tableOverflow}>
@@ -196,43 +209,33 @@ const UttakAktiviteterTabell: FunctionComponent<OwnProps> = ({
                   </div>
                 </TableColumn>
                 <TableColumn>
-                  <FlexContainer>
-                    <FlexRow>
-                      <FlexColumn className={styles.ukeOgDag}>
-                        <span className={styles.weekPosition}>
-                          <NumberField
-                            name={`aktiviteter.${index}.weeks`}
-                            readOnly={isReadOnly}
-                            validate={[
-                              required,
-                              hasValidInteger,
-                              maxLength3,
-                              validerAtUkerEllerDagerErStørreEnn0NårUtsettelseOgOppfylt(
-                                getValues,
-                                utsettelseType,
-                                intl,
-                              ),
-                            ]}
-                          />
-                        </span>
-                      </FlexColumn>
-                      <FlexColumn>
-                        {isReadOnly ? <span>/</span> : <span className={styles.verticalCharPlacementInTable}>/</span>}
-                      </FlexColumn>
-                      <FlexColumn className={styles.ukeOgDag}>
-                        <NumberField
-                          name={`aktiviteter.${index}.days`}
-                          readOnly={isReadOnly}
-                          validate={[
-                            required,
-                            hasValidDecimal,
-                            maxLength3,
-                            validerAtUkerEllerDagerErStørreEnn0NårUtsettelseOgOppfylt(getValues, utsettelseType, intl),
-                          ]}
-                        />
-                      </FlexColumn>
-                    </FlexRow>
-                  </FlexContainer>
+                  <HStack gap="2" align="center">
+                    <span className={styles.weekPosition}>
+                      <NumberField
+                        name={`aktiviteter.${index}.weeks`}
+                        className={styles.numberWidth}
+                        readOnly={isReadOnly}
+                        validate={[
+                          required,
+                          hasValidInteger,
+                          maxLength3,
+                          validerAtUkerEllerDagerErStørreEnn0NårUtsettelseOgOppfylt(getValues, utsettelseType, intl),
+                        ]}
+                      />
+                    </span>
+                    {isReadOnly ? <div>/</div> : <div className={styles.verticalCharPlacementInTable}>/</div>}
+                    <NumberField
+                      name={`aktiviteter.${index}.days`}
+                      className={styles.numberWidth}
+                      readOnly={isReadOnly}
+                      validate={[
+                        required,
+                        hasValidDecimal,
+                        maxLength3,
+                        validerAtUkerEllerDagerErStørreEnn0NårUtsettelseOgOppfylt(getValues, utsettelseType, intl),
+                      ]}
+                    />
+                  </HStack>
                 </TableColumn>
                 <TableColumn>
                   <BodyShort size="small">{arbeidsforholdData.prosentArbeidText}</BodyShort>
@@ -247,6 +250,8 @@ const UttakAktiviteterTabell: FunctionComponent<OwnProps> = ({
                         minValue0,
                         maxProsentValue100,
                         hasValidDecimal,
+                        // @ts-ignore Fiks typen til utbetalingsgrad. Bør vera number
+                        sjekkOmUtbetalingsgradMårVæreHøyereEnn0(intl, valgtPeriode, erOppfylt),
                         // @ts-ignore Fiks typen til utbetalingsgrad. Bør vera number
                         sjekkOmUtbetalingsgradEr0OmAvslått(intl, erOppfylt, utsettelseType),
                         // @ts-ignore Fiks typen til utbetalingsgrad. Bør vera number

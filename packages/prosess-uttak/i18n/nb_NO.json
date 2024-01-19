@@ -224,6 +224,8 @@
   "ValidationMessage.utbetalingsgradErMerSamtidigUttaksprosent": "Feltet kan ikke være høyere enn samtidig uttaksprosent",
   "ValidationMessage.trekkdagerErMerEnnNullUtsettelse": "Ingen trekkdager for utsettelse",
   "ValidationMessage.utbetalingMerEnnNullUtsettelse": "Ingen utbetalingsgrad for utsettelse",
+  "ValidationMessage.HøyereEnn0NårInnvilgetUttak": "Feltet må være høyere enn 0",
+  "ValidationMessage.SamtidigUttakErObligatorisk": "Feltet er obligatorisk",
   "DelOppPeriodeModalImpl.Periode": "Periode",
   "DelOppPeriodeModalImpl.AngiTomDato": "Angi t.o.m. dato for første periode",
   "DelOppPeriodeModalImpl.ModalDescription": "Periode er splittet",

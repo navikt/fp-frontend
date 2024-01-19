@@ -1,15 +1,8 @@
 import React, { ReactElement, FunctionComponent, useCallback, useState } from 'react';
 import dayjs from 'dayjs';
 import { FormattedMessage, useIntl } from 'react-intl';
-import {
-  AksjonspunktHelpTextHTML,
-  EditedIcon,
-  FlexColumn,
-  FlexContainer,
-  FlexRow,
-  VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
-import { Button, Label, Panel } from '@navikt/ds-react';
+import { AksjonspunktHelpTextHTML, EditedIcon, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { Button, HStack, Label, Panel } from '@navikt/ds-react';
 import { behandlingType as BehandlingType, KodeverkType, StonadskontoType } from '@navikt/fp-kodeverk';
 import { calcDays } from '@navikt/ft-utils';
 
@@ -228,72 +221,65 @@ const UttakPeriodePanel: FunctionComponent<OwnProps> = ({
     <>
       <div className={styles.space} />
       <Panel border>
-        <FlexContainer>
-          <FlexRow spaceBetween>
-            <FlexColumn>
-              <Label size="small">
-                <FormattedMessage id="UttakTimeLineData.PeriodeData.Detaljer" />
-                {!!valgtPeriode.begrunnelse && !harÅpneAksjonspunkter && <EditedIcon />}
-              </Label>
-            </FlexColumn>
-            {!isReadOnly && erHovedsøkersPeriode && !erRevurderingFørEndringsdato && (
-              <FlexColumn>
-                <Button
-                  className={styles.margin}
-                  size="xsmall"
-                  icon={<ScissorsIcon aria-hidden />}
-                  onClick={toggleVisningAvModal}
-                  variant="tertiary-neutral"
-                  type="button"
-                  title={intl.formatMessage({ id: 'UttakTimeLineData.PeriodeData.DelOppPerioden' })}
-                >
-                  <FormattedMessage id="UttakTimeLineData.PeriodeData.DelOppPerioden" />
-                </Button>
-                {visModal && (
-                  <SplittPeriodeModal
-                    cancel={toggleVisningAvModal}
-                    fomDato={valgtPeriode.fom}
-                    tomDato={valgtPeriode.tom}
-                    submit={splittPeriode}
-                  />
-                )}
-              </FlexColumn>
-            )}
-            <FlexColumn className={styles.fix}>
-              <Button
-                className={styles.margin}
-                size="xsmall"
-                icon={<ArrowLeftIcon aria-hidden />}
-                onClick={visForrigePeriode}
-                variant="secondary-neutral"
-                type="button"
-                title={intl.formatMessage({ id: 'UttakPeriodePanel.prevPeriod' })}
-              >
-                <FormattedMessage id="UttakPeriodePanel.prevPeriodShort" />
-              </Button>
-              <Button
-                className={styles.margin}
-                size="xsmall"
-                icon={<ArrowRightIcon aria-hidden />}
-                onClick={visNestePeriode}
-                variant="secondary-neutral"
-                type="button"
-                title={intl.formatMessage({ id: 'UttakPeriodePanel.nextPeriod' })}
-                iconPosition="right"
-              >
-                <FormattedMessage id="UttakPeriodePanel.nextPeriodShort" />
-              </Button>
+        <HStack align="center" justify="space-between">
+          <Label size="small">
+            <FormattedMessage id="UttakTimeLineData.PeriodeData.Detaljer" />
+            {!!valgtPeriode.begrunnelse && !harÅpneAksjonspunkter && <EditedIcon />}
+          </Label>
+          {!isReadOnly && erHovedsøkersPeriode && !erRevurderingFørEndringsdato && (
+            <>
               <Button
                 size="xsmall"
-                icon={<XMarkIcon aria-hidden />}
-                onClick={lukkPeriode}
+                icon={<ScissorsIcon aria-hidden />}
+                onClick={toggleVisningAvModal}
                 variant="tertiary-neutral"
                 type="button"
-                title={intl.formatMessage({ id: 'UttakPeriodePanel.LukkPeriode' })}
-              />
-            </FlexColumn>
-          </FlexRow>
-        </FlexContainer>
+                title={intl.formatMessage({ id: 'UttakTimeLineData.PeriodeData.DelOppPerioden' })}
+              >
+                <FormattedMessage id="UttakTimeLineData.PeriodeData.DelOppPerioden" />
+              </Button>
+              {visModal && (
+                <SplittPeriodeModal
+                  cancel={toggleVisningAvModal}
+                  fomDato={valgtPeriode.fom}
+                  tomDato={valgtPeriode.tom}
+                  submit={splittPeriode}
+                />
+              )}
+            </>
+          )}
+          <HStack gap="2">
+            <Button
+              size="xsmall"
+              icon={<ArrowLeftIcon aria-hidden />}
+              onClick={visForrigePeriode}
+              variant="secondary-neutral"
+              type="button"
+              title={intl.formatMessage({ id: 'UttakPeriodePanel.prevPeriod' })}
+            >
+              <FormattedMessage id="UttakPeriodePanel.prevPeriodShort" />
+            </Button>
+            <Button
+              size="xsmall"
+              icon={<ArrowRightIcon aria-hidden />}
+              onClick={visNestePeriode}
+              variant="secondary-neutral"
+              type="button"
+              title={intl.formatMessage({ id: 'UttakPeriodePanel.nextPeriod' })}
+              iconPosition="right"
+            >
+              <FormattedMessage id="UttakPeriodePanel.nextPeriodShort" />
+            </Button>
+            <Button
+              size="xsmall"
+              icon={<XMarkIcon aria-hidden />}
+              onClick={lukkPeriode}
+              variant="tertiary-neutral"
+              type="button"
+              title={intl.formatMessage({ id: 'UttakPeriodePanel.LukkPeriode' })}
+            />
+          </HStack>
+        </HStack>
         <VerticalSpacer sixteenPx />
         {valgtPeriode.manuellBehandlingÅrsak && valgtPeriode.manuellBehandlingÅrsak !== '-' && (
           <>

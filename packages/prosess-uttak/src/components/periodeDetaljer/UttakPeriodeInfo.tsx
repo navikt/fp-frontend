@@ -1,10 +1,10 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import dayjs from 'dayjs';
-import { Label, Detail, BodyShort } from '@navikt/ds-react';
+import { Label, Detail, BodyShort, HStack } from '@navikt/ds-react';
 import { calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { hasValidDecimal, maxValue, notDash, required } from '@navikt/ft-form-validators';
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { CheckboxField, NumberField, SelectField } from '@navikt/ft-form-hooks';
 
 import {
@@ -153,6 +153,8 @@ interface OwnProps {
   alleKodeverk: AlleKodeverk;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   erTilknyttetStortinget: boolean;
+  erOppfylt?: boolean;
+  valgtInnvilgelsesÅrsak?: string;
 }
 
 const UttakPeriodeInfo: FunctionComponent<OwnProps> = ({
@@ -164,6 +166,8 @@ const UttakPeriodeInfo: FunctionComponent<OwnProps> = ({
   alleKodeverk,
   arbeidsgiverOpplysningerPerId,
   erTilknyttetStortinget,
+  erOppfylt,
+  valgtInnvilgelsesÅrsak,
 }) => {
   const intl = useIntl();
 
@@ -173,88 +177,89 @@ const UttakPeriodeInfo: FunctionComponent<OwnProps> = ({
 
   return (
     <div className={periodeStatusClassName(valgtPeriode, erTilknyttetStortinget)}>
-      <FlexContainer>
-        {valgtPeriode.oppholdÅrsak === '-' && (
-          <FlexRow spaceBetween>
-            <FlexColumn>
-              <Label size="small">{typePeriode(valgtPeriode, alleKodeverk, kontoIkkeSatt)}</Label>
-              <BodyShort>{stonadskonto(valgtPeriode, alleKodeverk, kontoIkkeSatt)}</BodyShort>
-            </FlexColumn>
-            <FlexColumn>{isReadOnly && isInnvilgetText(valgtPeriode, alleKodeverk)}</FlexColumn>
-            <FlexColumn>
-              {harSoktOmFlerbarnsdager && (
-                <CheckboxField
-                  name="flerbarnsdager"
-                  label={intl.formatMessage({ id: 'UttakActivity.Flerbarnsdager' })}
-                  readOnly={isReadOnly}
-                />
-              )}
+      {valgtPeriode.oppholdÅrsak === '-' && (
+        <HStack justify="space-between">
+          <div>
+            <Label size="small">{typePeriode(valgtPeriode, alleKodeverk, kontoIkkeSatt)}</Label>
+            <BodyShort>{stonadskonto(valgtPeriode, alleKodeverk, kontoIkkeSatt)}</BodyShort>
+          </div>
+          <div>{isReadOnly && isInnvilgetText(valgtPeriode, alleKodeverk)}</div>
+          <div>
+            {harSoktOmFlerbarnsdager && (
               <CheckboxField
-                key="samtidigUttak"
-                name="samtidigUttak"
-                label={intl.formatMessage({ id: 'UttakActivity.SamtidigUttak' })}
+                name="flerbarnsdager"
+                label={intl.formatMessage({ id: 'UttakActivity.Flerbarnsdager' })}
                 readOnly={isReadOnly}
               />
-              {erSamtidigUttak && (
-                <FlexContainer>
-                  <FlexRow>
-                    <FlexColumn className={styles.bredde}>
-                      <NumberField
-                        name="samtidigUttaksprosent"
-                        readOnly={isReadOnly}
-                        label={intl.formatMessage({ id: 'UttakInfo.SamtidigUttaksprosent' })}
-                        validate={[required, maxValue100, hasValidDecimal]}
-                        forceTwoDecimalDigits
-                      />
-                    </FlexColumn>
-                    {!isReadOnly && <FlexColumn className={styles.suffix}>%</FlexColumn>}
-                  </FlexRow>
-                </FlexContainer>
-              )}
-            </FlexColumn>
-          </FlexRow>
-        )}
-        <VerticalSpacer eightPx />
-        <FlexRow>
-          <FlexColumn>
-            <Label size="small">
-              <FormattedMessage
-                id="UttakActivity.PeriodeData.Periode"
-                values={{
-                  fomVerdi: dayjs(valgtPeriode.fom.toString()).format(DDMMYYYY_DATE_FORMAT),
-                  tomVerdi: dayjs(valgtPeriode.tom.toString()).format(DDMMYYYY_DATE_FORMAT),
-                }}
-              />
-            </Label>
-            {valgtPeriode.oppholdÅrsak === '-' && (
-              <BodyShort>{calcDaysAndWeeks(valgtPeriode.fom, valgtPeriode.tom).formattedString}</BodyShort>
             )}
-          </FlexColumn>
-          <FlexColumn>
-            {valgtPeriode.gradertAktivitet && (
-              <Detail>
-                <FormattedMessage id="UttakActivity.Gradering" />
-              </Detail>
+            <CheckboxField
+              key="samtidigUttak"
+              name="samtidigUttak"
+              label={intl.formatMessage({ id: 'UttakActivity.SamtidigUttak' })}
+              readOnly={isReadOnly}
+              validate={[
+                // @ts-ignore FIX type i CheckboxField
+                (samtidigUttak: boolean) =>
+                  erOppfylt && samtidigUttak !== true && valgtInnvilgelsesÅrsak === '2038'
+                    ? intl.formatMessage({ id: 'ValidationMessage.SamtidigUttakErObligatorisk' })
+                    : null,
+              ]}
+            />
+            {erSamtidigUttak && (
+              <HStack gap="2">
+                <NumberField
+                  name="samtidigUttaksprosent"
+                  className={styles.numberFieldLength}
+                  readOnly={isReadOnly}
+                  label={intl.formatMessage({ id: 'UttakInfo.SamtidigUttaksprosent' })}
+                  validate={[required, maxValue100, hasValidDecimal]}
+                  forceTwoDecimalDigits
+                />
+                {!isReadOnly && <div className={styles.suffix}>%</div>}
+              </HStack>
             )}
-            {valgtPeriode.oppholdÅrsak !== '-' && (
-              <div>{calcDaysAndWeeks(valgtPeriode.fom, valgtPeriode.tom).formattedString}</div>
-            )}
-            {gradertArbforhold(valgtPeriode, arbeidsgiverOpplysningerPerId)}
-          </FlexColumn>
-          {visGraderingIkkeInnvilget(valgtPeriode, isReadOnly, graderingInnvilget) && (
-            <FlexColumn>
-              <b>
-                <FormattedMessage id="UttakActivity.GraderingIkkeOppfylt" />:
-              </b>
-              {
-                alleKodeverk[KodeverkType.GRADERING_AVSLAG_AARSAK].find(
-                  k => k.kode === valgtPeriode.graderingAvslagÅrsak,
-                )?.navn
-              }
-            </FlexColumn>
+          </div>
+        </HStack>
+      )}
+      <VerticalSpacer eightPx />
+      <HStack gap="10">
+        <div>
+          <Label size="small">
+            <FormattedMessage
+              id="UttakActivity.PeriodeData.Periode"
+              values={{
+                fomVerdi: dayjs(valgtPeriode.fom.toString()).format(DDMMYYYY_DATE_FORMAT),
+                tomVerdi: dayjs(valgtPeriode.tom.toString()).format(DDMMYYYY_DATE_FORMAT),
+              }}
+            />
+          </Label>
+          {valgtPeriode.oppholdÅrsak === '-' && (
+            <BodyShort>{calcDaysAndWeeks(valgtPeriode.fom, valgtPeriode.tom).formattedString}</BodyShort>
           )}
-        </FlexRow>
-      </FlexContainer>
+        </div>
+        <div>
+          {valgtPeriode.gradertAktivitet && (
+            <Detail>
+              <FormattedMessage id="UttakActivity.Gradering" />
+            </Detail>
+          )}
+          {valgtPeriode.oppholdÅrsak !== '-' && (
+            <div>{calcDaysAndWeeks(valgtPeriode.fom, valgtPeriode.tom).formattedString}</div>
+          )}
+          {gradertArbforhold(valgtPeriode, arbeidsgiverOpplysningerPerId)}
+        </div>
+        {visGraderingIkkeInnvilget(valgtPeriode, isReadOnly, graderingInnvilget) && (
+          <div>
+            <b>
+              <FormattedMessage id="UttakActivity.GraderingIkkeOppfylt" />:
+            </b>
+            {
+              alleKodeverk[KodeverkType.GRADERING_AVSLAG_AARSAK].find(k => k.kode === valgtPeriode.graderingAvslagÅrsak)
+                ?.navn
+            }
+          </div>
+        )}
+      </HStack>
       {valgtPeriode.oppholdÅrsak !== '-' && (
         <div className={styles.select}>
           <VerticalSpacer sixteenPx />
