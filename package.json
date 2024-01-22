@@ -39,7 +39,7 @@
     "packages/**/*"
   ],
   "dependencies": {
-    "dotenv": "16.3.1"
+    "dotenv": "16.3.2"
   },
   "devDependencies": {
     "@navikt/aksel-stylelint": "5.13.0",
