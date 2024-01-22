@@ -167,16 +167,12 @@ MedFeriepengegrunnlag.args = {
     },
   ] as Aksjonspunkt[],
   feriepengegrunnlag: {
-    feriepengeperiodeFom: '2020-01-01',
-    feriepengeperiodeTom: '2022-10-10',
     andeler: [
       {
         aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
         opptjeningsår: 2,
         årsbeløp: 500000,
         erBrukerMottaker: true,
-        ytelseperiodeFom: '2020-01-01',
-        ytelseperiodeTom: '2022-01-01',
       },
     ],
   },
