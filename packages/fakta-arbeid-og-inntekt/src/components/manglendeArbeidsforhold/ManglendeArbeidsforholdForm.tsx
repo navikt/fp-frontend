@@ -47,6 +47,7 @@ const validerPeriodeRekkefølge = (getValues: UseFormGetValues<FormValues>) => (
 interface OwnProps {
   saksnummer: string;
   behandlingUuid: string;
+  behandlingVersjon: number;
   arbeidsgiverNavn: string;
   inntektsmelding: Inntektsmelding;
   radData: ArbeidsforholdOgInntektRadData;
@@ -62,6 +63,7 @@ interface OwnProps {
 const ManglendeArbeidsforholdForm: FunctionComponent<OwnProps> = ({
   saksnummer,
   behandlingUuid,
+  behandlingVersjon,
   arbeidsgiverNavn,
   inntektsmelding,
   radData,
@@ -150,6 +152,7 @@ const ManglendeArbeidsforholdForm: FunctionComponent<OwnProps> = ({
       }
       return lagreVurdering({
         behandlingUuid,
+        behandlingVersjon,
         vurdering: formValues.saksbehandlersVurdering!,
         begrunnelse: formValues.begrunnelse!,
         arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,

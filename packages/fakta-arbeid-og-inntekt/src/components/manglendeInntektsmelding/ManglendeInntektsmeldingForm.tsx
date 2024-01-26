@@ -33,6 +33,7 @@ type FormValues = {
 interface OwnProps {
   saksnummer: string;
   behandlingUuid: string;
+  behandlingVersjon: number;
   skjæringspunktDato: string;
   inntektsposter?: Inntektspost[];
   isReadOnly: boolean;
@@ -49,6 +50,7 @@ interface OwnProps {
 const ManglendeInntektsmeldingForm: FunctionComponent<OwnProps> = ({
   saksnummer,
   behandlingUuid,
+  behandlingVersjon,
   skjæringspunktDato,
   inntektsposter = [],
   arbeidsforholdForRad,
@@ -88,6 +90,7 @@ const ManglendeInntektsmeldingForm: FunctionComponent<OwnProps> = ({
     (formValues: FormValues) => {
       const params = {
         behandlingUuid,
+        behandlingVersjon,
         vurdering: formValues.saksbehandlersVurdering!,
         arbeidsgiverIdent: radData.arbeidsgiverIdent,
         internArbeidsforholdRef: erEttArbeidsforhold ? arbeidsforholdForRad[0].internArbeidsforholdId : undefined,

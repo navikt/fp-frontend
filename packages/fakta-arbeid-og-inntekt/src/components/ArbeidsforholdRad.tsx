@@ -85,6 +85,7 @@ const finnInntektsmelding = (
 interface OwnProps {
   saksnummer: string;
   behandlingUuid: string;
+  behandlingVersjon: number;
   arbeidOgInntekt: ArbeidOgInntektsmelding;
   radData: ArbeidsforholdOgInntektRadData;
   isReadOnly: boolean;
@@ -100,6 +101,7 @@ interface OwnProps {
 const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
   saksnummer,
   behandlingUuid,
+  behandlingVersjon,
   arbeidOgInntekt,
   radData,
   isReadOnly,
@@ -187,6 +189,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
             <ManglendeInntektsmeldingForm
               saksnummer={saksnummer}
               behandlingUuid={behandlingUuid}
+              behandlingVersjon={behandlingVersjon}
               skjæringspunktDato={arbeidOgInntekt.skjæringstidspunkt}
               inntektsposter={inntektsposter}
               isReadOnly={isReadOnly}
@@ -204,6 +207,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
             <ManglendeArbeidsforholdForm
               saksnummer={saksnummer}
               behandlingUuid={behandlingUuid}
+              behandlingVersjon={behandlingVersjon}
               arbeidsgiverNavn={arbeidsgiverNavn}
               inntektsmelding={inntektsmeldingerForRad[0]}
               radData={radData}

@@ -273,6 +273,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
             arbeidOgInntekt={arbeidOgInntekt}
             saksnummer={saksnummer}
             behandlingUuid={behandling.uuid}
+            behandlingVersjon={behandling.versjon}
             radData={radData}
             isReadOnly={readOnly || erAksjonspunktAvsluttet}
             registrerArbeidsforhold={registrerArbeidsforhold}
