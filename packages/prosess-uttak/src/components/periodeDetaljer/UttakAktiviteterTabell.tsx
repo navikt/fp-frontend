@@ -70,11 +70,16 @@ const sjekkOmUtbetalingsgradEr0OmAvslått =
   };
 
 const sjekkOmUtbetalingsgradMårVæreHøyereEnn0 =
-  (intl: IntlShape, valgtPeriode: PeriodeSoker, erOppfylt: boolean) =>
+  (
+    intl: IntlShape,
+    valgtPeriode: PeriodeSoker,
+    samletUtbetalingsgradForAndreAktiviteter: number,
+    erOppfylt?: boolean,
+  ) =>
   (utbetalingsgrad: string): string | null => {
     const kontoIkkeSatt = !valgtPeriode.periodeType && valgtPeriode.aktiviteter[0].stønadskontoType === '-';
     const erUttak = valgtPeriode.utsettelseType === '-' && !kontoIkkeSatt;
-    if (erUttak && erOppfylt && parseFloat(utbetalingsgrad) <= 0) {
+    if (erUttak && erOppfylt && parseFloat(utbetalingsgrad) <= 0 && samletUtbetalingsgradForAndreAktiviteter === 0) {
       return intl.formatMessage({ id: 'ValidationMessage.HøyereEnn0NårInnvilgetUttak' });
     }
     return null;
@@ -169,7 +174,7 @@ const UttakAktiviteterTabell: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
 
-  const { control, getValues } = useFormContext<UttakAktivitetType>();
+  const { control, getValues, watch } = useFormContext<UttakAktivitetType>();
   const { fields } = useFieldArray({
     control,
     name: 'aktiviteter',
@@ -178,6 +183,8 @@ const UttakAktiviteterTabell: FunctionComponent<OwnProps> = ({
   const periodeTypeOptions = useMemo(() => lagPeriodeTypeOptions(periodeTyper), [periodeTyper]);
 
   const { utsettelseType } = valgtPeriode;
+
+  const aktiviteterFraFormState = watch('aktiviteter');
 
   return (
     <div className={styles.tableOverflow}>
@@ -189,6 +196,12 @@ const UttakAktiviteterTabell: FunctionComponent<OwnProps> = ({
               arbeidsgiverOpplysningerPerId,
               intl,
             );
+
+            const samletUtbetalingsgradForAndreAktiviteter = aktiviteterFraFormState.reduce(
+              (sum, aktivitet, i) => (i !== index ? sum + parseInt(aktivitet.utbetalingsgrad, 10) : sum),
+              0,
+            );
+
             return (
               <TableRow key={field.id}>
                 <TableColumn>
@@ -251,7 +264,12 @@ const UttakAktiviteterTabell: FunctionComponent<OwnProps> = ({
                         maxProsentValue100,
                         hasValidDecimal,
                         // @ts-ignore Fiks typen til utbetalingsgrad. Bør vera number
-                        sjekkOmUtbetalingsgradMårVæreHøyereEnn0(intl, valgtPeriode, erOppfylt),
+                        sjekkOmUtbetalingsgradMårVæreHøyereEnn0(
+                          intl,
+                          valgtPeriode,
+                          samletUtbetalingsgradForAndreAktiviteter,
+                          erOppfylt,
+                        ),
                         // @ts-ignore Fiks typen til utbetalingsgrad. Bør vera number
                         sjekkOmUtbetalingsgradEr0OmAvslått(intl, erOppfylt, utsettelseType),
                         // @ts-ignore Fiks typen til utbetalingsgrad. Bør vera number
