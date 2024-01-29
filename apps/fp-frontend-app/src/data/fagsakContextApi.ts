@@ -59,6 +59,7 @@ export const FagsakApiKeys = {
   ALL_DOCUMENTS: new RestKey<Dokument[], { saksnummer: string }>('ALL_DOCUMENTS'),
   SAVE_TOTRINNSAKSJONSPUNKT: new RestKey<Behandling, any>('SAVE_TOTRINNSAKSJONSPUNKT'),
   SUBMIT_MESSAGE: new RestKey<void, SubmitMessageParams>('SUBMIT_MESSAGE'),
+  PREVIEW_MESSAGE: new RestKey<void, ForhåndsvisMeldingParams>('PREVIEW_MESSAGE'),
   LAGRE_NOTAT: new RestKey<void, { saksnummer: string; notat: string }>('LAGRE_NOTAT'),
   KAN_TILBAKEKREVING_OPPRETTES: new RestKey<boolean, { saksnummer: string; uuid: string }>(
     'KAN_TILBAKEKREVING_OPPRETTES',
@@ -93,6 +94,7 @@ const fagsakEndepunkter = new RestApiConfigBuilder()
   // Behandling
   .withRel('bekreft-totrinnsaksjonspunkt', FagsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT)
   .withRel('brev-bestill', FagsakApiKeys.SUBMIT_MESSAGE)
+  .withRel('brev-vis', FagsakApiKeys.PREVIEW_MESSAGE, { isResponseBlob: true })
 
   .withPost('/fptilbake/api/brev/forhandsvis', FagsakApiKeys.PREVIEW_MESSAGE_TILBAKEKREVING, { isResponseBlob: true })
   .withPost(
