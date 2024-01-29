@@ -85,7 +85,7 @@ describe('<MeldingIndex>', () => {
     const data = [
       { key: FagsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: { navn: 'Peder' } } },
       { key: FagsakApiKeys.KODEVERK.name, global: true, data: kodeverk },
-      { key: FagsakApiKeys.PREVIEW_MESSAGE.name, data: {} },
+      { key: FagsakApiKeys.PREVIEW_MESSAGE_MENU.name, data: {} },
     ];
 
     let axiosMock: MockAdapter;
