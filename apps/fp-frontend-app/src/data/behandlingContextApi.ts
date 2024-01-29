@@ -259,8 +259,8 @@ export const behandlingEndepunkter = new RestApiConfigBuilder()
     isResponseBlob: true,
   })
 
-  /* FPFORMIDLING */
   .withPost('/fpsak/api/brev/forhandsvis/manuell', BehandlingApiKeys.PREVIEW_MESSAGE, { isResponseBlob: true })
+  //.withRel('brev-vis', BehandlingApiKeys.PREVIEW_MESSAGE, { isResponseBlob: true })
 
   .build();
 

@@ -59,7 +59,7 @@ export const FagsakApiKeys = {
   ALL_DOCUMENTS: new RestKey<Dokument[], { saksnummer: string }>('ALL_DOCUMENTS'),
   SAVE_TOTRINNSAKSJONSPUNKT: new RestKey<Behandling, any>('SAVE_TOTRINNSAKSJONSPUNKT'),
   SUBMIT_MESSAGE: new RestKey<void, SubmitMessageParams>('SUBMIT_MESSAGE'),
-  PREVIEW_MESSAGE: new RestKey<void, ForhåndsvisMeldingParams>('PREVIEW_MESSAGE'),
+  PREVIEW_MESSAGE_MENU: new RestKey<void, ForhåndsvisMeldingParams>('PREVIEW_MESSAGE_MENU'),
   LAGRE_NOTAT: new RestKey<void, { saksnummer: string; notat: string }>('LAGRE_NOTAT'),
   KAN_TILBAKEKREVING_OPPRETTES: new RestKey<boolean, { saksnummer: string; uuid: string }>(
     'KAN_TILBAKEKREVING_OPPRETTES',
@@ -68,7 +68,6 @@ export const FagsakApiKeys = {
     'KAN_TILBAKEKREVING_REVURDERING_OPPRETTES',
   ),
   PREVIEW_MESSAGE_TILBAKEKREVING: new RestKey<any, any>('PREVIEW_MESSAGE_TILBAKEKREVING'),
-  PREVIEW_MESSAGE_FORMIDLING: new RestKey<any, ForhåndsvisMeldingParams>('PREVIEW_MESSAGE_FORMIDLING'),
   PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE: new RestKey<any, any>('PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE'),
   ENDRE_SAK_MARKERING: new RestKey<void, { saksnummer: string; fagsakMarkering: string }>('ENDRE_SAK_MARKERING'),
 };
@@ -94,7 +93,7 @@ const fagsakEndepunkter = new RestApiConfigBuilder()
   // Behandling
   .withRel('bekreft-totrinnsaksjonspunkt', FagsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT)
   .withRel('brev-bestill', FagsakApiKeys.SUBMIT_MESSAGE)
-  .withRel('brev-vis', FagsakApiKeys.PREVIEW_MESSAGE, { isResponseBlob: true })
+  .withRel('brev-vis', FagsakApiKeys.PREVIEW_MESSAGE_MENU, { isResponseBlob: true })
 
   .withPost('/fptilbake/api/brev/forhandsvis', FagsakApiKeys.PREVIEW_MESSAGE_TILBAKEKREVING, { isResponseBlob: true })
   .withPost(
@@ -105,9 +104,6 @@ const fagsakEndepunkter = new RestApiConfigBuilder()
   .withAsyncPost('/fptilbake/api/behandlinger/opprett', FagsakApiKeys.NEW_BEHANDLING_FPTILBAKE)
   .withAsyncPut('/fpsak/api/behandlinger', FagsakApiKeys.NEW_BEHANDLING_FPSAK)
   .withGet('/fpsak/api/aktoer-info', FagsakApiKeys.AKTOER_INFO)
-
-  // FpFormidling
-  .withPost('/fpformidling/api/brev/forhaandsvis', FagsakApiKeys.PREVIEW_MESSAGE_FORMIDLING, { isResponseBlob: true })
 
   // Kun brukt for søk på localhost
   .withPost('/fpsak/api/fagsak/sok', FagsakApiKeys.SEARCH_FAGSAK)
