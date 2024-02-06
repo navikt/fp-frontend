@@ -271,22 +271,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     );
     expect(message[0].props.id).toEqual('ToTrinnsForm.Beregning.InntektFastsatt');
   });
-  it('skal vise korrekt tekst for aksjonspunkt 5042', () => {
-    const aksjonspunkt = {
-      aksjonspunktKode: AksjonspunktCode.FASTSETT_BRUTTO_BEREGNINGSGRUNNLAG_SELVSTENDIG_NAERINGSDRIVENDE,
-      besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: false,
-    } as TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(
-      true,
-      behandlingStatus,
-      arbeidsforholdHandlingTyper,
-      faktaOmBeregningTilfeller,
-      erTilbakekreving,
-      aksjonspunkt,
-    );
-    expect(message[0].props.id).toEqual('ToTrinnsForm.Beregning.InntektFastsatt');
-  });
   it('skal vise korrekt tekst for aksjonspunkt 6007', () => {
     const aksjonspunkt = {
       aksjonspunktKode: AksjonspunktCode.OVERSTYR_BEREGNING,
@@ -719,49 +703,9 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], [], false, aksjonspunkt, behandlingsresultat);
     expect(message[0].props.id).toEqual('ToTrinnsForm.Klage.OmgjortTilGunst');
   });
-  it('skal vise korrekt tekst for aksjonspunkt 5036 medhold', () => {
-    const aksjonspunkt = {
-      aksjonspunktKode: AksjonspunktCode.BEHANDLE_KLAGE_NFP,
-      besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: false,
-    } as TotrinnskontrollAksjonspunkt;
-    const behandlingsresultat = {
-      type: behandlingResultatType.KLAGE_MEDHOLD,
-    } as Behandlingsresultat;
-    const message = getAksjonspunkttekst(
-      true,
-      behandlingStatusFVED,
-      [],
-      faktaOmBeregningTilfeller,
-      false,
-      aksjonspunkt,
-      behandlingsresultat,
-    );
-    expect(message[0].props.id).toEqual('ToTrinnsForm.Klage.OmgjortTilGunst');
-  });
   // Klage avslag
   // Ytelsesvedtak opphevet
   it('skal vise korrekt tekst for aksjonspunkt 5035 avslag ytelsesvedtak opphevet', () => {
-    const behandlingsresultat = {
-      type: behandlingResultatType.KLAGE_YTELSESVEDTAK_OPPHEVET,
-    } as Behandlingsresultat;
-    const aksjonspunkt = {
-      aksjonspunktKode: AksjonspunktCode.BEHANDLE_KLAGE_NFP,
-      besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: false,
-    } as TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(
-      true,
-      behandlingStatusFVED,
-      [],
-      faktaOmBeregningTilfeller,
-      false,
-      aksjonspunkt,
-      behandlingsresultat,
-    );
-    expect(message[0].props.id).toEqual('ToTrinnsForm.Klage.OppheveYtelsesVedtak');
-  });
-  it('skal vise korrekt tekst for aksjonspunkt 5036 avslag ytelsesvedtak opphevet', () => {
     const behandlingsresultat = {
       type: behandlingResultatType.KLAGE_YTELSESVEDTAK_OPPHEVET,
     } as Behandlingsresultat;
@@ -794,20 +738,8 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], [], false, aksjonspunkt, behandlingsresultat);
     expect(message[0].props.id).toEqual('ToTrinnsForm.Klage.Avvist');
   });
-  it('skal vise korrekt tekst for aksjonspunkt 5036 avslag klage avvist', () => {
-    const behandlingsresultat = {
-      type: behandlingResultatType.KLAGE_AVVIST,
-    } as Behandlingsresultat;
-    const aksjonspunkt = {
-      aksjonspunktKode: AksjonspunktCode.BEHANDLE_KLAGE_NFP,
-      besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: false,
-    } as TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], [], false, aksjonspunkt, behandlingsresultat);
-    expect(message[0].props.id).toEqual('ToTrinnsForm.Klage.Avvist');
-  });
   // Ikke fastsatt Engangsstønad
-  it('skal vise korrekt tekst for aksjonspunkt 5036 avslag ikke fastsatt', () => {
+  it('skal vise korrekt tekst for aksjonspunkt 5035 avslag ikke fastsatt', () => {
     const behandlingsresultat = {
       type: behandlingResultatType.KLAGE_YTELSESVEDTAK_STADFESTET,
     } as Behandlingsresultat;
@@ -819,7 +751,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], [], false, aksjonspunkt, behandlingsresultat);
     expect(message[0].props.id).toEqual('ToTrinnsForm.Klage.StadfesteYtelsesVedtak');
   });
-  it('skal vise korrekt tekst for aksjonspunkt 5036 avslag ytelsesvedtak stadfestet', () => {
+  it('skal vise korrekt tekst for aksjonspunkt 5035 avslag ytelsesvedtak stadfestet', () => {
     const behandlingsresultat = {
       type: behandlingResultatType.KLAGE_YTELSESVEDTAK_STADFESTET,
     } as Behandlingsresultat;
