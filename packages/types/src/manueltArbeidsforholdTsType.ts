@@ -1,5 +1,6 @@
 type ManueltArbeidsforhold = Readonly<{
   behandlingUuid: string;
+  behandlingVersjon: number;
   begrunnelse: string;
   arbeidsgiverIdent: string;
   internArbeidsforholdRef?: string;

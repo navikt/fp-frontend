@@ -154,6 +154,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
           {erManueltOpprettet && (
             <ManueltLagtTilArbeidsforholdForm
               behandlingUuid={behandlingUuid}
+              behandlingVersjon={behandlingVersjon}
               isReadOnly={false}
               registrerArbeidsforhold={registrerArbeidsforhold}
               radData={radData}

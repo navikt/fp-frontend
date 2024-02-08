@@ -140,6 +140,7 @@ const ArbeidsOgInntektOverstyrPanel: FunctionComponent<OwnProps> = ({
         <>
           <ManueltLagtTilArbeidsforholdForm
             behandlingUuid={behandling.uuid}
+            behandlingVersjon={behandling.versjon}
             isReadOnly={false}
             registrerArbeidsforhold={registrerArbeidsforhold}
             lukkArbeidsforholdRad={() => toggleVisningAvLeggTilArbeidsforhold(false)}
