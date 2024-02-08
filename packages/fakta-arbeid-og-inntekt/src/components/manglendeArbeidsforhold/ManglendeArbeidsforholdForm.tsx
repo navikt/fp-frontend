@@ -138,6 +138,7 @@ const ManglendeArbeidsforholdForm: FunctionComponent<OwnProps> = ({
       ) {
         return registrerArbeidsforhold({
           behandlingUuid,
+          behandlingVersjon,
           internArbeidsforholdRef: inntektsmelding.internArbeidsforholdId,
           arbeidsgiverNavn,
           arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,

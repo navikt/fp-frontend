@@ -49,6 +49,7 @@ const validerPeriodeRekkefølge = (getValues: UseFormGetValues<FormValues>) => (
 
 interface OwnProps {
   behandlingUuid: string;
+  behandlingVersjon: number;
   isReadOnly: boolean;
   registrerArbeidsforhold: (params: ManueltArbeidsforhold) => Promise<void>;
   radData?: ArbeidsforholdOgInntektRadData;
@@ -61,6 +62,7 @@ interface OwnProps {
 
 const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
   behandlingUuid,
+  behandlingVersjon,
   isReadOnly,
   registrerArbeidsforhold,
   radData,
@@ -98,6 +100,7 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
     (formValues: FormValues) => {
       const params = {
         behandlingUuid,
+        behandlingVersjon,
         arbeidsgiverIdent: MANUELT_ORG_NR,
         vurdering: ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER,
         ...formValues,
@@ -138,6 +141,7 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
     const formValues = formMethods.getValues();
     const params = {
       behandlingUuid,
+      behandlingVersjon,
       arbeidsgiverIdent: MANUELT_ORG_NR,
       vurdering: ArbeidsforholdKomplettVurderingType.FJERN_FRA_BEHANDLINGEN,
       ...formValues,
