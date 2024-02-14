@@ -250,7 +250,7 @@
       "dokumentLinks": [],
       "historikkinnslagDeler": [
         {
-          "begrunnelsetekst": null,
+          "begrunnelsetekst": "Dette er ein lang begrunnelsestekst",
           "begrunnelseFritekst": "Personopplysning",
           "hendelse": {
             "navn": "BYTT_ENHET",
