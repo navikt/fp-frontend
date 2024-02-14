@@ -31,7 +31,7 @@ const utledTypeTekst = (
       ? finnProsentSvangerskapspenger(tilrettelegging, stillingsprosentArbeidsforhold, velferdspermisjonsprosent)
       : 0;
   return tilrettelegging.fom
-    ? intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.SVPprosent' }, { prosent })
+    ? intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.SVPprosent' }, { prosent: prosent || '0' })
     : intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.Tilrettelegging' });
 };
 
