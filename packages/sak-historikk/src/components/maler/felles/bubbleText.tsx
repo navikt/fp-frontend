@@ -1,7 +1,8 @@
-import React, { FunctionComponent, useCallback, useState, KeyboardEvent } from 'react';
+import React, { FunctionComponent, MouseEvent, useState, KeyboardEvent } from 'react';
 import { useIntl } from 'react-intl';
 import { ChevronDownIcon, ChevronUpIcon } from '@navikt/aksel-icons';
 
+import { HStack, Link } from '@navikt/ds-react';
 import styles from './bubbleText.module.css';
 
 const truncateText = (tekst: string, cutOffLength: number): string =>
@@ -25,31 +26,34 @@ const BubbleText: FunctionComponent<OwnProps> = ({ cutOffLength = 83, bodyText =
   const intl = useIntl();
   const [expanded, setExpanded] = useState(false);
 
-  const handleOnClick = useCallback(() => setExpanded(prevState => !prevState), []);
-  const handleKeyDown = useCallback((event: KeyboardEvent) => {
+  const handleOnClick = (event: MouseEvent) => {
+    setExpanded(prevState => !prevState);
+    event.preventDefault();
+  };
+  const handleKeyDown = (event: KeyboardEvent) => {
     if (event && event.keyCode === 32) {
       setExpanded(prevState => !prevState);
     }
-  }, []);
+    event.preventDefault();
+  };
 
   if (bodyText.length < cutOffLength + 1) {
     return <div>{bodyText}</div>;
   }
 
   return (
-    <>
+    <HStack gap="2" justify="end">
       {expanded && <div>{bodyText}</div>}
       {!expanded && <div className={styles.breakWord}>{truncateText(bodyText, cutOffLength)}</div>}
-      <a
+      <Link
         href="#"
         onClick={handleOnClick}
         onKeyDown={handleKeyDown}
-        className={styles.clickableArea}
-        title={intl.formatMessage({ id: expanded ? 'BubbleText.LukkeTekstfelt' : 'BubbleText.ApneTekstfelt' })}
+        aria-label={intl.formatMessage({ id: expanded ? 'BubbleText.LukkeTekstfelt' : 'BubbleText.ApneTekstfelt' })}
       >
         {expanded ? <ChevronUpIcon /> : <ChevronDownIcon />}
-      </a>
-    </>
+      </Link>
+    </HStack>
   );
 };
 
