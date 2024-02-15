@@ -118,7 +118,7 @@ describe('<MeldingIndex>', () => {
 
     await waitFor(() => expect(axiosMock.history.post.length).toBe(1));
     await waitFor(() =>
-      expect(axiosMock.history.post.find(a => a.url === '/fpformidling/api/brev/forhaandsvis')?.data).toBe(
+      expect(axiosMock.history.post.find(a => a.url === '/fpsak/api/brev/forhaandsvis')?.data).toBe(
         JSON.stringify({
           behandlingUuid: '1',
           fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,

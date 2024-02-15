@@ -11,7 +11,6 @@
   "externals": [
     "fpsak-api.prod-fss-pub.nais.io",
     "fplos.prod-fss-pub.nais.io",
-    "fpformidling.prod-fss-pub.nais.io",
     "fptilbake.prod-fss-pub.nais.io"
   ],
   "proxyRedirects": [
@@ -24,11 +23,6 @@
       "path": "/fptilbake/api",
       "url": "https://fptilbake.prod-fss-pub.nais.io",
       "scope": "api://prod-fss.teamforeldrepenger.fptilbake/.default"
-    },
-    {
-      "path": "/fpformidling/api",
-      "url": "https://fpformidling.prod-fss-pub.nais.io",
-      "scope": "api://prod-fss.teamforeldrepenger.fpformidling/.default"
     },
     {
       "path": "/fplos/api",
