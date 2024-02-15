@@ -32,7 +32,7 @@ const useVisForhandsvisningAvMelding = (behandlingType?: string): ForhandsvisFun
     FagsakApiKeys.PREVIEW_MESSAGE_TILBAKEKREVING,
   );
   const { startRequest: forhandsvisMelding } = restFagsakApiHooks.useRestApiRunner(
-    FagsakApiKeys.PREVIEW_MESSAGE_FORMIDLING,
+    FagsakApiKeys.PREVIEW_MESSAGE_MENU,
   );
 
   const erTilbakekreving =
