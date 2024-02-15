@@ -259,8 +259,7 @@ export const behandlingEndepunkter = new RestApiConfigBuilder()
     isResponseBlob: true,
   })
 
-  /* FPFORMIDLING */
-  .withPost('/fpformidling/api/brev/forhaandsvis', BehandlingApiKeys.PREVIEW_MESSAGE, { isResponseBlob: true })
+  .withPost('/fpsak/api/brev/forhandsvis', BehandlingApiKeys.PREVIEW_MESSAGE, { isResponseBlob: true })
 
   .build();
 
