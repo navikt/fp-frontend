@@ -131,7 +131,7 @@ describe('<InnsynVedtakProsessStegInitPanel>', () => {
 
     await waitFor(() => expect(axiosMock.history.post.length).toBe(1));
 
-    expect(axiosMock.history.post.find(a => a.url === '/fpformidling/api/brev/forhaandsvis')?.data).toBe(
+    expect(axiosMock.history.post.find(a => a.url === '/fpsak/api/brev/forhaandsvis')?.data).toBe(
       JSON.stringify({
         fritekst: ' ',
         mottaker: '',
