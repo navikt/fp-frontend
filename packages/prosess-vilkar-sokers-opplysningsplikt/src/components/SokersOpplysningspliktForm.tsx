@@ -110,7 +110,7 @@ const buildInitialValues = (
   // TODO Mogleg inntektsmeldingerSomIkkeKommer kan fjernast, men trur fjerning av bruken av denne i render er ein midlertidig
   // fiks og at dette derfor skal brukast etterkvart. Sjå TFP-3076
   const inntektsmeldingerSomIkkeKommer = sorterteManglendeVedlegg
-    .filter(mv => mv.arbeidsgiverReferanse !== null && mv.arbeidsgiverReferanse)
+    .filter(mv => !!mv.arbeidsgiverReferanse)
     .reduce(
       (acc, mv) => ({
         ...acc,
@@ -260,7 +260,7 @@ const SokersOpplysningspliktForm: FunctionComponent<OwnProps> = ({
                 >
                   <TableColumn>{vedlegg.dokumentTittel}</TableColumn>
                   <TableColumn>
-                    {vedlegg.arbeidsgiverReferanse !== null && vedlegg.arbeidsgiverReferanse &&
+                    {!!vedlegg.arbeidsgiverReferanse &&
                       formatArbeidsgiver(arbeidsgiverOpplysningerPerId, vedlegg.arbeidsgiverReferanse)}
                   </TableColumn>
                 </TableRow>

@@ -32,6 +32,7 @@ const arbeidsgiverOpplysningerPerId = {
 const soknad = {
   manglendeVedlegg: [
     {
+      dokumentType: 'I000067',
       dokumentTittel: 'Inntektsmelding',
       arbeidsgiverReferanse: '1234',
     },
