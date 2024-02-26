@@ -73,6 +73,5 @@ export { default as venteArsakType } from './src/venteArsakType';
 export { default as VilkarType, adopsjonsvilkarene, fodselsvilkarene } from './src/vilkarType';
 export { default as vilkarUtfallType } from './src/vilkarUtfallType';
 export { default as vurderPaNyttArsakType } from './src/vurderPaNyttArsakType';
-export { default as dokumentTypeId } from './src/dokumentTypeId';
 export { default as VergeType } from './src/vergeType';
 export { default as tilbakekrevingVidereBehandling } from './src/tilbakekrevingVidereBehandling';

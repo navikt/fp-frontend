@@ -1,5 +1,6 @@
 export type ManglendeVedleggSoknad = Readonly<{
-  dokumentType: string;
+  dokumentType: string; // Brukes kun som sorteringsnøkkel, ikke kodeverk
+  dokumentTittel: string;
   arbeidsgiverReferanse: string;
   brukerHarSagtAtIkkeKommer: boolean;
 }>;
