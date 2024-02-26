@@ -11,7 +11,6 @@ import {
   KodeverkType,
   VilkarType,
   getKodeverknavnFn,
-  dokumentTypeId,
   AksjonspunktCode,
   aksjonspunktStatus,
 } from '@navikt/fp-kodeverk';
@@ -85,7 +84,7 @@ export const getSortedManglendeVedlegg = (soknad: Soknad): ManglendeVedleggSokna
   soknad && soknad.manglendeVedlegg
     ? soknad.manglendeVedlegg
         .slice()
-        .sort(mv1 => (mv1.dokumentType === dokumentTypeId.DOKUMENTASJON_AV_TERMIN_ELLER_FØDSEL ? 1 : -1))
+        .sort((mv1, mv2) => mv1.dokumentTittel.localeCompare(mv2.dokumentTittel))
     : [];
 
 const harSoknad = (soknad: Soknad): boolean => soknad !== null && isObject(soknad);
@@ -111,7 +110,7 @@ const buildInitialValues = (
   // TODO Mogleg inntektsmeldingerSomIkkeKommer kan fjernast, men trur fjerning av bruken av denne i render er ein midlertidig
   // fiks og at dette derfor skal brukast etterkvart. Sjå TFP-3076
   const inntektsmeldingerSomIkkeKommer = sorterteManglendeVedlegg
-    .filter(mv => mv.dokumentType === dokumentTypeId.INNTEKTSMELDING)
+    .filter(mv => mv.arbeidsgiverReferanse !== null && mv.arbeidsgiverReferanse)
     .reduce(
       (acc, mv) => ({
         ...acc,
@@ -135,7 +134,7 @@ const transformValues = (
   aksjonspunkter: Aksjonspunkt[],
 ): BekreftSokersOpplysningspliktManuAp | OverstyringSokersOpplysingspliktAp => {
   const arbeidsgiverReferanser = manglendeVedlegg
-    .filter(mv => mv.dokumentType === dokumentTypeId.INNTEKTSMELDING)
+    .filter(mv => mv.arbeidsgiverReferanse !== null && mv.arbeidsgiverReferanse)
     .map(mv => mv.arbeidsgiverReferanse);
 
   const aksjonspunkt = aksjonspunkter.length > 0 ? aksjonspunkter[0] : undefined;
@@ -229,8 +228,6 @@ const SokersOpplysningspliktForm: FunctionComponent<OwnProps> = ({
   const isOpenAksjonspunkt = aksjonspunkter.some(ap => ap.status === aksjonspunktStatus.OPPRETTET);
   const originalErVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
 
-  const dokumentTypeIds = alleKodeverk[KodeverkType.DOKUMENT_TYPE_ID];
-
   return (
     <Form
       formMethods={formMethods}
@@ -261,9 +258,9 @@ const SokersOpplysningspliktForm: FunctionComponent<OwnProps> = ({
                 <TableRow
                   key={vedlegg.dokumentType + (vedlegg.arbeidsgiverReferanse ? vedlegg.arbeidsgiverReferanse : '')}
                 >
-                  <TableColumn>{dokumentTypeIds.find(dti => dti.kode === vedlegg.dokumentType)?.navn}</TableColumn>
+                  <TableColumn>{vedlegg.dokumentTittel}</TableColumn>
                   <TableColumn>
-                    {vedlegg.dokumentType === dokumentTypeId.INNTEKTSMELDING &&
+                    {vedlegg.arbeidsgiverReferanse !== null && vedlegg.arbeidsgiverReferanse &&
                       formatArbeidsgiver(arbeidsgiverOpplysningerPerId, vedlegg.arbeidsgiverReferanse)}
                   </TableColumn>
                 </TableRow>

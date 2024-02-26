@@ -34,7 +34,6 @@ enum KodeverkType {
   FAGSYSTEM = 'Fagsystem',
   REGION = 'Region',
   SIVILSTAND_TYPE = 'SivilstandType',
-  DOKUMENT_TYPE_ID = 'DokumentTypeId',
   FAKTA_OM_BEREGNING_TILFELLE = 'FaktaOmBeregningTilfelle',
   GRADERING_AVSLAG_AARSAK = 'GraderingAvslagÅrsak',
   SKJERMLENKE_TYPE = 'SkjermlenkeType',

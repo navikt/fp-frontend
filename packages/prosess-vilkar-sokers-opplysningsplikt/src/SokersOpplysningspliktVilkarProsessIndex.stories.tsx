@@ -4,7 +4,6 @@ import { action } from '@storybook/addon-actions';
 
 import {
   aksjonspunktStatus,
-  dokumentTypeId,
   vilkarUtfallType,
   avslagsarsakCodes,
   AksjonspunktCode,
@@ -33,7 +32,7 @@ const arbeidsgiverOpplysningerPerId = {
 const soknad = {
   manglendeVedlegg: [
     {
-      dokumentType: dokumentTypeId.INNTEKTSMELDING,
+      dokumentTittel: 'Inntektsmelding',
       arbeidsgiverReferanse: '1234',
     },
   ],
