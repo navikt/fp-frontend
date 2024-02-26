@@ -134,7 +134,7 @@ const transformValues = (
   aksjonspunkter: Aksjonspunkt[],
 ): BekreftSokersOpplysningspliktManuAp | OverstyringSokersOpplysingspliktAp => {
   const arbeidsgiverReferanser = manglendeVedlegg
-    .filter(mv => mv.arbeidsgiverReferanse !== null && mv.arbeidsgiverReferanse)
+    .filter(mv => !!mv.arbeidsgiverReferanse)
     .map(mv => mv.arbeidsgiverReferanse);
 
   const aksjonspunkt = aksjonspunkter.length > 0 ? aksjonspunkter[0] : undefined;
