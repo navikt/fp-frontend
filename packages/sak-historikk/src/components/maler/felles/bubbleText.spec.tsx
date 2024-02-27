@@ -22,7 +22,7 @@ describe('<BubbleText>', () => {
     );
 
     expect(await screen.findByText('My body...')).toBeInTheDocument();
-    expect(screen.getByTitle('Åpne tekstfelt')).toBeInTheDocument();
+    expect(screen.getByLabelText('Åpne tekstfelt')).toBeInTheDocument();
   });
 
   it('skal vise hele teksten om cutoffpointen vi sender er størren en teksten', async () => {
@@ -48,8 +48,8 @@ describe('<BubbleText>', () => {
       </RawIntlProvider>,
     );
 
-    await userEvent.click(screen.getByTitle('Åpne tekstfelt'));
+    await userEvent.click(screen.getByLabelText('Åpne tekstfelt'));
 
-    expect(await screen.findByTitle('Lukke tekstfelt')).toBeInTheDocument();
+    expect(await screen.getByLabelText('Lukke tekstfelt')).toBeInTheDocument();
   });
 });

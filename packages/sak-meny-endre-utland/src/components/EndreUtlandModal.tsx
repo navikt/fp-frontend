@@ -85,6 +85,10 @@ const EndreUtlandModal: FunctionComponent<OwnProps> = ({
                 label: intl.formatMessage({ id: 'MenyEndreUtlandIndex.SammensattKontroll' }),
                 value: FagsakMarkeringKode.SAMMENSATT_KONTROLL,
               },
+              {
+                label: intl.formatMessage({ id: 'MenyEndreUtlandIndex.PraksisUtsettelse' }),
+                value: FagsakMarkeringKode.PRAKSIS_UTSETTELSE,
+              },
             ]}
           />
         </Modal.Body>
