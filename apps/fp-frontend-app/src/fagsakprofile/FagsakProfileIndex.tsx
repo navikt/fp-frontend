@@ -49,6 +49,8 @@ const finnFagsakMarkeringTekst = (fagsak: Fagsak): string | undefined => {
       return 'Død';
     case FagsakMarkeringKode.SELVSTENDIG_NÆRING:
       return 'Næring';
+    case FagsakMarkeringKode.PRAKSIS_UTSETTELSE:
+      return 'Utsettelse';
     default:
       return undefined;
   }

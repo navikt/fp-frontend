@@ -901,6 +901,10 @@ const historikkEndretFeltVerdiTypeCodes = {
     kode: 'SELVSTENDIG_NÆRING',
     verdiId: 'HistorikkEndretFeltVerdiType.SelvstendigNæring',
   },
+  PRAKSIS_UTSETTELSE: {
+    kode: 'PRAKSIS_UTSETTELSE',
+    verdiId: 'HistorikkEndretFeltVerdiType.PraksisUtsettelse',
+  },
   SØKER_ER_I_PERMISJON: {
     kode: 'SØKER_ER_I_PERMISJON',
     verdiId: 'HistorikkEndretFeltVerdiType.SøkerErIPermisjon',
