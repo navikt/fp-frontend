@@ -29,7 +29,7 @@
     "react": "18.2.0",
     "react-hook-form": "7.50.1",
     "react-intl": "6.6.2",
-    "react-router-dom": "6.22.0"
+    "react-router-dom": "6.22.2"
   },
   "devDependencies": {
     "@navikt/ds-css": "5.18.1",
