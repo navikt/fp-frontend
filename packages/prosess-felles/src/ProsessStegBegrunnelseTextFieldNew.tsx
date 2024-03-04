@@ -65,7 +65,7 @@ const ProsessStegBegrunnelseTextField: FunctionComponent<OwnProps> & StaticFunct
         maxLength={2000}
         readOnly={readOnly}
         // Må erstatte bindestrek kopiert inn fra Word med vanlig bindestrek
-        parse={value => value.toString().replaceAll('‑', '-')}
+        parse={value => value.toString().replaceAll(/\p{Dash_Punctuation}/gu, '-')}
       />
     </div>
   );
