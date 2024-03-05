@@ -13,7 +13,7 @@ import styles from './prosessStegBegrunnelseTextField.module.css';
 const intl = createIntl(messages);
 
 const minLength3 = minLength(3);
-const maxLength1500 = maxLength(1500);
+const maxLength1500 = maxLength(2000);
 
 const getBegrunnelseTextCode = (readOnly: boolean): string =>
   readOnly
