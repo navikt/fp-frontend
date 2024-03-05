@@ -88,7 +88,7 @@ const ManueltVedtaksbrevPanel: FunctionComponent<OwnProps> = ({
         maxLength={10000}
         readOnly={isReadOnly}
         // Må erstatte bindestrek kopiert inn fra Word med vanlig bindestrek
-        parse={value => value.toString().replaceAll('‑', '-').replaceAll('\t', ' ')}
+        parse={value => value.toString().replaceAll(/\p{Dash_Punctuation}/gu, '-').replaceAll('\t', ' ')}
       />
       {isReadOnly && (
         <>

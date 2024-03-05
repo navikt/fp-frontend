@@ -247,7 +247,7 @@ const FormkravKlageFormNfp: FunctionComponent<OwnProps> = ({
             maxLength={100000}
             readOnly={readOnly}
             // Må erstatte bindestrek kopiert inn fra Word med vanlig bindestrek
-            parse={value => value.toString().replaceAll('‑', '-')}
+            parse={value => value.toString().replaceAll(/\p{Dash_Punctuation}/gu, '-')}
           />
         )}
         <HStack justify="space-between">
