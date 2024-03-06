@@ -14,10 +14,7 @@ export type OpptjeningAktivitet = {
 export type FastsattOpptjeningAktivitet = {
   fom: string;
   tom: string;
-  type: string;
   klasse: string;
-  aktivitetReferanse: string;
-  arbeidsgiverNavn: string;
 };
 
 export type FastsattOpptjening = {
