@@ -32,7 +32,7 @@ export const transformValues = (values: FormValues): VurderFeilutbetalingAp => {
     return {
       kode: AksjonspunktCode.VURDER_FEILUTBETALING,
       begrunnelse,
-      videreBehandling: tilbakekrevingVidereBehandling.TILBAKEKR_INFOTRYGD,
+      videreBehandling: tilbakekrevingVidereBehandling.TILBAKEKR_OPPRETT,
     };
   }
 
@@ -54,7 +54,7 @@ export const buildInitialValues = (
 
   const harTypeIkkeSendt =
     !tilbakekrevingvalg.varseltekst &&
-    tilbakekrevingvalg.videreBehandling === tilbakekrevingVidereBehandling.TILBAKEKR_INFOTRYGD;
+    tilbakekrevingvalg.videreBehandling === tilbakekrevingVidereBehandling.TILBAKEKR_OPPRETT;
 
   return {
     videreBehandling: harTypeIkkeSendt
@@ -116,7 +116,7 @@ const TilbakekrevSøkerForm: FunctionComponent<OwnProps> = ({
         isReadOnly={readOnly}
         radios={[
           {
-            value: tilbakekrevingVidereBehandling.TILBAKEKR_INFOTRYGD,
+            value: tilbakekrevingVidereBehandling.TILBAKEKR_OPPRETT,
             label: <FormattedMessage id="Simulering.gjennomfør" />,
             element: (
               <div className={styles.varsel}>
@@ -155,7 +155,7 @@ const TilbakekrevSøkerForm: FunctionComponent<OwnProps> = ({
             ),
           },
           {
-            value: `${tilbakekrevingVidereBehandling.TILBAKEKR_INFOTRYGD}${IKKE_SEND}`,
+            value: `${tilbakekrevingVidereBehandling.TILBAKEKR_OPPRETT}${IKKE_SEND}`,
             label: <FormattedMessage id="Simulering.OpprettMenIkkeSendVarsel" />,
           },
           {

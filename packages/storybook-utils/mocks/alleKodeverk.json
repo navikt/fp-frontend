@@ -1824,7 +1824,7 @@
       "navn": "Feilutbetaling hvor inntrekk dekker hele beløpet"
     },
     {
-      "kode": "TILBAKEKR_INFOTRYGD",
+      "kode": "TILBAKEKR_OPPRETT",
       "kodeverk": "TILBAKEKR_VIDERE_BEH",
       "navn": "Feilutbetaling med tilbakekreving"
     },
