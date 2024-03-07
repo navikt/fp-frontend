@@ -8,7 +8,8 @@ import {
 import { AlleKodeverk, SimuleringResultat, TilbakekrevingValg, Vilkar } from '@navikt/fp-types';
 
 const tilbakekrevingMedInntrekk = (tilbakekrevingKode: string, simuleringResultat: SimuleringResultat): boolean =>
-  tilbakekrevingKode === tilbakekrevingVidereBehandling.TILBAKEKR_OPPRETT &&
+  (tilbakekrevingKode === tilbakekrevingVidereBehandling.TILBAKEKR_OPPRETT ||
+    tilbakekrevingKode === tilbakekrevingVidereBehandling.TILBAKEKR_INFOTRYGD) &&
   (!!simuleringResultat.simuleringResultat.sumInntrekk || !!simuleringResultat.simuleringResultatUtenInntrekk);
 
 export const getTilbakekrevingText = (
