@@ -1097,11 +1097,6 @@
   ],
   "VidereBehandling": [
     {
-      "kode": "TILBAKEKR_INFOTRYGD",
-      "navn": "Feilutbetaling med tilbakekreving",
-      "kodeverk": "TILBAKEKR_VIDERE_BEH"
-    },
-    {
       "kode": "TILBAKEKR_OPPRETT",
       "navn": "Feilutbetaling med tilbakekreving",
       "kodeverk": "TILBAKEKR_VIDERE_BEH"

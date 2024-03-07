@@ -152,9 +152,13 @@ const historikkEndretFeltVerdiTypeCodes = {
     kode: 'SJØMANN',
     verdiId: 'HistorikkEndretFeltVerdiType.Sjømann',
   },
+  TILBAKEKR_OPPRETT: {
+    kode: 'TILBAKEKR_OPPRETT',
+    verdiId: 'HistorikkEndretFeltVerdiType.opprettTilbakekr',
+  },
   TILBAKEKR_INFOTRYGD: {
     kode: 'TILBAKEKR_INFOTRYGD',
-    verdiId: 'HistorikkEndretFeltVerdiType.tilbakekrInfotrygd',
+    verdiId: 'HistorikkEndretFeltVerdiType.opprettTilbakekr',
   },
   TILBAKEKR_IGNORER: {
     kode: 'TILBAKEKR_IGNORER',

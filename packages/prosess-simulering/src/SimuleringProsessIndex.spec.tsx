@@ -69,7 +69,7 @@ describe('<SimuleringProsessIndex>', () => {
         begrunnelse: 'Dette er en begrunnelse',
         kode: '5084',
         varseltekst: 'Dette er en fritekst',
-        videreBehandling: 'TILBAKEKR_INFOTRYGD',
+        videreBehandling: 'TILBAKEKR_OPPRETT',
       },
     ]);
   });
