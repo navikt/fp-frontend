@@ -33,7 +33,7 @@
     "classnames": "2.5.1",
     "dayjs": "1.11.10",
     "react": "18.2.0",
-    "react-hook-form": "7.50.1",
+    "react-hook-form": "7.51.0",
     "react-intl": "6.6.2"
   },
   "devDependencies": {
