@@ -156,10 +156,6 @@ const historikkEndretFeltVerdiTypeCodes = {
     kode: 'TILBAKEKR_OPPRETT',
     verdiId: 'HistorikkEndretFeltVerdiType.opprettTilbakekr',
   },
-  TILBAKEKR_INFOTRYGD: {
-    kode: 'TILBAKEKR_INFOTRYGD',
-    verdiId: 'HistorikkEndretFeltVerdiType.opprettTilbakekr',
-  },
   TILBAKEKR_IGNORER: {
     kode: 'TILBAKEKR_IGNORER',
     verdiId: 'HistorikkEndretFeltVerdiType.tilbakekrIgnorer',
