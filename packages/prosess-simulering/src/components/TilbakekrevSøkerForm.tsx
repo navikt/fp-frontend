@@ -53,9 +53,7 @@ export const buildInitialValues = (
   }
 
   const harTypeIkkeSendt =
-    !tilbakekrevingvalg.varseltekst &&
-    (tilbakekrevingvalg.videreBehandling === tilbakekrevingVidereBehandling.TILBAKEKR_OPPRETT ||
-    tilbakekrevingvalg.videreBehandling === tilbakekrevingVidereBehandling.TILBAKEKR_INFOTRYGD);
+    !tilbakekrevingvalg.varseltekst && tilbakekrevingvalg.videreBehandling === tilbakekrevingVidereBehandling.TILBAKEKR_OPPRETT;
 
   return {
     videreBehandling: harTypeIkkeSendt
