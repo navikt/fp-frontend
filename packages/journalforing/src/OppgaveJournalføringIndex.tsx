@@ -162,6 +162,7 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
         harSøktOgFunnetIngenMatch={harSøktOgFunnetIngenMatch}
         valgtJournalpost={valgtJournalpost}
         hentJournalpost={hentJournalpost}
+        antallOppgaver={alleOppgaver ? alleOppgaver.length : undefined}
       />
       {visModal && (
         <JournalførtSubmitModal
