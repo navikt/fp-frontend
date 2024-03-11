@@ -14,6 +14,7 @@ type OwnProps = Readonly<{
   avbrytVisningAvJournalpost: () => void;
   valgtJournalpost?: Journalpost;
   harSøktOgFunnetIngenMatch: boolean;
+  antallOppgaver?: number;
 }>;
 
 /**
@@ -24,6 +25,7 @@ const JournalføringHeader: FunctionComponent<OwnProps> = ({
   hentJournalpost,
   avbrytVisningAvJournalpost,
   harSøktOgFunnetIngenMatch,
+  antallOppgaver,
 }) => {
   const [åpenSøkemodal, setÅpenSøkemodal] = useState<boolean>(false);
   const åpneModal = useCallback(() => {
@@ -38,6 +40,7 @@ const JournalføringHeader: FunctionComponent<OwnProps> = ({
       lukkModal();
     }
   }, [valgtJournalpost]);
+  const harHentetOppgaver = antallOppgaver || antallOppgaver === 0;
 
   return (
     <div className={styles.header}>
@@ -72,6 +75,9 @@ const JournalføringHeader: FunctionComponent<OwnProps> = ({
           </>
         )}
       </HStack>
+      {!valgtJournalpost && harHentetOppgaver && (
+        <FormattedMessage id="Journalforing.Antall.Oppgaver" values={{ antall: antallOppgaver }} />
+      )}
     </div>
   );
 };
