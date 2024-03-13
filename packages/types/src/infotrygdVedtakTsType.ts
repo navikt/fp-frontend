@@ -1,7 +1,7 @@
 export type VedtakArbeidsforhold = {
   arbeidsgiverOrgnr: string;
   inntekt: number;
-  inntektsperiode: {
+  inntektsperiode?: {
     kode: string;
     termnavn: string;
   };
@@ -24,7 +24,7 @@ export type VedtakUtbetaling = {
 
 export type Vedtak = {
   identdato: string;
-  opphørFom: string;
+  opphørFom?: string;
   opprinneligIdentdato: string;
   periode: {
     fom: string;
@@ -32,7 +32,7 @@ export type Vedtak = {
   };
   registrert: string;
   saksbehandlerId: string;
-  arbeidskategori: {
+  arbeidskategori?: {
     kode: string;
     termnavn: string;
   };
