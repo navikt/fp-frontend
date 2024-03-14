@@ -39,7 +39,7 @@ const JournalpostSøkModal: FunctionComponent<OwnProps> = ({
   );
   const minLength9 = minLength(9);
   return (
-    <Modal open={erÅpen} onClose={lukkModal}>
+    <Modal open={erÅpen} onClose={lukkModal} aria-label="journalpost-modal">
       <Modal.Header>
         <Heading size="medium">
           <FormattedMessage id="Journalpost.Søk.Tittel" />
