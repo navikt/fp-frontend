@@ -53,7 +53,7 @@
     "@testing-library/react": "14.2.1",
     "@testing-library/react-hooks": "8.0.1",
     "@testing-library/user-event": "14.5.2",
-    "@types/react": "18.2.65",
+    "@types/react": "18.2.66",
     "@types/react-collapse": "5.0.4",
     "@types/react-dom": "18.2.22",
     "@types/react-responsive": "8.0.8",
