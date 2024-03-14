@@ -25,7 +25,7 @@ const JournalførtSubmitModal: FunctionComponent<OwnProps> = ({ saksnummer, lukk
   }
   const lenke = saksnummer?.saksnummer ? velgSakLenke(saksnummer?.saksnummer) : undefined;
   return (
-    <Modal width="small" open={showModal} onClose={lukkModal}>
+    <Modal width="small" open={showModal} onClose={lukkModal} aria-label="journalpost-modal">
       <Modal.Body>
         <VStack gap="4">
           {isLoading && (
