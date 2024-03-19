@@ -10,6 +10,7 @@ import { DateLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import VedtakPanel from './VedtakPanel';
 
 import styles from './utbetalingsdataPanel.module.css';
+import SakerPanel from './SakerPanel';
 
 const FORELDREPENGER_KODER = ['AP', 'FØ'];
 
@@ -51,6 +52,7 @@ const UtbetalingsdataPanel: FunctionComponent<OwnProps> = ({
           htmlSize="12"
           error={error}
           onSearchClick={startSøk}
+          autoComplete="off"
         >
           <Search.Button type="button" loading={infotrygdVedtakState === RestApiState.LOADING} />
         </Search>
@@ -59,8 +61,25 @@ const UtbetalingsdataPanel: FunctionComponent<OwnProps> = ({
         <>
           <VerticalSpacer sixteenPx />
           <Heading size="small">
-            <FormattedMessage id="UtbetalingsdataPanel.Resultat" />
+            {infotrygdVedtak.saker.length > 0 || infotrygdVedtak.vedtakKjeder.length > 0 ? (
+              <FormattedMessage id="UtbetalingsdataPanel.Resultat" />
+            ) : (
+              <FormattedMessage id="UtbetalingsdataPanel.IngenSakerFunnet" />
+            )}
           </Heading>
+          {infotrygdVedtak.saker.length > 0 && (
+            <>
+              <Heading size="xsmall">
+                <FormattedMessage id="UtbetalingsdataPanel.Saker" />
+              </Heading>
+              <SakerPanel saker={infotrygdVedtak.saker} />
+            </>
+          )}
+          {infotrygdVedtak.vedtakKjeder.length > 0 && (
+            <Heading size="xsmall">
+              <FormattedMessage id="UtbetalingsdataPanel.Utbetalinger" />
+            </Heading>
+          )}
           {infotrygdVedtak.vedtakKjeder.map(vedtakKjede => (
             <ExpansionCard
               size="small"

@@ -55,10 +55,7 @@ export type {
 } from './src/beregningsresultatDagytelseTsType';
 export type { default as Dokument } from './src/dokumentTsType';
 export type { default as FaktaArbeidsforhold } from './src/faktaArbeidsforholdTsType';
-export type {
-  default as InntektArbeidYtelse,
-  RelatertTilgrensedYtelse,
-} from './src/inntektArbeidYtelseTsType';
+export type { default as InntektArbeidYtelse, RelatertTilgrensedYtelse } from './src/inntektArbeidYtelseTsType';
 export type { default as KodeverkMedNavn } from './src/kodeverkMedNavnTsType';
 export type { default as AlleKodeverk } from './src/kodeverkAlleTsType';
 export type { default as AlleKodeverkTilbakekreving } from './src/kodeverkAlleTilbakekrevingTsType';
@@ -180,4 +177,5 @@ export type {
   Vedtak,
   VedtakArbeidsforhold,
   VedtakUtbetaling,
+  Sak,
 } from './src/infotrygdVedtakTsType';

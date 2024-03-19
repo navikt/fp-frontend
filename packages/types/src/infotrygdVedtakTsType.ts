@@ -43,6 +43,19 @@ export type Vedtak = {
   gradering?: number;
 };
 
+export type Sak = {
+  iverksatt: string;
+  resultat: string;
+  registrert: string;
+  sakId: string;
+  mottatt: string;
+  type: string;
+  vedtatt: string;
+  valg: string;
+  undervalg: string;
+  nivaa: string;
+};
+
 type InfotrygdVedtak = {
   vedtakKjeder: {
     opprinneligIdentdato: string;
@@ -52,6 +65,7 @@ type InfotrygdVedtak = {
     };
     vedtak: Vedtak[];
   }[];
+  saker: Sak[];
 };
 
 export default InfotrygdVedtak;
