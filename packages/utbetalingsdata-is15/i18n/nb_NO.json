@@ -3,6 +3,9 @@
   "UtbetalingsdataPanel.Sok": "Fødselsnummer",
   "UtbetalingsdataPanel.UgyldigFnr": "Oppgitt fødselsnummer er ikke gyldig",
   "UtbetalingsdataPanel.Resultat": "Søkeresultat:",
+  "UtbetalingsdataPanel.IngenSakerFunnet": "Søkeresultat: Ingen saker funnet",
+  "UtbetalingsdataPanel.Saker": "Saker",
+  "UtbetalingsdataPanel.Utbetalinger": "Utbetalinger",
 
   "VedtakPanel.Identdato": "Identdato",
   "VedtakPanel.Dekningsgrad": "Dekningsgrad",
@@ -14,6 +17,15 @@
 
   "VedtakDetaljerPanel.Arbeidsforhold": "Arbeidsforhold",
   "VedtakDetaljerPanel.Utbetalinger": "Utbetalinger",
+
+  "SakerPanel.Registrert": "Registrert",
+  "SakerPanel.Sak": "Sak",
+  "SakerPanel.Stonad": "Stønad",
+  "SakerPanel.Variant": "Variant",
+  "SakerPanel.Type": "Type",
+  "SakerPanel.Resultat": "Resultat",
+  "SakerPanel.Vedtatt": "Vedtatt",
+  "SakerPanel.Niva": "Nivå",
 
   "ArbeidsforholdPanel.Arbeidsgiver": "Arbeidsgiver",
   "ArbeidsforholdPanel.Inntekt": "Inntekt",

@@ -35,6 +35,32 @@ const Template: StoryFn<{
 export const Default = Template.bind({});
 Default.args = {
   infotrygdVedtak: {
+    saker: [
+      {
+        resultat: 'Avslag',
+        type: 'Søknad',
+        mottatt: '2024-01-01',
+        nivaa: 'Trygdekontor',
+        vedtatt: '2024-02-01',
+        registrert: '2024-03-01',
+        sakId: 'B01',
+        valg: 'Foreldrepenger fødsel',
+        undervalg: 'ordinær',
+        iverksatt: '2024-03-01',
+      },
+      {
+        resultat: 'Innvilget',
+        type: 'Revurdering',
+        mottatt: '2024-01-01',
+        nivaa: 'Trygdekontor',
+        vedtatt: '2024-02-01',
+        registrert: '2024-03-01',
+        sakId: 'B02',
+        valg: 'Engangsstønad fødsel',
+        undervalg: 'nasjonal',
+        iverksatt: '2024-04-01',
+      },
+    ],
     vedtakKjeder: [
       {
         opprinneligIdentdato: '2015-06-01',
@@ -171,5 +197,13 @@ Default.args = {
         ],
       },
     ],
+  },
+};
+
+export const IngenData = Template.bind({});
+IngenData.args = {
+  infotrygdVedtak: {
+    saker: [],
+    vedtakKjeder: [],
   },
 };
