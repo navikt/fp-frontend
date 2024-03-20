@@ -35,8 +35,8 @@ describe('<UtbetalingsdataIs15Index>', () => {
     expect(await screen.findByText('Søkeresultat:')).toBeInTheDocument();
 
     expect(screen.getByText('Saker')).toBeInTheDocument();
-    expect(screen.getByText('Foreldrepenger fødsel')).toBeInTheDocument();
-    expect(screen.getByText('Engangsstønad fødsel')).toBeInTheDocument();
+    expect(screen.getByText('Foreldrepenger fødsel ordinær')).toBeInTheDocument();
+    expect(screen.getByText('Engangsstønad fødsel nasjonal')).toBeInTheDocument();
 
     expect(screen.getByText('Utbetalinger')).toBeInTheDocument();
     expect(screen.getAllByText('01.06.2015')).toHaveLength(2);

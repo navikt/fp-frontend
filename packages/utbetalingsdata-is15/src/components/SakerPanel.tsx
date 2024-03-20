@@ -25,9 +25,6 @@ const SakerPanel: FunctionComponent<OwnProps> = ({ saker }) => (
               <FormattedMessage id="SakerPanel.Stonad" />
             </Table.HeaderCell>
             <Table.HeaderCell scope="col">
-              <FormattedMessage id="SakerPanel.Variant" />
-            </Table.HeaderCell>
-            <Table.HeaderCell scope="col">
               <FormattedMessage id="SakerPanel.Type" />
             </Table.HeaderCell>
             <Table.HeaderCell scope="col">
@@ -49,7 +46,6 @@ const SakerPanel: FunctionComponent<OwnProps> = ({ saker }) => (
               </Table.DataCell>
               <Table.DataCell>{sak.sakId}</Table.DataCell>
               <Table.DataCell>{sak.valg}</Table.DataCell>
-              <Table.DataCell>{sak.undervalg}</Table.DataCell>
               <Table.DataCell>{sak.type}</Table.DataCell>
               <Table.DataCell>{sak.resultat}</Table.DataCell>
               <Table.DataCell>

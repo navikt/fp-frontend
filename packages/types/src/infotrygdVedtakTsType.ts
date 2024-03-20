@@ -52,7 +52,6 @@ export type Sak = {
   type: string;
   vedtatt: string;
   valg: string;
-  undervalg: string;
   nivaa: string;
 };
 
