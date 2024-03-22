@@ -3113,7 +3113,7 @@ __metadata:
     fast-glob: ^3.3.2
     moment: 2.30.1
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     storybook: 8.0.0
     stylelint: 15.11.0
@@ -3152,7 +3152,7 @@ __metadata:
     dayjs: 1.11.10
     eslint: 8.57.0
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     storybook: 8.0.0
     stylelint: 15.11.0
@@ -3223,7 +3223,7 @@ __metadata:
     dayjs: 1.11.10
     eslint: 8.57.0
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     storybook: 8.0.0
     stylelint: 15.11.0
@@ -3289,7 +3289,7 @@ __metadata:
     eslint: 8.57.0
     moment: 2.30.1
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     storybook: 8.0.0
     stylelint: 15.11.0
@@ -3326,7 +3326,7 @@ __metadata:
     eslint: 8.57.0
     moment: 2.30.1
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     storybook: 8.0.0
     stylelint: 15.11.0
@@ -3362,7 +3362,7 @@ __metadata:
     eslint: 8.57.0
     moment: 2.30.1
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     storybook: 8.0.0
     stylelint: 15.11.0
@@ -3401,7 +3401,7 @@ __metadata:
     eslint: 8.57.0
     moment: 2.30.1
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     storybook: 8.0.0
     stylelint: 15.11.0
@@ -3440,7 +3440,7 @@ __metadata:
     eslint: 8.57.0
     moment: 2.30.1
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     storybook: 8.0.0
     stylelint: 15.11.0
@@ -3475,7 +3475,7 @@ __metadata:
     eslint: 8.57.0
     react: 18.2.0
     react-dom: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     storybook: 8.0.0
     stylelint: 15.11.0
@@ -3513,7 +3513,7 @@ __metadata:
     dayjs: 1.11.10
     eslint: 8.57.0
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     storybook: 8.0.0
     stylelint: 15.11.0
@@ -3550,7 +3550,7 @@ __metadata:
     dayjs: 1.11.10
     eslint: 8.57.0
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     storybook: 8.0.0
     stylelint: 15.11.0
@@ -3590,7 +3590,7 @@ __metadata:
     fast-glob: ^3.3.2
     react: 18.2.0
     react-dom: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     storybook: 8.0.0
     stylelint: 15.11.0
@@ -3628,7 +3628,7 @@ __metadata:
     dayjs: 1.11.10
     eslint: 8.57.0
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     storybook: 8.0.0
     stylelint: 15.11.0
@@ -3663,7 +3663,7 @@ __metadata:
     dayjs: 1.11.10
     eslint: 8.57.0
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     storybook: 8.0.0
     stylelint: 15.11.0
@@ -3697,7 +3697,7 @@ __metadata:
     cross-env: 7.0.3
     eslint: 8.57.0
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     storybook: 8.0.0
     stylelint: 15.11.0
@@ -3846,16 +3846,16 @@ __metadata:
     "@navikt/ft-ui-komponenter": 2.3.1
     "@navikt/ft-utils": 2.3.1
     "@popperjs/core": 2.11.8
-    "@sentry/browser": 7.107.0
+    "@sentry/browser": 7.108.0
     "@storybook/addon-actions": 8.0.0
     "@storybook/react": 8.0.0
     "@storybook/react-vite": 8.0.0
     "@testing-library/react": 14.2.1
     "@testing-library/user-event": 14.5.2
-    axios: 1.6.7
+    axios: 1.6.8
     axios-mock-adapter: 1.22.0
     classnames: 2.5.1
-    core-js: 3.36.0
+    core-js: 3.36.1
     dayjs: 1.11.10
     eslint: 8.57.0
     history: 5.3.0
@@ -3906,7 +3906,7 @@ __metadata:
     dayjs: 1.11.10
     eslint: 8.57.0
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     storybook: 8.0.0
     stylelint: 15.11.0
@@ -3969,7 +3969,7 @@ __metadata:
     history: 5.3.0
     lodash.debounce: 4.0.8
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     react-router-dom: 6.22.3
     storybook: 8.0.0
@@ -4008,7 +4008,7 @@ __metadata:
     history: 5.3.0
     lodash.debounce: 4.0.8
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     react-router-dom: 6.22.3
     storybook: 8.0.0
@@ -4052,7 +4052,7 @@ __metadata:
     lodash.debounce: 4.0.8
     react: 18.2.0
     react-dom: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     react-router-dom: 6.22.3
     storybook: 8.0.0
@@ -4088,7 +4088,7 @@ __metadata:
     dayjs: 1.11.10
     eslint: 8.57.0
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     storybook: 8.0.0
     stylelint: 15.11.0
@@ -4127,7 +4127,7 @@ __metadata:
     eslint: 8.57.0
     moment: 2.30.1
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     react-router-dom: 6.22.3
     storybook: 8.0.0
@@ -4162,7 +4162,7 @@ __metadata:
     cross-env: 7.0.3
     eslint: 8.57.0
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     react-router-dom: 6.22.3
     storybook: 8.0.0
@@ -4292,7 +4292,7 @@ __metadata:
     cross-env: 7.0.3
     eslint: 8.57.0
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     storybook: 8.0.0
     stylelint: 15.11.0
@@ -4355,7 +4355,7 @@ __metadata:
     cross-env: 7.0.3
     eslint: 8.57.0
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -4390,7 +4390,7 @@ __metadata:
     eslint: 8.57.0
     moment: 2.30.1
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     storybook: 8.0.0
     stylelint: 15.11.0
@@ -4429,7 +4429,7 @@ __metadata:
     eslint: 8.57.0
     moment: 2.30.1
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     storybook: 8.0.0
     stylelint: 15.11.0
@@ -4465,7 +4465,7 @@ __metadata:
     cross-env: 7.0.3
     eslint: 8.57.0
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     storybook: 8.0.0
     stylelint: 15.11.0
@@ -4502,7 +4502,7 @@ __metadata:
     dayjs: 1.11.10
     eslint: 8.57.0
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     storybook: 8.0.0
     stylelint: 15.11.0
@@ -4538,7 +4538,7 @@ __metadata:
     eslint: 8.57.0
     moment: 2.30.1
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     storybook: 8.0.0
     stylelint: 15.11.0
@@ -4576,7 +4576,7 @@ __metadata:
     eslint: 8.57.0
     react: 18.2.0
     react-dom: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     storybook: 8.0.0
     stylelint: 15.11.0
@@ -4613,7 +4613,7 @@ __metadata:
     eslint: 8.57.0
     moment: 2.30.1
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     storybook: 8.0.0
     stylelint: 15.11.0
@@ -4652,7 +4652,7 @@ __metadata:
     eslint: 8.57.0
     moment: 2.30.1
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     storybook: 8.0.0
     stylelint: 15.11.0
@@ -4688,7 +4688,7 @@ __metadata:
     cross-env: 7.0.3
     eslint: 8.57.0
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     storybook: 8.0.0
     stylelint: 15.11.0
@@ -4760,7 +4760,7 @@ __metadata:
     eslint: 8.57.0
     moment: 2.30.1
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     storybook: 8.0.0
     stylelint: 15.11.0
@@ -4794,7 +4794,7 @@ __metadata:
     cross-env: 7.0.3
     eslint: 8.57.0
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     storybook: 8.0.0
     stylelint: 15.11.0
@@ -4828,7 +4828,7 @@ __metadata:
     cross-env: 7.0.3
     eslint: 8.57.0
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     storybook: 8.0.0
     stylelint: 15.11.0
@@ -4862,7 +4862,7 @@ __metadata:
     cross-env: 7.0.3
     eslint: 8.57.0
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     storybook: 8.0.0
     stylelint: 15.11.0
@@ -4896,7 +4896,7 @@ __metadata:
     cross-env: 7.0.3
     eslint: 8.57.0
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     storybook: 8.0.0
     stylelint: 15.11.0
@@ -4931,7 +4931,7 @@ __metadata:
     eslint: 8.57.0
     react: 18.2.0
     react-dom: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     storybook: 8.0.0
     stylelint: 15.11.0
@@ -4967,7 +4967,7 @@ __metadata:
     eslint: 8.57.0
     moment: 2.30.1
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     storybook: 8.0.0
     stylelint: 15.11.0
@@ -5003,7 +5003,7 @@ __metadata:
     eslint: 8.57.0
     moment: 2.30.1
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     storybook: 8.0.0
     stylelint: 15.11.0
@@ -5039,7 +5039,7 @@ __metadata:
     eslint: 8.57.0
     moment: 2.30.1
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     storybook: 8.0.0
     stylelint: 15.11.0
@@ -5074,7 +5074,7 @@ __metadata:
     eslint: 8.57.0
     moment: 2.30.1
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     storybook: 8.0.0
     stylelint: 15.11.0
@@ -5103,8 +5103,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-rest-api@workspace:packages/rest-api"
   dependencies:
-    "@sentry/browser": 7.107.0
-    axios: 1.6.7
+    "@sentry/browser": 7.108.0
+    axios: 1.6.8
     axios-mock-adapter: 1.22.0
     cross-env: 7.0.3
     eslint: 8.57.0
@@ -5179,7 +5179,7 @@ __metadata:
     cross-env: 7.0.3
     eslint: 8.57.0
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     storybook: 8.0.0
     stylelint: 15.11.0
@@ -5240,7 +5240,7 @@ __metadata:
     cross-env: 7.0.3
     eslint: 8.57.0
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     storybook: 8.0.0
     stylelint: 15.11.0
@@ -5274,7 +5274,7 @@ __metadata:
     cross-env: 7.0.3
     eslint: 8.57.0
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     storybook: 8.0.0
     stylelint: 15.11.0
@@ -5307,7 +5307,7 @@ __metadata:
     cross-env: 7.0.3
     eslint: 8.57.0
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     storybook: 8.0.0
     stylelint: 15.11.0
@@ -5373,7 +5373,7 @@ __metadata:
     dayjs: 1.11.10
     eslint: 8.57.0
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     storybook: 8.0.0
     stylelint: 15.11.0
@@ -5407,7 +5407,7 @@ __metadata:
     cross-env: 7.0.3
     eslint: 8.57.0
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     storybook: 8.0.0
     stylelint: 15.11.0
@@ -5449,7 +5449,7 @@ __metadata:
     history: 5.3.0
     moment: 2.30.1
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     react-router-dom: 6.22.3
     storybook: 8.0.0
@@ -5476,7 +5476,7 @@ __metadata:
     cross-env: 7.0.3
     eslint: 8.57.0
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     storybook: 8.0.0
     stylelint: 15.11.0
@@ -5494,7 +5494,7 @@ __metadata:
     eslint: 8.57.0
     history: 5.3.0
     react: 18.2.0
-    react-hook-form: 7.51.0
+    react-hook-form: 7.51.1
     react-intl: 6.6.2
     react-router-dom: 6.22.3
     typescript: 5.4.2
@@ -7172,52 +7172,52 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sentry-internal/feedback@npm:7.107.0":
-  version: 7.107.0
-  resolution: "@sentry-internal/feedback@npm:7.107.0"
+"@sentry-internal/feedback@npm:7.108.0":
+  version: 7.108.0
+  resolution: "@sentry-internal/feedback@npm:7.108.0"
   dependencies:
-    "@sentry/core": 7.107.0
-    "@sentry/types": 7.107.0
-    "@sentry/utils": 7.107.0
-  checksum: 4144b088713d25ac3fbc21ace9d3abf3b446cb6d9697eb5b746f6c9cb1d0b657bb886ac89072d790361ab4e0474dd95ab058b1e369fda626ec2fafa671fe23cb
+    "@sentry/core": 7.108.0
+    "@sentry/types": 7.108.0
+    "@sentry/utils": 7.108.0
+  checksum: 6461d1c02a04d77fc7f2be1d2d5dc107f340053c85737062b48a7055d609484f8ba680c0dbbfb6ac1b9d28c5399d839be7f59298a6a376edc1bd9bc69d3c4117
   languageName: node
   linkType: hard
 
-"@sentry-internal/replay-canvas@npm:7.107.0":
-  version: 7.107.0
-  resolution: "@sentry-internal/replay-canvas@npm:7.107.0"
+"@sentry-internal/replay-canvas@npm:7.108.0":
+  version: 7.108.0
+  resolution: "@sentry-internal/replay-canvas@npm:7.108.0"
   dependencies:
-    "@sentry/core": 7.107.0
-    "@sentry/replay": 7.107.0
-    "@sentry/types": 7.107.0
-    "@sentry/utils": 7.107.0
-  checksum: c12e57da3f4218f5852933dd2809ec04c4d7721a39fc60e2f9c1714b5eee0804a9a41294008452d8d93b22000623a9eb6a3a3409285167899536bfe67a4f0a3b
+    "@sentry/core": 7.108.0
+    "@sentry/replay": 7.108.0
+    "@sentry/types": 7.108.0
+    "@sentry/utils": 7.108.0
+  checksum: 99c60ced47620a2daefe3715839d1f7679935396cd5ebafc02e260184a6d2d647be9b235084ff278adbd43f21f4173d02d5f6bfdba90316c781203c65cac1364
   languageName: node
   linkType: hard
 
-"@sentry-internal/tracing@npm:7.107.0":
-  version: 7.107.0
-  resolution: "@sentry-internal/tracing@npm:7.107.0"
+"@sentry-internal/tracing@npm:7.108.0":
+  version: 7.108.0
+  resolution: "@sentry-internal/tracing@npm:7.108.0"
   dependencies:
-    "@sentry/core": 7.107.0
-    "@sentry/types": 7.107.0
-    "@sentry/utils": 7.107.0
-  checksum: 13d4127d6fd24425911c64dae5d4ce40683b5bda8e5f44bc8a6565bdd59a0993974c73f6a4248da2b32e168eff82538ecb8a42d589baebb72073671cef5062c0
+    "@sentry/core": 7.108.0
+    "@sentry/types": 7.108.0
+    "@sentry/utils": 7.108.0
+  checksum: ade1c2f6f0185edf5c42ad74a9d855e608aea9bd5df784783d892b5736010835e7e9c584aca5b281760058d958ae7605aa5acb012388d825ec40c88df3bead9e
   languageName: node
   linkType: hard
 
-"@sentry/browser@npm:7.107.0":
-  version: 7.107.0
-  resolution: "@sentry/browser@npm:7.107.0"
+"@sentry/browser@npm:7.108.0":
+  version: 7.108.0
+  resolution: "@sentry/browser@npm:7.108.0"
   dependencies:
-    "@sentry-internal/feedback": 7.107.0
-    "@sentry-internal/replay-canvas": 7.107.0
-    "@sentry-internal/tracing": 7.107.0
-    "@sentry/core": 7.107.0
-    "@sentry/replay": 7.107.0
-    "@sentry/types": 7.107.0
-    "@sentry/utils": 7.107.0
-  checksum: 9c2857f56d27a5d5f0257acfe6c294ce5e0875fd2e2ef8b4bebee044c6b759feea625498988e711cac79261f6c236b2d2e28ee6600bc4813f0359c4a452a5f48
+    "@sentry-internal/feedback": 7.108.0
+    "@sentry-internal/replay-canvas": 7.108.0
+    "@sentry-internal/tracing": 7.108.0
+    "@sentry/core": 7.108.0
+    "@sentry/replay": 7.108.0
+    "@sentry/types": 7.108.0
+    "@sentry/utils": 7.108.0
+  checksum: d936dd0bc08fee0afac2605b6d2290ca2b89181b0b6e3d4a1d295aaa91f8dfded9bf106390934c38d48fb436fb4b12361d44ef17293bc555c9bdf575341f45b0
   languageName: node
   linkType: hard
 
@@ -7307,41 +7307,41 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sentry/core@npm:7.107.0":
-  version: 7.107.0
-  resolution: "@sentry/core@npm:7.107.0"
+"@sentry/core@npm:7.108.0":
+  version: 7.108.0
+  resolution: "@sentry/core@npm:7.108.0"
   dependencies:
-    "@sentry/types": 7.107.0
-    "@sentry/utils": 7.107.0
-  checksum: f0dd7d4f20abf15ceb07d8244bc5daf6dbd3940225ca10fb684111772e3bd35c52e7d95dfb6083c669cecfea75d73f6f34cbc7eb626fcb0858643dda4421ee86
+    "@sentry/types": 7.108.0
+    "@sentry/utils": 7.108.0
+  checksum: 0929ec9ba3378df1f92662cb7fef20a3d5c7865ed1927f9f75666655832cd4ad2e2e7df762a9ad5152da927121ce182a690f5e14947c225bcfbc047488341592
   languageName: node
   linkType: hard
 
-"@sentry/replay@npm:7.107.0":
-  version: 7.107.0
-  resolution: "@sentry/replay@npm:7.107.0"
+"@sentry/replay@npm:7.108.0":
+  version: 7.108.0
+  resolution: "@sentry/replay@npm:7.108.0"
   dependencies:
-    "@sentry-internal/tracing": 7.107.0
-    "@sentry/core": 7.107.0
-    "@sentry/types": 7.107.0
-    "@sentry/utils": 7.107.0
-  checksum: e238ccd0c0e07c6d8da771e1bc553142a262b0c3a8e6485c19db8434a774e8a7500461de769603e7e01ef5283d1e2572d8e60b39d12885182828e6cfdac45fd3
+    "@sentry-internal/tracing": 7.108.0
+    "@sentry/core": 7.108.0
+    "@sentry/types": 7.108.0
+    "@sentry/utils": 7.108.0
+  checksum: f1a76286ec4b900f4c3906c28576128462b7cf99ea1cfbf2d6815d8ac147f361d2969bb7be34972062661207a3443d03bd54d40f4ad94556e0dab3bb3ef3388a
   languageName: node
   linkType: hard
 
-"@sentry/types@npm:7.107.0":
-  version: 7.107.0
-  resolution: "@sentry/types@npm:7.107.0"
-  checksum: dbf6b5447016691268da0f29eb7261b98d5a8212d55e949027b4dd9050231cb44fcb3760797f04b017b6efa708468fe05ae734d6431197e1564a2af7e21c2691
+"@sentry/types@npm:7.108.0":
+  version: 7.108.0
+  resolution: "@sentry/types@npm:7.108.0"
+  checksum: ac9a4c16e6965f04d375cd9651b73fce9c19e013d5f36449ea23dd4d16eea674476c9706bbd26ecbd6cdb10ebf15f75cf81ad339229d43da28a86a011866b8d7
   languageName: node
   linkType: hard
 
-"@sentry/utils@npm:7.107.0":
-  version: 7.107.0
-  resolution: "@sentry/utils@npm:7.107.0"
+"@sentry/utils@npm:7.108.0":
+  version: 7.108.0
+  resolution: "@sentry/utils@npm:7.108.0"
   dependencies:
-    "@sentry/types": 7.107.0
-  checksum: c21d24f9444afcec79450d592a00793c42b7cd54a4ec0058c953a9778ad76551394ef2fdcb8c9d1fbc1d87580bcfa2a5f024abb3da35c58fcec4dc65b2550e07
+    "@sentry/types": 7.108.0
+  checksum: af77a9da8c6e878cca871be29d03890bf0f81a47a6cf2ef73276c67e238ea698e2ce797ea0c6f93bf8bbe6290d069075c8d912e35c47536cba4aac48ece8424f
   languageName: node
   linkType: hard
 
@@ -9840,7 +9840,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:1.6.7, axios@npm:^1.6.0":
+"axios@npm:1.6.8":
+  version: 1.6.8
+  resolution: "axios@npm:1.6.8"
+  dependencies:
+    follow-redirects: ^1.15.6
+    form-data: ^4.0.0
+    proxy-from-env: ^1.1.0
+  checksum: bf007fa4b207d102459300698620b3b0873503c6d47bf5a8f6e43c0c64c90035a4f698b55027ca1958f61ab43723df2781c38a99711848d232cad7accbcdfcdd
+  languageName: node
+  linkType: hard
+
+"axios@npm:^1.6.0":
   version: 1.6.7
   resolution: "axios@npm:1.6.7"
   dependencies:
@@ -10947,6 +10958,13 @@ __metadata:
   version: 3.36.0
   resolution: "core-js@npm:3.36.0"
   checksum: 48c807d5055ad0424f52d13583e96ddca2efcdc4e3cd9c479d60f269c8fe225191cd4e26a4593f43f7ef6dba08d161091147ecf8ae0300c15bc648a4f555217b
+  languageName: node
+  linkType: hard
+
+"core-js@npm:3.36.1":
+  version: 3.36.1
+  resolution: "core-js@npm:3.36.1"
+  checksum: 6f6c152179bd0673da34e67a82c6a5c37f31f9fbe908e9caf93749dc62a25b6e07fbff2411de3b74bb2d0661b7f9fb247115ba8efabf9904f5fef26edead515e
   languageName: node
   linkType: hard
 
@@ -13021,6 +13039,16 @@ __metadata:
     debug:
       optional: true
   checksum: 5ca49b5ce6f44338cbfc3546823357e7a70813cecc9b7b768158a1d32c1e62e7407c944402a918ea8c38ae2e78266312d617dc68783fac502cbb55e1047b34ec
+  languageName: node
+  linkType: hard
+
+"follow-redirects@npm:^1.15.6":
+  version: 1.15.6
+  resolution: "follow-redirects@npm:1.15.6"
+  peerDependenciesMeta:
+    debug:
+      optional: true
+  checksum: a62c378dfc8c00f60b9c80cab158ba54e99ba0239a5dd7c81245e5a5b39d10f0c35e249c3379eae719ff0285fff88c365dd446fab19dee771f1d76252df1bbf5
   languageName: node
   linkType: hard
 
@@ -17986,6 +18014,15 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17 || ^18
   checksum: c3d9996a2c2867994f10d1f598ca24b0dee019221116750ebe64f5abb422081b76b217c0265807485c9f2fc7b2e8c2aa8bed153cbf86fa0c2603d42b714f20eb
+  languageName: node
+  linkType: hard
+
+"react-hook-form@npm:7.51.1":
+  version: 7.51.1
+  resolution: "react-hook-form@npm:7.51.1"
+  peerDependencies:
+    react: ^16.8.0 || ^17 || ^18
+  checksum: 6ed9060ac9230a7e9e6ca46fc001cc5f44f35e6485e0c951ab1a5e85bd698c200a7230c5514f0642875e4f45f6cb8f79479deac0253f1c2b8db1445d1c96d796
   languageName: node
   linkType: hard
 
