@@ -65,7 +65,7 @@ describe('<VarselOmRevurderingProsessIndex>', () => {
     expect(forhåndsvis).toHaveBeenNthCalledWith(1, {
       dokumentMal: 'VARREV',
       fritekst: 'Dette er en fritekst',
-      mottaker: '',
+      arsakskode: 'ANNET',
     });
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
