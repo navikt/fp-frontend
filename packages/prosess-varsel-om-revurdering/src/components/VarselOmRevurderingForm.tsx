@@ -7,7 +7,7 @@ import { Heading, Detail, BodyShort, Button } from '@navikt/ds-react';
 
 import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 import { Form, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
-import { behandlingType as BehandlingType, dokumentMalType, AksjonspunktCode, KodeverkType } from '@navikt/fp-kodeverk';
+import { behandlingType as BehandlingType, dokumentMalType, ugunstAarsakTyper, AksjonspunktCode, KodeverkType } from '@navikt/fp-kodeverk';
 import { AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { hasValidText, minLength, maxLength, required } from '@navikt/ft-form-validators';
 import { ISO_DATE_FORMAT, getLanguageFromSprakkode } from '@navikt/ft-utils';
@@ -31,7 +31,7 @@ const minLength3 = minLength(3);
 const maxLength10000 = maxLength(10000);
 
 export type ForhandsvisData = {
-  mottaker: string;
+  arsakskode: string;
   dokumentMal: string;
   fritekst: string;
 };
@@ -124,8 +124,8 @@ const VarselOmRevurderingForm: FunctionComponent<OwnProps> = ({
     (e: MouseEvent) => {
       e.preventDefault();
       previewCallback({
-        mottaker: '',
         dokumentMal: dokumentMalType.VARSEL_OM_REVURDERING,
+        arsakskode: ugunstAarsakTyper.ANNET,
         fritekst: formVerdier.fritekst || ' ',
       });
     },
