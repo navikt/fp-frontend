@@ -10,7 +10,7 @@ import { BodyShort, Button, Label } from '@navikt/ds-react';
 import { omitMany } from '@navikt/ft-utils';
 
 import { AlleKodeverk, ArbeidsgiverOpplysningerPerId, Fagsak, FaktaArbeidsforhold } from '@navikt/fp-types';
-import { KodeverkType, StonadskontoType, uttakPeriodeType } from '@navikt/fp-kodeverk';
+import { KodeverkType, StonadskontoType } from '@navikt/fp-kodeverk';
 
 import { RelasjonsRolleType } from '@navikt/ft-kodeverk';
 import FordelingPeriodeKilde from '../kodeverk/fordelingPeriodeKilde';
@@ -144,8 +144,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
   const sorterteUttakPeriodeTyper = useMemo(
     () =>
       [...alleKodeverk[KodeverkType.UTTAK_PERIODE_TYPE]]
-        .sort((k1, k2) => k1.navn.localeCompare(k2.navn))
-        .filter(k => k.kode !== uttakPeriodeType.ANNET),
+        .sort((k1, k2) => k1.navn.localeCompare(k2.navn)),
     [],
   );
   const sorterteOverføringÅrsaker = useMemo(

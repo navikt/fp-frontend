@@ -51,7 +51,6 @@ const PERIODE_TYPE_IKON_MAP = {
   [uttakPeriodeType.FEDREKVOTE]: <StrollerIcon />,
   [uttakPeriodeType.FELLESPERIODE]: <StrollerIcon />,
   [uttakPeriodeType.FORELDREPENGER]: <StrollerIcon />,
-  [uttakPeriodeType.ANNET]: <StrollerIcon />,
   [uttakPeriodeType.FORELDREPENGER_FOR_FODSEL]: <PersonPregnantIcon />,
 };
 
@@ -60,7 +59,6 @@ const PERIODE_TYPE_LABEL_MAP = {
   [uttakPeriodeType.FEDREKVOTE]: 'UttakTidslinje.Fedrekvote',
   [uttakPeriodeType.FELLESPERIODE]: 'UttakTidslinje.Fellesperiode',
   [uttakPeriodeType.FORELDREPENGER]: 'UttakTidslinje.Foreldrepenger',
-  [uttakPeriodeType.ANNET]: 'UttakTidslinje.Annet',
   [uttakPeriodeType.FORELDREPENGER_FOR_FODSEL]: 'UttakTidslinje.ForeldrepengerForFodsel',
 };
 
