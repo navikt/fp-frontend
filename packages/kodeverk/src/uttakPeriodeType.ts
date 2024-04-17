@@ -4,7 +4,6 @@ const uttakPeriodeType = {
   FELLESPERIODE: 'FELLESPERIODE',
   FORELDREPENGER_FOR_FODSEL: 'FORELDREPENGER_FØR_FØDSEL',
   FORELDREPENGER: 'FORELDREPENGER',
-  ANNET: 'ANNET',
   UDEFINERT: '-',
 };
 
@@ -16,7 +15,6 @@ export const uttakPeriodeNavn = {
   FORELDREPENGER_FØR_FØDSEL: 'Foreldrepenger før fødsel',
   FORELDREPENGER: 'Foreldrepenger',
   FLERBARNSDAGER: 'Flerbarnsdager',
-  ANNET: 'Annet',
   UDEFINERT: '-',
 } as Record<string, string>;
 

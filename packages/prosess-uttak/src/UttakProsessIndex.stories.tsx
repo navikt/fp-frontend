@@ -1222,7 +1222,7 @@ VisOppholdsperiode.args = {
         samtidigUttak: false,
         samtidigUttaksprosent: undefined,
         graderingInnvilget: false,
-        periodeType: 'ANNET',
+        periodeType: '-',
         utsettelseType: '-',
         oppholdÅrsak: 'UTTAK_FEDREKVOTE_ANNEN_FORELDER',
         mottattDato: '2023-01-18',
