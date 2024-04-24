@@ -20,7 +20,7 @@ const getGraphRequest = (bearerToken, graphUrl) => new Promise(((resolve, reject
 }));
 
 const getUserInfoFromGraphApi = (bearerToken) => {
-  const query = 'onPremisesSamAccountName,displayName,givenName,mail,officeLocation,surname,userPrincipalName,id,jobTitle';
+  const query = 'onPremisesSamAccountName,displayName,givenName,mail,officeLocation,surname,userPrincipalName,id,jobTitle,memberOf';
   const graphUrl = `https://graph.microsoft.com/v1.0/me?$select=${query}`;
   return getGraphRequest(bearerToken, graphUrl);
 };
