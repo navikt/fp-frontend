@@ -40,6 +40,10 @@ const azureAd = {
     name: 'AZURE_APP_JWKS',
     required: true,
   })),
+  graphUrl: envVar({
+    name: 'MS_GRAPH_URL',
+    required: false,
+  }),
 
   // leave at default
   tokenEndpointAuthMethod: 'private_key_jwt',

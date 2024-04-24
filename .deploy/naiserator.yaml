@@ -76,3 +76,5 @@ spec:
               ]}'
     - name: NODE_ENV
       value: "{{env}}"
+    - name: MS_GRAPH_URL
+      value: "https://graph.microsoft.com"
