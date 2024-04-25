@@ -10,7 +10,6 @@ type NavAnsatt = Readonly<{
   kanSaksbehandle: boolean;
   kanVeilede: boolean;
   navn: string;
-  skalViseDetaljerteFeilmeldinger: boolean;
 }>;
 
 export default NavAnsatt;
