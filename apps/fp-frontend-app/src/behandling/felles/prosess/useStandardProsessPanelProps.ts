@@ -120,13 +120,7 @@ const useStandardProsessPanelProps = (
     [vilkår, vilkarKoder],
   );
 
-  const isReadOnly = erReadOnly(
-    value.behandling,
-    aksjonspunkterForSteg,
-    vilkarForSteg,
-    value.rettigheter,
-    value.hasFetchError,
-  );
+  const isReadOnly = erReadOnly(value.behandling, vilkarForSteg, value.rettigheter, value.hasFetchError);
 
   const alleMerknaderFraBeslutter = useMemo(
     () => getAlleMerknaderFraBeslutter(value.behandling, aksjonspunkterForSteg),

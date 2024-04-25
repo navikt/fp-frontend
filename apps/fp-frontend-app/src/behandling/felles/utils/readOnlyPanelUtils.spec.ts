@@ -1,13 +1,5 @@
-import {
-  VilkarType,
-  AksjonspunktStatus,
-  BehandlingType,
-  BehandlingStatus,
-  VilkarUtfallType,
-} from '@navikt/ft-kodeverk';
+import { VilkarType, BehandlingType, BehandlingStatus, VilkarUtfallType } from '@navikt/ft-kodeverk';
 import { Behandling } from '@navikt/ft-types';
-
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 
 import { erReadOnly, harBehandlingReadOnlyStatus } from './readOnlyPanelUtils';
 
@@ -20,16 +12,6 @@ describe('<readOnlyUtils>', () => {
     behandlingPaaVent: false,
     behandlingHenlagt: false,
   };
-
-  const aksjonspunkter = [
-    {
-      status: AksjonspunktStatus.OPPRETTET,
-      definisjon: AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
-      kanLoses: true,
-      toTrinnsBehandling: true,
-      toTrinnsBehandlingGodkjent: false,
-    },
-  ];
 
   const vilkar = [
     {
@@ -75,7 +57,7 @@ describe('<readOnlyUtils>', () => {
 
   it('skal ikke være readonly', () => {
     const hasFetchError = false;
-    const readOnly = erReadOnly(behandling as Behandling, aksjonspunkter, vilkar, rettigheter, hasFetchError);
+    const readOnly = erReadOnly(behandling as Behandling, vilkar, rettigheter, hasFetchError);
 
     expect(readOnly).toBe(false);
   });
@@ -89,14 +71,14 @@ describe('<readOnlyUtils>', () => {
       },
     };
     const hasFetchError = false;
-    const readOnly = erReadOnly(behandling as Behandling, aksjonspunkter, vilkar, nyRettigheter, hasFetchError);
+    const readOnly = erReadOnly(behandling as Behandling, vilkar, nyRettigheter, hasFetchError);
 
     expect(readOnly).toBe(true);
   });
 
   it('skal være readonly når en har fetch error', () => {
     const hasFetchError = true;
-    const readOnly = erReadOnly(behandling as Behandling, aksjonspunkter, vilkar, rettigheter, hasFetchError);
+    const readOnly = erReadOnly(behandling as Behandling, vilkar, rettigheter, hasFetchError);
 
     expect(readOnly).toBe(true);
   });
@@ -109,13 +91,7 @@ describe('<readOnlyUtils>', () => {
       },
     };
     const hasFetchError = false;
-    const readOnly = erReadOnly(
-      behandlingMedReadOnly as Behandling,
-      aksjonspunkter,
-      vilkar,
-      rettigheter,
-      hasFetchError,
-    );
+    const readOnly = erReadOnly(behandlingMedReadOnly as Behandling, vilkar, rettigheter, hasFetchError);
 
     expect(readOnly).toBe(true);
   });
@@ -128,7 +104,7 @@ describe('<readOnlyUtils>', () => {
       },
     ];
     const hasFetchError = false;
-    const readOnly = erReadOnly(behandling as Behandling, aksjonspunkter, nyeVilkar, rettigheter, hasFetchError);
+    const readOnly = erReadOnly(behandling as Behandling, nyeVilkar, rettigheter, hasFetchError);
 
     expect(readOnly).toBe(true);
   });

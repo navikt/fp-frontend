@@ -79,7 +79,7 @@ const useStandardFaktaPanelProps = (
     [aksjonspunkt, aksjonspunktKoder],
   );
 
-  const readOnly = erReadOnly(value.behandling, aksjonspunkterForSteg, [], value.rettigheter, value.hasFetchError);
+  const readOnly = erReadOnly(value.behandling, [], value.rettigheter, value.hasFetchError);
   const alleMerknaderFraBeslutter = useMemo(
     () => getAlleMerknaderFraBeslutter(value.behandling, aksjonspunkterForSteg),
     [value.behandling.versjon, aksjonspunkterForSteg],
