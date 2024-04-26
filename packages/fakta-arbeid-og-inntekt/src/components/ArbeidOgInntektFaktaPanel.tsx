@@ -241,9 +241,10 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
   );
   const harBehandletAllePerioder = tabellRader.every(d => !d.årsak || (d.årsak && d.avklaring));
 
+  const harIngenAksjonspunkt = aksjonspunkt === undefined;
   const erAksjonspunktAvsluttet = aksjonspunkt?.status === aksjonspunktStatus.UTFORT;
   const erAksjonspunktApent = aksjonspunkt?.status === aksjonspunktStatus.OPPRETTET;
-  const erOverstyrerOgHarIngenAksjonspunkt = erOverstyrer && aksjonspunkt === undefined;
+  const erOverstyrerOgHarIngenAksjonspunkt = erOverstyrer && harIngenAksjonspunkt;
 
   const skalViseÅpneForNyVurderingKnapp = !readOnly && (erAksjonspunktAvsluttet || erOverstyrerOgHarIngenAksjonspunkt);
   const skalViseSettPåVentKnapp =
@@ -275,7 +276,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
             behandlingUuid={behandling.uuid}
             behandlingVersjon={behandling.versjon}
             radData={radData}
-            isReadOnly={readOnly || erAksjonspunktAvsluttet}
+            isReadOnly={readOnly || erAksjonspunktAvsluttet || harIngenAksjonspunkt}
             registrerArbeidsforhold={registrerArbeidsforhold}
             lagreVurdering={lagreVurdering}
             toggleÅpenRad={() => toggleÅpenRad(index)}
