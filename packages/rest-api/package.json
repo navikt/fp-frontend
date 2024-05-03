@@ -15,8 +15,8 @@
     "clean": "rm -rf ./dist ./node_modules"
   },
   "dependencies": {
-    "@sentry/browser": "7.107.0",
-    "axios": "1.6.7"
+    "@sentry/browser": "7.113.0",
+    "axios": "1.6.8"
   },
   "devDependencies": {
     "axios-mock-adapter": "1.22.0",
