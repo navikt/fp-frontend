@@ -13,6 +13,7 @@ import OppgaverForForsteStonadsdag from '../typer/oppgaverForForsteStonadsdagTsT
 import OppgaverSomErApneEllerPaVent from '../typer/oppgaverSomErApneEllerPaVentTsType';
 import Reservasjon from '../typer/reservasjonTsType';
 import SaksbehandlerForFlytting from '../typer/saksbehandlerForFlyttingTsType';
+import SaksbehandlereOgSaksbehandlerGrupper from '../typer/saksbehandlereOgSaksbehandlerGrupper ';
 
 export const RestApiGlobalStatePathsKeys = {
   KODEVERK_LOS: new RestKey<AlleKodeverk, void>('KODEVERK_LOS'),
@@ -132,6 +133,50 @@ export const RestApiPathsKeys = {
       avdelingEnhet: string;
     }
   >('LAGRE_SAKSLISTE_SAKSBEHANDLER'),
+
+  HENT_GRUPPER: new RestKey<
+    SaksbehandlereOgSaksbehandlerGrupper,
+    {
+      avdelingEnhet: string;
+    }
+  >('OPPRETT_GRUPPE'),
+  OPPRETT_GRUPPE: new RestKey<
+    void,
+    {
+      avdelingEnhet: string;
+    }
+  >('OPPRETT_GRUPPE'),
+  LEGG_SAKSBEHANDLER_TIL_GRUPPE: new RestKey<
+    void,
+    {
+      brukerIdent: string;
+      avdelingEnhet: string;
+      gruppeId: number;
+    }
+  >('LEGG_SAKSBEHANDLER_TIL_GRUPPE'),
+  FJERN_SAKSBEHANDLER_FRA_GRUPPE: new RestKey<
+    void,
+    {
+      brukerIdent: string;
+      avdelingEnhet: string;
+      gruppeId: number;
+    }
+  >('FJERN_SAKSBEHANDLER_FRA_GRUPPE'),
+  ENDRE_GRUPPENAVN: new RestKey<
+    void,
+    {
+      gruppeId: number;
+      gruppeNavn: string;
+      avdelingEnhet: string;
+    }
+  >('ENDRE_GRUPPENAVN'),
+  SLETT_GRUPPE: new RestKey<
+    void,
+    {
+      gruppeId: number;
+      avdelingEnhet: string;
+    }
+  >('SLETT_GRUPPE'),
 };
 
 export const endpoints = new RestApiConfigBuilder()
@@ -166,6 +211,20 @@ export const endpoints = new RestApiConfigBuilder()
   .withPost('/fplos/api/avdelingsleder/saksbehandlere/søk', RestApiPathsKeys.SAKSBEHANDLER_SOK)
   .withPost('/fplos/api/avdelingsleder/saksbehandlere', RestApiPathsKeys.OPPRETT_NY_SAKSBEHANDLER)
   .withPost('/fplos/api/avdelingsleder/saksbehandlere/slett', RestApiPathsKeys.SLETT_SAKSBEHANDLER)
+
+  .withPost('/fplos/api/avdelingsleder/saksbehandlere/grupper/opprett-gruppe', RestApiPathsKeys.OPPRETT_GRUPPE)
+  .withGet('/fplos/api/avdelingsleder/saksbehandlere/grupper', RestApiPathsKeys.HENT_GRUPPER)
+  .withPost(
+    '/fplos/api/avdelingsleder/saksbehandlere/grupper/legg-til-saksbehandler',
+    RestApiPathsKeys.LEGG_SAKSBEHANDLER_TIL_GRUPPE,
+  )
+  .withPost(
+    '/fplos/api/avdelingsleder/saksbehandlere/grupper/fjern-saksbehandler',
+    RestApiPathsKeys.FJERN_SAKSBEHANDLER_FRA_GRUPPE,
+  )
+  .withPost('/fplos/api/avdelingsleder/saksbehandlere/grupper/endre-gruppenavn', RestApiPathsKeys.ENDRE_GRUPPENAVN)
+  .withPost('/fplos/api/avdelingsleder/saksbehandlere/grupper/slett-saksbehandlergruppe', RestApiPathsKeys.SLETT_GRUPPE)
+
   .withGet(
     '/fplos/api/avdelingsleder/nøkkeltall/behandlinger-under-arbeid',
     RestApiPathsKeys.HENT_OPPGAVER_FOR_AVDELING,

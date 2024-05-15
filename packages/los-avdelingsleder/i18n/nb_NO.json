@@ -1,6 +1,7 @@
 {
   "AvdelingslederIndex.Behandlingskoer": "Behandlingskøer",
   "AvdelingslederIndex.Saksbehandlere": "Saksbehandlere",
+  "AvdelingslederIndex.Grupper": "Grupper",
   "AvdelingslederIndex.Nokkeltall": "Nøkkeltall",
   "AvdelingslederIndex.Reservasjoner": "Reservasjoner",
 
@@ -61,6 +62,8 @@
 
   "SaksbehandlereForSakslisteForm.Saksbehandlere": "Saksbehandlere",
   "SaksbehandlereForSakslisteForm.IngenSaksbehandlere": "Avdelingen har ingen saksbehandlere tilknyttet",
+  "SaksbehandlereForSakslisteForm.Gruppenavn": "Gruppenavn",
+  "SaksbehandlereForSakslisteForm.AntallSaksbehandlere": "Antall saksbehandlere",
 
   "SletteSaksbehandlerModal.SletteModal": "Ønsker du å slette saksbehandler?",
   "SletteSaksbehandlerModal.SletteSaksbehandler": "Ønsker du å slette {saksbehandlerNavn}?",
@@ -134,5 +137,17 @@
   "SletteSakslisteModal.SletteModal": "Ønsker du å slette behandlingskøen?",
   "SletteSakslisteModal.SletteSaksliste": "Ønsker du å slette {sakslisteNavn}?",
   "SletteSakslisteModal.Ja": "Ja",
-  "SletteSakslisteModal.Nei": "Nei"
+  "SletteSakslisteModal.Nei": "Nei",
+
+  "GrupperPanel.OpprettGruppe": "Opprett gruppe",
+
+  "GrupperTabell.Grupper": "Grupper",
+  "GrupperTabell.Id": "Id",
+  "GrupperTabell.Navn": "Navn",
+  "GrupperTabell.AntallSaksbehandlere": "Antall saksbehandlere",
+
+  "GruppeSaksbehandlere.ValgteSaksbehandlere": "Saksbehandlere",
+  "GruppeSaksbehandlere.Ingen": "Ingen valgte saksbehandlere",
+  "GruppeSaksbehandlere.Navn": "Navn på gruppe",
+  "GruppeSaksbehandlere.VelgSaksbehandlere": "Legg saksbehandler til gruppe"
 }
