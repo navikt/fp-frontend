@@ -52,10 +52,12 @@ const GrupperIndex: FunctionComponent<OwnProps> = ({ valgtAvdelingEnhet, avdelin
     fjernGruppe({
       gruppeId,
       avdelingEnhet: valgtAvdelingEnhet,
-    });
+    }).then(() => hentGrupper({ avdelingEnhet: valgtAvdelingEnhet }));
 
   const opprettOgHentAlleGrupper = () =>
-    opprettGruppe({ avdelingEnhet: valgtAvdelingEnhet }).then(() => hentGrupper({ avdelingEnhet: valgtAvdelingEnhet }));
+    opprettGruppe({ avdelingEnhet: valgtAvdelingEnhet }).then(() => {
+      hentGrupper({ avdelingEnhet: valgtAvdelingEnhet });
+    });
 
   useEffect(() => {
     hentGrupper({

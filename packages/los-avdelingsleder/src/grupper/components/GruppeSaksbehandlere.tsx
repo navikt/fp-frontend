@@ -15,7 +15,7 @@ const maxLength100 = maxLength(100);
 
 const sortGrupperteSaksbehandlere = (saksbehandlere: GruppeSaksbehandler[]) =>
   [...saksbehandlere].sort((saksbehandler1, saksbehandler2) =>
-    saksbehandler1.saksbehandlerDto.navn.localeCompare(saksbehandler2.saksbehandlerDto.navn),
+    saksbehandler1.navn.localeCompare(saksbehandler2.navn),
   );
 
 const sortAvdelingensSaksbehandlere = (saksbehandlere: SaksbehandlerAvdeling[]) =>
@@ -65,21 +65,21 @@ const GruppeSaksbehandlere: FunctionComponent<Props> = ({
                 <FormattedMessage id="GruppeSaksbehandlere.Ingen" />
               </BodyShort>
             )}
-            {sorterteGrupperteSaksbehandlere.map(saksbehandler => (
+            {sorterteGrupperteSaksbehandlere?.map(saksbehandler => (
               <HStack gap="2" align="center">
-                <div>{`${saksbehandler.saksbehandlerDto.navn} (${saksbehandler.saksbehandlerDto.brukerIdent})`}</div>
+                <div>{`${saksbehandler.navn} (${saksbehandler.brukerIdent})`}</div>
                 <div>
                   <XMarkIcon
                     onMouseDown={() =>
                       lagreValgtSaksbehandlar(
-                        saksbehandler.saksbehandlerDto.brukerIdent,
+                        saksbehandler.brukerIdent,
                         saksbehandlerGruppe.gruppeId,
                         false,
                       )
                     }
                     onKeyDown={() =>
                       lagreValgtSaksbehandlar(
-                        saksbehandler.saksbehandlerDto.brukerIdent,
+                        saksbehandler.brukerIdent,
                         saksbehandlerGruppe.gruppeId,
                         false,
                       )
@@ -99,7 +99,7 @@ const GruppeSaksbehandlere: FunctionComponent<Props> = ({
           )}
           onToggleSelected={option => {
             const navnOgBrukerIdent = option.replace(')', '').split(' (');
-            if (!sorterteGrupperteSaksbehandlere.some(gs => gs.saksbehandlerDto.brukerIdent === navnOgBrukerIdent[1])) {
+            if (!sorterteGrupperteSaksbehandlere.some(gs => gs.brukerIdent === navnOgBrukerIdent[1])) {
               lagreValgtSaksbehandlar(navnOgBrukerIdent[1], saksbehandlerGruppe.gruppeId, true);
             }
           }}

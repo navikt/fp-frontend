@@ -139,7 +139,7 @@ export const RestApiPathsKeys = {
     {
       avdelingEnhet: string;
     }
-  >('OPPRETT_GRUPPE'),
+  >('HENT_GRUPPER'),
   OPPRETT_GRUPPE: new RestKey<
     void,
     {

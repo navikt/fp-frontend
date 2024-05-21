@@ -42,7 +42,7 @@ const GrupperTabell: FunctionComponent<OwnProps> = ({
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {grupper.saksbehandlerGrupper.map(saksbehandlerGruppe => (
+        {grupper.saksbehandlerGrupper?.map(saksbehandlerGruppe => (
           <Table.ExpandableRow
             key={saksbehandlerGruppe.gruppeId}
             content={
