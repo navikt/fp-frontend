@@ -9,7 +9,7 @@ import { restApiHooks, RestApiPathsKeys } from '../../../data/fplosRestApi';
 import Saksbehandler from '../../../typer/saksbehandlerAvdelingTsType';
 import Saksliste from '../../../typer/sakslisteAvdelingTsType';
 
-import SaksbehandlereOgSaksbehandlerGrupper from '../../../typer/saksbehandlereOgSaksbehandlerGrupper ';
+import SaksbehandlereOgSaksbehandlerGrupper, { SaksbehandlerGruppe } from '../../../typer/saksbehandlereOgSaksbehandlerGrupper ';
 import styles from './saksbehandlereForSakslisteForm.module.css';
 import ValgAvSaksbehandlere from './ValgAvSaksbehandlere';
 
@@ -24,6 +24,15 @@ const finnesDetGrupperMedSaksbehandlere = (grupper?: SaksbehandlereOgSaksbehandl
   grupper &&
   grupper.saksbehandlerGrupper.length > 0 &&
   !grupper.saksbehandlerGrupper.every(sg => sg.saksbehandlere.length === 0);
+
+const antallTilknyttetSaksliste = (saksliste: Saksliste, gruppe: SaksbehandlerGruppe) => {
+  let matchCount = 0;
+  saksliste.saksbehandlerIdenter.forEach(ident => {
+    const matches = gruppe.saksbehandlere.filter(saksbehandler => saksbehandler.brukerIdent === ident);
+    matchCount += matches.length;
+  });
+  return matchCount;
+};
 
 type FormValues = {
   reserverTil: string;
@@ -109,7 +118,7 @@ const SaksbehandlereForSakslisteForm: FunctionComponent<OwnProps> = ({
                   }
                 >
                   <Table.DataCell scope="row">{sg.gruppeNavn}</Table.DataCell>
-                  <Table.DataCell>{sg.saksbehandlere.length}</Table.DataCell>
+                  <Table.DataCell>{antallTilknyttetSaksliste(valgtSaksliste, sg)}</Table.DataCell>
                 </Table.ExpandableRow>
               ))}
             </Table.Body>
