@@ -150,17 +150,13 @@ SaksbehandlereSomErGruppert.args = {
         saksbehandlere: [
           {
             avdelingsnavn: ['NAV Oslo'],
-            saksbehandlerDto: {
-              brukerIdent: 'E23232',
-              navn: 'Espen Utvikler',
-            },
+            brukerIdent: 'E23232',
+            navn: 'Espen Utvikler',
           },
           {
             avdelingsnavn: ['NAV Oslo'],
-            saksbehandlerDto: {
-              brukerIdent: 'S34354',
-              navn: 'Steffen',
-            },
+            brukerIdent: 'S34354',
+            navn: 'Steffen',
           },
         ],
       },

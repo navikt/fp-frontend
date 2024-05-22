@@ -38,10 +38,8 @@ const avdelingensSaksbehandlere = [
 const saksbehandlere = [
   {
     avdelingsnavn: ['NAV Oslo'],
-    saksbehandlerDto: {
-      brukerIdent: 'ident1',
-      navn: 'Anders Utvikler',
-    },
+    brukerIdent: 'ident1',
+    navn: 'Anders Utvikler',
   },
 ];
 
@@ -59,10 +57,8 @@ const endreSaksbehandlere = (gruppeSaksbehandlere: GruppeSaksbehandler[], bruker
   if (isChecked) {
     return gruppeSaksbehandlere.concat({
       avdelingsnavn: ['Navn på avdeling'],
-      saksbehandlerDto: {
-        brukerIdent,
-        navn: 'Placholder for navn i story',
-      },
+      brukerIdent,
+      navn: 'Placholder for navn i story',
     });
   }
   // @ts-ignore

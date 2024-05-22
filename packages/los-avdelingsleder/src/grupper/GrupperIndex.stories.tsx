@@ -36,10 +36,8 @@ const avdelingensSaksbehandlere = [
 const saksbehandlere = [
   {
     avdelingsnavn: ['NAV Oslo'],
-    saksbehandlerDto: {
-      brukerIdent: 'ident1',
-      navn: 'Anders Utvikler',
-    },
+    brukerIdent: 'ident1',
+    navn: 'Anders Utvikler',
   },
 ];
 

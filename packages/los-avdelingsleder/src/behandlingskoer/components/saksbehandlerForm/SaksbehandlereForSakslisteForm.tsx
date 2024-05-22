@@ -99,8 +99,8 @@ const SaksbehandlereForSakslisteForm: FunctionComponent<OwnProps> = ({
                   content={
                     <ValgAvSaksbehandlere
                       saksbehandlere={sg.saksbehandlere.map(sb => ({
-                        brukerIdent: sb.saksbehandlerDto.brukerIdent,
-                        navn: sb.saksbehandlerDto.navn,
+                        brukerIdent: sb.brukerIdent,
+                        navn: sb.navn,
                       }))}
                       valgtSaksliste={valgtSaksliste}
                       valgtAvdelingEnhet={valgtAvdelingEnhet}
