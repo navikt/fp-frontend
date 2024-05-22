@@ -1,8 +1,6 @@
 export type GruppeSaksbehandler = Readonly<{
-  saksbehandlerDto: {
-    brukerIdent: string;
-    navn: string;
-  };
+  brukerIdent: string;
+  navn: string;
   avdelingsnavn: string[];
 }>;
 
