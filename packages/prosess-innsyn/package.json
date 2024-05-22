@@ -34,7 +34,7 @@
     "classnames": "2.5.1",
     "moment": "2.30.1",
     "react": "18.2.0",
-    "react-hook-form": "7.51.0",
+    "react-hook-form": "7.51.4",
     "react-intl": "6.6.2"
   },
   "devDependencies": {
