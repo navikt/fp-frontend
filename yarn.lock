@@ -2580,14 +2580,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@formatjs/intl-datetimeformat@npm:6.12.2":
-  version: 6.12.2
-  resolution: "@formatjs/intl-datetimeformat@npm:6.12.2"
+"@formatjs/intl-datetimeformat@npm:6.12.5":
+  version: 6.12.5
+  resolution: "@formatjs/intl-datetimeformat@npm:6.12.5"
   dependencies:
-    "@formatjs/ecma402-abstract": 1.18.2
+    "@formatjs/ecma402-abstract": 2.0.0
     "@formatjs/intl-localematcher": 0.5.4
     tslib: ^2.4.0
-  checksum: 41031741f4b1d46b53c1679e017181a6206f70f39b7b8b513edc7496e2486dae725fe33af6e94a3da2dfa9051790f22bcb978f7b28c26af2ba3ae15774909013
+  checksum: 06f5a3f33fc3c8fc4de65d9f311fdf9c94b782f580c8d3f60f4e78c4e071eb02b3b07c68156f067dc759c09514467827ec058163509ee2762346ed5c1f3054f6
   languageName: node
   linkType: hard
 
@@ -2610,17 +2610,6 @@ __metadata:
     "@formatjs/intl-localematcher": 0.4.2
     tslib: ^2.4.0
   checksum: e48718c00fc2392aac49bbc6971f44d6e56f3626aaebae9ecf61fe8787b7e11b5b0be9f7be5d8bcd43ea6fbaa7ea4aa1453b042e076f982fa0d24d7744088ccf
-  languageName: node
-  linkType: hard
-
-"@formatjs/intl-displaynames@npm:6.6.6":
-  version: 6.6.6
-  resolution: "@formatjs/intl-displaynames@npm:6.6.6"
-  dependencies:
-    "@formatjs/ecma402-abstract": 1.18.2
-    "@formatjs/intl-localematcher": 0.5.4
-    tslib: ^2.4.0
-  checksum: 4f4f2c690dff61570872eb397ed8e7e8e31d67acf94813c165ac96db8d83f9321c19b9410275f592cdeea980cd9391b14f823a142d5b52e85aab499cd3a00d39
   languageName: node
   linkType: hard
 
@@ -2654,17 +2643,6 @@ __metadata:
     "@formatjs/intl-localematcher": 0.4.2
     tslib: ^2.4.0
   checksum: e31c0f8cf91c23c22c725db6fee51f5a54399a04d7dc1834a7a83e2d7069e26b92f7276a10c4f35d4ffa82f482c1fcf1240571f2e04e10ef072f2edcd2f69a09
-  languageName: node
-  linkType: hard
-
-"@formatjs/intl-listformat@npm:7.5.5":
-  version: 7.5.5
-  resolution: "@formatjs/intl-listformat@npm:7.5.5"
-  dependencies:
-    "@formatjs/ecma402-abstract": 1.18.2
-    "@formatjs/intl-localematcher": 0.5.4
-    tslib: ^2.4.0
-  checksum: ed49f0820e45e600ea4cbd72be894b741a45446959e9d8e007416e50236e663aa18ba46cf0040b35190765e3e67b11c673d4930f0f9a733f4f9cf7ab15d8a08c
   languageName: node
   linkType: hard
 
@@ -2706,34 +2684,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@formatjs/intl-numberformat@npm:8.10.0":
-  version: 8.10.0
-  resolution: "@formatjs/intl-numberformat@npm:8.10.0"
+"@formatjs/intl-numberformat@npm:8.10.3":
+  version: 8.10.3
+  resolution: "@formatjs/intl-numberformat@npm:8.10.3"
   dependencies:
-    "@formatjs/ecma402-abstract": 1.18.2
+    "@formatjs/ecma402-abstract": 2.0.0
     "@formatjs/intl-localematcher": 0.5.4
     tslib: ^2.4.0
-  checksum: 4a1344cad4e88630f84484791c32a299b8881fd168f7a5d0a9bd5baaa19fb62ffdb7d6f5f79e7b1683ca64a4eadd5764e7ff482872b5ae7a0cd489e55429cc9b
-  languageName: node
-  linkType: hard
-
-"@formatjs/intl@npm:2.10.0":
-  version: 2.10.0
-  resolution: "@formatjs/intl@npm:2.10.0"
-  dependencies:
-    "@formatjs/ecma402-abstract": 1.18.2
-    "@formatjs/fast-memoize": 2.2.0
-    "@formatjs/icu-messageformat-parser": 2.7.6
-    "@formatjs/intl-displaynames": 6.6.6
-    "@formatjs/intl-listformat": 7.5.5
-    intl-messageformat: 10.5.11
-    tslib: ^2.4.0
-  peerDependencies:
-    typescript: ^4.7 || 5
-  peerDependenciesMeta:
-    typescript:
-      optional: true
-  checksum: 45ed03c7c4a378606b273477a1fd0323804caf2eee1d0ace17b8dfe15a9c71b4083ffc4592c02a1261bcbc2edfd09e81d3144b5b7599dcd51f3cae48c5c93d9a
+  checksum: 7f7925318f9d404bc66cce4b6a547c1a216636ce150de89b844f022aee923827bcabf2dc08455aa3612459ef9803cb9edeaa9a0b09dd32fd5040b34be59340f7
   languageName: node
   linkType: hard
 
@@ -3262,9 +3220,9 @@ __metadata:
     eslint: 8.57.0
     fast-glob: ^3.3.2
     moment: 2.30.1
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -3299,11 +3257,11 @@ __metadata:
     "@testing-library/user-event": 14.5.2
     classnames: 2.5.1
     cross-env: 7.0.3
-    dayjs: 1.11.10
+    dayjs: 1.11.11
     eslint: 8.57.0
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -3337,8 +3295,8 @@ __metadata:
     cross-env: 7.0.3
     eslint: 8.57.0
     moment: 2.30.1
-    react: 18.2.0
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -3370,11 +3328,11 @@ __metadata:
     "@testing-library/react": 14.2.1
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
-    dayjs: 1.11.10
+    dayjs: 1.11.11
     eslint: 8.57.0
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -3403,8 +3361,8 @@ __metadata:
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
-    react: 18.2.0
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-intl: 6.6.8
     stylelint: 15.11.0
     typescript: 5.4.2
     vite: 5.1.6
@@ -3438,9 +3396,9 @@ __metadata:
     cross-env: 7.0.3
     eslint: 8.57.0
     moment: 2.30.1
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -3475,9 +3433,9 @@ __metadata:
     cross-env: 7.0.3
     eslint: 8.57.0
     moment: 2.30.1
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -3511,9 +3469,9 @@ __metadata:
     cross-env: 7.0.3
     eslint: 8.57.0
     moment: 2.30.1
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -3550,9 +3508,9 @@ __metadata:
     cross-env: 7.0.3
     eslint: 8.57.0
     moment: 2.30.1
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -3589,9 +3547,9 @@ __metadata:
     cross-env: 7.0.3
     eslint: 8.57.0
     moment: 2.30.1
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -3621,12 +3579,12 @@ __metadata:
     "@testing-library/react": 14.2.1
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
-    dayjs: 1.11.10
+    dayjs: 1.11.11
     eslint: 8.57.0
-    react: 18.2.0
-    react-dom: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-dom: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -3660,11 +3618,11 @@ __metadata:
     "@testing-library/user-event": 14.5.2
     classnames: 2.5.1
     cross-env: 7.0.3
-    dayjs: 1.11.10
+    dayjs: 1.11.11
     eslint: 8.57.0
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -3697,11 +3655,11 @@ __metadata:
     "@testing-library/react": 14.2.1
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
-    dayjs: 1.11.10
+    dayjs: 1.11.11
     eslint: 8.57.0
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -3735,13 +3693,13 @@ __metadata:
     "@testing-library/react": 14.2.1
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
-    dayjs: 1.11.10
+    dayjs: 1.11.11
     eslint: 8.57.0
     fast-glob: ^3.3.2
-    react: 18.2.0
-    react-dom: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-dom: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -3775,11 +3733,11 @@ __metadata:
     "@testing-library/user-event": 14.5.2
     classnames: 2.5.1
     cross-env: 7.0.3
-    dayjs: 1.11.10
+    dayjs: 1.11.11
     eslint: 8.57.0
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -3810,11 +3768,11 @@ __metadata:
     "@testing-library/react": 14.2.1
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
-    dayjs: 1.11.10
+    dayjs: 1.11.11
     eslint: 8.57.0
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -3846,9 +3804,9 @@ __metadata:
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -3878,8 +3836,8 @@ __metadata:
     cross-env: 7.0.3
     eslint: 8.57.0
     moment: 2.30.1
-    react: 18.2.0
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -3892,8 +3850,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-frontend-app@workspace:apps/fp-frontend-app"
   dependencies:
-    "@formatjs/intl-datetimeformat": 6.12.2
-    "@formatjs/intl-numberformat": 8.10.0
+    "@formatjs/intl-datetimeformat": 6.12.5
+    "@formatjs/intl-numberformat": 8.10.3
     "@navikt/aksel-icons": 6.1.1
     "@navikt/ds-css": 6.1.1
     "@navikt/ds-css-internal": ^3.4.3
@@ -4002,22 +3960,22 @@ __metadata:
     "@storybook/react-vite": 8.0.0
     "@testing-library/react": 14.2.1
     "@testing-library/user-event": 14.5.2
-    axios: 1.6.7
+    axios: 1.7.2
     axios-mock-adapter: 1.22.0
     classnames: 2.5.1
-    core-js: 3.36.0
-    dayjs: 1.11.10
+    core-js: 3.37.1
+    dayjs: 1.11.11
     eslint: 8.57.0
     history: 5.3.0
     moment: 2.30.1
-    react: 18.2.0
-    react-dom: 18.2.0
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-dom: 18.3.1
+    react-intl: 6.6.8
     react-modal: 3.16.1
     react-popper: 2.3.0
     react-responsive: 9.0.2
-    react-router: 6.22.3
-    react-router-dom: 6.22.3
+    react-router: 6.23.1
+    react-router-dom: 6.23.1
     react-test-renderer: 18.2.0
     rollup-plugin-sourcemaps: 0.6.3
     storybook: 8.0.0
@@ -4053,11 +4011,11 @@ __metadata:
     "@testing-library/react": 14.2.1
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
-    dayjs: 1.11.10
+    dayjs: 1.11.11
     eslint: 8.57.0
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -4113,15 +4071,15 @@ __metadata:
     "@testing-library/user-event": 14.5.2
     "@types/lodash.debounce": 4.0.9
     cross-env: 7.0.3
-    dayjs: 1.11.10
+    dayjs: 1.11.11
     echarts: 5.5.0
     eslint: 8.57.0
     history: 5.3.0
     lodash.debounce: 4.0.8
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
-    react-router-dom: 6.22.3
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
+    react-router-dom: 6.23.1
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -4152,15 +4110,15 @@ __metadata:
     "@testing-library/react": 14.2.1
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
-    dayjs: 1.11.10
+    dayjs: 1.11.11
     echarts: 5.5.0
     eslint: 8.57.0
     history: 5.3.0
     lodash.debounce: 4.0.8
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
-    react-router-dom: 6.22.3
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
+    react-router-dom: 6.23.1
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -4195,16 +4153,16 @@ __metadata:
     "@testing-library/react": 14.2.1
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
-    dayjs: 1.11.10
+    dayjs: 1.11.11
     echarts: 5.5.0
     eslint: 8.57.0
     history: 5.3.0
     lodash.debounce: 4.0.8
-    react: 18.2.0
-    react-dom: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
-    react-router-dom: 6.22.3
+    react: 18.3.1
+    react-dom: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
+    react-router-dom: 6.23.1
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -4235,11 +4193,11 @@ __metadata:
     "@testing-library/react": 14.2.1
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
-    dayjs: 1.11.10
+    dayjs: 1.11.11
     eslint: 8.57.0
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -4273,13 +4231,13 @@ __metadata:
     "@testing-library/user-event": 14.5.2
     classnames: 2.5.1
     cross-env: 7.0.3
-    dayjs: 1.11.10
+    dayjs: 1.11.11
     eslint: 8.57.0
     moment: 2.30.1
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
-    react-router-dom: 6.22.3
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
+    react-router-dom: 6.23.1
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -4311,10 +4269,10 @@ __metadata:
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
-    react-router-dom: 6.22.3
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
+    react-router-dom: 6.23.1
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -4344,8 +4302,8 @@ __metadata:
     classnames: 2.5.1
     cross-env: 7.0.3
     eslint: 8.57.0
-    react: 18.2.0
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -4375,8 +4333,8 @@ __metadata:
     classnames: 2.5.1
     cross-env: 7.0.3
     eslint: 8.57.0
-    react: 18.2.0
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -4407,8 +4365,8 @@ __metadata:
     cross-env: 7.0.3
     eslint: 8.57.0
     moment: 2.30.1
-    react: 18.2.0
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -4441,9 +4399,9 @@ __metadata:
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -4474,8 +4432,8 @@ __metadata:
     cross-env: 7.0.3
     eslint: 8.57.0
     moment: 2.30.1
-    react: 18.2.0
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -4504,9 +4462,9 @@ __metadata:
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     stylelint: 15.11.0
     typescript: 5.4.2
     vite: 5.1.6
@@ -4539,9 +4497,9 @@ __metadata:
     cross-env: 7.0.3
     eslint: 8.57.0
     moment: 2.30.1
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -4578,9 +4536,9 @@ __metadata:
     cross-env: 7.0.3
     eslint: 8.57.0
     moment: 2.30.1
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -4614,9 +4572,9 @@ __metadata:
     classnames: 2.5.1
     cross-env: 7.0.3
     eslint: 8.57.0
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -4649,11 +4607,11 @@ __metadata:
     "@testing-library/user-event": 14.5.2
     classnames: 2.5.1
     cross-env: 7.0.3
-    dayjs: 1.11.10
+    dayjs: 1.11.11
     eslint: 8.57.0
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -4687,9 +4645,9 @@ __metadata:
     cross-env: 7.0.3
     eslint: 8.57.0
     moment: 2.30.1
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -4722,12 +4680,12 @@ __metadata:
     "@testing-library/user-event": 14.5.2
     classnames: 2.5.1
     cross-env: 7.0.3
-    dayjs: 1.11.10
+    dayjs: 1.11.11
     eslint: 8.57.0
-    react: 18.2.0
-    react-dom: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-dom: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -4759,12 +4717,12 @@ __metadata:
     "@testing-library/user-event": 14.5.2
     classnames: 2.5.1
     cross-env: 7.0.3
-    dayjs: 1.11.10
+    dayjs: 1.11.11
     eslint: 8.57.0
     moment: 2.30.1
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -4801,9 +4759,9 @@ __metadata:
     cross-env: 7.0.3
     eslint: 8.57.0
     moment: 2.30.1
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -4837,9 +4795,9 @@ __metadata:
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -4871,8 +4829,8 @@ __metadata:
     classnames: 2.5.1
     cross-env: 7.0.3
     eslint: 8.57.0
-    react: 18.2.0
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -4909,9 +4867,9 @@ __metadata:
     cross-env: 7.0.3
     eslint: 8.57.0
     moment: 2.30.1
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -4943,9 +4901,9 @@ __metadata:
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -4977,9 +4935,9 @@ __metadata:
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -5011,9 +4969,9 @@ __metadata:
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -5045,9 +5003,9 @@ __metadata:
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -5077,12 +5035,12 @@ __metadata:
     "@testing-library/react": 14.2.1
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
-    dayjs: 1.11.10
+    dayjs: 1.11.11
     eslint: 8.57.0
-    react: 18.2.0
-    react-dom: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-dom: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -5116,9 +5074,9 @@ __metadata:
     cross-env: 7.0.3
     eslint: 8.57.0
     moment: 2.30.1
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -5152,9 +5110,9 @@ __metadata:
     cross-env: 7.0.3
     eslint: 8.57.0
     moment: 2.30.1
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -5188,9 +5146,9 @@ __metadata:
     cross-env: 7.0.3
     eslint: 8.57.0
     moment: 2.30.1
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -5223,9 +5181,9 @@ __metadata:
     cross-env: 7.0.3
     eslint: 8.57.0
     moment: 2.30.1
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -5242,7 +5200,7 @@ __metadata:
     "@testing-library/react": 14.2.1
     cross-env: 7.0.3
     eslint: 8.57.0
-    react: 18.2.0
+    react: 18.3.1
     typescript: 5.4.2
     vite: 5.1.6
     vitest: 1.3.1
@@ -5254,7 +5212,7 @@ __metadata:
   resolution: "@navikt/fp-rest-api@workspace:packages/rest-api"
   dependencies:
     "@sentry/browser": 7.107.0
-    axios: 1.6.7
+    axios: 1.7.2
     axios-mock-adapter: 1.22.0
     cross-env: 7.0.3
     eslint: 8.57.0
@@ -5292,9 +5250,9 @@ __metadata:
     eslint: 8.57.0
     history: 5.3.0
     moment: 2.30.1
-    react: 18.2.0
-    react-intl: 6.6.2
-    react-router-dom: 6.22.3
+    react: 18.3.1
+    react-intl: 6.6.8
+    react-router-dom: 6.23.1
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -5328,9 +5286,9 @@ __metadata:
     classnames: 2.5.1
     cross-env: 7.0.3
     eslint: 8.57.0
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -5357,8 +5315,8 @@ __metadata:
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
-    react: 18.2.0
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -5389,9 +5347,9 @@ __metadata:
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -5423,9 +5381,9 @@ __metadata:
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -5456,9 +5414,9 @@ __metadata:
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -5487,10 +5445,10 @@ __metadata:
     "@testing-library/react": 14.2.1
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
-    dayjs: 1.11.10
+    dayjs: 1.11.11
     eslint: 8.57.0
-    react: 18.2.0
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -5520,11 +5478,11 @@ __metadata:
     "@testing-library/react": 14.2.1
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
-    dayjs: 1.11.10
+    dayjs: 1.11.11
     eslint: 8.57.0
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -5556,9 +5514,9 @@ __metadata:
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -5598,10 +5556,10 @@ __metadata:
     eslint: 8.57.0
     history: 5.3.0
     moment: 2.30.1
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
-    react-router-dom: 6.22.3
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
+    react-router-dom: 6.23.1
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -5625,9 +5583,9 @@ __metadata:
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -5643,10 +5601,10 @@ __metadata:
     "@navikt/ft-form-hooks": 4.4.7
     eslint: 8.57.0
     history: 5.3.0
-    react: 18.2.0
-    react-hook-form: 7.51.4
-    react-intl: 6.6.2
-    react-router-dom: 6.22.3
+    react: 18.3.1
+    react-hook-form: 7.51.5
+    react-intl: 6.6.8
+    react-router-dom: 6.23.1
     typescript: 5.4.2
     vite: 5.1.6
   languageName: unknown
@@ -5694,8 +5652,8 @@ __metadata:
     cross-env: 7.0.3
     eslint: 8.57.0
     fast-glob: ^3.3.2
-    react: 18.2.0
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-intl: 6.6.8
     storybook: 8.0.0
     stylelint: 15.11.0
     typescript: 5.4.2
@@ -5711,11 +5669,11 @@ __metadata:
     "@navikt/fp-rest-api": "workspace:*"
     "@navikt/fp-rest-api-hooks": "workspace:*"
     "@navikt/ft-ui-komponenter": 2.3.7
-    "@testing-library/jest-dom": 6.4.2
+    "@testing-library/jest-dom": 6.4.5
     axios-mock-adapter: 1.22.0
     eslint: 8.57.0
-    react: 18.2.0
-    react-intl: 6.6.2
+    react: 18.3.1
+    react-intl: 6.6.8
     typescript: 5.4.2
     vite: 5.1.6
   languageName: unknown
@@ -7134,10 +7092,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@remix-run/router@npm:1.15.3":
-  version: 1.15.3
-  resolution: "@remix-run/router@npm:1.15.3"
-  checksum: 9e70bd334d99fdf9285f0885c10353d7e25f66369080f551d997e3ce204e1af3a12d6f12b091f94a2dc9a54c80598bbe3c5194b57cbae17b7b40ab815dcd49a0
+"@remix-run/router@npm:1.16.1":
+  version: 1.16.1
+  resolution: "@remix-run/router@npm:1.16.1"
+  checksum: 69068815832b30d2a5c063ac1c75365c45cf5b484dab65e1b3129fdbb3c2a7b866401733f766e550dbca1eaf0b84bc772a9c55310f4dd21eb53e62eb1b4625d0
   languageName: node
   linkType: hard
 
@@ -8305,9 +8263,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/jest-dom@npm:6.4.2":
-  version: 6.4.2
-  resolution: "@testing-library/jest-dom@npm:6.4.2"
+"@testing-library/jest-dom@npm:6.4.5":
+  version: 6.4.5
+  resolution: "@testing-library/jest-dom@npm:6.4.5"
   dependencies:
     "@adobe/css-tools": ^4.3.2
     "@babel/runtime": ^7.9.2
@@ -8315,7 +8273,7 @@ __metadata:
     chalk: ^3.0.0
     css.escape: ^1.5.1
     dom-accessibility-api: ^0.6.3
-    lodash: ^4.17.15
+    lodash: ^4.17.21
     redent: ^3.0.0
   peerDependencies:
     "@jest/globals": ">= 28"
@@ -8334,7 +8292,7 @@ __metadata:
       optional: true
     vitest:
       optional: true
-  checksum: 631aeadbf4e738080ae095242cf1a29a0b4ee2f09c8bdd0d3f00a923707da64c1617e088ba9a961d098481afabdc1d19149fb7ef98edf15132348eb222f345ae
+  checksum: 95bd94f1f4ba2110eaaa15174207f74d46481f0f168a4d58c30f92a9285f797f9949c166aa8401bcb46e16edbf14a097013204d65801e9d1361892757e525bd6
   languageName: node
   linkType: hard
 
@@ -8826,12 +8784,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:18.2.22":
-  version: 18.2.22
-  resolution: "@types/react-dom@npm:18.2.22"
+"@types/react-dom@npm:18.3.0":
+  version: 18.3.0
+  resolution: "@types/react-dom@npm:18.3.0"
   dependencies:
     "@types/react": "*"
-  checksum: 83bb3ddcd7894f20a9a6cbc2befe75d8b76984734020c455b4c50cad625a4025250d8e1d247ef6264e484d47d5a94f2dd11f77c1dcac6a5de998cb447d85b720
+  checksum: a0cd9b1b815a6abd2a367a9eabdd8df8dd8f13f95897b2f9e1359ea3ac6619f957c1432ece004af7d95e2a7caddbba19faa045f831f32d6263483fc5404a7596
   languageName: node
   linkType: hard
 
@@ -8894,7 +8852,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:18.2.65, @types/react@npm:^16.8.0 || ^17.0.0 || ^18.0.0":
+"@types/react@npm:18.3.2":
+  version: 18.3.2
+  resolution: "@types/react@npm:18.3.2"
+  dependencies:
+    "@types/prop-types": "*"
+    csstype: ^3.0.2
+  checksum: d0b8b9d0ede6cd28dbbe34106d914b5e3652d9d7aa9d0f32fe6171506b6fc7c826d9d6571642976a5422bd29c5022fd893a710ed59a1177a0c1df8e02cf17ffe
+  languageName: node
+  linkType: hard
+
+"@types/react@npm:^16.8.0 || ^17.0.0 || ^18.0.0":
   version: 18.2.65
   resolution: "@types/react@npm:18.2.65"
   dependencies:
@@ -9990,7 +9958,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:1.6.7, axios@npm:^1.6.0":
+"axios@npm:1.7.2":
+  version: 1.7.2
+  resolution: "axios@npm:1.7.2"
+  dependencies:
+    follow-redirects: ^1.15.6
+    form-data: ^4.0.0
+    proxy-from-env: ^1.1.0
+  checksum: e457e2b0ab748504621f6fa6609074ac08c824bf0881592209dfa15098ece7e88495300e02cd22ba50b3468fd712fe687e629dcb03d6a3f6a51989727405aedf
+  languageName: node
+  linkType: hard
+
+"axios@npm:^1.6.0":
   version: 1.6.7
   resolution: "axios@npm:1.6.7"
   dependencies:
@@ -11093,13 +11072,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js@npm:3.36.0":
-  version: 3.36.0
-  resolution: "core-js@npm:3.36.0"
-  checksum: 48c807d5055ad0424f52d13583e96ddca2efcdc4e3cd9c479d60f269c8fe225191cd4e26a4593f43f7ef6dba08d161091147ecf8ae0300c15bc648a4f555217b
-  languageName: node
-  linkType: hard
-
 "core-js@npm:3.37.1":
   version: 3.37.1
   resolution: "core-js@npm:3.37.1"
@@ -11328,13 +11300,6 @@ __metadata:
   version: 0.1.2
   resolution: "dayjs-plugin-utc@npm:0.1.2"
   checksum: 80a3732407d7bcb0e2ca34a2964852a60c88540144ecca3fb0f4db03c1611f8198fea49fd8373972af7f8427789e591f42e32d0a5fa54d0f413c1b0921685dec
-  languageName: node
-  linkType: hard
-
-"dayjs@npm:1.11.10":
-  version: 1.11.10
-  resolution: "dayjs@npm:1.11.10"
-  checksum: a6b5a3813b8884f5cd557e2e6b7fa569f4c5d0c97aca9558e38534af4f2d60daafd3ff8c2000fed3435cfcec9e805bcebd99f90130c6d1c5ef524084ced588c4
   languageName: node
   linkType: hard
 
@@ -13188,6 +13153,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"follow-redirects@npm:^1.15.6":
+  version: 1.15.6
+  resolution: "follow-redirects@npm:1.15.6"
+  peerDependenciesMeta:
+    debug:
+      optional: true
+  checksum: a62c378dfc8c00f60b9c80cab158ba54e99ba0239a5dd7c81245e5a5b39d10f0c35e249c3379eae719ff0285fff88c365dd446fab19dee771f1d76252df1bbf5
+  languageName: node
+  linkType: hard
+
 "for-each@npm:^0.3.3":
   version: 0.3.3
   resolution: "for-each@npm:0.3.3"
@@ -13246,13 +13221,13 @@ __metadata:
     "@storybook/builder-vite": 8.0.0
     "@storybook/cli": 8.0.0
     "@storybook/react": 8.0.0
-    "@testing-library/jest-dom": 6.4.2
+    "@testing-library/jest-dom": 6.4.5
     "@testing-library/react": 14.2.1
     "@testing-library/react-hooks": 8.0.1
     "@testing-library/user-event": 14.5.2
-    "@types/react": 18.2.65
+    "@types/react": 18.3.2
     "@types/react-collapse": 5.0.4
-    "@types/react-dom": 18.2.22
+    "@types/react-dom": 18.3.0
     "@types/react-responsive": 8.0.8
     "@types/react-router-dom": 5.3.3
     "@types/react-test-renderer": 18.0.7
@@ -14450,18 +14425,6 @@ __metadata:
     "@formatjs/icu-messageformat-parser": 2.6.0
     tslib: ^2.4.0
   checksum: 164c49028b8bf2685f57f8f018d9a2c1d827e94b1c300ebf9df50b6aef25adedb3bf511b3cf603364d67257634b57926935066b2f3715ccb6c2af683cc0815a6
-  languageName: node
-  linkType: hard
-
-"intl-messageformat@npm:10.5.11":
-  version: 10.5.11
-  resolution: "intl-messageformat@npm:10.5.11"
-  dependencies:
-    "@formatjs/ecma402-abstract": 1.18.2
-    "@formatjs/fast-memoize": 2.2.0
-    "@formatjs/icu-messageformat-parser": 2.7.6
-    tslib: ^2.4.0
-  checksum: b5574447a0d938170049042ec807344d57c72e9aabb2e72be0d5197baabeb763e05680b19b7607df93fadeec0e13c9bfcb450e9ba2fe7464b4f06600b612bf5e
   languageName: node
   linkType: hard
 
@@ -15760,7 +15723,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash@npm:^4.17.15, lodash@npm:^4.17.21, lodash@npm:~4.17.15":
+"lodash@npm:^4.17.21, lodash@npm:~4.17.15":
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: eb835a2e51d381e561e508ce932ea50a8e5a68f4ebdd771ea240d3048244a8d13658acbd502cd4829768c56f2e16bdd4340b9ea141297d472517b83868e677f7
@@ -18165,6 +18128,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-hook-form@npm:7.51.5":
+  version: 7.51.5
+  resolution: "react-hook-form@npm:7.51.5"
+  peerDependencies:
+    react: ^16.8.0 || ^17 || ^18
+  checksum: 6b6a56b6520ddb68d491e2f07791538aa611c13fcd76052a499ba10bdaf7f77f4a5f7191e6ca9d9ab0af739bf07171c6e8d97f6c4da06f576aa74caed71828f1
+  languageName: node
+  linkType: hard
+
 "react-intl@npm:6.4.4":
   version: 6.4.4
   resolution: "react-intl@npm:6.4.4"
@@ -18210,30 +18182,6 @@ __metadata:
     typescript:
       optional: true
   checksum: 5b53096e4bf1e2a60b1175d381d645b284723280575054eba7c2f3a0b7aaf338228ffb7f1319caa7f7cdd7a463c9ba564e7ee09e3be794aa4c556fc850bbd670
-  languageName: node
-  linkType: hard
-
-"react-intl@npm:6.6.2":
-  version: 6.6.2
-  resolution: "react-intl@npm:6.6.2"
-  dependencies:
-    "@formatjs/ecma402-abstract": 1.18.2
-    "@formatjs/icu-messageformat-parser": 2.7.6
-    "@formatjs/intl": 2.10.0
-    "@formatjs/intl-displaynames": 6.6.6
-    "@formatjs/intl-listformat": 7.5.5
-    "@types/hoist-non-react-statics": ^3.3.1
-    "@types/react": 16 || 17 || 18
-    hoist-non-react-statics: ^3.3.2
-    intl-messageformat: 10.5.11
-    tslib: ^2.4.0
-  peerDependencies:
-    react: ^16.6.0 || 17 || 18
-    typescript: ^4.7 || 5
-  peerDependenciesMeta:
-    typescript:
-      optional: true
-  checksum: a7a7cffa68089053f4d6e87bba8c84e23b2ed27200764bc115edd2455fa2b538c5890fd2f112056e66fceed2ab77e6abdf7c63d6e357ead5549f5eabbd666840
   languageName: node
   linkType: hard
 
@@ -18361,27 +18309,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-router-dom@npm:6.22.3":
-  version: 6.22.3
-  resolution: "react-router-dom@npm:6.22.3"
+"react-router-dom@npm:6.23.1":
+  version: 6.23.1
+  resolution: "react-router-dom@npm:6.23.1"
   dependencies:
-    "@remix-run/router": 1.15.3
-    react-router: 6.22.3
+    "@remix-run/router": 1.16.1
+    react-router: 6.23.1
   peerDependencies:
     react: ">=16.8"
     react-dom: ">=16.8"
-  checksum: 5ae3759a70e4123cd4b8efbb82199a69f5d8c4a7a434d186d2ec7b532b6ef3302df2a98e5c27db977d3f0d725c7a279010a16ae77a3bf6257f1fee96123d8b77
+  checksum: e87b5cf85019496f499286d466a4ad9cf5efe729f1420502fc5d16093d525462803253538418ea5b0da7ab5671a16caefee67848b373008e567629c2d667dc44
   languageName: node
   linkType: hard
 
-"react-router@npm:6.22.3":
-  version: 6.22.3
-  resolution: "react-router@npm:6.22.3"
+"react-router@npm:6.23.1":
+  version: 6.23.1
+  resolution: "react-router@npm:6.23.1"
   dependencies:
-    "@remix-run/router": 1.15.3
+    "@remix-run/router": 1.16.1
   peerDependencies:
     react: ">=16.8"
-  checksum: 1f7d9a5a849761ff69ef8f3d3131b4c1c25d18b76317ba5ad6f0d9421192c0b8b71ab0cc818c57aad7b81ada725559e513307d0ab43296a460262f0358602672
+  checksum: d5d43ccb908a95d2b7345f2a13315c38bf094e25bcf97d5a6c3f353b1ea88602de15726c3570cd7f07c53b19a3519af2b6739bf6929ec355012795611d739cff
   languageName: node
   linkType: hard
 
