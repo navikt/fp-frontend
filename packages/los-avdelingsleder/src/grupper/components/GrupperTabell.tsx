@@ -9,7 +9,7 @@ import GruppeSaksbehandlere from './GruppeSaksbehandlere';
 interface OwnProps {
   grupper: SaksbehandlereOgSaksbehandlerGrupper;
   avdelingensSaksbehandlere: SaksbehandlerAvdeling[];
-  lagreValgtSaksbehandlar: (brukerIdent: string, gruppeId: number, isChecked: boolean) => void;
+  lagreValgtSaksbehandlar: (brukerIdent: string, gruppeId: number, leggTil: boolean) => void;
   endreGruppenavn: (gruppeId: number, gruppeNavn: string) => void;
   slettGruppe: (gruppeId: number) => void;
 }

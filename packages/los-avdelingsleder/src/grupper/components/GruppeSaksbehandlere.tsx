@@ -9,22 +9,26 @@ import SaksbehandlerAvdeling from '../../typer/saksbehandlerAvdelingTsType';
 import { GruppeSaksbehandler, SaksbehandlerGruppe } from '../../typer/saksbehandlereOgSaksbehandlerGrupper ';
 
 import styles from './gruppeSaksbehandlere.module.css';
+import useDebounce from '../../behandlingskoer/components/sakslisteForm/useDebounce';
 
 const minLength3 = minLength(3);
 const maxLength100 = maxLength(100);
 
 const sortGrupperteSaksbehandlere = (saksbehandlere: GruppeSaksbehandler[]) =>
-  [...saksbehandlere].sort((saksbehandler1, saksbehandler2) =>
-    saksbehandler1.navn.localeCompare(saksbehandler2.navn),
-  );
-
-const sortAvdelingensSaksbehandlere = (saksbehandlere: SaksbehandlerAvdeling[]) =>
   [...saksbehandlere].sort((saksbehandler1, saksbehandler2) => saksbehandler1.navn.localeCompare(saksbehandler2.navn));
+
+const sortAvdelingensSaksbehandlere = (
+  saksbehandlere: SaksbehandlerAvdeling[],
+  grupperteSaksbehandlere: SaksbehandlerAvdeling[],
+) =>
+  saksbehandlere
+    .filter(s => !grupperteSaksbehandlere.some(gs => gs.brukerIdent === s.brukerIdent))
+    .sort((saksbehandler1, saksbehandler2) => saksbehandler1.navn.localeCompare(saksbehandler2.navn));
 
 interface Props {
   saksbehandlerGruppe: SaksbehandlerGruppe;
   avdelingensSaksbehandlere: SaksbehandlerAvdeling[];
-  lagreValgtSaksbehandlar: (brukerIdent: string, gruppeId: number, isChecked: boolean) => void;
+  lagreValgtSaksbehandlar: (brukerIdent: string, gruppeId: number, leggTil: boolean) => void;
   endreGruppenavn: (gruppeId: number, gruppeNavn: string) => void;
 }
 
@@ -43,7 +47,16 @@ const GruppeSaksbehandlere: FunctionComponent<Props> = ({
   });
 
   const sorterteGrupperteSaksbehandlere = sortGrupperteSaksbehandlere(saksbehandlerGruppe.saksbehandlere);
-  const sorterteSaksbehandlereForAvdeling = sortAvdelingensSaksbehandlere(avdelingensSaksbehandlere);
+  const sorterteSaksbehandlereForAvdeling = sortAvdelingensSaksbehandlere(
+    avdelingensSaksbehandlere,
+    sorterteGrupperteSaksbehandlere,
+  );
+
+  const lagreNavnDebounce = useDebounce<string>(
+    'navn',
+    (navn: string) => endreGruppenavn(saksbehandlerGruppe.gruppeId, navn),
+    formMethods.trigger,
+  );
 
   return (
     <Form formMethods={formMethods}>
@@ -52,14 +65,31 @@ const GruppeSaksbehandlere: FunctionComponent<Props> = ({
           name="navn"
           label={intl.formatMessage({ id: 'GruppeSaksbehandlere.Navn' })}
           validate={[required, minLength3, maxLength100, hasValidName]}
-          onChange={(navn: string) => endreGruppenavn(saksbehandlerGruppe.gruppeId, navn)}
+          onBlur={lagreNavnDebounce}
           className={styles.navn}
         />
-        <VStack gap="1">
-          <Label size="small">
-            <FormattedMessage id="GruppeSaksbehandlere.ValgteSaksbehandlere" />
-          </Label>
+        <VStack gap="4">
+          {/* eslint-disable-next-line react/jsx-pascal-case */}
+          <UNSAFE_Combobox // eslint-disable-line camelcase
+            label={intl.formatMessage({ id: 'GruppeSaksbehandlere.VelgSaksbehandlere' })}
+            size="small"
+            options={sorterteSaksbehandlereForAvdeling.map(
+              saksbehandler => `${saksbehandler.navn} (${saksbehandler.brukerIdent})`,
+            )}
+            onToggleSelected={option => {
+              const navnOgBrukerIdent = option.replace(')', '').split(' (');
+              if (!sorterteGrupperteSaksbehandlere.some(gs => gs.brukerIdent === navnOgBrukerIdent[1])) {
+                lagreValgtSaksbehandlar(navnOgBrukerIdent[1], saksbehandlerGruppe.gruppeId, true);
+              }
+            }}
+            shouldAutocomplete
+            className={styles.saksbehandlerCombo}
+          />
+
           <VStack gap="2">
+            <Label size="small">
+              <FormattedMessage id="GruppeSaksbehandlere.ValgteSaksbehandlere" />
+            </Label>
             {sorterteGrupperteSaksbehandlere.length === 0 && (
               <BodyShort size="small">
                 <FormattedMessage id="GruppeSaksbehandlere.Ingen" />
@@ -71,18 +101,10 @@ const GruppeSaksbehandlere: FunctionComponent<Props> = ({
                 <div>
                   <XMarkIcon
                     onMouseDown={() =>
-                      lagreValgtSaksbehandlar(
-                        saksbehandler.brukerIdent,
-                        saksbehandlerGruppe.gruppeId,
-                        false,
-                      )
+                      lagreValgtSaksbehandlar(saksbehandler.brukerIdent, saksbehandlerGruppe.gruppeId, false)
                     }
                     onKeyDown={() =>
-                      lagreValgtSaksbehandlar(
-                        saksbehandler.brukerIdent,
-                        saksbehandlerGruppe.gruppeId,
-                        false,
-                      )
+                      lagreValgtSaksbehandlar(saksbehandler.brukerIdent, saksbehandlerGruppe.gruppeId, false)
                     }
                   />
                 </div>
@@ -90,22 +112,6 @@ const GruppeSaksbehandlere: FunctionComponent<Props> = ({
             ))}
           </VStack>
         </VStack>
-        {/* eslint-disable-next-line react/jsx-pascal-case */}
-        <UNSAFE_Combobox // eslint-disable-line camelcase
-          label={intl.formatMessage({ id: 'GruppeSaksbehandlere.VelgSaksbehandlere' })}
-          size="small"
-          options={sorterteSaksbehandlereForAvdeling.map(
-            saksbehandler => `${saksbehandler.navn} (${saksbehandler.brukerIdent})`,
-          )}
-          onToggleSelected={option => {
-            const navnOgBrukerIdent = option.replace(')', '').split(' (');
-            if (!sorterteGrupperteSaksbehandlere.some(gs => gs.brukerIdent === navnOgBrukerIdent[1])) {
-              lagreValgtSaksbehandlar(navnOgBrukerIdent[1], saksbehandlerGruppe.gruppeId, true);
-            }
-          }}
-          shouldAutocomplete
-          className={styles.saksbehandlerCombo}
-        />
       </VStack>
     </Form>
   );

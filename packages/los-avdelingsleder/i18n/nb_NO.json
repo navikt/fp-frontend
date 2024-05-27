@@ -146,8 +146,8 @@
   "GrupperTabell.Navn": "Navn",
   "GrupperTabell.AntallSaksbehandlere": "Antall saksbehandlere",
 
-  "GruppeSaksbehandlere.ValgteSaksbehandlere": "Saksbehandlere",
+  "GruppeSaksbehandlere.ValgteSaksbehandlere": "Valgte saksbehandlere",
   "GruppeSaksbehandlere.Ingen": "Ingen valgte saksbehandlere",
   "GruppeSaksbehandlere.Navn": "Navn på gruppe",
-  "GruppeSaksbehandlere.VelgSaksbehandlere": "Legg saksbehandler til gruppe"
+  "GruppeSaksbehandlere.VelgSaksbehandlere": "Velg saksbehandlere"
 }

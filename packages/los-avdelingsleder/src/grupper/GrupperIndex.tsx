@@ -1,6 +1,5 @@
 import React, { FunctionComponent, useEffect } from 'react';
 
-import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { RestApiPathsKeys, restApiHooks } from '../data/fplosRestApi';
 import SaksbehandlerAvdeling from '../typer/saksbehandlerAvdelingTsType';
@@ -12,7 +11,7 @@ interface OwnProps {
 }
 
 const GrupperIndex: FunctionComponent<OwnProps> = ({ valgtAvdelingEnhet, avdelingensSaksbehandlere }) => {
-  const { startRequest: hentGrupper, state, data } = restApiHooks.useRestApiRunner(RestApiPathsKeys.HENT_GRUPPER);
+  const { startRequest: hentGrupper, data } = restApiHooks.useRestApiRunner(RestApiPathsKeys.HENT_GRUPPER);
   const { startRequest: opprettGruppe, state: opprettNyGruppeState } = restApiHooks.useRestApiRunner(
     RestApiPathsKeys.OPPRETT_GRUPPE,
   );
@@ -31,13 +30,13 @@ const GrupperIndex: FunctionComponent<OwnProps> = ({ valgtAvdelingEnhet, avdelin
         brukerIdent,
         avdelingEnhet: valgtAvdelingEnhet,
         gruppeId,
-      }).then(() => hentGrupper({ avdelingEnhet: valgtAvdelingEnhet }));
+      }).then(() => hentGrupper({ avdelingEnhet: valgtAvdelingEnhet }, true));
     } else {
       fjernSaksbehandlerFraGruppe({
         brukerIdent,
         avdelingEnhet: valgtAvdelingEnhet,
         gruppeId,
-      }).then(() => hentGrupper({ avdelingEnhet: valgtAvdelingEnhet }));
+      }).then(() => hentGrupper({ avdelingEnhet: valgtAvdelingEnhet }, true));
     }
   };
 
@@ -52,11 +51,11 @@ const GrupperIndex: FunctionComponent<OwnProps> = ({ valgtAvdelingEnhet, avdelin
     fjernGruppe({
       gruppeId,
       avdelingEnhet: valgtAvdelingEnhet,
-    }).then(() => hentGrupper({ avdelingEnhet: valgtAvdelingEnhet }));
+    }).then(() => hentGrupper({ avdelingEnhet: valgtAvdelingEnhet }, true));
 
   const opprettOgHentAlleGrupper = () =>
     opprettGruppe({ avdelingEnhet: valgtAvdelingEnhet }).then(() => {
-      hentGrupper({ avdelingEnhet: valgtAvdelingEnhet });
+      hentGrupper({ avdelingEnhet: valgtAvdelingEnhet }, true);
     });
 
   useEffect(() => {
@@ -65,7 +64,7 @@ const GrupperIndex: FunctionComponent<OwnProps> = ({ valgtAvdelingEnhet, avdelin
     });
   }, []);
 
-  if (state !== RestApiState.SUCCESS || !data) {
+  if (!data) {
     return <LoadingPanel />;
   }
 

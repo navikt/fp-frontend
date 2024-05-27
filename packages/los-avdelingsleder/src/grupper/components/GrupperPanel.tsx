@@ -13,7 +13,7 @@ interface OwnProps {
   avdelingensSaksbehandlere: SaksbehandlerAvdeling[];
   opprettOgHentAlleGrupper: () => void;
   opprettNyGruppeState?: RestApiState;
-  lagreValgtSaksbehandlar: (brukerIdent: string, gruppeId: number, isChecked: boolean) => void;
+  lagreValgtSaksbehandlar: (brukerIdent: string, gruppeId: number, leggTil: boolean) => void;
   endreGruppenavn: (gruppeId: number, gruppeNavn: string) => void;
   slettGruppe: (gruppeId: number) => void;
 }
