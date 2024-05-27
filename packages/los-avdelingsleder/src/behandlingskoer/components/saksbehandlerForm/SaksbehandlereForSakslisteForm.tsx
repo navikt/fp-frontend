@@ -1,15 +1,17 @@
-import { Label, Panel, Table } from '@navikt/ds-react';
+import { ExpansionCard, Label, Panel, Table, VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import React, { FunctionComponent, useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { restApiHooks, RestApiPathsKeys } from '../../../data/fplosRestApi';
 import Saksbehandler from '../../../typer/saksbehandlerAvdelingTsType';
 import Saksliste from '../../../typer/sakslisteAvdelingTsType';
 
-import SaksbehandlereOgSaksbehandlerGrupper, { SaksbehandlerGruppe } from '../../../typer/saksbehandlereOgSaksbehandlerGrupper ';
+import SaksbehandlereOgSaksbehandlerGrupper, {
+  SaksbehandlerGruppe,
+} from '../../../typer/saksbehandlereOgSaksbehandlerGrupper ';
 import styles from './saksbehandlereForSakslisteForm.module.css';
 import ValgAvSaksbehandlere from './ValgAvSaksbehandlere';
 
@@ -54,6 +56,8 @@ const SaksbehandlereForSakslisteForm: FunctionComponent<OwnProps> = ({
   valgtAvdelingEnhet,
   hentAvdelingensSakslister,
 }) => {
+  const intl = useIntl();
+
   const sorterteAvdelingensSaksbehandlere = useMemo(
     () => sortSaksbehandlere(avdelingensSaksbehandlere),
     [avdelingensSaksbehandlere],
@@ -88,50 +92,72 @@ const SaksbehandlereForSakslisteForm: FunctionComponent<OwnProps> = ({
         {sorterteAvdelingensSaksbehandlere.length === 0 && (
           <FormattedMessage id="SaksbehandlereForSakslisteForm.IngenSaksbehandlere" />
         )}
-        {harGrupper && (
-          <Table>
-            <Table.Header>
-              <Table.Row>
-                <Table.HeaderCell />
-                <Table.HeaderCell scope="col">
-                  <FormattedMessage id="SaksbehandlereForSakslisteForm.Gruppenavn" />
-                </Table.HeaderCell>
-                <Table.HeaderCell scope="col">
-                  <FormattedMessage id="SaksbehandlereForSakslisteForm.AntallSaksbehandlere" />
-                </Table.HeaderCell>
-              </Table.Row>
-            </Table.Header>
-            <Table.Body>
-              {grupper?.saksbehandlerGrupper.map(sg => (
-                <Table.ExpandableRow
-                  key={sg.gruppeId}
-                  content={
-                    <ValgAvSaksbehandlere
-                      saksbehandlere={sg.saksbehandlere.map(sb => ({
-                        brukerIdent: sb.brukerIdent,
-                        navn: sb.navn,
-                      }))}
-                      valgtSaksliste={valgtSaksliste}
-                      valgtAvdelingEnhet={valgtAvdelingEnhet}
-                      hentAvdelingensSakslister={hentAvdelingensSakslister}
-                    />
-                  }
-                >
-                  <Table.DataCell scope="row">{sg.gruppeNavn}</Table.DataCell>
-                  <Table.DataCell>{antallTilknyttetSaksliste(valgtSaksliste, sg)}</Table.DataCell>
-                </Table.ExpandableRow>
-              ))}
-            </Table.Body>
-          </Table>
-        )}
-        {sorterteAvdelingensSaksbehandlere.length > 0 && !harGrupper && (
-          <ValgAvSaksbehandlere
-            saksbehandlere={sorterteAvdelingensSaksbehandlere}
-            valgtSaksliste={valgtSaksliste}
-            valgtAvdelingEnhet={valgtAvdelingEnhet}
-            hentAvdelingensSakslister={hentAvdelingensSakslister}
-          />
-        )}
+        <VStack gap="10">
+          {harGrupper && (
+            <Table>
+              <Table.Header>
+                <Table.Row>
+                  <Table.HeaderCell />
+                  <Table.HeaderCell scope="col">
+                    <FormattedMessage id="SaksbehandlereForSakslisteForm.Gruppenavn" />
+                  </Table.HeaderCell>
+                  <Table.HeaderCell scope="col">
+                    <FormattedMessage id="SaksbehandlereForSakslisteForm.AntallSaksbehandlere" />
+                  </Table.HeaderCell>
+                </Table.Row>
+              </Table.Header>
+              <Table.Body>
+                {grupper?.saksbehandlerGrupper.map(sg => (
+                  <Table.ExpandableRow
+                    key={sg.gruppeId}
+                    content={
+                      <ValgAvSaksbehandlere
+                        saksbehandlere={sg.saksbehandlere.map(sb => ({
+                          brukerIdent: sb.brukerIdent,
+                          navn: sb.navn,
+                        }))}
+                        valgtSaksliste={valgtSaksliste}
+                        valgtAvdelingEnhet={valgtAvdelingEnhet}
+                        hentAvdelingensSakslister={hentAvdelingensSakslister}
+                      />
+                    }
+                  >
+                    <Table.DataCell scope="row">{sg.gruppeNavn}</Table.DataCell>
+                    <Table.DataCell>{antallTilknyttetSaksliste(valgtSaksliste, sg)}</Table.DataCell>
+                  </Table.ExpandableRow>
+                ))}
+              </Table.Body>
+            </Table>
+          )}
+          {sorterteAvdelingensSaksbehandlere.length > 0 && !harGrupper && (
+            <ValgAvSaksbehandlere
+              saksbehandlere={sorterteAvdelingensSaksbehandlere}
+              valgtSaksliste={valgtSaksliste}
+              valgtAvdelingEnhet={valgtAvdelingEnhet}
+              hentAvdelingensSakslister={hentAvdelingensSakslister}
+            />
+          )}
+          {harGrupper && (
+            <ExpansionCard
+              aria-label={intl.formatMessage({ id: 'SaksbehandlereForSakslisteForm.VisAlle' })}
+              size="small"
+            >
+              <ExpansionCard.Header>
+                <ExpansionCard.Title size="small">
+                  <FormattedMessage id="SaksbehandlereForSakslisteForm.VisAlle" />
+                </ExpansionCard.Title>
+              </ExpansionCard.Header>
+              <ExpansionCard.Content>
+                <ValgAvSaksbehandlere
+                  saksbehandlere={sorterteAvdelingensSaksbehandlere}
+                  valgtSaksliste={valgtSaksliste}
+                  valgtAvdelingEnhet={valgtAvdelingEnhet}
+                  hentAvdelingensSakslister={hentAvdelingensSakslister}
+                />
+              </ExpansionCard.Content>
+            </ExpansionCard>
+          )}
+        </VStack>
       </Panel>
     </Form>
   );

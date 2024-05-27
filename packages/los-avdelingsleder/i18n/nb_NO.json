@@ -64,6 +64,7 @@
   "SaksbehandlereForSakslisteForm.IngenSaksbehandlere": "Avdelingen har ingen saksbehandlere tilknyttet",
   "SaksbehandlereForSakslisteForm.Gruppenavn": "Gruppenavn",
   "SaksbehandlereForSakslisteForm.AntallSaksbehandlere": "Antall tilknyttet køen",
+  "SaksbehandlereForSakslisteForm.VisAlle": "Alle saksbehandlere",
 
   "SletteSaksbehandlerModal.SletteModal": "Ønsker du å slette saksbehandler?",
   "SletteSaksbehandlerModal.SletteSaksbehandler": "Ønsker du å slette {saksbehandlerNavn}?",
