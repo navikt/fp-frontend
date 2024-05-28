@@ -18,9 +18,6 @@ const intl = createIntl(messages);
 const navAnsatt = {
   brukernavn: 'Test',
   kanBehandleKode6: false,
-  kanBehandleKode7: false,
-  kanBehandleKodeEgenAnsatt: false,
-  kanBeslutte: true,
   kanOverstyre: false,
   kanSaksbehandle: true,
   kanVeilede: false,
