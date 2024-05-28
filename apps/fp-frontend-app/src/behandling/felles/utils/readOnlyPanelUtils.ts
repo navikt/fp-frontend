@@ -1,4 +1,4 @@
-import { Behandling, Aksjonspunkt } from '@navikt/ft-types';
+import { Behandling } from '@navikt/ft-types';
 import { Vilkar, AksessRettigheter } from '@navikt/fp-types';
 
 export const harBehandlingReadOnlyStatus = (behandling: Behandling) =>
@@ -6,7 +6,6 @@ export const harBehandlingReadOnlyStatus = (behandling: Behandling) =>
 
 export const erReadOnly = (
   behandling: Behandling,
-  aksjonspunkterForPunkt: Aksjonspunkt[],
   vilkarlisteForPunkt: Vilkar[],
   rettigheter: AksessRettigheter,
   hasFetchError: boolean,

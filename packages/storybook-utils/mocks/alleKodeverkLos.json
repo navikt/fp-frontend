@@ -21,8 +21,8 @@
       "kodeverk": "ANDRE_KRITERIER"
     },
     {
-      "kode": "SOKT_GRADERING",
-      "navn": "Søkt gradering",
+      "kode": "BARE_FAR_RETT",
+      "navn": "Bare far har rett",
       "kodeverk": "ANDRE_KRITERIER"
     },
     {
@@ -43,6 +43,61 @@
     {
       "kode": "BERØRT_BEHANDLING",
       "navn": "Berørt behandling",
+      "kodeverk": "ANDRE_KRITERIER"
+    },
+    {
+      "kode": "ENDRINGSSOKNAD",
+      "navn": "Endringssøknad",
+      "kodeverk": "ANDRE_KRITERIER"
+    },
+    {
+      "kode": "VURDER_FORMKRAV",
+      "navn": "Vurder formkrav",
+      "kodeverk": "ANDRE_KRITERIER"
+    },
+    {
+      "kode": "VURDER_EØS_OPPTJENING",
+      "navn": "Vurder behov for SED",
+      "kodeverk": "ANDRE_KRITERIER"
+    },
+    {
+      "kode": "KLAGE_PÅ_TILBAKEBETALING",
+      "navn": "Klage på tilbakebetaling",
+      "kodeverk": "ANDRE_KRITERIER"
+    },
+    {
+      "kode": "EØS_SAK",
+      "navn": "EØS (bosatt Norge)",
+      "kodeverk": "ANDRE_KRITERIER"
+    },
+    {
+      "kode": "KODE7_SAK",
+      "navn": "Kode 7",
+      "kodeverk": "ANDRE_KRITERIER"
+    },
+    {
+      "kode": "SAMMENSATT_KONTROLL",
+      "navn": "Sammensatt kontroll",
+      "kodeverk": "ANDRE_KRITERIER"
+    },
+    {
+      "kode": "ARBEID_INNTEKT",
+      "navn": "Arbeid og inntekt",
+      "kodeverk": "ANDRE_KRITERIER"
+    },
+    {
+      "kode": "DØD",
+      "navn": "Død eller dødfødsel",
+      "kodeverk": "ANDRE_KRITERIER"
+    },
+    {
+      "kode": "NÆRING",
+      "navn": "Selvstendig næringsdrivende",
+      "kodeverk": "ANDRE_KRITERIER"
+    },
+    {
+      "kode": "PRAKSIS_UTSETTELSE",
+      "navn": "Praksis utsettelse",
       "kodeverk": "ANDRE_KRITERIER"
     }
   ],

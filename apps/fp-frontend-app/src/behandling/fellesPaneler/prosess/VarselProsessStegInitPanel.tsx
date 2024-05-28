@@ -98,6 +98,7 @@ const VarselProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitP
       prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.CheckVarselRevurdering' })}
       skalPanelVisesIMeny={data => skalViseProsessPanel(data.aksjonspunkter)}
       lagringSideEffekter={lagringSideEffekter}
+      // @ts-ignore
       renderPanel={data => <VarselOmRevurderingProsessIndex previewCallback={previewCallback} {...data} />}
     />
   );
