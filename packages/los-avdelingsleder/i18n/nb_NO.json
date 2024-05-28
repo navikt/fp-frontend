@@ -146,6 +146,7 @@
   "GrupperTabell.Id": "Id",
   "GrupperTabell.Navn": "Navn",
   "GrupperTabell.AntallSaksbehandlere": "Antall saksbehandlere",
+  "GrupperTabell.IngenGrupper": "Ingen grupper",
 
   "GruppeSaksbehandlere.ValgteSaksbehandlere": "Valgte saksbehandlere",
   "GruppeSaksbehandlere.Ingen": "Ingen valgte saksbehandlere",

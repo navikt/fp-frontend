@@ -1,4 +1,4 @@
-import { Label, Table } from '@navikt/ds-react';
+import { BodyShort, Label, Table } from '@navikt/ds-react';
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { XMarkIcon } from '@navikt/aksel-icons';
@@ -25,48 +25,55 @@ const GrupperTabell: FunctionComponent<OwnProps> = ({
     <Label size="small">
       <FormattedMessage id="GrupperTabell.Grupper" />
     </Label>
-    <Table>
-      <Table.Header>
-        <Table.Row>
-          <Table.HeaderCell />
-          <Table.HeaderCell scope="col">
-            <FormattedMessage id="GrupperTabell.Id" />
-          </Table.HeaderCell>
-          <Table.HeaderCell scope="col">
-            <FormattedMessage id="GrupperTabell.Navn" />
-          </Table.HeaderCell>
-          <Table.HeaderCell scope="col">
-            <FormattedMessage id="GrupperTabell.AntallSaksbehandlere" />
-          </Table.HeaderCell>
-          <Table.HeaderCell />
-        </Table.Row>
-      </Table.Header>
-      <Table.Body>
-        {grupper.saksbehandlerGrupper?.map(saksbehandlerGruppe => (
-          <Table.ExpandableRow
-            key={saksbehandlerGruppe.gruppeId}
-            content={
-              <GruppeSaksbehandlere
-                saksbehandlerGruppe={saksbehandlerGruppe}
-                avdelingensSaksbehandlere={avdelingensSaksbehandlere}
-                lagreValgtSaksbehandlar={lagreValgtSaksbehandlar}
-                endreGruppenavn={endreGruppenavn}
-              />
-            }
-          >
-            <Table.DataCell scope="row">{saksbehandlerGruppe.gruppeId}</Table.DataCell>
-            <Table.DataCell>{saksbehandlerGruppe.gruppeNavn || '-'}</Table.DataCell>
-            <Table.DataCell>{saksbehandlerGruppe.saksbehandlere.length}</Table.DataCell>
-            <Table.DataCell>
-              <XMarkIcon
-                onMouseDown={() => slettGruppe(saksbehandlerGruppe.gruppeId)}
-                onKeyDown={() => slettGruppe(saksbehandlerGruppe.gruppeId)}
-              />
-            </Table.DataCell>
-          </Table.ExpandableRow>
-        ))}
-      </Table.Body>
-    </Table>
+    {grupper.saksbehandlerGrupper.length > 0 && (
+      <Table>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell />
+            <Table.HeaderCell scope="col">
+              <FormattedMessage id="GrupperTabell.Id" />
+            </Table.HeaderCell>
+            <Table.HeaderCell scope="col">
+              <FormattedMessage id="GrupperTabell.Navn" />
+            </Table.HeaderCell>
+            <Table.HeaderCell scope="col">
+              <FormattedMessage id="GrupperTabell.AntallSaksbehandlere" />
+            </Table.HeaderCell>
+            <Table.HeaderCell />
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          {grupper.saksbehandlerGrupper?.map(saksbehandlerGruppe => (
+            <Table.ExpandableRow
+              key={saksbehandlerGruppe.gruppeId}
+              content={
+                <GruppeSaksbehandlere
+                  saksbehandlerGruppe={saksbehandlerGruppe}
+                  avdelingensSaksbehandlere={avdelingensSaksbehandlere}
+                  lagreValgtSaksbehandlar={lagreValgtSaksbehandlar}
+                  endreGruppenavn={endreGruppenavn}
+                />
+              }
+            >
+              <Table.DataCell scope="row">{saksbehandlerGruppe.gruppeId}</Table.DataCell>
+              <Table.DataCell>{saksbehandlerGruppe.gruppeNavn || '-'}</Table.DataCell>
+              <Table.DataCell>{saksbehandlerGruppe.saksbehandlere.length}</Table.DataCell>
+              <Table.DataCell>
+                <XMarkIcon
+                  onMouseDown={() => slettGruppe(saksbehandlerGruppe.gruppeId)}
+                  onKeyDown={() => slettGruppe(saksbehandlerGruppe.gruppeId)}
+                />
+              </Table.DataCell>
+            </Table.ExpandableRow>
+          ))}
+        </Table.Body>
+      </Table>
+    )}
+    {grupper.saksbehandlerGrupper.length === 0 && (
+      <BodyShort>
+        <FormattedMessage id="GrupperTabell.IngenGrupper" />
+      </BodyShort>
+    )}
   </>
 );
 

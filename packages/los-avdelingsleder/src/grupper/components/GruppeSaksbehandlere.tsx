@@ -95,8 +95,8 @@ const GruppeSaksbehandlere: FunctionComponent<Props> = ({
                 <FormattedMessage id="GruppeSaksbehandlere.Ingen" />
               </BodyShort>
             )}
-            {sorterteGrupperteSaksbehandlere?.map(saksbehandler => (
-              <HStack gap="2" align="center">
+            {sorterteGrupperteSaksbehandlere.map(saksbehandler => (
+              <HStack gap="2" align="center" key={saksbehandler.brukerIdent}>
                 <div>{`${saksbehandler.navn} (${saksbehandler.brukerIdent})`}</div>
                 <div>
                   <XMarkIcon

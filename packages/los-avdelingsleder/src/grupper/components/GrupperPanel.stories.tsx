@@ -53,8 +53,8 @@ const saksbehandlereOgSaksbehandlerGrupper = {
   ],
 } as SaksbehandlereOgSaksbehandlerGrupper;
 
-const endreSaksbehandlere = (gruppeSaksbehandlere: GruppeSaksbehandler[], brukerIdent: string, isChecked: boolean) => {
-  if (isChecked) {
+const endreSaksbehandlere = (gruppeSaksbehandlere: GruppeSaksbehandler[], brukerIdent: string, leggTil: boolean) => {
+  if (leggTil) {
     return gruppeSaksbehandlere.concat({
       avdelingsnavn: ['Navn på avdeling'],
       brukerIdent,
@@ -86,12 +86,9 @@ const Template = () => {
     }));
   };
 
-  const slettGruppeOgHentAllePåNytt = () => {
+  const slettGruppeOgHentAllePåNytt = (gruppeId: number) => {
     setGruppe(oldG => ({
-      saksbehandlerGrupper: oldG.saksbehandlerGrupper.concat({
-        gruppeId: creatNewId(oldG.saksbehandlerGrupper),
-        saksbehandlere: [],
-      }),
+      saksbehandlerGrupper: oldG.saksbehandlerGrupper.filter(g => g.gruppeId !== gruppeId),
     }));
   };
 
@@ -109,13 +106,13 @@ const Template = () => {
     }));
   };
 
-  const lagreValgtSaksbehandler = (brukerIdent: string, gruppeId: number, isChecked: boolean) => {
+  const lagreValgtSaksbehandler = (brukerIdent: string, gruppeId: number, leggTil: boolean) => {
     setGruppe(oldG => ({
       saksbehandlerGrupper: oldG.saksbehandlerGrupper.map(g => {
         if (g.gruppeId === gruppeId) {
           return {
             ...g,
-            saksbehandlere: endreSaksbehandlere(g.saksbehandlere, brukerIdent, isChecked),
+            saksbehandlere: endreSaksbehandlere(g.saksbehandlere, brukerIdent, leggTil),
           };
         }
         return g;
