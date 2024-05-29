@@ -1,0 +1,6 @@
+.removeIcon {
+  color: var(--a-red-400);
+  cursor: pointer;
+  height: 25px;
+  width: 25px;
+}

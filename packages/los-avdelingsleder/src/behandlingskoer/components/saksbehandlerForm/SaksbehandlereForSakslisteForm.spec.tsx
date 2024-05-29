@@ -4,7 +4,7 @@ import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
 import * as stories from './SaksbehandlereForSakslisteForm.stories';
 
-const { IngenSaksbehandlere, ToSaksbehandlere } = composeStories(stories);
+const { IngenSaksbehandlere, ToSaksbehandlere, SaksbehandlereSomErGruppert } = composeStories(stories);
 
 describe('<SaksbehandlereForSakslisteForm>', () => {
   it('skal vise tekst som viser at ingen saksbehandlere er tilknyttet', async () => {
@@ -39,5 +39,18 @@ describe('<SaksbehandlereForSakslisteForm>', () => {
 
     expect(screen.getAllByRole('checkbox')[0]).toBeChecked();
     expect(screen.getAllByRole('checkbox')[1]).toBeChecked();
+  });
+
+  it('skal vise gruppe og liste med alle saksbehandlere', async () => {
+    render(<SaksbehandlereSomErGruppert />);
+    expect(await screen.findByText('Saksbehandlere')).toBeInTheDocument();
+    expect(screen.getByText('Gruppenavn')).toBeInTheDocument();
+    expect(screen.getByText('Gruppe 1')).toBeInTheDocument();
+    expect(screen.getByText('Antall tilknyttet køen')).toBeInTheDocument();
+    expect(screen.getByText('1')).toBeInTheDocument();
+
+    expect(screen.getAllByText('Steffen')).toHaveLength(2);
+    expect(screen.getAllByText('Espen Utvikler')).toHaveLength(2);
+    expect(screen.getByText('Eirik')).toBeInTheDocument();
   });
 });

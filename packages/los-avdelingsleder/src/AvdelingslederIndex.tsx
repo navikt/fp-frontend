@@ -26,6 +26,7 @@ import Avdelingsvelger from './components/Avdelingsvelger';
 import styles from './avdelingslederIndex.module.css';
 
 import messages from '../i18n/nb_NO.json';
+import GrupperIndex from './grupper/GrupperIndex';
 
 const intl = createIntl(messages);
 
@@ -39,7 +40,9 @@ const setAvdeling = (
   valgtAvdelingEnhet?: string,
 ) => {
   if (avdelinger.length > 0 && !valgtAvdelingEnhet) {
-    let valgtEnhet = avdelinger.some(a => a.avdelingEnhet === nasjonalEnhet) ? nasjonalEnhet : avdelinger[0].avdelingEnhet;
+    let valgtEnhet = avdelinger.some(a => a.avdelingEnhet === nasjonalEnhet)
+      ? nasjonalEnhet
+      : avdelinger[0].avdelingEnhet;
     const lagretAvdelingEnhet = getValueFromLocalStorage('avdelingEnhet');
     if (lagretAvdelingEnhet) {
       if (avdelinger.some(a => a.avdelingEnhet === lagretAvdelingEnhet)) {
@@ -92,6 +95,10 @@ const renderAvdelingslederPanel = (
           avdelingensSaksbehandlere={avdelingensSaksbehandlere}
         />
       );
+    case AvdelingslederPanels.GRUPPER:
+      return (
+        <GrupperIndex valgtAvdelingEnhet={valgtAvdelingEnhet} avdelingensSaksbehandlere={avdelingensSaksbehandlere} />
+      );
     case AvdelingslederPanels.NOKKELTALL:
       return <NokkeltallIndex valgtAvdelingEnhet={valgtAvdelingEnhet} />;
     case AvdelingslederPanels.RESERVASJONER:
@@ -104,6 +111,7 @@ const renderAvdelingslederPanel = (
 const messageId = {
   [AvdelingslederPanels.BEHANDLINGSKOER]: 'AvdelingslederIndex.Behandlingskoer',
   [AvdelingslederPanels.SAKSBEHANDLERE]: 'AvdelingslederIndex.Saksbehandlere',
+  [AvdelingslederPanels.GRUPPER]: 'AvdelingslederIndex.Grupper',
   [AvdelingslederPanels.NOKKELTALL]: 'AvdelingslederIndex.Nokkeltall',
   [AvdelingslederPanels.RESERVASJONER]: 'AvdelingslederIndex.Reservasjoner',
 };
@@ -206,6 +214,14 @@ const AvdelingslederIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
               label={
                 <Heading size="small">
                   <FormattedMessage id={messageId[AvdelingslederPanels.SAKSBEHANDLERE]} />
+                </Heading>
+              }
+            />
+            <Tabs.Tab
+              value={AvdelingslederPanels.GRUPPER}
+              label={
+                <Heading size="small">
+                  <FormattedMessage id={messageId[AvdelingslederPanels.GRUPPER]} />
                 </Heading>
               }
             />
