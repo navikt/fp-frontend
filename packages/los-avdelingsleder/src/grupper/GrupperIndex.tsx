@@ -72,7 +72,6 @@ const GrupperIndex: FunctionComponent<OwnProps> = ({ valgtAvdelingEnhet, avdelin
     <GrupperPanel
       grupper={data}
       avdelingensSaksbehandlere={avdelingensSaksbehandlere}
-      valgtAvdelingEnhet={valgtAvdelingEnhet}
       opprettOgHentAlleGrupper={opprettOgHentAlleGrupper}
       opprettNyGruppeState={opprettNyGruppeState}
       lagreValgtSaksbehandlar={lagreValgtSaksbehandlar}

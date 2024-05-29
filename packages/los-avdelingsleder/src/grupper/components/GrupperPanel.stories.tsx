@@ -123,7 +123,6 @@ const Template = () => {
   return (
     <GrupperPanel
       grupper={grupper}
-      valgtAvdelingEnhet="NAV Oslo"
       avdelingensSaksbehandlere={avdelingensSaksbehandlere}
       opprettOgHentAlleGrupper={opprettOgHentAlleGrupper}
       opprettNyGruppeState={RestApiState.NOT_STARTED}

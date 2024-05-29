@@ -9,7 +9,6 @@ import GrupperTabell from './GrupperTabell';
 
 interface OwnProps {
   grupper: SaksbehandlereOgSaksbehandlerGrupper;
-  valgtAvdelingEnhet: string;
   avdelingensSaksbehandlere: SaksbehandlerAvdeling[];
   opprettOgHentAlleGrupper: () => void;
   opprettNyGruppeState?: RestApiState;
