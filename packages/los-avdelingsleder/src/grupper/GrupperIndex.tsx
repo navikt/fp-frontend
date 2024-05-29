@@ -45,7 +45,7 @@ const GrupperIndex: FunctionComponent<OwnProps> = ({ valgtAvdelingEnhet, avdelin
       gruppeId,
       gruppeNavn,
       avdelingEnhet: valgtAvdelingEnhet,
-    });
+    }).then(() => hentGrupper({ avdelingEnhet: valgtAvdelingEnhet }, true));
 
   const slettGruppe = (gruppeId: number) =>
     fjernGruppe({

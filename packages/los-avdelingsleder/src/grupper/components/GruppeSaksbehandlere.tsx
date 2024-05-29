@@ -100,6 +100,7 @@ const GruppeSaksbehandlere: FunctionComponent<Props> = ({
                 <div>{`${saksbehandler.navn} (${saksbehandler.brukerIdent})`}</div>
                 <div>
                   <XMarkIcon
+                    className={styles.removeIcon}
                     onMouseDown={() =>
                       lagreValgtSaksbehandlar(saksbehandler.brukerIdent, saksbehandlerGruppe.gruppeId, false)
                     }
