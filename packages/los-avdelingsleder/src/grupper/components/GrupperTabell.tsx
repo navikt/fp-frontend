@@ -6,6 +6,8 @@ import SaksbehandlerAvdeling from '../../typer/saksbehandlerAvdelingTsType';
 import SaksbehandlereOgSaksbehandlerGrupper from '../../typer/saksbehandlereOgSaksbehandlerGrupper ';
 import GruppeSaksbehandlere from './GruppeSaksbehandlere';
 
+import styles from './grupperTabell.module.css';
+
 interface OwnProps {
   grupper: SaksbehandlereOgSaksbehandlerGrupper;
   avdelingensSaksbehandlere: SaksbehandlerAvdeling[];
@@ -60,6 +62,7 @@ const GrupperTabell: FunctionComponent<OwnProps> = ({
               <Table.DataCell>{saksbehandlerGruppe.saksbehandlere.length}</Table.DataCell>
               <Table.DataCell>
                 <XMarkIcon
+                  className={styles.removeIcon}
                   onMouseDown={() => slettGruppe(saksbehandlerGruppe.gruppeId)}
                   onKeyDown={() => slettGruppe(saksbehandlerGruppe.gruppeId)}
                 />
