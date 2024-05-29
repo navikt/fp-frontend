@@ -14,9 +14,6 @@ import messages from '../../../i18n/nb_NO.json';
 const navAnsatt = {
   brukernavn: 'Peder',
   kanBehandleKode6: false,
-  kanBehandleKode7: false,
-  kanBehandleKodeEgenAnsatt: false,
-  kanBeslutte: true,
   kanOverstyre: false,
   kanOppgavestyre: true,
   kanSaksbehandle: true,

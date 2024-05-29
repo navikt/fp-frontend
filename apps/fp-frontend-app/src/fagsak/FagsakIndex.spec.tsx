@@ -57,9 +57,6 @@ describe('<FagsakIndex>', () => {
   const navAnsatt = {
     brukernavn: 'Peder',
     kanBehandleKode6: false,
-    kanBehandleKode7: false,
-    kanBehandleKodeEgenAnsatt: false,
-    kanBeslutte: true,
     kanOverstyre: false,
     kanSaksbehandle: true,
     kanVeilede: false,
