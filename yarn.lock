@@ -3978,7 +3978,7 @@ __metadata:
     "@navikt/ft-form-validators": 2.3.6
     "@navikt/ft-kodeverk": 2.4.6
     "@navikt/ft-plattform-komponenter": 2.5.10
-    "@navikt/ft-prosess-beregningsgrunnlag": 6.5.10
+    "@navikt/ft-prosess-beregningsgrunnlag": 6.5.11
     "@navikt/ft-prosess-tilbakekreving": 3.3.7
     "@navikt/ft-prosess-tilbakekreving-foreldelse": 3.3.7
     "@navikt/ft-prosess-tilbakekreving-vedtak": 2.4.7
@@ -4897,7 +4897,7 @@ __metadata:
     "@navikt/ft-form-hooks": 4.4.7
     "@navikt/ft-form-validators": 2.3.6
     "@navikt/ft-kodeverk": 2.4.6
-    "@navikt/ft-prosess-beregningsgrunnlag": 6.5.10
+    "@navikt/ft-prosess-beregningsgrunnlag": 6.5.11
     "@navikt/ft-types": 2.4.6
     "@navikt/ft-ui-komponenter": 2.3.7
     "@navikt/ft-utils": 2.3.6
@@ -5278,7 +5278,7 @@ __metadata:
     "@navikt/fp-utils-test": "workspace:*"
     "@navikt/ft-fakta-beregning": 5.2.7
     "@navikt/ft-kodeverk": 2.4.6
-    "@navikt/ft-prosess-beregningsgrunnlag": 6.5.10
+    "@navikt/ft-prosess-beregningsgrunnlag": 6.5.11
     "@navikt/ft-types": 2.4.6
     "@navikt/ft-ui-komponenter": 2.3.7
     "@navikt/ft-utils": 2.3.6
@@ -5585,7 +5585,7 @@ __metadata:
     "@navikt/ft-form-hooks": 4.4.7
     "@navikt/ft-form-validators": 2.3.6
     "@navikt/ft-kodeverk": 2.4.6
-    "@navikt/ft-prosess-beregningsgrunnlag": 6.5.10
+    "@navikt/ft-prosess-beregningsgrunnlag": 6.5.11
     "@navikt/ft-types": 2.4.6
     "@navikt/ft-ui-komponenter": 2.3.7
     "@navikt/ft-utils": 2.3.6
@@ -5660,7 +5660,7 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-fakta-beregning": 5.2.7
     "@navikt/ft-fakta-fordel-beregningsgrunnlag": 7.5.9
-    "@navikt/ft-prosess-beregningsgrunnlag": 6.5.10
+    "@navikt/ft-prosess-beregningsgrunnlag": 6.5.11
     typescript: 5.4.2
     vite: 5.1.6
   languageName: unknown
@@ -5970,9 +5970,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/ft-prosess-beregningsgrunnlag@npm:6.5.10":
-  version: 6.5.10
-  resolution: "@navikt/ft-prosess-beregningsgrunnlag@npm:6.5.10::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-prosess-beregningsgrunnlag%2F6.5.10%2F3ddd9bc71ca4fa808ed01a0b00b5e6a36d5722cd"
+"@navikt/ft-prosess-beregningsgrunnlag@npm:6.5.11":
+  version: 6.5.11
+  resolution: "@navikt/ft-prosess-beregningsgrunnlag@npm:6.5.11::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-prosess-beregningsgrunnlag%2F6.5.11%2Ff7d48c86de5f803537813671929dd7f08fa7b350"
   dependencies:
     "@navikt/aksel-icons": 6.8.0
     "@navikt/ds-css": 6.8.0
@@ -6009,7 +6009,7 @@ __metadata:
     react-collapse: 5.1.1
     react-hook-form: 7.43.9
     react-intl: 6.3.2
-  checksum: 965a17c18189ac1cab62fa5859259faf66befa75fbcca4c8277de752bb45cd9c712d4c9064dfb89c566de0136570c2d76bbe197a660a24d488266f1d96a6e4f9
+  checksum: 9b7bed1fc2c55dddae3693e3d0c00a1823c964a7cb445b03f3971d44b50ea0614783f3ab21da2e8d4b3b27435d8b01d05322bb89cd8e06557440d6ec3d130d54
   languageName: node
   linkType: hard
 
