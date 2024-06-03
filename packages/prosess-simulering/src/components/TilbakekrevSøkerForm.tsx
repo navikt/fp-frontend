@@ -136,6 +136,8 @@ const TilbakekrevSøkerForm: FunctionComponent<OwnProps> = ({
                       validate={[required, minLength3, maxLength1500, hasValidText]}
                       maxLength={1500}
                       readOnly={readOnly}
+                      // Må erstatte bindestrek kopiert inn fra Word med vanlig bindestrek
+                      parse={value => value.toString().replaceAll(/\p{Dash_Punctuation}/gu, '-').replaceAll('\t', ' ')}
                       badges={[
                         {
                           type: 'info',

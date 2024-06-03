@@ -196,6 +196,8 @@ const VarselOmRevurderingForm: FunctionComponent<OwnProps> = ({
                     label={intl.formatMessage({ id: 'VarselOmRevurderingForm.FritekstIBrev' })}
                     validate={[required, minLength3, maxLength10000, hasValidText]}
                     maxLength={10000}
+                    // Må erstatte bindestrek kopiert inn fra Word med vanlig bindestrek
+                    parse={value => value.toString().replaceAll(/\p{Dash_Punctuation}/gu, '-').replaceAll('\t', ' ')}
                   />
                   <VerticalSpacer fourPx />
                   <a

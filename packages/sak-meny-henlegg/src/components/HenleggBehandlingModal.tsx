@@ -198,6 +198,8 @@ const HenleggBehandlingModal: FunctionComponent<PureOwnProps> = ({
                   label={intl.formatMessage({ id: 'HenleggBehandlingModal.Fritekst' })}
                   validate={[required, hasValidText]}
                   maxLength={2000}
+                  // Må erstatte bindestrek kopiert inn fra Word med vanlig bindestrek
+                  parse={value => value.toString().replaceAll(/\p{Dash_Punctuation}/gu, '-').replaceAll('\t', ' ')}
                 />
               </div>
             </>

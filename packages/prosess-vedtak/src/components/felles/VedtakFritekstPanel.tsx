@@ -39,6 +39,8 @@ const VedtakFritekstPanel: FunctionComponent<OwnProps> = ({
             validate={[minLength3, maxLength1500, hasValidText]}
             maxLength={1500}
             readOnly={isReadOnly}
+            // Må erstatte bindestrek kopiert inn fra Word med vanlig bindestrek
+            parse={value => value.toString().replaceAll(/\p{Dash_Punctuation}/gu, '-').replaceAll('\t', ' ')}
             badges={[
               {
                 type: 'info',
