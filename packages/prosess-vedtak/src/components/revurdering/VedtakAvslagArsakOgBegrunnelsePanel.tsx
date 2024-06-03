@@ -83,6 +83,8 @@ const VedtakAvslagArsakOgBegrunnelsePanel: FunctionComponent<OwnProps> = ({
             validate={[requiredIfCustomFunctionIsTrueNew(isRequiredFn), minLength3, maxLength1500, hasValidText]}
             maxLength={1500}
             readOnly={erReadOnly}
+            // Må erstatte bindestrek kopiert inn fra Word med vanlig bindestrek
+            parse={value => value.toString().replaceAll(/\p{Dash_Punctuation}/gu, '-').replaceAll('\t', ' ')}
             badges={[
               {
                 type: 'info',

@@ -193,6 +193,8 @@ const Messages: FunctionComponent<OwnProps> = ({
             validate={[required, erVarselOmRevurdering ? maxLength10000 : maxLength4000, minLength3, hasValidText]}
             maxLength={erVarselOmRevurdering ? 10000 : 4000}
             badges={[{ type: 'info', titleText: language }]}
+            // Må erstatte bindestrek kopiert inn fra Word med vanlig bindestrek
+            parse={value => value.toString().replaceAll(/\p{Dash_Punctuation}/gu, '-').replaceAll('\t', ' ')}
           />
         </>
       )}
