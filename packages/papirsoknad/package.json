@@ -15,7 +15,7 @@
     "storybook": "storybook dev --quiet -p 7024"
   },
   "dependencies": {
-    "@navikt/ds-react": "6.10.0",
+    "@navikt/ds-react": "6.10.1",
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-papirsoknad-ui-komponenter": "workspace:*",
     "@navikt/fp-storybook-utils": "workspace:*",
@@ -32,7 +32,7 @@
     "react-router-dom": "6.23.1"
   },
   "devDependencies": {
-    "@navikt/ds-css": "6.10.0",
+    "@navikt/ds-css": "6.10.1",
     "@navikt/fp-storybook-utils": "workspace:*",
     "@storybook/addon-actions": "8.1.5",
     "@storybook/react": "8.1.5",

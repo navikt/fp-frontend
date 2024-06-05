@@ -42,7 +42,7 @@
     "dotenv": "16.4.5"
   },
   "devDependencies": {
-    "@navikt/aksel-stylelint": "6.10.0",
+    "@navikt/aksel-stylelint": "6.10.1",
     "@sentry/cli": "2.32.1",
     "@storybook/addon-essentials": "8.1.5",
     "@storybook/addon-links": "8.1.5",
