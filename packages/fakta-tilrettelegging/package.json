@@ -38,10 +38,10 @@
     "react-intl": "6.6.8"
   },
   "devDependencies": {
-    "@formatjs/cli-lib": "6.3.6",
+    "@formatjs/cli-lib": "6.4.2",
     "@navikt/ds-css": "6.10.1",
     "@navikt/fp-storybook-utils": "workspace:*",
-    "@storybook/addon-actions": "8.0.0",
+    "@storybook/addon-actions": "8.1.6",
     "@storybook/react": "8.1.6",
     "@storybook/react-vite": "8.1.6",
     "@testing-library/react": "14.3.1",
@@ -51,7 +51,7 @@
     "fast-glob": "^3.3.2",
     "storybook": "8.1.6",
     "stylelint": "15.11.0",
-    "typescript": "5.4.2",
+    "typescript": "5.4.5",
     "vite": "5.2.12",
     "vitest": "1.6.0"
   }
