@@ -21,12 +21,12 @@
     "@navikt/fp-rest-api-hooks": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/ft-ui-komponenter": "2.3.8",
-    "@navikt/ft-utils": "2.3.6",
+    "@navikt/ft-utils": "2.3.7",
     "react": "18.3.1",
     "react-intl": "6.6.8"
   },
   "devDependencies": {
-    "@formatjs/cli-lib": "6.3.6",
+    "@formatjs/cli-lib": "6.4.2",
     "@navikt/ds-css": "6.10.1",
     "@storybook/react": "8.1.6",
     "@storybook/react-vite": "8.1.6",
@@ -37,7 +37,7 @@
     "fast-glob": "^3.3.2",
     "storybook": "8.1.6",
     "stylelint": "15.11.0",
-    "typescript": "5.4.2",
+    "typescript": "5.4.5",
     "vite": "5.2.12",
     "vitest": "1.6.0"
   }
