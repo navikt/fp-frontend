@@ -41,7 +41,8 @@ const DekningradApForm: FunctionComponent<OwnProps> = ({ søknad, fagsak, aksjon
       onSubmit={(values: FormValues) =>
         submitCallback({
           kode: AksjonspunktCode.AVKLAR_DEKNINGSGRAD,
-          ...values,
+          begrunnelse: values.begrunnelse,
+          dekningsgrad: parseInt(values.dekningsgrad, 10),
         })
       }
     >

@@ -101,7 +101,8 @@ const DekningradForm: FunctionComponent<OwnProps> = ({ aksjonspunkt, fagsak, sø
       onSubmit={(values: FormValues) =>
         submitCallback({
           kode: AksjonspunktCode.OVERSTYR_DEKNINGSGRAD,
-          ...values,
+          dekningsgrad: parseInt(values.dekningsgrad, 10),
+          begrunnelse: values.begrunnelse,
         }).then(slåAvEditeringAvStartdato)
       }
     >
