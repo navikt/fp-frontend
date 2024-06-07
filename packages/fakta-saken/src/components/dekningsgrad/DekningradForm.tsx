@@ -16,7 +16,7 @@ const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 
 type FormValues = {
-  dekningsgrad: string;
+  dekningsgrad: number;
   begrunnelse: string;
 };
 
@@ -32,8 +32,8 @@ const DekningradForm: FunctionComponent<OwnProps> = ({ aksjonspunkt, fagsak, sø
   const intl = useIntl();
 
   const dekningsgrad =
-    søknad.oppgittFordeling.dekningsgrader.avklartDekningsgrad?.toString() ||
-    søknad.oppgittFordeling.dekningsgrader.søker.dekningsgrad.toString();
+    søknad.oppgittFordeling.dekningsgrader.avklartDekningsgrad ||
+    søknad.oppgittFordeling.dekningsgrader.søker.dekningsgrad;
 
   const defaultValues = {
     dekningsgrad,
@@ -58,7 +58,7 @@ const DekningradForm: FunctionComponent<OwnProps> = ({ aksjonspunkt, fagsak, sø
           <Heading size="small">
             <FormattedMessage id="DekningsgradForm.Dekningsgrad" />
           </Heading>
-          {!!søknad.oppgittFordeling.dekningsgrader.avklartDekningsgrad && (
+          {aksjonspunkt?.begrunnelse && (
             <BodyShort size="small">
               <FormattedMessage id="DekningsgradForm.ErEndret" />
             </BodyShort>
@@ -79,7 +79,7 @@ const DekningradForm: FunctionComponent<OwnProps> = ({ aksjonspunkt, fagsak, sø
             onClick={readOnly ? undefined : () => toggleEdit(true)}
           />
         </HStack>
-        {!!søknad.oppgittFordeling.dekningsgrader.avklartDekningsgrad && (
+        {aksjonspunkt?.begrunnelse && (
           <HStack>
             <Box background="bg-subtle" padding="5" borderColor="border-default" borderRadius="medium">
               <VStack gap="2">
@@ -101,7 +101,7 @@ const DekningradForm: FunctionComponent<OwnProps> = ({ aksjonspunkt, fagsak, sø
       onSubmit={(values: FormValues) =>
         submitCallback({
           kode: AksjonspunktCode.OVERSTYR_DEKNINGSGRAD,
-          dekningsgrad: parseInt(values.dekningsgrad, 10),
+          dekningsgrad: values.dekningsgrad,
           begrunnelse: values.begrunnelse,
         }).then(slåAvEditeringAvStartdato)
       }
@@ -139,6 +139,7 @@ const DekningradForm: FunctionComponent<OwnProps> = ({ aksjonspunkt, fagsak, sø
               },
             ]}
             isReadOnly={readOnly}
+            parse={value => parseInt(value, 10)}
             radios={[
               {
                 label: intl.formatMessage(
@@ -164,7 +165,12 @@ const DekningradForm: FunctionComponent<OwnProps> = ({ aksjonspunkt, fagsak, sø
             readOnly={readOnly}
           />
           <HStack>
-            <Button variant="primary" size="small">
+            <Button
+              variant="primary"
+              size="small"
+              disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
+              loading={formMethods.formState.isSubmitting}
+            >
               <FormattedMessage id="DekningsgradForm.Bekreft" />
             </Button>
           </HStack>

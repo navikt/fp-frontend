@@ -14,7 +14,7 @@ const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 
 type FormValues = {
-  dekningsgrad: string;
+  dekningsgrad: number;
   begrunnelse: string;
 };
 
@@ -30,7 +30,7 @@ const DekningradApForm: FunctionComponent<OwnProps> = ({ søknad, fagsak, aksjon
   const intl = useIntl();
   const formMethods = useForm<FormValues>({
     defaultValues: {
-      dekningsgrad: søknad.oppgittFordeling.dekningsgrader.avklartDekningsgrad?.toString(),
+      dekningsgrad: søknad.oppgittFordeling.dekningsgrader.avklartDekningsgrad,
       begrunnelse: aksjonspunkt.begrunnelse,
     },
   });
@@ -42,7 +42,7 @@ const DekningradApForm: FunctionComponent<OwnProps> = ({ søknad, fagsak, aksjon
         submitCallback({
           kode: AksjonspunktCode.AVKLAR_DEKNINGSGRAD,
           begrunnelse: values.begrunnelse,
-          dekningsgrad: parseInt(values.dekningsgrad, 10),
+          dekningsgrad: values.dekningsgrad,
         })
       }
     >
@@ -92,6 +92,7 @@ const DekningradApForm: FunctionComponent<OwnProps> = ({ søknad, fagsak, aksjon
           label={<FormattedMessage id="DekningradApForm.HvilkenDekningsgrad" />}
           validate={[required]}
           isReadOnly={readOnly}
+          parse={value => parseInt(value, 10)}
           radios={[
             {
               label: intl.formatMessage({ id: 'DekningradApForm.80' }),

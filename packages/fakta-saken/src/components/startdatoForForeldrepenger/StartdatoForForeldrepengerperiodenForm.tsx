@@ -22,6 +22,11 @@ type FormValues = {
   begrunnelse?: string;
 };
 
+const capitalizeFirstLetter = (landNavn: string): string => {
+  const string = landNavn.toLowerCase();
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
 const buildInitialValues = (soknad: Soknad, aksjonspunkt?: Aksjonspunkt): FormValues => ({
   startdatoFraSoknad: soknad.oppgittFordeling?.startDatoForPermisjon,
   begrunnelse: (aksjonspunkt && aksjonspunkt.begrunnelse) || '',
@@ -91,7 +96,7 @@ const StartdatoForForeldrepengerperiodenForm: FunctionComponent<OwnProps> = ({
         <HStack gap="2">
           <BodyShort size="small">
             {soknad.oppgittFordeling
-              ? dayjs(soknad.oppgittFordeling.startDatoForPermisjon).format('dddd D MMMM YYYY')
+              ? capitalizeFirstLetter(dayjs(soknad.oppgittFordeling.startDatoForPermisjon).format('dddd D MMMM YYYY'))
               : '-'}
           </BodyShort>
           <PencilFillIcon
