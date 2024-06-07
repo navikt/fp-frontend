@@ -4,12 +4,12 @@ import { action } from '@storybook/addon-actions';
 
 import { AksjonspunktCode, aksjonspunktStatus } from '@navikt/fp-kodeverk';
 import {
-  Behandling,
   Aksjonspunkt,
+  Behandling,
   DokumentasjonVurderingBehov,
   UttakType,
-  UttakÅrsak,
   UttakVurdering,
+  UttakÅrsak,
 } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';

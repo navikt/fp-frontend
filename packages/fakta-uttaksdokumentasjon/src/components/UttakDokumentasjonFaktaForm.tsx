@@ -10,7 +10,7 @@ import { Aksjonspunkt, DokumentasjonVurderingBehov } from '@navikt/fp-types';
 import { FaktaBegrunnelseTextFieldNew } from '@navikt/fp-fakta-felles';
 import { VurderDokumentasjonAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import UttakDokumentasjonFaktaTable from './UttakDokumentasjonFaktaTable';
+import UttakDokumentasjonFaktaTable from './UttakDokumentasjonFaktaTable/UttakDokumentasjonFaktaTable';
 
 interface OwnProps {
   aksjonspunkter: Aksjonspunkt[];

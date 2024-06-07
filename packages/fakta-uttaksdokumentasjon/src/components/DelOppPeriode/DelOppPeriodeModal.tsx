@@ -3,13 +3,12 @@ import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import dayjs from 'dayjs';
 import { useForm } from 'react-hook-form';
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
-import { Button, BodyShort, Modal, Heading, Label } from '@navikt/ds-react';
+import { Button, BodyShort, Modal, Heading, Label, VStack, HStack } from '@navikt/ds-react';
 import { Datepicker, Form } from '@navikt/ft-form-hooks';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import { FlexColumn, FlexContainer, FlexRow, PeriodLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { DokumentasjonVurderingBehov } from '@navikt/fp-types';
-
 import styles from './delOppPeriodeModal.module.css';
 
 const validerInnenforIntervall = (fom: string, tom: string, intl: IntlShape) => (dato: string) => {
@@ -54,47 +53,41 @@ const DelOppPeriodeModal: FunctionComponent<OwnProps> = ({
           )}
         </Modal.Header>
         <Modal.Body>
-          {!visSlettEtterfølgendePerioder && (
-            <>
-              <FlexContainer>
-                <FlexRow>
-                  <FlexColumn>
-                    <ExclamationmarkTriangleFillIcon
-                      className={styles.image}
-                      title={intl.formatMessage({ id: 'DelOppPeriodeModal.Nullstilles' })}
-                    />
-                  </FlexColumn>
-                  <FlexColumn className={styles.text}>
-                    <BodyShort size="small">
-                      <FormattedMessage id="DelOppPeriodeModal.Nullstilles" />
-                    </BodyShort>
-                  </FlexColumn>
-                </FlexRow>
-              </FlexContainer>
-              <VerticalSpacer sixteenPx />
-            </>
-          )}
-          <Label size="small">
-            <FormattedMessage id="DelOppPeriodeModal.Periode" />
-          </Label>
-          <VerticalSpacer fourPx />
-          <BodyShort size="small">
-            <PeriodLabel dateStringFom={periode.fom} dateStringTom={periode.tom} />
-          </BodyShort>
-          <VerticalSpacer twentyPx />
-          <BodyShort size="small">
-            <FormattedMessage id="DelOppPeriodeModal.Splitt" />
-          </BodyShort>
-          <VerticalSpacer sixteenPx />
-          <Datepicker
-            name="dato"
-            label={<FormattedMessage id="DelOppPeriodeModal.Dato" />}
-            validate={[required, hasValidDate, validerInnenforIntervall(periode.fom, originalTom, intl)]}
-            disabledDays={{
-              fromDate: dayjs(periode.fom, ISO_DATE_FORMAT).toDate(),
-              toDate: dayjs(originalTom, ISO_DATE_FORMAT).subtract(1, 'day').toDate(),
-            }}
-          />
+          <VStack gap="4">
+            {!visSlettEtterfølgendePerioder && (
+              <HStack gap="4">
+                <ExclamationmarkTriangleFillIcon
+                  className={styles.image}
+                  title={intl.formatMessage({ id: 'DelOppPeriodeModal.Nullstilles' })}
+                />
+                <div className={styles.text}>
+                  <BodyShort size="small">
+                    <FormattedMessage id="DelOppPeriodeModal.Nullstilles" />
+                  </BodyShort>
+                </div>
+              </HStack>
+            )}
+            <div>
+              <Label size="small">
+                <FormattedMessage id="DelOppPeriodeModal.Periode" />
+              </Label>
+              <BodyShort size="small">
+                <PeriodLabel dateStringFom={periode.fom} dateStringTom={periode.tom} />
+              </BodyShort>
+            </div>
+            <BodyShort size="small">
+              <FormattedMessage id="DelOppPeriodeModal.Splitt" />
+            </BodyShort>
+            <Datepicker
+              name="dato"
+              label={<FormattedMessage id="DelOppPeriodeModal.Dato" />}
+              validate={[required, hasValidDate, validerInnenforIntervall(periode.fom, originalTom, intl)]}
+              disabledDays={{
+                fromDate: dayjs(periode.fom, ISO_DATE_FORMAT).toDate(),
+                toDate: dayjs(originalTom, ISO_DATE_FORMAT).subtract(1, 'day').toDate(),
+              }}
+            />
+          </VStack>
         </Modal.Body>
         <Modal.Footer>
           <Button size="small" variant="primary">

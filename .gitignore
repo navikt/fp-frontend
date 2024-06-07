@@ -24,4 +24,4 @@ ssh.exe.stackdump
 !.yarn/sdks
 !.yarn/versions
 
-.nx/cache
+.nx
