@@ -34,6 +34,17 @@ type Soknad = Readonly<{
   manglendeVedlegg: ManglendeVedleggSoknad[];
   oppgittFordeling: {
     startDatoForPermisjon?: string;
+    dekningsgrader: {
+      avklartDekningsgrad?: number;
+      søker: {
+        søknadsdato: string;
+        dekningsgrad: number;
+      };
+      annenPart: {
+        søknadsdato: string;
+        dekningsgrad: number;
+      };
+    };
   };
   søknadsfrist: Søknadsfrist;
   utstedtdato?: string;

@@ -1,13 +1,12 @@
-import React, { FunctionComponent, useCallback, useState } from 'react';
-import dayjs from 'dayjs';
-import { useForm, UseFormGetValues } from 'react-hook-form';
-import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
-import { BodyShort, Heading, Button } from '@navikt/ds-react';
-import { hasValidDate, hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
-import { Datepicker, TextAreaField, Form } from '@navikt/ft-form-hooks';
-import { FlexColumn, FlexContainer, FlexRow, AksjonspunktBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { PencilFillIcon } from '@navikt/aksel-icons';
+import { BodyShort, Button, HStack, Heading } from '@navikt/ds-react';
+import { Datepicker, Form, TextAreaField } from '@navikt/ft-form-hooks';
+import { hasValidDate, hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
+import { AksjonspunktBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import dayjs from 'dayjs';
+import React, { FunctionComponent, useCallback, useState } from 'react';
+import { UseFormGetValues, useForm } from 'react-hook-form';
+import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Soknad } from '@navikt/fp-types';
@@ -89,29 +88,18 @@ const StartdatoForForeldrepengerperiodenForm: FunctionComponent<OwnProps> = ({
       </Heading>
       <VerticalSpacer sixteenPx />
       {!visEditeringsmodus && (
-        <FlexContainer>
-          <FlexRow>
-            <FlexColumn>
-              <BodyShort size="small">
-                <FormattedMessage id="StartdatoForForeldrepengerperiodenForm.StartdatoSomBenyttes" />
-              </BodyShort>
-            </FlexColumn>
-            <FlexColumn>
-              <BodyShort size="small">
-                {soknad.oppgittFordeling
-                  ? dayjs(soknad.oppgittFordeling.startDatoForPermisjon).format(DDMMYYYY_DATE_FORMAT)
-                  : '-'}
-              </BodyShort>
-            </FlexColumn>
-            <FlexColumn>
-              <PencilFillIcon
-                title={intl.formatMessage({ id: 'StartdatoForForeldrepengerperiodenForm.EndreStartdato' })}
-                className={readOnly ? styles.editIconReadonly : styles.editIcon}
-                onClick={readOnly ? undefined : slåPåEditering}
-              />
-            </FlexColumn>
-          </FlexRow>
-        </FlexContainer>
+        <HStack gap="2">
+          <BodyShort size="small">
+            {soknad.oppgittFordeling
+              ? dayjs(soknad.oppgittFordeling.startDatoForPermisjon).format('dddd D MMMM YYYY')
+              : '-'}
+          </BodyShort>
+          <PencilFillIcon
+            title={intl.formatMessage({ id: 'StartdatoForForeldrepengerperiodenForm.EndreStartdato' })}
+            className={readOnly ? styles.editIconReadonly : styles.editIcon}
+            onClick={readOnly ? undefined : slåPåEditering}
+          />
+        </HStack>
       )}
       {visEditeringsmodus && (
         <AksjonspunktBox

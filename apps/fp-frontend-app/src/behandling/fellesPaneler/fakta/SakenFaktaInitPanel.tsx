@@ -15,9 +15,10 @@ import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
 const AKSJONSPUNKT_KODER = [
   AksjonspunktCode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
   AksjonspunktCode.OVERSTYR_AVKLAR_STARTDATO,
+  AksjonspunktCode.AVKLAR_DEKNINGSGRAD,
 ];
 
-const OVERSTYRING_AP_CODES = [AksjonspunktCode.OVERSTYR_AVKLAR_STARTDATO];
+const OVERSTYRING_AP_CODES = [AksjonspunktCode.OVERSTYR_AVKLAR_STARTDATO, AksjonspunktCode.OVERSTYR_DEKNINGSGRAD];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.UTLAND_DOK_STATUS, BehandlingApiKeys.SOKNAD];
 type EndepunktPanelData = {
@@ -45,12 +46,7 @@ const SakenFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = (
     faktaPanelKode={FaktaPanelCode.SAKEN}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'SakenFaktaPanel.Title' })}
     skalPanelVisesIMeny={() => true}
-    renderPanel={data => (
-      <SakenFaktaIndex
-        {...data}
-        erSvangerskapspenger={fagsak.fagsakYtelseType === FagsakYtelseType.SVANGERSKAPSPENGER}
-      />
-    )}
+    renderPanel={data => <SakenFaktaIndex {...data} fagsak={fagsak} />}
   />
 );
 

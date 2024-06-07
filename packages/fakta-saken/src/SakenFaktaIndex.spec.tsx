@@ -4,7 +4,8 @@ import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
 import * as stories from './SakenFaktaIndex.stories';
 
-const { StartdatoForForeldrepenger, ApentAksjonspunktForInnhentingAvDokumentasjon } = composeStories(stories);
+const { StartdatoForForeldrepengerOgDekningsgrad, ApentAksjonspunktForInnhentingAvDokumentasjon } =
+  composeStories(stories);
 
 describe('<SakenFaktaIndex>', () => {
   it('skal få aksjonspunkt om innehenting av dokumentasjon, svar at vil bli innhentet og bekreft', async () => {
@@ -58,11 +59,10 @@ describe('<SakenFaktaIndex>', () => {
   it('skal lagre ny startdato for foreldrepenger', async () => {
     const lagre = vi.fn();
 
-    render(<StartdatoForForeldrepenger submitCallback={lagre} />);
+    render(<StartdatoForForeldrepengerOgDekningsgrad submitCallback={lagre} />);
 
     expect(await screen.findByText('Startdato for foreldrepengeperioden')).toBeInTheDocument();
-    expect(screen.getByText('Startdato som benyttes')).toBeInTheDocument();
-    expect(screen.getByText('01.01.2019')).toBeInTheDocument();
+    expect(screen.getByText('Tuesday 1 January 2019')).toBeInTheDocument();
 
     expect(screen.queryByText('Startdato som skal benyttes (fra søknad eller fødsel)')).not.toBeInTheDocument();
 
