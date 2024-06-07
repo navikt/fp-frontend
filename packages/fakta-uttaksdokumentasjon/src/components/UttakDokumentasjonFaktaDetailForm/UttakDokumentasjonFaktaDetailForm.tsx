@@ -2,16 +2,20 @@ import React, { FunctionComponent, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useFieldArray, useForm } from 'react-hook-form';
 import dayjs from 'dayjs';
-import { BodyShort, Button, HStack, Label, VStack } from '@navikt/ds-react';
+import { BodyShort, Button, HStack, Label, Link, ReadMore, VStack } from '@navikt/ds-react';
 import { required } from '@navikt/ft-form-validators';
 import { PencilIcon } from '@navikt/aksel-icons';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { Form, RadioGroupPanel, NumberField } from '@navikt/ft-form-hooks';
 import { AvsnittSkiller, DateLabel } from '@navikt/ft-ui-komponenter';
-import { DokumentasjonVurderingBehov } from '@navikt/fp-types';
-import { DelOppPeriodeModal, DelOppPeriodeButton } from '../DelOppPeriode';
+import { DokumentasjonVurderingBehov, UttakÅrsak } from '@navikt/fp-types';
+import { FOLKETRYGDLOVEN_KAP14_13_URL } from '@navikt/fp-konstanter';
+
 import styles from './uttakDokumentasjonFaktaDetailForm.module.css';
-import lagVurderingsAlternativer from './vurderingsValg';
+import { DelOppPeriodeModal, DelOppPeriodeButton } from '../DelOppPeriode';
+import { lagVurderingsAlternativer } from './vurderingsAlternativer';
+import { FormValues, fraFormValues, tilFormValues } from './formValues';
+import { VurderingsAlternativ } from '../../types';
 
 interface OwnProps {
   valgtDokBehov: DokumentasjonVurderingBehov;
@@ -19,10 +23,6 @@ interface OwnProps {
   oppdaterDokBehov: (dokBehov: { perioder: DokumentasjonVurderingBehov[] }) => void;
   avbrytEditeringAvAktivitetskrav: () => void;
 }
-
-type FormValues = {
-  perioder: DokumentasjonVurderingBehov[];
-};
 
 const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({
   valgtDokBehov,
@@ -36,9 +36,7 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({
   const [valgtPeriodeIndex, settValgtPeriodeIndex] = useState<number | undefined>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: {
-      perioder: [valgtDokBehov],
-    },
+    defaultValues: tilFormValues(valgtDokBehov),
   });
 
   const { fields, append, update, remove } = useFieldArray({
@@ -91,7 +89,7 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({
   };
   const vurderingsalternativ = lagVurderingsAlternativer(intl, valgtDokBehov.årsak);
 
-  const handleSubmit = (formvalues: FormValues): void => oppdaterDokBehov(formvalues);
+  const handleSubmit = (formvalues: FormValues): void => oppdaterDokBehov(fraFormValues(formvalues));
 
   return (
     <>
@@ -163,6 +161,38 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({
                 isReadOnly={readOnly}
                 radios={vurderingsalternativ}
               />
+              {formMethods.getValues(`perioder.${index}.vurdering`) === VurderingsAlternativ.GODKJENT_UNDER75 && (
+                <NumberField
+                  label={<FormattedMessage id="UttakDokumentasjonFaktaDetailForm.MorsStillingsprosent.Label" />}
+                  name={`perioder.${index}.morsStillingsprosent`}
+                  readOnly={readOnly}
+                />
+              )}
+              {field.årsak === UttakÅrsak.AKTIVITETSKRAV_ARBEID && (
+                <ReadMore
+                  size="small"
+                  header={
+                    <FormattedMessage id="UttakDokumentasjonFaktaDetailForm.MorsStillingsprosent.ReadMoreTittel" />
+                  }
+                >
+                  <FormattedMessage
+                    id="UttakDokumentasjonFaktaDetailForm.MorsStillingsprosent.ReadMoreInnhold"
+                    values={{
+                      a: (msg: any) => (
+                        <Link
+                          inlineText
+                          href={FOLKETRYGDLOVEN_KAP14_13_URL}
+                          className="lenke"
+                          rel="noreferrer"
+                          target="_blank"
+                        >
+                          {msg}
+                        </Link>
+                      ),
+                    }}
+                  />
+                </ReadMore>
+              )}
             </VStack>
           ))}
           {!readOnly && (

@@ -8,8 +8,9 @@ import { Datepicker, Form } from '@navikt/ft-form-hooks';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
-import { DokumentasjonVurderingBehov } from '@navikt/fp-types';
+
 import styles from './delOppPeriodeModal.module.css';
+import { VurderingsBehovPeriode } from '../../types';
 
 const validerInnenforIntervall = (fom: string, tom: string, intl: IntlShape) => (dato: string) => {
   if (!dayjs(dato).isBefore(fom) && dayjs(dato).isBefore(tom)) {
@@ -19,7 +20,7 @@ const validerInnenforIntervall = (fom: string, tom: string, intl: IntlShape) => 
 };
 
 interface OwnProps {
-  periode: DokumentasjonVurderingBehov;
+  periode: VurderingsBehovPeriode;
   originalTom: string;
   cancel: () => void;
   submit: (dato: string) => void;
