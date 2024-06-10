@@ -40,7 +40,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/code-frame@npm:^7.0.0, @babel/code-frame@npm:^7.10.4, @babel/code-frame@npm:^7.22.13":
+"@babel/code-frame@npm:^7.0.0, @babel/code-frame@npm:^7.22.13":
   version: 7.22.13
   resolution: "@babel/code-frame@npm:7.22.13"
   dependencies:
@@ -3204,9 +3204,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@lerna/create@npm:8.1.3":
-  version: 8.1.3
-  resolution: "@lerna/create@npm:8.1.3"
+"@lerna/create@npm:8.1.4":
+  version: 8.1.4
+  resolution: "@lerna/create@npm:8.1.4"
   dependencies:
     "@npmcli/run-script": 7.0.2
     "@nx/devkit": ">=17.1.2 < 20"
@@ -3272,7 +3272,7 @@ __metadata:
     write-pkg: 4.0.0
     yargs: 17.7.2
     yargs-parser: 21.1.1
-  checksum: a9b381aad249d4c77f4fa39fcfb47ef49895aad0ac8a7a47b6e3143c1d5e25ba82f3ff840692c4ee18119f7cff9bf4cf9180893b749e9e3874034c0b104237e3
+  checksum: 17097d04a8d084d36f225335f49fe7adfedddafec4a79adc395c14ac4fe48f1621835e1330259e293cc06b5cb8de0a23024867bba160c889de13906ebdb4869f
   languageName: node
   linkType: hard
 
@@ -3504,7 +3504,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
@@ -3516,7 +3516,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -3543,7 +3543,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     classnames: 2.5.1
     cross-env: 7.0.3
@@ -3555,7 +3555,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -3580,7 +3580,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
@@ -3590,7 +3590,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -3615,7 +3615,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     dayjs: 1.11.11
@@ -3626,7 +3626,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -3647,7 +3647,7 @@ __metadata:
     "@navikt/ft-types": 2.4.7
     "@navikt/ft-ui-komponenter": 2.3.8
     "@navikt/ft-utils": 2.3.7
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
@@ -3655,7 +3655,7 @@ __metadata:
     react-intl: 6.6.8
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -3681,7 +3681,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
@@ -3692,7 +3692,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -3718,7 +3718,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
@@ -3729,7 +3729,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -3754,7 +3754,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
@@ -3765,7 +3765,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -3792,7 +3792,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     classnames: 2.5.1
     cross-env: 7.0.3
@@ -3804,7 +3804,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -3831,7 +3831,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     classnames: 2.5.1
     cross-env: 7.0.3
@@ -3843,7 +3843,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -3866,7 +3866,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     dayjs: 1.11.11
@@ -3878,7 +3878,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -3904,7 +3904,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     classnames: 2.5.1
     cross-env: 7.0.3
@@ -3916,7 +3916,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -3942,7 +3942,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     dayjs: 1.11.11
@@ -3953,7 +3953,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -3980,7 +3980,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     dayjs: 1.11.11
@@ -3993,7 +3993,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -4019,7 +4019,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     classnames: 2.5.1
     cross-env: 7.0.3
@@ -4031,7 +4031,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -4055,7 +4055,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     dayjs: 1.11.11
@@ -4066,7 +4066,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -4090,7 +4090,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
@@ -4100,7 +4100,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -4121,7 +4121,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
@@ -4131,7 +4131,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -4244,11 +4244,11 @@ __metadata:
     "@navikt/ft-ui-komponenter": 2.3.8
     "@navikt/ft-utils": 2.3.7
     "@popperjs/core": 2.11.8
-    "@sentry/browser": 7.116.0
+    "@sentry/browser": 7.117.0
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     axios: 1.7.2
     axios-mock-adapter: 1.22.0
@@ -4271,7 +4271,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -4298,7 +4298,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     dayjs: 1.11.11
@@ -4309,7 +4309,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -4320,7 +4320,7 @@ __metadata:
   dependencies:
     eslint: 8.57.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
   languageName: unknown
   linkType: soft
 
@@ -4330,7 +4330,7 @@ __metadata:
   dependencies:
     eslint: 8.57.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
   languageName: unknown
   linkType: soft
 
@@ -4357,7 +4357,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     "@types/lodash.debounce": 4.0.9
     cross-env: 7.0.3
@@ -4373,7 +4373,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -4397,7 +4397,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     dayjs: 1.11.11
@@ -4412,7 +4412,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -4440,7 +4440,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     dayjs: 1.11.11
@@ -4456,7 +4456,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -4480,7 +4480,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     dayjs: 1.11.11
@@ -4491,7 +4491,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -4517,7 +4517,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     classnames: 2.5.1
     cross-env: 7.0.3
@@ -4531,7 +4531,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -4555,7 +4555,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
@@ -4566,7 +4566,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -4587,7 +4587,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     classnames: 2.5.1
     cross-env: 7.0.3
@@ -4597,7 +4597,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -4618,7 +4618,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     classnames: 2.5.1
     cross-env: 7.0.3
@@ -4628,7 +4628,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -4649,7 +4649,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     classnames: 2.5.1
     cross-env: 7.0.3
@@ -4660,7 +4660,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -4685,7 +4685,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
@@ -4695,7 +4695,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -4717,7 +4717,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
@@ -4727,7 +4727,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -4748,7 +4748,7 @@ __metadata:
     "@navikt/ft-types": 2.4.7
     "@navikt/ft-ui-komponenter": 2.3.8
     "@navikt/ft-utils": 2.3.7
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
@@ -4757,7 +4757,7 @@ __metadata:
     react-intl: 6.6.8
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -4782,7 +4782,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
@@ -4793,7 +4793,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -4820,7 +4820,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     classnames: 2.5.1
     cross-env: 7.0.3
@@ -4832,7 +4832,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -4857,7 +4857,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     classnames: 2.5.1
     cross-env: 7.0.3
@@ -4868,7 +4868,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -4893,7 +4893,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     classnames: 2.5.1
     cross-env: 7.0.3
@@ -4905,7 +4905,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -4930,7 +4930,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
@@ -4941,7 +4941,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -4966,7 +4966,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     classnames: 2.5.1
     cross-env: 7.0.3
@@ -4979,7 +4979,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -5003,7 +5003,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     classnames: 2.5.1
     cross-env: 7.0.3
@@ -5016,7 +5016,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -5043,7 +5043,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     classnames: 2.5.1
     cross-env: 7.0.3
@@ -5055,7 +5055,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -5081,7 +5081,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
@@ -5091,7 +5091,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -5114,7 +5114,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     classnames: 2.5.1
     cross-env: 7.0.3
@@ -5124,7 +5124,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -5152,7 +5152,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
@@ -5163,7 +5163,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -5187,7 +5187,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
@@ -5197,7 +5197,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -5221,7 +5221,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
@@ -5231,7 +5231,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -5255,7 +5255,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
@@ -5265,7 +5265,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -5289,7 +5289,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
@@ -5299,7 +5299,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -5322,7 +5322,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     dayjs: 1.11.11
@@ -5334,7 +5334,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -5359,7 +5359,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
@@ -5370,7 +5370,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -5395,7 +5395,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
@@ -5406,7 +5406,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -5431,7 +5431,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
@@ -5442,7 +5442,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -5466,7 +5466,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
@@ -5477,7 +5477,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -5487,12 +5487,12 @@ __metadata:
   resolution: "@navikt/fp-rest-api-hooks@workspace:packages/rest-api-hooks"
   dependencies:
     "@navikt/fp-rest-api": "workspace:*"
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     cross-env: 7.0.3
     eslint: 8.57.0
     react: 18.3.1
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -5501,13 +5501,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-rest-api@workspace:packages/rest-api"
   dependencies:
-    "@sentry/browser": 7.116.0
+    "@sentry/browser": 7.117.0
     axios: 1.7.2
     axios-mock-adapter: 1.22.0
     cross-env: 7.0.3
     eslint: 8.57.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -5533,7 +5533,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     classnames: 2.5.1
     cross-env: 7.0.3
@@ -5546,7 +5546,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -5571,7 +5571,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     classnames: 2.5.1
     cross-env: 7.0.3
@@ -5582,7 +5582,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -5601,7 +5601,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
@@ -5610,7 +5610,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -5633,7 +5633,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
@@ -5643,7 +5643,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -5667,7 +5667,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
@@ -5677,7 +5677,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -5700,7 +5700,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
@@ -5710,7 +5710,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -5732,7 +5732,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     dayjs: 1.11.11
@@ -5742,7 +5742,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -5765,7 +5765,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     dayjs: 1.11.11
@@ -5776,7 +5776,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -5800,7 +5800,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
@@ -5810,7 +5810,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -5840,7 +5840,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
@@ -5853,7 +5853,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -5869,7 +5869,7 @@ __metadata:
     "@storybook/addon-actions": 8.1.6
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
@@ -5879,7 +5879,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -5896,7 +5896,7 @@ __metadata:
     react-intl: 6.6.8
     react-router-dom: 6.23.1
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
   languageName: unknown
   linkType: soft
 
@@ -5910,7 +5910,7 @@ __metadata:
     "@navikt/ft-fakta-fordel-beregningsgrunnlag": 7.5.10
     "@navikt/ft-prosess-beregningsgrunnlag": 6.5.12
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
   languageName: unknown
   linkType: soft
 
@@ -5920,7 +5920,7 @@ __metadata:
   dependencies:
     "@navikt/fp-kodeverk": "workspace:*"
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
   languageName: unknown
   linkType: soft
 
@@ -5937,7 +5937,7 @@ __metadata:
     "@navikt/ft-utils": 2.3.7
     "@storybook/react": 8.1.6
     "@storybook/react-vite": 8.1.6
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/user-event": 14.5.2
     cross-env: 7.0.3
     eslint: 8.57.0
@@ -5947,7 +5947,7 @@ __metadata:
     storybook: 8.1.6
     stylelint: 15.11.0
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vitest: 1.6.0
   languageName: unknown
   linkType: soft
@@ -5965,7 +5965,7 @@ __metadata:
     react: 18.3.1
     react-intl: 6.6.8
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
   languageName: unknown
   linkType: soft
 
@@ -7954,53 +7954,53 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sentry-internal/feedback@npm:7.116.0":
-  version: 7.116.0
-  resolution: "@sentry-internal/feedback@npm:7.116.0"
+"@sentry-internal/feedback@npm:7.117.0":
+  version: 7.117.0
+  resolution: "@sentry-internal/feedback@npm:7.117.0"
   dependencies:
-    "@sentry/core": 7.116.0
-    "@sentry/types": 7.116.0
-    "@sentry/utils": 7.116.0
-  checksum: e22bebb3a00883c47ff7e7e9ce26aca765f6861bbb788485ecce6273cc2516c39179d2fd6791e1ad64b71601cf4e88661d68bf4e4f8887fbf1c717b6ab46b744
+    "@sentry/core": 7.117.0
+    "@sentry/types": 7.117.0
+    "@sentry/utils": 7.117.0
+  checksum: 937c1a59723881ac090a8b12669a6f2264d04c7e50ba73a802031a68187a3799cdc7d41f8a5f0023eee3321bce145141f385ee353a880f17f028e45b57e57044
   languageName: node
   linkType: hard
 
-"@sentry-internal/replay-canvas@npm:7.116.0":
-  version: 7.116.0
-  resolution: "@sentry-internal/replay-canvas@npm:7.116.0"
+"@sentry-internal/replay-canvas@npm:7.117.0":
+  version: 7.117.0
+  resolution: "@sentry-internal/replay-canvas@npm:7.117.0"
   dependencies:
-    "@sentry/core": 7.116.0
-    "@sentry/replay": 7.116.0
-    "@sentry/types": 7.116.0
-    "@sentry/utils": 7.116.0
-  checksum: e5a78bb591b16682810d17d2bfea5d9684ddc9a6bd5dec0dc71c929c8c79f0a8f1f92c92468f590daef7b67c993c0ae84157aecf4683e60e3ef5b0fdeb8da515
+    "@sentry/core": 7.117.0
+    "@sentry/replay": 7.117.0
+    "@sentry/types": 7.117.0
+    "@sentry/utils": 7.117.0
+  checksum: d84e9fa4d777a00b83d5e60aa4a9ca5a74768c3eb8e2aadcec0adc0379900103027a23cd3c228d3e8adca90f45b6c3a0713f051258aaf5ac32656f887ba26350
   languageName: node
   linkType: hard
 
-"@sentry-internal/tracing@npm:7.116.0":
-  version: 7.116.0
-  resolution: "@sentry-internal/tracing@npm:7.116.0"
+"@sentry-internal/tracing@npm:7.117.0":
+  version: 7.117.0
+  resolution: "@sentry-internal/tracing@npm:7.117.0"
   dependencies:
-    "@sentry/core": 7.116.0
-    "@sentry/types": 7.116.0
-    "@sentry/utils": 7.116.0
-  checksum: 494e639fb1ea4a7565a96da27da03e8d26ffe6304b32686e4f325bf7323ca0465a48d6936faa325022b11a035882992b7ef4b87efba21fb5e12beb69e3de959a
+    "@sentry/core": 7.117.0
+    "@sentry/types": 7.117.0
+    "@sentry/utils": 7.117.0
+  checksum: 3a4b5b4ebfa8da73e324aef2ed20921a840e88b3a1b949c8f092b6cf73c6e7dcb99bb8c47bf6ac56101b53ed959597c29f22a4618fd5d93c05e04c3841ebe256
   languageName: node
   linkType: hard
 
-"@sentry/browser@npm:7.116.0":
-  version: 7.116.0
-  resolution: "@sentry/browser@npm:7.116.0"
+"@sentry/browser@npm:7.117.0":
+  version: 7.117.0
+  resolution: "@sentry/browser@npm:7.117.0"
   dependencies:
-    "@sentry-internal/feedback": 7.116.0
-    "@sentry-internal/replay-canvas": 7.116.0
-    "@sentry-internal/tracing": 7.116.0
-    "@sentry/core": 7.116.0
-    "@sentry/integrations": 7.116.0
-    "@sentry/replay": 7.116.0
-    "@sentry/types": 7.116.0
-    "@sentry/utils": 7.116.0
-  checksum: 7e41c6bf22913da6930807d04c0c5cdb0ffa782bdf861b8e76d336d8a866a91af271b8201806479776d6582f6212e648a80d59b779df3560e8b934534d7b19c4
+    "@sentry-internal/feedback": 7.117.0
+    "@sentry-internal/replay-canvas": 7.117.0
+    "@sentry-internal/tracing": 7.117.0
+    "@sentry/core": 7.117.0
+    "@sentry/integrations": 7.117.0
+    "@sentry/replay": 7.117.0
+    "@sentry/types": 7.117.0
+    "@sentry/utils": 7.117.0
+  checksum: 161113058e7c48333d9bbdf278d799d3da355a5b2e77ce12bf796bfc40cd5e099b8569df5372e0d3f6d508e516def768e3251add97a9ddfa007ddb60f0873566
   languageName: node
   linkType: hard
 
@@ -8090,53 +8090,53 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sentry/core@npm:7.116.0":
-  version: 7.116.0
-  resolution: "@sentry/core@npm:7.116.0"
+"@sentry/core@npm:7.117.0":
+  version: 7.117.0
+  resolution: "@sentry/core@npm:7.117.0"
   dependencies:
-    "@sentry/types": 7.116.0
-    "@sentry/utils": 7.116.0
-  checksum: b3000b31e144c056af64805e4f0aba6e145374593d157db7f6cdf2e97fb43d538161fc5a8cadc4a74f665a29c6ace0772924d7d204ef28b84317c1540b814b20
+    "@sentry/types": 7.117.0
+    "@sentry/utils": 7.117.0
+  checksum: ef22d6d3d358cfae9cee6c1ef62bc425987dd7262089d78b80851b32a1b6ad50282cbe83b7d9c16d411fd5861065775b69bc989656b311d4692a207d8fda8e1c
   languageName: node
   linkType: hard
 
-"@sentry/integrations@npm:7.116.0":
-  version: 7.116.0
-  resolution: "@sentry/integrations@npm:7.116.0"
+"@sentry/integrations@npm:7.117.0":
+  version: 7.117.0
+  resolution: "@sentry/integrations@npm:7.117.0"
   dependencies:
-    "@sentry/core": 7.116.0
-    "@sentry/types": 7.116.0
-    "@sentry/utils": 7.116.0
+    "@sentry/core": 7.117.0
+    "@sentry/types": 7.117.0
+    "@sentry/utils": 7.117.0
     localforage: ^1.8.1
-  checksum: 6868594a78dfd689ab4a9f9c7f765ec7869c7f3395a619d3fba02d8dcb3da46ee04f26f847f59fcbad20ff01d035eb60e1f133a4be207590399e6fd74202b051
+  checksum: 5b1ba3fb6e12ea2b79cbd2f2ce592621abfc37bf9809e6fcd2b1d1cfa4c589d40534747ef9bb64ed6a342f847130c29fc737a7297d6197a63e0228091bdf96cb
   languageName: node
   linkType: hard
 
-"@sentry/replay@npm:7.116.0":
-  version: 7.116.0
-  resolution: "@sentry/replay@npm:7.116.0"
+"@sentry/replay@npm:7.117.0":
+  version: 7.117.0
+  resolution: "@sentry/replay@npm:7.117.0"
   dependencies:
-    "@sentry-internal/tracing": 7.116.0
-    "@sentry/core": 7.116.0
-    "@sentry/types": 7.116.0
-    "@sentry/utils": 7.116.0
-  checksum: b38c74b7deca96a399ef003602ca65ab182ce42c05838c7b611de282f80ef71e8ea81e26d6be076a1866d56d8bc0940aaae405ef5d131a9fbcbca0237898bdb5
+    "@sentry-internal/tracing": 7.117.0
+    "@sentry/core": 7.117.0
+    "@sentry/types": 7.117.0
+    "@sentry/utils": 7.117.0
+  checksum: de9b8783c1670d652934931d08fd0e0797d476493b36aeda4f945d184bb2a45df570dbd11e4381ae7369b91c758bfb5703fee2dd2ef4ce1d8b5d59e1d08a81b1
   languageName: node
   linkType: hard
 
-"@sentry/types@npm:7.116.0":
-  version: 7.116.0
-  resolution: "@sentry/types@npm:7.116.0"
-  checksum: d2ed11ce814201531c3c426f52c25dd32160eda434426ad10963f694f670218d2c40fecc4741acb1c921b826c8c99ef2e60716aff78e74f85f8a091623a0705d
+"@sentry/types@npm:7.117.0":
+  version: 7.117.0
+  resolution: "@sentry/types@npm:7.117.0"
+  checksum: f3eabf921ecbe1e89c5dc50fd5f52340484ae710333718a6e027f58462bee552d22a70ff50e2a8b9924f935a3b86e3ec4aca20ab3bc3fbee1f77c3a6d49255df
   languageName: node
   linkType: hard
 
-"@sentry/utils@npm:7.116.0":
-  version: 7.116.0
-  resolution: "@sentry/utils@npm:7.116.0"
+"@sentry/utils@npm:7.117.0":
+  version: 7.117.0
+  resolution: "@sentry/utils@npm:7.117.0"
   dependencies:
-    "@sentry/types": 7.116.0
-  checksum: f8d2f7fd61409fd52376665f6e87fe7b74706c4a9eb6f05b4d85c2c2fa3dc4cb1c31a4cadddc248a3798a6f01906b16ff8317356a0ab4767cb13e38b0f3f90f0
+    "@sentry/types": 7.117.0
+  checksum: d8cf0db1a1b572ed0fa673aa29864bfb47ffa03ddfba13da253b018f5d1fb16b2d5b7e0e302194af30881c1fec2de5896df60a71bd9507b009f9736b24b89b7d
   languageName: node
   linkType: hard
 
@@ -8955,22 +8955,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/dom@npm:^9.0.0":
-  version: 9.3.3
-  resolution: "@testing-library/dom@npm:9.3.3"
-  dependencies:
-    "@babel/code-frame": ^7.10.4
-    "@babel/runtime": ^7.12.5
-    "@types/aria-query": ^5.0.1
-    aria-query: 5.1.3
-    chalk: ^4.1.0
-    dom-accessibility-api: ^0.5.9
-    lz-string: ^1.5.0
-    pretty-format: ^27.0.2
-  checksum: 34e0a564da7beb92aa9cc44a9080221e2412b1a132eb37be3d513fe6c58027674868deb9f86195756d98d15ba969a30fe00632a4e26e25df2a5a4f6ac0686e37
-  languageName: node
-  linkType: hard
-
 "@testing-library/jest-dom@npm:6.4.5":
   version: 6.4.5
   resolution: "@testing-library/jest-dom@npm:6.4.5"
@@ -9026,17 +9010,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/react@npm:14.3.1":
-  version: 14.3.1
-  resolution: "@testing-library/react@npm:14.3.1"
+"@testing-library/react@npm:16.0.0":
+  version: 16.0.0
+  resolution: "@testing-library/react@npm:16.0.0"
   dependencies:
     "@babel/runtime": ^7.12.5
-    "@testing-library/dom": ^9.0.0
-    "@types/react-dom": ^18.0.0
   peerDependencies:
+    "@testing-library/dom": ^10.0.0
+    "@types/react": ^18.0.0
+    "@types/react-dom": ^18.0.0
     react: ^18.0.0
     react-dom: ^18.0.0
-  checksum: b057d4c9db5a523acfc24d7bc4665a924ab8d6f252c7f51eecf7dd30f1239413e1134925fd5cc9cbdef80496af64c04e6719b2081f89fe05ba87e8c6305bcc16
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    "@types/react-dom":
+      optional: true
+  checksum: 45a35f0b5f34b5a7f4dcefdd3f1d202d5421692e5cc7a491c9bc71e6ed9dd5872a182b80b4dfefb4a56d9c1df35e50f6fa2917bcf657cc26b4bc0d2259df0027
   languageName: node
   linkType: hard
 
@@ -9094,13 +9084,6 @@ __metadata:
   version: 1.0.38
   resolution: "@types/argparse@npm:1.0.38"
   checksum: 26ed7e3f1e3595efdb883a852f5205f971b798e4c28b7e30a32c5298eee596e8b45834ce831f014d250b9730819ab05acff5b31229666d3af4ba465b4697d0eb
-  languageName: node
-  linkType: hard
-
-"@types/aria-query@npm:^5.0.1":
-  version: 5.0.2
-  resolution: "@types/aria-query@npm:5.0.2"
-  checksum: 19394fea016e72da39dd5ef1cf1643e3252b7ee99d8f0b3a8740d3b72f874443fc1e00a41935b36fdfaf92cd735d4ae10dc5d6ab8f1192527d4c0471bb8ff8e4
   languageName: node
   linkType: hard
 
@@ -9515,15 +9498,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^18.0.0":
-  version: 18.2.8
-  resolution: "@types/react-dom@npm:18.2.8"
-  dependencies:
-    "@types/react": "*"
-  checksum: d36264631028d021b73cd9e015f10b95c4959ae1ce8f7a7419f318d1f05b1d063e6afffcd2a349a6bccd64ccc9ee9d2d976e1f0437643f0e7db621fa035bca65
-  languageName: node
-  linkType: hard
-
 "@types/react-responsive@npm:8.0.8":
   version: 8.0.8
   resolution: "@types/react-responsive@npm:8.0.8"
@@ -9902,9 +9876,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitejs/plugin-react@npm:4.3.0":
-  version: 4.3.0
-  resolution: "@vitejs/plugin-react@npm:4.3.0"
+"@vitejs/plugin-react@npm:4.3.1":
+  version: 4.3.1
+  resolution: "@vitejs/plugin-react@npm:4.3.1"
   dependencies:
     "@babel/core": ^7.24.5
     "@babel/plugin-transform-react-jsx-self": ^7.24.5
@@ -9913,7 +9887,7 @@ __metadata:
     react-refresh: ^0.14.2
   peerDependencies:
     vite: ^4.2.0 || ^5.0.0
-  checksum: e4642c081e74e701fc07f03f505b44eb428d7105461b8026e7364ecd30dcf7785126bf272767a3bc36899b6abe85479af444612ef6d09509d9bc7d6025cac925
+  checksum: 57872e0193c7e545c5ef4852cbe1adf17a6b35406a2aba4b3acce06c173a9dabbf6ff4c72701abc11bb3cbe24a056f5054f39018f7034c9aa57133a3a7770237
   languageName: node
   linkType: hard
 
@@ -10412,15 +10386,6 @@ __metadata:
   dependencies:
     tslib: ^2.0.0
   checksum: 7d7d211629eef315e94ed3b064c6823d13617e609d3f9afab1c2ed86399bb8e90405f9bdd358a85506802766f3ecb468af985c67c846045a34b973bcc0289db9
-  languageName: node
-  linkType: hard
-
-"aria-query@npm:5.1.3":
-  version: 5.1.3
-  resolution: "aria-query@npm:5.1.3"
-  dependencies:
-    deep-equal: ^2.0.5
-  checksum: 929ff95f02857b650fb4cbcd2f41072eee2f46159a6605ea03bf63aa572e35ffdff43d69e815ddc462e16e07de8faba3978afc2813650b4448ee18c9895d982b
   languageName: node
   linkType: hard
 
@@ -12249,32 +12214,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"deep-equal@npm:^2.0.5":
-  version: 2.2.2
-  resolution: "deep-equal@npm:2.2.2"
-  dependencies:
-    array-buffer-byte-length: ^1.0.0
-    call-bind: ^1.0.2
-    es-get-iterator: ^1.1.3
-    get-intrinsic: ^1.2.1
-    is-arguments: ^1.1.1
-    is-array-buffer: ^3.0.2
-    is-date-object: ^1.0.5
-    is-regex: ^1.1.4
-    is-shared-array-buffer: ^1.0.2
-    isarray: ^2.0.5
-    object-is: ^1.1.5
-    object-keys: ^1.1.1
-    object.assign: ^4.1.4
-    regexp.prototype.flags: ^1.5.0
-    side-channel: ^1.0.4
-    which-boxed-primitive: ^1.0.2
-    which-collection: ^1.0.1
-    which-typed-array: ^1.1.9
-  checksum: eb61c35157b6ecb96a5359b507b083fbff8ddb4c86a78a781ee38485f77a667465e45d63ee2ebd8a00e86d94c80e499906900cd82c2debb400237e1662cd5397
-  languageName: node
-  linkType: hard
-
 "deep-is@npm:^0.1.3":
   version: 0.1.4
   resolution: "deep-is@npm:0.1.4"
@@ -12471,13 +12410,6 @@ __metadata:
   dependencies:
     esutils: ^2.0.2
   checksum: fd7673ca77fe26cd5cba38d816bc72d641f500f1f9b25b83e8ce28827fe2da7ad583a8da26ab6af85f834138cf8dae9f69b0cd6ab925f52ddab1754db44d99ce
-  languageName: node
-  linkType: hard
-
-"dom-accessibility-api@npm:^0.5.9":
-  version: 0.5.16
-  resolution: "dom-accessibility-api@npm:0.5.16"
-  checksum: 005eb283caef57fc1adec4d5df4dd49189b628f2f575af45decb210e04d634459e3f1ee64f18b41e2dcf200c844bc1d9279d80807e686a30d69a4756151ad248
   languageName: node
   linkType: hard
 
@@ -12953,23 +12885,6 @@ __metadata:
   version: 1.3.0
   resolution: "es-errors@npm:1.3.0"
   checksum: ec1414527a0ccacd7f15f4a3bc66e215f04f595ba23ca75cdae0927af099b5ec865f9f4d33e9d7e86f512f252876ac77d4281a7871531a50678132429b1271b5
-  languageName: node
-  linkType: hard
-
-"es-get-iterator@npm:^1.1.3":
-  version: 1.1.3
-  resolution: "es-get-iterator@npm:1.1.3"
-  dependencies:
-    call-bind: ^1.0.2
-    get-intrinsic: ^1.1.3
-    has-symbols: ^1.0.3
-    is-arguments: ^1.1.1
-    is-map: ^2.0.2
-    is-set: ^2.0.2
-    is-string: ^1.0.7
-    isarray: ^2.0.5
-    stop-iteration-iterator: ^1.0.0
-  checksum: 8fa118da42667a01a7c7529f8a8cca514feeff243feec1ce0bb73baaa3514560bd09d2b3438873cf8a5aaec5d52da248131de153b28e2638a061b6e4df13267d
   languageName: node
   linkType: hard
 
@@ -14230,7 +14145,7 @@ __metadata:
     "@storybook/cli": 8.1.6
     "@storybook/react": 8.1.6
     "@testing-library/jest-dom": 6.4.5
-    "@testing-library/react": 14.3.1
+    "@testing-library/react": 16.0.0
     "@testing-library/react-hooks": 8.0.1
     "@testing-library/user-event": 14.5.2
     "@types/react": 18.3.3
@@ -14241,7 +14156,7 @@ __metadata:
     "@types/react-test-renderer": 18.3.0
     "@typescript-eslint/eslint-plugin": 7.12.0
     "@typescript-eslint/parser": 7.12.0
-    "@vitejs/plugin-react": 4.3.0
+    "@vitejs/plugin-react": 4.3.1
     "@vitest/coverage-c8": 0.33.0
     axios-mock-adapter: 1.22.0
     cross-env: 7.0.3
@@ -14259,14 +14174,14 @@ __metadata:
     gh-pages: 6.1.1
     husky: 9.0.11
     jsdom: 24.1.0
-    lerna: 8.1.3
+    lerna: 8.1.4
     lint-staged: 15.2.5
     react-test-renderer: 18.3.1
     shelljs: 0.8.5
     stylelint: 15.11.0
     stylelint-order: 6.0.4
     typescript: 5.4.5
-    vite: 5.2.12
+    vite: 5.2.13
     vite-plugin-dts: 3.9.1
     vite-plugin-externalize-deps: 0.8.0
     vite-plugin-html: 3.2.2
@@ -15459,7 +15374,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"internal-slot@npm:^1.0.4, internal-slot@npm:^1.0.5":
+"internal-slot@npm:^1.0.5":
   version: 1.0.5
   resolution: "internal-slot@npm:1.0.5"
   dependencies:
@@ -15554,7 +15469,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"is-arguments@npm:^1.0.4, is-arguments@npm:^1.1.1":
+"is-arguments@npm:^1.0.4":
   version: 1.1.1
   resolution: "is-arguments@npm:1.1.1"
   dependencies:
@@ -15784,7 +15699,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"is-map@npm:^2.0.1, is-map@npm:^2.0.2":
+"is-map@npm:^2.0.1":
   version: 2.0.2
   resolution: "is-map@npm:2.0.2"
   checksum: ace3d0ecd667bbdefdb1852de601268f67f2db725624b1958f279316e13fecb8fa7df91fd60f690d7417b4ec180712f5a7ee967008e27c65cfd475cc84337728
@@ -15885,7 +15800,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"is-set@npm:^2.0.1, is-set@npm:^2.0.2":
+"is-set@npm:^2.0.1":
   version: 2.0.2
   resolution: "is-set@npm:2.0.2"
   checksum: b64343faf45e9387b97a6fd32be632ee7b269bd8183701f3b3f5b71a7cf00d04450ed8669d0bd08753e08b968beda96fca73a10fd0ff56a32603f64deba55a57
@@ -16487,11 +16402,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lerna@npm:8.1.3":
-  version: 8.1.3
-  resolution: "lerna@npm:8.1.3"
+"lerna@npm:8.1.4":
+  version: 8.1.4
+  resolution: "lerna@npm:8.1.4"
   dependencies:
-    "@lerna/create": 8.1.3
+    "@lerna/create": 8.1.4
     "@npmcli/run-script": 7.0.2
     "@nx/devkit": ">=17.1.2 < 20"
     "@octokit/plugin-enterprise-rest": 6.0.1
@@ -16567,7 +16482,7 @@ __metadata:
     yargs-parser: 21.1.1
   bin:
     lerna: dist/cli.js
-  checksum: 8276d944e4dda3915e8d8c3ffbe252e65cf2717d0f84b7cfff19577a1d0357e25e9452363b2e5f3237738008bea6f6e7a003c86605e5c3702728ad22983eeaac
+  checksum: 35a821f04f0b30181862d95bb5a722ff5b9c83c673995cdaeff6437b0086f9a4afe6f0707c27b4e95ae6fdbf5a2ce1414637e747f28ebe4b9c26ef14f2e44930
   languageName: node
   linkType: hard
 
@@ -16922,15 +16837,6 @@ __metadata:
   version: 10.0.1
   resolution: "lru-cache@npm:10.0.1"
   checksum: 06f8d0e1ceabd76bb6f644a26dbb0b4c471b79c7b514c13c6856113879b3bf369eb7b497dad4ff2b7e2636db202412394865b33c332100876d838ad1372f0181
-  languageName: node
-  linkType: hard
-
-"lz-string@npm:^1.5.0":
-  version: 1.5.0
-  resolution: "lz-string@npm:1.5.0"
-  bin:
-    lz-string: bin/bin.js
-  checksum: 1ee98b4580246fd90dd54da6e346fb1caefcf05f677c686d9af237a157fdea3fd7c83a4bc58f858cd5b10a34d27afe0fdcbd0505a47e0590726a873dc8b8f65d
   languageName: node
   linkType: hard
 
@@ -18930,17 +18836,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pretty-format@npm:^27.0.2":
-  version: 27.5.1
-  resolution: "pretty-format@npm:27.5.1"
-  dependencies:
-    ansi-regex: ^5.0.1
-    ansi-styles: ^5.0.0
-    react-is: ^17.0.1
-  checksum: cf610cffcb793885d16f184a62162f2dd0df31642d9a18edf4ca298e909a8fe80bdbf556d5c9573992c102ce8bf948691da91bf9739bee0ffb6e79c8a8a6e088
-  languageName: node
-  linkType: hard
-
 "pretty-format@npm:^29.7.0":
   version: 29.7.0
   resolution: "pretty-format@npm:29.7.0"
@@ -19394,13 +19289,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-is@npm:^17.0.1":
-  version: 17.0.2
-  resolution: "react-is@npm:17.0.2"
-  checksum: 9d6d111d8990dc98bc5402c1266a808b0459b5d54830bbea24c12d908b536df7883f268a7868cfaedde3dd9d4e0d574db456f84d2e6df9c4526f99bb4b5344d8
-  languageName: node
-  linkType: hard
-
 "react-lifecycles-compat@npm:^3.0.0":
   version: 3.0.4
   resolution: "react-lifecycles-compat@npm:3.0.4"
@@ -19836,7 +19724,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"regexp.prototype.flags@npm:^1.5.0, regexp.prototype.flags@npm:^1.5.1":
+"regexp.prototype.flags@npm:^1.5.1":
   version: 1.5.1
   resolution: "regexp.prototype.flags@npm:1.5.1"
   dependencies:
@@ -20882,15 +20770,6 @@ __metadata:
   version: 3.6.0
   resolution: "std-env@npm:3.6.0"
   checksum: ec344e93af17fd1b71eb28aeb4712f72790b9f2363981fc91ad1a91c9c7967c1ab89271819242d1b3bdbd57f10ac8ef0559d561ccf081a5377f9b3cd8c9b2259
-  languageName: node
-  linkType: hard
-
-"stop-iteration-iterator@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "stop-iteration-iterator@npm:1.0.0"
-  dependencies:
-    internal-slot: ^1.0.4
-  checksum: d04173690b2efa40e24ab70e5e51a3ff31d56d699550cfad084104ab3381390daccb36652b25755e420245f3b0737de66c1879eaa2a8d4fc0a78f9bf892fcb42
   languageName: node
   linkType: hard
 
@@ -22390,9 +22269,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:5.2.12":
-  version: 5.2.12
-  resolution: "vite@npm:5.2.12"
+"vite@npm:5.2.13":
+  version: 5.2.13
+  resolution: "vite@npm:5.2.13"
   dependencies:
     esbuild: ^0.20.1
     fsevents: ~2.3.3
@@ -22426,7 +22305,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 908b8a09460c031fe94c2038a46743a73a70fe76fd1991ae8b51a56eb88dec75128bc7da7ab37d8f84c0e1e3063ce268bdd81cc27d79229f8ea756e752bc83d9
+  checksum: 79620413e45804494bedb81f2b78b48ca1d26fb026894a114a2f40cb1a3ad9b6783e777bc8969a51f8711e168b4db93a9563a5af027c80eecf000ef9b675a3be
   languageName: node
   linkType: hard
 
