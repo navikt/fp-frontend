@@ -1,7 +1,7 @@
 import { BodyShort, HStack, Label, UNSAFE_Combobox, VStack } from '@navikt/ds-react'; // eslint-disable-line camelcase
 import { Form, InputField } from '@navikt/ft-form-hooks';
 import { hasValidName, maxLength, minLength, required } from '@navikt/ft-form-validators';
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { XMarkIcon } from '@navikt/aksel-icons';
@@ -51,12 +51,40 @@ const GruppeSaksbehandlere: FunctionComponent<Props> = ({
     avdelingensSaksbehandlere,
     sorterteGrupperteSaksbehandlere,
   );
+  const options = sorterteSaksbehandlereForAvdeling.map(sb => `${sb.navn} (${sb.brukerIdent})`);
 
   const lagreNavnDebounce = useDebounce<string>(
     'navn',
     (navn: string) => endreGruppenavn(saksbehandlerGruppe.gruppeId, navn),
     formMethods.trigger,
   );
+
+  const [filteredOptions, setFilteredOptions] = useState<string[]>([]);
+
+  const filterOptions = 
+    (searchTerm: string | undefined) => {
+      if (searchTerm?.trim()) {
+        setFilteredOptions(options.filter(option => option.toLowerCase().includes(searchTerm.toLowerCase())))
+      } else {
+        setFilteredOptions(options);
+      }
+    };
+
+  const toggleSelected = (option: string, isSelected: boolean) => {
+    const selectedOption = filteredOptions.find(o => o.toLowerCase().includes(option?.toLowerCase()));
+    const navnOgBrukerIdent = selectedOption?.replace(')', '').split(' (');
+    const alreadySelected = sorterteGrupperteSaksbehandlere.some(
+      gs => navnOgBrukerIdent && gs.brukerIdent === navnOgBrukerIdent[1],
+    );
+
+    if (selectedOption && isSelected && !alreadySelected && navnOgBrukerIdent) {
+      lagreValgtSaksbehandlar(navnOgBrukerIdent[1], saksbehandlerGruppe.gruppeId, true);
+    }
+  };
+
+  const fjernFraGruppe = (ident: string, gruppeId: number) => {
+    lagreValgtSaksbehandlar(ident, gruppeId, false);
+  }
 
   return (
     <Form formMethods={formMethods}>
@@ -73,16 +101,11 @@ const GruppeSaksbehandlere: FunctionComponent<Props> = ({
           <UNSAFE_Combobox // eslint-disable-line camelcase
             label={intl.formatMessage({ id: 'GruppeSaksbehandlere.VelgSaksbehandlere' })}
             size="small"
-            options={sorterteSaksbehandlereForAvdeling.map(
-              saksbehandler => `${saksbehandler.navn} (${saksbehandler.brukerIdent})`,
-            )}
-            onToggleSelected={option => {
-              const navnOgBrukerIdent = option.replace(')', '').split(' (');
-              if (!sorterteGrupperteSaksbehandlere.some(gs => gs.brukerIdent === navnOgBrukerIdent[1])) {
-                lagreValgtSaksbehandlar(navnOgBrukerIdent[1], saksbehandlerGruppe.gruppeId, true);
-              }
-            }}
-            shouldAutocomplete
+            options={options}
+            filteredOptions={filteredOptions}
+            selectedOptions={[]}
+            onChange={event => filterOptions(event?.target.value as string)}
+            onToggleSelected={toggleSelected}
             className={styles.saksbehandlerCombo}
           />
 
@@ -101,12 +124,8 @@ const GruppeSaksbehandlere: FunctionComponent<Props> = ({
                 <div>
                   <XMarkIcon
                     className={styles.removeIcon}
-                    onMouseDown={() =>
-                      lagreValgtSaksbehandlar(saksbehandler.brukerIdent, saksbehandlerGruppe.gruppeId, false)
-                    }
-                    onKeyDown={() =>
-                      lagreValgtSaksbehandlar(saksbehandler.brukerIdent, saksbehandlerGruppe.gruppeId, false)
-                    }
+                    onMouseDown={() => fjernFraGruppe(saksbehandler.brukerIdent, saksbehandlerGruppe.gruppeId)}
+                    onKeyDown={() => fjernFraGruppe(saksbehandler.brukerIdent, saksbehandlerGruppe.gruppeId)}
                   />
                 </div>
               </HStack>
