@@ -8,6 +8,7 @@ import {
   behandlingStatus,
   aksjonspunktStatus,
   fagsakYtelseType,
+  navBrukerKjonn,
 } from '@navikt/fp-kodeverk';
 import { Behandling, Aksjonspunkt, Soknad, Fagsak } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
@@ -61,12 +62,14 @@ const Template: StoryFn<{
   submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
   søknad?: Soknad;
   fagsak?: Fagsak;
+  kanOverstyreAccess?: boolean;
 }> = ({
   aksjonspunkter,
   alleMerknaderFraBeslutter = {},
   submitCallback = promiseAction(),
   søknad = defaultSøknad,
   fagsak = defaultFagsak,
+  kanOverstyreAccess = true,
 }) => (
   <SakenFaktaIndex
     aksjonspunkter={aksjonspunkter}
@@ -80,6 +83,7 @@ const Template: StoryFn<{
     behandling={behandling as Behandling}
     harApneAksjonspunkter={aksjonspunkter.some(ap => ap.status === aksjonspunktStatus.OPPRETTET)}
     soknad={søknad}
+    kanOverstyreAccess={kanOverstyreAccess}
   />
 );
 
@@ -92,7 +96,7 @@ export const StartdatoForForeldrepengerOgDekningsgradMedAnnenPart = Template.bin
 StartdatoForForeldrepengerOgDekningsgradMedAnnenPart.args = {
   aksjonspunkter: [],
   fagsak: {
-    fagsakYtelseType: fagsakYtelseType.SVANGERSKAPSPENGER,
+    fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
     bruker: {
       navn: 'Helga Utvikler',
     },
@@ -100,6 +104,21 @@ StartdatoForForeldrepengerOgDekningsgradMedAnnenPart.args = {
       navn: 'Espen Utvikler',
     },
   } as Fagsak,
+};
+
+export const KanIkkeOverstyreDekningsgrad = Template.bind({});
+KanIkkeOverstyreDekningsgrad.args = {
+  aksjonspunkter: [],
+  fagsak: {
+    fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
+    bruker: {
+      navn: 'Helga Utvikler',
+    },
+    annenPart: {
+      navn: 'Espen Utvikler',
+    },
+  } as Fagsak,
+  kanOverstyreAccess: false,
 };
 
 export const ApentAksjonspunktForInnhentingAvDokumentasjon = Template.bind({});
@@ -180,9 +199,48 @@ HarFåttDekningsgradAksjonspunkt.args = {
     fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
     bruker: {
       navn: 'Helga Utvikler',
+      kjønn: navBrukerKjonn.KVINNE,
     },
     annenPart: {
       navn: 'Espen Utvikler',
+      kjønn: navBrukerKjonn.MANN,
+    },
+  } as Fagsak,
+  søknad: {
+    oppgittFordeling: {
+      startDatoForPermisjon: '2019-01-01',
+      dekningsgrader: {
+        søker: {
+          søknadsdato: '2019-01-02',
+          dekningsgrad: 100,
+        },
+        annenPart: {
+          søknadsdato: '2019-01-01',
+          dekningsgrad: 80,
+        },
+      },
+    },
+  } as Soknad,
+};
+
+export const HarFåttDekningsgradAksjonspunktMedUkjentAndrePart = Template.bind({});
+HarFåttDekningsgradAksjonspunktMedUkjentAndrePart.args = {
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.AVKLAR_DEKNINGSGRAD,
+      status: aksjonspunktStatus.OPPRETTET,
+      kanLoses: true,
+    },
+  ],
+  fagsak: {
+    fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
+    bruker: {
+      navn: 'Helga Utvikler',
+      kjønn: navBrukerKjonn.KVINNE,
+    },
+    annenPart: {
+      navn: 'Espen Utvikler',
+      kjønn: navBrukerKjonn.UDEFINERT,
     },
   } as Fagsak,
   søknad: {

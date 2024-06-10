@@ -1,12 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
-import { Fagsak } from '@navikt/ft-types';
-import { FagsakYtelseType } from '@navikt/ft-kodeverk';
 
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { SakenFaktaIndex } from '@navikt/fp-fakta-saken';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import { Soknad } from '@navikt/fp-types';
+import { AksessRettigheter, Fagsak, Soknad } from '@navikt/fp-types';
 
 import FaktaPanelInitProps from '../../felles/typer/faktaPanelInitProps';
 import FaktaDefaultInitPanel from '../../felles/fakta/FaktaDefaultInitPanel';
@@ -30,6 +28,7 @@ type EndepunktPanelData = {
 
 interface OwnProps {
   fagsak: Fagsak;
+  rettigheter: AksessRettigheter;
 }
 
 /**
@@ -37,7 +36,7 @@ interface OwnProps {
  *
  * Dette faktapanelet skal alltid vises
  */
-const SakenFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = ({ fagsak, ...props }) => (
+const SakenFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = ({ fagsak, rettigheter, ...props }) => (
   <FaktaDefaultInitPanel<EndepunktPanelData>
     {...props}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
@@ -46,7 +45,9 @@ const SakenFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = (
     faktaPanelKode={FaktaPanelCode.SAKEN}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'SakenFaktaPanel.Title' })}
     skalPanelVisesIMeny={() => true}
-    renderPanel={data => <SakenFaktaIndex {...data} fagsak={fagsak} />}
+    renderPanel={data => (
+      <SakenFaktaIndex {...data} fagsak={fagsak} kanOverstyreAccess={rettigheter.kanOverstyreAccess.isEnabled} />
+    )}
   />
 );
 

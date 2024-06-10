@@ -26,9 +26,17 @@ interface OwnProps {
   søknad: Soknad;
   submitCallback: (data: OverstyringDekningsgradAp) => Promise<void>;
   readOnly: boolean;
+  kanOverstyreAccess: boolean;
 }
 
-const DekningradForm: FunctionComponent<OwnProps> = ({ aksjonspunkt, fagsak, søknad, submitCallback, readOnly }) => {
+const DekningradForm: FunctionComponent<OwnProps> = ({
+  aksjonspunkt,
+  fagsak,
+  søknad,
+  submitCallback,
+  readOnly,
+  kanOverstyreAccess,
+}) => {
   const intl = useIntl();
 
   const dekningsgrad =
@@ -73,11 +81,13 @@ const DekningradForm: FunctionComponent<OwnProps> = ({ aksjonspunkt, fagsak, sø
                 søknad.oppgittFordeling.dekningsgrader.søker.dekningsgrad,
             }}
           />
-          <PencilFillIcon
-            title={intl.formatMessage({ id: 'DekningsgradForm.EndreDekningsgrad' })}
-            className={readOnly ? styles.editIconReadonly : styles.editIcon}
-            onClick={readOnly ? undefined : () => toggleEdit(true)}
-          />
+          {kanOverstyreAccess && (
+            <PencilFillIcon
+              title={intl.formatMessage({ id: 'DekningsgradForm.EndreDekningsgrad' })}
+              className={readOnly ? styles.editIconReadonly : styles.editIcon}
+              onClick={readOnly ? undefined : () => toggleEdit(true)}
+            />
+          )}
         </HStack>
         {aksjonspunkt?.begrunnelse && (
           <HStack>
@@ -144,14 +154,14 @@ const DekningradForm: FunctionComponent<OwnProps> = ({ aksjonspunkt, fagsak, sø
               {
                 label: intl.formatMessage(
                   { id: 'DekningsgradForm.80' },
-                  { erSatt: søknad.oppgittFordeling.dekningsgrader.søker.dekningsgrad === 80 },
+                  { erSatt: søknad.oppgittFordeling.dekningsgrader.avklartDekningsgrad === 80 },
                 ),
                 value: '80',
               },
               {
                 label: intl.formatMessage(
                   { id: 'DekningsgradForm.100' },
-                  { erSatt: søknad.oppgittFordeling.dekningsgrader.søker.dekningsgrad === 100 },
+                  { erSatt: søknad.oppgittFordeling.dekningsgrader.avklartDekningsgrad === 100 },
                 ),
                 value: '100',
               },
@@ -168,7 +178,7 @@ const DekningradForm: FunctionComponent<OwnProps> = ({ aksjonspunkt, fagsak, sø
             <Button
               variant="primary"
               size="small"
-              disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
+              disabled={readOnly || !formMethods.formState.isDirty || formMethods.formState.isSubmitting}
               loading={formMethods.formState.isSubmitting}
             >
               <FormattedMessage id="DekningsgradForm.Bekreft" />

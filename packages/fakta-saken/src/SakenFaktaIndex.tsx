@@ -13,6 +13,7 @@ interface OwnProps {
   utlandDokStatus?: {
     dokStatus?: string;
   };
+  kanOverstyreAccess: boolean;
 }
 
 const intl = createIntl(messages);
@@ -29,6 +30,7 @@ const SakenFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = (
   alleMerknaderFraBeslutter,
   formData,
   setFormData,
+  kanOverstyreAccess,
 }) => (
   <RawIntlProvider value={intl}>
     <SakenFaktaPanel
@@ -43,6 +45,7 @@ const SakenFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = (
       alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
       formData={formData}
       setFormData={setFormData}
+      kanOverstyreAccess={kanOverstyreAccess}
     />
   </RawIntlProvider>
 );

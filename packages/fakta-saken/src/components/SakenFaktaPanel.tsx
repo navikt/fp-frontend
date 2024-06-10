@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt, Fagsak, Soknad } from '@navikt/fp-types';
+import { Fagsak, Aksjonspunkt, Soknad } from '@navikt/fp-types';
 import {
   AvklarDekningsgradAp,
   MerkOpptjeningUtlandAp,
@@ -16,7 +16,8 @@ import { FagsakYtelseType } from '@navikt/ft-kodeverk';
 import InnhentDokOpptjeningUtlandPanel from './innhentDok/InnhentDokOpptjeningUtlandPanel';
 import StartdatoForForeldrepengerperiodenForm from './startdatoForForeldrepenger/StartdatoForForeldrepengerperiodenForm';
 
-import DekningradPanel from './dekningsgrad/DekningradPanel';
+import DekningradApForm from './dekningsgrad/DekningradApForm';
+import DekningradForm from './dekningsgrad/DekningradForm';
 
 interface OwnProps {
   fagsak: Fagsak;
@@ -36,6 +37,7 @@ interface OwnProps {
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   formData?: any;
   setFormData: (data: any) => void;
+  kanOverstyreAccess: boolean;
 }
 
 const erMarkertUtenlandssak = (aksjonspunkter: Aksjonspunkt[]): boolean =>
@@ -53,10 +55,14 @@ const SakenFaktaPanel: FunctionComponent<OwnProps> = ({
   submittable,
   formData,
   setFormData,
+  kanOverstyreAccess,
 }) => {
   const automatiskMarkeringAvUtenlandssakAp = aksjonspunkter.find(
     ap => ap.definisjon === AksjonspunktCode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
   );
+  const automatiskAp = aksjonspunkter.find(ap => ap.definisjon === AksjonspunktCode.AVKLAR_DEKNINGSGRAD);
+  const overstyringsAp = aksjonspunkter.find(ap => ap.definisjon === AksjonspunktCode.OVERSTYR_DEKNINGSGRAD);
+
   return (
     <>
       {harApneAksjonspunkter && erMarkertUtenlandssak(aksjonspunkter) && (
@@ -76,6 +82,15 @@ const SakenFaktaPanel: FunctionComponent<OwnProps> = ({
         </>
       )}
       <VStack gap="10">
+        {soknad && automatiskAp && (
+          <DekningradApForm
+            søknad={soknad}
+            fagsak={fagsak}
+            aksjonspunkt={automatiskAp}
+            submitCallback={submitCallback}
+            readOnly={readOnly}
+          />
+        )}
         <HStack gap="10">
           {automatiskMarkeringAvUtenlandssakAp && (
             <InnhentDokOpptjeningUtlandPanel
@@ -102,17 +117,14 @@ const SakenFaktaPanel: FunctionComponent<OwnProps> = ({
             />
           )}
         </HStack>
-        {soknad && (
-          <DekningradPanel
-            fagsak={fagsak}
+        {soknad && !automatiskAp && fagsak.fagsakYtelseType === FagsakYtelseType.FORELDREPENGER && (
+          <DekningradForm
             søknad={soknad}
+            fagsak={fagsak}
+            aksjonspunkt={overstyringsAp}
             submitCallback={submitCallback}
-            aksjonspunkter={aksjonspunkter.filter(
-              ap =>
-                ap.definisjon === AksjonspunktCode.AVKLAR_DEKNINGSGRAD ||
-                ap.definisjon === AksjonspunktCode.OVERSTYR_DEKNINGSGRAD,
-            )}
             readOnly={readOnly}
+            kanOverstyreAccess={kanOverstyreAccess}
           />
         )}
       </VStack>
