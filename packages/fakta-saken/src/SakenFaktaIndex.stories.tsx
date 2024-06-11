@@ -267,6 +267,7 @@ DekningsgradAksjonspunktErSendtTIlbakeFraBeslutter.args = {
       definisjon: AksjonspunktCode.AVKLAR_DEKNINGSGRAD,
       status: aksjonspunktStatus.OPPRETTET,
       kanLoses: true,
+      begrunnelse: 'Dette er en begrunnelse',
     },
   ],
   fagsak: {
@@ -289,6 +290,7 @@ DekningsgradAksjonspunktErSendtTIlbakeFraBeslutter.args = {
     oppgittFordeling: {
       startDatoForPermisjon: '2019-01-01',
       dekningsgrader: {
+        avklartDekningsgrad: 100,
         søker: {
           søknadsdato: '2019-01-02',
           dekningsgrad: 100,
