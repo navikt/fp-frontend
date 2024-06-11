@@ -48,7 +48,7 @@ const EngangsstonadPaneler: FunctionComponent<OwnProps> = ({
   const faktaPaneler = useCallback(
     (props: FaktaPanelInitProps) => (
       <>
-        <SakenFaktaInitPanel {...props} fagsak={fagsak} />
+        <SakenFaktaInitPanel {...props} fagsak={fagsak} rettigheter={rettigheter} />
         <YtelserFaktaInitPanel {...props} />
         <VergeFaktaInitPanel {...props} />
         <OmsorgvilkaretFaktaInitPanel {...props} personoversikt={personoversikt} />
@@ -59,8 +59,7 @@ const EngangsstonadPaneler: FunctionComponent<OwnProps> = ({
     ),
     [personoversikt, fagsak],
   );
-  const emptyArbeidsgiverOpplysningerPerId = {
-  };
+  const emptyArbeidsgiverOpplysningerPerId = {};
 
   const prosessPaneler = useCallback(
     (props: ProsessPanelInitProps, ekstraProps: ProsessPanelExtraInitProps) => (
