@@ -1,7 +1,7 @@
 import { BodyShort, HStack, Label, UNSAFE_Combobox, VStack } from '@navikt/ds-react'; // eslint-disable-line camelcase
 import { Form, InputField } from '@navikt/ft-form-hooks';
 import { hasValidName, maxLength, minLength, required } from '@navikt/ft-form-validators';
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { XMarkIcon } from '@navikt/aksel-icons';
@@ -51,6 +51,7 @@ const GruppeSaksbehandlere: FunctionComponent<Props> = ({
     avdelingensSaksbehandlere,
     sorterteGrupperteSaksbehandlere,
   );
+
   const options = sorterteSaksbehandlereForAvdeling.map(sb => `${sb.navn} (${sb.brukerIdent})`);
 
   const lagreNavnDebounce = useDebounce<string>(
@@ -60,15 +61,15 @@ const GruppeSaksbehandlere: FunctionComponent<Props> = ({
   );
 
   const [filteredOptions, setFilteredOptions] = useState<string[]>([]);
+  const [filterValue, setFilterValue] = useState<string>('');
 
-  const filterOptions = 
-    (searchTerm: string | undefined) => {
-      if (searchTerm?.trim()) {
-        setFilteredOptions(options.filter(option => option.toLowerCase().includes(searchTerm.toLowerCase())))
-      } else {
-        setFilteredOptions(options);
-      }
-    };
+  const filterOptions = (searchTerm: string | undefined) => {
+    if (searchTerm?.trim()) {
+      setFilteredOptions(options.filter(option => option.toLowerCase().includes(searchTerm.toLowerCase())));
+    } else {
+      setFilteredOptions(options);
+    }
+  };
 
   const toggleSelected = (option: string, isSelected: boolean) => {
     const selectedOption = filteredOptions.find(o => o.toLowerCase().includes(option?.toLowerCase()));
@@ -84,7 +85,9 @@ const GruppeSaksbehandlere: FunctionComponent<Props> = ({
 
   const fjernFraGruppe = (ident: string, gruppeId: number) => {
     lagreValgtSaksbehandlar(ident, gruppeId, false);
-  }
+  };
+
+  useEffect(() => filterOptions(filterValue), [saksbehandlerGruppe, filterValue]);
 
   return (
     <Form formMethods={formMethods}>
@@ -104,7 +107,7 @@ const GruppeSaksbehandlere: FunctionComponent<Props> = ({
             options={options}
             filteredOptions={filteredOptions}
             selectedOptions={[]}
-            onChange={event => filterOptions(event?.target.value as string)}
+            onChange={event => setFilterValue(event?.target.value as string)}
             onToggleSelected={toggleSelected}
             className={styles.saksbehandlerCombo}
           />
