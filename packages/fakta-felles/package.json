@@ -32,6 +32,7 @@
     "@navikt/ds-css": "6.10.1",
     "@navikt/fp-storybook-utils": "workspace:*",
     "@navikt/fp-utils-test": "workspace:*",
+    "@testing-library/dom": "10.1.0",
     "@testing-library/react": "16.0.0",
     "@testing-library/user-event": "14.5.2",
     "cross-env": "7.0.3",

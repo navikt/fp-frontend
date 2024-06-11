@@ -30,6 +30,7 @@
     "@navikt/ds-css": "6.10.1",
     "@storybook/react": "8.1.6",
     "@storybook/react-vite": "8.1.6",
+    "@testing-library/dom": "10.1.0",
     "@testing-library/react": "16.0.0",
     "@testing-library/user-event": "14.5.2",
     "cross-env": "7.0.3",
