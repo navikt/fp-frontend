@@ -43,7 +43,7 @@ describe('<UttakProsessIndex>', () => {
     expect(await screen.findByText('Aktivitet')).toBeInTheDocument();
     expect(screen.getByText('BEDRIFT AS (910909088)')).toBeInTheDocument();
     expect(screen.getByText('Disponibelt')).toBeInTheDocument();
-    expect(screen.getByText('0')).toBeInTheDocument();
+    expect(screen.getAllByText('0')).toHaveLength(2);
 
     await userEvent.click(screen.getByText('Før fødsel'));
 
@@ -61,7 +61,7 @@ describe('<UttakProsessIndex>', () => {
 
     expect(screen.getByText('BEDRIFT AS (910909088)...-001')).toBeInTheDocument();
     expect(screen.getByText('3')).toBeInTheDocument();
-    expect(screen.getByText('0')).toBeInTheDocument();
+    expect(screen.getAllByText('0')).toHaveLength(2);
     expect(screen.getByText('0%')).toBeInTheDocument();
     expect(screen.getByText('100')).toBeInTheDocument();
   });
