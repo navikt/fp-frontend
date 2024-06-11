@@ -89,6 +89,7 @@ const SakenFaktaPanel: FunctionComponent<OwnProps> = ({
             aksjonspunkt={automatiskAp}
             submitCallback={submitCallback}
             readOnly={readOnly}
+            alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
           />
         )}
         <HStack gap="10">

@@ -259,3 +259,45 @@ HarFåttDekningsgradAksjonspunktMedUkjentAndrePart.args = {
     },
   } as Soknad,
 };
+
+export const DekningsgradAksjonspunktErSendtTIlbakeFraBeslutter = Template.bind({});
+DekningsgradAksjonspunktErSendtTIlbakeFraBeslutter.args = {
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.AVKLAR_DEKNINGSGRAD,
+      status: aksjonspunktStatus.OPPRETTET,
+      kanLoses: true,
+    },
+  ],
+  fagsak: {
+    fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
+    bruker: {
+      navn: 'Helga Utvikler',
+      kjønn: navBrukerKjonn.KVINNE,
+    },
+    annenPart: {
+      navn: 'Espen Utvikler',
+      kjønn: navBrukerKjonn.MANN,
+    },
+  } as Fagsak,
+  alleMerknaderFraBeslutter: {
+    [AksjonspunktCode.AVKLAR_DEKNINGSGRAD]: {
+      notAccepted: true,
+    },
+  },
+  søknad: {
+    oppgittFordeling: {
+      startDatoForPermisjon: '2019-01-01',
+      dekningsgrader: {
+        søker: {
+          søknadsdato: '2019-01-02',
+          dekningsgrad: 100,
+        },
+        annenPart: {
+          søknadsdato: '2019-01-01',
+          dekningsgrad: 80,
+        },
+      },
+    },
+  } as Soknad,
+};
