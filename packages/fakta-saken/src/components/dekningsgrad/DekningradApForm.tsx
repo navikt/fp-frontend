@@ -94,7 +94,9 @@ const DekningradApForm: FunctionComponent<OwnProps> = ({ søknad, fagsak, aksjon
                       <FormattedMessage
                         id="DekningradApForm.SøknadSendt"
                         values={{
-                          dato: dayjs(søknad.oppgittFordeling.dekningsgrader.søker.søknadsdato).format('D MMMM YYYY'),
+                          dato: dayjs(søknad.oppgittFordeling.dekningsgrader.annenPart.søknadsdato).format(
+                            'D MMMM YYYY',
+                          ),
                         }}
                       />
                     </BodyShort>
