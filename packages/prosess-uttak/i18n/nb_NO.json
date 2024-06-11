@@ -43,7 +43,7 @@
   "TimeLineInfo.Aktivitet": "Aktivitet",
   "TimeLineInfo.Disponibelt": "Disponibelt",
   "TimeLineInfo.Stonadinfo.DisponibleStonadsdager": "Disponible stønadsdager (u/d)",
-  "TimeLineInfo.Stonadinfo.Total": "Sum permisjon: <b>{ukerVerdi} </b> uker",
+  "TimeLineInfo.Stonadinfo.Total": "Sum permisjon: <b>{uker} </b> uker og <b>{dager} </b> dager",
   "TimeLineInfo.Stonadinfo.MaksDato": "Maks dato: <b>{dato} </b>",
   "TimeLineInfo.Stonadinfo.UkerDager": "<b>{ukerVerdi}/{dagerVerdi}</b>",
   "TimeLineTab.Stonadinfo.UkerDager": "<b>{ukerVerdi}/{dagerVerdi}</b>",
