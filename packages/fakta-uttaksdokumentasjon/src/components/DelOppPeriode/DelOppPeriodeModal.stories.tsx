@@ -7,7 +7,7 @@ import { UttakType, UttakÅrsak } from '@navikt/fp-types';
 
 import DelOppPeriodeModal from './DelOppPeriodeModal';
 
-import messages from '../../i18n/nb_NO.json';
+import messages from '../../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
 
