@@ -3,6 +3,7 @@
   "description": "Komponent som lar saksbehandler åpne opp en igjen en avsluttet behandling",
   "license": "MIT",
   "private": true,
+  "type": "module",
   "main": "index.ts",
   "types": "index.ts",
   "scripts": {

@@ -2,6 +2,7 @@
   "name": "@navikt/fp-journalforing",
   "license": "MIT",
   "private": true,
+  "type": "module",
   "description": "Komponent som lar saksbehandler journalføre (knytte til sak) journalposter som ikke har latt seg journalføres automatisk",
   "main": "index.ts",
   "types": "index.ts",

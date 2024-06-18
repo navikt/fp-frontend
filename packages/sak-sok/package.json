@@ -3,6 +3,7 @@
   "description": "Komponent som blir brukt for å søke opp fagsak (Blir kun brukt om LOS er nede)",
   "license": "MIT",
   "private": true,
+  "type": "module",
   "main": "index.ts",
   "types": "index.ts",
   "scripts": {

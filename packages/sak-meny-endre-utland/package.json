@@ -3,6 +3,7 @@
   "description": "Komponent som lar saksbehandler endre utlandsmarkering via en modal",
   "license": "MIT",
   "private": true,
+  "type": "module",
   "main": "index.ts",
   "types": "index.ts",
   "scripts": {

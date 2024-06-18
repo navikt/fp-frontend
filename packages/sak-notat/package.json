@@ -3,6 +3,7 @@
   "description": "Komponent som lar saksbehandlere skrive notater til andre saksbehandlere",
   "license": "MIT",
   "private": true,
+  "type": "module",
   "main": "index.ts",
   "types": "index.ts",
   "scripts": {

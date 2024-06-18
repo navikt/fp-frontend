@@ -2,6 +2,7 @@
   "name": "@navikt/fp-prosess-vilkar-soknadsfrist",
   "license": "MIT",
   "private": true,
+  "type": "module",
   "main": "index.ts",
   "types": "index.ts",
   "scripts": {

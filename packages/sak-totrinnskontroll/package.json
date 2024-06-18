@@ -3,6 +3,7 @@
   "description": "Komponent som lar beslutter godkjenne eller avslå vedtak gjort av en saksbehandler. Viser også beslutters valg til saksbehandler (readonly).",
   "license": "MIT",
   "private": true,
+  "type": "module",
   "main": "index.ts",
   "types": "index.ts",
   "scripts": {
