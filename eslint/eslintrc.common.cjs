@@ -1,7 +1,7 @@
 const OFF = 0;
 const ERROR = 2;
 
-const config = {
+module.exports = {
   env: {
     es6: true,
     browser: true,
@@ -92,4 +92,3 @@ const config = {
     },
   }],
 };
-module.exports = config;
