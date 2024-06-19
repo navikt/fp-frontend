@@ -3,6 +3,7 @@
   "license": "MIT",
   "description": "Prosesspanel for resultat av simulering mot økonomi, lar saksbehandler vurdere etterbetaling til søker og tilbakekreving fra søker.",
   "private": true,
+  "type": "module",
   "main": "index.ts",
   "types": "index.ts",
   "scripts": {

@@ -3,6 +3,7 @@
   "description": "Komponent som lar saksbehandler sende meldinger til søker",
   "license": "MIT",
   "private": true,
+  "type": "module",
   "main": "index.ts",
   "types": "index.ts",
   "scripts": {

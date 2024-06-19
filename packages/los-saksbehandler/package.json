@@ -2,6 +2,7 @@
   "name": "@navikt/fp-los-saksbehandler",
   "license": "MIT",
   "private": true,
+  "type": "module",
   "main": "index.ts",
   "types": "index.ts",
   "scripts": {

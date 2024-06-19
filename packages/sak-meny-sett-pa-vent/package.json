@@ -3,6 +3,7 @@
   "description": "Komponent som lar saksbehandler sette en behandling på vent",
   "license": "MIT",
   "private": true,
+  "type": "module",
   "main": "index.ts",
   "types": "index.ts",
   "scripts": {
