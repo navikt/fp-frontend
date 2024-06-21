@@ -58,6 +58,8 @@ const StonadsdagerTab: FunctionComponent<OwnProps> = ({ stønadskonto, visDagerF
 
   const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
 
+  const uker = Math.floor(stønadskonto.maxDager / 5);
+
   return (
     <div className={styles.tabs}>
       <li
@@ -76,7 +78,8 @@ const StonadsdagerTab: FunctionComponent<OwnProps> = ({ stønadskonto, visDagerF
               <FormattedMessage
                 id={kontonavnTekst}
                 values={{
-                  uker: Math.floor(stønadskonto.maxDager / 5),
+                  uker,
+                  dager: stønadskonto.maxDager - uker * 5,
                 }}
               />
             </Detail>
