@@ -29,10 +29,10 @@
     "remove-node-modules": "find . -name \"node_modules\" -exec rm -rf '{}' +",
     "storybook-clean-deploy-folder": "rm -rf ./.storybook-static-build",
     "storybook-build-all": "lerna run build-storybook --stream",
-    "storybook-create-deploy-folder": "node scripts/create-storybook-index.js",
+    "storybook-create-deploy-folder": "node scripts/create-storybook-index.cjs",
     "storybook-deploy-to-github": "gh-pages -d .storybook-static-build -t true",
     "deploy-storybook": "yarn storybook-clean-deploy-folder && yarn storybook-build-all && yarn storybook-create-deploy-folder && yarn storybook-deploy-to-github",
-    "sentry-release": "(SENTRY_RELEASE=$(git rev-parse --short HEAD); node ./scripts/sentry-release)",
+    "sentry-release": "(SENTRY_RELEASE=$(git rev-parse --short HEAD); node ./scripts/sentry-release.cjs)",
     "prepare": "husky install"
   },
   "workspaces": [
