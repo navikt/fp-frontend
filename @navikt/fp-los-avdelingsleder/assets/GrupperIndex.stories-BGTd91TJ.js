@@ -1,0 +1,9 @@
+import{R as n}from"./index-DVXBtNgz.js";import{g as p,m as i}from"./nb_NO-DypaWN8k.js";import{R as l}from"./RestApiMock-CMcnG-4N.js";import"./useRestApiRunner-r8nm61Jn.js";import{a as m,r as v}from"./fplosRestApi-DXPSIiTb.js";import{G as o}from"./GrupperIndex-CbNnyOUo.js";import"./index-Cbx7Fas8.js";import"./dayjs.min-Dkhc0ShP.js";import"./tslib.es6-CMwweBXX.js";import"./GrupperPanel-CmAgOQpX.js";import"./index.es-CZr2up0C.js";import"./useDebounce-3_Oo3BO5.js";import"./Table-vbMIJBOg.js";const u=p(i),c=[{brukerIdent:"ident1",navn:"Anders Utvikler",avdelingsnavn:["NAV Oslo"]},{brukerIdent:"ident12",navn:"Espen Utvikler",avdelingsnavn:["NAV Oslo"]},{brukerIdent:"ident4",navn:"Olga Utvikler",avdelingsnavn:["NAV Oslo"]},{brukerIdent:"ident3",navn:"Klara Utvikler",avdelingsnavn:["NAV Oslo"]}],r=[{avdelingsnavn:["NAV Oslo"],brukerIdent:"ident1",navn:"Anders Utvikler"}],g={saksbehandlere:r,saksbehandlerGrupper:[{gruppeId:1,gruppeNavn:"gruppenavn",saksbehandlere:r}]},S={title:"los/avdelingsleder/grupper/GrupperIndex",component:o,decorators:[u]},k=()=>{const d=[{key:m.HENT_GRUPPER.name,data:g}];return n.createElement(l,{data:d,requestApi:v},n.createElement(o,{valgtAvdelingEnhet:"test",avdelingensSaksbehandlere:c}))},e=k.bind({});var a,t,s;e.parameters={...e.parameters,docs:{...(a=e.parameters)==null?void 0:a.docs,source:{originalSource:`() => {
+  const data = [{
+    key: RestApiPathsKeys.HENT_GRUPPER.name,
+    data: saksbehandlereOgSaksbehandlerGrupper
+  }];
+  return <RestApiMock data={data} requestApi={requestApi}>
+      <GrupperIndex valgtAvdelingEnhet="test" avdelingensSaksbehandlere={avdelingensSaksbehandlere} />
+    </RestApiMock>;
+}`,...(s=(t=e.parameters)==null?void 0:t.docs)==null?void 0:s.source}}};const V=["Default"];export{e as Default,V as __namedExportsOrder,S as default};

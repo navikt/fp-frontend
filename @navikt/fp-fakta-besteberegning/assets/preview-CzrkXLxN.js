@@ -1,0 +1,1 @@
+import{R as e}from"./index-DVXBtNgz.js";import{d as r}from"./nb-irRu9i30.js";r.locale("nb");const l=[t=>e.createElement("div",{style:{margin:"40px"}},e.createElement(t,null))];export{l as decorators};
