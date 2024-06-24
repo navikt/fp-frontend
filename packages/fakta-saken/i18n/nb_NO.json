@@ -1,5 +1,6 @@
 {
   "SakenFaktaPanel.OpptjeningUtland": "Se søknad for informasjon om oppgitt rettighet fra EØS. Innhent dokumentasjon fra utenlandsk trygdemyndighet ved behov",
+  "SakenFaktaPanel.AvklarDekningsgrad": "Mor og far har søkt med ulik dekningsgrad. Kontroller hvilken som stemmer.",
 
   "UtlandPanel.lagre": "Lagre",
   "UtlandPanel.avbryt": "Avbryt",
@@ -15,6 +16,25 @@
   "StartdatoForForeldrepengerperiodenForm.Vurdering": "Vurdering",
   "StartdatoForForeldrepengerperiodenForm.Startdato": "Startdato som skal benyttes (fra søknad eller fødsel)",
   "StartdatoForForeldrepengerperiodenForm.Oppdater": "Oppdater",
-  "StartdatoForForeldrepengerperiodenForm.StartdatoSomBenyttes": "Startdato som benyttes",
-  "StartdatoForForeldrepengerperiodenForm.EndreStartdato": "Endre startdato for foreldrepenger"
+  "StartdatoForForeldrepengerperiodenForm.EndreStartdato": "Endre startdato for foreldrepenger",
+
+  "DekningsgradForm.Dekningsgrad": "Dekningsgrad",
+  "DekningsgradForm.DekningsgradForeldrepenger": "{dekningsgrad}% foreldrepenger",
+  "DekningsgradForm.Begrunnelse": "Begrunnelse",
+  "DekningsgradForm.Bekreft": "Bekreft og fortsett",
+  "DekningsgradForm.80": "80 {erSatt, select, true {(Nåværende)} other {}}",
+  "DekningsgradForm.100": "100 {erSatt, select, true {(Nåværende)} other {}}",
+  "DekningsgradForm.EndreDekningsgrad": "Endre dekningsgrad",
+  "DekningsgradForm.GjelderFor": "Gjelder for {søker} og {annenPart}",
+  "DekningsgradForm.ErEndret": "Er endret",
+  "DekningsgradForm.LikEksisterende": "Du må endre dekningsgrad",
+  "DekningsgradForm.BeskrivelseAvEndring": "Beskrivelse av endring",
+
+  "DekningradApForm.HvilkenDekningsgrad": "Hvilken dekningsgrad skal gjelde for begge?",
+  "DekningradApForm.HarValgt": "Har valgt {dekningsgrad}% foreldrepenger",
+  "DekningradApForm.SøknadSendt": "Søknad sendt {dato}",
+  "DekningradApForm.80": "80",
+  "DekningradApForm.100": "100",
+  "DekningradApForm.Begrunnelse": "Begrunnelse",
+  "DekningradApForm.Bekreft": "Bekreft og fortsett"
 }

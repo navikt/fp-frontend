@@ -33,6 +33,8 @@ import KontrollerBesteberegningAP from './fakta/KontrollerBesteberegningAP';
 import VurderDokumentasjonAp from './fakta/VurderDokumentasjonAp';
 import VurderArbeidsforholdInntektsmeldingAp from './fakta/VurderArbeidsforholdInntektsmeldingAp';
 import VurderArbeidsforholdPermisjonAp from './fakta/VurderArbeidsforholdPermisjonAp';
+import OverstyringDekningsgradAp from './fakta/OverstyringDekningsgradAp';
+import AvklarDekningsgradAp from './fakta/AvklarDekningsgradAp';
 
 export type FaktaAksjonspunkt =
   | AvklarVergeAp
@@ -65,6 +67,8 @@ export type FaktaAksjonspunkt =
   | AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp
   | VurderArbeidsforholdInntektsmeldingAp
   | VurderDokumentasjonAp
-  | VurderArbeidsforholdPermisjonAp;
+  | VurderArbeidsforholdPermisjonAp
+  | OverstyringDekningsgradAp
+  | AvklarDekningsgradAp;
 
 export default FaktaAksjonspunkt;

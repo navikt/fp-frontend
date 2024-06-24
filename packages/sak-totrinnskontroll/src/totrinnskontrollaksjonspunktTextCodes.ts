@@ -44,6 +44,8 @@ const totrinnskontrollaksjonspunktTextCodes = {
   [AksjonspunktCode.AVKLAR_OPPHOLDSRETT]: 'ToTrinnsForm.Medlemskap.AvklarOppholdsrett',
   [AksjonspunktCode.OVERSTYR_MEDLEMSKAPSVILKAR]: 'ToTrinnsForm.Medlemskap.VilkarOverstyrt',
   [AksjonspunktCode.OVERSTYR_AVKLAR_STARTDATO]: 'ToTrinnsForm.Medlemskap.OverstyrtStartdato',
+  [AksjonspunktCode.AVKLAR_DEKNINGSGRAD]: 'ToTrinnsForm.Medlemskap.AvklartDekningsgrad',
+  [AksjonspunktCode.OVERSTYR_DEKNINGSGRAD]: 'ToTrinnsForm.Medlemskap.OverstyrtDekningsgrad',
 
   [AksjonspunktCode.FORESLA_VEDTAK]: 'ToTrinnsForm.Vedtak.Fritekstbrev',
   [AksjonspunktCode.FORESLA_VEDTAK_MANUELT]: 'ToTrinnsForm.Vedtak.Fritekstbrev',
