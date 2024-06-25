@@ -233,6 +233,9 @@ describe('<VedtakProsessIndex>', () => {
     expect(
       screen.getByText('Beregningsgrunnlaget er endret til ugunst for søker. Skal det sendes varsel?'),
     ).toBeInTheDocument();
+    expect(
+      screen.getByText('Det er en åpen klagesak, og det er mottatt ny inntektsmelding. Vurder beregningsgrunnlaget på nytt og behandle revurdering og klage under ett.'),
+    ).toBeInTheDocument();
 
     const fritekstInput = utils.getByLabelText(
       'Fritekst i brev til søker som handler om fastsettelse av beregningsgrunnlaget',
