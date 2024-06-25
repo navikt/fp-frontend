@@ -14,6 +14,9 @@ const findHelpTexts = (intl: IntlShape, aksjonspunkter: Aksjonspunkt[]): string[
   if (aksjonspunkter && aksjonspunkter.some(a => a.definisjon === AksjonspunktCode.VURDERE_DOKUMENT)) {
     helpTexts.push(intl.formatMessage({ id: 'VedtakForm.VurderDokument' }));
   }
+  if (aksjonspunkter && aksjonspunkter.some(a => a.definisjon === AksjonspunktCode.VURDERE_INNTEKTSMELDING_KLAGE)) {
+    helpTexts.push(intl.formatMessage({ id: 'VedtakForm.VurderInntektsmeldingKlage' }));
+  }
   if (
     aksjonspunkter &&
     aksjonspunkter.some(a => a.definisjon === AksjonspunktCode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST)

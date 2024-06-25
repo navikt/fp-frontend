@@ -58,6 +58,7 @@ export type { default as KontrollerRevurderingsBehandlingAp } from './src/proses
 export type { default as KontrollAvManueltOpprettetRevurderingsbehandlingAp } from './src/prosess/KontrollAvManueltOpprettetRevurderingsbehandlingAp';
 export type { default as VurdereAnnenYtelseForVedtakAp } from './src/prosess/VurdereAnnenYtelseForVedtakAp';
 export type { default as VurdereDokumentForVedtakAp } from './src/prosess/VurdereDokumentForVedtakAp';
+export type { default as VurdereInntektsmeldingKlageForVedtakAp } from './src/prosess/VurdereInntektsmeldingKlageForVedtakAp';
 export type { default as OverstyringMedlemskapsvilkaretLopendeAp } from './src/prosess/OverstyringMedlemskapsvilkaretLopendeAp';
 export type { default as VarselRevurderingAp } from './src/prosess/VarselRevurderingAp';
 export type { default as UttakAp } from './src/prosess/UttakAp';

@@ -23,6 +23,8 @@ import OverstyringAp from './prosess/OverstyringAp';
 import VurdereAnnenYtelseForVedtakAp from './prosess/VurdereAnnenYtelseForVedtakAp';
 import OverstyringMedlemskapsvilkaretLopendeAp from './prosess/OverstyringMedlemskapsvilkaretLopendeAp';
 import VurdereDokumentForVedtakAp from './prosess/VurdereDokumentForVedtakAp';
+import VurdereInntektsmeldingKlageForVedtakAp from './prosess/VurdereInntektsmeldingKlageForVedtakAp';
+
 import KontrollerRevurderingsBehandlingAp from './prosess/KontrollerRevurderingsBehandlingAp';
 import KontrollAvManueltOpprettetRevurderingsbehandlingAp from './prosess/KontrollAvManueltOpprettetRevurderingsbehandlingAp';
 import VarselRevurderingAp from './prosess/VarselRevurderingAp';
@@ -57,6 +59,7 @@ export type ProsessAksjonspunkt =
   | VurdereAnnenYtelseForVedtakAp
   | UttakAp
   | BeregningAksjonspunktSubmitType
-  | VurdereDokumentForVedtakAp;
+  | VurdereDokumentForVedtakAp
+  | VurdereInntektsmeldingKlageForVedtakAp;
 
 export default ProsessAksjonspunkt;

@@ -34,6 +34,7 @@ import {
   KontrollerRevurderingsBehandlingAp,
   VurdereAnnenYtelseForVedtakAp,
   VurdereDokumentForVedtakAp,
+  VurdereInntektsmeldingKlageForVedtakAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 
@@ -50,6 +51,7 @@ type RevurderingVedtakAksjonspunkter =
   | BekreftVedtakUtenTotrinnskontrollAp
   | VurdereAnnenYtelseForVedtakAp
   | VurdereDokumentForVedtakAp
+  | VurdereInntektsmeldingKlageForVedtakAp
   | KontrollerRevurderingsBehandlingAp
   | KontrollAvManueltOpprettetRevurderingsbehandlingAp;
 
@@ -222,6 +224,7 @@ const transformValues = (values: FormValues): RevurderingVedtakAksjonspunkter[] 
       AksjonspunktCode.VEDTAK_UTEN_TOTRINNSKONTROLL,
       AksjonspunktCode.VURDERE_ANNEN_YTELSE,
       AksjonspunktCode.VURDERE_DOKUMENT,
+      AksjonspunktCode.VURDERE_INNTEKTSMELDING_KLAGE,
       AksjonspunktCode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST,
       AksjonspunktCode.KONTROLL_AV_MAUNELT_OPPRETTET_REVURDERINGSBEHANDLING,
     ),

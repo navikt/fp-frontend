@@ -272,6 +272,12 @@ TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil.args = {
       kanLoses: false,
     },
     {
+      definisjon: AksjonspunktCode.VURDERE_INNTEKTSMELDING_KLAGE,
+      status: aksjonspunktStatus.OPPRETTET,
+      begrunnelse: undefined,
+      kanLoses: false,
+    },
+    {
       definisjon: AksjonspunktCode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST,
       status: aksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
