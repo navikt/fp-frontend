@@ -1,0 +1,11 @@
+.col {
+  width: 50%;
+}
+
+.hr {
+  border-bottom: 0;
+  border-top: 1px solid #949899;
+  margin: 5px 0;
+  text-align: left;
+  width: 100%;
+}

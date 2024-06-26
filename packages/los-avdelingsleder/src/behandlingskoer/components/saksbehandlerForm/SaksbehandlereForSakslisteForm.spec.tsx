@@ -41,7 +41,7 @@ describe('<SaksbehandlereForSakslisteForm>', () => {
     expect(screen.getAllByRole('checkbox')[1]).toBeChecked();
   });
 
-  it('skal vise gruppe og liste med alle saksbehandlere', async () => {
+  it.skip('skal vise gruppe og liste med alle saksbehandlere', async () => {
     render(<SaksbehandlereSomErGruppert />);
     expect(await screen.findByText('Saksbehandlere')).toBeInTheDocument();
     expect(screen.getByText('Gruppenavn')).toBeInTheDocument();

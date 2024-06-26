@@ -3,8 +3,8 @@
   "UttakDokumentasjonFaktaForm.Overskrift": "Fakta om uttaksdokumentasjon",
   "UttakDokumentasjonFaktaForm.Bekreft": "Bekreft og fortsett",
   "UttakDokumentasjonFaktaForm.Begrunnelse": "Begrunnelse",
-
   "UttakDokumentasjonFaktaTable.Periode": "Periode",
+  "UttakDokumentasjonFaktaTable.Lengde": "Lengde",
   "UttakDokumentasjonFaktaTable.Avklaring": "Avklaring",
   "UttakDokumentasjonFaktaTable.AvklaringBehov": "Avklaringsbehov",
   "UttakDokumentasjonFaktaTable.Arsak": "Årsak",
@@ -33,7 +33,6 @@
   "UttakDokumentasjonFaktaTable.AktivitetskravInnlagt": "Aktivitetskrav - Innlagt",
   "UttakDokumentasjonFaktaTable.AktivitetskravArbeidUtdanning": "Aktivitetskrav - Arbeid og utdanning",
   "UttakDokumentasjonFaktaTable.AktivitetskravIkkeOppgitt": "Aktivitetskrav - Aktivitet ikke oppgitt",
-
   "UttakDokumentasjonFaktaDetailForm.Header": "Detaljer",
   "UttakDokumentasjonFaktaDetailForm.Oppdater": "Oppdater",
   "UttakDokumentasjonFaktaDetailForm.Avbryt": "Avbryt",
@@ -49,7 +48,6 @@
   "UttakDokumentasjonFaktaDetailForm.IkkeDokumentert": "Mangler dokumentasjon",
   "UttakDokumentasjonFaktaDetailForm.RedigerPeriode": "Rediger dato",
   "UttakDokumentasjonFaktaDetailForm.PeriodeMedIndex": "Periode {index}",
-
   "DelOppPeriodeModal.Periode": "Periode",
   "DelOppPeriodeModal.RedigerPeriode": "Vil du redigere periode?",
   "DelOppPeriodeModal.Nullstilles": "Etterfølgende perioder blir nullstilt",

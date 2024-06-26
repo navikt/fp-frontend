@@ -46,9 +46,9 @@ const lagTabellRadKey = (
   return `${arbKey} ${arbeidsforhold.saldo}`;
 };
 
-const finnTilgjengeligeUker = (stønadskontoer?: Stonadskonto[]): number => {
+const finnTilgjengeligeUker = (stønadskontoer?: Stonadskonto[]): { uker: number; dager: number } => {
   if (!stønadskontoer) {
-    return 0;
+    return { uker: 0, dager: 0 };
   }
 
   const sumDager = stønadskontoer.reduce((sum, konto) => {
@@ -63,7 +63,12 @@ const finnTilgjengeligeUker = (stønadskontoer?: Stonadskonto[]): number => {
     }
     return sum;
   }, 0);
-  return Math.floor(sumDager / 5);
+
+  const uker = Math.floor(sumDager / 5);
+  return {
+    uker,
+    dager: sumDager - uker * 5,
+  };
 };
 
 const utledNavn = (
@@ -130,7 +135,10 @@ const DisponibleStonadskontoerPanel: FunctionComponent<OwnProps> = ({
           <FormattedMessage id="TimeLineInfo.Stonadinfo.DisponibleStonadsdager" />
         </Label>
         <BodyShort size="small">
-          <FormattedMessage id="TimeLineInfo.Stonadinfo.Total" values={{ ukerVerdi: tilgjengeligeUker, b: bTag }} />
+          <FormattedMessage
+            id="TimeLineInfo.Stonadinfo.Total"
+            values={{ uker: tilgjengeligeUker.uker, dager: tilgjengeligeUker.dager, b: bTag }}
+          />
         </BodyShort>
       </HStack>
       <div className={styles.tabs}>

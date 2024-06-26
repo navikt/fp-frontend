@@ -2,6 +2,7 @@
   "name": "@navikt/fp-types-avklar-aksjonspunkter",
   "license": "MIT",
   "private": true,
+  "type": "module",
   "main": "index.ts",
   "types": "index.ts",
   "scripts": {
@@ -12,12 +13,12 @@
   "dependencies": {
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-types": "workspace:*",
-    "@navikt/ft-fakta-beregning": "5.2.7",
-    "@navikt/ft-fakta-fordel-beregningsgrunnlag": "7.5.9",
-    "@navikt/ft-prosess-beregningsgrunnlag": "6.5.11"
+    "@navikt/ft-fakta-beregning": "5.2.11",
+    "@navikt/ft-fakta-fordel-beregningsgrunnlag": "7.5.13",
+    "@navikt/ft-prosess-beregningsgrunnlag": "6.5.15"
   },
   "devDependencies": {
-    "typescript": "5.4.2",
-    "vite": "5.1.6"
+    "typescript": "5.4.5",
+    "vite": "5.3.1"
   }
 }

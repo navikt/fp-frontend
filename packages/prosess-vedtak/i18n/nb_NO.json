@@ -25,6 +25,7 @@
   "VedtakForm.Fritekst.Beregningsgrunnlag": "Fritekst i brev til søker som handler om fastsettelse av beregningsgrunnlaget",
   "VedtakForm.VurderAnnenYtelse": "Påvirker den åpne Gosys-oppgaven «Vurder konsekvens for ytelse» behandlingen?",
   "VedtakForm.VurderDokument": "Påvirker den åpne Gosys-oppgaven «Vurder dokument» behandlingen?",
+  "VedtakForm.VurderInntektsmeldingKlage": "Det er en åpen klagesak, og det er mottatt ny inntektsmelding. Vurder beregningsgrunnlaget på nytt og behandle revurdering og klage under ett.",
   "VedtakForm.Resultat.IngenEndring": "Ingen endring",
   "VedtakForm.Resultat.EndretTilAvslag": "Endret til Avslag",
   "VedtakForm.Resultat.EndretTilInnvilget": "Endret til Innvilget",

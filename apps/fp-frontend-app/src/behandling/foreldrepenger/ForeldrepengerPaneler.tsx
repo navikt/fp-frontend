@@ -64,7 +64,7 @@ const ForeldrepengerPaneler: FunctionComponent<OwnProps> = ({
   const faktaPaneler = useCallback(
     (props: FaktaPanelInitProps) => (
       <>
-        <SakenFaktaInitPanel {...props} fagsak={fagsak} />
+        <SakenFaktaInitPanel {...props} fagsak={fagsak} rettigheter={rettigheter} />
         <ArbeidOgInntektFaktaInitPanel
           {...props}
           saksnummer={fagsak.saksnummer}
@@ -135,7 +135,12 @@ const ForeldrepengerPaneler: FunctionComponent<OwnProps> = ({
           arbeidsgiverOpplysningerPerId={arbeidsgivere}
           personoversikt={personoversikt}
         />
-        <SimuleringProsessStegInitPanel {...props} fagsak={fagsak} menyData={ekstraProps.allMenyData} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+        <SimuleringProsessStegInitPanel
+          {...props}
+          fagsak={fagsak}
+          menyData={ekstraProps.allMenyData}
+          arbeidsgiverOpplysningerPerId={arbeidsgivere}
+        />
         <VedtakFpProsessStegInitPanel
           {...props}
           fagsak={fagsak}

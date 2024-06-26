@@ -24,7 +24,7 @@ const detaljertJournalpostMal = (medBruker: boolean, tilstand: JournalpostTilsta
     eksisterendeSaksnummer: erEndeligJournalført(tilstand) ? '125416597' : undefined,
     tilstand,
     journalførendeEnhet: erEndeligJournalført(tilstand) ? '4867' : undefined,
-    kanal: JournalKanal.ALLTIN,
+    kanal: JournalKanal.ALTINN,
     bruker: medBruker
       ? {
           navn: 'Søker Søkersen',

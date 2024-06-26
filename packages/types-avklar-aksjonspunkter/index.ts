@@ -18,6 +18,8 @@ export type { default as AvklarAnnenforelderHarRettAp } from './src/fakta/Avklar
 export type { default as BekreftUttaksperioderAp } from './src/fakta/BekreftUttaksperioderAp';
 export type { default as VurderArbeidsforholdPermisjonAp } from './src/fakta/VurderArbeidsforholdPermisjonAp';
 export type { default as OverstyringAvklarStartdatoForPeriodenAp } from './src/fakta/OverstyringAvklarStartdatoForPeriodenAp';
+export type { default as OverstyringDekningsgradAp } from './src/fakta/OverstyringDekningsgradAp';
+export type { default as AvklarDekningsgradAp } from './src/fakta/AvklarDekningsgradAp';
 export type { default as AvklarFaktaForForeldreansvarAksjonspunktAp } from './src/fakta/AvklarFaktaForForeldreansvarAksjonspunktAp';
 export type { default as AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp } from './src/fakta/AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp';
 export type {
@@ -56,6 +58,7 @@ export type { default as KontrollerRevurderingsBehandlingAp } from './src/proses
 export type { default as KontrollAvManueltOpprettetRevurderingsbehandlingAp } from './src/prosess/KontrollAvManueltOpprettetRevurderingsbehandlingAp';
 export type { default as VurdereAnnenYtelseForVedtakAp } from './src/prosess/VurdereAnnenYtelseForVedtakAp';
 export type { default as VurdereDokumentForVedtakAp } from './src/prosess/VurdereDokumentForVedtakAp';
+export type { default as VurdereInntektsmeldingKlageForVedtakAp } from './src/prosess/VurdereInntektsmeldingKlageForVedtakAp';
 export type { default as OverstyringMedlemskapsvilkaretLopendeAp } from './src/prosess/OverstyringMedlemskapsvilkaretLopendeAp';
 export type { default as VarselRevurderingAp } from './src/prosess/VarselRevurderingAp';
 export type { default as UttakAp } from './src/prosess/UttakAp';
