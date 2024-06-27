@@ -36,6 +36,11 @@ export type Saksnotat = {
   notat: string;
 };
 
+export type Saksmarkering = {
+  fagsakMarkering: string;
+  kortNavn?: string;
+};
+
 type Fagsak = Readonly<{
   saksnummer: string;
   fagsakYtelseType: string;
@@ -48,6 +53,7 @@ type Fagsak = Readonly<{
   behandlingTypeKanOpprettes: BehandlingOppretting[];
   bruker: FagsakPerson;
   fagsakMarkering?: string;
+  fagsakMarkeringer: Saksmarkering[];
   annenPart?: FagsakPerson;
   familiehendelse?: FagsakHendelse;
   annenpartBehandling: AnnenPartBehandling;

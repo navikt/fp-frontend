@@ -38,22 +38,7 @@ const finnFagsakMarkeringTekst = (fagsak: Fagsak): string[] => {
   if (!fagsak.fagsakMarkering || fagsak.fagsakMarkering === FagsakMarkeringKode.NASJONAL) {
     return [];
   }
-  switch (fagsak.fagsakMarkering) {
-    case FagsakMarkeringKode.EØS_BOSATT_NORGE:
-      return ['EØS'];
-    case FagsakMarkeringKode.BOSATT_UTLAND:
-      return ['Utland'];
-    case FagsakMarkeringKode.SAMMENSATT_KONTROLL:
-      return ['Kontroll'];
-    case FagsakMarkeringKode.DØD_DØDFØDSEL:
-      return ['Død'];
-    case FagsakMarkeringKode.SELVSTENDIG_NÆRING:
-      return ['Næring'];
-    case FagsakMarkeringKode.PRAKSIS_UTSETTELSE:
-      return ['Utsettelse'];
-    default:
-      return [];
-  }
+  return fagsak.fagsakMarkeringer.map(m => m.kortNavn).filter(navn => !!navn);
 };
 
 interface OwnProps {
