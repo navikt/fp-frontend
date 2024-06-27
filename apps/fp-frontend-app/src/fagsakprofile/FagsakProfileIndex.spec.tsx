@@ -38,7 +38,7 @@ describe('<FagsakProfileIndex>', () => {
       kjønn: 'M',
       fødselsdato: '2000-01-01',
     },
-    fagsakEgenskaper: [],
+    fagsakMarkeringer: undefined,
   } as Fagsak;
 
   const navAnsatt = {

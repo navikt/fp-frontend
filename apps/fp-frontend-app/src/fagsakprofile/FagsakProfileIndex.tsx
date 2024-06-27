@@ -35,10 +35,10 @@ const findPathToBehandling = (saksnummer: string, location: Location, alleBehand
 };
 
 const finnFagsakMarkeringTekst = (fagsak: Fagsak): string[] => {
-  if (!fagsak.fagsakMarkeringer || fagsak.fagsakMarkering === FagsakMarkeringKode.NASJONAL) {
+  if (!fagsak.fagsakMarkeringer) {
     return [];
   }
-  return fagsak.fagsakMarkeringer.map(m => m.kortNavn).filter(navn => !!navn);
+  return fagsak.fagsakMarkeringer.map(m => m.kortNavn).filter(navn => !!navn) as string[];
 };
 
 interface OwnProps {
