@@ -7,7 +7,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { BehandlingStatus, BehandlingType, FagsakYtelseType, FagsakStatus } from '@navikt/ft-kodeverk';
 
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import { Fagsak, Saksmarkering, BehandlingAppKontekst, BehandlingOppretting } from '@navikt/fp-types';
+import { Fagsak, BehandlingAppKontekst, BehandlingOppretting } from '@navikt/fp-types';
 import { RestApiMock } from '@navikt/fp-utils-test';
 
 import { requestFagsakApi, FagsakApiKeys } from '../data/fagsakContextApi';
@@ -38,7 +38,7 @@ describe('<FagsakProfileIndex>', () => {
       kjønn: 'M',
       fødselsdato: '2000-01-01',
     },
-    fagsakEgenskaper: [] as Saksmarkering[],
+    fagsakEgenskaper: [],
   } as Fagsak;
 
   const navAnsatt = {
