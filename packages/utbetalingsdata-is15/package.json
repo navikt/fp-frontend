@@ -18,17 +18,17 @@
     "storybook": "storybook dev --quiet -p 7019"
   },
   "dependencies": {
-    "@navikt/ds-react": "6.11.0",
+    "@navikt/ds-react": "6.12.0",
     "@navikt/fp-rest-api-hooks": "workspace:*",
     "@navikt/fp-types": "workspace:*",
-    "@navikt/ft-ui-komponenter": "2.3.11",
-    "@navikt/ft-utils": "2.3.10",
+    "@navikt/ft-ui-komponenter": "2.3.14",
+    "@navikt/ft-utils": "2.3.13",
     "react": "18.3.1",
     "react-intl": "6.6.8"
   },
   "devDependencies": {
     "@formatjs/cli-lib": "6.4.2",
-    "@navikt/ds-css": "6.11.0",
+    "@navikt/ds-css": "6.12.0",
     "@storybook/react": "8.1.10",
     "@storybook/react-vite": "8.1.10",
     "@testing-library/react": "14.3.1",
