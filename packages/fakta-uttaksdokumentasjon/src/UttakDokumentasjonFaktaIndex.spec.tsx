@@ -19,7 +19,7 @@ describe('<UttakDokumentasjonFaktaIndex>', () => {
 
     expect(await screen.findByText('Fakta om uttaksdokumentasjon')).toBeInTheDocument();
     expect(screen.getByText('Kontroller dokumentasjon')).toBeInTheDocument();
-    expect(screen.getByText('01.11.2022 - 07.11.2022')).toBeInTheDocument();
+    expect(screen.getByText('01.11.2022 – 07.11.2022')).toBeInTheDocument();
     expect(screen.getByText('Oppdater').closest('button')).toBeDisabled();
     expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 
@@ -28,14 +28,14 @@ describe('<UttakDokumentasjonFaktaIndex>', () => {
 
     await waitFor(() => expect(screen.getByText('Oppdater').closest('button')).toBeDisabled());
 
-    expect(screen.getByText('08.11.2022 - 13.11.2022')).toBeInTheDocument();
+    expect(screen.getByText('08.11.2022 – 13.11.2022')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Ikke godkjent'));
     await userEvent.click(screen.getByText('Oppdater'));
 
     await waitFor(() => expect(screen.getByText('Oppdater').closest('button')).toBeDisabled());
 
-    expect(screen.getByText('15.11.2022 - 20.11.2022')).toBeInTheDocument();
+    expect(screen.getByText('15.11.2022 – 20.11.2022')).toBeInTheDocument();
     await userEvent.click(screen.getAllByText('Godkjent')[1]);
     await userEvent.click(screen.getByText('Oppdater'));
 
@@ -43,7 +43,7 @@ describe('<UttakDokumentasjonFaktaIndex>', () => {
 
     expect(await screen.findByText('Mangler dokumentasjon')).toBeInTheDocument();
 
-    expect(screen.getByText('08.12.2022 - 13.12.2022')).toBeInTheDocument();
+    expect(screen.getByText('08.12.2022 – 13.12.2022')).toBeInTheDocument();
     await userEvent.click(screen.getByText('Mangler dokumentasjon'));
     await userEvent.click(screen.getByText('Oppdater'));
 

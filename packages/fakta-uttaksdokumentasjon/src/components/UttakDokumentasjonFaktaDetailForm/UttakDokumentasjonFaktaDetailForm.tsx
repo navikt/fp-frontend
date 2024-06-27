@@ -2,186 +2,148 @@ import React, { FunctionComponent, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useFieldArray, useForm } from 'react-hook-form';
 import dayjs from 'dayjs';
-import { BodyShort, Button, HStack, Label, VStack } from '@navikt/ds-react';
+import { BodyShort, Box, Button, HStack, Label, VStack } from '@navikt/ds-react';
 import { required } from '@navikt/ft-form-validators';
-import { PencilIcon } from '@navikt/aksel-icons';
-import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { calcDaysAndWeeks, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
-import { AvsnittSkiller, DateLabel } from '@navikt/ft-ui-komponenter';
 import { DokumentasjonVurderingBehov } from '@navikt/fp-types';
-import { DelOppPeriodeModal, DelOppPeriodeButton } from '../DelOppPeriode';
-import styles from './uttakDokumentasjonFaktaDetailForm.module.css';
+import { DelOppPeriodeButton, DelOppPeriodeModal } from '../DelOppPeriode';
+import SlåSammenPeriodeButton from '../SlåSammenPeriodeButton';
+import { getFormatertPeriode, periodeErMerEnnEnDag } from '../../utils/periodeUtils';
 import lagVurderingsAlternativer from './vurderingsValg';
+import Card from '../Card';
 
 interface OwnProps {
-  valgtDokBehov: DokumentasjonVurderingBehov;
+  behov: DokumentasjonVurderingBehov;
   readOnly: boolean;
-  oppdaterDokBehov: (dokBehov: { perioder: DokumentasjonVurderingBehov[] }) => void;
-  avbrytEditeringAvAktivitetskrav: () => void;
+  submit: (dokBehov: { perioder: DokumentasjonVurderingBehov[] }) => void;
+  cancel: () => void;
 }
 
 type FormValues = {
   perioder: DokumentasjonVurderingBehov[];
 };
 
-const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({
-  valgtDokBehov,
-  readOnly,
-  avbrytEditeringAvAktivitetskrav,
-  oppdaterDokBehov,
-}) => {
+const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({ behov, readOnly, cancel, submit }) => {
   const intl = useIntl();
 
-  const [sistOppdeltPeriodeIndex, setSistOppdeltPeriodeIndex] = useState<number>();
   const [valgtPeriodeIndex, settValgtPeriodeIndex] = useState<number | undefined>();
 
   const formMethods = useForm<FormValues>({
     defaultValues: {
-      perioder: [valgtDokBehov],
+      perioder: [behov],
     },
   });
 
-  const { fields, append, update, remove } = useFieldArray({
+  const { fields, update, remove, insert } = useFieldArray({
     control: formMethods.control,
     name: 'perioder',
   });
 
-  const perioder = formMethods.watch('perioder');
+  const lagNyPeriode = (currentIndex: number, dato: string) => {
+    const currentPeriode = fields[currentIndex];
 
-  const lagNyPeriode = (dato: string) => {
-    if (valgtPeriodeIndex !== undefined) {
-      const periode = perioder[valgtPeriodeIndex];
-      const nyPeriode = {
-        ...periode,
-        tom: dato,
-      };
-      update(valgtPeriodeIndex, nyPeriode);
-      append({
-        ...periode,
-        fom: dayjs(dato).add(1, 'day').format(ISO_DATE_FORMAT),
-        tom: periode.tom,
-        vurdering: undefined,
-      });
+    update(currentIndex, {
+      ...currentPeriode,
+      tom: dato,
+      vurdering: undefined,
+    });
 
-      settValgtPeriodeIndex(undefined);
-      setSistOppdeltPeriodeIndex(valgtPeriodeIndex);
-    }
+    insert(currentIndex + 1, {
+      ...currentPeriode,
+      fom: dayjs(dato).add(1, 'day').format(ISO_DATE_FORMAT),
+      tom: currentPeriode.tom,
+      vurdering: undefined,
+    });
+    settValgtPeriodeIndex(undefined);
   };
 
-  const oppdaterOgNullstillPerioder = (dato: string) => {
-    if (valgtPeriodeIndex !== undefined) {
-      settValgtPeriodeIndex(undefined);
-
-      for (let i = fields.length - 1; i > valgtPeriodeIndex + 1; i -= 1) {
-        remove(i);
-      }
-
-      update(valgtPeriodeIndex, {
-        ...perioder[valgtPeriodeIndex],
-        tom: dato,
-      });
-      update(valgtPeriodeIndex + 1, {
-        ...perioder[valgtPeriodeIndex + 1],
-        fom: dayjs(dato).add(1, 'day').format(ISO_DATE_FORMAT),
-        tom: valgtDokBehov.tom,
-      });
-
-      setSistOppdeltPeriodeIndex(valgtPeriodeIndex);
-    }
+  const slåSammenMedPeriodeOver = (currentIndex: number) => {
+    const previousIndex = currentIndex - 1;
+    const previousPeriode = fields[previousIndex];
+    update(previousIndex, { ...previousPeriode, vurdering: undefined, tom: fields[currentIndex].tom });
+    remove(currentIndex);
   };
-  const vurderingsalternativ = lagVurderingsAlternativer(intl, valgtDokBehov.årsak);
 
-  const handleSubmit = (formvalues: FormValues): void => oppdaterDokBehov(formvalues);
+  const vurderingsalternativ = lagVurderingsAlternativer(intl, behov.årsak);
 
   return (
-    <>
-      <Form formMethods={formMethods} onSubmit={handleSubmit}>
+    <Box
+      padding="4"
+      style={
+        !behov.vurdering &&
+        fields.length === 1 && {
+          borderLeft: '3px solid var(--a-surface-warning)',
+        }
+      }
+    >
+      <Form formMethods={formMethods} onSubmit={submit}>
         <VStack gap="4">
-          {fields.map((field, index) => (
-            <VStack key={field.id} gap="4">
-              {index > 0 && <AvsnittSkiller dividerParagraf className={styles.skiller} />}
-              {fields.length === 1 && !readOnly && perioder[index].fom !== perioder[index].tom && (
-                <HStack>
-                  <DelOppPeriodeButton onClick={() => settValgtPeriodeIndex(index)} />
-                </HStack>
-              )}
-              {fields.length > 1 && (
-                <>
-                  <Label size="medium">
-                    <FormattedMessage
-                      id="UttakDokumentasjonFaktaDetailForm.PeriodeMedIndex"
-                      values={{ index: index + 1 }}
-                    />
-                  </Label>
-                  <HStack gap="4">
-                    <HStack gap="2">
-                      <Label size="small">
-                        <FormattedMessage id="UttakDokumentasjonFaktaDetailForm.Fom" />
-                      </Label>
-                      {perioder[index].fom && (
-                        <BodyShort size="small">
-                          <DateLabel dateString={perioder[index].fom} />
-                        </BodyShort>
-                      )}
-                    </HStack>
-                    <HStack gap="1">
-                      <Label size="small">
-                        <FormattedMessage id="UttakDokumentasjonFaktaDetailForm.Tom" />
-                      </Label>
-                      {perioder[index].tom && (
-                        <BodyShort size="small">
-                          <DateLabel dateString={perioder[index].tom} />
-                        </BodyShort>
-                      )}
-                    </HStack>
-                    {!!sistOppdeltPeriodeIndex && sistOppdeltPeriodeIndex >= index && (
-                      <HStack>
-                        <Button
-                          size="small"
-                          variant="tertiary"
-                          icon={<PencilIcon aria-hidden />}
-                          onClick={() => settValgtPeriodeIndex(index)}
-                          type="button"
-                          disabled={!perioder[index].tom}
-                        >
-                          <FormattedMessage id="UttakDokumentasjonFaktaDetailForm.RedigerPeriode" />
-                        </Button>
-                      </HStack>
-                    )}
-                  </HStack>
-                  {perioder[index].fom !== perioder[index].tom && fields.length > 1 && index === fields.length - 1 && (
-                    <HStack>
-                      <DelOppPeriodeButton onClick={() => settValgtPeriodeIndex(index)} />
-                    </HStack>
-                  )}
-                </>
-              )}
+          {fields.length === 1 && (
+            <div>
+              <DelOppPeriodeButton
+                display={!readOnly && periodeErMerEnnEnDag(fields[0])}
+                onClick={() => settValgtPeriodeIndex(0)}
+              />
               <RadioGroupPanel
-                name={`perioder.${index}.vurdering`}
+                name={`perioder.${0}.vurdering`}
                 label={<FormattedMessage id="UttakDokumentasjonFaktaDetailForm.Vurdering" />}
                 validate={[required]}
                 isReadOnly={readOnly}
                 radios={vurderingsalternativ}
               />
-            </VStack>
-          ))}
+            </div>
+          )}
+
+          {fields.length > 1 &&
+            fields.map((periode, index) => (
+              <Card key={periode.fom}>
+                <Card.Header>
+                  <Label>
+                    <FormattedMessage
+                      id="UttakDokumentasjonFaktaDetailForm.PeriodeMedIndex"
+                      values={{ index: index + 1 }}
+                    />
+                  </Label>
+                  <HStack gap="2">
+                    <DelOppPeriodeButton
+                      display={!readOnly && periodeErMerEnnEnDag(periode)}
+                      onClick={() => settValgtPeriodeIndex(index)}
+                    />
+                    <SlåSammenPeriodeButton
+                      display={!readOnly && fields.length > 1 && index > 0}
+                      onClick={() => slåSammenMedPeriodeOver(index)}
+                      disabled={!periode.tom}
+                    />
+                  </HStack>
+                </Card.Header>
+                <Card.Content>
+                  <HStack gap="6">
+                    <BodyShort weight="semibold">{getFormatertPeriode(periode)}</BodyShort>
+                    <BodyShort>{calcDaysAndWeeks(periode.fom, periode.tom).formattedString}</BodyShort>
+                  </HStack>
+                  <RadioGroupPanel
+                    name={`perioder.${index}.vurdering`}
+                    label={<FormattedMessage id="UttakDokumentasjonFaktaDetailForm.Vurdering" />}
+                    validate={[required]}
+                    isReadOnly={readOnly}
+                    radios={vurderingsalternativ}
+                  />
+                </Card.Content>
+              </Card>
+            ))}
           {!readOnly && (
             <HStack gap="2">
               <Button
                 size="small"
+                type="submit"
                 variant="primary"
                 loading={false}
                 disabled={!formMethods.formState.isDirty || readOnly}
               >
                 <FormattedMessage id="UttakDokumentasjonFaktaDetailForm.Oppdater" />
               </Button>
-              <Button
-                size="small"
-                variant="secondary"
-                onClick={avbrytEditeringAvAktivitetskrav}
-                disabled={readOnly}
-                type="button"
-              >
+              <Button size="small" type="button" variant="secondary" onClick={cancel} disabled={readOnly}>
                 <FormattedMessage id="UttakDokumentasjonFaktaDetailForm.Avbryt" />
               </Button>
             </HStack>
@@ -190,16 +152,12 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({
       </Form>
       {valgtPeriodeIndex !== undefined && (
         <DelOppPeriodeModal
-          periode={perioder[valgtPeriodeIndex]}
-          originalTom={valgtDokBehov.tom}
-          submit={dato =>
-            valgtPeriodeIndex + 1 < fields.length ? oppdaterOgNullstillPerioder(dato) : lagNyPeriode(dato)
-          }
+          periode={fields[valgtPeriodeIndex]}
+          submit={dato => lagNyPeriode(valgtPeriodeIndex, dato)}
           cancel={() => settValgtPeriodeIndex(undefined)}
-          visSlettEtterfølgendePerioder={valgtPeriodeIndex < fields.length - 1}
         />
       )}
-    </>
+    </Box>
   );
 };
 

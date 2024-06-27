@@ -17,24 +17,17 @@ export default {
   decorators: [withIntl],
 };
 
-const Template: StoryFn<{ visSlettEtterfølgendePerioder?: boolean }> = ({ visSlettEtterfølgendePerioder = false }) => (
+const Template: StoryFn = () => (
   <DelOppPeriodeModal
     submit={action('button-click')}
     cancel={action('button-click')}
-    originalTom="2022-11-07"
     periode={{
       fom: '2022-11-01',
-      tom: '2022-11-07',
+      tom: '2022-11-23',
       type: UttakType.UTSETTELSE,
       årsak: UttakÅrsak.INNLEGGELSE_SØKER,
     }}
-    visSlettEtterfølgendePerioder={visSlettEtterfølgendePerioder}
   />
 );
 
 export const VisModalForÅDeleOppPeriode = Template.bind({});
-
-export const VisModalDerEnMåFjerneEtterfølgendePerioder = Template.bind({});
-VisModalDerEnMåFjerneEtterfølgendePerioder.args = {
-  visSlettEtterfølgendePerioder: true,
-};
