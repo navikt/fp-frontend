@@ -1,9 +1,9 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useMemo } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import dayjs from 'dayjs';
 import { useForm } from 'react-hook-form';
-import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
-import { Button, BodyShort, Modal, Heading, Label, VStack, HStack } from '@navikt/ds-react';
+import { ScissorsIcon } from '@navikt/aksel-icons';
+import { BodyShort, Box, Button, Heading, HStack, Label, Modal, VStack } from '@navikt/ds-react';
 import { Datepicker, Form } from '@navikt/ft-form-hooks';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
@@ -11,6 +11,7 @@ import { hasValidDate, required } from '@navikt/ft-form-validators';
 
 import styles from './delOppPeriodeModal.module.css';
 import { VurderingsBehovPeriode } from '../../../types/FormValues';
+import { getFormatertPeriode, splitPeriodePåDato } from '../../utils/periodeUtils';
 
 const validerInnenforIntervall = (fom: string, tom: string, intl: IntlShape) => (dato: string) => {
   if (!dayjs(dato).isBefore(fom) && dayjs(dato).isBefore(tom)) {
@@ -21,22 +22,17 @@ const validerInnenforIntervall = (fom: string, tom: string, intl: IntlShape) => 
 
 interface OwnProps {
   periode: VurderingsBehovPeriode;
-  originalTom: string;
   cancel: () => void;
   submit: (dato: string) => void;
-  visSlettEtterfølgendePerioder: boolean;
 }
 
-const DelOppPeriodeModal: FunctionComponent<OwnProps> = ({
-  periode,
-  originalTom,
-  visSlettEtterfølgendePerioder,
-  cancel,
-  submit,
-}) => {
+const DelOppPeriodeModal: FunctionComponent<OwnProps> = ({ periode, cancel, submit }) => {
   const intl = useIntl();
 
   const formMethods = useForm<{ dato: string }>();
+
+  const splittDato = formMethods.watch('dato');
+  const perioder = useMemo(() => (splittDato ? splitPeriodePåDato(periode, splittDato) : null), [splittDato]);
 
   return (
     <Form formMethods={formMethods} onSubmit={values => submit(values.dato)}>
@@ -47,54 +43,62 @@ const DelOppPeriodeModal: FunctionComponent<OwnProps> = ({
         className={styles.modal}
       >
         <Modal.Header>
-          {!visSlettEtterfølgendePerioder && (
-            <Heading size="small">
-              <FormattedMessage id="DelOppPeriodeModal.RedigerPeriode" />
-            </Heading>
-          )}
+          <Heading size="medium">
+            <HStack gap="1" align="center">
+              <ScissorsIcon />
+              <FormattedMessage id="DelOppPeriodeModal.Tittel" />
+            </HStack>
+          </Heading>
         </Modal.Header>
         <Modal.Body>
-          <VStack gap="4">
-            {!visSlettEtterfølgendePerioder && (
-              <HStack gap="4">
-                <ExclamationmarkTriangleFillIcon
-                  className={styles.image}
-                  title={intl.formatMessage({ id: 'DelOppPeriodeModal.Nullstilles' })}
-                />
-                <div className={styles.text}>
-                  <BodyShort size="small">
-                    <FormattedMessage id="DelOppPeriodeModal.Nullstilles" />
-                  </BodyShort>
-                </div>
-              </HStack>
-            )}
+          <VStack gap="6">
+            <BodyShort>
+              <FormattedMessage id="DelOppPeriodeModal.Beskrivelse" />
+            </BodyShort>
             <div>
-              <Label size="small">
-                <FormattedMessage id="DelOppPeriodeModal.Periode" />
+              <Label>
+                <FormattedMessage id="DelOppPeriodeModal.PeriodeLabel" />
               </Label>
-              <BodyShort size="small">
+              <BodyShort>
                 <PeriodLabel dateStringFom={periode.fom} dateStringTom={periode.tom} />
               </BodyShort>
             </div>
-            <BodyShort size="small">
-              <FormattedMessage id="DelOppPeriodeModal.Splitt" />
-            </BodyShort>
             <Datepicker
               name="dato"
-              label={<FormattedMessage id="DelOppPeriodeModal.Dato" />}
-              validate={[required, hasValidDate, validerInnenforIntervall(periode.fom, originalTom, intl)]}
+              size="medium"
+              description={intl.formatMessage({ id: 'DelOppPeriodeModal.DatePickerBeskrivelse' })}
+              label={<FormattedMessage id="DelOppPeriodeModal.DatePickerTittel" />}
+              validate={[required, hasValidDate, validerInnenforIntervall(periode.fom, periode.tom, intl)]}
               disabledDays={{
                 fromDate: dayjs(periode.fom, ISO_DATE_FORMAT).toDate(),
-                toDate: dayjs(originalTom, ISO_DATE_FORMAT).subtract(1, 'day').toDate(),
+                toDate: dayjs(periode.tom, ISO_DATE_FORMAT).subtract(1, 'day').toDate(),
               }}
             />
+            {perioder && (
+              <Box background="bg-subtle" padding="2" borderRadius="large" style={{ width: 'max-content' }}>
+                <VStack gap="1">
+                  <Label>
+                    <FormattedMessage id="DelOppPeriodeModal.NyePeriodeLabel" />
+                  </Label>
+                  {perioder &&
+                    perioder.map((p, index) => (
+                      <BodyShort key={p.fom}>
+                        <FormattedMessage
+                          id="UttakDokumentasjonFaktaDetailForm.PeriodeMedInnhold"
+                          values={{ index: index + 1, periode: getFormatertPeriode(p) }}
+                        />
+                      </BodyShort>
+                    ))}
+                </VStack>
+              </Box>
+            )}
           </VStack>
         </Modal.Body>
         <Modal.Footer>
-          <Button size="small" variant="primary">
-            <FormattedMessage id="DelOppPeriodeModal.Oppdater" />
+          <Button type="submit" variant="primary">
+            <FormattedMessage id="DelOppPeriodeModal.Submit" />
           </Button>
-          <Button size="small" variant="secondary" onClick={cancel} type="button">
+          <Button variant="secondary" onClick={cancel}>
             <FormattedMessage id="DelOppPeriodeModal.Avbryt" />
           </Button>
         </Modal.Footer>
