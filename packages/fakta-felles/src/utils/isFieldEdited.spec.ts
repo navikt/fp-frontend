@@ -17,6 +17,16 @@ const soknad = {
   manglendeVedlegg: [],
   oppgittFordeling: {
     startDatoForPermisjon: '2018-07-06',
+    dekningsgrader: {
+      søker: {
+        søknadsdato: '2018-05-17',
+        dekningsgrad: 100,
+      },
+      annenPart: {
+        søknadsdato: '2018-05-28',
+        dekningsgrad: 100,
+      },
+    },
   },
   utstedtdato: '2018-06-25',
   termindato: '2018-07-27',
