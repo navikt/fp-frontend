@@ -34,25 +34,25 @@ const findPathToBehandling = (saksnummer: string, location: Location, alleBehand
   return pathToBehandlinger(saksnummer);
 };
 
-const finnFagsakMarkeringTekst = (fagsak: Fagsak): string | undefined => {
+const finnFagsakMarkeringTekst = (fagsak: Fagsak): string[] => {
   if (!fagsak.fagsakMarkering || fagsak.fagsakMarkering === FagsakMarkeringKode.NASJONAL) {
-    return undefined;
+    return [];
   }
   switch (fagsak.fagsakMarkering) {
     case FagsakMarkeringKode.EØS_BOSATT_NORGE:
-      return 'EØS';
+      return ['EØS'];
     case FagsakMarkeringKode.BOSATT_UTLAND:
-      return 'Utland';
+      return ['Utland'];
     case FagsakMarkeringKode.SAMMENSATT_KONTROLL:
-      return 'Kontroll';
+      return ['Kontroll'];
     case FagsakMarkeringKode.DØD_DØDFØDSEL:
-      return 'Død';
+      return ['Død'];
     case FagsakMarkeringKode.SELVSTENDIG_NÆRING:
-      return 'Næring';
+      return ['Næring'];
     case FagsakMarkeringKode.PRAKSIS_UTSETTELSE:
-      return 'Utsettelse';
+      return ['Utsettelse'];
     default:
-      return undefined;
+      return [];
   }
 };
 
@@ -124,7 +124,7 @@ const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
                   fagsakYtelseType={fagsakYtelseTypeMedNavn}
                   fagsakStatus={fagsakStatusMedNavn}
                   dekningsgrad={fagsak.dekningsgrad}
-                  fagsakMarkeringTekst={finnFagsakMarkeringTekst(fagsak)}
+                  fagsakMarkeringTekster={finnFagsakMarkeringTekst(fagsak)}
                 />
               </div>
               <ErrorBoundary

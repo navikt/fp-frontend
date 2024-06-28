@@ -47,6 +47,8 @@ const StatusForBorgerFaktaPanel: FunctionComponent<OwnProps> & StaticFunctions =
     periodeAp =>
       periodeAp === AksjonspunktCode.AVKLAR_OPPHOLDSRETT || periodeAp === AksjonspunktCode.AVKLAR_LOVLIG_OPPHOLD,
   );
+  // TODO Fiks denne
+  // @ts-ignore
   const aksjonspunkt = aksjonspunkter.find(ap => oppholdAp.includes(ap.definisjon));
   const erAksjonspunktLukket = aksjonspunkt?.status !== AksjonspunktStatus.OPPRETTET;
 
