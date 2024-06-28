@@ -5,7 +5,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Box, HStack, Spacer, Tag, Link, Label, VStack } from '@navikt/ds-react';
 import { BehandlingVelgerSakIndex } from '@navikt/ft-sak-behandling-velger';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { KodeverkType, FagsakMarkeringKode } from '@navikt/fp-kodeverk';
+import { KodeverkType } from '@navikt/fp-kodeverk';
 import { Behandling, BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
 import { UkjentAdresseMeldingIndex } from '@navikt/fp-sak-ukjent-adresse';
 import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
