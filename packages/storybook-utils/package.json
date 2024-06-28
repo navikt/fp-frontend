@@ -13,16 +13,16 @@
     "clean": "rm -rf ./dist ./node_modules"
   },
   "dependencies": {
-    "@navikt/ft-form-hooks": "4.4.11",
+    "@navikt/ft-form-hooks": "4.4.15",
     "history": "5.3.0",
     "react": "18.3.1",
     "react-hook-form": "7.52.0",
     "react-intl": "6.6.8",
-    "react-router-dom": "6.23.1"
+    "react-router-dom": "6.24.0"
   },
   "devDependencies": {
     "eslint": "8.57.0",
-    "typescript": "5.4.5",
-    "vite": "5.3.1"
+    "typescript": "5.5.2",
+    "vite": "5.3.2"
   }
 }
