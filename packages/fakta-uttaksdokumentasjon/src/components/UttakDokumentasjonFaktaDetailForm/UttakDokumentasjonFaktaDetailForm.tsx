@@ -3,19 +3,29 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { useFieldArray, useForm } from 'react-hook-form';
 import dayjs from 'dayjs';
 import { BodyShort, Button, HStack, Label, Link, ReadMore, VStack } from '@navikt/ds-react';
-import { required } from '@navikt/ft-form-validators';
+import { maxValue, minValue, required } from '@navikt/ft-form-validators';
 import { PencilIcon } from '@navikt/aksel-icons';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { Form, RadioGroupPanel, NumberField } from '@navikt/ft-form-hooks';
 import { AvsnittSkiller, DateLabel } from '@navikt/ft-ui-komponenter';
-import { DokumentasjonVurderingBehov, UttakÅrsak } from '@navikt/fp-types';
+import { DokumentasjonVurderingBehov } from '@navikt/fp-types';
 import { FOLKETRYGDLOVEN_KAP14_13_URL } from '@navikt/fp-konstanter';
 
 import styles from './uttakDokumentasjonFaktaDetailForm.module.css';
 import { DelOppPeriodeModal, DelOppPeriodeButton } from '../DelOppPeriode';
-import { lagVurderingsAlternativer } from './vurderingsAlternativer';
-import { FormValues, fraFormValues, tilFormValues } from './formValues';
-import { VurderingsAlternativ } from '../../types';
+import {
+  erUttaksperiodeMedAktivitetskravArbeid,
+  fraFormValues,
+  tilFormValues,
+} from './DokumentasjonVurderingBehovFormMapper';
+import lagVurderingsAlternativer from './VurderingsAlternativUtleder';
+import FormValues, { VurderingsAlternativ } from '../../../types/FormValues';
+
+const attachLinkToReadMore = (msg: any) => (
+  <Link inlineText href={FOLKETRYGDLOVEN_KAP14_13_URL} className="lenke" rel="noreferrer" target="_blank">
+    {msg}
+  </Link>
+);
 
 interface OwnProps {
   valgtDokBehov: DokumentasjonVurderingBehov;
@@ -87,7 +97,7 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({
       setSistOppdeltPeriodeIndex(valgtPeriodeIndex);
     }
   };
-  const vurderingsalternativ = lagVurderingsAlternativer(intl, valgtDokBehov.årsak);
+  const vurderingsalternativ = lagVurderingsAlternativer(intl, valgtDokBehov.type, valgtDokBehov.årsak);
 
   const handleSubmit = (formvalues: FormValues): void => oppdaterDokBehov(fraFormValues(formvalues));
 
@@ -165,10 +175,11 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({
                 <NumberField
                   label={<FormattedMessage id="UttakDokumentasjonFaktaDetailForm.MorsStillingsprosent.Label" />}
                   name={`perioder.${index}.morsStillingsprosent`}
+                  validate={[required, minValue(0), maxValue(74.99)]}
                   readOnly={readOnly}
                 />
               )}
-              {field.årsak === UttakÅrsak.AKTIVITETSKRAV_ARBEID && (
+              {erUttaksperiodeMedAktivitetskravArbeid(field.type, field.årsak) && (
                 <ReadMore
                   size="small"
                   header={
@@ -178,17 +189,7 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({
                   <FormattedMessage
                     id="UttakDokumentasjonFaktaDetailForm.MorsStillingsprosent.ReadMoreInnhold"
                     values={{
-                      a: (msg: any) => (
-                        <Link
-                          inlineText
-                          href={FOLKETRYGDLOVEN_KAP14_13_URL}
-                          className="lenke"
-                          rel="noreferrer"
-                          target="_blank"
-                        >
-                          {msg}
-                        </Link>
-                      ),
+                      a: attachLinkToReadMore,
                     }}
                   />
                 </ReadMore>
