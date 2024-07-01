@@ -21,6 +21,7 @@ interface OwnProps {
   opneSokeside: () => void;
   setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void;
   alleBehandlinger: BehandlingAppKontekst[];
+  hentOgSettBehandling: (keepData?: boolean) => void;
 }
 
 const KlagePaneler: FunctionComponent<OwnProps> = ({
@@ -32,6 +33,7 @@ const KlagePaneler: FunctionComponent<OwnProps> = ({
   opneSokeside,
   setSkalOppdatereEtterBekreftelseAvAp,
   alleBehandlinger,
+  hentOgSettBehandling,
 }) => {
   const hentFaktaPaneler = useCallback((props: FaktaPanelInitProps) => <VergeFaktaInitPanel {...props} />, []);
 
@@ -53,16 +55,29 @@ const KlagePaneler: FunctionComponent<OwnProps> = ({
   const hentProsessPaneler = useCallback(
     (props: ProsessPanelInitProps) => (
       <>
-        <FormKravFamOgPensjonProsessStegInitPanel {...props} alleBehandlinger={fagsakBehandlingerInfo} />
+        <FormKravFamOgPensjonProsessStegInitPanel
+          {...props}
+          alleBehandlinger={fagsakBehandlingerInfo}
+          hentOgSettBehandling={hentOgSettBehandling}
+        />
         <VurderingFamOgPensjonProsessStegInitPanel
           {...props}
           fagsak={fagsak}
           opneSokeside={opneSokeside}
           setSkalOppdatereEtterBekreftelseAvAp={setSkalOppdatereEtterBekreftelseAvAp}
           oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+          hentOgSettBehandling={hentOgSettBehandling}
         />
-        <FormKravKlageInstansProsessStegInitPanel {...props} alleBehandlinger={fagsakBehandlingerInfo} />
-        <VurderingKlageInstansProsessStegInitPanel {...props} fagsak={fagsak} />
+        <FormKravKlageInstansProsessStegInitPanel
+          {...props}
+          alleBehandlinger={fagsakBehandlingerInfo}
+          hentOgSettBehandling={hentOgSettBehandling}
+        />
+        <VurderingKlageInstansProsessStegInitPanel
+          {...props}
+          fagsak={fagsak}
+          hentOgSettBehandling={hentOgSettBehandling}
+        />
         <KlageresultatProsessStegInitPanel
           {...props}
           fagsak={fagsak}

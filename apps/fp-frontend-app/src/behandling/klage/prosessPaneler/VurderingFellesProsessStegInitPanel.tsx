@@ -32,14 +32,18 @@ const lagForhandsvisCallback =
   };
 
 const lagKlageCallback =
-  (lagreKlageVurdering: (params?: any, keepData?: boolean) => Promise<any>, behandling: Behandling) =>
+  (
+    lagreKlageVurdering: (params?: any, keepData?: boolean) => Promise<any>,
+    behandling: Behandling,
+    hentOgSettBehandling: (keepData?: boolean) => void,
+  ) =>
   (aksjonspunktModel: AksjonspunktVerdier) => {
     const data = {
       behandlingUuid: behandling.uuid,
       ...aksjonspunktModel,
     };
 
-    return lagreKlageVurdering(data);
+    return lagreKlageVurdering(data).then(() => hentOgSettBehandling(true));
   };
 
 const getLagringSideeffekter =
@@ -82,6 +86,7 @@ interface OwnProps {
   aksjonspunktKoder?: string[];
   prosessPanelKode: ProsessStegCode;
   prosessPanelMenyTekst: string;
+  hentOgSettBehandling: (keepData?: boolean) => void;
 }
 
 const VurderingFellesProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
@@ -92,6 +97,7 @@ const VurderingFellesProsessStegInitPanel: FunctionComponent<OwnProps & ProsessP
   aksjonspunktKoder,
   prosessPanelKode,
   prosessPanelMenyTekst,
+  hentOgSettBehandling,
   ...props
 }) => {
   const [visModalKlageBehandling, toggleKlageModal] = useState(false);
@@ -117,9 +123,10 @@ const VurderingFellesProsessStegInitPanel: FunctionComponent<OwnProps & ProsessP
   const { startRequest: lagreKlageVurdering } = restBehandlingApiHooks.useRestApiRunner(
     BehandlingApiKeys.SAVE_KLAGE_VURDERING,
   );
-  const lagreKlage = useCallback(lagKlageCallback(lagreKlageVurdering, standardPanelProps.behandling), [
-    standardPanelProps.behandling.versjon,
-  ]);
+  const lagreKlage = useCallback(
+    lagKlageCallback(lagreKlageVurdering, standardPanelProps.behandling, hentOgSettBehandling),
+    [standardPanelProps.behandling.versjon],
+  );
 
   return (
     <ProsessDefaultInitPanel<EndepunktPanelData>

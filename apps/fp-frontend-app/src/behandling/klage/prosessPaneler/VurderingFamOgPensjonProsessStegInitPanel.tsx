@@ -15,6 +15,7 @@ interface OwnProps {
   setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void;
   opneSokeside: () => void;
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
+  hentOgSettBehandling: (keepData?: boolean) => void;
 }
 
 const VurderingFamOgPensjonProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
@@ -22,6 +23,7 @@ const VurderingFamOgPensjonProsessStegInitPanel: FunctionComponent<OwnProps & Pr
   setSkalOppdatereEtterBekreftelseAvAp,
   opneSokeside,
   oppdaterProsessStegOgFaktaPanelIUrl,
+  hentOgSettBehandling,
   ...props
 }) => (
   <VurderingFellesProsessStegInitPanel
@@ -33,6 +35,7 @@ const VurderingFamOgPensjonProsessStegInitPanel: FunctionComponent<OwnProps & Pr
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     prosessPanelKode={ProsessStegCode.KLAGE_NAV_FAMILIE_OG_PENSJON}
     prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.CheckKlageNFP' })}
+    hentOgSettBehandling={hentOgSettBehandling}
   />
 );
 

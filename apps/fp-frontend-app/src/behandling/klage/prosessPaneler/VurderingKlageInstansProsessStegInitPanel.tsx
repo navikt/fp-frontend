@@ -12,10 +12,12 @@ const AKSJONSPUNKT_KODER = [AksjonspunktCode.BEHANDLE_KLAGE_NK];
 
 interface OwnProps {
   fagsak: Fagsak;
+  hentOgSettBehandling: (keepData?: boolean) => void;
 }
 
 const VurderingKlageInstansProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
   fagsak,
+  hentOgSettBehandling,
   ...props
 }) => (
   <VurderingFellesProsessStegInitPanel
@@ -24,6 +26,7 @@ const VurderingKlageInstansProsessStegInitPanel: FunctionComponent<OwnProps & Pr
     fagsak={fagsak}
     prosessPanelKode={ProsessStegCode.KLAGE_NAV_KLAGEINSTANS}
     prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.CheckKlageNK' })}
+    hentOgSettBehandling={hentOgSettBehandling}
   />
 );
 
