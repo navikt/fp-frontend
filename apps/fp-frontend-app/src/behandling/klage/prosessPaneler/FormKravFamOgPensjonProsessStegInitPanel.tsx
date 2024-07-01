@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 import { BehandlingStatus, BehandlingType } from '@navikt/ft-kodeverk';
 
 import { AksjonspunktCode, isKlageAvvist } from '@navikt/fp-kodeverk';
-import { FormkravProsessIndex } from '@navikt/fp-prosess-formkrav';
+import { FormkravMellomlagretDataType, FormkravProsessIndex } from '@navikt/fp-prosess-formkrav';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { KlageVurdering } from '@navikt/fp-types';
 
@@ -27,10 +27,12 @@ interface OwnProps {
     avsluttet?: string;
     resultatType?: string;
   }[];
+  hentOgSettBehandling: (keepData?: boolean) => void;
 }
 
 const FormKravFamOgPensjonProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
   alleBehandlinger,
+  hentOgSettBehandling,
   ...props
 }) => {
   const intl = useIntl();
@@ -49,6 +51,9 @@ const FormKravFamOgPensjonProsessStegInitPanel: FunctionComponent<OwnProps & Pro
     BehandlingApiKeys.SAVE_FORMKRAV_VURDERING,
   );
 
+  const lagreFormkravOgHentBehandlingPåNytt = (data: FormkravMellomlagretDataType) =>
+    lagreFormkravVurdering(data).then(() => hentOgSettBehandling(true));
+
   return (
     <ProsessDefaultInitPanel<EndepunktPanelData>
       {...props}
@@ -60,7 +65,7 @@ const FormKravFamOgPensjonProsessStegInitPanel: FunctionComponent<OwnProps & Pro
       renderPanel={data => (
         <FormkravProsessIndex
           avsluttedeBehandlinger={avsluttedeBehandlinger}
-          lagreFormkravVurdering={lagreFormkravVurdering}
+          lagreFormkravVurdering={lagreFormkravOgHentBehandlingPåNytt}
           {...data}
         />
       )}
