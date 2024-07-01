@@ -10,7 +10,7 @@ import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 
 import styles from './delOppPeriodeModal.module.css';
-import { VurderingsBehovPeriode } from '../../types';
+import { VurderingsBehovPeriode } from '../../../types/FormValues';
 
 const validerInnenforIntervall = (fom: string, tom: string, intl: IntlShape) => (dato: string) => {
   if (!dayjs(dato).isBefore(fom) && dayjs(dato).isBefore(tom)) {

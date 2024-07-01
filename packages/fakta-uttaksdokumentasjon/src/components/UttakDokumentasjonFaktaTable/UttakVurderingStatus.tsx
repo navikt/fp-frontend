@@ -7,17 +7,27 @@ import assertUnreachable from '../../utils/switchCaseUtils';
 
 interface Props {
   vurdering: UttakVurdering;
+  morsStillingsprosent?: number;
 }
 
-const UttakVurderingStatus: FC<Props> = ({ vurdering }) => {
+const UttakVurderingStatus: FC<Props> = ({ vurdering, morsStillingsprosent }) => {
   switch (vurdering) {
     case UttakVurdering.GODKJENT:
-      return (
-        <HStack gap="1">
-          <CheckmarkIcon />
-          <FormattedMessage id="UttakDokumentasjonFaktaTable.Godkjent" />
-        </HStack>
-      );
+      if (morsStillingsprosent) {
+        return (
+          <HStack gap="1">
+            <CheckmarkIcon />
+            <FormattedMessage id="UttakDokumentasjonFaktaTable.GodkjentMedProsent" values={{ morsStillingsprosent }} />
+          </HStack>
+        );
+      } else {
+        return (
+          <HStack gap="1">
+            <CheckmarkIcon />
+            <FormattedMessage id="UttakDokumentasjonFaktaTable.Godkjent" />
+          </HStack>
+        );
+      }
     case UttakVurdering.IKKE_GODKJENT:
       return (
         <HStack gap="1">
