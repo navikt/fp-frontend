@@ -36,8 +36,11 @@
     "antallBarn": 1,
     "dødfødsel": false
   },
-  "utlandMarkering": "BOSATT_UTLAND",
   "fagsakMarkering": "BOSATT_UTLAND",
+  "fagsakMarkeringer": {
+    "fagsakMarkering": "BOSATT_UTLAND",
+    "kortNavn": "Utland"
+  },
   "behandlingTypeKanOpprettes": [
     {
       "behandlingType": "BT-002",
