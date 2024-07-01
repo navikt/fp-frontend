@@ -4,10 +4,5 @@
 }
 
 .expansionContentInner {
-  margin: calc(0rem - var(--a-spacing-4))  calc(0rem - var(--a-spacing-2) - 3rem);
-  padding: var(--a-spacing-4)
-}
-
-.leftBorder {
-  border-left: 3px solid var(--a-surface-warning);
+  margin: calc(0rem - var(--a-spacing-4)) calc(0rem - var(--a-spacing-2) - 3rem);
 }

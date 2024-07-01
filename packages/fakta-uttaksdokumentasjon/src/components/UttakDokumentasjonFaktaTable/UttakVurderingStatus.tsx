@@ -1,36 +1,42 @@
 import React, { FC } from 'react';
 import { UttakVurdering } from '@navikt/fp-types';
-import { FormattedMessage } from 'react-intl';
-import { CheckmarkIcon, FileXMarkIcon, XMarkOctagonIcon } from '@navikt/aksel-icons';
-import { HStack } from '@navikt/ds-react';
+import { CheckmarkCircleFillIcon, CircleFillIcon, FileXMarkFillIcon, XMarkOctagonFillIcon } from '@navikt/aksel-icons';
 import assertUnreachable from '../../utils/switchCaseUtils';
+import IconLabel from '../IconLabel';
 
 interface Props {
-  vurdering: UttakVurdering;
+  vurdering?: UttakVurdering;
 }
 
 const UttakVurderingStatus: FC<Props> = ({ vurdering }) => {
   switch (vurdering) {
+    case undefined:
+      return (
+        <IconLabel
+          icon={<CircleFillIcon color="var(--a-orange-400)" />}
+          formattedMessageId="UttakDokumentasjonFaktaTable.TilVurdering"
+        />
+      );
     case UttakVurdering.GODKJENT:
       return (
-        <HStack gap="1">
-          <CheckmarkIcon />
-          <FormattedMessage id="UttakDokumentasjonFaktaTable.Godkjent" />
-        </HStack>
+        <IconLabel
+          icon={<CheckmarkCircleFillIcon color="var(--a-icon-success)" />}
+          formattedMessageId="UttakDokumentasjonFaktaTable.Godkjent"
+        />
       );
     case UttakVurdering.IKKE_GODKJENT:
       return (
-        <HStack gap="1">
-          <XMarkOctagonIcon />
-          <FormattedMessage id="UttakDokumentasjonFaktaTable.IkkeGodkjent" />
-        </HStack>
+        <IconLabel
+          icon={<XMarkOctagonFillIcon color="var(--a-icon-danger)" />}
+          formattedMessageId="UttakDokumentasjonFaktaTable.IkkeGodkjent"
+        />
       );
     case UttakVurdering.IKKE_DOKUMENTERT:
       return (
-        <HStack gap="1">
-          <FileXMarkIcon />
-          <FormattedMessage id="UttakDokumentasjonFaktaTable.ManglerDok" />
-        </HStack>
+        <IconLabel
+          icon={<FileXMarkFillIcon color="var(--a-icon-subtle)" />}
+          formattedMessageId="UttakDokumentasjonFaktaTable.ManglerDok"
+        />
       );
     default:
       return assertUnreachable(vurdering);
