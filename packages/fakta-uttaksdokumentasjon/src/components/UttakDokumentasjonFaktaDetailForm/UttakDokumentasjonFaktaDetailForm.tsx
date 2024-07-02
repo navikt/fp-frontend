@@ -175,7 +175,7 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({
                 <NumberField
                   label={<FormattedMessage id="UttakDokumentasjonFaktaDetailForm.MorsStillingsprosent.Label" />}
                   name={`perioder.${index}.morsStillingsprosent`}
-                  validate={[required, minValue(0), maxValue(74.99)]}
+                  validate={[required, minValue(0.01), maxValue(74.99)]}
                   readOnly={readOnly}
                 />
               )}

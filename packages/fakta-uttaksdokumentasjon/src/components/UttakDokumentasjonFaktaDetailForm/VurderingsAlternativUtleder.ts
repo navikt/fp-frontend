@@ -32,7 +32,7 @@ const lagVurderingsAlternativer = (intl: IntlShape, type: UttakType, årsak: Utt
 
   if (årsak.includes('AKTIVITETSKRAV')) {
     vurderingsalternativer.push({
-      value: UttakVurdering.IKKE_DOKUMENTERT.toString(),
+      value: VurderingsAlternativ.IKKE_DOKUMENTERT,
       label: intl.formatMessage({ id: 'UttakDokumentasjonFaktaDetailForm.IkkeDokumentert' }),
     });
   }
