@@ -23,6 +23,7 @@
     "@navikt/ds-react": "6.12.0",
     "@navikt/fp-fakta-felles": "workspace:*",
     "@navikt/fp-kodeverk": "workspace:*",
+    "@navikt/fp-konstanter": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*",
     "@navikt/ft-form-hooks": "4.4.16",

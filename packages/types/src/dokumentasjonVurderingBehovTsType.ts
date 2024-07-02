@@ -37,6 +37,7 @@ type DokumentasjonVurderingBehov = Readonly<{
   type: UttakType;
   årsak: UttakÅrsak;
   vurdering?: UttakVurdering;
+  morsStillingsprosent?: number;
 }>;
 
 export default DokumentasjonVurderingBehov;

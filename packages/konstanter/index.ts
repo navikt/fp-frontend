@@ -9,6 +9,7 @@ export {
   AINNTEKT_URL,
   AAREG_URL,
   GOSYS_URL,
+  FOLKETRYGDLOVEN_KAP14_13_URL,
   getModiaUrl,
   hentDokumentLenke,
   hentVedtakDokumentLenke,
