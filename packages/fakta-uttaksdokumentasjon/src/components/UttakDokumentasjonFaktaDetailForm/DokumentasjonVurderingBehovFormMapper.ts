@@ -1,5 +1,6 @@
 import { DokumentasjonVurderingBehov, UttakType, UttakVurdering, UttakÅrsak } from '@navikt/fp-types';
 import FormValues, { VurderingsAlternativ } from '../../../types/FormValues';
+import assertUnreachable from '../../utils/switchCaseUtils';
 
 export function erUttaksperiodeMedAktivitetskravArbeid(type: UttakType, årsak: UttakÅrsak) {
   return årsak === UttakÅrsak.AKTIVITETSKRAV_ARBEID && type === UttakType.UTTAK;
@@ -15,6 +16,8 @@ function mapVurderingsAlternativTilUttakVurdering(vurdering: VurderingsAlternati
       return UttakVurdering.IKKE_GODKJENT;
     case VurderingsAlternativ.IKKE_DOKUMENTERT:
       return UttakVurdering.IKKE_DOKUMENTERT;
+    default:
+      return assertUnreachable(vurdering);
   }
 }
 
@@ -35,6 +38,8 @@ function mapUttakVurderingTilVurderingsAlternativ(
       return VurderingsAlternativ.IKKE_GODKJENT;
     case UttakVurdering.IKKE_DOKUMENTERT:
       return VurderingsAlternativ.IKKE_DOKUMENTERT;
+    default:
+      return assertUnreachable(vurdering);
   }
 }
 
