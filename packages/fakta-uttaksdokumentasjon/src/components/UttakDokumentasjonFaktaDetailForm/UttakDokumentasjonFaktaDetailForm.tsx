@@ -171,7 +171,7 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({
                 isReadOnly={readOnly}
                 radios={vurderingsalternativ}
               />
-              {formMethods.getValues(`perioder.${index}.vurdering`) === VurderingsAlternativ.GODKJENT_UNDER75 && (
+              {formMethods.watch(`perioder.${index}.vurdering`) === VurderingsAlternativ.GODKJENT_UNDER75 && (
                 <NumberField
                   label={<FormattedMessage id="UttakDokumentasjonFaktaDetailForm.MorsStillingsprosent.Label" />}
                   name={`perioder.${index}.morsStillingsprosent`}
