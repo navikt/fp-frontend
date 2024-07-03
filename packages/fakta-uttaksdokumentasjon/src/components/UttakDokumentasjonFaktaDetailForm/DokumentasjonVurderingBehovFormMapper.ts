@@ -1,5 +1,4 @@
 import { DokumentasjonVurderingBehov, UttakType, UttakVurdering, UttakÅrsak } from '@navikt/fp-types';
-import assertUnreachable from '../../utils/switchCaseUtils';
 import FormValues, { VurderingsAlternativ } from '../../../types/FormValues';
 
 export function erUttaksperiodeMedAktivitetskravArbeid(type: UttakType, årsak: UttakÅrsak) {
@@ -16,8 +15,6 @@ function mapVurderingsAlternativTilUttakVurdering(vurdering: VurderingsAlternati
       return UttakVurdering.IKKE_GODKJENT;
     case VurderingsAlternativ.IKKE_DOKUMENTERT:
       return UttakVurdering.IKKE_DOKUMENTERT;
-    default:
-      return assertUnreachable(vurdering);
   }
 }
 
@@ -28,9 +25,9 @@ function mapUttakVurderingTilVurderingsAlternativ(
   switch (vurdering) {
     case UttakVurdering.GODKJENT: {
       if (erUttaksperiodeMedAktivitetskravArbeid(dokumentasjonVurderingBehov.type, dokumentasjonVurderingBehov.årsak)) {
-        return !dokumentasjonVurderingBehov.morsStillingsprosent
-          ? VurderingsAlternativ.GODKJENT_OVER75
-          : VurderingsAlternativ.GODKJENT_UNDER75;
+        return dokumentasjonVurderingBehov.morsStillingsprosent
+          ? VurderingsAlternativ.GODKJENT_UNDER75
+          : VurderingsAlternativ.GODKJENT_OVER75;
       }
       return VurderingsAlternativ.GODKJENT;
     }
@@ -38,8 +35,6 @@ function mapUttakVurderingTilVurderingsAlternativ(
       return VurderingsAlternativ.IKKE_GODKJENT;
     case UttakVurdering.IKKE_DOKUMENTERT:
       return VurderingsAlternativ.IKKE_DOKUMENTERT;
-    default:
-      return assertUnreachable(vurdering);
   }
 }
 

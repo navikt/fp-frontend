@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, ReactNode, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useFieldArray, useForm } from 'react-hook-form';
 import dayjs from 'dayjs';
@@ -21,7 +21,7 @@ import {
 import lagVurderingsAlternativer from './VurderingsAlternativUtleder';
 import FormValues, { VurderingsAlternativ } from '../../../types/FormValues';
 
-const attachLinkToReadMore = (msg: any) => (
+const attachLinkToReadMore = (msg: ReactNode[]) => (
   <Link inlineText href={FOLKETRYGDLOVEN_KAP14_13_URL} className="lenke" rel="noreferrer" target="_blank">
     {msg}
   </Link>
