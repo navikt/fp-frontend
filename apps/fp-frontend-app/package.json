@@ -113,7 +113,7 @@
     "@navikt/ft-sak-aktor": "2.4.19",
     "@navikt/ft-sak-behandling-velger": "2.3.19",
     "@navikt/ft-sak-dekorator": "4.3.19",
-    "@navikt/ft-sak-dokumenter": "2.3.16",
+    "@navikt/ft-sak-dokumenter": "2.4.0",
     "@navikt/ft-sak-fagsak-profil": "3.3.17",
     "@navikt/ft-sak-infosider": "2.3.16",
     "@navikt/ft-sak-meny": "3.3.19",
