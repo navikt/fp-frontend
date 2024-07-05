@@ -4214,7 +4214,7 @@ __metadata:
     "@navikt/ft-sak-aktor": 2.4.19
     "@navikt/ft-sak-behandling-velger": 2.3.19
     "@navikt/ft-sak-dekorator": 4.3.19
-    "@navikt/ft-sak-dokumenter": 2.3.16
+    "@navikt/ft-sak-dokumenter": 2.4.0
     "@navikt/ft-sak-fagsak-profil": 3.3.17
     "@navikt/ft-sak-infosider": 2.3.16
     "@navikt/ft-sak-meny": 3.3.19
@@ -6446,9 +6446,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/ft-sak-dokumenter@npm:2.3.16":
-  version: 2.3.16
-  resolution: "@navikt/ft-sak-dokumenter@npm:2.3.16::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-sak-dokumenter%2F2.3.16%2Fb6582afb4563caf619b7e2a1a059296437eed139"
+"@navikt/ft-sak-dokumenter@npm:2.4.0":
+  version: 2.4.0
+  resolution: "@navikt/ft-sak-dokumenter@npm:2.4.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-sak-dokumenter%2F2.4.0%2F8589e22410110d7dc96ecf69e1a00a17113d9bdb"
   dependencies:
     "@navikt/aksel-icons": 6.12.0
     "@navikt/ds-css": 6.12.0
@@ -6469,7 +6469,7 @@ __metadata:
     "@navikt/ft-utils": 2.x
     react: 18.3.1
     react-intl: 6.6.8
-  checksum: 4d106fbaf4bac4e427a7b81bfc75bc26669eeb5cf61e251601c30f15a6bcfa7feb7a2324db3d0898a76fd75c48d3216ac722006a7414e5841b99d9e424886698
+  checksum: cbbfcffba3be192fa695af0a009d0ee7d1161045acb8cab1820b5d84eafe17816b2af17e11558001886c164698326532c037f4d91a748aa090c4b8aa6f174402
   languageName: node
   linkType: hard
 
