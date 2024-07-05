@@ -100,7 +100,6 @@ export const BehandleKlageFormNfp: FunctionComponent<OwnProps> = ({
   const formMethods = useForm<KlageFormType>({
     defaultValues: formData || initialValues,
   });
-
   const formValues = formMethods.watch();
 
   const lukkModal = useCallback(() => {
@@ -151,7 +150,7 @@ export const BehandleKlageFormNfp: FunctionComponent<OwnProps> = ({
                     readOnly={readOnly}
                     isSubmittable={!readOnlySubmitButton}
                     isSubmitting={formMethods.formState.isSubmitting}
-                    isDirty={formMethods.formState.isDirty}
+                    isDirty={formMethods.formState.isValid}
                   />
                 </>
               )}
