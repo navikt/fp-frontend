@@ -53,7 +53,8 @@ export const buildInitialValues = (
   }
 
   const harTypeIkkeSendt =
-    !tilbakekrevingvalg.varseltekst && tilbakekrevingvalg.videreBehandling === tilbakekrevingVidereBehandling.TILBAKEKR_OPPRETT;
+    !tilbakekrevingvalg.varseltekst &&
+    tilbakekrevingvalg.videreBehandling === tilbakekrevingVidereBehandling.TILBAKEKR_OPPRETT;
 
   return {
     videreBehandling: harTypeIkkeSendt
@@ -137,7 +138,12 @@ const TilbakekrevSøkerForm: FunctionComponent<OwnProps> = ({
                       maxLength={1500}
                       readOnly={readOnly}
                       // Må erstatte bindestrek kopiert inn fra Word med vanlig bindestrek
-                      parse={value => value.toString().replaceAll(/\p{Dash_Punctuation}/gu, '-').replaceAll('\t', ' ')}
+                      parse={value =>
+                        value
+                          .toString()
+                          .replaceAll(/\p{Dash_Punctuation}/gu, '-')
+                          .replaceAll('\t', ' ')
+                      }
                       badges={[
                         {
                           type: 'info',
@@ -146,9 +152,12 @@ const TilbakekrevSøkerForm: FunctionComponent<OwnProps> = ({
                       ]}
                     />
                     {!readOnly && (
-                      <a href="" onClick={previewMessage} className={styles.previewLink}>
-                        <FormattedMessage id="Messages.PreviewText" />
-                      </a>
+                      <>
+                        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                        <a href="" onClick={previewMessage} className={styles.previewLink}>
+                          <FormattedMessage id="Messages.PreviewText" />
+                        </a>
+                      </>
                     )}
                   </VStack>
                 </ArrowBox>

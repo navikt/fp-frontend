@@ -1,5 +1,5 @@
 import React from 'react';
-import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react';
 import { RestApiMock } from '@navikt/fp-utils-test';
 import { withRouter } from '@navikt/fp-storybook-utils';
 import { NavAnsatt } from '@navikt/fp-types';
@@ -104,7 +104,7 @@ const detaljertJournalpostMal = (medBruker: boolean, tilstand: JournalpostTilsta
           },
         ]
       : [],
-  } as Journalpost);
+  }) as Journalpost;
 
 export default {
   title: 'journalføring/journalføring/JournalforingIndex',

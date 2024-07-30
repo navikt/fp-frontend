@@ -1,5 +1,5 @@
 import React from 'react';
-import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import { dokumentMalType, fagsakYtelseType as FagsakYtelseType, ugunstAarsakTyper } from '@navikt/fp-kodeverk';

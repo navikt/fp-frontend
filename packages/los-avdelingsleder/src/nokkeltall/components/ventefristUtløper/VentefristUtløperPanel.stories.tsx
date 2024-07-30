@@ -1,6 +1,6 @@
 import React from 'react';
 import dayjs from 'dayjs';
-import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { FagsakYtelseType } from '@navikt/ft-kodeverk';
 
@@ -11,7 +11,7 @@ import BehandlingVentefrist from '../../../typer/behandlingVentefristTsType';
 import { RestApiGlobalStatePathsKeys, requestApi } from '../../../data/fplosRestApi';
 
 import messages from '../../../../i18n/nb_NO.json';
-import VentefristUtløperPanel from "./VentefristUtløperPanel";
+import VentefristUtløperPanel from './VentefristUtløperPanel';
 
 const withIntl = getIntlDecorator(messages);
 

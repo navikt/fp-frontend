@@ -5,7 +5,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Box, HStack, Spacer, Tag, Link, Label, VStack } from '@navikt/ds-react';
 import { BehandlingVelgerSakIndex } from '@navikt/ft-sak-behandling-velger';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { KodeverkType, FagsakMarkeringKode } from '@navikt/fp-kodeverk';
+import { KodeverkType } from '@navikt/fp-kodeverk';
 import { Behandling, BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
 import { UkjentAdresseMeldingIndex } from '@navikt/fp-sak-ukjent-adresse';
 import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
@@ -35,25 +35,10 @@ const findPathToBehandling = (saksnummer: string, location: Location, alleBehand
 };
 
 const finnFagsakMarkeringTekst = (fagsak: Fagsak): string[] => {
-  if (!fagsak.fagsakMarkering || fagsak.fagsakMarkering === FagsakMarkeringKode.NASJONAL) {
+  if (!fagsak.fagsakMarkeringer) {
     return [];
   }
-  switch (fagsak.fagsakMarkering) {
-    case FagsakMarkeringKode.EØS_BOSATT_NORGE:
-      return ['EØS'];
-    case FagsakMarkeringKode.BOSATT_UTLAND:
-      return ['Utland'];
-    case FagsakMarkeringKode.SAMMENSATT_KONTROLL:
-      return ['Kontroll'];
-    case FagsakMarkeringKode.DØD_DØDFØDSEL:
-      return ['Død'];
-    case FagsakMarkeringKode.SELVSTENDIG_NÆRING:
-      return ['Næring'];
-    case FagsakMarkeringKode.PRAKSIS_UTSETTELSE:
-      return ['Utsettelse'];
-    default:
-      return [];
-  }
+  return fagsak.fagsakMarkeringer.map(m => m.kortNavn).filter(navn => !!navn) as string[];
 };
 
 interface OwnProps {

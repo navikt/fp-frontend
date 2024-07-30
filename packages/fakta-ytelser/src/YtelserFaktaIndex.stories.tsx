@@ -1,5 +1,5 @@
 import React from 'react';
-import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react';
 
 import { InntektArbeidYtelse } from '@navikt/fp-types';
 
@@ -55,9 +55,7 @@ export default {
 
 const Template: StoryFn<{
   inntektArbeidYtelse: InntektArbeidYtelse;
-}> = ({ inntektArbeidYtelse }) => (
-  <YtelserFaktaIndex inntektArbeidYtelse={inntektArbeidYtelse} />
-);
+}> = ({ inntektArbeidYtelse }) => <YtelserFaktaIndex inntektArbeidYtelse={inntektArbeidYtelse} />;
 
 export const YtelserForHovedsøker = Template.bind({});
 YtelserForHovedsøker.args = {

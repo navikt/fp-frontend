@@ -7,7 +7,13 @@ import { Heading, Detail, BodyShort, Button } from '@navikt/ds-react';
 
 import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 import { Form, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
-import { behandlingType as BehandlingType, dokumentMalType, ugunstAarsakTyper, AksjonspunktCode, KodeverkType } from '@navikt/fp-kodeverk';
+import {
+  behandlingType as BehandlingType,
+  dokumentMalType,
+  ugunstAarsakTyper,
+  AksjonspunktCode,
+  KodeverkType,
+} from '@navikt/fp-kodeverk';
 import { AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { hasValidText, minLength, maxLength, required } from '@navikt/ft-form-validators';
 import { ISO_DATE_FORMAT, getLanguageFromSprakkode } from '@navikt/ft-utils';
@@ -197,9 +203,15 @@ const VarselOmRevurderingForm: FunctionComponent<OwnProps> = ({
                     validate={[required, minLength3, maxLength10000, hasValidText]}
                     maxLength={10000}
                     // Må erstatte bindestrek kopiert inn fra Word med vanlig bindestrek
-                    parse={value => value.toString().replaceAll(/\p{Dash_Punctuation}/gu, '-').replaceAll('\t', ' ')}
+                    parse={value =>
+                      value
+                        .toString()
+                        .replaceAll(/\p{Dash_Punctuation}/gu, '-')
+                        .replaceAll('\t', ' ')
+                    }
                   />
                   <VerticalSpacer fourPx />
+                  {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                   <a
                     href=""
                     onClick={forhåndsvisMelding}

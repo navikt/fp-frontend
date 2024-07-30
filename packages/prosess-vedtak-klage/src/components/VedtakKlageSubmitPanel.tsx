@@ -45,6 +45,7 @@ const VedtakKlageSubmitPanel: FunctionComponent<OwnProps> = ({
           </FlexColumn>
         )}
         <FlexColumn>
+          {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
           <a
             href=""
             onClick={forhåndsvis}

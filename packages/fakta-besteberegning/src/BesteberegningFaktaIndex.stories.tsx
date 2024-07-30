@@ -1,5 +1,4 @@
 import React from 'react';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 

@@ -45,16 +45,19 @@ const PreviewKlageLink: FunctionComponent<OwnProps> = ({ previewCallback, fritek
     e.preventDefault();
   };
   return (
-    <a
-      href=""
-      onClick={e => {
-        previewMessage(e);
-      }}
-      onKeyDown={e => (e.key === 'Enter' ? previewMessage(e) : null)}
-      className={classNames(styles.previewLink, 'lenke lenke--frittstaende')}
-    >
-      <FormattedMessage id="PreviewKlageLink.ForhandvisBrev" />
-    </a>
+    <>
+      {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+      <a
+        href=""
+        onClick={e => {
+          previewMessage(e);
+        }}
+        onKeyDown={e => (e.key === 'Enter' ? previewMessage(e) : null)}
+        className={classNames(styles.previewLink, 'lenke lenke--frittstaende')}
+      >
+        <FormattedMessage id="PreviewKlageLink.ForhandvisBrev" />
+      </a>
+    </>
   );
 };
 

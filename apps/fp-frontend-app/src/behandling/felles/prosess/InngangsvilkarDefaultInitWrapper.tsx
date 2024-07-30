@@ -125,6 +125,7 @@ const InngangsvilkarDefaultInitWrapper: FunctionComponent<OwnProps & ProsessPane
                 ? [
                     <React.Fragment key="1">
                       {intl.formatMessage({ id: 'InngangsvilkarProsessStegPanelDef.AvventerAvklaringAv' })}
+                      {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                       <a href="" onClick={oppdaterUrl}>
                         {apentFaktaPanelInfo.text}
                       </a>

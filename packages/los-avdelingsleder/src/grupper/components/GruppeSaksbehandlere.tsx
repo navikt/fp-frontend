@@ -1,4 +1,4 @@
-import { BodyShort, HStack, Label, UNSAFE_Combobox, VStack } from '@navikt/ds-react'; // eslint-disable-line camelcase
+import { BodyShort, HStack, Label, UNSAFE_Combobox, VStack } from '@navikt/ds-react';
 import { Form, InputField } from '@navikt/ft-form-hooks';
 import { hasValidName, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import React, { FunctionComponent, useState, useEffect } from 'react';
@@ -100,8 +100,7 @@ const GruppeSaksbehandlere: FunctionComponent<Props> = ({
           className={styles.navn}
         />
         <VStack gap="4">
-          {/* eslint-disable-next-line react/jsx-pascal-case */}
-          <UNSAFE_Combobox // eslint-disable-line camelcase
+          <UNSAFE_Combobox
             label={intl.formatMessage({ id: 'GruppeSaksbehandlere.VelgSaksbehandlere' })}
             size="small"
             options={options}
