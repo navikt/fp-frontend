@@ -76,12 +76,10 @@ ToSaksbehandlere.args = {
     {
       brukerIdent: 'E23232',
       navn: 'Espen Utvikler',
-      avdelingsnavn: ['NAV Viken'],
     },
     {
       brukerIdent: 'S34354',
       navn: 'Steffen',
-      avdelingsnavn: ['NAV Viken'],
     },
   ],
   hentAvdelingensSakslister: action('button-click'),
@@ -100,17 +98,14 @@ TreSaksbehandlere.args = {
     {
       brukerIdent: 'E23232',
       navn: 'Espen Utvikler',
-      avdelingsnavn: ['NAV Viken'],
     },
     {
       brukerIdent: 'S34354',
       navn: 'Steffen',
-      avdelingsnavn: ['NAV Viken'],
     },
     {
       brukerIdent: 'E24353',
       navn: 'Eirik',
-      avdelingsnavn: ['NAV Viken'],
     },
   ],
   hentAvdelingensSakslister: action('button-click'),
@@ -129,17 +124,14 @@ SaksbehandlereSomErGruppert.args = {
     {
       brukerIdent: 'E23232',
       navn: 'Espen Utvikler',
-      avdelingsnavn: ['NAV Viken'],
     },
     {
       brukerIdent: 'S34354',
       navn: 'Steffen',
-      avdelingsnavn: ['NAV Viken'],
     },
     {
       brukerIdent: 'E24353',
       navn: 'Eirik',
-      avdelingsnavn: ['NAV Viken'],
     },
   ],
   grupperteSaksbehandlere: {
@@ -149,12 +141,10 @@ SaksbehandlereSomErGruppert.args = {
         gruppeNavn: 'Gruppe 1',
         saksbehandlere: [
           {
-            avdelingsnavn: ['NAV Oslo'],
             brukerIdent: 'E23232',
             navn: 'Espen Utvikler',
           },
           {
-            avdelingsnavn: ['NAV Oslo'],
             brukerIdent: 'S34354',
             navn: 'Steffen',
           },

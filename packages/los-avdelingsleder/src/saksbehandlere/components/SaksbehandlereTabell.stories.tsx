@@ -41,12 +41,10 @@ Default.args = {
     {
       brukerIdent: 'R12122',
       navn: 'Espen Utvikler',
-      avdelingsnavn: ['NAV Viken'],
     },
     {
       brukerIdent: 'S53343',
       navn: 'Steffen',
-      avdelingsnavn: ['NAV Oslo'],
     },
   ],
   hentAvdelingensSaksbehandlere: () => undefined,

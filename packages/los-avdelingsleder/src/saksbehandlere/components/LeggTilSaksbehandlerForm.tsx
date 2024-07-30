@@ -83,10 +83,9 @@ const LeggTilSaksbehandlerForm: FunctionComponent<OwnProps> = ({
       return '';
     }
 
-    const brukerinfo = `${saksbehandler.navn}, ${saksbehandler.avdelingsnavn.join(', ')}`;
     return erLagtTilAllerede
-      ? `${brukerinfo} (${intl.formatMessage({ id: 'LeggTilSaksbehandlerForm.FinnesAllerede' })})`
-      : brukerinfo;
+      ? `${saksbehandler.navn} (${intl.formatMessage({ id: 'LeggTilSaksbehandlerForm.FinnesAllerede' })})`
+      : saksbehandler.navn;
   }, [state, saksbehandler, erLagtTilAllerede]);
 
   const formMethods = useForm<FormValues>();
