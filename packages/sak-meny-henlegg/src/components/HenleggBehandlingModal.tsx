@@ -199,7 +199,12 @@ const HenleggBehandlingModal: FunctionComponent<PureOwnProps> = ({
                   validate={[required, hasValidText]}
                   maxLength={2000}
                   // Må erstatte bindestrek kopiert inn fra Word med vanlig bindestrek
-                  parse={value => value.toString().replaceAll(/\p{Dash_Punctuation}/gu, '-').replaceAll('\t', ' ')}
+                  parse={value =>
+                    value
+                      .toString()
+                      .replaceAll(/\p{Dash_Punctuation}/gu, '-')
+                      .replaceAll('\t', ' ')
+                  }
                 />
               </div>
             </>
@@ -212,6 +217,7 @@ const HenleggBehandlingModal: FunctionComponent<PureOwnProps> = ({
                   <Label size="small">{intl.formatMessage({ id: 'HenleggBehandlingModal.SokerInformeres' })}</Label>
                 </FlexColumn>
                 <FlexColumn>
+                  {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                   <a
                     href=""
                     onClick={previewHenleggBehandlingDoc(

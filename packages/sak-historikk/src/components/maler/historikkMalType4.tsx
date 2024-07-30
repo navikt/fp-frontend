@@ -9,11 +9,7 @@ import HistorikkMal from '../HistorikkMalTsType';
 const HistorikkMalType4: FunctionComponent<HistorikkMal> = ({ historikkinnslag, getKodeverknavn }) => (
   <>
     {historikkinnslag.historikkinnslagDeler.map((del, delIndex) => (
-      <div
-        key={
-          `del${delIndex}` // eslint-disable-line react/no-array-index-key
-        }
-      >
+      <div key={`del${delIndex}`}>
         <BodyShort size="small" className="snakkeboble-panel__tekst">
           {findHendelseText(del.hendelse, getKodeverknavn)}
         </BodyShort>

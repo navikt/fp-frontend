@@ -4,12 +4,10 @@ import ErrorEventType from './errorEventType';
 
 describe('RestHaltedOrDelayedFormatter', () => {
   it('skal håndtere feil når feildata er av korrekt type', () => {
-    // eslint-disable-next-line no-unused-expressions
     expect(new RestHaltedOrDelayedFormatter().isOfType(ErrorEventType.POLLING_HALTED_OR_DELAYED)).toBe(true);
   });
 
   it('skal ikke håndtere feil når feildata er av annen type', () => {
-    // eslint-disable-next-line no-unused-expressions
     expect(new RestHaltedOrDelayedFormatter().isOfType(ErrorEventType.POLLING_TIMEOUT)).toBe(false);
   });
 
