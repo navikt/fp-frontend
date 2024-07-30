@@ -1,6 +1,6 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react';
 import MockAdapter from 'axios-mock-adapter';
 import { RestApiErrorProvider, RestApiProvider } from '@navikt/fp-rest-api-hooks';
 import { alleKodeverk, alleKodeverkTilbakekreving } from '@navikt/fp-storybook-utils';

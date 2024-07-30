@@ -1,6 +1,6 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react';
 
 import { Aksjonspunkt } from '@navikt/ft-types';
 import { Fagsak, KontrollerFaktaPeriode, Ytelsefordeling } from '@navikt/fp-types';

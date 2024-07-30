@@ -21,7 +21,6 @@ export type InputErrorMessage =
   | ErrorDataTimeoutOrNotFound;
 
 class ErrorFormatter {
-  // eslint-disable-next-line class-methods-use-this
   format = (errorMessages: InputErrorMessage[], crashMessage?: string): ErrorMessage[] => {
     const allErrorMessages: ErrorMessage[] = [];
     if (crashMessage) {

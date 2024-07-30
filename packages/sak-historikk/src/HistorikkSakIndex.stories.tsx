@@ -1,5 +1,5 @@
 import React from 'react';
-import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react';
 
 import { skjermlenkeCodes } from '@navikt/fp-konstanter';
 import { Historikkinnslag, HistorikkinnslagDel } from '@navikt/fp-types';

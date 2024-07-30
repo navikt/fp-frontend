@@ -1,4 +1,3 @@
-/* eslint-disable import/no-import-module-exports */
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
@@ -31,7 +30,6 @@ init({
     if (exception.isAxiosError) {
       // @ts-ignore
       const requestUrl = new URL(exception.request.responseURL);
-      // eslint-disable-next-line no-param-reassign
       event.fingerprint = [
         '{{ default }}',
         // @ts-ignore
@@ -40,10 +38,8 @@ init({
         String(exception.message),
         String(requestUrl.pathname),
       ];
-      // eslint-disable-next-line no-param-reassign
       event.extra = event.extra ? event.extra : {};
       // @ts-ignore
-      // eslint-disable-next-line no-param-reassign
       event.extra.callId = exception.response.config.headers['Nav-Callid'];
     }
     return event;

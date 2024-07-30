@@ -1,13 +1,8 @@
 import React from 'react';
-import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import {
-  aksjonspunktStatus,
-  vilkarUtfallType,
-  avslagsarsakCodes,
-  AksjonspunktCode,
-} from '@navikt/fp-kodeverk';
+import { aksjonspunktStatus, vilkarUtfallType, avslagsarsakCodes, AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Behandling, Soknad } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';

@@ -42,7 +42,6 @@ class RequestRunner {
 
   maxPollingLimit: number = MAX_POLLING_ATTEMPTS;
 
-  // eslint-disable-next-line class-methods-use-this
   notify: Notify = () => undefined;
 
   isCancelled = false;

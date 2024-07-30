@@ -142,7 +142,7 @@ describe('<SakenFaktaIndex>', () => {
     expect(screen.getByText('Er endret til 80 fordi...')).toBeInTheDocument();
   });
 
-  it('skal lagre ny dekningsgrad', async () => {
+  it('skal lagre ny dekningsgrad (samme tekst som annen test - FIX)', async () => {
     const lagre = vi.fn(() => Promise.resolve());
 
     render(<HarFåttDekningsgradAksjonspunkt submitCallback={lagre} />);

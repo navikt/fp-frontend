@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
-import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react';
 
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';

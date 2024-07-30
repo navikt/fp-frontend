@@ -19,5 +19,6 @@ const MenuButton: FunctionComponent<OwnProps> = React.forwardRef(({ onClick, chi
     <Detail>{children}</Detail>
   </button>
 ));
+MenuButton.displayName = 'MenuButton';
 
 export default MenuButton;

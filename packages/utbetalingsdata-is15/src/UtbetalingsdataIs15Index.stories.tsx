@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react';
 import { InfotrygdVedtak } from '@navikt/fp-types';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 

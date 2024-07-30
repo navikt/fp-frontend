@@ -1,6 +1,6 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react';
 import { BehandlingStatus, BehandlingType, FagsakStatus, FagsakYtelseType } from '@navikt/ft-kodeverk';
 
 import { RestApiMock } from '@navikt/fp-utils-test';

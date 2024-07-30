@@ -61,11 +61,7 @@ const HistorikkMalType8: FunctionComponent<HistorikkMal> = ({
   return (
     <>
       {historikkinnslagDeler.map((historikkinnslagDel, historikkinnslagDelIndex) => (
-        <div
-          key={
-            `historikkinnslagDel${historikkinnslagDelIndex}` // eslint-disable-line react/no-array-index-key
-          }
-        >
+        <div key={`historikkinnslagDel${historikkinnslagDelIndex}`}>
           <Skjermlenke
             skjermlenke={historikkinnslagDel.skjermlenke}
             behandlingLocation={behandlingLocation}
