@@ -45,12 +45,10 @@ const SistBehandledeSaker: FunctionComponent<OwnProps> = ({ åpneFagsak }) => {
         <Fragment key={sbs.id}>
           <BodyShort size="small">
             {sbs.navn ? (
-              // eslint-disable-next-line jsx-a11y/anchor-is-valid
               <Link href="#" onClick={getClickEvent(openFpsak, sbs)}>
                 {`${sbs.navn} ${sbs.personnummer}`}
               </Link>
             ) : (
-              // eslint-disable-next-line jsx-a11y/anchor-is-valid
               <Link href="#" onClick={getClickEvent(openFpsak, sbs)}>
                 <FormattedMessage id="SistBehandledeSaker.Behandling" values={{ index: index + 1 }} />
               </Link>

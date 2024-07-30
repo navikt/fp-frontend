@@ -1,5 +1,4 @@
-// eslint-disable-next-line import/prefer-default-export
-export const setup = (app) => {
+export const setup = app => {
   app.disable('x-powered-by');
   app.use((req, res, next) => {
     res.header('X-Content-Type-Options', 'nosniff');

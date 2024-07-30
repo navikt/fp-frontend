@@ -11,7 +11,7 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "sourceMap": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "typeRoots": ["./node_modules/@types", "./@types", "./node_modules"],
     "skipLibCheck": true
   },

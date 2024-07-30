@@ -1,5 +1,5 @@
 import React from 'react';
-import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react';
 
 import { RestApiMock } from '@navikt/fp-utils-test';
 import { alleKodeverkLos, withRouter } from '@navikt/fp-storybook-utils';

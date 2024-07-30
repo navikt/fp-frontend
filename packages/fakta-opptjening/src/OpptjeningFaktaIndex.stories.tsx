@@ -1,6 +1,6 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react';
 
 import { AksjonspunktCode, aksjonspunktStatus, opptjeningAktivitetType } from '@navikt/fp-kodeverk';
 import { Behandling, Aksjonspunkt, Opptjening } from '@navikt/fp-types';

@@ -194,7 +194,12 @@ const Messages: FunctionComponent<OwnProps> = ({
             maxLength={erVarselOmRevurdering ? 10000 : 4000}
             badges={[{ type: 'info', titleText: language }]}
             // Må erstatte bindestrek kopiert inn fra Word med vanlig bindestrek
-            parse={value => value.toString().replaceAll(/\p{Dash_Punctuation}/gu, '-').replaceAll('\t', ' ')}
+            parse={value =>
+              value
+                .toString()
+                .replaceAll(/\p{Dash_Punctuation}/gu, '-')
+                .replaceAll('\t', ' ')
+            }
           />
         </>
       )}
@@ -213,6 +218,7 @@ const Messages: FunctionComponent<OwnProps> = ({
         <VerticalSpacer sixteenPx />
         <FlexRow spaceBetween>
           <FlexColumn>
+            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
             <a
               href=""
               onClick={previewMessage}

@@ -22,7 +22,7 @@
     "react-intl": "6.6.8"
   },
   "devDependencies": {
-    "eslint": "8.57.0",
+    "eslint": "9.8.0",
     "typescript": "5.5.4",
     "vite": "5.3.5"
   }
