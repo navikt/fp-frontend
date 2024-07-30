@@ -257,6 +257,7 @@ const BehandlingPanelerIndex: FunctionComponent<OwnProps> = ({
                   setSkalOppdatereEtterBekreftelseAvAp={setSkalOppdatereEtterBekreftelseAvAp}
                   opneSokeside={opneSokeside}
                   alleBehandlinger={alleBehandlinger}
+                  hentOgSettBehandling={hentOgSettBehandling}
                 />
               </ErrorBoundary>
             </Suspense>

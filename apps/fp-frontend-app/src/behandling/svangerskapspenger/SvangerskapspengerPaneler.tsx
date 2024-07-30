@@ -36,7 +36,7 @@ interface OwnProps {
   arbeidsgivere: ArbeidsgiverOpplysningerPerId;
   personoversikt: Personoversikt;
   rettigheter: AksessRettigheter;
-  hentOgSettBehandling: () => void;
+  hentOgSettBehandling: (keepData?: boolean) => void;
 }
 
 const SvangerskapspengerPaneler: FunctionComponent<OwnProps> = ({
