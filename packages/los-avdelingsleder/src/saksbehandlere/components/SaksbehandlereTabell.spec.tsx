@@ -9,7 +9,9 @@ const { Default, TomTabell } = composeStories(stories);
 describe('<SaksbehandlereTabell>', () => {
   it('skal vise to saksbehandlere i tabell', async () => {
     render(<Default />);
-    expect(await screen.findByText('Tilgjengelige saksbehandlere')).toBeInTheDocument();
+
+    expect(await screen.findByText('Navn')).toBeInTheDocument();
+
     expect(screen.getByText('Navn')).toBeInTheDocument();
     expect(screen.getByText('Espen Utvikler')).toBeInTheDocument();
     expect(screen.getByText('Steffen')).toBeInTheDocument();
@@ -17,10 +19,6 @@ describe('<SaksbehandlereTabell>', () => {
     expect(screen.getByText('Brukerident')).toBeInTheDocument();
     expect(screen.getByText('R12122')).toBeInTheDocument();
     expect(screen.getByText('S53343')).toBeInTheDocument();
-
-    expect(screen.getByText('Avdeling')).toBeInTheDocument();
-    expect(screen.getByText('NAV Viken')).toBeInTheDocument();
-    expect(screen.getByText('NAV Oslo')).toBeInTheDocument();
   });
 
   it('skal vise tekst som viser at ingen saksbehandlere er lagt til', async () => {
@@ -31,7 +29,7 @@ describe('<SaksbehandlereTabell>', () => {
   it('skal fjerne en saksbehandler ved å trykk på fjern-knappen', async () => {
     const hentAvdelingensSaksbehandlere = vi.fn();
     render(<Default hentAvdelingensSaksbehandlere={hentAvdelingensSaksbehandlere} />);
-    expect(await screen.findByText('Tilgjengelige saksbehandlere')).toBeInTheDocument();
+    expect(await screen.findByText('Navn')).toBeInTheDocument();
 
     await userEvent.click(screen.getAllByRole('img')[0]);
 

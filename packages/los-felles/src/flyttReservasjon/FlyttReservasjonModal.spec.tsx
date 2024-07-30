@@ -47,7 +47,7 @@ describe('<FlyttReservasjonModal>', () => {
 
     await userEvent.click(screen.getByText('Søk'));
 
-    expect(await screen.findByText('Espen Utvikler, NAV Viken')).toBeInTheDocument();
+    expect(await screen.findByText('Espen Utvikler')).toBeInTheDocument();
     expect(screen.getByText('OK').closest('button')).toBeDisabled();
 
     const begrunnelseInput = utils.getByLabelText('Begrunn flytting av reservasjonen');

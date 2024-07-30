@@ -27,7 +27,7 @@ const SaksbehandlerePanel: FunctionComponent<OwnProps> = ({
       valgtAvdelingEnhet={valgtAvdelingEnhet}
       hentAvdelingensSaksbehandlere={hentAvdelingensSaksbehandlere}
     />
-    <VerticalSpacer sixteenPx />
+    <VerticalSpacer twentyPx />
     <LeggTilSaksbehandlerForm
       valgtAvdelingEnhet={valgtAvdelingEnhet}
       avdelingensSaksbehandlere={avdelingensSaksbehandlere}

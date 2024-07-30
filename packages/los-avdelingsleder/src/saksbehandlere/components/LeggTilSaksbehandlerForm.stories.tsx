@@ -22,7 +22,6 @@ export default {
 const saksbehandler = {
   brukerIdent: 'R232323',
   navn: 'Espen Utvikler',
-  avdelingsnavn: ['NAV Viken'],
 };
 
 interface Props {
