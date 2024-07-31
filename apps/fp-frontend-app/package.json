@@ -113,7 +113,7 @@
     "@navikt/ft-sak-aktor": "2.4.20",
     "@navikt/ft-sak-behandling-velger": "2.3.20",
     "@navikt/ft-sak-dekorator": "4.3.20",
-    "@navikt/ft-sak-dokumenter": "2.4.1",
+    "@navikt/ft-sak-dokumenter": "2.4.2",
     "@navikt/ft-sak-fagsak-profil": "3.3.18",
     "@navikt/ft-sak-infosider": "2.3.17",
     "@navikt/ft-sak-meny": "3.3.20",
@@ -154,7 +154,7 @@
     "eslint": "9.8.0",
     "react-test-renderer": "18.3.1",
     "storybook": "8.2.6",
-    "stylelint": "16.8.0",
+    "stylelint": "16.8.1",
     "typescript": "5.5.4",
     "vite": "5.3.5",
     "vitest": "2.0.4"
