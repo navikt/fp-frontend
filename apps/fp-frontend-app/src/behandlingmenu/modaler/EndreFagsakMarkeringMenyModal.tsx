@@ -1,7 +1,7 @@
 import { KodeverkType } from '@navikt/fp-kodeverk';
 import { FormValues as EndreUtlandFormValues, MenyEndreUtlandIndex } from '@navikt/fp-sak-meny-endre-utland';
 import { Saksmarkering } from '@navikt/fp-types';
-import { FunctionComponent, useCallback } from 'react';
+import React, { FunctionComponent, useCallback } from 'react';
 import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
 import { useFpSakKodeverk } from '../../data/useKodeverk';
 

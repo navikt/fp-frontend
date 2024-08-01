@@ -1,14 +1,14 @@
-import React, { FunctionComponent } from 'react';
+import React, { Button, Heading, Modal } from '@navikt/ds-react';
+import { FunctionComponent } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Modal, Button, Heading } from '@navikt/ds-react';
 
-import { RadioGroupPanel, Form, CheckboxPanel } from '@navikt/ft-form-hooks';
-import { required } from '@navikt/ft-form-validators';
 import { FagsakMarkeringKode } from '@navikt/fp-kodeverk';
+import { CheckboxPanel, Form } from '@navikt/ft-form-hooks';
+import { required } from '@navikt/ft-form-validators';
 
-import styles from './endreUtlandModal.module.css';
 import { KodeverkMedNavn, Saksmarkering } from '@navikt/fp-types';
+import styles from './endreUtlandModal.module.css';
 
 export type FormValues = {
   saksnummer: string;
@@ -61,13 +61,8 @@ const EndreUtlandModal: FunctionComponent<OwnProps> = ({
           </Heading>
         </Modal.Header>
         <Modal.Body>
-<<<<<<< Updated upstream
-          <RadioGroupPanel
-            name="fagsakMarkering"
-=======
           <CheckboxPanel
             name="fagsakMarkeringer"
->>>>>>> Stashed changes
             hideLegend
             checkboxes={fagsakMarkeringerKodeverk.map(markering => ({
               label: markering.navn,
