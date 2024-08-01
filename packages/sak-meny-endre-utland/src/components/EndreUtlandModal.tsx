@@ -3,7 +3,6 @@ import { FunctionComponent } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { FagsakMarkeringKode } from '@navikt/fp-kodeverk';
 import { CheckboxPanel, Form } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
