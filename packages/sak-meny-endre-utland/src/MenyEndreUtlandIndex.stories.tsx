@@ -3,6 +3,7 @@ import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import MenyEndreUtlandIndex from './MenyEndreUtlandIndex';
+import { FagsakMarkeringKode } from '@navikt/fp-kodeverk';
 
 export default {
   title: 'sak/sak-meny-endre-utland',
@@ -18,11 +19,10 @@ const Template: StoryFn<{
     endreFagsakMarkering={endreFagsakMarkering}
     lukkModal={lukkModal}
     fagsakMarkeringerKodeverk={[
-      { kode: 'NASJONAL', navn: 'Nasjonal', kodeverk: 'FAGSAK_MARKERING' },
-      { kode: 'BOSATT_NORGE', navn: 'Bosatt Norge', kodeverk: 'FAGSAK_MARKERING' },
-      { kode: 'BOSATT_UTLAND', navn: 'Bosatt utland', kodeverk: 'FAGSAK_MARKERING' },
-      { kode: 'EØS_BOSATT_I_NORGE', navn: 'EØS bosatt Norge', kodeverk: 'FAGSAK_MARKERING' },
-      { kode: 'NÆRINGSDRIVENDE', navn: 'Næringsdrivende', kodeverk: 'FAGSAK_MARKERING' },
+      { kode: FagsakMarkeringKode.NASJONAL, navn: 'Nasjonal', kodeverk: 'FAGSAK_MARKERING' },
+      { kode: FagsakMarkeringKode.BOSATT_UTLAND, navn: 'Bosatt utland', kodeverk: 'FAGSAK_MARKERING' },
+      { kode: FagsakMarkeringKode.EØS_BOSATT_NORGE, navn: 'EØS bosatt Norge', kodeverk: 'FAGSAK_MARKERING' },
+      { kode: FagsakMarkeringKode.SELVSTENDIG_NÆRING, navn: 'Næringsdrivende', kodeverk: 'FAGSAK_MARKERING' },
     ]}
   />
 );

@@ -41,9 +41,7 @@ const EndreUtlandModal: FunctionComponent<OwnProps> = ({
   const formMethods = useForm<FormValues>({
     defaultValues: {
       saksnummer,
-      fagsakMarkeringer: fagsakMarkeringer
-        ? fagsakMarkeringer.map(m => m.fagsakMarkering)
-        : [FagsakMarkeringKode.NASJONAL],
+      fagsakMarkeringer: fagsakMarkeringer ? fagsakMarkeringer.map(m => m.fagsakMarkering) : [],
     },
   });
 
