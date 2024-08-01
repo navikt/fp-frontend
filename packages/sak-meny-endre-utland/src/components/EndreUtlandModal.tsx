@@ -3,42 +3,47 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Modal, Button, Heading } from '@navikt/ds-react';
 
-import { RadioGroupPanel, Form } from '@navikt/ft-form-hooks';
+import { RadioGroupPanel, Form, CheckboxPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { FagsakMarkeringKode } from '@navikt/fp-kodeverk';
 
 import styles from './endreUtlandModal.module.css';
+import { KodeverkMedNavn, Saksmarkering } from '@navikt/fp-types';
 
 export type FormValues = {
   saksnummer: string;
-  fagsakMarkering: string;
+  fagsakMarkeringer: string[];
 };
 
 interface OwnProps {
   saksnummer: string;
-  fagsakMarkering?: string;
+  fagsakMarkeringer?: Saksmarkering[];
   cancelEvent: () => void;
   submitCallback: (formData: FormValues) => void;
+  fagsakMarkeringerKodeverk: KodeverkMedNavn[];
 }
 
 /**
  * EndreUtlandModal
  *
- * Presentasjonskomponent. Denne modalen vises etter at en saksbehandler har valgt opprett ny 1.gangsbehandling i behandlingsmenyen.
+ * Denne modalen vises etter at en saksbehandler har valgt opprett ny 1.gangsbehandling i behandlingsmenyen.
  * Ved å trykke på ok skal ny behandling(1.gangsbehandling) av sak opprettes.
  */
 const EndreUtlandModal: FunctionComponent<OwnProps> = ({
   submitCallback,
   cancelEvent,
   saksnummer,
-  fagsakMarkering,
+  fagsakMarkeringer,
+  fagsakMarkeringerKodeverk,
 }) => {
   const intl = useIntl();
 
   const formMethods = useForm<FormValues>({
     defaultValues: {
       saksnummer,
-      fagsakMarkering: fagsakMarkering || FagsakMarkeringKode.NASJONAL,
+      fagsakMarkeringer: fagsakMarkeringer
+        ? fagsakMarkeringer.map(m => m.fagsakMarkering)
+        : [FagsakMarkeringKode.NASJONAL],
     },
   });
 
@@ -56,40 +61,19 @@ const EndreUtlandModal: FunctionComponent<OwnProps> = ({
           </Heading>
         </Modal.Header>
         <Modal.Body>
+<<<<<<< Updated upstream
           <RadioGroupPanel
             name="fagsakMarkering"
+=======
+          <CheckboxPanel
+            name="fagsakMarkeringer"
+>>>>>>> Stashed changes
             hideLegend
+            checkboxes={fagsakMarkeringerKodeverk.map(markering => ({
+              label: markering.navn,
+              value: markering.kode,
+            }))}
             validate={[required]}
-            radios={[
-              {
-                label: intl.formatMessage({ id: 'MenyEndreUtlandIndex.Nasjonal' }),
-                value: FagsakMarkeringKode.NASJONAL,
-              },
-              {
-                label: intl.formatMessage({ id: 'MenyEndreUtlandIndex.EøsBosattNorge' }),
-                value: FagsakMarkeringKode.EØS_BOSATT_NORGE,
-              },
-              {
-                label: intl.formatMessage({ id: 'MenyEndreUtlandIndex.BosattUtland' }),
-                value: FagsakMarkeringKode.BOSATT_UTLAND,
-              },
-              {
-                label: intl.formatMessage({ id: 'MenyEndreUtlandIndex.SelvstendigNæring' }),
-                value: FagsakMarkeringKode.SELVSTENDIG_NÆRING,
-              },
-              {
-                label: intl.formatMessage({ id: 'MenyEndreUtlandIndex.DødDødfødsel' }),
-                value: FagsakMarkeringKode.DØD_DØDFØDSEL,
-              },
-              {
-                label: intl.formatMessage({ id: 'MenyEndreUtlandIndex.SammensattKontroll' }),
-                value: FagsakMarkeringKode.SAMMENSATT_KONTROLL,
-              },
-              {
-                label: intl.formatMessage({ id: 'MenyEndreUtlandIndex.PraksisUtsettelse' }),
-                value: FagsakMarkeringKode.PRAKSIS_UTSETTELSE,
-              },
-            ]}
           />
         </Modal.Body>
         <Modal.Footer>

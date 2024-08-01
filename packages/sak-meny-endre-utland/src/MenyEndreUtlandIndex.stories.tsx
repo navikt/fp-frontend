@@ -13,7 +13,18 @@ const Template: StoryFn<{
   endreFagsakMarkering: () => void;
   lukkModal: () => void;
 }> = ({ endreFagsakMarkering, lukkModal }) => (
-  <MenyEndreUtlandIndex saksnummer="123" endreFagsakMarkering={endreFagsakMarkering} lukkModal={lukkModal} />
+  <MenyEndreUtlandIndex
+    saksnummer="123"
+    endreFagsakMarkering={endreFagsakMarkering}
+    lukkModal={lukkModal}
+    fagsakMarkeringerKodeverk={[
+      { kode: 'NASJONAL', navn: 'Nasjonal', kodeverk: 'FAGSAK_MARKERING' },
+      { kode: 'BOSATT_NORGE', navn: 'Bosatt Norge', kodeverk: 'FAGSAK_MARKERING' },
+      { kode: 'BOSATT_UTLAND', navn: 'Bosatt utland', kodeverk: 'FAGSAK_MARKERING' },
+      { kode: 'EØS_BOSATT_I_NORGE', navn: 'EØS bosatt Norge', kodeverk: 'FAGSAK_MARKERING' },
+      { kode: 'NÆRINGSDRIVENDE', navn: 'Næringsdrivende', kodeverk: 'FAGSAK_MARKERING' },
+    ]}
+  />
 );
 
 export const Default = Template.bind({});

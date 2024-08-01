@@ -65,6 +65,7 @@ enum KodeverkType {
   FARESIGNAL_VURDERING = 'FaresignalVurdering',
   FORDELING_PERIODE_KILDE = 'FordelingPeriodeKilde',
   RELASJONSROLLE_TYPE = 'RelasjonsRolleType',
+  FAGSAK_MARKERING = 'FagsakMarkering',
 }
 
 export default KodeverkType;
