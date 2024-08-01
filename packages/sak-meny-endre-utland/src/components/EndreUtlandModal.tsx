@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Modal, Button, Heading } from '@navikt/ds-react';
+import { Modal, Button, Heading, CheckboxGroup, Checkbox } from '@navikt/ds-react';
 
 import { RadioGroupPanel, Form } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
@@ -56,6 +56,20 @@ const EndreUtlandModal: FunctionComponent<OwnProps> = ({
           </Heading>
         </Modal.Header>
         <Modal.Body>
+          <CheckboxPanel
+            name="checkboxpanel"
+            label="Dette er et checkboxpanel"
+            checkboxes={[
+              {
+                label: 'Verdi 1',
+                value: 'verdi1',
+              },
+              {
+                label: 'Verdi 2',
+                value: 'verdi2',
+              },
+            ]}
+          />
           <RadioGroupPanel
             name="fagsakMarkering"
             hideLegend
