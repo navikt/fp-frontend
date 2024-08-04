@@ -1,10 +1,13 @@
+import { KodeverkType } from '@navikt/fp-kodeverk';
+import { FormValues as EndreUtlandFormValues, MenyEndreUtlandIndex } from '@navikt/fp-sak-meny-endre-utland';
+import { Saksmarkering } from '@navikt/fp-types';
 import React, { FunctionComponent, useCallback } from 'react';
-import { MenyEndreUtlandIndex, FormValues as EndreUtlandFormValues } from '@navikt/fp-sak-meny-endre-utland';
 import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
+import { useFpSakKodeverk } from '../../data/useKodeverk';
 
 interface OwnProps {
   saksnummer: string;
-  fagsakMarkering: string | undefined;
+  fagsakMarkeringer: Saksmarkering[] | undefined;
   oppdaterFagsak: () => void;
   hentOgSettBehandling: () => void;
   lukkModal: () => void;
@@ -12,11 +15,14 @@ interface OwnProps {
 
 const EndreFagsakMarkeringMenyModal: FunctionComponent<OwnProps> = ({
   saksnummer,
-  fagsakMarkering,
+  fagsakMarkeringer,
   oppdaterFagsak,
   hentOgSettBehandling,
   lukkModal,
 }) => {
+  const fagsakMarkeringerKodeverk = useFpSakKodeverk(KodeverkType.FAGSAK_MARKERING)
+    .sort((a, b) => a.navn.localeCompare(b.navn));
+
   const { startRequest: endreSaksmerking } = restFagsakApiHooks.useRestApiRunner(FagsakApiKeys.ENDRE_SAK_MARKERING);
 
   const endreFagsakMarkering = useCallback(
@@ -31,9 +37,10 @@ const EndreFagsakMarkeringMenyModal: FunctionComponent<OwnProps> = ({
   return (
     <MenyEndreUtlandIndex
       saksnummer={saksnummer}
-      fagsakMarkering={fagsakMarkering}
+      fagsakMarkeringer={fagsakMarkeringer}
       endreFagsakMarkering={endreFagsakMarkering}
       lukkModal={lukkModal}
+      fagsakMarkeringerKodeverk={fagsakMarkeringerKodeverk}
     />
   );
 };

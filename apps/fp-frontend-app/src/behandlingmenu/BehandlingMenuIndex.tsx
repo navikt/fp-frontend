@@ -1,25 +1,26 @@
-import React, { FunctionComponent, useCallback, useMemo, useState } from 'react';
-import { Button } from '@navikt/ds-react';
+import React from 'react';
 import { ChevronDownIcon } from '@navikt/aksel-icons';
-import { FormattedMessage } from 'react-intl';
+import { Button } from '@navikt/ds-react';
 import { Dropdown } from '@navikt/ds-react-internal';
-import { getMenytekst as getNyBehandlingMenytekst } from '@navikt/fp-sak-meny-ny-behandling';
-import { getEndreEnhetMenytekst, getVergeMenytekst, getTaAvVentMenytekst } from '@navikt/ft-sak-meny';
-import { getMenytekst as getSettPaVentMenytekst } from '@navikt/fp-sak-meny-sett-pa-vent';
-import { getMenytekst as getHenleggMenytekst } from '@navikt/fp-sak-meny-henlegg';
 import { getMenytekst as getApneForEndringerMenytekst } from '@navikt/fp-sak-meny-apne-for-endringer';
 import { getMenytekst as getEndreUtlandMenytekst } from '@navikt/fp-sak-meny-endre-utland';
+import { getMenytekst as getHenleggMenytekst } from '@navikt/fp-sak-meny-henlegg';
+import { getMenytekst as getNyBehandlingMenytekst } from '@navikt/fp-sak-meny-ny-behandling';
+import { getMenytekst as getSettPaVentMenytekst } from '@navikt/fp-sak-meny-sett-pa-vent';
 import { Behandling, BehandlingAppKontekst, Fagsak, VergeBehandlingmenyValg } from '@navikt/fp-types';
+import { getEndreEnhetMenytekst, getTaAvVentMenytekst, getVergeMenytekst } from '@navikt/ft-sak-meny';
+import { FunctionComponent, useCallback, useMemo, useState } from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import { FagsakApiKeys, restFagsakApiHooks } from '../data/fagsakContextApi';
 import FagsakData from '../fagsak/FagsakData';
-import NyBehandlingMenyModal from './modaler/NyBehandlingMenyModal';
 import ApneForEndringerMenyModal from './modaler/ApneForEndringerMenyModal';
-import HenleggMenyModal from './modaler/HenleggMenyModal';
 import EndreBehandlendeEnhetMenyModal from './modaler/EndreBehandlendeEnhetMenyModal';
+import EndreFagsakMarkeringMenyModal from './modaler/EndreFagsakMarkeringMenyModal';
+import HenleggMenyModal from './modaler/HenleggMenyModal';
+import NyBehandlingMenyModal from './modaler/NyBehandlingMenyModal';
 import SettPaVentMenyModal from './modaler/SettPaVentMenyModal';
 import TaAvVentMenyModal from './modaler/TaAvVentMenyModal';
-import EndreFagsakMarkeringMenyModal from './modaler/EndreFagsakMarkeringMenyModal';
 import VergeMenyModal from './modaler/VergeMenyModal';
 
 import '@navikt/ft-sak-meny/dist/style.css';
@@ -146,7 +147,7 @@ const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
       {valgtModal === ModalType.ENDRE_FAGSAK_MARKERING && (
         <EndreFagsakMarkeringMenyModal
           saksnummer={fagsak.saksnummer}
-          fagsakMarkering={fagsak.fagsakMarkering}
+          fagsakMarkeringer={fagsak.fagsakMarkeringer}
           oppdaterFagsak={oppdaterFagsak}
           hentOgSettBehandling={hentOgSettBehandling}
           lukkModal={lukkModal}

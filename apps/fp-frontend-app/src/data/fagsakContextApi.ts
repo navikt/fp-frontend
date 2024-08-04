@@ -69,7 +69,7 @@ export const FagsakApiKeys = {
   ),
   PREVIEW_MESSAGE_TILBAKEKREVING: new RestKey<any, any>('PREVIEW_MESSAGE_TILBAKEKREVING'),
   PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE: new RestKey<any, any>('PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE'),
-  ENDRE_SAK_MARKERING: new RestKey<void, { saksnummer: string; fagsakMarkering: string }>('ENDRE_SAK_MARKERING'),
+  ENDRE_SAK_MARKERING: new RestKey<void, { saksnummer: string; fagsakMarkeringer: string[] }>('ENDRE_SAK_MARKERING'),
 };
 
 const fagsakEndepunkter = new RestApiConfigBuilder()

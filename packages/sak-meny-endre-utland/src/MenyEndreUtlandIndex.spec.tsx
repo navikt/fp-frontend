@@ -22,7 +22,7 @@ describe('<MenyEndreUtlandIndex>', () => {
     await waitFor(() => expect(lukkModal).toHaveBeenCalledTimes(1));
     await waitFor(() => expect(endreFagsakMarkering).toHaveBeenCalledTimes(1));
     expect(endreFagsakMarkering).toHaveBeenNthCalledWith(1, {
-      fagsakMarkering: FagsakMarkeringKode.EØS_BOSATT_NORGE,
+      fagsakMarkeringer: [FagsakMarkeringKode.EØS_BOSATT_NORGE],
       saksnummer: '123',
     });
   });
@@ -40,7 +40,7 @@ describe('<MenyEndreUtlandIndex>', () => {
     await waitFor(() => expect(lukkModal).toHaveBeenCalledTimes(1));
     await waitFor(() => expect(endreFagsakMarkering).toHaveBeenCalledTimes(1));
     expect(endreFagsakMarkering).toHaveBeenNthCalledWith(1, {
-      fagsakMarkering: FagsakMarkeringKode.BOSATT_UTLAND,
+      fagsakMarkeringer: [FagsakMarkeringKode.BOSATT_UTLAND],
       saksnummer: '123',
     });
   });

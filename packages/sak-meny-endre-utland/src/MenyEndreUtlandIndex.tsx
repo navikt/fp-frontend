@@ -6,6 +6,7 @@ import { createIntl } from '@navikt/ft-utils';
 import EndreUtlandModal, { FormValues } from './components/EndreUtlandModal';
 
 import messages from '../i18n/nb_NO.json';
+import { KodeverkMedNavn, Saksmarkering } from '@navikt/fp-types';
 
 const intl = createIntl(messages);
 
@@ -13,34 +14,32 @@ export const getMenytekst = (): string => intl.formatMessage({ id: 'MenyEndreUtl
 
 interface OwnProps {
   saksnummer: string;
-  fagsakMarkering?: string;
+  fagsakMarkeringer?: Saksmarkering[];
   endreFagsakMarkering: (formData: FormValues) => void;
   lukkModal: () => void;
+  fagsakMarkeringerKodeverk: KodeverkMedNavn[];
 }
 
 const MenyEndreUtlandIndex: FunctionComponent<OwnProps> = ({
   saksnummer,
-  fagsakMarkering,
+  fagsakMarkeringer,
   endreFagsakMarkering,
   lukkModal,
+  fagsakMarkeringerKodeverk,
 }) => {
   const submit = useCallback((formValues: FormValues) => {
-    const params = {
-      saksnummer: formValues.saksnummer,
-      fagsakMarkering: formValues.fagsakMarkering,
-    };
-
-    endreFagsakMarkering(params);
-
+    endreFagsakMarkering(formValues);
     lukkModal();
   }, []);
+
   return (
     <RawIntlProvider value={intl}>
       <EndreUtlandModal
         saksnummer={saksnummer}
-        fagsakMarkering={fagsakMarkering}
+        fagsakMarkeringer={fagsakMarkeringer}
         cancelEvent={lukkModal}
         submitCallback={submit}
+        fagsakMarkeringerKodeverk={fagsakMarkeringerKodeverk}
       />
     </RawIntlProvider>
   );
