@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { CheckboxPanel, Form } from '@navikt/ft-form-hooks';
-import { required } from '@navikt/ft-form-validators';
 
 import { KodeverkMedNavn, Saksmarkering } from '@navikt/fp-types';
 import styles from './endreUtlandModal.module.css';
@@ -65,7 +64,6 @@ const EndreUtlandModal: FunctionComponent<OwnProps> = ({
               label: markering.navn,
               value: markering.kode,
             }))}
-            validate={[required]}
           />
         </Modal.Body>
         <Modal.Footer>
