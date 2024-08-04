@@ -4,12 +4,9 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { CheckboxPanel, Form } from '@navikt/ft-form-hooks';
-import { arrayMinLength } from '@navikt/ft-form-validators';
 
 import { KodeverkMedNavn, Saksmarkering } from '@navikt/fp-types';
 import styles from './endreUtlandModal.module.css';
-
-const minLength0 = arrayMinLength(0);
 
 export type FormValues = {
   saksnummer: string;
@@ -67,7 +64,6 @@ const EndreUtlandModal: FunctionComponent<OwnProps> = ({
               label: markering.navn,
               value: markering.kode,
             }))}
-            validate={[minLength0]}
           />
         </Modal.Body>
         <Modal.Footer>
