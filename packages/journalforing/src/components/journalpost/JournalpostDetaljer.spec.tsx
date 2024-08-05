@@ -125,18 +125,17 @@ describe('<JournalforingIndex>', () => {
     expect(screen.getByText('Journalfør').closest('button')).toBeEnabled();
     expect(screen.queryByLabelText('Ytelse')).not.toBeInTheDocument();
     expect(
-      screen.queryByLabelText(
+      screen.queryByText(
         'Det vil ikke opprettes sak når du journalfører på generell sak. Innholdet vil bli knyttet direkte til personen.',
       ),
     ).not.toBeInTheDocument();
     await userEvent.click(screen.getAllByRole('radio')[4]);
     expect(screen.queryByLabelText('Ytelse')).not.toBeInTheDocument();
-    // TODO FIX Petter ser på dette
-    // expect(
-    //   screen.queryByLabelText(
-    //     'Det vil ikke opprettes sak når du journalfører på generell sak. Innholdet vil bli knyttet direkte til personen.',
-    //   ),
-    // ).toBeInTheDocument();
+    expect(
+      screen.queryByText(
+        'Det vil ikke opprettes sak når du journalfører på generell sak. Innholdet vil bli knyttet direkte til personen.',
+      ),
+    ).toBeInTheDocument();
     await userEvent.click(screen.getByText('Journalfør'));
     await waitFor(() => expect(journalfør).toHaveBeenCalledTimes(1));
 
