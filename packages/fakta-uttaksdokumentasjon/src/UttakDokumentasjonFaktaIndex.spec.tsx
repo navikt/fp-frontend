@@ -1,8 +1,9 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
 import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
 import * as stories from './UttakDokumentasjonFaktaIndex.stories';
+import { UttakType, UttakVurdering, UttakÅrsak } from '@navikt/fp-types';
 
 const {
   AksjonspunktMedUavklartePerioder,
@@ -10,6 +11,7 @@ const {
   AksjonspunktErBekreftetMenBehandlingErÅpen,
   UavklartePerioderMenIkkeAksjonspunktEnnå,
 } = composeStories(stories);
+
 
 describe('<UttakDokumentasjonFaktaIndex>', () => {
   it('skal avklare perioder og så bekrefte aksjonspunkt', async () => {
@@ -19,72 +21,81 @@ describe('<UttakDokumentasjonFaktaIndex>', () => {
 
     expect(await screen.findByText('Fakta om uttaksdokumentasjon')).toBeInTheDocument();
     expect(screen.getByText('Kontroller dokumentasjon')).toBeInTheDocument();
-    expect(screen.getByText('01.11.2022 – 07.11.2022')).toBeInTheDocument();
-    expect(screen.getByText('Oppdater').closest('button')).toBeDisabled();
     expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 
-    await userEvent.click(screen.getByText('Godkjent'));
-    await userEvent.click(screen.getByText('Oppdater'));
+    expect(screen.getByText('08.01.2022 – 13.02.2022'));
+    expect(screen.getByText('5 uker')).toBeInTheDocument();
 
-    await waitFor(() => expect(screen.getByText('Oppdater').closest('button')).toBeDisabled());
+    await userEvent.click(screen.getByRole('radio', { name: 'Godkjent' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Oppdater' }));
 
-    expect(screen.getByText('08.11.2022 – 13.11.2022')).toBeInTheDocument();
+    await waitFor(() =>
+      expect(screen.getByRole('button', { name: 'Oppdater' }).closest('button')).toBeDisabled(),
+    );
 
-    await userEvent.click(screen.getByText('Ikke godkjent'));
-    await userEvent.click(screen.getByText('Oppdater'));
-
-    await waitFor(() => expect(screen.getByText('Oppdater').closest('button')).toBeDisabled());
+    expect(screen.getByText('01.11.2022 – 07.01.2023')).toBeInTheDocument();
+    await userEvent.click(screen.getByRole('radio', { name: 'Ikke godkjent' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Oppdater' }));
+    await waitFor(() => expect(screen.getByRole('button', { name: 'Oppdater' }).closest('button')).toBeDisabled());
 
     expect(screen.getByText('15.11.2022 – 20.11.2022')).toBeInTheDocument();
-    await userEvent.click(screen.getAllByText('Godkjent')[1]);
-    await userEvent.click(screen.getByText('Oppdater'));
+    await userEvent.click(screen.getByRole('radio', { name: 'Godkjent' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Oppdater' }));
 
-    await waitFor(() => expect(screen.getByText('Oppdater').closest('button')).toBeDisabled());
+    await waitFor(() =>
+      expect(screen.getByRole('button', { name: 'Oppdater' }).closest('button')).toBeDisabled(),
+    );
 
-    expect(await screen.findByText('Mangler dokumentasjon')).toBeInTheDocument();
 
-    expect(screen.getByText('08.12.2022 – 13.12.2022')).toBeInTheDocument();
-    await userEvent.click(screen.getByText('Mangler dokumentasjon'));
-    await userEvent.click(screen.getByText('Oppdater'));
+    expect(screen.getByText('18.11.2022 – 03.12.2022')).toBeInTheDocument();
+    await userEvent.click(screen.getByRole('radio', { name: 'Godkjent - Mor jobber mindre enn 75%' }));
+    await userEvent.type(screen.getByRole('textbox', { name: 'Hvor mange prosent jobber mor?' }), '60');
+    await userEvent.click(screen.getByRole('button', { name: 'Oppdater' }));
+
 
     await userEvent.type(utils.getByLabelText('Begrunnelse'), 'Dette er en begrunnelse');
 
-    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByRole('button', { name: 'Bekreft og fortsett' }));
+
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
       kode: '5074',
       begrunnelse: 'Dette er en begrunnelse',
-      vurderingBehov: [
+      vurderingBehov: ([
         {
-          fom: '2022-11-01',
-          tom: '2022-11-07',
-          type: 'UTSETTELSE',
-          vurdering: 'GODKJENT',
-          årsak: 'INNLEGGELSE_SØKER',
+          fom: '2022-01-08',
+          morsStillingsprosent: undefined,
+          tom: '2022-02-13',
+          type: UttakType.OVERFØRING,
+          årsak: UttakÅrsak.SYKDOM_ANNEN_FORELDER,
+          vurdering: UttakVurdering.GODKJENT,
         },
         {
-          fom: '2022-11-08',
-          tom: '2022-11-13',
-          type: 'OVERFØRING',
-          vurdering: 'IKKE_GODKJENT',
-          årsak: 'SYKDOM_ANNEN_FORELDER',
+          fom: '2022-11-01',
+          morsStillingsprosent: undefined,
+          tom: '2023-01-07',
+          type: UttakType.UTSETTELSE,
+          årsak: UttakÅrsak.INNLEGGELSE_SØKER,
+          vurdering: UttakVurdering.IKKE_GODKJENT,
         },
         {
           fom: '2022-11-15',
+          morsStillingsprosent: undefined,
           tom: '2022-11-20',
-          type: 'UTTAK',
-          vurdering: 'GODKJENT',
-          årsak: 'TIDLIG_OPPSTART_FAR',
+          type: UttakType.UTTAK,
+          årsak: UttakÅrsak.TIDLIG_OPPSTART_FAR,
+          vurdering: UttakVurdering.GODKJENT,
         },
         {
-          fom: '2022-12-08',
-          tom: '2022-12-13',
-          type: 'UTTAK',
-          vurdering: 'IKKE_DOKUMENTERT',
-          årsak: 'AKTIVITETSKRAV_ARBEID',
+          fom: '2022-11-18',
+          tom: '2022-12-03',
+          type: UttakType.UTTAK,
+          årsak: UttakÅrsak.AKTIVITETSKRAV_ARBEID,
+          vurdering: UttakVurdering.GODKJENT,
+          morsStillingsprosent: '60',
         },
-      ],
+      ]),
     });
   });
 
@@ -104,17 +115,19 @@ describe('<UttakDokumentasjonFaktaIndex>', () => {
 
     expect(await screen.findByText('Fakta om uttaksdokumentasjon')).toBeInTheDocument();
     expect(screen.queryByText('Kontroller dokumentasjon')).not.toBeInTheDocument();
+
     expect(screen.getByText('Godkjent')).toBeInTheDocument();
-    expect(screen.getByText('Dette er en begrunnelse')).toBeInTheDocument();
-    expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
+    expect(screen.getByRole('textbox', { name: 'Begrunnelse' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Bekreft og fortsett' }).closest('button')).toBeDisabled();
 
     await userEvent.click(screen.getByTitle('Vis mer'));
 
     expect(await screen.findByText('Del opp periode')).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('Ikke godkjent'));
-    await userEvent.click(screen.getByText('Oppdater'));
-    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByRole('radio', { name: 'Ikke godkjent' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Oppdater' }));
+    await userEvent.type(screen.getByRole('textbox', { name: 'Begrunnelse' }), 'Dette er en begrunnelse');
+    await userEvent.click(screen.getByRole('button', { name: 'Bekreft og fortsett' }));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
@@ -134,9 +147,7 @@ describe('<UttakDokumentasjonFaktaIndex>', () => {
 
   it('skal vise tabellrader som ikke kan ekspanderes når det ikke er aksjonspunkt', async () => {
     render(<UavklartePerioderMenIkkeAksjonspunktEnnå />);
-
     expect(await screen.findByText('Fakta om uttaksdokumentasjon')).toBeInTheDocument();
-
     expect(await screen.queryByAltText('Åpne rad')).not.toBeInTheDocument();
   });
 });

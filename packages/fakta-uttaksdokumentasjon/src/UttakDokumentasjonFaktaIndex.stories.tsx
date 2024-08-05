@@ -25,22 +25,22 @@ const behandling = {
   versjon: 1,
 } as Behandling;
 
-const dokumentasjonVurderingBehovListe = [
+const opprettetDokumentasjonVurderingBehovListe = [
   {
     fom: '2022-11-01',
-    tom: '2022-11-07',
+    tom: '2023-01-07',
     type: UttakType.UTSETTELSE,
     årsak: UttakÅrsak.INNLEGGELSE_SØKER,
   },
   {
-    fom: '2022-11-08',
-    tom: '2022-11-13',
+    fom: '2022-01-08',
+    tom: '2022-02-13',
     type: UttakType.OVERFØRING,
     årsak: UttakÅrsak.SYKDOM_ANNEN_FORELDER,
   },
   {
-    fom: '2022-12-08',
-    tom: '2022-12-13',
+    fom: '2022-11-18',
+    tom: '2022-12-03',
     type: UttakType.UTTAK,
     årsak: UttakÅrsak.AKTIVITETSKRAV_ARBEID,
   },
@@ -96,11 +96,44 @@ AksjonspunktMedUavklartePerioder.args = {
       kanLoses: true,
     },
   ],
-  dokumentasjonVurderingBehov: dokumentasjonVurderingBehovListe,
+  dokumentasjonVurderingBehov: opprettetDokumentasjonVurderingBehovListe,
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   readOnly: false,
   submittable: true,
 };
+
+const utfortDokumentasjonVurderingBehovListe = [
+  {
+    fom: '2024-07-30',
+    tom: '2024-08-02',
+    type: UttakType.UTSETTELSE,
+    årsak: UttakÅrsak.INNLEGGELSE_SØKER,
+    vurdering: UttakVurdering.IKKE_GODKJENT
+  },
+  {
+    fom: '2024-02-08',
+    tom: '2024-02-13',
+    type: UttakType.OVERFØRING,
+    årsak: UttakÅrsak.SYKDOM_ANNEN_FORELDER,
+    vurdering: UttakVurdering.GODKJENT
+  },
+  {
+    fom: '2024-05-30',
+    tom: '2024-06-11',
+    type: UttakType.UTTAK,
+    årsak: UttakÅrsak.AKTIVITETSKRAV_ARBEID,
+    vurdering: UttakVurdering.GODKJENT,
+    morsStillingsprosent: 60
+  },
+  {
+    fom: '2024-08-07',
+    tom: '2024-08-23',
+    type: UttakType.UTTAK,
+    årsak: UttakÅrsak.TIDLIG_OPPSTART_FAR,
+    vurdering: UttakVurdering.IKKE_DOKUMENTERT
+  },
+] as DokumentasjonVurderingBehov[];
+
 
 export const AksjonspunktSomErBekreftetOgBehandlingAvsluttet = Template.bind({});
 AksjonspunktSomErBekreftetOgBehandlingAvsluttet.args = {
@@ -112,15 +145,7 @@ AksjonspunktSomErBekreftetOgBehandlingAvsluttet.args = {
       kanLoses: false,
     },
   ],
-  dokumentasjonVurderingBehov: [
-    {
-      fom: '2022-12-08',
-      tom: '2022-12-13',
-      type: UttakType.UTSETTELSE,
-      årsak: UttakÅrsak.HV_ØVELSE,
-      vurdering: UttakVurdering.GODKJENT,
-    },
-  ],
+  dokumentasjonVurderingBehov: utfortDokumentasjonVurderingBehovListe,
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   readOnly: true,
   submittable: false,
@@ -132,7 +157,7 @@ AksjonspunktErBekreftetMenBehandlingErÅpen.args = {
     {
       definisjon: AksjonspunktCode.VURDER_UTTAK_DOKUMENTASJON,
       status: aksjonspunktStatus.UTFORT,
-      begrunnelse: 'Dette er en begrunnelse',
+      begrunnelse: undefined,
       kanLoses: true,
     },
   ],
@@ -154,7 +179,7 @@ AksjonspunktErBekreftetMenBehandlingErÅpen.args = {
 export const UavklartePerioderMenIkkeAksjonspunktEnnå = Template.bind({});
 UavklartePerioderMenIkkeAksjonspunktEnnå.args = {
   aksjonspunkter: [],
-  dokumentasjonVurderingBehov: dokumentasjonVurderingBehovListe,
+  dokumentasjonVurderingBehov: opprettetDokumentasjonVurderingBehovListe,
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   readOnly: false,
   submittable: true,
