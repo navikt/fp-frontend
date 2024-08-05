@@ -24,11 +24,13 @@ const UttakVurderingStatus: FC<Props> = ({ vurdering, morsStillingsprosent }) =>
       return (
         <HStack gap="1">
           <CheckmarkCircleFillIcon color="var(--a-icon-success)" />
-          {morsStillingsprosent
-            ? <FormattedMessage id="UttakDokumentasjonFaktaTable.GodkjentMedProsent" values={{ morsStillingsprosent }} />
-            : <FormattedMessage id="UttakDokumentasjonFaktaTable.Godkjent" />
-          }
-        </HStack>);
+          {morsStillingsprosent ? (
+            <FormattedMessage id="UttakDokumentasjonFaktaTable.GodkjentMedProsent" values={{ morsStillingsprosent }} />
+          ) : (
+            <FormattedMessage id="UttakDokumentasjonFaktaTable.Godkjent" />
+          )}
+        </HStack>
+      );
     case UttakVurdering.IKKE_GODKJENT:
       return (
         <IconLabel

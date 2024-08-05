@@ -108,7 +108,7 @@ const UttakDokumentasjonFaktaTable: FunctionComponent<OwnProps> = ({
                 <FormattedMessage id={getUttakÅrsakTekst(behov.årsak)} />
               </Table.DataCell>
               <Table.DataCell>
-                <UttakVurderingStatus vurdering={behov.vurdering} morsStillingsprosent={behov.morsStillingsprosent}/>
+                <UttakVurderingStatus vurdering={behov.vurdering} morsStillingsprosent={behov.morsStillingsprosent} />
               </Table.DataCell>
             </>
           );

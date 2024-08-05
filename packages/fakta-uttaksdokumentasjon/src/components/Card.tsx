@@ -12,10 +12,14 @@ Card.Header = ({ children }: PropsWithChildren) => (
   </Box>
 );
 
+Card.Header.displayName = 'Card.Header';
+
 Card.Content = ({ children }: PropsWithChildren) => (
   <Box background="surface-neutral-subtle" paddingInline="4" paddingBlock="2">
     <VStack gap="6">{children}</VStack>
   </Box>
 );
+
+Card.Content.displayName = 'Card.Content';
 
 export default Card;

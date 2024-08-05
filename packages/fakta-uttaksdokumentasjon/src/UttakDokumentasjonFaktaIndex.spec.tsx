@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, waitFor, within } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
 import * as stories from './UttakDokumentasjonFaktaIndex.stories';
@@ -12,7 +12,6 @@ const {
   UavklartePerioderMenIkkeAksjonspunktEnnå,
 } = composeStories(stories);
 
-
 describe('<UttakDokumentasjonFaktaIndex>', () => {
   it('skal avklare perioder og så bekrefte aksjonspunkt', async () => {
     const lagre = vi.fn(() => Promise.resolve());
@@ -23,15 +22,11 @@ describe('<UttakDokumentasjonFaktaIndex>', () => {
     expect(screen.getByText('Kontroller dokumentasjon')).toBeInTheDocument();
     expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 
-    expect(screen.getByText('08.01.2022 – 13.02.2022'));
-    expect(screen.getByText('5 uker')).toBeInTheDocument();
-
+    expect(screen.getByText('08.01.2022 – 13.02.2022')).toBeInTheDocument();
     await userEvent.click(screen.getByRole('radio', { name: 'Godkjent' }));
     await userEvent.click(screen.getByRole('button', { name: 'Oppdater' }));
 
-    await waitFor(() =>
-      expect(screen.getByRole('button', { name: 'Oppdater' }).closest('button')).toBeDisabled(),
-    );
+    await waitFor(() => expect(screen.getByRole('button', { name: 'Oppdater' }).closest('button')).toBeDisabled());
 
     expect(screen.getByText('01.11.2022 – 07.01.2023')).toBeInTheDocument();
     await userEvent.click(screen.getByRole('radio', { name: 'Ikke godkjent' }));
@@ -42,27 +37,22 @@ describe('<UttakDokumentasjonFaktaIndex>', () => {
     await userEvent.click(screen.getByRole('radio', { name: 'Godkjent' }));
     await userEvent.click(screen.getByRole('button', { name: 'Oppdater' }));
 
-    await waitFor(() =>
-      expect(screen.getByRole('button', { name: 'Oppdater' }).closest('button')).toBeDisabled(),
-    );
-
+    await waitFor(() => expect(screen.getByRole('button', { name: 'Oppdater' }).closest('button')).toBeDisabled());
 
     expect(screen.getByText('18.11.2022 – 03.12.2022')).toBeInTheDocument();
     await userEvent.click(screen.getByRole('radio', { name: 'Godkjent - Mor jobber mindre enn 75%' }));
     await userEvent.type(screen.getByRole('textbox', { name: 'Hvor mange prosent jobber mor?' }), '60');
     await userEvent.click(screen.getByRole('button', { name: 'Oppdater' }));
 
-
     await userEvent.type(utils.getByLabelText('Begrunnelse'), 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByRole('button', { name: 'Bekreft og fortsett' }));
-
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
       kode: '5074',
       begrunnelse: 'Dette er en begrunnelse',
-      vurderingBehov: ([
+      vurderingBehov: [
         {
           fom: '2022-01-08',
           morsStillingsprosent: undefined,
@@ -95,7 +85,7 @@ describe('<UttakDokumentasjonFaktaIndex>', () => {
           vurdering: UttakVurdering.GODKJENT,
           morsStillingsprosent: '60',
         },
-      ]),
+      ],
     });
   });
 

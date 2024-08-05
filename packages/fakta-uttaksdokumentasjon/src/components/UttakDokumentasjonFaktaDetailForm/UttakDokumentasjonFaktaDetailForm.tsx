@@ -42,27 +42,30 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({ behov,
     defaultValues: tilFormValues(behov),
   });
 
-  const { fields, update, replace, remove, insert } = useFieldArray({
+  const { fields, update, remove, insert } = useFieldArray({
     control: formMethods.control,
     name: 'perioder',
   });
 
-  const lagNyPeriode = useCallback((currentIndex: number, dato: string) => {
-    const currentPeriode = fields[currentIndex];
+  const lagNyPeriode = useCallback(
+    (currentIndex: number, dato: string) => {
+      const currentPeriode = fields[currentIndex];
 
-    update(currentIndex, {
-      ...currentPeriode,
-      tom: dato,
-      vurdering: undefined,
-    });
-    insert(currentIndex + 1, {
-      ...currentPeriode,
-      fom: dayjs(dato).add(1, 'day').format(ISO_DATE_FORMAT),
-      tom: currentPeriode.tom,
-      vurdering: undefined,
-    });
-    settValgtPeriodeIndex(undefined);
-  }, [fields]);
+      update(currentIndex, {
+        ...currentPeriode,
+        tom: dato,
+        vurdering: undefined,
+      });
+      insert(currentIndex + 1, {
+        ...currentPeriode,
+        fom: dayjs(dato).add(1, 'day').format(ISO_DATE_FORMAT),
+        tom: currentPeriode.tom,
+        vurdering: undefined,
+      });
+      settValgtPeriodeIndex(undefined);
+    },
+    [fields],
+  );
 
   const slåSammenMedPeriodeOver = (currentIndex: number) => {
     const previousIndex = currentIndex - 1;
@@ -78,10 +81,11 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({ behov,
     <Box
       padding="4"
       style={
-        !behov.vurdering &&
-        fields.length === 1 ? {
-          borderLeft: '3px solid var(--a-surface-warning)',
-        } : {}
+        !behov.vurdering && fields.length === 1
+          ? {
+              borderLeft: '3px solid var(--a-surface-warning)',
+            }
+          : {}
       }
     >
       <Form formMethods={formMethods} onSubmit={handleSubmit}>
@@ -137,9 +141,7 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({ behov,
                 <Card.Content>
                   <HStack gap="6">
                     <BodyShort weight="semibold">{getFormatertPeriode(periode)}</BodyShort>
-                    <BodyShort>
-                      {calcDaysAndWeeks(periode.fom, periode.tom).formattedString}
-                    </BodyShort>
+                    <BodyShort>{calcDaysAndWeeks(periode.fom, periode.tom).formattedString}</BodyShort>
                   </HStack>
                   <RadioGroupPanel
                     name={`perioder.${index}.vurdering`}
@@ -162,9 +164,7 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({ behov,
           {erUttaksperiodeMedAktivitetskravArbeid(fields[0].type, fields[0].årsak) && (
             <ReadMore
               size="small"
-              header={
-                <FormattedMessage id="UttakDokumentasjonFaktaDetailForm.MorsStillingsprosent.ReadMoreTittel" />
-              }
+              header={<FormattedMessage id="UttakDokumentasjonFaktaDetailForm.MorsStillingsprosent.ReadMoreTittel" />}
             >
               <FormattedMessage
                 id="UttakDokumentasjonFaktaDetailForm.MorsStillingsprosent.ReadMoreInnhold"

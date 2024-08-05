@@ -108,14 +108,14 @@ const utfortDokumentasjonVurderingBehovListe = [
     tom: '2024-08-02',
     type: UttakType.UTSETTELSE,
     årsak: UttakÅrsak.INNLEGGELSE_SØKER,
-    vurdering: UttakVurdering.IKKE_GODKJENT
+    vurdering: UttakVurdering.IKKE_GODKJENT,
   },
   {
     fom: '2024-02-08',
     tom: '2024-02-13',
     type: UttakType.OVERFØRING,
     årsak: UttakÅrsak.SYKDOM_ANNEN_FORELDER,
-    vurdering: UttakVurdering.GODKJENT
+    vurdering: UttakVurdering.GODKJENT,
   },
   {
     fom: '2024-05-30',
@@ -123,17 +123,16 @@ const utfortDokumentasjonVurderingBehovListe = [
     type: UttakType.UTTAK,
     årsak: UttakÅrsak.AKTIVITETSKRAV_ARBEID,
     vurdering: UttakVurdering.GODKJENT,
-    morsStillingsprosent: 60
+    morsStillingsprosent: 60,
   },
   {
     fom: '2024-08-07',
     tom: '2024-08-23',
     type: UttakType.UTTAK,
     årsak: UttakÅrsak.TIDLIG_OPPSTART_FAR,
-    vurdering: UttakVurdering.IKKE_DOKUMENTERT
+    vurdering: UttakVurdering.IKKE_DOKUMENTERT,
   },
 ] as DokumentasjonVurderingBehov[];
-
 
 export const AksjonspunktSomErBekreftetOgBehandlingAvsluttet = Template.bind({});
 AksjonspunktSomErBekreftetOgBehandlingAvsluttet.args = {
