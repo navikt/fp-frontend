@@ -17,10 +17,12 @@ import styles from './termindatoFaktaForm.module.css';
 const minValue1 = minValue(1);
 const maxValue9 = maxValue(9);
 
-const erTerminbekreftelseUtstedtForTidlig = (utstedtdato?: string, termindato?: string): boolean =>
-  utstedtdato !== undefined &&
-  termindato !== undefined &&
-  !moment(utstedtdato).isAfter(moment(termindato).subtract(18, 'weeks').subtract(4, 'days'));
+const erTerminbekreftelseUtstedtForTidlig = (
+  isFormValidAndSubmitted: boolean,
+  utstedtdato?: string,
+  termindato?: string,
+): boolean =>
+  isFormValidAndSubmitted && !moment(utstedtdato).isAfter(moment(termindato).subtract(18, 'weeks').subtract(4, 'days'));
 
 export type FormValues = {
   utstedtdato?: string;
@@ -57,12 +59,20 @@ export const TermindatoFaktaForm: FunctionComponent<OwnProps> & StaticFunctions 
   const intl = useIntl();
   const editedStatus = isFieldEdited(soknad, gjeldendeFamiliehendelse);
 
-  const { watch } = useFormContext<FormValues>();
+  const {
+    watch,
+
+    formState: { isValid, isSubmitted },
+  } = useFormContext<FormValues>();
 
   const termindato = watch('termindato');
   const utstedtdato = watch('utstedtdato');
   const begrunnelse = watch('begrunnelse');
-  const isForTidligTerminbekreftelse = erTerminbekreftelseUtstedtForTidlig(utstedtdato, termindato);
+  const isForTidligTerminbekreftelse = erTerminbekreftelseUtstedtForTidlig(
+    isValid && isSubmitted,
+    utstedtdato,
+    termindato,
+  );
 
   const { avklartBarn } = gjeldendeFamiliehendelse;
   const fodselsdatoTps = avklartBarn && avklartBarn.length > 0 ? avklartBarn[0].fodselsdato : undefined;
