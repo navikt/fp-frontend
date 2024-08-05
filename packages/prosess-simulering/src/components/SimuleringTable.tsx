@@ -54,7 +54,7 @@ const getHeaderCodes = (
         })}
         key={`${monthAndYear.month}-${monthAndYear.year}`}
       >
-        {dayjs(monthAndYear.month).isValid() && <FormattedMessage id={`Simulering.headerText.${monthAndYear.month}`} />}
+        <FormattedMessage id={`Simulering.headerText.${monthAndYear.month}`} />
       </span>
     )),
   ];
