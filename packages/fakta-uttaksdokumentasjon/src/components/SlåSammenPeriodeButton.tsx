@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { ArrowUpIcon } from '@navikt/aksel-icons';
 
 interface Props {
-  onClick: () => any;
+  onClick: () => void;
   display: boolean;
   disabled: boolean;
 }
