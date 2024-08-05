@@ -23,30 +23,30 @@ describe('<UttakDokumentasjonFaktaIndex>', () => {
     expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 
     expect(screen.getByText('08.01.2022 – 13.02.2022')).toBeInTheDocument();
-    await userEvent.click(screen.getByRole('radio', { name: 'Godkjent' }));
-    await userEvent.click(screen.getByRole('button', { name: 'Oppdater' }));
+    await userEvent.click(screen.getByLabelText('Godkjent'));
+    await userEvent.click(screen.getByText('Oppdater'));
 
-    await waitFor(() => expect(screen.getByRole('button', { name: 'Oppdater' }).closest('button')).toBeDisabled());
+    await waitFor(() => expect(screen.getByText('Oppdater').closest('button')).toBeDisabled());
 
     expect(screen.getByText('01.11.2022 – 07.01.2023')).toBeInTheDocument();
-    await userEvent.click(screen.getByRole('radio', { name: 'Ikke godkjent' }));
-    await userEvent.click(screen.getByRole('button', { name: 'Oppdater' }));
-    await waitFor(() => expect(screen.getByRole('button', { name: 'Oppdater' }).closest('button')).toBeDisabled());
+    await userEvent.click(screen.getByLabelText('Ikke godkjent'));
+    await userEvent.click(screen.getByText('Oppdater'));
+    await waitFor(() => expect(screen.getByText('Oppdater').closest('button')).toBeDisabled());
 
     expect(screen.getByText('15.11.2022 – 20.11.2022')).toBeInTheDocument();
-    await userEvent.click(screen.getByRole('radio', { name: 'Godkjent' }));
-    await userEvent.click(screen.getByRole('button', { name: 'Oppdater' }));
+    await userEvent.click(screen.getByLabelText('Godkjent'));
+    await userEvent.click(screen.getByText('Oppdater'));
 
-    await waitFor(() => expect(screen.getByRole('button', { name: 'Oppdater' }).closest('button')).toBeDisabled());
+    await waitFor(() => expect(screen.getByText('Oppdater').closest('button')).toBeDisabled());
 
     expect(screen.getByText('18.11.2022 – 03.12.2022')).toBeInTheDocument();
-    await userEvent.click(screen.getByRole('radio', { name: 'Godkjent - Mor jobber mindre enn 75%' }));
-    await userEvent.type(screen.getByRole('textbox', { name: 'Hvor mange prosent jobber mor?' }), '60');
-    await userEvent.click(screen.getByRole('button', { name: 'Oppdater' }));
+    await userEvent.click(screen.getByLabelText('Godkjent - Mor jobber mindre enn 75%'));
+    await userEvent.type(screen.getByLabelText('Hvor mange prosent jobber mor?'), '60');
+    await userEvent.click(screen.getByText('Oppdater'));
 
     await userEvent.type(utils.getByLabelText('Begrunnelse'), 'Dette er en begrunnelse');
 
-    await userEvent.click(screen.getByRole('button', { name: 'Bekreft og fortsett' }));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
@@ -107,17 +107,17 @@ describe('<UttakDokumentasjonFaktaIndex>', () => {
     expect(screen.queryByText('Kontroller dokumentasjon')).not.toBeInTheDocument();
 
     expect(screen.getByText('Godkjent')).toBeInTheDocument();
-    expect(screen.getByRole('textbox', { name: 'Begrunnelse' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Bekreft og fortsett' }).closest('button')).toBeDisabled();
+    expect(screen.getByLabelText('Begrunnelse')).toBeInTheDocument();
+    expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 
     await userEvent.click(screen.getByTitle('Vis mer'));
 
     expect(await screen.findByText('Del opp periode')).toBeInTheDocument();
 
-    await userEvent.click(screen.getByRole('radio', { name: 'Ikke godkjent' }));
-    await userEvent.click(screen.getByRole('button', { name: 'Oppdater' }));
-    await userEvent.type(screen.getByRole('textbox', { name: 'Begrunnelse' }), 'Dette er en begrunnelse');
-    await userEvent.click(screen.getByRole('button', { name: 'Bekreft og fortsett' }));
+    await userEvent.click(screen.getByLabelText('Ikke godkjent'));
+    await userEvent.click(screen.getByText('Oppdater'));
+    await userEvent.type(screen.getByLabelText('Begrunnelse'), 'Dette er en begrunnelse');
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
