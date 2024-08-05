@@ -162,7 +162,7 @@ describe('<JournalforingIndex>', () => {
     expect(screen.getByText('Journalfør').closest('button')).toBeDisabled();
     expect(screen.getByText('Avbryt').closest('button')).toBeEnabled();
 
-    expect(screen.queryByLabelText('Flytt Til Gosys')).not.toBeInTheDocument();
+    expect(screen.queryByText('Flytt Til Gosys')).not.toBeInTheDocument();
   });
 
   it('skal kunne flytte oppgaven til gosys', async () => {
@@ -172,8 +172,6 @@ describe('<JournalforingIndex>', () => {
     expect(await screen.findByText('Søker Søkersen')).toBeInTheDocument();
     expect(screen.getByText('Journalfør').closest('button')).toBeDisabled();
     expect(screen.getByText('Avbryt').closest('button')).toBeEnabled();
-
-    // TODO FIX Petter ser på dette
-    //expect(screen.queryByLabelText('Flytt Til Gosys')).toBeInTheDocument();
+    expect(screen.getByText('Flytt til Gosys').closest('button')).toBeEnabled();
   });
 });
