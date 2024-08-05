@@ -77,16 +77,11 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({ behov,
   const vurderingsalternativ = lagVurderingsAlternativer(intl, behov.type, behov.årsak);
 
   const handleSubmit = (formvalues: FormValues): void => submit(fraFormValues(formvalues));
+
   return (
     <Box
       padding="4"
-      style={
-        !behov.vurdering && fields.length === 1
-          ? {
-              borderLeft: '3px solid var(--a-surface-warning)',
-            }
-          : {}
-      }
+      style={!behov.vurdering && fields.length === 1 ? { borderLeft: '3px solid var(--a-surface-warning)' } : {}}
     >
       <Form formMethods={formMethods} onSubmit={handleSubmit}>
         <VStack gap="6">
