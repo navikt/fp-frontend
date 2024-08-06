@@ -3,6 +3,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
 import * as stories from './UttakDokumentasjonFaktaIndex.stories';
+import { UttakType, UttakVurdering, UttakÅrsak } from '@navikt/fp-types';
 
 const {
   AksjonspunktMedUavklartePerioder,
@@ -19,32 +20,28 @@ describe('<UttakDokumentasjonFaktaIndex>', () => {
 
     expect(await screen.findByText('Fakta om uttaksdokumentasjon')).toBeInTheDocument();
     expect(screen.getByText('Kontroller dokumentasjon')).toBeInTheDocument();
-    expect(screen.getByText('01.11.2022 - 07.11.2022')).toBeInTheDocument();
-    expect(screen.getByText('Oppdater').closest('button')).toBeDisabled();
     expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 
-    await userEvent.click(screen.getByText('Godkjent'));
+    expect(screen.getByText('08.01.2022 – 13.02.2022')).toBeInTheDocument();
+    await userEvent.click(screen.getByLabelText('Godkjent'));
     await userEvent.click(screen.getByText('Oppdater'));
 
     await waitFor(() => expect(screen.getByText('Oppdater').closest('button')).toBeDisabled());
 
-    expect(screen.getByText('08.11.2022 - 13.11.2022')).toBeInTheDocument();
+    expect(screen.getByText('01.11.2022 – 07.01.2023')).toBeInTheDocument();
+    await userEvent.click(screen.getByLabelText('Ikke godkjent'));
+    await userEvent.click(screen.getByText('Oppdater'));
+    await waitFor(() => expect(screen.getByText('Oppdater').closest('button')).toBeDisabled());
 
-    await userEvent.click(screen.getByText('Ikke godkjent'));
+    expect(screen.getByText('15.11.2022 – 20.11.2022')).toBeInTheDocument();
+    await userEvent.click(screen.getByLabelText('Godkjent'));
     await userEvent.click(screen.getByText('Oppdater'));
 
     await waitFor(() => expect(screen.getByText('Oppdater').closest('button')).toBeDisabled());
 
-    expect(screen.getByText('15.11.2022 - 20.11.2022')).toBeInTheDocument();
-    await userEvent.click(screen.getAllByText('Godkjent')[1]);
-    await userEvent.click(screen.getByText('Oppdater'));
-
-    await waitFor(() => expect(screen.getByText('Oppdater').closest('button')).toBeDisabled());
-
-    expect(await screen.findByText('Mangler dokumentasjon')).toBeInTheDocument();
-
-    expect(screen.getByText('08.12.2022 - 13.12.2022')).toBeInTheDocument();
-    await userEvent.click(screen.getByText('Mangler dokumentasjon'));
+    expect(screen.getByText('18.11.2022 – 03.12.2022')).toBeInTheDocument();
+    await userEvent.click(screen.getByLabelText('Godkjent - Mor jobber mindre enn 75%'));
+    await userEvent.type(screen.getByLabelText('Hvor mange prosent jobber mor?'), '60');
     await userEvent.click(screen.getByText('Oppdater'));
 
     await userEvent.type(utils.getByLabelText('Begrunnelse'), 'Dette er en begrunnelse');
@@ -57,32 +54,36 @@ describe('<UttakDokumentasjonFaktaIndex>', () => {
       begrunnelse: 'Dette er en begrunnelse',
       vurderingBehov: [
         {
-          fom: '2022-11-01',
-          tom: '2022-11-07',
-          type: 'UTSETTELSE',
-          vurdering: 'GODKJENT',
-          årsak: 'INNLEGGELSE_SØKER',
+          fom: '2022-01-08',
+          morsStillingsprosent: undefined,
+          tom: '2022-02-13',
+          type: UttakType.OVERFØRING,
+          årsak: UttakÅrsak.SYKDOM_ANNEN_FORELDER,
+          vurdering: UttakVurdering.GODKJENT,
         },
         {
-          fom: '2022-11-08',
-          tom: '2022-11-13',
-          type: 'OVERFØRING',
-          vurdering: 'IKKE_GODKJENT',
-          årsak: 'SYKDOM_ANNEN_FORELDER',
+          fom: '2022-11-01',
+          morsStillingsprosent: undefined,
+          tom: '2023-01-07',
+          type: UttakType.UTSETTELSE,
+          årsak: UttakÅrsak.INNLEGGELSE_SØKER,
+          vurdering: UttakVurdering.IKKE_GODKJENT,
         },
         {
           fom: '2022-11-15',
+          morsStillingsprosent: undefined,
           tom: '2022-11-20',
-          type: 'UTTAK',
-          vurdering: 'GODKJENT',
-          årsak: 'TIDLIG_OPPSTART_FAR',
+          type: UttakType.UTTAK,
+          årsak: UttakÅrsak.TIDLIG_OPPSTART_FAR,
+          vurdering: UttakVurdering.GODKJENT,
         },
         {
-          fom: '2022-12-08',
-          tom: '2022-12-13',
-          type: 'UTTAK',
-          vurdering: 'IKKE_DOKUMENTERT',
-          årsak: 'AKTIVITETSKRAV_ARBEID',
+          fom: '2022-11-18',
+          tom: '2022-12-03',
+          type: UttakType.UTTAK,
+          årsak: UttakÅrsak.AKTIVITETSKRAV_ARBEID,
+          vurdering: UttakVurdering.GODKJENT,
+          morsStillingsprosent: '60',
         },
       ],
     });
@@ -104,16 +105,18 @@ describe('<UttakDokumentasjonFaktaIndex>', () => {
 
     expect(await screen.findByText('Fakta om uttaksdokumentasjon')).toBeInTheDocument();
     expect(screen.queryByText('Kontroller dokumentasjon')).not.toBeInTheDocument();
+
     expect(screen.getByText('Godkjent')).toBeInTheDocument();
-    expect(screen.getByText('Dette er en begrunnelse')).toBeInTheDocument();
+    expect(screen.getByLabelText('Begrunnelse')).toBeInTheDocument();
     expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 
     await userEvent.click(screen.getByTitle('Vis mer'));
 
     expect(await screen.findByText('Del opp periode')).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('Ikke godkjent'));
+    await userEvent.click(screen.getByLabelText('Ikke godkjent'));
     await userEvent.click(screen.getByText('Oppdater'));
+    await userEvent.type(screen.getByLabelText('Begrunnelse'), 'Dette er en begrunnelse');
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
@@ -134,9 +137,7 @@ describe('<UttakDokumentasjonFaktaIndex>', () => {
 
   it('skal vise tabellrader som ikke kan ekspanderes når det ikke er aksjonspunkt', async () => {
     render(<UavklartePerioderMenIkkeAksjonspunktEnnå />);
-
     expect(await screen.findByText('Fakta om uttaksdokumentasjon')).toBeInTheDocument();
-
     expect(await screen.queryByAltText('Åpne rad')).not.toBeInTheDocument();
   });
 });

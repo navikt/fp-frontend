@@ -2,11 +2,12 @@ import React, { FunctionComponent, useCallback, useEffect, useState } from 'reac
 import { FormattedMessage } from 'react-intl';
 import { BodyShort, Table } from '@navikt/ds-react';
 import { DokumentasjonVurderingBehov, UttakType } from '@navikt/fp-types';
-import { dateFormat, calcDaysAndWeeks } from '@navikt/ft-utils';
+import { calcDaysAndWeeks } from '@navikt/ft-utils';
 import UttakDokumentasjonFaktaDetailForm from '../UttakDokumentasjonFaktaDetailForm';
 import styles from './uttakDokumentasjonFaktaTable.module.css';
 import UttakVurderingStatus from './UttakVurderingStatus';
 import getUttakÅrsakTekst from './uttakÅrsak';
+import { getFormatertPeriode } from '../../utils/periodeUtils';
 
 const finnType = (type: UttakType) => {
   if (type === UttakType.UTSETTELSE) {
@@ -97,7 +98,7 @@ const UttakDokumentasjonFaktaTable: FunctionComponent<OwnProps> = ({
           const kolonner = (
             <>
               <Table.DataCell>
-                <BodyShort weight="semibold">{`${dateFormat(behov.fom)} - ${dateFormat(behov.tom)}`}</BodyShort>
+                <BodyShort weight="semibold">{getFormatertPeriode(behov)}</BodyShort>
               </Table.DataCell>
               <Table.DataCell>
                 <BodyShort>{calcDaysAndWeeks(behov.fom, behov.tom).formattedString}</BodyShort>
@@ -107,14 +108,12 @@ const UttakDokumentasjonFaktaTable: FunctionComponent<OwnProps> = ({
                 <FormattedMessage id={getUttakÅrsakTekst(behov.årsak)} />
               </Table.DataCell>
               <Table.DataCell>
-                {behov.vurdering && (
-                  <UttakVurderingStatus vurdering={behov.vurdering} morsStillingsprosent={behov.morsStillingsprosent} />
-                )}
+                <UttakVurderingStatus vurdering={behov.vurdering} morsStillingsprosent={behov.morsStillingsprosent} />
               </Table.DataCell>
             </>
           );
 
-          if (harAksjonspunkt) {
+          if (harAksjonspunkt && (!readOnly || !behov.vurdering)) {
             return (
               <Table.ExpandableRow
                 key={behov.fom + behov.tom}
@@ -126,13 +125,13 @@ const UttakDokumentasjonFaktaTable: FunctionComponent<OwnProps> = ({
                 className={styles.expansionContentOuter}
                 content={
                   valgtDokBehovFomDatoer.includes(behov.fom) && (
-                    <div className={`${styles.expansionContentInner} ${!behov.vurdering && styles.leftBorder}`}>
+                    <div className={styles.expansionContentInner}>
                       <UttakDokumentasjonFaktaDetailForm
                         key={behov.fom}
-                        valgtDokBehov={behov}
+                        behov={behov}
                         readOnly={readOnly}
-                        oppdaterDokBehov={oppdaterPeriode}
-                        avbrytEditeringAvAktivitetskrav={() => velgDokBehovFomDato(behov.fom)}
+                        submit={oppdaterPeriode}
+                        cancel={() => velgDokBehovFomDato(behov.fom)}
                       />
                     </div>
                   )
