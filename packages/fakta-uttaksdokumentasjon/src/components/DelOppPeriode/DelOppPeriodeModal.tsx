@@ -55,14 +55,12 @@ const DelOppPeriodeModal: FunctionComponent<OwnProps> = ({ periode, cancel, subm
             <BodyShort>
               <FormattedMessage id="DelOppPeriodeModal.Beskrivelse" />
             </BodyShort>
-            <div>
+            <VStack>
               <Label>
                 <FormattedMessage id="DelOppPeriodeModal.PeriodeLabel" />
               </Label>
-              <BodyShort>
-                <PeriodLabel dateStringFom={periode.fom} dateStringTom={periode.tom} />
-              </BodyShort>
-            </div>
+              <PeriodLabel dateStringFom={periode.fom} dateStringTom={periode.tom} />
+            </VStack>
             <Datepicker
               name="dato"
               size="medium"

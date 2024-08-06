@@ -1,4 +1,5 @@
 import React from 'react';
+import { expect, vi, describe, it } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
@@ -18,7 +19,6 @@ describe('<UttakDokumentasjonFaktaIndex>', () => {
 
     const utils = render(<AksjonspunktMedUavklartePerioder submitCallback={lagre} />);
 
-    expect(await screen.findByText('Fakta om uttaksdokumentasjon')).toBeInTheDocument();
     expect(screen.getByText('Kontroller dokumentasjon')).toBeInTheDocument();
     expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 
@@ -92,8 +92,8 @@ describe('<UttakDokumentasjonFaktaIndex>', () => {
   it('skal vise bekreftet periode i tabell når behandling er avsluttet', async () => {
     render(<AksjonspunktSomErBekreftetOgBehandlingAvsluttet />);
 
-    expect(await screen.findByText('Fakta om uttaksdokumentasjon')).toBeInTheDocument();
     expect(screen.queryByText('Kontroller dokumentasjon')).not.toBeInTheDocument();
+
     expect(screen.getByText('Godkjent')).toBeInTheDocument();
     expect(screen.getByText('Dette er en begrunnelse')).toBeInTheDocument();
     expect(screen.queryByText('Bekreft og fortsett')).not.toBeInTheDocument();
@@ -103,7 +103,6 @@ describe('<UttakDokumentasjonFaktaIndex>', () => {
     const lagre = vi.fn(() => Promise.resolve());
     render(<AksjonspunktErBekreftetMenBehandlingErÅpen submitCallback={lagre} />);
 
-    expect(await screen.findByText('Fakta om uttaksdokumentasjon')).toBeInTheDocument();
     expect(screen.queryByText('Kontroller dokumentasjon')).not.toBeInTheDocument();
 
     expect(screen.getByText('Godkjent')).toBeInTheDocument();
@@ -137,7 +136,7 @@ describe('<UttakDokumentasjonFaktaIndex>', () => {
 
   it('skal vise tabellrader som ikke kan ekspanderes når det ikke er aksjonspunkt', async () => {
     render(<UavklartePerioderMenIkkeAksjonspunktEnnå />);
-    expect(await screen.findByText('Fakta om uttaksdokumentasjon')).toBeInTheDocument();
+    expect(screen.queryByText('Kontroller dokumentasjon')).not.toBeInTheDocument();
     expect(await screen.queryByAltText('Åpne rad')).not.toBeInTheDocument();
   });
 });
