@@ -2,8 +2,7 @@ import React, { FunctionComponent, useCallback, useEffect, useMemo, useState } f
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Form } from '@navikt/ft-form-hooks';
-import { Button, Heading } from '@navikt/ds-react';
-import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { Alert, Button, VStack } from '@navikt/ds-react';
 
 import { AksjonspunktCode, aksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, DokumentasjonVurderingBehov } from '@navikt/fp-types';
@@ -74,18 +73,11 @@ const UttakDokumentasjonFaktaForm: FunctionComponent<OwnProps> = ({
   const [isDirty, setDirty] = useState<boolean>(false);
 
   return (
-    <>
-      <Heading size="small">
-        <FormattedMessage id="UttakDokumentasjonFaktaForm.Overskrift" />
-      </Heading>
-      <VerticalSpacer thirtyTwoPx />
+    <VStack gap="6">
       {aksjonspunkter.some(a => a.status === aksjonspunktStatus.OPPRETTET) && (
-        <>
-          <AksjonspunktHelpTextHTML>
-            {[intl.formatMessage({ id: 'UttakDokumentasjonFaktaForm.AksjonspunktHjelpetekst' })]}
-          </AksjonspunktHelpTextHTML>
-          <VerticalSpacer twentyPx />
-        </>
+        <Alert variant="warning">
+          <FormattedMessage id="UttakDokumentasjonFaktaForm.AksjonspunktHjelpetekst" />
+        </Alert>
       )}
       <UttakDokumentasjonFaktaTable
         harAksjonspunkt={aksjonspunkter.length > 0}
@@ -94,28 +86,30 @@ const UttakDokumentasjonFaktaForm: FunctionComponent<OwnProps> = ({
         setDirty={setDirty}
         readOnly={readOnly}
       />
-      <VerticalSpacer twentyPx />
       <Form formMethods={formMethods} onSubmit={(values: { begrunnelse: string }) => bekreft(values.begrunnelse)}>
-        <FaktaBegrunnelseTextFieldNew
-          name="begrunnelse"
-          label={intl.formatMessage({ id: 'UttakDokumentasjonFaktaForm.Begrunnelse' })}
-          isSubmittable
-          isReadOnly={readOnly}
-          hasBegrunnelse
-        />
-        <VerticalSpacer sixteenPx />
-        {!readOnly && (
-          <Button
-            size="small"
-            variant="primary"
-            disabled={!isSubmittable || (!isDirty && !formMethods.formState.isDirty) || erBekreftKnappTrykket}
-            loading={erBekreftKnappTrykket}
-          >
-            <FormattedMessage id="UttakDokumentasjonFaktaForm.Bekreft" />
-          </Button>
-        )}
+        <VStack gap="4">
+          <FaktaBegrunnelseTextFieldNew
+            name="begrunnelse"
+            label={intl.formatMessage({ id: 'UttakDokumentasjonFaktaForm.Begrunnelse' })}
+            isSubmittable
+            isReadOnly={readOnly}
+            hasBegrunnelse
+          />
+          {!readOnly && (
+            <div>
+              <Button
+                size="small"
+                variant="primary"
+                disabled={!isSubmittable || (!isDirty && !formMethods.formState.isDirty) || erBekreftKnappTrykket}
+                loading={erBekreftKnappTrykket}
+              >
+                <FormattedMessage id="UttakDokumentasjonFaktaForm.Bekreft" />
+              </Button>
+            </div>
+          )}
+        </VStack>
       </Form>
-    </>
+    </VStack>
   );
 };
 

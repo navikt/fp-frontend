@@ -115,22 +115,24 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({ behov,
             fields.map((periode, index) => (
               <Card key={periode.fom}>
                 <Card.Header>
-                  <Label>
-                    <FormattedMessage
-                      id="UttakDokumentasjonFaktaDetailForm.PeriodeMedIndex"
-                      values={{ index: index + 1 }}
-                    />
-                  </Label>
-                  <HStack gap="2">
-                    <DelOppPeriodeButton
-                      display={!readOnly && periodeErMerEnnEnDag(periode)}
-                      onClick={() => settValgtPeriodeIndex(index)}
-                    />
-                    <SlåSammenPeriodeButton
-                      display={!readOnly && fields.length > 1 && index > 0}
-                      onClick={() => slåSammenMedPeriodeOver(index)}
-                      disabled={!periode.tom}
-                    />
+                  <HStack gap="4">
+                    <Label>
+                      <FormattedMessage
+                        id="UttakDokumentasjonFaktaDetailForm.PeriodeMedIndex"
+                        values={{ index: index + 1 }}
+                      />
+                    </Label>
+                    <HStack gap="2">
+                      <DelOppPeriodeButton
+                        display={!readOnly && periodeErMerEnnEnDag(periode)}
+                        onClick={() => settValgtPeriodeIndex(index)}
+                      />
+                      <SlåSammenPeriodeButton
+                        display={!readOnly && fields.length > 1 && index > 0}
+                        onClick={() => slåSammenMedPeriodeOver(index)}
+                        disabled={!periode.tom}
+                      />
+                    </HStack>
                   </HStack>
                 </Card.Header>
                 <Card.Content>
