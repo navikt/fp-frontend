@@ -76,7 +76,7 @@ const AppIndex: FunctionComponent = () => {
 
   return (
     <RawIntlProvider value={intl}>
-      <ErrorBoundary errorMessageCallback={addErrorMessageAndSetAsCrashed} showChild>
+      <ErrorBoundary errorMessageCallback={addErrorMessageAndSetAsCrashed}>
         <AppConfigResolver>
           <>
             <Dekorator
@@ -85,9 +85,13 @@ const AppIndex: FunctionComponent = () => {
               setSiteHeight={setSiteHeight}
               crashMessage={crashMessage}
             />
-            {shouldRenderHome && <Home headerHeight={headerHeight} navAnsatt={navAnsatt} />}
+            <ErrorBoundary errorMessageCallback={addErrorMessageAndSetAsCrashed} showChild>
+              {shouldRenderHome && <Home headerHeight={headerHeight} navAnsatt={navAnsatt} />}
+            </ErrorBoundary>
             {forbiddenErrors.length > 0 && <ForbiddenPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />}
-            {unauthorizedErrors.length > 0 && <UnauthorizedPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />}
+            {unauthorizedErrors.length > 0 && (
+              <UnauthorizedPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />
+            )}
           </>
         </AppConfigResolver>
       </ErrorBoundary>
