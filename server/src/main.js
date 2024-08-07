@@ -133,7 +133,7 @@ async function startApp() {
 
     reverseProxy.setup(server);
 
-    addLocalViteServerHandler(server);
+    addLocalViteServerHandler(server, "9100");
 
     // serve static files
     const rootDir = './dist';

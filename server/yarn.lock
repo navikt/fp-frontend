@@ -27,7 +27,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fp-frontend/server@workspace:."
   dependencies:
-    "@navikt/backend-for-frontend-utils": 0.7.3
+    "@navikt/backend-for-frontend-utils": 0.8.0
     axios: ^1.7.2
     connect-timeout: ^1.9.0
     cors: ^2.8.5
@@ -65,9 +65,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/backend-for-frontend-utils@npm:0.7.3":
-  version: 0.7.3
-  resolution: "@navikt/backend-for-frontend-utils@npm:0.7.3::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fbackend-for-frontend-utils%2F0.7.3%2F9029cb88b9776514c34d3ae8b67a2cb563ace985"
+"@navikt/backend-for-frontend-utils@npm:0.8.0":
+  version: 0.8.0
+  resolution: "@navikt/backend-for-frontend-utils@npm:0.8.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fbackend-for-frontend-utils%2F0.8.0%2F3f4c0fa3e2435798f715faf38bb3e35e744f97e0"
   dependencies:
     axios: 1.6.2
     cookie-parser: 1.4.6
@@ -77,7 +77,7 @@ __metadata:
     uuid: 9.0.1
   peerDependencies:
     express: 4.x
-  checksum: 2380b741d98795709b8fe8f0abaa28c9ef7b1e93ffaaddb39fb93fd27605fe08bb395e3ecc1509f620bdbe8f55eefb543a9b0ea001601d30b71585cf8b10ae2c
+  checksum: a3d54de9127d6cfc2ffb44652d8d584e66e9c3b44063ff39e76c1cae36a391b911b3a17440cafee09c3bbef4f420ad8198d67c0be6954e74c69ca91b989f571c
   languageName: node
   linkType: hard
 
