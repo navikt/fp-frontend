@@ -9,6 +9,7 @@
     "start-express": "node ./server.js"
   },
   "dependencies": {
+    "@navikt/backend-for-frontend-utils": "0.7.3",
     "axios": "^1.7.2",
     "connect-timeout": "^1.9.0",
     "cors": "^2.8.5",
