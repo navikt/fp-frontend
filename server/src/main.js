@@ -40,10 +40,12 @@ async function startApp() {
           directives: {
             'default-src': ["'self'"],
             'base-uri': ["'self'"],
+            "script-src-elem": ["http://localhost:9100"],
             'connect-src': [
               "'self'",
               'https://sentry.gc.nav.no',
               'https://graph.microsoft.com',
+              "ws://localhost:9100"
             ],
             'font-src': [
               "'self'",
