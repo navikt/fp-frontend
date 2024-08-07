@@ -108,7 +108,7 @@ const Dekorator: FunctionComponent<OwnProps> = ({
 
   const formaterteFeilmeldinger = useMemo(
     () => new ErrorFormatter().format(errorMessages, crashMessage),
-    [errorMessages],
+    [errorMessages, crashMessage],
   );
   const resolvedErrorMessages = useMemo(
     () => lagFeilmeldinger(formaterteFeilmeldinger, queryStrings, intl),

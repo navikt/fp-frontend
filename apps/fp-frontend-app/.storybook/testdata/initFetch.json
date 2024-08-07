@@ -1,13 +1,15 @@
 {
   "innloggetBruker": {
-    "brukernavn": "saksbeh",
-    "navn": "Sara Saksbehandler",
-    "kanSaksbehandle": true,
-    "kanVeilede": false,
-    "kanOverstyre": false,
-    "kanOppgavestyre": false,
-    "kanBehandleKode6": false,
-    "funksjonellTid": "2023-06-09T10:49:51.447269271"
+    "navAnsatt": {
+      "brukernavn": "saksbeh",
+      "navn": "Sara Saksbehandler",
+      "kanSaksbehandle": true,
+      "kanVeilede": false,
+      "kanOverstyre": false,
+      "kanOppgavestyre": false,
+      "kanBehandleKode6": false,
+      "funksjonellTid": "2023-06-09T10:49:51.447269271"
+    }
   },
   "behandlendeEnheter": [
     {
