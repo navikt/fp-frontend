@@ -18,7 +18,7 @@ jobs:
       contents: read
       packages: write
       id-token: write
-    uses: navikt/fp-gha-workflows/.github/workflows/build-app-frontend-yarn.yml@main
+    uses: navikt/fp-gha-workflows/.github/workflows/build-app-frontend-yarn.yml@legg-til-navikt-scope
     with:
       runs-on: 'ubuntu-latest-8-cores'
       node-version: '18.8.0'
