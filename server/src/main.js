@@ -23,6 +23,8 @@ const globalErrorHandler = (err, req, res) => {
   res.status(err.status || 500).send({ error: err });
 }
 
+const VITE_DEV_MODE_SCRIPT_HASH = "sha256-w8lX+YWZo/wDjnJo7pT375MLu8LV/TBoTe9Kw55eb28=";
+
 async function startApp() {
   try {
     server.use(timeout('10m'));
@@ -40,7 +42,7 @@ async function startApp() {
           directives: {
             'default-src': ["'self'"],
             'base-uri': ["'self'"],
-            "script-src-elem": ["UNSAFE_INLINE", "http://localhost:9100"],
+            "script-src-elem": [VITE_DEV_MODE_SCRIPT_HASH, "http://localhost:9100"],
             'connect-src': [
               "'self'",
               'https://sentry.gc.nav.no',
