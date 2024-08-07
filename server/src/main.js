@@ -5,6 +5,9 @@ import timeout from 'connect-timeout';
 import * as headers from './headers.js';
 import logger from './log.js';
 import { getIssuer } from './azure/issuer.js';
+import {
+  addLocalViteServerHandler,
+} from "@navikt/backend-for-frontend-utils";
 
 // for debugging during development
 import config from './config.js';
@@ -129,6 +132,8 @@ async function startApp() {
     });
 
     reverseProxy.setup(server);
+
+    addLocalViteServerHandler(server, "9100");
 
     // serve static files
     const rootDir = './dist';
