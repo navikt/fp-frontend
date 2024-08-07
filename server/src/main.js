@@ -23,7 +23,7 @@ const globalErrorHandler = (err, req, res) => {
   res.status(err.status || 500).send({ error: err });
 }
 
-const VITE_DEV_MODE_SCRIPT_HASH = "sha256-w8lX+YWZo/wDjnJo7pT375MLu8LV/TBoTe9Kw55eb28=";
+const VITE_DEV_MODE_SCRIPT_HASH = "'sha256-w8lX+YWZo/wDjnJo7pT375MLu8LV/TBoTe9Kw55eb28='";
 
 async function startApp() {
   try {
