@@ -38,7 +38,7 @@ const finnFagsakMarkeringTekst = (fagsak: Fagsak): string[] => {
   if (!fagsak.fagsakMarkeringer) {
     return [];
   }
-  return fagsak.fagsakMarkeringer.map(m => m.kortNavn) as string[];
+  return fagsak.fagsakMarkeringer.map(m => m.kortNavn).filter(navn => !!navn) as string[];
 };
 
 interface OwnProps {
