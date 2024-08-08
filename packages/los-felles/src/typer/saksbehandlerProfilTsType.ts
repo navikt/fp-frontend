@@ -1,7 +1,7 @@
 type SaksbehandlerProfil = Readonly<{
   brukerIdent: string;
   navn: string;
-  epostAdresse?: string;
+  ansattAvdeling?: string;
 }>;
 
 export default SaksbehandlerProfil;

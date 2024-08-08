@@ -27,13 +27,13 @@ export const RestApiPathsKeys = {
   ),
   BEHANDLINGSKO_OPPGAVE_ANTALL: new RestKey<number, { sakslisteId: number }>('BEHANDLINGSKO_OPPGAVE_ANTALL'),
   SAKSLISTER_FOR_AVDELING: new RestKey<SakslisteAvdeling[], { avdelingEnhet: string }>('SAKSLISTER_FOR_AVDELING'),
-  SAKSBEHANDLERE_FOR_AVDELING: new RestKey<SaksbehandlerAvdeling[], { avdelingEnhet: string }>(
+  SAKSBEHANDLERE_FOR_AVDELING: new RestKey<SaksbehandlerProfil[], { avdelingEnhet: string }>(
     'SAKSBEHANDLERE_FOR_AVDELING',
   ),
   OPPGAVE_AVDELING_ANTALL: new RestKey<number, { avdelingEnhet: string }>('OPPGAVE_AVDELING_ANTALL'),
   OPPGAVE_ANTALL: new RestKey<number, { sakslisteId: number; avdelingEnhet: string }>('OPPGAVE_ANTALL'),
   SAKSBEHANDLER_SOK: new RestKey<SaksbehandlerAvdeling, { brukerIdent: string }>('SAKSBEHANDLER_SOK'),
-  FLYTT_RESERVASJON_SAKSBEHANDLER_SOK: new RestKey<SaksbehandlerProfil, { brukerIdent: string }>(
+  FLYTT_RESERVASJON_SAKSBEHANDLER_SOK: new RestKey<SaksbehandlerAvdeling, { brukerIdent: string }>(
     'FLYTT_RESERVASJON_SAKSBEHANDLER_SOK',
   ),
   ENDRE_OPPGAVERESERVASJON: new RestKey<Oppgave[], { oppgaveId: number; reserverTil: string }>(

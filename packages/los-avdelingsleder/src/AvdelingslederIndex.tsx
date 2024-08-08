@@ -7,6 +7,7 @@ import { LoadingPanel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { formatQueryString, parseQueryString, createIntl } from '@navikt/ft-utils';
 
 import { NavAnsatt } from '@navikt/fp-types';
+import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
 import { RestApiState, useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 
 import useTrackRouteParam from './useTrackRouteParam';
@@ -77,7 +78,7 @@ const renderAvdelingslederPanel = (
   avdelingslederPanel: string,
   valgtAvdelingEnhet: string,
   hentAvdelingensSaksbehandlere: (params: { avdelingEnhet: string }) => void,
-  avdelingensSaksbehandlere: Saksbehandler[],
+  avdelingensSaksbehandlere: SaksbehandlerProfil[],
 ) => {
   switch (avdelingslederPanel) {
     case AvdelingslederPanels.BEHANDLINGSKOER:
