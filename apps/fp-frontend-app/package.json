@@ -1,7 +1,7 @@
 {
   "name": "@navikt/fp-frontend-app",
   "version": "1.0.0",
-  "module": "src/index.tsx",
+  "module": "src/main.tsx",
   "license": "MIT",
   "private": true,
   "type": "module",

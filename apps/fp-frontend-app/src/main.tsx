@@ -11,7 +11,7 @@ import AppIndex from './app/AppIndex';
 
 dayjs.locale('nb');
 
-const app = document.getElementById('app');
+const app = document.getElementById('root');
 if (app === null) {
   throw new Error('No app element');
 }
