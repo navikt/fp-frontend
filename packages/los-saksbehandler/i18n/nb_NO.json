@@ -40,7 +40,7 @@
   "LeggTilSaksbehandlerForm.Sok": "Søk",
   "LeggTilSaksbehandlerForm.LeggTilIListen": "Legg til i listen",
   "LeggTilSaksbehandlerForm.Nullstill": "Nullstill",
-  "LeggTilSaksbehandlerForm.FinnesAllerede": "Brukerident finnes allerede i listen",
+  "LeggTilSaksbehandlerForm.FinnesAllerede": "Saksbehandler finnes allerede i listen",
   "LeggTilSaksbehandlerForm.FinnesIkke": "Kan ikke finne brukerident",
 
   "FlyttReservasjonModal.FlyttReservasjon": "Flytt reservasjonen til annen saksbehandler",

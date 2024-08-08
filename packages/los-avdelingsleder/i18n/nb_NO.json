@@ -13,7 +13,7 @@
   "LeggTilSaksbehandlerForm.Sok": "Søk",
   "LeggTilSaksbehandlerForm.LeggTilIListen": "Legg til i listen",
   "LeggTilSaksbehandlerForm.Nullstill": "Nullstill",
-  "LeggTilSaksbehandlerForm.FinnesAllerede": "Brukerident finnes allerede i listen",
+  "LeggTilSaksbehandlerForm.FinnesAllerede": "Saksbehandler finnes allerede i listen",
   "LeggTilSaksbehandlerForm.FinnesIkke": "Kan ikke finne brukerident",
 
   "EndreSakslisterPanel.KnyttetMotSaksbehandlere": "Behandlingskøen benyttes av disse saksbehandlerne",
@@ -127,10 +127,9 @@
   "FlyttReservasjonModal.Ok": "OK",
   "FlyttReservasjonModal.Avbryt": "Avbryt",
 
+  "SaksbehandlereTabell.AnsattVed": "Ansatt ved avdeling",
   "SaksbehandlereTabell.Navn": "Navn",
   "SaksbehandlereTabell.Brukerident": "Brukerident",
-  "SaksbehandlereTabell.Avdeling": "Avdeling",
-  "SaksbehandlereTabell.Saksbehandlere": "Tilgjengelige saksbehandlere",
   "SaksbehandlereTabell.IngenSaksbehandlere": "Ingen saksbehandlere lagt til",
 
   "OppgaverPerForsteStonadsdagPanel.FordeltPaForsteStonadsdag": "Antall åpne oppgaver for førstegangsbehandlinger fordelt på første stønadsdag - alle ytelser",

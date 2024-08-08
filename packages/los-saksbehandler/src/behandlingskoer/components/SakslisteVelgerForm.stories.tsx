@@ -55,7 +55,6 @@ Default.args = {
         verdi: '32434',
       },
       navn: 'Espen Utvikler',
-      avdelingsnavn: [],
     },
     {
       brukerIdent: {
@@ -63,7 +62,6 @@ Default.args = {
         verdi: '32111',
       },
       navn: 'Auto Joakim',
-      avdelingsnavn: [],
     },
   ],
   sakslister: [
@@ -97,7 +95,6 @@ MedToSakslister.args = {
         verdi: '32434',
       },
       navn: 'Espen Utvikler',
-      avdelingsnavn: [],
     },
     {
       brukerIdent: {
@@ -105,7 +102,6 @@ MedToSakslister.args = {
         verdi: '32111',
       },
       navn: 'Auto Joakim',
-      avdelingsnavn: [],
     },
   ],
   sakslister: [

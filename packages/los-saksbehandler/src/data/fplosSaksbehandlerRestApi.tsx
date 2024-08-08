@@ -1,7 +1,7 @@
 import { RestApiConfigBuilder, createRequestApi, RestKey } from '@navikt/fp-rest-api';
 import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
 import { FagsakEnkel, AlleKodeverk } from '@navikt/fp-types';
-import { SaksbehandlerForFlytting, Oppgave, OppgaveStatus } from '@navikt/fp-los-felles';
+import { Oppgave, OppgaveStatus, SaksbehandlerProfil } from '@navikt/fp-los-felles';
 
 import NyeOgFerdigstilteOppgaver from '../typer/nyeOgFerdigstilteOppgaverTsType';
 import Saksbehandler from '../typer/saksbehandlerTsType';
@@ -30,7 +30,7 @@ export const RestApiPathsKeys = {
     'FLYTT_RESERVASJON',
   ),
   RESERVER_OPPGAVE: new RestKey<OppgaveStatus, { oppgaveId: number }>('RESERVER_OPPGAVE'),
-  FLYTT_RESERVASJON_SAKSBEHANDLER_SOK: new RestKey<SaksbehandlerForFlytting, { brukerIdent: string }>(
+  FLYTT_RESERVASJON_SAKSBEHANDLER_SOK: new RestKey<SaksbehandlerProfil, { brukerIdent: string }>(
     'FLYTT_RESERVASJON_SAKSBEHANDLER_SOK',
   ),
   HENT_RESERVASJONSSTATUS: new RestKey<OppgaveStatus, { oppgaveId: number }>('HENT_RESERVASJONSSTATUS'),

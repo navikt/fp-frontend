@@ -1,7 +1,5 @@
-type SaksbehandlerAvdeling = Readonly<{
-  brukerIdent: string;
-  navn: string;
-  avdelingsnavn: string[];
-}>;
+import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
+
+type SaksbehandlerAvdeling =Readonly<Pick<SaksbehandlerProfil, 'brukerIdent' | 'navn'>>;
 
 export default SaksbehandlerAvdeling;
