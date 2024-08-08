@@ -33,6 +33,7 @@ import OmsorgOgRettFaktaInitPanel from './faktaPaneler/OmsorgOgRettFaktaInitPane
 import UttakDokumentasjonFaktaInitPanel from './faktaPaneler/UttakDokumentasjonFaktaInitPanel';
 import FaktaPanelInitProps from '../felles/typer/faktaPanelInitProps';
 import ProsessPanelInitProps, { ProsessPanelExtraInitProps } from '../felles/typer/prosessPanelInitProps';
+import { InntektsmeldingerFaktaInitPanel } from '../fellesPaneler/fakta/InntektsmeldingerFaktaInitPanel';
 
 interface OwnProps {
   behandling: Behandling;
@@ -73,6 +74,7 @@ const ForeldrepengerPaneler: FunctionComponent<OwnProps> = ({
           arbeidsgiverOpplysningerPerId={arbeidsgivere}
           hentOgSettBehandling={hentOgSettBehandling}
         />
+        <InntektsmeldingerFaktaInitPanel {...props} />
         <ArbeidsforholdFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
         <YtelserFaktaInitPanel {...props} />
         <VergeFaktaInitPanel {...props} />

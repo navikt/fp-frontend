@@ -116,6 +116,7 @@ export const BehandlingApiKeys = {
   ARBEIDSGIVERE_OVERSIKT: new RestKey<ArbeidsgiverOpplysningerWrapper, void>('ARBEIDSGIVERE_OVERSIKT'),
   BEHANDLING_PERSONOVERSIKT: new RestKey<Personoversikt, void>('BEHANDLING_PERSONOVERSIKT'),
   ARBEID_OG_INNTEKT: new RestKey<ArbeidOgInntektsmelding, void>('ARBEID_OG_INNTEKT'),
+  INNTEKTSMELDINGER: new RestKey<unknown, void>('INNTEKTSMELDINGER'),
   ARBEID_OG_INNTEKT_REGISTRER_ARBEIDSFORHOLD: new RestKey<void, ManueltArbeidsforhold>(
     'ARBEID_OG_INNTEKT_REGISTRER_ARBEIDSFORHOLD',
   ),
@@ -187,6 +188,7 @@ export const behandlingEndepunkter = new RestApiConfigBuilder()
   .withRel('arbeidsgivere-oversikt', BehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT)
   .withRel('behandling-personoversikt', BehandlingApiKeys.BEHANDLING_PERSONOVERSIKT)
   .withRel('arbeidsforhold-inntektsmelding', BehandlingApiKeys.ARBEID_OG_INNTEKT)
+  .withRel('inntektsmeldinger', BehandlingApiKeys.INNTEKTSMELDINGER)
 
   // INNSYN
   .withRel('innsyn', BehandlingApiKeys.INNSYN)
