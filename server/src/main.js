@@ -42,7 +42,7 @@ async function startApp() {
           directives: {
             'default-src': ["'self'"],
             'base-uri': ["'self'"],
-            "script-src-elem": [VITE_DEV_MODE_SCRIPT_HASH, "http://localhost:9100"],
+            "script-src-elem": [VITE_DEV_MODE_SCRIPT_HASH, "http://localhost:9100", "'self'"],
             'connect-src': [
               "'self'",
               'https://sentry.gc.nav.no',
