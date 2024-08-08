@@ -77,7 +77,9 @@ const SaksbehandlereTabell: FunctionComponent<OwnProps> = ({
               <Table.HeaderCell scope="col">
                 <FormattedMessage id="SaksbehandlereTabell.Brukerident" />
               </Table.HeaderCell>
-              <Table.HeaderCell scope="col">Ansatt ved avdeling</Table.HeaderCell>
+              <Table.HeaderCell scope="col">
+                <FormattedMessage id="SaksbehandlereTabell.AnsattVed" />
+              </Table.HeaderCell>
               <Table.HeaderCell scope="col" />
             </Table.Row>
           </Table.Header>
