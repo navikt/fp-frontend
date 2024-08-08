@@ -4,7 +4,7 @@ import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
 import * as stories from './SaksbehandlereTabell.stories';
 
-const { Default, TomTabell } = composeStories(stories);
+const { Default, TomTabell, MedSaksbehandlerUtenAnsattAvdeling } = composeStories(stories);
 
 describe('<SaksbehandlereTabell>', () => {
   it('skal vise to saksbehandlere i tabell', async () => {
@@ -41,7 +41,7 @@ describe('<SaksbehandlereTabell>', () => {
     expect(hentAvdelingensSaksbehandlere).toHaveBeenNthCalledWith(1, { avdelingEnhet: 'NAV Viken' });
   });
 
-  it('skal sortere saksbehandlere etter ansatt-avdeling og navn', async () => {
+  it('skal sortere saksbehandlere etter ansattAvdeling og navn', async () => {
     render(<Default />);
 
     const sortedNames = ['Hildegunn', 'Espen Utvikler', 'Steffen'];
@@ -52,4 +52,15 @@ describe('<SaksbehandlereTabell>', () => {
       expect(row).toHaveTextContent(sortedNames[index]);
     });
   });
+
+  it('skal sortere saksbehandlere med ansattAvdeling null sist', async () => {
+    render(<MedSaksbehandlerUtenAnsattAvdeling />);
+    const sortedNames = ['Hildegunn', 'Ukjent saksbehandler (X11111)'];
+
+    const rows = await screen.findAllByRole('row');
+
+    rows.slice(1).forEach((row, index) => {
+      expect(row).toHaveTextContent(sortedNames[index]);
+    });
+  })
 });

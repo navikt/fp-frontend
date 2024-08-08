@@ -61,3 +61,18 @@ export const TomTabell = Template.bind({});
 Template.args = {
   hentAvdelingensSaksbehandlere: () => undefined,
 };
+
+export const MedSaksbehandlerUtenAnsattAvdeling = Template.bind({});
+MedSaksbehandlerUtenAnsattAvdeling.args = {
+  saksbehandlere: [
+    {
+      brukerIdent: 'X1111',
+      navn: 'Ukjent saksbehandler (X11111)',
+    },
+    {
+      brukerIdent: 'H11111',
+      navn: 'Hildegunn',
+      ansattAvdeling: 'Drammen'
+    },
+  ]
+}
