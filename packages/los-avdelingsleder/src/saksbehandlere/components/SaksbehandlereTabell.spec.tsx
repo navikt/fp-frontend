@@ -31,7 +31,7 @@ describe('<SaksbehandlereTabell>', () => {
     render(<Default hentAvdelingensSaksbehandlere={hentAvdelingensSaksbehandlere} />);
     expect(await screen.findByText('Navn')).toBeInTheDocument();
 
-    await userEvent.click(screen.getAllByRole('img')[0]);
+    await userEvent.click(screen.getAllByRole('img')[1]);
 
     expect(await screen.findByText('Ønsker du å slette Espen Utvikler?')).toBeInTheDocument();
 
@@ -39,5 +39,17 @@ describe('<SaksbehandlereTabell>', () => {
 
     await waitFor(() => expect(hentAvdelingensSaksbehandlere).toHaveBeenCalledTimes(1));
     expect(hentAvdelingensSaksbehandlere).toHaveBeenNthCalledWith(1, { avdelingEnhet: 'NAV Viken' });
+  });
+
+  it('skal sortere saksbehandlere etter ansatt-avdeling og navn', async () => {
+    render(<Default />);
+
+    const sortedNames = ['Hildegunn', 'Espen Utvikler', 'Steffen'];
+
+    const rows = await screen.findAllByRole('row');
+
+    rows.slice(1).forEach((row, index) => {
+      expect(row).toHaveTextContent(sortedNames[index]);
+    });
   });
 });
