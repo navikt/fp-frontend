@@ -10,6 +10,7 @@ import { ArbeidsgiverOpplysningerPerId, Behandling, Inntektsmelding } from '@nav
 import { formatCurrencyWithKr } from '@navikt/ft-utils';
 import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
 import { CircleFillIcon } from '@navikt/aksel-icons';
+import { NaturalytelseType } from '@navikt/fp-types/src/arbeidOgInntektsmeldingTsType';
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.INNTEKTSMELDINGER];
 type EndepunktPanelData = {
@@ -28,7 +29,8 @@ export const InntektsmeldingerFaktaInitPanel = ({arbeidsgiverOpplysningerPerId, 
     faktaPanelKode={FaktaPanelCode.INNTEKTSMELDINGER}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'InntektsmeldingerInfoPanel.Title' })}
     skalPanelVisesIMeny={() => true}
-    renderPanel={data => <InntektsmledingerFaktaInnhold {...data} behandling={props.behandling} arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}  />}
+    renderPanel={data =>
+      <InntektsmledingerFaktaInnhold {...data} behandling={props.behandling} arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}  />}
   />
 );
 
@@ -51,11 +53,12 @@ const InntektsmledingerFaktaInnhold = ({ arbeidsgiverOpplysningerPerId, behandli
         <Table.Body>
           {inntektsmeldinger.map((inntektsmelding, index) => {
             return (
-              <Table.ExpandableRow togglePlacement="right" key={index} content={<InntektsmeldingContent arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId} inntektsmelding={inntektsmelding} /> }>
+              <Table.ExpandableRow togglePlacement="right" key={index} content={
+                <InntektsmeldingContent arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId} inntektsmelding={inntektsmelding} /> }>
                 <Table.DataCell>{inntektsmelding.innsendingsårsak}</Table.DataCell>
                 <Table.DataCell><DateTimeLabel dateTimeString={inntektsmelding.innsendingstidspunkt} /></Table.DataCell>
                 <Table.DataCell>{arbeidsgiverOpplysningerPerId[inntektsmelding.arbeidsgiverIdent].navn}</Table.DataCell>
-                <Table.DataCell><DateLabel dateString={inntektsmelding.startDatoPermisjon} /></Table.DataCell>
+                <Table.DataCell>{inntektsmelding.startDatoPermisjon ? <DateLabel dateString={inntektsmelding.startDatoPermisjon} /> : "-"}</Table.DataCell>
                 <Table.DataCell>{formatCurrencyWithKr(inntektsmelding.inntektPrMnd)}</Table.DataCell>
                 <Table.DataCell><InntektsmeldingStatus behandling={behandling} inntektsmelding={inntektsmelding}  /></Table.DataCell>
                 <Table.DataCell>HVORDAN?</Table.DataCell>
@@ -78,7 +81,9 @@ const InntektsmeldingStatus = ({behandling, inntektsmelding}:{behandling: Behand
   return <HStack gap="1" align="center"><CircleFillIcon style={{ color: "var(--a-border-subtle)"}} /> Ingen</HStack>
 }
 
-const InntektsmeldingContent = ({inntektsmelding,arbeidsgiverOpplysningerPerId}: {inntektsmelding:Inntektsmelding} & Pick<OwnProps, "arbeidsgiverOpplysningerPerId">) => {
+const InntektsmeldingContent = (
+  {inntektsmelding,arbeidsgiverOpplysningerPerId}: {inntektsmelding:Inntektsmelding} & Pick<OwnProps, "arbeidsgiverOpplysningerPerId">
+) => {
 
   return (
     <HGrid columns={{ md: 3, "2xl": 4 }}  gap="8" style={{background: "rgba(18, 43, 68, 0.08)", padding: "1.5rem 1rem"}}>
@@ -103,7 +108,7 @@ const InntektsmeldingContent = ({inntektsmelding,arbeidsgiverOpplysningerPerId}:
       </InntektsmeldingInfoBlokk>
 
       <InntektsmeldingInfoBlokk tittel={"Første dag med foreldrepenger"}>
-        <span><DateLabel dateString={inntektsmelding.startDatoPermisjon} /></span>
+        <span>{inntektsmelding.startDatoPermisjon ? <DateLabel dateString={inntektsmelding.startDatoPermisjon} /> : "-"}</span>
         <span>Oppgitt av arbeidsgiver</span>
       </InntektsmeldingInfoBlokk>
 
@@ -116,13 +121,13 @@ const InntektsmeldingContent = ({inntektsmelding,arbeidsgiverOpplysningerPerId}:
       </InntektsmeldingInfoBlokk>
 
       <InntektsmeldingInfoBlokk tittel={"Naturalytelser som faller bort"}>
-        {inntektsmelding.naturalytelser.length === 0 ? <span>Ingen</span> :
+        {inntektsmelding.bortfalteNaturalytelser.length === 0 ? <span>Ingen</span> :
         <VStack>
-          {inntektsmelding.naturalytelser.map(({ type, periode, beloepPerMnd, indexKey }) => (
+          {inntektsmelding.bortfalteNaturalytelser.map(({ type, periode, beloepPerMnd, indexKey }) => (
             <VStack key={indexKey}>
-              <span>{type}</span>
+              <span>{NaturalytelseType[type]}</span>
               <ul style={{margin: 0}}>
-                <li><DateLabel dateString={periode.fomDato} /> TODO: denne er feil</li>
+                <li><DateLabel dateString={periode.fomDato} /></li>
                 <li>Verdi pr måned: {formatCurrencyWithKr(beloepPerMnd.verdi)}</li>
               </ul>
             </VStack>
