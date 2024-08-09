@@ -58,7 +58,7 @@ const InntektsmledingerFaktaInnhold = ({ arbeidsgiverOpplysningerPerId, behandli
                 <Table.DataCell><DateLabel dateString={inntektsmelding.startDatoPermisjon} /></Table.DataCell>
                 <Table.DataCell>{formatCurrencyWithKr(inntektsmelding.inntektPrMnd)}</Table.DataCell>
                 <Table.DataCell><InntektsmeldingStatus behandling={behandling} inntektsmelding={inntektsmelding}  /></Table.DataCell>
-                <Table.DataCell>Dato for behandling</Table.DataCell>
+                <Table.DataCell>HVORDAN?</Table.DataCell>
               </Table.ExpandableRow>
             );
           })}
@@ -103,8 +103,8 @@ const InntektsmeldingContent = ({inntektsmelding,arbeidsgiverOpplysningerPerId}:
       </InntektsmeldingInfoBlokk>
 
       <InntektsmeldingInfoBlokk tittel={"Første dag med foreldrepenger"}>
-        <span>12.12.TODO</span>
-        <span>Oppgitt av søker: TODO</span>
+        <span><DateLabel dateString={inntektsmelding.startDatoPermisjon} /></span>
+        <span>Oppgitt av arbeidsgiver</span>
       </InntektsmeldingInfoBlokk>
 
       <InntektsmeldingInfoBlokk tittel={"Kilde"}>
@@ -115,7 +115,7 @@ const InntektsmeldingContent = ({inntektsmelding,arbeidsgiverOpplysningerPerId}:
         <span>{inntektsmelding.refusjonPrMnd ? formatCurrencyWithKr(inntektsmelding.refusjonPrMnd): "Ingen refusjon"}</span>
       </InntektsmeldingInfoBlokk>
 
-      <InntektsmeldingInfoBlokk tittel={"Naturalytelser"}>
+      <InntektsmeldingInfoBlokk tittel={"Naturalytelser som faller bort"}>
         {inntektsmelding.naturalytelser.length === 0 ? <span>Ingen</span> :
         <VStack>
           {inntektsmelding.naturalytelser.map(({ type, periode, beloepPerMnd, indexKey }) => (
