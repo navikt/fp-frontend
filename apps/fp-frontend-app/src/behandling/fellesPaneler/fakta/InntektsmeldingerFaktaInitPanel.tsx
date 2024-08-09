@@ -10,7 +10,7 @@ import { ArbeidsgiverOpplysningerPerId, Behandling, Inntektsmelding } from '@nav
 import { formatCurrencyWithKr } from '@navikt/ft-utils';
 import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
 import { CircleFillIcon } from '@navikt/aksel-icons';
-import { NaturalytelseType } from '@navikt/fp-types/src/arbeidOgInntektsmeldingTsType';
+import { InntektsmeldingInnsendingsårsak, NaturalytelseType } from '@navikt/fp-types/src/arbeidOgInntektsmeldingTsType';
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.INNTEKTSMELDINGER];
 type EndepunktPanelData = {
@@ -55,7 +55,7 @@ const InntektsmledingerFaktaInnhold = ({ arbeidsgiverOpplysningerPerId, behandli
             return (
               <Table.ExpandableRow togglePlacement="right" key={index} content={
                 <InntektsmeldingContent arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId} inntektsmelding={inntektsmelding} /> }>
-                <Table.DataCell>{inntektsmelding.innsendingsårsak}</Table.DataCell>
+                <Table.DataCell>{InntektsmeldingInnsendingsårsak[inntektsmelding.innsendingsårsak]}</Table.DataCell>
                 <Table.DataCell><DateTimeLabel dateTimeString={inntektsmelding.innsendingstidspunkt} /></Table.DataCell>
                 <Table.DataCell>{arbeidsgiverOpplysningerPerId[inntektsmelding.arbeidsgiverIdent].navn}</Table.DataCell>
                 <Table.DataCell>{inntektsmelding.startDatoPermisjon ? <DateLabel dateString={inntektsmelding.startDatoPermisjon} /> : "-"}</Table.DataCell>
@@ -86,7 +86,7 @@ const InntektsmeldingContent = (
 ) => {
 
   return (
-    <HGrid columns={{ md: 3, "2xl": 4 }}  gap="8" style={{background: "rgba(18, 43, 68, 0.08)", padding: "1.5rem 1rem"}}>
+    <HGrid columns={{ md: 3, "2xl": 4 }}  gap="8" style={{background: "rgba(18, 43, 68, 0.08)", padding: "1.5rem 1rem", marginLeft: "-3rem", borderRadius: "4px"}}>
       <InntektsmeldingInfoBlokk tittel={"Arbeidsgiver"}>
         <span>Virksomhetsnavn: {arbeidsgiverOpplysningerPerId[inntektsmelding.arbeidsgiverIdent].navn}</span>
         <span>Org.nr. for underenhet: {inntektsmelding.arbeidsgiverIdent} </span>
