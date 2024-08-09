@@ -6,7 +6,7 @@ import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { useIntl } from 'react-intl';
 import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
 import { HGrid, Label, Table, VStack } from '@navikt/ds-react';
-import { Inntektsmelding } from '@navikt/fp-types';
+import { ArbeidsgiverOpplysningerPerId, Inntektsmelding } from '@navikt/fp-types';
 import { formatCurrencyNoKr } from '@navikt/ft-utils';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 
@@ -15,18 +15,22 @@ type EndepunktPanelData = {
   inntektsmeldinger: Inntektsmelding[];
 };
 
-export const InntektsmeldingerFaktaInitPanel = ({...props}: FaktaPanelInitProps) => (
+type OwnProps = {
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+}
+
+export const InntektsmeldingerFaktaInitPanel = ({arbeidsgiverOpplysningerPerId, ...props}: FaktaPanelInitProps & OwnProps) => (
   <FaktaDefaultInitPanel<EndepunktPanelData>
     {...props}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     faktaPanelKode={FaktaPanelCode.INNTEKTSMELDINGER}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'InntektsmeldingerInfoPanel.Title' })}
     skalPanelVisesIMeny={() => true}
-    renderPanel={data => <InntektsmledingerFaktaInnhold {...data} />}
+    renderPanel={data => <InntektsmledingerFaktaInnhold {...data} arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}  />}
   />
 );
 
-const InntektsmledingerFaktaInnhold = ({ inntektsmeldinger }: {inntektsmeldinger:Inntektsmelding[]}) => {
+const InntektsmledingerFaktaInnhold = ({ arbeidsgiverOpplysningerPerId, inntektsmeldinger }: {inntektsmeldinger:Inntektsmelding[]} & OwnProps) => {
   console.log(inntektsmeldinger);
   return (
     <Table>
@@ -45,10 +49,10 @@ const InntektsmledingerFaktaInnhold = ({ inntektsmeldinger }: {inntektsmeldinger
         <Table.Body>
           {inntektsmeldinger.map((inntektsmelding, index) => {
             return (
-              <Table.ExpandableRow togglePlacement="right" key={index} content={<InntektsmeldingContent inntektsmelding={inntektsmelding} /> }>
+              <Table.ExpandableRow togglePlacement="right" key={index} content={<InntektsmeldingContent arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId} inntektsmelding={inntektsmelding} /> }>
                 <Table.DataCell>{inntektsmelding.dokumentId ?? "finnes ei"}</Table.DataCell>
                 <Table.DataCell><DateLabel dateString={inntektsmelding.motattDato} /></Table.DataCell>
-                <Table.DataCell>{inntektsmelding.arbeidsgiverIdent}</Table.DataCell>
+                <Table.DataCell>{arbeidsgiverOpplysningerPerId[inntektsmelding.arbeidsgiverIdent].navn}</Table.DataCell>
                 <Table.DataCell>Dunno</Table.DataCell>
                 <Table.DataCell>{formatCurrencyNoKr(inntektsmelding.inntektPrMnd)}</Table.DataCell>
                 <Table.DataCell>En eller annen status</Table.DataCell>
@@ -61,23 +65,23 @@ const InntektsmledingerFaktaInnhold = ({ inntektsmeldinger }: {inntektsmeldinger
   )
 }
 
-const InntektsmeldingContent = ({inntektsmelding}: {inntektsmelding:Inntektsmelding}) => {
+const InntektsmeldingContent = ({inntektsmelding,arbeidsgiverOpplysningerPerId}: {inntektsmelding:Inntektsmelding} & OwnProps) => {
 
   return (
     <HGrid columns={{ xl: 3, "2xl": 4 }}  gap="8" style={{background: "rgba(18, 43, 68, 0.08)", padding: "1.5rem 1rem"}}>
       <InntektsmeldingInfoBlokk tittel={"Arbeidsgiver"}>
-        <span>Virksomhetsnavn: TODO</span>
-        <span>Org.nr. for underenhet: {inntektsmelding.arbeidsgiverIdent}</span>
+        <span>Virksomhetsnavn: {arbeidsgiverOpplysningerPerId[inntektsmelding.arbeidsgiverIdent].navn}</span>
+        <span>Org.nr. for underenhet: {inntektsmelding.arbeidsgiverIdent} </span>
       </InntektsmeldingInfoBlokk>
 
       <InntektsmeldingInfoBlokk tittel={"Kontaktperson fra arbeidsgiver"}>
-        <span>Virksomhetsnavn: TODO</span>
-        <span>Org.nr. for underenhet: {inntektsmelding.arbeidsgiverIdent}</span>
+        <span>Navn: {inntektsmelding.kontaktpersonNavn}</span>
+        <span>Telefonnummer {inntektsmelding.kontaktpersonNummer}</span>
       </InntektsmeldingInfoBlokk>
 
       <InntektsmeldingInfoBlokk tittel={"Behandling"}>
         <span>Brukt i denne behandlingen: TODO</span>
-        <span>Avsluttet dato 14.14.14</span>
+        <span>Avsluttet dato 14.14.TODO</span>
       </InntektsmeldingInfoBlokk>
 
       <InntektsmeldingInfoBlokk tittel={"Månedsinntekt"}>
