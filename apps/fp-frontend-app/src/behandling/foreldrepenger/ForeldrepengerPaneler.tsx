@@ -74,7 +74,7 @@ const ForeldrepengerPaneler: FunctionComponent<OwnProps> = ({
           arbeidsgiverOpplysningerPerId={arbeidsgivere}
           hentOgSettBehandling={hentOgSettBehandling}
         />
-        <InntektsmeldingerFaktaInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} {...props} />
+        <InntektsmeldingerFaktaInitPanel behandling={behandling} arbeidsgiverOpplysningerPerId={arbeidsgivere} {...props} />
         <ArbeidsforholdFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
         <YtelserFaktaInitPanel {...props} />
         <VergeFaktaInitPanel {...props} />

@@ -5,10 +5,11 @@ import React from 'react';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { useIntl } from 'react-intl';
 import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
-import { HGrid, Label, Table, VStack } from '@navikt/ds-react';
-import { ArbeidsgiverOpplysningerPerId, Inntektsmelding } from '@navikt/fp-types';
+import { HGrid, HStack, Label, Table, VStack } from '@navikt/ds-react';
+import { ArbeidsgiverOpplysningerPerId, Behandling, Inntektsmelding } from '@navikt/fp-types';
 import { formatCurrencyWithKr } from '@navikt/ft-utils';
 import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
+import { CircleFillIcon } from '@navikt/aksel-icons';
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.INNTEKTSMELDINGER];
 type EndepunktPanelData = {
@@ -17,6 +18,7 @@ type EndepunktPanelData = {
 
 type OwnProps = {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  behandling: Behandling;
 }
 
 export const InntektsmeldingerFaktaInitPanel = ({arbeidsgiverOpplysningerPerId, ...props}: FaktaPanelInitProps & OwnProps) => (
@@ -26,11 +28,11 @@ export const InntektsmeldingerFaktaInitPanel = ({arbeidsgiverOpplysningerPerId, 
     faktaPanelKode={FaktaPanelCode.INNTEKTSMELDINGER}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'InntektsmeldingerInfoPanel.Title' })}
     skalPanelVisesIMeny={() => true}
-    renderPanel={data => <InntektsmledingerFaktaInnhold {...data} arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}  />}
+    renderPanel={data => <InntektsmledingerFaktaInnhold {...data} behandling={props.behandling} arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}  />}
   />
 );
 
-const InntektsmledingerFaktaInnhold = ({ arbeidsgiverOpplysningerPerId, inntektsmeldinger }: {inntektsmeldinger:Inntektsmelding[]} & OwnProps) => {
+const InntektsmledingerFaktaInnhold = ({ arbeidsgiverOpplysningerPerId, behandling, inntektsmeldinger }: {inntektsmeldinger:Inntektsmelding[]} & OwnProps) => {
   console.log(inntektsmeldinger);
   return (
     <Table>
@@ -55,7 +57,7 @@ const InntektsmledingerFaktaInnhold = ({ arbeidsgiverOpplysningerPerId, inntekts
                 <Table.DataCell>{arbeidsgiverOpplysningerPerId[inntektsmelding.arbeidsgiverIdent].navn}</Table.DataCell>
                 <Table.DataCell><DateLabel dateString={inntektsmelding.startDatoPermisjon} /></Table.DataCell>
                 <Table.DataCell>{formatCurrencyWithKr(inntektsmelding.inntektPrMnd)}</Table.DataCell>
-                <Table.DataCell>En eller annen status</Table.DataCell>
+                <Table.DataCell><InntektsmeldingStatus behandling={behandling} inntektsmelding={inntektsmelding}  /></Table.DataCell>
                 <Table.DataCell>Dato for behandling</Table.DataCell>
               </Table.ExpandableRow>
             );
@@ -65,7 +67,18 @@ const InntektsmledingerFaktaInnhold = ({ arbeidsgiverOpplysningerPerId, inntekts
   )
 }
 
-const InntektsmeldingContent = ({inntektsmelding,arbeidsgiverOpplysningerPerId}: {inntektsmelding:Inntektsmelding} & OwnProps) => {
+const InntektsmeldingStatus = ({behandling, inntektsmelding}:{behandling: Behandling, inntektsmelding: Inntektsmelding} ) => {
+  if (inntektsmelding.behandlingsIdeer.includes(behandling.uuid)) {
+    return <HStack gap="1" align="center"><CircleFillIcon style={{ color: "var(--a-green-400)"}} /> Denne</HStack>
+  }
+  if (inntektsmelding.behandlingsIdeer.length > 0) {
+    return <HStack gap="1" align="center"><CircleFillIcon style={{ color: "var(--a-border-subtle)"}} /> Tidligere</HStack>
+  }
+
+  return <HStack gap="1" align="center"><CircleFillIcon style={{ color: "var(--a-border-subtle)"}} /> Ingen</HStack>
+}
+
+const InntektsmeldingContent = ({inntektsmelding,arbeidsgiverOpplysningerPerId}: {inntektsmelding:Inntektsmelding} & Pick<OwnProps, "arbeidsgiverOpplysningerPerId">) => {
 
   return (
     <HGrid columns={{ md: 3, "2xl": 4 }}  gap="8" style={{background: "rgba(18, 43, 68, 0.08)", padding: "1.5rem 1rem"}}>
