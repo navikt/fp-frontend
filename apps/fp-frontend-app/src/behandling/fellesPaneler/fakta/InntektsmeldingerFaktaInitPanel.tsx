@@ -7,7 +7,7 @@ import { useIntl } from 'react-intl';
 import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
 import { HGrid, Label, Table, VStack } from '@navikt/ds-react';
 import { ArbeidsgiverOpplysningerPerId, Inntektsmelding } from '@navikt/fp-types';
-import { formatCurrencyNoKr } from '@navikt/ft-utils';
+import { formatCurrencyWithKr } from '@navikt/ft-utils';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.INNTEKTSMELDINGER];
@@ -53,8 +53,8 @@ const InntektsmledingerFaktaInnhold = ({ arbeidsgiverOpplysningerPerId, inntekts
                 <Table.DataCell>{inntektsmelding.dokumentId ?? "finnes ei"}</Table.DataCell>
                 <Table.DataCell><DateLabel dateString={inntektsmelding.motattDato} /></Table.DataCell>
                 <Table.DataCell>{arbeidsgiverOpplysningerPerId[inntektsmelding.arbeidsgiverIdent].navn}</Table.DataCell>
-                <Table.DataCell>Dunno</Table.DataCell>
-                <Table.DataCell>{formatCurrencyNoKr(inntektsmelding.inntektPrMnd)}</Table.DataCell>
+                <Table.DataCell><DateLabel dateString={inntektsmelding.startDatoPermisjon} /></Table.DataCell>
+                <Table.DataCell>{formatCurrencyWithKr(inntektsmelding.inntektPrMnd)}</Table.DataCell>
                 <Table.DataCell>En eller annen status</Table.DataCell>
                 <Table.DataCell>Dato for behandling</Table.DataCell>
               </Table.ExpandableRow>
@@ -68,7 +68,7 @@ const InntektsmledingerFaktaInnhold = ({ arbeidsgiverOpplysningerPerId, inntekts
 const InntektsmeldingContent = ({inntektsmelding,arbeidsgiverOpplysningerPerId}: {inntektsmelding:Inntektsmelding} & OwnProps) => {
 
   return (
-    <HGrid columns={{ xl: 3, "2xl": 4 }}  gap="8" style={{background: "rgba(18, 43, 68, 0.08)", padding: "1.5rem 1rem"}}>
+    <HGrid columns={{ md: 3, "2xl": 4 }}  gap="8" style={{background: "rgba(18, 43, 68, 0.08)", padding: "1.5rem 1rem"}}>
       <InntektsmeldingInfoBlokk tittel={"Arbeidsgiver"}>
         <span>Virksomhetsnavn: {arbeidsgiverOpplysningerPerId[inntektsmelding.arbeidsgiverIdent].navn}</span>
         <span>Org.nr. for underenhet: {inntektsmelding.arbeidsgiverIdent} </span>
@@ -85,7 +85,7 @@ const InntektsmeldingContent = ({inntektsmelding,arbeidsgiverOpplysningerPerId}:
       </InntektsmeldingInfoBlokk>
 
       <InntektsmeldingInfoBlokk tittel={"Månedsinntekt"}>
-        <span>{formatCurrencyNoKr(inntektsmelding.inntektPrMnd)}</span>
+        <span>{formatCurrencyWithKr(inntektsmelding.inntektPrMnd)}</span>
         <span>TODO</span>
       </InntektsmeldingInfoBlokk>
 
@@ -96,15 +96,27 @@ const InntektsmeldingContent = ({inntektsmelding,arbeidsgiverOpplysningerPerId}:
 
 
       <InntektsmeldingInfoBlokk tittel={"Kilde"}>
-        <span>TODO</span>
+        <span>{inntektsmelding.kildeSystem}</span>
       </InntektsmeldingInfoBlokk>
 
       <InntektsmeldingInfoBlokk tittel={"Refusjon"}>
-        <span>{formatCurrencyNoKr(inntektsmelding.refusjonPrMnd)}</span>
+        <span>{inntektsmelding.refusjonPrMnd ? formatCurrencyWithKr(inntektsmelding.refusjonPrMnd): "Ingen refusjon"}</span>
       </InntektsmeldingInfoBlokk>
 
       <InntektsmeldingInfoBlokk tittel={"Naturalytelser"}>
-        <span>Ingen</span>
+        {inntektsmelding.naturalytelser.length === 0 ? <span>Ingen</span> :
+        <VStack>
+          {inntektsmelding.naturalytelser.map(({ type, periode, beloepPerMnd, indexKey }) => (
+            <VStack key={indexKey}>
+              <span>{type}</span>
+              <ul style={{margin: 0}}>
+                <li><DateLabel dateString={periode.fomDato} /> TODO: denne er feil</li>
+                <li>Verdi pr måned: {formatCurrencyWithKr(beloepPerMnd.verdi)}</li>
+              </ul>
+            </VStack>
+          ))}
+        </VStack>
+        }
       </InntektsmeldingInfoBlokk>
     </HGrid>
   )
