@@ -8,7 +8,7 @@ import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
 import { HGrid, Label, Table, VStack } from '@navikt/ds-react';
 import { ArbeidsgiverOpplysningerPerId, Inntektsmelding } from '@navikt/fp-types';
 import { formatCurrencyWithKr } from '@navikt/ft-utils';
-import { DateLabel } from '@navikt/ft-ui-komponenter';
+import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.INNTEKTSMELDINGER];
 type EndepunktPanelData = {
@@ -50,8 +50,8 @@ const InntektsmledingerFaktaInnhold = ({ arbeidsgiverOpplysningerPerId, inntekts
           {inntektsmeldinger.map((inntektsmelding, index) => {
             return (
               <Table.ExpandableRow togglePlacement="right" key={index} content={<InntektsmeldingContent arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId} inntektsmelding={inntektsmelding} /> }>
-                <Table.DataCell>{inntektsmelding.dokumentId ?? "finnes ei"}</Table.DataCell>
-                <Table.DataCell><DateLabel dateString={inntektsmelding.motattDato} /></Table.DataCell>
+                <Table.DataCell>{inntektsmelding.innsendingsårsak}</Table.DataCell>
+                <Table.DataCell><DateTimeLabel dateTimeString={inntektsmelding.innsendingstidspunkt} /></Table.DataCell>
                 <Table.DataCell>{arbeidsgiverOpplysningerPerId[inntektsmelding.arbeidsgiverIdent].navn}</Table.DataCell>
                 <Table.DataCell><DateLabel dateString={inntektsmelding.startDatoPermisjon} /></Table.DataCell>
                 <Table.DataCell>{formatCurrencyWithKr(inntektsmelding.inntektPrMnd)}</Table.DataCell>
@@ -93,7 +93,6 @@ const InntektsmeldingContent = ({inntektsmelding,arbeidsgiverOpplysningerPerId}:
         <span>12.12.TODO</span>
         <span>Oppgitt av søker: TODO</span>
       </InntektsmeldingInfoBlokk>
-
 
       <InntektsmeldingInfoBlokk tittel={"Kilde"}>
         <span>{inntektsmelding.kildeSystem}</span>
