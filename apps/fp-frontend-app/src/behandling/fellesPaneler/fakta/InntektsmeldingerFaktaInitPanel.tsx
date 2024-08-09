@@ -1,17 +1,24 @@
-import FaktaPanelInitProps from "../../felles/typer/faktaPanelInitProps";
+/* eslint-disable @typescript-eslint/no-use-before-define */ // TODO
+import FaktaPanelInitProps from '../../felles/typer/faktaPanelInitProps';
 import FaktaDefaultInitPanel from '../../felles/fakta/FaktaDefaultInitPanel';
 import React from 'react';
-import { FaktaPanelCode } from "@navikt/fp-konstanter";
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { useIntl } from 'react-intl';
 import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
+import { HGrid, Label, Table, VStack } from '@navikt/ds-react';
+import { Inntektsmelding } from '@navikt/fp-types';
+import { formatCurrencyNoKr } from '@navikt/ft-utils';
+import { DateLabel } from '@navikt/ft-ui-komponenter';
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.INNTEKTSMELDINGER];
+type EndepunktPanelData = {
+  inntektsmeldinger: Inntektsmelding[];
+};
 
 export const InntektsmeldingerFaktaInitPanel = ({...props}: FaktaPanelInitProps) => (
-  <FaktaDefaultInitPanel
+  <FaktaDefaultInitPanel<EndepunktPanelData>
     {...props}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
-    // aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={FaktaPanelCode.INNTEKTSMELDINGER}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'InntektsmeldingerInfoPanel.Title' })}
     skalPanelVisesIMeny={() => true}
@@ -19,9 +26,92 @@ export const InntektsmeldingerFaktaInitPanel = ({...props}: FaktaPanelInitProps)
   />
 );
 
-const InntektsmledingerFaktaInnhold = ({ inntektsmeldinger }: any) => {
+const InntektsmledingerFaktaInnhold = ({ inntektsmeldinger }: {inntektsmeldinger:Inntektsmelding[]}) => {
   console.log(inntektsmeldinger);
   return (
-    <div>Heisann</div>
+    <Table>
+      <Table.Header>
+        <Table.Row>
+          <Table.HeaderCell scope="col">Innhold</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Dato innsendt</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Bedrift</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Skjæringst.</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Månedsi.</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Behandling</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Dato for beh.</Table.HeaderCell>
+          <Table.HeaderCell />
+        </Table.Row>
+      </Table.Header>
+        <Table.Body>
+          {inntektsmeldinger.map((inntektsmelding, index) => {
+            return (
+              <Table.ExpandableRow togglePlacement="right" key={index} content={<InntektsmeldingContent inntektsmelding={inntektsmelding} /> }>
+                <Table.DataCell>{inntektsmelding.dokumentId ?? "finnes ei"}</Table.DataCell>
+                <Table.DataCell><DateLabel dateString={inntektsmelding.motattDato} /></Table.DataCell>
+                <Table.DataCell>{inntektsmelding.arbeidsgiverIdent}</Table.DataCell>
+                <Table.DataCell>Dunno</Table.DataCell>
+                <Table.DataCell>{formatCurrencyNoKr(inntektsmelding.inntektPrMnd)}</Table.DataCell>
+                <Table.DataCell>En eller annen status</Table.DataCell>
+                <Table.DataCell>Dato for behandling</Table.DataCell>
+              </Table.ExpandableRow>
+            );
+          })}
+        </Table.Body>
+    </Table>
+  )
+}
+
+const InntektsmeldingContent = ({inntektsmelding}: {inntektsmelding:Inntektsmelding}) => {
+
+  return (
+    <HGrid columns={{ xl: 3, "2xl": 4 }}  gap="8" style={{background: "rgba(18, 43, 68, 0.08)", padding: "1.5rem 1rem"}}>
+      <InntektsmeldingInfoBlokk tittel={"Arbeidsgiver"}>
+        <span>Virksomhetsnavn: TODO</span>
+        <span>Org.nr. for underenhet: {inntektsmelding.arbeidsgiverIdent}</span>
+      </InntektsmeldingInfoBlokk>
+
+      <InntektsmeldingInfoBlokk tittel={"Kontaktperson fra arbeidsgiver"}>
+        <span>Virksomhetsnavn: TODO</span>
+        <span>Org.nr. for underenhet: {inntektsmelding.arbeidsgiverIdent}</span>
+      </InntektsmeldingInfoBlokk>
+
+      <InntektsmeldingInfoBlokk tittel={"Behandling"}>
+        <span>Brukt i denne behandlingen: TODO</span>
+        <span>Avsluttet dato 14.14.14</span>
+      </InntektsmeldingInfoBlokk>
+
+      <InntektsmeldingInfoBlokk tittel={"Månedsinntekt"}>
+        <span>{formatCurrencyNoKr(inntektsmelding.inntektPrMnd)}</span>
+        <span>TODO</span>
+      </InntektsmeldingInfoBlokk>
+
+      <InntektsmeldingInfoBlokk tittel={"Første dag med foreldrepenger"}>
+        <span>12.12.TODO</span>
+        <span>Oppgitt av søker: TODO</span>
+      </InntektsmeldingInfoBlokk>
+
+
+      <InntektsmeldingInfoBlokk tittel={"Kilde"}>
+        <span>TODO</span>
+      </InntektsmeldingInfoBlokk>
+
+      <InntektsmeldingInfoBlokk tittel={"Refusjon"}>
+        <span>{formatCurrencyNoKr(inntektsmelding.refusjonPrMnd)}</span>
+      </InntektsmeldingInfoBlokk>
+
+      <InntektsmeldingInfoBlokk tittel={"Naturalytelser"}>
+        <span>Ingen</span>
+      </InntektsmeldingInfoBlokk>
+    </HGrid>
+  )
+}
+
+const InntektsmeldingInfoBlokk = ({tittel, children}: {tittel:string, children: React.ReactNode}) => {
+  return (
+    <VStack><Label size="medium" >
+      {tittel}
+    </Label>
+      {children}
+    </VStack>
   )
 }
