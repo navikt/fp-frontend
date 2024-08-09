@@ -3,12 +3,13 @@ import { FormattedMessage } from 'react-intl';
 import { BodyShort, Table } from '@navikt/ds-react';
 import { XMarkIcon } from '@navikt/aksel-icons';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
 
 import SletteSaksbehandlerModal from './SletteSaksbehandlerModal';
 import { RestApiPathsKeys, restApiHooks } from '../../data/fplosRestApi';
 
 import styles from './saksbehandlereTabell.module.css';
-import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
+
 
 interface OwnProps {
   saksbehandlere: SaksbehandlerProfil[];
@@ -41,7 +42,7 @@ const SaksbehandlereTabell: FunctionComponent<OwnProps> = ({
   const sorterteSaksbehandlere = useMemo(
     () =>
       saksbehandlere.sort((saksbehandler1, saksbehandler2) => {
-        const compareWithNullsLast = (a: any, b: any) => {
+        const compareWithNullsLast = (a: string | null, b: string | null) => {
           if (a != null && b != null) return a.localeCompare(b);
           if (a == null && b == null) return 0;
           return a == null ? 1 : -1;

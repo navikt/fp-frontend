@@ -1,14 +1,15 @@
 import React, { FunctionComponent } from 'react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
 
-import Saksbehandler from '../../typer/saksbehandlerAvdelingTsType';
 import LeggTilSaksbehandlerForm from './LeggTilSaksbehandlerForm';
 import SaksbehandlereTabell from './SaksbehandlereTabell';
 
+
 interface OwnProps {
-  saksbehandlere: Saksbehandler[];
+  saksbehandlere: SaksbehandlerProfil[];
   valgtAvdelingEnhet: string;
-  avdelingensSaksbehandlere: Saksbehandler[];
+  avdelingensSaksbehandlere: SaksbehandlerProfil[];
   hentAvdelingensSaksbehandlere: (params: { avdelingEnhet: string }) => void;
 }
 
