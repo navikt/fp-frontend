@@ -1,6 +1,13 @@
 import React, { FunctionComponent, useCallback } from 'react';
 
-import { AksessRettigheter, ArbeidsgiverOpplysningerPerId, Behandling, Fagsak, Personoversikt } from '@navikt/fp-types';
+import {
+  AksessRettigheter,
+  ArbeidsgiverOpplysningerPerId,
+  Behandling,
+  BehandlingAppKontekst,
+  Fagsak,
+  Personoversikt,
+} from '@navikt/fp-types';
 
 import BehandlingContainer from '../felles/BehandlingContainer';
 import SakenFaktaInitPanel from '../fellesPaneler/fakta/SakenFaktaInitPanel';
@@ -36,7 +43,8 @@ import ProsessPanelInitProps, { ProsessPanelExtraInitProps } from '../felles/typ
 import { InntektsmeldingerFaktaInitPanel } from '../fellesPaneler/fakta/InntektsmeldingerFaktaInitPanel';
 
 interface OwnProps {
-  behandling: Behandling;
+  alleBehandlinger: BehandlingAppKontekst[];
+  behandling: Behandling; // TODO: kommer ikke denne fra faktapanelinitprops?
   fagsak: Fagsak;
   valgtProsessSteg?: string;
   valgtFaktaSteg?: string;
@@ -50,6 +58,7 @@ interface OwnProps {
 }
 
 const ForeldrepengerPaneler: FunctionComponent<OwnProps> = ({
+                                                              alleBehandlinger,
   behandling,
   fagsak,
   valgtProsessSteg,
@@ -74,7 +83,7 @@ const ForeldrepengerPaneler: FunctionComponent<OwnProps> = ({
           arbeidsgiverOpplysningerPerId={arbeidsgivere}
           hentOgSettBehandling={hentOgSettBehandling}
         />
-        <InntektsmeldingerFaktaInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} {...props} />
+        <InntektsmeldingerFaktaInitPanel fagsak={fagsak} alleBehandlinger={alleBehandlinger} arbeidsgiverOpplysningerPerId={arbeidsgivere} {...props} />
         <ArbeidsforholdFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
         <YtelserFaktaInitPanel {...props} />
         <VergeFaktaInitPanel {...props} />

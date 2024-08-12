@@ -5,11 +5,17 @@ import React, { useState } from 'react';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { useIntl } from 'react-intl';
 import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
-import { HGrid, HStack, Label, SortState, Table, VStack } from '@navikt/ds-react';
-import { ArbeidsgiverOpplysningerPerId, Behandling, Inntektsmelding } from '@navikt/fp-types';
+import { Button, Heading, HGrid, HStack, Label, Link, SortState, Table, VStack } from '@navikt/ds-react';
+import {
+  ArbeidsgiverOpplysningerPerId,
+  Behandling,
+  BehandlingAppKontekst,
+  Fagsak,
+  Inntektsmelding,
+} from '@navikt/fp-types';
 import { formatCurrencyWithKr } from '@navikt/ft-utils';
 import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
-import { CircleFillIcon } from '@navikt/aksel-icons';
+import { CircleFillIcon, DownloadIcon } from '@navikt/aksel-icons';
 import { InntektsmeldingInnsendingsårsak, NaturalytelseType } from '@navikt/fp-types/src/arbeidOgInntektsmeldingTsType';
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.INNTEKTSMELDINGER];
@@ -20,9 +26,11 @@ type EndepunktPanelData = {
 type OwnProps = {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   behandling: Behandling;
+  alleBehandlinger: BehandlingAppKontekst[];
+  fagsak: Fagsak;
 }
 
-export const InntektsmeldingerFaktaInitPanel = ({arbeidsgiverOpplysningerPerId, ...props}: FaktaPanelInitProps & OwnProps) => (
+export const InntektsmeldingerFaktaInitPanel = ({arbeidsgiverOpplysningerPerId, fagsak, alleBehandlinger, ...props}: FaktaPanelInitProps & OwnProps) => (
   <FaktaDefaultInitPanel<EndepunktPanelData>
     {...props}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
@@ -30,13 +38,13 @@ export const InntektsmeldingerFaktaInitPanel = ({arbeidsgiverOpplysningerPerId, 
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'InntektsmeldingerInfoPanel.Title' })}
     skalPanelVisesIMeny={() => true}
     renderPanel={data =>
-      <InntektsmledingerFaktaInnhold {...data} behandling={props.behandling} arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}  />}
+      <InntektsmledingerFaktaInnhold {...data} fagsak={fagsak} alleBehandlinger={alleBehandlinger} behandling={props.behandling} arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}  />}
   />
 );
 
 type TableHeaders = keyof Pick<Inntektsmelding, "innsendingsårsak" | "innsendingstidspunkt" | "arbeidsgiverIdent" | "startDatoPermisjon" | "inntektPrMnd" | "behandlingsIdeer"> | "datoForAvsluttedBehandling";
 
-const InntektsmledingerFaktaInnhold = ({ arbeidsgiverOpplysningerPerId, behandling, inntektsmeldinger }: {inntektsmeldinger:Inntektsmelding[]} & OwnProps) => {
+const InntektsmledingerFaktaInnhold = ({ arbeidsgiverOpplysningerPerId, fagsak, alleBehandlinger, behandling, inntektsmeldinger }: {inntektsmeldinger:Inntektsmelding[]} & OwnProps) => {
   console.log(inntektsmeldinger);
 
   // Logikk for å sortere tabell tilpasset fra Aksel-eksempel: https://aksel.nav.no/komponenter/core/table#tabledemo-sortable
@@ -78,20 +86,36 @@ const InntektsmledingerFaktaInnhold = ({ arbeidsgiverOpplysningerPerId, behandli
           {ims.map((inntektsmelding, index) => {
             return (
               <Table.ExpandableRow togglePlacement="right" key={index} content={
-                <InntektsmeldingContent behandling={behandling} arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId} inntektsmelding={inntektsmelding} /> }>
+                <InntektsmeldingContent fagsak={fagsak} behandling={behandling} arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId} inntektsmelding={inntektsmelding} /> }>
                 <Table.DataCell>{InntektsmeldingInnsendingsårsak[inntektsmelding.innsendingsårsak]}</Table.DataCell>
                 <Table.DataCell><DateTimeLabel dateTimeString={inntektsmelding.innsendingstidspunkt} /></Table.DataCell>
                 <Table.DataCell>{arbeidsgiverOpplysningerPerId[inntektsmelding.arbeidsgiverIdent].navn}</Table.DataCell>
                 <Table.DataCell>{inntektsmelding.startDatoPermisjon ? <DateLabel dateString={inntektsmelding.startDatoPermisjon} /> : "-"}</Table.DataCell>
                 <Table.DataCell>{formatCurrencyWithKr(inntektsmelding.inntektPrMnd)}</Table.DataCell>
                 <Table.DataCell><InntektsmeldingStatus behandling={behandling} inntektsmelding={inntektsmelding}  /></Table.DataCell>
-                <Table.DataCell>HVORDAN?</Table.DataCell>
+                <Table.DataCell><AvsluttetDatoForIMSinBehandling inntektsmelding={inntektsmelding} alleBehandlinger={alleBehandlinger} /></Table.DataCell>
               </Table.ExpandableRow>
             );
           })}
         </Table.Body>
     </Table>
   )
+}
+
+const LastNedPdfKnapp = ({inntektsmelding, fagsak}: {fagsak: Fagsak; inntektsmelding:Inntektsmelding}) => {
+  return <Button size="small" as={Link} href={`/fpsak/api/dokument/hent-dokument?saksnummer=${fagsak.saksnummer}&journalpostId=${inntektsmelding.journalpostId}&dokumentId=${inntektsmelding.dokumentId}`}
+                 target="_blank" variant="secondary" icon={<DownloadIcon />}>
+    Last ned som PDF
+  </Button>
+
+}
+
+const AvsluttetDatoForIMSinBehandling = ({inntektsmelding, alleBehandlinger}: {inntektsmelding: Inntektsmelding; alleBehandlinger: BehandlingAppKontekst[]}) => {
+  const gjeldendeBehandlinger = alleBehandlinger.filter(behandling => inntektsmelding.behandlingsIdeer.includes(behandling.uuid));
+
+  const behandling = gjeldendeBehandlinger[0]; //TODO: velg basert på en sortering
+
+  return behandling.avsluttet ? <DateLabel dateString={behandling.avsluttet} /> : null;
 }
 
 const sorterInntektsmeldinger = ({ inntektsmeldinger, arbeidsgiverOpplysningerPerId, sortKey, behandling }: {inntektsmeldinger: Inntektsmelding[], arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId, sortKey: TableHeaders, behandling: Behandling}) => {
@@ -156,11 +180,16 @@ const InntektsmeldingStatus = ({behandling, inntektsmelding}:{behandling: Behand
 }
 
 const InntektsmeldingContent = (
-  {inntektsmelding,arbeidsgiverOpplysningerPerId, behandling}: {inntektsmelding:Inntektsmelding} & OwnProps
+  {inntektsmelding,arbeidsgiverOpplysningerPerId, fagsak, behandling}: {inntektsmelding:Inntektsmelding} & OwnProps
 ) => {
 
   return (
-    <HGrid columns={{ md: 3, "2xl": 4 }}  gap="8" style={{background: "rgba(18, 43, 68, 0.08)", padding: "1.5rem 1rem", marginLeft: "-3rem", borderRadius: "4px"}}>
+    <VStack gap="4" style={{background: "rgba(18, 43, 68, 0.08)", padding: "1.5rem 1rem", marginLeft: "-3rem", borderRadius: "4px"}}>
+      <HStack gap="4" justify="space-between" align="start">
+        <Heading level="3" size="small">Inntektsmelding sendt <DateTimeLabel dateTimeString={inntektsmelding.innsendingstidspunkt} /></Heading>
+        <LastNedPdfKnapp fagsak={fagsak} inntektsmelding={inntektsmelding} />
+      </HStack>
+    <HGrid columns={{ md: 3, "2xl": 4 }}  gap="8" >
       <InntektsmeldingInfoBlokk tittel={"Arbeidsgiver"}>
         <span>Virksomhetsnavn: {arbeidsgiverOpplysningerPerId[inntektsmelding.arbeidsgiverIdent].navn}</span>
         <span>Org.nr. for underenhet: {inntektsmelding.arbeidsgiverIdent} </span>
@@ -173,7 +202,6 @@ const InntektsmeldingContent = (
 
       <InntektsmeldingInfoBlokk tittel={"Behandling"}>
         <span>{inntektsmelding.behandlingsIdeer.includes(behandling.uuid) ? "Brukt i denne behandlingen" : "Brukt i en annen behandling"}</span>
-        {/*{behandling.avsluttet ? <span>Avsluttet dato: <DateLabel dateString={behandling.avsluttet}/></span> : null}*/}
       </InntektsmeldingInfoBlokk>
 
       <InntektsmeldingInfoBlokk tittel={"Månedsinntekt"}>
@@ -210,6 +238,8 @@ const InntektsmeldingContent = (
         }
       </InntektsmeldingInfoBlokk>
     </HGrid>
+    </VStack>
+
   )
 }
 
