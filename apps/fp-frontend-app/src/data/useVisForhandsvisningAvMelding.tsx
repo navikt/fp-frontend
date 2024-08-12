@@ -31,9 +31,7 @@ const useVisForhandsvisningAvMelding = (behandlingType?: string): ForhandsvisFun
   const { startRequest: forhandsvisTilbakekreving } = restFagsakApiHooks.useRestApiRunner(
     FagsakApiKeys.PREVIEW_MESSAGE_TILBAKEKREVING,
   );
-  const { startRequest: forhandsvisMelding } = restFagsakApiHooks.useRestApiRunner(
-    FagsakApiKeys.PREVIEW_MESSAGE_MENU,
-  );
+  const { startRequest: forhandsvisMelding } = restFagsakApiHooks.useRestApiRunner(FagsakApiKeys.PREVIEW_MESSAGE_MENU);
 
   const erTilbakekreving =
     BehandlingType.TILBAKEKREVING === behandlingType || BehandlingType.TILBAKEKREVING_REVURDERING === behandlingType;

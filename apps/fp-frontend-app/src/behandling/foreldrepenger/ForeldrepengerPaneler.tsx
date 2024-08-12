@@ -58,7 +58,7 @@ interface OwnProps {
 }
 
 const ForeldrepengerPaneler: FunctionComponent<OwnProps> = ({
-                                                              alleBehandlinger,
+  alleBehandlinger,
   behandling,
   fagsak,
   valgtProsessSteg,
@@ -83,7 +83,12 @@ const ForeldrepengerPaneler: FunctionComponent<OwnProps> = ({
           arbeidsgiverOpplysningerPerId={arbeidsgivere}
           hentOgSettBehandling={hentOgSettBehandling}
         />
-        <InntektsmeldingerFaktaInitPanel fagsak={fagsak} alleBehandlinger={alleBehandlinger} arbeidsgiverOpplysningerPerId={arbeidsgivere} {...props} />
+        <InntektsmeldingerFaktaInitPanel
+          fagsak={fagsak}
+          alleBehandlinger={alleBehandlinger}
+          arbeidsgiverOpplysningerPerId={arbeidsgivere}
+          {...props}
+        />
         <ArbeidsforholdFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
         <YtelserFaktaInitPanel {...props} />
         <VergeFaktaInitPanel {...props} />
