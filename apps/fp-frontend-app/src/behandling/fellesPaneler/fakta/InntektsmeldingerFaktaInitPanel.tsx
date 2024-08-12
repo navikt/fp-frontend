@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { useIntl } from 'react-intl';
 import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
-import { Button, Heading, HGrid, HStack, Label, Link, SortState, Table, VStack } from '@navikt/ds-react';
+import { Button, CopyButton, Heading, HGrid, HStack, Label, Link, SortState, Table, VStack } from '@navikt/ds-react';
 import {
   ArbeidsgiverOpplysningerPerId,
   Behandling,
@@ -130,6 +130,7 @@ const InntektsmledingerFaktaInnhold = ({
         {ims.map((inntektsmelding, index) => {
           return (
             <Table.ExpandableRow
+              expandOnRowClick
               togglePlacement="right"
               key={index}
               content={
@@ -313,7 +314,7 @@ const InntektsmeldingContent = ({
 
         <InntektsmeldingInfoBlokk tittel={'Kontaktperson fra arbeidsgiver'}>
           <span>Navn: {inntektsmelding.kontaktpersonNavn}</span>
-          <span>Telefonnummer {inntektsmelding.kontaktpersonNummer}</span>
+          <HStack  align="start" gap="2"><span>Telefonnummer {inntektsmelding.kontaktpersonNummer}</span>  <CopyButton size="xsmall" copyText={inntektsmelding.kontaktpersonNummer} /> </HStack>
         </InntektsmeldingInfoBlokk>
 
         <InntektsmeldingInfoBlokk tittel={'Behandling'}>
