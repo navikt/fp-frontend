@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */ // TODO
 import FaktaPanelInitProps from '../../felles/typer/faktaPanelInitProps';
 import FaktaDefaultInitPanel from '../../felles/fakta/FaktaDefaultInitPanel';
-import React from 'react';
+import React, { useState } from 'react';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { useIntl } from 'react-intl';
 import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
-import { HGrid, HStack, Label, Table, VStack } from '@navikt/ds-react';
+import { HGrid, HStack, Label, SortState, Table, VStack } from '@navikt/ds-react';
 import { ArbeidsgiverOpplysningerPerId, Behandling, Inntektsmelding } from '@navikt/fp-types';
 import { formatCurrencyWithKr } from '@navikt/ft-utils';
 import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
@@ -34,27 +34,51 @@ export const InntektsmeldingerFaktaInitPanel = ({arbeidsgiverOpplysningerPerId, 
   />
 );
 
+type TableHeaders = keyof Pick<Inntektsmelding, "innsendingsårsak" | "innsendingstidspunkt" | "arbeidsgiverIdent" | "startDatoPermisjon" | "inntektPrMnd" | "behandlingsIdeer"> | "datoForAvsluttedBehandling";
+
 const InntektsmledingerFaktaInnhold = ({ arbeidsgiverOpplysningerPerId, behandling, inntektsmeldinger }: {inntektsmeldinger:Inntektsmelding[]} & OwnProps) => {
   console.log(inntektsmeldinger);
+
+  // Logikk for å sortere tabell tilpasset fra Aksel-eksempel: https://aksel.nav.no/komponenter/core/table#tabledemo-sortable
+  const [sort, setSort] = useState<SortState | undefined>({ orderBy: 'tidspunkt', direction: 'ascending' });
+  const handleSort = (sortKey: TableHeaders) => {
+    setSort(
+      sort && sortKey === sort.orderBy && sort.direction === 'descending'
+        ? undefined
+        : {
+          orderBy: sortKey,
+          direction: sort && sortKey === sort.orderBy && sort.direction === 'ascending' ? 'descending' : 'ascending',
+        },
+    );
+  };
+
+  const sorterteInntektsmeldinger = sort ? sorterInntektsmeldinger({
+    inntektsmeldinger,
+    arbeidsgiverOpplysningerPerId,
+    sortKey: sort.orderBy as TableHeaders,
+    behandling
+  }) : inntektsmeldinger;
+  const ims = sort?.direction === "ascending" ?  sorterteInntektsmeldinger : sorterteInntektsmeldinger.reverse();
+
   return (
-    <Table>
+    <Table sort={sort} onSortChange={sortKey => handleSort(sortKey as TableHeaders)}>
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell scope="col">Innhold</Table.HeaderCell>
-          <Table.HeaderCell scope="col">Dato innsendt</Table.HeaderCell>
-          <Table.HeaderCell scope="col">Bedrift</Table.HeaderCell>
-          <Table.HeaderCell scope="col">Skjæringst.</Table.HeaderCell>
-          <Table.HeaderCell scope="col">Månedsi.</Table.HeaderCell>
-          <Table.HeaderCell scope="col">Behandling</Table.HeaderCell>
-          <Table.HeaderCell scope="col">Dato for beh.</Table.HeaderCell>
+          <Table.ColumnHeader sortKey="innsendingsårsak" sortable>Innhold</Table.ColumnHeader>
+          <Table.ColumnHeader sortKey="innsendingstidspunkt" sortable   >Dato innsendt</Table.ColumnHeader>
+          <Table.ColumnHeader sortKey="arbeidsgiverIdent" sortable>Bedrift</Table.ColumnHeader>
+          <Table.ColumnHeader sortKey="startDatoPermisjon" sortable>Skjæringst.</Table.ColumnHeader>
+          <Table.ColumnHeader sortKey="inntektPrMnd" sortable>Månedsi.</Table.ColumnHeader>
+          <Table.ColumnHeader sortKey="behandlingsIdeer" sortable >Behandling</Table.ColumnHeader>
+          <Table.ColumnHeader sortKey="datoForAvsluttedBehandling" sortable>Dato for beh.</Table.ColumnHeader>
           <Table.HeaderCell />
         </Table.Row>
       </Table.Header>
         <Table.Body>
-          {inntektsmeldinger.map((inntektsmelding, index) => {
+          {ims.map((inntektsmelding, index) => {
             return (
               <Table.ExpandableRow togglePlacement="right" key={index} content={
-                <InntektsmeldingContent arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId} inntektsmelding={inntektsmelding} /> }>
+                <InntektsmeldingContent behandling={behandling} arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId} inntektsmelding={inntektsmelding} /> }>
                 <Table.DataCell>{InntektsmeldingInnsendingsårsak[inntektsmelding.innsendingsårsak]}</Table.DataCell>
                 <Table.DataCell><DateTimeLabel dateTimeString={inntektsmelding.innsendingstidspunkt} /></Table.DataCell>
                 <Table.DataCell>{arbeidsgiverOpplysningerPerId[inntektsmelding.arbeidsgiverIdent].navn}</Table.DataCell>
@@ -70,7 +94,57 @@ const InntektsmledingerFaktaInnhold = ({ arbeidsgiverOpplysningerPerId, behandli
   )
 }
 
+const sorterInntektsmeldinger = ({ inntektsmeldinger, arbeidsgiverOpplysningerPerId, sortKey, behandling }: {inntektsmeldinger: Inntektsmelding[], arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId, sortKey: TableHeaders, behandling: Behandling}) => {
+  if (sortKey === "arbeidsgiverIdent") {
+    return inntektsmeldinger.slice().sort((a,b) => {
+      const navnA = arbeidsgiverOpplysningerPerId[a.arbeidsgiverIdent].navn;
+      const navnB = arbeidsgiverOpplysningerPerId[b.arbeidsgiverIdent].navn;
+
+      return sorterStreng(navnA,navnB);
+    });
+  }
+
+  if (sortKey === "datoForAvsluttedBehandling") {
+    // TODO
+    return inntektsmeldinger;
+  }
+
+  if (sortKey === "behandlingsIdeer") {
+    return inntektsmeldinger.slice().sort((a,b) => {
+      const AinnegårIBehandling = a.behandlingsIdeer.includes(behandling.uuid);
+      const BinnegårIBehandling = b.behandlingsIdeer.includes(behandling.uuid);
+
+      if (AinnegårIBehandling && BinnegårIBehandling) {
+        return 0;
+      }
+      return AinnegårIBehandling ? 1 : -1;
+    });
+
+    // TODO
+    return inntektsmeldinger;
+  }
+
+  return inntektsmeldinger.slice().sort((a,b) => {
+    const aValue = a[sortKey];
+    const bValue = b[sortKey];
+
+    // TODO: fungerer. Hadde vanligvis brukt Lodash, gode tips for uten Lodash?
+    return sorterStreng(aValue,bValue);
+  });
+}
+
+const sorterStreng = (a:string, b:string) => {
+  if (a < b) {
+    return -1;
+  }
+  if (a > b) {
+    return 1;
+  }
+  return 0;
+}
+
 const InntektsmeldingStatus = ({behandling, inntektsmelding}:{behandling: Behandling, inntektsmelding: Inntektsmelding} ) => {
+  console.log(behandling);
   if (inntektsmelding.behandlingsIdeer.includes(behandling.uuid)) {
     return <HStack gap="1" align="center"><CircleFillIcon style={{ color: "var(--a-green-400)"}} /> Denne</HStack>
   }
@@ -82,7 +156,7 @@ const InntektsmeldingStatus = ({behandling, inntektsmelding}:{behandling: Behand
 }
 
 const InntektsmeldingContent = (
-  {inntektsmelding,arbeidsgiverOpplysningerPerId}: {inntektsmelding:Inntektsmelding} & Pick<OwnProps, "arbeidsgiverOpplysningerPerId">
+  {inntektsmelding,arbeidsgiverOpplysningerPerId, behandling}: {inntektsmelding:Inntektsmelding} & OwnProps
 ) => {
 
   return (
@@ -98,8 +172,8 @@ const InntektsmeldingContent = (
       </InntektsmeldingInfoBlokk>
 
       <InntektsmeldingInfoBlokk tittel={"Behandling"}>
-        <span>Brukt i denne behandlingen: TODO</span>
-        <span>Avsluttet dato 14.14.TODO</span>
+        <span>{inntektsmelding.behandlingsIdeer.includes(behandling.uuid) ? "Brukt i denne behandlingen" : "Brukt i en annen behandling"}</span>
+        {/*{behandling.avsluttet ? <span>Avsluttet dato: <DateLabel dateString={behandling.avsluttet}/></span> : null}*/}
       </InntektsmeldingInfoBlokk>
 
       <InntektsmeldingInfoBlokk tittel={"Månedsinntekt"}>
@@ -127,7 +201,7 @@ const InntektsmeldingContent = (
             <VStack key={indexKey}>
               <span>{NaturalytelseType[type]}</span>
               <ul style={{margin: 0}}>
-                <li><DateLabel dateString={periode.fomDato} /></li>
+                <li>Fra og med <DateLabel dateString={periode.fomDato} /></li>
                 <li>Verdi pr måned: {formatCurrencyWithKr(beloepPerMnd.verdi)}</li>
               </ul>
             </VStack>
