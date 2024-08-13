@@ -8,6 +8,7 @@ import historikkOpplysningTypeCodes from './kodeverk/historikkOpplysningTypeCode
 import HistorikkSakIndex from './HistorikkSakIndex';
 import historikkEndretFeltType from './kodeverk/historikkEndretFeltType';
 import historikkinnslagType from './kodeverk/historikkinnslagType';
+import historikkAlleMaler from './saksHistorikkAlleMaler';
 
 const historikkInnslag = [
   {
@@ -27,7 +28,11 @@ const historikkInnslag = [
     ],
     historikkinnslagDeler: [
       {
-        begrunnelsetekst: 'Dette er en tekst',
+        begrunnelsetekst:
+          'Dette er en tekst. Den er uten viktig innhold. Kun en enkel, men litt lengre tekst. ' +
+          'Dette er en tekst. Den er uten viktig innhold. Kun en enkel, men litt lengre tekst. ' +
+          'Dette er en tekst. Den er uten viktig innhold. Kun en enkel, men litt lengre tekst. ' +
+          'Dette er en tekst. Den er uten viktig innhold. Kun en enkel, men litt lengre tekst. ',
         hendelse: {
           navn: 'NYE_REGOPPLYSNINGER',
         },
@@ -120,6 +125,11 @@ const Template: StoryFn<{
     />
   </div>
 );
+export const VisAlleMaler = Template.bind({});
+
+VisAlleMaler.args = {
+  historikkFpSak: historikkAlleMaler,
+};
 
 export const BehandlingIkkeErValgt = Template.bind({});
 BehandlingIkkeErValgt.args = {

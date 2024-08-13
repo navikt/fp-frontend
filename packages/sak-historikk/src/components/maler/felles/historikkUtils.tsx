@@ -55,7 +55,7 @@ export const findHendelseText = (
   if (!hendelse || !hendelse.navn) {
     return undefined;
   }
-  if (hendelse.verdi === null) {
+  if (!hendelse.verdi) {
     return getKodeverknavn(hendelse.navn, KodeverkType.HISTORIKKINNSLAG_TYPE);
   }
   return `${getKodeverknavn(hendelse.navn, KodeverkType.HISTORIKKINNSLAG_TYPE)} ${hendelse.verdi}`;
