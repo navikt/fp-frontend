@@ -1,11 +1,24 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */ // TODO
+/* eslint-disable @typescript-eslint/no-use-before-define */  // TODO
 import FaktaPanelInitProps from '../../felles/typer/faktaPanelInitProps';
 import FaktaDefaultInitPanel from '../../felles/fakta/FaktaDefaultInitPanel';
-import React, { useContext, useState } from 'react';
-import { FaktaPanelCode } from '@navikt/fp-konstanter';
+import React, { useContext, useRef, useState } from 'react';
+import { FaktaPanelCode, hentDokumentLenke } from '@navikt/fp-konstanter';
 import { useIntl } from 'react-intl';
 import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
-import { Button, CopyButton, Heading, HGrid, HStack, Label, Link, List, SortState, Table, VStack } from '@navikt/ds-react';
+import {
+  BodyLong,
+  Button,
+  CopyButton,
+  Heading,
+  HGrid,
+  HStack,
+  Label,
+  List,
+  Modal,
+  SortState,
+  Table,
+  VStack,
+} from '@navikt/ds-react';
 import {
   ArbeidsgiverOpplysningerPerId,
   Behandling,
@@ -55,8 +68,7 @@ export const InntektsmeldingerFaktaInitPanel = ({
   />
 );
 
-type TableHeaders =
-  | keyof Pick<
+type TableHeaders = keyof Pick<
       Inntektsmelding,
       | 'innsendingsårsak'
       | 'innsendingstidspunkt'
@@ -64,8 +76,7 @@ type TableHeaders =
       | 'startDatoPermisjon'
       | 'inntektPrMnd'
       | 'behandlingsIdeer'
-    >
-  | 'datoForAvsluttedBehandling';
+    >;
 
 const InntektsmledingerFaktaInnhold = ({
   arbeidsgiverOpplysningerPerId,
@@ -166,17 +177,40 @@ const InntektsmledingerFaktaInnhold = ({
 };
 
 const LastNedPdfKnapp = ({ inntektsmelding, fagsak }: { fagsak: Fagsak; inntektsmelding: Inntektsmelding }) => {
+
+  const ref = useRef<HTMLDialogElement>(null);
+
   return (
-    <Button
-      size="small"
-      as={Link}
-      href={`/fpsak/api/dokument/hent-dokument?saksnummer=${fagsak.saksnummer}&journalpostId=${inntektsmelding.journalpostId}&dokumentId=${inntektsmelding.dokumentId}`}
-      target="_blank"
-      variant="secondary"
-      icon={<DownloadIcon />}
-    >
-      Last ned som PDF
-    </Button>
+    <div className="py-16">
+      <Button icon={<DownloadIcon />} variant="secondary" size="small" onClick={() => ref.current?.showModal()}>Last ned PDF</Button>
+
+      <Modal ref={ref} header={{ heading: "All informasjon fra PDF’en er tilgjengelig i faktapanelet" }}>
+        <Modal.Body>
+          <BodyLong>
+            PDF’en du skal laste ned inneholder ikke noe annet enn det som står i faktapanelet. Du kan likevel laste ned hvis du ønsker det.
+          </BodyLong>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            type="button"
+            onClick={() => {
+              window.open(hentDokumentLenke(fagsak.saksnummer, inntektsmelding.journalpostId, inntektsmelding.dokumentId), '_blank');
+              ref.current?.close();
+            }}
+            variant="primary"
+          >
+            Last ned som PDF
+          </Button>
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={() => ref.current?.close()}
+          >
+            Avbryt
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </div>
   );
 };
 
@@ -249,11 +283,6 @@ const sorterInntektsmeldinger = ({
 
       return sorterStreng(navnA, navnB);
     });
-  }
-
-  if (sortKey === 'datoForAvsluttedBehandling') {
-    // TODO
-    return inntektsmeldinger;
   }
 
   if (sortKey === 'behandlingsIdeer') {
@@ -349,11 +378,10 @@ const InntektsmeldingContent = ({
           </HStack>
         </InntektsmeldingInfoBlokk>
 
-        <BehandlingsOversikt inntektsmelding={inntektsmelding} alleBehandlinger={alleBehandlinger} behandling={behandling} />
 
         <InntektsmeldingInfoBlokk tittel={'Månedsinntekt'}>
           <span>{formatCurrencyWithKr(inntektsmelding.inntektPrMnd)}</span>
-          <span>TODO</span>
+          {/*TODO: Få inn endringsgrunn*/}
         </InntektsmeldingInfoBlokk>
 
         <InntektsmeldingInfoBlokk tittel={'Første dag med foreldrepenger'}>
@@ -364,18 +392,30 @@ const InntektsmeldingContent = ({
         </InntektsmeldingInfoBlokk>
 
         <InntektsmeldingInfoBlokk tittel={'Kilde'}>
-          {/*TODO: endre til LPS/NAV  */}
-          <span>{inntektsmelding.kildeSystem}</span>
+          <KildeSystem inntektsmelding={inntektsmelding} />
         </InntektsmeldingInfoBlokk>
 
         <InntektsmeldingInfoBlokk tittel={'Refusjon'}>
           <Refusjon inntektsmelding={inntektsmelding} />
         </InntektsmeldingInfoBlokk>
         <BortfalteNaturalYtelser inntektsmelding={inntektsmelding} />
+        <BehandlingsOversikt inntektsmelding={inntektsmelding} alleBehandlinger={alleBehandlinger} behandling={behandling} />
+
       </HGrid>
     </VStack>
   );
 };
+
+const KildeSystem = ({ inntektsmelding }: { inntektsmelding: Inntektsmelding }) => {
+  if (inntektsmelding.kildeSystem === "NAV_NO") {
+    return "NAV";
+  }
+  if (inntektsmelding.kildeSystem === "ALTINN") {
+    return "Altinn";
+  }
+
+  return "LPS";
+}
 
 const Refusjon = ({ inntektsmelding }: { inntektsmelding: Inntektsmelding }) => {
   if (inntektsmelding.refusjonsperioder.length === 0) {
