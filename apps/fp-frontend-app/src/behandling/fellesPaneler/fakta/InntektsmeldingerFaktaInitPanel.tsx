@@ -291,7 +291,7 @@ const InntektsmeldingContent = ({
   arbeidsgiverOpplysningerPerId,
   fagsak,
   behandling,
-}: { inntektsmelding: Inntektsmelding } & Omit<OwnProps, "alleBehandlinger">) => {
+}: { inntektsmelding: Inntektsmelding } & Omit<OwnProps, 'alleBehandlinger'>) => {
   return (
     <VStack
       gap="4"
@@ -311,7 +311,10 @@ const InntektsmeldingContent = ({
 
         <InntektsmeldingInfoBlokk tittel={'Kontaktperson fra arbeidsgiver'}>
           <span>Navn: {inntektsmelding.kontaktpersonNavn}</span>
-          <HStack  align="start" gap="2"><span>Telefonnummer {inntektsmelding.kontaktpersonNummer}</span>  <CopyButton size="xsmall" copyText={inntektsmelding.kontaktpersonNummer} /> </HStack>
+          <HStack align="start" gap="2">
+            <span>Telefonnummer {inntektsmelding.kontaktpersonNummer}</span>{' '}
+            <CopyButton size="xsmall" copyText={inntektsmelding.kontaktpersonNummer} />{' '}
+          </HStack>
         </InntektsmeldingInfoBlokk>
 
         <InntektsmeldingInfoBlokk tittel={'Behandling'}>
@@ -348,13 +351,13 @@ const InntektsmeldingContent = ({
   );
 };
 
-const Refusjon = ({inntektsmelding}:{inntektsmelding: Inntektsmelding}) => {
+const Refusjon = ({ inntektsmelding }: { inntektsmelding: Inntektsmelding }) => {
   if (inntektsmelding.refusjonsperioder.length === 0) {
     return (
       <span>
-            {inntektsmelding.refusjonPrMnd ? formatCurrencyWithKr(inntektsmelding.refusjonPrMnd) : 'Ingen refusjon'}
-          </span>
-    )
+        {inntektsmelding.refusjonPrMnd ? formatCurrencyWithKr(inntektsmelding.refusjonPrMnd) : 'Ingen refusjon'}
+      </span>
+    );
   }
 
   const perioderStigende = [...inntektsmelding.refusjonsperioder].sort(
@@ -368,14 +371,21 @@ const Refusjon = ({inntektsmelding}:{inntektsmelding: Inntektsmelding}) => {
 
         return (
           <VStack key={refusjon.indexKey}>
-            <span>Krever refusjon fra <DateLabel dateString={refusjon.fom} /></span>
+            <span>
+              Krever refusjon fra <DateLabel dateString={refusjon.fom} />
+            </span>
             <span>Refusjonsbeløp: {formatCurrencyWithKr(refusjon.refusjonsbeløp.verdi)}</span>
-            {forrigePeriode?.fom ? <span>Opphører <DateLabel dateString={forrigePeriode.fom} /></span> : null}
+            {forrigePeriode?.fom ? (
+              <span>
+                Opphører <DateLabel dateString={forrigePeriode.fom} />
+              </span>
+            ) : null}
           </VStack>
-        )
+        );
       })}
-    </VStack>);
-}
+    </VStack>
+  );
+};
 
 const BortfalteNaturalYtelser = ({ inntektsmelding }: { inntektsmelding: Inntektsmelding }) => {
   return (
@@ -398,8 +408,8 @@ const BortfalteNaturalYtelser = ({ inntektsmelding }: { inntektsmelding: Inntekt
         </VStack>
       )}
     </InntektsmeldingInfoBlokk>
-  )
-}
+  );
+};
 
 const InntektsmeldingInfoBlokk = ({ tittel, children }: { tittel: string; children: React.ReactNode }) => {
   return (
