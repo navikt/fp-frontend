@@ -4,9 +4,9 @@ import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import React, { FunctionComponent, useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
+import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
 
 import { restApiHooks, RestApiPathsKeys } from '../../../data/fplosRestApi';
-import Saksbehandler from '../../../typer/saksbehandlerAvdelingTsType';
 import Saksliste from '../../../typer/sakslisteAvdelingTsType';
 
 import SaksbehandlereOgSaksbehandlerGrupper, {
@@ -15,7 +15,7 @@ import SaksbehandlereOgSaksbehandlerGrupper, {
 import styles from './saksbehandlereForSakslisteForm.module.css';
 import ValgAvSaksbehandlere from './ValgAvSaksbehandlere';
 
-const sortSaksbehandlere = (saksbehandlere: Saksbehandler[]) =>
+const sortSaksbehandlere = (saksbehandlere: SaksbehandlerProfil[]) =>
   saksbehandlere && saksbehandlere instanceof Array
     ? [...saksbehandlere].sort((saksbehandler1, saksbehandler2) =>
         saksbehandler1.navn.localeCompare(saksbehandler2.navn),
@@ -42,7 +42,7 @@ type FormValues = {
 
 interface OwnProps {
   valgtSaksliste: Saksliste;
-  avdelingensSaksbehandlere: Saksbehandler[];
+  avdelingensSaksbehandlere: SaksbehandlerProfil[];
   valgtAvdelingEnhet: string;
   hentAvdelingensSakslister: (params: { avdelingEnhet: string }) => void;
 }

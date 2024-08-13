@@ -5,7 +5,6 @@ import { Oppgave, SaksbehandlerProfil } from '@navikt/fp-los-felles';
 
 import Avdeling from '../typer/avdelingTsType';
 import SakslisteAvdeling from '../typer/sakslisteAvdelingTsType';
-import SaksbehandlerAvdeling from '../typer/saksbehandlerAvdelingTsType';
 import OppgaverForAvdeling from '../typer/oppgaverForAvdelingTsType';
 import OppgaveForDato from '../typer/oppgaverForDatoTsType';
 import BehandlingVentefrist from '../typer/behandlingVentefristTsType';
@@ -32,8 +31,8 @@ export const RestApiPathsKeys = {
   ),
   OPPGAVE_AVDELING_ANTALL: new RestKey<number, { avdelingEnhet: string }>('OPPGAVE_AVDELING_ANTALL'),
   OPPGAVE_ANTALL: new RestKey<number, { sakslisteId: number; avdelingEnhet: string }>('OPPGAVE_ANTALL'),
-  SAKSBEHANDLER_SOK: new RestKey<SaksbehandlerAvdeling, { brukerIdent: string }>('SAKSBEHANDLER_SOK'),
-  FLYTT_RESERVASJON_SAKSBEHANDLER_SOK: new RestKey<SaksbehandlerAvdeling, { brukerIdent: string }>(
+  SAKSBEHANDLER_SOK: new RestKey<SaksbehandlerProfil, { brukerIdent: string }>('SAKSBEHANDLER_SOK'),
+  FLYTT_RESERVASJON_SAKSBEHANDLER_SOK: new RestKey<SaksbehandlerProfil, { brukerIdent: string }>(
     'FLYTT_RESERVASJON_SAKSBEHANDLER_SOK',
   ),
   ENDRE_OPPGAVERESERVASJON: new RestKey<Oppgave[], { oppgaveId: number; reserverTil: string }>(

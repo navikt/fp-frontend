@@ -68,6 +68,7 @@ MedSaksbehandlerUtenAnsattAvdeling.args = {
     {
       brukerIdent: 'X1111',
       navn: 'Ukjent saksbehandler (X11111)',
+      ansattAvdeling: null
     },
     {
       brukerIdent: 'H11111',

@@ -4,10 +4,10 @@ import { action } from '@storybook/addon-actions';
 
 import { RestApiMock } from '@navikt/fp-utils-test';
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
+import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
 
 import LeggTilSaksbehandlerForm from './LeggTilSaksbehandlerForm';
 import { RestApiPathsKeys, requestApi } from '../../data/fplosRestApi';
-import SaksbehandlerAvdeling from '../../typer/saksbehandlerAvdelingTsType';
 
 import messages from '../../../i18n/nb_NO.json';
 
@@ -22,11 +22,12 @@ export default {
 const saksbehandler = {
   brukerIdent: 'R232323',
   navn: 'Espen Utvikler',
+  ansattAvdeling: 'Avdeling Å',
 };
 
 interface Props {
-  avdelingensSaksbehandlere?: SaksbehandlerAvdeling[];
-  funnetSaksbehandler?: SaksbehandlerAvdeling;
+  avdelingensSaksbehandlere?: SaksbehandlerProfil[];
+  funnetSaksbehandler?: SaksbehandlerProfil;
   hentAvdelingensSaksbehandlere: (params: { avdelingEnhet: string }) => void;
 }
 

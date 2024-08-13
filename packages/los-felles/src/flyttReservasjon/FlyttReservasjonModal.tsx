@@ -5,11 +5,12 @@ import { Label, Button, BodyShort, Modal as NavModal } from '@navikt/ds-react';
 import { Form, TextAreaField, InputField } from '@navikt/ft-form-hooks';
 import { VerticalSpacer, FlexContainer, FlexRow, FlexColumn } from '@navikt/ft-ui-komponenter';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
+import SaksbehandlerProfil from '../typer/saksbehandlerProfilTsType';
 
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
 import styles from './flyttReservasjonModal.module.css';
-import SaksbehandlerProfil from '../typer/saksbehandlerProfilTsType';
+
 
 const minLength3 = minLength(3);
 const maxLength500 = maxLength(500);
@@ -30,6 +31,7 @@ type SøkFormValues = {
 type LagreFormValues = {
   begrunnelse: string;
 };
+
 
 interface OwnProps {
   showModal: boolean;

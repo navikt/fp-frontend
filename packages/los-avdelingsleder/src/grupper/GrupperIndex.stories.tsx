@@ -14,18 +14,22 @@ const avdelingensSaksbehandlere = [
   {
     brukerIdent: 'ident1',
     navn: 'Anders Utvikler',
+    ansattAvdeling: null,
   },
   {
     brukerIdent: 'ident12',
     navn: 'Espen Utvikler',
+    ansattAvdeling: null,
   },
   {
     brukerIdent: 'ident4',
     navn: 'Olga Utvikler',
+    ansattAvdeling: null,
   },
   {
     brukerIdent: 'ident3',
     navn: 'Klara Utvikler',
+    ansattAvdeling: null,
   },
 ];
 
@@ -33,6 +37,7 @@ const saksbehandlere = [
   {
     brukerIdent: 'ident1',
     navn: 'Anders Utvikler',
+    ansattAvdeling: null,
   },
 ];
 

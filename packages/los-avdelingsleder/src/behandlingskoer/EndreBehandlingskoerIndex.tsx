@@ -1,11 +1,11 @@
 import React, { FunctionComponent, useState, useCallback } from 'react';
 
 import EndreSakslisterPanel from './components/EndreSakslisterPanel';
-import Saksbehandler from '../typer/saksbehandlerAvdelingTsType';
+import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
 
 interface OwnProps {
   valgtAvdelingEnhet: string;
-  avdelingensSaksbehandlere: Saksbehandler[];
+  avdelingensSaksbehandlere: SaksbehandlerProfil[];
 }
 
 /**

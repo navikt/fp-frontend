@@ -3,8 +3,8 @@ import { action } from '@storybook/addon-actions';
 import { StoryFn } from '@storybook/react';
 
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
+import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
 
-import Saksbehandler from '../../typer/saksbehandlerAvdelingTsType';
 import SletteSaksbehandlerModal from './SletteSaksbehandlerModal';
 
 import messages from '../../../i18n/nb_NO.json';
@@ -18,12 +18,13 @@ export default {
 };
 
 const Template: StoryFn<{
-  fjernSaksbehandler: (saksbehandler: Saksbehandler) => void;
+  fjernSaksbehandler: (saksbehandler: SaksbehandlerProfil) => void;
 }> = ({ fjernSaksbehandler }) => (
   <SletteSaksbehandlerModal
     valgtSaksbehandler={{
       brukerIdent: 'R12122',
-      navn: 'Espen Utvikler'
+      navn: 'Espen Utvikler',
+      ansattAvdeling: null
     }}
     closeSletteModal={action('button-click')}
     fjernSaksbehandler={fjernSaksbehandler}

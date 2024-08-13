@@ -14,7 +14,6 @@ import useTrackRouteParam from './useTrackRouteParam';
 import { requestApi, RestApiPathsKeys, RestApiGlobalStatePathsKeys, restApiHooks } from './data/fplosRestApi';
 import AvdelingslederDashboard from './components/AvdelingslederDashboard';
 import IkkeTilgangTilAvdelingslederPanel from './components/IkkeTilgangTilAvdelingslederPanel';
-import Saksbehandler from './typer/saksbehandlerAvdelingTsType';
 import AvdelingslederPanels from './avdelingslederPanels';
 import NokkeltallIndex from './nokkeltall/NokkeltallIndex';
 import EndreSaksbehandlereIndex from './saksbehandlere/EndreSaksbehandlereIndex';
@@ -33,7 +32,7 @@ const intl = createIntl(messages);
 
 const nasjonalEnhet = '4867';
 
-const EMPTY_ARRAY: Saksbehandler[] = [];
+const EMPTY_ARRAY: SaksbehandlerProfil[] = [];
 
 const setAvdeling = (
   setValgtAvdeling: (avdelingEnhet: string) => void,
