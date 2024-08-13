@@ -3498,6 +3498,40 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@navikt/fp-fakta-inntektsmelding@workspace:*, @navikt/fp-fakta-inntektsmelding@workspace:packages/fakta-inntektsmelding":
+  version: 0.0.0-use.local
+  resolution: "@navikt/fp-fakta-inntektsmelding@workspace:packages/fakta-inntektsmelding"
+  dependencies:
+    "@navikt/aksel-icons": 6.13.0
+    "@navikt/ds-css": 6.13.0
+    "@navikt/ds-react": 6.13.0
+    "@navikt/fp-fakta-felles": "workspace:*"
+    "@navikt/fp-kodeverk": "workspace:*"
+    "@navikt/fp-storybook-utils": "workspace:*"
+    "@navikt/fp-types": "workspace:*"
+    "@navikt/ft-kodeverk": 2.4.14
+    "@navikt/ft-types": 2.4.14
+    "@navikt/ft-ui-komponenter": 2.3.17
+    "@navikt/ft-utils": 2.3.16
+    "@storybook/addon-actions": 8.2.7
+    "@storybook/react": 8.2.7
+    "@storybook/react-vite": 8.2.7
+    "@testing-library/dom": 10.4.0
+    "@testing-library/react": 16.0.0
+    "@testing-library/user-event": 14.5.2
+    cross-env: 7.0.3
+    eslint: 9.8.0
+    react: 18.3.1
+    react-hook-form: 7.52.1
+    react-intl: 6.6.8
+    storybook: 8.2.7
+    stylelint: 16.8.1
+    typescript: 5.5.4
+    vite: 5.3.5
+    vitest: 2.0.5
+  languageName: unknown
+  linkType: soft
+
 "@navikt/fp-fakta-medlemskap@workspace:*, @navikt/fp-fakta-medlemskap@workspace:packages/fakta-medlemskap":
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-medlemskap@workspace:packages/fakta-medlemskap"
@@ -3967,6 +4001,7 @@ __metadata:
     "@navikt/fp-fakta-besteberegning": "workspace:*"
     "@navikt/fp-fakta-felles": "workspace:*"
     "@navikt/fp-fakta-fodsel": "workspace:*"
+    "@navikt/fp-fakta-inntektsmelding": "workspace:*"
     "@navikt/fp-fakta-medlemskap": "workspace:*"
     "@navikt/fp-fakta-omsorg": "workspace:*"
     "@navikt/fp-fakta-omsorg-og-foreldreansvar": "workspace:*"

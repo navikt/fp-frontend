@@ -17,7 +17,6 @@ import ArbeidOgInntektFaktaIndex from './ArbeidOgInntektFaktaIndex';
 import '@navikt/ds-css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
 import '@navikt/ft-form-hooks/dist/style.css';
-import { InntektsmeldingInnsendingsårsak } from '@navikt/fp-types/src/arbeidOgInntektsmeldingTsType';
 
 const MANUELT_ORG_NR = '342352362';
 
