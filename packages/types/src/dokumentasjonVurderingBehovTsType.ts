@@ -36,7 +36,7 @@ type DokumentasjonVurderingBehov = Readonly<{
   tom: string;
   type: UttakType;
   årsak: UttakÅrsak;
-  vurdering?: UttakVurdering;
+  vurdering?: UttakVurdering | null;
   morsStillingsprosent?: number;
 }>;
 

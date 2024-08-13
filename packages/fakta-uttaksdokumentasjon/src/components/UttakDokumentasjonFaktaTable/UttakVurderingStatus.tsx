@@ -7,7 +7,7 @@ import assertUnreachable from '../../utils/switchCaseUtils';
 import IconLabel from '../IconLabel';
 
 interface Props {
-  vurdering?: UttakVurdering;
+  vurdering?: UttakVurdering | null;
   morsStillingsprosent?: number;
 }
 
