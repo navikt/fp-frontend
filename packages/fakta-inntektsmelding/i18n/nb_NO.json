@@ -1,3 +1,57 @@
 {
+  "InntektsmeldingFaktaPanel.tabell.header.type": "Type",
+  "InntektsmeldingFaktaPanel.tabell.header.innsendt": "Innsendt",
+  "InntektsmeldingFaktaPanel.tabell.header.arbeidsgiver": "Arbeidsgiver",
+  "InntektsmeldingFaktaPanel.tabell.header.skjæringstidspunkt": "Skjæringst.",
+  "InntektsmeldingFaktaPanel.tabell.header.månedsinntekt": "Månedsi.",
+  "InntektsmeldingFaktaPanel.tabell.header.behandling": "Behandling",
 
+  "InntektsmeldingFaktaPanel.tabell.cell.behandling.denne": "Denne",
+  "InntektsmeldingFaktaPanel.tabell.cell.behandling.andre": "Andre",
+  "InntektsmeldingFaktaPanel.tabell.cell.behandling.ingen": "Ingen",
+
+  "InntektsmeldingFaktaPanel.modal.heading": "All informasjon fra PDF’en er tilgjengelig i faktapanelet",
+  "InntektsmeldingFaktaPanel.modal.trigger": "Last ned PDF",
+  "InntektsmeldingFaktaPanel.modal.body": "PDF’en du skal laste ned inneholder ikke noe annet enn det som står i faktapanelet. Du kan likevel laste ned hvis du ønsker det.",
+  "InntektsmeldingFaktaPanel.modal.button.primary": "Last ned som PDF",
+  "InntektsmeldingFaktaPanel.modal.button.secondary": "Avbryt",
+
+  "InntektsmeldingFaktaPanel.behandling.heading": "Behandling",
+  "InntektsmeldingFaktaPanel.behandling.bruktKunIDenne": "Brukt i denne behandlingen",
+  "InntektsmeldingFaktaPanel.behandling.ikkeBruktINoen": "Ikke brukt i noen behandlinger",
+  "InntektsmeldingFaktaPanel.behandling.bruktIAndre": "Brukt i andre behandlinger ({antallBehandlinger})",
+  "InntektsmeldingFaktaPanel.behandling.bruktIDenneOgFlere": "Brukt i denne og andre behandlinger ({antallBehandlinger})",
+  "InntektsmeldingFaktaPanel.behandling.opprettet": "Opprettet",
+  "InntektsmeldingFaktaPanel.behandling.avsluttet": "Avsluttet",
+
+  "InntektsmeldingFaktaPanel.innsendingstidspunkt": "Inntektsmelding sendt",
+
+  "InntektsmeldingFaktaPanel.arbeidsgiver.heading": "Arbeidsgiver",
+  "InntektsmeldingFaktaPanel.arbeidsgiver.navn": "Virksomhetsnavn",
+  "InntektsmeldingFaktaPanel.arbeidsgiver.underenhet": "Org.nr. for underenhet",
+
+  "InntektsmeldingFaktaPanel.kontaktperson.heading": "Kontaktperson fra arbeidsgiver",
+  "InntektsmeldingFaktaPanel.kontaktperson.navn": "Navn",
+  "InntektsmeldingFaktaPanel.kontaktperson.telefon": "Telefonnummer",
+
+  "InntektsmeldingFaktaPanel.månedsinntekt.heading": "Månedsinntekt",
+
+  "InntektsmeldingFaktaPanel.startDato.heading": "Første dag med {ytelse}",
+  "InntektsmeldingFaktaPanel.startDato.fraArbeidsgiver":  "Oppgitt av arbeidsgiver",
+
+  "InntektsmeldingFaktaPanel.kilde.heading": "Kilde",
+  "InntektsmeldingFaktaPanel.kilde.nav": "NAV",
+  "InntektsmeldingFaktaPanel.kilde.altinn": "Altinn",
+  "InntektsmeldingFaktaPanel.kilde.lps": "LPS",
+
+  "InntektsmeldingFaktaPanel.refusjon.heading": "Refusjon",
+  "InntektsmeldingFaktaPanel.refusjon.ingen": "Ingen refusjon",
+  "InntektsmeldingFaktaPanel.refusjon.fom": "Krever refusjon fra",
+  "InntektsmeldingFaktaPanel.refusjon.opphører": "Opphører",
+  "InntektsmeldingFaktaPanel.refusjon.beløp": "Refusjonsbeløp",
+
+  "InntektsmeldingFaktaPanel.bortfalteNaturalytelser.heading": "Naturalytelser som faller bort",
+  "InntektsmeldingFaktaPanel.bortfalteNaturalytelser.ingen": "Ingen",
+  "InntektsmeldingFaktaPanel.bortfalteNaturalytelser.fom": "Fra og med",
+  "InntektsmeldingFaktaPanel.bortfalteNaturalytelser.verdi": "Verdi pr måned"
 }
