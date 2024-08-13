@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */ // TODO
 import FaktaPanelInitProps from '../../felles/typer/faktaPanelInitProps';
 import FaktaDefaultInitPanel from '../../felles/fakta/FaktaDefaultInitPanel';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { useIntl } from 'react-intl';
 import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
-import { Button, CopyButton, Heading, HGrid, HStack, Label, Link, SortState, Table, VStack } from '@navikt/ds-react';
+import { Button, CopyButton, Heading, HGrid, HStack, Label, Link, List, SortState, Table, VStack } from '@navikt/ds-react';
 import {
   ArbeidsgiverOpplysningerPerId,
   Behandling,
@@ -17,6 +17,7 @@ import { formatCurrencyWithKr } from '@navikt/ft-utils';
 import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
 import { CircleFillIcon, DownloadIcon } from '@navikt/aksel-icons';
 import { InntektsmeldingInnsendingsårsak, NaturalytelseType } from '@navikt/fp-types/src/arbeidOgInntektsmeldingTsType';
+import { StandardPropsStateContext } from '../../felles/utils/standardPropsStateContext';
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.INNTEKTSMELDINGER];
 type EndepunktPanelData = {
@@ -134,6 +135,7 @@ const InntektsmledingerFaktaInnhold = ({
                 <InntektsmeldingContent
                   fagsak={fagsak}
                   behandling={behandling}
+                  alleBehandlinger={alleBehandlinger}
                   arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
                   inntektsmelding={inntektsmelding}
                 />
@@ -155,12 +157,6 @@ const InntektsmledingerFaktaInnhold = ({
               <Table.DataCell>
                 <InntektsmeldingStatus behandling={behandling} inntektsmelding={inntektsmelding} />
               </Table.DataCell>
-              {/*<Table.DataCell>*/}
-              {/*  <AvsluttetDatoForIMSinBehandling*/}
-              {/*    inntektsmelding={inntektsmelding}*/}
-              {/*    alleBehandlinger={alleBehandlinger}*/}
-              {/*  />*/}
-              {/*</Table.DataCell>*/}
             </Table.ExpandableRow>
           );
         })}
@@ -184,21 +180,56 @@ const LastNedPdfKnapp = ({ inntektsmelding, fagsak }: { fagsak: Fagsak; inntekts
   );
 };
 
-const AvsluttetDatoForIMSinBehandling = ({
-  inntektsmelding,
-  alleBehandlinger,
-}: {
+const BehandlingsOversikt = ({
+                               inntektsmelding,
+  behandling,
+                               alleBehandlinger,
+                             }: {
   inntektsmelding: Inntektsmelding;
+  behandling: Behandling
   alleBehandlinger: BehandlingAppKontekst[];
 }) => {
-  const gjeldendeBehandlinger = alleBehandlinger.filter(behandling =>
-    inntektsmelding.behandlingsIdeer.includes(behandling.uuid),
+  const bruktIDenneBehandlingen = inntektsmelding.behandlingsIdeer.includes(behandling.uuid);
+
+  const gjeldendeBehandlinger = alleBehandlinger.filter(b =>
+    inntektsmelding.behandlingsIdeer.includes(b.uuid),
   );
 
-  const behandling = gjeldendeBehandlinger[0]; //TODO: velg basert på en sortering
+  // TODO: er dette lov?
+  const { alleKodeverk: {BehandlingType} } = useContext(StandardPropsStateContext);
 
-  return behandling.avsluttet ? <DateLabel dateString={behandling.avsluttet} /> : null;
-};
+  const infoTekst = (()=>{
+    const antallBehandlinger = gjeldendeBehandlinger.length;
+    if (bruktIDenneBehandlingen && antallBehandlinger > 1) {
+      return `Brukt i denne og tidligere behandlinger (${antallBehandlinger})`;
+    }
+    if (bruktIDenneBehandlingen) {
+      return "Brukt i denne behandlingen"
+    }
+    if (antallBehandlinger === 0) {
+      return "Ikke brukt i noen behandlinger"
+    }
+
+    return `Brukt i andre behandlinger (${antallBehandlinger})`
+  })();
+
+  return (
+    <InntektsmeldingInfoBlokk tittel={'Behandling'}>
+      {infoTekst}
+      <List>
+      {gjeldendeBehandlinger.map(b => (
+        <List.Item key={b.uuid}>
+          <VStack>
+            <span>{BehandlingType.find(({kode}) => kode === b.type)?.navn}</span>
+            <span>Opprettet <DateTimeLabel dateTimeString={b.opprettet} /></span>
+            {b.avsluttet ? <span>Avsluttet <DateTimeLabel dateTimeString={b.avsluttet} /></span> : null}
+          </VStack></List.Item>
+      ))}
+
+      </List>
+    </InntektsmeldingInfoBlokk>
+  )
+}
 
 const sorterInntektsmeldinger = ({
   inntektsmeldinger,
@@ -290,8 +321,9 @@ const InntektsmeldingContent = ({
   inntektsmelding,
   arbeidsgiverOpplysningerPerId,
   fagsak,
+  alleBehandlinger,
   behandling,
-}: { inntektsmelding: Inntektsmelding } & Omit<OwnProps, 'alleBehandlinger'>) => {
+}: { inntektsmelding: Inntektsmelding } & OwnProps) => {
   return (
     <VStack
       gap="4"
@@ -317,13 +349,7 @@ const InntektsmeldingContent = ({
           </HStack>
         </InntektsmeldingInfoBlokk>
 
-        <InntektsmeldingInfoBlokk tittel={'Behandling'}>
-          <span>
-            {inntektsmelding.behandlingsIdeer.includes(behandling.uuid)
-              ? 'Brukt i denne behandlingen'
-              : 'Brukt i en annen behandling'}
-          </span>
-        </InntektsmeldingInfoBlokk>
+        <BehandlingsOversikt inntektsmelding={inntektsmelding} alleBehandlinger={alleBehandlinger} behandling={behandling} />
 
         <InntektsmeldingInfoBlokk tittel={'Månedsinntekt'}>
           <span>{formatCurrencyWithKr(inntektsmelding.inntektPrMnd)}</span>

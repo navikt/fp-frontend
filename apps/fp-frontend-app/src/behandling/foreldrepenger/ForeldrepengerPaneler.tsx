@@ -44,7 +44,7 @@ import { InntektsmeldingerFaktaInitPanel } from '../fellesPaneler/fakta/Inntekts
 
 interface OwnProps {
   alleBehandlinger: BehandlingAppKontekst[];
-  behandling: Behandling; // TODO: kommer ikke denne fra faktapanelinitprops?
+  behandling: Behandling;
   fagsak: Fagsak;
   valgtProsessSteg?: string;
   valgtFaktaSteg?: string;
