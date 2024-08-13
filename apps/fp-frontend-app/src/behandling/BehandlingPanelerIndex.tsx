@@ -188,6 +188,7 @@ const BehandlingPanelerIndex: FunctionComponent<OwnProps> = ({
                 <SvangerskapspengerPaneler
                   behandling={behandling}
                   fagsak={fagsak}
+                  //TODO: IM panel
                   valgtProsessSteg={query.punkt}
                   valgtFaktaSteg={query.fakta}
                   oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}

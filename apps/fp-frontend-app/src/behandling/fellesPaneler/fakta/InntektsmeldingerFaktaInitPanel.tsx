@@ -103,13 +103,13 @@ const InntektsmledingerFaktaInnhold = ({
       <Table.Header>
         <Table.Row>
           <Table.ColumnHeader sortKey="innsendingsårsak" sortable>
-            Innhold
+            Type
           </Table.ColumnHeader>
           <Table.ColumnHeader sortKey="innsendingstidspunkt" sortable>
-            Dato innsendt
+            Innsendt
           </Table.ColumnHeader>
           <Table.ColumnHeader sortKey="arbeidsgiverIdent" sortable>
-            Bedrift
+            Arbeidsgiver
           </Table.ColumnHeader>
           <Table.ColumnHeader sortKey="startDatoPermisjon" sortable>
             Skjæringst.
@@ -119,9 +119,6 @@ const InntektsmledingerFaktaInnhold = ({
           </Table.ColumnHeader>
           <Table.ColumnHeader sortKey="behandlingsIdeer" sortable>
             Behandling
-          </Table.ColumnHeader>
-          <Table.ColumnHeader sortKey="datoForAvsluttedBehandling" sortable>
-            Dato for beh.
           </Table.ColumnHeader>
           <Table.HeaderCell />
         </Table.Row>
@@ -158,12 +155,12 @@ const InntektsmledingerFaktaInnhold = ({
               <Table.DataCell>
                 <InntektsmeldingStatus behandling={behandling} inntektsmelding={inntektsmelding} />
               </Table.DataCell>
-              <Table.DataCell>
-                <AvsluttetDatoForIMSinBehandling
-                  inntektsmelding={inntektsmelding}
-                  alleBehandlinger={alleBehandlinger}
-                />
-              </Table.DataCell>
+              {/*<Table.DataCell>*/}
+              {/*  <AvsluttetDatoForIMSinBehandling*/}
+              {/*    inntektsmelding={inntektsmelding}*/}
+              {/*    alleBehandlinger={alleBehandlinger}*/}
+              {/*  />*/}
+              {/*</Table.DataCell>*/}
             </Table.ExpandableRow>
           );
         })}
@@ -338,38 +335,71 @@ const InntektsmeldingContent = ({
         </InntektsmeldingInfoBlokk>
 
         <InntektsmeldingInfoBlokk tittel={'Kilde'}>
+          {/*TODO: endre til LPS/NAV  */}
           <span>{inntektsmelding.kildeSystem}</span>
         </InntektsmeldingInfoBlokk>
 
         <InntektsmeldingInfoBlokk tittel={'Refusjon'}>
-          <span>
-            {inntektsmelding.refusjonPrMnd ? formatCurrencyWithKr(inntektsmelding.refusjonPrMnd) : 'Ingen refusjon'}
-          </span>
+          <Refusjon inntektsmelding={inntektsmelding} />
         </InntektsmeldingInfoBlokk>
-
-        <InntektsmeldingInfoBlokk tittel={'Naturalytelser som faller bort'}>
-          {inntektsmelding.bortfalteNaturalytelser.length === 0 ? (
-            <span>Ingen</span>
-          ) : (
-            <VStack>
-              {inntektsmelding.bortfalteNaturalytelser.map(({ type, periode, beloepPerMnd, indexKey }) => (
-                <VStack key={indexKey}>
-                  <span>{NaturalytelseType[type]}</span>
-                  <ul style={{ margin: 0 }}>
-                    <li>
-                      Fra og med <DateLabel dateString={periode.fomDato} />
-                    </li>
-                    <li>Verdi pr måned: {formatCurrencyWithKr(beloepPerMnd.verdi)}</li>
-                  </ul>
-                </VStack>
-              ))}
-            </VStack>
-          )}
-        </InntektsmeldingInfoBlokk>
+        <BortfalteNaturalYtelser inntektsmelding={inntektsmelding} />
       </HGrid>
     </VStack>
   );
 };
+
+const Refusjon = ({inntektsmelding}:{inntektsmelding: Inntektsmelding}) => {
+  if (inntektsmelding.refusjonsperioder.length === 0) {
+    return (
+      <span>
+            {inntektsmelding.refusjonPrMnd ? formatCurrencyWithKr(inntektsmelding.refusjonPrMnd) : 'Ingen refusjon'}
+          </span>
+    )
+  }
+
+  const perioderStigende = [...inntektsmelding.refusjonsperioder].sort(
+    (a, b) => new Date(a.fom).getTime() - new Date(b.fom).getTime(),
+  );
+  console.log(perioderStigende);
+  return (
+    <VStack gap="2">
+      {perioderStigende.map((refusjon, index, array) => {
+        const forrigePeriode = array[index + 1];
+
+        return (
+          <VStack key={refusjon.indexKey}>
+            <span>Krever refusjon fra <DateLabel dateString={refusjon.fom} /></span>
+            <span>Refusjonsbeløp: {formatCurrencyWithKr(refusjon.refusjonsbeløp.verdi)}</span>
+            {forrigePeriode?.fom ? <span>Opphører <DateLabel dateString={forrigePeriode.fom} /></span> : null}
+          </VStack>
+        )
+      })}
+    </VStack>);
+}
+
+const BortfalteNaturalYtelser = ({ inntektsmelding }: { inntektsmelding: Inntektsmelding }) => {
+  return (
+    <InntektsmeldingInfoBlokk tittel={'Naturalytelser som faller bort'}>
+      {inntektsmelding.bortfalteNaturalytelser.length === 0 ? (
+        <span>Ingen</span>
+      ) : (
+        <VStack>
+          {inntektsmelding.bortfalteNaturalytelser.map(({ type, periode, beloepPerMnd, indexKey }) => (
+            <VStack key={indexKey}>
+              <span>{NaturalytelseType[type]}</span>
+              <ul style={{ margin: 0 }}>
+                <li>
+                  Fra og med <DateLabel dateString={periode.fomDato} />
+                </li>
+                <li>Verdi pr måned: {formatCurrencyWithKr(beloepPerMnd.verdi)}</li>
+              </ul>
+            </VStack>
+          ))}
+        </VStack>
+      )}
+    </InntektsmeldingInfoBlokk>
+  )
+}
 
 const InntektsmeldingInfoBlokk = ({ tittel, children }: { tittel: string; children: React.ReactNode }) => {
   return (

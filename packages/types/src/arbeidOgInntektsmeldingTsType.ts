@@ -36,7 +36,8 @@ export type Inntektsmelding = Readonly<{
 }>;
 
 type Refusjonsperiode = {
-  refusjonsbeløpMnd: Beløp;
+  refusjonsbeløp: Beløp;
+  indexKey: string;
   fom: string;
 }
 
