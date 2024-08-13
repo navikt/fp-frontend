@@ -1,6 +1,12 @@
 import { InntektsmeldingFaktaIndex } from '@navikt/fp-fakta-inntektsmelding';
 import { StoryFn } from '@storybook/react';
-import { Behandling, BehandlingAppKontekst, Fagsak, Inntektsmelding } from '@navikt/fp-types';
+import {
+  ArbeidsgiverOpplysninger,
+  Behandling,
+  BehandlingAppKontekst,
+  Fagsak,
+  Inntektsmelding,
+} from '@navikt/fp-types';
 import React from 'react';
 import { OwnProps } from './InntektsmeldingFaktaIndex';
 
@@ -62,7 +68,9 @@ InntektsmeldingDefault.args = {
       opprettet: "2024-07-15",
       avsluttet: "2024-08-15",
     }] as BehandlingAppKontekst[],
-  arbeidsgiverOpplysningerPerId: {},
+  arbeidsgiverOpplysningerPerId: {
+    ["910909088"]: { navn: "Rema 1000" } as ArbeidsgiverOpplysninger
+  },
   behandling: {
     uuid: 'UUID2',
   } as Behandling,

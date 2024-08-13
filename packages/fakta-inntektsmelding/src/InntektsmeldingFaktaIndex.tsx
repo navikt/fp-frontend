@@ -60,7 +60,6 @@ export const InntektsmeldingFaktaIndex = ({
                                          inntektsmeldinger,
                                        }: { inntektsmeldinger: Inntektsmelding[] } & OwnProps) => {
   console.log(inntektsmeldinger);
-
   // Logikk for å sortere tabell tilpasset fra Aksel-eksempel: https://aksel.nav.no/komponenter/core/table#tabledemo-sortable
   const [sort, setSort] = useState<SortState | undefined>({ orderBy: 'tidspunkt', direction: 'ascending' });
   const handleSort = (sortKey: TableHeaders) => {
@@ -207,8 +206,6 @@ const BehandlingsOversikt = ({
   const gjeldendeBehandlinger = alleBehandlinger.filter(b =>
     inntektsmelding.behandlingsIdeer.includes(b.uuid),
   );
-
-  console.log(alleKodeverk);
 
   const infoTekst = (()=>{
     const antallBehandlinger = gjeldendeBehandlinger.length;
