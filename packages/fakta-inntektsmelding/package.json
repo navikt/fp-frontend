@@ -15,7 +15,8 @@
     "stylelint": "stylelint \"src/**/*.module.css\"",
     "prettier": "prettier --write src",
     "clean": "rm -rf ./dist ./node_modules ./coverage ./.storybook-static-build",
-    "build-storybook": "storybook build -o .storybook-static-build"
+    "build-storybook": "storybook build -o .storybook-static-build",
+    "storybook": "storybook dev --quiet -p 7006"
   },
   "dependencies": {
     "@navikt/aksel-icons": "6.13.0",

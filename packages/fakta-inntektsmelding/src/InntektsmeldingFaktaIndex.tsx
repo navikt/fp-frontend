@@ -1,5 +1,6 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */    // TODO
+/* eslint-disable @typescript-eslint/no-use-before-define */        // TODO
 import {
+  AlleKodeverk,
   ArbeidsgiverOpplysningerPerId,
   Behandling,
   BehandlingAppKontekst,
@@ -8,10 +9,7 @@ import {
 } from '@navikt/fp-types';
 import { InntektsmeldingInnsendingsårsak, NaturalytelseType } from '@navikt/fp-types/src/arbeidOgInntektsmeldingTsType';
 import { hentDokumentLenke } from '@navikt/fp-konstanter';
-import {
-  StandardPropsStateContext
-} from '@navikt/fp-frontend-app/src/behandling/felles/utils/standardPropsStateContext';
-import React, { useContext, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   BodyLong,
   Button,
@@ -27,14 +25,20 @@ import {
   VStack,
 } from '@navikt/ds-react';
 import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
-import { formatCurrencyWithKr } from '@navikt/ft-utils';
+import { createIntl, formatCurrencyWithKr } from '@navikt/ft-utils';
 import { CircleFillIcon, DownloadIcon } from '@navikt/aksel-icons';
 
-type OwnProps = {
+import messages from '../i18n/nb_NO.json';
+import { RawIntlProvider } from 'react-intl';
+
+const intl = createIntl(messages);
+
+export type OwnProps = {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   behandling: Behandling;
   alleBehandlinger: BehandlingAppKontekst[];
   fagsak: Fagsak;
+  alleKodeverk: AlleKodeverk;
 };
 
 type TableHeaders = keyof Pick<
@@ -52,6 +56,7 @@ export const InntektsmeldingFaktaIndex = ({
                                          fagsak,
                                          alleBehandlinger,
                                          behandling,
+  alleKodeverk,
                                          inntektsmeldinger,
                                        }: { inntektsmeldinger: Inntektsmelding[] } & OwnProps) => {
   console.log(inntektsmeldinger);
@@ -80,6 +85,7 @@ export const InntektsmeldingFaktaIndex = ({
   const ims = sort?.direction === 'ascending' ? sorterteInntektsmeldinger : sorterteInntektsmeldinger.reverse();
 
   return (
+    <RawIntlProvider value={intl}>
     <Table sort={sort} onSortChange={sortKey => handleSort(sortKey as TableHeaders)}>
       <Table.Header>
         <Table.Row>
@@ -113,6 +119,7 @@ export const InntektsmeldingFaktaIndex = ({
               key={index}
               content={
                 <InntektsmeldingContent
+                  alleKodeverk={alleKodeverk}
                   fagsak={fagsak}
                   behandling={behandling}
                   alleBehandlinger={alleBehandlinger}
@@ -125,7 +132,7 @@ export const InntektsmeldingFaktaIndex = ({
               <Table.DataCell>
                 <DateTimeLabel dateTimeString={inntektsmelding.innsendingstidspunkt} />
               </Table.DataCell>
-              <Table.DataCell>{arbeidsgiverOpplysningerPerId[inntektsmelding.arbeidsgiverIdent].navn}</Table.DataCell>
+              <Table.DataCell>{arbeidsgiverOpplysningerPerId[inntektsmelding.arbeidsgiverIdent]?.navn ?? "-"}</Table.DataCell>
               <Table.DataCell>
                 {inntektsmelding.startDatoPermisjon ? (
                   <DateLabel dateString={inntektsmelding.startDatoPermisjon} />
@@ -142,6 +149,7 @@ export const InntektsmeldingFaktaIndex = ({
         })}
       </Table.Body>
     </Table>
+    </RawIntlProvider>
   );
 };
 
@@ -187,10 +195,12 @@ const BehandlingsOversikt = ({
                                inntektsmelding,
                                behandling,
                                alleBehandlinger,
+  alleKodeverk,
                              }: {
   inntektsmelding: Inntektsmelding;
   behandling: Behandling
   alleBehandlinger: BehandlingAppKontekst[];
+  alleKodeverk: AlleKodeverk,
 }) => {
   const bruktIDenneBehandlingen = inntektsmelding.behandlingsIdeer.includes(behandling.uuid);
 
@@ -198,8 +208,7 @@ const BehandlingsOversikt = ({
     inntektsmelding.behandlingsIdeer.includes(b.uuid),
   );
 
-  // TODO: er dette lov?
-  const { alleKodeverk: {BehandlingType} } = useContext(StandardPropsStateContext);
+  console.log(alleKodeverk);
 
   const infoTekst = (()=>{
     const antallBehandlinger = gjeldendeBehandlinger.length;
@@ -223,7 +232,7 @@ const BehandlingsOversikt = ({
         {gjeldendeBehandlinger.map(b => (
           <List.Item key={b.uuid}>
             <VStack>
-              <span>{BehandlingType.find(({kode}) => kode === b.type)?.navn}</span>
+              <span>{alleKodeverk.BehandlingType.find(({kode}) => kode === b.type)?.navn}</span>
               <span>Opprettet <DateTimeLabel dateTimeString={b.opprettet} /></span>
               {b.avsluttet ? <span>Avsluttet <DateTimeLabel dateTimeString={b.avsluttet} /></span> : null}
             </VStack></List.Item>
@@ -247,8 +256,8 @@ const sorterInntektsmeldinger = ({
 }) => {
   if (sortKey === 'arbeidsgiverIdent') {
     return inntektsmeldinger.slice().sort((a, b) => {
-      const navnA = arbeidsgiverOpplysningerPerId[a.arbeidsgiverIdent].navn;
-      const navnB = arbeidsgiverOpplysningerPerId[b.arbeidsgiverIdent].navn;
+      const navnA = arbeidsgiverOpplysningerPerId[a.arbeidsgiverIdent]?.navn;
+      const navnB = arbeidsgiverOpplysningerPerId[b.arbeidsgiverIdent]?.navn;
 
       return sorterStreng(navnA, navnB);
     });
@@ -321,6 +330,7 @@ const InntektsmeldingContent = ({
                                   fagsak,
                                   alleBehandlinger,
                                   behandling,
+                                  alleKodeverk
                                 }: { inntektsmelding: Inntektsmelding } & OwnProps) => {
   return (
     <VStack
@@ -335,7 +345,7 @@ const InntektsmeldingContent = ({
       </HStack>
       <HGrid columns={{ md: 3, '2xl': 4 }} gap="8">
         <InntektsmeldingInfoBlokk tittel={'Arbeidsgiver'}>
-          <span>Virksomhetsnavn: {arbeidsgiverOpplysningerPerId[inntektsmelding.arbeidsgiverIdent].navn}</span>
+          <span>Virksomhetsnavn: {arbeidsgiverOpplysningerPerId[inntektsmelding.arbeidsgiverIdent]?.navn ?? "-"}</span>
           <span>Org.nr. for underenhet: {inntektsmelding.arbeidsgiverIdent} </span>
         </InntektsmeldingInfoBlokk>
 
@@ -368,7 +378,7 @@ const InntektsmeldingContent = ({
           <Refusjon inntektsmelding={inntektsmelding} />
         </InntektsmeldingInfoBlokk>
         <BortfalteNaturalYtelser inntektsmelding={inntektsmelding} />
-        <BehandlingsOversikt inntektsmelding={inntektsmelding} alleBehandlinger={alleBehandlinger} behandling={behandling} />
+        <BehandlingsOversikt alleKodeverk={alleKodeverk} inntektsmelding={inntektsmelding} alleBehandlinger={alleBehandlinger} behandling={behandling} />
 
       </HGrid>
     </VStack>
@@ -376,10 +386,10 @@ const InntektsmeldingContent = ({
 };
 
 const KildeSystem = ({ inntektsmelding }: { inntektsmelding: Inntektsmelding }) => {
-  if (inntektsmelding.kildeSystem === "NAV_NO") {
+  if (inntektsmelding.kildeSystem.toUpperCase() === "NAV_NO") {
     return "NAV";
   }
-  if (inntektsmelding.kildeSystem === "ALTINN") {
+  if (inntektsmelding.kildeSystem.toUpperCase() === "ALTINN") {
     return "Altinn";
   }
 
