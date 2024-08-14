@@ -36,6 +36,7 @@ import {
   DokumentasjonVurderingBehov,
   BeregningsresultatEs,
   BeregningsresultatTilbakekreving,
+  Inntektsmelding,
 } from '@navikt/fp-types';
 
 import {
@@ -116,7 +117,7 @@ export const BehandlingApiKeys = {
   ARBEIDSGIVERE_OVERSIKT: new RestKey<ArbeidsgiverOpplysningerWrapper, void>('ARBEIDSGIVERE_OVERSIKT'),
   BEHANDLING_PERSONOVERSIKT: new RestKey<Personoversikt, void>('BEHANDLING_PERSONOVERSIKT'),
   ARBEID_OG_INNTEKT: new RestKey<ArbeidOgInntektsmelding, void>('ARBEID_OG_INNTEKT'),
-  INNTEKTSMELDINGER: new RestKey<unknown, void>('INNTEKTSMELDINGER'),
+  INNTEKTSMELDINGER: new RestKey<Inntektsmelding[], void>('INNTEKTSMELDINGER'),
   ARBEID_OG_INNTEKT_REGISTRER_ARBEIDSFORHOLD: new RestKey<void, ManueltArbeidsforhold>(
     'ARBEID_OG_INNTEKT_REGISTRER_ARBEIDSFORHOLD',
   ),
