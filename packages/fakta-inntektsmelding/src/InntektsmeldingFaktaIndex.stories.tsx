@@ -2,7 +2,7 @@ import { InntektsmeldingFaktaIndex } from '@navikt/fp-fakta-inntektsmelding';
 import { StoryFn } from '@storybook/react';
 import { ArbeidsgiverOpplysninger, Behandling, BehandlingAppKontekst, Fagsak, Inntektsmelding } from '@navikt/fp-types';
 import React from 'react';
-import { OwnProps } from './InntektsmeldingFaktaIndex';
+import { InntektsmeldingFaktaProps } from './InntektsmeldingFaktaIndex';
 
 import '@navikt/ds-css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
@@ -14,7 +14,7 @@ export default {
   component: InntektsmeldingFaktaIndex,
 };
 
-const Template: StoryFn<OwnProps & { inntektsmeldinger: Inntektsmelding[] }> = props => (
+const Template: StoryFn<InntektsmeldingFaktaProps & { inntektsmeldinger: Inntektsmelding[] }> = props => (
   <InntektsmeldingFaktaIndex {...props} />
 );
 
@@ -40,7 +40,10 @@ const inntektsmeldingmal = {
 export const InntektsmeldingDefault = Template.bind({});
 InntektsmeldingDefault.args = {
   alleKodeverk: alleKodeverk as any,
-  fagsak: { saksnummer: '123' } as Fagsak,
+  fagsak: {
+    saksnummer: '123',
+    fagsakYtelseType: "FP",
+  } as Fagsak,
   alleBehandlinger: [
     {
       uuid: 'UUID1',
