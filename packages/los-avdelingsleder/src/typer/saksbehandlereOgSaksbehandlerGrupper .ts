@@ -1,13 +1,9 @@
-export type GruppeSaksbehandler = Readonly<{
-  brukerIdent: string;
-  navn: string;
-  avdelingsnavn: string[];
-}>;
+import { SaksbehandlerProfil } from "@navikt/fp-los-felles";
 
 export type SaksbehandlerGruppe = Readonly<{
   gruppeId: number;
   gruppeNavn?: string;
-  saksbehandlere: GruppeSaksbehandler[];
+  saksbehandlere: SaksbehandlerProfil[];
 }>;
 
 type SaksbehandlereOgSaksbehandlerGrupper = Readonly<{

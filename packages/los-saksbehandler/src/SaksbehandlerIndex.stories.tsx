@@ -89,7 +89,6 @@ const Template: StoryFn = () => {
             verdi: '32434',
           },
           navn: 'Espen Utvikler',
-          avdelingsnavn: [],
         },
         {
           brukerIdent: {
@@ -97,7 +96,6 @@ const Template: StoryFn = () => {
             verdi: '32111',
           },
           navn: 'Auto Joakim',
-          avdelingsnavn: [],
         },
       ],
     },

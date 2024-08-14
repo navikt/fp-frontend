@@ -38,7 +38,7 @@ describe('<LeggTilSaksbehandlerForm>', () => {
 
     await userEvent.click(screen.getByText('Søk'));
 
-    expect(await screen.findByText('Espen Utvikler, NAV Viken')).toBeInTheDocument();
+    expect(await screen.findByText('Espen Utvikler')).toBeInTheDocument();
 
     await waitFor(() => expect(screen.getByText('Legg til i listen')).toBeEnabled());
 

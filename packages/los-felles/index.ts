@@ -3,4 +3,4 @@ export { default as OppgaveReservasjonEndringDatoModal } from './src/endreReserv
 export { default as FlyttReservasjonModal } from './src/flyttReservasjon/FlyttReservasjonModal';
 
 export type { default as Oppgave, OppgaveStatus } from './src/typer/oppgaveTsType';
-export type { default as SaksbehandlerForFlytting } from './src/typer/saksbehandlerForFlyttingTsType';
+export type { default as SaksbehandlerProfil } from './src/typer/saksbehandlerProfilTsType';

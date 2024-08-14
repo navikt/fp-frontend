@@ -5,8 +5,8 @@ import React, { FunctionComponent, useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { XMarkIcon } from '@navikt/aksel-icons';
-import SaksbehandlerAvdeling from '../../typer/saksbehandlerAvdelingTsType';
-import { GruppeSaksbehandler, SaksbehandlerGruppe } from '../../typer/saksbehandlereOgSaksbehandlerGrupper ';
+import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
+import { SaksbehandlerGruppe } from '../../typer/saksbehandlereOgSaksbehandlerGrupper ';
 
 import styles from './gruppeSaksbehandlere.module.css';
 import useDebounce from '../../behandlingskoer/components/sakslisteForm/useDebounce';
@@ -14,12 +14,12 @@ import useDebounce from '../../behandlingskoer/components/sakslisteForm/useDebou
 const minLength3 = minLength(3);
 const maxLength100 = maxLength(100);
 
-const sortGrupperteSaksbehandlere = (saksbehandlere: GruppeSaksbehandler[]) =>
+const sortGrupperteSaksbehandlere = (saksbehandlere: SaksbehandlerProfil[]) =>
   [...saksbehandlere].sort((saksbehandler1, saksbehandler2) => saksbehandler1.navn.localeCompare(saksbehandler2.navn));
 
 const sortAvdelingensSaksbehandlere = (
-  saksbehandlere: SaksbehandlerAvdeling[],
-  grupperteSaksbehandlere: SaksbehandlerAvdeling[],
+  saksbehandlere: SaksbehandlerProfil[],
+  grupperteSaksbehandlere: SaksbehandlerProfil[],
 ) =>
   saksbehandlere
     .filter(s => !grupperteSaksbehandlere.some(gs => gs.brukerIdent === s.brukerIdent))
@@ -27,7 +27,7 @@ const sortAvdelingensSaksbehandlere = (
 
 interface Props {
   saksbehandlerGruppe: SaksbehandlerGruppe;
-  avdelingensSaksbehandlere: SaksbehandlerAvdeling[];
+  avdelingensSaksbehandlere: SaksbehandlerProfil[];
   lagreValgtSaksbehandlar: (brukerIdent: string, gruppeId: number, leggTil: boolean) => void;
   endreGruppenavn: (gruppeId: number, gruppeNavn: string) => void;
 }

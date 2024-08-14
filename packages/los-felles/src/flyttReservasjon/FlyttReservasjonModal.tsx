@@ -5,24 +5,24 @@ import { Label, Button, BodyShort, Modal as NavModal } from '@navikt/ds-react';
 import { Form, TextAreaField, InputField } from '@navikt/ft-form-hooks';
 import { VerticalSpacer, FlexContainer, FlexRow, FlexColumn } from '@navikt/ft-ui-komponenter';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
+import SaksbehandlerProfil from '../typer/saksbehandlerProfilTsType';
 
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
-import SaksbehandlerForFlytting from '../typer/saksbehandlerForFlyttingTsType';
-
 import styles from './flyttReservasjonModal.module.css';
+
 
 const minLength3 = minLength(3);
 const maxLength500 = maxLength(500);
 const minLength7 = minLength(7);
 const maxLength7 = maxLength(7);
 
-const formatText = (state: RestApiState, intl: IntlShape, saksbehandler?: SaksbehandlerForFlytting): string => {
+const formatText = (state: RestApiState, intl: IntlShape, saksbehandler?: SaksbehandlerProfil): string => {
   if (state === RestApiState.SUCCESS && !saksbehandler) {
     return intl.formatMessage({ id: 'LeggTilSaksbehandlerForm.FinnesIkke' });
   }
 
-  return saksbehandler ? `${saksbehandler.navn}, ${saksbehandler.avdelingsnavn.join(', ')}` : '';
+  return saksbehandler ? `${saksbehandler.navn}` : '';
 };
 
 type SøkFormValues = {
@@ -32,6 +32,7 @@ type LagreFormValues = {
   begrunnelse: string;
 };
 
+
 interface OwnProps {
   showModal: boolean;
   oppgaveId: number;
@@ -39,9 +40,9 @@ interface OwnProps {
   toggleMenu: () => void;
   hentReserverteOppgaver: (params: any, keepData: boolean) => void;
   flyttOppgavereservasjon: (params: { oppgaveId: number; brukerIdent: string; begrunnelse: string }) => Promise<void>;
-  hentSaksbehandler: (params: { brukerIdent: string }) => Promise<SaksbehandlerForFlytting | undefined>;
+  hentSaksbehandler: (params: { brukerIdent: string }) => Promise<SaksbehandlerProfil | undefined>;
   hentSaksbehandlerState: RestApiState;
-  saksbehandler?: SaksbehandlerForFlytting;
+  saksbehandler?: SaksbehandlerProfil;
   resetHentSaksbehandler: () => void;
 }
 

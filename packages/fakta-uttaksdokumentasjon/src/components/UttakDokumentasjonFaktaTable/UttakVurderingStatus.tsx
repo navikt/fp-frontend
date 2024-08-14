@@ -7,19 +7,20 @@ import assertUnreachable from '../../utils/switchCaseUtils';
 import IconLabel from '../IconLabel';
 
 interface Props {
-  vurdering?: UttakVurdering;
+  vurdering?: UttakVurdering | null;
   morsStillingsprosent?: number;
 }
 
 const UttakVurderingStatus: FC<Props> = ({ vurdering, morsStillingsprosent }) => {
+  if (!vurdering) {
+    return (
+      <IconLabel
+        icon={<CircleFillIcon color="var(--a-orange-400)" />}
+        formattedMessageId="UttakDokumentasjonFaktaTable.TilVurdering"
+      />
+    );
+  }
   switch (vurdering) {
-    case undefined:
-      return (
-        <IconLabel
-          icon={<CircleFillIcon color="var(--a-orange-400)" />}
-          formattedMessageId="UttakDokumentasjonFaktaTable.TilVurdering"
-        />
-      );
     case UttakVurdering.GODKJENT:
       return (
         <HStack gap="1">

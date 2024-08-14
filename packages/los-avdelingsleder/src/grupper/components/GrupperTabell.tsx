@@ -1,8 +1,8 @@
-import { BodyShort, Label, Table } from '@navikt/ds-react';
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
+import { BodyShort, Label, Table } from '@navikt/ds-react';
 import { XMarkIcon } from '@navikt/aksel-icons';
-import SaksbehandlerAvdeling from '../../typer/saksbehandlerAvdelingTsType';
+import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
 import SaksbehandlereOgSaksbehandlerGrupper from '../../typer/saksbehandlereOgSaksbehandlerGrupper ';
 import GruppeSaksbehandlere from './GruppeSaksbehandlere';
 
@@ -10,7 +10,7 @@ import styles from './grupperTabell.module.css';
 
 interface OwnProps {
   grupper: SaksbehandlereOgSaksbehandlerGrupper;
-  avdelingensSaksbehandlere: SaksbehandlerAvdeling[];
+  avdelingensSaksbehandlere: SaksbehandlerProfil[];
   lagreValgtSaksbehandlar: (brukerIdent: string, gruppeId: number, leggTil: boolean) => void;
   endreGruppenavn: (gruppeId: number, gruppeNavn: string) => void;
   slettGruppe: (gruppeId: number) => void;

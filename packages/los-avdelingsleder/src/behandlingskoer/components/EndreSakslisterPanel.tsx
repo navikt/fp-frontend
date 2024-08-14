@@ -4,9 +4,9 @@ import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { ArrowDownIcon } from '@navikt/aksel-icons';
 import { HStack } from '@navikt/ds-react';
+import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
 import { restApiHooks, RestApiPathsKeys } from '../../data/fplosRestApi';
 import Saksliste from '../../typer/sakslisteAvdelingTsType';
-import Saksbehandler from '../../typer/saksbehandlerAvdelingTsType';
 import GjeldendeSakslisterTabell from './GjeldendeSakslisterTabell';
 import SaksbehandlereForSakslisteForm from './saksbehandlerForm/SaksbehandlereForSakslisteForm';
 import UtvalgskriterierForSakslisteForm from './sakslisteForm/UtvalgskriterierForSakslisteForm';
@@ -19,7 +19,7 @@ interface OwnProps {
   setValgtSakslisteId: (sakslisteId?: number) => void;
   valgtSakslisteId?: number;
   valgtAvdelingEnhet: string;
-  avdelingensSaksbehandlere: Saksbehandler[];
+  avdelingensSaksbehandlere: SaksbehandlerProfil[];
   resetValgtSakslisteId: () => void;
 }
 

@@ -1,10 +1,9 @@
 import React, { FunctionComponent } from 'react';
-
-import Saksbehandler from '../typer/saksbehandlerAvdelingTsType';
+import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
 import SaksbehandlerePanel from './components/SaksbehandlerePanel';
 
 interface OwnProps {
-  avdelingensSaksbehandlere: Saksbehandler[];
+  avdelingensSaksbehandlere: SaksbehandlerProfil[];
   valgtAvdelingEnhet: string;
   hentAvdelingensSaksbehandlere: (params: { avdelingEnhet: string }) => void;
 }

@@ -5,10 +5,10 @@ import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import messages from '../../../i18n/nb_NO.json';
 import SaksbehandlereOgSaksbehandlerGrupper, {
-  GruppeSaksbehandler,
   SaksbehandlerGruppe,
 } from '../../typer/saksbehandlereOgSaksbehandlerGrupper ';
 import GrupperPanel from './GrupperPanel';
+import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
 
 const withIntl = getIntlDecorator(messages);
 
@@ -16,28 +16,27 @@ const avdelingensSaksbehandlere = [
   {
     brukerIdent: 'ident1',
     navn: 'Anders Utvikler',
-    avdelingsnavn: ['NAV Oslo'],
+    ansattAvdeling: null,
   },
   {
     brukerIdent: 'ident12',
     navn: 'Espen Utvikler',
-    avdelingsnavn: ['NAV Oslo'],
+    ansattAvdeling: 'Avdeling Å',
   },
   {
     brukerIdent: 'ident4',
     navn: 'Olga Utvikler',
-    avdelingsnavn: ['NAV Oslo'],
+    ansattAvdeling: 'Avdeling Å',
   },
   {
     brukerIdent: 'ident3',
     navn: 'Klara Utvikler',
-    avdelingsnavn: ['NAV Oslo'],
+    ansattAvdeling: 'Avdeling Å',
   },
 ];
 
 const saksbehandlere = [
   {
-    avdelingsnavn: ['NAV Oslo'],
     brukerIdent: 'ident1',
     navn: 'Anders Utvikler',
   },
@@ -53,12 +52,12 @@ const saksbehandlereOgSaksbehandlerGrupper = {
   ],
 } as SaksbehandlereOgSaksbehandlerGrupper;
 
-const endreSaksbehandlere = (gruppeSaksbehandlere: GruppeSaksbehandler[], brukerIdent: string, leggTil: boolean) => {
+const endreSaksbehandlere = (gruppeSaksbehandlere: SaksbehandlerProfil[], brukerIdent: string, leggTil: boolean) => {
   if (leggTil) {
     return gruppeSaksbehandlere.concat({
-      avdelingsnavn: ['Navn på avdeling'],
       brukerIdent,
       navn: 'Placholder for navn i story',
+      ansattAvdeling: null,
     });
   }
   // @ts-ignore

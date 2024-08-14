@@ -1,23 +1,18 @@
 import React, { FunctionComponent, useState, useCallback, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { BodyShort, Label } from '@navikt/ds-react';
+import { BodyShort, Table } from '@navikt/ds-react';
 import { XMarkIcon } from '@navikt/aksel-icons';
-import { Table, TableRow, TableColumn, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
 
-import Saksbehandler from '../../typer/saksbehandlerAvdelingTsType';
 import SletteSaksbehandlerModal from './SletteSaksbehandlerModal';
 import { RestApiPathsKeys, restApiHooks } from '../../data/fplosRestApi';
 
 import styles from './saksbehandlereTabell.module.css';
 
-const headerTextCodes = [
-  'SaksbehandlereTabell.Navn',
-  'SaksbehandlereTabell.Brukerident',
-  'SaksbehandlereTabell.Avdeling',
-];
 
 interface OwnProps {
-  saksbehandlere: Saksbehandler[];
+  saksbehandlere: SaksbehandlerProfil[];
   valgtAvdelingEnhet: string;
   hentAvdelingensSaksbehandlere: (params: { avdelingEnhet: string }) => void;
 }
@@ -30,12 +25,12 @@ const SaksbehandlereTabell: FunctionComponent<OwnProps> = ({
   valgtAvdelingEnhet,
   hentAvdelingensSaksbehandlere,
 }) => {
-  const [valgtSaksbehandler, setValgtSaksbehandler] = useState<Saksbehandler>();
+  const [valgtSaksbehandler, setValgtSaksbehandler] = useState<SaksbehandlerProfil>();
 
   const { startRequest: fjernSaksbehandler } = restApiHooks.useRestApiRunner(RestApiPathsKeys.SLETT_SAKSBEHANDLER);
 
   const fjernSaksbehandlerFn = useCallback(
-    (saksbehandler: Saksbehandler) => {
+    (saksbehandler: SaksbehandlerProfil) => {
       fjernSaksbehandler({ brukerIdent: saksbehandler.brukerIdent, avdelingEnhet: valgtAvdelingEnhet }).then(() =>
         hentAvdelingensSaksbehandlere({ avdelingEnhet: valgtAvdelingEnhet }),
       );
@@ -46,15 +41,24 @@ const SaksbehandlereTabell: FunctionComponent<OwnProps> = ({
 
   const sorterteSaksbehandlere = useMemo(
     () =>
-      saksbehandlere.sort((saksbehandler1, saksbehandler2) => saksbehandler1.navn.localeCompare(saksbehandler2.navn)),
+      saksbehandlere.sort((saksbehandler1, saksbehandler2) => {
+        const compareWithNullsLast = (a: string | null, b: string | null) => {
+          if (a != null && b != null) return a.localeCompare(b);
+          if (a == null && b == null) return 0;
+          return a == null ? 1 : -1;
+        };
+
+        const enhetComparison = compareWithNullsLast(saksbehandler1.ansattAvdeling, saksbehandler2.ansattAvdeling);
+        if (enhetComparison !== 0) {
+          return enhetComparison;
+        }
+        return compareWithNullsLast(saksbehandler1.navn, saksbehandler2.navn);
+      }),
     [saksbehandlere],
   );
 
   return (
     <>
-      <Label size="small">
-        <FormattedMessage id="SaksbehandlereTabell.Saksbehandlere" />
-      </Label>
       {sorterteSaksbehandlere.length === 0 && (
         <>
           <VerticalSpacer eightPx />
@@ -65,21 +69,37 @@ const SaksbehandlereTabell: FunctionComponent<OwnProps> = ({
         </>
       )}
       {sorterteSaksbehandlere.length > 0 && (
-        <Table headerTextCodes={headerTextCodes} noHover>
-          {sorterteSaksbehandlere.map(saksbehandler => (
-            <TableRow key={saksbehandler.brukerIdent}>
-              <TableColumn>{saksbehandler.navn}</TableColumn>
-              <TableColumn>{saksbehandler.brukerIdent}</TableColumn>
-              <TableColumn>{saksbehandler.avdelingsnavn.join(', ')}</TableColumn>
-              <TableColumn>
-                <XMarkIcon
-                  className={styles.removeIcon}
-                  onMouseDown={() => setValgtSaksbehandler(saksbehandler)}
-                  onKeyDown={() => setValgtSaksbehandler(saksbehandler)}
-                />
-              </TableColumn>
-            </TableRow>
-          ))}
+        <Table>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell scope="col">
+                <FormattedMessage id="SaksbehandlereTabell.Navn" />
+              </Table.HeaderCell>
+              <Table.HeaderCell scope="col">
+                <FormattedMessage id="SaksbehandlereTabell.Brukerident" />
+              </Table.HeaderCell>
+              <Table.HeaderCell scope="col">
+                <FormattedMessage id="SaksbehandlereTabell.AnsattVed" />
+              </Table.HeaderCell>
+              <Table.HeaderCell scope="col" />
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
+            {sorterteSaksbehandlere.map(saksbehandler => (
+              <Table.Row key={saksbehandler.brukerIdent}>
+                <Table.DataCell scope="row">{saksbehandler.navn}</Table.DataCell>
+                <Table.DataCell>{saksbehandler.brukerIdent}</Table.DataCell>
+                <Table.DataCell>{saksbehandler.ansattAvdeling}</Table.DataCell>
+                <Table.DataCell>
+                  <XMarkIcon
+                    className={styles.removeIcon}
+                    onMouseDown={() => setValgtSaksbehandler(saksbehandler)}
+                    onKeyDown={() => setValgtSaksbehandler(saksbehandler)}
+                  />
+                </Table.DataCell>
+              </Table.Row>
+            ))}
+          </Table.Body>
         </Table>
       )}
       {valgtSaksbehandler && (
