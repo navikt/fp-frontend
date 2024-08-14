@@ -67,7 +67,7 @@ export const InntektsmeldingFaktaIndex = ({
         behandling,
       })
     : inntektsmeldinger;
-  const ims = sort?.direction === 'ascending' ? sorterteInntektsmeldinger : sorterteInntektsmeldinger.reverse();
+  const ims = sort?.direction === 'ascending' ? sorterteInntektsmeldinger : sorterteInntektsmeldinger.toReversed();
 
   return (
     <RawIntlProvider value={intl}>
@@ -96,12 +96,12 @@ export const InntektsmeldingFaktaIndex = ({
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {ims.map((inntektsmelding, index) => {
+          {ims.map((inntektsmelding) => {
             return (
               <Table.ExpandableRow
                 expandOnRowClick
                 togglePlacement="right"
-                key={index}
+                key={inntektsmelding.journalpostId}
                 content={
                   <InntektsmeldingInnhold
                     alleKodeverk={alleKodeverk}

@@ -11,7 +11,7 @@ describe('<InntektsmeldingDefault>', () => {
   // eslint-disable-next-line vitest/expect-expect -- assertes i hjelpefunksjon
   it('Skal kunne sortere tabellen', async () => {
 
-    const utils = render(
+    render(
       <InntektsmeldingDefault />,
     );
 
@@ -28,7 +28,7 @@ const verifiserKolonneSortering = async (headerNavn: string, kolonneIndex: numbe
   await userEvent.click(await screen.findByRole('button', {name: headerNavn}));
   assertSortedColumn(kolonneIndex, forventetSortering);
   await userEvent.click(await screen.findByRole('button', {name: headerNavn}));
-  assertSortedColumn(kolonneIndex, forventetSortering.reverse());
+  assertSortedColumn(kolonneIndex, forventetSortering.toReversed());
 }
 
 const assertSortedColumn = (columnIndex: number, forventetSortering: string[]) => {
