@@ -186,9 +186,9 @@ const BehandlingPanelerIndex: FunctionComponent<OwnProps> = ({
             <Suspense fallback={<LoadingPanel />}>
               <ErrorBoundary errorMessageCallback={addErrorMessage}>
                 <SvangerskapspengerPaneler
+                  alleBehandlinger={alleBehandlinger}
                   behandling={behandling}
                   fagsak={fagsak}
-                  //TODO: IM panel
                   valgtProsessSteg={query.punkt}
                   valgtFaktaSteg={query.fakta}
                   oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}

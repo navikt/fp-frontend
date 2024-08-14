@@ -67,25 +67,11 @@ export const InntektsmeldingInnhold = ({
           {/*TODO: Få inn endringsgrunn*/}
         </InntektsmeldingInfoBlokk>
 
-        <InntektsmeldingInfoBlokk
-          tittel={intl.formatMessage(
-            { id: 'InntektsmeldingFaktaPanel.startDato.heading' },
-            {
-              ytelse: getKodeverknavnFraKode(
-                alleKodeverk,
-                KodeverkType.FAGSAK_YTELSE,
-                fagsak.fagsakYtelseType,
-              ).toLowerCase(),
-            },
-          )}
-        >
-          <span>
-            {inntektsmelding.startDatoPermisjon ? <DateLabel dateString={inntektsmelding.startDatoPermisjon} /> : '-'}
-          </span>
-          <span>
-            <FormattedMessage id="InntektsmeldingFaktaPanel.startDato.fraArbeidsgiver" />
-          </span>
-        </InntektsmeldingInfoBlokk>
+        <Startdato ytelse={getKodeverknavnFraKode(
+          alleKodeverk,
+          KodeverkType.FAGSAK_YTELSE,
+          fagsak.fagsakYtelseType,
+        )} startDatoPermisjon={inntektsmelding.startDatoPermisjon}/>
 
         <InntektsmeldingInfoBlokk
           tittel={intl.formatMessage({ id: 'InntektsmeldingFaktaPanel.kilde.heading' })}
@@ -109,6 +95,31 @@ export const InntektsmeldingInnhold = ({
     </VStack>
   );
 };
+
+const Startdato =  ({ startDatoPermisjon, ytelse }: { startDatoPermisjon?: string; ytelse: string }) => {
+  const intl = useIntl();
+  if (!startDatoPermisjon) {
+    return null;
+  }
+
+  return (
+    <InntektsmeldingInfoBlokk
+      tittel={intl.formatMessage(
+        { id: 'InntektsmeldingFaktaPanel.startDato.heading' },
+        {
+          ytelse: ytelse.toLowerCase(),
+        },
+      )}
+    >
+          <span>
+            {startDatoPermisjon ? <DateLabel dateString={startDatoPermisjon} /> : '-'}
+          </span>
+      <span>
+            <FormattedMessage id="InntektsmeldingFaktaPanel.startDato.fraArbeidsgiver" />
+          </span>
+    </InntektsmeldingInfoBlokk>
+  )
+}
 
 const KildeSystem = ({ inntektsmelding }: { inntektsmelding: Inntektsmelding }) => {
   if (inntektsmelding.kildeSystem.toUpperCase() === 'NAV_NO') {
@@ -225,6 +236,7 @@ const LastNedPdfKnapp = ({ inntektsmelding, fagsak }: { fagsak: Fagsak; inntekts
 };
 
 // TODO: denne skal taes i bruk når all info fra PDF er tilgjengelig i GUI.
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const LastNedPdfModalKnapp = ({ inntektsmelding, fagsak }: { fagsak: Fagsak; inntektsmelding: Inntektsmelding }) => {
   const ref = useRef<HTMLDialogElement>(null);
   const intl = useIntl();
