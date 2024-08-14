@@ -1,13 +1,13 @@
 import React, { FunctionComponent, useEffect } from 'react';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
+import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
 import { RestApiPathsKeys, restApiHooks } from '../data/fplosRestApi';
-import SaksbehandlerAvdeling from '../typer/saksbehandlerAvdelingTsType';
 import GrupperPanel from './components/GrupperPanel';
 
 interface OwnProps {
   valgtAvdelingEnhet: string;
-  avdelingensSaksbehandlere: SaksbehandlerAvdeling[];
+  avdelingensSaksbehandlere: SaksbehandlerProfil[];
 }
 
 const GrupperIndex: FunctionComponent<OwnProps> = ({ valgtAvdelingEnhet, avdelingensSaksbehandlere }) => {

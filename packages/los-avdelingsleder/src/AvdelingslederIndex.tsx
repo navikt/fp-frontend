@@ -7,13 +7,13 @@ import { LoadingPanel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { formatQueryString, parseQueryString, createIntl } from '@navikt/ft-utils';
 
 import { NavAnsatt } from '@navikt/fp-types';
+import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
 import { RestApiState, useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 
 import useTrackRouteParam from './useTrackRouteParam';
 import { requestApi, RestApiPathsKeys, RestApiGlobalStatePathsKeys, restApiHooks } from './data/fplosRestApi';
 import AvdelingslederDashboard from './components/AvdelingslederDashboard';
 import IkkeTilgangTilAvdelingslederPanel from './components/IkkeTilgangTilAvdelingslederPanel';
-import Saksbehandler from './typer/saksbehandlerAvdelingTsType';
 import AvdelingslederPanels from './avdelingslederPanels';
 import NokkeltallIndex from './nokkeltall/NokkeltallIndex';
 import EndreSaksbehandlereIndex from './saksbehandlere/EndreSaksbehandlereIndex';
@@ -32,7 +32,7 @@ const intl = createIntl(messages);
 
 const nasjonalEnhet = '4867';
 
-const EMPTY_ARRAY: Saksbehandler[] = [];
+const EMPTY_ARRAY: SaksbehandlerProfil[] = [];
 
 const setAvdeling = (
   setValgtAvdeling: (avdelingEnhet: string) => void,
@@ -77,7 +77,7 @@ const renderAvdelingslederPanel = (
   avdelingslederPanel: string,
   valgtAvdelingEnhet: string,
   hentAvdelingensSaksbehandlere: (params: { avdelingEnhet: string }) => void,
-  avdelingensSaksbehandlere: Saksbehandler[],
+  avdelingensSaksbehandlere: SaksbehandlerProfil[],
 ) => {
   switch (avdelingslederPanel) {
     case AvdelingslederPanels.BEHANDLINGSKOER:

@@ -27,7 +27,6 @@ const Template: StoryFn<{ oppgave: Oppgave }> = ({ oppgave }) => {
       data: {
         brukerIdent: 'teasdfa',
         navn: 'Espen Utvikler',
-        avdelingsnavn: ['NAV Viken'],
       },
     },
     { key: RestApiPathsKeys.FLYTT_RESERVASJON.name, data: {} },

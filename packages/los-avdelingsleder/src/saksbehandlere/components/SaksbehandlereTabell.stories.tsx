@@ -3,8 +3,8 @@ import { StoryFn } from '@storybook/react';
 
 import { RestApiMock } from '@navikt/fp-utils-test';
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
+import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
 
-import Saksbehandler from '../../typer/saksbehandlerAvdelingTsType';
 import SaksbehandlereTabell from './SaksbehandlereTabell';
 import { RestApiPathsKeys, requestApi } from '../../data/fplosRestApi';
 
@@ -19,7 +19,7 @@ export default {
 };
 
 const Template: StoryFn<{
-  saksbehandlere?: Saksbehandler[];
+  saksbehandlere?: SaksbehandlerProfil[];
   hentAvdelingensSaksbehandlere: (params: { avdelingEnhet: string }) => void;
 }> = ({ saksbehandlere, hentAvdelingensSaksbehandlere }) => {
   const data = [{ key: RestApiPathsKeys.SLETT_SAKSBEHANDLER.name, data: undefined }];
@@ -41,13 +41,18 @@ Default.args = {
     {
       brukerIdent: 'R12122',
       navn: 'Espen Utvikler',
-      avdelingsnavn: ['NAV Viken'],
+      ansattAvdeling: 'Oslo',
     },
     {
       brukerIdent: 'S53343',
       navn: 'Steffen',
-      avdelingsnavn: ['NAV Oslo'],
+      ansattAvdeling: 'Oslo',
     },
+    {
+      brukerIdent: 'H11111',
+      navn: 'Hildegunn',
+      ansattAvdeling: 'Drammen'
+    }
   ],
   hentAvdelingensSaksbehandlere: () => undefined,
 };
@@ -56,3 +61,19 @@ export const TomTabell = Template.bind({});
 Template.args = {
   hentAvdelingensSaksbehandlere: () => undefined,
 };
+
+export const MedSaksbehandlerUtenAnsattAvdeling = Template.bind({});
+MedSaksbehandlerUtenAnsattAvdeling.args = {
+  saksbehandlere: [
+    {
+      brukerIdent: 'X1111',
+      navn: 'Ukjent saksbehandler (X11111)',
+      ansattAvdeling: null
+    },
+    {
+      brukerIdent: 'H11111',
+      navn: 'Hildegunn',
+      ansattAvdeling: 'Drammen'
+    },
+  ]
+}

@@ -6,15 +6,15 @@ import { Form, InputField } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
+import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
 
-import Saksbehandler from '../../typer/saksbehandlerAvdelingTsType';
 import { RestApiPathsKeys, restApiHooks } from '../../data/fplosRestApi';
 
 import styles from './leggTilSaksbehandlerForm.module.css';
 
 const erSaksbehandlerLagtTilAllerede = (
-  saksbehandler?: Saksbehandler,
-  avdelingensSaksbehandlere: Saksbehandler[] = [],
+  saksbehandler?: SaksbehandlerProfil,
+  avdelingensSaksbehandlere: SaksbehandlerProfil[] = [],
 ) =>
   avdelingensSaksbehandlere instanceof Array &&
   avdelingensSaksbehandlere.some(
@@ -23,7 +23,7 @@ const erSaksbehandlerLagtTilAllerede = (
 
 interface OwnProps {
   valgtAvdelingEnhet: string;
-  avdelingensSaksbehandlere: Saksbehandler[];
+  avdelingensSaksbehandlere: SaksbehandlerProfil[];
   hentAvdelingensSaksbehandlere: (params: { avdelingEnhet: string }) => void;
 }
 
@@ -83,10 +83,9 @@ const LeggTilSaksbehandlerForm: FunctionComponent<OwnProps> = ({
       return '';
     }
 
-    const brukerinfo = `${saksbehandler.navn}, ${saksbehandler.avdelingsnavn.join(', ')}`;
     return erLagtTilAllerede
-      ? `${brukerinfo} (${intl.formatMessage({ id: 'LeggTilSaksbehandlerForm.FinnesAllerede' })})`
-      : brukerinfo;
+      ? `${saksbehandler.navn} (${intl.formatMessage({ id: 'LeggTilSaksbehandlerForm.FinnesAllerede' })})`
+      : saksbehandler.navn;
   }, [state, saksbehandler, erLagtTilAllerede]);
 
   const formMethods = useForm<FormValues>();

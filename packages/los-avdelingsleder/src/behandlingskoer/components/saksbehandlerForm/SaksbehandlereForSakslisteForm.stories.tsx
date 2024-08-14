@@ -4,9 +4,9 @@ import React from 'react';
 
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 import { RestApiMock } from '@navikt/fp-utils-test';
+import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
 
 import { RestApiPathsKeys, requestApi } from '../../../data/fplosRestApi';
-import SaksbehandlerAvdeling from '../../../typer/saksbehandlerAvdelingTsType';
 import Saksliste from '../../../typer/sakslisteAvdelingTsType';
 import SaksbehandlereForSakslisteForm from './SaksbehandlereForSakslisteForm';
 
@@ -23,7 +23,7 @@ export default {
 
 const Template: StoryFn<{
   saksliste: Saksliste;
-  avdelingensSaksbehandlere: SaksbehandlerAvdeling[];
+  avdelingensSaksbehandlere: SaksbehandlerProfil[];
   hentAvdelingensSakslister: (params: { avdelingEnhet: string }) => void;
   grupperteSaksbehandlere?: SaksbehandlereOgSaksbehandlerGrupper;
 }> = ({ saksliste, avdelingensSaksbehandlere, hentAvdelingensSakslister, grupperteSaksbehandlere }) => {
@@ -76,12 +76,12 @@ ToSaksbehandlere.args = {
     {
       brukerIdent: 'E23232',
       navn: 'Espen Utvikler',
-      avdelingsnavn: ['NAV Viken'],
+      ansattAvdeling: 'Avdeling Å',
     },
     {
       brukerIdent: 'S34354',
       navn: 'Steffen',
-      avdelingsnavn: ['NAV Viken'],
+      ansattAvdeling: 'Avdeling Å',
     },
   ],
   hentAvdelingensSakslister: action('button-click'),
@@ -100,17 +100,17 @@ TreSaksbehandlere.args = {
     {
       brukerIdent: 'E23232',
       navn: 'Espen Utvikler',
-      avdelingsnavn: ['NAV Viken'],
+      ansattAvdeling: 'Avdeling Å',
     },
     {
       brukerIdent: 'S34354',
       navn: 'Steffen',
-      avdelingsnavn: ['NAV Viken'],
+      ansattAvdeling: 'Avdeling Å',
     },
     {
       brukerIdent: 'E24353',
       navn: 'Eirik',
-      avdelingsnavn: ['NAV Viken'],
+      ansattAvdeling: 'Avdeling Å',
     },
   ],
   hentAvdelingensSakslister: action('button-click'),
@@ -129,17 +129,17 @@ SaksbehandlereSomErGruppert.args = {
     {
       brukerIdent: 'E23232',
       navn: 'Espen Utvikler',
-      avdelingsnavn: ['NAV Viken'],
+      ansattAvdeling: 'Avdeling Å',
     },
     {
       brukerIdent: 'S34354',
       navn: 'Steffen',
-      avdelingsnavn: ['NAV Viken'],
+      ansattAvdeling: 'Avdeling Å',
     },
     {
       brukerIdent: 'E24353',
       navn: 'Eirik',
-      avdelingsnavn: ['NAV Viken'],
+      ansattAvdeling: 'Avdeling Å',
     },
   ],
   grupperteSaksbehandlere: {
@@ -149,14 +149,14 @@ SaksbehandlereSomErGruppert.args = {
         gruppeNavn: 'Gruppe 1',
         saksbehandlere: [
           {
-            avdelingsnavn: ['NAV Oslo'],
             brukerIdent: 'E23232',
             navn: 'Espen Utvikler',
+            ansattAvdeling: 'Avdeling Å',
           },
           {
-            avdelingsnavn: ['NAV Oslo'],
             brukerIdent: 'S34354',
             navn: 'Steffen',
+            ansattAvdeling: 'Avdeling Å',
           },
         ],
       },

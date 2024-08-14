@@ -6,7 +6,7 @@ import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
 import FlyttReservasjonModal from './FlyttReservasjonModal';
-import SaksbehandlerAvdeling from '../typer/saksbehandlerAvdelingTsType';
+import SaksbehandlerProfil from '../typer/saksbehandlerProfilTsType';
 
 import messages from '../../i18n/nb_NO.json';
 
@@ -19,7 +19,7 @@ export default {
 };
 
 const Template: StoryFn<{
-  saksbehandler: SaksbehandlerAvdeling;
+  saksbehandler: SaksbehandlerProfil;
   hentReserverteOppgaver: (params: any, keepData: boolean) => void;
 }> = ({ saksbehandler, hentReserverteOppgaver }) => {
   const [harHentet, setHentet] = useState(false);
@@ -56,6 +56,6 @@ MedTreffPåSøk.args = {
   saksbehandler: {
     brukerIdent: 'R232323',
     navn: 'Espen Utvikler',
-    avdelingsnavn: ['NAV Viken'],
+    ansattAvdeling: 'Avdeling A'
   },
 };

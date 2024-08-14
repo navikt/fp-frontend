@@ -3,13 +3,13 @@ import React, { FunctionComponent } from 'react';
 import { Button, VStack } from '@navikt/ds-react';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { FormattedMessage } from 'react-intl';
-import SaksbehandlerAvdeling from '../../typer/saksbehandlerAvdelingTsType';
+import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
 import SaksbehandlereOgSaksbehandlerGrupper from '../../typer/saksbehandlereOgSaksbehandlerGrupper ';
 import GrupperTabell from './GrupperTabell';
 
 interface OwnProps {
   grupper: SaksbehandlereOgSaksbehandlerGrupper;
-  avdelingensSaksbehandlere: SaksbehandlerAvdeling[];
+  avdelingensSaksbehandlere: SaksbehandlerProfil[];
   opprettOgHentAlleGrupper: () => void;
   opprettNyGruppeState?: RestApiState;
   lagreValgtSaksbehandlar: (brukerIdent: string, gruppeId: number, leggTil: boolean) => void;

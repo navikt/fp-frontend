@@ -1,19 +1,18 @@
 import { RestApiConfigBuilder, createRequestApi, RestKey } from '@navikt/fp-rest-api';
 import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
 import { AlleKodeverk } from '@navikt/fp-types';
-import { Oppgave } from '@navikt/fp-los-felles';
+import { Oppgave, SaksbehandlerProfil } from '@navikt/fp-los-felles';
 
 import Avdeling from '../typer/avdelingTsType';
 import SakslisteAvdeling from '../typer/sakslisteAvdelingTsType';
-import SaksbehandlerAvdeling from '../typer/saksbehandlerAvdelingTsType';
 import OppgaverForAvdeling from '../typer/oppgaverForAvdelingTsType';
 import OppgaveForDato from '../typer/oppgaverForDatoTsType';
 import BehandlingVentefrist from '../typer/behandlingVentefristTsType';
 import OppgaverForForsteStonadsdag from '../typer/oppgaverForForsteStonadsdagTsType';
 import OppgaverSomErApneEllerPaVent from '../typer/oppgaverSomErApneEllerPaVentTsType';
 import Reservasjon from '../typer/reservasjonTsType';
-import SaksbehandlerForFlytting from '../typer/saksbehandlerForFlyttingTsType';
 import SaksbehandlereOgSaksbehandlerGrupper from '../typer/saksbehandlereOgSaksbehandlerGrupper ';
+
 
 export const RestApiGlobalStatePathsKeys = {
   KODEVERK_LOS: new RestKey<AlleKodeverk, void>('KODEVERK_LOS'),
@@ -27,13 +26,13 @@ export const RestApiPathsKeys = {
   ),
   BEHANDLINGSKO_OPPGAVE_ANTALL: new RestKey<number, { sakslisteId: number }>('BEHANDLINGSKO_OPPGAVE_ANTALL'),
   SAKSLISTER_FOR_AVDELING: new RestKey<SakslisteAvdeling[], { avdelingEnhet: string }>('SAKSLISTER_FOR_AVDELING'),
-  SAKSBEHANDLERE_FOR_AVDELING: new RestKey<SaksbehandlerAvdeling[], { avdelingEnhet: string }>(
+  SAKSBEHANDLERE_FOR_AVDELING: new RestKey<SaksbehandlerProfil[], { avdelingEnhet: string }>(
     'SAKSBEHANDLERE_FOR_AVDELING',
   ),
   OPPGAVE_AVDELING_ANTALL: new RestKey<number, { avdelingEnhet: string }>('OPPGAVE_AVDELING_ANTALL'),
   OPPGAVE_ANTALL: new RestKey<number, { sakslisteId: number; avdelingEnhet: string }>('OPPGAVE_ANTALL'),
-  SAKSBEHANDLER_SOK: new RestKey<SaksbehandlerAvdeling, { brukerIdent: string }>('SAKSBEHANDLER_SOK'),
-  FLYTT_RESERVASJON_SAKSBEHANDLER_SOK: new RestKey<SaksbehandlerForFlytting, { brukerIdent: string }>(
+  SAKSBEHANDLER_SOK: new RestKey<SaksbehandlerProfil, { brukerIdent: string }>('SAKSBEHANDLER_SOK'),
+  FLYTT_RESERVASJON_SAKSBEHANDLER_SOK: new RestKey<SaksbehandlerProfil, { brukerIdent: string }>(
     'FLYTT_RESERVASJON_SAKSBEHANDLER_SOK',
   ),
   ENDRE_OPPGAVERESERVASJON: new RestKey<Oppgave[], { oppgaveId: number; reserverTil: string }>(
