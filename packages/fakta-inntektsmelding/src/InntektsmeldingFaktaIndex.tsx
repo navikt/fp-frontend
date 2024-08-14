@@ -289,12 +289,17 @@ const sorterInntektsmeldinger = ({
     const aValue = a[sortKey];
     const bValue = b[sortKey];
 
-    // TODO: fungerer. Hadde vanligvis brukt Lodash, gode tips for uten Lodash?
     return sorterStreng(aValue, bValue);
   });
 };
 
-const sorterStreng = (a: string, b: string) => {
+const sorterStreng = (a: string | undefined | number, b: string | undefined | number) => {
+  if (a === undefined) {
+    return -1;
+  }
+  if (b === undefined) {
+    return 1;
+  }
   if (a < b) {
     return -1;
   }
