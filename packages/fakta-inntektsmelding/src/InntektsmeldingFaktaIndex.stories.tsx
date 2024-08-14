@@ -80,6 +80,7 @@ InntektsmeldingDefault.args = {
       innsendingstidspunkt: '2024-07-20T00:00:00',
       startDatoPermisjon: '2024-10-10',
       refusjonPrMnd: undefined,
+      journalpostId: '1',
       refusjonsperioder: [
         {
           refusjonsbeløp: { verdi: 5000 },
@@ -101,6 +102,7 @@ InntektsmeldingDefault.args = {
       kildeSystem: 'FS22',
       refusjonPrMnd: undefined,
       arbeidsgiverIdent: '2',
+      journalpostId: '2',
     },
     {
       ...inntektsmeldingmal,
@@ -111,6 +113,7 @@ InntektsmeldingDefault.args = {
       kildeSystem: 'NAV_NO',
       startDatoPermisjon: '2024-11-11',
       arbeidsgiverIdent: '3',
+      journalpostId: '3',
       bortfalteNaturalytelser: [
         {
           periode: { fomDato: '2024-01-09', tomDato: '2024-10-09' },
