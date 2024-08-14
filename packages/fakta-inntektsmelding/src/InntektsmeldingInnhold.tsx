@@ -41,7 +41,7 @@ export const InntektsmeldingInnhold = ({
           </span>
           <span>
             <FormattedMessage id="InntektsmeldingFaktaPanel.arbeidsgiver.underenhet" />:{' '}
-            {inntektsmelding.arbeidsgiverIdent}{' '}
+            {inntektsmelding.arbeidsgiverIdent}
           </span>
         </InntektsmeldingInfoBlokk>
 
@@ -55,8 +55,8 @@ export const InntektsmeldingInnhold = ({
             <span>
               <FormattedMessage id="InntektsmeldingFaktaPanel.kontaktperson.telefon" />{' '}
               {inntektsmelding.kontaktpersonNummer}
-            </span>{' '}
-            <CopyButton size="xsmall" copyText={inntektsmelding.kontaktpersonNummer} />{' '}
+            </span>
+            <CopyButton size="xsmall" copyText={inntektsmelding.kontaktpersonNummer} />
           </HStack>
         </InntektsmeldingInfoBlokk>
 
@@ -64,7 +64,7 @@ export const InntektsmeldingInnhold = ({
           tittel={intl.formatMessage({ id: 'InntektsmeldingFaktaPanel.månedsinntekt.heading' })}
         >
           <span>{formatCurrencyWithKr(inntektsmelding.inntektPrMnd)}</span>
-          {/*TODO: Få inn endringsgrunn*/}
+          {/*TODO: Få inn endringsgrunn når dette er med i data-modellen*/}
         </InntektsmeldingInfoBlokk>
 
         <Startdato ytelse={getKodeverknavnFraKode(
