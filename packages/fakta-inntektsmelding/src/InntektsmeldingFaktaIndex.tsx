@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */  // TODO
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import {
   AlleKodeverk,
   ArbeidsgiverOpplysningerPerId,
@@ -391,7 +391,16 @@ const InntektsmeldingContent = ({
         </InntektsmeldingInfoBlokk>
 
         <InntektsmeldingInfoBlokk
-          tittel={intl.formatMessage({ id: 'InntektsmeldingFaktaPanel.startDato.heading' }, { ytelse: getKodeverknavnFraKode(alleKodeverk, KodeverkType.FAGSAK_YTELSE, fagsak.fagsakYtelseType).toLowerCase()  })}
+          tittel={intl.formatMessage(
+            { id: 'InntektsmeldingFaktaPanel.startDato.heading' },
+            {
+              ytelse: getKodeverknavnFraKode(
+                alleKodeverk,
+                KodeverkType.FAGSAK_YTELSE,
+                fagsak.fagsakYtelseType,
+              ).toLowerCase(),
+            },
+          )}
         >
           <span>
             {inntektsmelding.startDatoPermisjon ? <DateLabel dateString={inntektsmelding.startDatoPermisjon} /> : '-'}
@@ -402,13 +411,13 @@ const InntektsmeldingContent = ({
         </InntektsmeldingInfoBlokk>
 
         <InntektsmeldingInfoBlokk
-          tittel={intl.formatMessage({ id: 'InntektsmeldingFaktaPanel.kilde.heading' }, { ytelse: 'TODO' })}
+          tittel={intl.formatMessage({ id: 'InntektsmeldingFaktaPanel.kilde.heading' })}
         >
           <KildeSystem inntektsmelding={inntektsmelding} />
         </InntektsmeldingInfoBlokk>
 
         <InntektsmeldingInfoBlokk
-          tittel={intl.formatMessage({ id: 'InntektsmeldingFaktaPanel.refusjon.heading' }, { ytelse: 'TODO' })}
+          tittel={intl.formatMessage({ id: 'InntektsmeldingFaktaPanel.refusjon.heading' })}
         >
           <Refusjon inntektsmelding={inntektsmelding} />
         </InntektsmeldingInfoBlokk>
