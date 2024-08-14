@@ -25,7 +25,7 @@ const inntektsmeldingmal = {
   refusjonsperioder: [],
   innsendingsårsak: 'NY' as const,
   behandlingsIdeer: [],
-  arbeidsgiverIdent: '910909088',
+  arbeidsgiverIdent: '1',
   eksternArbeidsforholdId: 'ARB001-001',
   inntektPrMnd: 30000,
   internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
@@ -62,7 +62,9 @@ InntektsmeldingDefault.args = {
     },
   ] as BehandlingAppKontekst[],
   arbeidsgiverOpplysningerPerId: {
-    ['910909088']: { navn: 'Rema 1000' } as ArbeidsgiverOpplysninger,
+    ['1']: { navn: 'Rema 1000' } as ArbeidsgiverOpplysninger,
+    ['2']: { navn: 'Kiwi' } as ArbeidsgiverOpplysninger,
+    ['3']: { navn: 'Meny' } as ArbeidsgiverOpplysninger,
   },
   behandling: {
     uuid: 'UUID2',
@@ -95,6 +97,7 @@ InntektsmeldingDefault.args = {
       innsendingstidspunkt: '2024-08-01T00:00:00',
       kildeSystem: 'FS22',
       refusjonPrMnd: undefined,
+      arbeidsgiverIdent: '2',
     },
     {
       ...inntektsmeldingmal,
@@ -104,6 +107,7 @@ InntektsmeldingDefault.args = {
       innsendingsårsak: 'ENDRING' as const,
       kildeSystem: 'NAV_NO',
       startDatoPermisjon: '2024-11-11',
+      arbeidsgiverIdent: '3',
       bortfalteNaturalytelser: [
         {
           periode: { fomDato: '2024-01-09', tomDato: '2024-10-09' },
