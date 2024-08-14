@@ -10,7 +10,7 @@ import { formatCurrencyWithKr } from '@navikt/ft-utils';
 import { NaturalytelseType } from '@navikt/fp-types/src/arbeidOgInntektsmeldingTsType';
 import { hentDokumentLenke } from '@navikt/fp-konstanter';
 import { DownloadIcon } from '@navikt/aksel-icons';
-
+import styles from "./inntektsmeldingFakta.module.css";
 export const InntektsmeldingInnhold = ({
                                   inntektsmelding,
                                   arbeidsgiverOpplysningerPerId,
@@ -24,7 +24,7 @@ export const InntektsmeldingInnhold = ({
   return (
     <VStack
       gap="4"
-      style={{ background: 'rgba(18, 43, 68, 0.08)', padding: '1.5rem 1rem', marginLeft: '-3rem', borderRadius: '4px' }}
+      className={styles.container}
     >
       <HStack gap="4" justify="space-between" align="start">
         <Heading level="3" size="small">
@@ -191,7 +191,7 @@ const BortfalteNaturalYtelser = ({ inntektsmelding }: { inntektsmelding: Inntekt
           {inntektsmelding.bortfalteNaturalytelser.map(({ type, periode, beloepPerMnd, indexKey }) => (
             <VStack key={indexKey}>
               <span>{NaturalytelseType[type]}</span>
-              <ul style={{ margin: 0 }}>
+              <ul>
                 <li>
                   <FormattedMessage id="InntektsmeldingFaktaPanel.bortfalteNaturalytelser.fom" />{' '}
                   <DateLabel dateString={periode.fomDato} />
@@ -242,7 +242,7 @@ const LastNedPdfModalKnapp = ({ inntektsmelding, fagsak }: { fagsak: Fagsak; inn
   const intl = useIntl();
 
   return (
-    <div className="py-16">
+    <>
       <Button icon={<DownloadIcon />} variant="secondary" size="small" onClick={() => ref.current?.showModal()}>
         <FormattedMessage id="InntektsmeldingFaktaPanel.modal.trigger" />
       </Button>
@@ -272,7 +272,7 @@ const LastNedPdfModalKnapp = ({ inntektsmelding, fagsak }: { fagsak: Fagsak; inn
           </Button>
         </Modal.Footer>
       </Modal>
-    </div>
+    </>
   );
 };
 

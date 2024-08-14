@@ -16,7 +16,7 @@ import { CircleFillIcon } from '@navikt/aksel-icons';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 import messages from '../i18n/nb_NO.json';
 import { InntektsmeldingInnhold } from './InntektsmeldingInnhold';
-
+import styles from "./inntektsmeldingFakta.module.css";
 const intl = createIntl(messages);
 
 export type InntektsmeldingFaktaProps = {
@@ -207,7 +207,7 @@ const InntektsmeldingStatus = ({
   if (inntektsmelding.behandlingsIdeer.includes(behandling.uuid)) {
     return (
       <HStack gap="1" align="center">
-        <CircleFillIcon style={{ color: 'var(--a-green-400)' }} />{' '}
+        <CircleFillIcon className={styles.behandlingCircleDenne} />{' '}
         <FormattedMessage id="InntektsmeldingFaktaPanel.tabell.cell.behandling.denne" />
       </HStack>
     );
@@ -215,7 +215,7 @@ const InntektsmeldingStatus = ({
   if (inntektsmelding.behandlingsIdeer.length > 0) {
     return (
       <HStack gap="1" align="center">
-        <CircleFillIcon style={{ color: 'var(--a-border-subtle)' }} />{' '}
+        <CircleFillIcon className={styles.behandlingCircleAndre} />{' '}
         <FormattedMessage id="InntektsmeldingFaktaPanel.tabell.cell.behandling.andre" />
       </HStack>
     );
@@ -223,7 +223,7 @@ const InntektsmeldingStatus = ({
 
   return (
     <HStack gap="1" align="center">
-      <CircleFillIcon style={{ color: 'var(--a-border-subtle)' }} />{' '}
+      <CircleFillIcon className={styles.behandlingCircleIngen} />{' '}
       <FormattedMessage id="InntektsmeldingFaktaPanel.tabell.cell.behandling.ingen" />
     </HStack>
   );
