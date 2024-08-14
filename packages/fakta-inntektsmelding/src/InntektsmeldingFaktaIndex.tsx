@@ -45,7 +45,6 @@ export const InntektsmeldingFaktaIndex = ({
   alleKodeverk,
   inntektsmeldinger,
 }: { inntektsmeldinger: Inntektsmelding[] } & InntektsmeldingFaktaProps) => {
-  console.log(inntektsmeldinger);
   // Logikk for å sortere tabell tilpasset fra Aksel-eksempel: https://aksel.nav.no/komponenter/core/table#tabledemo-sortable
   const [sort, setSort] = useState<SortState | undefined>({ orderBy: 'tidspunkt', direction: 'ascending' });
   const handleSort = (sortKey: TableHeaders) => {
