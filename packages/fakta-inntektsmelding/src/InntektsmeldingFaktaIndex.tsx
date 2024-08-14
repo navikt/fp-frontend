@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */ // TODO
+/* eslint-disable @typescript-eslint/no-use-before-define */  // TODO
 import {
   AlleKodeverk,
   ArbeidsgiverOpplysningerPerId,
@@ -27,9 +27,9 @@ import {
 import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
 import { createIntl, formatCurrencyWithKr } from '@navikt/ft-utils';
 import { CircleFillIcon, DownloadIcon } from '@navikt/aksel-icons';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage, RawIntlProvider } from 'react-intl';
 import messages from '../i18n/nb_NO.json';
-import { RawIntlProvider } from 'react-intl';
+import { getKodeverknavnFraKode, KodeverkType } from '@navikt/fp-kodeverk';
 
 const intl = createIntl(messages);
 
@@ -391,7 +391,7 @@ const InntektsmeldingContent = ({
         </InntektsmeldingInfoBlokk>
 
         <InntektsmeldingInfoBlokk
-          tittel={intl.formatMessage({ id: 'InntektsmeldingFaktaPanel.startDato.heading' }, { ytelse: 'TODO' })}
+          tittel={intl.formatMessage({ id: 'InntektsmeldingFaktaPanel.startDato.heading' }, { ytelse: getKodeverknavnFraKode(alleKodeverk, KodeverkType.FAGSAK_YTELSE, fagsak.fagsakYtelseType).toLowerCase()  })}
         >
           <span>
             {inntektsmelding.startDatoPermisjon ? <DateLabel dateString={inntektsmelding.startDatoPermisjon} /> : '-'}
