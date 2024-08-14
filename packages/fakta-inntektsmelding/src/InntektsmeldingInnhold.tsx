@@ -207,8 +207,25 @@ const InntektsmeldingInfoBlokk = ({ tittel, children }: { tittel: string; childr
   );
 };
 
-
 const LastNedPdfKnapp = ({ inntektsmelding, fagsak }: { fagsak: Fagsak; inntektsmelding: Inntektsmelding }) => {
+  return (<Button
+    type="button"
+    onClick={() => {
+      window.open(
+        hentDokumentLenke(fagsak.saksnummer, inntektsmelding.journalpostId, inntektsmelding.dokumentId),
+        '_blank',
+      );
+    }}
+    variant="secondary"
+    size={"small"}
+    icon={<DownloadIcon />}
+  >
+    <FormattedMessage id="InntektsmeldingFaktaPanel.modal.trigger" />
+  </Button>);
+};
+
+// TODO: denne skal taes i bruk når all info fra PDF er tilgjengelig i GUI.
+const LastNedPdfModalKnapp = ({ inntektsmelding, fagsak }: { fagsak: Fagsak; inntektsmelding: Inntektsmelding }) => {
   const ref = useRef<HTMLDialogElement>(null);
   const intl = useIntl();
 
