@@ -9,10 +9,10 @@ import {
 } from '@navikt/fp-types';
 import { InntektsmeldingInnsendingsårsak } from '@navikt/fp-types/src/arbeidOgInntektsmeldingTsType';
 import React, { useState } from 'react';
-import { HStack, SortState, Table } from '@navikt/ds-react';
+import { BodyShort, HStack, SortState, Table } from '@navikt/ds-react';
 import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
 import { createIntl, formatCurrencyWithKr } from '@navikt/ft-utils';
-import { CircleFillIcon } from '@navikt/aksel-icons';
+import { CircleFillIcon, CoffeeIcon } from '@navikt/aksel-icons';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 import messages from '../i18n/nb_NO.json';
 import { InntektsmeldingInnhold } from './InntektsmeldingInnhold';
@@ -67,6 +67,15 @@ export const InntektsmeldingFaktaIndex = ({
       })
     : inntektsmeldinger;
   const ims = sort?.direction === 'ascending' ? sorterteInntektsmeldinger : sorterteInntektsmeldinger.toReversed();
+
+  if (ims.length === 0) {
+    return (
+      <HStack gap="2" justify="center" align="center" className={styles.ingenInntektsmeldinger}>
+        <BodyShort>Ingen inntektsmeldinger er registrert</BodyShort>
+        <CoffeeIcon />
+      </HStack>
+    )
+  }
 
   return (
     <RawIntlProvider value={intl}>

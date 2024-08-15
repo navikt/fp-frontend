@@ -131,3 +131,8 @@ InntektsmeldingDefault.args = {
     },
   ],
 };
+
+export const IngenInntektsmeldinger = Template.bind({});
+IngenInntektsmeldinger.args = {
+  inntektsmeldinger: []
+}
