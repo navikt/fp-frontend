@@ -30,7 +30,7 @@ export const InntektsmeldingInnhold = ({
         </Heading>
         <LastNedPdfKnapp fagsak={fagsak} inntektsmelding={inntektsmelding} />
       </HStack>
-      <HGrid columns={{ md: 3, '2xl': 4 }} gap="8">
+      <HGrid columns={{ "xl": 3, '2xl': 3 }} gap="8">
         <InntektsmeldingInfoBlokk tittel={intl.formatMessage({ id: 'InntektsmeldingFaktaPanel.arbeidsgiver.heading' })}>
           <span>
             <FormattedMessage id="InntektsmeldingFaktaPanel.arbeidsgiver.navn" />:{' '}
@@ -64,6 +64,17 @@ export const InntektsmeldingInnhold = ({
           {/*TODO: Få inn endringsgrunn når dette er med i data-modellen*/}
         </InntektsmeldingInfoBlokk>
 
+        <BehandlingsOversikt
+          alleKodeverk={alleKodeverk}
+          inntektsmelding={inntektsmelding}
+          alleBehandlinger={alleBehandlinger}
+          behandling={behandling}
+        />
+
+
+
+
+
         <Startdato
           ytelse={getKodeverknavnFraKode(alleKodeverk, KodeverkType.FAGSAK_YTELSE, fagsak.fagsakYtelseType)}
           startDatoPermisjon={inntektsmelding.startDatoPermisjon}
@@ -73,16 +84,11 @@ export const InntektsmeldingInnhold = ({
           <KildeSystem inntektsmelding={inntektsmelding} />
         </InntektsmeldingInfoBlokk>
 
+        <BortfalteNaturalYtelser inntektsmelding={inntektsmelding} />
         <InntektsmeldingInfoBlokk tittel={intl.formatMessage({ id: 'InntektsmeldingFaktaPanel.refusjon.heading' })}>
           <Refusjon inntektsmelding={inntektsmelding} />
         </InntektsmeldingInfoBlokk>
-        <BortfalteNaturalYtelser inntektsmelding={inntektsmelding} />
-        <BehandlingsOversikt
-          alleKodeverk={alleKodeverk}
-          inntektsmelding={inntektsmelding}
-          alleBehandlinger={alleBehandlinger}
-          behandling={behandling}
-        />
+
       </HGrid>
     </VStack>
   );
@@ -309,7 +315,7 @@ const BehandlingsOversikt = ({
         {gjeldendeBehandlinger.map(b => (
           <List.Item key={b.uuid}>
             <VStack>
-              <span>{alleKodeverk.BehandlingType.find(({ kode }) => kode === b.type)?.navn}</span>
+              <span>Automatisk {alleKodeverk.BehandlingType.find(({ kode }) => kode === b.type)?.navn}</span>
               <span>
                 <FormattedMessage id="InntektsmeldingFaktaPanel.behandling.opprettet" />{' '}
                 <DateTimeLabel dateTimeString={b.opprettet} />

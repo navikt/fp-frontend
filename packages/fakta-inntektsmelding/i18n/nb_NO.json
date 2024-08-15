@@ -1,4 +1,6 @@
 {
+  "InntektsmeldingFaktaPanel.ingen": "Ingen inntektsmeldinger er registrert",
+
   "InntektsmeldingFaktaPanel.tabell.header.type": "Type",
   "InntektsmeldingFaktaPanel.tabell.header.innsendt": "Innsendt",
   "InntektsmeldingFaktaPanel.tabell.header.arbeidsgiver": "Arbeidsgiver",

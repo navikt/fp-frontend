@@ -70,10 +70,12 @@ export const InntektsmeldingFaktaIndex = ({
 
   if (ims.length === 0) {
     return (
+      <RawIntlProvider value={intl}>
       <HStack gap="2" justify="center" align="center" className={styles.ingenInntektsmeldinger}>
-        <BodyShort>Ingen inntektsmeldinger er registrert</BodyShort>
+        <BodyShort><FormattedMessage id="InntektsmeldingFaktaPanel.ingen" /></BodyShort>
         <CoffeeIcon />
       </HStack>
+      </RawIntlProvider>
     )
   }
 
