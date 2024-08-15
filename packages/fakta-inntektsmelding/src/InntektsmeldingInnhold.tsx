@@ -315,7 +315,7 @@ const BehandlingsOversikt = ({
         {gjeldendeBehandlinger.map(b => (
           <List.Item key={b.uuid}>
             <VStack>
-              <span>Automatisk {alleKodeverk.BehandlingType.find(({ kode }) => kode === b.type)?.navn}</span>
+              <span{alleKodeverk.BehandlingType.find(({ kode }) => kode === b.type)?.navn}</span>
               <span>
                 <FormattedMessage id="InntektsmeldingFaktaPanel.behandling.opprettet" />{' '}
                 <DateTimeLabel dateTimeString={b.opprettet} />
