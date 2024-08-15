@@ -18,7 +18,6 @@ interface OwnProps {
   totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[];
   erForeldrepengerFagsak: boolean;
   erTilbakekreving: boolean;
-  arbeidsforholdHandlingTyper: KodeverkMedNavn[];
   skjemalenkeTyper: KodeverkMedNavn[];
   vurderArsaker: KodeverkMedNavn[];
   faktaOmBeregningTilfeller: KodeverkMedNavn[];
@@ -29,7 +28,6 @@ const TotrinnskontrollSaksbehandlerPanel: FunctionComponent<OwnProps> = ({
   behandling,
   totrinnskontrollSkjermlenkeContext,
   erForeldrepengerFagsak,
-  arbeidsforholdHandlingTyper,
   erTilbakekreving,
   skjemalenkeTyper,
   vurderArsaker,
@@ -68,7 +66,6 @@ const TotrinnskontrollSaksbehandlerPanel: FunctionComponent<OwnProps> = ({
                 const aksjonspunktTexts = getAksjonspunkttekst(
                   erForeldrepengerFagsak,
                   behandling.status,
-                  arbeidsforholdHandlingTyper,
                   faktaOmBeregningTilfeller,
                   erTilbakekreving,
                   aksjonspunkt,

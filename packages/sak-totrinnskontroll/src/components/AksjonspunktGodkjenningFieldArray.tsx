@@ -30,7 +30,6 @@ type OwnProps = {
   totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[];
   readOnly: boolean;
   erForeldrepengerFagsak: boolean;
-  arbeidsforholdHandlingTyper: KodeverkMedNavn[];
   erTilbakekreving: boolean;
   skjemalenkeTyper: KodeverkMedNavn[];
   faktaOmBeregningTilfeller: KodeverkMedNavn[];
@@ -42,7 +41,6 @@ const AksjonspunktGodkjenningFieldArray: FunctionComponent<OwnProps> = ({
   totrinnskontrollSkjermlenkeContext,
   readOnly,
   erForeldrepengerFagsak,
-  arbeidsforholdHandlingTyper,
   erTilbakekreving,
   skjemalenkeTyper,
   faktaOmBeregningTilfeller,
@@ -74,7 +72,6 @@ const AksjonspunktGodkjenningFieldArray: FunctionComponent<OwnProps> = ({
         const aksjonspunktText = getAksjonspunkttekst(
           erForeldrepengerFagsak,
           behandling.status,
-          arbeidsforholdHandlingTyper,
           faktaOmBeregningTilfeller,
           erTilbakekreving,
           totrinnskontrollAksjonspunkt,

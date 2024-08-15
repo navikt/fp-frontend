@@ -12,15 +12,6 @@ import getAksjonspunkttekst from './aksjonspunktTekstUtleder';
 
 const behandlingStatusFVED = behandlingStatusCodes.FATTER_VEDTAK;
 
-const arbeidsforholdHandlingTyper = [
-  { kode: 'BRUK', navn: 'aaa', kodeverk: '' },
-  { kode: 'NYTT_ARBEIDSFORHOLD', navn: 'bbb', kodeverk: '' },
-  { kode: 'BRUK_UTEN_INNTEKTSMELDING', navn: 'ccc', kodeverk: '' },
-  { kode: 'IKKE_BRUK', navn: 'ddd', kodeverk: '' },
-  { kode: 'SLÅTT_SAMMEN_MED_ANNET', navn: 'eee', kodeverk: '' },
-  { kode: 'LAGT_TIL_AV_SAKSBEHANDLER', navn: 'fff', kodeverk: '' },
-];
-
 const erTilbakekreving = false;
 
 const behandlingStatus = behandlingStatusCodes.OPPRETTET;
@@ -36,7 +27,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const message = getAksjonspunkttekst(
       true,
       behandlingStatus,
-      arbeidsforholdHandlingTyper,
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
@@ -52,7 +42,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const message = getAksjonspunkttekst(
       true,
       behandlingStatus,
-      arbeidsforholdHandlingTyper,
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
@@ -68,7 +57,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const message = getAksjonspunkttekst(
       true,
       behandlingStatus,
-      arbeidsforholdHandlingTyper,
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
@@ -84,7 +72,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const message = getAksjonspunkttekst(
       true,
       behandlingStatus,
-      arbeidsforholdHandlingTyper,
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
@@ -101,7 +88,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const message = getAksjonspunkttekst(
       true,
       behandlingStatus,
-      arbeidsforholdHandlingTyper,
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
@@ -117,7 +103,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const message = getAksjonspunkttekst(
       true,
       behandlingStatus,
-      arbeidsforholdHandlingTyper,
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
@@ -134,7 +119,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const message = getAksjonspunkttekst(
       true,
       behandlingStatus,
-      arbeidsforholdHandlingTyper,
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
@@ -150,7 +134,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const message = getAksjonspunkttekst(
       true,
       behandlingStatus,
-      arbeidsforholdHandlingTyper,
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
@@ -166,7 +149,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const message = getAksjonspunkttekst(
       true,
       behandlingStatus,
-      arbeidsforholdHandlingTyper,
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
@@ -182,7 +164,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const message = getAksjonspunkttekst(
       true,
       behandlingStatus,
-      arbeidsforholdHandlingTyper,
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
@@ -199,7 +180,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const message = getAksjonspunkttekst(
       true,
       behandlingStatus,
-      arbeidsforholdHandlingTyper,
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
@@ -215,7 +195,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const message = getAksjonspunkttekst(
       false,
       behandlingStatus,
-      arbeidsforholdHandlingTyper,
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
@@ -231,7 +210,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const message = getAksjonspunkttekst(
       true,
       behandlingStatus,
-      arbeidsforholdHandlingTyper,
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
@@ -247,7 +225,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const message = getAksjonspunkttekst(
       true,
       behandlingStatus,
-      arbeidsforholdHandlingTyper,
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
@@ -264,7 +241,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const message = getAksjonspunkttekst(
       true,
       behandlingStatus,
-      arbeidsforholdHandlingTyper,
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
@@ -280,7 +256,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const message = getAksjonspunkttekst(
       true,
       behandlingStatus,
-      arbeidsforholdHandlingTyper,
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
@@ -296,7 +271,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const message = getAksjonspunkttekst(
       true,
       behandlingStatus,
-      arbeidsforholdHandlingTyper,
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
@@ -313,7 +287,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const message = getAksjonspunkttekst(
       true,
       behandlingStatus,
-      arbeidsforholdHandlingTyper,
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
@@ -329,7 +302,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const message = getAksjonspunkttekst(
       true,
       behandlingStatus,
-      arbeidsforholdHandlingTyper,
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
@@ -345,7 +317,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const message = getAksjonspunkttekst(
       true,
       behandlingStatus,
-      arbeidsforholdHandlingTyper,
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
@@ -362,7 +333,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const message = getAksjonspunkttekst(
       true,
       behandlingStatus,
-      arbeidsforholdHandlingTyper,
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
@@ -378,7 +348,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const message = getAksjonspunkttekst(
       true,
       behandlingStatus,
-      arbeidsforholdHandlingTyper,
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
@@ -394,7 +363,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const message = getAksjonspunkttekst(
       true,
       behandlingStatus,
-      arbeidsforholdHandlingTyper,
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
@@ -410,7 +378,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const message = getAksjonspunkttekst(
       true,
       behandlingStatus,
-      arbeidsforholdHandlingTyper,
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
@@ -426,7 +393,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const message = getAksjonspunkttekst(
       true,
       behandlingStatus,
-      arbeidsforholdHandlingTyper,
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
@@ -444,7 +410,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const message = getAksjonspunkttekst(
       true,
       behandlingStatus,
-      arbeidsforholdHandlingTyper,
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
@@ -461,7 +426,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const message = getAksjonspunkttekst(
       true,
       behandlingStatus,
-      arbeidsforholdHandlingTyper,
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
@@ -489,7 +453,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const message = getAksjonspunkttekst(
       true,
       behandlingStatus,
-      arbeidsforholdHandlingTyper,
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
@@ -516,7 +479,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const message = getAksjonspunkttekst(
       true,
       behandlingStatus,
-      arbeidsforholdHandlingTyper,
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
@@ -544,7 +506,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const message = getAksjonspunkttekst(
       true,
       behandlingStatus,
-      arbeidsforholdHandlingTyper,
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
@@ -571,7 +532,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const message = getAksjonspunkttekst(
       true,
       behandlingStatus,
-      arbeidsforholdHandlingTyper,
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
@@ -599,7 +559,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const message = getAksjonspunkttekst(
       true,
       behandlingStatus,
-      arbeidsforholdHandlingTyper,
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
@@ -626,7 +585,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const message = getAksjonspunkttekst(
       true,
       behandlingStatus,
-      arbeidsforholdHandlingTyper,
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
@@ -654,7 +612,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const message = getAksjonspunkttekst(
       true,
       behandlingStatus,
-      arbeidsforholdHandlingTyper,
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
@@ -681,7 +638,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const message = getAksjonspunkttekst(
       true,
       behandlingStatus,
-      arbeidsforholdHandlingTyper,
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
@@ -700,7 +656,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const behandlingsresultat = {
       type: behandlingResultatType.KLAGE_MEDHOLD,
     } as Behandlingsresultat;
-    const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], [], false, aksjonspunkt, behandlingsresultat);
+    const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], false, aksjonspunkt, behandlingsresultat);
     expect(message[0].props.id).toEqual('ToTrinnsForm.Klage.OmgjortTilGunst');
   });
   // Klage avslag
@@ -717,7 +673,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const message = getAksjonspunkttekst(
       true,
       behandlingStatusFVED,
-      [],
       faktaOmBeregningTilfeller,
       false,
       aksjonspunkt,
@@ -735,7 +690,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
       besluttersBegrunnelse: 'begrunnelse',
       totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], [], false, aksjonspunkt, behandlingsresultat);
+    const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], false, aksjonspunkt, behandlingsresultat);
     expect(message[0].props.id).toEqual('ToTrinnsForm.Klage.Avvist');
   });
   // Ikke fastsatt Engangsstønad
@@ -748,7 +703,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
       besluttersBegrunnelse: 'begrunnelse',
       totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], [], false, aksjonspunkt, behandlingsresultat);
+    const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], false, aksjonspunkt, behandlingsresultat);
     expect(message[0].props.id).toEqual('ToTrinnsForm.Klage.StadfesteYtelsesVedtak');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5035 avslag ytelsesvedtak stadfestet', () => {
@@ -760,7 +715,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
       besluttersBegrunnelse: 'begrunnelse',
       totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], [], false, aksjonspunkt, behandlingsresultat);
+    const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], false, aksjonspunkt, behandlingsresultat);
     expect(message[0].props.id).toEqual('ToTrinnsForm.Klage.StadfesteYtelsesVedtak');
   });
 
@@ -779,14 +734,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
       totrinnskontrollGodkjent: false,
       beregningDto,
     } as TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(
-      true,
-      behandlingStatus,
-      arbeidsforholdHandlingTyper,
-      beregningTilfeller,
-      erTilbakekreving,
-      aksjonspunkt,
-    );
+    const message = getAksjonspunkttekst(true, behandlingStatus, beregningTilfeller, erTilbakekreving, aksjonspunkt);
     expect(message[0]).toEqual(
       <div key="Vurder tidsbegrenset arbeidsforhold">Vurder tidsbegrenset arbeidsforhold</div>,
     );
@@ -806,14 +754,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
       totrinnskontrollGodkjent: false,
       beregningDto,
     } as TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(
-      true,
-      behandlingStatus,
-      arbeidsforholdHandlingTyper,
-      beregningTilfeller,
-      erTilbakekreving,
-      aksjonspunkt,
-    );
+    const message = getAksjonspunkttekst(true, behandlingStatus, beregningTilfeller, erTilbakekreving, aksjonspunkt);
     expect(message[0]).toEqual(<div key="Vurder at og fl">Vurder at og fl</div>);
   });
   it('skal vise korrekte tekster for kombinasjon av aksjonspunkt 5058', () => {
@@ -841,14 +782,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
       totrinnskontrollGodkjent: false,
       beregningDto,
     } as TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(
-      true,
-      behandlingStatus,
-      arbeidsforholdHandlingTyper,
-      beregningTilfeller,
-      erTilbakekreving,
-      aksjonspunkt,
-    );
+    const message = getAksjonspunkttekst(true, behandlingStatus, beregningTilfeller, erTilbakekreving, aksjonspunkt);
     expect(message[0]).toEqual(<div key="Vurder besteberegning">Vurder besteberegning</div>);
     expect(message[1]).toEqual(
       <div key="Vurder tidsbegrenset arbeidsforhold">Vurder tidsbegrenset arbeidsforhold</div>,
