@@ -16,7 +16,7 @@ import { CircleFillIcon } from '@navikt/aksel-icons';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 import messages from '../i18n/nb_NO.json';
 import { InntektsmeldingInnhold } from './InntektsmeldingInnhold';
-import styles from "./inntektsmeldingFakta.module.css";
+import styles from './inntektsmeldingFakta.module.css';
 const intl = createIntl(messages);
 
 export type InntektsmeldingFaktaProps = {
@@ -95,7 +95,7 @@ export const InntektsmeldingFaktaIndex = ({
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {ims.map((inntektsmelding) => {
+          {ims.map(inntektsmelding => {
             return (
               <Table.ExpandableRow
                 expandOnRowClick
@@ -138,7 +138,6 @@ export const InntektsmeldingFaktaIndex = ({
     </RawIntlProvider>
   );
 };
-
 
 const sorterInntektsmeldinger = ({
   inntektsmeldinger,
@@ -227,9 +226,3 @@ const InntektsmeldingStatus = ({
     </HStack>
   );
 };
-
-
-
-
-
-

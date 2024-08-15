@@ -42,7 +42,7 @@ InntektsmeldingDefault.args = {
   alleKodeverk: alleKodeverk as any,
   fagsak: {
     saksnummer: '123',
-    fagsakYtelseType: "FP",
+    fagsakYtelseType: 'FP',
   } as Fagsak,
   alleBehandlinger: [
     {

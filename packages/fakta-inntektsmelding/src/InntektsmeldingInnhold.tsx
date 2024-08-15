@@ -10,22 +10,19 @@ import { formatCurrencyWithKr } from '@navikt/ft-utils';
 import { NaturalytelseType } from '@navikt/fp-types/src/arbeidOgInntektsmeldingTsType';
 import { hentDokumentLenke } from '@navikt/fp-konstanter';
 import { DownloadIcon } from '@navikt/aksel-icons';
-import styles from "./inntektsmeldingFakta.module.css";
+import styles from './inntektsmeldingFakta.module.css';
 export const InntektsmeldingInnhold = ({
-                                  inntektsmelding,
-                                  arbeidsgiverOpplysningerPerId,
-                                  fagsak,
-                                  alleBehandlinger,
-                                  behandling,
-                                  alleKodeverk,
-                                }: { inntektsmelding: Inntektsmelding } & InntektsmeldingFaktaProps) => {
+  inntektsmelding,
+  arbeidsgiverOpplysningerPerId,
+  fagsak,
+  alleBehandlinger,
+  behandling,
+  alleKodeverk,
+}: { inntektsmelding: Inntektsmelding } & InntektsmeldingFaktaProps) => {
   const intl = useIntl();
 
   return (
-    <VStack
-      gap="4"
-      className={styles.container}
-    >
+    <VStack gap="4" className={styles.container}>
       <HStack gap="4" justify="space-between" align="start">
         <Heading level="3" size="small">
           <FormattedMessage id="InntektsmeldingFaktaPanel.innsendingstidspunkt" />{' '}
@@ -67,21 +64,16 @@ export const InntektsmeldingInnhold = ({
           {/*TODO: Få inn endringsgrunn når dette er med i data-modellen*/}
         </InntektsmeldingInfoBlokk>
 
-        <Startdato ytelse={getKodeverknavnFraKode(
-          alleKodeverk,
-          KodeverkType.FAGSAK_YTELSE,
-          fagsak.fagsakYtelseType,
-        )} startDatoPermisjon={inntektsmelding.startDatoPermisjon}/>
+        <Startdato
+          ytelse={getKodeverknavnFraKode(alleKodeverk, KodeverkType.FAGSAK_YTELSE, fagsak.fagsakYtelseType)}
+          startDatoPermisjon={inntektsmelding.startDatoPermisjon}
+        />
 
-        <InntektsmeldingInfoBlokk
-          tittel={intl.formatMessage({ id: 'InntektsmeldingFaktaPanel.kilde.heading' })}
-        >
+        <InntektsmeldingInfoBlokk tittel={intl.formatMessage({ id: 'InntektsmeldingFaktaPanel.kilde.heading' })}>
           <KildeSystem inntektsmelding={inntektsmelding} />
         </InntektsmeldingInfoBlokk>
 
-        <InntektsmeldingInfoBlokk
-          tittel={intl.formatMessage({ id: 'InntektsmeldingFaktaPanel.refusjon.heading' })}
-        >
+        <InntektsmeldingInfoBlokk tittel={intl.formatMessage({ id: 'InntektsmeldingFaktaPanel.refusjon.heading' })}>
           <Refusjon inntektsmelding={inntektsmelding} />
         </InntektsmeldingInfoBlokk>
         <BortfalteNaturalYtelser inntektsmelding={inntektsmelding} />
@@ -96,7 +88,7 @@ export const InntektsmeldingInnhold = ({
   );
 };
 
-const Startdato =  ({ startDatoPermisjon, ytelse }: { startDatoPermisjon?: string; ytelse: string }) => {
+const Startdato = ({ startDatoPermisjon, ytelse }: { startDatoPermisjon?: string; ytelse: string }) => {
   const intl = useIntl();
   if (!startDatoPermisjon) {
     return null;
@@ -111,15 +103,13 @@ const Startdato =  ({ startDatoPermisjon, ytelse }: { startDatoPermisjon?: strin
         },
       )}
     >
-          <span>
-            {startDatoPermisjon ? <DateLabel dateString={startDatoPermisjon} /> : '-'}
-          </span>
+      <span>{startDatoPermisjon ? <DateLabel dateString={startDatoPermisjon} /> : '-'}</span>
       <span>
-            <FormattedMessage id="InntektsmeldingFaktaPanel.startDato.fraArbeidsgiver" />
-          </span>
+        <FormattedMessage id="InntektsmeldingFaktaPanel.startDato.fraArbeidsgiver" />
+      </span>
     </InntektsmeldingInfoBlokk>
-  )
-}
+  );
+};
 
 const KildeSystem = ({ inntektsmelding }: { inntektsmelding: Inntektsmelding }) => {
   if (inntektsmelding.kildeSystem.toUpperCase() === 'NAV_NO') {
@@ -175,7 +165,6 @@ const Refusjon = ({ inntektsmelding }: { inntektsmelding: Inntektsmelding }) => 
   );
 };
 
-
 const BortfalteNaturalYtelser = ({ inntektsmelding }: { inntektsmelding: Inntektsmelding }) => {
   const intl = useIntl();
   return (
@@ -219,20 +208,22 @@ const InntektsmeldingInfoBlokk = ({ tittel, children }: { tittel: string; childr
 };
 
 const LastNedPdfKnapp = ({ inntektsmelding, fagsak }: { fagsak: Fagsak; inntektsmelding: Inntektsmelding }) => {
-  return (<Button
-    type="button"
-    onClick={() => {
-      window.open(
-        hentDokumentLenke(fagsak.saksnummer, inntektsmelding.journalpostId, inntektsmelding.dokumentId),
-        '_blank',
-      );
-    }}
-    variant="secondary"
-    size={"small"}
-    icon={<DownloadIcon />}
-  >
-    <FormattedMessage id="InntektsmeldingFaktaPanel.modal.trigger" />
-  </Button>);
+  return (
+    <Button
+      type="button"
+      onClick={() => {
+        window.open(
+          hentDokumentLenke(fagsak.saksnummer, inntektsmelding.journalpostId, inntektsmelding.dokumentId),
+          '_blank',
+        );
+      }}
+      variant="secondary"
+      size={'small'}
+      icon={<DownloadIcon />}
+    >
+      <FormattedMessage id="InntektsmeldingFaktaPanel.modal.trigger" />
+    </Button>
+  );
 };
 
 // TODO: denne skal taes i bruk når all info fra PDF er tilgjengelig i GUI.
@@ -277,11 +268,11 @@ const LastNedPdfModalKnapp = ({ inntektsmelding, fagsak }: { fagsak: Fagsak; inn
 };
 
 const BehandlingsOversikt = ({
-                               inntektsmelding,
-                               behandling,
-                               alleBehandlinger,
-                               alleKodeverk,
-                             }: {
+  inntektsmelding,
+  behandling,
+  alleBehandlinger,
+  alleKodeverk,
+}: {
   inntektsmelding: Inntektsmelding;
   behandling: Behandling;
   alleBehandlinger: BehandlingAppKontekst[];
