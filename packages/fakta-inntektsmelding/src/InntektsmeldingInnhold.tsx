@@ -125,7 +125,7 @@ const KildeSystem = ({ inntektsmelding }: { inntektsmelding: Inntektsmelding }) 
   if (inntektsmelding.kildeSystem.toUpperCase() === 'NAV_NO') {
     return <FormattedMessage id="InntektsmeldingFaktaPanel.kilde.nav" />;
   }
-  if (inntektsmelding.kildeSystem.toUpperCase() === 'ALTINN') {
+  if (inntektsmelding.kildeSystem.toUpperCase().includes('ALTINN')) {
     return <FormattedMessage id="InntektsmeldingFaktaPanel.kilde.altinn" />;
   }
 
