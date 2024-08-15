@@ -294,7 +294,7 @@ const BehandlingsOversikt = ({
       return (
         <FormattedMessage
           id="InntektsmeldingFaktaPanel.behandling.bruktIDenneOgFlere"
-          values={{ antallBehandlinger }}
+          values={{ antallBehandlinger: antallBehandlinger - 1 }}
         />
       );
     }
