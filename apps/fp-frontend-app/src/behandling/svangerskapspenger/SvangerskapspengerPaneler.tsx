@@ -31,7 +31,7 @@ import VedtakSvpProsessStegInitPanel from './prosessPaneler/VedtakSvpProsessSteg
 import PermisjonFaktaInitPanel from '../fellesPaneler/fakta/PermisjonFaktaInitPanel';
 import ProsessPanelInitProps, { ProsessPanelExtraInitProps } from '../felles/typer/prosessPanelInitProps';
 import FaktaPanelInitProps from '../felles/typer/faktaPanelInitProps';
-import { InntektsmeldingerFaktaInitPanel } from '../fellesPaneler/fakta/InntektsmeldingerFaktaInitPanel';
+import InntektsmeldingerFaktaInitPanel from '../fellesPaneler/fakta/InntektsmeldingerFaktaInitPanel';
 
 interface OwnProps {
   alleBehandlinger: BehandlingAppKontekst[];
