@@ -1,4 +1,4 @@
-FROM gcr.io/distroless/nodejs18-debian11:nonroot
+FROM gcr.io/distroless/nodejs22-debian12
 
 LABEL org.opencontainers.image.source=https://github.com/navikt/fp-frontend
 ENV TZ="Europe/Oslo"
