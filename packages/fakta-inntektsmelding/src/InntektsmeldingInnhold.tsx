@@ -50,7 +50,7 @@ export const InntektsmeldingInnhold = ({
           </span>
           <HStack align="start" gap="2">
             <span>
-              <FormattedMessage id="InntektsmeldingFaktaPanel.kontaktperson.telefon" />{' '}
+              <FormattedMessage id="InntektsmeldingFaktaPanel.kontaktperson.telefon" />:{' '}
               {inntektsmelding.kontaktpersonNummer}
             </span>
             <CopyButton size="xsmall" copyText={inntektsmelding.kontaktpersonNummer} />

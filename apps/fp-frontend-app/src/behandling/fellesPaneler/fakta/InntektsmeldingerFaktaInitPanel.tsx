@@ -25,7 +25,7 @@ type OwnProps = {
   fagsak: Fagsak;
 };
 
-export const InntektsmeldingerFaktaInitPanel = ({
+const InntektsmeldingerFaktaInitPanel = ({
   arbeidsgiverOpplysningerPerId,
   fagsak,
   alleBehandlinger,
@@ -48,3 +48,5 @@ export const InntektsmeldingerFaktaInitPanel = ({
     )}
   />
 );
+
+export default InntektsmeldingerFaktaInitPanel;

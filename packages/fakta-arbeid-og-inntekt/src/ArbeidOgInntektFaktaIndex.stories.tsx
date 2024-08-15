@@ -280,12 +280,7 @@ AvklarManglendeArbeidsforhold.args = {
         dokumentId: '2',
         motattDato: '2021-12-06',
         årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD,
-        innsendingstidspunkt: '2021-12-06T00:00:00',
-        kildeSystem: "Altinn",
-        bortfalteNaturalytelser: [],
-        refusjonsperioder: [],
-        innsendingsårsak: "NY",
-        behandlingsIdeer: []
+        ...fellesInntektsmeldingFelter
       },
     ],
     inntekter: [],
