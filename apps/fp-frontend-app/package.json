@@ -35,6 +35,7 @@
     "@navikt/fp-fakta-besteberegning": "workspace:*",
     "@navikt/fp-fakta-felles": "workspace:*",
     "@navikt/fp-fakta-fodsel": "workspace:*",
+    "@navikt/fp-fakta-inntektsmelding": "workspace:*",
     "@navikt/fp-fakta-medlemskap": "workspace:*",
     "@navikt/fp-fakta-omsorg": "workspace:*",
     "@navikt/fp-fakta-omsorg-og-foreldreansvar": "workspace:*",
