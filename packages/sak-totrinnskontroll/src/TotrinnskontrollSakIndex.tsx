@@ -31,8 +31,6 @@ const sorterteSkjermlenkeCodesForTilbakekreving = [
   skjermlenkeCodes.VEDTAK,
 ];
 
-const TOMT_KODEVERK = [] as KodeverkMedNavn[];
-
 const getArsaker = (apData: AksjonspunktGodkjenningData): string[] => {
   const arsaker = [];
   if (apData.feilFakta) {
@@ -52,11 +50,7 @@ const getArsaker = (apData: AksjonspunktGodkjenningData): string[] => {
   }
   return arsaker;
 };
-
-const finnArbeidsforholdHandlingTyper = (alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving) =>
-  KodeverkType.ARBEIDSFORHOLD_HANDLING_TYPE in alleKodeverk
-    ? (alleKodeverk as AlleKodeverk)[KodeverkType.ARBEIDSFORHOLD_HANDLING_TYPE]
-    : TOMT_KODEVERK;
+const TOMT_KODEVERK = [] as KodeverkMedNavn[];
 const finnFaktaOmBeregningTilfeller = (alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving) =>
   KodeverkType.FAKTA_OM_BEREGNING_TILFELLE in alleKodeverk
     ? (alleKodeverk as AlleKodeverk)[KodeverkType.FAKTA_OM_BEREGNING_TILFELLE]
@@ -154,7 +148,6 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
   const erStatusFatterVedtak = behandling.status === BehandlingStatus.FATTER_VEDTAK;
   const skjemalenkeTyper = alleKodeverk[KodeverkType.SKJERMLENKE_TYPE];
   const vurderArsaker = alleKodeverk[KodeverkType.VURDER_AARSAK];
-  const arbeidsforholdHandlingTyper = finnArbeidsforholdHandlingTyper(alleKodeverk);
   const faktaOmBeregningTilfeller = finnFaktaOmBeregningTilfeller(alleKodeverk);
 
   return (
@@ -167,7 +160,6 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
           onSubmit={submitHandler}
           forhandsvisVedtaksbrev={forhandsvisVedtaksbrev}
           erForeldrepengerFagsak={fagsakYtelseType === FagsakYtelseType.FORELDREPENGER}
-          arbeidsforholdHandlingTyper={arbeidsforholdHandlingTyper}
           skjemalenkeTyper={skjemalenkeTyper}
           erBehandlingEtterKlage={erBehandlingEtterKlage}
           faktaOmBeregningTilfeller={faktaOmBeregningTilfeller}
@@ -183,7 +175,6 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
           totrinnskontrollSkjermlenkeContext={sorterteTotrinnskontrollSkjermlenkeContext}
           erForeldrepengerFagsak={fagsakYtelseType === FagsakYtelseType.FORELDREPENGER}
           erTilbakekreving={erTilbakekreving}
-          arbeidsforholdHandlingTyper={arbeidsforholdHandlingTyper}
           skjemalenkeTyper={skjemalenkeTyper}
           lagLenke={lagLenke}
           vurderArsaker={vurderArsaker}

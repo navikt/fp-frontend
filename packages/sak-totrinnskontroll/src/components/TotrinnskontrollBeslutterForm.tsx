@@ -86,7 +86,6 @@ interface OwnProps {
   readOnly: boolean;
   erTilbakekreving: boolean;
   erForeldrepengerFagsak: boolean;
-  arbeidsforholdHandlingTyper: KodeverkMedNavn[];
   skjemalenkeTyper: KodeverkMedNavn[];
   erBehandlingEtterKlage: boolean;
   faktaOmBeregningTilfeller: KodeverkMedNavn[];
@@ -108,7 +107,6 @@ export const TotrinnskontrollBeslutterForm: FunctionComponent<OwnProps> = ({
   readOnly,
   erBehandlingEtterKlage,
   erForeldrepengerFagsak,
-  arbeidsforholdHandlingTyper,
   skjemalenkeTyper,
   erTilbakekreving,
   totrinnskontrollSkjermlenkeContext,
@@ -161,7 +159,6 @@ export const TotrinnskontrollBeslutterForm: FunctionComponent<OwnProps> = ({
         behandling={behandling}
         erForeldrepengerFagsak={erForeldrepengerFagsak}
         erTilbakekreving={erTilbakekreving}
-        arbeidsforholdHandlingTyper={arbeidsforholdHandlingTyper}
         readOnly={readOnly}
         totrinnskontrollSkjermlenkeContext={totrinnskontrollSkjermlenkeContext}
         skjemalenkeTyper={skjemalenkeTyper}

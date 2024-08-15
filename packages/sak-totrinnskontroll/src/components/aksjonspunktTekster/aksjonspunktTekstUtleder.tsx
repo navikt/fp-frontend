@@ -48,10 +48,7 @@ const buildUttakText = (aksjonspunkt: TotrinnskontrollAksjonspunkt): ReactElemen
           aksjonspunkt.aksjonspunktKode === AksjonspunktCode.OVERSTYRING_AV_UTTAKPERIODER
         ) {
           id = 'ToTrinnsForm.OverstyrUttak.PeriodeEndret';
-        } else if (
-          uttakperiode.erEndret &&
-          aksjonspunkt.aksjonspunktKode === AksjonspunktCode.OVERSTYR_FAKTA_UTTAK
-        ) {
+        } else if (uttakperiode.erEndret && aksjonspunkt.aksjonspunktKode === AksjonspunktCode.OVERSTYR_FAKTA_UTTAK) {
           id = 'ToTrinnsForm.OverstyrUttak.PeriodeEndret';
         } else if (uttakperiode.erEndret) {
           id = 'ToTrinnsForm.AvklarUttak.PeriodeEndret';
@@ -149,7 +146,6 @@ const erKlageAksjonspunkt = (aksjonspunkt: TotrinnskontrollAksjonspunkt): boolea
 const getAksjonspunkttekst = (
   isForeldrepenger: boolean,
   behandlingStatus: string,
-  arbeidsforholdHandlingTyper: KodeverkMedNavn[],
   faktaOmBeregningTilfeller: KodeverkMedNavn[],
   erTilbakekreving: boolean,
   aksjonspunkt: TotrinnskontrollAksjonspunkt,
