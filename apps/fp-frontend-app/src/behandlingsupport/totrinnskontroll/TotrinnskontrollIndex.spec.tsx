@@ -28,7 +28,7 @@ describe('<TotrinnskontrollIndex>', () => {
       aksjonspunktKode,
       opptjeningAktiviteter: [],
       vurderPaNyttArsaker: [],
-    } as TotrinnskontrollAksjonspunkt);
+    }) as TotrinnskontrollAksjonspunkt;
 
   const getTotrinnsaksjonspunkterFoedsel = () => ({
     skjermlenkeType: 'FAKTA_OM_FOEDSEL',

@@ -14,7 +14,8 @@ import OverstyringPanelDef from '../../../felles/prosess/OverstyringPanelDef';
 
 const AKSJONSPUNKT_TEKST_PER_KODE = {
   [AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN]: 'SRBVilkarForm.VurderSammeBarn',
-  [AksjonspunktCode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN]: 'SRBVilkarForm.VurderAnnenForelderSammeBarn',
+  [AksjonspunktCode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN]:
+    'SRBVilkarForm.VurderAnnenForelderSammeBarn',
 } as Record<string, string>;
 
 const hentAksjonspunktTekst = (intl: IntlShape, aksjonspunkter: Aksjonspunkt[] = []): string =>

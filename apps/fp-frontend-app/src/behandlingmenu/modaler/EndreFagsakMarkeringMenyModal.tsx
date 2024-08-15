@@ -20,8 +20,9 @@ const EndreFagsakMarkeringMenyModal: FunctionComponent<OwnProps> = ({
   hentOgSettBehandling,
   lukkModal,
 }) => {
-  const fagsakMarkeringerKodeverk = useFpSakKodeverk(KodeverkType.FAGSAK_MARKERING)
-    .sort((a, b) => a.navn.localeCompare(b.navn));
+  const fagsakMarkeringerKodeverk = useFpSakKodeverk(KodeverkType.FAGSAK_MARKERING).sort((a, b) =>
+    a.navn.localeCompare(b.navn),
+  );
 
   const { startRequest: endreSaksmerking } = restFagsakApiHooks.useRestApiRunner(FagsakApiKeys.ENDRE_SAK_MARKERING);
 

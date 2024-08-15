@@ -7,6 +7,7 @@ enum FaktaPanelCode {
   BESTEBEREGNING = 'besteberegning',
   DEFAULT = 'default',
   FORDELING = 'fordeling',
+  INNTEKTSMELDINGER = "inntektsmeldinger",
   FEILUTBETALING = 'feilutbetaling',
   FODSELSVILKARET = 'foedselsvilkaaret',
   FODSELTILRETTELEGGING = 'fodseltilrettelegging',

@@ -166,6 +166,7 @@ const BehandlingPanelerIndex: FunctionComponent<OwnProps> = ({
             <Suspense fallback={<LoadingPanel />}>
               <ErrorBoundary errorMessageCallback={addErrorMessage}>
                 <ForeldrepengerPaneler
+                  alleBehandlinger={alleBehandlinger}
                   behandling={behandling}
                   fagsak={fagsak}
                   valgtProsessSteg={query.punkt}
@@ -185,6 +186,7 @@ const BehandlingPanelerIndex: FunctionComponent<OwnProps> = ({
             <Suspense fallback={<LoadingPanel />}>
               <ErrorBoundary errorMessageCallback={addErrorMessage}>
                 <SvangerskapspengerPaneler
+                  alleBehandlinger={alleBehandlinger}
                   behandling={behandling}
                   fagsak={fagsak}
                   valgtProsessSteg={query.punkt}
