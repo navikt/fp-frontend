@@ -14,7 +14,6 @@ import {
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Aksjonspunkt, KlageVurdering, AlleKodeverk, Behandlingsresultat } from '@navikt/fp-types';
 import {
-  BekreftVedtakUtenTotrinnskontrollAp,
   ForeslaVedtakAp,
   ForeslaVedtakManueltAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -39,7 +38,7 @@ const getPreviewVedtakCallback = (previewVedtakCallback: (data: ForhandsvisData)
     gjelderVedtak: true,
   });
 
-type AksjonspunktData = Array<ForeslaVedtakAp | ForeslaVedtakManueltAp | BekreftVedtakUtenTotrinnskontrollAp>;
+type AksjonspunktData = Array<ForeslaVedtakAp | ForeslaVedtakManueltAp>;
 
 const getAvvisningsAarsaker = (klageVurderingResultat: KlageVurdering): string[] => {
   if (klageVurderingResultat) {
@@ -136,7 +135,6 @@ const VedtakKlageForm: FunctionComponent<OwnProps> = ({
         apCode,
         AksjonspunktCode.FORESLA_VEDTAK,
         AksjonspunktCode.FORESLA_VEDTAK_MANUELT,
-        AksjonspunktCode.VEDTAK_UTEN_TOTRINNSKONTROLL,
       ),
     }));
 

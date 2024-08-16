@@ -98,7 +98,6 @@ const getForhandsvisCallback =
 
 const IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER = [
   AksjonspunktCode.FATTER_VEDTAK,
-  AksjonspunktCode.VEDTAK_UTEN_TOTRINNSKONTROLL,
   AksjonspunktCode.VURDERE_ANNEN_YTELSE,
   AksjonspunktCode.VURDERE_DOKUMENT,
   AksjonspunktCode.VURDERE_INNTEKTSMELDING_KLAGE,

@@ -27,7 +27,6 @@ import { decodeHtmlEntity } from '@navikt/ft-utils';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import { Form } from '@navikt/ft-form-hooks';
 import {
-  BekreftVedtakUtenTotrinnskontrollAp,
   ForeslaVedtakAp,
   ForeslaVedtakManueltAp,
   VurdereAnnenYtelseForVedtakAp,
@@ -142,7 +141,6 @@ const transformValues = (values: FormValues): VedtakAksjonspunkter[] =>
       apCode,
       AksjonspunktCode.FORESLA_VEDTAK,
       AksjonspunktCode.FORESLA_VEDTAK_MANUELT,
-      AksjonspunktCode.VEDTAK_UTEN_TOTRINNSKONTROLL,
       AksjonspunktCode.VURDERE_ANNEN_YTELSE,
       AksjonspunktCode.VURDERE_DOKUMENT,
     ),
@@ -176,7 +174,6 @@ const buildInitialValues = (
 type VedtakAksjonspunkter =
   | ForeslaVedtakAp
   | ForeslaVedtakManueltAp
-  | BekreftVedtakUtenTotrinnskontrollAp
   | VurdereAnnenYtelseForVedtakAp
   | VurdereDokumentForVedtakAp;
 

@@ -44,7 +44,6 @@ export type { default as Foreldreansvarsvilkar1Ap } from './src/prosess/Foreldre
 export type { default as Foreldreansvarsvilkar2Ap } from './src/prosess/Foreldreansvarsvilkar2Ap';
 export type { default as ForeslaVedtakAp } from './src/prosess/ForeslaVedtakAp';
 export type { default as ForeslaVedtakManueltAp } from './src/prosess/ForeslaVedtakManueltAp';
-export type { default as BekreftVedtakUtenTotrinnskontrollAp } from './src/prosess/BekreftVedtakUtenTotrinnskontrollAp';
 export type { default as OverstyringBeregningAp } from './src/prosess/OverstyringBeregningAp';
 export type { default as VurderFeilutbetalingAp } from './src/prosess/VurderFeilutbetalingAp';
 export type { default as KontrollerEtterbetalingTilSøkerAP } from './src/prosess/KontrollerEtterbetalingTilSøkerAP';
