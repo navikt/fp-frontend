@@ -70,7 +70,6 @@ const AKSJONSPUNKT_KODER = [
   AksjonspunktCode.FORESLA_VEDTAK,
   AksjonspunktCode.FATTER_VEDTAK,
   AksjonspunktCode.FORESLA_VEDTAK_MANUELT,
-  AksjonspunktCode.VEDTAK_UTEN_TOTRINNSKONTROLL,
 ];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.KLAGE_VURDERING];

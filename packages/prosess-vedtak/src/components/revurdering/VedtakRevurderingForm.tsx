@@ -27,7 +27,6 @@ import {
   TilbakekrevingValg,
 } from '@navikt/fp-types';
 import {
-  BekreftVedtakUtenTotrinnskontrollAp,
   ForeslaVedtakAp,
   ForeslaVedtakManueltAp,
   KontrollAvManueltOpprettetRevurderingsbehandlingAp,
@@ -48,7 +47,6 @@ import { getTilbakekrevingText } from '../felles/VedtakHelper';
 type RevurderingVedtakAksjonspunkter =
   | ForeslaVedtakAp
   | ForeslaVedtakManueltAp
-  | BekreftVedtakUtenTotrinnskontrollAp
   | VurdereAnnenYtelseForVedtakAp
   | VurdereDokumentForVedtakAp
   | VurdereInntektsmeldingKlageForVedtakAp
@@ -221,7 +219,6 @@ const transformValues = (values: FormValues): RevurderingVedtakAksjonspunkter[] 
       apCode,
       AksjonspunktCode.FORESLA_VEDTAK,
       AksjonspunktCode.FORESLA_VEDTAK_MANUELT,
-      AksjonspunktCode.VEDTAK_UTEN_TOTRINNSKONTROLL,
       AksjonspunktCode.VURDERE_ANNEN_YTELSE,
       AksjonspunktCode.VURDERE_DOKUMENT,
       AksjonspunktCode.VURDERE_INNTEKTSMELDING_KLAGE,

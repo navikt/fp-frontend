@@ -10,7 +10,6 @@ import VurdereYtelseSammeBarnAnnenForelderAp from './prosess/VurdereYtelseSammeB
 import Foreldreansvarsvilkar1Ap from './prosess/Foreldreansvarsvilkar1Ap';
 import Foreldreansvarsvilkar2Ap from './prosess/Foreldreansvarsvilkar2Ap';
 import ForeslaVedtakAp from './prosess/ForeslaVedtakAp';
-import BekreftVedtakUtenTotrinnskontrollAp from './prosess/BekreftVedtakUtenTotrinnskontrollAp';
 import ForeslaVedtakManueltAp from './prosess/ForeslaVedtakManueltAp';
 import VurderFeilutbetalingAp from './prosess/VurderFeilutbetalingAp';
 import OverstyringBeregningAp from './prosess/OverstyringBeregningAp';
@@ -42,7 +41,6 @@ export type ProsessAksjonspunkt =
   | Foreldreansvarsvilkar1Ap
   | Foreldreansvarsvilkar2Ap
   | ForeslaVedtakAp
-  | BekreftVedtakUtenTotrinnskontrollAp
   | ForeslaVedtakManueltAp
   | VurderInnsynAp
   | OverstyringBeregningAp
