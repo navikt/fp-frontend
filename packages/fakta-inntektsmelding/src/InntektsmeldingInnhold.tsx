@@ -305,11 +305,15 @@ const BehandlingsOversikt = ({
     return <FormattedMessage id="InntektsmeldingFaktaPanel.behandling.bruktIAndre" />;
   })();
 
+  const sorterteBehandlinger = [...gjeldendeBehandlinger].sort((a, b) => {
+    return new Date(a.opprettet).getTime() - new Date(b.opprettet).getTime();
+  });
+
   return (
     <InntektsmeldingInfoBlokk tittel={intl.formatMessage({ id: 'InntektsmeldingFaktaPanel.behandling.heading' })}>
       {infoTekst}
       <List>
-        {gjeldendeBehandlinger.map(b => (
+        {sorterteBehandlinger.map(b => (
           <List.Item key={b.uuid}>
             <VStack>
               <span>{alleKodeverk.BehandlingType.find(({ kode }) => kode === b.type)?.navn}</span>
