@@ -9,7 +9,7 @@ import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
 import { formatCurrencyWithKr } from '@navikt/ft-utils';
 import { NaturalytelseType } from '@navikt/fp-types/src/arbeidOgInntektsmeldingTsType';
 import { hentDokumentLenke } from '@navikt/fp-konstanter';
-import { DownloadIcon } from '@navikt/aksel-icons';
+import { ArrowForwardIcon } from '@navikt/aksel-icons';
 import styles from './inntektsmeldingFakta.module.css';
 
 export const InntektsmeldingInnhold = ({
@@ -223,7 +223,7 @@ const LastNedPdfKnapp = ({ inntektsmelding, fagsak }: { fagsak: Fagsak; inntekts
       }}
       variant="secondary"
       size={'small'}
-      icon={<DownloadIcon />}
+      icon={<ArrowForwardIcon />}
     >
       <FormattedMessage id="InntektsmeldingFaktaPanel.modal.trigger" />
     </Button>
