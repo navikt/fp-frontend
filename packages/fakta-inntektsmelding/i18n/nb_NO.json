@@ -21,8 +21,8 @@
   "InntektsmeldingFaktaPanel.behandling.heading": "Behandling",
   "InntektsmeldingFaktaPanel.behandling.bruktKunIDenne": "Brukt i denne behandlingen",
   "InntektsmeldingFaktaPanel.behandling.ikkeBruktINoen": "Ikke brukt i noen behandlinger",
-  "InntektsmeldingFaktaPanel.behandling.bruktIAndre": "Brukt i andre behandlinger ({antallBehandlinger})",
-  "InntektsmeldingFaktaPanel.behandling.bruktIDenneOgFlere": "Brukt i denne og andre behandlinger ({antallBehandlinger})",
+  "InntektsmeldingFaktaPanel.behandling.bruktIAndre": "Brukt i andre behandlinger",
+  "InntektsmeldingFaktaPanel.behandling.bruktIDenneOgFlere": "Brukt i denne og andre behandlinger",
   "InntektsmeldingFaktaPanel.behandling.opprettet": "Opprettet",
   "InntektsmeldingFaktaPanel.behandling.avsluttet": "Avsluttet",
 
