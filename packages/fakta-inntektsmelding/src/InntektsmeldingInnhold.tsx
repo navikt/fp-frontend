@@ -238,7 +238,7 @@ const LastNedPdfModalKnapp = ({ inntektsmelding, fagsak }: { fagsak: Fagsak; inn
 
   return (
     <>
-      <Button icon={<DownloadIcon />} variant="secondary" size="small" onClick={() => ref.current?.showModal()}>
+      <Button icon={<ArrowForwardIcon />} variant="secondary" size="small" onClick={() => ref.current?.showModal()}>
         <FormattedMessage id="InntektsmeldingFaktaPanel.modal.trigger" />
       </Button>
 
@@ -283,8 +283,8 @@ const BehandlingsOversikt = ({
   alleKodeverk: AlleKodeverk;
 }) => {
   const intl = useIntl();
-  const bruktIDenneBehandlingen = inntektsmelding.behandlingsIdeer.includes(behandling.uuid);
-  const gjeldendeBehandlinger = alleBehandlinger.filter(b => inntektsmelding.behandlingsIdeer.includes(b.uuid));
+  const bruktIDenneBehandlingen = inntektsmelding.aktiveBehandlingsIder.includes(behandling.uuid);
+  const gjeldendeBehandlinger = alleBehandlinger.filter(b => inntektsmelding.aktiveBehandlingsIder.includes(b.uuid));
 
   const infoTekst = (() => {
     const antallBehandlinger = gjeldendeBehandlinger.length;
