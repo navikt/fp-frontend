@@ -15,9 +15,9 @@ describe('<InntektsmeldingDefault>', () => {
     await verifiserKolonneSortering('Type', 0, ['Endring', 'Ny', 'Ny']);
     await verifiserKolonneSortering('Innsendt', 1, ['20.07.2024-00:00', '01.08.2024-00:00', '10.09.2024-00:00']);
     await verifiserKolonneSortering('Arbeidsgiver', 2, ['Kiwi', 'Meny', 'Rema 1000']);
-    await verifiserKolonneSortering('Skjæringst.', 3, ['-', '10.10.2024', '11.11.2024']);
+    await verifiserKolonneSortering('Startdato', 3, ['-', '10.10.2024', '11.11.2024']);
     await verifiserKolonneSortering('Månedsi.', 4, ['10 000 kr', '20 000 kr', '30 000 kr']);
-    await verifiserKolonneSortering('Behandling', 5, [' Ingen', ' Andre', ' Denne']);
+    await verifiserKolonneSortering('Behandling', 5, [' Andre', ' Denne', ' Ingen']);
   });
 });
 
