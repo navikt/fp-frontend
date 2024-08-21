@@ -3,7 +3,7 @@ import { AlleKodeverk, Behandling, BehandlingAppKontekst, Fagsak, Inntektsmeldin
 import { getKodeverknavnFraKode, KodeverkType } from '@navikt/fp-kodeverk';
 import React, { useRef } from 'react';
 import { InntektsmeldingFaktaProps } from './InntektsmeldingFaktaIndex';
-import { BodyLong, Button, CopyButton, Heading, HGrid, HStack, Label, List, Modal, VStack } from '@navikt/ds-react';
+import { BodyLong, Button, Heading, HGrid, HStack, Label, List, Modal, VStack } from '@navikt/ds-react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
 import { formatCurrencyWithKr } from '@navikt/ft-utils';
@@ -31,7 +31,7 @@ export const InntektsmeldingInnhold = ({
         </Heading>
         <LastNedPdfKnapp fagsak={fagsak} inntektsmelding={inntektsmelding} />
       </HStack>
-      <HGrid columns={{ 'xl': 3, '2xl': 3 }} gap="8">
+      <HGrid columns={3} gap="8">
         <InntektsmeldingInfoBlokk tittel={intl.formatMessage({ id: 'InntektsmeldingFaktaPanel.arbeidsgiver.heading' })}>
           <span>
             <FormattedMessage id="InntektsmeldingFaktaPanel.arbeidsgiver.navn" />:{' '}
@@ -41,21 +41,6 @@ export const InntektsmeldingInnhold = ({
             <FormattedMessage id="InntektsmeldingFaktaPanel.arbeidsgiver.underenhet" />:{' '}
             {inntektsmelding.arbeidsgiverIdent}
           </span>
-        </InntektsmeldingInfoBlokk>
-
-        <InntektsmeldingInfoBlokk
-          tittel={intl.formatMessage({ id: 'InntektsmeldingFaktaPanel.kontaktperson.heading' })}
-        >
-          <span>
-            <FormattedMessage id="InntektsmeldingFaktaPanel.kontaktperson.navn" />: {inntektsmelding.kontaktpersonNavn}
-          </span>
-          <HStack align="start" gap="2">
-            <span>
-              <FormattedMessage id="InntektsmeldingFaktaPanel.kontaktperson.telefon" />:{' '}
-              {inntektsmelding.kontaktpersonNummer}
-            </span>
-            <CopyButton size="xsmall" copyText={inntektsmelding.kontaktpersonNummer} />
-          </HStack>
         </InntektsmeldingInfoBlokk>
 
         <InntektsmeldingInfoBlokk
@@ -72,6 +57,17 @@ export const InntektsmeldingInnhold = ({
           behandling={behandling}
         />
 
+        <InntektsmeldingInfoBlokk
+          tittel={intl.formatMessage({ id: 'InntektsmeldingFaktaPanel.kontaktperson.heading' })}
+        >
+          <span>
+            <FormattedMessage id="InntektsmeldingFaktaPanel.kontaktperson.navn" />: {inntektsmelding.kontaktpersonNavn}
+          </span>
+          <span>
+              <FormattedMessage id="InntektsmeldingFaktaPanel.kontaktperson.telefon" />:{' '}
+            {inntektsmelding.kontaktpersonNummer}
+            </span>
+        </InntektsmeldingInfoBlokk>
 
         <Startdato
           ytelse={getKodeverknavnFraKode(alleKodeverk, KodeverkType.FAGSAK_YTELSE, fagsak.fagsakYtelseType)}
