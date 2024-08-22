@@ -139,28 +139,22 @@ const Refusjon = ({ inntektsmelding }: { inntektsmelding: Inntektsmelding }) => 
     (a, b) => new Date(a.fom).getTime() - new Date(b.fom).getTime(),
   );
   return (
-    <VStack gap="2">
-      {perioderStigende.map((refusjon, index, array) => {
-        const forrigePeriode = array[index + 1];
-
-        return (
-          <VStack key={refusjon.indexKey}>
-            <span>
-              <FormattedMessage id="InntektsmeldingFaktaPanel.refusjon.fom" /> <DateLabel dateString={refusjon.fom} />
-            </span>
-            <span>
-              <FormattedMessage id="InntektsmeldingFaktaPanel.refusjon.beløp" />:{' '}
-              {formatCurrencyWithKr(refusjon.refusjonsbeløp.verdi)}
-            </span>
-            {forrigePeriode?.fom ? (
-              <span>
-                <FormattedMessage id="InntektsmeldingFaktaPanel.refusjon.opphører" />{' '}
-                <DateLabel dateString={forrigePeriode.fom} />
-              </span>
-            ) : null}
-          </VStack>
-        );
-      })}
+    <VStack gap="0">
+      <span>Krever refusjon</span>
+      <span>{formatCurrencyWithKr(inntektsmelding.refusjonPrMnd ?? 0)}</span>
+      <span>Endringer i perioden:</span>
+      <ul>
+        {perioderStigende.map((refusjon) => {
+          return (
+            <li key={refusjon.indexKey}>
+              <FormattedMessage id="InntektsmeldingFaktaPanel.refusjon.endring.periode" values={{
+                kroner: formatCurrencyWithKr(refusjon.refusjonsbeløp.verdi),
+                fom: refusjon.fom,
+              }} />
+            </li>
+          );
+        })}
+      </ul>
     </VStack>
   );
 };
