@@ -149,7 +149,7 @@ const Refusjon = ({ inntektsmelding }: { inntektsmelding: Inntektsmelding }) => 
             <li key={refusjon.indexKey}>
               <FormattedMessage id="InntektsmeldingFaktaPanel.refusjon.endring.periode" values={{
                 kroner: formatCurrencyWithKr(refusjon.refusjonsbeløp.verdi),
-                fom: refusjon.fom,
+                fom: <DateLabel dateString={refusjon.fom} />
               }} />
             </li>
           );
