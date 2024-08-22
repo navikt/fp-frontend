@@ -6,7 +6,7 @@ import { InntektsmeldingFaktaProps } from './InntektsmeldingFaktaIndex';
 import { BodyLong, Button, Heading, HGrid, HStack, Label, List, Modal, VStack } from '@navikt/ds-react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
-import { formatCurrencyWithKr } from '@navikt/ft-utils';
+import { addDaysToDate, formatCurrencyWithKr } from '@navikt/ft-utils';
 import { NaturalytelseType } from '@navikt/fp-types/src/arbeidOgInntektsmeldingTsType';
 import { hentDokumentLenke } from '@navikt/fp-konstanter';
 import { ArrowForwardIcon } from '@navikt/aksel-icons';
@@ -167,6 +167,7 @@ const Refusjon = ({ inntektsmelding }: { inntektsmelding: Inntektsmelding }) => 
 
 const BortfalteNaturalYtelser = ({ inntektsmelding }: { inntektsmelding: Inntektsmelding }) => {
   const intl = useIntl();
+
   return (
     <InntektsmeldingInfoBlokk
       tittel={intl.formatMessage({ id: 'InntektsmeldingFaktaPanel.bortfalteNaturalytelser.heading' })}
@@ -183,7 +184,11 @@ const BortfalteNaturalYtelser = ({ inntektsmelding }: { inntektsmelding: Inntekt
               <ul>
                 <li>
                   <FormattedMessage id="InntektsmeldingFaktaPanel.bortfalteNaturalytelser.fom" />{' '}
-                  <DateLabel dateString={periode.fomDato} />
+                  {/*
+                  NOTE: naturalYtelsene som kommer fra fpsak er invertert. Det vil si de sier når en naturalytelse var AKTIV.
+                  Det er angitt som fra år 0 tom siste dagen. For å finne ut fra når den faller bort må vi derfor bruker tomDato + 1
+                  */}
+                  <DateLabel dateString={addDaysToDate(periode.tomDato, 1)} />
                 </li>
                 <li>
                   <FormattedMessage id="InntektsmeldingFaktaPanel.bortfalteNaturalytelser.verdi" />:{' '}
