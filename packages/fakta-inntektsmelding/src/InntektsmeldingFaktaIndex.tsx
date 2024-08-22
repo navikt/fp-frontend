@@ -34,7 +34,7 @@ type TableHeaders = keyof Pick<
   | 'arbeidsgiverIdent'
   | 'startDatoPermisjon'
   | 'inntektPrMnd'
-  | 'aktiveBehandlingsIder'
+  | 'tilknyttedeBehandlingIder'
 >;
 
 export const InntektsmeldingFaktaIndex = ({
@@ -99,7 +99,7 @@ export const InntektsmeldingFaktaIndex = ({
             <Table.ColumnHeader sortKey="inntektPrMnd" sortable>
               <FormattedMessage id={'InntektsmeldingFaktaPanel.tabell.header.månedsinntekt'} />
             </Table.ColumnHeader>
-            <Table.ColumnHeader sortKey="aktiveBehandlingsIder" sortable>
+            <Table.ColumnHeader sortKey="tilknyttedeBehandlingIder" sortable>
               <FormattedMessage id={'InntektsmeldingFaktaPanel.tabell.header.behandling'} />
             </Table.ColumnHeader>
             <Table.HeaderCell />
@@ -170,7 +170,7 @@ const sorterInntektsmeldinger = ({
     });
   }
 
-  if (sortKey === 'aktiveBehandlingsIder') {
+  if (sortKey === 'tilknyttedeBehandlingIder') {
     return inntektsmeldinger.slice().sort((a, b) => {
       const IMStatusA = hentBehandlingIMStatus({ behandling, inntektsmelding: a });
       const IMStatusB = hentBehandlingIMStatus({ behandling, inntektsmelding: b });
@@ -243,10 +243,10 @@ const hentBehandlingIMStatus = ({
   behandling: Behandling;
   inntektsmelding: Inntektsmelding;
 }) => {
-  if (inntektsmelding.aktiveBehandlingsIder.includes(behandling.uuid)) {
+  if (inntektsmelding.tilknyttedeBehandlingIder.includes(behandling.uuid)) {
     return "DENNE";
   }
-  if (inntektsmelding.aktiveBehandlingsIder.length > 0) {
+  if (inntektsmelding.tilknyttedeBehandlingIder.length > 0) {
     return "ANDRE"
   }
 

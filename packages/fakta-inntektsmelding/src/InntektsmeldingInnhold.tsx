@@ -279,8 +279,8 @@ const BehandlingsOversikt = ({
   alleKodeverk: AlleKodeverk;
 }) => {
   const intl = useIntl();
-  const bruktIDenneBehandlingen = inntektsmelding.aktiveBehandlingsIder.includes(behandling.uuid);
-  const gjeldendeBehandlinger = alleBehandlinger.filter(b => inntektsmelding.aktiveBehandlingsIder.includes(b.uuid));
+  const bruktIDenneBehandlingen = inntektsmelding.tilknyttedeBehandlingIder.includes(behandling.uuid);
+  const gjeldendeBehandlinger = alleBehandlinger.filter(b => inntektsmelding.tilknyttedeBehandlingIder.includes(b.uuid));
 
   const infoTekst = (() => {
     const antallBehandlinger = gjeldendeBehandlinger.length;
