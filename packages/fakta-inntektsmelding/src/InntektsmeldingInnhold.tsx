@@ -6,7 +6,7 @@ import { InntektsmeldingFaktaProps } from './InntektsmeldingFaktaIndex';
 import { BodyLong, Button, Heading, HGrid, HStack, Label, List, Modal, VStack } from '@navikt/ds-react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
-import { formatCurrencyWithKr } from '@navikt/ft-utils';
+import { addDaysToDate, formatCurrencyWithKr } from '@navikt/ft-utils';
 import { NaturalytelseType } from '@navikt/fp-types/src/arbeidOgInntektsmeldingTsType';
 import { hentDokumentLenke } from '@navikt/fp-konstanter';
 import { ArrowForwardIcon } from '@navikt/aksel-icons';
@@ -139,34 +139,29 @@ const Refusjon = ({ inntektsmelding }: { inntektsmelding: Inntektsmelding }) => 
     (a, b) => new Date(a.fom).getTime() - new Date(b.fom).getTime(),
   );
   return (
-    <VStack gap="2">
-      {perioderStigende.map((refusjon, index, array) => {
-        const forrigePeriode = array[index + 1];
-
-        return (
-          <VStack key={refusjon.indexKey}>
-            <span>
-              <FormattedMessage id="InntektsmeldingFaktaPanel.refusjon.fom" /> <DateLabel dateString={refusjon.fom} />
-            </span>
-            <span>
-              <FormattedMessage id="InntektsmeldingFaktaPanel.refusjon.beløp" />:{' '}
-              {formatCurrencyWithKr(refusjon.refusjonsbeløp.verdi)}
-            </span>
-            {forrigePeriode?.fom ? (
-              <span>
-                <FormattedMessage id="InntektsmeldingFaktaPanel.refusjon.opphører" />{' '}
-                <DateLabel dateString={forrigePeriode.fom} />
-              </span>
-            ) : null}
-          </VStack>
-        );
-      })}
+    <VStack gap="0">
+      <span>Krever refusjon</span>
+      <span>{formatCurrencyWithKr(inntektsmelding.refusjonPrMnd ?? 0)}</span>
+      <span>Endringer i perioden:</span>
+      <ul>
+        {perioderStigende.map((refusjon) => {
+          return (
+            <li key={refusjon.indexKey}>
+              <FormattedMessage id="InntektsmeldingFaktaPanel.refusjon.endring.periode" values={{
+                kroner: formatCurrencyWithKr(refusjon.refusjonsbeløp.verdi),
+                fom: <DateLabel dateString={refusjon.fom} />
+              }} />
+            </li>
+          );
+        })}
+      </ul>
     </VStack>
   );
 };
 
 const BortfalteNaturalYtelser = ({ inntektsmelding }: { inntektsmelding: Inntektsmelding }) => {
   const intl = useIntl();
+
   return (
     <InntektsmeldingInfoBlokk
       tittel={intl.formatMessage({ id: 'InntektsmeldingFaktaPanel.bortfalteNaturalytelser.heading' })}
@@ -183,7 +178,11 @@ const BortfalteNaturalYtelser = ({ inntektsmelding }: { inntektsmelding: Inntekt
               <ul>
                 <li>
                   <FormattedMessage id="InntektsmeldingFaktaPanel.bortfalteNaturalytelser.fom" />{' '}
-                  <DateLabel dateString={periode.fomDato} />
+                  {/*
+                  NOTE: naturalYtelsene som kommer fra fpsak er invertert. Det vil si de sier når en naturalytelse var AKTIV.
+                  Det er angitt som fra år 0 tom siste dagen. For å finne ut fra når den faller bort må vi derfor bruker tomDato + 1
+                  */}
+                  <DateLabel dateString={addDaysToDate(periode.tomDato, 1)} />
                 </li>
                 <li>
                   <FormattedMessage id="InntektsmeldingFaktaPanel.bortfalteNaturalytelser.verdi" />:{' '}

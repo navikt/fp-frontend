@@ -48,9 +48,7 @@
 
   "InntektsmeldingFaktaPanel.refusjon.heading": "Refusjon",
   "InntektsmeldingFaktaPanel.refusjon.ingen": "Ingen refusjon",
-  "InntektsmeldingFaktaPanel.refusjon.fom": "Krever refusjon fra",
-  "InntektsmeldingFaktaPanel.refusjon.opphører": "Opphører",
-  "InntektsmeldingFaktaPanel.refusjon.beløp": "Refusjonsbeløp",
+  "InntektsmeldingFaktaPanel.refusjon.endring.periode": "Refusjonsbeløp på {kroner} fra {fom}",
 
   "InntektsmeldingFaktaPanel.bortfalteNaturalytelser.heading": "Naturalytelser som faller bort",
   "InntektsmeldingFaktaPanel.bortfalteNaturalytelser.ingen": "Ingen",
