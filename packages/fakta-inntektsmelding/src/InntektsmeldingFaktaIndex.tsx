@@ -34,7 +34,7 @@ type TableHeaders = keyof Pick<
   | 'arbeidsgiverIdent'
   | 'startDatoPermisjon'
   | 'inntektPrMnd'
-  | 'behandlingsIdeer'
+  | 'tilknyttedeBehandlingIder'
 >;
 
 export const InntektsmeldingFaktaIndex = ({
@@ -99,7 +99,7 @@ export const InntektsmeldingFaktaIndex = ({
             <Table.ColumnHeader sortKey="inntektPrMnd" sortable>
               <FormattedMessage id={'InntektsmeldingFaktaPanel.tabell.header.månedsinntekt'} />
             </Table.ColumnHeader>
-            <Table.ColumnHeader sortKey="behandlingsIdeer" sortable>
+            <Table.ColumnHeader sortKey="tilknyttedeBehandlingIder" sortable>
               <FormattedMessage id={'InntektsmeldingFaktaPanel.tabell.header.behandling'} />
             </Table.ColumnHeader>
             <Table.HeaderCell />
@@ -170,15 +170,12 @@ const sorterInntektsmeldinger = ({
     });
   }
 
-  if (sortKey === 'behandlingsIdeer') {
+  if (sortKey === 'tilknyttedeBehandlingIder') {
     return inntektsmeldinger.slice().sort((a, b) => {
-      const AinnegårIBehandling = a.behandlingsIdeer.includes(behandling.uuid);
-      const BinnegårIBehandling = b.behandlingsIdeer.includes(behandling.uuid);
+      const IMStatusA = hentBehandlingIMStatus({ behandling, inntektsmelding: a });
+      const IMStatusB = hentBehandlingIMStatus({ behandling, inntektsmelding: b });
 
-      if (AinnegårIBehandling && BinnegårIBehandling) {
-        return 0;
-      }
-      return AinnegårIBehandling ? 1 : -1;
+      return sorterStreng(IMStatusA, IMStatusB);
     });
   }
 
@@ -213,7 +210,8 @@ const InntektsmeldingStatus = ({
   behandling: Behandling;
   inntektsmelding: Inntektsmelding;
 }) => {
-  if (inntektsmelding.behandlingsIdeer.includes(behandling.uuid)) {
+  const behandlingIMStatus = hentBehandlingIMStatus({ behandling, inntektsmelding });
+  if (behandlingIMStatus === "DENNE") {
     return (
       <HStack gap="1" align="center">
         <CircleFillIcon className={styles.behandlingCircleDenne} />{' '}
@@ -221,7 +219,7 @@ const InntektsmeldingStatus = ({
       </HStack>
     );
   }
-  if (inntektsmelding.behandlingsIdeer.length > 0) {
+  if (behandlingIMStatus === "ANDRE") {
     return (
       <HStack gap="1" align="center">
         <CircleFillIcon className={styles.behandlingCircleAndre} />{' '}
@@ -237,3 +235,20 @@ const InntektsmeldingStatus = ({
     </HStack>
   );
 };
+
+const hentBehandlingIMStatus = ({
+                                  behandling,
+                                  inntektsmelding,
+                                }: {
+  behandling: Behandling;
+  inntektsmelding: Inntektsmelding;
+}) => {
+  if (inntektsmelding.tilknyttedeBehandlingIder.includes(behandling.uuid)) {
+    return "DENNE";
+  }
+  if (inntektsmelding.tilknyttedeBehandlingIder.length > 0) {
+    return "ANDRE"
+  }
+
+  return "INGEN";
+}

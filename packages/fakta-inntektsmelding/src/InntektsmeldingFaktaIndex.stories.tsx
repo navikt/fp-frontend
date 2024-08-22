@@ -24,7 +24,6 @@ const inntektsmeldingmal = {
   bortfalteNaturalytelser: [],
   refusjonsperioder: [],
   innsendingsårsak: 'NY' as const,
-  behandlingsIdeer: [],
   arbeidsgiverIdent: '1',
   eksternArbeidsforholdId: 'ARB001-001',
   inntektPrMnd: 30000,
@@ -75,7 +74,7 @@ InntektsmeldingDefault.args = {
   inntektsmeldinger: [
     {
       ...inntektsmeldingmal,
-      behandlingsIdeer: ['UUID1'],
+      tilknyttedeBehandlingIder: ['UUID1'],
       inntektPrMnd: 10000,
       innsendingstidspunkt: '2024-07-20T00:00:00',
       startDatoPermisjon: '2024-10-10',
@@ -96,7 +95,7 @@ InntektsmeldingDefault.args = {
     },
     {
       ...inntektsmeldingmal,
-      behandlingsIdeer: ['UUID1', 'UUID2'],
+      tilknyttedeBehandlingIder: ['UUID1', 'UUID2'],
       inntektPrMnd: 20000,
       innsendingstidspunkt: '2024-08-01T00:00:00',
       kildeSystem: 'FS22',
@@ -106,7 +105,7 @@ InntektsmeldingDefault.args = {
     },
     {
       ...inntektsmeldingmal,
-      behandlingsIdeer: [],
+      tilknyttedeBehandlingIder: [],
       inntektPrMnd: 30000,
       innsendingstidspunkt: '2024-09-10T00:00:00',
       innsendingsårsak: 'ENDRING' as const,

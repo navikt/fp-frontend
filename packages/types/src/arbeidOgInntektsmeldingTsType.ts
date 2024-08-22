@@ -32,7 +32,7 @@ export type Inntektsmelding = Readonly<{
   bortfalteNaturalytelser: BortfaltNaturalYtelse[];
   refusjonsperioder: Refusjonsperiode[];
   innsendingsårsak: keyof typeof InntektsmeldingInnsendingsårsak;
-  behandlingsIdeer: string[];
+  tilknyttedeBehandlingIder: string[];
 }>;
 
 type Refusjonsperiode = {

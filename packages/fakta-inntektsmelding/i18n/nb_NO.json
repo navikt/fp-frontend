@@ -4,7 +4,7 @@
   "InntektsmeldingFaktaPanel.tabell.header.type": "Type",
   "InntektsmeldingFaktaPanel.tabell.header.innsendt": "Innsendt",
   "InntektsmeldingFaktaPanel.tabell.header.arbeidsgiver": "Arbeidsgiver",
-  "InntektsmeldingFaktaPanel.tabell.header.skjæringstidspunkt": "Skjæringst.",
+  "InntektsmeldingFaktaPanel.tabell.header.skjæringstidspunkt": "Startdato",
   "InntektsmeldingFaktaPanel.tabell.header.månedsinntekt": "Månedsi.",
   "InntektsmeldingFaktaPanel.tabell.header.behandling": "Behandling",
 
@@ -13,16 +13,16 @@
   "InntektsmeldingFaktaPanel.tabell.cell.behandling.ingen": "Ingen",
 
   "InntektsmeldingFaktaPanel.modal.heading": "All informasjon fra PDF’en er tilgjengelig i faktapanelet",
-  "InntektsmeldingFaktaPanel.modal.trigger": "Last ned PDF",
-  "InntektsmeldingFaktaPanel.modal.body": "PDF’en du skal laste ned inneholder ikke noe annet enn det som står i faktapanelet. Du kan likevel laste ned hvis du ønsker det.",
+  "InntektsmeldingFaktaPanel.modal.trigger": "Åpne PDF",
+  "InntektsmeldingFaktaPanel.modal.body": "PDF’en du skal åpne inneholder ikke noe annet enn det som står i faktapanelet. Du kan likevel åpne den hvis du ønsker det.",
   "InntektsmeldingFaktaPanel.modal.button.primary": "Last ned som PDF",
   "InntektsmeldingFaktaPanel.modal.button.secondary": "Avbryt",
 
   "InntektsmeldingFaktaPanel.behandling.heading": "Behandling",
   "InntektsmeldingFaktaPanel.behandling.bruktKunIDenne": "Brukt i denne behandlingen",
   "InntektsmeldingFaktaPanel.behandling.ikkeBruktINoen": "Ikke brukt i noen behandlinger",
-  "InntektsmeldingFaktaPanel.behandling.bruktIAndre": "Brukt i andre behandlinger ({antallBehandlinger})",
-  "InntektsmeldingFaktaPanel.behandling.bruktIDenneOgFlere": "Brukt i denne og andre behandlinger ({antallBehandlinger})",
+  "InntektsmeldingFaktaPanel.behandling.bruktIAndre": "Brukt i andre behandlinger",
+  "InntektsmeldingFaktaPanel.behandling.bruktIDenneOgFlere": "Brukt i denne og andre behandlinger",
   "InntektsmeldingFaktaPanel.behandling.opprettet": "Opprettet",
   "InntektsmeldingFaktaPanel.behandling.avsluttet": "Avsluttet",
 
@@ -44,7 +44,7 @@
   "InntektsmeldingFaktaPanel.kilde.heading": "Kilde",
   "InntektsmeldingFaktaPanel.kilde.nav": "NAV",
   "InntektsmeldingFaktaPanel.kilde.altinn": "Altinn",
-  "InntektsmeldingFaktaPanel.kilde.lps": "LPS",
+  "InntektsmeldingFaktaPanel.kilde.lps": "Arbeidsgiver sitt lønns- og personalsystem(LPS)",
 
   "InntektsmeldingFaktaPanel.refusjon.heading": "Refusjon",
   "InntektsmeldingFaktaPanel.refusjon.ingen": "Ingen refusjon",
