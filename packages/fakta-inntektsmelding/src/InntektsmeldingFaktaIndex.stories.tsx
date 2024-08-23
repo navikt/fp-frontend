@@ -75,7 +75,7 @@ InntektsmeldingDefault.args = {
     {
       ...inntektsmeldingmal,
       tilknyttedeBehandlingIder: ['UUID1'],
-      inntektPrMnd: 10000,
+      inntektPrMnd: 10000.5,
       innsendingstidspunkt: '2024-07-20T00:00:00',
       startDatoPermisjon: '2024-10-10',
       refusjonPrMnd: undefined,

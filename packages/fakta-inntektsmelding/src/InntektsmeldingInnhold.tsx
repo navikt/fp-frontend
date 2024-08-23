@@ -6,7 +6,7 @@ import { InntektsmeldingFaktaProps } from './InntektsmeldingFaktaIndex';
 import { BodyLong, Button, Heading, HGrid, HStack, Label, List, Modal, VStack } from '@navikt/ds-react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
-import { addDaysToDate, formatCurrencyWithKr } from '@navikt/ft-utils';
+import { addDaysToDate, formatCurrencyNoKr } from '@navikt/ft-utils';
 import { NaturalytelseType } from '@navikt/fp-types/src/arbeidOgInntektsmeldingTsType';
 import { hentDokumentLenke } from '@navikt/fp-konstanter';
 import { ArrowForwardIcon } from '@navikt/aksel-icons';
@@ -46,7 +46,7 @@ export const InntektsmeldingInnhold = ({
         <InntektsmeldingInfoBlokk
           tittel={intl.formatMessage({ id: 'InntektsmeldingFaktaPanel.månedsinntekt.heading' })}
         >
-          <span>{formatCurrencyWithKr(inntektsmelding.inntektPrMnd)}</span>
+          <span>{formatCurrencyNoKr(inntektsmelding.inntektPrMnd)}</span>
           {/*TODO: Få inn endringsgrunn når dette er med i data-modellen*/}
         </InntektsmeldingInfoBlokk>
 
@@ -127,7 +127,7 @@ const Refusjon = ({ inntektsmelding }: { inntektsmelding: Inntektsmelding }) => 
     return (
       <span>
         {inntektsmelding.refusjonPrMnd ? (
-          formatCurrencyWithKr(inntektsmelding.refusjonPrMnd)
+          formatCurrencyNoKr(inntektsmelding.refusjonPrMnd)
         ) : (
           <FormattedMessage id="InntektsmeldingFaktaPanel.refusjon.ingen" />
         )}
@@ -141,14 +141,14 @@ const Refusjon = ({ inntektsmelding }: { inntektsmelding: Inntektsmelding }) => 
   return (
     <VStack gap="0">
       <span>Krever refusjon</span>
-      <span>{formatCurrencyWithKr(inntektsmelding.refusjonPrMnd ?? 0)}</span>
+      <span>{formatCurrencyNoKr(inntektsmelding.refusjonPrMnd ?? 0)}</span>
       <span>Endringer i perioden:</span>
       <ul>
         {perioderStigende.map((refusjon) => {
           return (
             <li key={refusjon.indexKey}>
               <FormattedMessage id="InntektsmeldingFaktaPanel.refusjon.endring.periode" values={{
-                kroner: formatCurrencyWithKr(refusjon.refusjonsbeløp.verdi),
+                kroner: formatCurrencyNoKr(refusjon.refusjonsbeløp.verdi),
                 fom: <DateLabel dateString={refusjon.fom} />
               }} />
             </li>
@@ -186,7 +186,7 @@ const BortfalteNaturalYtelser = ({ inntektsmelding }: { inntektsmelding: Inntekt
                 </li>
                 <li>
                   <FormattedMessage id="InntektsmeldingFaktaPanel.bortfalteNaturalytelser.verdi" />:{' '}
-                  {formatCurrencyWithKr(beloepPerMnd.verdi)}
+                  {formatCurrencyNoKr(beloepPerMnd.verdi)}
                 </li>
               </ul>
             </VStack>

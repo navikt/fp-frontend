@@ -11,8 +11,8 @@ import { InntektsmeldingInnsendingsårsak } from '@navikt/fp-types/src/arbeidOgI
 import React, { useState } from 'react';
 import { BodyShort, HStack, SortState, Table } from '@navikt/ds-react';
 import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
-import { createIntl, formatCurrencyWithKr } from '@navikt/ft-utils';
-import { CircleFillIcon, CoffeeIcon } from '@navikt/aksel-icons';
+import { createIntl, formatCurrencyNoKr } from '@navikt/ft-utils';
+import { CircleFillIcon, CoffeeIcon, StarFillIcon } from '@navikt/aksel-icons';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 import messages from '../i18n/nb_NO.json';
 import { InntektsmeldingInnhold } from './InntektsmeldingInnhold';
@@ -46,7 +46,7 @@ export const InntektsmeldingFaktaIndex = ({
   inntektsmeldinger,
 }: { inntektsmeldinger: Inntektsmelding[] } & InntektsmeldingFaktaProps) => {
   // Logikk for å sortere tabell tilpasset fra Aksel-eksempel: https://aksel.nav.no/komponenter/core/table#tabledemo-sortable
-  const [sort, setSort] = useState<SortState | undefined>({ orderBy: 'tidspunkt', direction: 'ascending' });
+  const [sort, setSort] = useState<SortState | undefined>({ orderBy: 'innsendingstidspunkt', direction: 'descending' });
   const handleSort = (sortKey: TableHeaders) => {
     setSort(
       sort && sortKey === sort.orderBy && sort.direction === 'descending'
@@ -137,7 +137,7 @@ export const InntektsmeldingFaktaIndex = ({
                     '-'
                   )}
                 </Table.DataCell>
-                <Table.DataCell>{formatCurrencyWithKr(inntektsmelding.inntektPrMnd)}</Table.DataCell>
+                <Table.DataCell>{formatCurrencyNoKr(inntektsmelding.inntektPrMnd)}</Table.DataCell>
                 <Table.DataCell>
                   <InntektsmeldingStatus behandling={behandling} inntektsmelding={inntektsmelding} />
                 </Table.DataCell>
@@ -214,7 +214,7 @@ const InntektsmeldingStatus = ({
   if (behandlingIMStatus === "DENNE") {
     return (
       <HStack gap="1" align="center">
-        <CircleFillIcon className={styles.behandlingCircleDenne} />{' '}
+        <StarFillIcon className={styles.behandlingDenneStjerne} />
         <FormattedMessage id="InntektsmeldingFaktaPanel.tabell.cell.behandling.denne" />
       </HStack>
     );
@@ -222,7 +222,7 @@ const InntektsmeldingStatus = ({
   if (behandlingIMStatus === "ANDRE") {
     return (
       <HStack gap="1" align="center">
-        <CircleFillIcon className={styles.behandlingCircleAndre} />{' '}
+        <CircleFillIcon className={styles.behandlingCircleAndre} />
         <FormattedMessage id="InntektsmeldingFaktaPanel.tabell.cell.behandling.andre" />
       </HStack>
     );
@@ -230,7 +230,7 @@ const InntektsmeldingStatus = ({
 
   return (
     <HStack gap="1" align="center">
-      <CircleFillIcon className={styles.behandlingCircleIngen} />{' '}
+      <CircleFillIcon className={styles.behandlingCircleIngen} />
       <FormattedMessage id="InntektsmeldingFaktaPanel.tabell.cell.behandling.ingen" />
     </HStack>
   );
