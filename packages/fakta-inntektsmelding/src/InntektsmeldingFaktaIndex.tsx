@@ -11,7 +11,7 @@ import { InntektsmeldingInnsendingsårsak } from '@navikt/fp-types/src/arbeidOgI
 import React, { useState } from 'react';
 import { BodyShort, HStack, SortState, Table } from '@navikt/ds-react';
 import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
-import { createIntl, formatCurrencyWithKr } from '@navikt/ft-utils';
+import { createIntl, formatCurrencyNoKr } from '@navikt/ft-utils';
 import { CircleFillIcon, CoffeeIcon } from '@navikt/aksel-icons';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 import messages from '../i18n/nb_NO.json';
@@ -137,7 +137,7 @@ export const InntektsmeldingFaktaIndex = ({
                     '-'
                   )}
                 </Table.DataCell>
-                <Table.DataCell>{formatCurrencyWithKr(inntektsmelding.inntektPrMnd)}</Table.DataCell>
+                <Table.DataCell>{formatCurrencyNoKr(inntektsmelding.inntektPrMnd)}</Table.DataCell>
                 <Table.DataCell>
                   <InntektsmeldingStatus behandling={behandling} inntektsmelding={inntektsmelding} />
                 </Table.DataCell>
