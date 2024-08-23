@@ -2,8 +2,8 @@
   color: var(--a-border-subtle);
 }
 
-.behandlingDenneStjerne {
-  color: var(--a-orange-400);
+.behandlingCircleDenne {
+  color: var(--a-green-400);
 }
 
 .behandlingCircleAndre {
