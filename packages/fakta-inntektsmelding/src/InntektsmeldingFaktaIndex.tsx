@@ -214,7 +214,7 @@ const InntektsmeldingStatus = ({
   if (behandlingIMStatus === "DENNE") {
     return (
       <HStack gap="1" align="center">
-        <StarFillIcon className={styles.behandlingDenneStjerne} />
+        <CircleFillIcon className={styles.behandlingCircleDenne} />
         <FormattedMessage id="InntektsmeldingFaktaPanel.tabell.cell.behandling.denne" />
       </HStack>
     );
