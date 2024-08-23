@@ -12,11 +12,12 @@ import React, { useState } from 'react';
 import { BodyShort, HStack, SortState, Table } from '@navikt/ds-react';
 import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
 import { createIntl, formatCurrencyNoKr } from '@navikt/ft-utils';
-import { CircleFillIcon, CoffeeIcon, StarFillIcon } from '@navikt/aksel-icons';
+import { CircleFillIcon, CoffeeIcon } from '@navikt/aksel-icons';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 import messages from '../i18n/nb_NO.json';
 import { InntektsmeldingInnhold } from './InntektsmeldingInnhold';
 import styles from './inntektsmeldingFakta.module.css';
+
 const intl = createIntl(messages);
 
 export type InntektsmeldingFaktaProps = {
