@@ -12,7 +12,7 @@ import React, { useState } from 'react';
 import { BodyShort, HStack, SortState, Table } from '@navikt/ds-react';
 import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
 import { createIntl, formatCurrencyNoKr } from '@navikt/ft-utils';
-import { CircleFillIcon, CoffeeIcon } from '@navikt/aksel-icons';
+import { CircleFillIcon, CoffeeIcon, StarFillIcon } from '@navikt/aksel-icons';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 import messages from '../i18n/nb_NO.json';
 import { InntektsmeldingInnhold } from './InntektsmeldingInnhold';
@@ -214,7 +214,7 @@ const InntektsmeldingStatus = ({
   if (behandlingIMStatus === "DENNE") {
     return (
       <HStack gap="1" align="center">
-        <CircleFillIcon className={styles.behandlingCircleDenne} />{' '}
+        <StarFillIcon className={styles.behandlingDenneStjerne} />
         <FormattedMessage id="InntektsmeldingFaktaPanel.tabell.cell.behandling.denne" />
       </HStack>
     );
