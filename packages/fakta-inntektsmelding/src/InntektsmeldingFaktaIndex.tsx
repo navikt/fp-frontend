@@ -222,7 +222,7 @@ const InntektsmeldingStatus = ({
   if (behandlingIMStatus === "ANDRE") {
     return (
       <HStack gap="1" align="center">
-        <CircleFillIcon className={styles.behandlingCircleAndre} />{' '}
+        <CircleFillIcon className={styles.behandlingCircleAndre} />
         <FormattedMessage id="InntektsmeldingFaktaPanel.tabell.cell.behandling.andre" />
       </HStack>
     );
@@ -230,7 +230,7 @@ const InntektsmeldingStatus = ({
 
   return (
     <HStack gap="1" align="center">
-      <CircleFillIcon className={styles.behandlingCircleIngen} />{' '}
+      <CircleFillIcon className={styles.behandlingCircleIngen} />
       <FormattedMessage id="InntektsmeldingFaktaPanel.tabell.cell.behandling.ingen" />
     </HStack>
   );

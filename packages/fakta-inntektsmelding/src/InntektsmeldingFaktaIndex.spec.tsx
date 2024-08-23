@@ -17,7 +17,7 @@ describe('<InntektsmeldingDefault>', () => {
     await verifiserKolonneSortering('Arbeidsgiver', 2, ['Kiwi', 'Meny', 'Rema 1000']);
     await verifiserKolonneSortering('Startdato', 3, ['-', '10.10.2024', '11.11.2024']);
     await verifiserKolonneSortering('Månedsi.', 4, ['10 001', '20 000', '30 000']);
-    await verifiserKolonneSortering('Behandling', 5, [' Andre', ' Denne', ' Ingen']);
+    await verifiserKolonneSortering('Behandling', 5, ['Andre', 'Denne', 'Ingen']);
   });
 });
 
