@@ -1,1 +1,1 @@
-export { default as MedlemskapFaktaIndex } from './src/MedlemskapFaktaIndex';
+export { default as MedlemskapFaktaIndex } from './src/v2/MedlemskapFaktaIndex';
