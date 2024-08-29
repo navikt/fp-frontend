@@ -1,5 +1,8 @@
 export {
-  default as AksjonspunktCode, hasAksjonspunkt, isUttakAksjonspunkt, isFaktaUttakAksjonspunkt,
+  default as AksjonspunktCode,
+  hasAksjonspunkt,
+  isUttakAksjonspunkt,
+  isFaktaUttakAksjonspunkt,
 } from './src/aksjonspunktCodes';
 export type { OverstyringAksjonspunkter } from './src/aksjonspunktCodes';
 export { default as AksjonspunktCodeTilbakekreving } from './src/aksjonspunktCodesTilbakekreving';
@@ -16,7 +19,12 @@ export { default as arbeidType } from './src/arbeidType';
 export { default as avslagsarsakCodes } from './src/avslagsarsakCodes';
 export { default as behandlingArsakType } from './src/behandlingArsakType';
 export {
-  default as behandlingResultatType, isAvslag, isInnvilget, isOpphor, isKlageOmgjort, isKlageAvvist,
+  default as behandlingResultatType,
+  isAvslag,
+  isInnvilget,
+  isOpphor,
+  isKlageOmgjort,
+  isKlageAvvist,
 } from './src/behandlingResultatType';
 export { default as behandlingStatus } from './src/behandlingStatus';
 export { default as behandlingType } from './src/behandlingType';

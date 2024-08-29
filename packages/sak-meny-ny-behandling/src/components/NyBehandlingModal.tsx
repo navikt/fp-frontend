@@ -11,10 +11,7 @@ import { KodeverkMedNavn } from '@navikt/fp-types';
 
 import styles from './nyBehandlingModal.module.css';
 
-const createOptions = (
-  bt: KodeverkMedNavn,
-  enabledBehandlingstyper: KodeverkMedNavn[],
-): ReactElement => {
+const createOptions = (bt: KodeverkMedNavn, enabledBehandlingstyper: KodeverkMedNavn[]): ReactElement => {
   const isEnabled = enabledBehandlingstyper.some(b => b.kode === bt.kode);
   return <option key={bt.kode} value={bt.kode} disabled={!isEnabled}>{` ${bt.navn} `}</option>;
 };

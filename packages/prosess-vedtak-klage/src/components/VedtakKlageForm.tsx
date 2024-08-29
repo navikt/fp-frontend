@@ -13,10 +13,7 @@ import {
 } from '@navikt/fp-kodeverk';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Aksjonspunkt, KlageVurdering, AlleKodeverk, Behandlingsresultat } from '@navikt/fp-types';
-import {
-  ForeslaVedtakAp,
-  ForeslaVedtakManueltAp,
-} from '@navikt/fp-types-avklar-aksjonspunkter';
+import { ForeslaVedtakAp, ForeslaVedtakManueltAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 
 import VedtakKlageSubmitPanel from './VedtakKlageSubmitPanel';
@@ -131,11 +128,7 @@ const VedtakKlageForm: FunctionComponent<OwnProps> = ({
       .filter(ap => ap.status === aksjonspunktStatus.OPPRETTET)
       .map(ap => ap.definisjon);
     const input = behandlingAksjonspunktCodes.map(apCode => ({
-      kode: validerApKodeOgHentApEnum(
-        apCode,
-        AksjonspunktCode.FORESLA_VEDTAK,
-        AksjonspunktCode.FORESLA_VEDTAK_MANUELT,
-      ),
+      kode: validerApKodeOgHentApEnum(apCode, AksjonspunktCode.FORESLA_VEDTAK, AksjonspunktCode.FORESLA_VEDTAK_MANUELT),
     }));
 
     submitCallback(input).then(() => setSubmitting(false));

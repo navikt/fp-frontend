@@ -5,7 +5,6 @@ import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
 import LeggTilSaksbehandlerForm from './LeggTilSaksbehandlerForm';
 import SaksbehandlereTabell from './SaksbehandlereTabell';
 
-
 interface OwnProps {
   saksbehandlere: SaksbehandlerProfil[];
   valgtAvdelingEnhet: string;

@@ -1,6 +1,7 @@
 Håndterer rest-kall mot backend via Axios.
 
-Eksempel: 
+Eksempel:
+
 ```javascript
 import { createRequestApi, RequestConfig } from '@navikt/fp-rest-api';
 
@@ -15,8 +16,8 @@ const params = {saksnummer: '1'};
 const payload = requestApi.startRequest('FAGSAK_SOK', params);
 ```
 
-
 Forenkling av oppsett av endepunktene ved bruk av builder:
+
 ```javascript
 import { createRequestApi, RestApiConfigBuilder } from '@navikt/fp-rest-api';
 
@@ -28,10 +29,11 @@ const endpoints = new RestApiConfigBuilder()
 const requestApi = createRequestApi(endpoints);
 ```
 
-
 Konfigurering av ekstra parametere for et request: (Med og uten bruk av builder.)
+
 ```javascript
-    new RequestConfig('FAGSAK_SOK', '/api/fagsak/sok', {maxPollingLimit: 100}).withAsyncGetMethod()
-    new RestApiConfigBuilder().withAsyncPost('/api/behandlinger', 'FAGSAK_SOK', {maxPollingLimit: 100})
+new RequestConfig('FAGSAK_SOK', '/api/fagsak/sok', { maxPollingLimit: 100 }).withAsyncGetMethod();
+new RestApiConfigBuilder().withAsyncPost('/api/behandlinger', 'FAGSAK_SOK', { maxPollingLimit: 100 });
 ```
+
 For en oversikt over parametere, se "defaultConfig" i RequestConfig-klassen.

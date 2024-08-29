@@ -72,12 +72,14 @@ export const InntektsmeldingFaktaIndex = ({
   if (ims.length === 0) {
     return (
       <RawIntlProvider value={intl}>
-      <HStack gap="2" justify="center" align="center" className={styles.ingenInntektsmeldinger}>
-        <BodyShort><FormattedMessage id="InntektsmeldingFaktaPanel.ingen" /></BodyShort>
-        <CoffeeIcon />
-      </HStack>
+        <HStack gap="2" justify="center" align="center" className={styles.ingenInntektsmeldinger}>
+          <BodyShort>
+            <FormattedMessage id="InntektsmeldingFaktaPanel.ingen" />
+          </BodyShort>
+          <CoffeeIcon />
+        </HStack>
       </RawIntlProvider>
-    )
+    );
   }
 
   return (
@@ -126,7 +128,7 @@ export const InntektsmeldingFaktaIndex = ({
               >
                 <Table.DataCell>{InntektsmeldingInnsendingsårsak[inntektsmelding.innsendingsårsak]}</Table.DataCell>
                 <Table.DataCell>
-                  <DateTimeLabel dateTimeString={inntektsmelding.innsendingstidspunkt} separator='kl' />
+                  <DateTimeLabel dateTimeString={inntektsmelding.innsendingstidspunkt} separator="kl" />
                 </Table.DataCell>
                 <Table.DataCell>
                   {arbeidsgiverOpplysningerPerId[inntektsmelding.arbeidsgiverIdent]?.navn ?? '-'}
@@ -212,7 +214,7 @@ const InntektsmeldingStatus = ({
   inntektsmelding: Inntektsmelding;
 }) => {
   const behandlingIMStatus = hentBehandlingIMStatus({ behandling, inntektsmelding });
-  if (behandlingIMStatus === "DENNE") {
+  if (behandlingIMStatus === 'DENNE') {
     return (
       <HStack gap="1" align="center">
         <CircleFillIcon className={styles.behandlingCircleDenne} />
@@ -220,7 +222,7 @@ const InntektsmeldingStatus = ({
       </HStack>
     );
   }
-  if (behandlingIMStatus === "ANDRE") {
+  if (behandlingIMStatus === 'ANDRE') {
     return (
       <HStack gap="1" align="center">
         <CircleFillIcon className={styles.behandlingCircleAndre} />
@@ -238,18 +240,18 @@ const InntektsmeldingStatus = ({
 };
 
 const hentBehandlingIMStatus = ({
-                                  behandling,
-                                  inntektsmelding,
-                                }: {
+  behandling,
+  inntektsmelding,
+}: {
   behandling: Behandling;
   inntektsmelding: Inntektsmelding;
 }) => {
   if (inntektsmelding.tilknyttedeBehandlingIder.includes(behandling.uuid)) {
-    return "DENNE";
+    return 'DENNE';
   }
   if (inntektsmelding.tilknyttedeBehandlingIder.length > 0) {
-    return "ANDRE"
+    return 'ANDRE';
   }
 
-  return "INGEN";
-}
+  return 'INGEN';
+};

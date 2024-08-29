@@ -17,13 +17,16 @@ const behandlingstypeOrder = [
 ];
 
 const slåSammen = (oppgaverForAvdeling: OppgaverForAvdeling[]): number[] => {
-  const test = oppgaverForAvdeling.reduce((acc, o) => {
-    const index = behandlingstypeOrder.findIndex(bo => bo === o.behandlingType) + 1;
-    return {
-      ...acc,
-      [index]: acc[index] ? acc[index] + o.antall : o.antall,
-    };
-  }, {} as Record<string, number>);
+  const test = oppgaverForAvdeling.reduce(
+    (acc, o) => {
+      const index = behandlingstypeOrder.findIndex(bo => bo === o.behandlingType) + 1;
+      return {
+        ...acc,
+        [index]: acc[index] ? acc[index] + o.antall : o.antall,
+      };
+    },
+    {} as Record<string, number>,
+  );
 
   return behandlingstypeOrder.map((b, index) => test[index + 1]);
 };

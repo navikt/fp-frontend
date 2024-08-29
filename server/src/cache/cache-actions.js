@@ -5,7 +5,7 @@ export const flush = () => {
   tokenCache.flushAll();
 };
 
-export const getTokenInCache = (cacheKey) => {
+export const getTokenInCache = cacheKey => {
   const tokenInCache = tokenCache.get(cacheKey);
   if (tokenInCache) {
     logger.debug('Henter fra cache.');

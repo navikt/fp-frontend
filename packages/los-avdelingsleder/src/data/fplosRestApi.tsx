@@ -13,7 +13,6 @@ import OppgaverSomErApneEllerPaVent from '../typer/oppgaverSomErApneEllerPaVentT
 import Reservasjon from '../typer/reservasjonTsType';
 import SaksbehandlereOgSaksbehandlerGrupper from '../typer/saksbehandlereOgSaksbehandlerGrupper ';
 
-
 export const RestApiGlobalStatePathsKeys = {
   KODEVERK_LOS: new RestKey<AlleKodeverk, void>('KODEVERK_LOS'),
 };

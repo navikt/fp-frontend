@@ -62,9 +62,7 @@ const VedtakPanel: FunctionComponent<OwnProps> = ({ alleVedtak, erForeldrepenger
                 <PeriodLabel dateStringFom={vedtak.periode.fom} dateStringTom={vedtak.periode.tom} />
               </Table.DataCell>
               <Table.DataCell>{vedtak.arbeidskategori?.termnavn}</Table.DataCell>
-              <Table.DataCell>
-                {vedtak.opphørFom && <DateLabel dateString={vedtak.opphørFom} />}
-              </Table.DataCell>
+              <Table.DataCell>{vedtak.opphørFom && <DateLabel dateString={vedtak.opphørFom} />}</Table.DataCell>
               {erForeldrepenger && (
                 <>
                   <Table.DataCell>

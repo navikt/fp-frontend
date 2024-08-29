@@ -61,28 +61,30 @@ const HarAnnenForelderRettFelter: FunctionComponent<OwnProps> = ({ readOnly, avk
           ]}
         />
       )}
-      {harAnnenForelderRett === false && (!avklareRettEØS || harAnnenForelderRettEØS === false) && avklareUforetrygd && (
-        <>
-          <VerticalSpacer thirtyTwoPx />
-          <RadioGroupPanel
-            name="mottarAnnenForelderUforetrygd"
-            label={<FormattedMessage id="HarAnnenForelderRettFelter.MottarUforetrygd" />}
-            validate={[required]}
-            isReadOnly={readOnly}
-            isTrueOrFalseSelection
-            radios={[
-              {
-                label: <FormattedMessage id="HarAnnenForelderRettFelter.Ja" />,
-                value: 'true',
-              },
-              {
-                label: <FormattedMessage id="HarAnnenForelderRettFelter.Nei" />,
-                value: 'false',
-              },
-            ]}
-          />
-        </>
-      )}
+      {harAnnenForelderRett === false &&
+        (!avklareRettEØS || harAnnenForelderRettEØS === false) &&
+        avklareUforetrygd && (
+          <>
+            <VerticalSpacer thirtyTwoPx />
+            <RadioGroupPanel
+              name="mottarAnnenForelderUforetrygd"
+              label={<FormattedMessage id="HarAnnenForelderRettFelter.MottarUforetrygd" />}
+              validate={[required]}
+              isReadOnly={readOnly}
+              isTrueOrFalseSelection
+              radios={[
+                {
+                  label: <FormattedMessage id="HarAnnenForelderRettFelter.Ja" />,
+                  value: 'true',
+                },
+                {
+                  label: <FormattedMessage id="HarAnnenForelderRettFelter.Nei" />,
+                  value: 'false',
+                },
+              ]}
+            />
+          </>
+        )}
     </>
   );
 };

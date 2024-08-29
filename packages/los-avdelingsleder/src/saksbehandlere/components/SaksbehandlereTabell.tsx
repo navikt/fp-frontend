@@ -10,7 +10,6 @@ import { RestApiPathsKeys, restApiHooks } from '../../data/fplosRestApi';
 
 import styles from './saksbehandlereTabell.module.css';
 
-
 interface OwnProps {
   saksbehandlere: SaksbehandlerProfil[];
   valgtAvdelingEnhet: string;

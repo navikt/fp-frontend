@@ -10,7 +10,7 @@
   "PersonArbeidsforholdTable.IngenArbeidsforhold": "Det finnes ingen arbeidsforhold",
   "PersonArbeidsforholdTable.IngenArbeidsforholdRegistrert": "Ingen arbeidsforhold registrert",
   "PersonArbeidsforholdTable.LeggTilArbeidsforhold": "Legg til arbeidsforhold",
-  
+
   "ArbeidsforholdDetail.Header": "Detaljer",
   "ArbeidsforholdDetail.ArbeidsforholdErAktivt": "Arbeidsforholdet er aktivt og skal benyttes i behandlingen. Nødvendig inntektsmelding er ikke mottatt.",
   "ArbeidsforholdDetail.OppdaterArbeidsforhold": "Arbeidsforhold er manuelt opprettet av saksbehandler",
@@ -27,7 +27,6 @@
   "PersonArbeidsforholdTable.Inntektsmelding": "Inntektsmelding",
   "PersonArbeidsforholdTable.Saksbehandler": "Saksbehandler",
   "PersonArbeidsforholdTable.AaRegisteret": "AA-Registeret",
-
 
   "PermisjonPeriode.Permisjon": "Permisjon",
   "PermisjonPeriode.Permisjoner": "Permisjoner"

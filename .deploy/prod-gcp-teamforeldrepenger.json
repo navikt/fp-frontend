@@ -1,5 +1,5 @@
 {
-  "ingresses": [ "https://fpsak.intern.nav.no" ],
+  "ingresses": ["https://fpsak.intern.nav.no"],
   "minReplicas": "2",
   "maxReplicas": "4",
   "env": "production",
@@ -8,11 +8,7 @@
     "77f05833-ebfd-45fb-8be7-88eca8e7418f",
     "1a59da27-4c55-4a9d-8480-6abd1a856cd2"
   ],
-  "externals": [
-    "fpsak-api.prod-fss-pub.nais.io",
-    "fplos.prod-fss-pub.nais.io",
-    "fptilbake.prod-fss-pub.nais.io"
-  ],
+  "externals": ["fpsak-api.prod-fss-pub.nais.io", "fplos.prod-fss-pub.nais.io", "fptilbake.prod-fss-pub.nais.io"],
   "proxyRedirects": [
     {
       "path": "/fpsak/api",

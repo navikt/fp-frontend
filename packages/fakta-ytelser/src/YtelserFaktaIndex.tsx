@@ -15,9 +15,7 @@ const intl = createIntl(messages);
 
 const YtelserFaktaIndex: FunctionComponent<OwnProps> = ({ inntektArbeidYtelse }) => (
   <RawIntlProvider value={intl}>
-    <YtelserFaktaPanel
-      inntektArbeidYtelse={inntektArbeidYtelse}
-    />
+    <YtelserFaktaPanel inntektArbeidYtelse={inntektArbeidYtelse} />
   </RawIntlProvider>
 );
 

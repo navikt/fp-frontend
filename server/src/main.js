@@ -5,9 +5,7 @@ import timeout from 'connect-timeout';
 import * as headers from './headers.js';
 import logger from './log.js';
 import { getIssuer } from './azure/issuer.js';
-import {
-  addLocalViteServerHandler,
-} from "@navikt/backend-for-frontend-utils";
+import { addLocalViteServerHandler } from '@navikt/backend-for-frontend-utils';
 
 // for debugging during development
 import config from './config.js';
@@ -21,7 +19,7 @@ const { port } = config.server;
 const globalErrorHandler = (err, req, res) => {
   logger.warning(err.stack);
   res.status(err.status || 500).send({ error: err });
-}
+};
 
 const VITE_DEV_MODE_SCRIPT_HASH = "'sha256-w8lX+YWZo/wDjnJo7pT375MLu8LV/TBoTe9Kw55eb28='";
 
@@ -42,18 +40,9 @@ async function startApp() {
           directives: {
             'default-src': ["'self'"],
             'base-uri': ["'self'"],
-            "script-src-elem": [VITE_DEV_MODE_SCRIPT_HASH, "http://localhost:9100", "'self'"],
-            'connect-src': [
-              "'self'",
-              'https://sentry.gc.nav.no',
-              'https://graph.microsoft.com',
-              "ws://localhost:9100"
-            ],
-            'font-src': [
-              "'self'",
-              'https://cdn.nav.no',
-              'data:',
-            ],
+            'script-src-elem': [VITE_DEV_MODE_SCRIPT_HASH, 'http://localhost:9100', "'self'"],
+            'connect-src': ["'self'", 'https://sentry.gc.nav.no', 'https://graph.microsoft.com', 'ws://localhost:9100'],
+            'font-src': ["'self'", 'https://cdn.nav.no', 'data:'],
             'img-src': ["'self'", 'data:'],
             'style-src': ["'self'", "'unsafe-inline'"],
             'frame-src': ["'self'"],
@@ -121,23 +110,23 @@ async function startApp() {
 
     // return user info fetched from the Microsoft Graph API
     server.get('/me', (req, res) => {
-      msgraph.getUserInfoFromGraphApi(req.headers.authorization)
-        .then((userinfo) => res.json(userinfo))
-        .catch((err) => res.status(500)
-          .json(err));
+      msgraph
+        .getUserInfoFromGraphApi(req.headers.authorization)
+        .then(userinfo => res.json(userinfo))
+        .catch(err => res.status(500).json(err));
     });
 
     // return groups that the user is a member of from the Microsoft Graph API
     server.get('/me/memberOf', (req, res) => {
-      msgraph.getUserGroups(req.headers.authorization)
-        .then((userinfo) => res.json(userinfo))
-        .catch((err) => res.status(500)
-          .json(err));
+      msgraph
+        .getUserGroups(req.headers.authorization)
+        .then(userinfo => res.json(userinfo))
+        .catch(err => res.status(500).json(err));
     });
 
     reverseProxy.setup(server);
 
-    addLocalViteServerHandler(server, "9100");
+    addLocalViteServerHandler(server, '9100');
 
     // serve static files
     const rootDir = './dist';
@@ -146,7 +135,7 @@ async function startApp() {
       res.sendFile('index.html', { root: rootDir });
     });
 
-    server.use(globalErrorHandler)
+    server.use(globalErrorHandler);
 
     server.listen(port, () => logger.info(`Listening on port ${port}`));
   } catch (error) {
@@ -154,5 +143,4 @@ async function startApp() {
   }
 }
 
-startApp()
-  .catch((err) => logger.error(err));
+startApp().catch(err => logger.error(err));

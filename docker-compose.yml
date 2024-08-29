@@ -3,9 +3,17 @@ services:
   mock-oauth2-server:
     image: ghcr.io/navikt/mock-oauth2-server:0.5.5
     ports:
-      - "8080:8080"
+      - '8080:8080'
     healthcheck:
-      test: [ "CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8080/default/.well-known/openid-configuration" ]
+      test:
+        [
+          'CMD',
+          'wget',
+          '--no-verbose',
+          '--tries=1',
+          '--spider',
+          'http://localhost:8080/default/.well-known/openid-configuration',
+        ]
       interval: 15s
       timeout: 10s
       retries: 10
@@ -45,7 +53,7 @@ services:
   wonderwall:
     image: ghcr.io/nais/wonderwall:latest
     ports:
-      - "9000:9000"
+      - '9000:9000'
     command: >
       --openid.provider=azure
       --openid.scopes=api://vtp.teamforeldrepenger.fpfrontend/.default
@@ -82,7 +90,7 @@ services:
   upstream:
     image: mendhak/http-https-echo:28
     ports:
-      - "4000:4000"
+      - '4000:4000'
     environment:
       HTTP_PORT: 4000
       JWT_HEADER: Authorization
@@ -92,7 +100,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "9090:9090"
+      - '9090:9090'
     environment:
       NODE_ENV: development
       AZURE_APP_CLIENT_ID: local-client-123
@@ -122,7 +130,7 @@ services:
     restart: on-failure
     container_name: frontend
     healthcheck:
-      test: [ "CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:9090/health/isReady" ]
+      test: ['CMD', 'wget', '--no-verbose', '--tries=1', '--spider', 'http://localhost:9090/health/isReady']
       interval: 15s
       timeout: 10s
       retries: 10

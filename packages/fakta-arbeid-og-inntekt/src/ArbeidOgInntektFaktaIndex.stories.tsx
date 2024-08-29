@@ -22,10 +22,10 @@ const MANUELT_ORG_NR = '342352362';
 
 const fellesInntektsmeldingFelter = {
   innsendingstidspunkt: '2021-12-06T00:00:00',
-  kildeSystem: "Altinn",
+  kildeSystem: 'Altinn',
   bortfalteNaturalytelser: [],
   refusjonsperioder: [],
-  innsendingsårsak: "NY" as const,
+  innsendingsårsak: 'NY' as const,
   behandlingsIdeer: [],
   tilknyttedeBehandlingIder: [],
 };
@@ -281,7 +281,7 @@ AvklarManglendeArbeidsforhold.args = {
         journalpostId: '1',
         dokumentId: '2',
         motattDato: '2021-12-06',
-        årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD
+        årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD,
       },
     ],
     inntekter: [],
@@ -334,7 +334,7 @@ AvklarManglendeArbeidsforholdDerBehandlingErAvsluttet.args = {
         refusjonPrMnd: undefined,
         journalpostId: '1',
         dokumentId: '2',
-        årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD
+        årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD,
       },
     ],
     inntekter: [],
@@ -388,7 +388,7 @@ AvklarManglendeOpplysningerDerAksjonspunktErBekreftetOgTilbakehoppMulig.args = {
         refusjonPrMnd: undefined,
         journalpostId: '1',
         dokumentId: '2',
-        årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD
+        årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD,
       },
     ],
     inntekter: [],
@@ -435,7 +435,7 @@ IngenAksjonspunktMenTilbakehoppMuligForOverstyrer.args = {
         motattDato: '2021-12-06',
         refusjonPrMnd: undefined,
         journalpostId: '1',
-        dokumentId: '2'
+        dokumentId: '2',
       },
     ],
     inntekter: [],
@@ -589,7 +589,7 @@ ArbeidsforholdErOK.args = {
         motattDato: '2021-12-06',
         refusjonPrMnd: 20000,
         journalpostId: '1',
-        dokumentId: '2'
+        dokumentId: '2',
       },
     ],
     inntekter: [
@@ -677,7 +677,7 @@ ArbeidsforholdErOKDerDetErToArbeidsforholdFraSammeVirksomhet.args = {
         motattDato: '2021-12-06',
         refusjonPrMnd: 20000,
         journalpostId: '1',
-        dokumentId: '2'
+        dokumentId: '2',
       },
       {
         ...fellesInntektsmeldingFelter,
@@ -689,7 +689,7 @@ ArbeidsforholdErOKDerDetErToArbeidsforholdFraSammeVirksomhet.args = {
         kontaktpersonNummer: '41925090',
         motattDato: '2021-11-06',
         journalpostId: '1',
-        dokumentId: '2'
+        dokumentId: '2',
       },
     ],
     inntekter: [
@@ -799,7 +799,7 @@ FlereArbeidsforholdOgInntekstemeldinger.args = {
         motattDato: '2021-12-06',
         refusjonPrMnd: 20000,
         journalpostId: '1',
-        dokumentId: '2'
+        dokumentId: '2',
       },
       {
         ...fellesInntektsmeldingFelter,
@@ -813,7 +813,7 @@ FlereArbeidsforholdOgInntekstemeldinger.args = {
         refusjonPrMnd: 5000,
         journalpostId: '1',
         dokumentId: '2',
-        årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD
+        årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD,
       },
     ],
     inntekter: [
@@ -954,7 +954,7 @@ ArbeidsforholdMedSammeOrgNr.args = {
         journalpostId: '1',
         dokumentId: '2',
         motattDato: '2021-12-06',
-        årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD
+        årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD,
       },
       {
         ...fellesInntektsmeldingFelter,
@@ -968,7 +968,7 @@ ArbeidsforholdMedSammeOrgNr.args = {
         journalpostId: '1',
         dokumentId: '2',
         motattDato: '2021-12-06',
-        årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD
+        årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD,
       },
     ],
     inntekter: [
@@ -1083,7 +1083,7 @@ ArbeidsforholdMedSammeOrgNrDerEnManglerInntektsmeldingMenIkkeDetAndre.args = {
         journalpostId: '1',
         dokumentId: '2',
         motattDato: '2021-12-06',
-        årsak: undefined
+        årsak: undefined,
       },
     ],
     inntekter: [
@@ -1159,7 +1159,7 @@ FoerRegisterinnhenting.args = {
         motattDato: '2022-02-15',
         årsak: undefined,
         begrunnelse: undefined,
-        saksbehandlersVurdering: undefined
+        saksbehandlersVurdering: undefined,
       },
     ],
     arbeidsforhold: [],
@@ -1253,7 +1253,7 @@ EtterAtEtterspurtInntektsmeldingErKommet.args = {
         motattDato: '2022-02-16',
         årsak: undefined,
         begrunnelse: 'her vil jeg mase på AG',
-        saksbehandlersVurdering: 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING'
+        saksbehandlersVurdering: 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING',
       },
     ],
     arbeidsforhold: [
@@ -1347,7 +1347,7 @@ SkalViseFødselsnummerForPrivatperson.args = {
         motattDato: '2021-12-06',
         refusjonPrMnd: 20000,
         journalpostId: '1',
-        dokumentId: '2'
+        dokumentId: '2',
       },
     ],
     inntekter: [
