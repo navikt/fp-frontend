@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback } from 'react';
+import React, { FunctionComponent, useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { hasValidInteger, minLength, required } from '@navikt/ft-form-validators';
@@ -28,12 +28,16 @@ const JournalpostSøkModal: FunctionComponent<OwnProps> = ({
   harSøktOgFunnetIngenMatch,
 }) => {
   const intl = useIntl();
+  const [lasterJournalpost, setLasterJournalpost] = useState(false);
   const formMethods = useForm({
     defaultValues: {} as Formvalues,
   });
+
   const submit = useCallback(
     (data: Formvalues) => {
+      setLasterJournalpost(true);
       hentJournalpost(data.journalpostId);
+      setLasterJournalpost(false);
     },
     [hentJournalpost],
   );
@@ -63,7 +67,7 @@ const JournalpostSøkModal: FunctionComponent<OwnProps> = ({
               hideLabel
               label={intl.formatMessage({ id: 'Journalpost.Søk.JournalpostID' })}
             />
-            <Button size="xsmall">
+            <Button size="xsmall" loading={lasterJournalpost}>
               <FormattedMessage id="Journalpost.Søk.Finn" />
             </Button>
           </HStack>
