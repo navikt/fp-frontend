@@ -33,11 +33,11 @@ interface Props {
 }
 
 const GruppeSaksbehandlere: FunctionComponent<Props> = ({
-                                                          saksbehandlerGruppe,
-                                                          avdelingensSaksbehandlere,
-                                                          lagreValgtSaksbehandlar,
-                                                          endreGruppenavn,
-                                                        }) => {
+  saksbehandlerGruppe,
+  avdelingensSaksbehandlere,
+  lagreValgtSaksbehandlar,
+  endreGruppenavn,
+}) => {
   const intl = useIntl();
 
   const formMethods = useForm({

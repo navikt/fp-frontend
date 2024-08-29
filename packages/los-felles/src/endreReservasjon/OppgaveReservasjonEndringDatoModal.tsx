@@ -33,14 +33,14 @@ interface OwnProps {
  * OppgaveReservasjonEndringDatoModal.
  */
 const OppgaveReservasjonEndringDatoModal: FunctionComponent<OwnProps> = ({
-                                                                           showModal,
-                                                                           closeModal,
-                                                                           reserverTilDefault,
-                                                                           oppgaveId,
-                                                                           hentReserverteOppgaver,
-                                                                           endreReserverasjonState,
-                                                                           endreOppgavereservasjon,
-                                                                         }) => {
+  showModal,
+  closeModal,
+  reserverTilDefault,
+  oppgaveId,
+  hentReserverteOppgaver,
+  endreReserverasjonState,
+  endreOppgavereservasjon,
+}) => {
   const intl = useIntl();
 
   const endreOppgaveReservasjonFn = useCallback(
