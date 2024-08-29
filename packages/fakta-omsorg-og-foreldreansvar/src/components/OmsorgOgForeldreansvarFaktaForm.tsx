@@ -123,9 +123,7 @@ const OmsorgOgForeldreansvarFaktaForm: FunctionComponent<PureOwnProps> & StaticF
           </div>
           {!erAksjonspunktForeldreansvar && (
             <div className={styles.cols}>
-              <RettighetFaktaPanel
-                alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-              />
+              <RettighetFaktaPanel alleMerknaderFraBeslutter={alleMerknaderFraBeslutter} />
             </div>
           )}
         </HStack>

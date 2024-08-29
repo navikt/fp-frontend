@@ -24,7 +24,7 @@ const Template: StoryFn<{
     valgtSaksbehandler={{
       brukerIdent: 'R12122',
       navn: 'Espen Utvikler',
-      ansattAvdeling: null
+      ansattAvdeling: null,
     }}
     closeSletteModal={action('button-click')}
     fjernSaksbehandler={fjernSaksbehandler}

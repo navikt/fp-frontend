@@ -62,5 +62,5 @@ describe('<SaksbehandlereTabell>', () => {
     rows.slice(1).forEach((row, index) => {
       expect(row).toHaveTextContent(sortedNames[index]);
     });
-  })
+  });
 });

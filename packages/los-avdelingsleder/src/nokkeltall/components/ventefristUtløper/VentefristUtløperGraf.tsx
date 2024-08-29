@@ -38,7 +38,7 @@ const lagDatastruktur = (koordinater: Koordinat[]): (number | Date)[][] => {
     const sumY = koordinater
       .filter(k => dayjs(k.x).isSame(dato))
       .map(k => k.y)
-      .reduce((sum, y)  => sum + y, 0);
+      .reduce((sum, y) => sum + y, 0);
     nyeKoordinater.push([dato.toDate(), sumY]);
   }
 

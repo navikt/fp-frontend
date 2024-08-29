@@ -13,13 +13,13 @@ import { ArrowForwardIcon } from '@navikt/aksel-icons';
 import styles from './inntektsmeldingFakta.module.css';
 
 export const InntektsmeldingInnhold = ({
-                                         inntektsmelding,
-                                         arbeidsgiverOpplysningerPerId,
-                                         fagsak,
-                                         alleBehandlinger,
-                                         behandling,
-                                         alleKodeverk,
-                                       }: { inntektsmelding: Inntektsmelding } & InntektsmeldingFaktaProps) => {
+  inntektsmelding,
+  arbeidsgiverOpplysningerPerId,
+  fagsak,
+  alleBehandlinger,
+  behandling,
+  alleKodeverk,
+}: { inntektsmelding: Inntektsmelding } & InntektsmeldingFaktaProps) => {
   const intl = useIntl();
 
   return (
@@ -27,7 +27,7 @@ export const InntektsmeldingInnhold = ({
       <HStack gap="4" justify="space-between" align="start">
         <Heading level="3" size="small">
           <FormattedMessage id="InntektsmeldingFaktaPanel.innsendingstidspunkt" />{' '}
-          <DateTimeLabel dateTimeString={inntektsmelding.innsendingstidspunkt} separator='kl'/>
+          <DateTimeLabel dateTimeString={inntektsmelding.innsendingstidspunkt} separator="kl" />
         </Heading>
         <LastNedPdfKnapp fagsak={fagsak} inntektsmelding={inntektsmelding} />
       </HStack>
@@ -64,9 +64,9 @@ export const InntektsmeldingInnhold = ({
             <FormattedMessage id="InntektsmeldingFaktaPanel.kontaktperson.navn" />: {inntektsmelding.kontaktpersonNavn}
           </span>
           <span>
-              <FormattedMessage id="InntektsmeldingFaktaPanel.kontaktperson.telefon" />:{' '}
+            <FormattedMessage id="InntektsmeldingFaktaPanel.kontaktperson.telefon" />:{' '}
             {inntektsmelding.kontaktpersonNummer}
-            </span>
+          </span>
         </InntektsmeldingInfoBlokk>
 
         <Startdato
@@ -82,7 +82,6 @@ export const InntektsmeldingInnhold = ({
         <InntektsmeldingInfoBlokk tittel={intl.formatMessage({ id: 'InntektsmeldingFaktaPanel.refusjon.heading' })}>
           <Refusjon inntektsmelding={inntektsmelding} />
         </InntektsmeldingInfoBlokk>
-
       </HGrid>
     </VStack>
   );
@@ -144,13 +143,16 @@ const Refusjon = ({ inntektsmelding }: { inntektsmelding: Inntektsmelding }) => 
       <span>{formatCurrencyNoKr(inntektsmelding.refusjonPrMnd ?? 0)}</span>
       <span>Endringer i perioden:</span>
       <ul>
-        {perioderStigende.map((refusjon) => {
+        {perioderStigende.map(refusjon => {
           return (
             <li key={refusjon.indexKey}>
-              <FormattedMessage id="InntektsmeldingFaktaPanel.refusjon.endring.periode" values={{
-                kroner: formatCurrencyNoKr(refusjon.refusjonsbeløp.verdi),
-                fom: <DateLabel dateString={refusjon.fom} />
-              }} />
+              <FormattedMessage
+                id="InntektsmeldingFaktaPanel.refusjon.endring.periode"
+                values={{
+                  kroner: formatCurrencyNoKr(refusjon.refusjonsbeløp.verdi),
+                  fom: <DateLabel dateString={refusjon.fom} />,
+                }}
+              />
             </li>
           );
         })}
@@ -267,11 +269,11 @@ const LastNedPdfModalKnapp = ({ inntektsmelding, fagsak }: { fagsak: Fagsak; inn
 };
 
 const BehandlingsOversikt = ({
-                               inntektsmelding,
-                               behandling,
-                               alleBehandlinger,
-                               alleKodeverk,
-                             }: {
+  inntektsmelding,
+  behandling,
+  alleBehandlinger,
+  alleKodeverk,
+}: {
   inntektsmelding: Inntektsmelding;
   behandling: Behandling;
   alleBehandlinger: BehandlingAppKontekst[];
@@ -279,16 +281,14 @@ const BehandlingsOversikt = ({
 }) => {
   const intl = useIntl();
   const bruktIDenneBehandlingen = inntektsmelding.tilknyttedeBehandlingIder.includes(behandling.uuid);
-  const gjeldendeBehandlinger = alleBehandlinger.filter(b => inntektsmelding.tilknyttedeBehandlingIder.includes(b.uuid));
+  const gjeldendeBehandlinger = alleBehandlinger.filter(b =>
+    inntektsmelding.tilknyttedeBehandlingIder.includes(b.uuid),
+  );
 
   const infoTekst = (() => {
     const antallBehandlinger = gjeldendeBehandlinger.length;
     if (bruktIDenneBehandlingen && antallBehandlinger > 1) {
-      return (
-        <FormattedMessage
-          id="InntektsmeldingFaktaPanel.behandling.bruktIDenneOgFlere"
-        />
-      );
+      return <FormattedMessage id="InntektsmeldingFaktaPanel.behandling.bruktIDenneOgFlere" />;
     }
     if (bruktIDenneBehandlingen) {
       return <FormattedMessage id="InntektsmeldingFaktaPanel.behandling.bruktKunIDenne" />;
@@ -314,12 +314,12 @@ const BehandlingsOversikt = ({
               <span>{alleKodeverk.BehandlingType.find(({ kode }) => kode === b.type)?.navn}</span>
               <span>
                 <FormattedMessage id="InntektsmeldingFaktaPanel.behandling.opprettet" />{' '}
-                <DateTimeLabel dateTimeString={b.opprettet} separator='kl' />
+                <DateTimeLabel dateTimeString={b.opprettet} separator="kl" />
               </span>
               {b.avsluttet ? (
                 <span>
                   <FormattedMessage id="InntektsmeldingFaktaPanel.behandling.avsluttet" />{' '}
-                  <DateTimeLabel dateTimeString={b.avsluttet} separator='kl' />
+                  <DateTimeLabel dateTimeString={b.avsluttet} separator="kl" />
                 </span>
               ) : null}
             </VStack>

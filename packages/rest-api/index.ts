@@ -13,4 +13,5 @@ export { default as RestKey } from './src/RestKey';
 export { default as AsyncPollingStatus } from './src/requestApi/asyncPollingStatus';
 export { default as EventType } from './src/requestApi/eventType';
 
-export const createRequestApi = (configs: RequestConfig[]): RequestApi => new RequestApi(getAxiosHttpClientApi(), configs);
+export const createRequestApi = (configs: RequestConfig[]): RequestApi =>
+  new RequestApi(getAxiosHttpClientApi(), configs);

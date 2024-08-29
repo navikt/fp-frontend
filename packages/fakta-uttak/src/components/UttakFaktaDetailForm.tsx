@@ -142,9 +142,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
   }, []);
 
   const sorterteUttakPeriodeTyper = useMemo(
-    () =>
-      [...alleKodeverk[KodeverkType.UTTAK_PERIODE_TYPE]]
-        .sort((k1, k2) => k1.navn.localeCompare(k2.navn)),
+    () => [...alleKodeverk[KodeverkType.UTTAK_PERIODE_TYPE]].sort((k1, k2) => k1.navn.localeCompare(k2.navn)),
     [],
   );
   const sorterteOverføringÅrsaker = useMemo(

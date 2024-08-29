@@ -223,7 +223,7 @@ FlereArbeidsforhold.args = {
         motattDato: '2021-12-06',
         refusjonPrMnd: 20000,
         journalpostId: '1',
-        dokumentId: '2'
+        dokumentId: '2',
       },
     ],
     inntekter: [
@@ -361,7 +361,7 @@ FlereArbeidsforholdFraSammeArbeidsgiver.args = {
         motattDato: '2021-12-06',
         refusjonPrMnd: 20000,
         journalpostId: '1',
-        dokumentId: '2'
+        dokumentId: '2',
       },
       {
         ...fellesInntektsmeldingFelter,
@@ -373,7 +373,7 @@ FlereArbeidsforholdFraSammeArbeidsgiver.args = {
         kontaktpersonNummer: '41925090',
         motattDato: '2021-12-06',
         journalpostId: '1',
-        dokumentId: '2'
+        dokumentId: '2',
       },
     ],
     inntekter: [

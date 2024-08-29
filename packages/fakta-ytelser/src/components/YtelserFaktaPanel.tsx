@@ -11,17 +11,13 @@ interface OwnProps {
   inntektArbeidYtelse: InntektArbeidYtelse;
 }
 
-const YtelserFaktaPanel: FunctionComponent<OwnProps> = ({
-  inntektArbeidYtelse,
-}) => (
+const YtelserFaktaPanel: FunctionComponent<OwnProps> = ({ inntektArbeidYtelse }) => (
   <>
     <Heading size="small">
       <FormattedMessage id="YtelserFaktaPanel.SokersYtelser" />
     </Heading>
     <VerticalSpacer eightPx />
-    <PersonYtelserTable
-      ytelser={inntektArbeidYtelse.relatertTilgrensendeYtelserForSoker}
-    />
+    <PersonYtelserTable ytelser={inntektArbeidYtelse.relatertTilgrensendeYtelserForSoker} />
     {inntektArbeidYtelse.relatertTilgrensendeYtelserForAnnenForelder &&
       inntektArbeidYtelse.relatertTilgrensendeYtelserForAnnenForelder.length > 0 && (
         <>
@@ -30,9 +26,7 @@ const YtelserFaktaPanel: FunctionComponent<OwnProps> = ({
             <FormattedMessage id="YtelserFaktaPanel.AnnenPartsYtelser" />
           </Heading>
           <VerticalSpacer eightPx />
-          <PersonYtelserTable
-            ytelser={inntektArbeidYtelse.relatertTilgrensendeYtelserForAnnenForelder}
-          />
+          <PersonYtelserTable ytelser={inntektArbeidYtelse.relatertTilgrensendeYtelserForAnnenForelder} />
         </>
       )}
   </>

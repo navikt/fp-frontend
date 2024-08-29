@@ -1,4 +1,4 @@
-import { SaksbehandlerProfil } from "@navikt/fp-los-felles";
+import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
 
 export type SaksbehandlerGruppe = Readonly<{
   gruppeId: number;

@@ -86,12 +86,9 @@ const VentefristUtløperPanel: FunctionComponent<OwnProps> = ({
         height={height}
         behandlingerPaVent={
           behandlingerPaVent &&
-          behandlingerPaVent
-            .filter(ompv =>
-              values.valgtYtelsetype === ALLE_YTELSETYPER_VALGT
-                ? true
-                : values.valgtYtelsetype === ompv.fagsakYtelseType,
-            )
+          behandlingerPaVent.filter(ompv =>
+            values.valgtYtelsetype === ALLE_YTELSETYPER_VALGT ? true : values.valgtYtelsetype === ompv.fagsakYtelseType,
+          )
         }
       />
     </Form>

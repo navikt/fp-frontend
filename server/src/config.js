@@ -1,10 +1,7 @@
 import 'dotenv/config';
 import logger from './log.js';
 
-const envVar = ({
-  name,
-  required = true,
-}) => {
+const envVar = ({ name, required = true }) => {
   if (!process.env[name] && required) {
     logger.error(`Missing required environment variable '${name}'`);
     process.exit(1);
@@ -14,16 +11,18 @@ const envVar = ({
 
 const server = {
   // should be equivalent to the URL this application is hosted on for correct CORS origin header
-  host: envVar({
-    name: 'HOST',
-    required: false,
-  }) || 'localhost',
+  host:
+    envVar({
+      name: 'HOST',
+      required: false,
+    }) || 'localhost',
 
   // port for your application
-  port: envVar({
-    name: 'PORT',
-    required: false,
-  }) || 3000,
+  port:
+    envVar({
+      name: 'PORT',
+      required: false,
+    }) || 3000,
 };
 
 const azureAd = {
@@ -36,10 +35,12 @@ const azureAd = {
     name: 'AZURE_APP_CLIENT_ID',
     required: true,
   }),
-  clientJwks: JSON.parse(envVar({
-    name: 'AZURE_APP_JWKS',
-    required: true,
-  })),
+  clientJwks: JSON.parse(
+    envVar({
+      name: 'AZURE_APP_JWKS',
+      required: true,
+    }),
+  ),
   graphUrl: envVar({
     name: 'MS_GRAPH_URL',
     required: false,
@@ -51,24 +52,29 @@ const azureAd = {
 };
 
 const cors = {
-  allowedHeaders: envVar({
-    name: 'CORS_ALLOWED_HEADERS',
-    required: false,
-  }) || 'Nav-CallId',
-  exposedHeaders: envVar({
-    name: 'CORS_EXPOSED_HEADERS',
-    required: false,
-  }) || '',
-  allowedMethods: envVar({
-    name: 'CORS_ALLOWED_METHODS',
-    required: false,
-  }) || '',
+  allowedHeaders:
+    envVar({
+      name: 'CORS_ALLOWED_HEADERS',
+      required: false,
+    }) || 'Nav-CallId',
+  exposedHeaders:
+    envVar({
+      name: 'CORS_EXPOSED_HEADERS',
+      required: false,
+    }) || '',
+  allowedMethods:
+    envVar({
+      name: 'CORS_ALLOWED_METHODS',
+      required: false,
+    }) || '',
 };
 
 // eslint-disable-next-line consistent-return
 const configValueAsJson = ({ name, required = true }) => {
   const value = envVar({ name, required });
-  if (!value) { return null; }
+  if (!value) {
+    return null;
+  }
   try {
     return JSON.parse(value);
   } catch (error) {

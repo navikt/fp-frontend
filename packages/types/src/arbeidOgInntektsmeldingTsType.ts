@@ -39,10 +39,10 @@ type Refusjonsperiode = {
   refusjonsbeløp: Beløp;
   indexKey: string;
   fom: string;
-}
+};
 
 type BortfaltNaturalYtelse = Readonly<{
-  periode: { fomDato: string; tomDato: string; };
+  periode: { fomDato: string; tomDato: string };
   beloepPerMnd: Beløp;
   type: keyof typeof NaturalytelseType;
   indexKey: string;
@@ -50,35 +50,35 @@ type BortfaltNaturalYtelse = Readonly<{
 
 type Beløp = {
   verdi: number;
-}
+};
 
 export const InntektsmeldingInnsendingsårsak = {
-  NY: "Ny",
-  ENDRING: "Endring",
-  UDEFINERT: "Udefinert"
-}
+  NY: 'Ny',
+  ENDRING: 'Endring',
+  UDEFINERT: 'Udefinert',
+};
 
 export const NaturalytelseType = {
-  ELEKTRISK_KOMMUNIKASJON: "Elektrisk kommunikasjon",
-  AKSJER_GRUNNFONDSBEVIS_TIL_UNDERKURS: "Aksjer grunnfondsbevis til underkurs",
-  LOSJI: "Losji",
-  KOST_DØGN: "Kostpenger døgnsats",
-  BESØKSREISER_HJEMMET_ANNET: "Besøksreiser hjemmet annet",
-  KOSTBESPARELSE_I_HJEMMET: "Kostbesparelser i hjemmet",
-  RENTEFORDEL_LÅN: "Rentefordel lån",
-  BIL: "Bil",
-  KOST_DAGER: "Kostpenger dager",
-  BOLIG: "Bolig",
-  SKATTEPLIKTIG_DEL_FORSIKRINGER: "Skattepliktig del forsikringer",
-  FRI_TRANSPORT: "Fri transport",
-  OPSJONER: "Opsjoner",
-  TILSKUDD_BARNEHAGEPLASS: "Tilskudd barnehageplass",
-  ANNET: "Annet",
-  BEDRIFTSBARNEHAGEPLASS: "Bedriftsbarnehageplass",
-  YRKEBIL_TJENESTLIGBEHOV_KILOMETER: "Yrkesbil tjenesteligbehov kilometer",
-  YRKEBIL_TJENESTLIGBEHOV_LISTEPRIS: "Yrkesbil tjenesteligbehov listepris",
-  INNBETALING_TIL_UTENLANDSK_PENSJONSORDNING: "Innbetaling utenlandsk pensjonsordning",
-  UDEFINERT: "Ikke definert"
+  ELEKTRISK_KOMMUNIKASJON: 'Elektrisk kommunikasjon',
+  AKSJER_GRUNNFONDSBEVIS_TIL_UNDERKURS: 'Aksjer grunnfondsbevis til underkurs',
+  LOSJI: 'Losji',
+  KOST_DØGN: 'Kostpenger døgnsats',
+  BESØKSREISER_HJEMMET_ANNET: 'Besøksreiser hjemmet annet',
+  KOSTBESPARELSE_I_HJEMMET: 'Kostbesparelser i hjemmet',
+  RENTEFORDEL_LÅN: 'Rentefordel lån',
+  BIL: 'Bil',
+  KOST_DAGER: 'Kostpenger dager',
+  BOLIG: 'Bolig',
+  SKATTEPLIKTIG_DEL_FORSIKRINGER: 'Skattepliktig del forsikringer',
+  FRI_TRANSPORT: 'Fri transport',
+  OPSJONER: 'Opsjoner',
+  TILSKUDD_BARNEHAGEPLASS: 'Tilskudd barnehageplass',
+  ANNET: 'Annet',
+  BEDRIFTSBARNEHAGEPLASS: 'Bedriftsbarnehageplass',
+  YRKEBIL_TJENESTLIGBEHOV_KILOMETER: 'Yrkesbil tjenesteligbehov kilometer',
+  YRKEBIL_TJENESTLIGBEHOV_LISTEPRIS: 'Yrkesbil tjenesteligbehov listepris',
+  INNBETALING_TIL_UTENLANDSK_PENSJONSORDNING: 'Innbetaling utenlandsk pensjonsordning',
+  UDEFINERT: 'Ikke definert',
 };
 
 export type Arbeidsforhold = Readonly<{

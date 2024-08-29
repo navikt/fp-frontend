@@ -34,9 +34,7 @@ interface StaticFunctions {
 /**
  * RettighetFaktaPanel
  */
-const RettighetFaktaPanel: FunctionComponent<PureOwnProps> & StaticFunctions = ({
-  alleMerknaderFraBeslutter,
-}) => {
+const RettighetFaktaPanel: FunctionComponent<PureOwnProps> & StaticFunctions = ({ alleMerknaderFraBeslutter }) => {
   const intl = useIntl();
   const { watch } = useFormContext<FormValues>();
 
