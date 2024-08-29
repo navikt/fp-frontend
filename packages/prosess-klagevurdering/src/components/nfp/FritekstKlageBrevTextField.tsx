@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
-import { getLanguageFromSprakkode } from '@navikt/ft-utils';
+import { formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 import { hasValidText, required } from '@navikt/ft-form-validators';
 import { TextAreaField } from '@navikt/ft-form-hooks';
 
@@ -26,8 +26,7 @@ const FritekstKlageBrevTextField: FunctionComponent<OwnProps> = ({ sprakkode, re
           titleText: getLanguageFromSprakkode(sprakkode),
         },
       ]}
-      // Må erstatte bindestrek kopiert inn fra Word med vanlig bindestrek
-      parse={value => value.toString().replaceAll(/\p{Dash_Punctuation}/gu, '-').replaceAll('\t', ' ')}
+      parse={formaterFritekst}
     />
   </div>
 );

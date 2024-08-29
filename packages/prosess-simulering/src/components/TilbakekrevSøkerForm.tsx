@@ -5,7 +5,7 @@ import { BodyShort, HStack, VStack } from '@navikt/ds-react';
 
 import { RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
 import { ArrowBox, VerticalSpacer, Tooltip } from '@navikt/ft-ui-komponenter';
-import { getLanguageFromSprakkode } from '@navikt/ft-utils';
+import { formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { fagsakYtelseType, AksjonspunktCode, tilbakekrevingVidereBehandling } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Fagsak, TilbakekrevingValg } from '@navikt/fp-types';
@@ -137,13 +137,7 @@ const TilbakekrevSøkerForm: FunctionComponent<OwnProps> = ({
                       validate={[required, minLength3, maxLength1500, hasValidText]}
                       maxLength={1500}
                       readOnly={readOnly}
-                      // Må erstatte bindestrek kopiert inn fra Word med vanlig bindestrek
-                      parse={value =>
-                        value
-                          .toString()
-                          .replaceAll(/\p{Dash_Punctuation}/gu, '-')
-                          .replaceAll('\t', ' ')
-                      }
+                      parse={formaterFritekst}
                       badges={[
                         {
                           type: 'info',

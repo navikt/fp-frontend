@@ -7,7 +7,7 @@ import { Button } from '@navikt/ds-react';
 import { dokumentMalType, ugunstAarsakTyper, fagsakYtelseType as FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { KodeverkMedNavn } from '@navikt/fp-types';
 import { ariaCheck, hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
-import { getLanguageFromSprakkode } from '@navikt/ft-utils';
+import { formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 import { SelectField, TextAreaField, Form } from '@navikt/ft-form-hooks';
 import { FlexContainer, FlexRow, FlexColumn, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { UkjentAdresseMeldingIndex } from '@navikt/fp-sak-ukjent-adresse';
@@ -193,13 +193,7 @@ const Messages: FunctionComponent<OwnProps> = ({
             validate={[required, erVarselOmRevurdering ? maxLength10000 : maxLength4000, minLength3, hasValidText]}
             maxLength={erVarselOmRevurdering ? 10000 : 4000}
             badges={[{ type: 'info', titleText: language }]}
-            // Må erstatte bindestrek kopiert inn fra Word med vanlig bindestrek
-            parse={value =>
-              value
-                .toString()
-                .replaceAll(/\p{Dash_Punctuation}/gu, '-')
-                .replaceAll('\t', ' ')
-            }
+            parse={formaterFritekst}
           />
         </>
       )}

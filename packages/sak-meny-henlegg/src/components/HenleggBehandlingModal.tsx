@@ -15,6 +15,7 @@ import { hasValidText, maxLength, required } from '@navikt/ft-form-validators';
 import { KodeverkMedNavn } from '@navikt/fp-types';
 
 import styles from './henleggBehandlingModal.module.css';
+import { formaterFritekst } from '@navikt/ft-utils';
 
 const maxLength1500 = maxLength(1500);
 
@@ -198,13 +199,7 @@ const HenleggBehandlingModal: FunctionComponent<PureOwnProps> = ({
                   label={intl.formatMessage({ id: 'HenleggBehandlingModal.Fritekst' })}
                   validate={[required, hasValidText]}
                   maxLength={2000}
-                  // Må erstatte bindestrek kopiert inn fra Word med vanlig bindestrek
-                  parse={value =>
-                    value
-                      .toString()
-                      .replaceAll(/\p{Dash_Punctuation}/gu, '-')
-                      .replaceAll('\t', ' ')
-                  }
+                  parse={formaterFritekst}
                 />
               </div>
             </>
