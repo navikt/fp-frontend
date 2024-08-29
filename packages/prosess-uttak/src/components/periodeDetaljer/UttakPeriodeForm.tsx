@@ -1,5 +1,6 @@
 import React, { useCallback, ReactElement, FunctionComponent, useMemo, useEffect } from 'react';
 import { Alert, Button, HStack } from '@navikt/ds-react';
+import dayjs from 'dayjs';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { Form, TextAreaField, RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
@@ -77,12 +78,12 @@ const sorterÅrsakKodeverk = (a: ArsakKodeverk, b: ArsakKodeverk): number => {
 };
 
 const getFiltrerPåGyldighetForLovendringer =
-  (aarsakFilter: AarsakFilter) =>
+  (aarsakFilter: AarsakFilter, periodeFom: string) =>
   (kodeItem: ArsakKodeverk): boolean => {
     if (kodeItem.gyldigForLovendringer === undefined) {
       return true;
     }
-    if (aarsakFilter.kreverSammenhengendeUttak) {
+    if (dayjs(periodeFom).isBefore('2021-10-01')) {
       return kodeItem.gyldigForLovendringer.includes('KREVER_SAMMENHENGENDE_UTTAK');
     }
     return aarsakFilter.utenMinsterett
@@ -103,6 +104,7 @@ const getFiltrerPåSynlighet =
 
 const lagOptionsTilPeriodeÅrsakSelect = (
   årsakKoder: ArsakKodeverk[],
+  periodeFom: string,
   utfallType: string,
   aarsakFilter: AarsakFilter,
   utsettelseType?: string,
@@ -113,7 +115,7 @@ const lagOptionsTilPeriodeÅrsakSelect = (
 
   const filteredNyKodeArray = årsakKoder
     .filter(kodeItem => !utfallType || kodeItem.utfallType === utfallType)
-    .filter(getFiltrerPåGyldighetForLovendringer(aarsakFilter))
+    .filter(getFiltrerPåGyldighetForLovendringer(aarsakFilter, periodeFom))
     .filter(getFiltrerPåSynlighet(aarsakFilter));
 
   const mapTilOption = (kodeverk: KodeverkMedNavn) => (
@@ -324,6 +326,7 @@ const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
     () =>
       lagOptionsTilPeriodeÅrsakSelect(
         periodeResultatårsakKoder,
+        valgtPeriode.fom,
         erOppfylt ? 'INNVILGET' : 'AVSLÅTT',
         årsakFilter,
         valgtPeriode.utsettelseType,

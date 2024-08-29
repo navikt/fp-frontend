@@ -322,7 +322,7 @@ AksjonspunktDerValgtStønadskontoIkkeFinnes.args = {
     perioderAnnenpart: [],
     annenForelderHarRett: true,
     aleneomsorg: false,
-    årsakFilter: { kreverSammenhengendeUttak: false, utenMinsterett: false, søkerErMor: true },
+    årsakFilter: { kreverSammenhengendeUttak: false, kreverSammenhengendeUttakTom: '2021-09-30', utenMinsterett: false, søkerErMor: true },
   },
 };
 
@@ -500,7 +500,7 @@ PeriodeMedGraderingUtenAksjonspunkt.args = {
     perioderAnnenpart: [],
     annenForelderHarRett: true,
     aleneomsorg: false,
-    årsakFilter: { kreverSammenhengendeUttak: true, utenMinsterett: true, søkerErMor: true },
+    årsakFilter: { kreverSammenhengendeUttak: true, kreverSammenhengendeUttakTom: '2021-09-30', utenMinsterett: true, søkerErMor: true },
   },
 };
 
@@ -648,7 +648,7 @@ AksjonspunktIRevurdering.args = {
     perioderAnnenpart: [],
     annenForelderHarRett: true,
     aleneomsorg: false,
-    årsakFilter: { kreverSammenhengendeUttak: true, utenMinsterett: true, søkerErMor: true },
+    årsakFilter: { kreverSammenhengendeUttak: true, kreverSammenhengendeUttakTom: '2021-09-30', utenMinsterett: true, søkerErMor: true },
   },
 };
 
@@ -878,7 +878,7 @@ ProsessUttakToParter.args = {
     ],
     annenForelderHarRett: true,
     aleneomsorg: false,
-    årsakFilter: { kreverSammenhengendeUttak: false, utenMinsterett: false, søkerErMor: true },
+    årsakFilter: { kreverSammenhengendeUttak: false, kreverSammenhengendeUttakTom: '2021-09-30', utenMinsterett: false, søkerErMor: true },
   },
 };
 
@@ -1058,7 +1058,7 @@ AksjonspunktForFar.args = {
     ],
     annenForelderHarRett: true,
     aleneomsorg: false,
-    årsakFilter: { kreverSammenhengendeUttak: false, utenMinsterett: false, søkerErMor: false },
+    årsakFilter: { kreverSammenhengendeUttak: false, kreverSammenhengendeUttakTom: '2021-09-30', utenMinsterett: false, søkerErMor: false },
   },
 };
 
@@ -1112,7 +1112,7 @@ StønadskontoMedUgyldigForbruk.args = {
     perioderAnnenpart: [],
     annenForelderHarRett: true,
     aleneomsorg: false,
-    årsakFilter: { kreverSammenhengendeUttak: false, utenMinsterett: false, søkerErMor: true },
+    årsakFilter: { kreverSammenhengendeUttak: false, kreverSammenhengendeUttakTom: '2021-09-30', utenMinsterett: false, søkerErMor: true },
   },
 };
 
@@ -1156,7 +1156,7 @@ VisAdvarselNårProsentIArbeidTotaltErMindreEnn100Prosent.args = {
     perioderAnnenpart: [],
     annenForelderHarRett: true,
     aleneomsorg: false,
-    årsakFilter: { kreverSammenhengendeUttak: false, utenMinsterett: false, søkerErMor: true },
+    årsakFilter: { kreverSammenhengendeUttak: false, kreverSammenhengendeUttakTom: '2021-09-30', utenMinsterett: false, søkerErMor: true },
   },
 };
 
@@ -1200,7 +1200,7 @@ VisAdvarselNårUtbetalingsgradOgProsentArbeidOverstiger100Prosent.args = {
     perioderAnnenpart: [],
     annenForelderHarRett: true,
     aleneomsorg: false,
-    årsakFilter: { kreverSammenhengendeUttak: false, utenMinsterett: false, søkerErMor: true },
+    årsakFilter: { kreverSammenhengendeUttak: false, kreverSammenhengendeUttakTom: '2021-09-30', utenMinsterett: false, søkerErMor: true },
   },
 };
 
@@ -1339,6 +1339,6 @@ VisOppholdsperiode.args = {
     ],
     annenForelderHarRett: true,
     aleneomsorg: false,
-    årsakFilter: { kreverSammenhengendeUttak: true, utenMinsterett: true, søkerErMor: true },
+    årsakFilter: { kreverSammenhengendeUttak: true, kreverSammenhengendeUttakTom: '2021-09-30', utenMinsterett: true, søkerErMor: true },
   },
 };
