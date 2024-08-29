@@ -6,7 +6,7 @@ import { AlleKodeverk, Vilkar, Behandlingsresultat } from '@navikt/fp-types';
 import { vilkarUtfallType, getKodeverknavnFn, KodeverkType } from '@navikt/fp-kodeverk';
 import { TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
-import { decodeHtmlEntity, getLanguageFromSprakkode } from '@navikt/ft-utils';
+import { decodeHtmlEntity, formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { useFormContext } from 'react-hook-form';
@@ -83,8 +83,7 @@ const VedtakAvslagArsakOgBegrunnelsePanel: FunctionComponent<OwnProps> = ({
             validate={[requiredIfCustomFunctionIsTrueNew(isRequiredFn), minLength3, maxLength1500, hasValidText]}
             maxLength={1500}
             readOnly={erReadOnly}
-            // Må erstatte bindestrek kopiert inn fra Word med vanlig bindestrek
-            parse={value => value.toString().replaceAll(/\p{Dash_Punctuation}/gu, '-').replaceAll('\t', ' ')}
+            parse={formaterFritekst}
             badges={[
               {
                 type: 'info',

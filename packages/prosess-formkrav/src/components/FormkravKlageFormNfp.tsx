@@ -11,7 +11,7 @@ import { Detail, HStack, Heading, VStack } from '@navikt/ds-react';
 
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { DATE_TIME_FORMAT } from '@navikt/ft-utils';
+import { DATE_TIME_FORMAT, formaterFritekst } from '@navikt/ft-utils';
 import { required } from '@navikt/ft-form-validators';
 
 import AvsluttetBehandling from '../types/avsluttetBehandlingTsType';
@@ -246,8 +246,7 @@ const FormkravKlageFormNfp: FunctionComponent<OwnProps> = ({
             label={intl.formatMessage({ id: 'FormkravKlageFormNfp.Fritekst' })}
             maxLength={100000}
             readOnly={readOnly}
-            // Må erstatte bindestrek kopiert inn fra Word med vanlig bindestrek
-            parse={value => value.toString().replaceAll(/\p{Dash_Punctuation}/gu, '-')}
+            parse={formaterFritekst}
           />
         )}
         <HStack justify="space-between">

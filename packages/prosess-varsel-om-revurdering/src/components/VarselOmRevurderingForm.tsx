@@ -16,7 +16,7 @@ import {
 } from '@navikt/fp-kodeverk';
 import { AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { hasValidText, minLength, maxLength, required } from '@navikt/ft-form-validators';
-import { ISO_DATE_FORMAT, getLanguageFromSprakkode } from '@navikt/ft-utils';
+import { ISO_DATE_FORMAT, formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 import { FodselSammenligningIndex } from '@navikt/fp-prosess-fakta-fodsel-sammenligning';
 import { SettPaVentModalIndex, FormValues as ModalFormValues } from '@navikt/fp-modal-sett-pa-vent';
 import {
@@ -202,13 +202,7 @@ const VarselOmRevurderingForm: FunctionComponent<OwnProps> = ({
                     label={intl.formatMessage({ id: 'VarselOmRevurderingForm.FritekstIBrev' })}
                     validate={[required, minLength3, maxLength10000, hasValidText]}
                     maxLength={10000}
-                    // Må erstatte bindestrek kopiert inn fra Word med vanlig bindestrek
-                    parse={value =>
-                      value
-                        .toString()
-                        .replaceAll(/\p{Dash_Punctuation}/gu, '-')
-                        .replaceAll('\t', ' ')
-                    }
+                    parse={formaterFritekst}
                   />
                   <VerticalSpacer fourPx />
                   {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}

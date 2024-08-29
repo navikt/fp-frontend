@@ -5,7 +5,7 @@ import { Detail } from '@navikt/ds-react';
 import { Behandlingsresultat } from '@navikt/fp-types';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { TextAreaField } from '@navikt/ft-form-hooks';
-import { decodeHtmlEntity, getLanguageFromSprakkode } from '@navikt/ft-utils';
+import { decodeHtmlEntity, formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 import { hasValidText, maxLength, minLength } from '@navikt/ft-form-validators';
 
 import styles from './vedtakFritekstPanel.module.css';
@@ -39,8 +39,7 @@ const VedtakFritekstPanel: FunctionComponent<OwnProps> = ({
             validate={[minLength3, maxLength1500, hasValidText]}
             maxLength={1500}
             readOnly={isReadOnly}
-            // Må erstatte bindestrek kopiert inn fra Word med vanlig bindestrek
-            parse={value => value.toString().replaceAll(/\p{Dash_Punctuation}/gu, '-').replaceAll('\t', ' ')}
+            parse={formaterFritekst}
             badges={[
               {
                 type: 'info',
