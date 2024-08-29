@@ -83,7 +83,7 @@ const getFiltrerPåGyldighetForLovendringer =
     if (kodeItem.gyldigForLovendringer === undefined) {
       return true;
     }
-    if (dayjs(periodeFom).isBefore('2021-10-01')) {
+    if (!dayjs(periodeFom).isAfter(aarsakFilter.kreverSammenhengendeUttakTom)) {
       return kodeItem.gyldigForLovendringer.includes('KREVER_SAMMENHENGENDE_UTTAK');
     }
     return aarsakFilter.utenMinsterett
