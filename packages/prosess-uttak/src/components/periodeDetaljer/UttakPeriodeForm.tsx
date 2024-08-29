@@ -326,6 +326,7 @@ const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
     () =>
       lagOptionsTilPeriodeÅrsakSelect(
         periodeResultatårsakKoder,
+        valgtPeriode.fom,
         erOppfylt ? 'INNVILGET' : 'AVSLÅTT',
         årsakFilter,
         valgtPeriode.utsettelseType,
