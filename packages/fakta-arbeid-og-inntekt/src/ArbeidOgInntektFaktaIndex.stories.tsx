@@ -26,7 +26,8 @@ const fellesInntektsmeldingFelter = {
   bortfalteNaturalytelser: [],
   refusjonsperioder: [],
   innsendingsårsak: "NY" as const,
-  behandlingsIdeer: []
+  behandlingsIdeer: [],
+  tilknyttedeBehandlingIder: [],
 };
 
 const promiseAction =
@@ -269,6 +270,7 @@ AvklarManglendeArbeidsforhold.args = {
     arbeidsforhold: [],
     inntektsmeldinger: [
       {
+        ...fellesInntektsmeldingFelter,
         inntektPrMnd: 30000,
         refusjonPrMnd: undefined,
         arbeidsgiverIdent: '910909088',
@@ -279,8 +281,7 @@ AvklarManglendeArbeidsforhold.args = {
         journalpostId: '1',
         dokumentId: '2',
         motattDato: '2021-12-06',
-        årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD,
-        ...fellesInntektsmeldingFelter
+        årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD
       },
     ],
     inntekter: [],
@@ -322,6 +323,7 @@ AvklarManglendeArbeidsforholdDerBehandlingErAvsluttet.args = {
     ],
     inntektsmeldinger: [
       {
+        ...fellesInntektsmeldingFelter,
         arbeidsgiverIdent: '910909088',
         eksternArbeidsforholdId: 'ARB001-001',
         inntektPrMnd: 30000,
@@ -332,8 +334,7 @@ AvklarManglendeArbeidsforholdDerBehandlingErAvsluttet.args = {
         refusjonPrMnd: undefined,
         journalpostId: '1',
         dokumentId: '2',
-        årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD,
-        ...fellesInntektsmeldingFelter
+        årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD
       },
     ],
     inntekter: [],
@@ -376,6 +377,7 @@ AvklarManglendeOpplysningerDerAksjonspunktErBekreftetOgTilbakehoppMulig.args = {
     ],
     inntektsmeldinger: [
       {
+        ...fellesInntektsmeldingFelter,
         arbeidsgiverIdent: '910909088',
         eksternArbeidsforholdId: 'ARB001-001',
         inntektPrMnd: 30000,
@@ -386,8 +388,7 @@ AvklarManglendeOpplysningerDerAksjonspunktErBekreftetOgTilbakehoppMulig.args = {
         refusjonPrMnd: undefined,
         journalpostId: '1',
         dokumentId: '2',
-        årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD,
-        ...fellesInntektsmeldingFelter
+        årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD
       },
     ],
     inntekter: [],
@@ -424,6 +425,7 @@ IngenAksjonspunktMenTilbakehoppMuligForOverstyrer.args = {
     ],
     inntektsmeldinger: [
       {
+        ...fellesInntektsmeldingFelter,
         arbeidsgiverIdent: '910909088',
         eksternArbeidsforholdId: 'ARB001-001',
         inntektPrMnd: 30000,
@@ -433,8 +435,7 @@ IngenAksjonspunktMenTilbakehoppMuligForOverstyrer.args = {
         motattDato: '2021-12-06',
         refusjonPrMnd: undefined,
         journalpostId: '1',
-        dokumentId: '2',
-        ...fellesInntektsmeldingFelter
+        dokumentId: '2'
       },
     ],
     inntekter: [],
@@ -578,6 +579,7 @@ ArbeidsforholdErOK.args = {
     ],
     inntektsmeldinger: [
       {
+        ...fellesInntektsmeldingFelter,
         arbeidsgiverIdent: '910909088',
         eksternArbeidsforholdId: 'ARB001-001',
         inntektPrMnd: 30000,
@@ -587,8 +589,7 @@ ArbeidsforholdErOK.args = {
         motattDato: '2021-12-06',
         refusjonPrMnd: 20000,
         journalpostId: '1',
-        dokumentId: '2',
-        ...fellesInntektsmeldingFelter
+        dokumentId: '2'
       },
     ],
     inntekter: [
@@ -666,6 +667,7 @@ ArbeidsforholdErOKDerDetErToArbeidsforholdFraSammeVirksomhet.args = {
     ],
     inntektsmeldinger: [
       {
+        ...fellesInntektsmeldingFelter,
         arbeidsgiverIdent: '910909088',
         eksternArbeidsforholdId: 'ARB001-001',
         inntektPrMnd: 30000,
@@ -675,10 +677,10 @@ ArbeidsforholdErOKDerDetErToArbeidsforholdFraSammeVirksomhet.args = {
         motattDato: '2021-12-06',
         refusjonPrMnd: 20000,
         journalpostId: '1',
-        dokumentId: '2',
-        ...fellesInntektsmeldingFelter
+        dokumentId: '2'
       },
       {
+        ...fellesInntektsmeldingFelter,
         arbeidsgiverIdent: '910909088',
         eksternArbeidsforholdId: 'ARB001-002',
         inntektPrMnd: 10000,
@@ -687,8 +689,7 @@ ArbeidsforholdErOKDerDetErToArbeidsforholdFraSammeVirksomhet.args = {
         kontaktpersonNummer: '41925090',
         motattDato: '2021-11-06',
         journalpostId: '1',
-        dokumentId: '2',
-        ...fellesInntektsmeldingFelter
+        dokumentId: '2'
       },
     ],
     inntekter: [
@@ -788,6 +789,7 @@ FlereArbeidsforholdOgInntekstemeldinger.args = {
     ],
     inntektsmeldinger: [
       {
+        ...fellesInntektsmeldingFelter,
         arbeidsgiverIdent: '910909088',
         eksternArbeidsforholdId: 'ARB001-001',
         inntektPrMnd: 30000,
@@ -797,10 +799,10 @@ FlereArbeidsforholdOgInntekstemeldinger.args = {
         motattDato: '2021-12-06',
         refusjonPrMnd: 20000,
         journalpostId: '1',
-        dokumentId: '2',
-        ...fellesInntektsmeldingFelter
+        dokumentId: '2'
       },
       {
+        ...fellesInntektsmeldingFelter,
         arbeidsgiverIdent: '910909092',
         eksternArbeidsforholdId: undefined,
         inntektPrMnd: 10000,
@@ -811,8 +813,7 @@ FlereArbeidsforholdOgInntekstemeldinger.args = {
         refusjonPrMnd: 5000,
         journalpostId: '1',
         dokumentId: '2',
-        årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD,
-        ...fellesInntektsmeldingFelter
+        årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD
       },
     ],
     inntekter: [
@@ -942,6 +943,7 @@ ArbeidsforholdMedSammeOrgNr.args = {
     ],
     inntektsmeldinger: [
       {
+        ...fellesInntektsmeldingFelter,
         inntektPrMnd: 30000,
         refusjonPrMnd: undefined,
         arbeidsgiverIdent: '910909090',
@@ -952,10 +954,10 @@ ArbeidsforholdMedSammeOrgNr.args = {
         journalpostId: '1',
         dokumentId: '2',
         motattDato: '2021-12-06',
-        årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD,
-        ...fellesInntektsmeldingFelter
+        årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD
       },
       {
+        ...fellesInntektsmeldingFelter,
         inntektPrMnd: 30000,
         refusjonPrMnd: undefined,
         arbeidsgiverIdent: '910909090',
@@ -966,8 +968,7 @@ ArbeidsforholdMedSammeOrgNr.args = {
         journalpostId: '1',
         dokumentId: '2',
         motattDato: '2021-12-06',
-        årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD,
-        ...fellesInntektsmeldingFelter
+        årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD
       },
     ],
     inntekter: [
@@ -1071,6 +1072,7 @@ ArbeidsforholdMedSammeOrgNrDerEnManglerInntektsmeldingMenIkkeDetAndre.args = {
     ],
     inntektsmeldinger: [
       {
+        ...fellesInntektsmeldingFelter,
         inntektPrMnd: 30000,
         refusjonPrMnd: undefined,
         arbeidsgiverIdent: '910909088',
@@ -1081,8 +1083,7 @@ ArbeidsforholdMedSammeOrgNrDerEnManglerInntektsmeldingMenIkkeDetAndre.args = {
         journalpostId: '1',
         dokumentId: '2',
         motattDato: '2021-12-06',
-        årsak: undefined,
-        ...fellesInntektsmeldingFelter
+        årsak: undefined
       },
     ],
     inntekter: [
@@ -1145,6 +1146,7 @@ FoerRegisterinnhenting.args = {
   arbeidOgInntekt: {
     inntektsmeldinger: [
       {
+        ...fellesInntektsmeldingFelter,
         inntektPrMnd: 40000.0,
         refusjonPrMnd: undefined,
         arbeidsgiverIdent: '947064649',
@@ -1157,8 +1159,7 @@ FoerRegisterinnhenting.args = {
         motattDato: '2022-02-15',
         årsak: undefined,
         begrunnelse: undefined,
-        saksbehandlersVurdering: undefined,
-        ...fellesInntektsmeldingFelter
+        saksbehandlersVurdering: undefined
       },
     ],
     arbeidsforhold: [],
@@ -1239,6 +1240,7 @@ EtterAtEtterspurtInntektsmeldingErKommet.args = {
   arbeidOgInntekt: {
     inntektsmeldinger: [
       {
+        ...fellesInntektsmeldingFelter,
         inntektPrMnd: 20000.0,
         refusjonPrMnd: undefined,
         arbeidsgiverIdent: '972674818',
@@ -1251,8 +1253,7 @@ EtterAtEtterspurtInntektsmeldingErKommet.args = {
         motattDato: '2022-02-16',
         årsak: undefined,
         begrunnelse: 'her vil jeg mase på AG',
-        saksbehandlersVurdering: 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING',
-        ...fellesInntektsmeldingFelter
+        saksbehandlersVurdering: 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING'
       },
     ],
     arbeidsforhold: [
@@ -1336,6 +1337,7 @@ SkalViseFødselsnummerForPrivatperson.args = {
     ],
     inntektsmeldinger: [
       {
+        ...fellesInntektsmeldingFelter,
         arbeidsgiverIdent: '910909088',
         eksternArbeidsforholdId: 'ARB001-001',
         inntektPrMnd: 30000,
@@ -1345,8 +1347,7 @@ SkalViseFødselsnummerForPrivatperson.args = {
         motattDato: '2021-12-06',
         refusjonPrMnd: 20000,
         journalpostId: '1',
-        dokumentId: '2',
-        ...fellesInntektsmeldingFelter
+        dokumentId: '2'
       },
     ],
     inntekter: [
