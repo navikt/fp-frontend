@@ -122,6 +122,7 @@
         "skjæringstidspunkt": {
           "dato": "2023-06-07",
           "kreverSammenhengendeUttak": false,
+          "kreverSammenhengendeUttakTom": "2021-09-30",
           "utenMinsterett": false
         }
       },

@@ -32,6 +32,7 @@ export type PeriodeSoker = Readonly<{
 
 export type AarsakFilter = Readonly<{
   kreverSammenhengendeUttak: boolean;
+  kreverSammenhengendeUttakTom?: string;
   utenMinsterett: boolean;
   søkerErMor: boolean;
 }>;
