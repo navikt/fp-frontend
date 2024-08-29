@@ -15,7 +15,7 @@
   "dependencies": {
     "@navikt/fp-rest-api": "workspace:*",
     "@navikt/fp-rest-api-hooks": "workspace:*",
-    "@navikt/ft-ui-komponenter": "2.4.2",
+    "@navikt/ft-ui-komponenter": "2.4.3",
     "@testing-library/jest-dom": "6.4.8",
     "axios-mock-adapter": "1.22.0",
     "react": "18.3.1",
