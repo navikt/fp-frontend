@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import dayjs from 'dayjs';
-import { Detail, BodyShort, Modal, Button, Heading, VStack, HStack } from '@navikt/ds-react';
+import { BodyShort, Button, Detail, Heading, HStack, Modal, VStack } from '@navikt/ds-react';
 import { Datepicker, Form } from '@navikt/ft-form-hooks';
 
 import { calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
@@ -79,7 +79,8 @@ const SplittPeriodeModal: FunctionComponent<OwnProps> = ({ fomDato, tomDato, sub
                 label={<FormattedMessage id="DelOppPeriodeModalImpl.AngiTomDato" />}
                 validate={[required, hasValidDate, validerInnenforIntervall(fomDato, tomDato, intl)]}
                 defaultMonth={new Date(fomDato)}
-                disabledDays={{ fromDate: dayjs(fomDato).toDate(), toDate: dayjs(tomDato).toDate() }}
+                fromDate={dayjs(fomDato).toDate()}
+                toDate={dayjs(tomDato).toDate()}
               />
               {dato && <div className={styles.dager}>{numberOfDaysAndWeeks.formattedString}</div>}
             </HStack>
