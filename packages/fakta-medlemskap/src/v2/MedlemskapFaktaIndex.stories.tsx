@@ -53,7 +53,7 @@ const merknaderFraBeslutter = {
 };
 
 export default {
-  title: 'fakta/fakta-medlemskap',
+  title: 'fakta/fakta-medlemskap-v2',
   component: MedlemskapFaktaIndex,
 };
 
