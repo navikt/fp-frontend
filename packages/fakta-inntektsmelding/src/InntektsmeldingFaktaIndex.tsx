@@ -126,7 +126,7 @@ export const InntektsmeldingFaktaIndex = ({
               >
                 <Table.DataCell>{InntektsmeldingInnsendingsårsak[inntektsmelding.innsendingsårsak]}</Table.DataCell>
                 <Table.DataCell>
-                  <DateTimeLabel dateTimeString={inntektsmelding.innsendingstidspunkt} />
+                  <DateTimeLabel dateTimeString={inntektsmelding.innsendingstidspunkt} separator='kl' />
                 </Table.DataCell>
                 <Table.DataCell>
                   {arbeidsgiverOpplysningerPerId[inntektsmelding.arbeidsgiverIdent]?.navn ?? '-'}

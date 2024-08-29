@@ -27,7 +27,7 @@ export const InntektsmeldingInnhold = ({
       <HStack gap="4" justify="space-between" align="start">
         <Heading level="3" size="small">
           <FormattedMessage id="InntektsmeldingFaktaPanel.innsendingstidspunkt" />{' '}
-          <DateTimeLabel dateTimeString={inntektsmelding.innsendingstidspunkt} />
+          <DateTimeLabel dateTimeString={inntektsmelding.innsendingstidspunkt} separator='kl'/>
         </Heading>
         <LastNedPdfKnapp fagsak={fagsak} inntektsmelding={inntektsmelding} />
       </HStack>
@@ -314,12 +314,12 @@ const BehandlingsOversikt = ({
               <span>{alleKodeverk.BehandlingType.find(({ kode }) => kode === b.type)?.navn}</span>
               <span>
                 <FormattedMessage id="InntektsmeldingFaktaPanel.behandling.opprettet" />{' '}
-                <DateTimeLabel dateTimeString={b.opprettet} />
+                <DateTimeLabel dateTimeString={b.opprettet} separator='kl' />
               </span>
               {b.avsluttet ? (
                 <span>
                   <FormattedMessage id="InntektsmeldingFaktaPanel.behandling.avsluttet" />{' '}
-                  <DateTimeLabel dateTimeString={b.avsluttet} />
+                  <DateTimeLabel dateTimeString={b.avsluttet} separator='kl' />
                 </span>
               ) : null}
             </VStack>
