@@ -12,6 +12,16 @@ import '@navikt/ds-css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
 import '@navikt/ft-form-hooks/dist/style.css';
 
+const fellesInntektsmeldingFelter = {
+  innsendingstidspunkt: '2021-12-06T00:00:00',
+  kildeSystem: 'Altinn',
+  bortfalteNaturalytelser: [],
+  refusjonsperioder: [],
+  innsendingsårsak: 'NY' as const,
+  behandlingsIdeer: [],
+  tilknyttedeBehandlingIder: [],
+};
+
 const behandling = {
   uuid: '1',
   versjon: 1,
@@ -94,6 +104,7 @@ ManueltOpprettetArbeidsforhold.args = {
     ],
     inntektsmeldinger: [
       {
+        ...fellesInntektsmeldingFelter,
         inntektPrMnd: 40000,
         arbeidsgiverIdent: '999999999',
         kontaktpersonNavn: 'Dolly Dollesen',
@@ -230,6 +241,7 @@ ArbeidsforholdetErOpprettetBasertPåIM.args = {
   arbeidOgInntekt: {
     inntektsmeldinger: [
       {
+        ...fellesInntektsmeldingFelter,
         inntektPrMnd: 25500.0,
         refusjonPrMnd: undefined,
         arbeidsgiverIdent: '999999999',
@@ -313,6 +325,7 @@ FlereArbeidsforholdITabell.args = {
     ],
     inntektsmeldinger: [
       {
+        ...fellesInntektsmeldingFelter,
         inntektPrMnd: 30000,
         refusjonPrMnd: undefined,
         arbeidsgiverIdent: '999999999',
@@ -325,6 +338,7 @@ FlereArbeidsforholdITabell.args = {
         motattDato: '2021-11-06',
       },
       {
+        ...fellesInntektsmeldingFelter,
         inntektPrMnd: 40000,
         refusjonPrMnd: undefined,
         arbeidsgiverIdent: '999999998',
