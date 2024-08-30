@@ -12,7 +12,7 @@ import { Detail, HStack, Heading, VStack } from '@navikt/ds-react';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { DATE_TIME_FORMAT, formaterFritekst } from '@navikt/ft-utils';
-import { required } from '@navikt/ft-form-validators';
+import { required, hasValidText } from '@navikt/ft-form-validators';
 
 import AvsluttetBehandling from '../types/avsluttetBehandlingTsType';
 
@@ -245,6 +245,7 @@ const FormkravKlageFormNfp: FunctionComponent<OwnProps> = ({
             name="fritekstTilBrev"
             label={intl.formatMessage({ id: 'FormkravKlageFormNfp.Fritekst' })}
             maxLength={100000}
+            validate={[required, hasValidText]}
             readOnly={readOnly}
             parse={formaterFritekst}
           />

@@ -7,7 +7,7 @@ import { Alert, BodyShort, Button, Chat } from '@navikt/ds-react';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Form, TextAreaField } from '@navikt/ft-form-hooks';
 import { Saksnotat } from '@navikt/fp-types';
-import { maxLength, required } from '@navikt/ft-form-validators';
+import { maxLength, required, hasValidText } from '@navikt/ft-form-validators';
 
 import styles from './notatPanel.module.css';
 
@@ -134,7 +134,7 @@ const NotatPanel: FunctionComponent<OwnProps> = ({
         <div className={styles.form}>
           <Form formMethods={formMethods} onSubmit={lagre}>
             <VerticalSpacer sixteenPx />
-            <TextAreaField name="beskrivelse" label="" maxLength={1000} validate={[required, maxLength1000]} />
+            <TextAreaField name="beskrivelse" label="" maxLength={1000} validate={[required, maxLength1000, hasValidText]} />
             <VerticalSpacer sixteenPx />
             <FlexContainer>
               <FlexRow spaceBetween>
