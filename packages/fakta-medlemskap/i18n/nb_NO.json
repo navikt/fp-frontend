@@ -65,5 +65,22 @@
   "BostedSokerFaktaIndex.Soker": "Søker",
 
   "Personstatus.Hjelpetekst": "Personstatus",
-  "Personstatus.Ukjent": "Ukjent"
+  "Personstatus.Ukjent": "Ukjent",
+
+  "MedlemskapInfoPanel.Submit": "Bekreft",
+
+  "AksjonspunktHelpText.HarMedlemskap": "Vurder om søker har medlemskap i folketrygden.",
+
+  "SituasjonLabel.HarBodd": "Har bodd",
+  "SituasjonLabel.SkalBo": "Skal bo",
+  "SituasjonLabel.SisteAdresse": "Siste adresse",
+  "SituasjonLabel.Statborgerskap": "Statsborgerskap",
+  "SituasjonLabel.Personstatus": "Personstatus",
+
+  "SituasjonSource.Soknad": "Fra søknaden",
+  "SituasjonSource.FREG": "Fra folkeregisteret",
+  "SituasjonSource.AAREG": "Fra aa-reg",
+
+  "Situasjon.FlereLand": "I flere land",
+  "Situasjon.ILand": "I {land}"
 }

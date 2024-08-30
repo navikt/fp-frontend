@@ -41,6 +41,7 @@ export default [
           unnamedComponents: 'arrow-function',
         },
       ],
+      'react/jsx-curly-brace-presence': ['error', { props: 'never' }],
       'react/prop-types': OFF,
       'jsx-a11y/no-autofocus': OFF,
 
