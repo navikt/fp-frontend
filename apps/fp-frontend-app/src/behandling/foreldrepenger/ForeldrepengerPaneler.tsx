@@ -41,6 +41,7 @@ import UttakDokumentasjonFaktaInitPanel from './faktaPaneler/UttakDokumentasjonF
 import FaktaPanelInitProps from '../felles/typer/faktaPanelInitProps';
 import ProsessPanelInitProps, { ProsessPanelExtraInitProps } from '../felles/typer/prosessPanelInitProps';
 import InntektsmeldingerFaktaInitPanel from '../fellesPaneler/fakta/InntektsmeldingerFaktaInitPanel';
+import MedlemskapsvilkaretFaktaInitPanelV3 from '../fellesPaneler/fakta/MedlemskapsvilkaretFaktaInitPanelV3';
 
 interface OwnProps {
   alleBehandlinger: BehandlingAppKontekst[];
@@ -96,6 +97,7 @@ const ForeldrepengerPaneler: FunctionComponent<OwnProps> = ({
         <AdopsjonsvilkaretFaktaInitPanel {...props} fagsak={fagsak} />
         <FodselvilkaretFaktaInitPanel {...props} />
         <MedlemskapsvilkaretFaktaInitPanel {...props} />
+        <MedlemskapsvilkaretFaktaInitPanelV3 {...props} />
         <OpptjeningsvilkaretFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
         <PermisjonFaktaInitPanel
           {...props}
