@@ -3,12 +3,8 @@ import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { Aksjonspunkt } from '@navikt/ft-types';
 
-import {
-  behandlingStatus,
-  behandlingType,
-  opplysningAdresseType as OpplysningAdresseType,
-} from '@navikt/fp-kodeverk';
-import { Behandling, MedlemskapV3, Soknad } from '@navikt/fp-types';
+import { behandlingStatus, behandlingType, opplysningAdresseType as OpplysningAdresseType } from '@navikt/fp-kodeverk';
+import { Behandling, MedlemskapAksjonspunktÅrsak, MedlemskapV3, Soknad } from '@navikt/fp-types';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
@@ -81,8 +77,8 @@ const Template: StoryFn<{
 export const Default = Template.bind({});
 Default.args = {
   medlemskap: {
-    aksjonspunkt: {
-      årsaker: ['OPPHOLDSRETT'],
+    manuellBehandling: {
+      årsaker: [MedlemskapAksjonspunktÅrsak.OPPHOLDSRETT],
     },
     oppholdstillatelser: [
       {
@@ -103,36 +99,43 @@ Default.args = {
         medlemskapType: 'AVKLARES',
         dekningType: 'OPPHOR',
         beslutningsdato: '2020-02-01',
-
       },
     ],
-    utenlandsopphold: [{
-      fom: '2019-01-01',
-      tom: '2021-10-13',
-      landkode: 'DNK'
-    }],
-    adresser: [{
-      fom: '2019-01-01',
-      tom: '2021-10-13',
-      adresse: {
-        adresseType: OpplysningAdresseType.BOSTEDSADRESSE,
-        adresselinje1: 'Adresse 1',
-        adresselinje2: 'Adresse 2',
-        adresselinje3: 'Adresse 3',
-        poststed: 'poststed',
-        postNummer: '1234',
-      }
-    }],
-    regioner: [{
-      fom: '2019-01-01',
-      tom: '2021-10-13',
-      type: 'NORDEN',
-    }],
-    personstatuser: [{
-      fom: '2019-01-01',
-      tom: '2021-10-13',
-      type: 'BOSATT',
-    }],
+    utenlandsopphold: [
+      {
+        fom: '2019-01-01',
+        tom: '2021-10-13',
+        landkode: 'DNK',
+      },
+    ],
+    adresser: [
+      {
+        fom: '2019-01-01',
+        tom: '2021-10-13',
+        adresse: {
+          adresseType: OpplysningAdresseType.BOSTEDSADRESSE,
+          adresselinje1: 'Adresse 1',
+          adresselinje2: 'Adresse 2',
+          adresselinje3: 'Adresse 3',
+          poststed: 'poststed',
+          postNummer: '1234',
+        },
+      },
+    ],
+    regioner: [
+      {
+        fom: '2019-01-01',
+        tom: '2021-10-13',
+        type: 'NORDEN',
+      },
+    ],
+    personstatuser: [
+      {
+        fom: '2019-01-01',
+        tom: '2021-10-13',
+        type: 'BOSATT',
+      },
+    ],
   },
   aksjonspunkter: [],
   alleMerknaderFraBeslutter: {},

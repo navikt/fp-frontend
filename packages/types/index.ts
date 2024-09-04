@@ -107,11 +107,10 @@ export type {
 } from './src/medlemskapTsType';
 export type {
   default as MedlemskapV3,
-  MedelemskapsResultat,
-  MedlemskapAksjonspunktÅrsak,
   ManuellMedlemskapsBehandling,
   LegacyManuellMedlemskapsBehandling,
 } from './src/medlemskapV3TsType';
+export { MedelemskapsResultat, MedlemskapAksjonspunktÅrsak } from './src/medlemskapV3TsType';
 export type { default as Risikoklassifisering } from './src/risikoklassifiseringTsType';
 export type { default as AnkeVurdering } from './src/ankeVurderingTsType';
 export type { default as KlageVurdering, KlageVurderingResultat } from './src/klageVurderingTsType';

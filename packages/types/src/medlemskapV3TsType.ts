@@ -38,19 +38,19 @@ type MedlemskapPeriode = Readonly<{
   beslutningsdato: string;
 }>;
 export enum MedlemskapAksjonspunktÅrsak {
-  BOSATT,
-  MEDLEMSKAPSPERIODER_FRA_REGISTER,
-  OPPHOLD,
-  OPPHOLDSRETT,
+  BOSATT = 'BOSATT',
+  MEDLEMSKAPSPERIODER_FRA_REGISTER = 'MEDLEMSKAPSPERIODER_FRA_REGISTER',
+  OPPHOLD = 'OPPHOLD',
+  OPPHOLDSRETT = 'OPPHOLDSRETT',
 }
 
 export enum MedelemskapsResultat {
-  SØKER_ER_MEDLEM,
-  SØKER_ER_IKKE_MEDLEM,
-  SØKER_ER_UTVANDRET,
-  SØKER_HAR_IKKE_LOVLIG_OPPHOLD,
-  SØKER_HAR_IKKE_OPPHOLDSRETT,
-  SØKER_ER_IKKE_BOSATT,
+  SØKER_ER_MEDLEM = 'SØKER_ER_MEDLEM',
+  SØKER_ER_IKKE_MEDLEM = 'SØKER_ER_IKKE_MEDLEM',
+  SØKER_ER_UTVANDRET = 'SØKER_ER_UTVANDRET',
+  SØKER_HAR_IKKE_LOVLIG_OPPHOLD = 'SØKER_HAR_IKKE_LOVLIG_OPPHOLD',
+  SØKER_HAR_IKKE_OPPHOLDSRETT = 'SØKER_HAR_IKKE_OPPHOLDSRETT',
+  SØKER_ER_IKKE_BOSATT = 'SØKER_ER_IKKE_BOSATT',
 }
 
 type MedlemPeriode = Readonly<{
@@ -69,7 +69,7 @@ export type LegacyManuellMedlemskapsBehandling = Readonly<{
 
 export type ManuellMedlemskapsBehandling = Readonly<{
   årsaker: MedlemskapAksjonspunktÅrsak[];
-  resultat: MedelemskapsResultat;
+  resultat?: MedelemskapsResultat;
 }>;
 
 type Annenpart = {
@@ -79,8 +79,8 @@ type Annenpart = {
 };
 
 type MedlemskapV3 = Readonly<{
-  manuellBehandling: ManuellMedlemskapsBehandling;
-  legacyManuellBehandling: LegacyManuellMedlemskapsBehandling;
+  manuellBehandling?: ManuellMedlemskapsBehandling;
+  legacyManuellBehandling?: LegacyManuellMedlemskapsBehandling;
   regioner: RegionPeriode[];
   personstatuser: PersonstatusPeriode[];
   utenlandsopphold: UtenlandsoppholdPeriode[];
