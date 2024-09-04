@@ -84,7 +84,15 @@ Default.args = {
   } as Soknad,
   medlemskap: {
     manuellBehandling: {
-      avvik: [MedlemskapAvvik.TREDJELAND_MANGLENDE_LOVLIG_OPPHOLD],
+      avvik: [
+        MedlemskapAvvik.BOSATT_UTENLANDSOPPHOLD,
+        MedlemskapAvvik.BOSATT_UTENLANDSADRESSE,
+        MedlemskapAvvik.BOSATT_MANGLENDE_BOSTEDSADRESSE,
+        MedlemskapAvvik.BOSATT_UGYLDIG_PERSONSTATUS,
+        MedlemskapAvvik.MEDL_PERIODER,
+        MedlemskapAvvik.TREDJELAND_MANGLENDE_LOVLIG_OPPHOLD,
+        MedlemskapAvvik.EØS_MANGLENDE_ANSETTELSE_MED_INNTEKT,
+      ],
     },
     oppholdstillatelser: [
       {

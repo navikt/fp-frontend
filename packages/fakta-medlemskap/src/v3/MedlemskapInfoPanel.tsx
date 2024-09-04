@@ -13,6 +13,7 @@ import { Form } from '@navikt/ft-form-hooks';
 import { FormValues } from './types';
 import AksjonspunktHelpText from './components/AksjonspunktHelpText';
 import SituasjonsOversikt from './components/situasjon/SituasjonOversikt';
+import OpplysningerOmUtenlandsopphold from './components/opplysningsKort/OpplysningerOmUtenlandsopphold';
 
 const inngangsAksjonspunkter = [
   // TODO: erstatt disse med nye ap når vi vet hvilke vi har
@@ -21,7 +22,6 @@ const inngangsAksjonspunkter = [
 
 const createInitialValues = (aksjonspunkter: Aksjonspunkt[]): FormValues => {
   const aksjonspunkt = aksjonspunkter.find(ap => inngangsAksjonspunkter.some(value => ap.definisjon == value));
-
   return {
     begrunnelse: aksjonspunkt?.begrunnelse,
     // TODO finn ut hvordan vi henter ut tidligere vurdering
@@ -64,6 +64,7 @@ const MedlemskapInfoPanel: FC<MedlemskapFaktaProps> = ({
       )}
 
       <SituasjonsOversikt medlemskap={medlemskap} soknad={soknad} />
+      <OpplysningerOmUtenlandsopphold soknad={soknad} avvik={medlemskap.manuellBehandling?.avvik} />
 
       <Form formMethods={formMethods} onSubmit={values => bekreft(values)}>
         <VStack gap="6">
