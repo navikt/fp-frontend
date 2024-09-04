@@ -1,4 +1,4 @@
-import{u as bn,a as S,j as e,H as $,b as I,B as c,V as W,c as re,f as U,L as D,t as pe,P as ye,E as oa,R as ee,D as Y,r as ua,S as Qn,G as me,i as Me,aj as da,d as Ce,w as $e,x as ga,C as er}from"./index.es-DPpTVAD5.js";import{f as se,Y as ie,F as ne,a as M,H as k,P as ka,d as ma,M as ae,Z as te,k as ve,I as de,aj as Ke,ak as on,z as ze,B as G,W as De,n as ge,K,ab as Bn,G as qe,u as Je,ag as Ae,q as xe,a3 as _e,r as nr,L as H,al as be,s as Vn,am as fn,T as qn,an as rr,ao as Le,ap as Fn,aq as ke,a1 as un,a5 as pa,a0 as ar,p as ya}from"./AppIndex.stories-DQtSbVis.js";import{M as u,y as b,$ as jn,W as Z,H as L,L as w,v as Ve,f as ce,x as je,g as x,D as hn,U as fe,z as Tn,Z as dn,b as va,S as ba,O as gn,F as fa,c as tr,h as qa,j as ja,i as ha,R as Ta,K as Aa,A as sr,q as Ra,I as ca}from"./index.es-U15HDO2n.js";import{H as Pe,f as En,z as Nn,E as Pa,T as wa,x as Q}from"./index.es-zhgnUGpN.js";import{r as q,R as Sa}from"./index-CDs2tPxN.js";import{b as kn,a as Ba,F as We}from"./VergeFaktaInitPanel-Dpb1Mr42.js";import{a as Ze,c as Va,P as An,O as Fa,V as Rn}from"./OverstyringPanel-D6vnKCov.js";import{v as ue,P as ir,u as cn,a as Ea}from"./ProsessDefaultInitPanel-BQpC5D5R.js";import{R as lr,A as On}from"./useRestApiRunner-3CdZwFeX.js";import{P as Na}from"./BehandlingHenlagtPanel-8v7L-Rpe.js";import{c as Oa}from"./bind-DK9GJUjU.js";import{v as or}from"./validerApKodeOgHentApEnum-BJOxEDqe.js";import{l as Ia}from"./landkoder-T-1RG3zx.js";var Ma=function(n,r){var a={};for(var t in n)Object.prototype.hasOwnProperty.call(n,t)&&r.indexOf(t)<0&&(a[t]=n[t]);if(n!=null&&typeof Object.getOwnPropertySymbols=="function")for(var s=0,t=Object.getOwnPropertySymbols(n);s<t.length;s++)r.indexOf(t[s])<0&&Object.prototype.propertyIsEnumerable.call(n,t[s])&&(a[t[s]]=n[t[s]]);return a};const ur=q.forwardRef((n,r)=>{var{title:a,titleId:t}=n,s=Ma(n,["title","titleId"]);let i=bn();return i=a?t||"title-"+i:void 0,q.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",width:"1em",height:"1em",fill:"none",viewBox:"0 0 24 24",focusable:!1,role:"img",ref:r,"aria-labelledby":i},s),a?q.createElement("title",{id:i},a):null,q.createElement("path",{fill:"currentColor",fillRule:"evenodd",d:"M13.672 3.825a.75.75 0 0 1 .791.085l7 5.5a.75.75 0 0 1 0 1.18l-7 5.5a.75.75 0 0 1-1.213-.59v-2.724a9.1 9.1 0 0 0-2.63.565c-2.284.87-3.759 2.562-4.671 4.077a12.4 12.4 0 0 0-.957 1.965 10 10 0 0 0-.263.792l-.001.007A.75.75 0 0 1 3.25 20c0-1.654.322-3.941 1.224-6.123.903-2.184 2.413-4.32 4.823-5.558 1.133-.581 2.445-.954 3.953-1.046V4.5a.75.75 0 0 1 .422-.675M5.505 15.412c1.038-1.344 2.519-2.688 4.582-3.473 1.136-.432 2.435-.689 3.913-.689a.75.75 0 0 1 .75.75v1.957L19.786 10 14.75 6.043V8a.75.75 0 0 1-.75.75c-1.606 0-2.927.344-4.018.904-1.996 1.025-3.306 2.824-4.121 4.796q-.197.479-.356.962",clipRule:"evenodd"}))});var Ka=function(n,r){var a={};for(var t in n)Object.prototype.hasOwnProperty.call(n,t)&&r.indexOf(t)<0&&(a[t]=n[t]);if(n!=null&&typeof Object.getOwnPropertySymbols=="function")for(var s=0,t=Object.getOwnPropertySymbols(n);s<t.length;s++)r.indexOf(t[s])<0&&Object.prototype.propertyIsEnumerable.call(n,t[s])&&(a[t[s]]=n[t[s]]);return a};const dr=q.forwardRef((n,r)=>{var{title:a,titleId:t}=n,s=Ka(n,["title","titleId"]);let i=bn();return i=a?t||"title-"+i:void 0,q.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",width:"1em",height:"1em",fill:"none",viewBox:"0 0 24 24",focusable:!1,role:"img",ref:r,"aria-labelledby":i},s),a?q.createElement("title",{id:i},a):null,q.createElement("path",{fill:"currentColor",fillRule:"evenodd",d:"M19.638 4.417a3.25 3.25 0 0 0-4.608-.008.33.33 0 0 0 .003.467l.298.292 3.841 3.84a.324.324 0 0 0 .458 0 3.25 3.25 0 0 0 .008-4.59m-1.651 6.235a.5.5 0 0 0 0-.707l-3.714-3.713-.184-.181a.5.5 0 0 0-.704.003l-7.733 7.734a.75.75 0 0 0-.19.324l-1.415 4.95a.75.75 0 0 0 .925.927l4.94-1.398a.75.75 0 0 0 .327-.191z",clipRule:"evenodd"}))});var Da=function(n,r){var a={};for(var t in n)Object.prototype.hasOwnProperty.call(n,t)&&r.indexOf(t)<0&&(a[t]=n[t]);if(n!=null&&typeof Object.getOwnPropertySymbols=="function")for(var s=0,t=Object.getOwnPropertySymbols(n);s<t.length;s++)r.indexOf(t[s])<0&&Object.prototype.propertyIsEnumerable.call(n,t[s])&&(a[t[s]]=n[t[s]]);return a};const xa=q.forwardRef((n,r)=>{var{title:a,titleId:t}=n,s=Da(n,["title","titleId"]);let i=bn();return i=a?t||"title-"+i:void 0,q.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",width:"1em",height:"1em",fill:"none",viewBox:"0 0 24 24",focusable:!1,role:"img",ref:r,"aria-labelledby":i},s),a?q.createElement("title",{id:i},a):null,q.createElement("path",{fill:"currentColor",fillRule:"evenodd",d:"M12.53 1.57a.75.75 0 0 0-1.06 0l-9.9 9.9a.75.75 0 0 0 0 1.06l9.9 9.9a.75.75 0 0 0 1.06 0l9.9-9.9a.75.75 0 0 0 0-1.06zM12 20.84 3.161 12l8.84-8.839 8.838 8.84zm-.92-11.86c-.19.19-.33.49-.33.92a.75.75 0 0 1-1.5 0c0-.77.26-1.471.77-1.98.51-.51 1.21-.77 1.98-.77s1.47.26 1.98.77c.51.509.77 1.21.77 1.98 0 .517-.217.944-.452 1.273-.224.314-.512.601-.748.837l-.02.02c-.26.26-.463.466-.607.668-.14.196-.173.319-.173.402v.4a.75.75 0 0 1-1.5 0v-.4c0-.518.217-.945.452-1.274.224-.313.512-.6.748-.837l.02-.02c.26-.26.463-.465.607-.668.14-.196.173-.319.173-.401 0-.43-.14-.73-.33-.92s-.49-.33-.92-.33-.73.14-.92.33m-.03 6.923a.95.95 0 1 1 1.9 0 .95.95 0 0 1-1.9 0",clipRule:"evenodd"}))}),_a={INGEN_BEREGNINGSREGLER:"1099"},mn={ARBG:"ARBG_ORG",ARBGP:"ARBG_PRIV",BRUKER:"BRUKER"};var he=(n=>(n.BOSTEDSADRESSE="BOSTEDSADRESSE",n.POSTADRESSE="POSTADRESSE",n.UTENLANDSK_POSTADRESSE="POSTADRESSE_UTLAND",n.NORSK_NAV_TILLEGGSADRESSE="MIDLERTIDIG_POSTADRESSE_NORGE",n.UTENLANDSK_NAV_TILLEGSADRESSE="MIDLERTIDIG_POSTADRESSE_UTLAND",n.UKJENT="UKJENT_ADRESSE",n))(he||{});const In={DOD:"DØD",BOSATT:"BOSA",UTVANDRET:"UTVA",AKTIVTBOSTNR:"ABNR",AKTIVT:"ADNR",FORSVUNNET:"FOSV",FODSELSREGISTRERT:"FØDR",UFULLSTENDIGFNR:"UFUL",UREGISTRERT:"UREG",UTGATTANNULLERT:"UTAN",UTGATTPERSON:"UTPE",UDEFINERT:"-"},La={UDEFINERT:"-",NORDEN:"NORDEN"},Xl={FODSEL:"ST-001",ADOPSJON:"ST-002"};var Xe=(n=>(n.FODSELSVILKARET_MOR="FP_VK_1",n.SVANGERSKAPVILKARET="SVP_VK_1",n.MEDLEMSKAPSVILKARET="FP_VK_2",n.MEDLEMSKAPSVILKÅRET_LØPENDE="FP_VK_2_L",n.SOKNADFRISTVILKARET="FP_VK_3",n.ADOPSJONSVILKARET="FP_VK_4",n.OMSORGSVILKARET="FP_VK_5",n.FORELDREANSVARSVILKARET_2_LEDD="FP_VK_8",n.FODSELSVILKARET_FAR="FP_VK_11",n.ADOPSJONSVILKARET_FORELDREPENGER="FP_VK_16",n.OPPTJENINGSPERIODE="FP_VK_21",n.OPPTJENINGSVILKARET="FP_VK_23",n.FORELDREANSVARSVILKARET_4_LEDD="FP_VK_33",n.SOKERSOPPLYSNINGSPLIKT="FP_VK_34",n.BEREGNINGSGRUNNLAGVILKARET="FP_VK_41",n))(Xe||{});const Ql=["FP_VK_1","FP_VK_11"],eo=["FP_VK_4","FP_VK_16"],Ua="_aksjonspunktMargin_1k4dy_1",Ga={aksjonspunktMargin:Ua},Mn={DOKUMENTASJON_VIL_BLI_INNHENTET:"DOKUMENTASJON_VIL_BLI_INNHENTET",DOKUMENTASJON_VIL_IKKE_BLI_INNHENTET:"DOKUMENTASJON_VIL_IKKE_BLI_INNHENTET"},Ya=n=>({kode:k.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,...n}),gr=({readOnly:n,harApneAksjonspunkter:r,aksjonspunkt:a,alleMerknaderFraBeslutter:t,submittable:s,submitCallback:i,dokStatus:l,formData:o,setFormData:d})=>{var y;const g=S(),v=se({defaultValues:o||{dokStatus:l,...kn.buildInitialValues(a)}}),m=v.watch("begrunnelse"),f=q.useCallback((...h)=>e.jsx("b",{children:h}),[]);return e.jsxs(ie,{formMethods:v,onSubmit:h=>i(Ya(h)),setDataOnUnmount:d,children:[e.jsx($,{size:"small",children:e.jsx(u,{id:"InnhentDokOpptjeningUtlandPanel.OpptjeningUtland"})}),r&&e.jsx(b,{sixteenPx:!0}),e.jsxs(jn,{className:Ga.aksjonspunktMargin,erAksjonspunktApent:r,erIkkeGodkjentAvBeslutter:!!((y=t[a.definisjon])!=null&&y.notAccepted),children:[e.jsx(ne,{name:"dokStatus",label:e.jsx(u,{id:"InnhentDokOpptjeningUtlandPanel.InnhentelseDok"}),validate:[M],isReadOnly:n,radios:[{label:e.jsx(u,{id:"InnhentDokOpptjeningUtlandPanel.Innhentes"}),value:Mn.DOKUMENTASJON_VIL_BLI_INNHENTET},{label:e.jsx(u,{id:"InnhentDokOpptjeningUtlandPanel.InnhentesIkke",values:{b:f}}),value:Mn.DOKUMENTASJON_VIL_IKKE_BLI_INNHENTET}]}),e.jsx(b,{sixteenPx:!0}),e.jsx(kn,{isSubmittable:s,isReadOnly:n,hasBegrunnelse:!!m,label:g.formatMessage({id:"InnhentDokOpptjeningUtlandPanel.Begrunnelse"})}),e.jsx(b,{sixteenPx:!0}),e.jsx(Ba,{isSubmittable:s,isSubmitting:v.formState.isSubmitting,isDirty:v.formState.isDirty,isReadOnly:n})]})]})};gr.__docgenInfo={description:"",methods:[],displayName:"InnhentDokOpptjeningUtlandPanel",props:{readOnly:{required:!0,tsType:{name:"boolean"},description:""},harApneAksjonspunkter:{required:!0,tsType:{name:"boolean"},description:""},alleMerknaderFraBeslutter:{required:!0,tsType:{name:"signature",type:"object",raw:"{ [key: string]: { notAccepted?: boolean } }",signature:{properties:[{key:{name:"string"},value:{name:"signature",type:"object",raw:"{ notAccepted?: boolean }",signature:{properties:[{key:"notAccepted",value:{name:"boolean",required:!1}}]},required:!0}}]}},description:""},submittable:{required:!0,tsType:{name:"boolean"},description:""},submitCallback:{required:!0,tsType:{name:"signature",type:"function",raw:"(data: MerkOpptjeningUtlandAp) => Promise<void>",signature:{arguments:[{type:{name:"intersection",raw:`{
+import{u as bn,a as S,j as e,H as $,b as I,B as c,V as W,c as re,f as U,L as D,t as pe,P as ye,E as oa,R as ee,D as Y,r as ua,S as Qn,G as me,i as Me,aj as da,d as Ce,w as $e,x as ga,C as er}from"./index.es-DPpTVAD5.js";import{f as se,Y as ie,F as ne,a as M,H as k,P as ka,d as ma,M as ae,Z as te,k as ve,I as de,aj as Ke,ak as on,z as ze,B as G,W as De,n as ge,K,ab as Bn,G as qe,u as Je,ag as Ae,q as xe,a3 as _e,r as nr,L as H,al as be,s as Vn,am as fn,T as qn,an as rr,ao as Le,ap as Fn,aq as ke,a1 as un,a5 as pa,a0 as ar,p as ya}from"./AppIndex.stories-Cl0vTh3-.js";import{M as u,y as b,$ as jn,W as Z,H as L,L as w,v as Ve,f as ce,x as je,g as x,D as hn,U as fe,z as Tn,Z as dn,b as va,S as ba,O as gn,F as fa,c as tr,h as qa,j as ja,i as ha,R as Ta,K as Aa,A as sr,q as Ra,I as ca}from"./index.es-U15HDO2n.js";import{H as Pe,f as En,z as Nn,E as Pa,T as wa,x as Q}from"./index.es-zhgnUGpN.js";import{r as q,R as Sa}from"./index-CDs2tPxN.js";import{b as kn,a as Ba,F as We}from"./VergeFaktaInitPanel-CeBeh49u.js";import{a as Ze,c as Va,P as An,O as Fa,V as Rn}from"./OverstyringPanel-DGxYZlYI.js";import{v as ue,P as ir,u as cn,a as Ea}from"./ProsessDefaultInitPanel-OlUrMmwx.js";import{R as lr,A as On}from"./useRestApiRunner-3CdZwFeX.js";import{P as Na}from"./BehandlingHenlagtPanel-8v7L-Rpe.js";import{c as Oa}from"./bind-DK9GJUjU.js";import{v as or}from"./validerApKodeOgHentApEnum-BJOxEDqe.js";import{l as Ia}from"./landkoder-T-1RG3zx.js";var Ma=function(n,r){var a={};for(var t in n)Object.prototype.hasOwnProperty.call(n,t)&&r.indexOf(t)<0&&(a[t]=n[t]);if(n!=null&&typeof Object.getOwnPropertySymbols=="function")for(var s=0,t=Object.getOwnPropertySymbols(n);s<t.length;s++)r.indexOf(t[s])<0&&Object.prototype.propertyIsEnumerable.call(n,t[s])&&(a[t[s]]=n[t[s]]);return a};const ur=q.forwardRef((n,r)=>{var{title:a,titleId:t}=n,s=Ma(n,["title","titleId"]);let i=bn();return i=a?t||"title-"+i:void 0,q.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",width:"1em",height:"1em",fill:"none",viewBox:"0 0 24 24",focusable:!1,role:"img",ref:r,"aria-labelledby":i},s),a?q.createElement("title",{id:i},a):null,q.createElement("path",{fill:"currentColor",fillRule:"evenodd",d:"M13.672 3.825a.75.75 0 0 1 .791.085l7 5.5a.75.75 0 0 1 0 1.18l-7 5.5a.75.75 0 0 1-1.213-.59v-2.724a9.1 9.1 0 0 0-2.63.565c-2.284.87-3.759 2.562-4.671 4.077a12.4 12.4 0 0 0-.957 1.965 10 10 0 0 0-.263.792l-.001.007A.75.75 0 0 1 3.25 20c0-1.654.322-3.941 1.224-6.123.903-2.184 2.413-4.32 4.823-5.558 1.133-.581 2.445-.954 3.953-1.046V4.5a.75.75 0 0 1 .422-.675M5.505 15.412c1.038-1.344 2.519-2.688 4.582-3.473 1.136-.432 2.435-.689 3.913-.689a.75.75 0 0 1 .75.75v1.957L19.786 10 14.75 6.043V8a.75.75 0 0 1-.75.75c-1.606 0-2.927.344-4.018.904-1.996 1.025-3.306 2.824-4.121 4.796q-.197.479-.356.962",clipRule:"evenodd"}))});var Ka=function(n,r){var a={};for(var t in n)Object.prototype.hasOwnProperty.call(n,t)&&r.indexOf(t)<0&&(a[t]=n[t]);if(n!=null&&typeof Object.getOwnPropertySymbols=="function")for(var s=0,t=Object.getOwnPropertySymbols(n);s<t.length;s++)r.indexOf(t[s])<0&&Object.prototype.propertyIsEnumerable.call(n,t[s])&&(a[t[s]]=n[t[s]]);return a};const dr=q.forwardRef((n,r)=>{var{title:a,titleId:t}=n,s=Ka(n,["title","titleId"]);let i=bn();return i=a?t||"title-"+i:void 0,q.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",width:"1em",height:"1em",fill:"none",viewBox:"0 0 24 24",focusable:!1,role:"img",ref:r,"aria-labelledby":i},s),a?q.createElement("title",{id:i},a):null,q.createElement("path",{fill:"currentColor",fillRule:"evenodd",d:"M19.638 4.417a3.25 3.25 0 0 0-4.608-.008.33.33 0 0 0 .003.467l.298.292 3.841 3.84a.324.324 0 0 0 .458 0 3.25 3.25 0 0 0 .008-4.59m-1.651 6.235a.5.5 0 0 0 0-.707l-3.714-3.713-.184-.181a.5.5 0 0 0-.704.003l-7.733 7.734a.75.75 0 0 0-.19.324l-1.415 4.95a.75.75 0 0 0 .925.927l4.94-1.398a.75.75 0 0 0 .327-.191z",clipRule:"evenodd"}))});var Da=function(n,r){var a={};for(var t in n)Object.prototype.hasOwnProperty.call(n,t)&&r.indexOf(t)<0&&(a[t]=n[t]);if(n!=null&&typeof Object.getOwnPropertySymbols=="function")for(var s=0,t=Object.getOwnPropertySymbols(n);s<t.length;s++)r.indexOf(t[s])<0&&Object.prototype.propertyIsEnumerable.call(n,t[s])&&(a[t[s]]=n[t[s]]);return a};const xa=q.forwardRef((n,r)=>{var{title:a,titleId:t}=n,s=Da(n,["title","titleId"]);let i=bn();return i=a?t||"title-"+i:void 0,q.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",width:"1em",height:"1em",fill:"none",viewBox:"0 0 24 24",focusable:!1,role:"img",ref:r,"aria-labelledby":i},s),a?q.createElement("title",{id:i},a):null,q.createElement("path",{fill:"currentColor",fillRule:"evenodd",d:"M12.53 1.57a.75.75 0 0 0-1.06 0l-9.9 9.9a.75.75 0 0 0 0 1.06l9.9 9.9a.75.75 0 0 0 1.06 0l9.9-9.9a.75.75 0 0 0 0-1.06zM12 20.84 3.161 12l8.84-8.839 8.838 8.84zm-.92-11.86c-.19.19-.33.49-.33.92a.75.75 0 0 1-1.5 0c0-.77.26-1.471.77-1.98.51-.51 1.21-.77 1.98-.77s1.47.26 1.98.77c.51.509.77 1.21.77 1.98 0 .517-.217.944-.452 1.273-.224.314-.512.601-.748.837l-.02.02c-.26.26-.463.466-.607.668-.14.196-.173.319-.173.402v.4a.75.75 0 0 1-1.5 0v-.4c0-.518.217-.945.452-1.274.224-.313.512-.6.748-.837l.02-.02c.26-.26.463-.465.607-.668.14-.196.173-.319.173-.401 0-.43-.14-.73-.33-.92s-.49-.33-.92-.33-.73.14-.92.33m-.03 6.923a.95.95 0 1 1 1.9 0 .95.95 0 0 1-1.9 0",clipRule:"evenodd"}))}),_a={INGEN_BEREGNINGSREGLER:"1099"},mn={ARBG:"ARBG_ORG",ARBGP:"ARBG_PRIV",BRUKER:"BRUKER"};var he=(n=>(n.BOSTEDSADRESSE="BOSTEDSADRESSE",n.POSTADRESSE="POSTADRESSE",n.UTENLANDSK_POSTADRESSE="POSTADRESSE_UTLAND",n.NORSK_NAV_TILLEGGSADRESSE="MIDLERTIDIG_POSTADRESSE_NORGE",n.UTENLANDSK_NAV_TILLEGSADRESSE="MIDLERTIDIG_POSTADRESSE_UTLAND",n.UKJENT="UKJENT_ADRESSE",n))(he||{});const In={DOD:"DØD",BOSATT:"BOSA",UTVANDRET:"UTVA",AKTIVTBOSTNR:"ABNR",AKTIVT:"ADNR",FORSVUNNET:"FOSV",FODSELSREGISTRERT:"FØDR",UFULLSTENDIGFNR:"UFUL",UREGISTRERT:"UREG",UTGATTANNULLERT:"UTAN",UTGATTPERSON:"UTPE",UDEFINERT:"-"},La={UDEFINERT:"-",NORDEN:"NORDEN"},Xl={FODSEL:"ST-001",ADOPSJON:"ST-002"};var Xe=(n=>(n.FODSELSVILKARET_MOR="FP_VK_1",n.SVANGERSKAPVILKARET="SVP_VK_1",n.MEDLEMSKAPSVILKARET="FP_VK_2",n.MEDLEMSKAPSVILKÅRET_LØPENDE="FP_VK_2_L",n.SOKNADFRISTVILKARET="FP_VK_3",n.ADOPSJONSVILKARET="FP_VK_4",n.OMSORGSVILKARET="FP_VK_5",n.FORELDREANSVARSVILKARET_2_LEDD="FP_VK_8",n.FODSELSVILKARET_FAR="FP_VK_11",n.ADOPSJONSVILKARET_FORELDREPENGER="FP_VK_16",n.OPPTJENINGSPERIODE="FP_VK_21",n.OPPTJENINGSVILKARET="FP_VK_23",n.FORELDREANSVARSVILKARET_4_LEDD="FP_VK_33",n.SOKERSOPPLYSNINGSPLIKT="FP_VK_34",n.BEREGNINGSGRUNNLAGVILKARET="FP_VK_41",n))(Xe||{});const Ql=["FP_VK_1","FP_VK_11"],eo=["FP_VK_4","FP_VK_16"],Ua="_aksjonspunktMargin_1k4dy_1",Ga={aksjonspunktMargin:Ua},Mn={DOKUMENTASJON_VIL_BLI_INNHENTET:"DOKUMENTASJON_VIL_BLI_INNHENTET",DOKUMENTASJON_VIL_IKKE_BLI_INNHENTET:"DOKUMENTASJON_VIL_IKKE_BLI_INNHENTET"},Ya=n=>({kode:k.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,...n}),gr=({readOnly:n,harApneAksjonspunkter:r,aksjonspunkt:a,alleMerknaderFraBeslutter:t,submittable:s,submitCallback:i,dokStatus:l,formData:o,setFormData:d})=>{var y;const g=S(),v=se({defaultValues:o||{dokStatus:l,...kn.buildInitialValues(a)}}),m=v.watch("begrunnelse"),f=q.useCallback((...h)=>e.jsx("b",{children:h}),[]);return e.jsxs(ie,{formMethods:v,onSubmit:h=>i(Ya(h)),setDataOnUnmount:d,children:[e.jsx($,{size:"small",children:e.jsx(u,{id:"InnhentDokOpptjeningUtlandPanel.OpptjeningUtland"})}),r&&e.jsx(b,{sixteenPx:!0}),e.jsxs(jn,{className:Ga.aksjonspunktMargin,erAksjonspunktApent:r,erIkkeGodkjentAvBeslutter:!!((y=t[a.definisjon])!=null&&y.notAccepted),children:[e.jsx(ne,{name:"dokStatus",label:e.jsx(u,{id:"InnhentDokOpptjeningUtlandPanel.InnhentelseDok"}),validate:[M],isReadOnly:n,radios:[{label:e.jsx(u,{id:"InnhentDokOpptjeningUtlandPanel.Innhentes"}),value:Mn.DOKUMENTASJON_VIL_BLI_INNHENTET},{label:e.jsx(u,{id:"InnhentDokOpptjeningUtlandPanel.InnhentesIkke",values:{b:f}}),value:Mn.DOKUMENTASJON_VIL_IKKE_BLI_INNHENTET}]}),e.jsx(b,{sixteenPx:!0}),e.jsx(kn,{isSubmittable:s,isReadOnly:n,hasBegrunnelse:!!m,label:g.formatMessage({id:"InnhentDokOpptjeningUtlandPanel.Begrunnelse"})}),e.jsx(b,{sixteenPx:!0}),e.jsx(Ba,{isSubmittable:s,isSubmitting:v.formState.isSubmitting,isDirty:v.formState.isDirty,isReadOnly:n})]})]})};gr.__docgenInfo={description:"",methods:[],displayName:"InnhentDokOpptjeningUtlandPanel",props:{readOnly:{required:!0,tsType:{name:"boolean"},description:""},harApneAksjonspunkter:{required:!0,tsType:{name:"boolean"},description:""},alleMerknaderFraBeslutter:{required:!0,tsType:{name:"signature",type:"object",raw:"{ [key: string]: { notAccepted?: boolean } }",signature:{properties:[{key:{name:"string"},value:{name:"signature",type:"object",raw:"{ notAccepted?: boolean }",signature:{properties:[{key:"notAccepted",value:{name:"boolean",required:!1}}]},required:!0}}]}},description:""},submittable:{required:!0,tsType:{name:"boolean"},description:""},submitCallback:{required:!0,tsType:{name:"signature",type:"function",raw:"(data: MerkOpptjeningUtlandAp) => Promise<void>",signature:{arguments:[{type:{name:"intersection",raw:`{
   dokStatus?: string;
 } & AksjonspunktTilBekreftelse<AksjonspunktCode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK>`,elements:[{name:"signature",type:"object",raw:`{
   dokStatus?: string;
@@ -5603,45 +5603,69 @@ Har ansvar for å vise faktapanelene for medlemskap.`,methods:[],displayName:"Me
   adopsjonFodelsedatoer?: Record<number, string>;
   farSokerType?: string;
 }>`},description:""}}};const Qt=pe(Br),Fr=()=>e.jsx(ye,{value:Qt});Fr.__docgenInfo={description:"",methods:[],displayName:"MedlemskapFaktaIndex",props:{medlemskap:{required:!0,tsType:{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  aksjonspunkt: Aksjonspunkt,
-  regioner: RegionPeriode[],
-  personstatuser: PersonstatusPeriode[],
-  utenlandsopphold: UtenlandsoppholdPeriode[],
-  adresser: AdressePeriode[],
-  oppholdstillatelser: OppholdstillatelsePeriode[],
-  medlemskapsperiode: MedlemskapPeriode[]
-}`,signature:{properties:[{key:"aksjonspunkt",value:{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  årsaker: string[],
-}`,signature:{properties:[{key:"årsaker",value:{name:"Array",elements:[{name:"string"}],raw:"string[]",required:!0}}]}}],raw:`Readonly<{
-  årsaker: string[],
+  manuellBehandling: ManuellMedlemskapsBehandling;
+  legacyManuellBehandling: LegacyManuellMedlemskapsBehandling;
+  regioner: RegionPeriode[];
+  personstatuser: PersonstatusPeriode[];
+  utenlandsopphold: UtenlandsoppholdPeriode[];
+  adresser: AdressePeriode[];
+  oppholdstillatelser: OppholdstillatelsePeriode[];
+  medlemskapsperiode: MedlemskapPeriode[];
+  annenpart?: Annenpart;
+}`,signature:{properties:[{key:"manuellBehandling",value:{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  årsaker: MedlemskapAksjonspunktÅrsak[];
+  resultat: MedelemskapsResultat;
+}`,signature:{properties:[{key:"årsaker",value:{name:"Array",elements:[{name:"MedlemskapAksjonspunktÅrsak"}],raw:"MedlemskapAksjonspunktÅrsak[]",required:!0}},{key:"resultat",value:{name:"MedelemskapsResultat",required:!0}}]}}],raw:`Readonly<{
+  årsaker: MedlemskapAksjonspunktÅrsak[];
+  resultat: MedelemskapsResultat;
+}>`,required:!0}},{key:"legacyManuellBehandling",value:{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  perioder: MedlemPeriode[];
+}`,signature:{properties:[{key:"perioder",value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  vurderingsdato: string;
+  oppholdsrettVurdering?: boolean;
+  erEosBorger?: boolean;
+  lovligOppholdVurdering?: boolean;
+  bosattVurdering?: boolean;
+  medlemskapManuellVurderingType?: string;
+  begrunnelse?: string;
+}`,signature:{properties:[{key:"vurderingsdato",value:{name:"string",required:!0}},{key:"oppholdsrettVurdering",value:{name:"boolean",required:!1}},{key:"erEosBorger",value:{name:"boolean",required:!1}},{key:"lovligOppholdVurdering",value:{name:"boolean",required:!1}},{key:"bosattVurdering",value:{name:"boolean",required:!1}},{key:"medlemskapManuellVurderingType",value:{name:"string",required:!1}},{key:"begrunnelse",value:{name:"string",required:!1}}]}}],raw:`Readonly<{
+  vurderingsdato: string;
+  oppholdsrettVurdering?: boolean;
+  erEosBorger?: boolean;
+  lovligOppholdVurdering?: boolean;
+  bosattVurdering?: boolean;
+  medlemskapManuellVurderingType?: string;
+  begrunnelse?: string;
+}>`}],raw:"MedlemPeriode[]",required:!0}}]}}],raw:`Readonly<{
+  perioder: MedlemPeriode[];
 }>`,required:!0}},{key:"regioner",value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  fom: string,
-  tom: string,
-  type: string
+  fom: string;
+  tom: string;
+  type: string;
 }`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"tom",value:{name:"string",required:!0}},{key:"type",value:{name:"string",required:!0}}]}}],raw:`Readonly<{
-  fom: string,
-  tom: string,
-  type: string
+  fom: string;
+  tom: string;
+  type: string;
 }>`}],raw:"RegionPeriode[]",required:!0}},{key:"personstatuser",value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  fom: string,
-  tom: string,
-  type: string,
+  fom: string;
+  tom: string;
+  type: string;
 }`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"tom",value:{name:"string",required:!0}},{key:"type",value:{name:"string",required:!0}}]}}],raw:`Readonly<{
-  fom: string,
-  tom: string,
-  type: string,
+  fom: string;
+  tom: string;
+  type: string;
 }>`}],raw:"PersonstatusPeriode[]",required:!0}},{key:"utenlandsopphold",value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  fom: string,
-  tom: string,
-  landkode: string
+  fom: string;
+  tom: string;
+  landkode: string;
 }`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"tom",value:{name:"string",required:!0}},{key:"landkode",value:{name:"string",required:!0}}]}}],raw:`Readonly<{
-  fom: string,
-  tom: string,
-  landkode: string
+  fom: string;
+  tom: string;
+  landkode: string;
 }>`}],raw:"UtenlandsoppholdPeriode[]",required:!0}},{key:"adresser",value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  fom: string,
-  tom: string,
-  adresse: Personadresse
+  fom: string;
+  tom: string;
+  adresse: Personadresse;
 }`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"tom",value:{name:"string",required:!0}},{key:"adresse",value:{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
   adresseType?: string;
   adresselinje1?: string;
@@ -5659,9 +5683,9 @@ Har ansvar for å vise faktapanelene for medlemskap.`,methods:[],displayName:"Me
   poststed?: string;
   land?: string;
 }>`,required:!0}}]}}],raw:`Readonly<{
-  fom: string,
-  tom: string,
-  adresse: Personadresse
+  fom: string;
+  tom: string;
+  adresse: Personadresse;
 }>`}],raw:"AdressePeriode[]",required:!0}},{key:"oppholdstillatelser",value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
   fom: string;
   tom: string;
@@ -5671,25 +5695,71 @@ Har ansvar for å vise faktapanelene for medlemskap.`,methods:[],displayName:"Me
   tom: string;
   oppholdstillatelseType: string;
 }>`}],raw:"OppholdstillatelsePeriode[]",required:!0}},{key:"medlemskapsperiode",value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  fom: string,
-  tom: string,
-  medlemskapType: string,
-  dekningType: string,
-  beslutningsdato: string
+  fom: string;
+  tom: string;
+  medlemskapType: string;
+  dekningType: string;
+  beslutningsdato: string;
 }`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"tom",value:{name:"string",required:!0}},{key:"medlemskapType",value:{name:"string",required:!0}},{key:"dekningType",value:{name:"string",required:!0}},{key:"beslutningsdato",value:{name:"string",required:!0}}]}}],raw:`Readonly<{
-  fom: string,
-  tom: string,
-  medlemskapType: string,
-  dekningType: string,
-  beslutningsdato: string
-}>`}],raw:"MedlemskapPeriode[]",required:!0}}]}}],raw:`Readonly<{
-  aksjonspunkt: Aksjonspunkt,
-  regioner: RegionPeriode[],
-  personstatuser: PersonstatusPeriode[],
-  utenlandsopphold: UtenlandsoppholdPeriode[],
-  adresser: AdressePeriode[],
-  oppholdstillatelser: OppholdstillatelsePeriode[],
-  medlemskapsperiode: MedlemskapPeriode[]
+  fom: string;
+  tom: string;
+  medlemskapType: string;
+  dekningType: string;
+  beslutningsdato: string;
+}>`}],raw:"MedlemskapPeriode[]",required:!0}},{key:"annenpart",value:{name:"signature",type:"object",raw:`{
+  adresser: AdressePeriode[];
+  regioner: RegionPeriode[];
+  personstatuser: PersonstatusPeriode[];
+}`,signature:{properties:[{key:"adresser",value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  fom: string;
+  tom: string;
+  adresse: Personadresse;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"tom",value:{name:"string",required:!0}},{key:"adresse",value:{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  adresseType?: string;
+  adresselinje1?: string;
+  adresselinje2?: string;
+  adresselinje3?: string;
+  postNummer?: string;
+  poststed?: string;
+  land?: string;
+}`,signature:{properties:[{key:"adresseType",value:{name:"string",required:!1}},{key:"adresselinje1",value:{name:"string",required:!1}},{key:"adresselinje2",value:{name:"string",required:!1}},{key:"adresselinje3",value:{name:"string",required:!1}},{key:"postNummer",value:{name:"string",required:!1}},{key:"poststed",value:{name:"string",required:!1}},{key:"land",value:{name:"string",required:!1}}]}}],raw:`Readonly<{
+  adresseType?: string;
+  adresselinje1?: string;
+  adresselinje2?: string;
+  adresselinje3?: string;
+  postNummer?: string;
+  poststed?: string;
+  land?: string;
+}>`,required:!0}}]}}],raw:`Readonly<{
+  fom: string;
+  tom: string;
+  adresse: Personadresse;
+}>`}],raw:"AdressePeriode[]",required:!0}},{key:"regioner",value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  fom: string;
+  tom: string;
+  type: string;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"tom",value:{name:"string",required:!0}},{key:"type",value:{name:"string",required:!0}}]}}],raw:`Readonly<{
+  fom: string;
+  tom: string;
+  type: string;
+}>`}],raw:"RegionPeriode[]",required:!0}},{key:"personstatuser",value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  fom: string;
+  tom: string;
+  type: string;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"tom",value:{name:"string",required:!0}},{key:"type",value:{name:"string",required:!0}}]}}],raw:`Readonly<{
+  fom: string;
+  tom: string;
+  type: string;
+}>`}],raw:"PersonstatusPeriode[]",required:!0}}]},required:!1}}]}}],raw:`Readonly<{
+  manuellBehandling: ManuellMedlemskapsBehandling;
+  legacyManuellBehandling: LegacyManuellMedlemskapsBehandling;
+  regioner: RegionPeriode[];
+  personstatuser: PersonstatusPeriode[];
+  utenlandsopphold: UtenlandsoppholdPeriode[];
+  adresser: AdressePeriode[];
+  oppholdstillatelser: OppholdstillatelsePeriode[];
+  medlemskapsperiode: MedlemskapPeriode[];
+  annenpart?: Annenpart;
 }>`},description:""},soknad:{required:!0,tsType:{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
   soknadType: string;
   mottattDato: string;
