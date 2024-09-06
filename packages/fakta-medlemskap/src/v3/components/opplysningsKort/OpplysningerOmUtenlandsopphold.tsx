@@ -22,7 +22,7 @@ const UtenlandsoppholdListe: FC<{ utlandsopphold: UtlandsoppholdPeriode[]; label
             <BodyShort size="small">
               <PeriodLabel size="small" dateStringFom={utenlandsopphold.fom} dateStringTom={utenlandsopphold.tom} />{' '}
               <FormattedMessage
-                id="OpplysningerFraSoknad.iLand"
+                id="OpplysningerOmUtenlandsopphold.iLand"
                 values={{ land: toTitleCapitalization(utenlandsopphold.landNavn) }}
               />
             </BodyShort>
@@ -45,17 +45,17 @@ const OpplysningerOmUtenlandsopphold: FC<Props> = ({ avvik = [], soknad: { oppgi
 
   return (
     <EkspansjonsKort
-      tittel={intl.formatMessage({ id: 'OpplysningerFraSoknad.Title' })}
+      tittel={intl.formatMessage({ id: 'OpplysningerOmUtenlandsopphold.Title' })}
       kilde={FaktaKilde.SOKNAD}
       relevanteAvvik={avvik.filter(a => relevantForUtenlandsopphold.includes(a))}
     >
       <div>
         <Label size="small">
-          <FormattedMessage id="OpplysningerFraSoknad.BoddForegaaende12.Sporsmaal" />
+          <FormattedMessage id="OpplysningerOmUtenlandsopphold.BoddForegaaende12.Sporsmaal" />
         </Label>
         <BodyShort size="small">
           <FormattedMessage
-            id="OpplysningerFraSoknad.BoddForegaaende12.Svar"
+            id="OpplysningerOmUtenlandsopphold.BoddForegaaende12.Svar"
             values={{ iNorge: oppholdSistePeriode }}
           />
         </BodyShort>
@@ -63,23 +63,26 @@ const OpplysningerOmUtenlandsopphold: FC<Props> = ({ avvik = [], soknad: { oppgi
 
       {utlandsoppholdFor.length && (
         <UtenlandsoppholdListe
-          label={<FormattedMessage id="OpplysningerFraSoknad.BoddForegaaende12.HvilkeLand" />}
+          label={<FormattedMessage id="OpplysningerOmUtenlandsopphold.BoddForegaaende12.HvilkeLand" />}
           utlandsopphold={utlandsoppholdFor}
         />
       )}
 
       <div>
         <Label size="small">
-          <FormattedMessage id="OpplysningerFraSoknad.BoNeste12.Sporsmaal" />
+          <FormattedMessage id="OpplysningerOmUtenlandsopphold.BoNeste12.Sporsmaal" />
         </Label>
         <BodyShort size="small">
-          <FormattedMessage id="OpplysningerFraSoknad.BoNeste12.Svar" values={{ iNorge: oppholdNestePeriode }} />
+          <FormattedMessage
+            id="OpplysningerOmUtenlandsopphold.BoNeste12.Svar"
+            values={{ iNorge: oppholdNestePeriode }}
+          />
         </BodyShort>
       </div>
 
       {utlandsoppholdEtter.length && (
         <UtenlandsoppholdListe
-          label={<FormattedMessage id="OpplysningerFraSoknad.BoNeste12.HvilkeLand" />}
+          label={<FormattedMessage id="OpplysningerOmUtenlandsopphold.BoNeste12.HvilkeLand" />}
           utlandsopphold={utlandsoppholdEtter}
         />
       )}

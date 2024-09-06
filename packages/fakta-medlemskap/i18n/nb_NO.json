@@ -83,22 +83,22 @@
   "Situasjon.FlereLand": "I flere land",
   "Situasjon.ILand": "I {land}",
 
-  "OpplysningerFraSoknad.Title": "Opplysninger fra søknad",
+  "OpplysningerOmUtenlandsopphold.Title": "Opplysninger fra søknad",
 
-  "Merknadstekst.BosattUtenlandsopphold": "Dette ble markert fordi søker har oppgitt at man skal eller har bodd i utlandet",
-  "Merknadstekst.BosattManglendeAdresse":"Dette ble markert fordi det ikke er registrert noen adresser i folkeregisteret",
-  "Merknadstekst.BosattUgyldigPersonstatus": "Dette ble markert fordi noen er registrert som {personstatus}",
-  "Merknadstekst.BosattUtenlandsadresse":"Dette ble markert fordi det er registrert én eller flere adresser i utlandet",
-  "Merknadstekst.Oppholdsrett": "Dette ble markert fordi søker har én eller flere oppholdstilatelser",
-  "Merknadstekst.MedlPerioder":"Dette ble markert fordi søker har én eller flere perioder i medlemskapsregisteret",
-  "Merknadstekst.EOSManglendeAnsettelseMedInntekt": "Dette ble markert fordi det ikke er registrert inntekt eller annsettelse på søker",
+  "AvvikMerknad.BosattUtenlandsopphold": "Dette ble markert fordi søker har oppgitt at man skal eller har bodd i utlandet",
+  "AvvikMerknad.BosattManglendeAdresse":"Dette ble markert fordi det ikke er registrert noen adresser i folkeregisteret",
+  "AvvikMerknad.BosattUgyldigPersonstatus": "Dette ble markert fordi noen er registrert som {personstatus}",
+  "AvvikMerknad.BosattUtenlandsadresse":"Dette ble markert fordi det er registrert én eller flere adresser i utlandet",
+  "AvvikMerknad.Oppholdsrett": "Dette ble markert fordi søker har én eller flere oppholdstilatelser",
+  "AvvikMerknad.MedlPerioder":"Dette ble markert fordi søker har én eller flere perioder i medlemskapsregisteret",
+  "AvvikMerknad.EOSManglendeAnsettelseMedInntekt": "Dette ble markert fordi det ikke er registrert inntekt eller annsettelse på søker",
 
 
-  "OpplysningerFraSoknad.BoddForegaaende12.Sporsmaal":"Hvor har du bodd de siste 12 månedene?",
-  "OpplysningerFraSoknad.BoddForegaaende12.Svar":"{iNorge, select, true {Jeg har bodd i Norge} other {Jeg har bodd helt eller delvis i utlandet}}",
-  "OpplysningerFraSoknad.BoddForegaaende12.HvilkeLand":"Hvilke land og hvor lenge har du bodd der?",
-  "OpplysningerFraSoknad.BoNeste12.Sporsmaal":"Hvor skal du bo de neste 12 månedene?",
-  "OpplysningerFraSoknad.BoNeste12.Svar":"{iNorge, select, true {Jeg skal bo i Norge} other {Jeg skal bo helt eller delvis i utlandet}}",
-  "OpplysningerFraSoknad.BoNeste12.HvilkeLand":"Hvilke land og hvor lenge skal du bo der?",
-  "OpplysningerFraSoknad.iLand": "i {land}"
+  "OpplysningerOmUtenlandsopphold.BoddForegaaende12.Sporsmaal":"Hvor har du bodd de siste 12 månedene?",
+  "OpplysningerOmUtenlandsopphold.BoddForegaaende12.Svar":"{iNorge, select, true {Jeg har bodd i Norge} other {Jeg har bodd helt eller delvis i utlandet}}",
+  "OpplysningerOmUtenlandsopphold.BoddForegaaende12.HvilkeLand":"Hvilke land og hvor lenge har du bodd der?",
+  "OpplysningerOmUtenlandsopphold.BoNeste12.Sporsmaal":"Hvor skal du bo de neste 12 månedene?",
+  "OpplysningerOmUtenlandsopphold.BoNeste12.Svar":"{iNorge, select, true {Jeg skal bo i Norge} other {Jeg skal bo helt eller delvis i utlandet}}",
+  "OpplysningerOmUtenlandsopphold.BoNeste12.HvilkeLand":"Hvilke land og hvor lenge skal du bo der?",
+  "OpplysningerOmUtenlandsopphold.iLand": "i {land}"
 }
