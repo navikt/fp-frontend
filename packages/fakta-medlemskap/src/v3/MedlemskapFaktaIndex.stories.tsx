@@ -3,7 +3,13 @@ import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { Aksjonspunkt } from '@navikt/ft-types';
 
-import { behandlingStatus, behandlingType, opplysningAdresseType as OpplysningAdresseType } from '@navikt/fp-kodeverk';
+import {
+  AksjonspunktCode,
+  aksjonspunktStatus,
+  behandlingStatus,
+  behandlingType,
+  opplysningAdresseType as OpplysningAdresseType,
+} from '@navikt/fp-kodeverk';
 import { Behandling, MedlemskapAvvik, MedlemskapV3, Soknad } from '@navikt/fp-types';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
@@ -22,32 +28,6 @@ const behandling = {
   status: behandlingStatus.BEHANDLING_UTREDES,
 } as Behandling;
 
-const soknad = {
-  oppgittFordeling: {
-    startDatoForPermisjon: '2019-01-01',
-  },
-  oppgittTilknytning: {
-    oppholdNorgeNa: true,
-    oppholdNestePeriode: true,
-    oppholdSistePeriode: true,
-    utlandsoppholdFor: [
-      {
-        landNavn: 'SVERIGE',
-        fom: '2010-01-01',
-        tom: '2011-01-01',
-      },
-    ],
-    utlandsoppholdEtter: [
-      {
-        landNavn: 'DANMARK',
-        fom: '2018-01-01',
-        tom: '2019-01-01',
-      },
-    ],
-  },
-  termindato: '2018-01-01',
-} as Soknad;
-
 export default {
   title: 'fakta/fakta-medlemskap-v3',
   component: MedlemskapFaktaIndex,
@@ -55,10 +35,11 @@ export default {
 
 const Template: StoryFn<{
   medlemskap: MedlemskapV3;
+  soknad: Soknad;
   aksjonspunkter: Aksjonspunkt[];
   submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
-}> = ({ medlemskap, aksjonspunkter, submitCallback, alleMerknaderFraBeslutter }) => (
+}> = ({ medlemskap, soknad, aksjonspunkter, submitCallback, alleMerknaderFraBeslutter }) => (
   <MedlemskapFaktaIndex
     behandling={behandling}
     medlemskap={medlemskap}
@@ -76,6 +57,31 @@ const Template: StoryFn<{
 
 export const Default = Template.bind({});
 Default.args = {
+  soknad: {
+    oppgittFordeling: {
+      startDatoForPermisjon: '2019-01-01',
+    },
+    oppgittTilknytning: {
+      oppholdNorgeNa: true,
+      oppholdNestePeriode: true,
+      oppholdSistePeriode: true,
+      utlandsoppholdFor: [
+        {
+          landNavn: 'SVERIGE',
+          fom: '2010-01-01',
+          tom: '2011-01-01',
+        },
+      ],
+      utlandsoppholdEtter: [
+        {
+          landNavn: 'DANMARK',
+          fom: '2018-01-01',
+          tom: '2019-01-01',
+        },
+      ],
+    },
+    termindato: '2018-01-01',
+  } as Soknad,
   medlemskap: {
     manuellBehandling: {
       avvik: [MedlemskapAvvik.TREDJELAND_MANGLENDE_LOVLIG_OPPHOLD],
@@ -119,6 +125,7 @@ Default.args = {
           adresselinje3: 'Adresse 3',
           poststed: 'poststed',
           postNummer: '1234',
+          land: 'NOR',
         },
       },
     ],
@@ -133,11 +140,18 @@ Default.args = {
       {
         fom: '2019-01-01',
         tom: '2021-10-13',
-        type: 'BOSATT',
+        type: 'BOSA',
       },
     ],
   },
-  aksjonspunkter: [],
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.AVKLAR_FORTSATT_MEDLEMSKAP,
+      status: aksjonspunktStatus.OPPRETTET,
+      begrunnelse: undefined,
+      kanLoses: true,
+    },
+  ],
   alleMerknaderFraBeslutter: {},
   submitCallback: action('button-click') as (data: any) => Promise<any>,
 };
