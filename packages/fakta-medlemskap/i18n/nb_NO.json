@@ -77,9 +77,8 @@
   "SituasjonLabel.Statborgerskap": "Statsborgerskap",
   "SituasjonLabel.Personstatus": "Personstatus",
 
-  "DataKilde.Soknad": "Fra søknaden",
-  "DataKilde.FREG": "Fra folkeregisteret",
-  "DataKilde.AAREG": "Fra aa-reg",
+  "FaktaKilde.Soknad": "Fra søknaden",
+  "FaktaKilde.FREG": "Fra folkeregisteret",
 
   "Situasjon.FlereLand": "I flere land",
   "Situasjon.ILand": "I {land}",

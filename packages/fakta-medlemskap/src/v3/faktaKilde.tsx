@@ -8,9 +8,9 @@ export enum FaktaKilde {
 export function getFormateringsIdForKilde(kilde: FaktaKilde) {
   switch (kilde) {
     case FaktaKilde.SOKNAD:
-      return 'DataKilde.Soknad';
+      return 'FaktaKilde.Soknad';
     case FaktaKilde.FREG:
-      return 'DataKilde.FREG';
+      return 'FaktaKilde.FREG';
     default:
       return assertUnreachable(kilde);
   }
