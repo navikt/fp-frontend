@@ -37,14 +37,17 @@ type MedlemskapPeriode = Readonly<{
   dekningType: string;
   beslutningsdato: string;
 }>;
-export enum MedlemskapAksjonspunktÅrsak {
-  BOSATT = 'BOSATT',
-  MEDLEMSKAPSPERIODER_FRA_REGISTER = 'MEDLEMSKAPSPERIODER_FRA_REGISTER',
-  OPPHOLD = 'OPPHOLD',
-  OPPHOLDSRETT = 'OPPHOLDSRETT',
+export enum MedlemskapAvvik {
+  BOSATT_UTENLANDSOPPHOLD = 'BOSATT_UTENLANDSOPPHOLD',
+  BOSATT_MANGLENDE_BOSTEDSADRESSE = 'BOSATT_MANGLENDE_BOSTEDSADRESSE',
+  BOSATT_UTENLANDSADRESSE = 'BOSATT_UTENLANDSADRESSE',
+  BOSATT_UGYLDIG_PERSONSTATUS = 'BOSATT_UGYLDIG_PERSONSTATUS',
+  TREDJELAND_MANGLENDE_LOVLIG_OPPHOLD = 'TREDJELAND_MANGLENDE_LOVLIG_OPPHOLD',
+  EØS_MANGLENDE_ANSETTELSE_MED_INNTEKT = 'EØS_MANGLENDE_ANSETTELSE_MED_INNTEKT',
+  MEDL_PERIODER = 'MEDL_PERIODER',
 }
 
-export enum MedelemskapsResultat {
+export enum MedlemskapResultat {
   SØKER_ER_MEDLEM = 'SØKER_ER_MEDLEM',
   SØKER_ER_IKKE_MEDLEM = 'SØKER_ER_IKKE_MEDLEM',
   SØKER_ER_UTVANDRET = 'SØKER_ER_UTVANDRET',
@@ -68,8 +71,8 @@ export type LegacyManuellMedlemskapsBehandling = Readonly<{
 }>;
 
 export type ManuellMedlemskapsBehandling = Readonly<{
-  årsaker: MedlemskapAksjonspunktÅrsak[];
-  resultat?: MedelemskapsResultat;
+  avvik: MedlemskapAvvik[];
+  resultat?: MedlemskapResultat;
 }>;
 
 type Annenpart = {

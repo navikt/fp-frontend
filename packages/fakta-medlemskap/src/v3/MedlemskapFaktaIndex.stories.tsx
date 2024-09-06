@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { Aksjonspunkt } from '@navikt/ft-types';
 
 import { behandlingStatus, behandlingType, opplysningAdresseType as OpplysningAdresseType } from '@navikt/fp-kodeverk';
-import { Behandling, MedlemskapAksjonspunktÅrsak, MedlemskapV3, Soknad } from '@navikt/fp-types';
+import { Behandling, MedlemskapAvvik, MedlemskapV3, Soknad } from '@navikt/fp-types';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
@@ -78,7 +78,7 @@ export const Default = Template.bind({});
 Default.args = {
   medlemskap: {
     manuellBehandling: {
-      årsaker: [MedlemskapAksjonspunktÅrsak.OPPHOLDSRETT],
+      avvik: [MedlemskapAvvik.TREDJELAND_MANGLENDE_LOVLIG_OPPHOLD],
     },
     oppholdstillatelser: [
       {

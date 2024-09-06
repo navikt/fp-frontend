@@ -110,7 +110,7 @@ export type {
   ManuellMedlemskapsBehandling,
   LegacyManuellMedlemskapsBehandling,
 } from './src/medlemskapV3TsType';
-export { MedelemskapsResultat, MedlemskapAksjonspunktÅrsak } from './src/medlemskapV3TsType';
+export { MedlemskapResultat, MedlemskapAvvik } from './src/medlemskapV3TsType';
 export type { default as Risikoklassifisering } from './src/risikoklassifiseringTsType';
 export type { default as AnkeVurdering } from './src/ankeVurderingTsType';
 export type { default as KlageVurdering, KlageVurderingResultat } from './src/klageVurderingTsType';
