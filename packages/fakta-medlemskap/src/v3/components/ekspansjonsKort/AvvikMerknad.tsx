@@ -1,6 +1,6 @@
 import { BodyLong, Box, HStack } from '@navikt/ds-react';
 import React, { FC } from 'react';
-import Status from './Status';
+import AvvikStatus from './AvvikStatus';
 import { FormattedMessage } from 'react-intl';
 import { MedlemskapAvvik } from '@navikt/fp-types';
 import assertUnreachable from '@navikt/fp-fakta-uttaksdokumentasjon/src/utils/switchCaseUtils';
@@ -31,11 +31,11 @@ interface Props {
   values?: Record<string, string>;
 }
 
-const Merknadstekst: FC<Props> = ({ avvik, values }) => {
+const AvvikMerknad: FC<Props> = ({ avvik, values }) => {
   return (
     <Box borderRadius="full" paddingInline="2" paddingBlock="1" background="surface-neutral-subtle">
       <HStack gap="2">
-        <Status harAvvik={true} />
+        <AvvikStatus harAvvik={true} />
         <BodyLong size="small">
           <FormattedMessage id={getFormateringsIdForÅrsak(avvik)} values={values} />
         </BodyLong>
@@ -44,4 +44,4 @@ const Merknadstekst: FC<Props> = ({ avvik, values }) => {
   );
 };
 
-export default Merknadstekst;
+export default AvvikMerknad;

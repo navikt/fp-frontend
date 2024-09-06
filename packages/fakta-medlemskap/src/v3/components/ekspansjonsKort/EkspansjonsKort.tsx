@@ -3,8 +3,8 @@ import { MedlemskapAvvik } from '@navikt/fp-types';
 import { Box, Detail, ExpansionCard, HStack, VStack } from '@navikt/ds-react';
 import { FormattedMessage } from 'react-intl';
 
-import Status from './Status';
-import Merknadstekst from './Merknadstekst';
+import AvvikStatus from './AvvikStatus';
+import AvvikMerknad from './AvvikMerknad';
 import { FaktaKilde, getFormateringsIdForKilde } from '../../faktaKilde';
 
 interface Props {
@@ -19,7 +19,7 @@ const EkspansjonsKort: FC<PropsWithChildren<Props>> = ({ tittel, kilde, relevant
       <ExpansionCard.Header>
         <HStack gap="4">
           <div style={{ marginTop: 4 }}>
-            <Status harAvvik={relevanteAvvik.length > 0} />
+            <AvvikStatus harAvvik={relevanteAvvik.length > 0} />
           </div>
           <div>
             <ExpansionCard.Title>{tittel}</ExpansionCard.Title>
@@ -35,7 +35,7 @@ const EkspansjonsKort: FC<PropsWithChildren<Props>> = ({ tittel, kilde, relevant
         <Box padding="4" background="surface-subtle" borderRadius="medium">
           <VStack gap="4">
             {relevanteAvvik.map(a => (
-              <Merknadstekst key={a} avvik={a} />
+              <AvvikMerknad key={a} avvik={a} />
             ))}
             {children}
           </VStack>
