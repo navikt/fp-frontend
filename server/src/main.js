@@ -5,7 +5,7 @@ import timeout from 'connect-timeout';
 import * as headers from './headers.js';
 import logger from './log.js';
 import { getIssuer } from './azure/issuer.js';
-import { addLocalViteServerHandler } from '@navikt/backend-for-frontend-utils';
+import { serveViteMode } from '@navikt/vite-mode';
 
 // for debugging during development
 import config from './config.js';
@@ -20,8 +20,6 @@ const globalErrorHandler = (err, req, res) => {
   logger.warning(err.stack);
   res.status(err.status || 500).send({ error: err });
 };
-
-const VITE_DEV_MODE_SCRIPT_HASH = "'sha256-w8lX+YWZo/wDjnJo7pT375MLu8LV/TBoTe9Kw55eb28='";
 
 async function startApp() {
   try {
@@ -40,8 +38,7 @@ async function startApp() {
           directives: {
             'default-src': ["'self'"],
             'base-uri': ["'self'"],
-            'script-src-elem': [VITE_DEV_MODE_SCRIPT_HASH, 'http://localhost:9100', "'self'"],
-            'connect-src': ["'self'", 'https://sentry.gc.nav.no', 'https://graph.microsoft.com', 'ws://localhost:9100'],
+            'connect-src': ["'self'", 'https://sentry.gc.nav.no', 'https://graph.microsoft.com'],
             'font-src': ["'self'", 'https://cdn.nav.no', 'data:'],
             'img-src': ["'self'", 'data:'],
             'style-src': ["'self'", "'unsafe-inline'"],
@@ -126,7 +123,7 @@ async function startApp() {
 
     reverseProxy.setup(server);
 
-    addLocalViteServerHandler(server, '9100');
+    serveViteMode(server, { port: '9100'  });
 
     // serve static files
     const rootDir = './dist';
