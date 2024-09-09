@@ -32,13 +32,13 @@
     "@navikt/ds-css": "6.16.2",
     "@navikt/fp-storybook-utils": "workspace:*",
     "@testing-library/dom": "10.4.0",
-    "@testing-library/react": "16.0.0",
+    "@testing-library/react": "16.0.1",
     "@testing-library/user-event": "14.5.2",
     "cross-env": "7.0.3",
-    "eslint": "9.8.0",
-    "stylelint": "16.8.1",
+    "eslint": "9.10.0",
+    "stylelint": "16.9.0",
     "typescript": "5.5.4",
-    "vite": "5.3.5",
+    "vite": "5.4.3",
     "vitest": "2.0.5"
   }
 }
