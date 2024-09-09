@@ -1,9 +1,0 @@
-import{a as p,j as e,M as a,H as y,b as g,L as s,B as d,c as j,V as i,E as x}from"./index.es-Cl81KEsX.js";import{M as t,D as k}from"./index.es-gKvG78un.js";import"./index-CDs2tPxN.js";const v="_modal_mgzc2_1",M={modal:v},h=()=>{const n=i().toDate();return n.setDate(n.getDate()+28),i(n).format(x)},o=({lukkCallback:n,ventearsaker:l,ventearsak:c})=>{var r;const m=p();return e.jsxs(a,{className:M.modal,open:!0,"aria-label":m.formatMessage({id:"SettPaVentReadOnlyModal.ModalDescriptionErPaVent"}),onClose:n,children:[e.jsx(a.Header,{children:e.jsx(y,{size:"small",children:e.jsx(t,{id:"SettPaVentReadOnlyModal.ModalDescriptionErPaVent"})})}),e.jsx(a.Body,{children:e.jsxs(g,{gap:"6",children:[e.jsxs("div",{children:[e.jsx(s,{children:e.jsx(t,{id:"SettPaVentReadOnlyModal.Arsak"})}),e.jsx(d,{children:(r=l.find(u=>u.kode===c))==null?void 0:r.navn})]}),e.jsxs("div",{children:[e.jsx(s,{children:e.jsx(t,{id:"SettPaVentReadOnlyModal.Frist"})}),e.jsx(d,{children:e.jsx(k,{dateString:h()})})]})]})}),e.jsx(a.Footer,{children:e.jsx(j,{size:"small",variant:"primary",onClick:n,children:e.jsx(t,{id:"SettPaVentReadOnlyModal.Forsiden"})})})]})},P=o;o.__docgenInfo={description:"",methods:[],displayName:"SettPaVentReadOnlyModal",props:{lukkCallback:{required:!0,tsType:{name:"signature",type:"function",raw:"() => void",signature:{arguments:[],return:{name:"void"}}},description:""},ventearsaker:{required:!0,tsType:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  kode: string;
-  navn: string;
-  kodeverk: string;
-}`,signature:{properties:[{key:"kode",value:{name:"string",required:!0}},{key:"navn",value:{name:"string",required:!0}},{key:"kodeverk",value:{name:"string",required:!0}}]}}],raw:`Readonly<{
-  kode: string;
-  navn: string;
-  kodeverk: string;
-}>`}],raw:"KodeverkMedNavn[]"},description:""},ventearsak:{required:!1,tsType:{name:"string"},description:""}}};export{P as S};
