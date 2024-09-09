@@ -4,6 +4,7 @@ import React, { FC } from 'react';
 import { useIntl } from 'react-intl';
 import { formaterUtenlandsopphold, getSisteBostedsLand, getSistePersonstatus, getSisteRegion } from './situasjonUtils';
 import Situasjon from './Situasjon';
+import { FaktaKilde } from '../../faktaKilde';
 
 interface Props {
   medlemskap: MedlemskapV3;
@@ -17,27 +18,27 @@ const SituasjonOversikt: FC<Props> = ({ soknad, medlemskap }) => {
       <Situasjon
         labelFormatId="SituasjonLabel.HarBodd"
         value={formaterUtenlandsopphold(soknad.oppgittTilknytning.utlandsoppholdFor, intl)}
-        sourceFormatId="SituasjonSource.Soknad"
+        kilde={FaktaKilde.SOKNAD}
       />
       <Situasjon
         labelFormatId="SituasjonLabel.SkalBo"
         value={formaterUtenlandsopphold(soknad.oppgittTilknytning.utlandsoppholdEtter, intl)}
-        sourceFormatId="SituasjonSource.Soknad"
+        kilde={FaktaKilde.SOKNAD}
       />
       <Situasjon
         labelFormatId="SituasjonLabel.SisteAdresse"
         value={getSisteBostedsLand(medlemskap, intl)}
-        sourceFormatId="SituasjonSource.FREG"
+        kilde={FaktaKilde.FREG}
       />
       <Situasjon
         labelFormatId="SituasjonLabel.Statborgerskap"
         value={getSisteRegion(medlemskap)}
-        sourceFormatId="SituasjonSource.FREG"
+        kilde={FaktaKilde.FREG}
       />
       <Situasjon
         labelFormatId="SituasjonLabel.Personstatus"
         value={getSistePersonstatus(medlemskap)}
-        sourceFormatId="SituasjonSource.FREG"
+        kilde={FaktaKilde.FREG}
       />
     </HStack>
   );

@@ -3,33 +3,8 @@ import { getKodeverknavnFn, KodeverkType, opplysningAdresseType } from '@navikt/
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import kodeverkTyper from '@navikt/fp-kodeverk/src/kodeverkTyper';
 import { IntlShape } from 'react-intl';
-import { TIDENES_ENDE } from '@navikt/ft-utils';
-
-type Periode = { fom: string; tom: string };
-
-export const sorterPerioder = (a: Periode, b: Periode) => {
-  const dateAEnd = a.tom ? new Date(a.tom) : new Date(TIDENES_ENDE);
-  const dateBEnd = b.tom ? new Date(b.tom) : new Date(TIDENES_ENDE);
-
-  if (dateAEnd > dateBEnd) return -1;
-  if (dateAEnd < dateBEnd) return 1;
-
-  const dateAStart = new Date(a.fom);
-  const dateBStart = new Date(b.fom);
-
-  if (dateAStart > dateBStart) return -1;
-  if (dateAStart < dateBStart) return 1;
-
-  return 0;
-};
-
-const toTitleCapitalization = (sentence: string): string => {
-  return sentence
-    .toLowerCase()
-    .split(' ')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize the first letter of each word
-    .join(' ');
-};
+import { toTitleCapitalization } from '../../utils/stringUtils';
+import { sorterPerioder } from '../../utils/periodeUtils';
 
 const formaterLand = (landNavn: string, intl: IntlShape) => {
   return intl.formatMessage({ id: 'Situasjon.ILand' }, { land: toTitleCapitalization(landNavn) });

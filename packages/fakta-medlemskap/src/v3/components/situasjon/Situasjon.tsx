@@ -1,14 +1,15 @@
 import { BodyShort, Box, Detail, Label, VStack } from '@navikt/ds-react';
 import React, { FC } from 'react';
 import { FormattedMessage } from 'react-intl';
+import { FaktaKilde, getFormateringsIdForKilde } from '../../faktaKilde';
 
 interface Props {
   labelFormatId: `SituasjonLabel.${string}`;
   value: string;
-  sourceFormatId: `SituasjonSource.${string}`;
+  kilde: FaktaKilde;
 }
 
-const Situasjon: FC<Props> = ({ labelFormatId, value, sourceFormatId }) => {
+const Situasjon: FC<Props> = ({ labelFormatId, value, kilde }) => {
   return (
     <Box background="bg-subtle" minWidth="200px" paddingBlock="2" paddingInline="4" borderRadius="medium">
       <VStack gap="6">
@@ -19,7 +20,7 @@ const Situasjon: FC<Props> = ({ labelFormatId, value, sourceFormatId }) => {
           <BodyShort size="large">{value}</BodyShort>
         </div>
         <Detail uppercase>
-          <FormattedMessage id={sourceFormatId} />
+          <FormattedMessage id={getFormateringsIdForKilde(kilde)} />
         </Detail>
       </VStack>
     </Box>
