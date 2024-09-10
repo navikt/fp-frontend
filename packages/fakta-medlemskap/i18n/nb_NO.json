@@ -108,5 +108,7 @@
   "OpplysningerOmAdresser.Annenpart.Beskrivelse": "Det er mulighet for å se bostedadresse på skjæringspunktet for den andre forelderen",
 
   "OpplysningerOmAdresser.Tabell.IngenAdresse": "Ingen adresser funnet for {erAnnenpart, select, true {den andre forelderen} other {søker} }.",
-  "OpplysningerOmAdresser.Tabell.SammeAdresse": "Den andre forelderen har samme adresse som søker på skjæringstidspunktet"
+  "OpplysningerOmAdresser.Tabell.SammeAdresse": "Den andre forelderen har samme adresse som søker på skjæringstidspunktet",
+
+  "MedlemskapLegacy.TidligereVurdering": "Tidligere vurdering"
 }

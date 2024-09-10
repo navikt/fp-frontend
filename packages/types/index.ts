@@ -109,9 +109,11 @@ export type {
   default as MedlemskapV3,
   ManuellMedlemskapsBehandling,
   LegacyManuellMedlemskapsBehandling,
+  LegacyMedlemPeriode,
+  MedlemskapResultat,
   AdressePeriode,
 } from './src/medlemskapV3TsType';
-export { MedlemskapResultat, MedlemskapAvvik } from './src/medlemskapV3TsType';
+export { MedlemskapAvvik } from './src/medlemskapV3TsType';
 export type { default as Risikoklassifisering } from './src/risikoklassifiseringTsType';
 export type { default as AnkeVurdering } from './src/ankeVurderingTsType';
 export type { default as KlageVurdering, KlageVurderingResultat } from './src/klageVurderingTsType';

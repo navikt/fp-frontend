@@ -47,16 +47,13 @@ export enum MedlemskapAvvik {
   MEDL_PERIODER = 'MEDL_PERIODER',
 }
 
-export enum MedlemskapResultat {
-  SØKER_ER_MEDLEM = 'SØKER_ER_MEDLEM',
-  SØKER_ER_IKKE_MEDLEM = 'SØKER_ER_IKKE_MEDLEM',
-  SØKER_ER_UTVANDRET = 'SØKER_ER_UTVANDRET',
-  SØKER_HAR_IKKE_LOVLIG_OPPHOLD = 'SØKER_HAR_IKKE_LOVLIG_OPPHOLD',
-  SØKER_HAR_IKKE_OPPHOLDSRETT = 'SØKER_HAR_IKKE_OPPHOLDSRETT',
-  SØKER_ER_IKKE_BOSATT = 'SØKER_ER_IKKE_BOSATT',
-}
+export type MedlemskapResultat = {
+  avslagskode: string | null;
+  medlemFom?: string | null;
+  opphørFom?: string | null;
+};
 
-type MedlemPeriode = Readonly<{
+export type LegacyMedlemPeriode = Readonly<{
   vurderingsdato: string;
   oppholdsrettVurdering?: boolean;
   erEosBorger?: boolean;
@@ -67,7 +64,7 @@ type MedlemPeriode = Readonly<{
 }>;
 
 export type LegacyManuellMedlemskapsBehandling = Readonly<{
-  perioder: MedlemPeriode[];
+  perioder: LegacyMedlemPeriode[];
 }>;
 
 export type ManuellMedlemskapsBehandling = Readonly<{
@@ -82,8 +79,8 @@ type Annenpart = {
 };
 
 type MedlemskapV3 = Readonly<{
-  manuellBehandling?: ManuellMedlemskapsBehandling;
-  legacyManuellBehandling?: LegacyManuellMedlemskapsBehandling;
+  manuellBehandling?: ManuellMedlemskapsBehandling | null;
+  legacyManuellBehandling?: LegacyManuellMedlemskapsBehandling | null;
   regioner: RegionPeriode[];
   personstatuser: PersonstatusPeriode[];
   utenlandsopphold: UtenlandsoppholdPeriode[];
