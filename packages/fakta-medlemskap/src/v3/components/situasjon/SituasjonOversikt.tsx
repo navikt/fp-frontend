@@ -1,5 +1,5 @@
 import { HStack } from '@navikt/ds-react';
-import { MedlemskapV3, Soknad } from '@navikt/fp-types';
+import { AlleKodeverk, MedlemskapV3, Soknad } from '@navikt/fp-types';
 import React, { FC } from 'react';
 import { useIntl } from 'react-intl';
 import { formaterUtenlandsopphold, getSisteBostedsLand, getSistePersonstatus, getSisteRegion } from './situasjonUtils';
@@ -9,35 +9,36 @@ import { FaktaKilde } from '../../faktaKilde';
 interface Props {
   medlemskap: MedlemskapV3;
   soknad: Soknad;
+  alleKodeverk: AlleKodeverk;
 }
 
-const SituasjonOversikt: FC<Props> = ({ soknad, medlemskap }) => {
+const SituasjonOversikt: FC<Props> = ({ soknad, medlemskap, alleKodeverk }) => {
   const intl = useIntl();
   return (
-    <HStack gap="2">
+    <HStack gap="2" style={{ display: 'flex' }}>
       <Situasjon
         labelFormatId="SituasjonLabel.HarBodd"
-        value={formaterUtenlandsopphold(soknad.oppgittTilknytning.utlandsoppholdFor, intl)}
+        value={formaterUtenlandsopphold(soknad.oppgittTilknytning.utlandsoppholdFor, alleKodeverk, intl)}
         kilde={FaktaKilde.SOKNAD}
       />
       <Situasjon
         labelFormatId="SituasjonLabel.SkalBo"
-        value={formaterUtenlandsopphold(soknad.oppgittTilknytning.utlandsoppholdEtter, intl)}
+        value={formaterUtenlandsopphold(soknad.oppgittTilknytning.utlandsoppholdEtter, alleKodeverk, intl)}
         kilde={FaktaKilde.SOKNAD}
       />
       <Situasjon
         labelFormatId="SituasjonLabel.SisteAdresse"
-        value={getSisteBostedsLand(medlemskap, intl)}
+        value={getSisteBostedsLand(medlemskap, alleKodeverk, intl)}
         kilde={FaktaKilde.FREG}
       />
       <Situasjon
         labelFormatId="SituasjonLabel.Statborgerskap"
-        value={getSisteRegion(medlemskap)}
+        value={getSisteRegion(medlemskap, alleKodeverk)}
         kilde={FaktaKilde.FREG}
       />
       <Situasjon
         labelFormatId="SituasjonLabel.Personstatus"
-        value={getSistePersonstatus(medlemskap)}
+        value={getSistePersonstatus(medlemskap, alleKodeverk)}
         kilde={FaktaKilde.FREG}
       />
     </HStack>
