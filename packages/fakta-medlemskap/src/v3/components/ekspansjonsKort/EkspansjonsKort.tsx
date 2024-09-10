@@ -22,7 +22,7 @@ const EkspansjonsKort: FC<PropsWithChildren<Props>> = ({ tittel, kilde, relevant
             <AvvikStatus harAvvik={relevanteAvvik.length > 0} />
           </div>
           <div>
-            <ExpansionCard.Title>{tittel}</ExpansionCard.Title>
+            <ExpansionCard.Title size="small">{tittel}</ExpansionCard.Title>
             <ExpansionCard.Description>
               <Detail uppercase>
                 <FormattedMessage id={getFormateringsIdForKilde(kilde)}></FormattedMessage>

@@ -41,6 +41,7 @@ const MedlemskapInfoPanel: FC<MedlemskapFaktaProps> = ({
   aksjonspunkter,
   medlemskap,
   soknad,
+  alleKodeverk,
 }) => {
   const [isSubmitting, setSubmitting] = useState(false);
 
@@ -63,7 +64,7 @@ const MedlemskapInfoPanel: FC<MedlemskapFaktaProps> = ({
         <AksjonspunktHelpText aksjonspunkter={aksjonspunkter} />
       )}
 
-      <SituasjonsOversikt medlemskap={medlemskap} soknad={soknad} />
+      <SituasjonsOversikt medlemskap={medlemskap} soknad={soknad} alleKodeverk={alleKodeverk} />
       <OpplysningerOmUtenlandsopphold soknad={soknad} avvik={medlemskap.manuellBehandling?.avvik} />
 
       <Form formMethods={formMethods} onSubmit={values => bekreft(values)}>

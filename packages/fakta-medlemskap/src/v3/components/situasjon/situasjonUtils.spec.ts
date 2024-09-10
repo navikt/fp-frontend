@@ -1,9 +1,10 @@
-import { MedlemskapV3 } from '@navikt/fp-types';
+import { AlleKodeverk, MedlemskapV3 } from '@navikt/fp-types';
 import { formaterUtenlandsopphold, getSisteBostedsLand, getSistePersonstatus, getSisteRegion } from './situasjonUtils';
 import { opplysningAdresseType } from '@navikt/fp-kodeverk';
 import { expect } from 'vitest';
 import { createIntl } from '@navikt/ft-utils';
 import messages from '../../../../i18n/nb_NO.json';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 const defaultMedlemskapProps: MedlemskapV3 = {
   regioner: [],
@@ -16,7 +17,7 @@ const defaultMedlemskapProps: MedlemskapV3 = {
 };
 
 const intl = createIntl(messages);
-
+const kodeverk = alleKodeverk as unknown as AlleKodeverk;
 describe('situasjonUtils', () => {
   describe('getSisteRegion', () => {
     it('skal returnere region for siste aktuelle regions periode', () => {
@@ -27,7 +28,7 @@ describe('situasjonUtils', () => {
           { fom: '2022-07-01', tom: '2025-02-01', type: 'EOS' },
         ],
       };
-      expect(getSisteRegion(medlemskap)).toBe('EU/EØS');
+      expect(getSisteRegion(medlemskap, kodeverk)).toBe('EU/EØS');
     });
   });
 
@@ -37,10 +38,10 @@ describe('situasjonUtils', () => {
         ...defaultMedlemskapProps,
         personstatuser: [
           { fom: '2022-06-02', tom: '2025-02-01', type: 'DØD' },
-          { fom: '2022-07-01', tom: '2025-02-01', type: 'BOSA' },
+          { fom: '2022-07-01', tom: '2025-02-01', type: 'UTVA' },
         ],
       };
-      expect(getSistePersonstatus(medlemskap)).toBe('Bosatt');
+      expect(getSistePersonstatus(medlemskap, kodeverk)).toBe('Utvandret');
     });
   });
 
@@ -66,13 +67,13 @@ describe('situasjonUtils', () => {
           },
         ],
       };
-      expect(getSisteBostedsLand(medlemskap, intl)).toBe('I Finland');
+      expect(getSisteBostedsLand(medlemskap, kodeverk, intl)).toBe('I Finland');
     });
   });
 
   describe('formaterUtenlandsopphold', () => {
     it('skal formatere ingen utelandsopphold', () => {
-      expect(formaterUtenlandsopphold([], intl)).toBe('I Norge');
+      expect(formaterUtenlandsopphold([], kodeverk, intl)).toBe('I Norge');
     });
 
     it('skal formatere et utelandsopphold', () => {
@@ -83,7 +84,7 @@ describe('situasjonUtils', () => {
           landNavn: 'FINLAND',
         },
       ];
-      expect(formaterUtenlandsopphold(utenlandsopphold, intl)).toBe('I Finland');
+      expect(formaterUtenlandsopphold(utenlandsopphold, kodeverk, intl)).toBe('I Finland');
     });
 
     it('skal formatere flere utelandsopphold', () => {
@@ -99,7 +100,7 @@ describe('situasjonUtils', () => {
           landNavn: 'FINLAND',
         },
       ];
-      expect(formaterUtenlandsopphold(utenlandsopphold, intl)).toBe('I flere land');
+      expect(formaterUtenlandsopphold(utenlandsopphold, kodeverk, intl)).toBe('I flere land');
     });
   });
 });
