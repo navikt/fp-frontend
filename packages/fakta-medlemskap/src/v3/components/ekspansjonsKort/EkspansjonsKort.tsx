@@ -15,7 +15,7 @@ interface Props {
 
 const EkspansjonsKort: FC<PropsWithChildren<Props>> = ({ tittel, kilde, relevanteAvvik, children }) => {
   return (
-    <ExpansionCard aria-label={tittel} size="small" open={relevanteAvvik.length > 0}>
+    <ExpansionCard aria-label={tittel} size="small">
       <ExpansionCard.Header>
         <HStack gap="4">
           <div style={{ marginTop: 4 }}>

@@ -45,7 +45,7 @@ const OpplysningerOmUtenlandsopphold: FC<Props> = ({ avvik = [], soknad: { oppgi
 
   return (
     <EkspansjonsKort
-      tittel={intl.formatMessage({ id: 'OpplysningerOmUtenlandsopphold.Title' })}
+      tittel={intl.formatMessage({ id: 'OpplysningsKort.UtenlandsoppholdTittel' })}
       kilde={FaktaKilde.SOKNAD}
       relevanteAvvik={avvik.filter(a => relevantForUtenlandsopphold.includes(a))}
     >

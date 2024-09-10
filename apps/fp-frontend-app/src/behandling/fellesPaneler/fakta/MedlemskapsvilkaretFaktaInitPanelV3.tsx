@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl';
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { MedlemskapFaktaIndexV3 } from '@navikt/fp-fakta-medlemskap';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import { MedlemskapV3, Soknad } from '@navikt/fp-types';
+import { Fagsak, MedlemskapV3, Soknad } from '@navikt/fp-types';
 
 import FaktaPanelInitProps from '../../felles/typer/faktaPanelInitProps';
 import FaktaDefaultInitPanel from '../../felles/fakta/FaktaDefaultInitPanel';
@@ -19,10 +19,14 @@ type EndepunktPanelData = {
   soknad: Soknad;
 };
 
+interface Props {
+  fagsak: Fagsak;
+}
+
 /**
  * MedlemskapsvilkaretFaktaInitPanel
  */
-const MedlemskapsvilkaretFaktaInitPanelV3: FunctionComponent<FaktaPanelInitProps> = ({ ...props }) => (
+const MedlemskapsvilkaretFaktaInitPanelV3: FunctionComponent<FaktaPanelInitProps & Props> = ({ ...props }) => (
   <FaktaDefaultInitPanel<EndepunktPanelData>
     {...props}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
@@ -30,7 +34,13 @@ const MedlemskapsvilkaretFaktaInitPanelV3: FunctionComponent<FaktaPanelInitProps
     faktaPanelKode={FaktaPanelCode.MEDLEMSKAPSVILKARET_V3}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'MedlemskapInfoPanel.MedlemskapV3' })}
     skalPanelVisesIMeny={erGjeldendeEnv => props.behandling.harSøknad && !erGjeldendeEnv('production')}
-    renderPanel={data => <MedlemskapFaktaIndexV3 {...data} />}
+    renderPanel={data => (
+      <MedlemskapFaktaIndexV3
+        {...data}
+        brukerNavn={props.fagsak.bruker.navn}
+        annenpartNavn={props.fagsak.annenPart?.navn}
+      />
+    )}
   />
 );
 

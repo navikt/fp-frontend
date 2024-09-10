@@ -6994,5 +6994,37 @@
       "kodeverk": "FORELDRE_TYPE",
       "navn": "Andre"
     }
+  ],
+  "AdresseType": [
+    {
+      "kode": "BOSTEDSADRESSE",
+      "kodeverk": "ADRESSE_TYPE",
+      "navn": "Bostedsadresse"
+    },
+    {
+      "kode": "POSTADRESSE",
+      "kodeverk": "ADRESSE_TYPE",
+      "navn": "Postadresse"
+    },
+    {
+      "kode": "POSTADRESSE_UTLAND",
+      "kodeverk": "ADRESSE_TYPE",
+      "navn": "Postadresse i utlandet"
+    },
+    {
+      "kode": "MIDLERTIDIG_POSTADRESSE_NORGE",
+      "kodeverk": "ADRESSE_TYPE",
+      "navn": "Midlertidig postadresse i Norge"
+    },
+    {
+      "kode": "MIDLERTIDIG_POSTADRESSE_UTLAND",
+      "kodeverk": "ADRESSE_TYPE",
+      "navn": "Midlertidig postadresse i utlandet"
+    },
+    {
+      "kode": "UKJENT_ADRESSE",
+      "kodeverk": "ADRESSE_TYPE",
+      "navn": "Ukjent adresse"
+    }
   ]
 }

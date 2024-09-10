@@ -86,7 +86,7 @@ const SvangerskapspengerPaneler: FunctionComponent<OwnProps> = ({
         <VergeFaktaInitPanel {...props} />
         <FodseltilretteleggingFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
         <MedlemskapsvilkaretFaktaInitPanel {...props} />
-        <MedlemskapsvilkaretFaktaInitPanelV3 {...props} />
+        <MedlemskapsvilkaretFaktaInitPanelV3 {...props} fagsak={fagsak} />
         <OpptjeningsvilkaretFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
         <PermisjonFaktaInitPanel
           {...props}

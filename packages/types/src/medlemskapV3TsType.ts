@@ -24,7 +24,7 @@ type UtenlandsoppholdPeriode = Readonly<{
   landkode: string;
 }>;
 
-type AdressePeriode = Readonly<{
+export type AdressePeriode = Readonly<{
   fom: string;
   tom: string;
   adresse: Personadresse;

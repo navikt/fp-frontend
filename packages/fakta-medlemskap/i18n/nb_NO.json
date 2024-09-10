@@ -83,22 +83,30 @@
   "Situasjon.FlereLand": "I flere land",
   "Situasjon.ILand": "I {land}",
 
-  "OpplysningerOmUtenlandsopphold.Title": "Opplysninger fra søknad",
+  "OpplysningsKort.UtenlandsoppholdTittel": "Opplysninger fra søknad",
+  "OpplysningsKort.AdresseTittel": "Adresser til søker({adresseCountSoker}){adresseCountAnnenpart, select, none {} other { og annen part({adresseCountAnnenpart})}}",
 
   "AvvikMerknad.BosattUtenlandsopphold": "Dette ble markert fordi søker har oppgitt at man skal eller har bodd i utlandet",
-  "AvvikMerknad.BosattManglendeAdresse":"Dette ble markert fordi det ikke er registrert noen adresser i folkeregisteret",
+  "AvvikMerknad.BosattManglendeAdresse": "Dette ble markert fordi det ikke er registrert noen adresser i folkeregisteret",
   "AvvikMerknad.BosattUgyldigPersonstatus": "Dette ble markert fordi noen er registrert som {personstatus}",
-  "AvvikMerknad.BosattUtenlandsadresse":"Dette ble markert fordi det er registrert én eller flere adresser i utlandet",
+  "AvvikMerknad.BosattUtenlandsadresse": "Dette ble markert fordi det er registrert én eller flere adresser i utlandet",
   "AvvikMerknad.Oppholdsrett": "Dette ble markert fordi søker har én eller flere oppholdstilatelser",
-  "AvvikMerknad.MedlPerioder":"Dette ble markert fordi søker har én eller flere perioder i medlemskapsregisteret",
+  "AvvikMerknad.MedlPerioder": "Dette ble markert fordi søker har én eller flere perioder i medlemskapsregisteret",
   "AvvikMerknad.EOSManglendeAnsettelseMedInntekt": "Dette ble markert fordi det ikke er registrert inntekt eller annsettelse på søker",
 
+  "OpplysningerOmUtenlandsopphold.BoddForegaaende12.Sporsmaal": "Hvor har du bodd de siste 12 månedene?",
+  "OpplysningerOmUtenlandsopphold.BoddForegaaende12.Svar": "{iNorge, select, true {Jeg har bodd i Norge} other {Jeg har bodd helt eller delvis i utlandet}}",
+  "OpplysningerOmUtenlandsopphold.BoddForegaaende12.HvilkeLand": "Hvilke land og hvor lenge har du bodd der?",
+  "OpplysningerOmUtenlandsopphold.BoNeste12.Sporsmaal": "Hvor skal du bo de neste 12 månedene?",
+  "OpplysningerOmUtenlandsopphold.BoNeste12.Svar": "{iNorge, select, true {Jeg skal bo i Norge} other {Jeg skal bo helt eller delvis i utlandet}}",
+  "OpplysningerOmUtenlandsopphold.BoNeste12.HvilkeLand": "Hvilke land og hvor lenge skal du bo der?",
+  "OpplysningerOmUtenlandsopphold.iLand": "i {land}",
 
-  "OpplysningerOmUtenlandsopphold.BoddForegaaende12.Sporsmaal":"Hvor har du bodd de siste 12 månedene?",
-  "OpplysningerOmUtenlandsopphold.BoddForegaaende12.Svar":"{iNorge, select, true {Jeg har bodd i Norge} other {Jeg har bodd helt eller delvis i utlandet}}",
-  "OpplysningerOmUtenlandsopphold.BoddForegaaende12.HvilkeLand":"Hvilke land og hvor lenge har du bodd der?",
-  "OpplysningerOmUtenlandsopphold.BoNeste12.Sporsmaal":"Hvor skal du bo de neste 12 månedene?",
-  "OpplysningerOmUtenlandsopphold.BoNeste12.Svar":"{iNorge, select, true {Jeg skal bo i Norge} other {Jeg skal bo helt eller delvis i utlandet}}",
-  "OpplysningerOmUtenlandsopphold.BoNeste12.HvilkeLand":"Hvilke land og hvor lenge skal du bo der?",
-  "OpplysningerOmUtenlandsopphold.iLand": "i {land}"
+  "OpplysningerOmAdresser.Soker": "Søker, {navn}:",
+  "OpplysningerOmAdresser.Soker.Beskrivelse": "Bostedsadresse for søker registrert i folkeregisteret  gyldige for de siste 12 månedene",
+  "OpplysningerOmAdresser.Annenpart": "Annen part, {navn}:",
+  "OpplysningerOmAdresser.Annenpart.Beskrivelse": "Det er mulighet for å se bostedadresse på skjæringspunktet for den andre forelderen",
+
+  "OpplysningerOmAdresser.Tabell.IngenAdresse": "Ingen adresser funnet for {erAnnenpart, select, true {den andre forelderen} other {søker} }.",
+  "OpplysningerOmAdresser.Tabell.SammeAdresse": "Den andre forelderen har samme adresse som søker på skjæringstidspunktet"
 }

@@ -14,6 +14,7 @@ import { FormValues } from './types';
 import AksjonspunktHelpText from './components/AksjonspunktHelpText';
 import SituasjonsOversikt from './components/situasjon/SituasjonOversikt';
 import OpplysningerOmUtenlandsopphold from './components/opplysningsKort/OpplysningerOmUtenlandsopphold';
+import OpplysningerOmAdresser from './components/opplysningsKort/OpplysningerOmAdresser';
 
 const inngangsAksjonspunkter = [
   // TODO: erstatt disse med nye ap når vi vet hvilke vi har
@@ -41,6 +42,8 @@ const MedlemskapInfoPanel: FC<MedlemskapFaktaProps> = ({
   aksjonspunkter,
   medlemskap,
   soknad,
+  brukerNavn,
+  annenpartNavn,
   alleKodeverk,
 }) => {
   const [isSubmitting, setSubmitting] = useState(false);
@@ -66,6 +69,13 @@ const MedlemskapInfoPanel: FC<MedlemskapFaktaProps> = ({
 
       <SituasjonsOversikt medlemskap={medlemskap} soknad={soknad} alleKodeverk={alleKodeverk} />
       <OpplysningerOmUtenlandsopphold soknad={soknad} avvik={medlemskap.manuellBehandling?.avvik} />
+      <OpplysningerOmAdresser
+        medlemskap={medlemskap}
+        avvik={medlemskap.manuellBehandling?.avvik}
+        brukerNavn={brukerNavn}
+        annenpartNavn={annenpartNavn}
+        alleKodeverk={alleKodeverk}
+      />
 
       <Form formMethods={formMethods} onSubmit={values => bekreft(values)}>
         <VStack gap="6">
