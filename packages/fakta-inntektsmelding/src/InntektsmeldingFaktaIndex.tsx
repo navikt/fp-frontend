@@ -88,22 +88,22 @@ export const InntektsmeldingFaktaIndex = ({
         <Table.Header>
           <Table.Row>
             <Table.ColumnHeader sortKey="innsendingsårsak" sortable>
-              <FormattedMessage id={'InntektsmeldingFaktaPanel.tabell.header.type'} />
+              <FormattedMessage id="InntektsmeldingFaktaPanel.tabell.header.type" />
             </Table.ColumnHeader>
             <Table.ColumnHeader sortKey="innsendingstidspunkt" sortable>
-              <FormattedMessage id={'InntektsmeldingFaktaPanel.tabell.header.innsendt'} />
+              <FormattedMessage id="InntektsmeldingFaktaPanel.tabell.header.innsendt" />
             </Table.ColumnHeader>
             <Table.ColumnHeader sortKey="arbeidsgiverIdent" sortable>
-              <FormattedMessage id={'InntektsmeldingFaktaPanel.tabell.header.arbeidsgiver'} />
+              <FormattedMessage id="InntektsmeldingFaktaPanel.tabell.header.arbeidsgiver" />
             </Table.ColumnHeader>
             <Table.ColumnHeader sortKey="startDatoPermisjon" sortable>
-              <FormattedMessage id={'InntektsmeldingFaktaPanel.tabell.header.skjæringstidspunkt'} />
+              <FormattedMessage id="InntektsmeldingFaktaPanel.tabell.header.skjæringstidspunkt" />
             </Table.ColumnHeader>
             <Table.ColumnHeader sortKey="inntektPrMnd" sortable>
-              <FormattedMessage id={'InntektsmeldingFaktaPanel.tabell.header.månedsinntekt'} />
+              <FormattedMessage id="InntektsmeldingFaktaPanel.tabell.header.månedsinntekt" />
             </Table.ColumnHeader>
             <Table.ColumnHeader sortKey="tilknyttedeBehandlingIder" sortable>
-              <FormattedMessage id={'InntektsmeldingFaktaPanel.tabell.header.behandling'} />
+              <FormattedMessage id="InntektsmeldingFaktaPanel.tabell.header.behandling" />
             </Table.ColumnHeader>
             <Table.HeaderCell />
           </Table.Row>
@@ -114,7 +114,7 @@ export const InntektsmeldingFaktaIndex = ({
               <Table.ExpandableRow
                 expandOnRowClick
                 togglePlacement="right"
-                key={inntektsmelding.journalpostId}
+                key={`${inntektsmelding.journalpostId}-${inntektsmelding.internArbeidsforholdId}`}
                 content={
                   <InntektsmeldingInnhold
                     alleKodeverk={alleKodeverk}

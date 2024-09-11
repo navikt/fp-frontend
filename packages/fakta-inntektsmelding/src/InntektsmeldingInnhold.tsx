@@ -219,7 +219,7 @@ const LastNedPdfKnapp = ({ inntektsmelding, fagsak }: { fagsak: Fagsak; inntekts
         );
       }}
       variant="secondary"
-      size={'small'}
+      size="small"
       icon={<ArrowForwardIcon />}
     >
       <FormattedMessage id="InntektsmeldingFaktaPanel.modal.trigger" />
