@@ -11,9 +11,10 @@ interface Props {
   kilde: FaktaKilde;
   tittel: string;
   relevanteAvvik: MedlemskapAvvik[];
+  avvikValues?: Record<string, string>;
 }
 
-const EkspansjonsKort: FC<PropsWithChildren<Props>> = ({ tittel, kilde, relevanteAvvik, children }) => {
+const EkspansjonsKort: FC<PropsWithChildren<Props>> = ({ tittel, kilde, relevanteAvvik, avvikValues, children }) => {
   return (
     <ExpansionCard aria-label={tittel} size="small">
       <ExpansionCard.Header>
@@ -35,7 +36,7 @@ const EkspansjonsKort: FC<PropsWithChildren<Props>> = ({ tittel, kilde, relevant
         <Box padding="4" background="surface-subtle" borderRadius="medium">
           <VStack gap="4">
             {relevanteAvvik.map(a => (
-              <AvvikMerknad key={a} avvik={a} />
+              <AvvikMerknad key={a} avvik={a} values={avvikValues} />
             ))}
             {children}
           </VStack>

@@ -9,6 +9,7 @@ import {
   behandlingStatus,
   behandlingType,
   opplysningAdresseType as OpplysningAdresseType,
+  personstatusType,
 } from '@navikt/fp-kodeverk';
 import { Behandling, MedlemskapAvvik, MedlemskapV3, Soknad } from '@navikt/fp-types';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -19,6 +20,7 @@ import MedlemskapFaktaIndex from './MedlemskapFaktaIndex';
 import '@navikt/ds-css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
 import '@navikt/ft-form-hooks/dist/style.css';
+import region from '@navikt/fp-kodeverk/src/region';
 
 const behandling = {
   uuid: '1',
@@ -156,14 +158,19 @@ const lagMedlemskap = (override: Partial<MedlemskapV3>) => ({
     {
       fom: '2019-01-01',
       tom: '2021-01-01',
-      type: 'NORDEN',
+      type: region.NORDEN,
     },
   ],
   personstatuser: [
     {
       fom: '2019-01-01',
-      tom: '2020-01-01',
-      type: 'BOSA',
+      tom: '2022-01-01',
+      type: personstatusType.BOSATT,
+    },
+    {
+      fom: '2022-01-01',
+      tom: '2024-01-01',
+      type: personstatusType.UTVANDRET,
     },
   ],
   annenpart: {
@@ -195,8 +202,20 @@ const lagMedlemskap = (override: Partial<MedlemskapV3>) => ({
         },
       },
     ],
-    regioner: [],
-    personstatuser: [],
+    regioner: [
+      {
+        fom: '2019-01-01',
+        tom: '2021-01-01',
+        type: region.ANNET,
+      },
+    ],
+    personstatuser: [
+      {
+        fom: '2019-01-01',
+        tom: '2020-01-01',
+        type: personstatusType.BOSATT,
+      },
+    ],
   },
   ...override,
 });

@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest';
 import { composeStories } from '@storybook/react';
 import * as stories from './MedlemskapFaktaIndex.stories';
 import userEvent from '@testing-library/user-event';
+
 const { Default } = composeStories(stories);
 
 describe('<MedlemskapFaktaIndex>', () => {
@@ -27,7 +28,7 @@ describe('<MedlemskapFaktaIndex>', () => {
     expect(situasjon.getByText('Nordisk')).toBeInTheDocument();
 
     expect(situasjon.getByText('Personstatus')).toBeInTheDocument();
-    expect(situasjon.getByText('Bosatt (f.reg)')).toBeInTheDocument();
+    expect(situasjon.getByText('Utvandret')).toBeInTheDocument();
 
     expect(screen.getByText('Opplysninger fra søknad')).toBeInTheDocument();
     expect(screen.getByText('Adresser til søker(2) og annen part(2)')).toBeInTheDocument();
@@ -64,7 +65,7 @@ describe('<MedlemskapFaktaIndex>', () => {
 
     expect(adresser.getByText('Søker, Ola Nordmann:')).toBeInTheDocument();
     expect(
-      adresser.getByText('Bostedsadresse for søker registrert i folkeregisteret gyldige for de siste 12 månedene'),
+      adresser.getByText('Adresse for søker registrert i folkeregisteret gyldige for de siste 12 månedene'),
     ).toBeInTheDocument();
     expect(adresser.getByText('01.01.2019 - 01.01.2020')).toBeInTheDocument();
     expect(adresser.getByText('Oslogata 1, 1234 Oslo NOR')).toBeInTheDocument();
@@ -74,11 +75,35 @@ describe('<MedlemskapFaktaIndex>', () => {
     expect(adresser.getByText('Postadresse i utlandet')).toBeInTheDocument();
     expect(adresser.getByText('Annen part, Kari Nordmann:')).toBeInTheDocument();
     expect(
-      adresser.getByText('Det er mulighet for å se bostedadresse på skjæringspunktet for den andre forelderen'),
+      adresser.getByText('Det er mulighet for å se adresse på skjæringspunktet for den andre forelderen'),
     ).toBeInTheDocument();
     expect(
       adresser.getByText('Den andre forelderen har samme adresse som søker på skjæringstidspunktet'),
     ).toBeInTheDocument();
+
+    // OpplysningerOmPersonstatus
+    const personstatus = within(screen.getByLabelText('Personstatus og statsborgerskap fra søker og annen part'));
+    await userEvent.click(personstatus.getByText('Vis mer'));
+
+    const bruker = within(screen.getByLabelText('Personstatus og statsborgerskap for Ola Nordmann'));
+    expect(bruker.getByText('Søker, Ola Nordmann:')).toBeInTheDocument();
+
+    expect(bruker.getByText('Personstatus')).toBeInTheDocument();
+    expect(bruker.getByText('Utvandret')).toBeInTheDocument();
+    expect(bruker.getByText('Utvandringsdato')).toBeInTheDocument();
+    expect(bruker.getByText('01.01.2022')).toBeInTheDocument();
+
+    expect(bruker.getByText('Statsborgerskap/region')).toBeInTheDocument();
+    expect(bruker.getByText('Nordisk')).toBeInTheDocument();
+
+    const annenpart = within(screen.getByLabelText('Personstatus og statsborgerskap for Kari Nordmann'));
+    expect(annenpart.getByText('Annen part, Kari Nordmann:')).toBeInTheDocument();
+
+    expect(annenpart.getByText('Personstatus')).toBeInTheDocument();
+    expect(annenpart.getByText('Bosatt (i følge folkeregisterloven)')).toBeInTheDocument();
+
+    expect(annenpart.getByText('Statsborgerskap/region')).toBeInTheDocument();
+    expect(annenpart.getByText('3.landsborger')).toBeInTheDocument();
 
     expect(screen.getByText('Begrunn endringene')).toBeInTheDocument();
     expect(screen.getByText('Bekreft')).toBeInTheDocument();
