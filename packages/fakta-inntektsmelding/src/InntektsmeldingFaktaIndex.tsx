@@ -114,7 +114,7 @@ export const InntektsmeldingFaktaIndex = ({
               <Table.ExpandableRow
                 expandOnRowClick
                 togglePlacement="right"
-                key={inntektsmelding.journalpostId}
+                key={`${inntektsmelding.journalpostId}-${inntektsmelding.internArbeidsforholdId}`}
                 content={
                   <InntektsmeldingInnhold
                     alleKodeverk={alleKodeverk}
