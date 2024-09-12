@@ -12,10 +12,6 @@ import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER: AksjonspunktCode[] = [
   AksjonspunktCode.VURDER_MEDLEMSKAPSVILKÅRET,
-  AksjonspunktCode.AVKLAR_LOVLIG_OPPHOLD,
-  AksjonspunktCode.AVKLAR_OM_BRUKER_ER_BOSATT,
-  AksjonspunktCode.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE,
-  AksjonspunktCode.AVKLAR_OPPHOLDSRETT,
   // TODO: FORUTGÅENDE ES INC
 ];
 
@@ -40,11 +36,14 @@ const MedlemskapsvilkaretFaktaInitPanelV3: FunctionComponent<FaktaPanelInitProps
     faktaPanelKode={FaktaPanelCode.MEDLEMSKAPSVILKARET_V3}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'MedlemskapInfoPanel.MedlemskapV3' })}
     skalPanelVisesIMeny={erGjeldendeEnv => props.behandling.harSøknad && !erGjeldendeEnv('production')}
-    renderPanel={data => <MedlemskapFaktaIndexV3
-      medlemskap={data.medlemskapV3}
-                                                 brukerNavn={props.fagsak.bruker.navn}
-                                                 annenpartNavn={props.fagsak.annenPart?.navn}
-      {...data} />}
+    renderPanel={data => (
+      <MedlemskapFaktaIndexV3
+        medlemskap={data.medlemskapV3}
+        brukerNavn={props.fagsak.bruker.navn}
+        annenpartNavn={props.fagsak.annenPart?.navn}
+        {...data}
+      />
+    )}
   />
 );
 
