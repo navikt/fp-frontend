@@ -97,7 +97,7 @@ const ForeldrepengerPaneler: FunctionComponent<OwnProps> = ({
         <AdopsjonsvilkaretFaktaInitPanel {...props} fagsak={fagsak} />
         <FodselvilkaretFaktaInitPanel {...props} />
         <MedlemskapsvilkaretFaktaInitPanel {...props} />
-        <MedlemskapsvilkaretFaktaInitPanelV3 {...props} />
+        <MedlemskapsvilkaretFaktaInitPanelV3 {...props} fagsak={fagsak} />
         <OpptjeningsvilkaretFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
         <PermisjonFaktaInitPanel
           {...props}

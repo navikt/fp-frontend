@@ -66,6 +66,7 @@ enum KodeverkType {
   FORDELING_PERIODE_KILDE = 'FordelingPeriodeKilde',
   RELASJONSROLLE_TYPE = 'RelasjonsRolleType',
   FAGSAK_MARKERING = 'FagsakMarkering',
+  ADRESSE_TYPE = 'AdresseType',
 }
 
 export default KodeverkType;

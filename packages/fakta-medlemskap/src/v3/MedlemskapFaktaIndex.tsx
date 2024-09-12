@@ -12,6 +12,8 @@ const intl = createIntl(messages);
 interface Props {
   medlemskap: MedlemskapV3;
   soknad: Soknad;
+  brukerNavn: string;
+  annenpartNavn?: string;
 }
 
 export type MedlemskapFaktaProps = Props & StandardFaktaPanelProps;

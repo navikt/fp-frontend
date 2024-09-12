@@ -14,8 +14,9 @@ interface Props {
 
 const SituasjonOversikt: FC<Props> = ({ soknad, medlemskap, alleKodeverk }) => {
   const intl = useIntl();
+
   return (
-    <HStack gap="2" style={{ display: 'flex' }}>
+    <HStack gap="2" style={{ display: 'flex' }} aria-label="Situasjons Oversikt">
       <Situasjon
         labelFormatId="SituasjonLabel.HarBodd"
         value={formaterUtenlandsopphold(soknad.oppgittTilknytning.utlandsoppholdFor, alleKodeverk, intl)}

@@ -56,7 +56,7 @@ const EngangsstonadPaneler: FunctionComponent<OwnProps> = ({
         <AdopsjonsvilkaretFaktaInitPanel {...props} fagsak={fagsak} />
         <FodselvilkaretFaktaInitPanel {...props} />
         <MedlemskapsvilkaretFaktaInitPanel {...props} />
-        <MedlemskapsvilkaretFaktaInitPanelV3 {...props} />
+        <MedlemskapsvilkaretFaktaInitPanelV3 {...props} fagsak={fagsak} />
       </>
     ),
     [personoversikt, fagsak],

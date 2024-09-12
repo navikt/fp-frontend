@@ -52,106 +52,153 @@ const Template: StoryFn<{
     harApneAksjonspunkter
     submittable
     setFormData={() => undefined}
+    brukerNavn="Ola Nordmann"
+    annenpartNavn="Kari Nordmann"
   />
 );
 
-export const Default = Template.bind({});
-Default.args = {
-  soknad: {
-    oppgittFordeling: {
-      startDatoForPermisjon: '2019-01-01',
-    },
-    oppgittTilknytning: {
-      oppholdNorgeNa: true,
-      oppholdNestePeriode: true,
-      oppholdSistePeriode: true,
-      utlandsoppholdFor: [
-        {
-          landNavn: 'SVERIGE',
-          fom: '2010-01-01',
-          tom: '2011-01-01',
-        },
-      ],
-      utlandsoppholdEtter: [
-        {
-          landNavn: 'DANMARK',
-          fom: '2018-01-01',
-          tom: '2019-01-01',
-        },
-      ],
-    },
-    termindato: '2018-01-01',
-  } as Soknad,
-  medlemskap: {
-    manuellBehandling: {
-      avvik: [
-        MedlemskapAvvik.BOSATT_UTENLANDSOPPHOLD,
-        MedlemskapAvvik.BOSATT_UTENLANDSADRESSE,
-        MedlemskapAvvik.BOSATT_MANGLENDE_BOSTEDSADRESSE,
-        MedlemskapAvvik.BOSATT_UGYLDIG_PERSONSTATUS,
-        MedlemskapAvvik.MEDL_PERIODER,
-        MedlemskapAvvik.TREDJELAND_MANGLENDE_LOVLIG_OPPHOLD,
-        MedlemskapAvvik.EØS_MANGLENDE_ANSETTELSE_MED_INNTEKT,
-      ],
-    },
-    oppholdstillatelser: [
+const soknad = {
+  oppgittFordeling: {
+    startDatoForPermisjon: '2019-01-01',
+  },
+  oppgittTilknytning: {
+    oppholdNorgeNa: true,
+    oppholdNestePeriode: true,
+    oppholdSistePeriode: true,
+    utlandsoppholdFor: [
       {
-        fom: '2019-01-01',
-        tom: '2021-10-13',
-        oppholdstillatelseType: 'MIDLERTIDIG',
-      },
-      {
-        fom: '2019-01-01',
-        tom: '2021-01-13',
-        oppholdstillatelseType: 'MIDLERTIDIG',
+        landNavn: 'SVERIGE',
+        fom: '2010-01-01',
+        tom: '2011-01-01',
       },
     ],
-    medlemskapsperiode: [
+    utlandsoppholdEtter: [
       {
-        fom: '2019-01-01',
-        tom: '2021-10-13',
-        medlemskapType: 'AVKLARES',
-        dekningType: 'OPPHOR',
-        beslutningsdato: '2020-02-01',
+        landNavn: 'DANMARK',
+        fom: '2018-01-01',
+        tom: '2019-01-01',
       },
     ],
-    utenlandsopphold: [
-      {
-        fom: '2019-01-01',
-        tom: '2021-10-13',
-        landkode: 'DNK',
-      },
+  },
+  termindato: '2018-01-01',
+} as Soknad;
+
+export const medlemskap = {
+  manuellBehandling: {
+    avvik: [
+      MedlemskapAvvik.BOSATT_UTENLANDSOPPHOLD,
+      MedlemskapAvvik.BOSATT_UTENLANDSADRESSE,
+      MedlemskapAvvik.BOSATT_MANGLENDE_BOSTEDSADRESSE,
+      MedlemskapAvvik.BOSATT_UGYLDIG_PERSONSTATUS,
+      MedlemskapAvvik.MEDL_PERIODER,
+      MedlemskapAvvik.TREDJELAND_MANGLENDE_LOVLIG_OPPHOLD,
+      MedlemskapAvvik.EØS_MANGLENDE_ANSETTELSE_MED_INNTEKT,
     ],
+  },
+  oppholdstillatelser: [
+    {
+      fom: '2019-01-01',
+      tom: '2021-10-13',
+      oppholdstillatelseType: 'MIDLERTIDIG',
+    },
+    {
+      fom: '2019-01-01',
+      tom: '2021-01-13',
+      oppholdstillatelseType: 'MIDLERTIDIG',
+    },
+  ],
+  medlemskapsperiode: [
+    {
+      fom: '2019-01-01',
+      tom: '2021-01-01',
+      medlemskapType: 'AVKLARES',
+      dekningType: 'OPPHOR',
+      beslutningsdato: '2020-02-01',
+    },
+  ],
+  utenlandsopphold: [
+    {
+      fom: '2019-01-01',
+      tom: '2021-01-01',
+      landkode: 'DNK',
+    },
+  ],
+  adresser: [
+    {
+      fom: '2019-01-01',
+      tom: '2020-01-01',
+      adresse: {
+        adresseType: OpplysningAdresseType.BOSTEDSADRESSE,
+        adresselinje1: 'Oslogata 1',
+        poststed: 'Oslo',
+        postNummer: '1234',
+        land: 'NOR',
+      },
+    },
+    {
+      fom: '2020-01-01',
+      tom: '2021-01-01',
+      adresse: {
+        adresseType: OpplysningAdresseType.POSTADRESSE_UTLAND,
+        adresselinje1: 'Mäkelänkatu 1 B',
+        poststed: 'Helsinki',
+        postNummer: 'FI-00123',
+        land: 'FIN',
+      },
+    },
+  ],
+  regioner: [
+    {
+      fom: '2019-01-01',
+      tom: '2021-01-01',
+      type: 'NORDEN',
+    },
+  ],
+  personstatuser: [
+    {
+      fom: '2019-01-01',
+      tom: '2020-01-01',
+      type: 'BOSA',
+    },
+  ],
+  annenpart: {
     adresser: [
       {
         fom: '2019-01-01',
-        tom: '2021-10-13',
+        tom: '2020-01-01',
         adresse: {
           adresseType: OpplysningAdresseType.BOSTEDSADRESSE,
-          adresselinje1: 'Adresse 1',
-          adresselinje2: 'Adresse 2',
-          adresselinje3: 'Adresse 3',
-          poststed: 'poststed',
+          adresselinje1: 'Oslogata 1',
+          adresselinje2: undefined,
+          adresselinje3: undefined,
+          poststed: 'Oslo',
           postNummer: '1234',
           land: 'NOR',
         },
       },
-    ],
-    regioner: [
       {
-        fom: '2019-01-01',
-        tom: '2021-10-13',
-        type: 'NORDEN',
+        fom: '2020-01-01',
+        tom: '2021-01-01',
+        adresse: {
+          adresseType: OpplysningAdresseType.POSTADRESSE_UTLAND,
+          adresselinje1: 'Mäkelänkatu 1 B',
+          adresselinje2: undefined,
+          adresselinje3: undefined,
+          poststed: 'Helsinki',
+          postNummer: 'FI-00123',
+          land: 'FIN',
+        },
       },
     ],
-    personstatuser: [
-      {
-        fom: '2019-01-01',
-        tom: '2021-10-13',
-        type: 'BOSA',
-      },
-    ],
+    regioner: [],
+    personstatuser: [],
   },
+};
+
+export const Default = Template.bind({});
+Default.args = {
+  soknad,
+  medlemskap,
   aksjonspunkter: [
     {
       definisjon: AksjonspunktCode.AVKLAR_FORTSATT_MEDLEMSKAP,

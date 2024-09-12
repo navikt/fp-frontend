@@ -109,6 +109,7 @@ export type {
   default as MedlemskapV3,
   ManuellMedlemskapsBehandling,
   LegacyManuellMedlemskapsBehandling,
+  AdressePeriode,
 } from './src/medlemskapV3TsType';
 export { MedlemskapResultat, MedlemskapAvvik } from './src/medlemskapV3TsType';
 export type { default as Risikoklassifisering } from './src/risikoklassifiseringTsType';

@@ -10,7 +10,7 @@ export type Adresser = { [key in opplysningAdresseType]?: string };
 
 const getAddresses = (addresses: Personadresse[] = []): Adresser =>
   addresses.reduce<Adresser>((acc, address) => {
-    if (!address.adresseType || address.adresseType === opplysningAdresseType.UKJENT) {
+    if (!address.adresseType || address.adresseType === opplysningAdresseType.UKJENT_ADRESSE) {
       return {
         ...acc,
         [opplysningAdresseType.BOSTEDSADRESSE]: 'UKJENT',
