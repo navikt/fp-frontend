@@ -10,12 +10,14 @@ import FaktaPanelInitProps from '../../felles/typer/faktaPanelInitProps';
 import FaktaDefaultInitPanel from '../../felles/fakta/FaktaDefaultInitPanel';
 import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
 
-// TODO: legg inn nye aksjonspunkt
-const AKSJONSPUNKT_KODER: AksjonspunktCode[] = [AksjonspunktCode.AVKLAR_FORTSATT_MEDLEMSKAP];
+const AKSJONSPUNKT_KODER: AksjonspunktCode[] = [
+  AksjonspunktCode.VURDER_MEDLEMSKAPSVILKÅRET,
+  // TODO: FORUTGÅENDE ES INC
+];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.MEDLEMSKAP_V3, BehandlingApiKeys.SOKNAD];
 type EndepunktPanelData = {
-  medlemskap: MedlemskapV3;
+  medlemskapV3: MedlemskapV3;
   soknad: Soknad;
 };
 
@@ -36,9 +38,10 @@ const MedlemskapsvilkaretFaktaInitPanelV3: FunctionComponent<FaktaPanelInitProps
     skalPanelVisesIMeny={erGjeldendeEnv => props.behandling.harSøknad && !erGjeldendeEnv('production')}
     renderPanel={data => (
       <MedlemskapFaktaIndexV3
-        {...data}
+        medlemskap={data.medlemskapV3}
         brukerNavn={props.fagsak.bruker.navn}
         annenpartNavn={props.fagsak.annenPart?.navn}
+        {...data}
       />
     )}
   />

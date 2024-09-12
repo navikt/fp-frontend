@@ -5,7 +5,7 @@ import { MedlemskapV3, Soknad, StandardFaktaPanelProps } from '@navikt/fp-types'
 import { createIntl } from '@navikt/ft-utils';
 
 import messages from '../../i18n/nb_NO.json';
-import MedlemskapInfoPanel from './MedlemskapInfoPanel';
+import MedlemskapInfoPanel from './components/MedlemskapInfoPanel';
 
 const intl = createIntl(messages);
 

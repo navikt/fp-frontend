@@ -184,6 +184,14 @@ const historikkEndretFeltTypeCodes = {
     kode: 'OVERSTYRT_VURDERING',
     feltId: 'Historikk.Template.7.OverstyrtVilkar',
   },
+  MEDLEMSKAPSVILKÅRET: {
+    kode: 'MEDLEMSKAPSVILKÅRET',
+    feltId: 'HistorikkEndretFelt.Medlemskapvilkåret',
+  },
+  MEDLEMSKAPSVILKÅRET_OPPHØRSDATO: {
+    kode: 'MEDLEMSKAPSVILKÅRET_OPPHØRSDATO',
+    feltId: 'HistorikkEndretFelt.MedlemskapvilkåretOpphørsdato',
+  },
   SELVSTENDIG_NAERINGSDRIVENDE: {
     kode: 'SELVSTENDIG_NAERINGSDRIVENDE',
     feltId: 'HistorikkEndretFelt.SelvstendigNæringsdrivende',

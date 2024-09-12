@@ -83,7 +83,7 @@ const soknad = {
   termindato: '2018-01-01',
 } as Soknad;
 
-export const medlemskap = {
+const lagMedlemskap = (override: Partial<MedlemskapV3>) => ({
   manuellBehandling: {
     avvik: [
       MedlemskapAvvik.BOSATT_UTENLANDSOPPHOLD,
@@ -94,6 +94,11 @@ export const medlemskap = {
       MedlemskapAvvik.TREDJELAND_MANGLENDE_LOVLIG_OPPHOLD,
       MedlemskapAvvik.EØS_MANGLENDE_ANSETTELSE_MED_INNTEKT,
     ],
+    resultat: {
+      avslagskode: null,
+      medlemFom: null,
+      opphørFom: null,
+    },
   },
   oppholdstillatelser: [
     {
@@ -193,18 +198,97 @@ export const medlemskap = {
     regioner: [],
     personstatuser: [],
   },
-};
+  ...override,
+});
 
 export const Default = Template.bind({});
 Default.args = {
   soknad,
-  medlemskap,
+  medlemskap: lagMedlemskap({}),
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.AVKLAR_FORTSATT_MEDLEMSKAP,
+      definisjon: AksjonspunktCode.AVKLAR_LOVLIG_OPPHOLD,
       status: aksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
       kanLoses: true,
+    },
+  ],
+  alleMerknaderFraBeslutter: {},
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+};
+
+export const LegacyVurderingAvLøpendeMedlemskap = Template.bind({});
+LegacyVurderingAvLøpendeMedlemskap.args = {
+  soknad,
+  medlemskap: lagMedlemskap({
+    manuellBehandling: null,
+    legacyManuellBehandling: {
+      perioder: [
+        {
+          vurderingsdato: '2018-01-01',
+          erEosBorger: true,
+          oppholdsrettVurdering: true,
+          begrunnelse: 'Eøs borger og har oppholdsrett',
+        },
+        {
+          vurderingsdato: '2018-05-01',
+          erEosBorger: true,
+          oppholdsrettVurdering: false,
+          begrunnelse: 'Eøs borger og har ikke oppholdsrett',
+        },
+        {
+          vurderingsdato: '2019-05-05',
+          erEosBorger: false,
+          lovligOppholdVurdering: true,
+          begrunnelse: 'Ikke eøs borger, men har lovlig opphold',
+        },
+        {
+          vurderingsdato: '2019-05-12',
+          bosattVurdering: true,
+          begrunnelse: 'Søker er vurdert til bosatt',
+        },
+        {
+          vurderingsdato: '2019-05-23',
+          medlemskapManuellVurderingType: 'MEDLEM',
+          begrunnelse: 'Søker er medlem jaja',
+        },
+      ],
+    },
+  }),
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.AVKLAR_FORTSATT_MEDLEMSKAP,
+      status: aksjonspunktStatus.UTFORT,
+      begrunnelse: undefined,
+      kanLoses: false,
+    },
+  ],
+  alleMerknaderFraBeslutter: {},
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+};
+
+export const LegacyVurdertInngangsvilkårMedlemskap = Template.bind({});
+LegacyVurdertInngangsvilkårMedlemskap.args = {
+  soknad,
+  medlemskap: lagMedlemskap({
+    manuellBehandling: null,
+    legacyManuellBehandling: {
+      perioder: [
+        {
+          vurderingsdato: '2018-01-01',
+          erEosBorger: true,
+          oppholdsrettVurdering: true,
+          begrunnelse: 'Eøs borger og har oppholdsrett',
+        },
+      ],
+    },
+  }),
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.AVKLAR_OPPHOLDSRETT,
+      status: aksjonspunktStatus.UTFORT,
+      begrunnelse: undefined,
+      kanLoses: false,
     },
   ],
   alleMerknaderFraBeslutter: {},
