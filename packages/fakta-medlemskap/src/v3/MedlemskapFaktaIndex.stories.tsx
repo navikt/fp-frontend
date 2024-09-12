@@ -207,7 +207,7 @@ Default.args = {
   medlemskap: lagMedlemskap({}),
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.VURDER_MEDLEMSKAPSVILKÅRET,
+      definisjon: AksjonspunktCode.AVKLAR_LOVLIG_OPPHOLD,
       status: aksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
       kanLoses: true,
@@ -217,8 +217,8 @@ Default.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
 };
 
-export const LegacyBehandling = Template.bind({});
-LegacyBehandling.args = {
+export const LegacyVurderingAvLøpendeMedlemskap = Template.bind({});
+LegacyVurderingAvLøpendeMedlemskap.args = {
   soknad,
   medlemskap: lagMedlemskap({
     manuellBehandling: null,
@@ -258,9 +258,37 @@ LegacyBehandling.args = {
   aksjonspunkter: [
     {
       definisjon: AksjonspunktCode.AVKLAR_FORTSATT_MEDLEMSKAP,
-      status: aksjonspunktStatus.OPPRETTET,
+      status: aksjonspunktStatus.UTFORT,
       begrunnelse: undefined,
-      kanLoses: true,
+      kanLoses: false,
+    },
+  ],
+  alleMerknaderFraBeslutter: {},
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+};
+
+export const LegacyVurdertInngangsvilkårMedlemskap = Template.bind({});
+LegacyVurdertInngangsvilkårMedlemskap.args = {
+  soknad,
+  medlemskap: lagMedlemskap({
+    manuellBehandling: null,
+    legacyManuellBehandling: {
+      perioder: [
+        {
+          vurderingsdato: '2018-01-01',
+          erEosBorger: true,
+          oppholdsrettVurdering: true,
+          begrunnelse: 'Eøs borger og har oppholdsrett',
+        },
+      ],
+    },
+  }),
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.AVKLAR_OPPHOLDSRETT,
+      status: aksjonspunktStatus.UTFORT,
+      begrunnelse: undefined,
+      kanLoses: false,
     },
   ],
   alleMerknaderFraBeslutter: {},
