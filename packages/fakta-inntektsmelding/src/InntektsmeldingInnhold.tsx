@@ -165,10 +165,7 @@ const Refusjon = ({ inntektsmelding }: { inntektsmelding: Inntektsmelding }) => 
 const BortfalteNaturalYtelser = ({ inntektsmelding }: { inntektsmelding: Inntektsmelding }) => {
   const intl = useIntl();
 
-  console.log(konverterAktivePerioderTilBortfaltePerioder(inntektsmelding));
-
   const bortfalteNaturalytelser = konverterAktivePerioderTilBortfaltePerioder(inntektsmelding);
-
   return (
     <InntektsmeldingInfoBlokk
       tittel={intl.formatMessage({ id: 'InntektsmeldingFaktaPanel.bortfalteNaturalytelser.heading' })}
@@ -208,6 +205,12 @@ const BortfalteNaturalYtelser = ({ inntektsmelding }: { inntektsmelding: Inntekt
   );
 };
 
+/**
+ * Konverterer liste aktive naturalytelser til liste av bortfalte perioder.
+ * Eksempelvis vil disse aktive periodene resultere i denne bortfalte perioden:
+ * Aktiv periode: {fomDato: '0001-01-01', tomDato: '2024-09-04'} og {fomDato: '2024-09-27', tomDato: '9999-12-31'}
+ * bortfalt periode: {fomDato: '2024-09-05', tomDato: '2024-09-26'}
+ */
 const konverterAktivePerioderTilBortfaltePerioder = (inntektsmelding: Inntektsmelding) => {
   const aktiveNaturalytelser = inntektsmelding.bortfalteNaturalytelser;
 
@@ -220,11 +223,15 @@ const konverterAktivePerioderTilBortfaltePerioder = (inntektsmelding: Inntektsme
     return {...prev, [type]: [value]}
   }, {} as Record<string, AktivNaturalYtelse[]>)
 
-  const acc = {} as Record<string, AktivNaturalYtelse[]>;
+  const bortfalteNaturalytelser = {} as Record<string, AktivNaturalYtelse[]>;
 
   Object.entries(gruppertPåType).map(([key, value]) => {
-    const sortert = value.sort((a,b) => sorterPerioder({fom: a.periode.fomDato, tom: a.periode.tomDato}, {fom: b.periode.fomDato, tom: b.periode.tomDato})).reverse();
-    acc[key] = sortert.flatMap((current, index, array) => {
+    const sortert = value.sort((a,b) => sorterPerioder(
+      {fom: a.periode.fomDato, tom: a.periode.tomDato},
+      {fom: b.periode.fomDato, tom: b.periode.tomDato})
+    ).reverse();
+
+    bortfalteNaturalytelser[key] = sortert.flatMap((current, index, array) => {
       const next = array[index + 1];
 
       const nyFom = current.periode.tomDato;
@@ -244,7 +251,7 @@ const konverterAktivePerioderTilBortfaltePerioder = (inntektsmelding: Inntektsme
     });
   });
 
-  return acc;
+  return bortfalteNaturalytelser;
 }
 
 const InntektsmeldingInfoBlokk = ({ tittel, children }: { tittel: string; children: React.ReactNode }) => {
