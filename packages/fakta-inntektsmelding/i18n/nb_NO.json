@@ -53,5 +53,6 @@
   "InntektsmeldingFaktaPanel.bortfalteNaturalytelser.heading": "Naturalytelser som faller bort",
   "InntektsmeldingFaktaPanel.bortfalteNaturalytelser.ingen": "Ingen",
   "InntektsmeldingFaktaPanel.bortfalteNaturalytelser.fom": "Fra og med",
+  "InntektsmeldingFaktaPanel.bortfalteNaturalytelser.tom": "Til og med",
   "InntektsmeldingFaktaPanel.bortfalteNaturalytelser.verdi": "Verdi pr måned"
 }
