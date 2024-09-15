@@ -193,10 +193,10 @@ const BortfalteNaturalYtelser = ({ inntektsmelding }: { inntektsmelding: Inntekt
                       <FormattedMessage id="InntektsmeldingFaktaPanel.bortfalteNaturalytelser.verdi" />:{' '}
                       {formatCurrencyNoKr(naturalytelse.beloepPerMnd.verdi)}
                     </li>
-                    <li key={naturalytelse.indexKey}>
+                    {naturalytelse.periode.tomDato !== TIDENES_ENDE && (<li key={naturalytelse.indexKey}>
                       <FormattedMessage id="InntektsmeldingFaktaPanel.bortfalteNaturalytelser.tom" />{' '}
                       <DateLabel dateString={naturalytelse.periode.tomDato} />
-                    </li>
+                    </li>)}
                   </>
                 ))}
               </ul>
@@ -218,19 +218,19 @@ const konverterAktivePerioderTilBortfaltePerioder = (inntektsmelding: Inntektsme
     }
 
     return {...prev, [type]: [value]}
-  }, {} as Record<keyof typeof NaturalytelseType, AktivNaturalYtelse[]>)
+  }, {} as Record<string, AktivNaturalYtelse[]>)
 
-  const x = {};
+  const acc = {} as Record<string, AktivNaturalYtelse[]>;
 
   Object.entries(gruppertPåType).map(([key, value]) => {
     const sortert = value.sort((a,b) => sorterPerioder({fom: a.periode.fomDato, tom: a.periode.tomDato}, {fom: b.periode.fomDato, tom: b.periode.tomDato})).reverse();
-    x[key] = sortert.flatMap((current, index, array) => {
+    acc[key] = sortert.flatMap((current, index, array) => {
       const next = array[index + 1];
 
       const nyFom = current.periode.tomDato;
       const nyTom = next?.periode.fomDato;
 
-      if (nyFom == TIDENES_ENDE) {
+      if (nyFom === TIDENES_ENDE) {
         return [];
       }
 
@@ -238,13 +238,13 @@ const konverterAktivePerioderTilBortfaltePerioder = (inntektsmelding: Inntektsme
         ...current,
         periode: {
           fomDato: addDaysToDate(nyFom, 1),
-          tomDato: nyTom ? addDaysToDate(nyTom, -1) : undefined,
+          tomDato: nyTom ? addDaysToDate(nyTom, -1) : TIDENES_ENDE,
         }
       }]
     });
   });
 
-  return x;
+  return acc;
 }
 
 const InntektsmeldingInfoBlokk = ({ tittel, children }: { tittel: string; children: React.ReactNode }) => {
