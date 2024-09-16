@@ -69,7 +69,7 @@ export type LegacyManuellMedlemskapsBehandling = Readonly<{
 
 export type ManuellMedlemskapsBehandling = Readonly<{
   avvik: MedlemskapAvvik[];
-  resultat?: MedlemskapResultat;
+  resultat: MedlemskapResultat | null;
 }>;
 
 type Annenpart = {

@@ -85,7 +85,7 @@ const soknad = {
   termindato: '2018-01-01',
 } as Soknad;
 
-const lagMedlemskap = (override: Partial<MedlemskapV3>) => ({
+const lagMedlemskap = (override: Partial<MedlemskapV3>): MedlemskapV3 => ({
   manuellBehandling: {
     avvik: [
       MedlemskapAvvik.BOSATT_UTENLANDSOPPHOLD,
@@ -96,11 +96,7 @@ const lagMedlemskap = (override: Partial<MedlemskapV3>) => ({
       MedlemskapAvvik.TREDJELAND_MANGLENDE_LOVLIG_OPPHOLD,
       MedlemskapAvvik.EØS_MANGLENDE_ANSETTELSE_MED_INNTEKT,
     ],
-    resultat: {
-      avslagskode: null,
-      medlemFom: null,
-      opphørFom: null,
-    },
+    resultat: null,
   },
   oppholdstillatelser: [
     {

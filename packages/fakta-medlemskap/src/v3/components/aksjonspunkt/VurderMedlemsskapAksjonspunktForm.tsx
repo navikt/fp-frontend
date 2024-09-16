@@ -8,7 +8,7 @@ import { FaktaBegrunnelseTextFieldNew } from '@navikt/fp-fakta-felles';
 import { useForm } from 'react-hook-form';
 import { Form } from '@navikt/ft-form-hooks';
 
-import { AlleKodeverk, MedlemskapV3 } from '@navikt/fp-types';
+import { AlleKodeverk, ManuellMedlemskapsBehandling, MedlemskapResultat } from '@navikt/fp-types';
 import VurderingAlternativer from './VurderingAlternativer';
 import VurderMedlemskap from '@navikt/fp-types-avklar-aksjonspunkter/src/fakta/VurderMedlemskapAp';
 import { Vurdering, VurderMedlemskapFormValues } from '../../types/vurderingMedlemskapForm';
@@ -19,7 +19,7 @@ interface Props {
   alleKodeverk: AlleKodeverk;
   submitCallback: (aksjonspunktData: VurderMedlemskap) => Promise<void>;
   aksjonspunkter: Aksjonspunkt[];
-  medlemskap: MedlemskapV3;
+  manuellBehandling: ManuellMedlemskapsBehandling;
 }
 
 const inngangsAksjonspunkter = [
@@ -29,32 +29,22 @@ const inngangsAksjonspunkter = [
 
 const createInitialValues = (
   aksjonspunkter: Aksjonspunkt[],
-  { manuellBehandling }: MedlemskapV3,
+  resultat: MedlemskapResultat | null,
 ): Partial<VurderMedlemskapFormValues> => {
   const aksjonspunkt = aksjonspunkter.find(ap => inngangsAksjonspunkter.some(value => ap.definisjon == value));
   const begrunnelse = aksjonspunkt?.begrunnelse ?? '';
 
-  if (manuellBehandling?.resultat) {
-    const { opphørFom, avslagskode } = manuellBehandling.resultat;
-    let vurdering = undefined;
-    if (opphørFom) {
-      vurdering = Vurdering.DELVIS_OPPFYLT;
-    } else if (avslagskode) {
-      vurdering = Vurdering.IKKE_OPPFYLT;
-    } else {
-      vurdering = Vurdering.OPPFYLT;
+  if (resultat) {
+    const { opphørFom, avslagskode } = resultat;
+    if (avslagskode && opphørFom) {
+      return { vurdering: Vurdering.DELVIS_OPPFYLT, opphørFom, avslagskode, begrunnelse };
+    } else if (avslagskode && !opphørFom) {
+      return { vurdering: Vurdering.IKKE_OPPFYLT, avslagskode, begrunnelse };
+    } else if (!opphørFom && !avslagskode) {
+      return { vurdering: Vurdering.OPPFYLT, begrunnelse };
     }
-    return {
-      begrunnelse,
-      vurdering,
-      opphørFom: opphørFom ?? undefined,
-      avslagskode: avslagskode ?? undefined,
-    };
   }
-
-  return {
-    begrunnelse,
-  };
+  return { begrunnelse };
 };
 
 /**
@@ -68,22 +58,22 @@ const VurderMedlemsskapAksjonspunktForm: FC<Props> = ({
   alleKodeverk,
   submitCallback,
   aksjonspunkter,
-  medlemskap,
+  manuellBehandling,
 }) => {
   const [isSubmitting, setSubmitting] = useState(false);
 
   const formMethods = useForm<VurderMedlemskapFormValues>({
-    defaultValues: createInitialValues(aksjonspunkter, medlemskap),
+    defaultValues: createInitialValues(aksjonspunkter, manuellBehandling.resultat),
   });
   const begrunnelseVerdi = formMethods.watch('begrunnelse');
 
-  const bekreft = useCallback(({ avslagskode, opphørFom, begrunnelse }: VurderMedlemskapFormValues) => {
+  const bekreft = useCallback(({ vurdering, avslagskode, opphørFom, begrunnelse }: VurderMedlemskapFormValues) => {
     setSubmitting(true);
     return submitCallback({
       kode: AksjonspunktCode.VURDER_MEDLEMSKAPSVILKÅRET,
       begrunnelse,
-      avslagskode,
-      opphørFom,
+      avslagskode: vurdering !== Vurdering.OPPFYLT ? avslagskode : undefined,
+      opphørFom: vurdering === Vurdering.DELVIS_OPPFYLT ? opphørFom : undefined,
     });
   }, []);
 
