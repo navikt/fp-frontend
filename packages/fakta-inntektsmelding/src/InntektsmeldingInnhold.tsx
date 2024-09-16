@@ -212,9 +212,7 @@ const BortfalteNaturalYtelser = ({ inntektsmelding }: { inntektsmelding: Inntekt
  * bortfalt periode: {fomDato: '2024-09-05', tomDato: '2024-09-26'}
  */
 const konverterAktivePerioderTilBortfaltePerioder = (inntektsmelding: Inntektsmelding) => {
-  const aktiveNaturalytelser = inntektsmelding.aktiveNaturalytelser;
-
-  const gruppertPåType = aktiveNaturalytelser.reduce((prev, value) => {
+  const gruppertPåType = inntektsmelding.aktiveNaturalytelser.reduce((prev, value) => {
     const type = value.type;
     if (type in prev) {
       return {...prev, [type]: [...prev[type], value]}
