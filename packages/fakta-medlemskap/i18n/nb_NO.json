@@ -87,6 +87,7 @@
   "OpplysningsKort.AdresseTittel": "Adresser til søker({adresseCountSoker}){adresseCountAnnenpart, select, none {} other { og annen part({adresseCountAnnenpart})}}",
   "OpplysningsKort.PersonstatusTittel": "Personstatus og statsborgerskap fra søker{ harAnnenpart, select, true { og annen part} other {}}",
   "OpplysningsKort.MedlemskapsperiodeTittel": "Perioder fra medlemskapsregisteret({count})",
+  "OpplysningsKort.OppholdstillatelseTittel": "Oppholdstillatelse({count})",
 
   "AvvikMerknad.BosattUtenlandsopphold": "Dette ble markert fordi søker har oppgitt at man skal eller har bodd i utlandet",
   "AvvikMerknad.BosattManglendeAdresse": "Dette ble markert fordi det ikke er registrert noen adresser i folkeregisteret",
@@ -134,6 +135,15 @@
 
   "OpplysningerFraMedlemskapsregister.TabellCell.ErMedlem": "{erMedlem, select, true {Ja} false {Nei} other {}}",
 
+
+
+  "OpplysningerOmOppholdstillatelser.Beskrivelse": "Perioder med oppholdstilatelser som er registrert i folkegregisteret gyldige for de siste 12 månedene",
+  "OpplysningerOmOppholdstillatelser.Tabell.Ingen": "Ingen oppholdstillatelser funnet for søker.",
+  "OpplysningerOmOppholdstillatelser.TabellHeader.Periode": "Periode",
+  "OpplysningerOmOppholdstillatelser.TabellHeader.Type": "Type",
+
+  "OpplysningerOmOppholdstillatelser.ReadMore.Tittel": "Hvordan oppholdstillatelser i folkeregistreret registreres",
+  "OpplysningerOmOppholdstillatelser.ReadMore.Innhold": "Når man får en oppholdstillatelse på minst 6 måneder, vil UDI sende en melding til Folkeregisteret om dette. Man kan da bli automatisk registrert bosatt i Norge, og få et fødselsnummer.",
 
   "MedlemskapLegacy.TidligereVurdering": "Tidligere vurdering"
 }
