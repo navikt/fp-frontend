@@ -6,10 +6,10 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { FaktaKilde } from '../../../faktaKilde';
 import { relevantForPersonstatus } from '../../ekspansjonsKort/medlemsAvvik';
 import EkspansjonsKort from '../../ekspansjonsKort/EkspansjonsKort';
-import Divider from '../../Divider';
 import { getPersonstatuserSomIkkeErBosatt } from '../../../utils/personstatusUtils';
 import PersonstatusVisning from './PersonstatusVisning';
 import RegionVisning from './RegionVisning';
+import { AvsnittSkiller } from '@navikt/ft-ui-komponenter';
 
 interface Props {
   medlemskap: MedlemskapV3;
@@ -47,7 +47,7 @@ const OpplysningerOmPersonstatus: FC<Props> = ({
 
       {annenpart && (
         <>
-          <Divider />
+          <AvsnittSkiller dividerParagraf />
           <VStack gap="4" aria-label={`Personstatus og statsborgerskap for ${annenpartNavn}`}>
             <Label>
               <FormattedMessage id="OpplysningerOmPersonstatus.Annenpart" values={{ navn: annenpartNavn }} />
