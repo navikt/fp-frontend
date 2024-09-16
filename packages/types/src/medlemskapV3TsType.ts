@@ -1,12 +1,12 @@
 import Personadresse from './personadresseTsType';
 
-type RegionPeriode = Readonly<{
+export type RegionPeriode = Readonly<{
   fom: string;
   tom: string;
   type: string;
 }>;
 
-type PersonstatusPeriode = Readonly<{
+export type PersonstatusPeriode = Readonly<{
   fom: string;
   tom: string;
   type: string;
@@ -69,7 +69,7 @@ export type LegacyManuellMedlemskapsBehandling = Readonly<{
 
 export type ManuellMedlemskapsBehandling = Readonly<{
   avvik: MedlemskapAvvik[];
-  resultat?: MedlemskapResultat;
+  resultat: MedlemskapResultat | null;
 }>;
 
 type Annenpart = {

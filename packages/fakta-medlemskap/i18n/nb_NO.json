@@ -85,6 +85,7 @@
 
   "OpplysningsKort.UtenlandsoppholdTittel": "Opplysninger fra søknad",
   "OpplysningsKort.AdresseTittel": "Adresser til søker({adresseCountSoker}){adresseCountAnnenpart, select, none {} other { og annen part({adresseCountAnnenpart})}}",
+  "OpplysningsKort.PersonstatusTittel": "Personstatus og statsborgerskap fra søker{ harAnnenpart, select, true { og annen part} other {}}",
 
   "AvvikMerknad.BosattUtenlandsopphold": "Dette ble markert fordi søker har oppgitt at man skal eller har bodd i utlandet",
   "AvvikMerknad.BosattManglendeAdresse": "Dette ble markert fordi det ikke er registrert noen adresser i folkeregisteret",
@@ -103,12 +104,21 @@
   "OpplysningerOmUtenlandsopphold.iLand": "i {land}",
 
   "OpplysningerOmAdresser.Soker": "Søker, {navn}:",
-  "OpplysningerOmAdresser.Soker.Beskrivelse": "Bostedsadresse for søker registrert i folkeregisteret  gyldige for de siste 12 månedene",
+  "OpplysningerOmAdresser.Soker.Beskrivelse": "Adresse for søker registrert i folkeregisteret  gyldige for de siste 12 månedene",
   "OpplysningerOmAdresser.Annenpart": "Annen part, {navn}:",
-  "OpplysningerOmAdresser.Annenpart.Beskrivelse": "Det er mulighet for å se bostedadresse på skjæringspunktet for den andre forelderen",
+  "OpplysningerOmAdresser.Annenpart.Beskrivelse": "Det er mulighet for å se adresse på skjæringspunktet for den andre forelderen",
 
   "OpplysningerOmAdresser.Tabell.IngenAdresse": "Ingen adresser funnet for {erAnnenpart, select, true {den andre forelderen} other {søker} }.",
   "OpplysningerOmAdresser.Tabell.SammeAdresse": "Den andre forelderen har samme adresse som søker på skjæringstidspunktet",
+
+  "OpplysningerOmPersonstatus.Soker": "Søker, {navn}:",
+  "OpplysningerOmPersonstatus.Annenpart": "Annen part, {navn}:",
+
+  "OpplysningerOmPersonstatus.RegionLabel": "Statsborgerskap/region",
+  "OpplysningerOmPersonstatus.PersonstatusLabel": "Personstatus",
+  "OpplysningerOmPersonstatus.UtvandretLabel": "Utvandringsdato",
+  "OpplysningerOmPersonstatus.PersonstatusIngen": "Ingen personstatus funnet for {erAnnenpart, select, true {den andre forelderen} other {søker} }.",
+  "OpplysningerOmPersonstatus.RegionIngen": "Ingen region funnet for {erAnnenpart, select, true {den andre forelderen} other {søker} }.",
 
   "MedlemskapLegacy.TidligereVurdering": "Tidligere vurdering"
 }

@@ -13,7 +13,7 @@ const defaultMedlemskapProps: MedlemskapV3 = {
   adresser: [],
   utenlandsopphold: [],
   oppholdstillatelser: [],
-  manuellBehandling: { avvik: [] },
+  manuellBehandling: { avvik: [], resultat: null },
   legacyManuellBehandling: null,
 };
 

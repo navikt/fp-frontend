@@ -10,6 +10,7 @@ import OpplysningerOmUtenlandsopphold from './opplysningsKort/OpplysningerOmUten
 import VurderMedlemsskapAksjonspunktForm from './aksjonspunkt/VurderMedlemsskapAksjonspunktForm';
 import VurderMedlemsskapLegacyAksjonspunktVisning from './aksjonspunkt/VurderMedlemsskapLegacyAksjonspunktVisning';
 import OpplysningerOmAdresser from './opplysningsKort/OpplysningerOmAdresser';
+import OpplysningerOmPersonstatus from './opplysningsKort/OpplysningerOmPersonstatus/OpplysningerOmPersonstatus';
 
 /**
  * MedlemskapInfoPanel
@@ -40,10 +41,17 @@ const MedlemskapInfoPanel: FC<MedlemskapFaktaProps> = ({
         annenpartNavn={annenpartNavn}
         alleKodeverk={alleKodeverk}
       />
+      <OpplysningerOmPersonstatus
+        medlemskap={medlemskap}
+        avvik={medlemskap.manuellBehandling?.avvik}
+        brukerNavn={brukerNavn}
+        annenpartNavn={annenpartNavn}
+        alleKodeverk={alleKodeverk}
+      />
 
       {medlemskap.manuellBehandling && (
         <VurderMedlemsskapAksjonspunktForm
-          medlemskap={medlemskap}
+          manuellBehandling={medlemskap.manuellBehandling}
           aksjonspunkter={aksjonspunkter}
           alleKodeverk={alleKodeverk}
           {...rest}
