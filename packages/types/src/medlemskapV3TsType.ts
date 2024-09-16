@@ -1,12 +1,12 @@
 import Personadresse from './personadresseTsType';
 
-type RegionPeriode = Readonly<{
+export type RegionPeriode = Readonly<{
   fom: string;
   tom: string;
   type: string;
 }>;
 
-type PersonstatusPeriode = Readonly<{
+export type PersonstatusPeriode = Readonly<{
   fom: string;
   tom: string;
   type: string;

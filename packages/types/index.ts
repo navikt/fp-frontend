@@ -112,6 +112,8 @@ export type {
   LegacyMedlemPeriode,
   MedlemskapResultat,
   AdressePeriode,
+  RegionPeriode,
+  PersonstatusPeriode,
 } from './src/medlemskapV3TsType';
 export { MedlemskapAvvik } from './src/medlemskapV3TsType';
 export type { default as Risikoklassifisering } from './src/risikoklassifiseringTsType';
