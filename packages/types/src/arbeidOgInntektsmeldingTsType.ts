@@ -29,7 +29,7 @@ export type Inntektsmelding = Readonly<{
   begrunnelse?: string;
   kildeSystem: string;
   startDatoPermisjon?: string;
-  bortfalteNaturalytelser: BortfaltNaturalYtelse[];
+  bortfalteNaturalytelser: AktivNaturalYtelse[]; // Navngivingen her er misvisende. Data fra BE gir aktive perioder, ikke de bortfalte.
   refusjonsperioder: Refusjonsperiode[];
   innsendingsårsak: keyof typeof InntektsmeldingInnsendingsårsak;
   tilknyttedeBehandlingIder: string[];
@@ -41,7 +41,7 @@ type Refusjonsperiode = {
   fom: string;
 };
 
-type BortfaltNaturalYtelse = Readonly<{
+export type AktivNaturalYtelse = Readonly<{
   periode: { fomDato: string; tomDato: string };
   beloepPerMnd: Beløp;
   type: keyof typeof NaturalytelseType;

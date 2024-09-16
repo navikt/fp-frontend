@@ -6,11 +6,12 @@ import { InntektsmeldingFaktaProps } from './InntektsmeldingFaktaIndex';
 import { BodyLong, Button, Heading, HGrid, HStack, Label, List, Modal, VStack } from '@navikt/ds-react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
-import { addDaysToDate, formatCurrencyNoKr } from '@navikt/ft-utils';
-import { NaturalytelseType } from '@navikt/fp-types/src/arbeidOgInntektsmeldingTsType';
+import { addDaysToDate, formatCurrencyNoKr, TIDENES_ENDE } from '@navikt/ft-utils';
+import { AktivNaturalYtelse, NaturalytelseType } from '@navikt/fp-types/src/arbeidOgInntektsmeldingTsType';
 import { hentDokumentLenke } from '@navikt/fp-konstanter';
 import { ArrowForwardIcon } from '@navikt/aksel-icons';
 import styles from './inntektsmeldingFakta.module.css';
+import { sorterPerioder } from '@navikt/fp-fakta-medlemskap/src/v3/utils/periodeUtils';
 
 export const InntektsmeldingInnhold = ({
   inntektsmelding,
@@ -164,6 +165,7 @@ const Refusjon = ({ inntektsmelding }: { inntektsmelding: Inntektsmelding }) => 
 const BortfalteNaturalYtelser = ({ inntektsmelding }: { inntektsmelding: Inntektsmelding }) => {
   const intl = useIntl();
 
+  const bortfalteNaturalytelser = konverterAktivePerioderTilBortfaltePerioder(inntektsmelding);
   return (
     <InntektsmeldingInfoBlokk
       tittel={intl.formatMessage({ id: 'InntektsmeldingFaktaPanel.bortfalteNaturalytelser.heading' })}
@@ -174,22 +176,26 @@ const BortfalteNaturalYtelser = ({ inntektsmelding }: { inntektsmelding: Inntekt
         </span>
       ) : (
         <VStack>
-          {inntektsmelding.bortfalteNaturalytelser.map(({ type, periode, beloepPerMnd, indexKey }) => (
-            <VStack key={indexKey}>
-              <span>{NaturalytelseType[type]}</span>
+          {Object.entries(bortfalteNaturalytelser).map(([key, value]) => (
+            <VStack key={key}>
+              <span>{NaturalytelseType[key as keyof typeof NaturalytelseType]}</span>
               <ul>
-                <li>
-                  <FormattedMessage id="InntektsmeldingFaktaPanel.bortfalteNaturalytelser.fom" />{' '}
-                  {/*
-                  NOTE: naturalYtelsene som kommer fra fpsak er invertert. Det vil si de sier når en naturalytelse var AKTIV.
-                  Det er angitt som fra år 0 tom siste dagen. For å finne ut fra når den faller bort må vi derfor bruker tomDato + 1
-                  */}
-                  <DateLabel dateString={addDaysToDate(periode.tomDato, 1)} />
-                </li>
-                <li>
-                  <FormattedMessage id="InntektsmeldingFaktaPanel.bortfalteNaturalytelser.verdi" />:{' '}
-                  {formatCurrencyNoKr(beloepPerMnd.verdi)}
-                </li>
+                {value.map(naturalytelse => (
+                  <>
+                    <li key={naturalytelse.indexKey}>
+                      <FormattedMessage id="InntektsmeldingFaktaPanel.bortfalteNaturalytelser.fom" />{' '}
+                      <DateLabel dateString={naturalytelse.periode.fomDato} />
+                    </li>
+                    <li>
+                      <FormattedMessage id="InntektsmeldingFaktaPanel.bortfalteNaturalytelser.verdi" />:{' '}
+                      {formatCurrencyNoKr(naturalytelse.beloepPerMnd.verdi)}
+                    </li>
+                    {naturalytelse.periode.tomDato !== TIDENES_ENDE && (<li key={naturalytelse.indexKey}>
+                      <FormattedMessage id="InntektsmeldingFaktaPanel.bortfalteNaturalytelser.tom" />{' '}
+                      <DateLabel dateString={naturalytelse.periode.tomDato} />
+                    </li>)}
+                  </>
+                ))}
               </ul>
             </VStack>
           ))}
@@ -198,6 +204,55 @@ const BortfalteNaturalYtelser = ({ inntektsmelding }: { inntektsmelding: Inntekt
     </InntektsmeldingInfoBlokk>
   );
 };
+
+/**
+ * Konverterer liste aktive naturalytelser til liste av bortfalte perioder.
+ * Eksempelvis vil disse aktive periodene resultere i denne bortfalte perioden:
+ * Aktiv periode: {fomDato: '0001-01-01', tomDato: '2024-09-04'} og {fomDato: '2024-09-27', tomDato: '9999-12-31'}
+ * bortfalt periode: {fomDato: '2024-09-05', tomDato: '2024-09-26'}
+ */
+const konverterAktivePerioderTilBortfaltePerioder = (inntektsmelding: Inntektsmelding) => {
+  const aktiveNaturalytelser = inntektsmelding.bortfalteNaturalytelser;
+
+  const gruppertPåType = aktiveNaturalytelser.reduce((prev, value) => {
+    const type = value.type;
+    if (type in prev) {
+      return {...prev, [type]: [...prev[type], value]}
+    }
+
+    return {...prev, [type]: [value]}
+  }, {} as Record<string, AktivNaturalYtelse[]>)
+
+  const bortfalteNaturalytelser = {} as Record<string, AktivNaturalYtelse[]>;
+
+  Object.entries(gruppertPåType).map(([key, value]) => {
+    const sortert = value.sort((a,b) => sorterPerioder(
+      {fom: a.periode.fomDato, tom: a.periode.tomDato},
+      {fom: b.periode.fomDato, tom: b.periode.tomDato})
+    ).reverse();
+
+    bortfalteNaturalytelser[key] = sortert.flatMap((current, index, array) => {
+      const next = array[index + 1];
+
+      const nyFom = current.periode.tomDato;
+      const nyTom = next?.periode.fomDato;
+
+      if (nyFom === TIDENES_ENDE) {
+        return [];
+      }
+
+      return [{
+        ...current,
+        periode: {
+          fomDato: addDaysToDate(nyFom, 1),
+          tomDato: nyTom ? addDaysToDate(nyTom, -1) : TIDENES_ENDE,
+        }
+      }]
+    });
+  });
+
+  return bortfalteNaturalytelser;
+}
 
 const InntektsmeldingInfoBlokk = ({ tittel, children }: { tittel: string; children: React.ReactNode }) => {
   return (
