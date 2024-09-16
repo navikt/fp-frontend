@@ -21,7 +21,7 @@ const Template: StoryFn<InntektsmeldingFaktaProps & { inntektsmeldinger: Inntekt
 const inntektsmeldingmal = {
   innsendingstidspunkt: '2024-08-08T00:00:00',
   kildeSystem: 'Altinn',
-  bortfalteNaturalytelser: [],
+  aktiveNaturalytelser: [],
   refusjonsperioder: [],
   innsendingsårsak: 'NY' as const,
   arbeidsgiverIdent: '1',
@@ -113,7 +113,7 @@ InntektsmeldingDefault.args = {
       startDatoPermisjon: '2024-11-11',
       arbeidsgiverIdent: '3',
       journalpostId: '3',
-      bortfalteNaturalytelser: [
+      aktiveNaturalytelser: [
         {
           periode: { fomDato: '2024-01-09', tomDato: '2024-10-09' },
           type: 'ELEKTRISK_KOMMUNIKASJON',
