@@ -51,7 +51,7 @@ const MedlemskapInfoPanel: FC<MedlemskapFaktaProps> = ({
 
       {medlemskap.manuellBehandling && (
         <VurderMedlemsskapAksjonspunktForm
-          medlemskap={medlemskap}
+          manuellBehandling={medlemskap.manuellBehandling}
           aksjonspunkter={aksjonspunkter}
           alleKodeverk={alleKodeverk}
           {...rest}
