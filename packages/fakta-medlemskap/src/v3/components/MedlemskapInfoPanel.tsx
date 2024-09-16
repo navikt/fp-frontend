@@ -11,6 +11,7 @@ import VurderMedlemsskapAksjonspunktForm from './aksjonspunkt/VurderMedlemsskapA
 import VurderMedlemsskapLegacyAksjonspunktVisning from './aksjonspunkt/VurderMedlemsskapLegacyAksjonspunktVisning';
 import OpplysningerOmAdresser from './opplysningsKort/OpplysningerOmAdresser';
 import OpplysningerOmPersonstatus from './opplysningsKort/OpplysningerOmPersonstatus/OpplysningerOmPersonstatus';
+import OpplysningerFraMedlemskapsregister from './opplysningsKort/OpplysningerFraMedlemskapsregister';
 
 /**
  * MedlemskapInfoPanel
@@ -46,6 +47,11 @@ const MedlemskapInfoPanel: FC<MedlemskapFaktaProps> = ({
         avvik={medlemskap.manuellBehandling?.avvik}
         brukerNavn={brukerNavn}
         annenpartNavn={annenpartNavn}
+        alleKodeverk={alleKodeverk}
+      />
+      <OpplysningerFraMedlemskapsregister
+        medlemskapsperiode={medlemskap.medlemskapsperiode}
+        avvik={medlemskap.manuellBehandling?.avvik}
         alleKodeverk={alleKodeverk}
       />
 

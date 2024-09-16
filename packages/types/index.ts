@@ -114,6 +114,7 @@ export type {
   AdressePeriode,
   RegionPeriode,
   PersonstatusPeriode,
+  MedlemskapPeriodeV3,
 } from './src/medlemskapV3TsType';
 export { MedlemskapAvvik } from './src/medlemskapV3TsType';
 export type { default as Risikoklassifisering } from './src/risikoklassifiseringTsType';
