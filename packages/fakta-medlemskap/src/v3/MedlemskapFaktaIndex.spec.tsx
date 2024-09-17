@@ -137,6 +137,23 @@ describe('<MedlemskapFaktaIndex>', () => {
     expect(medlPerioder.getByText('Opphør')).toBeInTheDocument();
     expect(medlPerioder.getByText('01.02.2020')).toBeInTheDocument();
 
+    // OpplysningerOmOppholdstillatelser
+    const oppholdstillatelser = within(screen.getByLabelText('Oppholdstillatelse(1)'));
+    await userEvent.click(oppholdstillatelser.getByText('Vis mer'));
+
+    expect(
+      oppholdstillatelser.getByText('Dette ble markert fordi søker har én eller flere oppholdstilatelser'),
+    ).toBeInTheDocument();
+    expect(
+      oppholdstillatelser.getByText(
+        'Perioder med oppholdstilatelser som er registrert i folkegregisteret gyldige for de siste 12 månedene',
+      ),
+    ).toBeInTheDocument();
+    expect(oppholdstillatelser.getByText('Periode')).toBeInTheDocument();
+    expect(oppholdstillatelser.getByText('Type')).toBeInTheDocument();
+    expect(oppholdstillatelser.getByText('13.10.2021 - 13.01.2024')).toBeInTheDocument();
+    expect(oppholdstillatelser.getByText('Permanent oppholdstillatelse')).toBeInTheDocument();
+
     expect(screen.getByText('Begrunn endringene')).toBeInTheDocument();
     expect(screen.getByText('Bekreft')).toBeInTheDocument();
   });

@@ -18,7 +18,7 @@ const EkspansjonsKort: FC<PropsWithChildren<Props>> = ({ tittel, kilde, relevant
   return (
     <ExpansionCard aria-label={tittel} size="small">
       <ExpansionCard.Header>
-        <HStack gap="4">
+        <HStack gap="4" wrap={false}>
           <div style={{ marginTop: 4 }}>
             <AvvikStatus harAvvik={relevanteAvvik.length > 0} />
           </div>

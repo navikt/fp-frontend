@@ -12,7 +12,7 @@ export type PersonstatusPeriode = Readonly<{
   type: string;
 }>;
 
-type OppholdstillatelsePeriode = Readonly<{
+export type OppholdstillatelsePeriode = Readonly<{
   fom: string;
   tom: string;
   oppholdstillatelseType: string;
