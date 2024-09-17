@@ -31,6 +31,7 @@ const fellesInntektsmeldingFelter = {
   innsendingsårsak: 'NY' as const,
   behandlingsIdeer: [],
   tilknyttedeBehandlingIder: [],
+  aktiveNaturalytelser: [],
 };
 
 const Template: StoryFn<{
