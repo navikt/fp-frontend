@@ -113,10 +113,23 @@ const lagMedlemskap = (override: Partial<MedlemskapV3>): MedlemskapV3 => ({
   medlemskapsperiode: [
     {
       fom: '2019-01-01',
-      tom: '2021-01-01',
+      tom: '2022-01-01',
+      erMedlem: false,
+      lovvalgsland: null,
+      studieland: null,
       medlemskapType: 'AVKLARES',
       dekningType: 'OPPHOR',
       beslutningsdato: '2020-02-01',
+    },
+    {
+      fom: '2022-01-01',
+      tom: '2024-01-01',
+      erMedlem: true,
+      lovvalgsland: 'ESP',
+      studieland: 'IRQ',
+      medlemskapType: 'ENDELIG',
+      dekningType: 'FULL',
+      beslutningsdato: '2024-02-01',
     },
   ],
   utenlandsopphold: [

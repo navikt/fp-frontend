@@ -30,13 +30,17 @@ export type AdressePeriode = Readonly<{
   adresse: Personadresse;
 }>;
 
-type MedlemskapPeriode = Readonly<{
+export type MedlemskapPeriodeV3 = Readonly<{
   fom: string;
   tom: string;
+  erMedlem: boolean;
+  lovvalgsland: string | null;
+  studieland: string | null;
   medlemskapType: string;
   dekningType: string;
   beslutningsdato: string;
 }>;
+
 export enum MedlemskapAvvik {
   BOSATT_UTENLANDSOPPHOLD = 'BOSATT_UTENLANDSOPPHOLD',
   BOSATT_MANGLENDE_BOSTEDSADRESSE = 'BOSATT_MANGLENDE_BOSTEDSADRESSE',
@@ -86,7 +90,7 @@ type MedlemskapV3 = Readonly<{
   utenlandsopphold: UtenlandsoppholdPeriode[];
   adresser: AdressePeriode[];
   oppholdstillatelser: OppholdstillatelsePeriode[];
-  medlemskapsperiode: MedlemskapPeriode[];
+  medlemskapsperiode: MedlemskapPeriodeV3[];
   annenpart?: Annenpart;
 }>;
 
