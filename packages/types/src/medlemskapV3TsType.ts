@@ -53,8 +53,8 @@ export enum MedlemskapAvvik {
 
 export type MedlemskapResultat = {
   avslagskode: string | null;
-  medlemFom?: string | null;
-  opphørFom?: string | null;
+  medlemFom: string | null;
+  opphørFom: string | null;
 };
 
 export type LegacyMedlemPeriode = Readonly<{
@@ -83,15 +83,15 @@ type Annenpart = {
 };
 
 type MedlemskapV3 = Readonly<{
-  manuellBehandling?: ManuellMedlemskapsBehandling | null;
-  legacyManuellBehandling?: LegacyManuellMedlemskapsBehandling | null;
+  manuellBehandling: ManuellMedlemskapsBehandling | null;
+  legacyManuellBehandling: LegacyManuellMedlemskapsBehandling | null;
   regioner: RegionPeriode[];
   personstatuser: PersonstatusPeriode[];
   utenlandsopphold: UtenlandsoppholdPeriode[];
   adresser: AdressePeriode[];
   oppholdstillatelser: OppholdstillatelsePeriode[];
   medlemskapsperioder: MedlemskapPeriodeV3[];
-  annenpart?: Annenpart;
+  annenpart: Annenpart | null;
 }>;
 
 export default MedlemskapV3;

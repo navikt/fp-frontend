@@ -1,5 +1,5 @@
 import { opplysningAdresseType, landkoder as Landkode } from '@navikt/fp-kodeverk';
-import { Personadresse } from '@navikt/ft-types';
+import { Personadresse } from '@navikt/fp-types';
 
 const emptyIfnull = (text?: string): string => (text == null ? '' : text);
 

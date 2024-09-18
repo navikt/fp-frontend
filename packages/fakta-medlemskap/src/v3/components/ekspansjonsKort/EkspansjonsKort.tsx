@@ -12,16 +12,26 @@ interface Props {
   tittel: string;
   relevanteAvvik: MedlemskapAvvik[];
   avvikValues?: Record<string, string>;
+  readOnly: boolean;
 }
 
-const EkspansjonsKort: FC<PropsWithChildren<Props>> = ({ tittel, kilde, relevanteAvvik, avvikValues, children }) => {
+const EkspansjonsKort: FC<PropsWithChildren<Props>> = ({
+  tittel,
+  kilde,
+  relevanteAvvik,
+  avvikValues,
+  readOnly,
+  children,
+}) => {
   return (
     <ExpansionCard aria-label={tittel} size="small">
       <ExpansionCard.Header>
         <HStack gap="4" wrap={false}>
-          <div style={{ marginTop: 4 }}>
-            <AvvikStatus harAvvik={relevanteAvvik.length > 0} />
-          </div>
+          {!readOnly && (
+            <div style={{ marginTop: 4 }}>
+              <AvvikStatus harAvvik={relevanteAvvik.length > 0} />
+            </div>
+          )}
           <div>
             <ExpansionCard.Title size="small">{tittel}</ExpansionCard.Title>
             <ExpansionCard.Description>

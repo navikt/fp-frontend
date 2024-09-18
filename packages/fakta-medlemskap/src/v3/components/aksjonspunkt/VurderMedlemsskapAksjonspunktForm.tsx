@@ -1,6 +1,6 @@
-import React, { FC, useCallback, useState } from 'react';
+import React, { FC, PropsWithChildren, useCallback, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Button, VStack } from '@navikt/ds-react';
+import { Box, Button, VStack } from '@navikt/ds-react';
 import { Aksjonspunkt } from '@navikt/ft-types';
 
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
@@ -47,6 +47,16 @@ const createInitialValues = (
   return { begrunnelse };
 };
 
+const Wrapper = ({ readOnly, children }: PropsWithChildren<{ readOnly: boolean }>) => {
+  return readOnly ? (
+    <Box background="surface-subtle" borderWidth="2" borderRadius="large" borderColor="border-divider" padding="4">
+      {children}
+    </Box>
+  ) : (
+    <>{children}</>
+  );
+};
+
 /**
  * MedlemskapInfoPanel
  *
@@ -78,29 +88,31 @@ const VurderMedlemsskapAksjonspunktForm: FC<Props> = ({
   }, []);
 
   return (
-    <Form formMethods={formMethods} onSubmit={bekreft}>
-      <VStack gap="6">
-        <VurderingAlternativer alleKodeverk={alleKodeverk} />
-        <FaktaBegrunnelseTextFieldNew
-          isReadOnly={readOnly}
-          isSubmittable={submittable}
-          hasBegrunnelse={!!begrunnelseVerdi}
-        />
-        {!readOnly && (
-          <div>
-            <Button
-              size="small"
-              variant="primary"
-              disabled={isSubmitting || !formMethods.formState.isDirty}
-              loading={isSubmitting}
-              type="submit"
-            >
-              <FormattedMessage id="MedlemskapInfoPanel.Submit" />
-            </Button>
-          </div>
-        )}
-      </VStack>
-    </Form>
+    <Wrapper readOnly={readOnly}>
+      <Form formMethods={formMethods} onSubmit={bekreft}>
+        <VStack gap={readOnly ? '2' : '6'}>
+          <VurderingAlternativer alleKodeverk={alleKodeverk} readOnly={readOnly} />
+          <FaktaBegrunnelseTextFieldNew
+            isReadOnly={readOnly}
+            isSubmittable={submittable}
+            hasBegrunnelse={!!begrunnelseVerdi}
+          />
+          {!readOnly && (
+            <div>
+              <Button
+                size="small"
+                variant="primary"
+                disabled={isSubmitting || !formMethods.formState.isDirty}
+                loading={isSubmitting}
+                type="submit"
+              >
+                <FormattedMessage id="MedlemskapInfoPanel.Submit" />
+              </Button>
+            </div>
+          )}
+        </VStack>
+      </Form>
+    </Wrapper>
   );
 };
 

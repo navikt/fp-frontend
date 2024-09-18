@@ -1,5 +1,5 @@
 import React, { FC, useCallback } from 'react';
-import { BodyShort, Box, Heading, HStack, Label, VStack } from '@navikt/ds-react';
+import { BodyLong, BodyShort, Box, HStack, Label, VStack } from '@navikt/ds-react';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
 
@@ -15,16 +15,23 @@ interface Props {
 interface VurderingVisningProps {
   alleKodeverk: AlleKodeverk;
   medlemsperiode: LegacyMedlemPeriode;
+  index: number;
 }
 
-const MedlemskapPeriodeVisning: FC<VurderingVisningProps> = ({ medlemsperiode, alleKodeverk }) => {
+const MedlemskapPeriodeVisning: FC<VurderingVisningProps> = ({ medlemsperiode, alleKodeverk, index }) => {
   const vurderingstyper = alleKodeverk[KodeverkType.MEDLEMSKAP_MANUELL_VURDERING_TYPE];
   const bTag = useCallback((chunks: any) => <b>{chunks}</b>, []);
   return (
     <Box key={medlemsperiode.vurderingsdato}>
-      <Label>
-        Vurdering fra og med <DateLabel dateString={medlemsperiode.vurderingsdato} />
-      </Label>
+      <HStack justify="space-between" align="start">
+        <BodyShort size="small" weight="semibold">
+          <FormattedMessage id="MedlemskapLegacy.Vurdering" values={{ index: index + 1 }} />
+        </BodyShort>
+        <BodyShort size="small" weight="semibold">
+          <DateLabel dateString={medlemsperiode.vurderingsdato} />
+        </BodyShort>
+      </HStack>
+
       <Box paddingInline="2">
         {medlemsperiode.oppholdsrettVurdering !== undefined && (
           <HStack gap="2">
@@ -59,14 +66,13 @@ const MedlemskapPeriodeVisning: FC<VurderingVisningProps> = ({ medlemsperiode, a
         {medlemsperiode.bosattVurdering !== undefined && (
           <HStack gap="2">
             <Label size="small">
-              <FormattedMessage id="MedlemskapInfoPanel.ErSokerBosattINorge" />
-              {'? '}
+              <FormattedMessage id="MedlemskapLegacy.ErSokerBosattINorge.Label" />
             </Label>
             <BodyShort size="small">
               {medlemsperiode.bosattVurdering ? (
-                <FormattedMessage id="OppholdINorgeOgAdresserFaktaPanel.ResidingInNorway" />
+                <FormattedMessage id="MedlemskapLegacy.ErSokerBosattINorge.True" />
               ) : (
-                <FormattedMessage id="OppholdINorgeOgAdresserFaktaPanel.NotResidingInNorway" values={{ b: bTag }} />
+                <FormattedMessage id="MedlemskapLegacy.ErSokerBosattINorge.False" values={{ b: bTag }} />
               )}
             </BodyShort>
           </HStack>
@@ -75,20 +81,14 @@ const MedlemskapPeriodeVisning: FC<VurderingVisningProps> = ({ medlemsperiode, a
         {medlemsperiode.medlemskapManuellVurderingType && (
           <HStack gap="2">
             <Label size="small">
-              <FormattedMessage id="MedlemskapInfoPanel.GyldigMedlemFolketrygden" />
-              {'? '}
+              <FormattedMessage id="MedlemskapLegacy.MedlemskapManuell.Label" />
             </Label>
             <BodyShort size="small">
               {vurderingstyper.find(type => type.kode === medlemsperiode.medlemskapManuellVurderingType)?.navn}
             </BodyShort>
           </HStack>
         )}
-        {medlemsperiode.begrunnelse && (
-          <HStack gap="2">
-            <Label size="small">Begrunnelse: </Label>
-            <BodyShort size="small">{medlemsperiode.begrunnelse}</BodyShort>
-          </HStack>
-        )}
+        {medlemsperiode.begrunnelse && <BodyLong size="small">{medlemsperiode.begrunnelse}</BodyLong>}
       </Box>
     </Box>
   );
@@ -96,13 +96,20 @@ const MedlemskapPeriodeVisning: FC<VurderingVisningProps> = ({ medlemsperiode, a
 
 const VurderMedlemsskapLegacyAksjonspunktVisning: FC<Props> = ({ legacyManuellBehandling, alleKodeverk }) => {
   return (
-    <Box background="bg-subtle" borderRadius="large" padding="4">
+    <Box background="surface-subtle" borderWidth="2" borderRadius="large" borderColor="border-divider" padding="4">
       <VStack gap="4">
-        <Heading size="small">
-          <FormattedMessage id="MedlemskapLegacy.TidligereVurdering" />
-        </Heading>
-        {legacyManuellBehandling?.perioder.map(p => (
-          <MedlemskapPeriodeVisning key={p.vurderingsdato} medlemsperiode={p} alleKodeverk={alleKodeverk} />
+        <HStack>
+          <BodyShort size="small" weight="semibold">
+            <FormattedMessage id="MedlemskapLegacy.TidligereVurdering" />
+          </BodyShort>
+        </HStack>
+        {legacyManuellBehandling?.perioder.map((p, index) => (
+          <MedlemskapPeriodeVisning
+            key={p.vurderingsdato}
+            medlemsperiode={p}
+            alleKodeverk={alleKodeverk}
+            index={index}
+          />
         ))}
       </VStack>
     </Box>

@@ -8,6 +8,7 @@ import { FaktaKilde } from '../../faktaKilde';
 import { toTitleCapitalization } from '../../utils/stringUtils';
 import { relevantForUtenlandsopphold } from '../ekspansjonsKort/medlemsAvvik';
 import EkspansjonsKort from '../ekspansjonsKort/EkspansjonsKort';
+import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 const UtenlandsoppholdListe: FC<{ utlandsopphold: UtlandsoppholdPeriode[]; label: ReactElement }> = ({
   utlandsopphold,
@@ -20,7 +21,11 @@ const UtenlandsoppholdListe: FC<{ utlandsopphold: UtlandsoppholdPeriode[]; label
         {utlandsopphold.map(utenlandsopphold => (
           <li key={utenlandsopphold.fom}>
             <BodyShort size="small">
-              <PeriodLabel size="small" dateStringFom={utenlandsopphold.fom} dateStringTom={utenlandsopphold.tom} />{' '}
+              <PeriodLabel
+                size="small"
+                dateStringFom={utenlandsopphold.fom}
+                dateStringTom={utenlandsopphold.tom === TIDENES_ENDE ? undefined : utenlandsopphold.tom}
+              />{' '}
               <FormattedMessage
                 id="OpplysningerOmUtenlandsopphold.iLand"
                 values={{ land: toTitleCapitalization(utenlandsopphold.landNavn) }}
@@ -36,15 +41,17 @@ const UtenlandsoppholdListe: FC<{ utlandsopphold: UtlandsoppholdPeriode[]; label
 interface Props {
   soknad: Soknad;
   avvik: MedlemskapAvvik[] | undefined;
+  readOnly: boolean;
 }
 
-const OpplysningerOmUtenlandsopphold: FC<Props> = ({ avvik = [], soknad: { oppgittTilknytning } }) => {
+const OpplysningerOmUtenlandsopphold: FC<Props> = ({ avvik = [], soknad: { oppgittTilknytning }, readOnly }) => {
   const intl = useIntl();
 
   const { oppholdSistePeriode, oppholdNestePeriode, utlandsoppholdFor, utlandsoppholdEtter } = oppgittTilknytning;
 
   return (
     <EkspansjonsKort
+      readOnly={readOnly}
       tittel={intl.formatMessage({ id: 'OpplysningsKort.UtenlandsoppholdTittel' })}
       kilde={FaktaKilde.SOKNAD}
       relevanteAvvik={avvik.filter(a => relevantForUtenlandsopphold.includes(a))}
@@ -61,7 +68,7 @@ const OpplysningerOmUtenlandsopphold: FC<Props> = ({ avvik = [], soknad: { oppgi
         </BodyShort>
       </div>
 
-      {utlandsoppholdFor.length && (
+      {utlandsoppholdFor.length > 0 && (
         <UtenlandsoppholdListe
           label={<FormattedMessage id="OpplysningerOmUtenlandsopphold.BoddForegaaende12.HvilkeLand" />}
           utlandsopphold={utlandsoppholdFor}
@@ -80,7 +87,7 @@ const OpplysningerOmUtenlandsopphold: FC<Props> = ({ avvik = [], soknad: { oppgi
         </BodyShort>
       </div>
 
-      {utlandsoppholdEtter.length && (
+      {utlandsoppholdEtter.length > 0 && (
         <UtenlandsoppholdListe
           label={<FormattedMessage id="OpplysningerOmUtenlandsopphold.BoNeste12.HvilkeLand" />}
           utlandsopphold={utlandsoppholdEtter}

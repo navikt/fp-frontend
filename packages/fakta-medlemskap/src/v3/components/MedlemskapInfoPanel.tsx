@@ -26,6 +26,7 @@ const MedlemskapInfoPanel: FC<MedlemskapFaktaProps> = ({
   brukerNavn,
   annenpartNavn,
   alleKodeverk,
+  readOnly,
   ...rest
 }) => {
   return (
@@ -33,39 +34,12 @@ const MedlemskapInfoPanel: FC<MedlemskapFaktaProps> = ({
       {aksjonspunkter.some(ap => ap.status === AksjonspunktStatus.OPPRETTET) && (
         <AksjonspunktHelpText aksjonspunkter={aksjonspunkter} />
       )}
-
-      <SituasjonsOversikt medlemskap={medlemskap} soknad={soknad} alleKodeverk={alleKodeverk} />
-      <OpplysningerOmUtenlandsopphold soknad={soknad} avvik={medlemskap.manuellBehandling?.avvik} />
-      <OpplysningerOmAdresser
-        medlemskap={medlemskap}
-        avvik={medlemskap.manuellBehandling?.avvik}
-        brukerNavn={brukerNavn}
-        annenpartNavn={annenpartNavn}
-        alleKodeverk={alleKodeverk}
-      />
-      <OpplysningerOmPersonstatus
-        medlemskap={medlemskap}
-        avvik={medlemskap.manuellBehandling?.avvik}
-        brukerNavn={brukerNavn}
-        annenpartNavn={annenpartNavn}
-        alleKodeverk={alleKodeverk}
-      />
-      <OpplysningerFraMedlemskapsregister
-        medlemskapsperioder={medlemskap.medlemskapsperioder}
-        avvik={medlemskap.manuellBehandling?.avvik}
-        alleKodeverk={alleKodeverk}
-      />
-      <OpplysningerOmOppholdstillatelser
-        oppholdstillatelser={medlemskap.oppholdstillatelser}
-        avvik={medlemskap.manuellBehandling?.avvik}
-        alleKodeverk={alleKodeverk}
-      />
-
-      {medlemskap.manuellBehandling && (
+      {medlemskap.manuellBehandling && readOnly && (
         <VurderMedlemsskapAksjonspunktForm
           manuellBehandling={medlemskap.manuellBehandling}
           aksjonspunkter={aksjonspunkter}
           alleKodeverk={alleKodeverk}
+          readOnly={readOnly}
           {...rest}
         />
       )}
@@ -73,6 +47,52 @@ const MedlemskapInfoPanel: FC<MedlemskapFaktaProps> = ({
         <VurderMedlemsskapLegacyAksjonspunktVisning
           legacyManuellBehandling={medlemskap.legacyManuellBehandling}
           alleKodeverk={alleKodeverk}
+        />
+      )}
+      <SituasjonsOversikt medlemskap={medlemskap} soknad={soknad} alleKodeverk={alleKodeverk} />
+
+      <VStack gap="2">
+        <OpplysningerOmUtenlandsopphold
+          soknad={soknad}
+          avvik={medlemskap.manuellBehandling?.avvik}
+          readOnly={readOnly}
+        />
+        <OpplysningerOmAdresser
+          medlemskap={medlemskap}
+          avvik={medlemskap.manuellBehandling?.avvik}
+          brukerNavn={brukerNavn}
+          annenpartNavn={annenpartNavn}
+          alleKodeverk={alleKodeverk}
+          readOnly={readOnly}
+        />
+        <OpplysningerOmPersonstatus
+          medlemskap={medlemskap}
+          avvik={medlemskap.manuellBehandling?.avvik}
+          brukerNavn={brukerNavn}
+          annenpartNavn={annenpartNavn}
+          alleKodeverk={alleKodeverk}
+          readOnly={readOnly}
+        />
+        <OpplysningerFraMedlemskapsregister
+          medlemskapsperioder={medlemskap.medlemskapsperioder}
+          avvik={medlemskap.manuellBehandling?.avvik}
+          alleKodeverk={alleKodeverk}
+          readOnly={readOnly}
+        />
+        <OpplysningerOmOppholdstillatelser
+          oppholdstillatelser={medlemskap.oppholdstillatelser}
+          avvik={medlemskap.manuellBehandling?.avvik}
+          alleKodeverk={alleKodeverk}
+          readOnly={readOnly}
+        />
+      </VStack>
+      {medlemskap.manuellBehandling && !readOnly && (
+        <VurderMedlemsskapAksjonspunktForm
+          manuellBehandling={medlemskap.manuellBehandling}
+          aksjonspunkter={aksjonspunkter}
+          alleKodeverk={alleKodeverk}
+          readOnly={readOnly}
+          {...rest}
         />
       )}
     </VStack>

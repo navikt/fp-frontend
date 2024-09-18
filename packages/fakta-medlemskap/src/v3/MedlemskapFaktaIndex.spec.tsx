@@ -63,17 +63,17 @@ describe('<MedlemskapFaktaIndex>', () => {
       adresser.getByText('Dette ble markert fordi det ikke er registrert noen adresser i folkeregisteret'),
     ).toBeInTheDocument();
 
-    expect(adresser.getByText('Søker, Ola Nordmann:')).toBeInTheDocument();
+    expect(adresser.getByText('Søker, Ola Nordmann')).toBeInTheDocument();
     expect(
       adresser.getByText('Adresse for søker registrert i folkeregisteret gyldige for de siste 12 månedene'),
     ).toBeInTheDocument();
-    expect(adresser.getByText('01.01.2019 - 01.01.2020')).toBeInTheDocument();
+    expect(adresser.getByText('01.01.2019 -')).toBeInTheDocument();
     expect(adresser.getByText('Oslogata 1, 1234 Oslo NOR')).toBeInTheDocument();
     expect(adresser.getByText('Bostedsadresse')).toBeInTheDocument();
     expect(adresser.getByText('01.01.2020 - 01.01.2021')).toBeInTheDocument();
     expect(adresser.getByText('Mäkelänkatu 1 B, FI-00123 Helsinki FIN')).toBeInTheDocument();
     expect(adresser.getByText('Postadresse i utlandet')).toBeInTheDocument();
-    expect(adresser.getByText('Annen part, Kari Nordmann:')).toBeInTheDocument();
+    expect(adresser.getByText('Annen part, Kari Nordmann')).toBeInTheDocument();
     expect(
       adresser.getByText('Det er mulighet for å se adresse på skjæringspunktet for den andre forelderen'),
     ).toBeInTheDocument();
@@ -86,27 +86,27 @@ describe('<MedlemskapFaktaIndex>', () => {
     await userEvent.click(personstatus.getByText('Vis mer'));
 
     const bruker = within(screen.getByLabelText('Personstatus og statsborgerskap for Ola Nordmann'));
-    expect(bruker.getByText('Søker, Ola Nordmann:')).toBeInTheDocument();
+    expect(bruker.getByText('Søker, Ola Nordmann')).toBeInTheDocument();
 
     expect(bruker.getByText('Personstatus')).toBeInTheDocument();
     expect(bruker.getByText('Utvandret')).toBeInTheDocument();
     expect(bruker.getByText('Utvandringsdato')).toBeInTheDocument();
     expect(bruker.getByText('01.01.2022')).toBeInTheDocument();
 
-    expect(bruker.getByText('Statsborgerskap/region')).toBeInTheDocument();
+    expect(bruker.getByText('Region for statsborgerskap')).toBeInTheDocument();
     expect(bruker.getByText('Nordisk')).toBeInTheDocument();
 
     const annenpart = within(screen.getByLabelText('Personstatus og statsborgerskap for Kari Nordmann'));
-    expect(annenpart.getByText('Annen part, Kari Nordmann:')).toBeInTheDocument();
+    expect(annenpart.getByText('Annen part, Kari Nordmann')).toBeInTheDocument();
 
     expect(annenpart.getByText('Personstatus')).toBeInTheDocument();
     expect(annenpart.getByText('Bosatt (i følge folkeregisterloven)')).toBeInTheDocument();
 
-    expect(annenpart.getByText('Statsborgerskap/region')).toBeInTheDocument();
+    expect(annenpart.getByText('Region for statsborgerskap')).toBeInTheDocument();
     expect(annenpart.getByText('3.landsborger')).toBeInTheDocument();
 
     // OpplysningerFraMedlemskapsregister
-    const medlPerioder = within(screen.getByLabelText('Perioder fra medlemskapsregisteret(2)'));
+    const medlPerioder = within(screen.getByLabelText('Medlemskapsperioder(2)'));
     await userEvent.click(medlPerioder.getByText('Vis mer'));
 
     expect(
