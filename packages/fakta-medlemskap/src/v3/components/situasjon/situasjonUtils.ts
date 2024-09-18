@@ -18,10 +18,7 @@ export const getSisteRegion = (medlemskap: MedlemskapV3, alleKodeverk: AlleKodev
 export const getSistePersonstatus = (medlemskap: MedlemskapV3, alleKodeverk: AlleKodeverk): string => {
   const nyeste = medlemskap.personstatuser.sort(sorterPerioder)[0];
   if (nyeste) {
-    const personstatus = getKodeverknavnFn(alleKodeverk)(nyeste.type, KodeverkType.PERSONSTATUS_TYPE);
-
-    if (personstatus === 'Bosatt') return `${personstatus} (f.reg)`;
-    if (personstatus) return personstatus;
+    return getKodeverknavnFn(alleKodeverk)(nyeste.type, KodeverkType.PERSONSTATUS_TYPE);
   }
   return '-';
 };
@@ -34,7 +31,7 @@ export const getSisteBostedsLand = (medlemskap: MedlemskapV3, alleKodeverk: Alle
     const landNavn = getKodeverknavnFn(alleKodeverk)(nyeste, kodeverkTyper.LANDKODER);
     if (landNavn) return formaterLand(landNavn, intl);
   }
-  return '-';
+  return nyeste ?? `-`;
 };
 
 export const formaterUtenlandsopphold = (

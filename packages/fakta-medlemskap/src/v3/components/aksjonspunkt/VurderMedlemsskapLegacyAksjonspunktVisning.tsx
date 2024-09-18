@@ -1,12 +1,9 @@
 import React, { FC, useCallback } from 'react';
-import { BodyShort, Box, HStack, Label, VStack } from '@navikt/ds-react';
-
-import { KodeverkType } from '@navikt/fp-kodeverk';
-
-import { AlleKodeverk, LegacyManuellMedlemskapsBehandling, LegacyMedlemPeriode } from '@navikt/fp-types';
 import { FormattedMessage } from 'react-intl';
+import { BodyShort, Box, HStack, Label, VStack } from '@navikt/ds-react';
+import { KodeverkType } from '@navikt/fp-kodeverk';
+import { AlleKodeverk, LegacyManuellMedlemskapsBehandling, LegacyMedlemPeriode } from '@navikt/fp-types';
 import { AvsnittSkiller, DateLabel } from '@navikt/ft-ui-komponenter';
-import { ReadOnlyField } from '@navikt/ft-form-hooks';
 
 interface Props {
   alleKodeverk: AlleKodeverk;
@@ -100,7 +97,14 @@ const MedlemskapPeriodeVisning: FC<VurderingVisningProps> = ({ medlemsperiode, a
             </BodyShort>
           </HStack>
         )}
-        {medlemsperiode.begrunnelse && <ReadOnlyField value={medlemsperiode.begrunnelse} type="textarea" />}
+        {medlemsperiode.begrunnelse && (
+          <HStack gap="2">
+            <Label size="small">
+              <FormattedMessage id="MedlemskapLegacy.Begrunnelse.Label" />
+            </Label>
+            <BodyShort size="small">{medlemsperiode.begrunnelse}</BodyShort>
+          </HStack>
+        )}
       </VStack>
     </HStack>
   );

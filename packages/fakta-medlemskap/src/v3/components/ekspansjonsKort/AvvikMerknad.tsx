@@ -20,7 +20,7 @@ const getFormateringsIdForAvvik = (avvik: MedlemskapAvvik) => {
     case MedlemskapAvvik.MEDL_PERIODER:
       return 'AvvikMerknad.MedlPerioder';
     case MedlemskapAvvik.EØS_MANGLENDE_ANSETTELSE_MED_INNTEKT:
-      return 'AvvikMerknad.EØSManglendeAnsettelseMedInntekt';
+      return 'AvvikMerknad.EOSManglendeAnsettelseMedInntekt';
     default:
       assertUnreachable(avvik);
   }
