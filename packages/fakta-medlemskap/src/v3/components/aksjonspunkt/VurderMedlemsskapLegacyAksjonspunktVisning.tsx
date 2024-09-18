@@ -1,11 +1,12 @@
 import React, { FC, useCallback } from 'react';
-import { BodyLong, BodyShort, Box, HStack, Label, VStack } from '@navikt/ds-react';
+import { BodyShort, Box, HStack, Label, VStack } from '@navikt/ds-react';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
 
 import { AlleKodeverk, LegacyManuellMedlemskapsBehandling, LegacyMedlemPeriode } from '@navikt/fp-types';
 import { FormattedMessage } from 'react-intl';
-import { DateLabel } from '@navikt/ft-ui-komponenter';
+import { AvsnittSkiller, DateLabel } from '@navikt/ft-ui-komponenter';
+import { ReadOnlyField } from '@navikt/ft-form-hooks';
 
 interface Props {
   alleKodeverk: AlleKodeverk;
@@ -15,28 +16,39 @@ interface Props {
 interface VurderingVisningProps {
   alleKodeverk: AlleKodeverk;
   medlemsperiode: LegacyMedlemPeriode;
-  index: number;
 }
 
-const MedlemskapPeriodeVisning: FC<VurderingVisningProps> = ({ medlemsperiode, alleKodeverk, index }) => {
+const MedlemskapPeriodeVisning: FC<VurderingVisningProps> = ({ medlemsperiode, alleKodeverk }) => {
   const vurderingstyper = alleKodeverk[KodeverkType.MEDLEMSKAP_MANUELL_VURDERING_TYPE];
   const bTag = useCallback((chunks: any) => <b>{chunks}</b>, []);
   return (
-    <Box key={medlemsperiode.vurderingsdato}>
-      <HStack justify="space-between" align="start">
-        <BodyShort size="small" weight="semibold">
-          <FormattedMessage id="MedlemskapLegacy.Vurdering" values={{ index: index + 1 }} />
-        </BodyShort>
-        <BodyShort size="small" weight="semibold">
-          <DateLabel dateString={medlemsperiode.vurderingsdato} />
-        </BodyShort>
-      </HStack>
+    <HStack gap="6">
+      <BodyShort size="small" weight="semibold">
+        <DateLabel dateString={medlemsperiode.vurderingsdato} />
+      </BodyShort>
 
-      <Box paddingInline="2">
+      <VStack gap="2">
+        {medlemsperiode.erEosBorger !== undefined && (
+          <HStack gap="2">
+            <Label size="small">
+              <FormattedMessage id="MedlemskapLegacy.ErSokerEOS.Label" />
+            </Label>
+            <BodyShort size="small">
+              <FormattedMessage
+                id={
+                  medlemsperiode.erEosBorger
+                    ? 'StatusForBorgerFaktaPanel.CitizenEEA'
+                    : 'StatusForBorgerFaktaPanel.CitizenOutsideEEA'
+                }
+              />
+            </BodyShort>
+          </HStack>
+        )}
+
         {medlemsperiode.oppholdsrettVurdering !== undefined && (
           <HStack gap="2">
             <Label size="small">
-              <FormattedMessage id="StatusForBorgerFaktaPanel.CitizenEEA" />
+              <FormattedMessage id="StatusForBorgerFaktaPanel.Oppholdsrett" />
               {': '}
             </Label>
             <BodyShort size="small">
@@ -51,7 +63,7 @@ const MedlemskapPeriodeVisning: FC<VurderingVisningProps> = ({ medlemsperiode, a
         {medlemsperiode.lovligOppholdVurdering !== undefined && (
           <HStack gap="2">
             <Label size="small">
-              <FormattedMessage id="StatusForBorgerFaktaPanel.CitizenOutsideEEA" />
+              <FormattedMessage id="StatusForBorgerFaktaPanel.LovligOpphold" />
               {': '}
             </Label>
             <BodyShort size="small">
@@ -88,9 +100,9 @@ const MedlemskapPeriodeVisning: FC<VurderingVisningProps> = ({ medlemsperiode, a
             </BodyShort>
           </HStack>
         )}
-        {medlemsperiode.begrunnelse && <BodyLong size="small">{medlemsperiode.begrunnelse}</BodyLong>}
-      </Box>
-    </Box>
+        {medlemsperiode.begrunnelse && <ReadOnlyField value={medlemsperiode.begrunnelse} type="textarea" />}
+      </VStack>
+    </HStack>
   );
 };
 
@@ -104,12 +116,10 @@ const VurderMedlemsskapLegacyAksjonspunktVisning: FC<Props> = ({ legacyManuellBe
           </BodyShort>
         </HStack>
         {legacyManuellBehandling?.perioder.map((p, index) => (
-          <MedlemskapPeriodeVisning
-            key={p.vurderingsdato}
-            medlemsperiode={p}
-            alleKodeverk={alleKodeverk}
-            index={index}
-          />
+          <>
+            <MedlemskapPeriodeVisning key={p.vurderingsdato} medlemsperiode={p} alleKodeverk={alleKodeverk} />
+            {index + 1 !== legacyManuellBehandling.perioder.length && <AvsnittSkiller dividerParagraf />}
+          </>
         ))}
       </VStack>
     </Box>
