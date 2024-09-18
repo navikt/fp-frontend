@@ -105,7 +105,7 @@ const lagMedlemskap = (override: Partial<MedlemskapV3>): MedlemskapV3 => ({
       oppholdstillatelseType: 'PERMANENT',
     },
   ],
-  medlemskapsperiode: [
+  medlemskapsperioder: [
     {
       fom: '2019-01-01',
       tom: '2022-01-01',

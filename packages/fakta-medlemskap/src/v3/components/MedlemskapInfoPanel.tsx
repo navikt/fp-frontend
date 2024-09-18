@@ -51,7 +51,7 @@ const MedlemskapInfoPanel: FC<MedlemskapFaktaProps> = ({
         alleKodeverk={alleKodeverk}
       />
       <OpplysningerFraMedlemskapsregister
-        medlemskapsperiode={medlemskap.medlemskapsperiode}
+        medlemskapsperioder={medlemskap.medlemskapsperioder}
         avvik={medlemskap.manuellBehandling?.avvik}
         alleKodeverk={alleKodeverk}
       />

@@ -9,7 +9,7 @@ import { alleKodeverk } from '@navikt/fp-storybook-utils';
 const defaultMedlemskapProps: MedlemskapV3 = {
   regioner: [],
   personstatuser: [],
-  medlemskapsperiode: [],
+  medlemskapsperioder: [],
   adresser: [],
   utenlandsopphold: [],
   oppholdstillatelser: [],

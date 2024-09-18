@@ -90,7 +90,7 @@ type MedlemskapV3 = Readonly<{
   utenlandsopphold: UtenlandsoppholdPeriode[];
   adresser: AdressePeriode[];
   oppholdstillatelser: OppholdstillatelsePeriode[];
-  medlemskapsperiode: MedlemskapPeriodeV3[];
+  medlemskapsperioder: MedlemskapPeriodeV3[];
   annenpart?: Annenpart;
 }>;
 

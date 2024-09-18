@@ -12,26 +12,26 @@ import { relevantForMedl } from '../ekspansjonsKort/medlemsAvvik';
 import { getLandnavnFraLandkode } from '../../utils/landUtils';
 
 interface Props {
-  medlemskapsperiode: MedlemskapPeriodeV3[];
+  medlemskapsperioder: MedlemskapPeriodeV3[];
   avvik: MedlemskapAvvik[] | undefined;
   alleKodeverk: AlleKodeverk;
 }
 
-const OpplysningerFraMedlemskapsregister = ({ medlemskapsperiode, avvik = [], alleKodeverk }: Props) => {
+const OpplysningerFraMedlemskapsregister = ({ medlemskapsperioder, avvik = [], alleKodeverk }: Props) => {
   const intl = useIntl();
 
   const medlemskapTypeKodeverk = alleKodeverk[KodeverkType.MEDLEMSKAP_TYPE];
   const dekningTypeKodeverk = alleKodeverk[KodeverkType.MEDLEMSKAP_DEKNING];
 
-  const skalViseStudieland = medlemskapsperiode.find(mp => mp.studieland !== null);
-  const skalViseLovvalgtland = medlemskapsperiode.find(mp => mp.lovvalgsland !== null);
+  const skalViseStudieland = medlemskapsperioder.find(mp => mp.studieland !== null);
+  const skalViseLovvalgtland = medlemskapsperioder.find(mp => mp.lovvalgsland !== null);
 
   return (
     <EkspansjonsKort
       kilde={FaktaKilde.FREG}
       tittel={intl.formatMessage(
         { id: 'OpplysningsKort.MedlemskapsperiodeTittel' },
-        { count: medlemskapsperiode.length },
+        { count: medlemskapsperioder.length },
       )}
       relevanteAvvik={avvik.filter(a => relevantForMedl.includes(a))}
     >
@@ -40,14 +40,14 @@ const OpplysningerFraMedlemskapsregister = ({ medlemskapsperiode, avvik = [], al
           <FormattedMessage id="OpplysningerFraMedlemskapsregister.Beskrivelse" />
         </BodyShort>
 
-        {medlemskapsperiode.length === 0 && (
+        {medlemskapsperioder.length === 0 && (
           <Box padding="4">
             <BodyLong textColor="subtle">
               <FormattedMessage id="OpplysningerFraMedlemskapsregister.Tabell.Ingen" />
             </BodyLong>
           </Box>
         )}
-        {medlemskapsperiode.length > 0 && (
+        {medlemskapsperioder.length > 0 && (
           <Table>
             <Table.Header>
               <Table.Row>
@@ -79,7 +79,7 @@ const OpplysningerFraMedlemskapsregister = ({ medlemskapsperiode, avvik = [], al
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {medlemskapsperiode
+              {medlemskapsperioder
                 .sort(sorterPerioder)
                 .map(
                   ({ fom, tom, medlemskapType, dekningType, beslutningsdato, studieland, lovvalgsland, erMedlem }) => {
