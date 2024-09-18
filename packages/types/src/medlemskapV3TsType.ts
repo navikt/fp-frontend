@@ -51,12 +51,6 @@ export enum MedlemskapAvvik {
   MEDL_PERIODER = 'MEDL_PERIODER',
 }
 
-export type MedlemskapResultat = {
-  avslagskode: string | null;
-  medlemFom: string | null;
-  opphørFom: string | null;
-};
-
 export type LegacyMedlemPeriode = Readonly<{
   vurderingsdato: string;
   oppholdsrettVurdering?: boolean;
@@ -71,9 +65,10 @@ export type LegacyManuellMedlemskapsBehandling = Readonly<{
   perioder: LegacyMedlemPeriode[];
 }>;
 
-export type ManuellMedlemskapsBehandling = Readonly<{
-  avvik: MedlemskapAvvik[];
-  resultat: MedlemskapResultat | null;
+export type ManuellBehandlingResultat = Readonly<{
+  avslagskode: string | null;
+  medlemFom: string | null;
+  opphørFom: string | null;
 }>;
 
 type Annenpart = {
@@ -83,7 +78,7 @@ type Annenpart = {
 };
 
 type MedlemskapV3 = Readonly<{
-  manuellBehandling: ManuellMedlemskapsBehandling | null;
+  manuellBehandlingResultat: ManuellBehandlingResultat | null;
   legacyManuellBehandling: LegacyManuellMedlemskapsBehandling | null;
   regioner: RegionPeriode[];
   personstatuser: PersonstatusPeriode[];
@@ -91,6 +86,7 @@ type MedlemskapV3 = Readonly<{
   adresser: AdressePeriode[];
   oppholdstillatelser: OppholdstillatelsePeriode[];
   medlemskapsperioder: MedlemskapPeriodeV3[];
+  avvik: MedlemskapAvvik[];
   annenpart: Annenpart | null;
 }>;
 

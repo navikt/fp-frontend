@@ -75,7 +75,7 @@ const AdresseTabell: FC<AdresseTabellProps> = ({
 
 interface Props {
   medlemskap: MedlemskapV3;
-  avvik: MedlemskapAvvik[] | undefined;
+  avvik: MedlemskapAvvik[];
   brukerNavn: string;
   annenpartNavn?: string;
   alleKodeverk: AlleKodeverk;

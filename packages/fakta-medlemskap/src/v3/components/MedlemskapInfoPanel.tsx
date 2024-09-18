@@ -34,16 +34,16 @@ const MedlemskapInfoPanel: FC<MedlemskapFaktaProps> = ({
       {aksjonspunkter.some(ap => ap.status === AksjonspunktStatus.OPPRETTET) && (
         <AksjonspunktHelpText aksjonspunkter={aksjonspunkter} />
       )}
-      {medlemskap.manuellBehandling && readOnly && (
+      {medlemskap.manuellBehandlingResultat && readOnly && (
         <VurderMedlemsskapAksjonspunktForm
-          manuellBehandling={medlemskap.manuellBehandling}
+          manuellBehandlingResultat={medlemskap.manuellBehandlingResultat}
           aksjonspunkter={aksjonspunkter}
           alleKodeverk={alleKodeverk}
           readOnly={readOnly}
           {...rest}
         />
       )}
-      {medlemskap.legacyManuellBehandling && !medlemskap.manuellBehandling && (
+      {medlemskap.legacyManuellBehandling && !medlemskap.manuellBehandlingResultat && (
         <VurderMedlemsskapLegacyAksjonspunktVisning
           legacyManuellBehandling={medlemskap.legacyManuellBehandling}
           alleKodeverk={alleKodeverk}
@@ -54,12 +54,12 @@ const MedlemskapInfoPanel: FC<MedlemskapFaktaProps> = ({
       <VStack gap="2">
         <OpplysningerOmUtenlandsopphold
           soknad={soknad}
-          avvik={medlemskap.manuellBehandling?.avvik}
+          avvik={medlemskap.avvik}
           readOnly={readOnly}
         />
         <OpplysningerOmAdresser
           medlemskap={medlemskap}
-          avvik={medlemskap.manuellBehandling?.avvik}
+          avvik={medlemskap.avvik}
           brukerNavn={brukerNavn}
           annenpartNavn={annenpartNavn}
           alleKodeverk={alleKodeverk}
@@ -67,7 +67,7 @@ const MedlemskapInfoPanel: FC<MedlemskapFaktaProps> = ({
         />
         <OpplysningerOmPersonstatus
           medlemskap={medlemskap}
-          avvik={medlemskap.manuellBehandling?.avvik}
+          avvik={medlemskap.avvik}
           brukerNavn={brukerNavn}
           annenpartNavn={annenpartNavn}
           alleKodeverk={alleKodeverk}
@@ -75,20 +75,20 @@ const MedlemskapInfoPanel: FC<MedlemskapFaktaProps> = ({
         />
         <OpplysningerFraMedlemskapsregister
           medlemskapsperioder={medlemskap.medlemskapsperioder}
-          avvik={medlemskap.manuellBehandling?.avvik}
+          avvik={medlemskap.avvik}
           alleKodeverk={alleKodeverk}
           readOnly={readOnly}
         />
         <OpplysningerOmOppholdstillatelser
           oppholdstillatelser={medlemskap.oppholdstillatelser}
-          avvik={medlemskap.manuellBehandling?.avvik}
+          avvik={medlemskap.avvik}
           alleKodeverk={alleKodeverk}
           readOnly={readOnly}
         />
       </VStack>
-      {medlemskap.manuellBehandling && !readOnly && (
+      {aksjonspunkter.some(ap => ap.status === AksjonspunktStatus.OPPRETTET || ap.status === AksjonspunktStatus.UTFORT) && !readOnly && (
         <VurderMedlemsskapAksjonspunktForm
-          manuellBehandling={medlemskap.manuellBehandling}
+          manuellBehandlingResultat={medlemskap.manuellBehandlingResultat}
           aksjonspunkter={aksjonspunkter}
           alleKodeverk={alleKodeverk}
           readOnly={readOnly}

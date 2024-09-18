@@ -13,7 +13,7 @@ import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 interface Props {
   oppholdstillatelser: OppholdstillatelsePeriode[];
-  avvik: MedlemskapAvvik[] | undefined;
+  avvik: MedlemskapAvvik[];
   alleKodeverk: AlleKodeverk;
   readOnly: boolean;
 }
