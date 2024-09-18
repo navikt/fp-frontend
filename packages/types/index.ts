@@ -107,10 +107,9 @@ export type {
 } from './src/medlemskapTsType';
 export type {
   default as MedlemskapV3,
-  ManuellMedlemskapsBehandling,
+  ManuellBehandlingResultat,
   LegacyManuellMedlemskapsBehandling,
   LegacyMedlemPeriode,
-  MedlemskapResultat,
   AdressePeriode,
   RegionPeriode,
   PersonstatusPeriode,

@@ -40,7 +40,7 @@ const UtenlandsoppholdListe: FC<{ utlandsopphold: UtlandsoppholdPeriode[]; label
 
 interface Props {
   soknad: Soknad;
-  avvik: MedlemskapAvvik[] | undefined;
+  avvik: MedlemskapAvvik[];
   readOnly: boolean;
 }
 

@@ -87,18 +87,16 @@ const soknad = {
 } as Soknad;
 
 const lagMedlemskap = (override: Partial<MedlemskapV3>): MedlemskapV3 => ({
-  manuellBehandling: {
-    avvik: [
-      MedlemskapAvvik.BOSATT_UTENLANDSOPPHOLD,
-      MedlemskapAvvik.BOSATT_UTENLANDSADRESSE,
-      MedlemskapAvvik.BOSATT_MANGLENDE_BOSTEDSADRESSE,
-      MedlemskapAvvik.BOSATT_UGYLDIG_PERSONSTATUS,
-      MedlemskapAvvik.MEDL_PERIODER,
-      MedlemskapAvvik.TREDJELAND_MANGLENDE_LOVLIG_OPPHOLD,
-      MedlemskapAvvik.EØS_MANGLENDE_ANSETTELSE_MED_INNTEKT,
-    ],
-    resultat: null,
-  },
+  manuellBehandlingResultat: null,
+  avvik: [
+    MedlemskapAvvik.BOSATT_UTENLANDSOPPHOLD,
+    MedlemskapAvvik.BOSATT_UTENLANDSADRESSE,
+    MedlemskapAvvik.BOSATT_MANGLENDE_BOSTEDSADRESSE,
+    MedlemskapAvvik.BOSATT_UGYLDIG_PERSONSTATUS,
+    MedlemskapAvvik.MEDL_PERIODER,
+    MedlemskapAvvik.TREDJELAND_MANGLENDE_LOVLIG_OPPHOLD,
+    MedlemskapAvvik.EØS_MANGLENDE_ANSETTELSE_MED_INNTEKT,
+  ],
   legacyManuellBehandling: null,
   oppholdstillatelser: [
     {
@@ -251,14 +249,12 @@ TidligereVurderingAvMedlemskap.args = {
   readOnly: true,
   soknad,
   medlemskap: lagMedlemskap({
-    manuellBehandling: {
-      avvik: [MedlemskapAvvik.BOSATT_UTENLANDSADRESSE],
-      resultat: {
-        medlemFom: null,
-        avslagskode: '1025',
-        opphørFom: '2024-10-18',
-      },
+    manuellBehandlingResultat: {
+      medlemFom: null,
+      avslagskode: '1025',
+      opphørFom: '2024-10-18',
     },
+    avvik: [MedlemskapAvvik.BOSATT_UTENLANDSADRESSE],
   }),
   aksjonspunkter: [
     {
@@ -277,7 +273,8 @@ LegacyVurderingAvLøpendeMedlemskap.args = {
   readOnly: true,
   soknad,
   medlemskap: lagMedlemskap({
-    manuellBehandling: null,
+    manuellBehandlingResultat: null,
+    avvik: [],
     legacyManuellBehandling: {
       perioder: [
         {
@@ -328,7 +325,8 @@ LegacyVurdertInngangsvilkårMedlemskap.args = {
   readOnly: true,
   soknad,
   medlemskap: lagMedlemskap({
-    manuellBehandling: null,
+    manuellBehandlingResultat: null,
+    avvik: [],
     legacyManuellBehandling: {
       perioder: [
         {

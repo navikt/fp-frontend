@@ -8,7 +8,7 @@ import { FaktaBegrunnelseTextFieldNew } from '@navikt/fp-fakta-felles';
 import { useForm } from 'react-hook-form';
 import { Form } from '@navikt/ft-form-hooks';
 
-import { AlleKodeverk, ManuellMedlemskapsBehandling, MedlemskapResultat } from '@navikt/fp-types';
+import { AlleKodeverk, ManuellBehandlingResultat } from '@navikt/fp-types';
 import VurderingAlternativer from './VurderingAlternativer';
 import VurderMedlemskap from '@navikt/fp-types-avklar-aksjonspunkter/src/fakta/VurderMedlemskapAp';
 import { Vurdering, VurderMedlemskapFormValues } from '../../types/vurderingMedlemskapForm';
@@ -19,7 +19,7 @@ interface Props {
   alleKodeverk: AlleKodeverk;
   submitCallback: (aksjonspunktData: VurderMedlemskap) => Promise<void>;
   aksjonspunkter: Aksjonspunkt[];
-  manuellBehandling: ManuellMedlemskapsBehandling;
+  manuellBehandlingResultat: ManuellBehandlingResultat | null;
 }
 
 const inngangsAksjonspunkter = [
@@ -29,7 +29,7 @@ const inngangsAksjonspunkter = [
 
 const createInitialValues = (
   aksjonspunkter: Aksjonspunkt[],
-  resultat: MedlemskapResultat | null,
+  resultat: ManuellBehandlingResultat | null,
 ): Partial<VurderMedlemskapFormValues> => {
   const aksjonspunkt = aksjonspunkter.find(ap => inngangsAksjonspunkter.some(value => ap.definisjon == value));
   const begrunnelse = aksjonspunkt?.begrunnelse ?? '';
@@ -68,12 +68,12 @@ const VurderMedlemsskapAksjonspunktForm: FC<Props> = ({
   alleKodeverk,
   submitCallback,
   aksjonspunkter,
-  manuellBehandling,
+  manuellBehandlingResultat,
 }) => {
   const [isSubmitting, setSubmitting] = useState(false);
 
   const formMethods = useForm<VurderMedlemskapFormValues>({
-    defaultValues: createInitialValues(aksjonspunkter, manuellBehandling.resultat),
+    defaultValues: createInitialValues(aksjonspunkter, manuellBehandlingResultat),
   });
   const begrunnelseVerdi = formMethods.watch('begrunnelse');
 

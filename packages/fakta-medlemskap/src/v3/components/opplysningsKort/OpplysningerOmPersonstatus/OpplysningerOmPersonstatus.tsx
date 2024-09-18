@@ -13,7 +13,7 @@ import { AvsnittSkiller } from '@navikt/ft-ui-komponenter';
 
 interface Props {
   medlemskap: MedlemskapV3;
-  avvik: MedlemskapAvvik[] | undefined;
+  avvik: MedlemskapAvvik[];
   brukerNavn: string;
   annenpartNavn?: string;
   alleKodeverk: AlleKodeverk;
@@ -21,7 +21,7 @@ interface Props {
 }
 
 const OpplysningerOmPersonstatus: FC<Props> = ({
-  avvik = [],
+  avvik,
   medlemskap: { regioner, personstatuser, annenpart },
   brukerNavn,
   annenpartNavn,
