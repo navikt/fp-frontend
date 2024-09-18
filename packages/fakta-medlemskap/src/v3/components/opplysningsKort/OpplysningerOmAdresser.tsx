@@ -4,6 +4,7 @@ import { BodyLong, Box, Detail, Label, Table } from '@navikt/ds-react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 import { KodeverkType } from '@navikt/fp-kodeverk';
+import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 import EkspansjonsKort from '../ekspansjonsKort/EkspansjonsKort';
 import { relevantForAdresser } from '../ekspansjonsKort/medlemsAvvik';
@@ -56,7 +57,7 @@ const AdresseTabell: FC<AdresseTabellProps> = ({
               return (
                 <Table.Row key={i + fom + tom}>
                   <Table.DataCell>
-                    <PeriodLabel dateStringFom={fom} dateStringTom={tom} />
+                    <PeriodLabel dateStringFom={fom} dateStringTom={tom === TIDENES_ENDE ? undefined : tom} />
                   </Table.DataCell>
                   <Table.DataCell>{formaterAdresse(adresse)}</Table.DataCell>
                   <Table.DataCell>
@@ -78,6 +79,7 @@ interface Props {
   brukerNavn: string;
   annenpartNavn?: string;
   alleKodeverk: AlleKodeverk;
+  readOnly: boolean;
 }
 
 const OpplysningerOmAdresser: FC<Props> = ({
@@ -86,11 +88,13 @@ const OpplysningerOmAdresser: FC<Props> = ({
   brukerNavn,
   annenpartNavn,
   alleKodeverk,
+  readOnly,
 }) => {
   const intl = useIntl();
 
   return (
     <EkspansjonsKort
+      readOnly={readOnly}
       tittel={intl.formatMessage(
         { id: 'OpplysningsKort.AdresseTittel' },
         {

@@ -9,20 +9,23 @@ import EkspansjonsKort from '../ekspansjonsKort/EkspansjonsKort';
 import { FaktaKilde } from '../../faktaKilde';
 import { sorterPerioder } from '../../utils/periodeUtils';
 import { relevantForOppholdstillatelser } from '../ekspansjonsKort/medlemsAvvik';
+import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 interface Props {
   oppholdstillatelser: OppholdstillatelsePeriode[];
   avvik: MedlemskapAvvik[] | undefined;
   alleKodeverk: AlleKodeverk;
+  readOnly: boolean;
 }
 
-const OpplysningerOmOppholdstillatelser = ({ oppholdstillatelser, avvik = [], alleKodeverk }: Props) => {
+const OpplysningerOmOppholdstillatelser = ({ oppholdstillatelser, avvik = [], alleKodeverk, readOnly }: Props) => {
   const intl = useIntl();
 
   const oppholdstillatelseTypeKodeverk = alleKodeverk[KodeverkType.OPPHOLDSTILLATELSE_TYPE];
 
   return (
     <EkspansjonsKort
+      readOnly={readOnly}
       kilde={FaktaKilde.FREG}
       tittel={intl.formatMessage(
         { id: 'OpplysningsKort.OppholdstillatelseTittel' },
@@ -59,7 +62,7 @@ const OpplysningerOmOppholdstillatelser = ({ oppholdstillatelser, avvik = [], al
                 return (
                   <Table.Row key={fom + tom}>
                     <Table.DataCell>
-                      <PeriodLabel dateStringFom={fom} dateStringTom={tom} />
+                      <PeriodLabel dateStringFom={fom} dateStringTom={tom === TIDENES_ENDE ? undefined : tom} />
                     </Table.DataCell>
                     <Table.DataCell>
                       {oppholdstillatelseTypeKodeverk.find(kv => kv.kode === oppholdstillatelseType)?.navn}

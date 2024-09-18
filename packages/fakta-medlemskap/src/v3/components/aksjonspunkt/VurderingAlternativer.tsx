@@ -6,25 +6,30 @@ import { useFormContext } from 'react-hook-form';
 import { AlleKodeverk } from '@navikt/fp-types';
 import { KodeverkType, VilkarType } from '@navikt/fp-kodeverk';
 import { Vurdering, VurderMedlemskapFormValues } from '../../types/vurderingMedlemskapForm';
+import { useIntl } from 'react-intl';
 
 interface Props {
   alleKodeverk: AlleKodeverk;
+  readOnly: boolean;
 }
 
-const VurderingAlternativer = ({ alleKodeverk }: Props) => {
+const VurderingAlternativer = ({ alleKodeverk, readOnly }: Props) => {
   const { watch } = useFormContext<VurderMedlemskapFormValues>();
   const vurdering = watch('vurdering');
 
   const avslagsårsaker = alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.MEDLEMSKAPSVILKARET];
-
+  const intl = useIntl();
   return (
     <>
       <RadioGroupPanel
         name="vurdering"
-        label="Er medlemskapsvilkåret oppfylt?"
+        label={intl.formatMessage({
+          id: readOnly
+            ? 'VurderMedlemsskapAksjonspunktForm.VurderingLabel.ReadOnly'
+            : 'VurderMedlemsskapAksjonspunktForm.VurderingLabel',
+        })}
         validate={[required]}
-        isReadOnly={false}
-        isEdited={false}
+        isReadOnly={readOnly}
         radios={[
           {
             label: 'Oppfylt',
@@ -43,19 +48,32 @@ const VurderingAlternativer = ({ alleKodeverk }: Props) => {
       {vurdering && [Vurdering.DELVIS_OPPFYLT, Vurdering.IKKE_OPPFYLT].includes(vurdering) && (
         <SelectField
           name="avslagskode"
-          label="Velg en avslagsårsak"
+          label={intl.formatMessage({
+            id: readOnly
+              ? 'VurderMedlemsskapAksjonspunktForm.AvslagsarsakLabel.ReadOnly'
+              : 'VurderMedlemsskapAksjonspunktForm.AvslagsarsakLabel',
+          })}
           selectValues={avslagsårsaker.map(aa => (
             <option key={aa.kode} value={aa.kode}>
               {aa.navn}
             </option>
           ))}
-          readOnly={false}
+          readOnly={readOnly}
           validate={[required]}
         />
       )}
 
       {vurdering === Vurdering.DELVIS_OPPFYLT && (
-        <Datepicker name="opphørFom" label="Når opphører medlemskapet?" validate={[hasValidDate, required]} />
+        <Datepicker
+          name="opphørFom"
+          label={intl.formatMessage({
+            id: readOnly
+              ? 'VurderMedlemsskapAksjonspunktForm.OpphorFomLabel.ReadOnly'
+              : 'VurderMedlemsskapAksjonspunktForm.OpphorFomLabel',
+          })}
+          validate={[hasValidDate, required]}
+          isReadOnly={readOnly}
+        />
       )}
     </>
   );

@@ -38,10 +38,11 @@ export default {
 const Template: StoryFn<{
   medlemskap: MedlemskapV3;
   soknad: Soknad;
+  readOnly: boolean;
   aksjonspunkter: Aksjonspunkt[];
   submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
-}> = ({ medlemskap, soknad, aksjonspunkter, submitCallback, alleMerknaderFraBeslutter }) => (
+}> = ({ medlemskap, soknad, aksjonspunkter, submitCallback, alleMerknaderFraBeslutter, readOnly = false }) => (
   <MedlemskapFaktaIndex
     behandling={behandling}
     medlemskap={medlemskap}
@@ -50,7 +51,7 @@ const Template: StoryFn<{
     alleKodeverk={alleKodeverk as any}
     alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
     submitCallback={submitCallback}
-    readOnly={false}
+    readOnly={readOnly}
     harApneAksjonspunkter
     submittable
     setFormData={() => undefined}
@@ -98,6 +99,7 @@ const lagMedlemskap = (override: Partial<MedlemskapV3>): MedlemskapV3 => ({
     ],
     resultat: null,
   },
+  legacyManuellBehandling: null,
   oppholdstillatelser: [
     {
       fom: '2021-10-13',
@@ -137,10 +139,12 @@ const lagMedlemskap = (override: Partial<MedlemskapV3>): MedlemskapV3 => ({
   adresser: [
     {
       fom: '2019-01-01',
-      tom: '2020-01-01',
+      tom: '9999-12-31',
       adresse: {
         adresseType: OpplysningAdresseType.BOSTEDSADRESSE,
         adresselinje1: 'Oslogata 1',
+        adresselinje2: null,
+        adresselinje3: null,
         poststed: 'Oslo',
         postNummer: '1234',
         land: 'NOR',
@@ -152,6 +156,8 @@ const lagMedlemskap = (override: Partial<MedlemskapV3>): MedlemskapV3 => ({
       adresse: {
         adresseType: OpplysningAdresseType.POSTADRESSE_UTLAND,
         adresselinje1: 'Mäkelänkatu 1 B',
+        adresselinje2: null,
+        adresselinje3: null,
         poststed: 'Helsinki',
         postNummer: 'FI-00123',
         land: 'FIN',
@@ -181,12 +187,12 @@ const lagMedlemskap = (override: Partial<MedlemskapV3>): MedlemskapV3 => ({
     adresser: [
       {
         fom: '2019-01-01',
-        tom: '2020-01-01',
+        tom: '9999-12-31',
         adresse: {
           adresseType: OpplysningAdresseType.BOSTEDSADRESSE,
           adresselinje1: 'Oslogata 1',
-          adresselinje2: undefined,
-          adresselinje3: undefined,
+          adresselinje2: null,
+          adresselinje3: null,
           poststed: 'Oslo',
           postNummer: '1234',
           land: 'NOR',
@@ -198,8 +204,8 @@ const lagMedlemskap = (override: Partial<MedlemskapV3>): MedlemskapV3 => ({
         adresse: {
           adresseType: OpplysningAdresseType.POSTADRESSE_UTLAND,
           adresselinje1: 'Mäkelänkatu 1 B',
-          adresselinje2: undefined,
-          adresselinje3: undefined,
+          adresselinje2: null,
+          adresselinje3: null,
           poststed: 'Helsinki',
           postNummer: 'FI-00123',
           land: 'FIN',
@@ -240,8 +246,35 @@ Default.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
 };
 
+export const TidligereVurderingAvMedlemskap = Template.bind({});
+TidligereVurderingAvMedlemskap.args = {
+  readOnly: true,
+  soknad,
+  medlemskap: lagMedlemskap({
+    manuellBehandling: {
+      avvik: [MedlemskapAvvik.BOSATT_UTENLANDSADRESSE],
+      resultat: {
+        medlemFom: null,
+        avslagskode: '1025',
+        opphørFom: '2024-10-18',
+      },
+    },
+  }),
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.VURDER_MEDLEMSKAPSVILKÅRET,
+      status: aksjonspunktStatus.UTFORT,
+      begrunnelse: 'Søker skal flytte ut av landet',
+      kanLoses: true,
+    },
+  ],
+  alleMerknaderFraBeslutter: {},
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+};
+
 export const LegacyVurderingAvLøpendeMedlemskap = Template.bind({});
 LegacyVurderingAvLøpendeMedlemskap.args = {
+  readOnly: true,
   soknad,
   medlemskap: lagMedlemskap({
     manuellBehandling: null,
@@ -292,6 +325,7 @@ LegacyVurderingAvLøpendeMedlemskap.args = {
 
 export const LegacyVurdertInngangsvilkårMedlemskap = Template.bind({});
 LegacyVurdertInngangsvilkårMedlemskap.args = {
+  readOnly: true,
   soknad,
   medlemskap: lagMedlemskap({
     manuellBehandling: null,

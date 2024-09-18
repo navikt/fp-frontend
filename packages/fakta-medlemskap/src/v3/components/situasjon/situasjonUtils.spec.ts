@@ -15,6 +15,7 @@ const defaultMedlemskapProps: MedlemskapV3 = {
   oppholdstillatelser: [],
   manuellBehandling: { avvik: [], resultat: null },
   legacyManuellBehandling: null,
+  annenpart: null,
 };
 
 const intl = createIntl(messages);

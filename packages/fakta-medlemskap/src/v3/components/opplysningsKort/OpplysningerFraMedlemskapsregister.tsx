@@ -10,14 +10,16 @@ import { FaktaKilde } from '../../faktaKilde';
 import { sorterPerioder } from '../../utils/periodeUtils';
 import { relevantForMedl } from '../ekspansjonsKort/medlemsAvvik';
 import { getLandnavnFraLandkode } from '../../utils/landUtils';
+import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 interface Props {
   medlemskapsperioder: MedlemskapPeriodeV3[];
   avvik: MedlemskapAvvik[] | undefined;
   alleKodeverk: AlleKodeverk;
+  readOnly: boolean;
 }
 
-const OpplysningerFraMedlemskapsregister = ({ medlemskapsperioder, avvik = [], alleKodeverk }: Props) => {
+const OpplysningerFraMedlemskapsregister = ({ medlemskapsperioder, avvik = [], alleKodeverk, readOnly }: Props) => {
   const intl = useIntl();
 
   const medlemskapTypeKodeverk = alleKodeverk[KodeverkType.MEDLEMSKAP_TYPE];
@@ -28,7 +30,8 @@ const OpplysningerFraMedlemskapsregister = ({ medlemskapsperioder, avvik = [], a
 
   return (
     <EkspansjonsKort
-      kilde={FaktaKilde.FREG}
+      readOnly={readOnly}
+      kilde={FaktaKilde.MEDL}
       tittel={intl.formatMessage(
         { id: 'OpplysningsKort.MedlemskapsperiodeTittel' },
         { count: medlemskapsperioder.length },
@@ -92,7 +95,7 @@ const OpplysningerFraMedlemskapsregister = ({ medlemskapsperioder, avvik = [], a
                     return (
                       <Table.Row key={fom + tom + medlemskapTypeString}>
                         <Table.DataCell>
-                          <PeriodLabel dateStringFom={fom} dateStringTom={tom} />
+                          <PeriodLabel dateStringFom={fom} dateStringTom={tom === TIDENES_ENDE ? undefined : tom} />
                         </Table.DataCell>
                         <Table.DataCell>
                           <FormattedMessage

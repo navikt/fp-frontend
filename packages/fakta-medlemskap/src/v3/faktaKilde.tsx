@@ -3,6 +3,7 @@ import assertUnreachable from '@navikt/fp-fakta-uttaksdokumentasjon/src/utils/sw
 export enum FaktaKilde {
   SOKNAD,
   FREG,
+  MEDL,
 }
 
 export function getFormateringsIdForKilde(kilde: FaktaKilde) {
@@ -11,6 +12,8 @@ export function getFormateringsIdForKilde(kilde: FaktaKilde) {
       return 'FaktaKilde.Soknad';
     case FaktaKilde.FREG:
       return 'FaktaKilde.FREG';
+    case FaktaKilde.MEDL:
+      return 'FaktaKilde.MEDL';
     default:
       return assertUnreachable(kilde);
   }
