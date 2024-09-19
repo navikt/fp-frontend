@@ -396,10 +396,7 @@ InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerUtenOverstyring.
     type: behandlingType.REVURDERING,
     behandlingsresultat: {
       type: behandlingResultatType.INNVILGET,
-      konsekvenserForYtelsen: [
-        konsekvensForYtelsen.ENDRING_I_BEREGNING_OG_UTTAK,
-        konsekvensForYtelsen.FORELDREPENGER_OPPHORER,
-      ],
+      konsekvenserForYtelsen: [konsekvensForYtelsen.ENDRING_I_BEREGNING, konsekvensForYtelsen.FORELDREPENGER_OPPHORER],
     },
   } as Behandling,
   beregningresultatDagytelse: defaultberegningresultatDagytelse,
@@ -416,10 +413,7 @@ GodkjentRevurderingForeldrepengerForSaksbehandlerUtenOverstyring.args = {
     status: behandlingStatus.AVSLUTTET,
     behandlingsresultat: {
       type: behandlingResultatType.INNVILGET,
-      konsekvenserForYtelsen: [
-        konsekvensForYtelsen.ENDRING_I_BEREGNING_OG_UTTAK,
-        konsekvensForYtelsen.FORELDREPENGER_OPPHORER,
-      ],
+      konsekvenserForYtelsen: [konsekvensForYtelsen.ENDRING_I_BEREGNING, konsekvensForYtelsen.FORELDREPENGER_OPPHORER],
     },
   } as Behandling,
   beregningresultatDagytelse: defaultberegningresultatDagytelse,
@@ -435,10 +429,7 @@ InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyring.a
     type: behandlingType.REVURDERING,
     behandlingsresultat: {
       type: behandlingResultatType.INNVILGET,
-      konsekvenserForYtelsen: [
-        konsekvensForYtelsen.ENDRING_I_BEREGNING_OG_UTTAK,
-        konsekvensForYtelsen.FORELDREPENGER_OPPHORER,
-      ],
+      konsekvenserForYtelsen: [konsekvensForYtelsen.ENDRING_I_BEREGNING, konsekvensForYtelsen.FORELDREPENGER_OPPHORER],
     },
   } as Behandling,
   beregningresultatDagytelse: defaultberegningresultatDagytelse,
@@ -455,10 +446,7 @@ GodkjentRevurderingForeldrepengerForSaksbehandlerMedOverstyring.args = {
     status: behandlingStatus.AVSLUTTET,
     behandlingsresultat: {
       type: behandlingResultatType.INNVILGET,
-      konsekvenserForYtelsen: [
-        konsekvensForYtelsen.ENDRING_I_BEREGNING_OG_UTTAK,
-        konsekvensForYtelsen.FORELDREPENGER_OPPHORER,
-      ],
+      konsekvenserForYtelsen: [konsekvensForYtelsen.ENDRING_I_BEREGNING, konsekvensForYtelsen.FORELDREPENGER_OPPHORER],
     },
   } as Behandling,
   beregningresultatDagytelse: defaultberegningresultatDagytelse,
@@ -549,7 +537,7 @@ InnvilgetForRevurderingForeldrepengerDerBeregningErManueltFastsatt.args = {
     type: behandlingType.REVURDERING,
     behandlingsresultat: {
       type: behandlingResultatType.INNVILGET,
-      konsekvenserForYtelsen: [konsekvensForYtelsen.ENDRING_I_BEREGNING_OG_UTTAK],
+      konsekvenserForYtelsen: [konsekvensForYtelsen.ENDRING_I_BEREGNING],
     },
   } as Behandling,
   beregningresultatDagytelse: defaultberegningresultatDagytelse,
@@ -576,7 +564,7 @@ AvslåttForRevurderingForeldrepengerDerSøknadsfristvilkåretIkkeErOppfylt.args 
     type: behandlingType.REVURDERING,
     behandlingsresultat: {
       type: behandlingResultatType.AVSLATT,
-      konsekvenserForYtelsen: [konsekvensForYtelsen.ENDRING_I_BEREGNING_OG_UTTAK],
+      konsekvenserForYtelsen: [konsekvensForYtelsen.ENDRING_I_BEREGNING],
       avslagsarsak: '1007',
     },
   } as Behandling,
