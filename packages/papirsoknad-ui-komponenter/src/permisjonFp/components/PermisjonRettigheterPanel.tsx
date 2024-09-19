@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
+import { VStack } from '@navikt/ds-react';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { useFormContext } from 'react-hook-form';
 
 const ANNEN_FORELDER_NAME_PREFIX = 'annenForelder';
@@ -32,7 +32,7 @@ const PermisjonRettigheterPanel: FunctionComponent<OwnProps> = ({ readOnly, soke
   const annenForelderRettEØS = watch(`${ANNEN_FORELDER_NAME_PREFIX}.annenForelderRettEØS`);
 
   return (
-    <>
+    <VStack gap="4">
       <RadioGroupPanel
         name={`${ANNEN_FORELDER_NAME_PREFIX}.sokerHarAleneomsorg`}
         label={intl.formatMessage({ id: 'Registrering.Permisjon.SøkerHarAleneomsorg' })}
@@ -51,7 +51,6 @@ const PermisjonRettigheterPanel: FunctionComponent<OwnProps> = ({ readOnly, soke
           },
         ]}
       />
-      <VerticalSpacer sixteenPx />
       {sokerHarAleneomsorg === false && (
         <RadioGroupPanel
           name={`${ANNEN_FORELDER_NAME_PREFIX}.denAndreForelderenHarRettPaForeldrepenger`}
@@ -115,7 +114,7 @@ const PermisjonRettigheterPanel: FunctionComponent<OwnProps> = ({ readOnly, soke
             ]}
           />
         )}
-    </>
+    </VStack>
   );
 };
 
