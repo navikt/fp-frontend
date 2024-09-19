@@ -70,7 +70,6 @@ describe('<OpptjeningVilkarProsessIndex>', () => {
       begrunnelse: 'Dette er en vurdering',
       erVilkarOk: false,
       kode: '5089',
-      avslagDato: undefined,
       avslagskode: undefined,
     });
   });

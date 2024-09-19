@@ -22,7 +22,7 @@ const getIsAvslagCodeRequired = (erVilkarOk: boolean, avslagCode?: string) => ()
 type FormValues = {
   erVilkarOk?: boolean;
   avslagCode?: string;
-  avslagDato?: string;
+  opphørFom?: string;
 };
 
 interface OwnProps {
@@ -48,7 +48,7 @@ interface StaticFunctions {
     | {
         erVilkarOk: boolean;
         avslagskode: string;
-        avslagDato: string;
+        opphørFom: string;
       };
 }
 
@@ -131,8 +131,8 @@ const VilkarResultPicker: FunctionComponent<OwnProps> & StaticFunctions = ({
             <>
               <VerticalSpacer sixteenPx />
               <Datepicker
-                name="avslagDato"
-                label={intl.formatMessage({ id: 'VilkarResultPicker.VilkarDato' })}
+                name="opphørFom"
+                label={intl.formatMessage({ id: 'VilkarResultPicker.OpphorFom' })}
                 isReadOnly={readOnly}
                 validate={[required, hasValidDate]}
               />
@@ -167,7 +167,7 @@ VilkarResultPicker.transformValues = values =>
     : {
         erVilkarOk: values.erVilkarOk!,
         avslagskode: values.avslagCode,
-        avslagDato: values.avslagDato,
+        opphørFom: values.opphørFom,
       };
 
 export default VilkarResultPicker;

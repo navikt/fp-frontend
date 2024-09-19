@@ -50,7 +50,6 @@ const finnesInnvilgetUttak = (svangerskapspengerTilrettelegging: FodselOgTilrett
 type FormValues = {
   erVilkarOk?: boolean;
   avslagCode?: string;
-  avslagDato?: string;
   begrunnelse?: string;
 };
 
