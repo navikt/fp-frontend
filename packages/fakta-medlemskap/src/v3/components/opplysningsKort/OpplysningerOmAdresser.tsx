@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { AdressePeriode, AlleKodeverk, KodeverkMedNavn, MedlemskapAvvik, MedlemskapV3 } from '@navikt/fp-types';
 import { BodyLong, Box, Detail, Label, Table } from '@navikt/ds-react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { PeriodLabel } from '@navikt/ft-ui-komponenter';
+import { AvsnittSkiller, PeriodLabel } from '@navikt/ft-ui-komponenter';
 import { KodeverkType } from '@navikt/fp-kodeverk';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 
@@ -34,6 +34,8 @@ const AdresseTabell: FC<AdresseTabellProps> = ({
       </Box>
     );
   }
+  const rowStyle = (index: number) => (index + 1 === adresser.length ? { border: '0px' } : {});
+
   return (
     <>
       {adresser.length === 0 && (
@@ -44,23 +46,29 @@ const AdresseTabell: FC<AdresseTabellProps> = ({
         </Box>
       )}
       {adresser.length > 0 && (
-        <Table>
+        <Table style={{ tableLayout: 'fixed' }}>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell>Periode</Table.HeaderCell>
-              <Table.HeaderCell>Adresse</Table.HeaderCell>
-              <Table.HeaderCell>Type</Table.HeaderCell>
+              <Table.HeaderCell>
+                <FormattedMessage id="OpplysningerOmAdresser.PeriodeLabel" />
+              </Table.HeaderCell>
+              <Table.HeaderCell>
+                <FormattedMessage id="OpplysningerOmAdresser.AdresseLabel" />
+              </Table.HeaderCell>
+              <Table.HeaderCell>
+                <FormattedMessage id="OpplysningerOmAdresser.TypeLabel" />
+              </Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           <Table.Body>
             {adresser.sort(sorterPerioder).map(({ adresse, fom, tom }, i) => {
               return (
                 <Table.Row key={i + fom + tom}>
-                  <Table.DataCell>
+                  <Table.DataCell style={rowStyle(i)}>
                     <PeriodLabel dateStringFom={fom} dateStringTom={tom === TIDENES_ENDE ? undefined : tom} />
                   </Table.DataCell>
-                  <Table.DataCell>{formaterAdresse(adresse)}</Table.DataCell>
-                  <Table.DataCell>
+                  <Table.DataCell style={rowStyle(i)}>{formaterAdresse(adresse)}</Table.DataCell>
+                  <Table.DataCell style={rowStyle(i)}>
                     {adresseKodeverk.find(k => k.kode === adresse.adresseType)?.navn ?? '-'}
                   </Table.DataCell>
                 </Table.Row>
@@ -113,6 +121,7 @@ const OpplysningerOmAdresser: FC<Props> = ({
       </Detail>
       <AdresseTabell adresser={adresser} adresseKodeverk={alleKodeverk[KodeverkType.ADRESSE_TYPE]} />
 
+      {annenpart && <AvsnittSkiller dividerParagraf />}
       {annenpart && (
         <>
           <Label>

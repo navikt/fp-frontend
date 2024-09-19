@@ -119,6 +119,9 @@
 
   "OpplysningerOmAdresser.Tabell.IngenAdresse": "Ingen adresser funnet for {erAnnenpart, select, true {den andre forelderen} other {søker} }.",
   "OpplysningerOmAdresser.Tabell.SammeAdresse": "Den andre forelderen har samme adresse som søker på skjæringstidspunktet",
+  "OpplysningerOmAdresser.PeriodeLabel": "Periode",
+  "OpplysningerOmAdresser.AdresseLabel": "Adresse",
+  "OpplysningerOmAdresser.TypeLabel": "Type",
 
   "OpplysningerOmPersonstatus.Soker": "Søker, {navn}",
   "OpplysningerOmPersonstatus.Annenpart": "Annen part, {navn}",
@@ -128,6 +131,9 @@
   "OpplysningerOmPersonstatus.UtvandretLabel": "Utflyttingsdato",
   "OpplysningerOmPersonstatus.PersonstatusIngen": "Ingen personstatus funnet for {erAnnenpart, select, true {den andre forelderen} other {søker} }.",
   "OpplysningerOmPersonstatus.RegionIngen": "Ingen region funnet for {erAnnenpart, select, true {den andre forelderen} other {søker} }.",
+  "OpplysningerOmPersonstatus.Fom": "Fra og med",
+  "OpplysningerOmPersonstatus.Tom": "Til og med",
+  "OpplysningerOmPersonstatus.Beskrivelse": "Personstatus og region for statsborgerskap registrert i folkeregisteret  for de siste 12 månedene før skjæringstidspunktet",
 
 
   "OpplysningerFraMedlemskapsregister.Beskrivelse": "Perioder fra medlemskapsregisteret gyldige for de siste 12 månedene",
