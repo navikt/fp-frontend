@@ -1,5 +1,5 @@
-import React, { Button, Heading, Modal } from '@navikt/ds-react';
-import { FunctionComponent } from 'react';
+import { Button, Heading, Modal } from '@navikt/ds-react';
+import React, { FunctionComponent } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 

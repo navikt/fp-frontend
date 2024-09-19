@@ -2,7 +2,7 @@ import React, { FunctionComponent, useMemo, ReactElement, useState, useCallback 
 import { BodyShort, Heading, Search, Alert, Button, CopyButton, HStack, VStack } from '@navikt/ds-react';
 import { isValidFodselsnummer } from '@navikt/ft-utils';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { Buldings3Icon, FigureInwardIcon, SilhouetteIcon, FigureOutwardIcon } from '@navikt/aksel-icons';
+import { Buildings3Icon, FigureInwardIcon, SilhouetteIcon, FigureOutwardIcon } from '@navikt/aksel-icons';
 import { FormattedMessage, useIntl } from 'react-intl';
 import styles from './brukerAvsenderPanel.module.css';
 import Journalpost from '../../../typer/journalpostTsType';
@@ -23,7 +23,7 @@ const finnAvsenderBilde = (journalpost: Journalpost): ReactElement => {
     return <SilhouetteIcon className={styles.ikon} />;
   }
   if (avsenderId.length === 9) {
-    return <Buldings3Icon className={styles.ikon} />;
+    return <Buildings3Icon className={styles.ikon} />;
   }
   if (avsenderId.length === 11) {
     return finnKjønnBilde(journalpost.bruker.fnr);

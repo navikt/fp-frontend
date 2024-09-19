@@ -103,7 +103,7 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({ behov,
               {formMethods.watch(`perioder.0.vurdering`) === VurderingsAlternativ.GODKJENT_UNDER75 && (
                 <NumberField
                   label={<FormattedMessage id="UttakDokumentasjonFaktaDetailForm.MorsStillingsprosent.Label" />}
-                  name={`perioder.0.morsStillingsprosent`}
+                  name="perioder.0.morsStillingsprosent"
                   validate={[required, minValue(0.01), maxValue(74.99)]}
                   readOnly={readOnly}
                 />
