@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { AlleKodeverk, MedlemskapAvvik, MedlemskapV3 } from '@navikt/fp-types';
-import { Label, VStack } from '@navikt/ds-react';
+import { Detail, Label, VStack } from '@navikt/ds-react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { FaktaKilde } from '../../../faktaKilde';
@@ -44,6 +44,9 @@ const OpplysningerOmPersonstatus: FC<Props> = ({
         <Label>
           <FormattedMessage id="OpplysningerOmPersonstatus.Soker" values={{ navn: brukerNavn }} />
         </Label>
+        <Detail>
+          <FormattedMessage id="OpplysningerOmPersonstatus.Beskrivelse" />
+        </Detail>
         <PersonstatusVisning personstatuser={personstatuser} alleKodeverk={alleKodeverk} />
         <RegionVisning regioner={regioner} alleKodeverk={alleKodeverk} />
       </VStack>

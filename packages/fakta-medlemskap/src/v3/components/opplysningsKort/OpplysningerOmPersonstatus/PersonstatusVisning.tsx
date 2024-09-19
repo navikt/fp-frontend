@@ -1,11 +1,12 @@
 import React, { FC } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { AlleKodeverk, PersonstatusPeriode } from '@navikt/fp-types';
-import { BodyLong, BodyShort, Box, Label } from '@navikt/ds-react';
+import { Table, BodyLong, Label } from '@navikt/ds-react';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
-import { KodeverkType, personstatusType } from '@navikt/fp-kodeverk';
+import { KodeverkType } from '@navikt/fp-kodeverk';
 
 import { sorterPerioder } from '../../../utils/periodeUtils';
+import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 interface Props {
   personstatuser: PersonstatusPeriode[];
@@ -21,38 +22,46 @@ const PersonstatusVisning: FC<Props> = ({ personstatuser, erAnnenpart = false, a
     return kodeverk?.navn ?? `Ukjent personstatus: ${verdi?.type.toLowerCase()}`;
   };
 
-  const nyesteInnslag = personstatuser.sort(sorterPerioder).at(0);
-  if (!nyesteInnslag)
+  const sortertPersonstatus = personstatuser.sort(sorterPerioder);
+
+  const rowStyle = (index: number) => (index + 1 === sortertPersonstatus.length ? { border: '0px' } : {});
+
+  if (sortertPersonstatus.length === 0)
     return (
-      <Box>
+      <>
         <Label size="small">
           <FormattedMessage id="OpplysningerOmPersonstatus.PersonstatusLabel" />
         </Label>
         <BodyLong textColor="subtle">
           <FormattedMessage id="OpplysningerOmPersonstatus.PersonstatusIngen" values={{ erAnnenpart }} />
         </BodyLong>
-      </Box>
+      </>
     );
-
   return (
-    <>
-      <Box>
-        <Label size="small">
-          <FormattedMessage id="OpplysningerOmPersonstatus.PersonstatusLabel" />
-        </Label>
-        <BodyShort>{getPersonstatus(nyesteInnslag)}</BodyShort>
-      </Box>
-      {nyesteInnslag.type === personstatusType.UTVANDRET && (
-        <Box>
-          <Label size="small">
-            <FormattedMessage id="OpplysningerOmPersonstatus.UtvandretLabel" />
-          </Label>
-          <BodyShort>
-            <DateLabel dateString={nyesteInnslag.fom} />
-          </BodyShort>
-        </Box>
-      )}
-    </>
+    <Table style={{ tableLayout: 'fixed' }} aria-label={`Personstatus for ${erAnnenpart ? 'annenpart' : 'bruker'}`}>
+      <Table.HeaderCell>
+        <FormattedMessage id="OpplysningerOmPersonstatus.PersonstatusLabel" />
+      </Table.HeaderCell>
+      <Table.HeaderCell>
+        <FormattedMessage id="OpplysningerOmPersonstatus.Fom" />
+      </Table.HeaderCell>
+      <Table.HeaderCell>
+        <FormattedMessage id="OpplysningerOmPersonstatus.Tom" />
+      </Table.HeaderCell>
+      <Table.Body>
+        {sortertPersonstatus.map((ps, index) => (
+          <Table.Row key={`${ps.fom}-${ps.tom}-${ps.type}`}>
+            <Table.DataCell style={rowStyle(index)}>{getPersonstatus(ps)}</Table.DataCell>
+            <Table.DataCell style={rowStyle(index)}>
+              <DateLabel dateString={ps.fom} />
+            </Table.DataCell>
+            <Table.DataCell style={rowStyle(index)}>
+              {ps.tom === TIDENES_ENDE ? undefined : <DateLabel dateString={ps.tom} />}
+            </Table.DataCell>
+          </Table.Row>
+        ))}
+      </Table.Body>
+    </Table>
   );
 };
 

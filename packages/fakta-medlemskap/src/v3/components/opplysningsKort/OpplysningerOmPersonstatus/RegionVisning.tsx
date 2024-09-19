@@ -1,10 +1,12 @@
 import React, { FC } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { AlleKodeverk, RegionPeriode } from '@navikt/fp-types';
-import { BodyLong, BodyShort, Box, Label } from '@navikt/ds-react';
+import { BodyLong, Table, Label } from '@navikt/ds-react';
 import { KodeverkType } from '@navikt/fp-kodeverk';
 
 import { sorterPerioder } from '../../../utils/periodeUtils';
+import { DateLabel } from '@navikt/ft-ui-komponenter';
+import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 interface Props {
   regioner: RegionPeriode[];
@@ -19,24 +21,49 @@ const RegionVisning: FC<Props> = ({ regioner, erAnnenpart = false, alleKodeverk 
     return kodeverkNavn.find(it => it.kode === verdi.type)?.navn ?? `Ukjent region: ${verdi?.type.toLowerCase()}`;
   };
 
-  const nyesteRegion = regioner.sort(sorterPerioder).at(0);
+  const sortertRegion = regioner.sort(sorterPerioder);
 
-  return (
-    <Box>
-      <Label size="small">
-        <FormattedMessage id="OpplysningerOmPersonstatus.RegionLabel" />
-      </Label>
-      {!nyesteRegion ? (
+  const rowStyle = (index: number) => (index + 1 === sortertRegion.length ? { border: '0px' } : {});
+
+  if (sortertRegion.length === 0)
+    return (
+      <>
+        <Label size="small">
+          <FormattedMessage id="OpplysningerOmPersonstatus.RegionLabel" />
+        </Label>
         <BodyLong textColor="subtle">
           <FormattedMessage
             id="OpplysningerOmPersonstatus.RegionIngen"
             values={{ type: KodeverkType.REGION, erAnnenpart }}
           />
         </BodyLong>
-      ) : (
-        <BodyShort>{getRegion(nyesteRegion)}</BodyShort>
-      )}
-    </Box>
+      </>
+    );
+  return (
+    <Table style={{ tableLayout: 'fixed' }} aria-label={`Region for ${erAnnenpart ? 'annenpart' : 'bruker'}`}>
+      <Table.HeaderCell>
+        <FormattedMessage id="OpplysningerOmPersonstatus.RegionLabel" />
+      </Table.HeaderCell>
+      <Table.HeaderCell>
+        <FormattedMessage id="OpplysningerOmPersonstatus.Fom" />
+      </Table.HeaderCell>
+      <Table.HeaderCell>
+        <FormattedMessage id="OpplysningerOmPersonstatus.Tom" />
+      </Table.HeaderCell>
+      <Table.Body>
+        {sortertRegion.map((r, index) => (
+          <Table.Row key={`${r.fom}-${r.tom}-${r.type}`}>
+            <Table.DataCell style={rowStyle(index)}>{getRegion(r)}</Table.DataCell>
+            <Table.DataCell style={rowStyle(index)}>
+              <DateLabel dateString={r.fom} />
+            </Table.DataCell>
+            <Table.DataCell style={rowStyle(index)}>
+              {r.tom === TIDENES_ENDE ? '-' : <DateLabel dateString={r.tom} />}
+            </Table.DataCell>
+          </Table.Row>
+        ))}
+      </Table.Body>
+    </Table>
   );
 };
 
