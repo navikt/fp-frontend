@@ -1,23 +1,23 @@
 import React, { FC, PropsWithChildren, useCallback, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Box, Button, VStack } from '@navikt/ds-react';
+import { Button, VStack } from '@navikt/ds-react';
 import { Aksjonspunkt } from '@navikt/ft-types';
 
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { FaktaBegrunnelseTextFieldNew } from '@navikt/fp-fakta-felles';
 import { useForm } from 'react-hook-form';
 import { Form } from '@navikt/ft-form-hooks';
-
+import { VurderMedlemskapAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { AlleKodeverk, ManuellBehandlingResultat } from '@navikt/fp-types';
 import VurderingAlternativer from './VurderingAlternativer';
-import VurderMedlemskap from '@navikt/fp-types-avklar-aksjonspunkter/src/fakta/VurderMedlemskapAp';
 import { Vurdering, VurderMedlemskapFormValues } from '../../types/vurderingMedlemskapForm';
+import InfoBox from '../InfoBox';
 
 interface Props {
   submittable: boolean;
   readOnly: boolean;
   alleKodeverk: AlleKodeverk;
-  submitCallback: (aksjonspunktData: VurderMedlemskap) => Promise<void>;
+  submitCallback: (aksjonspunktData: VurderMedlemskapAp) => Promise<void>;
   aksjonspunkter: Aksjonspunkt[];
   manuellBehandlingResultat: ManuellBehandlingResultat | null;
 }
@@ -47,16 +47,8 @@ const createInitialValues = (
   return { begrunnelse };
 };
 
-const Wrapper = ({ readOnly, children }: PropsWithChildren<{ readOnly: boolean }>) => {
-  return readOnly ? (
-    <Box background="surface-subtle" borderWidth="2" borderRadius="large" borderColor="border-divider" padding="4">
-      {children}
-    </Box>
-  ) : (
-    <>{children}</>
-  );
-};
-
+const ConditionalWrapper = ({ isReadOnly, children }: PropsWithChildren<{ isReadOnly: boolean }>) =>
+  isReadOnly ? <InfoBox size="medium">{children}</InfoBox> : <>{children}</>;
 /**
  * MedlemskapInfoPanel
  *
@@ -88,7 +80,7 @@ const VurderMedlemsskapAksjonspunktForm: FC<Props> = ({
   }, []);
 
   return (
-    <Wrapper readOnly={readOnly}>
+    <ConditionalWrapper isReadOnly={readOnly}>
       <Form formMethods={formMethods} onSubmit={bekreft}>
         <VStack gap={readOnly ? '2' : '6'}>
           <VurderingAlternativer alleKodeverk={alleKodeverk} readOnly={readOnly} />
@@ -112,7 +104,7 @@ const VurderMedlemsskapAksjonspunktForm: FC<Props> = ({
           )}
         </VStack>
       </Form>
-    </Wrapper>
+    </ConditionalWrapper>
   );
 };
 

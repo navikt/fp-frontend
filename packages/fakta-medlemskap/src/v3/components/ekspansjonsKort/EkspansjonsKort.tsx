@@ -1,6 +1,6 @@
 import React, { FC, PropsWithChildren } from 'react';
 import { MedlemskapAvvik } from '@navikt/fp-types';
-import { Box, Detail, ExpansionCard, HStack, VStack } from '@navikt/ds-react';
+import { Box, ExpansionCard, HStack, VStack } from '@navikt/ds-react';
 import { FormattedMessage } from 'react-intl';
 
 import AvvikStatus from './AvvikStatus';
@@ -35,9 +35,7 @@ const EkspansjonsKort: FC<PropsWithChildren<Props>> = ({
           <div>
             <ExpansionCard.Title size="small">{tittel}</ExpansionCard.Title>
             <ExpansionCard.Description>
-              <Detail uppercase>
-                <FormattedMessage id={getFormateringsIdForKilde(kilde)}></FormattedMessage>
-              </Detail>
+              <FormattedMessage id={getFormateringsIdForKilde(kilde)}></FormattedMessage>
             </ExpansionCard.Description>
           </div>
         </HStack>

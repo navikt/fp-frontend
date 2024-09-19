@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { VStack } from '@navikt/ds-react';
-import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
+import { aksjonspunktStatus } from '@navikt/fp-kodeverk';
 
 import { MedlemskapFaktaProps } from '../MedlemskapFaktaIndex';
 
@@ -31,9 +31,7 @@ const MedlemskapInfoPanel: FC<MedlemskapFaktaProps> = ({
 }) => {
   return (
     <VStack gap="6">
-      {aksjonspunkter.some(ap => ap.status === AksjonspunktStatus.OPPRETTET) && (
-        <AksjonspunktHelpText aksjonspunkter={aksjonspunkter} />
-      )}
+      <AksjonspunktHelpText aksjonspunkter={aksjonspunkter} medlemskap={medlemskap} />
       {medlemskap.manuellBehandlingResultat && readOnly && (
         <VurderMedlemsskapAksjonspunktForm
           manuellBehandlingResultat={medlemskap.manuellBehandlingResultat}
@@ -52,11 +50,7 @@ const MedlemskapInfoPanel: FC<MedlemskapFaktaProps> = ({
       <SituasjonsOversikt medlemskap={medlemskap} soknad={soknad} alleKodeverk={alleKodeverk} />
 
       <VStack gap="2">
-        <OpplysningerOmUtenlandsopphold
-          soknad={soknad}
-          avvik={medlemskap.avvik}
-          readOnly={readOnly}
-        />
+        <OpplysningerOmUtenlandsopphold soknad={soknad} avvik={medlemskap.avvik} readOnly={readOnly} />
         <OpplysningerOmAdresser
           medlemskap={medlemskap}
           avvik={medlemskap.avvik}
@@ -86,15 +80,18 @@ const MedlemskapInfoPanel: FC<MedlemskapFaktaProps> = ({
           readOnly={readOnly}
         />
       </VStack>
-      {aksjonspunkter.some(ap => ap.status === AksjonspunktStatus.OPPRETTET || ap.status === AksjonspunktStatus.UTFORT) && !readOnly && (
-        <VurderMedlemsskapAksjonspunktForm
-          manuellBehandlingResultat={medlemskap.manuellBehandlingResultat}
-          aksjonspunkter={aksjonspunkter}
-          alleKodeverk={alleKodeverk}
-          readOnly={readOnly}
-          {...rest}
-        />
-      )}
+      {aksjonspunkter.some(
+        ap => ap.status === aksjonspunktStatus.OPPRETTET || ap.status === aksjonspunktStatus.UTFORT,
+      ) &&
+        !readOnly && (
+          <VurderMedlemsskapAksjonspunktForm
+            manuellBehandlingResultat={medlemskap.manuellBehandlingResultat}
+            aksjonspunkter={aksjonspunkter}
+            alleKodeverk={alleKodeverk}
+            readOnly={readOnly}
+            {...rest}
+          />
+        )}
     </VStack>
   );
 };

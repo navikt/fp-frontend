@@ -10,7 +10,11 @@ const { Default } = composeStories(stories);
 describe('<MedlemskapFaktaIndex>', () => {
   it('skal vise medlemspanel med aksjonspunkt', async () => {
     render(<Default submitCallback={vi.fn()} />);
-    expect(await screen.findByText('Vurder om søker har medlemskap i folketrygden.')).toBeInTheDocument();
+    expect(
+      await screen.findByText(
+        'Det er usikkert om søker er bosatt i Norge. Vurder om søker har medlemskap i folketrygden.',
+      ),
+    ).toBeInTheDocument();
 
     // SituasjonOversikt
     const situasjon = within(screen.getByLabelText('Situasjons Oversikt'));
@@ -21,7 +25,7 @@ describe('<MedlemskapFaktaIndex>', () => {
     expect(situasjon.getByText('Skal bo')).toBeInTheDocument();
     expect(situasjon.getByText('I Danmark')).toBeInTheDocument();
 
-    expect(situasjon.getByText('Siste adresse')).toBeInTheDocument();
+    expect(situasjon.getByText('Siste bostedsadresse')).toBeInTheDocument();
     expect(situasjon.getByText('I Norge')).toBeInTheDocument();
 
     expect(situasjon.getByText('Statsborgerskap')).toBeInTheDocument();
@@ -82,7 +86,7 @@ describe('<MedlemskapFaktaIndex>', () => {
     ).toBeInTheDocument();
 
     // OpplysningerOmPersonstatus
-    const personstatus = within(screen.getByLabelText('Personstatus og statsborgerskap fra søker og annen part'));
+    const personstatus = within(screen.getByLabelText('Personstatus og statsborgerskap for søker og annen part'));
     await userEvent.click(personstatus.getByText('Vis mer'));
 
     const bruker = within(screen.getByLabelText('Personstatus og statsborgerskap for Ola Nordmann'));
@@ -90,7 +94,7 @@ describe('<MedlemskapFaktaIndex>', () => {
 
     expect(bruker.getByText('Personstatus')).toBeInTheDocument();
     expect(bruker.getByText('Utvandret')).toBeInTheDocument();
-    expect(bruker.getByText('Utvandringsdato')).toBeInTheDocument();
+    expect(bruker.getByText('Utflyttingsdato')).toBeInTheDocument();
     expect(bruker.getByText('01.01.2022')).toBeInTheDocument();
 
     expect(bruker.getByText('Region for statsborgerskap')).toBeInTheDocument();
@@ -100,7 +104,7 @@ describe('<MedlemskapFaktaIndex>', () => {
     expect(annenpart.getByText('Annen part, Kari Nordmann')).toBeInTheDocument();
 
     expect(annenpart.getByText('Personstatus')).toBeInTheDocument();
-    expect(annenpart.getByText('Bosatt (i følge folkeregisterloven)')).toBeInTheDocument();
+    expect(annenpart.getByText('Bosatt')).toBeInTheDocument();
 
     expect(annenpart.getByText('Region for statsborgerskap')).toBeInTheDocument();
     expect(annenpart.getByText('3.landsborger')).toBeInTheDocument();

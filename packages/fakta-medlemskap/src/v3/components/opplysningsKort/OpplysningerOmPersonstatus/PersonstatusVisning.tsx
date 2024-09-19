@@ -18,7 +18,6 @@ const PersonstatusVisning: FC<Props> = ({ personstatuser, erAnnenpart = false, a
 
   const getPersonstatus = (verdi: PersonstatusPeriode): string => {
     const kodeverk = kodeverkNavn.find(it => it.kode === verdi.type);
-    if (kodeverk?.kode === personstatusType.BOSATT) return `${kodeverk.navn} (i følge folkeregisterloven)`;
     return kodeverk?.navn ?? `Ukjent personstatus: ${verdi?.type.toLowerCase()}`;
   };
 
