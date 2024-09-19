@@ -9,6 +9,7 @@ import { useForm } from 'react-hook-form';
 import { Form } from '@navikt/ft-form-hooks';
 import { VurderMedlemskapAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { AlleKodeverk, ManuellBehandlingResultat } from '@navikt/fp-types';
+
 import VurderingAlternativer from './VurderingAlternativer';
 import { Vurdering, VurderMedlemskapFormValues } from '../../types/vurderingMedlemskapForm';
 import InfoBox from '../InfoBox';
@@ -20,6 +21,7 @@ interface Props {
   submitCallback: (aksjonspunktData: VurderMedlemskapAp) => Promise<void>;
   aksjonspunkter: Aksjonspunkt[];
   manuellBehandlingResultat: ManuellBehandlingResultat | null;
+  ytelse: string;
 }
 
 const inngangsAksjonspunkter = [
@@ -61,6 +63,7 @@ const VurderMedlemsskapAksjonspunktForm: FC<Props> = ({
   submitCallback,
   aksjonspunkter,
   manuellBehandlingResultat,
+  ytelse,
 }) => {
   const [isSubmitting, setSubmitting] = useState(false);
 
@@ -83,7 +86,7 @@ const VurderMedlemsskapAksjonspunktForm: FC<Props> = ({
     <ConditionalWrapper isReadOnly={readOnly}>
       <Form formMethods={formMethods} onSubmit={bekreft}>
         <VStack gap={readOnly ? '2' : '6'}>
-          <VurderingAlternativer alleKodeverk={alleKodeverk} readOnly={readOnly} />
+          <VurderingAlternativer alleKodeverk={alleKodeverk} readOnly={readOnly} ytelse={ytelse} />
           <FaktaBegrunnelseTextFieldNew
             isReadOnly={readOnly}
             isSubmittable={submittable}
