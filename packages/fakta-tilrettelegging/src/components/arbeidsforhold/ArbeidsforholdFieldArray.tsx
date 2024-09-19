@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import dayjs from 'dayjs';
 import { BodyShort, ExpansionCard, Heading, Tag } from '@navikt/ds-react';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { Buldings3Icon, ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
+import { Buildings3Icon, ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import {
   AoIArbeidsforhold,
@@ -100,7 +100,7 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
                   <FlexContainer>
                     <FlexRow>
                       <FlexColumn>
-                        <Buldings3Icon color="var(--a-blue-600)" className={styles.image} />
+                        <Buildings3Icon color="var(--a-blue-600)" className={styles.image} />
                       </FlexColumn>
                       <FlexColumn>
                         <Heading size="small">{arbeidsgiverOpplysning?.navn || arbeidType?.navn}</Heading>
