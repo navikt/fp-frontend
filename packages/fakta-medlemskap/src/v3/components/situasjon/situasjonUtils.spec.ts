@@ -44,7 +44,7 @@ describe('situasjonUtils', () => {
           { fom: '2022-07-01', tom: '2025-02-01', type: 'UTVA' },
         ],
       };
-      expect(getSistePersonstatus(medlemskap, kodeverk)).toBe('Utvandret');
+      expect(getSistePersonstatus(medlemskap, kodeverk)).toBe('Utflyttet');
     });
   });
 

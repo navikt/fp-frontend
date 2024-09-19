@@ -32,7 +32,7 @@ describe('<MedlemskapFaktaIndex>', () => {
     expect(situasjon.getByText('Nordisk')).toBeInTheDocument();
 
     expect(situasjon.getByText('Personstatus')).toBeInTheDocument();
-    expect(situasjon.getByText('Utvandret')).toBeInTheDocument();
+    expect(situasjon.getByText('Utflyttet')).toBeInTheDocument();
 
     expect(screen.getByText('Opplysninger fra søknad')).toBeInTheDocument();
     expect(screen.getByText('Adresser til søker(2) og annen part(2)')).toBeInTheDocument();
@@ -76,7 +76,7 @@ describe('<MedlemskapFaktaIndex>', () => {
     expect(adresser.getByText('Bostedsadresse')).toBeInTheDocument();
     expect(adresser.getByText('01.01.2020 - 01.01.2021')).toBeInTheDocument();
     expect(adresser.getByText('Mäkelänkatu 1 B, FI-00123 Helsinki FIN')).toBeInTheDocument();
-    expect(adresser.getByText('Postadresse i utlandet')).toBeInTheDocument();
+    expect(adresser.getByText('Kontaktadresse utland')).toBeInTheDocument();
     expect(adresser.getByText('Annen part, Kari Nordmann')).toBeInTheDocument();
     expect(
       adresser.getByText('Adresser for annen part registrert i folkeregisteret gyldige på skjæringstidspunktet'),
@@ -106,9 +106,9 @@ describe('<MedlemskapFaktaIndex>', () => {
     expect(personstatusTabellBruker.getByText('Personstatus')).toBeInTheDocument();
     expect(personstatusTabellBruker.getByText('Fra og med')).toBeInTheDocument();
     expect(personstatusTabellBruker.getByText('Til og med')).toBeInTheDocument();
-    expect(personstatusTabellBruker.getByText('Utvandret')).toBeInTheDocument();
+    expect(personstatusTabellBruker.getByText('Utflyttet')).toBeInTheDocument();
     expect(personstatusTabellBruker.getByText('01.01.2024')).toBeInTheDocument();
-    expect(personstatusTabellBruker.getByText('Bosatt')).toBeInTheDocument();
+    expect(personstatusTabellBruker.getByText('Bosatt (f.reg)')).toBeInTheDocument();
     expect(personstatusTabellBruker.getByText('01.01.2019')).toBeInTheDocument();
     expect(personstatusTabellBruker.getByText('01.01.2022')).toBeInTheDocument();
 
@@ -130,7 +130,7 @@ describe('<MedlemskapFaktaIndex>', () => {
     expect(personstatusTabellAnnenpart.getByText('Personstatus')).toBeInTheDocument();
     expect(personstatusTabellAnnenpart.getByText('Fra og med')).toBeInTheDocument();
     expect(personstatusTabellAnnenpart.getByText('Til og med')).toBeInTheDocument();
-    expect(personstatusTabellAnnenpart.getByText('Bosatt')).toBeInTheDocument();
+    expect(personstatusTabellAnnenpart.getByText('Bosatt (f.reg)')).toBeInTheDocument();
     expect(personstatusTabellAnnenpart.getByText('01.01.2019')).toBeInTheDocument();
     expect(personstatusTabellAnnenpart.getByText('01.01.2020')).toBeInTheDocument();
 

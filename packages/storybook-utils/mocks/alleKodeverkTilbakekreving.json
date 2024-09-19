@@ -647,6 +647,11 @@
       "kodeverk": "HISTORIKKINNSLAG_TYPE"
     },
     {
+      "kode": "OPPGAVE_VEDTAK",
+      "navn": "Oppgave før vedtak",
+      "kodeverk": "HISTORIKKINNSLAG_TYPE"
+    },
+    {
       "kode": "FORSLAG_VEDTAK",
       "navn": "Vedtak foreslått og sendt til beslutter",
       "kodeverk": "HISTORIKKINNSLAG_TYPE"
@@ -950,6 +955,16 @@
     {
       "kode": "FEIL_REGEL",
       "navn": "Feil regelforståelse",
+      "kodeverk": "VURDER_AARSAK"
+    },
+    {
+      "kode": "SKJØNN",
+      "navn": "Skjønn",
+      "kodeverk": "VURDER_AARSAK"
+    },
+    {
+      "kode": "UTREDNING",
+      "navn": "Utredning",
       "kodeverk": "VURDER_AARSAK"
     },
     {
