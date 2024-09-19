@@ -8,10 +8,11 @@ import {
   aksjonspunktStatus,
   behandlingStatus,
   behandlingType,
+  fagsakYtelseType,
   opplysningAdresseType as OpplysningAdresseType,
   personstatusType,
 } from '@navikt/fp-kodeverk';
-import { Behandling, MedlemskapAvvik, MedlemskapV3, Soknad } from '@navikt/fp-types';
+import { Behandling, Fagsak, MedlemskapAvvik, MedlemskapV3, Soknad } from '@navikt/fp-types';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
@@ -34,6 +35,11 @@ export default {
   title: 'fakta/fakta-medlemskap-v3',
   component: MedlemskapFaktaIndex,
 };
+const fagsak = {
+  bruker: { navn: 'Ola Nordmann' },
+  annenPart: { navn: 'Kari Nordmann' },
+  fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
+};
 
 const Template: StoryFn<{
   medlemskap: MedlemskapV3;
@@ -55,8 +61,7 @@ const Template: StoryFn<{
     harApneAksjonspunkter
     submittable
     setFormData={() => undefined}
-    brukerNavn="Ola Nordmann"
-    annenpartNavn="Kari Nordmann"
+    fagsak={fagsak as Fagsak}
   />
 );
 

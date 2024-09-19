@@ -23,8 +23,7 @@ const MedlemskapInfoPanel: FC<MedlemskapFaktaProps> = ({
   aksjonspunkter,
   medlemskap,
   soknad,
-  brukerNavn,
-  annenpartNavn,
+  fagsak,
   alleKodeverk,
   readOnly,
   ...rest
@@ -38,6 +37,7 @@ const MedlemskapInfoPanel: FC<MedlemskapFaktaProps> = ({
           aksjonspunkter={aksjonspunkter}
           alleKodeverk={alleKodeverk}
           readOnly={readOnly}
+          ytelse={fagsak.fagsakYtelseType}
           {...rest}
         />
       )}
@@ -54,16 +54,16 @@ const MedlemskapInfoPanel: FC<MedlemskapFaktaProps> = ({
         <OpplysningerOmAdresser
           medlemskap={medlemskap}
           avvik={medlemskap.avvik}
-          brukerNavn={brukerNavn}
-          annenpartNavn={annenpartNavn}
+          brukerNavn={fagsak.bruker.navn}
+          annenpartNavn={fagsak.annenPart?.navn}
           alleKodeverk={alleKodeverk}
           readOnly={readOnly}
         />
         <OpplysningerOmPersonstatus
           medlemskap={medlemskap}
           avvik={medlemskap.avvik}
-          brukerNavn={brukerNavn}
-          annenpartNavn={annenpartNavn}
+          brukerNavn={fagsak.bruker.navn}
+          annenpartNavn={fagsak.annenPart?.navn}
           alleKodeverk={alleKodeverk}
           readOnly={readOnly}
         />
@@ -89,6 +89,7 @@ const MedlemskapInfoPanel: FC<MedlemskapFaktaProps> = ({
             aksjonspunkter={aksjonspunkter}
             alleKodeverk={alleKodeverk}
             readOnly={readOnly}
+            ytelse={fagsak.fagsakYtelseType}
             {...rest}
           />
         )}

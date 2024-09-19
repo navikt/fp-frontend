@@ -36,14 +36,7 @@ const MedlemskapsvilkaretFaktaInitPanelV3: FunctionComponent<FaktaPanelInitProps
     faktaPanelKode={FaktaPanelCode.MEDLEMSKAPSVILKARET_V3}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'MedlemskapInfoPanel.MedlemskapV3' })}
     skalPanelVisesIMeny={erGjeldendeEnv => props.behandling.harSøknad && !erGjeldendeEnv('production')}
-    renderPanel={data => (
-      <MedlemskapFaktaIndexV3
-        medlemskap={data.medlemskapV3}
-        brukerNavn={props.fagsak.bruker.navn}
-        annenpartNavn={props.fagsak.annenPart?.navn}
-        {...data}
-      />
-    )}
+    renderPanel={data => <MedlemskapFaktaIndexV3 medlemskap={data.medlemskapV3} fagsak={props.fagsak} {...data} />}
   />
 );
 

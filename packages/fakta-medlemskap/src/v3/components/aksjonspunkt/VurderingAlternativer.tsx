@@ -4,16 +4,43 @@ import { Datepicker, RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks'
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { useFormContext } from 'react-hook-form';
 import { AlleKodeverk } from '@navikt/fp-types';
-import { KodeverkType, VilkarType } from '@navikt/fp-kodeverk';
+import { fagsakYtelseType, KodeverkType, VilkarType } from '@navikt/fp-kodeverk';
 import { Vurdering, VurderMedlemskapFormValues } from '../../types/vurderingMedlemskapForm';
 import { useIntl } from 'react-intl';
 
 interface Props {
   alleKodeverk: AlleKodeverk;
   readOnly: boolean;
+  ytelse: string;
 }
 
-const VurderingAlternativer = ({ alleKodeverk, readOnly }: Props) => {
+const lagVurderingsAlternativer = (
+  ytelse: string,
+): {
+  value: string;
+  label: string;
+}[] => {
+  return [
+    {
+      label: 'Oppfylt',
+      value: Vurdering.OPPFYLT,
+    },
+    ...(ytelse !== fagsakYtelseType.ENGANGSSTONAD
+      ? [
+          {
+            label: 'Delvis oppfylt',
+            value: Vurdering.DELVIS_OPPFYLT,
+          },
+        ]
+      : []),
+    {
+      label: 'Ikke oppfylt',
+      value: Vurdering.IKKE_OPPFYLT,
+    },
+  ];
+};
+
+const VurderingAlternativer = ({ alleKodeverk, readOnly, ytelse }: Props) => {
   const { watch } = useFormContext<VurderMedlemskapFormValues>();
   const vurdering = watch('vurdering');
 
@@ -30,20 +57,7 @@ const VurderingAlternativer = ({ alleKodeverk, readOnly }: Props) => {
         })}
         validate={[required]}
         isReadOnly={readOnly}
-        radios={[
-          {
-            label: 'Oppfylt',
-            value: Vurdering.OPPFYLT,
-          },
-          {
-            label: 'Delvis oppfylt',
-            value: Vurdering.DELVIS_OPPFYLT,
-          },
-          {
-            label: 'Ikke oppfylt',
-            value: Vurdering.IKKE_OPPFYLT,
-          },
-        ]}
+        radios={lagVurderingsAlternativer(ytelse)}
       />
       {vurdering && [Vurdering.DELVIS_OPPFYLT, Vurdering.IKKE_OPPFYLT].includes(vurdering) && (
         <SelectField
