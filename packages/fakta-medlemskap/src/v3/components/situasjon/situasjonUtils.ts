@@ -9,21 +9,25 @@ const formaterLand = (landNavn: string, intl: IntlShape) => {
   return intl.formatMessage({ id: 'Situasjon.ILand' }, { land: toTitleCapitalization(landNavn) });
 };
 
-export const getSisteRegion = (medlemskap: MedlemskapV3, alleKodeverk: AlleKodeverk): string => {
+export const getSisteRegion = (medlemskap: MedlemskapV3, alleKodeverk: AlleKodeverk): string | null => {
   const alleRegioner = alleKodeverk[KodeverkType.REGION];
   const nyesteRegion = medlemskap.regioner.sort(sorterPerioder)[0];
-  return alleRegioner.find(r => r.kode === nyesteRegion.type)?.navn ?? '-';
+  return alleRegioner.find(r => r.kode === nyesteRegion.type)?.navn ?? null;
 };
 
-export const getSistePersonstatus = (medlemskap: MedlemskapV3, alleKodeverk: AlleKodeverk): string => {
+export const getSistePersonstatus = (medlemskap: MedlemskapV3, alleKodeverk: AlleKodeverk): string | null => {
   const nyeste = medlemskap.personstatuser.sort(sorterPerioder)[0];
   if (nyeste) {
     return getKodeverknavnFn(alleKodeverk)(nyeste.type, KodeverkType.PERSONSTATUS_TYPE);
   }
-  return '-';
+  return null;
 };
 
-export const getSisteBostedsLand = (medlemskap: MedlemskapV3, alleKodeverk: AlleKodeverk, intl: IntlShape): string => {
+export const getSisteBostedsLand = (
+  medlemskap: MedlemskapV3,
+  alleKodeverk: AlleKodeverk,
+  intl: IntlShape,
+): string | null => {
   const nyeste = medlemskap.adresser
     .filter(adresse => adresse.adresse.adresseType === opplysningAdresseType.BOSTEDSADRESSE)
     .sort(sorterPerioder)[0]?.adresse.land;
@@ -31,7 +35,7 @@ export const getSisteBostedsLand = (medlemskap: MedlemskapV3, alleKodeverk: Alle
     const landNavn = getKodeverknavnFn(alleKodeverk)(nyeste, kodeverkTyper.LANDKODER);
     if (landNavn) return formaterLand(landNavn, intl);
   }
-  return nyeste ?? `-`;
+  return nyeste ?? null;
 };
 
 export const formaterUtenlandsopphold = (

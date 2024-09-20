@@ -5,7 +5,7 @@ import { FaktaKilde, getFormateringsIdForKilde } from '../../faktaKilde';
 
 interface Props {
   labelFormatId: `SituasjonLabel.${string}`;
-  value: string;
+  value: string | null;
   kilde: FaktaKilde;
 }
 

@@ -56,7 +56,7 @@ const PersonstatusVisning: FC<Props> = ({ personstatuser, erAnnenpart = false, a
               <DateLabel dateString={ps.fom} />
             </Table.DataCell>
             <Table.DataCell style={rowStyle(index)}>
-              {ps.tom === TIDENES_ENDE ? undefined : <DateLabel dateString={ps.tom} />}
+              {!(ps.tom === null || ps.tom === TIDENES_ENDE) && <DateLabel dateString={ps.tom} />}
             </Table.DataCell>
           </Table.Row>
         ))}
