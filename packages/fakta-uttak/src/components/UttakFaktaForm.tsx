@@ -321,7 +321,7 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
       <VerticalSpacer sixteenPx />
       <VerticalSpacer sixteenPx />
       <Form formMethods={formMethods} onSubmit={(values: { begrunnelse: string }) => bekreft(values.begrunnelse)}>
-        <FaktaBegrunnelseTextFieldNew name="begrunnelse" isSubmittable isReadOnly={!erRedigerbart} hasBegrunnelse />
+        <FaktaBegrunnelseTextFieldNew isSubmittable isReadOnly={!erRedigerbart} hasBegrunnelse />
         {erRedigerbart && (
           <>
             <VerticalSpacer twentyPx />
