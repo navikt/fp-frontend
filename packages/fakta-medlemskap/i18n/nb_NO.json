@@ -70,12 +70,12 @@
   "MedlemskapInfoPanel.Submit": "Bekreft",
 
   "AksjonspunktHelpText.Bosatt": "Det er usikkert om søker er bosatt i Norge. ",
-  "AksjonspunktHelpText.Oppholdsrett": "Det er usikkert om søkeren har en gyldig oppholdstilatelse.",
-  "AksjonspunktHelpText.MedlPerioder": "Søker har en periode i medlemskapsregisteret.",
-  "AksjonspunktHelpText.EØSManglendeAnsettelseMedInntekt": "Søkeren er en EØS-borger men det er usikkert om søker har oppholdsrett i Norge.",
+  "AksjonspunktHelpText.Oppholdsrett": "Det er usikkert om søkeren har en gyldig oppholdstilatelse. ",
+  "AksjonspunktHelpText.MedlPerioder": "Søker har en periode i medlemskapsregisteret. ",
+  "AksjonspunktHelpText.EØSManglendeAnsettelseMedInntekt": "Søkeren er en EØS-borger men det er usikkert om søker har oppholdsrett i Norge. ",
   "AksjonspunktHelpText.Postfix": "Vurder om søker har medlemskap i folketrygden.",
-  "AksjonspunktHelpText.ErMedlem": "Søker har {vurdering, select, IKKE_OPPFYLT {ikke } DELVIS_OPPFYLT {delvis } other {}}medlemskap i folketrygden.",
 
+  "AksjonspunktHelpText.ErMedlem": "Søker har {vurdering, select, IKKE_OPPFYLT {ikke } DELVIS_OPPFYLT {delvis } other {}}medlemskap i folketrygden.",
 
   "SituasjonLabel.HarBodd": "Har bodd",
   "SituasjonLabel.SkalBo": "Skal bo",

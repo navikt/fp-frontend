@@ -22,6 +22,7 @@ import '@navikt/ds-css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
 import '@navikt/ft-form-hooks/dist/style.css';
 import region from '@navikt/fp-kodeverk/src/region';
+import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 const behandling = {
   uuid: '1',
@@ -181,8 +182,8 @@ const lagMedlemskap = (override: Partial<MedlemskapV3>): MedlemskapV3 => ({
       type: personstatusType.BOSATT,
     },
     {
-      fom: '2022-01-01',
-      tom: '2024-01-01',
+      fom: '2024-01-01',
+      tom: TIDENES_ENDE,
       type: personstatusType.UTVANDRET,
     },
   ],

@@ -108,9 +108,9 @@ describe('<MedlemskapFaktaIndex>', () => {
     expect(personstatusTabellBruker.getByText('Til og med')).toBeInTheDocument();
     expect(personstatusTabellBruker.getByText('Utvandret')).toBeInTheDocument();
     expect(personstatusTabellBruker.getByText('01.01.2024')).toBeInTheDocument();
-    expect(personstatusTabellBruker.getAllByText('01.01.2022')).toHaveLength(2);
     expect(personstatusTabellBruker.getByText('Bosatt')).toBeInTheDocument();
     expect(personstatusTabellBruker.getByText('01.01.2019')).toBeInTheDocument();
+    expect(personstatusTabellBruker.getByText('01.01.2022')).toBeInTheDocument();
 
     const annenpart = within(screen.getByLabelText('Personstatus og statsborgerskap for Kari Nordmann'));
     expect(annenpart.getByText('Annen part, Kari Nordmann')).toBeInTheDocument();

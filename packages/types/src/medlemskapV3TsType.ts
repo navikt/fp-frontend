@@ -2,37 +2,37 @@ import Personadresse from './personadresseTsType';
 
 export type RegionPeriode = Readonly<{
   fom: string;
-  tom: string;
+  tom: string | null;
   type: string;
 }>;
 
 export type PersonstatusPeriode = Readonly<{
   fom: string;
-  tom: string;
+  tom: string | null;
   type: string;
 }>;
 
 export type OppholdstillatelsePeriode = Readonly<{
   fom: string;
-  tom: string;
+  tom: string | null;
   oppholdstillatelseType: string;
 }>;
 
 type UtenlandsoppholdPeriode = Readonly<{
   fom: string;
-  tom: string;
+  tom: string | null;
   landkode: string;
 }>;
 
 export type AdressePeriode = Readonly<{
   fom: string;
-  tom: string;
+  tom: string | null;
   adresse: Personadresse;
 }>;
 
 export type MedlemskapPeriodeV3 = Readonly<{
   fom: string;
-  tom: string;
+  tom: string | null;
   erMedlem: boolean;
   lovvalgsland: string | null;
   studieland: string | null;

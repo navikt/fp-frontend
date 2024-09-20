@@ -95,7 +95,10 @@ const OpplysningerFraMedlemskapsregister = ({ medlemskapsperioder, avvik = [], a
                     return (
                       <Table.Row key={fom + tom + medlemskapTypeString}>
                         <Table.DataCell>
-                          <PeriodLabel dateStringFom={fom} dateStringTom={tom === TIDENES_ENDE ? undefined : tom} />
+                          <PeriodLabel
+                            dateStringFom={fom}
+                            dateStringTom={tom === null || tom === TIDENES_ENDE ? undefined : tom}
+                          />
                         </Table.DataCell>
                         <Table.DataCell>
                           <FormattedMessage
