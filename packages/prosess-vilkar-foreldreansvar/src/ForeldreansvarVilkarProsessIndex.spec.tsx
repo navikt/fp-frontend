@@ -62,7 +62,6 @@ describe('<ForeldreansvarVilkarProsessIndex>', () => {
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, [
       {
-        avslagDato: undefined,
         avslagskode: '1015',
         begrunnelse: 'Dette er en vurdering',
         erVilkarOk: false,
@@ -119,7 +118,6 @@ describe('<ForeldreansvarVilkarProsessIndex>', () => {
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, [
       {
-        avslagDato: undefined,
         avslagskode: '1034',
         begrunnelse: 'Dette er en vurdering',
         erVilkarOk: false,
