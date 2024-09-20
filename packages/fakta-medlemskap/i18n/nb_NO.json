@@ -100,7 +100,7 @@
   "AvvikMerknad.BosattManglendeAdresse": "Dette ble markert fordi det ikke er registrert noen adresser i folkeregisteret",
   "AvvikMerknad.BosattUgyldigPersonstatus": "Dette ble markert fordi noen er registrert som {personstatus}",
   "AvvikMerknad.BosattUtenlandsadresse": "Dette ble markert fordi det er registrert én eller flere adresser i utlandet",
-  "AvvikMerknad.Oppholdsrett": "Dette ble markert fordi søker har én eller flere oppholdstilatelser",
+  "AvvikMerknad.Oppholdsrett": "Dette ble markert fordi søker mangler oppholdstilatelse",
   "AvvikMerknad.MedlPerioder": "Dette ble markert fordi søker har én eller flere perioder i medlemskapsregisteret",
   "AvvikMerknad.EOSManglendeAnsettelseMedInntekt": "Dette ble markert fordi det ikke er registrert inntekt eller annsettelse på søker",
 
