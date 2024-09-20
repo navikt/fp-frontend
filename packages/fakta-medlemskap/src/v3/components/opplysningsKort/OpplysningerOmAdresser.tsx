@@ -65,11 +65,14 @@ const AdresseTabell: FC<AdresseTabellProps> = ({
               return (
                 <Table.Row key={i + fom + tom}>
                   <Table.DataCell style={rowStyle(i)}>
-                    <PeriodLabel dateStringFom={fom} dateStringTom={tom === TIDENES_ENDE ? undefined : tom} />
+                    <PeriodLabel
+                      dateStringFom={fom}
+                      dateStringTom={tom === null || tom === TIDENES_ENDE ? undefined : tom}
+                    />
                   </Table.DataCell>
                   <Table.DataCell style={rowStyle(i)}>{formaterAdresse(adresse)}</Table.DataCell>
                   <Table.DataCell style={rowStyle(i)}>
-                    {adresseKodeverk.find(k => k.kode === adresse.adresseType)?.navn ?? '-'}
+                    {adresseKodeverk.find(k => k.kode === adresse.adresseType)?.navn}
                   </Table.DataCell>
                 </Table.Row>
               );

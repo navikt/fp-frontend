@@ -58,7 +58,7 @@ const RegionVisning: FC<Props> = ({ regioner, erAnnenpart = false, alleKodeverk 
               <DateLabel dateString={r.fom} />
             </Table.DataCell>
             <Table.DataCell style={rowStyle(index)}>
-              {r.tom === TIDENES_ENDE ? '-' : <DateLabel dateString={r.tom} />}
+              {!(r.tom === null || r.tom === TIDENES_ENDE) && <DateLabel dateString={r.tom} />}
             </Table.DataCell>
           </Table.Row>
         ))}

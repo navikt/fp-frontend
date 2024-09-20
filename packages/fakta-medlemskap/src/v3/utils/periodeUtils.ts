@@ -1,6 +1,6 @@
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 
-type Periode = { fom: string; tom: string };
+type Periode = { fom: string; tom: string | null };
 
 export const sorterPerioder = (a: Periode, b: Periode) => {
   const dateAEnd = a.tom ? new Date(a.tom) : new Date(TIDENES_ENDE);

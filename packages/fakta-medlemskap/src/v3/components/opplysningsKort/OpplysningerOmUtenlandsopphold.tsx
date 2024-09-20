@@ -18,17 +18,17 @@ const UtenlandsoppholdListe: FC<{ utlandsopphold: UtlandsoppholdPeriode[]; label
     <div>
       <Label size="small">{label}</Label>
       <ul style={{ marginBlock: 0 }}>
-        {utlandsopphold.map(utenlandsopphold => (
-          <li key={utenlandsopphold.fom}>
+        {utlandsopphold.map(({ fom, tom, landNavn }) => (
+          <li key={fom}>
             <BodyShort size="small">
               <PeriodLabel
                 size="small"
-                dateStringFom={utenlandsopphold.fom}
-                dateStringTom={utenlandsopphold.tom === TIDENES_ENDE ? undefined : utenlandsopphold.tom}
+                dateStringFom={fom}
+                dateStringTom={tom === null || tom === TIDENES_ENDE ? undefined : tom}
               />{' '}
               <FormattedMessage
                 id="OpplysningerOmUtenlandsopphold.iLand"
-                values={{ land: toTitleCapitalization(utenlandsopphold.landNavn) }}
+                values={{ land: toTitleCapitalization(landNavn) }}
               />
             </BodyShort>
           </li>
