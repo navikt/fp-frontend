@@ -69,7 +69,7 @@ describe('<MedlemskapFaktaIndex>', () => {
 
     expect(adresser.getByText('Søker, Ola Nordmann')).toBeInTheDocument();
     expect(
-      adresser.getByText('Adresse for søker registrert i folkeregisteret gyldige for de siste 12 månedene'),
+      adresser.getByText('Adresser for søker registrert i folkeregisteret gyldige for de siste 12 månedene'),
     ).toBeInTheDocument();
     expect(adresser.getByText('01.01.2019 -')).toBeInTheDocument();
     expect(adresser.getByText('Oslogata 1, 1234 Oslo NOR')).toBeInTheDocument();
@@ -79,7 +79,7 @@ describe('<MedlemskapFaktaIndex>', () => {
     expect(adresser.getByText('Postadresse i utlandet')).toBeInTheDocument();
     expect(adresser.getByText('Annen part, Kari Nordmann')).toBeInTheDocument();
     expect(
-      adresser.getByText('Det er mulighet for å se adresse på skjæringspunktet for den andre forelderen'),
+      adresser.getByText('Adresser for annen part registrert i folkeregisteret gyldige på skjæringstidspunktet'),
     ).toBeInTheDocument();
     expect(
       adresser.getByText('Den andre forelderen har samme adresse som søker på skjæringstidspunktet'),
