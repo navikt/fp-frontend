@@ -171,7 +171,7 @@ describe('<MedlemskapFaktaIndex>', () => {
     await userEvent.click(oppholdstillatelser.getByText('Vis mer'));
 
     expect(
-      oppholdstillatelser.getByText('Dette ble markert fordi søker har én eller flere oppholdstilatelser'),
+      oppholdstillatelser.getByText('Dette ble markert fordi søker mangler oppholdstilatelse'),
     ).toBeInTheDocument();
     expect(
       oppholdstillatelser.getByText(
