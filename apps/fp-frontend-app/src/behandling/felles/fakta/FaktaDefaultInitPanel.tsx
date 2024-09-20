@@ -11,28 +11,11 @@ import useFaktaMenyRegistrerer from './useFaktaMenyRegistrerer';
 import FaktaPanelWrapper from './FaktaPanelWrapper';
 import { restBehandlingApiHooks } from '../../../data/behandlingContextApi';
 
-type Env = 'local' | 'dev' | 'production';
-
-function getEnvironment(): Env {
-  const hostname = window.location.hostname;
-
-  if (hostname === 'localhost' || hostname === '127.0.0.1') {
-    return 'local';
-  } else if (hostname.includes('intern.dev.nav.no')) {
-    return 'dev';
-  }
-  return 'production';
-}
-
-function isCurrentEnvironment(env: Env): boolean {
-  return env === getEnvironment();
-}
-
 export type OwnProps<PANEL_DATA> = {
   panelEndepunkter?: RestKey<any, any>[];
   aksjonspunktKoder?: string[];
   overstyringApKoder?: string[];
-  skalPanelVisesIMeny: (erGjeldendeEnv: typeof isCurrentEnvironment) => boolean;
+  skalPanelVisesIMeny: () => boolean;
   renderPanel: (data: PANEL_DATA & StandardFaktaPanelProps) => ReactElement;
   faktaPanelKode: FaktaPanelCode;
   faktaPanelMenyTekst: string;
@@ -56,7 +39,7 @@ const FaktaDefaultInitPanel = <PANEL_DATA,>({
     registrerFaktaPanel,
     faktaPanelKode,
     faktaPanelMenyTekst,
-    skalPanelVisesIMeny(isCurrentEnvironment),
+    skalPanelVisesIMeny(),
     standardPanelProps.harApneAksjonspunkter,
     valgtFaktaSteg,
   );
