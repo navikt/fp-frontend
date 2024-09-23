@@ -171,11 +171,11 @@ describe('<MedlemskapFaktaIndex>', () => {
     await userEvent.click(oppholdstillatelser.getByText('Vis mer'));
 
     expect(
-      oppholdstillatelser.getByText('Dette ble markert fordi søker mangler oppholdstilatelse'),
+      oppholdstillatelser.getByText('Dette ble markert fordi søker mangler oppholdstillatelse'),
     ).toBeInTheDocument();
     expect(
       oppholdstillatelser.getByText(
-        'Perioder med oppholdstilatelser som er registrert i folkegregisteret gyldige for de siste 12 månedene',
+        'Perioder med oppholdstillatelser som er registrert i folkeregisteret gyldige for de siste 12 månedene',
       ),
     ).toBeInTheDocument();
     expect(oppholdstillatelser.getByText('Periode')).toBeInTheDocument();
