@@ -19,8 +19,8 @@ const getAdresse = (adresser: Personadresse[]): string => {
 const getUtlandsadresse = (adresser: Personadresse[]): string => {
   const adresseListe = getAddresses(adresser);
   const utlandsAdresse =
-    adresseListe[opplysningAdresseType.UTENLANDSK_POSTADRESSE] ||
-    adresseListe[opplysningAdresseType.UTENLANDSK_NAV_TILLEGSADRESSE];
+    adresseListe[opplysningAdresseType.POSTADRESSE_UTLAND] ||
+    adresseListe[opplysningAdresseType.MIDLERTIDIG_POSTADRESSE_UTLAND];
   return utlandsAdresse || '-';
 };
 

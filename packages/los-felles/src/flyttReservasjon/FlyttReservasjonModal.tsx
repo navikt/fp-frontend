@@ -11,7 +11,6 @@ import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
 import styles from './flyttReservasjonModal.module.css';
 
-
 const minLength3 = minLength(3);
 const maxLength500 = maxLength(500);
 const minLength7 = minLength(7);
@@ -31,7 +30,6 @@ type SøkFormValues = {
 type LagreFormValues = {
   begrunnelse: string;
 };
-
 
 interface OwnProps {
   showModal: boolean;

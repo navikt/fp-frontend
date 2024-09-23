@@ -6,20 +6,21 @@ import { InntektsmeldingFaktaProps } from './InntektsmeldingFaktaIndex';
 import { BodyLong, Button, Heading, HGrid, HStack, Label, List, Modal, VStack } from '@navikt/ds-react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
-import { addDaysToDate, formatCurrencyNoKr } from '@navikt/ft-utils';
-import { NaturalytelseType } from '@navikt/fp-types/src/arbeidOgInntektsmeldingTsType';
+import { addDaysToDate, formatCurrencyNoKr, TIDENES_ENDE } from '@navikt/ft-utils';
+import { AktivNaturalYtelse, NaturalytelseType } from '@navikt/fp-types/src/arbeidOgInntektsmeldingTsType';
 import { hentDokumentLenke } from '@navikt/fp-konstanter';
 import { ArrowForwardIcon } from '@navikt/aksel-icons';
 import styles from './inntektsmeldingFakta.module.css';
+import { sorterPerioder } from '@navikt/fp-fakta-medlemskap/src/v3/utils/periodeUtils';
 
 export const InntektsmeldingInnhold = ({
-                                         inntektsmelding,
-                                         arbeidsgiverOpplysningerPerId,
-                                         fagsak,
-                                         alleBehandlinger,
-                                         behandling,
-                                         alleKodeverk,
-                                       }: { inntektsmelding: Inntektsmelding } & InntektsmeldingFaktaProps) => {
+  inntektsmelding,
+  arbeidsgiverOpplysningerPerId,
+  fagsak,
+  alleBehandlinger,
+  behandling,
+  alleKodeverk,
+}: { inntektsmelding: Inntektsmelding } & InntektsmeldingFaktaProps) => {
   const intl = useIntl();
 
   return (
@@ -27,7 +28,7 @@ export const InntektsmeldingInnhold = ({
       <HStack gap="4" justify="space-between" align="start">
         <Heading level="3" size="small">
           <FormattedMessage id="InntektsmeldingFaktaPanel.innsendingstidspunkt" />{' '}
-          <DateTimeLabel dateTimeString={inntektsmelding.innsendingstidspunkt} />
+          <DateTimeLabel dateTimeString={inntektsmelding.innsendingstidspunkt} separator="kl" />
         </Heading>
         <LastNedPdfKnapp fagsak={fagsak} inntektsmelding={inntektsmelding} />
       </HStack>
@@ -64,9 +65,9 @@ export const InntektsmeldingInnhold = ({
             <FormattedMessage id="InntektsmeldingFaktaPanel.kontaktperson.navn" />: {inntektsmelding.kontaktpersonNavn}
           </span>
           <span>
-              <FormattedMessage id="InntektsmeldingFaktaPanel.kontaktperson.telefon" />:{' '}
+            <FormattedMessage id="InntektsmeldingFaktaPanel.kontaktperson.telefon" />:{' '}
             {inntektsmelding.kontaktpersonNummer}
-            </span>
+          </span>
         </InntektsmeldingInfoBlokk>
 
         <Startdato
@@ -82,7 +83,6 @@ export const InntektsmeldingInnhold = ({
         <InntektsmeldingInfoBlokk tittel={intl.formatMessage({ id: 'InntektsmeldingFaktaPanel.refusjon.heading' })}>
           <Refusjon inntektsmelding={inntektsmelding} />
         </InntektsmeldingInfoBlokk>
-
       </HGrid>
     </VStack>
   );
@@ -144,13 +144,16 @@ const Refusjon = ({ inntektsmelding }: { inntektsmelding: Inntektsmelding }) => 
       <span>{formatCurrencyNoKr(inntektsmelding.refusjonPrMnd ?? 0)}</span>
       <span>Endringer i perioden:</span>
       <ul>
-        {perioderStigende.map((refusjon) => {
+        {perioderStigende.map(refusjon => {
           return (
             <li key={refusjon.indexKey}>
-              <FormattedMessage id="InntektsmeldingFaktaPanel.refusjon.endring.periode" values={{
-                kroner: formatCurrencyNoKr(refusjon.refusjonsbeløp.verdi),
-                fom: <DateLabel dateString={refusjon.fom} />
-              }} />
+              <FormattedMessage
+                id="InntektsmeldingFaktaPanel.refusjon.endring.periode"
+                values={{
+                  kroner: formatCurrencyNoKr(refusjon.refusjonsbeløp.verdi),
+                  fom: <DateLabel dateString={refusjon.fom} />,
+                }}
+              />
             </li>
           );
         })}
@@ -162,32 +165,37 @@ const Refusjon = ({ inntektsmelding }: { inntektsmelding: Inntektsmelding }) => 
 const BortfalteNaturalYtelser = ({ inntektsmelding }: { inntektsmelding: Inntektsmelding }) => {
   const intl = useIntl();
 
+  const bortfalteNaturalytelser = konverterAktivePerioderTilBortfaltePerioder(inntektsmelding);
   return (
     <InntektsmeldingInfoBlokk
       tittel={intl.formatMessage({ id: 'InntektsmeldingFaktaPanel.bortfalteNaturalytelser.heading' })}
     >
-      {inntektsmelding.bortfalteNaturalytelser.length === 0 ? (
+      {inntektsmelding.aktiveNaturalytelser.length === 0 ? (
         <span>
           <FormattedMessage id="InntektsmeldingFaktaPanel.bortfalteNaturalytelser.ingen" />
         </span>
       ) : (
         <VStack>
-          {inntektsmelding.bortfalteNaturalytelser.map(({ type, periode, beloepPerMnd, indexKey }) => (
-            <VStack key={indexKey}>
-              <span>{NaturalytelseType[type]}</span>
+          {Object.entries(bortfalteNaturalytelser).map(([key, value]) => (
+            <VStack key={key}>
+              <span>{NaturalytelseType[key as keyof typeof NaturalytelseType]}</span>
               <ul>
-                <li>
-                  <FormattedMessage id="InntektsmeldingFaktaPanel.bortfalteNaturalytelser.fom" />{' '}
-                  {/*
-                  NOTE: naturalYtelsene som kommer fra fpsak er invertert. Det vil si de sier når en naturalytelse var AKTIV.
-                  Det er angitt som fra år 0 tom siste dagen. For å finne ut fra når den faller bort må vi derfor bruker tomDato + 1
-                  */}
-                  <DateLabel dateString={addDaysToDate(periode.tomDato, 1)} />
-                </li>
-                <li>
-                  <FormattedMessage id="InntektsmeldingFaktaPanel.bortfalteNaturalytelser.verdi" />:{' '}
-                  {formatCurrencyNoKr(beloepPerMnd.verdi)}
-                </li>
+                {value.map(naturalytelse => (
+                  <>
+                    <li key={naturalytelse.indexKey}>
+                      <FormattedMessage id="InntektsmeldingFaktaPanel.bortfalteNaturalytelser.fom" />{' '}
+                      <DateLabel dateString={naturalytelse.periode.fomDato} />
+                    </li>
+                    <li>
+                      <FormattedMessage id="InntektsmeldingFaktaPanel.bortfalteNaturalytelser.verdi" />:{' '}
+                      {formatCurrencyNoKr(naturalytelse.beloepPerMnd.verdi)}
+                    </li>
+                    {naturalytelse.periode.tomDato !== TIDENES_ENDE && (<li key={naturalytelse.indexKey}>
+                      <FormattedMessage id="InntektsmeldingFaktaPanel.bortfalteNaturalytelser.tom" />{' '}
+                      <DateLabel dateString={naturalytelse.periode.tomDato} />
+                    </li>)}
+                  </>
+                ))}
               </ul>
             </VStack>
           ))}
@@ -196,6 +204,53 @@ const BortfalteNaturalYtelser = ({ inntektsmelding }: { inntektsmelding: Inntekt
     </InntektsmeldingInfoBlokk>
   );
 };
+
+/**
+ * Konverterer liste aktive naturalytelser til liste av bortfalte perioder.
+ * Eksempelvis vil disse aktive periodene resultere i denne bortfalte perioden:
+ * Aktiv periode: {fomDato: '0001-01-01', tomDato: '2024-09-04'} og {fomDato: '2024-09-27', tomDato: '9999-12-31'}
+ * bortfalt periode: {fomDato: '2024-09-05', tomDato: '2024-09-26'}
+ */
+const konverterAktivePerioderTilBortfaltePerioder = (inntektsmelding: Inntektsmelding) => {
+  const gruppertPåType = inntektsmelding.aktiveNaturalytelser.reduce((prev, value) => {
+    const type = value.type;
+    if (type in prev) {
+      return {...prev, [type]: [...prev[type], value]}
+    }
+
+    return {...prev, [type]: [value]}
+  }, {} as Record<string, AktivNaturalYtelse[]>)
+
+  const bortfalteNaturalytelser = {} as Record<string, AktivNaturalYtelse[]>;
+
+  Object.entries(gruppertPåType).map(([key, value]) => {
+    const sortert = value.sort((a,b) => sorterPerioder(
+      {fom: a.periode.fomDato, tom: a.periode.tomDato},
+      {fom: b.periode.fomDato, tom: b.periode.tomDato})
+    ).reverse();
+
+    bortfalteNaturalytelser[key] = sortert.flatMap((current, index, array) => {
+      const next = array[index + 1];
+
+      const nyFom = current.periode.tomDato;
+      const nyTom = next?.periode.fomDato;
+
+      if (nyFom === TIDENES_ENDE) {
+        return [];
+      }
+
+      return [{
+        ...current,
+        periode: {
+          fomDato: addDaysToDate(nyFom, 1),
+          tomDato: nyTom ? addDaysToDate(nyTom, -1) : TIDENES_ENDE,
+        }
+      }]
+    });
+  });
+
+  return bortfalteNaturalytelser;
+}
 
 const InntektsmeldingInfoBlokk = ({ tittel, children }: { tittel: string; children: React.ReactNode }) => {
   return (
@@ -217,7 +272,7 @@ const LastNedPdfKnapp = ({ inntektsmelding, fagsak }: { fagsak: Fagsak; inntekts
         );
       }}
       variant="secondary"
-      size={'small'}
+      size="small"
       icon={<ArrowForwardIcon />}
     >
       <FormattedMessage id="InntektsmeldingFaktaPanel.modal.trigger" />
@@ -267,11 +322,11 @@ const LastNedPdfModalKnapp = ({ inntektsmelding, fagsak }: { fagsak: Fagsak; inn
 };
 
 const BehandlingsOversikt = ({
-                               inntektsmelding,
-                               behandling,
-                               alleBehandlinger,
-                               alleKodeverk,
-                             }: {
+  inntektsmelding,
+  behandling,
+  alleBehandlinger,
+  alleKodeverk,
+}: {
   inntektsmelding: Inntektsmelding;
   behandling: Behandling;
   alleBehandlinger: BehandlingAppKontekst[];
@@ -279,16 +334,14 @@ const BehandlingsOversikt = ({
 }) => {
   const intl = useIntl();
   const bruktIDenneBehandlingen = inntektsmelding.tilknyttedeBehandlingIder.includes(behandling.uuid);
-  const gjeldendeBehandlinger = alleBehandlinger.filter(b => inntektsmelding.tilknyttedeBehandlingIder.includes(b.uuid));
+  const gjeldendeBehandlinger = alleBehandlinger.filter(b =>
+    inntektsmelding.tilknyttedeBehandlingIder.includes(b.uuid),
+  );
 
   const infoTekst = (() => {
     const antallBehandlinger = gjeldendeBehandlinger.length;
     if (bruktIDenneBehandlingen && antallBehandlinger > 1) {
-      return (
-        <FormattedMessage
-          id="InntektsmeldingFaktaPanel.behandling.bruktIDenneOgFlere"
-        />
-      );
+      return <FormattedMessage id="InntektsmeldingFaktaPanel.behandling.bruktIDenneOgFlere" />;
     }
     if (bruktIDenneBehandlingen) {
       return <FormattedMessage id="InntektsmeldingFaktaPanel.behandling.bruktKunIDenne" />;
@@ -314,12 +367,12 @@ const BehandlingsOversikt = ({
               <span>{alleKodeverk.BehandlingType.find(({ kode }) => kode === b.type)?.navn}</span>
               <span>
                 <FormattedMessage id="InntektsmeldingFaktaPanel.behandling.opprettet" />{' '}
-                <DateTimeLabel dateTimeString={b.opprettet} />
+                <DateTimeLabel dateTimeString={b.opprettet} separator="kl" />
               </span>
               {b.avsluttet ? (
                 <span>
                   <FormattedMessage id="InntektsmeldingFaktaPanel.behandling.avsluttet" />{' '}
-                  <DateTimeLabel dateTimeString={b.avsluttet} />
+                  <DateTimeLabel dateTimeString={b.avsluttet} separator="kl" />
                 </span>
               ) : null}
             </VStack>

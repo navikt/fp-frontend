@@ -11,7 +11,7 @@ import FordelingAvBehandlingstypePanel from './fordelingAvBehandlingstype/Fordel
 import TilBehandlingPanel from './tilBehandling/TilBehandlingPanel';
 import OppgaverPerForsteStonadsdagPanel from './antallBehandlingerPerForsteStonadsdag/OppgaverPerForsteStonadsdagPanel';
 import OppgaverSomErApneEllerPaVentPanel from './apneOgPaVentBehandlinger/OppgaverSomErApneEllerPaVentPanel';
-import VentefristUtløperPanel from "./ventefristUtløper/VentefristUtløperPanel";
+import VentefristUtløperPanel from './ventefristUtløper/VentefristUtløperPanel';
 
 interface OwnProps {
   oppgaverForAvdeling: OppgaverForAvdeling[];

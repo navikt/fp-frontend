@@ -37,16 +37,16 @@ const stdoutLogger = winston.createLogger({
   ],
 });
 
-const debug = (msg) => {
-  stdoutLogger.debug(msg.replace(/[\n\r]/g, ""));
+const debug = msg => {
+  stdoutLogger.debug(msg.replace(/[\n\r]/g, ''));
 };
 
-const info = (msg) => {
-  stdoutLogger.info(msg.replace(/[\n\r]/g, ""));
+const info = msg => {
+  stdoutLogger.info(msg.replace(/[\n\r]/g, ''));
 };
 
-const warning = (msg) => {
-  stdoutLogger.warn(msg.replace(/[\n\r]/g, ""));
+const warning = msg => {
+  stdoutLogger.warn(msg.replace(/[\n\r]/g, ''));
 };
 
 const error = (msg, err) => {
@@ -59,16 +59,14 @@ const error = (msg, err) => {
 
 const stream = {
   // Use the http severity
-  write: (message) => stdoutLogger.http(message),
+  write: message => stdoutLogger.http(message),
 };
 
 const skip = () => process.env.NODE_ENV === 'production';
 
 const vanligFormat = ':method :url :status :res[content-length] - :response-time ms';
 
-const morganMiddleware = morgan(
-  vanligFormat, { stream, skip },
-);
+const morganMiddleware = morgan(vanligFormat, { stream, skip });
 
 export default {
   debug,

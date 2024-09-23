@@ -89,7 +89,13 @@ export type {
 export type { default as Vilkar } from './src/vilkarTsType';
 export type { default as Ytelsefordeling } from './src/ytelsefordelingTsType';
 export type { FamilieHendelse, FamilieHendelseSamling, AvklartBarn } from './src/familieHendelseTsType';
-export type { default as Fagsak, Saksnotat, AnnenPartBehandling, BehandlingOppretting, Saksmarkering } from './src/fagsakTsType';
+export type {
+  default as Fagsak,
+  Saksnotat,
+  AnnenPartBehandling,
+  BehandlingOppretting,
+  Saksmarkering,
+} from './src/fagsakTsType';
 export type { default as FagsakEnkel, Person } from './src/fagsakEnkelTsType';
 export type { default as FagsakDataFpTilbake } from './src/fagsakTilbakekrevingTsType';
 export type {
@@ -99,6 +105,18 @@ export type {
   Oppholdstillatelse,
   PersonopplysningMedlem,
 } from './src/medlemskapTsType';
+export type {
+  default as MedlemskapV3,
+  ManuellBehandlingResultat,
+  LegacyManuellMedlemskapsBehandling,
+  LegacyMedlemPeriode,
+  AdressePeriode,
+  RegionPeriode,
+  PersonstatusPeriode,
+  MedlemskapPeriodeV3,
+  OppholdstillatelsePeriode,
+} from './src/medlemskapV3TsType';
+export { MedlemskapAvvik } from './src/medlemskapV3TsType';
 export type { default as Risikoklassifisering } from './src/risikoklassifiseringTsType';
 export type { default as AnkeVurdering } from './src/ankeVurderingTsType';
 export type { default as KlageVurdering, KlageVurderingResultat } from './src/klageVurderingTsType';

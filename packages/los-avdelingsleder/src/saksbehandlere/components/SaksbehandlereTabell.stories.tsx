@@ -51,8 +51,8 @@ Default.args = {
     {
       brukerIdent: 'H11111',
       navn: 'Hildegunn',
-      ansattAvdeling: 'Drammen'
-    }
+      ansattAvdeling: 'Drammen',
+    },
   ],
   hentAvdelingensSaksbehandlere: () => undefined,
 };
@@ -68,12 +68,12 @@ MedSaksbehandlerUtenAnsattAvdeling.args = {
     {
       brukerIdent: 'X1111',
       navn: 'Ukjent saksbehandler (X11111)',
-      ansattAvdeling: null
+      ansattAvdeling: null,
     },
     {
       brukerIdent: 'H11111',
       navn: 'Hildegunn',
-      ansattAvdeling: 'Drammen'
+      ansattAvdeling: 'Drammen',
     },
-  ]
-}
+  ],
+};

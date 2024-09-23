@@ -15,7 +15,7 @@
   "Registrering.Permisjon.SøkerHarAleneomsorg": "Har søker aleneomsorg for barnet?",
   "Registrering.Permisjon.SøkerHarAleneomsorg.Yes": "Ja",
   "Registrering.Permisjon.SøkerHarAleneomsorg.No": "Nei",
-  "Registrering.Permisjon.HarRettPaForeldrepenger": "Har den andre forelderen rett på foreldrepenger?",
+  "Registrering.Permisjon.HarRettPaForeldrepenger": "Har den andre forelderen rett på foreldrepenger i Norge?",
   "Registrering.Permisjon.HarRettPaForeldrepenger.Yes": "Ja",
   "Registrering.Permisjon.HarRettPaForeldrepenger.No": "Nei",
   "Registrering.Permisjon.MorUføretrygd": "Bare far rett og mor mottar uføretryd?",
@@ -256,5 +256,5 @@
   "Registrering.TheOtherParent.No": "Nei",
 
   "PermisjonPanel.MinstEnPeriodeRequired": "Minst en av følgende perioder må være utfylt: fullt uttak, overføring av kvote, utsettelse eller gradering",
-  "PermisjonPanel.DateRangesOverlappingPeriodTypes" : "Perioder kan ikke overlappe i tid (uttak, utsettelse, gradering, overforing, opphold)"
+  "PermisjonPanel.DateRangesOverlappingPeriodTypes": "Perioder kan ikke overlappe i tid (uttak, utsettelse, gradering, overforing, opphold)"
 }

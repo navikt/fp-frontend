@@ -35,23 +35,23 @@ const finnGrafPeriode = (oppgaverSomErApneEllerPaVent: OppgaverSomErApneEllerPaV
     });
 
   // Ekstra kolonne for data med ukjent dato
-  return [
-    dayjs(periodeStart.startOf('month')),
-    dayjs(periodeSlutt.add(1, 'months').startOf('month')),
-  ];
+  return [dayjs(periodeStart.startOf('month')), dayjs(periodeSlutt.add(1, 'months').startOf('month'))];
 };
 
 const finnAntallPerDato = (
   oppgaverSomErApneEllerPaVent: OppgaverSomErApneEllerPaVent[],
 ): KoordinatDatoEllerUkjent[] => {
-  const antallPerDatoOgUkjent = oppgaverSomErApneEllerPaVent.reduce((acc, oppgave) => {
-    const { førsteUttakMåned, antall } = oppgave;
-    const key = førsteUttakMåned || UKJENT_DATO;
-    return {
-      ...acc,
-      [key]: acc[key] ? acc[key] + antall : antall,
-    };
-  }, {} as Record<string, number>);
+  const antallPerDatoOgUkjent = oppgaverSomErApneEllerPaVent.reduce(
+    (acc, oppgave) => {
+      const { førsteUttakMåned, antall } = oppgave;
+      const key = førsteUttakMåned || UKJENT_DATO;
+      return {
+        ...acc,
+        [key]: acc[key] ? acc[key] + antall : antall,
+      };
+    },
+    {} as Record<string, number>,
+  );
 
   return Object.keys(antallPerDatoOgUkjent).map(k => ({ x: k, y: antallPerDatoOgUkjent[k] }));
 };

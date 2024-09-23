@@ -12,7 +12,7 @@ import {
 import { ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Form, TextAreaField } from '@navikt/ft-form-hooks';
-import { decodeHtmlEntity, getLanguageFromSprakkode } from '@navikt/ft-utils';
+import { decodeHtmlEntity, formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 import { hasValidText, maxLength, minLength } from '@navikt/ft-form-validators';
 import { Aksjonspunkt, Dokument, InnsynDokument } from '@navikt/fp-types';
 import { ForeslaVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -180,13 +180,7 @@ const InnsynVedtakForm: FunctionComponent<OwnProps> = ({
           validate={[minLength3, maxLength1500, hasValidText]}
           maxLength={1500}
           readOnly={readOnly}
-          // Må erstatte bindestrek kopiert inn fra Word med vanlig bindestrek
-          parse={value =>
-            value
-              .toString()
-              .replaceAll(/\p{Dash_Punctuation}/gu, '-')
-              .replaceAll('\t', ' ')
-          }
+          parse={formaterFritekst}
           badges={[
             {
               type: 'info',

@@ -35,7 +35,6 @@ describe('<VilkarresultatMedOverstyringProsessIndex>', () => {
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      avslagDato: undefined,
       avslagskode: 'AVSLAG_TEST_1',
       begrunnelse: 'Dette er en begrunnelse',
       erVilkarOk: false,
@@ -88,7 +87,7 @@ describe('<VilkarresultatMedOverstyringProsessIndex>', () => {
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      avslagDato: '2021-12-20',
+      opphørFom: '2021-12-20',
       avslagskode: 'AVSLAG_TEST_1',
       begrunnelse: 'Dette er en begrunnelse',
       erVilkarOk: false,

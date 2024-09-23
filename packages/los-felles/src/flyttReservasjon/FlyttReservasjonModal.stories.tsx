@@ -56,6 +56,6 @@ MedTreffPåSøk.args = {
   saksbehandler: {
     brukerIdent: 'R232323',
     navn: 'Espen Utvikler',
-    ansattAvdeling: 'Avdeling A'
+    ansattAvdeling: 'Avdeling A',
   },
 };

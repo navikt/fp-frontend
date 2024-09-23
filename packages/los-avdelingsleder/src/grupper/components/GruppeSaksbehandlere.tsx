@@ -1,7 +1,7 @@
 import { BodyShort, HStack, Label, UNSAFE_Combobox, VStack } from '@navikt/ds-react';
 import { Form, InputField } from '@navikt/ft-form-hooks';
 import { hasValidName, maxLength, minLength, required } from '@navikt/ft-form-validators';
-import React, { FunctionComponent, useState, useEffect } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { XMarkIcon } from '@navikt/aksel-icons';
@@ -106,7 +106,7 @@ const GruppeSaksbehandlere: FunctionComponent<Props> = ({
             options={options}
             filteredOptions={filteredOptions}
             selectedOptions={[]}
-            onChange={event => setFilterValue(event?.target.value as string)}
+            onChange={setFilterValue}
             onToggleSelected={toggleSelected}
             className={styles.saksbehandlerCombo}
           />

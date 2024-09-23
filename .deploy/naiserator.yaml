@@ -57,6 +57,10 @@ spec:
         {{#each externals as |external|}}
         - host: "{{external}}"
         {{/each}}
+  observability:
+    autoInstrumentation:
+      enabled: true
+      runtime: nodejs
   env:
     - name: HOST
       value: {{ingress}}

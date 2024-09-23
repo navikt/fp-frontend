@@ -4,7 +4,7 @@
   "MedlemskapInfoPanel.EOSBorgerMedOppholdsrett": "Vurder om søker er EØS-borger med oppholdsrett",
   "MedlemskapInfoPanel.IkkeEOSBorgerMedLovligOpphold": "Avklar om søker har lovlig opphold",
   "MedlemskapInfoPanel.HarFortsattMedlemskap": "Vurder om søker fortsatt har gyldig medlemskap i perioden",
-  
+
   "StartdatoForForeldrepengerperiodenForm.StartdatoFør2019": "Startdato kan ikke være før 01.01.2019",
   "StartdatoForForeldrepengerperiodenForm.StartdatoForPerioden": "Startdato for foreldrepengeperioden",
   "StartdatoForForeldrepengerperiodenForm.Vurdering": "Vurdering",
@@ -65,5 +65,114 @@
   "BostedSokerFaktaIndex.Soker": "Søker",
 
   "Personstatus.Hjelpetekst": "Personstatus",
-  "Personstatus.Ukjent": "Ukjent"
+  "Personstatus.Ukjent": "Ukjent",
+
+  "MedlemskapInfoPanel.Submit": "Bekreft",
+
+  "AksjonspunktHelpText.Bosatt": "Det er usikkert om søker er bosatt i Norge. ",
+  "AksjonspunktHelpText.Oppholdsrett": "Det er usikkert om søkeren har en gyldig oppholdstilatelse. ",
+  "AksjonspunktHelpText.MedlPerioder": "Søker har en periode i medlemskapsregisteret. ",
+  "AksjonspunktHelpText.EØSManglendeAnsettelseMedInntekt": "Søkeren er en EØS-borger men det er usikkert om søker har oppholdsrett i Norge. ",
+  "AksjonspunktHelpText.Postfix": "Vurder om søker har medlemskap i folketrygden.",
+
+  "AksjonspunktHelpText.ErMedlem": "Søker har {vurdering, select, IKKE_OPPFYLT {ikke } DELVIS_OPPFYLT {delvis } other {}}medlemskap i folketrygden.",
+
+  "SituasjonLabel.HarBodd": "Har bodd",
+  "SituasjonLabel.SkalBo": "Skal bo",
+  "SituasjonLabel.SisteAdresse": "Siste bostedsadresse",
+  "SituasjonLabel.Statborgerskap": "Statsborgerskap",
+  "SituasjonLabel.Personstatus": "Personstatus",
+
+  "FaktaKilde.Soknad": "FRA SØKNADEN",
+  "FaktaKilde.FREG": "FRA FOLKEREGISTERET",
+  "FaktaKilde.MEDL": "FRA MEDLEMSKAPSREGISTERET",
+
+  "Situasjon.FlereLand": "I flere land",
+  "Situasjon.ILand": "I {land}",
+
+  "OpplysningsKort.UtenlandsoppholdTittel": "Opplysninger fra søknad",
+  "OpplysningsKort.AdresseTittel": "Adresser til søker({adresseCountSoker}){adresseCountAnnenpart, select, none {} other { og annen part({adresseCountAnnenpart})}}",
+  "OpplysningsKort.PersonstatusTittel": "Personstatus og statsborgerskap for søker{ harAnnenpart, select, true { og annen part} other {}}",
+  "OpplysningsKort.MedlemskapsperiodeTittel": "Medlemskapsperioder({count})",
+  "OpplysningsKort.OppholdstillatelseTittel": "Oppholdstillatelse({count})",
+
+  "AvvikMerknad.BosattUtenlandsopphold": "Dette ble markert fordi søker har oppgitt at man skal eller har bodd i utlandet",
+  "AvvikMerknad.BosattManglendeAdresse": "Dette ble markert fordi det ikke er registrert noen adresser i folkeregisteret",
+  "AvvikMerknad.BosattUgyldigPersonstatus": "Dette ble markert fordi noen er registrert som {personstatus}",
+  "AvvikMerknad.BosattUtenlandsadresse": "Dette ble markert fordi det er registrert én eller flere adresser i utlandet",
+  "AvvikMerknad.Oppholdsrett": "Dette ble markert fordi søker mangler oppholdstilatelse",
+  "AvvikMerknad.MedlPerioder": "Dette ble markert fordi søker har én eller flere perioder i medlemskapsregisteret",
+  "AvvikMerknad.EOSManglendeAnsettelseMedInntekt": "Dette ble markert fordi det ikke er registrert inntekt eller annsettelse på søker",
+
+  "OpplysningerOmUtenlandsopphold.BoddForegaaende12.Sporsmaal": "Hvor har du bodd de siste 12 månedene?",
+  "OpplysningerOmUtenlandsopphold.BoddForegaaende12.Svar": "{iNorge, select, true {Jeg har bodd i Norge} other {Jeg har bodd helt eller delvis i utlandet}}",
+  "OpplysningerOmUtenlandsopphold.BoddForegaaende12.HvilkeLand": "Hvilke land og hvor lenge har du bodd der?",
+  "OpplysningerOmUtenlandsopphold.BoNeste12.Sporsmaal": "Hvor skal du bo de neste 12 månedene?",
+  "OpplysningerOmUtenlandsopphold.BoNeste12.Svar": "{iNorge, select, true {Jeg skal bo i Norge} other {Jeg skal bo helt eller delvis i utlandet}}",
+  "OpplysningerOmUtenlandsopphold.BoNeste12.HvilkeLand": "Hvilke land og hvor lenge skal du bo der?",
+  "OpplysningerOmUtenlandsopphold.iLand": "i {land}",
+
+  "OpplysningerOmAdresser.Soker": "Søker, {navn}",
+  "OpplysningerOmAdresser.Soker.Beskrivelse": "Adresser for søker registrert i folkeregisteret gyldige for de siste 12 månedene",
+  "OpplysningerOmAdresser.Annenpart": "Annen part, {navn}",
+  "OpplysningerOmAdresser.Annenpart.Beskrivelse": "Adresser for annen part registrert i folkeregisteret gyldige på skjæringstidspunktet",
+
+  "OpplysningerOmAdresser.Tabell.IngenAdresse": "Ingen adresser funnet for {erAnnenpart, select, true {den andre forelderen} other {søker} }.",
+  "OpplysningerOmAdresser.Tabell.SammeAdresse": "Den andre forelderen har samme adresse som søker på skjæringstidspunktet",
+  "OpplysningerOmAdresser.PeriodeLabel": "Periode",
+  "OpplysningerOmAdresser.AdresseLabel": "Adresse",
+  "OpplysningerOmAdresser.TypeLabel": "Type",
+
+  "OpplysningerOmPersonstatus.Soker": "Søker, {navn}",
+  "OpplysningerOmPersonstatus.Annenpart": "Annen part, {navn}",
+
+  "OpplysningerOmPersonstatus.RegionLabel": "Region for statsborgerskap",
+  "OpplysningerOmPersonstatus.PersonstatusLabel": "Personstatus",
+  "OpplysningerOmPersonstatus.UtvandretLabel": "Utflyttingsdato",
+  "OpplysningerOmPersonstatus.PersonstatusIngen": "Ingen personstatus funnet for {erAnnenpart, select, true {den andre forelderen} other {søker} }.",
+  "OpplysningerOmPersonstatus.RegionIngen": "Ingen region funnet for {erAnnenpart, select, true {den andre forelderen} other {søker} }.",
+  "OpplysningerOmPersonstatus.Fom": "Fra og med",
+  "OpplysningerOmPersonstatus.Tom": "Til og med",
+  "OpplysningerOmPersonstatus.Beskrivelse": "Personstatus og region for statsborgerskap registrert i folkeregisteret for de siste 12 månedene før skjæringstidspunktet",
+
+
+  "OpplysningerFraMedlemskapsregister.Beskrivelse": "Perioder fra medlemskapsregisteret gyldige for de siste 12 månedene",
+  "OpplysningerFraMedlemskapsregister.Tabell.Ingen": "Ingen perioder funnet for søker i medlemskapsregister.",
+  "OpplysningerFraMedlemskapsregister.TabellHeader.Periode": "Periode",
+  "OpplysningerFraMedlemskapsregister.TabellHeader.ErMedlem": "Er medlem",
+  "OpplysningerFraMedlemskapsregister.TabellHeader.LovvalgLand": "Land lovv.",
+  "OpplysningerFraMedlemskapsregister.TabellHeader.Studieland": "Studieland",
+  "OpplysningerFraMedlemskapsregister.TabellHeader.MedlType": "Type medl.",
+  "OpplysningerFraMedlemskapsregister.TabellHeader.Dekningtype": "Dekn. type",
+  "OpplysningerFraMedlemskapsregister.TabellHeader.Beslutningsdato": "Besl. dato",
+
+  "OpplysningerFraMedlemskapsregister.TabellCell.ErMedlem": "{erMedlem, select, true {Ja} false {Nei} other {}}",
+
+
+
+  "OpplysningerOmOppholdstillatelser.Beskrivelse": "Perioder med oppholdstilatelser som er registrert i folkegregisteret gyldige for de siste 12 månedene",
+  "OpplysningerOmOppholdstillatelser.Tabell.Ingen": "Ingen oppholdstillatelser funnet for søker.",
+  "OpplysningerOmOppholdstillatelser.TabellHeader.Periode": "Periode",
+  "OpplysningerOmOppholdstillatelser.TabellHeader.Type": "Type",
+
+  "OpplysningerOmOppholdstillatelser.ReadMore.Tittel": "Hvordan oppholdstillatelser i folkeregistreret registreres",
+  "OpplysningerOmOppholdstillatelser.ReadMore.Innhold": "Når man får en oppholdstillatelse på minst 6 måneder, vil UDI sende en melding til Folkeregisteret om dette. Man kan da bli automatisk registrert bosatt i Norge, og få et fødselsnummer.",
+
+  "MedlemskapLegacy.TidligereVurdering": "Tidligere vurderinger",
+  "MedlemskapLegacy.Begrunnelse.Label": "Begrunnelse fra saksbehandler:",
+
+  "MedlemskapLegacy.ErSokerBosattINorge.Label": "Er søker bosatt i Norge?",
+  "MedlemskapLegacy.ErSokerBosattINorge.True": "Ja",
+  "MedlemskapLegacy.ErSokerBosattINorge.False": "Nei",
+
+  "MedlemskapLegacy.MedlemskapManuell.Label": "Har søker gyldig medlemskap i perioden?",
+  "MedlemskapLegacy.ErSokerEOS.Label": "Er søker EØS borger?",
+
+
+  "VurderMedlemsskapAksjonspunktForm.VurderingLabel": "Er medlemskapsvilkåret oppfylt?",
+  "VurderMedlemsskapAksjonspunktForm.VurderingLabel.ReadOnly": "Vurdering av medlemskapsvilkåret",
+  "VurderMedlemsskapAksjonspunktForm.AvslagsarsakLabel": "Velg en avslagsårsak",
+  "VurderMedlemsskapAksjonspunktForm.AvslagsarsakLabel.ReadOnly": "Avslagsårsak",
+  "VurderMedlemsskapAksjonspunktForm.OpphorFomLabel": "Når opphører medlemskapet?",
+  "VurderMedlemsskapAksjonspunktForm.OpphorFomLabel.ReadOnly": "Opphørsdato"
 }

@@ -19,7 +19,6 @@ import OpptjeningVilkarView from './OpptjeningVilkarView';
 export type FormValues = {
   erVilkarOk?: boolean;
   avslagCode?: string;
-  avslagDato?: string;
   begrunnelse?: string;
 };
 

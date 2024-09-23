@@ -7,14 +7,14 @@ const FORKORTET = '...';
 
 const lagForkortetNavn = (dok: JournalDokument): string => {
   if (!dok.tittel) {
-    return 'Ukjent tittel'
+    return 'Ukjent tittel';
   }
   if (dok.tittel.length > 10) {
-    const kortNavn = dok.tittel.substring(0,9);
+    const kortNavn = dok.tittel.substring(0, 9);
     return kortNavn.concat(FORKORTET);
   }
   return dok.tittel;
-}
+};
 
 type OwnProps = {
   setValgtDokument: (dok: JournalDokument) => void;
@@ -36,7 +36,7 @@ const DokumentVelger: FunctionComponent<OwnProps> = ({ setValgtDokument, valgtDo
     <div className={styles.panel}>
       <div className={styles.toggleGroup}>
         <ToggleGroup defaultValue={valgtDokument.dokumentId} onChange={endreValg}>
-          {dokumenter.map((dok) => (
+          {dokumenter.map(dok => (
             <ToggleGroup.Item value={dok.dokumentId} key={dok.dokumentId}>
               {lagForkortetNavn(dok)}
             </ToggleGroup.Item>

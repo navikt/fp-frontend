@@ -21,6 +21,7 @@ type QueryStrings = {
 const parseErrorDetails = (details: string) => {
   try {
     return JSON.parse(details);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
     return 'Kunne ikke tolke feildetaljer';
   }

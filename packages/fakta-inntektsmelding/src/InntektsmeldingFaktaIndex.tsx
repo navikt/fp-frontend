@@ -72,12 +72,14 @@ export const InntektsmeldingFaktaIndex = ({
   if (ims.length === 0) {
     return (
       <RawIntlProvider value={intl}>
-      <HStack gap="2" justify="center" align="center" className={styles.ingenInntektsmeldinger}>
-        <BodyShort><FormattedMessage id="InntektsmeldingFaktaPanel.ingen" /></BodyShort>
-        <CoffeeIcon />
-      </HStack>
+        <HStack gap="2" justify="center" align="center" className={styles.ingenInntektsmeldinger}>
+          <BodyShort>
+            <FormattedMessage id="InntektsmeldingFaktaPanel.ingen" />
+          </BodyShort>
+          <CoffeeIcon />
+        </HStack>
       </RawIntlProvider>
-    )
+    );
   }
 
   return (
@@ -86,22 +88,22 @@ export const InntektsmeldingFaktaIndex = ({
         <Table.Header>
           <Table.Row>
             <Table.ColumnHeader sortKey="innsendingsårsak" sortable>
-              <FormattedMessage id={'InntektsmeldingFaktaPanel.tabell.header.type'} />
+              <FormattedMessage id="InntektsmeldingFaktaPanel.tabell.header.type" />
             </Table.ColumnHeader>
             <Table.ColumnHeader sortKey="innsendingstidspunkt" sortable>
-              <FormattedMessage id={'InntektsmeldingFaktaPanel.tabell.header.innsendt'} />
+              <FormattedMessage id="InntektsmeldingFaktaPanel.tabell.header.innsendt" />
             </Table.ColumnHeader>
             <Table.ColumnHeader sortKey="arbeidsgiverIdent" sortable>
-              <FormattedMessage id={'InntektsmeldingFaktaPanel.tabell.header.arbeidsgiver'} />
+              <FormattedMessage id="InntektsmeldingFaktaPanel.tabell.header.arbeidsgiver" />
             </Table.ColumnHeader>
             <Table.ColumnHeader sortKey="startDatoPermisjon" sortable>
-              <FormattedMessage id={'InntektsmeldingFaktaPanel.tabell.header.skjæringstidspunkt'} />
+              <FormattedMessage id="InntektsmeldingFaktaPanel.tabell.header.skjæringstidspunkt" />
             </Table.ColumnHeader>
             <Table.ColumnHeader sortKey="inntektPrMnd" sortable>
-              <FormattedMessage id={'InntektsmeldingFaktaPanel.tabell.header.månedsinntekt'} />
+              <FormattedMessage id="InntektsmeldingFaktaPanel.tabell.header.månedsinntekt" />
             </Table.ColumnHeader>
             <Table.ColumnHeader sortKey="tilknyttedeBehandlingIder" sortable>
-              <FormattedMessage id={'InntektsmeldingFaktaPanel.tabell.header.behandling'} />
+              <FormattedMessage id="InntektsmeldingFaktaPanel.tabell.header.behandling" />
             </Table.ColumnHeader>
             <Table.HeaderCell />
           </Table.Row>
@@ -112,7 +114,7 @@ export const InntektsmeldingFaktaIndex = ({
               <Table.ExpandableRow
                 expandOnRowClick
                 togglePlacement="right"
-                key={inntektsmelding.journalpostId}
+                key={`${inntektsmelding.journalpostId}-${inntektsmelding.internArbeidsforholdId}`}
                 content={
                   <InntektsmeldingInnhold
                     alleKodeverk={alleKodeverk}
@@ -126,7 +128,7 @@ export const InntektsmeldingFaktaIndex = ({
               >
                 <Table.DataCell>{InntektsmeldingInnsendingsårsak[inntektsmelding.innsendingsårsak]}</Table.DataCell>
                 <Table.DataCell>
-                  <DateTimeLabel dateTimeString={inntektsmelding.innsendingstidspunkt} />
+                  <DateTimeLabel dateTimeString={inntektsmelding.innsendingstidspunkt} separator="kl" />
                 </Table.DataCell>
                 <Table.DataCell>
                   {arbeidsgiverOpplysningerPerId[inntektsmelding.arbeidsgiverIdent]?.navn ?? '-'}
@@ -212,7 +214,7 @@ const InntektsmeldingStatus = ({
   inntektsmelding: Inntektsmelding;
 }) => {
   const behandlingIMStatus = hentBehandlingIMStatus({ behandling, inntektsmelding });
-  if (behandlingIMStatus === "DENNE") {
+  if (behandlingIMStatus === 'DENNE') {
     return (
       <HStack gap="1" align="center">
         <CircleFillIcon className={styles.behandlingCircleDenne} />
@@ -220,7 +222,7 @@ const InntektsmeldingStatus = ({
       </HStack>
     );
   }
-  if (behandlingIMStatus === "ANDRE") {
+  if (behandlingIMStatus === 'ANDRE') {
     return (
       <HStack gap="1" align="center">
         <CircleFillIcon className={styles.behandlingCircleAndre} />
@@ -238,18 +240,18 @@ const InntektsmeldingStatus = ({
 };
 
 const hentBehandlingIMStatus = ({
-                                  behandling,
-                                  inntektsmelding,
-                                }: {
+  behandling,
+  inntektsmelding,
+}: {
   behandling: Behandling;
   inntektsmelding: Inntektsmelding;
 }) => {
   if (inntektsmelding.tilknyttedeBehandlingIder.includes(behandling.uuid)) {
-    return "DENNE";
+    return 'DENNE';
   }
   if (inntektsmelding.tilknyttedeBehandlingIder.length > 0) {
-    return "ANDRE"
+    return 'ANDRE';
   }
 
-  return "INGEN";
-}
+  return 'INGEN';
+};

@@ -19,6 +19,7 @@ import VedtakEsProsessStegInitPanel from './prosessPaneler/VedtakEsProsessStegIn
 import SoknadsfristEsProsessStegInitPanel from './prosessPaneler/SoknadsfristEsProsessStegInitPanel';
 import FaktaPanelInitProps from '../felles/typer/faktaPanelInitProps';
 import ProsessPanelInitProps, { ProsessPanelExtraInitProps } from '../felles/typer/prosessPanelInitProps';
+import MedlemskapsvilkaretFaktaInitPanelV3 from '../fellesPaneler/fakta/MedlemskapsvilkaretFaktaInitPanelV3';
 
 interface OwnProps {
   behandling: Behandling;
@@ -55,6 +56,7 @@ const EngangsstonadPaneler: FunctionComponent<OwnProps> = ({
         <AdopsjonsvilkaretFaktaInitPanel {...props} fagsak={fagsak} />
         <FodselvilkaretFaktaInitPanel {...props} />
         <MedlemskapsvilkaretFaktaInitPanel {...props} />
+        <MedlemskapsvilkaretFaktaInitPanelV3 {...props} fagsak={fagsak} />
       </>
     ),
     [personoversikt, fagsak],

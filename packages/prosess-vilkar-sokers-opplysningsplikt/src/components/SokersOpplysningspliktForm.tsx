@@ -82,9 +82,7 @@ const formatArbeidsgiver = (
 
 export const getSortedManglendeVedlegg = (soknad: Soknad): ManglendeVedleggSoknad[] =>
   soknad && soknad.manglendeVedlegg
-    ? soknad.manglendeVedlegg
-        .slice()
-        .sort((mv1, mv2) => mv1.dokumentTittel.localeCompare(mv2.dokumentTittel))
+    ? soknad.manglendeVedlegg.slice().sort((mv1, mv2) => mv1.dokumentTittel.localeCompare(mv2.dokumentTittel))
     : [];
 
 const harSoknad = (soknad: Soknad): boolean => soknad !== null && isObject(soknad);

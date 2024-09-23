@@ -67,10 +67,8 @@ const DelOppPeriodeModal: FunctionComponent<OwnProps> = ({ periode, cancel, subm
               description={intl.formatMessage({ id: 'DelOppPeriodeModal.DatePickerBeskrivelse' })}
               label={<FormattedMessage id="DelOppPeriodeModal.DatePickerTittel" />}
               validate={[required, hasValidDate, validerInnenforIntervall(periode.fom, periode.tom, intl)]}
-              disabledDays={{
-                fromDate: dayjs(periode.fom, ISO_DATE_FORMAT).toDate(),
-                toDate: dayjs(periode.tom, ISO_DATE_FORMAT).subtract(1, 'day').toDate(),
-              }}
+              fromDate={dayjs(periode.fom, ISO_DATE_FORMAT).toDate()}
+              toDate={dayjs(periode.tom, ISO_DATE_FORMAT).subtract(1, 'day').toDate()}
             />
             {perioder && (
               <Box background="bg-subtle" padding="2" borderRadius="large" style={{ width: 'max-content' }}>

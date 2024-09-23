@@ -53,7 +53,6 @@ describe('<AdopsjonVilkarProsessIndex>', () => {
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      avslagDato: undefined,
       avslagskode: '1006',
       begrunnelse: 'Dette er en vurdering',
       erVilkarOk: false,

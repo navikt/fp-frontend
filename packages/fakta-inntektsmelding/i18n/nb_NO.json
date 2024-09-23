@@ -39,7 +39,7 @@
   "InntektsmeldingFaktaPanel.månedsinntekt.heading": "Månedsinntekt",
 
   "InntektsmeldingFaktaPanel.startDato.heading": "Første dag med {ytelse}",
-  "InntektsmeldingFaktaPanel.startDato.fraArbeidsgiver":  "Oppgitt av arbeidsgiver",
+  "InntektsmeldingFaktaPanel.startDato.fraArbeidsgiver": "Oppgitt av arbeidsgiver",
 
   "InntektsmeldingFaktaPanel.kilde.heading": "Kilde",
   "InntektsmeldingFaktaPanel.kilde.nav": "NAV",
@@ -53,5 +53,6 @@
   "InntektsmeldingFaktaPanel.bortfalteNaturalytelser.heading": "Naturalytelser som faller bort",
   "InntektsmeldingFaktaPanel.bortfalteNaturalytelser.ingen": "Ingen",
   "InntektsmeldingFaktaPanel.bortfalteNaturalytelser.fom": "Fra og med",
+  "InntektsmeldingFaktaPanel.bortfalteNaturalytelser.tom": "Til og med",
   "InntektsmeldingFaktaPanel.bortfalteNaturalytelser.verdi": "Verdi pr måned"
 }

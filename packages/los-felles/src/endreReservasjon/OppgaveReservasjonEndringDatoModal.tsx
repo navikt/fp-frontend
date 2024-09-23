@@ -1,11 +1,11 @@
-import React, { MouseEvent, FunctionComponent, useCallback, useMemo } from 'react';
-import { useIntl, FormattedMessage } from 'react-intl';
+import React, { FunctionComponent, MouseEvent, useCallback, useMemo } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import dayjs from 'dayjs';
-import { Button, Modal as NavModal, Heading } from '@navikt/ds-react';
+import { Button, Heading, Modal as NavModal } from '@navikt/ds-react';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { dateAfterOrEqual, dateBeforeOrEqual, hasValidDate } from '@navikt/ft-form-validators';
-import { Form, Datepicker } from '@navikt/ft-form-hooks';
+import { Datepicker, Form } from '@navikt/ft-form-hooks';
 
 import Oppgave from '../typer/oppgaveTsType';
 
@@ -81,7 +81,8 @@ const OppgaveReservasjonEndringDatoModal: FunctionComponent<OwnProps> = ({
             label=""
             name="reserverTil"
             validate={[hasValidDate, dateAfterOrEqual(new Date()), dateBeforeOrEqual(thirtyDaysFromNow())]}
-            disabledDays={{ fromDate: new Date(), toDate: thirtyDaysFromNow() }}
+            fromDate={new Date()}
+            toDate={thirtyDaysFromNow()}
           />
         </NavModal.Body>
         <NavModal.Footer>

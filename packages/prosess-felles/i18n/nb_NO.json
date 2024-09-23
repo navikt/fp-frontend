@@ -11,8 +11,8 @@
   "ProsessPanelTemplate.IkkeBehandlet": "Ikke behandlet",
 
   "VilkarResultPicker.Arsak": "Avslagsårsak",
-  "VilkarResultPicker.VilkarDato": "Dato for opphør av medlemskapet",
-  
+  "VilkarResultPicker.OpphorFom": "Dato for opphør av medlemskapet",
+
   "ProsessStegBegrunnelseTextField.ExplanationRequired": "Vurdering",
   "ProsessStegBegrunnelseTextField.ExplanationRequiredReadOnly": "Begrunnelse",
   "ProsessStegBegrunnelseTextField.BegrunnVurdering": "Begrunn vurderingen din",

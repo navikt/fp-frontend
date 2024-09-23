@@ -23,6 +23,17 @@ export default {
   component: PermisjonFaktaIndex,
 };
 
+const fellesInntektsmeldingFelter = {
+  innsendingstidspunkt: '2021-12-06T00:00:00',
+  kildeSystem: 'Altinn',
+  bortfalteNaturalytelser: [],
+  refusjonsperioder: [],
+  innsendingsårsak: 'NY' as const,
+  behandlingsIdeer: [],
+  tilknyttedeBehandlingIder: [],
+  aktiveNaturalytelser: [],
+};
+
 const Template: StoryFn<{
   aksjonspunkter?: Aksjonspunkt[];
   arbeidOgInntekt: ArbeidOgInntektsmelding;
@@ -203,6 +214,7 @@ FlereArbeidsforhold.args = {
     ],
     inntektsmeldinger: [
       {
+        ...fellesInntektsmeldingFelter,
         arbeidsgiverIdent: '910909088',
         eksternArbeidsforholdId: 'ARB001-001',
         inntektPrMnd: 30000,
@@ -340,6 +352,7 @@ FlereArbeidsforholdFraSammeArbeidsgiver.args = {
     ],
     inntektsmeldinger: [
       {
+        ...fellesInntektsmeldingFelter,
         arbeidsgiverIdent: '910909088',
         eksternArbeidsforholdId: 'ARB001-001-asdfasdfasdf-asdfadsfertbrtynet65y454hrthfdsgfbdsfgb',
         inntektPrMnd: 30000,
@@ -352,6 +365,7 @@ FlereArbeidsforholdFraSammeArbeidsgiver.args = {
         dokumentId: '2',
       },
       {
+        ...fellesInntektsmeldingFelter,
         arbeidsgiverIdent: '910909088',
         eksternArbeidsforholdId: 'ARB001-002',
         inntektPrMnd: 10000,

@@ -1,21 +1,21 @@
-name: "CodeQL"
+name: 'CodeQL'
 
 on:
   push:
-    branches: [ "master" ]
+    branches: ['master']
   pull_request:
-    branches: [ "master" ]
+    branches: ['master']
   schedule:
     - cron: '0 0 * * 0,4'
 
 jobs:
   codeql:
-   name: CodeQl
-   permissions:
-     actions: read
-     contents: read
-     security-events: write
-   uses: navikt/fp-gha-workflows/.github/workflows/codeql.yml@main
-   with:
-    language: javascript
-   secrets: inherit
+    name: CodeQl
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+    uses: navikt/fp-gha-workflows/.github/workflows/codeql.yml@main
+    with:
+      language: javascript
+    secrets: inherit

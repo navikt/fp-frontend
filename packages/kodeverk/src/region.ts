@@ -1,6 +1,8 @@
 const region = {
-  UDEFINERT: '-',
+  ANNET: 'ANNET',
+  EOS: 'EOS',
   NORDEN: 'NORDEN',
+  UDEFINERT: '-',
 };
 
 export default region;

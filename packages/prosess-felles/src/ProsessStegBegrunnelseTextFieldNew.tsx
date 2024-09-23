@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 
 import { TextAreaField } from '@navikt/ft-form-hooks';
-import { decodeHtmlEntity, createIntl } from '@navikt/ft-utils';
+import { decodeHtmlEntity, createIntl, formaterFritekst } from '@navikt/ft-utils';
 import { hasValidText, maxLength, minLength, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
 import { Aksjonspunkt } from '@navikt/fp-types';
 
@@ -64,8 +64,7 @@ const ProsessStegBegrunnelseTextField: FunctionComponent<OwnProps> & StaticFunct
         validate={[requiredIfCustomFunctionIsTrueNew(isRequiredFn), minLength3, maxLength1500, hasValidText]}
         maxLength={2000}
         readOnly={readOnly}
-        // Må erstatte bindestrek kopiert inn fra Word med vanlig bindestrek
-        parse={value => value.toString().replaceAll(/\p{Dash_Punctuation}/gu, '-')}
+        parse={formaterFritekst}
       />
     </div>
   );

@@ -1,24 +1,24 @@
 {{#each files}}
-{{#if components}}
-{{#if components.[0].title}}
-== {{abbrevFilename}}
+  {{#if components}}
+    {{#if components.[0].title}}
+      ==
+      {{abbrevFilename}}
 
-{{#each components}}
-=== {{title}}
+      {{#each components}}
+        ===
+        {{title}}
 
-{{{description}}}
+        {{{description}}}
 
-{{#if props}}
-[options="header"]
-|===
-|Property | Type | Required | Default value | Description
-{{#each props}}
-|{{@key}}|{{type.name}}|{{#if required}}yes{{else}}no{{/if}}|{{defaultValue.value}}|{{description}}
-{{/each}}
+        {{#if props}}
+          [options="header"] |=== |Property | Type | Required | Default value | Description
+          {{#each props}}
+            |{{@key}}|{{type.name}}|{{#if required}}yes{{else}}no{{/if}}|{{defaultValue.value}}|{{description}}
+          {{/each}}
 
-|===
-{{/if}}
-{{/each}}
-{{/if}}
-{{/if}}
+          |===
+        {{/if}}
+      {{/each}}
+    {{/if}}
+  {{/if}}
 {{/each}}
