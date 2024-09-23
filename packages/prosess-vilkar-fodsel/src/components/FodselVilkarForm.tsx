@@ -23,7 +23,6 @@ const avslagsarsakerES = ['1002', '1003', '1032'];
 type FormValues = {
   erVilkarOk?: boolean;
   avslagCode?: string;
-  avslagDato?: string;
   begrunnelse?: string;
 };
 

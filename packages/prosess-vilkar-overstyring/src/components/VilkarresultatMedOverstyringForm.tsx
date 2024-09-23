@@ -64,7 +64,7 @@ const getCustomVilkarTextForIkkeOppfylt = (behandlingType: string, medlemskapFom
 type FormValues = {
   erVilkarOk?: boolean;
   avslagCode?: string;
-  avslagDato?: string;
+  opphørFom?: string;
   begrunnelse?: string;
   isOverstyrt?: boolean;
 };

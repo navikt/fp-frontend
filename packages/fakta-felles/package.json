@@ -12,7 +12,6 @@
     "tsc": "tsc --pretty",
     "eslint": "eslint \"src/**/*.ts*\" --color",
     "eslint:fix": "eslint --fix \"src/**/*.ts*\" --color",
-    "stylelint": "stylelint \"src/**/*.module.css\"",
     "prettier": "prettier --write src",
     "clean": "rm -rf ./dist ./node_modules"
   },
@@ -38,7 +37,6 @@
     "@testing-library/user-event": "14.5.2",
     "cross-env": "7.0.3",
     "eslint": "9.10.0",
-    "stylelint": "16.9.0",
     "typescript": "5.6.2",
     "vite": "5.4.6",
     "vitest": "2.1.1"

@@ -9,7 +9,6 @@ import EkspansjonsKort from '../ekspansjonsKort/EkspansjonsKort';
 import { FaktaKilde } from '../../faktaKilde';
 import { sorterPerioder } from '../../utils/periodeUtils';
 import { relevantForMedl } from '../ekspansjonsKort/medlemsAvvik';
-import { getLandnavnFraLandkode } from '../../utils/landUtils';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 interface Props {
@@ -25,8 +24,8 @@ const OpplysningerFraMedlemskapsregister = ({ medlemskapsperioder, avvik = [], a
   const medlemskapTypeKodeverk = alleKodeverk[KodeverkType.MEDLEMSKAP_TYPE];
   const dekningTypeKodeverk = alleKodeverk[KodeverkType.MEDLEMSKAP_DEKNING];
 
-  const skalViseStudieland = medlemskapsperioder.find(mp => mp.studieland !== null);
-  const skalViseLovvalgtland = medlemskapsperioder.find(mp => mp.lovvalgsland !== null);
+  const skalViseStudieland = medlemskapsperioder.find(mp => !!mp.studieland);
+  const skalViseLovvalgtland = medlemskapsperioder.find(mp => !!mp.lovvalgsland);
 
   return (
     <EkspansjonsKort
@@ -86,9 +85,6 @@ const OpplysningerFraMedlemskapsregister = ({ medlemskapsperioder, avvik = [], a
                 .sort(sorterPerioder)
                 .map(
                   ({ fom, tom, medlemskapType, dekningType, beslutningsdato, studieland, lovvalgsland, erMedlem }) => {
-                    const lovvalgtLandString = getLandnavnFraLandkode(lovvalgsland, alleKodeverk);
-                    const studielandString = getLandnavnFraLandkode(studieland, alleKodeverk);
-
                     const dekningTypeString = dekningTypeKodeverk.find(kv => kv.kode === dekningType)?.navn;
                     const medlemskapTypeString = medlemskapTypeKodeverk.find(kv => kv.kode === medlemskapType)?.navn;
 
@@ -106,8 +102,8 @@ const OpplysningerFraMedlemskapsregister = ({ medlemskapsperioder, avvik = [], a
                             values={{ erMedlem }}
                           />
                         </Table.DataCell>
-                        {skalViseLovvalgtland && <Table.DataCell>{lovvalgtLandString}</Table.DataCell>}
-                        {skalViseStudieland && <Table.DataCell>{studielandString}</Table.DataCell>}
+                        {lovvalgsland && <Table.DataCell>{lovvalgsland}</Table.DataCell>}
+                        {studieland && <Table.DataCell>{studieland}</Table.DataCell>}
                         <Table.DataCell>{medlemskapTypeString}</Table.DataCell>
                         <Table.DataCell>{dekningTypeString}</Table.DataCell>
                         <Table.DataCell>

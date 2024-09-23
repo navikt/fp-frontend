@@ -6,8 +6,6 @@ import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-va
 import { TextAreaField } from '@navikt/ft-form-hooks';
 import { Aksjonspunkt } from '@navikt/fp-types';
 
-import styles from './faktaBegrunnelseTextField.module.css';
-
 import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
@@ -20,6 +18,7 @@ type OwnProps = {
   isSubmittable: boolean;
   hasBegrunnelse: boolean;
   label?: string;
+  hasReadOnlyLabel?: boolean;
   hasVurderingText?: boolean;
   name?: string;
 };
@@ -45,23 +44,26 @@ const FaktaBegrunnelseTextField: FunctionComponent<OwnProps> & StaticFunctions =
   isSubmittable,
   hasBegrunnelse,
   label,
+  hasReadOnlyLabel = false,
   hasVurderingText = false,
   name = 'begrunnelse',
 }) => {
   const code = hasVurderingText ? 'FaktaBegrunnelseTextField.Vurdering' : 'FaktaBegrunnelseTextField.BegrunnEndringene';
-  const textAreaLabel = label || intl.formatMessage({ id: code });
+
+  const getLabel = () => {
+    if (isReadOnly) return hasReadOnlyLabel ? intl.formatMessage({ id: 'FaktaBegrunnelseTextField.Begrunnelse' }) : '';
+    return label || intl.formatMessage({ id: code });
+  };
   return (
     <RawIntlProvider value={intl}>
       {(isSubmittable || hasBegrunnelse) && (
-        <div className={styles.begrunnelseTextField}>
-          <TextAreaField
-            name={name}
-            label={isReadOnly ? '' : textAreaLabel}
-            validate={[required, minLength3, maxLength1500, hasValidText]}
-            maxLength={1500}
-            readOnly={isReadOnly}
-          />
-        </div>
+        <TextAreaField
+          name={name}
+          label={getLabel()}
+          validate={[required, minLength3, maxLength1500, hasValidText]}
+          maxLength={1500}
+          readOnly={isReadOnly}
+        />
       )}
     </RawIntlProvider>
   );

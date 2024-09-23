@@ -28,10 +28,13 @@ const MedlemskapInfoPanel: FC<MedlemskapFaktaProps> = ({
   readOnly,
   ...rest
 }) => {
+  const harAksjonspunkt = aksjonspunkter.some(
+    ap => ap.status === aksjonspunktStatus.OPPRETTET || ap.status === aksjonspunktStatus.UTFORT,
+  );
   return (
     <VStack gap="6">
       <AksjonspunktHelpText aksjonspunkter={aksjonspunkter} medlemskap={medlemskap} />
-      {medlemskap.manuellBehandlingResultat && readOnly && (
+      {harAksjonspunkt && readOnly && (
         <VurderMedlemsskapAksjonspunktForm
           manuellBehandlingResultat={medlemskap.manuellBehandlingResultat}
           aksjonspunkter={aksjonspunkter}
@@ -80,19 +83,16 @@ const MedlemskapInfoPanel: FC<MedlemskapFaktaProps> = ({
           readOnly={readOnly}
         />
       </VStack>
-      {aksjonspunkter.some(
-        ap => ap.status === aksjonspunktStatus.OPPRETTET || ap.status === aksjonspunktStatus.UTFORT,
-      ) &&
-        !readOnly && (
-          <VurderMedlemsskapAksjonspunktForm
-            manuellBehandlingResultat={medlemskap.manuellBehandlingResultat}
-            aksjonspunkter={aksjonspunkter}
-            alleKodeverk={alleKodeverk}
-            readOnly={readOnly}
-            ytelse={fagsak.fagsakYtelseType}
-            {...rest}
-          />
-        )}
+      {harAksjonspunkt && !readOnly && (
+        <VurderMedlemsskapAksjonspunktForm
+          manuellBehandlingResultat={medlemskap.manuellBehandlingResultat}
+          aksjonspunkter={aksjonspunkter}
+          alleKodeverk={alleKodeverk}
+          readOnly={readOnly}
+          ytelse={fagsak.fagsakYtelseType}
+          {...rest}
+        />
+      )}
     </VStack>
   );
 };

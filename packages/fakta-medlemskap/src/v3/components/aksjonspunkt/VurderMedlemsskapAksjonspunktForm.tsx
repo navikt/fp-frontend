@@ -88,6 +88,7 @@ const VurderMedlemsskapAksjonspunktForm: FC<Props> = ({
         <VStack gap={readOnly ? '2' : '6'}>
           <VurderingAlternativer alleKodeverk={alleKodeverk} readOnly={readOnly} ytelse={ytelse} />
           <FaktaBegrunnelseTextFieldNew
+            hasReadOnlyLabel
             isReadOnly={readOnly}
             isSubmittable={submittable}
             hasBegrunnelse={!!begrunnelseVerdi}
