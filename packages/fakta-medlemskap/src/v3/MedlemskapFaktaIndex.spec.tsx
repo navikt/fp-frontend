@@ -64,7 +64,7 @@ describe('<MedlemskapFaktaIndex>', () => {
       adresser.getByText('Dette ble markert fordi det er registrert én eller flere adresser i utlandet'),
     ).toBeInTheDocument();
     expect(
-      adresser.getByText('Dette ble markert fordi det ikke er registrert noen adresser i folkeregisteret'),
+      adresser.getByText('Dette ble markert fordi det ikke er registrert noen bostedsadresser i folkeregisteret'),
     ).toBeInTheDocument();
 
     expect(adresser.getByText('Søker, Ola Nordmann')).toBeInTheDocument();
