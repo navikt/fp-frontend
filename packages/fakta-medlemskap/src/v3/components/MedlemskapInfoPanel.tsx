@@ -84,15 +84,15 @@ const MedlemskapInfoPanel: FC<MedlemskapFaktaProps> = ({
         />
       </VStack>
       {harAksjonspunkt && !readOnly && (
-          <VurderMedlemsskapAksjonspunktForm
-            manuellBehandlingResultat={medlemskap.manuellBehandlingResultat}
-            aksjonspunkter={aksjonspunkter}
-            alleKodeverk={alleKodeverk}
-            readOnly={readOnly}
-            ytelse={fagsak.fagsakYtelseType}
-            {...rest}
-          />
-        )}
+        <VurderMedlemsskapAksjonspunktForm
+          manuellBehandlingResultat={medlemskap.manuellBehandlingResultat}
+          aksjonspunkter={aksjonspunkter}
+          alleKodeverk={alleKodeverk}
+          readOnly={readOnly}
+          ytelse={fagsak.fagsakYtelseType}
+          {...rest}
+        />
+      )}
     </VStack>
   );
 };
