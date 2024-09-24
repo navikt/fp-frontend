@@ -4524,7 +4524,7 @@
     {
       "kode": "ADNR",
       "kodeverk": "PERSONSTATUS_TYPE",
-      "navn": "Aktivt D-nummer"
+      "navn": "D-nummer"
     },
     {
       "kode": "UTAN",
@@ -4960,7 +4960,7 @@
       {
         "kode": "1024",
         "kodeverk": "AVSLAGSARSAK",
-        "navn": "Søker har ikke oppholdsrett",
+        "navn": "Søker har ikke oppholdsrett (EØS)",
         "lovHjemmel": "{\"fagsakYtelseType\": [{\"FP\": [{\"kategori\": \"FP_VK_2\", \"lovreferanse\": \"14-2\"}]}]}"
       },
       {
@@ -5217,7 +5217,7 @@
       {
         "kode": "1024",
         "kodeverk": "AVSLAGSARSAK",
-        "navn": "Søker har ikke oppholdsrett",
+        "navn": "Søker har ikke oppholdsrett (EØS)",
         "lovHjemmel": "{\"fagsakYtelseType\": [{\"FP\": [{\"kategori\": \"FP_VK_2\", \"lovreferanse\": \"14-2\"}]}]}"
       },
       {
