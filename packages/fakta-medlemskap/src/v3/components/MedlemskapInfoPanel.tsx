@@ -31,10 +31,11 @@ const MedlemskapInfoPanel: FC<MedlemskapFaktaProps> = ({
   const harAksjonspunkt = aksjonspunkter.some(
     ap => ap.status === aksjonspunktStatus.OPPRETTET || ap.status === aksjonspunktStatus.UTFORT,
   );
+
   return (
     <VStack gap="6">
       <AksjonspunktHelpText aksjonspunkter={aksjonspunkter} medlemskap={medlemskap} />
-      {harAksjonspunkt && readOnly && (
+      {medlemskap.manuellBehandlingResultat && readOnly && (
         <VurderMedlemsskapAksjonspunktForm
           manuellBehandlingResultat={medlemskap.manuellBehandlingResultat}
           aksjonspunkter={aksjonspunkter}
@@ -53,14 +54,14 @@ const MedlemskapInfoPanel: FC<MedlemskapFaktaProps> = ({
       <SituasjonsOversikt medlemskap={medlemskap} soknad={soknad} alleKodeverk={alleKodeverk} />
 
       <VStack gap="2">
-        <OpplysningerOmUtenlandsopphold soknad={soknad} avvik={medlemskap.avvik} readOnly={readOnly} />
+        <OpplysningerOmUtenlandsopphold soknad={soknad} avvik={medlemskap.avvik} skalViseAvvik={harAksjonspunkt} />
         <OpplysningerOmAdresser
           medlemskap={medlemskap}
           avvik={medlemskap.avvik}
           brukerNavn={fagsak.bruker.navn}
           annenpartNavn={fagsak.annenPart?.navn}
           alleKodeverk={alleKodeverk}
-          readOnly={readOnly}
+          skalViseAvvik={harAksjonspunkt}
         />
         <OpplysningerOmPersonstatus
           medlemskap={medlemskap}
@@ -68,19 +69,19 @@ const MedlemskapInfoPanel: FC<MedlemskapFaktaProps> = ({
           brukerNavn={fagsak.bruker.navn}
           annenpartNavn={fagsak.annenPart?.navn}
           alleKodeverk={alleKodeverk}
-          readOnly={readOnly}
+          skalViseAvvik={harAksjonspunkt}
         />
         <OpplysningerFraMedlemskapsregister
           medlemskapsperioder={medlemskap.medlemskapsperioder}
           avvik={medlemskap.avvik}
           alleKodeverk={alleKodeverk}
-          readOnly={readOnly}
+          skalViseAvvik={harAksjonspunkt}
         />
         <OpplysningerOmOppholdstillatelser
           oppholdstillatelser={medlemskap.oppholdstillatelser}
           avvik={medlemskap.avvik}
           alleKodeverk={alleKodeverk}
-          readOnly={readOnly}
+          skalViseAvvik={harAksjonspunkt}
         />
       </VStack>
       {harAksjonspunkt && !readOnly && (

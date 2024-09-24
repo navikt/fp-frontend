@@ -72,10 +72,10 @@ describe('<MedlemskapFaktaIndex>', () => {
       adresser.getByText('Adresser for søker registrert i folkeregisteret gyldige for de siste 12 månedene'),
     ).toBeInTheDocument();
     expect(adresser.getByText('01.01.2019 -')).toBeInTheDocument();
-    expect(adresser.getByText('Oslogata 1, 1234 Oslo NOR')).toBeInTheDocument();
+    expect(adresser.getByText('Oslogata 1, 1234 Oslo Norge')).toBeInTheDocument();
     expect(adresser.getByText('Bostedsadresse')).toBeInTheDocument();
     expect(adresser.getByText('01.01.2020 - 01.01.2021')).toBeInTheDocument();
-    expect(adresser.getByText('Mäkelänkatu 1 B, FI-00123 Helsinki FIN')).toBeInTheDocument();
+    expect(adresser.getByText('Mäkelänkatu 1B, FI-00123 Helsinki Finland')).toBeInTheDocument();
     expect(adresser.getByText('Postadresse i utlandet')).toBeInTheDocument();
     expect(adresser.getByText('Annen part, Kari Nordmann')).toBeInTheDocument();
     expect(

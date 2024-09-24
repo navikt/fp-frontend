@@ -41,17 +41,17 @@ const UtenlandsoppholdListe: FC<{ utlandsopphold: UtlandsoppholdPeriode[]; label
 interface Props {
   soknad: Soknad;
   avvik: MedlemskapAvvik[];
-  readOnly: boolean;
+  skalViseAvvik: boolean;
 }
 
-const OpplysningerOmUtenlandsopphold: FC<Props> = ({ avvik = [], soknad: { oppgittTilknytning }, readOnly }) => {
+const OpplysningerOmUtenlandsopphold: FC<Props> = ({ avvik = [], soknad: { oppgittTilknytning }, skalViseAvvik }) => {
   const intl = useIntl();
 
   const { oppholdSistePeriode, oppholdNestePeriode, utlandsoppholdFor, utlandsoppholdEtter } = oppgittTilknytning;
 
   return (
     <EkspansjonsKort
-      readOnly={readOnly}
+      skalViseAvvik={skalViseAvvik}
       tittel={intl.formatMessage({ id: 'OpplysningsKort.UtenlandsoppholdTittel' })}
       kilde={FaktaKilde.SOKNAD}
       relevanteAvvik={avvik.filter(a => relevantForUtenlandsopphold.includes(a))}

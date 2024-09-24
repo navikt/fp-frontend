@@ -15,10 +15,15 @@ interface Props {
   medlemskapsperioder: MedlemskapPeriodeV3[];
   avvik: MedlemskapAvvik[] | undefined;
   alleKodeverk: AlleKodeverk;
-  readOnly: boolean;
+  skalViseAvvik: boolean;
 }
 
-const OpplysningerFraMedlemskapsregister = ({ medlemskapsperioder, avvik = [], alleKodeverk, readOnly }: Props) => {
+const OpplysningerFraMedlemskapsregister = ({
+  medlemskapsperioder,
+  avvik = [],
+  alleKodeverk,
+  skalViseAvvik,
+}: Props) => {
   const intl = useIntl();
 
   const medlemskapTypeKodeverk = alleKodeverk[KodeverkType.MEDLEMSKAP_TYPE];
@@ -29,7 +34,7 @@ const OpplysningerFraMedlemskapsregister = ({ medlemskapsperioder, avvik = [], a
 
   return (
     <EkspansjonsKort
-      readOnly={readOnly}
+      skalViseAvvik={skalViseAvvik}
       kilde={FaktaKilde.MEDL}
       tittel={intl.formatMessage(
         { id: 'OpplysningsKort.MedlemskapsperiodeTittel' },

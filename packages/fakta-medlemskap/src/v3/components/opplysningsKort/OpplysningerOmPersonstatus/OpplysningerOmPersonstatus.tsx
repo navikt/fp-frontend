@@ -17,7 +17,7 @@ interface Props {
   brukerNavn: string;
   annenpartNavn?: string;
   alleKodeverk: AlleKodeverk;
-  readOnly: boolean;
+  skalViseAvvik: boolean;
 }
 
 const OpplysningerOmPersonstatus: FC<Props> = ({
@@ -26,13 +26,13 @@ const OpplysningerOmPersonstatus: FC<Props> = ({
   brukerNavn,
   annenpartNavn,
   alleKodeverk,
-  readOnly,
+  skalViseAvvik,
 }) => {
   const intl = useIntl();
 
   return (
     <EkspansjonsKort
-      readOnly={readOnly}
+      skalViseAvvik={skalViseAvvik}
       tittel={intl.formatMessage({ id: 'OpplysningsKort.PersonstatusTittel' }, { harAnnenpart: !!annenpart })}
       kilde={FaktaKilde.FREG}
       relevanteAvvik={avvik.filter(a => relevantForPersonstatus.includes(a))}
