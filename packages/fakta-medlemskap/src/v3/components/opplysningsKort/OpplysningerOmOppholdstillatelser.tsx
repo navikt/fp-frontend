@@ -58,7 +58,7 @@ const OpplysningerOmOppholdstillatelser = ({ oppholdstillatelser, avvik = [], al
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {oppholdstillatelser.sort(sorterPerioder).map(({ fom, tom, oppholdstillatelseType }) => {
+              {oppholdstillatelser.sort(sorterPerioder).map(({ fom, tom, type }) => {
                 return (
                   <Table.Row key={fom + tom}>
                     <Table.DataCell>
@@ -68,7 +68,7 @@ const OpplysningerOmOppholdstillatelser = ({ oppholdstillatelser, avvik = [], al
                       />
                     </Table.DataCell>
                     <Table.DataCell>
-                      {oppholdstillatelseTypeKodeverk.find(kv => kv.kode === oppholdstillatelseType)?.navn}
+                      {oppholdstillatelseTypeKodeverk.find(kv => kv.kode === type)?.navn}
                     </Table.DataCell>
                   </Table.Row>
                 );

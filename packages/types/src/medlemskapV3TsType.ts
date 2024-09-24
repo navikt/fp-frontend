@@ -15,7 +15,7 @@ export type PersonstatusPeriode = Readonly<{
 export type OppholdstillatelsePeriode = Readonly<{
   fom: string;
   tom: string | null;
-  oppholdstillatelseType: string;
+  type: string;
 }>;
 
 type UtenlandsoppholdPeriode = Readonly<{
