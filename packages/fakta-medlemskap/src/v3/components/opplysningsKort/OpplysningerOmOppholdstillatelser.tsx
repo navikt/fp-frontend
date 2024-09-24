@@ -15,17 +15,17 @@ interface Props {
   oppholdstillatelser: OppholdstillatelsePeriode[];
   avvik: MedlemskapAvvik[];
   alleKodeverk: AlleKodeverk;
-  readOnly: boolean;
+  skalViseAvvik: boolean;
 }
 
-const OpplysningerOmOppholdstillatelser = ({ oppholdstillatelser, avvik = [], alleKodeverk, readOnly }: Props) => {
+const OpplysningerOmOppholdstillatelser = ({ oppholdstillatelser, avvik = [], alleKodeverk, skalViseAvvik }: Props) => {
   const intl = useIntl();
 
   const oppholdstillatelseTypeKodeverk = alleKodeverk[KodeverkType.OPPHOLDSTILLATELSE_TYPE];
 
   return (
     <EkspansjonsKort
-      readOnly={readOnly}
+      skalViseAvvik={skalViseAvvik}
       kilde={FaktaKilde.FREG}
       tittel={intl.formatMessage(
         { id: 'OpplysningsKort.OppholdstillatelseTittel' },

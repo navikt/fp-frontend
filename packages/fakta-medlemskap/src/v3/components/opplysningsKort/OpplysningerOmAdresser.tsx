@@ -90,7 +90,7 @@ interface Props {
   brukerNavn: string;
   annenpartNavn?: string;
   alleKodeverk: AlleKodeverk;
-  readOnly: boolean;
+  skalViseAvvik: boolean;
 }
 
 const OpplysningerOmAdresser: FC<Props> = ({
@@ -99,13 +99,13 @@ const OpplysningerOmAdresser: FC<Props> = ({
   brukerNavn,
   annenpartNavn,
   alleKodeverk,
-  readOnly,
+  skalViseAvvik,
 }) => {
   const intl = useIntl();
 
   return (
     <EkspansjonsKort
-      readOnly={readOnly}
+      skalViseAvvik={skalViseAvvik}
       tittel={intl.formatMessage(
         { id: 'OpplysningsKort.AdresseTittel' },
         {

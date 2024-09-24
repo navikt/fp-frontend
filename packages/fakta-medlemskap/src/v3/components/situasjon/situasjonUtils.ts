@@ -32,8 +32,7 @@ export const getSisteBostedsLand = (
     .filter(adresse => adresse.adresse.adresseType === opplysningAdresseType.BOSTEDSADRESSE)
     .sort(sorterPerioder)[0]?.adresse.land;
   if (nyeste) {
-    const landNavn = getKodeverknavnFn(alleKodeverk)(nyeste, kodeverkTyper.LANDKODER);
-    if (landNavn) return formaterLand(landNavn, intl);
+    return formaterLand(nyeste, intl);
   }
   return nyeste ?? null;
 };

@@ -1,7 +1,7 @@
 import { Personadresse, AdressePeriode } from '@navikt/fp-types';
 import { isEqual } from 'lodash';
 
-const emptyIfnull = (text?: string): string => (text == null ? '' : text);
+const emptyIfnull = (text: string | null | undefined): string => (text == null ? '' : text);
 
 export const formaterAdresse = (adresse: Personadresse): string => {
   const { adresselinje1, adresselinje2, adresselinje3, postNummer, poststed, land } = adresse;

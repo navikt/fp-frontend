@@ -1,10 +1,14 @@
 import { opplysningAdresseType, landkoder as Landkode } from '@navikt/fp-kodeverk';
 import { Personadresse } from '@navikt/fp-types';
 
-const emptyIfnull = (text?: string): string => (text == null ? '' : text);
+const emptyIfnull = (text?: string | null): string => (text == null ? '' : text);
 
-const constructAddress = (adresse = '', postnummer = '', poststed = '', land = ''): string =>
-  `${emptyIfnull(adresse)}, ${emptyIfnull(postnummer)} ${emptyIfnull(poststed)} ${emptyIfnull(land)}`;
+const constructAddress = (
+  adresse?: string | null,
+  postnummer?: string | null,
+  poststed?: string | null,
+  land?: string | null,
+): string => `${emptyIfnull(adresse)}, ${emptyIfnull(postnummer)} ${emptyIfnull(poststed)} ${emptyIfnull(land)}`;
 
 export type Adresser = { [key in opplysningAdresseType]?: string };
 

@@ -56,12 +56,12 @@ describe('situasjonUtils', () => {
           {
             fom: '2022-06-02',
             tom: '2025-02-01',
-            adresse: { adresseType: opplysningAdresseType.BOSTEDSADRESSE, land: 'NOR' },
+            adresse: { adresseType: opplysningAdresseType.BOSTEDSADRESSE, land: 'Norge' },
           },
           {
             fom: '2022-07-01',
             tom: '2025-02-01',
-            adresse: { adresseType: opplysningAdresseType.BOSTEDSADRESSE, land: 'FIN' },
+            adresse: { adresseType: opplysningAdresseType.BOSTEDSADRESSE, land: 'Finland' },
           },
           {
             fom: '2022-07-01',
@@ -84,7 +84,7 @@ describe('situasjonUtils', () => {
         {
           fom: '2022-07-01',
           tom: '2025-02-01',
-          landNavn: 'FINLAND',
+          landNavn: 'Finland',
         },
       ];
       expect(formaterUtenlandsopphold(utenlandsopphold, kodeverk, intl)).toBe('I Finland');
@@ -95,12 +95,12 @@ describe('situasjonUtils', () => {
         {
           fom: '2023-07-01',
           tom: '2023-09-01',
-          landNavn: 'DANMARK',
+          landNavn: 'Danmark',
         },
         {
           fom: '2024-07-01',
           tom: '2024-10-01',
-          landNavn: 'FINLAND',
+          landNavn: 'Finland',
         },
       ];
       expect(formaterUtenlandsopphold(utenlandsopphold, kodeverk, intl)).toBe('I flere land');
