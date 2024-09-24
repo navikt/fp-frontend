@@ -134,7 +134,12 @@ const NotatPanel: FunctionComponent<OwnProps> = ({
         <div className={styles.form}>
           <Form formMethods={formMethods} onSubmit={lagre}>
             <VerticalSpacer sixteenPx />
-            <TextAreaField name="beskrivelse" label="" maxLength={1000} validate={[required, maxLength1000, hasValidText]} />
+            <TextAreaField
+              name="beskrivelse"
+              label=""
+              maxLength={1000}
+              validate={[required, maxLength1000, hasValidText]}
+            />
             <VerticalSpacer sixteenPx />
             <FlexContainer>
               <FlexRow spaceBetween>

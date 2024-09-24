@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { AksjonspunktCode, VilkarType, aksjonspunktStatus} from '@navikt/fp-kodeverk';
+import { AksjonspunktCode, VilkarType, aksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { AksessRettigheter, Medlemskap } from '@navikt/fp-types';
 
 import InngangsvilkarPanelInitProps from '../../../felles/typer/inngangsvilkarPanelInitProps';
@@ -37,8 +37,11 @@ const MedlemskapInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsvi
     inngangsvilkarPanelKode="MEDLEMSKAP"
     hentInngangsvilkarPanelTekst={() => ''}
     renderPanel={(data, erOverstyrt, toggleOverstyring) => {
-      const harMedlemskapsAksjonspunkt = data.aksjonspunkter.some(value => value.definisjon === AksjonspunktCode.VURDER_MEDLEMSKAPSVILKÅRET
-        && value.status !== aksjonspunktStatus.AVBRUTT);
+      const harMedlemskapsAksjonspunkt = data.aksjonspunkter.some(
+        value =>
+          value.definisjon === AksjonspunktCode.VURDER_MEDLEMSKAPSVILKÅRET &&
+          value.status !== aksjonspunktStatus.AVBRUTT,
+      );
       return (
         <>
           <OverstyringPanelDef
@@ -46,14 +49,15 @@ const MedlemskapInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsvi
             aksjonspunktKode={AksjonspunktCode.OVERSTYR_MEDLEMSKAPSVILKAR}
             vilkar={data.vilkar}
             vilkarKoder={VILKAR_KODER}
-            panelTekstKode='Inngangsvilkar.Medlemskapsvilkaret'
+            panelTekstKode="Inngangsvilkar.Medlemskapsvilkaret"
             erMedlemskapsPanel
             medlemskap={data.medlemskap}
             toggleOverstyring={toggleOverstyring}
             erOverstyrt={erOverstyrt}
             overrideReadOnly={
-              data.isReadOnly || harMedlemskapsAksjonspunkt || (props.harInngangsvilkarApentAksjonspunkt
-                && !(data.isAksjonspunktOpen || erOverstyrt))
+              data.isReadOnly ||
+              harMedlemskapsAksjonspunkt ||
+              (props.harInngangsvilkarApentAksjonspunkt && !(data.isAksjonspunktOpen || erOverstyrt))
             }
             kanOverstyreAccess={rettigheter.kanOverstyreAccess}
           />
