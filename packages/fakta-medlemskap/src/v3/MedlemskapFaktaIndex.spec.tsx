@@ -146,22 +146,23 @@ describe('<MedlemskapFaktaIndex>', () => {
     ).toBeInTheDocument();
     expect(medlPerioder.getByText('Periode')).toBeInTheDocument();
     expect(medlPerioder.getByText('Er medlem')).toBeInTheDocument();
-    expect(medlPerioder.getByText('Land lovv.')).toBeInTheDocument();
+    expect(medlPerioder.getByText('Lovvalgland')).toBeInTheDocument();
     expect(medlPerioder.getByText('Studieland')).toBeInTheDocument();
-    expect(medlPerioder.getByText('Type medl.')).toBeInTheDocument();
+    expect(medlPerioder.getByText('Lovvalg')).toBeInTheDocument();
     expect(medlPerioder.getByText('Dekn. type')).toBeInTheDocument();
     expect(medlPerioder.getByText('Besl. dato')).toBeInTheDocument();
 
-    expect(medlPerioder.getByText('01.01.2022 - 01.01.2024')).toBeInTheDocument();
+    expect(medlPerioder.getByText('01.01.2023 - 01.01.2024')).toBeInTheDocument();
     expect(medlPerioder.getByText('Ja')).toBeInTheDocument();
-    expect(medlPerioder.getByText('Spania')).toBeInTheDocument();
-    expect(medlPerioder.getByText('Irak')).toBeInTheDocument();
+    expect(medlPerioder.getByText('Norge')).toBeInTheDocument();
+    expect(medlPerioder.getByText('Sverige')).toBeInTheDocument();
     expect(medlPerioder.getByText('Endelig')).toBeInTheDocument();
     expect(medlPerioder.getByText('Full')).toBeInTheDocument();
-    expect(medlPerioder.getByText('01.02.2024')).toBeInTheDocument();
+    expect(medlPerioder.getByText('24.09.2024')).toBeInTheDocument();
 
     expect(medlPerioder.getByText('01.01.2019 - 01.01.2022')).toBeInTheDocument();
     expect(medlPerioder.getByText('Nei')).toBeInTheDocument();
+    expect(medlPerioder.getByText('Finland')).toBeInTheDocument();
     expect(medlPerioder.getByText('Under avklaring')).toBeInTheDocument();
     expect(medlPerioder.getByText('Opphør')).toBeInTheDocument();
     expect(medlPerioder.getByText('01.02.2020')).toBeInTheDocument();

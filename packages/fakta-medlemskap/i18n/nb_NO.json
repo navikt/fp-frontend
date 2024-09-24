@@ -140,9 +140,9 @@
   "OpplysningerFraMedlemskapsregister.Tabell.Ingen": "Ingen perioder funnet for søker i medlemskapsregister.",
   "OpplysningerFraMedlemskapsregister.TabellHeader.Periode": "Periode",
   "OpplysningerFraMedlemskapsregister.TabellHeader.ErMedlem": "Er medlem",
-  "OpplysningerFraMedlemskapsregister.TabellHeader.LovvalgLand": "Land lovv.",
+  "OpplysningerFraMedlemskapsregister.TabellHeader.LovvalgLand": "Lovvalgland",
   "OpplysningerFraMedlemskapsregister.TabellHeader.Studieland": "Studieland",
-  "OpplysningerFraMedlemskapsregister.TabellHeader.MedlType": "Type medl.",
+  "OpplysningerFraMedlemskapsregister.TabellHeader.MedlType": "Lovvalg",
   "OpplysningerFraMedlemskapsregister.TabellHeader.Dekningtype": "Dekn. type",
   "OpplysningerFraMedlemskapsregister.TabellHeader.Beslutningsdato": "Besl. dato",
 
