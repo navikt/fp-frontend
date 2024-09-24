@@ -107,8 +107,8 @@ const OpplysningerFraMedlemskapsregister = ({
                             values={{ erMedlem }}
                           />
                         </Table.DataCell>
-                        {lovvalgsland && <Table.DataCell>{lovvalgsland}</Table.DataCell>}
-                        {studieland && <Table.DataCell>{studieland}</Table.DataCell>}
+                        {skalViseLovvalgtland && <Table.DataCell>{lovvalgsland}</Table.DataCell>}
+                        {skalViseStudieland && <Table.DataCell>{studieland}</Table.DataCell>}
                         <Table.DataCell>{medlemskapTypeString}</Table.DataCell>
                         <Table.DataCell>{dekningTypeString}</Table.DataCell>
                         <Table.DataCell>
