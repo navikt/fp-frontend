@@ -355,7 +355,7 @@
   "HistorikkEndretFeltVerdiType.IkkeLovligOpphold": "Søker har ikke lovlig opphold",
   "HistorikkEndretFeltVerdiType.IkkeOmsorgForBarnet": "Søker har ikke omsorg for barnet",
   "HistorikkEndretFeltVerdiType.IkkeOppfylt": "ikke oppfylt",
-  "HistorikkEndretFeltVerdiType.IkkeOppholdsrett": "Søker har ikke oppholdsrett",
+  "HistorikkEndretFeltVerdiType.IkkeOppholdsrett": "Søker har ikke oppholdsrett (EØS)",
   "HistorikkEndretFeltVerdiType.IkkeRelevantPeriode": "Ikke relevant periode",
   "HistorikkEndretFeltVerdiType.IngenInntektskategori": "Ingen inntektskategori",
   "HistorikkEndretFeltVerdiType.IngenVarigEndringNaering": "Ingen varig endret eller nyoppstartet næring",
