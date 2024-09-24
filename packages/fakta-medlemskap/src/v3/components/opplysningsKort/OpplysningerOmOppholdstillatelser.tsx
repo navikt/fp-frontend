@@ -67,9 +67,7 @@ const OpplysningerOmOppholdstillatelser = ({ oppholdstillatelser, avvik = [], al
                         dateStringTom={tom === null || tom === TIDENES_ENDE ? undefined : tom}
                       />
                     </Table.DataCell>
-                    <Table.DataCell>
-                      {oppholdstillatelseTypeKodeverk.find(kv => kv.kode === type)?.navn}
-                    </Table.DataCell>
+                    <Table.DataCell>{oppholdstillatelseTypeKodeverk.find(kv => kv.kode === type)?.navn}</Table.DataCell>
                   </Table.Row>
                 );
               })}
