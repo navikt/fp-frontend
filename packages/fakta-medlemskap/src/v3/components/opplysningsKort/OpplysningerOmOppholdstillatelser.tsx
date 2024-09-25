@@ -4,9 +4,9 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { BodyLong, BodyShort, Box, ReadMore, Table } from '@navikt/ds-react';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 import { KodeverkType } from '@navikt/fp-kodeverk';
+import { FaktaKilde } from '@navikt/fp-fakta-felles';
 
 import EkspansjonsKort from '../ekspansjonsKort/EkspansjonsKort';
-import { FaktaKilde } from '../../faktaKilde';
 import { sorterPerioder } from '../../utils/periodeUtils';
 import { relevantForOppholdstillatelser } from '../ekspansjonsKort/medlemsAvvik';
 import { TIDENES_ENDE } from '@navikt/ft-utils';

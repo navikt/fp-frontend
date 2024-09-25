@@ -2,8 +2,8 @@ import React, { FC } from 'react';
 import { AlleKodeverk, MedlemskapAvvik, MedlemskapV3 } from '@navikt/fp-types';
 import { Detail, Label, VStack } from '@navikt/ds-react';
 import { FormattedMessage, useIntl } from 'react-intl';
+import { FaktaKilde } from '@navikt/fp-fakta-felles';
 
-import { FaktaKilde } from '../../../faktaKilde';
 import { relevantForPersonstatus } from '../../ekspansjonsKort/medlemsAvvik';
 import EkspansjonsKort from '../../ekspansjonsKort/EkspansjonsKort';
 import { getPersonstatuserSomIkkeErBosatt } from '../../../utils/personstatusUtils';

@@ -1,10 +1,9 @@
-import { HStack } from '@navikt/ds-react';
+import React from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { AlleKodeverk, MedlemskapV3, Soknad } from '@navikt/fp-types';
-import React, { FC } from 'react';
-import { useIntl } from 'react-intl';
+import { FaktaGruppe, FaktaBox, FaktaKilde } from '@navikt/fp-fakta-felles';
+
 import { formaterUtenlandsopphold, getSisteBostedsLand, getSistePersonstatus, getSisteRegion } from './situasjonUtils';
-import Situasjon from './Situasjon';
-import { FaktaKilde } from '../../faktaKilde';
 
 interface Props {
   medlemskap: MedlemskapV3;
@@ -12,37 +11,37 @@ interface Props {
   alleKodeverk: AlleKodeverk;
 }
 
-const SituasjonOversikt: FC<Props> = ({ soknad, medlemskap, alleKodeverk }) => {
+const SituasjonOversikt = ({ soknad, medlemskap, alleKodeverk }: Props) => {
   const intl = useIntl();
 
   return (
-    <HStack gap="2" style={{ display: 'flex' }} aria-label="Situasjons Oversikt">
-      <Situasjon
-        labelFormatId="SituasjonLabel.HarBodd"
+    <FaktaGruppe aria-label="Situasjons Oversikt">
+      <FaktaBox
+        label={<FormattedMessage id="SituasjonLabel.HarBodd" />}
         value={formaterUtenlandsopphold(soknad.oppgittTilknytning.utlandsoppholdFor, alleKodeverk, intl)}
         kilde={FaktaKilde.SOKNAD}
       />
-      <Situasjon
-        labelFormatId="SituasjonLabel.SkalBo"
+      <FaktaBox
+        label={<FormattedMessage id="SituasjonLabel.SkalBo" />}
         value={formaterUtenlandsopphold(soknad.oppgittTilknytning.utlandsoppholdEtter, alleKodeverk, intl)}
         kilde={FaktaKilde.SOKNAD}
       />
-      <Situasjon
-        labelFormatId="SituasjonLabel.SisteAdresse"
+      <FaktaBox
+        label={<FormattedMessage id="SituasjonLabel.SisteAdresse" />}
         value={getSisteBostedsLand(medlemskap, intl)}
         kilde={FaktaKilde.FREG}
       />
-      <Situasjon
-        labelFormatId="SituasjonLabel.Statborgerskap"
+      <FaktaBox
+        label={<FormattedMessage id="SituasjonLabel.Statborgerskap" />}
         value={getSisteRegion(medlemskap, alleKodeverk, intl)}
         kilde={FaktaKilde.FREG}
       />
-      <Situasjon
-        labelFormatId="SituasjonLabel.Personstatus"
+      <FaktaBox
+        label={<FormattedMessage id="SituasjonLabel.Personstatus" />}
         value={getSistePersonstatus(medlemskap, alleKodeverk, intl)}
         kilde={FaktaKilde.FREG}
       />
-    </HStack>
+    </FaktaGruppe>
   );
 };
 
