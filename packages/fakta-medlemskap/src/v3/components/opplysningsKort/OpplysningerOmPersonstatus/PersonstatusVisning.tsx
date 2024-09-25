@@ -39,15 +39,19 @@ const PersonstatusVisning: FC<Props> = ({ personstatuser, erAnnenpart = false, a
     );
   return (
     <Table style={{ tableLayout: 'fixed' }} aria-label={`Personstatus for ${erAnnenpart ? 'annenpart' : 'bruker'}`}>
-      <Table.HeaderCell>
-        <FormattedMessage id="OpplysningerOmPersonstatus.PersonstatusLabel" />
-      </Table.HeaderCell>
-      <Table.HeaderCell>
-        <FormattedMessage id="OpplysningerOmPersonstatus.Fom" />
-      </Table.HeaderCell>
-      <Table.HeaderCell>
-        <FormattedMessage id="OpplysningerOmPersonstatus.Tom" />
-      </Table.HeaderCell>
+      <Table.Header>
+        <Table.Row>
+          <Table.HeaderCell>
+            <FormattedMessage id="OpplysningerOmPersonstatus.PersonstatusLabel" />
+          </Table.HeaderCell>
+          <Table.HeaderCell>
+            <FormattedMessage id="OpplysningerOmPersonstatus.Fom" />
+          </Table.HeaderCell>
+          <Table.HeaderCell>
+            <FormattedMessage id="OpplysningerOmPersonstatus.Tom" />
+          </Table.HeaderCell>
+        </Table.Row>
+      </Table.Header>
       <Table.Body>
         {sortertPersonstatus.map((ps, index) => (
           <Table.Row key={`${ps.fom}-${ps.tom}-${ps.type}`}>

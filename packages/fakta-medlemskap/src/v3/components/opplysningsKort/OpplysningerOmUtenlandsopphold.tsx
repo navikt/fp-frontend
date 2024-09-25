@@ -4,11 +4,11 @@ import { BodyShort, Label } from '@navikt/ds-react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 
-import { FaktaKilde } from '../../faktaKilde';
 import { toTitleCapitalization } from '../../utils/stringUtils';
 import { relevantForUtenlandsopphold } from '../ekspansjonsKort/medlemsAvvik';
 import EkspansjonsKort from '../ekspansjonsKort/EkspansjonsKort';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
+import { FaktaKilde } from '@navikt/fp-fakta-felles';
 
 const UtenlandsoppholdListe: FC<{ utlandsopphold: UtlandsoppholdPeriode[]; label: ReactElement }> = ({
   utlandsopphold,

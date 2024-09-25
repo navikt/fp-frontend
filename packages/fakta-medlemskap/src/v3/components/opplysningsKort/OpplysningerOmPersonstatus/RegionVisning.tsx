@@ -41,15 +41,19 @@ const RegionVisning: FC<Props> = ({ regioner, erAnnenpart = false, alleKodeverk 
     );
   return (
     <Table style={{ tableLayout: 'fixed' }} aria-label={`Region for ${erAnnenpart ? 'annenpart' : 'bruker'}`}>
-      <Table.HeaderCell>
-        <FormattedMessage id="OpplysningerOmPersonstatus.RegionLabel" />
-      </Table.HeaderCell>
-      <Table.HeaderCell>
-        <FormattedMessage id="OpplysningerOmPersonstatus.Fom" />
-      </Table.HeaderCell>
-      <Table.HeaderCell>
-        <FormattedMessage id="OpplysningerOmPersonstatus.Tom" />
-      </Table.HeaderCell>
+      <Table.Header>
+        <Table.Row>
+          <Table.HeaderCell>
+            <FormattedMessage id="OpplysningerOmPersonstatus.RegionLabel" />
+          </Table.HeaderCell>
+          <Table.HeaderCell>
+            <FormattedMessage id="OpplysningerOmPersonstatus.Fom" />
+          </Table.HeaderCell>
+          <Table.HeaderCell>
+            <FormattedMessage id="OpplysningerOmPersonstatus.Tom" />
+          </Table.HeaderCell>
+        </Table.Row>
+      </Table.Header>
       <Table.Body>
         {sortertRegion.map((r, index) => (
           <Table.Row key={`${r.fom}-${r.tom}-${r.type}`}>
