@@ -1,6 +1,6 @@
 import React, { FC, forwardRef, ForwardRefExoticComponent, PropsWithChildren, ReactNode } from 'react';
 import { BodyShort, Box, Detail, HStack, Label, VStack } from '@navikt/ds-react';
-import { FaktaKilde, FaktaKildeLabel } from './FaktaKilde';
+import { FaktaKilde, getLabelForFaktaKilde } from './FaktaKilde';
 
 const FaktaGruppe = forwardRef((props, ref) => (
   <HStack gap="2" style={{ display: 'flex' }} {...props} ref={ref} />
@@ -22,9 +22,7 @@ const FaktaBox: FC<FaktaBoxProps> = ({ label, value, kilde }) => {
           <Label size="small">{label}</Label>
           <BodyShort size="large">{value}</BodyShort>
         </div>
-        <Detail uppercase>
-          <FaktaKildeLabel kilde={kilde} />
-        </Detail>
+        <Detail uppercase>{getLabelForFaktaKilde(kilde)}</Detail>
       </VStack>
     </Box>
   );
