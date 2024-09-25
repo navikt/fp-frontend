@@ -32,7 +32,7 @@ describe('situasjonUtils', () => {
           { fom: '2022-07-01', tom: '2025-02-01', type: 'EOS' },
         ],
       };
-      expect(getSisteRegion(medlemskap, kodeverk)).toBe('EU/EØS');
+      expect(getSisteRegion(medlemskap, kodeverk, intl)).toBe('EU/EØS');
     });
   });
 
@@ -45,7 +45,7 @@ describe('situasjonUtils', () => {
           { fom: '2022-07-01', tom: '2025-02-01', type: 'UTVA' },
         ],
       };
-      expect(getSistePersonstatus(medlemskap, kodeverk)).toBe('Utvandret');
+      expect(getSistePersonstatus(medlemskap, kodeverk, intl)).toBe('Utvandret');
     });
   });
 

@@ -91,6 +91,7 @@
   "Situasjon.ILand": "I {land}",
   "Situasjon.INorge": "I Norge",
   "Situasjon.IUtlandet": "I utlandet",
+  "Situasjon.Ukjent": "Ukjent",
 
   "OpplysningsKort.UtenlandsoppholdTittel": "Opplysninger fra søknad",
   "OpplysningsKort.AdresseTittel": "Adresser til søker({adresseCountSoker}){adresseCountAnnenpart, select, none {} other { og annen part({adresseCountAnnenpart})}}",
