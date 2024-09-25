@@ -93,8 +93,8 @@ const erÅrsakTypeBehandlingEtterKlage = (behandlingArsakTyper: Behandling['beha
     .some(
       bt =>
         bt === BehandlingArsakType.ETTER_KLAGE ||
-        bt === BehandlingArsakType.KLAGE_U_INNTK ||
-        bt === BehandlingArsakType.KLAGE_M_INNTK,
+        bt === BehandlingArsakType.RE_KLAGE_UTEN_END_INNTEKT ||
+        bt === BehandlingArsakType.RE_KLAGE_MED_END_INNTEKT,
     );
 
 const lagÅrsakString = (

@@ -9,7 +9,7 @@ import { FlexContainer, FlexRow, FlexColumn, VerticalSpacer, OverstyringKnapp } 
 import { Form } from '@navikt/ft-form-hooks';
 import { KodeverkMedNavn, Aksjonspunkt, Behandling } from '@navikt/fp-types';
 import {
-  vilkarUtfallType,
+  vilkarUtfall,
   aksjonspunktStatus,
   OverstyringAksjonspunkter,
   behandlingType as BehandlingType,
@@ -178,8 +178,8 @@ const VilkarresultatMedOverstyringForm: FunctionComponent<OwnProps> = ({
       ? !(aksjonspunkt.status === aksjonspunktStatus.OPPRETTET && !aksjonspunkt.kanLoses)
       : false;
 
-  const erOppfylt = vilkarUtfallType.OPPFYLT === status;
-  const originalErVilkarOk = vilkarUtfallType.IKKE_VURDERT !== status ? erOppfylt : undefined;
+  const erOppfylt = vilkarUtfall.OPPFYLT === status;
+  const originalErVilkarOk = vilkarUtfall.IKKE_VURDERT !== status ? erOppfylt : undefined;
 
   return (
     <Form

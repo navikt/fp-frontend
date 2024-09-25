@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useCallback, useState } from 'react';
 import { useIntl } from 'react-intl';
 
-import { vilkarUtfallType, AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { vilkarUtfall, AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { BeregningsresultatProsessIndex } from '@navikt/fp-prosess-beregningsresultat';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { AksessRettigheter, BeregningsresultatEs } from '@navikt/fp-types';
@@ -38,8 +38,8 @@ const BeregningEsProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanel
       skalPanelVisesIMeny={() => true}
       hentOverstyrtStatus={() =>
         requestBehandlingApi.hasPath(BehandlingApiKeys.BEREGNINGRESULTAT_ENGANGSSTONAD.name)
-          ? vilkarUtfallType.OPPFYLT
-          : vilkarUtfallType.IKKE_VURDERT
+          ? vilkarUtfall.OPPFYLT
+          : vilkarUtfall.IKKE_VURDERT
       }
       erOverstyrt={erOverstyrt}
       renderPanel={data => (

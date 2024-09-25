@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Label } from '@navikt/ds-react';
 
 import { Form } from '@navikt/ft-form-hooks';
-import { vilkarUtfallType, AksjonspunktCode, aksjonspunktStatus } from '@navikt/fp-kodeverk';
+import { vilkarUtfall, AksjonspunktCode, aksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import {
   VilkarResultPicker,
@@ -84,7 +84,7 @@ const OpptjeningVilkarAksjonspunktPanel: FunctionComponent<OwnProps> = ({
   });
 
   const isOpenAksjonspunkt = aksjonspunkter.some(ap => ap.status === aksjonspunktStatus.OPPRETTET);
-  const originalErVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
+  const originalErVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfall.OPPFYLT === status;
 
   const onSubmit = useCallback((values: FormValues) => submitCallback(transformValues(values)), [submitCallback]);
 

@@ -10,6 +10,7 @@ import { fagsakYtelseType, behandlingType as bType, behandlingArsakType } from '
 import { KodeverkMedNavn } from '@navikt/fp-types';
 
 import styles from './nyBehandlingModal.module.css';
+import { behandlingArsakTypeTilbakekreving } from '@navikt/fp-kodeverk/src/behandlingArsakType';
 
 const createOptions = (bt: KodeverkMedNavn, enabledBehandlingstyper: KodeverkMedNavn[]): ReactElement => {
   const isEnabled = enabledBehandlingstyper.some(b => b.kode === bt.kode);
@@ -34,13 +35,13 @@ const manuelleRevurderingsArsakerFP = [
   behandlingArsakType.DØD,
   behandlingArsakType.SØKERS_RELASJON,
   behandlingArsakType.SØKNADSFRIST,
-  behandlingArsakType.KLAGE_U_INNTK,
-  behandlingArsakType.KLAGE_M_INNTK,
+  behandlingArsakType.RE_KLAGE_UTEN_END_INNTEKT,
+  behandlingArsakType.RE_KLAGE_MED_END_INNTEKT,
 ];
 
 const manuelleRevurderingsArsakerSVP = [
-  behandlingArsakType.KLAGE_U_INNTK,
-  behandlingArsakType.KLAGE_M_INNTK,
+  behandlingArsakType.RE_KLAGE_UTEN_END_INNTEKT,
+  behandlingArsakType.RE_KLAGE_MED_END_INNTEKT,
   behandlingArsakType.RE_ENDRET_INNTEKTSMELDING,
   behandlingArsakType.RE_ENDRING_FRA_BRUKER,
   behandlingArsakType.FØDSEL,
@@ -50,11 +51,11 @@ const manuelleRevurderingsArsakerSVP = [
 ];
 
 const TilbakekrevingRevurderingArsaker = [
-  behandlingArsakType.RE_FORELDELSE,
-  behandlingArsakType.RE_VILKÅR,
-  behandlingArsakType.RE_KLAGE_KA,
-  behandlingArsakType.RE_KLAGE_NFP,
-  behandlingArsakType.RE_FEILUTBETALT_BELØP_REDUSERT,
+  behandlingArsakTypeTilbakekreving.RE_FORELDELSE,
+  behandlingArsakTypeTilbakekreving.RE_VILKÅR,
+  behandlingArsakTypeTilbakekreving.RE_KLAGE_KA,
+  behandlingArsakTypeTilbakekreving.RE_KLAGE_NFP,
+  behandlingArsakTypeTilbakekreving.RE_FEILUTBETALT_BELØP_REDUSERT,
 ];
 
 const getBehandlingAarsaker = (

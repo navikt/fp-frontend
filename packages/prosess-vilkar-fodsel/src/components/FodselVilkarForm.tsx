@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Label } from '@navikt/ds-react';
 
 import { Form } from '@navikt/ft-form-hooks';
-import { VilkarType, AksjonspunktCode, fagsakYtelseType, vilkarUtfallType, KodeverkType } from '@navikt/fp-kodeverk';
+import { VilkarType, AksjonspunktCode, fagsakYtelseType, vilkarUtfall, KodeverkType } from '@navikt/fp-kodeverk';
 import {
   ProsessStegBegrunnelseTextFieldNew,
   VilkarResultPicker,
@@ -111,7 +111,7 @@ const FodselVilkarForm: FunctionComponent<OwnProps> = ({
   );
 
   const isOpenAksjonspunkt = aksjonspunkter.some(ap => ap.status === AksjonspunktStatus.OPPRETTET);
-  const originalErVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
+  const originalErVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfall.OPPFYLT === status;
   const { lovReferanse } = vilkar[0];
 
   const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);

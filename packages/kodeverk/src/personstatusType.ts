@@ -1,16 +1,12 @@
 const personstatusType = {
-  DOD: 'DØD',
-  BOSATT: 'BOSA',
-  UTVANDRET: 'UTVA',
-  AKTIVTBOSTNR: 'ABNR',
   AKTIVT: 'ADNR',
+  UREGISTRERT: 'UREG',
+  UTGATTPERSON: 'UTPE',
   FORSVUNNET: 'FOSV',
   FODSELSREGISTRERT: 'FØDR',
-  UFULLSTENDIGFNR: 'UFUL',
-  UREGISTRERT: 'UREG',
-  UTGATTANNULLERT: 'UTAN',
-  UTGATTPERSON: 'UTPE',
-  UDEFINERT: '-',
+  BOSATT: 'BOSA',
+  UTVANDRET: 'UTVA',
+  DOD: 'DØD',
 };
 
 export default personstatusType;

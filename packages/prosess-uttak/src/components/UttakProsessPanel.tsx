@@ -22,10 +22,10 @@ import {
 import {
   StonadskontoType,
   AksjonspunktCode,
-  uttakPeriodeNavn,
   periodeResultatType,
   aksjonspunktStatus,
   aksjonspunktStatus as AksjonspunktStatus,
+  KodeverkType,
 } from '@navikt/fp-kodeverk';
 
 import DisponibleStonadskontoerPanel from './stonadsdagerOversikt/DisponibleStonadskontoerPanel';
@@ -77,7 +77,12 @@ const hentApTekster = (uttaksresultat: UttaksresultatPeriode, aksjonspunkter: Ak
   return aksjonspunktTekster;
 };
 
-const validerPerioder = (perioder: PeriodeSoker[], stønadskonto: UttakStonadskontoer, intl: IntlShape) => {
+const validerPerioder = (
+  perioder: PeriodeSoker[],
+  stønadskonto: UttakStonadskontoer,
+  intl: IntlShape,
+  alleKodeverk: AlleKodeverk,
+) => {
   const feil = [] as string[];
 
   perioder.forEach(p => {
@@ -90,7 +95,11 @@ const validerPerioder = (perioder: PeriodeSoker[], stønadskonto: UttakStonadsko
     if (p.periodeResultatType === periodeResultatType.INNVILGET && ikkeGyldigeAktiviteter.length > 0) {
       const feilmelding = intl.formatMessage(
         { id: 'UttakPanel.InvalidStonadskonto' },
-        { konto: uttakPeriodeNavn[ikkeGyldigeAktiviteter[0].stønadskontoType as StonadskontoType] },
+        {
+          konto: alleKodeverk[KodeverkType.STOENADSKONTOTYPE].find(
+            st => st.kode === ikkeGyldigeAktiviteter[0].stønadskontoType,
+          )?.navn,
+        },
       );
       if (!feil.includes(feilmelding)) {
         feil.push(feilmelding);
@@ -104,7 +113,11 @@ const validerPerioder = (perioder: PeriodeSoker[], stønadskonto: UttakStonadsko
       feil.push(
         intl.formatMessage(
           { id: 'UttakPanel.KontoMedUgyldigForbruk' },
-          { konto: uttakPeriodeNavn[kontoerMedUgyldigForbruk[0].stonadskontotype] },
+          {
+            konto: alleKodeverk[KodeverkType.STOENADSKONTOTYPE].find(
+              st => st.kode === kontoerMedUgyldigForbruk[0].stonadskontotype,
+            )?.navn,
+          },
         ),
       );
     }
@@ -279,7 +292,7 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
     if (!isDirty || valgtPeriodeIndex !== undefined) {
       return [];
     }
-    return validerPerioder(perioder, stønadskonto, intl);
+    return validerPerioder(perioder, stønadskonto, intl, alleKodeverk);
   }, [perioder, stønadskonto, valgtPeriodeIndex, isDirty]);
 
   const harIngenEllerLukkedeAksjonspunkt =

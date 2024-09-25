@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
-import { AksjonspunktCode, vilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktCode, vilkarUtfall } from '@navikt/fp-kodeverk';
 import { TilkjentYtelseProsessIndex } from '@navikt/fp-prosess-tilkjent-ytelse';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import {
@@ -57,8 +57,8 @@ const TilkjentYtelseFpProsessStegInitPanel: FunctionComponent<OwnProps & Prosess
     skalPanelVisesIMeny={() => true}
     hentOverstyrtStatus={() =>
       requestBehandlingApi.hasPath(BehandlingApiKeys.BEREGNINGRESULTAT_DAGYTELSE.name)
-        ? vilkarUtfallType.OPPFYLT
-        : vilkarUtfallType.IKKE_VURDERT
+        ? vilkarUtfall.OPPFYLT
+        : vilkarUtfall.IKKE_VURDERT
     }
     renderPanel={data => (
       <TilkjentYtelseProsessIndex

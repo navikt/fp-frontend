@@ -4,7 +4,7 @@ import { CheckmarkIcon, XMarkOctagonIcon } from '@navikt/aksel-icons';
 import { FlexContainer, FlexRow, FlexColumn, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 
-import { vilkarUtfallType } from '@navikt/fp-kodeverk';
+import { vilkarUtfall } from '@navikt/fp-kodeverk';
 import { Datepicker, RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
 import { createIntl } from '@navikt/ft-utils';
 import { hasValidDate, required, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
@@ -151,7 +151,7 @@ VilkarResultPicker.buildInitialValues = (
   behandlingsresultat?: Behandlingsresultat,
 ): FormValues => {
   const isOpenAksjonspunkt = aksjonspunkter.some(ap => ap.status === AksjonspunktStatus.OPPRETTET);
-  const erVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
+  const erVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfall.OPPFYLT === status;
   return {
     erVilkarOk,
     avslagCode:

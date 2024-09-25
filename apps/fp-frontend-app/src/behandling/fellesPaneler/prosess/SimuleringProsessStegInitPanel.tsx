@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useCallback } from 'react';
 import { useIntl } from 'react-intl';
 
-import { AksjonspunktCode, vilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktCode, vilkarUtfall } from '@navikt/fp-kodeverk';
 import { SimuleringProsessIndex } from '@navikt/fp-prosess-simulering';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import {
@@ -78,14 +78,14 @@ const SimuleringProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelI
       skalPanelVisesIMeny={() => {
         const harVedtakspanel = menyData.some(
           d =>
-            d.id === ProsessStegCode.VEDTAK && (d.status !== vilkarUtfallType.IKKE_VURDERT || d.harApentAksjonspunkt),
+            d.id === ProsessStegCode.VEDTAK && (d.status !== vilkarUtfall.IKKE_VURDERT || d.harApentAksjonspunkt),
         );
         return requestBehandlingApi.hasPath(BehandlingApiKeys.SIMULERING_RESULTAT.name) || !harVedtakspanel;
       }}
       hentOverstyrtStatus={() =>
         requestBehandlingApi.hasPath(BehandlingApiKeys.SIMULERING_RESULTAT.name)
-          ? vilkarUtfallType.OPPFYLT
-          : vilkarUtfallType.IKKE_VURDERT
+          ? vilkarUtfall.OPPFYLT
+          : vilkarUtfall.IKKE_VURDERT
       }
       renderPanel={data => (
         <SimuleringProsessIndex

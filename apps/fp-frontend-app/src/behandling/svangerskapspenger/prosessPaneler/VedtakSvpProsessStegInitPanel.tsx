@@ -5,7 +5,7 @@ import {
   isAvslag,
   fagsakYtelseType,
   AksjonspunktCode,
-  vilkarUtfallType,
+  vilkarUtfall,
   aksjonspunktStatus,
 } from '@navikt/fp-kodeverk';
 import { VedtakProsessIndex, ForhandsvisData } from '@navikt/fp-prosess-vedtak';
@@ -53,31 +53,31 @@ const findStatusForVedtak = (
   behandlingsresultat?: Behandlingsresultat,
 ): string => {
   if (vilkar.length === 0) {
-    return vilkarUtfallType.IKKE_VURDERT;
+    return vilkarUtfall.IKKE_VURDERT;
   }
 
   if (
     hasOnlyClosedAps(aksjonspunkter, vedtakAksjonspunkter) &&
-    vilkar.some(v => v.vilkarStatus === vilkarUtfallType.IKKE_OPPFYLT)
+    vilkar.some(v => v.vilkarStatus === vilkarUtfall.IKKE_OPPFYLT)
   ) {
-    return vilkarUtfallType.IKKE_OPPFYLT;
+    return vilkarUtfall.IKKE_OPPFYLT;
   }
 
   if (
-    vilkar.some(v => v.vilkarStatus === vilkarUtfallType.IKKE_VURDERT) ||
+    vilkar.some(v => v.vilkarStatus === vilkarUtfall.IKKE_VURDERT) ||
     aksjonspunkter.some(isAksjonspunktOpenAndOfType)
   ) {
-    return vilkarUtfallType.IKKE_VURDERT;
+    return vilkarUtfall.IKKE_VURDERT;
   }
 
   if (!hasOnlyClosedAps(aksjonspunkter, vedtakAksjonspunkter)) {
-    return vilkarUtfallType.IKKE_VURDERT;
+    return vilkarUtfall.IKKE_VURDERT;
   }
 
   if (behandlingsresultat && isAvslag(behandlingsresultat.type)) {
-    return vilkarUtfallType.IKKE_OPPFYLT;
+    return vilkarUtfall.IKKE_OPPFYLT;
   }
-  return vilkarUtfallType.OPPFYLT;
+  return vilkarUtfall.OPPFYLT;
 };
 
 const getForhandsvisCallback =
@@ -215,7 +215,7 @@ const VedtakSvpProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelIn
           aksjonspunkter || [],
           standardData.aksjonspunkter,
           standardData.behandling.behandlingsresultat,
-        ) !== vilkarUtfallType.IKKE_VURDERT
+        ) !== vilkarUtfall.IKKE_VURDERT
       }
       renderPanel={data => (
         <>

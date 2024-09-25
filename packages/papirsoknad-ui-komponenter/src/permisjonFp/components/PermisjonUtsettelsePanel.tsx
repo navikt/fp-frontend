@@ -35,7 +35,7 @@ interface StaticFunctions {
  * Komponenten har inputfelter og må derfor rendres som etterkommer av form komponent.
  */
 const PermisjonUtsettelsePanel: FunctionComponent<OwnProps> & StaticFunctions = ({ readOnly, alleKodeverk }) => {
-  const utsettelseReasons = alleKodeverk[KodeverkType.UTSETTELSE_AARSAK_TYPE];
+  const utsettelseReasons = alleKodeverk[KodeverkType.UTSETTELSE_AARSAK];
   const utsettelseKvoter = alleKodeverk[KodeverkType.UTTAK_PERIODE_TYPE];
 
   const { watch } = useFormContext<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: FormValues }>();

@@ -5959,6 +5959,7 @@ __metadata:
     react-router-dom: 6.26.2
     typescript: 5.6.2
     vite: 5.4.6
+    vitest: ^2.1.1
   languageName: unknown
   linkType: soft
 
@@ -21208,7 +21209,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vitest@npm:2.1.1":
+"vitest@npm:2.1.1, vitest@npm:^2.1.1":
   version: 2.1.1
   resolution: "vitest@npm:2.1.1"
   dependencies:

@@ -7,9 +7,11 @@ import {
   behandlingStatus,
   behandlingType,
   fagsakYtelseType,
-  opplysningAdresseType,
+  adresseType,
   personstatusType,
   region,
+  medlemskapType,
+  oppholdstillatelseType,
 } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Behandling, Fagsak, MedlemskapAvvik, MedlemskapV3, Soknad } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
@@ -108,7 +110,7 @@ const lagMedlemskap = (override: Partial<MedlemskapV3>): MedlemskapV3 => ({
     {
       fom: '2021-10-13',
       tom: '2024-01-13',
-      type: 'PERMANENT',
+      type: oppholdstillatelseType.PERMANENT,
     },
   ],
   medlemskapsperioder: [
@@ -118,7 +120,7 @@ const lagMedlemskap = (override: Partial<MedlemskapV3>): MedlemskapV3 => ({
       erMedlem: false,
       lovvalgsland: 'Finland',
       studieland: null,
-      medlemskapType: 'AVKLARES',
+      medlemskapType: medlemskapType.AVKLARES,
       dekningType: 'OPPHOR',
       beslutningsdato: '2020-02-01',
     },
@@ -129,7 +131,7 @@ const lagMedlemskap = (override: Partial<MedlemskapV3>): MedlemskapV3 => ({
       erMedlem: true,
       lovvalgsland: 'Norge',
       studieland: 'Sverige',
-      medlemskapType: 'ENDELIG',
+      medlemskapType: medlemskapType.ENDELIG,
       dekningType: 'FULL',
       beslutningsdato: '2024-09-24',
     },
@@ -146,7 +148,7 @@ const lagMedlemskap = (override: Partial<MedlemskapV3>): MedlemskapV3 => ({
       fom: '2019-01-01',
       tom: TIDENES_ENDE,
       adresse: {
-        adresseType: opplysningAdresseType.BOSTEDSADRESSE,
+        adresseType: adresseType.BOSTEDSADRESSE,
         adresselinje1: 'Oslogata 1',
         adresselinje2: null,
         adresselinje3: null,
@@ -159,7 +161,7 @@ const lagMedlemskap = (override: Partial<MedlemskapV3>): MedlemskapV3 => ({
       fom: '2020-01-01',
       tom: '2021-01-01',
       adresse: {
-        adresseType: opplysningAdresseType.POSTADRESSE_UTLAND,
+        adresseType: adresseType.POSTADRESSE_UTLAND,
         adresselinje1: 'Mäkelänkatu 1B',
         adresselinje2: null,
         adresselinje3: null,
@@ -194,7 +196,7 @@ const lagMedlemskap = (override: Partial<MedlemskapV3>): MedlemskapV3 => ({
         fom: '2019-01-01',
         tom: TIDENES_ENDE,
         adresse: {
-          adresseType: opplysningAdresseType.BOSTEDSADRESSE,
+          adresseType: adresseType.BOSTEDSADRESSE,
           adresselinje1: 'Oslogata 1',
           adresselinje2: null,
           adresselinje3: null,
@@ -207,7 +209,7 @@ const lagMedlemskap = (override: Partial<MedlemskapV3>): MedlemskapV3 => ({
         fom: '2020-01-01',
         tom: '2021-01-01',
         adresse: {
-          adresseType: opplysningAdresseType.POSTADRESSE_UTLAND,
+          adresseType: adresseType.POSTADRESSE_UTLAND,
           adresselinje1: 'Mäkelänkatu 1B',
           adresselinje2: null,
           adresselinje3: null,
@@ -259,7 +261,7 @@ VurderingAvMedlemskapMedlemskapMedEtAvvik.args = {
         fom: '2024-09-10',
         tom: TIDENES_ENDE,
         adresse: {
-          adresseType: 'POSTADRESSE_UTLAND',
+          adresseType: adresseType.POSTADRESSE_UTLAND,
           adresselinje1: 'Kirkeveien 1',
           adresselinje2: null,
           adresselinje3: null,
@@ -272,7 +274,7 @@ VurderingAvMedlemskapMedlemskapMedEtAvvik.args = {
         fom: '2022-09-01',
         tom: TIDENES_ENDE,
         adresse: {
-          adresseType: 'BOSTEDSADRESSE',
+          adresseType: adresseType.BOSTEDSADRESSE,
           adresselinje1: 'Krattstien 4',
           adresselinje2: null,
           adresselinje3: null,

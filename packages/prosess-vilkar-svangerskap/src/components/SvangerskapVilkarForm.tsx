@@ -7,7 +7,7 @@ import { Label } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 import {
   VilkarType,
-  vilkarUtfallType,
+  vilkarUtfall,
   KodeverkType,
   AksjonspunktCode,
   tilretteleggingType,
@@ -127,7 +127,7 @@ const SvangerskapVilkarForm: FunctionComponent<OwnProps> = ({
   const avslagsarsaker = alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.SVANGERSKAPVILKARET];
 
   const isOpenAksjonspunkt = aksjonspunkter.some(ap => ap.status === aksjonspunktStatus.OPPRETTET);
-  const originalErVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
+  const originalErVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfall.OPPFYLT === status;
 
   const bTag = useCallback((chunks: any) => <b>{chunks}</b>, []);
 

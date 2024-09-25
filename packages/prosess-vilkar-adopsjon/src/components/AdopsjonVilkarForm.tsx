@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Label } from '@navikt/ds-react';
 
-import { AksjonspunktCode, VilkarType, vilkarUtfallType, KodeverkType, aksjonspunktStatus } from '@navikt/fp-kodeverk';
+import { AksjonspunktCode, VilkarType, vilkarUtfall, KodeverkType, aksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { Form } from '@navikt/ft-form-hooks';
 import { Aksjonspunkt, AlleKodeverk, Behandling, Vilkar } from '@navikt/fp-types';
 import {
@@ -94,7 +94,7 @@ const AdopsjonVilkarForm: FunctionComponent<OwnProps> = ({
   const avslagsarsaker = alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.ADOPSJONSVILKARET];
 
   const isOpenAksjonspunkt = aksjonspunkter.some(ap => ap.status === aksjonspunktStatus.OPPRETTET);
-  const originalErVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
+  const originalErVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfall.OPPFYLT === status;
   const { lovReferanse } = vilkar[0];
 
   const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);

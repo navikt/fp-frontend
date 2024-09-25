@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions';
 import {
   VilkarType,
   aksjonspunktStatus,
-  vilkarUtfallType,
+  vilkarUtfall,
   avslagsarsakCodes,
   soknadType,
   AksjonspunktCode,
@@ -94,7 +94,7 @@ export const ÅpentAksjonspunkt = Template.bind({});
   ] as Aksjonspunkt[],
   isReadOnly: false,
   readOnlySubmitButton: false,
-  status: vilkarUtfallType.IKKE_VURDERT,
+  status: vilkarUtfall.IKKE_VURDERT,
 };
 
 export const OppfyltVilkår = Template.bind({});
@@ -111,7 +111,7 @@ OppfyltVilkår.args = {
   ] as Aksjonspunkt[],
   isReadOnly: true,
   readOnlySubmitButton: true,
-  status: vilkarUtfallType.OPPFYLT,
+  status: vilkarUtfall.OPPFYLT,
 };
 
 export const AvslåttVilkår = Template.bind({});
@@ -134,5 +134,5 @@ AvslåttVilkår.args = {
   ] as Aksjonspunkt[],
   isReadOnly: true,
   readOnlySubmitButton: true,
-  status: vilkarUtfallType.IKKE_OPPFYLT,
+  status: vilkarUtfall.IKKE_OPPFYLT,
 };

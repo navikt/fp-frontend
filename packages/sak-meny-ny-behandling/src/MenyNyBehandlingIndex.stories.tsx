@@ -78,7 +78,7 @@ const Template: StoryFn<{
     tilbakekrevingRevurderingArsaker={tilbakekrevingRevurderingArsaker}
     revurderingArsaker={[
       {
-        kode: behandlingArsakType.KLAGE_U_INNTK,
+        kode: behandlingArsakType.RE_KLAGE_UTEN_END_INNTEKT,
         kodeverk: 'BEHANDLING_ARSAK_TYPE',
         navn: 'Klage uten inntekt',
       },

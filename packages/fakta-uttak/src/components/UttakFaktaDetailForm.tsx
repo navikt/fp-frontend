@@ -150,7 +150,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
     [],
   );
   const sorterteUtsettelseÅrsaker = useMemo(
-    () => [...alleKodeverk[KodeverkType.UTSETTELSE_AARSAK_TYPE]].sort((k1, k2) => k1.navn.localeCompare(k2.navn)),
+    () => [...alleKodeverk[KodeverkType.UTSETTELSE_AARSAK]].sort((k1, k2) => k1.navn.localeCompare(k2.navn)),
     [],
   );
   const sorterteOppholdÅrsaker = useMemo(

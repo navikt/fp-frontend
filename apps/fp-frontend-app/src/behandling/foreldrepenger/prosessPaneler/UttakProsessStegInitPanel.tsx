@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
-import { AksjonspunktCode, vilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktCode, vilkarUtfall } from '@navikt/fp-kodeverk';
 import { UttakProsessIndex } from '@navikt/fp-prosess-uttak';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import {
@@ -24,9 +24,9 @@ import { BehandlingApiKeys, requestBehandlingApi, restBehandlingApiHooks } from 
 const getStatusFromUttakresultat = (behandling: Behandling): string => {
   const harLenke = requestBehandlingApi.hasPath(BehandlingApiKeys.UTTAKSRESULTAT_PERIODER.name);
   if (!harLenke) {
-    return vilkarUtfallType.IKKE_VURDERT;
+    return vilkarUtfall.IKKE_VURDERT;
   }
-  return behandling.alleUttaksperioderAvslått ? vilkarUtfallType.IKKE_OPPFYLT : vilkarUtfallType.OPPFYLT;
+  return behandling.alleUttaksperioderAvslått ? vilkarUtfall.IKKE_OPPFYLT : vilkarUtfall.OPPFYLT;
 };
 
 const AKSJONSPUNKT_KODER = [

@@ -2,7 +2,7 @@ import React from 'react';
 import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { vilkarUtfallType, aksjonspunktStatus, AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { vilkarUtfall, aksjonspunktStatus, AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Behandling, Opptjening } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -57,7 +57,7 @@ const Template: StoryFn<{
     isReadOnly={false}
     isAksjonspunktOpen
     readOnlySubmitButton={false}
-    status={vilkarUtfallType.IKKE_VURDERT}
+    status={vilkarUtfall.IKKE_VURDERT}
     vilkar={[]}
     alleMerknaderFraBeslutter={{}}
     setFormData={() => undefined}

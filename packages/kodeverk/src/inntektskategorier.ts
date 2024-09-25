@@ -9,17 +9,6 @@ const inntektskategorier = {
   JORDBRUKER: 'JORDBRUKER',
   FISKER: 'FISKER',
   ARBEIDSTAKER_UTEN_FERIEPENGER: 'ARBEIDSTAKER_UTEN_FERIEPENGER',
-  UDEFINERT: '-',
 };
-
-const SELVSTENDIG_NÆRINGSDRIVENDE_INNTEKTSKATEGORIER = [
-  inntektskategorier.SELVSTENDIG_NÆRINGSDRIVENDE,
-  inntektskategorier.JORDBRUKER,
-  inntektskategorier.DAGMAMMA,
-  inntektskategorier.FISKER,
-];
-
-export const isSelvstendigNæringsdrivende = (inntektskategori: string): boolean =>
-  SELVSTENDIG_NÆRINGSDRIVENDE_INNTEKTSKATEGORIER.includes(inntektskategori);
 
 export default inntektskategorier;

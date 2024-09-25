@@ -7,7 +7,7 @@ import { Form, TextAreaField, RadioGroupPanel, SelectField } from '@navikt/ft-fo
 import { hasValidText, maxLength, minLength, notDash, required } from '@navikt/ft-form-validators';
 import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { KodeverkType, oppholdArsakType, utsettelseArsakCodes, periodeResultatType } from '@navikt/fp-kodeverk';
+import { KodeverkType, utsettelseArsak, periodeResultatType } from '@navikt/fp-kodeverk';
 import {
   AarsakFilter,
   AlleKodeverk,
@@ -47,10 +47,7 @@ const erPeriodeOppfylt = (valgtPeriode: PeriodeSoker, utfallKoder: ArsakKodeverk
   if (valgtPeriode.periodeResultatType && valgtPeriode.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING) {
     // Litt flaky. Bør sende med kodeverket og slå opp utfallType
     const kodeverkKode = utfallKoder.find(kodeItem => kodeItem.kode === valgtPeriode.periodeResultatÅrsak);
-    if (
-      (kodeverkKode && kodeverkKode.utfallType === 'INNVILGET') ||
-      valgtPeriode.oppholdÅrsak !== oppholdArsakType.UDEFINERT
-    ) {
+    if ((kodeverkKode && kodeverkKode.utfallType === 'INNVILGET') || !!valgtPeriode.oppholdÅrsak) {
       return true;
     }
     if (kodeverkKode && kodeverkKode.utfallType === 'AVSLÅTT') {
@@ -125,10 +122,10 @@ const lagOptionsTilPeriodeÅrsakSelect = (
   );
 
   if (skalFiltrere && utsettelseType) {
-    if (utsettelseType !== utsettelseArsakCodes.UDEFINERT) {
+    if (utsettelseType !== utsettelseArsak.UDEFINERT) {
       return filteredNyKodeArray.filter(kv => kv.uttakTyper?.includes('UTSETTELSE')).map(mapTilOption);
     }
-    if (periodeType && utsettelseType === utsettelseArsakCodes.UDEFINERT) {
+    if (periodeType && utsettelseType === utsettelseArsak.UDEFINERT) {
       return filteredNyKodeArray
         .filter(kv => kv.uttakTyper?.includes('UTTAK'))
         .filter(kv => kv.valgbarForKonto?.includes(periodeType))
@@ -183,7 +180,7 @@ const hentTekstForÅVurdereUtsettelseVedMindreEnn100ProsentStilling = (
   intl: IntlShape,
   erOppfylt?: boolean,
 ): string | undefined => {
-  if (utsettelseType && utsettelseType === utsettelseArsakCodes.ARBEID && erOppfylt && aktiviteter) {
+  if (utsettelseType && utsettelseType === utsettelseArsak.ARBEID && erOppfylt && aktiviteter) {
     const prosentIArbeid = aktiviteter.reduce((total, aktivitet): number => total + (aktivitet.prosentArbeid || 0), 0);
     if (prosentIArbeid < 100) {
       return intl.formatMessage({ id: 'UttakActivity.MerEn100ProsentOgOgyldigUtsettlse' });
@@ -249,9 +246,7 @@ const transformValues = (
   graderingInnvilget: values.erOppfylt ? values.graderingInnvilget : false,
   oppholdÅrsak: values.oppholdArsak,
   periodeResultatType:
-    values.erOppfylt || values.oppholdArsak !== oppholdArsakType.UDEFINERT
-      ? periodeResultatType.INNVILGET
-      : periodeResultatType.AVSLATT,
+    values.erOppfylt || !!values.oppholdArsak ? periodeResultatType.INNVILGET : periodeResultatType.AVSLATT,
   graderingAvslagÅrsak: values.graderingAvslagAarsak,
   periodeResultatÅrsak: values.periodeAarsak,
   samtidigUttaksprosent: values.samtidigUttaksprosent ? parseFloat(values.samtidigUttaksprosent) : undefined,
@@ -366,7 +361,7 @@ const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
         erOppfylt={erOppfylt}
         valgtInnvilgelsesÅrsak={valgtInnvilgelsesÅrsak}
       />
-      {valgtPeriode.oppholdÅrsak === oppholdArsakType.UDEFINERT && (
+      {!!valgtPeriode.oppholdÅrsak && (
         <UttakAktiviteterTabell
           isReadOnly={isReadOnly}
           periodeTyper={alleKodeverk[KodeverkType.UTTAK_PERIODE_TYPE]}

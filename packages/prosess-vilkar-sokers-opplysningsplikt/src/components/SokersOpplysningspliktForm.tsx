@@ -7,7 +7,7 @@ import { BodyShort } from '@navikt/ds-react';
 import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessPanelTemplate } from '@navikt/fp-prosess-felles';
 import {
-  vilkarUtfallType,
+  vilkarUtfall,
   KodeverkType,
   VilkarType,
   getKodeverknavnFn,
@@ -103,7 +103,7 @@ const buildInitialValues = (
 ): FormValues => {
   const aksjonspunkt = aksjonspunkter.length > 0 ? aksjonspunkter[0] : undefined;
   const isOpenAksjonspunkt = aksjonspunkt && aksjonspunkt.status === aksjonspunktStatus.OPPRETTET;
-  const isVilkarGodkjent = soknadExists && vilkarUtfallType.OPPFYLT === status;
+  const isVilkarGodkjent = soknadExists && vilkarUtfall.OPPFYLT === status;
 
   // TODO Mogleg inntektsmeldingerSomIkkeKommer kan fjernast, men trur fjerning av bruken av denne i render er ein midlertidig
   // fiks og at dette derfor skal brukast etterkvart. Sjå TFP-3076
@@ -224,7 +224,7 @@ const SokersOpplysningspliktForm: FunctionComponent<OwnProps> = ({
   const erVilkarOk = formMethods.watch('erVilkarOk');
 
   const isOpenAksjonspunkt = aksjonspunkter.some(ap => ap.status === aksjonspunktStatus.OPPRETTET);
-  const originalErVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
+  const originalErVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfall.OPPFYLT === status;
 
   return (
     <Form

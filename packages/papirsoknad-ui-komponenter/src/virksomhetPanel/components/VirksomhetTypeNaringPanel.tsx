@@ -4,17 +4,17 @@ import { Label, ErrorMessage } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { CheckboxField } from '@navikt/ft-form-hooks';
 import { AlleKodeverk } from '@navikt/fp-types';
-import { naringsvirksomhetType, KodeverkType } from '@navikt/fp-kodeverk';
+import { virksomhetType, KodeverkType } from '@navikt/fp-kodeverk';
 import { isRequiredMessage } from '@navikt/ft-form-validators';
 import { useFormContext } from 'react-hook-form';
 
 const TYPE_VIRKSOMHET_PREFIX = 'typeVirksomhet';
 
 const naringsvirksomhetTypeOrder = {
-  [naringsvirksomhetType.DAGMAMMA]: 1,
-  [naringsvirksomhetType.FISKE]: 2,
-  [naringsvirksomhetType.JORDBRUK_ELLER_SKOGBRUK]: 3,
-  [naringsvirksomhetType.ANNEN]: 4,
+  [virksomhetType.DAGMAMMA]: 1,
+  [virksomhetType.FISKE]: 2,
+  [virksomhetType.JORDBRUK_ELLER_SKOGBRUK]: 3,
+  [virksomhetType.ANNEN]: 4,
 };
 
 const compare = (arg1: number, arg2: number): number => {
@@ -48,7 +48,7 @@ const VirksomhetTypeNaringPanel: FunctionComponent<OwnProps> = ({ readOnly, alle
   const naringvirksomhetTyper = useMemo(
     () =>
       virksomhetTyper
-        .filter(t => t.kode !== naringsvirksomhetType.FRILANSER)
+        .filter(t => t.kode !== virksomhetType.FRILANSER)
         .sort((a, b) => compare(naringsvirksomhetTypeOrder[a.kode], naringsvirksomhetTypeOrder[b.kode])),
     [],
   );

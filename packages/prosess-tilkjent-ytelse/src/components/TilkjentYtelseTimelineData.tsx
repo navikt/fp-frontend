@@ -3,7 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import dayjs from 'dayjs';
 import { Label, BodyShort, Button, Panel } from '@navikt/ds-react';
 
-import { KodeverkType, aktivitetStatus, uttakPeriodeNavn, getKodeverknavnFn } from '@navikt/fp-kodeverk';
+import { KodeverkType, aktivitetStatus, getKodeverknavnFn } from '@navikt/fp-kodeverk';
 import {
   Table,
   TableColumn,
@@ -210,7 +210,12 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
               <TableColumn>{findAndelsnavn(andel, getKodeverknavn, arbeidsgiverOpplysningerPerId)}</TableColumn>
               {!isSoknadSvangerskapspenger && (
                 <TableColumn>
-                  <BodyShort size="small">{uttakPeriodeNavn[andel.uttak.stonadskontoType]}</BodyShort>
+                  <BodyShort size="small">
+                    {
+                      alleKodeverk[KodeverkType.STOENADSKONTOTYPE].find(st => st.kode === andel.uttak.stonadskontoType)
+                        ?.navn
+                    }
+                  </BodyShort>
                 </TableColumn>
               )}
               {!isSoknadSvangerskapspenger && (

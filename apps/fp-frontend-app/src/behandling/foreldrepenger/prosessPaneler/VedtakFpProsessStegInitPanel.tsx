@@ -2,7 +2,7 @@ import React, { FunctionComponent, useCallback, useState } from 'react';
 import { useIntl } from 'react-intl';
 
 import {
-  vilkarUtfallType,
+  vilkarUtfall,
   isAvslag,
   fagsakYtelseType,
   AksjonspunktCode,
@@ -53,31 +53,31 @@ const findStatusForVedtak = (
   behandlingsresultat?: Behandlingsresultat,
 ): string => {
   if (vilkar.length === 0) {
-    return vilkarUtfallType.IKKE_VURDERT;
+    return vilkarUtfall.IKKE_VURDERT;
   }
 
   if (
     hasOnlyClosedAps(aksjonspunkter, vedtakAksjonspunkter) &&
-    vilkar.some(v => v.vilkarStatus === vilkarUtfallType.IKKE_OPPFYLT)
+    vilkar.some(v => v.vilkarStatus === vilkarUtfall.IKKE_OPPFYLT)
   ) {
-    return vilkarUtfallType.IKKE_OPPFYLT;
+    return vilkarUtfall.IKKE_OPPFYLT;
   }
 
   if (
-    vilkar.some(v => v.vilkarStatus === vilkarUtfallType.IKKE_VURDERT) ||
+    vilkar.some(v => v.vilkarStatus === vilkarUtfall.IKKE_VURDERT) ||
     aksjonspunkter.some(isAksjonspunktOpenAndOfType)
   ) {
-    return vilkarUtfallType.IKKE_VURDERT;
+    return vilkarUtfall.IKKE_VURDERT;
   }
 
   if (!hasOnlyClosedAps(aksjonspunkter, vedtakAksjonspunkter)) {
-    return vilkarUtfallType.IKKE_VURDERT;
+    return vilkarUtfall.IKKE_VURDERT;
   }
 
   if (behandlingsresultat && isAvslag(behandlingsresultat.type)) {
-    return vilkarUtfallType.IKKE_OPPFYLT;
+    return vilkarUtfall.IKKE_OPPFYLT;
   }
-  return vilkarUtfallType.OPPFYLT;
+  return vilkarUtfall.OPPFYLT;
 };
 
 const getForhandsvisCallback =
@@ -215,7 +215,7 @@ const VedtakFpProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelIni
           props.behandling.aksjonspunkt || [],
           standardData.aksjonspunkter,
           standardData.behandling.behandlingsresultat,
-        ) !== vilkarUtfallType.IKKE_VURDERT
+        ) !== vilkarUtfall.IKKE_VURDERT
       }
       renderPanel={data => (
         <>

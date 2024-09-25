@@ -1,4 +1,4 @@
-import { VilkarType, vilkarUtfallType } from '@navikt/fp-kodeverk';
+import { VilkarType, vilkarUtfall } from '@navikt/fp-kodeverk';
 import { Vilkar } from '@navikt/fp-types';
 
 import { hasIkkeOppfyltSoknadsfristvilkar } from './VedtakHelper';
@@ -8,7 +8,7 @@ describe('<VedtakHelper>', () => {
     const vilkarListe = [
       {
         vilkarType: VilkarType.SOKNADFRISTVILKARET,
-        vilkarStatus: vilkarUtfallType.IKKE_OPPFYLT,
+        vilkarStatus: vilkarUtfall.IKKE_OPPFYLT,
         lovReferanse: '§ 22-13, 2. ledd',
       },
     ] as Vilkar[];

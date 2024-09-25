@@ -3,7 +3,14 @@ import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { Aksjonspunkt } from '@navikt/ft-types';
 
-import { aksjonspunktStatus, behandlingType, AksjonspunktCode, behandlingStatus } from '@navikt/fp-kodeverk';
+import {
+  aksjonspunktStatus,
+  behandlingType,
+  AksjonspunktCode,
+  behandlingStatus,
+  oppholdstillatelseType,
+  medlemskapType,
+} from '@navikt/fp-kodeverk';
 import { Behandling, Medlemskap, Soknad, MedlemPeriode, PersonopplysningMedlem } from '@navikt/fp-types';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
@@ -85,18 +92,18 @@ AvklarOmBrukerErBosatt.args = {
       {
         fom: '2019-01-01',
         tom: '2021-10-13',
-        oppholdstillatelseType: 'MIDLERTIDIG',
+        oppholdstillatelseType: oppholdstillatelseType.MIDLERTIDIG,
       },
       {
         tom: '2021-01-13',
-        oppholdstillatelseType: 'MIDLERTIDIG',
+        oppholdstillatelseType: oppholdstillatelseType.MIDLERTIDIG,
       },
     ],
     medlemskapPerioder: [
       {
         fom: '2019-01-01',
         tom: '2021-10-13',
-        medlemskapType: 'AVKLARES',
+        medlemskapType: medlemskapType.AVKLARES,
         dekningType: 'OPPHOR',
         kildeType: 'FS22',
       },
@@ -134,7 +141,7 @@ AvklarOmBrukerHarGyldigPeriode.args = {
       {
         fom: '2021-06-30',
         tom: '2025-06-30',
-        medlemskapType: 'ENDELIG',
+        medlemskapType: medlemskapType.ENDELIG,
         dekningType: 'IHT_AVTALE',
         kildeType: 'ANNEN',
         beslutningsdato: '2021-06-30',
@@ -201,18 +208,18 @@ AvklarOmBrukerHarOppholdsrett.args = {
       {
         fom: '2019-01-01',
         tom: '2021-10-13',
-        oppholdstillatelseType: 'MIDLERTIDIG',
+        oppholdstillatelseType: oppholdstillatelseType.MIDLERTIDIG,
       },
       {
         tom: '2021-01-13',
-        oppholdstillatelseType: 'MIDLERTIDIG',
+        oppholdstillatelseType: oppholdstillatelseType.MIDLERTIDIG,
       },
     ],
     medlemskapPerioder: [
       {
         fom: '2019-01-01',
         tom: '2021-10-13',
-        medlemskapType: 'AVKLARES',
+        medlemskapType: medlemskapType.AVKLARES,
         dekningType: 'OPPHOR',
         kildeType: 'FS22',
       },
@@ -250,18 +257,18 @@ AvklarOmBrukerHarLovligOpphold.args = {
       {
         fom: '2019-01-01',
         tom: '2021-10-13',
-        oppholdstillatelseType: 'MIDLERTIDIG',
+        oppholdstillatelseType: oppholdstillatelseType.MIDLERTIDIG,
       },
       {
         tom: '2021-01-13',
-        oppholdstillatelseType: 'MIDLERTIDIG',
+        oppholdstillatelseType: oppholdstillatelseType.MIDLERTIDIG,
       },
     ],
     medlemskapPerioder: [
       {
         fom: '2019-01-01',
         tom: '2021-10-13',
-        medlemskapType: 'AVKLARES',
+        medlemskapType: medlemskapType.AVKLARES,
         dekningType: 'OPPHOR',
         kildeType: 'FS22',
       },
@@ -299,18 +306,18 @@ BrukerHarLovligOppholdSomErSendtTilbakeFraBeslutter.args = {
       {
         fom: '2019-01-01',
         tom: '2021-10-13',
-        oppholdstillatelseType: 'MIDLERTIDIG',
+        oppholdstillatelseType: oppholdstillatelseType.MIDLERTIDIG,
       },
       {
         tom: '2021-01-13',
-        oppholdstillatelseType: 'MIDLERTIDIG',
+        oppholdstillatelseType: oppholdstillatelseType.MIDLERTIDIG,
       },
     ],
     medlemskapPerioder: [
       {
         fom: '2019-01-01',
         tom: '2021-10-13',
-        medlemskapType: 'AVKLARES',
+        medlemskapType: medlemskapType.AVKLARES,
         dekningType: 'OPPHOR',
         kildeType: 'FS22',
       },
@@ -352,18 +359,18 @@ AvklarFortsattMedlemskap.args = {
       {
         fom: '2019-01-01',
         tom: '2021-10-13',
-        oppholdstillatelseType: 'MIDLERTIDIG',
+        oppholdstillatelseType: oppholdstillatelseType.MIDLERTIDIG,
       },
       {
         tom: '2021-01-13',
-        oppholdstillatelseType: 'MIDLERTIDIG',
+        oppholdstillatelseType: oppholdstillatelseType.MIDLERTIDIG,
       },
     ],
     medlemskapPerioder: [
       {
         fom: '2019-01-01',
         tom: '2021-10-13',
-        medlemskapType: 'AVKLARES',
+        medlemskapType: medlemskapType.AVKLARES,
         dekningType: 'OPPHOR',
         kildeType: 'FS22',
       },

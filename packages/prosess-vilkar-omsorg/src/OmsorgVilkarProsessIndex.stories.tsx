@@ -2,7 +2,7 @@ import React from 'react';
 import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { aksjonspunktStatus, avslagsarsakCodes, vilkarUtfallType, AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { aksjonspunktStatus, avslagsarsakCodes, vilkarUtfall, AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Behandling } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -56,7 +56,7 @@ export const ÅpentAksjonspunkt = Template.bind({});
   ] as Aksjonspunkt[],
   isReadOnly: false,
   readOnlySubmitButton: false,
-  status: vilkarUtfallType.IKKE_VURDERT,
+  status: vilkarUtfall.IKKE_VURDERT,
 };
 
 export const OppfyltVilkår = Template.bind({});
@@ -72,7 +72,7 @@ OppfyltVilkår.args = {
   ] as Aksjonspunkt[],
   isReadOnly: true,
   readOnlySubmitButton: true,
-  status: vilkarUtfallType.OPPFYLT,
+  status: vilkarUtfall.OPPFYLT,
 };
 
 export const AvslåttVilkår = Template.bind({});
@@ -94,5 +94,5 @@ AvslåttVilkår.args = {
   ] as Aksjonspunkt[],
   isReadOnly: true,
   readOnlySubmitButton: true,
-  status: vilkarUtfallType.IKKE_OPPFYLT,
+  status: vilkarUtfall.IKKE_OPPFYLT,
 };

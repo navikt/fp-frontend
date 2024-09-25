@@ -3,7 +3,6 @@ const overforingArsakCodes = {
   SYKDOM_ANNEN_FORELDER: 'SYKDOM_ANNEN_FORELDER',
   IKKE_RETT_ANNEN_FORELDER: 'IKKE_RETT_ANNEN_FORELDER',
   ALENEOMSORG: 'ALENEOMSORG',
-  UDEFINERT: '-',
 };
 
 export default overforingArsakCodes;

@@ -6,7 +6,7 @@ import {
   AksjonspunktCode,
   avslagsarsakCodes,
   aksjonspunktStatus,
-  vilkarUtfallType,
+  vilkarUtfall,
   tilretteleggingType,
 } from '@navikt/fp-kodeverk';
 import {
@@ -84,7 +84,7 @@ export const ÅpentAksjonspunktSkalIkkeKunneInnvilge = Template.bind({});
   ] as Aksjonspunkt[],
   isReadOnly: false,
   readOnlySubmitButton: false,
-  status: vilkarUtfallType.IKKE_VURDERT,
+  status: vilkarUtfall.IKKE_VURDERT,
 };
 
 export const ÅpentAksjonspunktSkalKunneInnvilge = Template.bind({});
@@ -100,7 +100,7 @@ export const ÅpentAksjonspunktSkalKunneInnvilge = Template.bind({});
   ] as Aksjonspunkt[],
   isReadOnly: false,
   readOnlySubmitButton: false,
-  status: vilkarUtfallType.IKKE_VURDERT,
+  status: vilkarUtfall.IKKE_VURDERT,
   svangerskapspengerTilrettelegging: {
     arbeidsforholdListe: [
       {
@@ -127,7 +127,7 @@ OppfyltVilkår.args = {
   ] as Aksjonspunkt[],
   isReadOnly: true,
   readOnlySubmitButton: true,
-  status: vilkarUtfallType.OPPFYLT,
+  status: vilkarUtfall.OPPFYLT,
 };
 
 export const AvslåttVilkår = Template.bind({});
@@ -149,5 +149,5 @@ AvslåttVilkår.args = {
   ] as Aksjonspunkt[],
   isReadOnly: true,
   readOnlySubmitButton: true,
-  status: vilkarUtfallType.IKKE_OPPFYLT,
+  status: vilkarUtfall.IKKE_OPPFYLT,
 };

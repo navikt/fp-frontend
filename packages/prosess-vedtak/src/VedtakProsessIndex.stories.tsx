@@ -13,7 +13,7 @@ import {
 } from '@navikt/fp-types';
 import {
   behandlingArsakType,
-  vilkarUtfallType,
+  vilkarUtfall,
   konsekvensForYtelsen,
   behandlingResultatType,
   VilkarType,
@@ -49,7 +49,7 @@ const defaultVilkar = [
   {
     lovReferanse: '§§Dette er en lovreferanse',
     vilkarType: VilkarType.FODSELSVILKARET_MOR,
-    vilkarStatus: vilkarUtfallType.OPPFYLT,
+    vilkarStatus: vilkarUtfall.OPPFYLT,
     overstyrbar: true,
   },
 ] as Vilkar[];
@@ -585,7 +585,7 @@ AvslåttForRevurderingForeldrepengerDerSøknadsfristvilkåretIkkeErOppfylt.args 
     {
       lovReferanse: '§§Dette er en lovreferanse',
       vilkarType: VilkarType.SOKNADFRISTVILKARET,
-      vilkarStatus: vilkarUtfallType.IKKE_OPPFYLT,
+      vilkarStatus: vilkarUtfall.IKKE_OPPFYLT,
       overstyrbar: true,
     },
   ],

@@ -2,8 +2,7 @@ const foreldreType = {
   MOR: 'MOR',
   FAR: 'FAR',
   MEDMOR: 'MEDMOR',
-  MEDFAR: 'MEDFAR',
-  TREDJE_PART: 'TREDJE_PART',
+  ANDRE: 'ANDRE',
 };
 
 export default foreldreType;

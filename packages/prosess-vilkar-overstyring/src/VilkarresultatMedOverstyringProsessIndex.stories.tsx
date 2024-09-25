@@ -3,7 +3,7 @@ import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import {
-  vilkarUtfallType,
+  vilkarUtfall,
   AksjonspunktCode,
   aksjonspunktStatus,
   OverstyringAksjonspunkter,
@@ -54,7 +54,7 @@ const Template: StoryFn<{
   erMedlemskapsPanel,
   behandling = defaultBehandling,
   aksjonspunkter = [],
-  status = vilkarUtfallType.OPPFYLT,
+  status = vilkarUtfall.OPPFYLT,
 }) => {
   const [erOverstyrt, toggleOverstyring] = React.useState(false);
   return (
@@ -123,7 +123,7 @@ OverstyrtAksjonspunktSomErBekreftet.args = {
     } as Aksjonspunkt,
   ],
   submitCallback: action('button-click') as (data: any) => Promise<any>,
-  status: vilkarUtfallType.IKKE_OPPFYLT,
+  status: vilkarUtfall.IKKE_OPPFYLT,
   panelTittelKode: 'Inngangsvilkar.Fodselsvilkaret',
   overstyringApKode: AksjonspunktCode.OVERSTYR_FODSELSVILKAR,
   erMedlemskapsPanel: false,

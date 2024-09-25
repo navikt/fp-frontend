@@ -1,4 +1,4 @@
-import { opplysningAdresseType, landkoder as Landkode } from '@navikt/fp-kodeverk';
+import { adresseType, landkoder as Landkode } from '@navikt/fp-kodeverk';
 import { Personadresse } from '@navikt/fp-types';
 
 const emptyIfnull = (text?: string | null): string => (text == null ? '' : text);
@@ -10,14 +10,14 @@ const constructAddress = (
   land?: string,
 ): string => `${emptyIfnull(adresse)}, ${emptyIfnull(postnummer)} ${emptyIfnull(poststed)} ${emptyIfnull(land)}`;
 
-export type Adresser = { [key in opplysningAdresseType]?: string };
+export type Adresser = { [key in adresseType]?: string };
 
 const getAddresses = (addresses: Personadresse[] = []): Adresser =>
   addresses.reduce<Adresser>((acc, address) => {
-    if (!address.adresseType || address.adresseType === opplysningAdresseType.UKJENT_ADRESSE) {
+    if (!address.adresseType || address.adresseType === adresseType.UKJENT_ADRESSE) {
       return {
         ...acc,
-        [opplysningAdresseType.BOSTEDSADRESSE]: 'UKJENT',
+        [adresseType.BOSTEDSADRESSE]: 'UKJENT',
       };
     }
 

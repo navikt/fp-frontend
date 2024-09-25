@@ -1,4 +1,4 @@
-const naringsvirksomhetType = {
+const virksomhetType = {
   FISKE: 'FISKE',
   FRILANSER: 'FRILANSER',
   DAGMAMMA: 'DAGMAMMA',
@@ -6,4 +6,4 @@ const naringsvirksomhetType = {
   ANNEN: 'ANNEN',
 };
 
-export default naringsvirksomhetType;
+export default virksomhetType;

@@ -13,12 +13,7 @@ import {
   Fagsak,
   AlleKodeverk,
 } from '@navikt/fp-types';
-import {
-  soknadType,
-  oppholdArsakType,
-  oppholdArsakMapper,
-  behandlingType as BehandlingType,
-} from '@navikt/fp-kodeverk';
+import { soknadType, oppholdArsakMapper, behandlingType as BehandlingType } from '@navikt/fp-kodeverk';
 
 import UttakTidslinje, { PeriodeSøkerMedTidslinjedata, TidslinjeTimes } from './UttakTidslinje';
 
@@ -115,7 +110,7 @@ const lagUttakMedOpphold = (perioderSøker: PeriodeSoker[]): PeriodeSoker[] =>
   perioderSøker.map(uttak => {
     const { ...uttakPerioder } = uttak;
 
-    if (uttak.oppholdÅrsak !== oppholdArsakType.UDEFINERT) {
+    if (uttak.oppholdÅrsak) {
       const stonadskonto = oppholdArsakMapper[uttak.oppholdÅrsak];
       const oppholdInfo = {
         stønadskontoType: stonadskonto,

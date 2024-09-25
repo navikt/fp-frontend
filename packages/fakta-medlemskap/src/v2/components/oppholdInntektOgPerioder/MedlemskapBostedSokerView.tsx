@@ -3,7 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Label, BodyShort, Detail, Tag, HStack } from '@navikt/ds-react';
 import { Tooltip } from '@navikt/ft-ui-komponenter';
 
-import { region, personstatusType, opplysningAdresseType } from '@navikt/fp-kodeverk';
+import { region, personstatusType, adresseType } from '@navikt/fp-kodeverk';
 import { KodeverkMedNavn, Personadresse, PersonopplysningMedlem } from '@navikt/fp-types';
 
 import getAddresses from '../../getAddresses';
@@ -12,15 +12,15 @@ import styles from './medlemskapBostedSokerView.module.css';
 
 const getAdresse = (adresser: Personadresse[]): string => {
   const adresseListe = getAddresses(adresser);
-  const adresse = adresseListe[opplysningAdresseType.POSTADRESSE] || adresseListe[opplysningAdresseType.BOSTEDSADRESSE];
+  const adresse = adresseListe[adresseType.POSTADRESSE] || adresseListe[adresseType.BOSTEDSADRESSE];
   return adresse || '-';
 };
 
 const getUtlandsadresse = (adresser: Personadresse[]): string => {
   const adresseListe = getAddresses(adresser);
   const utlandsAdresse =
-    adresseListe[opplysningAdresseType.POSTADRESSE_UTLAND] ||
-    adresseListe[opplysningAdresseType.MIDLERTIDIG_POSTADRESSE_UTLAND];
+    adresseListe[adresseType.POSTADRESSE_UTLAND] ||
+    adresseListe[adresseType.MIDLERTIDIG_POSTADRESSE_UTLAND];
   return utlandsAdresse || '-';
 };
 
@@ -60,17 +60,15 @@ export const MedlemskapBostedSokerView: FunctionComponent<OwnProps> = ({
                   className={personopplysninger.personstatus === personstatusType.DOD ? styles.dodEtikett : ''}
                   variant="warning"
                 >
-                  {personopplysninger.personstatus === personstatusType.UDEFINERT
-                    ? intl.formatMessage({ id: 'Personstatus.Ukjent' })
-                    : personstatusTypes.find(s => s.kode === personopplysninger.personstatus)?.navn}
+                  { personstatusTypes.find(s => s.kode === personopplysninger.personstatus)?.navn ?? intl.formatMessage({ id: 'Personstatus.Ukjent' })}
                 </Tag>
               </Tooltip>
             </div>
           )}
-          {personopplysninger.region && personopplysninger.region !== region.UDEFINERT && (
+          {personopplysninger.region && (
             <div className={styles.etikettMargin}>
               <Tooltip content={intl.formatMessage({ id: 'BostedSokerView.Region' })} alignBottom>
-                <Tag variant="warning">{regionTypes.find(r => r.kode === personopplysninger.region)?.navn}</Tag>
+                <Tag variant="warning">{regionTypes.find(r => r.kode === personopplysninger.region)?.navn ?? intl.formatMessage({ id: 'Region.Ukjent' })}</Tag>
               </Tooltip>
             </div>
           )}

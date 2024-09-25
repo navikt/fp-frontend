@@ -1,5 +1,6 @@
-enum OpplysningAdresseType {
+enum AdresseType {
   BOSTEDSADRESSE = 'BOSTEDSADRESSE',
+  BOSTEDSADRESSE_UTLAND = 'BOSTEDSADRESSE_UTLAND',
   POSTADRESSE = 'POSTADRESSE',
   POSTADRESSE_UTLAND = 'POSTADRESSE_UTLAND',
   MIDLERTIDIG_POSTADRESSE_NORGE = 'MIDLERTIDIG_POSTADRESSE_NORGE',
@@ -7,4 +8,4 @@ enum OpplysningAdresseType {
   UKJENT_ADRESSE = 'UKJENT_ADRESSE',
 }
 
-export default OpplysningAdresseType;
+export default AdresseType;

@@ -122,8 +122,8 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
             .some(
               bt =>
                 bt === BehandlingÅrsakType.ETTER_KLAGE ||
-                bt === BehandlingÅrsakType.KLAGE_U_INNTK ||
-                bt === BehandlingÅrsakType.KLAGE_M_INNTK,
+                bt === BehandlingÅrsakType.RE_KLAGE_UTEN_END_INNTEKT ||
+                bt === BehandlingÅrsakType.RE_KLAGE_MED_END_INNTEKT,
             )
         : false,
     [behandling],

@@ -3,7 +3,7 @@ import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import {
-  opplysningAdresseType,
+  adresseType,
   navBrukerKjonn,
   soknadType,
   AksjonspunktCode,
@@ -51,7 +51,7 @@ const personoversikt = {
     fødselsdato: '1979-01-01',
     adresser: [
       {
-        adresseType: opplysningAdresseType.POSTADRESSE,
+        adresseType: adresseType.POSTADRESSE,
         adresselinje1: 'Gateadresse 1',
         postNummer: '1000',
         poststed: 'Oslo',

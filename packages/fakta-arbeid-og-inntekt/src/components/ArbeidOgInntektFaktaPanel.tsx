@@ -19,7 +19,7 @@ import { VerticalSpacer, Table } from '@navikt/ft-ui-komponenter';
 import {
   AksjonspunktCode,
   KodeverkType,
-  venteArsakType,
+  venteArsak,
   aksjonspunktStatus,
   ArbeidsforholdKomplettVurderingType,
 } from '@navikt/fp-kodeverk';
@@ -301,7 +301,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
           <SettPaVentModalIndex
             submitCallback={settPaVent}
             cancelEvent={() => settVisSettPåVentModal(false)}
-            defaultVenteårsak={venteArsakType.VENT_OPDT_INNTEKTSMELDING}
+            defaultVenteårsak={venteArsak.VENT_OPDT_INNTEKTSMELDING}
             hasManualPaVent
             ventearsaker={alleKodeverk[KodeverkType.VENT_AARSAK]}
             erTilbakekreving={false}

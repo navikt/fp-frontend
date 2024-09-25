@@ -13,7 +13,8 @@ const aktivitetStatus = {
   ARBEIDSAVKLARINGSPENGER: 'AAP',
   MILITAER_ELLER_SIVIL: 'MS',
   BRUKERS_ANDEL: 'BA',
-  UDEFINERT: '-',
+  TY:"TY",
+  VENTELØNN_VARTPENGER: "VENTELØNN_VARTPENGER",
 };
 
 export default aktivitetStatus;

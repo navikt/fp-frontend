@@ -1,4 +1,4 @@
-const utsettelseArsakCodes = {
+const utsettelseArsak = {
   ARBEID: 'ARBEID',
   LOVBESTEMT_FERIE: 'LOVBESTEMT_FERIE',
   SYKDOM: 'SYKDOM',
@@ -18,4 +18,4 @@ export const utsettelseArsakTexts = {
   UDEFINERT: '-',
 };
 
-export default utsettelseArsakCodes;
+export default utsettelseArsak;

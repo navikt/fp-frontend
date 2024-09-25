@@ -14,7 +14,7 @@ import {
 } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import {
-  utsettelseArsakCodes,
+  utsettelseArsak,
   AksjonspunktCode,
   aksjonspunktType,
   aksjonspunktStatus as AksjonspunktStatus,
@@ -1147,7 +1147,7 @@ VisAdvarselNårProsentIArbeidTotaltErMindreEnn100Prosent.args = {
         samtidigUttaksprosent: undefined,
         graderingInnvilget: false,
         periodeType: 'FORELDREPENGER',
-        utsettelseType: utsettelseArsakCodes.ARBEID,
+        utsettelseType: utsettelseArsak.ARBEID,
         oppholdÅrsak: '-',
         mottattDato: '2023-01-05',
         gradertAktivitet: undefined,
@@ -1191,7 +1191,7 @@ VisAdvarselNårUtbetalingsgradOgProsentArbeidOverstiger100Prosent.args = {
         samtidigUttaksprosent: undefined,
         graderingInnvilget: false,
         periodeType: 'FORELDREPENGER',
-        utsettelseType: utsettelseArsakCodes.ARBEID,
+        utsettelseType: utsettelseArsak.ARBEID,
         oppholdÅrsak: '-',
         mottattDato: '2023-01-05',
         gradertAktivitet: undefined,

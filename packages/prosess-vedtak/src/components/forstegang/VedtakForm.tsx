@@ -117,8 +117,8 @@ const erÅrsakTypeBehandlingEtterKlage = (behandlingArsakTyper: Behandling['beha
     .some(
       bt =>
         bt === klageBehandlingArsakType.ETTER_KLAGE ||
-        bt === klageBehandlingArsakType.KLAGE_U_INNTK ||
-        bt === klageBehandlingArsakType.KLAGE_M_INNTK,
+        bt === klageBehandlingArsakType.RE_KLAGE_UTEN_END_INNTEKT ||
+        bt === klageBehandlingArsakType.RE_KLAGE_MED_END_INNTEKT,
     );
 
 const finnVedtakstatusTekst = (

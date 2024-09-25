@@ -2,7 +2,7 @@ import React, { FunctionComponent, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { KodeverkMedNavn } from '@navikt/fp-types';
-import { behandlingType as BehandlingType, KodeverkType, venteArsakType, dokumentMalType } from '@navikt/fp-kodeverk';
+import { behandlingType as BehandlingType, KodeverkType, venteArsak, dokumentMalType } from '@navikt/fp-kodeverk';
 import { MeldingerSakIndex, MessagesModalSakIndex, FormValues } from '@navikt/fp-sak-meldinger';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
@@ -213,7 +213,7 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
       {submitFinished && showSettPaVentModal && (
         <SettPaVentReadOnlyModal
           lukkCallback={handleSubmitFromModal}
-          ventearsak={venteArsakType.AVV_DOK}
+          ventearsak={venteArsak.AVV_DOK}
           ventearsaker={ventearsaker}
         />
       )}

@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
-import { vilkarUtfallType, VilkarType, AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { vilkarUtfall, VilkarType, AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { OpptjeningFaktaIndex } from '@navikt/fp-fakta-opptjening';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { ArbeidsgiverOpplysningerPerId, Opptjening } from '@navikt/fp-types';
@@ -38,7 +38,7 @@ const OpptjeningsvilkaretFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanel
       !!props.behandling.vilkår &&
       props.behandling.vilkår.some(v => v.vilkarType === VilkarType.OPPTJENINGSVILKARET) &&
       props.behandling.vilkår.some(
-        v => v.vilkarType === VilkarType.MEDLEMSKAPSVILKARET && v.vilkarStatus === vilkarUtfallType.OPPFYLT,
+        v => v.vilkarType === VilkarType.MEDLEMSKAPSVILKARET && v.vilkarStatus === vilkarUtfall.OPPFYLT,
       )
     }
     renderPanel={data => (

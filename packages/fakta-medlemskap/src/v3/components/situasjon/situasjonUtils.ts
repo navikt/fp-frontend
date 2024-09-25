@@ -1,6 +1,6 @@
 import { AlleKodeverk, MedlemskapV3, UtlandsoppholdPeriode } from '@navikt/fp-types';
-import { getKodeverknavnFn, KodeverkType, opplysningAdresseType } from '@navikt/fp-kodeverk';
-import kodeverkTyper from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import { getKodeverknavnFn, KodeverkType, adresseType } from '@navikt/fp-kodeverk';
+import kodeverkTyper from '@navikt/fp-kodeverk/src/kodeverk/kodeverkTyper';
 import { IntlShape } from 'react-intl';
 import { toTitleCapitalization } from '../../utils/stringUtils';
 import { sorterPerioder } from '../../utils/periodeUtils';
@@ -29,7 +29,7 @@ export const getSisteBostedsLand = (
   intl: IntlShape,
 ): string | null => {
   const nyeste = medlemskap.adresser
-    .filter(adresse => adresse.adresse.adresseType === opplysningAdresseType.BOSTEDSADRESSE)
+    .filter(adresse => adresse.adresse.adresseType === adresseType.BOSTEDSADRESSE)
     .sort(sorterPerioder)[0]?.adresse.land;
   if (nyeste) {
     return formaterLand(nyeste, intl);

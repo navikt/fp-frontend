@@ -2,7 +2,7 @@ import React from 'react';
 import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { avslagsarsakCodes, aksjonspunktStatus, vilkarUtfallType, AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { avslagsarsakCodes, aksjonspunktStatus, vilkarUtfall, AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Behandling } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -67,7 +67,7 @@ export const ÅpentAksjonspunkt2Ledd = Template.bind({});
   ] as Aksjonspunkt[],
   isReadOnly: false,
   readOnlySubmitButton: false,
-  status: vilkarUtfallType.IKKE_VURDERT,
+  status: vilkarUtfall.IKKE_VURDERT,
   isForeldreansvar2Ledd: true,
 };
 
@@ -84,7 +84,7 @@ OppfyltVilkår2Ledd.args = {
   ] as Aksjonspunkt[],
   isReadOnly: true,
   readOnlySubmitButton: true,
-  status: vilkarUtfallType.OPPFYLT,
+  status: vilkarUtfall.OPPFYLT,
   isForeldreansvar2Ledd: true,
 };
 
@@ -107,7 +107,7 @@ AvslåttVilkår2Ledd.args = {
   ] as Aksjonspunkt[],
   isReadOnly: true,
   readOnlySubmitButton: true,
-  status: vilkarUtfallType.IKKE_OPPFYLT,
+  status: vilkarUtfall.IKKE_OPPFYLT,
   isForeldreansvar2Ledd: true,
 };
 
@@ -124,7 +124,7 @@ export const ÅpentAksjonspunkt4Ledd = Template.bind({});
   ] as Aksjonspunkt[],
   isReadOnly: false,
   readOnlySubmitButton: false,
-  status: vilkarUtfallType.IKKE_VURDERT,
+  status: vilkarUtfall.IKKE_VURDERT,
   isForeldreansvar2Ledd: false,
 };
 
@@ -141,7 +141,7 @@ OppfyltVilkår4Ledd.args = {
   ] as Aksjonspunkt[],
   isReadOnly: true,
   readOnlySubmitButton: true,
-  status: vilkarUtfallType.OPPFYLT,
+  status: vilkarUtfall.OPPFYLT,
   isForeldreansvar2Ledd: false,
 };
 
@@ -164,6 +164,6 @@ AvslåttVilkår4Ledd.args = {
   ] as Aksjonspunkt[],
   isReadOnly: true,
   readOnlySubmitButton: true,
-  status: vilkarUtfallType.IKKE_OPPFYLT,
+  status: vilkarUtfall.IKKE_OPPFYLT,
   isForeldreansvar2Ledd: false,
 };

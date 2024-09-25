@@ -1,6 +1,6 @@
 import { AlleKodeverk, MedlemskapV3 } from '@navikt/fp-types';
 import { formaterUtenlandsopphold, getSisteBostedsLand, getSistePersonstatus, getSisteRegion } from './situasjonUtils';
-import { opplysningAdresseType } from '@navikt/fp-kodeverk';
+import { adresseType } from '@navikt/fp-kodeverk';
 import { expect } from 'vitest';
 import { createIntl } from '@navikt/ft-utils';
 import messages from '../../../../i18n/nb_NO.json';
@@ -56,17 +56,17 @@ describe('situasjonUtils', () => {
           {
             fom: '2022-06-02',
             tom: '2025-02-01',
-            adresse: { adresseType: opplysningAdresseType.BOSTEDSADRESSE, land: 'Norge' },
+            adresse: { adresseType: adresseType.BOSTEDSADRESSE, land: 'Norge' },
           },
           {
             fom: '2022-07-01',
             tom: '2025-02-01',
-            adresse: { adresseType: opplysningAdresseType.BOSTEDSADRESSE, land: 'Finland' },
+            adresse: { adresseType: adresseType.BOSTEDSADRESSE, land: 'Finland' },
           },
           {
             fom: '2022-07-01',
             tom: '2025-02-01',
-            adresse: { adresseType: opplysningAdresseType.POSTADRESSE, land: 'USA' },
+            adresse: { adresseType: adresseType.POSTADRESSE, land: 'USA' },
           },
         ],
       };

@@ -8,7 +8,7 @@ import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import {
   KodeverkType,
   soknadType,
-  vilkarUtfallType,
+  vilkarUtfall,
   getKodeverknavnFn,
   AksjonspunktCode,
   aksjonspunktStatus,
@@ -67,7 +67,7 @@ const findDate = (soknad: Soknad, familiehendelse: FamilieHendelse): string | un
 
 export const buildInitialValues = (aksjonspunkter: Aksjonspunkt[], status: string): FormValues => ({
   erVilkarOk:
-    aksjonspunkter[0].status === aksjonspunktStatus.OPPRETTET ? undefined : vilkarUtfallType.OPPFYLT === status,
+    aksjonspunkter[0].status === aksjonspunktStatus.OPPRETTET ? undefined : vilkarUtfall.OPPFYLT === status,
   ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
 });
 

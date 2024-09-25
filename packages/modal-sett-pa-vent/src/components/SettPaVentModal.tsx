@@ -15,7 +15,7 @@ import {
   dateBeforeToday,
 } from '@navikt/ft-form-validators';
 import { KodeverkMedNavn } from '@navikt/fp-types';
-import { venteArsakType } from '@navikt/fp-kodeverk';
+import { venteArsak } from '@navikt/fp-kodeverk';
 
 import styles from './settPaVentModal.module.css';
 
@@ -31,21 +31,21 @@ const buildInitialValues = (hasManualPaVent: boolean, ventearsak?: string, frist
 });
 
 const manuelleVenteArsaker = [
-  venteArsakType.AVV_DOK,
-  venteArsakType.AVV_FODSEL,
-  venteArsakType.VENT_PÅ_BRUKERTILBAKEMELDING,
-  venteArsakType.UTV_FRIST,
-  venteArsakType.FOR_TIDLIG_SOKNAD,
-  venteArsakType.VENT_OPDT_INNTEKTSMELDING,
-  venteArsakType.VENT_UTLAND_TRYGD,
-  venteArsakType.UTVIDET_TILSVAR_FRIST,
-  venteArsakType.ENDRE_TILKJENT_YTELSE,
-  venteArsakType.VENT_PÅ_MULIG_MOTREGNING,
+  venteArsak.AVV_DOK,
+  venteArsak.AVV_FODSEL,
+  venteArsak.VENT_PÅ_BRUKERTILBAKEMELDING,
+  venteArsak.UTV_FRIST,
+  venteArsak.FOR_TIDLIG_SOKNAD,
+  venteArsak.VENT_OPDT_INNTEKTSMELDING,
+  venteArsak.VENT_UTLAND_TRYGD,
+  venteArsak.UTVIDET_TILSVAR_FRIST,
+  venteArsak.ENDRE_TILKJENT_YTELSE,
+  venteArsak.VENT_PÅ_MULIG_MOTREGNING,
 ];
 
 const automatiskeVentearsakerForTilbakekreving = [
-  venteArsakType.VENT_PÅ_BRUKERTILBAKEMELDING,
-  venteArsakType.VENT_PÅ_TILBAKEKREVINGSGRUNNLAG,
+  venteArsak.VENT_PÅ_BRUKERTILBAKEMELDING,
+  venteArsak.VENT_PÅ_TILBAKEKREVINGSGRUNNLAG,
 ];
 
 const inkluderVentearsak = (ventearsak: KodeverkMedNavn, valgtVentearsak?: string): boolean =>
@@ -61,7 +61,7 @@ const skalViseFristenTekst = (
     erTilbakekreving &&
     ((frist !== undefined && dateBeforeToday(frist) === null) ||
       (originalFrist !== undefined && dateBeforeToday(originalFrist) === null));
-  const erVenterPaKravgrunnlag = ventearsak === venteArsakType.VENT_PÅ_TILBAKEKREVINGSGRUNNLAG;
+  const erVenterPaKravgrunnlag = ventearsak === venteArsak.VENT_PÅ_TILBAKEKREVINGSGRUNNLAG;
   return erTilbakekreving && erFristenUtløpt && erVenterPaKravgrunnlag;
 };
 
