@@ -29,7 +29,7 @@ const SituasjonOversikt: FC<Props> = ({ soknad, medlemskap, alleKodeverk }) => {
       />
       <Situasjon
         labelFormatId="SituasjonLabel.SisteAdresse"
-        value={getSisteBostedsLand(medlemskap, alleKodeverk, intl)}
+        value={getSisteBostedsLand(medlemskap, intl)}
         kilde={FaktaKilde.FREG}
       />
       <Situasjon

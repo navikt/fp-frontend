@@ -21,6 +21,7 @@ const defaultMedlemskapProps: MedlemskapV3 = {
 
 const intl = createIntl(messages);
 const kodeverk = alleKodeverk as unknown as AlleKodeverk;
+
 describe('situasjonUtils', () => {
   describe('getSisteRegion', () => {
     it('skal returnere region for siste aktuelle regions periode', () => {
@@ -70,7 +71,7 @@ describe('situasjonUtils', () => {
           },
         ],
       };
-      expect(getSisteBostedsLand(medlemskap, kodeverk, intl)).toBe('I Finland');
+      expect(getSisteBostedsLand(medlemskap, intl)).toBe('I utlandet');
     });
   });
 
