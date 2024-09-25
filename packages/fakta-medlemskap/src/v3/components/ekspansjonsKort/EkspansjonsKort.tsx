@@ -1,7 +1,7 @@
 import React, { FC, PropsWithChildren } from 'react';
 import { MedlemskapAvvik } from '@navikt/fp-types';
 import { Box, ExpansionCard, HStack, VStack } from '@navikt/ds-react';
-import { FaktaKildeLabel, FaktaKilde } from '@navikt/fp-fakta-felles';
+import { FaktaKilde, getLabelForFaktaKilde } from '@navikt/fp-fakta-felles';
 
 import AvvikStatus from './AvvikStatus';
 import AvvikMerknad from './AvvikMerknad';
@@ -33,9 +33,7 @@ const EkspansjonsKort: FC<PropsWithChildren<Props>> = ({
           )}
           <div>
             <ExpansionCard.Title size="small">{tittel}</ExpansionCard.Title>
-            <ExpansionCard.Description>
-              <FaktaKildeLabel kilde={kilde} />
-            </ExpansionCard.Description>
+            <ExpansionCard.Description>{getLabelForFaktaKilde(kilde)}</ExpansionCard.Description>
           </div>
         </HStack>
       </ExpansionCard.Header>
