@@ -15,17 +15,17 @@ interface Props {
   oppholdstillatelser: OppholdstillatelsePeriode[];
   avvik: MedlemskapAvvik[];
   alleKodeverk: AlleKodeverk;
-  readOnly: boolean;
+  skalViseAvvik: boolean;
 }
 
-const OpplysningerOmOppholdstillatelser = ({ oppholdstillatelser, avvik = [], alleKodeverk, readOnly }: Props) => {
+const OpplysningerOmOppholdstillatelser = ({ oppholdstillatelser, avvik = [], alleKodeverk, skalViseAvvik }: Props) => {
   const intl = useIntl();
 
   const oppholdstillatelseTypeKodeverk = alleKodeverk[KodeverkType.OPPHOLDSTILLATELSE_TYPE];
 
   return (
     <EkspansjonsKort
-      readOnly={readOnly}
+      skalViseAvvik={skalViseAvvik}
       kilde={FaktaKilde.FREG}
       tittel={intl.formatMessage(
         { id: 'OpplysningsKort.OppholdstillatelseTittel' },
@@ -58,7 +58,7 @@ const OpplysningerOmOppholdstillatelser = ({ oppholdstillatelser, avvik = [], al
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {oppholdstillatelser.sort(sorterPerioder).map(({ fom, tom, oppholdstillatelseType }) => {
+              {oppholdstillatelser.sort(sorterPerioder).map(({ fom, tom, type }) => {
                 return (
                   <Table.Row key={fom + tom}>
                     <Table.DataCell>
@@ -67,9 +67,7 @@ const OpplysningerOmOppholdstillatelser = ({ oppholdstillatelser, avvik = [], al
                         dateStringTom={tom === null || tom === TIDENES_ENDE ? undefined : tom}
                       />
                     </Table.DataCell>
-                    <Table.DataCell>
-                      {oppholdstillatelseTypeKodeverk.find(kv => kv.kode === oppholdstillatelseType)?.navn}
-                    </Table.DataCell>
+                    <Table.DataCell>{oppholdstillatelseTypeKodeverk.find(kv => kv.kode === type)?.navn}</Table.DataCell>
                   </Table.Row>
                 );
               })}

@@ -64,7 +64,7 @@ describe('<MedlemskapFaktaIndex>', () => {
       adresser.getByText('Dette ble markert fordi det er registrert én eller flere adresser i utlandet'),
     ).toBeInTheDocument();
     expect(
-      adresser.getByText('Dette ble markert fordi det ikke er registrert noen adresser i folkeregisteret'),
+      adresser.getByText('Dette ble markert fordi det ikke er registrert norske bostedsadresser i folkeregisteret'),
     ).toBeInTheDocument();
 
     expect(adresser.getByText('Søker, Ola Nordmann')).toBeInTheDocument();
@@ -72,10 +72,10 @@ describe('<MedlemskapFaktaIndex>', () => {
       adresser.getByText('Adresser for søker registrert i folkeregisteret gyldige for de siste 12 månedene'),
     ).toBeInTheDocument();
     expect(adresser.getByText('01.01.2019 -')).toBeInTheDocument();
-    expect(adresser.getByText('Oslogata 1, 1234 Oslo NOR')).toBeInTheDocument();
+    expect(adresser.getByText('Oslogata 1, 1234 Oslo Norge')).toBeInTheDocument();
     expect(adresser.getByText('Bostedsadresse')).toBeInTheDocument();
     expect(adresser.getByText('01.01.2020 - 01.01.2021')).toBeInTheDocument();
-    expect(adresser.getByText('Mäkelänkatu 1 B, FI-00123 Helsinki FIN')).toBeInTheDocument();
+    expect(adresser.getByText('Mäkelänkatu 1B, FI-00123 Helsinki Finland')).toBeInTheDocument();
     expect(adresser.getByText('Postadresse i utlandet')).toBeInTheDocument();
     expect(adresser.getByText('Annen part, Kari Nordmann')).toBeInTheDocument();
     expect(
@@ -146,22 +146,23 @@ describe('<MedlemskapFaktaIndex>', () => {
     ).toBeInTheDocument();
     expect(medlPerioder.getByText('Periode')).toBeInTheDocument();
     expect(medlPerioder.getByText('Er medlem')).toBeInTheDocument();
-    expect(medlPerioder.getByText('Land lovv.')).toBeInTheDocument();
+    expect(medlPerioder.getByText('Lovvalgland')).toBeInTheDocument();
     expect(medlPerioder.getByText('Studieland')).toBeInTheDocument();
-    expect(medlPerioder.getByText('Type medl.')).toBeInTheDocument();
+    expect(medlPerioder.getByText('Lovvalg')).toBeInTheDocument();
     expect(medlPerioder.getByText('Dekn. type')).toBeInTheDocument();
     expect(medlPerioder.getByText('Besl. dato')).toBeInTheDocument();
 
-    expect(medlPerioder.getByText('01.01.2022 - 01.01.2024')).toBeInTheDocument();
+    expect(medlPerioder.getByText('01.01.2023 - 01.01.2024')).toBeInTheDocument();
     expect(medlPerioder.getByText('Ja')).toBeInTheDocument();
-    expect(medlPerioder.getByText('Spania')).toBeInTheDocument();
-    expect(medlPerioder.getByText('Irak')).toBeInTheDocument();
+    expect(medlPerioder.getByText('Norge')).toBeInTheDocument();
+    expect(medlPerioder.getByText('Sverige')).toBeInTheDocument();
     expect(medlPerioder.getByText('Endelig')).toBeInTheDocument();
     expect(medlPerioder.getByText('Full')).toBeInTheDocument();
-    expect(medlPerioder.getByText('01.02.2024')).toBeInTheDocument();
+    expect(medlPerioder.getByText('24.09.2024')).toBeInTheDocument();
 
     expect(medlPerioder.getByText('01.01.2019 - 01.01.2022')).toBeInTheDocument();
     expect(medlPerioder.getByText('Nei')).toBeInTheDocument();
+    expect(medlPerioder.getByText('Finland')).toBeInTheDocument();
     expect(medlPerioder.getByText('Under avklaring')).toBeInTheDocument();
     expect(medlPerioder.getByText('Opphør')).toBeInTheDocument();
     expect(medlPerioder.getByText('01.02.2020')).toBeInTheDocument();
@@ -171,11 +172,11 @@ describe('<MedlemskapFaktaIndex>', () => {
     await userEvent.click(oppholdstillatelser.getByText('Vis mer'));
 
     expect(
-      oppholdstillatelser.getByText('Dette ble markert fordi søker mangler oppholdstilatelse'),
+      oppholdstillatelser.getByText('Dette ble markert fordi søker mangler oppholdstillatelse'),
     ).toBeInTheDocument();
     expect(
       oppholdstillatelser.getByText(
-        'Perioder med oppholdstilatelser som er registrert i folkegregisteret gyldige for de siste 12 månedene',
+        'Perioder med oppholdstillatelser som er registrert i folkeregisteret gyldige for de siste 12 månedene',
       ),
     ).toBeInTheDocument();
     expect(oppholdstillatelser.getByText('Periode')).toBeInTheDocument();

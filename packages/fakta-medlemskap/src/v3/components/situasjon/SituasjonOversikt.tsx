@@ -29,17 +29,17 @@ const SituasjonOversikt: FC<Props> = ({ soknad, medlemskap, alleKodeverk }) => {
       />
       <Situasjon
         labelFormatId="SituasjonLabel.SisteAdresse"
-        value={getSisteBostedsLand(medlemskap, alleKodeverk, intl)}
+        value={getSisteBostedsLand(medlemskap, intl)}
         kilde={FaktaKilde.FREG}
       />
       <Situasjon
         labelFormatId="SituasjonLabel.Statborgerskap"
-        value={getSisteRegion(medlemskap, alleKodeverk)}
+        value={getSisteRegion(medlemskap, alleKodeverk, intl)}
         kilde={FaktaKilde.FREG}
       />
       <Situasjon
         labelFormatId="SituasjonLabel.Personstatus"
-        value={getSistePersonstatus(medlemskap, alleKodeverk)}
+        value={getSistePersonstatus(medlemskap, alleKodeverk, intl)}
         kilde={FaktaKilde.FREG}
       />
     </HStack>

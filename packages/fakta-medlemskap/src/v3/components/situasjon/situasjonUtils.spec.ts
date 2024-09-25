@@ -21,6 +21,7 @@ const defaultMedlemskapProps: MedlemskapV3 = {
 
 const intl = createIntl(messages);
 const kodeverk = alleKodeverk as unknown as AlleKodeverk;
+
 describe('situasjonUtils', () => {
   describe('getSisteRegion', () => {
     it('skal returnere region for siste aktuelle regions periode', () => {
@@ -31,7 +32,7 @@ describe('situasjonUtils', () => {
           { fom: '2022-07-01', tom: '2025-02-01', type: 'EOS' },
         ],
       };
-      expect(getSisteRegion(medlemskap, kodeverk)).toBe('EU/EØS');
+      expect(getSisteRegion(medlemskap, kodeverk, intl)).toBe('EU/EØS');
     });
   });
 
@@ -44,7 +45,7 @@ describe('situasjonUtils', () => {
           { fom: '2022-07-01', tom: '2025-02-01', type: 'UTVA' },
         ],
       };
-      expect(getSistePersonstatus(medlemskap, kodeverk)).toBe('Utvandret');
+      expect(getSistePersonstatus(medlemskap, kodeverk, intl)).toBe('Utvandret');
     });
   });
 
@@ -56,12 +57,12 @@ describe('situasjonUtils', () => {
           {
             fom: '2022-06-02',
             tom: '2025-02-01',
-            adresse: { adresseType: opplysningAdresseType.BOSTEDSADRESSE, land: 'NOR' },
+            adresse: { adresseType: opplysningAdresseType.BOSTEDSADRESSE, land: 'Norge' },
           },
           {
             fom: '2022-07-01',
             tom: '2025-02-01',
-            adresse: { adresseType: opplysningAdresseType.BOSTEDSADRESSE, land: 'FIN' },
+            adresse: { adresseType: opplysningAdresseType.BOSTEDSADRESSE, land: 'Finland' },
           },
           {
             fom: '2022-07-01',
@@ -70,7 +71,7 @@ describe('situasjonUtils', () => {
           },
         ],
       };
-      expect(getSisteBostedsLand(medlemskap, kodeverk, intl)).toBe('I Finland');
+      expect(getSisteBostedsLand(medlemskap, intl)).toBe('I utlandet');
     });
   });
 
@@ -84,7 +85,7 @@ describe('situasjonUtils', () => {
         {
           fom: '2022-07-01',
           tom: '2025-02-01',
-          landNavn: 'FINLAND',
+          landNavn: 'Finland',
         },
       ];
       expect(formaterUtenlandsopphold(utenlandsopphold, kodeverk, intl)).toBe('I Finland');
@@ -95,12 +96,12 @@ describe('situasjonUtils', () => {
         {
           fom: '2023-07-01',
           tom: '2023-09-01',
-          landNavn: 'DANMARK',
+          landNavn: 'Danmark',
         },
         {
           fom: '2024-07-01',
           tom: '2024-10-01',
-          landNavn: 'FINLAND',
+          landNavn: 'Finland',
         },
       ];
       expect(formaterUtenlandsopphold(utenlandsopphold, kodeverk, intl)).toBe('I flere land');

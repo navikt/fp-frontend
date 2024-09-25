@@ -12,7 +12,7 @@ interface Props {
   tittel: string;
   relevanteAvvik: MedlemskapAvvik[];
   avvikValues?: Record<string, string>;
-  readOnly: boolean;
+  skalViseAvvik: boolean;
 }
 
 const EkspansjonsKort: FC<PropsWithChildren<Props>> = ({
@@ -20,14 +20,14 @@ const EkspansjonsKort: FC<PropsWithChildren<Props>> = ({
   kilde,
   relevanteAvvik,
   avvikValues,
-  readOnly,
+  skalViseAvvik,
   children,
 }) => {
   return (
     <ExpansionCard aria-label={tittel} size="small">
       <ExpansionCard.Header>
         <HStack gap="4" wrap={false}>
-          {!readOnly && (
+          {skalViseAvvik && (
             <div style={{ marginTop: 4 }}>
               <AvvikStatus harAvvik={relevanteAvvik.length > 0} />
             </div>
@@ -43,9 +43,7 @@ const EkspansjonsKort: FC<PropsWithChildren<Props>> = ({
       <ExpansionCard.Content>
         <Box padding="4" background="surface-subtle" borderRadius="medium">
           <VStack gap="4">
-            {relevanteAvvik.map(a => (
-              <AvvikMerknad key={a} avvik={a} values={avvikValues} />
-            ))}
+            {skalViseAvvik && relevanteAvvik.map(a => <AvvikMerknad key={a} avvik={a} values={avvikValues} />)}
             {children}
           </VStack>
         </Box>

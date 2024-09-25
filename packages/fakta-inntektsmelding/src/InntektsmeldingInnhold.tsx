@@ -190,10 +190,12 @@ const BortfalteNaturalYtelser = ({ inntektsmelding }: { inntektsmelding: Inntekt
                       <FormattedMessage id="InntektsmeldingFaktaPanel.bortfalteNaturalytelser.verdi" />:{' '}
                       {formatCurrencyNoKr(naturalytelse.beloepPerMnd.verdi)}
                     </li>
-                    {naturalytelse.periode.tomDato !== TIDENES_ENDE && (<li key={naturalytelse.indexKey}>
-                      <FormattedMessage id="InntektsmeldingFaktaPanel.bortfalteNaturalytelser.tom" />{' '}
-                      <DateLabel dateString={naturalytelse.periode.tomDato} />
-                    </li>)}
+                    {naturalytelse.periode.tomDato !== TIDENES_ENDE && (
+                      <li key={naturalytelse.indexKey}>
+                        <FormattedMessage id="InntektsmeldingFaktaPanel.bortfalteNaturalytelser.tom" />{' '}
+                        <DateLabel dateString={naturalytelse.periode.tomDato} />
+                      </li>
+                    )}
                   </>
                 ))}
               </ul>
@@ -212,22 +214,29 @@ const BortfalteNaturalYtelser = ({ inntektsmelding }: { inntektsmelding: Inntekt
  * bortfalt periode: {fomDato: '2024-09-05', tomDato: '2024-09-26'}
  */
 const konverterAktivePerioderTilBortfaltePerioder = (inntektsmelding: Inntektsmelding) => {
-  const gruppertPåType = inntektsmelding.aktiveNaturalytelser.reduce((prev, value) => {
-    const type = value.type;
-    if (type in prev) {
-      return {...prev, [type]: [...prev[type], value]}
-    }
+  const gruppertPåType = inntektsmelding.aktiveNaturalytelser.reduce(
+    (prev, value) => {
+      const type = value.type;
+      if (type in prev) {
+        return { ...prev, [type]: [...prev[type], value] };
+      }
 
-    return {...prev, [type]: [value]}
-  }, {} as Record<string, AktivNaturalYtelse[]>)
+      return { ...prev, [type]: [value] };
+    },
+    {} as Record<string, AktivNaturalYtelse[]>,
+  );
 
   const bortfalteNaturalytelser = {} as Record<string, AktivNaturalYtelse[]>;
 
   Object.entries(gruppertPåType).map(([key, value]) => {
-    const sortert = value.sort((a,b) => sorterPerioder(
-      {fom: a.periode.fomDato, tom: a.periode.tomDato},
-      {fom: b.periode.fomDato, tom: b.periode.tomDato})
-    ).reverse();
+    const sortert = value
+      .sort((a, b) =>
+        sorterPerioder(
+          { fom: a.periode.fomDato, tom: a.periode.tomDato },
+          { fom: b.periode.fomDato, tom: b.periode.tomDato },
+        ),
+      )
+      .reverse();
 
     bortfalteNaturalytelser[key] = sortert.flatMap((current, index, array) => {
       const next = array[index + 1];
@@ -239,18 +248,20 @@ const konverterAktivePerioderTilBortfaltePerioder = (inntektsmelding: Inntektsme
         return [];
       }
 
-      return [{
-        ...current,
-        periode: {
-          fomDato: addDaysToDate(nyFom, 1),
-          tomDato: nyTom ? addDaysToDate(nyTom, -1) : TIDENES_ENDE,
-        }
-      }]
+      return [
+        {
+          ...current,
+          periode: {
+            fomDato: addDaysToDate(nyFom, 1),
+            tomDato: nyTom ? addDaysToDate(nyTom, -1) : TIDENES_ENDE,
+          },
+        },
+      ];
     });
   });
 
   return bortfalteNaturalytelser;
-}
+};
 
 const InntektsmeldingInfoBlokk = ({ tittel, children }: { tittel: string; children: React.ReactNode }) => {
   return (

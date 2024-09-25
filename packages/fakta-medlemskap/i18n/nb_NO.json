@@ -70,7 +70,7 @@
   "MedlemskapInfoPanel.Submit": "Bekreft",
 
   "AksjonspunktHelpText.Bosatt": "Det er usikkert om søker er bosatt i Norge. ",
-  "AksjonspunktHelpText.Oppholdsrett": "Det er usikkert om søkeren har en gyldig oppholdstilatelse. ",
+  "AksjonspunktHelpText.Oppholdsrett": "Det er usikkert om søkeren har en gyldig oppholdstillatelse. ",
   "AksjonspunktHelpText.MedlPerioder": "Søker har en periode i medlemskapsregisteret. ",
   "AksjonspunktHelpText.EØSManglendeAnsettelseMedInntekt": "Søkeren er en EØS-borger men det er usikkert om søker har oppholdsrett i Norge. ",
   "AksjonspunktHelpText.Postfix": "Vurder om søker har medlemskap i folketrygden.",
@@ -89,6 +89,9 @@
 
   "Situasjon.FlereLand": "I flere land",
   "Situasjon.ILand": "I {land}",
+  "Situasjon.INorge": "I Norge",
+  "Situasjon.IUtlandet": "I utlandet",
+  "Situasjon.Ukjent": "Ukjent",
 
   "OpplysningsKort.UtenlandsoppholdTittel": "Opplysninger fra søknad",
   "OpplysningsKort.AdresseTittel": "Adresser til søker({adresseCountSoker}){adresseCountAnnenpart, select, none {} other { og annen part({adresseCountAnnenpart})}}",
@@ -97,10 +100,10 @@
   "OpplysningsKort.OppholdstillatelseTittel": "Oppholdstillatelse({count})",
 
   "AvvikMerknad.BosattUtenlandsopphold": "Dette ble markert fordi søker har oppgitt at man skal eller har bodd i utlandet",
-  "AvvikMerknad.BosattManglendeAdresse": "Dette ble markert fordi det ikke er registrert noen adresser i folkeregisteret",
-  "AvvikMerknad.BosattUgyldigPersonstatus": "Dette ble markert fordi noen er registrert som {personstatus}",
+  "AvvikMerknad.BosattManglendeAdresse": "Dette ble markert fordi det ikke er registrert norske bostedsadresser i folkeregisteret",
+  "AvvikMerknad.BosattUgyldigPersonstatus": "Dette ble markert fordi søker er registrert som {personstatus}",
   "AvvikMerknad.BosattUtenlandsadresse": "Dette ble markert fordi det er registrert én eller flere adresser i utlandet",
-  "AvvikMerknad.Oppholdsrett": "Dette ble markert fordi søker mangler oppholdstilatelse",
+  "AvvikMerknad.Oppholdsrett": "Dette ble markert fordi søker mangler oppholdstillatelse",
   "AvvikMerknad.MedlPerioder": "Dette ble markert fordi søker har én eller flere perioder i medlemskapsregisteret",
   "AvvikMerknad.EOSManglendeAnsettelseMedInntekt": "Dette ble markert fordi det ikke er registrert inntekt eller annsettelse på søker",
 
@@ -140,9 +143,9 @@
   "OpplysningerFraMedlemskapsregister.Tabell.Ingen": "Ingen perioder funnet for søker i medlemskapsregister.",
   "OpplysningerFraMedlemskapsregister.TabellHeader.Periode": "Periode",
   "OpplysningerFraMedlemskapsregister.TabellHeader.ErMedlem": "Er medlem",
-  "OpplysningerFraMedlemskapsregister.TabellHeader.LovvalgLand": "Land lovv.",
+  "OpplysningerFraMedlemskapsregister.TabellHeader.LovvalgLand": "Lovvalgland",
   "OpplysningerFraMedlemskapsregister.TabellHeader.Studieland": "Studieland",
-  "OpplysningerFraMedlemskapsregister.TabellHeader.MedlType": "Type medl.",
+  "OpplysningerFraMedlemskapsregister.TabellHeader.MedlType": "Lovvalg",
   "OpplysningerFraMedlemskapsregister.TabellHeader.Dekningtype": "Dekn. type",
   "OpplysningerFraMedlemskapsregister.TabellHeader.Beslutningsdato": "Besl. dato",
 
@@ -150,7 +153,7 @@
 
 
 
-  "OpplysningerOmOppholdstillatelser.Beskrivelse": "Perioder med oppholdstilatelser som er registrert i folkegregisteret gyldige for de siste 12 månedene",
+  "OpplysningerOmOppholdstillatelser.Beskrivelse": "Perioder med oppholdstillatelser som er registrert i folkeregisteret gyldige for de siste 12 månedene",
   "OpplysningerOmOppholdstillatelser.Tabell.Ingen": "Ingen oppholdstillatelser funnet for søker.",
   "OpplysningerOmOppholdstillatelser.TabellHeader.Periode": "Periode",
   "OpplysningerOmOppholdstillatelser.TabellHeader.Type": "Type",

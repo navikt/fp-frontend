@@ -1,28 +1,25 @@
 import React from 'react';
 import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { Aksjonspunkt } from '@navikt/ft-types';
-
 import {
   AksjonspunktCode,
   aksjonspunktStatus,
   behandlingStatus,
   behandlingType,
   fagsakYtelseType,
-  opplysningAdresseType as OpplysningAdresseType,
+  opplysningAdresseType,
   personstatusType,
+  region,
 } from '@navikt/fp-kodeverk';
-import { Behandling, Fagsak, MedlemskapAvvik, MedlemskapV3, Soknad } from '@navikt/fp-types';
-import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { Aksjonspunkt, Behandling, Fagsak, MedlemskapAvvik, MedlemskapV3, Soknad } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 import MedlemskapFaktaIndex from './MedlemskapFaktaIndex';
 
 import '@navikt/ds-css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
 import '@navikt/ft-form-hooks/dist/style.css';
-import region from '@navikt/fp-kodeverk/src/region';
-import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 const behandling = {
   uuid: '1',
@@ -32,44 +29,13 @@ const behandling = {
   status: behandlingStatus.BEHANDLING_UTREDES,
 } as Behandling;
 
-export default {
-  title: 'fakta/fakta-medlemskap-v3',
-  component: MedlemskapFaktaIndex,
-};
-const fagsak = {
+const defaultFagsak = {
   bruker: { navn: 'Ola Nordmann' },
   annenPart: { navn: 'Kari Nordmann' },
   fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
-};
+} as Fagsak;
 
-const Template: StoryFn<{
-  medlemskap: MedlemskapV3;
-  soknad: Soknad;
-  readOnly: boolean;
-  aksjonspunkter: Aksjonspunkt[];
-  submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
-  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
-}> = ({ medlemskap, soknad, aksjonspunkter, submitCallback, alleMerknaderFraBeslutter, readOnly = false }) => (
-  <MedlemskapFaktaIndex
-    behandling={behandling}
-    medlemskap={medlemskap}
-    soknad={soknad}
-    aksjonspunkter={aksjonspunkter}
-    alleKodeverk={alleKodeverk as any}
-    alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-    submitCallback={submitCallback}
-    readOnly={readOnly}
-    harApneAksjonspunkter
-    submittable
-    setFormData={() => undefined}
-    fagsak={fagsak as Fagsak}
-  />
-);
-
-const soknad = {
-  oppgittFordeling: {
-    startDatoForPermisjon: '2019-01-01',
-  },
+const defaultSoknad = {
   oppgittTilknytning: {
     oppholdNorgeNa: true,
     oppholdNestePeriode: true,
@@ -89,8 +55,43 @@ const soknad = {
       },
     ],
   },
-  termindato: '2018-01-01',
 } as Soknad;
+
+export default {
+  title: 'fakta/fakta-medlemskap-v3',
+  component: MedlemskapFaktaIndex,
+};
+
+const Template: StoryFn<{
+  medlemskap: MedlemskapV3;
+  soknad: Soknad;
+  readOnly: boolean;
+  aksjonspunkter: Aksjonspunkt[];
+  fagsak: Fagsak;
+  submitCallback: (aksjonspunktData: any) => Promise<void>;
+}> = ({
+  medlemskap,
+  soknad = defaultSoknad,
+  aksjonspunkter,
+  readOnly = false,
+  fagsak = defaultFagsak,
+  submitCallback = action('button-click') as (aksjonspunktData: any) => Promise<void>,
+}) => (
+  <MedlemskapFaktaIndex
+    behandling={behandling}
+    medlemskap={medlemskap}
+    soknad={soknad}
+    aksjonspunkter={aksjonspunkter}
+    alleKodeverk={alleKodeverk as any}
+    alleMerknaderFraBeslutter={{}}
+    submitCallback={submitCallback}
+    readOnly={readOnly}
+    harApneAksjonspunkter
+    submittable
+    setFormData={() => undefined}
+    fagsak={fagsak}
+  />
+);
 
 const lagMedlemskap = (override: Partial<MedlemskapV3>): MedlemskapV3 => ({
   manuellBehandlingResultat: null,
@@ -101,14 +102,13 @@ const lagMedlemskap = (override: Partial<MedlemskapV3>): MedlemskapV3 => ({
     MedlemskapAvvik.BOSATT_UGYLDIG_PERSONSTATUS,
     MedlemskapAvvik.MEDL_PERIODER,
     MedlemskapAvvik.TREDJELAND_MANGLENDE_LOVLIG_OPPHOLD,
-    MedlemskapAvvik.EØS_MANGLENDE_ANSETTELSE_MED_INNTEKT,
   ],
   legacyManuellBehandling: null,
   oppholdstillatelser: [
     {
       fom: '2021-10-13',
       tom: '2024-01-13',
-      oppholdstillatelseType: 'PERMANENT',
+      type: 'PERMANENT',
     },
   ],
   medlemskapsperioder: [
@@ -116,21 +116,22 @@ const lagMedlemskap = (override: Partial<MedlemskapV3>): MedlemskapV3 => ({
       fom: '2019-01-01',
       tom: '2022-01-01',
       erMedlem: false,
-      lovvalgsland: null,
+      lovvalgsland: 'Finland',
       studieland: null,
       medlemskapType: 'AVKLARES',
       dekningType: 'OPPHOR',
       beslutningsdato: '2020-02-01',
     },
+
     {
-      fom: '2022-01-01',
+      fom: '2023-01-01',
       tom: '2024-01-01',
       erMedlem: true,
-      lovvalgsland: 'Spania',
-      studieland: 'Irak',
+      lovvalgsland: 'Norge',
+      studieland: 'Sverige',
       medlemskapType: 'ENDELIG',
       dekningType: 'FULL',
-      beslutningsdato: '2024-02-01',
+      beslutningsdato: '2024-09-24',
     },
   ],
   utenlandsopphold: [
@@ -143,28 +144,28 @@ const lagMedlemskap = (override: Partial<MedlemskapV3>): MedlemskapV3 => ({
   adresser: [
     {
       fom: '2019-01-01',
-      tom: '9999-12-31',
+      tom: TIDENES_ENDE,
       adresse: {
-        adresseType: OpplysningAdresseType.BOSTEDSADRESSE,
+        adresseType: opplysningAdresseType.BOSTEDSADRESSE,
         adresselinje1: 'Oslogata 1',
         adresselinje2: null,
         adresselinje3: null,
         poststed: 'Oslo',
         postNummer: '1234',
-        land: 'NOR',
+        land: 'Norge',
       },
     },
     {
       fom: '2020-01-01',
       tom: '2021-01-01',
       adresse: {
-        adresseType: OpplysningAdresseType.POSTADRESSE_UTLAND,
-        adresselinje1: 'Mäkelänkatu 1 B',
+        adresseType: opplysningAdresseType.POSTADRESSE_UTLAND,
+        adresselinje1: 'Mäkelänkatu 1B',
         adresselinje2: null,
         adresselinje3: null,
         poststed: 'Helsinki',
         postNummer: 'FI-00123',
-        land: 'FIN',
+        land: 'Finland',
       },
     },
   ],
@@ -191,28 +192,28 @@ const lagMedlemskap = (override: Partial<MedlemskapV3>): MedlemskapV3 => ({
     adresser: [
       {
         fom: '2019-01-01',
-        tom: '9999-12-31',
+        tom: TIDENES_ENDE,
         adresse: {
-          adresseType: OpplysningAdresseType.BOSTEDSADRESSE,
+          adresseType: opplysningAdresseType.BOSTEDSADRESSE,
           adresselinje1: 'Oslogata 1',
           adresselinje2: null,
           adresselinje3: null,
           poststed: 'Oslo',
           postNummer: '1234',
-          land: 'NOR',
+          land: 'Norge',
         },
       },
       {
         fom: '2020-01-01',
         tom: '2021-01-01',
         adresse: {
-          adresseType: OpplysningAdresseType.POSTADRESSE_UTLAND,
-          adresselinje1: 'Mäkelänkatu 1 B',
+          adresseType: opplysningAdresseType.POSTADRESSE_UTLAND,
+          adresselinje1: 'Mäkelänkatu 1B',
           adresselinje2: null,
           adresselinje3: null,
           poststed: 'Helsinki',
           postNummer: 'FI-00123',
-          land: 'FIN',
+          land: 'Finland',
         },
       },
     ],
@@ -236,7 +237,6 @@ const lagMedlemskap = (override: Partial<MedlemskapV3>): MedlemskapV3 => ({
 
 export const Default = Template.bind({});
 Default.args = {
-  soknad,
   medlemskap: lagMedlemskap({}),
   aksjonspunkter: [
     {
@@ -246,38 +246,93 @@ Default.args = {
       kanLoses: true,
     },
   ],
-  alleMerknaderFraBeslutter: {},
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
 };
 
-export const TidligereVurderingAvMedlemskap = Template.bind({});
-TidligereVurderingAvMedlemskap.args = {
-  readOnly: true,
-  soknad,
+export const VurderingAvMedlemskapMedlemskapMedEtAvvik = Template.bind({});
+VurderingAvMedlemskapMedlemskapMedEtAvvik.args = {
   medlemskap: lagMedlemskap({
-    manuellBehandlingResultat: {
-      medlemFom: null,
-      avslagskode: '1025',
-      opphørFom: '2024-10-18',
-    },
+    legacyManuellBehandling: null,
+    manuellBehandlingResultat: null,
     avvik: [MedlemskapAvvik.BOSATT_UTENLANDSADRESSE],
+    adresser: [
+      {
+        fom: '2024-09-10',
+        tom: TIDENES_ENDE,
+        adresse: {
+          adresseType: 'POSTADRESSE_UTLAND',
+          adresselinje1: 'Kirkeveien 1',
+          adresselinje2: null,
+          adresselinje3: null,
+          postNummer: null,
+          poststed: null,
+          land: 'Guatemala',
+        },
+      },
+      {
+        fom: '2022-09-01',
+        tom: TIDENES_ENDE,
+        adresse: {
+          adresseType: 'BOSTEDSADRESSE',
+          adresselinje1: 'Krattstien 4',
+          adresselinje2: null,
+          adresselinje3: null,
+          postNummer: '9515',
+          poststed: 'Alta',
+          land: 'Norge',
+        },
+      },
+    ],
+    annenpart: null,
+    medlemskapsperioder: [],
+    oppholdstillatelser: [],
+    utenlandsopphold: [],
+    personstatuser: [{ fom: '2022-09-01', tom: TIDENES_ENDE, type: 'BOSA' }],
+    regioner: [{ fom: '1971-09-17', tom: TIDENES_ENDE, type: 'NORDEN' }],
+  }),
+  soknad: {
+    oppgittTilknytning: {
+      oppholdNorgeNa: true,
+      oppholdSistePeriode: true,
+      oppholdNestePeriode: true,
+      utlandsoppholdFor: [],
+      utlandsoppholdEtter: [],
+    } as Soknad['oppgittTilknytning'],
+  } as Soknad,
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.VURDER_MEDLEMSKAPSVILKÅRET,
+      status: aksjonspunktStatus.OPPRETTET,
+      begrunnelse: undefined,
+      kanLoses: true,
+    },
+  ],
+};
+
+export const TidligereVurderingAvMedlemskapMedEtAvvik = Template.bind({});
+TidligereVurderingAvMedlemskapMedEtAvvik.args = {
+  ...VurderingAvMedlemskapMedlemskapMedEtAvvik.args.medlemskap,
+  readOnly: true,
+  medlemskap: lagMedlemskap({
+    ...VurderingAvMedlemskapMedlemskapMedEtAvvik.args.medlemskap,
+    manuellBehandlingResultat: {
+      avslagskode: '1025',
+      medlemFom: null,
+      opphørFom: null,
+    },
   }),
   aksjonspunkter: [
     {
       definisjon: AksjonspunktCode.VURDER_MEDLEMSKAPSVILKÅRET,
       status: aksjonspunktStatus.UTFORT,
-      begrunnelse: 'Søker skal flytte ut av landet',
-      kanLoses: true,
+      begrunnelse: 'Søker har bodd i Gautemala siden 10.09.2024 ',
+      kanLoses: false,
     },
   ],
-  alleMerknaderFraBeslutter: {},
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
 };
 
 export const LegacyVurderingAvLøpendeMedlemskap = Template.bind({});
 LegacyVurderingAvLøpendeMedlemskap.args = {
   readOnly: true,
-  soknad,
   medlemskap: lagMedlemskap({
     manuellBehandlingResultat: null,
     avvik: [],
@@ -322,14 +377,11 @@ LegacyVurderingAvLøpendeMedlemskap.args = {
       kanLoses: false,
     },
   ],
-  alleMerknaderFraBeslutter: {},
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
 };
 
 export const LegacyVurdertInngangsvilkårMedlemskap = Template.bind({});
 LegacyVurdertInngangsvilkårMedlemskap.args = {
   readOnly: true,
-  soknad,
   medlemskap: lagMedlemskap({
     manuellBehandlingResultat: null,
     avvik: [],
@@ -352,6 +404,4 @@ LegacyVurdertInngangsvilkårMedlemskap.args = {
       kanLoses: false,
     },
   ],
-  alleMerknaderFraBeslutter: {},
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
 };

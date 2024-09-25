@@ -15,10 +15,15 @@ interface Props {
   medlemskapsperioder: MedlemskapPeriodeV3[];
   avvik: MedlemskapAvvik[] | undefined;
   alleKodeverk: AlleKodeverk;
-  readOnly: boolean;
+  skalViseAvvik: boolean;
 }
 
-const OpplysningerFraMedlemskapsregister = ({ medlemskapsperioder, avvik = [], alleKodeverk, readOnly }: Props) => {
+const OpplysningerFraMedlemskapsregister = ({
+  medlemskapsperioder,
+  avvik = [],
+  alleKodeverk,
+  skalViseAvvik,
+}: Props) => {
   const intl = useIntl();
 
   const medlemskapTypeKodeverk = alleKodeverk[KodeverkType.MEDLEMSKAP_TYPE];
@@ -29,7 +34,7 @@ const OpplysningerFraMedlemskapsregister = ({ medlemskapsperioder, avvik = [], a
 
   return (
     <EkspansjonsKort
-      readOnly={readOnly}
+      skalViseAvvik={skalViseAvvik}
       kilde={FaktaKilde.MEDL}
       tittel={intl.formatMessage(
         { id: 'OpplysningsKort.MedlemskapsperiodeTittel' },
@@ -102,8 +107,8 @@ const OpplysningerFraMedlemskapsregister = ({ medlemskapsperioder, avvik = [], a
                             values={{ erMedlem }}
                           />
                         </Table.DataCell>
-                        {lovvalgsland && <Table.DataCell>{lovvalgsland}</Table.DataCell>}
-                        {studieland && <Table.DataCell>{studieland}</Table.DataCell>}
+                        {skalViseLovvalgtland && <Table.DataCell>{lovvalgsland}</Table.DataCell>}
+                        {skalViseStudieland && <Table.DataCell>{studieland}</Table.DataCell>}
                         <Table.DataCell>{medlemskapTypeString}</Table.DataCell>
                         <Table.DataCell>{dekningTypeString}</Table.DataCell>
                         <Table.DataCell>
