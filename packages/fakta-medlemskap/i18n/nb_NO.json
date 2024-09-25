@@ -83,10 +83,6 @@
   "SituasjonLabel.Statborgerskap": "Statsborgerskap",
   "SituasjonLabel.Personstatus": "Personstatus",
 
-  "FaktaKilde.Soknad": "FRA SØKNADEN",
-  "FaktaKilde.FREG": "FRA FOLKEREGISTERET",
-  "FaktaKilde.MEDL": "FRA MEDLEMSKAPSREGISTERET",
-
   "Situasjon.FlereLand": "I flere land",
   "Situasjon.ILand": "I {land}",
   "Situasjon.INorge": "I Norge",
@@ -162,6 +158,7 @@
   "OpplysningerOmOppholdstillatelser.ReadMore.Innhold": "Når man får en oppholdstillatelse på minst 6 måneder, vil UDI sende en melding til Folkeregisteret om dette. Man kan da bli automatisk registrert bosatt i Norge, og få et fødselsnummer.",
 
   "MedlemskapLegacy.TidligereVurdering": "Tidligere vurderinger",
+  "MedlemskapLegacy.Vurderingsdato.Label": "Gjeldende f.o.m: ",
   "MedlemskapLegacy.Begrunnelse.Label": "Begrunnelse fra saksbehandler:",
 
   "MedlemskapLegacy.ErSokerBosattINorge.Label": "Er søker bosatt i Norge?",
