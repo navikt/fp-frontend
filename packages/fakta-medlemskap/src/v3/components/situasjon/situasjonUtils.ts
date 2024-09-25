@@ -5,21 +5,13 @@ import { IntlShape } from 'react-intl';
 import { sorterPerioder } from '../../utils/periodeUtils';
 import { toTitleCapitalization } from '../../utils/stringUtils';
 
-export const getSisteRegion = (
-  medlemskap: MedlemskapV3,
-  alleKodeverk: AlleKodeverk,
-  intl: IntlShape,
-): string | null => {
+export const getSisteRegion = (medlemskap: MedlemskapV3, alleKodeverk: AlleKodeverk, intl: IntlShape): string => {
   const alleRegioner = alleKodeverk[KodeverkType.REGION];
   const nyesteRegion = medlemskap.regioner.sort(sorterPerioder)[0];
   return alleRegioner.find(r => r.kode === nyesteRegion.type)?.navn ?? intl.formatMessage({ id: 'Situasjon.Ukjent' });
 };
 
-export const getSistePersonstatus = (
-  medlemskap: MedlemskapV3,
-  alleKodeverk: AlleKodeverk,
-  intl: IntlShape,
-): string | null => {
+export const getSistePersonstatus = (medlemskap: MedlemskapV3, alleKodeverk: AlleKodeverk, intl: IntlShape): string => {
   const nyeste = medlemskap.personstatuser.sort(sorterPerioder)[0];
   if (nyeste) {
     return getKodeverknavnFn(alleKodeverk)(nyeste.type, KodeverkType.PERSONSTATUS_TYPE);
@@ -27,7 +19,7 @@ export const getSistePersonstatus = (
   return intl.formatMessage({ id: 'Situasjon.Ukjent' });
 };
 
-export const getSisteBostedsLand = (medlemskap: MedlemskapV3, intl: IntlShape): string | null => {
+export const getSisteBostedsLand = (medlemskap: MedlemskapV3, intl: IntlShape): string => {
   const nyeste = medlemskap.adresser
     .filter(adresse => adresse.adresse.adresseType === opplysningAdresseType.BOSTEDSADRESSE)
     .sort(sorterPerioder)[0]?.adresse.land;

@@ -1,11 +1,10 @@
 import React, { FC, PropsWithChildren } from 'react';
 import { MedlemskapAvvik } from '@navikt/fp-types';
 import { Box, ExpansionCard, HStack, VStack } from '@navikt/ds-react';
-import { FormattedMessage } from 'react-intl';
+import { FaktaKildeLabel, FaktaKilde } from '@navikt/fp-fakta-felles';
 
 import AvvikStatus from './AvvikStatus';
 import AvvikMerknad from './AvvikMerknad';
-import { FaktaKilde, getFormateringsIdForKilde } from '../../faktaKilde';
 
 interface Props {
   kilde: FaktaKilde;
@@ -35,7 +34,7 @@ const EkspansjonsKort: FC<PropsWithChildren<Props>> = ({
           <div>
             <ExpansionCard.Title size="small">{tittel}</ExpansionCard.Title>
             <ExpansionCard.Description>
-              <FormattedMessage id={getFormateringsIdForKilde(kilde)}></FormattedMessage>
+              <FaktaKildeLabel kilde={kilde} />
             </ExpansionCard.Description>
           </div>
         </HStack>
