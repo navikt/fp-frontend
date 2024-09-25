@@ -9,7 +9,6 @@ import VergeFaktaInitPanel from '../fellesPaneler/fakta/VergeFaktaInitPanel';
 import OmsorgvilkaretFaktaInitPanel from '../fellesPaneler/fakta/OmsorgvilkaretFaktaInitPanel';
 import AdopsjonsvilkaretFaktaInitPanel from '../fellesPaneler/fakta/AdopsjonsvilkaretFaktaInitPanel';
 import FodselvilkaretFaktaInitPanel from '../fellesPaneler/fakta/FodselvilkaretFaktaInitPanel';
-import MedlemskapsvilkaretFaktaInitPanel from '../fellesPaneler/fakta/MedlemskapsvilkaretFaktaInitPanel';
 import VarselProsessStegInitPanel from '../fellesPaneler/prosess/VarselProsessStegInitPanel';
 import InngangsvilkarProsessStegInitPanel from './prosessPaneler/InngangsvilkarEsProsessStegInitPanel';
 import OpplysningspliktProsessStegInitPanel from '../fellesPaneler/prosess/OpplysningspliktProsessStegInitPanel';
@@ -55,7 +54,6 @@ const EngangsstonadPaneler: FunctionComponent<OwnProps> = ({
         <OmsorgvilkaretFaktaInitPanel {...props} personoversikt={personoversikt} />
         <AdopsjonsvilkaretFaktaInitPanel {...props} fagsak={fagsak} />
         <FodselvilkaretFaktaInitPanel {...props} />
-        <MedlemskapsvilkaretFaktaInitPanel {...props} />
         <MedlemskapsvilkaretFaktaInitPanelV3 {...props} fagsak={fagsak} />
       </>
     ),

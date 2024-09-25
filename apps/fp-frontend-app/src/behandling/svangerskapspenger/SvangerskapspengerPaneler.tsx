@@ -16,7 +16,6 @@ import ArbeidOgInntektFaktaInitPanel from '../fellesPaneler/fakta/ArbeidOgInntek
 import YtelserFaktaInitPanel from '../fellesPaneler/fakta/YtelserFaktaInitPanel';
 import VergeFaktaInitPanel from '../fellesPaneler/fakta/VergeFaktaInitPanel';
 import FodseltilretteleggingFaktaInitPanel from './faktaPaneler/FodseltilretteleggingFaktaInitPanel';
-import MedlemskapsvilkaretFaktaInitPanel from '../fellesPaneler/fakta/MedlemskapsvilkaretFaktaInitPanel';
 import OpptjeningsvilkaretFaktaInitPanel from '../fellesPaneler/fakta/OpptjeningsvilkaretFaktaInitPanel';
 import BeregningFaktaInitPanel from '../fellesPaneler/fakta/BeregningFaktaInitPanel';
 import FordelingFaktaInitPanel from '../fellesPaneler/fakta/FordelingFaktaInitPanel';
@@ -85,7 +84,6 @@ const SvangerskapspengerPaneler: FunctionComponent<OwnProps> = ({
         <YtelserFaktaInitPanel {...props} />
         <VergeFaktaInitPanel {...props} />
         <FodseltilretteleggingFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-        <MedlemskapsvilkaretFaktaInitPanel {...props} />
         <MedlemskapsvilkaretFaktaInitPanelV3 {...props} fagsak={fagsak} />
         <OpptjeningsvilkaretFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
         <PermisjonFaktaInitPanel
