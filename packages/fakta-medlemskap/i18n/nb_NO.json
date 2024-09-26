@@ -174,5 +174,12 @@
   "VurderMedlemsskapAksjonspunktForm.AvslagsarsakLabel": "Velg en avslagsårsak",
   "VurderMedlemsskapAksjonspunktForm.AvslagsarsakLabel.ReadOnly": "Avslagsårsak",
   "VurderMedlemsskapAksjonspunktForm.OpphorFomLabel": "Når opphører medlemskapet?",
-  "VurderMedlemsskapAksjonspunktForm.OpphorFomLabel.ReadOnly": "Opphørsdato"
+  "VurderMedlemsskapAksjonspunktForm.OpphorFomLabel.ReadOnly": "Opphørsdato",
+
+  "VurderForutgaendeMedlemskapAksjonspunktForm.VurderingLabel": "Har bruker vært medlem i 12 måneder før termin/omsorgsovertakelse?",
+  "VurderForutgaendeMedlemskapAksjonspunktForm.VurderingLabel.ReadOnly": "Vurdering av medlemskapsvilkåret",
+  "VurderForutgaendeMedlemskapAksjonspunktForm.AvslagsarsakLabel": "Velg en avslagsårsak",
+  "VurderForutgaendeMedlemskapAksjonspunktForm.AvslagsarsakLabel.ReadOnly": "Avslagsårsak",
+  "VurderForutgaendeMedlemskapAksjonspunktForm.MedlemFomLabel": "Innflyttingsdato",
+  "VurderForutgaendeMedlemskapAksjonspunktForm.MedlemFomLabel.ReadOnly": "Innflyttet dato"
 }
