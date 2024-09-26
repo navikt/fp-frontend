@@ -19,6 +19,8 @@ const intl = createIntl(messages);
 
 const getIsAvslagCodeRequired = (erVilkarOk: boolean, avslagCode?: string) => () => erVilkarOk === false && !avslagCode;
 
+const EMPTY_ARRAY = [] as KodeverkMedNavn[];
+
 type FormValues = {
   erVilkarOk?: boolean;
   avslagCode?: string;
@@ -51,6 +53,12 @@ interface StaticFunctions {
         opphørFom: string;
       };
 }
+
+const sorterAvslagsArsaker = (
+  avslagsarsakerUsortert: KodeverkMedNavn[],
+): KodeverkMedNavn[] =>
+  avslagsarsakerUsortert.sort((k1, k2) => k1.navn.localeCompare(k2.navn));
+
 
 /**
  * VilkarResultPicker
@@ -118,7 +126,7 @@ const VilkarResultPicker: FunctionComponent<OwnProps> & StaticFunctions = ({
           <SelectField
             name="avslagCode"
             label={intl.formatMessage({ id: 'VilkarResultPicker.Arsak' })}
-            selectValues={avslagsarsaker.map(aa => (
+            selectValues={sorterAvslagsArsaker(avslagsarsaker || EMPTY_ARRAY).map(aa => (
               <option key={aa.kode} value={aa.kode}>
                 {aa.navn}
               </option>
