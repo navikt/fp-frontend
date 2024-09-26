@@ -192,6 +192,10 @@ const historikkEndretFeltTypeCodes = {
     kode: 'MEDLEMSKAPSVILKÅRET_OPPHØRSDATO',
     feltId: 'HistorikkEndretFelt.MedlemskapvilkåretOpphørsdato',
   },
+  MEDLEMSKAPSVILKÅRET_MEDLEMFRADATO: {
+    kode: 'MEDLEMSKAPSVILKÅRET_MEDLEMFRADATO',
+    feltId: 'HistorikkEndretFelt.MedlemskapvilkåretMedlemFom',
+  },
   SELVSTENDIG_NAERINGSDRIVENDE: {
     kode: 'SELVSTENDIG_NAERINGSDRIVENDE',
     feltId: 'HistorikkEndretFelt.SelvstendigNæringsdrivende',

@@ -248,6 +248,23 @@ Default.args = {
   ],
 };
 
+export const ForutgåendeMedlemskap = Template.bind({});
+ForutgåendeMedlemskap.args = {
+  medlemskap: lagMedlemskap({
+    legacyManuellBehandling: null,
+    manuellBehandlingResultat: null,
+    avvik: [MedlemskapAvvik.BOSATT_UTENLANDSADRESSE],
+  }),
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
+      status: aksjonspunktStatus.OPPRETTET,
+      begrunnelse: undefined,
+      kanLoses: true,
+    },
+  ],
+};
+
 export const VurderingAvMedlemskapMedlemskapMedEtAvvik = Template.bind({});
 VurderingAvMedlemskapMedlemskapMedEtAvvik.args = {
   medlemskap: lagMedlemskap({

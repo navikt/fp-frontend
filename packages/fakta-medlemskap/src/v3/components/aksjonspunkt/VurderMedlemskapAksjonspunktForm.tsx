@@ -7,34 +7,27 @@ import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { FaktaBegrunnelseTextFieldNew } from '@navikt/fp-fakta-felles';
 import { useForm } from 'react-hook-form';
 import { Form } from '@navikt/ft-form-hooks';
-import { VurderMedlemskapAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { AlleKodeverk, ManuellBehandlingResultat } from '@navikt/fp-types';
-
+import InfoBox from '../InfoBox';
 import VurderingAlternativer from './VurderingAlternativer';
 import { Vurdering, VurderMedlemskapFormValues } from '../../types/vurderingMedlemskapForm';
-import InfoBox from '../InfoBox';
+import { VurderMedlemskapAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 interface Props {
   submittable: boolean;
   readOnly: boolean;
   alleKodeverk: AlleKodeverk;
   submitCallback: (aksjonspunktData: VurderMedlemskapAp) => Promise<void>;
-  aksjonspunkter: Aksjonspunkt[];
+  aksjonspunkt: Aksjonspunkt;
   manuellBehandlingResultat: ManuellBehandlingResultat | null;
   ytelse: string;
 }
 
-const inngangsAksjonspunkter = [
-  AksjonspunktCode.VURDER_MEDLEMSKAPSVILKÅRET,
-  // TODO: FORUTGÅENDE ES INC
-];
-
 const createInitialValues = (
-  aksjonspunkter: Aksjonspunkt[],
+  aksjonspunkt: Aksjonspunkt,
   resultat: ManuellBehandlingResultat | null,
 ): Partial<VurderMedlemskapFormValues> => {
-  const aksjonspunkt = aksjonspunkter.find(ap => inngangsAksjonspunkter.some(value => ap.definisjon == value));
-  const begrunnelse = aksjonspunkt?.begrunnelse ?? '';
+  const begrunnelse = aksjonspunkt.begrunnelse ?? '';
 
   if (resultat) {
     const { opphørFom, avslagskode } = resultat;
@@ -56,19 +49,19 @@ const ConditionalWrapper = ({ isReadOnly, children }: PropsWithChildren<{ isRead
  *
  * Har ansvar for å vise faktapanelene for medlemskap.
  */
-const VurderMedlemsskapAksjonspunktForm: FC<Props> = ({
+const VurderMedlemskapAksjonspunktForm: FC<Props> = ({
   submittable,
   readOnly,
   alleKodeverk,
   submitCallback,
-  aksjonspunkter,
+  aksjonspunkt,
   manuellBehandlingResultat,
   ytelse,
 }) => {
   const [isSubmitting, setSubmitting] = useState(false);
 
   const formMethods = useForm<VurderMedlemskapFormValues>({
-    defaultValues: createInitialValues(aksjonspunkter, manuellBehandlingResultat),
+    defaultValues: createInitialValues(aksjonspunkt, manuellBehandlingResultat),
   });
   const begrunnelseVerdi = formMethods.watch('begrunnelse');
 
@@ -112,4 +105,4 @@ const VurderMedlemsskapAksjonspunktForm: FC<Props> = ({
   );
 };
 
-export default VurderMedlemsskapAksjonspunktForm;
+export default VurderMedlemskapAksjonspunktForm;

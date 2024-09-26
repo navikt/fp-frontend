@@ -5232,6 +5232,44 @@
         "navn": "Søker er utvandret",
         "lovHjemmel": "{\"fagsakYtelseType\": [{\"FP\": [{\"kategori\": \"FP_VK_2\", \"lovreferanse\": \"14-2\"}]}]}"
       }
+    ],
+    "FP_VK_2_F": [
+      {
+        "kode": "1025",
+        "kodeverk": "AVSLAGSARSAK",
+        "navn": "Søker er ikke bosatt",
+        "lovHjemmel": "{\"fagsakYtelseType\": [{\"FP\": [{\"kategori\": \"FP_VK_2\", \"lovreferanse\": \"14-2\"}]}]}"
+      },
+      {
+        "kode": "1020",
+        "kodeverk": "AVSLAGSARSAK",
+        "navn": "Søker er ikke medlem",
+        "lovHjemmel": "{\"fagsakYtelseType\": [{\"FP\": [{\"kategori\": \"FP_VK_2\", \"lovreferanse\": \"14-2\"}]}]}"
+      },
+      {
+        "kode": "1024",
+        "kodeverk": "AVSLAGSARSAK",
+        "navn": "Søker har ikke oppholdsrett (EØS)",
+        "lovHjemmel": "{\"fagsakYtelseType\": [{\"FP\": [{\"kategori\": \"FP_VK_2\", \"lovreferanse\": \"14-2\"}]}]}"
+      },
+      {
+        "kode": "1023",
+        "kodeverk": "AVSLAGSARSAK",
+        "navn": "Søker har ikke lovlig opphold",
+        "lovHjemmel": "{\"fagsakYtelseType\": [{\"FP\": [{\"kategori\": \"FP_VK_2\", \"lovreferanse\": \"14-2\"}]}]}"
+      },
+      {
+        "kode": "1021",
+        "kodeverk": "AVSLAGSARSAK",
+        "navn": "Søker er utvandret",
+        "lovHjemmel": "{\"fagsakYtelseType\": [{\"FP\": [{\"kategori\": \"FP_VK_2\", \"lovreferanse\": \"14-2\"}]}]}"
+      },
+      {
+        "kode": "1052",
+        "kodeverk": "AVSLAGSARSAK",
+        "navn": "Innflyttet for mindre enn ett år siden",
+        "lovHjemmel": "{\"fagsakYtelseType\": [{\"ES\": [{\"kategori\": \"FP_VK_2_F\", \"lovreferanse\": \"14-17 5. ledd\"}]}]}"
+      }
     ]
   },
   "OpptjeningAktivitetType": [

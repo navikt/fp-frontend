@@ -1,7 +1,7 @@
 import React, { FunctionComponent, ReactElement, useMemo } from 'react';
 import { BodyShort } from '@navikt/ds-react';
 import { CheckmarkIcon, XMarkOctagonIcon } from '@navikt/aksel-icons';
-import { FlexContainer, FlexRow, FlexColumn, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 
 import { vilkarUtfallType } from '@navikt/fp-kodeverk';
@@ -127,7 +127,7 @@ const VilkarResultPicker: FunctionComponent<OwnProps> & StaticFunctions = ({
             className={styles.selectBredde}
             validate={[requiredIfCustomFunctionIsTrueNew(getIsAvslagCodeRequired(erVilkarOk, getValues('avslagCode')))]}
           />
-          {erMedlemskapsPanel && (
+          {!erMedlemskapsPanel && (
             <>
               <VerticalSpacer sixteenPx />
               <Datepicker

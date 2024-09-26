@@ -1,18 +1,19 @@
 import React, { FC } from 'react';
 import { VStack } from '@navikt/ds-react';
-import { aksjonspunktStatus } from '@navikt/fp-kodeverk';
+import { AksjonspunktCode, aksjonspunktStatus } from '@navikt/fp-kodeverk';
 
 import { MedlemskapFaktaProps } from '../MedlemskapFaktaIndex';
 
 import AksjonspunktHelpText from './AksjonspunktHelpText';
 import SituasjonsOversikt from './situasjon/SituasjonOversikt';
 import OpplysningerOmUtenlandsopphold from './opplysningsKort/OpplysningerOmUtenlandsopphold';
-import VurderMedlemsskapAksjonspunktForm from './aksjonspunkt/VurderMedlemsskapAksjonspunktForm';
-import VurderMedlemsskapLegacyAksjonspunktVisning from './aksjonspunkt/VurderMedlemsskapLegacyAksjonspunktVisning';
+import VurderMedlemskapAksjonspunktForm from './aksjonspunkt/VurderMedlemskapAksjonspunktForm';
+import VurderMedlemskapLegacyAksjonspunktVisning from './aksjonspunkt/VurderMedlemskapLegacyAksjonspunktVisning';
 import OpplysningerOmAdresser from './opplysningsKort/OpplysningerOmAdresser';
 import OpplysningerOmPersonstatus from './opplysningsKort/OpplysningerOmPersonstatus/OpplysningerOmPersonstatus';
 import OpplysningerFraMedlemskapsregister from './opplysningsKort/OpplysningerFraMedlemskapsregister';
 import OpplysningerOmOppholdstillatelser from './opplysningsKort/OpplysningerOmOppholdstillatelser';
+import VurderMedlemskapForutgaendeAksjonspunktForm from './aksjonspunkt/VurderMedlemskapForutgaendeAksjonspunktForm';
 
 /**
  * MedlemskapInfoPanel
@@ -28,25 +29,42 @@ const MedlemskapInfoPanel: FC<MedlemskapFaktaProps> = ({
   readOnly,
   ...rest
 }) => {
-  const harAksjonspunkt = aksjonspunkter.some(
+  const aksjonspunkt = aksjonspunkter.find(
     ap => ap.status === aksjonspunktStatus.OPPRETTET || ap.status === aksjonspunktStatus.UTFORT,
   );
+  const harAksjonspunkt = !!aksjonspunkt;
 
   return (
     <VStack gap="6">
       <AksjonspunktHelpText aksjonspunkter={aksjonspunkter} medlemskap={medlemskap} />
-      {medlemskap.manuellBehandlingResultat && readOnly && (
-        <VurderMedlemsskapAksjonspunktForm
-          manuellBehandlingResultat={medlemskap.manuellBehandlingResultat}
-          aksjonspunkter={aksjonspunkter}
-          alleKodeverk={alleKodeverk}
-          readOnly={readOnly}
-          ytelse={fagsak.fagsakYtelseType}
-          {...rest}
-        />
-      )}
+      {medlemskap.manuellBehandlingResultat &&
+        readOnly &&
+        aksjonspunkt?.definisjon === AksjonspunktCode.VURDER_MEDLEMSKAPSVILKÅRET && (
+          <VurderMedlemskapAksjonspunktForm
+            manuellBehandlingResultat={medlemskap.manuellBehandlingResultat}
+            aksjonspunkt={aksjonspunkt}
+            alleKodeverk={alleKodeverk}
+            readOnly={readOnly}
+            ytelse={fagsak.fagsakYtelseType}
+            {...rest}
+          />
+        )}
+
+      {medlemskap.manuellBehandlingResultat &&
+        readOnly &&
+        aksjonspunkt?.definisjon === AksjonspunktCode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR && (
+          <VurderMedlemskapForutgaendeAksjonspunktForm
+            manuellBehandlingResultat={medlemskap.manuellBehandlingResultat}
+            aksjonspunkt={aksjonspunkt}
+            alleKodeverk={alleKodeverk}
+            readOnly={readOnly}
+            ytelse={fagsak.fagsakYtelseType}
+            {...rest}
+          />
+        )}
+
       {medlemskap.legacyManuellBehandling && !medlemskap.manuellBehandlingResultat && (
-        <VurderMedlemsskapLegacyAksjonspunktVisning
+        <VurderMedlemskapLegacyAksjonspunktVisning
           legacyManuellBehandling={medlemskap.legacyManuellBehandling}
           alleKodeverk={alleKodeverk}
         />
@@ -84,10 +102,20 @@ const MedlemskapInfoPanel: FC<MedlemskapFaktaProps> = ({
           skalViseAvvik={harAksjonspunkt}
         />
       </VStack>
-      {harAksjonspunkt && !readOnly && (
-        <VurderMedlemsskapAksjonspunktForm
+      {!readOnly && aksjonspunkt?.definisjon === AksjonspunktCode.VURDER_MEDLEMSKAPSVILKÅRET && (
+        <VurderMedlemskapAksjonspunktForm
           manuellBehandlingResultat={medlemskap.manuellBehandlingResultat}
-          aksjonspunkter={aksjonspunkter}
+          aksjonspunkt={aksjonspunkt}
+          alleKodeverk={alleKodeverk}
+          readOnly={readOnly}
+          ytelse={fagsak.fagsakYtelseType}
+          {...rest}
+        />
+      )}
+      {!readOnly && aksjonspunkt?.definisjon === AksjonspunktCode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR && (
+        <VurderMedlemskapForutgaendeAksjonspunktForm
+          manuellBehandlingResultat={medlemskap.manuellBehandlingResultat}
+          aksjonspunkt={aksjonspunkt}
           alleKodeverk={alleKodeverk}
           readOnly={readOnly}
           ytelse={fagsak.fagsakYtelseType}

@@ -12,7 +12,7 @@ import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER: AksjonspunktCode[] = [
   AksjonspunktCode.VURDER_MEDLEMSKAPSVILKÅRET,
-  // TODO: FORUTGÅENDE ES INC
+  AksjonspunktCode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
 ];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.MEDLEMSKAP_V3, BehandlingApiKeys.SOKNAD];

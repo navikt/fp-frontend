@@ -332,6 +332,7 @@
   "HistorikkEndretFelt.FjernFraBehandlingen": "Fjernet fra behandlingen",
   "HistorikkEndretFelt.Medlemskapvilkåret": "Medlemskap",
   "HistorikkEndretFelt.MedlemskapvilkåretOpphørsdato": "Opphørt medlemskap",
+  "HistorikkEndretFelt.MedlemskapvilkåretMedlemFom": "Innflyttingsdato",
   "HistorikkEndretFeltVerdiType.AdoptererAlene": "adopterer alene",
   "HistorikkEndretFeltVerdiType.AdoptererIkkeAlene": "adopterer ikke alene",
   "HistorikkEndretFeltVerdiType.Aleneomsorg": "Søker har aleneomsorg for barnet",
