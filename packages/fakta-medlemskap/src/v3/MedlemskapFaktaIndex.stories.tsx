@@ -240,7 +240,7 @@ Default.args = {
   medlemskap: lagMedlemskap({}),
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.AVKLAR_LOVLIG_OPPHOLD,
+      definisjon: AksjonspunktCode.VURDER_MEDLEMSKAPSVILKÅRET,
       status: aksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
       kanLoses: true,
