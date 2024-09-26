@@ -12,7 +12,6 @@ import { SØKER_INNFLYTTET_FOR_SENT_KODE } from '../../types/vurderingMedlemskap
 interface Props {
   alleKodeverk: AlleKodeverk;
   readOnly: boolean;
-  ytelse: string;
 }
 
 const lagVurderingsAlternativer = (): {

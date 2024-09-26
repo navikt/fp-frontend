@@ -24,7 +24,6 @@ interface Props {
   submitCallback: (aksjonspunktData: VurderForutgaendeMedlemskapAp) => Promise<void>;
   aksjonspunkt: Aksjonspunkt;
   manuellBehandlingResultat: ManuellBehandlingResultat | null;
-  ytelse: string;
 }
 
 const createInitialValues = (
@@ -62,9 +61,8 @@ const VurderMedlemsskapAksjonspunktForm: FC<Props> = ({
   submitCallback,
   aksjonspunkt,
   manuellBehandlingResultat,
-  ytelse,
 }) => {
-  const [isSubmitting, setSubmitting] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const formMethods = useForm<VurderMedlemskapForutgaendeFormValues>({
     defaultValues: createInitialValues(aksjonspunkt, manuellBehandlingResultat),
@@ -88,7 +86,7 @@ const VurderMedlemsskapAksjonspunktForm: FC<Props> = ({
     <ConditionalWrapper isReadOnly={readOnly}>
       <Form formMethods={formMethods} onSubmit={bekreft}>
         <VStack gap={readOnly ? '2' : '6'}>
-          <VurderingAlternativerForutgaende alleKodeverk={alleKodeverk} readOnly={readOnly} ytelse={ytelse} />
+          <VurderingAlternativerForutgaende alleKodeverk={alleKodeverk} readOnly={readOnly} />
           <FaktaBegrunnelseTextFieldNew
             hasReadOnlyLabel
             isReadOnly={readOnly}
@@ -100,8 +98,8 @@ const VurderMedlemsskapAksjonspunktForm: FC<Props> = ({
               <Button
                 size="small"
                 variant="primary"
-                disabled={isSubmitting || !formMethods.formState.isDirty}
-                loading={isSubmitting}
+                disabled={submitting || !formMethods.formState.isDirty}
+                loading={submitting}
                 type="submit"
               >
                 <FormattedMessage id="MedlemskapInfoPanel.Submit" />

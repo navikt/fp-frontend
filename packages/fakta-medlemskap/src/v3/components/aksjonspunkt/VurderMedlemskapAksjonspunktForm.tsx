@@ -58,7 +58,7 @@ const VurderMedlemskapAksjonspunktForm: FC<Props> = ({
   manuellBehandlingResultat,
   ytelse,
 }) => {
-  const [isSubmitting, setSubmitting] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const formMethods = useForm<VurderMedlemskapFormValues>({
     defaultValues: createInitialValues(aksjonspunkt, manuellBehandlingResultat),
@@ -91,8 +91,8 @@ const VurderMedlemskapAksjonspunktForm: FC<Props> = ({
               <Button
                 size="small"
                 variant="primary"
-                disabled={isSubmitting || !formMethods.formState.isDirty}
-                loading={isSubmitting}
+                disabled={submitting || !formMethods.formState.isDirty}
+                loading={submitting}
                 type="submit"
               >
                 <FormattedMessage id="MedlemskapInfoPanel.Submit" />

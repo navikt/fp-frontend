@@ -58,7 +58,6 @@ const MedlemskapInfoPanel: FC<MedlemskapFaktaProps> = ({
             aksjonspunkt={aksjonspunkt}
             alleKodeverk={alleKodeverk}
             readOnly={readOnly}
-            ytelse={fagsak.fagsakYtelseType}
             {...rest}
           />
         )}
@@ -118,7 +117,6 @@ const MedlemskapInfoPanel: FC<MedlemskapFaktaProps> = ({
           aksjonspunkt={aksjonspunkt}
           alleKodeverk={alleKodeverk}
           readOnly={readOnly}
-          ytelse={fagsak.fagsakYtelseType}
           {...rest}
         />
       )}
