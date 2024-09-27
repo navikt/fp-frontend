@@ -9,7 +9,7 @@ import { useForm } from 'react-hook-form';
 import { Form } from '@navikt/ft-form-hooks';
 import { AlleKodeverk, ManuellBehandlingResultat } from '@navikt/fp-types';
 import InfoBox from '../InfoBox';
-import { VilkårResultatPickerMedlemskapsvilkåretForutgående } from './VurderingAlternativerForutgaende';
+import { VilkårResultatPickerMedlemskapsvilkåretForutgående } from './VilkårResultatPickerMedlemskapsvilkåretForutgående';
 import {
   SØKER_INNFLYTTET_FOR_SENT_KODE,
   Vurdering,

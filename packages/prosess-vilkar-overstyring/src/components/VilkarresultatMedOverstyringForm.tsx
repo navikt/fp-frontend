@@ -48,21 +48,22 @@ const buildInitialValues = (
   aksjonspunkter: Aksjonspunkt[],
   status: string,
   overstyringApKode: OverstyringAksjonspunkter,
-  behandlingsresultat?: Behandling['behandlingsresultat'],
-  medlemskapManuellBehandlingResultat?: ManuellBehandlingResultat,
+  behandlingsresultat: Behandling['behandlingsresultat'] | undefined,
+  medlemskapManuellBehandlingResultat: ManuellBehandlingResultat | undefined,
 ): FormValues => {
   const aksjonspunkt = aksjonspunkter.find(ap => ap.definisjon === overstyringApKode);
   const felles = {
     isOverstyrt: aksjonspunkt !== undefined,
     begrunnelse: decodeHtmlEntity(aksjonspunkt && aksjonspunkt.begrunnelse ? aksjonspunkt.begrunnelse : ''),
   };
+  console.log(medlemskapManuellBehandlingResultat);
 
   switch (overstyringApKode) {
     case AksjonspunktCode.OVERSTYR_MEDLEMSKAPSVILKAR:
     case AksjonspunktCode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE:
       return {
         ...felles,
-        avslagskode: medlemskapManuellBehandlingResultat?.medlemFom ?? undefined,
+        avslagskode: medlemskapManuellBehandlingResultat?.avslagskode ?? undefined,
         medlemFom: medlemskapManuellBehandlingResultat?.medlemFom ?? undefined,
         opphørFom: medlemskapManuellBehandlingResultat?.opphørFom ?? undefined,
       };
@@ -78,6 +79,7 @@ type OverstyringVilkår =
   | OverstyringMedlemskapsvilkaretLopendeAp
   | OverstyringMedlemskapsvilkaretAp
   | OverstyringMedlemskapvilkaretForutgaendeAp;
+
 const transformValues = (values: FormValues, overstyringApKode: OverstyringAksjonspunkter): OverstyringVilkår => {
   const felles = {
     kode: overstyringApKode,
@@ -147,6 +149,7 @@ const VilkarresultatMedOverstyringForm: FunctionComponent<OwnProps> = ({
   overrideReadOnly,
   kanOverstyreAccess,
   behandlingsresultat,
+  medlemskapManuellBehandlingResultat,
   toggleOverstyring,
   submitCallback,
   erIkkeGodkjentAvBeslutter,
@@ -155,9 +158,17 @@ const VilkarresultatMedOverstyringForm: FunctionComponent<OwnProps> = ({
   setFormData,
 }) => {
   const initialValues = useMemo(
-    () => buildInitialValues(aksjonspunkter, status, overstyringApKode, behandlingsresultat),
+    () =>
+      buildInitialValues(
+        aksjonspunkter,
+        status,
+        overstyringApKode,
+        behandlingsresultat,
+        medlemskapManuellBehandlingResultat,
+      ),
     [aksjonspunkter, status, overstyringApKode, behandlingsresultat],
   );
+  console.log(initialValues);
   const formMethods = useForm<FormValues>({
     defaultValues: formData || initialValues,
   });
@@ -183,6 +194,8 @@ const VilkarresultatMedOverstyringForm: FunctionComponent<OwnProps> = ({
 
   const erOppfylt = vilkarUtfallType.OPPFYLT === status;
   const originalErVilkarOk = vilkarUtfallType.IKKE_VURDERT !== status ? erOppfylt : undefined;
+
+  const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
 
   return (
     <Form
@@ -261,7 +274,7 @@ const VilkarresultatMedOverstyringForm: FunctionComponent<OwnProps> = ({
                 readOnly={overrideReadOnly || !erOverstyrt}
                 customVilkarOppfyltText={<FormattedMessage id="VilkarresultatMedOverstyringForm.ErOppfylt" />}
                 customVilkarIkkeOppfyltText={
-                  <FormattedMessage id="VilkarresultatMedOverstyringForm.VilkarIkkeOppfylt" />
+                  <FormattedMessage id="VilkarresultatMedOverstyringForm.VilkarIkkeOppfylt" values={{ b: bTag }} />
                 }
               />
             )}

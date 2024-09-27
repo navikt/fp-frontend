@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 import { useFormContext } from 'react-hook-form';
 
@@ -47,7 +47,7 @@ const lagVurderingsAlternativer = (
   ];
 };
 
-export const VilkårResultatPickerMedlemskapsvilkåret: FC<Props> = ({ alleKodeverk, readOnly, ytelse }: Props) => {
+export const VilkårResultatPickerMedlemskapsvilkåret = ({ alleKodeverk, readOnly, ytelse }: Props) => {
   const { watch } = useFormContext<VurderMedlemskapFormValues>();
   const vurdering = watch('vurdering');
 
