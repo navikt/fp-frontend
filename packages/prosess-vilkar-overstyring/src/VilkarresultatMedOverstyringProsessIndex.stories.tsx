@@ -42,7 +42,6 @@ const medlemskap = {
   },
 } as MedlemskapV3;
 
-const fagsak = ;
 export default {
   title: 'prosess/prosess-vilkar-overstyring',
   component: VilkarresultatMedOverstyringProsessIndex,
@@ -56,16 +55,16 @@ const Template: StoryFn<{
   aksjonspunkter?: Aksjonspunkt[];
   status?: string;
   vilkarType: VilkarType;
-  fagsakYtelseType: string;
+  ytelse: string;
 }> = ({
   submitCallback,
   panelTittelKode,
   overstyringApKode,
   behandling = defaultBehandling,
   aksjonspunkter = [],
-  status = vilkarUtfallType.OPPFYLT,
   vilkarType,
-                        fagsakYtelseType= fagsakYtelseType.ENGANGSSTONAD
+  status = vilkarUtfallType.OPPFYLT,
+  ytelse = fagsakYtelseType.ENGANGSSTONAD,
 }) => {
   const [erOverstyrt, toggleOverstyring] = React.useState(false);
   return (
@@ -86,9 +85,11 @@ const Template: StoryFn<{
         isEnabled: true,
       }}
       vilkarType={vilkarType}
-      fagsak={{
-        fagsakYtelseType,
-      } as Fagsak}
+      fagsak={
+        {
+          fagsakYtelseType: ytelse,
+        } as Fagsak
+      }
       toggleOverstyring={() => toggleOverstyring(!erOverstyrt)}
       erOverstyrt={erOverstyrt}
       avslagsarsaker={avslagsarsaker}
