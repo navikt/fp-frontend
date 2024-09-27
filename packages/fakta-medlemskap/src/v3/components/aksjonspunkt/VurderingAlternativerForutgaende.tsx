@@ -35,7 +35,8 @@ const VurderingAlternativerForutgaende = ({ alleKodeverk, readOnly }: Props) => 
   const vurdering = watch('vurdering');
   const avslagskode = watch('avslagskode');
 
-  const avslagsårsaker = alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.MEDLEMSKAPSVILKARET_FORUTGAENDE];
+  const avslagsårsaker = alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.MEDLEMSKAPSVILKARET_FORUTGAENDE]
+    .sort((k1, k2) => k1.navn.localeCompare(k2.navn));
   const intl = useIntl();
   return (
     <>

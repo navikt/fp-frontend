@@ -44,7 +44,8 @@ const VurderingAlternativer = ({ alleKodeverk, readOnly, ytelse }: Props) => {
   const { watch } = useFormContext<VurderMedlemskapFormValues>();
   const vurdering = watch('vurdering');
 
-  const avslagsårsaker = alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.MEDLEMSKAPSVILKARET];
+  const avslagsårsaker = alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.MEDLEMSKAPSVILKARET]
+    .sort((k1, k2) => k1.navn.localeCompare(k2.navn));
   const intl = useIntl();
   return (
     <>
