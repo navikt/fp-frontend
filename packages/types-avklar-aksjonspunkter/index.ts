@@ -60,6 +60,8 @@ export type { default as VurdereAnnenYtelseForVedtakAp } from './src/prosess/Vur
 export type { default as VurdereDokumentForVedtakAp } from './src/prosess/VurdereDokumentForVedtakAp';
 export type { default as VurdereInntektsmeldingKlageForVedtakAp } from './src/prosess/VurdereInntektsmeldingKlageForVedtakAp';
 export type { default as OverstyringMedlemskapsvilkaretLopendeAp } from './src/prosess/OverstyringMedlemskapsvilkaretLopendeAp';
+export type { default as OverstyringMedlemskapvilkaretForutgaendeAp } from './src/prosess/OverstyringMedlemskapvilkaretForutgaendeAp';
+export type { default as OverstyringMedlemskapsvilkaretAp } from './src/prosess/OverstyringMedlemskapsvilkaretAp';
 export type { default as VarselRevurderingAp } from './src/prosess/VarselRevurderingAp';
 export type { default as UttakAp } from './src/prosess/UttakAp';
 export type { default as SoknadsfristAp } from './src/prosess/SoknadsfristAp';

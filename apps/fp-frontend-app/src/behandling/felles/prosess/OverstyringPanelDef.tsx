@@ -4,7 +4,7 @@ import { VilkarType } from '@navikt/ft-kodeverk';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { VilkarresultatMedOverstyringProsessIndex } from '@navikt/fp-prosess-vilkar-overstyring';
-import { Medlemskap, Vilkar } from '@navikt/fp-types';
+import { MedlemskapV3, Vilkar } from '@navikt/fp-types';
 import { KodeverkType, OverstyringAksjonspunkter } from '@navikt/fp-kodeverk';
 
 import skalViseProsessPanel from './skalViseProsessPanel';
@@ -25,8 +25,7 @@ interface OwnProps {
   aksjonspunktKode: OverstyringAksjonspunkter;
   vilkar: Vilkar[];
   vilkarKoder: string[];
-  erMedlemskapsPanel: boolean;
-  medlemskap?: Medlemskap;
+  medlemskap?: MedlemskapV3;
   panelTekstKode: string;
   erOverstyrt: boolean;
   toggleOverstyring: () => void;
@@ -40,7 +39,6 @@ const OverstyringPanelDef: FunctionComponent<OwnProps> = ({
   vilkar,
   vilkarKoder,
   panelTekstKode,
-  erMedlemskapsPanel,
   medlemskap,
   erOverstyrt,
   toggleOverstyring,
@@ -56,10 +54,8 @@ const OverstyringPanelDef: FunctionComponent<OwnProps> = ({
 
   const skalVises = skalViseProsessPanel(overstyrteAksjonspunkter, vilkarKoder, vilkar);
 
-  const avslagsarsaker = filtrerAvslagsarsaker(
-    standardProps.alleKodeverk[KodeverkType.AVSLAGSARSAK],
-    vilkar[0].vilkarType,
-  );
+  const vilkarTypeKode = vilkar[0].vilkarType;
+  const avslagsarsaker = filtrerAvslagsarsaker(standardProps.alleKodeverk[KodeverkType.AVSLAGSARSAK], vilkarTypeKode);
 
   if (!skalVises) {
     return null;
@@ -77,7 +73,7 @@ const OverstyringPanelDef: FunctionComponent<OwnProps> = ({
         panelTittelKode={panelTekstKode}
         overstyringApKode={aksjonspunktKode}
         lovReferanse={vilkar.length > 0 ? vilkar[0].lovReferanse : undefined}
-        erMedlemskapsPanel={erMedlemskapsPanel}
+        vilkarType={vilkarTypeKode as VilkarType}
         {...standardProps}
       />
       <VerticalSpacer thirtyTwoPx />
