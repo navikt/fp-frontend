@@ -45,6 +45,7 @@ export const VilkårResultatPickerMedlemskapsvilkåretForutgående = ({ alleKode
   const vurdering = watch('vurdering');
   const avslagskode = watch('avslagskode');
 
+  // TODO flytt avslagsårsaker ut av komponenten
   const avslagsårsaker = alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.MEDLEMSKAPSVILKARET_FORUTGAENDE];
   return (
     <RawIntlProvider value={intl}>
