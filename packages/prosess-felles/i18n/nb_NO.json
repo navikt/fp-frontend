@@ -12,6 +12,7 @@
 
   "VilkarResultPicker.Arsak": "Avslagsårsak",
   "VilkarResultPicker.OpphorFom": "Dato for opphør av medlemskapet",
+  "VilkarResultPicker.MedlemFom": "Innflyttingsdato",
 
   "ProsessStegBegrunnelseTextField.ExplanationRequired": "Vurdering",
   "ProsessStegBegrunnelseTextField.ExplanationRequiredReadOnly": "Begrunnelse",

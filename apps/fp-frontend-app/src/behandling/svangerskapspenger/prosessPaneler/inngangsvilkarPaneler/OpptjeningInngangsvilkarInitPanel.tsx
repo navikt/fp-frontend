@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 
-import { VilkarType, AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktCode, VilkarType } from '@navikt/fp-kodeverk';
 import { AksessRettigheter, Opptjening } from '@navikt/fp-types';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { OpptjeningVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-opptjening';
@@ -28,6 +28,7 @@ interface OwnProps {
 const OpptjeningInngangsvilkarInitPanel: FunctionComponent<OwnProps & InngangsvilkarPanelInitProps> = ({
   behandlingVersjon,
   rettigheter,
+
   ...props
 }) => {
   const intl = useIntl();
@@ -50,7 +51,6 @@ const OpptjeningInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsvi
                 vilkar={data.vilkar}
                 vilkarKoder={VILKAR_KODER}
                 panelTekstKode="Inngangsvilkar.Opptjeningsvilkaret"
-                erMedlemskapsPanel={false}
                 toggleOverstyring={toggleOverstyring}
                 erOverstyrt={erOverstyrt}
                 overrideReadOnly={

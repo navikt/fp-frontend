@@ -3,13 +3,15 @@ import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import {
-  vilkarUtfallType,
   AksjonspunktCode,
   aksjonspunktStatus,
-  OverstyringAksjonspunkter,
   behandlingType,
+  fagsakYtelseType,
+  OverstyringAksjonspunkter,
+  VilkarType,
+  vilkarUtfallType,
 } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt, Behandling, Medlemskap } from '@navikt/fp-types';
+import { Aksjonspunkt, Behandling, Fagsak, MedlemskapV3 } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -33,7 +35,14 @@ const avslagsarsaker = [
     kodeverk: '',
   },
 ];
+const medlemskap = {
+  manuellBehandlingResultat: {
+    avslagskode: '1051',
+    medlemFom: '2022-02-19',
+  },
+} as MedlemskapV3;
 
+const fagsak = ;
 export default {
   title: 'prosess/prosess-vilkar-overstyring',
   component: VilkarresultatMedOverstyringProsessIndex,
@@ -43,18 +52,20 @@ const Template: StoryFn<{
   submitCallback: (aksjonspunktData: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>;
   panelTittelKode: string;
   overstyringApKode: OverstyringAksjonspunkter;
-  erMedlemskapsPanel: boolean;
   behandling?: Behandling;
   aksjonspunkter?: Aksjonspunkt[];
   status?: string;
+  vilkarType: VilkarType;
+  fagsakYtelseType: string;
 }> = ({
   submitCallback,
   panelTittelKode,
   overstyringApKode,
-  erMedlemskapsPanel,
   behandling = defaultBehandling,
   aksjonspunkter = [],
   status = vilkarUtfallType.OPPFYLT,
+  vilkarType,
+                        fagsakYtelseType= fagsakYtelseType.ENGANGSSTONAD
 }) => {
   const [erOverstyrt, toggleOverstyring] = React.useState(false);
   return (
@@ -69,15 +80,15 @@ const Template: StoryFn<{
       alleMerknaderFraBeslutter={{}}
       setFormData={() => undefined}
       behandling={behandling}
-      medlemskap={
-        {
-          fom: '2019-01-01',
-        } as Medlemskap
-      }
+      medlemskap={medlemskap}
       overrideReadOnly={false}
       kanOverstyreAccess={{
         isEnabled: true,
       }}
+      vilkarType={vilkarType}
+      fagsak={{
+        fagsakYtelseType,
+      } as Fagsak}
       toggleOverstyring={() => toggleOverstyring(!erOverstyrt)}
       erOverstyrt={erOverstyrt}
       avslagsarsaker={avslagsarsaker}
@@ -85,7 +96,6 @@ const Template: StoryFn<{
       panelTittelKode={panelTittelKode}
       lovReferanse="§§ Dette er en lovreferanse"
       overstyringApKode={overstyringApKode}
-      erMedlemskapsPanel={erMedlemskapsPanel}
     />
   );
 };
@@ -95,7 +105,6 @@ OverstyringspanelForFødsel.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   panelTittelKode: 'Inngangsvilkar.Fodselsvilkaret',
   overstyringApKode: AksjonspunktCode.OVERSTYR_FODSELSVILKAR,
-  erMedlemskapsPanel: false,
 };
 
 export const OverstyringspanelForMedlemskap = Template.bind({});
@@ -103,7 +112,7 @@ OverstyringspanelForMedlemskap.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   panelTittelKode: 'Inngangsvilkar.Medlemskapsvilkaret',
   overstyringApKode: AksjonspunktCode.OVERSTYR_MEDLEMSKAPSVILKAR,
-  erMedlemskapsPanel: true,
+  vilkarType: VilkarType.MEDLEMSKAPSVILKARET_FORUTGAENDE,
 };
 
 export const OverstyrtAksjonspunktSomErBekreftet = Template.bind({});
@@ -126,5 +135,4 @@ OverstyrtAksjonspunktSomErBekreftet.args = {
   status: vilkarUtfallType.IKKE_OPPFYLT,
   panelTittelKode: 'Inngangsvilkar.Fodselsvilkaret',
   overstyringApKode: AksjonspunktCode.OVERSTYR_FODSELSVILKAR,
-  erMedlemskapsPanel: false,
 };

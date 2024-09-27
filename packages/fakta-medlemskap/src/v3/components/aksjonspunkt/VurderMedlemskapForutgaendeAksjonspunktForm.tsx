@@ -9,7 +9,7 @@ import { useForm } from 'react-hook-form';
 import { Form } from '@navikt/ft-form-hooks';
 import { AlleKodeverk, ManuellBehandlingResultat } from '@navikt/fp-types';
 import InfoBox from '../InfoBox';
-import VurderingAlternativerForutgaende from './VurderingAlternativerForutgaende';
+import { VilkårResultatPickerMedlemskapsvilkåretForutgående } from './VurderingAlternativerForutgaende';
 import {
   SØKER_INNFLYTTET_FOR_SENT_KODE,
   Vurdering,
@@ -86,7 +86,7 @@ const VurderMedlemsskapAksjonspunktForm: FC<Props> = ({
     <ConditionalWrapper isReadOnly={readOnly}>
       <Form formMethods={formMethods} onSubmit={bekreft}>
         <VStack gap={readOnly ? '2' : '6'}>
-          <VurderingAlternativerForutgaende alleKodeverk={alleKodeverk} readOnly={readOnly} />
+          <VilkårResultatPickerMedlemskapsvilkåretForutgående alleKodeverk={alleKodeverk} readOnly={readOnly} />
           <FaktaBegrunnelseTextFieldNew
             hasReadOnlyLabel
             isReadOnly={readOnly}

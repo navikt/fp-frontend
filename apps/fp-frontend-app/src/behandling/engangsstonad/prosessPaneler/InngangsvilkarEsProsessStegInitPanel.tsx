@@ -10,6 +10,7 @@ import OmsorgInngangsvilkarInitPanel from './inngangsvilkarPaneler/OmsorgInngang
 import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
 import InngangsvilkarDefaultInitWrapper from '../../felles/prosess/InngangsvilkarDefaultInitWrapper';
 import InngangsvilkarPanelInitProps from '../../felles/typer/inngangsvilkarPanelInitProps';
+import MedlemskapForutgaendeInngangsvilkarInitPanel from './inngangsvilkarPaneler/MedlemskapForutgaendeInngangsvilkarInitPanel';
 
 interface OwnProps {
   apentFaktaPanelInfo?: { urlCode: string; text: string };
@@ -32,6 +33,11 @@ const InngangsvilkarEsProsessStegInitPanel: FunctionComponent<OwnProps & Prosess
         <AdopsjonInngangsvilkarInitPanel behandlingVersjon={behandling.versjon} rettigheter={rettigheter} {...props} />
         <OmsorgInngangsvilkarInitPanel behandlingVersjon={behandling.versjon} {...props} />
         <MedlemskapInngangsvilkarInitPanel
+          behandlingVersjon={behandling.versjon}
+          rettigheter={rettigheter}
+          {...props}
+        />
+        <MedlemskapForutgaendeInngangsvilkarInitPanel
           behandlingVersjon={behandling.versjon}
           rettigheter={rettigheter}
           {...props}
