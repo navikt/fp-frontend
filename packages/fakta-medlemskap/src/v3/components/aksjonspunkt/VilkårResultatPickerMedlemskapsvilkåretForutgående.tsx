@@ -79,7 +79,7 @@ export const VilkårResultatPickerMedlemskapsvilkåretForutgående = ({ alleKode
             validate={[required]}
           />
         )}
-        {avslagskode === SØKER_INNFLYTTET_FOR_SENT_KODE && (
+        {vurdering && [Vurdering.IKKE_OPPFYLT].includes(vurdering) && avslagskode === SØKER_INNFLYTTET_FOR_SENT_KODE && (
           <Datepicker
             name="medlemFom"
             label={intl.formatMessage({
