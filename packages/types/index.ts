@@ -99,13 +99,6 @@ export type {
 export type { default as FagsakEnkel, Person } from './src/fagsakEnkelTsType';
 export type { default as FagsakDataFpTilbake } from './src/fagsakTilbakekrevingTsType';
 export type {
-  default as Medlemskap,
-  MedlemPeriode,
-  MedlemskapPeriode,
-  Oppholdstillatelse,
-  PersonopplysningMedlem,
-} from './src/medlemskapTsType';
-export type {
   default as MedlemskapV3,
   ManuellBehandlingResultat,
   LegacyManuellMedlemskapsBehandling,

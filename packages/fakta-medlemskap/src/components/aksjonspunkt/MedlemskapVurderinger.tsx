@@ -15,7 +15,7 @@ import {
   VurderMedlemskapFormValues,
 } from '../../types/vurderingMedlemskapForm';
 
-import messages from '../../../../i18n/nb_NO.json';
+import messages from '../../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 

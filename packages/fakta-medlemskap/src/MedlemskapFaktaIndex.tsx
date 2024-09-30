@@ -5,7 +5,7 @@ import { Fagsak, MedlemskapV3, Soknad, StandardFaktaPanelProps } from '@navikt/f
 import { createIntl } from '@navikt/ft-utils';
 
 import MedlemskapInfoPanel from './components/MedlemskapInfoPanel';
-import messages from '../../i18n/nb_NO.json';
+import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 

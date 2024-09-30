@@ -3,7 +3,7 @@ import { formaterUtenlandsopphold, getSisteBostedsLand, getSistePersonstatus, ge
 import { opplysningAdresseType } from '@navikt/fp-kodeverk';
 import { expect } from 'vitest';
 import { createIntl } from '@navikt/ft-utils';
-import messages from '../../../../i18n/nb_NO.json';
+import messages from '../../../i18n/nb_NO.json';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 const defaultMedlemskapProps: MedlemskapV3 = {
