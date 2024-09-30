@@ -137,7 +137,7 @@ const ForeldrepengerPaneler: FunctionComponent<OwnProps> = ({
         />
         <BeregningsgrunnlagProsessStegInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
         <SoknadsfristProsessStegInitPanel {...props} />
-        <FortsattMedlemskapProsessStegInitPanel {...props} rettigheter={rettigheter} />
+        <FortsattMedlemskapProsessStegInitPanel {...props} />
         <UttakProsessStegInitPanel
           {...props}
           arbeidsgiverOpplysningerPerId={arbeidsgivere}
