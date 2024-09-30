@@ -12,7 +12,6 @@ enum FaktaPanelCode {
   FODSELSVILKARET = 'foedselsvilkaaret',
   FODSELTILRETTELEGGING = 'fodseltilrettelegging',
   MEDLEMSKAPSVILKARET = 'medlemskapsvilkaaret',
-  MEDLEMSKAPSVILKARET_V3 = 'medlemskapsvilkaaret-v3',
   OMSORG = 'omsorg',
   OMSORG_OG_RETT = 'omsorgogrett',
   OMSORGSVILKARET = 'omsorgsvilkaaret',
