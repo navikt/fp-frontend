@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { AksjonspunktCode, aksjonspunktStatus, VilkarType } from '@navikt/fp-kodeverk';
-import { AksessRettigheter, MedlemskapV3 } from '@navikt/fp-types';
+import { AksessRettigheter, Medlemskap } from '@navikt/fp-types';
 
 import InngangsvilkarPanelInitProps from '../../../felles/typer/inngangsvilkarPanelInitProps';
 import InngangsvilkarDefaultInitPanel from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
@@ -18,7 +18,7 @@ const VILKAR_KODER = [VilkarType.MEDLEMSKAPSVILKARET_FORUTGAENDE];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.MEDLEMSKAP_V3];
 type EndepunktPanelData = {
-  medlemskap: MedlemskapV3;
+  medlemskap: Medlemskap;
 };
 
 interface OwnProps {

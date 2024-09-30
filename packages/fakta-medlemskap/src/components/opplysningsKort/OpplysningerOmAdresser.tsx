@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { AdressePeriode, AlleKodeverk, KodeverkMedNavn, MedlemskapAvvik, MedlemskapV3 } from '@navikt/fp-types';
+import { AdressePeriode, AlleKodeverk, KodeverkMedNavn, MedlemskapAvvik, Medlemskap } from '@navikt/fp-types';
 import { BodyLong, Box, Detail, Label, Table } from '@navikt/ds-react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { AvsnittSkiller, PeriodLabel } from '@navikt/ft-ui-komponenter';
@@ -84,7 +84,7 @@ const AdresseTabell: FC<AdresseTabellProps> = ({
 };
 
 interface Props {
-  medlemskap: MedlemskapV3;
+  medlemskap: Medlemskap;
   avvik: MedlemskapAvvik[];
   brukerNavn: string;
   annenpartNavn?: string;

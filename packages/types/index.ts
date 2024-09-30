@@ -99,17 +99,17 @@ export type {
 export type { default as FagsakEnkel, Person } from './src/fagsakEnkelTsType';
 export type { default as FagsakDataFpTilbake } from './src/fagsakTilbakekrevingTsType';
 export type {
-  default as MedlemskapV3,
+  default as Medlemskap,
   ManuellBehandlingResultat,
   LegacyManuellMedlemskapsBehandling,
   LegacyMedlemPeriode,
   AdressePeriode,
   RegionPeriode,
   PersonstatusPeriode,
-  MedlemskapPeriodeV3,
+  MedlemskapPeriode,
   OppholdstillatelsePeriode,
-} from './src/medlemskapV3TsType';
-export { MedlemskapAvvik } from './src/medlemskapV3TsType';
+} from './src/medlemskapTsType';
+export { MedlemskapAvvik } from './src/medlemskapTsType';
 export type { default as Risikoklassifisering } from './src/risikoklassifiseringTsType';
 export type { default as AnkeVurdering } from './src/ankeVurderingTsType';
 export type { default as KlageVurdering, KlageVurderingResultat } from './src/klageVurderingTsType';

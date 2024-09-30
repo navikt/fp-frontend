@@ -1,4 +1,4 @@
-export enum Vurdering {
+export enum MedlemskapVurdering {
   OPPFYLT = 'OPPFYLT',
   DELVIS_OPPFYLT = 'DELVIS_OPPFYLT',
   IKKE_OPPFYLT = 'IKKE_OPPFYLT',
@@ -6,7 +6,7 @@ export enum Vurdering {
 
 export type VurderMedlemskapFormValues = {
   begrunnelse: string;
-  vurdering: Vurdering;
+  vurdering: MedlemskapVurdering;
   opphørFom?: string;
   medlemFom?: string;
   avslagskode?: string;

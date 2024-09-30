@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { Fagsak, MedlemskapV3, Soknad, StandardFaktaPanelProps } from '@navikt/fp-types';
+import { Fagsak, Medlemskap, Soknad, StandardFaktaPanelProps } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
 import MedlemskapInfoPanel from './components/MedlemskapInfoPanel';
@@ -10,7 +10,7 @@ import messages from '../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 interface Props {
-  medlemskap: MedlemskapV3;
+  medlemskap: Medlemskap;
   soknad: Soknad;
   fagsak: Fagsak;
 }

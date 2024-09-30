@@ -1,5 +1,5 @@
 import React from 'react';
-import { AlleKodeverk, MedlemskapAvvik, MedlemskapPeriodeV3 } from '@navikt/fp-types';
+import { AlleKodeverk, MedlemskapAvvik, MedlemskapPeriode } from '@navikt/fp-types';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { BodyLong, BodyShort, Box, Table } from '@navikt/ds-react';
 import { DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
@@ -11,7 +11,7 @@ import { relevantForMedl } from '../ekspansjonsKort/medlemsAvvik';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 interface Props {
-  medlemskapsperioder: MedlemskapPeriodeV3[];
+  medlemskapsperioder: MedlemskapPeriode[];
   avvik: MedlemskapAvvik[] | undefined;
   alleKodeverk: AlleKodeverk;
   skalViseAvvik: boolean;

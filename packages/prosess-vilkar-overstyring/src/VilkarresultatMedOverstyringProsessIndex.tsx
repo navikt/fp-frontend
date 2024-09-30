@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { AlleKodeverk, KodeverkMedNavn, MedlemskapV3, StandardProsessPanelProps } from '@navikt/fp-types';
+import { AlleKodeverk, KodeverkMedNavn, Medlemskap, StandardProsessPanelProps } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 import { OverstyringAksjonspunkter } from '@navikt/fp-kodeverk';
 
@@ -12,7 +12,7 @@ const intl = createIntl(messages);
 
 interface OwnProps {
   alleKodeverk: AlleKodeverk;
-  medlemskap?: MedlemskapV3;
+  medlemskap?: Medlemskap;
   overrideReadOnly: boolean;
   kanOverstyreAccess: {
     isEnabled: boolean;

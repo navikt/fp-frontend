@@ -18,9 +18,7 @@ import {
 } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import styles from './vilkarresultatMedOverstyringForm.module.css';
-import { MedlemskapVurderinger } from '@navikt/fp-fakta-medlemskap';
-import { Vurdering } from '@navikt/fp-fakta-medlemskap/src/v3/types/vurderingMedlemskapForm';
-import { createInitialValues as medlemskapInitialValues } from '@navikt/fp-fakta-medlemskap/src/v3/components/aksjonspunkt/VurderMedlemskapAksjonspunktForm';
+import { MedlemskapVurderinger, MedlemskapVurdering, createMedlemskapInitialValues } from '@navikt/fp-fakta-medlemskap';
 
 const isOverridden = (aksjonspunkter: Aksjonspunkt[], aksjonspunktCode: string): boolean =>
   aksjonspunkter.some(ap => ap.definisjon === aksjonspunktCode);
@@ -30,7 +28,7 @@ const isHidden = (kanOverstyre: boolean, aksjonspunkter: Aksjonspunkt[], aksjons
 
 type FormValues = {
   erVilkarOk?: boolean;
-  vurdering?: Vurdering;
+  vurdering?: MedlemskapVurdering;
   avslagskode?: string;
   opphørFom?: string;
   medlemFom?: string;
@@ -62,7 +60,7 @@ const createInitialValues = (
     if (aksjonspunkt) {
       return {
         ...felles,
-        ...medlemskapInitialValues(aksjonspunkt, medlemskapManuellBehandlingResultat || null),
+        ...createMedlemskapInitialValues(aksjonspunkt, medlemskapManuellBehandlingResultat || null),
       };
     } else {
       return felles;
@@ -90,14 +88,14 @@ const transformValues = (values: FormValues, overstyringApKode: OverstyringAksjo
     case AksjonspunktCode.OVERSTYR_MEDLEMSKAPSVILKAR:
       return {
         ...felles,
-        avslagskode: vurdering !== Vurdering.OPPFYLT ? avslagskode : undefined,
-        opphørFom: vurdering === Vurdering.DELVIS_OPPFYLT ? opphørFom : undefined,
+        avslagskode: vurdering !== MedlemskapVurdering.OPPFYLT ? avslagskode : undefined,
+        opphørFom: vurdering === MedlemskapVurdering.DELVIS_OPPFYLT ? opphørFom : undefined,
       };
     case AksjonspunktCode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE:
       return {
         ...felles,
-        avslagskode: vurdering !== Vurdering.OPPFYLT ? avslagskode : undefined,
-        medlemFom: vurdering === Vurdering.IKKE_OPPFYLT ? medlemFom : undefined,
+        avslagskode: vurdering !== MedlemskapVurdering.OPPFYLT ? avslagskode : undefined,
+        medlemFom: vurdering === MedlemskapVurdering.IKKE_OPPFYLT ? medlemFom : undefined,
       };
     default:
       return {

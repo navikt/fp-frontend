@@ -13,7 +13,7 @@ import InfoBox from '../InfoBox';
 import { MedlemskapVurderinger } from './MedlemskapVurderinger';
 import {
   SØKER_INNFLYTTET_FOR_SENT_KODE,
-  Vurdering,
+  MedlemskapVurdering,
   VurderMedlemskapFormValues,
 } from '../../types/vurderingMedlemskapForm';
 
@@ -27,7 +27,7 @@ interface Props {
   ytelse: string;
 }
 
-export const createInitialValues = (
+export const createMedlemskapInitialValues = (
   aksjonspunkt: Aksjonspunkt,
   resultat: ManuellBehandlingResultat | null,
 ): Partial<VurderMedlemskapFormValues> => {
@@ -36,14 +36,14 @@ export const createInitialValues = (
   if (resultat) {
     const { opphørFom, avslagskode, medlemFom } = resultat;
     if (!avslagskode) {
-      return { vurdering: Vurdering.OPPFYLT, begrunnelse };
+      return { vurdering: MedlemskapVurdering.OPPFYLT, begrunnelse };
     } else {
       if (opphørFom) {
-        return { vurdering: Vurdering.DELVIS_OPPFYLT, opphørFom, avslagskode, begrunnelse };
+        return { vurdering: MedlemskapVurdering.DELVIS_OPPFYLT, opphørFom, avslagskode, begrunnelse };
       } else if (medlemFom) {
-        return { vurdering: Vurdering.IKKE_OPPFYLT, medlemFom, avslagskode, begrunnelse };
+        return { vurdering: MedlemskapVurdering.IKKE_OPPFYLT, medlemFom, avslagskode, begrunnelse };
       } else {
-        return { vurdering: Vurdering.IKKE_OPPFYLT, avslagskode, begrunnelse };
+        return { vurdering: MedlemskapVurdering.IKKE_OPPFYLT, avslagskode, begrunnelse };
       }
     }
   }
@@ -69,7 +69,7 @@ const VurderMedlemskapAksjonspunktForm: FC<Props> = ({
   const [submitting, setSubmitting] = useState(false);
 
   const formMethods = useForm<VurderMedlemskapFormValues>({
-    defaultValues: createInitialValues(aksjonspunkt, manuellBehandlingResultat),
+    defaultValues: createMedlemskapInitialValues(aksjonspunkt, manuellBehandlingResultat),
   });
 
   const begrunnelseVerdi = formMethods.watch('begrunnelse');
@@ -83,8 +83,8 @@ const VurderMedlemskapAksjonspunktForm: FC<Props> = ({
           ? AksjonspunktCode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR
           : AksjonspunktCode.VURDER_MEDLEMSKAPSVILKÅRET,
         begrunnelse,
-        avslagskode: vurdering !== Vurdering.OPPFYLT ? avslagskode : undefined,
-        opphørFom: vurdering === Vurdering.DELVIS_OPPFYLT ? opphørFom : undefined,
+        avslagskode: vurdering !== MedlemskapVurdering.OPPFYLT ? avslagskode : undefined,
+        opphørFom: vurdering === MedlemskapVurdering.DELVIS_OPPFYLT ? opphørFom : undefined,
         medlemFom: avslagskode === SØKER_INNFLYTTET_FOR_SENT_KODE ? medlemFom : undefined,
       });
     },

@@ -30,7 +30,7 @@ export type AdressePeriode = Readonly<{
   adresse: Personadresse;
 }>;
 
-export type MedlemskapPeriodeV3 = Readonly<{
+export type MedlemskapPeriode = Readonly<{
   fom: string;
   tom: string | null;
   erMedlem: boolean;
@@ -77,7 +77,7 @@ type Annenpart = {
   personstatuser: PersonstatusPeriode[];
 };
 
-type MedlemskapV3 = Readonly<{
+type Medlemskap = Readonly<{
   manuellBehandlingResultat: ManuellBehandlingResultat | null;
   legacyManuellBehandling: LegacyManuellMedlemskapsBehandling | null;
   regioner: RegionPeriode[];
@@ -85,9 +85,9 @@ type MedlemskapV3 = Readonly<{
   utenlandsopphold: UtenlandsoppholdPeriode[];
   adresser: AdressePeriode[];
   oppholdstillatelser: OppholdstillatelsePeriode[];
-  medlemskapsperioder: MedlemskapPeriodeV3[];
+  medlemskapsperioder: MedlemskapPeriode[];
   avvik: MedlemskapAvvik[];
   annenpart: Annenpart | null;
 }>;
 
-export default MedlemskapV3;
+export default Medlemskap;

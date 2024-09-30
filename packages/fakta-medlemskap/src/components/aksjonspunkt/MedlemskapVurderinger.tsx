@@ -11,7 +11,7 @@ import { createIntl } from '@navikt/ft-utils';
 
 import {
   SØKER_INNFLYTTET_FOR_SENT_KODE,
-  Vurdering,
+  MedlemskapVurdering,
   VurderMedlemskapFormValues,
 } from '../../types/vurderingMedlemskapForm';
 
@@ -36,19 +36,19 @@ const lagVurderingsAlternativer = (
   return [
     {
       label: 'Oppfylt',
-      value: Vurdering.OPPFYLT,
+      value: MedlemskapVurdering.OPPFYLT,
     },
     ...(!erForutgående && ytelse !== fagsakYtelseType.ENGANGSSTONAD
       ? [
           {
             label: 'Delvis oppfylt',
-            value: Vurdering.DELVIS_OPPFYLT,
+            value: MedlemskapVurdering.DELVIS_OPPFYLT,
           },
         ]
       : []),
     {
       label: 'Ikke oppfylt',
-      value: Vurdering.IKKE_OPPFYLT,
+      value: MedlemskapVurdering.IKKE_OPPFYLT,
     },
   ];
 };
@@ -74,7 +74,7 @@ export const MedlemskapVurderinger = ({ readOnly, ytelse, avslagsarsaker, erForu
           isReadOnly={readOnly}
           radios={lagVurderingsAlternativer(ytelse, erForutgående)}
         />
-        {vurdering && [Vurdering.DELVIS_OPPFYLT, Vurdering.IKKE_OPPFYLT].includes(vurdering) && (
+        {vurdering && [MedlemskapVurdering.DELVIS_OPPFYLT, MedlemskapVurdering.IKKE_OPPFYLT].includes(vurdering) && (
           <SelectField
             name="avslagskode"
             label={intl.formatMessage({
@@ -91,7 +91,7 @@ export const MedlemskapVurderinger = ({ readOnly, ytelse, avslagsarsaker, erForu
             validate={[required]}
           />
         )}
-        {!erForutgående && vurdering === Vurdering.DELVIS_OPPFYLT && (
+        {!erForutgående && vurdering === MedlemskapVurdering.DELVIS_OPPFYLT && (
           <Datepicker
             name="opphørFom"
             label={intl.formatMessage({
@@ -105,7 +105,7 @@ export const MedlemskapVurderinger = ({ readOnly, ytelse, avslagsarsaker, erForu
         )}
         {erForutgående &&
           vurdering &&
-          [Vurdering.IKKE_OPPFYLT].includes(vurdering) &&
+          [MedlemskapVurdering.IKKE_OPPFYLT].includes(vurdering) &&
           avslagskode === SØKER_INNFLYTTET_FOR_SENT_KODE && (
             <Datepicker
               name="medlemFom"
