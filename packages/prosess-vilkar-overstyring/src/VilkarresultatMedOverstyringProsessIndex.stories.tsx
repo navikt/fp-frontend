@@ -50,6 +50,10 @@ const Template: StoryFn<{
   status?: string;
   avslagsarsaker?: KodeverkMedNavn[];
   vilkarType: VilkarType;
+  kanOverstyreAccess: {
+    isEnabled: boolean;
+  };
+  isReadOnly: boolean;
   ytelse: string;
   submitCallback?: (data: any) => Promise<any>;
 }> = ({
@@ -61,6 +65,8 @@ const Template: StoryFn<{
   avslagsarsaker = defaultAvslagsarsaker,
   status = vilkarUtfallType.OPPFYLT,
   ytelse = fagsakYtelseType.FORELDREPENGER,
+  isReadOnly = false,
+  kanOverstyreAccess = { isEnabled: true },
   submitCallback = action('button-click') as (data: any) => Promise<any>,
 }) => {
   const [erOverstyrt, toggleOverstyring] = React.useState(false);
@@ -69,7 +75,7 @@ const Template: StoryFn<{
       aksjonspunkter={aksjonspunkter}
       alleKodeverk={alleKodeverk as any}
       submitCallback={submitCallback}
-      isReadOnly={false}
+      isReadOnly={isReadOnly}
       isAksjonspunktOpen
       readOnlySubmitButton={false}
       vilkar={[]}
@@ -78,9 +84,7 @@ const Template: StoryFn<{
       behandling={behandling}
       medlemskap={medlemskap}
       overrideReadOnly={false}
-      kanOverstyreAccess={{
-        isEnabled: true,
-      }}
+      kanOverstyreAccess={kanOverstyreAccess}
       fagsak={
         {
           fagsakYtelseType: ytelse,
@@ -206,4 +210,23 @@ OverstyringAvOpptjeningsvilkåretSomIkkeErVurdert.args = {
   status: vilkarUtfallType.IKKE_VURDERT,
   panelTittelKode: 'Inngangsvilkar.Opptjeningsvilkaret',
   overstyringApKode: AksjonspunktCode.OVERSTYRING_AV_OPPTJENINGSVILKARET,
+};
+
+export const OverstyringAvLøpendeMedlemskapVisning = Template.bind({});
+OverstyringAvLøpendeMedlemskapVisning.args = {
+  ytelse: fagsakYtelseType.FORELDREPENGER,
+  panelTittelKode: 'Behandlingspunkt.FortsattMedlemskap',
+  overstyringApKode: AksjonspunktCode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
+  avslagsarsaker: alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE],
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
+      status: aksjonspunktStatus.UTFORT,
+      kanLoses: false,
+      begrunnelse: 'Dette er en begrunnelse',
+    },
+  ],
+  status: vilkarUtfallType.OPPFYLT,
+  kanOverstyreAccess: { isEnabled: false },
+  isReadOnly: true,
 };
