@@ -10,8 +10,9 @@ import { addDaysToDate, formatCurrencyNoKr, TIDENES_ENDE } from '@navikt/ft-util
 import { AktivNaturalYtelse, NaturalytelseType } from '@navikt/fp-types/src/arbeidOgInntektsmeldingTsType';
 import { hentDokumentLenke } from '@navikt/fp-konstanter';
 import { ArrowForwardIcon } from '@navikt/aksel-icons';
+import { sorterPerioder } from '@navikt/fp-fakta-felles';
+
 import styles from './inntektsmeldingFakta.module.css';
-import { sorterPerioder } from '@navikt/fp-fakta-medlemskap/src/v3/utils/periodeUtils';
 
 export const InntektsmeldingInnhold = ({
   inntektsmelding,

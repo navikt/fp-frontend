@@ -1,8 +1,8 @@
+import { IntlShape } from 'react-intl';
 import { AlleKodeverk, MedlemskapV3, UtlandsoppholdPeriode } from '@navikt/fp-types';
 import { getKodeverknavnFn, KodeverkType, landkoder, opplysningAdresseType } from '@navikt/fp-kodeverk';
-import { IntlShape } from 'react-intl';
+import { sorterPerioder } from '@navikt/fp-fakta-felles';
 
-import { sorterPerioder } from '../../utils/periodeUtils';
 import { toTitleCapitalization } from '../../utils/stringUtils';
 
 export const getSisteRegion = (medlemskap: MedlemskapV3, alleKodeverk: AlleKodeverk, intl: IntlShape): string => {

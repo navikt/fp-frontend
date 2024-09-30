@@ -3,8 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { AlleKodeverk, RegionPeriode } from '@navikt/fp-types';
 import { BodyLong, Table, Label } from '@navikt/ds-react';
 import { KodeverkType } from '@navikt/fp-kodeverk';
-
-import { sorterPerioder } from '../../../utils/periodeUtils';
+import { sorterPerioder } from '@navikt/fp-fakta-felles';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 
