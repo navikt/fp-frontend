@@ -3,7 +3,7 @@ import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import { vilkarUtfallType, aksjonspunktStatus, AksjonspunktCode } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt, Behandling, Opptjening } from '@navikt/fp-types';
+import { Aksjonspunkt, Behandling, Fagsak, Opptjening } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -65,6 +65,7 @@ const Template: StoryFn<{
     aksjonspunkter={aksjonspunkter}
     lovReferanse="§§Dette er en lovreferanse"
     erSvpFagsak={erSvp}
+    fagsak={{} as Fagsak}
   />
 );
 

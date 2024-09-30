@@ -62,7 +62,7 @@ const OverstyringPanel: FunctionComponent<OwnProps> = ({
       erAksjonspunktApent={erOverstyrt}
       erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
     >
-      <Label size="small">{intl.formatMessage({ id: 'OverstyringPanel.AutomatiskVurdering' })}</Label>
+      <Label size="medium">{intl.formatMessage({ id: 'OverstyringPanel.AutomatiskVurdering' })}</Label>
       <VerticalSpacer eightPx />
       {children}
       {(erOverstyrt || hasAksjonspunkt) && (

@@ -4,7 +4,7 @@ import { Aksjonspunkt } from '@navikt/ft-types';
 import { BehandlingStatus, VilkarUtfallType } from '@navikt/ft-kodeverk';
 
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import { Behandling } from '@navikt/fp-types';
+import { Behandling, Fagsak } from '@navikt/fp-types';
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
@@ -38,6 +38,7 @@ const defaultProps = {
   vilkar: [],
   isAksjonspunktOpen: true,
   setFormData: () => undefined,
+  fagsak: {} as Fagsak,
 };
 
 describe('<ProsessDefaultInitPanel>', () => {

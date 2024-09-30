@@ -56,7 +56,6 @@ const FodselInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsvilkar
               vilkar={data.vilkar}
               vilkarKoder={VILKAR_KODER}
               panelTekstKode="Inngangsvilkar.Fodselsvilkaret"
-              erMedlemskapsPanel={false}
               toggleOverstyring={toggleOverstyring}
               erOverstyrt={erOverstyrt}
               overrideReadOnly={

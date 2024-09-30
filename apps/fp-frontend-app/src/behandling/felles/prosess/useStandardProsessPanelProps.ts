@@ -1,6 +1,6 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { Aksjonspunkt } from '@navikt/ft-types';
-import { AksjonspunktStatus, VilkarUtfallType, isAksjonspunktOpen } from '@navikt/ft-kodeverk';
+import { AksjonspunktStatus, isAksjonspunktOpen, VilkarUtfallType } from '@navikt/ft-kodeverk';
 
 import { Behandling, Fagsak, StandardProsessPanelProps, Vilkar } from '@navikt/fp-types';
 
@@ -159,6 +159,7 @@ const useStandardProsessPanelProps = (
   );
 
   return {
+    fagsak: value.fagsak,
     behandling: value.behandling,
     isAksjonspunktOpen: harApneAksjonspunkter,
     aksjonspunkter: aksjonspunkterForSteg,

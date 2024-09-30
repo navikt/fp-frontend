@@ -49,7 +49,6 @@ const OpptjeningInngangsvilkarFpInitPanel: FunctionComponent<OwnProps & Inngangs
               vilkar={data.vilkar}
               vilkarKoder={VILKAR_KODER}
               panelTekstKode="Inngangsvilkar.Opptjeningsvilkaret"
-              erMedlemskapsPanel={false}
               toggleOverstyring={toggleOverstyring}
               erOverstyrt={erOverstyrt}
               overrideReadOnly={

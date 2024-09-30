@@ -10,7 +10,7 @@ import {
   soknadType,
   AksjonspunktCode,
 } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt, Behandling, FamilieHendelseSamling, Soknad, Vilkar } from '@navikt/fp-types';
+import { Aksjonspunkt, Behandling, Fagsak, FamilieHendelseSamling, Soknad, Vilkar } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -77,6 +77,7 @@ const Template: StoryFn<{
     familiehendelse={familiehendelse}
     aksjonspunkter={aksjonspunkter}
     status={status}
+    fagsak={{} as Fagsak}
   />
 );
 

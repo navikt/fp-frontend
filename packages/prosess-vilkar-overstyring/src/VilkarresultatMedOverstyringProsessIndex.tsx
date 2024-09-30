@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { Medlemskap, KodeverkMedNavn, StandardProsessPanelProps } from '@navikt/fp-types';
+import { AlleKodeverk, KodeverkMedNavn, MedlemskapV3, StandardProsessPanelProps } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 import { OverstyringAksjonspunkter } from '@navikt/fp-kodeverk';
 
@@ -11,7 +11,8 @@ import messages from '../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 interface OwnProps {
-  medlemskap?: Medlemskap;
+  alleKodeverk: AlleKodeverk;
+  medlemskap?: MedlemskapV3;
   overrideReadOnly: boolean;
   kanOverstyreAccess: {
     isEnabled: boolean;
@@ -22,10 +23,10 @@ interface OwnProps {
   panelTittelKode: string;
   overstyringApKode: OverstyringAksjonspunkter;
   lovReferanse?: string;
-  erMedlemskapsPanel: boolean;
 }
 
 const VilkarresultatMedOverstyringProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
+  alleKodeverk,
   behandling,
   medlemskap,
   aksjonspunkter,
@@ -39,16 +40,17 @@ const VilkarresultatMedOverstyringProsessIndex: FunctionComponent<OwnProps & Sta
   panelTittelKode,
   overstyringApKode,
   lovReferanse = '',
-  erMedlemskapsPanel,
   alleMerknaderFraBeslutter,
   formData,
   setFormData,
+  fagsak,
 }) => (
   <RawIntlProvider value={intl}>
     <VilkarresultatMedOverstyringForm
-      behandlingType={behandling.type}
+      ytelseType={fagsak.fagsakYtelseType}
+      alleKodeverk={alleKodeverk}
       behandlingsresultat={behandling.behandlingsresultat}
-      medlemskapFom={medlemskap?.fom}
+      medlemskapManuellBehandlingResultat={medlemskap?.manuellBehandlingResultat ?? undefined}
       aksjonspunkter={aksjonspunkter}
       submitCallback={submitCallback}
       overrideReadOnly={overrideReadOnly}
@@ -60,7 +62,6 @@ const VilkarresultatMedOverstyringProsessIndex: FunctionComponent<OwnProps & Sta
       panelTittelKode={panelTittelKode}
       overstyringApKode={overstyringApKode}
       lovReferanse={lovReferanse}
-      erMedlemskapsPanel={erMedlemskapsPanel}
       erIkkeGodkjentAvBeslutter={aksjonspunkter.some(a => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted)}
       formData={formData}
       setFormData={setFormData}

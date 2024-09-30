@@ -10,6 +10,7 @@ import {
   Medlemskap,
   Vilkar,
   Aksjonspunkt,
+  Fagsak,
 } from '@navikt/fp-types';
 import {
   behandlingArsakType,
@@ -118,6 +119,7 @@ const Template: StoryFn<{
     alleKodeverk={alleKodeverk as any}
     beregningsgrunnlag={beregningsgrunnlag}
     beregningsresultatOriginalBehandling={beregningsresultatOriginalBehandling}
+    fagsak={{} as Fagsak}
   />
 );
 

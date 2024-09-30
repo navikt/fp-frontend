@@ -10,7 +10,7 @@ import {
   fagsakYtelseType,
 } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import { Aksjonspunkt, Behandling, Vilkar } from '@navikt/fp-types';
+import { Aksjonspunkt, Behandling, Fagsak, Vilkar } from '@navikt/fp-types';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import FodselVilkarProsessIndex from './FodselVilkarProsessIndex';
@@ -53,6 +53,7 @@ const Template: StoryFn<{
       ] as Vilkar[]
     }
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
+    fagsak={{} as Fagsak}
   />
 );
 

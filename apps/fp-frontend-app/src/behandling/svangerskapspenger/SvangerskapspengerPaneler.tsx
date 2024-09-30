@@ -112,7 +112,6 @@ const SvangerskapspengerPaneler: FunctionComponent<OwnProps> = ({
         <FortsattMedlemskapProsessStegInitPanel {...props} rettigheter={rettigheter} />
         <TilkjentYtelseProsessStegInitPanel
           {...props}
-          fagsak={fagsak}
           arbeidsgiverOpplysningerPerId={arbeidsgivere}
           personoversikt={personoversikt}
         />

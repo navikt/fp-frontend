@@ -5,7 +5,7 @@ import { VilkarUtfallType, BehandlingStatus } from '@navikt/ft-kodeverk';
 
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import { Behandling } from '@navikt/fp-types';
+import { Behandling, Fagsak } from '@navikt/fp-types';
 
 import * as Felles from './useStandardProsessPanelProps';
 import InngangsvilkarDefaultInitPanel from './InngangsvilkarDefaultInitPanel';
@@ -37,6 +37,7 @@ const defaultProps = {
   vilkar: [],
   isAksjonspunktOpen: true,
   setFormData: () => undefined,
+  fagsak: {} as Fagsak,
 };
 
 describe('<InngangsvilkarDefaultInitPanel>', () => {

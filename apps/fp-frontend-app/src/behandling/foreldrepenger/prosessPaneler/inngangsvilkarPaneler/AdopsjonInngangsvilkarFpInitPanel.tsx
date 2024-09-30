@@ -45,7 +45,6 @@ const AdopsjonInngangsvilkarFpInitPanel: FunctionComponent<OwnProps & Inngangsvi
               vilkar={data.vilkar}
               vilkarKoder={VILKAR_KODER}
               panelTekstKode="Inngangsvilkar.Adopsjonsvilkaret"
-              erMedlemskapsPanel={false}
               toggleOverstyring={toggleOverstyring}
               erOverstyrt={erOverstyrt}
               overrideReadOnly={

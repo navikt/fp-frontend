@@ -134,7 +134,6 @@
   "OpplysningerOmPersonstatus.Tom": "Til og med",
   "OpplysningerOmPersonstatus.Beskrivelse": "Personstatus og region for statsborgerskap registrert i folkeregisteret for de siste 12 månedene før skjæringstidspunktet",
 
-
   "OpplysningerFraMedlemskapsregister.Beskrivelse": "Perioder fra medlemskapsregisteret gyldige for de siste 12 månedene",
   "OpplysningerFraMedlemskapsregister.Tabell.Ingen": "Ingen perioder funnet for søker i medlemskapsregister.",
   "OpplysningerFraMedlemskapsregister.TabellHeader.Periode": "Periode",
@@ -146,8 +145,6 @@
   "OpplysningerFraMedlemskapsregister.TabellHeader.Beslutningsdato": "Besl. dato",
 
   "OpplysningerFraMedlemskapsregister.TabellCell.ErMedlem": "{erMedlem, select, true {Ja} false {Nei} other {}}",
-
-
 
   "OpplysningerOmOppholdstillatelser.Beskrivelse": "Perioder med oppholdstillatelser som er registrert i folkeregisteret gyldige for de siste 12 månedene",
   "OpplysningerOmOppholdstillatelser.Tabell.Ingen": "Ingen oppholdstillatelser funnet for søker.",
@@ -168,18 +165,15 @@
   "MedlemskapLegacy.MedlemskapManuell.Label": "Har søker gyldig medlemskap i perioden?",
   "MedlemskapLegacy.ErSokerEOS.Label": "Er søker EØS borger?",
 
-
-  "VurderMedlemsskapAksjonspunktForm.VurderingLabel": "Er medlemskapsvilkåret oppfylt?",
+  "VurderMedlemsskapAksjonspunktForm.VurderingLabel.Ordinaert": "Er medlemskapsvilkåret oppfylt?",
+  "VurderMedlemsskapAksjonspunktForm.VurderingLabel.Forutgaaende": "Har bruker vært medlem i 12 måneder før termin/omsorgsovertakelse?",
   "VurderMedlemsskapAksjonspunktForm.VurderingLabel.ReadOnly": "Vurdering av medlemskapsvilkåret",
+
   "VurderMedlemsskapAksjonspunktForm.AvslagsarsakLabel": "Velg en avslagsårsak",
   "VurderMedlemsskapAksjonspunktForm.AvslagsarsakLabel.ReadOnly": "Avslagsårsak",
   "VurderMedlemsskapAksjonspunktForm.OpphorFomLabel": "Når opphører medlemskapet?",
   "VurderMedlemsskapAksjonspunktForm.OpphorFomLabel.ReadOnly": "Opphørsdato",
 
-  "VurderForutgaendeMedlemskapAksjonspunktForm.VurderingLabel": "Har bruker vært medlem i 12 måneder før termin/omsorgsovertakelse?",
-  "VurderForutgaendeMedlemskapAksjonspunktForm.VurderingLabel.ReadOnly": "Vurdering av medlemskapsvilkåret",
-  "VurderForutgaendeMedlemskapAksjonspunktForm.AvslagsarsakLabel": "Velg en avslagsårsak",
-  "VurderForutgaendeMedlemskapAksjonspunktForm.AvslagsarsakLabel.ReadOnly": "Avslagsårsak",
-  "VurderForutgaendeMedlemskapAksjonspunktForm.MedlemFomLabel": "Innflyttingsdato",
-  "VurderForutgaendeMedlemskapAksjonspunktForm.MedlemFomLabel.ReadOnly": "Innflyttet dato"
+  "VurderMedlemsskapAksjonspunktForm.MedlemFomLabel": "Innflyttingsdato",
+  "VurderMedlemsskapAksjonspunktForm.MedlemFomLabel.ReadOnly": "Innflyttet dato"
 }
