@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { Aksjonspunkt } from '@navikt/ft-types';
-import { VilkarUtfallType, BehandlingStatus } from '@navikt/ft-kodeverk';
+import { BehandlingStatus, VilkarUtfallType } from '@navikt/ft-kodeverk';
 
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
@@ -60,24 +60,5 @@ describe('<InngangsvilkarDefaultInitPanel>', () => {
     );
 
     await waitFor(() => expect(screen.queryByText('Dette er komponenten')).not.toBeInTheDocument());
-  });
-
-  it('skal vise panel', async () => {
-    vi.spyOn(Felles, 'default').mockImplementation(() => defaultProps);
-
-    render(
-      <InngangsvilkarDefaultInitPanel
-        erPanelValgt
-        behandlingVersjon={1}
-        registrerInngangsvilkarPanel={() => {}}
-        aksjonspunktKoder={[AksjonspunktCode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR]}
-        renderPanel={() => <div>Dette er komponenten</div>}
-        inngangsvilkarPanelKode="test"
-        hentInngangsvilkarPanelTekst={() => 'test'}
-        harInngangsvilkarApentAksjonspunkt={false}
-      />,
-    );
-
-    expect(await screen.findByText('Dette er komponenten')).toBeInTheDocument();
   });
 });

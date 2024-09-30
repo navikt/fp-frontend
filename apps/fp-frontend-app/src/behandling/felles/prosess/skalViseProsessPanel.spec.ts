@@ -9,7 +9,7 @@ describe('skalViseProsessPanel', () => {
   it('skal vise prosesspanel når en har aksjonspunkt men ikke har tilknyttet noen vilkår', () => {
     const aksjonspunkter = [
       {
-        definisjon: AksjonspunktCode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
+        definisjon: AksjonspunktCode.OVERSTYR_MEDLEMSKAPSVILKAR,
       },
     ] as Aksjonspunkt[];
 
@@ -39,7 +39,7 @@ describe('skalViseProsessPanel', () => {
   it('skal vise prosesspanel når en har både vilkar og aksjonspunkt', () => {
     const aksjonspunkter = [
       {
-        definisjon: AksjonspunktCode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
+        definisjon: AksjonspunktCode.OVERSTYR_MEDLEMSKAPSVILKAR,
       },
     ] as Aksjonspunkt[];
     const vilkar = [
@@ -56,7 +56,7 @@ describe('skalViseProsessPanel', () => {
   it('skal ikke vise prosesspanel når en har tilknyttet et vilkår men ingen aktive vilkår', () => {
     const aksjonspunkter = [
       {
-        definisjon: AksjonspunktCode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
+        definisjon: AksjonspunktCode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE,
       },
     ] as Aksjonspunkt[];
     const vilkar = [] as Vilkar[];
