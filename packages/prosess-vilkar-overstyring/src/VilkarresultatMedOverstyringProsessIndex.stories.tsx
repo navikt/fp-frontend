@@ -28,6 +28,19 @@ export default {
   component: VilkarresultatMedOverstyringProsessIndex,
 };
 
+const defaultAvslagsarsaker = [
+  {
+    kode: 'AVSLAG_TEST_1',
+    navn: 'Dette er en avslagsårsak',
+    kodeverk: '',
+  },
+  {
+    kode: 'AVSLAG_TEST_2',
+    navn: 'Dette er en annen avslagsårsak',
+    kodeverk: '',
+  },
+];
+
 const Template: StoryFn<{
   panelTittelKode: string;
   overstyringApKode: OverstyringAksjonspunkter;
@@ -45,7 +58,7 @@ const Template: StoryFn<{
   behandling = defaultBehandling,
   medlemskap,
   aksjonspunkter = [],
-  avslagsarsaker = [],
+  avslagsarsaker = defaultAvslagsarsaker,
   status = vilkarUtfallType.OPPFYLT,
   ytelse = fagsakYtelseType.FORELDREPENGER,
   submitCallback = action('button-click') as (data: any) => Promise<any>,
@@ -88,7 +101,6 @@ export const OverstyringspanelForFødsel = Template.bind({});
 OverstyringspanelForFødsel.args = {
   panelTittelKode: 'Inngangsvilkar.Fodselsvilkaret',
   overstyringApKode: AksjonspunktCode.OVERSTYR_FODSELSVILKAR,
-  avslagsarsaker: alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.FODSELSVILKARET_MOR],
 };
 
 export const OverstyringspanelForMedlemskap = Template.bind({});

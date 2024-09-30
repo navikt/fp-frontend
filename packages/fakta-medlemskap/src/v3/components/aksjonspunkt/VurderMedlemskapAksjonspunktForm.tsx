@@ -35,14 +35,16 @@ export const createInitialValues = (
 
   if (resultat) {
     const { opphørFom, avslagskode, medlemFom } = resultat;
-    if (avslagskode && opphørFom) {
-      return { vurdering: Vurdering.DELVIS_OPPFYLT, opphørFom, avslagskode, begrunnelse };
-    } else if (avslagskode && medlemFom) {
-      return { vurdering: Vurdering.IKKE_OPPFYLT, medlemFom, avslagskode, begrunnelse };
-    } else if (avslagskode && !opphørFom && !medlemFom) {
-      return { vurdering: Vurdering.IKKE_OPPFYLT, avslagskode, begrunnelse };
-    } else if (!avslagskode) {
+    if (!avslagskode) {
       return { vurdering: Vurdering.OPPFYLT, begrunnelse };
+    } else {
+      if (opphørFom) {
+        return { vurdering: Vurdering.DELVIS_OPPFYLT, opphørFom, avslagskode, begrunnelse };
+      } else if (medlemFom) {
+        return { vurdering: Vurdering.IKKE_OPPFYLT, medlemFom, avslagskode, begrunnelse };
+      } else {
+        return { vurdering: Vurdering.IKKE_OPPFYLT, avslagskode, begrunnelse };
+      }
     }
   }
   return { begrunnelse };

@@ -26,7 +26,7 @@ describe('<VilkarresultatMedOverstyringProsessIndex>', () => {
 
     expect(await screen.findByText('Avslagsårsak')).toBeInTheDocument();
 
-    await userEvent.selectOptions(utils.getByLabelText('Avslagsårsak'), 'Søker er medmor');
+    await userEvent.selectOptions(utils.getByLabelText('Avslagsårsak'), 'Dette er en avslagsårsak');
 
     const vurderingInput = utils.getByLabelText('Begrunnelse');
     await userEvent.type(vurderingInput, 'Dette er en begrunnelse');
@@ -35,7 +35,7 @@ describe('<VilkarresultatMedOverstyringProsessIndex>', () => {
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      avslagskode: '1002',
+      avslagskode: 'AVSLAG_TEST_1',
       begrunnelse: 'Dette er en begrunnelse',
       erVilkarOk: false,
       kode: '6003',
@@ -68,15 +68,19 @@ describe('<VilkarresultatMedOverstyringProsessIndex>', () => {
     await userEvent.click(screen.getByRole('button'));
 
     expect(await screen.findByText('Manuell overstyring av automatisk vurdering')).toBeInTheDocument();
-    expect(screen.queryByText('Avslagsårsak')).not.toBeInTheDocument();
+    expect(screen.getByText('Er medlemskapsvilkåret oppfylt?')).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText(/Delvis oppfylt/));
+    expect(screen.queryByText('Velg en avslagsårsak')).not.toBeInTheDocument();
+    expect(screen.queryByText('Når opphører medlemskapet?')).not.toBeInTheDocument();
 
-    expect(await screen.findByText('Avslagsårsak')).toBeInTheDocument();
+    await userEvent.click(screen.getByText('Delvis oppfylt'));
 
-    await userEvent.selectOptions(utils.getByLabelText('Avslagsårsak'), 'AVSLAG_TEST_1');
+    expect(screen.getByText('Velg en avslagsårsak')).toBeInTheDocument();
+    expect(screen.getByText('Når opphører medlemskapet?')).toBeInTheDocument();
 
-    const opphørDatoInput = utils.getByLabelText('Dato for opphør av medlemskapet');
+    await userEvent.selectOptions(screen.getByLabelText('Velg en avslagsårsak'), 'Søker er utvandret');
+
+    const opphørDatoInput = screen.getByLabelText('Når opphører medlemskapet?');
     await userEvent.type(opphørDatoInput, '20.12.2021');
     fireEvent.blur(opphørDatoInput);
 
@@ -88,9 +92,8 @@ describe('<VilkarresultatMedOverstyringProsessIndex>', () => {
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
       opphørFom: '2021-12-20',
-      avslagskode: 'AVSLAG_TEST_1',
+      avslagskode: '1021',
       begrunnelse: 'Dette er en begrunnelse',
-      erVilkarOk: false,
       kode: '6005',
     });
   });
