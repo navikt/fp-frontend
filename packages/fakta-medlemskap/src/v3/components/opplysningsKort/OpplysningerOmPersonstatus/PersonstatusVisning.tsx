@@ -4,8 +4,7 @@ import { AlleKodeverk, PersonstatusPeriode } from '@navikt/fp-types';
 import { Table, BodyLong, Label } from '@navikt/ds-react';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { KodeverkType } from '@navikt/fp-kodeverk';
-
-import { sorterPerioder } from '../../../utils/periodeUtils';
+import { sorterPerioder } from '@navikt/fp-fakta-felles';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 interface Props {

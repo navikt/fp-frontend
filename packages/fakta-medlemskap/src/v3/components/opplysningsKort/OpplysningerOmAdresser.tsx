@@ -5,12 +5,11 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { AvsnittSkiller, PeriodLabel } from '@navikt/ft-ui-komponenter';
 import { KodeverkType } from '@navikt/fp-kodeverk';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
-import { FaktaKilde } from '@navikt/fp-fakta-felles';
+import { FaktaKilde, sorterPerioder } from '@navikt/fp-fakta-felles';
 
 import EkspansjonsKort from '../ekspansjonsKort/EkspansjonsKort';
 import { relevantForAdresser } from '../ekspansjonsKort/medlemsAvvik';
 import { erAdressePerioderLike, formaterAdresse } from '../../utils/adresseUtils';
-import { sorterPerioder } from '../../utils/periodeUtils';
 
 interface AdresseTabellProps {
   adresser: AdressePeriode[];
