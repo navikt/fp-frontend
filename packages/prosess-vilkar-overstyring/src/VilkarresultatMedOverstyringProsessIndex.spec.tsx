@@ -26,7 +26,7 @@ describe('<VilkarresultatMedOverstyringProsessIndex>', () => {
 
     expect(await screen.findByText('Avslagsårsak')).toBeInTheDocument();
 
-    await userEvent.selectOptions(utils.getByLabelText('Avslagsårsak'), 'AVSLAG_TEST_1');
+    await userEvent.selectOptions(utils.getByLabelText('Avslagsårsak'), 'Søker er medmor');
 
     const vurderingInput = utils.getByLabelText('Begrunnelse');
     await userEvent.type(vurderingInput, 'Dette er en begrunnelse');
@@ -35,7 +35,7 @@ describe('<VilkarresultatMedOverstyringProsessIndex>', () => {
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      avslagskode: 'AVSLAG_TEST_1',
+      avslagskode: '1002',
       begrunnelse: 'Dette er en begrunnelse',
       erVilkarOk: false,
       kode: '6003',
@@ -70,7 +70,7 @@ describe('<VilkarresultatMedOverstyringProsessIndex>', () => {
     expect(await screen.findByText('Manuell overstyring av automatisk vurdering')).toBeInTheDocument();
     expect(screen.queryByText('Avslagsårsak')).not.toBeInTheDocument();
 
-    await userEvent.click(screen.getByText(/ikke/));
+    await userEvent.click(screen.getByText(/Delvis oppfylt/));
 
     expect(await screen.findByText('Avslagsårsak')).toBeInTheDocument();
 

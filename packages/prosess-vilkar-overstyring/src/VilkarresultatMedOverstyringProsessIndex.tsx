@@ -23,7 +23,6 @@ interface OwnProps {
   panelTittelKode: string;
   overstyringApKode: OverstyringAksjonspunkter;
   lovReferanse?: string;
-  vilkarType: string;
 }
 
 const VilkarresultatMedOverstyringProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
@@ -41,7 +40,6 @@ const VilkarresultatMedOverstyringProsessIndex: FunctionComponent<OwnProps & Sta
   panelTittelKode,
   overstyringApKode,
   lovReferanse = '',
-  vilkarType,
   alleMerknaderFraBeslutter,
   formData,
   setFormData,
@@ -50,7 +48,6 @@ const VilkarresultatMedOverstyringProsessIndex: FunctionComponent<OwnProps & Sta
   <RawIntlProvider value={intl}>
     <VilkarresultatMedOverstyringForm
       ytelseType={fagsak.fagsakYtelseType}
-      vilkarType={vilkarType}
       alleKodeverk={alleKodeverk}
       behandlingsresultat={behandling.behandlingsresultat}
       medlemskapManuellBehandlingResultat={medlemskap?.manuellBehandlingResultat ?? undefined}

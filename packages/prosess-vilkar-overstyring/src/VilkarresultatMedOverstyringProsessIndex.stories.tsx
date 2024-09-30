@@ -38,6 +38,7 @@ const Template: StoryFn<{
   avslagsarsaker?: KodeverkMedNavn[];
   vilkarType: VilkarType;
   ytelse: string;
+  submitCallback?: (data: any) => Promise<any>;
 }> = ({
   panelTittelKode,
   overstyringApKode,
@@ -45,16 +46,16 @@ const Template: StoryFn<{
   medlemskap,
   aksjonspunkter = [],
   avslagsarsaker = [],
-  vilkarType,
   status = vilkarUtfallType.OPPFYLT,
   ytelse = fagsakYtelseType.FORELDREPENGER,
+  submitCallback = action('button-click') as (data: any) => Promise<any>,
 }) => {
   const [erOverstyrt, toggleOverstyring] = React.useState(false);
   return (
     <VilkarresultatMedOverstyringProsessIndex
       aksjonspunkter={aksjonspunkter}
       alleKodeverk={alleKodeverk as any}
-      submitCallback={action('button-click') as (data: any) => Promise<any>}
+      submitCallback={submitCallback}
       isReadOnly={false}
       isAksjonspunktOpen
       readOnlySubmitButton={false}
@@ -67,7 +68,6 @@ const Template: StoryFn<{
       kanOverstyreAccess={{
         isEnabled: true,
       }}
-      vilkarType={vilkarType}
       fagsak={
         {
           fagsakYtelseType: ytelse,
@@ -89,7 +89,6 @@ OverstyringspanelForFødsel.args = {
   panelTittelKode: 'Inngangsvilkar.Fodselsvilkaret',
   overstyringApKode: AksjonspunktCode.OVERSTYR_FODSELSVILKAR,
   avslagsarsaker: alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.FODSELSVILKARET_MOR],
-  vilkarType: VilkarType.FODSELSVILKARET_MOR,
 };
 
 export const OverstyringspanelForMedlemskap = Template.bind({});
@@ -97,8 +96,7 @@ OverstyringspanelForMedlemskap.args = {
   ytelse: fagsakYtelseType.FORELDREPENGER,
   panelTittelKode: 'Inngangsvilkar.Medlemskapsvilkaret',
   overstyringApKode: AksjonspunktCode.OVERSTYR_MEDLEMSKAPSVILKAR,
-  avslagsarsaker: alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.FODSELSVILKARET_MOR],
-  vilkarType: VilkarType.MEDLEMSKAPSVILKARET,
+  avslagsarsaker: alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.MEDLEMSKAPSVILKARET],
 };
 
 export const OverstyringErUtførtForMedlemskap = Template.bind({});
@@ -122,7 +120,6 @@ OverstyringErUtførtForMedlemskap.args = {
       opphørFom: '2022-02-19',
     },
   } as MedlemskapV3,
-  vilkarType: VilkarType.MEDLEMSKAPSVILKARET,
 };
 
 export const OverstyringForForutgåendeMedlemskap = Template.bind({});
@@ -131,7 +128,6 @@ OverstyringForForutgåendeMedlemskap.args = {
   panelTittelKode: 'Inngangsvilkar.Medlemskapsvilkaret',
   avslagsarsaker: alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.MEDLEMSKAPSVILKARET_FORUTGAENDE],
   overstyringApKode: AksjonspunktCode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE,
-  vilkarType: VilkarType.MEDLEMSKAPSVILKARET_FORUTGAENDE,
 };
 
 export const OverstyringErUtførtForForutgåendeMedlemskap = Template.bind({});
@@ -155,14 +151,12 @@ OverstyringErUtførtForForutgåendeMedlemskap.args = {
       medlemFom: '2022-02-19',
     },
   } as MedlemskapV3,
-  vilkarType: VilkarType.MEDLEMSKAPSVILKARET,
 };
 
 export const OverstyringspanelForOpptjening = Template.bind({});
 OverstyringspanelForOpptjening.args = {
   panelTittelKode: 'Inngangsvilkar.Opptjeningsvilkaret',
   overstyringApKode: AksjonspunktCode.OVERSTYRING_AV_OPPTJENINGSVILKARET,
-  vilkarType: VilkarType.OPPTJENINGSVILKARET,
   ytelse: fagsakYtelseType.FORELDREPENGER,
   avslagsarsaker: alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.OPPTJENINGSVILKARET],
 };

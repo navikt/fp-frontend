@@ -7,13 +7,7 @@ import { OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 
 import { Form } from '@navikt/ft-form-hooks';
 import { Aksjonspunkt, AlleKodeverk, Behandling, KodeverkMedNavn, ManuellBehandlingResultat } from '@navikt/fp-types';
-import {
-  AksjonspunktCode,
-  aksjonspunktStatus,
-  OverstyringAksjonspunkter,
-  VilkarType,
-  vilkarUtfallType,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktCode, aksjonspunktStatus, OverstyringAksjonspunkter, vilkarUtfallType } from '@navikt/fp-kodeverk';
 import { OverstyringPanel, VilkarResultPicker } from '@navikt/fp-prosess-felles';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 import {
@@ -24,10 +18,9 @@ import {
 } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import styles from './vilkarresultatMedOverstyringForm.module.css';
-import {
-  VilkårResultatPickerMedlemskapsvilkåret,
-  VilkårResultatPickerMedlemskapsvilkåretForutgående,
-} from '@navikt/fp-fakta-medlemskap';
+import { MedlemskapVurderinger } from '@navikt/fp-fakta-medlemskap';
+import { Vurdering } from '@navikt/fp-fakta-medlemskap/src/v3/types/vurderingMedlemskapForm';
+import { createInitialValues as medlemskapInitialValues } from '@navikt/fp-fakta-medlemskap/src/v3/components/aksjonspunkt/VurderMedlemskapAksjonspunktForm';
 
 const isOverridden = (aksjonspunkter: Aksjonspunkt[], aksjonspunktCode: string): boolean =>
   aksjonspunkter.some(ap => ap.definisjon === aksjonspunktCode);
@@ -37,6 +30,7 @@ const isHidden = (kanOverstyre: boolean, aksjonspunkter: Aksjonspunkt[], aksjons
 
 type FormValues = {
   erVilkarOk?: boolean;
+  vurdering?: Vurdering;
   avslagskode?: string;
   opphørFom?: string;
   medlemFom?: string;
@@ -44,7 +38,14 @@ type FormValues = {
   isOverstyrt?: boolean;
 };
 
-const buildInitialValues = (
+function erOverstyringAvMedlemskap(overstyringApKode: AksjonspunktCode) {
+  return [
+    AksjonspunktCode.OVERSTYR_MEDLEMSKAPSVILKAR,
+    AksjonspunktCode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE,
+  ].includes(overstyringApKode);
+}
+
+const createInitialValues = (
   aksjonspunkter: Aksjonspunkt[],
   status: string,
   overstyringApKode: OverstyringAksjonspunkter,
@@ -56,24 +57,23 @@ const buildInitialValues = (
     isOverstyrt: aksjonspunkt !== undefined,
     begrunnelse: decodeHtmlEntity(aksjonspunkt && aksjonspunkt.begrunnelse ? aksjonspunkt.begrunnelse : ''),
   };
-  console.log(medlemskapManuellBehandlingResultat);
 
-  switch (overstyringApKode) {
-    case AksjonspunktCode.OVERSTYR_MEDLEMSKAPSVILKAR:
-    case AksjonspunktCode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE:
+  if (erOverstyringAvMedlemskap(overstyringApKode)) {
+    if (aksjonspunkt) {
       return {
         ...felles,
-        avslagskode: medlemskapManuellBehandlingResultat?.avslagskode ?? undefined,
-        medlemFom: medlemskapManuellBehandlingResultat?.medlemFom ?? undefined,
-        opphørFom: medlemskapManuellBehandlingResultat?.opphørFom ?? undefined,
+        ...medlemskapInitialValues(aksjonspunkt, medlemskapManuellBehandlingResultat || null),
       };
-    default:
-      return {
-        ...felles,
-        ...VilkarResultPicker.buildInitialValues(aksjonspunkter, status, behandlingsresultat),
-      };
+    } else {
+      return felles;
+    }
   }
+  return {
+    ...felles,
+    ...VilkarResultPicker.buildInitialValues(aksjonspunkter, status, behandlingsresultat),
+  };
 };
+
 type OverstyringVilkår =
   | OverstyringAp
   | OverstyringMedlemskapsvilkaretLopendeAp
@@ -81,22 +81,23 @@ type OverstyringVilkår =
   | OverstyringMedlemskapvilkaretForutgaendeAp;
 
 const transformValues = (values: FormValues, overstyringApKode: OverstyringAksjonspunkter): OverstyringVilkår => {
+  const { vurdering, avslagskode, begrunnelse, medlemFom, opphørFom } = values;
   const felles = {
     kode: overstyringApKode,
-    begrunnelse: values.begrunnelse,
+    begrunnelse: begrunnelse,
   };
   switch (overstyringApKode) {
     case AksjonspunktCode.OVERSTYR_MEDLEMSKAPSVILKAR:
       return {
         ...felles,
-        avslagskode: values.avslagskode,
-        medlemFom: values.medlemFom,
+        avslagskode: vurdering !== Vurdering.OPPFYLT ? avslagskode : undefined,
+        opphørFom: vurdering === Vurdering.DELVIS_OPPFYLT ? opphørFom : undefined,
       };
     case AksjonspunktCode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE:
       return {
         ...felles,
-        avslagskode: values.avslagskode,
-        opphørFom: values.opphørFom,
+        avslagskode: vurdering !== Vurdering.OPPFYLT ? avslagskode : undefined,
+        medlemFom: vurdering === Vurdering.IKKE_OPPFYLT ? medlemFom : undefined,
       };
     default:
       return {
@@ -124,7 +125,6 @@ interface OwnProps {
   panelTittelKode: string;
   overstyringApKode: OverstyringAksjonspunkter;
   lovReferanse?: string;
-  vilkarType: string;
   erIkkeGodkjentAvBeslutter: boolean;
   formData?: FormValues;
   setFormData: (data: FormValues) => void;
@@ -137,13 +137,11 @@ interface OwnProps {
  * Resultatet kan overstyres av Nav-ansatt med overstyr-rettighet.
  */
 const VilkarresultatMedOverstyringForm: FunctionComponent<OwnProps> = ({
-  alleKodeverk,
   ytelseType,
   panelTittelKode,
   erOverstyrt,
   overstyringApKode,
   lovReferanse,
-  vilkarType,
   avslagsarsaker,
   aksjonspunkter,
   overrideReadOnly,
@@ -159,7 +157,7 @@ const VilkarresultatMedOverstyringForm: FunctionComponent<OwnProps> = ({
 }) => {
   const initialValues = useMemo(
     () =>
-      buildInitialValues(
+      createInitialValues(
         aksjonspunkter,
         status,
         overstyringApKode,
@@ -168,7 +166,6 @@ const VilkarresultatMedOverstyringForm: FunctionComponent<OwnProps> = ({
       ),
     [aksjonspunkter, status, overstyringApKode, behandlingsresultat],
   );
-  console.log(initialValues);
   const formMethods = useForm<FormValues>({
     defaultValues: formData || initialValues,
   });
@@ -251,24 +248,14 @@ const VilkarresultatMedOverstyringForm: FunctionComponent<OwnProps> = ({
             toggleAv={toggleAv}
             erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
           >
-            {VilkarType.MEDLEMSKAPSVILKARET === vilkarType && (
-              <VilkårResultatPickerMedlemskapsvilkåret
-                alleKodeverk={alleKodeverk}
+            {erOverstyringAvMedlemskap(overstyringApKode) ? (
+              <MedlemskapVurderinger
+                avslagsarsaker={avslagsarsaker}
                 readOnly={overrideReadOnly || !erOverstyrt}
                 ytelse={ytelseType}
+                erForutgående={overstyringApKode === AksjonspunktCode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE}
               />
-            )}
-
-            {VilkarType.MEDLEMSKAPSVILKARET_FORUTGAENDE === vilkarType && (
-              <VilkårResultatPickerMedlemskapsvilkåretForutgående
-                alleKodeverk={alleKodeverk}
-                readOnly={overrideReadOnly || !erOverstyrt}
-              />
-            )}
-
-            {![VilkarType.MEDLEMSKAPSVILKARET_FORUTGAENDE, VilkarType.MEDLEMSKAPSVILKARET].includes(
-              vilkarType as VilkarType,
-            ) && (
+            ) : (
               <VilkarResultPicker
                 avslagsarsaker={avslagsarsaker}
                 readOnly={overrideReadOnly || !erOverstyrt}

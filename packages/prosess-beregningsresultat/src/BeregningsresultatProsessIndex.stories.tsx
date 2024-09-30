@@ -2,7 +2,7 @@ import React from 'react';
 import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { Behandling, Aksjonspunkt } from '@navikt/fp-types';
+import { Behandling, Aksjonspunkt, Fagsak } from '@navikt/fp-types';
 
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
@@ -55,6 +55,7 @@ const Template: StoryFn<{
     overrideReadOnly={false}
     kanOverstyreAccess={kanOverstyreAccess}
     toggleOverstyring={action('button-click')}
+    fagsak={{} as Fagsak}
   />
 );
 

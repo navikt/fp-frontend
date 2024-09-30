@@ -54,8 +54,10 @@ const OverstyringPanelDef: FunctionComponent<OwnProps> = ({
 
   const skalVises = skalViseProsessPanel(overstyrteAksjonspunkter, vilkarKoder, vilkar);
 
-  const vilkarTypeKode = vilkar[0].vilkarType;
-  const avslagsarsaker = filtrerAvslagsarsaker(standardProps.alleKodeverk[KodeverkType.AVSLAGSARSAK], vilkarTypeKode);
+  const avslagsarsaker = filtrerAvslagsarsaker(
+    standardProps.alleKodeverk[KodeverkType.AVSLAGSARSAK],
+    vilkar[0].vilkarType,
+  );
 
   if (!skalVises) {
     return null;
@@ -73,7 +75,6 @@ const OverstyringPanelDef: FunctionComponent<OwnProps> = ({
         panelTittelKode={panelTekstKode}
         overstyringApKode={aksjonspunktKode}
         lovReferanse={vilkar.length > 0 ? vilkar[0].lovReferanse : undefined}
-        vilkarType={vilkarTypeKode as VilkarType}
         {...standardProps}
       />
       <VerticalSpacer thirtyTwoPx />

@@ -5,24 +5,30 @@ import { useFormContext } from 'react-hook-form';
 import { VStack } from '@navikt/ds-react';
 import { Datepicker, RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
-import { AlleKodeverk } from '@navikt/fp-types';
-import { fagsakYtelseType, KodeverkType, VilkarType } from '@navikt/fp-kodeverk';
+import { KodeverkMedNavn } from '@navikt/fp-types';
+import { fagsakYtelseType } from '@navikt/fp-kodeverk';
 import { createIntl } from '@navikt/ft-utils';
 
-import { Vurdering, VurderMedlemskapFormValues } from '../../types/vurderingMedlemskapForm';
+import {
+  SØKER_INNFLYTTET_FOR_SENT_KODE,
+  Vurdering,
+  VurderMedlemskapFormValues,
+} from '../../types/vurderingMedlemskapForm';
 
 import messages from '../../../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
 interface Props {
-  alleKodeverk: AlleKodeverk;
+  avslagsarsaker: KodeverkMedNavn[];
   readOnly: boolean;
   ytelse: string;
+  erForutgående: boolean;
 }
 
 const lagVurderingsAlternativer = (
   ytelse: string,
+  erForutgående: boolean,
 ): {
   value: string;
   label: string;
@@ -32,7 +38,7 @@ const lagVurderingsAlternativer = (
       label: 'Oppfylt',
       value: Vurdering.OPPFYLT,
     },
-    ...(ytelse !== fagsakYtelseType.ENGANGSSTONAD
+    ...(!erForutgående && ytelse !== fagsakYtelseType.ENGANGSSTONAD
       ? [
           {
             label: 'Delvis oppfylt',
@@ -47,12 +53,10 @@ const lagVurderingsAlternativer = (
   ];
 };
 
-export const VilkårResultatPickerMedlemskapsvilkåret = ({ alleKodeverk, readOnly, ytelse }: Props) => {
+export const MedlemskapVurderinger = ({ readOnly, ytelse, avslagsarsaker, erForutgående }: Props) => {
   const { watch } = useFormContext<VurderMedlemskapFormValues>();
   const vurdering = watch('vurdering');
-
-  const avslagsårsaker = alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.MEDLEMSKAPSVILKARET]
-    .sort((k1, k2) => k1.navn.localeCompare(k2.navn));
+  const avslagskode = watch('avslagskode');
 
   return (
     <RawIntlProvider value={intl}>
@@ -62,11 +66,13 @@ export const VilkårResultatPickerMedlemskapsvilkåret = ({ alleKodeverk, readOn
           label={intl.formatMessage({
             id: readOnly
               ? 'VurderMedlemsskapAksjonspunktForm.VurderingLabel.ReadOnly'
-              : 'VurderMedlemsskapAksjonspunktForm.VurderingLabel',
+              : erForutgående
+                ? 'VurderMedlemsskapAksjonspunktForm.VurderingLabel.Forutgaaende'
+                : 'VurderMedlemsskapAksjonspunktForm.VurderingLabel.Ordinaert',
           })}
           validate={[required]}
           isReadOnly={readOnly}
-          radios={lagVurderingsAlternativer(ytelse)}
+          radios={lagVurderingsAlternativer(ytelse, erForutgående)}
         />
         {vurdering && [Vurdering.DELVIS_OPPFYLT, Vurdering.IKKE_OPPFYLT].includes(vurdering) && (
           <SelectField
@@ -76,7 +82,7 @@ export const VilkårResultatPickerMedlemskapsvilkåret = ({ alleKodeverk, readOn
                 ? 'VurderMedlemsskapAksjonspunktForm.AvslagsarsakLabel.ReadOnly'
                 : 'VurderMedlemsskapAksjonspunktForm.AvslagsarsakLabel',
             })}
-            selectValues={avslagsårsaker.map(aa => (
+            selectValues={avslagsarsaker.map(aa => (
               <option key={aa.kode} value={aa.kode}>
                 {aa.navn}
               </option>
@@ -85,7 +91,7 @@ export const VilkårResultatPickerMedlemskapsvilkåret = ({ alleKodeverk, readOn
             validate={[required]}
           />
         )}
-        {vurdering === Vurdering.DELVIS_OPPFYLT && (
+        {!erForutgående && vurdering === Vurdering.DELVIS_OPPFYLT && (
           <Datepicker
             name="opphørFom"
             label={intl.formatMessage({
@@ -97,6 +103,21 @@ export const VilkårResultatPickerMedlemskapsvilkåret = ({ alleKodeverk, readOn
             isReadOnly={readOnly}
           />
         )}
+        {erForutgående &&
+          vurdering &&
+          [Vurdering.IKKE_OPPFYLT].includes(vurdering) &&
+          avslagskode === SØKER_INNFLYTTET_FOR_SENT_KODE && (
+            <Datepicker
+              name="medlemFom"
+              label={intl.formatMessage({
+                id: readOnly
+                  ? 'VurderMedlemsskapAksjonspunktForm.MedlemFomLabel.ReadOnly'
+                  : 'VurderMedlemsskapAksjonspunktForm.MedlemFomLabel',
+              })}
+              validate={[hasValidDate, required]}
+              isReadOnly={readOnly}
+            />
+          )}
       </VStack>
     </RawIntlProvider>
   );

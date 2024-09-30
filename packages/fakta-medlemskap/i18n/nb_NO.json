@@ -169,17 +169,15 @@
   "MedlemskapLegacy.ErSokerEOS.Label": "Er søker EØS borger?",
 
 
-  "VurderMedlemsskapAksjonspunktForm.VurderingLabel": "Er medlemskapsvilkåret oppfylt?",
+  "VurderMedlemsskapAksjonspunktForm.VurderingLabel.Ordinaert": "Er medlemskapsvilkåret oppfylt?",
+  "VurderMedlemsskapAksjonspunktForm.VurderingLabel.Forutgaaende": "Har bruker vært medlem i 12 måneder før termin/omsorgsovertakelse?",
   "VurderMedlemsskapAksjonspunktForm.VurderingLabel.ReadOnly": "Vurdering av medlemskapsvilkåret",
+
   "VurderMedlemsskapAksjonspunktForm.AvslagsarsakLabel": "Velg en avslagsårsak",
   "VurderMedlemsskapAksjonspunktForm.AvslagsarsakLabel.ReadOnly": "Avslagsårsak",
   "VurderMedlemsskapAksjonspunktForm.OpphorFomLabel": "Når opphører medlemskapet?",
   "VurderMedlemsskapAksjonspunktForm.OpphorFomLabel.ReadOnly": "Opphørsdato",
 
-  "VurderForutgaendeMedlemskapAksjonspunktForm.VurderingLabel": "Har bruker vært medlem i 12 måneder før termin/omsorgsovertakelse?",
-  "VurderForutgaendeMedlemskapAksjonspunktForm.VurderingLabel.ReadOnly": "Vurdering av medlemskapsvilkåret",
-  "VurderForutgaendeMedlemskapAksjonspunktForm.AvslagsarsakLabel": "Velg en avslagsårsak",
-  "VurderForutgaendeMedlemskapAksjonspunktForm.AvslagsarsakLabel.ReadOnly": "Avslagsårsak",
-  "VurderForutgaendeMedlemskapAksjonspunktForm.MedlemFomLabel": "Innflyttingsdato",
-  "VurderForutgaendeMedlemskapAksjonspunktForm.MedlemFomLabel.ReadOnly": "Innflyttet dato"
+  "VurderMedlemsskapAksjonspunktForm.MedlemFomLabel": "Innflyttingsdato",
+  "VurderMedlemsskapAksjonspunktForm.MedlemFomLabel.ReadOnly": "Innflyttet dato"
 }

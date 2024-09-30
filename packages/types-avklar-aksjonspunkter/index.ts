@@ -28,6 +28,7 @@ export type {
 } from './src/fakta/AvklarAktivitetsPerioderAp';
 export type { default as VurderDokumentasjonAp } from './src/fakta/VurderDokumentasjonAp';
 export type { default as VurderMedlemskapAp } from './src/fakta/VurderMedlemskapAp';
+export type { default as VurderForutgaendeMedlemskapAp } from './src/fakta/VurderForutgaendeMedlemskapAp';
 export type {
   default as BesteberegningAP,
   ManuellKontrollBesteberegningAP,
