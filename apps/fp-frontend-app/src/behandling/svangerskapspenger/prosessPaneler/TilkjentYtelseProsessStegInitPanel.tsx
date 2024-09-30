@@ -7,7 +7,6 @@ import { ProsessStegCode } from '@navikt/fp-konstanter';
 import {
   ArbeidsgiverOpplysningerPerId,
   BeregningsresultatDagytelse,
-  Fagsak,
   FamilieHendelseSamling,
   Feriepengegrunnlag,
   Personoversikt,
@@ -35,13 +34,11 @@ type EndepunktPanelData = {
 
 interface OwnProps {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  fagsak: Fagsak;
   personoversikt: Personoversikt;
 }
 
 const TilkjentYtelseProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
   arbeidsgiverOpplysningerPerId,
-  fagsak,
   personoversikt,
   ...props
 }) => (
@@ -59,7 +56,6 @@ const TilkjentYtelseProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPa
     }
     renderPanel={data => (
       <TilkjentYtelseProsessIndex
-        fagsak={fagsak}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         personoversikt={personoversikt}
         beregningresultat={data?.beregningresultatDagytelse}

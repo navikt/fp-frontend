@@ -13,6 +13,7 @@ import {
   Aksjonspunkt,
   ArbeidsforholdFodselOgTilrettelegging,
   Behandling,
+  Fagsak,
   FodselOgTilrettelegging,
   Vilkar,
 } from '@navikt/fp-types';
@@ -68,6 +69,7 @@ const Template: StoryFn<{
         },
       ] as Vilkar[]
     }
+    fagsak={{} as Fagsak}
   />
 );
 

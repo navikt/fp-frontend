@@ -3,7 +3,7 @@ import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import { avslagsarsakCodes, aksjonspunktStatus, vilkarUtfallType, AksjonspunktCode } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt, Behandling } from '@navikt/fp-types';
+import { Aksjonspunkt, Behandling, Fagsak } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -51,6 +51,7 @@ const Template: StoryFn<{
     status={status}
     isEngangsstonad={false}
     isForeldreansvar2Ledd={isForeldreansvar2Ledd}
+    fagsak={{} as Fagsak}
   />
 );
 

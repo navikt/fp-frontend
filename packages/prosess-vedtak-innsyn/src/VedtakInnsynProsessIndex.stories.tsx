@@ -9,7 +9,7 @@ import {
   kommunikasjonsretning,
   AksjonspunktCode,
 } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt, Behandling, Innsyn } from '@navikt/fp-types';
+import { Aksjonspunkt, Behandling, Fagsak, Innsyn } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -70,6 +70,7 @@ const Template: StoryFn<{
       },
     ]}
     previewCallback={forhandsvisCallback}
+    fagsak={{} as Fagsak}
   />
 );
 

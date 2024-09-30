@@ -8,7 +8,7 @@ import {
   klageVurdering as klageVurderingCodes,
   AksjonspunktCode,
 } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt, Behandling, KlageVurdering, KlageVurderingResultat } from '@navikt/fp-types';
+import { Aksjonspunkt, Behandling, Fagsak, KlageVurdering, KlageVurderingResultat } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -62,6 +62,7 @@ const Template: StoryFn<{
     setFormData={() => undefined}
     klageVurdering={klageVurdering}
     previewVedtakCallback={previewVedtakCallback}
+    fagsak={{} as Fagsak}
   />
 );
 

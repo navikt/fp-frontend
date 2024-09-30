@@ -66,6 +66,7 @@ describe('<InnsynVedtakProsessStegInitPanel>', () => {
     vilkar: [],
     isAksjonspunktOpen: true,
     setFormData: () => undefined,
+    fagsak,
   }));
 
   it('skal rendre komponent korrekt', async () => {

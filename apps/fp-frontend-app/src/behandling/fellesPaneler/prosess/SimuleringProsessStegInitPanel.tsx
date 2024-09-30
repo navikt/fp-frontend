@@ -89,7 +89,6 @@ const SimuleringProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelI
       }
       renderPanel={data => (
         <SimuleringProsessIndex
-          fagsak={fagsak}
           previewFptilbakeCallback={previewFptilbakeCallback}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           {...data}

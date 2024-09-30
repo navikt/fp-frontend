@@ -3,7 +3,7 @@ import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import { AksjonspunktCode, aksjonspunktStatus } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt, Behandling, Soknad } from '@navikt/fp-types';
+import { Aksjonspunkt, Behandling, Fagsak, Soknad } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -54,6 +54,7 @@ const Template: StoryFn<{
         },
       ] as Aksjonspunkt[]
     }
+    fagsak={{} as Fagsak}
   />
 );
 
