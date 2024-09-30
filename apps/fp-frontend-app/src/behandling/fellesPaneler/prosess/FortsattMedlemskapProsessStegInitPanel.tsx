@@ -47,7 +47,6 @@ const FortsattMedlemskapProsessStegInitPanel: FunctionComponent<OwnProps & Prose
           vilkar={data.vilkar}
           vilkarKoder={VILKAR_KODER}
           panelTekstKode="Behandlingspunkt.FortsattMedlemskap"
-          erMedlemskapsPanel={false}
           toggleOverstyring={toggleOverstyring}
           erOverstyrt={erOverstyrt}
           overrideReadOnly={data.isReadOnly}

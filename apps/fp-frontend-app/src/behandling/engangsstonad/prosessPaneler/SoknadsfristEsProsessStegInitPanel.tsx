@@ -57,7 +57,6 @@ const SoknadsfristEsProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPa
                 vilkar={data.vilkar}
                 vilkarKoder={VILKAR_KODER}
                 panelTekstKode="Behandlingspunkt.Soknadsfristvilkaret"
-                erMedlemskapsPanel={false}
                 toggleOverstyring={toggleOverstyring}
                 erOverstyrt={erOverstyrt}
                 overrideReadOnly={data.isReadOnly}

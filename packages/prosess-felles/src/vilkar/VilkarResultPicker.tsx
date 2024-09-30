@@ -109,22 +109,18 @@ const VilkarResultPicker: FunctionComponent<OwnProps> & StaticFunctions = ({
         />
       )}
       {erVilkarOk !== undefined && !erVilkarOk && avslagsarsaker && (
-        <>
-          <SelectField
-            name="avslagskode"
-            label={intl.formatMessage({ id: 'VilkarResultPicker.Arsak' })}
-            selectValues={sorterAvslagsArsaker(avslagsarsaker || EMPTY_ARRAY).map(aa => (
-              <option key={aa.kode} value={aa.kode}>
-                {aa.navn}
-              </option>
-            ))}
-            readOnly={readOnly}
-            className={styles.selectBredde}
-            validate={[
-              requiredIfCustomFunctionIsTrueNew(getIsAvslagCodeRequired(erVilkarOk, getValues('avslagskode'))),
-            ]}
-          />
-        </>
+        <SelectField
+          name="avslagskode"
+          label={intl.formatMessage({ id: 'VilkarResultPicker.Arsak' })}
+          selectValues={sorterAvslagsArsaker(avslagsarsaker || EMPTY_ARRAY).map(aa => (
+            <option key={aa.kode} value={aa.kode}>
+              {aa.navn}
+            </option>
+          ))}
+          readOnly={readOnly}
+          className={styles.selectBredde}
+          validate={[requiredIfCustomFunctionIsTrueNew(getIsAvslagCodeRequired(erVilkarOk, getValues('avslagskode')))]}
+        />
       )}
     </VStack>
   );
