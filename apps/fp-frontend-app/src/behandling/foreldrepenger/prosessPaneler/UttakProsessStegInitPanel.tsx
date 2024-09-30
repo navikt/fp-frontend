@@ -8,7 +8,6 @@ import {
   AksessRettigheter,
   ArbeidsgiverOpplysningerPerId,
   Behandling,
-  Fagsak,
   FamilieHendelseSamling,
   Personoversikt,
   Soknad,

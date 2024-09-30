@@ -7,7 +7,7 @@ import { vilkarUtfallType } from '@navikt/fp-kodeverk';
 import { RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
 import { createIntl } from '@navikt/ft-utils';
 import { required, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
-import { Aksjonspunkt, Behandlingsresultat, KodeverkMedNavn, ManuellBehandlingResultat } from '@navikt/fp-types';
+import { Aksjonspunkt, Behandlingsresultat, KodeverkMedNavn } from '@navikt/fp-types';
 import { useFormContext } from 'react-hook-form';
 
 import messages from '../../i18n/nb_NO.json';
@@ -50,11 +50,8 @@ interface StaticFunctions {
       };
 }
 
-const sorterAvslagsArsaker = (
-  avslagsarsakerUsortert: KodeverkMedNavn[],
-): KodeverkMedNavn[] =>
+const sorterAvslagsArsaker = (avslagsarsakerUsortert: KodeverkMedNavn[]): KodeverkMedNavn[] =>
   avslagsarsakerUsortert.sort((k1, k2) => k1.navn.localeCompare(k2.navn));
-
 
 /**
  * VilkarResultPicker
