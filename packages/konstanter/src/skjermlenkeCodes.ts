@@ -121,7 +121,7 @@ const skjermlenkeCodes = {
   },
   PUNKT_FOR_MEDLEMSKAP: {
     kode: 'PUNKT_FOR_MEDLEMSKAP',
-    faktaNavn: FaktaPanelCode.DEFAULT,
+    faktaNavn: FaktaPanelCode.MEDLEMSKAPSVILKARET,
     punktNavn: ProsessStegCode.INNGANGSVILKAR,
   },
   PUNKT_FOR_OMSORG: {
