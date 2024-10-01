@@ -7,7 +7,7 @@ import {
   behandlingStatus,
   behandlingType,
   fagsakYtelseType,
-  opplysningAdresseType,
+  AdresseType,
   personstatusType,
   region,
 } from '@navikt/fp-kodeverk';
@@ -146,7 +146,7 @@ const lagMedlemskap = (override: Partial<Medlemskap>): Medlemskap => ({
       fom: '2019-01-01',
       tom: TIDENES_ENDE,
       adresse: {
-        adresseType: opplysningAdresseType.BOSTEDSADRESSE,
+        adresseType: AdresseType.BOSTEDSADRESSE,
         adresselinje1: 'Oslogata 1',
         adresselinje2: null,
         adresselinje3: null,
@@ -159,7 +159,7 @@ const lagMedlemskap = (override: Partial<Medlemskap>): Medlemskap => ({
       fom: '2020-01-01',
       tom: '2021-01-01',
       adresse: {
-        adresseType: opplysningAdresseType.POSTADRESSE_UTLAND,
+        adresseType: AdresseType.POSTADRESSE_UTLAND,
         adresselinje1: 'Mäkelänkatu 1B',
         adresselinje2: null,
         adresselinje3: null,
@@ -194,7 +194,7 @@ const lagMedlemskap = (override: Partial<Medlemskap>): Medlemskap => ({
         fom: '2019-01-01',
         tom: TIDENES_ENDE,
         adresse: {
-          adresseType: opplysningAdresseType.BOSTEDSADRESSE,
+          adresseType: AdresseType.BOSTEDSADRESSE,
           adresselinje1: 'Oslogata 1',
           adresselinje2: null,
           adresselinje3: null,
@@ -207,7 +207,7 @@ const lagMedlemskap = (override: Partial<Medlemskap>): Medlemskap => ({
         fom: '2020-01-01',
         tom: '2021-01-01',
         adresse: {
-          adresseType: opplysningAdresseType.POSTADRESSE_UTLAND,
+          adresseType: AdresseType.POSTADRESSE_UTLAND,
           adresselinje1: 'Mäkelänkatu 1B',
           adresselinje2: null,
           adresselinje3: null,
@@ -276,7 +276,7 @@ VurderingAvMedlemskapMedlemskapMedEtAvvik.args = {
         fom: '2024-09-10',
         tom: TIDENES_ENDE,
         adresse: {
-          adresseType: 'POSTADRESSE_UTLAND',
+          adresseType: AdresseType.POSTADRESSE_UTLAND,
           adresselinje1: 'Kirkeveien 1',
           adresselinje2: null,
           adresselinje3: null,
@@ -289,7 +289,7 @@ VurderingAvMedlemskapMedlemskapMedEtAvvik.args = {
         fom: '2022-09-01',
         tom: TIDENES_ENDE,
         adresse: {
-          adresseType: 'BOSTEDSADRESSE',
+          adresseType: AdresseType.BOSTEDSADRESSE,
           adresselinje1: 'Krattstien 4',
           adresselinje2: null,
           adresselinje3: null,

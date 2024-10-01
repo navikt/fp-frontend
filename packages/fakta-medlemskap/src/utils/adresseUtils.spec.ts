@@ -11,7 +11,7 @@ const defaultAdresse = {
     adresselinje3: null,
     postNummer: '5511',
     poststed: 'Ukjent',
-    land: 'NOR',
+    land: 'Norge',
   },
 };
 

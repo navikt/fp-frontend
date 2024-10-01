@@ -3,19 +3,15 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Label, BodyShort } from '@navikt/ds-react';
 import { PersonopplysningerBasis } from '@navikt/fp-types';
-import { opplysningAdresseType } from '@navikt/fp-kodeverk';
+import { AdresseType } from '@navikt/fp-kodeverk';
 
 interface OwnProps {
   personopplysninger: PersonopplysningerBasis;
 }
 
 const AdresseVisning: FunctionComponent<OwnProps> = ({ personopplysninger }) => {
-  const postadr = personopplysninger.adresser.find(
-    adresse => adresse.adresseType === opplysningAdresseType.POSTADRESSE,
-  );
-  const bostedsadr = personopplysninger.adresser.find(
-    adresse => adresse.adresseType === opplysningAdresseType.BOSTEDSADRESSE,
-  );
+  const postadr = personopplysninger.adresser.find(adresse => adresse.adresseType === AdresseType.POSTADRESSE);
+  const bostedsadr = personopplysninger.adresser.find(adresse => adresse.adresseType === AdresseType.BOSTEDSADRESSE);
   if (!postadr && !bostedsadr) {
     return null;
   }
