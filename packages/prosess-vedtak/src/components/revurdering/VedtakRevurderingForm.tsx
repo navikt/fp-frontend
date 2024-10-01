@@ -201,14 +201,14 @@ const finnInvilgetRevurderingTekst = (
 
 const getOpphorsdato = (
   resultatstruktur?: BeregningsresultatDagytelse | BeregningsresultatEs,
-  medlemskapFom?: string,
+  opphørFom?: string,
   behandlingsresultat?: Behandling['behandlingsresultat'],
 ): string => {
   if (resultatstruktur && 'opphoersdato' in resultatstruktur && resultatstruktur.opphoersdato) {
     return resultatstruktur.opphoersdato;
   }
-  if (medlemskapFom) {
-    return medlemskapFom;
+  if (opphørFom) {
+    return opphørFom;
   }
   return behandlingsresultat?.skjæringstidspunkt ? behandlingsresultat.skjæringstidspunkt.dato : '';
 };
@@ -256,7 +256,7 @@ interface OwnProps {
   simuleringResultat?: SimuleringResultat;
   vilkar: Vilkar[];
   beregningErManueltFastsatt: boolean;
-  medlemskapFom?: string;
+  opphørFom: string | undefined;
   resultatstrukturOriginalBehandling?: BeregningsresultatDagytelse | BeregningsresultatEs;
   submitCallback: (data: RevurderingVedtakAksjonspunkter[]) => Promise<void>;
   formData?: FormValues;
@@ -275,7 +275,7 @@ const VedtakRevurderingForm: FunctionComponent<OwnProps> = ({
   simuleringResultat,
   vilkar,
   beregningErManueltFastsatt,
-  medlemskapFom,
+  opphørFom,
   resultatstrukturOriginalBehandling,
   submitCallback,
   formData,
@@ -338,7 +338,7 @@ const VedtakRevurderingForm: FunctionComponent<OwnProps> = ({
             : 'VedtakForm.RevurderingFP.ForeldrepengerOpphoerer',
       },
       {
-        dato: moment(getOpphorsdato(resultatstruktur, medlemskapFom, behandlingsresultat)).format(DDMMYYYY_DATE_FORMAT),
+        dato: moment(getOpphorsdato(resultatstruktur, opphørFom, behandlingsresultat)).format(DDMMYYYY_DATE_FORMAT),
       },
     );
   }

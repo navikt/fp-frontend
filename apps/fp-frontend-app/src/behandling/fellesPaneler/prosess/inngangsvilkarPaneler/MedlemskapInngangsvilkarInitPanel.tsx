@@ -13,7 +13,7 @@ const AKSJONSPUNKT_KODER = [AksjonspunktCode.VURDER_MEDLEMSKAPSVILKÅRET, Aksjon
 
 const VILKAR_KODER = [VilkarType.MEDLEMSKAPSVILKARET];
 
-const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.MEDLEMSKAP_V3];
+const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.MEDLEMSKAP];
 type EndepunktPanelData = {
   medlemskap: Medlemskap;
 };
