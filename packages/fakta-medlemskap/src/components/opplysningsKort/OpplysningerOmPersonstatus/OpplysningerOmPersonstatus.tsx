@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { AlleKodeverk, MedlemskapAvvik, MedlemskapV3 } from '@navikt/fp-types';
+import { AlleKodeverk, MedlemskapAvvik, Medlemskap } from '@navikt/fp-types';
 import { Detail, Label, VStack } from '@navikt/ds-react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { FaktaKilde } from '@navikt/fp-fakta-felles';
@@ -12,7 +12,7 @@ import RegionVisning from './RegionVisning';
 import { AvsnittSkiller } from '@navikt/ft-ui-komponenter';
 
 interface Props {
-  medlemskap: MedlemskapV3;
+  medlemskap: Medlemskap;
   avvik: MedlemskapAvvik[];
   brukerNavn: string;
   annenpartNavn?: string;

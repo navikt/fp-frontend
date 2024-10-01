@@ -40,7 +40,7 @@ import UttakDokumentasjonFaktaInitPanel from './faktaPaneler/UttakDokumentasjonF
 import FaktaPanelInitProps from '../felles/typer/faktaPanelInitProps';
 import ProsessPanelInitProps, { ProsessPanelExtraInitProps } from '../felles/typer/prosessPanelInitProps';
 import InntektsmeldingerFaktaInitPanel from '../fellesPaneler/fakta/InntektsmeldingerFaktaInitPanel';
-import MedlemskapsvilkaretFaktaInitPanelV3 from '../fellesPaneler/fakta/MedlemskapsvilkaretFaktaInitPanelV3';
+import MedlemskapsvilkaretFaktaInitPanel from '../fellesPaneler/fakta/MedlemskapsvilkaretFaktaInitPanel';
 
 interface OwnProps {
   alleBehandlinger: BehandlingAppKontekst[];
@@ -95,7 +95,7 @@ const ForeldrepengerPaneler: FunctionComponent<OwnProps> = ({
         <OmsorgvilkaretFaktaInitPanel {...props} personoversikt={personoversikt} />
         <AdopsjonsvilkaretFaktaInitPanel {...props} fagsak={fagsak} />
         <FodselvilkaretFaktaInitPanel {...props} />
-        <MedlemskapsvilkaretFaktaInitPanelV3 {...props} fagsak={fagsak} />
+        <MedlemskapsvilkaretFaktaInitPanel {...props} fagsak={fagsak} />
         <OpptjeningsvilkaretFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
         <PermisjonFaktaInitPanel
           {...props}

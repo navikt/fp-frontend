@@ -1,18 +1,18 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
-import { Aksjonspunkt, ManuellBehandlingResultat, MedlemskapAvvik, MedlemskapV3 } from '@navikt/fp-types';
+import { Aksjonspunkt, ManuellBehandlingResultat, MedlemskapAvvik, Medlemskap } from '@navikt/fp-types';
 import { Alert, VStack } from '@navikt/ds-react';
 import { aksjonspunktStatus } from '@navikt/fp-kodeverk';
 
-import { Vurdering } from '../types/vurderingMedlemskapForm';
+import { MedlemskapVurdering } from '../types/vurderingMedlemskapForm';
 import InfoBox from './InfoBox';
 
 import { ExclamationmarkIcon, XMarkOctagonIcon } from '@navikt/aksel-icons';
 
 interface Props {
   aksjonspunkter: Aksjonspunkt[];
-  medlemskap: MedlemskapV3;
+  medlemskap: Medlemskap;
 }
 
 function getFormateringsIdForAvvik(avvik: MedlemskapAvvik) {
@@ -30,16 +30,16 @@ function getFormateringsIdForAvvik(avvik: MedlemskapAvvik) {
       return 'AksjonspunktHelpText.EØSManglendeAnsettelseMedInntekt';
   }
 }
-const getVurdering = (resultat: ManuellBehandlingResultat): Vurdering | undefined => {
+const getVurdering = (resultat: ManuellBehandlingResultat): MedlemskapVurdering | undefined => {
   if (resultat) {
     const { opphørFom, avslagskode } = resultat;
 
     if (avslagskode && opphørFom) {
-      return Vurdering.DELVIS_OPPFYLT;
+      return MedlemskapVurdering.DELVIS_OPPFYLT;
     } else if (avslagskode && !opphørFom) {
-      return Vurdering.IKKE_OPPFYLT;
+      return MedlemskapVurdering.IKKE_OPPFYLT;
     } else if (!opphørFom && !avslagskode) {
-      return Vurdering.OPPFYLT;
+      return MedlemskapVurdering.OPPFYLT;
     }
   }
 };
@@ -70,15 +70,15 @@ const AksjonspunktHelpText = ({ aksjonspunkter, medlemskap }: Props) => {
       const text = intl.formatMessage({ id: 'AksjonspunktHelpText.ErMedlem' }, { vurdering });
 
       switch (vurdering) {
-        case Vurdering.OPPFYLT:
+        case MedlemskapVurdering.OPPFYLT:
           return (
             <Alert variant="success" size="small">
               {text}
             </Alert>
           );
-        case Vurdering.DELVIS_OPPFYLT:
+        case MedlemskapVurdering.DELVIS_OPPFYLT:
           return <InfoBox Icon={ExclamationmarkIcon}>{text}</InfoBox>;
-        case Vurdering.IKKE_OPPFYLT:
+        case MedlemskapVurdering.IKKE_OPPFYLT:
           return <InfoBox Icon={XMarkOctagonIcon}>{text}</InfoBox>;
       }
     }

@@ -11,7 +11,7 @@ import {
   personstatusType,
   region,
 } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt, Behandling, Fagsak, MedlemskapAvvik, MedlemskapV3, Soknad } from '@navikt/fp-types';
+import { Aksjonspunkt, Behandling, Fagsak, MedlemskapAvvik, Medlemskap, Soknad } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 
@@ -63,7 +63,7 @@ export default {
 };
 
 const Template: StoryFn<{
-  medlemskap: MedlemskapV3;
+  medlemskap: Medlemskap;
   soknad: Soknad;
   readOnly: boolean;
   aksjonspunkter: Aksjonspunkt[];
@@ -93,7 +93,7 @@ const Template: StoryFn<{
   />
 );
 
-const lagMedlemskap = (override: Partial<MedlemskapV3>): MedlemskapV3 => ({
+const lagMedlemskap = (override: Partial<Medlemskap>): Medlemskap => ({
   manuellBehandlingResultat: null,
   avvik: [
     MedlemskapAvvik.BOSATT_UTENLANDSOPPHOLD,

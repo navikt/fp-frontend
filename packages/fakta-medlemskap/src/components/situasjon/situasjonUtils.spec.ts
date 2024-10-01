@@ -1,12 +1,12 @@
-import { AlleKodeverk, MedlemskapV3 } from '@navikt/fp-types';
+import { AlleKodeverk, Medlemskap } from '@navikt/fp-types';
 import { formaterUtenlandsopphold, getSisteBostedsLand, getSistePersonstatus, getSisteRegion } from './situasjonUtils';
 import { opplysningAdresseType } from '@navikt/fp-kodeverk';
 import { expect } from 'vitest';
 import { createIntl } from '@navikt/ft-utils';
-import messages from '../../../../i18n/nb_NO.json';
+import messages from '../../../i18n/nb_NO.json';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
-const defaultMedlemskapProps: MedlemskapV3 = {
+const defaultMedlemskapProps: Medlemskap = {
   regioner: [],
   personstatuser: [],
   medlemskapsperioder: [],
@@ -25,7 +25,7 @@ const kodeverk = alleKodeverk as unknown as AlleKodeverk;
 describe('situasjonUtils', () => {
   describe('getSisteRegion', () => {
     it('skal returnere region for siste aktuelle regions periode', () => {
-      const medlemskap: MedlemskapV3 = {
+      const medlemskap: Medlemskap = {
         ...defaultMedlemskapProps,
         regioner: [
           { fom: '2022-06-02', tom: '2025-02-01', type: 'ANNET' },
@@ -38,7 +38,7 @@ describe('situasjonUtils', () => {
 
   describe('getSistePersonstatus', () => {
     it('skal returnere personstatus for siste aktuelle personstatus', () => {
-      const medlemskap: MedlemskapV3 = {
+      const medlemskap: Medlemskap = {
         ...defaultMedlemskapProps,
         personstatuser: [
           { fom: '2022-06-02', tom: '2025-02-01', type: 'DØD' },
@@ -51,7 +51,7 @@ describe('situasjonUtils', () => {
 
   describe('getSisteBostedsLand', () => {
     it('skal returnere land for siste aktuelle bostedsadresse', () => {
-      const medlemskap: MedlemskapV3 = {
+      const medlemskap: Medlemskap = {
         ...defaultMedlemskapProps,
         adresser: [
           {

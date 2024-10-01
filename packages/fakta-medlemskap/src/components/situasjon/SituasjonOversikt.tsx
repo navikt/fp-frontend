@@ -1,12 +1,12 @@
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { AlleKodeverk, MedlemskapV3, Soknad } from '@navikt/fp-types';
+import { AlleKodeverk, Medlemskap, Soknad } from '@navikt/fp-types';
 import { FaktaGruppe, FaktaBox, FaktaKilde } from '@navikt/fp-fakta-felles';
 
 import { formaterUtenlandsopphold, getSisteBostedsLand, getSistePersonstatus, getSisteRegion } from './situasjonUtils';
 
 interface Props {
-  medlemskap: MedlemskapV3;
+  medlemskap: Medlemskap;
   soknad: Soknad;
   alleKodeverk: AlleKodeverk;
 }
