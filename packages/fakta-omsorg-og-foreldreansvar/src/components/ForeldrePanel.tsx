@@ -3,7 +3,7 @@ import { FormattedMessage, WrappedComponentProps } from 'react-intl';
 import { Label, BodyShort, Heading } from '@navikt/ds-react';
 
 import { DateLabel, VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
-import { AksjonspunktCode, navBrukerKjonn, opplysningAdresseType } from '@navikt/fp-kodeverk';
+import { AksjonspunktCode, navBrukerKjonn, AdresseType } from '@navikt/fp-kodeverk';
 import { PersonopplysningerBasis, Personoversikt } from '@navikt/fp-types';
 
 import getAddresses from '../getAddresses';
@@ -18,7 +18,7 @@ const lagSøkerdata = (personopplysninger: PersonopplysningerBasis) => {
     aktorId: personopplysninger.aktoerId,
     navn: personopplysninger.navn,
     dodsdato: personopplysninger.dødsdato,
-    adresse: addresses[opplysningAdresseType.POSTADRESSE] || addresses[opplysningAdresseType.BOSTEDSADRESSE],
+    adresse: addresses[AdresseType.POSTADRESSE] || addresses[AdresseType.BOSTEDSADRESSE],
     erMor: personopplysninger.kjønn === navBrukerKjonn.KVINNE,
   };
 };

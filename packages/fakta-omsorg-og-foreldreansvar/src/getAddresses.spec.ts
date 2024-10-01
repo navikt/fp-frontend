@@ -1,4 +1,4 @@
-import { opplysningAdresseType as OpplysningAdresseType } from '@navikt/fp-kodeverk';
+import { AdresseType } from '@navikt/fp-kodeverk';
 
 import getAddresses from './getAddresses';
 
@@ -6,7 +6,7 @@ describe('getAddresses', () => {
   it('skal sjekke at bostedsadresse blir korrekt bygget', () => {
     const adresseListe = [
       {
-        adresseType: OpplysningAdresseType.BOSTEDSADRESSE,
+        adresseType: AdresseType.BOSTEDSADRESSE,
         adresselinje1: 'Adresse 1',
         adresselinje2: 'Adresse 2',
         adresselinje3: 'Adresse 3',
@@ -21,7 +21,7 @@ describe('getAddresses', () => {
   it('skal sjekke at bostedsadresse blir korrekt satt dersom adresselinje1 ikke er satt', () => {
     const adresseListe = [
       {
-        adresseType: OpplysningAdresseType.BOSTEDSADRESSE,
+        adresseType: AdresseType.BOSTEDSADRESSE,
         adresselinje2: 'Adresse 2',
         poststed: 'poststed',
         postNummer: '1234',
@@ -34,10 +34,10 @@ describe('getAddresses', () => {
   it('skal sjekke at land ikke blir vist når landet er norge', () => {
     const adresseListe = [
       {
-        adresseType: OpplysningAdresseType.POSTADRESSE,
+        adresseType: AdresseType.POSTADRESSE,
         adresselinje1: 'Adresse 1',
         poststed: 'poststed',
-        land: 'NOR',
+        land: 'Norge',
         postNummer: '1234',
       },
     ];
@@ -48,21 +48,21 @@ describe('getAddresses', () => {
   it('skal sjekke at land blir vist når landet ikke er norge', () => {
     const adresseListe = [
       {
-        adresseType: OpplysningAdresseType.POSTADRESSE,
+        adresseType: AdresseType.POSTADRESSE,
         adresselinje1: 'Adresse 1',
         poststed: 'poststed',
-        land: 'SWE',
+        land: 'Sverige',
         postNummer: '1234',
       },
     ];
     const adresse = getAddresses(adresseListe);
-    expect(adresse.POSTADRESSE).toBe('Adresse 1, 1234 poststed SWE');
+    expect(adresse.POSTADRESSE).toBe('Adresse 1, 1234 poststed Sverige');
   });
 
   it('skal sjekke at postadresse blir korrekt satt', () => {
     const adresseListe = [
       {
-        adresseType: OpplysningAdresseType.POSTADRESSE,
+        adresseType: AdresseType.POSTADRESSE,
         adresselinje1: 'Adresse 1',
         poststed: 'poststed',
         postNummer: '1234',

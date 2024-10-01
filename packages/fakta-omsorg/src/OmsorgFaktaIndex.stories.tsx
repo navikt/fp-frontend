@@ -8,7 +8,7 @@ import {
   AksjonspunktCode,
   sivilstandType,
   aksjonspunktStatus,
-  opplysningAdresseType as OpplysningAdresseType,
+  AdresseType as OpplysningAdresseType,
 } from '@navikt/fp-kodeverk';
 import { Behandling, KjønnkodeEnum, Personoversikt, Ytelsefordeling } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
@@ -26,7 +26,7 @@ const behandling = {
 
 const adresser = [
   {
-    adresseType: OpplysningAdresseType.BOSTEDSADRESSE,
+    adresseType: adresseType.BOSTEDSADRESSE,
     adresselinje1: 'Veigata 1',
     adresselinje2: 'Oddelandet',
     adresselinje3: 'Leilighet 2',
