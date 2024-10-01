@@ -11,3 +11,7 @@ export { default as validerApKodeOgHentApEnum } from './src/utils/validerApKodeO
 export type { FormValues as FaktaBegrunnelseFormValues } from './src/components/FaktaBegrunnelseTextFieldNew';
 export { FaktaGruppe, FaktaBox } from './src/components/FaktaBox';
 export { FaktaKilde, getLabelForFaktaKilde } from './src/components/FaktaKilde';
+export { AdresseVisning } from './src/components/personer/AdresseVisning';
+export { AlleBarnPanel } from './src/components/personer/AlleBarnPanel';
+export { ForelderPanel } from './src/components/personer/ForelderPanel';
+export { Boks } from './src/components/Boks';

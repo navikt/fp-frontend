@@ -7,14 +7,17 @@ import { Heading } from '@navikt/ds-react';
 
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { FaktaBegrunnelseTextFieldNew, FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
+import {
+  AlleBarnPanel,
+  FaktaBegrunnelseTextFieldNew,
+  FaktaSubmitButtonNew,
+  ForelderPanel,
+  Boks,
+} from '@navikt/fp-fakta-felles';
 import { Aksjonspunkt, AlleKodeverk, KjønnkodeEnum, Personoversikt, Ytelsefordeling } from '@navikt/fp-types';
 import { BekreftOmsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import OmsorgFaktaForm, { FormValues as OmsorgFormValues } from './OmsorgFaktaForm';
-import AlleBarnPanel from './personer/AlleBarnPanel';
-import ForelderPanel from './personer/ForelderPanel';
-import Boks from './Boks';
 
 const { MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG } = AksjonspunktCode;
 
@@ -101,7 +104,6 @@ const OmsorgInfoPanel: FunctionComponent<OwnProps> = ({
         <ForelderPanel
           forelder={personoversikt.annenPart}
           kjønn={personoversikt.annenPart.kjønn || finnMotsattKjønn(personoversikt.bruker.kjønn)}
-          erSøker={false}
           alleKodeverk={alleKodeverk}
         />
       )}
@@ -121,7 +123,7 @@ const OmsorgInfoPanel: FunctionComponent<OwnProps> = ({
           <FaktaBegrunnelseTextFieldNew
             isSubmittable={submittable}
             isReadOnly={readOnly}
-            hasBegrunnelse
+            hasBegrunnelse={true}
             hasVurderingText
           />
           <VerticalSpacer sixteenPx />

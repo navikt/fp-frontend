@@ -3,6 +3,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
 import * as stories from './OmsorgOgRettFaktaIndex.stories';
+import { expect } from 'vitest';
 
 const {
   HarAksjonspunktForAvklarAleneomsorg,
@@ -46,7 +47,7 @@ describe('<OmsorgOgRettFaktaIndex>', () => {
 
     expect(screen.getByText('Søker har oppgitt å ha aleneomsorg for barnet')).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('Søker har aleneomsorg for barnet'));
+    await userEvent.click(screen.getByLabelText('Søker har aleneomsorg for barnet'));
 
     await userEvent.type(utils.getByLabelText('Begrunn vurderingen'), 'Dette er en begrunnelse');
 
@@ -71,7 +72,7 @@ describe('<OmsorgOgRettFaktaIndex>', () => {
     expect(screen.getByText('Vurder om søker har aleneomsorg for barnet.')).toBeInTheDocument();
 
     expect(screen.getByText('Søker har oppgitt å ha aleneomsorg for barnet')).toBeInTheDocument();
-    await userEvent.click(screen.getByText('Søker har IKKE aleneomsorg for barnet'));
+    await userEvent.click(screen.getByLabelText('Søker har ikke aleneomsorg for barnet'));
 
     expect(screen.getByText('Har annen forelder rett til foreldrepenger i Norge?')).toBeInTheDocument();
     await userEvent.click(screen.getByText('Ja'));

@@ -9,8 +9,8 @@ import { FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { BekreftAleneomsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
+import { Boks } from '@navikt/fp-fakta-felles';
 
-import Boks from '../Boks';
 import HarAnnenForelderRettFelter from './HarAnnenForelderRettFelter';
 
 const minLength3 = minLength(3);

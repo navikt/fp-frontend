@@ -10,8 +10,8 @@ import { Aksjonspunkt } from '@navikt/ft-types';
 import { Ytelsefordeling } from '@navikt/fp-types';
 import { AvklarAnnenforelderHarRettAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { Boks } from '@navikt/fp-fakta-felles';
 
-import Boks from '../Boks';
 import HarAnnenForelderRettFelter from './HarAnnenForelderRettFelter';
 
 const minLength3 = minLength(3);

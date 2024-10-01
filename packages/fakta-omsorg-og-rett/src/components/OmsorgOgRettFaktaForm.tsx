@@ -6,8 +6,7 @@ import { AlleKodeverk, KjønnkodeEnum, Personoversikt, Ytelsefordeling } from '@
 import { AvklarAnnenforelderHarRettAp, BekreftAleneomsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { Aksjonspunkt } from '@navikt/ft-types';
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
-import AlleBarnPanel from './personer/AlleBarnPanel';
-import ForelderPanel from './personer/ForelderPanel';
+import { AlleBarnPanel, ForelderPanel } from '@navikt/fp-fakta-felles';
 import AleneomsorgForm, { FormValues as AleneOmsorgValues } from './forms/AleneomsorgForm';
 import HarAnnenForelderRettForm, { FormValues as RettFormValues } from './forms/HarAnnenForelderRettForm';
 
@@ -74,7 +73,6 @@ const OmsorgOgRettFaktaIndex: FunctionComponent<OwnProps> = ({
         <ForelderPanel
           forelder={personoversikt.annenPart}
           kjønn={personoversikt.annenPart.kjønn || finnMotsattKjønn(personoversikt.bruker.kjønn)}
-          erSøker={false}
           alleKodeverk={alleKodeverk}
         />
       )}
