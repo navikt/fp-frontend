@@ -77,13 +77,13 @@ const Template: StoryFn<{
       submitCallback={submitCallback}
       isReadOnly={isReadOnly}
       isAksjonspunktOpen
-      readOnlySubmitButton={false}
+      readOnlySubmitButton={isReadOnly}
       vilkar={[]}
       alleMerknaderFraBeslutter={{}}
       setFormData={() => undefined}
       behandling={behandling}
       medlemskap={medlemskap}
-      overrideReadOnly={false}
+      overrideReadOnly={isReadOnly}
       kanOverstyreAccess={kanOverstyreAccess}
       fagsak={
         {
@@ -212,8 +212,8 @@ OverstyringAvOpptjeningsvilkåretSomIkkeErVurdert.args = {
   overstyringApKode: AksjonspunktCode.OVERSTYRING_AV_OPPTJENINGSVILKARET,
 };
 
-export const OverstyringAvLøpendeMedlemskapVisning = Template.bind({});
-OverstyringAvLøpendeMedlemskapVisning.args = {
+export const LøpendeMedlemskapSomErOverstyrtVisesBareIReadOnlyMode = Template.bind({});
+LøpendeMedlemskapSomErOverstyrtVisesBareIReadOnlyMode.args = {
   ytelse: fagsakYtelseType.FORELDREPENGER,
   panelTittelKode: 'Behandlingspunkt.FortsattMedlemskap',
   overstyringApKode: AksjonspunktCode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
@@ -227,6 +227,17 @@ OverstyringAvLøpendeMedlemskapVisning.args = {
     },
   ],
   status: vilkarUtfallType.OPPFYLT,
+  kanOverstyreAccess: { isEnabled: false },
+  isReadOnly: true,
+};
+
+export const LøpendeMedlemskapVisningSomIkkeErOverstyrt = Template.bind({});
+LøpendeMedlemskapVisningSomIkkeErOverstyrt.args = {
+  ytelse: fagsakYtelseType.FORELDREPENGER,
+  panelTittelKode: 'Behandlingspunkt.FortsattMedlemskap',
+  overstyringApKode: AksjonspunktCode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
+  avslagsarsaker: alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE],
+  status: vilkarUtfallType.IKKE_OPPFYLT,
   kanOverstyreAccess: { isEnabled: false },
   isReadOnly: true,
 };
