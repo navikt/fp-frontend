@@ -1,74 +1,71 @@
 import { AdresseType } from '@navikt/fp-kodeverk';
 
 import getAddresses from './getAddresses';
+import { Personadresse } from '@navikt/fp-types';
 
 describe('getAddresses', () => {
-  it('skal sjekke at bostedsadresse blir korrekt bygget', () => {
-    const adresseListe = [
+  it('skal sjekke at adresser blir korrekt delt på type', () => {
+    const adresseListe: Personadresse[] = [
       {
         adresseType: AdresseType.BOSTEDSADRESSE,
         adresselinje1: 'Adresse 1',
-        adresselinje2: 'Adresse 2',
-        adresselinje3: 'Adresse 3',
         poststed: 'poststed',
-        postNummer: '1234',
+        postNummer: '0001',
       },
-    ];
-    const adresse = getAddresses(adresseListe);
-    expect(adresse.BOSTEDSADRESSE).toBe('Adresse 1, Adresse 2, Adresse 3, 1234 poststed');
-  });
-
-  it('skal sjekke at bostedsadresse blir korrekt satt dersom adresselinje1 ikke er satt', () => {
-    const adresseListe = [
       {
-        adresseType: AdresseType.BOSTEDSADRESSE,
-        adresselinje2: 'Adresse 2',
+        adresseType: AdresseType.BOSTEDSADRESSE_UTLAND,
+        adresselinje1: 'Adresse 2',
         poststed: 'poststed',
-        postNummer: '1234',
+        land: 'Finland',
+        postNummer: '0002',
       },
-    ];
-    const adresse = getAddresses(adresseListe);
-    expect(adresse.BOSTEDSADRESSE).toBe('Adresse 2, 1234 poststed');
-  });
-
-  it('skal sjekke at land ikke blir vist når landet er norge', () => {
-    const adresseListe = [
       {
         adresseType: AdresseType.POSTADRESSE,
-        adresselinje1: 'Adresse 1',
+        adresselinje1: 'Adresse 3',
         poststed: 'poststed',
         land: 'Norge',
-        postNummer: '1234',
+        postNummer: '0003',
+      },
+      {
+        adresseType: AdresseType.POSTADRESSE_UTLAND,
+        adresselinje1: 'Adresse 4',
+        poststed: 'poststed',
+        land: 'Danmark',
+        postNummer: '0004',
       },
     ];
-    const adresse = getAddresses(adresseListe);
-    expect(adresse.POSTADRESSE).toBe('Adresse 1, 1234 poststed');
+
+    const adresser = getAddresses(adresseListe);
+    expect(adresser.BOSTEDSADRESSE).toBe('Adresse 1, 0001 poststed');
+    expect(adresser.BOSTEDSADRESSE_UTLAND).toBe('Adresse 2, 0002 poststed, Finland');
+    expect(adresser.POSTADRESSE).toBe('Adresse 3, 0003 poststed');
+    expect(adresser.POSTADRESSE_UTLAND).toBe('Adresse 4, 0004 poststed, Danmark');
   });
 
-  it('skal sjekke at land blir vist når landet ikke er norge', () => {
-    const adresseListe = [
+  it('skal returnere bostedsadresse som ukjent for adresse med ukjent adresse type', () => {
+    const adresseListe: Personadresse[] = [
       {
-        adresseType: AdresseType.POSTADRESSE,
         adresselinje1: 'Adresse 1',
         poststed: 'poststed',
-        land: 'Sverige',
-        postNummer: '1234',
+        postNummer: '0001',
       },
     ];
-    const adresse = getAddresses(adresseListe);
-    expect(adresse.POSTADRESSE).toBe('Adresse 1, 1234 poststed Sverige');
+
+    const adresser = getAddresses(adresseListe);
+    expect(adresser.BOSTEDSADRESSE).toBe('UKJENT');
   });
 
-  it('skal sjekke at postadresse blir korrekt satt', () => {
-    const adresseListe = [
+  it('skal ikke returnere adresse for tomme adresselinjer', () => {
+    const adresseListe: Personadresse[] = [
       {
-        adresseType: AdresseType.POSTADRESSE,
-        adresselinje1: 'Adresse 1',
+        adresseType: AdresseType.BOSTEDSADRESSE_UTLAND,
         poststed: 'poststed',
-        postNummer: '1234',
+        land: 'Finland',
+        postNummer: '0002',
       },
     ];
-    const adresse = getAddresses(adresseListe);
-    expect(adresse.POSTADRESSE).toBe('Adresse 1, 1234 poststed');
+
+    const adresser = getAddresses(adresseListe);
+    expect(adresser.BOSTEDSADRESSE_UTLAND).toBeUndefined();
   });
 });
