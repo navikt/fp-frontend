@@ -34,7 +34,7 @@ describe('<OmsorgOgForeldreansvarFaktaIndex>', () => {
     expect(screen.getByText('Olga Utvikler')).toBeInTheDocument();
     expect(screen.getByText('Gateadresse 1, 1000 Oslo')).toBeInTheDocument();
     expect(screen.getByText('Espen Utvikler')).toBeInTheDocument();
-    expect(screen.getByText('Dato for fars død')).toBeInTheDocument();
+    expect(screen.getByText('Dødsdato')).toBeInTheDocument();
     expect(screen.getByText('01.01.2021')).toBeInTheDocument();
 
     expect(screen.getAllByText('Velg vilkår som skal anvendes')[1]).toBeInTheDocument();
@@ -89,7 +89,7 @@ describe('<OmsorgOgForeldreansvarFaktaIndex>', () => {
     expect(screen.getByText('Olga Utvikler')).toBeInTheDocument();
     expect(screen.getByText('Gateadresse 1, 1000 Oslo')).toBeInTheDocument();
     expect(screen.getByText('Espen Utvikler')).toBeInTheDocument();
-    expect(screen.getByText('Dato for fars død')).toBeInTheDocument();
+    expect(screen.getByText('Dødsdato')).toBeInTheDocument();
     expect(screen.getByText('01.01.2021')).toBeInTheDocument();
 
     const begrunnValgInput = utils.getByLabelText('Begrunn endringene');

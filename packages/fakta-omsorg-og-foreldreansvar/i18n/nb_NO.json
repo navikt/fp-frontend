@@ -27,6 +27,5 @@
 
   "ForeldrePanel.Foreldre": "Søkere",
   "ForeldrePanel.Address": "Adresse",
-  "ForeldrePanel.MotherDeathDate": "Dato for mors død",
-  "ForeldrePanel.FatherDeathDate": "Dato for fars død"
+  "ForeldrePanel.DeathDate": "Dødsdato"
 }

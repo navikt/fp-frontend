@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form';
 
 import { FaktaBegrunnelseTextFieldNew, FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
 import { Form } from '@navikt/ft-form-hooks';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { AksjonspunktCode, getKodeverknavnFn, KodeverkType } from '@navikt/fp-kodeverk';
 import {
   Aksjonspunkt,
@@ -20,6 +19,7 @@ import {
 } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import OmsorgOgForeldreansvarFaktaForm, { FormValues as OmsorgFormValues } from './OmsorgOgForeldreansvarFaktaForm';
+import { VStack } from '@navikt/ds-react';
 
 type FormValues = OmsorgFormValues & {
   begrunnelse?: string;
@@ -114,34 +114,34 @@ export const OmsorgOgForeldreansvarInfoPanel: FunctionComponent<PureOwnProps> = 
       formMethods={formMethods}
       onSubmit={(values: FormValues) => submitCallback(transformValues(values, aksjonspunkter[0]))}
     >
-      <OmsorgOgForeldreansvarFaktaForm
-        erAksjonspunktForeldreansvar={erAksjonspunktForeldreansvar}
-        readOnly={readOnly}
-        vilkarTypes={alleKodeverk[KodeverkType.OMSORGSOVERTAKELSE_VILKAR_TYPE]}
-        hasOpenAksjonspunkter={hasOpenAksjonspunkter}
-        alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-        soknad={soknad}
-        gjeldendeFamiliehendelse={gjeldendeFamiliehendelse}
-        personoversikt={personoversikt}
-      />
-      <VerticalSpacer twentyPx />
-      <FaktaBegrunnelseTextFieldNew
-        isSubmittable={submittable}
-        isReadOnly={readOnly}
-        hasBegrunnelse={!!begrunnelse}
-        label={intl.formatMessage({
-          id: erAksjonspunktForeldreansvar
-            ? 'OmsorgOgForeldreansvarInfoPanel.BegrunnelseTitleFp'
-            : 'OmsorgOgForeldreansvarInfoPanel.BegrunnelseTitleEs',
-        })}
-      />
-      <VerticalSpacer twentyPx />
-      <FaktaSubmitButtonNew
-        isSubmittable={submittable}
-        isSubmitting={formMethods.formState.isSubmitting}
-        isDirty={formMethods.formState.isDirty}
-        isReadOnly={readOnly}
-      />
+      <VStack gap="5">
+        <OmsorgOgForeldreansvarFaktaForm
+          erAksjonspunktForeldreansvar={erAksjonspunktForeldreansvar}
+          readOnly={readOnly}
+          vilkarTypes={alleKodeverk[KodeverkType.OMSORGSOVERTAKELSE_VILKAR_TYPE]}
+          hasOpenAksjonspunkter={hasOpenAksjonspunkter}
+          alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+          soknad={soknad}
+          gjeldendeFamiliehendelse={gjeldendeFamiliehendelse}
+          personoversikt={personoversikt}
+        />
+        <FaktaBegrunnelseTextFieldNew
+          isSubmittable={submittable}
+          isReadOnly={readOnly}
+          hasBegrunnelse={!!begrunnelse}
+          label={intl.formatMessage({
+            id: erAksjonspunktForeldreansvar
+              ? 'OmsorgOgForeldreansvarInfoPanel.BegrunnelseTitleFp'
+              : 'OmsorgOgForeldreansvarInfoPanel.BegrunnelseTitleEs',
+          })}
+        />
+        <FaktaSubmitButtonNew
+          isSubmittable={submittable}
+          isSubmitting={formMethods.formState.isSubmitting}
+          isDirty={formMethods.formState.isDirty}
+          isReadOnly={readOnly}
+        />
+      </VStack>
     </Form>
   );
 };
