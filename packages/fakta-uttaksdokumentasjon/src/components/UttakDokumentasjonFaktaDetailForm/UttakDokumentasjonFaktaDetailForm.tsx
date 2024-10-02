@@ -2,12 +2,14 @@ import React, { FunctionComponent, ReactNode, useCallback, useState } from 'reac
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useFieldArray, useForm } from 'react-hook-form';
 import dayjs from 'dayjs';
-import { BodyShort, Box, Button, HStack, Label, Link, ReadMore, VStack } from '@navikt/ds-react';
+import { BodyShort, Button, HStack, Label, Link, ReadMore, VStack } from '@navikt/ds-react';
 import { maxValue, minValue, required } from '@navikt/ft-form-validators';
 import { calcDaysAndWeeks, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { Form, NumberField, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { DokumentasjonVurderingBehov } from '@navikt/fp-types';
 import { FOLKETRYGDLOVEN_KAP14_13_URL } from '@navikt/fp-konstanter';
+import { Boks } from '@navikt/fp-fakta-felles';
+
 import { DelOppPeriodeButton, DelOppPeriodeModal } from '../DelOppPeriode';
 import {
   erUttaksperiodeMedAktivitetskravArbeid,
@@ -79,10 +81,7 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({ behov,
   const handleSubmit = (formvalues: FormValues): void => submit(fraFormValues(formvalues));
 
   return (
-    <Box
-      padding="4"
-      style={!behov.vurdering && fields.length === 1 ? { borderLeft: '3px solid var(--a-surface-warning)' } : {}}
-    >
+    <Boks harBorderLeft={!behov.vurdering && fields.length === 1}>
       <Form formMethods={formMethods} onSubmit={handleSubmit}>
         <VStack gap="6">
           {fields.length === 1 && (
@@ -196,7 +195,7 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({ behov,
           cancel={() => settValgtPeriodeIndex(undefined)}
         />
       )}
-    </Box>
+    </Boks>
   );
 };
 
