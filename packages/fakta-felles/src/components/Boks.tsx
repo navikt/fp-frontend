@@ -5,12 +5,12 @@ import styles from './boks.module.css';
 
 const classNames = classnames.bind(styles);
 
-interface OwnProps {
+interface Props {
   harBorderTop: boolean;
   children: ReactElement | ReactElement[];
 }
 
-const Boks: FunctionComponent<OwnProps> = ({ harBorderTop, children }) => (
+export const Boks: FunctionComponent<Props> = ({ harBorderTop, children }) => (
   <div
     className={classNames(styles.boks, {
       harBorderTop,
@@ -19,5 +19,3 @@ const Boks: FunctionComponent<OwnProps> = ({ harBorderTop, children }) => (
     {children}
   </div>
 );
-
-export default Boks;

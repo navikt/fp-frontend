@@ -4,9 +4,8 @@
   "OmsorgOgRettFaktaForm.VurderAndreForelderRett": "Vurder om den andre forelderen har rett til foreldrepenger.",
 
   "AleneomsorgForm.Aleneomsorg": "Søker har oppgitt å ha aleneomsorg for barnet",
-  "AleneomsorgForm.OppgittIkkeAleneomsorg": "Søker har oppgitt IKKE å ha aleneomsorg for barnet",
   "AleneomsorgForm.HarAleneomsorg": "Søker har aleneomsorg for barnet",
-  "AleneomsorgForm.HarIkkeAleneomsorg": "Søker har IKKE aleneomsorg for barnet",
+  "AleneomsorgForm.HarIkkeAleneomsorg": "Søker har <b>ikke</b> aleneomsorg for barnet",
   "AleneomsorgForm.Begrunn": "Begrunn vurderingen",
   "AleneomsorgForm.Bekreft": "Bekreft og fortsett",
 
@@ -17,14 +16,5 @@
   "HarAnnenForelderRettFelter.AnnenForelderRettEØS": "Har annen forelder tilstrekkelig opptjening fra land i EØS?",
 
   "HarAnnenForelderRettForm.Begrunn": "Begrunn vurderingen",
-  "HarAnnenForelderRettForm.Bekreft": "Bekreft og fortsett",
-
-  "PersonInfoPanel.Barn": "Barn",
-  "PersonInfoPanel.BarnNr": "Barn {nummer}",
-  "PersonInfoPanel.Fodt": "Født",
-  "PersonInfoPanel.Dod": "Død",
-  "PersonInfoPanel.Adresse": "Adresse",
-
-  "ForelderPanel.Soker": "Søker",
-  "ForelderPanel.AnnenForelder": "Annen forelder"
+  "HarAnnenForelderRettForm.Bekreft": "Bekreft og fortsett"
 }

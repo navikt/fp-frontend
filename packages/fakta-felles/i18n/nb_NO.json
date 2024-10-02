@@ -1,4 +1,14 @@
 {
+  "AdresseVisning.Adresse": "Adresse",
+
+  "ForelderPanel.Soker": "Søker",
+  "ForelderPanel.AnnenForelder": "Annen forelder",
+
+  "AlleBarnPanel.Barn": "Barn",
+  "AlleBarnPanel.BarnNr": "Barn {nummer}",
+  "AlleBarnPanel.Fodt": "Født",
+  "AlleBarnPanel.Dod": "Død",
+
   "MerkePanel.Dod": "DØD",
   "MerkePanel.DodTittel": "Personen er død",
   "MerkePanel.DodFodt": "DØDFØDT",

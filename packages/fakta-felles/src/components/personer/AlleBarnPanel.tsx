@@ -1,23 +1,28 @@
-import { FormattedMessage, useIntl } from 'react-intl';
-import React, { FunctionComponent } from 'react';
+import React from 'react';
+import { FormattedMessage, RawIntlProvider } from 'react-intl';
+
 import { ChildEyesIcon } from '@navikt/aksel-icons';
 import { Label, BodyShort, HStack, VStack } from '@navikt/ds-react';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { PersonopplysningerBasis } from '@navikt/fp-types';
+import { createIntl } from '@navikt/ft-utils';
 
-import Boks from '../Boks';
-import AdresseVisning from './AdresseVisning';
+import { Boks } from '../Boks';
+import { AdresseVisning } from './AdresseVisning';
+
+import messages from '../../../i18n/nb_NO.json';
+
+const intl = createIntl(messages);
 
 import styles from './alleBarnPanel.module.css';
 
-interface OwnProps {
+interface Props {
   alleBarn: PersonopplysningerBasis[];
 }
 
-const AlleBarnPanel: FunctionComponent<OwnProps> = ({ alleBarn }) => {
-  const intl = useIntl();
+export const AlleBarnPanel = ({ alleBarn }: Props) => {
   return (
-    <>
+    <RawIntlProvider value={intl}>
       {alleBarn.map((barn, index) => (
         <Boks key={barn.aktoerId} harBorderTop={index === 0}>
           <HStack>
@@ -50,14 +55,10 @@ const AlleBarnPanel: FunctionComponent<OwnProps> = ({ alleBarn }) => {
                 )}
               </VStack>
             </HStack>
-            <div>
-              <AdresseVisning personopplysninger={barn} />
-            </div>
+            <AdresseVisning adresser={barn.adresser} />
           </HStack>
         </Boks>
       ))}
-    </>
+    </RawIntlProvider>
   );
 };
-
-export default AlleBarnPanel;
