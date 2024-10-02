@@ -7040,24 +7040,29 @@
       "navn": "Bostedsadresse"
     },
     {
+      "kode": "BOSTEDSADRESSE_UTLAND",
+      "kodeverk": "ADRESSE_TYPE",
+      "navn": "Bostedsadresse utland"
+    },
+    {
       "kode": "POSTADRESSE",
       "kodeverk": "ADRESSE_TYPE",
-      "navn": "Postadresse"
+      "navn": "Kontaktadresse"
     },
     {
       "kode": "POSTADRESSE_UTLAND",
       "kodeverk": "ADRESSE_TYPE",
-      "navn": "Postadresse i utlandet"
+      "navn": "Kontaktadresse utland"
     },
     {
       "kode": "MIDLERTIDIG_POSTADRESSE_NORGE",
       "kodeverk": "ADRESSE_TYPE",
-      "navn": "Midlertidig postadresse i Norge"
+      "navn": "Oppholdsadresse"
     },
     {
       "kode": "MIDLERTIDIG_POSTADRESSE_UTLAND",
       "kodeverk": "ADRESSE_TYPE",
-      "navn": "Midlertidig postadresse i utlandet"
+      "navn": "Oppholdsadresse utland"
     },
     {
       "kode": "UKJENT_ADRESSE",

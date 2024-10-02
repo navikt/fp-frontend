@@ -32,7 +32,7 @@ describe('<OmsorgOgForeldreansvarFaktaIndex>', () => {
     expect(screen.getByText('11.01.2019')).toBeInTheDocument();
 
     expect(screen.getByText('Olga Utvikler')).toBeInTheDocument();
-    expect(screen.getByText('Gateadresse 1, 1000 Oslo Norge')).toBeInTheDocument();
+    expect(screen.getByText('Gateadresse 1, 1000 Oslo')).toBeInTheDocument();
     expect(screen.getByText('Espen Utvikler')).toBeInTheDocument();
     expect(screen.getByText('Dato for fars død')).toBeInTheDocument();
     expect(screen.getByText('01.01.2021')).toBeInTheDocument();
@@ -87,7 +87,7 @@ describe('<OmsorgOgForeldreansvarFaktaIndex>', () => {
     expect(screen.getByText('11.01.2019')).toBeInTheDocument();
 
     expect(screen.getByText('Olga Utvikler')).toBeInTheDocument();
-    expect(screen.getByText('Gateadresse 1, 1000 Oslo Norge')).toBeInTheDocument();
+    expect(screen.getByText('Gateadresse 1, 1000 Oslo')).toBeInTheDocument();
     expect(screen.getByText('Espen Utvikler')).toBeInTheDocument();
     expect(screen.getByText('Dato for fars død')).toBeInTheDocument();
     expect(screen.getByText('01.01.2021')).toBeInTheDocument();

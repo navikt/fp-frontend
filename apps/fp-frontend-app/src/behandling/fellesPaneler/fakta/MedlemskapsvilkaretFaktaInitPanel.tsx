@@ -4,18 +4,15 @@ import { useIntl } from 'react-intl';
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { MedlemskapFaktaIndex } from '@navikt/fp-fakta-medlemskap';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import { Medlemskap, Soknad } from '@navikt/fp-types';
+import { Fagsak, Medlemskap, Soknad } from '@navikt/fp-types';
 
 import FaktaPanelInitProps from '../../felles/typer/faktaPanelInitProps';
 import FaktaDefaultInitPanel from '../../felles/fakta/FaktaDefaultInitPanel';
 import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
 
-const AKSJONSPUNKT_KODER = [
-  AksjonspunktCode.AVKLAR_OM_BRUKER_ER_BOSATT,
-  AksjonspunktCode.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE,
-  AksjonspunktCode.AVKLAR_OPPHOLDSRETT,
-  AksjonspunktCode.AVKLAR_LOVLIG_OPPHOLD,
-  AksjonspunktCode.AVKLAR_FORTSATT_MEDLEMSKAP,
+const AKSJONSPUNKT_KODER: AksjonspunktCode[] = [
+  AksjonspunktCode.VURDER_MEDLEMSKAPSVILKÅRET,
+  AksjonspunktCode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
 ];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.MEDLEMSKAP, BehandlingApiKeys.SOKNAD];
@@ -24,10 +21,14 @@ type EndepunktPanelData = {
   soknad: Soknad;
 };
 
+interface Props {
+  fagsak: Fagsak;
+}
+
 /**
  * MedlemskapsvilkaretFaktaInitPanel
  */
-const MedlemskapsvilkaretFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = ({ ...props }) => (
+const MedlemskapsvilkaretFaktaInitPanel: FunctionComponent<FaktaPanelInitProps & Props> = ({ ...props }) => (
   <FaktaDefaultInitPanel<EndepunktPanelData>
     {...props}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
@@ -35,7 +36,7 @@ const MedlemskapsvilkaretFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> 
     faktaPanelKode={FaktaPanelCode.MEDLEMSKAPSVILKARET}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'MedlemskapInfoPanel.Medlemskap' })}
     skalPanelVisesIMeny={() => props.behandling.harSøknad}
-    renderPanel={data => <MedlemskapFaktaIndex {...data} />}
+    renderPanel={data => <MedlemskapFaktaIndex fagsak={props.fagsak} {...data} />}
   />
 );
 

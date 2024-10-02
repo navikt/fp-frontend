@@ -4,7 +4,7 @@ import { VilkarType } from '@navikt/ft-kodeverk';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { VilkarresultatMedOverstyringProsessIndex } from '@navikt/fp-prosess-vilkar-overstyring';
-import { MedlemskapV3, Vilkar } from '@navikt/fp-types';
+import { Medlemskap, Vilkar } from '@navikt/fp-types';
 import { KodeverkType, OverstyringAksjonspunkter } from '@navikt/fp-kodeverk';
 
 import skalViseProsessPanel from './skalViseProsessPanel';
@@ -25,7 +25,7 @@ interface OwnProps {
   aksjonspunktKode: OverstyringAksjonspunkter;
   vilkar: Vilkar[];
   vilkarKoder: string[];
-  medlemskap?: MedlemskapV3;
+  medlemskap?: Medlemskap;
   panelTekstKode: string;
   erOverstyrt: boolean;
   toggleOverstyring: () => void;

@@ -12,7 +12,7 @@ import {
   VilkarType,
   vilkarUtfallType,
 } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt, Behandling, Fagsak, KodeverkMedNavn, MedlemskapV3 } from '@navikt/fp-types';
+import { Aksjonspunkt, Behandling, Fagsak, KodeverkMedNavn, Medlemskap } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 import VilkarresultatMedOverstyringProsessIndex from './VilkarresultatMedOverstyringProsessIndex';
@@ -46,7 +46,7 @@ const Template: StoryFn<{
   overstyringApKode: OverstyringAksjonspunkter;
   behandling?: Behandling;
   aksjonspunkter?: Aksjonspunkt[];
-  medlemskap?: MedlemskapV3;
+  medlemskap?: Medlemskap;
   status?: string;
   avslagsarsaker?: KodeverkMedNavn[];
   vilkarType: VilkarType;
@@ -135,7 +135,7 @@ OverstyringErUtførtForMedlemskap.args = {
       avslagskode: '1025',
       opphørFom: '2022-02-19',
     },
-  } as MedlemskapV3,
+  } as Medlemskap,
 };
 
 export const OverstyringForForutgåendeMedlemskap = Template.bind({});
@@ -166,7 +166,7 @@ OverstyringErUtførtForForutgåendeMedlemskap.args = {
       avslagskode: '1052',
       medlemFom: '2022-02-19',
     },
-  } as MedlemskapV3,
+  } as Medlemskap,
 };
 
 export const OverstyringspanelForOpptjening = Template.bind({});

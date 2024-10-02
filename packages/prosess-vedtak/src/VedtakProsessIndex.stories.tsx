@@ -113,7 +113,7 @@ const Template: StoryFn<{
     setFormData={() => undefined}
     beregningresultatDagytelse={beregningresultatDagytelse}
     beregningresultatEngangsstonad={beregningresultatEngangsstonad}
-    medlemskap={{ fom: '2019-01-01' } as Medlemskap}
+    medlemskap={{ manuellBehandlingResultat: { medlemFom: '2019-01-02', opphørFom: '2024-02-03' } } as Medlemskap}
     previewCallback={previewCallback || (action('button-click') as any)}
     ytelseTypeKode={ytelseTypeKode}
     alleKodeverk={alleKodeverk as any}

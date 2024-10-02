@@ -37,7 +37,6 @@ import {
   BeregningsresultatEs,
   BeregningsresultatTilbakekreving,
   Inntektsmelding,
-  MedlemskapV3,
 } from '@navikt/fp-types';
 
 import {
@@ -89,7 +88,6 @@ export const BehandlingApiKeys = {
   >('BEREGNINGSRESULTAT_DAGYTELSE_ORIGINAL_BEHANDLING'),
   FAMILIEHENDELSE_ORIGINAL_BEHANDLING: new RestKey<FamilieHendelse, void>('FAMILIEHENDELSE_ORIGINAL_BEHANDLING'),
   MEDLEMSKAP: new RestKey<Medlemskap, void>('MEDLEMSKAP'),
-  MEDLEMSKAP_V3: new RestKey<MedlemskapV3, void>('MEDLEMSKAP_V3'),
   INNTEKT_ARBEID_YTELSE: new RestKey<InntektArbeidYtelse, void>('INNTEKT_ARBEID_YTELSE'),
   SIMULERING_RESULTAT: new RestKey<SimuleringResultat, void>('SIMULERING_RESULTAT'),
   TILBAKEKREVINGVALG: new RestKey<TilbakekrevingValg, void>('TILBAKEKREVINGVALG'),
@@ -182,8 +180,7 @@ export const behandlingEndepunkter = new RestApiConfigBuilder()
   .withRel('soknad', BehandlingApiKeys.SOKNAD)
   .withRel('soknad-original-behandling', BehandlingApiKeys.SOKNAD_ORIGINAL_BEHANDLING)
   .withRel('familiehendelse-original-behandling', BehandlingApiKeys.FAMILIEHENDELSE_ORIGINAL_BEHANDLING)
-  .withRel('soeker-medlemskap-v2', BehandlingApiKeys.MEDLEMSKAP)
-  .withRel('soeker-medlemskap-v3', BehandlingApiKeys.MEDLEMSKAP_V3)
+  .withRel('soeker-medlemskap-v3', BehandlingApiKeys.MEDLEMSKAP)
   .withRel('inntekt-arbeid-ytelse', BehandlingApiKeys.INNTEKT_ARBEID_YTELSE)
   .withRel('soeker-verge', BehandlingApiKeys.VERGE)
   .withRel('ytelsefordeling', BehandlingApiKeys.YTELSEFORDELING)

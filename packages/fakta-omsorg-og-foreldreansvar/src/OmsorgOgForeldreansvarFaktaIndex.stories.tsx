@@ -2,13 +2,7 @@ import React from 'react';
 import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import {
-  opplysningAdresseType,
-  navBrukerKjonn,
-  soknadType,
-  AksjonspunktCode,
-  aksjonspunktStatus,
-} from '@navikt/fp-kodeverk';
+import { AdresseType, navBrukerKjonn, soknadType, AksjonspunktCode, aksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { Behandling, FamilieHendelseSamling, InntektArbeidYtelse, Soknad, Aksjonspunkt } from '@navikt/fp-types';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -51,7 +45,7 @@ const personoversikt = {
     fødselsdato: '1979-01-01',
     adresser: [
       {
-        adresseType: opplysningAdresseType.POSTADRESSE,
+        adresseType: AdresseType.POSTADRESSE,
         adresselinje1: 'Gateadresse 1',
         postNummer: '1000',
         poststed: 'Oslo',

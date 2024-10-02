@@ -131,7 +131,7 @@ const VedtakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps
           vilkar={vilkar}
           beregningErManueltFastsatt={beregningErManueltFastsatt}
           resultatstrukturOriginalBehandling={originaltBeregningsresultat}
-          medlemskapFom={medlemskap?.fom}
+          opphørFom={medlemskap?.manuellBehandlingResultat?.opphørFom ?? undefined}
           formData={formData}
           setFormData={setFormData}
         />

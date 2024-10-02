@@ -54,7 +54,7 @@ export { default as mottakerTyper } from './src/mottakerTyper';
 export { default as naringsvirksomhetType } from './src/naringsvirksomhetType';
 export { default as navBrukerKjonn } from './src/navBrukerKjonn';
 export { default as oppholdArsakType, oppholdArsakKontoNavn, oppholdArsakMapper } from './src/oppholdArsakType';
-export { default as opplysningAdresseType } from './src/opplysningAdresseType';
+export { default as AdresseType } from './src/adresseType';
 export { default as opplysningsKilde } from './src/opplysningsKilde';
 export { default as opptjeningAktivitetType } from './src/opptjeningAktivitetType';
 export { default as organisasjonstype } from './src/organisasjonstype';

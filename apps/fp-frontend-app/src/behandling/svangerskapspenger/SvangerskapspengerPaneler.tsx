@@ -31,7 +31,7 @@ import PermisjonFaktaInitPanel from '../fellesPaneler/fakta/PermisjonFaktaInitPa
 import ProsessPanelInitProps, { ProsessPanelExtraInitProps } from '../felles/typer/prosessPanelInitProps';
 import FaktaPanelInitProps from '../felles/typer/faktaPanelInitProps';
 import InntektsmeldingerFaktaInitPanel from '../fellesPaneler/fakta/InntektsmeldingerFaktaInitPanel';
-import MedlemskapsvilkaretFaktaInitPanelV3 from '../fellesPaneler/fakta/MedlemskapsvilkaretFaktaInitPanelV3';
+import MedlemskapsvilkaretFaktaInitPanel from '../fellesPaneler/fakta/MedlemskapsvilkaretFaktaInitPanel';
 
 interface OwnProps {
   alleBehandlinger: BehandlingAppKontekst[];
@@ -84,7 +84,7 @@ const SvangerskapspengerPaneler: FunctionComponent<OwnProps> = ({
         <YtelserFaktaInitPanel {...props} />
         <VergeFaktaInitPanel {...props} />
         <FodseltilretteleggingFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-        <MedlemskapsvilkaretFaktaInitPanelV3 {...props} fagsak={fagsak} />
+        <MedlemskapsvilkaretFaktaInitPanel {...props} fagsak={fagsak} />
         <OpptjeningsvilkaretFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
         <PermisjonFaktaInitPanel
           {...props}
