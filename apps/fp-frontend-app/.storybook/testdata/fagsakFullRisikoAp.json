@@ -239,7 +239,7 @@
         "kontrollresultat": "HOY",
         "iayFaresignaler": null,
         "medlFaresignaler": {
-          "faresignaler": ["Dette er et faresignl"]
+          "faresignaler": ["Dette er et faresignal"]
         },
         "faresignalVurdering": null
       },

@@ -13,7 +13,15 @@
   },
   "manglendeVedlegg": [],
   "oppgittFordeling": {
-    "startDatoForPermisjon": "2023-06-07"
+    "startDatoForPermisjon": "2023-06-07",
+    "dekningsgrader": {
+      "avklartDekningsgrad": null,
+      "søker": {
+        "søknadsdato": "2023-06-09",
+        "dekningsgrad": 100
+      },
+      "annenPart": null
+    }
   },
   "søknadsfrist": {
     "mottattDato": "2023-06-09",

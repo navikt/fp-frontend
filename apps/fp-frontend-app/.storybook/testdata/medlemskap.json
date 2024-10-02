@@ -1,65 +1,81 @@
 {
-  "medlemskapPerioder": [
+  "manuellBehandlingResultat": null,
+  "legacyManuellBehandling": null,
+  "regioner": [
     {
-      "fom": "2022-06-09",
-      "tom": "2026-06-09",
-      "medlemskapType": "ENDELIG",
-      "dekningType": "IHT_AVTALE",
-      "kildeType": "ANNEN",
-      "beslutningsdato": "2022-06-09"
+      "fom": "1927-09-26",
+      "tom": "9999-12-31",
+      "type": "NORDEN"
     }
   ],
-  "perioder": [
+  "personstatuser": [
     {
-      "vurderingsdato": "2023-06-07",
-      "aksjonspunkter": ["5021"],
-      "årsaker": ["SKJÆRINGSTIDSPUNKT"],
-      "oppholdsrettVurdering": null,
-      "erEosBorger": null,
-      "lovligOppholdVurdering": null,
-      "bosattVurdering": null,
-      "medlemskapManuellVurderingType": null,
-      "begrunnelse": null,
-      "personopplysningBruker": {
-        "fnr": "02439132852",
-        "aktoerId": "9902439132852",
-        "diskresjonskode": "UDEF",
-        "navn": "Hjort Brit",
-        "personstatus": "BOSA",
-        "region": "NORDEN",
-        "adresser": [
-          {
-            "adresseType": "BOSTEDSADRESSE",
-            "adresselinje1": null,
-            "adresselinje2": null,
-            "adresselinje3": null,
-            "postNummer": "2500",
-            "poststed": "Ukjent",
-            "land": "NOR"
-          }
-        ]
-      },
-      "personopplysningAnnenPart": {
-        "fnr": "16488918099",
-        "aktoerId": "9916488918099",
-        "diskresjonskode": "UDEF",
-        "navn": "Hjort Gabriel",
-        "personstatus": "BOSA",
-        "region": "NORDEN",
-        "adresser": [
-          {
-            "adresseType": "BOSTEDSADRESSE",
-            "adresselinje1": null,
-            "adresselinje2": null,
-            "adresselinje3": null,
-            "postNummer": "2500",
-            "poststed": "Ukjent",
-            "land": "NOR"
-          }
-        ]
+      "fom": "2020-12-22",
+      "tom": "9999-12-31",
+      "type": "BOSA"
+    }
+  ],
+  "utenlandsopphold": [],
+  "adresser": [
+    {
+      "fom": "2019-06-07",
+      "tom": "9999-12-31",
+      "adresse": {
+        "adresseType": "BOSTEDSADRESSE",
+        "adresselinje1": null,
+        "adresselinje2": null,
+        "adresselinje3": null,
+        "postNummer": "2500",
+        "poststed": "Ukjent",
+        "land": "Norge"
       }
     }
   ],
-  "opphold": [],
-  "fom": null
+  "oppholdstillatelser": [],
+  "avvik": [
+    "BOSATT_UTENLANDSOPPHOLD"
+  ],
+  "annenpart": {
+    "regioner": [
+      {
+        "fom": "1927-09-26",
+        "tom": "9999-12-31",
+        "type": "NORDEN"
+      }
+    ],
+    "personstatuser": [
+      {
+        "fom": "2020-12-22",
+        "tom": "9999-12-31",
+        "type": "BOSA"
+      }
+    ],
+    "adresser": [
+      {
+        "fom": "2019-06-07",
+        "tom": "9999-12-31",
+        "adresse": {
+          "adresseType": "BOSTEDSADRESSE",
+          "adresselinje1": null,
+          "adresselinje2": null,
+          "adresselinje3": null,
+          "postNummer": "2500",
+          "poststed": "Ukjent",
+          "land": "Norge"
+        }
+      }
+    ]
+  },
+  "medlemskapsperioder": [
+    {
+      "fom": "2022-06-09",
+      "tom": "2026-06-09",
+      "erMedlem": false,
+      "lovvalgsland": null,
+      "studieland": null,
+      "medlemskapType": "ENDELIG",
+      "dekningType": "IHT_AVTALE",
+      "beslutningsdato": "2022-06-09"
+    }
+  ]
 }
