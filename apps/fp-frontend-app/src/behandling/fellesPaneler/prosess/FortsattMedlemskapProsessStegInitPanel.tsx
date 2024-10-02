@@ -1,9 +1,8 @@
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 
-import { VilkarType, AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktCode, VilkarType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import { AksessRettigheter } from '@navikt/fp-types';
 
 import skalViseProsessPanel from '../../felles/prosess/skalViseProsessPanel';
 import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
@@ -16,14 +15,7 @@ const VILKAR_KODER = [VilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE];
 
 type EndepunktPanelData = Record<string, never>;
 
-interface OwnProps {
-  rettigheter: AksessRettigheter;
-}
-
-const FortsattMedlemskapProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
-  rettigheter,
-  ...props
-}) => {
+const FortsattMedlemskapProsessStegInitPanel: FunctionComponent<ProsessPanelInitProps> = ({ ...props }) => {
   const { behandling } = props;
   const [erOverstyrt, setOverstyrt] = useState(false);
   const toggleOverstyring = useCallback(() => setOverstyrt(!erOverstyrt), [erOverstyrt]);
@@ -49,8 +41,8 @@ const FortsattMedlemskapProsessStegInitPanel: FunctionComponent<OwnProps & Prose
           panelTekstKode="Behandlingspunkt.FortsattMedlemskap"
           toggleOverstyring={toggleOverstyring}
           erOverstyrt={erOverstyrt}
-          overrideReadOnly={data.isReadOnly}
-          kanOverstyreAccess={rettigheter.kanOverstyreAccess}
+          overrideReadOnly={true}
+          kanOverstyreAccess={{ isEnabled: false, employeeHasAccess: false }}
         />
       )}
     />
