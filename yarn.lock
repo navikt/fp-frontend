@@ -3679,6 +3679,7 @@ __metadata:
     eslint: 9.10.0
     react: 18.3.1
     react-intl: 6.6.8
+    stylelint: ^16.9.0
     typescript: 5.6.2
     vite: 5.4.6
     vitest: 2.1.1
@@ -20250,7 +20251,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint@npm:16.9.0":
+"stylelint@npm:16.9.0, stylelint@npm:^16.9.0":
   version: 16.9.0
   resolution: "stylelint@npm:16.9.0"
   dependencies:
