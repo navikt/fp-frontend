@@ -17,7 +17,7 @@ const behandling = {
   versjon: 1,
 } as Behandling;
 
-const familieHendelse = {
+const defaultFamilieHendelse = {
   gjeldende: {
     termindato: '2019-01-01',
     utstedtdato: '2019-01-01',
@@ -92,14 +92,22 @@ export default {
 };
 
 const Template: StoryFn<{
+  familieHendelse: FamilieHendelseSamling;
   aksjonspunkter: Aksjonspunkt[];
   submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
-}> = ({ aksjonspunkter, submitCallback, alleMerknaderFraBeslutter }) => (
+  readOnly: boolean;
+}> = ({
+  familieHendelse = defaultFamilieHendelse,
+  aksjonspunkter,
+  submitCallback = action('button-click') as (data: any) => Promise<any>,
+  alleMerknaderFraBeslutter,
+  readOnly = false,
+}) => (
   <OmsorgOgForeldreansvarFaktaIndex
     submitCallback={submitCallback}
-    readOnly={false}
-    harApneAksjonspunkter
+    readOnly={readOnly}
+    harApneAksjonspunkter={aksjonspunkter.some(ap => ap.status === aksjonspunktStatus.OPPRETTET)}
     submittable
     setFormData={() => undefined}
     behandling={behandling}
@@ -126,7 +134,32 @@ export const ÅpentAksjonspunktForOmsorgovertakelse = Template.bind({});
   alleMerknaderFraBeslutter: {
     [AksjonspunktCode.OMSORGSOVERTAKELSE]: merknaderFraBeslutter,
   },
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  readOnly: false,
+};
+
+export const UtførtAksjonspunktForOmsorgovertakelse = Template.bind({});
+UtførtAksjonspunktForOmsorgovertakelse.args = {
+  familieHendelse: {
+    ...defaultFamilieHendelse,
+    gjeldende: {
+      ...defaultFamilieHendelse.gjeldende,
+      omsorgsovertakelseDato: '2021-01-01',
+      foreldreansvarDato: '2021-02-02',
+      vilkarType: 'FP_VK_8',
+    },
+  },
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.OMSORGSOVERTAKELSE,
+      status: aksjonspunktStatus.UTFORT,
+      begrunnelse: 'dette er en begrunnelse',
+      kanLoses: false,
+    },
+  ],
+  alleMerknaderFraBeslutter: {
+    [AksjonspunktCode.OMSORGSOVERTAKELSE]: merknaderFraBeslutter,
+  },
+  readOnly: true,
 };
 
 export const ÅpentAksjonspunktForAvklareVilkårForForeldreansvar = Template.bind({});
@@ -142,5 +175,29 @@ export const ÅpentAksjonspunktForAvklareVilkårForForeldreansvar = Template.bin
   alleMerknaderFraBeslutter: {
     [AksjonspunktCode.AVKLAR_VILKAR_FOR_FORELDREANSVAR]: merknaderFraBeslutter,
   },
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  readOnly: false,
+};
+
+export const UtførtAksjonspunktForAvklareVilkårForForeldreansvar = Template.bind({});
+UtførtAksjonspunktForAvklareVilkårForForeldreansvar.args = {
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.AVKLAR_VILKAR_FOR_FORELDREANSVAR,
+      status: aksjonspunktStatus.UTFORT,
+      begrunnelse: 'dette er en begrunnelse',
+      kanLoses: false,
+    },
+  ],
+  familieHendelse: {
+    ...defaultFamilieHendelse,
+    gjeldende: {
+      ...defaultFamilieHendelse.gjeldende,
+      omsorgsovertakelseDato: '2021-01-01',
+      foreldreansvarDato: '2021-02-02',
+    },
+  },
+  alleMerknaderFraBeslutter: {
+    [AksjonspunktCode.AVKLAR_VILKAR_FOR_FORELDREANSVAR]: merknaderFraBeslutter,
+  },
+  readOnly: true,
 };

@@ -1,8 +1,8 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Label, BodyShort, HStack, VStack } from '@navikt/ds-react';
+import { Label, BodyShort, VStack, HGrid } from '@navikt/ds-react';
 
-import { AksjonspunktHelpTextTemp, VerticalSpacer, FaktaGruppe, EditedIcon } from '@navikt/ft-ui-komponenter';
+import { AksjonspunktHelpTextHTML, VerticalSpacer, FaktaGruppe, EditedIcon } from '@navikt/ft-ui-komponenter';
 import { AksjonspunktCode, VilkarType, KodeverkType } from '@navikt/fp-kodeverk';
 import { SelectField } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
@@ -58,7 +58,7 @@ export type FormValues = OmsorgFormValues &
     vilkarType?: string;
   };
 
-interface PureOwnProps {
+interface Props {
   soknad: Soknad;
   gjeldendeFamiliehendelse: FamilieHendelse;
   readOnly: boolean;
@@ -87,7 +87,7 @@ interface StaticFunctions {
  *
  * Setter opp aksjonspunktet for avklaring av fakta for omsorgs og foreldreansvarsvilkåret.
  */
-const OmsorgOgForeldreansvarFaktaForm: FunctionComponent<PureOwnProps> & StaticFunctions = ({
+const OmsorgOgForeldreansvarFaktaForm: FunctionComponent<Props> & StaticFunctions = ({
   readOnly,
   vilkarTypes,
   hasOpenAksjonspunkter,
@@ -106,39 +106,31 @@ const OmsorgOgForeldreansvarFaktaForm: FunctionComponent<PureOwnProps> & StaticF
 
   return (
     <>
-      <AksjonspunktHelpTextTemp isAksjonspunktOpen={hasOpenAksjonspunkter}>
-        {findAksjonspunktHelpTexts(erAksjonspunktForeldreansvar)}
-      </AksjonspunktHelpTextTemp>
+      {hasOpenAksjonspunkter && (
+        <AksjonspunktHelpTextHTML>{findAksjonspunktHelpTexts(erAksjonspunktForeldreansvar)}</AksjonspunktHelpTextHTML>
+      )}
       <VStack gap="2">
-        <HStack gap="5">
-          <div className={erAksjonspunktForeldreansvar ? styles.oneCol : styles.cols}>
-            <OmsorgsovertakelseFaktaPanel
-              readOnly={readOnly}
-              erAksjonspunktForeldreansvar={erAksjonspunktForeldreansvar}
-              editedStatus={editedStatus}
-              alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-              soknad={soknad}
-              familiehendelse={gjeldendeFamiliehendelse}
-            />
-          </div>
+        <HGrid gap="5" columns="repeat(auto-fit, minmax(16rem, 1fr))">
+          <OmsorgsovertakelseFaktaPanel
+            readOnly={readOnly}
+            erAksjonspunktForeldreansvar={erAksjonspunktForeldreansvar}
+            editedStatus={editedStatus}
+            alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+            soknad={soknad}
+            familiehendelse={gjeldendeFamiliehendelse}
+          />
           {!erAksjonspunktForeldreansvar && (
-            <div className={styles.cols}>
-              <RettighetFaktaPanel alleMerknaderFraBeslutter={alleMerknaderFraBeslutter} />
-            </div>
+            <RettighetFaktaPanel alleMerknaderFraBeslutter={alleMerknaderFraBeslutter} />
           )}
-        </HStack>
-        <HStack gap="5">
-          <div className={styles.cols}>
-            <BarnPanel soknad={soknad} alleMerknaderFraBeslutter={alleMerknaderFraBeslutter} intl={intl} />
-          </div>
-          <div className={styles.cols}>
-            <ForeldrePanel
-              personoversikt={personoversikt}
-              alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-              intl={intl}
-            />
-          </div>
-        </HStack>
+        </HGrid>
+        <HGrid gap="5" columns="repeat(auto-fit, minmax(16rem, 1fr))">
+          <BarnPanel soknad={soknad} alleMerknaderFraBeslutter={alleMerknaderFraBeslutter} intl={intl} />
+          <ForeldrePanel
+            personoversikt={personoversikt}
+            alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+            intl={intl}
+          />
+        </HGrid>
         {!erAksjonspunktForeldreansvar && (
           <FaktaGruppe
             title={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.VelgVilkaarSomSkalAnvendes' })}

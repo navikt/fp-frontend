@@ -1,25 +1,22 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { FormattedMessage, WrappedComponentProps } from 'react-intl';
-import { Label, BodyShort, Heading } from '@navikt/ds-react';
+import { Label, BodyShort, Heading, VStack } from '@navikt/ds-react';
 
-import { DateLabel, VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
+import { DateLabel, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { AksjonspunktCode, navBrukerKjonn, AdresseType } from '@navikt/fp-kodeverk';
 import { PersonopplysningerBasis, Personoversikt } from '@navikt/fp-types';
+import { formaterAdresse } from '@navikt/fp-fakta-felles';
 
-import getAddresses from '../getAddresses';
-
-const getParentHeader = (erMor: boolean): string =>
-  erMor ? 'ForeldrePanel.MotherDeathDate' : 'ForeldrePanel.FatherDeathDate';
-
-const lagSøkerdata = (personopplysninger: PersonopplysningerBasis) => {
-  const addresses = getAddresses(personopplysninger.adresser);
+const lagSøkerdata = ({ aktoerId, navn, kjønn, adresser, dødsdato }: PersonopplysningerBasis) => {
+  const postadr = adresser.find(adresse => adresse.adresseType === AdresseType.POSTADRESSE);
+  const bostedsadr = adresser.find(adresse => adresse.adresseType === AdresseType.BOSTEDSADRESSE);
 
   return {
-    aktorId: personopplysninger.aktoerId,
-    navn: personopplysninger.navn,
-    dodsdato: personopplysninger.dødsdato,
-    adresse: addresses[AdresseType.POSTADRESSE] || addresses[AdresseType.BOSTEDSADRESSE],
-    erMor: personopplysninger.kjønn === navBrukerKjonn.KVINNE,
+    aktorId: aktoerId,
+    navn: navn,
+    dodsdato: dødsdato,
+    adresse: postadr || bostedsadr,
+    erMor: kjønn === navBrukerKjonn.KVINNE,
   };
 };
 
@@ -51,32 +48,31 @@ const ForeldrePanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
       title={intl.formatMessage({ id: 'ForeldrePanel.Foreldre' })}
       merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.OMSORGSOVERTAKELSE]}
     >
-      {beggeForeldre.map(foreldre => {
-        const shouldShowAdress = foreldre.adresse && !foreldre.dodsdato;
-        const parentHeader = getParentHeader(foreldre.erMor);
-        return (
-          <div key={`${foreldre.aktorId}`}>
-            <Heading size="small">{foreldre.navn}</Heading>
-            <VerticalSpacer eightPx />
-            <BodyShort size="small">
-              <FormattedMessage id="ForeldrePanel.Address" />
-            </BodyShort>
-            {shouldShowAdress && <Label size="small">{foreldre.adresse}</Label>}
-            {!shouldShowAdress && <BodyShort size="small"> - </BodyShort>}
-            <VerticalSpacer eightPx />
-            <BodyShort size="small">
-              <FormattedMessage id={parentHeader} />
-            </BodyShort>
-            {foreldre.dodsdato && (
+      <VStack gap="8">
+        {beggeForeldre.map(foreldre => {
+          return (
+            <VStack gap="2" key={`${foreldre.aktorId}`}>
+              <Heading size="small">{foreldre.navn}</Heading>
               <Label size="small">
-                <DateLabel dateString={foreldre.dodsdato} />
+                <FormattedMessage id="ForeldrePanel.Address" />
               </Label>
-            )}
-            {!foreldre.dodsdato && <BodyShort size="small"> - </BodyShort>}
-            <VerticalSpacer sixteenPx />
-          </div>
-        );
-      })}
+              <BodyShort size="small">
+                {foreldre.adresse && !foreldre.dodsdato ? formaterAdresse(foreldre.adresse) : '-'}
+              </BodyShort>
+              {foreldre.dodsdato && (
+                <>
+                  <Label size="small">
+                    <FormattedMessage id="ForeldrePanel.DeathDate" />
+                  </Label>
+                  <BodyShort size="small">
+                    <DateLabel dateString={foreldre.dodsdato} />
+                  </BodyShort>
+                </>
+              )}
+            </VStack>
+          );
+        })}
+      </VStack>
     </FaktaGruppe>
   );
 };
