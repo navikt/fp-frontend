@@ -239,8 +239,8 @@
       "type": "GET"
     },
     {
-      "href": "/fpsak/api/behandling/person/medlemskap-v2?uuid=7d198233-b499-4aaf-a01b-be97958e20ce",
-      "rel": "soeker-medlemskap-v2",
+      "href": "/fpsak/api/behandling/person/medlemskap-v3?uuid=7d198233-b499-4aaf-a01b-be97958e20ce",
+      "rel": "soeker-medlemskap-v3",
       "requestPayload": null,
       "type": "GET"
     },

@@ -21,6 +21,7 @@ import arbeidOgInntektData from '../../.storybook/testdata/arbeidOgInntekt.json'
 import dokumenterData from '../../.storybook/testdata/dokumenter.json';
 import medlemskapData from '../../.storybook/testdata/medlemskap.json';
 import inntektArbeidYtelseData from '../../.storybook/testdata/inntektArbeidYtelse.json';
+import alleInntektsmeldinger from '../../.storybook/testdata/alleInntektsmeldinger.json';
 import { requestFagsakApi } from '../data/fagsakContextApi';
 import { requestBehandlingApi } from '../data/behandlingContextApi';
 
@@ -83,6 +84,14 @@ const Template: StoryFn<{
       .onGet(`/fpsak/api/behandling/person/medlemskap-v2?uuid=${behandlingUuid}`)
       .replyOnce(200, medlemskapData);
   }
+
+  apiMockBehandling
+    .onGet(`/fpsak/api/behandling/person/medlemskap-v3?uuid=${behandlingUuid}`)
+    .replyOnce(200, medlemskapData);
+
+  apiMockBehandling
+    .onGet(`/fpsak/api/behandling/inntektsmeldinger-alle?uuid=${behandlingUuid}`)
+    .reply(200, alleInntektsmeldinger);
 
   return (
     <div>
