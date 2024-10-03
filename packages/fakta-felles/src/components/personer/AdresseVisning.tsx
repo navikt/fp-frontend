@@ -7,6 +7,7 @@ import { AdresseType } from '@navikt/fp-kodeverk';
 import { createIntl } from '@navikt/ft-utils';
 
 import messages from '../../../i18n/nb_NO.json';
+import { getNyesteAdresse } from '../../utils/adresseUtils';
 
 const intl = createIntl(messages);
 
@@ -15,8 +16,8 @@ interface Props {
 }
 
 export const AdresseVisning: FunctionComponent<Props> = ({ adresser }) => {
-  const postadr = adresser.find(adresse => adresse.adresseType === AdresseType.POSTADRESSE);
-  const bostedsadr = adresser.find(adresse => adresse.adresseType === AdresseType.BOSTEDSADRESSE);
+  const postadr = getNyesteAdresse(adresser, AdresseType.POSTADRESSE);
+  const bostedsadr = getNyesteAdresse(adresser, AdresseType.BOSTEDSADRESSE);
   if (!postadr && !bostedsadr) {
     return null;
   }
