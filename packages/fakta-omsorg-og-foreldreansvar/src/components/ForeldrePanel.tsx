@@ -1,15 +1,15 @@
-import React, { FunctionComponent, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { FormattedMessage, WrappedComponentProps } from 'react-intl';
 import { Label, BodyShort, Heading, VStack } from '@navikt/ds-react';
 
 import { DateLabel, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { AksjonspunktCode, navBrukerKjonn, AdresseType } from '@navikt/fp-kodeverk';
 import { PersonopplysningerBasis, Personoversikt } from '@navikt/fp-types';
-import { formaterAdresse } from '@navikt/fp-fakta-felles';
+import { formaterAdresse, getNyesteAdresse } from '@navikt/fp-fakta-felles';
 
 const lagSøkerdata = ({ aktoerId, navn, kjønn, adresser, dødsdato }: PersonopplysningerBasis) => {
-  const postadr = adresser.find(adresse => adresse.adresseType === AdresseType.POSTADRESSE);
-  const bostedsadr = adresser.find(adresse => adresse.adresseType === AdresseType.BOSTEDSADRESSE);
+  const postadr = getNyesteAdresse(adresser, AdresseType.POSTADRESSE);
+  const bostedsadr = getNyesteAdresse(adresser, AdresseType.BOSTEDSADRESSE);
 
   return {
     aktorId: aktoerId,
@@ -20,7 +20,7 @@ const lagSøkerdata = ({ aktoerId, navn, kjønn, adresser, dødsdato }: Personop
   };
 };
 
-interface OwnProps {
+interface Props {
   personoversikt: Personoversikt;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
 }
@@ -30,18 +30,14 @@ interface OwnProps {
  *
  * Presentasjonskomponent. Brukes i tilknytning til faktapanel for omsorg.
  */
-const ForeldrePanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  intl,
-  personoversikt,
-  alleMerknaderFraBeslutter,
-}) => {
+const ForeldrePanel = ({ intl, personoversikt, alleMerknaderFraBeslutter }: Props & WrappedComponentProps) => {
   const beggeForeldre = useMemo(() => {
     const f = [lagSøkerdata(personoversikt.bruker)];
     if (personoversikt.annenPart) {
       f.push(lagSøkerdata(personoversikt.annenPart));
     }
     return f;
-  }, []);
+  }, [personoversikt]);
 
   return (
     <FaktaGruppe

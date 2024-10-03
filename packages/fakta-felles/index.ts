@@ -5,7 +5,7 @@ export { default as isFieldEdited } from './src/utils/isFieldEdited';
 export type { FieldEditedInfo } from './src/utils/isFieldEdited';
 
 export { sorterPerioder } from './src/utils/periodeUtils';
-export { formaterAdresse } from './src/utils/adresseUtils';
+export { formaterAdresse, getNyesteAdresse } from './src/utils/adresseUtils';
 
 export { default as validerApKodeOgHentApEnum } from './src/utils/validerApKodeOgHentApEnum';
 export type { FormValues as FaktaBegrunnelseFormValues } from './src/components/FaktaBegrunnelseTextFieldNew';

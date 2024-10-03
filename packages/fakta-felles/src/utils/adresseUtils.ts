@@ -1,4 +1,6 @@
 import { Personadresse } from '@navikt/fp-types';
+import { AdresseType } from '@navikt/fp-kodeverk';
+import { sorterPerioder } from './periodeUtils';
 
 const PERSON_ADRESSE_LAND_NORGE = 'NORGE';
 
@@ -17,3 +19,6 @@ export const formaterAdresse = (adresse: Personadresse): string => {
     .join(', ')
     .trim();
 };
+
+export const getNyesteAdresse = (adresser: Personadresse[], adresseType: AdresseType): Personadresse | undefined =>
+  [...adresser].sort(sorterPerioder).find(adresse => adresse.adresseType === adresseType);

@@ -1,4 +1,6 @@
 export type Personadresse = Readonly<{
+  fom?: string | null;
+  tom?: string | null;
   adresseType?: string;
   adresselinje1?: string | null;
   adresselinje2?: string | null;
