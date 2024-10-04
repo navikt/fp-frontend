@@ -40,19 +40,19 @@
   "devDependencies": {
     "@formatjs/cli-lib": "6.4.2",
     "@navikt/fp-storybook-utils": "workspace:*",
-    "@storybook/addon-actions": "8.3.1",
-    "@storybook/react": "8.3.1",
-    "@storybook/react-vite": "8.3.1",
+    "@storybook/addon-actions": "8.3.5",
+    "@storybook/react": "8.3.5",
+    "@storybook/react-vite": "8.3.5",
     "@testing-library/dom": "10.4.0",
     "@testing-library/react": "16.0.1",
     "@testing-library/user-event": "14.5.2",
     "cross-env": "7.0.3",
-    "eslint": "9.10.0",
+    "eslint": "9.11.1",
     "fast-glob": "^3.3.2",
-    "storybook": "8.3.1",
+    "storybook": "8.3.5",
     "stylelint": "16.9.0",
     "typescript": "5.6.2",
-    "vite": "5.4.6",
-    "vitest": "2.1.1"
+    "vite": "5.4.8",
+    "vitest": "2.1.2"
   }
 }
