@@ -177,7 +177,7 @@ const GjeldendeSakslisterTabell: FunctionComponent<OwnProps> = ({
                 key={saksliste.sakslisteId}
                 className={saksliste.sakslisteId === valgtSakslisteId ? styles.isSelected : undefined}
                 onOpenChange={isOpen => setValgtSaksliste(isOpen, saksliste.sakslisteId)}
-                content={content}
+                content={saksliste.sakslisteId === valgtSakslisteId ? content : undefined}
                 open={saksliste.sakslisteId === valgtSakslisteId}
               >
                 <Table.DataCell>{saksliste.navn}</Table.DataCell>
