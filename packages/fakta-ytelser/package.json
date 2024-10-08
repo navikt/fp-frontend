@@ -19,19 +19,19 @@
     "storybook": "storybook dev --quiet -p 7018"
   },
   "dependencies": {
-    "@navikt/ds-react": "7.0.0",
+    "@navikt/ds-react": "7.2.0",
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-types": "workspace:*",
-    "@navikt/ft-kodeverk": "2.5.0",
-    "@navikt/ft-types": "2.5.0",
-    "@navikt/ft-ui-komponenter": "2.5.0",
-    "@navikt/ft-utils": "2.4.0",
+    "@navikt/ft-kodeverk": "2.5.2",
+    "@navikt/ft-types": "2.5.2",
+    "@navikt/ft-ui-komponenter": "2.5.2",
+    "@navikt/ft-utils": "2.4.2",
     "moment": "2.30.1",
     "react": "18.3.1",
     "react-intl": "6.6.8"
   },
   "devDependencies": {
-    "@navikt/ds-css": "7.0.0",
+    "@navikt/ds-css": "7.2.0",
     "@navikt/fp-storybook-utils": "workspace:*",
     "@storybook/addon-actions": "8.3.1",
     "@storybook/react": "8.3.1",
