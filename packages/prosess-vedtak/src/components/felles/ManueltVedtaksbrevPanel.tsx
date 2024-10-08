@@ -78,6 +78,7 @@ const ManueltVedtaksbrevPanel: FunctionComponent<OwnProps> = ({
         validate={[required, minLength3, maxLength200, hasValidText]}
         maxLength={200}
         readOnly={isReadOnly}
+        parse={formaterFritekst}
         className={styles.smallTextArea}
       />
       <VerticalSpacer thirtyTwoPx />
