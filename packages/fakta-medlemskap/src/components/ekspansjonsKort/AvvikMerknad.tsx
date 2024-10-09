@@ -10,7 +10,7 @@ const getFormateringsIdForAvvik = (avvik: MedlemskapAvvik) => {
     case MedlemskapAvvik.BOSATT_UTENLANDSOPPHOLD:
       return 'AvvikMerknad.BosattUtenlandsopphold';
     case MedlemskapAvvik.BOSATT_MANGLENDE_BOSTEDSADRESSE:
-      return 'AvvikMerknad.BosattManglendeAdresse';
+      return 'AvvikMerknad.BosattManglendeBostedsadresse';
     case MedlemskapAvvik.BOSATT_UGYLDIG_PERSONSTATUS:
       return 'AvvikMerknad.BosattUgyldigPersonstatus';
     case MedlemskapAvvik.BOSATT_UTENLANDSADRESSE:
