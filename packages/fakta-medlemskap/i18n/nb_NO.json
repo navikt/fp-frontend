@@ -113,7 +113,7 @@
 
   "OpplysningerOmAdresser.Soker": "Søker, {navn}",
   "OpplysningerOmAdresser.Soker.Beskrivelse": "Adresser for søker registrert i folkeregisteret gyldige for de siste 12 månedene",
-  "OpplysningerOmAdresser.Annenpart": "Annen part, {navn}",
+  "OpplysningerOmAdresser.Annenpart": "Annen part{navn, select, none {} other {, {navn}}}",
   "OpplysningerOmAdresser.Annenpart.Beskrivelse": "Adresser for annen part registrert i folkeregisteret gyldige på skjæringstidspunktet",
 
   "OpplysningerOmAdresser.Tabell.IngenAdresse": "Ingen adresser funnet for {erAnnenpart, select, true {den andre forelderen} other {søker} }.",
@@ -123,7 +123,7 @@
   "OpplysningerOmAdresser.TypeLabel": "Type",
 
   "OpplysningerOmPersonstatus.Soker": "Søker, {navn}",
-  "OpplysningerOmPersonstatus.Annenpart": "Annen part, {navn}",
+  "OpplysningerOmPersonstatus.Annenpart": "Annen part{navn, select, none {} other {, {navn}}}",
 
   "OpplysningerOmPersonstatus.RegionLabel": "Region for statsborgerskap",
   "OpplysningerOmPersonstatus.PersonstatusLabel": "Personstatus",

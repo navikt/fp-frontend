@@ -56,7 +56,7 @@ const OpplysningerOmPersonstatus: FC<Props> = ({
           <AvsnittSkiller dividerParagraf />
           <VStack gap="4" aria-label={`Personstatus og statsborgerskap for ${annenpartNavn}`}>
             <Label>
-              <FormattedMessage id="OpplysningerOmPersonstatus.Annenpart" values={{ navn: annenpartNavn }} />
+              <FormattedMessage id="OpplysningerOmPersonstatus.Annenpart" values={{ navn: annenpartNavn ?? 'none' }} />
             </Label>
             <PersonstatusVisning personstatuser={annenpart.personstatuser} alleKodeverk={alleKodeverk} erAnnenpart />
             <RegionVisning regioner={annenpart.regioner} alleKodeverk={alleKodeverk} erAnnenpart />
