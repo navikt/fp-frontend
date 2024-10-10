@@ -127,7 +127,7 @@ const OpplysningerOmAdresser: FC<Props> = ({
       {annenpart && (
         <>
           <Label>
-            <FormattedMessage id="OpplysningerOmAdresser.Annenpart" values={{ navn: annenpartNavn }} />
+            <FormattedMessage id="OpplysningerOmAdresser.Annenpart" values={{ navn: annenpartNavn ?? 'none' }} />
           </Label>
           <Detail>
             <FormattedMessage id="OpplysningerOmAdresser.Annenpart.Beskrivelse" />
