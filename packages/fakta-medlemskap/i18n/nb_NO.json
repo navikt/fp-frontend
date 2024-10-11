@@ -5,6 +5,8 @@
   "MedlemskapInfoPanel.IkkeEOSBorgerMedLovligOpphold": "Avklar om søker har lovlig opphold",
   "MedlemskapInfoPanel.HarFortsattMedlemskap": "Vurder om søker fortsatt har gyldig medlemskap i perioden",
 
+  "MedlemskapInfoPanel.ManglerPersonopplysninger": "Saken har på dette tidspunktet ikke hentet inn personopplysninger fra register",
+
   "StartdatoForForeldrepengerperiodenForm.StartdatoFør2019": "Startdato kan ikke være før 01.01.2019",
   "StartdatoForForeldrepengerperiodenForm.StartdatoForPerioden": "Startdato for foreldrepengeperioden",
   "StartdatoForForeldrepengerperiodenForm.Vurdering": "Vurdering",
