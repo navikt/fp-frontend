@@ -29,7 +29,7 @@
     "@navikt/ft-utils": "2.4.4",
     "dayjs": "1.11.13",
     "react": "18.3.1",
-    "react-intl": "6.6.8"
+    "react-intl": "6.7.2"
   },
   "devDependencies": {
     "@navikt/ds-css": "7.2.0",
