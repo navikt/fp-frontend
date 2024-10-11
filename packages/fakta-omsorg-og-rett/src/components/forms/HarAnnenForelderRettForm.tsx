@@ -1,18 +1,17 @@
-import React, { FunctionComponent, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
-import { Button, Label } from '@navikt/ds-react';
+import { Button, Label, VStack } from '@navikt/ds-react';
 import { Form, TextAreaField } from '@navikt/ft-form-hooks';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
-import { FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { Aksjonspunkt } from '@navikt/ft-types';
 import { Ytelsefordeling } from '@navikt/fp-types';
 import { AvklarAnnenforelderHarRettAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
-import { Boks } from '@navikt/fp-fakta-felles';
 
-import HarAnnenForelderRettFelter from './HarAnnenForelderRettFelter';
+import { HarAnnenForelderRettFelter } from './HarAnnenForelderRettFelter';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
@@ -24,7 +23,7 @@ export type FormValues = {
   begrunnelse: string;
 };
 
-interface OwnProps {
+interface Props {
   ytelsefordeling: Ytelsefordeling;
   aksjonspunkt: Aksjonspunkt;
   readOnly: boolean;
@@ -34,7 +33,7 @@ interface OwnProps {
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
 }
 
-const HarAnnenForelderRettForm: FunctionComponent<OwnProps> = ({
+export const HarAnnenForelderRettForm = ({
   ytelsefordeling,
   readOnly,
   aksjonspunkt,
@@ -42,7 +41,7 @@ const HarAnnenForelderRettForm: FunctionComponent<OwnProps> = ({
   setFormData,
   lagreCallback,
   alleMerknaderFraBeslutter,
-}) => {
+}: Props) => {
   const formMethods = useForm<FormValues>({
     defaultValues: formData || {
       harAnnenForelderRett: ytelsefordeling?.rettigheterAnnenforelder?.bekreftetAnnenforelderRett,
@@ -73,18 +72,16 @@ const HarAnnenForelderRettForm: FunctionComponent<OwnProps> = ({
 
   return (
     <Form formMethods={formMethods} onSubmit={transformerFeltverdier} setDataOnUnmount={setFormData}>
-      <Boks harBorderTop={false}>
-        <FaktaGruppe
-          withoutBorder
-          merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.AVKLAR_ANNEN_FORELDER_RETT]}
-        >
-          <VerticalSpacer thirtyTwoPx />
+      <FaktaGruppe
+        withoutBorder
+        merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.AVKLAR_ANNEN_FORELDER_RETT]}
+      >
+        <VStack gap="6">
           <HarAnnenForelderRettFelter
             readOnly={readOnly}
             avklareUforetrygd={skalAvklareUforetrygd}
             avklareRettEØS={skalAvklareRettEØS}
           />
-          <VerticalSpacer thirtyTwoPx />
           <TextAreaField
             label={
               <Label size="small">
@@ -96,7 +93,6 @@ const HarAnnenForelderRettForm: FunctionComponent<OwnProps> = ({
             maxLength={1500}
             readOnly={readOnly}
           />
-          <VerticalSpacer sixteenPx />
           {!readOnly && (
             <Button
               size="small"
@@ -107,10 +103,8 @@ const HarAnnenForelderRettForm: FunctionComponent<OwnProps> = ({
               <FormattedMessage id="HarAnnenForelderRettForm.Bekreft" />
             </Button>
           )}
-        </FaktaGruppe>
-      </Boks>
+        </VStack>
+      </FaktaGruppe>
     </Form>
   );
 };
-
-export default HarAnnenForelderRettForm;

@@ -4,17 +4,17 @@ import { RawIntlProvider } from 'react-intl';
 import { StandardFaktaPanelProps, Personoversikt, Ytelsefordeling } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
-import OmsorgOgRettFaktaForm from './components/OmsorgOgRettFaktaForm';
+import { OmsorgOgRettInfoPanel } from './components/OmsorgOgRettInfoPanel';
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-interface OwnProps {
+interface Props {
   personoversikt: Personoversikt;
   ytelsefordeling: Ytelsefordeling;
 }
 
-const OmsorgOgRettFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
+const OmsorgOgRettFaktaIndex = ({
   personoversikt,
   ytelsefordeling,
   aksjonspunkter,
@@ -24,9 +24,9 @@ const OmsorgOgRettFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelPro
   formData,
   setFormData,
   alleMerknaderFraBeslutter,
-}) => (
+}: Props & StandardFaktaPanelProps) => (
   <RawIntlProvider value={intl}>
-    <OmsorgOgRettFaktaForm
+    <OmsorgOgRettInfoPanel
       aksjonspunkter={aksjonspunkter}
       personoversikt={personoversikt}
       ytelsefordeling={ytelsefordeling}

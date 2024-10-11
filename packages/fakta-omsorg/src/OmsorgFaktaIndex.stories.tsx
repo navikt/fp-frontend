@@ -21,6 +21,8 @@ const behandling = {
 
 const adresser = [
   {
+    fom: '2019-01-01',
+    tom: '2020-01-01',
     adresseType: AdresseType.BOSTEDSADRESSE,
     adresselinje1: 'Veigata 1',
     adresselinje2: 'Oddelandet',

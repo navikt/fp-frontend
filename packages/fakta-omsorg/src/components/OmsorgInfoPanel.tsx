@@ -1,20 +1,16 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
-
 import { Form } from '@navikt/ft-form-hooks';
-import { Heading } from '@navikt/ds-react';
-
+import { VStack } from '@navikt/ds-react';
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
-import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import {
-  AlleBarnPanel,
   FaktaBegrunnelseTextFieldNew,
   FaktaSubmitButtonNew,
-  ForelderPanel,
-  Boks,
+  PersonopplysningerForFamilie,
 } from '@navikt/fp-fakta-felles';
-import { Aksjonspunkt, AlleKodeverk, KjønnkodeEnum, Personoversikt, Ytelsefordeling } from '@navikt/fp-types';
+import { Aksjonspunkt, AlleKodeverk, Personoversikt, Ytelsefordeling } from '@navikt/fp-types';
 import { BekreftOmsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import OmsorgFaktaForm, { FormValues as OmsorgFormValues } from './OmsorgFaktaForm';
@@ -39,9 +35,6 @@ const buildInitialValues = (ytelsefordeling: Ytelsefordeling, aksjonspunkter: Ak
     ...FaktaBegrunnelseTextFieldNew.buildInitialValues(omsorgAp),
   };
 };
-
-const finnMotsattKjønn = (kjønn: string) =>
-  kjønn === KjønnkodeEnum.KVINNE ? KjønnkodeEnum.MANN : KjønnkodeEnum.KVINNE;
 
 const transformValues = (values: FormValues): BekreftOmsorgVurderingAp => ({
   ...OmsorgFaktaForm.transformOmsorgValues(values),
@@ -84,58 +77,37 @@ const OmsorgInfoPanel: FunctionComponent<OwnProps> = ({
   });
 
   return (
-    <>
-      <Heading size="small">
-        <FormattedMessage id="OmsorgInfoPanel.Overskrift" />
-      </Heading>
-      <VerticalSpacer thirtyTwoPx />
+    <VStack gap="8">
       {!readOnly && hasOpenAksjonspunkter && (
         <AksjonspunktHelpTextHTML>{getHelpTexts(aksjonspunkter)}</AksjonspunktHelpTextHTML>
       )}
-      <VerticalSpacer thirtyTwoPx />
-      <AlleBarnPanel alleBarn={personoversikt.barn} />
-      <ForelderPanel
-        forelder={personoversikt.bruker}
-        kjønn={personoversikt.bruker.kjønn}
-        erSøker
-        alleKodeverk={alleKodeverk}
-      />
-      {personoversikt.annenPart && (
-        <ForelderPanel
-          forelder={personoversikt.annenPart}
-          kjønn={personoversikt.annenPart.kjønn || finnMotsattKjønn(personoversikt.bruker.kjønn)}
-          alleKodeverk={alleKodeverk}
-        />
-      )}
+      <PersonopplysningerForFamilie alleKodeverk={alleKodeverk} personoversikt={personoversikt} />
       <Form
         formMethods={formMethods}
         onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
         setDataOnUnmount={setFormData}
       >
-        <Boks harBorderTop={false}>
-          <VerticalSpacer sixteenPx />
+        <VStack gap="6">
           <OmsorgFaktaForm
             readOnly={readOnly}
             aksjonspunkter={aksjonspunkter}
             alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
           />
-          <VerticalSpacer thirtyTwoPx />
           <FaktaBegrunnelseTextFieldNew
             isSubmittable={submittable}
             isReadOnly={readOnly}
             hasBegrunnelse={true}
             hasVurderingText
           />
-          <VerticalSpacer sixteenPx />
           <FaktaSubmitButtonNew
             isSubmittable={submittable}
             isReadOnly={readOnly}
             isSubmitting={formMethods.formState.isSubmitting}
             isDirty={formMethods.formState.isDirty}
           />
-        </Boks>
+        </VStack>
       </Form>
-    </>
+    </VStack>
   );
 };
 

@@ -1,14 +1,14 @@
-import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import React, { FunctionComponent } from 'react';
+import React from 'react';
+import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { FormattedMessage } from 'react-intl';
-import { Heading } from '@navikt/ds-react';
-import { AlleKodeverk, KjønnkodeEnum, Personoversikt, Ytelsefordeling } from '@navikt/fp-types';
+import { VStack } from '@navikt/ds-react';
+import { AlleKodeverk, Personoversikt, Ytelsefordeling } from '@navikt/fp-types';
 import { AvklarAnnenforelderHarRettAp, BekreftAleneomsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { Aksjonspunkt } from '@navikt/ft-types';
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
-import { AlleBarnPanel, ForelderPanel } from '@navikt/fp-fakta-felles';
-import AleneomsorgForm, { FormValues as AleneOmsorgValues } from './forms/AleneomsorgForm';
-import HarAnnenForelderRettForm, { FormValues as RettFormValues } from './forms/HarAnnenForelderRettForm';
+import { PersonopplysningerForFamilie } from '@navikt/fp-fakta-felles';
+import { AleneomsorgForm, FormValues as AleneomsorgFormValues } from './forms/AleneomsorgForm';
+import { HarAnnenForelderRettForm, FormValues as RettFormValues } from './forms/HarAnnenForelderRettForm';
 
 const finnAksjonspunktTekst = (aksjonspunkter: Aksjonspunkt[]): string => {
   if (aksjonspunkter.some(ap => ap.definisjon === AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG)) {
@@ -20,22 +20,19 @@ const finnAksjonspunktTekst = (aksjonspunkter: Aksjonspunkt[]): string => {
   return '';
 };
 
-const finnMotsattKjønn = (kjønn: string) =>
-  kjønn === KjønnkodeEnum.KVINNE ? KjønnkodeEnum.MANN : KjønnkodeEnum.KVINNE;
-
-interface OwnProps {
+interface Props {
   readOnly: boolean;
   personoversikt: Personoversikt;
   ytelsefordeling: Ytelsefordeling;
   alleKodeverk: AlleKodeverk;
   aksjonspunkter: Aksjonspunkt[];
   lagreCallback: (aksjonspunktData: BekreftAleneomsorgVurderingAp | AvklarAnnenforelderHarRettAp) => Promise<void>;
-  formData?: RettFormValues | AleneOmsorgValues;
-  setFormData: (data: RettFormValues | AleneOmsorgValues) => void;
+  formData?: RettFormValues | AleneomsorgFormValues;
+  setFormData: (data: RettFormValues | AleneomsorgFormValues) => void;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
 }
 
-const OmsorgOgRettFaktaIndex: FunctionComponent<OwnProps> = ({
+export const OmsorgOgRettInfoPanel = ({
   readOnly,
   personoversikt,
   ytelsefordeling,
@@ -45,42 +42,24 @@ const OmsorgOgRettFaktaIndex: FunctionComponent<OwnProps> = ({
   formData,
   setFormData,
   alleMerknaderFraBeslutter,
-}) => {
+}: Props) => {
   const aksjonspunktTekst = finnAksjonspunktTekst(aksjonspunkter);
   const harAleneomsorgAksjonspunkt = aksjonspunkter.some(
     ap => ap.definisjon === AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
   );
   return (
-    <>
-      <Heading size="small">
-        <FormattedMessage id="OmsorgOgRettFaktaForm.Overskrift" />
-      </Heading>
-      <VerticalSpacer thirtyTwoPx />
+    <VStack gap="8">
       {aksjonspunktTekst && (
         <AksjonspunktHelpTextHTML>
           <FormattedMessage id={aksjonspunktTekst} />
         </AksjonspunktHelpTextHTML>
       )}
-      <VerticalSpacer thirtyTwoPx />
-      <AlleBarnPanel alleBarn={personoversikt.barn} />
-      <ForelderPanel
-        forelder={personoversikt.bruker}
-        kjønn={personoversikt.bruker.kjønn}
-        erSøker
-        alleKodeverk={alleKodeverk}
-      />
-      {personoversikt.annenPart && (
-        <ForelderPanel
-          forelder={personoversikt.annenPart}
-          kjønn={personoversikt.annenPart.kjønn || finnMotsattKjønn(personoversikt.bruker.kjønn)}
-          alleKodeverk={alleKodeverk}
-        />
-      )}
+      <PersonopplysningerForFamilie alleKodeverk={alleKodeverk} personoversikt={personoversikt} />
       {harAleneomsorgAksjonspunkt && (
         <AleneomsorgForm
           ytelsefordeling={ytelsefordeling}
           readOnly={readOnly}
-          formData={formData as AleneOmsorgValues}
+          formData={formData as AleneomsorgFormValues}
           setFormData={setFormData}
           lagreCallback={lagreCallback}
           alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
@@ -98,8 +77,6 @@ const OmsorgOgRettFaktaIndex: FunctionComponent<OwnProps> = ({
           aksjonspunkt={aksjonspunkter[0]}
         />
       )}
-    </>
+    </VStack>
   );
 };
-
-export default OmsorgOgRettFaktaIndex;

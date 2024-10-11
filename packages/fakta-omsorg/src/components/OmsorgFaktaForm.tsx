@@ -20,10 +20,9 @@ export type FormValues = {
   omsorg?: boolean;
 };
 
-interface OwnProps {
+interface Props {
   aksjonspunkter: Aksjonspunkt[];
   readOnly: boolean;
-  className?: string;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
 }
 
@@ -33,17 +32,16 @@ interface StaticFunctions {
   validate?: (values: FormValues) => any;
 }
 
-const OmsorgFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
+const OmsorgFaktaForm: FunctionComponent<Props> & StaticFunctions = ({
   aksjonspunkter,
   readOnly,
-  className,
   alleMerknaderFraBeslutter,
 }) => {
   const intl = useIntl();
   const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
 
   return (
-    <div className={className || styles.defaultAleneOmsorgFakta}>
+    <>
       {hasAksjonspunkt(MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG, aksjonspunkter) && (
         <FaktaGruppe
           withoutBorder
@@ -68,7 +66,7 @@ const OmsorgFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
           />
         </FaktaGruppe>
       )}
-    </div>
+    </>
   );
 };
 

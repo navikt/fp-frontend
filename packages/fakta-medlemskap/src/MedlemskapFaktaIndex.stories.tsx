@@ -146,6 +146,8 @@ const lagMedlemskap = (override: Partial<Medlemskap>): Medlemskap => ({
       fom: '2019-01-01',
       tom: TIDENES_ENDE,
       adresse: {
+        fom: '2019-01-01',
+        tom: TIDENES_ENDE,
         adresseType: AdresseType.BOSTEDSADRESSE,
         adresselinje1: 'Oslogata 1',
         adresselinje2: null,
@@ -159,6 +161,8 @@ const lagMedlemskap = (override: Partial<Medlemskap>): Medlemskap => ({
       fom: '2020-01-01',
       tom: '2021-01-01',
       adresse: {
+        fom: '2020-01-01',
+        tom: '2021-01-01',
         adresseType: AdresseType.POSTADRESSE_UTLAND,
         adresselinje1: 'Mäkelänkatu 1B',
         adresselinje2: null,
@@ -194,6 +198,8 @@ const lagMedlemskap = (override: Partial<Medlemskap>): Medlemskap => ({
         fom: '2019-01-01',
         tom: TIDENES_ENDE,
         adresse: {
+          fom: '2019-01-01',
+          tom: TIDENES_ENDE,
           adresseType: AdresseType.BOSTEDSADRESSE,
           adresselinje1: 'Oslogata 1',
           adresselinje2: null,
@@ -207,6 +213,8 @@ const lagMedlemskap = (override: Partial<Medlemskap>): Medlemskap => ({
         fom: '2020-01-01',
         tom: '2021-01-01',
         adresse: {
+          fom: '2020-01-01',
+          tom: '2021-01-01',
           adresseType: AdresseType.POSTADRESSE_UTLAND,
           adresselinje1: 'Mäkelänkatu 1B',
           adresselinje2: null,
@@ -276,6 +284,8 @@ VurderingAvMedlemskapMedlemskapMedEtAvvik.args = {
         fom: '2024-09-10',
         tom: TIDENES_ENDE,
         adresse: {
+          fom: '2024-09-10',
+          tom: TIDENES_ENDE,
           adresseType: AdresseType.POSTADRESSE_UTLAND,
           adresselinje1: 'Kirkeveien 1',
           adresselinje2: null,
@@ -289,6 +299,8 @@ VurderingAvMedlemskapMedlemskapMedEtAvvik.args = {
         fom: '2022-09-01',
         tom: TIDENES_ENDE,
         adresse: {
+          fom: '2022-09-01',
+          tom: TIDENES_ENDE,
           adresseType: AdresseType.BOSTEDSADRESSE,
           adresselinje1: 'Krattstien 4',
           adresselinje2: null,
