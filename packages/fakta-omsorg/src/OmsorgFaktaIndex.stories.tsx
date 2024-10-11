@@ -5,8 +5,9 @@ import { Aksjonspunkt } from '@navikt/ft-types';
 
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { AksjonspunktCode, sivilstandType, aksjonspunktStatus, AdresseType } from '@navikt/fp-kodeverk';
-import { Behandling, KjønnkodeEnum, Personoversikt, Ytelsefordeling } from '@navikt/fp-types';
+import { Behandling, KjønnkodeEnum, PersonopplysningerBasis, Ytelsefordeling } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 import OmsorgFaktaIndex from './OmsorgFaktaIndex';
 
@@ -19,49 +20,50 @@ const behandling = {
   versjon: 1,
 } as Behandling;
 
-const adresser = [
-  {
-    fom: '2019-01-01',
-    tom: '2020-01-01',
-    adresseType: AdresseType.BOSTEDSADRESSE,
-    adresselinje1: 'Veigata 1',
-    adresselinje2: 'Oddelandet',
-    adresselinje3: 'Leilighet 2',
-    postNummer: '0123',
-    poststed: 'Bobygda',
-    land: 'Norge',
-  },
-];
+const adresse1 = {
+  fom: '2023-01-01',
+  tom: TIDENES_ENDE,
+  adresseType: AdresseType.BOSTEDSADRESSE,
+  adresselinje1: 'Industrigata 2B',
+  postNummer: '4123',
+  poststed: 'Bobygda',
+  land: 'Norge',
+};
+const adresse2 = {
+  fom: '2019-01-01',
+  tom: '2023-01-01',
+  adresseType: AdresseType.BOSTEDSADRESSE,
+  adresselinje1: 'Veigata 1',
+  postNummer: '0203',
+  poststed: 'Bobygda',
+  land: 'Norge',
+};
 
-const personoversikt = {
-  bruker: {
-    navn: 'Espen Utvikler',
-    aktoerId: '1',
-    kjønn: KjønnkodeEnum.MANN,
-    sivilstand: sivilstandType.SAMBOER,
-    fødselsdato: '1989-01-01',
-    adresser,
-  },
-  annenPart: {
-    navn: 'Petra Utvikler',
-    aktoerId: '2',
-    kjønn: KjønnkodeEnum.KVINNE,
-    sivilstand: sivilstandType.SAMBOER,
-    fødselsdato: '1989-01-01',
-    adresser,
-  },
-  barn: [
-    {
-      navn: 'Tutta Utvikler',
-      dødsdato: '2019-01-01',
-      fødselsdato: '2018-01-01',
-      adresser,
-      aktoerId: '3',
-      kjønn: KjønnkodeEnum.KVINNE,
-      sivilstand: sivilstandType.UGIFT,
-    },
-  ],
-} as Personoversikt;
+const defaultBruker: PersonopplysningerBasis = {
+  navn: 'Espen Utvikler',
+  aktoerId: '1',
+  kjønn: KjønnkodeEnum.MANN,
+  sivilstand: sivilstandType.SAMBOER,
+  fødselsdato: '1989-01-01',
+  adresser: [adresse1, adresse2],
+};
+const defaultAnnenPart: PersonopplysningerBasis = {
+  navn: 'Petra Utvikler',
+  aktoerId: '2',
+  kjønn: KjønnkodeEnum.KVINNE,
+  sivilstand: sivilstandType.SAMBOER,
+  fødselsdato: '1989-01-01',
+  adresser: [adresse1, adresse2],
+};
+const defaultBarn: PersonopplysningerBasis = {
+  navn: 'Tutta Utvikler',
+  dødsdato: '2023-04-01',
+  fødselsdato: '2023-04-01',
+  adresser: [adresse2],
+  aktoerId: '3',
+  kjønn: KjønnkodeEnum.KVINNE,
+  sivilstand: sivilstandType.UGIFT,
+};
 
 const ytelsefordeling = {} as Ytelsefordeling;
 
@@ -76,9 +78,19 @@ export default {
 
 const Template: StoryFn<{
   aksjonspunkter: Aksjonspunkt[];
-  submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
+  submitCallback?: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
-}> = ({ aksjonspunkter, submitCallback, alleMerknaderFraBeslutter }) => (
+  bruker?: PersonopplysningerBasis;
+  annenPart?: PersonopplysningerBasis;
+  barn?: PersonopplysningerBasis[];
+}> = ({
+  aksjonspunkter,
+  submitCallback = action('button-click') as (data: any) => Promise<any>,
+  alleMerknaderFraBeslutter,
+  annenPart = defaultAnnenPart,
+  bruker = defaultBruker,
+  barn = [defaultBarn],
+}) => (
   <OmsorgFaktaIndex
     submitCallback={submitCallback}
     readOnly={false}
@@ -87,7 +99,7 @@ const Template: StoryFn<{
     setFormData={() => undefined}
     behandling={behandling}
     ytelsefordeling={ytelsefordeling}
-    personoversikt={personoversikt}
+    personoversikt={{ barn, annenPart, bruker }}
     aksjonspunkter={aksjonspunkter}
     alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
     alleKodeverk={alleKodeverk as any}
@@ -96,6 +108,9 @@ const Template: StoryFn<{
 
 export const ÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg = Template.bind({});
 ÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg.args = {
+  annenPart: defaultAnnenPart,
+  bruker: defaultBruker,
+  barn: [defaultBarn],
   aksjonspunkter: [
     {
       definisjon: AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG,
@@ -107,5 +122,4 @@ export const ÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg = Template.bind({}
   alleMerknaderFraBeslutter: {
     [AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG]: merknaderFraBeslutter,
   },
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
 };

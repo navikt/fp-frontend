@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { StandardFaktaPanelProps, Personoversikt, Ytelsefordeling } from '@navikt/fp-types';
@@ -9,34 +9,14 @@ import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-interface Props {
+export interface OmsorgOgRettProps {
   personoversikt: Personoversikt;
   ytelsefordeling: Ytelsefordeling;
 }
 
-const OmsorgOgRettFaktaIndex = ({
-  personoversikt,
-  ytelsefordeling,
-  aksjonspunkter,
-  alleKodeverk,
-  readOnly,
-  submitCallback,
-  formData,
-  setFormData,
-  alleMerknaderFraBeslutter,
-}: Props & StandardFaktaPanelProps) => (
+const OmsorgOgRettFaktaIndex = (props: OmsorgOgRettProps & StandardFaktaPanelProps) => (
   <RawIntlProvider value={intl}>
-    <OmsorgOgRettInfoPanel
-      aksjonspunkter={aksjonspunkter}
-      personoversikt={personoversikt}
-      ytelsefordeling={ytelsefordeling}
-      alleKodeverk={alleKodeverk}
-      readOnly={readOnly}
-      lagreCallback={submitCallback}
-      formData={formData}
-      setFormData={setFormData}
-      alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-    />
+    <OmsorgOgRettInfoPanel {...props} />
   </RawIntlProvider>
 );
 

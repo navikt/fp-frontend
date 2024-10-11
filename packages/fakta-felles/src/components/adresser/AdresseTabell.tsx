@@ -43,17 +43,19 @@ export const AdresseTabell: FC<AdresseTabellProps> = ({
       )}
       {adresser.length > 0 && (
         <Table style={{ tableLayout: 'fixed' }}>
-          <Table.Row>
-            <Table.HeaderCell>
-              <FormattedMessage id="AdresseTabell.PeriodeLabel" />
-            </Table.HeaderCell>
-            <Table.HeaderCell>
-              <FormattedMessage id="AdresseTabell.AdresseLabel" />
-            </Table.HeaderCell>
-            <Table.HeaderCell>
-              <FormattedMessage id="AdresseTabell.TypeLabel" />
-            </Table.HeaderCell>
-          </Table.Row>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell>
+                <FormattedMessage id="AdresseTabell.PeriodeLabel" />
+              </Table.HeaderCell>
+              <Table.HeaderCell>
+                <FormattedMessage id="AdresseTabell.AdresseLabel" />
+              </Table.HeaderCell>
+              <Table.HeaderCell>
+                <FormattedMessage id="AdresseTabell.TypeLabel" />
+              </Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
           <Table.Body>
             {adresser.sort(sorterPerioder).map((adresse, i) => {
               return (

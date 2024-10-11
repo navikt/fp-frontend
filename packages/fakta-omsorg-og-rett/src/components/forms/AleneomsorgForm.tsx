@@ -27,7 +27,7 @@ interface Props {
   ytelsefordeling: Ytelsefordeling;
   aksjonspunkt: Aksjonspunkt;
   readOnly: boolean;
-  lagreCallback: (aksjonspunktData: BekreftAleneomsorgVurderingAp) => Promise<void>;
+  submitCallback: (aksjonspunktData: BekreftAleneomsorgVurderingAp) => Promise<void>;
   formData?: FormValues;
   setFormData: (data: FormValues) => void;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
@@ -37,7 +37,7 @@ export const AleneomsorgForm = ({
   ytelsefordeling,
   aksjonspunkt,
   readOnly,
-  lagreCallback,
+  submitCallback,
   formData,
   setFormData,
   alleMerknaderFraBeslutter,
@@ -58,7 +58,7 @@ export const AleneomsorgForm = ({
 
   const transformerFeltverdier = useCallback(
     (feltVerdier: FormValues) =>
-      lagreCallback({
+      submitCallback({
         kode: AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
         aleneomsorg: feltVerdier.harAleneomsorg,
         annenforelderHarRett: feltVerdier.harAnnenForelderRett,
@@ -116,14 +116,16 @@ export const AleneomsorgForm = ({
             readOnly={readOnly}
           />
           {!readOnly && (
-            <Button
-              size="small"
-              variant="primary"
-              disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
-              loading={formMethods.formState.isSubmitting}
-            >
-              <FormattedMessage id="AleneomsorgForm.Bekreft" />
-            </Button>
+            <div>
+              <Button
+                size="small"
+                variant="primary"
+                disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
+                loading={formMethods.formState.isSubmitting}
+              >
+                <FormattedMessage id="AleneomsorgForm.Bekreft" />
+              </Button>
+            </div>
           )}
         </VStack>
       </FaktaGruppe>

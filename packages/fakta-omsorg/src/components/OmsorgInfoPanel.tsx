@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import { Form } from '@navikt/ft-form-hooks';
@@ -6,14 +6,14 @@ import { VStack } from '@navikt/ds-react';
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import {
+  PersonopplysningerForFamilie,
   FaktaBegrunnelseTextFieldNew,
   FaktaSubmitButtonNew,
-  PersonopplysningerForFamilie,
 } from '@navikt/fp-fakta-felles';
-import { Aksjonspunkt, AlleKodeverk, Personoversikt, Ytelsefordeling } from '@navikt/fp-types';
+import { Aksjonspunkt, Personoversikt, StandardFaktaPanelProps, Ytelsefordeling } from '@navikt/fp-types';
 import { BekreftOmsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import OmsorgFaktaForm, { FormValues as OmsorgFormValues } from './OmsorgFaktaForm';
+import { OmsorgFaktaFields, FormValues as OmsorgFormValues } from './OmsorgFaktaFields';
 
 const { MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG } = AksjonspunktCode;
 
@@ -31,13 +31,13 @@ const buildInitialValues = (ytelsefordeling: Ytelsefordeling, aksjonspunkter: Ak
     ap => ap.definisjon === AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG,
   );
   return {
-    ...OmsorgFaktaForm.buildInitialValues(ytelsefordeling, omsorgAp),
+    ...OmsorgFaktaFields.buildInitialValues(ytelsefordeling, omsorgAp),
     ...FaktaBegrunnelseTextFieldNew.buildInitialValues(omsorgAp),
   };
 };
 
 const transformValues = (values: FormValues): BekreftOmsorgVurderingAp => ({
-  ...OmsorgFaktaForm.transformOmsorgValues(values),
+  ...OmsorgFaktaFields.transformOmsorgValues(values),
   begrunnelse: values.begrunnelse,
 });
 
@@ -45,24 +45,16 @@ type FormValues = OmsorgFormValues & {
   begrunnelse?: string;
 };
 
-interface OwnProps {
-  aksjonspunkter: Aksjonspunkt[];
-  readOnly: boolean;
-  hasOpenAksjonspunkter: boolean;
-  submittable: boolean;
-  alleKodeverk: AlleKodeverk;
-  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
+interface Props {
   personoversikt: Personoversikt;
   ytelsefordeling: Ytelsefordeling;
   submitCallback: (data: BekreftOmsorgVurderingAp) => Promise<void>;
-  formData?: any;
-  setFormData: (data: any) => void;
 }
 
-const OmsorgInfoPanel: FunctionComponent<OwnProps> = ({
+const OmsorgInfoPanel = ({
   personoversikt,
   readOnly,
-  hasOpenAksjonspunkter,
+  harApneAksjonspunkter,
   submittable,
   aksjonspunkter,
   alleKodeverk,
@@ -71,14 +63,14 @@ const OmsorgInfoPanel: FunctionComponent<OwnProps> = ({
   alleMerknaderFraBeslutter,
   formData,
   setFormData,
-}) => {
+}: Props & StandardFaktaPanelProps) => {
   const formMethods = useForm<FormValues>({
     defaultValues: formData || buildInitialValues(ytelsefordeling, aksjonspunkter),
   });
 
   return (
     <VStack gap="8">
-      {!readOnly && hasOpenAksjonspunkter && (
+      {!readOnly && harApneAksjonspunkter && (
         <AksjonspunktHelpTextHTML>{getHelpTexts(aksjonspunkter)}</AksjonspunktHelpTextHTML>
       )}
       <PersonopplysningerForFamilie alleKodeverk={alleKodeverk} personoversikt={personoversikt} />
@@ -88,7 +80,7 @@ const OmsorgInfoPanel: FunctionComponent<OwnProps> = ({
         setDataOnUnmount={setFormData}
       >
         <VStack gap="6">
-          <OmsorgFaktaForm
+          <OmsorgFaktaFields
             readOnly={readOnly}
             aksjonspunkter={aksjonspunkter}
             alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
@@ -99,12 +91,14 @@ const OmsorgInfoPanel: FunctionComponent<OwnProps> = ({
             hasBegrunnelse={true}
             hasVurderingText
           />
-          <FaktaSubmitButtonNew
-            isSubmittable={submittable}
-            isReadOnly={readOnly}
-            isSubmitting={formMethods.formState.isSubmitting}
-            isDirty={formMethods.formState.isDirty}
-          />
+          <div>
+            <FaktaSubmitButtonNew
+              isSubmittable={submittable}
+              isReadOnly={readOnly}
+              isSubmitting={formMethods.formState.isSubmitting}
+              isDirty={formMethods.formState.isDirty}
+            />
+          </div>
         </VStack>
       </Form>
     </VStack>

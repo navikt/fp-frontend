@@ -17,31 +17,15 @@ describe('<OmsorgOgRettFaktaIndex>', () => {
 
     const utils = render(<HarAksjonspunktForAvklarAleneomsorg submitCallback={lagreVurdering} />);
 
-    expect(await screen.findByText('Fakta om omsorg og rett')).toBeInTheDocument();
-    expect(screen.getByText('Vurder om søker har aleneomsorg for barnet.')).toBeInTheDocument();
+    expect(await screen.findByText('Vurder om søker har aleneomsorg for barnet.')).toBeInTheDocument();
 
-    expect(screen.getByText('Barn 1')).toBeInTheDocument();
-    expect(screen.getByText('Tutta Utvikler')).toBeInTheDocument();
-    expect(screen.getByText('Født')).toBeInTheDocument();
-    expect(screen.getByText('01.01.2018')).toBeInTheDocument();
-    expect(screen.getByText('Død')).toBeInTheDocument();
-    expect(screen.getByText('01.01.2019')).toBeInTheDocument();
+    expect(screen.getByText('Barnet, Tutta Utvikler')).toBeInTheDocument();
 
-    expect(screen.getAllByText('Søker')).toHaveLength(3);
-    expect(screen.getByText('Espen Utvikler')).toBeInTheDocument();
+    expect(screen.getByText('Søker, Espen Utvikler')).toBeInTheDocument();
+    expect(screen.getByText('Den andre forelderen, Petra Utvikler')).toBeInTheDocument();
 
-    expect(screen.getByText('Annen forelder')).toBeInTheDocument();
-    expect(screen.getByText('Petra Utvikler')).toBeInTheDocument();
-
-    expect(screen.getAllByText('Samboer')).toHaveLength(2);
-
-    expect(screen.getAllByText('Adresse')).toHaveLength(3);
-    expect(screen.getAllByText('Veigata 1')).toHaveLength(3);
-    expect(screen.getAllByText('Oddelandet')).toHaveLength(3);
-    expect(screen.getAllByText('Leilighet 2')).toHaveLength(3);
-    expect(screen.getAllByText('0123 Bobygda, Norge')).toHaveLength(3);
-
-    expect(screen.queryByText('Barn 2')).not.toBeInTheDocument();
+    expect(screen.getAllByText('Veigata 1, 0203 Bobygda')).toHaveLength(3);
+    expect(screen.getAllByText('Industrigata 2B, 4123 Bobygda')).toHaveLength(2);
 
     expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 
@@ -68,8 +52,7 @@ describe('<OmsorgOgRettFaktaIndex>', () => {
 
     const utils = render(<HarAksjonspunktForAvklarAleneomsorg submitCallback={lagreVurdering} />);
 
-    expect(await screen.findByText('Fakta om omsorg og rett')).toBeInTheDocument();
-    expect(screen.getByText('Vurder om søker har aleneomsorg for barnet.')).toBeInTheDocument();
+    expect(await screen.findByText('Vurder om søker har aleneomsorg for barnet.')).toBeInTheDocument();
 
     expect(screen.getByText('Søker har oppgitt å ha aleneomsorg for barnet')).toBeInTheDocument();
     await userEvent.click(screen.getByLabelText('Søker har ikke aleneomsorg for barnet'));
@@ -94,12 +77,9 @@ describe('<OmsorgOgRettFaktaIndex>', () => {
   it('skal vise flere barn', async () => {
     render(<HarAksjonspunktForAvklarAleneomsorgMedFlereBarn />);
 
-    expect(await screen.findByText('Fakta om omsorg og rett')).toBeInTheDocument();
-    expect(screen.getByText('Barn 1')).toBeInTheDocument();
-    expect(screen.getByText('Tutta Utvikler')).toBeInTheDocument();
-    expect(screen.getByText('Barn 2')).toBeInTheDocument();
-    expect(screen.getByText('Petter Tester')).toBeInTheDocument();
-
+    expect(await screen.findByText('Vurder om søker har aleneomsorg for barnet.')).toBeInTheDocument();
+    expect(screen.getByText('Barnet, Tutta Utvikler')).toBeInTheDocument();
+    expect(screen.getByText('Barnet, Petter Tester')).toBeInTheDocument();
     expect(screen.getByText('Søker har oppgitt å ha aleneomsorg for barnet')).toBeInTheDocument();
   });
 
@@ -108,8 +88,7 @@ describe('<OmsorgOgRettFaktaIndex>', () => {
 
     const utils = render(<HarAksjonspunktForAvklarAnnenForelderRett submitCallback={lagreVurdering} />);
 
-    expect(await screen.findByText('Fakta om omsorg og rett')).toBeInTheDocument();
-    expect(screen.getByText('Vurder om den andre forelderen har rett til foreldrepenger.')).toBeInTheDocument();
+    expect(await screen.findByText('Vurder om den andre forelderen har rett til foreldrepenger.')).toBeInTheDocument();
 
     expect(screen.getByText('Har annen forelder rett til foreldrepenger i Norge?')).toBeInTheDocument();
     await userEvent.click(screen.getByText('Ja'));
@@ -132,8 +111,7 @@ describe('<OmsorgOgRettFaktaIndex>', () => {
 
     const utils = render(<HarAksjonspunktForAvklarAnnenForelderRett submitCallback={lagreVurdering} />);
 
-    expect(await screen.findByText('Fakta om omsorg og rett')).toBeInTheDocument();
-    expect(screen.getByText('Vurder om den andre forelderen har rett til foreldrepenger.')).toBeInTheDocument();
+    expect(await screen.findByText('Vurder om den andre forelderen har rett til foreldrepenger.')).toBeInTheDocument();
 
     expect(screen.getByText('Har annen forelder rett til foreldrepenger i Norge?')).toBeInTheDocument();
     await userEvent.click(screen.getByText('Nei'));

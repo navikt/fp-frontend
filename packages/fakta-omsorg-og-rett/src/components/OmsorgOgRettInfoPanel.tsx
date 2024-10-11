@@ -2,35 +2,23 @@ import React from 'react';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { FormattedMessage } from 'react-intl';
 import { VStack } from '@navikt/ds-react';
-import { AlleKodeverk, Personoversikt, Ytelsefordeling } from '@navikt/fp-types';
-import { AvklarAnnenforelderHarRettAp, BekreftAleneomsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { StandardFaktaPanelProps } from '@navikt/fp-types';
 import { Aksjonspunkt } from '@navikt/ft-types';
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktCode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
 import { PersonopplysningerForFamilie } from '@navikt/fp-fakta-felles';
 import { AleneomsorgForm, FormValues as AleneomsorgFormValues } from './forms/AleneomsorgForm';
 import { HarAnnenForelderRettForm, FormValues as RettFormValues } from './forms/HarAnnenForelderRettForm';
+import { OmsorgOgRettProps } from '../OmsorgOgRettFaktaIndex';
 
 const finnAksjonspunktTekst = (aksjonspunkter: Aksjonspunkt[]): string => {
-  if (aksjonspunkter.some(ap => ap.definisjon === AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG)) {
-    return 'OmsorgOgRettFaktaForm.VurderOmAleneomsorg';
+  if (hasAksjonspunkt(AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG, aksjonspunkter)) {
+    return 'OmsorgOgRettInfoPanel.VurderOmAleneomsorg';
   }
-  if (aksjonspunkter.some(ap => ap.definisjon === AksjonspunktCode.AVKLAR_ANNEN_FORELDER_RETT)) {
-    return 'OmsorgOgRettFaktaForm.VurderAndreForelderRett';
+  if (hasAksjonspunkt(AksjonspunktCode.AVKLAR_ANNEN_FORELDER_RETT, aksjonspunkter)) {
+    return 'OmsorgOgRettInfoPanel.VurderAndreForelderRett';
   }
   return '';
 };
-
-interface Props {
-  readOnly: boolean;
-  personoversikt: Personoversikt;
-  ytelsefordeling: Ytelsefordeling;
-  alleKodeverk: AlleKodeverk;
-  aksjonspunkter: Aksjonspunkt[];
-  lagreCallback: (aksjonspunktData: BekreftAleneomsorgVurderingAp | AvklarAnnenforelderHarRettAp) => Promise<void>;
-  formData?: RettFormValues | AleneomsorgFormValues;
-  setFormData: (data: RettFormValues | AleneomsorgFormValues) => void;
-  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
-}
 
 export const OmsorgOgRettInfoPanel = ({
   readOnly,
@@ -38,14 +26,15 @@ export const OmsorgOgRettInfoPanel = ({
   ytelsefordeling,
   alleKodeverk,
   aksjonspunkter,
-  lagreCallback,
+  submitCallback,
   formData,
   setFormData,
   alleMerknaderFraBeslutter,
-}: Props) => {
+}: OmsorgOgRettProps & StandardFaktaPanelProps) => {
   const aksjonspunktTekst = finnAksjonspunktTekst(aksjonspunkter);
-  const harAleneomsorgAksjonspunkt = aksjonspunkter.some(
-    ap => ap.definisjon === AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
+  const harAleneomsorgAksjonspunkt = hasAksjonspunkt(
+    AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
+    aksjonspunkter,
   );
   return (
     <VStack gap="8">
@@ -61,7 +50,7 @@ export const OmsorgOgRettInfoPanel = ({
           readOnly={readOnly}
           formData={formData as AleneomsorgFormValues}
           setFormData={setFormData}
-          lagreCallback={lagreCallback}
+          submitCallback={submitCallback}
           alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
           aksjonspunkt={aksjonspunkter[0]}
         />
@@ -72,7 +61,7 @@ export const OmsorgOgRettInfoPanel = ({
           readOnly={readOnly}
           formData={formData as RettFormValues}
           setFormData={setFormData}
-          lagreCallback={lagreCallback}
+          submitCallback={submitCallback}
           alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
           aksjonspunkt={aksjonspunkter[0]}
         />

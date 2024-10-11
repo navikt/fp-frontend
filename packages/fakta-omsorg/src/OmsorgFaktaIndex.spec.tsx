@@ -12,31 +12,11 @@ describe('<OmsorgFaktaIndex>', () => {
 
     const utils = render(<ÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg submitCallback={lagreVurdering} />);
 
-    expect(await screen.findByText('Fakta om omsorg')).toBeInTheDocument();
-    expect(screen.getByText('Vurder om søker har omsorg for barnet i søknadsperioden')).toBeInTheDocument();
+    expect(await screen.findByText('Vurder om søker har omsorg for barnet i søknadsperioden')).toBeInTheDocument();
 
-    expect(screen.getByText('Barn 1')).toBeInTheDocument();
-    expect(screen.getByText('Tutta Utvikler')).toBeInTheDocument();
-    expect(screen.getByText('Født')).toBeInTheDocument();
-    expect(screen.getByText('01.01.2018')).toBeInTheDocument();
-    expect(screen.getByText('Død')).toBeInTheDocument();
-    expect(screen.getByText('01.01.2019')).toBeInTheDocument();
-
-    expect(screen.getAllByText('Søker')).toHaveLength(3);
-    expect(screen.getByText('Espen Utvikler')).toBeInTheDocument();
-
-    expect(screen.getByText('Annen forelder')).toBeInTheDocument();
-    expect(screen.getByText('Petra Utvikler')).toBeInTheDocument();
-
-    expect(screen.getAllByText('Samboer')).toHaveLength(2);
-
-    expect(screen.getAllByText('Adresse')).toHaveLength(3);
-    expect(screen.getAllByText('Veigata 1')).toHaveLength(3);
-    expect(screen.getAllByText('Oddelandet')).toHaveLength(3);
-    expect(screen.getAllByText('Leilighet 2')).toHaveLength(3);
-    expect(screen.getAllByText('0123 Bobygda, Norge')).toHaveLength(3);
-
-    expect(screen.queryByText('Barn 2')).not.toBeInTheDocument();
+    expect(screen.getByText('Barnet, Tutta Utvikler')).toBeInTheDocument();
+    expect(screen.getByText('Søker, Espen Utvikler')).toBeInTheDocument();
+    expect(screen.getByText('Den andre forelderen, Petra Utvikler')).toBeInTheDocument();
 
     expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 
@@ -61,8 +41,7 @@ describe('<OmsorgFaktaIndex>', () => {
 
     const utils = render(<ÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg submitCallback={lagreVurdering} />);
 
-    expect(await screen.findByText('Fakta om omsorg')).toBeInTheDocument();
-    expect(screen.getByText('Vurder om søker har omsorg for barnet i søknadsperioden')).toBeInTheDocument();
+    expect(await screen.findByText('Vurder om søker har omsorg for barnet i søknadsperioden')).toBeInTheDocument();
 
     expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 

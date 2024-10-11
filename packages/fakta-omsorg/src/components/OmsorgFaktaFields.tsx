@@ -9,8 +9,6 @@ import { AksjonspunktCode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
 import { BekreftOmsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import styles from './omsorgFaktaForm.module.css';
-
 const { MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG } = AksjonspunktCode;
 
 const getAksjonspunkt = (aksjonspunktCode: string, aksjonspunkter: Aksjonspunkt[]): Aksjonspunkt[] =>
@@ -32,7 +30,7 @@ interface StaticFunctions {
   validate?: (values: FormValues) => any;
 }
 
-const OmsorgFaktaForm: FunctionComponent<Props> & StaticFunctions = ({
+export const OmsorgFaktaFields: FunctionComponent<Props> & StaticFunctions = ({
   aksjonspunkter,
   readOnly,
   alleMerknaderFraBeslutter,
@@ -49,17 +47,17 @@ const OmsorgFaktaForm: FunctionComponent<Props> & StaticFunctions = ({
         >
           <RadioGroupPanel
             name="omsorg"
-            label={<FormattedMessage id="OmsorgFaktaForm.OppgittOmsorg" />}
+            label={<FormattedMessage id="OmsorgFaktaFields.OppgittOmsorg" />}
             validate={[required]}
             isReadOnly={readOnly}
             isTrueOrFalseSelection
             radios={[
               {
-                label: intl.formatMessage({ id: 'OmsorgFaktaForm.HarOmsorg' }),
+                label: intl.formatMessage({ id: 'OmsorgFaktaFields.HarOmsorg' }),
                 value: 'true',
               },
               {
-                label: <FormattedMessage id="OmsorgFaktaForm.HarIkkeOmsorg" values={{ b: bTag }} />,
+                label: <FormattedMessage id="OmsorgFaktaFields.HarIkkeOmsorg" values={{ b: bTag }} />,
                 value: 'false',
               },
             ]}
@@ -70,7 +68,10 @@ const OmsorgFaktaForm: FunctionComponent<Props> & StaticFunctions = ({
   );
 };
 
-OmsorgFaktaForm.buildInitialValues = (ytelsefordeling: Ytelsefordeling, aksjonspunkter: Aksjonspunkt[]): FormValues => {
+OmsorgFaktaFields.buildInitialValues = (
+  ytelsefordeling: Ytelsefordeling,
+  aksjonspunkter: Aksjonspunkt[],
+): FormValues => {
   const omsorgAp = getAksjonspunkt(MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG, aksjonspunkter);
   let omsorg;
 
@@ -83,9 +84,7 @@ OmsorgFaktaForm.buildInitialValues = (ytelsefordeling: Ytelsefordeling, aksjonsp
   };
 };
 
-OmsorgFaktaForm.transformOmsorgValues = (values: FormValues): BekreftOmsorgVurderingAp => ({
+OmsorgFaktaFields.transformOmsorgValues = (values: FormValues): BekreftOmsorgVurderingAp => ({
   kode: MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG,
   omsorg: values.omsorg || false,
 });
-
-export default OmsorgFaktaForm;

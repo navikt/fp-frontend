@@ -29,7 +29,7 @@ interface Props {
   readOnly: boolean;
   formData?: FormValues;
   setFormData: (data: FormValues) => void;
-  lagreCallback: (aksjonspunktData: AvklarAnnenforelderHarRettAp) => Promise<void>;
+  submitCallback: (aksjonspunktData: AvklarAnnenforelderHarRettAp) => Promise<void>;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
 }
 
@@ -39,7 +39,7 @@ export const HarAnnenForelderRettForm = ({
   aksjonspunkt,
   formData,
   setFormData,
-  lagreCallback,
+  submitCallback,
   alleMerknaderFraBeslutter,
 }: Props) => {
   const formMethods = useForm<FormValues>({
@@ -60,7 +60,7 @@ export const HarAnnenForelderRettForm = ({
 
   const transformerFeltverdier = useCallback(
     (feltVerdier: FormValues) =>
-      lagreCallback({
+      submitCallback({
         kode: AksjonspunktCode.AVKLAR_ANNEN_FORELDER_RETT,
         annenforelderHarRett: feltVerdier.harAnnenForelderRett,
         annenforelderMottarUføretrygd: feltVerdier.mottarAnnenForelderUforetrygd,
@@ -94,14 +94,16 @@ export const HarAnnenForelderRettForm = ({
             readOnly={readOnly}
           />
           {!readOnly && (
-            <Button
-              size="small"
-              variant="primary"
-              disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
-              loading={formMethods.formState.isSubmitting}
-            >
-              <FormattedMessage id="HarAnnenForelderRettForm.Bekreft" />
-            </Button>
+            <div>
+              <Button
+                size="small"
+                variant="primary"
+                disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
+                loading={formMethods.formState.isSubmitting}
+              >
+                <FormattedMessage id="HarAnnenForelderRettForm.Bekreft" />
+              </Button>
+            </div>
           )}
         </VStack>
       </FaktaGruppe>

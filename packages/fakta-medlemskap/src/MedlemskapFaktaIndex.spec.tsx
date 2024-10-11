@@ -77,9 +77,11 @@ describe('<MedlemskapFaktaIndex>', () => {
     expect(adresser.getByText('01.01.2020 - 01.01.2021')).toBeInTheDocument();
     expect(adresser.getByText('Mäkelänkatu 1B, FI-00123 Helsinki, Finland')).toBeInTheDocument();
     expect(adresser.getByText('Kontaktadresse utland')).toBeInTheDocument();
-    expect(adresser.getByText('Annen part, Kari Nordmann')).toBeInTheDocument();
+    expect(adresser.getByText('Den andre forelderen, Kari Nordmann')).toBeInTheDocument();
     expect(
-      adresser.getByText('Adresser for annen part registrert i folkeregisteret gyldige på skjæringstidspunktet'),
+      adresser.getByText(
+        'Adresser for den andre forelderen registrert i folkeregisteret gyldige på skjæringstidspunktet',
+      ),
     ).toBeInTheDocument();
     expect(
       adresser.getByText('Den andre forelderen har samme adresse som søker på skjæringstidspunktet'),
