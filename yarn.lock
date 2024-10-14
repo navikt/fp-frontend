@@ -4293,7 +4293,6 @@ __metadata:
     "@navikt/fp-utbetalingsdata-is15": "workspace:*"
     "@navikt/fp-utils-test": "workspace:*"
     "@navikt/ft-fakta-beregning": 6.0.0
-    "@navikt/ft-fakta-beregning-redesign": 1.4.1
     "@navikt/ft-fakta-fordel-beregningsgrunnlag": 7.6.8
     "@navikt/ft-fakta-tilbakekreving-feilutbetaling": 2.5.8
     "@navikt/ft-form-hooks": 5.1.8
@@ -6089,50 +6088,6 @@ __metadata:
     vite: 5.4.6
   languageName: unknown
   linkType: soft
-
-"@navikt/ft-fakta-beregning-redesign@npm:1.4.1":
-  version: 1.4.1
-  resolution: "@navikt/ft-fakta-beregning-redesign@npm:1.4.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-beregning-redesign%2F1.4.1%2Fdad94bb5c19bb53f7a53356e15b2d53dfc6ea169"
-  dependencies:
-    "@navikt/aksel-icons": 7.1.2
-    "@navikt/ds-css": 7.1.2
-    "@navikt/ds-react": 7.1.2
-    "@navikt/ft-form-hooks": ^5.1.8
-    "@navikt/ft-form-validators": ^2.4.4
-    "@navikt/ft-kodeverk": ^2.5.3
-    "@navikt/ft-konstanter": ^2.4.3
-    "@navikt/ft-plattform-komponenter": ^5.0.0
-    "@navikt/ft-types": ^2.5.4
-    "@navikt/ft-ui-komponenter": ^2.5.4
-    "@navikt/ft-utils": ^2.4.4
-    core-js: 3.38.1
-    dayjs: 1.11.13
-    dayjs-plugin-utc: 0.1.2
-    react: 18.3.1
-    react-dom: 18.3.1
-    react-hook-form: 7.53.0
-    react-intl: 6.7.0
-  peerDependencies:
-    "@navikt/aksel-icons": 7.x
-    "@navikt/ds-css": 7.x
-    "@navikt/ds-react": 7.x
-    "@navikt/ft-form-hooks": 5.x
-    "@navikt/ft-form-validators": 2.x
-    "@navikt/ft-kodeverk": 2.x
-    "@navikt/ft-konstanter": 2.x
-    "@navikt/ft-types": 2.x
-    "@navikt/ft-ui-komponenter": 2.x
-    "@navikt/ft-utils": 2.x
-    core-js: 3.37.1
-    dayjs: 1.11.x
-    dayjs-plugin-utc: 0.1.2
-    react: 18.3.1
-    react-dom: 18.3.1
-    react-hook-form: 7.x
-    react-intl: 6.x
-  checksum: 67693b071b40b389b574717471d4bb9e6f16dd6f9aed10f0561d6ff0bc41c035a447dd5ee4b54bf653ea159b3e8a78667dbe3d38c82b5abdb1181de5825c7aa9
-  languageName: node
-  linkType: hard
 
 "@navikt/ft-fakta-beregning@npm:6.0.0":
   version: 6.0.0
