@@ -1,5 +1,7 @@
 import { Personadresse } from '@navikt/fp-types';
 import { AdresseType } from '@navikt/fp-kodeverk';
+import { isEqual } from 'lodash';
+
 import { sorterPerioder } from './periodeUtils';
 
 const PERSON_ADRESSE_LAND_NORGE = 'NORGE';
@@ -22,3 +24,14 @@ export const formaterAdresse = (adresse: Personadresse): string => {
 
 export const getNyesteAdresse = (adresser: Personadresse[], adresseType: AdresseType): Personadresse | undefined =>
   [...adresser].sort(sorterPerioder).find(adresse => adresse.adresseType === adresseType);
+
+export const erPersonAdresserLike = (list1: Personadresse[], list2: Personadresse[]): boolean => {
+  if (list1.length !== list2.length) {
+    return false;
+  }
+
+  return (
+    list1.every(obj1 => list2.some(obj2 => isEqual(obj1, obj2))) &&
+    list2.every(obj2 => list1.some(obj1 => isEqual(obj1, obj2)))
+  );
+};

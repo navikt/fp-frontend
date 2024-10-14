@@ -9,6 +9,18 @@
   "AlleBarnPanel.Fodt": "Født",
   "AlleBarnPanel.Dod": "Død",
 
+  "PersonPanel.RolleOgNavn": "{rolle, select, BRUKER {Søker, } ANNEN_PART {Den andre forelderen, } BARN {Barnet, } other {} }{navn}",
+  "PersonPanel.Beskrivelse.Bruker": "Adresser for søker registrert i folkeregisteret gyldige for de siste 12 månedene",
+  "PersonPanel.Beskrivelse.Barn": "Adresser for barnet registrert i folkeregisteret gyldige på skjæringstidspunktet",
+  "PersonPanel.Beskrivelse.Annenpart": "Adresser for den andre forelderen registrert i folkeregisteret gyldige på skjæringstidspunktet",
+  "PersonPanel.Fodt": "Født {dato}",
+  "PersonPanel.Dod": "Død {dato}",
+  "AdresseTabell.IngenAdresse": "Ingen adresser funnet for {erAnnenpart, select, true {den andre forelderen} other {søker} }.",
+  "AdresseTabell.SammeAdresse": "Den andre forelderen har samme adresse som søker på skjæringstidspunktet",
+  "AdresseTabell.PeriodeLabel": "Periode",
+  "AdresseTabell.AdresseLabel": "Adresse",
+  "AdresseTabell.TypeLabel": "Type",
+
   "MerkePanel.Dod": "DØD",
   "MerkePanel.DodTittel": "Personen er død",
   "MerkePanel.DodFodt": "DØDFØDT",

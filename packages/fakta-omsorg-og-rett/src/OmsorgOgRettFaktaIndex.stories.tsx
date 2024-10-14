@@ -2,12 +2,14 @@ import React from 'react';
 import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { Behandling, KjønnkodeEnum, Personoversikt, Ytelsefordeling } from '@navikt/fp-types';
+import { Behandling, KjønnkodeEnum, PersonopplysningerBasis, Ytelsefordeling } from '@navikt/fp-types';
 import { sivilstandType, AdresseType, AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { Aksjonspunkt } from '@navikt/ft-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { TIDENES_ENDE } from '@navikt/ft-utils';
+
 import OmsorgOgRettFaktaIndex from './OmsorgOgRettFaktaIndex';
 
 import '@navikt/ds-css';
@@ -19,56 +21,69 @@ export default {
   component: OmsorgOgRettFaktaIndex,
 };
 
-const adresser = [
-  {
-    adresseType: AdresseType.BOSTEDSADRESSE,
-    adresselinje1: 'Veigata 1',
-    adresselinje2: 'Oddelandet',
-    adresselinje3: 'Leilighet 2',
-    postNummer: '0123',
-    poststed: 'Bobygda',
-    land: 'Norge',
-  },
-];
+const adresse1 = {
+  fom: '2023-01-01',
+  tom: TIDENES_ENDE,
+  adresseType: AdresseType.BOSTEDSADRESSE,
+  adresselinje1: 'Industrigata 2B',
+  postNummer: '4123',
+  poststed: 'Bobygda',
+  land: 'Norge',
+};
 
-const defaultPersonoversikt = {
-  bruker: {
-    navn: 'Espen Utvikler',
-    aktoerId: '1',
-    kjønn: KjønnkodeEnum.MANN,
-    sivilstand: sivilstandType.SAMBOER,
-    fødselsdato: '1989-01-01',
-    adresser,
-  },
-  annenPart: {
-    navn: 'Petra Utvikler',
-    aktoerId: '2',
-    kjønn: KjønnkodeEnum.KVINNE,
-    sivilstand: sivilstandType.SAMBOER,
-    fødselsdato: '1989-01-01',
-    adresser,
-  },
-  barn: [
-    {
-      navn: 'Tutta Utvikler',
-      dødsdato: '2019-01-01',
-      fødselsdato: '2018-01-01',
-      adresser,
-      aktoerId: '3',
-      kjønn: KjønnkodeEnum.KVINNE.toString(),
-      sivilstand: sivilstandType.UGIFT,
-    },
-  ],
-} as Personoversikt;
+const adresse2 = {
+  fom: '2019-01-01',
+  tom: '2023-01-01',
+  adresseType: AdresseType.BOSTEDSADRESSE,
+  adresselinje1: 'Veigata 1',
+  postNummer: '0203',
+  poststed: 'Bobygda',
+  land: 'Norge',
+};
+
+const defaultBruker: PersonopplysningerBasis = {
+  navn: 'Espen Utvikler',
+  aktoerId: '1',
+  kjønn: KjønnkodeEnum.MANN,
+  sivilstand: sivilstandType.SAMBOER,
+  fødselsdato: '1989-01-01',
+  adresser: [adresse1, adresse2],
+};
+
+const defaultAnnenPart: PersonopplysningerBasis = {
+  navn: 'Petra Utvikler',
+  aktoerId: '2',
+  kjønn: KjønnkodeEnum.KVINNE,
+  sivilstand: sivilstandType.SAMBOER,
+  fødselsdato: '1989-01-01',
+  adresser: [adresse1, adresse2],
+};
+
+const defaultBarn: PersonopplysningerBasis = {
+  navn: 'Tutta Utvikler',
+  fødselsdato: '2018-01-01',
+  adresser: [adresse2],
+  aktoerId: '3',
+  kjønn: KjønnkodeEnum.KVINNE,
+  sivilstand: sivilstandType.UGIFT,
+};
 
 const Template: StoryFn<{
   aksjonspunkter: Aksjonspunkt[];
   submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
-  personoversikt: Personoversikt;
-}> = ({ aksjonspunkter, submitCallback, personoversikt }) => (
+  bruker: PersonopplysningerBasis;
+  annenPart?: PersonopplysningerBasis;
+  barn: PersonopplysningerBasis[];
+}> = ({
+  aksjonspunkter,
+  submitCallback = action('button-click') as (data: any) => Promise<any>,
+  annenPart = defaultAnnenPart,
+  bruker = defaultBruker,
+  barn = [defaultBarn],
+}) => (
   <OmsorgOgRettFaktaIndex
     behandling={{ uuid: 'test' } as Behandling}
-    personoversikt={personoversikt}
+    personoversikt={{ barn, annenPart, bruker }}
     ytelsefordeling={{} as Ytelsefordeling}
     submittable
     harApneAksjonspunkter
@@ -83,47 +98,40 @@ const Template: StoryFn<{
 
 export const HarAksjonspunktForAvklarAleneomsorg = Template.bind({});
 HarAksjonspunktForAvklarAleneomsorg.args = {
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [
     {
       definisjon: AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
       kanLoses: true,
     },
   ] as Aksjonspunkt[],
-  personoversikt: defaultPersonoversikt,
 };
 
 export const HarAksjonspunktForAvklarAleneomsorgMedFlereBarn = Template.bind({});
 HarAksjonspunktForAvklarAleneomsorgMedFlereBarn.args = {
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [
     {
       definisjon: AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
       kanLoses: true,
     },
   ] as Aksjonspunkt[],
-  personoversikt: {
-    ...defaultPersonoversikt,
-    barn: defaultPersonoversikt.barn.concat({
+  barn: [
+    defaultBarn,
+    {
+      ...defaultBarn,
       navn: 'Petter Tester',
-      dødsdato: undefined,
       fødselsdato: '2018-01-01',
-      adresser,
       aktoerId: '4',
-      kjønn: KjønnkodeEnum.MANN.toString(),
-      sivilstand: sivilstandType.UGIFT,
-    }),
-  },
+      kjønn: KjønnkodeEnum.MANN,
+    },
+  ],
 };
 
 export const HarAksjonspunktForAvklarAnnenForelderRett = Template.bind({});
 HarAksjonspunktForAvklarAnnenForelderRett.args = {
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [
     {
       definisjon: AksjonspunktCode.AVKLAR_ANNEN_FORELDER_RETT,
       kanLoses: true,
     },
   ] as Aksjonspunkt[],
-  personoversikt: defaultPersonoversikt,
 };

@@ -3383,6 +3383,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@navikt/aksel-icons@npm:^7.0.0":
+  version: 7.2.1
+  resolution: "@navikt/aksel-icons@npm:7.2.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-icons%2F7.2.1%2F8cc80c4d03f7d22428f72fd4cb6a93946b087db1"
+  checksum: 9579ec21d4d119567e0307d8a181d7ccc331ffce55de4ac353ad56837b918879a64a0ce94d90a9b2a67a255b84f6bf4f4a2fc9296d62c628bf772532c86686b6
+  languageName: node
+  linkType: hard
+
 "@navikt/aksel-stylelint@npm:7.2.0":
   version: 7.2.0
   resolution: "@navikt/aksel-stylelint@npm:7.2.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-stylelint%2F7.2.0%2Fc9ea78f722d90ce3d6d823f6459c67c1b9abee4b"
@@ -3401,6 +3408,13 @@ __metadata:
   version: 4.4.0
   resolution: "@navikt/ds-css@npm:4.4.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-css%2F4.4.0%2Ff8793291536f0e8ff8a6a28a58b7173efccb4254"
   checksum: 155414092e2f99d14305d2d36c84f4586a36866b4fabe21ff33af5feb01b6609e92024154604d71232d05553a5d1d4479a444f9b07b8227e6a8644e3f98eb63c
+  languageName: node
+  linkType: hard
+
+"@navikt/ds-css@npm:7.0.0":
+  version: 7.0.0
+  resolution: "@navikt/ds-css@npm:7.0.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-css%2F7.0.0%2F24c8994367516a16e383a49d6940e34472ec9413"
+  checksum: 8d5ac506f9236b84ef9d1b7e5d2668c580371108eb6004c94be3ee207ab81f723dbe1502738c32ee751d4771c4ce63e37417b512e7034eb4051d700a524a04d9
   languageName: node
   linkType: hard
 
@@ -3431,6 +3445,24 @@ __metadata:
     "@types/react": ^17.0.30 || ^18.0.0
     react: ^17.0.0 || ^18.0.0
   checksum: d6d165dccceafafc3cad995e3586a0624aa05a7a871a06999b664f23e21256474fcfecef8b2e3e3b76531fada9e3eed63004724bf41d7a27d153d0328f65fec5
+  languageName: node
+  linkType: hard
+
+"@navikt/ds-react@npm:7.0.0":
+  version: 7.0.0
+  resolution: "@navikt/ds-react@npm:7.0.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-react%2F7.0.0%2F6bea7efb224bee86c8695f0e576365dd84af6d5d"
+  dependencies:
+    "@floating-ui/react": 0.25.4
+    "@floating-ui/react-dom": ^2.0.9
+    "@navikt/aksel-icons": ^7.0.0
+    "@navikt/ds-tokens": ^7.0.0
+    clsx: ^2.1.0
+    date-fns: ^3.0.0
+    react-day-picker: 8.10.0
+  peerDependencies:
+    "@types/react": ^17.0.30 || ^18.0.0
+    react: ^17.0.0 || ^18.0.0
+  checksum: b274a607aba5917aa6a9936e55af6adfc9c917fe37df8b5f636b83dcf0024ba7255c8067bd9411eef73d32a257391a6d001de5708fe9b77bcfde6d5459267335
   languageName: node
   linkType: hard
 
@@ -3486,6 +3518,13 @@ __metadata:
     "@types/react": ^17.0.30 || ^18.0.0
     react: ^17.0.0 || ^18.0.0
   checksum: fdb1504a5b493be29a554cb118bad3aa037446505b83a96b8ab016d2dfe6c34ed5a3526d370da25dd8f393dc35818ae004913bfc70259c3a03be313713330c73
+  languageName: node
+  linkType: hard
+
+"@navikt/ds-tokens@npm:^7.0.0":
+  version: 7.2.1
+  resolution: "@navikt/ds-tokens@npm:7.2.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-tokens%2F7.2.1%2F0df577b32219208add6ca8646449fb558faad282"
+  checksum: 08b37e04d4361d95eb0b3637fadaef11cdba4aee55eba6daa12ab01aebb24ae70ba399cea0fc83d16e2d30189394061398914d353e47d74d25b25a0a758644cf
   languageName: node
   linkType: hard
 
@@ -3660,8 +3699,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-felles@workspace:packages/fakta-felles"
   dependencies:
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/ds-css": 7.0.0
+    "@navikt/ds-react": 7.0.0
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
@@ -3669,6 +3708,7 @@ __metadata:
     "@navikt/ft-form-hooks": 5.1.8
     "@navikt/ft-form-validators": 2.4.4
     "@navikt/ft-kodeverk": 2.5.3
+    "@navikt/ft-plattform-komponenter": 5.0.0
     "@navikt/ft-types": 2.5.4
     "@navikt/ft-ui-komponenter": 2.5.4
     "@navikt/ft-utils": 2.4.4
@@ -3905,7 +3945,6 @@ __metadata:
     react-hook-form: 7.53.0
     react-intl: 6.6.8
     storybook: 8.3.1
-    stylelint: 16.9.0
     typescript: 5.6.2
     vite: 5.4.6
     vitest: 2.1.1

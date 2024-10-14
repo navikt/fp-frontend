@@ -57,17 +57,17 @@ describe('situasjonUtils', () => {
           {
             fom: '2022-06-02',
             tom: '2025-02-01',
-            adresse: { adresseType: AdresseType.BOSTEDSADRESSE, land: 'Norge' },
+            adresse: { fom: '2022-06-02', tom: '2025-02-01', adresseType: AdresseType.BOSTEDSADRESSE, land: 'Norge' },
           },
           {
             fom: '2022-07-01',
             tom: '2025-02-01',
-            adresse: { adresseType: AdresseType.BOSTEDSADRESSE, land: 'Finland' },
+            adresse: { fom: '2022-07-01', tom: '2025-02-01', adresseType: AdresseType.BOSTEDSADRESSE, land: 'Finland' },
           },
           {
             fom: '2022-07-01',
             tom: '2025-02-01',
-            adresse: { adresseType: AdresseType.POSTADRESSE, land: 'USA' },
+            adresse: { fom: '2022-07-01', tom: '2025-02-01', adresseType: AdresseType.POSTADRESSE, land: 'USA' },
           },
         ],
       };

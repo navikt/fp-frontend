@@ -1,8 +1,7 @@
 {
   "OmsorgInfoPanel.VurderOmsorg": "Vurder om søker har omsorg for barnet i søknadsperioden",
-  "OmsorgInfoPanel.Overskrift": "Fakta om omsorg",
 
-  "OmsorgFaktaForm.HarOmsorg": "Søker har omsorg for barnet",
-  "OmsorgFaktaForm.HarIkkeOmsorg": "Søker har <b>ikke</b> omsorg for barnet",
-  "OmsorgFaktaForm.OppgittOmsorg": "Søker har oppgitt å ha omsorg for barnet"
+  "OmsorgFaktaFields.HarOmsorg": "Søker har omsorg for barnet",
+  "OmsorgFaktaFields.HarIkkeOmsorg": "Søker har <b>ikke</b> omsorg for barnet",
+  "OmsorgFaktaFields.OppgittOmsorg": "Søker har oppgitt å ha omsorg for barnet"
 }

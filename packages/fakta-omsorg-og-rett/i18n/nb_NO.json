@@ -1,7 +1,6 @@
 {
-  "OmsorgOgRettFaktaForm.Overskrift": "Fakta om omsorg og rett",
-  "OmsorgOgRettFaktaForm.VurderOmAleneomsorg": "Vurder om søker har aleneomsorg for barnet.",
-  "OmsorgOgRettFaktaForm.VurderAndreForelderRett": "Vurder om den andre forelderen har rett til foreldrepenger.",
+  "OmsorgOgRettInfoPanel.VurderOmAleneomsorg": "Vurder om søker har aleneomsorg for barnet.",
+  "OmsorgOgRettInfoPanel.VurderAndreForelderRett": "Vurder om den andre forelderen har rett til foreldrepenger.",
 
   "AleneomsorgForm.Aleneomsorg": "Søker har oppgitt å ha aleneomsorg for barnet",
   "AleneomsorgForm.HarAleneomsorg": "Søker har aleneomsorg for barnet",

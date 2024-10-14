@@ -9,8 +9,6 @@ import { AksjonspunktCode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
 import { BekreftOmsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import styles from './omsorgFaktaForm.module.css';
-
 const { MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG } = AksjonspunktCode;
 
 const getAksjonspunkt = (aksjonspunktCode: string, aksjonspunkter: Aksjonspunkt[]): Aksjonspunkt[] =>
@@ -20,10 +18,9 @@ export type FormValues = {
   omsorg?: boolean;
 };
 
-interface OwnProps {
+interface Props {
   aksjonspunkter: Aksjonspunkt[];
   readOnly: boolean;
-  className?: string;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
 }
 
@@ -33,17 +30,16 @@ interface StaticFunctions {
   validate?: (values: FormValues) => any;
 }
 
-const OmsorgFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
+export const OmsorgFaktaFields: FunctionComponent<Props> & StaticFunctions = ({
   aksjonspunkter,
   readOnly,
-  className,
   alleMerknaderFraBeslutter,
 }) => {
   const intl = useIntl();
   const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
 
   return (
-    <div className={className || styles.defaultAleneOmsorgFakta}>
+    <>
       {hasAksjonspunkt(MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG, aksjonspunkter) && (
         <FaktaGruppe
           withoutBorder
@@ -51,28 +47,31 @@ const OmsorgFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
         >
           <RadioGroupPanel
             name="omsorg"
-            label={<FormattedMessage id="OmsorgFaktaForm.OppgittOmsorg" />}
+            label={<FormattedMessage id="OmsorgFaktaFields.OppgittOmsorg" />}
             validate={[required]}
             isReadOnly={readOnly}
             isTrueOrFalseSelection
             radios={[
               {
-                label: intl.formatMessage({ id: 'OmsorgFaktaForm.HarOmsorg' }),
+                label: intl.formatMessage({ id: 'OmsorgFaktaFields.HarOmsorg' }),
                 value: 'true',
               },
               {
-                label: <FormattedMessage id="OmsorgFaktaForm.HarIkkeOmsorg" values={{ b: bTag }} />,
+                label: <FormattedMessage id="OmsorgFaktaFields.HarIkkeOmsorg" values={{ b: bTag }} />,
                 value: 'false',
               },
             ]}
           />
         </FaktaGruppe>
       )}
-    </div>
+    </>
   );
 };
 
-OmsorgFaktaForm.buildInitialValues = (ytelsefordeling: Ytelsefordeling, aksjonspunkter: Aksjonspunkt[]): FormValues => {
+OmsorgFaktaFields.buildInitialValues = (
+  ytelsefordeling: Ytelsefordeling,
+  aksjonspunkter: Aksjonspunkt[],
+): FormValues => {
   const omsorgAp = getAksjonspunkt(MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG, aksjonspunkter);
   let omsorg;
 
@@ -85,9 +84,7 @@ OmsorgFaktaForm.buildInitialValues = (ytelsefordeling: Ytelsefordeling, aksjonsp
   };
 };
 
-OmsorgFaktaForm.transformOmsorgValues = (values: FormValues): BekreftOmsorgVurderingAp => ({
+OmsorgFaktaFields.transformOmsorgValues = (values: FormValues): BekreftOmsorgVurderingAp => ({
   kode: MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG,
   omsorg: values.omsorg || false,
 });
-
-export default OmsorgFaktaForm;
