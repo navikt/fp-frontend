@@ -34,7 +34,7 @@
     "react-intl": "6.6.8"
   },
   "devDependencies": {
-    "@navikt/ds-css": "7.2.0",
+    "@navikt/ds-css": "7.2.1",
     "@navikt/fp-storybook-utils": "workspace:*",
     "@storybook/addon-actions": "8.3.1",
     "@storybook/react": "8.3.1",
