@@ -2,15 +2,30 @@ import React from 'react';
 import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { AdresseType, navBrukerKjonn, soknadType, AksjonspunktCode, aksjonspunktStatus } from '@navikt/fp-kodeverk';
+import {
+  AdresseType,
+  navBrukerKjonn,
+  soknadType,
+  AksjonspunktCode,
+  aksjonspunktStatus,
+  sivilstandType,
+} from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import { Behandling, FamilieHendelseSamling, InntektArbeidYtelse, Soknad, Aksjonspunkt } from '@navikt/fp-types';
+import {
+  Behandling,
+  FamilieHendelseSamling,
+  InntektArbeidYtelse,
+  Soknad,
+  Aksjonspunkt,
+  Personoversikt,
+} from '@navikt/fp-types';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import OmsorgOgForeldreansvarFaktaIndex from './OmsorgOgForeldreansvarFaktaIndex';
 
 import '@navikt/ds-css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
 import '@navikt/ft-form-hooks/dist/style.css';
+import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 const behandling = {
   uuid: '1',
@@ -34,17 +49,17 @@ const soknad = {
   farSokerType: 'ADOPTERER_ALENE',
 } as Soknad;
 
-const personoversikt = {
+const personoversikt: Personoversikt = {
   bruker: {
-    fnr: '',
     navn: 'Olga Utvikler',
     aktoerId: '2',
-    diskresjonskode: '',
     kjønn: navBrukerKjonn.KVINNE,
-    sivilstand: '',
+    sivilstand: sivilstandType.GIFT,
     fødselsdato: '1979-01-01',
     adresser: [
       {
+        fom: '2019-01-01',
+        tom: TIDENES_ENDE,
         adresseType: AdresseType.POSTADRESSE,
         adresselinje1: 'Gateadresse 1',
         postNummer: '1000',
@@ -54,12 +69,10 @@ const personoversikt = {
     ],
   },
   annenPart: {
-    fnr: '',
     navn: 'Espen Utvikler',
     aktoerId: '1',
-    diskresjonskode: '',
     kjønn: navBrukerKjonn.MANN,
-    sivilstand: '',
+    sivilstand: sivilstandType.GIFT,
     fødselsdato: '1989-01-01',
     dødsdato: '2021-01-01',
     adresser: [],
