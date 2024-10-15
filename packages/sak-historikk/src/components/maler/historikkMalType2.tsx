@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { BodyShort } from '@navikt/ds-react';
 import { useIntl } from 'react-intl';
 
@@ -6,12 +6,12 @@ import { findHendelseText, findResultatText } from './felles/historikkUtils';
 import Skjermlenke from './felles/Skjermlenke';
 import HistorikkMal from '../HistorikkMalTsType';
 
-const HistorikkMalType2: FunctionComponent<HistorikkMal> = ({
+const HistorikkMalType2 = ({
   historikkinnslag,
   behandlingLocation,
   getKodeverknavn,
   createLocationForSkjermlenke,
-}) => {
+}: HistorikkMal) => {
   const intl = useIntl();
   const { historikkinnslagDeler } = historikkinnslag;
   return (
@@ -39,5 +39,7 @@ const HistorikkMalType2: FunctionComponent<HistorikkMal> = ({
     </>
   );
 };
+
+HistorikkMalType2.displayName = 'HistorikkMalType2';
 
 export default HistorikkMalType2;

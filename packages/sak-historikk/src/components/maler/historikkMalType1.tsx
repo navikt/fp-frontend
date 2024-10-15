@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { BodyShort } from '@navikt/ds-react';
 
 import BubbleText from './felles/bubbleText';
@@ -6,7 +6,7 @@ import { findHendelseText } from './felles/historikkUtils';
 import HistorikkDokumentLenke from './felles/HistorikkDokumentLenke';
 import HistorikkMal from '../HistorikkMalTsType';
 
-const HistorikkMalType1: FunctionComponent<HistorikkMal> = ({ historikkinnslag, getKodeverknavn, saksnummer }) => {
+const HistorikkMalType1 = ({ historikkinnslag, getKodeverknavn, saksnummer }: HistorikkMal) => {
   const { historikkinnslagDeler, dokumentLinks } = historikkinnslag;
   return (
     <>
@@ -32,5 +32,7 @@ const HistorikkMalType1: FunctionComponent<HistorikkMal> = ({ historikkinnslag, 
     </>
   );
 };
+
+HistorikkMalType1.displayName = 'HistorikkMalType1';
 
 export default HistorikkMalType1;

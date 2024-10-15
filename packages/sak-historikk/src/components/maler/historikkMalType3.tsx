@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { useIntl, IntlShape } from 'react-intl';
 import { BodyShort } from '@navikt/ds-react';
 
@@ -108,13 +108,13 @@ const formaterAksjonspunkt = (
   );
 };
 
-const HistorikkMalType3: FunctionComponent<HistorikkMal> = ({
+const HistorikkMalType3 = ({
   historikkinnslag,
   behandlingLocation,
   getKodeverknavn,
   createLocationForSkjermlenke,
   erTilbakekreving,
-}) => {
+}: HistorikkMal) => {
   const intl = useIntl();
   if (historikkinnslag.historikkinnslagDeler) {
     return (
@@ -148,5 +148,7 @@ const HistorikkMalType3: FunctionComponent<HistorikkMal> = ({
   }
   return null;
 };
+
+HistorikkMalType3.displayName = 'HistorikkMalType3';
 
 export default HistorikkMalType3;
