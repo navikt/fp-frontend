@@ -3369,10 +3369,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aksel-icons@npm:7.2.0, @navikt/aksel-icons@npm:^7.2.0":
-  version: 7.2.0
-  resolution: "@navikt/aksel-icons@npm:7.2.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-icons%2F7.2.0%2Fc30a4ad1dbfa414a50e42c296dd01b1e9b395f5e"
-  checksum: cd4e4edb2a9beb9a6bc0cd5c98c97ca3625a9f00e8b2740ebc7ac63df7c6dc605f71815eba46a7bebc2941b34a3aabd5a3b24d0fd94154357e1457a07bceac83
+"@navikt/aksel-icons@npm:7.2.1, @navikt/aksel-icons@npm:^7.2.1":
+  version: 7.2.1
+  resolution: "@navikt/aksel-icons@npm:7.2.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-icons%2F7.2.1%2F8cc80c4d03f7d22428f72fd4cb6a93946b087db1"
+  checksum: 9579ec21d4d119567e0307d8a181d7ccc331ffce55de4ac353ad56837b918879a64a0ce94d90a9b2a67a255b84f6bf4f4a2fc9296d62c628bf772532c86686b6
   languageName: node
   linkType: hard
 
@@ -3383,17 +3383,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aksel-icons@npm:^7.0.0":
+"@navikt/aksel-stylelint@npm:7.2.1":
   version: 7.2.1
-  resolution: "@navikt/aksel-icons@npm:7.2.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-icons%2F7.2.1%2F8cc80c4d03f7d22428f72fd4cb6a93946b087db1"
-  checksum: 9579ec21d4d119567e0307d8a181d7ccc331ffce55de4ac353ad56837b918879a64a0ce94d90a9b2a67a255b84f6bf4f4a2fc9296d62c628bf772532c86686b6
-  languageName: node
-  linkType: hard
-
-"@navikt/aksel-stylelint@npm:7.2.0":
-  version: 7.2.0
-  resolution: "@navikt/aksel-stylelint@npm:7.2.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-stylelint%2F7.2.0%2Fc9ea78f722d90ce3d6d823f6459c67c1b9abee4b"
-  checksum: c2467917a2e4e57c038e0859351e10e0f7a342fef545b0665249a3a5eff76b177bc4a9ad6493e97eadf0df9896283d228d06e51339c88cc901e6237ba0474bd5
+  resolution: "@navikt/aksel-stylelint@npm:7.2.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-stylelint%2F7.2.1%2F69b4054bd356425faddb3cde3a921f42216411b9"
+  checksum: ce8ac530f391af5091c1c031d4296fe2afb8acf530e465443501791158d9fef77bdadca4ce12c88a7ba7f114fd1fda54afbd32d0a7dab1ea9ddbe98b65cd7de1
   languageName: node
   linkType: hard
 
@@ -3411,13 +3404,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/ds-css@npm:7.0.0":
-  version: 7.0.0
-  resolution: "@navikt/ds-css@npm:7.0.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-css%2F7.0.0%2F24c8994367516a16e383a49d6940e34472ec9413"
-  checksum: 8d5ac506f9236b84ef9d1b7e5d2668c580371108eb6004c94be3ee207ab81f723dbe1502738c32ee751d4771c4ce63e37417b512e7034eb4051d700a524a04d9
-  languageName: node
-  linkType: hard
-
 "@navikt/ds-css@npm:7.1.2":
   version: 7.1.2
   resolution: "@navikt/ds-css@npm:7.1.2::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-css%2F7.1.2%2Fdf3bf84098aadde046fafc34abdd9a8057425654"
@@ -3425,10 +3411,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/ds-css@npm:7.2.0":
-  version: 7.2.0
-  resolution: "@navikt/ds-css@npm:7.2.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-css%2F7.2.0%2F9c22001014d7c3ffcc994c7a921937ed0d973004"
-  checksum: d3a052c24848eb41c76080615afbf6d9d5d2a0d073c47486cbb5f2476bd82d8815ccf53e8721e2c681ff2b009be3a4e5397f978ada3efc1951c487d936f30646
+"@navikt/ds-css@npm:7.2.1":
+  version: 7.2.1
+  resolution: "@navikt/ds-css@npm:7.2.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-css%2F7.2.1%2F4201a8c184239da9b0c546a94a25ee985c89fc3c"
+  checksum: 3012d797860cc08bb953b7d7dcc14aec64674cc4b2ca00266b8fcb7ab14c7b7003ba176ebd3446a099a68cf1110eb283c275e7d4089469d76c052d9b42cf6bb1
   languageName: node
   linkType: hard
 
@@ -3445,24 +3431,6 @@ __metadata:
     "@types/react": ^17.0.30 || ^18.0.0
     react: ^17.0.0 || ^18.0.0
   checksum: d6d165dccceafafc3cad995e3586a0624aa05a7a871a06999b664f23e21256474fcfecef8b2e3e3b76531fada9e3eed63004724bf41d7a27d153d0328f65fec5
-  languageName: node
-  linkType: hard
-
-"@navikt/ds-react@npm:7.0.0":
-  version: 7.0.0
-  resolution: "@navikt/ds-react@npm:7.0.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-react%2F7.0.0%2F6bea7efb224bee86c8695f0e576365dd84af6d5d"
-  dependencies:
-    "@floating-ui/react": 0.25.4
-    "@floating-ui/react-dom": ^2.0.9
-    "@navikt/aksel-icons": ^7.0.0
-    "@navikt/ds-tokens": ^7.0.0
-    clsx: ^2.1.0
-    date-fns: ^3.0.0
-    react-day-picker: 8.10.0
-  peerDependencies:
-    "@types/react": ^17.0.30 || ^18.0.0
-    react: ^17.0.0 || ^18.0.0
-  checksum: b274a607aba5917aa6a9936e55af6adfc9c917fe37df8b5f636b83dcf0024ba7255c8067bd9411eef73d32a257391a6d001de5708fe9b77bcfde6d5459267335
   languageName: node
   linkType: hard
 
@@ -3484,21 +3452,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/ds-react@npm:7.2.0":
-  version: 7.2.0
-  resolution: "@navikt/ds-react@npm:7.2.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-react%2F7.2.0%2F6ee45ff434cb8d7a32ec354c6870a88f7529a2d4"
+"@navikt/ds-react@npm:7.2.1":
+  version: 7.2.1
+  resolution: "@navikt/ds-react@npm:7.2.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-react%2F7.2.1%2Fd8283fca0fea8efb9281f54dc08e424d4f4e0078"
   dependencies:
     "@floating-ui/react": 0.25.4
     "@floating-ui/react-dom": ^2.0.9
-    "@navikt/aksel-icons": ^7.2.0
-    "@navikt/ds-tokens": ^7.2.0
+    "@navikt/aksel-icons": ^7.2.1
+    "@navikt/ds-tokens": ^7.2.1
     clsx: ^2.1.0
     date-fns: ^3.0.0
     react-day-picker: 8.10.0
   peerDependencies:
     "@types/react": ^17.0.30 || ^18.0.0
     react: ^17.0.0 || ^18.0.0
-  checksum: de55c87d97888104980919f3d8126d3dc23d87b4cc1a6856f9bf9eebf838b1b8b2ed76fe64507793fff0449fc08c51d5f374541ddcb2338bbac11923cef81df0
+  checksum: d30616bb151bf53e266270ca1d42a180348eca4c4e7996b070b10e44af8f4ce1c73cf9e77e25549ebc5d60d70c2f84336f6fe84e33c6b1eb3fb74fd1ce5e64ec
   languageName: node
   linkType: hard
 
@@ -3521,13 +3489,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/ds-tokens@npm:^7.0.0":
-  version: 7.2.1
-  resolution: "@navikt/ds-tokens@npm:7.2.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-tokens%2F7.2.1%2F0df577b32219208add6ca8646449fb558faad282"
-  checksum: 08b37e04d4361d95eb0b3637fadaef11cdba4aee55eba6daa12ab01aebb24ae70ba399cea0fc83d16e2d30189394061398914d353e47d74d25b25a0a758644cf
-  languageName: node
-  linkType: hard
-
 "@navikt/ds-tokens@npm:^7.1.2":
   version: 7.1.2
   resolution: "@navikt/ds-tokens@npm:7.1.2::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-tokens%2F7.1.2%2Fb282a80d89991b5b251e97bdedec892c7ff30b8b"
@@ -3535,10 +3496,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/ds-tokens@npm:^7.2.0":
-  version: 7.2.0
-  resolution: "@navikt/ds-tokens@npm:7.2.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-tokens%2F7.2.0%2F675def7e380f09655e86123bebfc289a8cc8123b"
-  checksum: 9fd678308e938809e1de6dcdf1c79a7091e2ffe49246722b1728e7217832cfe817c4dc01aa11b550195660f27d13a554e58c5b338d02611fb926cb44b98dcf4b
+"@navikt/ds-tokens@npm:^7.2.1":
+  version: 7.2.1
+  resolution: "@navikt/ds-tokens@npm:7.2.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-tokens%2F7.2.1%2F0df577b32219208add6ca8646449fb558faad282"
+  checksum: 08b37e04d4361d95eb0b3637fadaef11cdba4aee55eba6daa12ab01aebb24ae70ba399cea0fc83d16e2d30189394061398914d353e47d74d25b25a0a758644cf
   languageName: node
   linkType: hard
 
@@ -3547,9 +3508,9 @@ __metadata:
   resolution: "@navikt/fp-fakta-adopsjon@workspace:packages/fakta-adopsjon"
   dependencies:
     "@formatjs/cli-lib": 6.4.2
-    "@navikt/aksel-icons": 7.2.0
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/aksel-icons": 7.2.1
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-fakta-felles": "workspace:*"
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
@@ -3586,9 +3547,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-arbeid-og-inntekt@workspace:packages/fakta-arbeid-og-inntekt"
   dependencies:
-    "@navikt/aksel-icons": 7.2.0
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/aksel-icons": 7.2.1
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-konstanter": "workspace:*"
     "@navikt/fp-modal-sett-pa-vent": "workspace:*"
@@ -3626,9 +3587,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-arbeidsforhold@workspace:packages/fakta-arbeidsforhold"
   dependencies:
-    "@navikt/aksel-icons": 7.2.0
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/aksel-icons": 7.2.1
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
@@ -3662,8 +3623,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-besteberegning@workspace:packages/fakta-besteberegning"
   dependencies:
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-fakta-felles": "workspace:*"
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
@@ -3699,8 +3660,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-felles@workspace:packages/fakta-felles"
   dependencies:
-    "@navikt/ds-css": 7.0.0
-    "@navikt/ds-react": 7.0.0
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
@@ -3730,8 +3691,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-fodsel@workspace:packages/fakta-fodsel"
   dependencies:
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-fakta-felles": "workspace:*"
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-prosess-fakta-fodsel-sammenligning": "workspace:*"
@@ -3768,9 +3729,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-inntektsmelding@workspace:packages/fakta-inntektsmelding"
   dependencies:
-    "@navikt/aksel-icons": 7.2.0
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/aksel-icons": 7.2.1
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-fakta-felles": "workspace:*"
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
@@ -3802,9 +3763,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-medlemskap@workspace:packages/fakta-medlemskap"
   dependencies:
-    "@navikt/aksel-icons": 7.2.0
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/aksel-icons": 7.2.1
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-fakta-felles": "workspace:*"
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
@@ -3840,8 +3801,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-omsorg-og-foreldreansvar@workspace:packages/fakta-omsorg-og-foreldreansvar"
   dependencies:
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-fakta-felles": "workspace:*"
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
@@ -3877,9 +3838,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-omsorg-og-rett@workspace:packages/fakta-omsorg-og-rett"
   dependencies:
-    "@navikt/aksel-icons": 7.2.0
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/aksel-icons": 7.2.1
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-fakta-felles": "workspace:*"
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
@@ -3916,9 +3877,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-omsorg@workspace:packages/fakta-omsorg"
   dependencies:
-    "@navikt/aksel-icons": 7.2.0
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/aksel-icons": 7.2.1
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-fakta-felles": "workspace:*"
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
@@ -3955,9 +3916,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-opptjening@workspace:packages/fakta-opptjening"
   dependencies:
-    "@navikt/aksel-icons": 7.2.0
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/aksel-icons": 7.2.1
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
@@ -3991,9 +3952,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-permisjon@workspace:packages/fakta-permisjon"
   dependencies:
-    "@navikt/aksel-icons": 7.2.0
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/aksel-icons": 7.2.1
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-konstanter": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
@@ -4030,9 +3991,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-saken@workspace:packages/fakta-saken"
   dependencies:
-    "@navikt/aksel-icons": 7.2.0
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/aksel-icons": 7.2.1
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-fakta-felles": "workspace:*"
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
@@ -4069,9 +4030,9 @@ __metadata:
   resolution: "@navikt/fp-fakta-tilrettelegging@workspace:packages/fakta-tilrettelegging"
   dependencies:
     "@formatjs/cli-lib": 6.4.2
-    "@navikt/aksel-icons": 7.2.0
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/aksel-icons": 7.2.1
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-fakta-felles": "workspace:*"
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
@@ -4109,9 +4070,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-uttak@workspace:packages/fakta-uttak"
   dependencies:
-    "@navikt/aksel-icons": 7.2.0
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/aksel-icons": 7.2.1
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-fakta-felles": "workspace:*"
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
@@ -4148,9 +4109,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-uttaksdokumentasjon@workspace:packages/fakta-uttaksdokumentasjon"
   dependencies:
-    "@navikt/aksel-icons": 7.2.0
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/aksel-icons": 7.2.1
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-fakta-felles": "workspace:*"
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-konstanter": "workspace:*"
@@ -4185,7 +4146,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-verge@workspace:packages/fakta-verge"
   dependencies:
-    "@navikt/ds-css": 7.2.0
+    "@navikt/ds-css": 7.2.1
     "@navikt/fp-fakta-felles": "workspace:*"
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
@@ -4220,8 +4181,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-ytelser@workspace:packages/fakta-ytelser"
   dependencies:
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
@@ -4254,10 +4215,10 @@ __metadata:
   dependencies:
     "@formatjs/intl-datetimeformat": 6.12.5
     "@formatjs/intl-numberformat": 8.10.3
-    "@navikt/aksel-icons": 7.2.0
-    "@navikt/ds-css": 7.2.0
+    "@navikt/aksel-icons": 7.2.1
+    "@navikt/ds-css": 7.2.1
     "@navikt/ds-css-internal": ^3.4.3
-    "@navikt/ds-react": 7.2.0
+    "@navikt/ds-react": 7.2.1
     "@navikt/ds-react-internal": ^3.4.3
     "@navikt/fp-fakta-adopsjon": "workspace:*"
     "@navikt/fp-fakta-arbeid-og-inntekt": "workspace:*"
@@ -4331,8 +4292,7 @@ __metadata:
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utbetalingsdata-is15": "workspace:*"
     "@navikt/fp-utils-test": "workspace:*"
-    "@navikt/ft-fakta-beregning": 5.3.9
-    "@navikt/ft-fakta-beregning-redesign": 1.4.1
+    "@navikt/ft-fakta-beregning": 6.0.0
     "@navikt/ft-fakta-fordel-beregningsgrunnlag": 7.6.8
     "@navikt/ft-fakta-tilbakekreving-feilutbetaling": 2.5.8
     "@navikt/ft-form-hooks": 5.1.8
@@ -4394,9 +4354,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-journalforing@workspace:packages/journalforing"
   dependencies:
-    "@navikt/aksel-icons": 7.2.0
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/aksel-icons": 7.2.1
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/ds-react-internal": 3.4.3
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-rest-api": "workspace:*"
@@ -4453,9 +4413,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-los-avdelingsleder@workspace:packages/los-avdelingsleder"
   dependencies:
-    "@navikt/aksel-icons": 7.2.0
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/aksel-icons": 7.2.1
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-los-felles": "workspace:*"
     "@navikt/fp-rest-api": "workspace:*"
@@ -4498,8 +4458,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-los-felles@workspace:packages/los-felles"
   dependencies:
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-rest-api": "workspace:*"
     "@navikt/fp-rest-api-hooks": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
@@ -4538,9 +4498,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-los-saksbehandler@workspace:packages/los-saksbehandler"
   dependencies:
-    "@navikt/aksel-icons": 7.2.0
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/aksel-icons": 7.2.1
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-los-felles": "workspace:*"
     "@navikt/fp-rest-api": "workspace:*"
@@ -4583,8 +4543,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-modal-sett-pa-vent@workspace:packages/modal-sett-pa-vent"
   dependencies:
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
@@ -4619,9 +4579,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-papirsoknad-ui-komponenter@workspace:packages/papirsoknad-ui-komponenter"
   dependencies:
-    "@navikt/aksel-icons": 7.2.0
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/aksel-icons": 7.2.1
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-prosess-felles": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
@@ -4660,8 +4620,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-papirsoknad@workspace:packages/papirsoknad"
   dependencies:
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-papirsoknad-ui-komponenter": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
@@ -4696,8 +4656,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-anke-resultat@workspace:packages/prosess-anke-resultat"
   dependencies:
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
@@ -4728,8 +4688,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-anke-trygderettsbehandling@workspace:packages/prosess-anke-trygderettsbehandling"
   dependencies:
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
@@ -4760,8 +4720,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-anke@workspace:packages/prosess-anke"
   dependencies:
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
@@ -4793,8 +4753,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-beregningsresultat@workspace:packages/prosess-beregningsresultat"
   dependencies:
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-prosess-felles": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
@@ -4829,8 +4789,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-fakta-fodsel-sammenligning@workspace:packages/prosess-fakta-fodsel-sammenligning"
   dependencies:
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
@@ -4862,9 +4822,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-felles@workspace:packages/prosess-felles"
   dependencies:
-    "@navikt/aksel-icons": 7.2.0
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/aksel-icons": 7.2.1
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
@@ -4893,8 +4853,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-formkrav@workspace:packages/prosess-formkrav"
   dependencies:
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-prosess-felles": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
@@ -4930,9 +4890,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-innsyn@workspace:packages/prosess-innsyn"
   dependencies:
-    "@navikt/aksel-icons": 7.2.0
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/aksel-icons": 7.2.1
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-konstanter": "workspace:*"
     "@navikt/fp-prosess-felles": "workspace:*"
@@ -4970,8 +4930,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-klagevurdering@workspace:packages/prosess-klagevurdering"
   dependencies:
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-prosess-felles": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
@@ -5007,9 +4967,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-simulering@workspace:packages/prosess-simulering"
   dependencies:
-    "@navikt/aksel-icons": 7.2.0
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/aksel-icons": 7.2.1
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
@@ -5045,8 +5005,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-soknadsfrist@workspace:packages/prosess-soknadsfrist"
   dependencies:
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-prosess-felles": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
@@ -5082,9 +5042,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-tilkjent-ytelse@workspace:packages/prosess-tilkjent-ytelse"
   dependencies:
-    "@navikt/aksel-icons": 7.2.0
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/aksel-icons": 7.2.1
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-prosess-fakta-fodsel-sammenligning": "workspace:*"
     "@navikt/fp-prosess-felles": "workspace:*"
@@ -5121,9 +5081,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-uttak@workspace:packages/prosess-uttak"
   dependencies:
-    "@navikt/aksel-icons": 7.2.0
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/aksel-icons": 7.2.1
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-prosess-felles": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
@@ -5159,8 +5119,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-varsel-om-revurdering@workspace:packages/prosess-varsel-om-revurdering"
   dependencies:
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-modal-sett-pa-vent": "workspace:*"
     "@navikt/fp-prosess-fakta-fodsel-sammenligning": "workspace:*"
@@ -5199,8 +5159,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-vedtak-innsyn@workspace:packages/prosess-vedtak-innsyn"
   dependencies:
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-konstanter": "workspace:*"
     "@navikt/fp-prosess-felles": "workspace:*"
@@ -5236,8 +5196,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-vedtak-klage@workspace:packages/prosess-vedtak-klage"
   dependencies:
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-prosess-felles": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
@@ -5270,9 +5230,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-vedtak@workspace:packages/prosess-vedtak"
   dependencies:
-    "@navikt/aksel-icons": 7.2.0
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/aksel-icons": 7.2.1
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-prosess-felles": "workspace:*"
     "@navikt/fp-rest-api": "workspace:*"
@@ -5310,8 +5270,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-vilkar-adopsjon@workspace:packages/prosess-vilkar-adopsjon"
   dependencies:
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-prosess-felles": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
@@ -5345,8 +5305,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-vilkar-fodsel@workspace:packages/prosess-vilkar-fodsel"
   dependencies:
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-prosess-felles": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
@@ -5380,8 +5340,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-vilkar-foreldreansvar@workspace:packages/prosess-vilkar-foreldreansvar"
   dependencies:
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-prosess-felles": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
@@ -5415,8 +5375,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-vilkar-omsorg@workspace:packages/prosess-vilkar-omsorg"
   dependencies:
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-prosess-felles": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
@@ -5450,9 +5410,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-vilkar-opptjening@workspace:packages/prosess-vilkar-opptjening"
   dependencies:
-    "@navikt/aksel-icons": 7.2.0
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/aksel-icons": 7.2.1
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-prosess-felles": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
@@ -5486,9 +5446,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-vilkar-overstyring@workspace:packages/prosess-vilkar-overstyring"
   dependencies:
-    "@navikt/aksel-icons": 7.2.0
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/aksel-icons": 7.2.1
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-prosess-felles": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
@@ -5523,8 +5483,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-vilkar-sokers-opplysningsplikt@workspace:packages/prosess-vilkar-sokers-opplysningsplikt"
   dependencies:
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-prosess-felles": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
@@ -5560,8 +5520,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-vilkar-soknadsfrist@workspace:packages/prosess-vilkar-soknadsfrist"
   dependencies:
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-prosess-felles": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
@@ -5597,8 +5557,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-vilkar-svangerskap@workspace:packages/prosess-vilkar-svangerskap"
   dependencies:
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-prosess-felles": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
@@ -5664,15 +5624,15 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-historikk@workspace:packages/sak-historikk"
   dependencies:
-    "@navikt/aksel-icons": 7.2.0
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/aksel-icons": 7.2.1
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-konstanter": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-utils-test": "workspace:*"
-    "@navikt/ft-fakta-beregning": 5.3.9
+    "@navikt/ft-fakta-beregning": 6.0.0
     "@navikt/ft-kodeverk": 2.5.3
     "@navikt/ft-prosess-beregningsgrunnlag": 6.6.10
     "@navikt/ft-types": 2.5.4
@@ -5704,9 +5664,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-meldinger@workspace:packages/sak-meldinger"
   dependencies:
-    "@navikt/aksel-icons": 7.2.0
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/aksel-icons": 7.2.1
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-sak-ukjent-adresse": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
@@ -5741,8 +5701,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-meny-apne-for-endringer@workspace:packages/sak-meny-apne-for-endringer"
   dependencies:
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/ft-kodeverk": 2.5.3
     "@navikt/ft-types": 2.5.4
@@ -5770,8 +5730,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-meny-endre-utland@workspace:packages/sak-meny-endre-utland"
   dependencies:
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
@@ -5804,9 +5764,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-meny-henlegg@workspace:packages/sak-meny-henlegg"
   dependencies:
-    "@navikt/aksel-icons": 7.2.0
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/aksel-icons": 7.2.1
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
@@ -5839,8 +5799,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-meny-ny-behandling@workspace:packages/sak-meny-ny-behandling"
   dependencies:
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
@@ -5873,8 +5833,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-meny-sett-pa-vent@workspace:packages/sak-meny-sett-pa-vent"
   dependencies:
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-modal-sett-pa-vent": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
@@ -5906,8 +5866,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-notat@workspace:packages/sak-notat"
   dependencies:
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
@@ -5941,9 +5901,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-sok@workspace:packages/sak-sok"
   dependencies:
-    "@navikt/aksel-icons": 7.2.0
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/aksel-icons": 7.2.1
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
@@ -5976,16 +5936,16 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-totrinnskontroll@workspace:packages/sak-totrinnskontroll"
   dependencies:
-    "@navikt/aksel-icons": 7.2.0
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/aksel-icons": 7.2.1
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-konstanter": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils-test": "workspace:*"
-    "@navikt/ft-fakta-beregning": 5.3.9
+    "@navikt/ft-fakta-beregning": 6.0.0
     "@navikt/ft-fakta-fordel-beregningsgrunnlag": 7.6.8
     "@navikt/ft-form-hooks": 5.1.8
     "@navikt/ft-form-validators": 2.4.4
@@ -6020,7 +5980,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-ukjent-adresse@workspace:packages/sak-ukjent-adresse"
   dependencies:
-    "@navikt/ds-css": 7.2.0
+    "@navikt/ds-css": 7.2.1
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/ft-ui-komponenter": 2.5.4
     "@navikt/ft-utils": 2.4.4
@@ -6065,7 +6025,7 @@ __metadata:
   dependencies:
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-fakta-beregning": 5.3.9
+    "@navikt/ft-fakta-beregning": 6.0.0
     "@navikt/ft-fakta-fordel-beregningsgrunnlag": 7.6.8
     "@navikt/ft-prosess-beregningsgrunnlag": 6.6.10
     typescript: 5.6.2
@@ -6088,8 +6048,8 @@ __metadata:
   resolution: "@navikt/fp-utbetalingsdata-is15@workspace:packages/utbetalingsdata-is15"
   dependencies:
     "@formatjs/cli-lib": 6.4.2
-    "@navikt/ds-css": 7.2.0
-    "@navikt/ds-react": 7.2.0
+    "@navikt/ds-css": 7.2.1
+    "@navikt/ds-react": 7.2.1
     "@navikt/fp-rest-api-hooks": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-ui-komponenter": 2.5.4
@@ -6129,9 +6089,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ft-fakta-beregning-redesign@npm:1.4.1":
-  version: 1.4.1
-  resolution: "@navikt/ft-fakta-beregning-redesign@npm:1.4.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-beregning-redesign%2F1.4.1%2Fdad94bb5c19bb53f7a53356e15b2d53dfc6ea169"
+"@navikt/ft-fakta-beregning@npm:6.0.0":
+  version: 6.0.0
+  resolution: "@navikt/ft-fakta-beregning@npm:6.0.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-beregning%2F6.0.0%2F209a53675d1562f02e8c10c1a826a12a15197789"
   dependencies:
     "@navikt/aksel-icons": 7.1.2
     "@navikt/ds-css": 7.1.2
@@ -6169,50 +6129,7 @@ __metadata:
     react-dom: 18.3.1
     react-hook-form: 7.x
     react-intl: 6.x
-  checksum: 67693b071b40b389b574717471d4bb9e6f16dd6f9aed10f0561d6ff0bc41c035a447dd5ee4b54bf653ea159b3e8a78667dbe3d38c82b5abdb1181de5825c7aa9
-  languageName: node
-  linkType: hard
-
-"@navikt/ft-fakta-beregning@npm:5.3.9":
-  version: 5.3.9
-  resolution: "@navikt/ft-fakta-beregning@npm:5.3.9::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-beregning%2F5.3.9%2Fa1d33c2f519e8f51e8f5a9b8d161599ae4c7162b"
-  dependencies:
-    "@navikt/aksel-icons": 7.1.2
-    "@navikt/ds-css": 7.1.2
-    "@navikt/ds-react": 7.1.2
-    "@navikt/ft-form-hooks": ^5.1.8
-    "@navikt/ft-form-validators": ^2.4.4
-    "@navikt/ft-kodeverk": ^2.5.3
-    "@navikt/ft-konstanter": ^2.4.3
-    "@navikt/ft-types": ^2.5.4
-    "@navikt/ft-ui-komponenter": ^2.5.4
-    "@navikt/ft-utils": ^2.4.4
-    core-js: 3.38.1
-    dayjs: 1.11.13
-    dayjs-plugin-utc: 0.1.2
-    react: 18.3.1
-    react-dom: 18.3.1
-    react-hook-form: 7.53.0
-    react-intl: 6.7.0
-  peerDependencies:
-    "@navikt/aksel-icons": 7.x
-    "@navikt/ds-css": 7.x
-    "@navikt/ds-react": 7.x
-    "@navikt/ft-form-hooks": 5.x
-    "@navikt/ft-form-validators": 2.x
-    "@navikt/ft-kodeverk": 2.x
-    "@navikt/ft-konstanter": 2.x
-    "@navikt/ft-types": 2.x
-    "@navikt/ft-ui-komponenter": 2.x
-    "@navikt/ft-utils": 2.x
-    core-js: 3.37.1
-    dayjs: 1.11.x
-    dayjs-plugin-utc: 0.1.2
-    react: 18.3.1
-    react-dom: 18.3.1
-    react-hook-form: 7.x
-    react-intl: 6.x
-  checksum: 6d5e245029e93167d2b74b3c8c1623ae52d9a541231a31c082b33a59000bf23000b1933caae03a0d958d3374fccd34a555ac29607789f8057ba72fbac254d95e
+  checksum: b5c377525d41387399ee7ce3075f9d47bf0a80a23287db21eca1020fcd2939542c9544929ba92cfc308ea52349585656f12d9868f4089dba4f68016ef859f327
   languageName: node
   linkType: hard
 
@@ -13473,7 +13390,7 @@ __metadata:
   resolution: "fp-frontend@workspace:."
   dependencies:
     "@eslint/js": 9.10.0
-    "@navikt/aksel-stylelint": 7.2.0
+    "@navikt/aksel-stylelint": 7.2.1
     "@sentry/cli": 2.36.1
     "@storybook/addon-essentials": 8.3.1
     "@storybook/addon-links": 8.3.1

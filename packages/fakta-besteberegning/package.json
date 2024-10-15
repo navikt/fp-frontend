@@ -19,7 +19,7 @@
     "storybook": "storybook dev --quiet -p 7005"
   },
   "dependencies": {
-    "@navikt/ds-react": "7.2.0",
+    "@navikt/ds-react": "7.2.1",
     "@navikt/fp-fakta-felles": "workspace:*",
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-types": "workspace:*",
@@ -36,7 +36,7 @@
     "react-intl": "6.6.8"
   },
   "devDependencies": {
-    "@navikt/ds-css": "7.2.0",
+    "@navikt/ds-css": "7.2.1",
     "@navikt/fp-storybook-utils": "workspace:*",
     "@storybook/addon-actions": "8.3.1",
     "@storybook/react": "8.3.1",

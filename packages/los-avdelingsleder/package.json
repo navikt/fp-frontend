@@ -19,8 +19,8 @@
     "storybook": "storybook dev --quiet -p 7020"
   },
   "dependencies": {
-    "@navikt/aksel-icons": "7.2.0",
-    "@navikt/ds-react": "7.2.0",
+    "@navikt/aksel-icons": "7.2.1",
+    "@navikt/ds-react": "7.2.1",
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-los-felles": "workspace:*",
     "@navikt/fp-rest-api": "workspace:*",
@@ -42,7 +42,7 @@
     "react-router-dom": "6.26.2"
   },
   "devDependencies": {
-    "@navikt/ds-css": "7.2.0",
+    "@navikt/ds-css": "7.2.1",
     "@navikt/fp-storybook-utils": "workspace:*",
     "@navikt/fp-utils-test": "workspace:*",
     "@storybook/addon-actions": "8.3.1",
