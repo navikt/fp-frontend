@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { render, screen } from '@testing-library/react';
 import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
@@ -11,6 +11,12 @@ const {
   HistorikkinnslagForeldelse,
   HistorikkinnslagTilbakekreving,
 } = composeStories(stories);
+
+vi.mock('./components/EnvironmentWrapper', () => ({
+  EnvironmentWrapper: ({ children }: PropsWithChildren) => {
+    return <>{children}</>;
+  },
+}));
 
 describe('<HistorikkSakIndex>', () => {
   it('skal vise historikk uten behandlingsfilter når ingen behandlinger er valgt', async () => {
