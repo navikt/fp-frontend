@@ -28,6 +28,7 @@ import PlaceholderHistorikkMal from './maler/placeholderHistorikkMal';
 import HistorikkMalTypeAktivitetskrav from './maler/HistorikkMalTypeAktivitetskrav';
 
 import styles from './history.module.css';
+import { EnvironmentWrapper } from './EnvironmentWrapper';
 
 /*
  https://confluence.adeo.no/display/MODNAV/OMR-13+SF4+Sakshistorikk+-+UX+og+grafisk+design
@@ -319,7 +320,7 @@ const History: FunctionComponent<OwnProps> = ({
         }}
       >
         {filtrerteInnslag.map((historikkinnslag, index) => {
-          const HistorikkMal = velgHistorikkMal(historikkinnslag.type);
+          const Mal = velgHistorikkMal(historikkinnslag.type);
           const aktorIsVL = historikkinnslag.aktoer === HistorikkAktor.VEDTAKSLOSNINGEN;
           const aktorIsSOKER = historikkinnslag.aktoer === HistorikkAktor.SOKER;
           const aktorIsArbeidsgiver = historikkinnslag.aktoer === HistorikkAktor.ARBEIDSGIVER;
@@ -340,14 +341,16 @@ const History: FunctionComponent<OwnProps> = ({
               opprettetAv={aktorIsSOKER || aktorIsArbeidsgiver || aktorIsVL ? '' : historikkinnslag.opprettetAv}
               erFørsteBoble={index === 0}
             >
-              <HistorikkMal
-                historikkinnslag={historikkinnslag}
-                behandlingLocation={getBehandlingLocation(historikkinnslag.behandlingUuid)}
-                saksnummer={saksnummer}
-                getKodeverknavn={getKodeverknavn}
-                createLocationForSkjermlenke={createLocationForSkjermlenke}
-                erTilbakekreving={!!historikkinnslag.erTilbakekreving}
-              />
+              <EnvironmentWrapper historikkinnslag={historikkinnslag} malType={Mal.name}>
+                <Mal
+                  historikkinnslag={historikkinnslag}
+                  behandlingLocation={getBehandlingLocation(historikkinnslag.behandlingUuid)}
+                  saksnummer={saksnummer}
+                  getKodeverknavn={getKodeverknavn}
+                  createLocationForSkjermlenke={createLocationForSkjermlenke}
+                  erTilbakekreving={!!historikkinnslag.erTilbakekreving}
+                />
+              </EnvironmentWrapper>
             </Snakkeboble>
           );
         })}
