@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactNode, useCallback } from 'react';
+import React, { ReactNode, useCallback } from 'react';
 import { FormattedMessage, useIntl, IntlShape } from 'react-intl';
 
 import { HistorikkinnslagDel, HistorikkinnslagEndretFelt } from '@navikt/fp-types';
@@ -113,13 +113,13 @@ const sortArray = (endredeFelter: HistorikkinnslagEndretFelt[]): Historikkinnsla
 /**
  * Mal for Historikk
  */
-const HistorikkMalType10: FunctionComponent<HistorikkMal> = ({
+const HistorikkMalType10 = ({
   historikkinnslag,
   behandlingLocation,
   getKodeverknavn,
   createLocationForSkjermlenke,
   saksnummer,
-}) => {
+}: HistorikkMal) => {
   const intl = useIntl();
   const { historikkinnslagDeler, dokumentLinks, type: originType } = historikkinnslag;
 
@@ -181,5 +181,7 @@ const HistorikkMalType10: FunctionComponent<HistorikkMal> = ({
     </>
   );
 };
+
+HistorikkMalType10.displayName = 'HistorikkMalType10';
 
 export default HistorikkMalType10;

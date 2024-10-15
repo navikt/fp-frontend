@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactNode, useCallback } from 'react';
+import React, { ReactNode, useCallback } from 'react';
 import { FormattedMessage, useIntl, IntlShape } from 'react-intl';
 import { BodyShort } from '@navikt/ds-react';
 
@@ -40,13 +40,13 @@ const formatChangedField = (endretFelt: HistorikkinnslagEndretFelt, intl: IntlSh
   return false;
 };
 
-const HistorikkMalType7: FunctionComponent<HistorikkMal> = ({
+const HistorikkMalType7 = ({
   historikkinnslag,
   behandlingLocation,
   getKodeverknavn,
   createLocationForSkjermlenke,
   saksnummer,
-}) => {
+}: HistorikkMal) => {
   const intl = useIntl();
   const { historikkinnslagDeler, dokumentLinks } = historikkinnslag;
 
@@ -107,5 +107,7 @@ const HistorikkMalType7: FunctionComponent<HistorikkMal> = ({
     </>
   );
 };
+
+HistorikkMalType7.displayName = 'HistorikkMalType7';
 
 export default HistorikkMalType7;

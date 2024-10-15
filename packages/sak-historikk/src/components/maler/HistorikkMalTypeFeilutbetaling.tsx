@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactNode, useCallback } from 'react';
+import React, { ReactNode, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { BodyShort } from '@navikt/ds-react';
 
@@ -68,12 +68,12 @@ const buildEndretFeltText = (
   );
 };
 
-const HistorikkMalTypeFeilutbetaling: FunctionComponent<HistorikkMal> = ({
+const HistorikkMalTypeFeilutbetaling = ({
   historikkinnslag,
   behandlingLocation,
   getKodeverknavn,
   createLocationForSkjermlenke,
-}) => {
+}: HistorikkMal) => {
   const { historikkinnslagDeler } = historikkinnslag;
   const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
 
@@ -110,5 +110,7 @@ const HistorikkMalTypeFeilutbetaling: FunctionComponent<HistorikkMal> = ({
     </>
   );
 };
+
+HistorikkMalTypeFeilutbetaling.displayName = 'HistorikkMalTypeFeilutbetaling';
 
 export default HistorikkMalTypeFeilutbetaling;

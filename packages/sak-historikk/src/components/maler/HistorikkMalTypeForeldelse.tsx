@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { BodyShort } from '@navikt/ds-react';
 
@@ -10,12 +10,12 @@ import historikkOpplysningTypeCodes from '../../kodeverk/historikkOpplysningType
 import HistorikkMal from '../HistorikkMalTsType';
 import Skjermlenke from './felles/Skjermlenke';
 
-const HistorikkMalTypeForeldelse: FunctionComponent<HistorikkMal> = ({
+const HistorikkMalTypeForeldelse = ({
   historikkinnslag,
   behandlingLocation,
   getKodeverknavn,
   createLocationForSkjermlenke,
-}) => {
+}: HistorikkMal) => {
   const { historikkinnslagDeler } = historikkinnslag;
 
   const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
@@ -87,5 +87,7 @@ const HistorikkMalTypeForeldelse: FunctionComponent<HistorikkMal> = ({
     </div>
   );
 };
+
+HistorikkMalTypeForeldelse.displayName = 'HistorikkMalTypeForeldelse';
 
 export default HistorikkMalTypeForeldelse;

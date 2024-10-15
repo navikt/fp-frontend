@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactNode, useCallback } from 'react';
+import React, { ReactNode, useCallback } from 'react';
 import { FormattedMessage, useIntl, IntlShape } from 'react-intl';
 import { BodyShort } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -156,13 +156,13 @@ const lagSoeknadsperiode = (soeknadsperiode?: HistorikkinnslagDel['soeknadsperio
     />
   );
 
-const HistorikkMalType5: FunctionComponent<HistorikkMal> = ({
+const HistorikkMalType5 = ({
   historikkinnslag,
   behandlingLocation,
   getKodeverknavn,
   createLocationForSkjermlenke,
   saksnummer,
-}) => {
+}: HistorikkMal) => {
   const intl = useIntl();
   const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
   return (
@@ -223,5 +223,7 @@ const HistorikkMalType5: FunctionComponent<HistorikkMal> = ({
     </>
   );
 };
+
+HistorikkMalType5.displayName = 'HistorikkMalType5';
 
 export default HistorikkMalType5;

@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { BodyShort } from '@navikt/ds-react';
 
 import { HistorikkInnslagOpplysning } from '@navikt/fp-types';
@@ -25,7 +25,7 @@ const formaterOpplysning = (
   </div>
 );
 
-const HistorikkMalType6: FunctionComponent<HistorikkMal> = ({ historikkinnslag, getKodeverknavn }) => (
+const HistorikkMalType6 = ({ historikkinnslag, getKodeverknavn }: HistorikkMal) => (
   <>
     {historikkinnslag.historikkinnslagDeler.map(del => (
       <div key={del.hendelse?.navn}>
@@ -37,5 +37,7 @@ const HistorikkMalType6: FunctionComponent<HistorikkMal> = ({ historikkinnslag, 
     ))}
   </>
 );
+
+HistorikkMalType6.displayName = 'HistorikkMalType6';
 
 export default HistorikkMalType6;

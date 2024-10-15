@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { BodyShort } from '@navikt/ds-react';
 
@@ -58,12 +58,12 @@ const lagBegrunnelseKomponent = (
   );
 };
 
-const HistorikkMalTypeTilbakekreving: FunctionComponent<HistorikkMal> = ({
+const HistorikkMalTypeTilbakekreving = ({
   historikkinnslag,
   behandlingLocation,
   getKodeverknavn,
   createLocationForSkjermlenke,
-}) => {
+}: HistorikkMal) => {
   const { historikkinnslagDeler } = historikkinnslag;
 
   const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
@@ -143,5 +143,7 @@ const HistorikkMalTypeTilbakekreving: FunctionComponent<HistorikkMal> = ({
     </>
   );
 };
+
+HistorikkMalTypeTilbakekreving.displayName = 'HistorikkMalTypeTilbakekreving';
 
 export default HistorikkMalTypeTilbakekreving;

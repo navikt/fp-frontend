@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { BodyShort } from '@navikt/ds-react';
 
@@ -65,12 +65,12 @@ const buildEndretFeltText = (
   );
 };
 
-const HistorikkMalTypeAktivitetskrav: FunctionComponent<HistorikkMal> = ({
+const HistorikkMalTypeAktivitetskrav = ({
   historikkinnslag,
   behandlingLocation,
   getKodeverknavn,
   createLocationForSkjermlenke,
-}) => {
+}: HistorikkMal) => {
   const { historikkinnslagDeler } = historikkinnslag;
   return (
     <>
@@ -100,5 +100,7 @@ const HistorikkMalTypeAktivitetskrav: FunctionComponent<HistorikkMal> = ({
     </>
   );
 };
+
+HistorikkMalTypeAktivitetskrav.displayName = 'HistorikkMalTypeAktivitetskrav';
 
 export default HistorikkMalTypeAktivitetskrav;

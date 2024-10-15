@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { KodeverkType, tilbakekrevingVidereBehandling } from '@navikt/fp-kodeverk';
@@ -26,12 +26,12 @@ const getSplitPeriods = (endredeFelter: HistorikkinnslagEndretFelt[]): string =>
   return text;
 };
 
-const HistorikkMalType9: FunctionComponent<HistorikkMal> = ({
+const HistorikkMalType9 = ({
   historikkinnslag,
   behandlingLocation,
   getKodeverknavn,
   createLocationForSkjermlenke,
-}) => {
+}: HistorikkMal) => {
   const intl = useIntl();
 
   const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
@@ -101,5 +101,7 @@ const HistorikkMalType9: FunctionComponent<HistorikkMal> = ({
     </>
   );
 };
+
+HistorikkMalType9.displayName = 'HistorikkMalType9';
 
 export default HistorikkMalType9;
