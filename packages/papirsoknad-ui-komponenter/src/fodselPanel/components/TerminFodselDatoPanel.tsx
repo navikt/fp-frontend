@@ -169,14 +169,6 @@ const TerminFodselDatoPanel: FunctionComponent<OwnProps> = ({ readOnly, erForeld
                     validate={[hasValidDate]}
                   />
                 </FlexColumn>
-                <FlexColumn>
-                  <Datepicker
-                    name="terminbekreftelseDato"
-                    label={intl.formatMessage({ id: 'Registrering.UtstedtDato' })}
-                    isReadOnly={readOnly}
-                    validate={[hasValidDate]}
-                  />
-                </FlexColumn>
               </FlexRow>
             </FlexContainer>
           </ArrowBox>
