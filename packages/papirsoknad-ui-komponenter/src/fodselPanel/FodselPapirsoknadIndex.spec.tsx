@@ -68,8 +68,8 @@ describe('<FodselPapirsoknadIndex>', () => {
     expect(
       screen.queryByText('Rett til prematuruker vil kun sjekkes når du også oppgir termindato'),
     ).not.toBeInTheDocument();
-    expect(screen.queryByText('Termindato')).not.toBeInTheDocument();
-    expect(screen.queryByText('Utstedt dato fra terminbekreftelsen')).not.toBeInTheDocument();
+    expect(screen.queryByText('Termindato')).toBeInTheDocument();
+    expect(screen.queryByText('Utstedt dato fra terminbekreftelsen')).toBeInTheDocument();
   });
 
   it('skal velge at barnet ikke er født', async () => {
