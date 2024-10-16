@@ -1,8 +1,8 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 import { FamilieHendelseSamling } from '@navikt/ft-types';
 
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktCode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
 import { OmsorgOgForeldreansvarFaktaIndex } from '@navikt/fp-fakta-omsorg-og-foreldreansvar';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { InntektArbeidYtelse, Personoversikt, Soknad } from '@navikt/fp-types';
@@ -11,7 +11,7 @@ import FaktaPanelInitProps from '../../felles/typer/faktaPanelInitProps';
 import FaktaDefaultInitPanel from '../../felles/fakta/FaktaDefaultInitPanel';
 import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
 
-const AKSJONSPUNKT_KODER = [AksjonspunktCode.OMSORGSOVERTAKELSE];
+const AKSJONSPUNKT_KODER = [AksjonspunktCode.OMSORGSOVERTAKELSE, AksjonspunktCode.AVKLAR_VILKAR_FOR_FORELDREANSVAR];
 
 const ENDEPUNKTER_PANEL_DATA = [
   BehandlingApiKeys.SOKNAD,
@@ -24,24 +24,21 @@ type EndepunktPanelData = {
   inntektArbeidYtelse: InntektArbeidYtelse;
 };
 
-interface OwnProps {
+interface Props {
   personoversikt: Personoversikt;
 }
 
 /**
  * OmsorgvilkaretFaktaInitPanel
  */
-const OmsorgvilkaretFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = ({
-  personoversikt,
-  ...props
-}) => (
+const OmsorgvilkaretFaktaInitPanel = ({ personoversikt, ...props }: Props & FaktaPanelInitProps) => (
   <FaktaDefaultInitPanel<EndepunktPanelData>
     {...props}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={FaktaPanelCode.OMSORGSVILKARET}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'OmsorgOgForeldreansvarInfoPanel.Omsorg' })}
-    skalPanelVisesIMeny={() => !!props.behandling.aksjonspunkt.some(ap => ap.definisjon === AKSJONSPUNKT_KODER[0])}
+    skalPanelVisesIMeny={() => AKSJONSPUNKT_KODER.some(kode => hasAksjonspunkt(kode, props.behandling.aksjonspunkt))}
     renderPanel={data => <OmsorgOgForeldreansvarFaktaIndex personoversikt={personoversikt} {...data} />}
   />
 );

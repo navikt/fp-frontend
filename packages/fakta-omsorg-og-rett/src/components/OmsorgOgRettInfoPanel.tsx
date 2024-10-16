@@ -3,22 +3,11 @@ import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { FormattedMessage } from 'react-intl';
 import { VStack } from '@navikt/ds-react';
 import { StandardFaktaPanelProps } from '@navikt/fp-types';
-import { Aksjonspunkt } from '@navikt/ft-types';
 import { AksjonspunktCode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
 import { PersonopplysningerForFamilie } from '@navikt/fp-fakta-felles';
 import { AleneomsorgForm, FormValues as AleneomsorgFormValues } from './forms/AleneomsorgForm';
 import { HarAnnenForelderRettForm, FormValues as RettFormValues } from './forms/HarAnnenForelderRettForm';
 import { OmsorgOgRettProps } from '../OmsorgOgRettFaktaIndex';
-
-const finnAksjonspunktTekst = (aksjonspunkter: Aksjonspunkt[]): string => {
-  if (hasAksjonspunkt(AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG, aksjonspunkter)) {
-    return 'OmsorgOgRettInfoPanel.VurderOmAleneomsorg';
-  }
-  if (hasAksjonspunkt(AksjonspunktCode.AVKLAR_ANNEN_FORELDER_RETT, aksjonspunkter)) {
-    return 'OmsorgOgRettInfoPanel.VurderAndreForelderRett';
-  }
-  return '';
-};
 
 export const OmsorgOgRettInfoPanel = ({
   readOnly,
@@ -30,21 +19,24 @@ export const OmsorgOgRettInfoPanel = ({
   formData,
   setFormData,
   alleMerknaderFraBeslutter,
+  harApneAksjonspunkter,
 }: OmsorgOgRettProps & StandardFaktaPanelProps) => {
-  const aksjonspunktTekst = finnAksjonspunktTekst(aksjonspunkter);
-  const harAleneomsorgAksjonspunkt = hasAksjonspunkt(
+  const harAPAleneomsorg = hasAksjonspunkt(
     AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
     aksjonspunkter,
   );
+  const harAPAnnenForelderRett = hasAksjonspunkt(AksjonspunktCode.AVKLAR_ANNEN_FORELDER_RETT, aksjonspunkter);
+
   return (
     <VStack gap="8">
-      {aksjonspunktTekst && (
+      {!readOnly && harApneAksjonspunkter && (
         <AksjonspunktHelpTextHTML>
-          <FormattedMessage id={aksjonspunktTekst} />
+          {harAPAleneomsorg && <FormattedMessage id="OmsorgOgRettInfoPanel.VurderOmAleneomsorg" />}
+          {harAPAnnenForelderRett && <FormattedMessage id="OmsorgOgRettInfoPanel.VurderAndreForelderRett" />}
         </AksjonspunktHelpTextHTML>
       )}
       <PersonopplysningerForFamilie alleKodeverk={alleKodeverk} personoversikt={personoversikt} />
-      {harAleneomsorgAksjonspunkt && (
+      {harAPAleneomsorg && (
         <AleneomsorgForm
           ytelsefordeling={ytelsefordeling}
           readOnly={readOnly}
@@ -55,7 +47,7 @@ export const OmsorgOgRettInfoPanel = ({
           aksjonspunkt={aksjonspunkter[0]}
         />
       )}
-      {!harAleneomsorgAksjonspunkt && (
+      {harAPAnnenForelderRett && (
         <HarAnnenForelderRettForm
           ytelsefordeling={ytelsefordeling}
           readOnly={readOnly}

@@ -1,9 +1,8 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import { Form } from '@navikt/ft-form-hooks';
 import { VStack } from '@navikt/ds-react';
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import {
   PersonopplysningerForFamilie,
@@ -15,24 +14,10 @@ import { BekreftOmsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter
 
 import { OmsorgFaktaFields, FormValues as OmsorgFormValues } from './OmsorgFaktaFields';
 
-const { MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG } = AksjonspunktCode;
-
-const getHelpTexts = (aksjonspunkter: Aksjonspunkt[]): ReactElement[] => {
-  const helpTexts = [];
-  const harOmsorgAp = aksjonspunkter.filter(ap => ap.definisjon === MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG);
-  if (harOmsorgAp.length > 0) {
-    helpTexts.push(<FormattedMessage key="VurderOmsorg" id="OmsorgInfoPanel.VurderOmsorg" />);
-  }
-  return helpTexts;
-};
-
 const buildInitialValues = (ytelsefordeling: Ytelsefordeling, aksjonspunkter: Aksjonspunkt[]): FormValues => {
-  const omsorgAp = aksjonspunkter.filter(
-    ap => ap.definisjon === AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG,
-  );
   return {
-    ...OmsorgFaktaFields.buildInitialValues(ytelsefordeling, omsorgAp),
-    ...FaktaBegrunnelseTextFieldNew.buildInitialValues(omsorgAp),
+    ...OmsorgFaktaFields.buildInitialValues(ytelsefordeling, aksjonspunkter),
+    ...FaktaBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
   };
 };
 
@@ -51,7 +36,7 @@ interface Props {
   submitCallback: (data: BekreftOmsorgVurderingAp) => Promise<void>;
 }
 
-const OmsorgInfoPanel = ({
+export const OmsorgInfoPanel = ({
   personoversikt,
   readOnly,
   harApneAksjonspunkter,
@@ -71,7 +56,9 @@ const OmsorgInfoPanel = ({
   return (
     <VStack gap="8">
       {!readOnly && harApneAksjonspunkter && (
-        <AksjonspunktHelpTextHTML>{getHelpTexts(aksjonspunkter)}</AksjonspunktHelpTextHTML>
+        <AksjonspunktHelpTextHTML>
+          <FormattedMessage id="OmsorgInfoPanel.VurderOmsorg" />
+        </AksjonspunktHelpTextHTML>
       )}
       <PersonopplysningerForFamilie alleKodeverk={alleKodeverk} personoversikt={personoversikt} />
       <Form
@@ -104,5 +91,3 @@ const OmsorgInfoPanel = ({
     </VStack>
   );
 };
-
-export default OmsorgInfoPanel;

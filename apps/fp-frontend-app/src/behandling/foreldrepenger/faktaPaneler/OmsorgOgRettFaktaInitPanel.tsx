@@ -1,7 +1,7 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktCode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
 import { OmsorgOgRettFaktaIndex } from '@navikt/fp-fakta-omsorg-og-rett';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { Personoversikt, Ytelsefordeling } from '@navikt/fp-types';
@@ -20,26 +20,21 @@ type EndepunktPanelData = {
   ytelsefordeling: Ytelsefordeling;
 };
 
-interface OwnProps {
+interface Props {
   personoversikt: Personoversikt;
 }
 
 /**
  * OmsorgOgRettFaktaInitPanel
  */
-const OmsorgOgRettFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = ({
-  personoversikt,
-  ...props
-}) => (
+const OmsorgOgRettFaktaInitPanel = ({ personoversikt, ...props }: Props & FaktaPanelInitProps) => (
   <FaktaDefaultInitPanel<EndepunktPanelData>
     {...props}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={FaktaPanelCode.OMSORG_OG_RETT}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'OmsorgInfoPanel.OmsorgOgRett' })}
-    skalPanelVisesIMeny={() =>
-      !!props.behandling.aksjonspunkt?.some(ap => AKSJONSPUNKT_KODER.some(kode => kode === ap.definisjon))
-    }
+    skalPanelVisesIMeny={() => AKSJONSPUNKT_KODER.some(kode => hasAksjonspunkt(kode, props.behandling.aksjonspunkt))}
     renderPanel={data => <OmsorgOgRettFaktaIndex personoversikt={personoversikt} {...data} />}
   />
 );
