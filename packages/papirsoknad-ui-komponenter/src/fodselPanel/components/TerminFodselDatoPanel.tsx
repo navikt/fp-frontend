@@ -166,7 +166,7 @@ const TerminFodselDatoPanel: FunctionComponent<OwnProps> = ({ readOnly, erForeld
                     name="termindato"
                     label={intl.formatMessage({ id: 'Registrering.Termindato' })}
                     isReadOnly={readOnly}
-                    validate={erForeldrepenger ? [hasValidDate] : [required, hasValidDate]}
+                    validate={[hasValidDate]}
                   />
                 </FlexColumn>
               </FlexRow>
