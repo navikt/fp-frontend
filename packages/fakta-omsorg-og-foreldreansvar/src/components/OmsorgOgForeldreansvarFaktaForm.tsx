@@ -2,7 +2,7 @@ import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Label, BodyShort, VStack, HGrid } from '@navikt/ds-react';
 
-import { AksjonspunktHelpTextHTML, VerticalSpacer, FaktaGruppe, EditedIcon } from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer, FaktaGruppe, EditedIcon } from '@navikt/ft-ui-komponenter';
 import { AksjonspunktCode, VilkarType, KodeverkType } from '@navikt/fp-kodeverk';
 import { SelectField } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
@@ -42,14 +42,6 @@ const getDescriptionText = (vilkarCode?: string): ReactElement => {
   return <FormattedMessage id="OmsorgOgForeldreansvarFaktaForm.ChooseVilkarToSeeDescription" />;
 };
 
-const findAksjonspunktHelpTexts = (erAksjonspunktForeldreansvar: boolean): ReactElement[] =>
-  erAksjonspunktForeldreansvar
-    ? [<FormattedMessage key="CheckInformation" id="OmsorgOgForeldreansvarFaktaForm.CheckInformationForeldreansvar" />]
-    : [
-        <FormattedMessage key="CheckInformation" id="OmsorgOgForeldreansvarFaktaForm.CheckInformation" />,
-        <FormattedMessage key="ChooseVilkar" id="OmsorgOgForeldreansvarFaktaForm.ChooseVilkar" />,
-      ];
-
 const getEditedStatus = (soknad: Soknad, gjeldendeFamiliehendelse: FamilieHendelse): FieldEditedInfo =>
   isFieldEdited(soknad, gjeldendeFamiliehendelse);
 
@@ -63,7 +55,6 @@ interface Props {
   gjeldendeFamiliehendelse: FamilieHendelse;
   readOnly: boolean;
   vilkarTypes: KodeverkMedNavn[];
-  hasOpenAksjonspunkter: boolean;
   erAksjonspunktForeldreansvar: boolean;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   personoversikt: Personoversikt;
@@ -90,7 +81,6 @@ interface StaticFunctions {
 const OmsorgOgForeldreansvarFaktaForm: FunctionComponent<Props> & StaticFunctions = ({
   readOnly,
   vilkarTypes,
-  hasOpenAksjonspunkter,
   soknad,
   erAksjonspunktForeldreansvar,
   alleMerknaderFraBeslutter,
@@ -105,67 +95,60 @@ const OmsorgOgForeldreansvarFaktaForm: FunctionComponent<Props> & StaticFunction
   const vilkarType = watch('vilkarType');
 
   return (
-    <>
-      {hasOpenAksjonspunkter && (
-        <AksjonspunktHelpTextHTML>{findAksjonspunktHelpTexts(erAksjonspunktForeldreansvar)}</AksjonspunktHelpTextHTML>
-      )}
-      <VStack gap="2">
-        <HGrid gap="5" columns="repeat(auto-fit, minmax(16rem, 1fr))">
-          <OmsorgsovertakelseFaktaPanel
-            readOnly={readOnly}
-            erAksjonspunktForeldreansvar={erAksjonspunktForeldreansvar}
-            editedStatus={editedStatus}
-            alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-            soknad={soknad}
-            familiehendelse={gjeldendeFamiliehendelse}
-          />
-          {!erAksjonspunktForeldreansvar && (
-            <RettighetFaktaPanel alleMerknaderFraBeslutter={alleMerknaderFraBeslutter} />
+    <VStack gap="2">
+      <HGrid gap="5" columns="repeat(auto-fit, minmax(16rem, 1fr))">
+        <OmsorgsovertakelseFaktaPanel
+          readOnly={readOnly}
+          erAksjonspunktForeldreansvar={erAksjonspunktForeldreansvar}
+          editedStatus={editedStatus}
+          alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+          soknad={soknad}
+          familiehendelse={gjeldendeFamiliehendelse}
+        />
+        {!erAksjonspunktForeldreansvar && <RettighetFaktaPanel alleMerknaderFraBeslutter={alleMerknaderFraBeslutter} />}
+      </HGrid>
+      <HGrid gap="5" columns="repeat(auto-fit, minmax(16rem, 1fr))">
+        <BarnPanel soknad={soknad} alleMerknaderFraBeslutter={alleMerknaderFraBeslutter} intl={intl} />
+        <ForeldrePanel
+          personoversikt={personoversikt}
+          alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+          intl={intl}
+        />
+      </HGrid>
+      {!erAksjonspunktForeldreansvar && (
+        <FaktaGruppe
+          title={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.VelgVilkaarSomSkalAnvendes' })}
+          merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.OMSORGSOVERTAKELSE]}
+        >
+          {!readOnly && (
+            <SelectField
+              name="vilkarType"
+              validate={[required]}
+              hideLabel
+              label=""
+              selectValues={vilkarTypes.map(d => (
+                <option key={d.kode} value={d.kode}>
+                  {d.navn}
+                </option>
+              ))}
+              className={styles.breddeSelect}
+              readOnly={readOnly}
+              disabled={readOnly}
+            />
           )}
-        </HGrid>
-        <HGrid gap="5" columns="repeat(auto-fit, minmax(16rem, 1fr))">
-          <BarnPanel soknad={soknad} alleMerknaderFraBeslutter={alleMerknaderFraBeslutter} intl={intl} />
-          <ForeldrePanel
-            personoversikt={personoversikt}
-            alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-            intl={intl}
-          />
-        </HGrid>
-        {!erAksjonspunktForeldreansvar && (
-          <FaktaGruppe
-            title={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.VelgVilkaarSomSkalAnvendes' })}
-            merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.OMSORGSOVERTAKELSE]}
-          >
-            {!readOnly && (
-              <SelectField
-                name="vilkarType"
-                validate={[required]}
-                hideLabel
-                label=""
-                selectValues={vilkarTypes.map(d => (
-                  <option key={d.kode} value={d.kode}>
-                    {d.navn}
-                  </option>
-                ))}
-                className={styles.breddeSelect}
-                readOnly={readOnly}
-                disabled={readOnly}
-              />
-            )}
-            {readOnly && vilkarType && (
-              <div className={styles.vilkarTypeReadOnly}>
-                <Label size="small" as="span">
-                  {(vilkarTypes.find(d => d.kode === vilkarType) || {}).navn}
-                </Label>
-                {editedStatus.vilkarType && <EditedIcon />}
-              </div>
-            )}
-            <VerticalSpacer eightPx />
-            <BodyShort size="small">{getDescriptionText(vilkarType)}</BodyShort>
-          </FaktaGruppe>
-        )}
-      </VStack>
-    </>
+          {readOnly && vilkarType && (
+            <div className={styles.vilkarTypeReadOnly}>
+              <Label size="small" as="span">
+                {(vilkarTypes.find(d => d.kode === vilkarType) || {}).navn}
+              </Label>
+              {editedStatus.vilkarType && <EditedIcon />}
+            </div>
+          )}
+          <VerticalSpacer eightPx />
+          <BodyShort size="small">{getDescriptionText(vilkarType)}</BodyShort>
+        </FaktaGruppe>
+      )}
+    </VStack>
   );
 };
 

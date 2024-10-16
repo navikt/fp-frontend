@@ -13,8 +13,9 @@ describe('<OmsorgOgForeldreansvarFaktaIndex>', () => {
 
     const utils = render(<ÅpentAksjonspunktForOmsorgovertakelse submitCallback={lagre} />);
 
-    expect(await screen.findByText('Kontroller opplysningene om omsorgsovertakelse')).toBeInTheDocument();
-    expect(screen.getAllByText('Velg vilkår som skal anvendes')[0]).toBeInTheDocument();
+    expect(
+      await screen.findByText('Kontroller opplysningene om omsorgsovertakelse. Velg vilkår som skal anvendes'),
+    ).toBeInTheDocument();
 
     expect(screen.getByText('Opplysninger om omsorg')).toBeInTheDocument();
     const omsorgsovertakelseInput = utils.getByLabelText('Dato for omsorgsovertakelse');
@@ -37,7 +38,7 @@ describe('<OmsorgOgForeldreansvarFaktaIndex>', () => {
     expect(screen.getByText('Dødsdato')).toBeInTheDocument();
     expect(screen.getByText('01.01.2021')).toBeInTheDocument();
 
-    expect(screen.getAllByText('Velg vilkår som skal anvendes')[1]).toBeInTheDocument();
+    expect(screen.getByText('Velg vilkår som skal anvendes')).toBeInTheDocument();
     await userEvent.selectOptions(screen.getByRole('combobox', { hidden: true }), 'FP_VK_5');
 
     expect(

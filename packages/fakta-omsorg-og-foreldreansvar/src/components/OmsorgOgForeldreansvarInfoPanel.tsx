@@ -1,10 +1,11 @@
-import React, { FunctionComponent } from 'react';
-import { useIntl } from 'react-intl';
+import React, { ReactElement } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
-
+import { VStack } from '@navikt/ds-react';
+import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { FaktaBegrunnelseTextFieldNew, FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
 import { Form } from '@navikt/ft-form-hooks';
-import { AksjonspunktCode, getKodeverknavnFn, KodeverkType } from '@navikt/fp-kodeverk';
+import { AksjonspunktCode, getKodeverknavnFn, hasAksjonspunkt, KodeverkType } from '@navikt/fp-kodeverk';
 import {
   Aksjonspunkt,
   FamilieHendelse,
@@ -12,6 +13,7 @@ import {
   RelatertTilgrensedYtelse,
   Soknad,
   AlleKodeverk,
+  StandardFaktaPanelProps,
 } from '@navikt/fp-types';
 import {
   AvklarFaktaForForeldreansvarAksjonspunktAp,
@@ -19,7 +21,6 @@ import {
 } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import OmsorgOgForeldreansvarFaktaForm, { FormValues as OmsorgFormValues } from './OmsorgOgForeldreansvarFaktaForm';
-import { VStack } from '@navikt/ds-react';
 
 type FormValues = OmsorgFormValues & {
   begrunnelse?: string;
@@ -56,22 +57,24 @@ const buildInitialValues = (
   };
 };
 
-interface PureOwnProps {
+const findAksjonspunktHelpTexts = (erAksjonspunktForeldreansvar: boolean): ReactElement[] =>
+  erAksjonspunktForeldreansvar
+    ? [<FormattedMessage key="CheckInformation" id="OmsorgOgForeldreansvarInfoPanel.CheckInformationForeldreansvar" />]
+    : [
+        <FormattedMessage
+          key="CheckInformation"
+          id="OmsorgOgForeldreansvarInfoPanel.CheckInformationOmsorgsovertakelse"
+        />,
+      ];
+
+interface Props {
   soknad: Soknad;
   personoversikt: Personoversikt;
   gjeldendeFamiliehendelse: FamilieHendelse;
   innvilgetRelatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYtelse[];
-  aksjonspunkter: Aksjonspunkt[];
-  alleKodeverk: AlleKodeverk;
   submitCallback: (
     data: AvklarFaktaForForeldreansvarAksjonspunktAp | AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp,
   ) => Promise<void>;
-  hasOpenAksjonspunkter: boolean;
-  submittable: boolean;
-  readOnly: boolean;
-  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
-  formData: FormValues;
-  setFormData: (data: FormValues) => void;
 }
 
 /**
@@ -79,8 +82,8 @@ interface PureOwnProps {
  *
  * Har ansvar for å sette opp form for faktapenelet til Omsorgsvilkåret.
  */
-export const OmsorgOgForeldreansvarInfoPanel: FunctionComponent<PureOwnProps> = ({
-  hasOpenAksjonspunkter,
+export const OmsorgOgForeldreansvarInfoPanel = ({
+  harApneAksjonspunkter,
   submittable,
   readOnly,
   innvilgetRelatertTilgrensendeYtelserForAnnenForelder,
@@ -91,7 +94,7 @@ export const OmsorgOgForeldreansvarInfoPanel: FunctionComponent<PureOwnProps> = 
   submitCallback,
   aksjonspunkter,
   alleKodeverk,
-}) => {
+}: Props & StandardFaktaPanelProps) => {
   const intl = useIntl();
 
   const formMethods = useForm<FormValues>({
@@ -106,8 +109,10 @@ export const OmsorgOgForeldreansvarInfoPanel: FunctionComponent<PureOwnProps> = 
 
   const begrunnelse = formMethods.watch('begrunnelse');
 
-  const erAksjonspunktForeldreansvar =
-    aksjonspunkter[0].definisjon === AksjonspunktCode.AVKLAR_VILKAR_FOR_FORELDREANSVAR;
+  const erAksjonspunktForeldreansvar = hasAksjonspunkt(
+    AksjonspunktCode.AVKLAR_VILKAR_FOR_FORELDREANSVAR,
+    aksjonspunkter,
+  );
 
   return (
     <Form
@@ -115,11 +120,13 @@ export const OmsorgOgForeldreansvarInfoPanel: FunctionComponent<PureOwnProps> = 
       onSubmit={(values: FormValues) => submitCallback(transformValues(values, aksjonspunkter[0]))}
     >
       <VStack gap="5">
+        {!readOnly && harApneAksjonspunkter && (
+          <AksjonspunktHelpTextHTML>{findAksjonspunktHelpTexts(erAksjonspunktForeldreansvar)}</AksjonspunktHelpTextHTML>
+        )}
         <OmsorgOgForeldreansvarFaktaForm
           erAksjonspunktForeldreansvar={erAksjonspunktForeldreansvar}
           readOnly={readOnly}
           vilkarTypes={alleKodeverk[KodeverkType.OMSORGSOVERTAKELSE_VILKAR_TYPE]}
-          hasOpenAksjonspunkter={hasOpenAksjonspunkter}
           alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
           soknad={soknad}
           gjeldendeFamiliehendelse={gjeldendeFamiliehendelse}
@@ -145,5 +152,3 @@ export const OmsorgOgForeldreansvarInfoPanel: FunctionComponent<PureOwnProps> = 
     </Form>
   );
 };
-
-export default OmsorgOgForeldreansvarInfoPanel;

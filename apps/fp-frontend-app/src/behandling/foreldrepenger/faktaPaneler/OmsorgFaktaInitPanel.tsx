@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktCode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
 import { OmsorgFaktaIndex } from '@navikt/fp-fakta-omsorg';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { Personoversikt, Ytelsefordeling } from '@navikt/fp-types';
@@ -31,9 +31,7 @@ const OmsorgFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = 
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={FaktaPanelCode.OMSORG}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'OmsorgInfoPanel.Omsorg' })}
-    skalPanelVisesIMeny={() =>
-      !!props.behandling.aksjonspunkt?.some(ap => AKSJONSPUNKT_KODER.some(kode => kode === ap.definisjon))
-    }
+    skalPanelVisesIMeny={() => AKSJONSPUNKT_KODER.some(kode => hasAksjonspunkt(kode, props.behandling.aksjonspunkt))}
     renderPanel={data => <OmsorgFaktaIndex personoversikt={personoversikt} {...data} />}
   />
 );

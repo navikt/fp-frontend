@@ -2,8 +2,10 @@
   "OmsorgOgForeldreansvarInfoPanel.BegrunnelseTitleEs": "Begrunn valg av vilkår",
   "OmsorgOgForeldreansvarInfoPanel.BegrunnelseTitleFp": "Begrunn endringene",
 
+  "OmsorgOgForeldreansvarInfoPanel.CheckInformationForeldreansvar": "Kontroller opplysninger om foreldreansvar og omsorg",
+  "OmsorgOgForeldreansvarInfoPanel.CheckInformationOmsorgsovertakelse": "Kontroller opplysningene om omsorgsovertakelse. Velg vilkår som skal anvendes",
+
   "OmsorgOgForeldreansvarFaktaForm.OmsorgInfo": "Opplysninger om omsorg",
-  "OmsorgOgForeldreansvarFaktaForm.CheckInformationForeldreansvar": "Kontroller opplysninger om foreldreansvar og omsorg",
   "OmsorgOgForeldreansvarFaktaForm.ForeldreansvarInfo": "Foreldreansvar og omsorg",
   "OmsorgOgForeldreansvarFaktaForm.ApplicationInformation": "Omsorgsvilkåret",
   "OmsorgOgForeldreansvarFaktaForm.OmsorgsovertakelseDate": "Dato for omsorgsovertakelse",
@@ -11,8 +13,6 @@
   "OmsorgOgForeldreansvarFaktaForm.NrOfChildren": "Antall barn",
   "OmsorgOgForeldreansvarFaktaForm.AndreYtelseTilMor": "Andre ytelser til mor",
   "OmsorgOgForeldreansvarFaktaForm.VelgVilkaarSomSkalAnvendes": "Velg vilkår som skal anvendes",
-  "OmsorgOgForeldreansvarFaktaForm.CheckInformation": "Kontroller opplysningene om omsorgsovertakelse",
-  "OmsorgOgForeldreansvarFaktaForm.ChooseVilkar": "Velg vilkår som skal anvendes",
   "OmsorgOgForeldreansvarFaktaForm.Rettighet": "Rettighet",
   "OmsorgOgForeldreansvarFaktaForm.YtelseIverksatt": "{ytelseType} iverksatt ",
   "OmsorgOgForeldreansvarFaktaForm.ChooseVilkarToSeeDescription": "Velg vilkår for å se beskrivelsesteksten",
