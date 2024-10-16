@@ -73,7 +73,7 @@ const RegistreringFodselGrid: FunctionComponent<OwnProps> & StaticFunctions = ({
           fodselsdato={fodselsdato}
         />
       )}
-      <FodselPapirsoknadIndex readOnly={readOnly} />
+      <FodselPapirsoknadIndex readOnly={readOnly} erForeldrepenger={false}/>
     </div>
   </HStack>
 );
