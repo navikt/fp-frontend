@@ -9,7 +9,7 @@ const intl = createIntl(messages);
 
 interface OwnProps {
   readOnly: boolean;
-  erForeldrepenger?: boolean;
+  erForeldrepenger: boolean;
 }
 
 const FodselPapirsoknadIndex: FunctionComponent<OwnProps> = ({ readOnly, erForeldrepenger }) => (

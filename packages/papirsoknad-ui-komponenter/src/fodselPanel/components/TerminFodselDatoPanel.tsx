@@ -45,7 +45,7 @@ const validateTermin = (getValues: UseFormGetValues<FormValues>) => (terminbekre
 
 interface OwnProps {
   readOnly: boolean;
-  erForeldrepenger?: boolean;
+  erForeldrepenger: boolean;
 }
 
 /*
@@ -53,7 +53,7 @@ interface OwnProps {
  *
  * Form som brukes for registrere termin i papir soknad.
  */
-const TerminFodselDatoPanel: FunctionComponent<OwnProps> = ({ readOnly, erForeldrepenger = false }) => {
+const TerminFodselDatoPanel: FunctionComponent<OwnProps> = ({ readOnly, erForeldrepenger }) => {
   const intl = useIntl();
 
   const {
@@ -157,16 +157,16 @@ const TerminFodselDatoPanel: FunctionComponent<OwnProps> = ({ readOnly, erForeld
                       <FormattedMessage id="Registrering.RettTilPrematuruker" />
                     </Label>
                   </Alert>
-                  <VerticalSpacer sixteenPx />
                 </>
               )}
+              <VerticalSpacer sixteenPx />
               <FlexRow>
                 <FlexColumn>
                   <Datepicker
                     name="termindato"
                     label={intl.formatMessage({ id: 'Registrering.Termindato' })}
                     isReadOnly={readOnly}
-                    validate={[hasValidDate]}
+                    validate={erForeldrepenger ? [hasValidDate] : [required, hasValidDate]}
                   />
                 </FlexColumn>
               </FlexRow>
