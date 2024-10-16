@@ -40,9 +40,7 @@ describe('<FodselPapirsoknadIndex>', () => {
     await userEvent.type(termindatoInput, '14.09.2022');
     fireEvent.blur(termindatoInput);
 
-    const utstedDatoInput = utils.getByLabelText('Utstedt dato fra terminbekreftelsen');
-    await userEvent.type(utstedDatoInput, '15.09.2022');
-    fireEvent.blur(utstedDatoInput);
+    expect(screen.queryByText('Utstedt dato fra terminbekreftelsen')).not.toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
@@ -51,7 +49,6 @@ describe('<FodselPapirsoknadIndex>', () => {
       antallBarn: '2',
       erBarnetFodt: true,
       foedselsDato: dayjs().subtract(10, 'day').format(ISO_DATE_FORMAT),
-      terminbekreftelseDato: '2022-09-15',
       termindato: '2022-09-14',
     });
   });
@@ -68,7 +65,7 @@ describe('<FodselPapirsoknadIndex>', () => {
     expect(
       screen.queryByText('Rett til prematuruker vil kun sjekkes når du også oppgir termindato'),
     ).not.toBeInTheDocument();
-    expect(screen.queryByText('Termindato')).not.toBeInTheDocument();
+    expect(screen.queryByText('Termindato')).toBeInTheDocument();
     expect(screen.queryByText('Utstedt dato fra terminbekreftelsen')).not.toBeInTheDocument();
   });
 
