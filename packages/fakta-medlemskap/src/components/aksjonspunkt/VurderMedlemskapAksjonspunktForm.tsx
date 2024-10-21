@@ -3,10 +3,10 @@ import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
 
 import { Button, VStack } from '@navikt/ds-react';
-import { AksjonspunktCode, KodeverkType, VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktCode, behandlingType as BehandlingType, KodeverkType, VilkarType } from '@navikt/fp-kodeverk';
 import { FaktaBegrunnelseTextFieldNew } from '@navikt/fp-fakta-felles';
 import { Form } from '@navikt/ft-form-hooks';
-import { Aksjonspunkt, AlleKodeverk, ManuellBehandlingResultat } from '@navikt/fp-types';
+import { Aksjonspunkt, AlleKodeverk, Behandling, ManuellBehandlingResultat } from '@navikt/fp-types';
 import { VurderMedlemskapAp, VurderForutgaendeMedlemskapAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import InfoBox from '../InfoBox';
@@ -23,6 +23,7 @@ interface Props {
   alleKodeverk: AlleKodeverk;
   submitCallback: (aksjonspunktData: VurderMedlemskapAp | VurderForutgaendeMedlemskapAp) => Promise<void>;
   aksjonspunkt: Aksjonspunkt;
+  behandling: Behandling;
   manuellBehandlingResultat: ManuellBehandlingResultat | null;
   ytelse: string;
 }
@@ -63,6 +64,7 @@ const VurderMedlemskapAksjonspunktForm: FC<Props> = ({
   alleKodeverk,
   submitCallback,
   aksjonspunkt,
+  behandling,
   manuellBehandlingResultat,
   ytelse,
 }) => {
@@ -100,6 +102,7 @@ const VurderMedlemskapAksjonspunktForm: FC<Props> = ({
         <VStack gap={readOnly ? '2' : '6'}>
           <MedlemskapVurderinger
             erForutgående={erForutgåendeAksjonspunkt}
+            erRevurdering={behandling.type === BehandlingType.REVURDERING}
             avslagsarsaker={avslagsarsaker}
             readOnly={readOnly}
             ytelse={ytelse}
