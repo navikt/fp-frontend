@@ -7,7 +7,13 @@ import { OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 
 import { Form } from '@navikt/ft-form-hooks';
 import { Aksjonspunkt, AlleKodeverk, Behandling, KodeverkMedNavn, ManuellBehandlingResultat } from '@navikt/fp-types';
-import { AksjonspunktCode, aksjonspunktStatus, OverstyringAksjonspunkter, vilkarUtfallType } from '@navikt/fp-kodeverk';
+import {
+  AksjonspunktCode,
+  aksjonspunktStatus,
+  behandlingType as BehandlingType,
+  OverstyringAksjonspunkter,
+  vilkarUtfallType,
+} from '@navikt/fp-kodeverk';
 import { OverstyringPanel, VilkarResultPicker } from '@navikt/fp-prosess-felles';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 import {
@@ -111,6 +117,7 @@ interface OwnProps {
   behandlingsresultat?: Behandling['behandlingsresultat'];
   medlemskapManuellBehandlingResultat?: ManuellBehandlingResultat;
   aksjonspunkter: Aksjonspunkt[];
+  behandling: Behandling;
   submitCallback: (data: OverstyringVilkår) => Promise<void>;
   overrideReadOnly: boolean;
   kanOverstyreAccess: {
@@ -142,6 +149,7 @@ const VilkarresultatMedOverstyringForm: FunctionComponent<OwnProps> = ({
   lovReferanse,
   avslagsarsaker,
   aksjonspunkter,
+  behandling,
   overrideReadOnly,
   kanOverstyreAccess,
   behandlingsresultat,
@@ -251,6 +259,7 @@ const VilkarresultatMedOverstyringForm: FunctionComponent<OwnProps> = ({
                 avslagsarsaker={avslagsarsaker}
                 readOnly={overrideReadOnly || !erOverstyrt}
                 ytelse={ytelseType}
+                erRevurdering={behandling.type === BehandlingType.REVURDERING}
                 erForutgående={overstyringApKode === AksjonspunktCode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE}
               />
             ) : (

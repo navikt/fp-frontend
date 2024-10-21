@@ -113,6 +113,10 @@ OverstyringspanelForMedlemskap.args = {
   panelTittelKode: 'Inngangsvilkar.Medlemskapsvilkaret',
   overstyringApKode: AksjonspunktCode.OVERSTYR_MEDLEMSKAPSVILKAR,
   avslagsarsaker: alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.MEDLEMSKAPSVILKARET],
+  behandling: {
+    ...defaultBehandling,
+    type: behandlingType.REVURDERING,
+  } as Behandling,
 };
 
 export const OverstyringErUtførtForMedlemskap = Template.bind({});

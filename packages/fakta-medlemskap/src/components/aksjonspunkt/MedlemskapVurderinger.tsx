@@ -6,7 +6,6 @@ import { VStack } from '@navikt/ds-react';
 import { Datepicker, RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { KodeverkMedNavn } from '@navikt/fp-types';
-import { fagsakYtelseType } from '@navikt/fp-kodeverk';
 import { createIntl } from '@navikt/ft-utils';
 
 import {
@@ -16,6 +15,7 @@ import {
 } from '../../types/vurderingMedlemskapForm';
 
 import messages from '../../../i18n/nb_NO.json';
+import { lagVurderingsAlternativer } from './lagVurderingsAlternativer';
 
 const intl = createIntl(messages);
 
@@ -24,36 +24,10 @@ interface Props {
   readOnly: boolean;
   ytelse: string;
   erForutgående: boolean;
+  erRevurdering: boolean;
 }
 
-const lagVurderingsAlternativer = (
-  ytelse: string,
-  erForutgående: boolean,
-): {
-  value: string;
-  label: string;
-}[] => {
-  return [
-    {
-      label: 'Oppfylt',
-      value: MedlemskapVurdering.OPPFYLT,
-    },
-    ...(!erForutgående && ytelse !== fagsakYtelseType.ENGANGSSTONAD
-      ? [
-          {
-            label: 'Delvis oppfylt',
-            value: MedlemskapVurdering.DELVIS_OPPFYLT,
-          },
-        ]
-      : []),
-    {
-      label: 'Ikke oppfylt',
-      value: MedlemskapVurdering.IKKE_OPPFYLT,
-    },
-  ];
-};
-
-export const MedlemskapVurderinger = ({ readOnly, ytelse, avslagsarsaker, erForutgående }: Props) => {
+export const MedlemskapVurderinger = ({ readOnly, ytelse, avslagsarsaker, erForutgående, erRevurdering }: Props) => {
   const { watch } = useFormContext<VurderMedlemskapFormValues>();
   const vurdering = watch('vurdering');
   const avslagskode = watch('avslagskode');
@@ -72,7 +46,7 @@ export const MedlemskapVurderinger = ({ readOnly, ytelse, avslagsarsaker, erForu
           })}
           validate={[required]}
           isReadOnly={readOnly}
-          radios={lagVurderingsAlternativer(ytelse, erForutgående)}
+          radios={lagVurderingsAlternativer(ytelse, erForutgående, erRevurdering)}
         />
         {vurdering && [MedlemskapVurdering.DELVIS_OPPFYLT, MedlemskapVurdering.IKKE_OPPFYLT].includes(vurdering) && (
           <SelectField

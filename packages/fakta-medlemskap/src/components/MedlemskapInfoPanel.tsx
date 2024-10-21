@@ -26,6 +26,7 @@ const MedlemskapInfoPanel: FC<MedlemskapFaktaProps> = ({
   soknad,
   fagsak,
   alleKodeverk,
+  behandling,
   readOnly,
   ...rest
 }) => {
@@ -42,6 +43,7 @@ const MedlemskapInfoPanel: FC<MedlemskapFaktaProps> = ({
           <VurderMedlemskapAksjonspunktForm
             manuellBehandlingResultat={medlemskap.manuellBehandlingResultat}
             aksjonspunkt={aksjonspunkt}
+            behandling={behandling}
             alleKodeverk={alleKodeverk}
             readOnly={readOnly}
             ytelse={fagsak.fagsakYtelseType}
@@ -92,6 +94,7 @@ const MedlemskapInfoPanel: FC<MedlemskapFaktaProps> = ({
           <VurderMedlemskapAksjonspunktForm
             manuellBehandlingResultat={medlemskap.manuellBehandlingResultat}
             aksjonspunkt={aksjonspunkt}
+            behandling={behandling}
             alleKodeverk={alleKodeverk}
             readOnly={readOnly}
             ytelse={fagsak.fagsakYtelseType}

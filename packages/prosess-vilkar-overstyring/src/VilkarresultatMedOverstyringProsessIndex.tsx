@@ -52,6 +52,7 @@ const VilkarresultatMedOverstyringProsessIndex: FunctionComponent<OwnProps & Sta
       behandlingsresultat={behandling.behandlingsresultat}
       medlemskapManuellBehandlingResultat={medlemskap?.manuellBehandlingResultat ?? undefined}
       aksjonspunkter={aksjonspunkter}
+      behandling={behandling}
       submitCallback={submitCallback}
       overrideReadOnly={overrideReadOnly}
       kanOverstyreAccess={kanOverstyreAccess}
