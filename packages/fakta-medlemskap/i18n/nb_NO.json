@@ -98,7 +98,7 @@
   "OpplysningsKort.OppholdstillatelseTittel": "Oppholdstillatelse({count})",
 
   "AvvikMerknad.BosattUtenlandsopphold": "Dette ble markert fordi søker har oppgitt at man skal eller har bodd i utlandet",
-  "AvvikMerknad.BosattManglendeAdresse": "Dette ble markert fordi det ikke er registrert norske bostedsadresser i folkeregisteret",
+  "AvvikMerknad.BosattManglendeBostedsadresse": "Dette ble markert fordi det finnes perioder uten norsk bostedsadresse i folkeregisteret",
   "AvvikMerknad.BosattUgyldigPersonstatus": "Dette ble markert fordi søker er registrert som {personstatus}",
   "AvvikMerknad.BosattUtenlandsadresse": "Dette ble markert fordi det er registrert én eller flere adresser i utlandet",
   "AvvikMerknad.Oppholdsrett": "Dette ble markert fordi søker mangler oppholdstillatelse",
