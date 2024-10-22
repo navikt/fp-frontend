@@ -4,6 +4,7 @@ import {
   Fagsak,
   FagsakDataFpTilbake,
   Historikkinnslag,
+  HistorikkinnslagV2,
 } from '@navikt/fp-types';
 
 class FagsakData {
@@ -60,6 +61,15 @@ class FagsakData {
 
   getHistorikkFpTilbake(): Historikkinnslag[] | undefined {
     return this.$$fpTilbakeFagsakData?.historikkinnslag;
+  }
+
+  getHistorikkV2FpSak(): HistorikkinnslagV2[] {
+    return this.$$fagsak.historikkinnslagV2;
+  }
+
+  getHistorikkV2FpTilbake(): HistorikkinnslagV2[] | undefined {
+    return undefined;
+    //return this.$$fpTilbakeFagsakData?.historikkinnslagV2;
   }
 }
 

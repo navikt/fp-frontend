@@ -1,0 +1,63 @@
+.bubbleSaksbehandler {
+  --ac-chat-bubble-bg: var(--a-purple-100);
+  --ac-chat-avatar-bg: var(--a-purple-300);
+  --ac-chat-avatar-color: white;
+
+  max-width: 500px;
+  min-width: 300px;
+}
+
+.bubbleBeslutter {
+  --ac-chat-bubble-bg: var(--a-green-100);
+  --ac-chat-avatar-bg: var(--a-green-300);
+  --ac-chat-avatar-color: white;
+
+  max-width: 500px;
+  min-width: 300px;
+}
+
+.bubbleVedtakslosningen {
+  --ac-chat-bubble-bg: var(--a-gray-100);
+  --ac-chat-avatar-bg: var(--a-gray-300);
+  --ac-chat-avatar-color: white;
+
+  max-width: 500px;
+  min-width: 300px;
+}
+
+.bubbleSoker {
+  --ac-chat-bubble-bg: var(--a-orange-100);
+  --ac-chat-avatar-bg: var(--a-orange-300);
+  --ac-chat-avatar-color: white;
+
+  max-width: 500px;
+  min-width: 300px;
+}
+
+.bubbleSokerKvinne {
+  --ac-chat-bubble-bg: var(--a-orange-100);
+  --ac-chat-avatar-bg: var(--a-red-300);
+  --ac-chat-avatar-color: white;
+
+  max-width: 500px;
+  min-width: 300px;
+}
+
+.bubbleSokerMann {
+  --ac-chat-bubble-bg: var(--a-orange-100);
+  --ac-chat-avatar-bg: var(--a-blue-400);
+  --ac-chat-avatar-color: white;
+
+  max-width: 500px;
+  min-width: 300px;
+}
+
+.bubbleArbeidsgiver {
+  --ac-chat-bubble-bg: var(--a-lightblue-100);
+  --ac-chat-avatar-bg: var(--a-lightblue-300);
+  --ac-chat-avatar-color: white;
+
+  max-width: 500px;
+  min-width: 300px;
+}
+
