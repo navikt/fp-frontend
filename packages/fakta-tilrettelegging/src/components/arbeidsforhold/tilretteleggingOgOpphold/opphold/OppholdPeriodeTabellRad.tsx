@@ -24,16 +24,14 @@ const utledTypeTekst = (intl: IntlShape, opphold: SvpAvklartOppholdPeriode) => {
 };
 
 const utledKilde = (intl: IntlShape, opphold: SvpAvklartOppholdPeriode) => {
-  if (opphold.oppholdÅrsak === 'FERIE') {
-    return opphold.forVisning
-      ? intl.formatMessage({
-          id: 'TilretteleggingPerioderTabellRad.Inntektsmelding',
-        })
-      : intl.formatMessage({
-          id: 'TilretteleggingPerioderTabellRad.Saksbehandler',
-        });
+  switch (opphold.oppholdKilde) {
+    case 'SØKNAD':
+      return intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.Soknad' });
+    case 'INNTEKTSMELDING':
+      return intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.Inntektsmelding' });
+    default:
+      return intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.Saksbehandler' });
   }
-  return intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.Saksbehandler' });
 };
 
 interface OwnProps {

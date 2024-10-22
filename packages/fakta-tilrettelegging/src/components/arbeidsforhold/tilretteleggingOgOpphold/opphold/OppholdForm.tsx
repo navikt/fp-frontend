@@ -72,6 +72,8 @@ const validerAtPeriodeIkkeOverlapper =
       : undefined;
   };
 
+const forVisning = (periode: SvpAvklartOppholdPeriode) => periode.oppholdKilde === 'INNTEKTSMELDING';
+
 interface OwnProps {
   opphold: SvpAvklartOppholdPeriode;
   index: number;
@@ -145,7 +147,7 @@ const OppholdForm: FunctionComponent<OwnProps> = ({
               validerAtDatoErUnik(intl, alleOpphold, alleTilrettelegginger, opphold),
               validerAtPeriodeErGyldig(intl, alleTilrettelegginger, termindato),
             ]}
-            isReadOnly={readOnly || opphold.forVisning}
+            isReadOnly={readOnly || forVisning(opphold)}
           />
           <Datepicker
             name={`${index}.tom`}
@@ -159,7 +161,7 @@ const OppholdForm: FunctionComponent<OwnProps> = ({
               validerAtPeriodeErGyldig(intl, alleTilrettelegginger, termindato),
               validerAtPeriodeIkkeOverlapper(formMethods.getValues, index, opphold, alleOpphold),
             ]}
-            isReadOnly={readOnly || opphold.forVisning}
+            isReadOnly={readOnly || forVisning(opphold)}
           />
         </HStack>
         <VerticalSpacer thirtyTwoPx />
@@ -167,7 +169,7 @@ const OppholdForm: FunctionComponent<OwnProps> = ({
           name={`${index}.oppholdÅrsak`}
           label={intl.formatMessage({ id: 'OppholdForm.GrunnTilOpphold' })}
           validate={[required]}
-          isReadOnly={readOnly || opphold.forVisning}
+          isReadOnly={readOnly || forVisning(opphold)}
           radios={[
             {
               label: intl.formatMessage({ id: 'OppholdForm.Sykepenger' }),
@@ -180,7 +182,7 @@ const OppholdForm: FunctionComponent<OwnProps> = ({
           ]}
         />
         <VerticalSpacer thirtyTwoPx />
-        {!opphold.forVisning && !readOnly && (
+        {!forVisning(opphold) && !readOnly && (
           <HStack gap="2">
             <Button
               size="small"
