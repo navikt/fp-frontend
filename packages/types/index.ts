@@ -134,6 +134,7 @@ export type {
   HistorikkInnslagOpplysning,
   HistorikkInnslagAksjonspunkt,
 } from './src/historikkinnslagTsType';
+export type { HistorikkinnslagV2 } from './src/historikkinnslagTsTypeV2';
 export type {
   default as ArbeidsgiverOpplysningerPerId,
   ArbeidsgiverOpplysningerWrapper,

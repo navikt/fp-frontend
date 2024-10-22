@@ -13,6 +13,7 @@ import {
 } from '@navikt/aksel-icons';
 import { getSupportPanelLocationCreator } from '../app/paths';
 import HistorikkIndex from './historikk/HistorikkIndex';
+import { HistorikkIndex as HistorikkIndexV2 } from './historikk-v2/HistorikkIndex';
 import MeldingIndex from './melding/MeldingIndex';
 import DokumentIndex from './dokument/DokumentIndex';
 import TotrinnskontrollIndex from './totrinnskontroll/TotrinnskontrollIndex';
@@ -39,6 +40,16 @@ const utledAktivtPanel = (
   }
   return SupportTabs.HISTORIKK;
 };
+
+function getEnvironment() {
+  const hostname = window.location.hostname;
+  if (hostname === 'localhost' || hostname === '127.0.0.1') {
+    return 'local';
+  } else if (hostname.includes('intern.dev.nav.no')) {
+    return 'dev';
+  }
+  return 'production';
+}
 
 interface OwnProps {
   fagsakData: FagsakData;
@@ -67,6 +78,8 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
     paramName: 'stotte',
     isQueryParam: true,
   });
+
+  const skalViseHistorikkV2 = ['local', 'dev'].includes(getEnvironment());
 
   const [meldingFormData, setMeldingFormData] = useState();
   const [beslutterFormData, setBeslutterFormData] = useState();
@@ -113,6 +126,13 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
           value={SupportTabs.HISTORIKK}
           icon={<ClockDashedIcon title={intl.formatMessage({ id: 'BehandlingSupportIndex.Historikk' })} />}
         />
+        {skalViseHistorikkV2 && (
+          <Tabs.Tab
+            className={styles.tab}
+            value={SupportTabs.HISTORIKK_V2}
+            icon={<ClockDashedIcon title={intl.formatMessage({ id: 'BehandlingSupportIndex.HistorikkV2' })} />}
+          />
+        )}
         <Tabs.Tab
           className={styles.tab}
           value={SupportTabs.MELDINGER}
@@ -164,6 +184,18 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
           kjønn={fagsak.bruker.kjønn}
         />
       </Tabs.Panel>
+      {skalViseHistorikkV2 && (
+        <Tabs.Panel value={SupportTabs.HISTORIKK_V2}>
+          <HistorikkIndexV2
+            saksnummer={fagsak.saksnummer}
+            behandlingUuid={behandlingUuid}
+            behandlingVersjon={behandlingVersjon}
+            historikkinnslagFpSak={fagsakData.getHistorikkV2FpSak()}
+            historikkinnslagFpTilbake={fagsakData.getHistorikkV2FpTilbake()}
+            kjønn={fagsak.bruker.kjønn}
+          />
+        </Tabs.Panel>
+      )}
       <Tabs.Panel value={SupportTabs.MELDINGER}>
         {behandling && (
           <MeldingIndex
@@ -182,9 +214,11 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
           behandlingVersjon={behandlingVersjon}
         />
       </Tabs.Panel>
+      ;
       <Tabs.Panel value={SupportTabs.NOTATER}>
         <NotatIndex fagsak={fagsak} oppdaterFagsak={oppdaterFagsak} />
       </Tabs.Panel>
+      ;
     </Tabs>
   );
 };
