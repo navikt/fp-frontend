@@ -7,7 +7,7 @@ import { BodyLong, Button, Heading, HGrid, HStack, Label, List, Modal, VStack } 
 import { FormattedMessage, useIntl } from 'react-intl';
 import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
 import { addDaysToDate, formatCurrencyNoKr, TIDENES_ENDE } from '@navikt/ft-utils';
-import { AktivNaturalYtelse, NaturalytelseType } from '@navikt/fp-types/src/arbeidOgInntektsmeldingTsType';
+import { AktivNaturalYtelse } from '@navikt/fp-types';
 import { hentDokumentLenke } from '@navikt/fp-konstanter';
 import { ArrowForwardIcon } from '@navikt/aksel-icons';
 import { sorterPerioder } from '@navikt/fp-fakta-felles';
@@ -80,7 +80,7 @@ export const InntektsmeldingInnhold = ({
           <KildeSystem inntektsmelding={inntektsmelding} />
         </InntektsmeldingInfoBlokk>
 
-        <BortfalteNaturalYtelser inntektsmelding={inntektsmelding} />
+        <BortfalteNaturalYtelser inntektsmelding={inntektsmelding} alleKodeverk={alleKodeverk} />
         <InntektsmeldingInfoBlokk tittel={intl.formatMessage({ id: 'InntektsmeldingFaktaPanel.refusjon.heading' })}>
           <Refusjon inntektsmelding={inntektsmelding} />
         </InntektsmeldingInfoBlokk>
@@ -163,7 +163,13 @@ const Refusjon = ({ inntektsmelding }: { inntektsmelding: Inntektsmelding }) => 
   );
 };
 
-const BortfalteNaturalYtelser = ({ inntektsmelding }: { inntektsmelding: Inntektsmelding }) => {
+const BortfalteNaturalYtelser = ({
+  inntektsmelding,
+  alleKodeverk,
+}: {
+  inntektsmelding: Inntektsmelding;
+  alleKodeverk: AlleKodeverk;
+}) => {
   const intl = useIntl();
 
   const bortfalteNaturalytelser = konverterAktivePerioderTilBortfaltePerioder(inntektsmelding);
@@ -179,25 +185,27 @@ const BortfalteNaturalYtelser = ({ inntektsmelding }: { inntektsmelding: Inntekt
         <VStack>
           {Object.entries(bortfalteNaturalytelser).map(([key, value]) => (
             <VStack key={key}>
-              <span>{NaturalytelseType[key as keyof typeof NaturalytelseType]}</span>
+              <span>
+                {alleKodeverk[KodeverkType.NATURAL_YTELSE_TYPE].find(kodeverk => kodeverk.kode === key)?.navn}
+              </span>
               <ul>
                 {value.map(naturalytelse => (
-                  <>
-                    <li key={naturalytelse.indexKey}>
+                  <React.Fragment key={naturalytelse.indexKey}>
+                    <li>
                       <FormattedMessage id="InntektsmeldingFaktaPanel.bortfalteNaturalytelser.fom" />{' '}
                       <DateLabel dateString={naturalytelse.periode.fomDato} />
                     </li>
-                    <li>
-                      <FormattedMessage id="InntektsmeldingFaktaPanel.bortfalteNaturalytelser.verdi" />:{' '}
-                      {formatCurrencyNoKr(naturalytelse.beloepPerMnd.verdi)}
-                    </li>
                     {naturalytelse.periode.tomDato !== TIDENES_ENDE && (
-                      <li key={naturalytelse.indexKey}>
+                      <li>
                         <FormattedMessage id="InntektsmeldingFaktaPanel.bortfalteNaturalytelser.tom" />{' '}
                         <DateLabel dateString={naturalytelse.periode.tomDato} />
                       </li>
                     )}
-                  </>
+                    <li>
+                      <FormattedMessage id="InntektsmeldingFaktaPanel.bortfalteNaturalytelser.verdi" />:{' '}
+                      {formatCurrencyNoKr(naturalytelse.beloepPerMnd.verdi)}
+                    </li>
+                  </React.Fragment>
                 ))}
               </ul>
             </VStack>

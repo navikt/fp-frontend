@@ -5608,24 +5608,9 @@
   ],
   "MorsAktivitet": [
     {
-      "kode": "ARBEID_OG_UTDANNING",
-      "kodeverk": "MORS_AKTIVITET",
-      "navn": "Er i arbeid og utdanning"
-    },
-    {
-      "kode": "UTDANNING",
-      "kodeverk": "MORS_AKTIVITET",
-      "navn": "Tar utdanning på heltid"
-    },
-    {
       "kode": "INTROPROG",
       "kodeverk": "MORS_AKTIVITET",
       "navn": "Deltar i introduksjonsprogram for nykomne innvandrere"
-    },
-    {
-      "kode": "ARBEID",
-      "kodeverk": "MORS_AKTIVITET",
-      "navn": "Er i arbeid"
     },
     {
       "kode": "INNLAGT",
@@ -5638,9 +5623,9 @@
       "navn": "Mor mottar uføretrygd"
     },
     {
-      "kode": "KVALPROG",
+      "kode": "UTDANNING",
       "kodeverk": "MORS_AKTIVITET",
-      "navn": "Deltar i kvalifiseringsprogrammet"
+      "navn": "Tar utdanning på heltid"
     },
     {
       "kode": "IKKE_OPPGITT",
@@ -5648,9 +5633,121 @@
       "navn": "Periode uten oppgitt aktivitetskrav"
     },
     {
+      "kode": "ARBEID_OG_UTDANNING",
+      "kodeverk": "MORS_AKTIVITET",
+      "navn": "Er i arbeid og utdanning"
+    },
+    {
       "kode": "TRENGER_HJELP",
       "kodeverk": "MORS_AKTIVITET",
       "navn": "Er avhengig av hjelp til å ta seg av barnet"
+    },
+    {
+      "kode": "ARBEID",
+      "kodeverk": "MORS_AKTIVITET",
+      "navn": "Er i arbeid"
+    },
+    {
+      "kode": "KVALPROG",
+      "kodeverk": "MORS_AKTIVITET",
+      "navn": "Deltar i kvalifiseringsprogrammet"
+    }
+  ],
+  "NaturalYtelseType": [
+    {
+      "kode": "KOSTBESPARELSE_HJEM",
+      "kodeverk": "NATURAL_YTELSE_TYPE",
+      "navn": "Kostbesparelser i hjemmet"
+    },
+    {
+      "kode": "FORSIKRINGER",
+      "kodeverk": "NATURAL_YTELSE_TYPE",
+      "navn": "Skattepliktig del forsikringer"
+    },
+    {
+      "kode": "BEDRIFTSBARNEHAGE",
+      "kodeverk": "NATURAL_YTELSE_TYPE",
+      "navn": "Bedriftsbarnehageplass"
+    },
+    {
+      "kode": "KOST_DAGER",
+      "kodeverk": "NATURAL_YTELSE_TYPE",
+      "navn": "Kostpenger dager"
+    },
+    {
+      "kode": "KOST_DOEGN",
+      "kodeverk": "NATURAL_YTELSE_TYPE",
+      "navn": "Kostpenger døgnsats"
+    },
+    {
+      "kode": "YRKESBIL_KILOMETER",
+      "kodeverk": "NATURAL_YTELSE_TYPE",
+      "navn": "Yrkesbil tjenesteligbehov kilometer"
+    },
+    {
+      "kode": "RENTEFORDEL_LAAN",
+      "kodeverk": "NATURAL_YTELSE_TYPE",
+      "navn": "Rentefordel lån"
+    },
+    {
+      "kode": "YRKESBIL_LISTEPRIS",
+      "kodeverk": "NATURAL_YTELSE_TYPE",
+      "navn": "Yrkesbil tjenesteligbehov listepris"
+    },
+    {
+      "kode": "BESOEKSREISER_HJEM",
+      "kodeverk": "NATURAL_YTELSE_TYPE",
+      "navn": "Besøksreiser hjemmet annet"
+    },
+    {
+      "kode": "UTENLANDSK_PENSJONSORDNING",
+      "kodeverk": "NATURAL_YTELSE_TYPE",
+      "navn": "Innbetaling utenlandsk pensjonsordning"
+    },
+    {
+      "kode": "ELEKTRISK_KOMMUNIKASJON",
+      "kodeverk": "NATURAL_YTELSE_TYPE",
+      "navn": "Elektrisk kommunikasjon"
+    },
+    {
+      "kode": "BOLIG",
+      "kodeverk": "NATURAL_YTELSE_TYPE",
+      "navn": "Bolig"
+    },
+    {
+      "kode": "OPSJONER",
+      "kodeverk": "NATURAL_YTELSE_TYPE",
+      "navn": "Opsjoner"
+    },
+    {
+      "kode": "FRI_TRANSPORT",
+      "kodeverk": "NATURAL_YTELSE_TYPE",
+      "navn": "Fri transport"
+    },
+    {
+      "kode": "TILSKUDD_BARNEHAGE",
+      "kodeverk": "NATURAL_YTELSE_TYPE",
+      "navn": "Tilskudd barnehageplass"
+    },
+    {
+      "kode": "AKSJER_UNDERKURS",
+      "kodeverk": "NATURAL_YTELSE_TYPE",
+      "navn": "Aksjer grunnfondsbevis til underkurs"
+    },
+    {
+      "kode": "ANNET",
+      "kodeverk": "NATURAL_YTELSE_TYPE",
+      "navn": "Annet"
+    },
+    {
+      "kode": "BIL",
+      "kodeverk": "NATURAL_YTELSE_TYPE",
+      "navn": "Bil"
+    },
+    {
+      "kode": "LOSJI",
+      "kodeverk": "NATURAL_YTELSE_TYPE",
+      "navn": "Losji"
     }
   ],
   "PeriodeResultatÅrsak": [
