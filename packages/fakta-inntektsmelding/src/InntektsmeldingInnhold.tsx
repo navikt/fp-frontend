@@ -1,16 +1,24 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import { AlleKodeverk, Behandling, BehandlingAppKontekst, Fagsak, Inntektsmelding } from '@navikt/fp-types';
-import { getKodeverknavnFraKode, KodeverkType } from '@navikt/fp-kodeverk';
 import React, { useRef } from 'react';
-import { InntektsmeldingFaktaProps } from './InntektsmeldingFaktaIndex';
-import { BodyLong, Button, Heading, HGrid, HStack, Label, List, Modal, VStack } from '@navikt/ds-react';
 import { FormattedMessage, useIntl } from 'react-intl';
+
+import { BodyLong, Button, Heading, HGrid, HStack, Label, List, Modal, VStack } from '@navikt/ds-react';
+import { ArrowForwardIcon } from '@navikt/aksel-icons';
+import {
+  AlleKodeverk,
+  AktivNaturalYtelse,
+  Behandling,
+  BehandlingAppKontekst,
+  Fagsak,
+  Inntektsmelding,
+} from '@navikt/fp-types';
+import { getKodeverknavnFraKode, KodeverkType } from '@navikt/fp-kodeverk';
 import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
 import { addDaysToDate, formatCurrencyNoKr, TIDENES_ENDE } from '@navikt/ft-utils';
-import { AktivNaturalYtelse } from '@navikt/fp-types';
 import { hentDokumentLenke } from '@navikt/fp-konstanter';
-import { ArrowForwardIcon } from '@navikt/aksel-icons';
 import { sorterPerioder } from '@navikt/fp-fakta-felles';
+
+import { InntektsmeldingFaktaProps } from './InntektsmeldingFaktaIndex';
 
 import styles from './inntektsmeldingFakta.module.css';
 
@@ -237,7 +245,7 @@ const konverterAktivePerioderTilBortfaltePerioder = (inntektsmelding: Inntektsme
 
   const bortfalteNaturalytelser = {} as Record<string, AktivNaturalYtelse[]>;
 
-  Object.entries(gruppertPåType).map(([key, value]) => {
+  Object.entries(gruppertPåType).forEach(([key, value]) => {
     const sortert = value
       .sort((a, b) =>
         sorterPerioder(
