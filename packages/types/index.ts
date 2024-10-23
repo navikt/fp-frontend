@@ -173,6 +173,7 @@ export type {
   Arbeidsforhold as AoIArbeidsforhold,
   Inntektsmelding,
   Inntektspost,
+  AktivNaturalYtelse,
 } from './src/arbeidOgInntektsmeldingTsType';
 export { AksjonspunktÅrsak } from './src/arbeidOgInntektsmeldingTsType';
 export type {

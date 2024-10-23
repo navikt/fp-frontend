@@ -67,6 +67,7 @@ enum KodeverkType {
   RELASJONSROLLE_TYPE = 'RelasjonsRolleType',
   FAGSAK_MARKERING = 'FagsakMarkering',
   ADRESSE_TYPE = 'AdresseType',
+  NATURAL_YTELSE_TYPE = 'NaturalYtelseType',
 }
 
 export default KodeverkType;
