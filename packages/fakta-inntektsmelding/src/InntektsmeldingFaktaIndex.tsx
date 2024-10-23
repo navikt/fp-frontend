@@ -15,7 +15,7 @@ import { createIntl, formatCurrencyNoKr } from '@navikt/ft-utils';
 import { CircleFillIcon, CoffeeIcon } from '@navikt/aksel-icons';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 import messages from '../i18n/nb_NO.json';
-import { InntektsmeldingInnhold } from './InntektsmeldingInnhold';
+import { InntektsmeldingInnhold } from './components/InntektsmeldingInnhold';
 import styles from './inntektsmeldingFakta.module.css';
 
 const intl = createIntl(messages);
