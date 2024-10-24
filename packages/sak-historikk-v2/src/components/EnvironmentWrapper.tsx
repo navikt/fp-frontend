@@ -1,12 +1,12 @@
 import React, { PropsWithChildren, useRef, useState } from 'react';
-import { Historikkinnslag } from '@navikt/fp-types';
-import { Detail, Label, Popover } from '@navikt/ds-react';
+import { HistorikkinnslagV2 } from '@navikt/fp-types';
+import { Detail, Popover } from '@navikt/ds-react';
 
 type Env = 'local' | 'dev' | 'production';
 
 function getEnvironment(): Env {
   const hostname = window.location.hostname;
-  if (hostname === 'localhost' || hostname === '127.0.0.1') {
+  if (['localhost', '127.0.0.1'].includes(hostname)) {
     return 'local';
   } else if (hostname.includes('intern.dev.nav.no')) {
     return 'dev';
@@ -16,9 +16,8 @@ function getEnvironment(): Env {
 
 export const EnvironmentWrapper = ({
   historikkinnslag,
-  malType,
   children,
-}: PropsWithChildren<{ historikkinnslag: Historikkinnslag; malType: string }>) => {
+}: PropsWithChildren<{ historikkinnslag: HistorikkinnslagV2 }>) => {
   const [hoverState, setHoverState] = useState(false);
   const hoverRef = useRef<HTMLDivElement>(null);
 
@@ -35,7 +34,6 @@ export const EnvironmentWrapper = ({
           onClose={() => setHoverState(false)}
         >
           <Popover.Content>
-            <Label>{malType}</Label>
             <Detail as="pre">{JSON.stringify(historikkinnslag, null, 2)}</Detail>
           </Popover.Content>
         </Popover>

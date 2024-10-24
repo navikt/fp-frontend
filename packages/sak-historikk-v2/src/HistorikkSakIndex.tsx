@@ -6,24 +6,31 @@ import { createIntl } from '@navikt/ft-utils';
 import { Historikk } from './components/Historikk';
 import messages from '../i18n/nb_NO.json';
 import { AlleKodeverk, AlleKodeverkTilbakekreving, HistorikkinnslagV2 } from '@navikt/fp-types';
+import { Location } from 'history';
 
 const intl = createIntl(messages);
 
 interface Props {
-  valgtBehandlingUuid?: string;
   historikkFpSak?: HistorikkinnslagV2[];
   historikkFpTilbake?: HistorikkinnslagV2[];
   alleKodeverkFpTilbake?: AlleKodeverkTilbakekreving;
   alleKodeverkFpSak: AlleKodeverk;
+  saksnummer: string;
+  getBehandlingLocation: (behandlingUuid: string) => Location;
+  createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location | undefined;
+  valgtBehandlingUuid?: string;
   kjønn: string;
 }
 
 const HistorikkSakIndex = ({
-  valgtBehandlingUuid,
   historikkFpSak = [],
   historikkFpTilbake = [],
-  alleKodeverkFpSak,
   alleKodeverkFpTilbake,
+  alleKodeverkFpSak,
+  saksnummer,
+  getBehandlingLocation,
+  createLocationForSkjermlenke,
+  valgtBehandlingUuid,
   kjønn,
 }: Props) => (
   <RawIntlProvider value={intl}>
@@ -34,6 +41,9 @@ const HistorikkSakIndex = ({
       alleKodeverkFpTilbake={alleKodeverkFpTilbake}
       alleKodeverkFpSak={alleKodeverkFpSak}
       kjønn={kjønn}
+      saksnummer={saksnummer}
+      getBehandlingLocation={getBehandlingLocation}
+      createLocationForSkjermlenke={createLocationForSkjermlenke}
     />
   </RawIntlProvider>
 );

@@ -1,3 +1,5 @@
+import { HistorikkInnslagDokumentLink } from './historikkinnslagTsTypeV2';
+
 export type HistorikkinnslagEndretFelt = {
   endretFeltNavn: string;
   navnVerdi?: string;
@@ -48,14 +50,6 @@ export type HistorikkinnslagDel = {
   endredeFelter: HistorikkinnslagEndretFelt[];
   aksjonspunkter?: HistorikkInnslagAksjonspunkt[];
 };
-
-export type HistorikkInnslagDokumentLink = Readonly<{
-  dokumentId?: string;
-  journalpostId?: string;
-  tag: string;
-  url?: string;
-  utgått: boolean;
-}>;
 
 type Historikkinnslag = Readonly<{
   opprettetAv?: string;
