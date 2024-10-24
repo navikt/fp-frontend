@@ -22,11 +22,13 @@ export type ArbeidsforholdTilretteleggingDato = Readonly<{
   mottattDato?: string;
 }>;
 
+export type OppholdKilde = 'SØKNAD' | 'INNTEKTSMELDING' | 'REGISTRERT_AV_SAKSBEHANDLER';
+
 export type SvpAvklartOppholdPeriode = Readonly<{
   fom: string;
   tom: string;
   oppholdÅrsak: string;
-  forVisning?: boolean;
+  oppholdKilde: OppholdKilde;
 }>;
 
 export type ArbeidsforholdFodselOgTilrettelegging = Readonly<{
