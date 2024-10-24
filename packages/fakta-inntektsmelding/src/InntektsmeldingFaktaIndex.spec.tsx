@@ -12,16 +12,16 @@ describe('<InntektsmeldingDefault>', () => {
   it('Skal kunne sortere tabellen', async () => {
     render(<InntektsmeldingDefault />);
 
-    await verifiserKolonneSortering('Type', 0, ['Endring', 'Ny', 'Ny']);
-    await verifiserKolonneSortering('Innsendt', 1, [
+    // "Innsendt" er standard sortering. Derfor tester vi å sortere arbeidsgiver først
+    await verifiserKolonneSortering('Arbeidsgiver', 1, ['Kiwi', 'Meny', 'Rema 1000']);
+    await verifiserKolonneSortering('Innsendt', 0, [
       '20.07.2024 kl.00:00',
       '01.08.2024 kl.00:00',
       '10.09.2024 kl.00:00',
     ]);
-    await verifiserKolonneSortering('Arbeidsgiver', 2, ['Kiwi', 'Meny', 'Rema 1000']);
-    await verifiserKolonneSortering('Startdato', 3, ['-', '10.10.2024', '11.11.2024']);
-    await verifiserKolonneSortering('Månedsi.', 4, ['10 001', '20 000', '30 000']);
-    await verifiserKolonneSortering('Behandling', 5, ['Andre', 'Denne', 'Ingen']);
+    await verifiserKolonneSortering('Startdato', 2, ['-', '10.10.2024', '11.11.2024']);
+    await verifiserKolonneSortering('Månedsi.', 3, ['10 001', '20 000', '30 000']);
+    await verifiserKolonneSortering('Behandling', 4, ['Andre', 'Denne', 'Ingen']);
   });
 });
 
