@@ -7,7 +7,6 @@ import {
   Fagsak,
   Inntektsmelding,
 } from '@navikt/fp-types';
-import { InntektsmeldingInnsendingsårsak } from '@navikt/fp-types/src/arbeidOgInntektsmeldingTsType';
 import React, { useState } from 'react';
 import { BodyShort, HStack, SortState, Table } from '@navikt/ds-react';
 import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
@@ -30,7 +29,6 @@ export type InntektsmeldingFaktaProps = {
 
 type TableHeaders = keyof Pick<
   Inntektsmelding,
-  | 'innsendingsårsak'
   | 'innsendingstidspunkt'
   | 'arbeidsgiverIdent'
   | 'startDatoPermisjon'
@@ -87,9 +85,6 @@ export const InntektsmeldingFaktaIndex = ({
       <Table sort={sort} onSortChange={sortKey => handleSort(sortKey as TableHeaders)}>
         <Table.Header>
           <Table.Row>
-            <Table.ColumnHeader sortKey="innsendingsårsak" sortable>
-              <FormattedMessage id="InntektsmeldingFaktaPanel.tabell.header.type" />
-            </Table.ColumnHeader>
             <Table.ColumnHeader sortKey="innsendingstidspunkt" sortable>
               <FormattedMessage id="InntektsmeldingFaktaPanel.tabell.header.innsendt" />
             </Table.ColumnHeader>
@@ -126,7 +121,6 @@ export const InntektsmeldingFaktaIndex = ({
                   />
                 }
               >
-                <Table.DataCell>{InntektsmeldingInnsendingsårsak[inntektsmelding.innsendingsårsak]}</Table.DataCell>
                 <Table.DataCell>
                   <DateTimeLabel dateTimeString={inntektsmelding.innsendingstidspunkt} separator="kl" />
                 </Table.DataCell>
