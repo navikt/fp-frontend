@@ -8,6 +8,7 @@ import '@navikt/ds-css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
 import '@navikt/ft-form-hooks/dist/style.css';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 export default {
   title: 'fakta/fakta-inntektsmelding',
@@ -115,16 +116,28 @@ InntektsmeldingDefault.args = {
       journalpostId: '3',
       aktiveNaturalytelser: [
         {
-          periode: { fomDato: '2024-01-09', tomDato: '2024-10-09' },
+          periode: { fomDato: '2024-01-09', tomDato: '2024-05-09' },
           type: 'ELEKTRISK_KOMMUNIKASJON',
           beloepPerMnd: { verdi: 999 },
           indexKey: '1',
         },
         {
+          periode: { fomDato: '2024-07-21', tomDato: '2024-08-01' },
+          type: 'ELEKTRISK_KOMMUNIKASJON',
+          beloepPerMnd: { verdi: 999 },
+          indexKey: '2',
+        },
+        {
+          periode: { fomDato: '2024-09-30', tomDato: TIDENES_ENDE },
+          type: 'ELEKTRISK_KOMMUNIKASJON',
+          beloepPerMnd: { verdi: 999 },
+          indexKey: '3',
+        },
+        {
           periode: { fomDato: '2024-01-11', tomDato: '2024-10-11' },
           type: 'LOSJI',
           beloepPerMnd: { verdi: 10 },
-          indexKey: '2',
+          indexKey: '4',
         },
       ],
     },
