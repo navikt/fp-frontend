@@ -72,8 +72,6 @@ const validerAtPeriodeIkkeOverlapper =
       : undefined;
   };
 
-const forVisning = (periode: SvpAvklartOppholdPeriode) => periode.oppholdKilde === 'INNTEKTSMELDING';
-
 interface OwnProps {
   opphold: SvpAvklartOppholdPeriode;
   index: number;
@@ -123,6 +121,8 @@ const OppholdForm: FunctionComponent<OwnProps> = ({
     formMethods.reset();
   };
 
+  const forVisning = readOnly || opphold.oppholdKilde === 'INNTEKTSMELDING';
+
   return (
     <FormProvider {...formMethods}>
       <div
@@ -147,7 +147,7 @@ const OppholdForm: FunctionComponent<OwnProps> = ({
               validerAtDatoErUnik(intl, alleOpphold, alleTilrettelegginger, opphold),
               validerAtPeriodeErGyldig(intl, alleTilrettelegginger, termindato),
             ]}
-            isReadOnly={readOnly || forVisning(opphold)}
+            isReadOnly={forVisning}
           />
           <Datepicker
             name={`${index}.tom`}
@@ -161,7 +161,7 @@ const OppholdForm: FunctionComponent<OwnProps> = ({
               validerAtPeriodeErGyldig(intl, alleTilrettelegginger, termindato),
               validerAtPeriodeIkkeOverlapper(formMethods.getValues, index, opphold, alleOpphold),
             ]}
-            isReadOnly={readOnly || forVisning(opphold)}
+            isReadOnly={forVisning}
           />
         </HStack>
         <VerticalSpacer thirtyTwoPx />
@@ -169,7 +169,7 @@ const OppholdForm: FunctionComponent<OwnProps> = ({
           name={`${index}.oppholdÅrsak`}
           label={intl.formatMessage({ id: 'OppholdForm.GrunnTilOpphold' })}
           validate={[required]}
-          isReadOnly={readOnly || forVisning(opphold)}
+          isReadOnly={forVisning}
           radios={[
             {
               label: intl.formatMessage({ id: 'OppholdForm.Sykepenger' }),
@@ -182,7 +182,7 @@ const OppholdForm: FunctionComponent<OwnProps> = ({
           ]}
         />
         <VerticalSpacer thirtyTwoPx />
-        {!forVisning(opphold) && !readOnly && (
+        {!forVisning && (
           <HStack gap="2">
             <Button
               size="small"
