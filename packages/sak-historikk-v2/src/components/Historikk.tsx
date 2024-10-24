@@ -11,6 +11,7 @@ import { Snakkeboble } from './Snakkeboble/Snakkeboble';
 import { EnvironmentWrapper } from './EnvironmentWrapper';
 
 import styles from './historikk.module.css';
+import { useDevMode } from '@navikt/fp-sak-historikk/src/hooks/useDevMode';
 
 type HistorikkMedTilbakekrevingIndikator = HistorikkinnslagV2 & {
   erTilbakekreving?: boolean;
@@ -55,6 +56,7 @@ export const Historikk = ({
   createLocationForSkjermlenke,
 }: Props) => {
   const intl = useIntl();
+  const isDevMode = useDevMode();
 
   const [skalSortertePaValgtBehandling, setSkalSortertePaBehandling] = useState(false);
 
@@ -116,7 +118,11 @@ export const Historikk = ({
             }
 
             return (
-              <EnvironmentWrapper key={historikkinnslag.opprettetTidspunkt} historikkinnslag={historikkinnslag}>
+              <EnvironmentWrapper
+                shouldRender={isDevMode}
+                key={historikkinnslag.opprettetTidspunkt}
+                historikkinnslag={historikkinnslag}
+              >
                 <Snakkeboble
                   saksnummer={saksnummer}
                   historikkInnslag={historikkinnslag}

@@ -8,7 +8,6 @@ import '@navikt/ds-css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
 import '@navikt/ft-form-hooks/dist/style.css';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 export default {
   title: 'fakta/fakta-inntektsmelding',
