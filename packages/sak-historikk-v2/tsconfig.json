@@ -1,0 +1,5 @@
+{
+  "include": ["./", "../../@types/externals.d.ts"],
+  "exclude": ["node_modules", "**.spec.ts"],
+  "extends": "../../tsconfig.json"
+}

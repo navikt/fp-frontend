@@ -1,6 +1,7 @@
 import BehandlingAppKontekst from './behandlingAppKontekstTsType';
 import Historikkinnslag from './historikkinnslagTsType';
 import Risikoklassifisering from './risikoklassifiseringTsType';
+import { HistorikkinnslagV2 } from './historikkinnslagTsTypeV2';
 
 export type BehandlingOppretting = Readonly<{
   behandlingType: string;
@@ -59,6 +60,7 @@ type Fagsak = Readonly<{
   behandlinger: BehandlingAppKontekst[];
   brukerManglerAdresse: boolean;
   historikkinnslag: Historikkinnslag[];
+  historikkinnslagV2: HistorikkinnslagV2[];
   kontrollResultat: Risikoklassifisering;
   notater: Saksnotat[];
 }>;
