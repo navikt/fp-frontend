@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { FunctionComponent, useEffect, useMemo, useState } from 'react';
 import { Location } from 'history';
 import { useIntl } from 'react-intl';
 import moment from 'moment';
@@ -13,6 +13,7 @@ import Snakkeboble from './maler/felles/snakkeboble';
 import styles from './history.module.css';
 import { EnvironmentWrapper } from './EnvironmentWrapper';
 import { velgHistorikkMal } from './velgHistorikkMal';
+import { useDevMode } from '../hooks/useDevMode';
 
 type HistorikkMedTilbakekrevingIndikator = Historikkinnslag & {
   erTilbakekreving?: boolean;
@@ -60,6 +61,7 @@ const History: FunctionComponent<OwnProps> = ({
   kjønn,
 }) => {
   const intl = useIntl();
+  const isDevMode = useDevMode();
 
   const [skalSortertePaValgtBehandling, setSkalSortertePaBehandling] = useState(false);
 
@@ -84,9 +86,8 @@ const History: FunctionComponent<OwnProps> = ({
 
   const [top, setTop] = useState<number>();
 
-  const scrollReset = useCallback(() => setTop(0), []);
-
   useEffect(() => {
+    const scrollReset = () => setTop(0);
     window.addEventListener('scroll', scrollReset);
     return () => {
       window.removeEventListener('scroll', scrollReset);
@@ -154,7 +155,11 @@ const History: FunctionComponent<OwnProps> = ({
               opprettetAv={aktorIsSOKER || aktorIsArbeidsgiver || aktorIsVL ? '' : historikkinnslag.opprettetAv}
               erFørsteBoble={index === 0}
             >
-              <EnvironmentWrapper historikkinnslag={historikkinnslag} malType={Mal.displayName}>
+              <EnvironmentWrapper
+                historikkinnslag={historikkinnslag}
+                malType={Mal.displayName}
+                shouldRender={isDevMode}
+              >
                 <Mal
                   historikkinnslag={historikkinnslag}
                   behandlingLocation={getBehandlingLocation(historikkinnslag.behandlingUuid)}
