@@ -2,27 +2,16 @@ import React, { PropsWithChildren, useRef, useState } from 'react';
 import { Historikkinnslag } from '@navikt/fp-types';
 import { Detail, Label, Popover } from '@navikt/ds-react';
 
-type Env = 'local' | 'dev' | 'production';
-
-function getEnvironment(): Env {
-  const hostname = window.location.hostname;
-  if (hostname === 'localhost' || hostname === '127.0.0.1') {
-    return 'local';
-  } else if (hostname.includes('intern.dev.nav.no')) {
-    return 'dev';
-  }
-  return 'production';
-}
-
 export const EnvironmentWrapper = ({
   historikkinnslag,
   malType,
+  shouldRender,
   children,
-}: PropsWithChildren<{ historikkinnslag: Historikkinnslag; malType: string }>) => {
+}: PropsWithChildren<{ historikkinnslag: Historikkinnslag; malType: string; shouldRender: boolean }>) => {
   const [hoverState, setHoverState] = useState(false);
   const hoverRef = useRef<HTMLDivElement>(null);
 
-  if (['local', 'dev'].includes(getEnvironment())) {
+  if (shouldRender) {
     return (
       <>
         <div ref={hoverRef} onMouseEnter={() => setHoverState(true)} onMouseLeave={() => setHoverState(false)}>
