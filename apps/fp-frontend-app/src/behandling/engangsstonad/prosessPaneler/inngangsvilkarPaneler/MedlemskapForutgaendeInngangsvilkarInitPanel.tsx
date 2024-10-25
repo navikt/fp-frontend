@@ -45,25 +45,34 @@ const MedlemskapForutgaendeInngangsvilkarInitPanel: FunctionComponent<OwnProps &
           value.definisjon === AksjonspunktCode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR &&
           value.status !== aksjonspunktStatus.AVBRUTT,
       );
+      const harÅpentMedlemskapAksjonspunkt = data.aksjonspunkter.some(
+        value =>
+          value.definisjon === AksjonspunktCode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR &&
+          value.status == aksjonspunktStatus.OPPRETTET,
+      );
       return (
         <>
-          <OverstyringPanelDef
-            aksjonspunkter={data.aksjonspunkter}
-            aksjonspunktKode={AksjonspunktCode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE}
-            vilkar={data.vilkar}
-            vilkarKoder={VILKAR_KODER}
-            panelTekstKode="Inngangsvilkar.Medlemskapsvilkaret"
-            medlemskap={data.medlemskap}
-            toggleOverstyring={toggleOverstyring}
-            erOverstyrt={erOverstyrt}
-            overrideReadOnly={
-              data.isReadOnly ||
-              harMedlemskapsAksjonspunkt ||
-              (props.harInngangsvilkarApentAksjonspunkt && !(data.isAksjonspunktOpen || erOverstyrt))
-            }
-            kanOverstyreAccess={rettigheter.kanOverstyreAccess}
-          />
-          <VerticalSpacer thirtyTwoPx />
+          {!harÅpentMedlemskapAksjonspunkt && (
+            <>
+              <OverstyringPanelDef
+                aksjonspunkter={data.aksjonspunkter}
+                aksjonspunktKode={AksjonspunktCode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE}
+                vilkar={data.vilkar}
+                vilkarKoder={VILKAR_KODER}
+                panelTekstKode="Inngangsvilkar.Medlemskapsvilkaret"
+                medlemskap={data.medlemskap}
+                toggleOverstyring={toggleOverstyring}
+                erOverstyrt={erOverstyrt}
+                overrideReadOnly={
+                  data.isReadOnly ||
+                  harMedlemskapsAksjonspunkt ||
+                  (props.harInngangsvilkarApentAksjonspunkt && !(data.isAksjonspunktOpen || erOverstyrt))
+                }
+                kanOverstyreAccess={rettigheter.kanOverstyreAccess}
+              />
+              <VerticalSpacer thirtyTwoPx />
+            </>
+          )}
         </>
       );
     }}
