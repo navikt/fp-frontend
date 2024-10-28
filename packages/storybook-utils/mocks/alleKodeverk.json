@@ -1145,49 +1145,9 @@
   ],
   "SkjermlenkeType": [
     {
-      "kode": "FAKTA_OM_SIMULERING",
+      "kode": "FAKTA_OM_MEDLEMSKAP",
       "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Simulering"
-    },
-    {
-      "kode": "PUNKT_FOR_SVANGERSKAPSPENGER",
-      "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Svangerskapspenger"
-    },
-    {
-      "kode": "FAKTA_OM_FORDELING",
-      "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Fakta om fordeling"
-    },
-    {
-      "kode": "FAKTA_OM_FOEDSEL",
-      "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Fakta om fødsel"
-    },
-    {
-      "kode": "FAKTA_OM_ARBEIDSFORHOLD_INNTEKTSMELDING",
-      "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Fakta om arbeid og inntekt"
-    },
-    {
-      "kode": "PUNKT_FOR_OPPTJENING",
-      "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Opptjening"
-    },
-    {
-      "kode": "FAKTA_OM_AKTIVITETSKRAV",
-      "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Fakta om aktivitetskrav"
-    },
-    {
-      "kode": "TILKJENT_YTELSE",
-      "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Tilkjent ytelse"
-    },
-    {
-      "kode": "FAKTA_OM_ARBEIDSFORHOLD",
-      "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Fakta om arbeidsforhold"
+      "navn": "Fakta om medlemskap"
     },
     {
       "kode": "KLAGE_BEH_NFP",
@@ -1195,159 +1155,14 @@
       "navn": "Klageresultat Vedtaksinstans"
     },
     {
-      "kode": "FAKTA_OM_OPPTJENING",
+      "kode": "PUNKT_FOR_ADOPSJON",
       "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Fakta om opptjening"
+      "navn": "Adopsjon"
     },
     {
-      "kode": "PUNKT_FOR_SVP_INNGANG",
+      "kode": "PUNKT_FOR_SVANGERSKAPSPENGER",
       "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Fakta om fødsel og tilrettelegging"
-    },
-    {
-      "kode": "SOEKNADSFRIST",
-      "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Søknadsfrist"
-    },
-    {
-      "kode": "KONTROLL_AV_SAKSOPPLYSNINGER",
-      "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Kontroll av saksopplysninger"
-    },
-    {
-      "kode": "PUNKT_FOR_MEDLEMSKAP",
-      "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Medlemskap"
-    },
-    {
-      "kode": "FAKTA_OM_MEDLEMSKAP",
-      "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Fakta om medlemskap"
-    },
-    {
-      "kode": "FORMKRAV_KLAGE_NFP",
-      "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Formkrav klage NFP"
-    },
-    {
-      "kode": "FAKTA_OM_OMSORG_OG_FORELDREANSVAR",
-      "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Fakta om omsorg og foreldreansvar"
-    },
-    {
-      "kode": "UTTAK",
-      "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Uttak"
-    },
-    {
-      "kode": "ANKE_VURDERING",
-      "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Anke vurdering"
-    },
-    {
-      "kode": "ANKE_MERKNADER",
-      "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Anke merknader"
-    },
-    {
-      "kode": "PUNKT_FOR_MEDLEMSKAP_LØPENDE",
-      "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Løpende medlemskap"
-    },
-    {
-      "kode": "FAKTA_UTTAK",
-      "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Fakta uttak"
-    },
-    {
-      "kode": "FAKTA_FOR_OMSORG",
-      "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Fakta om omsorg"
-    },
-    {
-      "kode": "VURDER_FARESIGNALER",
-      "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Vurder faresignaler"
-    },
-    {
-      "kode": "VURDER_UTTAK_DOKUMENTASJON",
-      "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Vurder dokumentasjon"
-    },
-    {
-      "kode": "BESTEBEREGNING",
-      "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Besteberegning"
-    },
-    {
-      "kode": "FAKTA_OM_VERGE",
-      "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Fakta om verge/fullmektig"
-    },
-    {
-      "kode": "FORMKRAV_KLAGE_KA",
-      "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Formkrav klage KA"
-    },
-    {
-      "kode": "KLAGE_BEH_NK",
-      "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Klageresultat Klageinstans"
-    },
-    {
-      "kode": "PUNKT_FOR_FORELDREANSVAR",
-      "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Foreldreansvar"
-    },
-    {
-      "kode": "FAKTA_OM_BEREGNING",
-      "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Fakta om beregning"
-    },
-    {
-      "kode": "VEDTAK",
-      "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Vedtak"
-    },
-    {
-      "kode": "FAKTA_OMSORG_OG_RETT",
-      "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Fakta om aleneomsorg og annenpart rett"
-    },
-    {
-      "kode": "PUNKT_FOR_OMSORG",
-      "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Omsorg"
-    },
-    {
-      "kode": "BEREGNING_ENGANGSSTOENAD",
-      "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Beregning"
-    },
-    {
-      "kode": "FAKTA_OM_ARBEIDSFORHOLD_PERMISJON",
-      "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Fkta om arbeidsforhold med permisjon uten sluttdato"
-    },
-    {
-      "kode": "FAKTA_OM_UTTAK",
-      "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Fakta om uttak"
-    },
-    {
-      "kode": "FAKTA_OM_UTTAK_DOKUMENTASJON",
-      "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Fakta om uttaksdokumentasjon"
-    },
-    {
-      "kode": "KONTROLL_AV_SAKSOPPLYSNINGER",
-      "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Fakta om saken"
-    },
-    {
-      "kode": "FAKTA_OM_ADOPSJON",
-      "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Fakta om adopsjon"
+      "navn": "Svangerskapspenger"
     },
     {
       "kode": "UTLAND",
@@ -1355,19 +1170,19 @@
       "navn": "Endret utland"
     },
     {
-      "kode": "PUNKT_FOR_FOEDSEL",
+      "kode": "FAKTA_OMSORG_OG_RETT",
       "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Fødsel"
+      "navn": "Fakta om aleneomsorg og annenpart rett"
     },
     {
-      "kode": "OPPLYSNINGSPLIKT",
+      "kode": "PUNKT_FOR_MEDLEMSKAP_LØPENDE",
       "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Opplysningsplikt"
+      "navn": "Løpende medlemskap"
     },
     {
-      "kode": "PUNKT_FOR_ADOPSJON",
+      "kode": "FAKTA_OM_FORDELING",
       "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Adopsjon"
+      "navn": "Fakta om fordeling"
     },
     {
       "kode": "BEREGNING_FORELDREPENGER",
@@ -1375,9 +1190,184 @@
       "navn": "Beregning"
     },
     {
+      "kode": "BESTEBEREGNING",
+      "kodeverk": "SKJERMLENKE_TYPE",
+      "navn": "Besteberegning"
+    },
+    {
+      "kode": "FAKTA_OM_AKTIVITETSKRAV",
+      "kodeverk": "SKJERMLENKE_TYPE",
+      "navn": "Fakta om aktivitetskrav"
+    },
+    {
+      "kode": "FORMKRAV_KLAGE_NFP",
+      "kodeverk": "SKJERMLENKE_TYPE",
+      "navn": "Formkrav klage NFP"
+    },
+    {
+      "kode": "FAKTA_OM_ADOPSJON",
+      "kodeverk": "SKJERMLENKE_TYPE",
+      "navn": "Fakta om adopsjon"
+    },
+    {
+      "kode": "KLAGE_BEH_NK",
+      "kodeverk": "SKJERMLENKE_TYPE",
+      "navn": "Klageresultat Klageinstans"
+    },
+    {
+      "kode": "FAKTA_OM_ARBEIDSFORHOLD_INNTEKTSMELDING",
+      "kodeverk": "SKJERMLENKE_TYPE",
+      "navn": "Fakta om arbeid og inntekt"
+    },
+    {
+      "kode": "FAKTA_UTTAK",
+      "kodeverk": "SKJERMLENKE_TYPE",
+      "navn": "Fakta uttak"
+    },
+    {
+      "kode": "PUNKT_FOR_FORELDREANSVAR",
+      "kodeverk": "SKJERMLENKE_TYPE",
+      "navn": "Foreldreansvar"
+    },
+    {
+      "kode": "UTTAK",
+      "kodeverk": "SKJERMLENKE_TYPE",
+      "navn": "Uttak"
+    },
+    {
+      "kode": "BEREGNING_ENGANGSSTOENAD",
+      "kodeverk": "SKJERMLENKE_TYPE",
+      "navn": "Beregning"
+    },
+    {
+      "kode": "FAKTA_OM_FOEDSEL",
+      "kodeverk": "SKJERMLENKE_TYPE",
+      "navn": "Fakta om fødsel"
+    },
+    {
+      "kode": "FAKTA_OM_OMSORG_OG_FORELDREANSVAR",
+      "kodeverk": "SKJERMLENKE_TYPE",
+      "navn": "Fakta om omsorg og foreldreansvar"
+    },
+    {
+      "kode": "FORMKRAV_KLAGE_KA",
+      "kodeverk": "SKJERMLENKE_TYPE",
+      "navn": "Formkrav klage KA"
+    },
+    {
+      "kode": "PUNKT_FOR_FOEDSEL",
+      "kodeverk": "SKJERMLENKE_TYPE",
+      "navn": "Fødsel"
+    },
+    {
+      "kode": "FAKTA_OM_BEREGNING",
+      "kodeverk": "SKJERMLENKE_TYPE",
+      "navn": "Fakta om beregning"
+    },
+    {
+      "kode": "FAKTA_OM_ARBEIDSFORHOLD_PERMISJON",
+      "kodeverk": "SKJERMLENKE_TYPE",
+      "navn": "Fakta om arbeidsforhold med permisjon uten sluttdato"
+    },
+    {
+      "kode": "KONTROLL_AV_SAKSOPPLYSNINGER",
+      "kodeverk": "SKJERMLENKE_TYPE",
+      "navn": "Fakta om saken"
+    },
+    {
+      "kode": "FAKTA_OM_VERGE",
+      "kodeverk": "SKJERMLENKE_TYPE",
+      "navn": "Fakta om verge/fullmektig"
+    },
+    {
+      "kode": "TILKJENT_YTELSE",
+      "kodeverk": "SKJERMLENKE_TYPE",
+      "navn": "Tilkjent ytelse"
+    },
+    {
+      "kode": "PUNKT_FOR_MEDLEMSKAP",
+      "kodeverk": "SKJERMLENKE_TYPE",
+      "navn": "Medlemskap"
+    },
+    {
+      "kode": "ANKE_MERKNADER",
+      "kodeverk": "SKJERMLENKE_TYPE",
+      "navn": "Anke merknader"
+    },
+    {
+      "kode": "FAKTA_OM_ARBEIDSFORHOLD",
+      "kodeverk": "SKJERMLENKE_TYPE",
+      "navn": "Fakta om arbeidsforhold"
+    },
+    {
+      "kode": "FAKTA_OM_OPPTJENING",
+      "kodeverk": "SKJERMLENKE_TYPE",
+      "navn": "Fakta om opptjening"
+    },
+    {
+      "kode": "FAKTA_OM_UTTAK",
+      "kodeverk": "SKJERMLENKE_TYPE",
+      "navn": "Fakta om uttak"
+    },
+    {
+      "kode": "PUNKT_FOR_OMSORG",
+      "kodeverk": "SKJERMLENKE_TYPE",
+      "navn": "Omsorg"
+    },
+    {
+      "kode": "VURDER_FARESIGNALER",
+      "kodeverk": "SKJERMLENKE_TYPE",
+      "navn": "Vurder faresignaler"
+    },
+    {
+      "kode": "ANKE_VURDERING",
+      "kodeverk": "SKJERMLENKE_TYPE",
+      "navn": "Anke vurdering"
+    },
+    {
+      "kode": "PUNKT_FOR_SVP_INNGANG",
+      "kodeverk": "SKJERMLENKE_TYPE",
+      "navn": "Fakta om fødsel og tilrettelegging"
+    },
+    {
+      "kode": "FAKTA_OM_SIMULERING",
+      "kodeverk": "SKJERMLENKE_TYPE",
+      "navn": "Simulering"
+    },
+    {
+      "kode": "SOEKNADSFRIST",
+      "kodeverk": "SKJERMLENKE_TYPE",
+      "navn": "Søknadsfrist"
+    },
+    {
+      "kode": "FAKTA_FOR_OMSORG",
+      "kodeverk": "SKJERMLENKE_TYPE",
+      "navn": "Fakta om omsorg"
+    },
+    {
+      "kode": "FAKTA_OM_UTTAK_DOKUMENTASJON",
+      "kodeverk": "SKJERMLENKE_TYPE",
+      "navn": "Vurder dokumentasjon"
+    },
+    {
+      "kode": "VEDTAK",
+      "kodeverk": "SKJERMLENKE_TYPE",
+      "navn": "Vedtak"
+    },
+    {
       "kode": "FAKTA_FOR_OPPTJENING",
       "kodeverk": "SKJERMLENKE_TYPE",
       "navn": "Fakta om opptjening"
+    },
+    {
+      "kode": "OPPLYSNINGSPLIKT",
+      "kodeverk": "SKJERMLENKE_TYPE",
+      "navn": "Opplysningsplikt"
+    },
+    {
+      "kode": "PUNKT_FOR_OPPTJENING",
+      "kodeverk": "SKJERMLENKE_TYPE",
+      "navn": "Opptjening"
     }
   ],
   "FaktaOmBeregningTilfelle": [

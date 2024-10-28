@@ -3,7 +3,7 @@ import ProsessStegCode from './prosessStegCodes';
 
 type SkjermlenkeData = Record<string, { kode: string; faktaNavn: string; punktNavn: string }>;
 
-const skjermlenkeCodes = {
+export const skjermlenkeCodesFpsak: SkjermlenkeData = {
   BEREGNING_ENGANGSSTOENAD: {
     kode: 'BEREGNING_ENGANGSSTOENAD',
     faktaNavn: FaktaPanelCode.DEFAULT,
@@ -22,6 +22,11 @@ const skjermlenkeCodes = {
   FAKTA_OM_ADOPSJON: {
     kode: 'FAKTA_OM_ADOPSJON',
     faktaNavn: FaktaPanelCode.ADOPSJONSVILKARET,
+    punktNavn: '',
+  },
+  FAKTA_OM_ARBEIDSFORHOLD_PERMISJON: {
+    kode: 'FAKTA_OM_ARBEIDSFORHOLD_PERMISJON',
+    faktaNavn: FaktaPanelCode.ARBEIDSFORHOLD,
     punktNavn: '',
   },
   FAKTA_OM_BEREGNING: {
@@ -104,6 +109,11 @@ const skjermlenkeCodes = {
     faktaNavn: FaktaPanelCode.DEFAULT,
     punktNavn: ProsessStegCode.ANKEBEHANDLING,
   },
+  ANKE_MERKNADER: {
+    kode: 'ANKE_MERKNADER',
+    faktaNavn: FaktaPanelCode.DEFAULT,
+    punktNavn: ProsessStegCode.ANKE_MERKNADER,
+  },
   OPPLYSNINGSPLIKT: {
     kode: 'OPPLYSNINGSPLIKT',
     faktaNavn: FaktaPanelCode.DEFAULT,
@@ -179,31 +189,15 @@ const skjermlenkeCodes = {
     faktaNavn: FaktaPanelCode.DEFAULT,
     punktNavn: ProsessStegCode.TILKJENT_YTELSE,
   },
-
   FAKTA_OM_SIMULERING: {
     kode: 'SIMULERING',
     faktaNavn: FaktaPanelCode.DEFAULT,
     punktNavn: ProsessStegCode.SIMULERING,
   },
-  FAKTA_OM_FEILUTBETALING: {
-    kode: 'FAKTA_OM_FEILUTBETALING',
-    faktaNavn: FaktaPanelCode.FEILUTBETALING,
-    punktNavn: '',
-  },
   UTLAND: {
     kode: 'UTLAND',
     faktaNavn: FaktaPanelCode.SAKEN,
     punktNavn: '',
-  },
-  FORELDELSE: {
-    kode: 'FORELDELSE',
-    faktaNavn: FaktaPanelCode.DEFAULT,
-    punktNavn: ProsessStegCode.FORELDELSE,
-  },
-  TILBAKEKREVING: {
-    kode: 'TILBAKEKREVING',
-    faktaNavn: FaktaPanelCode.DEFAULT,
-    punktNavn: ProsessStegCode.TILBAKEKREVING,
   },
   PUNKT_FOR_SVP_INNGANG: {
     kode: 'SVANGERSKAP',
@@ -218,6 +212,11 @@ const skjermlenkeCodes = {
   VURDER_FARESIGNALER: {
     kode: 'VURDER_FARESIGNALER',
     faktaNavn: FaktaPanelCode.DEFAULT,
+    punktNavn: '',
+  },
+  VURDER_UTTAK_DOKUMENTASJON: {
+    kode: 'VURDER_UTTAK_DOKUMENTASJON',
+    faktaNavn: FaktaPanelCode.UTTAK_DOKUMENTASJON,
     punktNavn: '',
   },
   PUNKT_FOR_MEDLEMSKAP_LØPENDE: {
@@ -236,5 +235,35 @@ const skjermlenkeCodes = {
     punktNavn: '',
   },
 } as SkjermlenkeData;
+
+export const skjermlenkeCodesFpTilbake: SkjermlenkeData = {
+  FAKTA_OM_FEILUTBETALING: {
+    kode: 'FAKTA_OM_FEILUTBETALING',
+    faktaNavn: FaktaPanelCode.FEILUTBETALING,
+    punktNavn: '',
+  },
+  TILBAKEKREVING: {
+    kode: 'TILBAKEKREVING',
+    faktaNavn: FaktaPanelCode.DEFAULT,
+    punktNavn: ProsessStegCode.TILBAKEKREVING,
+  },
+  FORELDELSE: {
+    kode: 'FORELDELSE',
+    faktaNavn: FaktaPanelCode.DEFAULT,
+    punktNavn: ProsessStegCode.FORELDELSE,
+  },
+  VEDTAK: {
+    kode: 'VEDTAK',
+    faktaNavn: FaktaPanelCode.DEFAULT,
+    punktNavn: ProsessStegCode.VEDTAK,
+  },
+  FAKTA_OM_VERGE: {
+    kode: 'FAKTA_OM_VERGE',
+    faktaNavn: FaktaPanelCode.VERGE,
+    punktNavn: '',
+  },
+};
+
+const skjermlenkeCodes = { ...skjermlenkeCodesFpsak, ...skjermlenkeCodesFpTilbake };
 
 export default skjermlenkeCodes;
