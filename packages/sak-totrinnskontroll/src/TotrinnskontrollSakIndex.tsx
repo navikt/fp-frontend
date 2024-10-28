@@ -13,7 +13,7 @@ import {
   behandlingArsakType as BehandlingÅrsakType,
   vurderPaNyttArsakType,
 } from '@navikt/fp-kodeverk';
-import { skjermlenkeCodes } from '@navikt/fp-konstanter';
+import { skjermlenkeCodesFpTilbake as skjermlenkeCodes } from '@navikt/fp-konstanter';
 import { BehandlingAppKontekst, AlleKodeverk, AlleKodeverkTilbakekreving, KodeverkMedNavn } from '@navikt/fp-types';
 import { FatterVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
