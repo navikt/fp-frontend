@@ -1,0 +1,25 @@
+import{j as e}from"./jsx-runtime-Cw0GR0a5.js";import{d as E,e as L,S as A,H as V,y as t,k as q,M as m,f,W as j,c,L as n,O as u,g as F,h as H,A as N,t as K,P as $,m as w,a as B,b as W,$ as U,B as G}from"./nb_NO-5hZsV4-L.js";import{r as o,b as g,R as b,_ as J,y as Q,N as X,I as Y,h as O}from"./index.es-CbGsWAf8.js";import{A as Z}from"./Alert-BdM_VJbu.js";import"./index-CTjT7uj6.js";import"./v4-CQkTLCs1.js";import"./dayjs.min-DQZRloWl.js";import"./index-vZN_Bsf0.js";import"./ExclamationmarkTriangleFill-BVJ-PMQL.js";const h=Q(1),k=X(9),S=()=>O().startOf("day"),ee=()=>S().subtract(3,"weeks"),re=r=>{const a=ee(),s=r?O(r,N):void 0,d=S();return s&&s.isSameOrBefore(d)?(s.isAfter(a)?s:a).subtract(1,"days"):d},se=r=>a=>Y(re(r("termindato")))(a),I=({readOnly:r,erForeldrepenger:a})=>{const s=E(),{watch:d,getValues:_,trigger:z,formState:{isSubmitted:C}}=L(),x=d("erBarnetFodt");return e.jsxs(A,{children:[e.jsx(V,{size:"small",children:s.formatMessage({id:"Registrering.TerminOgFodsel"})}),e.jsx(t,{sixteenPx:!0}),e.jsx(q,{name:"erBarnetFodt",label:e.jsx(m,{id:"Registrering.Termin.Fodt"}),validate:[o],isReadOnly:r,isHorizontal:!0,isTrueOrFalseSelection:!0,radios:[{label:e.jsx(m,{id:"Registrering.Fodsel.ErFodt"}),value:"true"},{label:e.jsx(m,{id:"Registrering.Fodsel.ErIkkeFodt"}),value:"false"}]}),x===!1&&e.jsxs(e.Fragment,{children:[e.jsx(t,{eightPx:!0}),e.jsx(f,{alignOffset:64,children:e.jsxs(j,{children:[e.jsxs(c,{children:[e.jsx(n,{children:e.jsx(u,{name:"termindato",label:s.formatMessage({id:"Registrering.Termindato"}),isReadOnly:r,validate:[o,g],onChange:()=>C?z():void 0})}),e.jsx(n,{children:e.jsx(F,{name:"antallBarnFraTerminbekreftelse",label:s.formatMessage({id:"Registrering.AntallBarn"}),readOnly:r,validate:[o,b,h,k]})})]}),e.jsx(t,{sixteenPx:!0}),e.jsx(c,{children:e.jsx(n,{children:e.jsx(u,{name:"terminbekreftelseDato",label:s.formatMessage({id:"Registrering.UtstedtDato"}),isReadOnly:r,validate:[g,se(_)]})})})]})})]}),x&&e.jsxs(e.Fragment,{children:[e.jsx(t,{eightPx:!0}),e.jsx(f,{alignOffset:0,children:e.jsxs(j,{children:[e.jsxs(c,{children:[e.jsx(n,{children:e.jsx(u,{name:"foedselsDato",label:s.formatMessage({id:"Registrering.Fodselsdato"}),isReadOnly:r,validate:[o,g,J]})}),e.jsx(n,{children:e.jsx(F,{name:"antallBarn",label:s.formatMessage({id:"Registrering.AntallBarn"}),readOnly:r,validate:[o,b,h,k]})})]}),a&&e.jsxs(e.Fragment,{children:[e.jsx(t,{sixteenPx:!0}),e.jsx(Z,{size:"small",variant:"info",children:e.jsx(H,{size:"small",children:e.jsx(m,{id:"Registrering.RettTilPrematuruker"})})})]}),e.jsx(t,{sixteenPx:!0}),e.jsx(c,{children:e.jsx(n,{children:e.jsx(u,{name:"termindato",label:s.formatMessage({id:"Registrering.Termindato"}),isReadOnly:r,validate:[g]})})})]})})]})]})};I.__docgenInfo={description:"",methods:[],displayName:"TerminFodselDatoPanel",props:{readOnly:{required:!0,tsType:{name:"boolean"},description:""},erForeldrepenger:{required:!0,tsType:{name:"boolean"},description:""}}};const ae=K(w),p=({readOnly:r,erForeldrepenger:a})=>e.jsx($,{value:ae,children:e.jsx(I,{readOnly:r,erForeldrepenger:a})});p.__docgenInfo={description:"",methods:[],displayName:"FodselPapirsoknadIndex",props:{readOnly:{required:!0,tsType:{name:"boolean"},description:""},erForeldrepenger:{required:!0,tsType:{name:"boolean"},description:""}}};const ge={title:"papirsoknad/ui-komponenter/fodsel",component:p},D=({submitCallback:r,erForeldrepenger:a})=>{const s=W();return e.jsxs(U,{formMethods:s,onSubmit:r,children:[e.jsx(p,{readOnly:!1,erForeldrepenger:a}),e.jsx(t,{fourtyPx:!0}),e.jsx(G,{size:"small",variant:"primary",children:"Lagreknapp (Kun for test)"})]})},i=D.bind({});i.args={submitCallback:B("button-click"),erForeldrepenger:!0};const l=D.bind({});l.args={submitCallback:B("button-click"),erForeldrepenger:!1};var y,v,R;i.parameters={...i.parameters,docs:{...(y=i.parameters)==null?void 0:y.docs,source:{originalSource:`({
+  submitCallback,
+  erForeldrepenger
+}) => {
+  const formMethods = useForm();
+  return <Form formMethods={formMethods} onSubmit={submitCallback}>
+      <FodselPapirsoknadIndex readOnly={false} erForeldrepenger={erForeldrepenger} />
+      <VerticalSpacer fourtyPx />
+      <Button size="small" variant="primary">
+        Lagreknapp (Kun for test)
+      </Button>
+    </Form>;
+}`,...(R=(v=i.parameters)==null?void 0:v.docs)==null?void 0:R.source}}};var T,M,P;l.parameters={...l.parameters,docs:{...(T=l.parameters)==null?void 0:T.docs,source:{originalSource:`({
+  submitCallback,
+  erForeldrepenger
+}) => {
+  const formMethods = useForm();
+  return <Form formMethods={formMethods} onSubmit={submitCallback}>
+      <FodselPapirsoknadIndex readOnly={false} erForeldrepenger={erForeldrepenger} />
+      <VerticalSpacer fourtyPx />
+      <Button size="small" variant="primary">
+        Lagreknapp (Kun for test)
+      </Button>
+    </Form>;
+}`,...(P=(M=l.parameters)==null?void 0:M.docs)==null?void 0:P.source}}};const pe=["Default","ErIkkeForeldrepenger"];export{i as Default,l as ErIkkeForeldrepenger,pe as __namedExportsOrder,ge as default};
