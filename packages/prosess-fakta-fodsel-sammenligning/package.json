@@ -29,7 +29,7 @@
     "@navikt/ft-utils": "2.4.4",
     "moment": "2.30.1",
     "react": "18.3.1",
-    "react-intl": "6.6.8"
+    "react-intl": "6.8.4"
   },
   "devDependencies": {
     "@navikt/ds-css": "7.2.1",
