@@ -18,7 +18,7 @@ export default defineConfig({
     },
   },
   server: {
-    port: 9100,
+    port: 9010,
     proxy: {
       '/fpsak/api': {
         target: 'http://127.0.0.1:9000',
