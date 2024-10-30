@@ -79,15 +79,15 @@ For å utvikle lokalt på fpfrontend mot autotest må man kjøre opp autotest (f
 kjøre [./lokal-utvikling/lokal-utvikling-ide.sh](https://github.com/navikt/fp-autotest/blob/master/lokal-utvikling/lokal-utvikling-ide.sh)
 i fp-autotest-repoet). Her er det viktig å understreke at fpfrontend(:9090) også skal spinnes opp i autotest.
 Det er fordi man trenger fpfrontend i docker til å få til login. Deretter kan man starte fpfrontend lokalt
-på http://localhost:9100 med `yarn dev`.
+på http://localhost:9010 med `yarn dev`.
 
 ### Innlogging og utlogging mot autotest
 
-Den lokale frontenden kjører på port 9100, for å logge seg inn må man kalle wonderwall
-på http://localhost:9000/oauth2/login?redirect=http://localhost:9100.
+Den lokale frontenden kjører på port 9010, for å logge seg inn må man kalle wonderwall
+på http://localhost:9000/oauth2/login?redirect=http://localhost:9010.
 
-Ved innlogging gå til http://localhost:9000/oauth2/login?redirect=http://localhost:9100 - logg inn der med den brukeren
-du ønsker å teste med, så fortsett å jobbe videre med den lokale frontenden på http://localhost:9100.
+Ved innlogging gå til http://localhost:9000/oauth2/login?redirect=http://localhost:9010 - logg inn der med den brukeren
+du ønsker å teste med, så fortsett å jobbe videre med den lokale frontenden på http://localhost:9010.
 
 Om man skulle få problemer med at `authserver:8085` ikke finnes så må man legge inn `authserver` i `hosts` fila på
 maskinen:

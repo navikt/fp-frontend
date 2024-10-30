@@ -85,7 +85,7 @@ async function startApp() {
         res.redirect(loginPath);
       } else {
         // Validate token and continue to app
-        // eslint-disable-next-line no-lonely-if
+
         if (await validateAuthorization(authorization)) {
           logger.debug('User token is valid. Continue.');
           next();
@@ -123,7 +123,7 @@ async function startApp() {
 
     reverseProxy.setup(server);
 
-    serveViteMode(server, { port: '9100'  });
+    serveViteMode(server, { port: '9010' });
 
     // serve static files
     const rootDir = './dist';
