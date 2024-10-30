@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { AksjonspunktCode, VilkarType } from '@navikt/fp-kodeverk';
 import { AdopsjonVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-adopsjon';
 import { AksessRettigheter } from '@navikt/fp-types';
@@ -54,12 +53,7 @@ const AdopsjonInngangsvilkarFpInitPanel: FunctionComponent<OwnProps & Inngangsvi
               kanOverstyreAccess={rettigheter.kanOverstyreAccess}
             />
           )}
-          {data.aksjonspunkter.length > 0 && (
-            <>
-              <AdopsjonVilkarProsessIndex {...data} />
-              <VerticalSpacer thirtyTwoPx />
-            </>
-          )}
+          {data.aksjonspunkter.length > 0 && <AdopsjonVilkarProsessIndex {...data} />}
         </>
       )}
     />

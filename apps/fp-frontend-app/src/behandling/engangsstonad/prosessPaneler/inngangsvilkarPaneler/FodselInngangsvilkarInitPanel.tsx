@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { IntlShape, useIntl } from 'react-intl';
 
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { AksjonspunktCode, VilkarType, fagsakYtelseType } from '@navikt/fp-kodeverk';
 import { FodselVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-fodsel';
 import { Aksjonspunkt, AksessRettigheter } from '@navikt/fp-types';
@@ -66,10 +65,7 @@ const FodselInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsvilkar
             />
           )}
           {data.aksjonspunkter.length > 0 && (
-            <>
-              <FodselVilkarProsessIndex ytelseTypeKode={fagsakYtelseType.ENGANGSSTONAD} {...data} />
-              <VerticalSpacer thirtyTwoPx />
-            </>
+            <FodselVilkarProsessIndex ytelseTypeKode={fagsakYtelseType.ENGANGSSTONAD} {...data} />
           )}
         </>
       )}

@@ -2,7 +2,6 @@ import React, { FunctionComponent } from 'react';
 
 import { AksjonspunktCode, VilkarType } from '@navikt/fp-kodeverk';
 import { AksessRettigheter, Opptjening } from '@navikt/fp-types';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { OpptjeningVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-opptjening';
 
 import { useIntl } from 'react-intl';
@@ -44,29 +43,23 @@ const OpptjeningInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsvi
       renderPanel={(data, erOverstyrt, toggleOverstyring) => (
         <>
           {data.aksjonspunkter.length === 0 && (
-            <>
-              <OverstyringPanelDef
-                aksjonspunkter={data.aksjonspunkter}
-                aksjonspunktKode={AksjonspunktCode.OVERSTYRING_AV_OPPTJENINGSVILKARET}
-                vilkar={data.vilkar}
-                vilkarKoder={VILKAR_KODER}
-                panelTekstKode="Inngangsvilkar.Opptjeningsvilkaret"
-                toggleOverstyring={toggleOverstyring}
-                erOverstyrt={erOverstyrt}
-                overrideReadOnly={
-                  data.isReadOnly ||
-                  (props.harInngangsvilkarApentAksjonspunkt && !(data.isAksjonspunktOpen || erOverstyrt))
-                }
-                kanOverstyreAccess={rettigheter.kanOverstyreAccess}
-              />
-              <VerticalSpacer thirtyTwoPx />
-            </>
+            <OverstyringPanelDef
+              aksjonspunkter={data.aksjonspunkter}
+              aksjonspunktKode={AksjonspunktCode.OVERSTYRING_AV_OPPTJENINGSVILKARET}
+              vilkar={data.vilkar}
+              vilkarKoder={VILKAR_KODER}
+              panelTekstKode="Inngangsvilkar.Opptjeningsvilkaret"
+              toggleOverstyring={toggleOverstyring}
+              erOverstyrt={erOverstyrt}
+              overrideReadOnly={
+                data.isReadOnly ||
+                (props.harInngangsvilkarApentAksjonspunkt && !(data.isAksjonspunktOpen || erOverstyrt))
+              }
+              kanOverstyreAccess={rettigheter.kanOverstyreAccess}
+            />
           )}
           {data.aksjonspunkter.length > 0 && (
-            <>
-              <OpptjeningVilkarProsessIndex erSvpFagsak lovReferanse={data.vilkar[0].lovReferanse} {...data} />
-              <VerticalSpacer thirtyTwoPx />
-            </>
+            <OpptjeningVilkarProsessIndex erSvpFagsak lovReferanse={data.vilkar[0].lovReferanse} {...data} />
           )}
         </>
       )}

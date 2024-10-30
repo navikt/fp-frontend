@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { VilkarType, AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { OpptjeningVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-opptjening';
 import { AksessRettigheter, Opptjening } from '@navikt/fp-types';
@@ -59,10 +58,7 @@ const OpptjeningInngangsvilkarFpInitPanel: FunctionComponent<OwnProps & Inngangs
             />
           )}
           {data.aksjonspunkter.length > 0 && (
-            <>
-              <OpptjeningVilkarProsessIndex lovReferanse={data.vilkar[0].lovReferanse} {...data} />
-              <VerticalSpacer thirtyTwoPx />
-            </>
+            <OpptjeningVilkarProsessIndex lovReferanse={data.vilkar[0].lovReferanse} {...data} />
           )}
         </>
       )}

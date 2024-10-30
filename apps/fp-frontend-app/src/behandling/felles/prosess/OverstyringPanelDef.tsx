@@ -1,7 +1,6 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { Aksjonspunkt, KodeverkMedNavn } from '@navikt/ft-types';
 import { VilkarType } from '@navikt/ft-kodeverk';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { VilkarresultatMedOverstyringProsessIndex } from '@navikt/fp-prosess-vilkar-overstyring';
 import { Medlemskap, Vilkar } from '@navikt/fp-types';
@@ -64,21 +63,18 @@ const OverstyringPanelDef: FunctionComponent<OwnProps> = ({
   }
 
   return (
-    <>
-      <VilkarresultatMedOverstyringProsessIndex
-        medlemskap={medlemskap}
-        overrideReadOnly={overrideReadOnly}
-        kanOverstyreAccess={kanOverstyreAccess}
-        toggleOverstyring={toggleOverstyring}
-        avslagsarsaker={avslagsarsaker}
-        erOverstyrt={erOverstyrt}
-        panelTittelKode={panelTekstKode}
-        overstyringApKode={aksjonspunktKode}
-        lovReferanse={vilkar.length > 0 ? vilkar[0].lovReferanse : undefined}
-        {...standardProps}
-      />
-      <VerticalSpacer thirtyTwoPx />
-    </>
+    <VilkarresultatMedOverstyringProsessIndex
+      medlemskap={medlemskap}
+      overrideReadOnly={overrideReadOnly}
+      kanOverstyreAccess={kanOverstyreAccess}
+      toggleOverstyring={toggleOverstyring}
+      avslagsarsaker={avslagsarsaker}
+      erOverstyrt={erOverstyrt}
+      panelTittelKode={panelTekstKode}
+      overstyringApKode={aksjonspunktKode}
+      lovReferanse={vilkar.length > 0 ? vilkar[0].lovReferanse : undefined}
+      {...standardProps}
+    />
   );
 };
 

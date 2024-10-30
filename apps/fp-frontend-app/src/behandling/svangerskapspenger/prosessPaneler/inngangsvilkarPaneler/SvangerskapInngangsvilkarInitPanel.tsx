@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { VilkarType, AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { SvangerskapVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-svangerskap';
 import { FodselOgTilrettelegging } from '@navikt/fp-types';
@@ -38,12 +37,7 @@ const SvangerskapInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsv
       vilkarKoder={VILKAR_KODER}
       inngangsvilkarPanelKode="SVANGERSKAP"
       hentInngangsvilkarPanelTekst={() => intl.formatMessage({ id: 'SvangerskapVilkarForm.FyllerVilkår' })}
-      renderPanel={data => (
-        <>
-          <SvangerskapVilkarProsessIndex {...data} />
-          <VerticalSpacer thirtyTwoPx />
-        </>
-      )}
+      renderPanel={data => <SvangerskapVilkarProsessIndex {...data} />}
     />
   );
 };
