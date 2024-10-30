@@ -1,13 +1,8 @@
 import React, { FunctionComponent, ReactElement, useCallback, useState, MouseEvent } from 'react';
 import { useIntl } from 'react-intl';
+import { HGrid, VStack } from '@navikt/ds-react';
 import { VilkarUtfallType } from '@navikt/ft-kodeverk';
-import {
-  VerticalSpacer,
-  AksjonspunktHelpTextHTML,
-  FlexContainer,
-  FlexRow,
-  FlexColumn,
-} from '@navikt/ft-ui-komponenter';
+import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { Behandling } from '@navikt/ft-types';
 
 import { ProsessStegCode } from '@navikt/fp-konstanter';
@@ -18,8 +13,6 @@ import useProsessMenyRegistrerer from './useProsessMenyRegistrerer';
 import InngangsvilkarPanelData from '../typer/inngangsvilkarPanelData';
 import ProsessPanelInitProps from '../typer/prosessPanelInitProps';
 import InngangsvilkarPanelInitProps from '../typer/inngangsvilkarPanelInitProps';
-
-import styles from './inngangsvilkarDefaultInitWrapper.module.css';
 
 const harMinstEttDelPanelStatus = (paneler: InngangsvilkarPanelData[], vuType: string): boolean =>
   paneler.some(p => p.status === vuType);
@@ -117,50 +110,41 @@ const InngangsvilkarDefaultInitWrapper: FunctionComponent<OwnProps & ProsessPane
       dataState={RestApiState.SUCCESS}
       skalSkjulePanel={!erPanelValgt}
     >
-      <>
+      <VStack gap="8">
         {erPanelValgt && ((apentFaktaPanelInfo && erIkkeFerdigbehandlet) || aksjonspunktTekster.length > 0) && (
-          <>
-            <AksjonspunktHelpTextHTML>
-              {apentFaktaPanelInfo && erIkkeFerdigbehandlet
-                ? [
-                    <React.Fragment key="1">
-                      {intl.formatMessage({ id: 'InngangsvilkarProsessStegPanelDef.AvventerAvklaringAv' })}
-                      {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                      <a href="" onClick={oppdaterUrl}>
-                        {apentFaktaPanelInfo.text}
-                      </a>
-                    </React.Fragment>,
-                  ]
-                : aksjonspunktTekster.map(tekst => tekst)}
-            </AksjonspunktHelpTextHTML>
-            <VerticalSpacer thirtyTwoPx />
-          </>
+          <AksjonspunktHelpTextHTML>
+            {apentFaktaPanelInfo && erIkkeFerdigbehandlet
+              ? [
+                  <React.Fragment key="1">
+                    {intl.formatMessage({ id: 'InngangsvilkarProsessStegPanelDef.AvventerAvklaringAv' })}
+                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                    <a href="" onClick={oppdaterUrl}>
+                      {apentFaktaPanelInfo.text}
+                    </a>
+                  </React.Fragment>,
+                ]
+              : aksjonspunktTekster.map(tekst => tekst)}
+          </AksjonspunktHelpTextHTML>
         )}
-        <FlexContainer>
-          <FlexRow>
-            <FlexColumn className={styles.col}>
-              <div className={styles.panelLeft}>
-                {leftPanels({
-                  registrerInngangsvilkarPanel,
-                  erPanelValgt,
-                  harInngangsvilkarApentAksjonspunkt: harApentAksjonspunkt,
-                })}
-              </div>
-            </FlexColumn>
-            {rightPanels && (
-              <FlexColumn className={styles.col}>
-                <div className={styles.panelRight}>
-                  {rightPanels({
-                    registrerInngangsvilkarPanel,
-                    erPanelValgt,
-                    harInngangsvilkarApentAksjonspunkt: harApentAksjonspunkt,
-                  })}
-                </div>
-              </FlexColumn>
-            )}
-          </FlexRow>
-        </FlexContainer>
-      </>
+        <HGrid columns={2} gap="8">
+          <VStack gap="8">
+            {leftPanels({
+              registrerInngangsvilkarPanel,
+              erPanelValgt,
+              harInngangsvilkarApentAksjonspunkt: harApentAksjonspunkt,
+            })}
+          </VStack>
+          {rightPanels && (
+            <VStack gap="8">
+              {rightPanels({
+                registrerInngangsvilkarPanel,
+                erPanelValgt,
+                harInngangsvilkarApentAksjonspunkt: harApentAksjonspunkt,
+              })}
+            </VStack>
+          )}
+        </HGrid>
+      </VStack>
     </ProsessPanelWrapper>
   );
 };

@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { VilkarType, AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { OmsorgVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-omsorg';
 
@@ -32,12 +31,7 @@ const OmsorgInngangsvilkarFpInitPanel: FunctionComponent<OwnProps & Inngangsvilk
       vilkarKoder={VILKAR_KODER}
       inngangsvilkarPanelKode="OMSORG"
       hentInngangsvilkarPanelTekst={() => intl.formatMessage({ id: 'SRBVilkarForm.VurderSammeBarn' })}
-      renderPanel={data => (
-        <>
-          <OmsorgVilkarProsessIndex {...data} />
-          <VerticalSpacer thirtyTwoPx />
-        </>
-      )}
+      renderPanel={data => <OmsorgVilkarProsessIndex {...data} />}
     />
   );
 };

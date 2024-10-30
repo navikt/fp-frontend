@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { IntlShape, useIntl } from 'react-intl';
 
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { VilkarType, AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { ForeldreansvarVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-foreldreansvar';
 import { Aksjonspunkt } from '@navikt/fp-types';
@@ -51,14 +50,11 @@ const ForeldreansvarInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngan
       inngangsvilkarPanelKode="FORELDREANSVARSVILKARET"
       hentInngangsvilkarPanelTekst={data => hentAksjonspunktTekst(intl, data?.aksjonspunkter)}
       renderPanel={data => (
-        <>
-          <ForeldreansvarVilkarProsessIndex
-            isEngangsstonad
-            isForeldreansvar2Ledd={data.vilkar.some(v => v.vilkarType === VilkarType.FORELDREANSVARSVILKARET_2_LEDD)}
-            {...data}
-          />
-          <VerticalSpacer thirtyTwoPx />
-        </>
+        <ForeldreansvarVilkarProsessIndex
+          isEngangsstonad
+          isForeldreansvar2Ledd={data.vilkar.some(v => v.vilkarType === VilkarType.FORELDREANSVARSVILKARET_2_LEDD)}
+          {...data}
+        />
       )}
     />
   );

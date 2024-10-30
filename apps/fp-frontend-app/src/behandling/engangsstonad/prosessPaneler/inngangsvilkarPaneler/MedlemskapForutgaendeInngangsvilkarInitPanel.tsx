@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react';
 
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { AksjonspunktCode, aksjonspunktStatus, VilkarType } from '@navikt/fp-kodeverk';
 import { AksessRettigheter, Medlemskap } from '@navikt/fp-types';
 
@@ -53,25 +52,22 @@ const MedlemskapForutgaendeInngangsvilkarInitPanel: FunctionComponent<OwnProps &
       return (
         <>
           {!harÅpentMedlemskapAksjonspunkt && (
-            <>
-              <OverstyringPanelDef
-                aksjonspunkter={data.aksjonspunkter}
-                aksjonspunktKode={AksjonspunktCode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE}
-                vilkar={data.vilkar}
-                vilkarKoder={VILKAR_KODER}
-                panelTekstKode="Inngangsvilkar.Medlemskapsvilkaret"
-                medlemskap={data.medlemskap}
-                toggleOverstyring={toggleOverstyring}
-                erOverstyrt={erOverstyrt}
-                overrideReadOnly={
-                  data.isReadOnly ||
-                  harMedlemskapsAksjonspunkt ||
-                  (props.harInngangsvilkarApentAksjonspunkt && !(data.isAksjonspunktOpen || erOverstyrt))
-                }
-                kanOverstyreAccess={rettigheter.kanOverstyreAccess}
-              />
-              <VerticalSpacer thirtyTwoPx />
-            </>
+            <OverstyringPanelDef
+              aksjonspunkter={data.aksjonspunkter}
+              aksjonspunktKode={AksjonspunktCode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE}
+              vilkar={data.vilkar}
+              vilkarKoder={VILKAR_KODER}
+              panelTekstKode="Inngangsvilkar.Medlemskapsvilkaret"
+              medlemskap={data.medlemskap}
+              toggleOverstyring={toggleOverstyring}
+              erOverstyrt={erOverstyrt}
+              overrideReadOnly={
+                data.isReadOnly ||
+                harMedlemskapsAksjonspunkt ||
+                (props.harInngangsvilkarApentAksjonspunkt && !(data.isAksjonspunktOpen || erOverstyrt))
+              }
+              kanOverstyreAccess={rettigheter.kanOverstyreAccess}
+            />
           )}
         </>
       );

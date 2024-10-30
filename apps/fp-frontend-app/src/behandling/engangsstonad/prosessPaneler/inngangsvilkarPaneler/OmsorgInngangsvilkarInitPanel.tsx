@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { IntlShape, useIntl } from 'react-intl';
 
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { VilkarType, AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { OmsorgVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-omsorg';
 import { Aksjonspunkt } from '@navikt/fp-types';
@@ -45,12 +44,7 @@ const OmsorgInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsvilkar
       vilkarKoder={VILKAR_KODER}
       inngangsvilkarPanelKode="OMSORG"
       hentInngangsvilkarPanelTekst={data => hentAksjonspunktTekst(intl, data.aksjonspunkter)}
-      renderPanel={data => (
-        <>
-          <OmsorgVilkarProsessIndex {...data} />
-          <VerticalSpacer thirtyTwoPx />
-        </>
-      )}
+      renderPanel={data => <OmsorgVilkarProsessIndex {...data} />}
     />
   );
 };
