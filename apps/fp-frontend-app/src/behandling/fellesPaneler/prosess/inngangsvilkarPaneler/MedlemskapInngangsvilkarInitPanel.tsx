@@ -67,7 +67,7 @@ const MedlemskapInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsvi
                 }
                 kanOverstyreAccess={rettigheter.kanOverstyreAccess}
               />
-              <VerticalSpacer thirtyTwoPx />)
+              <VerticalSpacer thirtyTwoPx />
             </>
           )}
         </>
