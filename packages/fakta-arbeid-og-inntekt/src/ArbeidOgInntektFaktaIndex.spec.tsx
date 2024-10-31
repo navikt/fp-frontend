@@ -130,7 +130,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     await userEvent.click(screen.getByTitle('Åpne rad'));
     expect(await screen.findByTitle('Lukk rad')).toBeInTheDocument();
 
-    expect(screen.getByRole('radio', { hidden: true })).toBeDisabled();
+    expect(screen.getAllByRole('radio', { hidden: true })).toBeDisabled();
     expect(screen.getByText('Vil innehente inntektsmelding fordi...')).toBeInTheDocument();
   });
 
