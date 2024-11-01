@@ -41,8 +41,8 @@ describe('<SoknadsfristVilkarProsessIndex>', () => {
     render(<OppfyltVilkår />);
 
     expect(await screen.findByText('Søknadsfrist')).toBeInTheDocument();
-    expect(screen.getByText('Vilkåret er oppfylt')).toBeInTheDocument();
-    expect(screen.getByText(/ikke/)).toBeInTheDocument();
+    expect(screen.getByLabelText('Vilkåret er oppfylt')).toBeChecked();
+    expect(screen.getByLabelText('Vilkåret er ikke oppfylt')).not.toBeChecked();
     expect(screen.getByText('Dette vilkåret er godkjent')).toBeInTheDocument();
     expect(screen.queryByText('Bekreft og fortsett')).not.toBeInTheDocument();
   });

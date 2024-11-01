@@ -1,5 +1,5 @@
 import { composeStories } from '@storybook/react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import * as stories from './GrupperPanel.stories';
@@ -42,12 +42,8 @@ describe('<GrupperPanel>', () => {
 
     const combobox = screen.getByLabelText('Velg saksbehandlere');
     await userEvent.type(combobox, 'Klara');
-    await waitFor(() => {
-      expect(screen.getByText('Klara Utvikler (ident3)')).toBeInTheDocument();
-    });
 
-    await userEvent.click(screen.getAllByRole('img')[0]);
-    await userEvent.click(screen.getByText('Klara Utvikler (ident3)'));
+    await userEvent.click(screen.getByText(/ident3/));
 
     expect(await screen.findByText('Placholder for navn i story (ident3)')).toBeInTheDocument();
   });

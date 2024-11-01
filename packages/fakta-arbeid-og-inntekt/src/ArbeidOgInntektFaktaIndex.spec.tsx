@@ -130,7 +130,11 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     await userEvent.click(screen.getByTitle('Åpne rad'));
     expect(await screen.findByTitle('Lukk rad')).toBeInTheDocument();
 
-    expect(screen.getByRole('radio', { hidden: true })).toBeDisabled();
+    const radioknapper = screen.getAllByRole('radio', { hidden: true });
+    expect(radioknapper).toHaveLength(2);
+    expect(radioknapper[0]).toBeDisabled();
+    expect(radioknapper[0]).toBeChecked();
+    expect(radioknapper[1]).toBeDisabled();
     expect(screen.getByText('Vil innehente inntektsmelding fordi...')).toBeInTheDocument();
   });
 
@@ -276,9 +280,12 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     await userEvent.click(screen.getByTitle('Åpne rad'));
     expect(await screen.findByTitle('Lukk rad')).toBeInTheDocument();
 
-    const radioKnapp = screen.getByRole('radio', { hidden: true });
-    expect(radioKnapp).toBeInTheDocument();
-    expect(radioKnapp).toBeDisabled();
+    const radioKnapper = screen.getAllByRole('radio', { hidden: true });
+    expect(radioKnapper).toHaveLength(3);
+    expect(radioKnapper[0]).toBeDisabled();
+    expect(radioKnapper[1]).toBeDisabled();
+    expect(radioKnapper[2]).toBeDisabled();
+    expect(radioKnapper[2]).toBeChecked();
     expect(screen.getByText('Jeg opprettet arbeidsforhold fordi...')).toBeInTheDocument();
   });
 

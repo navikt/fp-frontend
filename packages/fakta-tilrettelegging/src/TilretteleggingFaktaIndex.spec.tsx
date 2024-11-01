@@ -488,9 +488,8 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
     render(<HarOpphold />);
 
     expect(await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver')).toBeInTheDocument();
-
     // Kun for manuelt lagt til opphold kan en velge "sykepenger...". Derfor kun ett innslag i DOM
-    expect(screen.getByText('Sykepenger 100% i perioden med svangerskapspenger')).toBeInTheDocument();
+    expect(screen.getAllByText('Sykepenger 100% i perioden med svangerskapspenger')).toHaveLength(2);
 
     // Kun for tilretteleggingene og manuelt lagt til opphold kan en slette.
     expect(screen.getAllByText('Slett periode')).toHaveLength(3);
