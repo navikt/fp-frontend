@@ -191,7 +191,7 @@ interface OwnProps {
   aksjonspunkter: Aksjonspunkt[];
   previewCallback: (data: ForhandsvisData) => Promise<any>;
   ytelseTypeKode: string;
-  resultatstruktur?: BeregningsresultatDagytelse | BeregningsresultatEs;
+  beregningsresultat?: BeregningsresultatDagytelse | BeregningsresultatEs;
   alleKodeverk: AlleKodeverk;
   tilbakekrevingvalg?: TilbakekrevingValg;
   simuleringResultat?: SimuleringResultat;
@@ -208,7 +208,7 @@ const VedtakForm: FunctionComponent<OwnProps> = ({
   aksjonspunkter,
   previewCallback,
   ytelseTypeKode,
-  resultatstruktur,
+  beregningsresultat,
   alleKodeverk,
   tilbakekrevingvalg,
   simuleringResultat,
@@ -286,7 +286,7 @@ const VedtakForm: FunctionComponent<OwnProps> = ({
                 skalBrukeOverstyrendeFritekstBrev={skalBrukeOverstyrendeFritekstBrev}
                 ytelseTypeKode={ytelseTypeKode}
                 språkKode={sprakkode}
-                resultatstruktur={resultatstruktur}
+                beregningsresultat={beregningsresultat}
                 beregningErManueltFastsatt={beregningErManueltFastsatt}
               />
             );

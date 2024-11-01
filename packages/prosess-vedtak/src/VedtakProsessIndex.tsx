@@ -9,7 +9,6 @@ import {
   TilbakekrevingValg,
   SimuleringResultat,
   Beregningsgrunnlag,
-  Medlemskap,
   Aksjonspunkt,
   StandardProsessPanelProps,
 } from '@navikt/fp-types';
@@ -56,7 +55,6 @@ interface OwnProps {
     'beregningsresultat-engangsstonad'?: BeregningsresultatEs;
     'beregningsresultat-foreldrepenger'?: BeregningsresultatDagytelse;
   };
-  medlemskap: Medlemskap;
   vilkar: Vilkar[];
   previewCallback: (data: ForhandsvisData) => Promise<any>;
   ytelseTypeKode: string;
@@ -71,7 +69,6 @@ const VedtakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps
   beregningsgrunnlag,
   vilkar,
   beregningsresultatOriginalBehandling,
-  medlemskap,
   aksjonspunkter,
   isReadOnly,
   previewCallback,
@@ -85,7 +82,7 @@ const VedtakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps
     aksjonspunkter,
     beregningsgrunnlag,
   );
-  const resultatstruktur =
+  const beregningsresultat =
     ytelseTypeKode === fagsakYtelseType.ENGANGSSTONAD ? beregningresultatEngangsstonad : beregningresultatDagytelse;
 
   let originaltBeregningsresultat;
@@ -106,7 +103,7 @@ const VedtakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps
           previewCallback={previewCallback}
           tilbakekrevingvalg={tilbakekrevingvalg}
           simuleringResultat={simuleringResultat}
-          resultatstruktur={resultatstruktur}
+          beregningsresultat={beregningsresultat}
           aksjonspunkter={aksjonspunkter}
           ytelseTypeKode={ytelseTypeKode}
           alleKodeverk={alleKodeverk}
@@ -124,14 +121,13 @@ const VedtakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps
           previewCallback={previewCallback}
           tilbakekrevingvalg={tilbakekrevingvalg}
           simuleringResultat={simuleringResultat}
-          resultatstruktur={resultatstruktur}
+          beregningsresultat={beregningsresultat}
           aksjonspunkter={aksjonspunkter}
           ytelseTypeKode={ytelseTypeKode}
           alleKodeverk={alleKodeverk}
           vilkar={vilkar}
           beregningErManueltFastsatt={beregningErManueltFastsatt}
-          resultatstrukturOriginalBehandling={originaltBeregningsresultat}
-          opphørFom={medlemskap?.manuellBehandlingResultat?.opphørFom ?? undefined}
+          beregningsresultatOriginalBehandling={originaltBeregningsresultat}
           formData={formData}
           setFormData={setFormData}
         />

@@ -18,7 +18,6 @@ import {
   BeregningsresultatDagytelse,
   Fagsak,
   ForhåndsvisMeldingParams,
-  Medlemskap,
   SimuleringResultat,
   TilbakekrevingValg,
   Vilkar,
@@ -133,7 +132,6 @@ const AKSJONSPUNKT_KODER = [...IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER, Aksjonspun
 const ENDEPUNKTER_PANEL_DATA = [
   BehandlingApiKeys.TILBAKEKREVINGVALG,
   BehandlingApiKeys.BEREGNINGSRESULTAT_DAGYTELSE_ORIGINAL_BEHANDLING,
-  BehandlingApiKeys.MEDLEMSKAP,
   BehandlingApiKeys.SIMULERING_RESULTAT,
   BehandlingApiKeys.BEREGNINGRESULTAT_DAGYTELSE,
   BehandlingApiKeys.BEREGNINGSGRUNNLAG,
@@ -143,7 +141,6 @@ type EndepunktPanelData = {
   beregningsresultatOriginalBehandling?: {
     'beregningsresultat-foreldrepenger'?: BeregningsresultatDagytelse;
   };
-  medlemskap: Medlemskap;
   simuleringResultat: SimuleringResultat;
   beregningresultatDagytelse?: BeregningsresultatDagytelse;
   beregningsgrunnlag?: Beregningsgrunnlag;

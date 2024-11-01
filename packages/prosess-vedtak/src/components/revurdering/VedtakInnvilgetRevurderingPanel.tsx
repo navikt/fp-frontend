@@ -13,7 +13,7 @@ interface OwnProps {
   ytelseTypeKode: string;
   revurderingsÅrsakString?: string;
   isReadOnly: boolean;
-  resultatstruktur?: BeregningsresultatDagytelse | BeregningsresultatEs;
+  beregningsresultat?: BeregningsresultatDagytelse | BeregningsresultatEs;
   språkKode: string;
   behandlingsresultat?: Behandlingsresultat;
   beregningErManueltFastsatt: boolean;
@@ -24,14 +24,14 @@ const VedtakInnvilgetRevurderingPanel: FunctionComponent<OwnProps> = ({
   ytelseTypeKode,
   revurderingsÅrsakString,
   isReadOnly,
-  resultatstruktur,
+  beregningsresultat,
   språkKode,
   behandlingsresultat,
   beregningErManueltFastsatt,
   skalBrukeOverstyrendeFritekstBrev,
 }) => (
   <>
-    {ytelseTypeKode === fagsakYtelseType.ENGANGSSTONAD && resultatstruktur && 'antallBarn' in resultatstruktur && (
+    {ytelseTypeKode === fagsakYtelseType.ENGANGSSTONAD && beregningsresultat && 'antallBarn' in beregningsresultat && (
       <FlexContainer>
         <FlexRow>
           <FlexColumn>
@@ -39,14 +39,14 @@ const VedtakInnvilgetRevurderingPanel: FunctionComponent<OwnProps> = ({
               <FormattedMessage id="VedtakForm.beregnetTilkjentYtelse" />
             </Detail>
             <Label size="small">
-              {formatCurrencyWithKr((resultatstruktur as BeregningsresultatEs).beregnetTilkjentYtelse)}
+              {formatCurrencyWithKr((beregningsresultat as BeregningsresultatEs).beregnetTilkjentYtelse)}
             </Label>
           </FlexColumn>
           <FlexColumn>
             <Detail>
               <FormattedMessage id="VedtakForm.AntallBarn" />
             </Detail>
-            <Label size="small">{resultatstruktur.antallBarn}</Label>
+            <Label size="small">{beregningsresultat.antallBarn}</Label>
           </FlexColumn>
         </FlexRow>
       </FlexContainer>
@@ -56,7 +56,7 @@ const VedtakInnvilgetRevurderingPanel: FunctionComponent<OwnProps> = ({
         {revurderingsÅrsakString && (
           <>
             <Label size="small">
-              <FormattedMessage id="VedtakForm.RevurderingFP.Aarsak" />
+              <FormattedMessage id="VedtakForm.Revurdering.Aarsak" />
             </Label>
             <BodyShort size="small">{revurderingsÅrsakString}</BodyShort>
             <VerticalSpacer eightPx />

@@ -199,20 +199,6 @@ const finnInvilgetRevurderingTekst = (
   return `${konsekvens}${konsekvens !== '' ? tilbakekrevingText : '. '}`;
 };
 
-const getOpphorsdato = (
-  resultatstruktur?: BeregningsresultatDagytelse | BeregningsresultatEs,
-  opphørFom?: string,
-  behandlingsresultat?: Behandling['behandlingsresultat'],
-): string => {
-  if (resultatstruktur && 'opphoersdato' in resultatstruktur && resultatstruktur.opphoersdato) {
-    return resultatstruktur.opphoersdato;
-  }
-  if (opphørFom) {
-    return opphørFom;
-  }
-  return behandlingsresultat?.skjæringstidspunkt ? behandlingsresultat.skjæringstidspunkt.dato : '';
-};
-
 const transformValues = (values: FormValues): RevurderingVedtakAksjonspunkter[] =>
   values.aksjonspunktKoder.map(apCode => ({
     kode: validerApKodeOgHentApEnum(
@@ -250,14 +236,13 @@ interface OwnProps {
   aksjonspunkter: Aksjonspunkt[];
   previewCallback: (data: ForhandsvisData) => Promise<any>;
   ytelseTypeKode: string;
-  resultatstruktur?: BeregningsresultatDagytelse | BeregningsresultatEs;
+  beregningsresultat?: BeregningsresultatDagytelse | BeregningsresultatEs;
   alleKodeverk: AlleKodeverk;
   tilbakekrevingvalg?: TilbakekrevingValg;
   simuleringResultat?: SimuleringResultat;
   vilkar: Vilkar[];
   beregningErManueltFastsatt: boolean;
-  opphørFom: string | undefined;
-  resultatstrukturOriginalBehandling?: BeregningsresultatDagytelse | BeregningsresultatEs;
+  beregningsresultatOriginalBehandling?: BeregningsresultatDagytelse | BeregningsresultatEs;
   submitCallback: (data: RevurderingVedtakAksjonspunkter[]) => Promise<void>;
   formData?: FormValues;
   setFormData: (data: FormValues) => void;
@@ -269,14 +254,13 @@ const VedtakRevurderingForm: FunctionComponent<OwnProps> = ({
   aksjonspunkter,
   previewCallback,
   ytelseTypeKode,
-  resultatstruktur,
+  beregningsresultat,
   alleKodeverk,
   tilbakekrevingvalg,
   simuleringResultat,
   vilkar,
   beregningErManueltFastsatt,
-  opphørFom,
-  resultatstrukturOriginalBehandling,
+  beregningsresultatOriginalBehandling,
   submitCallback,
   formData,
   setFormData,
@@ -312,33 +296,29 @@ const VedtakRevurderingForm: FunctionComponent<OwnProps> = ({
 
   let vedtakstatusTekst = '';
   if (behandlingsresultat && isInnvilget(behandlingsresultat.type)) {
-    const konsekvenserForYtelsen =
-      behandlingsresultat !== undefined ? behandlingsresultat.konsekvenserForYtelsen : undefined;
+    const konsekvenserForYtelsen = behandlingsresultat.konsekvenserForYtelsen;
     vedtakstatusTekst = finnInvilgetRevurderingTekst(
       intl,
       ytelseTypeKode,
       getKodeverknavnFn(alleKodeverk),
       tilbakekrevingtekst,
       konsekvenserForYtelsen,
-      resultatstruktur,
-      resultatstrukturOriginalBehandling,
+      beregningsresultat,
+      beregningsresultatOriginalBehandling,
     );
   }
   if (behandlingsresultat && isAvslag(behandlingsresultat.type)) {
     vedtakstatusTekst = intl.formatMessage({
-      id: hentResultattekst(false, resultatstruktur, resultatstrukturOriginalBehandling),
+      id: hentResultattekst(false, beregningsresultat, beregningsresultatOriginalBehandling),
     });
   }
-  if (behandlingsresultat && isOpphor(behandlingsresultat.type)) {
+  if (behandlingsresultat && isOpphor(behandlingsresultat.type) && behandlingsresultat.opphørsdato) {
     vedtakstatusTekst = intl.formatMessage(
       {
-        id:
-          ytelseTypeKode === fagsakYtelseType.SVANGERSKAPSPENGER
-            ? 'VedtakForm.RevurderingSVP.SvangerskapspengerOpphoerer'
-            : 'VedtakForm.RevurderingFP.ForeldrepengerOpphoerer',
+        id: 'VedtakForm.Revurdering.Opphoerer',
       },
       {
-        dato: moment(getOpphorsdato(resultatstruktur, opphørFom, behandlingsresultat)).format(DDMMYYYY_DATE_FORMAT),
+        dato: moment(behandlingsresultat.opphørsdato).format(DDMMYYYY_DATE_FORMAT),
       },
     );
   }
@@ -380,7 +360,7 @@ const VedtakRevurderingForm: FunctionComponent<OwnProps> = ({
                 ytelseTypeKode={ytelseTypeKode}
                 revurderingsÅrsakString={revurderingsÅrsakString}
                 isReadOnly={readOnly}
-                resultatstruktur={resultatstruktur}
+                beregningsresultat={beregningsresultat}
                 språkKode={sprakkode}
                 behandlingsresultat={behandlingsresultat}
                 beregningErManueltFastsatt={beregningErManueltFastsatt}
