@@ -36,18 +36,14 @@ describe('<GrupperPanel>', () => {
     expect(await screen.findByText('Ingen grupper')).toBeInTheDocument();
   });
 
-  it.skip('skal legge til saksbehandlere', async () => {
-    // TODO: TOR
+  it('skal legge til saksbehandlere', async () => {
     render(<Default />);
     expect(await screen.findByText('Grupper')).toBeInTheDocument();
 
     const combobox = screen.getByLabelText('Velg saksbehandlere');
     await userEvent.type(combobox, 'Klara');
 
-    expect(screen.getByText(/Utvikler (ident3)/)).toBeInTheDocument();
-
-    await userEvent.click(screen.getAllByRole('img')[0]);
-    await userEvent.click(screen.getByText('Klara Utvikler (ident3)'));
+    await userEvent.click(screen.getByText(/ident3/));
 
     expect(await screen.findByText('Placholder for navn i story (ident3)')).toBeInTheDocument();
   });
