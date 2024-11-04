@@ -36,7 +36,7 @@ const Template: StoryFn<{ verdier: Record<string, boolean> }> = ({ verdier }) =>
       <Form formMethods={formMethods}>
         <BehandlingstypeVelger
           valgtSakslisteId={1}
-          valgtAvdelingEnhet="NAV Viken"
+          valgtAvdelingEnhet="Nav Vikafossen"
           hentAvdelingensSakslister={action('button-click')}
           hentAntallOppgaver={action('button-click')}
         />

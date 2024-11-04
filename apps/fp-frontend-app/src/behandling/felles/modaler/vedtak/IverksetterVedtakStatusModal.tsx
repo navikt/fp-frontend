@@ -19,7 +19,7 @@ interface OwnProps {
  * IverksetterVedtakStatusModal
  *
  * Denne modalen vises etter en vilkarsvurdering der behandlingsstatusen
- * er satt til Iverksetter vedtak. Ved å trykke på knapp blir den NAV-ansatte tatt tilbake til sokesiden.
+ * er satt til Iverksetter vedtak. Ved å trykke på knapp blir den Nav-ansatte tatt tilbake til sokesiden.
  */
 const IverksetterVedtakStatusModal: FunctionComponent<OwnProps> = ({ lukkModal, visModal, behandlingsresultat }) => {
   const intl = useIntl();

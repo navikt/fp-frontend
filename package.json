@@ -2,7 +2,7 @@
   "name": "fp-frontend",
   "description": "Klient for FPSAK",
   "main": "./dist/index.js",
-  "author": "NAV",
+  "author": "Nav",
   "private": true,
   "type": "module",
   "license": "SEE LICENSE IN LICENSE",

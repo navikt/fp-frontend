@@ -14,15 +14,15 @@
   "behandlendeEnheter": [
     {
       "enhetId": "2103",
-      "enhetNavn": "NAV Vikafossen"
+      "enhetNavn": "Nav Vikafossen"
     },
     {
       "enhetId": "4867",
-      "enhetNavn": "NAV Familie- og pensjonsytelser Foreldrepenger"
+      "enhetNavn": "Nav familie- og pensjonsytelser foreldrepenger"
     },
     {
       "enhetId": "4883",
-      "enhetNavn": "NAV Familie- og pensjonsytelser Egne ansatte"
+      "enhetNavn": "Nav familie- og pensjonsytelser egne ansatte"
     }
   ],
   "links": [

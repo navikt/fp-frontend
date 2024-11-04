@@ -24,7 +24,7 @@ describe('<FagsakIndex>', () => {
     type: BehandlingType.FORSTEGANGSSOKNAD,
     status: BehandlingStatus.OPPRETTET,
     behandlendeEnhetId: 'test',
-    behandlendeEnhetNavn: 'NAV Viken',
+    behandlendeEnhetNavn: 'Nav Vikafossen',
     opprettet: '2017-08-02T00:54:25.455',
   };
   const behandling2 = {
@@ -33,7 +33,7 @@ describe('<FagsakIndex>', () => {
     type: BehandlingType.FORSTEGANGSSOKNAD,
     status: BehandlingStatus.OPPRETTET,
     behandlendeEnhetId: 'test',
-    behandlendeEnhetNavn: 'NAV Viken',
+    behandlendeEnhetNavn: 'Nav Vikafossen',
     opprettet: '2017-08-02T00:54:25.455',
   };
 

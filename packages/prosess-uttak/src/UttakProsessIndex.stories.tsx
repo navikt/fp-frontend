@@ -178,7 +178,7 @@ const arbeidsgiverOpplysningerPerId = {
   994884174: {
     referanse: '994884174',
     identifikator: '994884174',
-    navn: 'NAV',
+    navn: 'Nav',
     fødselsdato: undefined,
     erPrivatPerson: false,
   },

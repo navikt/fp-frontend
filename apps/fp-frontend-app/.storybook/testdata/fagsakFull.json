@@ -89,7 +89,7 @@
       "endret": "2023-06-09T10:49:31.474",
       "endretAvBrukernavn": "srvfpsak",
       "behandlendeEnhetId": "4806",
-      "behandlendeEnhetNavn": "NAV Familie- og pensjonsytelser Drammen",
+      "behandlendeEnhetNavn": "Nav familie- og pensjonsytelser Drammen",
       "erAktivPapirsoknad": false,
       "førsteÅrsak": null,
       "behandlingsfristTid": "2023-07-21",
@@ -272,8 +272,8 @@
               "endretFeltNavn": "BEHANDLENDE_ENHET",
               "navnVerdi": null,
               "klNavn": "HISTORIKK_ENDRET_FELT_TYPE",
-              "fraVerdi": "4867 NAV Familie- og pensjonsytelser Foreldrepenger",
-              "tilVerdi": "4806 NAV Familie- og pensjonsytelser Drammen",
+              "fraVerdi": "4867 Nav familie- og pensjonsytelser foreldrepenger",
+              "tilVerdi": "4806 Nav familie- og pensjonsytelser Drammen",
               "klFraVerdi": null,
               "klTilVerdi": null
             }

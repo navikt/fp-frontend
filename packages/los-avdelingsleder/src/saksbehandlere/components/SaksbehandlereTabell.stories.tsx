@@ -29,7 +29,7 @@ const Template: StoryFn<{
       <SaksbehandlereTabell
         saksbehandlere={saksbehandlere || []}
         hentAvdelingensSaksbehandlere={hentAvdelingensSaksbehandlere}
-        valgtAvdelingEnhet="NAV Viken"
+        valgtAvdelingEnhet="Nav Vikafossen"
       />
     </RestApiMock>
   );

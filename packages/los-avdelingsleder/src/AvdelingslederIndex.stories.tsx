@@ -56,12 +56,12 @@ Default.args = {
   avdelinger: [
     {
       avdelingEnhet: '1234',
-      navn: 'NAV Oslo',
+      navn: 'Nav Oslo',
       kreverKode6: true,
     },
     {
       avdelingEnhet: '123',
-      navn: 'NAV Viken',
+      navn: 'Nav Vikafossen',
       kreverKode6: false,
     },
   ],
@@ -88,12 +88,12 @@ SkalFiltrereBortAvdelingerSomKreverKode6.args = {
   avdelinger: [
     {
       avdelingEnhet: '1234',
-      navn: 'NAV Oslo',
+      navn: 'Nav Oslo',
       kreverKode6: true,
     },
     {
       avdelingEnhet: '123',
-      navn: 'NAV Viken',
+      navn: 'Nav Vikafossen',
       kreverKode6: false,
     },
   ],
