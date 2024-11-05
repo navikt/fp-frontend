@@ -38,7 +38,7 @@ describe('<SaksbehandlereTabell>', () => {
     await userEvent.click(screen.getByText('Ja'));
 
     await waitFor(() => expect(hentAvdelingensSaksbehandlere).toHaveBeenCalledTimes(1));
-    expect(hentAvdelingensSaksbehandlere).toHaveBeenNthCalledWith(1, { avdelingEnhet: 'NAV Viken' });
+    expect(hentAvdelingensSaksbehandlere).toHaveBeenNthCalledWith(1, { avdelingEnhet: 'Nav Vikafossen' });
   });
 
   it('skal sortere saksbehandlere etter ansattAvdeling og navn', async () => {

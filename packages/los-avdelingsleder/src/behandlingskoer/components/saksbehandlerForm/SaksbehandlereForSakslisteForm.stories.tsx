@@ -44,7 +44,7 @@ const Template: StoryFn<{
         valgtSaksliste={saksliste}
         avdelingensSaksbehandlere={avdelingensSaksbehandlere}
         hentAvdelingensSakslister={hentAvdelingensSakslister}
-        valgtAvdelingEnhet="NAV Viken"
+        valgtAvdelingEnhet="Nav Vikafossen"
       />
     </RestApiMock>
   );

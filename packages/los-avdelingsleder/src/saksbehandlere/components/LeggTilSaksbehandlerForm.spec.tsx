@@ -45,6 +45,6 @@ describe('<LeggTilSaksbehandlerForm>', () => {
     await userEvent.click(screen.getByText('Legg til i listen'));
 
     await waitFor(() => expect(hentAvdelingensSaksbehandlere).toHaveBeenCalledTimes(1));
-    expect(hentAvdelingensSaksbehandlere).toHaveBeenNthCalledWith(1, { avdelingEnhet: 'NAV Viken' });
+    expect(hentAvdelingensSaksbehandlere).toHaveBeenNthCalledWith(1, { avdelingEnhet: 'Nav Vikafossen' });
   });
 });

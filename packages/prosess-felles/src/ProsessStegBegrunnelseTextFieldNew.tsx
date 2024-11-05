@@ -44,7 +44,7 @@ interface StaticFunctions {
 /**
  * ProsessStegBegrunnelseTextField
  *
- * Presentasjonskomponent. Lar den NAV-ansatte skrive inn en begrunnelse før lagring av behandlingspunkter.
+ * Presentasjonskomponent. Lar den Nav-ansatte skrive inn en begrunnelse før lagring av behandlingspunkter.
  */
 const ProsessStegBegrunnelseTextField: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly,

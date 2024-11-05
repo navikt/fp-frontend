@@ -53,7 +53,7 @@ const Template: StoryFn<{ valgteBehandlingtyper: string[]; erDynamiskPeriode: bo
         <SorteringVelger
           valgtSakslisteId={1}
           valgteBehandlingtyper={valgteBehandlingtyper}
-          valgtAvdelingEnhet="NAV Viken"
+          valgtAvdelingEnhet="Nav Vikafossen"
           erDynamiskPeriode={verdier.erDynamiskPeriode}
           hentAvdelingensSakslister={action('button-click')}
           hentAntallOppgaver={action('button-click')}

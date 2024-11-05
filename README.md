@@ -128,6 +128,6 @@ FAKE_ERROR_BODY={"error":"dette fikk galt"}
 
 _For updated information, always see LICENSE first!_
 
-### For NAV-ansatte
+### For Nav-ansatte
 
 Interne henvendelser kan sendes via Slack i kanalen **#fp-frontend**.

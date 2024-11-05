@@ -46,7 +46,7 @@ const alleBehandlinger = [
     type: BehandlingType.REVURDERING,
     status: BehandlingStatus.BEHANDLING_UTREDES,
     behandlendeEnhetId: '2323',
-    behandlendeEnhetNavn: 'NAV Viken',
+    behandlendeEnhetNavn: 'Nav Vikafossen',
     erAktivPapirsoknad: false,
     behandlingTillatteOperasjoner,
   },

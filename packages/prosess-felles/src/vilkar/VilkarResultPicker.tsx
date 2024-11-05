@@ -56,7 +56,7 @@ const sorterAvslagsArsaker = (avslagsarsakerUsortert: KodeverkMedNavn[]): Kodeve
 /**
  * VilkarResultPicker
  *
- * Presentasjonskomponent. Lar NAV-ansatt velge om vilkåret skal oppfylles eller avvises.
+ * Presentasjonskomponent. Lar Nav-ansatt velge om vilkåret skal oppfylles eller avvises.
  */
 const VilkarResultPicker: FunctionComponent<OwnProps> & StaticFunctions = ({
   avslagsarsaker,

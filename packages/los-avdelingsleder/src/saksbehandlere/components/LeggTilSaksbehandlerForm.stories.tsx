@@ -46,7 +46,7 @@ const Template: StoryFn<Props> = ({
       <LeggTilSaksbehandlerForm
         avdelingensSaksbehandlere={avdelingensSaksbehandlere || []}
         hentAvdelingensSaksbehandlere={hentAvdelingensSaksbehandlere}
-        valgtAvdelingEnhet="NAV Viken"
+        valgtAvdelingEnhet="Nav Vikafossen"
       />
     </RestApiMock>
   );

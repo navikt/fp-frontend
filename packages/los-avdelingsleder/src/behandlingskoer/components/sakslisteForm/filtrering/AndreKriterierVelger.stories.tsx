@@ -38,7 +38,7 @@ const Template: StoryFn<{ defaultVerdier: Record<string, boolean> }> = ({ defaul
       <Form formMethods={formMethods}>
         <AndreKriterierVelger
           valgtSakslisteId={1}
-          valgtAvdelingEnhet="NAV Viken"
+          valgtAvdelingEnhet="Nav Vikafossen"
           values={verdier}
           hentAvdelingensSakslister={action('button-click')}
           hentAntallOppgaver={action('button-click')}

@@ -312,7 +312,7 @@
     {
       "kode": "NAV_TILTAK",
       "kodeverk": "UTTAK_UTSETTELSE_TYPE",
-      "navn": "Tiltak i regi av NAV"
+      "navn": "Tiltak i regi av Nav"
     }
   ],
   "FagsakYtelseType": [
@@ -4635,7 +4635,7 @@
     {
       "kode": "NAV_TILTAK",
       "kodeverk": "UTSETTELSE_AARSAK_TYPE",
-      "navn": "Tiltak i regi av NAV"
+      "navn": "Tiltak i regi av Nav"
     },
     {
       "kode": "HV_OVELSE",
