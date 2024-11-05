@@ -25,7 +25,7 @@
     "@navikt/ft-ui-komponenter": "2.5.9",
     "@navikt/ft-utils": "2.4.9",
     "react": "18.3.1",
-    "react-intl": "6.6.8"
+    "react-intl": "6.8.7"
   },
   "devDependencies": {
     "@navikt/ds-css": "7.4.3",
