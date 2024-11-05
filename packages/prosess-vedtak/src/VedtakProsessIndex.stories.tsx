@@ -7,7 +7,6 @@ import {
   BeregningsresultatEs,
   Beregningsgrunnlag,
   BeregningsresultatDagytelse,
-  Medlemskap,
   Vilkar,
   Aksjonspunkt,
   Fagsak,
@@ -113,7 +112,6 @@ const Template: StoryFn<{
     setFormData={() => undefined}
     beregningresultatDagytelse={beregningresultatDagytelse}
     beregningresultatEngangsstonad={beregningresultatEngangsstonad}
-    medlemskap={{ manuellBehandlingResultat: { medlemFom: '2019-01-02', opphørFom: '2024-02-03' } } as Medlemskap}
     previewCallback={previewCallback || (action('button-click') as any)}
     ytelseTypeKode={ytelseTypeKode}
     alleKodeverk={alleKodeverk as any}
@@ -536,6 +534,7 @@ OpphørForRevurderingForeldrepengerForSaksbehandlerMedOverstyring.args = {
     type: behandlingType.REVURDERING,
     behandlingsresultat: {
       type: behandlingResultatType.OPPHOR,
+      opphørsdato: '2024-11-01',
     },
   } as Behandling,
   beregningresultatDagytelse: defaultberegningresultatDagytelse,
@@ -614,6 +613,7 @@ OpphørForRevurderingForeldrepengerDerBeregningErManueltFastsatt.args = {
     type: behandlingType.REVURDERING,
     behandlingsresultat: {
       type: behandlingResultatType.OPPHOR,
+      opphørsdato: '2024-11-01',
     },
   } as Behandling,
   beregningresultatDagytelse: defaultberegningresultatDagytelse,

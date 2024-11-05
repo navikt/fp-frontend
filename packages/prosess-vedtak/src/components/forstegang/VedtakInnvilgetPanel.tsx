@@ -10,7 +10,7 @@ import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-u
 import VedtakFritekstPanel from '../felles/VedtakFritekstPanel';
 
 interface OwnProps {
-  resultatstruktur?: BeregningsresultatDagytelse | BeregningsresultatEs;
+  beregningsresultat?: BeregningsresultatDagytelse | BeregningsresultatEs;
   behandlingsresultat?: Behandlingsresultat;
   ytelseTypeKode: string;
   språkKode: string;
@@ -26,28 +26,30 @@ const VedtakInnvilgetPanel: FunctionComponent<OwnProps> = ({
   isReadOnly,
   skalBrukeOverstyrendeFritekstBrev,
   beregningErManueltFastsatt,
-  resultatstruktur = {},
+  beregningsresultat = {},
 }) => {
   const intl = useIntl();
   return (
     <>
-      {ytelseTypeKode === fagsakYtelseType.ENGANGSSTONAD && resultatstruktur && 'antallBarn' in resultatstruktur && (
-        <FlexContainer>
-          <FlexRow>
-            <FlexColumn>
-              <Detail>{intl.formatMessage({ id: 'VedtakForm.beregnetTilkjentYtelse' })}</Detail>
-              <Label size="small">
-                {formatCurrencyWithKr((resultatstruktur as BeregningsresultatEs).beregnetTilkjentYtelse)}
-              </Label>
-            </FlexColumn>
-            <FlexColumn>
-              <Detail>{intl.formatMessage({ id: 'VedtakForm.AntallBarn' })}</Detail>
-              <Label size="small">{resultatstruktur.antallBarn}</Label>
-            </FlexColumn>
-          </FlexRow>
-          <VerticalSpacer sixteenPx />
-        </FlexContainer>
-      )}
+      {ytelseTypeKode === fagsakYtelseType.ENGANGSSTONAD &&
+        beregningsresultat &&
+        'antallBarn' in beregningsresultat && (
+          <FlexContainer>
+            <FlexRow>
+              <FlexColumn>
+                <Detail>{intl.formatMessage({ id: 'VedtakForm.beregnetTilkjentYtelse' })}</Detail>
+                <Label size="small">
+                  {formatCurrencyWithKr((beregningsresultat as BeregningsresultatEs).beregnetTilkjentYtelse)}
+                </Label>
+              </FlexColumn>
+              <FlexColumn>
+                <Detail>{intl.formatMessage({ id: 'VedtakForm.AntallBarn' })}</Detail>
+                <Label size="small">{beregningsresultat.antallBarn}</Label>
+              </FlexColumn>
+            </FlexRow>
+            <VerticalSpacer sixteenPx />
+          </FlexContainer>
+        )}
       {beregningErManueltFastsatt && !skalBrukeOverstyrendeFritekstBrev && (
         <VedtakFritekstPanel
           isReadOnly={isReadOnly}

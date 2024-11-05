@@ -21,7 +21,6 @@ export type BeregningsresultatPeriode = Readonly<{
 }>;
 
 type BeregningsresultatDagytelse = Readonly<{
-  opphoersdato?: string;
   perioder?: BeregningsresultatPeriode[];
 }>;
 

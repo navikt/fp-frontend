@@ -12,6 +12,7 @@ type Behandlingsresultat = Readonly<{
   skjæringstidspunkt?: {
     dato: string;
   };
+  opphørsdato?: string;
 }>;
 
 export default Behandlingsresultat;
