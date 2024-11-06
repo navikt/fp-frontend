@@ -7,6 +7,7 @@ import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 import OppgaveReservasjonEndringDatoModal from './OppgaveReservasjonEndringDatoModal';
 
 import messages from '../../i18n/nb_NO.json';
+import dayjs from 'dayjs';
 
 const withIntl = getIntlDecorator(messages);
 
@@ -39,5 +40,5 @@ Default.args = {
 export const MedDefaultverdi = Template.bind({});
 MedDefaultverdi.args = {
   endreReserverasjonState: action('button-click'),
-  reserverTilDefault: '2017-08-02T00:54:25.455',
+  reserverTilDefault: dayjs().add(1, 'week').format('YYYY-MM-DD'),
 };
