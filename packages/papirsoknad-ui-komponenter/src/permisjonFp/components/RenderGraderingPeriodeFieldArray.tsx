@@ -1,9 +1,9 @@
-import React, { FunctionComponent, ReactElement, useEffect } from 'react';
-import moment from 'moment/moment';
+import React, { ReactElement, useEffect } from 'react';
+import dayjs from 'dayjs';
 import { UseFormGetValues, useFieldArray, useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Alert, Label } from '@navikt/ds-react';
-import { VerticalSpacer, FlexColumn, FlexContainer, FlexRow, AvsnittSkiller } from '@navikt/ft-ui-komponenter';
+import { Alert, HStack, Label, VStack } from '@navikt/ds-react';
+import { AvsnittSkiller } from '@navikt/ft-ui-komponenter';
 import {
   dateAfterOrEqual,
   dateBeforeOrEqual,
@@ -16,15 +16,20 @@ import {
   maxValue,
   required,
 } from '@navikt/ft-form-validators';
-import { CheckboxField, Datepicker, InputField, SelectField, PeriodFieldArray } from '@navikt/ft-form-hooks';
+import {
+  CheckboxField,
+  Datepicker,
+  InputField,
+  SelectField,
+  PeriodFieldArray,
+  NumberField,
+} from '@navikt/ft-form-hooks';
 import { KodeverkMedNavn } from '@navikt/ft-types';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 
 import { arbeidskategori } from '@navikt/fp-kodeverk';
 
 import { gyldigeUttakperioder } from './RenderPermisjonPeriodeFieldArray';
-
-import styles from './renderGraderingPeriodeFieldArray.module.css';
 
 export const TIDSROM_PERMISJON_FORM_NAME_PREFIX = 'tidsromPermisjon';
 export const GRADERING_PERIODE_FIELD_ARRAY_NAME = 'graderingPeriode';
@@ -137,7 +142,7 @@ const mapArbeidskategori = (typer: KodeverkMedNavn[]): ReactElement[] =>
       </option>
     ));
 
-interface OwnProps {
+interface Props {
   graderingKvoter: KodeverkMedNavn[];
   readOnly: boolean;
   arbeidskategoriTyper: KodeverkMedNavn[];
@@ -148,11 +153,7 @@ interface OwnProps {
  *
  * Viser inputfelter for dato for bestemmelse av graderingperiode.
  */
-const RenderGraderingPeriodeFieldArray: FunctionComponent<OwnProps> = ({
-  graderingKvoter,
-  readOnly,
-  arbeidskategoriTyper,
-}) => {
+const RenderGraderingPeriodeFieldArray = ({ graderingKvoter, readOnly, arbeidskategoriTyper }: Props) => {
   const intl = useIntl();
 
   const {
@@ -191,27 +192,20 @@ const RenderGraderingPeriodeFieldArray: FunctionComponent<OwnProps> = ({
     >
       {(field, index, getRemoveButton) => {
         const { harSamtidigUttak, periodeFom } = graderingValues[index];
-        const periodeFomForTidlig = periodeFom && moment(periodeFom, ISO_DATE_FORMAT).isBefore(moment('2019-01-01'));
+        const periodeFomForTidlig = periodeFom && dayjs(periodeFom, ISO_DATE_FORMAT).isBefore(dayjs('2019-01-01'));
         const namePart1 = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}.${index}`;
         return (
-          <div key={field.id} className={index !== fields.length - 1 ? styles.notLastRow : ''}>
-            {index > 0 && (
-              <>
-                <AvsnittSkiller />
-                <VerticalSpacer sixteenPx />
-              </>
-            )}
-            <FlexContainer wrap>
-              <FlexRow>
-                <FlexColumn>
+          <React.Fragment key={field.id}>
+            {index > 0 && <AvsnittSkiller />}
+            <HStack wrap={false} justify="space-between" paddingBlock="4">
+              <div>
+                <HStack gap="4">
                   <SelectField
                     name={`${namePart1}.periodeForGradering`}
                     selectValues={mapKvoter(graderingKvoter)}
                     label={intl.formatMessage({ id: 'Registrering.Permisjon.Gradering.Periode' })}
                     validate={[required]}
                   />
-                </FlexColumn>
-                <FlexColumn>
                   <Datepicker
                     label={intl.formatMessage({ id: 'Registrering.Permisjon.periodeFom' })}
                     name={`${namePart1}.periodeFom`}
@@ -223,8 +217,6 @@ const RenderGraderingPeriodeFieldArray: FunctionComponent<OwnProps> = ({
                     ]}
                     onChange={() => (isSubmitted ? trigger() : undefined)}
                   />
-                </FlexColumn>
-                <FlexColumn>
                   <Datepicker
                     label={intl.formatMessage({ id: 'Registrering.Permisjon.periodeTom' })}
                     name={`${namePart1}.periodeTom`}
@@ -236,16 +228,11 @@ const RenderGraderingPeriodeFieldArray: FunctionComponent<OwnProps> = ({
                     ]}
                     onChange={() => (isSubmitted ? trigger() : undefined)}
                   />
-                </FlexColumn>
-                <FlexColumn className={styles.prosentHeader}>
-                  <InputField
+                  <NumberField
                     label={<FormattedMessage id="Registrering.Permisjon.Gradering.Prosentandel" />}
                     name={`${namePart1}.prosentandelArbeid`}
                     validate={[required, hasValidDecimal, maxValue100]}
-                    normalizeOnBlur={value => (Number.isNaN(value) ? value : parseFloat(value.toString()).toFixed(2))}
                   />
-                </FlexColumn>
-                <FlexColumn>
                   <InputField
                     label={intl.formatMessage({ id: 'Registrering.Permisjon.Orgnr' })}
                     name={`${namePart1}.arbeidsgiverIdentifikator`}
@@ -255,11 +242,6 @@ const RenderGraderingPeriodeFieldArray: FunctionComponent<OwnProps> = ({
                       validerAtArbeidsgiverIdErGyldig,
                     ]}
                   />
-                </FlexColumn>
-              </FlexRow>
-              <VerticalSpacer eightPx />
-              <FlexRow>
-                <FlexColumn>
                   <SelectField
                     label={intl.formatMessage({ id: 'Registrering.Permisjon.ArbeidskategoriLabel' })}
                     name={`${namePart1}.arbeidskategoriType`}
@@ -267,54 +249,41 @@ const RenderGraderingPeriodeFieldArray: FunctionComponent<OwnProps> = ({
                     validate={[required]}
                     onChange={() => (isSubmitted ? trigger() : undefined)}
                   />
-                </FlexColumn>
-                <FlexColumn>
-                  <div className={styles.graderesHeader}>
+                  <div>
                     <Label size="small">
                       <FormattedMessage id="Registrering.Permisjon.Gradering.SkalGraderes" />
                     </Label>
+                    <CheckboxField name={`${namePart1}.skalGraderes`} label="" />
                   </div>
-                  <CheckboxField name={`${namePart1}.skalGraderes`} label=" " />
-                </FlexColumn>
-                <FlexColumn>
-                  <div className={styles.smalHeader}>
+                  <div>
                     <Label size="small">
                       <FormattedMessage id="Registrering.Permisjon.Flerbarnsdager" />
                     </Label>
                     <CheckboxField readOnly={readOnly} name={`${namePart1}.flerbarnsdager`} label=" " />
                   </div>
-                </FlexColumn>
-                <FlexColumn>
-                  <div className={styles.smalHeader}>
+                  <div>
                     <Label size="small">
                       <FormattedMessage id="Registrering.Permisjon.HarSamtidigUttak" />
                     </Label>
+                    <CheckboxField name={`${namePart1}.harSamtidigUttak`} label="" />
                   </div>
-                  <CheckboxField name={`${namePart1}.harSamtidigUttak`} label="" />
-                </FlexColumn>
-                <FlexColumn>
                   {harSamtidigUttak && (
-                    <InputField
+                    <NumberField
                       name={`${namePart1}.samtidigUttaksprosent`}
                       validate={[required, hasValidDecimal, maxValue100]}
                       label={intl.formatMessage({ id: 'Registrering.Permisjon.SamtidigUttaksprosent' })}
                     />
                   )}
-                </FlexColumn>
-                {getRemoveButton && <FlexColumn className={styles.placeRemoveButton}>{getRemoveButton()}</FlexColumn>}
-              </FlexRow>
-              {periodeFomForTidlig && (
-                <div>
-                  <FlexRow wrap>
-                    <Alert size="small" variant="warning">
-                      <FormattedMessage id="Registrering.Permisjon.PeriodeFomForTidlig" />
-                    </Alert>
-                  </FlexRow>
-                  <VerticalSpacer eightPx />
-                </div>
-              )}
-            </FlexContainer>
-          </div>
+                </HStack>
+                {periodeFomForTidlig && (
+                  <Alert size="small" variant="warning">
+                    <FormattedMessage id="Registrering.Permisjon.PeriodeFomForTidlig" />
+                  </Alert>
+                )}
+              </div>
+              {getRemoveButton && <div>{getRemoveButton()}</div>}
+            </HStack>
+          </React.Fragment>
         );
       }}
     </PeriodFieldArray>
