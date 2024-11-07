@@ -1,7 +1,7 @@
 import React from 'react';
 import { Location } from 'history';
 
-import { BodyShort, Chat, Heading, VStack } from '@navikt/ds-react';
+import { BodyShort, Chat, VStack } from '@navikt/ds-react';
 import { KodeverkType } from '@navikt/fp-kodeverk';
 import { HistorikkinnslagV2 } from '@navikt/fp-types';
 
@@ -23,7 +23,7 @@ export const Snakkeboble = ({
   behandlingLocation,
   createLocationForSkjermlenke,
   getKodeverknavn,
-  historikkInnslag: { aktør, opprettetTidspunkt, title, body, dokumenter, skjermlenke },
+  historikkInnslag: { aktør, opprettetTidspunkt, tittel, body, dokumenter, skjermlenke },
   kjønn,
   saksnummer,
 }: Props) => {
@@ -39,7 +39,7 @@ export const Snakkeboble = ({
       className={getStyle(aktør.type, kjønn)}
     >
       <Chat.Bubble>
-        <Heading size="small">{title}</Heading>
+        <BodyShort size="small">{tittel}</BodyShort>
 
         <Skjermlenke
           skjermlenke={skjermlenke}

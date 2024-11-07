@@ -6,7 +6,7 @@ export type HistorikkinnslagV2 = Readonly<{
   behandlingUuid: string;
   skjermlenke?: string;
   dokumenter?: HistorikkInnslagDokumentLink[];
-  title: string;
+  tittel: string;
   body: string[];
 }>;
 
