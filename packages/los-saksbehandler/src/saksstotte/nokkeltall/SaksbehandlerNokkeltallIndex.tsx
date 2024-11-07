@@ -1,17 +1,14 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 
 import { RestApiPathsKeys, restApiHooks } from '../../data/fplosSaksbehandlerRestApi';
 
-import SaksbehandlerNokkeltallPanel from './components/SaksbehandlerNokkeltallPanel';
+import { SaksbehandlerNokkeltallPanel } from './SaksbehandlerNokkeltallPanel';
 
-interface OwnProps {
+interface Props {
   valgtSakslisteId: number;
 }
 
-/**
- * SaksbehandlerNokkeltallIndex
- */
-const SaksbehandlerNokkeltallIndex: FunctionComponent<OwnProps> = ({ valgtSakslisteId }) => {
+export const SaksbehandlerNokkeltallIndex = ({ valgtSakslisteId }: Props) => {
   const { data: nyeOgFerdigstilteOppgaver } = restApiHooks.useRestApi(
     RestApiPathsKeys.HENT_NYE_OG_FERDIGSTILTE_OPPGAVER,
     { sakslisteId: valgtSakslisteId },
@@ -22,5 +19,3 @@ const SaksbehandlerNokkeltallIndex: FunctionComponent<OwnProps> = ({ valgtSaksli
 
   return <SaksbehandlerNokkeltallPanel nyeOgFerdigstilteOppgaver={nyeOgFerdigstilteOppgaver} />;
 };
-
-export default SaksbehandlerNokkeltallIndex;

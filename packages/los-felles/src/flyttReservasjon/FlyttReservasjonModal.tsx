@@ -1,9 +1,8 @@
-import React, { FunctionComponent, useEffect, useCallback } from 'react';
+import React, { useEffect } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import { Label, Button, BodyShort, Modal as NavModal } from '@navikt/ds-react';
+import { Label, Button, BodyShort, Modal as NavModal, HStack, VStack } from '@navikt/ds-react';
 import { Form, TextAreaField, InputField } from '@navikt/ft-form-hooks';
-import { VerticalSpacer, FlexContainer, FlexRow, FlexColumn } from '@navikt/ft-ui-komponenter';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import SaksbehandlerProfil from '../typer/saksbehandlerProfilTsType';
 
@@ -31,11 +30,10 @@ type LagreFormValues = {
   begrunnelse: string;
 };
 
-interface OwnProps {
-  showModal: boolean;
+interface Props {
   oppgaveId: number;
+  flyttetBegrunnelse?: string;
   closeModal: () => void;
-  toggleMenu: () => void;
   hentReserverteOppgaver: (params: any, keepData: boolean) => void;
   flyttOppgavereservasjon: (params: { oppgaveId: number; brukerIdent: string; begrunnelse: string }) => Promise<void>;
   hentSaksbehandler: (params: { brukerIdent: string }) => Promise<SaksbehandlerProfil | undefined>;
@@ -49,31 +47,27 @@ interface OwnProps {
  *
  * Modal som lar en søke opp en saksbehandler som saken skal flyttes til. En kan også begrunne hvorfor saken skal flyttes.
  */
-const FlyttReservasjonModal: FunctionComponent<OwnProps> = ({
-  showModal,
-  closeModal,
+export const FlyttReservasjonModal = ({
   oppgaveId,
-  toggleMenu,
+  flyttetBegrunnelse,
+  closeModal,
   hentReserverteOppgaver,
   flyttOppgavereservasjon,
   hentSaksbehandler,
   hentSaksbehandlerState,
   saksbehandler,
   resetHentSaksbehandler,
-}) => {
+}: Props) => {
   const intl = useIntl();
 
-  const finnSaksbehandler = useCallback((brukerIdent: string) => hentSaksbehandler({ brukerIdent }), []);
+  const finnSaksbehandler = (formValues: SøkFormValues) => hentSaksbehandler({ brukerIdent: formValues.brukerIdent });
 
-  const flyttReservasjon = useCallback(
-    (brukerident: string, begrunnelse: string) =>
-      flyttOppgavereservasjon({
-        oppgaveId,
-        brukerIdent: brukerident,
-        begrunnelse,
-      }).then(() => hentReserverteOppgaver({}, true)),
-    [],
-  );
+  const flyttReservasjon = (brukerident: string, begrunnelse: string) =>
+    flyttOppgavereservasjon({
+      oppgaveId,
+      brukerIdent: brukerident,
+      begrunnelse,
+    }).then(() => hentReserverteOppgaver({}, true));
 
   useEffect(
     () => () => {
@@ -85,13 +79,15 @@ const FlyttReservasjonModal: FunctionComponent<OwnProps> = ({
   const søkFormMethods = useForm<SøkFormValues>();
   const brukerIdentValue = søkFormMethods.watch('brukerIdent');
 
-  const lagreFormMethods = useForm<LagreFormValues>();
+  const lagreFormMethods = useForm<LagreFormValues>({
+    defaultValues: { begrunnelse: flyttetBegrunnelse },
+  });
   const begrunnelseValue = lagreFormMethods.watch('begrunnelse');
 
   return (
     <NavModal
       className={styles.modal}
-      open={showModal}
+      open
       aria-label={intl.formatMessage({ id: 'FlyttReservasjonModal.FlyttReservasjon' })}
       onClose={closeModal}
     >
@@ -101,69 +97,66 @@ const FlyttReservasjonModal: FunctionComponent<OwnProps> = ({
         </Label>
       </NavModal.Header>
       <NavModal.Body>
-        <Form<SøkFormValues> formMethods={søkFormMethods} onSubmit={values => finnSaksbehandler(values.brukerIdent)}>
-          <FlexContainer>
-            <FlexRow>
-              <FlexColumn>
-                <InputField
-                  name="brukerIdent"
-                  label={intl.formatMessage({ id: 'FlyttReservasjonModal.Brukerident' })}
-                  validate={[required, minLength7, maxLength7]}
-                  autoFocus
-                  autoComplete
-                />
-              </FlexColumn>
-              <FlexColumn className={styles.buttonDiv}>
-                <Button
-                  size="small"
-                  variant="primary"
-                  loading={hentSaksbehandlerState === RestApiState.LOADING}
-                  disabled={!brukerIdentValue || hentSaksbehandlerState === RestApiState.LOADING}
-                >
-                  <FormattedMessage id="FlyttReservasjonModal.Sok" />
-                </Button>
-              </FlexColumn>
-            </FlexRow>
-          </FlexContainer>
-          {hentSaksbehandlerState === RestApiState.SUCCESS && (
-            <>
-              <BodyShort size="small">{formatText(hentSaksbehandlerState, intl, saksbehandler)}</BodyShort>
-              <VerticalSpacer sixteenPx />
-            </>
-          )}
-        </Form>
-        <VerticalSpacer sixteenPx />
-        <Form<LagreFormValues>
-          formMethods={lagreFormMethods}
-          onSubmit={values => {
-            toggleMenu();
-            flyttReservasjon(saksbehandler ? saksbehandler.brukerIdent : '', values.begrunnelse);
-          }}
-        >
-          <TextAreaField
-            name="begrunnelse"
-            label={intl.formatMessage({ id: 'FlyttReservasjonModal.Begrunn' })}
-            validate={[required, maxLength500, minLength3, hasValidText]}
-            maxLength={500}
-          />
-          <VerticalSpacer sixteenPx />
-          <NavModal.Footer>
-            <Button
-              className={styles.submitButton}
-              size="small"
-              variant="primary"
-              disabled={!saksbehandler || !begrunnelseValue || begrunnelseValue.length < 3}
-            >
-              <FormattedMessage id="FlyttReservasjonModal.Ok" />
-            </Button>
-            <Button className={styles.cancelButton} size="small" variant="secondary" onClick={closeModal} type="button">
-              <FormattedMessage id="FlyttReservasjonModal.Avbryt" />
-            </Button>
-          </NavModal.Footer>
-        </Form>
+        <VStack gap="4">
+          <Form formMethods={søkFormMethods} onSubmit={finnSaksbehandler}>
+            <HStack gap="4" align="end">
+              <InputField
+                name="brukerIdent"
+                label={intl.formatMessage({ id: 'FlyttReservasjonModal.Brukerident' })}
+                validate={[required, minLength7, maxLength7]}
+                autoFocus
+                autoComplete
+              />
+              <Button
+                size="small"
+                variant="primary"
+                loading={hentSaksbehandlerState === RestApiState.LOADING}
+                disabled={!brukerIdentValue || hentSaksbehandlerState === RestApiState.LOADING}
+              >
+                <FormattedMessage id="FlyttReservasjonModal.Sok" />
+              </Button>
+            </HStack>
+            {hentSaksbehandlerState === RestApiState.SUCCESS && (
+              <>
+                <BodyShort size="small">{formatText(hentSaksbehandlerState, intl, saksbehandler)}</BodyShort>
+              </>
+            )}
+          </Form>
+          <Form
+            formMethods={lagreFormMethods}
+            onSubmit={values => {
+              closeModal();
+              flyttReservasjon(saksbehandler ? saksbehandler.brukerIdent : '', values.begrunnelse);
+            }}
+          >
+            <TextAreaField
+              name="begrunnelse"
+              label={intl.formatMessage({ id: 'FlyttReservasjonModal.Begrunn' })}
+              validate={[required, maxLength500, minLength3, hasValidText]}
+              maxLength={500}
+            />
+            <HStack gap="2" justify="end">
+              <Button
+                className={styles.cancelButton}
+                size="small"
+                variant="secondary"
+                onClick={closeModal}
+                type="button"
+              >
+                <FormattedMessage id="FlyttReservasjonModal.Avbryt" />
+              </Button>
+              <Button
+                className={styles.submitButton}
+                size="small"
+                variant="primary"
+                disabled={!saksbehandler || !begrunnelseValue || begrunnelseValue.length < 3}
+              >
+                <FormattedMessage id="FlyttReservasjonModal.Ok" />
+              </Button>
+            </HStack>
+          </Form>
+        </VStack>
       </NavModal.Body>
     </NavModal>
   );
 };
-
-export default FlyttReservasjonModal;

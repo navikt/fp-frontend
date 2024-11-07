@@ -1,4 +1,4 @@
-enum DiskresjonskodeType {
+export enum DiskresjonskodeType {
   KODE6 = 'SPSF',
   KODE7 = 'SPFO',
   KLIENT_ADRESSE = 'KLIE',
@@ -9,5 +9,3 @@ enum DiskresjonskodeType {
   UTENRIKS_TJENST = 'URIK',
   UDEFINERT = 'UDEF',
 }
-
-export default DiskresjonskodeType;

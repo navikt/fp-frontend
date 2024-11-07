@@ -1,0 +1,28 @@
+.iconBackground {
+  background-color: var(--a-surface-hover);
+  height: 30px;
+  width: 30px;
+  padding-top: 3px;
+  padding-left: 3px;
+  border-radius: 9999px;
+}
+
+.ingenBehandlinger {
+  height: 100px;
+  padding-left: 40px;
+}
+
+.pointerIcon {
+  color: var(--a-icon-action);
+  cursor: pointer;
+  height: 30px;
+  margin-bottom: -5px;
+  margin-top: -5px;
+  width: 30px;
+}
+
+.clockIcon {
+  color: var(--a-icon-subtle);
+  height: 25px;
+  width: 25px;
+}

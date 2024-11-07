@@ -1,4 +1,4 @@
-import React, { FunctionComponent, MouseEvent, useCallback, useMemo } from 'react';
+import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import dayjs from 'dayjs';
@@ -19,9 +19,8 @@ type FormValues = {
   reserverTil: string;
 };
 
-interface OwnProps {
-  showModal: boolean;
-  closeModal: (event: MouseEvent<HTMLButtonElement>) => void;
+interface Props {
+  closeModal: () => void;
   reserverTilDefault?: string;
   oppgaveId: number;
   endreReserverasjonState: () => void;
@@ -29,47 +28,35 @@ interface OwnProps {
   endreOppgavereservasjon: (input: { oppgaveId: number; reserverTil: string }) => Promise<Oppgave[] | undefined>;
 }
 
-/**
- * OppgaveReservasjonEndringDatoModal.
- */
-const OppgaveReservasjonEndringDatoModal: FunctionComponent<OwnProps> = ({
-  showModal,
+export const OppgaveReservasjonEndringDatoModal = ({
   closeModal,
   reserverTilDefault,
   oppgaveId,
   hentReserverteOppgaver,
   endreReserverasjonState,
   endreOppgavereservasjon,
-}) => {
+}: Props) => {
   const intl = useIntl();
 
-  const endreOppgaveReservasjonFn = useCallback(
-    (reserverTil: string) =>
-      endreOppgavereservasjon({ oppgaveId, reserverTil }).then(() => {
-        endreReserverasjonState();
-        hentReserverteOppgaver({}, true);
-      }),
-    [],
-  );
-
-  const defaultValues = useMemo(
-    () => ({
-      reserverTil: reserverTilDefault ? dayjs(reserverTilDefault).format(ISO_DATE_FORMAT) : '',
-    }),
-    [reserverTilDefault],
-  );
+  const endreOppgaveReservasjonFn = (reserverTil: string) =>
+    endreOppgavereservasjon({ oppgaveId, reserverTil }).then(() => {
+      endreReserverasjonState();
+      hentReserverteOppgaver({}, true);
+    });
 
   const søkFormMethods = useForm<FormValues>({
-    defaultValues,
+    defaultValues: {
+      reserverTil: reserverTilDefault ? dayjs(reserverTilDefault).format(ISO_DATE_FORMAT) : '',
+    },
   });
 
   return (
     <Form<FormValues> formMethods={søkFormMethods} onSubmit={values => endreOppgaveReservasjonFn(values.reserverTil)}>
       <NavModal
         width="small"
-        open={showModal}
+        open
         aria-label={intl.formatMessage({ id: 'OppgaveReservasjonEndringDatoModal.Header' })}
-        onClose={closeModal as () => void}
+        onClose={closeModal}
       >
         <NavModal.Header>
           <Heading size="small">
@@ -97,5 +84,3 @@ const OppgaveReservasjonEndringDatoModal: FunctionComponent<OwnProps> = ({
     </Form>
   );
 };
-
-export default OppgaveReservasjonEndringDatoModal;

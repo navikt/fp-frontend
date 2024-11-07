@@ -1,0 +1,19 @@
+.koInput {
+  padding-bottom: 20px;
+  width: 250px;
+}
+
+.container {
+  background-color: var(--a-surface-subtle);
+  border-bottom-color: var(--a-gray-300);
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  padding-bottom: 32px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 16px;
+}
+
+.grayout {
+  color: var(--a-text-subtle);
+}

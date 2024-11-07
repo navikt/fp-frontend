@@ -1,15 +1,18 @@
 {
-  "SakslistePanel.StartBehandling": "Start behandling",
-
-  "OppgaverTabell.DineNesteSaker": "Neste behandlinger ({antall} i køen)",
-  "OppgaverTabell.IngenOppgaver": "Det er ingen behandlinger i denne køen",
+  "OppgaverTabell.DineNesteSaker": "Neste i køen",
+  "OppgaverTabell.DineNesteSakerAntall": "{antall, select, 0 {0 behandlinger} 1 {1 behandling} other {{antall} behandlinger}}",
+  "OppgaverTabell.IngenOppgaver": "<i>Det er ingen behandlinger i køen</i>",
   "OppgaverTabell.Soker": "Søker",
-  "OppgaverTabell.Behandlingstype": "Behandlingstype",
-  "OppgaverTabell.BehandlingOpprettet": "Behandling opprettet",
-  "OppgaverTabell.FristForBehandling": "Frist for behandling",
+  "OppgaverTabell.Sak": "Sak",
+  "OppgaverTabell.Behandlingstype": "Type",
+  "OppgaverTabell.BehandlingOpprettet": "Opprettet",
+  "OppgaverTabell.FristForBehandling": "Frist",
   "OppgaverTabell.OppgaveHandlinger": "Handlinger på oppgave",
   "OppgaverTabell.OverfortReservasjon": "Overført reservasjon",
-  "OppgaverTabell.OverfortReservasjonTooltip": "Overført reservasjon {dato} - {tid} fra {uid} {navn}{br}{br}{beskrivelse}",
+  "OppgaverTabell.OverfortReservasjonHeader": "Overført reservasjon",
+  "OppgaverTabell.OverfortReservasjonBody": "{dato} - {tid} fra {uid} {navn}",
+  "OppgaverTabell.OverfortReservasjonBegrunnelse": "Begrunnelse",
+  "OppgaverTabell.ReservertTilTidspunkt": "Reservert til",
 
   "Person.Age": "{age} år",
   "Person.ImageText": "Personinformasjon",
@@ -19,17 +22,20 @@
   "Person.UkjentNavn": "Ukjent navn på forelder",
   "Person.HarIkkeNorskFnrEllerDnr": "Har ikke norsk f.nr. eller d-nr.",
 
-  "Search.SearchFagsakOrPerson": "Søk på sak eller person",
-  "Search.SaksnummerOrPersonId": "Saksnummer eller fødselsnummer/D-nummer",
+  "Search.SearchHeader": "Søk",
+  "Search.SaksnummerOrPersonId": "Du kan søke saksnummer, fødselsnummer eller D-nummer.",
   "Search.Search": "Søk",
   "Search.ReserverBehandling": "Reserver behandlingen ved søk",
 
-  "SistBehandledeSaker.SistBehandledeSaker": "Siste behandlinger",
-  "SistBehandledeSaker.IngenBehandlinger": "Ingen behandlinger",
+  "SistBehandledeSaker.SistBehandledeSaker": "Dine siste reserverte behandlinger",
+  "SistBehandledeSaker.IngenBehandlinger": "<i>Ingen behandlinger</i>",
   "SistBehandledeSaker.Behandling": "Behandling {index}",
+  "SistBehandledeSaker.Soker": "Søker",
+  "SistBehandledeSaker.Saksnr": "Saksnr",
+  "SistBehandledeSaker.Status": "Status",
 
   "NyeOgFerdigstilteOppgaverForIdagPanel.NyeOgFerdigstilte": "Nye og ferdigstilte behandlinger",
-  "NyeOgFerdigstilteOppgaverForIdagPanel.IDag": "I dag",
+  "NyeOgFerdigstilteOppgaverForIdagPanel.IDag": "For i dag",
 
   "OppgaveErReservertAvAnnenModal.ReservertAv": "{saksbehandlernavn} ({saksbehandlerid}) arbeider nå med denne behandlingen (reservert fram t.o.m {date} - {time})",
   "OppgaveErReservertAvAnnenModal.ReservertAvEnkel": "En annen saksbehandler arbeider nå med denne behandlingen",
@@ -69,11 +75,11 @@
   "FagsakSearch.ZeroSearchResults": "Søket ga ingen treff eller du mangler tilgang til saken",
   "FagsakSearch.FlereSakerEllerBehandlinger": "Velg sak eller behandling du ønsker å åpne/reservere. (Fagsak kan ikke reserveres.)",
 
-  "OppgaveHandlingerMenu.LeggTilbake": "Legg behandling{br}tilbake i felles kø",
-  "OppgaveHandlingerMenu.ForlengReservasjon": "Forleng din reservasjon av{br}behandlingen med 24 timer",
-  "OppgaveHandlingerMenu.EndreReservasjon": "Reserver behandlingen med dato",
-  "OppgaveHandlingerMenu.ReservertTil": "{b}Reservert til {date} - {time}{b}",
-  "OppgaveHandlingerMenu.FlyttReservasjon": "Flytt reservasjonen til{br}annen saksbehandler",
+  "OppgaveHandlingerMenu.Meny": "Oppgavemeny",
+  "OppgaveHandlingerMenu.LeggTilbake": "Legg tilbake i felles kø",
+  "OppgaveHandlingerMenu.ForlengReservasjon": "Forleng reservasjon (24t)",
+  "OppgaveHandlingerMenu.EndreReservasjon": "Reserver med dato",
+  "OppgaveHandlingerMenu.FlyttReservasjon": "Flytt til ny saksbehandler",
 
   "FagsakList.Saksnummer": "Saksnummer",
   "FagsakList.Stonadstype": "Stønadstype",
@@ -88,7 +94,7 @@
   "MerkePanel.Diskresjon6Tittel": "Personen har diskresjonsmerking kode 6",
   "MerkePanel.Diskresjon7Tittel": "Personen har diskresjonsmerking kode 7",
 
-  "NyeOgFerdigstilteOppgaverForSisteSyvPanel.SisteSyv": "Siste 7 dager",
+  "NyeOgFerdigstilteOppgaverForSisteSyvPanel.SisteSyv": "For de siste 7 dager",
 
   "NyeOgFerdigstilteOppgaverForSisteSyvGraf.Ferdigstilte": "Ferdigstilte",
   "NyeOgFerdigstilteOppgaverForSisteSyvGraf.Nye": "Nye",
@@ -102,15 +108,19 @@
   "BehandlingskoerIndex.IngenKø": "Du er ikke lagt til i noen behandlingskøer",
 
   "SakslisteVelgerForm.Saksliste": "Behandlingskø",
-  "SakslisteVelgerForm.Stonadstype": "Stønadstype",
-  "SakslisteVelgerForm.Behandlingstype": "Behandlingstype",
+  "SakslisteVelgerForm.IkkeOppfort": "<i>Du er ikke oppført på noen behandlingskø</i>",
+  "SakslisteVelgerForm.Stonadstype": "Stønad",
+  "SakslisteVelgerForm.Behandlingstype": "Behandling",
   "SakslisteVelgerForm.Sortering": "Sortering",
   "SakslisteVelgerForm.Alle": "Alle",
   "SakslisteVelgerForm.AndreKriterier": "Andre filter",
   "SakslisteVelgerForm.Uten": "Uten: {kriterie}",
-  "SakslisteVelgerForm.Saksbehandlere": "Saksbehandlere tilknyttet denne køen",
-  "SakslisteVelgerForm.SaksbehandlerToolip": "Saksbehandlere",
+  "SakslisteVelgerForm.AndreSomJobber": "Andre som jobber med denne køen nå",
   "SakslisteVelgerForm.Sorteringsinfo": "{navn}{br}Gjeldende intervall:{br}{fomDato} - {tomDato}",
   "SakslisteVelgerForm.SorteringsinfoFom": "{navn}{br}Fra og med: {fomDato}",
-  "SakslisteVelgerForm.SorteringsinfoTom": "{navn}{br}Til og med: {tomDato}"
+  "SakslisteVelgerForm.SorteringsinfoTom": "{navn}{br}Til og med: {tomDato}",
+
+  "SaksbehandlerNokkeltallPanel.Statistikk": "Statistikk",
+  "SaksbehandlerNokkeltallPanel.ForAlle": "For alle saksbehandlere",
+  "SaksbehandlerNokkeltallPanel.ForAlleDetaljer": "Statistikk for alle som jobber med foreldrepenger, engangsstønad og svangerskapspenger"
 }

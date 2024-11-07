@@ -1,7 +1,6 @@
 import React, { FunctionComponent, useState, useCallback, useMemo } from 'react';
-import { Label, BodyShort } from '@navikt/ds-react';
+import { Label, BodyShort, Table, VStack } from '@navikt/ds-react';
 import { FormattedMessage } from 'react-intl';
-import { Table, TableRow, TableColumn, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { getDateAndTime } from '@navikt/ft-utils';
 import { PersonGroupIcon, CalendarIcon, XMarkIcon } from '@navikt/aksel-icons';
 
@@ -13,16 +12,6 @@ import { restApiHooks, RestApiPathsKeys } from '../../data/fplosRestApi';
 import Reservasjon from '../../typer/reservasjonTsType';
 
 import styles from './reservasjonerTabell.module.css';
-
-const headerTextCodes = [
-  'ReservasjonerTabell.Navn',
-  'ReservasjonerTabell.Saksnr',
-  'ReservasjonerTabell.BehandlingType',
-  'ReservasjonerTabell.ReservertTil',
-  'ReservasjonerTabell.Endre',
-  'ReservasjonerTabell.Flytt',
-  'ReservasjonerTabell.Slett',
-];
 
 interface OwnProps {
   reservasjoner: Reservasjon[];
@@ -81,50 +70,75 @@ const ReservasjonerTabell: FunctionComponent<OwnProps> = ({
   } = restApiHooks.useRestApiRunner(RestApiPathsKeys.FLYTT_RESERVASJON_SAKSBEHANDLER_SOK);
 
   return (
-    <>
+    <VStack gap="2">
       <Label size="small">
         <FormattedMessage id="ReservasjonerTabell.Reservasjoner" />
       </Label>
       {sorterteReservasjoner.length === 0 && (
-        <>
-          <VerticalSpacer eightPx />
-          <BodyShort size="small">
-            <FormattedMessage id="ReservasjonerTabell.IngenReservasjoner" />
-          </BodyShort>
-          <VerticalSpacer eightPx />
-        </>
+        <BodyShort size="small">
+          <FormattedMessage id="ReservasjonerTabell.IngenReservasjoner" />
+        </BodyShort>
       )}
       {sorterteReservasjoner.length > 0 && (
-        <Table headerTextCodes={headerTextCodes} noHover>
-          {sorterteReservasjoner.map(reservasjon => (
-            <TableRow key={reservasjon.oppgaveId}>
-              <TableColumn>{reservasjon.reservertAvNavn}</TableColumn>
-              <TableColumn>{reservasjon.oppgaveSaksNr}</TableColumn>
-              <TableColumn>
-                {getKodeverknavnFraKode(alleKodeverk, KodeverkType.BEHANDLING_TYPE, reservasjon.behandlingType)}
-              </TableColumn>
-              <TableColumn>
-                <FormattedMessage
-                  id="ReservasjonerTabell.ReservertTilFormat"
-                  values={getDateAndTime(reservasjon.reservertTilTidspunkt)}
-                />
-              </TableColumn>
-              <TableColumn>
-                <CalendarIcon className={styles.calendarIcon} onClick={() => showReservasjonEndringDato(reservasjon)} />
-              </TableColumn>
-              <TableColumn>
-                <PersonGroupIcon className={styles.flyttIcon} onClick={() => showFlytteModal(reservasjon)} />
-              </TableColumn>
-              <TableColumn>
-                <XMarkIcon className={styles.removeIcon} onClick={() => opphevReservasjon(reservasjon.oppgaveId)} />
-              </TableColumn>
-            </TableRow>
-          ))}
+        <Table>
+          <Table.Header>
+            <Table.Row>
+              <Table.ColumnHeader>
+                <FormattedMessage id="ReservasjonerTabell.Navn" />
+              </Table.ColumnHeader>
+              <Table.ColumnHeader>
+                <FormattedMessage id="ReservasjonerTabell.Saksnr" />
+              </Table.ColumnHeader>
+              <Table.ColumnHeader>
+                <FormattedMessage id="ReservasjonerTabell.BehandlingType" />
+              </Table.ColumnHeader>
+              <Table.ColumnHeader>
+                <FormattedMessage id="ReservasjonerTabell.ReservertTil" />
+              </Table.ColumnHeader>
+              <Table.ColumnHeader>
+                <FormattedMessage id="ReservasjonerTabell.Endre" />
+              </Table.ColumnHeader>
+              <Table.ColumnHeader>
+                <FormattedMessage id="ReservasjonerTabell.Flytt" />
+              </Table.ColumnHeader>
+              <Table.ColumnHeader>
+                <FormattedMessage id="ReservasjonerTabell.Slett" />
+              </Table.ColumnHeader>
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
+            {sorterteReservasjoner.map(reservasjon => (
+              <Table.Row key={reservasjon.oppgaveId} shadeOnHover={false}>
+                <Table.DataCell>{reservasjon.reservertAvNavn}</Table.DataCell>
+                <Table.DataCell>{reservasjon.oppgaveSaksNr}</Table.DataCell>
+                <Table.DataCell>
+                  {getKodeverknavnFraKode(alleKodeverk, KodeverkType.BEHANDLING_TYPE, reservasjon.behandlingType)}
+                </Table.DataCell>
+                <Table.DataCell>
+                  <FormattedMessage
+                    id="ReservasjonerTabell.ReservertTilFormat"
+                    values={getDateAndTime(reservasjon.reservertTilTidspunkt)}
+                  />
+                </Table.DataCell>
+                <Table.DataCell>
+                  <CalendarIcon
+                    className={styles.calendarIcon}
+                    onClick={() => showReservasjonEndringDato(reservasjon)}
+                  />
+                </Table.DataCell>
+                <Table.DataCell>
+                  <PersonGroupIcon className={styles.flyttIcon} onClick={() => showFlytteModal(reservasjon)} />
+                </Table.DataCell>
+                <Table.DataCell>
+                  <XMarkIcon className={styles.removeIcon} onClick={() => opphevReservasjon(reservasjon.oppgaveId)} />
+                </Table.DataCell>
+              </Table.Row>
+            ))}
+          </Table.Body>
         </Table>
       )}
       {valgtReservasjon && showReservasjonEndringDatoModal && (
         <OppgaveReservasjonEndringDatoModal
-          showModal={showReservasjonEndringDatoModal}
           closeModal={closeReservasjonEndringDatoModal}
           reserverTilDefault={valgtReservasjon.reservertTilTidspunkt}
           endreReserverasjonState={closeReservasjonEndringDatoModal}
@@ -135,10 +149,8 @@ const ReservasjonerTabell: FunctionComponent<OwnProps> = ({
       )}
       {valgtReservasjon && showFlyttReservasjonModal && (
         <FlyttReservasjonModal
-          showModal={showFlyttReservasjonModal}
           closeModal={closeFlytteModal}
           oppgaveId={valgtReservasjon.oppgaveId}
-          toggleMenu={closeFlytteModal}
           hentReserverteOppgaver={hentAvdelingensReservasjoner}
           flyttOppgavereservasjon={flyttOppgavereservasjon}
           hentSaksbehandler={hentSaksbehandler}
@@ -147,7 +159,7 @@ const ReservasjonerTabell: FunctionComponent<OwnProps> = ({
           resetHentSaksbehandler={resetHentSaksbehandler}
         />
       )}
-    </>
+    </VStack>
   );
 };
 
