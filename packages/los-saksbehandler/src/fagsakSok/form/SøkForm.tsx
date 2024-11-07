@@ -6,7 +6,7 @@ import { hasValidSaksnummerOrFodselsnummerFormat } from '@navikt/ft-form-validat
 import { Form, CheckboxField } from '@navikt/ft-form-hooks';
 
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
-import styles from './søkForm.module.css';
+import styles from './SøkForm.module.css';
 
 type FormValues = {
   skalReservere: boolean;
@@ -48,6 +48,7 @@ export const SøkForm = ({ onSubmit, searchResultAccessDenied, searchStarted, re
               hideLabel={false}
               variant="primary"
               onSearchClick={value => {
+                console.log(hasValidSaksnummerOrFodselsnummerFormat(value));
                 formMethods.setValue('searchString', value);
                 if (hasValidSaksnummerOrFodselsnummerFormat(value) === null) {
                   onSubmit({ searchString: value, skalReservere: skalReservereValue });
