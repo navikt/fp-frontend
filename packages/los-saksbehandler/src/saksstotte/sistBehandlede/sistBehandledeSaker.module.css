@@ -1,10 +1,10 @@
 .iconBackground {
   background-color: var(--a-surface-hover);
-  height: 30px;
-  width: 30px;
-  padding-top: 3px;
-  padding-left: 3px;
   border-radius: 9999px;
+  height: 30px;
+  padding-left: 3px;
+  padding-top: 3px;
+  width: 30px;
 }
 
 .ingenBehandlinger {
