@@ -48,7 +48,6 @@ export const SøkForm = ({ onSubmit, searchResultAccessDenied, searchStarted, re
               hideLabel={false}
               variant="primary"
               onSearchClick={value => {
-                console.log(hasValidSaksnummerOrFodselsnummerFormat(value));
                 formMethods.setValue('searchString', value);
                 if (hasValidSaksnummerOrFodselsnummerFormat(value) === null) {
                   onSubmit({ searchString: value, skalReservere: skalReservereValue });
