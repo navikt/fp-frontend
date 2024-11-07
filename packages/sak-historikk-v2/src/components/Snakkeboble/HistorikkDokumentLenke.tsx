@@ -1,8 +1,7 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
 
 import { FileIcon } from '@navikt/aksel-icons';
-import { HStack } from '@navikt/ds-react';
+import { BodyShort, HStack } from '@navikt/ds-react';
 import { HistorikkInnslagDokumentLink } from '@navikt/fp-types';
 
 const DOCUMENT_SERVER_URL = '/fpsak/api/dokument/hent-dokument';
@@ -20,7 +19,7 @@ export const HistorikkDokumentLenke = ({
     return (
       <HStack align="center" gap="1">
         <FileIcon title={tag} width={24} height={24} />
-        <FormattedMessage id="Historikk.Utgått" values={{ tag }} />
+        <BodyShort size="small">{tag}</BodyShort>
       </HStack>
     );
   }
