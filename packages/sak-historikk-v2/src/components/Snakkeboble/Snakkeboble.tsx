@@ -6,7 +6,7 @@ import { KodeverkType } from '@navikt/fp-kodeverk';
 import { HistorikkinnslagV2 } from '@navikt/fp-types';
 
 import { HistorikkDokumentLenke } from './HistorikkDokumentLenke';
-import { formatDate, getStyle, utledPlassering, visNavn } from './snakkebobleUtils';
+import { formatDate, getStyle, parseBoldText, utledPlassering, visNavn } from './snakkebobleUtils';
 import { Avatar } from './Avatar';
 import { Skjermlenke } from './Skjermlenke';
 
@@ -18,13 +18,6 @@ interface Props {
   kjønn: string;
   saksnummer: string;
 }
-
-const convertToBold = (input: string) =>
-  input
-    .split(/(__.*?__)/g)
-    .map((part, index) =>
-      part.startsWith('__') && part.endsWith('__') ? <b key={index}>{part.slice(2, -2)}</b> : part,
-    );
 
 export const Snakkeboble = ({
   behandlingLocation,
@@ -55,13 +48,11 @@ export const Snakkeboble = ({
           createLocationForSkjermlenke={createLocationForSkjermlenke}
         />
 
-        {body.map((linje, index) => {
-          return (
-            <BodyShort key={index} size="small">
-              {convertToBold(linje)}
-            </BodyShort>
-          );
-        })}
+        {body.map((linje, index) => (
+          <BodyShort key={index} size="small">
+            {parseBoldText(linje)}
+          </BodyShort>
+        ))}
 
         {dokumenter && (
           <VStack gap="1">

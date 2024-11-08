@@ -1,3 +1,4 @@
+import React from 'react';
 import { historikkAktor as HistorikkAktor } from '@navikt/fp-kodeverk';
 import { HistorikkinnslagV2, KjønnkodeEnum } from '@navikt/fp-types';
 import { dateFormat, timeFormat } from '@navikt/ft-utils';
@@ -31,3 +32,10 @@ export const visNavn = (rolleNavn: string, aktør: HistorikkinnslagV2['aktør'])
   [HistorikkAktor.ARBEIDSGIVER, HistorikkAktor.SOKER, HistorikkAktor.VEDTAKSLOSNINGEN].includes(aktør.type)
     ? rolleNavn
     : `${rolleNavn} ${aktør.ident}`;
+
+export const parseBoldText = (input: string) =>
+  input
+    .split(/(__.*?__)/g)
+    .map((part, index) =>
+      part.startsWith('__') && part.endsWith('__') ? <b key={index}>{part.slice(2, -2)}</b> : part,
+    );
