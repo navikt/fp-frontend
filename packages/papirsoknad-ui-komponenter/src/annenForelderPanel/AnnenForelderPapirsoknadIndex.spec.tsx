@@ -38,7 +38,7 @@ describe('<AnnenForelderPapirsoknadIndex>', () => {
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
     expect(
-      await screen.findByText('Fødselsnummer til den andre forelderen kan ikke være det samme som søker.'),
+      await screen.findByText('Fødselsnummer til den andre forelderen kan ikke være det samme som søker'),
     ).toBeInTheDocument();
 
     await userEvent.clear(fødselsnummer);
