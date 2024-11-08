@@ -34,7 +34,7 @@
     "classnames": "2.5.1",
     "react": "18.3.1",
     "react-hook-form": "7.53.1",
-    "react-intl": "6.6.8"
+    "react-intl": "6.8.7"
   },
   "devDependencies": {
     "@navikt/ds-css": "7.5.1",
