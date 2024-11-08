@@ -118,7 +118,7 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
     begrunnelse: a.begrunnelse,
   }));
 
-  const [formVerdierForAlleAktiviteter, oppdaterFormVerdier] = useState<FormValues[]>(
+  const [formVerdierForAlleAktiviteter, setFormVerdierForAlleAktiviteter] = useState<FormValues[]>(
     formData || formValuesAktiviteter,
   );
 
@@ -182,12 +182,12 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
   const oppdaterAktivitet = useCallback(
     (formValues: FormValues) => {
       if (valgtAktivitetIndex !== undefined) {
-        oppdaterFormVerdier((oldValues: FormValues[]) =>
+        setFormVerdierForAlleAktiviteter((oldValues: FormValues[]) =>
           Object.assign([], oldValues, { [valgtAktivitetIndex]: formValues }),
         );
       }
     },
-    [oppdaterFormVerdier, valgtAktivitetIndex],
+    [setFormVerdierForAlleAktiviteter, valgtAktivitetIndex],
   );
 
   const avbrytAktivitet = useCallback(() => setValgtAktivitetIndex(undefined), []);

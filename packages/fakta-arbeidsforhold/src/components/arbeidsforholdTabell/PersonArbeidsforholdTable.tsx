@@ -98,53 +98,52 @@ const PersonArbeidsforholdTable: FunctionComponent<OwnProps> = ({
 
   return (
     <Table headerColumnContent={headerColumnContent}>
-      {alleArbeidsforhold &&
-        alleArbeidsforhold.map(a => {
-          const stillingsprosent =
-            a.stillingsprosent !== undefined && a.stillingsprosent !== null ? `${a.stillingsprosent.toFixed(2)} %` : '';
-          const navn = utledNavn(a, alleArbeidsforhold, arbeidsgiverOpplysningerPerId);
-          const mottattDato = inntektsmeldinger.find(im => erMatch(a, im))?.motattDato;
-          return (
-            <TableRow<void, AoIArbeidsforhold>
-              key={utledNøkkel(a, arbeidsgiverOpplysningerPerId)}
-              model={a}
-              onMouseDown={selectArbeidsforholdCallback}
-              onKeyDown={selectArbeidsforholdCallback}
-              isSelected={a.arbeidsgiverIdent === selectedId}
-            >
-              <TableColumn>
-                <BodyShort size="small">{decodeHtmlEntity(navn)}</BodyShort>
-              </TableColumn>
-              <TableColumn>
+      {alleArbeidsforhold?.map(a => {
+        const stillingsprosent =
+          a.stillingsprosent !== undefined && a.stillingsprosent !== null ? `${a.stillingsprosent.toFixed(2)} %` : '';
+        const navn = utledNavn(a, alleArbeidsforhold, arbeidsgiverOpplysningerPerId);
+        const mottattDato = inntektsmeldinger.find(im => erMatch(a, im))?.motattDato;
+        return (
+          <TableRow<void, AoIArbeidsforhold>
+            key={utledNøkkel(a, arbeidsgiverOpplysningerPerId)}
+            model={a}
+            onMouseDown={selectArbeidsforholdCallback}
+            onKeyDown={selectArbeidsforholdCallback}
+            isSelected={a.arbeidsgiverIdent === selectedId}
+          >
+            <TableColumn>
+              <BodyShort size="small">{decodeHtmlEntity(navn)}</BodyShort>
+            </TableColumn>
+            <TableColumn>
+              <BodyShort size="small">
+                <PeriodLabel dateStringFom={a.fom} dateStringTom={a.tom !== TIDENES_ENDE ? a.tom : undefined} />
+              </BodyShort>
+            </TableColumn>
+            <TableColumn>
+              <BodyShort size="small">{finnKilde(a, intl)}</BodyShort>
+            </TableColumn>
+            <TableColumn>
+              <BodyShort size="small">{stillingsprosent}</BodyShort>
+            </TableColumn>
+            <TableColumn>
+              {mottattDato && (
                 <BodyShort size="small">
-                  <PeriodLabel dateStringFom={a.fom} dateStringTom={a.tom !== TIDENES_ENDE ? a.tom : undefined} />
+                  <DateLabel dateString={mottattDato} />
                 </BodyShort>
-              </TableColumn>
-              <TableColumn>
-                <BodyShort size="small">{finnKilde(a, intl)}</BodyShort>
-              </TableColumn>
-              <TableColumn>
-                <BodyShort size="small">{stillingsprosent}</BodyShort>
-              </TableColumn>
-              <TableColumn>
-                {mottattDato && (
-                  <BodyShort size="small">
-                    <DateLabel dateString={mottattDato} />
-                  </BodyShort>
-                )}
-              </TableColumn>
-              <TableColumn>
-                {(a.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.BRUK ||
-                  a.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING) && (
-                  <StarFillIcon
-                    className={styles.image}
-                    title={intl.formatMessage({ id: 'PersonArbeidsforholdTable.ErIBruk' })}
-                  />
-                )}
-              </TableColumn>
-            </TableRow>
-          );
-        })}
+              )}
+            </TableColumn>
+            <TableColumn>
+              {(a.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.BRUK ||
+                a.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING) && (
+                <StarFillIcon
+                  className={styles.image}
+                  title={intl.formatMessage({ id: 'PersonArbeidsforholdTable.ErIBruk' })}
+                />
+              )}
+            </TableColumn>
+          </TableRow>
+        );
+      })}
     </Table>
   );
 };

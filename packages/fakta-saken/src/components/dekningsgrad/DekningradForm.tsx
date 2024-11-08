@@ -52,11 +52,11 @@ const DekningradForm: FunctionComponent<OwnProps> = ({
     defaultValues,
   });
 
-  const [visEditeringsmodus, toggleEdit] = useState(false);
+  const [visEditeringsmodus, setVisEditeringsmodus] = useState(false);
 
   const slåAvEditeringAvStartdato = () => {
     formMethods.reset();
-    toggleEdit(false);
+    setVisEditeringsmodus(false);
   };
 
   if (!visEditeringsmodus) {
@@ -85,7 +85,7 @@ const DekningradForm: FunctionComponent<OwnProps> = ({
             <PencilFillIcon
               title={intl.formatMessage({ id: 'DekningsgradForm.EndreDekningsgrad' })}
               className={readOnly ? styles.editIconReadonly : styles.editIcon}
-              onClick={readOnly ? undefined : () => toggleEdit(true)}
+              onClick={readOnly ? undefined : () => setVisEditeringsmodus(true)}
             />
           )}
         </HStack>

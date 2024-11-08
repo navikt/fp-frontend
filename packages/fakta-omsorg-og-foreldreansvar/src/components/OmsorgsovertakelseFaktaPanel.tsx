@@ -83,10 +83,9 @@ const OmsorgsovertakelseFaktaPanel: FunctionComponent<OwnProps> & StaticFunction
 };
 
 OmsorgsovertakelseFaktaPanel.buildInitialValues = (soknad: Soknad, familiehendelse: FamilieHendelse): FormValues => ({
-  omsorgsovertakelseDato:
-    familiehendelse && familiehendelse.omsorgsovertakelseDato
-      ? familiehendelse.omsorgsovertakelseDato
-      : soknad.omsorgsovertakelseDato,
+  omsorgsovertakelseDato: familiehendelse?.omsorgsovertakelseDato
+    ? familiehendelse.omsorgsovertakelseDato
+    : soknad.omsorgsovertakelseDato,
   foreldreansvarDato: familiehendelse.foreldreansvarDato,
 });
 

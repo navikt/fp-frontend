@@ -11,7 +11,6 @@ import messages from '../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 interface OwnProps {
-  harApneAksjonspunkter: boolean;
   dokumentasjonVurderingBehov: DokumentasjonVurderingBehov[];
 }
 

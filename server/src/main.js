@@ -83,16 +83,13 @@ async function startApp() {
       if (!authorization) {
         logger.debug('User token missing. Redirect til login.');
         res.redirect(loginPath);
-      } else {
+      } else if (await validateAuthorization(authorization)) {
         // Validate token and continue to app
-
-        if (await validateAuthorization(authorization)) {
-          logger.debug('User token is valid. Continue.');
-          next();
-        } else {
-          logger.debug('User token is NOT valid. Redirect til login.');
-          res.redirect(loginPath);
-        }
+        logger.debug('User token is valid. Continue.');
+        next();
+      } else {
+        logger.debug('User token is NOT valid. Redirect til login.');
+        res.redirect(loginPath);
       }
     };
 

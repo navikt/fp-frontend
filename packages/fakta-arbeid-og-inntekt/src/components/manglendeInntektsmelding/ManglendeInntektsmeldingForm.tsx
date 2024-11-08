@@ -81,42 +81,39 @@ const ManglendeInntektsmeldingForm: FunctionComponent<OwnProps> = ({
 
   const erEttArbeidsforhold = arbeidsforholdForRad.length === 1;
 
-  const avbryt = useCallback(() => {
+  const avbryt = () => {
     lukkArbeidsforholdRad();
     formMethods.reset(defaultValues);
-  }, [lukkArbeidsforholdRad, defaultValues]);
+  };
 
-  const lagre = useCallback(
-    (formValues: FormValues) => {
-      const params = {
-        behandlingUuid,
-        behandlingVersjon,
-        vurdering: formValues.saksbehandlersVurdering!,
-        arbeidsgiverIdent: radData.arbeidsgiverIdent,
-        internArbeidsforholdRef: erEttArbeidsforhold ? arbeidsforholdForRad[0].internArbeidsforholdId : undefined,
-        begrunnelse: formValues.begrunnelse!,
-      };
-      return lagreVurdering(params)
-        .then(() => {
-          oppdaterTabell(oldData =>
-            oldData.map(data => {
-              if (data.arbeidsgiverIdent === radData.arbeidsgiverIdent) {
-                return {
-                  ...radData,
-                  avklaring: {
-                    begrunnelse: formValues.begrunnelse,
-                    saksbehandlersVurdering: formValues.saksbehandlersVurdering,
-                  },
-                };
-              }
-              return data;
-            }),
-          );
-        })
-        .finally(() => formMethods.reset(formValues));
-    },
-    [arbeidsforholdForRad, radData, oppdaterTabell],
-  );
+  const lagre = (formValues: FormValues) => {
+    const params = {
+      behandlingUuid,
+      behandlingVersjon,
+      vurdering: formValues.saksbehandlersVurdering!,
+      arbeidsgiverIdent: radData.arbeidsgiverIdent,
+      internArbeidsforholdRef: erEttArbeidsforhold ? arbeidsforholdForRad[0].internArbeidsforholdId : undefined,
+      begrunnelse: formValues.begrunnelse!,
+    };
+    return lagreVurdering(params)
+      .then(() => {
+        oppdaterTabell(oldData =>
+          oldData.map(data => {
+            if (data.arbeidsgiverIdent === radData.arbeidsgiverIdent) {
+              return {
+                ...radData,
+                avklaring: {
+                  begrunnelse: formValues.begrunnelse,
+                  saksbehandlersVurdering: formValues.saksbehandlersVurdering,
+                },
+              };
+            }
+            return data;
+          }),
+        );
+      })
+      .finally(() => formMethods.reset(formValues));
+  };
 
   const svgRef = useRef<SVGSVGElement>(null);
   const [openState, setOpenState] = useState(false);

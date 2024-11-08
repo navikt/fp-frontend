@@ -139,7 +139,7 @@ const OmsorgOgForeldreansvarFaktaForm: FunctionComponent<Props> & StaticFunction
           {readOnly && vilkarType && (
             <div className={styles.vilkarTypeReadOnly}>
               <Label size="small" as="span">
-                {(vilkarTypes.find(d => d.kode === vilkarType) || {}).navn}
+                {vilkarTypes.find(d => d.kode === vilkarType)?.navn}
               </Label>
               {editedStatus.vilkarType && <EditedIcon />}
             </div>

@@ -59,7 +59,7 @@ export const AdresseTabell: FC<AdresseTabellProps> = ({
           <Table.Body>
             {adresser.sort(sorterPerioder).map((adresse, i) => {
               return (
-                <Table.Row key={i}>
+                <Table.Row key={adresse.adresseType + adresse.fom + adresse.tom}>
                   <Table.DataCell style={rowStyle(i)}>
                     <PeriodLabel
                       dateStringFom={adresse.fom}

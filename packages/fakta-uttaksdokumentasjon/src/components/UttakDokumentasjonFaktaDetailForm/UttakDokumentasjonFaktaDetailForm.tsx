@@ -38,7 +38,7 @@ interface OwnProps {
 const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({ behov, readOnly, cancel, submit }) => {
   const intl = useIntl();
 
-  const [valgtPeriodeIndex, settValgtPeriodeIndex] = useState<number | undefined>();
+  const [valgtPeriodeIndex, setValgtPeriodeIndex] = useState<number | undefined>();
 
   const formMethods = useForm<FormValues>({
     defaultValues: tilFormValues(behov),
@@ -64,7 +64,7 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({ behov,
         tom: currentPeriode.tom,
         vurdering: undefined,
       });
-      settValgtPeriodeIndex(undefined);
+      setValgtPeriodeIndex(undefined);
     },
     [fields],
   );
@@ -89,7 +89,7 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({ behov,
               <HStack>
                 <DelOppPeriodeButton
                   display={!readOnly && periodeErMerEnnEnDag(fields[0])}
-                  onClick={() => settValgtPeriodeIndex(0)}
+                  onClick={() => setValgtPeriodeIndex(0)}
                 />
               </HStack>
               <RadioGroupPanel
@@ -124,7 +124,7 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({ behov,
                     <HStack gap="2">
                       <DelOppPeriodeButton
                         display={!readOnly && periodeErMerEnnEnDag(periode)}
-                        onClick={() => settValgtPeriodeIndex(index)}
+                        onClick={() => setValgtPeriodeIndex(index)}
                       />
                       <SlåSammenPeriodeButton
                         display={!readOnly && fields.length > 1 && index > 0}
@@ -192,7 +192,7 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({ behov,
         <DelOppPeriodeModal
           periode={fields[valgtPeriodeIndex]}
           submit={dato => lagNyPeriode(valgtPeriodeIndex, dato)}
-          cancel={() => settValgtPeriodeIndex(undefined)}
+          cancel={() => setValgtPeriodeIndex(undefined)}
         />
       )}
     </Boks>

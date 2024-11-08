@@ -76,15 +76,14 @@ const DelOppPeriodeModal: FunctionComponent<OwnProps> = ({ periode, cancel, subm
                   <Label>
                     <FormattedMessage id="DelOppPeriodeModal.NyePeriodeLabel" />
                   </Label>
-                  {perioder &&
-                    perioder.map((p, index) => (
-                      <BodyShort key={p.fom}>
-                        <FormattedMessage
-                          id="UttakDokumentasjonFaktaDetailForm.PeriodeMedInnhold"
-                          values={{ index: index + 1, periode: getFormatertPeriode(p) }}
-                        />
-                      </BodyShort>
-                    ))}
+                  {perioder.map((p, index) => (
+                    <BodyShort key={p.fom}>
+                      <FormattedMessage
+                        id="UttakDokumentasjonFaktaDetailForm.PeriodeMedInnhold"
+                        values={{ index: index + 1, periode: getFormatertPeriode(p) }}
+                      />
+                    </BodyShort>
+                  ))}
                 </VStack>
               </Box>
             )}

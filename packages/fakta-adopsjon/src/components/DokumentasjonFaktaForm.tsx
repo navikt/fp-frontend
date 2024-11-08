@@ -137,23 +137,22 @@ const DokumentasjonFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
 };
 
 DokumentasjonFaktaForm.buildInitialValues = (soknad: Soknad, familiehendelse: FamilieHendelse): FormValues => ({
-  omsorgsovertakelseDato:
-    familiehendelse && familiehendelse.omsorgsovertakelseDato
-      ? familiehendelse.omsorgsovertakelseDato
-      : soknad.omsorgsovertakelseDato,
-  barnetsAnkomstTilNorgeDato:
-    familiehendelse && familiehendelse.ankomstNorge ? familiehendelse.ankomstNorge : soknad.barnetsAnkomstTilNorgeDato,
-  fodselsdatoer:
-    familiehendelse && familiehendelse.adopsjonFodelsedatoer
-      ? familiehendelse.adopsjonFodelsedatoer
-      : soknad.adopsjonFodelsedatoer,
+  omsorgsovertakelseDato: familiehendelse?.omsorgsovertakelseDato
+    ? familiehendelse.omsorgsovertakelseDato
+    : soknad.omsorgsovertakelseDato,
+  barnetsAnkomstTilNorgeDato: familiehendelse?.ankomstNorge
+    ? familiehendelse.ankomstNorge
+    : soknad.barnetsAnkomstTilNorgeDato,
+  fodselsdatoer: familiehendelse?.adopsjonFodelsedatoer
+    ? familiehendelse.adopsjonFodelsedatoer
+    : soknad.adopsjonFodelsedatoer,
 });
 
 DokumentasjonFaktaForm.transformValues = (values: FormValues): BekreftDokumentertDatoAksjonspunktAp => ({
   kode: AksjonspunktCode.ADOPSJONSDOKUMENTAJON,
   // Desse to variablane skal alltid ha verdi - fix i typescript og fjern ''
-  omsorgsovertakelseDato: values.omsorgsovertakelseDato || '',
-  fodselsdatoer: values.fodselsdatoer || '',
+  omsorgsovertakelseDato: values.omsorgsovertakelseDato ?? '',
+  fodselsdatoer: values.fodselsdatoer ?? '',
 });
 
 export default DokumentasjonFaktaForm;

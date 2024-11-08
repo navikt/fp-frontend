@@ -50,15 +50,15 @@ const FagsakIndex: FunctionComponent = () => {
   });
 
   const [behandlingUuid, setBehandlingUuid] = useState<string | undefined>();
-  const [behandling, oppdaterBehandling] = useState<Behandling>();
-  const setBehandling = useCallback(
+  const [behandling, setBehandling] = useState<Behandling>();
+  const resetApiOgSettBehandling = useCallback(
     (hentetBehandling: Behandling | undefined) => {
       if (hentetBehandling) {
         requestBehandlingApi.resetCache();
         requestBehandlingApi.resetLinks();
         requestBehandlingApi.setLinks(hentetBehandling.links);
 
-        oppdaterBehandling(hentetBehandling);
+        setBehandling(hentetBehandling);
       }
     },
     [requestFagsakApi, requestBehandlingApi],
@@ -84,9 +84,9 @@ const FagsakIndex: FunctionComponent = () => {
     (keepData = false) => {
       if (behandlingUuid && fagsakBehandling) {
         if (erTilbakekreving) {
-          hentTilbakekrevingBehandling({ behandlingUuid }, keepData).then(setBehandling);
+          hentTilbakekrevingBehandling({ behandlingUuid }, keepData).then(resetApiOgSettBehandling);
         } else {
-          hentBehandling({ behandlingUuid }, keepData).then(setBehandling);
+          hentBehandling({ behandlingUuid }, keepData).then(resetApiOgSettBehandling);
         }
       }
     },
@@ -136,7 +136,7 @@ const FagsakIndex: FunctionComponent = () => {
                 <BehandlingerIndex
                   fagsakData={fagsakData}
                   behandling={behandling}
-                  setBehandling={setBehandling}
+                  setBehandling={resetApiOgSettBehandling}
                   hentOgSettBehandling={hentOgSettBehandling}
                   setRequestPendingMessage={setRequestPendingMessage}
                   setBehandlingUuid={setBehandlingUuid}
@@ -149,7 +149,7 @@ const FagsakIndex: FunctionComponent = () => {
           <FagsakProfileIndex
             fagsakData={fagsakData}
             behandlingUuid={behandlingUuid}
-            setBehandling={setBehandling}
+            setBehandling={resetApiOgSettBehandling}
             hentOgSettBehandling={hentOgSettBehandling}
             behandlingVersjon={behandling?.versjon}
             oppdaterFagsak={oppdaterFagsak}

@@ -8,18 +8,17 @@ import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 const findHelpTexts = (intl: IntlShape, aksjonspunkter: Aksjonspunkt[]): string[] => {
   const helpTexts = [];
-  if (aksjonspunkter && aksjonspunkter.some(a => a.definisjon === AksjonspunktCode.VURDERE_ANNEN_YTELSE)) {
+  if (aksjonspunkter?.some(a => a.definisjon === AksjonspunktCode.VURDERE_ANNEN_YTELSE)) {
     helpTexts.push(intl.formatMessage({ id: 'VedtakForm.VurderAnnenYtelse' }));
   }
-  if (aksjonspunkter && aksjonspunkter.some(a => a.definisjon === AksjonspunktCode.VURDERE_DOKUMENT)) {
+  if (aksjonspunkter?.some(a => a.definisjon === AksjonspunktCode.VURDERE_DOKUMENT)) {
     helpTexts.push(intl.formatMessage({ id: 'VedtakForm.VurderDokument' }));
   }
-  if (aksjonspunkter && aksjonspunkter.some(a => a.definisjon === AksjonspunktCode.VURDERE_INNTEKTSMELDING_KLAGE)) {
+  if (aksjonspunkter?.some(a => a.definisjon === AksjonspunktCode.VURDERE_INNTEKTSMELDING_KLAGE)) {
     helpTexts.push(intl.formatMessage({ id: 'VedtakForm.VurderInntektsmeldingKlage' }));
   }
   if (
-    aksjonspunkter &&
-    aksjonspunkter.some(a => a.definisjon === AksjonspunktCode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST)
+    aksjonspunkter?.some(a => a.definisjon === AksjonspunktCode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST)
   ) {
     helpTexts.push(intl.formatMessage({ id: 'VedtakForm.KontrollerRevurderingsbehandling' }));
   }

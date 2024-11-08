@@ -253,7 +253,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
       </TableColumn>
       <TableColumn className={erRadÅpen ? styles.colTopPadding : undefined}>
         <BodyShort>
-          {periode && periode.fom && (
+          {periode?.fom && (
             <PeriodLabel
               dateStringFom={periode.fom}
               dateStringTom={periode.tom !== TIDENES_ENDE ? periode.tom : undefined}

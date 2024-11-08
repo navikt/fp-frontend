@@ -51,7 +51,7 @@ interface StaticFunctions {
 }
 
 const sorterAvslagsArsaker = (avslagsarsakerUsortert: KodeverkMedNavn[]): KodeverkMedNavn[] =>
-  avslagsarsakerUsortert.sort((k1, k2) => k1.navn.localeCompare(k2.navn));
+  avslagsarsakerUsortert.toSorted((k1, k2) => k1.navn.localeCompare(k2.navn));
 
 /**
  * VilkarResultPicker
@@ -133,9 +133,7 @@ VilkarResultPicker.buildInitialValues = (
   return {
     erVilkarOk,
     avslagskode:
-      erVilkarOk === false && behandlingsresultat && behandlingsresultat.avslagsarsak
-        ? behandlingsresultat.avslagsarsak
-        : undefined,
+      erVilkarOk === false && behandlingsresultat?.avslagsarsak ? behandlingsresultat.avslagsarsak : undefined,
   };
 };
 

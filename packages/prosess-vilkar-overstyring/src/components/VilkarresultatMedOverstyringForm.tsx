@@ -6,7 +6,7 @@ import { BodyShort, Detail, Heading, HStack, Label, VStack } from '@navikt/ds-re
 import { OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 
 import { Form } from '@navikt/ft-form-hooks';
-import { Aksjonspunkt, AlleKodeverk, Behandling, KodeverkMedNavn, ManuellBehandlingResultat } from '@navikt/fp-types';
+import { Aksjonspunkt, Behandling, KodeverkMedNavn, ManuellBehandlingResultat } from '@navikt/fp-types';
 import {
   AksjonspunktCode,
   aksjonspunktStatus,
@@ -59,7 +59,7 @@ const createInitialValues = (
   const aksjonspunkt = aksjonspunkter.find(ap => ap.definisjon === overstyringApKode);
   const felles = {
     isOverstyrt: aksjonspunkt !== undefined,
-    begrunnelse: decodeHtmlEntity(aksjonspunkt && aksjonspunkt.begrunnelse ? aksjonspunkt.begrunnelse : ''),
+    begrunnelse: decodeHtmlEntity(aksjonspunkt?.begrunnelse ?? ''),
   };
 
   if (erOverstyringAvMedlemskap(overstyringApKode)) {
@@ -112,7 +112,6 @@ const transformValues = (values: FormValues, overstyringApKode: OverstyringAksjo
 };
 
 interface OwnProps {
-  alleKodeverk: AlleKodeverk;
   ytelseType: string;
   behandlingsresultat?: Behandling['behandlingsresultat'];
   medlemskapManuellBehandlingResultat?: ManuellBehandlingResultat;

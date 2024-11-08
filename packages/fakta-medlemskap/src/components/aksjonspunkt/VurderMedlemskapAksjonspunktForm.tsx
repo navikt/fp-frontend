@@ -38,15 +38,12 @@ export const createMedlemskapInitialValues = (
     const { opphørFom, avslagskode, medlemFom } = resultat;
     if (!avslagskode) {
       return { vurdering: MedlemskapVurdering.OPPFYLT, begrunnelse };
-    } else {
-      if (opphørFom) {
-        return { vurdering: MedlemskapVurdering.DELVIS_OPPFYLT, opphørFom, avslagskode, begrunnelse };
-      } else if (medlemFom) {
-        return { vurdering: MedlemskapVurdering.IKKE_OPPFYLT, medlemFom, avslagskode, begrunnelse };
-      } else {
-        return { vurdering: MedlemskapVurdering.IKKE_OPPFYLT, avslagskode, begrunnelse };
-      }
+    } else if (opphørFom) {
+      return { vurdering: MedlemskapVurdering.DELVIS_OPPFYLT, opphørFom, avslagskode, begrunnelse };
+    } else if (medlemFom) {
+      return { vurdering: MedlemskapVurdering.IKKE_OPPFYLT, medlemFom, avslagskode, begrunnelse };
     }
+    return { vurdering: MedlemskapVurdering.IKKE_OPPFYLT, avslagskode, begrunnelse };
   }
   return { begrunnelse };
 };

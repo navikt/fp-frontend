@@ -120,7 +120,7 @@ const TilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
     a => a.skalBrukes && a.velferdspermisjoner.some(vp => vp.erGyldig && vp.permisjonsprosent === 100),
   );
 
-  const [visFeil, skalViseFeil] = useState(false);
+  const [visFeil, setVisFeil] = useState(false);
 
   const harFeil =
     harIkkeVurdertAlleVelferdspermisjoner ||
@@ -132,7 +132,7 @@ const TilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
   const onSubmit = useCallback(
     (values: TilretteleggingFormValues) => {
       if (harFeil) {
-        skalViseFeil(true);
+        setVisFeil(true);
         return Promise.resolve();
       }
       return submitCallback({

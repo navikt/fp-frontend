@@ -142,7 +142,7 @@ const DisponibleStonadskontoerPanel: FunctionComponent<OwnProps> = ({
         </BodyShort>
       </HStack>
       <div className={styles.tabs}>
-        <ul role="tablist">
+        <ul>
           {stønadskontoerMedNavn.map(konto => (
             <StonadsdagerTab
               key={konto.stonadskontotype}
