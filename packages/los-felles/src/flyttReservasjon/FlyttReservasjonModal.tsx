@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import { Label, Button, BodyShort, Modal as NavModal } from '@navikt/ds-react';
@@ -31,7 +31,7 @@ type LagreFormValues = {
   begrunnelse: string;
 };
 
-interface OwnProps {
+interface Props {
   showModal: boolean;
   oppgaveId: number;
   closeModal: () => void;
@@ -49,7 +49,7 @@ interface OwnProps {
  *
  * Modal som lar en søke opp en saksbehandler som saken skal flyttes til. En kan også begrunne hvorfor saken skal flyttes.
  */
-const FlyttReservasjonModal: FunctionComponent<OwnProps> = ({
+const FlyttReservasjonModal = ({
   showModal,
   closeModal,
   oppgaveId,
@@ -60,7 +60,7 @@ const FlyttReservasjonModal: FunctionComponent<OwnProps> = ({
   hentSaksbehandlerState,
   saksbehandler,
   resetHentSaksbehandler,
-}) => {
+}: Props) => {
   const intl = useIntl();
 
   const finnSaksbehandler = useCallback((brukerIdent: string) => hentSaksbehandler({ brukerIdent }), []);

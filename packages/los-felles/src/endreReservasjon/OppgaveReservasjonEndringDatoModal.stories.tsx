@@ -1,43 +1,44 @@
-import React from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { StoryFn } from '@storybook/react';
 
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
 import OppgaveReservasjonEndringDatoModal from './OppgaveReservasjonEndringDatoModal';
 
 import messages from '../../i18n/nb_NO.json';
+import dayjs from 'dayjs';
+import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 
 const withIntl = getIntlDecorator(messages);
 
-export default {
-  title: 'los/avdelingsleder/behandlingskoer/OppgaveReservasjonEndringDatoModal',
+const meta = {
   component: OppgaveReservasjonEndringDatoModal,
-  decorators: [withIntl],
+  decorators: withIntl,
+  args: {
+    reserverTilDefault: undefined,
+    oppgaveId: 1,
+    showModal: true,
+    closeModal: action('onClose'),
+    endreReserverasjonState: () => {},
+    hentReserverteOppgaver: () => {},
+    endreOppgavereservasjon: args => {
+      action('onEndreOppgavereservasjon')(args);
+      return Promise.resolve([]);
+    },
+  },
+} satisfies Meta<typeof OppgaveReservasjonEndringDatoModal>;
+
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: {
+    reserverTilDefault: undefined,
+  },
 };
-
-const Template: StoryFn<{ endreReserverasjonState: () => void; reserverTilDefault?: string }> = ({
-  endreReserverasjonState,
-  reserverTilDefault,
-}) => (
-  <OppgaveReservasjonEndringDatoModal
-    showModal
-    closeModal={action('button-click')}
-    reserverTilDefault={reserverTilDefault}
-    oppgaveId={1}
-    endreReserverasjonState={endreReserverasjonState}
-    hentReserverteOppgaver={action('button-click')}
-    endreOppgavereservasjon={() => Promise.resolve([])}
-  />
-);
-
-export const Default = Template.bind({});
-Default.args = {
-  endreReserverasjonState: action('button-click'),
-};
-
-export const MedDefaultverdi = Template.bind({});
-MedDefaultverdi.args = {
-  endreReserverasjonState: action('button-click'),
-  reserverTilDefault: '2017-08-02T00:54:25.455',
+export const MedDefaultverdi: Story = {
+  args: {
+    reserverTilDefault: dayjs().add(2, 'weeks').format(ISO_DATE_FORMAT),
+  },
 };

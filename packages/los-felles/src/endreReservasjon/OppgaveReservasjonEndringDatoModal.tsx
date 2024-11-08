@@ -1,4 +1,4 @@
-import React, { FunctionComponent, MouseEvent, useCallback, useMemo } from 'react';
+import React, { MouseEvent, useCallback, useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import dayjs from 'dayjs';
@@ -19,7 +19,7 @@ type FormValues = {
   reserverTil: string;
 };
 
-interface OwnProps {
+export interface Props {
   showModal: boolean;
   closeModal: (event: MouseEvent<HTMLButtonElement>) => void;
   reserverTilDefault?: string;
@@ -32,7 +32,7 @@ interface OwnProps {
 /**
  * OppgaveReservasjonEndringDatoModal.
  */
-const OppgaveReservasjonEndringDatoModal: FunctionComponent<OwnProps> = ({
+const OppgaveReservasjonEndringDatoModal = ({
   showModal,
   closeModal,
   reserverTilDefault,
@@ -40,7 +40,7 @@ const OppgaveReservasjonEndringDatoModal: FunctionComponent<OwnProps> = ({
   hentReserverteOppgaver,
   endreReserverasjonState,
   endreOppgavereservasjon,
-}) => {
+}: Props) => {
   const intl = useIntl();
 
   const endreOppgaveReservasjonFn = useCallback(
