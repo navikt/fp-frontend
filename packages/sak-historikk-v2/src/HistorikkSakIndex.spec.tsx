@@ -1,5 +1,4 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
 import * as stories from './HistorikkSakIndex.stories';
@@ -8,19 +7,19 @@ const { BehandlingIkkeErValgt, BehandlingErValgt } = composeStories(stories);
 
 describe('<HistorikkSakIndex>', () => {
   it('skal vise historikk uten behandlingsfilter når ingen behandlinger er valgt', async () => {
-    render(<BehandlingIkkeErValgt />);
+    await BehandlingIkkeErValgt.run();
     expect(await screen.findByText(/Historikk/)).toBeInTheDocument();
     expect(screen.queryByText('Filtrer på behandling')).not.toBeInTheDocument();
   });
 
   it('skal vise historikk med behandlingsfilter når behandling er valgt', async () => {
-    render(<BehandlingErValgt />);
+    await BehandlingErValgt.run();
     expect(await screen.findByText(/Historikk/)).toBeInTheDocument();
     expect(screen.getByText('Filtrer på behandling')).toBeInTheDocument();
   });
 
   it('skal filtrere bort historikkinnslag ved filtrering på behandling', async () => {
-    render(<BehandlingErValgt />);
+    await BehandlingErValgt.run();
     expect(await screen.findByText(/Historikk/)).toBeInTheDocument();
 
     expect(screen.getAllByTestId('snakkeboble', { exact: false })).toHaveLength(5);
@@ -31,7 +30,7 @@ describe('<HistorikkSakIndex>', () => {
   });
 
   it('skal sortere og vise nyeste historikkinnslag først', async () => {
-    render(<BehandlingIkkeErValgt />);
+    await BehandlingIkkeErValgt.run();
     expect(await screen.findByText(/Historikk/)).toBeInTheDocument();
 
     const snakkebobler = screen.getAllByTestId('snakkeboble', { exact: false });
