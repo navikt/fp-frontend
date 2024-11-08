@@ -19,6 +19,13 @@ interface Props {
   saksnummer: string;
 }
 
+const convertToBold = (input: string) =>
+  input
+    .split(/(__.*?__)/g)
+    .map((part, index) =>
+      part.startsWith('__') && part.endsWith('__') ? <b key={index}>{part.slice(2, -2)}</b> : part,
+    );
+
 export const Snakkeboble = ({
   behandlingLocation,
   createLocationForSkjermlenke,
@@ -49,8 +56,11 @@ export const Snakkeboble = ({
         />
 
         {body.map((linje, index) => {
-          // @ts-ignore
-          return <BodyShort key={index} size="small" dangerouslySetInnerHTML={{ __html: linje }} />;
+          return (
+            <BodyShort key={index} size="small">
+              {convertToBold(linje)}
+            </BodyShort>
+          );
         })}
 
         {dokumenter && (
