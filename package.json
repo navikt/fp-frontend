@@ -44,7 +44,7 @@
   },
   "devDependencies": {
     "@eslint/js": "9.14.0",
-    "@navikt/aksel-stylelint": "7.4.3",
+    "@navikt/aksel-stylelint": "7.5.1",
     "@sentry/cli": "2.38.2",
     "@storybook/addon-essentials": "8.4.2",
     "@storybook/addon-links": "8.4.2",
