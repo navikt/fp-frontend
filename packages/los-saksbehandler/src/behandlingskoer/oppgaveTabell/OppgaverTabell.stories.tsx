@@ -16,6 +16,95 @@ import messages from '../../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
 
+const OPPGAVER_TIL_BEHANDLING = [
+  {
+    id: 1,
+    status: {
+      erReservert: false,
+      flyttetReservasjon: {
+        tidspunkt: '2019-02-02',
+        uid: '23423',
+        navn: 'Espen Utvikler',
+        begrunnelse: 'Flyttet fordi...',
+      },
+    },
+    saksnummer: 345325,
+    personnummer: '1212',
+    navn: 'Espen Utvikler',
+    system: 'SAK',
+    behandlingstype: BehandlingType.FORSTEGANGSSOKNAD,
+    behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
+    opprettetTidspunkt: '2019-01-01',
+    behandlingsfrist: '2019-01-01',
+    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    erTilSaksbehandling: true,
+    behandlingId: '1',
+  },
+];
+
+const RESERVERTE_OPPGAVER = [
+  {
+    id: 2,
+    status: {
+      erReservert: true,
+      reservertTilTidspunkt: '2019-01-01T00:54:25.455',
+      flyttetReservasjon: {
+        tidspunkt: '2019-02-02',
+        uid: '23423',
+        navn: 'Espen Utvikler',
+        begrunnelse: 'Dette er en begrunnelse',
+      },
+    },
+    saksnummer: 1234,
+    personnummer: '233',
+    navn: 'Helge Utvikler',
+    system: 'SAK',
+    behandlingstype: BehandlingType.KLAGE,
+    behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
+    opprettetTidspunkt: '2019-01-01',
+    behandlingsfrist: '2019-01-01',
+    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    erTilSaksbehandling: true,
+    behandlingId: '2',
+  },
+  {
+    id: 3,
+    status: {
+      erReservert: true,
+      reservertTilTidspunkt: '2023-01-01T00:54:25.455',
+    },
+    saksnummer: 964545,
+    personnummer: '233',
+    navn: 'Bjarne Bjærke',
+    system: 'SAK',
+    behandlingstype: BehandlingType.KLAGE,
+    behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
+    opprettetTidspunkt: '2023-01-01',
+    behandlingsfrist: '2023-01-01',
+    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    erTilSaksbehandling: true,
+    behandlingId: '2',
+  },
+  {
+    id: 4,
+    status: {
+      erReservert: true,
+      reservertTilTidspunkt: '2024-01-01T00:54:25.455',
+    },
+    saksnummer: 3454626,
+    personnummer: '233',
+    navn: 'Borgil Bø',
+    system: 'SAK',
+    behandlingstype: BehandlingType.REVURDERING,
+    behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
+    opprettetTidspunkt: '2024-01-01',
+    behandlingsfrist: '2024-01-01',
+    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    erTilSaksbehandling: true,
+    behandlingId: '2',
+  },
+];
+
 type StoryArgs = {
   reserverteOppgaver?: Oppgave[];
   oppgaverTilBehandling?: Oppgave[];
@@ -50,93 +139,8 @@ export const Default: Story = {
     valgtSakslisteId: 1,
     doPolling: false,
     antallOppgaver: 4,
-    oppgaverTilBehandling: [
-      {
-        id: 1,
-        status: {
-          erReservert: false,
-          flyttetReservasjon: {
-            tidspunkt: '2019-02-02',
-            uid: '23423',
-            navn: 'Espen Utvikler',
-            begrunnelse: 'Flyttet fordi...',
-          },
-        },
-        saksnummer: 345325,
-        personnummer: '1212',
-        navn: 'Espen Utvikler',
-        system: 'SAK',
-        behandlingstype: BehandlingType.FORSTEGANGSSOKNAD,
-        behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
-        opprettetTidspunkt: '2019-01-01',
-        behandlingsfrist: '2019-01-01',
-        fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
-        erTilSaksbehandling: true,
-        behandlingId: '1',
-      },
-    ],
-    reserverteOppgaver: [
-      {
-        id: 2,
-        status: {
-          erReservert: true,
-          reservertTilTidspunkt: '2019-01-01T00:54:25.455',
-          flyttetReservasjon: {
-            tidspunkt: '2019-02-02',
-            uid: '23423',
-            navn: 'Espen Utvikler',
-            begrunnelse: 'Dette er en begrunnelse',
-          },
-        },
-        saksnummer: 1234,
-        personnummer: '233',
-        navn: 'Helge Utvikler',
-        system: 'SAK',
-        behandlingstype: BehandlingType.KLAGE,
-        behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
-        opprettetTidspunkt: '2019-01-01',
-        behandlingsfrist: '2019-01-01',
-        fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
-        erTilSaksbehandling: true,
-        behandlingId: '2',
-      },
-      {
-        id: 3,
-        status: {
-          erReservert: true,
-          reservertTilTidspunkt: '2023-01-01T00:54:25.455',
-        },
-        saksnummer: 964545,
-        personnummer: '233',
-        navn: 'Bjarne Bjærke',
-        system: 'SAK',
-        behandlingstype: BehandlingType.KLAGE,
-        behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
-        opprettetTidspunkt: '2023-01-01',
-        behandlingsfrist: '2023-01-01',
-        fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
-        erTilSaksbehandling: true,
-        behandlingId: '2',
-      },
-      {
-        id: 4,
-        status: {
-          erReservert: true,
-          reservertTilTidspunkt: '2024-01-01T00:54:25.455',
-        },
-        saksnummer: 3454626,
-        personnummer: '233',
-        navn: 'Borgil Bø',
-        system: 'SAK',
-        behandlingstype: BehandlingType.REVURDERING,
-        behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
-        opprettetTidspunkt: '2024-01-01',
-        behandlingsfrist: '2024-01-01',
-        fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
-        erTilSaksbehandling: true,
-        behandlingId: '2',
-      },
-    ],
+    oppgaverTilBehandling: OPPGAVER_TIL_BEHANDLING,
+    reserverteOppgaver: RESERVERTE_OPPGAVER,
   },
 };
 
@@ -145,5 +149,22 @@ export const TomOppgaveTabell: Story = {
     reserverOppgave: action('button-click'),
     valgtSakslisteId: 1,
     doPolling: false,
+  },
+};
+
+export const VisPagineringNårMerEnnTilOppgaver: Story = {
+  args: {
+    reserverOppgave: action('button-click'),
+    valgtSakslisteId: 1,
+    doPolling: false,
+    antallOppgaver: 4,
+    oppgaverTilBehandling: OPPGAVER_TIL_BEHANDLING,
+    reserverteOppgaver: RESERVERTE_OPPGAVER.concat(RESERVERTE_OPPGAVER)
+      .concat(RESERVERTE_OPPGAVER)
+      .concat(RESERVERTE_OPPGAVER)
+      .concat(RESERVERTE_OPPGAVER)
+      .concat(RESERVERTE_OPPGAVER)
+      .concat(RESERVERTE_OPPGAVER)
+      .concat(RESERVERTE_OPPGAVER),
   },
 };

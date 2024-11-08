@@ -1,5 +1,5 @@
 import { ChatElipsisIcon } from '@navikt/aksel-icons';
-import { BodyShort, HStack, Button, Label, Popover, SortState, Table, VStack } from '@navikt/ds-react';
+import { BodyShort, HStack, Button, Label, Popover, SortState, Table, VStack, Pagination } from '@navikt/ds-react';
 import { getKodeverknavnFraKode, KodeverkType } from '@navikt/fp-kodeverk';
 import { Oppgave, OppgaveStatus } from '@navikt/fp-los-felles';
 import { TimeoutError } from '@navikt/fp-rest-api';
@@ -85,6 +85,29 @@ const NotatKnapp = ({ oppgave }: { oppgave: Oppgave }) => {
   );
 };
 
+const comparator = (a: OppgaveMedReservertIndikator, b: OppgaveMedReservertIndikator, orderBy: TableHeaders) => {
+  if (
+    (orderBy === 'reservertTilTidspunkt' && a.underBehandling && !b.underBehandling) ||
+    (!a.underBehandling && b.underBehandling)
+  ) {
+    return 1;
+  }
+  if (b[orderBy] === undefined || a[orderBy] === undefined || b[orderBy] < a[orderBy]) {
+    return -1;
+  }
+  return b[orderBy] > a[orderBy] ? 1 : 0;
+};
+
+const getSorterOppgaver =
+  (sort: SortState | undefined) => (a: OppgaveMedReservertIndikator, b: OppgaveMedReservertIndikator) => {
+    if (sort) {
+      return sort.direction === 'ascending'
+        ? comparator(b, a, sort.orderBy as TableHeaders)
+        : comparator(a, b, sort.orderBy as TableHeaders);
+    }
+    return 1;
+  };
+
 const slaSammenOgMarkerReserverte = (
   reserverteOppgaver: Oppgave[],
   oppgaverTilBehandling: Oppgave[],
@@ -116,6 +139,9 @@ export const OppgaverTabell = ({ reserverOppgave, antallOppgaver = 0, valgtSaksl
   const alleKodeverk = restApiHooks.useGlobalStateRestApiData(RestApiGlobalStatePathsKeys.KODEVERK_LOS);
 
   const [enableTableEvents, setEnableTableEvents] = useState(true);
+
+  const [sidetall, setSidetall] = useState(1);
+  const raderPerSide = 10;
 
   const { startRequest: hentReserverteOppgaver, data: reserverteOppgaver = EMPTY_ARRAY } =
     restApiHooks.useRestApiRunner(RestApiPathsKeys.RESERVERTE_OPPGAVER);
@@ -176,39 +202,32 @@ export const OppgaverTabell = ({ reserverOppgave, antallOppgaver = 0, valgtSaksl
 
   const alleOppgaver = slaSammenOgMarkerReserverte(reserverteOppgaver, oppgaverTilBehandling);
 
-  const [sort, setSort] = useState<SortState | undefined>({ orderBy: 'reservertTilTidspunkt', direction: 'ascending' });
-  const handleSort = (sortKey: TableHeaders) => {
-    setSort(
-      sort && sortKey === sort.orderBy && sort.direction === 'descending'
+  const [tabellSortering, setTabellSortering] = useState<SortState | undefined>({
+    orderBy: 'reservertTilTidspunkt',
+    direction: 'ascending',
+  });
+  const sorterTabellPåKolonne = (sorteringsnøkkel: TableHeaders) => {
+    setTabellSortering(
+      tabellSortering && sorteringsnøkkel === tabellSortering.orderBy && tabellSortering.direction === 'descending'
         ? undefined
         : {
-            orderBy: sortKey,
-            direction: sort && sortKey === sort.orderBy && sort.direction === 'ascending' ? 'descending' : 'ascending',
+            orderBy: sorteringsnøkkel,
+            direction:
+              tabellSortering &&
+              sorteringsnøkkel === tabellSortering.orderBy &&
+              tabellSortering.direction === 'ascending'
+                ? 'descending'
+                : 'ascending',
           },
     );
   };
 
-  const comparator = (a: OppgaveMedReservertIndikator, b: OppgaveMedReservertIndikator, orderBy: TableHeaders) => {
-    if (
-      (orderBy === 'reservertTilTidspunkt' && a.underBehandling && !b.underBehandling) ||
-      (!a.underBehandling && b.underBehandling)
-    ) {
-      return 1;
-    }
-    if (b[orderBy] === undefined || a[orderBy] === undefined || b[orderBy] < a[orderBy]) {
-      return -1;
-    }
-    return b[orderBy] > a[orderBy] ? 1 : 0;
-  };
+  const sorterteOppgaver = alleOppgaver.slice().sort(getSorterOppgaver(tabellSortering));
 
-  const sortedData = alleOppgaver.slice().sort((a, b) => {
-    if (sort) {
-      return sort.direction === 'ascending'
-        ? comparator(b, a, sort.orderBy as TableHeaders)
-        : comparator(a, b, sort.orderBy as TableHeaders);
-    }
-    return 1;
-  });
+  const oppgaverSomSkalVisesITabell =
+    sorterteOppgaver.length > raderPerSide
+      ? sorterteOppgaver.slice((sidetall - 1) * raderPerSide, sidetall * raderPerSide)
+      : sorterteOppgaver;
 
   return (
     <>
@@ -231,8 +250,8 @@ export const OppgaverTabell = ({ reserverOppgave, antallOppgaver = 0, valgtSaksl
         )}
       </VStack>
       {alleOppgaver.length > 0 && (
-        <>
-          <Table sort={sort} onSortChange={sortKey => handleSort(sortKey as TableHeaders)}>
+        <VStack gap="4">
+          <Table sort={tabellSortering} onSortChange={sortKey => sorterTabellPåKolonne(sortKey as TableHeaders)}>
             <Table.Header>
               <Table.Row>
                 <Table.ColumnHeader sortKey="navn" sortable>
@@ -258,7 +277,7 @@ export const OppgaverTabell = ({ reserverOppgave, antallOppgaver = 0, valgtSaksl
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {sortedData.map(oppgave => (
+              {oppgaverSomSkalVisesITabell.map(oppgave => (
                 <Table.Row
                   key={oppgave.id}
                   onMouseDown={enableTableEvents ? () => goToFagsak(oppgave) : undefined}
@@ -311,7 +330,16 @@ export const OppgaverTabell = ({ reserverOppgave, antallOppgaver = 0, valgtSaksl
               ))}
             </Table.Body>
           </Table>
-        </>
+          {sorterteOppgaver.length > raderPerSide && (
+            <Pagination
+              page={sidetall}
+              onPageChange={setSidetall}
+              count={Math.ceil(sorterteOppgaver.length / raderPerSide)}
+              size="small"
+              prevNextTexts
+            />
+          )}
+        </VStack>
       )}
     </>
   );
