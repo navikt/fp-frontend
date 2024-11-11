@@ -1,7 +1,5 @@
-import React, { useRef, useEffect, FunctionComponent } from 'react';
-import { init, getInstanceByDom } from 'echarts';
-import type { CSSProperties } from 'react';
-import type { EChartsOption, ECharts } from 'echarts';
+import React, { useRef, useEffect, FunctionComponent, CSSProperties } from 'react';
+import { init, getInstanceByDom, EChartsOption, ECharts } from 'echarts';
 
 export interface OwnProps {
   option: EChartsOption;
