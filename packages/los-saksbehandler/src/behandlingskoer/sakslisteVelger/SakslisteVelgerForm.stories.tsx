@@ -24,7 +24,7 @@ type StoryProps = {
 } & ComponentProps<typeof SakslisteVelgerForm>;
 
 const meta = {
-  title: 'los/saksbehandler/behandlingskoer/SakslisteVelgerForm',
+  title: 'behandlingskoer/SakslisteVelgerForm',
   component: SakslisteVelgerForm,
   decorators: [withIntl],
   render: props => {

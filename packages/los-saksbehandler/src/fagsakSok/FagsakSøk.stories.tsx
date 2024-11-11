@@ -15,7 +15,7 @@ import messages from '../../i18n/nb_NO.json';
 const withIntl = getIntlDecorator(messages);
 
 const meta = {
-  title: 'los/saksbehandler/søk/FagsakSøk',
+  title: 'søk/FagsakSøk',
   component: FagsakSøk,
   decorators: [withIntl],
   render: props => {

@@ -8,7 +8,7 @@ import { Meta, StoryObj } from '@storybook/react/*';
 const withIntl = getIntlDecorator(messages);
 
 const meta = {
-  title: 'los/saksbehandler/behandlingskoer/BehandlingPollingTimoutModal',
+  title: 'behandlingskoer/BehandlingPollingTimoutModal',
   component: BehandlingPollingTimoutModal,
   decorators: [withIntl],
 } satisfies Meta<typeof BehandlingPollingTimoutModal>;

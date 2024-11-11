@@ -13,7 +13,7 @@ import messages from '../../../../i18n/nb_NO.json';
 const withIntl = getIntlDecorator(messages);
 
 const meta = {
-  title: 'los/saksbehandler/behandlingskoer/OppgaveHandlingerMenu',
+  title: 'behandlingskoer/OppgaveHandlingerMenu',
   component: OppgaveHandlingerMenu,
   decorators: [withIntl],
   render: ({ oppgave }) => {

@@ -12,7 +12,7 @@ import { Meta, StoryObj } from '@storybook/react/*';
 const withIntl = getIntlDecorator(messages);
 
 const meta = {
-  title: 'los/saksbehandler/saksstotte/NyeOgFerdigstilteOppgaverForSisteSyvPanel',
+  title: 'saksstotte/NyeOgFerdigstilteOppgaverForSisteSyvPanel',
   component: NyeOgFerdigstilteOppgaverForSisteSyvPanel,
   decorators: [withIntl],
 } satisfies Meta<typeof NyeOgFerdigstilteOppgaverForSisteSyvPanel>;

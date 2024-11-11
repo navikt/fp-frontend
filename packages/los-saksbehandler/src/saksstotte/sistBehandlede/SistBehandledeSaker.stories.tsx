@@ -19,7 +19,7 @@ type StoryArgs = {
 } & ComponentProps<typeof SistBehandledeSaker>;
 
 const meta = {
-  title: 'los/saksbehandler/saksstotte/SistBehandledeSaker',
+  title: 'saksstotte/SistBehandledeSaker',
   component: SistBehandledeSaker,
   decorators: [withIntl],
   render: ({ behandledeOppgaver, åpneFagsak }) => {

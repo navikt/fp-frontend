@@ -111,7 +111,7 @@ type StoryArgs = {
 } & ComponentProps<typeof OppgaverTabell>;
 
 const meta = {
-  title: 'los/saksbehandler/behandlingskoer/OppgaverTabell',
+  title: 'behandlingskoer/OppgaverTabell',
   component: OppgaverTabell,
   decorators: [withIntl],
   render: ({ reserverteOppgaver = [], oppgaverTilBehandling = [], ...rest }) => {

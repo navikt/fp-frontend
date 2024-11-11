@@ -10,7 +10,7 @@ import messages from '../../../i18n/nb_NO.json';
 const withIntl = getIntlDecorator(messages);
 
 const meta = {
-  title: 'los/saksbehandler/søk/SøkForm',
+  title: 'søk/SøkForm',
   component: SøkForm,
   decorators: [withIntl],
 } satisfies Meta<typeof SøkForm>;

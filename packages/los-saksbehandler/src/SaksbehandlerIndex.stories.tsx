@@ -152,7 +152,7 @@ const REST_API_DATA = [
 ];
 
 const meta = {
-  title: 'los/saksbehandler/SaksbehandlerIndex',
+  title: 'SaksbehandlerIndex',
   component: SaksbehandlerIndex,
   render: props => (
     <RestApiMock data={REST_API_DATA} requestApi={requestApi}>

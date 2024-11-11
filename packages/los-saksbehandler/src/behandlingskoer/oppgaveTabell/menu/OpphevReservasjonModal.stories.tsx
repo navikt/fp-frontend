@@ -14,7 +14,7 @@ import messages from '../../../../i18n/nb_NO.json';
 const withIntl = getIntlDecorator(messages);
 
 const meta = {
-  title: 'los/saksbehandler/behandlingskoer/OpphevReservasjonModal',
+  title: 'behandlingskoer/OpphevReservasjonModal',
   component: OpphevReservasjonModal,
   decorators: [withIntl],
   render: ({ oppgave, hentReserverteOppgaver }) => {

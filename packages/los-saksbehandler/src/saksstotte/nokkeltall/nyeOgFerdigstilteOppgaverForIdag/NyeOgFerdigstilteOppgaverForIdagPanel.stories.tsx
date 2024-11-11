@@ -15,7 +15,7 @@ import messages from '../../../../i18n/nb_NO.json';
 const withIntl = getIntlDecorator(messages);
 
 const meta = {
-  title: 'los/saksbehandler/saksstotte/NyeOgFerdigstilteOppgaverForIdagPanel',
+  title: 'saksstotte/NyeOgFerdigstilteOppgaverForIdagPanel',
   component: NyeOgFerdigstilteOppgaverForIdagPanel,
   decorators: [withIntl],
   render: props => {

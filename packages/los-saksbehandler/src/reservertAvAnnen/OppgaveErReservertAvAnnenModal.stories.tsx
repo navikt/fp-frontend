@@ -35,7 +35,7 @@ const oppgaveForResevertAvAnnenModal = {
 };
 
 const meta = {
-  title: 'los/saksbehandler/OppgaveErReservertAvAnnenModal',
+  title: 'OppgaveErReservertAvAnnenModal',
   component: OppgaveErReservertAvAnnenModal,
   decorators: [withIntl],
 } satisfies Meta<typeof OppgaveErReservertAvAnnenModal>;

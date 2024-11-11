@@ -13,7 +13,7 @@ import { action } from '@storybook/addon-actions';
 const withIntl = getIntlDecorator(messages);
 
 const meta = {
-  title: 'los/saksbehandler/søk/FagsakSøkIndex',
+  title: 'søk/FagsakSøkIndex',
   component: FagsakSøkIndex,
   decorators: [withIntl],
   render: props => {

@@ -8,7 +8,7 @@ import messages from '../../i18n/nb_NO.json';
 const withIntl = getIntlDecorator(messages);
 
 const meta = {
-  title: 'los/saksbehandler/DriftsmeldingPanel',
+  title: 'DriftsmeldingPanel',
   component: DriftsmeldingPanel,
   decorators: [withIntl],
 } satisfies Meta<typeof DriftsmeldingPanel>;
