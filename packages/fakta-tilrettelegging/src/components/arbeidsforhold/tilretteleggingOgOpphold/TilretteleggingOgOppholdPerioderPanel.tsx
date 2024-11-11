@@ -42,7 +42,7 @@ const TilretteleggingOgOppholdPerioderPanel: FunctionComponent<OwnProps> = ({
   const tilretteleggingStateName = `arbeidsforhold.${arbeidsforholdIndex}.tilretteleggingDatoer`;
   const oppholdPerioderStateName = `arbeidsforhold.${arbeidsforholdIndex}.avklarteOppholdPerioder`;
 
-  const [erLeggTilKnapperDisablet, setLeggTilKnapperDisablet] = useState(false);
+  const [erLeggTilKnapperDisablet, setErLeggTilKnapperDisablet] = useState(false);
 
   const { append: appendTilrettelegging, remove: removeTilrettelegging } = useFieldArray({
     name: tilretteleggingStateName,
@@ -52,7 +52,7 @@ const TilretteleggingOgOppholdPerioderPanel: FunctionComponent<OwnProps> = ({
   const { tilretteleggingDatoer, avklarteOppholdPerioder } = arbeidsforhold;
 
   const leggTilOpphold = () => {
-    setLeggTilKnapperDisablet(true);
+    setErLeggTilKnapperDisablet(true);
     appendOpphold({
       fom: undefined,
       tom: undefined,
@@ -60,7 +60,7 @@ const TilretteleggingOgOppholdPerioderPanel: FunctionComponent<OwnProps> = ({
     });
   };
   const leggTilTilrettelegging = () => {
-    setLeggTilKnapperDisablet(true);
+    setErLeggTilKnapperDisablet(true);
     appendTilrettelegging({
       fom: undefined,
       type: undefined,
@@ -117,7 +117,7 @@ const TilretteleggingOgOppholdPerioderPanel: FunctionComponent<OwnProps> = ({
                   index={arbeidsforholdIndex + tilretteleggingIndex}
                   openRad={fomDato === undefined}
                   fjernTilrettelegging={fjernTilrettelegging}
-                  setLeggTilKnapperDisablet={setLeggTilKnapperDisablet}
+                  setLeggTilKnapperDisablet={setErLeggTilKnapperDisablet}
                   stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold}
                   arbeidsforhold={arbeidsforhold}
                   tomDatoForTilrettelegging={tomDatoForTilrettelegging}
@@ -138,7 +138,7 @@ const TilretteleggingOgOppholdPerioderPanel: FunctionComponent<OwnProps> = ({
                 index={arbeidsforholdIndex + oppholdIndex}
                 openRad={fomDato === undefined}
                 fjernOpphold={fjernOpphold}
-                setLeggTilKnapperDisablet={setLeggTilKnapperDisablet}
+                setLeggTilKnapperDisablet={setErLeggTilKnapperDisablet}
                 arbeidsforhold={arbeidsforhold}
                 termindato={termindato}
               />

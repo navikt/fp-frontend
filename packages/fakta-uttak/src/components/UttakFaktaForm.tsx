@@ -36,8 +36,7 @@ const finnAksjonspunktTekster = (aksjonspunkter: Aksjonspunkt[], ytelsefordeling
   aksjonspunkter
     .filter(ap => ap.status === AksjonspunktStatus.OPPRETTET)
     .map(ap => {
-      const førsteUttaksdato =
-        ytelsefordeling && ytelsefordeling.førsteUttaksdato ? ytelsefordeling.førsteUttaksdato : undefined;
+      const førsteUttaksdato = ytelsefordeling?.førsteUttaksdato ?? undefined;
       const førsteUttak = {
         value: dayjs(førsteUttaksdato).format(DDMMYYYY_DATE_FORMAT),
       };
@@ -191,7 +190,7 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
     return leggTilAksjonspunktMarkering(sortertListe, aksjonspunkter, arbeidsgiverOpplysningerPerId);
   }, [uttakKontrollerFaktaPerioder, aksjonspunkter, arbeidsgiverOpplysningerPerId]);
 
-  const [uttakPerioder, oppdaterUttakPerioder] = useState<KontrollerFaktaPeriodeMedApMarkering[]>(
+  const [uttakPerioder, setUttakPerioder] = useState<KontrollerFaktaPeriodeMedApMarkering[]>(
     formData?.uttakPerioder || sortertePerioder,
   );
 
@@ -241,7 +240,7 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
 
   const begrunnelse = formMethods.watch('begrunnelse');
 
-  const [isDirty, setDirty] = useState(false);
+  const [isDirty, setIsDirty] = useState(false);
 
   const feilmelding = useMemo(() => {
     if (isDirty || formMethods.formState.isDirty) {
@@ -251,12 +250,12 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
     return null;
   }, [uttakPerioder, isDirty, formMethods.formState.isDirty]);
 
-  const [visNyPeriode, settVisNyPeriode] = useState(false);
+  const [visNyPeriode, setVisNyPeriode] = useState(false);
 
   const isSubmittable =
     submittable && feilmelding === null && !!begrunnelse && !visNyPeriode && valgteFomDatoer.length === 0;
 
-  const [erOverstyrt, setOverstyrt] = useState(false);
+  const [erOverstyrt, setErOverstyrt] = useState(false);
 
   const harApneAksjonspunkter = aksjonspunkter.some(ap => isAksjonspunktOpen(ap.status));
   const aksjonspunktTekster = useMemo(
@@ -280,7 +279,7 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
                 </FlexColumn>
                 {kanOverstyre && !readOnly && automatiskeAksjonspunkter.length === 0 && (
                   <FlexColumn>
-                    <OverstyringKnapp onClick={() => setOverstyrt(true)} erOverstyrt={erOverstyrt} />
+                    <OverstyringKnapp onClick={() => setErOverstyrt(true)} erOverstyrt={erOverstyrt} />
                   </FlexColumn>
                 )}
               </FlexRow>
@@ -308,15 +307,15 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
         valgteFomDatoer={valgteFomDatoer}
         setValgteFomDatoer={setValgteFomDatoer}
         uttakKontrollerFaktaPerioder={uttakPerioder}
-        oppdaterUttakPerioder={oppdaterUttakPerioder}
+        oppdaterUttakPerioder={setUttakPerioder}
         alleKodeverk={alleKodeverk}
         readOnly={readOnly}
-        setDirty={setDirty}
+        setDirty={setIsDirty}
         erRedigerbart={erRedigerbart}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         faktaArbeidsforhold={faktaArbeidsforhold}
         visNyPeriode={visNyPeriode}
-        settVisNyPeriode={settVisNyPeriode}
+        settVisNyPeriode={setVisNyPeriode}
       />
       <VerticalSpacer sixteenPx />
       <VerticalSpacer sixteenPx />

@@ -158,7 +158,6 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
               isReadOnly={false}
               registrerArbeidsforhold={registrerArbeidsforhold}
               radData={radData}
-              arbeidsforhold={arbeidsforholdForRad[0]}
               lukkArbeidsforholdRad={toggleÅpenRad}
               erOverstyrt={erOverstyrt}
               oppdaterTabell={oppdaterTabell}
@@ -253,7 +252,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
       </TableColumn>
       <TableColumn className={erRadÅpen ? styles.colTopPadding : undefined}>
         <BodyShort>
-          {periode && periode.fom && (
+          {periode?.fom && (
             <PeriodLabel
               dateStringFom={periode.fom}
               dateStringTom={periode.tom !== TIDENES_ENDE ? periode.tom : undefined}

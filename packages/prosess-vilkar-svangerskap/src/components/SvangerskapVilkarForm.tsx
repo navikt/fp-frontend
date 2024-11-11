@@ -25,7 +25,6 @@ import {
   ArbeidsforholdTilretteleggingDato,
   Behandling,
   FodselOgTilrettelegging,
-  Vilkar,
 } from '@navikt/fp-types';
 import { BekreftSvangerskapspengervilkarAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -43,7 +42,7 @@ const finnesUttakPåArbfor = (arbfor: ArbeidsforholdFodselOgTilrettelegging): bo
 };
 
 const finnesInnvilgetUttak = (svangerskapspengerTilrettelegging: FodselOgTilrettelegging): boolean =>
-  svangerskapspengerTilrettelegging && svangerskapspengerTilrettelegging.arbeidsforholdListe
+  svangerskapspengerTilrettelegging?.arbeidsforholdListe
     ? svangerskapspengerTilrettelegging.arbeidsforholdListe.some(arbfor => finnesUttakPåArbfor(arbfor))
     : false;
 
@@ -72,7 +71,6 @@ interface OwnProps {
   behandlingsresultat?: Behandling['behandlingsresultat'];
   aksjonspunkter: Aksjonspunkt[];
   status: string;
-  vilkar: Vilkar[];
   submitCallback: (aksjonspunktData: BekreftSvangerskapspengervilkarAp) => Promise<void>;
   readOnly: boolean;
   readOnlySubmitButton: boolean;

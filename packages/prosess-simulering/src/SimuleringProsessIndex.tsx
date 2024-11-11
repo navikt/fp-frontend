@@ -32,7 +32,6 @@ const SimuleringProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelP
   arbeidsgiverOpplysningerPerId,
   submitCallback,
   isReadOnly,
-  readOnlySubmitButton,
   isAksjonspunktOpen,
   previewFptilbakeCallback,
   formData,
@@ -48,7 +47,6 @@ const SimuleringProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelP
       tilbakekrevingvalg={tilbakekrevingvalg}
       submitCallback={submitCallback}
       readOnly={isReadOnly}
-      readOnlySubmitButton={readOnlySubmitButton}
       isApOpen={isAksjonspunktOpen}
       previewCallback={previewFptilbakeCallback}
       formData={formData}

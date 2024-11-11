@@ -38,7 +38,6 @@ const getUuidForSisteLukkedeForsteEllerRevurd = (behandlinger: BehandlingAppKont
 interface OwnProps {
   fagsakData: FagsakData;
   behandlingUuid?: string;
-  behandlingVersjon?: number;
   lukkModal: () => void;
 }
 

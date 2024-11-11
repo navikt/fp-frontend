@@ -62,7 +62,7 @@ const getFamilieHendelseData = (familieHendelseSamling: FamilieHendelseSamling):
 
 const formatPerioder = (perioder: BeregningsresultatPeriode[] = []): Periode[] =>
   perioder
-    .filter(periode => periode.andeler && periode.andeler[0] && periode.dagsats)
+    .filter(periode => periode.andeler?.[0] && periode.dagsats)
     .map<Periode>((periode, index: number) => ({
       erGradert: sjekkOmGradert(periode),
       start: dayjs(periode.fom).toDate(),

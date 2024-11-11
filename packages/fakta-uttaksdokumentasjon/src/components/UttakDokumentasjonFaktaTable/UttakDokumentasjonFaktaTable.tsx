@@ -42,19 +42,19 @@ const UttakDokumentasjonFaktaTable: FunctionComponent<OwnProps> = ({
   setDirty,
   harAksjonspunkt,
 }) => {
-  const [valgtDokBehovFomDatoer, setDokBehovFomDatoer] = useState<string[]>([]);
+  const [valgtDokBehovFomDatoer, setValgtDokBehovFomDatoer] = useState<string[]>([]);
 
   const velgDokBehovFomDato = useCallback(
     (fom?: string) => {
       if (fom) {
         if (valgtDokBehovFomDatoer.includes(fom)) {
-          setDokBehovFomDatoer(foms => foms.filter(f => f !== fom));
+          setValgtDokBehovFomDatoer(foms => foms.filter(f => f !== fom));
         } else {
-          setDokBehovFomDatoer(foms => foms.concat(fom));
+          setValgtDokBehovFomDatoer(foms => foms.concat(fom));
         }
       }
     },
-    [valgtDokBehovFomDatoer, setDokBehovFomDatoer],
+    [valgtDokBehovFomDatoer, setValgtDokBehovFomDatoer],
   );
 
   useEffect(() => velgDokBehovFomDato(dokumentasjonVurderingBehov?.find(oa => !oa.vurdering)?.fom), []);
@@ -69,7 +69,7 @@ const UttakDokumentasjonFaktaTable: FunctionComponent<OwnProps> = ({
 
       oppdaterDokBehov(oppdaterteDokBehov);
 
-      setDokBehovFomDatoer(fomDatoer => {
+      setValgtDokBehovFomDatoer(fomDatoer => {
         const åpneRaderMinusDenSomErOppdatert = fomDatoer.filter(fom => fom !== perioder[0].fom);
         const nySomSkalÅpnes = oppdaterteDokBehov.find(oa => !oa.vurdering)?.fom;
         return nySomSkalÅpnes

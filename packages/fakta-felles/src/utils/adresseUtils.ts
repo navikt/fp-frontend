@@ -6,7 +6,7 @@ import { sorterPerioder } from './periodeUtils';
 
 const PERSON_ADRESSE_LAND_NORGE = 'NORGE';
 
-const emptyIfnull = (text: string | null | undefined): string => (text == null ? '' : text);
+const emptyIfnull = (text: string | null | undefined): string => text ?? '';
 
 export const formaterAdresse = (adresse: Personadresse): string => {
   const { adresselinje1, adresselinje2, adresselinje3, postNummer, poststed, land } = adresse;

@@ -13,7 +13,7 @@ interface OwnProps {
 
 const erBeløpSatt = (beløp?: number): boolean => !!beløp || beløp === 0;
 
-const hentBeløpEller0 = (beløp?: number): number => beløp || 0;
+const hentBeløpEller0 = (beløp?: number): number => beløp ?? 0;
 
 const finnGjeldendeBeløp = (andel: BeregningsgrunnlagAndel): number =>
   erBeløpSatt(andel.overstyrtPrAar) ? hentBeløpEller0(andel.overstyrtPrAar) : hentBeløpEller0(andel.beregnetPrAar);

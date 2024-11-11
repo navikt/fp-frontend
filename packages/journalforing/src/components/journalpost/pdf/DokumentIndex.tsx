@@ -12,12 +12,12 @@ type OwnProps = {
 };
 
 const DokumentIndex: FunctionComponent<OwnProps> = ({ dokumenter }) => {
-  const [valgDokument, setValgtDokument] = useState<JournalDokument | undefined>();
+  const [valgtDokument, setValgtDokument] = useState<JournalDokument | undefined>();
   useEffect(() => {
     const initieltDokumnet = dokumenter && dokumenter.length > 0 ? dokumenter[0] : undefined;
     setValgtDokument(initieltDokumnet);
   }, [dokumenter]);
-  if (!valgDokument || !dokumenter) {
+  if (!valgtDokument || !dokumenter) {
     return (
       <div>
         <Heading size="small">
@@ -28,9 +28,9 @@ const DokumentIndex: FunctionComponent<OwnProps> = ({ dokumenter }) => {
   }
   return (
     <div className={styles.pdfContainer}>
-      <DokumentVelger setValgtDokument={setValgtDokument} valgtDokument={valgDokument} dokumenter={dokumenter} />
+      <DokumentVelger setValgtDokument={setValgtDokument} valgtDokument={valgtDokument} dokumenter={dokumenter} />
       <VerticalSpacer sixteenPx />
-      <PDFVisning dokument={valgDokument} />
+      <PDFVisning dokument={valgtDokument} />
     </div>
   );
 };

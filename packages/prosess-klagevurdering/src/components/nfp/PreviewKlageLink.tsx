@@ -28,7 +28,7 @@ export type BrevData = {
 };
 
 const getBrevData = (klageVurdering?: string, fritekstTilBrev?: string): BrevData => ({
-  fritekst: fritekstTilBrev || '',
+  fritekst: fritekstTilBrev ?? '',
   dokumentMal: getBrevKode(false, klageVurdering),
   erOpphevetKlage: klageVurdering === klageVurderingType.OPPHEVE_YTELSESVEDTAK,
 });

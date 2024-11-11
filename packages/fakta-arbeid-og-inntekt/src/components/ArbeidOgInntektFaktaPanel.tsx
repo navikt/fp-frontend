@@ -168,14 +168,14 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
   alleKodeverk,
   åpneForNyVurdering,
 }) => {
-  const [erKnappTrykket, settKnappTrykket] = useState(false);
-  const [visSettPåVentModal, settVisSettPåVentModal] = useState(false);
+  const [erKnappTrykket, setErKnappTrykket] = useState(false);
+  const [visSettPåVentModal, setVisSettPåVentModal] = useState(false);
   const [erOverstyrt, setErOverstyrt] = useState(false);
 
-  const [tabellRader, setTabellData] = useState<ArbeidsforholdOgInntektRadData[]>(
+  const [tabellRader, setTabellRader] = useState<ArbeidsforholdOgInntektRadData[]>(
     formData || byggTabellStruktur(arbeidOgInntekt, arbeidsgiverOpplysningerPerId),
   );
-  const [åpneRadIndexer, settÅpneRadIndexer] = useState(finnUløstArbeidsforholdIndex(tabellRader));
+  const [åpneRadIndexer, setÅpneRadIndexer] = useState(finnUløstArbeidsforholdIndex(tabellRader));
 
   const isDirty = useIsFormDirty();
 
@@ -189,40 +189,40 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
   const toggleÅpenRad = useCallback(
     (index: number) => {
       if (åpneRadIndexer.some(radIndex => radIndex === index)) {
-        settÅpneRadIndexer(åpneRadIndexer.filter(i => i !== index));
+        setÅpneRadIndexer(åpneRadIndexer.filter(i => i !== index));
       } else {
-        settÅpneRadIndexer(åpneRadIndexer.concat(index));
+        setÅpneRadIndexer(åpneRadIndexer.concat(index));
       }
     },
-    [åpneRadIndexer, settÅpneRadIndexer],
+    [åpneRadIndexer, setÅpneRadIndexer],
   );
 
   const tableRef = useRef<HTMLTableElement>(null);
   const oppdaterTabellData = useCallback(
     (data: (rader: ArbeidsforholdOgInntektRadData[]) => ArbeidsforholdOgInntektRadData[]) => {
-      setTabellData(data);
-      settÅpneRadIndexer(finnUløstArbeidsforholdIndex(data(tabellRader)));
+      setTabellRader(data);
+      setÅpneRadIndexer(finnUløstArbeidsforholdIndex(data(tabellRader)));
       tableRef?.current?.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
     },
     [tabellRader],
   );
 
   const lagreOgFortsett = useCallback(() => {
-    settKnappTrykket(true);
+    setErKnappTrykket(true);
     lagreCallback({
       kode: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
     });
   }, [behandling.versjon]);
 
   const gjenåpneAksjonspunkt = useCallback(() => {
-    settKnappTrykket(true);
+    setErKnappTrykket(true);
     åpneForNyVurdering();
   }, [behandling.versjon]);
 
   const settPaVent = useCallback(
     (params: { frist?: string; ventearsak?: string }) => {
-      settKnappTrykket(true);
-      settVisSettPåVentModal(false);
+      setErKnappTrykket(true);
+      setVisSettPåVentModal(false);
 
       const { frist, ventearsak } = params;
       if (ventearsak) {
@@ -262,7 +262,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
         registrerArbeidsforhold={registrerArbeidsforhold}
         erOverstyrer={erOverstyrer}
         tabellData={tabellRader}
-        settÅpneRadIndexer={settÅpneRadIndexer}
+        settÅpneRadIndexer={setÅpneRadIndexer}
         setErOverstyrt={setErOverstyrt}
         oppdaterTabell={oppdaterTabellData}
       />
@@ -293,14 +293,14 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
             size="small"
             variant="primary"
             disabled={erKnappTrykket}
-            onClick={() => settVisSettPåVentModal(true)}
+            onClick={() => setVisSettPåVentModal(true)}
             type="button"
           >
             <FormattedMessage id="ArbeidOgInntektFaktaPanel.SettPaVent" />
           </Button>
           <SettPaVentModalIndex
             submitCallback={settPaVent}
-            cancelEvent={() => settVisSettPåVentModal(false)}
+            cancelEvent={() => setVisSettPåVentModal(false)}
             defaultVenteårsak={venteArsakType.VENT_OPDT_INNTEKTSMELDING}
             hasManualPaVent
             ventearsaker={alleKodeverk[KodeverkType.VENT_AARSAK]}

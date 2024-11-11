@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { UseFormGetValues, useFormContext } from 'react-hook-form';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { Alert, Label, Heading } from '@navikt/ds-react';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { Datepicker, InputField, RadioGroupPanel } from '@navikt/ft-form-hooks';
@@ -16,6 +16,10 @@ import {
   required,
 } from '@navikt/ft-form-validators';
 
+import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
+
+dayjs.extend(isSameOrBefore);
+
 const validateMinValue1 = minValue(1);
 const validateMaxValue9 = maxValue(9);
 
@@ -28,11 +32,11 @@ export type FormValues = {
   erBarnetFodt?: boolean;
 };
 
-const getToday = (): moment.Moment => moment().startOf('day');
-const getEarliestTerminDato = (): moment.Moment => getToday().subtract(3, 'weeks');
-const getLatestTerminbekreftelseDato = (termindato?: string): moment.Moment => {
+const getToday = (): dayjs.Dayjs => dayjs().startOf('day');
+const getEarliestTerminDato = (): dayjs.Dayjs => getToday().subtract(3, 'weeks');
+const getLatestTerminbekreftelseDato = (termindato?: string): dayjs.Dayjs => {
   const earliestTerminDato = getEarliestTerminDato();
-  const actualTermindato = termindato ? moment(termindato, ISO_DATE_FORMAT) : undefined;
+  const actualTermindato = termindato ? dayjs(termindato, ISO_DATE_FORMAT) : undefined;
   const today = getToday();
   if (actualTermindato && actualTermindato.isSameOrBefore(today)) {
     return (actualTermindato.isAfter(earliestTerminDato) ? actualTermindato : earliestTerminDato).subtract(1, 'days');

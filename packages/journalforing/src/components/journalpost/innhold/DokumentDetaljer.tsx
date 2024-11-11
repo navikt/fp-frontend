@@ -27,7 +27,7 @@ const DokumentDetaljer: FunctionComponent<OwnProps> = ({
   journalpost,
   dokumentTittelStyresAvJournalpostTittel,
 }) => {
-  const [kanRedigeres, setSkalRedigeres] = useState<boolean>(!dokument.tittel);
+  const [kanRedigeres, setKanRedigeres] = useState<boolean>(!dokument.tittel);
   const [harToggletFritekst, setHarToggletFritekst] = useState(false);
   const tittler = listeMedTittler.map(tittel => (
     <option value={tittel} key={tittel}>
@@ -40,7 +40,7 @@ const DokumentDetaljer: FunctionComponent<OwnProps> = ({
   }, [harToggletFritekst]);
 
   const toggleRedigering = useCallback(() => {
-    setSkalRedigeres(!kanRedigeres);
+    setKanRedigeres(!kanRedigeres);
   }, [kanRedigeres]);
   const inputFieldName = dokumentTittelStyresAvJournalpostTittel
     ? 'journalpostTittel'

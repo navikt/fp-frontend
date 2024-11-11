@@ -37,7 +37,7 @@ const getPreviewCallback =
     e.preventDefault();
 
     const data = {
-      fritekst: begrunnelse || ' ',
+      fritekst: begrunnelse ?? ' ',
       mottaker: '',
       dokumentMal: dokumentMalType.INNSYN_SVAR,
       gjelderVedtak: true,
