@@ -1,0 +1,12 @@
+import{j as s}from"./jsx-runtime-QvZ8i92b.js";import{d as t}from"./dayjs.min-BsYQKNhR.js";import{A as e,m as E}from"./nb_NO-ZX6bBe0Z.js";import{z as a,Y as o}from"./index.es-Cl_yxThX.js";import{R as g}from"./RestApiMock-DqJckcz7.js";import"./index-uubelm5h.js";import"./useRestApiRunner-c-Q2a7zB.js";import{g as R}from"./withIntl-2iPbc0WM.js";import{a as c}from"./alleKodeverkLos-BJud6Q-i.js";import{R as D,r as f}from"./fplosRestApi-CVJaTUaS.js";import{T as i}from"./TilBehandlingPanel-BfQfoRXA.js";import"./index-C5xsJX-I.js";import"./isSameOrAfter-C-awqOHd.js";import"./isSameOrBefore-DeYxtwBz.js";import"./StoreValuesInLocalStorage-D6Hb4UHw.js";import"./useLosKodeverk-DAQ82HSC.js";import"./FlyttReservasjonModal-B0Rjhzmq.js";import"./index.es-C__6ea7d.js";import"./Panel-ChlrvMgQ.js";const T=R(E),B={title:"los/avdelingsleder/nokkeltall/TilBehandlingPanel",component:i,decorators:[T]},u=({oppgaverPerDato:m})=>{const d=[{key:D.KODEVERK_LOS.name,data:c,global:!0}];return s.jsx(g,{data:d,requestApi:f,children:s.jsx(i,{height:300,oppgaverPerDato:m,getValueFromLocalStorage:()=>""})})},r=u.bind({});r.args={oppgaverPerDato:[{fagsakYtelseType:a.FORELDREPENGER,behandlingType:o.FORSTEGANGSSOKNAD,opprettetDato:t().format(e),antall:1},{fagsakYtelseType:a.FORELDREPENGER,behandlingType:o.FORSTEGANGSSOKNAD,opprettetDato:t().subtract(3,"d").format(e),antall:2},{fagsakYtelseType:a.FORELDREPENGER,behandlingType:o.KLAGE,opprettetDato:t().subtract(4,"d").format(e),antall:2},{fagsakYtelseType:a.FORELDREPENGER,behandlingType:o.FORSTEGANGSSOKNAD,opprettetDato:t().subtract(4,"d").format(e),antall:6},{fagsakYtelseType:a.FORELDREPENGER,behandlingType:o.DOKUMENTINNSYN,opprettetDato:t().subtract(10,"d").format(e),antall:3},{fagsakYtelseType:a.FORELDREPENGER,behandlingType:o.DOKUMENTINNSYN,opprettetDato:t().subtract(16,"d").format(e),antall:3}]};var p,l,n;r.parameters={...r.parameters,docs:{...(p=r.parameters)==null?void 0:p.docs,source:{originalSource:`({
+  oppgaverPerDato
+}) => {
+  const data = [{
+    key: RestApiGlobalStatePathsKeys.KODEVERK_LOS.name,
+    data: alleKodeverkLos,
+    global: true
+  }];
+  return <RestApiMock data={data} requestApi={requestApi}>
+      <TilBehandlingPanel height={300} oppgaverPerDato={oppgaverPerDato} getValueFromLocalStorage={() => ''} />
+    </RestApiMock>;
+}`,...(n=(l=r.parameters)==null?void 0:l.docs)==null?void 0:n.source}}};const I=["Default"];export{r as Default,I as __namedExportsOrder,B as default};
