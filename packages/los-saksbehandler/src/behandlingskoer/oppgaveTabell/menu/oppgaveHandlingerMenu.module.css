@@ -1,0 +1,7 @@
+.image {
+  color: var(--a-blue-600);
+  height: 30px;
+  margin-bottom: -5px;
+  margin-top: -5px;
+  width: 30px;
+}

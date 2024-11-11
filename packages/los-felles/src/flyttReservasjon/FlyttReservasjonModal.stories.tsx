@@ -5,7 +5,7 @@ import { StoryFn } from '@storybook/react';
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
-import FlyttReservasjonModal from './FlyttReservasjonModal';
+import { FlyttReservasjonModal } from './FlyttReservasjonModal';
 import SaksbehandlerProfil from '../typer/saksbehandlerProfilTsType';
 
 import messages from '../../i18n/nb_NO.json';
@@ -13,7 +13,7 @@ import messages from '../../i18n/nb_NO.json';
 const withIntl = getIntlDecorator(messages);
 
 export default {
-  title: 'los/avdelingsleder/behandlingskoer/FlyttReservasjonModal',
+  title: 'los/FlyttReservasjonModal',
   component: FlyttReservasjonModal,
   decorators: [withIntl],
 };
@@ -30,10 +30,8 @@ const Template: StoryFn<{
 
   return (
     <FlyttReservasjonModal
-      showModal
       oppgaveId={1}
       closeModal={action('button-click')}
-      toggleMenu={action('button-click')}
       hentReserverteOppgaver={hentReserverteOppgaver}
       flyttOppgavereservasjon={() => Promise.resolve()}
       hentSaksbehandler={hentSaksbehandler}

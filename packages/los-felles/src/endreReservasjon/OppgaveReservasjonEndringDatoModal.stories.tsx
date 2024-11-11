@@ -4,7 +4,7 @@ import { StoryFn } from '@storybook/react';
 
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
-import OppgaveReservasjonEndringDatoModal from './OppgaveReservasjonEndringDatoModal';
+import { OppgaveReservasjonEndringDatoModal } from './OppgaveReservasjonEndringDatoModal';
 
 import messages from '../../i18n/nb_NO.json';
 import dayjs from 'dayjs';
@@ -12,7 +12,7 @@ import dayjs from 'dayjs';
 const withIntl = getIntlDecorator(messages);
 
 export default {
-  title: 'los/avdelingsleder/behandlingskoer/OppgaveReservasjonEndringDatoModal',
+  title: 'los/OppgaveReservasjonEndringDatoModal',
   component: OppgaveReservasjonEndringDatoModal,
   decorators: [withIntl],
 };
@@ -22,7 +22,6 @@ const Template: StoryFn<{ endreReserverasjonState: () => void; reserverTilDefaul
   reserverTilDefault,
 }) => (
   <OppgaveReservasjonEndringDatoModal
-    showModal
     closeModal={action('button-click')}
     reserverTilDefault={reserverTilDefault}
     oppgaveId={1}

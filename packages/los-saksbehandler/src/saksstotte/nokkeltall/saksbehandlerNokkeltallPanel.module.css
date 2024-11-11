@@ -1,0 +1,12 @@
+.iconBackground {
+  background-color: var(--a-surface-hover);
+  border-radius: 9999px;
+  height: 30px;
+  width: 30px;
+}
+
+.sectorChatIcon {
+  color: var(--a-icon-subtle);
+  height: 30px;
+  width: 30px;
+}

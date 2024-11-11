@@ -1,1 +1,1 @@
-export { default as SaksbehandlerIndex } from './src/SaksbehandlerIndex';
+export { SaksbehandlerIndex } from './src/SaksbehandlerIndex';
