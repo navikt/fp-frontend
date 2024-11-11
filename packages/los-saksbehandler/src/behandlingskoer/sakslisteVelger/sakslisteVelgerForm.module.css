@@ -15,5 +15,7 @@
 }
 
 .grayout {
-  color: var(--a-text-subtle);
+  color: var(--a-gray-500);
+  height: 24px;
+  width: 24px;
 }

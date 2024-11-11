@@ -1,15 +1,18 @@
-import React, { ReactNode, useState } from 'react';
-import { PersonHeadsetIcon } from '@navikt/aksel-icons';
-import { ArrowsUpDownIcon, DocPencilIcon } from '@navikt/aksel-icons';
-import { FunnelIcon, PlusIcon } from '@navikt/aksel-icons';
+import React, { useEffect, ReactNode, useState } from 'react';
+import {
+  SackKronerIcon,
+  FunnelIcon,
+  PlusIcon,
+  PersonHeadsetIcon,
+  ArrowsUpDownIcon,
+  DocPencilIcon,
+} from '@navikt/aksel-icons';
 import { BodyShort, HStack, Label, VStack, Box, Heading, Button } from '@navikt/ds-react';
 import { Form, SelectField } from '@navikt/ft-form-hooks';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
-import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
-import { SackKronerIcon } from '@navikt/aksel-icons';
 import { KodeverkType, getKodeverknavnFraKode } from '@navikt/fp-kodeverk';
 import { AlleKodeverk } from '@navikt/fp-types';
 
@@ -318,7 +321,7 @@ export const SakslisteVelgerForm = ({
                   key={s.brukerIdent.brukerIdent}
                 >
                   <HStack gap="2" align="center">
-                    <PersonHeadsetIcon />
+                    <PersonHeadsetIcon aria-hidden className={styles.grayout} />
                     <BodyShort>{s.navn}</BodyShort>
                   </HStack>
                 </Box>
@@ -328,7 +331,7 @@ export const SakslisteVelgerForm = ({
                 {!visAlleSaksbehandlere && (
                   <Box background="surface-neutral-subtle" padding="2" borderRadius="full">
                     <HStack gap="2" align="center">
-                      <PlusIcon />
+                      <PlusIcon aria-hidden className={styles.grayout} />
                       <BodyShort>
                         <FormattedMessage
                           id="SakslisteVelgerForm.Andre"

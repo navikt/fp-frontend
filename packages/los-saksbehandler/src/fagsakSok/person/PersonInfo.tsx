@@ -15,17 +15,6 @@ interface Props {
   person: Person;
 }
 
-/**
- * PersonInfo
- *
- * Definerer visning av personen relatert til fagsak. (Søker)
- *
- * Eksempel:
- * ```html
- * <PersonInfo person={navn:"Ola" alder:{40} fødselsnummer:"12345678910" erKvinne:false
- * erDod:false diskresjonskode:"6" dødsdato:"1990.03.03"} medPanel />
- * ```
- */
 export const PersonInfo = ({ person }: Props) => {
   const intl = useIntl();
   const { kjønn, dødsdato, diskresjonskode, fødselsdato, navn, fødselsnummer } = person;
