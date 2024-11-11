@@ -350,7 +350,7 @@ const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
     erOppfylt,
   );
   const warning2 = hentTekstNårUtbetalingPlusArbeidsprosentMerEn100(aktiviteter, sorterteAktiviteter, intl);
-  const warning = warning1 || warning2;
+  const warning = warning1 ?? warning2;
 
   return (
     <Form formMethods={formMethods} onSubmit={submit}>

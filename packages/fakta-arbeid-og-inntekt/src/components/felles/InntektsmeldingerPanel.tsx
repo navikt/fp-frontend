@@ -48,7 +48,7 @@ const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
   arbeidsgiverFødselsdato,
 }) => {
   const intl = useIntl();
-  const [visInfoOmIm, toggleInfoOmIm] = useState<Record<string, boolean>>({});
+  const [visInfoOmIm, setVisInfoOmIm] = useState<Record<string, boolean>>({});
 
   const harEttArbeidsforhold = arbeidsforholdForRad.length === 1;
 
@@ -180,7 +180,7 @@ const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
                       <Link
                         onClick={e => {
                           e.preventDefault();
-                          toggleInfoOmIm(info => {
+                          setVisInfoOmIm(info => {
                             if (!a.internArbeidsforholdId) {
                               return info;
                             }

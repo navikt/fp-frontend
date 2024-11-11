@@ -69,7 +69,7 @@ const getShowLink = (behandlingType: string, arsakKode?: string, fritekst?: stri
     behandlingResultatType.HENLAGT_SOKNAD_TRUKKET,
     behandlingResultatType.HENLAGT_KLAGE_TRUKKET,
     behandlingResultatType.HENLAGT_INNSYN_TRUKKET,
-  ].includes(arsakKode || '');
+  ].includes(arsakKode ?? '');
 };
 
 const henleggArsakerPerBehandlingType = {

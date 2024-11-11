@@ -32,8 +32,7 @@ const kanSendesTilGodkjenning = (behandlingStatusKode: string): boolean =>
   behandlingStatusKode === behandlingStatusCode.BEHANDLING_UTREDES;
 
 const finnKnappetekstkode = (aksjonspunkter: Aksjonspunkt[], skalBrukeManueltBrev: boolean): string =>
-  (aksjonspunkter && aksjonspunkter.some(ap => ap.definisjon === AksjonspunktCode.FORESLA_VEDTAK)) ||
-  skalBrukeManueltBrev
+  aksjonspunkter?.some(ap => ap.definisjon === AksjonspunktCode.FORESLA_VEDTAK) || skalBrukeManueltBrev
     ? 'VedtakForm.TilGodkjenning'
     : 'VedtakForm.FattVedtak';
 
@@ -97,17 +96,17 @@ const VedtakFellesPanel: FunctionComponent<OwnProps> = ({
     throw new Error(`behandlingsresultat finnes ikke på behandling ${uuid}`);
   }
 
-  const [skalBrukeManueltBrev, toggleSkalBrukeManueltBrev] = useState(
+  const [skalBrukeManueltBrev, setSkalBrukeManueltBrev] = useState(
     !!behandlingsresultat.vedtaksbrev && behandlingsresultat.vedtaksbrev === 'FRITEKST',
   );
-  const [skalViseModal, toggleVisModal] = useState(false);
+  const [skalViseModal, setSkalViseModal] = useState(false);
   const onToggleOverstyring = useCallback((e: React.MouseEvent) => {
-    toggleSkalBrukeManueltBrev(true);
+    setSkalBrukeManueltBrev(true);
     e.preventDefault();
   }, []);
   const avsluttRedigering = useCallback(() => {
-    toggleSkalBrukeManueltBrev(false);
-    toggleVisModal(false);
+    setSkalBrukeManueltBrev(false);
+    setSkalViseModal(false);
     setValue('overskrift', undefined);
     setValue('brødtekst', undefined);
   }, []);
@@ -137,7 +136,7 @@ const VedtakFellesPanel: FunctionComponent<OwnProps> = ({
         text={intl.formatMessage({ id: 'VedtakFellesPanel.Forkast' })}
         okButtonText={intl.formatMessage({ id: 'VedtakFellesPanel.Ok' })}
         showModal={skalViseModal}
-        cancel={() => toggleVisModal(false)}
+        cancel={() => setSkalViseModal(false)}
         submit={avsluttRedigering}
       />
       <FlexContainer>
@@ -241,7 +240,7 @@ const VedtakFellesPanel: FunctionComponent<OwnProps> = ({
               </FlexColumn>
               {skalBrukeManueltBrev && (
                 <FlexColumn>
-                  <Button size="small" variant="secondary" onClick={() => toggleVisModal(true)} type="button">
+                  <Button size="small" variant="secondary" onClick={() => setSkalViseModal(true)} type="button">
                     <FormattedMessage id="VedtakFellesPanel.ForkastManueltBrev" />
                   </Button>
                 </FlexColumn>

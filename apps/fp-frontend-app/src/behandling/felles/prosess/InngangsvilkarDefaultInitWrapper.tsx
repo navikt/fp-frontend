@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactElement, useCallback, useState, MouseEvent } from 'react';
-import { useIntl } from 'react-intl';
-import { HGrid, VStack } from '@navikt/ds-react';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { HGrid, HStack, Link, VStack } from '@navikt/ds-react';
 import { VilkarUtfallType } from '@navikt/ft-kodeverk';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { Behandling } from '@navikt/ft-types';
@@ -115,13 +115,10 @@ const InngangsvilkarDefaultInitWrapper: FunctionComponent<OwnProps & ProsessPane
           <AksjonspunktHelpTextHTML>
             {apentFaktaPanelInfo && erIkkeFerdigbehandlet
               ? [
-                  <React.Fragment key="1">
-                    {intl.formatMessage({ id: 'InngangsvilkarProsessStegPanelDef.AvventerAvklaringAv' })}
-                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                    <a href="" onClick={oppdaterUrl}>
-                      {apentFaktaPanelInfo.text}
-                    </a>
-                  </React.Fragment>,
+                  <HStack gap="1" key="1">
+                    <FormattedMessage id="InngangsvilkarProsessStegPanelDef.AvventerAvklaringAv" />
+                    <Link onClick={oppdaterUrl}>{apentFaktaPanelInfo.text}</Link>
+                  </HStack>,
                 ]
               : aksjonspunktTekster.map(tekst => tekst)}
           </AksjonspunktHelpTextHTML>

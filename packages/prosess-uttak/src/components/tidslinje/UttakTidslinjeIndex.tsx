@@ -32,11 +32,7 @@ const finnSøknadsdato = (søknad: Soknad): string => {
 };
 
 const getFodselTerminDato = (søknad: Soknad, gjeldendeFamiliehendelse: FamilieHendelse): string | undefined => {
-  if (
-    gjeldendeFamiliehendelse &&
-    gjeldendeFamiliehendelse.avklartBarn &&
-    gjeldendeFamiliehendelse.avklartBarn.length > 0
-  ) {
+  if (gjeldendeFamiliehendelse?.avklartBarn && gjeldendeFamiliehendelse.avklartBarn.length > 0) {
     return gjeldendeFamiliehendelse.avklartBarn[0].fodselsdato;
   }
   const { fodselsdatoer, termindato, adopsjonFodelsedatoer } = søknad;
@@ -63,7 +59,7 @@ const finnTidslinjeTider = (
   const familiehendelseDate = getFodselTerminDato(søknad, gjeldendeFamiliehendelse);
   const endringsdato = ytelsefordeling.endringsdato ? ytelsefordeling.endringsdato : undefined;
   const endredFodselsDato =
-    gjeldendeFamiliehendelse && gjeldendeFamiliehendelse.avklartBarn && gjeldendeFamiliehendelse.avklartBarn.length > 0
+    gjeldendeFamiliehendelse?.avklartBarn && gjeldendeFamiliehendelse.avklartBarn.length > 0
       ? gjeldendeFamiliehendelse.avklartBarn[0].fodselsdato
       : undefined;
   const fødselsdato =

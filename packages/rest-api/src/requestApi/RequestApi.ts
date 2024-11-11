@@ -69,7 +69,7 @@ class RequestApi {
     this.endpointConfigList = endpointConfigList;
   }
 
-  private doCaching = async (endpointName: string): Promise<any> => {
+  private readonly doCaching = async (endpointName: string): Promise<any> => {
     if (this.cache.hasFetched(endpointName)) {
       return this.cache.getData(endpointName);
     }
@@ -81,7 +81,7 @@ class RequestApi {
     return undefined;
   };
 
-  private findLinks = (rel?: string): Link | undefined =>
+  private readonly findLinks = (rel?: string): Link | undefined =>
     rel
       ? Object.values(this.links)
           .flat()
@@ -129,7 +129,7 @@ class RequestApi {
     };
 
     try {
-      const result = await runner.start<T, P>(params || link?.requestPayload);
+      const result = await runner.start<T, P>(params ?? link?.requestPayload);
       if (useCaching) {
         this.cache.addData(endpointName, result);
       }
@@ -192,7 +192,7 @@ class RequestApi {
       throw new Error(`Mangler konfig for endepunkt ${endpointName}`);
     }
     const link = this.findLinks(endpointConfig.rel);
-    return link?.href || endpointConfig?.path;
+    return link?.href ?? endpointConfig?.path;
   };
 
   public getRestType = (endpointName: string): string => {
@@ -201,7 +201,7 @@ class RequestApi {
       throw new Error(`Mangler konfig for endepunkt ${endpointName}`);
     }
     const link = this.findLinks(endpointConfig.rel);
-    const type = link?.type || endpointConfig?.restMethod;
+    const type = link?.type ?? endpointConfig?.restMethod;
     if (!type) {
       throw new Error(`Mangler type for endepunkt ${endpointName}`);
     }

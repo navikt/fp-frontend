@@ -32,17 +32,17 @@ const MenyHenleggIndex: FunctionComponent<OwnProps> = ({
   gaaTilSokeside,
   lukkModal,
 }) => {
-  const [erHenlagt, setHenlagt] = useState(false);
+  const [erHenlagt, setErHenlagt] = useState(false);
 
   const submit = useCallback(
     (formValues: FormValues) => {
       const henleggBehandlingDto = {
-        årsakKode: formValues.årsakKode || '',
-        begrunnelse: formValues.begrunnelse || '',
+        årsakKode: formValues.årsakKode ?? '',
+        begrunnelse: formValues.begrunnelse ?? '',
         fritekst: formValues.fritekst,
       };
       henleggBehandling(henleggBehandlingDto).then(() => {
-        setHenlagt(true);
+        setErHenlagt(true);
       });
     },
     [valgtBehandling],

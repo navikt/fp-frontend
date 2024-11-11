@@ -72,8 +72,7 @@ const FodselSammenligningRevurderingPanel: FunctionComponent<OwnProps> = ({
 }) => {
   const erTermin =
     (familiehendelseOriginalBehandling && !!familiehendelseOriginalBehandling.termindato) ||
-    !soknadOriginalBehandling ||
-    !soknadOriginalBehandling.fodselsdatoer ||
+    !soknadOriginalBehandling?.fodselsdatoer ||
     Object.keys(soknadOriginalBehandling.fodselsdatoer).length === 0;
 
   const terminOrFodselLabel = erTermin ? 'FodselsammenligningPanel.Termindato' : 'FodselsammenligningPanel.Fodselsdato';
@@ -108,13 +107,13 @@ const FodselSammenligningRevurderingPanel: FunctionComponent<OwnProps> = ({
             <Label size="small">
               <FormattedMessage id={terminOrFodselLabel} />
             </Label>
-            <BodyShort size="small">{terminOrFodselDate || '-'}</BodyShort>
+            <BodyShort size="small">{terminOrFodselDate ?? '-'}</BodyShort>
           </FlexColumn>
           <FlexColumn>
             <Label size="small">
               <FormattedMessage id="FodselsammenligningPanel.AntallBarn" />
             </Label>
-            <BodyShort size="small">{antallBarn || '-'}</BodyShort>
+            <BodyShort size="small">{antallBarn ?? '-'}</BodyShort>
           </FlexColumn>
         </FlexRow>
       </FlexContainer>

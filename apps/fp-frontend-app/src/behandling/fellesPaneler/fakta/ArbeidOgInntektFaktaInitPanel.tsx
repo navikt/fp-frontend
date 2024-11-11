@@ -58,7 +58,7 @@ const ArbeidOgInntektFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInit
   const settBehandlingPåVentOgOppfriskBehandling = useCallback(
     (params: { frist?: string; ventearsak: string }) =>
       settBehandlingPåVent({
-        frist: params.frist || '',
+        frist: params.frist ?? '',
         ventearsak: params.ventearsak,
         behandlingUuid,
         behandlingVersjon: props.behandling.versjon,

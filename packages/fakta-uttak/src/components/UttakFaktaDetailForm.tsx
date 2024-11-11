@@ -133,9 +133,9 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
     defaultValues,
   });
 
-  const [visSletteDialog, settVisSletteDialog] = useState(false);
+  const [visSletteDialog, setVisSletteDialog] = useState(false);
   const slettUttaksperiode = useCallback(() => {
-    settVisSletteDialog(false);
+    setVisSletteDialog(false);
     if (slettPeriode) {
       slettPeriode();
     }
@@ -197,7 +197,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
         <OkAvbrytModal
           text={intl.formatMessage({ id: 'UttakFaktaDetailForm.VilDuSlette' })}
           submit={slettUttaksperiode}
-          cancel={() => settVisSletteDialog(false)}
+          cancel={() => setVisSletteDialog(false)}
           showModal
         />
       )}
@@ -229,7 +229,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
                   variant="tertiary"
                   type="button"
                   icon={<TrashIcon />}
-                  onClick={() => settVisSletteDialog(true)}
+                  onClick={() => setVisSletteDialog(true)}
                 >
                   <FormattedMessage id="UttakFaktaDetailForm.Slett" />
                 </Button>

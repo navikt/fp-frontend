@@ -40,7 +40,7 @@ const findTextCode = (soknad: Soknad, familiehendelse: FamilieHendelse): string 
   if (soknad.soknadType === soknadType.FODSEL) {
     const soknadFodselsdato = soknad.fodselsdatoer ? Object.values(soknad.fodselsdatoer)[0] : undefined;
     const fodselsdato =
-      familiehendelse && familiehendelse.avklartBarn && familiehendelse.avklartBarn.length > 0
+      familiehendelse?.avklartBarn && familiehendelse.avklartBarn.length > 0
         ? familiehendelse.avklartBarn[0].fodselsdato
         : soknadFodselsdato;
     return fodselsdato
@@ -54,13 +54,13 @@ const findDate = (soknad: Soknad, familiehendelse: FamilieHendelse): string | un
   if (soknad.soknadType === soknadType.FODSEL) {
     const soknadFodselsdato = soknad.fodselsdatoer ? Object.values(soknad.fodselsdatoer)[0] : undefined;
     const fodselsdato =
-      familiehendelse && familiehendelse.avklartBarn && familiehendelse.avklartBarn.length > 0
+      familiehendelse?.avklartBarn && familiehendelse.avklartBarn.length > 0
         ? familiehendelse.avklartBarn[0].fodselsdato
         : soknadFodselsdato;
-    const termindato = familiehendelse && familiehendelse.termindato ? familiehendelse.termindato : soknad.termindato;
+    const termindato = familiehendelse?.termindato ? familiehendelse.termindato : soknad.termindato;
     return fodselsdato || termindato;
   }
-  return familiehendelse && familiehendelse.omsorgsovertakelseDato
+  return familiehendelse?.omsorgsovertakelseDato
     ? familiehendelse.omsorgsovertakelseDato
     : soknad.omsorgsovertakelseDato;
 };

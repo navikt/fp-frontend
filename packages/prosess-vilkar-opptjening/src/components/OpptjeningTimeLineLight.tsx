@@ -75,36 +75,36 @@ const OpptjeningTimeLineLight: FunctionComponent<OwnProps> = ({
   );
   const perioder = useMemo(() => lagTidslinjePerioder(sorterteOpptjeningsperioder), [sorterteOpptjeningsperioder]);
 
-  const [valgtPeriod, setValgtPeriode] = useState<Periode>();
+  const [valgtPeriod, setValgtPeriod] = useState<Periode>();
 
   const velgPeriode = (startDato: string | undefined): void => {
     const valg = perioder.find(item => item.opptjeningsperiode?.fom === startDato);
     if (valg) {
-      setValgtPeriode(valg);
+      setValgtPeriod(valg);
     }
   };
 
   const lukkPeriode = useCallback((): void => {
-    setValgtPeriode(undefined);
+    setValgtPeriod(undefined);
   }, []);
 
   const velgNestePeriode = useCallback((): void => {
     if (perioder) {
       const nyIndex = perioder.findIndex(oa => oa.opptjeningsperiode?.fom === valgtPeriod?.opptjeningsperiode?.fom) + 1;
       if (nyIndex < perioder.length) {
-        setValgtPeriode(perioder[nyIndex]);
+        setValgtPeriod(perioder[nyIndex]);
       }
     }
-  }, [perioder, valgtPeriod, setValgtPeriode]);
+  }, [perioder, valgtPeriod, setValgtPeriod]);
 
   const velgForrigePeriode = useCallback((): void => {
     if (perioder) {
       const nyIndex = perioder.findIndex(oa => oa.opptjeningsperiode?.fom === valgtPeriod?.opptjeningsperiode?.fom) - 1;
       if (nyIndex >= 0) {
-        setValgtPeriode(perioder[nyIndex]);
+        setValgtPeriod(perioder[nyIndex]);
       }
     }
-  }, [perioder, valgtPeriod, setValgtPeriode]);
+  }, [perioder, valgtPeriod, setValgtPeriod]);
 
   return (
     <>

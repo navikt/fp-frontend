@@ -32,14 +32,14 @@ const UttakDokumentasjonFaktaForm: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
 
-  const [erBekreftKnappTrykket, settBekreftKnappTrykket] = useState(false);
-  const [dokBehov, oppdaterDokBehov] = useState<DokumentasjonVurderingBehov[]>(
+  const [erBekreftKnappTrykket, setErBekreftKnappTrykket] = useState(false);
+  const [dokBehov, setDokBehov] = useState<DokumentasjonVurderingBehov[]>(
     formData?.dokBehov || dokumentasjonVurderingBehov,
   );
 
   const bekreft = useCallback(
     (begrunnelse: string) => {
-      settBekreftKnappTrykket(true);
+      setErBekreftKnappTrykket(true);
       submitCallback({
         kode: AksjonspunktCode.VURDER_UTTAK_DOKUMENTASJON,
         vurderingBehov: dokBehov,
@@ -70,7 +70,7 @@ const UttakDokumentasjonFaktaForm: FunctionComponent<OwnProps> = ({
     [dokBehov, begrunnelse],
   );
 
-  const [isDirty, setDirty] = useState<boolean>(false);
+  const [isDirty, setIsDirty] = useState<boolean>(false);
 
   return (
     <VStack gap="6">
@@ -82,8 +82,8 @@ const UttakDokumentasjonFaktaForm: FunctionComponent<OwnProps> = ({
       <UttakDokumentasjonFaktaTable
         harAksjonspunkt={aksjonspunkter.length > 0}
         dokumentasjonVurderingBehov={dokBehov}
-        oppdaterDokBehov={oppdaterDokBehov}
-        setDirty={setDirty}
+        oppdaterDokBehov={setDokBehov}
+        setDirty={setIsDirty}
         readOnly={readOnly}
       />
       <Form formMethods={formMethods} onSubmit={(values: { begrunnelse: string }) => bekreft(values.begrunnelse)}>

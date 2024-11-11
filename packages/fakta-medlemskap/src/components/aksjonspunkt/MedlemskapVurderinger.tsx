@@ -32,18 +32,18 @@ export const MedlemskapVurderinger = ({ readOnly, ytelse, avslagsarsaker, erForu
   const vurdering = watch('vurdering');
   const avslagskode = watch('avslagskode');
 
+  const label = erForutgående
+    ? intl.formatMessage({ id: 'VurderMedlemsskapAksjonspunktForm.VurderingLabel.Forutgaaende' })
+    : intl.formatMessage({ id: 'VurderMedlemsskapAksjonspunktForm.VurderingLabel.Ordinaert' });
+
   return (
     <RawIntlProvider value={intl}>
       <VStack gap={readOnly ? '2' : '6'}>
         <RadioGroupPanel
           name="vurdering"
-          label={intl.formatMessage({
-            id: readOnly
-              ? 'VurderMedlemsskapAksjonspunktForm.VurderingLabel.ReadOnly'
-              : erForutgående
-                ? 'VurderMedlemsskapAksjonspunktForm.VurderingLabel.Forutgaaende'
-                : 'VurderMedlemsskapAksjonspunktForm.VurderingLabel.Ordinaert',
-          })}
+          label={
+            readOnly ? intl.formatMessage({ id: 'VurderMedlemsskapAksjonspunktForm.VurderingLabel.ReadOnly' }) : label
+          }
           validate={[required]}
           isReadOnly={readOnly}
           radios={lagVurderingsAlternativer(ytelse, erForutgående, erRevurdering)}

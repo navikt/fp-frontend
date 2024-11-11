@@ -96,74 +96,69 @@ const ManglendeArbeidsforholdForm: FunctionComponent<OwnProps> = ({
 
   const saksbehandlersVurdering = formMethods.watch('saksbehandlersVurdering');
 
-  const avbryt = useCallback(() => {
+  const avbryt = () => {
     lukkArbeidsforholdRad();
     formMethods.reset(defaultValues);
-  }, [defaultValues, lukkArbeidsforholdRad]);
+  };
 
-  const lagre = useCallback(
-    (formValues: FormValues) => {
-      const oppdater = () => {
-        oppdaterTabell(oldData =>
-          oldData.map(data => {
-            if (inntektsmelding.arbeidsgiverIdent === data.arbeidsgiverIdent) {
-              const opprettArbeidsforhold =
-                formValues.saksbehandlersVurdering ===
-                ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING;
-              const avklaringOpprett = opprettArbeidsforhold
-                ? {
-                    arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
-                    fom: formValues.fom,
-                    tom: formValues.tom,
-                    stillingsprosent: formValues.stillingsprosent,
-                    begrunnelse: formValues.begrunnelse,
-                    saksbehandlersVurdering: formValues.saksbehandlersVurdering,
-                  }
-                : undefined;
-              return {
-                ...radData,
-                avklaring: avklaringOpprett || {
+  const lagre = (formValues: FormValues) => {
+    const oppdater = () => {
+      oppdaterTabell(oldData =>
+        oldData.map(data => {
+          if (inntektsmelding.arbeidsgiverIdent === data.arbeidsgiverIdent) {
+            const opprettArbeidsforhold =
+              formValues.saksbehandlersVurdering ===
+              ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING;
+            const avklaringOpprett = opprettArbeidsforhold
+              ? {
+                  arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
+                  fom: formValues.fom,
+                  tom: formValues.tom,
+                  stillingsprosent: formValues.stillingsprosent,
                   begrunnelse: formValues.begrunnelse,
                   saksbehandlersVurdering: formValues.saksbehandlersVurdering,
-                },
-              };
-            }
-            return data;
-          }),
-        );
-      };
+                }
+              : undefined;
+            return {
+              ...radData,
+              avklaring: avklaringOpprett || {
+                begrunnelse: formValues.begrunnelse,
+                saksbehandlersVurdering: formValues.saksbehandlersVurdering,
+              },
+            };
+          }
+          return data;
+        }),
+      );
+    };
 
-      if (
-        formValues.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING
-      ) {
-        return registrerArbeidsforhold({
-          behandlingUuid,
-          behandlingVersjon,
-          internArbeidsforholdRef: inntektsmelding.internArbeidsforholdId,
-          arbeidsgiverNavn,
-          arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
-          vurdering: ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
-          begrunnelse: formValues.begrunnelse!,
-          fom: formValues.fom!,
-          tom: formValues.tom,
-          stillingsprosent: formValues.stillingsprosent!,
-        })
-          .then(oppdater)
-          .finally(() => formMethods.reset(formValues));
-      }
-      return lagreVurdering({
+    if (formValues.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING) {
+      return registrerArbeidsforhold({
         behandlingUuid,
         behandlingVersjon,
-        vurdering: formValues.saksbehandlersVurdering!,
-        begrunnelse: formValues.begrunnelse!,
-        arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
         internArbeidsforholdRef: inntektsmelding.internArbeidsforholdId,
+        arbeidsgiverNavn,
+        arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
+        vurdering: ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
+        begrunnelse: formValues.begrunnelse!,
+        fom: formValues.fom!,
+        tom: formValues.tom,
+        stillingsprosent: formValues.stillingsprosent!,
       })
         .then(oppdater)
         .finally(() => formMethods.reset(formValues));
-    },
-    [inntektsmelding, oppdaterTabell],
-  );
+    }
+    return lagreVurdering({
+      behandlingUuid,
+      behandlingVersjon,
+      vurdering: formValues.saksbehandlersVurdering!,
+      begrunnelse: formValues.begrunnelse!,
+      arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
+      internArbeidsforholdRef: inntektsmelding.internArbeidsforholdId,
+    })
+      .then(oppdater)
+      .finally(() => formMethods.reset(formValues));
+  };
 
   const buttonRef = useRef<SVGSVGElement>(null);
   const [openState, setOpenState] = useState(false);

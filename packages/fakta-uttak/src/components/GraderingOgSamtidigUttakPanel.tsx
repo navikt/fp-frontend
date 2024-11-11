@@ -90,10 +90,10 @@ const GraderingOgSamtidigUttakPanel: FunctionComponent<OwnProps> = ({
   const aRef = valgtPeriode?.arbeidsforhold?.arbeidsgiverReferanse;
   const arbeidsgiverFinnesIkke = aRef && aRef !== 'null' && !arbeidsgiverOpplysningerPerId[aRef];
 
-  const [visGradering, setGradering] = useState(!!valgtPeriode?.arbeidstidsprosent);
-  const [visSamtidigUttaksgradering, setSamtidigUttaksgradering] = useState(!!valgtPeriode?.samtidigUttaksprosent);
-  const toggleGradering = useCallback(() => setGradering(old => !old), []);
-  const toggleSamtidigUttaksprosent = useCallback(() => setSamtidigUttaksgradering(old => !old), []);
+  const [visGradering, setVisGradering] = useState(!!valgtPeriode?.arbeidstidsprosent);
+  const [visSamtidigUttaksgradering, setVisSamtidigUttaksgradering] = useState(!!valgtPeriode?.samtidigUttaksprosent);
+  const toggleGradering = useCallback(() => setVisGradering(old => !old), []);
+  const toggleSamtidigUttaksprosent = useCallback(() => setVisSamtidigUttaksgradering(old => !old), []);
 
   const { unregister } = useFormContext<FormValues>();
 

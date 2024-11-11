@@ -8,6 +8,7 @@ import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 import { AksjonspunktCode, VilkarType } from '@navikt/fp-kodeverk';
 import {
+  BeregningAksjonspunktSubmitType,
   BeregningsgrunnlagProsessIndex,
   ProsessBeregningsgrunnlagAvklaringsbehovCode,
 } from '@navikt/ft-prosess-beregningsgrunnlag';
@@ -34,7 +35,9 @@ const mapBGKodeTilFpsakKode = (bgKode: string): string => {
 };
 
 const lagModifisertCallback =
-  (submitCallback: (params: any, keepData?: boolean) => Promise<any>) => (aksjonspunkterSomSkalLagres: any | any[]) => {
+  (submitCallback: (params: any, keepData?: boolean) => Promise<any>) =>
+  (aksjonspunkterSomSkalLagres: BeregningAksjonspunktSubmitType[]) => {
+    //TODO (TOR) Det ser ut i BeregningsgrunnlagProsessIndex som om aksjonspunkterSomSkalLagres alltid er eit array?
     const apListe = Array.isArray(aksjonspunkterSomSkalLagres)
       ? aksjonspunkterSomSkalLagres
       : [aksjonspunkterSomSkalLagres];

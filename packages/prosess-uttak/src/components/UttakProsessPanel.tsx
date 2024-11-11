@@ -201,8 +201,8 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
   const intl = useIntl();
 
   const [erOverstyrt, setErOverstyrt] = useState(false);
-  const [isDirty, setDirty] = useState(false);
-  const [isSubmitting, setSubmitting] = useState(false);
+  const [isDirty, setIsDirty] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const toggleOverstyring = useCallback(() => {
     setErOverstyrt(forrigeVerdi => !forrigeVerdi);
   }, []);
@@ -233,7 +233,7 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
   }, []);
 
   const bekreftAksjonspunkter = useCallback(() => {
-    setSubmitting(true);
+    setIsSubmitting(true);
     submitCallback(transformValues(perioder, aksjonspunkter));
   }, [perioder, aksjonspunkter]);
 
@@ -242,7 +242,7 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
       const andrePerioder = perioder.filter(p => p.fom !== oppdatertePerioder[0].fom);
       const nyePerioder = [...andrePerioder.concat(oppdatertePerioder)].sort(sortByDate);
       setPerioder(nyePerioder);
-      setDirty(true);
+      setIsDirty(true);
 
       oppdaterStønadskontoer({ behandlingUuid: behandling.uuid, perioder: nyePerioder }).then(
         (oppdatertStønadskonto: UttakStonadskontoer) => {

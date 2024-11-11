@@ -6,9 +6,8 @@ import { AksessRettigheter, ArbeidsgiverOpplysningerPerId, Vilkar as FpVilkar } 
 
 import { Vilkar, Vilkarperiode, Beregningsgrunnlag } from '@navikt/ft-types';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
-import { BeregningFaktaIndex } from '@navikt/ft-fakta-beregning';
 import { AksjonspunktCode, VilkarType } from '@navikt/fp-kodeverk';
-import { FaktaBeregningAvklaringsbehovCode } from '@navikt/ft-fakta-beregning';
+import { BeregningFaktaIndex, FaktaBeregningAvklaringsbehovCode } from '@navikt/ft-fakta-beregning';
 import FaktaPanelInitProps from '../../felles/typer/faktaPanelInitProps';
 import FaktaDefaultInitPanel from '../../felles/fakta/FaktaDefaultInitPanel';
 import { BehandlingApiKeys, requestBehandlingApi } from '../../../data/behandlingContextApi';

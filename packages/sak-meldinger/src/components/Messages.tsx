@@ -64,9 +64,9 @@ const getfiltrerteRevurderingVarslingArsaker = (
   return revurderingVarslingArsaker;
 };
 
-const buildInitalValues = (templates: Template[], isKontrollerRevurderingApOpen?: boolean): FormValues => {
+const buildInitalValues = (templates?: Template[], isKontrollerRevurderingApOpen?: boolean): FormValues => {
   const initialValues = {
-    brevmalkode: templates && templates[0] ? templates[0].kode : undefined,
+    brevmalkode: templates?.[0]?.kode ?? undefined,
     fritekst: '',
   };
 
@@ -90,6 +90,7 @@ const transformValues = (values: FormValues) => {
 interface OwnProps {
   submitCallback: (values: FormValues) => void;
   previewCallback: (brevmalkode?: string, fritekst?: string, arsakskode?: string) => void;
+  // TODO (TOR) Er templates optional eller ikkje?
   templates: Template[];
   sprakKode?: string;
   revurderingVarslingArsak: KodeverkMedNavn[];

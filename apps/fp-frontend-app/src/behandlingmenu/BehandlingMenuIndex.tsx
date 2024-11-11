@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent, useCallback, useMemo, useState } from 'react';
 import { ChevronDownIcon } from '@navikt/aksel-icons';
 import { Button } from '@navikt/ds-react';
 import { Dropdown } from '@navikt/ds-react-internal';
@@ -9,7 +9,6 @@ import { getMenytekst as getNyBehandlingMenytekst } from '@navikt/fp-sak-meny-ny
 import { getMenytekst as getSettPaVentMenytekst } from '@navikt/fp-sak-meny-sett-pa-vent';
 import { Behandling, BehandlingAppKontekst, Fagsak, VergeBehandlingmenyValg } from '@navikt/fp-types';
 import { getEndreEnhetMenytekst, getTaAvVentMenytekst, getVergeMenytekst } from '@navikt/ft-sak-meny';
-import { FunctionComponent, useCallback, useMemo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { FagsakApiKeys, restFagsakApiHooks } from '../data/fagsakContextApi';

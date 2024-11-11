@@ -123,7 +123,6 @@ interface OwnProps {
   submitCallback: (data: SimuleringAksjonspunkt[]) => Promise<void>;
   readOnly: boolean;
   isApOpen: boolean;
-  readOnlySubmitButton: boolean;
   previewCallback: (mottaker: string, fritekst: string) => Promise<any>;
   formData?: FormValues;
   setFormData: (data: FormValues) => void;

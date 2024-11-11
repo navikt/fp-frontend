@@ -28,7 +28,7 @@ const lagHjelpetekstTooltip = (isForeldrepenger: boolean): ReactElement => (
 
 export const transformValues = (values: FormValues): VurderFeilutbetalingAp => {
   const { videreBehandling, varseltekst, begrunnelse } = values;
-  if (videreBehandling && videreBehandling.endsWith(IKKE_SEND)) {
+  if (videreBehandling?.endsWith(IKKE_SEND)) {
     return {
       kode: AksjonspunktCode.VURDER_FEILUTBETALING,
       begrunnelse,

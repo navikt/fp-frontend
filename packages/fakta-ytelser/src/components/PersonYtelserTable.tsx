@@ -33,43 +33,41 @@ const formatDateToDDMMYYYY = (date: string): string => {
 const PersonYtelserTable: FunctionComponent<OwnProps> = ({ ytelser }) => {
   const intl = useIntl();
 
-  const ytelseRows =
-    ytelser &&
-    ytelser
-      .map(ytelse => {
-        const ytelseNavn = ytelse.relatertYtelseNavn;
+  const ytelseRows = ytelser
+    ?.map(ytelse => {
+      const ytelseNavn = ytelse.relatertYtelseNavn;
 
-        const skalViseLenke =
-          ytelse.relatertYtelseNavn === 'Engangsstonad' ||
-          ytelse.relatertYtelseNavn === 'Foreldrepenger' ||
-          ytelse.relatertYtelseNavn === 'Svangerskapspenger';
+      const skalViseLenke =
+        ytelse.relatertYtelseNavn === 'Engangsstonad' ||
+        ytelse.relatertYtelseNavn === 'Foreldrepenger' ||
+        ytelse.relatertYtelseNavn === 'Svangerskapspenger';
 
-        if (ytelse.tilgrensendeYtelserListe.length === 0) {
-          return [
-            {
-              navn: ytelseNavn,
-              periode: intl.formatMessage({ id: 'PersonYtelserTable.Ingen' }),
-              status: '',
-              saksnummer: '',
-              skalViseLenke,
-            },
-          ];
-        }
-
-        return ytelse.tilgrensendeYtelserListe.map((ytelseInfo, innerIndex) => {
-          const tilDato = formatDateToDDMMYYYY(ytelseInfo.periodeTilDato) || '';
-          const fraDato = formatDateToDDMMYYYY(ytelseInfo.periodeFraDato) || '';
-
-          return {
-            navn: innerIndex === 0 ? ytelseNavn : '',
-            periode: `${fraDato} - ${tilDato}`,
-            status: ytelseInfo.statusNavn,
-            saksnummer: ytelseInfo.saksNummer,
+      if (ytelse.tilgrensendeYtelserListe.length === 0) {
+        return [
+          {
+            navn: ytelseNavn,
+            periode: intl.formatMessage({ id: 'PersonYtelserTable.Ingen' }),
+            status: '',
+            saksnummer: '',
             skalViseLenke,
-          };
-        });
-      })
-      .reduce((allRows, rows) => allRows.concat(rows), []);
+          },
+        ];
+      }
+
+      return ytelse.tilgrensendeYtelserListe.map((ytelseInfo, innerIndex) => {
+        const tilDato = formatDateToDDMMYYYY(ytelseInfo.periodeTilDato) || '';
+        const fraDato = formatDateToDDMMYYYY(ytelseInfo.periodeFraDato) || '';
+
+        return {
+          navn: innerIndex === 0 ? ytelseNavn : '',
+          periode: `${fraDato} - ${tilDato}`,
+          status: ytelseInfo.statusNavn,
+          saksnummer: ytelseInfo.saksNummer,
+          skalViseLenke,
+        };
+      });
+    })
+    .reduce((allRows, rows) => allRows.concat(rows), []);
 
   if (!ytelseRows) {
     return null;

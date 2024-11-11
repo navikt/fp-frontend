@@ -69,11 +69,11 @@ const VedtakTilbakekrevingProsessInitPanel: FunctionComponent<OwnProps & Prosess
 }) => {
   const intl = useIntl();
 
-  const [visApenRevurderingModal, toggleApenRevurderingModal] = useState(harApenRevurdering);
-  const lukkApenRevurderingModal = useCallback(() => toggleApenRevurderingModal(false), []);
-  const [visFatterVedtakModal, toggleFatterVedtakModal] = useState(false);
+  const [visApenRevurderingModal, setVisApenRevurderingModal] = useState(harApenRevurdering);
+  const lukkApenRevurderingModal = useCallback(() => setVisApenRevurderingModal(false), []);
+  const [visFatterVedtakModal, setVisFatterVedtakModal] = useState(false);
 
-  const lagringSideEffekter = getLagringSideeffekter(toggleFatterVedtakModal);
+  const lagringSideEffekter = getLagringSideeffekter(setVisFatterVedtakModal);
 
   const { startRequest: forhandsvisVedtaksbrev } = restBehandlingApiHooks.useRestApiRunner(
     BehandlingApiKeys.PREVIEW_VEDTAKSBREV,
@@ -95,7 +95,7 @@ const VedtakTilbakekrevingProsessInitPanel: FunctionComponent<OwnProps & Prosess
       <FatterVedtakStatusModal
         visModal={visFatterVedtakModal}
         lukkModal={() => {
-          toggleFatterVedtakModal(false);
+          setVisFatterVedtakModal(false);
           opneSokeside();
         }}
         tekst={intl.formatMessage({ id: 'FatterTilbakekrevingVedtakStatusModal.Sendt' })}

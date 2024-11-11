@@ -82,7 +82,7 @@ const AndreYtelserPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
               readOnly={readOnly}
             />
             {/* @ts-ignore TODO Er dette korrekt? Burde det vore selectedYtelser[ANDRE_YTELSER_NAME_PREFIX][ay.kode] */}
-            {selectedYtelser && selectedYtelser[ay.kode] && (
+            {selectedYtelser?.[ay.kode] && (
               <>
                 <VerticalSpacer eightPx />
                 <ArrowBox>
@@ -115,7 +115,7 @@ AndreYtelserPanel.transformValues = (values: FormValues, andreYtelser: KodeverkM
   }[];
 
   andreYtelser
-    .filter(ay => ytelseValues && ytelseValues[ay.kode])
+    .filter(ay => ytelseValues?.[ay.kode])
     .forEach(ay => {
       const ytelsePerioderFieldName = `${ay.kode}_${ANDRE_YTELSER_PERIODE_SUFFIX}`;
       const ytelsePerioder = ytelseValues ? ytelseValues[ytelsePerioderFieldName] : undefined;
