@@ -1,5 +1,5 @@
 import React, { ReactNode, useRef, useState } from 'react';
-import { ChatElipsisIcon, FilesIcon } from '@navikt/aksel-icons';
+import { ChatElipsisIcon, CheckmarkIcon, FilesIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, CopyButton, HStack, Label, Popover, Table, Tooltip, VStack } from '@navikt/ds-react';
 import { getKodeverknavnFraKode, KodeverkType } from '@navikt/fp-kodeverk';
 import { Oppgave, OppgaveStatus } from '@navikt/fp-los-felles';
@@ -113,7 +113,11 @@ export const OppgaveRad = ({ oppgave, reserverOppgave, hentReserverteOppgaver }:
         <HStack gap="1" align="center" ref={refCopyButton}>
           <BodyShort>{oppgave.saksnummer}</BodyShort>
           <Tooltip content={intl.formatMessage({ id: 'OppgaverTabell.Saksnr' })}>
-            <CopyButton copyText={oppgave.saksnummer.toString()} icon={<FilesIcon aria-hidden />} />
+            <CopyButton
+              activeIcon={<CheckmarkIcon className={styles.image} aria-hidden />}
+              copyText={oppgave.saksnummer.toString()}
+              icon={<FilesIcon aria-hidden className={styles.image} />}
+            />
           </Tooltip>
         </HStack>
       </Table.DataCell>

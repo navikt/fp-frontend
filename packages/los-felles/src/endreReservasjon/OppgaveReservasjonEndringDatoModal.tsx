@@ -40,6 +40,7 @@ export const OppgaveReservasjonEndringDatoModal = ({
     endreOppgavereservasjon({ oppgaveId, reserverTil }).then(() => {
       endreReserverasjonState();
       hentReserverteOppgaver({}, true);
+      closeModal();
     });
 
   const søkFormMethods = useForm<FormValues>({
