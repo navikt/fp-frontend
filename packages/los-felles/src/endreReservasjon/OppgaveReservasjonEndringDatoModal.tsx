@@ -4,15 +4,13 @@ import { useForm } from 'react-hook-form';
 import dayjs from 'dayjs';
 import { Button, Heading, Modal as NavModal } from '@navikt/ds-react';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import { dateAfterOrEqual, dateBeforeOrEqual, hasValidDate } from '@navikt/ft-form-validators';
+import { dateAfterOrEqualToToday, dateBeforeOrEqual, hasValidDate } from '@navikt/ft-form-validators';
 import { Datepicker, Form } from '@navikt/ft-form-hooks';
 
 import Oppgave from '../typer/oppgaveTsType';
 
-const thirtyDaysFromNow = () => {
-  const result = new Date();
-  result.setDate(new Date().getDate() + 30);
-  return result;
+const thirtyDaysFromNow = (): dayjs.Dayjs => {
+  return dayjs().startOf('day').add(30, 'days');
 };
 
 type FormValues = {
@@ -80,9 +78,9 @@ const OppgaveReservasjonEndringDatoModal: FunctionComponent<OwnProps> = ({
           <Datepicker
             label=""
             name="reserverTil"
-            validate={[hasValidDate, dateAfterOrEqual(new Date()), dateBeforeOrEqual(thirtyDaysFromNow())]}
+            validate={[hasValidDate, dateAfterOrEqualToToday, dateBeforeOrEqual(thirtyDaysFromNow())]}
             fromDate={new Date()}
-            toDate={thirtyDaysFromNow()}
+            toDate={thirtyDaysFromNow().toDate()}
           />
         </NavModal.Body>
         <NavModal.Footer>

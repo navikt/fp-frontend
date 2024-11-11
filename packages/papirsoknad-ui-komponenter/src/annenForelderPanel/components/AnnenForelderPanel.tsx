@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement, ReactNode, useMemo } from 'react';
+import React, { ReactElement, ReactNode, useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Heading } from '@navikt/ds-react';
 import { CheckboxField, InputField, RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
@@ -10,7 +10,7 @@ import {
   hasValidFodselsnummer,
   hasValidFodselsnummerFormat,
   required,
-  sammeFodselsnummerSomSokerMessage,
+  harSammeFodselsnummerSomSoker,
 } from '@navikt/ft-form-validators';
 
 import { useFormContext } from 'react-hook-form';
@@ -28,7 +28,7 @@ const filtrerLandOgLagOptions = (landkoder: KodeverkMedNavn[]): ReactElement[] =
       </option>
     ));
 
-interface OwnProps {
+interface Props {
   readOnly?: boolean;
   permisjonRettigheterPanel?: ReactNode;
   alleKodeverk: AlleKodeverk;
@@ -50,12 +50,12 @@ export type FormValues = {
  *
  * Form som brukes ved registrering av annen forelder.
  */
-const AnnenForelderPanel: FunctionComponent<OwnProps> = ({
+const AnnenForelderPanel = ({
   readOnly = true,
   permisjonRettigheterPanel,
   alleKodeverk,
   fagsakPersonnummer,
-}) => {
+}: Props) => {
   const { formatMessage } = useIntl();
 
   const {
@@ -89,8 +89,7 @@ const AnnenForelderPanel: FunctionComponent<OwnProps> = ({
                 required,
                 hasValidFodselsnummerFormat,
                 hasValidFodselsnummer,
-                (foedselsnummer: string) =>
-                  foedselsnummer === fagsakPersonnummer ? sammeFodselsnummerSomSokerMessage() : null,
+                harSammeFodselsnummerSomSoker(fagsakPersonnummer),
               ]
         }
         disabled={kanIkkeOppgiAnnenForelder}
