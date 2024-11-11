@@ -17,7 +17,6 @@ const SvangerskapVilkarProsessIndex: FunctionComponent<StandardProsessPanelProps
   behandling,
   aksjonspunkter,
   status,
-  vilkar,
   submitCallback,
   isReadOnly,
   readOnlySubmitButton,
@@ -33,7 +32,6 @@ const SvangerskapVilkarProsessIndex: FunctionComponent<StandardProsessPanelProps
       behandlingsresultat={behandling.behandlingsresultat}
       aksjonspunkter={aksjonspunkter}
       status={status}
-      vilkar={vilkar}
       submitCallback={submitCallback}
       readOnly={isReadOnly}
       readOnlySubmitButton={readOnlySubmitButton}

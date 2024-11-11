@@ -26,7 +26,6 @@ interface OwnProps {
 }
 
 const VilkarresultatMedOverstyringProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
-  alleKodeverk,
   behandling,
   medlemskap,
   aksjonspunkter,
@@ -48,7 +47,6 @@ const VilkarresultatMedOverstyringProsessIndex: FunctionComponent<OwnProps & Sta
   <RawIntlProvider value={intl}>
     <VilkarresultatMedOverstyringForm
       ytelseType={fagsak.fagsakYtelseType}
-      alleKodeverk={alleKodeverk}
       behandlingsresultat={behandling.behandlingsresultat}
       medlemskapManuellBehandlingResultat={medlemskap?.manuellBehandlingResultat ?? undefined}
       aksjonspunkter={aksjonspunkter}
