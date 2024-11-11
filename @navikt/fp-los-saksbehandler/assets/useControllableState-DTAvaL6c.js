@@ -1,0 +1,1 @@
+import{r as d}from"./index-uubelm5h.js";import{a as r}from"./nb_NO-3Rkd6eZ_.js";function C({value:n,defaultValue:c,onChange:l}){const s=r(l),[u,f]=d.useState(c),t=n!==void 0,e=t?n:u,i=r(o=>{const a=typeof o=="function"?o(e):o;t||f(a),s(a)},[t,s,e]);return[e,i]}export{C as u};
