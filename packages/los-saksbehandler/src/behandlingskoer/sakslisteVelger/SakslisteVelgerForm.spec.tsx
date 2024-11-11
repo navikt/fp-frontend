@@ -4,7 +4,7 @@ import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
 import * as stories from './SakslisteVelgerForm.stories';
 
-const { Default, MedToSakslister } = composeStories(stories);
+const { Default, MedToSakslister, MedFlereEnnTreSaksbehandlere } = composeStories(stories);
 
 describe('<SakslisteVelgerForm>', () => {
   it('skal vise dropdown med en saksliste', async () => {
@@ -55,5 +55,26 @@ describe('<SakslisteVelgerForm>', () => {
 
     expect(screen.getByText('Andre filter')).toBeInTheDocument();
     expect(screen.getByText('Utbetaling til bruker')).toBeInTheDocument();
+  });
+
+  it('skal i utgangspunktet kun vise tre saksbehandlere og så klikke for å vise alle', async () => {
+    render(<MedFlereEnnTreSaksbehandlere />);
+
+    expect(await screen.findByText('Andre som jobber med denne køen nå')).toBeInTheDocument();
+
+    expect(screen.getByText('Auto Joakim')).toBeInTheDocument();
+    expect(screen.getByText('Bente Frogner')).toBeInTheDocument();
+    expect(screen.getByText('Espen Utvikler')).toBeInTheDocument();
+    expect(screen.getByText('2 andre')).toBeInTheDocument();
+    expect(screen.queryByText('Hans Haugerud')).not.toBeInTheDocument();
+    expect(screen.queryByText('Olav Hellerud')).not.toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Se alle'));
+
+    expect(await screen.findByText('Se færre')).toBeInTheDocument();
+
+    expect(screen.queryByText('2 andre')).not.toBeInTheDocument();
+    expect(screen.getByText('Hans Haugerud')).toBeInTheDocument();
+    expect(screen.getByText('Olav Hellerud')).toBeInTheDocument();
   });
 });

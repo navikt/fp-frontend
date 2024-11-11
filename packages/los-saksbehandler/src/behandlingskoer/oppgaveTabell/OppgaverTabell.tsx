@@ -145,7 +145,10 @@ export const OppgaverTabell = ({ reserverOppgave, antallOppgaver = 0, valgtSaksl
             <FormattedMessage id="OppgaverTabell.DineNesteSaker" />
           </Label>
           <BodyShort size="small" className={styles.grayout}>
-            <FormattedMessage id="OppgaverTabell.DineNesteSakerAntall" values={{ antall: antallOppgaver }} />
+            <FormattedMessage
+              id="OppgaverTabell.DineNesteSakerAntall"
+              values={{ totaltAntall: antallOppgaver, reservertAntall: reserverteOppgaver.length }}
+            />
           </BodyShort>
         </HStack>
         {alleOppgaver.length === 0 && (

@@ -1,6 +1,6 @@
 {
   "OppgaverTabell.DineNesteSaker": "Neste i køen",
-  "OppgaverTabell.DineNesteSakerAntall": "{antall, select, 0 {0 behandlinger} 1 {1 behandling} other {{antall} behandlinger}}",
+  "OppgaverTabell.DineNesteSakerAntall": "{reservertAntall} reservert på deg, {totaltAntall} i køen totalt",
   "OppgaverTabell.IngenOppgaver": "<i>Det er ingen behandlinger i køen</i>",
   "OppgaverTabell.Soker": "Søker",
   "OppgaverTabell.Sak": "Sak",
@@ -120,6 +120,9 @@
   "SakslisteVelgerForm.Sorteringsinfo": "{navn}{br}Gjeldende intervall:{br}{fomDato} - {tomDato}",
   "SakslisteVelgerForm.SorteringsinfoFom": "{navn}{br}Fra og med: {fomDato}",
   "SakslisteVelgerForm.SorteringsinfoTom": "{navn}{br}Til og med: {tomDato}",
+  "SakslisteVelgerForm.VisFlere": "Se alle",
+  "SakslisteVelgerForm.VisFærre": "Se færre",
+  "SakslisteVelgerForm.Andre": "{antallAndre} andre",
 
   "SaksbehandlerNokkeltallPanel.Statistikk": "Statistikk",
   "SaksbehandlerNokkeltallPanel.ForAlle": "For alle saksbehandlere",

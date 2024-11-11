@@ -1,8 +1,8 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { PersonHeadsetIcon } from '@navikt/aksel-icons';
 import { ArrowsUpDownIcon, DocPencilIcon } from '@navikt/aksel-icons';
-import { FunnelIcon } from '@navikt/aksel-icons';
-import { BodyShort, HStack, Label, VStack, Box, Heading } from '@navikt/ds-react';
+import { FunnelIcon, PlusIcon } from '@navikt/aksel-icons';
+import { BodyShort, HStack, Label, VStack, Box, Heading, Button } from '@navikt/ds-react';
 import { Form, SelectField } from '@navikt/ft-form-hooks';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
@@ -171,6 +171,8 @@ export const SakslisteVelgerForm = ({
 }: Props) => {
   const intl = useIntl();
 
+  const [visAlleSaksbehandlere, setVisAlleSaksbehandlere] = useState(false);
+
   const sorterteSakslister = [...sakslister].sort((saksliste1, saksliste2) =>
     saksliste1.navn.localeCompare(saksliste2.navn),
   );
@@ -210,6 +212,8 @@ export const SakslisteVelgerForm = ({
       </VStack>
     );
   }
+
+  const sorterteSaksbehandlere = saksbehandlere?.toSorted((s1, s2) => s1.navn.localeCompare(s2.navn));
 
   return (
     <Form formMethods={formMethods} className={styles.container}>
@@ -301,14 +305,53 @@ export const SakslisteVelgerForm = ({
             <FormattedMessage id="SakslisteVelgerForm.AndreSomJobber" />
           </Label>
           <HStack gap="2">
-            {saksbehandlere?.map(s => (
-              <Box background="surface-neutral-subtle" padding="2" borderRadius="full" key={s.brukerIdent.brukerIdent}>
-                <HStack gap="2">
-                  <PersonHeadsetIcon />
-                  <BodyShort>{s.navn}</BodyShort>
-                </HStack>
-              </Box>
-            ))}
+            {sorterteSaksbehandlere
+              ?.slice(
+                0,
+                sorterteSaksbehandlere.length > 3 && !visAlleSaksbehandlere ? 3 : sorterteSaksbehandlere.length,
+              )
+              .map(s => (
+                <Box
+                  background="surface-neutral-subtle"
+                  padding="2"
+                  borderRadius="full"
+                  key={s.brukerIdent.brukerIdent}
+                >
+                  <HStack gap="2" align="center">
+                    <PersonHeadsetIcon />
+                    <BodyShort>{s.navn}</BodyShort>
+                  </HStack>
+                </Box>
+              ))}
+            {sorterteSaksbehandlere && sorterteSaksbehandlere.length > 3 && (
+              <HStack gap="2">
+                {!visAlleSaksbehandlere && (
+                  <Box background="surface-neutral-subtle" padding="2" borderRadius="full">
+                    <HStack gap="2" align="center">
+                      <PlusIcon />
+                      <BodyShort>
+                        <FormattedMessage
+                          id="SakslisteVelgerForm.Andre"
+                          values={{ antallAndre: sorterteSaksbehandlere.length - 3 }}
+                        />
+                      </BodyShort>
+                    </HStack>
+                  </Box>
+                )}
+                <Button
+                  variant="tertiary"
+                  size="xsmall"
+                  type="button"
+                  onClick={() => setVisAlleSaksbehandlere(!visAlleSaksbehandlere)}
+                >
+                  {visAlleSaksbehandlere ? (
+                    <FormattedMessage id="SakslisteVelgerForm.VisFærre" />
+                  ) : (
+                    <FormattedMessage id="SakslisteVelgerForm.VisFlere" />
+                  )}
+                </Button>
+              </HStack>
+            )}
           </HStack>
         </VStack>
       </VStack>

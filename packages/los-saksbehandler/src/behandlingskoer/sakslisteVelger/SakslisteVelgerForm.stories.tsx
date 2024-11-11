@@ -179,3 +179,70 @@ export const MedIngenSakslister: Story = {
     sakslister: [],
   },
 };
+
+export const MedFlereEnnTreSaksbehandlere: Story = {
+  args: {
+    setValgtSakslisteId: action('button-click'),
+    fetchAntallOppgaver: action('button-click'),
+    getValueFromLocalStorage: () => '',
+    setValueInLocalStorage: action('button-click'),
+    removeValueFromLocalStorage: action('button-click'),
+    saksbehandlere: [
+      {
+        brukerIdent: {
+          brukerIdent: '32434',
+          verdi: '32434',
+        },
+        navn: 'Espen Utvikler',
+      },
+      {
+        brukerIdent: {
+          brukerIdent: '31111',
+          verdi: '32111',
+        },
+        navn: 'Auto Joakim',
+      },
+      {
+        brukerIdent: {
+          brukerIdent: '3111123',
+          verdi: '3211123',
+        },
+        navn: 'Hans Haugerud',
+      },
+      {
+        brukerIdent: {
+          brukerIdent: '232323',
+          verdi: '23343',
+        },
+        navn: 'Olav Hellerud',
+      },
+      {
+        brukerIdent: {
+          brukerIdent: '311112',
+          verdi: '321112',
+        },
+        navn: 'Bente Frogner',
+      },
+    ],
+    sakslister: [
+      {
+        sakslisteId: 1,
+        navn: 'Saksliste 1',
+        behandlingTyper: [BehandlingType.FORSTEGANGSSOKNAD, BehandlingType.REVURDERING],
+        fagsakYtelseTyper: [FagsakYtelseType.FORELDREPENGER],
+        andreKriterier: [
+          {
+            andreKriterierType: AndreKriterierType.TIL_BESLUTTER,
+            inkluder: true,
+          },
+        ],
+        sortering: {
+          sorteringType: KoSortering.BEHANDLINGSFRIST,
+          fra: 2,
+          til: 4,
+          erDynamiskPeriode: true,
+        },
+      },
+    ],
+  },
+};
