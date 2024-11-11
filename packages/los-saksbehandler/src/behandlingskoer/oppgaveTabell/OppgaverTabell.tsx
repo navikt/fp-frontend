@@ -1,22 +1,14 @@
-import { ChatElipsisIcon } from '@navikt/aksel-icons';
-import { BodyShort, HStack, Button, Label, Popover, SortState, Table, VStack, Pagination } from '@navikt/ds-react';
-import { getKodeverknavnFraKode, KodeverkType } from '@navikt/fp-kodeverk';
-import { Oppgave, OppgaveStatus } from '@navikt/fp-los-felles';
+import React from 'react';
+import { BodyShort, HStack, Label, Pagination, SortState, Table, VStack } from '@navikt/ds-react';
+import { Oppgave } from '@navikt/fp-los-felles';
 import { TimeoutError } from '@navikt/fp-rest-api';
-import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
-import { getDateAndTime } from '@navikt/ft-utils';
-import React, { useEffect, useRef, useState, ReactNode } from 'react';
+import { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import {
-  requestApi,
-  RestApiGlobalStatePathsKeys,
-  restApiHooks,
-  RestApiPathsKeys,
-} from '../../data/fplosSaksbehandlerRestApi';
+import { requestApi, restApiHooks, RestApiPathsKeys } from '../../data/fplosSaksbehandlerRestApi';
 import { BehandlingPollingTimoutModal } from '../timeoutModal/BehandlingPollingTimoutModal';
 
-import { OppgaveHandlingerMenu } from './menu/OppgaveHandlingerMenu';
+import { OppgaveMedReservertIndikator, OppgaveRad } from './OppgaveRad';
 import styles from './oppgaverTabell.module.css';
 
 const EMPTY_ARRAY: Oppgave[] = [];
@@ -28,62 +20,6 @@ type TableHeaders =
   | 'opprettetTidspunkt'
   | 'behandlingsfrist'
   | 'reservertTilTidspunkt';
-
-type OppgaveMedReservertIndikator = Oppgave & { underBehandling: boolean; reservertTilTidspunkt: string | undefined };
-
-const createFlyttetReservasjonPopover = (oppgaveStatus: OppgaveStatus): ReactNode | undefined => {
-  const { flyttetReservasjon } = oppgaveStatus;
-  if (!flyttetReservasjon) {
-    return undefined;
-  }
-  const datoOgTid = getDateAndTime(flyttetReservasjon.tidspunkt);
-
-  return (
-    <VStack gap="2">
-      <VStack gap="1">
-        <Label size="small">
-          <FormattedMessage id="OppgaverTabell.OverfortReservasjonHeader" />
-        </Label>
-        <BodyShort size="small">
-          <FormattedMessage
-            id="OppgaverTabell.OverfortReservasjonBody"
-            values={{
-              dato: datoOgTid?.date,
-              tid: datoOgTid?.time,
-              uid: flyttetReservasjon.uid,
-              navn: flyttetReservasjon.navn,
-            }}
-          />
-        </BodyShort>
-      </VStack>
-      <VStack gap="1">
-        <Label size="small">
-          <FormattedMessage id="OppgaverTabell.OverfortReservasjonBegrunnelse" />
-        </Label>
-        <BodyShort size="small">{flyttetReservasjon.begrunnelse}</BodyShort>
-      </VStack>
-    </VStack>
-  );
-};
-
-const NotatKnapp = ({ oppgave }: { oppgave: Oppgave }) => {
-  const buttonRef = useRef<HTMLButtonElement>(null);
-  const [openState, setOpenState] = useState(false);
-  return (
-    <>
-      <Button
-        ref={buttonRef}
-        onClick={() => setOpenState(!openState)}
-        aria-expanded={openState}
-        icon={<ChatElipsisIcon className={styles.image} aria-hidden />}
-        variant="tertiary-neutral"
-      ></Button>
-      <Popover open={openState} onClose={() => setOpenState(false)} anchorEl={buttonRef.current}>
-        <Popover.Content>{createFlyttetReservasjonPopover(oppgave.status)}</Popover.Content>
-      </Popover>
-    </>
-  );
-};
 
 const comparator = (a: OppgaveMedReservertIndikator, b: OppgaveMedReservertIndikator, orderBy: TableHeaders) => {
   if (
@@ -136,10 +72,6 @@ interface Props {
 }
 
 export const OppgaverTabell = ({ reserverOppgave, antallOppgaver = 0, valgtSakslisteId, doPolling = true }: Props) => {
-  const alleKodeverk = restApiHooks.useGlobalStateRestApiData(RestApiGlobalStatePathsKeys.KODEVERK_LOS);
-
-  const [enableTableEvents, setEnableTableEvents] = useState(true);
-
   const [sidetall, setSidetall] = useState(1);
   const raderPerSide = 10;
 
@@ -174,31 +106,6 @@ export const OppgaverTabell = ({ reserverOppgave, antallOppgaver = 0, valgtSaksl
     },
     [],
   );
-
-  const ref = useRef<Record<number, HTMLDivElement | null>>({});
-  const refPopover = useRef<Record<number, HTMLDivElement | null>>({});
-
-  const goToFagsak = (oppgave: Oppgave) => {
-    if (
-      ref.current &&
-      // @ts-ignore Fiks
-      Object.keys(ref.current).some(key => ref.current[key] && ref.current[key].contains(event.target))
-    ) {
-      return;
-    }
-    if (
-      refPopover.current &&
-      Object.keys(refPopover.current).some(
-        // @ts-ignore Fiks
-        key => refPopover.current[key] && refPopover.current[key].contains(event.target),
-      )
-    ) {
-      return;
-    }
-    if (oppgave) {
-      reserverOppgave(oppgave);
-    }
-  };
 
   const alleOppgaver = slaSammenOgMarkerReserverte(reserverteOppgaver, oppgaverTilBehandling);
 
@@ -278,55 +185,12 @@ export const OppgaverTabell = ({ reserverOppgave, antallOppgaver = 0, valgtSaksl
             </Table.Header>
             <Table.Body>
               {oppgaverSomSkalVisesITabell.map(oppgave => (
-                <Table.Row
+                <OppgaveRad
                   key={oppgave.id}
-                  onMouseDown={enableTableEvents ? () => goToFagsak(oppgave) : undefined}
-                  onKeyDown={enableTableEvents ? () => goToFagsak(oppgave) : undefined}
-                  className={oppgave.underBehandling ? styles.isUnderBehandling : undefined}
-                >
-                  <Table.DataCell>{oppgave.navn ? `${oppgave.navn} ${oppgave.personnummer}` : '<navn>'}</Table.DataCell>
-                  <Table.DataCell>{oppgave.saksnummer}</Table.DataCell>
-                  <Table.DataCell>
-                    {getKodeverknavnFraKode(alleKodeverk, KodeverkType.BEHANDLING_TYPE, oppgave.behandlingstype)}
-                  </Table.DataCell>
-                  <Table.DataCell>
-                    {oppgave.opprettetTidspunkt && <DateLabel dateString={oppgave.opprettetTidspunkt} />}
-                  </Table.DataCell>
-                  <Table.DataCell>
-                    {oppgave.behandlingsfrist && <DateLabel dateString={oppgave.behandlingsfrist} />}
-                  </Table.DataCell>
-                  <Table.DataCell>
-                    {oppgave.reservertTilTidspunkt && (
-                      <DateTimeLabel dateTimeString={oppgave.reservertTilTidspunkt} separator="kl" />
-                    )}
-                  </Table.DataCell>
-                  <Table.DataCell>
-                    {oppgave.status.flyttetReservasjon && (
-                      <div
-                        ref={el => {
-                          refPopover.current = { ...refPopover.current, [oppgave.id]: el };
-                        }}
-                      >
-                        <NotatKnapp oppgave={oppgave} />
-                      </div>
-                    )}
-                  </Table.DataCell>
-                  <Table.DataCell>
-                    {oppgave.underBehandling && (
-                      <div
-                        ref={el => {
-                          ref.current = { ...ref.current, [oppgave.id]: el };
-                        }}
-                      >
-                        <OppgaveHandlingerMenu
-                          oppgave={oppgave}
-                          hentReserverteOppgaver={hentReserverteOppgaver}
-                          setEnableTableEvents={setEnableTableEvents}
-                        />
-                      </div>
-                    )}
-                  </Table.DataCell>
-                </Table.Row>
+                  oppgave={oppgave}
+                  hentReserverteOppgaver={hentReserverteOppgaver}
+                  reserverOppgave={reserverOppgave}
+                />
               ))}
             </Table.Body>
           </Table>

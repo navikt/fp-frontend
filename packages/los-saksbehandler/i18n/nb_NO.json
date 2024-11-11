@@ -13,6 +13,7 @@
   "OppgaverTabell.OverfortReservasjonBody": "{dato} - {tid} fra {uid} {navn}",
   "OppgaverTabell.OverfortReservasjonBegrunnelse": "Begrunnelse",
   "OppgaverTabell.ReservertTilTidspunkt": "Reservert til",
+  "OppgaverTabell.Saksnr": "Kopier saksnummer",
 
   "Person.Age": "{age} år",
   "Person.ImageText": "Personinformasjon",
