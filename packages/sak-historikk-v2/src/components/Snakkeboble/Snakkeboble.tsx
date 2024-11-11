@@ -36,6 +36,7 @@ export const Snakkeboble = ({
       name={visNavn(rolleNavn, aktør)}
       timestamp={formatDate(opprettetTidspunkt)}
       position={utledPlassering(aktør.type)}
+      toptextPosition="left"
       className={getStyle(aktør.type, kjønn)}
     >
       <Chat.Bubble>
