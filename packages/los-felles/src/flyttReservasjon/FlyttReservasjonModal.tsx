@@ -117,9 +117,7 @@ export const FlyttReservasjonModal = ({
               </Button>
             </HStack>
             {hentSaksbehandlerState === RestApiState.SUCCESS && (
-              <>
-                <BodyShort size="small">{formatText(hentSaksbehandlerState, intl, saksbehandler)}</BodyShort>
-              </>
+              <BodyShort size="small">{formatText(hentSaksbehandlerState, intl, saksbehandler)}</BodyShort>
             )}
           </Form>
           <Form

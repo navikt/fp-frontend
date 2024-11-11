@@ -140,7 +140,7 @@ const getSorteringsnavnForDynamiskPeriode = (
 };
 
 const getSorteringsnavn = (intl: IntlShape, alleKodeverk: AlleKodeverk, saksliste?: Saksliste): string => {
-  if (!saksliste || !saksliste.sortering) {
+  if (!saksliste?.sortering) {
     return '';
   }
 

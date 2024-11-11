@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { ComponentProps } from 'react';
 import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/ft-kodeverk';
 import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
-import { ComponentProps } from 'react';
 
 import { Oppgave } from '@navikt/fp-los-felles';
 import { alleKodeverkLos, getIntlDecorator } from '@navikt/fp-storybook-utils';

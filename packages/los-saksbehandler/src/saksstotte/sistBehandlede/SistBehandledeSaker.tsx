@@ -1,8 +1,7 @@
 import React from 'react';
-import { ChevronRightCircleFillIcon } from '@navikt/aksel-icons';
+import { ClockDashedIcon, ChevronRightCircleFillIcon } from '@navikt/aksel-icons';
 import { FormattedMessage } from 'react-intl';
 import { BodyShort, Heading, VStack, HStack, Table } from '@navikt/ds-react';
-import { ClockDashedIcon } from '@navikt/aksel-icons';
 import { Oppgave } from '@navikt/fp-los-felles';
 
 import { RestApiPathsKeys, restApiHooks } from '../../data/fplosSaksbehandlerRestApi';
@@ -36,10 +35,7 @@ export const SistBehandledeSaker = ({ åpneFagsak }: Props) => {
       {sistBehandledeSaker.length === 0 && (
         <div className={styles.ingenBehandlinger}>
           <BodyShort size="medium">
-            <FormattedMessage
-              id="SistBehandledeSaker.IngenBehandlinger"
-              values={{ i: (chunks: any) => <i>{chunks}</i> }}
-            />
+            <FormattedMessage id="SistBehandledeSaker.IngenBehandlinger" values={{ i: chunks => <i>{chunks}</i> }} />
           </BodyShort>
         </div>
       )}

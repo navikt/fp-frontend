@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FlyttReservasjonModal, Oppgave, OppgaveReservasjonEndringDatoModal } from '@navikt/fp-los-felles';
-import { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { restApiHooks, RestApiPathsKeys } from '../../../data/fplosSaksbehandlerRestApi';
@@ -26,10 +25,10 @@ interface Props {
 export const OppgaveHandlingerMenu = ({ oppgave, hentReserverteOppgaver, setEnableTableEvents }: Props) => {
   const intl = useIntl();
 
-  const [showOpphevReservasjonModal, setOpphevReservasjonModal] = useState(false);
-  const [showForlengetReservasjonModal, setForlengetReservasjonModal] = useState(false);
-  const [showReservasjonEndringDatoModal, setReservasjonEndringDatoModal] = useState(false);
-  const [showFlyttReservasjonModal, setFlyttReservasjonModal] = useState(false);
+  const [visOpphevReservasjonModal, setVisOpphevReservasjonModal] = useState(false);
+  const [visForlengetReservasjonModal, setVisForlengetReservasjonModal] = useState(false);
+  const [visReservasjonEndringDatoModal, setVisReservasjonEndringDatoModal] = useState(false);
+  const [visFlyttReservasjonModal, setVisFlyttReservasjonModal] = useState(false);
 
   const { startRequest: endreOppgavereservasjon } = restApiHooks.useRestApiRunner(
     RestApiPathsKeys.ENDRE_OPPGAVERESERVASJON,
@@ -50,7 +49,7 @@ export const OppgaveHandlingerMenu = ({ oppgave, hentReserverteOppgaver, setEnab
 
   const forlengReserverasjon = () => {
     forlengOppgavereservasjon({ oppgaveId: oppgave.id }).then(() => {
-      setForlengetReservasjonModal(true);
+      setVisForlengetReservasjonModal(true);
       hentReserverteOppgaver(undefined, true);
     });
   };
@@ -72,46 +71,52 @@ export const OppgaveHandlingerMenu = ({ oppgave, hentReserverteOppgaver, setEnab
         </ActionMenu.Trigger>
         <ActionMenu.Content>
           <ActionMenu.Group aria-label={intl.formatMessage({ id: 'OppgaveHandlingerMenu.Meny' })}>
-            <ActionMenu.Item onSelect={() => setOpphevReservasjonModal(true)} icon={<ArrowUndoIcon aria-hidden />}>
+            <ActionMenu.Item onSelect={() => setVisOpphevReservasjonModal(true)} icon={<ArrowUndoIcon aria-hidden />}>
               <FormattedMessage id="OppgaveHandlingerMenu.LeggTilbake" values={{ br: <br /> }} />
             </ActionMenu.Item>
             <ActionMenu.Item onSelect={forlengReserverasjon} icon={<HourglassTopFilledIcon aria-hidden />}>
               <FormattedMessage id="OppgaveHandlingerMenu.ForlengReservasjon" values={{ br: <br /> }} />
             </ActionMenu.Item>
-            <ActionMenu.Item onSelect={() => setReservasjonEndringDatoModal(true)} icon={<CalendarIcon aria-hidden />}>
+            <ActionMenu.Item
+              onSelect={() => setVisReservasjonEndringDatoModal(true)}
+              icon={<CalendarIcon aria-hidden />}
+            >
               <FormattedMessage id="OppgaveHandlingerMenu.EndreReservasjon" />
             </ActionMenu.Item>
-            <ActionMenu.Item onSelect={() => setFlyttReservasjonModal(true)} icon={<PersonHeadsetIcon aria-hidden />}>
+            <ActionMenu.Item
+              onSelect={() => setVisFlyttReservasjonModal(true)}
+              icon={<PersonHeadsetIcon aria-hidden />}
+            >
               <FormattedMessage id="OppgaveHandlingerMenu.FlyttReservasjon" values={{ br: <br /> }} />
             </ActionMenu.Item>
           </ActionMenu.Group>
         </ActionMenu.Content>
       </ActionMenu>
-      {showOpphevReservasjonModal && (
+      {visOpphevReservasjonModal && (
         <OpphevReservasjonModal
           oppgave={oppgave}
-          closeModal={() => setOpphevReservasjonModal(false)}
+          closeModal={() => setVisOpphevReservasjonModal(false)}
           hentReserverteOppgaver={hentReserverteOppgaver}
         />
       )}
-      {showReservasjonEndringDatoModal && (
+      {visReservasjonEndringDatoModal && (
         <OppgaveReservasjonEndringDatoModal
-          closeModal={() => setReservasjonEndringDatoModal(false)}
+          closeModal={() => setVisReservasjonEndringDatoModal(false)}
           reserverTilDefault={oppgave.status.reservertTilTidspunkt}
           oppgaveId={oppgave.id}
           hentReserverteOppgaver={hentReserverteOppgaver}
-          endreReserverasjonState={() => setForlengetReservasjonModal(true)}
+          endreReserverasjonState={() => setVisForlengetReservasjonModal(true)}
           endreOppgavereservasjon={endreOppgavereservasjon}
         />
       )}
-      {showForlengetReservasjonModal && (
-        <OppgaveReservasjonForlengetModal oppgave={oppgave} closeModal={() => setForlengetReservasjonModal(false)} />
+      {visForlengetReservasjonModal && (
+        <OppgaveReservasjonForlengetModal oppgave={oppgave} closeModal={() => setVisForlengetReservasjonModal(false)} />
       )}
-      {showFlyttReservasjonModal && (
+      {visFlyttReservasjonModal && (
         <FlyttReservasjonModal
           oppgaveId={oppgave.id}
           flyttetBegrunnelse={oppgave.status.flyttetReservasjon?.begrunnelse}
-          closeModal={() => setFlyttReservasjonModal(false)}
+          closeModal={() => setVisFlyttReservasjonModal(false)}
           hentReserverteOppgaver={hentReserverteOppgaver}
           flyttOppgavereservasjon={flyttOppgavereservasjon}
           hentSaksbehandler={hentSaksbehandler}

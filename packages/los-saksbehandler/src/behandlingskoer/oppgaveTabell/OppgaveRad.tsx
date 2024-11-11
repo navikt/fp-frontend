@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { ReactNode, useRef, useState } from 'react';
 import { ChatElipsisIcon, FilesIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, CopyButton, HStack, Label, Popover, Table, Tooltip, VStack } from '@navikt/ds-react';
 import { getKodeverknavnFraKode, KodeverkType } from '@navikt/fp-kodeverk';
 import { Oppgave, OppgaveStatus } from '@navikt/fp-los-felles';
 import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
 import { getDateAndTime } from '@navikt/ft-utils';
-import { ReactNode, useRef, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { RestApiGlobalStatePathsKeys, restApiHooks } from '../../data/fplosSaksbehandlerRestApi';
@@ -89,9 +88,9 @@ export const OppgaveRad = ({ oppgave, reserverOppgave, hentReserverteOppgaver }:
   const refCopyButton = useRef<HTMLDivElement | null>(null);
 
   const goToFagsak = (event: React.MouseEvent | React.KeyboardEvent, valgtOppgave: Oppgave) => {
-    const erMenyKlikk = refMeny.current && refMeny.current.contains(event.target as Node);
-    const erPopoverKlikk = refPopover.current && refPopover.current.contains(event.target as Node);
-    const erCopyButtonKlikk = refCopyButton.current && refCopyButton.current.contains(event.target as Node);
+    const erMenyKlikk = refMeny.current?.contains(event.target as Node);
+    const erPopoverKlikk = refPopover.current?.contains(event.target as Node);
+    const erCopyButtonKlikk = refCopyButton.current?.contains(event.target as Node);
 
     if (erMenyKlikk || erPopoverKlikk || erCopyButtonKlikk) {
       return;
