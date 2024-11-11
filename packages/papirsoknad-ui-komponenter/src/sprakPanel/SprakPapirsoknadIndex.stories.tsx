@@ -6,7 +6,7 @@ import { Button } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import SprakPapirsoknadIndex from './SprakPapirsoknadIndex';
+import { SprakPapirsoknadIndex } from './SprakPapirsoknadIndex';
 
 export default {
   title: 'papirsoknad/ui-komponenter/sprak',

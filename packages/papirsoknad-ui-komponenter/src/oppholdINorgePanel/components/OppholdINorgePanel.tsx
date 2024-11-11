@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { ArrowBox, BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -7,7 +7,7 @@ import { Heading } from '@navikt/ds-react';
 import { required } from '@navikt/ft-form-validators';
 import { AlleKodeverk } from '@navikt/fp-types';
 import { useFormContext } from 'react-hook-form';
-import UtenlandsOppholdField, { FormValues as FormValuesFieldArray } from './UtenlandsOppholdField';
+import { UtenlandsOppholdField, FormValues as FormValuesFieldArray } from './UtenlandsOppholdField';
 
 export type FormValues = {
   oppholdINorge?: boolean;
@@ -17,16 +17,11 @@ export type FormValues = {
   fremtidigeOppholdUtenlands?: FormValuesFieldArray[];
 };
 
-interface OwnProps {
+interface Props {
   erAdopsjon: boolean;
   readOnly: boolean;
   alleKodeverk: AlleKodeverk;
   mottattDato?: string;
-}
-
-interface StaticFunctions {
-  buildInitialValues: () => FormValues;
-  transformValues: (formValues: FormValues) => FormValues;
 }
 
 /**
@@ -36,12 +31,7 @@ interface StaticFunctions {
  * Inneholder delen av skjemaet som omhandler informasjon om utenlandsopphold.
  * Komponenten har inputfelter og må derfor rendres som etterkommer av form-komponent.
  */
-const OppholdINorgePanel: FunctionComponent<OwnProps> & StaticFunctions = ({
-  readOnly = true,
-  alleKodeverk,
-  mottattDato,
-  erAdopsjon,
-}) => {
+export const OppholdINorgePanel = ({ readOnly = true, alleKodeverk, mottattDato, erAdopsjon }: Props) => {
   const { formatMessage } = useIntl();
   const sortedCountriesByName = useMemo(
     () => alleKodeverk[KodeverkType.LANDKODER].slice().sort((a, b) => a.navn.localeCompare(b.navn)),
@@ -133,12 +123,7 @@ const OppholdINorgePanel: FunctionComponent<OwnProps> & StaticFunctions = ({
         <>
           <VerticalSpacer eightPx />
           <ArrowBox alignOffset={64}>
-            <UtenlandsOppholdField
-              erTidligereOpphold={false}
-              mottattDato={mottattDato}
-              countryCodes={sortedCountriesByName}
-              readOnly={readOnly}
-            />
+            <UtenlandsOppholdField mottattDato={mottattDato} countryCodes={sortedCountriesByName} readOnly={readOnly} />
           </ArrowBox>
         </>
       ) : null}
@@ -158,5 +143,3 @@ OppholdINorgePanel.transformValues = (formValues: FormValues): FormValues => ({
     : undefined,
   tidligereOppholdUtenlands: formValues.harTidligereOppholdUtenlands ? formValues.tidligereOppholdUtenlands : undefined,
 });
-
-export default OppholdINorgePanel;

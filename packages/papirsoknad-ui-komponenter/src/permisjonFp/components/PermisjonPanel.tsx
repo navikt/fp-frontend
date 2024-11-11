@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { UseFormGetValues, useFormContext } from 'react-hook-form';
 import { Label, Heading, ErrorMessage } from '@navikt/ds-react';
@@ -8,17 +8,19 @@ import { CheckboxField } from '@navikt/ft-form-hooks';
 import { AlleKodeverk } from '@navikt/fp-types';
 import { foreldreType as ForeldreType } from '@navikt/fp-kodeverk';
 
-import PermisjonUtsettelsePanel, { FormValues as FormValuesUtsettelse } from './PermisjonUtsettelsePanel';
-import PermisjonGraderingPanel, { FormValues as FormValuesGradering } from './PermisjonGraderingPanel';
+import { PermisjonUtsettelsePanel, FormValues as FormValuesUtsettelse } from './PermisjonUtsettelsePanel';
+import { PermisjonGraderingPanel, FormValues as FormValuesGradering } from './PermisjonGraderingPanel';
 import { GRADERING_PERIODE_FIELD_ARRAY_NAME } from './RenderGraderingPeriodeFieldArray';
-import PermisjonOverforingAvKvoterPanel, {
+import {
+  PermisjonOverforingAvKvoterPanel,
   FormValues as FormValuesOverforing,
 } from './PermisjonOverforingAvKvoterPanel';
-import RenderPermisjonPeriodeFieldArray, {
+import {
+  RenderPermisjonPeriodeFieldArray,
   PERMISJON_PERIODE_FIELD_ARRAY_NAME,
   FormValues as FormValuesPermisjon,
 } from './RenderPermisjonPeriodeFieldArray';
-import PermisjonOppholdPanel, { FormValues as FormValuesOpphold } from './PermisjonOppholdPanel';
+import { PermisjonOppholdPanel, FormValues as FormValuesOpphold } from './PermisjonOppholdPanel';
 import { UTSETTELSE_PERIODE_FIELD_ARRAY_NAME } from './RenderUtsettelsePeriodeFieldArray';
 import { OVERFORING_PERIODE_FIELD_ARRAY_NAME } from './RenderOverforingAvKvoterFieldArray';
 import { OPPHOLD_PERIODE_FIELD_ARRAY_NAME } from './RenderOppholdPeriodeFieldArray';
@@ -52,16 +54,11 @@ const getIsRequired = (getValues: UseFormGetValues<FormValues>) => {
   return !fulltUttak && !skalGradere && !skalUtsette && !skalOvertaKvote;
 };
 
-interface OwnProps {
+interface Props {
   foreldreType: string;
   readOnly: boolean;
   alleKodeverk: AlleKodeverk;
   erEndringssøknad: boolean;
-}
-
-interface StaticFunctions {
-  buildInitialValues: () => any;
-  transformValues: (values: FormValues) => any;
 }
 
 /**
@@ -69,12 +66,7 @@ interface StaticFunctions {
  *
  * Viser permisjonspanel for mor eller far/medmor
  */
-const PermisjonPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
-  foreldreType,
-  readOnly,
-  alleKodeverk,
-  erEndringssøknad,
-}) => {
+export const PermisjonPanel = ({ foreldreType, readOnly, alleKodeverk, erEndringssøknad }: Props) => {
   const intl = useIntl();
 
   const { watch, setError, clearErrors, getValues, formState } = useFormContext<FormValues>();
@@ -171,7 +163,7 @@ PermisjonPanel.transformValues = (values: FormValues) => {
   return newValues;
 };
 
-PermisjonPanel.buildInitialValues = () => ({
+PermisjonPanel.buildInitialValues = (): any => ({
   [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: {
     ...PermisjonUtsettelsePanel.buildInitialValues(),
     ...PermisjonGraderingPanel.buildInitialValues(),
@@ -181,5 +173,3 @@ PermisjonPanel.buildInitialValues = () => ({
     fulltUttak: false,
   },
 });
-
-export default PermisjonPanel;

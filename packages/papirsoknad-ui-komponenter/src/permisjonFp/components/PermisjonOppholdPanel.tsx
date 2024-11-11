@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Label } from '@navikt/ds-react';
 import { CheckboxField } from '@navikt/ft-form-hooks';
@@ -8,7 +8,8 @@ import { KodeverkType } from '@navikt/fp-kodeverk';
 import { AlleKodeverk } from '@navikt/fp-types';
 
 import { useFormContext } from 'react-hook-form';
-import RenderOppholdPeriodeFieldArray, {
+import {
+  RenderOppholdPeriodeFieldArray,
   OPPHOLD_PERIODE_FIELD_ARRAY_NAME,
   TIDSROM_PERMISJON_FORM_NAME_PREFIX,
   FormValues as PeriodeFormValues,
@@ -19,13 +20,9 @@ export type FormValues = {
   [OPPHOLD_PERIODE_FIELD_ARRAY_NAME]?: PeriodeFormValues;
 };
 
-interface OwnProps {
+interface Props {
   readOnly: boolean;
   alleKodeverk: AlleKodeverk;
-}
-
-interface StaticFunctions {
-  buildInitialValues: () => any;
 }
 
 /**
@@ -34,7 +31,7 @@ interface StaticFunctions {
  * Viser panel for utsettelse
  * Komponenten har inputfelter og må derfor rendres som etterkommer av form-komponent.
  */
-const PermisjonOppholdPanel: FunctionComponent<OwnProps> & StaticFunctions = ({ readOnly, alleKodeverk }) => {
+export const PermisjonOppholdPanel = ({ readOnly, alleKodeverk }: Props) => {
   const oppholdsReasons = alleKodeverk[KodeverkType.OPPHOLD_ARSAK];
 
   const { watch } = useFormContext<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: FormValues }>();
@@ -60,5 +57,3 @@ PermisjonOppholdPanel.buildInitialValues = () => ({
   [OPPHOLD_PERIODE_FIELD_ARRAY_NAME]: [{}],
   skalHaOpphold: false,
 });
-
-export default PermisjonOppholdPanel;

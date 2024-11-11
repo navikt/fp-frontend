@@ -1,5 +1,4 @@
-import React from 'react';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
 
@@ -11,8 +10,11 @@ describe('<PermisjonIndex>', () => {
   it('skal velge fullt uttak', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<SokerErMor submitCallback={lagre} />);
-
+    await SokerErMor.run({
+      parameters: {
+        submitCallback: lagre,
+      },
+    });
     expect(await screen.findByText('Tidsrom for permisjon')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
@@ -25,13 +27,13 @@ describe('<PermisjonIndex>', () => {
 
     await userEvent.click(screen.getAllByText('Fullt uttak')[1]);
 
-    await userEvent.selectOptions(utils.getByLabelText('Periodetype'), 'MØDREKVOTE');
+    await userEvent.selectOptions(screen.getByLabelText('Periodetype'), 'MØDREKVOTE');
 
-    const fomDatoInput = utils.getByLabelText('F.o.m.');
+    const fomDatoInput = screen.getByLabelText('F.o.m.');
     await userEvent.type(fomDatoInput, '20.05.2022');
     fireEvent.blur(fomDatoInput);
 
-    const tomDatoInput = utils.getByLabelText('T.o.m.');
+    const tomDatoInput = screen.getByLabelText('T.o.m.');
     await userEvent.type(tomDatoInput, '20.06.2022');
     fireEvent.blur(tomDatoInput);
 
@@ -39,13 +41,13 @@ describe('<PermisjonIndex>', () => {
 
     expect(await screen.findByText('Prosentandel uttak')).toBeInTheDocument();
 
-    const prosentUttakInput = utils.getByLabelText('Prosentandel uttak');
+    const prosentUttakInput = screen.getByLabelText('Prosentandel uttak');
     await userEvent.type(prosentUttakInput, '100');
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, {
+    expect(lagre).toHaveBeenCalledOnce();
+    expect(lagre).toHaveBeenCalledWith({
       tidsromPermisjon: {
         fulltUttak: true,
         permisjonsPerioder: [
@@ -73,26 +75,29 @@ describe('<PermisjonIndex>', () => {
   it('skal velge overføring av kvote', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<SokerErMor submitCallback={lagre} />);
-
+    await SokerErMor.run({
+      parameters: {
+        submitCallback: lagre,
+      },
+    });
     expect(await screen.findByText('Tidsrom for permisjon')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Søker ønsker å overta kvote'));
 
-    await userEvent.selectOptions(utils.getByLabelText('Angi årsak'), 'SYKDOM_ANNEN_FORELDER');
+    await userEvent.selectOptions(screen.getByLabelText('Angi årsak'), 'SYKDOM_ANNEN_FORELDER');
 
-    const fomDatoInput = utils.getByLabelText('F.o.m.');
+    const fomDatoInput = screen.getByLabelText('F.o.m.');
     await userEvent.type(fomDatoInput, '20.05.2022');
     fireEvent.blur(fomDatoInput);
 
-    const tomDatoInput = utils.getByLabelText('T.o.m.');
+    const tomDatoInput = screen.getByLabelText('T.o.m.');
     await userEvent.type(tomDatoInput, '20.06.2022');
     fireEvent.blur(tomDatoInput);
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, {
+    expect(lagre).toHaveBeenCalledOnce();
+    expect(lagre).toHaveBeenCalledWith({
       tidsromPermisjon: {
         fulltUttak: false,
         overforingsperioder: [
@@ -117,8 +122,11 @@ describe('<PermisjonIndex>', () => {
   it('skal velge utsettelse', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<SokerErMor submitCallback={lagre} />);
-
+    await SokerErMor.run({
+      parameters: {
+        submitCallback: lagre,
+      },
+    });
     expect(await screen.findByText('Tidsrom for permisjon')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Søker ønsker å utsette uttaket'));
@@ -127,28 +135,28 @@ describe('<PermisjonIndex>', () => {
 
     expect(await screen.findAllByText('Feltet må fylles ut')).toHaveLength(4);
 
-    await userEvent.selectOptions(utils.getByLabelText('Hva skal utsettes'), 'MØDREKVOTE');
+    await userEvent.selectOptions(screen.getByLabelText('Hva skal utsettes'), 'MØDREKVOTE');
 
-    const fomDatoInput = utils.getByLabelText('F.o.m.');
+    const fomDatoInput = screen.getByLabelText('F.o.m.');
     await userEvent.type(fomDatoInput, '20.05.2022');
     fireEvent.blur(fomDatoInput);
 
-    const tomDatoInput = utils.getByLabelText('T.o.m.');
+    const tomDatoInput = screen.getByLabelText('T.o.m.');
     await userEvent.type(tomDatoInput, '20.06.2022');
     fireEvent.blur(tomDatoInput);
 
-    await userEvent.selectOptions(utils.getByLabelText('Årsak til utsettelse'), 'ARBEID');
+    await userEvent.selectOptions(screen.getByLabelText('Årsak til utsettelse'), 'ARBEID');
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
     expect(await screen.findByText('Feltet må fylles ut')).toBeInTheDocument();
 
-    await userEvent.selectOptions(utils.getByLabelText('Type arbeid'), 'true');
+    await userEvent.selectOptions(screen.getByLabelText('Type arbeid'), 'true');
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, {
+    expect(lagre).toHaveBeenCalledOnce();
+    expect(lagre).toHaveBeenCalledWith({
       tidsromPermisjon: {
         fulltUttak: false,
         utsettelsePeriode: [
@@ -175,8 +183,11 @@ describe('<PermisjonIndex>', () => {
   it('skal velge gradering', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<SokerErMor submitCallback={lagre} />);
-
+    await SokerErMor.run({
+      parameters: {
+        submitCallback: lagre,
+      },
+    });
     expect(await screen.findByText('Tidsrom for permisjon')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Søker ønsker å gradere uttaket'));
@@ -185,35 +196,35 @@ describe('<PermisjonIndex>', () => {
 
     expect(await screen.findAllByText('Feltet må fylles ut')).toHaveLength(5);
 
-    await userEvent.selectOptions(utils.getByLabelText('Hva skal graderes'), 'MØDREKVOTE');
+    await userEvent.selectOptions(screen.getByLabelText('Hva skal graderes'), 'MØDREKVOTE');
 
-    const fomDatoInput = utils.getByLabelText('F.o.m.');
+    const fomDatoInput = screen.getByLabelText('F.o.m.');
     await userEvent.type(fomDatoInput, '20.05.2022');
     fireEvent.blur(fomDatoInput);
 
-    const tomDatoInput = utils.getByLabelText('T.o.m.');
+    const tomDatoInput = screen.getByLabelText('T.o.m.');
     await userEvent.type(tomDatoInput, '20.06.2022');
     fireEvent.blur(tomDatoInput);
 
-    const prosentandelInput = utils.getAllByRole('textbox')[2];
+    const prosentandelInput = screen.getAllByRole('textbox')[2];
     await userEvent.type(prosentandelInput, '100');
 
-    const virksomhetsnummerInput = utils.getByLabelText('Virksomhetsnummer');
+    const virksomhetsnummerInput = screen.getByLabelText('Virksomhetsnummer');
     await userEvent.type(virksomhetsnummerInput, '802323232');
 
-    await userEvent.selectOptions(utils.getByLabelText('Type arbeid'), 'ARBEIDSTAKER');
+    await userEvent.selectOptions(screen.getByLabelText('Type arbeid'), 'ARBEIDSTAKER');
 
     await userEvent.click(screen.getAllByRole('checkbox')[6]);
 
     expect(await screen.findByText('Prosentandel uttak')).toBeInTheDocument();
 
-    const prosentInput = utils.getByLabelText('Prosentandel uttak');
+    const prosentInput = screen.getByLabelText('Prosentandel uttak');
     await userEvent.type(prosentInput, '100');
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, {
+    expect(lagre).toHaveBeenCalledOnce();
+    expect(lagre).toHaveBeenCalledWith({
       tidsromPermisjon: {
         fulltUttak: false,
         graderingPeriode: [
@@ -245,12 +256,14 @@ describe('<PermisjonIndex>', () => {
     });
   });
 
-  // TODO Tek meir enn 20 sek
-  it.skip('skal velge opphold', async () => {
+  it('skal velge opphold', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<SokerErMor submitCallback={lagre} />);
-
+    await SokerErMor.run({
+      parameters: {
+        submitCallback: lagre,
+      },
+    });
     expect(await screen.findByText('Tidsrom for permisjon')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Søker ønsker opphold i uttaket'));
@@ -259,15 +272,15 @@ describe('<PermisjonIndex>', () => {
 
     expect(await screen.findAllByText('Feltet må fylles ut')).toHaveLength(3);
 
-    const fomDatoInput = utils.getByLabelText('F.o.m.');
+    const fomDatoInput = screen.getByLabelText('F.o.m.');
     await userEvent.type(fomDatoInput, '20.05.2022');
     fireEvent.blur(fomDatoInput);
 
-    const tomDatoInput = utils.getByLabelText('T.o.m.');
+    const tomDatoInput = screen.getByLabelText('T.o.m.');
     await userEvent.type(tomDatoInput, '20.06.2022');
     fireEvent.blur(tomDatoInput);
 
-    await userEvent.selectOptions(utils.getByLabelText('Årsak til opphold'), 'UTTAK_FORELDREPENGER_ANNEN_FORELDER');
+    await userEvent.selectOptions(screen.getByLabelText('Årsak til opphold'), 'UTTAK_FORELDREPENGER_ANNEN_FORELDER');
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
@@ -279,20 +292,20 @@ describe('<PermisjonIndex>', () => {
 
     await userEvent.click(screen.getAllByText('Fullt uttak')[1]);
 
-    await userEvent.selectOptions(utils.getByLabelText('Periodetype'), 'MØDREKVOTE');
+    await userEvent.selectOptions(screen.getByLabelText('Periodetype'), 'MØDREKVOTE');
 
-    const fomDatoUttakInput = utils.getAllByLabelText('F.o.m.')[0];
+    const fomDatoUttakInput = screen.getAllByLabelText('F.o.m.')[0];
     await userEvent.type(fomDatoUttakInput, '20.05.2022');
     fireEvent.blur(fomDatoUttakInput);
 
-    const tomDatoUttakInput = utils.getAllByLabelText('T.o.m.')[0];
+    const tomDatoUttakInput = screen.getAllByLabelText('T.o.m.')[0];
     await userEvent.type(tomDatoUttakInput, '20.06.2022');
     fireEvent.blur(tomDatoUttakInput);
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, {
+    expect(lagre).toHaveBeenCalledOnce();
+    expect(lagre).toHaveBeenCalledWith({
       tidsromPermisjon: {
         fulltUttak: true,
         oppholdPerioder: [

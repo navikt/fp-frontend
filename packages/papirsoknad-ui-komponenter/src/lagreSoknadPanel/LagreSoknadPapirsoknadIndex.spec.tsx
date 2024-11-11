@@ -1,5 +1,4 @@
-import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
 
@@ -11,11 +10,15 @@ describe('<LagreSoknadPapirsoknadIndex>', () => {
   it('skal bekrefte opplysninger', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<Default submitCallback={lagre} />);
+    await Default.run({
+      parameters: {
+        submitCallback: lagre,
+      },
+    });
 
     expect(await screen.findByText('Ferdigstill registrering')).toBeInTheDocument();
 
-    const textareaInput = utils.getByLabelText('Ved endring av opplysningene er begrunnelse obligatorisk');
+    const textareaInput = screen.getByLabelText('Ved endring av opplysningene er begrunnelse obligatorisk');
     await userEvent.type(textareaInput, 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Verge/fullmektig skal knyttes til saken'));
@@ -24,8 +27,8 @@ describe('<LagreSoknadPapirsoknadIndex>', () => {
 
     expect(screen.queryByText('Bekreft og avslutt behandling')).not.toBeInTheDocument();
 
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, {
+    expect(lagre).toHaveBeenCalledOnce();
+    expect(lagre).toHaveBeenCalledWith({
       kommentarEndring: 'Dette er en begrunnelse',
       registrerVerge: true,
       ufullstendigSoeknad: undefined,
@@ -33,13 +36,22 @@ describe('<LagreSoknadPapirsoknadIndex>', () => {
   });
 
   it('skal velge at søkers opplysningsplikt ikke er overholdt', async () => {
+    const lagreUfullstendigsoknad = vi.fn();
     const lagre = vi.fn();
 
-    const utils = render(<Default submitCallback={lagre} />);
+    await Default.run({
+      parameters: {
+        submitCallback: lagre,
+      },
+      args: {
+        ...Default.args,
+        onSubmitUfullstendigsoknad: lagreUfullstendigsoknad,
+      },
+    });
 
     expect(await screen.findByText('Ferdigstill registrering')).toBeInTheDocument();
 
-    const textareaInput = utils.getByLabelText('Ved endring av opplysningene er begrunnelse obligatorisk');
+    const textareaInput = screen.getByLabelText('Ved endring av opplysningene er begrunnelse obligatorisk');
     await userEvent.type(textareaInput, 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Søkers opplysningsplikt er ikke overholdt'));
@@ -48,15 +60,12 @@ describe('<LagreSoknadPapirsoknadIndex>', () => {
 
     await userEvent.click(screen.getByText('Bekreft og avslutt behandling'));
 
-    expect(
-      await screen.findByText(
-        'Avslutter registrering av søknaden. Det er ikke mulig å innhente ytterligere opplysninger.',
-      ),
-    ).toBeInTheDocument();
+    expect(await screen.findByText(/Avslutter registrering av søknaden/)).toBeInTheDocument();
     expect(screen.getByText('Bekreft at søknaden skal avslås')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('OK'));
 
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
+    expect(lagreUfullstendigsoknad).toHaveBeenCalledOnce();
+    expect(lagre).not.toHaveBeenCalled();
   });
 });

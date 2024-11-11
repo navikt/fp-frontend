@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 import { Heading, Panel } from '@navikt/ds-react';
 import { createIntl } from '@navikt/ft-utils';
@@ -8,9 +8,9 @@ import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponen
 import { SoknadData } from '@navikt/fp-papirsoknad-ui-komponenter';
 import { AlleKodeverk, Fagsak } from '@navikt/fp-types';
 
-import EngangsstonadPapirsoknadIndex from './engangsstonad/EngangsstonadPapirsoknadIndex';
-import ForeldrepengerPapirsoknadIndex from './foreldrepenger/ForeldrepengerPapirsoknadIndex';
-import SvangerskapspengerPapirsoknadIndex from './svangerskapspenger/SvangerskapspengerPapirsoknadIndex';
+import { EngangsstonadPapirsoknadIndex } from './engangsstonad/EngangsstonadPapirsoknadIndex';
+import { ForeldrepengerPapirsoknadIndex } from './foreldrepenger/ForeldrepengerPapirsoknadIndex';
+import { SvangerskapspengerPapirsoknadIndex } from './svangerskapspenger/SvangerskapspengerPapirsoknadIndex';
 import SoknadTypePickerForm from './SoknadTypePickerForm';
 import messages from '../i18n/nb_NO.json';
 
@@ -18,7 +18,7 @@ import styles from './registrerPapirsoknadPanel.module.css';
 
 const intl = createIntl(messages);
 
-interface OwnProps {
+interface Props {
   fagsak: Fagsak;
   kodeverk: AlleKodeverk;
   readOnly: boolean;
@@ -32,14 +32,14 @@ interface OwnProps {
   erEndringssøknad: boolean;
 }
 
-const RegistrerPapirsoknadPanel: FunctionComponent<OwnProps> = ({
+export const RegistrerPapirsoknadPanel = ({
   fagsak,
   kodeverk,
   readOnly,
   lagreUfullstendig,
   lagreFullstendig,
   erEndringssøknad,
-}) => {
+}: Props) => {
   const [soknadData, setSoknadData] = useState<SoknadData>();
 
   const lagre = useCallback(
@@ -115,5 +115,3 @@ const RegistrerPapirsoknadPanel: FunctionComponent<OwnProps> = ({
     </RawIntlProvider>
   );
 };
-
-export default RegistrerPapirsoknadPanel;

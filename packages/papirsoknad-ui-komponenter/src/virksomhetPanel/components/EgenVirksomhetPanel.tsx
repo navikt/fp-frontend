@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Heading } from '@navikt/ds-react';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
@@ -7,7 +7,8 @@ import { required } from '@navikt/ft-form-validators';
 import { AlleKodeverk } from '@navikt/fp-types';
 
 import { useFormContext } from 'react-hook-form';
-import RegistrerVirksomhetPanel, {
+import {
+  RegistrerVirksomhetPanel,
   EGEN_VIRKSOMHET_NAME_PREFIX,
   FormValues as VirksomhetFormValues,
 } from './RegistrerVirksomhetPanel';
@@ -16,7 +17,7 @@ export type FormValues = {
   harArbeidetIEgenVirksomhet: boolean;
 } & VirksomhetFormValues;
 
-interface OwnProps {
+interface Props {
   alleKodeverk: AlleKodeverk;
   readOnly?: boolean;
 }
@@ -27,7 +28,7 @@ interface OwnProps {
  * Komponenten vises som del av skjermbildet for registrering av papirsøknad dersom søknad gjelder foreldrepenger.
  * Søker må oppgi om hen har arbdeidet i egen virksomhet.
  */
-const EgenVirksomhetPanel: FunctionComponent<OwnProps> = ({ readOnly = true, alleKodeverk }) => {
+export const EgenVirksomhetPanel = ({ readOnly = true, alleKodeverk }: Props) => {
   const intl = useIntl();
 
   const { watch } = useFormContext<{ [EGEN_VIRKSOMHET_NAME_PREFIX]: FormValues }>();
@@ -60,5 +61,3 @@ const EgenVirksomhetPanel: FunctionComponent<OwnProps> = ({ readOnly = true, all
     </BorderBox>
   );
 };
-
-export default EgenVirksomhetPanel;

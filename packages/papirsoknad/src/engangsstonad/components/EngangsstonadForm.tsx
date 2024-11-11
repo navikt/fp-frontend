@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Form } from '@navikt/ft-form-hooks';
 import { omitOne } from '@navikt/ft-utils';
@@ -15,8 +15,6 @@ import {
 
 import RegistreringAdopsjonOgOmsorgGrid, { FormValues as FormValuesAdopsjon } from './RegistreringAdopsjonOgOmsorgGrid';
 import RegistreringFodselGrid, { FormValues as FormValuesFodsel } from './RegistreringFodselGrid';
-
-export const ENGANGSSTONAD_FORM_NAME = 'EngangsstonadForm';
 
 type FormValues = MottattDatoFormValues & (FormValuesFodsel | FormValuesAdopsjon);
 
@@ -42,7 +40,7 @@ const transformValues = (values: FormValues, erFødsel: boolean, erAdopsjon: boo
   };
 };
 
-interface OwnProps {
+interface Props {
   readOnly: boolean;
   soknadData: SoknadData;
   alleKodeverk: AlleKodeverk;
@@ -50,13 +48,7 @@ interface OwnProps {
   onSubmit: (values: any) => Promise<any>;
 }
 
-const EngangsstonadForm: FunctionComponent<OwnProps> = ({
-  readOnly,
-  soknadData,
-  alleKodeverk,
-  onSubmitUfullstendigsoknad,
-  onSubmit,
-}) => {
+const EngangsstonadForm = ({ readOnly, soknadData, alleKodeverk, onSubmitUfullstendigsoknad, onSubmit }: Props) => {
   const erFødsel = soknadData.getFamilieHendelseType() === familieHendelseType.FODSEL;
   const erAdopsjon = soknadData.getFamilieHendelseType() === familieHendelseType.ADOPSJON;
 

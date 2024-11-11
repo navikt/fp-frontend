@@ -1,5 +1,4 @@
-import React from 'react';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
 
@@ -11,8 +10,11 @@ describe('<FrilansPapirsoknadIndex>', () => {
   it('skal velge at søker ikke har periode med frilansvirksomhet', async () => {
     const lagre = vi.fn();
 
-    render(<Default submitCallback={lagre} />);
-
+    await Default.run({
+      parameters: {
+        submitCallback: lagre,
+      },
+    });
     expect(await screen.findByText('Frilanser')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
@@ -23,8 +25,8 @@ describe('<FrilansPapirsoknadIndex>', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, {
+    expect(lagre).toHaveBeenCalledOnce();
+    expect(lagre).toHaveBeenCalledWith({
       frilans: {
         harSokerPeriodeMedFrilans: false,
       },
@@ -34,7 +36,11 @@ describe('<FrilansPapirsoknadIndex>', () => {
   it('skal velge at søker har periode med frilansvirksomhet', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<Default submitCallback={lagre} />);
+    await Default.run({
+      parameters: {
+        submitCallback: lagre,
+      },
+    });
 
     expect(await screen.findByText('Frilanser')).toBeInTheDocument();
 
@@ -44,11 +50,11 @@ describe('<FrilansPapirsoknadIndex>', () => {
 
     expect(await screen.findAllByText('Feltet må fylles ut')).toHaveLength(5);
 
-    const fomInput = utils.getByLabelText('F.o.m.');
+    const fomInput = screen.getByLabelText('F.o.m.');
     await userEvent.type(fomInput, '27.05.2022');
     fireEvent.blur(fomInput);
 
-    const tomInput = utils.getByLabelText('T.o.m.');
+    const tomInput = screen.getByLabelText('T.o.m.');
     await userEvent.type(tomInput, '15.06.2022');
     fireEvent.blur(tomInput);
 
@@ -58,8 +64,8 @@ describe('<FrilansPapirsoknadIndex>', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, {
+    expect(lagre).toHaveBeenCalledOnce();
+    expect(lagre).toHaveBeenCalledWith({
       frilans: {
         erNyoppstartetFrilanser: false,
         harHattOppdragForFamilie: false,
@@ -85,17 +91,21 @@ describe('<FrilansPapirsoknadIndex>', () => {
   it('skal oppgi periode for når en har hatt oppdrag for nær familie', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<Default submitCallback={lagre} />);
+    await Default.run({
+      parameters: {
+        submitCallback: lagre,
+      },
+    });
 
     expect(await screen.findByText('Frilanser')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Ja'));
 
-    const fomInput = utils.getByLabelText('F.o.m.');
+    const fomInput = screen.getByLabelText('F.o.m.');
     await userEvent.type(fomInput, '27.05.2022');
     fireEvent.blur(fomInput);
 
-    const tomInput = utils.getByLabelText('T.o.m.');
+    const tomInput = screen.getByLabelText('T.o.m.');
     await userEvent.type(tomInput, '15.06.2022');
     fireEvent.blur(tomInput);
 
@@ -105,15 +115,15 @@ describe('<FrilansPapirsoknadIndex>', () => {
 
     expect(await screen.findByText('Oppgi periode')).toBeInTheDocument();
 
-    const oppdragFomInput = utils.getAllByLabelText('F.o.m.')[1];
+    const oppdragFomInput = screen.getAllByLabelText('F.o.m.')[1];
     await userEvent.type(oppdragFomInput, '26.05.2022');
     fireEvent.blur(oppdragFomInput);
 
-    const oppdragTomInput = utils.getAllByLabelText('T.o.m.')[1];
+    const oppdragTomInput = screen.getAllByLabelText('T.o.m.')[1];
     await userEvent.type(oppdragTomInput, '15.06.2022');
     fireEvent.blur(oppdragTomInput);
 
-    const oppdragsgiverInput = utils.getByLabelText('Oppdragsgiver');
+    const oppdragsgiverInput = screen.getByLabelText('Oppdragsgiver');
     await userEvent.type(oppdragsgiverInput, 'test-oppdragsgiver');
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
@@ -128,8 +138,8 @@ describe('<FrilansPapirsoknadIndex>', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, {
+    expect(lagre).toHaveBeenCalledOnce();
+    expect(lagre).toHaveBeenCalledWith({
       frilans: {
         erNyoppstartetFrilanser: false,
         harHattOppdragForFamilie: true,

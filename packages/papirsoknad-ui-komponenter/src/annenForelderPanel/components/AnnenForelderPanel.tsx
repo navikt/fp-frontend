@@ -50,7 +50,7 @@ export type FormValues = {
  *
  * Form som brukes ved registrering av annen forelder.
  */
-const AnnenForelderPanel = ({
+export const AnnenForelderPanel = ({
   readOnly = true,
   permisjonRettigheterPanel,
   alleKodeverk,
@@ -155,5 +155,3 @@ const AnnenForelderPanel = ({
     </BorderBox>
   );
 };
-
-export default AnnenForelderPanel;

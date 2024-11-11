@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 import { UseFormGetValues, useFieldArray, useFormContext } from 'react-hook-form';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -22,7 +22,7 @@ const getValue = (
   // @ts-ignore
 ): string => getValues(fieldName);
 
-interface OwnProps {
+interface Props {
   readOnly: boolean;
 }
 
@@ -31,7 +31,7 @@ interface OwnProps {
  *
  * Viser inputfelter for fra og til dato for frilansperioder
  */
-const FrilansPerioderFieldArray: FunctionComponent<OwnProps> = ({ readOnly }) => {
+export const FrilansPerioderFieldArray = ({ readOnly }: Props) => {
   const intl = useIntl();
 
   const {
@@ -101,5 +101,3 @@ const FrilansPerioderFieldArray: FunctionComponent<OwnProps> = ({ readOnly }) =>
     </PeriodFieldArray>
   );
 };
-
-export default FrilansPerioderFieldArray;

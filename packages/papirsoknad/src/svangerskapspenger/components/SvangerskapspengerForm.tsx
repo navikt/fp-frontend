@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { Form } from '@navikt/ft-form-hooks';
 import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
@@ -98,7 +98,7 @@ const transformValues = (formValues: FormValues, andreYtelserKodeverk: KodeverkM
   [ANDRE_YTELSER_FORM_NAME_PREFIX]: AndreYtelserPapirsoknadIndex.transformValues(formValues, andreYtelserKodeverk),
 });
 
-interface OwnProps {
+interface Props {
   readOnly: boolean;
   soknadData: SoknadData;
   alleKodeverk: AlleKodeverk;
@@ -111,13 +111,13 @@ interface OwnProps {
  *
  * Form-komponent for registrering av papirsøknad for svangerskapspenger.
  */
-const SvangerskapspengerForm: FunctionComponent<OwnProps> = ({
+export const SvangerskapspengerForm = ({
   readOnly,
   soknadData,
   alleKodeverk,
   onSubmit,
   onSubmitUfullstendigsoknad,
-}) => {
+}: Props) => {
   const formMethods = useForm<FormValues>({
     defaultValues: useMemo(() => buildInitialValues(alleKodeverk[KodeverkType.ARBEID_TYPE]), []),
   });
@@ -153,5 +153,3 @@ const SvangerskapspengerForm: FunctionComponent<OwnProps> = ({
     </Form>
   );
 };
-
-export default SvangerskapspengerForm;

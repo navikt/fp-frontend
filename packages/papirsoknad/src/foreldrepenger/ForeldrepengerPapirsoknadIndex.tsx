@@ -1,11 +1,11 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 
 import { AlleKodeverk } from '@navikt/fp-types';
 import { SoknadData } from '@navikt/fp-papirsoknad-ui-komponenter';
 
-import ForeldrepengerForm from './components/ForeldrepengerForm';
+import { ForeldrepengerForm } from './components/ForeldrepengerForm';
 
-interface OwnProps {
+interface Props {
   onSubmitUfullstendigsoknad: () => Promise<any>;
   onSubmit: (values: any) => Promise<any>;
   readOnly: boolean;
@@ -15,7 +15,7 @@ interface OwnProps {
   erEndringssøknad: boolean;
 }
 
-const ForeldrepengerPapirsoknadIndex: FunctionComponent<OwnProps> = ({
+export const ForeldrepengerPapirsoknadIndex = ({
   onSubmitUfullstendigsoknad,
   onSubmit,
   readOnly,
@@ -23,7 +23,7 @@ const ForeldrepengerPapirsoknadIndex: FunctionComponent<OwnProps> = ({
   alleKodeverk,
   fagsakPersonnummer,
   erEndringssøknad,
-}) => (
+}: Props) => (
   <ForeldrepengerForm
     onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
     onSubmit={onSubmit}
@@ -34,5 +34,3 @@ const ForeldrepengerPapirsoknadIndex: FunctionComponent<OwnProps> = ({
     erEndringssøknad={erEndringssøknad}
   />
 );
-
-export default ForeldrepengerPapirsoknadIndex;

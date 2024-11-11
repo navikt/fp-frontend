@@ -1,29 +1,20 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
 import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
-import AndreYtelserPanel, { FormValues } from './components/AndreYtelserPanel';
+import { AndreYtelserPanel, FormValues } from './components/AndreYtelserPanel';
 import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-interface OwnProps {
+interface Props {
   readOnly: boolean;
   alleKodeverk: AlleKodeverk;
   kunMiliterEllerSiviltjeneste?: boolean;
 }
 
-interface StaticFunctions {
-  buildInitialValues: (andreYtelser: KodeverkMedNavn[]) => FormValues;
-  transformValues: (values: FormValues, andreYtelser: KodeverkMedNavn[]) => any;
-}
-
-const AndreYtelserPapirsoknadIndex: FunctionComponent<OwnProps> & StaticFunctions = ({
-  readOnly,
-  alleKodeverk,
-  kunMiliterEllerSiviltjeneste,
-}) => (
+export const AndreYtelserPapirsoknadIndex = ({ readOnly, alleKodeverk, kunMiliterEllerSiviltjeneste }: Props) => (
   <RawIntlProvider value={intl}>
     <AndreYtelserPanel
       readOnly={readOnly}
@@ -33,9 +24,8 @@ const AndreYtelserPapirsoknadIndex: FunctionComponent<OwnProps> & StaticFunction
   </RawIntlProvider>
 );
 
-AndreYtelserPapirsoknadIndex.buildInitialValues = andreYtelser => AndreYtelserPanel.buildInitialValues(andreYtelser);
+AndreYtelserPapirsoknadIndex.buildInitialValues = (andreYtelser: KodeverkMedNavn[]) =>
+  AndreYtelserPanel.buildInitialValues(andreYtelser);
 
-AndreYtelserPapirsoknadIndex.transformValues = (values, andreYtelser) =>
+AndreYtelserPapirsoknadIndex.transformValues = (values: FormValues, andreYtelser: KodeverkMedNavn[]) =>
   AndreYtelserPanel.transformValues(values, andreYtelser);
-
-export default AndreYtelserPapirsoknadIndex;

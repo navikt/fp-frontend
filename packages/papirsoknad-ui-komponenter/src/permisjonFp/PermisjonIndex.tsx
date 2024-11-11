@@ -1,33 +1,23 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
 import { AlleKodeverk } from '@navikt/fp-types';
 
-import PermisjonPanel, { FormValues } from './components/PermisjonPanel';
+import { PermisjonPanel } from './components/PermisjonPanel';
 import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-interface OwnProps {
+interface Props {
   foreldreType: string;
   readOnly: boolean;
   alleKodeverk: AlleKodeverk;
   erEndringssøknad: boolean;
 }
 
-interface StaticFunctions {
-  buildInitialValues: () => any;
-  transformValues: (values: FormValues) => any;
-}
-
-const PermisjonIndex: FunctionComponent<OwnProps> & StaticFunctions = ({
-  foreldreType,
-  readOnly,
-  alleKodeverk,
-  erEndringssøknad,
-}) => (
+export const PermisjonIndex = ({ foreldreType, readOnly, alleKodeverk, erEndringssøknad }: Props) => (
   <RawIntlProvider value={intl}>
     <PermisjonPanel
       readOnly={readOnly}
@@ -41,5 +31,3 @@ const PermisjonIndex: FunctionComponent<OwnProps> & StaticFunctions = ({
 PermisjonIndex.transformValues = PermisjonPanel.transformValues;
 
 PermisjonIndex.buildInitialValues = PermisjonPanel.buildInitialValues;
-
-export default PermisjonIndex;

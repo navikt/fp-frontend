@@ -1,43 +1,49 @@
 import React from 'react';
-import { StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { useForm } from 'react-hook-form';
-import { Button } from '@navikt/ds-react';
+import { Button, VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import FodselPapirsoknadIndex from './FodselPapirsoknadIndex';
+import { FodselPapirsoknadIndex } from './FodselPapirsoknadIndex';
 
-export default {
+const meta = {
   title: 'papirsoknad/ui-komponenter/fodsel',
   component: FodselPapirsoknadIndex,
+  parameters: {
+    submitCallback: action('onSubmit'),
+  },
+  args: {
+    readOnly: false,
+  },
+  render: (args, { parameters: { submitCallback } }) => {
+    const formMethods = useForm();
+
+    return (
+      <Form formMethods={formMethods} onSubmit={submitCallback}>
+        <VStack gap="10">
+          <FodselPapirsoknadIndex {...args} />
+          <Button size="small" variant="primary">
+            Lagreknapp (Kun for test)
+          </Button>
+        </VStack>
+      </Form>
+    );
+  },
+} satisfies Meta<typeof FodselPapirsoknadIndex>;
+
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const ForeldrepengeSak: Story = {
+  args: {
+    erForeldrepenger: true,
+  },
 };
 
-const Template: StoryFn<{
-  submitCallback: (data: any) => Promise<void>;
-  erForeldrepenger: boolean;
-}> = ({ submitCallback, erForeldrepenger }) => {
-  const formMethods = useForm();
-
-  return (
-    <Form formMethods={formMethods} onSubmit={submitCallback}>
-      <FodselPapirsoknadIndex readOnly={false} erForeldrepenger={erForeldrepenger} />
-      <VerticalSpacer fourtyPx />
-      <Button size="small" variant="primary">
-        Lagreknapp (Kun for test)
-      </Button>
-    </Form>
-  );
-};
-
-export const Default = Template.bind({});
-Default.args = {
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-  erForeldrepenger: true,
-};
-
-export const ErIkkeForeldrepenger = Template.bind({});
-ErIkkeForeldrepenger.args = {
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-  erForeldrepenger: false,
+export const ErIkkeForeldrepengeSak: Story = {
+  args: {
+    erForeldrepenger: false,
+  },
 };

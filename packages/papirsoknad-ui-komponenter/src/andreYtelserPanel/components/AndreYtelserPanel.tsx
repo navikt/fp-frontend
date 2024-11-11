@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Heading } from '@navikt/ds-react';
 import { CheckboxField } from '@navikt/ft-form-hooks';
@@ -7,10 +7,12 @@ import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 import { arbeidType, KodeverkType } from '@navikt/fp-kodeverk';
 
 import { useFormContext } from 'react-hook-form';
-import RenderAndreYtelserPerioderFieldArray, {
+import {
+  RenderAndreYtelserPerioderFieldArray,
   FormValues as PerioderFormValues,
   ANDRE_YTELSER_PERIODE_SUFFIX,
   ANDRE_YTELSER_NAME_PREFIX,
+  TransformValues,
 } from './RenderAndreYtelserPerioderFieldArray';
 
 const removeArbeidstyper = (
@@ -34,15 +36,10 @@ export type FormValues = {
   };
 };
 
-interface OwnProps {
+interface Props {
   readOnly: boolean;
   alleKodeverk: AlleKodeverk;
   kunMiliterEllerSiviltjeneste?: boolean;
-}
-
-interface StaticFunctions {
-  buildInitialValues: (andreYtelser: KodeverkMedNavn[]) => FormValues;
-  transformValues: (values: FormValues, andreYtelser: KodeverkMedNavn[]) => any;
 }
 
 /**
@@ -50,11 +47,7 @@ interface StaticFunctions {
  *
  * Komponenten vises som del av skjermbildet for registrering av papirsøknad dersom søknad gjelder foreldrepenger.
  */
-const AndreYtelserPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
-  readOnly,
-  kunMiliterEllerSiviltjeneste = false,
-  alleKodeverk,
-}) => {
+export const AndreYtelserPanel = ({ readOnly, kunMiliterEllerSiviltjeneste = false, alleKodeverk }: Props) => {
   const { watch } = useFormContext<{ [ANDRE_YTELSER_NAME_PREFIX]: FormValues }>();
   const selectedYtelser = watch(ANDRE_YTELSER_NAME_PREFIX);
 
@@ -106,13 +99,9 @@ AndreYtelserPanel.buildInitialValues = (andreYtelser: KodeverkMedNavn[]): FormVa
   return { [ANDRE_YTELSER_NAME_PREFIX]: ytelseInitialValues };
 };
 
-AndreYtelserPanel.transformValues = (values: FormValues, andreYtelser: KodeverkMedNavn[]): any => {
+AndreYtelserPanel.transformValues = (values: FormValues, andreYtelser: KodeverkMedNavn[]): TransformValues[] => {
   const ytelseValues = values[ANDRE_YTELSER_NAME_PREFIX];
-  const newValues = [] as {
-    ytelseType: string;
-    periodeFom: string;
-    periodeTom: string;
-  }[];
+  const newValues: TransformValues[] = [];
 
   andreYtelser
     .filter(ay => ytelseValues?.[ay.kode])
@@ -126,5 +115,3 @@ AndreYtelserPanel.transformValues = (values: FormValues, andreYtelser: KodeverkM
 
   return newValues;
 };
-
-export default AndreYtelserPanel;

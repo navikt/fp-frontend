@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement, useMemo } from 'react';
+import React, { ReactElement, useMemo } from 'react';
 import classnames from 'classnames/bind';
 import { useIntl } from 'react-intl';
 import { Datepicker, SelectField, PeriodFieldArray } from '@navikt/ft-form-hooks';
@@ -73,8 +73,8 @@ const getValiderFørEllerEtter =
     return sjekkFør ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : dateAfterOrEqual(fomVerdi)(tomVerdi);
   };
 
-interface OwnProps {
-  erTidligereOpphold: boolean;
+interface Props {
+  erTidligereOpphold?: boolean;
   mottattDato?: string;
   countryCodes: KodeverkMedNavn[];
   readOnly: boolean;
@@ -88,12 +88,7 @@ interface OwnProps {
  * som lar seg tilpasse om opphold skal være fram eller tilbake i tid.
  * Komponenten har inputfelter og må derfor rendres som etterkommer av form-komponent.
  */
-const UtenlandsOppholdField: FunctionComponent<OwnProps> = ({
-  erTidligereOpphold,
-  mottattDato,
-  readOnly,
-  countryCodes,
-}) => {
+export const UtenlandsOppholdField = ({ erTidligereOpphold = false, mottattDato, readOnly, countryCodes }: Props) => {
   const intl = useIntl();
 
   const name = erTidligereOpphold ? 'tidligereOppholdUtenlands' : 'fremtidigeOppholdUtenlands';
@@ -192,5 +187,3 @@ const UtenlandsOppholdField: FunctionComponent<OwnProps> = ({
     </PeriodFieldArray>
   );
 };
-
-export default UtenlandsOppholdField;

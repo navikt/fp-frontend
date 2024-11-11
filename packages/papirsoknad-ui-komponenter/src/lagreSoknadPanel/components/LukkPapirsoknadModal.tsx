@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 import { Link } from 'react-router-dom';
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
@@ -7,7 +7,7 @@ import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-u
 
 import styles from './lukkPapirsoknadModal.module.css';
 
-interface OwnProps {
+interface Props {
   showModal: boolean;
   handleSubmit: () => void;
   cancelEvent: () => void;
@@ -19,7 +19,7 @@ interface OwnProps {
  * Denne modalen vises når saksbehandler velger 'Ikke mulig å fullføre registrering av søknad'
  * og trykker på 'Lagre og start behandling'. Ved å trykke på OK blir saken sendt til behandling av avslag.
  */
-const LukkPapirSoknadModal: FunctionComponent<OwnProps> = ({ showModal, handleSubmit, cancelEvent }) => {
+export const LukkPapirsoknadModal = ({ showModal, handleSubmit, cancelEvent }: Props) => {
   const intl = useIntl();
   return (
     <Modal
@@ -57,5 +57,3 @@ const LukkPapirSoknadModal: FunctionComponent<OwnProps> = ({ showModal, handleSu
     </Modal>
   );
 };
-
-export default LukkPapirSoknadModal;

@@ -1,45 +1,51 @@
-import React from 'react';
+import { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { FagsakYtelseType } from '@navikt/ft-kodeverk';
 
 import { foreldreType, familieHendelseType } from '@navikt/fp-kodeverk';
-import { alleKodeverk, withRouter } from '@navikt/fp-storybook-utils';
+import { alleKodeverk, getIntlDecorator, withRouter } from '@navikt/fp-storybook-utils';
 
 import { SoknadData } from '@navikt/fp-papirsoknad-ui-komponenter';
-import EngangsstonadPapirsoknadIndex from './EngangsstonadPapirsoknadIndex';
+import { EngangsstonadPapirsoknadIndex } from './EngangsstonadPapirsoknadIndex';
 
-export default {
-  title: 'papirsoknad/papirsoknad-es',
+import messages from '../../i18n/nb_NO.json';
+
+const meta = {
+  title: 'papirsoknad/engangstonad',
   component: EngangsstonadPapirsoknadIndex,
-  decorators: [withRouter],
+  decorators: [withRouter, getIntlDecorator(messages)],
+  args: {
+    readOnly: false,
+    alleKodeverk: alleKodeverk as any,
+    onSubmit: (values: any) => {
+      action('onSubmit')(values);
+      return Promise.resolve(values);
+    },
+    onSubmitUfullstendigsoknad: () => {
+      action('onSubmitUfullstendigsoknad')();
+      return Promise.resolve();
+    },
+  },
+} satisfies Meta<typeof EngangsstonadPapirsoknadIndex>;
+
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const ForMorVedFødsel: Story = {
+  args: {
+    soknadData: new SoknadData(FagsakYtelseType.ENGANGSSTONAD, familieHendelseType.FODSEL, foreldreType.MOR),
+  },
 };
 
-export const visPapirsoknadForMorVedFødsel = () => (
-  <EngangsstonadPapirsoknadIndex
-    onSubmitUfullstendigsoknad={action('button-click') as () => Promise<any>}
-    onSubmit={action('button-click') as (values: any) => Promise<any>}
-    readOnly={false}
-    soknadData={new SoknadData(FagsakYtelseType.ENGANGSSTONAD, familieHendelseType.FODSEL, foreldreType.MOR)}
-    alleKodeverk={alleKodeverk as any}
-  />
-);
+export const ForMorVedAdopsjon: Story = {
+  args: {
+    soknadData: new SoknadData(FagsakYtelseType.ENGANGSSTONAD, familieHendelseType.ADOPSJON, foreldreType.MOR),
+  },
+};
 
-export const visPapirsoknadForMorVedAdopsjon = () => (
-  <EngangsstonadPapirsoknadIndex
-    onSubmitUfullstendigsoknad={action('button-click') as () => Promise<any>}
-    onSubmit={action('button-click') as (values: any) => Promise<any>}
-    readOnly={false}
-    soknadData={new SoknadData(FagsakYtelseType.ENGANGSSTONAD, familieHendelseType.ADOPSJON, foreldreType.MOR)}
-    alleKodeverk={alleKodeverk as any}
-  />
-);
-
-export const visPapirsoknadForFarVedFødsel = () => (
-  <EngangsstonadPapirsoknadIndex
-    onSubmitUfullstendigsoknad={action('button-click') as () => Promise<any>}
-    onSubmit={action('button-click') as (values: any) => Promise<any>}
-    readOnly={false}
-    soknadData={new SoknadData(FagsakYtelseType.ENGANGSSTONAD, familieHendelseType.FODSEL, foreldreType.FAR)}
-    alleKodeverk={alleKodeverk as any}
-  />
-);
+export const ForFarVedFødsel: Story = {
+  args: {
+    soknadData: new SoknadData(FagsakYtelseType.ENGANGSSTONAD, familieHendelseType.FODSEL, foreldreType.FAR),
+  },
+};

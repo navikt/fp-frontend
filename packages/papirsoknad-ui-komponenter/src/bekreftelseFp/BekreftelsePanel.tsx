@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { Detail, Heading } from '@navikt/ds-react';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
@@ -9,7 +9,7 @@ import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-interface OwnProps {
+interface Props {
   readOnly: boolean;
   annenForelderInformertRequired?: boolean;
 }
@@ -17,7 +17,7 @@ interface OwnProps {
 /**
  * Presentasjonskomponent. Komponenten vises som del av skjermbildet for registrering av papirsøknad dersom søknad gjelder foreldrepenger.
  */
-const BekreftelsePanel: FunctionComponent<OwnProps> = ({ readOnly, annenForelderInformertRequired = false }) => (
+export const BekreftelsePanel = ({ readOnly, annenForelderInformertRequired = false }: Props) => (
   <BorderBox>
     <Heading size="small">{intl.formatMessage({ id: 'Registrering.TheOtherParent.Confirmation' })}</Heading>
     <VerticalSpacer sixteenPx />
@@ -42,5 +42,3 @@ const BekreftelsePanel: FunctionComponent<OwnProps> = ({ readOnly, annenForelder
     />
   </BorderBox>
 );
-
-export default BekreftelsePanel;

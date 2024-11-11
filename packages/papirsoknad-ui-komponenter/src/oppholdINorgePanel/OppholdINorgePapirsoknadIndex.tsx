@@ -1,32 +1,22 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
 import { AlleKodeverk } from '@navikt/fp-types';
 
-import OppholdINorgePanel, { FormValues } from './components/OppholdINorgePanel';
+import { OppholdINorgePanel } from './components/OppholdINorgePanel';
 
 import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-interface OwnProps {
+interface Props {
   readOnly: boolean;
   erAdopsjon: boolean;
   alleKodeverk: AlleKodeverk;
   mottattDato?: string;
 }
 
-interface StaticFunctions {
-  buildInitialValues: () => FormValues;
-  transformValues: (formValues: FormValues) => FormValues;
-}
-
-const OppholdINorgePapirsoknadIndex: FunctionComponent<OwnProps> & StaticFunctions = ({
-  readOnly,
-  erAdopsjon,
-  alleKodeverk,
-  mottattDato,
-}) => (
+export const OppholdINorgePapirsoknadIndex = ({ readOnly, erAdopsjon, alleKodeverk, mottattDato }: Props) => (
   <RawIntlProvider value={intl}>
     <OppholdINorgePanel
       readOnly={readOnly}
@@ -40,5 +30,3 @@ const OppholdINorgePapirsoknadIndex: FunctionComponent<OwnProps> & StaticFunctio
 OppholdINorgePapirsoknadIndex.buildInitialValues = OppholdINorgePanel.buildInitialValues;
 
 OppholdINorgePapirsoknadIndex.transformValues = OppholdINorgePanel.transformValues;
-
-export default OppholdINorgePapirsoknadIndex;

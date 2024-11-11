@@ -1,56 +1,56 @@
 import React from 'react';
-import { StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { useForm } from 'react-hook-form';
-import { Button } from '@navikt/ds-react';
+import { Button, VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { familieHendelseType as fht } from '@navikt/fp-kodeverk';
 
 import OmsorgOgAdopsjonPapirsoknadIndex from './OmsorgOgAdopsjonPapirsoknadIndex';
 
-export default {
+const meta = {
   title: 'papirsoknad/ui-komponenter/omsorg-og-adopsjon',
   component: OmsorgOgAdopsjonPapirsoknadIndex,
+  args: {
+    isForeldrepengerFagsak: false,
+    fodselsdato: '2022-05-27',
+    readOnly: false,
+  },
+  parameters: {
+    submitCallback: action('onSubmit'),
+  },
+  render: (args, { parameters: { submitCallback } }) => {
+    const formMethods = useForm();
+
+    return (
+      <Form
+        formMethods={formMethods}
+        onSubmit={values => submitCallback(OmsorgOgAdopsjonPapirsoknadIndex.transformValues(values.omsorg))}
+      >
+        <VStack gap="10">
+          <OmsorgOgAdopsjonPapirsoknadIndex {...args} />
+          <Button size="small" variant="primary">
+            Lagreknapp (Kun for test)
+          </Button>
+        </VStack>
+      </Form>
+    );
+  },
+} satisfies Meta<typeof OmsorgOgAdopsjonPapirsoknadIndex>;
+
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const ForFodsel: Story = {
+  args: {
+    familieHendelseType: fht.FODSEL,
+  },
 };
 
-const Template: StoryFn<{
-  isForeldrepengerFagsak: boolean;
-  familieHendelseType: string;
-  submitCallback: (data: any) => Promise<void>;
-}> = ({ isForeldrepengerFagsak, familieHendelseType, submitCallback }) => {
-  const formMethods = useForm();
-
-  return (
-    <Form
-      formMethods={formMethods}
-      onSubmit={values => submitCallback(OmsorgOgAdopsjonPapirsoknadIndex.transformValues(values.omsorg))}
-    >
-      <OmsorgOgAdopsjonPapirsoknadIndex
-        readOnly={false}
-        familieHendelseType={familieHendelseType}
-        isForeldrepengerFagsak={isForeldrepengerFagsak}
-        fodselsdato="2022-05-27"
-      />
-      <VerticalSpacer fourtyPx />
-      <Button size="small" variant="primary">
-        Lagreknapp (Kun for test)
-      </Button>
-    </Form>
-  );
-};
-
-export const ForFodsel = Template.bind({});
-ForFodsel.args = {
-  isForeldrepengerFagsak: false,
-  familieHendelseType: fht.FODSEL,
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-};
-
-export const ForAdopsjon = Template.bind({});
-ForAdopsjon.args = {
-  isForeldrepengerFagsak: false,
-  familieHendelseType: fht.ADOPSJON,
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
+export const ForAdopsjon: Story = {
+  args: {
+    familieHendelseType: fht.ADOPSJON,
+  },
 };

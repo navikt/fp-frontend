@@ -9,7 +9,7 @@ import { FagsakYtelseType } from '@navikt/ft-kodeverk';
 
 import { familieHendelseType, foreldreType } from '@navikt/fp-kodeverk';
 
-import RettigheterPapirsoknadIndex from './RettigheterPapirsoknadIndex';
+import { RettigheterPapirsoknadIndex } from './RettigheterPapirsoknadIndex';
 import SoknadData from '../felles/SoknadData';
 
 export default {

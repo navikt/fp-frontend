@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Button } from '@navikt/ds-react';
 import { VerticalSpacer, FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
@@ -6,7 +6,8 @@ import { Datepicker, InputField } from '@navikt/ft-form-hooks';
 import { required, hasValidOrgNumberOrFodselsnr, hasNoWhiteSpace } from '@navikt/ft-form-validators';
 
 import { useFieldArray, useFormContext } from 'react-hook-form';
-import BehovForTilretteleggingFieldArray, {
+import {
+  BehovForTilretteleggingFieldArray,
   behovForTilretteleggingFieldArrayName,
 } from './BehovForTilretteleggingFieldArray';
 
@@ -24,7 +25,7 @@ const defaultTilrettelegging: FormValues = {
   behovsdato: '',
 };
 
-interface OwnProps {
+interface Props {
   readOnly: boolean;
 }
 
@@ -33,7 +34,7 @@ interface OwnProps {
  *
  * Form som brukes for registrere om det er behov for tilrettelegging for arbeidsgiver.
  */
-const TilretteleggingForArbeidsgiverFieldArray: FunctionComponent<OwnProps> = ({ readOnly }) => {
+export const TilretteleggingForArbeidsgiverFieldArray = ({ readOnly }: Props) => {
   const intl = useIntl();
 
   const { control } = useFormContext<{
@@ -100,5 +101,3 @@ const TilretteleggingForArbeidsgiverFieldArray: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-
-export default TilretteleggingForArbeidsgiverFieldArray;

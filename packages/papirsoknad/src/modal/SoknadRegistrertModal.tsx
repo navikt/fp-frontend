@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Alert, Button, Modal } from '@navikt/ds-react';
 import { createIntl } from '@navikt/ft-utils';
@@ -8,7 +8,7 @@ import styles from './soknadRegistrertModal.module.css';
 
 const intl = createIntl(messages);
 
-interface OwnProps {
+interface Props {
   isOpen?: boolean;
 }
 
@@ -17,7 +17,7 @@ interface OwnProps {
  *
  * Informasjonsmodal som vises til saksbehandler når en papirsøknad har blitt registrert.
  */
-const SoknadRegistrertModal: FunctionComponent<OwnProps> = ({ isOpen = false }) => (
+export const SoknadRegistrertModal = ({ isOpen = false }: Props) => (
   <Modal
     className={styles.modalStyle}
     open={isOpen}
@@ -41,5 +41,3 @@ const SoknadRegistrertModal: FunctionComponent<OwnProps> = ({ isOpen = false }) 
     </Modal.Body>
   </Modal>
 );
-
-export default SoknadRegistrertModal;

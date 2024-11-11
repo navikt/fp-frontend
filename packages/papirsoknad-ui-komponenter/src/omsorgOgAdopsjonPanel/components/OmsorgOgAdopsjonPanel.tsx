@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Heading } from '@navikt/ds-react';
 import { BorderBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -44,15 +44,11 @@ const getValideringMotAnnenFødselsdato = (index: number, fodselsdato?: string |
   return undefined;
 };
 
-interface OwnProps {
+interface Props {
   familieHendelseType: string;
   readOnly?: boolean;
   isForeldrepengerFagsak: boolean;
   fodselsdatoer?: string | string[];
-}
-
-interface StaticFunctions {
-  transformValues: (formValues: FormValues) => TransformedFormValues;
 }
 
 /**
@@ -61,12 +57,12 @@ interface StaticFunctions {
  * Komponenten vises som del av skjermbildet for registrering av papirsøknad ved adopsjon og omsorgsovertakelse.
  * Komponenten har inputfelter og må derfor rendres som etterkommer av form-komponent.
  */
-const OmsorgOgAdopsjonPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
+export const OmsorgOgAdopsjonPanel = ({
   readOnly = true,
   familieHendelseType,
   isForeldrepengerFagsak,
   fodselsdatoer,
-}) => {
+}: Props) => {
   const { formatMessage } = useIntl();
 
   const { control, watch } = useFormContext<{ [OMSORG_NAME_PREFIX]: FormValues }>();
@@ -206,10 +202,8 @@ const OmsorgOgAdopsjonPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   );
 };
 
-OmsorgOgAdopsjonPanel.transformValues = values => ({
+OmsorgOgAdopsjonPanel.transformValues = (values: FormValues): TransformedFormValues => ({
   ...values,
   foedselsDato:
     values.foedselsDato && values.foedselsDato.length > 0 ? values.foedselsDato.map(f => f.dato) : undefined,
 });
-
-export default OmsorgOgAdopsjonPanel;

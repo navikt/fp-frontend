@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { UseFormGetValues, useFormContext } from 'react-hook-form';
 import dayjs from 'dayjs';
@@ -47,7 +47,7 @@ const getLatestTerminbekreftelseDato = (termindato?: string): dayjs.Dayjs => {
 const validateTermin = (getValues: UseFormGetValues<FormValues>) => (terminbekreftelseDato: string) =>
   dateBeforeOrEqual(getLatestTerminbekreftelseDato(getValues('termindato')))(terminbekreftelseDato);
 
-interface OwnProps {
+interface Props {
   readOnly: boolean;
   erForeldrepenger: boolean;
 }
@@ -57,7 +57,7 @@ interface OwnProps {
  *
  * Form som brukes for registrere termin i papir soknad.
  */
-const TerminFodselDatoPanel: FunctionComponent<OwnProps> = ({ readOnly, erForeldrepenger }) => {
+export const TerminFodselDatoPanel = ({ readOnly, erForeldrepenger }: Props) => {
   const intl = useIntl();
 
   const {
@@ -181,5 +181,3 @@ const TerminFodselDatoPanel: FunctionComponent<OwnProps> = ({ readOnly, erForeld
     </BorderBox>
   );
 };
-
-export default TerminFodselDatoPanel;

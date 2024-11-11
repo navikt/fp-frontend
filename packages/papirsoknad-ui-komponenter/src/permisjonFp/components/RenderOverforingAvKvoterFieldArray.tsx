@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement, useEffect } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { UseFormGetValues, useFieldArray, useFormContext } from 'react-hook-form';
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
@@ -42,7 +42,7 @@ const defaultOverforingPeriode: Periode = {
   overforingArsak: '',
 };
 
-interface OwnProps {
+interface Props {
   selectValues: ReactElement[];
   readOnly: boolean;
 }
@@ -52,7 +52,7 @@ interface OwnProps {
  *
  * Viser inputfelter for dato for bestemmelse av overføring.
  */
-const RenderOverforingAvKvoterFieldArray: FunctionComponent<OwnProps> = ({ selectValues, readOnly }) => {
+export const RenderOverforingAvKvoterFieldArray = ({ selectValues, readOnly }: Props) => {
   const intl = useIntl();
 
   const {
@@ -156,5 +156,3 @@ const RenderOverforingAvKvoterFieldArray: FunctionComponent<OwnProps> = ({ selec
     </PeriodFieldArray>
   );
 };
-
-export default RenderOverforingAvKvoterFieldArray;
