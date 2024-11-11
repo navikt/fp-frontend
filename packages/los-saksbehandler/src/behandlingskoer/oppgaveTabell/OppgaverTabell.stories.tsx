@@ -151,7 +151,7 @@ export const TomOppgaveTabell: Story = {
   },
 };
 
-export const VisPagineringNårMerEnnTilOppgaver: Story = {
+export const VisPagineringNårMerEnn15Oppgaver: Story = {
   args: {
     reserverOppgave: action('button-click'),
     valgtSakslisteId: 1,

@@ -72,7 +72,7 @@ interface Props {
 
 export const OppgaverTabell = ({ reserverOppgave, antallOppgaver = 0, valgtSakslisteId, doPolling = true }: Props) => {
   const [sidetall, setSidetall] = useState(1);
-  const raderPerSide = 10;
+  const raderPerSide = 15;
 
   const { startRequest: hentReserverteOppgaver, data: reserverteOppgaver = EMPTY_ARRAY } =
     restApiHooks.useRestApiRunner(RestApiPathsKeys.RESERVERTE_OPPGAVER);

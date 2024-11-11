@@ -44,6 +44,7 @@ export default [
       'react/jsx-curly-brace-presence': ['error', { props: 'never' }],
       'react/prop-types': OFF,
       'jsx-a11y/no-autofocus': OFF,
+      'no-duplicate-imports': ERROR,
 
       // Note: you must disable the base rule as it can report incorrect errors
       'no-use-before-define': OFF,
