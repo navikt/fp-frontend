@@ -23,7 +23,7 @@ interface Props {
  *
  * Form som brukes for registrere termin og fødsel i papirsøknad.
  */
-const TerminFodselSvpPanel = ({ readOnly }: Props) => (
+export const TerminFodselSvpPanel = ({ readOnly }: Props) => (
   <BorderBox>
     <Heading size="small">{intl.formatMessage({ id: 'TerminFodselSvpPanel.TerminOgFodsel' })}</Heading>
     <VerticalSpacer sixteenPx />
@@ -49,5 +49,3 @@ const TerminFodselSvpPanel = ({ readOnly }: Props) => (
     </FlexContainer>
   </BorderBox>
 );
-
-export default TerminFodselSvpPanel;

@@ -47,9 +47,9 @@ export { TIDSROM_PERMISJON_FORM_NAME_PREFIX } from './src/permisjonFp/components
 export { PermisjonIndex } from './src/permisjonFp/PermisjonIndex';
 export type { FormValues as FormValuesPermisjon } from './src/permisjonFp/components/PermisjonPanel';
 
-export { default as SoknadData } from './src/felles/SoknadData';
+export { SoknadData } from './src/felles/SoknadData';
 
-export { default as TerminFodselSvpPanel } from './src/terminOgFodselSvp/TerminFodselSvpPanel';
+export { TerminFodselSvpPanel } from './src/terminOgFodselSvp/TerminFodselSvpPanel';
 export type { FormValues as TerminFodselSvpFormValues } from './src/terminOgFodselSvp/TerminFodselSvpPanel';
 
 export { BehovForTilretteleggingPanel } from './src/tilretteleggingSvp/BehovForTilretteleggingPanel';

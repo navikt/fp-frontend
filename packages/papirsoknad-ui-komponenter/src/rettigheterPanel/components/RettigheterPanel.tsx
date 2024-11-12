@@ -6,7 +6,7 @@ import { Heading } from '@navikt/ds-react';
 
 import { familieHendelseType, foreldreType } from '@navikt/fp-kodeverk';
 
-import SoknadData from '../../felles/SoknadData';
+import { SoknadData } from '../../felles/SoknadData';
 
 export const rettighet = {
   ANNEN_FORELDER_DOED: 'ANNEN_FORELDER_DOED',

@@ -20,7 +20,7 @@ const meta = {
   parameters: {
     submitCallback: action('onSubmit'),
   },
-  render: (args, { parameters: { submitCallback } }) => {
+  render: function Render(args, { parameters: { submitCallback } }) {
     const formMethods = useForm();
 
     return (

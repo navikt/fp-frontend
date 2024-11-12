@@ -1,5 +1,4 @@
-import React from 'react';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import dayjs from 'dayjs';
 import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
@@ -13,7 +12,7 @@ describe('<TerminFodselSvpPanel>', () => {
   it('skal velge termindato og fødselsdato', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<Default submitCallback={lagre} />);
+    await Default.run({ parameters: { submitCallback: lagre } });
 
     expect(await screen.findByText('Opplysninger om termin og fødsel')).toBeInTheDocument();
 
@@ -21,11 +20,11 @@ describe('<TerminFodselSvpPanel>', () => {
 
     expect(await screen.findByText('Feltet må fylles ut')).toBeInTheDocument();
 
-    const termindato = utils.getByLabelText('Termindato');
+    const termindato = screen.getByLabelText('Termindato');
     await userEvent.type(termindato, '01.05.2022');
     fireEvent.blur(termindato);
 
-    const fødselsdato = utils.getByLabelText('Fødselsdato');
+    const fødselsdato = screen.getByLabelText('Fødselsdato');
     await userEvent.type(fødselsdato, dayjs().add(1, 'day').format(DDMMYYYY_DATE_FORMAT));
     fireEvent.blur(fødselsdato);
 
@@ -41,8 +40,8 @@ describe('<TerminFodselSvpPanel>', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, {
+    expect(lagre).toHaveBeenCalledOnce();
+    expect(lagre).toHaveBeenCalledWith({
       foedselsDato: dayjs().subtract(1, 'day').format(ISO_DATE_FORMAT),
       termindato: '2022-05-01',
     });

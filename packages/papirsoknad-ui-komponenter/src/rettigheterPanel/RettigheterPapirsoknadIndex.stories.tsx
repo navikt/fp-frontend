@@ -1,16 +1,14 @@
 import React from 'react';
-import { Meta, StoryFn, StoryObj } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
+import { Meta, StoryObj } from '@storybook/react';
 import { useForm } from 'react-hook-form';
 import { Button, VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { FagsakYtelseType } from '@navikt/ft-kodeverk';
 
 import { familieHendelseType, foreldreType } from '@navikt/fp-kodeverk';
 
 import { RettigheterPapirsoknadIndex } from './RettigheterPapirsoknadIndex';
-import SoknadData from '../felles/SoknadData';
+import { SoknadData } from '../felles/SoknadData';
 
 const meta = {
   title: 'papirsoknad/ui-komponenter/rettigheter',

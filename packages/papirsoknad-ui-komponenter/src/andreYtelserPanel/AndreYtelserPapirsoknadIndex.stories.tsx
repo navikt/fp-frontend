@@ -19,7 +19,7 @@ const meta = {
     readOnly: false,
     alleKodeverk: alleKodeverk as any,
   },
-  render: (args, { parameters: { submitCallback } }) => {
+  render: function Render(args, { parameters: { submitCallback } }) {
     const formMethods = useForm({
       defaultValues: AndreYtelserPapirsoknadIndex.buildInitialValues(alleKodeverk[KodeverkType.ARBEID_TYPE]),
     });
