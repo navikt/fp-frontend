@@ -2,19 +2,11 @@ import React from 'react';
 import { CheckboxField, Form, InputField } from '@navikt/ft-form-hooks';
 import { hasValidSaksnummerOrFodselsnummerFormat } from '@navikt/ft-form-validators';
 import { useForm } from 'react-hook-form';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 
 import { MagnifyingGlassIcon, ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 import styles from './SøkForm.module.css';
 import { Button, HStack, VStack } from '@navikt/ds-react';
-
-const isButtonDisabled = (
-  searchString: string,
-  searchStarted: boolean,
-  searchResultAccessDenied?: {
-    feilmelding?: string;
-  },
-) => (!searchResultAccessDenied?.feilmelding && searchStarted) || !searchString;
 
 type FormValues = {
   skalReservere: boolean;
@@ -61,7 +53,7 @@ export const SøkForm = ({ onSubmit, searchResultAccessDenied, searchStarted, re
               variant="primary"
               icon={<MagnifyingGlassIcon aria-hidden />}
               loading={!searchResultAccessDenied?.feilmelding && searchStarted}
-              disabled={isButtonDisabled(searchStringValue, searchStarted, searchResultAccessDenied)}
+              disabled={(!searchResultAccessDenied?.feilmelding && searchStarted) || !searchStringValue}
               className={styles.searchButton}
             />
           </HStack>
@@ -77,7 +69,7 @@ export const SøkForm = ({ onSubmit, searchResultAccessDenied, searchStarted, re
         {searchResultAccessDenied?.feilmelding && (
           <HStack gap="2">
             <ExclamationmarkTriangleFillIcon className={styles.advarselIcon} />
-            <FormattedMessage id={searchResultAccessDenied.feilmelding} />
+            {searchResultAccessDenied.feilmelding}
           </HStack>
         )}
       </VStack>
