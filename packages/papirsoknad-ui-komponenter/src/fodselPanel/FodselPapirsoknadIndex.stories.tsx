@@ -16,7 +16,7 @@ const meta = {
   args: {
     readOnly: false,
   },
-  render: (args, { parameters: { submitCallback } }) => {
+  render: function Render(args, { parameters: { submitCallback } }) {
     const formMethods = useForm();
 
     return (

@@ -1,5 +1,4 @@
-import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
 
@@ -11,7 +10,7 @@ describe('<SprakPapirsoknadIndex>', () => {
   it('skal velge korrekt språk', async () => {
     const lagre = vi.fn();
 
-    render(<Default submitCallback={lagre} />);
+    await Default.run({ parameters: { submitCallback: lagre } });
 
     expect(await screen.findByText('Språk')).toBeInTheDocument();
 
@@ -19,8 +18,8 @@ describe('<SprakPapirsoknadIndex>', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, {
+    expect(lagre).toHaveBeenCalledOnce();
+    expect(lagre).toHaveBeenCalledWith({
       språkkode: 'NN',
     });
   });
