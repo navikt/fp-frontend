@@ -1,9 +1,17 @@
-.searchWidth {
+.searchInput {
   width: 300px;
 }
 
+.searchButton {
+  height: 49px;
+  margin-top: 82px;
+  margin-left: -2px;
+  width: 49px;
+}
+
 .checkbox {
-  padding-bottom: 5px;
+  margin-top: 88px;
+  padding-bottom: 7px;
 }
 
 .advarselIcon {

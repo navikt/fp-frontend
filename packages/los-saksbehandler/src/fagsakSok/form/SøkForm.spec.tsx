@@ -11,12 +11,12 @@ describe('<SøkForm>', () => {
     const onSubmitMock = vi.fn();
     render(<Søkeskjema onSubmit={onSubmitMock} />);
 
-    expect(await screen.findAllByText('Søk')).toHaveLength(2);
+    expect(await screen.findByText('Søk')).toBeInTheDocument();
 
-    const saksnrEllerFødselsnrInput = screen.getAllByLabelText('Søk')[0];
+    const saksnrEllerFødselsnrInput = screen.getByLabelText('Søk');
     await userEvent.type(saksnrEllerFødselsnrInput, 'Dette er ikke et gyldig nr');
 
-    await userEvent.click(screen.getAllByText('Søk')[1]);
+    await userEvent.click(screen.getByRole('button'));
 
     expect(await screen.findByText('Ugyldig saksnummer eller fødselsnummer')).toBeInTheDocument();
 
@@ -27,12 +27,12 @@ describe('<SøkForm>', () => {
     const onSubmitMock = vi.fn();
     render(<Søkeskjema onSubmit={onSubmitMock} />);
 
-    expect(await screen.findAllByText('Søk')).toHaveLength(2);
+    expect(await screen.findByText('Søk')).toBeInTheDocument();
 
-    const saksnrEllerFødselsnrInput = screen.getAllByLabelText('Søk')[0];
+    const saksnrEllerFødselsnrInput = screen.getByLabelText('Søk');
     await userEvent.type(saksnrEllerFødselsnrInput, '07078518434');
 
-    await userEvent.click(screen.getAllByText('Søk')[1]);
+    await userEvent.click(screen.getByRole('button'));
 
     await waitFor(() => expect(screen.queryByText('Ugyldig saksnummer eller fødselsnummer')).not.toBeInTheDocument());
 
@@ -47,14 +47,14 @@ describe('<SøkForm>', () => {
     const onSubmitMock = vi.fn();
     render(<Søkeskjema onSubmit={onSubmitMock} />);
 
-    expect(await screen.findAllByText('Søk')).toHaveLength(2);
+    expect(await screen.findByText('Søk')).toBeInTheDocument();
 
-    const saksnrEllerFødselsnrInput = screen.getAllByLabelText('Søk')[0];
+    const saksnrEllerFødselsnrInput = screen.getByLabelText('Søk');
     await userEvent.type(saksnrEllerFødselsnrInput, '07078518434');
 
     await userEvent.click(screen.getByText('Reserver behandlingen ved søk'));
 
-    await userEvent.click(screen.getAllByText('Søk')[1]);
+    await userEvent.click(screen.getByRole('button'));
 
     await waitFor(() => expect(screen.queryByText('Ugyldig saksnummer eller fødselsnummer')).not.toBeInTheDocument());
 
