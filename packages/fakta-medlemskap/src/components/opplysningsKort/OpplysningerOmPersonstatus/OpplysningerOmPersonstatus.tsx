@@ -6,7 +6,6 @@ import { FaktaKilde } from '@navikt/fp-fakta-felles';
 
 import { relevantForPersonstatus } from '../../ekspansjonsKort/medlemsAvvik';
 import EkspansjonsKort from '../../ekspansjonsKort/EkspansjonsKort';
-import { getPersonstatuserSomIkkeErBosatt } from '../../../utils/personstatusUtils';
 import PersonstatusVisning from './PersonstatusVisning';
 import RegionVisning from './RegionVisning';
 import { AvsnittSkiller } from '@navikt/ft-ui-komponenter';
@@ -36,9 +35,6 @@ const OpplysningerOmPersonstatus: FC<Props> = ({
       tittel={intl.formatMessage({ id: 'OpplysningsKort.PersonstatusTittel' }, { harAnnenpart: !!annenpart })}
       kilde={FaktaKilde.FREG}
       relevanteAvvik={avvik.filter(a => relevantForPersonstatus.includes(a))}
-      avvikValues={{
-        personstatus: getPersonstatuserSomIkkeErBosatt(personstatuser),
-      }}
     >
       <VStack gap="4" aria-label={`Personstatus og statsborgerskap for ${brukerNavn}`}>
         <Label>

@@ -99,7 +99,7 @@
 
   "AvvikMerknad.BosattUtenlandsopphold": "Dette ble markert fordi søker har oppgitt at man skal eller har bodd i utlandet",
   "AvvikMerknad.BosattManglendeBostedsadresse": "Dette ble markert fordi det finnes perioder uten norsk bostedsadresse i folkeregisteret",
-  "AvvikMerknad.BosattUgyldigPersonstatus": "Dette ble markert fordi søker er registrert som {personstatus}",
+  "AvvikMerknad.BosattUgyldigPersonstatus": "Dette ble markert fordi søker har usikker personstatus",
   "AvvikMerknad.BosattUtenlandsadresse": "Dette ble markert fordi det er registrert én eller flere adresser i utlandet",
   "AvvikMerknad.Oppholdsrett": "Dette ble markert fordi søker mangler oppholdstillatelse",
   "AvvikMerknad.MedlPerioder": "Dette ble markert fordi søker har én eller flere perioder i medlemskapsregisteret",
