@@ -1,35 +1,37 @@
 import React from 'react';
-import { StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { useForm } from 'react-hook-form';
-import { Button } from '@navikt/ds-react';
+import { Button, VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import BehovForTilretteleggingPanel from './BehovForTilretteleggingPanel';
+import { BehovForTilretteleggingPanel } from './BehovForTilretteleggingPanel';
 
-export default {
+const meta = {
   title: 'papirsoknad/ui-komponenter/tilrettelegging-svp',
   component: BehovForTilretteleggingPanel,
-};
+  parameters: {
+    submitCallback: action('onSubmit'),
+  },
+  args: {
+    readOnly: false,
+  },
+  render: function Render(args, { parameters: { submitCallback } }) {
+    const formMethods = useForm();
 
-const Template: StoryFn<{
-  submitCallback: (data: any) => Promise<void>;
-}> = ({ submitCallback }) => {
-  const formMethods = useForm();
+    return (
+      <Form formMethods={formMethods} onSubmit={submitCallback}>
+        <VStack gap="10">
+          <BehovForTilretteleggingPanel {...args} />
+          <Button size="small" variant="primary">
+            Lagreknapp (Kun for test)
+          </Button>
+        </VStack>
+      </Form>
+    );
+  },
+} satisfies Meta<typeof BehovForTilretteleggingPanel>;
 
-  return (
-    <Form formMethods={formMethods} onSubmit={submitCallback}>
-      <BehovForTilretteleggingPanel readOnly={false} />
-      <VerticalSpacer fourtyPx />
-      <Button size="small" variant="primary">
-        Lagreknapp (Kun for test)
-      </Button>
-    </Form>
-  );
-};
+export default meta;
 
-export const Default = Template.bind({});
-Default.args = {
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-};
+export const Default: StoryObj<typeof meta> = {};

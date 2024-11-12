@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { IntlShape, useIntl } from 'react-intl';
 import moment from 'moment';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -69,7 +69,7 @@ const getValiderAtFomDatoErFørFørstePeriode =
     return null;
   };
 
-interface OwnProps {
+interface Props {
   readOnly: boolean;
 }
 
@@ -78,7 +78,7 @@ interface OwnProps {
  *
  * Viser inputfelter for fra og til dato for frilansperioder.
  */
-export const FrilansOppdragForFamilieFieldArray: FunctionComponent<OwnProps> = ({ readOnly }) => {
+export const FrilansOppdragForFamilieFieldArray = ({ readOnly }: Props) => {
   const intl = useIntl();
 
   const {
@@ -159,5 +159,3 @@ export const FrilansOppdragForFamilieFieldArray: FunctionComponent<OwnProps> = (
     </PeriodFieldArray>
   );
 };
-
-export default FrilansOppdragForFamilieFieldArray;

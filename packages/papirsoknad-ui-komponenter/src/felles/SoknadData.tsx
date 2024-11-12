@@ -3,7 +3,7 @@ import { FagsakYtelseType } from '@navikt/ft-kodeverk';
 
 import { familieHendelseType } from '@navikt/fp-kodeverk';
 
-class SoknadData {
+export class SoknadData {
   fagsakYtelseType: string;
 
   familieHendelseType: string;
@@ -32,5 +32,3 @@ class SoknadData {
     return this.foreldreType;
   }
 }
-
-export default SoknadData;

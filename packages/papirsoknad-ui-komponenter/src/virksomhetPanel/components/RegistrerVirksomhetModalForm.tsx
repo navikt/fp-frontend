@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import { Button, Modal, Heading } from '@navikt/ds-react';
@@ -6,11 +6,11 @@ import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Form } from '@navikt/ft-form-hooks';
 import { AlleKodeverk } from '@navikt/fp-types';
 
-import VirksomhetIdentifikasjonPanel, { FormValues as IdFormValues } from './VirksomhetIdentifikasjonPanel';
-import VirksomhetRegnskapPanel, { FormValues as RegnskapFormValues } from './VirksomhetRegnskapPanel';
-import VirksomhetStartetEndretPanel, { FormValues as StartedEndretFormValues } from './VirksomhetStartetEndretPanel';
-import VirksomhetRelasjonPanel, { FormValues as RelasjonFormValues } from './VirksomhetRelasjonPanel';
-import VirksomhetTypeNaringPanel, { FormValues as TypeNaringFormValues } from './VirksomhetTypeNaringPanel';
+import { VirksomhetIdentifikasjonPanel, FormValues as IdFormValues } from './VirksomhetIdentifikasjonPanel';
+import { VirksomhetRegnskapPanel, FormValues as RegnskapFormValues } from './VirksomhetRegnskapPanel';
+import { VirksomhetStartetEndretPanel, FormValues as StartedEndretFormValues } from './VirksomhetStartetEndretPanel';
+import { VirksomhetRelasjonPanel, FormValues as RelasjonFormValues } from './VirksomhetRelasjonPanel';
+import { VirksomhetTypeNaringPanel, FormValues as TypeNaringFormValues } from './VirksomhetTypeNaringPanel';
 
 import styles from './registrerVirksomhetModalForm.module.css';
 
@@ -20,7 +20,7 @@ export type FormValues = IdFormValues &
   StartedEndretFormValues &
   TypeNaringFormValues;
 
-interface OwnProps {
+interface Props {
   showModal?: boolean;
   onSubmit: (value: FormValues) => void;
   closeEvent: () => void;
@@ -35,14 +35,14 @@ interface OwnProps {
  * Komponenten vises som del av skjermbildet for registrering av papirsøknad dersom søknad gjelder
  * foreldrepenger og saksbehandler skal legge til ny virksomhet for søker.
  */
-const RegistrerVirksomhetModalForm: FunctionComponent<OwnProps> = ({
+export const RegistrerVirksomhetModalForm = ({
   showModal = false,
   readOnly = false,
   closeEvent,
   onSubmit,
   alleKodeverk,
   virksomhet,
-}) => {
+}: Props) => {
   const intl = useIntl();
 
   const formMethods = useForm<FormValues>({
@@ -96,5 +96,3 @@ const RegistrerVirksomhetModalForm: FunctionComponent<OwnProps> = ({
     </Form>
   );
 };
-
-export default RegistrerVirksomhetModalForm;

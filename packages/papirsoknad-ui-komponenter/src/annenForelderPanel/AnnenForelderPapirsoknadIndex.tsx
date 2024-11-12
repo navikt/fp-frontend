@@ -1,27 +1,27 @@
-import React, { FunctionComponent, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
 import { AlleKodeverk } from '@navikt/fp-types';
 
-import AnnenForelderPanel from './components/AnnenForelderPanel';
+import { AnnenForelderPanel } from './components/AnnenForelderPanel';
 
 import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-interface OwnProps {
+interface Props {
   readOnly: boolean;
   alleKodeverk: AlleKodeverk;
   permisjonRettigheterPanel?: ReactNode;
   fagsakPersonnummer: string;
 }
 
-const AnnenForelderPapirsoknadIndex: FunctionComponent<OwnProps> = ({
+export const AnnenForelderPapirsoknadIndex = ({
   readOnly,
   alleKodeverk,
   permisjonRettigheterPanel,
   fagsakPersonnummer,
-}) => (
+}: Props) => (
   <RawIntlProvider value={intl}>
     <AnnenForelderPanel
       readOnly={readOnly}
@@ -31,5 +31,3 @@ const AnnenForelderPapirsoknadIndex: FunctionComponent<OwnProps> = ({
     />
   </RawIntlProvider>
 );
-
-export default AnnenForelderPapirsoknadIndex;

@@ -1,10 +1,10 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { AlleKodeverk } from '@navikt/fp-types';
 import { SoknadData } from '@navikt/fp-papirsoknad-ui-komponenter';
 
 import EngangsstonadForm from './components/EngangsstonadForm';
 
-interface OwnProps {
+interface Props {
   onSubmitUfullstendigsoknad: () => Promise<any>;
   onSubmit: (values: any) => Promise<any>;
   readOnly: boolean;
@@ -12,13 +12,13 @@ interface OwnProps {
   alleKodeverk: AlleKodeverk;
 }
 
-const EngangsstonadPapirsoknadIndex: FunctionComponent<OwnProps> = ({
+export const EngangsstonadPapirsoknadIndex = ({
   onSubmitUfullstendigsoknad,
   onSubmit,
   readOnly,
   soknadData,
   alleKodeverk,
-}) => (
+}: Props) => (
   <EngangsstonadForm
     onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
     onSubmit={onSubmit}
@@ -27,5 +27,3 @@ const EngangsstonadPapirsoknadIndex: FunctionComponent<OwnProps> = ({
     alleKodeverk={alleKodeverk}
   />
 );
-
-export default EngangsstonadPapirsoknadIndex;

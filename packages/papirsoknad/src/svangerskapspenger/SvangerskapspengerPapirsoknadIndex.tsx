@@ -1,16 +1,10 @@
-import React, { FunctionComponent } from 'react';
-import { RawIntlProvider } from 'react-intl';
-import { createIntl } from '@navikt/ft-utils';
-
+import React from 'react';
 import { AlleKodeverk } from '@navikt/fp-types';
 import { SoknadData } from '@navikt/fp-papirsoknad-ui-komponenter';
 
-import SvangerskapspengerForm from './components/SvangerskapspengerForm';
-import messages from '../../i18n/nb_NO.json';
+import { SvangerskapspengerForm } from './components/SvangerskapspengerForm';
 
-const intl = createIntl(messages);
-
-interface OwnProps {
+interface Props {
   onSubmitUfullstendigsoknad: () => Promise<any>;
   onSubmit: (values: any) => Promise<any>;
   readOnly: boolean;
@@ -18,22 +12,18 @@ interface OwnProps {
   alleKodeverk: AlleKodeverk;
 }
 
-const SvangerskapspengerPapirsoknadIndex: FunctionComponent<OwnProps> = ({
+export const SvangerskapspengerPapirsoknadIndex = ({
   onSubmitUfullstendigsoknad,
   onSubmit,
   readOnly,
   soknadData,
   alleKodeverk,
-}) => (
-  <RawIntlProvider value={intl}>
-    <SvangerskapspengerForm
-      onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
-      onSubmit={onSubmit}
-      readOnly={readOnly}
-      soknadData={soknadData}
-      alleKodeverk={alleKodeverk}
-    />
-  </RawIntlProvider>
+}: Props) => (
+  <SvangerskapspengerForm
+    onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
+    onSubmit={onSubmit}
+    readOnly={readOnly}
+    soknadData={soknadData}
+    alleKodeverk={alleKodeverk}
+  />
 );
-
-export default SvangerskapspengerPapirsoknadIndex;

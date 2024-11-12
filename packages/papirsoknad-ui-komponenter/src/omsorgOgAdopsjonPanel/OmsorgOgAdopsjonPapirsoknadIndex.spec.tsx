@@ -1,5 +1,4 @@
-import React from 'react';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
 
@@ -11,18 +10,22 @@ describe('<OmsorgOgAdopsjonPapirsoknadIndex>', () => {
   it('skal velge ett barn for fødsel', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<ForFodsel submitCallback={lagre} />);
+    await ForFodsel.run({
+      parameters: {
+        submitCallback: lagre,
+      },
+    });
 
     expect(await screen.findByText('Omsorg')).toBeInTheDocument();
 
-    const datoInput = utils.getByLabelText('Dato for omsorgsovertakelsen');
+    const datoInput = screen.getByLabelText('Dato for omsorgsovertakelsen');
     await userEvent.type(datoInput, '30.05.2022');
     fireEvent.blur(datoInput);
 
-    const antallBarnInput = utils.getByLabelText('Antall barn');
+    const antallBarnInput = screen.getByLabelText('Antall barn');
     await userEvent.type(antallBarnInput, '1');
 
-    const fødselsdatoInput = utils.getByLabelText('Fødselsdato barn 1');
+    const fødselsdatoInput = screen.getByLabelText('Fødselsdato barn 1');
     await userEvent.type(fødselsdatoInput, '21.05.2022');
     fireEvent.blur(fødselsdatoInput);
 
@@ -47,22 +50,26 @@ describe('<OmsorgOgAdopsjonPapirsoknadIndex>', () => {
   it('skal velge to barn for fødsel', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<ForFodsel submitCallback={lagre} />);
+    await ForFodsel.run({
+      parameters: {
+        submitCallback: lagre,
+      },
+    });
 
     expect(await screen.findByText('Omsorg')).toBeInTheDocument();
 
-    const datoInput = utils.getByLabelText('Dato for omsorgsovertakelsen');
+    const datoInput = screen.getByLabelText('Dato for omsorgsovertakelsen');
     await userEvent.type(datoInput, '30.05.2022');
     fireEvent.blur(datoInput);
 
-    const antallBarnInput = utils.getByLabelText('Antall barn');
+    const antallBarnInput = screen.getByLabelText('Antall barn');
     await userEvent.type(antallBarnInput, '2');
 
-    const fødselsdatoInput = utils.getByLabelText('Fødselsdato barn 1');
+    const fødselsdatoInput = screen.getByLabelText('Fødselsdato barn 1');
     await userEvent.type(fødselsdatoInput, '27.05.2022');
     fireEvent.blur(fødselsdatoInput);
 
-    const fødselsdato2Input = utils.getByLabelText('Fødselsdato barn 2');
+    const fødselsdato2Input = screen.getByLabelText('Fødselsdato barn 2');
     await userEvent.type(fødselsdato2Input, '26.05.2022');
     fireEvent.blur(fødselsdato2Input);
 
@@ -79,7 +86,11 @@ describe('<OmsorgOgAdopsjonPapirsoknadIndex>', () => {
   it('skal velge to barn for adopsjon', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<ForAdopsjon submitCallback={lagre} />);
+    await ForAdopsjon.run({
+      parameters: {
+        submitCallback: lagre,
+      },
+    });
 
     expect(await screen.findByText('Adopsjon')).toBeInTheDocument();
 
@@ -87,26 +98,26 @@ describe('<OmsorgOgAdopsjonPapirsoknadIndex>', () => {
 
     expect(await screen.findAllByText('Feltet må fylles ut')).toHaveLength(2);
 
-    const datoInput = utils.getByLabelText('Dato for omsorgsovertakelse/stebarnsadopsjon');
+    const datoInput = screen.getByLabelText('Dato for omsorgsovertakelse/stebarnsadopsjon');
     await userEvent.type(datoInput, '30.05.2022');
     fireEvent.blur(datoInput);
 
-    const ankomstdatoInput = utils.getByLabelText('Ankomstdato');
+    const ankomstdatoInput = screen.getByLabelText('Ankomstdato');
     await userEvent.type(ankomstdatoInput, '22.05.2022');
     fireEvent.blur(ankomstdatoInput);
 
-    const antallBarnInput = utils.getByLabelText('Antall barn');
+    const antallBarnInput = screen.getByLabelText('Antall barn');
     await userEvent.type(antallBarnInput, '2');
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
     expect(await screen.findAllByText('Feltet må fylles ut')).toHaveLength(2);
 
-    const fødselsdatoInput = utils.getByLabelText('Fødselsdato barn 1');
+    const fødselsdatoInput = screen.getByLabelText('Fødselsdato barn 1');
     await userEvent.type(fødselsdatoInput, '27.05.2022');
     fireEvent.blur(fødselsdatoInput);
 
-    const fødselsdato2Input = utils.getByLabelText('Fødselsdato barn 2');
+    const fødselsdato2Input = screen.getByLabelText('Fødselsdato barn 2');
     await userEvent.type(fødselsdato2Input, '26.05.2022');
     fireEvent.blur(fødselsdato2Input);
 

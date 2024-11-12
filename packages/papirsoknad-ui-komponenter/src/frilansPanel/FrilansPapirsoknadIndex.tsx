@@ -1,22 +1,17 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
 
-import FrilansPanel, { FormValues } from './components/FrilansPanel';
+import { FrilansPanel, FormValues } from './components/FrilansPanel';
 import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-interface OwnProps {
+interface Props {
   readOnly: boolean;
 }
 
-interface StaticFunctions {
-  buildInitialValues: () => FormValues;
-  transformValues: (formValues: FormValues) => FormValues;
-}
-
-const FrilansPapirsoknadIndex: FunctionComponent<OwnProps> & StaticFunctions = ({ readOnly }) => (
+export const FrilansPapirsoknadIndex = ({ readOnly }: Props) => (
   <RawIntlProvider value={intl}>
     <FrilansPanel readOnly={readOnly} />
   </RawIntlProvider>
@@ -24,6 +19,4 @@ const FrilansPapirsoknadIndex: FunctionComponent<OwnProps> & StaticFunctions = (
 
 FrilansPapirsoknadIndex.buildInitialValues = () => FrilansPanel.buildInitialValues();
 
-FrilansPapirsoknadIndex.transformValues = formValues => FrilansPanel.transformValues(formValues);
-
-export default FrilansPapirsoknadIndex;
+FrilansPapirsoknadIndex.transformValues = (formValues: FormValues) => FrilansPanel.transformValues(formValues);

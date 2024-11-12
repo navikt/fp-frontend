@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { Label } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -8,7 +8,8 @@ import { overforingArsak, foreldreType as ForeldreType } from '@navikt/fp-kodeve
 import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
 import { useFormContext } from 'react-hook-form';
-import RenderOverforingAvKvoterFieldArray, {
+import {
+  RenderOverforingAvKvoterFieldArray,
   FormValues as KvoterPerioderFormValues,
   TIDSROM_PERMISJON_FORM_NAME_PREFIX,
   OVERFORING_PERIODE_FIELD_ARRAY_NAME,
@@ -52,15 +53,11 @@ export type FormValues = {
   [OVERFORING_PERIODE_FIELD_ARRAY_NAME]?: KvoterPerioderFormValues;
 };
 
-interface OwnProps {
+interface Props {
   foreldreType: string;
   readOnly: boolean;
   alleKodeverk: AlleKodeverk;
   erEndringssøknad: boolean;
-}
-
-interface StaticFunctions {
-  buildInitialValues: () => any;
 }
 
 /**
@@ -69,12 +66,7 @@ interface StaticFunctions {
  * Komponenten vises som del av skjermbildet for registrering av papirsøknad dersom søknad gjelder foreldrepenger.
  * Komponenten har inputfelter og må derfor rendres som etterkommer av form-komponent.
  */
-const PermisjonOverforingAvKvoterPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
-  foreldreType,
-  alleKodeverk,
-  readOnly,
-  erEndringssøknad,
-}) => {
+export const PermisjonOverforingAvKvoterPanel = ({ foreldreType, alleKodeverk, readOnly, erEndringssøknad }: Props) => {
   const intl = useIntl();
 
   const overtaKvoteReasons = alleKodeverk[KodeverkType.OVERFOERING_AARSAK_TYPE];
@@ -103,5 +95,3 @@ PermisjonOverforingAvKvoterPanel.buildInitialValues = () => ({
   skalOvertaKvote: false,
   overforingsperioder: [{}],
 });
-
-export default PermisjonOverforingAvKvoterPanel;

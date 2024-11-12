@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { ErrorMessage, Label } from '@navikt/ds-react';
 import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -23,7 +23,7 @@ export type FormValues = {
   inntekt?: number;
 };
 
-interface OwnProps {
+interface Props {
   readOnly: boolean;
 }
 
@@ -33,7 +33,7 @@ interface OwnProps {
  * Komponenten vises som del av skjermbildet for registrering av
  * papirsøknad dersom søknad gjelder foreldrepenger og saksbehandler skal legge til ny virksomhet for søker.
  */
-export const VirksomhetStartetEndretPanel: FunctionComponent<OwnProps> = ({ readOnly }) => {
+export const VirksomhetStartetEndretPanel = ({ readOnly }: Props) => {
   const intl = useIntl();
   const { watch, setError, clearErrors, formState } = useFormContext<FormValues & VirtuellFeilType>();
   const varigEndretEllerStartetSisteFireAr = watch('varigEndretEllerStartetSisteFireAr') || false;
@@ -152,5 +152,3 @@ export const VirksomhetStartetEndretPanel: FunctionComponent<OwnProps> = ({ read
     </>
   );
 };
-
-export default VirksomhetStartetEndretPanel;

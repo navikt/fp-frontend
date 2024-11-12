@@ -1,12 +1,12 @@
-import React, { FunctionComponent, useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
+import { useFormContext } from 'react-hook-form';
 import { Button, Detail } from '@navikt/ds-react';
 import { CheckboxField, TextAreaField } from '@navikt/ft-form-hooks';
 import { ariaCheck, hasValidText, maxLength } from '@navikt/ft-form-validators';
 import { BorderBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { useFormContext } from 'react-hook-form';
-import LukkPapirsoknadModal from './LukkPapirsoknadModal';
+import { LukkPapirsoknadModal } from './LukkPapirsoknadModal';
 
 import styles from './lagreSoknadPanel.module.css';
 
@@ -18,13 +18,13 @@ type FormValues = {
   ufullstendigSoeknad: boolean;
 };
 
-interface OwnProps {
+interface Props {
   onSubmitUfullstendigsoknad: () => void;
   readOnly?: boolean;
   submitting: boolean;
 }
 
-const LagreSoknadPanel: FunctionComponent<OwnProps> = ({ submitting, onSubmitUfullstendigsoknad, readOnly = true }) => {
+export const LagreSoknadPanel = ({ submitting, onSubmitUfullstendigsoknad, readOnly = true }: Props) => {
   const intl = useIntl();
 
   const [showLukkSoknadModal, setShowLukkSoknadModal] = useState(false);
@@ -107,5 +107,3 @@ const LagreSoknadPanel: FunctionComponent<OwnProps> = ({ submitting, onSubmitUfu
     </BorderBox>
   );
 };
-
-export default LagreSoknadPanel;

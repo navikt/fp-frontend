@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { InputField, RadioGroupPanel } from '@navikt/ft-form-hooks';
@@ -13,7 +13,7 @@ export type FormValues = {
   tlfRegnskapsforer?: string;
 };
 
-interface OwnProps {
+interface Props {
   readOnly?: boolean;
 }
 
@@ -23,7 +23,7 @@ interface OwnProps {
  * Komponenten vises som del av skjermbildet for registrering av papirsøknad dersom
  * søknad gjelder foreldrepenger og saksbehandler skal legge til ny virksomhet for søker.
  */
-const VirksomhetRegnskapPanel: FunctionComponent<OwnProps> = ({ readOnly = true }) => {
+export const VirksomhetRegnskapPanel = ({ readOnly = true }: Props) => {
   const { watch } = useFormContext<FormValues>();
   const harRegnskapsforer = watch('harRegnskapsforer') || false;
 
@@ -72,5 +72,3 @@ const VirksomhetRegnskapPanel: FunctionComponent<OwnProps> = ({ readOnly = true 
     </>
   );
 };
-
-export default VirksomhetRegnskapPanel;

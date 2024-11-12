@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 import { useIntl } from 'react-intl';
 import { maxLength, hasValidDate } from '@navikt/ft-form-validators';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -36,7 +36,7 @@ const countrySelectValues = (countryCodes: KodeverkMedNavn[]): ReactElement[] =>
       </option>
     ));
 
-interface OwnProps {
+interface Props {
   readOnly: boolean;
   alleKodeverk: AlleKodeverk;
 }
@@ -46,7 +46,7 @@ interface OwnProps {
  *
  * Viser inputfelter for arbeidsgiver og organisasjonsnummer for registrering av arbeidsforhold.
  */
-const RenderInntektsgivendeArbeidFieldArray: FunctionComponent<OwnProps> = ({ alleKodeverk, readOnly }) => {
+export const RenderInntektsgivendeArbeidFieldArray = ({ alleKodeverk, readOnly }: Props) => {
   const intl = useIntl();
 
   const { control } = useFormContext<{ [INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME]: FormValues[] }>();
@@ -116,5 +116,3 @@ const RenderInntektsgivendeArbeidFieldArray: FunctionComponent<OwnProps> = ({ al
     </PeriodFieldArray>
   );
 };
-
-export default RenderInntektsgivendeArbeidFieldArray;

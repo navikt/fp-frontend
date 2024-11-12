@@ -1,5 +1,4 @@
-import React from 'react';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
 
@@ -11,7 +10,11 @@ describe('<BehovForTilretteleggingPanel>', () => {
   it('skal velge nei på alle de obligatoriske spørsmålene og da få feilmelding', async () => {
     const lagre = vi.fn();
 
-    render(<Default submitCallback={lagre} />);
+    await Default.run({
+      parameters: {
+        submitCallback: lagre,
+      },
+    });
 
     expect(await screen.findByText('Behov for tilrettelegging')).toBeInTheDocument();
 
@@ -27,13 +30,17 @@ describe('<BehovForTilretteleggingPanel>', () => {
 
     expect(await screen.findByText('Minst ett av spørsmålene må besvares med alternativ Ja')).toBeInTheDocument();
 
-    expect(lagre).toHaveBeenCalledTimes(0);
+    expect(lagre).not.toHaveBeenCalled();
   });
 
   it('skal velge at det søkes om svangerskapspenger som selvstendig næringsdrivende', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<Default submitCallback={lagre} />);
+    await Default.run({
+      parameters: {
+        submitCallback: lagre,
+      },
+    });
 
     expect(await screen.findByText('Behov for tilrettelegging')).toBeInTheDocument();
 
@@ -49,23 +56,23 @@ describe('<BehovForTilretteleggingPanel>', () => {
 
     expect(await screen.findAllByText('Feltet må fylles ut')).toHaveLength(4);
 
-    const tilretteleggingFom = utils.getByLabelText('Jordmor/lege oppgir at tilrettelegging er nødvendig fra og med');
+    const tilretteleggingFom = screen.getByLabelText('Jordmor/lege oppgir at tilrettelegging er nødvendig fra og med');
     await userEvent.type(tilretteleggingFom, '01.05.2022');
     fireEvent.blur(tilretteleggingFom);
 
-    await userEvent.selectOptions(utils.getByLabelText('Behov for tilrettelegging'), 'HEL_TILRETTELEGGING');
+    await userEvent.selectOptions(screen.getByLabelText('Behov for tilrettelegging'), 'HEL_TILRETTELEGGING');
 
-    const fraDato = utils.getByLabelText('Fra dato');
+    const fraDato = screen.getByLabelText('Fra dato');
     await userEvent.type(fraDato, '30.05.2022');
     fireEvent.blur(fraDato);
 
-    const stillingsprosent = utils.getByLabelText('Stillingsprosent');
+    const stillingsprosent = screen.getByLabelText('Stillingsprosent');
     await userEvent.type(stillingsprosent, '100');
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, {
+    expect(lagre).toHaveBeenCalledOnce();
+    expect(lagre).toHaveBeenCalledWith({
       tilretteleggingArbeidsforhold: {
         behovsdatoSN: '2022-05-01',
         sokForArbeidsgiver: false,

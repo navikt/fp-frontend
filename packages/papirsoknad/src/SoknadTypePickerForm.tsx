@@ -1,4 +1,4 @@
-import React, { useCallback, FunctionComponent, useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 import { Detail, Heading, Button } from '@navikt/ds-react';
@@ -19,7 +19,7 @@ interface FormValues {
   foreldreType?: string;
 }
 
-interface OwnProps {
+interface Props {
   setSoknadData: (soknadData: SoknadData) => void;
   fagsakYtelseType: string;
   alleKodeverk: AlleKodeverk;
@@ -30,7 +30,7 @@ interface OwnProps {
  *
  * Toppkomponent for registrering av papirsøknad der søknadstype, tema og søker/foreldretype blir valgt.
  */
-const SoknadTypePickerForm: FunctionComponent<OwnProps> = ({ setSoknadData, fagsakYtelseType, alleKodeverk }) => {
+export const SoknadTypePickerForm = ({ setSoknadData, fagsakYtelseType, alleKodeverk }: Props) => {
   const defaultValues = useMemo<FormValues>(
     () => ({
       fagsakYtelseType,

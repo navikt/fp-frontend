@@ -1,5 +1,4 @@
-import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
 
@@ -10,16 +9,19 @@ const { Default, MedObligatoriskFeltFordiAnnenForelderErInformert } = composeSto
 describe('<BekreftelsePanel>', () => {
   it('skal ikke ha behov for å velge når annen forelder ikke er informert', async () => {
     const lagre = vi.fn();
-
-    render(<Default submitCallback={lagre} />);
+    await Default.run({
+      parameters: {
+        submitCallback: lagre,
+      },
+    });
 
     expect(await screen.findByText('Bekreftelse')).toBeInTheDocument();
     expect(screen.getByText('Annen forelder er kjent med hvilke perioder det er søkt om')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, {
+    await waitFor(() => expect(lagre).toHaveBeenCalledOnce());
+    expect(lagre).toHaveBeenCalledWith({
       annenForelderInformert: undefined,
     });
   });
@@ -27,7 +29,11 @@ describe('<BekreftelsePanel>', () => {
   it('skal måtte velge når annen forelder er informert', async () => {
     const lagre = vi.fn();
 
-    render(<MedObligatoriskFeltFordiAnnenForelderErInformert submitCallback={lagre} />);
+    await MedObligatoriskFeltFordiAnnenForelderErInformert.run({
+      parameters: {
+        submitCallback: lagre,
+      },
+    });
 
     expect(await screen.findByText('Bekreftelse')).toBeInTheDocument();
     expect(screen.getByText('Annen forelder er kjent med hvilke perioder det er søkt om')).toBeInTheDocument();
@@ -36,8 +42,8 @@ describe('<BekreftelsePanel>', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, {
+    await waitFor(() => expect(lagre).toHaveBeenCalledOnce());
+    expect(lagre).toHaveBeenCalledWith({
       annenForelderInformert: true,
     });
   });

@@ -1,5 +1,4 @@
-import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
 
@@ -11,15 +10,18 @@ describe('<AnnenForelderPapirsoknadIndex>', () => {
   it('skal validere fødselsnummer', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<Default submitCallback={lagre} />);
-
+    await Default.run({
+      parameters: {
+        submitCallback: lagre,
+      },
+    });
     expect(await screen.findByText('Den andre forelderen')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
     expect(await screen.findByText('Feltet må fylles ut')).toBeInTheDocument();
 
-    const fødselsnummer = utils.getByLabelText('Fødselsnummer/D-nummer');
+    const fødselsnummer = screen.getByLabelText('Fødselsnummer/D-nummer');
     await userEvent.type(fødselsnummer, '03');
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
@@ -58,17 +60,20 @@ describe('<AnnenForelderPapirsoknadIndex>', () => {
   it('skal ikke kunne oppgi annen forelder', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<Default submitCallback={lagre} />);
-
+    await Default.run({
+      parameters: {
+        submitCallback: lagre,
+      },
+    });
     expect(await screen.findByText('Den andre forelderen')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Kan ikke oppgi annen forelder'));
 
     await userEvent.click(screen.getByText('Har ikke norsk f.nr. eller d-nr.'));
 
-    await userEvent.selectOptions(utils.getByLabelText('Land'), 'AND');
+    await userEvent.selectOptions(screen.getByLabelText('Land'), 'AND');
 
-    const fødselsnummer = utils.getByLabelText('Utenlandsk fødselsnummer');
+    const fødselsnummer = screen.getByLabelText('Utenlandsk fødselsnummer');
     await userEvent.type(fødselsnummer, '032323');
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));

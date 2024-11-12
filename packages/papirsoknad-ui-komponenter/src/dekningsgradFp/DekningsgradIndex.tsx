@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -13,14 +13,14 @@ export type FormValues = {
   dekningsgrad: string;
 };
 
-interface OwnProps {
+interface Props {
   readOnly: boolean;
 }
 
 /**
  * Komponenten vises som del av skjermbildet for registrering av papirsøknad dersom søknad gjelder foreldrepenger.
  */
-const DekningsgradIndex: FunctionComponent<OwnProps> = ({ readOnly }) => (
+export const DekningsgradIndex = ({ readOnly }: Props) => (
   <BorderBox>
     <Heading size="small">{intl.formatMessage({ id: 'Registrering.Dekningsgrad.Title' })}</Heading>
     <VerticalSpacer sixteenPx />
@@ -42,5 +42,3 @@ const DekningsgradIndex: FunctionComponent<OwnProps> = ({ readOnly }) => (
     />
   </BorderBox>
 );
-
-export default DekningsgradIndex;
