@@ -28,16 +28,15 @@ const getFormateringsIdForAvvik = (avvik: MedlemskapAvvik) => {
 
 interface Props {
   avvik: MedlemskapAvvik;
-  values?: Record<string, string>;
 }
 
-const AvvikMerknad: FC<Props> = ({ avvik, values }) => {
+const AvvikMerknad: FC<Props> = ({ avvik }) => {
   return (
     <Box borderRadius="full" paddingInline="2" paddingBlock="1" background="surface-neutral-subtle">
       <HStack gap="2">
         <AvvikStatus harAvvik={true} />
         <BodyLong size="small">
-          <FormattedMessage id={getFormateringsIdForAvvik(avvik)} values={values} />
+          <FormattedMessage id={getFormateringsIdForAvvik(avvik)} />
         </BodyLong>
       </HStack>
     </Box>
