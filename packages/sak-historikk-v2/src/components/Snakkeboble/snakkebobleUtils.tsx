@@ -26,7 +26,7 @@ export const getStyle = (aktørType: HistorikkAktor, kjønn?: string) => {
   return styleMap[aktørType];
 };
 
-export const formatDate = (date: string) => `${dateFormat(date)} kl.${timeFormat(date)}`;
+export const formatDate = (date: string) => `${dateFormat(date)} - ${timeFormat(date)}`;
 
 export const visNavn = (rolleNavn: string, aktør: HistorikkinnslagV2['aktør']): string =>
   [HistorikkAktor.ARBEIDSGIVER, HistorikkAktor.SOKER, HistorikkAktor.VEDTAKSLOSNINGEN].includes(aktør.type)
