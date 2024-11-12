@@ -12,7 +12,7 @@ describe('<FagsakSøk>', () => {
 
     const alder = dayjs().diff('1980-10-10', 'years');
 
-    expect(await screen.findAllByText('Søk')).toHaveLength(2);
+    expect(await screen.findByText('Søk')).toBeInTheDocument();
     expect(screen.getByText('Espen Utvikler')).toBeInTheDocument();
     expect(screen.getByText(`${alder} år`)).toBeInTheDocument();
     expect(screen.getByText('12213234')).toBeInTheDocument();
