@@ -34,10 +34,10 @@ describe('<HistorikkSakIndex>', () => {
     expect(await screen.findByText(/Historikk/)).toBeInTheDocument();
 
     const snakkebobler = screen.getAllByTestId('snakkeboble', { exact: false });
-    expect(snakkebobler[0]).toHaveTextContent(/Arbeidsgiver•23.09.2019 kl.16:22/);
-    expect(snakkebobler[1]).toHaveTextContent(/Beslutter Z984523•20.09.2019 kl.14:11/);
-    expect(snakkebobler[2]).toHaveTextContent(/Vedtaksløsningen•19.09.2019 kl.12:16/);
-    expect(snakkebobler[3]).toHaveTextContent(/Saksbehandler Z991110•18.09.2019 kl.15:25/);
-    expect(snakkebobler[4]).toHaveTextContent(/Søker•18.09.2019 kl.13:12/);
+    expect(snakkebobler[0]).toHaveTextContent(/23.09.2019 - 16:22/);
+    expect(snakkebobler[1]).toHaveTextContent(/20.09.2019 - 14:11/);
+    expect(snakkebobler[2]).toHaveTextContent(/19.09.2019 - 12:16/);
+    expect(snakkebobler[3]).toHaveTextContent(/18.09.2019 - 15:25/);
+    expect(snakkebobler[4]).toHaveTextContent(/18.09.2019 - 13:12/);
   });
 });
