@@ -1,5 +1,4 @@
-import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
 
@@ -11,7 +10,7 @@ describe('<RettigheterPapirsoknadIndex>', () => {
   it('skal velge at andre forelderen er død', async () => {
     const lagre = vi.fn();
 
-    render(<Default submitCallback={lagre} />);
+    await Default.run({ parameters: { submitCallback: lagre } });
 
     expect(await screen.findByText('Rettigheter')).toBeInTheDocument();
     expect(screen.queryByText('Mann adopterer alene')).not.toBeInTheDocument();
@@ -20,8 +19,8 @@ describe('<RettigheterPapirsoknadIndex>', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, {
+    expect(lagre).toHaveBeenCalledOnce();
+    expect(lagre).toHaveBeenCalledWith({
       rettigheter: 'ANNEN_FORELDER_DOED',
     });
   });
@@ -29,7 +28,7 @@ describe('<RettigheterPapirsoknadIndex>', () => {
   it('skal kunne velge at mann adopterer alene når søker er far og det er en adopsjonssøknad', async () => {
     const lagre = vi.fn();
 
-    render(<FarAdopterer submitCallback={lagre} />);
+    await FarAdopterer.run({ parameters: { submitCallback: lagre } });
 
     expect(await screen.findByText('Rettigheter')).toBeInTheDocument();
 
@@ -37,8 +36,8 @@ describe('<RettigheterPapirsoknadIndex>', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, {
+    expect(lagre).toHaveBeenCalledOnce();
+    expect(lagre).toHaveBeenCalledWith({
       rettigheter: 'MANN_ADOPTERER_ALENE',
     });
   });

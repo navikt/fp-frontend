@@ -2,7 +2,7 @@ import React from 'react';
 import { Meta, StoryFn, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { useForm } from 'react-hook-form';
-import { Button } from '@navikt/ds-react';
+import { Button, VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
@@ -22,11 +22,12 @@ const meta = {
 
     return (
       <Form formMethods={formMethods} onSubmit={submitCallback}>
-        <SprakPapirsoknadIndex {...args} />
-        <VerticalSpacer fourtyPx />
-        <Button size="small" variant="primary">
-          Lagreknapp (Kun for test)
-        </Button>
+        <VStack gap="10">
+          <SprakPapirsoknadIndex {...args} />
+          <Button size="small" variant="primary">
+            Lagreknapp (Kun for test)
+          </Button>
+        </VStack>
       </Form>
     );
   },
