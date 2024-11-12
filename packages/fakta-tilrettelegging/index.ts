@@ -1,1 +1,1 @@
-export { default as TilretteleggingFaktaIndex } from './src/TilretteleggingFaktaIndex';
+export { TilretteleggingFaktaIndex } from './src/TilretteleggingFaktaIndex';

@@ -6,7 +6,7 @@ import nb from './nb_NO.json';
 // eslint-disable-next-line no-console
 const writeToConsole = (text: string) => console.log(text);
 
-describe('intl fakta-adopsjon', () => {
+describe('intl fakta-tilrettelegging', () => {
   it('Check that i18n strings in code and in language file match', async () => {
     const files = await glob('src/**/*.{ts,tsx}');
 

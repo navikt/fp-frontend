@@ -1,10 +1,10 @@
-import React, { useState, FunctionComponent, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Table, Tag } from '@navikt/ds-react';
 import { Permisjon } from '@navikt/fp-types';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 
-import VelferdspermisjonForm from './VelferdspermisjonForm';
+import { VelferdspermisjonForm } from './VelferdspermisjonForm';
 
 import styles from './velferdspermisjonTabellRad.module.css';
 
@@ -15,19 +15,19 @@ const utledStyleForRad = (open: boolean, erIkkeValgt: boolean) => {
   return open ? styles.openRow : styles.row;
 };
 
-interface OwnProps {
+interface Props {
   velferdspermisjon: Permisjon;
   arbeidsforholdIndex: number;
   readOnly: boolean;
   oppdaterOverstyrtUtbetalingsgrad: (velferdspermisjonprosent: number) => void;
 }
 
-const VelferdspermisjonTabellRad: FunctionComponent<OwnProps> = ({
+export const VelferdspermisjonTabellRad = ({
   velferdspermisjon,
   arbeidsforholdIndex,
   readOnly,
   oppdaterOverstyrtUtbetalingsgrad,
-}) => {
+}: Props) => {
   const erIkkeValgt = velferdspermisjon.erGyldig === undefined || velferdspermisjon.erGyldig === null;
 
   const [open, setOpen] = useState(erIkkeValgt);
@@ -71,5 +71,3 @@ const VelferdspermisjonTabellRad: FunctionComponent<OwnProps> = ({
     </Table.ExpandableRow>
   );
 };
-
-export default VelferdspermisjonTabellRad;
