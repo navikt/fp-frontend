@@ -28,6 +28,7 @@ const utledAktivtPanel = (
   skalViseFraBeslutter: boolean,
   skalViseTilGodkjenning: boolean,
   valgtSupportPanel: string,
+  skalViseHistorikkV2: boolean,
 ): string => {
   if (valgtSupportPanel) {
     return valgtSupportPanel;
@@ -38,7 +39,7 @@ const utledAktivtPanel = (
   if (skalViseTilGodkjenning) {
     return SupportTabs.TIL_BESLUTTER;
   }
-  return SupportTabs.HISTORIKK;
+  return skalViseHistorikkV2 ? SupportTabs.HISTORIKK_V2 : SupportTabs.HISTORIKK;
 };
 
 function getEnvironment() {
@@ -94,7 +95,12 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
   const skalViseFraBeslutter = !!behandlingTillatteOperasjoner?.behandlingFraBeslutter;
   const skalViseTilGodkjenning = !!behandlingTillatteOperasjoner?.behandlingTilGodkjenning;
 
-  const aktivtSupportPanel = utledAktivtPanel(skalViseFraBeslutter, skalViseTilGodkjenning, valgtSupportPanel);
+  const aktivtSupportPanel = utledAktivtPanel(
+    skalViseFraBeslutter,
+    skalViseTilGodkjenning,
+    valgtSupportPanel,
+    skalViseHistorikkV2,
+  );
 
   const changeRouteCallback = useCallback(
     (supportPanel: string) => {
@@ -121,11 +127,6 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
             icon={<PersonCheckmarkFillIcon title={intl.formatMessage({ id: 'BehandlingSupportIndex.Godkjenning' })} />}
           />
         )}
-        <Tabs.Tab
-          className={styles.tab}
-          value={SupportTabs.HISTORIKK}
-          icon={<ClockDashedIcon title={intl.formatMessage({ id: 'BehandlingSupportIndex.Historikk' })} />}
-        />
         {skalViseHistorikkV2 && (
           <Tabs.Tab
             className={styles.tab}
@@ -133,6 +134,11 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
             icon={<ClockDashedIcon title={intl.formatMessage({ id: 'BehandlingSupportIndex.HistorikkV2' })} />}
           />
         )}
+        <Tabs.Tab
+          className={styles.tab}
+          value={SupportTabs.HISTORIKK}
+          icon={<ClockDashedIcon title={intl.formatMessage({ id: 'BehandlingSupportIndex.Historikk' })} />}
+        />
         <Tabs.Tab
           className={styles.tab}
           value={SupportTabs.MELDINGER}
@@ -174,16 +180,6 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
           />
         )}
       </Tabs.Panel>
-      <Tabs.Panel value={SupportTabs.HISTORIKK}>
-        <HistorikkIndex
-          saksnummer={fagsak.saksnummer}
-          behandlingUuid={behandlingUuid}
-          behandlingVersjon={behandlingVersjon}
-          historikkinnslagFpSak={fagsakData.getHistorikkFpSak()}
-          historikkinnslagFpTilbake={fagsakData.getHistorikkFpTilbake()}
-          kjønn={fagsak.bruker.kjønn}
-        />
-      </Tabs.Panel>
       {skalViseHistorikkV2 && (
         <Tabs.Panel value={SupportTabs.HISTORIKK_V2}>
           <HistorikkIndexV2
@@ -196,6 +192,16 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
           />
         </Tabs.Panel>
       )}
+      <Tabs.Panel value={SupportTabs.HISTORIKK}>
+        <HistorikkIndex
+          saksnummer={fagsak.saksnummer}
+          behandlingUuid={behandlingUuid}
+          behandlingVersjon={behandlingVersjon}
+          historikkinnslagFpSak={fagsakData.getHistorikkFpSak()}
+          historikkinnslagFpTilbake={fagsakData.getHistorikkFpTilbake()}
+          kjønn={fagsak.bruker.kjønn}
+        />
+      </Tabs.Panel>
       <Tabs.Panel value={SupportTabs.MELDINGER}>
         {behandling && (
           <MeldingIndex
