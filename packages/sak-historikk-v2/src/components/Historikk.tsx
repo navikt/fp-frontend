@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useIntl } from 'react-intl';
-import dayjs from 'dayjs';
+import moment from 'moment';
 import { Location } from 'history';
 
 import { Box, Checkbox, Heading, HStack, VStack } from '@navikt/ds-react';
@@ -23,7 +23,7 @@ const sortAndTagTilbakekreving = (
 ): HistorikkMedTilbakekrevingIndikator[] => {
   const historikkFraTilbakekrevingMedMarkor = historikkFptilbake.map(ht => ({ ...ht, erTilbakekreving: true }));
   return [...historikkFpsak, ...historikkFraTilbakekrevingMedMarkor].sort((a, b) =>
-    dayjs(b.opprettetTidspunkt).diff(dayjs(a.opprettetTidspunkt)),
+    moment(b.opprettetTidspunkt).diff(moment(a.opprettetTidspunkt)),
   );
 };
 
