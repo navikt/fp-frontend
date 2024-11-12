@@ -1,12 +1,13 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Detail, Heading } from '@navikt/ds-react';
 import { ArrowBox, BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { required } from '@navikt/ft-form-validators';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 
-import FrilansPerioderFieldArray, { FormValues as PerioderFormValues } from './FrilansPerioderFieldArray';
-import FrilansOppdragForFamiliePanel, {
+import { FrilansPerioderFieldArray, FormValues as PerioderFormValues } from './FrilansPerioderFieldArray';
+import {
+  FrilansOppdragForFamiliePanel,
   FormValues as FormValuesOppdragForFamilie,
 } from './FrilansOppdragForFamiliePanel';
 
@@ -19,16 +20,11 @@ export type FormValues = {
 } & FormValuesOppdragForFamilie &
   PerioderFormValues;
 
-interface OwnProps {
+interface Props {
   readOnly: boolean;
 }
 
-interface StaticFunctions {
-  buildInitialValues: () => FormValues;
-  transformValues: (formValues: FormValues) => FormValues;
-}
-
-const FrilansPanel: FunctionComponent<OwnProps> & StaticFunctions = ({ readOnly }) => (
+export const FrilansPanel = ({ readOnly }: Props) => (
   <BorderBox>
     <Heading size="small">
       <FormattedMessage id="Registrering.Frilans.Title" />
@@ -106,7 +102,7 @@ const FrilansPanel: FunctionComponent<OwnProps> & StaticFunctions = ({ readOnly 
   </BorderBox>
 );
 
-FrilansPanel.buildInitialValues = () => ({
+FrilansPanel.buildInitialValues = (): FormValues => ({
   ...FrilansOppdragForFamiliePanel.buildInitialValues(),
   perioder: [
     {
@@ -116,11 +112,9 @@ FrilansPanel.buildInitialValues = () => ({
   ],
 });
 
-FrilansPanel.transformValues = formValues =>
+FrilansPanel.transformValues = (formValues: FormValues): FormValues =>
   formValues.harSokerPeriodeMedFrilans
     ? formValues
     : {
         harSokerPeriodeMedFrilans: formValues.harSokerPeriodeMedFrilans,
       };
-
-export default FrilansPanel;

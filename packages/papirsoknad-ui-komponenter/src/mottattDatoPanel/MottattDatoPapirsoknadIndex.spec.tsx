@@ -1,6 +1,5 @@
-import React from 'react';
 import dayjs from 'dayjs';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
@@ -13,11 +12,14 @@ describe('<MottattDatoPapirsoknadIndex>', () => {
   it('skal velge mottatt dato', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<Default submitCallback={lagre} />);
-
+    await Default.run({
+      parameters: {
+        submitCallback: lagre,
+      },
+    });
     expect(await screen.findAllByText('Mottatt dato')).toHaveLength(2);
 
-    const datoInput = utils.getByLabelText('Mottatt dato');
+    const datoInput = screen.getByLabelText('Mottatt dato');
     await userEvent.type(datoInput, '28.05.2050');
     fireEvent.blur(datoInput);
 
@@ -32,8 +34,8 @@ describe('<MottattDatoPapirsoknadIndex>', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, {
+    expect(lagre).toHaveBeenCalledOnce();
+    expect(lagre).toHaveBeenCalledWith({
       mottattDato: '2022-05-26',
     });
   });

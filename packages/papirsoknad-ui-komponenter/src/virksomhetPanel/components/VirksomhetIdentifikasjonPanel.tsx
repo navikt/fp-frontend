@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Datepicker, InputField, RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
 import { ArrowBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -23,7 +23,7 @@ const countrySelectValues = (countryCodes: KodeverkMedNavn[]): ReactElement[] =>
     </option>
   ));
 
-interface OwnProps {
+interface Props {
   readOnly?: boolean;
   alleKodeverk: AlleKodeverk;
 }
@@ -43,7 +43,7 @@ export type FormValues = {
  * Komponenten vises som del av skjermbildet for registrering av
  * papirsøknad dersom søknad gjelder foreldrepenger og saksbehandler skal legge til ny virksomhet for søker.
  */
-const VirksomhetIdentifikasjonPanel: FunctionComponent<OwnProps> = ({ readOnly = true, alleKodeverk }) => {
+export const VirksomhetIdentifikasjonPanel = ({ readOnly = true, alleKodeverk }: Props) => {
   const intl = useIntl();
   const sortedCountriesByName = alleKodeverk[KodeverkType.LANDKODER]
     .slice()
@@ -141,5 +141,3 @@ const VirksomhetIdentifikasjonPanel: FunctionComponent<OwnProps> = ({ readOnly =
     </>
   );
 };
-
-export default VirksomhetIdentifikasjonPanel;

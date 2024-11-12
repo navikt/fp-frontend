@@ -1,5 +1,4 @@
-import React from 'react';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import dayjs from 'dayjs';
 import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
@@ -13,7 +12,11 @@ describe('<OppholdINorgePapirsoknadIndex>', () => {
   it('skal svare ja på alle spørsmåla for fødsel', async () => {
     const lagre = vi.fn();
 
-    render(<ForFodsel submitCallback={lagre} />);
+    await ForFodsel.run({
+      parameters: {
+        submitCallback: lagre,
+      },
+    });
 
     expect(await screen.findByText('Opphold i Norge')).toBeInTheDocument();
 
@@ -28,8 +31,8 @@ describe('<OppholdINorgePapirsoknadIndex>', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, {
+    expect(lagre).toHaveBeenCalledOnce();
+    expect(lagre).toHaveBeenCalledWith({
       fremtidigeOppholdUtenlands: undefined,
       harFremtidigeOppholdUtenlands: false,
       harTidligereOppholdUtenlands: false,
@@ -41,7 +44,11 @@ describe('<OppholdINorgePapirsoknadIndex>', () => {
   it('skal ha annen tekst på første spørsmålet for adopsjon', async () => {
     const lagre = vi.fn();
 
-    render(<ForAdopsjon submitCallback={lagre} />);
+    await ForAdopsjon.run({
+      parameters: {
+        submitCallback: lagre,
+      },
+    });
 
     expect(await screen.findByText('Opphold i Norge')).toBeInTheDocument();
 
@@ -52,7 +59,11 @@ describe('<OppholdINorgePapirsoknadIndex>', () => {
   it('skal svare nei på at en har bodd i norge de siste 12 månedene', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<ForFodsel submitCallback={lagre} />);
+    await ForFodsel.run({
+      parameters: {
+        submitCallback: lagre,
+      },
+    });
 
     expect(await screen.findByText('Opphold i Norge')).toBeInTheDocument();
 
@@ -69,13 +80,13 @@ describe('<OppholdINorgePapirsoknadIndex>', () => {
 
     expect(await screen.findAllByText('Feltet må fylles ut')).toHaveLength(3);
 
-    await userEvent.selectOptions(utils.getByLabelText('Land'), 'AND');
+    await userEvent.selectOptions(screen.getByLabelText('Land'), 'AND');
 
-    const fomDatoInput = utils.getByLabelText('F.o.m.');
+    const fomDatoInput = screen.getByLabelText('F.o.m.');
     await userEvent.type(fomDatoInput, dayjs().subtract(10, 'day').format(DDMMYYYY_DATE_FORMAT));
     fireEvent.blur(fomDatoInput);
 
-    const tomDatoInput = utils.getByLabelText('T.o.m.');
+    const tomDatoInput = screen.getByLabelText('T.o.m.');
     await userEvent.type(tomDatoInput, dayjs().add(1, 'day').format(DDMMYYYY_DATE_FORMAT));
     fireEvent.blur(tomDatoInput);
 
@@ -104,8 +115,8 @@ describe('<OppholdINorgePapirsoknadIndex>', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, {
+    expect(lagre).toHaveBeenCalledOnce();
+    expect(lagre).toHaveBeenCalledWith({
       fremtidigeOppholdUtenlands: undefined,
       harFremtidigeOppholdUtenlands: false,
       harTidligereOppholdUtenlands: true,
@@ -123,8 +134,11 @@ describe('<OppholdINorgePapirsoknadIndex>', () => {
   it('skal svare nei på at en skal bo i norge de neste 12 månedene', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<ForFodsel submitCallback={lagre} />);
-
+    await ForFodsel.run({
+      parameters: {
+        submitCallback: lagre,
+      },
+    });
     expect(await screen.findByText('Opphold i Norge')).toBeInTheDocument();
 
     expect(screen.getByText('Bor i Norge ved fødselstidspunktet')).toBeInTheDocument();
@@ -140,13 +154,13 @@ describe('<OppholdINorgePapirsoknadIndex>', () => {
 
     expect(await screen.findAllByText('Feltet må fylles ut')).toHaveLength(3);
 
-    await userEvent.selectOptions(utils.getByLabelText('Land'), 'AND');
+    await userEvent.selectOptions(screen.getByLabelText('Land'), 'AND');
 
-    const fomDatoInput = utils.getByLabelText('F.o.m.');
+    const fomDatoInput = screen.getByLabelText('F.o.m.');
     await userEvent.type(fomDatoInput, dayjs('2022-05-30').subtract(1, 'day').format(DDMMYYYY_DATE_FORMAT));
     fireEvent.blur(fomDatoInput);
 
-    const tomDatoInput = utils.getByLabelText('T.o.m.');
+    const tomDatoInput = screen.getByLabelText('T.o.m.');
     await userEvent.type(tomDatoInput, dayjs().add(10, 'day').format(DDMMYYYY_DATE_FORMAT));
     fireEvent.blur(tomDatoInput);
 
@@ -173,8 +187,8 @@ describe('<OppholdINorgePapirsoknadIndex>', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, {
+    expect(lagre).toHaveBeenCalledOnce();
+    expect(lagre).toHaveBeenCalledWith({
       fremtidigeOppholdUtenlands: [
         {
           land: 'AND',

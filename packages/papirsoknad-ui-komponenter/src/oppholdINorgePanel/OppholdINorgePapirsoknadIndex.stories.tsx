@@ -1,56 +1,59 @@
 import React from 'react';
-import { StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { useForm } from 'react-hook-form';
-import { Button } from '@navikt/ds-react';
+import { Button, VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 import { FormValues } from './components/OppholdINorgePanel';
-import OppholdINorgePapirsoknadIndex from './OppholdINorgePapirsoknadIndex';
+import { OppholdINorgePapirsoknadIndex } from './OppholdINorgePapirsoknadIndex';
 
-export default {
+const meta = {
   title: 'papirsoknad/ui-komponenter/opphold-i-norge',
   component: OppholdINorgePapirsoknadIndex,
+  parameters: {
+    submitCallback: action('onSubmit'),
+  },
+  args: {
+    readOnly: false,
+    alleKodeverk: alleKodeverk as any,
+    mottattDato: '2022-05-30',
+  },
+  render: function Render(args, { parameters: { submitCallback } }) {
+    const formMethods = useForm({
+      defaultValues: OppholdINorgePapirsoknadIndex.buildInitialValues(),
+    });
+
+    return (
+      <Form
+        formMethods={formMethods}
+        onSubmit={(values: FormValues) => submitCallback(OppholdINorgePapirsoknadIndex.transformValues(values))}
+      >
+        <VStack gap="10">
+          <OppholdINorgePapirsoknadIndex {...args} />
+          <Button size="small" variant="primary">
+            Lagreknapp (Kun for test)
+          </Button>
+        </VStack>
+      </Form>
+    );
+  },
+} satisfies Meta<typeof OppholdINorgePapirsoknadIndex>;
+
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const ForFodsel: Story = {
+  args: {
+    erAdopsjon: false,
+  },
 };
 
-const Template: StoryFn<{
-  erAdopsjon: boolean;
-  submitCallback: (data: any) => Promise<void>;
-}> = ({ erAdopsjon, submitCallback }) => {
-  const formMethods = useForm({
-    defaultValues: OppholdINorgePapirsoknadIndex.buildInitialValues(),
-  });
-
-  return (
-    <Form
-      formMethods={formMethods}
-      onSubmit={(values: FormValues) => submitCallback(OppholdINorgePapirsoknadIndex.transformValues(values))}
-    >
-      <OppholdINorgePapirsoknadIndex
-        readOnly={false}
-        erAdopsjon={erAdopsjon}
-        alleKodeverk={alleKodeverk as any}
-        mottattDato="2022-05-30"
-      />
-      <VerticalSpacer fourtyPx />
-      <Button size="small" variant="primary">
-        Lagreknapp (Kun for test)
-      </Button>
-    </Form>
-  );
-};
-
-export const ForFodsel = Template.bind({});
-ForFodsel.args = {
-  erAdopsjon: false,
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-};
-
-export const ForAdopsjon = Template.bind({});
-ForAdopsjon.args = {
-  erAdopsjon: true,
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
+export const ForAdopsjon: Story = {
+  args: {
+    erAdopsjon: true,
+  },
 };

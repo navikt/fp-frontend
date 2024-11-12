@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Label } from '@navikt/ds-react';
 import { CheckboxField } from '@navikt/ft-form-hooks';
@@ -8,7 +8,8 @@ import { AlleKodeverk } from '@navikt/fp-types';
 import { KodeverkType } from '@navikt/fp-kodeverk';
 
 import { useFormContext } from 'react-hook-form';
-import RenderUtsettelsePeriodeFieldArray, {
+import {
+  RenderUtsettelsePeriodeFieldArray,
   UTSETTELSE_PERIODE_FIELD_ARRAY_NAME,
   TIDSROM_PERMISJON_FORM_NAME_PREFIX,
   FormValues as UtsettelsePeriodeFormValues,
@@ -19,13 +20,9 @@ export type FormValues = {
   [UTSETTELSE_PERIODE_FIELD_ARRAY_NAME]?: UtsettelsePeriodeFormValues;
 };
 
-interface OwnProps {
+interface Props {
   readOnly: boolean;
   alleKodeverk: AlleKodeverk;
-}
-
-interface StaticFunctions {
-  buildInitialValues: () => any;
 }
 
 /**
@@ -34,7 +31,7 @@ interface StaticFunctions {
  * Viser panel for utsettelse
  * Komponenten har inputfelter og må derfor rendres som etterkommer av form komponent.
  */
-const PermisjonUtsettelsePanel: FunctionComponent<OwnProps> & StaticFunctions = ({ readOnly, alleKodeverk }) => {
+export const PermisjonUtsettelsePanel = ({ readOnly, alleKodeverk }: Props) => {
   const utsettelseReasons = alleKodeverk[KodeverkType.UTSETTELSE_AARSAK_TYPE];
   const utsettelseKvoter = alleKodeverk[KodeverkType.UTTAK_PERIODE_TYPE];
 
@@ -67,5 +64,3 @@ PermisjonUtsettelsePanel.buildInitialValues = () => ({
   [UTSETTELSE_PERIODE_FIELD_ARRAY_NAME]: [{}],
   skalUtsette: false,
 });
-
-export default PermisjonUtsettelsePanel;

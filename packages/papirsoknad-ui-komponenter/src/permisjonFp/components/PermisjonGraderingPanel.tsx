@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Label } from '@navikt/ds-react';
 import { CheckboxField } from '@navikt/ft-form-hooks';
@@ -7,7 +7,8 @@ import { KodeverkType, arbeidskategori } from '@navikt/fp-kodeverk';
 import { AlleKodeverk } from '@navikt/fp-types';
 
 import { useFormContext } from 'react-hook-form';
-import RenderGraderingPeriodeFieldArray, {
+import {
+  RenderGraderingPeriodeFieldArray,
   TIDSROM_PERMISJON_FORM_NAME_PREFIX,
   GRADERING_PERIODE_FIELD_ARRAY_NAME,
   FormValues as GraderingPeriodeFormValues,
@@ -18,14 +19,9 @@ export type FormValues = {
   [GRADERING_PERIODE_FIELD_ARRAY_NAME]?: GraderingPeriodeFormValues;
 };
 
-interface OwnProps {
+interface Props {
   readOnly: boolean;
   alleKodeverk: AlleKodeverk;
-}
-
-interface StaticFunctions {
-  buildInitialValues: () => any;
-  transformValues: (formValues: FormValues) => any;
 }
 
 /**
@@ -34,7 +30,7 @@ interface StaticFunctions {
  * Viser panel for gradering
  * Komponenten har inputfelter og må derfor rendres som etterkommer av form-komponent
  */
-const PermisjonGraderingPanel: FunctionComponent<OwnProps> & StaticFunctions = ({ readOnly, alleKodeverk }) => {
+export const PermisjonGraderingPanel = ({ readOnly, alleKodeverk }: Props) => {
   const graderingKvoter = alleKodeverk[KodeverkType.UTTAK_PERIODE_TYPE];
   const arbeidskategoriTyper = alleKodeverk[KodeverkType.ARBEIDSKATEGORI];
 
@@ -85,5 +81,3 @@ PermisjonGraderingPanel.buildInitialValues = () => ({
   [GRADERING_PERIODE_FIELD_ARRAY_NAME]: [{}],
   skalGradere: false,
 });
-
-export default PermisjonGraderingPanel;

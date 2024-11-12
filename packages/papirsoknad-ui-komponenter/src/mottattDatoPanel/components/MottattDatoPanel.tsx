@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Heading } from '@navikt/ds-react';
 import { Datepicker } from '@navikt/ft-form-hooks';
@@ -9,7 +9,7 @@ export type FormValues = {
   mottattDato?: string;
 };
 
-interface OwnProps {
+interface Props {
   readOnly: boolean;
 }
 
@@ -19,7 +19,7 @@ interface OwnProps {
  * Komponenten vises som del av skjermbildet for registrering av papirsøknad.
  * Komponenten har inputfelter og må derfor rendres som etterkommer av form-komponent.
  */
-const MottattDatoPanel: FunctionComponent<OwnProps> = ({ readOnly }) => (
+export const MottattDatoPanel = ({ readOnly }: Props) => (
   <BorderBox>
     <Heading size="small">
       <FormattedMessage key="regDatoTittel" id="Registrering.Omsoknaden.MottattDato" />
@@ -33,5 +33,3 @@ const MottattDatoPanel: FunctionComponent<OwnProps> = ({ readOnly }) => (
     />
   </BorderBox>
 );
-
-export default MottattDatoPanel;

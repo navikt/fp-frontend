@@ -1,5 +1,4 @@
-import React from 'react';
-import { render, screen, waitFor, fireEvent } from '@testing-library/react';
+import { screen, fireEvent } from '@testing-library/react';
 import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
 
@@ -11,7 +10,11 @@ describe('<AndreYtelserPapirsoknadIndex>', () => {
   it('skal validere at fom-dato er før tom-dato', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<Default submitCallback={lagre} />);
+    await Default.run({
+      parameters: {
+        submitCallback: lagre,
+      },
+    });
 
     expect(await screen.findByText('Andre inntektskilder')).toBeInTheDocument();
     expect(screen.getByText('Etterlønn eller sluttpakke')).toBeInTheDocument();
@@ -21,11 +24,11 @@ describe('<AndreYtelserPapirsoknadIndex>', () => {
 
     expect(await screen.findByText('F.o.m.')).toBeInTheDocument();
 
-    const fomInput = utils.getByLabelText('F.o.m.');
+    const fomInput = screen.getByLabelText('F.o.m.');
     await userEvent.type(fomInput, '14.09.2022');
     fireEvent.blur(fomInput);
 
-    const tomInput = utils.getByLabelText('T.o.m.');
+    const tomInput = screen.getByLabelText('T.o.m.');
     await userEvent.type(tomInput, '13.09.2022');
     fireEvent.blur(tomInput);
 
@@ -40,8 +43,8 @@ describe('<AndreYtelserPapirsoknadIndex>', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, [
+    expect(lagre).toHaveBeenCalledOnce();
+    expect(lagre).toHaveBeenCalledWith([
       {
         periodeFom: '2022-09-14',
         periodeTom: '2022-09-15',
@@ -53,7 +56,11 @@ describe('<AndreYtelserPapirsoknadIndex>', () => {
   it('skal legge til flere perioder under militær eller siviltjeneste', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<KunMiliterEllerSiviltjeneste submitCallback={lagre} />);
+    await KunMiliterEllerSiviltjeneste.run({
+      parameters: {
+        submitCallback: lagre,
+      },
+    });
 
     expect(await screen.findByText('Andre inntektskilder')).toBeInTheDocument();
 
@@ -61,11 +68,11 @@ describe('<AndreYtelserPapirsoknadIndex>', () => {
 
     expect(await screen.findByText('F.o.m.')).toBeInTheDocument();
 
-    const fomInput = utils.getByLabelText('F.o.m.');
+    const fomInput = screen.getByLabelText('F.o.m.');
     await userEvent.type(fomInput, '14.09.2022');
     fireEvent.blur(fomInput);
 
-    const tomInput = utils.getByLabelText('T.o.m.');
+    const tomInput = screen.getByLabelText('T.o.m.');
     await userEvent.type(tomInput, '15.09.2022');
     fireEvent.blur(tomInput);
 
@@ -82,8 +89,8 @@ describe('<AndreYtelserPapirsoknadIndex>', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, [
+    expect(lagre).toHaveBeenCalledOnce();
+    expect(lagre).toHaveBeenCalledWith([
       {
         periodeFom: '2022-09-14',
         periodeTom: '2022-09-15',

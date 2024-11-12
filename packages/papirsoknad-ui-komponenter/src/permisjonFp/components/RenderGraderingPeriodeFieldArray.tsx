@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement, useEffect } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import moment from 'moment/moment';
 import { UseFormGetValues, useFieldArray, useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
@@ -137,7 +137,7 @@ const mapArbeidskategori = (typer: KodeverkMedNavn[]): ReactElement[] =>
       </option>
     ));
 
-interface OwnProps {
+interface Props {
   graderingKvoter: KodeverkMedNavn[];
   readOnly: boolean;
   arbeidskategoriTyper: KodeverkMedNavn[];
@@ -148,11 +148,7 @@ interface OwnProps {
  *
  * Viser inputfelter for dato for bestemmelse av graderingperiode.
  */
-const RenderGraderingPeriodeFieldArray: FunctionComponent<OwnProps> = ({
-  graderingKvoter,
-  readOnly,
-  arbeidskategoriTyper,
-}) => {
+export const RenderGraderingPeriodeFieldArray = ({ graderingKvoter, readOnly, arbeidskategoriTyper }: Props) => {
   const intl = useIntl();
 
   const {
@@ -320,5 +316,3 @@ const RenderGraderingPeriodeFieldArray: FunctionComponent<OwnProps> = ({
     </PeriodFieldArray>
   );
 };
-
-export default RenderGraderingPeriodeFieldArray;

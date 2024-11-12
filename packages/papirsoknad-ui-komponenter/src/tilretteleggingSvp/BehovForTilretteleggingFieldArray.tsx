@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useIntl } from 'react-intl';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { required, maxValue } from '@navikt/ft-form-validators';
@@ -27,7 +27,7 @@ const defaultTilrettelegging: FormValues = {
   stillingsprosent: '',
 };
 
-interface OwnProps {
+interface Props {
   readOnly: boolean;
   name: string;
 }
@@ -37,7 +37,7 @@ interface OwnProps {
  *
  * Viser inputfelter for tilrettelegging av arbeidsforhold for selvstendig næringsdrivende eller frilans.
  */
-const BehovForTilretteleggingFieldArray: FunctionComponent<OwnProps> = ({ readOnly, name }) => {
+export const BehovForTilretteleggingFieldArray = ({ readOnly, name }: Props) => {
   const intl = useIntl();
 
   const { control } = useFormContext();
@@ -125,5 +125,3 @@ const BehovForTilretteleggingFieldArray: FunctionComponent<OwnProps> = ({ readOn
     </PeriodFieldArray>
   );
 };
-
-export default BehovForTilretteleggingFieldArray;

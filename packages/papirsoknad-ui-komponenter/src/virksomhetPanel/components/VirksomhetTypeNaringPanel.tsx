@@ -1,4 +1,4 @@
-import React, { Fragment, FunctionComponent, useEffect, useMemo } from 'react';
+import React, { Fragment, useEffect, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Label, ErrorMessage } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -32,7 +32,7 @@ export type FormValues = {
   [TYPE_VIRKSOMHET_PREFIX]: Record<string, boolean>;
 };
 
-interface OwnProps {
+interface Props {
   readOnly: boolean;
   alleKodeverk: AlleKodeverk;
 }
@@ -43,7 +43,7 @@ interface OwnProps {
  * Presentasjonskomponent. Komponenten vises som del av skjermbildet for registrering av
  * papirsøknad dersom søknad gjelder foreldrepenger og saksbehandler skal legge til ny virksomhet for søker.
  */
-const VirksomhetTypeNaringPanel: FunctionComponent<OwnProps> = ({ readOnly, alleKodeverk }) => {
+export const VirksomhetTypeNaringPanel = ({ readOnly, alleKodeverk }: Props) => {
   const virksomhetTyper = alleKodeverk[KodeverkType.VIRKSOMHET_TYPE];
   const naringvirksomhetTyper = useMemo(
     () =>
@@ -95,5 +95,3 @@ const VirksomhetTypeNaringPanel: FunctionComponent<OwnProps> = ({ readOnly, alle
     </>
   );
 };
-
-export default VirksomhetTypeNaringPanel;

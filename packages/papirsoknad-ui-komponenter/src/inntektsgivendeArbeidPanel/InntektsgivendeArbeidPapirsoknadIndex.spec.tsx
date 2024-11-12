@@ -1,5 +1,4 @@
-import React from 'react';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
 
@@ -11,33 +10,33 @@ describe('<InntektsgivendeArbeidPapirsoknadIndex>', () => {
   it('skal fylle ut inntektsgivende arbeid i utland', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<Default submitCallback={lagre} />);
+    await Default.run({
+      parameters: {
+        submitCallback: lagre,
+      },
+    });
 
     expect(await screen.findByText('Inntektsgivende arbeid i Norge')).toBeInTheDocument();
-    expect(
-      screen.getByText(
-        'Vedtaksløsningen foretar oppslag av norske arbeidsforhold fra Aa-registeret så dette skal ikke registreres her',
-      ),
-    ).toBeInTheDocument();
+    expect(screen.getByText(/Vedtaksløsningen foretar oppslag av norske arbeidsforhold /)).toBeInTheDocument();
     expect(screen.getByText('Inntektsgivende arbeid i utlandet')).toBeInTheDocument();
 
-    const arbeidsgiverInput = utils.getByLabelText('Arbeidsgiver');
+    const arbeidsgiverInput = screen.getByLabelText('Arbeidsgiver');
     await userEvent.type(arbeidsgiverInput, 'test-arbeidsgiver');
 
-    const fomInput = utils.getByLabelText('Fra og med');
+    const fomInput = screen.getByLabelText('Fra og med');
     await userEvent.type(fomInput, '15.06.2022');
     fireEvent.blur(fomInput);
 
-    const tomInput = utils.getByLabelText('Til og med');
+    const tomInput = screen.getByLabelText('Til og med');
     await userEvent.type(tomInput, '18.06.2022');
     fireEvent.blur(tomInput);
 
-    await userEvent.selectOptions(utils.getByLabelText('Land'), 'AND');
+    await userEvent.selectOptions(screen.getByLabelText('Land'), 'AND');
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, {
+    expect(lagre).toHaveBeenCalledOnce();
+    expect(lagre).toHaveBeenCalledWith({
       arbeidsforhold: [
         {
           periodeFom: '2022-06-15',

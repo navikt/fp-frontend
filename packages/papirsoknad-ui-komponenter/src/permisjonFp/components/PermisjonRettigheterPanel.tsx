@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { VStack } from '@navikt/ds-react';
@@ -15,7 +15,7 @@ export type FormValues = {
   morMottarUføretrygd?: boolean;
 };
 
-interface OwnProps {
+interface Props {
   readOnly: boolean;
   denAndreForelderenHarRettPaForeldrepenger?: boolean;
   sokerErMor: boolean;
@@ -23,7 +23,7 @@ interface OwnProps {
 
 // TODO Kvifor ligg dette panelet her og ikkje under ANNEN_FORELDER?
 
-const PermisjonRettigheterPanel: FunctionComponent<OwnProps> = ({ readOnly, sokerErMor }) => {
+export const PermisjonRettigheterPanel = ({ readOnly, sokerErMor }: Props) => {
   const intl = useIntl();
 
   const { watch } = useFormContext<{ [ANNEN_FORELDER_NAME_PREFIX]: FormValues }>();
@@ -117,5 +117,3 @@ const PermisjonRettigheterPanel: FunctionComponent<OwnProps> = ({ readOnly, soke
     </VStack>
   );
 };
-
-export default PermisjonRettigheterPanel;

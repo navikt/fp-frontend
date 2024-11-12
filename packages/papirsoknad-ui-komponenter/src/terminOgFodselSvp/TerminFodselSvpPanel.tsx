@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { createIntl } from '@navikt/ft-utils';
 import { Heading } from '@navikt/ds-react';
 import { BorderBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -14,7 +14,7 @@ export type FormValues = {
   foedselsDato?: string;
 };
 
-interface OwnProps {
+interface Props {
   readOnly: boolean;
 }
 
@@ -23,7 +23,7 @@ interface OwnProps {
  *
  * Form som brukes for registrere termin og fødsel i papirsøknad.
  */
-const TerminFodselSvpPanel: FunctionComponent<OwnProps> = ({ readOnly }) => (
+export const TerminFodselSvpPanel = ({ readOnly }: Props) => (
   <BorderBox>
     <Heading size="small">{intl.formatMessage({ id: 'TerminFodselSvpPanel.TerminOgFodsel' })}</Heading>
     <VerticalSpacer sixteenPx />
@@ -49,5 +49,3 @@ const TerminFodselSvpPanel: FunctionComponent<OwnProps> = ({ readOnly }) => (
     </FlexContainer>
   </BorderBox>
 );
-
-export default TerminFodselSvpPanel;

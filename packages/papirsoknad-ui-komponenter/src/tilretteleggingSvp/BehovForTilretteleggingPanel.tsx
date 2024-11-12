@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { RawIntlProvider, FormattedMessage } from 'react-intl';
 import { ErrorMessage, Heading } from '@navikt/ds-react';
 import { RadioGroupPanel, Datepicker } from '@navikt/ft-form-hooks';
@@ -7,11 +7,12 @@ import { required } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
 
 import { useFormContext } from 'react-hook-form';
-import BehovForTilretteleggingFieldArray, {
+import {
+  BehovForTilretteleggingFieldArray,
   frilansFieldArrayName,
   selvstendigNaringsdrivendeFieldArrayName,
 } from './BehovForTilretteleggingFieldArray';
-import TilretteleggingForArbeidsgiverFieldArray from './TilretteleggingForArbeidsgiverFieldArray';
+import { TilretteleggingForArbeidsgiverFieldArray } from './TilretteleggingForArbeidsgiverFieldArray';
 import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
@@ -46,12 +47,8 @@ export type FormValues = {
   } & VirtuellFeilType;
 };
 
-interface OwnProps {
+interface Props {
   readOnly: boolean;
-}
-
-interface StaticFunctions {
-  buildInitialValues: () => FormValues;
 }
 
 /*
@@ -59,7 +56,7 @@ interface StaticFunctions {
  *
  * Form som brukes for registrere om det er behov for tilrettelegging.
  */
-const BehovForTilretteleggingPanel: FunctionComponent<OwnProps> & StaticFunctions = ({ readOnly }) => {
+export const BehovForTilretteleggingPanel = ({ readOnly }: Props) => {
   const { watch, setError, clearErrors, formState } = useFormContext<FormValues>();
 
   const sokForSelvstendigNaringsdrivende = watch(`${TILRETTELEGGING_NAME_PREFIX}.sokForSelvstendigNaringsdrivende`);
@@ -189,5 +186,3 @@ BehovForTilretteleggingPanel.buildInitialValues = (): FormValues => ({
     [tilretteleggingForArbeidsgiverFieldArrayName]: [{}],
   },
 });
-
-export default BehovForTilretteleggingPanel;

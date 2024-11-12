@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -6,7 +6,7 @@ import { Heading } from '@navikt/ds-react';
 
 import { familieHendelseType, foreldreType } from '@navikt/fp-kodeverk';
 
-import SoknadData from '../../felles/SoknadData';
+import { SoknadData } from '../../felles/SoknadData';
 
 export const rettighet = {
   ANNEN_FORELDER_DOED: 'ANNEN_FORELDER_DOED',
@@ -15,7 +15,7 @@ export const rettighet = {
   IKKE_RELEVANT: 'IKKE_RELEVANT',
 };
 
-interface OwnProps {
+interface Props {
   soknadData: SoknadData;
   readOnly?: boolean;
 }
@@ -26,7 +26,7 @@ interface OwnProps {
  * Komponenten vises som del av skjermbildet for registrering av papirsøknad dersom søknad gjelder engangsstønad og søker er far.
  * Komponenten har inputfelter og må derfor rendres som etterkommer av form-komponent.
  */
-const RettigheterPanel: FunctionComponent<OwnProps> = ({ readOnly = true, soknadData }) => {
+export const RettigheterPanel = ({ readOnly = true, soknadData }: Props) => {
   const intl = useIntl();
 
   const options = [
@@ -63,5 +63,3 @@ const RettigheterPanel: FunctionComponent<OwnProps> = ({ readOnly = true, soknad
     </BorderBox>
   );
 };
-
-export default RettigheterPanel;

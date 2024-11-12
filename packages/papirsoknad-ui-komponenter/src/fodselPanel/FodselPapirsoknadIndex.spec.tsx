@@ -1,5 +1,4 @@
-import React from 'react';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import dayjs from 'dayjs';
 import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
@@ -7,13 +6,17 @@ import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 
 import * as stories from './FodselPapirsoknadIndex.stories';
 
-const { Default, ErIkkeForeldrepenger } = composeStories(stories);
+const { ForeldrepengeSak, ErIkkeForeldrepengeSak } = composeStories(stories);
 
 describe('<FodselPapirsoknadIndex>', () => {
   it('skal velge at barnet er født for foreldrepengersak', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<Default submitCallback={lagre} />);
+    await ForeldrepengeSak.run({
+      parameters: {
+        submitCallback: lagre,
+      },
+    });
 
     expect(await screen.findByText('Opplysninger om termin og fødsel')).toBeInTheDocument();
 
@@ -29,14 +32,14 @@ describe('<FodselPapirsoknadIndex>', () => {
 
     expect(await screen.findAllByText('Feltet må fylles ut')).toHaveLength(2);
 
-    const fødtInput = utils.getByLabelText('Når ble barnet født?');
+    const fødtInput = screen.getByLabelText('Når ble barnet født?');
     await userEvent.type(fødtInput, dayjs().subtract(10, 'day').format(DDMMYYYY_DATE_FORMAT));
     fireEvent.blur(fødtInput);
-    await userEvent.type(utils.getByLabelText('Antall barn'), '2');
+    await userEvent.type(screen.getByLabelText('Antall barn'), '2');
 
     expect(screen.getByText('Rett til prematuruker vil kun sjekkes når du også oppgir termindato')).toBeInTheDocument();
 
-    const termindatoInput = utils.getByLabelText('Termindato');
+    const termindatoInput = screen.getByLabelText('Termindato');
     await userEvent.type(termindatoInput, '14.09.2022');
     fireEvent.blur(termindatoInput);
 
@@ -44,8 +47,8 @@ describe('<FodselPapirsoknadIndex>', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, {
+    expect(lagre).toHaveBeenCalledOnce();
+    expect(lagre).toHaveBeenCalledWith({
       antallBarn: '2',
       erBarnetFodt: true,
       foedselsDato: dayjs().subtract(10, 'day').format(ISO_DATE_FORMAT),
@@ -54,25 +57,51 @@ describe('<FodselPapirsoknadIndex>', () => {
   });
 
   it('skal velge at barnet er født for annet en foreldrepengersak', async () => {
-    render(<ErIkkeForeldrepenger />);
+    const lagre = vi.fn();
+    await ErIkkeForeldrepengeSak.run({
+      parameters: {
+        submitCallback: lagre,
+      },
+    });
 
     expect(await screen.findByText('Opplysninger om termin og fødsel')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Ja'));
 
-    expect(await screen.findByText('Når ble barnet født?')).toBeInTheDocument();
+    await userEvent.type(screen.getByLabelText('Når ble barnet født?'), '14.09.2022');
 
     expect(
       screen.queryByText('Rett til prematuruker vil kun sjekkes når du også oppgir termindato'),
     ).not.toBeInTheDocument();
-    expect(screen.queryByText('Termindato')).toBeInTheDocument();
+
+    await userEvent.type(screen.getByLabelText('Antall barn'), '1');
+
+    await userEvent.type(screen.getByLabelText('Termindato'), '13.09.2022');
+
     expect(screen.queryByText('Utstedt dato fra terminbekreftelsen')).not.toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
+
+    expect(lagre).toHaveBeenCalledOnce();
+    expect(lagre).toHaveBeenCalledWith({
+      antallBarn: '1',
+      erBarnetFodt: true,
+      foedselsDato: '2022-09-14',
+      termindato: '2022-09-13',
+    });
   });
 
-  it('skal velge at barnet ikke er født', async () => {
+  it.each([
+    ['en foreldrepenge sak', ForeldrepengeSak],
+    ['annet en foreldrepengersak', ErIkkeForeldrepengeSak],
+  ])('skal velge at barnet ikke er født for %s', async (navn, scenario) => {
     const lagre = vi.fn();
 
-    const utils = render(<Default submitCallback={lagre} />);
+    await scenario.run({
+      parameters: {
+        submitCallback: lagre,
+      },
+    });
 
     expect(await screen.findByText('Opplysninger om termin og fødsel')).toBeInTheDocument();
 
@@ -82,13 +111,13 @@ describe('<FodselPapirsoknadIndex>', () => {
 
     expect(await screen.findAllByText('Feltet må fylles ut')).toHaveLength(2);
 
-    const termindatoInput = utils.getByLabelText('Termindato');
+    const termindatoInput = screen.getByLabelText('Termindato');
     await userEvent.type(termindatoInput, '13.09.2022');
     fireEvent.blur(termindatoInput);
 
-    await userEvent.type(utils.getByLabelText('Antall barn'), '2');
+    await userEvent.type(screen.getByLabelText('Antall barn'), '2');
 
-    const utstedtDatoInput = utils.getByLabelText('Utstedt dato fra terminbekreftelsen');
+    const utstedtDatoInput = screen.getByLabelText('Utstedt dato fra terminbekreftelsen');
     await userEvent.type(utstedtDatoInput, dayjs().format(DDMMYYYY_DATE_FORMAT));
     fireEvent.blur(utstedtDatoInput);
 
@@ -102,8 +131,8 @@ describe('<FodselPapirsoknadIndex>', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, {
+    expect(lagre).toHaveBeenCalledOnce();
+    expect(lagre).toHaveBeenCalledWith({
       antallBarnFraTerminbekreftelse: '2',
       erBarnetFodt: false,
       terminbekreftelseDato: '2022-05-27',

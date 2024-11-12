@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement, useEffect } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import { UseFormGetValues, useFieldArray, useFormContext } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
@@ -62,7 +62,7 @@ const mapTyper = (typer: KodeverkMedNavn[]): ReactElement[] =>
       </option>
     ));
 
-interface OwnProps {
+interface Props {
   oppholdsReasons: KodeverkMedNavn[];
   readOnly: boolean;
 }
@@ -72,7 +72,7 @@ interface OwnProps {
  *
  * Viser inputfelter for dato for bestemmelse av oppholdsperiode.
  */
-const RenderOppholdPeriodeFieldArray: FunctionComponent<OwnProps> = ({ oppholdsReasons, readOnly }) => {
+export const RenderOppholdPeriodeFieldArray = ({ oppholdsReasons, readOnly }: Props) => {
   const intl = useIntl();
 
   const {
@@ -168,5 +168,3 @@ const RenderOppholdPeriodeFieldArray: FunctionComponent<OwnProps> = ({ oppholdsR
     </PeriodFieldArray>
   );
 };
-
-export default RenderOppholdPeriodeFieldArray;

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement, useEffect } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import moment from 'moment';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { UseFormGetValues, useFieldArray, useFormContext } from 'react-hook-form';
@@ -108,14 +108,10 @@ const getValiderFomOgTomVerdi =
     return erFør ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : dateAfterOrEqual(fomVerdi)(tomVerdi);
   };
 
-interface OwnProps {
+interface Props {
   readOnly: boolean;
   sokerErMor: boolean;
   alleKodeverk: AlleKodeverk;
-}
-
-interface StaticFunctions {
-  transformValues: (values: FormValues[]) => any;
 }
 
 /**
@@ -123,11 +119,7 @@ interface StaticFunctions {
  *
  * Viser inputfelter for dato for bestemmelse av perioder med permijon.
  */
-const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunctions = ({
-  sokerErMor,
-  readOnly,
-  alleKodeverk,
-}) => {
+export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKodeverk }: Props) => {
   const intl = useIntl();
 
   const periodeTyper = alleKodeverk[KodeverkType.UTTAK_PERIODE_TYPE];
@@ -315,5 +307,3 @@ RenderPermisjonPeriodeFieldArray.transformValues = (values: FormValues[]) =>
       samtidigUttaksprosent: value.samtidigUttaksprosent,
     };
   });
-
-export default RenderPermisjonPeriodeFieldArray;

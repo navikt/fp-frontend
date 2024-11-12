@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { PlusCircleIcon, XMarkIcon } from '@navikt/aksel-icons';
 import { Label, BodyShort, Detail, ErrorMessage, Link } from '@navikt/ds-react';
@@ -7,7 +7,7 @@ import { AlleKodeverk } from '@navikt/fp-types';
 
 import { useFieldArray, useFormContext } from 'react-hook-form';
 
-import RegistrerVirksomhetModalForm, { FormValues as ModalFormValues } from './RegistrerVirksomhetModalForm';
+import { RegistrerVirksomhetModalForm, FormValues as ModalFormValues } from './RegistrerVirksomhetModalForm';
 
 import styles from './registrerVirksomhetPanel.module.css';
 
@@ -21,7 +21,7 @@ export type FormValues = {
   virksomheter: ModalFormValues[];
 };
 
-interface OwnProps {
+interface Props {
   readOnly?: boolean;
   alleKodeverk: AlleKodeverk;
 }
@@ -33,7 +33,7 @@ interface OwnProps {
  * foreldrepenger og søker har arbeidet i egen virksomhet.
  * Viser registrerte virksomheter samt knapp for å legge til nye virksomheter.
  */
-const RegistrerVirksomhetPanel: FunctionComponent<OwnProps> = ({ readOnly = false, alleKodeverk }) => {
+export const RegistrerVirksomhetPanel = ({ readOnly = false, alleKodeverk }: Props) => {
   const intl = useIntl();
   const [virksomhetIndex, setVirksomhetIndex] = useState<number>();
 
@@ -139,5 +139,3 @@ const RegistrerVirksomhetPanel: FunctionComponent<OwnProps> = ({ readOnly = fals
     </div>
   );
 };
-
-export default RegistrerVirksomhetPanel;

@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { required } from '@navikt/ft-form-validators';
@@ -11,14 +11,14 @@ const sprakvalg = {
   ENGELSK: 'EN',
 };
 
-interface OwnProps {
+interface Props {
   readOnly: boolean;
 }
 
 /**
  * Komponenten vises som del av skjermbildet for registrering av papirsøknad dersom søknad gjelder engangsstønad.
  */
-const SprakPanel: FunctionComponent<OwnProps> = ({ readOnly }) => {
+export const SprakPanel = ({ readOnly }: Props) => {
   const intl = useIntl();
   return (
     <BorderBox>
@@ -46,5 +46,3 @@ const SprakPanel: FunctionComponent<OwnProps> = ({ readOnly }) => {
     </BorderBox>
   );
 };
-
-export default SprakPanel;

@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 import { UseFormGetValues, useFieldArray, useFormContext } from 'react-hook-form';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -16,26 +16,21 @@ export type FormValues = {
   periodeTom: string;
 };
 
+export type TransformValues = {
+  ytelseType: string;
+  periodeFom: string;
+  periodeTom: string;
+};
+
 const getValue = (
   getValues: UseFormGetValues<{ [ANDRE_YTELSER_NAME_PREFIX]: FormValues }>,
   fieldName: string,
   // @ts-ignore
 ): string => getValues(fieldName);
 
-interface OwnProps {
+interface Props {
   readOnly: boolean;
   name: string;
-}
-
-interface StaticFunctions {
-  transformValues: (
-    values: FormValues[],
-    ytelseType: string,
-  ) => {
-    ytelseType: string;
-    periodeFom: string;
-    periodeTom: string;
-  }[];
 }
 
 /**
@@ -43,7 +38,7 @@ interface StaticFunctions {
  *
  * Viser inputfelter for fra og til dato for perioder for andre ytelser
  */
-const RenderAndreYtelserPerioderFieldArray: FunctionComponent<OwnProps> & StaticFunctions = ({ readOnly, name }) => {
+export const RenderAndreYtelserPerioderFieldArray = ({ readOnly, name }: Props) => {
   const intl = useIntl();
 
   const {
@@ -117,11 +112,9 @@ const RenderAndreYtelserPerioderFieldArray: FunctionComponent<OwnProps> & Static
   );
 };
 
-RenderAndreYtelserPerioderFieldArray.transformValues = (values: FormValues[], ytelseType: string): any =>
+RenderAndreYtelserPerioderFieldArray.transformValues = (values: FormValues[], ytelseType: string): TransformValues[] =>
   values.map(ytelsePeriode => ({
     ytelseType,
     periodeFom: ytelsePeriode.periodeFom,
     periodeTom: ytelsePeriode.periodeTom,
   }));
-
-export default RenderAndreYtelserPerioderFieldArray;

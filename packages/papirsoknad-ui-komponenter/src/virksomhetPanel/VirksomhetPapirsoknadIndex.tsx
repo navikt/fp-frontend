@@ -1,22 +1,20 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
 import { AlleKodeverk } from '@navikt/fp-types';
 
-import EgenVirksomhetPanel from './components/EgenVirksomhetPanel';
+import { EgenVirksomhetPanel } from './components/EgenVirksomhetPanel';
 import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-interface OwnProps {
+interface Props {
   readOnly: boolean;
   alleKodeverk: AlleKodeverk;
 }
 
-const VirksomhetPapirsoknadIndex: FunctionComponent<OwnProps> = ({ readOnly, alleKodeverk }) => (
+export const VirksomhetPapirsoknadIndex = ({ readOnly, alleKodeverk }: Props) => (
   <RawIntlProvider value={intl}>
     <EgenVirksomhetPanel readOnly={readOnly} alleKodeverk={alleKodeverk} />
   </RawIntlProvider>
 );
-
-export default VirksomhetPapirsoknadIndex;

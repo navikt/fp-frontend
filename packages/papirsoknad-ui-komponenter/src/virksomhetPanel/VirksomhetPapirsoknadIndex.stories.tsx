@@ -1,37 +1,40 @@
 import React from 'react';
-import { StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { useForm } from 'react-hook-form';
-import { Button } from '@navikt/ds-react';
+import { Button, VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
-import VirksomhetPapirsoknadIndex from './VirksomhetPapirsoknadIndex';
+import { VirksomhetPapirsoknadIndex } from './VirksomhetPapirsoknadIndex';
 
-export default {
+const meta = {
   title: 'papirsoknad/ui-komponenter/virksomhet',
   component: VirksomhetPapirsoknadIndex,
-};
+  parameters: {
+    submitCallback: action('onSubmit'),
+  },
+  args: {
+    readOnly: false,
+    alleKodeverk: alleKodeverk as any,
+  },
+  render: function Render(args, { parameters: { submitCallback } }) {
+    const formMethods = useForm();
 
-const Template: StoryFn<{
-  submitCallback: (data: any) => Promise<void>;
-}> = ({ submitCallback }) => {
-  const formMethods = useForm();
+    return (
+      <Form formMethods={formMethods} onSubmit={submitCallback}>
+        <VStack gap="10">
+          <VirksomhetPapirsoknadIndex {...args} />
+          <Button size="small" variant="primary">
+            Lagreknapp (Kun for test)
+          </Button>
+        </VStack>
+      </Form>
+    );
+  },
+} satisfies Meta<typeof VirksomhetPapirsoknadIndex>;
 
-  return (
-    <Form formMethods={formMethods} onSubmit={submitCallback}>
-      <VirksomhetPapirsoknadIndex readOnly={false} alleKodeverk={alleKodeverk as any} />
-      <VerticalSpacer fourtyPx />
-      <Button size="small" variant="primary">
-        Lagreknapp (Kun for test)
-      </Button>
-    </Form>
-  );
-};
+export default meta;
 
-export const Default = Template.bind({});
-Default.args = {
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-};
+export const Default: StoryObj<typeof meta> = {};

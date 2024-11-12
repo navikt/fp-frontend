@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement, useEffect, useCallback } from 'react';
+import React, { ReactElement, useEffect, useCallback } from 'react';
 import { useIntl } from 'react-intl';
 import { UseFormGetValues, useFieldArray, useFormContext } from 'react-hook-form';
 import { AvsnittSkiller, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -86,7 +86,7 @@ const mapKvoter = (typer: KodeverkMedNavn[]): ReactElement[] =>
       </option>
     ));
 
-interface OwnProps {
+interface Props {
   utsettelseReasons: KodeverkMedNavn[];
   utsettelseKvoter: KodeverkMedNavn[];
   readOnly: boolean;
@@ -97,11 +97,7 @@ interface OwnProps {
  *
  * Viser inputfelter for dato for bestemmelse av utsettelseperiode.
  */
-const RenderUtsettelsePeriodeFieldArray: FunctionComponent<OwnProps> = ({
-  utsettelseReasons,
-  utsettelseKvoter,
-  readOnly,
-}) => {
+export const RenderUtsettelsePeriodeFieldArray = ({ utsettelseReasons, utsettelseKvoter, readOnly }: Props) => {
   const intl = useIntl();
 
   const {
@@ -225,5 +221,3 @@ const RenderUtsettelsePeriodeFieldArray: FunctionComponent<OwnProps> = ({
     </PeriodFieldArray>
   );
 };
-
-export default RenderUtsettelsePeriodeFieldArray;
