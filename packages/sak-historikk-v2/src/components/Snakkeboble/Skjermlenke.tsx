@@ -41,7 +41,6 @@ export const Skjermlenke = ({
           {getKodeverknavn(skjermlenke, KodeverkType.SKJERMLENKE_TYPE)}
         </NavLink>
       </Heading>
-      <VerticalSpacer fourPx />
     </>
   );
 };

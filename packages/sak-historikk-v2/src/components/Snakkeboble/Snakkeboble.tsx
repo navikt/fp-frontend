@@ -40,7 +40,7 @@ export const Snakkeboble = ({
       className={getStyle(aktør.type, kjønn)}
     >
       <Chat.Bubble>
-        <BodyShort size="small">{tittel}</BodyShort>
+        {tittel && <BodyShort size="small">{tittel}</BodyShort>}
 
         <Skjermlenke
           skjermlenke={skjermlenke}
