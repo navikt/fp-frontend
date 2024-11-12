@@ -1,6 +1,6 @@
 import React from 'react';
 import { historikkAktor as HistorikkAktor } from '@navikt/fp-kodeverk';
-import { HistorikkinnslagV2, KjønnkodeEnum } from '@navikt/fp-types';
+import { KjønnkodeEnum } from '@navikt/fp-types';
 import { dateFormat, timeFormat } from '@navikt/ft-utils';
 
 import styles from '../snakkeboble.module.css';
@@ -27,11 +27,6 @@ export const getStyle = (aktørType: HistorikkAktor, kjønn?: string) => {
 };
 
 export const formatDate = (date: string) => `${dateFormat(date)} - ${timeFormat(date)}`;
-
-export const visNavn = (rolleNavn: string, aktør: HistorikkinnslagV2['aktør']): string =>
-  [HistorikkAktor.ARBEIDSGIVER, HistorikkAktor.SOKER, HistorikkAktor.VEDTAKSLOSNINGEN].includes(aktør.type)
-    ? rolleNavn
-    : `${rolleNavn} ${aktør.ident}`;
 
 export const parseBoldText = (input: string) =>
   input

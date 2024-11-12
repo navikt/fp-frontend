@@ -6,7 +6,7 @@ import { KodeverkType } from '@navikt/fp-kodeverk';
 import { HistorikkinnslagV2 } from '@navikt/fp-types';
 
 import { HistorikkDokumentLenke } from './HistorikkDokumentLenke';
-import { formatDate, getStyle, parseBoldText, utledPlassering, visNavn } from './snakkebobleUtils';
+import { formatDate, getStyle, parseBoldText, utledPlassering } from './snakkebobleUtils';
 import { Avatar } from './Avatar';
 import { Skjermlenke } from './Skjermlenke';
 

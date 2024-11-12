@@ -4,7 +4,6 @@ import { Location } from 'history';
 import { Heading } from '@navikt/ds-react';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 interface Props {
   skjermlenke?: string;
