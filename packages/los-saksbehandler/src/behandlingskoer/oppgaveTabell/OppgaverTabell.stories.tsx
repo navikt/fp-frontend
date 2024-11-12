@@ -39,7 +39,7 @@ const OPPGAVER_TIL_BEHANDLING = [
     erTilSaksbehandling: true,
     behandlingId: '1',
   },
-];
+] satisfies Oppgave[];
 
 const RESERVERTE_OPPGAVER = [
   {
@@ -102,7 +102,7 @@ const RESERVERTE_OPPGAVER = [
     erTilSaksbehandling: true,
     behandlingId: '2',
   },
-];
+] satisfies Oppgave[];
 
 type StoryArgs = {
   reserverteOppgaver?: Oppgave[];
@@ -151,6 +151,13 @@ export const TomOppgaveTabell: Story = {
   },
 };
 
+const oppdatertId = (oppgaver: Oppgave[], idnumber: number): Oppgave[] => {
+  return oppgaver.map(o => ({
+    ...o,
+    id: o.id + idnumber,
+  }));
+};
+
 export const VisPagineringNårMerEnn15Oppgaver: Story = {
   args: {
     reserverOppgave: action('button-click'),
@@ -158,12 +165,15 @@ export const VisPagineringNårMerEnn15Oppgaver: Story = {
     doPolling: false,
     antallOppgaver: 4,
     oppgaverTilBehandling: OPPGAVER_TIL_BEHANDLING,
-    reserverteOppgaver: RESERVERTE_OPPGAVER.concat(RESERVERTE_OPPGAVER)
-      .concat(RESERVERTE_OPPGAVER)
-      .concat(RESERVERTE_OPPGAVER)
-      .concat(RESERVERTE_OPPGAVER)
-      .concat(RESERVERTE_OPPGAVER)
-      .concat(RESERVERTE_OPPGAVER)
-      .concat(RESERVERTE_OPPGAVER),
+    reserverteOppgaver: [
+      ...RESERVERTE_OPPGAVER,
+      ...oppdatertId(RESERVERTE_OPPGAVER, 10),
+      ...oppdatertId(RESERVERTE_OPPGAVER, 20),
+      ...oppdatertId(RESERVERTE_OPPGAVER, 30),
+      ...oppdatertId(RESERVERTE_OPPGAVER, 40),
+      ...oppdatertId(RESERVERTE_OPPGAVER, 50),
+      ...oppdatertId(RESERVERTE_OPPGAVER, 60),
+      ...oppdatertId(RESERVERTE_OPPGAVER, 70),
+    ],
   },
 };
