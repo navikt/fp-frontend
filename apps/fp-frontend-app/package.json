@@ -86,6 +86,7 @@
     "@navikt/fp-rest-api": "workspace:*",
     "@navikt/fp-rest-api-hooks": "workspace:*",
     "@navikt/fp-sak-historikk": "workspace:*",
+    "@navikt/fp-sak-historikk-v2": "workspace:*",
     "@navikt/fp-sak-meldinger": "workspace:*",
     "@navikt/fp-sak-meny-apne-for-endringer": "workspace:*",
     "@navikt/fp-sak-meny-endre-utland": "workspace:*",

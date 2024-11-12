@@ -1,6 +1,7 @@
 import { screen } from '@testing-library/react';
 import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
+
 import * as stories from './HistorikkSakIndex.stories';
 
 const { BehandlingIkkeErValgt, BehandlingErValgt } = composeStories(stories);

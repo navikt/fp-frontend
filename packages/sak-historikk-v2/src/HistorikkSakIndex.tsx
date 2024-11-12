@@ -1,12 +1,12 @@
 import React from 'react';
 import { RawIntlProvider } from 'react-intl';
-
+import { Location } from 'history';
 import { createIntl } from '@navikt/ft-utils';
+import { AlleKodeverk, AlleKodeverkTilbakekreving, HistorikkinnslagV2 } from '@navikt/fp-types';
 
 import { Historikk } from './components/Historikk';
+
 import messages from '../i18n/nb_NO.json';
-import { AlleKodeverk, AlleKodeverkTilbakekreving, HistorikkinnslagV2 } from '@navikt/fp-types';
-import { Location } from 'history';
 
 const intl = createIntl(messages);
 

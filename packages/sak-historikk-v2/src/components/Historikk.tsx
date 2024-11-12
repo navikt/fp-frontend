@@ -3,6 +3,7 @@ import { useIntl } from 'react-intl';
 import moment from 'moment';
 import { Location } from 'history';
 
+import { useStorageToggle } from '@navikt/ft-hooks';
 import { Box, Checkbox, Heading, HStack, VStack } from '@navikt/ds-react';
 import { AlleKodeverk, AlleKodeverkTilbakekreving, HistorikkinnslagV2 } from '@navikt/fp-types';
 import { getKodeverknavnFn } from '@navikt/fp-kodeverk';
@@ -11,7 +12,6 @@ import { Snakkeboble } from './Snakkeboble/Snakkeboble';
 import { EnvironmentWrapper } from './EnvironmentWrapper';
 
 import styles from './historikk.module.css';
-import { useDevMode } from '@navikt/fp-sak-historikk/src/hooks/useDevMode';
 
 type HistorikkMedTilbakekrevingIndikator = HistorikkinnslagV2 & {
   erTilbakekreving?: boolean;
@@ -56,7 +56,7 @@ export const Historikk = ({
   createLocationForSkjermlenke,
 }: Props) => {
   const intl = useIntl();
-  const isDevMode = useDevMode();
+  const isDevMode = useStorageToggle({ key: 'devmode' });
 
   const [skalSortertePaValgtBehandling, setSkalSortertePaBehandling] = useState(false);
 
