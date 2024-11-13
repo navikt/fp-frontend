@@ -318,5 +318,30 @@
         }
       ]
     }
+  ],
+  "historikkinnslagV2": [
+    {
+      "opprettetAv": "Srvfpsak",
+      "behandlingUuid": "7d198233-b499-4aaf-a01b-be97958e20ce",
+      "aktør": {
+        "type": "VL",
+        "ident": ""
+      },
+      "opprettetTidspunkt": "2023-06-09T10:49:30.395",
+      "title": "Bytt enhet",
+      "body": ["__Behandlende enhet__ endret fra 4867 NAV Familie- og pensjonsytelser Foreldrepenger til __4806 NAV Familie- og pensjonsytelser Drammen__",
+        "Dette er ein lang begrunnelsestekst",
+        "Personopplysning"]
+    },
+    {
+      "behandlingUuid": "7d198233-b499-4aaf-a01b-be97958e20ce",
+      "aktør": {
+        "type": "SOKER",
+        "ident": "Srvfpsak"
+      },
+      "opprettetTidspunkt": "2023-06-09T10:49:29.627",
+      "title": "Dette er en inntektsmelding",
+      "body": []
+    }
   ]
 }

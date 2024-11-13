@@ -13,6 +13,7 @@ import {
 } from '@navikt/aksel-icons';
 import { getSupportPanelLocationCreator } from '../app/paths';
 import HistorikkIndex from './historikk/HistorikkIndex';
+import { HistorikkIndex as HistorikkIndexV2 } from './historikk-v2/HistorikkIndex';
 import MeldingIndex from './melding/MeldingIndex';
 import DokumentIndex from './dokument/DokumentIndex';
 import TotrinnskontrollIndex from './totrinnskontroll/TotrinnskontrollIndex';
@@ -27,6 +28,7 @@ const utledAktivtPanel = (
   skalViseFraBeslutter: boolean,
   skalViseTilGodkjenning: boolean,
   valgtSupportPanel: string,
+  skalViseHistorikkV2: boolean,
 ): string => {
   if (valgtSupportPanel) {
     return valgtSupportPanel;
@@ -37,8 +39,18 @@ const utledAktivtPanel = (
   if (skalViseTilGodkjenning) {
     return SupportTabs.TIL_BESLUTTER;
   }
-  return SupportTabs.HISTORIKK;
+  return skalViseHistorikkV2 ? SupportTabs.HISTORIKK_V2 : SupportTabs.HISTORIKK;
 };
+
+function getEnvironment() {
+  const hostname = window.location.hostname;
+  if (hostname === 'localhost' || hostname === '127.0.0.1') {
+    return 'local';
+  } else if (hostname.includes('intern.dev.nav.no')) {
+    return 'dev';
+  }
+  return 'production';
+}
 
 interface OwnProps {
   fagsakData: FagsakData;
@@ -68,6 +80,8 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
     isQueryParam: true,
   });
 
+  const skalViseHistorikkV2 = ['local', 'dev'].includes(getEnvironment());
+
   const [meldingFormData, setMeldingFormData] = useState();
   const [beslutterFormData, setBeslutterFormData] = useState();
 
@@ -81,7 +95,12 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
   const skalViseFraBeslutter = !!behandlingTillatteOperasjoner?.behandlingFraBeslutter;
   const skalViseTilGodkjenning = !!behandlingTillatteOperasjoner?.behandlingTilGodkjenning;
 
-  const aktivtSupportPanel = utledAktivtPanel(skalViseFraBeslutter, skalViseTilGodkjenning, valgtSupportPanel);
+  const aktivtSupportPanel = utledAktivtPanel(
+    skalViseFraBeslutter,
+    skalViseTilGodkjenning,
+    valgtSupportPanel,
+    skalViseHistorikkV2,
+  );
 
   const changeRouteCallback = useCallback(
     (supportPanel: string) => {
@@ -106,6 +125,13 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
             className={styles.tab}
             value={SupportTabs.TIL_BESLUTTER}
             icon={<PersonCheckmarkFillIcon title={intl.formatMessage({ id: 'BehandlingSupportIndex.Godkjenning' })} />}
+          />
+        )}
+        {skalViseHistorikkV2 && (
+          <Tabs.Tab
+            className={styles.tab}
+            value={SupportTabs.HISTORIKK_V2}
+            icon={<ClockDashedIcon title={intl.formatMessage({ id: 'BehandlingSupportIndex.HistorikkV2' })} />}
           />
         )}
         <Tabs.Tab
@@ -154,6 +180,18 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
           />
         )}
       </Tabs.Panel>
+      {skalViseHistorikkV2 && (
+        <Tabs.Panel value={SupportTabs.HISTORIKK_V2}>
+          <HistorikkIndexV2
+            saksnummer={fagsak.saksnummer}
+            behandlingUuid={behandlingUuid}
+            behandlingVersjon={behandlingVersjon}
+            historikkinnslagFpSak={fagsakData.getHistorikkV2FpSak()}
+            historikkinnslagFpTilbake={fagsakData.getHistorikkV2FpTilbake()}
+            kjønn={fagsak.bruker.kjønn}
+          />
+        </Tabs.Panel>
+      )}
       <Tabs.Panel value={SupportTabs.HISTORIKK}>
         <HistorikkIndex
           saksnummer={fagsak.saksnummer}

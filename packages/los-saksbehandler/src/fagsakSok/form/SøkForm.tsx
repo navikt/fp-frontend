@@ -1,12 +1,12 @@
 import React from 'react';
-import { useIntl } from 'react-intl';
-import { useForm } from 'react-hook-form';
-import { ErrorMessage, HStack, Search, VStack } from '@navikt/ds-react';
+import { CheckboxField, Form, InputField } from '@navikt/ft-form-hooks';
 import { hasValidSaksnummerOrFodselsnummerFormat } from '@navikt/ft-form-validators';
-import { Form, CheckboxField } from '@navikt/ft-form-hooks';
+import { useForm } from 'react-hook-form';
+import { useIntl } from 'react-intl';
 
-import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
+import { MagnifyingGlassIcon, ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 import styles from './SøkForm.module.css';
+import { Button, HStack, VStack } from '@navikt/ds-react';
 
 type FormValues = {
   skalReservere: boolean;
@@ -33,30 +33,30 @@ export const SøkForm = ({ onSubmit, searchResultAccessDenied, searchStarted, re
   const formMethods = useForm<FormValues>();
 
   const searchStringValue = formMethods.watch('searchString');
-  const skalReservereValue = formMethods.watch('skalReservere');
-
-  const feilmelding = hasValidSaksnummerOrFodselsnummerFormat(searchStringValue);
 
   return (
-    <Form formMethods={formMethods}>
-      <VStack gap="4">
-        <HStack gap="4" align="end">
-          <div className={styles.searchWidth}>
-            <Search
-              label={intl.formatMessage({ id: 'Search.Search' })}
+    <Form<FormValues> onSubmit={onSubmit} formMethods={formMethods}>
+      <VStack gap="2">
+        <HStack gap="8">
+          <HStack gap="0">
+            <InputField
+              name="searchString"
+              label={intl.formatMessage({ id: 'Search.SearchHeader' })}
               description={intl.formatMessage({ id: 'Search.SaksnummerOrPersonId' })}
-              hideLabel={false}
+              validate={[hasValidSaksnummerOrFodselsnummerFormat]}
+              parse={(s = '') => s.toString().trim()}
+              className={styles.searchInput}
+              size="medium"
+            />
+            <Button
+              size="small"
               variant="primary"
-              onSearchClick={value => {
-                formMethods.setValue('searchString', value);
-                if (hasValidSaksnummerOrFodselsnummerFormat(value) === null) {
-                  onSubmit({ searchString: value, skalReservere: skalReservereValue });
-                }
-              }}
-            >
-              <Search.Button type="button" loading={!searchResultAccessDenied?.feilmelding && searchStarted} />
-            </Search>
-          </div>
+              icon={<MagnifyingGlassIcon aria-hidden />}
+              loading={!searchResultAccessDenied?.feilmelding && searchStarted}
+              disabled={(!searchResultAccessDenied?.feilmelding && searchStarted) || !searchStringValue}
+              className={styles.searchButton}
+            />
+          </HStack>
           {kanSaksbehandle && (
             <CheckboxField
               name="skalReservere"
@@ -66,7 +66,6 @@ export const SøkForm = ({ onSubmit, searchResultAccessDenied, searchStarted, re
             />
           )}
         </HStack>
-        {feilmelding && <ErrorMessage>{feilmelding}</ErrorMessage>}
         {searchResultAccessDenied?.feilmelding && (
           <HStack gap="2">
             <ExclamationmarkTriangleFillIcon className={styles.advarselIcon} />

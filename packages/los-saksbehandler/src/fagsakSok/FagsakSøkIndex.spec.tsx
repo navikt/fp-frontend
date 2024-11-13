@@ -8,6 +8,6 @@ const { Default } = composeStories(stories);
 describe('<FagsakSøkIndex>', () => {
   it('skal rendre komponent korrekt', async () => {
     render(<Default />);
-    expect(await screen.findAllByText('Søk')).toHaveLength(2);
+    expect(await screen.findByText('Søk')).toBeInTheDocument();
   });
 });
