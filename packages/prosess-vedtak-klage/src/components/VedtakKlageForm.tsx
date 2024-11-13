@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { BodyShort, Heading, Label } from '@navikt/ds-react';
 
@@ -16,7 +16,7 @@ import { Aksjonspunkt, KlageVurdering, AlleKodeverk, Behandlingsresultat } from 
 import { ForeslaVedtakAp, ForeslaVedtakManueltAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 
-import VedtakKlageSubmitPanel from './VedtakKlageSubmitPanel';
+import { VedtakKlageSubmitPanel } from './VedtakKlageSubmitPanel';
 
 export const VEDTAK_KLAGE_FORM_NAME = 'VEDTAK_KLAGE_FORM';
 
@@ -88,7 +88,7 @@ const getResultatText = (behandlingKlageVurdering: KlageVurdering): string | nul
   }
 };
 
-interface OwnProps {
+interface Props {
   behandlingsresultat: Behandlingsresultat;
   behandlingPaaVent: boolean;
   klageVurdering: KlageVurdering;
@@ -99,10 +99,7 @@ interface OwnProps {
   alleKodeverk: AlleKodeverk;
 }
 
-/**
- * VedtakKlageForm
- */
-const VedtakKlageForm: FunctionComponent<OwnProps> = ({
+export const VedtakKlageForm = ({
   submitCallback,
   klageVurdering,
   behandlingsresultat,
@@ -111,7 +108,7 @@ const VedtakKlageForm: FunctionComponent<OwnProps> = ({
   previewVedtakCallback,
   behandlingPaaVent,
   alleKodeverk,
-}) => {
+}: Props) => {
   const avvistArsaker = useMemo(() => getAvvisningsAarsaker(klageVurdering), [klageVurdering]);
   const omgjortAarsak = useMemo(() => getOmgjortAarsak(klageVurdering, alleKodeverk), [klageVurdering]);
   const behandlingsResultatTekst = useMemo(() => getResultatText(klageVurdering), [klageVurdering]);
@@ -193,5 +190,3 @@ const VedtakKlageForm: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-
-export default VedtakKlageForm;

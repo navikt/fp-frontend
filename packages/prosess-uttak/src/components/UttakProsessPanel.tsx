@@ -363,7 +363,7 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
             disabled={feilmeldinger.length > 0 || isSubmitting || erBekreftKnappDisablet}
             loading={isSubmitting}
             onClick={bekreftAksjonspunkter}
-            role="button"
+            type="button"
           >
             <FormattedMessage id="Uttak.Confirm" />
           </Button>

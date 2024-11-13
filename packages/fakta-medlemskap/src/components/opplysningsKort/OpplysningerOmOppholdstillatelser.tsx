@@ -57,7 +57,7 @@ const OpplysningerOmOppholdstillatelser = ({ oppholdstillatelser, avvik = [], al
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {oppholdstillatelser.sort(sorterPerioder).map(({ fom, tom, type }) => {
+              {oppholdstillatelser.toSorted(sorterPerioder).map(({ fom, tom, type }) => {
                 return (
                   <Table.Row key={fom + tom}>
                     <Table.DataCell>

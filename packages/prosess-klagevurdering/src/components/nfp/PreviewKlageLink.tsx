@@ -1,10 +1,9 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import classNames from 'classnames';
 
 import { dokumentMalType, klageVurdering as klageVurderingType } from '@navikt/fp-kodeverk';
 
-import styles from './previewKlageLink.module.css';
+import { Link } from '@navikt/ds-react';
 
 const getBrevKode = (klageVurdertAvKa: boolean, klageVurdering?: string): string | undefined => {
   switch (klageVurdering) {
@@ -33,32 +32,20 @@ const getBrevData = (klageVurdering?: string, fritekstTilBrev?: string): BrevDat
   erOpphevetKlage: klageVurdering === klageVurderingType.OPPHEVE_YTELSESVEDTAK,
 });
 
-interface OwnProps {
+interface Props {
   previewCallback: (data: BrevData) => Promise<any>;
   fritekstTilBrev?: string;
   klageVurdering?: string;
 }
 
-const PreviewKlageLink: FunctionComponent<OwnProps> = ({ previewCallback, fritekstTilBrev, klageVurdering }) => {
+export const PreviewKlageLink = ({ previewCallback, fritekstTilBrev, klageVurdering }: Props) => {
   const previewMessage = (e: React.MouseEvent | React.KeyboardEvent): void => {
     previewCallback(getBrevData(klageVurdering, fritekstTilBrev));
     e.preventDefault();
   };
   return (
-    <>
-      {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-      <a
-        href=""
-        onClick={e => {
-          previewMessage(e);
-        }}
-        onKeyDown={e => (e.key === 'Enter' ? previewMessage(e) : null)}
-        className={classNames(styles.previewLink, 'lenke lenke--frittstaende')}
-      >
-        <FormattedMessage id="PreviewKlageLink.ForhandvisBrev" />
-      </a>
-    </>
+    <Link href="#" onClick={previewMessage} onKeyDown={e => (e.key === 'Enter' ? previewMessage(e) : null)}>
+      <FormattedMessage id="PreviewKlageLink.ForhandvisBrev" />
+    </Link>
   );
 };
-
-export default PreviewKlageLink;

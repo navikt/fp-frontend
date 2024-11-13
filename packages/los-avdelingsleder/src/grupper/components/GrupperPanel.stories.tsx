@@ -74,10 +74,10 @@ export default {
 };
 
 const Template = () => {
-  const [grupper, setGruppe] = useState(saksbehandlereOgSaksbehandlerGrupper);
+  const [grupper, setGrupper] = useState(saksbehandlereOgSaksbehandlerGrupper);
 
   const opprettOgHentAlleGrupper = () => {
-    setGruppe(oldG => ({
+    setGrupper(oldG => ({
       saksbehandlerGrupper: oldG.saksbehandlerGrupper.concat({
         gruppeId: creatNewId(oldG.saksbehandlerGrupper),
         saksbehandlere: [],
@@ -86,13 +86,13 @@ const Template = () => {
   };
 
   const slettGruppeOgHentAllePåNytt = (gruppeId: number) => {
-    setGruppe(oldG => ({
+    setGrupper(oldG => ({
       saksbehandlerGrupper: oldG.saksbehandlerGrupper.filter(g => g.gruppeId !== gruppeId),
     }));
   };
 
   const endreGruppenavn = (gruppeId: number, gruppeNavn: string) => {
-    setGruppe(oldG => ({
+    setGrupper(oldG => ({
       saksbehandlerGrupper: oldG.saksbehandlerGrupper.map(g => {
         if (g.gruppeId === gruppeId) {
           return {
@@ -106,7 +106,7 @@ const Template = () => {
   };
 
   const lagreValgtSaksbehandler = (brukerIdent: string, gruppeId: number, leggTil: boolean) => {
-    setGruppe(oldG => ({
+    setGrupper(oldG => ({
       saksbehandlerGrupper: oldG.saksbehandlerGrupper.map(g => {
         if (g.gruppeId === gruppeId) {
           return {

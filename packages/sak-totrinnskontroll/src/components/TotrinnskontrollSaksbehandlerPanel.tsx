@@ -1,19 +1,36 @@
-import React, { FunctionComponent, ReactNode, useCallback } from 'react';
+import React, { ReactNode, useCallback } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { NavLink } from 'react-router-dom';
-import { BodyShort } from '@navikt/ds-react';
+import { BodyShort, HStack } from '@navikt/ds-react';
 import { Location } from 'history';
 import { XMarkOctagonIcon, CheckmarkIcon } from '@navikt/aksel-icons';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 
 import { KodeverkMedNavn, BehandlingAppKontekst, TotrinnskontrollSkjermlenkeContext } from '@navikt/fp-types';
 
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import getAksjonspunkttekst from './aksjonspunktTekster/aksjonspunktTekstUtleder';
 
 import styles from './totrinnskontrollSaksbehandlerPanel.module.css';
 
-interface OwnProps {
+const VurderPåNyttPunkter = ({
+  vurderPaNyttArsaker,
+  vurderArsaker,
+}: {
+  vurderPaNyttArsaker?: string[] | undefined;
+  vurderArsaker: KodeverkMedNavn[];
+}) => (
+  <div className={styles.approvalItem}>
+    {vurderPaNyttArsaker?.map(item => (
+      <HStack gap="2" key={item}>
+        <XMarkOctagonIcon className={styles.xmark} />
+        <div>{vurderArsaker.find(arsak => item === arsak.kode)?.navn}</div>
+      </HStack>
+    ))}
+  </div>
+);
+
+interface Props {
   behandling: BehandlingAppKontekst;
   totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[];
   erForeldrepengerFagsak: boolean;
@@ -24,7 +41,7 @@ interface OwnProps {
   lagLenke: (skjermlenkeCode: string) => Location | undefined;
 }
 
-const TotrinnskontrollSaksbehandlerPanel: FunctionComponent<OwnProps> = ({
+export const TotrinnskontrollSaksbehandlerPanel = ({
   behandling,
   totrinnskontrollSkjermlenkeContext,
   erForeldrepengerFagsak,
@@ -33,7 +50,7 @@ const TotrinnskontrollSaksbehandlerPanel: FunctionComponent<OwnProps> = ({
   vurderArsaker,
   faktaOmBeregningTilfeller,
   lagLenke,
-}) => {
+}: Props) => {
   const intl = useIntl();
   const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
 
@@ -85,35 +102,18 @@ const TotrinnskontrollSaksbehandlerPanel: FunctionComponent<OwnProps> = ({
                     <VerticalSpacer eightPx />
                     <div className={styles.approvalItem}>
                       {aksjonspunkt.totrinnskontrollGodkjent ? (
-                        <FlexContainer>
-                          <FlexRow>
-                            <FlexColumn>
-                              <CheckmarkIcon
-                                title={intl.formatMessage({ id: 'ToTrinnsForm.Godkjent' })}
-                                className={styles.checkmarkIcon}
-                              />
-                            </FlexColumn>
-                            <FlexColumn className={styles.textMarginCheck}>
-                              <FormattedMessage id="ToTrinnsForm.Godkjent" />
-                            </FlexColumn>
-                          </FlexRow>
-                        </FlexContainer>
+                        <HStack gap="2">
+                          <CheckmarkIcon
+                            title={intl.formatMessage({ id: 'ToTrinnsForm.Godkjent' })}
+                            className={styles.checkmarkIcon}
+                          />
+                          <FormattedMessage id="ToTrinnsForm.Godkjent" />
+                        </HStack>
                       ) : (
-                        <div className={styles.approvalItem}>
-                          {aksjonspunkt.vurderPaNyttArsaker &&
-                            aksjonspunkt.vurderPaNyttArsaker.map(item => (
-                              <FlexContainer key={`${item}${aksjonspunkt.aksjonspunktKode}`}>
-                                <FlexRow>
-                                  <FlexColumn>
-                                    <XMarkOctagonIcon className={styles.xmark} />
-                                  </FlexColumn>
-                                  <FlexColumn className={styles.textMarginXmark}>
-                                    {vurderArsaker.find(arsak => item === arsak.kode)?.navn}
-                                  </FlexColumn>
-                                </FlexRow>
-                              </FlexContainer>
-                            ))}
-                        </div>
+                        <VurderPåNyttPunkter
+                          vurderPaNyttArsaker={aksjonspunkt?.vurderPaNyttArsaker}
+                          vurderArsaker={vurderArsaker}
+                        />
                       )}
                     </div>
                     <pre className={styles.approvalItem}>{decodeHtmlEntity(aksjonspunkt.besluttersBegrunnelse)}</pre>
@@ -128,5 +128,3 @@ const TotrinnskontrollSaksbehandlerPanel: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-
-export default TotrinnskontrollSaksbehandlerPanel;

@@ -1,18 +1,12 @@
 import React, { FunctionComponent, useCallback, useMemo, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import { Heading, Button } from '@navikt/ds-react';
+import { Heading, Button, HStack } from '@navikt/ds-react';
 
 import { Form } from '@navikt/ft-form-hooks';
 
 import { AksjonspunktCode, KodeverkType, klageVurdering as klageVurderingType } from '@navikt/fp-kodeverk';
-import {
-  AksjonspunktHelpTextTemp,
-  FlexColumn,
-  FlexContainer,
-  FlexRow,
-  VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
+import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import { KlageVurdering, AlleKodeverk, KlageVurderingResultat, KodeverkMedNavn } from '@navikt/fp-types';
 import { KlageVurderingResultatAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -20,7 +14,7 @@ import { KlageVurderingResultatAp } from '@navikt/fp-types-avklar-aksjonspunkter
 import KlageFormType from '../../types/klageFormType';
 import KlageVurderingRadioOptionsNfp from './KlageVurderingRadioOptionsNfp';
 import FritekstBrevTextField from './FritekstKlageBrevTextField';
-import PreviewKlageLink, { BrevData } from './PreviewKlageLink';
+import { PreviewKlageLink, BrevData } from './PreviewKlageLink';
 import TempsaveKlageButton, { TransformedValues } from './TempsaveKlageButton';
 
 import styles from './behandleKlageFormNfp.module.css';
@@ -135,54 +129,48 @@ export const BehandleKlageFormNfp: FunctionComponent<OwnProps> = ({
         <VerticalSpacer sixteenPx />
         <FritekstBrevTextField sprakkode={sprakkode} readOnly={readOnly} />
         <VerticalSpacer sixteenPx />
-        <FlexContainer>
-          <FlexRow spaceBetween>
-            <FlexColumn>
-              {formValues.klageVurdering === klageVurderingType.STADFESTE_YTELSESVEDTAK && (
-                <>
-                  <Button variant="primary" type="button" size="small" onClick={() => åpneModal()} disabled={readOnly}>
-                    <FormattedMessage id="Klage.Behandle.Bekreft" />
-                  </Button>
-                  <BekreftOgSubmitKlageModal
-                    erModalÅpen={visSubmitModal}
-                    lukkModal={lukkModal}
-                    valgtHjemmel={hjemmlerMedNavn.find(hj => hj.kode === formValues.klageHjemmel)?.navn}
-                    readOnly={readOnly}
-                    isSubmittable={!readOnlySubmitButton}
-                    isSubmitting={formMethods.formState.isSubmitting}
-                    isDirty={formMethods.formState.isValid}
-                  />
-                </>
-              )}
-              {formValues.klageVurdering !== klageVurderingType.STADFESTE_YTELSESVEDTAK && (
-                <ProsessStegSubmitButtonNew
-                  isReadOnly={readOnly}
+        <HStack justify="space-between">
+          <HStack gap="4">
+            {formValues.klageVurdering === klageVurderingType.STADFESTE_YTELSESVEDTAK && (
+              <>
+                <Button variant="primary" type="button" size="small" onClick={() => åpneModal()} disabled={readOnly}>
+                  <FormattedMessage id="Klage.Behandle.Bekreft" />
+                </Button>
+                <BekreftOgSubmitKlageModal
+                  erModalÅpen={visSubmitModal}
+                  lukkModal={lukkModal}
+                  valgtHjemmel={hjemmlerMedNavn.find(hj => hj.kode === formValues.klageHjemmel)?.navn}
+                  readOnly={readOnly}
                   isSubmittable={!readOnlySubmitButton}
                   isSubmitting={formMethods.formState.isSubmitting}
-                  isDirty={formMethods.formState.isDirty}
+                  isDirty={formMethods.formState.isValid}
                 />
-              )}
-              {!readOnly &&
-                formValues.klageVurdering &&
-                formValues.fritekstTilBrev &&
-                formValues.fritekstTilBrev.length > 2 && (
-                  <PreviewKlageLink
-                    previewCallback={previewCallback}
-                    fritekstTilBrev={formValues.fritekstTilBrev}
-                    klageVurdering={formValues.klageVurdering}
-                  />
-                )}
-            </FlexColumn>
-            <FlexColumn>
-              <TempsaveKlageButton
-                saveKlage={saveKlage}
-                handleSubmit={formMethods.handleSubmit}
-                readOnly={readOnly}
-                aksjonspunktCode={AksjonspunktCode.BEHANDLE_KLAGE_NFP}
+              </>
+            )}
+            {formValues.klageVurdering !== klageVurderingType.STADFESTE_YTELSESVEDTAK && (
+              <ProsessStegSubmitButtonNew
+                isReadOnly={readOnly}
+                isSubmittable={!readOnlySubmitButton}
+                isSubmitting={formMethods.formState.isSubmitting}
+                isDirty={formMethods.formState.isDirty}
               />
-            </FlexColumn>
-          </FlexRow>
-        </FlexContainer>
+            )}
+            {!readOnly ||
+              (formValues.klageVurdering && formValues.fritekstTilBrev && formValues.fritekstTilBrev.length > 2 && (
+                <PreviewKlageLink
+                  previewCallback={previewCallback}
+                  fritekstTilBrev={formValues.fritekstTilBrev}
+                  klageVurdering={formValues.klageVurdering}
+                />
+              ))}
+          </HStack>
+          <TempsaveKlageButton
+            saveKlage={saveKlage}
+            handleSubmit={formMethods.handleSubmit}
+            readOnly={readOnly}
+            aksjonspunktCode={AksjonspunktCode.BEHANDLE_KLAGE_NFP}
+          />
+        </HStack>
       </div>
     </Form>
   );

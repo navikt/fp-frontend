@@ -26,7 +26,7 @@ export const ViseAtIngenReservasjonerBleFunnet = () => (
 );
 
 export const VisTabellMedReservasjoner = () => {
-  const [reservasjoner, fjernReservasjon] = useState([
+  const [reservasjoner, setReservasjoner] = useState([
     {
       reservertAvUid: 'wsfwer-sdsfd',
       reservertAvNavn: 'Espen Utvikler',
@@ -46,7 +46,7 @@ export const VisTabellMedReservasjoner = () => {
   ]);
 
   const opphevReservasjon = useCallback((oppgaveId: number) => {
-    fjernReservasjon(oldState => oldState.filter(s => s.oppgaveId !== oppgaveId));
+    setReservasjoner(oldState => oldState.filter(s => s.oppgaveId !== oppgaveId));
   }, []);
 
   return (
