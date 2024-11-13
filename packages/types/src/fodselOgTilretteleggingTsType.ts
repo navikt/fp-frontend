@@ -46,6 +46,7 @@ export type ArbeidsforholdFodselOgTilrettelegging = Readonly<{
   begrunnelse?: string;
   velferdspermisjoner: Permisjon[];
   avklarteOppholdPerioder: SvpAvklartOppholdPeriode[];
+  stillingsprosentStartTilrettelegging: number;
 }>;
 
 type FodselOgTilrettelegging = Readonly<{

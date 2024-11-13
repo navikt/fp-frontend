@@ -1,8 +1,8 @@
-import React, { FunctionComponent, useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import dayjs from 'dayjs';
 import { FormProvider, useForm } from 'react-hook-form';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
-import { Button, HStack, Spacer } from '@navikt/ds-react';
+import { Button, HStack, Spacer, VStack } from '@navikt/ds-react';
 
 import {
   ArbeidsforholdFodselOgTilrettelegging,
@@ -13,9 +13,8 @@ import {
 import { Datepicker, NumberField, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidDecimal, maxValue, minValue, required } from '@navikt/ft-form-validators';
 import { tilretteleggingType } from '@navikt/fp-kodeverk';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import TilretteleggingInfoPanel from './TilretteleggingInfoPanel';
+import { TilretteleggingInfoPanel } from './TilretteleggingInfoPanel';
 
 import styles from './tilretteleggingForm.module.css';
 
@@ -52,7 +51,7 @@ const validerAtPeriodeErGyldig =
     return null;
   };
 
-export const finnVelferdspermisjonprosent = (arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging) =>
+export const finnVelferdspermisjonprosent = (arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging): number =>
   arbeidsforhold.velferdspermisjoner
     .filter(p => p.erGyldig)
     .map(p => p.permisjonsprosent)
@@ -95,7 +94,7 @@ export const finnProsentSvangerskapspenger = (
 const sjekkOmTomDatoErTreUkerFørTermin = (termindato: string, tom?: string): boolean =>
   dayjs(termindato).subtract(3, 'week').subtract(1, 'day').isSame(dayjs(tom));
 
-interface OwnProps {
+interface Props {
   tilrettelegging: ArbeidsforholdTilretteleggingDato;
   termindato: string;
   index: number;
@@ -108,7 +107,7 @@ interface OwnProps {
   slettTilrettelegging: (fomDato: string) => void;
 }
 
-const TilretteleggingForm: FunctionComponent<OwnProps> = ({
+export const TilretteleggingForm = ({
   tilrettelegging,
   termindato,
   index,
@@ -119,7 +118,7 @@ const TilretteleggingForm: FunctionComponent<OwnProps> = ({
   arbeidsforhold,
   tomDatoForTilrettelegging,
   slettTilrettelegging,
-}) => {
+}: Props) => {
   const intl = useIntl();
 
   const erNyPeriode = !tilrettelegging.fom;
@@ -196,8 +195,8 @@ const TilretteleggingForm: FunctionComponent<OwnProps> = ({
           padding: '24px',
         }}
       >
-        {!erNyPeriode && (
-          <>
+        <VStack gap="8">
+          {!erNyPeriode && (
             <TilretteleggingInfoPanel
               tilrettelegging={formValues}
               termindato={termindato}
@@ -205,135 +204,128 @@ const TilretteleggingForm: FunctionComponent<OwnProps> = ({
               stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold}
               tomDato={tomDatoForTilrettelegging}
             />
-            <VerticalSpacer twentyPx />
-          </>
-        )}
-        <Datepicker
-          name={`${index}.fom`}
-          label={intl.formatMessage({
-            id: 'TilretteleggingForm.FraOgMed',
-          })}
-          validate={[
-            required,
-            hasValidDate,
-            validerAtDatoErUnik(
-              intl,
-              arbeidsforhold.tilretteleggingDatoer,
-              arbeidsforhold.avklarteOppholdPerioder,
-              tilrettelegging,
-            ),
-            validerAtPeriodeErGyldig(intl, arbeidsforhold.tilretteleggingBehovFom, termindato),
-          ]}
-          isReadOnly={readOnly}
-        />
-        <VerticalSpacer thirtyTwoPx />
-        <RadioGroupPanel
-          name={`${index}.type`}
-          label={intl.formatMessage({ id: 'TilretteleggingForm.Tilretteleggingsbehov' })}
-          validate={[required]}
-          isReadOnly={readOnly}
-          radios={[
-            {
-              label: intl.formatMessage({ id: 'TilretteleggingForm.KanGjennomfores' }),
-              value: tilretteleggingType.HEL_TILRETTELEGGING,
-            },
-            {
-              label: intl.formatMessage({ id: 'TilretteleggingForm.RedusertArbeid' }),
-              value: tilretteleggingType.DELVIS_TILRETTELEGGING,
-            },
-            {
-              label: intl.formatMessage({ id: 'TilretteleggingForm.KanIkkeGjennomfores' }),
-              value: tilretteleggingType.INGEN_TILRETTELEGGING,
-            },
-          ]}
-        />
-        {formValues.type === tilretteleggingType.DELVIS_TILRETTELEGGING && (
-          <>
-            {(tilrettelegging.stillingsprosent === undefined ||
-              tilrettelegging.type !== tilretteleggingType.DELVIS_TILRETTELEGGING ||
-              erNyPeriode ||
-              formValues.kilde === SvpTilretteleggingFomKilde.REGISTRERT_AV_SAKSBEHANDLER) && (
-              <>
-                <VerticalSpacer sixteenPx />
-                <NumberField
-                  name={`${index}.stillingsprosent`}
-                  className={styles.arbeidsprosent}
-                  readOnly={readOnly}
-                  label={intl.formatMessage({ id: 'TilretteleggingForm.Arbeidsprosent' })}
-                  description={intl.formatMessage({ id: 'TilretteleggingForm.ArbeidsprosentBeskrivelse' })}
-                  validate={[required, minValue0, maxValue100, hasValidDecimal]}
-                  forceTwoDecimalDigits
-                  onChange={value => {
-                    const utbetalingsgrad = finnUtbetalingsgradForTilrettelegging(
-                      stillingsprosentArbeidsforhold,
-                      velferdspermisjonprosent,
-                      value,
-                    );
-                    // @ts-ignore Fiks
-                    formMethods.setValue(`${index}.overstyrtUtbetalingsgrad`, utbetalingsgrad, { shouldDirty: true });
-                  }}
-                />
-              </>
-            )}
-            <VerticalSpacer sixteenPx />
-            <NumberField
-              name={`${index}.overstyrtUtbetalingsgrad`}
-              className={styles.utbetalingsgrad}
-              readOnly={readOnly}
-              label={intl.formatMessage({ id: 'TilretteleggingForm.ProsentSvp' })}
-              description={intl.formatMessage({ id: 'TilretteleggingForm.ProsentSvpBeskrivelse' })}
-              validate={[
-                required,
-                minValue0,
-                maxValue100,
-                hasValidDecimal,
-                (verdi: number) =>
-                  !stillingsprosentArbeidsforhold && verdi === 0
-                    ? intl.formatMessage({ id: 'TilretteleggingForm.AngiUtbetalingsgrad' })
-                    : null,
-              ]}
-              forceTwoDecimalDigits
-              disabled={formValues.stillingsprosent === undefined}
-            />
-          </>
-        )}
-        <VerticalSpacer thirtyTwoPx />
-        {!readOnly && (
-          <HStack gap="2">
-            <Button
-              size="small"
-              variant="primary"
-              type="button"
-              disabled={!formMethods.formState.isDirty || false}
-              loading={false}
-              onClick={formMethods.handleSubmit((values: FormValues) => lagreIForm(values))}
-            >
-              {erNyPeriode ? (
-                <FormattedMessage id="TilretteleggingForm.LeggTil" />
-              ) : (
-                <FormattedMessage id="TilretteleggingForm.Oppdater" />
+          )}
+          <Datepicker
+            name={`${index}.fom`}
+            label={intl.formatMessage({
+              id: 'TilretteleggingForm.FraOgMed',
+            })}
+            validate={[
+              required,
+              hasValidDate,
+              validerAtDatoErUnik(
+                intl,
+                arbeidsforhold.tilretteleggingDatoer,
+                arbeidsforhold.avklarteOppholdPerioder,
+                tilrettelegging,
+              ),
+              validerAtPeriodeErGyldig(intl, arbeidsforhold.tilretteleggingBehovFom, termindato),
+            ]}
+            isReadOnly={readOnly}
+          />
+          <RadioGroupPanel
+            name={`${index}.type`}
+            label={intl.formatMessage({ id: 'TilretteleggingForm.Tilretteleggingsbehov' })}
+            validate={[required]}
+            isReadOnly={readOnly}
+            radios={[
+              {
+                label: intl.formatMessage({ id: 'TilretteleggingForm.KanGjennomfores' }),
+                value: tilretteleggingType.HEL_TILRETTELEGGING,
+              },
+              {
+                label: intl.formatMessage({ id: 'TilretteleggingForm.RedusertArbeid' }),
+                value: tilretteleggingType.DELVIS_TILRETTELEGGING,
+              },
+              {
+                label: intl.formatMessage({ id: 'TilretteleggingForm.KanIkkeGjennomfores' }),
+                value: tilretteleggingType.INGEN_TILRETTELEGGING,
+              },
+            ]}
+          />
+          {formValues.type === tilretteleggingType.DELVIS_TILRETTELEGGING && (
+            <>
+              {(tilrettelegging.stillingsprosent === undefined ||
+                tilrettelegging.type !== tilretteleggingType.DELVIS_TILRETTELEGGING ||
+                erNyPeriode ||
+                formValues.kilde === SvpTilretteleggingFomKilde.REGISTRERT_AV_SAKSBEHANDLER) && (
+                <>
+                  <NumberField
+                    name={`${index}.stillingsprosent`}
+                    className={styles.arbeidsprosent}
+                    readOnly={readOnly}
+                    label={intl.formatMessage({ id: 'TilretteleggingForm.Arbeidsprosent' })}
+                    description={intl.formatMessage({ id: 'TilretteleggingForm.ArbeidsprosentBeskrivelse' })}
+                    validate={[required, minValue0, maxValue100, hasValidDecimal]}
+                    forceTwoDecimalDigits
+                    onChange={value => {
+                      const utbetalingsgrad = finnUtbetalingsgradForTilrettelegging(
+                        stillingsprosentArbeidsforhold,
+                        velferdspermisjonprosent,
+                        value,
+                      );
+                      // @ts-ignore Fiks
+                      formMethods.setValue(`${index}.overstyrtUtbetalingsgrad`, utbetalingsgrad, { shouldDirty: true });
+                    }}
+                  />
+                </>
               )}
-            </Button>
-            <Button size="small" variant="secondary" onClick={avbryt} type="button">
-              {erNyPeriode ? (
-                <FormattedMessage id="TilretteleggingForm.AvsluttOgSlett" />
-              ) : (
-                <FormattedMessage id="TilretteleggingForm.Avbryt" />
+              <NumberField
+                name={`${index}.overstyrtUtbetalingsgrad`}
+                className={styles.utbetalingsgrad}
+                readOnly={readOnly}
+                label={intl.formatMessage({ id: 'TilretteleggingForm.ProsentSvp' })}
+                description={intl.formatMessage({ id: 'TilretteleggingForm.ProsentSvpBeskrivelse' })}
+                validate={[
+                  required,
+                  minValue0,
+                  maxValue100,
+                  hasValidDecimal,
+                  (verdi: number) =>
+                    !stillingsprosentArbeidsforhold && verdi === 0
+                      ? intl.formatMessage({ id: 'TilretteleggingForm.AngiUtbetalingsgrad' })
+                      : null,
+                ]}
+                forceTwoDecimalDigits
+                disabled={formValues.stillingsprosent === undefined}
+              />
+            </>
+          )}
+          {!readOnly && (
+            <HStack gap="2">
+              <Button
+                size="small"
+                variant="primary"
+                type="button"
+                disabled={!formMethods.formState.isDirty || false}
+                loading={false}
+                onClick={formMethods.handleSubmit((values: FormValues) => lagreIForm(values))}
+              >
+                {erNyPeriode ? (
+                  <FormattedMessage id="TilretteleggingForm.LeggTil" />
+                ) : (
+                  <FormattedMessage id="TilretteleggingForm.Oppdater" />
+                )}
+              </Button>
+              <Button size="small" variant="secondary" onClick={avbryt} type="button">
+                {erNyPeriode ? (
+                  <FormattedMessage id="TilretteleggingForm.AvsluttOgSlett" />
+                ) : (
+                  <FormattedMessage id="TilretteleggingForm.Avbryt" />
+                )}
+              </Button>
+              {!erNyPeriode && (
+                <>
+                  <Spacer />
+                  <Button size="small" variant="secondary" onClick={slett} type="button">
+                    <FormattedMessage id="TilretteleggingForm.SlettPeriode" />
+                  </Button>
+                </>
               )}
-            </Button>
-            {!erNyPeriode && (
-              <>
-                <Spacer />
-                <Button size="small" variant="secondary" onClick={slett} type="button">
-                  <FormattedMessage id="TilretteleggingForm.SlettPeriode" />
-                </Button>
-              </>
-            )}
-          </HStack>
-        )}
+            </HStack>
+          )}
+        </VStack>
       </div>
     </FormProvider>
   );
 };
-
-export default TilretteleggingForm;

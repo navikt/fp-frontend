@@ -1,15 +1,19 @@
-import React, { useState, FunctionComponent } from 'react';
+import React, { useState } from 'react';
 import { useFieldArray } from 'react-hook-form';
-import { ArbeidsforholdFodselOgTilrettelegging, ArbeidsforholdTilretteleggingDato } from '@navikt/fp-types';
+import {
+  ArbeidsforholdFodselOgTilrettelegging,
+  ArbeidsforholdTilretteleggingDato,
+  SvpAvklartOppholdPeriode,
+  SvpTilretteleggingFomKilde,
+} from '@navikt/fp-types';
 
-import { Button, HStack, Table } from '@navikt/ds-react';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { Button, HStack, Table, VStack } from '@navikt/ds-react';
 import { FormattedMessage } from 'react-intl';
 import { PlusIcon } from '@navikt/aksel-icons';
 import dayjs from 'dayjs';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import TilretteleggingPeriodeTabellRad from './tilrettelegging/TilretteleggingPeriodeTabellRad';
-import OppholdPeriodeTabellRad from './opphold/OppholdPeriodeTabellRad';
+import { TilretteleggingPeriodeTabellRad } from './tilrettelegging/TilretteleggingPeriodeTabellRad';
+import { OppholdPeriodeTabellRad } from './opphold/OppholdPeriodeTabellRad';
 
 const finnTilrettelegging = (
   alleFomDatoerSortert: string[],
@@ -24,7 +28,7 @@ const finnTilrettelegging = (
   return nesteTilrettelegging || finnTilrettelegging(alleFomDatoerSortert, tilretteleggingDatoer, index + 1);
 };
 
-interface OwnProps {
+interface Props {
   arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging;
   arbeidsforholdIndex: number;
   readOnly: boolean;
@@ -32,13 +36,13 @@ interface OwnProps {
   termindato: string;
 }
 
-const TilretteleggingOgOppholdPerioderPanel: FunctionComponent<OwnProps> = ({
+export const TilretteleggingOgOppholdPerioderPanel = ({
   arbeidsforhold,
   arbeidsforholdIndex,
   readOnly,
   stillingsprosentArbeidsforhold,
   termindato,
-}) => {
+}: Props) => {
   const tilretteleggingStateName = `arbeidsforhold.${arbeidsforholdIndex}.tilretteleggingDatoer`;
   const oppholdPerioderStateName = `arbeidsforhold.${arbeidsforholdIndex}.avklarteOppholdPerioder`;
 
@@ -57,6 +61,7 @@ const TilretteleggingOgOppholdPerioderPanel: FunctionComponent<OwnProps> = ({
       fom: undefined,
       tom: undefined,
       oppholdÅrsak: undefined,
+      oppholdKilde: 'REGISTRERT_AV_SAKSBEHANDLER',
     });
   };
   const leggTilTilrettelegging = () => {
@@ -64,6 +69,7 @@ const TilretteleggingOgOppholdPerioderPanel: FunctionComponent<OwnProps> = ({
     appendTilrettelegging({
       fom: undefined,
       type: undefined,
+      kilde: SvpTilretteleggingFomKilde.REGISTRERT_AV_SAKSBEHANDLER,
     });
   };
 
@@ -72,50 +78,49 @@ const TilretteleggingOgOppholdPerioderPanel: FunctionComponent<OwnProps> = ({
       fomDato ? tilretteleggingDatoer.findIndex(t => t.fom === fomDato) : tilretteleggingDatoer.length - 1,
     );
   };
-  const fjernOpphold = (fomDato?: string) => {
+  const fjernOpphold = (opphold?: SvpAvklartOppholdPeriode) => {
     removeOpphold(
-      fomDato ? avklarteOppholdPerioder.findIndex(t => t.fom === fomDato) : avklarteOppholdPerioder.length - 1,
+      opphold
+        ? avklarteOppholdPerioder.findIndex(
+            o => o.fom === opphold.fom && o.tom === opphold.tom && o.oppholdKilde === opphold.oppholdKilde,
+          )
+        : avklarteOppholdPerioder.length - 1,
     );
   };
 
-  const antallRader = tilretteleggingDatoer.length + avklarteOppholdPerioder.length;
-  const alleFomDatoerSortert = tilretteleggingDatoer
-    .map(t => t.fom)
-    .concat(avklarteOppholdPerioder.map(t => t.fom))
-    .sort((fom1, fom2) => {
-      if (!fom1) {
-        return 1;
-      }
-      if (!fom2) {
-        return -1;
-      }
-      return dayjs(fom1).diff(dayjs(fom2));
-    });
+  const alleRaderSortert = [...tilretteleggingDatoer, ...avklarteOppholdPerioder].sort((d1, d2) => {
+    if (!d1.fom) {
+      return 1;
+    }
+    if (!d2.fom) {
+      return -1;
+    }
+    return dayjs(d1.fom).diff(dayjs(d2.fom));
+  });
 
   return (
-    <>
+    <VStack gap="6">
       <Table size="small">
         <Table.Body>
-          {[...Array(antallRader)].map((_d, index) => {
-            const fomDato = alleFomDatoerSortert[index];
-            const tilretteleggingIndex = tilretteleggingDatoer.findIndex(t => t.fom === fomDato);
-            if (tilretteleggingIndex !== -1) {
-              const navn = `${tilretteleggingStateName}.${tilretteleggingIndex}`;
-
-              const nesteTilrettelegging = finnTilrettelegging(alleFomDatoerSortert, tilretteleggingDatoer, index);
+          {alleRaderSortert.map((rad, index) => {
+            if ('kilde' in rad) {
+              const fomDatoer = alleRaderSortert.map(r => r.fom);
+              const tilretteleggingIndex = tilretteleggingDatoer.findIndex(t => t.fom === rad.fom);
+              const nesteTilrettelegging = finnTilrettelegging(fomDatoer, tilretteleggingDatoer, index);
 
               const tomDatoForTilrettelegging = nesteTilrettelegging?.fom
                 ? dayjs(nesteTilrettelegging.fom).subtract(1, 'day').format(ISO_DATE_FORMAT)
                 : dayjs(termindato).subtract(3, 'week').subtract(1, 'day').format(ISO_DATE_FORMAT);
 
+              const navn = `${tilretteleggingStateName}.${tilretteleggingIndex}`;
               return (
                 <TilretteleggingPeriodeTabellRad
                   key={navn}
                   navn={navn}
-                  tilrettelegging={tilretteleggingDatoer[tilretteleggingIndex]}
+                  tilrettelegging={rad}
                   readOnly={readOnly}
                   index={arbeidsforholdIndex + tilretteleggingIndex}
-                  openRad={fomDato === undefined}
+                  openRad={rad.fom === undefined}
                   fjernTilrettelegging={fjernTilrettelegging}
                   setLeggTilKnapperDisablet={setErLeggTilKnapperDisablet}
                   stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold}
@@ -126,17 +131,18 @@ const TilretteleggingOgOppholdPerioderPanel: FunctionComponent<OwnProps> = ({
               );
             }
 
-            const oppholdIndex = avklarteOppholdPerioder.findIndex(t => t.fom === fomDato);
+            const oppholdIndex = avklarteOppholdPerioder.findIndex(
+              t => t.fom === rad.fom && t.tom === rad.tom && t.oppholdKilde === rad.oppholdKilde,
+            );
             const navn = `${oppholdPerioderStateName}.${oppholdIndex}`;
-
             return (
               <OppholdPeriodeTabellRad
                 key={navn}
                 navn={navn}
-                opphold={avklarteOppholdPerioder[oppholdIndex]}
+                opphold={rad}
                 readOnly={readOnly}
                 index={arbeidsforholdIndex + oppholdIndex}
-                openRad={fomDato === undefined}
+                openRad={rad.fom === undefined}
                 fjernOpphold={fjernOpphold}
                 setLeggTilKnapperDisablet={setErLeggTilKnapperDisablet}
                 arbeidsforhold={arbeidsforhold}
@@ -148,7 +154,6 @@ const TilretteleggingOgOppholdPerioderPanel: FunctionComponent<OwnProps> = ({
       </Table>
       {!readOnly && (
         <>
-          <VerticalSpacer fourtyPx />
           <HStack gap="4">
             <Button
               size="small"
@@ -173,8 +178,6 @@ const TilretteleggingOgOppholdPerioderPanel: FunctionComponent<OwnProps> = ({
           </HStack>
         </>
       )}
-    </>
+    </VStack>
   );
 };
-
-export default TilretteleggingOgOppholdPerioderPanel;

@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import dayjs from 'dayjs';
 
@@ -14,7 +14,7 @@ const finnTekst = (intl: IntlShape, termindato: string, fom?: string): string =>
   return intl.formatMessage({ id: 'TilretteleggingInfoPanel.Dager' }, { dager });
 };
 
-const finnProsentSvangerskapspenger = (tilrettelegging: ArbeidsforholdTilretteleggingDato) => {
+const finnProsentSvangerskapspenger = (tilrettelegging: ArbeidsforholdTilretteleggingDato): number => {
   if (tilrettelegging.type === tilretteleggingType.HEL_TILRETTELEGGING) {
     return 0;
   }
@@ -24,7 +24,7 @@ const finnProsentSvangerskapspenger = (tilrettelegging: ArbeidsforholdTilrettele
   return tilrettelegging.overstyrtUtbetalingsgrad || 0;
 };
 
-const finnProsentArbeid = (tilrettelegging: ArbeidsforholdTilretteleggingDato) => {
+const finnProsentArbeid = (tilrettelegging: ArbeidsforholdTilretteleggingDato): number => {
   if (tilrettelegging.type === tilretteleggingType.HEL_TILRETTELEGGING) {
     return 100;
   }
@@ -34,7 +34,7 @@ const finnProsentArbeid = (tilrettelegging: ArbeidsforholdTilretteleggingDato) =
   return tilrettelegging.stillingsprosent || 0;
 };
 
-interface OwnProps {
+interface Props {
   tilrettelegging: ArbeidsforholdTilretteleggingDato;
   termindato: string;
   erTomDatoTreUkerFørTermin: boolean;
@@ -42,13 +42,13 @@ interface OwnProps {
   tomDato: string;
 }
 
-const TilretteleggingInfoPanel: FunctionComponent<OwnProps> = ({
+export const TilretteleggingInfoPanel = ({
   tilrettelegging,
   termindato,
   erTomDatoTreUkerFørTermin,
   stillingsprosentArbeidsforhold,
   tomDato,
-}) => {
+}: Props) => {
   const intl = useIntl();
 
   const dagerOgUker = calcDaysAndWeeks(tilrettelegging.fom, tomDato);
@@ -144,5 +144,3 @@ const TilretteleggingInfoPanel: FunctionComponent<OwnProps> = ({
     </div>
   );
 };
-
-export default TilretteleggingInfoPanel;

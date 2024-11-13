@@ -1,9 +1,9 @@
-import React, { useMemo, FunctionComponent, useState, useCallback } from 'react';
+import React, { ReactNode, useMemo, useState, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Datepicker, Form, TextAreaField } from '@navikt/ft-form-hooks';
-import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { hasValidDate, hasValidText, maxLength, required } from '@navikt/ft-form-validators';
+import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
+import { dateRangesNotOverlapping, hasValidDate, hasValidText, maxLength, required } from '@navikt/ft-form-validators';
 
 import {
   Aksjonspunkt,
@@ -16,11 +16,11 @@ import {
 import { BekreftSvangerskapspengerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
-import { Alert, HStack } from '@navikt/ds-react';
+import { Alert, HStack, VStack } from '@navikt/ds-react';
 
-import ArbeidsforholdFieldArray from './arbeidsforhold/ArbeidsforholdFieldArray';
+import { ArbeidsforholdFieldArray } from './arbeidsforhold/ArbeidsforholdFieldArray';
 import { filtrerVelferdspermisjoner } from './arbeidsforhold/ArbeidsforholdPanel';
-import TilretteleggingFormValues from '../types/TilretteleggingFormValues';
+import { TilretteleggingFormValues } from '../types/TilretteleggingFormValues';
 
 const maxLength1500 = maxLength(1500);
 
@@ -50,16 +50,18 @@ const utledOmEnSkalVurdereVelferdspermisjoner = (alleArbeidsforhold: Arbeidsforh
     ),
   );
 
-interface OwnProps {
+const FeilmeldingAlert = ({ children }: { children: ReactNode }) => <Alert variant="error">{children}</Alert>;
+
+interface Props {
   behandlingVersjon: number;
   readOnly: boolean;
-  hasOpenAksjonspunkter: boolean;
+  harApneAksjonspunkter: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   svangerskapspengerTilrettelegging: FodselOgTilrettelegging;
   aoiArbeidsforhold: AoIArbeidsforhold[];
   aksjonspunkter: Aksjonspunkt[];
   submitCallback: (data: BekreftSvangerskapspengerAp) => Promise<void>;
-  formData: TilretteleggingFormValues;
+  formData?: TilretteleggingFormValues;
   setFormData: (data: TilretteleggingFormValues) => void;
   submittable: boolean;
   uttakArbeidTyper: KodeverkMedNavn[];
@@ -70,10 +72,10 @@ interface OwnProps {
  *
  * Viser tillrettlegging før svangerskapspenger
  */
-const TilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
+export const TilretteleggingFaktaForm = ({
   behandlingVersjon,
   readOnly,
-  hasOpenAksjonspunkter,
+  harApneAksjonspunkter,
   arbeidsgiverOpplysningerPerId,
   aksjonspunkter,
   svangerskapspengerTilrettelegging,
@@ -83,7 +85,7 @@ const TilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
   setFormData,
   submittable,
   uttakArbeidTyper,
-}) => {
+}: Props) => {
   const intl = useIntl();
 
   const sorterteArbeidsforhold = useMemo(
@@ -119,6 +121,11 @@ const TilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
   const harGyldig100PermisjonDerEnHarValgtSvp = arbeidsforhold.some(
     a => a.skalBrukes && a.velferdspermisjoner.some(vp => vp.erGyldig && vp.permisjonsprosent === 100),
   );
+  const harOverlappendePerioder = arbeidsforhold.some(a =>
+    a.avklarteOppholdPerioder.filter(p => p.fom && p.tom).length > 0
+      ? dateRangesNotOverlapping(a.avklarteOppholdPerioder.filter(p => p.fom && p.tom).map(p => [p.fom, p.tom]))
+      : false,
+  );
 
   const [visFeil, setVisFeil] = useState(false);
 
@@ -127,7 +134,8 @@ const TilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
     harIkkeValgtNoenArbeidsforhold ||
     harPeriodeSomIkkeErFerdig ||
     harArbeidsforholdUtenTilrettelegging ||
-    harGyldig100PermisjonDerEnHarValgtSvp;
+    harGyldig100PermisjonDerEnHarValgtSvp ||
+    harOverlappendePerioder;
 
   const onSubmit = useCallback(
     (values: TilretteleggingFormValues) => {
@@ -148,8 +156,8 @@ const TilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
 
   return (
     <Form formMethods={formMethods} setDataOnUnmount={setFormData} onSubmit={onSubmit}>
-      {hasOpenAksjonspunkter && (
-        <>
+      <VStack gap="8">
+        {harApneAksjonspunkter && (
           <AksjonspunktHelpTextHTML>
             {skalVurdereVelferdspermisjoner
               ? [
@@ -160,91 +168,76 @@ const TilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
                 ]
               : [<FormattedMessage id="TilretteleggingFaktaForm.Aksjonspunkt" key="svangerskapspengerAp" />]}
           </AksjonspunktHelpTextHTML>
-          <VerticalSpacer fourtyPx />
-        </>
-      )}
-      <HStack gap="4" wrap>
-        <Datepicker
-          name="termindato"
-          label={intl.formatMessage({ id: 'TilretteleggingFaktaForm.Termindato' })}
-          validate={[required, hasValidDate]}
-          isReadOnly={readOnly}
-        />
-        {fødselsdato && (
+        )}
+        <HStack gap="4" wrap>
           <Datepicker
-            name="fødselsdato"
-            label={intl.formatMessage({ id: 'TilretteleggingFaktaForm.Fodselsdato' })}
+            name="termindato"
+            label={intl.formatMessage({ id: 'TilretteleggingFaktaForm.Termindato' })}
             validate={[required, hasValidDate]}
             isReadOnly={readOnly}
           />
-        )}
-      </HStack>
-      <VerticalSpacer fourtyPx />
-      <ArbeidsforholdFieldArray
-        sorterteArbeidsforhold={arbeidsforhold}
-        aoiArbeidsforhold={aoiArbeidsforhold}
-        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-        readOnly={readOnly}
-        uttakArbeidTyper={uttakArbeidTyper}
-      />
-      {harIkkeVurdertAlleVelferdspermisjoner && visFeil && (
-        <>
-          <VerticalSpacer sixteenPx />
-          <Alert variant="error">
+          {fødselsdato && (
+            <Datepicker
+              name="fødselsdato"
+              label={intl.formatMessage({ id: 'TilretteleggingFaktaForm.Fodselsdato' })}
+              validate={[required, hasValidDate]}
+              isReadOnly={readOnly}
+            />
+          )}
+        </HStack>
+        <ArbeidsforholdFieldArray
+          sorterteArbeidsforhold={arbeidsforhold}
+          aoiArbeidsforhold={aoiArbeidsforhold}
+          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+          readOnly={readOnly}
+          uttakArbeidTyper={uttakArbeidTyper}
+        />
+        {visFeil && harIkkeVurdertAlleVelferdspermisjoner && (
+          <FeilmeldingAlert>
             <FormattedMessage id="TilretteleggingFaktaForm.IkkeAllePermisjonerVurdert" />
-          </Alert>
-        </>
-      )}
-      {harIkkeValgtNoenArbeidsforhold && visFeil && (
-        <>
-          <VerticalSpacer sixteenPx />
-          <Alert variant="error">
+          </FeilmeldingAlert>
+        )}
+        {visFeil && harIkkeValgtNoenArbeidsforhold && (
+          <FeilmeldingAlert>
             <FormattedMessage id="TilretteleggingFaktaForm.HarIkkeValgtArbeidsforhold" />
-          </Alert>
-        </>
-      )}
-      {harPeriodeSomIkkeErFerdig && visFeil && (
-        <>
-          <VerticalSpacer sixteenPx />
-          <Alert variant="error">
+          </FeilmeldingAlert>
+        )}
+        {visFeil && harPeriodeSomIkkeErFerdig && (
+          <FeilmeldingAlert>
             <FormattedMessage id="TilretteleggingFaktaForm.PeriodeIkkeLagtTil" />
-          </Alert>
-        </>
-      )}
-      {harArbeidsforholdUtenTilrettelegging && visFeil && (
-        <>
-          <VerticalSpacer sixteenPx />
-          <Alert variant="error">
+          </FeilmeldingAlert>
+        )}
+        {visFeil && harArbeidsforholdUtenTilrettelegging && (
+          <FeilmeldingAlert>
             <FormattedMessage id="TilretteleggingFaktaForm.ArbeidsforholdUtenTilrettelegging" />
-          </Alert>
-        </>
-      )}
-      {harGyldig100PermisjonDerEnHarValgtSvp && visFeil && (
-        <>
-          <VerticalSpacer sixteenPx />
-          <Alert variant="error">
+          </FeilmeldingAlert>
+        )}
+        {visFeil && harGyldig100PermisjonDerEnHarValgtSvp && (
+          <FeilmeldingAlert>
             <FormattedMessage id="TilretteleggingFaktaForm.ValgtSvpVedGyldig100Permisjon" />
-          </Alert>
-        </>
-      )}
-      <VerticalSpacer fourtyPx />
-      <TextAreaField
-        name="begrunnelse"
-        label={intl.formatMessage({ id: 'TilretteleggingFaktaForm.BegrunnEndringene' })}
-        validate={[isRequiredFn, maxLength1500, hasValidText]}
-        maxLength={1500}
-        readOnly={readOnly}
-      />
-      <VerticalSpacer fourtyPx />
-      <FaktaSubmitButtonNew
-        isSubmittable={submittable}
-        isReadOnly={readOnly}
-        isSubmitting={formMethods.formState.isSubmitting}
-        isDirty={formMethods.formState.isDirty}
-      />
-      <VerticalSpacer fourtyPx />
+          </FeilmeldingAlert>
+        )}
+        {visFeil && harOverlappendePerioder && (
+          <FeilmeldingAlert>
+            <FormattedMessage id="TilretteleggingFaktaForm.HarOverlappendePeriode" />
+          </FeilmeldingAlert>
+        )}
+        <TextAreaField
+          name="begrunnelse"
+          label={intl.formatMessage({ id: 'TilretteleggingFaktaForm.BegrunnEndringene' })}
+          validate={[isRequiredFn, maxLength1500, hasValidText]}
+          maxLength={1500}
+          readOnly={readOnly}
+        />
+        <HStack>
+          <FaktaSubmitButtonNew
+            isSubmittable={submittable}
+            isReadOnly={readOnly}
+            isSubmitting={formMethods.formState.isSubmitting}
+            isDirty={formMethods.formState.isDirty}
+          />
+        </HStack>
+      </VStack>
     </Form>
   );
 };
-
-export default TilretteleggingFaktaForm;
