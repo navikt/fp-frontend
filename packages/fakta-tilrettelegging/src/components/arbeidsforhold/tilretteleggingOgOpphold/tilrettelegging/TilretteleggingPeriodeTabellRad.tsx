@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { Table, Tag } from '@navikt/ds-react';
 import {
@@ -10,7 +10,8 @@ import {
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { tilretteleggingType } from '@navikt/fp-kodeverk';
-import TilretteleggingForm, {
+import {
+  TilretteleggingForm,
   finnVelferdspermisjonprosent,
   finnProsentSvangerskapspenger,
 } from './TilretteleggingForm';
@@ -22,7 +23,7 @@ const utledTypeTekst = (
   stillingsprosentArbeidsforhold: number,
   arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging,
   tilrettelegging: ArbeidsforholdTilretteleggingDato,
-) => {
+): string => {
   const velferdspermisjonsprosent = finnVelferdspermisjonprosent(arbeidsforhold);
   const stillingsprosent =
     tilrettelegging.type === tilretteleggingType.INGEN_TILRETTELEGGING ? 100 : tilrettelegging.stillingsprosent;
@@ -35,7 +36,7 @@ const utledTypeTekst = (
     : intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.Tilrettelegging' });
 };
 
-const utledKilde = (intl: IntlShape, tilrettelegging: ArbeidsforholdTilretteleggingDato) => {
+const utledKilde = (intl: IntlShape, tilrettelegging: ArbeidsforholdTilretteleggingDato): string => {
   if (
     tilrettelegging.kilde === SvpTilretteleggingFomKilde.REGISTRERT_AV_SAKSBEHANDLER ||
     tilrettelegging.fom === undefined
@@ -51,7 +52,7 @@ const utledKilde = (intl: IntlShape, tilrettelegging: ArbeidsforholdTilrettelegg
   return intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.Soknad' });
 };
 
-interface OwnProps {
+interface Props {
   navn: string;
   tilrettelegging: ArbeidsforholdTilretteleggingDato;
   readOnly: boolean;
@@ -65,7 +66,7 @@ interface OwnProps {
   termindato: string;
 }
 
-const TilretteleggingPeriodeTabellRad: FunctionComponent<OwnProps> = ({
+export const TilretteleggingPeriodeTabellRad = ({
   navn,
   tilrettelegging,
   index,
@@ -77,7 +78,7 @@ const TilretteleggingPeriodeTabellRad: FunctionComponent<OwnProps> = ({
   arbeidsforhold,
   tomDatoForTilrettelegging,
   termindato,
-}) => {
+}: Props) => {
   const intl = useIntl();
   const [open, setOpen] = useState(openRad);
 
@@ -138,5 +139,3 @@ const TilretteleggingPeriodeTabellRad: FunctionComponent<OwnProps> = ({
     </Table.ExpandableRow>
   );
 };
-
-export default TilretteleggingPeriodeTabellRad;

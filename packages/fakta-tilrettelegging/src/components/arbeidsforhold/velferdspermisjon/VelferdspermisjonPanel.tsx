@@ -1,33 +1,31 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { HStack, Label, Table } from '@navikt/ds-react';
+import { HStack, Label, Table, VStack } from '@navikt/ds-react';
 
 import { Permisjon } from '@navikt/fp-types';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 
-import VelferdspermisjonTabellRad from './VelferdspermisjonTabellRad';
+import { VelferdspermisjonTabellRad } from './VelferdspermisjonTabellRad';
 
 import styles from './velferdspermisjonPanel.module.css';
 
-interface OwnProps {
+interface Props {
   velferdspermisjoner: Permisjon[];
   arbeidsforholdIndex: number;
   readOnly: boolean;
   oppdaterOverstyrtUtbetalingsgrad: (velferdspermisjonprosent: number) => void;
 }
 
-const VelferdspermisjonPanel: FunctionComponent<OwnProps> = ({
+export const VelferdspermisjonPanel = ({
   velferdspermisjoner,
   arbeidsforholdIndex,
   readOnly,
   oppdaterOverstyrtUtbetalingsgrad,
-}) => {
+}: Props) => {
   const intl = useIntl();
   return (
-    <>
-      <VerticalSpacer fourtyPx />
-      <HStack gap="4">
+    <VStack gap="2">
+      <HStack gap="4" align="center">
         <Label size="small">
           <FormattedMessage id="TilretteleggingForArbeidsgiverPanel.Velferdspermisjon" />
         </Label>
@@ -38,7 +36,6 @@ const VelferdspermisjonPanel: FunctionComponent<OwnProps> = ({
           />
         )}
       </HStack>
-      <VerticalSpacer sixteenPx />
       <Table size="small">
         <Table.Body>
           {velferdspermisjoner.map(permisjon => (
@@ -52,8 +49,6 @@ const VelferdspermisjonPanel: FunctionComponent<OwnProps> = ({
           ))}
         </Table.Body>
       </Table>
-    </>
+    </VStack>
   );
 };
-
-export default VelferdspermisjonPanel;

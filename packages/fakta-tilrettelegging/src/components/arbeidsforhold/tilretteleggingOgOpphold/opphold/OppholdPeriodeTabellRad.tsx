@@ -1,11 +1,11 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { Table, Tag } from '@navikt/ds-react';
 import { ArbeidsforholdFodselOgTilrettelegging, SvpAvklartOppholdPeriode } from '@navikt/fp-types';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 
-import OppholdForm from './OppholdForm';
+import { OppholdForm } from './OppholdForm';
 
 import styles from './oppholdPeriodeTabellRad.module.css';
 
@@ -34,19 +34,19 @@ const utledKilde = (intl: IntlShape, opphold: SvpAvklartOppholdPeriode) => {
   }
 };
 
-interface OwnProps {
+interface Props {
   navn: string;
   opphold: SvpAvklartOppholdPeriode;
   readOnly: boolean;
   index: number;
   openRad: boolean;
-  fjernOpphold: (fomDato?: string) => void;
+  fjernOpphold: (opphold?: SvpAvklartOppholdPeriode) => void;
   setLeggTilKnapperDisablet: React.Dispatch<React.SetStateAction<boolean>>;
   arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging;
   termindato: string;
 }
 
-const OppholdPeriodeTabellRad: FunctionComponent<OwnProps> = ({
+export const OppholdPeriodeTabellRad = ({
   navn,
   opphold,
   index,
@@ -56,7 +56,7 @@ const OppholdPeriodeTabellRad: FunctionComponent<OwnProps> = ({
   setLeggTilKnapperDisablet,
   arbeidsforhold,
   termindato,
-}) => {
+}: Props) => {
   const intl = useIntl();
   const [open, setOpen] = useState(openRad);
 
@@ -114,5 +114,3 @@ const OppholdPeriodeTabellRad: FunctionComponent<OwnProps> = ({
     </Table.ExpandableRow>
   );
 };
-
-export default OppholdPeriodeTabellRad;

@@ -1,7 +1,6 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import dayjs from 'dayjs';
-import { BodyShort, ExpansionCard, Heading, Tag } from '@navikt/ds-react';
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { BodyShort, ExpansionCard, Heading, HStack, Tag } from '@navikt/ds-react';
 import { Buildings3Icon, ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import {
@@ -13,7 +12,7 @@ import {
 
 import { FormattedMessage } from 'react-intl';
 import styles from './arbeidsforholdFieldArray.module.css';
-import ArbeidsforholdPanel from './ArbeidsforholdPanel';
+import { ArbeidsforholdPanel } from './ArbeidsforholdPanel';
 
 const getEndCharFromId = (id?: string): string => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
 
@@ -48,7 +47,7 @@ const finnStillingsprosent = (aoiArbeidsforhold: AoIArbeidsforhold[], tilrettele
   return aoiListe.reduce((sum, aoi) => sum + aoi.stillingsprosent, 0);
 };
 
-interface OwnProps {
+interface Props {
   readOnly: boolean;
   sorterteArbeidsforhold: ArbeidsforholdFodselOgTilrettelegging[];
   aoiArbeidsforhold: AoIArbeidsforhold[];
@@ -56,13 +55,13 @@ interface OwnProps {
   uttakArbeidTyper: KodeverkMedNavn[];
 }
 
-const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
+export const ArbeidsforholdFieldArray = ({
   sorterteArbeidsforhold,
   aoiArbeidsforhold,
   arbeidsgiverOpplysningerPerId,
   readOnly,
   uttakArbeidTyper,
-}) => {
+}: Props) => {
   const { control } = useFormContext();
   const { fields } = useFieldArray({
     control,
@@ -97,46 +96,34 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
             <ExpansionCard aria-label="arbeidsgiver" defaultOpen className={styles.card}>
               <ExpansionCard.Header>
                 <div className={styles.padding}>
-                  <FlexContainer>
-                    <FlexRow>
-                      <FlexColumn>
-                        <Buildings3Icon color="var(--a-blue-600)" className={styles.image} />
-                      </FlexColumn>
-                      <FlexColumn>
-                        <Heading size="small">{arbeidsgiverOpplysning?.navn || arbeidType?.navn}</Heading>
-                      </FlexColumn>
+                  <HStack gap="14" align="center">
+                    <HStack gap="4" align="center">
+                      <Buildings3Icon color="var(--a-blue-600)" className={styles.image} />
+                      <Heading size="small">{arbeidsgiverOpplysning?.navn || arbeidType?.navn}</Heading>
                       {arbeidsgiverOpplysning?.identifikator && (
-                        <FlexColumn className={styles.idMargin}>
-                          <BodyShort size="small">{arbeidsgiverOpplysning.identifikator}</BodyShort>
-                        </FlexColumn>
+                        <BodyShort size="small">{arbeidsgiverOpplysning.identifikator}</BodyShort>
                       )}
                       {arbeidsforhold.eksternArbeidsforholdReferanse && (
-                        <FlexColumn className={styles.idMargin}>
-                          <BodyShort size="small">
-                            {getEndCharFromId(arbeidsforhold.eksternArbeidsforholdReferanse)}
-                          </BodyShort>
-                        </FlexColumn>
+                        <BodyShort size="small">
+                          {getEndCharFromId(arbeidsforhold.eksternArbeidsforholdReferanse)}
+                        </BodyShort>
                       )}
-                      <FlexColumn className={styles.tagMargin}>
-                        <Tag size="small" variant="neutral-moderate">
-                          <FormattedMessage
-                            id="ArbeidsforholdFieldArray.Stillingsprosent"
-                            values={{ stillingsprosent: stillingsprosentArbeidsforhold }}
-                          />
-                        </Tag>
-                      </FlexColumn>
-                      <FlexColumn>
-                        <Tag size="small" variant="neutral-moderate">
-                          {finnSvpTagTekst(arbeidsforhold.skalBrukes, visInfoAlert)}
-                        </Tag>
-                      </FlexColumn>
+                    </HStack>
+                    <HStack gap="4" align="center">
+                      <Tag size="small" variant="neutral-moderate">
+                        <FormattedMessage
+                          id="ArbeidsforholdFieldArray.Stillingsprosent"
+                          values={{ stillingsprosent: stillingsprosentArbeidsforhold }}
+                        />
+                      </Tag>
+                      <Tag size="small" variant="neutral-moderate">
+                        {finnSvpTagTekst(arbeidsforhold.skalBrukes, visInfoAlert)}
+                      </Tag>
                       {arbeidsforhold.skalBrukes && visInfoAlert && (
-                        <FlexColumn>
-                          <ExclamationmarkTriangleFillIcon color="var(--a-orange-600)" className={styles.image} />
-                        </FlexColumn>
+                        <ExclamationmarkTriangleFillIcon color="var(--a-orange-600)" className={styles.image} />
                       )}
-                    </FlexRow>
-                  </FlexContainer>
+                    </HStack>
+                  </HStack>
                 </div>
               </ExpansionCard.Header>
               <ExpansionCard.Content>
@@ -149,12 +136,9 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
                 />
               </ExpansionCard.Content>
             </ExpansionCard>
-            <VerticalSpacer twentyPx />
           </React.Fragment>
         );
       })}
     </>
   );
 };
-
-export default ArbeidsforholdFieldArray;

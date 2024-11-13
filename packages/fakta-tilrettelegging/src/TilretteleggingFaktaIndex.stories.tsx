@@ -1,31 +1,27 @@
-import React from 'react';
-import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { Aksjonspunkt } from '@navikt/ft-types';
+import { Meta, StoryObj } from '@storybook/react';
 
-import { aksjonspunktStatus, AksjonspunktCode, tilretteleggingType } from '@navikt/fp-kodeverk';
+import { AksjonspunktCode, aksjonspunktStatus, tilretteleggingType, uttakArbeidType } from '@navikt/fp-kodeverk';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import {
+  ArbeidOgInntektsmelding,
   ArbeidsforholdFodselOgTilrettelegging,
   Behandling,
-  FodselOgTilrettelegging,
-  ArbeidOgInntektsmelding,
   SvpTilretteleggingFomKilde,
 } from '@navikt/fp-types';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import TilretteleggingFaktaIndex from './TilretteleggingFaktaIndex';
+import { TilretteleggingFaktaIndex } from './TilretteleggingFaktaIndex';
 
 import '@navikt/ds-css';
-import '@navikt/ft-ui-komponenter/dist/style.css';
 import '@navikt/ft-form-hooks/dist/style.css';
+import '@navikt/ft-ui-komponenter/dist/style.css';
 
-const behandling = {
+const BEHANDLING = {
   uuid: '1',
   versjon: 1,
 } as Behandling;
 
-const tilretteleggingPermisjon = {
+const TILRETTELEGGING_PERMISJON = {
   termindato: '2020-11-06',
   arbeidsforholdListe: [
     {
@@ -74,12 +70,13 @@ const tilretteleggingPermisjon = {
         },
       ],
       avklarteOppholdPerioder: [],
+      stillingsprosentStartTilrettelegging: 100,
     },
   ],
   saksbehandlet: true,
 };
 
-const tilretteleggingMed100ProsentPermisjon = {
+const TILRETTELEGGING_MED_100_PROSENT_PERMISJON = {
   termindato: '2020-11-06',
   arbeidsforholdListe: [
     {
@@ -110,6 +107,7 @@ const tilretteleggingMed100ProsentPermisjon = {
         },
       ],
       avklarteOppholdPerioder: [],
+      stillingsprosentStartTilrettelegging: 100,
     },
     {
       tilretteleggingId: 1008654,
@@ -129,12 +127,13 @@ const tilretteleggingMed100ProsentPermisjon = {
       velferdspermisjoner: [],
       avklarteOppholdPerioder: [],
       eksternArbeidsforholdReferanse: '23422323',
+      stillingsprosentStartTilrettelegging: 100,
     },
   ],
   saksbehandlet: true,
 };
 
-const svangerskapspengerTilretteleggingForFrilanser = {
+const SVANGERSKAPSPENGER_TIL_RETTELEGGING_FOR_FRILANSER = {
   termindato: '2020-02-27',
   saksbehandlet: false,
   arbeidsforholdListe: [
@@ -151,10 +150,12 @@ const svangerskapspengerTilretteleggingForFrilanser = {
         },
       ],
       arbeidsgiverReferanse: '1',
+      uttakArbeidType: uttakArbeidType.ANNET,
       skalBrukes: true,
       velferdspermisjoner: [],
       avklarteOppholdPerioder: [],
       eksternArbeidsforholdReferanse: '23422323',
+      stillingsprosentStartTilrettelegging: 100,
     },
     {
       tilretteleggingId: 1008654,
@@ -174,11 +175,12 @@ const svangerskapspengerTilretteleggingForFrilanser = {
       velferdspermisjoner: [],
       avklarteOppholdPerioder: [],
       eksternArbeidsforholdReferanse: '23422323',
+      stillingsprosentStartTilrettelegging: 100,
     },
-  ] as ArbeidsforholdFodselOgTilrettelegging[],
+  ] satisfies ArbeidsforholdFodselOgTilrettelegging[],
 };
 
-const defaultArbeidOgInntekt = {
+const DEFAULT_ARBEID_OG_INNTEKT = {
   arbeidsforhold: [
     {
       arbeidsgiverIdent: '1',
@@ -187,7 +189,7 @@ const defaultArbeidOgInntekt = {
   ],
 } as ArbeidOgInntektsmelding;
 
-const spesiellArbeidOgInntekt = {
+const SPESIELL_ARBEID_OG_INNTEKT = {
   inntektsmeldinger: [
     {
       arbeidsgiverIdent: '999999999',
@@ -205,7 +207,7 @@ const spesiellArbeidOgInntekt = {
   ],
 } as ArbeidOgInntektsmelding;
 
-const arbeidsgiverOpplysningerPerId = {
+const ARBEIDSGIVEROPPLYSNINGER_PER_ID = {
   1: {
     erPrivatPerson: false,
     identifikator: '973861778',
@@ -244,231 +246,225 @@ const arbeidsgiverOpplysningerPerId = {
   },
 };
 
-export default {
+const meta = {
   title: 'fakta/fakta-tilrettelegging',
   component: TilretteleggingFaktaIndex,
-};
+  args: {
+    behandling: BEHANDLING,
+    arbeidsgiverOpplysningerPerId: ARBEIDSGIVEROPPLYSNINGER_PER_ID,
+    alleMerknaderFraBeslutter: {},
+    setFormData: () => undefined,
+    submitCallback: action('button-click') as (data: any) => Promise<any>,
+    readOnly: false,
+    harApneAksjonspunkter: true,
+    submittable: true,
+    alleKodeverk: alleKodeverk as any,
+  },
+} satisfies Meta<typeof TilretteleggingFaktaIndex>;
+export default meta;
 
-const Template: StoryFn<{
-  aksjonspunkter: Aksjonspunkt[];
-  submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
-  svangerskapspengerTilrettelegging: FodselOgTilrettelegging;
-  arbeidOgInntekt: ArbeidOgInntektsmelding;
-  readonly: boolean;
-}> = ({ aksjonspunkter, submitCallback, svangerskapspengerTilrettelegging, arbeidOgInntekt, readonly = false }) => (
-  <TilretteleggingFaktaIndex
-    submitCallback={submitCallback}
-    readOnly={readonly}
-    harApneAksjonspunkter
-    submittable
-    alleMerknaderFraBeslutter={{}}
-    setFormData={() => undefined}
-    behandling={behandling}
-    svangerskapspengerTilrettelegging={svangerskapspengerTilrettelegging}
-    aksjonspunkter={aksjonspunkter}
-    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    alleKodeverk={alleKodeverk as any}
-    arbeidOgInntekt={arbeidOgInntekt}
-  />
-);
+type Story = StoryObj<typeof meta>;
 
-export const TilretteleggingMedVelferdspermisjon = Template.bind({});
-TilretteleggingMedVelferdspermisjon.args = {
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-  aksjonspunkter: [
-    {
-      definisjon: AksjonspunktCode.FODSELTILRETTELEGGING,
-      status: aksjonspunktStatus.OPPRETTET,
-      begrunnelse: undefined,
-      kanLoses: true,
-    },
-  ],
-  svangerskapspengerTilrettelegging: tilretteleggingPermisjon,
-  arbeidOgInntekt: spesiellArbeidOgInntekt,
-};
-
-export const TilretteleggingMed100ProsentVelferdspermisjon = Template.bind({});
-TilretteleggingMed100ProsentVelferdspermisjon.args = {
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-  aksjonspunkter: [
-    {
-      definisjon: AksjonspunktCode.FODSELTILRETTELEGGING,
-      status: aksjonspunktStatus.OPPRETTET,
-      begrunnelse: undefined,
-      kanLoses: true,
-    },
-  ],
-  svangerskapspengerTilrettelegging: tilretteleggingMed100ProsentPermisjon,
-  arbeidOgInntekt: spesiellArbeidOgInntekt,
-};
-
-export const SokerVarIkkeAnsattDaBehovetForTilretteleggingOppsto = Template.bind({});
-SokerVarIkkeAnsattDaBehovetForTilretteleggingOppsto.args = {
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-  aksjonspunkter: [
-    {
-      definisjon: AksjonspunktCode.FODSELTILRETTELEGGING,
-      status: aksjonspunktStatus.OPPRETTET,
-      begrunnelse: undefined,
-      kanLoses: true,
-    },
-  ],
-  svangerskapspengerTilrettelegging: svangerskapspengerTilretteleggingForFrilanser,
-  arbeidOgInntekt: defaultArbeidOgInntekt,
-};
-
-export const HarOpphold = Template.bind({});
-HarOpphold.args = {
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-  aksjonspunkter: [
-    {
-      definisjon: AksjonspunktCode.FODSELTILRETTELEGGING,
-      status: aksjonspunktStatus.OPPRETTET,
-      begrunnelse: undefined,
-      kanLoses: true,
-    },
-  ],
-  svangerskapspengerTilrettelegging: {
-    ...tilretteleggingPermisjon,
-    arbeidsforholdListe: [
+export const TilretteleggingMedVelferdspermisjon: Story = {
+  args: {
+    aksjonspunkter: [
       {
-        tilretteleggingId: 1116961,
-        tilretteleggingBehovFom: '2020-03-17',
-        tilretteleggingDatoer: [
-          {
-            fom: '2020-03-17',
-            type: 'INGEN_TILRETTELEGGING',
-            kilde: SvpTilretteleggingFomKilde.SØKNAD,
-            mottattDato: '2020-02-20',
-          },
-          {
-            fom: '2020-10-15',
-            type: 'HEL_TILRETTELEGGING',
-            kilde: SvpTilretteleggingFomKilde.SØKNAD,
-            mottattDato: '2020-02-20',
-          },
-        ],
-        arbeidsgiverReferanse: '999999999',
-        uttakArbeidType: 'FRILANS',
-        skalBrukes: true,
-        kanTilrettelegges: true,
-        velferdspermisjoner: [],
-        avklarteOppholdPerioder: [
-          {
-            fom: '2020-09-15',
-            tom: '2020-09-20',
-            oppholdÅrsak: 'SYKEPENGER',
-            oppholdKilde: 'REGISTRERT_AV_SAKSBEHANDLER'
-          },
-          {
-            fom: '2020-09-25',
-            tom: '2020-09-30',
-            oppholdÅrsak: 'FERIE',
-            oppholdKilde: 'INNTEKTSMELDING',
-          },
-        ],
+        definisjon: AksjonspunktCode.FODSELTILRETTELEGGING,
+        status: aksjonspunktStatus.OPPRETTET,
+        begrunnelse: undefined,
+        kanLoses: true,
       },
     ],
+    svangerskapspengerTilrettelegging: TILRETTELEGGING_PERMISJON,
+    arbeidOgInntekt: SPESIELL_ARBEID_OG_INNTEKT,
   },
-  arbeidOgInntekt: spesiellArbeidOgInntekt,
 };
 
-export const ErReadonly = Template.bind({});
-ErReadonly.args = {
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-  aksjonspunkter: [
-    {
-      definisjon: AksjonspunktCode.FODSELTILRETTELEGGING,
-      status: aksjonspunktStatus.OPPRETTET,
-      begrunnelse: undefined,
-      kanLoses: true,
-    },
-  ],
-  svangerskapspengerTilrettelegging: {
-    ...tilretteleggingPermisjon,
-    arbeidsforholdListe: [
+export const TilretteleggingMed100ProsentVelferdspermisjon: Story = {
+  args: {
+    aksjonspunkter: [
       {
-        tilretteleggingId: 1116961,
-        tilretteleggingBehovFom: '2020-03-17',
-        tilretteleggingDatoer: [
-          {
-            fom: '2020-03-17',
-            type: 'INGEN_TILRETTELEGGING',
-            kilde: SvpTilretteleggingFomKilde.SØKNAD,
-            mottattDato: '2020-02-20',
-          },
-          {
-            fom: '2020-10-15',
-            type: 'HEL_TILRETTELEGGING',
-            kilde: SvpTilretteleggingFomKilde.SØKNAD,
-            mottattDato: '2020-02-20',
-          },
-        ],
-        arbeidsgiverReferanse: '999999999',
-        uttakArbeidType: 'FRILANS',
-        skalBrukes: true,
-        kanTilrettelegges: true,
-        velferdspermisjoner: [],
-        avklarteOppholdPerioder: [
-          {
-            fom: '2020-09-15',
-            tom: '2020-09-20',
-            oppholdÅrsak: 'SYKEPENGER',
-            oppholdKilde: 'REGISTRERT_AV_SAKSBEHANDLER',
-          },
-          {
-            fom: '2020-09-25',
-            tom: '2020-09-30',
-            oppholdÅrsak: 'FERIE',
-            oppholdKilde: 'INNTEKTSMELDING',
-          },
-        ],
+        definisjon: AksjonspunktCode.FODSELTILRETTELEGGING,
+        status: aksjonspunktStatus.OPPRETTET,
+        begrunnelse: undefined,
+        kanLoses: true,
       },
     ],
+    svangerskapspengerTilrettelegging: TILRETTELEGGING_MED_100_PROSENT_PERMISJON,
+    arbeidOgInntekt: SPESIELL_ARBEID_OG_INNTEKT,
   },
-  arbeidOgInntekt: spesiellArbeidOgInntekt,
-  readonly: true,
 };
 
-export const ErRevurdering = Template.bind({});
-ErRevurdering.args = {
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-  aksjonspunkter: [
-    {
-      definisjon: AksjonspunktCode.FODSELTILRETTELEGGING,
-      status: aksjonspunktStatus.OPPRETTET,
-      begrunnelse: 'Dette er en begrunnelse',
-      kanLoses: true,
-    },
-  ],
-  svangerskapspengerTilrettelegging: {
-    ...tilretteleggingPermisjon,
-    arbeidsforholdListe: [
+export const SokerVarIkkeAnsattDaBehovetForTilretteleggingOppstod: Story = {
+  args: {
+    aksjonspunkter: [
       {
-        tilretteleggingId: 1116961,
-        tilretteleggingBehovFom: '2020-03-17',
-        tilretteleggingDatoer: [
-          {
-            fom: '2020-03-17',
-            type: 'INGEN_TILRETTELEGGING',
-            kilde: SvpTilretteleggingFomKilde.SØKNAD,
-            mottattDato: '2020-02-20',
-          },
-          {
-            fom: '2020-10-15',
-            type: 'HEL_TILRETTELEGGING',
-            kilde: SvpTilretteleggingFomKilde.SØKNAD,
-            mottattDato: '2020-02-20',
-          },
-        ],
-        arbeidsgiverReferanse: '999999999',
-        uttakArbeidType: 'FRILANS',
-        skalBrukes: true,
-        kanTilrettelegges: true,
-        velferdspermisjoner: [],
-        avklarteOppholdPerioder: [],
+        definisjon: AksjonspunktCode.FODSELTILRETTELEGGING,
+        status: aksjonspunktStatus.OPPRETTET,
+        begrunnelse: undefined,
+        kanLoses: true,
       },
     ],
+    svangerskapspengerTilrettelegging: SVANGERSKAPSPENGER_TIL_RETTELEGGING_FOR_FRILANSER,
+    arbeidOgInntekt: DEFAULT_ARBEID_OG_INNTEKT,
   },
-  arbeidOgInntekt: spesiellArbeidOgInntekt,
+};
+
+export const HarOpphold: Story = {
+  args: {
+    aksjonspunkter: [
+      {
+        definisjon: AksjonspunktCode.FODSELTILRETTELEGGING,
+        status: aksjonspunktStatus.OPPRETTET,
+        begrunnelse: undefined,
+        kanLoses: true,
+      },
+    ],
+    svangerskapspengerTilrettelegging: {
+      ...TILRETTELEGGING_PERMISJON,
+      arbeidsforholdListe: [
+        {
+          tilretteleggingId: 1116961,
+          tilretteleggingBehovFom: '2020-03-17',
+          tilretteleggingDatoer: [
+            {
+              fom: '2020-03-17',
+              type: 'INGEN_TILRETTELEGGING',
+              kilde: SvpTilretteleggingFomKilde.SØKNAD,
+              mottattDato: '2020-02-20',
+            },
+            {
+              fom: '2020-10-15',
+              type: 'HEL_TILRETTELEGGING',
+              kilde: SvpTilretteleggingFomKilde.SØKNAD,
+              mottattDato: '2020-02-20',
+            },
+          ],
+          arbeidsgiverReferanse: '999999999',
+          uttakArbeidType: 'FRILANS',
+          skalBrukes: true,
+          kanTilrettelegges: true,
+          velferdspermisjoner: [],
+          avklarteOppholdPerioder: [
+            {
+              fom: '2020-09-15',
+              tom: '2020-09-20',
+              oppholdÅrsak: 'SYKEPENGER',
+              oppholdKilde: 'REGISTRERT_AV_SAKSBEHANDLER',
+            },
+            {
+              fom: '2020-09-25',
+              tom: '2020-09-30',
+              oppholdÅrsak: 'FERIE',
+              oppholdKilde: 'INNTEKTSMELDING',
+            },
+          ],
+          stillingsprosentStartTilrettelegging: 100,
+        },
+      ],
+    },
+    arbeidOgInntekt: SPESIELL_ARBEID_OG_INNTEKT,
+  },
+};
+
+export const ErReadonly: Story = {
+  args: {
+    aksjonspunkter: [
+      {
+        definisjon: AksjonspunktCode.FODSELTILRETTELEGGING,
+        status: aksjonspunktStatus.OPPRETTET,
+        begrunnelse: undefined,
+        kanLoses: true,
+      },
+    ],
+    svangerskapspengerTilrettelegging: {
+      ...TILRETTELEGGING_PERMISJON,
+      arbeidsforholdListe: [
+        {
+          tilretteleggingId: 1116961,
+          tilretteleggingBehovFom: '2020-03-17',
+          tilretteleggingDatoer: [
+            {
+              fom: '2020-03-17',
+              type: 'INGEN_TILRETTELEGGING',
+              kilde: SvpTilretteleggingFomKilde.SØKNAD,
+              mottattDato: '2020-02-20',
+            },
+            {
+              fom: '2020-10-15',
+              type: 'HEL_TILRETTELEGGING',
+              kilde: SvpTilretteleggingFomKilde.SØKNAD,
+              mottattDato: '2020-02-20',
+            },
+          ],
+          arbeidsgiverReferanse: '999999999',
+          uttakArbeidType: 'FRILANS',
+          skalBrukes: true,
+          kanTilrettelegges: true,
+          velferdspermisjoner: [],
+          avklarteOppholdPerioder: [
+            {
+              fom: '2020-09-15',
+              tom: '2020-09-20',
+              oppholdÅrsak: 'SYKEPENGER',
+              oppholdKilde: 'REGISTRERT_AV_SAKSBEHANDLER',
+            },
+            {
+              fom: '2020-09-25',
+              tom: '2020-09-30',
+              oppholdÅrsak: 'FERIE',
+              oppholdKilde: 'INNTEKTSMELDING',
+            },
+          ],
+          stillingsprosentStartTilrettelegging: 100,
+        },
+      ],
+    },
+    arbeidOgInntekt: SPESIELL_ARBEID_OG_INNTEKT,
+    readOnly: true,
+  },
+};
+
+export const ErRevurdering: Story = {
+  args: {
+    aksjonspunkter: [
+      {
+        definisjon: AksjonspunktCode.FODSELTILRETTELEGGING,
+        status: aksjonspunktStatus.OPPRETTET,
+        begrunnelse: 'Dette er en begrunnelse',
+        kanLoses: true,
+      },
+    ],
+    svangerskapspengerTilrettelegging: {
+      ...TILRETTELEGGING_PERMISJON,
+      arbeidsforholdListe: [
+        {
+          tilretteleggingId: 1116961,
+          tilretteleggingBehovFom: '2020-03-17',
+          tilretteleggingDatoer: [
+            {
+              fom: '2020-03-17',
+              type: 'INGEN_TILRETTELEGGING',
+              kilde: SvpTilretteleggingFomKilde.SØKNAD,
+              mottattDato: '2020-02-20',
+            },
+            {
+              fom: '2020-10-15',
+              type: 'HEL_TILRETTELEGGING',
+              kilde: SvpTilretteleggingFomKilde.SØKNAD,
+              mottattDato: '2020-02-20',
+            },
+          ],
+          arbeidsgiverReferanse: '999999999',
+          uttakArbeidType: 'FRILANS',
+          skalBrukes: true,
+          kanTilrettelegges: true,
+          velferdspermisjoner: [],
+          avklarteOppholdPerioder: [],
+          stillingsprosentStartTilrettelegging: 100,
+        },
+      ],
+    },
+    arbeidOgInntekt: SPESIELL_ARBEID_OG_INNTEKT,
+  },
 };

@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm, FormProvider, useFormContext } from 'react-hook-form';
 import { Alert, Button, HStack, VStack } from '@navikt/ds-react';
@@ -6,11 +6,11 @@ import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { Permisjon } from '@navikt/fp-types';
 
-import TilretteleggingFormValues from '../../../types/TilretteleggingFormValues';
+import { TilretteleggingFormValues } from '../../../types/TilretteleggingFormValues';
 
 type FormValues = Record<number, Permisjon>;
 
-interface OwnProps {
+interface Props {
   velferdspermisjon: Permisjon;
   arbeidsforholdIndex: number;
   readOnly: boolean;
@@ -18,13 +18,13 @@ interface OwnProps {
   oppdaterOverstyrtUtbetalingsgrad: (velferdspermisjonprosent: number) => void;
 }
 
-const VelferdspermisjonForm: FunctionComponent<OwnProps> = ({
+export const VelferdspermisjonForm = ({
   velferdspermisjon,
   arbeidsforholdIndex,
   readOnly,
   lukkRad,
   oppdaterOverstyrtUtbetalingsgrad,
-}) => {
+}: Props) => {
   const intl = useIntl();
 
   const { setValue, getValues } = useFormContext<TilretteleggingFormValues>();
@@ -124,4 +124,3 @@ const VelferdspermisjonForm: FunctionComponent<OwnProps> = ({
     </FormProvider>
   );
 };
-export default VelferdspermisjonForm;
