@@ -84,12 +84,9 @@ const VentefristUtløperPanel: FunctionComponent<OwnProps> = ({
       <VerticalSpacer sixteenPx />
       <VentefristUtløperGraf
         height={height}
-        behandlingerPaVent={
-          behandlingerPaVent &&
-          behandlingerPaVent.filter(ompv =>
-            values.valgtYtelsetype === ALLE_YTELSETYPER_VALGT ? true : values.valgtYtelsetype === ompv.fagsakYtelseType,
-          )
-        }
+        behandlingerPaVent={behandlingerPaVent.filter(ompv =>
+          values.valgtYtelsetype === ALLE_YTELSETYPER_VALGT ? true : values.valgtYtelsetype === ompv.fagsakYtelseType,
+        )}
       />
     </Form>
   );

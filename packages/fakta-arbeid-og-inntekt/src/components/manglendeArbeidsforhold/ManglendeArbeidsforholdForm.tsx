@@ -44,6 +44,43 @@ const validerPeriodeRekkefølge = (getValues: UseFormGetValues<FormValues>) => (
   return fom && tom ? dateAfterOrEqual(fom)(tom) : null;
 };
 
+const getOppdaterTabell =
+  (
+    oppdaterTabell: (data: (rader: ArbeidsforholdOgInntektRadData[]) => ArbeidsforholdOgInntektRadData[]) => void,
+    radData: ArbeidsforholdOgInntektRadData,
+    inntektsmelding: Inntektsmelding,
+    formValues: FormValues,
+  ) =>
+  () => {
+    oppdaterTabell(oldData =>
+      oldData.map(data => {
+        if (inntektsmelding.arbeidsgiverIdent === data.arbeidsgiverIdent) {
+          const opprettArbeidsforhold =
+            formValues.saksbehandlersVurdering ===
+            ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING;
+          const avklaringOpprett = opprettArbeidsforhold
+            ? {
+                arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
+                fom: formValues.fom,
+                tom: formValues.tom,
+                stillingsprosent: formValues.stillingsprosent,
+                begrunnelse: formValues.begrunnelse,
+                saksbehandlersVurdering: formValues.saksbehandlersVurdering,
+              }
+            : undefined;
+          return {
+            ...radData,
+            avklaring: avklaringOpprett || {
+              begrunnelse: formValues.begrunnelse,
+              saksbehandlersVurdering: formValues.saksbehandlersVurdering,
+            },
+          };
+        }
+        return data;
+      }),
+    );
+  };
+
 interface OwnProps {
   saksnummer: string;
   behandlingUuid: string;
@@ -102,36 +139,7 @@ const ManglendeArbeidsforholdForm: FunctionComponent<OwnProps> = ({
   };
 
   const lagre = (formValues: FormValues) => {
-    const oppdater = () => {
-      oppdaterTabell(oldData =>
-        oldData.map(data => {
-          if (inntektsmelding.arbeidsgiverIdent === data.arbeidsgiverIdent) {
-            const opprettArbeidsforhold =
-              formValues.saksbehandlersVurdering ===
-              ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING;
-            const avklaringOpprett = opprettArbeidsforhold
-              ? {
-                  arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
-                  fom: formValues.fom,
-                  tom: formValues.tom,
-                  stillingsprosent: formValues.stillingsprosent,
-                  begrunnelse: formValues.begrunnelse,
-                  saksbehandlersVurdering: formValues.saksbehandlersVurdering,
-                }
-              : undefined;
-            return {
-              ...radData,
-              avklaring: avklaringOpprett || {
-                begrunnelse: formValues.begrunnelse,
-                saksbehandlersVurdering: formValues.saksbehandlersVurdering,
-              },
-            };
-          }
-          return data;
-        }),
-      );
-    };
-
+    const oppdater = getOppdaterTabell(oppdaterTabell, radData, inntektsmelding, formValues);
     if (formValues.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING) {
       return registrerArbeidsforhold({
         behandlingUuid,

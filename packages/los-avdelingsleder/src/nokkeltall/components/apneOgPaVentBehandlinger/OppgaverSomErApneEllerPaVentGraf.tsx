@@ -44,7 +44,7 @@ const finnAntallPerDato = (
   const antallPerDatoOgUkjent = oppgaverSomErApneEllerPaVent.reduce(
     (acc, oppgave) => {
       const { førsteUttakMåned, antall } = oppgave;
-      const key = førsteUttakMåned || UKJENT_DATO;
+      const key = førsteUttakMåned ?? UKJENT_DATO;
       return {
         ...acc,
         [key]: acc[key] ? acc[key] + antall : antall,
@@ -82,8 +82,8 @@ const fyllInnManglendeDatoerOgSorterEtterDato = (
     dato = dayjs(dato.add(1, 'month'));
   } while (dato.isBefore(periodeSlutt));
 
-  koordinaterPaVent.push([periodeSlutt.toDate(), oppgaverPaVent.find(d => d.x === UKJENT_DATO)?.y || 0]);
-  koordinaterIkkePaVent.push([periodeSlutt.toDate(), oppgaverIkkePaVent.find(d => d.x === UKJENT_DATO)?.y || 0]);
+  koordinaterPaVent.push([periodeSlutt.toDate(), oppgaverPaVent.find(d => d.x === UKJENT_DATO)?.y ?? 0]);
+  koordinaterIkkePaVent.push([periodeSlutt.toDate(), oppgaverIkkePaVent.find(d => d.x === UKJENT_DATO)?.y ?? 0]);
 
   return {
     koordinaterPaVent,

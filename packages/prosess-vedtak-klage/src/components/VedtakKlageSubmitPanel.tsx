@@ -1,12 +1,8 @@
-import React, { FunctionComponent, useCallback, KeyboardEvent, MouseEvent } from 'react';
+import React, { useCallback, KeyboardEvent, MouseEvent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import classNames from 'classnames';
-import { Button } from '@navikt/ds-react';
+import { Button, HStack, Link } from '@navikt/ds-react';
 
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
-import styles from './vedtakKlageSubmitPanel.module.css';
-
-interface OwnProps {
+interface Props {
   previewVedtakCallback: () => Promise<any>;
   behandlingPaaVent: boolean;
   readOnly: boolean;
@@ -14,50 +10,35 @@ interface OwnProps {
   isSubmitting: boolean;
 }
 
-const VedtakKlageSubmitPanel: FunctionComponent<OwnProps> = ({
+export const VedtakKlageSubmitPanel = ({
   behandlingPaaVent,
   previewVedtakCallback,
   readOnly,
   lagreVedtak,
   isSubmitting,
-}) => {
+}: Props) => {
   const forhåndsvis = useCallback((e: KeyboardEvent | MouseEvent) => {
     e.preventDefault();
     previewVedtakCallback();
   }, []);
 
   return (
-    <FlexContainer>
-      <FlexRow>
-        {!readOnly && (
-          <FlexColumn>
-            <Button
-              variant="primary"
-              size="small"
-              className={styles.mainButton}
-              onClick={lagreVedtak}
-              disabled={behandlingPaaVent || isSubmitting}
-              loading={isSubmitting}
-              type="button"
-            >
-              <FormattedMessage id="VedtakKlageForm.TilGodkjenning" />
-            </Button>
-          </FlexColumn>
-        )}
-        <FlexColumn>
-          {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-          <a
-            href=""
-            onClick={forhåndsvis}
-            onKeyDown={e => (e.key === 'Enter' ? forhåndsvis(e) : null)}
-            className={classNames('lenke lenke--frittstaende')}
-          >
-            <FormattedMessage id="VedtakKlageForm.ForhandvisBrev" />
-          </a>
-        </FlexColumn>
-      </FlexRow>
-    </FlexContainer>
+    <HStack gap="2" align="center">
+      {!readOnly && (
+        <Button
+          variant="primary"
+          size="small"
+          onClick={lagreVedtak}
+          disabled={behandlingPaaVent || isSubmitting}
+          loading={isSubmitting}
+          type="button"
+        >
+          <FormattedMessage id="VedtakKlageForm.TilGodkjenning" />
+        </Button>
+      )}
+      <Link href="#" onClick={forhåndsvis} onKeyDown={e => (e.key === 'Enter' ? forhåndsvis(e) : null)}>
+        <FormattedMessage id="VedtakKlageForm.ForhandvisBrev" />
+      </Link>
+    </HStack>
   );
 };
-
-export default VedtakKlageSubmitPanel;
