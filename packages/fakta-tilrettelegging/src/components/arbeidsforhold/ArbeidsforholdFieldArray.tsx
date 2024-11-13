@@ -42,6 +42,11 @@ const finnSvpTagTekst = (skalBrukes: boolean, visInfoAlert: boolean) => {
   );
 };
 
+const finnStillingsprosent = (aoiArbeidsforhold: AoIArbeidsforhold[], tilretteleggingBehovFom: string) => {
+  const aoiListe = aoiArbeidsforhold.filter(a => erInnenforIntervall(tilretteleggingBehovFom, a.fom, a.tom));
+  return aoiListe.reduce((sum, aoi) => sum + aoi.stillingsprosent, 0);
+};
+
 interface Props {
   readOnly: boolean;
   sorterteArbeidsforhold: ArbeidsforholdFodselOgTilrettelegging[];
@@ -80,6 +85,10 @@ export const ArbeidsforholdFieldArray = ({
           : alleIafAf.length > 0 &&
             alleIafAf.every(a => !erInnenforIntervall(arbeidsforhold.tilretteleggingBehovFom, a.fom, a.tom));
 
+        const stillingsprosentArbeidsforhold = af
+          ? af.stillingsprosent
+          : finnStillingsprosent(alleIafAf, arbeidsforhold.tilretteleggingBehovFom);
+
         const arbeidType = uttakArbeidTyper.find(type => type.kode === arbeidsforhold.uttakArbeidType);
 
         return (
@@ -104,7 +113,7 @@ export const ArbeidsforholdFieldArray = ({
                       <Tag size="small" variant="neutral-moderate">
                         <FormattedMessage
                           id="ArbeidsforholdFieldArray.Stillingsprosent"
-                          values={{ stillingsprosent: arbeidsforhold.stillingsprosentStartTilrettelegging }}
+                          values={{ stillingsprosent: stillingsprosentArbeidsforhold }}
                         />
                       </Tag>
                       <Tag size="small" variant="neutral-moderate">
@@ -123,7 +132,7 @@ export const ArbeidsforholdFieldArray = ({
                   arbeidsforholdIndex={index}
                   readOnly={readOnly}
                   visInfoAlert={arbeidsforhold.skalBrukes && visInfoAlert}
-                  stillingsprosentArbeidsforhold={arbeidsforhold.stillingsprosentStartTilrettelegging}
+                  stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold}
                 />
               </ExpansionCard.Content>
             </ExpansionCard>
