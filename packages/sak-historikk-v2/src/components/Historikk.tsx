@@ -58,7 +58,7 @@ export const Historikk = ({
   const intl = useIntl();
   const isDevMode = useStorageToggle({ key: 'devmode' });
 
-  const [skalSortertePaValgtBehandling, setSkalSortertePaBehandling] = useState(false);
+  const [skalSortertePaValgtBehandling, setSkalSortertePaValgtBehandling] = useState(false);
 
   const alleHistorikkInnslag = useMemo(
     () => sortAndTagTilbakekreving(historikkFpSak, historikkFpTilbake),
@@ -96,7 +96,7 @@ export const Historikk = ({
           <Heading size="small">{intl.formatMessage({ id: 'History.Historikk' })}</Heading>
           <HStack gap="8">
             {valgtBehandlingUuid && (
-              <Checkbox size="small" onChange={() => setSkalSortertePaBehandling(!skalSortertePaValgtBehandling)}>
+              <Checkbox size="small" onChange={() => setSkalSortertePaValgtBehandling(!skalSortertePaValgtBehandling)}>
                 {intl.formatMessage({ id: 'History.FiltrerPaBehandling' })}
               </Checkbox>
             )}

@@ -249,26 +249,24 @@ export const TilretteleggingForm = ({
                 tilrettelegging.type !== tilretteleggingType.DELVIS_TILRETTELEGGING ||
                 erNyPeriode ||
                 formValues.kilde === SvpTilretteleggingFomKilde.REGISTRERT_AV_SAKSBEHANDLER) && (
-                <>
-                  <NumberField
-                    name={`${index}.stillingsprosent`}
-                    className={styles.arbeidsprosent}
-                    readOnly={readOnly}
-                    label={intl.formatMessage({ id: 'TilretteleggingForm.Arbeidsprosent' })}
-                    description={intl.formatMessage({ id: 'TilretteleggingForm.ArbeidsprosentBeskrivelse' })}
-                    validate={[required, minValue0, maxValue100, hasValidDecimal]}
-                    forceTwoDecimalDigits
-                    onChange={value => {
-                      const utbetalingsgrad = finnUtbetalingsgradForTilrettelegging(
-                        stillingsprosentArbeidsforhold,
-                        velferdspermisjonprosent,
-                        value,
-                      );
-                      // @ts-ignore Fiks
-                      formMethods.setValue(`${index}.overstyrtUtbetalingsgrad`, utbetalingsgrad, { shouldDirty: true });
-                    }}
-                  />
-                </>
+                <NumberField
+                  name={`${index}.stillingsprosent`}
+                  className={styles.arbeidsprosent}
+                  readOnly={readOnly}
+                  label={intl.formatMessage({ id: 'TilretteleggingForm.Arbeidsprosent' })}
+                  description={intl.formatMessage({ id: 'TilretteleggingForm.ArbeidsprosentBeskrivelse' })}
+                  validate={[required, minValue0, maxValue100, hasValidDecimal]}
+                  forceTwoDecimalDigits
+                  onChange={value => {
+                    const utbetalingsgrad = finnUtbetalingsgradForTilrettelegging(
+                      stillingsprosentArbeidsforhold,
+                      velferdspermisjonprosent,
+                      value,
+                    );
+                    // @ts-ignore Fiks
+                    formMethods.setValue(`${index}.overstyrtUtbetalingsgrad`, utbetalingsgrad, { shouldDirty: true });
+                  }}
+                />
               )}
               <NumberField
                 name={`${index}.overstyrtUtbetalingsgrad`}

@@ -185,7 +185,6 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
           <HistorikkIndexV2
             saksnummer={fagsak.saksnummer}
             behandlingUuid={behandlingUuid}
-            behandlingVersjon={behandlingVersjon}
             historikkinnslagFpSak={fagsakData.getHistorikkV2FpSak()}
             historikkinnslagFpTilbake={fagsakData.getHistorikkV2FpTilbake()}
             kjønn={fagsak.bruker.kjønn}

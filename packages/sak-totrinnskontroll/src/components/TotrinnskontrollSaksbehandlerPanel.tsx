@@ -17,7 +17,7 @@ const VurderPåNyttPunkter = ({
   vurderPaNyttArsaker,
   vurderArsaker,
 }: {
-  vurderPaNyttArsaker?: string[] | undefined;
+  vurderPaNyttArsaker: string[] | undefined;
   vurderArsaker: KodeverkMedNavn[];
 }) => (
   <div className={styles.approvalItem}>

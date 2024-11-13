@@ -10,18 +10,20 @@ export const utledPlassering = (aktørType: HistorikkAktor): 'right' | 'left' =>
     ? 'right'
     : 'left';
 
+const getSøkerStyle = (kjønn?: string): string => {
+  if (kjønn === KjønnkodeEnum.KVINNE) {
+    return styles.bubbleSokerKvinne;
+  }
+  return kjønn === KjønnkodeEnum.MANN ? styles.bubbleSokerMann : styles.bubbleSoker;
+};
+
 export const getStyle = (aktørType: HistorikkAktor, kjønn?: string) => {
   const styleMap = {
     [HistorikkAktor.ARBEIDSGIVER]: styles.bubbleArbeidsgiver,
     [HistorikkAktor.BESLUTTER]: styles.bubbleBeslutter,
     [HistorikkAktor.VEDTAKSLOSNINGEN]: styles.bubbleVedtakslosningen,
     [HistorikkAktor.SAKSBEHANDLER]: styles.bubbleSaksbehandler,
-    [HistorikkAktor.SOKER]:
-      kjønn === KjønnkodeEnum.KVINNE
-        ? styles.bubbleSokerKvinne
-        : kjønn === KjønnkodeEnum.MANN
-          ? styles.bubbleSokerMann
-          : styles.bubbleSoker,
+    [HistorikkAktor.SOKER]: getSøkerStyle(kjønn),
   };
   return styleMap[aktørType];
 };

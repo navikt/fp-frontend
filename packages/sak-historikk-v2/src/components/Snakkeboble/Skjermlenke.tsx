@@ -34,12 +34,10 @@ export const Skjermlenke = ({
   }
 
   return (
-    <>
-      <Heading size="xsmall">
-        <NavLink to={location} onClick={scrollUp}>
-          {getKodeverknavn(skjermlenke, KodeverkType.SKJERMLENKE_TYPE)}
-        </NavLink>
-      </Heading>
-    </>
+    <Heading size="xsmall">
+      <NavLink to={location} onClick={scrollUp}>
+        {getKodeverknavn(skjermlenke, KodeverkType.SKJERMLENKE_TYPE)}
+      </NavLink>
+    </Heading>
   );
 };

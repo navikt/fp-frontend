@@ -47,6 +47,42 @@ const validerPeriodeRekkefølge = (getValues: UseFormGetValues<FormValues>) => (
   return null;
 };
 
+const getOppdaterTabell =
+  (formValues: FormValues) =>
+  (gammelData: ArbeidsforholdOgInntektRadData[]): ArbeidsforholdOgInntektRadData[] => {
+    const rad = {
+      arbeidsgiverIdent: MANUELT_ORG_NR,
+      arbeidsgiverNavn: formValues.arbeidsgiverNavn,
+      avklaring: {
+        fom: formValues.fom,
+        tom: formValues.tom,
+        stillingsprosent: formValues.stillingsprosent,
+        arbeidsgiverNavn: formValues.arbeidsgiverNavn,
+        begrunnelse: formValues.begrunnelse,
+        saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER,
+      },
+    } as ArbeidsforholdOgInntektRadData;
+
+    const gammelIndex = gammelData.findIndex(data => data.arbeidsgiverIdent === MANUELT_ORG_NR);
+    if (gammelIndex === -1) {
+      return gammelData.concat(rad);
+    }
+    return gammelData.map((data, i) => (i === gammelIndex ? rad : data));
+  };
+
+const getOppdaterTabellOgLukkRad =
+  (
+    oppdaterTabell: (data: (rader: ArbeidsforholdOgInntektRadData[]) => ArbeidsforholdOgInntektRadData[]) => void,
+    lukkArbeidsforholdRad: () => void,
+    erNyttArbeidsforhold?: boolean,
+  ) =>
+  () => {
+    oppdaterTabell(oldData => oldData.filter(data => data.arbeidsgiverIdent !== MANUELT_ORG_NR));
+    if (erNyttArbeidsforhold) {
+      lukkArbeidsforholdRad();
+    }
+  };
+
 interface OwnProps {
   behandlingUuid: string;
   behandlingVersjon: number;
@@ -103,28 +139,10 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
       vurdering: ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER,
       ...formValues,
     };
+
     // @ts-ignore Fiks
     return registrerArbeidsforhold(params).then(() => {
-      oppdaterTabell((gammelData: ArbeidsforholdOgInntektRadData[]) => {
-        const rad = {
-          arbeidsgiverIdent: MANUELT_ORG_NR,
-          arbeidsgiverNavn: formValues.arbeidsgiverNavn,
-          avklaring: {
-            fom: formValues.fom,
-            tom: formValues.tom,
-            stillingsprosent: formValues.stillingsprosent,
-            arbeidsgiverNavn: formValues.arbeidsgiverNavn,
-            begrunnelse: formValues.begrunnelse,
-            saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER,
-          },
-        } as ArbeidsforholdOgInntektRadData;
-
-        const gammelIndex = gammelData.findIndex(data => data.arbeidsgiverIdent === MANUELT_ORG_NR);
-        if (gammelIndex === -1) {
-          return gammelData.concat(rad);
-        }
-        return gammelData.map((data, i) => (i === gammelIndex ? rad : data));
-      });
+      oppdaterTabell(getOppdaterTabell(formValues));
 
       formMethods.reset(formValues);
       if (erNyttArbeidsforhold) {
@@ -143,12 +161,9 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
       ...formValues,
     };
     // @ts-ignore Fiks
-    registrerArbeidsforhold(params).then(() => {
-      oppdaterTabell(oldData => oldData.filter(data => data.arbeidsgiverIdent !== MANUELT_ORG_NR));
-      if (erNyttArbeidsforhold) {
-        lukkArbeidsforholdRad();
-      }
-    });
+    registrerArbeidsforhold(params).then(
+      getOppdaterTabellOgLukkRad(oppdaterTabell, lukkArbeidsforholdRad, erNyttArbeidsforhold),
+    );
   };
 
   return (
