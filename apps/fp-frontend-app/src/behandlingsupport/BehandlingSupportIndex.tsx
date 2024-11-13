@@ -220,11 +220,9 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
           behandlingVersjon={behandlingVersjon}
         />
       </Tabs.Panel>
-      ;
       <Tabs.Panel value={SupportTabs.NOTATER}>
         <NotatIndex fagsak={fagsak} oppdaterFagsak={oppdaterFagsak} />
       </Tabs.Panel>
-      ;
     </Tabs>
   );
 };
