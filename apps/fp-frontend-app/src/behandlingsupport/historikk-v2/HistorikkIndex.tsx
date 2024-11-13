@@ -10,7 +10,6 @@ import { createLocationForSkjermlenke, pathToBehandling } from '../../app/paths'
 interface Props {
   saksnummer: string;
   behandlingUuid?: string;
-  behandlingVersjon?: number;
   historikkinnslagFpSak?: HistorikkinnslagV2[];
   historikkinnslagFpTilbake?: HistorikkinnslagV2[];
   kjønn: string;

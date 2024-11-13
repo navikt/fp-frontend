@@ -153,30 +153,28 @@ export const TilretteleggingOgOppholdPerioderPanel = ({
         </Table.Body>
       </Table>
       {!readOnly && (
-        <>
-          <HStack gap="4">
-            <Button
-              size="small"
-              variant="secondary"
-              type="button"
-              icon={<PlusIcon aria-hidden />}
-              onClick={leggTilTilrettelegging}
-              disabled={erLeggTilKnapperDisablet}
-            >
-              <FormattedMessage id="TilretteleggingFieldArray.LeggTilTilrettelegging" />
-            </Button>
-            <Button
-              size="small"
-              variant="secondary"
-              onClick={leggTilOpphold}
-              icon={<PlusIcon aria-hidden />}
-              type="button"
-              disabled={erLeggTilKnapperDisablet}
-            >
-              <FormattedMessage id="TilretteleggingFieldArray.LeggTilOpphold" />
-            </Button>
-          </HStack>
-        </>
+        <HStack gap="4">
+          <Button
+            size="small"
+            variant="secondary"
+            type="button"
+            icon={<PlusIcon aria-hidden />}
+            onClick={leggTilTilrettelegging}
+            disabled={erLeggTilKnapperDisablet}
+          >
+            <FormattedMessage id="TilretteleggingFieldArray.LeggTilTilrettelegging" />
+          </Button>
+          <Button
+            size="small"
+            variant="secondary"
+            onClick={leggTilOpphold}
+            icon={<PlusIcon aria-hidden />}
+            type="button"
+            disabled={erLeggTilKnapperDisablet}
+          >
+            <FormattedMessage id="TilretteleggingFieldArray.LeggTilOpphold" />
+          </Button>
+        </HStack>
       )}
     </VStack>
   );

@@ -152,7 +152,7 @@ export const OppgaverTabell = ({ reserverOppgave, antallOppgaver = 0, valgtSaksl
         </HStack>
         {alleOppgaver.length === 0 && (
           <BodyShort size="small">
-            <FormattedMessage id="OppgaverTabell.IngenOppgaver" values={{ i: (chunks: any) => <i>{chunks}</i> }} />
+            <FormattedMessage id="OppgaverTabell.IngenOppgaver" values={{ i: chunks => <i>{chunks}</i> }} />
           </BodyShort>
         )}
       </VStack>
