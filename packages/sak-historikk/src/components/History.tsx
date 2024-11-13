@@ -5,6 +5,7 @@ import moment from 'moment';
 import { Checkbox, Heading } from '@navikt/ds-react';
 
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
+import { useStorageToggle } from '@navikt/ft-hooks';
 
 import { AlleKodeverk, AlleKodeverkTilbakekreving, Historikkinnslag } from '@navikt/fp-types';
 import { getKodeverknavnFn, historikkAktor as HistorikkAktor, KodeverkType } from '@navikt/fp-kodeverk';
@@ -13,7 +14,6 @@ import Snakkeboble from './maler/felles/snakkeboble';
 import styles from './history.module.css';
 import { EnvironmentWrapper } from './EnvironmentWrapper';
 import { velgHistorikkMal } from './velgHistorikkMal';
-import { useDevMode } from '../hooks/useDevMode';
 
 type HistorikkMedTilbakekrevingIndikator = Historikkinnslag & {
   erTilbakekreving?: boolean;
@@ -61,7 +61,7 @@ const History: FunctionComponent<OwnProps> = ({
   kjønn,
 }) => {
   const intl = useIntl();
-  const isDevMode = useDevMode();
+  const isDevMode = useStorageToggle({ key: 'devmode' });
 
   const [skalSortertePaValgtBehandling, setSkalSortertePaBehandling] = useState(false);
 

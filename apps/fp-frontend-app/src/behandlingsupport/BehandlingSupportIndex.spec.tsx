@@ -60,7 +60,7 @@ describe('<BehandlingSupportIndex>', () => {
       </RawIntlProvider>,
     );
 
-    expect(await screen.findAllByText('Historikk')).toHaveLength(2);
+    expect(await screen.findAllByText('Historikk (ny)')).toHaveLength(2);
     expect(screen.getByText('Filtrer på behandling')).toBeInTheDocument();
 
     expect(screen.getByText('Send melding')).toBeInTheDocument();
