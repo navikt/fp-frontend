@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { AlleKodeverk, KodeverkMedNavn, Medlemskap, StandardProsessPanelProps } from '@navikt/fp-types';
+import { KodeverkMedNavn, Medlemskap, StandardProsessPanelProps } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 import { OverstyringAksjonspunkter } from '@navikt/fp-kodeverk';
 
@@ -11,7 +11,6 @@ import messages from '../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 interface OwnProps {
-  alleKodeverk: AlleKodeverk;
   medlemskap?: Medlemskap;
   overrideReadOnly: boolean;
   kanOverstyreAccess: {
@@ -29,20 +28,10 @@ const VilkarresultatMedOverstyringProsessIndex: FunctionComponent<OwnProps & Sta
   behandling,
   medlemskap,
   aksjonspunkter,
-  submitCallback,
-  overrideReadOnly,
-  kanOverstyreAccess,
-  toggleOverstyring,
-  avslagsarsaker,
-  status,
-  erOverstyrt,
-  panelTittelKode,
-  overstyringApKode,
   lovReferanse = '',
   alleMerknaderFraBeslutter,
-  formData,
-  setFormData,
   fagsak,
+  ...rest
 }) => (
   <RawIntlProvider value={intl}>
     <VilkarresultatMedOverstyringForm
@@ -51,19 +40,9 @@ const VilkarresultatMedOverstyringProsessIndex: FunctionComponent<OwnProps & Sta
       medlemskapManuellBehandlingResultat={medlemskap?.manuellBehandlingResultat ?? undefined}
       aksjonspunkter={aksjonspunkter}
       behandling={behandling}
-      submitCallback={submitCallback}
-      overrideReadOnly={overrideReadOnly}
-      kanOverstyreAccess={kanOverstyreAccess}
-      toggleOverstyring={toggleOverstyring}
-      avslagsarsaker={avslagsarsaker}
-      status={status}
-      erOverstyrt={erOverstyrt}
-      panelTittelKode={panelTittelKode}
-      overstyringApKode={overstyringApKode}
       lovReferanse={lovReferanse}
       erIkkeGodkjentAvBeslutter={aksjonspunkter.some(a => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted)}
-      formData={formData}
-      setFormData={setFormData}
+      {...rest}
     />
   </RawIntlProvider>
 );

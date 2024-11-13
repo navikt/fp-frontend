@@ -27,7 +27,7 @@ const JournalføringHeader: FunctionComponent<OwnProps> = ({
   harSøktOgFunnetIngenMatch,
   antallOppgaver,
 }) => {
-  const [åpenSøkemodal, setÅpenSøkemodal] = useState<boolean>(false);
+  const [åpenSøkemodal, setÅpenSøkemodal] = useState(false);
   const åpneModal = useCallback(() => {
     setÅpenSøkemodal(true);
   }, [åpenSøkemodal]);

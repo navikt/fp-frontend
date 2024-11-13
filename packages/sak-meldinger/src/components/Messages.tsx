@@ -1,15 +1,13 @@
-import React, { FunctionComponent, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
-import { useIntl } from 'react-intl';
-import classNames from 'classnames';
-import { Button } from '@navikt/ds-react';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { Button, HStack, Link, VStack } from '@navikt/ds-react';
 
 import { dokumentMalType, ugunstAarsakTyper, fagsakYtelseType as FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { KodeverkMedNavn } from '@navikt/fp-types';
 import { ariaCheck, hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 import { SelectField, TextAreaField, Form } from '@navikt/ft-form-hooks';
-import { FlexContainer, FlexRow, FlexColumn, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { UkjentAdresseMeldingIndex } from '@navikt/fp-sak-ukjent-adresse';
 
 import styles from './messages.module.css';
@@ -87,7 +85,7 @@ const transformValues = (values: FormValues) => {
   return newValues;
 };
 
-interface OwnProps {
+interface Props {
   submitCallback: (values: FormValues) => void;
   previewCallback: (brevmalkode?: string, fritekst?: string, arsakskode?: string) => void;
   // TODO (TOR) Er templates optional eller ikkje?
@@ -108,7 +106,7 @@ interface OwnProps {
  * Presentasjonskomponent. Gir mulighet for å forhåndsvise og sende brev. Mottaker og brevtype velges fra predefinerte lister,
  * og fritekst som skal flettes inn i brevet skrives inn i et eget felt.
  */
-const Messages: FunctionComponent<OwnProps> = ({
+export const Messages = ({
   templates,
   previewCallback,
   submitCallback,
@@ -120,7 +118,7 @@ const Messages: FunctionComponent<OwnProps> = ({
   setMeldingFormData,
   isKontrollerRevurderingApOpen,
   brukerManglerAdresse,
-}) => {
+}: Props) => {
   const intl = useIntl();
   const formMethods = useForm<FormValues>({
     defaultValues: meldingFormData || buildInitalValues(templates, isKontrollerRevurderingApOpen),
@@ -158,20 +156,19 @@ const Messages: FunctionComponent<OwnProps> = ({
       onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
       setDataOnUnmount={setMeldingFormData}
     >
-      <SelectField
-        name="brevmalkode"
-        label={intl.formatMessage({ id: 'Messages.Template' })}
-        validate={[required]}
-        selectValues={templates.map(template => (
-          <option key={template.kode} value={template.kode} disabled={!template.tilgjengelig}>
-            {template.navn}
-          </option>
-        ))}
-        className={styles.bredde}
-      />
-      {erVarselOmRevurdering && (
-        <>
-          <VerticalSpacer sixteenPx />
+      <VStack gap="4">
+        <SelectField
+          name="brevmalkode"
+          label={intl.formatMessage({ id: 'Messages.Template' })}
+          validate={[required]}
+          selectValues={templates.map(template => (
+            <option key={template.kode} value={template.kode} disabled={!template.tilgjengelig}>
+              {template.navn}
+            </option>
+          ))}
+          className={styles.bredde}
+        />
+        {erVarselOmRevurdering && (
           <SelectField
             name="arsakskode"
             label={intl.formatMessage({ id: 'Messages.Årsak' })}
@@ -183,11 +180,8 @@ const Messages: FunctionComponent<OwnProps> = ({
             ))}
             className={styles.bredde}
           />
-        </>
-      )}
-      {showFritekst(brevmalkode, arsakskode) && (
-        <>
-          <VerticalSpacer sixteenPx />
+        )}
+        {showFritekst(brevmalkode, arsakskode) && (
           <TextAreaField
             name="fritekst"
             label={intl.formatMessage({ id: getFritekstMessage(brevmalkode) })}
@@ -196,48 +190,23 @@ const Messages: FunctionComponent<OwnProps> = ({
             badges={[{ type: 'info', titleText: language }]}
             parse={formaterFritekst}
           />
-        </>
-      )}
-
-      <FlexContainer>
-        {brukerManglerAdresse && (
-          <>
-            <VerticalSpacer sixteenPx />
-            <FlexRow>
-              <FlexColumn>
-                <UkjentAdresseMeldingIndex />
-              </FlexColumn>
-            </FlexRow>
-          </>
         )}
-        <VerticalSpacer sixteenPx />
-        <FlexRow spaceBetween>
-          <FlexColumn>
-            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-            <a
-              href=""
-              onClick={previewMessage}
-              onKeyDown={e => (e.key === 'Enter' ? previewMessage(e) : null)}
-              className={classNames(styles.previewLink, 'lenke lenke--frittstaende')}
-            >
-              {intl.formatMessage({ id: 'Messages.Preview' })}
-            </a>
-          </FlexColumn>
-          <FlexColumn>
-            <Button
-              size="small"
-              variant="primary"
-              loading={formState.isSubmitting}
-              disabled={formState.isSubmitting || kanVeilede}
-              onClick={ariaCheck}
-            >
-              {intl.formatMessage({ id: 'Messages.Submit' })}
-            </Button>
-          </FlexColumn>
-        </FlexRow>
-      </FlexContainer>
+        {brukerManglerAdresse && <UkjentAdresseMeldingIndex />}
+        <HStack justify="space-between">
+          <Link href="#" onClick={previewMessage} onKeyDown={e => (e.key === 'Enter' ? previewMessage(e) : null)}>
+            <FormattedMessage id="Messages.Preview" />
+          </Link>
+          <Button
+            size="small"
+            variant="primary"
+            loading={formState.isSubmitting}
+            disabled={formState.isSubmitting || kanVeilede}
+            onClick={ariaCheck}
+          >
+            <FormattedMessage id="Messages.Submit" />
+          </Button>
+        </HStack>
+      </VStack>
     </Form>
   );
 };
-
-export default Messages;

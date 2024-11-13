@@ -1,10 +1,10 @@
-import React, { FunctionComponent, ReactElement, useCallback } from 'react';
+import React, { FunctionComponent, useCallback } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { BodyShort, HStack, VStack } from '@navikt/ds-react';
+import { BodyShort, HStack, Link, Tooltip, VStack } from '@navikt/ds-react';
 
 import { RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
-import { ArrowBox, VerticalSpacer, Tooltip } from '@navikt/ft-ui-komponenter';
+import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { fagsakYtelseType, AksjonspunktCode, tilbakekrevingVidereBehandling } from '@navikt/fp-kodeverk';
@@ -19,12 +19,6 @@ import FormValues, { FeilutbetalingFormValues } from '../../types/FormValues';
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 const IKKE_SEND = 'IKKE_SEND';
-
-const lagHjelpetekstTooltip = (isForeldrepenger: boolean): ReactElement => (
-  <FormattedMessage
-    id={isForeldrepenger ? 'Simulering.HjelpetekstForeldrepenger' : 'Simulering.HjelpetekstEngangsstonad'}
-  />
-);
 
 export const transformValues = (values: FormValues): VurderFeilutbetalingAp => {
   const { videreBehandling, varseltekst, begrunnelse } = values;
@@ -127,7 +121,13 @@ const TilbakekrevSøkerForm: FunctionComponent<OwnProps> = ({
                       <BodyShort size="small" className={styles.bold}>
                         <FormattedMessage id="Simulering.varseltekst" />
                       </BodyShort>
-                      <Tooltip content={lagHjelpetekstTooltip(isForeldrepenger)}>
+                      <Tooltip
+                        content={
+                          isForeldrepenger
+                            ? intl.formatMessage({ id: 'Simulering.HjelpetekstForeldrepenger' })
+                            : intl.formatMessage({ id: 'Simulering.HjelpetekstEngangsstonad' })
+                        }
+                      >
                         <QuestionmarkDiamondIcon className={styles.helpTextImage} />
                       </Tooltip>
                     </HStack>
@@ -146,12 +146,9 @@ const TilbakekrevSøkerForm: FunctionComponent<OwnProps> = ({
                       ]}
                     />
                     {!readOnly && (
-                      <>
-                        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                        <a href="" onClick={previewMessage} className={styles.previewLink}>
-                          <FormattedMessage id="Messages.PreviewText" />
-                        </a>
-                      </>
+                      <Link href="#" onClick={previewMessage}>
+                        <FormattedMessage id="Messages.PreviewText" />
+                      </Link>
                     )}
                   </VStack>
                 </ArrowBox>

@@ -30,6 +30,29 @@ type FormValues = {
   begrunnelse?: string;
 };
 
+const getOppdaterTabell =
+  (
+    oppdaterTabell: (data: (rader: ArbeidsforholdOgInntektRadData[]) => ArbeidsforholdOgInntektRadData[]) => void,
+    radData: ArbeidsforholdOgInntektRadData,
+    formValues: FormValues,
+  ) =>
+  () => {
+    oppdaterTabell(oldData =>
+      oldData.map(data => {
+        if (data.arbeidsgiverIdent === radData.arbeidsgiverIdent) {
+          return {
+            ...radData,
+            avklaring: {
+              begrunnelse: formValues.begrunnelse,
+              saksbehandlersVurdering: formValues.saksbehandlersVurdering,
+            },
+          };
+        }
+        return data;
+      }),
+    );
+  };
+
 interface OwnProps {
   saksnummer: string;
   behandlingUuid: string;
@@ -96,22 +119,7 @@ const ManglendeInntektsmeldingForm: FunctionComponent<OwnProps> = ({
       begrunnelse: formValues.begrunnelse!,
     };
     return lagreVurdering(params)
-      .then(() => {
-        oppdaterTabell(oldData =>
-          oldData.map(data => {
-            if (data.arbeidsgiverIdent === radData.arbeidsgiverIdent) {
-              return {
-                ...radData,
-                avklaring: {
-                  begrunnelse: formValues.begrunnelse,
-                  saksbehandlersVurdering: formValues.saksbehandlersVurdering,
-                },
-              };
-            }
-            return data;
-          }),
-        );
-      })
+      .then(getOppdaterTabell(oppdaterTabell, radData, formValues))
       .finally(() => formMethods.reset(formValues));
   };
 

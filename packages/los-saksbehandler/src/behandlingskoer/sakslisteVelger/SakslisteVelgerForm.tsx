@@ -210,7 +210,7 @@ export const SakslisteVelgerForm = ({
           <FormattedMessage id="SakslisteVelgerForm.Saksliste" />
         </Heading>
         <BodyShort>
-          <FormattedMessage id="SakslisteVelgerForm.IkkeOppfort" values={{ i: (chunks: any) => <i>{chunks}</i> }} />
+          <FormattedMessage id="SakslisteVelgerForm.IkkeOppfort" values={{ i: chunks => <i>{chunks}</i> }} />
         </BodyShort>
       </VStack>
     );

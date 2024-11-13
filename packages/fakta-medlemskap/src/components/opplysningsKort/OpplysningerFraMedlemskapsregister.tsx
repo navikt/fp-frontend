@@ -86,7 +86,7 @@ const OpplysningerFraMedlemskapsregister = ({
             </Table.Header>
             <Table.Body>
               {medlemskapsperioder
-                .sort(sorterPerioder)
+                .toSorted(sorterPerioder)
                 .map(
                   ({ fom, tom, medlemskapType, dekningType, beslutningsdato, studieland, lovvalgsland, erMedlem }) => {
                     const dekningTypeString = dekningTypeKodeverk.find(kv => kv.kode === dekningType)?.navn;

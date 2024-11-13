@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Label, BodyShort, Heading } from '@navikt/ds-react';
+import { Label, BodyShort, Heading, HStack, Link } from '@navikt/ds-react';
 
 import {
   AksjonspunktCode,
@@ -10,7 +10,7 @@ import {
   dokumentMalType,
 } from '@navikt/fp-kodeverk';
 import { ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Form, TextAreaField } from '@navikt/ft-form-hooks';
 import { decodeHtmlEntity, formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 import { hasValidText, maxLength, minLength } from '@navikt/ft-form-validators';
@@ -197,37 +197,29 @@ const InnsynVedtakForm: FunctionComponent<OwnProps> = ({
         />
       )}
       <VerticalSpacer twentyPx />
-      <FlexContainer>
-        <FlexRow>
-          {!readOnly && (
-            <FlexColumn>
-              <ProsessStegSubmitButtonNew
-                isReadOnly={readOnly}
-                isSubmittable
-                isSubmitting={formMethods.formState.isSubmitting}
-                isDirty={formMethods.formState.isDirty}
-                hasEmptyRequiredFields={false}
-              />
-            </FlexColumn>
+      <HStack gap="2">
+        {!readOnly && (
+          <ProsessStegSubmitButtonNew
+            isReadOnly={readOnly}
+            isSubmittable
+            isSubmitting={formMethods.formState.isSubmitting}
+            isDirty={formMethods.formState.isDirty}
+            hasEmptyRequiredFields={false}
+          />
+        )}
+        <Link
+          href="#"
+          onClick={previewBrev}
+          onKeyDown={e => (e.key === 'Enter' ? previewBrev(e) : null)}
+          target="_blank"
+        >
+          {readOnly ? (
+            <FormattedMessage id="InnsynVedtakForm.VisVedtaksbrev" />
+          ) : (
+            <FormattedMessage id="InnsynVedtakForm.ForhåndsvisBrev" />
           )}
-          <FlexColumn>
-            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-            <a
-              onClick={previewBrev}
-              onKeyDown={e => (e.key === 'Enter' ? previewBrev(e) : null)}
-              className="lenke lenke--frittstaende"
-              target="_blank"
-              rel="noopener noreferrer"
-              role="link"
-              tabIndex={0}
-            >
-              <FormattedMessage
-                id={readOnly ? 'InnsynVedtakForm.VisVedtaksbrev' : 'InnsynVedtakForm.ForhåndsvisBrev'}
-              />
-            </a>
-          </FlexColumn>
-        </FlexRow>
-      </FlexContainer>
+        </Link>
+      </HStack>
     </Form>
   );
 };

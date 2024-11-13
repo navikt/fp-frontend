@@ -12,7 +12,6 @@
     "tsc": "tsc --pretty",
     "eslint": "eslint \"src/**/*.ts*\" --color",
     "eslint:fix": "eslint --fix \"src/**/*.ts*\" --color",
-    "stylelint": "stylelint \"src/**/*.module.css\"",
     "prettier": "prettier --write src",
     "clean": "rm -rf ./dist ./node_modules ./coverage ./.storybook-static-build",
     "build-storybook": "storybook build -o .storybook-static-build",
@@ -44,7 +43,6 @@
     "cross-env": "7.0.3",
     "eslint": "9.14.0",
     "storybook": "8.4.2",
-    "stylelint": "16.10.0",
     "typescript": "5.6.3",
     "vite": "5.4.10",
     "vitest": "2.1.4"

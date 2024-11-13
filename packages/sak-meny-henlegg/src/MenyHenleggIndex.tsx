@@ -4,7 +4,7 @@ import { RawIntlProvider } from 'react-intl';
 import { BehandlingAppKontekst, KodeverkMedNavn } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
-import HenleggBehandlingModal, { FormValues } from './components/HenleggBehandlingModal';
+import { HenleggBehandlingModal, FormValues } from './components/HenleggBehandlingModal';
 import HenlagtBehandlingModal from './components/HenlagtBehandlingModal';
 
 import messages from '../i18n/nb_NO.json';
