@@ -68,8 +68,7 @@ class FagsakData {
   }
 
   getHistorikkV2FpTilbake(): HistorikkinnslagV2[] | undefined {
-    return undefined;
-    //return this.$$fpTilbakeFagsakData?.historikkinnslagV2;
+    return this.$$fpTilbakeFagsakData?.historikkinnslagV2;
   }
 }
 
