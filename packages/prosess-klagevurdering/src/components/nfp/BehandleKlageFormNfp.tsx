@@ -155,14 +155,16 @@ export const BehandleKlageFormNfp: FunctionComponent<OwnProps> = ({
                 isDirty={formMethods.formState.isDirty}
               />
             )}
-            {!readOnly ||
-              (formValues.klageVurdering && formValues.fritekstTilBrev && formValues.fritekstTilBrev.length > 2 && (
+            {!readOnly &&
+              formValues.klageVurdering &&
+              formValues.fritekstTilBrev &&
+              formValues.fritekstTilBrev.length > 2 && (
                 <PreviewKlageLink
                   previewCallback={previewCallback}
                   fritekstTilBrev={formValues.fritekstTilBrev}
                   klageVurdering={formValues.klageVurdering}
                 />
-              ))}
+              )}
           </HStack>
           <TempsaveKlageButton
             saveKlage={saveKlage}
