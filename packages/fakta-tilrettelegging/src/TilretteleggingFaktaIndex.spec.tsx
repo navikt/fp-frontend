@@ -7,7 +7,7 @@ import * as stories from './TilretteleggingFaktaIndex.stories';
 const {
   TilretteleggingMedVelferdspermisjon,
   HarOpphold,
-  SokerVarIkkeAnsattDaBehovetForTilretteleggingOppsto,
+  SokerVarIkkeAnsattDaBehovetForTilretteleggingOppstod,
   TilretteleggingMed100ProsentVelferdspermisjon,
 } = composeStories(stories);
 
@@ -68,6 +68,7 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
           mottattTidspunkt: '2020-03-11T16:21:48.532298',
           skalBrukes: true,
           tilretteleggingBehovFom: '2020-03-17',
+          stillingsprosentStartTilrettelegging: 100,
           tilretteleggingDatoer: [
             {
               fom: '2020-03-17',
@@ -345,8 +346,10 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
               fom: '2020-07-14',
               oppholdÅrsak: 'FERIE',
               tom: '2020-07-25',
+              oppholdKilde: 'REGISTRERT_AV_SAKSBEHANDLER',
             },
           ],
+          stillingsprosentStartTilrettelegging: 100,
           eksternArbeidsforholdReferanse: '23422323',
           kanTilrettelegges: true,
           kopiertFraTidligereBehandling: true,
@@ -496,7 +499,7 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
   });
 
   it('skal vise advarsel når søker ikke var ansatt da behovet for tilrettelegging oppstod', async () => {
-    render(<SokerVarIkkeAnsattDaBehovetForTilretteleggingOppsto />);
+    render(<SokerVarIkkeAnsattDaBehovetForTilretteleggingOppstod />);
 
     expect(await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver')).toBeInTheDocument();
 
