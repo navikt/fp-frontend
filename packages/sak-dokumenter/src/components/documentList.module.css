@@ -1,0 +1,20 @@
+.image {
+  color: var(--a-orange-400);
+  height: 20px;
+  width: 25px;
+}
+.noDocuments {
+  margin-top: 30px;
+}
+.kommunikasjonsretning {
+  align-items: center;
+  display: flex;
+  gap: var(--a-spacing-2);
+}
+.dokumentlenke {
+  cursor: pointer;
+  display: inline;
+}
+.openDocumentButton {
+  margin-top: var(--a-spacing-2);
+}

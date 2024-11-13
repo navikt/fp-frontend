@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useCallback } from 'react';
-import { MenyTaAvVentIndex } from '@navikt/ft-sak-meny';
+import { MenyTaAvVentIndex } from '@navikt/fp-sak-meny';
 import { Behandling, BehandlingAppKontekst } from '@navikt/fp-types';
 
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../../data/behandlingContextApi';

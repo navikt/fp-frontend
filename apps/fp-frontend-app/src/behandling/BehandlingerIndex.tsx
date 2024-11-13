@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { IngenBehandlingValgtPanel } from '@navikt/ft-sak-infosider';
+import { IngenBehandlingValgtPanel } from '@navikt/fp-sak-infosider';
 import { Behandling } from '@navikt/fp-types';
 
 import { behandlingRoutePath } from '../app/paths';

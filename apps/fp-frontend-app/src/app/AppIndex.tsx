@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { RawIntlProvider } from 'react-intl';
 import moment from 'moment';
 import { createIntl, parseQueryString } from '@navikt/ft-utils';
-import { ForbiddenPage, UnauthorizedPage } from '@navikt/ft-sak-infosider';
+import { ForbiddenPage, UnauthorizedPage } from '@navikt/fp-sak-infosider';
 
 import { useRestApiError } from '@navikt/fp-rest-api-hooks';
 import { EventType } from '@navikt/fp-rest-api';
@@ -22,8 +22,6 @@ import '@navikt/ds-css-internal';
 import '@navikt/ft-ui-komponenter/dist/style.css';
 import '@navikt/ft-form-hooks/dist/style.css';
 import '@navikt/ft-plattform-komponenter/dist/style.css';
-import '@navikt/ft-sak-infosider/dist/style.css';
-import '@navikt/ft-sak-dekorator/dist/style.css';
 
 import '../globalCss/global.module.css';
 
