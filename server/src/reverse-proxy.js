@@ -1,10 +1,9 @@
 import proxy from 'express-http-proxy';
 import url from 'url';
 
-import { grantAzureOboToken } from './azure/grant.js';
-
 import config from './config.js';
-import log from './log.js';
+import { getToken, requestOboToken } from '@navikt/oasis';
+import logger from './logger.js';
 
 const xTimestamp = 'x-Timestamp';
 const stripTrailingSlash = str => (str.endsWith('/') ? str.slice(0, -1) : str);
@@ -12,22 +11,26 @@ const stripTrailingSlash = str => (str.endsWith('/') ? str.slice(0, -1) : str);
 const proxyOptions = api => ({
   parseReqBody: false,
   timeout: 60000,
-  proxyReqOptDecorator: (options, req) => {
+  proxyReqOptDecorator: async (options, req, res) => {
     const requestTime = Date.now();
     options.headers[xTimestamp] = requestTime;
     delete options.headers.cookie;
-    // eslint-disable-next-line no-promise-executor-return
-    return new Promise((resolve, reject) =>
-      grantAzureOboToken(req.headers.authorization, api.scopes).then(
-        accessToken => {
-          log.info(`Token veksling tok: (${Date.now() - requestTime}ms)`);
-          // eslint-disable-next-line camelcase
-          options.headers.Authorization = `Bearer ${accessToken}`;
-          resolve(options);
-        },
-        error => reject(error),
-      ),
-    );
+
+    // Vi har allerede validert token før vi kommer hit. Så dette burde aldri inntreffe
+    const token = getToken(req);
+    if (!token) {
+      logger.warning('Fant ikke Wonderwall token ved OBO-utveksling. Dette burde ikke inntreffe');
+      return res.status(401).send();
+    }
+    const obo = await requestOboToken(token, api.scopes);
+
+    if (obo.ok) {
+      logger.info(`Token veksling tok: (${Date.now() - requestTime}ms)`);
+      options.headers.Authorization = `Bearer ${obo.token}`;
+    } else {
+      logger.warning(`OBO-utveklsing for ${api.scopes} feilet.`);
+      return res.status(403).send();
+    }
   },
   proxyReqPathResolver: req => {
     const urlFromApi = url.parse(api.url);
@@ -39,7 +42,7 @@ const proxyOptions = api => ({
     const queryString = urlFromRequest.query;
     const newPath = (pathFromApi || '') + (pathFromRequest || '') + (queryString ? `?${queryString}` : '');
 
-    log.info(`Proxying request from '${req.originalUrl}' to '${stripTrailingSlash(urlFromApi.href)}${newPath}'`);
+    logger.info(`Proxying request from '${req.originalUrl}' to '${stripTrailingSlash(urlFromApi.href)}${newPath}'`);
     return newPath;
   },
   userResHeaderDecorator: (headers, userReq, userRes, proxyReq, proxyRes) => {
@@ -47,23 +50,23 @@ const proxyOptions = api => ({
     const location = proxyRes.headers.location;
     if (location && location.includes(api.url)) {
       headers.location = location.split(api.url)[1];
-      log.debug(`Location header etter endring: ${headers.location}`);
+      logger.debug(`Location header etter endring: ${headers.location}`);
     }
     const { statusCode } = proxyRes;
     const requestTime = Date.now() - proxyReq.getHeader(xTimestamp);
     const melding = `${statusCode} ${proxyRes.statusMessage}: ${userReq.method} - ${userReq.originalUrl} (${requestTime}ms)`;
     const callIdValue = proxyReq.getHeader('Nav-Callid');
     if (statusCode >= 500) {
-      log.logger.warn(melding, { 'Nav-Callid': callIdValue });
+      logger.logger.warn(melding, { 'Nav-Callid': callIdValue });
     } else {
-      log.logger.info(melding, { 'Nav-Callid': callIdValue });
+      logger.logger.info(melding, { 'Nav-Callid': callIdValue });
     }
     return headers;
   },
   proxyErrorHandler: function (err, res, next) {
     switch (err && err.code) {
       case 'ENOTFOUND': {
-        log.warning(`${err}, with code: ${err.code}`);
+        logger.warning(`${err}, with code: ${err.code}`);
         return res.status(404).send();
       }
       case 'ECONNRESET': {
@@ -73,19 +76,19 @@ const proxyOptions = api => ({
         return res.status(500).send();
       }
       default: {
-        log.warning(`${err}, with code: ${err.code}`);
+        logger.warning(`${err}, with code: ${err.code}`);
         next(err);
       }
     }
   },
 });
 
-// eslint-disable-next-line func-names
+
 const timedOut = function (req, res, next) {
   if (!req.timedout) {
     next();
   } else {
-    log.warning(`Request for ${req.originalUrl} timed out!`);
+    logger.warning(`Request for ${req.originalUrl} timed out!`);
   }
 };
 

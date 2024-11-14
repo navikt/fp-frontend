@@ -1,27 +1,25 @@
 import axios from 'axios';
-import { grantAzureOboToken } from './grant.js';
 import logger from '../log.js';
 import config from '../config.js';
+import { requestOboToken } from '@navikt/oasis';
 
-const getGraphRequest = (bearerToken, graphUrl) =>
-  new Promise((resolve, reject) => {
-    const scope = 'https://graph.microsoft.com/.default';
-    grantAzureOboToken(bearerToken, scope)
-      .then(accessToken =>
-        axios.get(graphUrl, {
-          headers: { Authorization: `Bearer ${accessToken}` },
-        }),
-      )
-      .then(response => resolve(response.data))
-      .catch(err => {
-        if (err.response.data) {
-          logger.warning(`Error during graph call: ${err}`);
-          reject(err.response.data);
-        } else {
-          reject(err);
-        }
+const getGraphRequest = async (bearerToken, graphUrl) => {
+  const scope = 'https://graph.microsoft.com/.default';
+  const obo = await requestOboToken(bearerToken, scope);
+
+  if (obo.ok) {
+    // TODO: feilhåndtering for axios kall
+      const response = await axios.get(graphUrl, {
+        headers: { Authorization: `Bearer ${obo.token}` },
       });
-  });
+
+      return response.data;
+
+  } else {
+    logger.warning(`OBO-utveklsing for ${scope} feilet.`);
+    throw obo.error;
+  }
+}
 
 const getUserInfoFromGraphApi = bearerToken => {
   const query =
