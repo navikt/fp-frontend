@@ -15,8 +15,7 @@ import { Table } from '@navikt/ds-react';
 import { FormattedMessage } from 'react-intl';
 
 const getFagsakCallback =
-  (åpneFagsak: (saksnummer: string, behandlingUuid?: string) => void) =>
-  (_event: React.KeyboardEvent | React.MouseEvent, saksnummer?: string) => {
+  (åpneFagsak: (saksnummer: string, behandlingUuid?: string) => void, saksnummer?: string) => () => {
     if (saksnummer) {
       åpneFagsak(saksnummer);
     }
@@ -107,7 +106,10 @@ export const SøkResultat = ({ fagsaker, fagsakOppgaver, åpneFagsak, selectOppg
 
           return (
             <Fragment key={fagsak.saksnummer}>
-              <Table.Row onMouseDown={getFagsakCallback(åpneFagsak)} onKeyDown={getFagsakCallback(åpneFagsak)}>
+              <Table.Row
+                onMouseDown={() => åpneFagsak(fagsak.saksnummer)}
+                onKeyDown={() => åpneFagsak(fagsak.saksnummer)}
+              >
                 <Table.DataCell>{fagsak.saksnummer}</Table.DataCell>
                 <Table.DataCell>{fagsakYtelseType ? fagsakYtelseType.navn : ''}</Table.DataCell>
                 <Table.DataCell />
