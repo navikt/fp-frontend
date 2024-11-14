@@ -48,14 +48,16 @@ export const SøkForm = ({ onSubmit, searchResultAccessDenied, searchStarted, re
               className={styles.searchInput}
               size="medium"
             />
-            <Button
-              size="small"
-              variant="primary"
-              icon={<MagnifyingGlassIcon aria-hidden />}
-              loading={!searchResultAccessDenied?.feilmelding && searchStarted}
-              disabled={(!searchResultAccessDenied?.feilmelding && searchStarted) || !searchStringValue}
-              className={styles.searchButton}
-            />
+            <div className={styles.searchButtonDiv}>
+              <Button
+                size="small"
+                variant="primary"
+                icon={<MagnifyingGlassIcon aria-hidden />}
+                loading={!searchResultAccessDenied?.feilmelding && searchStarted}
+                disabled={(!searchResultAccessDenied?.feilmelding && searchStarted) || !searchStringValue}
+                className={styles.searchButton}
+              />
+            </div>
           </HStack>
           {kanSaksbehandle && (
             <CheckboxField
