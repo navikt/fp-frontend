@@ -18,8 +18,12 @@ const proxyOptions = (api: ProxyConfig["apis"][0]) =>
     proxyReqOptDecorator: (options, req) => {
       const requestTime = Date.now();
 
+      // I tilfelle headers er undefined.
+      options.headers = options.headers ?? {};
+
       options.headers[xTimestamp] = requestTime;
       delete options.headers.cookie;
+
       return new Promise((resolve, reject) => {
         // Vi har allerede validert token før vi kommer hit. Så dette burde aldri inntreffe
         const token = getToken(req);
@@ -35,6 +39,8 @@ const proxyOptions = (api: ProxyConfig["apis"][0]) =>
               logger.info(
                 `Token veksling tok: (${Date.now() - requestTime}ms)`,
               );
+              // I tilfelle headers er undefined.
+              options.headers = options.headers ?? {};
               options.headers.Authorization = `Bearer ${obo.token}`;
               resolve(options);
             } else {
@@ -72,7 +78,7 @@ const proxyOptions = (api: ProxyConfig["apis"][0]) =>
         logger.debug(`Location header etter endring: ${headers.location}`);
       }
       const { statusCode } = proxyRes;
-      const requestTime = Date.now() - proxyReq.getHeader(xTimestamp);
+      const requestTime = Date.now() - Number(proxyReq.getHeader(xTimestamp));
       const melding = `${statusCode} ${proxyRes.statusMessage}: ${userReq.method} - ${userReq.originalUrl} (${requestTime}ms)`;
       const callIdValue = proxyReq.getHeader("Nav-Callid");
       if (Number(statusCode) >= 500) {
