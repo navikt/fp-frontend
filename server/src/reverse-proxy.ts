@@ -31,7 +31,7 @@ const proxyOptions = (api: ProxyConfig["apis"][0]) =>
           logger.warning(
             "Fant ikke Wonderwall token ved OBO-utveksling. Dette burde ikke inntreffe",
           );
-          reject("Intet Wonderwall token");
+          reject(new Error("Intet Wonderwall token"));
         }
         if (token) {
           requestAzureOboToken(token, api.scopes).then((obo) => {
@@ -73,7 +73,7 @@ const proxyOptions = (api: ProxyConfig["apis"][0]) =>
     userResHeaderDecorator: (headers, userReq, userRes, proxyReq, proxyRes) => {
       // FPSAK og TILBAKE sender er redirect med full hostname - dette må man modifisere slik at det går tilbake via proxy.
       const location = proxyRes.headers.location;
-      if (location && location.includes(api.url)) {
+      if (location?.includes(api.url)) {
         headers.location = location.split(api.url)[1];
         logger.debug(`Location header etter endring: ${headers.location}`);
       }
@@ -89,7 +89,7 @@ const proxyOptions = (api: ProxyConfig["apis"][0]) =>
       return headers;
     },
     proxyErrorHandler: function (err, res, next) {
-      switch (err && err.code) {
+      switch (err?.code) {
         case "ENOTFOUND": {
           logger.warning(`${err}, with code: ${err.code}`);
           return res.status(404).send();
@@ -113,7 +113,6 @@ export const setupProxies = (router: Router) => {
     router.use(
       `${api.path}/*`,
       (request, response, next) => {
-        // TODO
         if (request.timedout) {
           logger.warning(`Request for ${request.originalUrl} timed out!`);
         } else {
