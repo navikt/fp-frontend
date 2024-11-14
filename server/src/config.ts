@@ -51,6 +51,15 @@ const cors = {
   allowedMethods: envVar("CORS_ALLOWED_METHODS", false) || "",
 };
 
+export type ProxyConfig = {
+  apis: [
+    {
+      path: string;
+      url: string;
+      scopes: string;
+    },
+  ];
+};
 const getProxyConfig = () => {
   const config = configValueAsJson("PROXY_CONFIG", false);
   if (!config.apis) {
@@ -76,7 +85,7 @@ const getProxyConfig = () => {
     }
   }
 
-  return config;
+  return config as ProxyConfig;
 };
 
 export default {
