@@ -24,7 +24,7 @@
     "@navikt/fp-types": "workspace:*",
     "@navikt/ft-kodeverk": "2.5.7",
     "@navikt/ft-types": "2.5.8",
-    "@navikt/ft-ui-komponenter": "2.6.0",
+    "@navikt/ft-ui-komponenter": "2.6.1",
     "@navikt/ft-utils": "2.5.0",
     "moment": "2.30.1",
     "react": "18.3.1",

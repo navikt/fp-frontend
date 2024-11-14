@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { FormattedMessage } from 'react-intl';
-import { Heading } from '@navikt/ds-react';
 
 import { Oppgave, OppgaveStatus } from '@navikt/fp-los-felles';
 
@@ -8,6 +6,8 @@ import { Saksliste } from '../typer/sakslisteTsType';
 import { OppgaveErReservertAvAnnenModal } from '../reservertAvAnnen/OppgaveErReservertAvAnnenModal';
 import { RestApiPathsKeys, restApiHooks } from '../data/fplosSaksbehandlerRestApi';
 import { SakslistePanel } from './SakslistePanel';
+import { RestApiState } from '@navikt/fp-rest-api-hooks';
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 
 const EMPTY_ARRAY: Saksliste[] = [];
 
@@ -22,7 +22,9 @@ export const BehandlingskoerIndex = ({ valgtSakslisteId, setValgtSakslisteId, å
   const [reservertOppgave, setReservertOppgave] = useState<Oppgave>();
   const [reservertOppgaveStatus, setReservertOppgaveStatus] = useState<OppgaveStatus>();
 
-  const { data: sakslister = EMPTY_ARRAY } = restApiHooks.useRestApi(RestApiPathsKeys.SAKSLISTE);
+  const { data: sakslister = EMPTY_ARRAY, state: sakslisterState } = restApiHooks.useRestApi(
+    RestApiPathsKeys.SAKSLISTE,
+  );
 
   const { startRequest: reserverOppgave } = restApiHooks.useRestApiRunner(RestApiPathsKeys.RESERVER_OPPGAVE);
 
@@ -50,13 +52,10 @@ export const BehandlingskoerIndex = ({ valgtSakslisteId, setValgtSakslisteId, å
     åpneFagsak(oppgave.saksnummer.toString(), oppgave.behandlingId);
   };
 
-  if (sakslister.length === 0) {
-    return (
-      <Heading size="small">
-        <FormattedMessage id="BehandlingskoerIndex.IngenKø" />
-      </Heading>
-    );
+  if (sakslisterState !== RestApiState.SUCCESS) {
+    return <LoadingPanel />;
   }
+
   return (
     <>
       <SakslistePanel
