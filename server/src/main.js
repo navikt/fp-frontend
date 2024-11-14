@@ -4,7 +4,6 @@ import helmet from 'helmet';
 import timeout from 'connect-timeout';
 import * as headers from './headers.js';
 import logger from './logger.js';
-import { getIssuer } from './azure/issuer.js';
 import { serveViteMode } from '@navikt/vite-mode';
 
 // for debugging during development
@@ -63,8 +62,6 @@ async function startApp() {
         allowedHeaders: config.cors.allowedHeaders,
       }),
     );
-
-    await getIssuer();
 
     // Liveness and readiness probes for Kubernetes / nais
     server.get(['/health/isAlive', '/health/isReady'], (req, res) => {

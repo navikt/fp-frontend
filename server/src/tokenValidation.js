@@ -1,4 +1,4 @@
-import { getToken, validateToken } from "@navikt/oasis";
+import { getToken, validateAzureToken, validateToken } from '@navikt/oasis';
 import logger from './logger.js';
 
 /**
@@ -16,8 +16,9 @@ export const verifyToken = async (
     return response.status(401).send();
   }
 
-  const validation = await validateToken(token);
+  const validation = await validateAzureToken(token);
   if (!validation.ok) {
+    console.log(validation.error, validation.errorType);
     logger.debug('User token is NOT valid.');
     return response.status(403).send();
   }
