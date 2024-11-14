@@ -9,9 +9,9 @@ import { serveViteMode } from '@navikt/vite-mode';
 
 // for debugging during development
 import config from './config.js';
-import { getUserGroups, getUserInfoFromGraphApi } from './azure/msgraph.js';
+import { getUserGroups, getUserInfoFromGraphApi } from './msgraph.js';
 import reverseProxy from './reverse-proxy.js';
-import { verifyToken } from './azure/tokenValidation.js';
+import { verifyToken } from './tokenValidation.js';
 
 const server = express();
 const { port } = config.server;

@@ -1,6 +1,6 @@
 import axios from 'axios';
-import logger from '../log.js';
-import config from '../config.js';
+import logger from './log.js';
+import config from './config.js';
 import { requestOboToken } from '@navikt/oasis';
 
 const getGraphRequest = async (bearerToken, graphUrl) => {
