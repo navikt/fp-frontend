@@ -29,8 +29,6 @@ const proxyOptions = api => ({
           resolve(options);
         } else {
           logger.warning(`OBO-utveklsing for ${api.scopes} feilet.`);
-
-          // TODO: denne rejecten funker ikke helt som forventet.
           reject(obo.error);
         }
       });
