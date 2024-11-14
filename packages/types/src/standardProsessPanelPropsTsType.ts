@@ -2,7 +2,7 @@ import Aksjonspunkt from './aksjonspunktTsType';
 import Behandling from './behandlingTsType';
 import Vilkar from './vilkarTsType';
 import AlleKodeverk from './kodeverkAlleTsType';
-import Fagsak from './fagsakTsType';
+import { Fagsak } from './fagsakTsType';
 
 interface StandardProsessPanelProps {
   behandling: Behandling;

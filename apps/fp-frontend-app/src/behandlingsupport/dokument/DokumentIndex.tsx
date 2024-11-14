@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useMemo } from 'react';
-import { DokumenterSakIndex } from '@navikt/ft-sak-dokumenter';
+import { DokumenterSakIndex } from '@navikt/fp-sak-dokumenter';
 import { LoadingPanel, VerticalSpacer, usePrevious } from '@navikt/ft-ui-komponenter';
 import { Dokument } from '@navikt/ft-types';
 
@@ -10,7 +10,6 @@ import { useIntl } from 'react-intl';
 import useBehandlingEndret from '../../behandling/useBehandlingEndret';
 import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
 
-import '@navikt/ft-sak-dokumenter/dist/style.css';
 import SupportHeaderAndContent from '../SupportHeader';
 
 const selectDocument =

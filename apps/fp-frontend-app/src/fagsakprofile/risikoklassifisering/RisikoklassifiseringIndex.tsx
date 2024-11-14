@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect, useCallback, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
-import { RisikoklassifiseringSakIndex, AvklartRisikoklassifiseringAp } from '@navikt/ft-sak-risikoklassifisering';
+import { RisikoklassifiseringSakIndex, AvklartRisikoklassifiseringAp } from '@navikt/fp-sak-risikoklassifisering';
 
 import { NavAnsatt, AksessRettigheter, Behandling } from '@navikt/fp-types';
 import { KodeverkType } from '@navikt/fp-kodeverk';
@@ -12,7 +12,6 @@ import { getRiskPanelLocationCreator } from '../../app/paths';
 import getAccessRights from '../../app/util/access';
 import FagsakData from '../../fagsak/FagsakData';
 
-import '@navikt/ft-sak-risikoklassifisering/dist/style.css';
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../../data/behandlingContextApi';
 
 const getReadOnly = (navAnsatt: NavAnsatt, rettigheter: AksessRettigheter, erPaaVent: boolean) => {

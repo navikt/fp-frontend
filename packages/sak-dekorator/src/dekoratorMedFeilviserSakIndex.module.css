@@ -1,0 +1,13 @@
+.button {
+  margin-left: auto;
+}
+
+.container {
+  background-color: var(--a-gray-900);
+  color: var(--a-white);
+  font-size: 20px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 101;
+}

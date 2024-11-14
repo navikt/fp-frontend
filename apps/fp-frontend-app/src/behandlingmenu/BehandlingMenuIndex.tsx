@@ -8,7 +8,7 @@ import { getMenytekst as getHenleggMenytekst } from '@navikt/fp-sak-meny-henlegg
 import { getMenytekst as getNyBehandlingMenytekst } from '@navikt/fp-sak-meny-ny-behandling';
 import { getMenytekst as getSettPaVentMenytekst } from '@navikt/fp-sak-meny-sett-pa-vent';
 import { Behandling, BehandlingAppKontekst, Fagsak, VergeBehandlingmenyValg } from '@navikt/fp-types';
-import { getEndreEnhetMenytekst, getTaAvVentMenytekst, getVergeMenytekst } from '@navikt/ft-sak-meny';
+import { getEndreEnhetMenytekst, getTaAvVentMenytekst, getVergeMenytekst } from '@navikt/fp-sak-meny';
 import { FormattedMessage } from 'react-intl';
 
 import { FagsakApiKeys, restFagsakApiHooks } from '../data/fagsakContextApi';
@@ -21,8 +21,6 @@ import NyBehandlingMenyModal from './modaler/NyBehandlingMenyModal';
 import SettPaVentMenyModal from './modaler/SettPaVentMenyModal';
 import TaAvVentMenyModal from './modaler/TaAvVentMenyModal';
 import VergeMenyModal from './modaler/VergeMenyModal';
-
-import '@navikt/ft-sak-meny/dist/style.css';
 
 enum ModalType {
   NY_BEHANDLING = 'NY_BEHANDLING',

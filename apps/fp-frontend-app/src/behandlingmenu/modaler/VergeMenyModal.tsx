@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { MenyVergeIndex } from '@navikt/ft-sak-meny';
+import { MenyVergeIndex } from '@navikt/fp-sak-meny';
 import { VergeBehandlingmenyValg, Behandling, BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
 
 import { useLocation, useNavigate } from 'react-router-dom';

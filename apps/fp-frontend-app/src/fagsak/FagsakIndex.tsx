@@ -2,7 +2,7 @@ import React, { FunctionComponent, useState, useCallback, useEffect } from 'reac
 import { Route, Navigate, useLocation, Routes } from 'react-router-dom';
 import { useIntl } from 'react-intl';
 import { Location } from 'history';
-import { VisittkortSakIndex } from '@navikt/ft-sak-visittkort';
+import { VisittkortSakIndex } from '@navikt/fp-sak-visittkort';
 import { LoadingPanel, DataFetchPendingModal } from '@navikt/ft-ui-komponenter';
 import { BehandlingType } from '@navikt/ft-kodeverk';
 import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
@@ -24,8 +24,6 @@ import { requestFagsakApi } from '../data/fagsakContextApi';
 import useHentFagsak from './useHentFagsak';
 import ErrorBoundary from '../app/ErrorBoundary';
 import { BehandlingApiKeys, requestBehandlingApi, restBehandlingApiHooks } from '../data/behandlingContextApi';
-
-import '@navikt/ft-sak-visittkort/dist/style.css';
 
 const finnLenkeTilAnnenPart = (annenPartBehandling: AnnenPartBehandling): string =>
   pathToAnnenPart(annenPartBehandling.saksnummer, annenPartBehandling.behandlingUuid);
