@@ -109,7 +109,7 @@ const setup = (router: Router) => {
       (request, response, next) => {
         // TODO
         if (request.timedout) {
-          logger.warning(`Request for ${response.originalUrl} timed out!`);
+          logger.warning(`Request for ${request.originalUrl} timed out!`);
         } else {
           next();
         }

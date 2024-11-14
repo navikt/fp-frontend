@@ -15,11 +15,6 @@ import { verifyToken } from "./tokenValidation.js";
 const server = express();
 const { port } = config.server;
 
-const globalErrorHandler = (err, req, res) => {
-  logger.warning(err.stack);
-  res.status(err.status || 500).send({ error: err });
-};
-
 async function startApp() {
   try {
     server.use(timeout("10m"));
@@ -91,7 +86,7 @@ async function startApp() {
     server.get("/me", async (req, res, next) => {
       try {
         const userInfo = await getUserInfoFromGraphApi(
-          req.headers.authorization,
+          req.headers.authorization ?? "Fant ikke authorization header",
         );
         return res.json(userInfo);
       } catch (error) {
@@ -103,7 +98,7 @@ async function startApp() {
     server.get("/me/memberOf", async (req, res, next) => {
       try {
         const userInfo = await getUserInfoFromGraphApi(
-          req.headers.authorization,
+          req.headers.authorization ?? "Fant ikke authorization header",
         );
         return res.json(userInfo);
       } catch (error) {
@@ -122,7 +117,7 @@ async function startApp() {
       res.sendFile("index.html", { root: rootDir });
     });
 
-    server.use(globalErrorHandler);
+    // TODO: her var det en error handler. Jeg tror ikke vi trenger da det fanges av default handler: https://expressjs.com/en/guide/error-handling.html
 
     server.listen(port, () => logger.info(`Listening on port ${port}`));
   } catch (error) {
@@ -130,4 +125,8 @@ async function startApp() {
   }
 }
 
-startApp().catch((error) => logger.error(error));
+try {
+  await startApp();
+} catch (error) {
+  logger.error("Oppstart av server feilet", error);
+}
