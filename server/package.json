@@ -6,7 +6,10 @@
   "type": "module",
   "packageManager": "yarn@3.4.1",
   "scripts": {
-    "start-express": "node ./server.js"
+    "start-express": "node ./server.js",
+    "tsc": "tsc --pretty",
+    "eslint:fix": "eslint --fix \"src/**/*.ts*\" --color",
+    "prettier": "prettier --write src"
   },
   "dependencies": {
     "@navikt/oasis": "^3.4.0",
@@ -20,5 +23,18 @@
     "helmet": "^7.1.0",
     "morgan": "^1.10.0",
     "winston": "^3.14.2"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "3.1.0",
+    "@eslint/js": "9.14.0",
+    "@types/express": "4.17.21",
+    "@typescript-eslint/eslint-plugin": "8.14.0",
+    "eslint": "9.14.0",
+    "eslint-plugin-prettier": "5.2.1",
+    "eslint-plugin-simple-import-sort": "12.1.1",
+    "eslint-plugin-unicorn": "56.0.0",
+    "prettier": "3.3.3",
+    "typescript": "5.6.3",
+    "typescript-eslint": "8.14.0"
   }
 }
