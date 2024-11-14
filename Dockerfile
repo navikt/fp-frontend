@@ -10,4 +10,4 @@ COPY ./apps/fp-frontend-app/dist ./dist
 COPY server ./
 
 EXPOSE 8080
-CMD ["./server.js"]
+CMD ["./server.ts"]
