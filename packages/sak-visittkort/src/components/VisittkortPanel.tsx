@@ -2,7 +2,7 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 import { PersonCard, EmptyPersonCard, Gender } from '@navikt/ft-plattform-komponenter';
 import { Fagsak, FagsakPersoner } from '@navikt/fp-types';
-import { RelasjonsRolleType, NavBrukerKjonn } from '@navikt/fp-kodeverk';
+import { relasjonsRolleType, navBrukerKjonn } from '@navikt/fp-kodeverk';
 
 import { HStack, Spacer } from '@navikt/ds-react';
 import { VisittkortLabels } from './VisittkortLabels';
@@ -11,10 +11,10 @@ import { VisittkortBarnInfoPanel } from './VisittkortBarnInfoPanel';
 import styles from './visittkortPanel.module.css';
 
 const utledKjonn = (kjonn: string): Gender => {
-  if (kjonn === NavBrukerKjonn.KVINNE) {
+  if (kjonn === navBrukerKjonn.KVINNE) {
     return Gender.female;
   }
-  return kjonn === NavBrukerKjonn.MANN ? Gender.male : Gender.unknown;
+  return kjonn === navBrukerKjonn.MANN ? Gender.male : Gender.unknown;
 };
 
 interface Props {
@@ -29,14 +29,14 @@ export const VisittkortPanel = ({ fagsak, fagsakPersoner, lenkeTilAnnenPart, har
   const intl = useIntl();
 
   const fagsakPerson = fagsakPersoner.bruker;
-  const erMor = fagsak.relasjonsRolleType === RelasjonsRolleType.MOR;
+  const erMor = fagsak.relasjonsRolleType === relasjonsRolleType.MOR;
   if (erTilbakekreving && harVerge) {
     return (
       <div className={styles.container}>
         <PersonCard
           name={fagsakPerson.navn}
           fodselsnummer={fagsakPerson.fødselsnummer}
-          gender={fagsakPerson.kjønn === NavBrukerKjonn.KVINNE ? Gender.female : Gender.male}
+          gender={fagsakPerson.kjønn === navBrukerKjonn.KVINNE ? Gender.female : Gender.male}
           renderLabelContent={() => <VisittkortLabels fagsakPerson={fagsakPerson} harVerge={harVerge} />}
         />
       </div>

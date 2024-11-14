@@ -2,17 +2,14 @@ import React, { ReactElement, ReactNode } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { LinkPanel } from '@navikt/ds-react';
 import { VisittkortSakIndex } from '@navikt/fp-sak-visittkort';
-import { Fagsak, FagsakPerson, KodeverkMedNavn } from '@navikt/fp-types';
-import { RelasjonsRolleType } from '@navikt/fp-kodeverk';
+import { Aktor, Fagsak, KodeverkMedNavn } from '@navikt/fp-types';
+import { relasjonsRolleType } from '@navikt/fp-kodeverk';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import styles from './aktoerGrid.module.css';
 
 interface Props {
-  aktorInfo: {
-    fagsaker: Fagsak[];
-    person: FagsakPerson;
-  };
+  aktorInfo: Aktor;
   fagsakStatuser: KodeverkMedNavn[];
   fagsakYtelseTyper: KodeverkMedNavn[];
   renderSomLenke: (className: string | undefined, fagsakKomponent: ReactNode, saksnummer: string) => ReactElement;
@@ -20,7 +17,7 @@ interface Props {
 
 export const AktoerGrid = ({ aktorInfo, fagsakStatuser, fagsakYtelseTyper, renderSomLenke }: Props) => {
   const vFagsak =
-    aktorInfo.fagsaker.length > 0 ? aktorInfo.fagsaker[0] : { relasjonsRolleType: RelasjonsRolleType.MOR };
+    aktorInfo.fagsaker.length > 0 ? aktorInfo.fagsaker[0] : { relasjonsRolleType: relasjonsRolleType.MOR };
 
   return (
     <>

@@ -4,7 +4,11 @@ import { ChevronDownIcon, ChevronUpIcon, StarFillIcon } from '@navikt/aksel-icon
 import { BodyShort, Label, HStack, Spacer, VStack, Box } from '@navikt/ds-react';
 import { Tooltip, VerticalSpacer, DateTimeLabel } from '@navikt/ft-ui-komponenter';
 import { BehandlingAppKontekst, KodeverkMedNavn } from '@navikt/fp-types';
-import { KodeverkType, BehandlingType, BehandlingArsakType } from '@navikt/fp-kodeverk';
+import {
+  KodeverkType,
+  behandlingType as BehandlingType,
+  behandlingArsakType as BehandlingArsakType,
+} from '@navikt/fp-kodeverk';
 
 import styles from './behandlingInformasjon.module.css';
 

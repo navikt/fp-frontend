@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import { StoryFn } from '@storybook/react';
-import { BehandlingAppKontekst, Behandlingsresultat, KodeverkMedNavn } from '@navikt/ft-types';
-import { KodeverkType, BehandlingType, BehandlingStatus } from '@navikt/ft-kodeverk';
-import { alleKodeverk } from '@navikt/ft-frontend-storybook-utils';
+import { BehandlingAppKontekst, Behandlingsresultat, KodeverkMedNavn } from '@navikt/fp-types';
+import {
+  KodeverkType,
+  behandlingType as BehandlingType,
+  behandlingStatus as BehandlingStatus,
+} from '@navikt/fp-kodeverk';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 import '@navikt/ft-ui-komponenter/dist/style.css';
 
-import BehandlingVelgerSakIndex from './BehandlingVelgerSakIndex';
+import { BehandlingVelgerSakIndex } from './BehandlingVelgerSakIndex';
 
 const getKodeverkMedNavn = (
   kode: string,
@@ -66,7 +70,6 @@ Default.args = {
       avsluttet: '2017-08-03T02:04:25.455',
       behandlendeEnhetId: '4812',
       behandlendeEnhetNavn: 'Nav familie- og pensjonsytelser Bergen',
-      links: [],
       gjeldendeVedtak: true,
       behandlingPaaVent: false,
       behandlingHenlagt: false,
@@ -75,7 +78,6 @@ Default.args = {
       behandlingsresultat: {
         type: 'AVSLÅTT',
       } as Behandlingsresultat,
-      behandlingÅrsaker: [],
     },
     {
       versjon: 2,
@@ -88,7 +90,6 @@ Default.args = {
       avsluttet: '2017-08-01T02:04:25.455',
       behandlendeEnhetId: '4812',
       behandlendeEnhetNavn: 'Nav familie- og pensjonsytelser Bergen',
-      links: [],
       gjeldendeVedtak: false,
       behandlingPaaVent: false,
       behandlingHenlagt: false,
@@ -97,7 +98,6 @@ Default.args = {
       behandlingsresultat: {
         type: 'INNVILGET',
       } as Behandlingsresultat,
-      behandlingÅrsaker: [],
     },
     {
       versjon: 2,
@@ -109,13 +109,11 @@ Default.args = {
       opprettet: '2017-10-02T02:04:25.455',
       behandlendeEnhetId: '4812',
       behandlendeEnhetNavn: 'Nav familie- og pensjonsytelser Bergen',
-      links: [],
       gjeldendeVedtak: false,
       behandlingPaaVent: false,
       behandlingHenlagt: false,
       behandlingKoet: false,
       toTrinnsBehandling: false,
-      behandlingÅrsaker: [],
     },
     {
       versjon: 2,
@@ -128,18 +126,16 @@ Default.args = {
       avsluttet: '2017-07-13T02:04:25.455',
       behandlendeEnhetId: '4812',
       behandlendeEnhetNavn: 'Nav familie- og pensjonsytelser Bergen',
-      links: [],
       gjeldendeVedtak: false,
       behandlingPaaVent: false,
       behandlingHenlagt: false,
       behandlingKoet: false,
       toTrinnsBehandling: false,
-      behandlingÅrsaker: [],
       behandlingsresultat: {
         type: 'HENLAGT_SØKNAD_TRUKKET',
       } as Behandlingsresultat,
     },
-  ],
+  ] as BehandlingAppKontekst[],
 };
 
 export const IngenBehandlinger = Template.bind({});

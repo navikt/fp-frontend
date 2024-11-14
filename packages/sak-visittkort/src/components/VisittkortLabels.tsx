@@ -1,8 +1,8 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import dayjs from 'dayjs';
 import { useIntl, FormattedMessage } from 'react-intl';
 import { Tag, Tooltip } from '@navikt/ds-react';
-import { DiskresjonskodeType } from '@navikt/fp-kodeverk';
+import { diskresjonskodeType } from '@navikt/fp-kodeverk';
 import { FagsakPerson } from '@navikt/fp-types';
 import { dateFormat } from '@navikt/ft-utils';
 
@@ -13,31 +13,31 @@ interface Props {
 
 export const VisittkortLabels = ({ fagsakPerson, harVerge }: Props) => {
   const intl = useIntl();
-  const erSokerUnder18 = useMemo(() => dayjs().diff(fagsakPerson.fødselsdato, 'years') < 18, [fagsakPerson]);
+  const erSokerUnder18 = dayjs().diff(fagsakPerson.fødselsdato, 'years') < 18;
   return (
     <>
-      {fagsakPerson.dodsdato && (
+      {fagsakPerson.dødsdato && (
         <Tooltip content={intl.formatMessage({ id: 'VisittkortLabels.DodTittel' })} placement="bottom">
           <Tag variant="neutral" size="small">
-            <FormattedMessage id="VisittkortLabels.Dod" values={{ dato: dateFormat(fagsakPerson.dodsdato) }} />
+            <FormattedMessage id="VisittkortLabels.Dod" values={{ dato: dateFormat(fagsakPerson.dødsdato) }} />
           </Tag>
         </Tooltip>
       )}
-      {fagsakPerson.diskresjonskode === DiskresjonskodeType.KODE6 && !fagsakPerson.dodsdato && (
+      {fagsakPerson.diskresjonskode === diskresjonskodeType.KODE6 && !fagsakPerson.dødsdato && (
         <Tooltip content={intl.formatMessage({ id: 'VisittkortLabels.Diskresjon6Tittel' })} placement="bottom">
           <Tag variant="error" size="small">
             <FormattedMessage id="VisittkortLabels.Diskresjon6" />
           </Tag>
         </Tooltip>
       )}
-      {fagsakPerson.diskresjonskode === DiskresjonskodeType.KODE7 && !fagsakPerson.dodsdato && (
+      {fagsakPerson.diskresjonskode === diskresjonskodeType.KODE7 && !fagsakPerson.dødsdato && (
         <Tooltip content={intl.formatMessage({ id: 'VisittkortLabels.Diskresjon7Tittel' })} placement="bottom">
           <Tag variant="warning" size="small">
             <FormattedMessage id="VisittkortLabels.Diskresjon7" />
           </Tag>
         </Tooltip>
       )}
-      {harVerge && !fagsakPerson.dodsdato && (
+      {harVerge && !fagsakPerson.dødsdato && (
         <Tooltip content={intl.formatMessage({ id: 'VisittkortLabels.VergeTittel' })} placement="bottom">
           <Tag variant="info" size="small">
             <FormattedMessage id="VisittkortLabels.Verge" />

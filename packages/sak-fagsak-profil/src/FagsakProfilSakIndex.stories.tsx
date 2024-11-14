@@ -1,7 +1,7 @@
 import React from 'react';
 import { StoryFn } from '@storybook/react';
 
-import { FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { fagsakStatus, fagsakYtelseType } from '@navikt/fp-kodeverk';
 
 import { FagsakProfilSakIndex } from './FagsakProfilSakIndex';
 
@@ -20,12 +20,12 @@ const Template: StoryFn = () => (
     <FagsakProfilSakIndex
       saksnummer="232341251"
       fagsakYtelseType={{
-        kode: FagsakYtelseType.FORELDREPENGER,
+        kode: fagsakYtelseType.FORELDREPENGER,
         kodeverk: FAGSAK_YTELSE_KODEVERK,
         navn: 'Foreldrepenger',
       }}
       fagsakMarkeringTekster={['Næring', 'Utland']}
-      fagsakStatus={{ kode: FagsakStatus.OPPRETTET, kodeverk: FAGSAK_STATUS_KODEVERK, navn: 'Opprettet' }}
+      fagsakStatus={{ kode: fagsakStatus.OPPRETTET, kodeverk: FAGSAK_STATUS_KODEVERK, navn: 'Opprettet' }}
       dekningsgrad={100}
     />
   </div>

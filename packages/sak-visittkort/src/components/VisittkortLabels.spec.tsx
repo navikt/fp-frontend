@@ -22,7 +22,7 @@ describe('<VisittkortSakIndex>', () => {
         <VisittkortLabels
           fagsakPerson={{
             ...fagsakPerson,
-            dodsdato: '2019-01-01',
+            dødsdato: '2019-01-01',
           }}
           harVerge={false}
         />

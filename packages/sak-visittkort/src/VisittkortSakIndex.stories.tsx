@@ -3,13 +3,13 @@ import { StoryFn } from '@storybook/react';
 import dayjs from 'dayjs';
 
 import {
-  NavBrukerKjonn,
-  FagsakStatus,
-  PersonstatusType,
-  FagsakYtelseType,
-  RelasjonsRolleType,
-  FamilieHendelseType,
-  DiskresjonskodeType,
+  navBrukerKjonn,
+  fagsakStatus,
+  personstatusType,
+  fagsakYtelseType,
+  relasjonsRolleType,
+  familieHendelseType,
+  diskresjonskodeType,
 } from '@navikt/fp-kodeverk';
 import { Fagsak, FagsakPersoner } from '@navikt/fp-types';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
@@ -27,27 +27,27 @@ export default {
 
 const defaultFagsak = {
   saksnummer: '123456',
-  fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
-  relasjonsRolleType: RelasjonsRolleType.MOR,
-  status: FagsakStatus.LOPENDE,
+  fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
+  relasjonsRolleType: relasjonsRolleType.MOR,
+  status: fagsakStatus.LOPENDE,
   dekningsgrad: 100,
-};
+} as Fagsak;
 
 const fagsakPerson = {
   navn: 'Espen Utvikler',
   fødselsdato: '1979-01-01',
   fødselsnummer: '12345678910',
-  kjønn: NavBrukerKjonn.MANN,
+  kjønn: navBrukerKjonn.MANN,
   aktørId: '234',
-  personstatusType: PersonstatusType.BOSATT,
+  personstatusType: personstatusType.BOSATT,
 };
 
 const fagsakPersonAnnenPartUkjent = {
   navn: 'Klara Ku',
   fødselsdato: '1980-01-01',
   fødselsnummer: '65656578787',
-  kjønn: NavBrukerKjonn.KVINNE,
-  personstatusType: PersonstatusType.BOSATT,
+  kjønn: navBrukerKjonn.KVINNE,
+  personstatusType: personstatusType.BOSATT,
 };
 
 const fagsakPersonAnnenPart = {
@@ -113,8 +113,8 @@ export const MedDiskresjonskodeOgDødAnnenpart = Template.bind({});
 MedDiskresjonskodeOgDødAnnenpart.args = {
   fagsak: defaultFagsak,
   fagsakPersoner: {
-    bruker: { ...fagsakPerson, diskresjonskode: DiskresjonskodeType.KODE6 },
-    annenPart: { ...fagsakPersonAnnenPart, dodsdato: '2024-02-01' },
+    bruker: { ...fagsakPerson, diskresjonskode: diskresjonskodeType.KODE6 },
+    annenPart: { ...fagsakPersonAnnenPart, dødsdato: '2024-02-01' },
   },
   lenkeTilAnnenPart: 'testlenke til annen part',
 };
@@ -141,7 +141,7 @@ FamilieMedDødfødtBarn.args = {
   fagsakPersoner: {
     bruker: fagsakPerson,
     familiehendelse: {
-      hendelseType: FamilieHendelseType.FODSEL,
+      hendelseType: familieHendelseType.FODSEL,
       hendelseDato: '2020-01-21',
       dødfødsel: true,
       antallBarn: 1,
@@ -155,7 +155,7 @@ FamilieMedTermin.args = {
   fagsakPersoner: {
     bruker: fagsakPerson,
     familiehendelse: {
-      hendelseType: FamilieHendelseType.TERMIN,
+      hendelseType: familieHendelseType.TERMIN,
       hendelseDato: '2020-01-21',
       dødfødsel: false,
       antallBarn: 1,
@@ -169,7 +169,7 @@ FamilieMedOmsorgovertakelse.args = {
   fagsakPersoner: {
     bruker: fagsakPerson,
     familiehendelse: {
-      hendelseType: FamilieHendelseType.OMSORG,
+      hendelseType: familieHendelseType.OMSORG,
       hendelseDato: '2020-01-21',
       dødfødsel: false,
       antallBarn: 1,
@@ -183,7 +183,7 @@ FamilieMedAdopsjon.args = {
   fagsakPersoner: {
     bruker: fagsakPerson,
     familiehendelse: {
-      hendelseType: FamilieHendelseType.ADOPSJON,
+      hendelseType: familieHendelseType.ADOPSJON,
       hendelseDato: '2020-01-21',
       dødfødsel: false,
       antallBarn: 1,
