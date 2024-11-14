@@ -1,10 +1,11 @@
-import axios from 'axios';
-import logger from './logger.js';
-import config from './config.js';
-import { requestAzureOboToken } from '@navikt/oasis';
+import { requestAzureOboToken } from "@navikt/oasis";
+import axios from "axios";
 
-const getGraphRequest = async (bearerToken, graphUrl) => {
-  const scope = 'https://graph.microsoft.com/.default';
+import config from "./config.js";
+import logger from "./logger.js";
+
+const getGraphRequest = async (bearerToken: string, graphUrl: string) => {
+  const scope = "https://graph.microsoft.com/.default";
   const obo = await requestAzureOboToken(bearerToken, scope);
 
   if (!obo.ok) {
@@ -18,16 +19,16 @@ const getGraphRequest = async (bearerToken, graphUrl) => {
   });
 
   return response.data;
-}
+};
 
-export const getUserInfoFromGraphApi = async bearerToken => {
+export const getUserInfoFromGraphApi = async (bearerToken: string) => {
   const query =
-    'onPremisesSamAccountName,displayName,givenName,mail,officeLocation,surname,userPrincipalName,id,jobTitle,memberOf';
+    "onPremisesSamAccountName,displayName,givenName,mail,officeLocation,surname,userPrincipalName,id,jobTitle,memberOf";
   const { graphUrl } = config.azureAd;
   return getGraphRequest(bearerToken, `${graphUrl}/v1.0/me?$select=${query}`);
 };
 
-export const getUserGroups = async bearerToken => {
+export const getUserGroups = async (bearerToken: string) => {
   const { graphUrl } = config.azureAd;
   return getGraphRequest(bearerToken, `${graphUrl}/v1.0/me/memberOf`);
 };
