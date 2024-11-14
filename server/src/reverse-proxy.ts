@@ -108,7 +108,7 @@ const proxyOptions = (api: ProxyConfig["apis"][0]) =>
     },
   }) satisfies ProxyOptions;
 
-const setup = (router: Router) => {
+export const setupProxies = (router: Router) => {
   for (const api of config.reverseProxyConfig.apis) {
     router.use(
       `${api.path}/*`,
@@ -124,5 +124,3 @@ const setup = (router: Router) => {
     );
   }
 };
-
-export default { setup };

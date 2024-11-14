@@ -9,7 +9,7 @@ import config from "./config.js";
 import { addHeaders } from "./headers.js";
 import logger from "./logger.js";
 import { getUserGroups, getUserInfoFromGraphApi } from "./msgraph.js";
-import reverseProxy from "./reverse-proxy.js";
+import { setupProxies } from "./reverse-proxy.js";
 import { verifyToken } from "./tokenValidation.js";
 
 const server = express();
@@ -106,7 +106,7 @@ async function startApp() {
       }
     });
 
-    reverseProxy.setup(server);
+    setupProxies(server);
 
     serveViteMode(server, { port: "9010" });
 
