@@ -18,7 +18,6 @@ export const verifyToken = async (
 
   const validation = await validateAzureToken(token);
   if (!validation.ok) {
-    console.log(validation.error, validation.errorType);
     logger.debug('User token is NOT valid.');
     return response.status(403).send();
   }
