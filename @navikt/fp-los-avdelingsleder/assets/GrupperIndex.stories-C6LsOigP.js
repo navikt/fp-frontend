@@ -1,9 +1,0 @@
-import{j as r}from"./jsx-runtime-QvZ8i92b.js";import{m as o}from"./nb_NO-xOTxt9dL.js";import{g as d}from"./withIntl-YzfFZyng.js";import{R as l}from"./RestApiMock-B6qRNcBN.js";import"./index-uubelm5h.js";import"./useRestApiRunner-J7gTlJGx.js";import{a as m,r as u}from"./fplosRestApi-CXMGmySj.js";import{G as p}from"./GrupperIndex-BtzNXcKj.js";import"./index-C5xsJX-I.js";import"./Modal-tRW4hqse.js";import"./dayjs.min-BsYQKNhR.js";import"./GrupperPanel-CRIkk8An.js";import"./index.es-Det53JvI.js";import"./VStack-yjYS5DzK.js";import"./index.es-D4mUV_xz.js";import"./useDebounce-CYdw6kEm.js";import"./Table-BGg6xs3s.js";const v=d(o),g=[{brukerIdent:"ident1",navn:"Anders Utvikler",ansattAvdeling:null},{brukerIdent:"ident12",navn:"Espen Utvikler",ansattAvdeling:null},{brukerIdent:"ident4",navn:"Olga Utvikler",ansattAvdeling:null},{brukerIdent:"ident3",navn:"Klara Utvikler",ansattAvdeling:null}],t=[{brukerIdent:"ident1",navn:"Anders Utvikler",ansattAvdeling:null}],k={saksbehandlere:t,saksbehandlerGrupper:[{gruppeId:1,gruppeNavn:"gruppenavn",saksbehandlere:t}]},D={title:"los/avdelingsleder/grupper/GrupperIndex",component:p,decorators:[v]},c=()=>{const i=[{key:m.HENT_GRUPPER.name,data:k}];return r.jsx(l,{data:i,requestApi:u,children:r.jsx(p,{valgtAvdelingEnhet:"test",avdelingensSaksbehandlere:g})})},e=c.bind({});var n,a,s;e.parameters={...e.parameters,docs:{...(n=e.parameters)==null?void 0:n.docs,source:{originalSource:`() => {
-  const data = [{
-    key: RestApiPathsKeys.HENT_GRUPPER.name,
-    data: saksbehandlereOgSaksbehandlerGrupper
-  }];
-  return <RestApiMock data={data} requestApi={requestApi}>
-      <GrupperIndex valgtAvdelingEnhet="test" avdelingensSaksbehandlere={avdelingensSaksbehandlere} />
-    </RestApiMock>;
-}`,...(s=(a=e.parameters)==null?void 0:a.docs)==null?void 0:s.source}}};const K=["Default"];export{e as Default,K as __namedExportsOrder,D as default};
