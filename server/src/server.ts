@@ -15,7 +15,7 @@ import { verifyToken } from "./tokenValidation.js";
 const server = express();
 const { port } = config.server;
 
-async function startApp() {
+function startApp() {
   try {
     server.use(timeout("10m"));
     addHeaders(server);
@@ -111,10 +111,9 @@ async function startApp() {
     serveViteMode(server, { port: "9010" });
 
     // serve static files
-    const rootDir = "./dist";
-    server.use(express.static(rootDir));
-    server.use(/^\/(?!.*dist).*$/, (req, res) => {
-      res.sendFile("index.html", { root: rootDir });
+    server.use(express.static("./"));
+    server.use("*", (request, response) => {
+      response.sendFile("index.html");
     });
 
     // TODO: her var det en error handler. Jeg tror ikke vi trenger da det fanges av default handler: https://expressjs.com/en/guide/error-handling.html
@@ -126,7 +125,7 @@ async function startApp() {
 }
 
 try {
-  await startApp();
+  startApp();
 } catch (error) {
   logger.error("Oppstart av server feilet", error);
 }

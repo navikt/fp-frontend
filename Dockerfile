@@ -6,8 +6,8 @@ ENV NODE_ENV production
 
 WORKDIR /app
 
-COPY ./apps/fp-frontend-app/dist ./dist
-COPY server ./
+COPY ./apps/fp-frontend-app/dist ./
+COPY server/dist ./
 
 EXPOSE 8080
-CMD ["./server.ts"]
+CMD ["./index.js"]
