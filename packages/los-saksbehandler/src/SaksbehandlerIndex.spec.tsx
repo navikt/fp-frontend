@@ -7,7 +7,7 @@ const { Default } = composeStories(stories);
 
 describe('<SaksbehandlerIndex>', () => {
   it('skal saksbehandler-los', async () => {
-    render(<Default />);
+    await render(<Default />);
     expect(await screen.findByText('Behandlingskø')).toBeInTheDocument();
     expect(screen.getByText('Neste i køen')).toBeInTheDocument();
     expect(screen.getByText('Søk')).toBeInTheDocument();
