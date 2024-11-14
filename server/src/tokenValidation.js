@@ -1,4 +1,4 @@
-import { getToken, validateAzureToken, validateToken } from '@navikt/oasis';
+import { getToken, validateAzureToken } from '@navikt/oasis';
 import logger from './logger.js';
 
 /**

@@ -2,7 +2,7 @@ import proxy from 'express-http-proxy';
 import url from 'url';
 
 import config from './config.js';
-import { getToken, requestOboToken } from '@navikt/oasis';
+import { getToken, requestAzureOboToken } from '@navikt/oasis';
 import logger from './logger.js';
 
 const xTimestamp = 'x-Timestamp';
@@ -11,26 +11,28 @@ const stripTrailingSlash = str => (str.endsWith('/') ? str.slice(0, -1) : str);
 const proxyOptions = api => ({
   parseReqBody: false,
   timeout: 60000,
-  proxyReqOptDecorator: async (options, req, res) => {
+  proxyReqOptDecorator: (options, req, res) => {
     const requestTime = Date.now();
     options.headers[xTimestamp] = requestTime;
     delete options.headers.cookie;
-
-    // Vi har allerede validert token før vi kommer hit. Så dette burde aldri inntreffe
-    const token = getToken(req);
-    if (!token) {
-      logger.warning('Fant ikke Wonderwall token ved OBO-utveksling. Dette burde ikke inntreffe');
-      return res.status(401).send();
-    }
-    const obo = await requestOboToken(token, api.scopes);
-
-    if (obo.ok) {
-      logger.info(`Token veksling tok: (${Date.now() - requestTime}ms)`);
-      options.headers.Authorization = `Bearer ${obo.token}`;
-    } else {
-      logger.warning(`OBO-utveklsing for ${api.scopes} feilet.`);
-      return res.status(403).send();
-    }
+    return new Promise((resolve, reject) => {
+      // Vi har allerede validert token før vi kommer hit. Så dette burde aldri inntreffe
+      const token = getToken(req);
+      if (!token) {
+        logger.warning('Fant ikke Wonderwall token ved OBO-utveksling. Dette burde ikke inntreffe');
+        return res.status(401).send();
+      }
+      requestAzureOboToken(token, api.scopes).then(obo  => {
+        if (obo.ok) {
+          logger.info(`Token veksling tok: (${Date.now() - requestTime}ms)`);
+          options.headers.Authorization = `Bearer ${obo.token}`;
+          resolve(options);
+        } else {
+          logger.warning(`OBO-utveklsing for ${api.scopes} feilet.`);
+          return res.status(403).send();
+        }
+      });
+    });
   },
   proxyReqPathResolver: req => {
     const urlFromApi = url.parse(api.url);

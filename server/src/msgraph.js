@@ -1,11 +1,11 @@
 import axios from 'axios';
 import logger from './logger.js';
 import config from './config.js';
-import { requestOboToken } from '@navikt/oasis';
+import { requestAzureOboToken } from '@navikt/oasis';
 
 const getGraphRequest = async (bearerToken, graphUrl) => {
   const scope = 'https://graph.microsoft.com/.default';
-  const obo = await requestOboToken(bearerToken, scope);
+  const obo = await requestAzureOboToken(bearerToken, scope);
 
   if (obo.ok) {
     // TODO: feilhåndtering for axios kall
