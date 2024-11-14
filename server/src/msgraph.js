@@ -13,7 +13,6 @@ const getGraphRequest = async (bearerToken, graphUrl) => {
     throw new Error(errorMessage);
   }
 
-  // TODO: feilhåndtering for axios kall
   const response = await axios.get(graphUrl, {
     headers: { Authorization: `Bearer ${obo.token}` },
   });
