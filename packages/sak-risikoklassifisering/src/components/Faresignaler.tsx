@@ -36,10 +36,10 @@ interface Props {
  */
 export const Faresignaler = ({ risikoklassifisering }: Props) => (
   <>
-    {risikoklassifisering.medlFaresignaler && risikoklassifisering.medlFaresignaler.faresignaler && (
+    {risikoklassifisering.medlFaresignaler?.faresignaler && (
       <FarePanel risikoFaresignaler={risikoklassifisering.medlFaresignaler} labelId="Risikopanel.Panel.Medlemskap" />
     )}
-    {risikoklassifisering.iayFaresignaler && risikoklassifisering.iayFaresignaler.faresignaler && (
+    {risikoklassifisering.iayFaresignaler?.faresignaler && (
       <FarePanel
         risikoFaresignaler={risikoklassifisering.iayFaresignaler}
         labelId="Risikopanel.Panel.ArbeidsforholdInntekt"

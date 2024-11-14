@@ -59,7 +59,7 @@ export const VisittkortPanel = ({ fagsak, fagsakPersoner, lenkeTilAnnenPart, har
           />
         )}
         {!soker.aktørId && <EmptyPersonCard namePlaceholder={intl.formatMessage({ id: 'VisittkortPanel.Ukjent' })} />}
-        {annenPart && annenPart.aktørId && (
+        {annenPart?.aktørId && (
           <PersonCard
             name={annenPart.navn}
             fodselsnummer={annenPart.fødselsnummer}

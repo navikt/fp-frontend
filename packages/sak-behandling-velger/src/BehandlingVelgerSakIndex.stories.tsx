@@ -12,17 +12,9 @@ import '@navikt/ft-ui-komponenter/dist/style.css';
 
 import { BehandlingVelgerSakIndex } from './BehandlingVelgerSakIndex';
 
-const getKodeverkMedNavn = (
-  kode: string,
-  kodeverk: KodeverkType,
-  behandlingType: string = BehandlingType.FORSTEGANGSSOKNAD,
-) => {
-  const kodeverkForType =
-    behandlingType === BehandlingType.TILBAKEKREVING || behandlingType === BehandlingType.TILBAKEKREVING_REVURDERING
-      ? // @ts-ignore Fiks
-        (alleKodeverk[kodeverk] as KodeverkMedNavn[])
-      : // @ts-ignore Fiks
-        (alleKodeverk[kodeverk] as KodeverkMedNavn[]);
+const getKodeverkMedNavn = (kode: string, kodeverk: KodeverkType) => {
+  // @ts-ignore
+  const kodeverkForType = alleKodeverk[kodeverk] as KodeverkMedNavn[];
   if (!kodeverkForType || kodeverkForType.length === 0) {
     throw Error(`Det finnes ingen kodeverk for type ${kodeverk} med kode ${kode}`);
   }
@@ -37,19 +29,19 @@ export default {
 const Template: StoryFn<{
   behandlinger: BehandlingAppKontekst[];
 }> = ({ behandlinger }) => {
-  const [visAlle, toggleVisAlle] = useState(false);
+  const [visAlle, setVisAlle] = useState(false);
   return (
     <div style={{ width: '600px' }}>
       <BehandlingVelgerSakIndex
         behandlinger={behandlinger}
         renderRadSomLenke={(className, behandlingInfoKomponent) => (
-          <button type="button" className={className} onClick={() => toggleVisAlle(!visAlle)}>
+          <button type="button" className={className} onClick={() => setVisAlle(!visAlle)}>
             {behandlingInfoKomponent}
           </button>
         )}
         behandlingUuid="1"
         skalViseAlleBehandlinger={visAlle}
-        toggleVisAlleBehandlinger={() => toggleVisAlle(!visAlle)}
+        toggleVisAlleBehandlinger={() => setVisAlle(!visAlle)}
         getKodeverkMedNavn={getKodeverkMedNavn}
       />
     </div>

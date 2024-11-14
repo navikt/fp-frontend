@@ -15,14 +15,14 @@ const Template: StoryFn<{
   kanJournalføre?: boolean;
   feilmeldinger?: Feilmelding[];
 }> = ({ kanJournalføre, feilmeldinger = [] }) => {
-  const [errorMessages, removeErrorMessages] = useState(feilmeldinger);
+  const [errorMessages, setErrorMessages] = useState(feilmeldinger);
   return (
     <div style={{ marginLeft: '-56px' }}>
       <DekoratorMedFeilviserSakIndex
         tittel="Svangerskap, fødsel og adopsjon"
         tittelLenke="/fpsak"
         navAnsattNavn="Espen Utvikler"
-        fjernFeilmeldinger={() => removeErrorMessages([])}
+        fjernFeilmeldinger={() => setErrorMessages([])}
         setSiteHeight={() => undefined}
         feilmeldinger={errorMessages}
         eksterneLenker={[

@@ -8,7 +8,7 @@ import { Feilmelding } from '../typer/feilmeldingTsType';
 
 import styles from './feilmeldingsdetaljerModal.module.css';
 
-const capitalizeFirstLetters = (key: string): string => key.charAt(0).toUpperCase() + key.substr(1);
+const capitalizeFirstLetters = (key: string): string => key.charAt(0).toUpperCase() + key.substring(1);
 
 interface Props {
   skalViseModal: boolean;

@@ -14,7 +14,7 @@ import messages from '../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 const harResultatkode = (resultatkode: string, risikoklassifisering?: Risikoklassifisering): boolean => {
-  if (!risikoklassifisering || !risikoklassifisering.kontrollresultat) {
+  if (!risikoklassifisering?.kontrollresultat) {
     return false;
   }
   return risikoklassifisering.kontrollresultat === resultatkode;

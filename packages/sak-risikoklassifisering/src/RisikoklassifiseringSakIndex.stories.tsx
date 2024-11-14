@@ -28,7 +28,7 @@ const Template: StoryFn<{
   aksjonspunkt?: Aksjonspunkt;
   submitAksjonspunkt: () => Promise<any>;
 }> = ({ risikoklassifisering, aksjonspunkt, submitAksjonspunkt }) => {
-  const [isOpen, toggleOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(true);
 
   return (
     <RisikoklassifiseringSakIndex
@@ -37,7 +37,7 @@ const Template: StoryFn<{
       isPanelOpen={isOpen}
       readOnly={false}
       submitAksjonspunkt={submitAksjonspunkt}
-      toggleRiskPanel={() => toggleOpen(!isOpen)}
+      toggleRiskPanel={() => setIsOpen(!isOpen)}
       faresignalVurderinger={alleKodeverk[KodeverkType.FARESIGNAL_VURDERING]}
     />
   );

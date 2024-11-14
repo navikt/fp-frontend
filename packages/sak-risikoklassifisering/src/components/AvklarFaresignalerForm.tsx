@@ -29,7 +29,7 @@ export const buildInitialValues = (
   aksjonspunkt: Aksjonspunkt,
   risikoklassifisering?: Risikoklassifisering,
 ): Values | undefined => {
-  if (aksjonspunkt && aksjonspunkt.begrunnelse && risikoklassifisering && risikoklassifisering.faresignalVurdering) {
+  if (aksjonspunkt?.begrunnelse && risikoklassifisering?.faresignalVurdering) {
     const kode = risikoklassifisering.faresignalVurdering;
     return {
       [begrunnelseFieldName]: aksjonspunkt.begrunnelse,

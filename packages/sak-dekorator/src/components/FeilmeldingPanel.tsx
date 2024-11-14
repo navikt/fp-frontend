@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 import classnames from 'classnames/bind';
-import { Button, Detail } from '@navikt/ds-react';
+import { Button, Detail, Link } from '@navikt/ds-react';
 import { XMarkIcon } from '@navikt/aksel-icons';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 
@@ -24,12 +24,12 @@ interface Props {
  * Definerer hvordan feilmeldinger vises under header.
  */
 export const FeilmeldingPanel = ({ feilmeldinger, fjernFeilmeldinger }: Props) => {
-  const [erModalÅpen, setModalTilÅpen] = useState(false);
+  const [erModalÅpen, setErModalÅpen] = useState(false);
   const [valgtFeilmeldingIndex, setValgtFeilmeldingIndex] = useState<number | undefined>(undefined);
 
   const toggleModalOnClick = useCallback(
     (event: React.MouseEvent | React.KeyboardEvent, index: number): void => {
-      setModalTilÅpen(!erModalÅpen);
+      setErModalÅpen(!erModalÅpen);
       setValgtFeilmeldingIndex(index);
       if (event) {
         event.preventDefault();
@@ -57,18 +57,17 @@ export const FeilmeldingPanel = ({ feilmeldinger, fjernFeilmeldinger }: Props) =
     <div className={styles.container}>
       {feilmeldinger.map((message, index) => (
         <React.Fragment key={message.melding}>
-          <Detail size="small" className={styles.wordWrap}>{`${decodeHtmlEntity(message.melding)} `}</Detail>
+          <Detail className={styles.wordWrap}>{`${decodeHtmlEntity(message.melding)} `}</Detail>
           {message.tilleggsInfo && (
             <Detail>
-              {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-              <a
-                href=""
+              <Link
+                href="#"
+                className={classNames('link')}
                 onClick={event => toggleModalOnClick(event, index)}
                 onKeyDown={event => toggleModalOnKeyDown(event, index)}
-                className={classNames('link')}
               >
                 <FormattedMessage id="FeilmeldingPanel.ErrorDetails" />
-              </a>
+              </Link>
             </Detail>
           )}
         </React.Fragment>
