@@ -14,13 +14,6 @@ import { restApiHooks, RestApiGlobalStatePathsKeys } from '../../data/fplosSaksb
 import { Table } from '@navikt/ds-react';
 import { FormattedMessage } from 'react-intl';
 
-const getFagsakCallback =
-  (åpneFagsak: (saksnummer: string, behandlingUuid?: string) => void, saksnummer?: string) => () => {
-    if (saksnummer) {
-      åpneFagsak(saksnummer);
-    }
-  };
-
 const sorterFagsaker = (fagsak1: FagsakEnkel, fagsak2: FagsakEnkel) => {
   if (fagsak1.status === FagsakStatus.AVSLUTTET && fagsak2.status !== FagsakStatus.AVSLUTTET) {
     return 1;
