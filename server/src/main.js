@@ -84,17 +84,23 @@ async function startApp() {
     });
 
     // return user info fetched from the Microsoft Graph API
-    server.get('/me', (req, res) => {
-      getUserInfoFromGraphApi(req.headers.authorization)
-        .then(userinfo => res.json(userinfo))
-        .catch(err => res.status(500).json(err));
+    server.get('/me', async (req, res, next) => {
+      try {
+        const userInfo = await getUserInfoFromGraphApi(req.headers.authorization);
+        return res.json(userInfo);
+      } catch (error) {
+        return next(error);
+      }
     });
 
     // return groups that the user is a member of from the Microsoft Graph API
-    server.get('/me/memberOf', (req, res) => {
-      getUserGroups(req.headers.authorization)
-        .then(userinfo => res.json(userinfo))
-        .catch(err => res.status(500).json(err));
+    server.get('/me/memberOf', async (req, res, next) => {
+      try {
+        const userInfo = await getUserInfoFromGraphApi(req.headers.authorization);
+        return res.json(userInfo);
+      } catch (error) {
+        return next(error);
+      }
     });
 
     reverseProxy.setup(server);
