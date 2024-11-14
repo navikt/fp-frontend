@@ -11,7 +11,7 @@ const stripTrailingSlash = str => (str.endsWith('/') ? str.slice(0, -1) : str);
 const proxyOptions = api => ({
   parseReqBody: false,
   timeout: 60000,
-  proxyReqOptDecorator: (options, req, res) => {
+  proxyReqOptDecorator: (options, req) => {
     const requestTime = Date.now();
     options.headers[xTimestamp] = requestTime;
     delete options.headers.cookie;
@@ -20,7 +20,7 @@ const proxyOptions = api => ({
       const token = getToken(req);
       if (!token) {
         logger.warning('Fant ikke Wonderwall token ved OBO-utveksling. Dette burde ikke inntreffe');
-        return res.status(401).send();
+        reject("Intet Wonderwall token");
       }
       requestAzureOboToken(token, api.scopes).then(obo  => {
         if (obo.ok) {
@@ -29,7 +29,7 @@ const proxyOptions = api => ({
           resolve(options);
         } else {
           logger.warning(`OBO-utveklsing for ${api.scopes} feilet.`);
-          return res.status(403).send();
+          reject(obo.error);
         }
       });
     });
