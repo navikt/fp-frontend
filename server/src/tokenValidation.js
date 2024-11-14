@@ -1,5 +1,5 @@
 import { getToken, validateToken } from "@navikt/oasis";
-import logger from './log.js';
+import logger from './logger.js';
 
 /**
  * Validerer token som kommer fra Wonderwall

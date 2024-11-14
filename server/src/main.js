@@ -3,7 +3,7 @@ import express from 'express';
 import helmet from 'helmet';
 import timeout from 'connect-timeout';
 import * as headers from './headers.js';
-import logger from './log.js';
+import logger from './logger.js';
 import { getIssuer } from './azure/issuer.js';
 import { serveViteMode } from '@navikt/vite-mode';
 

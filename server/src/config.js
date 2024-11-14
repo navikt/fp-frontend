@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import logger from './log.js';
+import logger from './logger.js';
 
 const envVar = ({ name, required = true }) => {
   if (!process.env[name] && required) {

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import logger from './log.js';
+import logger from './logger.js';
 import config from './config.js';
 import { requestOboToken } from '@navikt/oasis';
 
