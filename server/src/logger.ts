@@ -50,7 +50,7 @@ const warning = (msg: string) => {
   stdoutLogger.warn(msg.replaceAll(/[\n\r]/g, ""));
 };
 
-const error = (msg: string, err: Error) => {
+const error = (msg: string, err?: Error) => {
   if (err) {
     stdoutLogger.error(msg, { message: `: ${err.message}` });
   } else {
