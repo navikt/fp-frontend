@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
 
-import { Dropdown, InternalHeader, Link } from '@navikt/ds-react';
+import { Dropdown, InternalHeader, Link, Spacer } from '@navikt/ds-react';
 import { ExternalLinkIcon, MenuGridIcon } from '@navikt/aksel-icons';
 import { FeilmeldingPanel } from './components/FeilmeldingPanel';
 import { Feilmelding } from './typer/feilmeldingTsType';
@@ -58,8 +58,9 @@ export const DekoratorMedFeilviserSakIndex = ({
           <InternalHeader.Title href={tittelLenke} onClick={tittelCallback} onContextMenu={tittelCallback}>
             {tittel}
           </InternalHeader.Title>
+          <Spacer />
           <Dropdown>
-            <InternalHeader.Button as={Dropdown.Toggle} className={styles.button}>
+            <InternalHeader.Button as={Dropdown.Toggle}>
               <MenuGridIcon
                 style={{ fontSize: '1.5rem' }}
                 title={intl.formatMessage({ id: 'DekoratorMedFeilviserSakIndex.SystemerOgOppslagsverk' })}
