@@ -9,7 +9,7 @@ import { serveViteMode } from '@navikt/vite-mode';
 
 // for debugging during development
 import config from './config.js';
-import msgraph from './azure/msgraph.js';
+import { getUserGroups, getUserInfoFromGraphApi } from './azure/msgraph.js';
 import reverseProxy from './reverse-proxy.js';
 import { verifyToken } from './azure/tokenValidation.js';
 
@@ -88,16 +88,14 @@ async function startApp() {
 
     // return user info fetched from the Microsoft Graph API
     server.get('/me', (req, res) => {
-      msgraph
-        .getUserInfoFromGraphApi(req.headers.authorization)
+      getUserInfoFromGraphApi(req.headers.authorization)
         .then(userinfo => res.json(userinfo))
         .catch(err => res.status(500).json(err));
     });
 
     // return groups that the user is a member of from the Microsoft Graph API
     server.get('/me/memberOf', (req, res) => {
-      msgraph
-        .getUserGroups(req.headers.authorization)
+      getUserGroups(req.headers.authorization)
         .then(userinfo => res.json(userinfo))
         .catch(err => res.status(500).json(err));
     });

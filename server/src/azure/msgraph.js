@@ -21,19 +21,14 @@ const getGraphRequest = async (bearerToken, graphUrl) => {
   }
 }
 
-const getUserInfoFromGraphApi = bearerToken => {
+export const getUserInfoFromGraphApi = bearerToken => {
   const query =
     'onPremisesSamAccountName,displayName,givenName,mail,officeLocation,surname,userPrincipalName,id,jobTitle,memberOf';
   const { graphUrl } = config.azureAd;
   return getGraphRequest(bearerToken, `${graphUrl}/v1.0/me?$select=${query}`);
 };
 
-const getUserGroups = bearerToken => {
+export const getUserGroups = bearerToken => {
   const { graphUrl } = config.azureAd;
   return getGraphRequest(bearerToken, `${graphUrl}/v1.0/me/memberOf`);
-};
-
-export default {
-  getUserInfoFromGraphApi,
-  getUserGroups,
 };
