@@ -11,7 +11,7 @@ import { serveViteMode } from '@navikt/vite-mode';
 import config from './config.js';
 import msgraph from './azure/msgraph.js';
 import reverseProxy from './reverse-proxy.js';
-import { validateAuthorization } from './azure/validate.js';
+import { verifyToken } from './azure/tokenValidation.js';
 
 const server = express();
 const { port } = config.server;
@@ -77,24 +77,8 @@ async function startApp() {
       });
     });
 
-    const ensureAuthenticated = async (req, res, next) => {
-      const { authorization } = req.headers;
-      const loginPath = `/oauth2/login?redirect=${req.originalUrl}`;
-      if (!authorization) {
-        logger.debug('User token missing. Redirect til login.');
-        res.redirect(loginPath);
-      } else if (await validateAuthorization(authorization)) {
-        // Validate token and continue to app
-        logger.debug('User token is valid. Continue.');
-        next();
-      } else {
-        logger.debug('User token is NOT valid. Redirect til login.');
-        res.redirect(loginPath);
-      }
-    };
-
     // The routes below require the user to be authenticated
-    server.use(ensureAuthenticated);
+    server.use(verifyToken);
 
     server.get(['/logout'], async (req, res) => {
       if (req.headers.authorization) {
