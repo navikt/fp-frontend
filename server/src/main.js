@@ -96,7 +96,7 @@ async function startApp() {
     // return groups that the user is a member of from the Microsoft Graph API
     server.get('/me/memberOf', async (req, res, next) => {
       try {
-        const userInfo = await getUserInfoFromGraphApi(req.headers.authorization);
+        const userInfo = await getUserGroups(req.headers.authorization);
         return res.json(userInfo);
       } catch (error) {
         return next(error);
