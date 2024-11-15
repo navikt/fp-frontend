@@ -1,9 +1,9 @@
 import React, { FunctionComponent, ReactElement, useCallback, useState, MouseEvent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { HGrid, HStack, Link, VStack } from '@navikt/ds-react';
-import { VilkarUtfallType } from '@navikt/ft-kodeverk';
+import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
-import { Behandling } from '@navikt/ft-types';
+import { Behandling } from '@navikt/fp-types';
 
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';

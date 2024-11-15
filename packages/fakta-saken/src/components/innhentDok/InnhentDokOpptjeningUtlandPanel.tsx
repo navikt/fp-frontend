@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Heading } from '@navikt/ds-react';
 
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaBegrunnelseTextFieldNew, FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
 import { AksjonspunktBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { required } from '@navikt/ft-form-validators';
@@ -19,7 +19,7 @@ const OpptjeningIUtlandDokStatus = {
 };
 
 const transformValues = (values: FormValues): MerkOpptjeningUtlandAp => ({
-  kode: AksjonspunktCode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
+  kode: AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
   ...values,
 });
 

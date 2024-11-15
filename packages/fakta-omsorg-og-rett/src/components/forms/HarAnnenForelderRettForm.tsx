@@ -6,10 +6,9 @@ import { Form, TextAreaField } from '@navikt/ft-form-hooks';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
-import { Aksjonspunkt } from '@navikt/ft-types';
-import { Ytelsefordeling } from '@navikt/fp-types';
+import { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
 import { AvklarAnnenforelderHarRettAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
 import { HarAnnenForelderRettFelter } from './HarAnnenForelderRettFelter';
 
@@ -61,7 +60,7 @@ export const HarAnnenForelderRettForm = ({
   const transformerFeltverdier = useCallback(
     (feltVerdier: FormValues) =>
       submitCallback({
-        kode: AksjonspunktCode.AVKLAR_ANNEN_FORELDER_RETT,
+        kode: AksjonspunktKode.AVKLAR_ANNEN_FORELDER_RETT,
         annenforelderHarRett: feltVerdier.harAnnenForelderRett,
         annenforelderMottarUføretrygd: feltVerdier.mottarAnnenForelderUforetrygd,
         annenForelderHarRettEØS: feltVerdier.harAnnenForelderRettEØS,
@@ -74,7 +73,7 @@ export const HarAnnenForelderRettForm = ({
     <Form formMethods={formMethods} onSubmit={transformerFeltverdier} setDataOnUnmount={setFormData}>
       <FaktaGruppe
         withoutBorder
-        merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.AVKLAR_ANNEN_FORELDER_RETT]}
+        merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.AVKLAR_ANNEN_FORELDER_RETT]}
       >
         <VStack gap="6">
           <HarAnnenForelderRettFelter

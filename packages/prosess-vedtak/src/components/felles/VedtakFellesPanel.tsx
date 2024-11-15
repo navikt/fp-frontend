@@ -5,13 +5,13 @@ import { ArrowForwardIcon, CheckmarkCircleFillIcon, PencilIcon, XMarkOctagonFill
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer, OkAvbrytModal } from '@navikt/ft-ui-komponenter';
 
 import {
-  avslagsarsakCodes,
-  behandlingStatus as behandlingStatusCode,
-  konsekvensForYtelsen,
+  Avslagsarsak,
+  BehandlingStatus as behandlingStatusCode,
+  KonsekvensForYtelsen,
   isAvslag,
   isInnvilget,
   isOpphor,
-  AksjonspunktCode,
+  AksjonspunktKode,
 } from '@navikt/fp-kodeverk';
 import { AsyncPollingStatus } from '@navikt/fp-rest-api';
 import { Behandling, Aksjonspunkt, Behandlingsresultat } from '@navikt/fp-types';
@@ -32,14 +32,12 @@ const kanSendesTilGodkjenning = (behandlingStatusKode: string): boolean =>
   behandlingStatusKode === behandlingStatusCode.BEHANDLING_UTREDES;
 
 const finnKnappetekstkode = (aksjonspunkter: Aksjonspunkt[], skalBrukeManueltBrev: boolean): string =>
-  aksjonspunkter?.some(ap => ap.definisjon === AksjonspunktCode.FORESLA_VEDTAK) || skalBrukeManueltBrev
+  aksjonspunkter?.some(ap => ap.definisjon === AksjonspunktKode.FORESLA_VEDTAK) || skalBrukeManueltBrev
     ? 'VedtakForm.TilGodkjenning'
     : 'VedtakForm.FattVedtak';
 
 const finnSkalViseLink = (behandlingsresultat: Behandlingsresultat): boolean =>
-  behandlingsresultat.avslagsarsak
-    ? behandlingsresultat.avslagsarsak !== avslagsarsakCodes.INGEN_BEREGNINGSREGLER
-    : true;
+  behandlingsresultat.avslagsarsak ? behandlingsresultat.avslagsarsak !== Avslagsarsak.INGEN_BEREGNINGSREGLER : true;
 
 const harIkkeKonsekvenserForYtelsen = (
   konsekvenserForYtelsenKoder: string[],
@@ -124,7 +122,7 @@ const VedtakFellesPanel: FunctionComponent<OwnProps> = ({
   const harIkkeKonsekvensForYtelse = useMemo(
     () =>
       harIkkeKonsekvenserForYtelsen(
-        [konsekvensForYtelsen.ENDRING_I_FORDELING_AV_YTELSEN, konsekvensForYtelsen.INGEN_ENDRING],
+        [KonsekvensForYtelsen.ENDRING_I_FORDELING_AV_YTELSEN, KonsekvensForYtelsen.INGEN_ENDRING],
         behandlingsresultat,
       ),
     [behandlingsresultat],

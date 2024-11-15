@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { SakenFaktaIndex } from '@navikt/fp-fakta-saken';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { AksessRettigheter, Fagsak, Soknad } from '@navikt/fp-types';
@@ -11,13 +11,13 @@ import FaktaDefaultInitPanel from '../../felles/fakta/FaktaDefaultInitPanel';
 import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [
-  AksjonspunktCode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
-  AksjonspunktCode.OVERSTYR_AVKLAR_STARTDATO,
-  AksjonspunktCode.AVKLAR_DEKNINGSGRAD,
-  AksjonspunktCode.OVERSTYR_DEKNINGSGRAD,
+  AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
+  AksjonspunktKode.OVERSTYR_AVKLAR_STARTDATO,
+  AksjonspunktKode.AVKLAR_DEKNINGSGRAD,
+  AksjonspunktKode.OVERSTYR_DEKNINGSGRAD,
 ];
 
-const OVERSTYRING_AP_CODES = [AksjonspunktCode.OVERSTYR_AVKLAR_STARTDATO, AksjonspunktCode.OVERSTYR_DEKNINGSGRAD];
+const OVERSTYRING_AP_CODES = [AksjonspunktKode.OVERSTYR_AVKLAR_STARTDATO, AksjonspunktKode.OVERSTYR_DEKNINGSGRAD];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.UTLAND_DOK_STATUS, BehandlingApiKeys.SOKNAD];
 type EndepunktPanelData = {

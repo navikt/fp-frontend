@@ -14,7 +14,7 @@ import { RestApiState, useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hoo
 import { parseQueryString, replaceNorwegianCharacters } from '@navikt/ft-utils';
 import { Location } from 'history';
 
-import { BehandlingType, FagsakYtelseType } from '@navikt/ft-kodeverk';
+import { BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { NavigateFunction, useLocation, useNavigate } from 'react-router';
 import BehandlingPaVent from './felles/modaler/paVent/BehandlingPaVent';
 import StandardPropsProvider from './felles/utils/standardPropsStateContext';

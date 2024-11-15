@@ -2,7 +2,7 @@ import React, { FunctionComponent, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { KodeverkMedNavn } from '@navikt/fp-types';
-import { behandlingType as BehandlingType, KodeverkType, venteArsakType, dokumentMalType } from '@navikt/fp-kodeverk';
+import { BehandlingType, KodeverkType, VenteArsakType, DokumentMalType } from '@navikt/fp-kodeverk';
 import { MeldingerSakIndex, MessagesModalSakIndex, FormValues } from '@navikt/fp-sak-meldinger';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
@@ -33,9 +33,9 @@ const getSubmitCallback =
   ) =>
   (values: FormValues) => {
     const skalSettePåVent =
-      values.brevmalkode === dokumentMalType.INNHENTE_OPPLYSNINGER ||
-      values.brevmalkode === dokumentMalType.VARSEL_OM_REVURDERING ||
-      values.brevmalkode === dokumentMalType.ETTERLYS_INNTEKTSMELDING;
+      values.brevmalkode === DokumentMalType.INNHENTE_OPPLYSNINGER ||
+      values.brevmalkode === DokumentMalType.VARSEL_OM_REVURDERING ||
+      values.brevmalkode === DokumentMalType.ETTERLYS_INNTEKTSMELDING;
     const erTilbakekreving =
       BehandlingType.TILBAKEKREVING === behandlingTypeKode ||
       BehandlingType.TILBAKEKREVING_REVURDERING === behandlingTypeKode;
@@ -213,7 +213,7 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
       {submitFinished && showSettPaVentModal && (
         <SettPaVentReadOnlyModal
           lukkCallback={handleSubmitFromModal}
-          ventearsak={venteArsakType.AVV_DOK}
+          ventearsak={VenteArsakType.AVV_DOK}
           ventearsaker={ventearsaker}
         />
       )}

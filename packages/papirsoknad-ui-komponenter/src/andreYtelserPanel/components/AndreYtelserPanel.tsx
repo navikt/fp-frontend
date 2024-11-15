@@ -4,7 +4,7 @@ import { Heading } from '@navikt/ds-react';
 import { CheckboxField } from '@navikt/ft-form-hooks';
 import { ArrowBox, BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
-import { arbeidType, KodeverkType } from '@navikt/fp-kodeverk';
+import { ArbeidType, KodeverkType } from '@navikt/fp-kodeverk';
 
 import { useFormContext } from 'react-hook-form';
 import {
@@ -20,13 +20,13 @@ const removeArbeidstyper = (
   kunMiliterEllerSiviltjeneste?: boolean,
 ): KodeverkMedNavn[] => {
   if (kunMiliterEllerSiviltjeneste) {
-    return andreYtelser.filter(ay => ay.kode === arbeidType.MILITÆR_ELLER_SIVILTJENESTE);
+    return andreYtelser.filter(ay => ay.kode === ArbeidType.MILITÆR_ELLER_SIVILTJENESTE);
   }
   return andreYtelser.filter(
     ay =>
-      ay.kode !== arbeidType.UTENLANDSK_ARBEIDSFORHOLD &&
-      ay.kode !== arbeidType.FRILANSER &&
-      ay.kode !== arbeidType.LONN_UNDER_UTDANNING,
+      ay.kode !== ArbeidType.UTENLANDSK_ARBEIDSFORHOLD &&
+      ay.kode !== ArbeidType.FRILANSER &&
+      ay.kode !== ArbeidType.LONN_UNDER_UTDANNING,
   );
 };
 

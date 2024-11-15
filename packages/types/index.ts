@@ -194,3 +194,4 @@ export type {
   VedtakUtbetaling,
   Sak,
 } from './src/infotrygdVedtakTsType';
+export type { Vilkarperiode } from './src/vilkarperiodeTsType';

@@ -5,11 +5,16 @@ import {
   FordelBeregningsgrunnlagFaktaIndex,
   FaktaFordelBeregningAvklaringsbehovCode,
 } from '@navikt/ft-fakta-fordel-beregningsgrunnlag';
-import { Beregningsgrunnlag, Vilkar, Vilkarperiode } from '@navikt/ft-types';
 
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import { ArbeidsgiverOpplysningerPerId, Vilkar as FpVilkar } from '@navikt/fp-types';
-import { VilkarType, AksjonspunktCode } from '@navikt/fp-kodeverk';
+import {
+  Beregningsgrunnlag,
+  Vilkar,
+  Vilkarperiode,
+  ArbeidsgiverOpplysningerPerId,
+  Vilkar as FpVilkar,
+} from '@navikt/fp-types';
+import { VilkarType, AksjonspunktKode } from '@navikt/fp-kodeverk';
 
 import FaktaPanelInitProps from '../../felles/typer/faktaPanelInitProps';
 import FaktaDefaultInitPanel from '../../felles/fakta/FaktaDefaultInitPanel';
@@ -20,9 +25,9 @@ import '@navikt/ft-fakta-fordel-beregningsgrunnlag/dist/style.css';
 const mapBGKodeTilFpsakKode = (bgKode: string): string => {
   switch (bgKode) {
     case FaktaFordelBeregningAvklaringsbehovCode.FORDEL_BEREGNINGSGRUNNLAG:
-      return AksjonspunktCode.FORDEL_BEREGNINGSGRUNNLAG;
+      return AksjonspunktKode.FORDEL_BEREGNINGSGRUNNLAG;
     case FaktaFordelBeregningAvklaringsbehovCode.VURDER_REFUSJON_BERGRUNN:
-      return AksjonspunktCode.VURDER_REFUSJON_BERGRUNN;
+      return AksjonspunktKode.VURDER_REFUSJON_BERGRUNN;
     default:
       throw new Error(`Ukjent avklaringspunkt ${bgKode}`);
   }
@@ -80,7 +85,7 @@ const lagFormatertBG = (beregningsgrunnlag: Beregningsgrunnlag): Beregningsgrunn
   return [nyttBG];
 };
 
-const AKSJONSPUNKT_KODER = [AksjonspunktCode.FORDEL_BEREGNINGSGRUNNLAG, AksjonspunktCode.VURDER_REFUSJON_BERGRUNN];
+const AKSJONSPUNKT_KODER = [AksjonspunktKode.FORDEL_BEREGNINGSGRUNNLAG, AksjonspunktKode.VURDER_REFUSJON_BERGRUNN];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.BEREGNINGSGRUNNLAG];
 type EndepunktPanelData = {

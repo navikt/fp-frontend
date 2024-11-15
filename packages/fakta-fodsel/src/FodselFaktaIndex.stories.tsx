@@ -2,7 +2,7 @@ import React from 'react';
 import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { AksjonspunktCode, aksjonspunktStatus, soknadType, behandlingType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus, SoknadType, BehandlingType } from '@navikt/fp-kodeverk';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { Behandling, FamilieHendelse, FamilieHendelseSamling, Soknad, Aksjonspunkt } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
@@ -15,7 +15,7 @@ import '@navikt/ft-form-hooks/dist/style.css';
 const behandling = {
   uuid: '1',
   versjon: 1,
-  type: behandlingType.FORSTEGANGSSOKNAD,
+  type: BehandlingType.FORSTEGANGSSOKNAD,
 } as Behandling;
 
 const familieHendelse = {
@@ -48,7 +48,7 @@ const soknad = {
   termindato: '2019-01-01',
   utstedtdato: '2019-01-02',
   antallBarn: 1,
-  soknadType: soknadType.FODSEL,
+  soknadType: SoknadType.FODSEL,
 } as Soknad;
 
 const soknadOriginalBehandling = {
@@ -67,8 +67,8 @@ const familiehendelseOriginalBehandling = {
 
 const defaultAksjonspunkter = [
   {
-    definisjon: AksjonspunktCode.TERMINBEKREFTELSE,
-    status: aksjonspunktStatus.OPPRETTET,
+    definisjon: AksjonspunktKode.TERMINBEKREFTELSE,
+    status: AksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
   },
@@ -117,7 +117,7 @@ export const AksjonspunktTerminbekreftelse = Template.bind({});
 AksjonspunktTerminbekreftelse.args = {
   aksjonspunkter: defaultAksjonspunkter,
   alleMerknaderFraBeslutter: {
-    [AksjonspunktCode.TERMINBEKREFTELSE]: merknaderFraBeslutter,
+    [AksjonspunktKode.TERMINBEKREFTELSE]: merknaderFraBeslutter,
   },
   submitCallback: action('button-click') as (data: any) => Promise<any>,
 };
@@ -126,10 +126,10 @@ export const AksjonspunktSjekkManglendeFødsel = Template.bind({});
 AksjonspunktSjekkManglendeFødsel.args = {
   aksjonspunkter: defaultAksjonspunkter.map(a => ({
     ...a,
-    definisjon: AksjonspunktCode.SJEKK_MANGLENDE_FODSEL,
+    definisjon: AksjonspunktKode.SJEKK_MANGLENDE_FODSEL,
   })),
   alleMerknaderFraBeslutter: {
-    [AksjonspunktCode.SJEKK_MANGLENDE_FODSEL]: merknaderFraBeslutter,
+    [AksjonspunktKode.SJEKK_MANGLENDE_FODSEL]: merknaderFraBeslutter,
   },
   submitCallback: action('button-click') as (data: any) => Promise<any>,
 };
@@ -140,12 +140,12 @@ ReadonlyPanel.args = {
   harApneAksjonspunkter: false,
   aksjonspunkter: defaultAksjonspunkter.map(a => ({
     ...a,
-    status: aksjonspunktStatus.UTFORT,
-    definisjon: AksjonspunktCode.SJEKK_MANGLENDE_FODSEL,
+    status: AksjonspunktStatus.UTFORT,
+    definisjon: AksjonspunktKode.SJEKK_MANGLENDE_FODSEL,
     begrunnelse: 'Dette er en begrunnelse',
   })),
   alleMerknaderFraBeslutter: {
-    [AksjonspunktCode.SJEKK_MANGLENDE_FODSEL]: merknaderFraBeslutter,
+    [AksjonspunktKode.SJEKK_MANGLENDE_FODSEL]: merknaderFraBeslutter,
   },
   submitCallback: action('button-click') as (data: any) => Promise<any>,
 };

@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { Button, VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 
-import { familieHendelseType as fht } from '@navikt/fp-kodeverk';
+import { FamilieHendelseType } from '@navikt/fp-kodeverk';
 
 import OmsorgOgAdopsjonPapirsoknadIndex from './OmsorgOgAdopsjonPapirsoknadIndex';
 
@@ -45,12 +45,12 @@ type Story = StoryObj<typeof meta>;
 
 export const ForFodsel: Story = {
   args: {
-    familieHendelseType: fht.FODSEL,
+    familieHendelseType: FamilieHendelseType.FODSEL,
   },
 };
 
 export const ForAdopsjon: Story = {
   args: {
-    familieHendelseType: fht.ADOPSJON,
+    familieHendelseType: FamilieHendelseType.ADOPSJON,
   },
 };

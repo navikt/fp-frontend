@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useCallback, useState } from 'react';
 
-import { klageVurdering as klageVurderingKodeverk, AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { KlageVurdering as KlageVurderingKodeverk, AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   KlagevurderingProsessIndex,
   AksjonspunktVerdier,
@@ -55,8 +55,8 @@ const getLagringSideeffekter =
   (aksjonspunktModels: { kode: string; klageVurdering?: string }[]) => {
     const skalByttTilKlageinstans = aksjonspunktModels.some(
       apValue =>
-        apValue.kode === AksjonspunktCode.BEHANDLE_KLAGE_NFP &&
-        apValue.klageVurdering === klageVurderingKodeverk.STADFESTE_YTELSESVEDTAK,
+        apValue.kode === AksjonspunktKode.BEHANDLE_KLAGE_NFP &&
+        apValue.klageVurdering === KlageVurderingKodeverk.STADFESTE_YTELSESVEDTAK,
     );
 
     if (skalByttTilKlageinstans) {

@@ -14,7 +14,7 @@ import {
   KodeverkMedNavn,
 } from '@navikt/fp-types';
 import { BekreftSvangerskapspengerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
 import { Alert, HStack, VStack } from '@navikt/ds-react';
 
@@ -37,7 +37,7 @@ const sorterArbeidsforhold = (
   });
 
 const getAksjonspunktBegrunnelse = (aksjonspunkter: Aksjonspunkt[]): string | undefined => {
-  const aksjonpunkt = aksjonspunkter.find(ap => ap.definisjon === AksjonspunktCode.FODSELTILRETTELEGGING);
+  const aksjonpunkt = aksjonspunkter.find(ap => ap.definisjon === AksjonspunktKode.FODSELTILRETTELEGGING);
   return aksjonpunkt ? aksjonpunkt.begrunnelse : undefined;
 };
 
@@ -144,7 +144,7 @@ export const TilretteleggingFaktaForm = ({
         return Promise.resolve();
       }
       return submitCallback({
-        kode: AksjonspunktCode.FODSELTILRETTELEGGING,
+        kode: AksjonspunktKode.FODSELTILRETTELEGGING,
         termindato: values.termindato,
         fødselsdato: values.fødselsdato,
         begrunnelse: values.begrunnelse,

@@ -12,7 +12,7 @@ import {
 } from '@navikt/fp-types';
 import { Datepicker, NumberField, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidDecimal, maxValue, minValue, required } from '@navikt/ft-form-validators';
-import { tilretteleggingType } from '@navikt/fp-kodeverk';
+import { TilretteleggingType } from '@navikt/fp-kodeverk';
 
 import { TilretteleggingInfoPanel } from './TilretteleggingInfoPanel';
 
@@ -74,14 +74,14 @@ export const finnProsentSvangerskapspenger = (
   velferdspermisjonprosent: number,
   brukOverstyrtUtbetalingsgrad = true,
 ): number | undefined => {
-  if (tilrettelegging.type === tilretteleggingType.HEL_TILRETTELEGGING) {
+  if (tilrettelegging.type === TilretteleggingType.HEL_TILRETTELEGGING) {
     return undefined;
   }
   if (brukOverstyrtUtbetalingsgrad && tilrettelegging.overstyrtUtbetalingsgrad) {
     return tilrettelegging.overstyrtUtbetalingsgrad;
   }
 
-  return tilrettelegging.type === tilretteleggingType.INGEN_TILRETTELEGGING
+  return tilrettelegging.type === TilretteleggingType.INGEN_TILRETTELEGGING
     ? 100
     : finnUtbetalingsgradForTilrettelegging(
         stillingsprosentArbeidsforhold,
@@ -231,22 +231,22 @@ export const TilretteleggingForm = ({
             radios={[
               {
                 label: intl.formatMessage({ id: 'TilretteleggingForm.KanGjennomfores' }),
-                value: tilretteleggingType.HEL_TILRETTELEGGING,
+                value: TilretteleggingType.HEL_TILRETTELEGGING,
               },
               {
                 label: intl.formatMessage({ id: 'TilretteleggingForm.RedusertArbeid' }),
-                value: tilretteleggingType.DELVIS_TILRETTELEGGING,
+                value: TilretteleggingType.DELVIS_TILRETTELEGGING,
               },
               {
                 label: intl.formatMessage({ id: 'TilretteleggingForm.KanIkkeGjennomfores' }),
-                value: tilretteleggingType.INGEN_TILRETTELEGGING,
+                value: TilretteleggingType.INGEN_TILRETTELEGGING,
               },
             ]}
           />
-          {formValues.type === tilretteleggingType.DELVIS_TILRETTELEGGING && (
+          {formValues.type === TilretteleggingType.DELVIS_TILRETTELEGGING && (
             <>
               {(tilrettelegging.stillingsprosent === undefined ||
-                tilrettelegging.type !== tilretteleggingType.DELVIS_TILRETTELEGGING ||
+                tilrettelegging.type !== TilretteleggingType.DELVIS_TILRETTELEGGING ||
                 erNyPeriode ||
                 formValues.kilde === SvpTilretteleggingFomKilde.REGISTRERT_AV_SAKSBEHANDLER) && (
                 <NumberField

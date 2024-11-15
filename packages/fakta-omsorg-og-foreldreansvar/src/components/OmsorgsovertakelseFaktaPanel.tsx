@@ -3,7 +3,7 @@ import { useIntl, FormattedMessage } from 'react-intl';
 import { BodyShort, HStack, Label } from '@navikt/ds-react';
 
 import { Datepicker } from '@navikt/ft-form-hooks';
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { FamilieHendelse, Soknad } from '@navikt/fp-types';
@@ -53,7 +53,7 @@ const OmsorgsovertakelseFaktaPanel: FunctionComponent<OwnProps> & StaticFunction
           ? 'OmsorgOgForeldreansvarFaktaForm.ForeldreansvarInfo'
           : 'OmsorgOgForeldreansvarFaktaForm.OmsorgInfo',
       })}
-      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.OMSORGSOVERTAKELSE]}
+      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OMSORGSOVERTAKELSE]}
     >
       <HStack gap="10">
         <Datepicker

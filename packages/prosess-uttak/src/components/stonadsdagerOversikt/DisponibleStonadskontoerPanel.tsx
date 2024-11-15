@@ -3,7 +3,7 @@ import { FormattedMessage, useIntl, IntlShape } from 'react-intl';
 import { Label, BodyShort, HStack } from '@navikt/ds-react';
 
 import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
-import { StonadskontoType, uttakArbeidType as uttakArbeidTypeKodeverk } from '@navikt/fp-kodeverk';
+import { StonadskontoType, UttakArbeidType as uttakArbeidTypeKodeverk } from '@navikt/fp-kodeverk';
 import { AktivitetIdentifikator, AktivitetSaldo, ArbeidsgiverOpplysningerPerId, Stonadskonto } from '@navikt/fp-types';
 
 import uttakArbeidTypeTekstCodes from '../../utils/uttakArbeidTypeCodes';

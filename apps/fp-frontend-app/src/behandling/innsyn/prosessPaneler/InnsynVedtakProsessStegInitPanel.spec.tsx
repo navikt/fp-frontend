@@ -3,14 +3,19 @@ import { RawIntlProvider } from 'react-intl';
 import { render, screen, waitFor } from '@testing-library/react';
 import MockAdapter from 'axios-mock-adapter';
 import userEvent from '@testing-library/user-event';
-import { AksjonspunktStatus, FagsakYtelseType, BehandlingStatus, VilkarUtfallType } from '@navikt/ft-kodeverk';
-import { Aksjonspunkt } from '@navikt/ft-types';
 import { createIntl } from '@navikt/ft-utils';
 
 import { RestApiMock } from '@navikt/fp-utils-test';
-import { AksjonspunktCode, dokumentMalType } from '@navikt/fp-kodeverk';
+import {
+  AksjonspunktStatus,
+  FagsakYtelseType,
+  BehandlingStatus,
+  VilkarUtfallType,
+  AksjonspunktKode,
+  DokumentMalType,
+} from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import { Behandling, Fagsak } from '@navikt/fp-types';
+import { Aksjonspunkt, Behandling, Fagsak } from '@navikt/fp-types';
 
 import * as Felles from '../../felles/prosess/useStandardProsessPanelProps';
 import InnsynVedtakProsessStegInitPanel from './InnsynVedtakProsessStegInitPanel';
@@ -36,12 +41,12 @@ const kodeverk = alleKodeverk as AlleKodeverk;
 
 const aksjonspunkter = [
   {
-    definisjon: AksjonspunktCode.FORESLA_VEDTAK,
+    definisjon: AksjonspunktKode.FORESLA_VEDTAK,
     kanLoses: true,
     status: AksjonspunktStatus.OPPRETTET,
   },
   {
-    definisjon: AksjonspunktCode.VURDER_INNSYN,
+    definisjon: AksjonspunktKode.VURDER_INNSYN,
     kanLoses: false,
     status: AksjonspunktStatus.UTFORT,
     begrunnelse: 'Dette er en begrunnelse',
@@ -136,7 +141,7 @@ describe('<InnsynVedtakProsessStegInitPanel>', () => {
       JSON.stringify({
         fritekst: ' ',
         mottaker: '',
-        dokumentMal: dokumentMalType.INNSYN_SVAR,
+        dokumentMal: DokumentMalType.INNSYN_SVAR,
         gjelderVedtak: true,
         behandlingUuid: 'test-uuid',
         fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,

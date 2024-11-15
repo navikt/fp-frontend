@@ -1,7 +1,7 @@
 import React from 'react';
 import { StoryFn } from '@storybook/react';
 import { Aktor, FagsakEnkel } from '@navikt/fp-types';
-import { navBrukerKjonn, fagsakStatus, fagsakYtelseType, KodeverkType } from '@navikt/fp-kodeverk';
+import { NavBrukerKjonn, FagsakStatus, FagsakYtelseType, KodeverkType } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { AktorSakIndex } from './AktorSakIndex';
 
@@ -10,8 +10,8 @@ import '@navikt/ft-plattform-komponenter/dist/style.css';
 
 const fagsak = {
   saksnummer: '35425245',
-  fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
-  status: fagsakStatus.UNDER_BEHANDLING,
+  fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+  status: FagsakStatus.UNDER_BEHANDLING,
   opprettet: '2020-01-01',
   endret: '2020-01-01',
 } as FagsakEnkel;
@@ -49,7 +49,7 @@ Default.args = {
     ],
     person: {
       navn: 'Espen Utvikler',
-      kjønn: navBrukerKjonn.MANN,
+      kjønn: NavBrukerKjonn.MANN,
       fødselsdato: '1979-01-01',
       fødselsnummer: '123456233',
       aktørId: '2323',

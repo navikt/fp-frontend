@@ -1,6 +1,4 @@
-const soknadType = {
-  FODSEL: 'ST-001',
-  ADOPSJON: 'ST-002',
-};
-
-export default soknadType;
+export enum SoknadType {
+  FODSEL = 'ST-001',
+  ADOPSJON = 'ST-002',
+}

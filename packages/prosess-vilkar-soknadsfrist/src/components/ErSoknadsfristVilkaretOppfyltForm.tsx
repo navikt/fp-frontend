@@ -7,11 +7,11 @@ import { Detail, Heading, Panel, BodyShort } from '@navikt/ds-react';
 import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import {
   KodeverkType,
-  soknadType,
-  vilkarUtfallType,
+  SoknadType,
+  VilkarUtfallType,
   getKodeverknavnFn,
-  AksjonspunktCode,
-  aksjonspunktStatus,
+  AksjonspunktKode,
+  AksjonspunktStatus,
   VilkarType,
 } from '@navikt/fp-kodeverk';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
@@ -37,7 +37,7 @@ type FormValues = {
 };
 
 const findTextCode = (soknad: Soknad, familiehendelse: FamilieHendelse): string => {
-  if (soknad.soknadType === soknadType.FODSEL) {
+  if (soknad.soknadType === SoknadType.FODSEL) {
     const soknadFodselsdato = soknad.fodselsdatoer ? Object.values(soknad.fodselsdatoer)[0] : undefined;
     const fodselsdato =
       familiehendelse?.avklartBarn && familiehendelse.avklartBarn.length > 0
@@ -51,7 +51,7 @@ const findTextCode = (soknad: Soknad, familiehendelse: FamilieHendelse): string 
 };
 
 const findDate = (soknad: Soknad, familiehendelse: FamilieHendelse): string | undefined => {
-  if (soknad.soknadType === soknadType.FODSEL) {
+  if (soknad.soknadType === SoknadType.FODSEL) {
     const soknadFodselsdato = soknad.fodselsdatoer ? Object.values(soknad.fodselsdatoer)[0] : undefined;
     const fodselsdato =
       familiehendelse?.avklartBarn && familiehendelse.avklartBarn.length > 0
@@ -67,13 +67,13 @@ const findDate = (soknad: Soknad, familiehendelse: FamilieHendelse): string | un
 
 export const buildInitialValues = (aksjonspunkter: Aksjonspunkt[], status: string): FormValues => ({
   erVilkarOk:
-    aksjonspunkter[0].status === aksjonspunktStatus.OPPRETTET ? undefined : vilkarUtfallType.OPPFYLT === status,
+    aksjonspunkter[0].status === AksjonspunktStatus.OPPRETTET ? undefined : VilkarUtfallType.OPPFYLT === status,
   ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
 });
 
 const transformValues = (values: FormValues): SoknadsfristAp => ({
   erVilkarOk: values.erVilkarOk || false,
-  kode: AksjonspunktCode.SOKNADSFRISTVILKARET,
+  kode: AksjonspunktKode.SOKNADSFRISTVILKARET,
   ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
 });
 

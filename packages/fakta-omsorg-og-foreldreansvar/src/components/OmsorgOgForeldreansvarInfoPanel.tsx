@@ -5,7 +5,7 @@ import { VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { FaktaBegrunnelseTextFieldNew, FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
 import { Form } from '@navikt/ft-form-hooks';
-import { AksjonspunktCode, getKodeverknavnFn, hasAksjonspunkt, KodeverkType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, getKodeverknavnFn, hasAksjonspunkt, KodeverkType } from '@navikt/fp-kodeverk';
 import {
   Aksjonspunkt,
   FamilieHendelse,
@@ -43,8 +43,8 @@ const buildInitialValues = (
 ): FormValues => {
   const aksjonspunkt = aksjonspunkter.find(
     ap =>
-      ap.definisjon === AksjonspunktCode.OMSORGSOVERTAKELSE ||
-      ap.definisjon === AksjonspunktCode.AVKLAR_VILKAR_FOR_FORELDREANSVAR,
+      ap.definisjon === AksjonspunktKode.OMSORGSOVERTAKELSE ||
+      ap.definisjon === AksjonspunktKode.AVKLAR_VILKAR_FOR_FORELDREANSVAR,
   );
   return {
     ...OmsorgOgForeldreansvarFaktaForm.buildInitialValues(
@@ -110,7 +110,7 @@ export const OmsorgOgForeldreansvarInfoPanel = ({
   const begrunnelse = formMethods.watch('begrunnelse');
 
   const erAksjonspunktForeldreansvar = hasAksjonspunkt(
-    AksjonspunktCode.AVKLAR_VILKAR_FOR_FORELDREANSVAR,
+    AksjonspunktKode.AVKLAR_VILKAR_FOR_FORELDREANSVAR,
     aksjonspunkter,
   );
 

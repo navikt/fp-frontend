@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl';
 
 import { Form } from '@navikt/ft-form-hooks';
 import { Aksjonspunkt, Verge, AlleKodeverk, AlleKodeverkTilbakekreving } from '@navikt/fp-types';
-import { AksjonspunktCode, KodeverkType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, KodeverkType } from '@navikt/fp-kodeverk';
 import { FaktaBegrunnelseTextFieldNew, FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { AvklarVergeAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -17,7 +17,7 @@ type FormValues = RegistrereFormValues & {
 
 const buildInitialValues = (verge: Verge, aksjonspunkter: Aksjonspunkt[]): FormValues => ({
   begrunnelse: FaktaBegrunnelseTextFieldNew.buildInitialValues(
-    aksjonspunkter.filter(ap => ap.definisjon === AksjonspunktCode.AVKLAR_VERGE)[0],
+    aksjonspunkter.filter(ap => ap.definisjon === AksjonspunktKode.AVKLAR_VERGE)[0],
   ).begrunnelse,
   ...RegistrereVergeFaktaForm.buildInitialValues(verge || {}),
 });

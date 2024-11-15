@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 
 import { AlleKodeverk } from '@navikt/fp-types';
-import { familieHendelseType, foreldreType } from '@navikt/fp-kodeverk';
+import { FamilieHendelseType, ForeldreType } from '@navikt/fp-kodeverk';
 import {
   SprakPapirsoknadIndex,
   RettigheterPapirsoknadIndex,
@@ -53,19 +53,19 @@ const RegistreringFodselGrid: FunctionComponent<OwnProps> & StaticFunctions = ({
 }) => (
   <HStack justify="space-between">
     <div className={styles.col}>
-      {soknadData.getForeldreType() !== foreldreType.MOR && (
+      {soknadData.getForeldreType() !== ForeldreType.MOR && (
         <RettigheterPapirsoknadIndex readOnly={readOnly} soknadData={soknadData} />
       )}
       <OppholdINorgePapirsoknadIndex
         readOnly={readOnly}
-        erAdopsjon={soknadData.getFamilieHendelseType() !== familieHendelseType.ADOPSJON}
+        erAdopsjon={soknadData.getFamilieHendelseType() !== FamilieHendelseType.ADOPSJON}
         alleKodeverk={alleKodeverk}
         mottattDato={mottattDato}
       />
       <SprakPapirsoknadIndex readOnly={readOnly} />
     </div>
     <div className={styles.col}>
-      {soknadData.getForeldreType() !== foreldreType.MOR && (
+      {soknadData.getForeldreType() !== ForeldreType.MOR && (
         <OmsorgOgAdopsjonPapirsoknadIndex
           readOnly={readOnly}
           familieHendelseType={soknadData.getFamilieHendelseType()}
@@ -73,7 +73,7 @@ const RegistreringFodselGrid: FunctionComponent<OwnProps> & StaticFunctions = ({
           fodselsdato={fodselsdato}
         />
       )}
-      <FodselPapirsoknadIndex readOnly={readOnly} erForeldrepenger={false}/>
+      <FodselPapirsoknadIndex readOnly={readOnly} erForeldrepenger={false} />
     </div>
   </HStack>
 );

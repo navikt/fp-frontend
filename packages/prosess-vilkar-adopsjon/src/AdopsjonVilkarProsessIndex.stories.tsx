@@ -2,7 +2,7 @@ import React from 'react';
 import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { AksjonspunktCode, avslagsarsakCodes, vilkarUtfallType, aksjonspunktStatus } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, Avslagsarsak, VilkarUtfallType, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Behandling, Fagsak, Vilkar } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -56,14 +56,14 @@ export const ÅpentAksjonspunkt = Template.bind({});
   behandling: defaultBehandling,
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+      status: AksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
     },
   ] as Aksjonspunkt[],
   isReadOnly: false,
   readOnlySubmitButton: false,
-  status: vilkarUtfallType.IKKE_VURDERT,
+  status: VilkarUtfallType.IKKE_VURDERT,
 };
 
 export const OppfyltVilkår = Template.bind({});
@@ -72,14 +72,14 @@ OppfyltVilkår.args = {
   behandling: defaultBehandling,
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
-      status: aksjonspunktStatus.UTFORT,
+      definisjon: AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+      status: AksjonspunktStatus.UTFORT,
       begrunnelse: 'Dette vilkåret er godkjent',
     },
   ] as Aksjonspunkt[],
   isReadOnly: true,
   readOnlySubmitButton: true,
-  status: vilkarUtfallType.OPPFYLT,
+  status: VilkarUtfallType.OPPFYLT,
 };
 
 export const AvslåttVilkår = Template.bind({});
@@ -89,17 +89,17 @@ AvslåttVilkår.args = {
     uuid: '1',
     versjon: 1,
     behandlingsresultat: {
-      avslagsarsak: avslagsarsakCodes.INGEN_BEREGNINGSREGLER,
+      avslagsarsak: Avslagsarsak.INGEN_BEREGNINGSREGLER,
     },
   } as Behandling,
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
-      status: aksjonspunktStatus.UTFORT,
+      definisjon: AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+      status: AksjonspunktStatus.UTFORT,
       begrunnelse: 'Dette vilkåret er avslått',
     },
   ] as Aksjonspunkt[],
   isReadOnly: true,
   readOnlySubmitButton: true,
-  status: vilkarUtfallType.IKKE_OPPFYLT,
+  status: VilkarUtfallType.IKKE_OPPFYLT,
 };

@@ -3,8 +3,7 @@ import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { Label } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { CheckboxField } from '@navikt/ft-form-hooks';
-import { KodeverkType } from '@navikt/ft-kodeverk';
-import { overforingArsak, foreldreType as ForeldreType } from '@navikt/fp-kodeverk';
+import { KodeverkType, OverforingArsak, ForeldreType } from '@navikt/fp-kodeverk';
 import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
 import { useFormContext } from 'react-hook-form';
@@ -16,10 +15,10 @@ import {
 } from './RenderOverforingAvKvoterFieldArray';
 
 const getText = (intl: IntlShape, kode: string, navn: string): string => {
-  if (kode === overforingArsak.INSTITUSJONSOPPHOLD_ANNEN_FORELDER) {
+  if (kode === OverforingArsak.INSTITUSJONSOPPHOLD_ANNEN_FORELDER) {
     return intl.formatMessage({ id: 'Registrering.Permisjon.OverforingAvKvote.Arsak.MorErInnlagt' });
   }
-  if (kode === overforingArsak.SYKDOM_ANNEN_FORELDER) {
+  if (kode === OverforingArsak.SYKDOM_ANNEN_FORELDER) {
     return intl.formatMessage({ id: 'Registrering.Permisjon.OverforingAvKvote.Arsak.MorErSyk' });
   }
   return navn;
@@ -34,7 +33,7 @@ const mapArsaker = (
   arsaker
     .filter(
       ({ kode }) =>
-        erEndringssøknad || (kode !== overforingArsak.ALENEOMSORG && kode !== overforingArsak.IKKE_RETT_ANNEN_FORELDER),
+        erEndringssøknad || (kode !== OverforingArsak.ALENEOMSORG && kode !== OverforingArsak.IKKE_RETT_ANNEN_FORELDER),
     )
     .map(({ kode, navn }) =>
       !sokerErMor ? (

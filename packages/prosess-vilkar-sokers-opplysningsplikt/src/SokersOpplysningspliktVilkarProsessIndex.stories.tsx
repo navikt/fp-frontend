@@ -2,7 +2,7 @@ import React from 'react';
 import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { aksjonspunktStatus, vilkarUtfallType, avslagsarsakCodes, AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktStatus, VilkarUtfallType, Avslagsarsak, AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Behandling, Fagsak, Soknad } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -71,14 +71,14 @@ export const ÅpentAksjonspunkt = Template.bind({});
   behandling: defaultBehandling,
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.SOKERS_OPPLYSNINGSPLIKT_MANU,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.SOKERS_OPPLYSNINGSPLIKT_MANU,
+      status: AksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
     },
   ] as Aksjonspunkt[],
   isReadOnly: false,
   readOnlySubmitButton: false,
-  status: vilkarUtfallType.IKKE_VURDERT,
+  status: VilkarUtfallType.IKKE_VURDERT,
 };
 
 export const OppfyltVilkår = Template.bind({});
@@ -87,14 +87,14 @@ OppfyltVilkår.args = {
   behandling: defaultBehandling,
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.SOKERS_OPPLYSNINGSPLIKT_MANU,
-      status: aksjonspunktStatus.UTFORT,
+      definisjon: AksjonspunktKode.SOKERS_OPPLYSNINGSPLIKT_MANU,
+      status: AksjonspunktStatus.UTFORT,
       begrunnelse: 'Dette vilkåret er godkjent',
     },
   ] as Aksjonspunkt[],
   isReadOnly: true,
   readOnlySubmitButton: true,
-  status: vilkarUtfallType.OPPFYLT,
+  status: VilkarUtfallType.OPPFYLT,
 };
 
 export const AvslåttVilkår = Template.bind({});
@@ -104,17 +104,17 @@ AvslåttVilkår.args = {
     uuid: '1',
     versjon: 1,
     behandlingsresultat: {
-      avslagsarsak: avslagsarsakCodes.INGEN_BEREGNINGSREGLER,
+      avslagsarsak: Avslagsarsak.INGEN_BEREGNINGSREGLER,
     },
   } as Behandling,
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.SOKERS_OPPLYSNINGSPLIKT_MANU,
-      status: aksjonspunktStatus.UTFORT,
+      definisjon: AksjonspunktKode.SOKERS_OPPLYSNINGSPLIKT_MANU,
+      status: AksjonspunktStatus.UTFORT,
       begrunnelse: 'Dette vilkåret er avslått',
     },
   ] as Aksjonspunkt[],
   isReadOnly: true,
   readOnlySubmitButton: true,
-  status: vilkarUtfallType.IKKE_OPPFYLT,
+  status: VilkarUtfallType.IKKE_OPPFYLT,
 };

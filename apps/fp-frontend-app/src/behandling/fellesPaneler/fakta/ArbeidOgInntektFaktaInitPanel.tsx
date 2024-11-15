@@ -1,17 +1,16 @@
 import React, { FunctionComponent, useCallback } from 'react';
 import { useIntl } from 'react-intl';
-import { ArbeidsgiverOpplysningerPerId } from '@navikt/ft-types';
 
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ArbeidOgInntektFaktaIndex } from '@navikt/fp-fakta-arbeid-og-inntekt';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import { ArbeidOgInntektsmelding, AksessRettigheter } from '@navikt/fp-types';
+import { ArbeidsgiverOpplysningerPerId, ArbeidOgInntektsmelding, AksessRettigheter } from '@navikt/fp-types';
 
 import FaktaPanelInitProps from '../../felles/typer/faktaPanelInitProps';
 import FaktaDefaultInitPanel from '../../felles/fakta/FaktaDefaultInitPanel';
 import { BehandlingApiKeys, requestBehandlingApi, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
 
-const AKSJONSPUNKT_KODER = [AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING];
+const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.ARBEID_OG_INNTEKT];
 type EndepunktPanelData = {
@@ -75,7 +74,7 @@ const ArbeidOgInntektFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInit
       faktaPanelMenyTekst={intl.formatMessage({ id: 'ArbeidOgInntektInfoPanel.Title' })}
       skalPanelVisesIMeny={() =>
         requestBehandlingApi.hasPath(BehandlingApiKeys.ARBEID_OG_INNTEKT.name) &&
-        !props.behandling.aksjonspunkt.some(ap => AksjonspunktCode.AVKLAR_ARBEIDSFORHOLD === ap.definisjon)
+        !props.behandling.aksjonspunkt.some(ap => AksjonspunktKode.AVKLAR_ARBEIDSFORHOLD === ap.definisjon)
       }
       renderPanel={data => (
         <ArbeidOgInntektFaktaIndex

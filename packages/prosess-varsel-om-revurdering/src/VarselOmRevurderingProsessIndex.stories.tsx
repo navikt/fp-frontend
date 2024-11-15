@@ -2,7 +2,7 @@ import React from 'react';
 import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { aksjonspunktStatus, behandlingType, AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktStatus, BehandlingType, AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Behandling, Fagsak, FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -18,7 +18,7 @@ const defaultBehandling = {
     },
   ],
   sprakkode: 'NN',
-  type: behandlingType.FORSTEGANGSSOKNAD,
+  type: BehandlingType.FORSTEGANGSSOKNAD,
 } as Behandling;
 
 const familieHendelse = {
@@ -59,8 +59,8 @@ const familiehendelseOriginalBehandling = {
 
 const aksjonspunkter = [
   {
-    definisjon: AksjonspunktCode.VARSEL_REVURDERING_MANUELL,
-    status: aksjonspunktStatus.OPPRETTET,
+    definisjon: AksjonspunktKode.VARSEL_REVURDERING_MANUELL,
+    status: AksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
   },
 ] as Aksjonspunkt[];
@@ -109,6 +109,6 @@ ForRevurdering.args = {
   previewCallback: action('button-click') as any,
   behandling: {
     ...defaultBehandling,
-    type: behandlingType.REVURDERING,
+    type: BehandlingType.REVURDERING,
   },
 };

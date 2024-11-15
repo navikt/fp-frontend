@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Button, HStack, Link, VStack } from '@navikt/ds-react';
 
-import { dokumentMalType, ugunstAarsakTyper, fagsakYtelseType as FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { DokumentMalType, UgunstAarsakType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { KodeverkMedNavn } from '@navikt/fp-types';
 import { ariaCheck, hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
@@ -29,18 +29,18 @@ export type Template = {
 };
 
 const getFritekstMessage = (brevmalkode?: string): string =>
-  brevmalkode === dokumentMalType.INNHENTE_OPPLYSNINGER || brevmalkode === dokumentMalType.TBK_INNHENTE_OPPLYSNINGER
+  brevmalkode === DokumentMalType.INNHENTE_OPPLYSNINGER || brevmalkode === DokumentMalType.TBK_INNHENTE_OPPLYSNINGER
     ? 'Messages.DocumentList'
     : 'Messages.Fritekst';
 
 // TODO (TOR) Bør erstattast av ein markør fra backend
 const showFritekst = (brevmalkode?: string, arsakskode?: string): boolean =>
-  brevmalkode === dokumentMalType.INNHENTE_OPPLYSNINGER ||
-  brevmalkode === dokumentMalType.FRITEKST ||
-  brevmalkode === dokumentMalType.KORRIGERT_VARSEL_OM_TILBAKEKREVING ||
-  brevmalkode === dokumentMalType.VARSEL_OM_TILBAKEKREVING ||
-  brevmalkode === dokumentMalType.TBK_INNHENTE_OPPLYSNINGER ||
-  (brevmalkode === dokumentMalType.VARSEL_OM_REVURDERING && arsakskode === ugunstAarsakTyper.ANNET);
+  brevmalkode === DokumentMalType.INNHENTE_OPPLYSNINGER ||
+  brevmalkode === DokumentMalType.FRITEKST ||
+  brevmalkode === DokumentMalType.KORRIGERT_VARSEL_OM_TILBAKEKREVING ||
+  brevmalkode === DokumentMalType.VARSEL_OM_TILBAKEKREVING ||
+  brevmalkode === DokumentMalType.TBK_INNHENTE_OPPLYSNINGER ||
+  (brevmalkode === DokumentMalType.VARSEL_OM_REVURDERING && arsakskode === UgunstAarsakType.ANNET);
 
 const getfiltrerteRevurderingVarslingArsaker = (
   revurderingVarslingArsaker: KodeverkMedNavn[],
@@ -49,14 +49,14 @@ const getfiltrerteRevurderingVarslingArsaker = (
   if (fagsakYtelseType === FagsakYtelseType.ENGANGSSTONAD) {
     return revurderingVarslingArsaker.filter(
       arsak =>
-        arsak.kode === ugunstAarsakTyper.BARN_IKKE_REGISTRERT_FOLKEREGISTER || arsak.kode === ugunstAarsakTyper.ANNET,
+        arsak.kode === UgunstAarsakType.BARN_IKKE_REGISTRERT_FOLKEREGISTER || arsak.kode === UgunstAarsakType.ANNET,
     );
   }
   if (fagsakYtelseType === FagsakYtelseType.SVANGERSKAPSPENGER) {
     return revurderingVarslingArsaker.filter(
       arsak =>
-        arsak.kode !== ugunstAarsakTyper.BARN_IKKE_REGISTRERT_FOLKEREGISTER &&
-        arsak.kode !== ugunstAarsakTyper.MORS_AKTIVITETSKRAV_ER_IKKE_OPPFYLT,
+        arsak.kode !== UgunstAarsakType.BARN_IKKE_REGISTRERT_FOLKEREGISTER &&
+        arsak.kode !== UgunstAarsakType.MORS_AKTIVITETSKRAV_ER_IKKE_OPPFYLT,
     );
   }
   return revurderingVarslingArsaker;
@@ -69,17 +69,14 @@ const buildInitalValues = (templates?: Template[], isKontrollerRevurderingApOpen
   };
 
   if (isKontrollerRevurderingApOpen) {
-    return { ...initialValues, brevmalkode: dokumentMalType.VARSEL_OM_REVURDERING };
+    return { ...initialValues, brevmalkode: DokumentMalType.VARSEL_OM_REVURDERING };
   }
   return { ...initialValues };
 };
 
 const transformValues = (values: FormValues) => {
   const newValues = values;
-  if (
-    values.brevmalkode === dokumentMalType.VARSEL_OM_REVURDERING &&
-    newValues.arsakskode !== ugunstAarsakTyper.ANNET
-  ) {
+  if (values.brevmalkode === DokumentMalType.VARSEL_OM_REVURDERING && newValues.arsakskode !== UgunstAarsakType.ANNET) {
     newValues.fritekst = ' ';
   }
   return newValues;
@@ -148,7 +145,7 @@ export const Messages = ({
 
   const language = getLanguageFromSprakkode(sprakKode);
 
-  const erVarselOmRevurdering = brevmalkode === dokumentMalType.VARSEL_OM_REVURDERING;
+  const erVarselOmRevurdering = brevmalkode === DokumentMalType.VARSEL_OM_REVURDERING;
 
   return (
     <Form

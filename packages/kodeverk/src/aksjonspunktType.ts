@@ -1,8 +1,6 @@
-const aksjonspunktType = {
-  MANUELL: 'MANU',
-  AUTOPUNKT: 'AUTO',
-  OVERSTYRING: 'OVST',
-  SAKSBEHANDLEROVERSTYRING: 'SAOV',
-};
-
-export default aksjonspunktType;
+export enum AksjonspunktType {
+  MANUELL = 'MANU',
+  AUTOPUNKT = 'AUTO',
+  OVERSTYRING = 'OVST',
+  SAKSBEHANDLEROVERSTYRING = 'SAOV',
+}

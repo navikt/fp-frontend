@@ -1,4 +1,4 @@
-import { behandlingType as BehandlingType, KodeverkType, tilbakekrevingKodeverkTyper } from '@navikt/fp-kodeverk';
+import { BehandlingType, KodeverkType, tilbakekrevingKodeverkTyper } from '@navikt/fp-kodeverk';
 import { AlleKodeverk, AlleKodeverkTilbakekreving, KodeverkMedNavn } from '@navikt/fp-types';
 
 class MenyKodeverk {

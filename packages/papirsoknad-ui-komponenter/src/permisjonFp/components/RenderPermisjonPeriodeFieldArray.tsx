@@ -18,7 +18,7 @@ import {
 import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 
-import { KodeverkType, uttakPeriodeType } from '@navikt/fp-kodeverk';
+import { KodeverkType, UttakPeriodeType } from '@navikt/fp-kodeverk';
 
 import styles from './renderPermisjonPeriodeFieldArray.module.css';
 
@@ -28,11 +28,11 @@ const TIDSROM_PERMISJON_FORM_NAME_PREFIX = 'tidsromPermisjon';
 export const PERMISJON_PERIODE_FIELD_ARRAY_NAME = 'permisjonsPerioder';
 
 export const gyldigeUttakperioder = [
-  uttakPeriodeType.FELLESPERIODE,
-  uttakPeriodeType.FEDREKVOTE,
-  uttakPeriodeType.FORELDREPENGER_FOR_FODSEL,
-  uttakPeriodeType.FORELDREPENGER,
-  uttakPeriodeType.MODREKVOTE,
+  UttakPeriodeType.FELLESPERIODE,
+  UttakPeriodeType.FEDREKVOTE,
+  UttakPeriodeType.FORELDREPENGER_FOR_FODSEL,
+  UttakPeriodeType.FORELDREPENGER,
+  UttakPeriodeType.MODREKVOTE,
 ];
 
 const mapPeriodeTyper = (typer: KodeverkMedNavn[]): ReactElement[] =>
@@ -52,9 +52,9 @@ const mapAktiviteter = (aktiviteter: KodeverkMedNavn[]): ReactElement[] =>
   ));
 
 export const PERIODS_WITH_NO_MORS_AKTIVITET = [
-  uttakPeriodeType.FEDREKVOTE,
-  uttakPeriodeType.FORELDREPENGER_FOR_FODSEL,
-  uttakPeriodeType.MODREKVOTE,
+  UttakPeriodeType.FEDREKVOTE,
+  UttakPeriodeType.FORELDREPENGER_FOR_FODSEL,
+  UttakPeriodeType.MODREKVOTE,
 ];
 
 const getLabel = (erForsteRad: boolean, text: string): string => (erForsteRad ? text : '');

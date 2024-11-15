@@ -8,11 +8,11 @@ import { OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 import { Form } from '@navikt/ft-form-hooks';
 import { Aksjonspunkt, Behandling, KodeverkMedNavn, ManuellBehandlingResultat } from '@navikt/fp-types';
 import {
-  AksjonspunktCode,
-  aksjonspunktStatus,
-  behandlingType as BehandlingType,
+  AksjonspunktKode,
+  AksjonspunktStatus,
+  BehandlingType,
   OverstyringAksjonspunkter,
-  vilkarUtfallType,
+  VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
 import { OverstyringPanel, VilkarResultPicker } from '@navikt/fp-prosess-felles';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
@@ -42,10 +42,10 @@ type FormValues = {
   isOverstyrt?: boolean;
 };
 
-function erOverstyringAvMedlemskap(overstyringApKode: AksjonspunktCode) {
+function erOverstyringAvMedlemskap(overstyringApKode: AksjonspunktKode) {
   return [
-    AksjonspunktCode.OVERSTYR_MEDLEMSKAPSVILKAR,
-    AksjonspunktCode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE,
+    AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR,
+    AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE,
   ].includes(overstyringApKode);
 }
 
@@ -91,13 +91,13 @@ const transformValues = (values: FormValues, overstyringApKode: OverstyringAksjo
     begrunnelse: begrunnelse,
   };
   switch (overstyringApKode) {
-    case AksjonspunktCode.OVERSTYR_MEDLEMSKAPSVILKAR:
+    case AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR:
       return {
         ...felles,
         avslagskode: vurdering !== MedlemskapVurdering.OPPFYLT ? avslagskode : undefined,
         opphørFom: vurdering === MedlemskapVurdering.DELVIS_OPPFYLT ? opphørFom : undefined,
       };
-    case AksjonspunktCode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE:
+    case AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE:
       return {
         ...felles,
         avslagskode: vurdering !== MedlemskapVurdering.OPPFYLT ? avslagskode : undefined,
@@ -191,11 +191,11 @@ const VilkarresultatMedOverstyringForm: FunctionComponent<OwnProps> = ({
   const hasAksjonspunkt = aksjonspunkt !== undefined;
   const isSolvable =
     aksjonspunkt !== undefined
-      ? !(aksjonspunkt.status === aksjonspunktStatus.OPPRETTET && !aksjonspunkt.kanLoses)
+      ? !(aksjonspunkt.status === AksjonspunktStatus.OPPRETTET && !aksjonspunkt.kanLoses)
       : false;
 
-  const erOppfylt = vilkarUtfallType.OPPFYLT === status;
-  const originalErVilkarOk = vilkarUtfallType.IKKE_VURDERT !== status ? erOppfylt : undefined;
+  const erOppfylt = VilkarUtfallType.OPPFYLT === status;
+  const originalErVilkarOk = VilkarUtfallType.IKKE_VURDERT !== status ? erOppfylt : undefined;
 
   const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
 
@@ -259,7 +259,7 @@ const VilkarresultatMedOverstyringForm: FunctionComponent<OwnProps> = ({
                 readOnly={overrideReadOnly || !erOverstyrt}
                 ytelse={ytelseType}
                 erRevurdering={behandling.type === BehandlingType.REVURDERING}
-                erForutgående={overstyringApKode === AksjonspunktCode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE}
+                erForutgående={overstyringApKode === AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE}
               />
             ) : (
               <VilkarResultPicker

@@ -3,13 +3,13 @@ import { FormattedMessage } from 'react-intl';
 import { BodyShort, Heading, Label } from '@navikt/ds-react';
 
 import {
-  klageVurdering as klageVurderingCodes,
-  behandlingResultatType,
+  KlageVurdering as klageVurderingCodes,
+  BehandlingResultatType,
   isKlageOmgjort,
   KodeverkType,
   getKodeverknavnFn,
-  AksjonspunktCode,
-  aksjonspunktStatus,
+  AksjonspunktKode,
+  AksjonspunktStatus,
 } from '@navikt/fp-kodeverk';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Aksjonspunkt, KlageVurdering, AlleKodeverk, Behandlingsresultat } from '@navikt/fp-types';
@@ -121,11 +121,11 @@ export const VedtakKlageForm = ({
   const lagreVedtak = useCallback(() => {
     setSubmitting(true);
 
-    const behandlingAksjonspunktCodes = aksjonspunkter
-      .filter(ap => ap.status === aksjonspunktStatus.OPPRETTET)
+    const behandlingAksjonspunktKodes = aksjonspunkter
+      .filter(ap => ap.status === AksjonspunktStatus.OPPRETTET)
       .map(ap => ap.definisjon);
-    const input = behandlingAksjonspunktCodes.map(apCode => ({
-      kode: validerApKodeOgHentApEnum(apCode, AksjonspunktCode.FORESLA_VEDTAK, AksjonspunktCode.FORESLA_VEDTAK_MANUELT),
+    const input = behandlingAksjonspunktKodes.map(apCode => ({
+      kode: validerApKodeOgHentApEnum(apCode, AksjonspunktKode.FORESLA_VEDTAK, AksjonspunktKode.FORESLA_VEDTAK_MANUELT),
     }));
 
     submitCallback(input).then(() => setSubmitting(false));
@@ -147,7 +147,7 @@ export const VedtakKlageForm = ({
         </BodyShort>
       )}
       <VerticalSpacer sixteenPx />
-      {behandlingsresultat.type === behandlingResultatType.KLAGE_AVVIST && (
+      {behandlingsresultat.type === BehandlingResultatType.KLAGE_AVVIST && (
         <>
           <Label size="small">
             <FormattedMessage id="VedtakKlageForm.ArsakTilAvvisning" />
@@ -169,7 +169,7 @@ export const VedtakKlageForm = ({
           <VerticalSpacer sixteenPx />
         </>
       )}
-      {behandlingsresultat.type === behandlingResultatType.KLAGE_YTELSESVEDTAK_OPPHEVET && (
+      {behandlingsresultat.type === BehandlingResultatType.KLAGE_YTELSESVEDTAK_OPPHEVET && (
         <>
           <Label size="small">
             <FormattedMessage id="VedtakKlageForm.ArsakTilOppheving" />

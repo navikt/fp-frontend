@@ -1,10 +1,8 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
-import { Aksjonspunkt } from '@navikt/ft-types';
-import { AksjonspunktStatus, isAksjonspunktOpen, VilkarUtfallType } from '@navikt/ft-kodeverk';
 
-import { Behandling, Fagsak, StandardProsessPanelProps, Vilkar } from '@navikt/fp-types';
+import { Aksjonspunkt, Behandling, Fagsak, StandardProsessPanelProps, Vilkar } from '@navikt/fp-types';
 
-import { aksjonspunktType } from '@navikt/fp-kodeverk';
+import { AksjonspunktStatus, isAksjonspunktOpen, VilkarUtfallType, AksjonspunktType } from '@navikt/fp-kodeverk';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { erReadOnly } from '../utils/readOnlyPanelUtils';
@@ -46,8 +44,8 @@ const getBekreftAksjonspunktProsessCallback =
       );
       const erOverstyringsaksjonspunkter = aksjonspunkterTilLagring.some(
         ap =>
-          ap.aksjonspunktType === aksjonspunktType.OVERSTYRING ||
-          ap.aksjonspunktType === aksjonspunktType.SAKSBEHANDLEROVERSTYRING,
+          ap.aksjonspunktType === AksjonspunktType.OVERSTYRING ||
+          ap.aksjonspunktType === AksjonspunktType.SAKSBEHANDLEROVERSTYRING,
       );
 
       if (apListe.length === 0) {

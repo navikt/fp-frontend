@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { AksjonspunktStatus, KodeverkType } from '@navikt/ft-kodeverk';
-import { Aksjonspunkt, Risikoklassifisering } from '@navikt/ft-types';
+import { AksjonspunktStatus, KodeverkType } from '@navikt/fp-kodeverk';
+import { Aksjonspunkt, Risikoklassifisering } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 import { KontrollresultatKode } from './kodeverk/kontrollresultatKode';

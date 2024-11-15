@@ -6,7 +6,7 @@ import { FatterVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { useIntl } from 'react-intl';
-import { behandlingStatus } from '@navikt/fp-kodeverk';
+import { BehandlingStatus } from '@navikt/fp-kodeverk';
 import FagsakData from '../../fagsak/FagsakData';
 import useVisForhandsvisningAvMelding from '../../data/useVisForhandsvisningAvMelding';
 import { createLocationForSkjermlenke } from '../../app/paths';
@@ -107,7 +107,7 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
     return null;
   }
 
-  const erStatusFatterVedtak = valgtBehandling.status === behandlingStatus.FATTER_VEDTAK;
+  const erStatusFatterVedtak = valgtBehandling.status === BehandlingStatus.FATTER_VEDTAK;
 
   return (
     <>

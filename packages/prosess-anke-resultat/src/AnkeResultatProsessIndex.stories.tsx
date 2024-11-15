@@ -1,7 +1,7 @@
 import React from 'react';
 import { StoryFn } from '@storybook/react';
 
-import { ankeVurderingOmgjoer, ankeVurdering as AnkeVurderingKodeverk } from '@navikt/fp-kodeverk';
+import { AnkeVurderingOmgjoer, AnkeVurdering as AnkeVurderingKodeverk } from '@navikt/fp-kodeverk';
 import { AnkeVurdering } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
@@ -55,7 +55,7 @@ ResultatVedOmgjør.args = {
     ankeVurderingResultat: {
       ...ankeVurderingResultat,
       ankeVurdering: AnkeVurderingKodeverk.ANKE_OMGJOER,
-      ankeVurderingOmgjoer: ankeVurderingOmgjoer.ANKE_TIL_UGUNST,
+      AnkeVurderingOmgjoer: AnkeVurderingOmgjoer.ANKE_TIL_UGUNST,
       ankeOmgjoerArsakNavn: 'Testårsak',
     },
   } as AnkeVurdering,

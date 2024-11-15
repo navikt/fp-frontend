@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 import { Heading, Panel } from '@navikt/ds-react';
 import { createIntl } from '@navikt/ft-utils';
-import { FagsakYtelseType } from '@navikt/ft-kodeverk';
+import { FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { SoknadData } from '@navikt/fp-papirsoknad-ui-komponenter';

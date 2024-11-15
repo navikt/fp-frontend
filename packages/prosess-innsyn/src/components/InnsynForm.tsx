@@ -5,11 +5,11 @@ import moment from 'moment';
 import { Heading } from '@navikt/ds-react';
 
 import {
-  kommunikasjonsretning,
-  AksjonspunktCode,
+  Kommunikasjonsretning,
+  AksjonspunktKode,
   KodeverkType,
-  innsynResultatType as innsynResultatTyperKV,
-  aksjonspunktStatus,
+  InnsynResultatType as innsynResultatTyperKV,
+  AksjonspunktStatus,
 } from '@navikt/fp-kodeverk';
 import { Form, Datepicker, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -51,7 +51,7 @@ const buildInitialValues = (
   mottattDato: innsynMottattDato,
   innsynResultatType: innsynResultatType || undefined,
   fristDato: fristBehandlingPåVent || moment().add(3, 'days').format(ISO_DATE_FORMAT),
-  sattPaVent: aksjonspunkter[0].status === aksjonspunktStatus.OPPRETTET ? undefined : !!fristBehandlingPåVent,
+  sattPaVent: aksjonspunkter[0].status === AksjonspunktStatus.OPPRETTET ? undefined : !!fristBehandlingPåVent,
   ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
   ...hentDokumenterMedNavnOgFikkInnsyn(dokumenter || []),
 });
@@ -78,14 +78,14 @@ const getFilteredValues = (values: FormValues) =>
 
 // @ts-ignore Fiks
 const transformValues = (values: FormValues, documents: Dokument[]): VurderInnsynAp => ({
-  kode: AksjonspunktCode.VURDER_INNSYN,
+  kode: AksjonspunktKode.VURDER_INNSYN,
   innsynDokumenter: getDocumentsStatus(values, documents),
   ...(getFilteredValues(values) as FormValues),
 });
 
 // Samme dokument kan ligge på flere behandlinger under samme fagsak.
 const getFilteredReceivedDocuments = (allDocuments: Dokument[]): Dokument[] => {
-  const filteredDocuments = allDocuments.filter(doc => doc.kommunikasjonsretning === kommunikasjonsretning.INN);
+  const filteredDocuments = allDocuments.filter(doc => doc.kommunikasjonsretning === Kommunikasjonsretning.INN);
   allDocuments.forEach(
     doc => !filteredDocuments.some(fd => fd.dokumentId === doc.dokumentId) && filteredDocuments.push(doc),
   );
@@ -159,7 +159,7 @@ const InnsynForm: FunctionComponent<OwnProps> = ({
     [alleKodeverk],
   );
 
-  const isApOpen = aksjonspunkter[0].status === aksjonspunktStatus.OPPRETTET;
+  const isApOpen = aksjonspunkter[0].status === AksjonspunktStatus.OPPRETTET;
 
   const innsynResultatTypeKode = formMethods.watch('innsynResultatType');
   const sattPaVent = formMethods.watch('sattPaVent');

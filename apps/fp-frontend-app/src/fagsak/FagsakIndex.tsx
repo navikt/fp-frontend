@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl';
 import { Location } from 'history';
 import { VisittkortSakIndex } from '@navikt/fp-sak-visittkort';
 import { LoadingPanel, DataFetchPendingModal } from '@navikt/ft-ui-komponenter';
-import { BehandlingType } from '@navikt/ft-kodeverk';
+import { BehandlingType } from '@navikt/fp-kodeverk';
 import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 import { AnnenPartBehandling, Behandling } from '@navikt/fp-types';
 

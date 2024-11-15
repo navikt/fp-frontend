@@ -4,7 +4,7 @@ import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-u
 import { required, maxValue } from '@navikt/ft-form-validators';
 import { Datepicker, InputField, SelectField, PeriodFieldArray } from '@navikt/ft-form-hooks';
 
-import { tilretteleggingType } from '@navikt/fp-kodeverk';
+import { TilretteleggingType } from '@navikt/fp-kodeverk';
 
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import styles from './behovForTilretteleggingFieldArray.module.css';
@@ -78,20 +78,20 @@ export const BehovForTilretteleggingFieldArray = ({ readOnly, name }: Props) => 
                   validate={[required]}
                   selectValues={[
                     <option
-                      value={tilretteleggingType.HEL_TILRETTELEGGING}
-                      key={tilretteleggingType.HEL_TILRETTELEGGING}
+                      value={TilretteleggingType.HEL_TILRETTELEGGING}
+                      key={TilretteleggingType.HEL_TILRETTELEGGING}
                     >
                       {intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.KanGjennomfores' })}
                     </option>,
                     <option
-                      value={tilretteleggingType.DELVIS_TILRETTELEGGING}
-                      key={tilretteleggingType.DELVIS_TILRETTELEGGING}
+                      value={TilretteleggingType.DELVIS_TILRETTELEGGING}
+                      key={TilretteleggingType.DELVIS_TILRETTELEGGING}
                     >
                       {intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.RedusertArbeid' })}
                     </option>,
                     <option
-                      value={tilretteleggingType.INGEN_TILRETTELEGGING}
-                      key={tilretteleggingType.INGEN_TILRETTELEGGING}
+                      value={TilretteleggingType.INGEN_TILRETTELEGGING}
+                      key={TilretteleggingType.INGEN_TILRETTELEGGING}
                     >
                       {intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.KanIkkeGjennomfores' })}
                     </option>,

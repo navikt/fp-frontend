@@ -1,4 +1,4 @@
-enum StonadskontoType {
+export enum StonadskontoType {
   FELLESPERIODE = 'FELLESPERIODE',
   MØDREKVOTE = 'MØDREKVOTE',
   FEDREKVOTE = 'FEDREKVOTE',
@@ -10,5 +10,3 @@ enum StonadskontoType {
   FORELDREPENGER_FØR_FØDSEL = 'FORELDREPENGER_FØR_FØDSEL',
   UDEFINERT = '-',
 }
-
-export default StonadskontoType;

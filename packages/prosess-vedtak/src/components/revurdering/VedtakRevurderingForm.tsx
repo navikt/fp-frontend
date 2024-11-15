@@ -9,11 +9,11 @@ import {
   isAvslag,
   isInnvilget,
   isOpphor,
-  behandlingArsakType as BehandlingArsakType,
+  BehandlingArsakType,
   getKodeverknavnFn,
-  fagsakYtelseType,
-  AksjonspunktCode,
-  dokumentMalType,
+  FagsakYtelseType,
+  AksjonspunktKode,
+  DokumentMalType,
 } from '@navikt/fp-kodeverk';
 import { Form } from '@navikt/ft-form-hooks';
 import {
@@ -77,7 +77,7 @@ const hentForhåndsvisManueltBrevCallback =
     if (!skalOverstyre || erFeltUtfylt) {
       const data = {
         fritekst: skalOverstyre ? brodtekst : begrunnelse,
-        dokumentMal: skalOverstyre ? dokumentMalType.FRITEKST : undefined,
+        dokumentMal: skalOverstyre ? DokumentMalType.FRITEKST : undefined,
         tittel: skalOverstyre ? overskrift : undefined,
         gjelderVedtak: true,
         automatiskVedtaksbrev: !skalOverstyre ? true : undefined,
@@ -192,7 +192,7 @@ const finnInvilgetRevurderingTekst = (
   beregningResultat?: BeregningsresultatDagytelse | BeregningsresultatEs,
   originaltBeregningResultat?: BeregningsresultatDagytelse | BeregningsresultatEs,
 ): string => {
-  if (ytelseTypeKode === fagsakYtelseType.ENGANGSSTONAD) {
+  if (ytelseTypeKode === FagsakYtelseType.ENGANGSSTONAD) {
     return intl.formatMessage({ id: hentResultattekst(true, beregningResultat, originaltBeregningResultat) });
   }
   const konsekvens = lagKonsekvensForYtelsenTekst(getKodeverknavn, konsekvenserForYtelsen);
@@ -203,13 +203,13 @@ const transformValues = (values: FormValues): RevurderingVedtakAksjonspunkter[] 
   values.aksjonspunktKoder.map(apCode => ({
     kode: validerApKodeOgHentApEnum(
       apCode,
-      AksjonspunktCode.FORESLA_VEDTAK,
-      AksjonspunktCode.FORESLA_VEDTAK_MANUELT,
-      AksjonspunktCode.VURDERE_ANNEN_YTELSE,
-      AksjonspunktCode.VURDERE_DOKUMENT,
-      AksjonspunktCode.VURDERE_INNTEKTSMELDING_KLAGE,
-      AksjonspunktCode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST,
-      AksjonspunktCode.KONTROLL_AV_MAUNELT_OPPRETTET_REVURDERINGSBEHANDLING,
+      AksjonspunktKode.FORESLA_VEDTAK,
+      AksjonspunktKode.FORESLA_VEDTAK_MANUELT,
+      AksjonspunktKode.VURDERE_ANNEN_YTELSE,
+      AksjonspunktKode.VURDERE_DOKUMENT,
+      AksjonspunktKode.VURDERE_INNTEKTSMELDING_KLAGE,
+      AksjonspunktKode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST,
+      AksjonspunktKode.KONTROLL_AV_MAUNELT_OPPRETTET_REVURDERINGSBEHANDLING,
     ),
     begrunnelse: values.begrunnelse,
     fritekstBrev: values.brødtekst,

@@ -15,7 +15,7 @@ import {
   XMarkOctagonIcon,
 } from '@navikt/aksel-icons';
 import { BodyShort, Label, Timeline } from '@navikt/ds-react';
-import { opptjeningAktivitetType as OpptjeningAktivitetType } from '@navikt/fp-kodeverk';
+import { OpptjeningAktivitetType } from '@navikt/fp-kodeverk';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { FormValues } from '../aktivitet/ValgtAktivitetForm';

@@ -1,10 +1,9 @@
 import React, { FunctionComponent, useEffect, useCallback, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 import { RisikoklassifiseringSakIndex, AvklartRisikoklassifiseringAp } from '@navikt/fp-sak-risikoklassifisering';
 
 import { NavAnsatt, AksessRettigheter, Behandling } from '@navikt/fp-types';
-import { KodeverkType } from '@navikt/fp-kodeverk';
+import { AksjonspunktStatus, KodeverkType } from '@navikt/fp-kodeverk';
 
 import useTrackRouteParam from '../../app/useTrackRouteParam';
 import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';

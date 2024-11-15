@@ -2,7 +2,7 @@ import React, { FunctionComponent, useMemo, ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Form, RadioGroupPanel, SelectField, TextAreaField } from '@navikt/ft-form-hooks';
-import { AksjonspunktCode, KodeverkType, getKodeverknavnFn } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, KodeverkType, getKodeverknavnFn } from '@navikt/fp-kodeverk';
 import { KlageVurdering, AlleKodeverk } from '@navikt/fp-types';
 import { KlageFormkravAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import moment from 'moment';
@@ -52,7 +52,7 @@ const getKlagBareVedtak = (
 };
 
 const getLovHjemmeler = (aksjonspunktCode: string): string =>
-  aksjonspunktCode === AksjonspunktCode.VURDERING_AV_FORMKRAV_KLAGE_NFP ? 'Klage.LovhjemmelNFP' : 'Klage.LovhjemmelKA';
+  aksjonspunktCode === AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP ? 'Klage.LovhjemmelNFP' : 'Klage.LovhjemmelKA';
 
 type FormValues = {
   erKlagerPart?: boolean;
@@ -84,7 +84,7 @@ const transformValues = (values: FormValues, avsluttedeBehandlinger: AvsluttetBe
   erKonkret: values.erKonkret!,
   erSignert: values.erSignert!,
   begrunnelse: values.begrunnelse,
-  kode: AksjonspunktCode.VURDERING_AV_FORMKRAV_KLAGE_NFP,
+  kode: AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP,
   vedtakBehandlingUuid: values.vedtak === IKKE_PA_KLAGD_VEDTAK ? undefined : values.vedtak,
   erTilbakekreving: erTilbakekreving(avsluttedeBehandlinger, values.vedtak!),
   tilbakekrevingInfo: påklagdTilbakekrevingInfo(avsluttedeBehandlinger, values.vedtak!),
@@ -141,11 +141,11 @@ const FormkravKlageFormNfp: FunctionComponent<OwnProps> = ({
     >
       <Heading size="small">{intl.formatMessage({ id: 'Klage.Formkrav.Title' })}</Heading>
       <VerticalSpacer fourPx />
-      <Detail>{intl.formatMessage({ id: getLovHjemmeler(AksjonspunktCode.VURDERING_AV_FORMKRAV_KLAGE_NFP) })}</Detail>
+      <Detail>{intl.formatMessage({ id: getLovHjemmeler(AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP) })}</Detail>
       <VerticalSpacer sixteenPx />
       <VStack gap="6">
         <AksjonspunktHelpTextTemp isAksjonspunktOpen={!readOnlySubmitButton}>
-          {[<FormattedMessage id="Klage.Formkrav.HelpText" key={AksjonspunktCode.VURDERING_AV_FORMKRAV_KLAGE_NFP} />]}
+          {[<FormattedMessage id="Klage.Formkrav.HelpText" key={AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP} />]}
         </AksjonspunktHelpTextTemp>
         <VStack gap="6">
           <HStack gap="10">
@@ -263,7 +263,7 @@ const FormkravKlageFormNfp: FunctionComponent<OwnProps> = ({
             avsluttedeBehandlinger={avsluttedeBehandlinger}
             handleSubmit={formMethods.handleSubmit}
             readOnly={readOnly}
-            aksjonspunktCode={AksjonspunktCode.VURDERING_AV_FORMKRAV_KLAGE_NFP}
+            aksjonspunktCode={AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP}
           />
         </HStack>
       </VStack>

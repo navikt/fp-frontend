@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 import { Detail, Heading, Button } from '@navikt/ds-react';
 import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
-import { familieHendelseType, fagsakYtelseType as FagsakYtelseType, KodeverkType } from '@navikt/fp-kodeverk';
+import { FamilieHendelseType, FagsakYtelseType, KodeverkType } from '@navikt/fp-kodeverk';
 import { ariaCheck, required } from '@navikt/ft-form-validators';
 import { BorderBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { AlleKodeverk } from '@navikt/fp-types';
@@ -11,7 +11,7 @@ import { SoknadData } from '@navikt/fp-papirsoknad-ui-komponenter';
 
 import styles from './soknadTypePickerForm.module.css';
 
-export const SøknadTyper = [familieHendelseType.ADOPSJON, familieHendelseType.FODSEL];
+export const SøknadTyper = [FamilieHendelseType.ADOPSJON, FamilieHendelseType.FODSEL];
 
 interface FormValues {
   fagsakYtelseType?: string;

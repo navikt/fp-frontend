@@ -1,17 +1,17 @@
 // TODO Fjern denne fila og heller legg aksjonspunkta på pakkene dei blir brukt i
 
 export type OverstyringAksjonspunkter =
-  | AksjonspunktCode.OVERSTYR_SOKNADSFRISTVILKAR
-  | AksjonspunktCode.OVERSTYR_ADOPSJONSVILKAR
-  | AksjonspunktCode.OVERSTYR_FODSELSVILKAR
-  | AksjonspunktCode.OVERSTYR_MEDLEMSKAPSVILKAR
-  | AksjonspunktCode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE
-  | AksjonspunktCode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR
-  | AksjonspunktCode.OVERSTYRING_AV_ADOPSJONSVILKÅRET_FP
-  | AksjonspunktCode.OVERSTYR_FODSELSVILKAR_FAR_MEDMOR
-  | AksjonspunktCode.OVERSTYRING_AV_OPPTJENINGSVILKARET;
+  | AksjonspunktKode.OVERSTYR_SOKNADSFRISTVILKAR
+  | AksjonspunktKode.OVERSTYR_ADOPSJONSVILKAR
+  | AksjonspunktKode.OVERSTYR_FODSELSVILKAR
+  | AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR
+  | AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE
+  | AksjonspunktKode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR
+  | AksjonspunktKode.OVERSTYRING_AV_ADOPSJONSVILKÅRET_FP
+  | AksjonspunktKode.OVERSTYR_FODSELSVILKAR_FAR_MEDMOR
+  | AksjonspunktKode.OVERSTYRING_AV_OPPTJENINGSVILKARET;
 
-enum AksjonspunktCode {
+export enum AksjonspunktKode {
   TERMINBEKREFTELSE = '5001',
   AVKLAR_DEKNINGSGRAD = '5002',
   ADOPSJONSDOKUMENTAJON = '5004',
@@ -122,25 +122,25 @@ enum AksjonspunktCode {
 }
 
 const uttakAksjonspunkter = [
-  AksjonspunktCode.OVERSTYRING_AV_UTTAKPERIODER,
-  AksjonspunktCode.FASTSETT_UTTAKPERIODER,
-  AksjonspunktCode.TILKNYTTET_STORTINGET,
-  AksjonspunktCode.TETTE_SAKER,
-  AksjonspunktCode.ANNENPART_EØS,
-  AksjonspunktCode.KONTROLLER_REALITETSBEHANDLING_ELLER_KLAGE,
-  AksjonspunktCode.KONTROLLER_OPPLYSNINGER_OM_FORDELING_AV_STØNADSPERIODEN,
-  AksjonspunktCode.KONTROLLER_OPPLYSNINGER_OM_DØD,
-  AksjonspunktCode.KONTROLLER_OPPLYSNINGER_OM_SØKNADSFRIST,
-  AksjonspunktCode.KONTROLLER_TILSTØTENDE_YTELSER_INNVILGET,
-  AksjonspunktCode.KONTROLLER_TILSTØTENDE_YTELSER_OPPHØRT,
+  AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER,
+  AksjonspunktKode.FASTSETT_UTTAKPERIODER,
+  AksjonspunktKode.TILKNYTTET_STORTINGET,
+  AksjonspunktKode.TETTE_SAKER,
+  AksjonspunktKode.ANNENPART_EØS,
+  AksjonspunktKode.KONTROLLER_REALITETSBEHANDLING_ELLER_KLAGE,
+  AksjonspunktKode.KONTROLLER_OPPLYSNINGER_OM_FORDELING_AV_STØNADSPERIODEN,
+  AksjonspunktKode.KONTROLLER_OPPLYSNINGER_OM_DØD,
+  AksjonspunktKode.KONTROLLER_OPPLYSNINGER_OM_SØKNADSFRIST,
+  AksjonspunktKode.KONTROLLER_TILSTØTENDE_YTELSER_INNVILGET,
+  AksjonspunktKode.KONTROLLER_TILSTØTENDE_YTELSER_OPPHØRT,
 ];
 
 const faktaUttakAksjonspunkter = [
-  AksjonspunktCode.OVERSTYR_FAKTA_UTTAK,
-  AksjonspunktCode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET_KODE,
-  AksjonspunktCode.FAKTA_UTTAK_INGEN_PERIODER_KODE,
-  AksjonspunktCode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
-  AksjonspunktCode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE,
+  AksjonspunktKode.OVERSTYR_FAKTA_UTTAK,
+  AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET_KODE,
+  AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER_KODE,
+  AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
+  AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE,
 ];
 
 const aksjonspunktIsOfType =
@@ -169,5 +169,3 @@ export const hasAksjonspunkt = (aksjonspunktKode: string, aksjonspunkter: Aksjon
 export const isUttakAksjonspunkt = aksjonspunktIsOfType(uttakAksjonspunkter);
 
 export const isFaktaUttakAksjonspunkt = aksjonspunktIsOfType(faktaUttakAksjonspunkter);
-
-export default AksjonspunktCode;

@@ -1,5 +1,3 @@
-const landkoder = {
-  NORGE: 'NOR',
-};
-
-export default landkoder;
+export enum Landkode {
+  NORGE = 'NOR',
+}

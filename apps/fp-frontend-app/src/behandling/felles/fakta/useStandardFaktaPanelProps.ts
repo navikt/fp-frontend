@@ -1,8 +1,7 @@
 import { useContext, useEffect, useMemo, useState } from 'react';
-import { Behandling, Fagsak } from '@navikt/ft-types';
-import { isAksjonspunktOpen } from '@navikt/ft-kodeverk';
+import { isAksjonspunktOpen } from '@navikt/fp-kodeverk';
 
-import { StandardFaktaPanelProps } from '@navikt/fp-types';
+import { StandardFaktaPanelProps, Behandling, Fagsak } from '@navikt/fp-types';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { erReadOnly } from '../utils/readOnlyPanelUtils';

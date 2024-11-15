@@ -1,7 +1,5 @@
-const fagsakYtelseType = {
-  ENGANGSSTONAD: 'ES',
-  FORELDREPENGER: 'FP',
-  SVANGERSKAPSPENGER: 'SVP',
-};
-
-export default fagsakYtelseType;
+export enum FagsakYtelseType {
+  ENGANGSSTONAD = 'ES',
+  FORELDREPENGER = 'FP',
+  SVANGERSKAPSPENGER = 'SVP',
+}

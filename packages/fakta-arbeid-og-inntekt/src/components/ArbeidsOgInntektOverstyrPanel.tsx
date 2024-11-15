@@ -12,7 +12,7 @@ import {
   AksjonspunktÅrsak,
 } from '@navikt/fp-types';
 import { VerticalSpacer, AksjonspunktHelpTextHTML, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
-import { ArbeidsforholdKomplettVurderingType, aksjonspunktStatus } from '@navikt/fp-kodeverk';
+import { ArbeidsforholdKomplettVurderingType, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 
 import ManueltLagtTilArbeidsforholdForm, { MANUELT_ORG_NR } from './manuelt/ManueltLagtTilArbeidsforholdForm';
 import ArbeidsforholdOgInntektRadData from '../types/arbeidsforholdOgInntekt';
@@ -27,7 +27,7 @@ const finnAksjonspunktTekstKoder = (
   const harManglandeOpplysninger = tabellData.some(
     d => d.årsak === AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD,
   );
-  const erApÅpent = aksjonspunkt?.status === aksjonspunktStatus.OPPRETTET;
+  const erApÅpent = aksjonspunkt?.status === AksjonspunktStatus.OPPRETTET;
 
   const koder = [];
   if (erApÅpent && harManglendeInntektsmeldinger) {
@@ -90,7 +90,7 @@ const ArbeidsOgInntektOverstyrPanel: FunctionComponent<OwnProps> = ({
 
   const harIngenArbeidsforholdSomErManueltLagtTil = tabellData.every(data => data.arbeidsgiverIdent !== MANUELT_ORG_NR);
 
-  const erAksjonspunktÅpent = aksjonspunkt?.status === aksjonspunktStatus.OPPRETTET;
+  const erAksjonspunktÅpent = aksjonspunkt?.status === AksjonspunktStatus.OPPRETTET;
 
   return (
     <>

@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { HStack, Label } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Form, CheckboxField } from '@navikt/ft-form-hooks';
-import { BehandlingType, KodeverkType } from '@navikt/ft-kodeverk';
+import { BehandlingType, KodeverkType } from '@navikt/fp-kodeverk';
 
 import OppgaverSomErApneEllerPaVent from '../../../typer/oppgaverSomErApneEllerPaVentTsType';
 import OppgaverSomErApneEllerPaVentGraf from './OppgaverSomErApneEllerPaVentGraf';

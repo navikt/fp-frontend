@@ -1,4 +1,4 @@
-import { opptjeningAktivitetType } from '@navikt/fp-kodeverk';
+import { OpptjeningAktivitetType } from '@navikt/fp-kodeverk';
 import { Beregningsgrunnlag, BeregningsgrunnlagAndel } from '@navikt/fp-types';
 
 export const besteberegninggrunnlag = {
@@ -8,11 +8,11 @@ export const besteberegninggrunnlag = {
       tom: '2020-01-31',
       inntekter: [
         {
-          opptjeningAktivitetType: opptjeningAktivitetType.DAGPENGER,
+          opptjeningAktivitetType: OpptjeningAktivitetType.DAGPENGER,
           inntekt: 5531,
         },
         {
-          opptjeningAktivitetType: opptjeningAktivitetType.ARBEID,
+          opptjeningAktivitetType: OpptjeningAktivitetType.ARBEID,
           arbeidsgiverId: '974652269',
           inntekt: 20000,
         },
@@ -23,7 +23,7 @@ export const besteberegninggrunnlag = {
       tom: '2020-02-29',
       inntekter: [
         {
-          opptjeningAktivitetType: opptjeningAktivitetType.DAGPENGER,
+          opptjeningAktivitetType: OpptjeningAktivitetType.DAGPENGER,
           inntekt: 5531,
         },
       ],
@@ -33,20 +33,20 @@ export const besteberegninggrunnlag = {
       tom: '2020-03-31',
       inntekter: [
         {
-          opptjeningAktivitetType: opptjeningAktivitetType.DAGPENGER,
+          opptjeningAktivitetType: OpptjeningAktivitetType.DAGPENGER,
           inntekt: 5531,
         },
         {
-          opptjeningAktivitetType: opptjeningAktivitetType.ARBEID,
+          opptjeningAktivitetType: OpptjeningAktivitetType.ARBEID,
           arbeidsgiverId: '974652269',
           inntekt: 4321,
         },
         {
-          opptjeningAktivitetType: opptjeningAktivitetType.DAGPENGER,
+          opptjeningAktivitetType: OpptjeningAktivitetType.DAGPENGER,
           inntekt: 354,
         },
         {
-          opptjeningAktivitetType: opptjeningAktivitetType.ARBEID,
+          opptjeningAktivitetType: OpptjeningAktivitetType.ARBEID,
           arbeidsgiverId: '6823424234232',
           inntekt: 32894,
         },
@@ -57,11 +57,11 @@ export const besteberegninggrunnlag = {
       tom: '2020-04-30',
       inntekter: [
         {
-          opptjeningAktivitetType: opptjeningAktivitetType.DAGPENGER,
+          opptjeningAktivitetType: OpptjeningAktivitetType.DAGPENGER,
           inntekt: 5531,
         },
         {
-          opptjeningAktivitetType: opptjeningAktivitetType.ARBEID,
+          opptjeningAktivitetType: OpptjeningAktivitetType.ARBEID,
           arbeidsgiverId: '974652269',
           inntekt: 25322,
         },
@@ -72,11 +72,11 @@ export const besteberegninggrunnlag = {
       tom: '2020-05-31',
       inntekter: [
         {
-          opptjeningAktivitetType: opptjeningAktivitetType.DAGPENGER,
+          opptjeningAktivitetType: OpptjeningAktivitetType.DAGPENGER,
           inntekt: 354,
         },
         {
-          opptjeningAktivitetType: opptjeningAktivitetType.DAGPENGER,
+          opptjeningAktivitetType: OpptjeningAktivitetType.DAGPENGER,
           inntekt: 5531,
         },
       ],
@@ -86,11 +86,11 @@ export const besteberegninggrunnlag = {
       tom: '2020-06-30',
       inntekter: [
         {
-          opptjeningAktivitetType: opptjeningAktivitetType.DAGPENGER,
+          opptjeningAktivitetType: OpptjeningAktivitetType.DAGPENGER,
           inntekt: 5531,
         },
         {
-          opptjeningAktivitetType: opptjeningAktivitetType.DAGPENGER,
+          opptjeningAktivitetType: OpptjeningAktivitetType.DAGPENGER,
           inntekt: 354,
         },
       ],

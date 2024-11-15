@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { BodyShort } from '@navikt/ds-react';
 
-import { AksjonspunktCode, KodeverkType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, KodeverkType } from '@navikt/fp-kodeverk';
 import { DateLabel, VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { RelatertTilgrensedYtelse, Soknad } from '@navikt/fp-types';
 
@@ -44,7 +44,7 @@ const RettighetFaktaPanel: FunctionComponent<PureOwnProps> & StaticFunctions = (
   return (
     <FaktaGruppe
       title={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.Rettighet' })}
-      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.OMSORGSOVERTAKELSE]}
+      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OMSORGSOVERTAKELSE]}
     >
       <BodyShort size="small">{farSokerType || '-'}</BodyShort>
       <VerticalSpacer sixteenPx />

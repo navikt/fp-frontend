@@ -1,8 +1,7 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { useIntl } from 'react-intl';
-import { BehandlingStatus, BehandlingType } from '@navikt/ft-kodeverk';
 
-import { AksjonspunktCode, isKlageAvvist } from '@navikt/fp-kodeverk';
+import { BehandlingStatus, BehandlingType, AksjonspunktKode, isKlageAvvist } from '@navikt/fp-kodeverk';
 import { FormkravMellomlagretDataType, FormkravProsessIndex } from '@navikt/fp-prosess-formkrav';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { KlageVurdering } from '@navikt/fp-types';
@@ -11,7 +10,7 @@ import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPane
 import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
 
-const AKSJONSPUNKT_KODER = [AksjonspunktCode.VURDERING_AV_FORMKRAV_KLAGE_NFP];
+const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.KLAGE_VURDERING];
 type EndepunktPanelData = {

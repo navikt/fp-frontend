@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import dayjs from 'dayjs';
 import { Button, BodyShort, Label } from '@navikt/ds-react';
 
-import { AksjonspunktCode, KodeverkType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, KodeverkType } from '@navikt/fp-kodeverk';
 import { ISO_DATE_FORMAT, addDaysToDate } from '@navikt/ft-utils';
 import { AksjonspunktHelpTextTemp, DateLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import {
@@ -161,7 +161,7 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
 
     submitCallback({
       opptjeningsaktiviteter: opptjeningsaktiviteterSomSkallagres,
-      kode: AksjonspunktCode.VURDER_PERIODER_MED_OPPTJENING,
+      kode: AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
     }).then(() => setIsSubmitting(false));
   }, [filtrerteOgSorterteOpptjeningsaktiviteter, formVerdierForAlleAktiviteter]);
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { avslagsarsakCodes, aksjonspunktStatus, vilkarUtfallType, AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { Avslagsarsak, AksjonspunktStatus, VilkarUtfallType, AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Behandling, Fagsak } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -61,14 +61,14 @@ export const ÅpentAksjonspunkt2Ledd = Template.bind({});
   behandling: defaultBehandling,
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
+      status: AksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
     },
   ] as Aksjonspunkt[],
   isReadOnly: false,
   readOnlySubmitButton: false,
-  status: vilkarUtfallType.IKKE_VURDERT,
+  status: VilkarUtfallType.IKKE_VURDERT,
   isForeldreansvar2Ledd: true,
 };
 
@@ -78,14 +78,14 @@ OppfyltVilkår2Ledd.args = {
   behandling: defaultBehandling,
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
-      status: aksjonspunktStatus.UTFORT,
+      definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
+      status: AksjonspunktStatus.UTFORT,
       begrunnelse: 'Dette vilkåret er godkjent',
     },
   ] as Aksjonspunkt[],
   isReadOnly: true,
   readOnlySubmitButton: true,
-  status: vilkarUtfallType.OPPFYLT,
+  status: VilkarUtfallType.OPPFYLT,
   isForeldreansvar2Ledd: true,
 };
 
@@ -96,19 +96,19 @@ AvslåttVilkår2Ledd.args = {
     uuid: '1',
     versjon: 1,
     behandlingsresultat: {
-      avslagsarsak: avslagsarsakCodes.INGEN_BEREGNINGSREGLER,
+      avslagsarsak: Avslagsarsak.INGEN_BEREGNINGSREGLER,
     },
   } as Behandling,
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
-      status: aksjonspunktStatus.UTFORT,
+      definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
+      status: AksjonspunktStatus.UTFORT,
       begrunnelse: 'Dette vilkåret er avslått',
     },
   ] as Aksjonspunkt[],
   isReadOnly: true,
   readOnlySubmitButton: true,
-  status: vilkarUtfallType.IKKE_OPPFYLT,
+  status: VilkarUtfallType.IKKE_OPPFYLT,
   isForeldreansvar2Ledd: true,
 };
 
@@ -118,14 +118,14 @@ export const ÅpentAksjonspunkt4Ledd = Template.bind({});
   behandling: defaultBehandling,
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
+      status: AksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
     },
   ] as Aksjonspunkt[],
   isReadOnly: false,
   readOnlySubmitButton: false,
-  status: vilkarUtfallType.IKKE_VURDERT,
+  status: VilkarUtfallType.IKKE_VURDERT,
   isForeldreansvar2Ledd: false,
 };
 
@@ -135,14 +135,14 @@ OppfyltVilkår4Ledd.args = {
   behandling: defaultBehandling,
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
-      status: aksjonspunktStatus.UTFORT,
+      definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
+      status: AksjonspunktStatus.UTFORT,
       begrunnelse: 'Dette vilkåret er godkjent',
     },
   ] as Aksjonspunkt[],
   isReadOnly: true,
   readOnlySubmitButton: true,
-  status: vilkarUtfallType.OPPFYLT,
+  status: VilkarUtfallType.OPPFYLT,
   isForeldreansvar2Ledd: false,
 };
 
@@ -153,18 +153,18 @@ AvslåttVilkår4Ledd.args = {
     uuid: '1',
     versjon: 1,
     behandlingsresultat: {
-      avslagsarsak: avslagsarsakCodes.INGEN_BEREGNINGSREGLER,
+      avslagsarsak: Avslagsarsak.INGEN_BEREGNINGSREGLER,
     },
   } as Behandling,
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
-      status: aksjonspunktStatus.UTFORT,
+      definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
+      status: AksjonspunktStatus.UTFORT,
       begrunnelse: 'Dette vilkåret er avslått',
     },
   ] as Aksjonspunkt[],
   isReadOnly: true,
   readOnlySubmitButton: true,
-  status: vilkarUtfallType.IKKE_OPPFYLT,
+  status: VilkarUtfallType.IKKE_OPPFYLT,
   isForeldreansvar2Ledd: false,
 };

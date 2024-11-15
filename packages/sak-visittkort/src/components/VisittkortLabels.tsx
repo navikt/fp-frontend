@@ -2,7 +2,7 @@ import React from 'react';
 import dayjs from 'dayjs';
 import { useIntl, FormattedMessage } from 'react-intl';
 import { Tag, Tooltip } from '@navikt/ds-react';
-import { diskresjonskodeType } from '@navikt/fp-kodeverk';
+import { DiskresjonskodeType } from '@navikt/fp-kodeverk';
 import { FagsakPerson } from '@navikt/fp-types';
 import { dateFormat } from '@navikt/ft-utils';
 
@@ -23,14 +23,14 @@ export const VisittkortLabels = ({ fagsakPerson, harVerge }: Props) => {
           </Tag>
         </Tooltip>
       )}
-      {fagsakPerson.diskresjonskode === diskresjonskodeType.KODE6 && !fagsakPerson.dødsdato && (
+      {fagsakPerson.diskresjonskode === DiskresjonskodeType.KODE6 && !fagsakPerson.dødsdato && (
         <Tooltip content={intl.formatMessage({ id: 'VisittkortLabels.Diskresjon6Tittel' })} placement="bottom">
           <Tag variant="error" size="small">
             <FormattedMessage id="VisittkortLabels.Diskresjon6" />
           </Tag>
         </Tooltip>
       )}
-      {fagsakPerson.diskresjonskode === diskresjonskodeType.KODE7 && !fagsakPerson.dødsdato && (
+      {fagsakPerson.diskresjonskode === DiskresjonskodeType.KODE7 && !fagsakPerson.dødsdato && (
         <Tooltip content={intl.formatMessage({ id: 'VisittkortLabels.Diskresjon7Tittel' })} placement="bottom">
           <Tag variant="warning" size="small">
             <FormattedMessage id="VisittkortLabels.Diskresjon7" />

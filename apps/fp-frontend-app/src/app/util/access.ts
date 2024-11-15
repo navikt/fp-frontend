@@ -1,4 +1,4 @@
-import { FagsakStatus, BehandlingStatus, BehandlingType } from '@navikt/ft-kodeverk';
+import { FagsakStatus, BehandlingStatus, BehandlingType } from '@navikt/fp-kodeverk';
 
 import { NavAnsatt, AksessRettigheter, Aksess } from '@navikt/fp-types';
 

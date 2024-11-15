@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { LinkPanel } from '@navikt/ds-react';
 import { VisittkortSakIndex } from '@navikt/fp-sak-visittkort';
 import { Aktor, Fagsak, KodeverkMedNavn } from '@navikt/fp-types';
-import { relasjonsRolleType } from '@navikt/fp-kodeverk';
+import { RelasjonsRolleType } from '@navikt/fp-kodeverk';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import styles from './aktoerGrid.module.css';
@@ -17,7 +17,7 @@ interface Props {
 
 export const AktoerGrid = ({ aktorInfo, fagsakStatuser, fagsakYtelseTyper, renderSomLenke }: Props) => {
   const vFagsak =
-    aktorInfo.fagsaker.length > 0 ? aktorInfo.fagsaker[0] : { relasjonsRolleType: relasjonsRolleType.MOR };
+    aktorInfo.fagsaker.length > 0 ? aktorInfo.fagsaker[0] : { relasjonsRolleType: RelasjonsRolleType.MOR };
 
   return (
     <>

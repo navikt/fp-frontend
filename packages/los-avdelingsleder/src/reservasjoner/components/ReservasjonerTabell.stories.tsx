@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { action } from '@storybook/addon-actions';
-import { BehandlingType } from '@navikt/ft-kodeverk';
+import { BehandlingType } from '@navikt/fp-kodeverk';
 
 import { getIntlDecorator, alleKodeverkLos } from '@navikt/fp-storybook-utils';
 

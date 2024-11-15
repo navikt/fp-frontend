@@ -1,15 +1,15 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
-import { VilkarType, AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { VilkarType, AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { OmsorgVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-omsorg';
 
 import InngangsvilkarPanelInitProps from '../../../felles/typer/inngangsvilkarPanelInitProps';
 import InngangsvilkarDefaultInitPanel from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 
 const AKSJONSPUNKT_KODER = [
-  AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
-  AksjonspunktCode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
+  AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+  AksjonspunktKode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
 ];
 
 const VILKAR_KODER = [VilkarType.OMSORGSVILKARET];

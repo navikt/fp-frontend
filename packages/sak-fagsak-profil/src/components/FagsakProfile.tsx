@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 import { Tag, BodyShort, Heading, HStack, VStack } from '@navikt/ds-react';
 import { Tooltip } from '@navikt/ft-ui-komponenter';
 import { KodeverkMedNavn } from '@navikt/fp-types';
-import { fagsakYtelseType as FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { FagsakYtelseType } from '@navikt/fp-kodeverk';
 
 const visSakDekningsgrad = (saksKode: string, dekningsgrad?: number): boolean => {
   const erForeldrepenger = saksKode === FagsakYtelseType.FORELDREPENGER;

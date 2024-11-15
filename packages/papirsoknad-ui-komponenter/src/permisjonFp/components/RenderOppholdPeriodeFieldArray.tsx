@@ -11,7 +11,7 @@ import {
   required,
 } from '@navikt/ft-form-validators';
 import { KodeverkMedNavn } from '@navikt/fp-types';
-import { oppholdArsakType } from '@navikt/fp-kodeverk';
+import { OppholdArsakType } from '@navikt/fp-kodeverk';
 
 import styles from './renderOppholdPeriodeFieldArray.module.css';
 
@@ -47,10 +47,10 @@ const defaultOppholdPeriode: Periode = {
 };
 
 const gyldigeÅrsaker = [
-  oppholdArsakType.UTTAK_MØDREKVOTE_ANNEN_FORELDER,
-  oppholdArsakType.UTTAK_FEDREKVOTE_ANNEN_FORELDER,
-  oppholdArsakType.UTTAK_FELLESP_ANNEN_FORELDER,
-  oppholdArsakType.UTTAK_FORELDREPENGER_ANNEN_FORELDER,
+  OppholdArsakType.UTTAK_MØDREKVOTE_ANNEN_FORELDER,
+  OppholdArsakType.UTTAK_FEDREKVOTE_ANNEN_FORELDER,
+  OppholdArsakType.UTTAK_FELLESP_ANNEN_FORELDER,
+  OppholdArsakType.UTTAK_FORELDREPENGER_ANNEN_FORELDER,
 ];
 
 const mapTyper = (typer: KodeverkMedNavn[]): ReactElement[] =>

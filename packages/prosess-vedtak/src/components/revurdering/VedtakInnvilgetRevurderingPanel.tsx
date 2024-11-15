@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { Label, BodyShort, Detail } from '@navikt/ds-react';
 
 import { formatCurrencyWithKr } from '@navikt/ft-utils';
-import { fagsakYtelseType } from '@navikt/fp-kodeverk';
+import { FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { Behandlingsresultat, BeregningsresultatDagytelse, BeregningsresultatEs } from '@navikt/fp-types';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
@@ -31,7 +31,7 @@ const VedtakInnvilgetRevurderingPanel: FunctionComponent<OwnProps> = ({
   skalBrukeOverstyrendeFritekstBrev,
 }) => (
   <>
-    {ytelseTypeKode === fagsakYtelseType.ENGANGSSTONAD && beregningsresultat && 'antallBarn' in beregningsresultat && (
+    {ytelseTypeKode === FagsakYtelseType.ENGANGSSTONAD && beregningsresultat && 'antallBarn' in beregningsresultat && (
       <FlexContainer>
         <FlexRow>
           <FlexColumn>
@@ -51,7 +51,7 @@ const VedtakInnvilgetRevurderingPanel: FunctionComponent<OwnProps> = ({
         </FlexRow>
       </FlexContainer>
     )}
-    {(ytelseTypeKode === fagsakYtelseType.FORELDREPENGER || ytelseTypeKode === fagsakYtelseType.SVANGERSKAPSPENGER) && (
+    {(ytelseTypeKode === FagsakYtelseType.FORELDREPENGER || ytelseTypeKode === FagsakYtelseType.SVANGERSKAPSPENGER) && (
       <>
         {revurderingsÅrsakString && (
           <>

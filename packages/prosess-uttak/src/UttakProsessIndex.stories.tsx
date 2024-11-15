@@ -14,12 +14,12 @@ import {
 } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import {
-  utsettelseArsakCodes,
-  AksjonspunktCode,
-  aksjonspunktType,
-  aksjonspunktStatus as AksjonspunktStatus,
-  navBrukerKjonn as NavBrukerKjonn,
-  relasjonsRolleType,
+  UtsettelseArsakCode,
+  AksjonspunktKode,
+  AksjonspunktType,
+  AksjonspunktStatus,
+  NavBrukerKjonn,
+  RelasjonsRolleType,
 } from '@navikt/fp-kodeverk';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -27,10 +27,10 @@ import UttakProsessIndex from './UttakProsessIndex';
 
 const åpentAksjonspunkt = [
   {
-    definisjon: AksjonspunktCode.FASTSETT_UTTAKPERIODER,
+    definisjon: AksjonspunktKode.FASTSETT_UTTAKPERIODER,
     status: AksjonspunktStatus.OPPRETTET,
     toTrinnsBehandling: true,
-    aksjonspunktType: aksjonspunktType.MANUELL,
+    aksjonspunktType: AksjonspunktType.MANUELL,
     kanLoses: true,
   },
 ];
@@ -47,9 +47,9 @@ const familiehendelse = {
 } as FamilieHendelseSamling;
 
 const fagsak = {
-  relasjonsRolleType: relasjonsRolleType.MOR,
+  relasjonsRolleType: RelasjonsRolleType.MOR,
   annenpartBehandling: {
-    relasjonsRolleType: relasjonsRolleType.FAR,
+    relasjonsRolleType: RelasjonsRolleType.FAR,
   },
 } as Fagsak;
 
@@ -1147,7 +1147,7 @@ VisAdvarselNårProsentIArbeidTotaltErMindreEnn100Prosent.args = {
         samtidigUttaksprosent: undefined,
         graderingInnvilget: false,
         periodeType: 'FORELDREPENGER',
-        utsettelseType: utsettelseArsakCodes.ARBEID,
+        utsettelseType: UtsettelseArsakCode.ARBEID,
         oppholdÅrsak: '-',
         mottattDato: '2023-01-05',
         gradertAktivitet: undefined,
@@ -1191,7 +1191,7 @@ VisAdvarselNårUtbetalingsgradOgProsentArbeidOverstiger100Prosent.args = {
         samtidigUttaksprosent: undefined,
         graderingInnvilget: false,
         periodeType: 'FORELDREPENGER',
-        utsettelseType: utsettelseArsakCodes.ARBEID,
+        utsettelseType: UtsettelseArsakCode.ARBEID,
         oppholdÅrsak: '-',
         mottattDato: '2023-01-05',
         gradertAktivitet: undefined,

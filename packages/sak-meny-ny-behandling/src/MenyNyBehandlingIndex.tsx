@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useCallback } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { behandlingType as BehandlingType } from '@navikt/fp-kodeverk';
+import { BehandlingType } from '@navikt/fp-kodeverk';
 import { KodeverkMedNavn } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 

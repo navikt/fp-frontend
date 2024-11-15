@@ -1,9 +1,9 @@
 import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 import { render, screen } from '@testing-library/react';
-import { FamilieHendelseType } from '@navikt/ft-kodeverk';
+import { FamilieHendelseType } from '@navikt/fp-kodeverk';
 import { createIntl } from '@navikt/ft-utils';
-import { FagsakHendelse } from '@navikt/ft-types';
+import { FagsakHendelse } from '@navikt/fp-types';
 
 import { VisittkortBarnInfoPanel } from './VisittkortBarnInfoPanel';
 import messages from '../../i18n/nb_NO.json';

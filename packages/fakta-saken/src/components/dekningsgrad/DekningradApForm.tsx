@@ -4,12 +4,11 @@ import React, { FunctionComponent } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktStatus, NavBrukerKjonn, AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Fagsak, Soknad } from '@navikt/fp-types';
 import { AvklarDekningsgradAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import dayjs from 'dayjs';
-import { AksjonspunktStatus, NavBrukerKjonn } from '@navikt/ft-kodeverk';
 import { AksjonspunktBox } from '@navikt/ft-ui-komponenter';
 import WomanIcon from '../../icons/Woman';
 import ManIcon from '../../icons/Man';
@@ -67,7 +66,7 @@ const DekningradApForm: FunctionComponent<OwnProps> = ({
           formMethods={formMethods}
           onSubmit={(values: FormValues) =>
             submitCallback({
-              kode: AksjonspunktCode.AVKLAR_DEKNINGSGRAD,
+              kode: AksjonspunktKode.AVKLAR_DEKNINGSGRAD,
               begrunnelse: values.begrunnelse,
               dekningsgrad: values.dekningsgrad,
             })

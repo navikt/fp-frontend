@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { VStack } from '@navikt/ds-react';
-import { aksjonspunktStatus } from '@navikt/fp-kodeverk';
+import { AksjonspunktStatus } from '@navikt/fp-kodeverk';
 
 import { MedlemskapFaktaProps } from '../MedlemskapFaktaIndex';
 
@@ -31,7 +31,7 @@ const MedlemskapInfoPanel: FC<MedlemskapFaktaProps> = ({
   ...rest
 }) => {
   const aksjonspunkt = aksjonspunkter.find(
-    ap => ap.status === aksjonspunktStatus.OPPRETTET || ap.status === aksjonspunktStatus.UTFORT,
+    ap => ap.status === AksjonspunktStatus.OPPRETTET || ap.status === AksjonspunktStatus.UTFORT,
   );
   const harAksjonspunkt = !!aksjonspunkt;
 

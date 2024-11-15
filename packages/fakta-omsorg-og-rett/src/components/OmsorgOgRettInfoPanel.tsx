@@ -3,7 +3,7 @@ import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { FormattedMessage } from 'react-intl';
 import { VStack } from '@navikt/ds-react';
 import { StandardFaktaPanelProps } from '@navikt/fp-types';
-import { AksjonspunktCode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
 import { PersonopplysningerForFamilie } from '@navikt/fp-fakta-felles';
 import { AleneomsorgForm, FormValues as AleneomsorgFormValues } from './forms/AleneomsorgForm';
 import { HarAnnenForelderRettForm, FormValues as RettFormValues } from './forms/HarAnnenForelderRettForm';
@@ -22,10 +22,10 @@ export const OmsorgOgRettInfoPanel = ({
   harApneAksjonspunkter,
 }: OmsorgOgRettProps & StandardFaktaPanelProps) => {
   const harAPAleneomsorg = hasAksjonspunkt(
-    AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
+    AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
     aksjonspunkter,
   );
-  const harAPAnnenForelderRett = hasAksjonspunkt(AksjonspunktCode.AVKLAR_ANNEN_FORELDER_RETT, aksjonspunkter);
+  const harAPAnnenForelderRett = hasAksjonspunkt(AksjonspunktKode.AVKLAR_ANNEN_FORELDER_RETT, aksjonspunkter);
 
   return (
     <VStack gap="8">

@@ -3,9 +3,8 @@ import { Label, Detail, Tag, Button, TagProps, CopyButton, HStack, VStack } from
 import { TabsAddIcon } from '@navikt/aksel-icons';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { FormattedMessage } from 'react-intl';
-import { FagsakStatus } from '@navikt/ft-kodeverk';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
-import { familieHendelseType } from '@navikt/fp-kodeverk';
+import { FagsakStatus, FamilieHendelseType } from '@navikt/fp-kodeverk';
 import dayjs from 'dayjs';
 import { finnYtelseTekst } from './VelgSakForm';
 import JournalFagsak, { FamilieHendelse } from '../../../typer/journalFagsakTsType';
@@ -31,13 +30,13 @@ const finnTagProps = (statusKode: string): TagProps | null => {
 
 const finnFamilieHendelseTekstKode = (hendelseType: string): string => {
   switch (hendelseType) {
-    case familieHendelseType.ADOPSJON:
+    case FamilieHendelseType.ADOPSJON:
       return 'Journal.Sak.FamAdopsjon';
-    case familieHendelseType.FODSEL:
+    case FamilieHendelseType.FODSEL:
       return 'Journal.Sak.FamFødsel';
-    case familieHendelseType.TERMIN:
+    case FamilieHendelseType.TERMIN:
       return 'Journal.Sak.FamTermin';
-    case familieHendelseType.OMSORG:
+    case FamilieHendelseType.OMSORG:
       return 'Journal.Sak.FamOmsorg';
     default:
       throw new Error(`Ukjent familiehendelse ${hendelseType}`);

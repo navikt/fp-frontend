@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Label } from '@navikt/ds-react';
 
 import { Form } from '@navikt/ft-form-hooks';
-import { vilkarUtfallType, AksjonspunktCode, aksjonspunktStatus } from '@navikt/fp-kodeverk';
+import { VilkarUtfallType, AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import {
   VilkarResultPicker,
@@ -34,7 +34,7 @@ export const buildInitialValues = (
 const transformValues = (values: FormValues): AvklarOpptjeningsvilkaretAp => ({
   ...VilkarResultPicker.transformValues(values),
   ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
-  kode: AksjonspunktCode.VURDER_OPPTJENINGSVILKARET,
+  kode: AksjonspunktKode.VURDER_OPPTJENINGSVILKARET,
 });
 
 interface OwnProps {
@@ -83,8 +83,8 @@ const OpptjeningVilkarAksjonspunktPanel: FunctionComponent<OwnProps> = ({
     defaultValues: formData || initialValues,
   });
 
-  const isOpenAksjonspunkt = aksjonspunkter.some(ap => ap.status === aksjonspunktStatus.OPPRETTET);
-  const originalErVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
+  const isOpenAksjonspunkt = aksjonspunkter.some(ap => ap.status === AksjonspunktStatus.OPPRETTET);
+  const originalErVilkarOk = isOpenAksjonspunkt ? undefined : VilkarUtfallType.OPPFYLT === status;
 
   const onSubmit = useCallback((values: FormValues) => submitCallback(transformValues(values)), [submitCallback]);
 

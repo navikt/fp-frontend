@@ -5,9 +5,9 @@ import { useForm } from 'react-hook-form';
 import { HStack, Label } from '@navikt/ds-react';
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
-import { KodeverkMedNavn } from '@navikt/ft-types';
+import { KodeverkMedNavn } from '@navikt/fp-types';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { FagsakYtelseType, KodeverkType } from '@navikt/ft-kodeverk';
+import { fagsakYtelseType as FagsakYtelseType, KodeverkType } from '@navikt/fp-kodeverk';
 import { Form, RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
 
 import StoreValuesInLocalStorage from '../../../data/StoreValuesInLocalStorage';

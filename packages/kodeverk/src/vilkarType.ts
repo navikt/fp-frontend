@@ -1,4 +1,4 @@
-enum VilkarType {
+export enum VilkarType {
   FODSELSVILKARET_MOR = 'FP_VK_1',
   SVANGERSKAPVILKARET = 'SVP_VK_1',
   MEDLEMSKAPSVILKARET = 'FP_VK_2',
@@ -19,5 +19,3 @@ enum VilkarType {
 
 export const fodselsvilkarene = [VilkarType.FODSELSVILKARET_MOR, VilkarType.FODSELSVILKARET_FAR];
 export const adopsjonsvilkarene = [VilkarType.ADOPSJONSVILKARET, VilkarType.ADOPSJONSVILKARET_FORELDREPENGER];
-
-export default VilkarType;

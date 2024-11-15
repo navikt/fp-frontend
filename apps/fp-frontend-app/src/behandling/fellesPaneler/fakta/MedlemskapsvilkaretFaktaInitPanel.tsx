@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { MedlemskapFaktaIndex } from '@navikt/fp-fakta-medlemskap';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { Fagsak, Medlemskap, Soknad } from '@navikt/fp-types';
@@ -10,9 +10,9 @@ import FaktaPanelInitProps from '../../felles/typer/faktaPanelInitProps';
 import FaktaDefaultInitPanel from '../../felles/fakta/FaktaDefaultInitPanel';
 import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
 
-const AKSJONSPUNKT_KODER: AksjonspunktCode[] = [
-  AksjonspunktCode.VURDER_MEDLEMSKAPSVILKÅRET,
-  AksjonspunktCode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
+const AKSJONSPUNKT_KODER: AksjonspunktKode[] = [
+  AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
+  AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
 ];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.MEDLEMSKAP, BehandlingApiKeys.SOKNAD];

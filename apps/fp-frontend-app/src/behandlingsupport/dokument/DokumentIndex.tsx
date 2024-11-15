@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { DokumenterSakIndex } from '@navikt/fp-sak-dokumenter';
 import { LoadingPanel, VerticalSpacer, usePrevious } from '@navikt/ft-ui-komponenter';
-import { Dokument } from '@navikt/ft-types';
+import { Dokument } from '@navikt/fp-types';
 
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { hentDokumentLenke } from '@navikt/fp-konstanter';

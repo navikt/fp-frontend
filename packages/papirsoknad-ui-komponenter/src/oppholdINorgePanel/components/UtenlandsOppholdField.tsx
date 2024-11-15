@@ -2,8 +2,8 @@ import React, { ReactElement, useMemo } from 'react';
 import classnames from 'classnames/bind';
 import { useIntl } from 'react-intl';
 import { Datepicker, SelectField, PeriodFieldArray } from '@navikt/ft-form-hooks';
-import { landkoder as Landkode } from '@navikt/fp-kodeverk';
-import { KodeverkMedNavn } from '@navikt/ft-types';
+import { Landkode } from '@navikt/fp-kodeverk';
+import { KodeverkMedNavn } from '@navikt/fp-types';
 
 import {
   dateAfterOrEqual,

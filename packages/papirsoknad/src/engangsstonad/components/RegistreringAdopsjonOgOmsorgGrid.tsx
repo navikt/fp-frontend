@@ -10,7 +10,7 @@ import {
   SoknadData,
   OmsorgOgAdopsjonTransformedFormValues,
 } from '@navikt/fp-papirsoknad-ui-komponenter';
-import { familieHendelseType } from '@navikt/fp-kodeverk';
+import { FamilieHendelseType } from '@navikt/fp-kodeverk';
 
 import { HStack } from '@navikt/ds-react';
 import styles from './registreringAdopsjonOgOmsorgGrid.module.css';
@@ -58,7 +58,7 @@ const RegistreringAdopsjonOgOmsorgGrid: FunctionComponent<OwnProps> & StaticFunc
       <OppholdINorgePapirsoknadIndex
         readOnly={readOnly}
         alleKodeverk={alleKodeverk}
-        erAdopsjon={soknadData.getFamilieHendelseType() !== familieHendelseType.ADOPSJON}
+        erAdopsjon={soknadData.getFamilieHendelseType() !== FamilieHendelseType.ADOPSJON}
         mottattDato={mottattDato}
       />
       <SprakPapirsoknadIndex readOnly={readOnly} />
@@ -66,7 +66,7 @@ const RegistreringAdopsjonOgOmsorgGrid: FunctionComponent<OwnProps> & StaticFunc
     <div className={styles.col}>
       <OmsorgOgAdopsjonPapirsoknadIndex
         readOnly={readOnly}
-        familieHendelseType={soknadData.getFamilieHendelseType()}
+        FamilieHendelseType={soknadData.getFamilieHendelseType()}
         isForeldrepengerFagsak={false}
         fodselsdato={fodselsdato}
       />

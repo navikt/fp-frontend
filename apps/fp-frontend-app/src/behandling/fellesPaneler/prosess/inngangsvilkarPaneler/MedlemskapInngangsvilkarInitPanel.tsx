@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 
-import { AksjonspunktCode, aksjonspunktStatus, VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus, VilkarType } from '@navikt/fp-kodeverk';
 import { AksessRettigheter, Medlemskap } from '@navikt/fp-types';
 
 import InngangsvilkarPanelInitProps from '../../../felles/typer/inngangsvilkarPanelInitProps';
@@ -8,7 +8,7 @@ import InngangsvilkarDefaultInitPanel from '../../../felles/prosess/Inngangsvilk
 import OverstyringPanelDef from '../../../felles/prosess/OverstyringPanelDef';
 import { BehandlingApiKeys } from '../../../../data/behandlingContextApi';
 
-const AKSJONSPUNKT_KODER = [AksjonspunktCode.VURDER_MEDLEMSKAPSVILKÅRET, AksjonspunktCode.OVERSTYR_MEDLEMSKAPSVILKAR];
+const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET, AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR];
 
 const VILKAR_KODER = [VilkarType.MEDLEMSKAPSVILKARET];
 
@@ -38,20 +38,20 @@ const MedlemskapInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsvi
     renderPanel={(data, erOverstyrt, toggleOverstyring) => {
       const harMedlemskapsAksjonspunkt = data.aksjonspunkter.some(
         value =>
-          value.definisjon === AksjonspunktCode.VURDER_MEDLEMSKAPSVILKÅRET &&
-          value.status !== aksjonspunktStatus.AVBRUTT,
+          value.definisjon === AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET &&
+          value.status !== AksjonspunktStatus.AVBRUTT,
       );
       const harÅpentMedlemskapAksjonspunkt = data.aksjonspunkter.some(
         value =>
-          value.definisjon === AksjonspunktCode.VURDER_MEDLEMSKAPSVILKÅRET &&
-          value.status == aksjonspunktStatus.OPPRETTET,
+          value.definisjon === AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET &&
+          value.status == AksjonspunktStatus.OPPRETTET,
       );
       return (
         <>
           {!harÅpentMedlemskapAksjonspunkt && (
             <OverstyringPanelDef
               aksjonspunkter={data.aksjonspunkter}
-              aksjonspunktKode={AksjonspunktCode.OVERSTYR_MEDLEMSKAPSVILKAR}
+              aksjonspunktKode={AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR}
               vilkar={data.vilkar}
               vilkarKoder={VILKAR_KODER}
               panelTekstKode="Inngangsvilkar.Medlemskapsvilkaret"

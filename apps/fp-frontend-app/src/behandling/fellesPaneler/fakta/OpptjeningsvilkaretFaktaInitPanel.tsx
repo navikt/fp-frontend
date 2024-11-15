@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
-import { vilkarUtfallType, VilkarType, AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { VilkarUtfallType, VilkarType, AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { OpptjeningFaktaIndex } from '@navikt/fp-fakta-opptjening';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { ArbeidsgiverOpplysningerPerId, Opptjening } from '@navikt/fp-types';
@@ -10,7 +10,7 @@ import FaktaPanelInitProps from '../../felles/typer/faktaPanelInitProps';
 import FaktaDefaultInitPanel from '../../felles/fakta/FaktaDefaultInitPanel';
 import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
 
-const AKSJONSPUNKT_KODER = [AksjonspunktCode.VURDER_PERIODER_MED_OPPTJENING];
+const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.OPPTJENING];
 type EndepunktPanelData = {
@@ -38,7 +38,7 @@ const OpptjeningsvilkaretFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanel
       !!props.behandling.vilkår &&
       props.behandling.vilkår.some(v => v.vilkarType === VilkarType.OPPTJENINGSVILKARET) &&
       props.behandling.vilkår.some(
-        v => v.vilkarType === VilkarType.MEDLEMSKAPSVILKARET && v.vilkarStatus === vilkarUtfallType.OPPFYLT,
+        v => v.vilkarType === VilkarType.MEDLEMSKAPSVILKARET && v.vilkarStatus === VilkarUtfallType.OPPFYLT,
       )
     }
     renderPanel={data => (

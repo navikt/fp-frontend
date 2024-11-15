@@ -3,9 +3,8 @@ import { Meta, StoryObj } from '@storybook/react';
 import { useForm } from 'react-hook-form';
 import { Button, VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
-import { FagsakYtelseType } from '@navikt/ft-kodeverk';
 
-import { familieHendelseType, foreldreType } from '@navikt/fp-kodeverk';
+import { FagsakYtelseType, FamilieHendelseType, ForeldreType } from '@navikt/fp-kodeverk';
 
 import { RettigheterPapirsoknadIndex } from './RettigheterPapirsoknadIndex';
 import { SoknadData } from '../felles/SoknadData';
@@ -38,12 +37,12 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    soknadData: new SoknadData(FagsakYtelseType.FORELDREPENGER, familieHendelseType.FODSEL, foreldreType.MOR),
+    soknadData: new SoknadData(FagsakYtelseType.FORELDREPENGER, FamilieHendelseType.FODSEL, ForeldreType.MOR),
   },
 };
 
 export const FarAdopterer: Story = {
   args: {
-    soknadData: new SoknadData(FagsakYtelseType.FORELDREPENGER, familieHendelseType.ADOPSJON, foreldreType.FAR),
+    soknadData: new SoknadData(FagsakYtelseType.FORELDREPENGER, FamilieHendelseType.ADOPSJON, ForeldreType.FAR),
   },
 };

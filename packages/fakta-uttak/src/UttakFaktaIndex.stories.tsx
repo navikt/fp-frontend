@@ -2,12 +2,10 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { StoryFn } from '@storybook/react';
 
-import { Aksjonspunkt } from '@navikt/ft-types';
-import { Fagsak, KontrollerFaktaPeriode, Ytelsefordeling } from '@navikt/fp-types';
+import { Aksjonspunkt, Fagsak, KontrollerFaktaPeriode, Ytelsefordeling } from '@navikt/fp-types';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import { RelasjonsRolleType } from '@navikt/ft-kodeverk';
-import { aksjonspunktStatus, uttakPeriodeType, AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { RelasjonsRolleType, AksjonspunktStatus, UttakPeriodeType, AksjonspunktKode } from '@navikt/fp-kodeverk';
 
 import UttakFaktaIndex from './UttakFaktaIndex';
 import UtsettelseÅrsak from './kodeverk/utsettelseÅrsak';
@@ -91,7 +89,7 @@ VisUttaksperiodeUtenAksjonspunkt.args = {
     {
       fom: '2022-11-12',
       tom: '2022-12-01',
-      uttakPeriodeType: uttakPeriodeType.MODREKVOTE,
+      uttakPeriodeType: UttakPeriodeType.MODREKVOTE,
       arbeidsforhold: undefined,
       flerbarnsdager: false,
       periodeKilde: 'SØKNAD',
@@ -118,7 +116,7 @@ VisUttaksperiodeUtenAksjonspunktKanOverstyre.args = {
     {
       fom: '2022-11-12',
       tom: '2022-12-01',
-      uttakPeriodeType: uttakPeriodeType.MODREKVOTE,
+      uttakPeriodeType: UttakPeriodeType.MODREKVOTE,
       arbeidsforhold: undefined,
       flerbarnsdager: false,
       periodeKilde: 'SØKNAD',
@@ -132,8 +130,8 @@ export const VisUttaksperiodeMedAksjonspunkt = Template.bind({});
 VisUttaksperiodeMedAksjonspunkt.args = {
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
+      status: AksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
       kanLoses: true,
     },
@@ -152,7 +150,7 @@ VisUttaksperiodeMedAksjonspunkt.args = {
     {
       fom: '2022-11-12',
       tom: '2022-12-01',
-      uttakPeriodeType: uttakPeriodeType.MODREKVOTE,
+      uttakPeriodeType: UttakPeriodeType.MODREKVOTE,
       arbeidstidsprosent: 10,
       arbeidsforhold: {
         arbeidsgiverReferanse: '910909088',
@@ -165,7 +163,7 @@ VisUttaksperiodeMedAksjonspunkt.args = {
     {
       fom: '2022-12-02',
       tom: '2022-12-10',
-      uttakPeriodeType: uttakPeriodeType.MODREKVOTE,
+      uttakPeriodeType: UttakPeriodeType.MODREKVOTE,
       arbeidstidsprosent: 50,
       arbeidsforhold: {
         arbeidsgiverReferanse: '910909088',
@@ -177,7 +175,7 @@ VisUttaksperiodeMedAksjonspunkt.args = {
     {
       fom: '2022-12-11',
       tom: '2022-12-20',
-      uttakPeriodeType: uttakPeriodeType.MODREKVOTE,
+      uttakPeriodeType: UttakPeriodeType.MODREKVOTE,
       arbeidstidsprosent: 50,
       arbeidsforhold: {
         arbeidsgiverReferanse: '910909088',
@@ -195,8 +193,8 @@ export const VisUtsettelseperiodeMedAksjonspunkt = Template.bind({});
 VisUtsettelseperiodeMedAksjonspunkt.args = {
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
+      status: AksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
       kanLoses: true,
     },
@@ -227,8 +225,8 @@ export const VisOverføringsperiodeMedAksjonspunkt = Template.bind({});
 VisOverføringsperiodeMedAksjonspunkt.args = {
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
+      status: AksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
       kanLoses: true,
     },
@@ -248,7 +246,7 @@ VisOverføringsperiodeMedAksjonspunkt.args = {
       fom: '2022-11-12',
       tom: '2022-12-01',
       overføringÅrsak: OverføringÅrsak.IKKE_RETT_ANNEN_FORELDER,
-      uttakPeriodeType: uttakPeriodeType.MODREKVOTE,
+      uttakPeriodeType: UttakPeriodeType.MODREKVOTE,
       periodeKilde: 'SØKNAD',
     },
   ],
@@ -260,8 +258,8 @@ export const VisAksjonspunktDerIngenPerioderFinnes = Template.bind({});
 VisAksjonspunktDerIngenPerioderFinnes.args = {
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.FAKTA_UTTAK_INGEN_PERIODER_KODE,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER_KODE,
+      status: AksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
       kanLoses: true,
     },
@@ -285,8 +283,8 @@ export const VisAksjonspunktDerArbeidsfoholdErUkjentVedGradering = Template.bind
 VisAksjonspunktDerArbeidsfoholdErUkjentVedGradering.args = {
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET_KODE,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET_KODE,
+      status: AksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
       kanLoses: true,
     },
@@ -305,7 +303,7 @@ VisAksjonspunktDerArbeidsfoholdErUkjentVedGradering.args = {
     {
       fom: '2022-11-12',
       tom: '2022-12-01',
-      uttakPeriodeType: uttakPeriodeType.MODREKVOTE,
+      uttakPeriodeType: UttakPeriodeType.MODREKVOTE,
       arbeidstidsprosent: 50,
       arbeidsforhold: {
         arbeidsgiverReferanse: '91090823',
@@ -323,8 +321,8 @@ export const VisAksjonspunktDerEnIkkeHarBeregningsgrunnlagVedGradering = Templat
 VisAksjonspunktDerEnIkkeHarBeregningsgrunnlagVedGradering.args = {
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE,
+      status: AksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
       kanLoses: true,
     },
@@ -343,7 +341,7 @@ VisAksjonspunktDerEnIkkeHarBeregningsgrunnlagVedGradering.args = {
     {
       fom: '2022-11-12',
       tom: '2022-12-01',
-      uttakPeriodeType: uttakPeriodeType.MODREKVOTE,
+      uttakPeriodeType: UttakPeriodeType.MODREKVOTE,
       arbeidstidsprosent: 50,
       arbeidsforhold: {
         arbeidsgiverReferanse: '910923',
@@ -361,8 +359,8 @@ export const VisPanelDerAksjonspunktErLøstOgBehandlingAvsluttet = Template.bind
 VisPanelDerAksjonspunktErLøstOgBehandlingAvsluttet.args = {
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE,
-      status: aksjonspunktStatus.UTFORT,
+      definisjon: AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE,
+      status: AksjonspunktStatus.UTFORT,
       begrunnelse: 'Dette er en begrunnelse',
       kanLoses: false,
     },
@@ -381,7 +379,7 @@ VisPanelDerAksjonspunktErLøstOgBehandlingAvsluttet.args = {
     {
       fom: '2022-11-12',
       tom: '2022-12-01',
-      uttakPeriodeType: uttakPeriodeType.MODREKVOTE,
+      uttakPeriodeType: UttakPeriodeType.MODREKVOTE,
       arbeidstidsprosent: 50,
       arbeidsforhold: {
         arbeidsgiverReferanse: '910909088',
@@ -402,8 +400,8 @@ export const VisBegrunnelseFraTidligereUtgaveAvPanel = Template.bind({});
 VisBegrunnelseFraTidligereUtgaveAvPanel.args = {
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE,
-      status: aksjonspunktStatus.UTFORT,
+      definisjon: AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE,
+      status: AksjonspunktStatus.UTFORT,
       begrunnelse: 'Dette er en begrunnelse',
       kanLoses: false,
     },
@@ -422,7 +420,7 @@ VisBegrunnelseFraTidligereUtgaveAvPanel.args = {
     {
       fom: '2022-11-12',
       tom: '2022-12-01',
-      uttakPeriodeType: uttakPeriodeType.MODREKVOTE,
+      uttakPeriodeType: UttakPeriodeType.MODREKVOTE,
       arbeidstidsprosent: 50,
       arbeidsforhold: {
         arbeidsgiverReferanse: '910909088',
@@ -444,8 +442,8 @@ export const VisUttaksperiodeMedAksjonspunktForFar = Template.bind({});
 VisUttaksperiodeMedAksjonspunktForFar.args = {
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
+      status: AksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
       kanLoses: true,
     },
@@ -464,7 +462,7 @@ VisUttaksperiodeMedAksjonspunktForFar.args = {
     {
       fom: '2022-11-12',
       tom: '2022-12-01',
-      uttakPeriodeType: uttakPeriodeType.FELLESPERIODE,
+      uttakPeriodeType: UttakPeriodeType.FELLESPERIODE,
       arbeidstidsprosent: 10,
       arbeidsforhold: {
         arbeidsgiverReferanse: '910909088',
@@ -477,7 +475,7 @@ VisUttaksperiodeMedAksjonspunktForFar.args = {
     {
       fom: '2022-12-02',
       tom: '2022-12-10',
-      uttakPeriodeType: uttakPeriodeType.MODREKVOTE,
+      uttakPeriodeType: UttakPeriodeType.MODREKVOTE,
       arbeidstidsprosent: 50,
       arbeidsforhold: {
         arbeidsgiverReferanse: '910909088',
@@ -489,7 +487,7 @@ VisUttaksperiodeMedAksjonspunktForFar.args = {
     {
       fom: '2022-12-11',
       tom: '2022-12-20',
-      uttakPeriodeType: uttakPeriodeType.MODREKVOTE,
+      uttakPeriodeType: UttakPeriodeType.MODREKVOTE,
       arbeidstidsprosent: 50,
       arbeidsforhold: {
         arbeidsgiverReferanse: '910909088',

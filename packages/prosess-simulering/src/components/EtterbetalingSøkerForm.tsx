@@ -4,7 +4,7 @@ import { ReadMore, VStack } from '@navikt/ds-react';
 
 import { TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt } from '@navikt/fp-types';
 import { KontrollerEtterbetalingTilSøkerAP } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -15,12 +15,12 @@ const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 
 export const transformValues = (values: FormValues): KontrollerEtterbetalingTilSøkerAP => ({
-  kode: AksjonspunktCode.KONTROLLER_STOR_ETTERBETALING_SØKER,
+  kode: AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER,
   begrunnelse: values.begrunnelseEtterbetaling,
 });
 
 export const buildInitialValues = (aksjonspunkt?: Aksjonspunkt): EtterbetalingSøkerFormValues | undefined => {
-  if (!aksjonspunkt || aksjonspunkt.definisjon !== AksjonspunktCode.KONTROLLER_STOR_ETTERBETALING_SØKER) {
+  if (!aksjonspunkt || aksjonspunkt.definisjon !== AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER) {
     return undefined;
   }
   return {
@@ -36,7 +36,7 @@ interface OwnProps {
 const TilbakekrevSøkerForm: FunctionComponent<OwnProps> = ({ readOnly, aksjonspunkt }) => {
   const intl = useIntl();
 
-  if (!aksjonspunkt || aksjonspunkt.definisjon !== AksjonspunktCode.KONTROLLER_STOR_ETTERBETALING_SØKER) {
+  if (!aksjonspunkt || aksjonspunkt.definisjon !== AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER) {
     return null;
   }
 

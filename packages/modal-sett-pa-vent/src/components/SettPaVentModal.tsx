@@ -15,7 +15,7 @@ import {
   dateBeforeToday,
 } from '@navikt/ft-form-validators';
 import { KodeverkMedNavn } from '@navikt/fp-types';
-import { venteArsakType } from '@navikt/fp-kodeverk';
+import { VenteArsakType } from '@navikt/fp-kodeverk';
 
 import styles from './settPaVentModal.module.css';
 
@@ -31,21 +31,21 @@ const buildInitialValues = (hasManualPaVent: boolean, ventearsak?: string, frist
 });
 
 const manuelleVenteArsaker = [
-  venteArsakType.AVV_DOK,
-  venteArsakType.AVV_FODSEL,
-  venteArsakType.VENT_PÅ_BRUKERTILBAKEMELDING,
-  venteArsakType.UTV_FRIST,
-  venteArsakType.FOR_TIDLIG_SOKNAD,
-  venteArsakType.VENT_OPDT_INNTEKTSMELDING,
-  venteArsakType.VENT_UTLAND_TRYGD,
-  venteArsakType.UTVIDET_TILSVAR_FRIST,
-  venteArsakType.ENDRE_TILKJENT_YTELSE,
-  venteArsakType.VENT_PÅ_MULIG_MOTREGNING,
+  VenteArsakType.AVV_DOK,
+  VenteArsakType.AVV_FODSEL,
+  VenteArsakType.VENT_PÅ_BRUKERTILBAKEMELDING,
+  VenteArsakType.UTV_FRIST,
+  VenteArsakType.FOR_TIDLIG_SOKNAD,
+  VenteArsakType.VENT_OPDT_INNTEKTSMELDING,
+  VenteArsakType.VENT_UTLAND_TRYGD,
+  VenteArsakType.UTVIDET_TILSVAR_FRIST,
+  VenteArsakType.ENDRE_TILKJENT_YTELSE,
+  VenteArsakType.VENT_PÅ_MULIG_MOTREGNING,
 ];
 
 const automatiskeVentearsakerForTilbakekreving = [
-  venteArsakType.VENT_PÅ_BRUKERTILBAKEMELDING,
-  venteArsakType.VENT_PÅ_TILBAKEKREVINGSGRUNNLAG,
+  VenteArsakType.VENT_PÅ_BRUKERTILBAKEMELDING,
+  VenteArsakType.VENT_PÅ_TILBAKEKREVINGSGRUNNLAG,
 ];
 
 const inkluderVentearsak = (ventearsak: KodeverkMedNavn, valgtVentearsak?: string): boolean =>
@@ -61,7 +61,7 @@ const skalViseFristenTekst = (
     erTilbakekreving &&
     ((frist !== undefined && dateBeforeToday(frist) === null) ||
       (originalFrist !== undefined && dateBeforeToday(originalFrist) === null));
-  const erVenterPaKravgrunnlag = ventearsak === venteArsakType.VENT_PÅ_TILBAKEKREVINGSGRUNNLAG;
+  const erVenterPaKravgrunnlag = ventearsak === VenteArsakType.VENT_PÅ_TILBAKEKREVINGSGRUNNLAG;
   return erTilbakekreving && erFristenUtløpt && erVenterPaKravgrunnlag;
 };
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { dokumentMalType, fagsakYtelseType as FagsakYtelseType, ugunstAarsakTyper } from '@navikt/fp-kodeverk';
+import { DokumentMalType, FagsakYtelseType, UgunstAarsakType } from '@navikt/fp-kodeverk';
 
 import MeldingerSakIndex from './MeldingerSakIndex';
 
@@ -36,12 +36,12 @@ const Template: StoryFn<{
       fagsakYtelseType={fagsakYtelseType}
       revurderingVarslingArsak={[
         {
-          kode: ugunstAarsakTyper.BARN_IKKE_REGISTRERT_FOLKEREGISTER,
+          kode: UgunstAarsakType.BARN_IKKE_REGISTRERT_FOLKEREGISTER,
           navn: 'Barn ikke registrert i folkeregisteret',
           kodeverk: 'UGUNST',
         },
         {
-          kode: ugunstAarsakTyper.ANNET,
+          kode: UgunstAarsakType.ANNET,
           navn: 'Annet',
           kodeverk: 'UGUNST',
         },
@@ -59,12 +59,12 @@ export const Default = Template.bind({});
 Default.args = {
   templates: [
     {
-      kode: dokumentMalType.INNHENTE_OPPLYSNINGER,
+      kode: DokumentMalType.INNHENTE_OPPLYSNINGER,
       navn: innhentDokumentasjon,
       tilgjengelig: true,
     },
     {
-      kode: dokumentMalType.VARSEL_OM_REVURDERING,
+      kode: DokumentMalType.VARSEL_OM_REVURDERING,
       navn: revurderingsdokumentasjon,
       tilgjengelig: true,
     },
@@ -79,12 +79,12 @@ export const ForSvangerskapspenger = Template.bind({});
 ForSvangerskapspenger.args = {
   templates: [
     {
-      kode: dokumentMalType.INNHENTE_OPPLYSNINGER,
+      kode: DokumentMalType.INNHENTE_OPPLYSNINGER,
       navn: innhentDokumentasjon,
       tilgjengelig: true,
     },
     {
-      kode: dokumentMalType.VARSEL_OM_REVURDERING,
+      kode: DokumentMalType.VARSEL_OM_REVURDERING,
       navn: revurderingsdokumentasjon,
       tilgjengelig: true,
     },
@@ -99,12 +99,12 @@ export const BrukerManglerAdresse = Template.bind({});
 BrukerManglerAdresse.args = {
   templates: [
     {
-      kode: dokumentMalType.INNHENTE_OPPLYSNINGER,
+      kode: DokumentMalType.INNHENTE_OPPLYSNINGER,
       navn: innhentDokumentasjon,
       tilgjengelig: true,
     },
     {
-      kode: dokumentMalType.VARSEL_OM_REVURDERING,
+      kode: DokumentMalType.VARSEL_OM_REVURDERING,
       navn: revurderingsdokumentasjon,
       tilgjengelig: true,
     },

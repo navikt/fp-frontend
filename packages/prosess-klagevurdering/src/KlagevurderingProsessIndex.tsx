@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { KlageVurdering, StandardProsessPanelProps } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
@@ -36,7 +36,7 @@ const KlagevurderingProsessIndex: FunctionComponent<OwnProps & StandardProsessPa
     {klageVurdering.klageVurderingResultatNK && (
       <BehandleKlageFormKa klageVurdering={klageVurdering} alleKodeverk={alleKodeverk} />
     )}
-    {aksjonspunkter.some(a => a.definisjon === AksjonspunktCode.BEHANDLE_KLAGE_NFP) && (
+    {aksjonspunkter.some(a => a.definisjon === AksjonspunktKode.BEHANDLE_KLAGE_NFP) && (
       <BehandleKlageFormNfp
         sprakkode={behandling.sprakkode}
         klageVurdering={klageVurdering}

@@ -5,7 +5,7 @@ import { BesteberegningFaktaIndex } from '@navikt/fp-fakta-besteberegning';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag } from '@navikt/fp-types';
 
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
 import FaktaPanelInitProps from '../../felles/typer/faktaPanelInitProps';
 import FaktaDefaultInitPanel from '../../felles/fakta/FaktaDefaultInitPanel';
@@ -30,8 +30,8 @@ const BesteberegningFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitP
   <FaktaDefaultInitPanel<EndepunktPanelData>
     {...props}
     aksjonspunktKoder={[
-      AksjonspunktCode.KONTROLLER_AUTOMATISK_BESTEBEREGNING,
-      AksjonspunktCode.MANUELL_KONTROLL_AV_BESTEBEREGNING,
+      AksjonspunktKode.KONTROLLER_AUTOMATISK_BESTEBEREGNING,
+      AksjonspunktKode.MANUELL_KONTROLL_AV_BESTEBEREGNING,
     ]}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     faktaPanelKode={FaktaPanelCode.BESTEBEREGNING}

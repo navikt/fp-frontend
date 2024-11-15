@@ -2,7 +2,7 @@ import React from 'react';
 import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { kommunikasjonsretning } from '@navikt/fp-kodeverk';
+import { Kommunikasjonsretning } from '@navikt/fp-kodeverk';
 import { Dokument } from '@navikt/fp-types';
 
 import { DokumenterSakIndex } from './DokumenterSakIndex';
@@ -44,7 +44,7 @@ Default.args = {
       behandlingUuidList: [behandlingUuid],
       tittel: 'Dette er et dokument',
       tidspunkt: '2017-08-01T02:04:25.455',
-      kommunikasjonsretning: kommunikasjonsretning.INN,
+      kommunikasjonsretning: Kommunikasjonsretning.INN,
       gjelderFor: 'test1',
     },
     {
@@ -53,7 +53,7 @@ Default.args = {
       behandlingUuidList: [],
       tittel: 'Dette er et nytt dokument',
       tidspunkt: '2017-02-04T02:54:25.455',
-      kommunikasjonsretning: kommunikasjonsretning.UT,
+      kommunikasjonsretning: Kommunikasjonsretning.UT,
       gjelderFor: 'test2',
     },
     {
@@ -62,7 +62,7 @@ Default.args = {
       behandlingUuidList: [],
       tittel: 'Dette er et tredje dokument',
       tidspunkt: '2017-01-03T10:54:25.455',
-      kommunikasjonsretning: kommunikasjonsretning.NOTAT,
+      kommunikasjonsretning: Kommunikasjonsretning.NOTAT,
       gjelderFor: 'Dette er en lang tekst som ikke skal kuttes',
     },
     {
@@ -71,7 +71,7 @@ Default.args = {
       behandlingUuidList: [],
       tittel: 'Dette er et fjerde dokument',
       tidspunkt: '2017-03-02T02:54:25.455',
-      kommunikasjonsretning: kommunikasjonsretning.UT,
+      kommunikasjonsretning: Kommunikasjonsretning.UT,
       gjelderFor: 'test4',
     },
     {
@@ -80,7 +80,7 @@ Default.args = {
       behandlingUuidList: [],
       tittel: 'Dette er et femte dokument',
       tidspunkt: '2017-04-01T02:54:25.455',
-      kommunikasjonsretning: kommunikasjonsretning.INN,
+      kommunikasjonsretning: Kommunikasjonsretning.INN,
       gjelderFor: 'test5',
     },
   ] as Dokument[],

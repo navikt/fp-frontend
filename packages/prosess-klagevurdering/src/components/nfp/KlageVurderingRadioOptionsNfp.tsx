@@ -2,8 +2,8 @@ import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
 import {
-  klageVurdering as klageVurderingType,
-  klageVurderingOmgjoer as klageVurderingOmgjoerType,
+  KlageVurdering as klageVurderingType,
+  KlageVurderingOmgjoer as klageVurderingOmgjoerType,
 } from '@navikt/fp-kodeverk';
 import { required } from '@navikt/ft-form-validators';
 import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';

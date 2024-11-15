@@ -2,12 +2,11 @@ import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import { FeilutbetalingAarsak, FeilutbetalingFakta } from '@navikt/ft-types';
 import {
   FeilutbetalingAksjonspunktCode,
   FeilutbetalingFaktaIndex,
 } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
-import { AlleKodeverkTilbakekreving } from '@navikt/fp-types';
+import { FeilutbetalingAarsak, FeilutbetalingFakta, AlleKodeverkTilbakekreving } from '@navikt/fp-types';
 import { BehandlingApiKeys, requestBehandlingApi } from '../../../data/behandlingContextApi';
 import FaktaDefaultInitPanel from '../../felles/fakta/FaktaDefaultInitPanel';
 import FaktaPanelInitProps from '../../felles/typer/faktaPanelInitProps';

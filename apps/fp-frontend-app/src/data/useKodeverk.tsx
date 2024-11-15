@@ -1,7 +1,5 @@
-import { BehandlingType } from '@navikt/ft-kodeverk';
-
 import { AlleKodeverk, KodeverkMedNavn, AlleKodeverkTilbakekreving } from '@navikt/fp-types';
-import { KodeverkType } from '@navikt/fp-kodeverk';
+import { KodeverkType, BehandlingType } from '@navikt/fp-kodeverk';
 
 import { FagsakApiKeys, restFagsakApiHooks } from './fagsakContextApi';
 

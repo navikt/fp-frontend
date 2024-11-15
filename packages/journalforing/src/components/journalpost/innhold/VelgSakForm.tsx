@@ -4,7 +4,7 @@ import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import { fagsakYtelseType } from '@navikt/fp-kodeverk';
+import { FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { useFormContext } from 'react-hook-form';
 import { JournalførSakSubmitValue } from '../../../typer/ferdigstillJournalføringSubmit';
 import Journalpost from '../../../typer/journalpostTsType';
@@ -23,11 +23,11 @@ const selectFieldName = 'ytelsetypeValg';
 
 export const finnYtelseTekst = (ytelseKode: string): string => {
   switch (ytelseKode) {
-    case fagsakYtelseType.ENGANGSSTONAD:
+    case FagsakYtelseType.ENGANGSSTONAD:
       return 'Journal.Sak.Ytelse.Engangsstønad';
-    case fagsakYtelseType.FORELDREPENGER:
+    case FagsakYtelseType.FORELDREPENGER:
       return 'Journal.Sak.Ytelse.Foreldrepenger';
-    case fagsakYtelseType.SVANGERSKAPSPENGER:
+    case FagsakYtelseType.SVANGERSKAPSPENGER:
       return 'Journal.Sak.Ytelse.Svangerskapspenger';
     default:
       return 'Journal.Sak.Ytelse.Ukjent';
@@ -46,16 +46,16 @@ type RadioOption = {
 
 const ytelseSelectValg: YtelseSelectValg[] = [
   {
-    ytelse: fagsakYtelseType.ENGANGSSTONAD,
-    beskrivelsekode: finnYtelseTekst(fagsakYtelseType.ENGANGSSTONAD),
+    ytelse: FagsakYtelseType.ENGANGSSTONAD,
+    beskrivelsekode: finnYtelseTekst(FagsakYtelseType.ENGANGSSTONAD),
   },
   {
-    ytelse: fagsakYtelseType.FORELDREPENGER,
-    beskrivelsekode: finnYtelseTekst(fagsakYtelseType.FORELDREPENGER),
+    ytelse: FagsakYtelseType.FORELDREPENGER,
+    beskrivelsekode: finnYtelseTekst(FagsakYtelseType.FORELDREPENGER),
   },
   {
-    ytelse: fagsakYtelseType.SVANGERSKAPSPENGER,
-    beskrivelsekode: finnYtelseTekst(fagsakYtelseType.SVANGERSKAPSPENGER),
+    ytelse: FagsakYtelseType.SVANGERSKAPSPENGER,
+    beskrivelsekode: finnYtelseTekst(FagsakYtelseType.SVANGERSKAPSPENGER),
   },
 ];
 

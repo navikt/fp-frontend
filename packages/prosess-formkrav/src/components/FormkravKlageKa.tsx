@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { BodyShort, Heading, Label } from '@navikt/ds-react';
 import { DATE_TIME_FORMAT } from '@navikt/ft-utils';
-import { KodeverkType } from '@navikt/ft-kodeverk';
+import { KodeverkType } from '@navikt/fp-kodeverk';
 
 import { AlleKodeverk, KlageVurdering } from '@navikt/fp-types';
 

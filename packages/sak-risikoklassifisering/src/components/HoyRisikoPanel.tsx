@@ -2,7 +2,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Panel } from '@navikt/ds-react';
 
-import { aksjonspunktStatus } from '@navikt/fp-kodeverk';
+import { AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Risikoklassifisering, Aksjonspunkt, KodeverkMedNavn } from '@navikt/fp-types';
 
@@ -31,7 +31,7 @@ export const HoyRisikoPanel = ({
   faresignalVurderinger,
 }: Props) => (
   <Panel>
-    {aksjonspunkt && aksjonspunkt.status === aksjonspunktStatus.OPPRETTET && (
+    {aksjonspunkt && aksjonspunkt.status === AksjonspunktStatus.OPPRETTET && (
       <>
         <AksjonspunktHelpTextHTML>
           <FormattedMessage id="Risikopanel.Panel.Tittel" />

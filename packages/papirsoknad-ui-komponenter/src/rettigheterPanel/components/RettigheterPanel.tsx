@@ -4,7 +4,7 @@ import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Heading } from '@navikt/ds-react';
 
-import { familieHendelseType, foreldreType } from '@navikt/fp-kodeverk';
+import { FamilieHendelseType, ForeldreType } from '@navikt/fp-kodeverk';
 
 import { SoknadData } from '../../felles/SoknadData';
 
@@ -49,8 +49,8 @@ export const RettigheterPanel = ({ readOnly = true, soknadData }: Props) => {
   ];
 
   const visMannAdoptererAlene =
-    soknadData.getFamilieHendelseType() !== familieHendelseType.FODSEL &&
-    soknadData.getForeldreType() === foreldreType.FAR;
+    soknadData.getFamilieHendelseType() !== FamilieHendelseType.FODSEL &&
+    soknadData.getForeldreType() === ForeldreType.FAR;
   if (!visMannAdoptererAlene) {
     options.splice(2, 1);
   }

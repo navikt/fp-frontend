@@ -4,11 +4,11 @@ import { action } from '@storybook/addon-actions';
 
 import {
   VilkarType,
-  aksjonspunktStatus,
-  vilkarUtfallType,
-  avslagsarsakCodes,
-  soknadType,
-  AksjonspunktCode,
+  AksjonspunktStatus,
+  VilkarUtfallType,
+  Avslagsarsak,
+  SoknadType,
+  AksjonspunktKode,
 } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Behandling, Fagsak, FamilieHendelseSamling, Soknad, Vilkar } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
@@ -29,7 +29,7 @@ const vilkar = [
 ] as Vilkar[];
 
 const soknad = {
-  soknadType: soknadType.FODSEL,
+  soknadType: SoknadType.FODSEL,
   mottattDato: '2019-01-01',
   fodselsdatoer: { 1: '2019-01-01' } as { [key: number]: string },
   begrunnelseForSenInnsending: 'Dette er en begrunnelse',
@@ -87,15 +87,15 @@ export const ÅpentAksjonspunkt = Template.bind({});
   behandling: defaultBehandling,
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.SOKNADSFRISTVILKARET,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.SOKNADSFRISTVILKARET,
+      status: AksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
       vilkarType: VilkarType.SOKNADFRISTVILKARET,
     },
   ] as Aksjonspunkt[],
   isReadOnly: false,
   readOnlySubmitButton: false,
-  status: vilkarUtfallType.IKKE_VURDERT,
+  status: VilkarUtfallType.IKKE_VURDERT,
 };
 
 export const OppfyltVilkår = Template.bind({});
@@ -104,15 +104,15 @@ OppfyltVilkår.args = {
   behandling: defaultBehandling,
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.SOKNADSFRISTVILKARET,
-      status: aksjonspunktStatus.UTFORT,
+      definisjon: AksjonspunktKode.SOKNADSFRISTVILKARET,
+      status: AksjonspunktStatus.UTFORT,
       begrunnelse: 'Dette vilkåret er godkjent',
       vilkarType: VilkarType.SOKNADFRISTVILKARET,
     },
   ] as Aksjonspunkt[],
   isReadOnly: true,
   readOnlySubmitButton: true,
-  status: vilkarUtfallType.OPPFYLT,
+  status: VilkarUtfallType.OPPFYLT,
 };
 
 export const AvslåttVilkår = Template.bind({});
@@ -122,18 +122,18 @@ AvslåttVilkår.args = {
     uuid: '1',
     versjon: 1,
     behandlingsresultat: {
-      avslagsarsak: avslagsarsakCodes.INGEN_BEREGNINGSREGLER,
+      avslagsarsak: Avslagsarsak.INGEN_BEREGNINGSREGLER,
     },
   } as Behandling,
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.SOKNADSFRISTVILKARET,
-      status: aksjonspunktStatus.UTFORT,
+      definisjon: AksjonspunktKode.SOKNADSFRISTVILKARET,
+      status: AksjonspunktStatus.UTFORT,
       begrunnelse: 'Dette vilkåret er avslått',
       vilkarType: VilkarType.SOKNADFRISTVILKARET,
     },
   ] as Aksjonspunkt[],
   isReadOnly: true,
   readOnlySubmitButton: true,
-  status: vilkarUtfallType.IKKE_OPPFYLT,
+  status: VilkarUtfallType.IKKE_OPPFYLT,
 };

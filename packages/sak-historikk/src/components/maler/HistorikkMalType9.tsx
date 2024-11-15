@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { KodeverkType, tilbakekrevingVidereBehandling } from '@navikt/fp-kodeverk';
+import { KodeverkType, TilbakekrevingVidereBehandling } from '@navikt/fp-kodeverk';
 import { HistorikkinnslagEndretFelt } from '@navikt/fp-types';
 
 import historikkinnslagType from '../../kodeverk/historikkinnslagType';
@@ -78,7 +78,7 @@ const HistorikkMalType9 = ({
             {historikkinnslag.type === historikkinnslagType.TILBAKEKR_VIDEREBEHANDLING &&
               historikkinnslagDel.endredeFelter &&
               historikkinnslagDel.endredeFelter
-                .filter(endretFelt => endretFelt.tilVerdi !== tilbakekrevingVidereBehandling.TILBAKEKR_INNTREKK)
+                .filter(endretFelt => endretFelt.tilVerdi !== TilbakekrevingVidereBehandling.TILBAKEKR_INNTREKK)
                 .map((endretFelt, index) => (
                   <div className={styles.tilbakekrevingTekst} key={`endretFelt${index + 1}`}>
                     <FormattedMessage

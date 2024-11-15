@@ -3,13 +3,12 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { required } from '@navikt/ft-form-validators';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
-import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 
-import { AksjonspunktCode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus, hasAksjonspunkt } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
 import { BekreftOmsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-const { MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG } = AksjonspunktCode;
+const { MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG } = AksjonspunktKode;
 
 const getAksjonspunkt = (aksjonspunktCode: string, aksjonspunkter: Aksjonspunkt[]): Aksjonspunkt[] =>
   aksjonspunkter.filter(ap => ap.definisjon === aksjonspunktCode);

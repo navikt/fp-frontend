@@ -21,7 +21,7 @@ import {
   FlexColumn,
 } from '@navikt/ft-ui-komponenter';
 import { VurderArbeidsforholdPermisjonAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { aksjonspunktStatus, AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktStatus, AksjonspunktKode } from '@navikt/fp-kodeverk';
 
 import ArbeidsforholdFieldArray from './ArbeidsforholdFieldArray';
 
@@ -103,7 +103,7 @@ const PermisjonFaktaPanel: FunctionComponent<OwnProps> = ({
     [formMethods.getValues()],
   );
 
-  const harÅpentAksjonspunkt = aksjonspunkter.some(a => a.status === aksjonspunktStatus.OPPRETTET);
+  const harÅpentAksjonspunkt = aksjonspunkter.some(a => a.status === AksjonspunktStatus.OPPRETTET);
 
   return (
     <>
@@ -135,7 +135,7 @@ const PermisjonFaktaPanel: FunctionComponent<OwnProps> = ({
         formMethods={formMethods}
         onSubmit={values =>
           lagreCallback({
-            kode: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_PERMISJON,
+            kode: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_PERMISJON,
             arbeidsforhold: values.arbeidsforhold.map((a, index) => ({
               internArbeidsforholdId: sorterteArbeidsforhold[index].internArbeidsforholdId,
               arbeidsgiverIdent: sorterteArbeidsforhold[index].arbeidsgiverIdent,

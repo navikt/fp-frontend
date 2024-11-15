@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 import { Label, Detail } from '@navikt/ds-react';
 
 import { Behandlingsresultat, BeregningsresultatDagytelse, BeregningsresultatEs } from '@navikt/fp-types';
-import { fagsakYtelseType } from '@navikt/fp-kodeverk';
+import { FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { formatCurrencyWithKr } from '@navikt/ft-utils';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
@@ -31,7 +31,7 @@ const VedtakInnvilgetPanel: FunctionComponent<OwnProps> = ({
   const intl = useIntl();
   return (
     <>
-      {ytelseTypeKode === fagsakYtelseType.ENGANGSSTONAD &&
+      {ytelseTypeKode === FagsakYtelseType.ENGANGSSTONAD &&
         beregningsresultat &&
         'antallBarn' in beregningsresultat && (
           <FlexContainer>

@@ -10,7 +10,7 @@ import { RestApiGlobalStatePathsKeys, RestApiPathsKeys, requestApi } from '../..
 import { SistBehandledeSaker } from './SistBehandledeSaker';
 
 import messages from '../../../i18n/nb_NO.json';
-import { BehandlingStatus } from '@navikt/ft-kodeverk';
+import { BehandlingStatus } from '@navikt/fp-kodeverk';
 
 const withIntl = getIntlDecorator(messages);
 

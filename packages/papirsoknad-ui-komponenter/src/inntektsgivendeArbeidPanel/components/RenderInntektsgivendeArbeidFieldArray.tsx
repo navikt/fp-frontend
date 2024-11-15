@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 import { maxLength, hasValidDate } from '@navikt/ft-form-validators';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Datepicker, InputField, SelectField, PeriodFieldArray } from '@navikt/ft-form-hooks';
-import { KodeverkType, landkoder as Landkode } from '@navikt/fp-kodeverk';
+import { KodeverkType, Landkode } from '@navikt/fp-kodeverk';
 import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
 import { useFieldArray, useFormContext } from 'react-hook-form';

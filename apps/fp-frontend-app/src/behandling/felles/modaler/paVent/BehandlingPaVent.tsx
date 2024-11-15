@@ -1,9 +1,8 @@
 import React, { useState, useMemo, useCallback, FunctionComponent, useEffect } from 'react';
-import { isAksjonspunktOpen } from '@navikt/ft-kodeverk';
 
 import { AlleKodeverk, AlleKodeverkTilbakekreving, Behandling } from '@navikt/fp-types';
 import { SettPaVentModalIndex, FormValues } from '@navikt/fp-modal-sett-pa-vent';
-import { AksjonspunktCode, KodeverkType } from '@navikt/fp-kodeverk';
+import { isAksjonspunktOpen, AksjonspunktKode, KodeverkType } from '@navikt/fp-kodeverk';
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../../data/behandlingContextApi';
 
 interface BehandlingPaVentProps {
@@ -48,7 +47,7 @@ const BehandlingPaVent: FunctionComponent<BehandlingPaVentProps> = ({
     () =>
       behandling.aksjonspunkt
         .filter(ap => isAksjonspunktOpen(ap.status))
-        .some(ap => ap.definisjon === AksjonspunktCode.AUTO_MANUELT_SATT_PÅ_VENT),
+        .some(ap => ap.definisjon === AksjonspunktKode.AUTO_MANUELT_SATT_PÅ_VENT),
     [behandling.aksjonspunkt],
   );
 

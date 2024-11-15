@@ -1,12 +1,17 @@
 import React, { FunctionComponent, useCallback, useState } from 'react';
 import { useIntl } from 'react-intl';
-import { Behandling, Behandlingsresultat, Fagsak, Aksjonspunkt } from '@navikt/ft-types';
-import { VilkarUtfallType, AksjonspunktStatus, BehandlingResultatType } from '@navikt/ft-kodeverk';
 
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { VilkarUtfallType, AksjonspunktStatus, BehandlingResultatType, AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { VedtakKlageProsessIndex, VedtakKlageBrevData } from '@navikt/fp-prosess-vedtak-klage';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import { ForhåndsvisMeldingParams, KlageVurdering } from '@navikt/fp-types';
+import {
+  Behandling,
+  Behandlingsresultat,
+  Fagsak,
+  Aksjonspunkt,
+  ForhåndsvisMeldingParams,
+  KlageVurdering,
+} from '@navikt/fp-types';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
 import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
@@ -67,9 +72,9 @@ const getLagringSideeffekter =
   };
 
 const AKSJONSPUNKT_KODER = [
-  AksjonspunktCode.FORESLA_VEDTAK,
-  AksjonspunktCode.FATTER_VEDTAK,
-  AksjonspunktCode.FORESLA_VEDTAK_MANUELT,
+  AksjonspunktKode.FORESLA_VEDTAK,
+  AksjonspunktKode.FATTER_VEDTAK,
+  AksjonspunktKode.FORESLA_VEDTAK_MANUELT,
 ];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.KLAGE_VURDERING];

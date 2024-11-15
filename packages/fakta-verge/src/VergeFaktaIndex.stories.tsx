@@ -2,7 +2,7 @@ import React from 'react';
 import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { AksjonspunktCode, aksjonspunktStatus } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { Behandling } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
@@ -14,8 +14,8 @@ import '@navikt/ft-form-hooks/dist/style.css';
 
 const aksjonspunkter = [
   {
-    definisjon: AksjonspunktCode.AVKLAR_VERGE,
-    status: aksjonspunktStatus.OPPRETTET,
+    definisjon: AksjonspunktKode.AVKLAR_VERGE,
+    status: AksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
   },
@@ -47,7 +47,7 @@ const Template: StoryFn<{
     aksjonspunkter={aksjonspunkter}
     alleKodeverk={alleKodeverk as any}
     alleMerknaderFraBeslutter={{
-      [AksjonspunktCode.AVKLAR_VERGE]: merknaderFraBeslutter,
+      [AksjonspunktKode.AVKLAR_VERGE]: merknaderFraBeslutter,
     }}
   />
 );

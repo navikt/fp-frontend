@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
-import { VilkarType, behandlingType, AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { VilkarType, BehandlingType, AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { SokersOpplysningspliktVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-sokers-opplysningsplikt';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { ArbeidsgiverOpplysningerPerId, Soknad } from '@navikt/fp-types';
@@ -12,8 +12,8 @@ import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [
-  AksjonspunktCode.SOKERS_OPPLYSNINGSPLIKT_OVST,
-  AksjonspunktCode.SOKERS_OPPLYSNINGSPLIKT_MANU,
+  AksjonspunktKode.SOKERS_OPPLYSNINGSPLIKT_OVST,
+  AksjonspunktKode.SOKERS_OPPLYSNINGSPLIKT_MANU,
 ];
 
 const VILKAR_KODER = [VilkarType.SOKERSOPPLYSNINGSPLIKT];
@@ -39,7 +39,7 @@ const OpplysningspliktProsessStegInitPanel: FunctionComponent<OwnProps & Prosess
     prosessPanelKode={ProsessStegCode.OPPLYSNINGSPLIKT}
     prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.Opplysningsplikt' })}
     skalPanelVisesIMeny={data =>
-      data.behandling.type !== behandlingType.REVURDERING
+      data.behandling.type !== BehandlingType.REVURDERING
         ? skalViseProsessPanel(data.aksjonspunkter, VILKAR_KODER, data.vilkar)
         : false
     }

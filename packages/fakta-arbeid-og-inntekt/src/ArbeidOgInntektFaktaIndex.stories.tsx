@@ -10,7 +10,7 @@ import {
   Behandling,
 } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import { AksjonspunktCode, aksjonspunktStatus, ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus, ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import ArbeidOgInntektFaktaIndex from './ArbeidOgInntektFaktaIndex';
 
@@ -99,8 +99,8 @@ InnhentInntektsmelding.args = {
   settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
+      status: AksjonspunktStatus.OPPRETTET,
     } as Aksjonspunkt,
   ],
   arbeidsgiverOpplysningerPerId: {
@@ -177,8 +177,8 @@ InnhentInntektsmeldingDerEnIkkeHarInntekterFraAAregisteret.args = {
   settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
+      status: AksjonspunktStatus.OPPRETTET,
     } as Aksjonspunkt,
   ],
   arbeidsgiverOpplysningerPerId: {
@@ -214,8 +214,8 @@ InnhentInntektsmeldingDerBehandlingErAvsluttet.args = {
   settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
-      status: aksjonspunktStatus.UTFORT,
+      definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
+      status: AksjonspunktStatus.UTFORT,
     } as Aksjonspunkt,
   ],
   arbeidsgiverOpplysningerPerId: {
@@ -254,8 +254,8 @@ AvklarManglendeArbeidsforhold.args = {
   settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
+      status: AksjonspunktStatus.OPPRETTET,
     } as Aksjonspunkt,
   ],
   arbeidsgiverOpplysningerPerId: {
@@ -296,8 +296,8 @@ AvklarManglendeArbeidsforholdDerBehandlingErAvsluttet.args = {
   settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
-      status: aksjonspunktStatus.UTFORT,
+      definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
+      status: AksjonspunktStatus.UTFORT,
     } as Aksjonspunkt,
   ],
   arbeidsgiverOpplysningerPerId: {
@@ -350,8 +350,8 @@ AvklarManglendeOpplysningerDerAksjonspunktErBekreftetOgTilbakehoppMulig.args = {
   settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
-      status: aksjonspunktStatus.UTFORT,
+      definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
+      status: AksjonspunktStatus.UTFORT,
     } as Aksjonspunkt,
   ],
   arbeidsgiverOpplysningerPerId: {
@@ -454,8 +454,8 @@ SkalKunneLeggeTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldinger
     settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
     aksjonspunkter: [
       {
-        definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
-        status: aksjonspunktStatus.OPPRETTET,
+        definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
+        status: AksjonspunktStatus.OPPRETTET,
       } as Aksjonspunkt,
     ],
     arbeidOgInntekt: {
@@ -486,8 +486,8 @@ ArbeidsforholdErManueltLagtTilOgLagretOgReåpnet.args = {
   settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
+      status: AksjonspunktStatus.OPPRETTET,
     } as Aksjonspunkt,
   ],
   arbeidsgiverOpplysningerPerId: {
@@ -741,8 +741,8 @@ FlereArbeidsforholdOgInntekstemeldinger.args = {
   erOverstyrer: true,
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
+      status: AksjonspunktStatus.OPPRETTET,
     },
   ] as Aksjonspunkt[],
   arbeidsgiverOpplysningerPerId: {
@@ -900,8 +900,8 @@ ArbeidsforholdMedSammeOrgNr.args = {
   erOverstyrer: true,
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
+      status: AksjonspunktStatus.OPPRETTET,
     },
   ] as Aksjonspunkt[],
   arbeidsgiverOpplysningerPerId: {
@@ -1020,8 +1020,8 @@ ArbeidsforholdMedSammeOrgNrDerEnManglerInntektsmeldingMenIkkeDetAndre.args = {
   erOverstyrer: true,
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
+      status: AksjonspunktStatus.OPPRETTET,
     },
   ] as Aksjonspunkt[],
   arbeidsgiverOpplysningerPerId: {
@@ -1211,8 +1211,8 @@ EtterAtEtterspurtInntektsmeldingErKommet.args = {
   erOverstyrer: false,
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
+      status: AksjonspunktStatus.OPPRETTET,
     },
   ] as Aksjonspunkt[],
   arbeidsgiverOpplysningerPerId: {

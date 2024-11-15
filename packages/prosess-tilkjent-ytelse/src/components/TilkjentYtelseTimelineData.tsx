@@ -3,7 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import dayjs from 'dayjs';
 import { Label, BodyShort, Button, Panel } from '@navikt/ds-react';
 
-import { KodeverkType, aktivitetStatus, uttakPeriodeNavn, getKodeverknavnFn } from '@navikt/fp-kodeverk';
+import { KodeverkType, AktivitetStatus, UttakPeriodeNavn, getKodeverknavnFn } from '@navikt/fp-kodeverk';
 import {
   Table,
   TableColumn,
@@ -71,19 +71,19 @@ const findAndelsnavn = (
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 ): ReactElement | string => {
   switch (andel.aktivitetStatus) {
-    case aktivitetStatus.ARBEIDSTAKER:
+    case AktivitetStatus.ARBEIDSTAKER:
       return createVisningNavnForUttakArbeidstaker(andel, getKodeverknavn, arbeidsgiverOpplysningerPerId);
-    case aktivitetStatus.FRILANSER:
+    case AktivitetStatus.FRILANSER:
       return <FormattedMessage id="TilkjentYtelse.PeriodeData.Frilans" />;
-    case aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE:
+    case AktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE:
       return <FormattedMessage id="TilkjentYtelse.PeriodeData.SelvstendigNaeringsdrivende" />;
-    case aktivitetStatus.DAGPENGER:
+    case AktivitetStatus.DAGPENGER:
       return <FormattedMessage id="TilkjentYtelse.PeriodeData.Dagpenger" />;
-    case aktivitetStatus.ARBEIDSAVKLARINGSPENGER:
+    case AktivitetStatus.ARBEIDSAVKLARINGSPENGER:
       return <FormattedMessage id="TilkjentYtelse.PeriodeData.AAP" />;
-    case aktivitetStatus.MILITAER_ELLER_SIVIL:
+    case AktivitetStatus.MILITAER_ELLER_SIVIL:
       return <FormattedMessage id="TilkjentYtelse.PeriodeData.Militaer" />;
-    case aktivitetStatus.BRUKERS_ANDEL:
+    case AktivitetStatus.BRUKERS_ANDEL:
       return <FormattedMessage id="TilkjentYtelse.PeriodeData.BrukersAndel" />;
 
     default:
@@ -210,7 +210,7 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
               <TableColumn>{findAndelsnavn(andel, getKodeverknavn, arbeidsgiverOpplysningerPerId)}</TableColumn>
               {!isSoknadSvangerskapspenger && (
                 <TableColumn>
-                  <BodyShort size="small">{uttakPeriodeNavn[andel.uttak.stonadskontoType]}</BodyShort>
+                  <BodyShort size="small">{UttakPeriodeNavn[andel.uttak.stonadskontoType]}</BodyShort>
                 </TableColumn>
               )}
               {!isSoknadSvangerskapspenger && (
@@ -223,7 +223,7 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
               </TableColumn>
               <TableColumn>
                 <BodyShort size="small">
-                  {andel.aktivitetStatus === aktivitetStatus.ARBEIDSTAKER && andel.refusjon ? andel.refusjon : ''}
+                  {andel.aktivitetStatus === AktivitetStatus.ARBEIDSTAKER && andel.refusjon ? andel.refusjon : ''}
                 </BodyShort>
               </TableColumn>
               <TableColumn>

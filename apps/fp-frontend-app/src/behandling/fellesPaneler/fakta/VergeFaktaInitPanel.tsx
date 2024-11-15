@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { VergeFaktaIndex } from '@navikt/fp-fakta-verge';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { Verge } from '@navikt/fp-types';
@@ -10,7 +10,7 @@ import FaktaPanelInitProps from '../../felles/typer/faktaPanelInitProps';
 import FaktaDefaultInitPanel from '../../felles/fakta/FaktaDefaultInitPanel';
 import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
 
-const AKSJONSPUNKT_KODER = [AksjonspunktCode.AVKLAR_VERGE];
+const AKSJONSPUNKT_KODER = [AksjonspunktKode.AVKLAR_VERGE];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.VERGE];
 type EndepunktPanelData = {

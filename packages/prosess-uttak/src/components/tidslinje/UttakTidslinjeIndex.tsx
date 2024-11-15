@@ -13,12 +13,7 @@ import {
   Fagsak,
   AlleKodeverk,
 } from '@navikt/fp-types';
-import {
-  soknadType,
-  oppholdArsakType,
-  oppholdArsakMapper,
-  behandlingType as BehandlingType,
-} from '@navikt/fp-kodeverk';
+import { SoknadType, OppholdArsakType, OppholdArsakMapper, BehandlingType } from '@navikt/fp-kodeverk';
 
 import UttakTidslinje, { PeriodeSøkerMedTidslinjedata, TidslinjeTimes } from './UttakTidslinje';
 
@@ -63,7 +58,7 @@ const finnTidslinjeTider = (
       ? gjeldendeFamiliehendelse.avklartBarn[0].fodselsdato
       : undefined;
   const fødselsdato =
-    søknad.soknadType === soknadType.FODSEL ? endredFodselsDato || familiehendelseDate : søknad.omsorgsovertakelseDato;
+    søknad.soknadType === SoknadType.FODSEL ? endredFodselsDato || familiehendelseDate : søknad.omsorgsovertakelseDato;
   const isRevurdering = behandling.type === BehandlingType.REVURDERING;
 
   const barnFraTps = familiehendelse.register?.avklartBarn ? familiehendelse.register.avklartBarn : [];
@@ -111,8 +106,8 @@ const lagUttakMedOpphold = (perioderSøker: PeriodeSoker[]): PeriodeSoker[] =>
   perioderSøker.map(uttak => {
     const { ...uttakPerioder } = uttak;
 
-    if (uttak.oppholdÅrsak !== oppholdArsakType.UDEFINERT) {
-      const stonadskonto = oppholdArsakMapper[uttak.oppholdÅrsak];
+    if (uttak.oppholdÅrsak !== OppholdArsakType.UDEFINERT) {
+      const stonadskonto = OppholdArsakMapper[uttak.oppholdÅrsak];
       const oppholdInfo = {
         stønadskontoType: stonadskonto,
         trekkdagerDesimaler: calcDays(uttak.fom, uttak.tom),

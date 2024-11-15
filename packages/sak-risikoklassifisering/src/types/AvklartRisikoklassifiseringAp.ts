@@ -1,4 +1,4 @@
-import { AksjonspunktTilBekreftelse } from '@navikt/ft-types';
+import { AksjonspunktTilBekreftelse } from '@navikt/fp-types';
 
 import { RisikoklassifiseringAksjonspunktCode } from '../RisikoklassifiseringAksjonspunktCode';
 
