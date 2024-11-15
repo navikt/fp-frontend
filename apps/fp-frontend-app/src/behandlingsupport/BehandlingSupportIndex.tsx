@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { FunctionComponent, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useIntl } from 'react-intl';
 
@@ -12,14 +12,14 @@ import {
   PersonCheckmarkFillIcon,
 } from '@navikt/aksel-icons';
 import { getSupportPanelLocationCreator } from '../app/paths';
-import { HistorikkIndex as HistorikkIndexV2 } from './historikk-v2/HistorikkIndex';
-import { MeldingIndex } from './melding/MeldingIndex';
-import { DokumentIndex } from './dokument/DokumentIndex';
-import { TotrinnskontrollIndex } from './totrinnskontroll/TotrinnskontrollIndex';
-import { useTrackRouteParam } from '../app/useTrackRouteParam';
-import { FagsakData } from '../fagsak/FagsakData';
-import { NotatIndex } from './notat/NotatIndex';
-import { SupportTabs } from './supportTabs';
+import { HistorikkIndex } from './historikk/HistorikkIndex';
+import MeldingIndex from './melding/MeldingIndex';
+import DokumentIndex from './dokument/DokumentIndex';
+import TotrinnskontrollIndex from './totrinnskontroll/TotrinnskontrollIndex';
+import useTrackRouteParam from '../app/useTrackRouteParam';
+import FagsakData from '../fagsak/FagsakData';
+import NotatIndex from './notat/NotatIndex';
+import SupportTabs from './supportTabs';
 
 import styles from './behandlingSupportIndex.module.css';
 
@@ -37,10 +37,10 @@ const utledAktivtPanel = (
   if (skalViseTilGodkjenning) {
     return SupportTabs.TIL_BESLUTTER;
   }
-  return SupportTabs.HISTORIKK_V2;
+  return SupportTabs.HISTORIKK;
 };
 
-interface Props {
+interface OwnProps {
   fagsakData: FagsakData;
   behandlingUuid?: string;
   behandlingVersjon?: number;
@@ -54,13 +54,13 @@ interface Props {
  * Har ansvar for å lage navigasjonsrad med korrekte navigasjonsvalg, og route til rett
  * støttepanelkomponent ihht. gitt parameter i URL-en.
  */
-export const BehandlingSupportIndex = ({
+const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
   fagsakData,
   behandlingUuid,
   behandlingVersjon,
   hentOgSettBehandling,
   oppdaterFagsak,
-}: Props) => {
+}) => {
   const intl = useIntl();
 
   const { selected: valgtSupportPanel, location } = useTrackRouteParam<string>({
@@ -110,8 +110,8 @@ export const BehandlingSupportIndex = ({
         )}
         <Tabs.Tab
           className={styles.tab}
-          value={SupportTabs.HISTORIKK_V2}
-          icon={<ClockDashedIcon title={intl.formatMessage({ id: 'BehandlingSupportIndex.HistorikkV2' })} />}
+          value={SupportTabs.HISTORIKK}
+          icon={<ClockDashedIcon title={intl.formatMessage({ id: 'BehandlingSupportIndex.Historikk' })} />}
         />
         <Tabs.Tab
           className={styles.tab}
@@ -154,12 +154,12 @@ export const BehandlingSupportIndex = ({
           />
         )}
       </Tabs.Panel>
-      <Tabs.Panel value={SupportTabs.HISTORIKK_V2}>
-        <HistorikkIndexV2
+      <Tabs.Panel value={SupportTabs.HISTORIKK}>
+        <HistorikkIndex
           saksnummer={fagsak.saksnummer}
           behandlingUuid={behandlingUuid}
-          historikkinnslagFpSak={fagsakData.getHistorikkV2FpSak()}
-          historikkinnslagFpTilbake={fagsakData.getHistorikkV2FpTilbake()}
+          historikkinnslagFpSak={fagsakData.getHistorikkFpSak()}
+          historikkinnslagFpTilbake={fagsakData.getHistorikkFpTilbake()}
           kjønn={fagsak.bruker.kjønn}
         />
       </Tabs.Panel>
@@ -187,3 +187,5 @@ export const BehandlingSupportIndex = ({
     </Tabs>
   );
 };
+
+export default BehandlingSupportIndex;

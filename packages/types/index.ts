@@ -129,14 +129,7 @@ export type {
   default as TotrinnskontrollAksjonspunkt,
   OpptjeningAktiviteter,
 } from './src/totrinnskontrollAksjonspunktTsType';
-export type {
-  default as Historikkinnslag,
-  HistorikkinnslagDel,
-  HistorikkinnslagEndretFelt,
-  HistorikkInnslagOpplysning,
-  HistorikkInnslagAksjonspunkt,
-} from './src/historikkinnslagTsType';
-export type { HistorikkinnslagV2, HistorikkInnslagDokumentLink } from './src/historikkinnslagTsTypeV2';
+export type { Historikkinnslag, HistorikkInnslagDokumentLink } from './src/historikkinnslagTsType';
 export type {
   default as ArbeidsgiverOpplysningerPerId,
   ArbeidsgiverOpplysningerWrapper,
