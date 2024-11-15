@@ -7,7 +7,8 @@ enum JournalpostTilstand {
   UTGAAR = 'UTGAAR',
 }
 
-const ENDELIGE_TILSTANDER = [JournalpostTilstand.FEILREGISTRERT, JournalpostTilstand.JOURNALFOERT, JournalpostTilstand.EKSPEDERT, JournalpostTilstand.FERDIGSTILT];
+const ENDELIGE_TILSTANDER = [JournalpostTilstand.FEILREGISTRERT, JournalpostTilstand.JOURNALFOERT,
+  JournalpostTilstand.EKSPEDERT, JournalpostTilstand.FERDIGSTILT];
 
 export const erEndeligJournalført = (tilstand: JournalpostTilstand | undefined): boolean =>
   !!tilstand && ENDELIGE_TILSTANDER.includes(tilstand);
