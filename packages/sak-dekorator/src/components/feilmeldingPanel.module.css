@@ -1,0 +1,25 @@
+.container {
+  background-color: var(--a-red-500);
+  color: var(--a-white);
+  display: block;
+  max-height: 120px;
+  min-height: 53px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-bottom: 5px;
+  padding-left: 40px;
+  padding-top: 5px;
+  position: relative;
+}
+.link {
+  color: var(--a-white);
+}
+.lukkContainer {
+  font-size: 18px;
+  position: absolute;
+  right: 16px;
+  top: 3px;
+}
+.wordWrap {
+  white-space: pre-line;
+}

@@ -1,8 +1,9 @@
-import { Aktor, Dokument } from '@navikt/ft-types';
+import { Dokument } from '@navikt/ft-types';
 
 import { RestApiConfigBuilder, createRequestApi, RestKey, Link } from '@navikt/fp-rest-api';
 import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
 import {
+  Aktor,
   ForhåndsvisMeldingParams,
   FagsakEnkel,
   Fagsak,

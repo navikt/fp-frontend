@@ -5,3 +5,10 @@
 .headerPadding {
   padding-left: 12px;
 }
+
+.tabell {
+  border-bottom-color: var(--a-gray-300);
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  padding-bottom: 50px;
+}

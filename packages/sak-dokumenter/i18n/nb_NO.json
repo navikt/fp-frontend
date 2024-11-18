@@ -1,0 +1,13 @@
+{
+  "DocumentList.Direction": "Inn/ut",
+  "DocumentList.DocumentType": "Dokument",
+  "DocumentList.Gjelder": "Gjelder",
+  "DocumentList.DateTime": "Dato",
+  "DocumentList.NoDocuments": "Det finnes ingen dokumenter på saken",
+  "DocumentList.Motta": "Inn",
+  "DocumentList.Send": "Ut",
+  "DocumentList.Intern": "Intern",
+  "DocumentList.IProduksjon": "I bestilling",
+  "DocumentList.IBruk": "Brukes i behandlingen",
+  "DocumentList.LastNedKnapp": "{antall, plural, one {Åpne # valgt dokument} other {Åpne # valgte dokumenter}}"
+}

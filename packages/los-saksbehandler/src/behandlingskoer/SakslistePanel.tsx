@@ -1,5 +1,4 @@
 import React from 'react';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { Oppgave } from '@navikt/fp-los-felles';
 
@@ -12,6 +11,7 @@ import { Saksliste } from '../typer/sakslisteTsType';
 import { RestApiPathsKeys, restApiHooks } from '../data/fplosSaksbehandlerRestApi';
 import { SakslisteVelgerForm } from './sakslisteVelger/SakslisteVelgerForm';
 import { OppgaverTabell } from './oppgaveTabell/OppgaverTabell';
+import { VStack } from '@navikt/ds-react';
 
 interface Props {
   valgtSakslisteId?: number;
@@ -26,7 +26,7 @@ export const SakslistePanel = ({ reserverOppgave, sakslister, setValgtSakslisteI
   );
 
   return (
-    <>
+    <VStack gap="8">
       <SakslisteVelgerForm
         sakslister={sakslister}
         setValgtSakslisteId={setValgtSakslisteId}
@@ -35,7 +35,6 @@ export const SakslistePanel = ({ reserverOppgave, sakslister, setValgtSakslisteI
         setValueInLocalStorage={setValueInLocalStorage}
         removeValueFromLocalStorage={removeValueFromLocalStorage}
       />
-      <VerticalSpacer twentyPx />
       {valgtSakslisteId && (
         <OppgaverTabell
           reserverOppgave={reserverOppgave}
@@ -43,6 +42,6 @@ export const SakslistePanel = ({ reserverOppgave, sakslister, setValgtSakslisteI
           valgtSakslisteId={valgtSakslisteId}
         />
       )}
-    </>
+    </VStack>
   );
 };

@@ -42,7 +42,13 @@ export type Saksmarkering = {
   kortNavn?: string;
 };
 
-type Fagsak = Readonly<{
+export type FagsakPersoner = Readonly<{
+  bruker: FagsakPerson;
+  annenPart?: FagsakPerson;
+  familiehendelse?: FagsakHendelse;
+}>;
+
+export type Fagsak = Readonly<{
   saksnummer: string;
   fagsakYtelseType: string;
   relasjonsRolleType: string;
@@ -64,5 +70,3 @@ type Fagsak = Readonly<{
   kontrollResultat: Risikoklassifisering;
   notater: Saksnotat[];
 }>;
-
-export default Fagsak;

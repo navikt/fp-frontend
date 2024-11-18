@@ -1,0 +1,8 @@
+.image {
+  color: var(--a-orange-500);
+  height: 30px;
+  width: 30px;
+}
+.firstCol {
+  width: 50px;
+}

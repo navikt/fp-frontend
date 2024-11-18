@@ -1,0 +1,48 @@
+{
+  "name": "@navikt/fp-sak-visittkort",
+  "description": "Komponent som viser informasjon om søker, annen part og barn",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "main": "index.ts",
+  "types": "index.ts",
+  "scripts": {
+    "test": "vitest",
+    "test:watch": "vitest --watch=true",
+    "test:coverage": "vitest --coverage",
+    "tsc": "tsc --pretty",
+    "eslint": "eslint \"src/**/*.ts*\" --color",
+    "eslint:fix": "eslint --fix \"src/**/*.ts*\" --color",
+    "stylelint": "stylelint \"src/**/*.module.css\"",
+    "prettier": "prettier --write src",
+    "clean": "rm -rf ./dist ./node_modules ./coverage ./.storybook-static-build",
+    "build-storybook": "storybook build -o .storybook-static-build",
+    "storybook": "storybook dev --quiet -p 7014"
+  },
+  "dependencies": {
+    "@navikt/aksel-icons": "7.5.1",
+    "@navikt/ds-css": "7.5.1",
+    "@navikt/ds-react": "7.5.1",
+    "@navikt/fp-kodeverk": "workspace:^",
+    "@navikt/fp-types": "workspace:^",
+    "@navikt/ft-plattform-komponenter": "5.1.0",
+    "@navikt/ft-utils": "2.5.0",
+    "dayjs": "1.11.13",
+    "react": "18.3.1",
+    "react-intl": "6.8.7"
+  },
+  "devDependencies": {
+    "@navikt/fp-storybook-utils": "workspace:*",
+    "@storybook/addon-actions": "8.4.2",
+    "@storybook/react": "8.4.2",
+    "@storybook/react-vite": "8.4.2",
+    "@testing-library/dom": "10.4.0",
+    "@testing-library/react": "16.0.1",
+    "eslint": "9.14.0",
+    "storybook": "8.4.2",
+    "stylelint": "16.10.0",
+    "typescript": "5.6.3",
+    "vite": "5.4.10",
+    "vitest": "2.1.4"
+  }
+}
