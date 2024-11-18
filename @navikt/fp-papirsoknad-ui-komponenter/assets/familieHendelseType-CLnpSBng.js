@@ -1,0 +1,1 @@
+var S=(O=>(O.ADOPSJON="ADPSJN",O.OMSORG="OMSRGO",O.FODSEL="FODSL",O.TERMIN="TERM",O))(S||{});export{S as F};

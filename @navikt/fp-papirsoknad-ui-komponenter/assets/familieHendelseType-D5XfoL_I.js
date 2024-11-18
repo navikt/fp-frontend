@@ -1,1 +1,0 @@
-const O={ADOPSJON:"ADPSJN",OMSORG:"OMSRGO",FODSEL:"FODSL",TERMIN:"TERM"};export{O as f};
