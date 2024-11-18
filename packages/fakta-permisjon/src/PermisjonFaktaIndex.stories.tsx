@@ -10,7 +10,7 @@ import {
   Behandling,
 } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import { AksjonspunktCode, aksjonspunktStatus } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import PermisjonFaktaIndex from './PermisjonFaktaIndex';
 
@@ -66,8 +66,8 @@ EttArbeidsforholdUtenSluttdatoForPermisjon.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_PERMISJON,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_PERMISJON,
+      status: AksjonspunktStatus.OPPRETTET,
     } as Aksjonspunkt,
   ],
   arbeidsgiverOpplysningerPerId: {
@@ -155,8 +155,8 @@ FlereArbeidsforhold.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
+      status: AksjonspunktStatus.OPPRETTET,
     },
   ] as Aksjonspunkt[],
   arbeidsgiverOpplysningerPerId: {
@@ -308,8 +308,8 @@ FlereArbeidsforholdFraSammeArbeidsgiver.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
+      status: AksjonspunktStatus.OPPRETTET,
     },
   ] as Aksjonspunkt[],
   arbeidsgiverOpplysningerPerId: {
@@ -410,8 +410,8 @@ VisFødselsdatoNårPrivatperson.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_PERMISJON,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_PERMISJON,
+      status: AksjonspunktStatus.OPPRETTET,
     } as Aksjonspunkt,
   ],
   arbeidsgiverOpplysningerPerId: {

@@ -1,11 +1,10 @@
 import React, { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { Form } from '@navikt/ft-form-hooks';
-import { KodeverkMedNavn } from '@navikt/ft-types';
 import { omitOne } from '@navikt/ft-utils';
 
-import { AlleKodeverk } from '@navikt/fp-types';
-import { foreldreType, KodeverkType, familieHendelseType } from '@navikt/fp-kodeverk';
+import { KodeverkMedNavn, AlleKodeverk } from '@navikt/fp-types';
+import { ForeldreType, KodeverkType, FamilieHendelseType } from '@navikt/fp-kodeverk';
 import {
   SoknadData,
   MottattDatoPapirsoknadIndex,
@@ -128,7 +127,7 @@ export const ForeldrepengerForm = ({
       <MottattDatoPapirsoknadIndex readOnly={readOnly} />
       <OppholdINorgePapirsoknadIndex
         readOnly={readOnly}
-        erAdopsjon={soknadData.getFamilieHendelseType() !== familieHendelseType.ADOPSJON}
+        erAdopsjon={soknadData.getFamilieHendelseType() !== FamilieHendelseType.ADOPSJON}
         alleKodeverk={alleKodeverk}
         mottattDato={mottattDato}
       />
@@ -137,7 +136,7 @@ export const ForeldrepengerForm = ({
       <FrilansPapirsoknadIndex readOnly={readOnly} />
       <AndreYtelserPapirsoknadIndex readOnly={readOnly} alleKodeverk={alleKodeverk} />
       <DekningsgradIndex readOnly={readOnly} />
-      {soknadData.getFamilieHendelseType() === familieHendelseType.FODSEL && (
+      {soknadData.getFamilieHendelseType() === FamilieHendelseType.FODSEL && (
         <FodselPapirsoknadIndex readOnly={readOnly} erForeldrepenger />
       )}
       <RettigheterPapirsoknadIndex readOnly={readOnly} soknadData={soknadData} />
@@ -153,7 +152,7 @@ export const ForeldrepengerForm = ({
           <PermisjonRettigheterPanel
             readOnly={readOnly}
             denAndreForelderenHarRettPaForeldrepenger={denAndreForelderenHarRettPaForeldrepenger}
-            sokerErMor={soknadData.getForeldreType() === foreldreType.MOR}
+            sokerErMor={soknadData.getForeldreType() === ForeldreType.MOR}
           />
         }
         alleKodeverk={alleKodeverk}

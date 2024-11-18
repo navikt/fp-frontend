@@ -7,12 +7,12 @@ import { BodyShort } from '@navikt/ds-react';
 import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessPanelTemplate } from '@navikt/fp-prosess-felles';
 import {
-  vilkarUtfallType,
+  VilkarUtfallType,
   KodeverkType,
   VilkarType,
   getKodeverknavnFn,
-  AksjonspunktCode,
-  aksjonspunktStatus,
+  AksjonspunktKode,
+  AksjonspunktStatus,
 } from '@navikt/fp-kodeverk';
 import { Table, TableColumn, TableRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT, isObject } from '@navikt/ft-utils';
@@ -102,8 +102,8 @@ const buildInitialValues = (
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 ): FormValues => {
   const aksjonspunkt = aksjonspunkter.length > 0 ? aksjonspunkter[0] : undefined;
-  const isOpenAksjonspunkt = aksjonspunkt && aksjonspunkt.status === aksjonspunktStatus.OPPRETTET;
-  const isVilkarGodkjent = soknadExists && vilkarUtfallType.OPPFYLT === status;
+  const isOpenAksjonspunkt = aksjonspunkt && aksjonspunkt.status === AksjonspunktStatus.OPPRETTET;
+  const isVilkarGodkjent = soknadExists && VilkarUtfallType.OPPFYLT === status;
 
   // TODO Mogleg inntektsmeldingerSomIkkeKommer kan fjernast, men trur fjerning av bruken av denne i render er ein midlertidig
   // fiks og at dette derfor skal brukast etterkvart. Sjå TFP-3076
@@ -137,9 +137,9 @@ const transformValues = (
 
   const aksjonspunkt = aksjonspunkter.length > 0 ? aksjonspunkter[0] : undefined;
   const kode =
-    aksjonspunkt && aksjonspunkt.definisjon === AksjonspunktCode.SOKERS_OPPLYSNINGSPLIKT_MANU
-      ? AksjonspunktCode.SOKERS_OPPLYSNINGSPLIKT_MANU
-      : AksjonspunktCode.SOKERS_OPPLYSNINGSPLIKT_OVST;
+    aksjonspunkt && aksjonspunkt.definisjon === AksjonspunktKode.SOKERS_OPPLYSNINGSPLIKT_MANU
+      ? AksjonspunktKode.SOKERS_OPPLYSNINGSPLIKT_MANU
+      : AksjonspunktKode.SOKERS_OPPLYSNINGSPLIKT_OVST;
 
   return {
     kode,
@@ -223,8 +223,8 @@ const SokersOpplysningspliktForm: FunctionComponent<OwnProps> = ({
   const hasAksjonspunkt = formMethods.watch('hasAksjonspunkt');
   const erVilkarOk = formMethods.watch('erVilkarOk');
 
-  const isOpenAksjonspunkt = aksjonspunkter.some(ap => ap.status === aksjonspunktStatus.OPPRETTET);
-  const originalErVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
+  const isOpenAksjonspunkt = aksjonspunkter.some(ap => ap.status === AksjonspunktStatus.OPPRETTET);
+  const originalErVilkarOk = isOpenAksjonspunkt ? undefined : VilkarUtfallType.OPPFYLT === status;
 
   return (
     <Form

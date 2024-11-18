@@ -1,4 +1,4 @@
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
 import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
 
@@ -12,6 +12,6 @@ type VurderInnsynAp = {
   }[];
   sattPaVent?: boolean;
   fristDato?: string;
-} & AksjonspunktTilBekreftelse<AksjonspunktCode.VURDER_INNSYN>;
+} & AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_INNSYN>;
 
 export default VurderInnsynAp;

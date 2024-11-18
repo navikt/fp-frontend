@@ -1,5 +1,4 @@
-import { Aksjonspunkt } from '@navikt/ft-types';
-import { Vilkar } from '@navikt/fp-types';
+import { Aksjonspunkt, Vilkar } from '@navikt/fp-types';
 
 const skalViseProsessPanel = (
   aksjonspunkter: Aksjonspunkt[] = [],

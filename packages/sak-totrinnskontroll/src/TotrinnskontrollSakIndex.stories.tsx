@@ -2,7 +2,7 @@ import React from 'react';
 import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { behandlingResultatType, behandlingType, behandlingStatus, fagsakYtelseType } from '@navikt/fp-kodeverk';
+import { BehandlingResultatType, BehandlingType, BehandlingStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { BehandlingAppKontekst, BehandlingÅrsak, TotrinnskontrollSkjermlenkeContext } from '@navikt/fp-types';
 import { withRouter, alleKodeverk } from '@navikt/fp-storybook-utils';
 
@@ -19,12 +19,12 @@ const location = {
 const defaultBehandling = {
   uuid: '1',
   versjon: 2,
-  status: behandlingStatus.FATTER_VEDTAK,
-  type: behandlingType.FORSTEGANGSSOKNAD,
+  status: BehandlingStatus.FATTER_VEDTAK,
+  type: BehandlingType.FORSTEGANGSSOKNAD,
   behandlingÅrsaker: [] as BehandlingÅrsak[],
   toTrinnsBehandling: true,
   behandlingsresultat: {
-    type: behandlingResultatType.KLAGE_YTELSESVEDTAK_STADFESTET,
+    type: BehandlingResultatType.KLAGE_YTELSESVEDTAK_STADFESTET,
   },
 } as BehandlingAppKontekst;
 
@@ -54,7 +54,7 @@ const Template: StoryFn<{
       readOnly={readOnly}
       onSubmit={lagre}
       forhandsvisVedtaksbrev={action('button-click')}
-      fagsakYtelseType={fagsakYtelseType.FORELDREPENGER}
+      fagsakYtelseType={FagsakYtelseType.FORELDREPENGER}
       alleKodeverk={alleKodeverk as any}
       createLocationForSkjermlenke={() => location}
       setBeslutterFormData={() => undefined}
@@ -109,7 +109,7 @@ ForSaksbehandler.args = {
   lagre: action('button-click') as any,
   behandling: {
     ...defaultBehandling,
-    status: behandlingStatus.BEHANDLING_UTREDES,
+    status: BehandlingStatus.BEHANDLING_UTREDES,
     totrinnskontrollÅrsaker: [
       {
         skjermlenkeType: 'FORMKRAV_KLAGE_NFP',

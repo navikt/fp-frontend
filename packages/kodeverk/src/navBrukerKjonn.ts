@@ -1,7 +1,5 @@
-const navBrukerKjonn = {
-  KVINNE: 'K',
-  MANN: 'M',
-  UDEFINERT: '-',
-};
-
-export default navBrukerKjonn;
+export enum NavBrukerKjonn {
+  KVINNE = 'K',
+  MANN = 'M',
+  UDEFINERT = '-',
+}

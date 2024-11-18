@@ -1,13 +1,11 @@
 import React, { FunctionComponent, useCallback, useState } from 'react';
 import { useIntl } from 'react-intl';
-import { AksjonspunktStatus, VilkarUtfallType } from '@navikt/ft-kodeverk';
-import { Dokument } from '@navikt/ft-types';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
-import { AksjonspunktCode, behandlingResultatType } from '@navikt/fp-kodeverk';
+import { AksjonspunktStatus, VilkarUtfallType, AksjonspunktKode, BehandlingResultatType } from '@navikt/fp-kodeverk';
 import { VedtakInnsynProsessIndex, InnsynBrevData } from '@navikt/fp-prosess-vedtak-innsyn';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import { Fagsak, Behandling, ForhåndsvisMeldingParams, Innsyn } from '@navikt/fp-types';
+import { Dokument, Fagsak, Behandling, ForhåndsvisMeldingParams, Innsyn } from '@navikt/fp-types';
 
 import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
 import IverksetterVedtakStatusModal from '../../felles/modaler/vedtak/IverksetterVedtakStatusModal';
@@ -21,8 +19,8 @@ const getVedtakStatus = (behandling: Behandling): string => {
   if (aksjonspunkt.length === 0 || harApentAksjonpunkt) {
     return VilkarUtfallType.IKKE_VURDERT;
   }
-  return behandlingsresultat?.type === behandlingResultatType.INNSYN_INNVILGET ||
-    behandlingsresultat?.type === behandlingResultatType.INNSYN_DELVIS_INNVILGET
+  return behandlingsresultat?.type === BehandlingResultatType.INNSYN_INNVILGET ||
+    behandlingsresultat?.type === BehandlingResultatType.INNSYN_DELVIS_INNVILGET
     ? VilkarUtfallType.OPPFYLT
     : VilkarUtfallType.IKKE_OPPFYLT;
 };
@@ -56,7 +54,7 @@ const getLagringSideeffekter =
     };
   };
 
-const AKSJONSPUNKT_KODER = [AksjonspunktCode.FORESLA_VEDTAK];
+const AKSJONSPUNKT_KODER = [AksjonspunktKode.FORESLA_VEDTAK];
 
 const getEndepunkterPanelData = (saksnummer: string) => [
   { key: BehandlingApiKeys.INNSYN },

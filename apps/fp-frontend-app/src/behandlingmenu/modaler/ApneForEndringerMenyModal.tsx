@@ -1,7 +1,6 @@
 import React, { FunctionComponent, useCallback } from 'react';
 import { MenyApneForEndringerIndex } from '@navikt/fp-sak-meny-apne-for-endringer';
-import { BehandlingAppKontekst } from '@navikt/ft-types';
-import { Behandling } from '@navikt/fp-types';
+import { Behandling, BehandlingAppKontekst } from '@navikt/fp-types';
 
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../../data/behandlingContextApi';
 

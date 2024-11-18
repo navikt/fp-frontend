@@ -3,7 +3,7 @@ import { FormattedMessage, WrappedComponentProps } from 'react-intl';
 import { Label, BodyShort, Heading, VStack } from '@navikt/ds-react';
 
 import { DateLabel, FaktaGruppe } from '@navikt/ft-ui-komponenter';
-import { AksjonspunktCode, navBrukerKjonn, AdresseType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, NavBrukerKjonn, AdresseType } from '@navikt/fp-kodeverk';
 import { PersonopplysningerBasis, Personoversikt } from '@navikt/fp-types';
 import { formaterAdresse, getNyesteAdresse } from '@navikt/fp-fakta-felles';
 
@@ -16,7 +16,7 @@ const lagSøkerdata = ({ aktoerId, navn, kjønn, adresser, dødsdato }: Personop
     navn: navn,
     dodsdato: dødsdato,
     adresse: postadr || bostedsadr,
-    erMor: kjønn === navBrukerKjonn.KVINNE,
+    erMor: kjønn === NavBrukerKjonn.KVINNE,
   };
 };
 
@@ -42,7 +42,7 @@ const ForeldrePanel = ({ intl, personoversikt, alleMerknaderFraBeslutter }: Prop
   return (
     <FaktaGruppe
       title={intl.formatMessage({ id: 'ForeldrePanel.Foreldre' })}
-      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.OMSORGSOVERTAKELSE]}
+      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OMSORGSOVERTAKELSE]}
     >
       <VStack gap="8">
         {beggeForeldre.map(foreldre => {

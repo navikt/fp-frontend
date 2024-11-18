@@ -13,7 +13,7 @@ import {
 } from '@navikt/ft-form-validators';
 import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 
-import { uttakPeriodeType, uttakArbeidType as UttakArbeidType } from '@navikt/fp-kodeverk';
+import { UttakPeriodeType, UttakArbeidType } from '@navikt/fp-kodeverk';
 import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, PeriodeSoker, PeriodeSokerAktivitet } from '@navikt/fp-types';
 
 import { UseFormGetValues, useFieldArray, useFormContext } from 'react-hook-form';
@@ -112,17 +112,17 @@ const sjekkOmDetErTrektMinstEnDagNårUtbetalingsgradErMerEnn0 =
   };
 
 const GYLDIGE_UTTAK_PERIODER = [
-  uttakPeriodeType.FELLESPERIODE,
-  uttakPeriodeType.FEDREKVOTE,
-  uttakPeriodeType.FORELDREPENGER_FOR_FODSEL,
-  uttakPeriodeType.FORELDREPENGER,
-  uttakPeriodeType.MODREKVOTE,
-  uttakPeriodeType.UDEFINERT,
+  UttakPeriodeType.FELLESPERIODE,
+  UttakPeriodeType.FEDREKVOTE,
+  UttakPeriodeType.FORELDREPENGER_FOR_FODSEL,
+  UttakPeriodeType.FORELDREPENGER,
+  UttakPeriodeType.MODREKVOTE,
+  UttakPeriodeType.UDEFINERT,
 ];
 
 const lagPeriodeTypeOptions = (typer: KodeverkMedNavn[]): ReactElement[] =>
   typer
-    .filter(({ kode }) => GYLDIGE_UTTAK_PERIODER.includes(kode))
+    .filter(({ kode }) => GYLDIGE_UTTAK_PERIODER.some(p => p === kode))
     .map(({ kode, navn }) => (
       <option value={kode} key={kode}>
         {navn}

@@ -3,11 +3,11 @@ import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import {
-  AksjonspunktCode,
-  aksjonspunktStatus,
-  behandlingType,
-  kommunikasjonsretning,
-  innsynResultatType,
+  AksjonspunktKode,
+  AksjonspunktStatus,
+  BehandlingType,
+  Kommunikasjonsretning,
+  InnsynResultatType,
 } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Behandling, Fagsak, Innsyn, InnsynDokument } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
@@ -23,8 +23,8 @@ const defaultBehandling = {
 
 const defaultAksjonspunkter = [
   {
-    definisjon: AksjonspunktCode.VURDER_INNSYN,
-    status: aksjonspunktStatus.OPPRETTET,
+    definisjon: AksjonspunktKode.VURDER_INNSYN,
+    status: AksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
   },
 ] as Aksjonspunkt[];
@@ -61,7 +61,7 @@ const Template: StoryFn<{
         dokumentId: '3',
         tittel: 'Dette er et dokument',
         tidspunkt: '2017-08-02T00:54:25.455',
-        kommunikasjonsretning: kommunikasjonsretning.INN,
+        kommunikasjonsretning: Kommunikasjonsretning.INN,
       },
     ]}
     fagsak={{} as Fagsak}
@@ -78,7 +78,7 @@ PanelForVurderingAvInnsyn.args = {
     vedtaksdokumentasjon: [
       {
         behandlingUuid: '48528d21-89bb-4453-b1eb-c8649273a37c',
-        tittel: behandlingType.FORSTEGANGSSOKNAD,
+        tittel: BehandlingType.FORSTEGANGSSOKNAD,
         opprettetDato: '2019-01-01',
       },
     ],
@@ -94,7 +94,7 @@ InnsynSattPaVent.args = {
   aksjonspunkter: [
     {
       ...defaultAksjonspunkter[0],
-      status: aksjonspunktStatus.UTFORT,
+      status: AksjonspunktStatus.UTFORT,
       begrunnelse: 'Dette er en begrunnelse',
     },
   ],
@@ -102,12 +102,12 @@ InnsynSattPaVent.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   innsyn: {
     dokumenter: [] as InnsynDokument[],
-    innsynResultatType: innsynResultatType.INNVILGET,
+    innsynResultatType: InnsynResultatType.INNVILGET,
     innsynMottattDato: '2021-12-12',
     vedtaksdokumentasjon: [
       {
         behandlingUuid: '48528d21-89bb-4453-b1eb-c8649273a37c',
-        tittel: behandlingType.FORSTEGANGSSOKNAD,
+        tittel: BehandlingType.FORSTEGANGSSOKNAD,
         opprettetDato: '2019-01-01',
       },
     ],

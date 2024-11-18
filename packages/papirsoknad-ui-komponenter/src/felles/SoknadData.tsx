@@ -1,7 +1,6 @@
 import { notNull } from '@navikt/ft-utils';
-import { FagsakYtelseType } from '@navikt/ft-kodeverk';
 
-import { familieHendelseType } from '@navikt/fp-kodeverk';
+import { FagsakYtelseType, FamilieHendelseType } from '@navikt/fp-kodeverk';
 
 export class SoknadData {
   fagsakYtelseType: string;
@@ -13,7 +12,7 @@ export class SoknadData {
   constructor(selectedFagsakYtelseType: string, selectedFamilieHendelseType: any, selectedForeldreType: string) {
     this.fagsakYtelseType = notNull(selectedFagsakYtelseType);
     if (selectedFagsakYtelseType === FagsakYtelseType.SVANGERSKAPSPENGER) {
-      this.familieHendelseType = familieHendelseType.FODSEL;
+      this.familieHendelseType = FamilieHendelseType.FODSEL;
     } else {
       this.familieHendelseType = notNull(selectedFamilieHendelseType);
     }

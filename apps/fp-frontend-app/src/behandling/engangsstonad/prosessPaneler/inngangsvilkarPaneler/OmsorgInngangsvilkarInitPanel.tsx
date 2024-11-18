@@ -1,16 +1,16 @@
 import React, { FunctionComponent } from 'react';
 import { IntlShape, useIntl } from 'react-intl';
 
-import { VilkarType, AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { VilkarType, AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { OmsorgVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-omsorg';
 import { Aksjonspunkt } from '@navikt/fp-types';
 import InngangsvilkarPanelInitProps from '../../../felles/typer/inngangsvilkarPanelInitProps';
 import InngangsvilkarDefaultInitPanel from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 
 const AKSJONSPUNKT_TEKST_PER_KODE = {
-  [AksjonspunktCode.MANUELL_VURDERING_AV_OMSORGSVILKARET]: 'ErOmsorgVilkaarOppfyltForm.Paragraf',
-  [AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN]: 'SRBVilkarForm.VurderSammeBarn',
-  [AksjonspunktCode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN]:
+  [AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKARET]: 'ErOmsorgVilkaarOppfyltForm.Paragraf',
+  [AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN]: 'SRBVilkarForm.VurderSammeBarn',
+  [AksjonspunktKode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN]:
     'SRBVilkarForm.VurderAnnenForelderSammeBarn',
 } as Record<string, string>;
 
@@ -20,9 +20,9 @@ const hentAksjonspunktTekst = (intl: IntlShape, aksjonspunkter: Aksjonspunkt[] =
     : '';
 
 const AKSJONSPUNKT_KODER = [
-  AksjonspunktCode.MANUELL_VURDERING_AV_OMSORGSVILKARET,
-  AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
-  AksjonspunktCode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
+  AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKARET,
+  AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+  AksjonspunktKode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
 ];
 
 const VILKAR_KODER = [VilkarType.OMSORGSVILKARET];

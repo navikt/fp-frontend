@@ -1,6 +1,6 @@
 import React from 'react';
 import { StoryFn } from '@storybook/react';
-import { BehandlingType, FagsakYtelseType } from '@navikt/ft-kodeverk';
+import { BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 
 import { RestApiMock } from '@navikt/fp-utils-test';
 import { getIntlDecorator, alleKodeverkLos } from '@navikt/fp-storybook-utils';

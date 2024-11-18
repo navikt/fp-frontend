@@ -2,7 +2,7 @@ import React from 'react';
 import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { AksjonspunktCode, aksjonspunktStatus } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Behandling, Fagsak, Soknad } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -48,8 +48,8 @@ const Template: StoryFn<{
     aksjonspunkter={
       [
         {
-          definisjon: AksjonspunktCode.VURDER_SOKNADSFRIST_FORELDREPENGER,
-          status: aksjonspunktStatus.OPPRETTET,
+          definisjon: AksjonspunktKode.VURDER_SOKNADSFRIST_FORELDREPENGER,
+          status: AksjonspunktStatus.OPPRETTET,
           begrunnelse: undefined,
         },
       ] as Aksjonspunkt[]

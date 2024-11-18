@@ -1,4 +1,4 @@
-enum KodeverkType {
+export enum KodeverkType {
   ARBEID_TYPE = 'ArbeidType',
   AVSLAGSARSAK = 'Avslagsårsak',
   VENT_AARSAK = 'Venteårsak',
@@ -69,5 +69,3 @@ enum KodeverkType {
   ADRESSE_TYPE = 'AdresseType',
   NATURAL_YTELSE_TYPE = 'NaturalYtelseType',
 }
-
-export default KodeverkType;

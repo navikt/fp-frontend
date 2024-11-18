@@ -1,4 +1,4 @@
-enum ArbeidsforholdKomplettVurderingType {
+export enum ArbeidsforholdKomplettVurderingType {
   KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING = 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING',
   FORTSETT_UTEN_INNTEKTSMELDING = 'FORTSETT_UTEN_INNTEKTSMELDING',
 
@@ -15,5 +15,3 @@ enum ArbeidsforholdKomplettVurderingType {
   BRUK = 'BRUK',
   NYTT_ARBEIDSFORHOLD = 'NYTT_ARBEIDSFORHOLD',
 }
-
-export default ArbeidsforholdKomplettVurderingType;

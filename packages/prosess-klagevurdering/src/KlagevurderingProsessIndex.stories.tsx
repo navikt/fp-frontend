@@ -3,9 +3,9 @@ import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import {
-  klageVurderingOmgjoer as klageVurderingOmgjoerType,
-  klageVurdering as klageVurderingCodes,
-  AksjonspunktCode,
+  KlageVurderingOmgjoer as klageVurderingOmgjoerType,
+  KlageVurdering as klageVurderingCodes,
+  AksjonspunktKode,
 } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Behandling, Fagsak, KlageVurdering } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
@@ -141,7 +141,7 @@ KlagevurderingMedAksjonspunktNfp.args = {
   forhandsvisCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.BEHANDLE_KLAGE_NFP,
+      definisjon: AksjonspunktKode.BEHANDLE_KLAGE_NFP,
     },
   ] as Aksjonspunkt[],
   klageVurdering: {

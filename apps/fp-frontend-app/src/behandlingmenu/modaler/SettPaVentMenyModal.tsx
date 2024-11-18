@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useCallback } from 'react';
-import { behandlingType as BehandlingType, KodeverkType } from '@navikt/fp-kodeverk';
+import { BehandlingType, KodeverkType } from '@navikt/fp-kodeverk';
 import { FormValues } from '@navikt/fp-modal-sett-pa-vent';
 
 import { MenySettPaVentIndex } from '@navikt/fp-sak-meny-sett-pa-vent';

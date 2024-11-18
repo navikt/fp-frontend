@@ -3,7 +3,6 @@ import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import moment from 'moment';
 import { Label, BodyShort, Detail, Heading, Panel } from '@navikt/ds-react';
-import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 
 import { Form, Datepicker, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import {
@@ -19,7 +18,7 @@ import { dateBeforeOrEqualToToday, hasValidDate, required } from '@navikt/ft-for
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import { Aksjonspunkt, Søknadsfrist } from '@navikt/fp-types';
 import { VurderSoknadsfristAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 
 import styles from './vurderSoknadsfristForeldrepengerForm.module.css';
 
@@ -49,7 +48,7 @@ const buildInitialValues = (
 const transformValues = (values: FormValues): VurderSoknadsfristAp => ({
   harGyldigGrunn: values.gyldigSenFremsetting,
   ansesMottattDato: values.ansesMottatt,
-  kode: AksjonspunktCode.VURDER_SOKNADSFRIST_FORELDREPENGER,
+  kode: AksjonspunktKode.VURDER_SOKNADSFRIST_FORELDREPENGER,
   ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
 });
 

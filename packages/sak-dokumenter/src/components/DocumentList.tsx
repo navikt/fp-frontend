@@ -8,8 +8,8 @@ import {
   StarFillIcon,
 } from '@navikt/aksel-icons';
 
-import { Kommunikasjonsretning } from '@navikt/ft-kodeverk';
-import { Dokument } from '@navikt/ft-types';
+import { Kommunikasjonsretning } from '@navikt/fp-kodeverk';
+import { Dokument } from '@navikt/fp-types';
 
 import { DateTimeLabel } from '@navikt/ft-ui-komponenter';
 import styles from './documentList.module.css';

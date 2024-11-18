@@ -1,14 +1,14 @@
 import {
   getKodeverknavnFn,
   KodeverkType,
-  tilbakekrevingVidereBehandling,
+  TilbakekrevingVidereBehandling,
   VilkarType,
-  vilkarUtfallType,
+  VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
 import { AlleKodeverk, SimuleringResultat, TilbakekrevingValg, Vilkar } from '@navikt/fp-types';
 
 const tilbakekrevingMedInntrekk = (tilbakekrevingKode: string, simuleringResultat: SimuleringResultat): boolean =>
-  tilbakekrevingKode === tilbakekrevingVidereBehandling.TILBAKEKR_OPPRETT &&
+  tilbakekrevingKode === TilbakekrevingVidereBehandling.TILBAKEKR_OPPRETT &&
   (!!simuleringResultat.simuleringResultat.sumInntrekk || !!simuleringResultat.simuleringResultatUtenInntrekk);
 
 export const getTilbakekrevingText = (
@@ -27,4 +27,4 @@ export const getTilbakekrevingText = (
 };
 
 export const hasIkkeOppfyltSoknadsfristvilkar = (vilkar: Vilkar[]): boolean =>
-  vilkar.some(v => v.vilkarType === VilkarType.SOKNADFRISTVILKARET && v.vilkarStatus === vilkarUtfallType.IKKE_OPPFYLT);
+  vilkar.some(v => v.vilkarType === VilkarType.SOKNADFRISTVILKARET && v.vilkarStatus === VilkarUtfallType.IKKE_OPPFYLT);

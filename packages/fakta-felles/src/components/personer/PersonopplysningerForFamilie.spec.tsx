@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen, within } from '@testing-library/react';
 import { expect } from 'vitest';
 
-import { AdresseType, sivilstandType } from '@navikt/fp-kodeverk';
+import { AdresseType, SivilstandType } from '@navikt/fp-kodeverk';
 import { AlleKodeverk, KjønnkodeEnum, Personoversikt } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
@@ -34,7 +34,7 @@ const personoversikt: Personoversikt = {
     navn: 'Espen Utvikler',
     aktoerId: '1',
     kjønn: KjønnkodeEnum.MANN,
-    sivilstand: sivilstandType.SAMBOER,
+    sivilstand: SivilstandType.SAMBOER,
     fødselsdato: '1989-01-01',
     adresser: [adresse1, adresse2],
   },
@@ -42,7 +42,7 @@ const personoversikt: Personoversikt = {
     navn: 'Petra Utvikler',
     aktoerId: '2',
     kjønn: KjønnkodeEnum.KVINNE,
-    sivilstand: sivilstandType.SAMBOER,
+    sivilstand: SivilstandType.SAMBOER,
     fødselsdato: '1989-01-01',
     adresser: [adresse1, adresse2],
   },
@@ -53,7 +53,7 @@ const personoversikt: Personoversikt = {
       adresser: [adresse1],
       aktoerId: '3',
       kjønn: KjønnkodeEnum.KVINNE,
-      sivilstand: sivilstandType.UGIFT,
+      sivilstand: SivilstandType.UGIFT,
     },
     {
       navn: 'Snuppa Utvikler',
@@ -62,7 +62,7 @@ const personoversikt: Personoversikt = {
       adresser: [adresse1],
       aktoerId: '4',
       kjønn: KjønnkodeEnum.KVINNE,
-      sivilstand: sivilstandType.UGIFT,
+      sivilstand: SivilstandType.UGIFT,
     },
   ],
 };

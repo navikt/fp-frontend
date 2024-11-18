@@ -2,7 +2,7 @@ import React from 'react';
 import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { behandlingType, klageVurdering as klageVurderingCodes, AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { BehandlingType, KlageVurdering as klageVurderingCodes, AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Behandling, Fagsak, KlageVurdering } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -19,7 +19,7 @@ const behandling = {
 const avsluttedeBehandlinger = [
   {
     uuid: '1',
-    type: behandlingType.FORSTEGANGSSOKNAD,
+    type: BehandlingType.FORSTEGANGSSOKNAD,
     avsluttet: '2017-08-02T00:54:25.455',
   },
 ];
@@ -67,7 +67,7 @@ FormkravPanelForAksjonspunktNfp.args = {
   } as KlageVurdering,
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.VURDERING_AV_FORMKRAV_KLAGE_NFP,
+      definisjon: AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP,
     },
   ] as Aksjonspunkt[],
 };

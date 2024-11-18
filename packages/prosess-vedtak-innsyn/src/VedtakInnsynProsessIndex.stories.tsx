@@ -3,11 +3,11 @@ import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import {
-  aksjonspunktStatus,
-  behandlingType,
-  innsynResultatType,
-  kommunikasjonsretning,
-  AksjonspunktCode,
+  AksjonspunktStatus,
+  BehandlingType,
+  InnsynResultatType,
+  Kommunikasjonsretning,
+  AksjonspunktKode,
 } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Behandling, Fagsak, Innsyn } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
@@ -23,13 +23,13 @@ const behandling = {
 
 const defaultAksjonspunkter = [
   {
-    definisjon: AksjonspunktCode.VURDER_INNSYN,
-    status: aksjonspunktStatus.UTFORT,
+    definisjon: AksjonspunktKode.VURDER_INNSYN,
+    status: AksjonspunktStatus.UTFORT,
     begrunnelse: 'Dette er utført',
   },
   {
-    definisjon: AksjonspunktCode.FORESLA_VEDTAK,
-    status: aksjonspunktStatus.OPPRETTET,
+    definisjon: AksjonspunktKode.FORESLA_VEDTAK,
+    status: AksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
   },
 ] as Aksjonspunkt[];
@@ -66,7 +66,7 @@ const Template: StoryFn<{
         dokumentId: '3',
         tittel: 'Dette er et dokument',
         tidspunkt: '2017-08-02T00:54:25.455',
-        kommunikasjonsretning: kommunikasjonsretning.INN,
+        kommunikasjonsretning: Kommunikasjonsretning.INN,
       },
     ]}
     previewCallback={forhandsvisCallback}
@@ -89,11 +89,11 @@ PanelForInnvilgetVedtak.args = {
     vedtaksdokumentasjon: [
       {
         behandlingUuid: '48528d21-89bb-4453-b1eb-c8649273a37c',
-        tittel: behandlingType.FORSTEGANGSSOKNAD,
+        tittel: BehandlingType.FORSTEGANGSSOKNAD,
         opprettetDato: '2019-01-01',
       },
     ],
-    innsynResultatType: innsynResultatType.INNVILGET,
+    innsynResultatType: InnsynResultatType.INNVILGET,
     innsynMottattDato: '2019-01-01',
   },
 };
@@ -113,11 +113,11 @@ PanelForAvvistVedtak.args = {
     vedtaksdokumentasjon: [
       {
         behandlingUuid: '48528d21-89bb-4453-b1eb-c8649273a37c',
-        tittel: behandlingType.FORSTEGANGSSOKNAD,
+        tittel: BehandlingType.FORSTEGANGSSOKNAD,
         opprettetDato: '2019-01-01',
       },
     ],
-    innsynResultatType: innsynResultatType.AVVIST,
+    innsynResultatType: InnsynResultatType.AVVIST,
     innsynMottattDato: '2019-01-01',
   },
 };
@@ -131,7 +131,7 @@ PanelForAvvistVedtakReadonly.args = {
     defaultAksjonspunkter[0],
     {
       ...defaultAksjonspunkter[1],
-      status: aksjonspunktStatus.UTFORT,
+      status: AksjonspunktStatus.UTFORT,
       begrunnelse: 'Dette er en vurdering',
     },
   ],
@@ -146,11 +146,11 @@ PanelForAvvistVedtakReadonly.args = {
     vedtaksdokumentasjon: [
       {
         behandlingUuid: '48528d21-89bb-4453-b1eb-c8649273a37c',
-        tittel: behandlingType.FORSTEGANGSSOKNAD,
+        tittel: BehandlingType.FORSTEGANGSSOKNAD,
         opprettetDato: '2019-01-01',
       },
     ],
-    innsynResultatType: innsynResultatType.AVVIST,
+    innsynResultatType: InnsynResultatType.AVVIST,
     innsynMottattDato: '2019-01-01',
   },
 };

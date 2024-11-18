@@ -13,7 +13,6 @@ import {
   VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
-import { AksjonspunktStatus, FamilieHendelseType, isAksjonspunktOpen } from '@navikt/ft-kodeverk';
 
 import { FaktaSubmitButtonNew, FaktaBegrunnelseTextFieldNew, validerApKodeOgHentApEnum } from '@navikt/fp-fakta-felles';
 import {
@@ -26,7 +25,13 @@ import {
   Fagsak,
 } from '@navikt/fp-types';
 import { BekreftUttaksperioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { AksjonspunktCode, relasjonsRolleType } from '@navikt/fp-kodeverk';
+import {
+  AksjonspunktStatus,
+  FamilieHendelseType,
+  isAksjonspunktOpen,
+  AksjonspunktKode,
+  RelasjonsRolleType,
+} from '@navikt/fp-kodeverk';
 
 import { dateRangesNotOverlapping } from '@navikt/ft-form-validators';
 import UttakFaktaTable from './UttakFaktaTable';
@@ -59,8 +64,8 @@ const leggTilAksjonspunktMarkering = (
     if (
       aksjonspunkter.some(
         ap =>
-          (ap.definisjon === AksjonspunktCode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET_KODE ||
-            ap.definisjon === AksjonspunktCode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE) &&
+          (ap.definisjon === AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET_KODE ||
+            ap.definisjon === AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE) &&
           ap.status === AksjonspunktStatus.OPPRETTET,
       ) &&
       periode.arbeidsforhold?.arbeidsgiverReferanse &&
@@ -141,7 +146,7 @@ const validerPerioder = (
   }
 
   const harApIngenPerioder = aksjonspunkter.some(
-    ap => ap.definisjon === AksjonspunktCode.FAKTA_UTTAK_INGEN_PERIODER_KODE,
+    ap => ap.definisjon === AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER_KODE,
   );
 
   return uttakPerioder.every(a => a.aksjonspunktType === undefined) &&
@@ -209,13 +214,13 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
     [uttakPerioder],
   );
 
-  const automatiskeAksjonspunkter = aksjonspunkter.filter(a => a.definisjon !== AksjonspunktCode.OVERSTYR_FAKTA_UTTAK);
+  const automatiskeAksjonspunkter = aksjonspunkter.filter(a => a.definisjon !== AksjonspunktKode.OVERSTYR_FAKTA_UTTAK);
   const bekreft = useCallback(
     (begrunnelse: string) => {
       const overstyrAp = [
         {
           // TODO Fiks hack
-          kode: validerApKodeOgHentApEnum(AksjonspunktCode.OVERSTYR_FAKTA_UTTAK, AksjonspunktCode.OVERSTYR_FAKTA_UTTAK),
+          kode: validerApKodeOgHentApEnum(AksjonspunktKode.OVERSTYR_FAKTA_UTTAK, AksjonspunktKode.OVERSTYR_FAKTA_UTTAK),
           perioder: uttakPerioder,
           begrunnelse,
         },
@@ -224,10 +229,10 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
       const aksjonspunkterSomSkalBekreftes = automatiskeAksjonspunkter.map(ap => ({
         kode: validerApKodeOgHentApEnum(
           ap.definisjon,
-          AksjonspunktCode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
-          AksjonspunktCode.FAKTA_UTTAK_INGEN_PERIODER_KODE,
-          AksjonspunktCode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET_KODE,
-          AksjonspunktCode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE,
+          AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
+          AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER_KODE,
+          AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET_KODE,
+          AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE,
         ),
         perioder: uttakPerioder,
         begrunnelse,
@@ -244,7 +249,7 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
 
   const feilmelding = useMemo(() => {
     if (isDirty || formMethods.formState.isDirty) {
-      const erMor = fagsak.relasjonsRolleType === relasjonsRolleType.MOR;
+      const erMor = fagsak.relasjonsRolleType === RelasjonsRolleType.MOR;
       return validerPerioder(fagsak, uttakPerioder, erMor, aksjonspunkter, ytelsefordeling.førsteUttaksdato, intl);
     }
     return null;

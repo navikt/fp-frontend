@@ -17,11 +17,11 @@ import {
   isAvslag,
   isInnvilget,
   isKlageOmgjort,
-  behandlingResultatType,
-  behandlingArsakType as klageBehandlingArsakType,
-  fagsakYtelseType,
-  AksjonspunktCode,
-  dokumentMalType,
+  BehandlingResultatType,
+  BehandlingArsakType as klageBehandlingArsakType,
+  FagsakYtelseType,
+  AksjonspunktKode,
+  DokumentMalType,
 } from '@navikt/fp-kodeverk';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
@@ -39,18 +39,18 @@ import VedtakAvslagPanel from './VedtakAvslagPanel';
 import VedtakFellesPanel from '../felles/VedtakFellesPanel';
 
 export const finnAvslagResultatText = (behandlingResultatTypeKode: string, ytelseType: string): string => {
-  if (behandlingResultatTypeKode === behandlingResultatType.KLAGE_YTELSESVEDTAK_OPPHEVET) {
+  if (behandlingResultatTypeKode === BehandlingResultatType.KLAGE_YTELSESVEDTAK_OPPHEVET) {
     return 'VedtakForm.ResultatKlageYtelsesvedtakOpphevet';
   }
-  if (behandlingResultatTypeKode === behandlingResultatType.KLAGE_AVVIST) {
+  if (behandlingResultatTypeKode === BehandlingResultatType.KLAGE_AVVIST) {
     return 'VedtakForm.ResultatKlageAvvist';
   }
 
-  if (ytelseType === fagsakYtelseType.ENGANGSSTONAD) {
+  if (ytelseType === FagsakYtelseType.ENGANGSSTONAD) {
     return 'VedtakForm.EngangsstonadIkkeInnvilget';
   }
 
-  if (ytelseType === fagsakYtelseType.SVANGERSKAPSPENGER) {
+  if (ytelseType === FagsakYtelseType.SVANGERSKAPSPENGER) {
     return 'VedtakForm.SvangerskapspengerIkkeInnvilget';
   }
 
@@ -58,18 +58,18 @@ export const finnAvslagResultatText = (behandlingResultatTypeKode: string, ytels
 };
 
 export const finnInnvilgetResultatText = (behandlingResultatTypeKode: string, ytelseType: string): string => {
-  if (behandlingResultatTypeKode === behandlingResultatType.KLAGE_YTELSESVEDTAK_STADFESTET) {
+  if (behandlingResultatTypeKode === BehandlingResultatType.KLAGE_YTELSESVEDTAK_STADFESTET) {
     return 'VedtakForm.ResultatOpprettholdVedtak';
   }
   if (isKlageOmgjort(behandlingResultatTypeKode)) {
     return 'VedtakForm.ResultatKlageMedhold';
   }
 
-  if (ytelseType === fagsakYtelseType.ENGANGSSTONAD) {
+  if (ytelseType === FagsakYtelseType.ENGANGSSTONAD) {
     return 'VedtakForm.VilkarStatusInnvilgetEngangsstonad';
   }
 
-  if (ytelseType === fagsakYtelseType.SVANGERSKAPSPENGER) {
+  if (ytelseType === FagsakYtelseType.SVANGERSKAPSPENGER) {
     return 'VedtakForm.SvangerskapspengerInnvilget';
   }
 
@@ -102,7 +102,7 @@ const hentForhåndsvisManueltBrevCallback =
     if (!skalOverstyre || erFeltUtfylt) {
       const data = {
         fritekst: skalOverstyre ? brodtekst : begrunnelse,
-        dokumentMal: skalOverstyre ? dokumentMalType.FRITEKST : undefined,
+        dokumentMal: skalOverstyre ? DokumentMalType.FRITEKST : undefined,
         tittel: skalOverstyre ? overskrift : undefined,
         gjelderVedtak: true,
         automatiskVedtaksbrev: !skalOverstyre ? true : undefined,
@@ -139,10 +139,10 @@ const transformValues = (values: FormValues): VedtakAksjonspunkter[] =>
   values.aksjonspunktKoder.map(apCode => ({
     kode: validerApKodeOgHentApEnum(
       apCode,
-      AksjonspunktCode.FORESLA_VEDTAK,
-      AksjonspunktCode.FORESLA_VEDTAK_MANUELT,
-      AksjonspunktCode.VURDERE_ANNEN_YTELSE,
-      AksjonspunktCode.VURDERE_DOKUMENT,
+      AksjonspunktKode.FORESLA_VEDTAK,
+      AksjonspunktKode.FORESLA_VEDTAK_MANUELT,
+      AksjonspunktKode.VURDERE_ANNEN_YTELSE,
+      AksjonspunktKode.VURDERE_DOKUMENT,
     ),
     begrunnelse: values.begrunnelse,
     fritekstBrev: values.brødtekst,

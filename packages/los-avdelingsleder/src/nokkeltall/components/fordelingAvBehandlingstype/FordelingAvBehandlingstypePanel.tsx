@@ -4,8 +4,8 @@ import { useForm } from 'react-hook-form';
 import { Label } from '@navikt/ds-react';
 import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { KodeverkMedNavn } from '@navikt/ft-types';
-import { FagsakYtelseType, KodeverkType } from '@navikt/ft-kodeverk';
+import { KodeverkMedNavn } from '@navikt/fp-types';
+import { FagsakYtelseType, KodeverkType } from '@navikt/fp-kodeverk';
 
 import OppgaverForAvdeling from '../../../typer/oppgaverForAvdelingTsType';
 import FordelingAvBehandlingstypeGraf from './FordelingAvBehandlingstypeGraf';

@@ -23,8 +23,6 @@
     "@navikt/fp-prosess-felles": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*",
-    "@navikt/ft-kodeverk": "2.5.7",
-    "@navikt/ft-types": "2.5.8",
     "@navikt/ft-ui-komponenter": "2.6.1",
     "@navikt/ft-utils": "2.5.0",
     "classnames": "2.5.1",

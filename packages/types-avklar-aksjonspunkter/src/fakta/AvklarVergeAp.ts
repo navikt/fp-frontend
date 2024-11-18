@@ -1,4 +1,4 @@
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
 import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
 
@@ -9,6 +9,6 @@ type AvklarVergeAp = {
   gyldigTom?: string;
   vergeType: string;
   organisasjonsnummer: string;
-} & AksjonspunktTilBekreftelse<AksjonspunktCode.AVKLAR_VERGE>;
+} & AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_VERGE>;
 
 export default AvklarVergeAp;

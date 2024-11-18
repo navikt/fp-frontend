@@ -3,13 +3,17 @@ import { FormattedMessage } from 'react-intl';
 import dayjs from 'dayjs';
 import { required } from '@navikt/ft-form-validators';
 import { DDMMYYYY_DATE_FORMAT, guid } from '@navikt/ft-utils';
-import { ArbeidsgiverOpplysninger } from '@navikt/ft-types';
 import { SelectField, NumberField, CheckboxField } from '@navikt/ft-form-hooks';
 import { FlexColumn, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Alert } from '@navikt/ds-react';
-import { uttakArbeidType, KodeverkType } from '@navikt/fp-kodeverk';
+import { UttakArbeidType, KodeverkType } from '@navikt/fp-kodeverk';
 
-import { AlleKodeverk, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold } from '@navikt/fp-types';
+import {
+  ArbeidsgiverOpplysninger,
+  AlleKodeverk,
+  ArbeidsgiverOpplysningerPerId,
+  FaktaArbeidsforhold,
+} from '@navikt/fp-types';
 import { useFormContext } from 'react-hook-form';
 import KontrollerFaktaPeriodeMedApMarkering from '../typer/kontrollerFaktaPeriodeMedApMarkering';
 
@@ -59,7 +63,7 @@ const mapArbeidsforhold = (
       : undefined;
 
     let periodeArbeidsforhold = '';
-    if (arbeidType && arbeidType !== uttakArbeidType.ORDINÆRT_ARBEID) {
+    if (arbeidType && arbeidType !== UttakArbeidType.ORDINÆRT_ARBEID) {
       periodeArbeidsforhold = alleKodeverk[KodeverkType.UTTAK_ARBEID_TYPE].find(k => k.kode === arbeidType)?.navn || '';
     } else if (arbeidsgiverOpplysninger) {
       periodeArbeidsforhold = lagVisningsNavn(arbeidsgiverOpplysninger);

@@ -2,7 +2,7 @@ import React, { FunctionComponent, useCallback, useState } from 'react';
 import { useIntl } from 'react-intl';
 
 import { SoknadsfristVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-soknadsfrist';
-import { AksjonspunktCode, VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { AksessRettigheter, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
 
@@ -12,7 +12,7 @@ import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
 import skalViseProsessPanel from '../../felles/prosess/skalViseProsessPanel';
 import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
 
-const AKSJONSPUNKT_KODER = [AksjonspunktCode.SOKNADSFRISTVILKARET, AksjonspunktCode.OVERSTYR_SOKNADSFRISTVILKAR];
+const AKSJONSPUNKT_KODER = [AksjonspunktKode.SOKNADSFRISTVILKARET, AksjonspunktKode.OVERSTYR_SOKNADSFRISTVILKAR];
 
 const VILKAR_KODER = [VilkarType.SOKNADFRISTVILKARET];
 
@@ -46,14 +46,14 @@ const SoknadsfristEsProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPa
       erOverstyrt={erOverstyrt}
       renderPanel={data => {
         const harSoknadsfristAp = data.aksjonspunkter.some(
-          ap => ap.definisjon === AksjonspunktCode.SOKNADSFRISTVILKARET,
+          ap => ap.definisjon === AksjonspunktKode.SOKNADSFRISTVILKARET,
         );
         return (
           <>
             {!harSoknadsfristAp && (
               <OverstyringPanelDef
                 aksjonspunkter={data?.aksjonspunkter}
-                aksjonspunktKode={AksjonspunktCode.OVERSTYR_SOKNADSFRISTVILKAR}
+                aksjonspunktKode={AksjonspunktKode.OVERSTYR_SOKNADSFRISTVILKAR}
                 vilkar={data.vilkar}
                 vilkarKoder={VILKAR_KODER}
                 panelTekstKode="Behandlingspunkt.Soknadsfristvilkaret"

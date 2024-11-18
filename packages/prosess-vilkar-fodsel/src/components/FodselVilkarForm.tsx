@@ -4,7 +4,14 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Label } from '@navikt/ds-react';
 
 import { Form } from '@navikt/ft-form-hooks';
-import { VilkarType, AksjonspunktCode, fagsakYtelseType, vilkarUtfallType, KodeverkType } from '@navikt/fp-kodeverk';
+import {
+  AksjonspunktStatus,
+  VilkarType,
+  AksjonspunktKode,
+  FagsakYtelseType,
+  VilkarUtfallType,
+  KodeverkType,
+} from '@navikt/fp-kodeverk';
 import {
   ProsessStegBegrunnelseTextFieldNew,
   VilkarResultPicker,
@@ -16,7 +23,6 @@ import {
   VurdereYtelseSammeBarnAnnenForelderAp,
   VurdereYtelseSammeBarnSokerAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 
 const avslagsarsakerES = ['1002', '1003', '1032'];
 
@@ -61,8 +67,8 @@ const transformValues = (
   ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
   kode: validerApKodeOgHentApEnum(
     aksjonspunkter[0].definisjon,
-    AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
-    AksjonspunktCode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
+    AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+    AksjonspunktKode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
   ),
 });
 
@@ -106,12 +112,12 @@ const FodselVilkarForm: FunctionComponent<OwnProps> = ({
 
   const alleAvslagsarsaker = alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.FODSELSVILKARET_MOR];
   const avslagsarsaker = getFodselVilkarAvslagsarsaker(
-    ytelseTypeKode === fagsakYtelseType.FORELDREPENGER,
+    ytelseTypeKode === FagsakYtelseType.FORELDREPENGER,
     alleAvslagsarsaker,
   );
 
   const isOpenAksjonspunkt = aksjonspunkter.some(ap => ap.status === AksjonspunktStatus.OPPRETTET);
-  const originalErVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
+  const originalErVilkarOk = isOpenAksjonspunkt ? undefined : VilkarUtfallType.OPPFYLT === status;
   const { lovReferanse } = vilkar[0];
 
   const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);

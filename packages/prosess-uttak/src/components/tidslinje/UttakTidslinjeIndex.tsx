@@ -13,14 +13,18 @@ import {
   Fagsak,
   AlleKodeverk,
 } from '@navikt/fp-types';
-import {
-  soknadType,
-  oppholdArsakType,
-  oppholdArsakMapper,
-  behandlingType as BehandlingType,
-} from '@navikt/fp-kodeverk';
+import { SoknadType, OppholdArsakType, BehandlingType } from '@navikt/fp-kodeverk';
 
 import UttakTidslinje, { PeriodeSøkerMedTidslinjedata, TidslinjeTimes } from './UttakTidslinje';
+
+//TODO (TOR) Dette er vel mapping mellom kodeverk? Bør i sofall bruka kodeverk-enums
+const OppholdArsakMapper = {
+  INGEN: 'UDEFINERT',
+  UTTAK_MØDREKVOTE_ANNEN_FORELDER: 'MØDREKVOTE',
+  UTTAK_FEDREKVOTE_ANNEN_FORELDER: 'FEDREKVOTE',
+  UTTAK_FELLESP_ANNEN_FORELDER: 'FELLESPERIODE',
+  UTTAK_FORELDREPENGER_ANNEN_FORELDER: 'FORELDREPENGER',
+} as Record<string, string>;
 
 const finnSøknadsdato = (søknad: Soknad): string => {
   const { mottattDato } = søknad;
@@ -63,7 +67,7 @@ const finnTidslinjeTider = (
       ? gjeldendeFamiliehendelse.avklartBarn[0].fodselsdato
       : undefined;
   const fødselsdato =
-    søknad.soknadType === soknadType.FODSEL ? endredFodselsDato || familiehendelseDate : søknad.omsorgsovertakelseDato;
+    søknad.soknadType === SoknadType.FODSEL ? endredFodselsDato || familiehendelseDate : søknad.omsorgsovertakelseDato;
   const isRevurdering = behandling.type === BehandlingType.REVURDERING;
 
   const barnFraTps = familiehendelse.register?.avklartBarn ? familiehendelse.register.avklartBarn : [];
@@ -111,8 +115,8 @@ const lagUttakMedOpphold = (perioderSøker: PeriodeSoker[]): PeriodeSoker[] =>
   perioderSøker.map(uttak => {
     const { ...uttakPerioder } = uttak;
 
-    if (uttak.oppholdÅrsak !== oppholdArsakType.UDEFINERT) {
-      const stonadskonto = oppholdArsakMapper[uttak.oppholdÅrsak];
+    if (uttak.oppholdÅrsak !== OppholdArsakType.UDEFINERT) {
+      const stonadskonto = OppholdArsakMapper[uttak.oppholdÅrsak];
       const oppholdInfo = {
         stønadskontoType: stonadskonto,
         trekkdagerDesimaler: calcDays(uttak.fom, uttak.tom),

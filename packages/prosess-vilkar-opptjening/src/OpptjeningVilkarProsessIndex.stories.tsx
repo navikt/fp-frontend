@@ -2,7 +2,7 @@ import React from 'react';
 import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { vilkarUtfallType, aksjonspunktStatus, AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { VilkarUtfallType, AksjonspunktStatus, AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Behandling, Fagsak, Opptjening } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -57,7 +57,7 @@ const Template: StoryFn<{
     isReadOnly={false}
     isAksjonspunktOpen
     readOnlySubmitButton={false}
-    status={vilkarUtfallType.IKKE_VURDERT}
+    status={VilkarUtfallType.IKKE_VURDERT}
     vilkar={[]}
     alleMerknaderFraBeslutter={{}}
     setFormData={() => undefined}
@@ -75,8 +75,8 @@ export const ÅpentAksjonspunkt = Template.bind({});
   opptjening: defaultOpptjening,
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.SVANGERSKAPSVILKARET,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
+      status: AksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
     },
   ] as Aksjonspunkt[],
@@ -89,8 +89,8 @@ export const ÅpentAksjonspunktSvangerskapspenger = Template.bind({});
   opptjening: defaultOpptjening,
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.SVANGERSKAPSVILKARET,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
+      status: AksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
     },
   ] as Aksjonspunkt[],
@@ -127,8 +127,8 @@ export const ÅpentAksjonspunktMedOppholdsperiode = Template.bind({});
   } as Opptjening,
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.SVANGERSKAPSVILKARET,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
+      status: AksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
     },
   ] as Aksjonspunkt[],
@@ -146,8 +146,8 @@ export const ÅpentAksjonspunktMenUtenAktiviteter = Template.bind({});
   },
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.SVANGERSKAPSVILKARET,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
+      status: AksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
     },
   ] as Aksjonspunkt[],

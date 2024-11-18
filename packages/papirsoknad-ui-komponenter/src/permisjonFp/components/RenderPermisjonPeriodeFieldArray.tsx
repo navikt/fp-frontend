@@ -18,7 +18,7 @@ import {
 import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 
-import { KodeverkType, uttakPeriodeType } from '@navikt/fp-kodeverk';
+import { KodeverkType, UttakPeriodeType } from '@navikt/fp-kodeverk';
 
 import styles from './renderPermisjonPeriodeFieldArray.module.css';
 
@@ -28,16 +28,16 @@ const TIDSROM_PERMISJON_FORM_NAME_PREFIX = 'tidsromPermisjon';
 export const PERMISJON_PERIODE_FIELD_ARRAY_NAME = 'permisjonsPerioder';
 
 export const gyldigeUttakperioder = [
-  uttakPeriodeType.FELLESPERIODE,
-  uttakPeriodeType.FEDREKVOTE,
-  uttakPeriodeType.FORELDREPENGER_FOR_FODSEL,
-  uttakPeriodeType.FORELDREPENGER,
-  uttakPeriodeType.MODREKVOTE,
+  UttakPeriodeType.FELLESPERIODE,
+  UttakPeriodeType.FEDREKVOTE,
+  UttakPeriodeType.FORELDREPENGER_FOR_FODSEL,
+  UttakPeriodeType.FORELDREPENGER,
+  UttakPeriodeType.MODREKVOTE,
 ];
 
 const mapPeriodeTyper = (typer: KodeverkMedNavn[]): ReactElement[] =>
   typer
-    .filter(({ kode }) => gyldigeUttakperioder.includes(kode))
+    .filter(({ kode }) => gyldigeUttakperioder.some(gu => gu === kode))
     .map(({ kode, navn }) => (
       <option value={kode} key={kode}>
         {navn}
@@ -52,9 +52,9 @@ const mapAktiviteter = (aktiviteter: KodeverkMedNavn[]): ReactElement[] =>
   ));
 
 export const PERIODS_WITH_NO_MORS_AKTIVITET = [
-  uttakPeriodeType.FEDREKVOTE,
-  uttakPeriodeType.FORELDREPENGER_FOR_FODSEL,
-  uttakPeriodeType.MODREKVOTE,
+  UttakPeriodeType.FEDREKVOTE,
+  UttakPeriodeType.FORELDREPENGER_FOR_FODSEL,
+  UttakPeriodeType.MODREKVOTE,
 ];
 
 const getLabel = (erForsteRad: boolean, text: string): string => (erForsteRad ? text : '');
@@ -171,7 +171,7 @@ export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKod
         const visEllerSkulOverskriftStyle = erForsteRad ? styles.visOverskrift : styles.skjulOverskrift;
 
         const skalDisableMorsAktivitet =
-          PERIODS_WITH_NO_MORS_AKTIVITET.includes(periode.periodeType) || periode.periodeType === '';
+          PERIODS_WITH_NO_MORS_AKTIVITET.some(pma => pma === periode.periodeType) || periode.periodeType === '';
 
         const namePart1 = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}.${index}`;
         return (
@@ -287,7 +287,7 @@ export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKod
 
 RenderPermisjonPeriodeFieldArray.transformValues = (values: FormValues[]) =>
   values.map(value => {
-    if (PERIODS_WITH_NO_MORS_AKTIVITET.includes(value.periodeType)) {
+    if (PERIODS_WITH_NO_MORS_AKTIVITET.some(pma => pma === value.periodeType)) {
       return {
         periodeType: value.periodeType,
         periodeFom: value.periodeFom,

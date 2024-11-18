@@ -5,7 +5,7 @@ import { CheckboxField, InputField, RadioGroupPanel, SelectField } from '@navikt
 import { ArrowBox, BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
-import { kanIkkeOppgiAnnenForelderArsak, KodeverkType, landkoder as Landkode } from '@navikt/fp-kodeverk';
+import { KanIkkeOppgiAnnenForelderArsak, KodeverkType, Landkode } from '@navikt/fp-kodeverk';
 import {
   hasValidFodselsnummer,
   hasValidFodselsnummerFormat,
@@ -116,15 +116,15 @@ export const AnnenForelderPanel = ({
               radios={[
                 {
                   label: formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.Reason.1' }),
-                  value: kanIkkeOppgiAnnenForelderArsak.UKJENT_FORELDER,
+                  value: KanIkkeOppgiAnnenForelderArsak.UKJENT_FORELDER,
                 },
                 {
                   label: formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.Reason.2' }),
-                  value: kanIkkeOppgiAnnenForelderArsak.IKKE_NORSK_FNR,
+                  value: KanIkkeOppgiAnnenForelderArsak.IKKE_NORSK_FNR,
                 },
               ]}
             />
-            {kanIkkeOppgiBegrunnelse?.arsak === kanIkkeOppgiAnnenForelderArsak.IKKE_NORSK_FNR && (
+            {kanIkkeOppgiBegrunnelse?.arsak === KanIkkeOppgiAnnenForelderArsak.IKKE_NORSK_FNR && (
               <>
                 <VerticalSpacer sixteenPx />
                 <SelectField

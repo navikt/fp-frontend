@@ -1,5 +1,5 @@
 import React from 'react';
-import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/ft-kodeverk';
+import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { Meta, StoryObj } from '@storybook/react';
 import dayjs from 'dayjs';

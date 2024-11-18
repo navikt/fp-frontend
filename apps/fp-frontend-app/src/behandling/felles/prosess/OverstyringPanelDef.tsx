@@ -1,10 +1,8 @@
 import React, { FunctionComponent, useMemo } from 'react';
-import { Aksjonspunkt, KodeverkMedNavn } from '@navikt/ft-types';
-import { VilkarType } from '@navikt/ft-kodeverk';
 
 import { VilkarresultatMedOverstyringProsessIndex } from '@navikt/fp-prosess-vilkar-overstyring';
-import { Medlemskap, Vilkar } from '@navikt/fp-types';
-import { KodeverkType, OverstyringAksjonspunkter } from '@navikt/fp-kodeverk';
+import { Aksjonspunkt, KodeverkMedNavn, Medlemskap, Vilkar } from '@navikt/fp-types';
+import { VilkarType, KodeverkType, OverstyringAksjonspunkter } from '@navikt/fp-kodeverk';
 
 import skalViseProsessPanel from './skalViseProsessPanel';
 import useStandardProsessPanelProps from './useStandardProsessPanelProps';

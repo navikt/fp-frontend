@@ -3,7 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Label, BodyShort, VStack, HGrid } from '@navikt/ds-react';
 
 import { VerticalSpacer, FaktaGruppe, EditedIcon } from '@navikt/ft-ui-komponenter';
-import { AksjonspunktCode, VilkarType, KodeverkType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, VilkarType, KodeverkType } from '@navikt/fp-kodeverk';
 import { SelectField } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { isFieldEdited, FieldEditedInfo } from '@navikt/fp-fakta-felles';
@@ -118,7 +118,7 @@ const OmsorgOgForeldreansvarFaktaForm: FunctionComponent<Props> & StaticFunction
       {!erAksjonspunktForeldreansvar && (
         <FaktaGruppe
           title={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.VelgVilkaarSomSkalAnvendes' })}
-          merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.OMSORGSOVERTAKELSE]}
+          merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OMSORGSOVERTAKELSE]}
         >
           {!readOnly && (
             <SelectField
@@ -171,16 +171,16 @@ OmsorgOgForeldreansvarFaktaForm.transformValues = (
   values: FormValues,
   aksjonspunkt: Aksjonspunkt,
 ): AvklarFaktaForForeldreansvarAksjonspunktAp | AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp =>
-  aksjonspunkt.definisjon === AksjonspunktCode.AVKLAR_VILKAR_FOR_FORELDREANSVAR
+  aksjonspunkt.definisjon === AksjonspunktKode.AVKLAR_VILKAR_FOR_FORELDREANSVAR
     ? ({
         omsorgsovertakelseDato: values.omsorgsovertakelseDato,
         foreldreansvarDato: values.foreldreansvarDato,
-        kode: AksjonspunktCode.AVKLAR_VILKAR_FOR_FORELDREANSVAR,
+        kode: AksjonspunktKode.AVKLAR_VILKAR_FOR_FORELDREANSVAR,
       } as AvklarFaktaForForeldreansvarAksjonspunktAp)
     : ({
         omsorgsovertakelseDato: values.omsorgsovertakelseDato,
         vilkarType: values.vilkarType,
-        kode: AksjonspunktCode.OMSORGSOVERTAKELSE,
+        kode: AksjonspunktKode.OMSORGSOVERTAKELSE,
       } as AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp);
 
 export default OmsorgOgForeldreansvarFaktaForm;

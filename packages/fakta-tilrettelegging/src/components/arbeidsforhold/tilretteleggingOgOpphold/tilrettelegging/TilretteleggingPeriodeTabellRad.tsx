@@ -9,7 +9,7 @@ import {
 
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
-import { tilretteleggingType } from '@navikt/fp-kodeverk';
+import { TilretteleggingType } from '@navikt/fp-kodeverk';
 import {
   TilretteleggingForm,
   finnVelferdspermisjonprosent,
@@ -26,7 +26,7 @@ const utledTypeTekst = (
 ): string => {
   const velferdspermisjonsprosent = finnVelferdspermisjonprosent(arbeidsforhold);
   const stillingsprosent =
-    tilrettelegging.type === tilretteleggingType.INGEN_TILRETTELEGGING ? 100 : tilrettelegging.stillingsprosent;
+    tilrettelegging.type === TilretteleggingType.INGEN_TILRETTELEGGING ? 100 : tilrettelegging.stillingsprosent;
   const prosent =
     tilrettelegging.fom && stillingsprosent
       ? finnProsentSvangerskapspenger(tilrettelegging, stillingsprosentArbeidsforhold, velferdspermisjonsprosent)

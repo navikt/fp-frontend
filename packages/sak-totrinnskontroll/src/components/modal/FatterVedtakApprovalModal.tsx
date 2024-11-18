@@ -4,8 +4,8 @@ import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Modal, Button, Label } from '@navikt/ds-react';
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
-import { behandlingType as BehandlingType, behandlingResultatType, behandlingStatus } from '@navikt/fp-kodeverk';
-import { Behandling } from '@navikt/ft-types';
+import { BehandlingType, BehandlingResultatType, BehandlingStatus } from '@navikt/fp-kodeverk';
+import { Behandling } from '@navikt/fp-types';
 
 import styles from './fatterVedtakApprovalModal.module.css';
 
@@ -30,7 +30,7 @@ const getInfoTextCode = (
   if (harSammeResultatSomOriginalBehandling) {
     return 'FatterVedtakApprovalModal.UendretUtfall';
   }
-  if (behandlingsresultat && behandlingsresultat.type === behandlingResultatType.AVSLATT) {
+  if (behandlingsresultat && behandlingsresultat.type === BehandlingResultatType.AVSLATT) {
     return 'FatterVedtakApprovalModal.IkkeInnvilget';
   }
   if (isOpphor) {
@@ -52,7 +52,7 @@ const getModalDescriptionTextCode = (isOpphor: boolean, behandlingTypeKode: stri
   return 'FatterVedtakApprovalModal.ModalDescriptionApproval';
 };
 
-const isStatusFatterVedtak = (behandlingStatusKode: string) => behandlingStatusKode === behandlingStatus.FATTER_VEDTAK;
+const isStatusFatterVedtak = (behandlingStatusKode: string) => behandlingStatusKode === BehandlingStatus.FATTER_VEDTAK;
 
 const utledInfoTextCode = (
   allAksjonspunktApproved: boolean,
@@ -112,7 +112,7 @@ const FatterVedtakApprovalModal: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
   const isBehandlingsresultatOpphor =
-    !!behandlingsresultat && behandlingsresultat.type === behandlingResultatType.OPPHOR;
+    !!behandlingsresultat && behandlingsresultat.type === BehandlingResultatType.OPPHOR;
   const infoTextCode = utledInfoTextCode(
     allAksjonspunktApproved,
     behandlingStatusKode,

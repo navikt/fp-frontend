@@ -4,13 +4,12 @@ import { useForm } from 'react-hook-form';
 import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Aksjonspunkt } from '@navikt/fp-types';
 import { FaktaBegrunnelseTextFieldNew, FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
-import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
-import { AksjonspunktCode, aksjonspunktStatus } from '@navikt/fp-kodeverk';
+import { AksjonspunktStatus, AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { Form, CheckboxField } from '@navikt/ft-form-hooks';
 import { ManuellKontrollBesteberegningAP } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 export const buildInitialValues = (aksjonspunkt: Aksjonspunkt): FormValues => {
-  const apErLøst = aksjonspunkt.status === aksjonspunktStatus.UTFORT;
+  const apErLøst = aksjonspunkt.status === AksjonspunktStatus.UTFORT;
   return {
     ...FaktaBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkt),
     besteberegningErKorrektValg: apErLøst ? true : undefined,
@@ -18,7 +17,7 @@ export const buildInitialValues = (aksjonspunkt: Aksjonspunkt): FormValues => {
 };
 
 export const transformValues = (values: FormValues): ManuellKontrollBesteberegningAP => ({
-  kode: AksjonspunktCode.MANUELL_KONTROLL_AV_BESTEBEREGNING,
+  kode: AksjonspunktKode.MANUELL_KONTROLL_AV_BESTEBEREGNING,
   begrunnelse: values.begrunnelse,
   besteberegningErKorrekt: !!values.besteberegningErKorrektValg,
 });

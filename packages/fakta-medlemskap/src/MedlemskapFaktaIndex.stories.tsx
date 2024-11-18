@@ -2,14 +2,14 @@ import React from 'react';
 import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import {
-  AksjonspunktCode,
-  aksjonspunktStatus,
-  behandlingStatus,
-  behandlingType,
-  fagsakYtelseType,
+  AksjonspunktKode,
+  AksjonspunktStatus,
+  BehandlingStatus,
+  BehandlingType,
+  FagsakYtelseType,
   AdresseType,
-  personstatusType,
-  region,
+  PersonstatusType,
+  Region,
 } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Behandling, Fagsak, MedlemskapAvvik, Medlemskap, Soknad } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
@@ -24,15 +24,15 @@ import '@navikt/ft-form-hooks/dist/style.css';
 const behandling = {
   uuid: '1',
   versjon: 1,
-  type: behandlingType.FORSTEGANGSSOKNAD,
+  type: BehandlingType.FORSTEGANGSSOKNAD,
   behandlingPaaVent: false,
-  status: behandlingStatus.BEHANDLING_UTREDES,
+  status: BehandlingStatus.BEHANDLING_UTREDES,
 } as Behandling;
 
 const defaultFagsak = {
   bruker: { navn: 'Ola Nordmann' },
   annenPart: { navn: 'Kari Nordmann' },
-  fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
+  fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
 } as Fagsak;
 
 const defaultSoknad = {
@@ -177,19 +177,19 @@ const lagMedlemskap = (override: Partial<Medlemskap>): Medlemskap => ({
     {
       fom: '2019-01-01',
       tom: '2021-01-01',
-      type: region.NORDEN,
+      type: Region.NORDEN,
     },
   ],
   personstatuser: [
     {
       fom: '2019-01-01',
       tom: '2022-01-01',
-      type: personstatusType.BOSATT,
+      type: PersonstatusType.BOSATT,
     },
     {
       fom: '2024-01-01',
       tom: TIDENES_ENDE,
-      type: personstatusType.UTVANDRET,
+      type: PersonstatusType.UTVANDRET,
     },
   ],
   annenpart: {
@@ -229,14 +229,14 @@ const lagMedlemskap = (override: Partial<Medlemskap>): Medlemskap => ({
       {
         fom: '2019-01-01',
         tom: '2021-01-01',
-        type: region.ANNET,
+        type: Region.ANNET,
       },
     ],
     personstatuser: [
       {
         fom: '2019-01-01',
         tom: '2020-01-01',
-        type: personstatusType.BOSATT,
+        type: PersonstatusType.BOSATT,
       },
     ],
   },
@@ -248,8 +248,8 @@ Default.args = {
   medlemskap: lagMedlemskap({}),
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.VURDER_MEDLEMSKAPSVILKÅRET,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
+      status: AksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
       kanLoses: true,
     },
@@ -265,8 +265,8 @@ ForutgåendeMedlemskap.args = {
   }),
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
+      status: AksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
       kanLoses: true,
     },
@@ -329,8 +329,8 @@ VurderingAvMedlemskapMedlemskapMedEtAvvik.args = {
   } as Soknad,
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.VURDER_MEDLEMSKAPSVILKÅRET,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
+      status: AksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
       kanLoses: true,
     },
@@ -351,8 +351,8 @@ TidligereVurderingAvMedlemskapMedEtAvvik.args = {
   }),
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.VURDER_MEDLEMSKAPSVILKÅRET,
-      status: aksjonspunktStatus.UTFORT,
+      definisjon: AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
+      status: AksjonspunktStatus.UTFORT,
       begrunnelse: 'Søker har bodd i Gautemala siden 10.09.2024 ',
       kanLoses: false,
     },
@@ -400,8 +400,8 @@ LegacyVurderingAvLøpendeMedlemskap.args = {
   }),
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.AVKLAR_FORTSATT_MEDLEMSKAP,
-      status: aksjonspunktStatus.UTFORT,
+      definisjon: AksjonspunktKode.AVKLAR_FORTSATT_MEDLEMSKAP,
+      status: AksjonspunktStatus.UTFORT,
       begrunnelse: undefined,
       kanLoses: false,
     },
@@ -427,8 +427,8 @@ LegacyVurdertInngangsvilkårMedlemskap.args = {
   }),
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.AVKLAR_OPPHOLDSRETT,
-      status: aksjonspunktStatus.UTFORT,
+      definisjon: AksjonspunktKode.AVKLAR_OPPHOLDSRETT,
+      status: AksjonspunktStatus.UTFORT,
       begrunnelse: undefined,
       kanLoses: false,
     },

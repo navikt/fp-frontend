@@ -10,7 +10,7 @@ import { Risikoklassifisering, Aksjonspunkt, KodeverkMedNavn } from '@navikt/fp-
 
 import { FaresignalVurdering } from '../kodeverk/faresignalVurdering';
 import { AvklartRisikoklassifiseringAp } from '../types/AvklartRisikoklassifiseringAp';
-import { RisikoklassifiseringAksjonspunktCode } from '../RisikoklassifiseringAksjonspunktCode';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
 const maxLength1500 = maxLength(1500);
 const minLength3 = minLength(3);
@@ -52,7 +52,7 @@ const utledFaresignalVurderingVerdi = (
     : vurderingUnderkategori;
 
 const transformValues = (values: Values): AvklartRisikoklassifiseringAp => ({
-  kode: RisikoklassifiseringAksjonspunktCode.VURDER_FARESIGNALER,
+  kode: AksjonspunktKode.VURDER_FARESIGNALER,
   faresignalVurdering: utledFaresignalVurderingVerdi(
     values[VURDERING_HOVEDKATEGORI],
     values[IKKE_REELLE_VURDERINGER_UNDERKATEGORI],

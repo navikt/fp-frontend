@@ -1,10 +1,6 @@
 import React, { FunctionComponent, useCallback, useMemo, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import {
-  behandlingType as BehandlingType,
-  behandlingStatus as BehandlingStatus,
-  KodeverkType,
-} from '@navikt/fp-kodeverk';
+import { BehandlingType, BehandlingStatus, KodeverkType } from '@navikt/fp-kodeverk';
 
 import { MenyNyBehandlingIndex, FormValues as NyBehandlingFormValues } from '@navikt/fp-sak-meny-ny-behandling';
 import { BehandlingAppKontekst } from '@navikt/fp-types';

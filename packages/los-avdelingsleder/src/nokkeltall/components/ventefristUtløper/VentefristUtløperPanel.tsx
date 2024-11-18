@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { HStack, Label } from '@navikt/ds-react';
 import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { FagsakYtelseType, KodeverkType } from '@navikt/ft-kodeverk';
+import { FagsakYtelseType, KodeverkType } from '@navikt/fp-kodeverk';
 import { KodeverkMedNavn } from '@navikt/fp-types';
 
 import BehandlingVentefrist from '../../../typer/behandlingVentefristTsType';

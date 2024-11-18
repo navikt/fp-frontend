@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 
-import { AksjonspunktCode, VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 
 import skalViseProsessPanel from '../../felles/prosess/skalViseProsessPanel';
@@ -9,7 +9,7 @@ import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPane
 import OverstyringPanelDef from '../../felles/prosess/OverstyringPanelDef';
 import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
 
-const AKSJONSPUNKT_KODE = AksjonspunktCode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR;
+const AKSJONSPUNKT_KODE = AksjonspunktKode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR;
 
 const VILKAR_KODER = [VilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE];
 

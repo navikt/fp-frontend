@@ -5,14 +5,14 @@ import classNames from 'classnames';
 import moment from 'moment';
 import { Heading, Detail, BodyShort, Button } from '@navikt/ds-react';
 
-import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 import { Form, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
 import {
-  behandlingType as BehandlingType,
-  dokumentMalType,
-  ugunstAarsakTyper,
-  AksjonspunktCode,
+  BehandlingType,
+  DokumentMalType,
+  UgunstAarsakType,
+  AksjonspunktKode,
   KodeverkType,
+  AksjonspunktStatus,
 } from '@navikt/fp-kodeverk';
 import { AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { hasValidText, minLength, maxLength, required } from '@navikt/ft-form-validators';
@@ -43,7 +43,7 @@ export type ForhandsvisData = {
 };
 
 type FormValues = {
-  kode: AksjonspunktCode.VARSEL_REVURDERING_ETTERKONTROLL | AksjonspunktCode.VARSEL_REVURDERING_MANUELL;
+  kode: AksjonspunktKode.VARSEL_REVURDERING_ETTERKONTROLL | AksjonspunktKode.VARSEL_REVURDERING_MANUELL;
   begrunnelse?: string;
   sendVarsel?: boolean;
   fritekst?: string;
@@ -52,8 +52,8 @@ type FormValues = {
 const buildInitialValues = (aksjonspunkter: Aksjonspunkt[]): FormValues => ({
   kode: validerApKodeOgHentApEnum(
     aksjonspunkter[0].definisjon,
-    AksjonspunktCode.VARSEL_REVURDERING_ETTERKONTROLL,
-    AksjonspunktCode.VARSEL_REVURDERING_MANUELL,
+    AksjonspunktKode.VARSEL_REVURDERING_ETTERKONTROLL,
+    AksjonspunktKode.VARSEL_REVURDERING_MANUELL,
   ),
   begrunnelse: aksjonspunkter[0].begrunnelse,
   sendVarsel: undefined,
@@ -130,8 +130,8 @@ const VarselOmRevurderingForm: FunctionComponent<OwnProps> = ({
     (e: MouseEvent) => {
       e.preventDefault();
       previewCallback({
-        dokumentMal: dokumentMalType.VARSEL_OM_REVURDERING,
-        arsakskode: ugunstAarsakTyper.ANNET,
+        dokumentMal: DokumentMalType.VARSEL_OM_REVURDERING,
+        arsakskode: UgunstAarsakType.ANNET,
         fritekst: formVerdier.fritekst || ' ',
       });
     },

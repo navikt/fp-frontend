@@ -2,9 +2,10 @@ import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import { FeilutbetalingAarsak, FeilutbetalingFakta } from '@navikt/ft-types';
 import {
+  FeilutbetalingAarsak,
   FeilutbetalingAksjonspunktCode,
+  FeilutbetalingFakta,
   FeilutbetalingFaktaIndex,
 } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
 import { AlleKodeverkTilbakekreving } from '@navikt/fp-types';

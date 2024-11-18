@@ -3,12 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Label, BodyShort, Heading, HStack, Link } from '@navikt/ds-react';
 
-import {
-  AksjonspunktCode,
-  kommunikasjonsretning,
-  innsynResultatType as InnsynResultatType,
-  dokumentMalType,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, Kommunikasjonsretning, InnsynResultatType, DokumentMalType } from '@navikt/fp-kodeverk';
 import { ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Form, TextAreaField } from '@navikt/ft-form-hooks';
@@ -39,7 +34,7 @@ const getPreviewCallback =
     const data = {
       fritekst: begrunnelse ?? ' ',
       mottaker: '',
-      dokumentMal: dokumentMalType.INNSYN_SVAR,
+      dokumentMal: DokumentMalType.INNSYN_SVAR,
       gjelderVedtak: true,
     };
     previewCallback(data);
@@ -47,7 +42,7 @@ const getPreviewCallback =
 
 // Samme dokument kan ligge på flere behandlinger under samme fagsak.
 const getFilteredReceivedDocuments = (allDocuments: Dokument[]): Dokument[] => {
-  const filteredDocuments = allDocuments.filter(doc => doc.kommunikasjonsretning === kommunikasjonsretning.INN);
+  const filteredDocuments = allDocuments.filter(doc => doc.kommunikasjonsretning === Kommunikasjonsretning.INN);
   allDocuments.forEach(
     doc => !filteredDocuments.some(fd => fd.dokumentId === doc.dokumentId) && filteredDocuments.push(doc),
   );
@@ -86,11 +81,11 @@ type FormValues = {
 
 const buildInitialValues = (innsynMottattDato: string, aksjonspunkter: Aksjonspunkt[]): FormValues => ({
   mottattDato: innsynMottattDato,
-  begrunnelse: aksjonspunkter.find(ap => ap.definisjon === AksjonspunktCode.FORESLA_VEDTAK)?.begrunnelse,
+  begrunnelse: aksjonspunkter.find(ap => ap.definisjon === AksjonspunktKode.FORESLA_VEDTAK)?.begrunnelse,
 });
 
 const transformValues = (values: FormValues): ForeslaVedtakAp => ({
-  kode: AksjonspunktCode.FORESLA_VEDTAK,
+  kode: AksjonspunktKode.FORESLA_VEDTAK,
   ...values,
 });
 
@@ -143,7 +138,7 @@ const InnsynVedtakForm: FunctionComponent<OwnProps> = ({
     [alleDokumenter, innsynDokumenter],
   );
 
-  const apBegrunnelse = aksjonspunkter.find(ap => ap.definisjon === AksjonspunktCode.VURDER_INNSYN)?.begrunnelse;
+  const apBegrunnelse = aksjonspunkter.find(ap => ap.definisjon === AksjonspunktKode.VURDER_INNSYN)?.begrunnelse;
 
   const begrunnelse = formMethods.watch('begrunnelse');
 

@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useCallback, useState } from 'react';
 import { useIntl } from 'react-intl';
 
-import { vilkarUtfallType, AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { VilkarUtfallType, AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { BeregningsresultatProsessIndex } from '@navikt/fp-prosess-beregningsresultat';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { AksessRettigheter, BeregningsresultatEs } from '@navikt/fp-types';
@@ -10,7 +10,7 @@ import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPane
 import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingApiKeys, requestBehandlingApi } from '../../../data/behandlingContextApi';
 
-const AKSJONSPUNKT_KODER = [AksjonspunktCode.OVERSTYR_BEREGNING];
+const AKSJONSPUNKT_KODER = [AksjonspunktKode.OVERSTYR_BEREGNING];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.BEREGNINGRESULTAT_ENGANGSSTONAD];
 type EndepunktPanelData = {
@@ -38,8 +38,8 @@ const BeregningEsProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanel
       skalPanelVisesIMeny={() => true}
       hentOverstyrtStatus={() =>
         requestBehandlingApi.hasPath(BehandlingApiKeys.BEREGNINGRESULTAT_ENGANGSSTONAD.name)
-          ? vilkarUtfallType.OPPFYLT
-          : vilkarUtfallType.IKKE_VURDERT
+          ? VilkarUtfallType.OPPFYLT
+          : VilkarUtfallType.IKKE_VURDERT
       }
       erOverstyrt={erOverstyrt}
       renderPanel={data => (

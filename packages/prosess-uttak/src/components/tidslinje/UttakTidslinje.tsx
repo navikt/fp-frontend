@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement, useMemo, useState } from 'react';
+import React, { FunctionComponent, ReactElement, ReactNode, useMemo, useState } from 'react';
 import dayjs from 'dayjs';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { DDMMYY_DATE_FORMAT, ISO_DATE_FORMAT, calcDaysAndWeeks } from '@navikt/ft-utils';
@@ -23,11 +23,11 @@ import { DateLabel, FloatRight, VerticalSpacer } from '@navikt/ft-ui-komponenter
 import { AlleKodeverk, Fagsak, PeriodeSoker } from '@navikt/fp-types';
 import {
   KodeverkType,
-  behandlingStatus,
-  oppholdArsakType,
-  periodeResultatType,
-  relasjonsRolleType,
-  uttakPeriodeType,
+  BehandlingStatus,
+  OppholdArsakType,
+  PeriodeResultatType,
+  RelasjonsRolleType,
+  UttakPeriodeType,
 } from '@navikt/fp-kodeverk';
 
 import styles from './uttakTidslinje.module.css';
@@ -47,20 +47,20 @@ export type TidslinjeTimes = {
 };
 
 const PERIODE_TYPE_IKON_MAP = {
-  [uttakPeriodeType.MODREKVOTE]: <StrollerIcon />,
-  [uttakPeriodeType.FEDREKVOTE]: <StrollerIcon />,
-  [uttakPeriodeType.FELLESPERIODE]: <StrollerIcon />,
-  [uttakPeriodeType.FORELDREPENGER]: <StrollerIcon />,
-  [uttakPeriodeType.FORELDREPENGER_FOR_FODSEL]: <PersonPregnantIcon />,
-};
+  [UttakPeriodeType.MODREKVOTE]: <StrollerIcon />,
+  [UttakPeriodeType.FEDREKVOTE]: <StrollerIcon />,
+  [UttakPeriodeType.FELLESPERIODE]: <StrollerIcon />,
+  [UttakPeriodeType.FORELDREPENGER]: <StrollerIcon />,
+  [UttakPeriodeType.FORELDREPENGER_FOR_FODSEL]: <PersonPregnantIcon />,
+} as Record<string, ReactNode>;
 
 const PERIODE_TYPE_LABEL_MAP = {
-  [uttakPeriodeType.MODREKVOTE]: 'UttakTidslinje.Modrekvote',
-  [uttakPeriodeType.FEDREKVOTE]: 'UttakTidslinje.Fedrekvote',
-  [uttakPeriodeType.FELLESPERIODE]: 'UttakTidslinje.Fellesperiode',
-  [uttakPeriodeType.FORELDREPENGER]: 'UttakTidslinje.Foreldrepenger',
-  [uttakPeriodeType.FORELDREPENGER_FOR_FODSEL]: 'UttakTidslinje.ForeldrepengerForFodsel',
-};
+  [UttakPeriodeType.MODREKVOTE]: 'UttakTidslinje.Modrekvote',
+  [UttakPeriodeType.FEDREKVOTE]: 'UttakTidslinje.Fedrekvote',
+  [UttakPeriodeType.FELLESPERIODE]: 'UttakTidslinje.Fellesperiode',
+  [UttakPeriodeType.FORELDREPENGER]: 'UttakTidslinje.Foreldrepenger',
+  [UttakPeriodeType.FORELDREPENGER_FOR_FODSEL]: 'UttakTidslinje.ForeldrepengerForFodsel',
+} as Record<string, string>;
 
 const sortByDate = (a: PeriodeSøkerMedTidslinjedata, b: PeriodeSøkerMedTidslinjedata): number => {
   if (a.periode.fom < b.periode.fom) {
@@ -84,13 +84,13 @@ type PeriodeMedStartOgSlutt = {
 } & PeriodeSøkerMedTidslinjedata;
 
 const getStatus = (periode: PeriodeSoker, tilknyttetStortinget: boolean): 'success' | 'warning' | 'danger' => {
-  if (periode.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING || tilknyttetStortinget) {
+  if (periode.periodeResultatType === PeriodeResultatType.MANUELL_BEHANDLING || tilknyttetStortinget) {
     return 'warning';
   }
   if (
     periode.gradertAktivitet &&
     periode.graderingInnvilget &&
-    periode.periodeResultatType === periodeResultatType.INNVILGET
+    periode.periodeResultatType === PeriodeResultatType.INNVILGET
   ) {
     return 'success';
   }
@@ -99,7 +99,7 @@ const getStatus = (periode: PeriodeSoker, tilknyttetStortinget: boolean): 'succe
   }
   if (
     ('erOppfylt' in periode && periode.erOppfylt === true) ||
-    (periode.periodeResultatType === periodeResultatType.INNVILGET && !tilknyttetStortinget)
+    (periode.periodeResultatType === PeriodeResultatType.INNVILGET && !tilknyttetStortinget)
   ) {
     return 'success';
   }
@@ -127,7 +127,7 @@ const formatPaneler = (
     status: getStatus(periode.periode, tilknyttetStortinget),
     periodeType: finnPeriodeType(periode.periode),
     erGradert: !!periode.periode.gradertAktivitet && !!periode.periode.graderingInnvilget,
-    erOpphold: periode.periode.oppholdÅrsak !== oppholdArsakType.UDEFINERT,
+    erOpphold: periode.periode.oppholdÅrsak !== OppholdArsakType.UDEFINERT,
     harUtsettelse: periode.periode.utsettelseType !== '-',
     begrunnelse: periode.periode.begrunnelse,
   }));
@@ -147,10 +147,10 @@ const lagGruppeIder = (perioder: PeriodeSøkerMedTidslinjedata[] = []) => {
 };
 
 const finnIkonGittKjønnkode = (rrType: string) => {
-  if (rrType === relasjonsRolleType.MOR || rrType === relasjonsRolleType.MEDMOR) {
+  if (rrType === RelasjonsRolleType.MOR || rrType === RelasjonsRolleType.MEDMOR) {
     return <FigureOutwardFillIcon width={20} height={20} color="var(--a-red-200)" />;
   }
-  if (rrType === relasjonsRolleType.FAR) {
+  if (rrType === RelasjonsRolleType.FAR) {
     return <SilhouetteFillIcon width={20} height={20} color="var(--a-blue-600)" />;
   }
   return <FigureCombinationIcon width={20} height={20} />;
@@ -248,7 +248,7 @@ const finnLabelForPeriode = (
   }
 
   const manueltEndret =
-    periode.begrunnelse && behandlingStatusKode === behandlingStatus.FATTER_VEDTAK
+    periode.begrunnelse && behandlingStatusKode === BehandlingStatus.FATTER_VEDTAK
       ? intl.formatMessage({ id: 'UttakTidslinje.ManueltEditert' })
       : '';
 
@@ -274,7 +274,7 @@ const finnIkonForPeriode = (periode: PeriodeMedStartOgSlutt, behandlingStatusKod
   if (periode.erGradert) {
     return <PercentIcon />;
   }
-  if (periode.begrunnelse && behandlingStatusKode === behandlingStatus.FATTER_VEDTAK) {
+  if (periode.begrunnelse && behandlingStatusKode === BehandlingStatus.FATTER_VEDTAK) {
     return <PersonPencilIcon />;
   }
   if (periode.harUtsettelse) {

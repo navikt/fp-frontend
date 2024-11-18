@@ -4,7 +4,7 @@ import { act } from 'react-dom/test-utils';
 import { RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
 import { MemoryRouter } from 'react-router-dom';
-import { BehandlingStatus, BehandlingType, FagsakYtelseType, FagsakStatus } from '@navikt/ft-kodeverk';
+import { BehandlingStatus, BehandlingType, FagsakYtelseType, FagsakStatus } from '@navikt/fp-kodeverk';
 
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { Fagsak, BehandlingAppKontekst, BehandlingOppretting } from '@navikt/fp-types';

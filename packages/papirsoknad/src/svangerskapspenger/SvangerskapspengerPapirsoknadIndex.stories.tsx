@@ -1,9 +1,8 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { FagsakYtelseType } from '@navikt/ft-kodeverk';
 
 import { SoknadData } from '@navikt/fp-papirsoknad-ui-komponenter';
-import { familieHendelseType, foreldreType } from '@navikt/fp-kodeverk';
+import { FamilieHendelseType, FagsakYtelseType, ForeldreType } from '@navikt/fp-kodeverk';
 import { alleKodeverk, getIntlDecorator, withRouter } from '@navikt/fp-storybook-utils';
 
 import { SvangerskapspengerPapirsoknadIndex } from './SvangerskapspengerPapirsoknadIndex';
@@ -34,18 +33,18 @@ type Story = StoryObj<typeof meta>;
 
 export const ForMorVedFødsel: Story = {
   args: {
-    soknadData: new SoknadData(FagsakYtelseType.SVANGERSKAPSPENGER, familieHendelseType.FODSEL, foreldreType.MOR),
+    soknadData: new SoknadData(FagsakYtelseType.SVANGERSKAPSPENGER, FamilieHendelseType.FODSEL, ForeldreType.MOR),
   },
 };
 
 export const ForMorVedAdopsjon: Story = {
   args: {
-    soknadData: new SoknadData(FagsakYtelseType.SVANGERSKAPSPENGER, familieHendelseType.ADOPSJON, foreldreType.MOR),
+    soknadData: new SoknadData(FagsakYtelseType.SVANGERSKAPSPENGER, FamilieHendelseType.ADOPSJON, ForeldreType.MOR),
   },
 };
 
 export const ForFarVedFodsel: Story = {
   args: {
-    soknadData: new SoknadData(FagsakYtelseType.SVANGERSKAPSPENGER, familieHendelseType.FODSEL, foreldreType.FAR),
+    soknadData: new SoknadData(FagsakYtelseType.SVANGERSKAPSPENGER, FamilieHendelseType.FODSEL, ForeldreType.FAR),
   },
 };

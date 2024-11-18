@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
-import { dokumentMalType } from '@navikt/fp-kodeverk';
+import { DokumentMalType } from '@navikt/fp-kodeverk';
 import * as stories from './VedtakProsessIndex.stories';
 
 const {
@@ -85,7 +85,7 @@ describe('<VedtakProsessIndex>', () => {
 
     await waitFor(() => expect(forhåndsvis).toHaveBeenCalledTimes(1));
     expect(forhåndsvis).toHaveBeenNthCalledWith(1, {
-      dokumentMal: dokumentMalType.FRITEKST,
+      dokumentMal: DokumentMalType.FRITEKST,
       fritekst: 'Dette er innhold',
       gjelderVedtak: true,
       tittel: 'Dette er en overskrift',

@@ -1,9 +1,9 @@
 import React, { useState, KeyboardEvent, FunctionComponent, useEffect, useRef, useCallback, ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { BodyShort, Detail, Label, Heading, Link, Table, HStack } from '@navikt/ds-react';
-import { KodeverkMedNavn } from '@navikt/ft-types';
+import { KodeverkMedNavn } from '@navikt/fp-types';
 import { VerticalSpacer, DateLabel } from '@navikt/ft-ui-komponenter';
-import { KodeverkType } from '@navikt/ft-kodeverk';
+import { KodeverkType } from '@navikt/fp-kodeverk';
 import { PlusCircleIcon, XMarkIcon } from '@navikt/aksel-icons';
 
 import { restApiHooks, RestApiPathsKeys } from '../../data/fplosRestApi';

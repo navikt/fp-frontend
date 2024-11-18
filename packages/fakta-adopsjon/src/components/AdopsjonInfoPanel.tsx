@@ -11,7 +11,7 @@ import {
 } from '@navikt/fp-fakta-felles';
 import { Aksjonspunkt, FamilieHendelse, AlleKodeverk, Soknad } from '@navikt/fp-types';
 import { VerticalSpacer, AksjonspunktHelpTextTemp } from '@navikt/ft-ui-komponenter';
-import { AksjonspunktCode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
 import { Form } from '@navikt/ft-form-hooks';
 import {
   BekreftDokumentertDatoAksjonspunktAp,
@@ -27,7 +27,7 @@ import DokumentasjonFaktaForm, { FormValues as DokFormValues } from './Dokumenta
 import styles from './adopsjonInfoPanel.module.css';
 
 const { ADOPSJONSDOKUMENTAJON, OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE, OM_ADOPSJON_GJELDER_EKTEFELLES_BARN } =
-  AksjonspunktCode;
+  AksjonspunktKode;
 const adopsjonAksjonspunkter = [
   OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
   ADOPSJONSDOKUMENTAJON,

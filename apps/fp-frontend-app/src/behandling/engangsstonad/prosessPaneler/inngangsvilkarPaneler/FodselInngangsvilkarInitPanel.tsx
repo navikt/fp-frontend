@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { IntlShape, useIntl } from 'react-intl';
 
-import { AksjonspunktCode, VilkarType, fagsakYtelseType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, VilkarType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { FodselVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-fodsel';
 import { Aksjonspunkt, AksessRettigheter } from '@navikt/fp-types';
 
@@ -10,8 +10,8 @@ import InngangsvilkarDefaultInitPanel from '../../../felles/prosess/Inngangsvilk
 import OverstyringPanelDef from '../../../felles/prosess/OverstyringPanelDef';
 
 const AKSJONSPUNKT_TEKST_PER_KODE = {
-  [AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN]: 'SRBVilkarForm.VurderSammeBarn',
-  [AksjonspunktCode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN]:
+  [AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN]: 'SRBVilkarForm.VurderSammeBarn',
+  [AksjonspunktKode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN]:
     'SRBVilkarForm.VurderAnnenForelderSammeBarn',
 } as Record<string, string>;
 
@@ -21,8 +21,8 @@ const hentAksjonspunktTekst = (intl: IntlShape, aksjonspunkter: Aksjonspunkt[] =
     : '';
 
 const AKSJONSPUNKT_KODER = [
-  AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
-  AksjonspunktCode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
+  AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+  AksjonspunktKode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
 ];
 
 const VILKAR_KODER = [VilkarType.FODSELSVILKARET_MOR];
@@ -51,7 +51,7 @@ const FodselInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsvilkar
           {data.aksjonspunkter.length === 0 && (
             <OverstyringPanelDef
               aksjonspunkter={data.aksjonspunkter}
-              aksjonspunktKode={AksjonspunktCode.OVERSTYR_FODSELSVILKAR}
+              aksjonspunktKode={AksjonspunktKode.OVERSTYR_FODSELSVILKAR}
               vilkar={data.vilkar}
               vilkarKoder={VILKAR_KODER}
               panelTekstKode="Inngangsvilkar.Fodselsvilkaret"
@@ -65,7 +65,7 @@ const FodselInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsvilkar
             />
           )}
           {data.aksjonspunkter.length > 0 && (
-            <FodselVilkarProsessIndex ytelseTypeKode={fagsakYtelseType.ENGANGSSTONAD} {...data} />
+            <FodselVilkarProsessIndex ytelseTypeKode={FagsakYtelseType.ENGANGSSTONAD} {...data} />
           )}
         </>
       )}

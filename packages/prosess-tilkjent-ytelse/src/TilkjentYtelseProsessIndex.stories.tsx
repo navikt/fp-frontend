@@ -3,15 +3,15 @@ import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import {
-  aktivitetStatus,
-  aksjonspunktStatus,
-  arbeidsforholdHandlingType,
+  AktivitetStatus,
+  AksjonspunktStatus,
+  ArbeidsforholdHandlingType,
   StonadskontoType,
-  navBrukerKjonn,
-  fagsakYtelseType,
-  soknadType,
-  AksjonspunktCode,
-  relasjonsRolleType,
+  NavBrukerKjonn,
+  FagsakYtelseType,
+  SoknadType,
+  AksjonspunktKode,
+  RelasjonsRolleType,
 } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import {
@@ -29,8 +29,8 @@ import {
 import TilkjentYtelseProsessIndex from './TilkjentYtelseProsessIndex';
 
 const fagsak = {
-  fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
-  relasjonsRolleType: relasjonsRolleType.MOR,
+  fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+  relasjonsRolleType: RelasjonsRolleType.MOR,
 } as Fagsak;
 
 const behandling = {
@@ -46,13 +46,13 @@ const defaultFamiliehendelse = {
       },
     ],
     omsorgsovertakelseDato: '2019-01-01',
-    soknadType: soknadType.FODSEL,
+    soknadType: SoknadType.FODSEL,
   } as FamilieHendelse,
 } as FamilieHendelseSamling;
 
 const personoversikt = {
   bruker: {
-    kjønn: navBrukerKjonn.KVINNE,
+    kjønn: NavBrukerKjonn.KVINNE,
   },
 } as Personoversikt;
 
@@ -64,8 +64,8 @@ const beregningresultat = {
           uttak: {
             stonadskontoType: StonadskontoType.FELLESPERIODE,
           },
-          aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
-          arbeidsforholdType: arbeidsforholdHandlingType.NYTT_ARBEIDSFORHOLD,
+          aktivitetStatus: AktivitetStatus.ARBEIDSTAKER,
+          arbeidsforholdType: ArbeidsforholdHandlingType.NYTT_ARBEIDSFORHOLD,
         },
       ],
       fom: '2018-01-01',
@@ -78,8 +78,8 @@ const beregningresultat = {
           uttak: {
             stonadskontoType: StonadskontoType.FORELDREPENGER,
           },
-          aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
-          arbeidsforholdType: arbeidsforholdHandlingType.NYTT_ARBEIDSFORHOLD,
+          aktivitetStatus: AktivitetStatus.ARBEIDSTAKER,
+          arbeidsforholdType: ArbeidsforholdHandlingType.NYTT_ARBEIDSFORHOLD,
         },
       ],
       fom: '2019-02-01',
@@ -91,7 +91,7 @@ const beregningresultat = {
 
 const søknad = {
   mottattDato: '2019-01-10',
-  soknadType: soknadType.FODSEL,
+  soknadType: SoknadType.FODSEL,
   omsorgsovertakelseDato: '2019-01-10',
   fodselsdatoer: {
     1: '2019-01-01',
@@ -152,8 +152,8 @@ UtførtAksjonspunkt.args = {
   aksjonspunkter: [
     {
       begrunnelse: 'Dette er en begrunnelse saksbehandler tidligere har gjort.',
-      definisjon: AksjonspunktCode.VURDER_TILBAKETREKK,
-      status: aksjonspunktStatus.UTFORT,
+      definisjon: AksjonspunktKode.VURDER_TILBAKETREKK,
+      status: AksjonspunktStatus.UTFORT,
     },
   ] as Aksjonspunkt[],
 };
@@ -162,14 +162,14 @@ export const MedFeriepengegrunnlag = Template.bind({});
 MedFeriepengegrunnlag.args = {
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.VURDER_TILBAKETREKK,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.VURDER_TILBAKETREKK,
+      status: AksjonspunktStatus.OPPRETTET,
     },
   ] as Aksjonspunkt[],
   feriepengegrunnlag: {
     andeler: [
       {
-        aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
+        aktivitetStatus: AktivitetStatus.ARBEIDSTAKER,
         opptjeningsår: 2,
         årsbeløp: 500000,
         erBrukerMottaker: true,
@@ -189,7 +189,7 @@ MedBarnFodtLengeForForstePeriode.args = {
           fodselsdato: '2017-01-01',
         },
       ],
-      soknadType: soknadType.FODSEL,
+      soknadType: SoknadType.FODSEL,
     } as FamilieHendelse,
   },
 };

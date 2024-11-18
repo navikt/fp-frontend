@@ -5,7 +5,7 @@ import { Button, Label, Heading, BodyShort, HStack, VStack } from '@navikt/ds-re
 import dayjs from 'dayjs';
 import { ArrowLeftIcon, ArrowRightIcon, XMarkIcon } from '@navikt/aksel-icons';
 
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { findDifferenceInMonthsAndDays, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
@@ -126,7 +126,7 @@ const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
     <Form formMethods={formMethods} onSubmit={(values: FormValues) => oppdaterAktivitet(values)}>
       <FaktaGruppe
         className={styles.panel}
-        merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.VURDER_PERIODER_MED_OPPTJENING]}
+        merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING]}
       >
         <VStack gap="2">
           <HStack justify="space-between">

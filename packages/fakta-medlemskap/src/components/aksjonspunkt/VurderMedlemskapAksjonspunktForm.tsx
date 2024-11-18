@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
 
 import { Button, VStack } from '@navikt/ds-react';
-import { AksjonspunktCode, behandlingType as BehandlingType, KodeverkType, VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, BehandlingType, KodeverkType, VilkarType } from '@navikt/fp-kodeverk';
 import { FaktaBegrunnelseTextFieldNew } from '@navikt/fp-fakta-felles';
 import { Form } from '@navikt/ft-form-hooks';
 import { Aksjonspunkt, AlleKodeverk, Behandling, ManuellBehandlingResultat } from '@navikt/fp-types';
@@ -72,15 +72,15 @@ const VurderMedlemskapAksjonspunktForm: FC<Props> = ({
   });
 
   const begrunnelseVerdi = formMethods.watch('begrunnelse');
-  const erForutgåendeAksjonspunkt = aksjonspunkt.definisjon === AksjonspunktCode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR;
+  const erForutgåendeAksjonspunkt = aksjonspunkt.definisjon === AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR;
 
   const bekreft = useCallback(
     ({ vurdering, avslagskode, medlemFom, opphørFom, begrunnelse }: VurderMedlemskapFormValues) => {
       setSubmitting(true);
       return submitCallback({
         kode: erForutgåendeAksjonspunkt
-          ? AksjonspunktCode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR
-          : AksjonspunktCode.VURDER_MEDLEMSKAPSVILKÅRET,
+          ? AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR
+          : AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
         begrunnelse,
         avslagskode: vurdering !== MedlemskapVurdering.OPPFYLT ? avslagskode : undefined,
         opphørFom: vurdering === MedlemskapVurdering.DELVIS_OPPFYLT ? opphørFom : undefined,

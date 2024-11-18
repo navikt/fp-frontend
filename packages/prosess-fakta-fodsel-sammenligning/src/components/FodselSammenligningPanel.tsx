@@ -5,7 +5,7 @@ import { Tag, BodyShort, Heading } from '@navikt/ds-react';
 
 import { FlexColumn, FlexContainer, FlexRow, Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import { behandlingType } from '@navikt/fp-kodeverk';
+import { BehandlingType } from '@navikt/fp-kodeverk';
 import { AvklartBarn, FamilieHendelse, Soknad } from '@navikt/fp-types';
 
 import FodselSammenligningOtherPanel from './FodselSammenligningOtherPanel';
@@ -44,10 +44,10 @@ const FodselSammenligningPanel: FunctionComponent<OwnProps> = ({
   <FlexContainer>
     <FlexRow>
       <FlexColumn className={styles.colWidthLeft}>
-        {behandlingsTypeKode !== behandlingType.REVURDERING && (
+        {behandlingsTypeKode !== BehandlingType.REVURDERING && (
           <FodselSammenligningOtherPanel soknad={soknad} termindato={termindato} />
         )}
-        {behandlingsTypeKode === behandlingType.REVURDERING && (
+        {behandlingsTypeKode === BehandlingType.REVURDERING && (
           <FodselSammenligningRevurderingPanel
             soknadOriginalBehandling={soknadOriginalBehandling}
             familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}

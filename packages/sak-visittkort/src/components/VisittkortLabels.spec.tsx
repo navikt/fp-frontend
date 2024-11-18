@@ -1,7 +1,7 @@
 import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 import { render, screen } from '@testing-library/react';
-import { DiskresjonskodeType, NavBrukerKjonn } from '@navikt/ft-kodeverk';
+import { DiskresjonskodeType, NavBrukerKjonn } from '@navikt/fp-kodeverk';
 import { createIntl } from '@navikt/ft-utils';
 import { VisittkortLabels } from './VisittkortLabels';
 import messages from '../../i18n/nb_NO.json';

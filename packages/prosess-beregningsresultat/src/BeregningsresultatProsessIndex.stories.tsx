@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 
 import { Behandling, Aksjonspunkt, Fagsak } from '@navikt/fp-types';
 
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -23,7 +23,7 @@ const beregningsresultat = {
 
 const defaultAksjonspunkter = [
   {
-    definisjon: AksjonspunktCode.VURDER_FEILUTBETALING,
+    definisjon: AksjonspunktKode.VURDER_FEILUTBETALING,
     begrunnelse: 'test',
   },
 ] as Aksjonspunkt[];
@@ -75,7 +75,7 @@ export const OverstyrtReadonlyPanel = Template.bind({});
 OverstyrtReadonlyPanel.args = {
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.OVERSTYR_BEREGNING,
+      definisjon: AksjonspunktKode.OVERSTYR_BEREGNING,
       begrunnelse: 'Dette er en begrunnelse',
     },
   ] as Aksjonspunkt[],

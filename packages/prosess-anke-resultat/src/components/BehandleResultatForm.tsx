@@ -3,7 +3,12 @@ import { FormattedMessage } from 'react-intl';
 import { Detail, Heading, Label } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { KodeverkType, getKodeverknavnFn, ankeVurdering, ankeVurderingOmgjoer } from '@navikt/fp-kodeverk';
+import {
+  KodeverkType,
+  getKodeverknavnFn,
+  AnkeVurdering as AnkeVurderingKodeverk,
+  AnkeVurderingOmgjoer,
+} from '@navikt/fp-kodeverk';
 import { AnkeVurdering, AlleKodeverk } from '@navikt/fp-types';
 
 interface OwnPropsResultat {
@@ -115,11 +120,11 @@ const ResultatAvvise: FunctionComponent<OwnPropsResultat> = ({ ankeVurderingResu
 
 const hentSprakKode = (ankeOmgjoerArsak?: string): string => {
   switch (ankeOmgjoerArsak) {
-    case ankeVurderingOmgjoer.ANKE_TIL_UGUNST:
+    case AnkeVurderingOmgjoer.ANKE_TIL_UGUNST:
       return 'Ankebehandling.Resultat.Innstilling.Omgjores.TilUgunst';
-    case ankeVurderingOmgjoer.ANKE_TIL_GUNST:
+    case AnkeVurderingOmgjoer.ANKE_TIL_GUNST:
       return 'Ankebehandling.Resultat.Innstilling.Omgjores.TilGunst';
-    case ankeVurderingOmgjoer.ANKE_DELVIS_OMGJOERING_TIL_GUNST:
+    case AnkeVurderingOmgjoer.ANKE_DELVIS_OMGJOERING_TIL_GUNST:
       return 'Ankebehandling.Resultat.Innstilling.Omgjores.Delvis';
     default:
       return '';
@@ -161,15 +166,15 @@ const AnkeResultat: FunctionComponent<OwnPropsResultat & { alleKodeverk: AlleKod
     return null;
   }
   switch (ankeVurderingResultat.ankeVurdering) {
-    case ankeVurdering.ANKE_STADFESTE_YTELSESVEDTAK:
+    case AnkeVurderingKodeverk.ANKE_STADFESTE_YTELSESVEDTAK:
       return <ResultatEnkel ankeVurderingResultat={ankeVurderingResultat} />;
-    case ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE:
+    case AnkeVurderingKodeverk.ANKE_OPPHEVE_OG_HJEMSENDE:
       return <ResultatOpphev ankeVurderingResultat={ankeVurderingResultat} />;
-    case ankeVurdering.ANKE_HJEMSENDE_UTEN_OPPHEV:
+    case AnkeVurderingKodeverk.ANKE_HJEMSENDE_UTEN_OPPHEV:
       return <ResultatHjemsend ankeVurderingResultat={ankeVurderingResultat} />;
-    case ankeVurdering.ANKE_OMGJOER:
+    case AnkeVurderingKodeverk.ANKE_OMGJOER:
       return <ResultatOmgjores ankeVurderingResultat={ankeVurderingResultat} alleKodeverk={alleKodeverk} />;
-    case ankeVurdering.ANKE_AVVIS:
+    case AnkeVurderingKodeverk.ANKE_AVVIS:
       return <ResultatAvvise ankeVurderingResultat={ankeVurderingResultat} />;
     default:
       return <div>???</div>;

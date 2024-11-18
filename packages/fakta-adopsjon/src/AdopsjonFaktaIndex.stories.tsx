@@ -2,7 +2,7 @@ import React from 'react';
 import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { aksjonspunktStatus, soknadType, AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktStatus, SoknadType, AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { Behandling, FamilieHendelseSamling, Soknad, Aksjonspunkt } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -32,7 +32,7 @@ const soknad = {
   termindato: '2019-01-01',
   utstedtdato: '2019-01-02',
   antallBarn: 1,
-  soknadType: soknadType.FODSEL,
+  soknadType: SoknadType.FODSEL,
   farSokerType: 'ADOPTERER_ALENE',
   omsorgsovertakelseDato: '2022-09-14',
   barnetsAnkomstTilNorgeDato: '2022-09-13',
@@ -75,14 +75,14 @@ export const AksjonspunktForAdopsjonsvilkåret = Template.bind({});
 AksjonspunktForAdopsjonsvilkåret.args = {
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.ADOPSJONSDOKUMENTAJON,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.ADOPSJONSDOKUMENTAJON,
+      status: AksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
       kanLoses: true,
     },
   ],
   alleMerknaderFraBeslutter: {
-    [AksjonspunktCode.ADOPSJONSDOKUMENTAJON]: merknaderFraBeslutter,
+    [AksjonspunktKode.ADOPSJONSDOKUMENTAJON]: merknaderFraBeslutter,
   },
   submitCallback: action('button-click') as (data: any) => Promise<any>,
 };
@@ -91,14 +91,14 @@ export const AksjonspunktForOmSøkerErMannSomAdoptererAlene = Template.bind({});
 AksjonspunktForOmSøkerErMannSomAdoptererAlene.args = {
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
+      status: AksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
       kanLoses: true,
     },
   ],
   alleMerknaderFraBeslutter: {
-    [AksjonspunktCode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE]: merknaderFraBeslutter,
+    [AksjonspunktKode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE]: merknaderFraBeslutter,
   },
   submitCallback: action('button-click') as (data: any) => Promise<any>,
 };
@@ -107,14 +107,14 @@ export const AksjonspunktForOmAdopsjonGjelderEktefellesBarn = Template.bind({});
 AksjonspunktForOmAdopsjonGjelderEktefellesBarn.args = {
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
+      status: AksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
       kanLoses: true,
     },
   ],
   alleMerknaderFraBeslutter: {
-    [AksjonspunktCode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN]: merknaderFraBeslutter,
+    [AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN]: merknaderFraBeslutter,
   },
   submitCallback: action('button-click') as (data: any) => Promise<any>,
 };
@@ -123,14 +123,14 @@ export const IkkeVisBarnetsAnkomstDatoForEngangsstønad = Template.bind({});
 IkkeVisBarnetsAnkomstDatoForEngangsstønad.args = {
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
+      status: AksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
       kanLoses: true,
     },
   ],
   alleMerknaderFraBeslutter: {
-    [AksjonspunktCode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN]: merknaderFraBeslutter,
+    [AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN]: merknaderFraBeslutter,
   },
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   isForeldrepengerFagsak: false,

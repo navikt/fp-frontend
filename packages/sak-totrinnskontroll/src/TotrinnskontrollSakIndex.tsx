@@ -5,13 +5,13 @@ import { createIntl } from '@navikt/ft-utils';
 
 import {
   KodeverkType,
-  behandlingStatus as BehandlingStatus,
-  AksjonspunktCode,
-  AksjonspunktCodeTilbakekreving,
-  fagsakYtelseType as FagsakYtelseType,
-  behandlingType as BehandlingType,
-  behandlingArsakType as BehandlingÅrsakType,
-  vurderPaNyttArsakType,
+  BehandlingStatus,
+  AksjonspunktKode,
+  AksjonspunktKodeTilbakekreving,
+  FagsakYtelseType,
+  BehandlingType,
+  BehandlingArsakType,
+  VurderPaNyttArsakType,
 } from '@navikt/fp-kodeverk';
 import { skjermlenkeCodesFpTilbake as skjermlenkeCodes } from '@navikt/fp-konstanter';
 import { BehandlingAppKontekst, AlleKodeverk, AlleKodeverkTilbakekreving, KodeverkMedNavn } from '@navikt/fp-types';
@@ -34,19 +34,19 @@ const sorterteSkjermlenkeCodesForTilbakekreving = [
 const getArsaker = (apData: AksjonspunktGodkjenningData): string[] => {
   const arsaker = [];
   if (apData.feilFakta) {
-    arsaker.push(vurderPaNyttArsakType.FEIL_FAKTA);
+    arsaker.push(VurderPaNyttArsakType.FEIL_FAKTA);
   }
   if (apData.feilLov) {
-    arsaker.push(vurderPaNyttArsakType.FEIL_LOV);
+    arsaker.push(VurderPaNyttArsakType.FEIL_LOV);
   }
   if (apData.feilSkjønn) {
-    arsaker.push(vurderPaNyttArsakType.SKJØNN);
+    arsaker.push(VurderPaNyttArsakType.SKJØNN);
   }
   if (apData.feilUtredning) {
-    arsaker.push(vurderPaNyttArsakType.UTREDNING);
+    arsaker.push(VurderPaNyttArsakType.UTREDNING);
   }
   if (apData.annet) {
-    arsaker.push(vurderPaNyttArsakType.ANNET);
+    arsaker.push(VurderPaNyttArsakType.ANNET);
   }
   return arsaker;
 };
@@ -64,7 +64,7 @@ interface OwnProps {
   readOnly: boolean;
   onSubmit: (data: {
     fatterVedtakAksjonspunktDto: {
-      '@type': AksjonspunktCode.FATTER_VEDTAK | AksjonspunktCodeTilbakekreving.FATTER_VEDTAK;
+      '@type': AksjonspunktKode.FATTER_VEDTAK | AksjonspunktKodeTilbakekreving.FATTER_VEDTAK;
     } & FatterVedtakAp;
     erAlleAksjonspunktGodkjent: boolean;
   }) => Promise<void>;
@@ -98,7 +98,7 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
         arsaker: getArsaker(apData),
       }));
 
-      const kode = erTilbakekreving ? AksjonspunktCodeTilbakekreving.FATTER_VEDTAK : AksjonspunktCode.FATTER_VEDTAK;
+      const kode = erTilbakekreving ? AksjonspunktKodeTilbakekreving.FATTER_VEDTAK : AksjonspunktKode.FATTER_VEDTAK;
       const fatterVedtakAksjonspunktDto = {
         '@type': kode,
         begrunnelse: null,
@@ -121,9 +121,9 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
             .map(({ behandlingArsakType }) => behandlingArsakType)
             .some(
               bt =>
-                bt === BehandlingÅrsakType.ETTER_KLAGE ||
-                bt === BehandlingÅrsakType.KLAGE_U_INNTK ||
-                bt === BehandlingÅrsakType.KLAGE_M_INNTK,
+                bt === BehandlingArsakType.ETTER_KLAGE ||
+                bt === BehandlingArsakType.KLAGE_U_INNTK ||
+                bt === BehandlingArsakType.KLAGE_M_INNTK,
             )
         : false,
     [behandling],

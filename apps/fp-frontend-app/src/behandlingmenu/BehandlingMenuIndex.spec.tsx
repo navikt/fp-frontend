@@ -2,7 +2,7 @@ import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import { createIntl } from '@navikt/ft-utils';
-import { BehandlingType, FagsakStatus, BehandlingStatus, FagsakYtelseType } from '@navikt/ft-kodeverk';
+import { BehandlingType, FagsakStatus, BehandlingStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
 
 import { RestApiMock } from '@navikt/fp-utils-test';
 import { Fagsak, VergeBehandlingmenyValg, BehandlingOppretting } from '@navikt/fp-types';

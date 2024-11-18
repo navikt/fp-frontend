@@ -1,9 +1,8 @@
 import React, { FunctionComponent, useState, useCallback, useMemo } from 'react';
-import { Aksjonspunkt } from '@navikt/ft-types';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
-import { AlleKodeverk, Behandling, AksessRettigheter, Fagsak } from '@navikt/fp-types';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { Aksjonspunkt, AlleKodeverk, Behandling, AksessRettigheter, Fagsak } from '@navikt/fp-types';
 import { AsyncPollingStatus } from '@navikt/fp-rest-api';
 import { RegistrerPapirsoknadPanel, SoknadRegistrertModal } from '@navikt/fp-papirsoknad';
 
@@ -15,10 +14,10 @@ const getAktivtPapirsoknadApKode = (aksjonspunkter: Aksjonspunkt[]): string =>
     .map(ap => ap.definisjon)
     .filter(
       kode =>
-        kode === AksjonspunktCode.REGISTRER_PAPIRSOKNAD_ENGANGSSTONAD ||
-        kode === AksjonspunktCode.REGISTRER_PAPIRSOKNAD_FORELDREPENGER ||
-        kode === AksjonspunktCode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER ||
-        kode === AksjonspunktCode.REGISTRER_PAPIRSOKNAD_SVANGERSKAPSPENGER,
+        kode === AksjonspunktKode.REGISTRER_PAPIRSOKNAD_ENGANGSSTONAD ||
+        kode === AksjonspunktKode.REGISTRER_PAPIRSOKNAD_FORELDREPENGER ||
+        kode === AksjonspunktKode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER ||
+        kode === AksjonspunktKode.REGISTRER_PAPIRSOKNAD_SVANGERSKAPSPENGER,
     )[0];
 
 const lagLagreFunksjon =
@@ -97,7 +96,7 @@ const RegistrerPapirsoknad: FunctionComponent<OwnProps> = ({
   }
 
   const erEndringssøknad = behandling.aksjonspunkt.some(
-    ap => ap.definisjon === AksjonspunktCode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER,
+    ap => ap.definisjon === AksjonspunktKode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER,
   );
 
   return (

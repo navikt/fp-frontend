@@ -1,3 +1,4 @@
+export type { default as AksjonspunktTilBekreftelse } from './src/AksjonspunktTilBekreftelse';
 export type { default as FaktaAksjonspunkt } from './src/FaktaAksjonspunkt';
 export type { default as AvklarVergeAp } from './src/fakta/AvklarVergeAp';
 export type { default as MerkOpptjeningUtlandAp } from './src/fakta/MerkOpptjeningUtlandAp';

@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 import { UseFormGetValues, useFieldArray, useFormContext } from 'react-hook-form';
 import { AvsnittSkiller, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Datepicker, SelectField, PeriodFieldArray } from '@navikt/ft-form-hooks';
-import { KodeverkMedNavn } from '@navikt/ft-types';
+import { KodeverkMedNavn } from '@navikt/fp-types';
 
 import {
   dateAfterOrEqual,
@@ -79,7 +79,7 @@ const mapTyper = (typer: KodeverkMedNavn[]): ReactElement[] =>
 
 const mapKvoter = (typer: KodeverkMedNavn[]): ReactElement[] =>
   typer
-    .filter(({ kode }) => gyldigeUttakperioder.includes(kode))
+    .filter(({ kode }) => gyldigeUttakperioder.some(gup => gup === kode))
     .map(({ kode, navn }) => (
       <option value={kode} key={kode}>
         {navn}

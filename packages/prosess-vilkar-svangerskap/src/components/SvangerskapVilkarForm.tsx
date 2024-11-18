@@ -7,11 +7,11 @@ import { Label } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 import {
   VilkarType,
-  vilkarUtfallType,
+  VilkarUtfallType,
   KodeverkType,
-  AksjonspunktCode,
-  tilretteleggingType,
-  aksjonspunktStatus,
+  AksjonspunktKode,
+  TilretteleggingType,
+  AksjonspunktStatus,
 } from '@navikt/fp-kodeverk';
 import {
   ProsessStegBegrunnelseTextFieldNew,
@@ -31,11 +31,11 @@ import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 const finnesUttakPåArbfor = (arbfor: ArbeidsforholdFodselOgTilrettelegging): boolean => {
   const finnesAnnenTilretteleggingEnnHel = arbfor.tilretteleggingDatoer.some(
-    (dato: ArbeidsforholdTilretteleggingDato) => dato.type !== tilretteleggingType.HEL_TILRETTELEGGING,
+    (dato: ArbeidsforholdTilretteleggingDato) => dato.type !== TilretteleggingType.HEL_TILRETTELEGGING,
   );
   const finnesHelTilretteleggingEtterBehovOppstår = arbfor.tilretteleggingDatoer.some(
     (dato: ArbeidsforholdTilretteleggingDato) =>
-      dato.type === tilretteleggingType.HEL_TILRETTELEGGING &&
+      dato.type === TilretteleggingType.HEL_TILRETTELEGGING &&
       moment(dato.fom).isAfter(moment(arbfor.tilretteleggingBehovFom)),
   );
   return finnesAnnenTilretteleggingEnnHel || finnesHelTilretteleggingEtterBehovOppstår;
@@ -64,7 +64,7 @@ const buildInitialValues = (
 const transformValues = (values: FormValues): BekreftSvangerskapspengervilkarAp => ({
   ...VilkarResultPicker.transformValues(values),
   ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
-  kode: AksjonspunktCode.SVANGERSKAPSVILKARET,
+  kode: AksjonspunktKode.SVANGERSKAPSVILKARET,
 });
 
 interface OwnProps {
@@ -124,8 +124,8 @@ const SvangerskapVilkarForm: FunctionComponent<OwnProps> = ({
 
   const avslagsarsaker = alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.SVANGERSKAPVILKARET];
 
-  const isOpenAksjonspunkt = aksjonspunkter.some(ap => ap.status === aksjonspunktStatus.OPPRETTET);
-  const originalErVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
+  const isOpenAksjonspunkt = aksjonspunkter.some(ap => ap.status === AksjonspunktStatus.OPPRETTET);
+  const originalErVilkarOk = isOpenAksjonspunkt ? undefined : VilkarUtfallType.OPPFYLT === status;
 
   const bTag = useCallback((chunks: any) => <b>{chunks}</b>, []);
 

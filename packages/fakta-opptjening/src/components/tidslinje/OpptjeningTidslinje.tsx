@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo, useCallback } from 'react';
+import React, { FunctionComponent, useMemo, useCallback, ReactNode } from 'react';
 
 import { KodeverkMedNavn, Opptjening, OpptjeningAktivitet } from '@navikt/fp-types';
 import dayjs from 'dayjs';
@@ -15,7 +15,7 @@ import {
   XMarkOctagonIcon,
 } from '@navikt/aksel-icons';
 import { BodyShort, Label, Timeline } from '@navikt/ds-react';
-import { opptjeningAktivitetType as OpptjeningAktivitetType } from '@navikt/fp-kodeverk';
+import { OpptjeningAktivitetType } from '@navikt/fp-kodeverk';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { FormValues } from '../aktivitet/ValgtAktivitetForm';
@@ -46,7 +46,7 @@ const AKTIVITET_TYPE_IKON_MAP = {
   [OpptjeningAktivitetType.SYKEPENGER]: <StethoscopeIcon width={20} height={20} />,
   [OpptjeningAktivitetType.UTENLANDSK_ARBEIDSFORHOLD]: <EarthIcon width={20} height={20} />,
   [OpptjeningAktivitetType.ETTERLONN_SLUTTPAKKE]: <WalletIcon width={20} height={20} />,
-};
+} as Record<string, ReactNode>;
 
 const PERIODE_STATUS_IKON_MAP = {
   danger: <XMarkOctagonIcon />,

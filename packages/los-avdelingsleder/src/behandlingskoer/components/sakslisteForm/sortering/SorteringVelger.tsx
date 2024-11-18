@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
-import { BehandlingType } from '@navikt/ft-kodeverk';
+import { BehandlingType } from '@navikt/fp-kodeverk';
 
 import { useFormContext } from 'react-hook-form';
 import useLosKodeverk from '../../../../data/useLosKodeverk';

@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { Aksjonspunkt, ManuellBehandlingResultat, MedlemskapAvvik, Medlemskap } from '@navikt/fp-types';
 import { Alert, VStack } from '@navikt/ds-react';
-import { aksjonspunktStatus } from '@navikt/fp-kodeverk';
+import { AksjonspunktStatus } from '@navikt/fp-kodeverk';
 
 import { MedlemskapVurdering } from '../types/vurderingMedlemskapForm';
 import InfoBox from './InfoBox';
@@ -51,8 +51,8 @@ const AksjonspunktHelpText = ({ aksjonspunkter, medlemskap }: Props) => {
     const { avvik, manuellBehandlingResultat: resultat } = medlemskap;
 
     if (aksjonspunkter.length === 0) return <></>;
-    const opprettetAp = aksjonspunkter.filter(ap => ap.status === aksjonspunktStatus.OPPRETTET);
-    const utførtAp = aksjonspunkter.filter(ap => ap.status === aksjonspunktStatus.UTFORT);
+    const opprettetAp = aksjonspunkter.filter(ap => ap.status === AksjonspunktStatus.OPPRETTET);
+    const utførtAp = aksjonspunkter.filter(ap => ap.status === AksjonspunktStatus.UTFORT);
 
     if (opprettetAp.length > 0) {
       return (

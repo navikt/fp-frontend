@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { FagsakYtelseType, AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { Fagsak, Aksjonspunkt, Soknad } from '@navikt/fp-types';
 import {
   AvklarDekningsgradAp,
@@ -12,7 +12,6 @@ import {
 import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { HStack, VStack } from '@navikt/ds-react';
-import { FagsakYtelseType } from '@navikt/ft-kodeverk';
 import InnhentDokOpptjeningUtlandPanel from './innhentDok/InnhentDokOpptjeningUtlandPanel';
 import StartdatoForForeldrepengerperiodenForm from './startdatoForForeldrepenger/StartdatoForForeldrepengerperiodenForm';
 
@@ -41,7 +40,7 @@ interface OwnProps {
 }
 
 const erMarkertUtenlandssak = (aksjonspunkter: Aksjonspunkt[]): boolean =>
-  aksjonspunkter.some(ap => ap.definisjon === AksjonspunktCode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK);
+  aksjonspunkter.some(ap => ap.definisjon === AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK);
 
 const SakenFaktaPanel: FunctionComponent<OwnProps> = ({
   fagsak,
@@ -58,10 +57,10 @@ const SakenFaktaPanel: FunctionComponent<OwnProps> = ({
   kanOverstyreAccess,
 }) => {
   const automatiskMarkeringAvUtenlandssakAp = aksjonspunkter.find(
-    ap => ap.definisjon === AksjonspunktCode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
+    ap => ap.definisjon === AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
   );
-  const automatiskAp = aksjonspunkter.find(ap => ap.definisjon === AksjonspunktCode.AVKLAR_DEKNINGSGRAD);
-  const overstyringsAp = aksjonspunkter.find(ap => ap.definisjon === AksjonspunktCode.OVERSTYR_DEKNINGSGRAD);
+  const automatiskAp = aksjonspunkter.find(ap => ap.definisjon === AksjonspunktKode.AVKLAR_DEKNINGSGRAD);
+  const overstyringsAp = aksjonspunkter.find(ap => ap.definisjon === AksjonspunktKode.OVERSTYR_DEKNINGSGRAD);
 
   return (
     <>
@@ -73,7 +72,7 @@ const SakenFaktaPanel: FunctionComponent<OwnProps> = ({
           <VerticalSpacer thirtyTwoPx />
         </>
       )}
-      {harApneAksjonspunkter && aksjonspunkter.some(ap => ap.definisjon === AksjonspunktCode.AVKLAR_DEKNINGSGRAD) && (
+      {harApneAksjonspunkter && aksjonspunkter.some(ap => ap.definisjon === AksjonspunktKode.AVKLAR_DEKNINGSGRAD) && (
         <>
           <AksjonspunktHelpTextHTML>
             {[<FormattedMessage key="AvklarDekningsgrad" id="SakenFaktaPanel.AvklarDekningsgrad" />]}
@@ -108,7 +107,7 @@ const SakenFaktaPanel: FunctionComponent<OwnProps> = ({
           )}
           {fagsak.fagsakYtelseType !== FagsakYtelseType.SVANGERSKAPSPENGER && !!soknad && (
             <StartdatoForForeldrepengerperiodenForm
-              aksjonspunkt={aksjonspunkter.find(ap => ap.definisjon === AksjonspunktCode.OVERSTYR_AVKLAR_STARTDATO)}
+              aksjonspunkt={aksjonspunkter.find(ap => ap.definisjon === AksjonspunktKode.OVERSTYR_AVKLAR_STARTDATO)}
               submitCallback={submitCallback}
               readOnly={readOnly}
               alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}

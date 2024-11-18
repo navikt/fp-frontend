@@ -5,7 +5,7 @@ import { BodyShort, Heading, Label } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 
-import { ankeVurdering as ankeVurderingKodeverk, ankeVurderingOmgjoer, KodeverkType } from '@navikt/fp-kodeverk';
+import { AnkeVurdering as AnkeVurderingKodeverk, AnkeVurderingOmgjoer, KodeverkType } from '@navikt/fp-kodeverk';
 import { AlleKodeverk, AnkeVurdering } from '@navikt/fp-types';
 
 export type BehandlingInfo = {
@@ -93,23 +93,23 @@ const BehandleAnkeForm: FunctionComponent<OwnProps> = ({ ankeVurdering, behandli
             <FormattedMessage id="Ankebehandling.Resultat" />
           </Label>
           <BodyShort size="small">
-            {avr?.ankeVurdering === ankeVurderingKodeverk.ANKE_OMGJOER && (
+            {avr?.ankeVurdering === AnkeVurderingKodeverk.ANKE_OMGJOER && (
               <FormattedMessage id="Ankebehandling.Resultat.Omgjør" />
             )}
-            {avr?.ankeVurdering === ankeVurderingKodeverk.ANKE_OPPHEVE_OG_HJEMSENDE && (
+            {avr?.ankeVurdering === AnkeVurderingKodeverk.ANKE_OPPHEVE_OG_HJEMSENDE && (
               <FormattedMessage id="Ankebehandling.Resultat.OpphevHjemsend" />
             )}
-            {avr?.ankeVurdering === ankeVurderingKodeverk.ANKE_HJEMSENDE_UTEN_OPPHEV && (
+            {avr?.ankeVurdering === AnkeVurderingKodeverk.ANKE_HJEMSENDE_UTEN_OPPHEV && (
               <FormattedMessage id="Ankebehandling.Resultat.Hjemsend" />
             )}
-            {avr?.ankeVurdering === ankeVurderingKodeverk.ANKE_AVVIS && (
+            {avr?.ankeVurdering === AnkeVurderingKodeverk.ANKE_AVVIS && (
               <FormattedMessage id="Ankebehandling.Resultat.Avvis" />
             )}
-            {avr?.ankeVurdering === ankeVurderingKodeverk.ANKE_STADFESTE_YTELSESVEDTAK && (
+            {avr?.ankeVurdering === AnkeVurderingKodeverk.ANKE_STADFESTE_YTELSESVEDTAK && (
               <FormattedMessage id="Ankebehandling.Resultat.Stadfest" />
             )}
           </BodyShort>
-          {ankeVurderingKodeverk.ANKE_AVVIS === avr?.ankeVurdering && !behandletKabal && (
+          {AnkeVurderingKodeverk.ANKE_AVVIS === avr?.ankeVurdering && !behandletKabal && (
             <>
               <VerticalSpacer sixteenPx />
               <Label size="small">
@@ -148,7 +148,7 @@ const BehandleAnkeForm: FunctionComponent<OwnProps> = ({ ankeVurdering, behandli
               </BodyShort>
             </>
           )}
-          {ankeVurderingKodeverk.ANKE_OMGJOER === avr?.ankeVurdering && (
+          {AnkeVurderingKodeverk.ANKE_OMGJOER === avr?.ankeVurdering && (
             <>
               <VerticalSpacer sixteenPx />
               <Label size="small">
@@ -159,20 +159,20 @@ const BehandleAnkeForm: FunctionComponent<OwnProps> = ({ ankeVurdering, behandli
               </BodyShort>
               <VerticalSpacer sixteenPx />
               <BodyShort size="small">
-                {avr?.ankeVurderingOmgjoer === ankeVurderingOmgjoer.ANKE_TIL_GUNST && (
+                {avr?.ankeVurderingOmgjoer === AnkeVurderingOmgjoer.ANKE_TIL_GUNST && (
                   <FormattedMessage id="Ankebehandling.VurderingOmgjoer.Gunst" />
                 )}
-                {avr?.ankeVurderingOmgjoer === ankeVurderingOmgjoer.ANKE_TIL_UGUNST && (
+                {avr?.ankeVurderingOmgjoer === AnkeVurderingOmgjoer.ANKE_TIL_UGUNST && (
                   <FormattedMessage id="Ankebehandling.VurderingOmgjoer.Ugunst" />
                 )}
-                {avr?.ankeVurderingOmgjoer === ankeVurderingOmgjoer.ANKE_DELVIS_OMGJOERING_TIL_GUNST && (
+                {avr?.ankeVurderingOmgjoer === AnkeVurderingOmgjoer.ANKE_DELVIS_OMGJOERING_TIL_GUNST && (
                   <FormattedMessage id="Ankebehandling.VurderingOmgjoer.Delvis" />
                 )}
               </BodyShort>
             </>
           )}
-          {(ankeVurderingKodeverk.ANKE_OPPHEVE_OG_HJEMSENDE === avr?.ankeVurdering ||
-            ankeVurderingKodeverk.ANKE_HJEMSENDE_UTEN_OPPHEV === avr?.ankeVurdering) &&
+          {(AnkeVurderingKodeverk.ANKE_OPPHEVE_OG_HJEMSENDE === avr?.ankeVurdering ||
+            AnkeVurderingKodeverk.ANKE_HJEMSENDE_UTEN_OPPHEV === avr?.ankeVurdering) &&
             !behandletKabal && (
               <>
                 <VerticalSpacer sixteenPx />

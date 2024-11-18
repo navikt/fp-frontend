@@ -1,6 +1,4 @@
-const opplysningsKilde = {
-  TPS: 'TPS',
-  SAKSBEHANDLER: 'SAKSBEH',
-};
-
-export default opplysningsKilde;
+export enum OpplysningsKilde {
+  TPS = 'TPS',
+  SAKSBEHANDLER = 'SAKSBEH',
+}

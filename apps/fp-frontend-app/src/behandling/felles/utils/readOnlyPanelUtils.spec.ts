@@ -1,5 +1,5 @@
-import { VilkarType, BehandlingType, BehandlingStatus, VilkarUtfallType } from '@navikt/ft-kodeverk';
-import { Behandling } from '@navikt/ft-types';
+import { VilkarType, BehandlingType, BehandlingStatus, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { Behandling } from '@navikt/fp-types';
 
 import { erReadOnly, harBehandlingReadOnlyStatus } from './readOnlyPanelUtils';
 

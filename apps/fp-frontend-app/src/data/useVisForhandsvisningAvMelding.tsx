@@ -1,4 +1,4 @@
-import { BehandlingType } from '@navikt/ft-kodeverk';
+import { BehandlingType } from '@navikt/fp-kodeverk';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
 import { FagsakApiKeys, restFagsakApiHooks } from './fagsakContextApi';

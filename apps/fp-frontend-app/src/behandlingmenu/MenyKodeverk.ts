@@ -1,4 +1,4 @@
-import { behandlingType as BehandlingType, KodeverkType, tilbakekrevingKodeverkTyper } from '@navikt/fp-kodeverk';
+import { BehandlingType, KodeverkType, TilbakekrevingKodeverkType } from '@navikt/fp-kodeverk';
 import { AlleKodeverk, AlleKodeverkTilbakekreving, KodeverkMedNavn } from '@navikt/fp-types';
 
 class MenyKodeverk {
@@ -23,7 +23,7 @@ class MenyKodeverk {
   }
 
   getKodeverkForBehandlingstype(
-    kodeverkType: KodeverkType | tilbakekrevingKodeverkTyper,
+    kodeverkType: KodeverkType | TilbakekrevingKodeverkType,
     behandlingTypeKode?: string,
   ): KodeverkMedNavn[] {
     if (

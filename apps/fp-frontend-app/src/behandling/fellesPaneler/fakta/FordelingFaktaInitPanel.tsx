@@ -4,12 +4,13 @@ import { TIDENES_ENDE } from '@navikt/ft-utils';
 import {
   FordelBeregningsgrunnlagFaktaIndex,
   FaktaFordelBeregningAvklaringsbehovCode,
+  FtVilkar,
+  FtBeregningsgrunnlag,
 } from '@navikt/ft-fakta-fordel-beregningsgrunnlag';
-import { Beregningsgrunnlag, Vilkar, Vilkarperiode } from '@navikt/ft-types';
 
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import { ArbeidsgiverOpplysningerPerId, Vilkar as FpVilkar } from '@navikt/fp-types';
-import { VilkarType, AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { Beregningsgrunnlag, Vilkar, Vilkarperiode, ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
+import { VilkarType, AksjonspunktKode } from '@navikt/fp-kodeverk';
 
 import FaktaPanelInitProps from '../../felles/typer/faktaPanelInitProps';
 import FaktaDefaultInitPanel from '../../felles/fakta/FaktaDefaultInitPanel';
@@ -20,9 +21,9 @@ import '@navikt/ft-fakta-fordel-beregningsgrunnlag/dist/style.css';
 const mapBGKodeTilFpsakKode = (bgKode: string): string => {
   switch (bgKode) {
     case FaktaFordelBeregningAvklaringsbehovCode.FORDEL_BEREGNINGSGRUNNLAG:
-      return AksjonspunktCode.FORDEL_BEREGNINGSGRUNNLAG;
+      return AksjonspunktKode.FORDEL_BEREGNINGSGRUNNLAG;
     case FaktaFordelBeregningAvklaringsbehovCode.VURDER_REFUSJON_BERGRUNN:
-      return AksjonspunktCode.VURDER_REFUSJON_BERGRUNN;
+      return AksjonspunktKode.VURDER_REFUSJON_BERGRUNN;
     default:
       throw new Error(`Ukjent avklaringspunkt ${bgKode}`);
   }
@@ -40,7 +41,7 @@ const lagModifisertCallback =
     return submitCallback(transformerteData);
   };
 
-const lagStandardPeriode = (beregningsgrunnlag: Beregningsgrunnlag, bgVilkar: FpVilkar): Vilkarperiode => ({
+const lagStandardPeriode = (beregningsgrunnlag: Beregningsgrunnlag, bgVilkar: Vilkar): Vilkarperiode => ({
   avslagKode: bgVilkar.avslagKode,
   vurderesIBehandlingen: true,
   merknadParametere: {},
@@ -51,7 +52,7 @@ const lagStandardPeriode = (beregningsgrunnlag: Beregningsgrunnlag, bgVilkar: Fp
   vilkarStatus: bgVilkar.vilkarStatus,
 });
 
-const lagBGVilkar = (vilkar: FpVilkar[], beregningsgrunnlag?: Beregningsgrunnlag): Vilkar => {
+const lagBGVilkar = (vilkar: Vilkar[], beregningsgrunnlag?: Beregningsgrunnlag): FtVilkar => {
   if (!vilkar) {
     // @ts-ignore FordelBeregningsgrunnlagFaktaIndex må kunna håndtera null
     return null;
@@ -68,7 +69,7 @@ const lagBGVilkar = (vilkar: FpVilkar[], beregningsgrunnlag?: Beregningsgrunnlag
   return nyVK;
 };
 
-const lagFormatertBG = (beregningsgrunnlag: Beregningsgrunnlag): Beregningsgrunnlag[] => {
+const lagFormatertBG = (beregningsgrunnlag: Beregningsgrunnlag): FtBeregningsgrunnlag[] => {
   if (!beregningsgrunnlag) {
     return [];
   }
@@ -77,10 +78,11 @@ const lagFormatertBG = (beregningsgrunnlag: Beregningsgrunnlag): Beregningsgrunn
     beregningsgrunnlagId: '1',
     vilkårsperiodeFom: beregningsgrunnlag.skjaeringstidspunktBeregning,
   };
+  //@ts-ignore TODO Fiks denne
   return [nyttBG];
 };
 
-const AKSJONSPUNKT_KODER = [AksjonspunktCode.FORDEL_BEREGNINGSGRUNNLAG, AksjonspunktCode.VURDER_REFUSJON_BERGRUNN];
+const AKSJONSPUNKT_KODER = [AksjonspunktKode.FORDEL_BEREGNINGSGRUNNLAG, AksjonspunktKode.VURDER_REFUSJON_BERGRUNN];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.BEREGNINGSGRUNNLAG];
 type EndepunktPanelData = {

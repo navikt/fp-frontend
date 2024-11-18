@@ -7,7 +7,7 @@ import { decodeHtmlEntity } from '@navikt/ft-utils';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { BekreftAleneomsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
 
 import { HarAnnenForelderRettFelter } from './HarAnnenForelderRettFelter';
@@ -59,7 +59,7 @@ export const AleneomsorgForm = ({
   const transformerFeltverdier = useCallback(
     (feltVerdier: FormValues) =>
       submitCallback({
-        kode: AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
+        kode: AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
         aleneomsorg: feltVerdier.harAleneomsorg,
         annenforelderHarRett: feltVerdier.harAnnenForelderRett,
         annenforelderMottarUføretrygd: feltVerdier.mottarAnnenForelderUforetrygd,
@@ -76,7 +76,7 @@ export const AleneomsorgForm = ({
       <FaktaGruppe
         withoutBorder
         merknaderFraBeslutter={
-          alleMerknaderFraBeslutter[AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG]
+          alleMerknaderFraBeslutter[AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG]
         }
       >
         <VStack gap="6">

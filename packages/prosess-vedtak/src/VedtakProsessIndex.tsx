@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { AksjonspunktCode, behandlingType, aksjonspunktStatus, fagsakYtelseType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, BehandlingType, AksjonspunktStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import {
   BeregningsresultatDagytelse,
   BeregningsresultatEs,
@@ -21,9 +21,9 @@ import messages from '../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 const BEREGNINGSGRUNNLAG_FRITEKSTFELT_I_VEDTAK_AKSJONSPUNKT = [
-  AksjonspunktCode.FASTSETT_BRUTTO_BEREGNINGSGRUNNLAG_SELVSTENDIG_NAERINGSDRIVENDE,
-  AksjonspunktCode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
-  AksjonspunktCode.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD,
+  AksjonspunktKode.FASTSETT_BRUTTO_BEREGNINGSGRUNNLAG_SELVSTENDIG_NAERINGSDRIVENDE,
+  AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
+  AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD,
 ];
 
 const skalSkriveFritekstGrunnetFastsettingAvBeregning = (
@@ -36,7 +36,7 @@ const skalSkriveFritekstGrunnetFastsettingAvBeregning = (
   const behandlingHarLøstBGAP = aksjonspunkter.find(
     ap =>
       BEREGNINGSGRUNNLAG_FRITEKSTFELT_I_VEDTAK_AKSJONSPUNKT.some(k => k === ap.definisjon) &&
-      ap.status === aksjonspunktStatus.UTFORT,
+      ap.status === AksjonspunktStatus.UTFORT,
   );
   const førstePeriode = beregningsgrunnlag.beregningsgrunnlagPeriode[0];
   const andelSomErManueltFastsatt = førstePeriode.beregningsgrunnlagPrStatusOgAndel?.find(
@@ -83,19 +83,19 @@ const VedtakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps
     beregningsgrunnlag,
   );
   const beregningsresultat =
-    ytelseTypeKode === fagsakYtelseType.ENGANGSSTONAD ? beregningresultatEngangsstonad : beregningresultatDagytelse;
+    ytelseTypeKode === FagsakYtelseType.ENGANGSSTONAD ? beregningresultatEngangsstonad : beregningresultatDagytelse;
 
   let originaltBeregningsresultat;
   if (beregningsresultatOriginalBehandling) {
     originaltBeregningsresultat =
-      ytelseTypeKode === fagsakYtelseType.ENGANGSSTONAD
+      ytelseTypeKode === FagsakYtelseType.ENGANGSSTONAD
         ? beregningsresultatOriginalBehandling['beregningsresultat-engangsstonad']
         : beregningsresultatOriginalBehandling['beregningsresultat-foreldrepenger'];
   }
 
   return (
     <RawIntlProvider value={intl}>
-      {behandling.type !== behandlingType.REVURDERING && (
+      {behandling.type !== BehandlingType.REVURDERING && (
         <VedtakForm
           behandling={behandling}
           submitCallback={submitCallback}
@@ -113,7 +113,7 @@ const VedtakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps
           setFormData={setFormData}
         />
       )}
-      {behandling.type === behandlingType.REVURDERING && (
+      {behandling.type === BehandlingType.REVURDERING && (
         <VedtakRevurderingForm
           behandling={behandling}
           submitCallback={submitCallback}

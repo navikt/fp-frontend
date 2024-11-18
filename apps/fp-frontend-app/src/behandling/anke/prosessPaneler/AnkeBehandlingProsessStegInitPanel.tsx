@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
-import { VilkarUtfallType } from '@navikt/ft-kodeverk';
+import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 
 import { AnkeProsessIndex } from '@navikt/fp-prosess-anke';
 import { ProsessStegCode } from '@navikt/fp-konstanter';

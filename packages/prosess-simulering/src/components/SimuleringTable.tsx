@@ -6,7 +6,7 @@ import { BodyShort } from '@navikt/ds-react';
 
 import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 import { formatCurrencyNoKr, getRangeOfMonths } from '@navikt/ft-utils';
-import { mottakerTyper } from '@navikt/fp-kodeverk';
+import { MottakerType } from '@navikt/fp-kodeverk';
 import {
   DetaljertSimuleringResultat,
   Mottaker,
@@ -112,7 +112,7 @@ const tableTitle = (
   mottaker: Mottaker,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 ): ReactElement | null =>
-  mottaker.mottakerType === mottakerTyper.ARBG || mottaker.mottakerType === mottakerTyper.ARBGP ? (
+  mottaker.mottakerType === MottakerType.ARBG || mottaker.mottakerType === MottakerType.ARBGP ? (
     <BodyShort size="small" className={styles.tableTitle}>
       {lagVisningsNavn(mottaker, arbeidsgiverOpplysningerPerId)}
     </BodyShort>
@@ -132,7 +132,7 @@ const getResultatRadene = (
 };
 
 const avvikBruker = (ingenPerioderMedAvvik: boolean, mottakerTypeKode: string): boolean =>
-  !!(ingenPerioderMedAvvik && mottakerTypeKode === mottakerTyper.BRUKER);
+  !!(ingenPerioderMedAvvik && mottakerTypeKode === MottakerType.BRUKER);
 
 const getPeriodeFom = (periodeFom: string, nesteUtbPeriodeFom: string): string => periodeFom || nesteUtbPeriodeFom;
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { StoryFn } from '@storybook/react';
 
-import { behandlingType } from '@navikt/fp-kodeverk';
+import { BehandlingType } from '@navikt/fp-kodeverk';
 import { AvklartBarn, FamilieHendelse, Soknad } from '@navikt/fp-types';
 
 import FodselSammenligningIndex from './FodselSammenligningIndex';
@@ -56,17 +56,17 @@ const Template: StoryFn<{
 
 export const PanelForNårBehandlingstypeErRevurdering = Template.bind({});
 PanelForNårBehandlingstypeErRevurdering.args = {
-  behandlingsTypeKode: behandlingType.REVURDERING,
+  behandlingsTypeKode: BehandlingType.REVURDERING,
 };
 
 export const PanelForNårBehandlingstypeErFørstegangssoknad = Template.bind({});
 PanelForNårBehandlingstypeErFørstegangssoknad.args = {
-  behandlingsTypeKode: behandlingType.FORSTEGANGSSOKNAD,
+  behandlingsTypeKode: BehandlingType.FORSTEGANGSSOKNAD,
 };
 
 export const PanelForMedVisningAvSvangerskapsuke = Template.bind({});
 PanelForMedVisningAvSvangerskapsuke.args = {
-  behandlingsTypeKode: behandlingType.REVURDERING,
+  behandlingsTypeKode: BehandlingType.REVURDERING,
   vedtaksDatoSomSvangerskapsuke: 43,
   familiehendelseOriginalBehandling: {
     avklartBarn: [] as AvklartBarn[],

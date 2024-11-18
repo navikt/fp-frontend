@@ -1,7 +1,5 @@
-const kommunikasjonsretning = {
-  INN: 'INN',
-  UT: 'UT',
-  NOTAT: 'N',
-};
-
-export default kommunikasjonsretning;
+export enum Kommunikasjonsretning {
+  INN = 'INN',
+  UT = 'UT',
+  NOTAT = 'N',
+}

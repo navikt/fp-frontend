@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { Label } from '@navikt/ds-react';
 import { CheckboxField } from '@navikt/ft-form-hooks';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { BehandlingType, KodeverkType } from '@navikt/ft-kodeverk';
+import { BehandlingType, KodeverkType } from '@navikt/fp-kodeverk';
 
 import { restApiHooks, RestApiPathsKeys } from '../../../../data/fplosRestApi';
 import useLosKodeverk from '../../../../data/useLosKodeverk';

@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { BodyShort, Heading, Label } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { ankeVurderingOmgjoer, ankeVurdering as ankeVurderingType, KodeverkType } from '@navikt/fp-kodeverk';
+import { AnkeVurderingOmgjoer, AnkeVurdering as ankeVurderingType, KodeverkType } from '@navikt/fp-kodeverk';
 import { AlleKodeverk, AnkeVurdering } from '@navikt/fp-types';
 
 interface OwnProps {
@@ -92,13 +92,13 @@ const TrygderettsbehandlingForm: FunctionComponent<OwnProps> = ({ ankeVurdering,
           </BodyShort>
           <VerticalSpacer sixteenPx />
           <BodyShort size="small">
-            {avr.trygderettVurderingOmgjoer === ankeVurderingOmgjoer.ANKE_TIL_GUNST && (
+            {avr.trygderettVurderingOmgjoer === AnkeVurderingOmgjoer.ANKE_TIL_GUNST && (
               <FormattedMessage id="Ankebehandling.VurderingOmgjoer.Gunst" />
             )}
-            {avr.trygderettVurderingOmgjoer === ankeVurderingOmgjoer.ANKE_TIL_UGUNST && (
+            {avr.trygderettVurderingOmgjoer === AnkeVurderingOmgjoer.ANKE_TIL_UGUNST && (
               <FormattedMessage id="Ankebehandling.VurderingOmgjoer.Ugunst" />
             )}
-            {avr.trygderettVurderingOmgjoer === ankeVurderingOmgjoer.ANKE_DELVIS_OMGJOERING_TIL_GUNST && (
+            {avr.trygderettVurderingOmgjoer === AnkeVurderingOmgjoer.ANKE_DELVIS_OMGJOERING_TIL_GUNST && (
               <FormattedMessage id="Ankebehandling.VurderingOmgjoer.Delvis" />
             )}
           </BodyShort>

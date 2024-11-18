@@ -1,16 +1,15 @@
 import React, { FunctionComponent, useCallback, useState } from 'react';
 import { useIntl } from 'react-intl';
-import { BehandlingArsakType, VilkarUtfallType } from '@navikt/ft-kodeverk';
-import { BeregningsresultatTilbakekreving, Vedtaksbrev } from '@navikt/ft-types';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 
-import { vedtakResultatType as VedtakResultatType } from '@navikt/fp-kodeverk';
-import { AlleKodeverkTilbakekreving, Behandlingsresultat } from '@navikt/fp-types';
+import { BehandlingArsakType, VilkarUtfallType, VedtakResultatType } from '@navikt/fp-kodeverk';
+import { BeregningsresultatTilbakekreving, AlleKodeverkTilbakekreving, Behandlingsresultat } from '@navikt/fp-types';
 import { WarningModal } from '@navikt/ft-ui-komponenter';
 import {
   VedtakTilbakekrevingProsessIndex,
   VedtakAksjonspunktCode,
   ForhandsvisData,
+  Vedtaksbrev,
 } from '@navikt/ft-prosess-tilbakekreving-vedtak';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';

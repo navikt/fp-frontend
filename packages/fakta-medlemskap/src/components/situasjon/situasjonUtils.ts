@@ -1,6 +1,6 @@
 import { IntlShape } from 'react-intl';
 import { AlleKodeverk, Medlemskap, UtlandsoppholdPeriode } from '@navikt/fp-types';
-import { getKodeverknavnFn, KodeverkType, landkoder, AdresseType } from '@navikt/fp-kodeverk';
+import { getKodeverknavnFn, KodeverkType, Landkode, AdresseType } from '@navikt/fp-kodeverk';
 import { sorterPerioder } from '@navikt/fp-fakta-felles';
 
 import { toTitleCapitalization } from '../../utils/stringUtils';
@@ -24,7 +24,7 @@ export const getSisteBostedsLand = (medlemskap: Medlemskap, intl: IntlShape): st
     .filter(adresse => adresse.adresse.adresseType === AdresseType.BOSTEDSADRESSE)
     .sort(sorterPerioder)[0]?.adresse.land;
   if (!nyeste) return intl.formatMessage({ id: 'Situasjon.Ukjent' });
-  if ([landkoder.NORGE, 'Norge'].includes(nyeste)) {
+  if ([Landkode.NORGE, 'Norge'].includes(nyeste)) {
     return intl.formatMessage({ id: 'Situasjon.INorge' });
   }
   return intl.formatMessage({ id: 'Situasjon.IUtlandet' });
@@ -41,7 +41,7 @@ export const formaterUtenlandsopphold = (
   const landNavn =
     utenlandsopphold.length === 1
       ? utenlandsopphold[0].landNavn
-      : getKodeverknavnFn(alleKodeverk)(landkoder.NORGE, KodeverkType.LANDKODER);
+      : getKodeverknavnFn(alleKodeverk)(Landkode.NORGE, KodeverkType.LANDKODER);
 
   return intl.formatMessage({ id: 'Situasjon.ILand' }, { land: toTitleCapitalization(landNavn) });
 };

@@ -3,7 +3,7 @@ import classnames from 'classnames/bind';
 import { FormattedMessage } from 'react-intl';
 import { BodyShort } from '@navikt/ds-react';
 import { LoadingPanel, FadingPanel } from '@navikt/ft-ui-komponenter';
-import { VilkarUtfallType } from '@navikt/ft-kodeverk';
+import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 

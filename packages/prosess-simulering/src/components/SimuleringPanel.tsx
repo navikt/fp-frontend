@@ -5,7 +5,7 @@ import { Label, Heading, Button } from '@navikt/ds-react';
 
 import { Form } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { AksjonspunktCode, tilbakekrevingVidereBehandling } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, TilbakekrevingVidereBehandling } from '@navikt/fp-kodeverk';
 import {
   Aksjonspunkt,
   Fagsak,
@@ -75,10 +75,10 @@ const hentToggleDetaljer =
 
 const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): SimuleringAksjonspunkt[] => {
   const aksjonspunkterTilSubmit: SimuleringAksjonspunkt[] = [];
-  if (harAksjonspunkt(aksjonspunkter, AksjonspunktCode.VURDER_FEILUTBETALING)) {
+  if (harAksjonspunkt(aksjonspunkter, AksjonspunktKode.VURDER_FEILUTBETALING)) {
     aksjonspunkterTilSubmit.push(transformValuesTilbakekrev(values));
   }
-  if (harAksjonspunkt(aksjonspunkter, AksjonspunktCode.KONTROLLER_STOR_ETTERBETALING_SØKER)) {
+  if (harAksjonspunkt(aksjonspunkter, AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER)) {
     aksjonspunkterTilSubmit.push(transformValuesEtterbetaling(values));
   }
   return aksjonspunkterTilSubmit;
@@ -93,21 +93,21 @@ const buildInitialValues = (
   }
   return {
     ...buildInitialValuesTilbakekrev(
-      finnAksjonspunkt(aksjonspunkter, AksjonspunktCode.VURDER_FEILUTBETALING),
+      finnAksjonspunkt(aksjonspunkter, AksjonspunktKode.VURDER_FEILUTBETALING),
       tilbakekrevingvalg,
     ),
     ...buildInitialValuesEtterbetaling(
-      finnAksjonspunkt(aksjonspunkter, AksjonspunktCode.KONTROLLER_STOR_ETTERBETALING_SØKER),
+      finnAksjonspunkt(aksjonspunkter, AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER),
     ),
   };
 };
 
 const lagAksjonspunktTitler = (aksjonspunkter: Aksjonspunkt[]): ReactElement[] => {
   const elementer: ReactElement[] = [];
-  if (harAksjonspunkt(aksjonspunkter, AksjonspunktCode.VURDER_FEILUTBETALING)) {
+  if (harAksjonspunkt(aksjonspunkter, AksjonspunktKode.VURDER_FEILUTBETALING)) {
     elementer.push(<FormattedMessage id="Simulering.AksjonspunktHelpText.5084" key="vurderFeilutbetaling" />);
   }
-  if (harAksjonspunkt(aksjonspunkter, AksjonspunktCode.KONTROLLER_STOR_ETTERBETALING_SØKER)) {
+  if (harAksjonspunkt(aksjonspunkter, AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER)) {
     elementer.push(<FormattedMessage id="Simulering.Etterbetaling.Tittel" key="kontrollerFeilutbetaling" />);
   }
   return elementer;
@@ -152,14 +152,14 @@ const SimuleringPanel: FunctionComponent<OwnProps> = ({
 
   const hasOpenTilbakekrevingsbehandling =
     tilbakekrevingvalg !== undefined &&
-    tilbakekrevingvalg.videreBehandling === tilbakekrevingVidereBehandling.TILBAKEKR_OPPDATER;
+    tilbakekrevingvalg.videreBehandling === TilbakekrevingVidereBehandling.TILBAKEKR_OPPDATER;
 
   const toggleDetaljer = hentToggleDetaljer(showDetails, setShowDetails);
 
   const simuleringResultatOption = simuleringResultat?.simuleringResultat;
   const skalHaForm =
-    harAksjonspunkt(aksjonspunkter, AksjonspunktCode.VURDER_FEILUTBETALING) ||
-    harAksjonspunkt(aksjonspunkter, AksjonspunktCode.KONTROLLER_STOR_ETTERBETALING_SØKER);
+    harAksjonspunkt(aksjonspunkter, AksjonspunktKode.VURDER_FEILUTBETALING) ||
+    harAksjonspunkt(aksjonspunkter, AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER);
   const aksjonspunktTittler = isApOpen ? lagAksjonspunktTitler(aksjonspunkter) : [];
   return (
     <>
@@ -207,7 +207,7 @@ const SimuleringPanel: FunctionComponent<OwnProps> = ({
           setDataOnUnmount={setFormData}
         >
           <TilbakekrevSøkerForm
-            aksjonspunkt={finnAksjonspunkt(aksjonspunkter, AksjonspunktCode.VURDER_FEILUTBETALING)}
+            aksjonspunkt={finnAksjonspunkt(aksjonspunkter, AksjonspunktKode.VURDER_FEILUTBETALING)}
             fagsak={fagsak}
             previewCallback={previewCallback}
             readOnly={readOnly}
@@ -216,7 +216,7 @@ const SimuleringPanel: FunctionComponent<OwnProps> = ({
           <VerticalSpacer sixteenPx />
           <EtterbetalingSøkerForm
             readOnly={readOnly}
-            aksjonspunkt={finnAksjonspunkt(aksjonspunkter, AksjonspunktCode.KONTROLLER_STOR_ETTERBETALING_SØKER)}
+            aksjonspunkt={finnAksjonspunkt(aksjonspunkter, AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER)}
           />
           <VerticalSpacer sixteenPx />
           <Button

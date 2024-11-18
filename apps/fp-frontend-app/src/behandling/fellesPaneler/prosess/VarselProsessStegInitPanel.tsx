@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useCallback } from 'react';
 import { useIntl } from 'react-intl';
 
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { VarselOmRevurderingProsessIndex } from '@navikt/fp-prosess-varsel-om-revurdering';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import {
@@ -47,8 +47,8 @@ const getLagringSideeffekter =
   };
 
 const AKSJONSPUNKT_KODER = [
-  AksjonspunktCode.VARSEL_REVURDERING_MANUELL,
-  AksjonspunktCode.VARSEL_REVURDERING_ETTERKONTROLL,
+  AksjonspunktKode.VARSEL_REVURDERING_MANUELL,
+  AksjonspunktKode.VARSEL_REVURDERING_ETTERKONTROLL,
 ];
 
 const ENDEPUNKTER_PANEL_DATA = [
