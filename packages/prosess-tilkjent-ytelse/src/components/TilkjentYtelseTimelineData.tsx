@@ -3,7 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import dayjs from 'dayjs';
 import { Label, BodyShort, Button, Panel } from '@navikt/ds-react';
 
-import { KodeverkType, AktivitetStatus, UttakPeriodeNavn, getKodeverknavnFn } from '@navikt/fp-kodeverk';
+import { KodeverkType, AktivitetStatus, getKodeverknavnFn } from '@navikt/fp-kodeverk';
 import {
   Table,
   TableColumn,
@@ -23,6 +23,17 @@ import {
 
 import { ArrowLeftIcon, ArrowRightIcon, XMarkIcon } from '@navikt/aksel-icons';
 import styles from './tilkjentYtelseTimelineData.module.css';
+
+// TODO Kva er dette? Kodeverk-navn skal hentast fra databasen!
+const UttakPeriodeNavn = {
+  MØDREKVOTE: 'Mødrekvote',
+  FEDREKVOTE: 'Fedrekvote',
+  FELLESPERIODE: 'Fellesperiode',
+  FORELDREPENGER_FØR_FØDSEL: 'Foreldrepenger før fødsel',
+  FORELDREPENGER: 'Foreldrepenger',
+  FLERBARNSDAGER: 'Flerbarnsdager',
+  UDEFINERT: '-',
+} as Record<string, string>;
 
 const getEndCharFromId = (id: string): string => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
 

@@ -15,7 +15,7 @@ const naringsvirksomhetTypeOrder = {
   [NaringsvirksomhetType.FISKE]: 2,
   [NaringsvirksomhetType.JORDBRUK_ELLER_SKOGBRUK]: 3,
   [NaringsvirksomhetType.ANNEN]: 4,
-};
+} as Record<string, number>;
 
 const compare = (arg1: number, arg2: number): number => {
   if (arg1 > arg2) {

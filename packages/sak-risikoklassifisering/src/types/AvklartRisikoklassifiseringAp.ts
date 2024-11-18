@@ -1,8 +1,8 @@
-import { AksjonspunktTilBekreftelse } from '@navikt/fp-types';
+import { AksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import { RisikoklassifiseringAksjonspunktCode } from '../RisikoklassifiseringAksjonspunktCode';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
 export type AvklartRisikoklassifiseringAp = {
   harInnvirketBehandlingen?: boolean;
   faresignalVurdering?: string;
-} & AksjonspunktTilBekreftelse<RisikoklassifiseringAksjonspunktCode.VURDER_FARESIGNALER>;
+} & AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_FARESIGNALER>;

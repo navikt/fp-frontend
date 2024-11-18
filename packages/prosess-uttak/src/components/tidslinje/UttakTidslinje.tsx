@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement, useMemo, useState } from 'react';
+import React, { FunctionComponent, ReactElement, ReactNode, useMemo, useState } from 'react';
 import dayjs from 'dayjs';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { DDMMYY_DATE_FORMAT, ISO_DATE_FORMAT, calcDaysAndWeeks } from '@navikt/ft-utils';
@@ -52,7 +52,7 @@ const PERIODE_TYPE_IKON_MAP = {
   [UttakPeriodeType.FELLESPERIODE]: <StrollerIcon />,
   [UttakPeriodeType.FORELDREPENGER]: <StrollerIcon />,
   [UttakPeriodeType.FORELDREPENGER_FOR_FODSEL]: <PersonPregnantIcon />,
-};
+} as Record<string, ReactNode>;
 
 const PERIODE_TYPE_LABEL_MAP = {
   [UttakPeriodeType.MODREKVOTE]: 'UttakTidslinje.Modrekvote',
@@ -60,7 +60,7 @@ const PERIODE_TYPE_LABEL_MAP = {
   [UttakPeriodeType.FELLESPERIODE]: 'UttakTidslinje.Fellesperiode',
   [UttakPeriodeType.FORELDREPENGER]: 'UttakTidslinje.Foreldrepenger',
   [UttakPeriodeType.FORELDREPENGER_FOR_FODSEL]: 'UttakTidslinje.ForeldrepengerForFodsel',
-};
+} as Record<string, string>;
 
 const sortByDate = (a: PeriodeSøkerMedTidslinjedata, b: PeriodeSøkerMedTidslinjedata): number => {
   if (a.periode.fom < b.periode.fom) {

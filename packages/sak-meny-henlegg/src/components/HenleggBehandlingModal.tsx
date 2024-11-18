@@ -63,7 +63,7 @@ const getShowLink = (behandlingType: string, arsakKode?: string, fritekst?: stri
     BehandlingResultatType.HENLAGT_SOKNAD_TRUKKET,
     BehandlingResultatType.HENLAGT_KLAGE_TRUKKET,
     BehandlingResultatType.HENLAGT_INNSYN_TRUKKET,
-  ].includes(arsakKode ?? '');
+  ].some(brt => brt === arsakKode);
 };
 
 const henleggArsakerPerBehandlingType = {
@@ -95,7 +95,7 @@ export const getHenleggArsaker = (
   behandlingType: string,
   ytelseType: string,
 ): KodeverkMedNavn[] => {
-  const typerForBehandlingType = henleggArsakerPerBehandlingType[behandlingType];
+  const typerForBehandlingType = henleggArsakerPerBehandlingType[behandlingType as BehandlingType];
   return typerForBehandlingType
     .filter(
       type =>

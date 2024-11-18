@@ -79,7 +79,7 @@ const mapTyper = (typer: KodeverkMedNavn[]): ReactElement[] =>
 
 const mapKvoter = (typer: KodeverkMedNavn[]): ReactElement[] =>
   typer
-    .filter(({ kode }) => gyldigeUttakperioder.includes(kode))
+    .filter(({ kode }) => gyldigeUttakperioder.some(gup => gup === kode))
     .map(({ kode, navn }) => (
       <option value={kode} key={kode}>
         {navn}

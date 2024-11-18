@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { AksjonspunktStatus, KodeverkType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus, KodeverkType } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Risikoklassifisering } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 import { KontrollresultatKode } from './kodeverk/kontrollresultatKode';
 import { RisikoklassifiseringSakIndex } from './RisikoklassifiseringSakIndex';
-import { RisikoklassifiseringAksjonspunktCode } from './RisikoklassifiseringAksjonspunktCode';
 
 import '@navikt/ds-css';
 
@@ -59,7 +58,7 @@ LavRisikoklassifisering.args = {
 export const HøyRisikoklassifisering = Template.bind({});
 HøyRisikoklassifisering.args = {
   aksjonspunkt: {
-    definisjon: RisikoklassifiseringAksjonspunktCode.VURDER_FARESIGNALER,
+    definisjon: AksjonspunktKode.VURDER_FARESIGNALER,
     status: AksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
   } as Aksjonspunkt,

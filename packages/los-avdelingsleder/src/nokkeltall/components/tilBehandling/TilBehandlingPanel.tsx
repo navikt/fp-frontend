@@ -7,7 +7,7 @@ import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 import { KodeverkMedNavn } from '@navikt/fp-types';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { fagsakYtelseType as FagsakYtelseType, KodeverkType } from '@navikt/fp-kodeverk';
+import { FagsakYtelseType, KodeverkType } from '@navikt/fp-kodeverk';
 import { Form, RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
 
 import StoreValuesInLocalStorage from '../../../data/StoreValuesInLocalStorage';

@@ -55,7 +55,7 @@ const gyldigeÅrsaker = [
 
 const mapTyper = (typer: KodeverkMedNavn[]): ReactElement[] =>
   typer
-    .filter(({ kode }) => gyldigeÅrsaker.includes(kode))
+    .filter(({ kode }) => gyldigeÅrsaker.some(ga => ga === kode))
     .map(({ kode, navn }) => (
       <option value={kode} key={kode}>
         {navn}

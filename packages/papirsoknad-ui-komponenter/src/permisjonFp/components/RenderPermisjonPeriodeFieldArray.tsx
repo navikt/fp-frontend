@@ -37,7 +37,7 @@ export const gyldigeUttakperioder = [
 
 const mapPeriodeTyper = (typer: KodeverkMedNavn[]): ReactElement[] =>
   typer
-    .filter(({ kode }) => gyldigeUttakperioder.includes(kode))
+    .filter(({ kode }) => gyldigeUttakperioder.some(gu => gu === kode))
     .map(({ kode, navn }) => (
       <option value={kode} key={kode}>
         {navn}
@@ -171,7 +171,7 @@ export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKod
         const visEllerSkulOverskriftStyle = erForsteRad ? styles.visOverskrift : styles.skjulOverskrift;
 
         const skalDisableMorsAktivitet =
-          PERIODS_WITH_NO_MORS_AKTIVITET.includes(periode.periodeType) || periode.periodeType === '';
+          PERIODS_WITH_NO_MORS_AKTIVITET.some(pma => pma === periode.periodeType) || periode.periodeType === '';
 
         const namePart1 = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}.${index}`;
         return (
@@ -287,7 +287,7 @@ export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKod
 
 RenderPermisjonPeriodeFieldArray.transformValues = (values: FormValues[]) =>
   values.map(value => {
-    if (PERIODS_WITH_NO_MORS_AKTIVITET.includes(value.periodeType)) {
+    if (PERIODS_WITH_NO_MORS_AKTIVITET.some(pma => pma === value.periodeType)) {
       return {
         periodeType: value.periodeType,
         periodeFom: value.periodeFom,

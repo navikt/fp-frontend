@@ -66,7 +66,7 @@ const RegistreringAdopsjonOgOmsorgGrid: FunctionComponent<OwnProps> & StaticFunc
     <div className={styles.col}>
       <OmsorgOgAdopsjonPapirsoknadIndex
         readOnly={readOnly}
-        FamilieHendelseType={soknadData.getFamilieHendelseType()}
+        familieHendelseType={soknadData.getFamilieHendelseType()}
         isForeldrepengerFagsak={false}
         fodselsdato={fodselsdato}
       />

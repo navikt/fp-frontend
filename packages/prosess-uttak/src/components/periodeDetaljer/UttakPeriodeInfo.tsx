@@ -10,7 +10,6 @@ import { CheckboxField, NumberField, SelectField } from '@navikt/ft-form-hooks';
 import {
   KodeverkType,
   OppholdArsakType,
-  OppholdArsakKontoNavn,
   UttakArbeidType as uttakArbeidTypeKodeverk,
   PeriodeResultatType,
 } from '@navikt/fp-kodeverk';
@@ -21,6 +20,15 @@ import uttakArbeidTypeTekstCodes from '../../utils/uttakArbeidTypeCodes';
 import styles from './uttakPeriodeInfo.module.css';
 
 const maxValue100 = maxValue(100);
+
+const OppholdArsakKontoNavn = {
+  INGEN: 'Ingen årsak',
+  UTTAK_MØDREKVOTE_ANNEN_FORELDER: 'Mødrekvote',
+  UTTAK_FEDREKVOTE_ANNEN_FORELDER: 'Fedrekvote',
+  UTTAK_FELLESP_ANNEN_FORELDER: 'Fellesperiode',
+  UTTAK_FORELDREPENGER_ANNEN_FORELDER: 'Foreldrepenger',
+  UDEFINERT: '-',
+} as Record<string, string>;
 
 const periodeStatusClassName = (valgtPeriode: PeriodeSoker, erTilknyttetStortinget: boolean): string => {
   if (valgtPeriode.periodeResultatType === PeriodeResultatType.INNVILGET && !erTilknyttetStortinget) {

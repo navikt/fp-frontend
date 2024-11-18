@@ -78,7 +78,7 @@ const getBehandlingAarsaker = (
       manuelleRevurderingsArsaker = manuelleRevurderingsArsakerSVP;
     }
     return alleRevurderingArsaker
-      .filter(bat => manuelleRevurderingsArsaker.indexOf(bat.kode) > -1)
+      .filter(bat => manuelleRevurderingsArsaker.some(mra => mra === bat.kode))
       .sort((bat1, bat2) => bat1.navn.localeCompare(bat2.navn));
   }
 

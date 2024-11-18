@@ -5053,6 +5053,7 @@ __metadata:
     "@navikt/fp-kodeverk": "workspace:^"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:^"
+    "@navikt/fp-types-avklar-aksjonspunkter": "workspace:^"
     "@navikt/ft-form-hooks": 5.2.3
     "@navikt/ft-form-validators": 2.5.3
     "@navikt/ft-ui-komponenter": 2.6.0
@@ -5223,7 +5224,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-types-avklar-aksjonspunkter@workspace:*, @navikt/fp-types-avklar-aksjonspunkter@workspace:packages/types-avklar-aksjonspunkter":
+"@navikt/fp-types-avklar-aksjonspunkter@workspace:*, @navikt/fp-types-avklar-aksjonspunkter@workspace:^, @navikt/fp-types-avklar-aksjonspunkter@workspace:packages/types-avklar-aksjonspunkter":
   version: 0.0.0-use.local
   resolution: "@navikt/fp-types-avklar-aksjonspunkter@workspace:packages/types-avklar-aksjonspunkter"
   dependencies:

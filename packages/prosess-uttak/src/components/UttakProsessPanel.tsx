@@ -19,13 +19,7 @@ import {
   PeriodeSoker,
   Fagsak,
 } from '@navikt/fp-types';
-import {
-  StonadskontoType,
-  AksjonspunktKode,
-  UttakPeriodeNavn,
-  PeriodeResultatType,
-  AksjonspunktStatus,
-} from '@navikt/fp-kodeverk';
+import { StonadskontoType, AksjonspunktKode, PeriodeResultatType, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 
 import DisponibleStonadskontoerPanel from './stonadsdagerOversikt/DisponibleStonadskontoerPanel';
 import UttakTidslinjeIndex from './tidslinje/UttakTidslinjeIndex';
@@ -43,6 +37,17 @@ const UTTAK_PANEL_AKSJONSPUNKT_KODER = {
   5078: 'UttakPanel.Aksjonspunkt.5078',
   5079: 'UttakPanel.Aksjonspunkt.5079',
   5098: 'UttakPanel.Aksjonspunkt.5098',
+} as Record<string, string>;
+
+// TODO Kva er dette? Kodeverk-navn skal hentast fra databasen!
+const UttakPeriodeNavn = {
+  MØDREKVOTE: 'Mødrekvote',
+  FEDREKVOTE: 'Fedrekvote',
+  FELLESPERIODE: 'Fellesperiode',
+  FORELDREPENGER_FØR_FØDSEL: 'Foreldrepenger før fødsel',
+  FORELDREPENGER: 'Foreldrepenger',
+  FLERBARNSDAGER: 'Flerbarnsdager',
+  UDEFINERT: '-',
 } as Record<string, string>;
 
 const hentApTekster = (uttaksresultat: UttaksresultatPeriode, aksjonspunkter: Aksjonspunkt[]): ReactElement[] => {

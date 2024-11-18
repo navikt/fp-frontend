@@ -49,7 +49,9 @@ const automatiskeVentearsakerForTilbakekreving = [
 ];
 
 const inkluderVentearsak = (ventearsak: KodeverkMedNavn, valgtVentearsak?: string): boolean =>
-  automatiskeVentearsakerForTilbakekreving.includes(ventearsak.kode) ? ventearsak.kode === valgtVentearsak : true;
+  automatiskeVentearsakerForTilbakekreving.some(vt => vt === ventearsak.kode)
+    ? ventearsak.kode === valgtVentearsak
+    : true;
 
 const skalViseFristenTekst = (
   erTilbakekreving: boolean,
@@ -151,7 +153,7 @@ const SettPaVentModal: FunctionComponent<PureOwnProps> = ({
                   !hasManualPaVent ||
                   (erTilbakekreving
                     ? inkluderVentearsak(va, ventearsakFraFelt)
-                    : manuelleVenteArsaker.includes(va.kode)),
+                    : manuelleVenteArsaker.some(mva => mva === va.kode)),
               )
               .sort((v1, v2) => v1.navn.localeCompare(v2.navn))
               .map(va => (

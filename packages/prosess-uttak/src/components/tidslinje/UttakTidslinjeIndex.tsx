@@ -13,9 +13,18 @@ import {
   Fagsak,
   AlleKodeverk,
 } from '@navikt/fp-types';
-import { SoknadType, OppholdArsakType, OppholdArsakMapper, BehandlingType } from '@navikt/fp-kodeverk';
+import { SoknadType, OppholdArsakType, BehandlingType } from '@navikt/fp-kodeverk';
 
 import UttakTidslinje, { PeriodeSøkerMedTidslinjedata, TidslinjeTimes } from './UttakTidslinje';
+
+//TODO (TOR) Dette er vel mapping mellom kodeverk? Bør i sofall bruka kodeverk-enums
+const OppholdArsakMapper = {
+  INGEN: 'UDEFINERT',
+  UTTAK_MØDREKVOTE_ANNEN_FORELDER: 'MØDREKVOTE',
+  UTTAK_FEDREKVOTE_ANNEN_FORELDER: 'FEDREKVOTE',
+  UTTAK_FELLESP_ANNEN_FORELDER: 'FELLESPERIODE',
+  UTTAK_FORELDREPENGER_ANNEN_FORELDER: 'FORELDREPENGER',
+} as Record<string, string>;
 
 const finnSøknadsdato = (søknad: Soknad): string => {
   const { mottattDato } = søknad;

@@ -56,7 +56,7 @@ const MenyNyBehandlingIndex: FunctionComponent<OwnProps> = ({
   const submit = useCallback(
     (formValues: FormValues) => {
       const isTilbakekreving =
-        !!formValues.behandlingType && TILBAKEKREVING_BEHANDLINGSTYPER.includes(formValues.behandlingType);
+        !!formValues.behandlingType && TILBAKEKREVING_BEHANDLINGSTYPER.some(bt => bt === formValues.behandlingType);
       const tilbakekrevingBehandlingUuid = behandlingUuid && isTilbakekreving ? { behandlingUuid } : {};
       const params = {
         saksnummer,

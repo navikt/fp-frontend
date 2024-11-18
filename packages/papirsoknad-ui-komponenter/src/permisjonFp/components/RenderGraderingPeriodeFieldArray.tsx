@@ -121,7 +121,7 @@ const maxValue100 = maxValue(100);
 
 const mapKvoter = (typer: KodeverkMedNavn[]): ReactElement[] =>
   typer
-    .filter(({ kode }) => gyldigeUttakperioder.includes(kode))
+    .filter(({ kode }) => gyldigeUttakperioder.some(ga => ga === kode))
     .map(({ kode, navn }) => (
       <option value={kode} key={kode}>
         {navn}
@@ -130,7 +130,7 @@ const mapKvoter = (typer: KodeverkMedNavn[]): ReactElement[] =>
 
 const mapArbeidskategori = (typer: KodeverkMedNavn[]): ReactElement[] =>
   typer
-    .filter(({ kode }) => gyldigArbeidskategori.includes(kode))
+    .filter(({ kode }) => gyldigArbeidskategori.some(ga => ga === kode))
     .map(({ kode, navn }) => (
       <option value={kode} key={kode}>
         {navn}
