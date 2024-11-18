@@ -3,15 +3,14 @@ import express from 'express';
 import helmet from 'helmet';
 import timeout from 'connect-timeout';
 import * as headers from './headers.js';
-import logger from './log.js';
-import { getIssuer } from './azure/issuer.js';
+import logger from './logger.js';
 import { serveViteMode } from '@navikt/vite-mode';
 
 // for debugging during development
 import config from './config.js';
-import msgraph from './azure/msgraph.js';
+import { getUserGroups, getUserInfoFromGraphApi } from './msgraph.js';
 import reverseProxy from './reverse-proxy.js';
-import { validateAuthorization } from './azure/validate.js';
+import { verifyToken } from './tokenValidation.js';
 
 const server = express();
 const { port } = config.server;
@@ -64,8 +63,6 @@ async function startApp() {
       }),
     );
 
-    await getIssuer();
-
     // Liveness and readiness probes for Kubernetes / nais
     server.get(['/health/isAlive', '/health/isReady'], (req, res) => {
       res.status(200).send('Alive');
@@ -77,24 +74,8 @@ async function startApp() {
       });
     });
 
-    const ensureAuthenticated = async (req, res, next) => {
-      const { authorization } = req.headers;
-      const loginPath = `/oauth2/login?redirect=${req.originalUrl}`;
-      if (!authorization) {
-        logger.debug('User token missing. Redirect til login.');
-        res.redirect(loginPath);
-      } else if (await validateAuthorization(authorization)) {
-        // Validate token and continue to app
-        logger.debug('User token is valid. Continue.');
-        next();
-      } else {
-        logger.debug('User token is NOT valid. Redirect til login.');
-        res.redirect(loginPath);
-      }
-    };
-
     // The routes below require the user to be authenticated
-    server.use(ensureAuthenticated);
+    server.use(verifyToken);
 
     server.get(['/logout'], async (req, res) => {
       if (req.headers.authorization) {
@@ -103,19 +84,23 @@ async function startApp() {
     });
 
     // return user info fetched from the Microsoft Graph API
-    server.get('/me', (req, res) => {
-      msgraph
-        .getUserInfoFromGraphApi(req.headers.authorization)
-        .then(userinfo => res.json(userinfo))
-        .catch(err => res.status(500).json(err));
+    server.get('/me', async (req, res, next) => {
+      try {
+        const userInfo = await getUserInfoFromGraphApi(req.headers.authorization);
+        return res.json(userInfo);
+      } catch (error) {
+        return next(error);
+      }
     });
 
     // return groups that the user is a member of from the Microsoft Graph API
-    server.get('/me/memberOf', (req, res) => {
-      msgraph
-        .getUserGroups(req.headers.authorization)
-        .then(userinfo => res.json(userinfo))
-        .catch(err => res.status(500).json(err));
+    server.get('/me/memberOf', async (req, res, next) => {
+      try {
+        const userInfo = await getUserGroups(req.headers.authorization);
+        return res.json(userInfo);
+      } catch (error) {
+        return next(error);
+      }
     });
 
     reverseProxy.setup(server);
