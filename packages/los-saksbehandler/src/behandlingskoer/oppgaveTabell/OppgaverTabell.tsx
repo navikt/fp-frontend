@@ -136,7 +136,7 @@ export const OppgaverTabell = ({ reserverOppgave, antallOppgaver = 0, valgtSaksl
       : sorterteOppgaver;
 
   return (
-    <>
+    <div className={styles.tabell}>
       {hentOppgaverTilBehandlingError instanceof TimeoutError && <BehandlingPollingTimoutModal />}
       <VStack gap="2" className={styles.headerPadding}>
         <HStack gap="2">
@@ -158,7 +158,11 @@ export const OppgaverTabell = ({ reserverOppgave, antallOppgaver = 0, valgtSaksl
       </VStack>
       {alleOppgaver.length > 0 && (
         <VStack gap="4">
-          <Table sort={tabellSortering} onSortChange={sortKey => sorterTabellPåKolonne(sortKey as TableHeaders)}>
+          <Table
+            size="small"
+            sort={tabellSortering}
+            onSortChange={sortKey => sorterTabellPåKolonne(sortKey as TableHeaders)}
+          >
             <Table.Header>
               <Table.Row>
                 <Table.ColumnHeader sortKey="navn" sortable>
@@ -205,6 +209,6 @@ export const OppgaverTabell = ({ reserverOppgave, antallOppgaver = 0, valgtSaksl
           )}
         </VStack>
       )}
-    </>
+    </div>
   );
 };
