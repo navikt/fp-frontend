@@ -115,8 +115,6 @@ function startApp() {
     response.sendFile("index.html");
   });
 
-  // TODO: her var det en error handler. Jeg tror ikke vi trenger da det fanges av default handler: https://expressjs.com/en/guide/error-handling.html
-
   server.listen(port, () => logger.info(`Listening on port ${port}`));
 }
 

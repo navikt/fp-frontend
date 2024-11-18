@@ -5,7 +5,6 @@ import logger from "./logger.js";
 
 /**
  * Validerer token som kommer fra Wonderwall
- * TODO: forrige impl hadde redirect til login dersom man ikke hadde token. Jeg mener at dette skal Wonderwall gjøre for oss og ikke er nødvendig
  */
 export const verifyToken = async (
   request: Request,
