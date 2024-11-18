@@ -114,7 +114,7 @@ export type BehandlingOppretting = Readonly<{
 export type FormValues = {
   behandlingType?: string;
   nyBehandlingEtterKlage?: string;
-  BehandlingArsakType?: string;
+  behandlingArsakType?: string;
 };
 
 interface OwnProps {
@@ -213,7 +213,7 @@ const NyBehandlingModal: FunctionComponent<OwnProps> = ({
           )}
           {behandlingArsakTyper.length > 0 && (
             <SelectField
-              name="BehandlingArsakType"
+              name="behandlingArsakType"
               label=""
               hideLabel
               validate={[required]}

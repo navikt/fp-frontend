@@ -3,17 +3,13 @@ import { useIntl } from 'react-intl';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 
 import { BehandlingArsakType, VilkarUtfallType, VedtakResultatType } from '@navikt/fp-kodeverk';
-import {
-  BeregningsresultatTilbakekreving,
-  Vedtaksbrev,
-  AlleKodeverkTilbakekreving,
-  Behandlingsresultat,
-} from '@navikt/fp-types';
+import { BeregningsresultatTilbakekreving, AlleKodeverkTilbakekreving, Behandlingsresultat } from '@navikt/fp-types';
 import { WarningModal } from '@navikt/ft-ui-komponenter';
 import {
   VedtakTilbakekrevingProsessIndex,
   VedtakAksjonspunktCode,
   ForhandsvisData,
+  Vedtaksbrev,
 } from '@navikt/ft-prosess-tilbakekreving-vedtak';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';

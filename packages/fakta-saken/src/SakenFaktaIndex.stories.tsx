@@ -198,11 +198,11 @@ HarFåttDekningsgradAksjonspunkt.args = {
   fagsak: {
     fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     bruker: {
-      navn: 'Felga Utvikler',
+      navn: 'Helga Utvikler',
       kjønn: NavBrukerKjonn.KVINNE,
     },
     annenPart: {
-      navn: 'Fspen Utvikler',
+      navn: 'Espen Utvikler',
       kjønn: NavBrukerKjonn.MANN,
     },
   } as Fagsak,
@@ -235,11 +235,11 @@ HarFåttDekningsgradAksjonspunktMedUkjentAndrePart.args = {
   fagsak: {
     fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     bruker: {
-      navn: 'Felga Utvikler',
+      navn: 'Helga Utvikler',
       kjønn: NavBrukerKjonn.KVINNE,
     },
     annenPart: {
-      navn: 'Fspen Utvikler',
+      navn: 'Espen Utvikler',
       kjønn: NavBrukerKjonn.UDEFINERT,
     },
   } as Fagsak,
@@ -273,11 +273,11 @@ DekningsgradAksjonspunktErSendtTIlbakeFraBeslutter.args = {
   fagsak: {
     fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     bruker: {
-      navn: 'Felga Utvikler',
+      navn: 'Helga Utvikler',
       kjønn: NavBrukerKjonn.KVINNE,
     },
     annenPart: {
-      navn: 'Fspen Utvikler',
+      navn: 'Espen Utvikler',
       kjønn: NavBrukerKjonn.MANN,
     },
   } as Fagsak,

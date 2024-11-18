@@ -3,10 +3,12 @@ import { useIntl } from 'react-intl';
 
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import {
+  FeilutbetalingAarsak,
   FeilutbetalingAksjonspunktCode,
+  FeilutbetalingFakta,
   FeilutbetalingFaktaIndex,
 } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
-import { FeilutbetalingAarsak, FeilutbetalingFakta, AlleKodeverkTilbakekreving } from '@navikt/fp-types';
+import { AlleKodeverkTilbakekreving } from '@navikt/fp-types';
 import { BehandlingApiKeys, requestBehandlingApi } from '../../../data/behandlingContextApi';
 import FaktaDefaultInitPanel from '../../felles/fakta/FaktaDefaultInitPanel';
 import FaktaPanelInitProps from '../../felles/typer/faktaPanelInitProps';

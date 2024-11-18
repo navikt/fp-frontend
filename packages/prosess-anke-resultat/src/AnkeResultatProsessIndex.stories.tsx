@@ -55,7 +55,7 @@ ResultatVedOmgjør.args = {
     ankeVurderingResultat: {
       ...ankeVurderingResultat,
       ankeVurdering: AnkeVurderingKodeverk.ANKE_OMGJOER,
-      AnkeVurderingOmgjoer: AnkeVurderingOmgjoer.ANKE_TIL_UGUNST,
+      ankeVurderingOmgjoer: AnkeVurderingOmgjoer.ANKE_TIL_UGUNST,
       ankeOmgjoerArsakNavn: 'Testårsak',
     },
   } as AnkeVurdering,

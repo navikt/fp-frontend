@@ -8,12 +8,16 @@ import {
   Beregningsgrunnlag,
   AksessRettigheter,
   ArbeidsgiverOpplysningerPerId,
-  Vilkar as FpVilkar,
 } from '@navikt/fp-types';
 
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
-import { BeregningFaktaIndex, FaktaBeregningAvklaringsbehovCode } from '@navikt/ft-fakta-beregning';
+import {
+  BeregningFaktaIndex,
+  FaktaBeregningAvklaringsbehovCode,
+  FtVilkar,
+  FtBeregningsgrunnlag,
+} from '@navikt/ft-fakta-beregning';
 import FaktaPanelInitProps from '../../felles/typer/faktaPanelInitProps';
 import FaktaDefaultInitPanel from '../../felles/fakta/FaktaDefaultInitPanel';
 import { BehandlingApiKeys, requestBehandlingApi } from '../../../data/behandlingContextApi';
@@ -47,7 +51,7 @@ const lagModifisertCallback =
     return submitCallback(transformerteData);
   };
 
-const lagStandardPeriode = (beregningsgrunnlag: Beregningsgrunnlag, bgVilkar: FpVilkar): Vilkarperiode => ({
+const lagStandardPeriode = (beregningsgrunnlag: Beregningsgrunnlag, bgVilkar: Vilkar): Vilkarperiode => ({
   avslagKode: bgVilkar.avslagKode,
   vurderesIBehandlingen: true,
   merknadParametere: {},
@@ -58,7 +62,7 @@ const lagStandardPeriode = (beregningsgrunnlag: Beregningsgrunnlag, bgVilkar: Fp
   vilkarStatus: bgVilkar.vilkarStatus,
 });
 
-const lagBGVilkar = (vilkar?: FpVilkar[], beregningsgrunnlag?: Beregningsgrunnlag): Vilkar => {
+const lagBGVilkar = (vilkar?: Vilkar[], beregningsgrunnlag?: Beregningsgrunnlag): FtVilkar => {
   if (!vilkar) {
     // @ts-ignore BeregningFaktaIndex må kunna ta i mot null
     return null;
@@ -75,7 +79,7 @@ const lagBGVilkar = (vilkar?: FpVilkar[], beregningsgrunnlag?: Beregningsgrunnla
   return nyVK;
 };
 
-const lagFormatertBG = (beregningsgrunnlag: Beregningsgrunnlag): Beregningsgrunnlag[] => {
+const lagFormatertBG = (beregningsgrunnlag: Beregningsgrunnlag): FtBeregningsgrunnlag[] => {
   if (!beregningsgrunnlag) {
     return [];
   }
@@ -83,6 +87,7 @@ const lagFormatertBG = (beregningsgrunnlag: Beregningsgrunnlag): Beregningsgrunn
     ...beregningsgrunnlag,
     vilkårsperiodeFom: beregningsgrunnlag.skjaeringstidspunktBeregning,
   };
+  //@ts-ignore TODO Fiks denne
   return [nyttBG];
 };
 

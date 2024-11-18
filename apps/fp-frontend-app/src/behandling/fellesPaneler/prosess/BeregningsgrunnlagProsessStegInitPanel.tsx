@@ -2,13 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import {
-  Beregningsgrunnlag,
-  Vilkar,
-  Vilkarperiode,
-  ArbeidsgiverOpplysningerPerId,
-  Vilkar as FpVilkar,
-} from '@navikt/fp-types';
+import { Beregningsgrunnlag, Vilkarperiode, ArbeidsgiverOpplysningerPerId, Vilkar as FpVilkar } from '@navikt/fp-types';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
@@ -16,6 +10,8 @@ import {
   BeregningAksjonspunktSubmitType,
   BeregningsgrunnlagProsessIndex,
   ProsessBeregningsgrunnlagAvklaringsbehovCode,
+  FtVilkar,
+  FtBeregningsgrunnlag,
 } from '@navikt/ft-prosess-beregningsgrunnlag';
 
 import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
@@ -64,7 +60,7 @@ const lagStandardPeriode = (beregningsgrunnlag: Beregningsgrunnlag, bgVilkar: Fp
   vilkarStatus: bgVilkar.vilkarStatus,
 });
 
-const lagBGVilkar = (vilkar: FpVilkar[], beregningsgrunnlag?: Beregningsgrunnlag): Vilkar => {
+const lagBGVilkar = (vilkar: FpVilkar[], beregningsgrunnlag?: Beregningsgrunnlag): FtVilkar => {
   const bgVilkar = vilkar.find(v => v.vilkarType && v.vilkarType === VilkarType.BEREGNINGSGRUNNLAGVILKARET);
   if (!bgVilkar || !beregningsgrunnlag) {
     // @ts-ignore Fiks BeregningsgrunnlagProsessIndex så den kan håndtera null
@@ -77,7 +73,7 @@ const lagBGVilkar = (vilkar: FpVilkar[], beregningsgrunnlag?: Beregningsgrunnlag
   return nyVK;
 };
 
-const lagFormatertBG = (beregningsgrunnlag?: Beregningsgrunnlag): Beregningsgrunnlag[] => {
+const lagFormatertBG = (beregningsgrunnlag?: Beregningsgrunnlag): FtBeregningsgrunnlag[] => {
   if (!beregningsgrunnlag) {
     return [];
   }
@@ -85,6 +81,7 @@ const lagFormatertBG = (beregningsgrunnlag?: Beregningsgrunnlag): Beregningsgrun
     ...beregningsgrunnlag,
     vilkårsperiodeFom: beregningsgrunnlag.skjaeringstidspunktBeregning,
   };
+  //@ts-ignore TODO Fiks denne
   return [nyttBG];
 };
 
