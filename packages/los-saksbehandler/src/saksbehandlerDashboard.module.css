@@ -25,13 +25,6 @@
   margin-bottom: 16px;
 }
 
-.koerContainer {
-  border-bottom-color: var(--a-gray-300);
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
-  padding-bottom: 50px;
-}
-
 .sokContainer {
   padding: 16px;
 }
