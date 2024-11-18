@@ -9,7 +9,7 @@ import { RestApiMock } from '@navikt/fp-utils-test';
 import { BehandlingAppKontekst, Fagsak, Saksnotat } from '@navikt/fp-types';
 
 import BehandlingSupportIndex from './BehandlingSupportIndex';
-import { requestFagsakApi, FagsakApiKeys } from '../data/fagsakContextApi';
+import { FagsakApiKeys, requestFagsakApi } from '../data/fagsakContextApi';
 import FagsakData from '../fagsak/FagsakData';
 import messages from '../../i18n/nb_NO.json';
 
@@ -60,7 +60,7 @@ describe('<BehandlingSupportIndex>', () => {
       </RawIntlProvider>,
     );
 
-    expect(await screen.findAllByText('Historikk (ny)')).toHaveLength(2);
+    expect(await screen.findAllByText('Historikk')).toHaveLength(2);
     expect(screen.getByText('Filtrer på behandling')).toBeInTheDocument();
 
     expect(screen.getByText('Send melding')).toBeInTheDocument();

@@ -15,6 +15,8 @@ describe('<SakslisteVelgerForm>', () => {
 
     expect((getByText('Saksliste 1') as HTMLOptionElement).selected).toBeTruthy();
 
+    await userEvent.click(screen.getByText('Filtere for køen'));
+
     expect(screen.getByText('Stønad')).toBeInTheDocument();
     expect(screen.getByText('Foreldrepenger')).toBeInTheDocument();
 
@@ -40,6 +42,10 @@ describe('<SakslisteVelgerForm>', () => {
     expect((getByText('Saksliste 1') as HTMLOptionElement).selected).toBeTruthy();
     expect((getByText('Saksliste 2') as HTMLOptionElement).selected).toBeFalsy();
 
+    await userEvent.click(screen.getByText('Filtere for køen'));
+
+    expect(screen.getByText('Andre som jobber med denne køen nå')).toBeInTheDocument();
+
     expect(screen.getByText('Foreldrepenger')).toBeInTheDocument();
 
     await userEvent.selectOptions(getByLabelText('Behandlingskø'), '2');
@@ -60,7 +66,11 @@ describe('<SakslisteVelgerForm>', () => {
   it('skal i utgangspunktet kun vise tre saksbehandlere og så klikke for å vise alle', async () => {
     render(<MedFlereEnnTreSaksbehandlere />);
 
-    expect(await screen.findByText('Andre som jobber med denne køen nå')).toBeInTheDocument();
+    expect(await screen.findByText('Behandlingskø')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Filtere for køen'));
+
+    expect(screen.getByText('Andre som jobber med denne køen nå')).toBeInTheDocument();
 
     expect(screen.getByText('Auto Joakim')).toBeInTheDocument();
     expect(screen.getByText('Bente Frogner')).toBeInTheDocument();

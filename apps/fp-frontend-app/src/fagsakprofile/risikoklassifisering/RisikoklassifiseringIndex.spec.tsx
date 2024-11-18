@@ -1,7 +1,7 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
-import { KontrollresultatKode } from '@navikt/ft-sak-risikoklassifisering';
+import { KontrollresultatKode } from '@navikt/fp-sak-risikoklassifisering';
 
 import { RestApiMock } from '@navikt/fp-utils-test';
 import { Fagsak, BehandlingAppKontekst } from '@navikt/fp-types';

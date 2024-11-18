@@ -107,7 +107,7 @@
   "NyeOgFerdigstilteOppgaverForIdagGraf.Førstegangsbehandling": "Førstegangsbeh.",
 
   "SakslisteVelgerForm.Saksliste": "Behandlingskø",
-  "SakslisteVelgerForm.IkkeOppfort": "<i>Du er ikke oppført på noen behandlingskø</i>",
+  "SakslisteVelgerForm.IkkeOppfort": "<i>Du er ikke lagt til i noen behandlingskøer</i>",
   "SakslisteVelgerForm.Stonadstype": "Stønad",
   "SakslisteVelgerForm.Behandlingstype": "Behandling",
   "SakslisteVelgerForm.Sortering": "Sortering",
@@ -121,6 +121,7 @@
   "SakslisteVelgerForm.VisFlere": "Se alle",
   "SakslisteVelgerForm.VisFærre": "Se færre",
   "SakslisteVelgerForm.Andre": "{antallAndre} andre",
+  "SakslisteVelgerForm.FilterForKoen": "Filtere for køen",
 
   "SaksbehandlerNokkeltallPanel.Statistikk": "Statistikk",
   "SaksbehandlerNokkeltallPanel.ForAlle": "For alle saksbehandlere",

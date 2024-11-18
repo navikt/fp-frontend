@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { Link } from 'react-router-dom';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-import { AktorSakIndex } from '@navikt/ft-sak-aktor';
+import { AktorSakIndex } from '@navikt/fp-sak-aktor';
 
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { KodeverkType } from '@navikt/fp-kodeverk';
@@ -9,8 +9,6 @@ import { KodeverkType } from '@navikt/fp-kodeverk';
 import useTrackRouteParam from '../app/useTrackRouteParam';
 import { restFagsakApiHooks, FagsakApiKeys } from '../data/fagsakContextApi';
 import { pathToFagsak } from '../app/paths';
-
-import '@navikt/ft-sak-aktor/dist/style.css';
 
 /**
  * AktoerIndex

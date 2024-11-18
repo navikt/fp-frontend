@@ -2,7 +2,7 @@ import React, { useCallback, FunctionComponent, useState, useEffect } from 'reac
 import { Link, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Heading } from '@navikt/ds-react';
-import { NotFoundPage } from '@navikt/ft-sak-infosider';
+import { NotFoundPage } from '@navikt/fp-sak-infosider';
 
 import { SaksbehandlerIndex } from '@navikt/fp-los-saksbehandler';
 import { OppgaveJournalføringIndex } from '@navikt/fp-journalforing';

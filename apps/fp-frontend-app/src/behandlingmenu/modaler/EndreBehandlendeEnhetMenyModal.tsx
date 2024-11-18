@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useCallback } from 'react';
-import { MenyEndreBehandlendeEnhetIndex } from '@navikt/ft-sak-meny';
+import { MenyEndreBehandlendeEnhetIndex } from '@navikt/fp-sak-meny';
 import { BehandlingAppKontekst } from '@navikt/fp-types';
 
 import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';

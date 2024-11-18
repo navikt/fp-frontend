@@ -90,7 +90,10 @@ export type { default as Vilkar } from './src/vilkarTsType';
 export type { default as Ytelsefordeling } from './src/ytelsefordelingTsType';
 export type { FamilieHendelse, FamilieHendelseSamling, AvklartBarn } from './src/familieHendelseTsType';
 export type {
-  default as Fagsak,
+  Fagsak,
+  FagsakPersoner,
+  FagsakHendelse,
+  FagsakPerson,
   Saksnotat,
   AnnenPartBehandling,
   BehandlingOppretting,

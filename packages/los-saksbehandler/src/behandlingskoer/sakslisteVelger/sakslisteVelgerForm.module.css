@@ -1,5 +1,4 @@
 .koInput {
-  padding-bottom: 20px;
   width: 250px;
 }
 
@@ -8,14 +7,26 @@
   border-bottom-color: var(--a-gray-300);
   border-bottom-style: solid;
   border-bottom-width: 1px;
-  padding-bottom: 32px;
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-top: 16px;
+  padding: 16px;
 }
 
 .grayout {
   color: var(--a-gray-500);
   height: 24px;
   width: 24px;
+}
+
+.paddingBottom {
+  padding-bottom: 16px;
+}
+
+.hidden {
+  max-height: 0;
+  overflow: hidden;
+}
+
+.active {
+  max-height: 500px;
+  overflow: hidden;
+  transition: max-height 1s;
 }

@@ -3,13 +3,13 @@ import { Navigate, NavLink, useLocation, useMatch } from 'react-router-dom';
 import { Location } from 'history';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Box, HStack, Spacer, Tag, Link, Label, VStack } from '@navikt/ds-react';
-import { BehandlingVelgerSakIndex } from '@navikt/ft-sak-behandling-velger';
+import { BehandlingVelgerSakIndex } from '@navikt/fp-sak-behandling-velger';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { KodeverkType } from '@navikt/fp-kodeverk';
 import { Behandling, BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
 import { UkjentAdresseMeldingIndex } from '@navikt/fp-sak-ukjent-adresse';
 import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
-import { FagsakProfilSakIndex } from '@navikt/ft-sak-fagsak-profil';
+import { FagsakProfilSakIndex } from '@navikt/fp-sak-fagsak-profil';
 import { AAREG_URL, AINNTEKT_URL, GOSYS_URL, getModiaUrl } from '@navikt/fp-konstanter';
 
 import { FagsakApiKeys, restFagsakApiHooks } from '../data/fagsakContextApi';
@@ -21,8 +21,6 @@ import FagsakData from '../fagsak/FagsakData';
 import ErrorBoundary from '../app/ErrorBoundary';
 
 import styles from './fagsakProfileIndex.module.css';
-
-import '@navikt/ft-sak-behandling-velger/dist/style.css';
 
 const findPathToBehandling = (saksnummer: string, location: Location, alleBehandlinger: BehandlingAppKontekst[]) => {
   if (alleBehandlinger.length === 1) {
