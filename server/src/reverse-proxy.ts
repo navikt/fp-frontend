@@ -45,7 +45,7 @@ const proxyOptions = (api: ProxyConfig["apis"][0]) =>
               resolve(options);
             } else {
               logger.warning(`OBO-utveklsing for ${api.scopes} feilet.`);
-              reject(obo.error);
+              reject(obo.error); // NOSONAR: Sonarcloud forstår ikke at obo.error er et Error objekt. Dermed gir den en false positive.
             }
           });
         }
