@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { RawIntlProvider } from 'react-intl';
 import moment from 'moment';
@@ -9,10 +9,10 @@ import { useRestApiError } from '@navikt/fp-rest-api-hooks';
 import { EventType } from '@navikt/fp-rest-api';
 
 import { FagsakApiKeys, restFagsakApiHooks } from '../data/fagsakContextApi';
-import ErrorBoundary from './ErrorBoundary';
-import AppConfigResolver from './AppConfigResolver';
-import Home from './components/Home';
-import Dekorator from './components/Dekorator';
+import { ErrorBoundary } from './ErrorBoundary';
+import { AppConfigResolver } from './AppConfigResolver';
+import { Home } from './components/Home';
+import { Dekorator } from './components/Dekorator';
 
 import messages from '../../i18n/nb_NO.json';
 
@@ -35,7 +35,7 @@ const intl = createIntl(messages);
  * Container komponent. Dette er toppkomponenten i applikasjonen. Denne vil rendre header
  * og home-komponentene. Home-komponenten vil rendre barn-komponenter via ruter.
  */
-const AppIndex: FunctionComponent = () => {
+export const AppIndex = () => {
   const [headerHeight, setHeaderHeight] = useState(0);
   const [crashMessage, setCrashMessage] = useState<string>();
 
@@ -96,5 +96,3 @@ const AppIndex: FunctionComponent = () => {
     </RawIntlProvider>
   );
 };
-
-export default AppIndex;

@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
@@ -6,8 +6,8 @@ import { ArbeidsforholdFaktaIndex } from '@navikt/fp-fakta-arbeidsforhold';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
-import FaktaPanelInitProps from '../../felles/typer/faktaPanelInitProps';
-import FaktaDefaultInitPanel from '../../felles/fakta/FaktaDefaultInitPanel';
+import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
+import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.AVKLAR_ARBEIDSFORHOLD];
@@ -17,7 +17,7 @@ type EndepunktPanelData = {
   arbeidOgInntekt: ArbeidOgInntektsmelding;
 };
 
-interface OwnProps {
+interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
@@ -26,10 +26,10 @@ interface OwnProps {
  *
  * Dette faktapanelet skal alltid vises
  */
-const ArbeidsforholdFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = ({
+export const ArbeidsforholdFaktaInitPanel = ({
   arbeidsgiverOpplysningerPerId,
   ...props
-}) => (
+}: Props & FaktaPanelInitProps) => (
   <FaktaDefaultInitPanel<EndepunktPanelData>
     {...props}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
@@ -44,5 +44,3 @@ const ArbeidsforholdFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitP
     )}
   />
 );
-
-export default ArbeidsforholdFaktaInitPanel;

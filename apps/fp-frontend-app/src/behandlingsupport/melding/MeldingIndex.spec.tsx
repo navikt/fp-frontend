@@ -10,8 +10,8 @@ import { Fagsak, BehandlingAppKontekst } from '@navikt/fp-types';
 
 import { RawIntlProvider } from 'react-intl';
 import { requestFagsakApi, FagsakApiKeys } from '../../data/fagsakContextApi';
-import MeldingIndex from './MeldingIndex';
-import FagsakData from '../../fagsak/FagsakData';
+import { MeldingIndex } from './MeldingIndex';
+import { FagsakData } from '../../fagsak/FagsakData';
 import messages from '../../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);

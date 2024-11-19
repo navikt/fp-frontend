@@ -1,21 +1,17 @@
-import React, { FunctionComponent, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { MenyEndreBehandlendeEnhetIndex } from '@navikt/fp-sak-meny';
 import { BehandlingAppKontekst } from '@navikt/fp-types';
 
 import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../../data/behandlingContextApi';
 
-interface OwnProps {
+interface Props {
   behandling: BehandlingAppKontekst;
   hentOgSettBehandling: () => void;
   lukkModal: () => void;
 }
 
-const EndreBehandlendeEnhetMenyModal: FunctionComponent<OwnProps> = ({
-  behandling,
-  hentOgSettBehandling,
-  lukkModal,
-}) => {
+export const EndreBehandlendeEnhetMenyModal = ({ behandling, hentOgSettBehandling, lukkModal }: Props) => {
   const initFetchData = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
 
   const { startRequest: nyBehandlendeEnhet } = restBehandlingApiHooks.useRestApiRunner(
@@ -46,5 +42,3 @@ const EndreBehandlendeEnhetMenyModal: FunctionComponent<OwnProps> = ({
     />
   );
 };
-
-export default EndreBehandlendeEnhetMenyModal;

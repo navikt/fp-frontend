@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 import {
@@ -12,8 +12,8 @@ import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { Beregningsgrunnlag, Vilkar, Vilkarperiode, ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 import { VilkarType, AksjonspunktKode } from '@navikt/fp-kodeverk';
 
-import FaktaPanelInitProps from '../../felles/typer/faktaPanelInitProps';
-import FaktaDefaultInitPanel from '../../felles/fakta/FaktaDefaultInitPanel';
+import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
+import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
 
 import '@navikt/ft-fakta-fordel-beregningsgrunnlag/dist/style.css';
@@ -89,17 +89,11 @@ type EndepunktPanelData = {
   beregningsgrunnlag: Beregningsgrunnlag;
 };
 
-interface OwnProps {
+interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
-/**
- * FordelingFaktaInitPanel
- */
-const FordelingFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = ({
-  arbeidsgiverOpplysningerPerId,
-  ...props
-}) => (
+export const FordelingFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId, ...props }: Props & FaktaPanelInitProps) => (
   <FaktaDefaultInitPanel<EndepunktPanelData>
     {...props}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
@@ -123,5 +117,3 @@ const FordelingFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps>
     )}
   />
 );
-
-export default FordelingFaktaInitPanel;

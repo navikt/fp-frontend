@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 import {
   TilbakekrevingProsessIndex,
@@ -10,8 +10,8 @@ import { VilkarUtfallType, isAksjonspunktOpen, KodeverkType } from '@navikt/fp-k
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 
 import { VilkarsVurdertePerioderWrapper, Aksjonspunkt, AlleKodeverkTilbakekreving } from '@navikt/fp-types';
-import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
-import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
+import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
 
 import '@navikt/ft-prosess-tilbakekreving/dist/style.css';
@@ -38,12 +38,12 @@ const finnTilbakekrevingStatus = (aksjonspunkter: Aksjonspunkt[]): string => {
   return VilkarUtfallType.IKKE_VURDERT;
 };
 
-interface OwnProps {
+interface Props {
   relasjonsRolleType: string;
   tilbakekrevingKodeverk: AlleKodeverkTilbakekreving;
 }
 
-const TilbakekrevingProsessInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({ ...props }) => {
+export const TilbakekrevingProsessInitPanel = ({ ...props }: Props & ProsessPanelInitProps) => {
   const intl = useIntl();
 
   const { startRequest: beregnBelop } = restBehandlingApiHooks.useRestApiRunner(BehandlingApiKeys.BEREGNE_BELØP);
@@ -69,5 +69,3 @@ const TilbakekrevingProsessInitPanel: FunctionComponent<OwnProps & ProsessPanelI
     />
   );
 };
-
-export default TilbakekrevingProsessInitPanel;

@@ -1,16 +1,16 @@
-import React, { FunctionComponent, ReactElement, useCallback, useMemo, useState } from 'react';
+import React, { ReactElement, useCallback, useMemo, useState } from 'react';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 
 import { Behandling } from '@navikt/fp-types';
 
-import BehandlingHenlagtPanel from './BehandlingHenlagtPanel';
-import ProsessMeny from './ProsessMeny';
-import ProsessPanelMenyData from '../typer/prosessPanelMenyData';
-import ProsessPanelInitProps, { ProsessPanelExtraInitProps } from '../typer/prosessPanelInitProps';
+import { BehandlingHenlagtPanel } from './BehandlingHenlagtPanel';
+import { ProsessMeny } from './ProsessMeny';
+import { ProsessPanelMenyData } from '../typer/prosessPanelMenyData';
+import { ProsessPanelInitProps, ProsessPanelExtraInitProps } from '../typer/prosessPanelInitProps';
 
 import styles from './prosessContainer.module.css';
 
-interface OwnProps {
+interface Props {
   behandling: Behandling;
   hentPaneler?: (props: ProsessPanelInitProps, ekstraProps: ProsessPanelExtraInitProps) => ReactElement;
   valgtProsessSteg?: string;
@@ -19,14 +19,14 @@ interface OwnProps {
   apentFaktaPanelInfo?: { urlCode: string; text: string };
 }
 
-const ProsessContainer: FunctionComponent<OwnProps> = ({
+export const ProsessContainer = ({
   behandling,
   hentPaneler,
   valgtProsessSteg,
   valgtFaktaSteg,
   oppdaterProsessStegOgFaktaPanelIUrl,
   apentFaktaPanelInfo,
-}) => {
+}: Props) => {
   const [menyData, setMenyData] = useState<ProsessPanelMenyData[]>([]);
 
   const registrerProsessPanel = useCallback((nyData: ProsessPanelMenyData) => {
@@ -84,5 +84,3 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
     </div>
   );
 };
-
-export default ProsessContainer;

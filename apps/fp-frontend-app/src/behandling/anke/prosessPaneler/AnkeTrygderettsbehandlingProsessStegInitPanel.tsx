@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { ProsessStegCode } from '@navikt/fp-konstanter';
@@ -6,8 +6,8 @@ import { AnkeVurdering } from '@navikt/fp-types';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { AnkeTrygderettsbehandlingProsessIndex } from '@navikt/fp-prosess-anke-trygderettsbehandling';
 
-import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
-import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
+import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.AUTO_VENT_ANKE_OVERSENDT_TIL_TRYGDERETTEN];
@@ -17,7 +17,7 @@ type EndepunktPanelData = {
   ankeVurdering: AnkeVurdering;
 };
 
-const AnkeTrygderettsbehandlingProsessStegInitPanel: FunctionComponent<ProsessPanelInitProps> = ({ ...props }) => {
+export const AnkeTrygderettsbehandlingProsessStegInitPanel = ({ ...props }: ProsessPanelInitProps) => {
   const intl = useIntl();
   return (
     <ProsessDefaultInitPanel<EndepunktPanelData>
@@ -31,5 +31,3 @@ const AnkeTrygderettsbehandlingProsessStegInitPanel: FunctionComponent<ProsessPa
     />
   );
 };
-
-export default AnkeTrygderettsbehandlingProsessStegInitPanel;

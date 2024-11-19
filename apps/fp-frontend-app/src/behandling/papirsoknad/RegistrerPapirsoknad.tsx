@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
@@ -7,7 +7,7 @@ import { AsyncPollingStatus } from '@navikt/fp-rest-api';
 import { RegistrerPapirsoknadPanel, SoknadRegistrertModal } from '@navikt/fp-papirsoknad';
 
 import { useNavigate } from 'react-router';
-import BehandlingPaVent from '../felles/modaler/paVent/BehandlingPaVent';
+import { BehandlingPaVent } from '../felles/modaler/paVent/BehandlingPaVent';
 
 const getAktivtPapirsoknadApKode = (aksjonspunkter: Aksjonspunkt[]): string =>
   aksjonspunkter
@@ -51,7 +51,7 @@ const lagLagreFunksjon =
     });
   };
 
-interface OwnProps {
+interface Props {
   fagsak: Fagsak;
   behandling: Behandling;
   kodeverk: AlleKodeverk;
@@ -66,13 +66,7 @@ interface OwnProps {
  * Komponenten tilpasser skjemaet til valgt søknadstype (engagnsstønad eller foreldrepenger), valgt søknadtema (fødsel, adopsjon eller omsorg)
  * og valgt foreldretype (mor, far/medmor eller tredjepart).
  */
-const RegistrerPapirsoknad: FunctionComponent<OwnProps> = ({
-  fagsak,
-  behandling,
-  kodeverk,
-  rettigheter,
-  lagreAksjonspunkt,
-}) => {
+export const RegistrerPapirsoknad = ({ fagsak, behandling, kodeverk, rettigheter, lagreAksjonspunkt }: Props) => {
   const [erAksjonspunktLagret, setAksjonspunktLagret] = useState(false);
   const readOnly = !rettigheter.writeAccess.isEnabled || behandling.behandlingPaaVent;
 
@@ -114,5 +108,3 @@ const RegistrerPapirsoknad: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-
-export default RegistrerPapirsoknad;

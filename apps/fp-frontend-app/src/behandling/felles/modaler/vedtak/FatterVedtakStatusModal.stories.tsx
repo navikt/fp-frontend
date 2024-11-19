@@ -1,25 +1,26 @@
-import React from 'react';
-import { RawIntlProvider } from 'react-intl';
 import { action } from '@storybook/addon-actions';
-import { createIntl } from '@navikt/ft-utils';
 
-import FatterVedtakStatusModal from './FatterVedtakStatusModal';
+import { FatterVedtakStatusModal } from './FatterVedtakStatusModal';
 
+import { Meta, StoryObj } from '@storybook/react/*';
 import messages from '../../../../../i18n/nb_NO.json';
+import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
-const intl = createIntl(messages);
+const withIntl = getIntlDecorator(messages);
 
-export default {
+const meta = {
   title: 'app/vedtak/FatterVedtakStatusModal',
   component: FatterVedtakStatusModal,
-};
+  decorators: [withIntl],
+} satisfies Meta<typeof FatterVedtakStatusModal>;
+export default meta;
 
-export const visFatterVedtakModal = () => (
-  <RawIntlProvider value={intl}>
-    <FatterVedtakStatusModal
-      visModal
-      lukkModal={action('button-click')}
-      tekst="Forslag til vedtak er sendt til beslutter"
-    />
-  </RawIntlProvider>
-);
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: {
+    visModal: true,
+    lukkModal: action('button-click'),
+    tekst: 'Forslag til vedtak er sendt til beslutter',
+  },
+};

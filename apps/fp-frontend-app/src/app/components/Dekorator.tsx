@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo, useCallback } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import { useIntl, IntlShape } from 'react-intl';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 import { useNavigate } from 'react-router-dom';
@@ -7,8 +7,8 @@ import { DekoratorMedFeilviserSakIndex, Feilmelding } from '@navikt/fp-sak-dekor
 import { useRestApiError, useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 import { SYSTEMRUTINE_URL, RETTSKILDE_URL } from '@navikt/fp-konstanter';
 
-import ErrorFormatter from './feilhandtering/ErrorFormatter';
-import ErrorMessage from './feilhandtering/ErrorMessage';
+import { ErrorFormatter } from './feilhandtering/ErrorFormatter';
+import { ErrorMessage } from './feilhandtering/ErrorMessage';
 
 import { AVDELINGSLEDER_PATH, JOURNALFØRING_PATH, UTBETALINGSDATA_PATH } from '../paths';
 import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
@@ -58,19 +58,14 @@ const lagFeilmeldinger = (
 
 const EMPTY_ARRAY = [] as Feilmelding[];
 
-interface OwnProps {
+interface Props {
   queryStrings: QueryStrings;
   setSiteHeight: (headerHeight: number) => void;
   crashMessage?: string;
   hideErrorMessages?: boolean;
 }
 
-const Dekorator: FunctionComponent<OwnProps> = ({
-  queryStrings,
-  setSiteHeight,
-  crashMessage,
-  hideErrorMessages = false,
-}) => {
+export const Dekorator = ({ queryStrings, setSiteHeight, crashMessage, hideErrorMessages = false }: Props) => {
   const intl = useIntl();
 
   const initFetch = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
@@ -167,5 +162,3 @@ const Dekorator: FunctionComponent<OwnProps> = ({
     />
   );
 };
-
-export default Dekorator;

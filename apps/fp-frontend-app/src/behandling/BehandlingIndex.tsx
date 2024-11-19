@@ -1,19 +1,19 @@
-import React, { Suspense, FunctionComponent, useEffect, useMemo } from 'react';
+import React, { Suspense, useEffect, useMemo } from 'react';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 import { Behandling } from '@navikt/fp-types';
-import useTrackRouteParam from '../app/useTrackRouteParam';
-import getAccessRights from '../app/util/access';
+import { useTrackRouteParam } from '../app/useTrackRouteParam';
+import { getAccessRights } from '../app/util/access';
 import { FagsakApiKeys, restFagsakApiHooks } from '../data/fagsakContextApi';
 import { requestBehandlingApi } from '../data/behandlingContextApi';
-import ErrorBoundary from '../app/ErrorBoundary';
-import FagsakData from '../fagsak/FagsakData';
-import BehandlingPanelerIndex from './BehandlingPanelerIndex';
-import lazyWithRetry from './lazyUtils';
+import { ErrorBoundary } from '../app/ErrorBoundary';
+import { FagsakData } from '../fagsak/FagsakData';
+import { BehandlingPanelerIndex } from './BehandlingPanelerIndex';
+import { lazyWithRetry } from './lazyUtils';
 
 const BehandlingPapirsoknadIndex = lazyWithRetry(() => import('./papirsoknad/BehandlingPapirsoknadIndex'));
 
-interface OwnProps {
+interface Props {
   behandling?: Behandling;
   setBehandling: (behandling: Behandling) => void;
   hentOgSettBehandling: () => void;
@@ -27,14 +27,14 @@ interface OwnProps {
  *
  * Er rot for for den delen av hovedvinduet som har innhold for en valgt behandling.
  */
-const BehandlingIndex: FunctionComponent<OwnProps> = ({
+export const BehandlingIndex = ({
   behandling,
   setBehandling,
   hentOgSettBehandling,
   fagsakData,
   setRequestPendingMessage,
   setBehandlingUuid,
-}) => {
+}: Props) => {
   const { addErrorMessage } = useRestApiErrorDispatcher();
 
   useEffect(() => {
@@ -96,5 +96,3 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
     </ErrorBoundary>
   );
 };
-
-export default BehandlingIndex;

@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { VilkarType, BehandlingType, AksjonspunktKode } from '@navikt/fp-kodeverk';
@@ -6,9 +6,9 @@ import { SokersOpplysningspliktVilkarProsessIndex } from '@navikt/fp-prosess-vil
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { ArbeidsgiverOpplysningerPerId, Soknad } from '@navikt/fp-types';
 
-import skalViseProsessPanel from '../../felles/prosess/skalViseProsessPanel';
-import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
-import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
+import { skalViseProsessPanel } from '../../felles/prosess/skalViseProsessPanel';
+import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [
@@ -23,14 +23,14 @@ type EndepunktPanelData = {
   soknad: Soknad;
 };
 
-interface OwnProps {
+interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
-const OpplysningspliktProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
+export const OpplysningspliktProsessStegInitPanel = ({
   arbeidsgiverOpplysningerPerId,
   ...props
-}) => (
+}: Props & ProsessPanelInitProps) => (
   <ProsessDefaultInitPanel<EndepunktPanelData>
     {...props}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
@@ -51,5 +51,3 @@ const OpplysningspliktProsessStegInitPanel: FunctionComponent<OwnProps & Prosess
     )}
   />
 );
-
-export default OpplysningspliktProsessStegInitPanel;

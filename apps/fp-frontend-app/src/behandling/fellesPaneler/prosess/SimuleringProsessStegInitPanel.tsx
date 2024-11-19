@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { useIntl } from 'react-intl';
 
 import { AksjonspunktKode, VilkarUtfallType } from '@navikt/fp-kodeverk';
@@ -13,10 +13,10 @@ import {
 } from '@navikt/fp-types';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
-import useStandardProsessPanelProps from '../../felles/prosess/useStandardProsessPanelProps';
-import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
-import ProsessPanelMenyData from '../../felles/typer/prosessPanelMenyData';
-import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
+import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
+import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { ProsessPanelMenyData } from '../../felles/typer/prosessPanelMenyData';
+import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingApiKeys, requestBehandlingApi, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
 
 const getForhandsvisFptilbakeCallback =
@@ -45,18 +45,18 @@ type EndepunktPanelData = {
   simuleringResultat?: SimuleringResultat;
 };
 
-interface OwnProps {
+interface Props {
   menyData: ProsessPanelMenyData[];
   fagsak: Fagsak;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
-const SimuleringProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
+export const SimuleringProsessStegInitPanel = ({
   menyData,
   fagsak,
   arbeidsgiverOpplysningerPerId,
   ...props
-}) => {
+}: Props & ProsessPanelInitProps) => {
   const { startRequest: forhandsvisTilbakekrevingMelding } = restBehandlingApiHooks.useRestApiRunner(
     BehandlingApiKeys.PREVIEW_TILBAKEKREVING_MESSAGE,
   );
@@ -97,5 +97,3 @@ const SimuleringProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelI
     />
   );
 };
-
-export default SimuleringProsessStegInitPanel;

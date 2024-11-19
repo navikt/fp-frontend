@@ -5,13 +5,13 @@ import { StandardFaktaPanelProps } from '@navikt/fp-types';
 import { RestKey } from '@navikt/fp-rest-api';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 
-import FaktaPanelInitProps from '../typer/faktaPanelInitProps';
-import useStandardFaktaPanelProps from './useStandardFaktaPanelProps';
-import useFaktaMenyRegistrerer from './useFaktaMenyRegistrerer';
-import FaktaPanelWrapper from './FaktaPanelWrapper';
+import { FaktaPanelInitProps } from '../typer/faktaPanelInitProps';
+import { useStandardFaktaPanelProps } from './useStandardFaktaPanelProps';
+import { useFaktaMenyRegistrerer } from './useFaktaMenyRegistrerer';
+import { FaktaPanelWrapper } from './FaktaPanelWrapper';
 import { restBehandlingApiHooks } from '../../../data/behandlingContextApi';
 
-export type OwnProps<PANEL_DATA> = {
+export type Props<PANEL_DATA> = {
   panelEndepunkter?: RestKey<any, any>[];
   aksjonspunktKoder?: string[];
   overstyringApKoder?: string[];
@@ -21,7 +21,7 @@ export type OwnProps<PANEL_DATA> = {
   faktaPanelMenyTekst: string;
 };
 
-const FaktaDefaultInitPanel = <PANEL_DATA,>({
+export const FaktaDefaultInitPanel = <PANEL_DATA,>({
   valgtFaktaSteg,
   behandling,
   registrerFaktaPanel,
@@ -32,7 +32,7 @@ const FaktaDefaultInitPanel = <PANEL_DATA,>({
   renderPanel,
   faktaPanelKode,
   faktaPanelMenyTekst,
-}: OwnProps<PANEL_DATA> & FaktaPanelInitProps) => {
+}: Props<PANEL_DATA> & FaktaPanelInitProps) => {
   const standardPanelProps = useStandardFaktaPanelProps(aksjonspunktKoder, overstyringApKoder);
 
   const erPanelValgt = useFaktaMenyRegistrerer(
@@ -66,5 +66,3 @@ const FaktaDefaultInitPanel = <PANEL_DATA,>({
     </FaktaPanelWrapper>
   );
 };
-
-export default FaktaDefaultInitPanel;

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useIntl } from 'react-intl';
 
 import {
@@ -24,11 +24,11 @@ import {
 } from '@navikt/fp-types';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
-import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
-import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
-import IverksetterVedtakStatusModal from '../../felles/modaler/vedtak/IverksetterVedtakStatusModal';
-import FatterVedtakStatusModal from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
-import useStandardProsessPanelProps from '../../felles/prosess/useStandardProsessPanelProps';
+import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
+import { IverksetterVedtakStatusModal } from '../../felles/modaler/vedtak/IverksetterVedtakStatusModal';
+import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
+import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
 
 const hasOnlyClosedAps = (aksjonspunkter: Aksjonspunkt[], vedtakAksjonspunkter: Aksjonspunkt[]): boolean =>
@@ -146,18 +146,18 @@ type EndepunktPanelData = {
   beregningsgrunnlag?: Beregningsgrunnlag;
 };
 
-interface OwnProps {
+interface Props {
   setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void;
   fagsak: Fagsak;
   opneSokeside: () => void;
 }
 
-const VedtakFpProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
+export const VedtakFpProsessStegInitPanel = ({
   setSkalOppdatereEtterBekreftelseAvAp,
   fagsak,
   opneSokeside,
   ...props
-}) => {
+}: Props & ProsessPanelInitProps) => {
   const intl = useIntl();
   const [visIverksetterVedtakModal, toggleIverksetterVedtakModal] = useState(false);
   const [visFatterVedtakModal, toggleFatterVedtakModal] = useState(false);
@@ -238,5 +238,3 @@ const VedtakFpProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelIni
     />
   );
 };
-
-export default VedtakFpProsessStegInitPanel;

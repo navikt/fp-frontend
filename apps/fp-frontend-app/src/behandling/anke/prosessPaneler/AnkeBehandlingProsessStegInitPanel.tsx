@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 
@@ -6,8 +6,8 @@ import { AnkeProsessIndex } from '@navikt/fp-prosess-anke';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { AnkeVurdering } from '@navikt/fp-types';
 
-import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
-import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
+import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.ANKE_VURDERING];
@@ -15,7 +15,7 @@ type EndepunktPanelData = {
   ankeVurdering: AnkeVurdering;
 };
 
-interface OwnProps {
+interface Props {
   alleBehandlinger: {
     uuid: string;
     type: string;
@@ -25,10 +25,7 @@ interface OwnProps {
   }[];
 }
 
-const AnkeBehandlingProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
-  alleBehandlinger,
-  ...props
-}) => {
+export const AnkeBehandlingProsessStegInitPanel = ({ alleBehandlinger, ...props }: Props & ProsessPanelInitProps) => {
   const intl = useIntl();
   const { behandling } = props;
   return (
@@ -45,5 +42,3 @@ const AnkeBehandlingProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPa
     />
   );
 };
-
-export default AnkeBehandlingProsessStegInitPanel;

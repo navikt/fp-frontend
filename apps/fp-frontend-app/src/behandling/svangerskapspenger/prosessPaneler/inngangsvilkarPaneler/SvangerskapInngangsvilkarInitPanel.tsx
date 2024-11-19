@@ -1,12 +1,12 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { VilkarType, AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { SvangerskapVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-svangerskap';
 import { FodselOgTilrettelegging } from '@navikt/fp-types';
 
-import InngangsvilkarPanelInitProps from '../../../felles/typer/inngangsvilkarPanelInitProps';
-import InngangsvilkarDefaultInitPanel from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
+import { InngangsvilkarPanelInitProps } from '../../../felles/typer/inngangsvilkarPanelInitProps';
+import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 import { BehandlingApiKeys } from '../../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.SVANGERSKAPSVILKARET];
@@ -19,14 +19,14 @@ type EndepunktPanelData = {
   svangerskapspengerTilrettelegging: FodselOgTilrettelegging;
 };
 
-interface OwnProps {
+interface Props {
   behandlingVersjon: number;
 }
 
-const SvangerskapInngangsvilkarInitPanel: FunctionComponent<OwnProps & InngangsvilkarPanelInitProps> = ({
+export const SvangerskapInngangsvilkarInitPanel = ({
   behandlingVersjon,
   ...props
-}) => {
+}: Props & InngangsvilkarPanelInitProps) => {
   const intl = useIntl();
   return (
     <InngangsvilkarDefaultInitPanel<EndepunktPanelData>
@@ -41,5 +41,3 @@ const SvangerskapInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsv
     />
   );
 };
-
-export default SvangerskapInngangsvilkarInitPanel;

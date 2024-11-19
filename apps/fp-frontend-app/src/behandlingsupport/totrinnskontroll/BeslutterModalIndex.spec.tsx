@@ -4,7 +4,7 @@ import { BehandlingResultatType, BehandlingType, BehandlingStatus } from '@navik
 
 import { BehandlingAppKontekst } from '@navikt/fp-types';
 
-import BeslutterModalIndex from './BeslutterModalIndex';
+import { BeslutterModalIndex } from './BeslutterModalIndex';
 
 describe('<BeslutterModalIndex>', () => {
   const behandling = {

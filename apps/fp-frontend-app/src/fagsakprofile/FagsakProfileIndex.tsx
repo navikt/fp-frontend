@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Navigate, NavLink, useLocation, useMatch } from 'react-router-dom';
 import { Location } from 'history';
 import { FormattedMessage, useIntl } from 'react-intl';
@@ -14,11 +14,11 @@ import { AAREG_URL, AINNTEKT_URL, GOSYS_URL, getModiaUrl } from '@navikt/fp-kons
 
 import { FagsakApiKeys, restFagsakApiHooks } from '../data/fagsakContextApi';
 import { getLocationWithDefaultProsessStegAndFakta, pathToBehandling, pathToBehandlinger } from '../app/paths';
-import BehandlingMenuIndex from '../behandlingmenu/BehandlingMenuIndex';
-import RisikoklassifiseringIndex from './risikoklassifisering/RisikoklassifiseringIndex';
+import { BehandlingMenuIndex } from '../behandlingmenu/BehandlingMenuIndex';
+import { RisikoklassifiseringIndex } from './risikoklassifisering/RisikoklassifiseringIndex';
 import { useFpSakKodeverkMedNavn, useGetKodeverkFn } from '../data/useKodeverk';
-import FagsakData from '../fagsak/FagsakData';
-import ErrorBoundary from '../app/ErrorBoundary';
+import { FagsakData } from '../fagsak/FagsakData';
+import { ErrorBoundary } from '../app/ErrorBoundary';
 
 import styles from './fagsakProfileIndex.module.css';
 
@@ -39,7 +39,7 @@ const finnFagsakMarkeringTekst = (fagsak: Fagsak): string[] => {
   return fagsak.fagsakMarkeringer.map(m => m.kortNavn).filter(navn => !!navn) as string[];
 };
 
-interface OwnProps {
+interface Props {
   fagsakData: FagsakData;
   behandlingUuid?: string;
   behandlingVersjon?: number;
@@ -48,14 +48,14 @@ interface OwnProps {
   oppdaterFagsak: () => void;
 }
 
-const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
+export const FagsakProfileIndex = ({
   fagsakData,
   behandlingUuid,
   behandlingVersjon,
   setBehandling,
   hentOgSettBehandling,
   oppdaterFagsak,
-}) => {
+}: Props) => {
   const intl = useIntl();
   const [showAll, setShowAll] = useState(!behandlingUuid);
   const toggleShowAll = useCallback(() => setShowAll(!showAll), [showAll]);
@@ -195,5 +195,3 @@ const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
     </div>
   );
 };
-
-export default FagsakProfileIndex;

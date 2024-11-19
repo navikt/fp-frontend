@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { useIntl } from 'react-intl';
 
 import { BehandlingStatus, BehandlingType, AksjonspunktKode, isKlageAvvist } from '@navikt/fp-kodeverk';
@@ -6,8 +6,8 @@ import { FormkravMellomlagretDataType, FormkravProsessIndex } from '@navikt/fp-p
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { KlageVurdering } from '@navikt/fp-types';
 
-import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
-import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
+import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP];
@@ -17,7 +17,7 @@ type EndepunktPanelData = {
   klageVurdering?: KlageVurdering;
 };
 
-interface OwnProps {
+interface Props {
   alleBehandlinger: {
     uuid: string;
     type: string;
@@ -29,11 +29,11 @@ interface OwnProps {
   hentOgSettBehandling: (keepData?: boolean) => void;
 }
 
-const FormKravFamOgPensjonProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
+export const FormKravFamOgPensjonProsessStegInitPanel = ({
   alleBehandlinger,
   hentOgSettBehandling,
   ...props
-}) => {
+}: Props & ProsessPanelInitProps) => {
   const intl = useIntl();
 
   const avsluttedeBehandlinger = useMemo(
@@ -71,5 +71,3 @@ const FormKravFamOgPensjonProsessStegInitPanel: FunctionComponent<OwnProps & Pro
     />
   );
 };
-
-export default FormKravFamOgPensjonProsessStegInitPanel;

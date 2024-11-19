@@ -1,7 +1,7 @@
 import { Behandling } from '@navikt/fp-types';
 import { AksjonspunktStatus, BehandlingType, BehandlingStatus, AksjonspunktKode } from '@navikt/fp-kodeverk';
 
-import getAlleMerknaderFraBeslutter from './getAlleMerknaderFraBeslutter';
+import { getAlleMerknaderFraBeslutter } from './getAlleMerknaderFraBeslutter';
 
 describe('<getAlleMerknaderFraBeslutter>', () => {
   const behandling = {

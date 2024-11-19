@@ -18,7 +18,7 @@ import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, Behandling, Fagsak } from '@navikt/fp-types';
 
 import * as Felles from '../../felles/prosess/useStandardProsessPanelProps';
-import InnsynVedtakProsessStegInitPanel from './InnsynVedtakProsessStegInitPanel';
+import { InnsynVedtakProsessStegInitPanel } from './InnsynVedtakProsessStegInitPanel';
 
 import messages from '../../../../i18n/nb_NO.json';
 import { BehandlingApiKeys, requestBehandlingApi } from '../../../data/behandlingContextApi';
@@ -59,7 +59,7 @@ const innsyn = {
 
 describe('<InnsynVedtakProsessStegInitPanel>', () => {
   const submitCallback = vi.fn();
-  vi.spyOn(Felles, 'default').mockImplementation(() => ({
+  vi.spyOn(Felles, 'useStandardProsessPanelProps').mockImplementation(() => ({
     behandling,
     alleMerknaderFraBeslutter: {},
     submitCallback,

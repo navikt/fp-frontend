@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { KodeverkMedNavn } from '@navikt/fp-types';
@@ -10,11 +10,11 @@ import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Alert } from '@navikt/ds-react';
 import { useFpSakKodeverk } from '../../data/useKodeverk';
-import useVisForhandsvisningAvMelding, { ForhandsvisFunksjon } from '../../data/useVisForhandsvisningAvMelding';
+import { useVisForhandsvisningAvMelding, ForhandsvisFunksjon } from '../../data/useVisForhandsvisningAvMelding';
 import { FagsakApiKeys, SubmitMessageParams, restFagsakApiHooks } from '../../data/fagsakContextApi';
-import FagsakData from '../../fagsak/FagsakData';
-import SettPaVentReadOnlyModal from './SettPaVentReadOnlyModal';
-import SupportHeaderAndContent from '../SupportHeader';
+import { FagsakData } from '../../fagsak/FagsakData';
+import { SettPaVentReadOnlyModal } from './SettPaVentReadOnlyModal';
+import { SupportHeaderAndContent } from '../SupportHeader';
 
 import styles from './MeldingIndex.module.css';
 
@@ -96,7 +96,7 @@ const finnKanIkkeLagreMeldingTekst = (kanVeilede: boolean, behandlingKanSendeMel
   return 'MeldingIndex.IkkeTilgjengeligAvsluttet';
 };
 
-interface OwnProps {
+interface Props {
   fagsakData: FagsakData;
   valgtBehandlingUuid: string;
   meldingFormData?: any;
@@ -111,13 +111,13 @@ const EMPTY_ARRAY = [] as KodeverkMedNavn[];
  *
  * Har ansvar for å hente mottakere og brevmaler fra serveren.
  */
-const MeldingIndex: FunctionComponent<OwnProps> = ({
+export const MeldingIndex = ({
   fagsakData,
   valgtBehandlingUuid,
   meldingFormData,
   setMeldingFormData,
   hentOgSettBehandling,
-}) => {
+}: Props) => {
   const intl = useIntl();
   const [showSettPaVentModal, setShowSettPaVentModal] = useState(false);
   const [showMessagesModal, setShowMessageModal] = useState(false);
@@ -220,5 +220,3 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-
-export default MeldingIndex;

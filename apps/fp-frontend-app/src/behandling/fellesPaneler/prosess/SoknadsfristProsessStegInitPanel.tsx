@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
@@ -6,9 +6,9 @@ import { VurderSoknadsfristForeldrepengerIndex } from '@navikt/fp-prosess-soknad
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { Soknad } from '@navikt/fp-types';
 
-import skalViseProsessPanel from '../../felles/prosess/skalViseProsessPanel';
-import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
-import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
+import { skalViseProsessPanel } from '../../felles/prosess/skalViseProsessPanel';
+import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_SOKNADSFRIST_FORELDREPENGER];
@@ -18,7 +18,7 @@ type EndepunktPanelData = {
   soknad: Soknad;
 };
 
-const SoknadsfristProsessStegInitPanel: FunctionComponent<ProsessPanelInitProps> = props => (
+export const SoknadsfristProsessStegInitPanel = (props: ProsessPanelInitProps) => (
   <ProsessDefaultInitPanel<EndepunktPanelData>
     {...props}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
@@ -29,5 +29,3 @@ const SoknadsfristProsessStegInitPanel: FunctionComponent<ProsessPanelInitProps>
     renderPanel={data => <VurderSoknadsfristForeldrepengerIndex {...data} />}
   />
 );
-
-export default SoknadsfristProsessStegInitPanel;

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { useIntl } from 'react-intl';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
@@ -6,8 +6,8 @@ import { ArbeidOgInntektFaktaIndex } from '@navikt/fp-fakta-arbeid-og-inntekt';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { ArbeidsgiverOpplysningerPerId, ArbeidOgInntektsmelding, AksessRettigheter } from '@navikt/fp-types';
 
-import FaktaPanelInitProps from '../../felles/typer/faktaPanelInitProps';
-import FaktaDefaultInitPanel from '../../felles/fakta/FaktaDefaultInitPanel';
+import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
+import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { BehandlingApiKeys, requestBehandlingApi, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING];
@@ -17,7 +17,7 @@ type EndepunktPanelData = {
   arbeidOgInntekt: ArbeidOgInntektsmelding;
 };
 
-interface OwnProps {
+interface Props {
   saksnummer: string;
   behandlingUuid: string;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -25,14 +25,14 @@ interface OwnProps {
   hentOgSettBehandling: () => void;
 }
 
-const ArbeidOgInntektFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = ({
+export const ArbeidOgInntektFaktaInitPanel = ({
   saksnummer,
   behandlingUuid,
   arbeidsgiverOpplysningerPerId,
   rettigheter,
   hentOgSettBehandling,
   ...props
-}) => {
+}: Props & FaktaPanelInitProps) => {
   const intl = useIntl();
 
   const { startRequest: registrerArbeidsforhold } = restBehandlingApiHooks.useRestApiRunner(
@@ -91,5 +91,3 @@ const ArbeidOgInntektFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInit
     />
   );
 };
-
-export default ArbeidOgInntektFaktaInitPanel;

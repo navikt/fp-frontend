@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { AksjonspunktKode, VilkarUtfallType } from '@navikt/fp-kodeverk';
@@ -14,8 +14,8 @@ import {
   UttaksresultatPeriode,
 } from '@navikt/fp-types';
 
-import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
-import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
+import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingApiKeys, requestBehandlingApi } from '../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_TILBAKETREKK];
@@ -35,16 +35,16 @@ type EndepunktPanelData = {
   uttaksresultatPerioder: UttaksresultatPeriode;
 };
 
-interface OwnProps {
+interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   personoversikt: Personoversikt;
 }
 
-const TilkjentYtelseFpProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
+export const TilkjentYtelseFpProsessStegInitPanel = ({
   arbeidsgiverOpplysningerPerId,
   personoversikt,
   ...props
-}) => (
+}: Props & ProsessPanelInitProps) => (
   <ProsessDefaultInitPanel<EndepunktPanelData>
     {...props}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
@@ -67,5 +67,3 @@ const TilkjentYtelseFpProsessStegInitPanel: FunctionComponent<OwnProps & Prosess
     )}
   />
 );
-
-export default TilkjentYtelseFpProsessStegInitPanel;

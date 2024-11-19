@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useIntl } from 'react-intl';
 
 import { VilkarUtfallType, AksjonspunktKode } from '@navikt/fp-kodeverk';
@@ -6,8 +6,8 @@ import { BeregningsresultatProsessIndex } from '@navikt/fp-prosess-beregningsres
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { AksessRettigheter, BeregningsresultatEs } from '@navikt/fp-types';
 
-import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
-import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
+import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingApiKeys, requestBehandlingApi } from '../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.OVERSTYR_BEREGNING];
@@ -17,14 +17,11 @@ type EndepunktPanelData = {
   beregningresultatEngangsstonad: BeregningsresultatEs;
 };
 
-interface OwnProps {
+interface Props {
   rettigheter: AksessRettigheter;
 }
 
-const BeregningEsProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
-  rettigheter,
-  ...props
-}) => {
+export const BeregningEsProsessStegInitPanel = ({ rettigheter, ...props }: Props & ProsessPanelInitProps) => {
   const [erOverstyrt, setOverstyrt] = useState(false);
   const toggleOverstyring = useCallback(() => setOverstyrt(!erOverstyrt), [erOverstyrt]);
 
@@ -53,5 +50,3 @@ const BeregningEsProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanel
     />
   );
 };
-
-export default BeregningEsProsessStegInitPanel;

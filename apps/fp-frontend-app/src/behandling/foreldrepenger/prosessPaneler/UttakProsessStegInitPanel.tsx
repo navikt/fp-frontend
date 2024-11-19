@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { AksjonspunktKode, VilkarUtfallType } from '@navikt/fp-kodeverk';
@@ -16,8 +16,8 @@ import {
   Ytelsefordeling,
 } from '@navikt/fp-types';
 
-import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
-import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
+import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingApiKeys, requestBehandlingApi, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
 
 const getStatusFromUttakresultat = (behandling: Behandling): string => {
@@ -57,18 +57,18 @@ type EndepunktPanelData = {
   uttaksresultatPerioder: UttaksresultatPeriode;
 };
 
-interface OwnProps {
+interface Props {
   rettigheter: AksessRettigheter;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   personoversikt: Personoversikt;
 }
 
-const UttakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
+export const UttakProsessStegInitPanel = ({
   rettigheter,
   arbeidsgiverOpplysningerPerId,
   personoversikt,
   ...props
-}) => {
+}: Props & ProsessPanelInitProps) => {
   const intl = useIntl();
   const { startRequest: oppdaterStønadskontoer } = restBehandlingApiHooks.useRestApiRunner(
     BehandlingApiKeys.STONADSKONTOER_GITT_UTTAKSPERIODER,
@@ -94,5 +94,3 @@ const UttakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitPr
     />
   );
 };
-
-export default UttakProsessStegInitPanel;

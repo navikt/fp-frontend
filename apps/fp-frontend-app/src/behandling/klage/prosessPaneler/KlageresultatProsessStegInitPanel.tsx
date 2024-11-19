@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useIntl } from 'react-intl';
 
 import { VilkarUtfallType, AksjonspunktStatus, BehandlingResultatType, AksjonspunktKode } from '@navikt/fp-kodeverk';
@@ -14,10 +14,10 @@ import {
 } from '@navikt/fp-types';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
-import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
-import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
-import useStandardProsessPanelProps from '../../felles/prosess/useStandardProsessPanelProps';
-import FatterVedtakStatusModal from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
+import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
+import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
+import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
 
 const lagForhandsvisCallback =
@@ -82,18 +82,18 @@ type EndepunktPanelData = {
   klageVurdering: KlageVurdering;
 };
 
-interface OwnProps {
+interface Props {
   fagsak: Fagsak;
   setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void;
   opneSokeside: () => void;
 }
 
-const KlageresultatProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
+export const KlageresultatProsessStegInitPanel = ({
   fagsak,
   setSkalOppdatereEtterBekreftelseAvAp,
   opneSokeside,
   ...props
-}) => {
+}: Props & ProsessPanelInitProps) => {
   const intl = useIntl();
 
   const [visFatterVedtakModal, toggleFatterVedtakModal] = useState(false);
@@ -141,5 +141,3 @@ const KlageresultatProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPan
     />
   );
 };
-
-export default KlageresultatProsessStegInitPanel;

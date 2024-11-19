@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
@@ -18,8 +18,8 @@ import {
   FtVilkar,
   FtBeregningsgrunnlag,
 } from '@navikt/ft-fakta-beregning';
-import FaktaPanelInitProps from '../../felles/typer/faktaPanelInitProps';
-import FaktaDefaultInitPanel from '../../felles/fakta/FaktaDefaultInitPanel';
+import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
+import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { BehandlingApiKeys, requestBehandlingApi } from '../../../data/behandlingContextApi';
 
 import '@navikt/ft-fakta-beregning/dist/style.css';
@@ -108,19 +108,16 @@ type EndepunktPanelData = {
   beregningsgrunnlag: Beregningsgrunnlag;
 };
 
-interface OwnProps {
+interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   rettigheter: AksessRettigheter;
 }
 
-/**
- * BeregningFaktaInitPanel
- */
-const BeregningFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = ({
+export const BeregningFaktaInitPanel = ({
   arbeidsgiverOpplysningerPerId,
   rettigheter,
   ...props
-}) => {
+}: Props & FaktaPanelInitProps) => {
   const intl = useIntl();
   return (
     <FaktaDefaultInitPanel<EndepunktPanelData>
@@ -146,5 +143,3 @@ const BeregningFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps>
     />
   );
 };
-
-export default BeregningFaktaInitPanel;

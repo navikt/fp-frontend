@@ -6,8 +6,8 @@ import { OmsorgOgRettFaktaIndex } from '@navikt/fp-fakta-omsorg-og-rett';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { Personoversikt, Ytelsefordeling } from '@navikt/fp-types';
 
-import FaktaPanelInitProps from '../../felles/typer/faktaPanelInitProps';
-import FaktaDefaultInitPanel from '../../felles/fakta/FaktaDefaultInitPanel';
+import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
+import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [
@@ -24,10 +24,7 @@ interface Props {
   personoversikt: Personoversikt;
 }
 
-/**
- * OmsorgOgRettFaktaInitPanel
- */
-const OmsorgOgRettFaktaInitPanel = ({ personoversikt, ...props }: Props & FaktaPanelInitProps) => (
+export const OmsorgOgRettFaktaInitPanel = ({ personoversikt, ...props }: Props & FaktaPanelInitProps) => (
   <FaktaDefaultInitPanel<EndepunktPanelData>
     {...props}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
@@ -38,5 +35,3 @@ const OmsorgOgRettFaktaInitPanel = ({ personoversikt, ...props }: Props & FaktaP
     renderPanel={data => <OmsorgOgRettFaktaIndex personoversikt={personoversikt} {...data} />}
   />
 );
-
-export default OmsorgOgRettFaktaInitPanel;

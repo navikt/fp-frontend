@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback } from 'react';
+import React, { useCallback } from 'react';
 
 import {
   AksessRettigheter,
@@ -9,31 +9,31 @@ import {
   Personoversikt,
 } from '@navikt/fp-types';
 
-import BehandlingContainer from '../felles/BehandlingContainer';
-import SakenFaktaInitPanel from '../fellesPaneler/fakta/SakenFaktaInitPanel';
-import ArbeidsforholdFaktaInitPanel from '../fellesPaneler/fakta/ArbeidsforholdFaktaInitPanel';
-import ArbeidOgInntektFaktaInitPanel from '../fellesPaneler/fakta/ArbeidOgInntektFaktaInitPanel';
-import YtelserFaktaInitPanel from '../fellesPaneler/fakta/YtelserFaktaInitPanel';
-import VergeFaktaInitPanel from '../fellesPaneler/fakta/VergeFaktaInitPanel';
-import FodseltilretteleggingFaktaInitPanel from './faktaPaneler/FodseltilretteleggingFaktaInitPanel';
-import OpptjeningsvilkaretFaktaInitPanel from '../fellesPaneler/fakta/OpptjeningsvilkaretFaktaInitPanel';
-import BeregningFaktaInitPanel from '../fellesPaneler/fakta/BeregningFaktaInitPanel';
-import FordelingFaktaInitPanel from '../fellesPaneler/fakta/FordelingFaktaInitPanel';
-import OpplysningspliktProsessStegInitPanel from '../fellesPaneler/prosess/OpplysningspliktProsessStegInitPanel';
-import InngangsvilkarSvpProsessStegInitPanel from './prosessPaneler/InngangsvilkarSvpProsessStegInitPanel';
-import BeregningsgrunnlagProsessStegInitPanel from '../fellesPaneler/prosess/BeregningsgrunnlagProsessStegInitPanel';
-import SoknadsfristProsessStegInitPanel from '../fellesPaneler/prosess/SoknadsfristProsessStegInitPanel';
-import FortsattMedlemskapProsessStegInitPanel from '../fellesPaneler/prosess/FortsattMedlemskapProsessStegInitPanel';
-import TilkjentYtelseProsessStegInitPanel from './prosessPaneler/TilkjentYtelseProsessStegInitPanel';
-import SimuleringProsessStegInitPanel from '../fellesPaneler/prosess/SimuleringProsessStegInitPanel';
-import VedtakSvpProsessStegInitPanel from './prosessPaneler/VedtakSvpProsessStegInitPanel';
-import PermisjonFaktaInitPanel from '../fellesPaneler/fakta/PermisjonFaktaInitPanel';
-import ProsessPanelInitProps, { ProsessPanelExtraInitProps } from '../felles/typer/prosessPanelInitProps';
-import FaktaPanelInitProps from '../felles/typer/faktaPanelInitProps';
-import InntektsmeldingerFaktaInitPanel from '../fellesPaneler/fakta/InntektsmeldingerFaktaInitPanel';
-import MedlemskapsvilkaretFaktaInitPanel from '../fellesPaneler/fakta/MedlemskapsvilkaretFaktaInitPanel';
+import { BehandlingContainer } from '../felles/BehandlingContainer';
+import { SakenFaktaInitPanel } from '../fellesPaneler/fakta/SakenFaktaInitPanel';
+import { ArbeidsforholdFaktaInitPanel } from '../fellesPaneler/fakta/ArbeidsforholdFaktaInitPanel';
+import { ArbeidOgInntektFaktaInitPanel } from '../fellesPaneler/fakta/ArbeidOgInntektFaktaInitPanel';
+import { YtelserFaktaInitPanel } from '../fellesPaneler/fakta/YtelserFaktaInitPanel';
+import { VergeFaktaInitPanel } from '../fellesPaneler/fakta/VergeFaktaInitPanel';
+import { FodseltilretteleggingFaktaInitPanel } from './faktaPaneler/FodseltilretteleggingFaktaInitPanel';
+import { OpptjeningsvilkaretFaktaInitPanel } from '../fellesPaneler/fakta/OpptjeningsvilkaretFaktaInitPanel';
+import { BeregningFaktaInitPanel } from '../fellesPaneler/fakta/BeregningFaktaInitPanel';
+import { FordelingFaktaInitPanel } from '../fellesPaneler/fakta/FordelingFaktaInitPanel';
+import { OpplysningspliktProsessStegInitPanel } from '../fellesPaneler/prosess/OpplysningspliktProsessStegInitPanel';
+import { InngangsvilkarSvpProsessStegInitPanel } from './prosessPaneler/InngangsvilkarSvpProsessStegInitPanel';
+import { BeregningsgrunnlagProsessStegInitPanel } from '../fellesPaneler/prosess/BeregningsgrunnlagProsessStegInitPanel';
+import { SoknadsfristProsessStegInitPanel } from '../fellesPaneler/prosess/SoknadsfristProsessStegInitPanel';
+import { FortsattMedlemskapProsessStegInitPanel } from '../fellesPaneler/prosess/FortsattMedlemskapProsessStegInitPanel';
+import { TilkjentYtelseProsessStegInitPanel } from './prosessPaneler/TilkjentYtelseProsessStegInitPanel';
+import { SimuleringProsessStegInitPanel } from '../fellesPaneler/prosess/SimuleringProsessStegInitPanel';
+import { VedtakSvpProsessStegInitPanel } from './prosessPaneler/VedtakSvpProsessStegInitPanel';
+import { PermisjonFaktaInitPanel } from '../fellesPaneler/fakta/PermisjonFaktaInitPanel';
+import { ProsessPanelInitProps, ProsessPanelExtraInitProps } from '../felles/typer/prosessPanelInitProps';
+import { FaktaPanelInitProps } from '../felles/typer/faktaPanelInitProps';
+import { InntektsmeldingerFaktaInitPanel } from '../fellesPaneler/fakta/InntektsmeldingerFaktaInitPanel';
+import { MedlemskapsvilkaretFaktaInitPanel } from '../fellesPaneler/fakta/MedlemskapsvilkaretFaktaInitPanel';
 
-interface OwnProps {
+interface Props {
   alleBehandlinger: BehandlingAppKontekst[];
   behandling: Behandling;
   fagsak: Fagsak;
@@ -48,7 +48,7 @@ interface OwnProps {
   hentOgSettBehandling: (keepData?: boolean) => void;
 }
 
-const SvangerskapspengerPaneler: FunctionComponent<OwnProps> = ({
+const SvangerskapspengerPaneler = ({
   alleBehandlinger,
   behandling,
   fagsak,
@@ -61,7 +61,7 @@ const SvangerskapspengerPaneler: FunctionComponent<OwnProps> = ({
   personoversikt,
   rettigheter,
   hentOgSettBehandling,
-}) => {
+}: Props) => {
   const faktaPaneler = useCallback(
     (props: FaktaPanelInitProps) => (
       <>

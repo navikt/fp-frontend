@@ -1,9 +1,7 @@
-import InngangsvilkarPanelData from './inngangsvilkarPanelData';
+import { InngangsvilkarPanelData } from './inngangsvilkarPanelData';
 
-type InngangsvilkarPanelInitProps = {
+export type InngangsvilkarPanelInitProps = {
   registrerInngangsvilkarPanel: (data: InngangsvilkarPanelData) => void;
   erPanelValgt: boolean;
   harInngangsvilkarApentAksjonspunkt: boolean;
 };
-
-export default InngangsvilkarPanelInitProps;

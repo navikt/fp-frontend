@@ -8,9 +8,9 @@ import { RestApiMock } from '@navikt/fp-utils-test';
 import { Fagsak, VergeBehandlingmenyValg, BehandlingOppretting } from '@navikt/fp-types';
 
 import { RawIntlProvider } from 'react-intl';
-import BehandlingMenuIndex from './BehandlingMenuIndex';
+import { BehandlingMenuIndex } from './BehandlingMenuIndex';
 import { requestFagsakApi, FagsakApiKeys } from '../data/fagsakContextApi';
-import FagsakData from '../fagsak/FagsakData';
+import { FagsakData } from '../fagsak/FagsakData';
 import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);

@@ -5,7 +5,7 @@ import { BehandlingStatus, BehandlingType } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, Behandling, AlleKodeverk } from '@navikt/fp-types';
 
-import BehandlingPaVent from './BehandlingPaVent';
+import { BehandlingPaVent } from './BehandlingPaVent';
 
 describe('<BehandlingPaVent>', () => {
   const behandling = {

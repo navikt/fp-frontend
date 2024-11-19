@@ -1,11 +1,11 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 
 import { AksjonspunktKode, AksjonspunktStatus, VilkarType } from '@navikt/fp-kodeverk';
 import { AksessRettigheter, Medlemskap } from '@navikt/fp-types';
 
-import InngangsvilkarPanelInitProps from '../../../felles/typer/inngangsvilkarPanelInitProps';
-import InngangsvilkarDefaultInitPanel from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
-import OverstyringPanelDef from '../../../felles/prosess/OverstyringPanelDef';
+import { InngangsvilkarPanelInitProps } from '../../../felles/typer/inngangsvilkarPanelInitProps';
+import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
+import { OverstyringPanelDef } from '../../../felles/prosess/OverstyringPanelDef';
 import { BehandlingApiKeys } from '../../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [
@@ -20,16 +20,16 @@ type EndepunktPanelData = {
   medlemskap: Medlemskap;
 };
 
-interface OwnProps {
+interface Props {
   behandlingVersjon: number;
   rettigheter: AksessRettigheter;
 }
 
-const MedlemskapForutgaendeInngangsvilkarInitPanel: FunctionComponent<OwnProps & InngangsvilkarPanelInitProps> = ({
+export const MedlemskapForutgaendeInngangsvilkarInitPanel = ({
   behandlingVersjon,
   rettigheter,
   ...props
-}) => (
+}: Props & InngangsvilkarPanelInitProps) => (
   <InngangsvilkarDefaultInitPanel<EndepunktPanelData>
     {...props}
     behandlingVersjon={behandlingVersjon}
@@ -74,5 +74,3 @@ const MedlemskapForutgaendeInngangsvilkarInitPanel: FunctionComponent<OwnProps &
     }}
   />
 );
-
-export default MedlemskapForutgaendeInngangsvilkarInitPanel;

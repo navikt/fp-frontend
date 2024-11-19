@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import { KlageVurdering as KlageVurderingKodeverk, AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
@@ -10,10 +10,10 @@ import { Behandling, Fagsak, ForhåndsvisMeldingParams, KlageVurdering } from '@
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
-import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
-import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
-import useStandardProsessPanelProps from '../../felles/prosess/useStandardProsessPanelProps';
-import KlageBehandlingModal from '../modaler/KlageBehandlingModal';
+import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
+import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
+import { KlageBehandlingModal } from '../modaler/KlageBehandlingModal';
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
 
 const lagForhandsvisCallback =
@@ -78,7 +78,7 @@ type EndepunktPanelData = {
   klageVurdering: KlageVurdering;
 };
 
-interface OwnProps {
+interface Props {
   fagsak: Fagsak;
   setSkalOppdatereEtterBekreftelseAvAp?: (skalHenteFagsak: boolean) => void;
   opneSokeside?: () => void;
@@ -89,7 +89,7 @@ interface OwnProps {
   hentOgSettBehandling: (keepData?: boolean) => void;
 }
 
-const VurderingFellesProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
+export const VurderingFellesProsessStegInitPanel = ({
   fagsak,
   setSkalOppdatereEtterBekreftelseAvAp,
   opneSokeside,
@@ -99,7 +99,7 @@ const VurderingFellesProsessStegInitPanel: FunctionComponent<OwnProps & ProsessP
   prosessPanelMenyTekst,
   hentOgSettBehandling,
   ...props
-}) => {
+}: Props & ProsessPanelInitProps) => {
   const [visModalKlageBehandling, toggleKlageModal] = useState(false);
 
   const standardPanelProps = useStandardProsessPanelProps();
@@ -154,5 +154,3 @@ const VurderingFellesProsessStegInitPanel: FunctionComponent<OwnProps & ProsessP
     />
   );
 };
-
-export default VurderingFellesProsessStegInitPanel;

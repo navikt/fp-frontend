@@ -1,16 +1,16 @@
-import React, { FunctionComponent, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { MenyTaAvVentIndex } from '@navikt/fp-sak-meny';
 import { Behandling, BehandlingAppKontekst } from '@navikt/fp-types';
 
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../../data/behandlingContextApi';
 
-interface OwnProps {
+interface Props {
   behandling: BehandlingAppKontekst;
   setBehandling: (behandling: Behandling | undefined) => void;
   lukkModal: () => void;
 }
 
-const TaAvVentMenyModal: FunctionComponent<OwnProps> = ({ behandling, setBehandling, lukkModal }) => {
+export const TaAvVentMenyModal = ({ behandling, setBehandling, lukkModal }: Props) => {
   const { startRequest: taBehandlingAvVent } = restBehandlingApiHooks.useRestApiRunner(
     BehandlingApiKeys.RESUME_BEHANDLING,
   );
@@ -30,5 +30,3 @@ const TaAvVentMenyModal: FunctionComponent<OwnProps> = ({ behandling, setBehandl
     />
   );
 };
-
-export default TaAvVentMenyModal;

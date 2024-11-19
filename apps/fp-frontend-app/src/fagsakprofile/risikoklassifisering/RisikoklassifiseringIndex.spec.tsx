@@ -6,10 +6,10 @@ import { KontrollresultatKode } from '@navikt/fp-sak-risikoklassifisering';
 import { RestApiMock } from '@navikt/fp-utils-test';
 import { Fagsak, BehandlingAppKontekst } from '@navikt/fp-types';
 
-import * as useTrackRouteParam from '../../app/useTrackRouteParam';
-import RisikoklassifiseringIndex from './RisikoklassifiseringIndex';
+import * as All from '../../app/useTrackRouteParam';
+import { RisikoklassifiseringIndex } from './RisikoklassifiseringIndex';
 import { requestFagsakApi, FagsakApiKeys } from '../../data/fagsakContextApi';
-import FagsakData from '../../fagsak/FagsakData';
+import { FagsakData } from '../../fagsak/FagsakData';
 
 const lagRisikoklassifisering = (kode: string) => ({
   kontrollresultat: kode,
@@ -38,7 +38,7 @@ const location = {
 const navAnsatt = { navn: 'Ann S. Att', kanSaksbehandle: true };
 
 describe('<RisikoklassifiseringIndex>', () => {
-  vi.spyOn(useTrackRouteParam, 'default').mockImplementation(() => ({
+  vi.spyOn(All, 'useTrackRouteParam').mockImplementation(() => ({
     selected: true,
     location,
   }));

@@ -1,11 +1,11 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { IntlShape, useIntl } from 'react-intl';
 
 import { VilkarType, AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { OmsorgVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-omsorg';
 import { Aksjonspunkt } from '@navikt/fp-types';
-import InngangsvilkarPanelInitProps from '../../../felles/typer/inngangsvilkarPanelInitProps';
-import InngangsvilkarDefaultInitPanel from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
+import { InngangsvilkarPanelInitProps } from '../../../felles/typer/inngangsvilkarPanelInitProps';
+import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 
 const AKSJONSPUNKT_TEKST_PER_KODE = {
   [AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKARET]: 'ErOmsorgVilkaarOppfyltForm.Paragraf',
@@ -27,14 +27,14 @@ const AKSJONSPUNKT_KODER = [
 
 const VILKAR_KODER = [VilkarType.OMSORGSVILKARET];
 
-interface OwnProps {
+interface Props {
   behandlingVersjon: number;
 }
 
-const OmsorgInngangsvilkarInitPanel: FunctionComponent<OwnProps & InngangsvilkarPanelInitProps> = ({
+export const OmsorgInngangsvilkarInitPanel = ({
   behandlingVersjon,
   ...props
-}) => {
+}: Props & InngangsvilkarPanelInitProps) => {
   const intl = useIntl();
   return (
     <InngangsvilkarDefaultInitPanel
@@ -48,5 +48,3 @@ const OmsorgInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsvilkar
     />
   );
 };
-
-export default OmsorgInngangsvilkarInitPanel;

@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 
 import { usePrevious } from '@navikt/ft-ui-komponenter';
-import ProsessPanelMenyData from '../typer/prosessPanelMenyData';
+import { ProsessPanelMenyData } from '../typer/prosessPanelMenyData';
 
 const DEFAULT_PANEL_VALGT = 'default';
 
-const useProsessMenyRegistrerer = (
+export const useProsessMenyRegistrerer = (
   registrerProsessPanel: (data: ProsessPanelMenyData) => void,
   id: string,
   tekst: string,
@@ -46,5 +46,3 @@ const useProsessMenyRegistrerer = (
 
   return skalVisesImeny && erPanelValgt;
 };
-
-export default useProsessMenyRegistrerer;

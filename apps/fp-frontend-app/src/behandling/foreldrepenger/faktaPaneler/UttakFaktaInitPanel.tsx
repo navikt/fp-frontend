@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
@@ -13,8 +13,8 @@ import {
   Fagsak,
 } from '@navikt/fp-types';
 
-import FaktaPanelInitProps from '../../felles/typer/faktaPanelInitProps';
-import FaktaDefaultInitPanel from '../../felles/fakta/FaktaDefaultInitPanel';
+import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
+import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { BehandlingApiKeys, requestBehandlingApi } from '../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [
@@ -38,21 +38,18 @@ type EndepunktPanelData = {
   ytelsefordeling: Ytelsefordeling;
 };
 
-interface OwnProps {
+interface Props {
   rettigheter: AksessRettigheter;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   fagsak: Fagsak;
 }
 
-/**
- * UttakFaktaInitPanel
- */
-const UttakFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = ({
+export const UttakFaktaInitPanel = ({
   rettigheter,
   arbeidsgiverOpplysningerPerId,
   fagsak,
   ...props
-}) => (
+}: Props & FaktaPanelInitProps) => (
   <FaktaDefaultInitPanel<EndepunktPanelData>
     {...props}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
@@ -75,5 +72,3 @@ const UttakFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = (
     )}
   />
 );
-
-export default UttakFaktaInitPanel;

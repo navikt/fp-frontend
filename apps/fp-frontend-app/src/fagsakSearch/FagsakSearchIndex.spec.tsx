@@ -7,7 +7,7 @@ import { FagsakEnkel, KjønnkodeEnum } from '@navikt/fp-types';
 import { RestApiMock } from '@navikt/fp-utils-test';
 
 import { requestFagsakApi, FagsakApiKeys } from '../data/fagsakContextApi';
-import FagsakSearchIndex from './FagsakSearchIndex';
+import { FagsakSearchIndex } from './FagsakSearchIndex';
 
 const mockHistoryPush = vi.fn();
 
