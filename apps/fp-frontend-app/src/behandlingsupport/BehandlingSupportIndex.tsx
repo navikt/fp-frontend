@@ -13,13 +13,13 @@ import {
 } from '@navikt/aksel-icons';
 import { getSupportPanelLocationCreator } from '../app/paths';
 import { HistorikkIndex } from './historikk/HistorikkIndex';
-import MeldingIndex from './melding/MeldingIndex';
-import DokumentIndex from './dokument/DokumentIndex';
-import TotrinnskontrollIndex from './totrinnskontroll/TotrinnskontrollIndex';
-import useTrackRouteParam from '../app/useTrackRouteParam';
-import FagsakData from '../fagsak/FagsakData';
-import NotatIndex from './notat/NotatIndex';
-import SupportTabs from './supportTabs';
+import { MeldingIndex } from './melding/MeldingIndex';
+import { DokumentIndex } from './dokument/DokumentIndex';
+import { TotrinnskontrollIndex } from './totrinnskontroll/TotrinnskontrollIndex';
+import { useTrackRouteParam } from '../app/useTrackRouteParam';
+import { FagsakData } from '../fagsak/FagsakData';
+import { NotatIndex } from './notat/NotatIndex';
+import { SupportTabs } from './supportTabs';
 
 import styles from './behandlingSupportIndex.module.css';
 
@@ -54,7 +54,7 @@ interface OwnProps {
  * Har ansvar for å lage navigasjonsrad med korrekte navigasjonsvalg, og route til rett
  * støttepanelkomponent ihht. gitt parameter i URL-en.
  */
-const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
+export const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
   fagsakData,
   behandlingUuid,
   behandlingVersjon,
@@ -187,5 +187,3 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
     </Tabs>
   );
 };
-
-export default BehandlingSupportIndex;
