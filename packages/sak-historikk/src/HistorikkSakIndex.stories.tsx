@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Historikkinnslag } from '@navikt/fp-types';
 import { alleKodeverk, alleKodeverkTilbakekreving, withRouter } from '@navikt/fp-storybook-utils';
 import HistorikkSakIndex from './HistorikkSakIndex';
-import { historikkAktor as HistorikkAktor, navBrukerKjonn } from '@navikt/fp-kodeverk';
+import { HistorikkAktor, NavBrukerKjonn } from '@navikt/fp-kodeverk';
 import { skjermlenkeCodes } from '@navikt/fp-konstanter';
 
 const historikkInnslag: Historikkinnslag[] = [
@@ -64,7 +64,7 @@ const meta = {
     valgtBehandlingUuid: undefined,
     historikkFpSak: historikkInnslag,
     historikkFpTilbake: [],
-    kjønn: navBrukerKjonn.KVINNE,
+    kjønn: NavBrukerKjonn.KVINNE,
     alleKodeverkFpSak: alleKodeverk as any,
     alleKodeverkFpTilbake: alleKodeverkTilbakekreving as any,
     saksnummer: '2',
