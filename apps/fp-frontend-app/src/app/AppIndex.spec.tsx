@@ -7,7 +7,7 @@ import { composeStories } from '@storybook/react';
 
 import { RestApiMock } from '@navikt/fp-utils-test';
 
-import AppIndex from './AppIndex';
+import { AppIndex } from './AppIndex';
 import { requestFagsakApi, FagsakApiKeys } from '../data/fagsakContextApi';
 
 import * as stories from './AppIndex.stories';

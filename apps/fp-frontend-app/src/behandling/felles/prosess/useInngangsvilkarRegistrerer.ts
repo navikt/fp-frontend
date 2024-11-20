@@ -1,8 +1,8 @@
 import { useState, useCallback, useEffect } from 'react';
 
-import InngangsvilkarPanelData from '../typer/inngangsvilkarPanelData';
+import { InngangsvilkarPanelData } from '../typer/inngangsvilkarPanelData';
 
-const useInngangsvilkarRegistrerer = (
+export const useInngangsvilkarRegistrerer = (
   registrerInngangsvilkarPanel: (data: InngangsvilkarPanelData) => void,
   behandlingVersjon: number,
   id: string,
@@ -31,5 +31,3 @@ const useInngangsvilkarRegistrerer = (
 
   return { erOverstyrt, toggleOverstyring };
 };
-
-export default useInngangsvilkarRegistrerer;

@@ -5,13 +5,13 @@ import { RestKey } from '@navikt/fp-rest-api';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { StandardProsessPanelProps } from '@navikt/fp-types';
 
-import InngangsvilkarPanelInitProps from '../typer/inngangsvilkarPanelInitProps';
-import useStandardProsessPanelProps from './useStandardProsessPanelProps';
-import skalViseProsessPanel from './skalViseProsessPanel';
-import useInngangsvilkarRegistrerer from './useInngangsvilkarRegistrerer';
+import { InngangsvilkarPanelInitProps } from '../typer/inngangsvilkarPanelInitProps';
+import { useStandardProsessPanelProps } from './useStandardProsessPanelProps';
+import { skalViseProsessPanel } from './skalViseProsessPanel';
+import { useInngangsvilkarRegistrerer } from './useInngangsvilkarRegistrerer';
 import { restBehandlingApiHooks } from '../../../data/behandlingContextApi';
 
-export type OwnProps<PANEL_DATA> = {
+export type Props<PANEL_DATA> = {
   behandlingVersjon: number;
   panelEndepunkter?: RestKey<any, any>[];
   aksjonspunktKoder?: string[];
@@ -25,7 +25,7 @@ export type OwnProps<PANEL_DATA> = {
   hentInngangsvilkarPanelTekst: (data: StandardProsessPanelProps) => string;
 };
 
-const InngangsvilkarDefaultInitPanel = <PANEL_DATA,>({
+export const InngangsvilkarDefaultInitPanel = <PANEL_DATA,>({
   erPanelValgt,
   behandlingVersjon,
   registrerInngangsvilkarPanel,
@@ -35,7 +35,7 @@ const InngangsvilkarDefaultInitPanel = <PANEL_DATA,>({
   renderPanel,
   inngangsvilkarPanelKode,
   hentInngangsvilkarPanelTekst,
-}: OwnProps<PANEL_DATA> & InngangsvilkarPanelInitProps) => {
+}: Props<PANEL_DATA> & InngangsvilkarPanelInitProps) => {
   const standardPanelProps = useStandardProsessPanelProps(aksjonspunktKoder, vilkarKoder);
 
   const skalVises = skalViseProsessPanel(standardPanelProps.aksjonspunkter, vilkarKoder, standardPanelProps.vilkar);
@@ -77,5 +77,3 @@ const InngangsvilkarDefaultInitPanel = <PANEL_DATA,>({
     toggleOverstyring,
   );
 };
-
-export default InngangsvilkarDefaultInitPanel;

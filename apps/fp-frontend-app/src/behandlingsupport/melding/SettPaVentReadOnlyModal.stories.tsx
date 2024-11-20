@@ -1,19 +1,13 @@
-import React from 'react';
-import { RawIntlProvider } from 'react-intl';
 import { action } from '@storybook/addon-actions';
-import { createIntl } from '@navikt/ft-utils';
 
+import { getIntlDecorator } from '@navikt/fp-storybook-utils';
+import { Meta, StoryObj } from '@storybook/react/*';
 import messages from '../../../i18n/nb_NO.json';
-import SettPaVentReadOnlyModal from './SettPaVentReadOnlyModal';
+import { SettPaVentReadOnlyModal } from './SettPaVentReadOnlyModal';
 
-const intl = createIntl(messages);
+const withIntl = getIntlDecorator(messages);
 
-export default {
-  title: 'app/settpavent/SettPaVentReadOnlyModal',
-  component: SettPaVentReadOnlyModal,
-};
-
-const ventearsaker = [
+const VENTEARSAKER = [
   {
     kode: 'test',
     navn: 'Dette er en venteårsak',
@@ -21,8 +15,19 @@ const ventearsaker = [
   },
 ];
 
-export const visModal = () => (
-  <RawIntlProvider value={intl}>
-    <SettPaVentReadOnlyModal ventearsaker={ventearsaker} ventearsak="test" lukkCallback={action('button-click')} />
-  </RawIntlProvider>
-);
+const meta = {
+  title: 'app/settpavent/SettPaVentReadOnlyModal',
+  component: SettPaVentReadOnlyModal,
+  decorators: [withIntl],
+} satisfies Meta<typeof SettPaVentReadOnlyModal>;
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: {
+    ventearsaker: VENTEARSAKER,
+    ventearsak: 'test',
+    lukkCallback: action('button-click'),
+  },
+};

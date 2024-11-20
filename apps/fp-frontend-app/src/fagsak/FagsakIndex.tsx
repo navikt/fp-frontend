@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { Route, Navigate, useLocation, Routes } from 'react-router-dom';
 import { useIntl } from 'react-intl';
 import { Location } from 'history';
@@ -8,10 +8,10 @@ import { BehandlingType } from '@navikt/fp-kodeverk';
 import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 import { AnnenPartBehandling, Behandling } from '@navikt/fp-types';
 
-import BehandlingerIndex from '../behandling/BehandlingerIndex';
-import useTrackRouteParam from '../app/useTrackRouteParam';
-import BehandlingSupportIndex from '../behandlingsupport/BehandlingSupportIndex';
-import FagsakProfileIndex from '../fagsakprofile/FagsakProfileIndex';
+import { BehandlingerIndex } from '../behandling/BehandlingerIndex';
+import { useTrackRouteParam } from '../app/useTrackRouteParam';
+import { BehandlingSupportIndex } from '../behandlingsupport/BehandlingSupportIndex';
+import { FagsakProfileIndex } from '../fagsakprofile/FagsakProfileIndex';
 import {
   pathToMissingPage,
   erUrlUnderBehandling,
@@ -19,10 +19,10 @@ import {
   behandlingerRoutePath,
   pathToAnnenPart,
 } from '../app/paths';
-import FagsakGrid from './components/FagsakGrid';
+import { FagsakGrid } from './components/FagsakGrid';
 import { requestFagsakApi } from '../data/fagsakContextApi';
-import useHentFagsak from './useHentFagsak';
-import ErrorBoundary from '../app/ErrorBoundary';
+import { useHentFagsak } from './useHentFagsak';
+import { ErrorBoundary } from '../app/ErrorBoundary';
 import { BehandlingApiKeys, requestBehandlingApi, restBehandlingApiHooks } from '../data/behandlingContextApi';
 
 const finnLenkeTilAnnenPart = (annenPartBehandling: AnnenPartBehandling): string =>
@@ -36,7 +36,7 @@ const finnSkalIkkeHenteData = (location: Location, selectedSaksnummer?: string, 
  *
  * Er rot for for fagsakdelen av hovedvinduet, og har ansvar å legge valgt saksnummer fra URL-en i staten.
  */
-const FagsakIndex: FunctionComponent = () => {
+export const FagsakIndex = () => {
   const intl = useIntl();
 
   const [requestPendingMessage, setRequestPendingMessage] = useState<string>();
@@ -193,5 +193,3 @@ const FagsakIndex: FunctionComponent = () => {
     </>
   );
 };
-
-export default FagsakIndex;

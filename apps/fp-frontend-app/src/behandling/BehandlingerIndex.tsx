@@ -1,13 +1,13 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { IngenBehandlingValgtPanel } from '@navikt/fp-sak-infosider';
 import { Behandling } from '@navikt/fp-types';
 
 import { behandlingRoutePath } from '../app/paths';
-import BehandlingIndex from './BehandlingIndex';
-import FagsakData from '../fagsak/FagsakData';
+import { BehandlingIndex } from './BehandlingIndex';
+import { FagsakData } from '../fagsak/FagsakData';
 
-interface OwnProps {
+interface Props {
   fagsakData: FagsakData;
   setBehandling: (behandling: Behandling) => void;
   hentOgSettBehandling: () => void;
@@ -16,14 +16,14 @@ interface OwnProps {
   setBehandlingUuid: (uuid: string) => void;
 }
 
-const BehandlingerIndex: FunctionComponent<OwnProps> = ({
+export const BehandlingerIndex = ({
   fagsakData,
   setBehandling,
   behandling,
   hentOgSettBehandling,
   setRequestPendingMessage,
   setBehandlingUuid,
-}) => (
+}: Props) => (
   <Routes>
     <Route
       path={behandlingRoutePath}
@@ -41,5 +41,3 @@ const BehandlingerIndex: FunctionComponent<OwnProps> = ({
     <Route path="/" element={<IngenBehandlingValgtPanel numBehandlinger={fagsakData.getAlleBehandlinger().length} />} />
   </Routes>
 );
-
-export default BehandlingerIndex;

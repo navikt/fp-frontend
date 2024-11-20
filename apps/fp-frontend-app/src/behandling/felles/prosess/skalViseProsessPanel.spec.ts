@@ -1,7 +1,7 @@
 import { VilkarType, AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Vilkar } from '@navikt/fp-types';
 
-import skalViseProsessPanel from './skalViseProsessPanel';
+import { skalViseProsessPanel } from './skalViseProsessPanel';
 
 describe('skalViseProsessPanel', () => {
   it('skal vise prosesspanel når en har aksjonspunkt men ikke har tilknyttet noen vilkår', () => {

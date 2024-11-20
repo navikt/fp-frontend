@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { FagsakYtelseType, AksjonspunktKode, adopsjonsvilkarene } from '@navikt/fp-kodeverk';
@@ -6,8 +6,8 @@ import { AdopsjonFaktaIndex } from '@navikt/fp-fakta-adopsjon';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { Fagsak, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
 
-import FaktaPanelInitProps from '../../felles/typer/faktaPanelInitProps';
-import FaktaDefaultInitPanel from '../../felles/fakta/FaktaDefaultInitPanel';
+import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
+import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [
@@ -22,14 +22,11 @@ type EndepunktPanelData = {
   soknad: Soknad;
 };
 
-interface OwnProps {
+interface Props {
   fagsak: Fagsak;
 }
 
-/**
- * AdopsjonsvilkaretFaktaInitPanel
- */
-const AdopsjonsvilkaretFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = ({ fagsak, ...props }) => (
+export const AdopsjonsvilkaretFaktaInitPanel = ({ fagsak, ...props }: Props & FaktaPanelInitProps) => (
   <FaktaDefaultInitPanel<EndepunktPanelData>
     {...props}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
@@ -47,5 +44,3 @@ const AdopsjonsvilkaretFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelIn
     )}
   />
 );
-
-export default AdopsjonsvilkaretFaktaInitPanel;

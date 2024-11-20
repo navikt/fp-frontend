@@ -1,12 +1,12 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { YtelserFaktaIndex } from '@navikt/fp-fakta-ytelser';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { InntektArbeidYtelse } from '@navikt/fp-types';
 
-import FaktaPanelInitProps from '../../felles/typer/faktaPanelInitProps';
-import FaktaDefaultInitPanel from '../../felles/fakta/FaktaDefaultInitPanel';
+import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
+import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.INNTEKT_ARBEID_YTELSE];
@@ -14,10 +14,7 @@ type EndepunktPanelData = {
   inntektArbeidYtelse: InntektArbeidYtelse;
 };
 
-/**
- * YtelserFaktaInitPanel
- */
-const YtelserFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = props => (
+export const YtelserFaktaInitPanel = (props: FaktaPanelInitProps) => (
   <FaktaDefaultInitPanel<EndepunktPanelData>
     {...props}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
@@ -27,5 +24,3 @@ const YtelserFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = props => (
     renderPanel={data => <YtelserFaktaIndex {...data} />}
   />
 );
-
-export default YtelserFaktaInitPanel;

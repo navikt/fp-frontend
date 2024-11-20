@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { ProsessStegCode } from '@navikt/fp-konstanter';
@@ -14,8 +14,8 @@ import {
   FtBeregningsgrunnlag,
 } from '@navikt/ft-prosess-beregningsgrunnlag';
 
-import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
-import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
+import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
 
 import '@navikt/ft-prosess-beregningsgrunnlag/dist/style.css';
@@ -99,14 +99,14 @@ type EndepunktPanelData = {
   beregningsgrunnlag?: Beregningsgrunnlag;
 };
 
-interface OwnProps {
+interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
-const BeregningsgrunnlagProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
+export const BeregningsgrunnlagProsessStegInitPanel = ({
   arbeidsgiverOpplysningerPerId,
   ...props
-}) => (
+}: Props & ProsessPanelInitProps) => (
   <ProsessDefaultInitPanel<EndepunktPanelData>
     {...props}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
@@ -127,5 +127,3 @@ const BeregningsgrunnlagProsessStegInitPanel: FunctionComponent<OwnProps & Prose
     )}
   />
 );
-
-export default BeregningsgrunnlagProsessStegInitPanel;

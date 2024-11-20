@@ -6,7 +6,7 @@ import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, Behandling, Fagsak } from '@navikt/fp-types';
 
 import * as Felles from './useStandardProsessPanelProps';
-import InngangsvilkarDefaultInitPanel from './InngangsvilkarDefaultInitPanel';
+import { InngangsvilkarDefaultInitPanel } from './InngangsvilkarDefaultInitPanel';
 
 const behandling = {
   uuid: '1',
@@ -40,7 +40,7 @@ const defaultProps = {
 
 describe('<InngangsvilkarDefaultInitPanel>', () => {
   it('skal ikke vise panel når en ikke har åpne aksjonspunkter', async () => {
-    vi.spyOn(Felles, 'default').mockImplementation(() => ({
+    vi.spyOn(Felles, 'useStandardProsessPanelProps').mockImplementation(() => ({
       ...defaultProps,
       aksjonspunkter: [] as Aksjonspunkt[],
     }));
@@ -61,7 +61,7 @@ describe('<InngangsvilkarDefaultInitPanel>', () => {
   });
 
   it('skal vise panel', async () => {
-    vi.spyOn(Felles, 'default').mockImplementation(() => defaultProps);
+    vi.spyOn(Felles, 'useStandardProsessPanelProps').mockImplementation(() => defaultProps);
 
     render(
       <InngangsvilkarDefaultInitPanel

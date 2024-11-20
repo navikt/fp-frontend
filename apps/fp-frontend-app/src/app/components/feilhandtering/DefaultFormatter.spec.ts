@@ -1,5 +1,5 @@
-import DefaultFormatter from './DefaultFormatter';
-import ErrorMessage from './ErrorMessage';
+import { DefaultFormatter } from './DefaultFormatter';
+import { ErrorMessage } from './ErrorMessage';
 
 describe('DefaultFormatter', () => {
   it('skal formatere feil der en har feilmelding i et objekt', () => {

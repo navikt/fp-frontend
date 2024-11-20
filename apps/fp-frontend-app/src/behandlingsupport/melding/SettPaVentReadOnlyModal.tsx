@@ -1,8 +1,8 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import dayjs from 'dayjs';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import { Button, Modal, Heading, Label, BodyShort, HStack } from '@navikt/ds-react';
+import { Button, Modal, Heading, Label, BodyShort, HStack, VStack } from '@navikt/ds-react';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 
 import { KodeverkMedNavn } from '@navikt/fp-types';
@@ -15,18 +15,13 @@ const finnFrist = (): string => {
   return dayjs(date).format(ISO_DATE_FORMAT);
 };
 
-export type FormValues = {
-  frist?: string;
-  ventearsak?: string;
-};
-
-interface PureOwnProps {
+interface Props {
   lukkCallback: () => void;
   ventearsaker: KodeverkMedNavn[];
   ventearsak?: string;
 }
 
-const SettPaVentReadOnlyModal: FunctionComponent<PureOwnProps> = ({ lukkCallback, ventearsaker, ventearsak }) => {
+export const SettPaVentReadOnlyModal = ({ lukkCallback, ventearsaker, ventearsak }: Props) => {
   const intl = useIntl();
 
   return (
@@ -45,20 +40,20 @@ const SettPaVentReadOnlyModal: FunctionComponent<PureOwnProps> = ({ lukkCallback
       </Modal.Header>
       <Modal.Body>
         <HStack gap="6">
-          <div>
+          <VStack gap="1">
             <Label>
               <FormattedMessage id="SettPaVentReadOnlyModal.Arsak" />
             </Label>
             <BodyShort>{ventearsaker.find(v => v.kode === ventearsak)?.navn}</BodyShort>
-          </div>
-          <div>
+          </VStack>
+          <VStack gap="1">
             <Label>
               <FormattedMessage id="SettPaVentReadOnlyModal.Frist" />
             </Label>
             <BodyShort>
               <DateLabel dateString={finnFrist()} />
             </BodyShort>
-          </div>
+          </VStack>
         </HStack>
       </Modal.Body>
       <Modal.Footer>
@@ -69,5 +64,3 @@ const SettPaVentReadOnlyModal: FunctionComponent<PureOwnProps> = ({ lukkCallback
     </Modal>
   );
 };
-
-export default SettPaVentReadOnlyModal;

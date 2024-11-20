@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { BesteberegningFaktaIndex } from '@navikt/fp-fakta-besteberegning';
@@ -7,8 +7,8 @@ import { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag } from '@navikt/fp-ty
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
-import FaktaPanelInitProps from '../../felles/typer/faktaPanelInitProps';
-import FaktaDefaultInitPanel from '../../felles/fakta/FaktaDefaultInitPanel';
+import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
+import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { BehandlingApiKeys, requestBehandlingApi } from '../../../data/behandlingContextApi';
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.BEREGNINGSGRUNNLAG];
@@ -16,17 +16,14 @@ type EndepunktPanelData = {
   beregningsgrunnlag: Beregningsgrunnlag;
 };
 
-interface OwnProps {
+interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
-/**
- * BesteberegningFaktaInitPanel
- */
-const BesteberegningFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = ({
+export const BesteberegningFaktaInitPanel = ({
   arbeidsgiverOpplysningerPerId,
   ...props
-}) => (
+}: Props & FaktaPanelInitProps) => (
   <FaktaDefaultInitPanel<EndepunktPanelData>
     {...props}
     aksjonspunktKoder={[
@@ -42,5 +39,3 @@ const BesteberegningFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitP
     )}
   />
 );
-
-export default BesteberegningFaktaInitPanel;

@@ -1,9 +1,9 @@
-import React, { FunctionComponent, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
 import styles from './fagsakGrid.module.css';
 
-interface OwnProps {
+interface Props {
   behandlingContent: ReactNode;
   profileAndNavigationContent: ReactNode;
   supportContent: ReactNode;
@@ -15,12 +15,12 @@ interface OwnProps {
  *
  * Presentasjonskomponent. Har ansvar for å sette opp applikasjonens hovedgrid.
  */
-const FagsakGrid: FunctionComponent<OwnProps> = ({
+export const FagsakGrid = ({
   behandlingContent,
   profileAndNavigationContent,
   supportContent,
   visittkortContent,
-}) => {
+}: Props) => {
   const isSmallScreen = useMediaQuery({ maxWidth: 1701 });
   const isBigScreen = useMediaQuery({ minWidth: 1702 });
   return (
@@ -39,5 +39,3 @@ const FagsakGrid: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-
-export default FagsakGrid;

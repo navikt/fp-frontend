@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import { createIntl } from '@navikt/ft-utils';
 
-import Home from './Home';
+import { Home } from './Home';
 
 import messages from '../../../i18n/nb_NO.json';
 

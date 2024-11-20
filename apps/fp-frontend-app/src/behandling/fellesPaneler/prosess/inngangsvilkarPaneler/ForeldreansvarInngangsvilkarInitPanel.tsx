@@ -1,12 +1,12 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { IntlShape, useIntl } from 'react-intl';
 
 import { VilkarType, AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ForeldreansvarVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-foreldreansvar';
 import { Aksjonspunkt } from '@navikt/fp-types';
 
-import InngangsvilkarPanelInitProps from '../../../felles/typer/inngangsvilkarPanelInitProps';
-import InngangsvilkarDefaultInitPanel from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
+import { InngangsvilkarPanelInitProps } from '../../../felles/typer/inngangsvilkarPanelInitProps';
+import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
@@ -32,14 +32,14 @@ const hentAksjonspunktTekst = (intl: IntlShape, aksjonspunkter: Aksjonspunkt[] =
 
 const VILKAR_KODER = [VilkarType.FORELDREANSVARSVILKARET_2_LEDD, VilkarType.FORELDREANSVARSVILKARET_4_LEDD];
 
-interface OwnProps {
+interface Props {
   behandlingVersjon: number;
 }
 
-const ForeldreansvarInngangsvilkarInitPanel: FunctionComponent<OwnProps & InngangsvilkarPanelInitProps> = ({
+export const ForeldreansvarInngangsvilkarInitPanel = ({
   behandlingVersjon,
   ...props
-}) => {
+}: Props & InngangsvilkarPanelInitProps) => {
   const intl = useIntl();
   return (
     <InngangsvilkarDefaultInitPanel
@@ -59,5 +59,3 @@ const ForeldreansvarInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngan
     />
   );
 };
-
-export default ForeldreansvarInngangsvilkarInitPanel;

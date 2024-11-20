@@ -1,26 +1,26 @@
-import React, { FunctionComponent, useCallback } from 'react';
+import React, { useCallback } from 'react';
 
 import { AksessRettigheter, ArbeidsgiverOpplysningerPerId, Behandling, Fagsak, Personoversikt } from '@navikt/fp-types';
 
-import BehandlingContainer from '../felles/BehandlingContainer';
-import SakenFaktaInitPanel from '../fellesPaneler/fakta/SakenFaktaInitPanel';
-import YtelserFaktaInitPanel from '../fellesPaneler/fakta/YtelserFaktaInitPanel';
-import VergeFaktaInitPanel from '../fellesPaneler/fakta/VergeFaktaInitPanel';
-import OmsorgvilkaretFaktaInitPanel from '../fellesPaneler/fakta/OmsorgvilkaretFaktaInitPanel';
-import AdopsjonsvilkaretFaktaInitPanel from '../fellesPaneler/fakta/AdopsjonsvilkaretFaktaInitPanel';
-import FodselvilkaretFaktaInitPanel from '../fellesPaneler/fakta/FodselvilkaretFaktaInitPanel';
-import VarselProsessStegInitPanel from '../fellesPaneler/prosess/VarselProsessStegInitPanel';
-import InngangsvilkarProsessStegInitPanel from './prosessPaneler/InngangsvilkarEsProsessStegInitPanel';
-import OpplysningspliktProsessStegInitPanel from '../fellesPaneler/prosess/OpplysningspliktProsessStegInitPanel';
-import BeregningEsProsessStegInitPanel from './prosessPaneler/BeregningEsProsessStegInitPanel';
-import SimuleringProsessStegInitPanel from '../fellesPaneler/prosess/SimuleringProsessStegInitPanel';
-import VedtakEsProsessStegInitPanel from './prosessPaneler/VedtakEsProsessStegInitPanel';
-import SoknadsfristEsProsessStegInitPanel from './prosessPaneler/SoknadsfristEsProsessStegInitPanel';
-import FaktaPanelInitProps from '../felles/typer/faktaPanelInitProps';
-import ProsessPanelInitProps, { ProsessPanelExtraInitProps } from '../felles/typer/prosessPanelInitProps';
-import MedlemskapsvilkaretFaktaInitPanel from '../fellesPaneler/fakta/MedlemskapsvilkaretFaktaInitPanel';
+import { BehandlingContainer } from '../felles/BehandlingContainer';
+import { SakenFaktaInitPanel } from '../fellesPaneler/fakta/SakenFaktaInitPanel';
+import { YtelserFaktaInitPanel } from '../fellesPaneler/fakta/YtelserFaktaInitPanel';
+import { VergeFaktaInitPanel } from '../fellesPaneler/fakta/VergeFaktaInitPanel';
+import { OmsorgvilkaretFaktaInitPanel } from '../fellesPaneler/fakta/OmsorgvilkaretFaktaInitPanel';
+import { AdopsjonsvilkaretFaktaInitPanel } from '../fellesPaneler/fakta/AdopsjonsvilkaretFaktaInitPanel';
+import { FodselvilkaretFaktaInitPanel } from '../fellesPaneler/fakta/FodselvilkaretFaktaInitPanel';
+import { VarselProsessStegInitPanel } from '../fellesPaneler/prosess/VarselProsessStegInitPanel';
+import { InngangsvilkarEsProsessStegInitPanel } from './prosessPaneler/InngangsvilkarEsProsessStegInitPanel';
+import { OpplysningspliktProsessStegInitPanel } from '../fellesPaneler/prosess/OpplysningspliktProsessStegInitPanel';
+import { BeregningEsProsessStegInitPanel } from './prosessPaneler/BeregningEsProsessStegInitPanel';
+import { SimuleringProsessStegInitPanel } from '../fellesPaneler/prosess/SimuleringProsessStegInitPanel';
+import { VedtakEsProsessStegInitPanel } from './prosessPaneler/VedtakEsProsessStegInitPanel';
+import { SoknadsfristEsProsessStegInitPanel } from './prosessPaneler/SoknadsfristEsProsessStegInitPanel';
+import { FaktaPanelInitProps } from '../felles/typer/faktaPanelInitProps';
+import { ProsessPanelInitProps, ProsessPanelExtraInitProps } from '../felles/typer/prosessPanelInitProps';
+import { MedlemskapsvilkaretFaktaInitPanel } from '../fellesPaneler/fakta/MedlemskapsvilkaretFaktaInitPanel';
 
-interface OwnProps {
+interface Props {
   behandling: Behandling;
   fagsak: Fagsak;
   valgtProsessSteg?: string;
@@ -33,7 +33,7 @@ interface OwnProps {
   rettigheter: AksessRettigheter;
 }
 
-const EngangsstonadPaneler: FunctionComponent<OwnProps> = ({
+const EngangsstonadPaneler = ({
   behandling,
   fagsak,
   valgtProsessSteg,
@@ -44,7 +44,7 @@ const EngangsstonadPaneler: FunctionComponent<OwnProps> = ({
   arbeidsgivere,
   personoversikt,
   rettigheter,
-}) => {
+}: Props) => {
   const faktaPaneler = useCallback(
     (props: FaktaPanelInitProps) => (
       <>
@@ -71,7 +71,7 @@ const EngangsstonadPaneler: FunctionComponent<OwnProps> = ({
           setSkalOppdatereEtterBekreftelseAvAp={setSkalOppdatereEtterBekreftelseAvAp}
         />
         <OpplysningspliktProsessStegInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-        <InngangsvilkarProsessStegInitPanel
+        <InngangsvilkarEsProsessStegInitPanel
           {...props}
           rettigheter={rettigheter}
           oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}

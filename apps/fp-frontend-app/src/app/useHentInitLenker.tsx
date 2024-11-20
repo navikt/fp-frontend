@@ -2,7 +2,7 @@ import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
 import { FagsakApiKeys, restFagsakApiHooks, requestFagsakApi, LinkCategory } from '../data/fagsakContextApi';
 
-const useHentInitLenker = (): boolean[] => {
+export const useHentInitLenker = (): boolean[] => {
   const { data: initFetchLinksFpSak, state: initFetchStateFpSak } = restFagsakApiHooks.useGlobalStateRestApi(
     FagsakApiKeys.INIT_FETCH,
   );
@@ -33,5 +33,3 @@ const useHentInitLenker = (): boolean[] => {
 
   return [harHentetFerdigInitLenker, harFpsakInitKallFeilet];
 };
-
-export default useHentInitLenker;

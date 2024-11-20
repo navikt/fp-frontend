@@ -1,6 +1,6 @@
 import { Aksjonspunkt, Vilkar } from '@navikt/fp-types';
 
-const skalViseProsessPanel = (
+export const skalViseProsessPanel = (
   aksjonspunkter: Aksjonspunkt[] = [],
   vilkarKoder: string[] = [],
   vilkar: Vilkar[] = [],
@@ -17,5 +17,3 @@ const skalViseProsessPanel = (
 
   return harAksjonspunkter && harVilkar;
 };
-
-export default skalViseProsessPanel;

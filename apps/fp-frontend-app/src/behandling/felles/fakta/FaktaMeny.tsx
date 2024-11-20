@@ -1,16 +1,16 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 import { SideMenu } from '@navikt/ft-plattform-komponenter';
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 
-import FaktaPanelMenyData from '../typer/faktaPanelMenyData';
+import { FaktaPanelMenyData } from '../typer/faktaPanelMenyData';
 
-interface OwnProps {
+interface Props {
   menyData: FaktaPanelMenyData[];
   oppdaterFaktaPanelIUrl: (index: number) => void;
 }
 
-const FaktaMeny: FunctionComponent<OwnProps> = ({ menyData, oppdaterFaktaPanelIUrl }) => {
+export const FaktaMeny = ({ menyData, oppdaterFaktaPanelIUrl }: Props) => {
   const intl = useIntl();
   return (
     <SideMenu
@@ -24,5 +24,3 @@ const FaktaMeny: FunctionComponent<OwnProps> = ({ menyData, oppdaterFaktaPanelIU
     />
   );
 };
-
-export default FaktaMeny;

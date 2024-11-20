@@ -7,7 +7,7 @@ import { EventType } from '@navikt/fp-rest-api';
 import { RestApiMock } from '@navikt/fp-utils-test';
 
 import { MemoryRouter } from 'react-router';
-import Dekorator from './Dekorator';
+import { Dekorator } from './Dekorator';
 import { requestFagsakApi, FagsakApiKeys } from '../../data/fagsakContextApi';
 import messages from '../../../i18n/nb_NO.json';
 

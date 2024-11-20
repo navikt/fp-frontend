@@ -7,7 +7,7 @@ import { BehandlingStatus, VilkarUtfallType, AksjonspunktKode } from '@navikt/fp
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 import * as Felles from './useStandardProsessPanelProps';
-import ProsessDefaultInitPanel from './ProsessDefaultInitPanel';
+import { ProsessDefaultInitPanel } from './ProsessDefaultInitPanel';
 
 const behandling = {
   uuid: '1',
@@ -40,7 +40,7 @@ const defaultProps = {
 };
 
 describe('<ProsessDefaultInitPanel>', () => {
-  vi.spyOn(Felles, 'default').mockImplementation(() => defaultProps);
+  vi.spyOn(Felles, 'useStandardProsessPanelProps').mockImplementation(() => defaultProps);
   it('skal rendre panel korrekt', async () => {
     render(
       <ProsessDefaultInitPanel

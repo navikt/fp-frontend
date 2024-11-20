@@ -6,8 +6,8 @@ import { OmsorgOgForeldreansvarFaktaIndex } from '@navikt/fp-fakta-omsorg-og-for
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { FamilieHendelseSamling, InntektArbeidYtelse, Personoversikt, Soknad } from '@navikt/fp-types';
 
-import FaktaPanelInitProps from '../../felles/typer/faktaPanelInitProps';
-import FaktaDefaultInitPanel from '../../felles/fakta/FaktaDefaultInitPanel';
+import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
+import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.OMSORGSOVERTAKELSE, AksjonspunktKode.AVKLAR_VILKAR_FOR_FORELDREANSVAR];
@@ -27,10 +27,7 @@ interface Props {
   personoversikt: Personoversikt;
 }
 
-/**
- * OmsorgvilkaretFaktaInitPanel
- */
-const OmsorgvilkaretFaktaInitPanel = ({ personoversikt, ...props }: Props & FaktaPanelInitProps) => (
+export const OmsorgvilkaretFaktaInitPanel = ({ personoversikt, ...props }: Props & FaktaPanelInitProps) => (
   <FaktaDefaultInitPanel<EndepunktPanelData>
     {...props}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
@@ -41,5 +38,3 @@ const OmsorgvilkaretFaktaInitPanel = ({ personoversikt, ...props }: Props & Fakt
     renderPanel={data => <OmsorgOgForeldreansvarFaktaIndex personoversikt={personoversikt} {...data} />}
   />
 );
-
-export default OmsorgvilkaretFaktaInitPanel;

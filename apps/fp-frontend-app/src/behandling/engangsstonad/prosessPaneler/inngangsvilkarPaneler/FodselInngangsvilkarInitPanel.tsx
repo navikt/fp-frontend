@@ -1,13 +1,13 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { IntlShape, useIntl } from 'react-intl';
 
 import { AksjonspunktKode, VilkarType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { FodselVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-fodsel';
 import { Aksjonspunkt, AksessRettigheter } from '@navikt/fp-types';
 
-import InngangsvilkarPanelInitProps from '../../../felles/typer/inngangsvilkarPanelInitProps';
-import InngangsvilkarDefaultInitPanel from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
-import OverstyringPanelDef from '../../../felles/prosess/OverstyringPanelDef';
+import { InngangsvilkarPanelInitProps } from '../../../felles/typer/inngangsvilkarPanelInitProps';
+import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
+import { OverstyringPanelDef } from '../../../felles/prosess/OverstyringPanelDef';
 
 const AKSJONSPUNKT_TEKST_PER_KODE = {
   [AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN]: 'SRBVilkarForm.VurderSammeBarn',
@@ -27,16 +27,16 @@ const AKSJONSPUNKT_KODER = [
 
 const VILKAR_KODER = [VilkarType.FODSELSVILKARET_MOR];
 
-interface OwnProps {
+interface Props {
   behandlingVersjon: number;
   rettigheter: AksessRettigheter;
 }
 
-const FodselInngangsvilkarInitPanel: FunctionComponent<OwnProps & InngangsvilkarPanelInitProps> = ({
+export const FodselInngangsvilkarInitPanel = ({
   behandlingVersjon,
   rettigheter,
   ...props
-}) => {
+}: Props & InngangsvilkarPanelInitProps) => {
   const intl = useIntl();
   return (
     <InngangsvilkarDefaultInitPanel
@@ -72,5 +72,3 @@ const FodselInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsvilkar
     />
   );
 };
-
-export default FodselInngangsvilkarInitPanel;

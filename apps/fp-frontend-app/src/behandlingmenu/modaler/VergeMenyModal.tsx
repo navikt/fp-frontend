@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { MenyVergeIndex } from '@navikt/fp-sak-meny';
 import { VergeBehandlingmenyValg, Behandling, BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
 
@@ -6,14 +6,14 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../../data/behandlingContextApi';
 import { getLocationWithDefaultProsessStegAndFakta, pathToBehandling } from '../../app/paths';
 
-interface OwnProps {
+interface Props {
   fagsak: Fagsak;
   behandling: BehandlingAppKontekst;
   setBehandling: (behandling: Behandling | undefined) => void;
   lukkModal: () => void;
 }
 
-const VergeMenyModal: FunctionComponent<OwnProps> = ({ fagsak, behandling, setBehandling, lukkModal }) => {
+export const VergeMenyModal = ({ fagsak, behandling, setBehandling, lukkModal }: Props) => {
   const vergeMenyvalg = behandling.behandlingTillatteOperasjoner?.vergeBehandlingsmeny;
 
   const navigate = useNavigate();
@@ -56,5 +56,3 @@ const VergeMenyModal: FunctionComponent<OwnProps> = ({ fagsak, behandling, setBe
 
   return <MenyVergeIndex fjernVerge={fjernVergeFn} opprettVerge={opprettVergeFn} lukkModal={lukkModal} />;
 };
-
-export default VergeMenyModal;

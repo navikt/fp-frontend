@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
@@ -6,8 +6,8 @@ import { InnsynProsessIndex } from '@navikt/fp-prosess-innsyn';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { Dokument, Fagsak, Innsyn } from '@navikt/fp-types';
 
-import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
-import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
+import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_INNSYN];
@@ -21,14 +21,11 @@ type EndepunktPanelData = {
   innsyn: Innsyn;
 };
 
-interface OwnProps {
+interface Props {
   fagsak: Fagsak;
 }
 
-const BehandleInnsynProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
-  fagsak,
-  ...props
-}) => (
+export const BehandleInnsynProsessStegInitPanel = ({ fagsak, ...props }: Props & ProsessPanelInitProps) => (
   <ProsessDefaultInitPanel<EndepunktPanelData>
     {...props}
     panelEndepunkter={getEndepunkterPanelData(fagsak.saksnummer)}
@@ -41,5 +38,3 @@ const BehandleInnsynProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPa
     )}
   />
 );
-
-export default BehandleInnsynProsessStegInitPanel;

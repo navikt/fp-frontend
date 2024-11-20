@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { ChevronDownIcon } from '@navikt/aksel-icons';
 import { Button } from '@navikt/ds-react';
 import { Dropdown } from '@navikt/ds-react-internal';
@@ -12,15 +12,15 @@ import { getEndreEnhetMenytekst, getTaAvVentMenytekst, getVergeMenytekst } from 
 import { FormattedMessage } from 'react-intl';
 
 import { FagsakApiKeys, restFagsakApiHooks } from '../data/fagsakContextApi';
-import FagsakData from '../fagsak/FagsakData';
-import ApneForEndringerMenyModal from './modaler/ApneForEndringerMenyModal';
-import EndreBehandlendeEnhetMenyModal from './modaler/EndreBehandlendeEnhetMenyModal';
-import EndreFagsakMarkeringMenyModal from './modaler/EndreFagsakMarkeringMenyModal';
-import HenleggMenyModal from './modaler/HenleggMenyModal';
-import NyBehandlingMenyModal from './modaler/NyBehandlingMenyModal';
-import SettPaVentMenyModal from './modaler/SettPaVentMenyModal';
-import TaAvVentMenyModal from './modaler/TaAvVentMenyModal';
-import VergeMenyModal from './modaler/VergeMenyModal';
+import { FagsakData } from '../fagsak/FagsakData';
+import { ApneForEndringerMenyModal } from './modaler/ApneForEndringerMenyModal';
+import { EndreBehandlendeEnhetMenyModal } from './modaler/EndreBehandlendeEnhetMenyModal';
+import { EndreFagsakMarkeringMenyModal } from './modaler/EndreFagsakMarkeringMenyModal';
+import { HenleggMenyModal } from './modaler/HenleggMenyModal';
+import { NyBehandlingMenyModal } from './modaler/NyBehandlingMenyModal';
+import { SettPaVentMenyModal } from './modaler/SettPaVentMenyModal';
+import { TaAvVentMenyModal } from './modaler/TaAvVentMenyModal';
+import { VergeMenyModal } from './modaler/VergeMenyModal';
 
 enum ModalType {
   NY_BEHANDLING = 'NY_BEHANDLING',
@@ -79,7 +79,7 @@ const hentMenyData = (behandling: BehandlingAppKontekst | undefined, fagsak: Fag
   } as Record<string, { disabled: boolean; text: string }>;
 };
 
-interface OwnProps {
+interface Props {
   fagsakData: FagsakData;
   behandlingUuid?: string;
   setBehandling: (behandling: Behandling | undefined) => void;
@@ -87,13 +87,13 @@ interface OwnProps {
   oppdaterFagsak: () => void;
 }
 
-const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
+export const BehandlingMenuIndex = ({
   fagsakData,
   behandlingUuid,
   setBehandling,
   hentOgSettBehandling,
   oppdaterFagsak,
-}) => {
+}: Props) => {
   const initFetchData = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
   const { innloggetBruker: navAnsatt } = initFetchData;
 
@@ -179,5 +179,3 @@ const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-
-export default BehandlingMenuIndex;

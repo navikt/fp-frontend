@@ -1,22 +1,24 @@
-import React from 'react';
-import { RawIntlProvider } from 'react-intl';
-
-import { createIntl } from '@navikt/ft-utils';
-
-import BehandlingHenlagtPanel from './BehandlingHenlagtPanel';
+import { getIntlDecorator } from '@navikt/fp-storybook-utils';
+import { Meta, StoryObj } from '@storybook/react/*';
+import { BehandlingHenlagtPanel } from './BehandlingHenlagtPanel';
 
 const messages = {
   'BehandlingHenlagtPanel.Henlagt': 'Behandling er henlagt',
 };
-const intl = createIntl(messages);
+const withIntl = getIntlDecorator(messages);
 
-export default {
+const meta = {
   title: 'app/prosess/BehandlingHenlagtPanel',
   component: BehandlingHenlagtPanel,
-};
+  decorators: [withIntl],
+} satisfies Meta<typeof BehandlingHenlagtPanel>;
+export default meta;
 
-export const visBehandlingErHenlagtProsessPanel = () => (
-  <RawIntlProvider value={intl}>
-    <BehandlingHenlagtPanel valgtProsessSteg="henlagt" registrerProsessPanel={() => undefined} />
-  </RawIntlProvider>
-);
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: {
+    valgtProsessSteg: 'henlagt',
+    registrerProsessPanel: () => undefined,
+  },
+};

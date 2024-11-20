@@ -7,7 +7,7 @@ import 'dayjs/locale/nb.js';
 
 import { RestApiErrorProvider, RestApiProvider } from '@navikt/fp-rest-api-hooks';
 
-import AppIndex from './app/AppIndex';
+import { AppIndex } from './app/AppIndex';
 
 dayjs.locale('nb');
 

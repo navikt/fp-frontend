@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
@@ -7,10 +7,10 @@ import { VedtakInnsynProsessIndex, InnsynBrevData } from '@navikt/fp-prosess-ved
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { Dokument, Fagsak, Behandling, ForhåndsvisMeldingParams, Innsyn } from '@navikt/fp-types';
 
-import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
-import IverksetterVedtakStatusModal from '../../felles/modaler/vedtak/IverksetterVedtakStatusModal';
-import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
-import useStandardProsessPanelProps from '../../felles/prosess/useStandardProsessPanelProps';
+import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { IverksetterVedtakStatusModal } from '../../felles/modaler/vedtak/IverksetterVedtakStatusModal';
+import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
+import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
 
 const getVedtakStatus = (behandling: Behandling): string => {
@@ -66,18 +66,18 @@ type EndepunktPanelData = {
   innsynDokumenter?: Dokument[];
 };
 
-interface OwnProps {
+interface Props {
   fagsak: Fagsak;
   opneSokeside: () => void;
   setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void;
 }
 
-const InnsynVedtakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
+export const InnsynVedtakProsessStegInitPanel = ({
   fagsak,
   opneSokeside,
   setSkalOppdatereEtterBekreftelseAvAp,
   ...props
-}) => {
+}: Props & ProsessPanelInitProps) => {
   const intl = useIntl();
   const [visIverksetterVedtakModal, toggleIverksetterVedtakModal] = useState(false);
   const lagringSideeffekterCallback = getLagringSideeffekter(
@@ -127,5 +127,3 @@ const InnsynVedtakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPane
     />
   );
 };
-
-export default InnsynVedtakProsessStegInitPanel;

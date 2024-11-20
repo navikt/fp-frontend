@@ -1,5 +1,5 @@
-import ErrorMessage from './ErrorMessage';
-import Formatter from './Formatter';
+import { ErrorMessage } from './ErrorMessage';
+import { Formatter } from './Formatter';
 
 export type ErrorData = {
   feilmelding?: string;
@@ -7,7 +7,7 @@ export type ErrorData = {
   type: string;
 };
 
-class DefaultFormatter implements Formatter<ErrorData> {
+export class DefaultFormatter implements Formatter<ErrorData> {
   isOfType = () => true;
 
   formatString = (errorData: string): ErrorMessage => ErrorMessage.withMessage(errorData);
@@ -22,5 +22,3 @@ class DefaultFormatter implements Formatter<ErrorData> {
     return undefined;
   };
 }
-
-export default DefaultFormatter;

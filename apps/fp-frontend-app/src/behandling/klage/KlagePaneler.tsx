@@ -1,18 +1,18 @@
-import React, { FunctionComponent, useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 
 import { Behandling, BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
 
-import FormKravFamOgPensjonProsessStegInitPanel from './prosessPaneler/FormKravFamOgPensjonProsessStegInitPanel';
-import VurderingFamOgPensjonProsessStegInitPanel from './prosessPaneler/VurderingFamOgPensjonProsessStegInitPanel';
-import FormKravKlageInstansProsessStegInitPanel from './prosessPaneler/FormKravKlageInstansProsessStegInitPanel';
-import VurderingKlageInstansProsessStegInitPanel from './prosessPaneler/VurderingKlageInstansProsessStegInitPanel';
-import KlageresultatProsessStegInitPanel from './prosessPaneler/KlageresultatProsessStegInitPanel';
-import VergeFaktaInitPanel from '../fellesPaneler/fakta/VergeFaktaInitPanel';
-import FaktaPanelInitProps from '../felles/typer/faktaPanelInitProps';
-import ProsessPanelInitProps from '../felles/typer/prosessPanelInitProps';
-import BehandlingContainer from '../felles/BehandlingContainer';
+import { FormKravFamOgPensjonProsessStegInitPanel } from './prosessPaneler/FormKravFamOgPensjonProsessStegInitPanel';
+import { VurderingFamOgPensjonProsessStegInitPanel } from './prosessPaneler/VurderingFamOgPensjonProsessStegInitPanel';
+import { FormKravKlageInstansProsessStegInitPanel } from './prosessPaneler/FormKravKlageInstansProsessStegInitPanel';
+import { VurderingKlageInstansProsessStegInitPanel } from './prosessPaneler/VurderingKlageInstansProsessStegInitPanel';
+import { KlageresultatProsessStegInitPanel } from './prosessPaneler/KlageresultatProsessStegInitPanel';
+import { VergeFaktaInitPanel } from '../fellesPaneler/fakta/VergeFaktaInitPanel';
+import { FaktaPanelInitProps } from '../felles/typer/faktaPanelInitProps';
+import { ProsessPanelInitProps } from '../felles/typer/prosessPanelInitProps';
+import { BehandlingContainer } from '../felles/BehandlingContainer';
 
-interface OwnProps {
+interface Props {
   behandling: Behandling;
   fagsak: Fagsak;
   valgtProsessSteg?: string;
@@ -24,7 +24,7 @@ interface OwnProps {
   hentOgSettBehandling: (keepData?: boolean) => void;
 }
 
-const KlagePaneler: FunctionComponent<OwnProps> = ({
+const KlagePaneler = ({
   behandling,
   fagsak,
   valgtProsessSteg,
@@ -34,7 +34,7 @@ const KlagePaneler: FunctionComponent<OwnProps> = ({
   setSkalOppdatereEtterBekreftelseAvAp,
   alleBehandlinger,
   hentOgSettBehandling,
-}) => {
+}: Props) => {
   const hentFaktaPaneler = useCallback((props: FaktaPanelInitProps) => <VergeFaktaInitPanel {...props} />, []);
 
   const fagsakBehandlingerInfo = useMemo(

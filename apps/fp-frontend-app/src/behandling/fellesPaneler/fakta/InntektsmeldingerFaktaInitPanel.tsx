@@ -1,5 +1,5 @@
-import FaktaPanelInitProps from '../../felles/typer/faktaPanelInitProps';
-import FaktaDefaultInitPanel from '../../felles/fakta/FaktaDefaultInitPanel';
+import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
+import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import React from 'react';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { useIntl } from 'react-intl';
@@ -18,19 +18,19 @@ type EndepunktPanelData = {
   inntektsmeldinger: Inntektsmelding[];
 };
 
-type OwnProps = {
+type Props = {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   behandling: Behandling;
   alleBehandlinger: BehandlingAppKontekst[];
   fagsak: Fagsak;
 };
 
-const InntektsmeldingerFaktaInitPanel = ({
+export const InntektsmeldingerFaktaInitPanel = ({
   arbeidsgiverOpplysningerPerId,
   fagsak,
   alleBehandlinger,
   ...props
-}: FaktaPanelInitProps & OwnProps) => (
+}: FaktaPanelInitProps & Props) => (
   <FaktaDefaultInitPanel<EndepunktPanelData>
     {...props}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
@@ -48,5 +48,3 @@ const InntektsmeldingerFaktaInitPanel = ({
     )}
   />
 );
-
-export default InntektsmeldingerFaktaInitPanel;

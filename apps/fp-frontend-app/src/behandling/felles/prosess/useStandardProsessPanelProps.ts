@@ -6,7 +6,7 @@ import { AksjonspunktStatus, isAksjonspunktOpen, VilkarUtfallType, AksjonspunktT
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { erReadOnly } from '../utils/readOnlyPanelUtils';
-import getAlleMerknaderFraBeslutter from '../utils/getAlleMerknaderFraBeslutter';
+import { getAlleMerknaderFraBeslutter } from '../utils/getAlleMerknaderFraBeslutter';
 import { StandardPropsStateContext } from '../utils/standardPropsStateContext';
 
 export const DEFAULT_FAKTA_KODE = 'default';
@@ -91,7 +91,7 @@ const finnStatus = (vilkar: Vilkar[], aksjonspunkter: Aksjonspunkt[]) => {
   return VilkarUtfallType.IKKE_VURDERT;
 };
 
-const useStandardProsessPanelProps = (
+export const useStandardProsessPanelProps = (
   aksjonspunktKoder?: string[],
   vilkarKoder?: string[],
   lagringSideEffekter?: (aksjonspunktModeller: any) => () => void,
@@ -172,5 +172,3 @@ const useStandardProsessPanelProps = (
     setFormData,
   };
 };
-
-export default useStandardProsessPanelProps;

@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
@@ -6,8 +6,8 @@ import { AnkeResultatProsessIndex } from '@navikt/fp-prosess-anke-resultat';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { AnkeVurdering } from '@navikt/fp-types';
 
-import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
-import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
+import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [
@@ -21,7 +21,7 @@ type EndepunktPanelData = {
   ankeVurdering: AnkeVurdering;
 };
 
-const AnkeResultatProsessStegInitPanel: FunctionComponent<ProsessPanelInitProps> = ({ ...props }) => {
+export const AnkeResultatProsessStegInitPanel = ({ ...props }: ProsessPanelInitProps) => {
   const intl = useIntl();
   return (
     <ProsessDefaultInitPanel<EndepunktPanelData>
@@ -37,5 +37,3 @@ const AnkeResultatProsessStegInitPanel: FunctionComponent<ProsessPanelInitProps>
     />
   );
 };
-
-export default AnkeResultatProsessStegInitPanel;

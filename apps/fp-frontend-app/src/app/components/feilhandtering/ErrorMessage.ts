@@ -1,4 +1,4 @@
-class ErrorMessage {
+export class ErrorMessage {
   text?: string;
 
   code?: string;
@@ -26,5 +26,3 @@ class ErrorMessage {
     return errorMessage;
   }
 }
-
-export default ErrorMessage;

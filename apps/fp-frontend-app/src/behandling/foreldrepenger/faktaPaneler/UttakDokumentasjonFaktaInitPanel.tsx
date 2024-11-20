@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
@@ -7,8 +7,8 @@ import { DokumentasjonVurderingBehov } from '@navikt/fp-types';
 
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 
-import FaktaPanelInitProps from '../../felles/typer/faktaPanelInitProps';
-import FaktaDefaultInitPanel from '../../felles/fakta/FaktaDefaultInitPanel';
+import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
+import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { BehandlingApiKeys, requestBehandlingApi } from '../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON];
@@ -18,10 +18,7 @@ type EndepunktPanelData = {
   dokumentasjonVurderingBehov: DokumentasjonVurderingBehov[];
 };
 
-/**
- * UttakDokumentasjonFaktaInitPanel
- */
-const UttakDokumentasjonFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = props => (
+export const UttakDokumentasjonFaktaInitPanel = (props: FaktaPanelInitProps) => (
   <FaktaDefaultInitPanel<EndepunktPanelData>
     {...props}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
@@ -32,5 +29,3 @@ const UttakDokumentasjonFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> =
     renderPanel={data => <UttakDokumentasjonFaktaIndex {...data} />}
   />
 );
-
-export default UttakDokumentasjonFaktaInitPanel;

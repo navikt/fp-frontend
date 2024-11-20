@@ -1,7 +1,7 @@
-import React, { FunctionComponent, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { AksessRettigheter, AlleKodeverk, Behandling, Fagsak } from '@navikt/fp-types';
 
-import RegistrerPapirsoknad from './RegistrerPapirsoknad';
+import { RegistrerPapirsoknad } from './RegistrerPapirsoknad';
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../../data/behandlingContextApi';
 
 const useSetBehandlingVedEndring = (setBehandling: (behandling: Behandling) => void, behandling?: Behandling): void => {
@@ -12,7 +12,7 @@ const useSetBehandlingVedEndring = (setBehandling: (behandling: Behandling) => v
   }, [behandling]);
 };
 
-type OwnProps = {
+type Props = {
   behandling: Behandling;
   setBehandling: (behandling: Behandling) => void;
   kodeverk: AlleKodeverk;
@@ -20,13 +20,7 @@ type OwnProps = {
   rettigheter: AksessRettigheter;
 };
 
-const BehandlingPapirsoknadIndex: FunctionComponent<OwnProps> = ({
-  behandling,
-  setBehandling,
-  kodeverk,
-  fagsak,
-  rettigheter,
-}) => {
+const BehandlingPapirsoknadIndex = ({ behandling, setBehandling, kodeverk, fagsak, rettigheter }: Props) => {
   const { startRequest: lagreAksjonspunkter, data: apBehandlingRes } = restBehandlingApiHooks.useRestApiRunner(
     BehandlingApiKeys.SAVE_AKSJONSPUNKT,
   );

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useIntl } from 'react-intl';
 
@@ -13,13 +13,13 @@ import {
 } from '@navikt/aksel-icons';
 import { getSupportPanelLocationCreator } from '../app/paths';
 import { HistorikkIndex as HistorikkIndexV2 } from './historikk-v2/HistorikkIndex';
-import MeldingIndex from './melding/MeldingIndex';
-import DokumentIndex from './dokument/DokumentIndex';
-import TotrinnskontrollIndex from './totrinnskontroll/TotrinnskontrollIndex';
-import useTrackRouteParam from '../app/useTrackRouteParam';
-import FagsakData from '../fagsak/FagsakData';
-import NotatIndex from './notat/NotatIndex';
-import SupportTabs from './supportTabs';
+import { MeldingIndex } from './melding/MeldingIndex';
+import { DokumentIndex } from './dokument/DokumentIndex';
+import { TotrinnskontrollIndex } from './totrinnskontroll/TotrinnskontrollIndex';
+import { useTrackRouteParam } from '../app/useTrackRouteParam';
+import { FagsakData } from '../fagsak/FagsakData';
+import { NotatIndex } from './notat/NotatIndex';
+import { SupportTabs } from './supportTabs';
 
 import styles from './behandlingSupportIndex.module.css';
 
@@ -40,7 +40,7 @@ const utledAktivtPanel = (
   return SupportTabs.HISTORIKK_V2;
 };
 
-interface OwnProps {
+interface Props {
   fagsakData: FagsakData;
   behandlingUuid?: string;
   behandlingVersjon?: number;
@@ -54,13 +54,13 @@ interface OwnProps {
  * Har ansvar for å lage navigasjonsrad med korrekte navigasjonsvalg, og route til rett
  * støttepanelkomponent ihht. gitt parameter i URL-en.
  */
-const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
+export const BehandlingSupportIndex = ({
   fagsakData,
   behandlingUuid,
   behandlingVersjon,
   hentOgSettBehandling,
   oppdaterFagsak,
-}) => {
+}: Props) => {
   const intl = useIntl();
 
   const { selected: valgtSupportPanel, location } = useTrackRouteParam<string>({
@@ -187,5 +187,3 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
     </Tabs>
   );
 };
-
-export default BehandlingSupportIndex;

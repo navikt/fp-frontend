@@ -1,13 +1,13 @@
-import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 
 import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 
-import skalViseProsessPanel from '../../felles/prosess/skalViseProsessPanel';
-import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
-import OverstyringPanelDef from '../../felles/prosess/OverstyringPanelDef';
-import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
+import { skalViseProsessPanel } from '../../felles/prosess/skalViseProsessPanel';
+import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { OverstyringPanelDef } from '../../felles/prosess/OverstyringPanelDef';
+import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 
 const AKSJONSPUNKT_KODE = AksjonspunktKode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR;
 
@@ -15,7 +15,7 @@ const VILKAR_KODER = [VilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE];
 
 type EndepunktPanelData = Record<string, never>;
 
-const FortsattMedlemskapProsessStegInitPanel: FunctionComponent<ProsessPanelInitProps> = ({ ...props }) => {
+export const FortsattMedlemskapProsessStegInitPanel = ({ ...props }: ProsessPanelInitProps) => {
   const { behandling } = props;
   const [erOverstyrt, setOverstyrt] = useState(false);
   const toggleOverstyring = useCallback(() => setOverstyrt(!erOverstyrt), [erOverstyrt]);
@@ -48,5 +48,3 @@ const FortsattMedlemskapProsessStegInitPanel: FunctionComponent<ProsessPanelInit
     />
   );
 };
-
-export default FortsattMedlemskapProsessStegInitPanel;

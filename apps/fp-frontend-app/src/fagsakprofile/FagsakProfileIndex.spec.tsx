@@ -11,8 +11,8 @@ import { Fagsak, BehandlingAppKontekst, BehandlingOppretting } from '@navikt/fp-
 import { RestApiMock } from '@navikt/fp-utils-test';
 
 import { requestFagsakApi, FagsakApiKeys } from '../data/fagsakContextApi';
-import FagsakProfileIndex from './FagsakProfileIndex';
-import FagsakData from '../fagsak/FagsakData';
+import { FagsakProfileIndex } from './FagsakProfileIndex';
+import { FagsakData } from '../fagsak/FagsakData';
 import messages from '../../i18n/nb_NO.json';
 
 describe('<FagsakProfileIndex>', () => {

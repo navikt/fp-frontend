@@ -1,25 +1,25 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { Fagsak } from '@navikt/fp-types';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
-import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
-import VurderingFellesProsessStegInitPanel from './VurderingFellesProsessStegInitPanel';
+import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
+import { VurderingFellesProsessStegInitPanel } from './VurderingFellesProsessStegInitPanel';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.BEHANDLE_KLAGE_NK];
 
-interface OwnProps {
+interface Props {
   fagsak: Fagsak;
   hentOgSettBehandling: (keepData?: boolean) => void;
 }
 
-const VurderingKlageInstansProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
+export const VurderingKlageInstansProsessStegInitPanel = ({
   fagsak,
   hentOgSettBehandling,
   ...props
-}) => (
+}: Props & ProsessPanelInitProps) => (
   <VurderingFellesProsessStegInitPanel
     {...props}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
@@ -29,5 +29,3 @@ const VurderingKlageInstansProsessStegInitPanel: FunctionComponent<OwnProps & Pr
     hentOgSettBehandling={hentOgSettBehandling}
   />
 );
-
-export default VurderingKlageInstansProsessStegInitPanel;

@@ -9,9 +9,9 @@ import { RestApiMock } from '@navikt/fp-utils-test';
 import { FagsakYtelseType, BehandlingType, KodeverkType, AksjonspunktKode } from '@navikt/fp-kodeverk';
 
 import { RawIntlProvider } from 'react-intl';
-import FagsakData from '../../fagsak/FagsakData';
+import { FagsakData } from '../../fagsak/FagsakData';
 import { requestFagsakApi, FagsakApiKeys } from '../../data/fagsakContextApi';
-import TotrinnskontrollIndex from './TotrinnskontrollIndex';
+import { TotrinnskontrollIndex } from './TotrinnskontrollIndex';
 
 import messages from '../../../i18n/nb_NO.json';
 

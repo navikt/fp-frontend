@@ -1,4 +1,4 @@
-enum SupportTabs {
+export enum SupportTabs {
   TIL_BESLUTTER = 'TIL_BESLUTTER',
   FRA_BESLUTTER = 'FRA_BESLUTTER',
   HISTORIKK = 'HISTORIKK',
@@ -7,5 +7,3 @@ enum SupportTabs {
   DOKUMENTER = 'DOKUMENTER',
   NOTATER = 'NOTATER',
 }
-
-export default SupportTabs;

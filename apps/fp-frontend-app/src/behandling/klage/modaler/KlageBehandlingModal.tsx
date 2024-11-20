@@ -1,11 +1,11 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 import { Button, BodyShort, Modal, HStack } from '@navikt/ds-react';
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
 
 import styles from './klageBehandlingModal.module.css';
 
-interface OwnProps {
+interface Props {
   visModal?: boolean;
   lukkModal: () => void;
 }
@@ -17,7 +17,7 @@ interface OwnProps {
  * i aksjonspunkt '' velger at ytelsesvedtaket skal stadfestes. Ved å trykke på knapp blir saksbehandler
  * tatt tilbake til sokesiden.
  */
-const KlageBehandlingModal: FunctionComponent<OwnProps> = ({ visModal = false, lukkModal }) => {
+export const KlageBehandlingModal = ({ visModal = false, lukkModal }: Props) => {
   const intl = useIntl();
   return (
     <Modal
@@ -41,5 +41,3 @@ const KlageBehandlingModal: FunctionComponent<OwnProps> = ({ visModal = false, l
     </Modal>
   );
 };
-
-export default KlageBehandlingModal;

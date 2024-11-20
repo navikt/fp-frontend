@@ -1,12 +1,12 @@
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
-import useGetEnabledApplikasjonContext from './useGetEnabledApplikasjonContext';
-import ApplicationContextPath from './ApplicationContextPath';
+import { useGetEnabledApplikasjonContext } from './useGetEnabledApplikasjonContext';
+import { ApplicationContextPath } from './ApplicationContextPath';
 import { FagsakApiKeys, restFagsakApiHooks } from '../data/fagsakContextApi';
 
 const NO_PARAMS = undefined;
 
-const useHentKodeverk = (skalHenteKodeverk: boolean): boolean => {
+export const useHentKodeverk = (skalHenteKodeverk: boolean): boolean => {
   const enabledApplicationContexts = useGetEnabledApplikasjonContext();
   const skalHenteFraFpTilbake = enabledApplicationContexts.includes(ApplicationContextPath.FPTILBAKE);
 
@@ -31,5 +31,3 @@ const useHentKodeverk = (skalHenteKodeverk: boolean): boolean => {
 
   return harHentetFpSak && harHentetFpTilbake;
 };
-
-export default useHentKodeverk;
