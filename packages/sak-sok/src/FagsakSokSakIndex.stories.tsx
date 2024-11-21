@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, ComponentProps } from 'react';
 import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
@@ -8,6 +8,18 @@ import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { FagsakEnkel } from '@navikt/fp-types';
 
 import { FagsakSokSakIndex } from './FagsakSokSakIndex';
+
+const ComponentWrapper = (storyArgs: ComponentProps<typeof FagsakSokSakIndex>) => {
+  const [args, setArgs] = useState(storyArgs);
+
+  const searchFagsakCallback = (params?: { searchString: string }) => {
+    args.searchFagsakCallback?.(params);
+    setArgs(oldArgs => ({ ...oldArgs, searchResultReceived: true }));
+    return Promise.resolve<FagsakEnkel[] | undefined>(args.fagsaker);
+  };
+
+  return <FagsakSokSakIndex {...args} searchFagsakCallback={searchFagsakCallback} />;
+};
 
 const meta = {
   title: 'sak/sak-sok',
@@ -19,17 +31,7 @@ const meta = {
     searchResultReceived: false,
     searchStarted: false,
   },
-  render: storyArgs => {
-    const [args, setArgs] = useState(storyArgs);
-
-    const searchFagsakCallback = (params?: { searchString: string }) => {
-      args.searchFagsakCallback?.(params);
-      setArgs(oldArgs => ({ ...oldArgs, searchResultReceived: true }));
-      return Promise.resolve<FagsakEnkel[] | undefined>(args.fagsaker);
-    };
-
-    return <FagsakSokSakIndex {...args} searchFagsakCallback={searchFagsakCallback} />;
-  },
+  render: args => <ComponentWrapper {...args} />,
 } satisfies Meta<typeof FagsakSokSakIndex>;
 export default meta;
 
