@@ -1,4 +1,4 @@
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
 import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
 
@@ -9,6 +9,6 @@ type KlageVurderingResultatAp = {
   klageVurderingOmgjoer?: string;
   klageHjemmel?: string;
   vedtaksdatoPaklagdBehandling?: string;
-} & AksjonspunktTilBekreftelse<AksjonspunktCode.BEHANDLE_KLAGE_NFP>;
+} & AksjonspunktTilBekreftelse<AksjonspunktKode.BEHANDLE_KLAGE_NFP>;
 
 export default KlageVurderingResultatAp;

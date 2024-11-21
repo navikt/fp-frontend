@@ -4,7 +4,7 @@ import { BodyShort, Heading } from '@navikt/ds-react';
 
 import { CheckboxField } from '@navikt/ft-form-hooks';
 import { DateTimeLabel, Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
-import { kommunikasjonsretning } from '@navikt/fp-kodeverk';
+import { Kommunikasjonsretning } from '@navikt/fp-kodeverk';
 import { Dokument } from '@navikt/fp-types';
 import { hentDokumentLenke } from '@navikt/fp-konstanter';
 import { ChevronDownDoubleIcon, ChevronLeftDoubleIcon, ChevronRightDoubleIcon } from '@navikt/aksel-icons';
@@ -12,7 +12,7 @@ import { ChevronDownDoubleIcon, ChevronLeftDoubleIcon, ChevronRightDoubleIcon } 
 import styles from './documentListInnsyn.module.css';
 
 const getDirectionImage = (document: Dokument, intl: IntlShape): ReactElement => {
-  if (document.kommunikasjonsretning === kommunikasjonsretning.INN) {
+  if (document.kommunikasjonsretning === Kommunikasjonsretning.INN) {
     return (
       <ChevronRightDoubleIcon
         title={intl.formatMessage({ id: 'DocumentListInnsyn.Motta' })}
@@ -20,7 +20,7 @@ const getDirectionImage = (document: Dokument, intl: IntlShape): ReactElement =>
       />
     );
   }
-  if (document.kommunikasjonsretning === kommunikasjonsretning.UT) {
+  if (document.kommunikasjonsretning === Kommunikasjonsretning.UT) {
     return (
       <ChevronLeftDoubleIcon
         title={intl.formatMessage({ id: 'DocumentListInnsyn.Send' })}

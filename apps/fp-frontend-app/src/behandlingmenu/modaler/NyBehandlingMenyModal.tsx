@@ -1,19 +1,15 @@
-import React, { FunctionComponent, useCallback, useMemo, useEffect } from 'react';
+import React, { useCallback, useMemo, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import {
-  behandlingType as BehandlingType,
-  behandlingStatus as BehandlingStatus,
-  KodeverkType,
-} from '@navikt/fp-kodeverk';
+import { BehandlingType, BehandlingStatus, KodeverkType } from '@navikt/fp-kodeverk';
 
 import { MenyNyBehandlingIndex, FormValues as NyBehandlingFormValues } from '@navikt/fp-sak-meny-ny-behandling';
 import { BehandlingAppKontekst } from '@navikt/fp-types';
 
 import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
-import useGetEnabledApplikasjonContext from '../../app/useGetEnabledApplikasjonContext';
-import ApplicationContextPath from '../../app/ApplicationContextPath';
-import MenyKodeverk from '../MenyKodeverk';
-import FagsakData from '../../fagsak/FagsakData';
+import { useGetEnabledApplikasjonContext } from '../../app/useGetEnabledApplikasjonContext';
+import { ApplicationContextPath } from '../../app/ApplicationContextPath';
+import { MenyKodeverk } from '../MenyKodeverk';
+import { FagsakData } from '../../fagsak/FagsakData';
 import { getLocationWithDefaultProsessStegAndFakta, pathToBehandling } from '../../app/paths';
 
 const BEHANDLINGSTYPER_SOM_SKAL_KUNNE_OPPRETTES = [
@@ -35,13 +31,13 @@ const getUuidForSisteLukkedeForsteEllerRevurd = (behandlinger: BehandlingAppKont
   return behandling ? behandling.uuid : undefined;
 };
 
-interface OwnProps {
+interface Props {
   fagsakData: FagsakData;
   behandlingUuid?: string;
   lukkModal: () => void;
 }
 
-const NyBehandlingMenyModal: FunctionComponent<OwnProps> = ({ fagsakData, behandlingUuid, lukkModal }) => {
+export const NyBehandlingMenyModal = ({ fagsakData, behandlingUuid, lukkModal }: Props) => {
   const fagsak = fagsakData.getFagsak();
   const alleBehandlinger = fagsakData.getAlleBehandlinger();
   const behandling = fagsakData.getBehandling(behandlingUuid);
@@ -137,5 +133,3 @@ const NyBehandlingMenyModal: FunctionComponent<OwnProps> = ({ fagsakData, behand
     />
   );
 };
-
-export default NyBehandlingMenyModal;

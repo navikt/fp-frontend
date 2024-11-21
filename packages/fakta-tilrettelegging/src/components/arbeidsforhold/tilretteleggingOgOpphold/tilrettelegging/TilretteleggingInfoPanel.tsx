@@ -7,7 +7,7 @@ import { BranchingIcon, CalendarIcon, PersonPregnantIcon } from '@navikt/aksel-i
 import { BodyShort, Detail, HStack } from '@navikt/ds-react';
 import { DDMMYYYY_DATE_FORMAT, calcDaysAndWeeks } from '@navikt/ft-utils';
 
-import { tilretteleggingType } from '@navikt/fp-kodeverk';
+import { TilretteleggingType } from '@navikt/fp-kodeverk';
 
 const finnTekst = (intl: IntlShape, termindato: string, fom?: string): string => {
   const dager = dayjs(termindato).diff(fom, 'days');
@@ -15,20 +15,20 @@ const finnTekst = (intl: IntlShape, termindato: string, fom?: string): string =>
 };
 
 const finnProsentSvangerskapspenger = (tilrettelegging: ArbeidsforholdTilretteleggingDato): number => {
-  if (tilrettelegging.type === tilretteleggingType.HEL_TILRETTELEGGING) {
+  if (tilrettelegging.type === TilretteleggingType.HEL_TILRETTELEGGING) {
     return 0;
   }
-  if (tilrettelegging.type === tilretteleggingType.INGEN_TILRETTELEGGING) {
+  if (tilrettelegging.type === TilretteleggingType.INGEN_TILRETTELEGGING) {
     return 100;
   }
   return tilrettelegging.overstyrtUtbetalingsgrad || 0;
 };
 
 const finnProsentArbeid = (tilrettelegging: ArbeidsforholdTilretteleggingDato): number => {
-  if (tilrettelegging.type === tilretteleggingType.HEL_TILRETTELEGGING) {
+  if (tilrettelegging.type === TilretteleggingType.HEL_TILRETTELEGGING) {
     return 100;
   }
-  if (tilrettelegging.type === tilretteleggingType.INGEN_TILRETTELEGGING) {
+  if (tilrettelegging.type === TilretteleggingType.INGEN_TILRETTELEGGING) {
     return 0;
   }
   return tilrettelegging.stillingsprosent || 0;

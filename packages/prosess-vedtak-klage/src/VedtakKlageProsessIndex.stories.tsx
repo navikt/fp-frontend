@@ -3,10 +3,10 @@ import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import {
-  aksjonspunktStatus,
-  behandlingResultatType,
-  klageVurdering as klageVurderingCodes,
-  AksjonspunktCode,
+  AksjonspunktStatus,
+  BehandlingResultatType,
+  KlageVurdering as klageVurderingCodes,
+  AksjonspunktKode,
 } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Behandling, Fagsak, KlageVurdering, KlageVurderingResultat } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
@@ -25,15 +25,15 @@ const behandling = {
   uuid: '1',
   versjon: 1,
   behandlingsresultat: {
-    type: behandlingResultatType.KLAGE_AVVIST,
+    type: BehandlingResultatType.KLAGE_AVVIST,
   },
   behandlingPaaVent: false,
 } as Behandling;
 
 const aksjonspunkter = [
   {
-    definisjon: AksjonspunktCode.FORESLA_VEDTAK,
-    status: aksjonspunktStatus.OPPRETTET,
+    definisjon: AksjonspunktKode.FORESLA_VEDTAK,
+    status: AksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
   },
 ] as Aksjonspunkt[];

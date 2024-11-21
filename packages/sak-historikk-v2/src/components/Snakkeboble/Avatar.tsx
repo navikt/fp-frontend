@@ -9,7 +9,7 @@ import {
   PersonSuitFillIcon,
   RobotSmileIcon,
 } from '@navikt/aksel-icons';
-import { historikkAktor as HistorikkAktor } from '@navikt/fp-kodeverk';
+import { HistorikkAktor } from '@navikt/fp-kodeverk';
 import { KjønnkodeEnum } from '@navikt/fp-types';
 
 interface Props {

@@ -1,7 +1,7 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { UttakFaktaIndex } from '@navikt/fp-fakta-uttak';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import {
@@ -13,19 +13,19 @@ import {
   Fagsak,
 } from '@navikt/fp-types';
 
-import FaktaPanelInitProps from '../../felles/typer/faktaPanelInitProps';
-import FaktaDefaultInitPanel from '../../felles/fakta/FaktaDefaultInitPanel';
+import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
+import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { BehandlingApiKeys, requestBehandlingApi } from '../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [
-  AksjonspunktCode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
-  AksjonspunktCode.FAKTA_UTTAK_INGEN_PERIODER_KODE,
-  AksjonspunktCode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET_KODE,
-  AksjonspunktCode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE,
-  AksjonspunktCode.OVERSTYR_FAKTA_UTTAK,
+  AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
+  AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER_KODE,
+  AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET_KODE,
+  AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE,
+  AksjonspunktKode.OVERSTYR_FAKTA_UTTAK,
 ];
 
-const OVERSTYRING_AP_CODES = [AksjonspunktCode.OVERSTYR_FAKTA_UTTAK];
+const OVERSTYRING_AP_CODES = [AksjonspunktKode.OVERSTYR_FAKTA_UTTAK];
 
 const ENDEPUNKTER_PANEL_DATA = [
   BehandlingApiKeys.UTTAK_KONTROLLER_FAKTA_PERIODER_V2,
@@ -38,21 +38,18 @@ type EndepunktPanelData = {
   ytelsefordeling: Ytelsefordeling;
 };
 
-interface OwnProps {
+interface Props {
   rettigheter: AksessRettigheter;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   fagsak: Fagsak;
 }
 
-/**
- * UttakFaktaInitPanel
- */
-const UttakFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = ({
+export const UttakFaktaInitPanel = ({
   rettigheter,
   arbeidsgiverOpplysningerPerId,
   fagsak,
   ...props
-}) => (
+}: Props & FaktaPanelInitProps) => (
   <FaktaDefaultInitPanel<EndepunktPanelData>
     {...props}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
@@ -75,5 +72,3 @@ const UttakFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = (
     )}
   />
 );
-
-export default UttakFaktaInitPanel;

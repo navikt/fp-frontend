@@ -1,13 +1,13 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 import { Modal, Button, BodyShort, Label, HStack } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { BehandlingResultatType } from '@navikt/ft-kodeverk';
+import { BehandlingResultatType } from '@navikt/fp-kodeverk';
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
 
 import styles from './iverksetterVedtakStatusModal.module.css';
 
-interface OwnProps {
+interface Props {
   lukkModal: () => void;
   visModal: boolean;
   behandlingsresultat?: {
@@ -21,7 +21,7 @@ interface OwnProps {
  * Denne modalen vises etter en vilkarsvurdering der behandlingsstatusen
  * er satt til Iverksetter vedtak. Ved å trykke på knapp blir den Nav-ansatte tatt tilbake til sokesiden.
  */
-const IverksetterVedtakStatusModal: FunctionComponent<OwnProps> = ({ lukkModal, visModal, behandlingsresultat }) => {
+export const IverksetterVedtakStatusModal = ({ lukkModal, visModal, behandlingsresultat }: Props) => {
   const intl = useIntl();
   const erVedtakAvslatt = behandlingsresultat && behandlingsresultat.type === BehandlingResultatType.AVSLATT;
   const imageAltText = intl.formatMessage({
@@ -54,5 +54,3 @@ const IverksetterVedtakStatusModal: FunctionComponent<OwnProps> = ({ lukkModal, 
     </Modal>
   );
 };
-
-export default IverksetterVedtakStatusModal;

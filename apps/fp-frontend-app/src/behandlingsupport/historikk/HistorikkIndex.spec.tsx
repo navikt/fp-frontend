@@ -5,7 +5,7 @@ import { render, screen } from '@testing-library/react';
 import { RestApiMock } from '@navikt/fp-utils-test';
 
 import { requestFagsakApi, FagsakApiKeys } from '../../data/fagsakContextApi';
-import HistorikkIndex from './HistorikkIndex';
+import { HistorikkIndex } from './HistorikkIndex';
 
 describe('<HistorikkIndex>', () => {
   it('skal prøve å hente historikk og så vise historikk-panel', async () => {

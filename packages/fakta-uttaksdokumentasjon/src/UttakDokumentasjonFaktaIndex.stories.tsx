@@ -2,7 +2,7 @@ import React from 'react';
 import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { AksjonspunktCode, aksjonspunktStatus } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import {
   Aksjonspunkt,
   Behandling,
@@ -79,7 +79,7 @@ const Template: StoryFn<{
     aksjonspunkter={aksjonspunkter}
     submitCallback={submitCallback}
     readOnly={readOnly}
-    harApneAksjonspunkter={aksjonspunkter.some(ap => ap.status === aksjonspunktStatus.OPPRETTET)}
+    harApneAksjonspunkter={aksjonspunkter.some(ap => ap.status === AksjonspunktStatus.OPPRETTET)}
     submittable={submittable}
     alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
     setFormData={() => undefined}
@@ -90,8 +90,8 @@ export const AksjonspunktMedUavklartePerioder = Template.bind({});
 AksjonspunktMedUavklartePerioder.args = {
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.VURDER_UTTAK_DOKUMENTASJON,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
+      status: AksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
       kanLoses: true,
     },
@@ -138,8 +138,8 @@ export const AksjonspunktSomErBekreftetOgBehandlingAvsluttet = Template.bind({})
 AksjonspunktSomErBekreftetOgBehandlingAvsluttet.args = {
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.VURDER_UTTAK_DOKUMENTASJON,
-      status: aksjonspunktStatus.UTFORT,
+      definisjon: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
+      status: AksjonspunktStatus.UTFORT,
       begrunnelse: 'Dette er en begrunnelse',
       kanLoses: false,
     },
@@ -154,8 +154,8 @@ export const AksjonspunktErBekreftetMenBehandlingErÅpen = Template.bind({});
 AksjonspunktErBekreftetMenBehandlingErÅpen.args = {
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.VURDER_UTTAK_DOKUMENTASJON,
-      status: aksjonspunktStatus.UTFORT,
+      definisjon: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
+      status: AksjonspunktStatus.UTFORT,
       begrunnelse: undefined,
       kanLoses: true,
     },

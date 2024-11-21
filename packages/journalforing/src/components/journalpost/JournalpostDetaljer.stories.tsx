@@ -3,7 +3,7 @@ import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
-import { fagsakStatus, fagsakYtelseType } from '@navikt/fp-kodeverk';
+import { FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { NavAnsatt } from '@navikt/fp-types';
 import JournalpostDetaljer from './JournalpostDetaljer';
 import JournalførSubmitValue from '../../typer/ferdigstillJournalføringSubmit';
@@ -50,7 +50,7 @@ const detaljertJournalpostMal = {
     navn: 'Svingen sag og høvleri',
     id: '999999999',
   },
-  ytelseType: fagsakYtelseType.FORELDREPENGER,
+  ytelseType: FagsakYtelseType.FORELDREPENGER,
   dokumenter: [
     {
       dokumentId: '999999999',
@@ -74,21 +74,21 @@ const detaljertJournalpostMal = {
   fagsaker: [
     {
       saksnummer: '125416597',
-      ytelseType: fagsakYtelseType.FORELDREPENGER,
+      ytelseType: FagsakYtelseType.FORELDREPENGER,
       opprettetDato: '2022-01-02',
-      status: fagsakStatus.LOPENDE,
+      status: FagsakStatus.LOPENDE,
     },
     {
       saksnummer: '155462542',
-      ytelseType: fagsakYtelseType.SVANGERSKAPSPENGER,
+      ytelseType: FagsakYtelseType.SVANGERSKAPSPENGER,
       opprettetDato: '2022-01-02',
-      status: fagsakStatus.AVSLUTTET,
+      status: FagsakStatus.AVSLUTTET,
     },
     {
       saksnummer: '175419131',
-      ytelseType: fagsakYtelseType.FORELDREPENGER,
+      ytelseType: FagsakYtelseType.FORELDREPENGER,
       opprettetDato: '2022-01-03',
-      status: fagsakStatus.AVSLUTTET,
+      status: FagsakStatus.AVSLUTTET,
     },
   ],
 } as Journalpost;

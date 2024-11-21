@@ -1,7 +1,7 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 
-import { AksjonspunktCode, vilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { TilkjentYtelseProsessIndex } from '@navikt/fp-prosess-tilkjent-ytelse';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import {
@@ -14,11 +14,11 @@ import {
   UttaksresultatPeriode,
 } from '@navikt/fp-types';
 
-import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
-import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
+import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingApiKeys, requestBehandlingApi } from '../../../data/behandlingContextApi';
 
-const AKSJONSPUNKT_KODER = [AksjonspunktCode.VURDER_TILBAKETREKK];
+const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_TILBAKETREKK];
 
 const ENDEPUNKTER_PANEL_DATA = [
   BehandlingApiKeys.FAMILIEHENDELSE,
@@ -35,16 +35,16 @@ type EndepunktPanelData = {
   uttaksresultatPerioder: UttaksresultatPeriode;
 };
 
-interface OwnProps {
+interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   personoversikt: Personoversikt;
 }
 
-const TilkjentYtelseFpProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
+export const TilkjentYtelseFpProsessStegInitPanel = ({
   arbeidsgiverOpplysningerPerId,
   personoversikt,
   ...props
-}) => (
+}: Props & ProsessPanelInitProps) => (
   <ProsessDefaultInitPanel<EndepunktPanelData>
     {...props}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
@@ -54,8 +54,8 @@ const TilkjentYtelseFpProsessStegInitPanel: FunctionComponent<OwnProps & Prosess
     skalPanelVisesIMeny={() => true}
     hentOverstyrtStatus={() =>
       requestBehandlingApi.hasPath(BehandlingApiKeys.BEREGNINGRESULTAT_DAGYTELSE.name)
-        ? vilkarUtfallType.OPPFYLT
-        : vilkarUtfallType.IKKE_VURDERT
+        ? VilkarUtfallType.OPPFYLT
+        : VilkarUtfallType.IKKE_VURDERT
     }
     renderPanel={data => (
       <TilkjentYtelseProsessIndex
@@ -67,5 +67,3 @@ const TilkjentYtelseFpProsessStegInitPanel: FunctionComponent<OwnProps & Prosess
     )}
   />
 );
-
-export default TilkjentYtelseFpProsessStegInitPanel;

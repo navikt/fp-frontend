@@ -8,7 +8,7 @@ import { FieldEditedInfo } from '@navikt/fp-fakta-felles';
 import { Datepicker } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FamilieHendelse, Soknad } from '@navikt/fp-types';
 import { BekreftDokumentertDatoAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -75,7 +75,7 @@ const DokumentasjonFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
   return (
     <FaktaGruppe
       title={intl.formatMessage({ id: 'DokumentasjonFaktaForm.ApplicationInformation' })}
-      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.ADOPSJONSDOKUMENTAJON]}
+      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.ADOPSJONSDOKUMENTAJON]}
     >
       <div className={styles.container}>
         <Datepicker
@@ -103,7 +103,7 @@ const DokumentasjonFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
         )}
         <VStack>
           {Object.keys(fodselsdatoer).map((id, i) => (
-            <div key={`div-${AksjonspunktCode.ADOPSJONSDOKUMENTAJON}-${id}`}>
+            <div key={`div-${AksjonspunktKode.ADOPSJONSDOKUMENTAJON}-${id}`}>
               <VerticalSpacer sixteenPx />
               <HStack gap="4">
                 <Datepicker
@@ -149,7 +149,7 @@ DokumentasjonFaktaForm.buildInitialValues = (soknad: Soknad, familiehendelse: Fa
 });
 
 DokumentasjonFaktaForm.transformValues = (values: FormValues): BekreftDokumentertDatoAksjonspunktAp => ({
-  kode: AksjonspunktCode.ADOPSJONSDOKUMENTAJON,
+  kode: AksjonspunktKode.ADOPSJONSDOKUMENTAJON,
   // Desse to variablane skal alltid ha verdi - fix i typescript og fjern ''
   omsorgsovertakelseDato: values.omsorgsovertakelseDato ?? '',
   fodselsdatoer: values.fodselsdatoer ?? '',

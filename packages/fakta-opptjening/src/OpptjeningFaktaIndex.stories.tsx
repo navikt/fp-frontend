@@ -2,7 +2,7 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { StoryFn } from '@storybook/react';
 
-import { AksjonspunktCode, aksjonspunktStatus, opptjeningAktivitetType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus, OpptjeningAktivitetType } from '@navikt/fp-kodeverk';
 import { Behandling, Aksjonspunkt, Opptjening } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
@@ -42,7 +42,7 @@ const Template: StoryFn<{
     aksjonspunkter={aksjonspunkter}
     alleKodeverk={alleKodeverk as any}
     alleMerknaderFraBeslutter={{
-      [AksjonspunktCode.VURDER_PERIODER_MED_OPPTJENING]: merknaderFraBeslutter,
+      [AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING]: merknaderFraBeslutter,
     }}
     submitCallback={submitCallback}
     readOnly={false}
@@ -57,8 +57,8 @@ MedAksjonspunkt.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.VURDER_PERIODER_MED_OPPTJENING,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
+      status: AksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
       kanLoses: true,
     },
@@ -75,7 +75,7 @@ MedAksjonspunkt.args = {
     },
     opptjeningAktivitetList: [
       {
-        aktivitetType: opptjeningAktivitetType.ARBEID,
+        aktivitetType: OpptjeningAktivitetType.ARBEID,
         opptjeningFom: '2019-02-11',
         opptjeningTom: '2019-03-24',
         arbeidsgiverReferanse: '3',
@@ -86,7 +86,7 @@ MedAksjonspunkt.args = {
         erEndret: false,
       },
       {
-        aktivitetType: opptjeningAktivitetType.ARBEID,
+        aktivitetType: OpptjeningAktivitetType.ARBEID,
         opptjeningFom: '2019-05-11',
         opptjeningTom: '2019-07-24',
         arbeidsgiverReferanse: '3',
@@ -97,7 +97,7 @@ MedAksjonspunkt.args = {
         erEndret: false,
       },
       {
-        aktivitetType: opptjeningAktivitetType.NARING,
+        aktivitetType: OpptjeningAktivitetType.NARING,
         opptjeningFom: '2019-02-11',
         opptjeningTom: '2019-10-24',
         arbeidsgiverReferanse: '1',
@@ -106,7 +106,7 @@ MedAksjonspunkt.args = {
         erEndret: false,
       },
       {
-        aktivitetType: opptjeningAktivitetType.AAP,
+        aktivitetType: OpptjeningAktivitetType.AAP,
         opptjeningFom: '2019-02-11',
         opptjeningTom: '2019-06-24',
         arbeidsgiverReferanse: '1',
@@ -116,7 +116,7 @@ MedAksjonspunkt.args = {
         erGodkjent: false,
       },
       {
-        aktivitetType: opptjeningAktivitetType.SYKEPENGER,
+        aktivitetType: OpptjeningAktivitetType.SYKEPENGER,
         opptjeningFom: '2018-12-11',
         opptjeningTom: '2019-04-24',
         arbeidsgiverReferanse: '1',
@@ -125,7 +125,7 @@ MedAksjonspunkt.args = {
         erEndret: false,
       },
       {
-        aktivitetType: opptjeningAktivitetType.ARBEID,
+        aktivitetType: OpptjeningAktivitetType.ARBEID,
         opptjeningFom: '2018-01-01',
         opptjeningTom: '2018-11-01',
         arbeidsgiverReferanse: '1',
@@ -170,7 +170,7 @@ UtenAksjonspunkt.args = {
       {
         opptjeningFom: '2017-01-01',
         opptjeningTom: '9999-12-31',
-        aktivitetType: opptjeningAktivitetType.ARBEID,
+        aktivitetType: OpptjeningAktivitetType.ARBEID,
         arbeidsgiverReferanse: '1',
         arbeidsforholdRef: 'bf623ff9-6ffb-4a81-b9f1-2648e5530a47',
         erEndret: false,
@@ -181,7 +181,7 @@ UtenAksjonspunkt.args = {
       {
         opptjeningFom: '2017-01-01',
         opptjeningTom: '9999-12-31',
-        aktivitetType: opptjeningAktivitetType.DAGPENGER,
+        aktivitetType: OpptjeningAktivitetType.DAGPENGER,
         arbeidsgiverReferanse: '1',
         arbeidsforholdRef: 'bf623ff9-6ffb-4a81-b9f1-2648e5530a47',
         erEndret: false,
@@ -198,8 +198,8 @@ MedToLikePerioderForSammeAktivitetstype.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.VURDER_PERIODER_MED_OPPTJENING,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
+      status: AksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
       kanLoses: true,
     },
@@ -216,7 +216,7 @@ MedToLikePerioderForSammeAktivitetstype.args = {
     },
     opptjeningAktivitetList: [
       {
-        aktivitetType: opptjeningAktivitetType.NARING,
+        aktivitetType: OpptjeningAktivitetType.NARING,
         opptjeningFom: '1995-09-14',
         opptjeningTom: '9999-12-31',
         arbeidsgiverReferanse: '1',
@@ -226,7 +226,7 @@ MedToLikePerioderForSammeAktivitetstype.args = {
         erEndret: false,
       },
       {
-        aktivitetType: opptjeningAktivitetType.NARING,
+        aktivitetType: OpptjeningAktivitetType.NARING,
         opptjeningFom: '1995-09-14',
         opptjeningTom: '9999-12-31',
         arbeidsgiverReferanse: '2',
@@ -259,8 +259,8 @@ MedAlleOpptjeningsaktiviteterFiltrertBort.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.VURDER_PERIODER_MED_OPPTJENING,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
+      status: AksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
       kanLoses: true,
     },
@@ -277,7 +277,7 @@ MedAlleOpptjeningsaktiviteterFiltrertBort.args = {
     },
     opptjeningAktivitetList: [
       {
-        aktivitetType: opptjeningAktivitetType.ARBEID,
+        aktivitetType: OpptjeningAktivitetType.ARBEID,
         opptjeningFom: '2020-12-25',
         opptjeningTom: '2021-10-24',
         arbeidsgiverReferanse: '3',

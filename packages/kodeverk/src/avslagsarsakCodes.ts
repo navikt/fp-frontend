@@ -1,5 +1,3 @@
-const avslagsarsakCodes = {
-  INGEN_BEREGNINGSREGLER: '1099',
-};
-
-export default avslagsarsakCodes;
+export enum Avslagsarsak {
+  INGEN_BEREGNINGSREGLER = '1099',
+}

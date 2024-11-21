@@ -7,7 +7,7 @@ import {
   HistorikkinnslagV2,
 } from '@navikt/fp-types';
 
-class FagsakData {
+export class FagsakData {
   private $$fagsak: Fagsak;
 
   private $$fpTilbakeFagsakData?: FagsakDataFpTilbake;
@@ -71,5 +71,3 @@ class FagsakData {
     return this.$$fpTilbakeFagsakData?.historikkinnslagV2;
   }
 }
-
-export default FagsakData;

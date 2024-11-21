@@ -1,4 +1,4 @@
-import KodeverkType from './kodeverkTyper';
+import { KodeverkType } from './kodeverkTyper';
 
 // TODO Fjern desse metodane. Kan like godt slå opp direkte
 

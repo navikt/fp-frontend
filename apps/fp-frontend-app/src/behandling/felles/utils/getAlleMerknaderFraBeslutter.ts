@@ -1,7 +1,7 @@
-import { Aksjonspunkt, Behandling } from '@navikt/ft-types';
-import { BehandlingStatus } from '@navikt/ft-kodeverk';
+import { Aksjonspunkt, Behandling } from '@navikt/fp-types';
+import { BehandlingStatus } from '@navikt/fp-kodeverk';
 
-const getAlleMerknaderFraBeslutter = (behandling: Behandling, aksjonspunkter: Aksjonspunkt[]) => {
+export const getAlleMerknaderFraBeslutter = (behandling: Behandling, aksjonspunkter: Aksjonspunkt[]) => {
   if (behandling.status !== BehandlingStatus.BEHANDLING_UTREDES) {
     return {};
   }
@@ -15,5 +15,3 @@ const getAlleMerknaderFraBeslutter = (behandling: Behandling, aksjonspunkter: Ak
     {},
   );
 };
-
-export default getAlleMerknaderFraBeslutter;

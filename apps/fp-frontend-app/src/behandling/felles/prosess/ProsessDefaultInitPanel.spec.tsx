@@ -1,15 +1,13 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { Aksjonspunkt } from '@navikt/ft-types';
-import { BehandlingStatus, VilkarUtfallType } from '@navikt/ft-kodeverk';
 
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import { Behandling, Fagsak } from '@navikt/fp-types';
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { Aksjonspunkt, Behandling, Fagsak } from '@navikt/fp-types';
+import { BehandlingStatus, VilkarUtfallType, AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 import * as Felles from './useStandardProsessPanelProps';
-import ProsessDefaultInitPanel from './ProsessDefaultInitPanel';
+import { ProsessDefaultInitPanel } from './ProsessDefaultInitPanel';
 
 const behandling = {
   uuid: '1',
@@ -31,7 +29,7 @@ const defaultProps = {
   readOnlySubmitButton: false,
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.VURDER_FEILUTBETALING,
+      definisjon: AksjonspunktKode.VURDER_FEILUTBETALING,
       kanLoses: true,
     },
   ] as Aksjonspunkt[],
@@ -42,7 +40,7 @@ const defaultProps = {
 };
 
 describe('<ProsessDefaultInitPanel>', () => {
-  vi.spyOn(Felles, 'default').mockImplementation(() => defaultProps);
+  vi.spyOn(Felles, 'useStandardProsessPanelProps').mockImplementation(() => defaultProps);
   it('skal rendre panel korrekt', async () => {
     render(
       <ProsessDefaultInitPanel

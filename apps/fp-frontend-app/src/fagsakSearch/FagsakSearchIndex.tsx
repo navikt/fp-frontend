@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { errorOfType, ErrorTypes, getErrorResponseData } from '@navikt/fp-rest-api';
@@ -17,7 +17,7 @@ const EMPTY_ARRAY = [] as FagsakEnkel[];
  * Container komponent. Har ansvar for å vise søkeskjermbildet og å håndtere fagsaksøket
  * mot server og lagringen av resultatet i klientens state.
  */
-const FagsakSearchIndex: FunctionComponent = () => {
+export const FagsakSearchIndex = () => {
   const alleKodeverk = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK);
 
   const navigate = useNavigate();
@@ -59,5 +59,3 @@ const FagsakSearchIndex: FunctionComponent = () => {
     />
   );
 };
-
-export default FagsakSearchIndex;

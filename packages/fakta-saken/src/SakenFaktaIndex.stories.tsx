@@ -3,12 +3,12 @@ import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import {
-  AksjonspunktCode,
-  behandlingType,
-  behandlingStatus,
-  aksjonspunktStatus,
-  fagsakYtelseType,
-  navBrukerKjonn,
+  AksjonspunktKode,
+  BehandlingType,
+  BehandlingStatus,
+  AksjonspunktStatus,
+  FagsakYtelseType,
+  NavBrukerKjonn,
 } from '@navikt/fp-kodeverk';
 import { Behandling, Aksjonspunkt, Soknad, Fagsak } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
@@ -29,8 +29,8 @@ const promiseAction =
 const behandling = {
   uuid: '1',
   versjon: 2,
-  status: behandlingStatus.BEHANDLING_UTREDES,
-  type: behandlingType.FORSTEGANGSSOKNAD,
+  status: BehandlingStatus.BEHANDLING_UTREDES,
+  type: BehandlingType.FORSTEGANGSSOKNAD,
   behandlingPaaVent: false,
   behandlingHenlagt: false,
 };
@@ -48,7 +48,7 @@ const defaultSøknad = {
 } as Soknad;
 
 const defaultFagsak = {
-  fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
+  fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
 } as Fagsak;
 
 export default {
@@ -81,7 +81,7 @@ const Template: StoryFn<{
     alleKodeverk={alleKodeverk as any}
     setFormData={() => undefined}
     behandling={behandling as Behandling}
-    harApneAksjonspunkter={aksjonspunkter.some(ap => ap.status === aksjonspunktStatus.OPPRETTET)}
+    harApneAksjonspunkter={aksjonspunkter.some(ap => ap.status === AksjonspunktStatus.OPPRETTET)}
     soknad={søknad}
     kanOverstyreAccess={kanOverstyreAccess}
   />
@@ -96,7 +96,7 @@ export const StartdatoForForeldrepengerOgDekningsgradMedAnnenPart = Template.bin
 StartdatoForForeldrepengerOgDekningsgradMedAnnenPart.args = {
   aksjonspunkter: [],
   fagsak: {
-    fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
+    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     bruker: {
       navn: 'Helga Utvikler',
     },
@@ -110,7 +110,7 @@ export const KanIkkeOverstyreDekningsgrad = Template.bind({});
 KanIkkeOverstyreDekningsgrad.args = {
   aksjonspunkter: [],
   fagsak: {
-    fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
+    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     bruker: {
       navn: 'Helga Utvikler',
     },
@@ -125,8 +125,8 @@ export const ApentAksjonspunktForInnhentingAvDokumentasjon = Template.bind({});
 ApentAksjonspunktForInnhentingAvDokumentasjon.args = {
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
+      status: AksjonspunktStatus.OPPRETTET,
       kanLoses: true,
     },
   ],
@@ -136,13 +136,13 @@ export const ApentAksjonspunktForInnhentingAvDokumentasjonVedSvp = Template.bind
 ApentAksjonspunktForInnhentingAvDokumentasjonVedSvp.args = {
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
+      status: AksjonspunktStatus.OPPRETTET,
       kanLoses: true,
     },
   ],
   fagsak: {
-    fagsakYtelseType: fagsakYtelseType.SVANGERSKAPSPENGER,
+    fagsakYtelseType: FagsakYtelseType.SVANGERSKAPSPENGER,
   } as Fagsak,
 };
 
@@ -150,13 +150,13 @@ export const AksjonspunktErIkkeGodkjentAvBeslutter = Template.bind({});
 AksjonspunktErIkkeGodkjentAvBeslutter.args = {
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
+      status: AksjonspunktStatus.OPPRETTET,
       kanLoses: true,
     },
   ],
   alleMerknaderFraBeslutter: {
-    [AksjonspunktCode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK]: {
+    [AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK]: {
       notAccepted: true,
     },
   },
@@ -166,8 +166,8 @@ export const DekningsgradErEndret = Template.bind({});
 DekningsgradErEndret.args = {
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.OVERSTYR_DEKNINGSGRAD,
-      status: aksjonspunktStatus.UTFORT,
+      definisjon: AksjonspunktKode.OVERSTYR_DEKNINGSGRAD,
+      status: AksjonspunktStatus.UTFORT,
       kanLoses: true,
       begrunnelse: 'Er endret til 80 fordi...',
     },
@@ -190,20 +190,20 @@ export const HarFåttDekningsgradAksjonspunkt = Template.bind({});
 HarFåttDekningsgradAksjonspunkt.args = {
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.AVKLAR_DEKNINGSGRAD,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.AVKLAR_DEKNINGSGRAD,
+      status: AksjonspunktStatus.OPPRETTET,
       kanLoses: true,
     },
   ],
   fagsak: {
-    fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
+    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     bruker: {
       navn: 'Helga Utvikler',
-      kjønn: navBrukerKjonn.KVINNE,
+      kjønn: NavBrukerKjonn.KVINNE,
     },
     annenPart: {
       navn: 'Espen Utvikler',
-      kjønn: navBrukerKjonn.MANN,
+      kjønn: NavBrukerKjonn.MANN,
     },
   } as Fagsak,
   søknad: {
@@ -227,20 +227,20 @@ export const HarFåttDekningsgradAksjonspunktMedUkjentAndrePart = Template.bind(
 HarFåttDekningsgradAksjonspunktMedUkjentAndrePart.args = {
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.AVKLAR_DEKNINGSGRAD,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.AVKLAR_DEKNINGSGRAD,
+      status: AksjonspunktStatus.OPPRETTET,
       kanLoses: true,
     },
   ],
   fagsak: {
-    fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
+    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     bruker: {
       navn: 'Helga Utvikler',
-      kjønn: navBrukerKjonn.KVINNE,
+      kjønn: NavBrukerKjonn.KVINNE,
     },
     annenPart: {
       navn: 'Espen Utvikler',
-      kjønn: navBrukerKjonn.UDEFINERT,
+      kjønn: NavBrukerKjonn.UDEFINERT,
     },
   } as Fagsak,
   søknad: {
@@ -264,25 +264,25 @@ export const DekningsgradAksjonspunktErSendtTIlbakeFraBeslutter = Template.bind(
 DekningsgradAksjonspunktErSendtTIlbakeFraBeslutter.args = {
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.AVKLAR_DEKNINGSGRAD,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.AVKLAR_DEKNINGSGRAD,
+      status: AksjonspunktStatus.OPPRETTET,
       kanLoses: true,
       begrunnelse: 'Dette er en begrunnelse',
     },
   ],
   fagsak: {
-    fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
+    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     bruker: {
       navn: 'Helga Utvikler',
-      kjønn: navBrukerKjonn.KVINNE,
+      kjønn: NavBrukerKjonn.KVINNE,
     },
     annenPart: {
       navn: 'Espen Utvikler',
-      kjønn: navBrukerKjonn.MANN,
+      kjønn: NavBrukerKjonn.MANN,
     },
   } as Fagsak,
   alleMerknaderFraBeslutter: {
-    [AksjonspunktCode.AVKLAR_DEKNINGSGRAD]: {
+    [AksjonspunktKode.AVKLAR_DEKNINGSGRAD]: {
       notAccepted: true,
     },
   },

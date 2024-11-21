@@ -1,31 +1,31 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { FodselVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-fodsel';
 import { AksessRettigheter } from '@navikt/fp-types';
-import { VilkarType, AksjonspunktCode, fagsakYtelseType } from '@navikt/fp-kodeverk';
+import { VilkarType, AksjonspunktKode, FagsakYtelseType } from '@navikt/fp-kodeverk';
 
-import InngangsvilkarPanelInitProps from '../../../felles/typer/inngangsvilkarPanelInitProps';
-import InngangsvilkarDefaultInitPanel from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
-import OverstyringPanelDef from '../../../felles/prosess/OverstyringPanelDef';
+import { InngangsvilkarPanelInitProps } from '../../../felles/typer/inngangsvilkarPanelInitProps';
+import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
+import { OverstyringPanelDef } from '../../../felles/prosess/OverstyringPanelDef';
 
 const AKSJONSPUNKT_KODER = [
-  AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
-  AksjonspunktCode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
+  AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+  AksjonspunktKode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
 ];
 
 const VILKAR_KODER = [VilkarType.FODSELSVILKARET_MOR, VilkarType.FODSELSVILKARET_FAR];
 
-interface OwnProps {
+interface Props {
   behandlingVersjon: number;
   rettigheter: AksessRettigheter;
 }
 
-const FodselInngangsvilkarFpInitPanel: FunctionComponent<OwnProps & InngangsvilkarPanelInitProps> = ({
+export const FodselInngangsvilkarFpInitPanel = ({
   behandlingVersjon,
   rettigheter,
   ...props
-}) => {
+}: Props & InngangsvilkarPanelInitProps) => {
   const intl = useIntl();
   return (
     <InngangsvilkarDefaultInitPanel
@@ -42,8 +42,8 @@ const FodselInngangsvilkarFpInitPanel: FunctionComponent<OwnProps & Inngangsvilk
               aksjonspunkter={data.aksjonspunkter}
               aksjonspunktKode={
                 data.vilkar.some(v => v.vilkarType === VilkarType.FODSELSVILKARET_MOR)
-                  ? AksjonspunktCode.OVERSTYR_FODSELSVILKAR
-                  : AksjonspunktCode.OVERSTYR_FODSELSVILKAR_FAR_MEDMOR
+                  ? AksjonspunktKode.OVERSTYR_FODSELSVILKAR
+                  : AksjonspunktKode.OVERSTYR_FODSELSVILKAR_FAR_MEDMOR
               }
               vilkar={data.vilkar}
               vilkarKoder={VILKAR_KODER}
@@ -58,12 +58,10 @@ const FodselInngangsvilkarFpInitPanel: FunctionComponent<OwnProps & Inngangsvilk
             />
           )}
           {data.aksjonspunkter.length > 0 && (
-            <FodselVilkarProsessIndex ytelseTypeKode={fagsakYtelseType.FORELDREPENGER} {...data} />
+            <FodselVilkarProsessIndex ytelseTypeKode={FagsakYtelseType.FORELDREPENGER} {...data} />
           )}
         </>
       )}
     />
   );
 };
-
-export default FodselInngangsvilkarFpInitPanel;

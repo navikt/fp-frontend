@@ -5,14 +5,14 @@ import { RestKey } from '@navikt/fp-rest-api';
 import { StandardProsessPanelProps } from '@navikt/fp-types';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 
-import { vilkarUtfallType } from '@navikt/fp-kodeverk';
-import ProsessPanelInitProps from '../typer/prosessPanelInitProps';
-import useStandardProsessPanelProps from './useStandardProsessPanelProps';
-import useProsessMenyRegistrerer from './useProsessMenyRegistrerer';
-import ProsessPanelWrapper from './ProsessPanelWrapper';
+import { VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { ProsessPanelInitProps } from '../typer/prosessPanelInitProps';
+import { useStandardProsessPanelProps } from './useStandardProsessPanelProps';
+import { useProsessMenyRegistrerer } from './useProsessMenyRegistrerer';
+import { ProsessPanelWrapper } from './ProsessPanelWrapper';
 import { restBehandlingApiHooks } from '../../../data/behandlingContextApi';
 
-export type OwnProps<PANEL_DATA> = {
+export type Props<PANEL_DATA> = {
   panelEndepunkter?: RestKey<any, any>[] | { key: RestKey<any, any>; params?: any }[];
   aksjonspunktKoder?: string[];
   vilkarKoder?: string[];
@@ -26,7 +26,7 @@ export type OwnProps<PANEL_DATA> = {
   hentSkalMarkeresSomAktiv?: (standardData: StandardProsessPanelProps) => boolean;
 };
 
-const ProsessDefaultInitPanel = <PANEL_DATA,>({
+export const ProsessDefaultInitPanel = <PANEL_DATA,>({
   valgtProsessSteg,
   behandling,
   registrerProsessPanel,
@@ -41,7 +41,7 @@ const ProsessDefaultInitPanel = <PANEL_DATA,>({
   hentOverstyrtStatus,
   erOverstyrt = false,
   hentSkalMarkeresSomAktiv,
-}: OwnProps<PANEL_DATA> & ProsessPanelInitProps) => {
+}: Props<PANEL_DATA> & ProsessPanelInitProps) => {
   const standardPanelProps = useStandardProsessPanelProps(aksjonspunktKoder, vilkarKoder, lagringSideEffekter);
 
   const status = hentOverstyrtStatus ? hentOverstyrtStatus(standardPanelProps) : standardPanelProps.status;
@@ -66,7 +66,7 @@ const ProsessDefaultInitPanel = <PANEL_DATA,>({
   const skalIkkeHenteData =
     !erPanelValgt ||
     formatertePanelEndepunkter.length === 0 ||
-    (status === vilkarUtfallType.IKKE_VURDERT && !harApentAksjonspunkt);
+    (status === VilkarUtfallType.IKKE_VURDERT && !harApentAksjonspunkt);
 
   const { data: panelData, state: panelDataState } = restBehandlingApiHooks.useMultipleRestApi<PANEL_DATA, any>(
     formatertePanelEndepunkter,
@@ -91,5 +91,3 @@ const ProsessDefaultInitPanel = <PANEL_DATA,>({
     </ProsessPanelWrapper>
   );
 };
-
-export default ProsessDefaultInitPanel;

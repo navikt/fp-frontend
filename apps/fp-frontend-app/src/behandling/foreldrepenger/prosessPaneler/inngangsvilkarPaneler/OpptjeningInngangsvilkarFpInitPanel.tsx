@@ -1,16 +1,16 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 
-import { VilkarType, AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { VilkarType, AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { OpptjeningVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-opptjening';
 import { AksessRettigheter, Opptjening } from '@navikt/fp-types';
 
-import InngangsvilkarPanelInitProps from '../../../felles/typer/inngangsvilkarPanelInitProps';
-import InngangsvilkarDefaultInitPanel from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
-import OverstyringPanelDef from '../../../felles/prosess/OverstyringPanelDef';
+import { InngangsvilkarPanelInitProps } from '../../../felles/typer/inngangsvilkarPanelInitProps';
+import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
+import { OverstyringPanelDef } from '../../../felles/prosess/OverstyringPanelDef';
 import { BehandlingApiKeys } from '../../../../data/behandlingContextApi';
 
-const AKSJONSPUNKT_KODER = [AksjonspunktCode.VURDER_OPPTJENINGSVILKARET];
+const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_OPPTJENINGSVILKARET];
 
 const VILKAR_KODER = [VilkarType.OPPTJENINGSPERIODE, VilkarType.OPPTJENINGSVILKARET];
 
@@ -19,16 +19,16 @@ type EndepunktPanelData = {
   opptjening: Opptjening;
 };
 
-interface OwnProps {
+interface Props {
   behandlingVersjon: number;
   rettigheter: AksessRettigheter;
 }
 
-const OpptjeningInngangsvilkarFpInitPanel: FunctionComponent<OwnProps & InngangsvilkarPanelInitProps> = ({
+export const OpptjeningInngangsvilkarFpInitPanel = ({
   behandlingVersjon,
   rettigheter,
   ...props
-}) => {
+}: Props & InngangsvilkarPanelInitProps) => {
   const intl = useIntl();
   return (
     <InngangsvilkarDefaultInitPanel<EndepunktPanelData>
@@ -44,7 +44,7 @@ const OpptjeningInngangsvilkarFpInitPanel: FunctionComponent<OwnProps & Inngangs
           {data.aksjonspunkter.length === 0 && (
             <OverstyringPanelDef
               aksjonspunkter={data.aksjonspunkter}
-              aksjonspunktKode={AksjonspunktCode.OVERSTYRING_AV_OPPTJENINGSVILKARET}
+              aksjonspunktKode={AksjonspunktKode.OVERSTYRING_AV_OPPTJENINGSVILKARET}
               vilkar={data.vilkar}
               vilkarKoder={VILKAR_KODER}
               panelTekstKode="Inngangsvilkar.Opptjeningsvilkaret"
@@ -65,5 +65,3 @@ const OpptjeningInngangsvilkarFpInitPanel: FunctionComponent<OwnProps & Inngangs
     />
   );
 };
-
-export default OpptjeningInngangsvilkarFpInitPanel;

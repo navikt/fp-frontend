@@ -1,10 +1,10 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { BehandlingResultatType, BehandlingType, BehandlingStatus } from '@navikt/ft-kodeverk';
+import { BehandlingResultatType, BehandlingType, BehandlingStatus } from '@navikt/fp-kodeverk';
 
 import { BehandlingAppKontekst } from '@navikt/fp-types';
 
-import BeslutterModalIndex from './BeslutterModalIndex';
+import { BeslutterModalIndex } from './BeslutterModalIndex';
 
 describe('<BeslutterModalIndex>', () => {
   const behandling = {

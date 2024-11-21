@@ -1,20 +1,20 @@
-import React, { FunctionComponent, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { useIntl } from 'react-intl';
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 import { Heading } from '@navikt/ds-react';
 import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 
 import styles from './supportHeader.module.css';
-import ErrorBoundary from '../app/ErrorBoundary';
+import { ErrorBoundary } from '../app/ErrorBoundary';
 
-type OwnProps = {
+type Props = {
   tekst: string;
   antall?: number;
   children: ReactNode;
   brukPadding?: boolean;
 };
 
-const SupportHeaderAndContent: FunctionComponent<OwnProps> = ({ tekst, antall, children, brukPadding = true }) => {
+export const SupportHeaderAndContent = ({ tekst, antall, children, brukPadding = true }: Props) => {
   const intl = useIntl();
   const { addErrorMessage } = useRestApiErrorDispatcher();
 
@@ -45,5 +45,3 @@ const SupportHeaderAndContent: FunctionComponent<OwnProps> = ({ tekst, antall, c
     </>
   );
 };
-
-export default SupportHeaderAndContent;

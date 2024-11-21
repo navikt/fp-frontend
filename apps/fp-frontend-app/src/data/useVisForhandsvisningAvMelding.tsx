@@ -1,4 +1,4 @@
-import { BehandlingType } from '@navikt/ft-kodeverk';
+import { BehandlingType } from '@navikt/fp-kodeverk';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
 import { FagsakApiKeys, restFagsakApiHooks } from './fagsakContextApi';
@@ -24,7 +24,7 @@ export type ForhandsvisFunksjon = (
   data: ForhandsvisDataFormidling | ForhandsvisDataTilbakekreving,
 ) => void;
 
-const useVisForhandsvisningAvMelding = (behandlingType?: string): ForhandsvisFunksjon => {
+export const useVisForhandsvisningAvMelding = (behandlingType?: string): ForhandsvisFunksjon => {
   const { startRequest: forhandsvisTilbakekrevingHenleggelse } = restFagsakApiHooks.useRestApiRunner(
     FagsakApiKeys.PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE,
   );
@@ -46,5 +46,3 @@ const useVisForhandsvisningAvMelding = (behandlingType?: string): ForhandsvisFun
     }
   };
 };
-
-export default useVisForhandsvisningAvMelding;

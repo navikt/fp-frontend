@@ -1,15 +1,15 @@
-import React, { FunctionComponent, ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
-interface OwnProps {
+interface Props {
   erPanelValgt: boolean;
   dataState: RestApiState;
   children: ReactElement | null;
 }
 
-const FaktaPanelWrapper: FunctionComponent<OwnProps> = ({ erPanelValgt, dataState, children }) => {
+export const FaktaPanelWrapper = ({ erPanelValgt, dataState, children }: Props) => {
   if (!erPanelValgt) {
     return null;
   }
@@ -20,5 +20,3 @@ const FaktaPanelWrapper: FunctionComponent<OwnProps> = ({ erPanelValgt, dataStat
 
   return children;
 };
-
-export default FaktaPanelWrapper;

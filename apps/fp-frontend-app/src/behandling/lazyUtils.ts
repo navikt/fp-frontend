@@ -1,6 +1,6 @@
 import { lazy } from 'react';
 
-const lazyWithRetry = (componentImport: () => Promise<any>) =>
+export const lazyWithRetry = (componentImport: () => Promise<any>) =>
   lazy(async () => {
     const pageHasAlreadyBeenForceRefreshed = JSON.parse(
       window.localStorage.getItem('page-has-been-force-refreshed') ?? 'false',
@@ -24,5 +24,3 @@ const lazyWithRetry = (componentImport: () => Promise<any>) =>
       throw error;
     }
   });
-
-export default lazyWithRetry;

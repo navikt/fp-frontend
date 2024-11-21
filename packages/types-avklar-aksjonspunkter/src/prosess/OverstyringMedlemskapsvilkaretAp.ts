@@ -1,9 +1,9 @@
 import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
 type OverstyringMedlemskapsvilkaretAp = {
   avslagskode?: string;
   opphørFom?: string;
-} & AksjonspunktTilBekreftelse<AksjonspunktCode.OVERSTYR_MEDLEMSKAPSVILKAR>;
+} & AksjonspunktTilBekreftelse<AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR>;
 
 export default OverstyringMedlemskapsvilkaretAp;

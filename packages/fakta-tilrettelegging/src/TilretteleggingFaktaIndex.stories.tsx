@@ -1,7 +1,7 @@
 import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktCode, aksjonspunktStatus, tilretteleggingType, uttakArbeidType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus, TilretteleggingType, UttakArbeidType } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import {
   ArbeidOgInntektsmelding,
@@ -116,7 +116,7 @@ const TILRETTELEGGING_MED_100_PROSENT_PERMISJON = {
       tilretteleggingDatoer: [
         {
           fom: '2019-10-01',
-          type: tilretteleggingType.INGEN_TILRETTELEGGING,
+          type: TilretteleggingType.INGEN_TILRETTELEGGING,
           kilde: SvpTilretteleggingFomKilde.SØKNAD,
           mottattDato: '2020-02-20',
         },
@@ -144,13 +144,13 @@ const SVANGERSKAPSPENGER_TIL_RETTELEGGING_FOR_FRILANSER = {
       tilretteleggingDatoer: [
         {
           fom: '2019-10-01',
-          type: tilretteleggingType.INGEN_TILRETTELEGGING,
+          type: TilretteleggingType.INGEN_TILRETTELEGGING,
           kilde: SvpTilretteleggingFomKilde.SØKNAD,
           mottattDato: '2020-02-20',
         },
       ],
       arbeidsgiverReferanse: '1',
-      uttakArbeidType: uttakArbeidType.ANNET,
+      uttakArbeidType: UttakArbeidType.ANNET,
       skalBrukes: true,
       velferdspermisjoner: [],
       avklarteOppholdPerioder: [],
@@ -164,7 +164,7 @@ const SVANGERSKAPSPENGER_TIL_RETTELEGGING_FOR_FRILANSER = {
       tilretteleggingDatoer: [
         {
           fom: '2019-10-01',
-          type: tilretteleggingType.INGEN_TILRETTELEGGING,
+          type: TilretteleggingType.INGEN_TILRETTELEGGING,
           kilde: SvpTilretteleggingFomKilde.SØKNAD,
           mottattDato: '2020-02-20',
         },
@@ -269,8 +269,8 @@ export const TilretteleggingMedVelferdspermisjon: Story = {
   args: {
     aksjonspunkter: [
       {
-        definisjon: AksjonspunktCode.FODSELTILRETTELEGGING,
-        status: aksjonspunktStatus.OPPRETTET,
+        definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
+        status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: undefined,
         kanLoses: true,
       },
@@ -284,8 +284,8 @@ export const TilretteleggingMed100ProsentVelferdspermisjon: Story = {
   args: {
     aksjonspunkter: [
       {
-        definisjon: AksjonspunktCode.FODSELTILRETTELEGGING,
-        status: aksjonspunktStatus.OPPRETTET,
+        definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
+        status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: undefined,
         kanLoses: true,
       },
@@ -299,8 +299,8 @@ export const SokerVarIkkeAnsattDaBehovetForTilretteleggingOppstod: Story = {
   args: {
     aksjonspunkter: [
       {
-        definisjon: AksjonspunktCode.FODSELTILRETTELEGGING,
-        status: aksjonspunktStatus.OPPRETTET,
+        definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
+        status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: undefined,
         kanLoses: true,
       },
@@ -314,8 +314,8 @@ export const HarOpphold: Story = {
   args: {
     aksjonspunkter: [
       {
-        definisjon: AksjonspunktCode.FODSELTILRETTELEGGING,
-        status: aksjonspunktStatus.OPPRETTET,
+        definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
+        status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: undefined,
         kanLoses: true,
       },
@@ -371,8 +371,8 @@ export const ErReadonly: Story = {
   args: {
     aksjonspunkter: [
       {
-        definisjon: AksjonspunktCode.FODSELTILRETTELEGGING,
-        status: aksjonspunktStatus.OPPRETTET,
+        definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
+        status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: undefined,
         kanLoses: true,
       },
@@ -429,8 +429,8 @@ export const ErRevurdering: Story = {
   args: {
     aksjonspunkter: [
       {
-        definisjon: AksjonspunktCode.FODSELTILRETTELEGGING,
-        status: aksjonspunktStatus.OPPRETTET,
+        definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
+        status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: 'Dette er en begrunnelse',
         kanLoses: true,
       },

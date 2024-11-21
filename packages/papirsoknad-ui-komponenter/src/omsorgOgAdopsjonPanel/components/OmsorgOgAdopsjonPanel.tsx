@@ -13,7 +13,7 @@ import {
 } from '@navikt/ft-form-validators';
 import { Datepicker, InputField, RadioGroupPanel } from '@navikt/ft-form-hooks';
 
-import { familieHendelseType as fht } from '@navikt/fp-kodeverk';
+import { FamilieHendelseType } from '@navikt/fp-kodeverk';
 
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import styles from './omsorgOgAdopsjonPanel.module.css';
@@ -91,13 +91,15 @@ export const OmsorgOgAdopsjonPanel = ({
       <Heading size="small">
         <FormattedMessage
           id={
-            familieHendelseType === fht.ADOPSJON ? 'Registrering.Adopsjon.Title' : 'Registrering.Adopsjon.OmsorgTitle'
+            familieHendelseType === FamilieHendelseType.ADOPSJON
+              ? 'Registrering.Adopsjon.Title'
+              : 'Registrering.Adopsjon.OmsorgTitle'
           }
         />
       </Heading>
       <VerticalSpacer sixteenPx />
       <FlexContainer>
-        {isForeldrepengerFagsak && familieHendelseType === fht.ADOPSJON && (
+        {isForeldrepengerFagsak && familieHendelseType === FamilieHendelseType.ADOPSJON && (
           <>
             <FlexRow>
               <FlexColumn className={styles.col}>
@@ -130,18 +132,20 @@ export const OmsorgOgAdopsjonPanel = ({
               name={`${OMSORG_NAME_PREFIX}.omsorgsovertakelsesdato`}
               label={formatMessage({
                 id:
-                  familieHendelseType === fht.ADOPSJON
+                  familieHendelseType === FamilieHendelseType.ADOPSJON
                     ? 'Registrering.Adopsjon.DatoForOvertakelsenStebarn'
                     : 'Registrering.Adopsjon.DatoForOvertakelsen',
               })}
               isReadOnly={readOnly}
-              validate={familieHendelseType === fht.ADOPSJON ? [required, hasValidDate] : [hasValidDate]}
+              validate={
+                familieHendelseType === FamilieHendelseType.ADOPSJON ? [required, hasValidDate] : [hasValidDate]
+              }
             />
           </FlexColumn>
         </FlexRow>
         <VerticalSpacer sixteenPx />
         <FlexRow>
-          {familieHendelseType === fht.ADOPSJON && (
+          {familieHendelseType === FamilieHendelseType.ADOPSJON && (
             <FlexColumn>
               <Datepicker
                 name={`${OMSORG_NAME_PREFIX}.ankomstdato`}
@@ -162,7 +166,7 @@ export const OmsorgOgAdopsjonPanel = ({
               }}
               className={styles.barnInput}
               validate={
-                familieHendelseType === fht.ADOPSJON
+                familieHendelseType === FamilieHendelseType.ADOPSJON
                   ? [required, hasValidInteger, minAntall, maxAntall]
                   : [
                       hasValidInteger,
@@ -182,7 +186,7 @@ export const OmsorgOgAdopsjonPanel = ({
                   name={`${OMSORG_NAME_PREFIX}.foedselsDato.${index}.dato`}
                   isReadOnly={readOnly}
                   validate={
-                    familieHendelseType === fht.ADOPSJON
+                    familieHendelseType === FamilieHendelseType.ADOPSJON
                       ? [
                           required,
                           hasValidDate,

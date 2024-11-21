@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { Form } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
-import { AksjonspunktCode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
 import { FodselSammenligningIndex } from '@navikt/fp-prosess-fakta-fodsel-sammenligning';
 import { Aksjonspunkt, FamilieHendelseSamling, FamilieHendelse, Soknad, AvklartBarn } from '@navikt/fp-types';
 import { BekreftTerminbekreftelseAp, SjekkManglendeFodselAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -13,7 +13,7 @@ import { BekreftTerminbekreftelseAp, SjekkManglendeFodselAp } from '@navikt/fp-t
 import TermindatoFaktaForm, { FormValues as TermindatoFormValues } from './TermindatoFaktaForm';
 import SjekkFodselDokForm, { FormValues as SjekkFodselDokFormValues } from './SjekkFodselDokForm';
 
-const { TERMINBEKREFTELSE, SJEKK_MANGLENDE_FODSEL } = AksjonspunktCode;
+const { TERMINBEKREFTELSE, SJEKK_MANGLENDE_FODSEL } = AksjonspunktKode;
 
 const getHelpTexts = (aksjonspunkter: Aksjonspunkt[]): ReactElement[] => {
   const helpTexts: ReactElement[] = [];

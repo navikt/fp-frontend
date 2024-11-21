@@ -4,8 +4,8 @@ import { BodyShort, Heading, Label } from '@navikt/ds-react';
 
 import {
   KodeverkType,
-  klageVurdering as klageVurderingType,
-  klageVurderingOmgjoer as klageVurderingOmgjoerType,
+  KlageVurdering as klageVurderingType,
+  KlageVurderingOmgjoer as klageVurderingOmgjoerType,
 } from '@navikt/fp-kodeverk';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { KlageVurdering, AlleKodeverk } from '@navikt/fp-types';

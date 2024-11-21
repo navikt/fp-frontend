@@ -1,15 +1,13 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { Aksjonspunkt } from '@navikt/ft-types';
-import { BehandlingStatus } from '@navikt/ft-kodeverk';
 
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, BehandlingStatus } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import { Behandling } from '@navikt/fp-types';
+import { Aksjonspunkt, Behandling } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 import * as Felles from './useStandardFaktaPanelProps';
-import FaktaDefaultInitPanel from './FaktaDefaultInitPanel';
+import { FaktaDefaultInitPanel } from './FaktaDefaultInitPanel';
 
 const behandling = {
   uuid: '1',
@@ -20,7 +18,7 @@ const behandling = {
 
 describe('<FaktaDefaultInitPanel>', () => {
   const submitCallback = vi.fn();
-  vi.spyOn(Felles, 'default').mockImplementation(() => ({
+  vi.spyOn(Felles, 'useStandardFaktaPanelProps').mockImplementation(() => ({
     behandling,
     submitCallback,
     // @ts-ignore Fiks
@@ -28,7 +26,7 @@ describe('<FaktaDefaultInitPanel>', () => {
     readOnly: false,
     aksjonspunkter: [
       {
-        definisjon: AksjonspunktCode.BEHANDLE_KLAGE_NFP,
+        definisjon: AksjonspunktKode.BEHANDLE_KLAGE_NFP,
         kanLoses: true,
       },
     ] as Aksjonspunkt[],

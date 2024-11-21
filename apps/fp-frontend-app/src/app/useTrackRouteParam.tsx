@@ -22,7 +22,7 @@ const mapMatchToParam = (params: Params, location: Location, trackingConfig: Con
     : undefined;
 };
 
-function useTrackRouteParam<T>(config: Config): { location: Location; selected: T } {
+export function useTrackRouteParam<T>(config: Config): { location: Location; selected: T } {
   const trackingConfig = { ...defaultConfig, ...config };
 
   const location = useLocation();
@@ -34,5 +34,3 @@ function useTrackRouteParam<T>(config: Config): { location: Location; selected: 
     selected: paramFromUrl,
   };
 }
-
-export default useTrackRouteParam;

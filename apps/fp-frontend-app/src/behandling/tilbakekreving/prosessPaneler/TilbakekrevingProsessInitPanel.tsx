@@ -1,18 +1,17 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
-import { VilkarUtfallType, isAksjonspunktOpen } from '@navikt/ft-kodeverk';
 import {
+  TilbakekrevingProsessIndex,
+  ForeldelseAksjonspunktCodes,
   DetaljerteFeilutbetalingsperioder,
   FeilutbetalingPerioderWrapper,
-  VilkarsVurdertePerioderWrapper,
-} from '@navikt/ft-types';
-import { TilbakekrevingProsessIndex, ForeldelseAksjonspunktCodes } from '@navikt/ft-prosess-tilbakekreving';
-import { KodeverkType } from '@navikt/fp-kodeverk';
+} from '@navikt/ft-prosess-tilbakekreving';
+import { VilkarUtfallType, isAksjonspunktOpen, KodeverkType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 
-import { Aksjonspunkt, AlleKodeverkTilbakekreving } from '@navikt/fp-types';
-import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
-import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
+import { VilkarsVurdertePerioderWrapper, Aksjonspunkt, AlleKodeverkTilbakekreving } from '@navikt/fp-types';
+import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
 
 import '@navikt/ft-prosess-tilbakekreving/dist/style.css';
@@ -39,12 +38,12 @@ const finnTilbakekrevingStatus = (aksjonspunkter: Aksjonspunkt[]): string => {
   return VilkarUtfallType.IKKE_VURDERT;
 };
 
-interface OwnProps {
+interface Props {
   relasjonsRolleType: string;
   tilbakekrevingKodeverk: AlleKodeverkTilbakekreving;
 }
 
-const TilbakekrevingProsessInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({ ...props }) => {
+export const TilbakekrevingProsessInitPanel = ({ ...props }: Props & ProsessPanelInitProps) => {
   const intl = useIntl();
 
   const { startRequest: beregnBelop } = restBehandlingApiHooks.useRestApiRunner(BehandlingApiKeys.BEREGNE_BELØP);
@@ -70,5 +69,3 @@ const TilbakekrevingProsessInitPanel: FunctionComponent<OwnProps & ProsessPanelI
     />
   );
 };
-
-export default TilbakekrevingProsessInitPanel;

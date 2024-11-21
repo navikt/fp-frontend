@@ -1,19 +1,19 @@
-import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { RawIntlProvider } from 'react-intl';
-import { VilkarUtfallType } from '@navikt/ft-kodeverk';
+import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { createIntl } from '@navikt/ft-utils';
 
 import { Behandling } from '@navikt/fp-types';
 
-import BehandlingContainer from './BehandlingContainer';
-import FaktaPanelInitProps from './typer/faktaPanelInitProps';
-import ProsessPanelInitProps from './typer/prosessPanelInitProps';
+import { BehandlingContainer } from './BehandlingContainer';
+import { FaktaPanelInitProps } from './typer/faktaPanelInitProps';
+import { ProsessPanelInitProps } from './typer/prosessPanelInitProps';
 
 import messages from '../../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-const FaktaPanelTest1: FunctionComponent<FaktaPanelInitProps> = ({ registrerFaktaPanel, valgtFaktaSteg }) => {
+const FaktaPanelTest1 = ({ registrerFaktaPanel, valgtFaktaSteg }: FaktaPanelInitProps) => {
   useEffect(() => {
     registrerFaktaPanel({
       id: '1',
@@ -29,7 +29,7 @@ const FaktaPanelTest1: FunctionComponent<FaktaPanelInitProps> = ({ registrerFakt
 
   return <div>Dette er et testpanel</div>;
 };
-const FaktaPanelTest2: FunctionComponent<FaktaPanelInitProps> = ({ registrerFaktaPanel, valgtFaktaSteg }) => {
+const FaktaPanelTest2 = ({ registrerFaktaPanel, valgtFaktaSteg }: FaktaPanelInitProps) => {
   useEffect(() => {
     registrerFaktaPanel({
       id: '2',
@@ -46,7 +46,7 @@ const FaktaPanelTest2: FunctionComponent<FaktaPanelInitProps> = ({ registrerFakt
   return <div>Dette er et annet panel</div>;
 };
 
-const ProsessPanelTest1: FunctionComponent<ProsessPanelInitProps> = ({ registrerProsessPanel, valgtProsessSteg }) => {
+const ProsessPanelTest1 = ({ registrerProsessPanel, valgtProsessSteg }: ProsessPanelInitProps) => {
   useEffect(() => {
     registrerProsessPanel({
       id: '1',
@@ -64,7 +64,7 @@ const ProsessPanelTest1: FunctionComponent<ProsessPanelInitProps> = ({ registrer
   return <div>Dette er et testpanel for adopsjon</div>;
 };
 
-const ProsessPanelTest2: FunctionComponent<ProsessPanelInitProps> = ({ registrerProsessPanel, valgtProsessSteg }) => {
+const ProsessPanelTest2 = ({ registrerProsessPanel, valgtProsessSteg }: ProsessPanelInitProps) => {
   useEffect(() => {
     registrerProsessPanel({
       id: '2',

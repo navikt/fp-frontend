@@ -2,23 +2,23 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { Alert, BodyShort } from '@navikt/ds-react';
 
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt } from '@navikt/fp-types';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 const findHelpTexts = (intl: IntlShape, aksjonspunkter: Aksjonspunkt[]): string[] => {
   const helpTexts = [];
-  if (aksjonspunkter?.some(a => a.definisjon === AksjonspunktCode.VURDERE_ANNEN_YTELSE)) {
+  if (aksjonspunkter?.some(a => a.definisjon === AksjonspunktKode.VURDERE_ANNEN_YTELSE)) {
     helpTexts.push(intl.formatMessage({ id: 'VedtakForm.VurderAnnenYtelse' }));
   }
-  if (aksjonspunkter?.some(a => a.definisjon === AksjonspunktCode.VURDERE_DOKUMENT)) {
+  if (aksjonspunkter?.some(a => a.definisjon === AksjonspunktKode.VURDERE_DOKUMENT)) {
     helpTexts.push(intl.formatMessage({ id: 'VedtakForm.VurderDokument' }));
   }
-  if (aksjonspunkter?.some(a => a.definisjon === AksjonspunktCode.VURDERE_INNTEKTSMELDING_KLAGE)) {
+  if (aksjonspunkter?.some(a => a.definisjon === AksjonspunktKode.VURDERE_INNTEKTSMELDING_KLAGE)) {
     helpTexts.push(intl.formatMessage({ id: 'VedtakForm.VurderInntektsmeldingKlage' }));
   }
   if (
-    aksjonspunkter?.some(a => a.definisjon === AksjonspunktCode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST)
+    aksjonspunkter?.some(a => a.definisjon === AksjonspunktKode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST)
   ) {
     helpTexts.push(intl.formatMessage({ id: 'VedtakForm.KontrollerRevurderingsbehandling' }));
   }

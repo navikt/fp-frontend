@@ -4,7 +4,7 @@ import React, { FunctionComponent, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Fagsak, Soknad } from '@navikt/fp-types';
 import { OverstyringDekningsgradAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { PencilFillIcon, PencilIcon } from '@navikt/aksel-icons';
@@ -110,7 +110,7 @@ const DekningradForm: FunctionComponent<OwnProps> = ({
       formMethods={formMethods}
       onSubmit={(values: FormValues) =>
         submitCallback({
-          kode: AksjonspunktCode.OVERSTYR_DEKNINGSGRAD,
+          kode: AksjonspunktKode.OVERSTYR_DEKNINGSGRAD,
           dekningsgrad: values.dekningsgrad,
           begrunnelse: values.begrunnelse,
         }).then(slåAvEditeringAvStartdato)

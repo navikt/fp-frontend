@@ -1,4 +1,4 @@
-import React, { useCallback, FunctionComponent, useState, useEffect } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { Link, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Heading } from '@navikt/ds-react';
@@ -19,14 +19,14 @@ import {
   avdelingslederRoutePath,
   utbetalingsdataIs15RoutePath,
 } from '../paths';
-import FagsakIndex from '../../fagsak/FagsakIndex';
-import AktoerIndex from '../../aktoer/AktoerIndex';
-import FagsakSearchIndex from '../../fagsakSearch/FagsakSearchIndex';
+import { FagsakIndex } from '../../fagsak/FagsakIndex';
+import { AktoerIndex } from '../../aktoer/AktoerIndex';
+import { FagsakSearchIndex } from '../../fagsakSearch/FagsakSearchIndex';
 
 import styles from './home.module.css';
 import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
 
-interface OwnProps {
+interface Props {
   headerHeight: number;
   navAnsatt?: NavAnsatt;
 }
@@ -36,7 +36,7 @@ interface OwnProps {
  *
  * Wrapper for sideinnholdet som vises under header.
  */
-const Home: FunctionComponent<OwnProps> = ({ headerHeight, navAnsatt }) => {
+export const Home = ({ headerHeight, navAnsatt }: Props) => {
   const intl = useIntl();
   const { addErrorMessage, removeErrorMessages } = useRestApiErrorDispatcher();
 
@@ -120,5 +120,3 @@ const Home: FunctionComponent<OwnProps> = ({ headerHeight, navAnsatt }) => {
     </div>
   );
 };
-
-export default Home;

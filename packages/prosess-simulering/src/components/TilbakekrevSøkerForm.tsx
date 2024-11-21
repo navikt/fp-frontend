@@ -7,7 +7,7 @@ import { RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
 import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
-import { fagsakYtelseType, AksjonspunktCode, tilbakekrevingVidereBehandling } from '@navikt/fp-kodeverk';
+import { FagsakYtelseType, AksjonspunktKode, TilbakekrevingVidereBehandling } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Fagsak, TilbakekrevingValg } from '@navikt/fp-types';
 import { VurderFeilutbetalingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -24,14 +24,14 @@ export const transformValues = (values: FormValues): VurderFeilutbetalingAp => {
   const { videreBehandling, varseltekst, begrunnelse } = values;
   if (videreBehandling?.endsWith(IKKE_SEND)) {
     return {
-      kode: AksjonspunktCode.VURDER_FEILUTBETALING,
+      kode: AksjonspunktKode.VURDER_FEILUTBETALING,
       begrunnelse,
-      videreBehandling: tilbakekrevingVidereBehandling.TILBAKEKR_OPPRETT,
+      videreBehandling: TilbakekrevingVidereBehandling.TILBAKEKR_OPPRETT,
     };
   }
 
   return {
-    kode: AksjonspunktCode.VURDER_FEILUTBETALING,
+    kode: AksjonspunktKode.VURDER_FEILUTBETALING,
     begrunnelse,
     videreBehandling: videreBehandling!,
     varseltekst,
@@ -48,7 +48,7 @@ export const buildInitialValues = (
 
   const harTypeIkkeSendt =
     !tilbakekrevingvalg.varseltekst &&
-    tilbakekrevingvalg.videreBehandling === tilbakekrevingVidereBehandling.TILBAKEKR_OPPRETT;
+    tilbakekrevingvalg.videreBehandling === TilbakekrevingVidereBehandling.TILBAKEKR_OPPRETT;
 
   return {
     videreBehandling: harTypeIkkeSendt
@@ -80,7 +80,7 @@ const TilbakekrevSøkerForm: FunctionComponent<OwnProps> = ({
 
   const varseltekst = watch('varseltekst');
 
-  const isForeldrepenger = fagsak.fagsakYtelseType === fagsakYtelseType.FORELDREPENGER;
+  const isForeldrepenger = fagsak.fagsakYtelseType === FagsakYtelseType.FORELDREPENGER;
 
   const previewMessage = useCallback(
     (e: React.MouseEvent): void => {
@@ -90,7 +90,7 @@ const TilbakekrevSøkerForm: FunctionComponent<OwnProps> = ({
     [varseltekst],
   );
 
-  if (!aksjonspunkt || aksjonspunkt.definisjon !== AksjonspunktCode.VURDER_FEILUTBETALING) {
+  if (!aksjonspunkt || aksjonspunkt.definisjon !== AksjonspunktKode.VURDER_FEILUTBETALING) {
     return null;
   }
 
@@ -110,7 +110,7 @@ const TilbakekrevSøkerForm: FunctionComponent<OwnProps> = ({
         isReadOnly={readOnly}
         radios={[
           {
-            value: tilbakekrevingVidereBehandling.TILBAKEKR_OPPRETT,
+            value: TilbakekrevingVidereBehandling.TILBAKEKR_OPPRETT,
             label: <FormattedMessage id="Simulering.gjennomfør" />,
             element: (
               <div className={styles.varsel}>
@@ -156,11 +156,11 @@ const TilbakekrevSøkerForm: FunctionComponent<OwnProps> = ({
             ),
           },
           {
-            value: `${tilbakekrevingVidereBehandling.TILBAKEKR_OPPRETT}${IKKE_SEND}`,
+            value: `${TilbakekrevingVidereBehandling.TILBAKEKR_OPPRETT}${IKKE_SEND}`,
             label: <FormattedMessage id="Simulering.OpprettMenIkkeSendVarsel" />,
           },
           {
-            value: tilbakekrevingVidereBehandling.TILBAKEKR_IGNORER,
+            value: TilbakekrevingVidereBehandling.TILBAKEKR_IGNORER,
             label: <FormattedMessage id="Simulering.avvent" />,
           },
         ]}

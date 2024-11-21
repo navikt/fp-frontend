@@ -1,27 +1,27 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { IntlShape, useIntl } from 'react-intl';
 
-import { VilkarType, AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { VilkarType, AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ForeldreansvarVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-foreldreansvar';
 import { Aksjonspunkt } from '@navikt/fp-types';
 
-import InngangsvilkarPanelInitProps from '../../../felles/typer/inngangsvilkarPanelInitProps';
-import InngangsvilkarDefaultInitPanel from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
+import { InngangsvilkarPanelInitProps } from '../../../felles/typer/inngangsvilkarPanelInitProps';
+import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 
 const AKSJONSPUNKT_KODER = [
-  AksjonspunktCode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
-  AksjonspunktCode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
-  AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
-  AksjonspunktCode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
+  AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
+  AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
+  AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+  AksjonspunktKode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
 ];
 
 const AKSJONSPUNKT_TEKST_PER_KODE = {
-  [AksjonspunktCode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD]:
+  [AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD]:
     'ErForeldreansvarVilkaarOppfyltForm.2LeddParagrafEngangsStonad',
-  [AksjonspunktCode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD]:
+  [AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD]:
     'ErForeldreansvarVilkaarOppfyltForm.4LeddParagraf',
-  [AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN]: 'SRBVilkarForm.VurderSammeBarn',
-  [AksjonspunktCode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN]:
+  [AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN]: 'SRBVilkarForm.VurderSammeBarn',
+  [AksjonspunktKode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN]:
     'SRBVilkarForm.VurderAnnenForelderSammeBarn',
 } as Record<string, string>;
 
@@ -32,14 +32,14 @@ const hentAksjonspunktTekst = (intl: IntlShape, aksjonspunkter: Aksjonspunkt[] =
 
 const VILKAR_KODER = [VilkarType.FORELDREANSVARSVILKARET_2_LEDD, VilkarType.FORELDREANSVARSVILKARET_4_LEDD];
 
-interface OwnProps {
+interface Props {
   behandlingVersjon: number;
 }
 
-const ForeldreansvarInngangsvilkarInitPanel: FunctionComponent<OwnProps & InngangsvilkarPanelInitProps> = ({
+export const ForeldreansvarInngangsvilkarInitPanel = ({
   behandlingVersjon,
   ...props
-}) => {
+}: Props & InngangsvilkarPanelInitProps) => {
   const intl = useIntl();
   return (
     <InngangsvilkarDefaultInitPanel
@@ -59,5 +59,3 @@ const ForeldreansvarInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngan
     />
   );
 };
-
-export default ForeldreansvarInngangsvilkarInitPanel;

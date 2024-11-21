@@ -37,16 +37,12 @@ import {
   BeregningsresultatEs,
   BeregningsresultatTilbakekreving,
   Inntektsmelding,
-} from '@navikt/fp-types';
-
-import {
-  DetaljerteFeilutbetalingsperioder,
-  FeilutbetalingAarsak,
-  FeilutbetalingFakta,
-  FeilutbetalingPerioderWrapper,
-  Vedtaksbrev,
   VilkarsVurdertePerioderWrapper,
-} from '@navikt/ft-types';
+} from '@navikt/fp-types';
+import { FeilutbetalingAarsak, FeilutbetalingFakta } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
+import { DetaljerteFeilutbetalingsperioder } from '@navikt/ft-prosess-tilbakekreving';
+import { FeilutbetalingPerioderWrapper } from '@navikt/ft-prosess-tilbakekreving-foreldelse';
+import { Vedtaksbrev } from '@navikt/ft-prosess-tilbakekreving-vedtak';
 
 export type SettPaVentParams = {
   ventearsak?: string;

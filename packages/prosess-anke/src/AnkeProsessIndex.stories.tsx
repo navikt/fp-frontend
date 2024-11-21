@@ -1,7 +1,7 @@
 import React from 'react';
 import { StoryFn } from '@storybook/react';
 
-import { ankeOmgjorArsak, ankeVurderingOmgjoer, ankeVurdering as AnkeVurderingKodeverk } from '@navikt/fp-kodeverk';
+import { AnkeOmgjorArsak, AnkeVurderingOmgjoer, AnkeVurdering as AnkeVurderingKodeverk } from '@navikt/fp-kodeverk';
 import { AnkeVurdering } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
@@ -24,8 +24,8 @@ OmjørResultatTilUgunst.args = {
     ankeVurderingResultat: {
       ankeVurdering: AnkeVurderingKodeverk.ANKE_OMGJOER,
       begrunnelse: 'Dette er en begrunnelse',
-      ankeOmgjoerArsak: ankeOmgjorArsak.ULIK_VURDERING,
-      ankeVurderingOmgjoer: ankeVurderingOmgjoer.ANKE_TIL_UGUNST,
+      ankeOmgjoerArsak: AnkeOmgjorArsak.ULIK_VURDERING,
+      ankeVurderingOmgjoer: AnkeVurderingOmgjoer.ANKE_TIL_UGUNST,
       fritekstTilBrev: 'Dette er en fritekst',
     },
   } as AnkeVurdering,
@@ -37,7 +37,7 @@ OpphevResultat.args = {
     ankeVurderingResultat: {
       ankeVurdering: AnkeVurderingKodeverk.ANKE_OPPHEVE_OG_HJEMSENDE,
       begrunnelse: 'Dette er en begrunnelse',
-      ankeOmgjoerArsak: ankeOmgjorArsak.ULIK_REGELVERKSTOLKNING,
+      ankeOmgjoerArsak: AnkeOmgjorArsak.ULIK_REGELVERKSTOLKNING,
       fritekstTilBrev: 'Dette er en fritekst',
     },
   } as AnkeVurdering,
@@ -49,7 +49,7 @@ HjemsendResultat.args = {
     ankeVurderingResultat: {
       ankeVurdering: AnkeVurderingKodeverk.ANKE_HJEMSENDE_UTEN_OPPHEV,
       begrunnelse: 'Dette er en begrunnelse',
-      ankeOmgjoerArsak: ankeOmgjorArsak.ULIK_REGELVERKSTOLKNING,
+      ankeOmgjoerArsak: AnkeOmgjorArsak.ULIK_REGELVERKSTOLKNING,
       fritekstTilBrev: 'Dette er en fritekst',
     },
   } as AnkeVurdering,
@@ -61,7 +61,7 @@ AvvisResultat.args = {
     ankeVurderingResultat: {
       ankeVurdering: AnkeVurderingKodeverk.ANKE_AVVIS,
       begrunnelse: 'Dette er en begrunnelse',
-      ankeOmgjoerArsak: ankeOmgjorArsak.ULIK_REGELVERKSTOLKNING,
+      ankeOmgjoerArsak: AnkeOmgjorArsak.ULIK_REGELVERKSTOLKNING,
       erSubsidiartRealitetsbehandles: true,
       erAnkerIkkePart: true,
       erIkkeKonkret: true,
@@ -94,7 +94,7 @@ ErBehandletIKabal.args = {
   ankeVurdering: {
     ankeVurderingResultat: {
       ankeVurdering: AnkeVurderingKodeverk.ANKE_OMGJOER,
-      ankeVurderingOmgjoer: ankeVurderingOmgjoer.ANKE_DELVIS_OMGJOERING_TIL_GUNST,
+      ankeVurderingOmgjoer: AnkeVurderingOmgjoer.ANKE_DELVIS_OMGJOERING_TIL_GUNST,
     },
     underBehandlingKabal: false,
     behandletAvKabal: true,

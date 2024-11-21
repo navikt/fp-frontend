@@ -2,7 +2,7 @@ import React from 'react';
 import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { behandlingType, behandlingStatus, behandlingResultatType } from '@navikt/fp-kodeverk';
+import { BehandlingType, BehandlingStatus, BehandlingResultatType } from '@navikt/fp-kodeverk';
 import { BehandlingAppKontekst } from '@navikt/fp-types';
 import FatterVedtakTotrinnskontrollModalSakIndex from './FatterVedtakTotrinnskontrollModalSakIndex';
 
@@ -28,8 +28,8 @@ EtterFatterVedtakOgGodkjent.args = {
   closeEvent: action('button-click'),
   behandling: {
     uuid: '1',
-    status: behandlingStatus.FATTER_VEDTAK,
-    type: behandlingType.FORSTEGANGSSOKNAD,
+    status: BehandlingStatus.FATTER_VEDTAK,
+    type: BehandlingType.FORSTEGANGSSOKNAD,
   } as BehandlingAppKontekst,
   allAksjonspunktApproved: true,
 };
@@ -39,10 +39,10 @@ EtterGodkjenning.args = {
   closeEvent: action('button-click'),
   behandling: {
     uuid: '1',
-    status: behandlingStatus.FATTER_VEDTAK,
-    type: behandlingType.FORSTEGANGSSOKNAD,
+    status: BehandlingStatus.FATTER_VEDTAK,
+    type: BehandlingType.FORSTEGANGSSOKNAD,
     behandlingsresultat: {
-      type: behandlingResultatType.OPPHOR,
+      type: BehandlingResultatType.OPPHOR,
     },
   } as BehandlingAppKontekst,
   allAksjonspunktApproved: true,
@@ -53,10 +53,10 @@ EtterGodkjenningAvKlage.args = {
   closeEvent: action('button-click'),
   behandling: {
     uuid: '1',
-    status: behandlingStatus.FATTER_VEDTAK,
-    type: behandlingType.KLAGE,
+    status: BehandlingStatus.FATTER_VEDTAK,
+    type: BehandlingType.KLAGE,
     behandlingsresultat: {
-      type: behandlingResultatType.OPPHOR,
+      type: BehandlingResultatType.OPPHOR,
     },
   } as BehandlingAppKontekst,
   allAksjonspunktApproved: true,
@@ -67,10 +67,10 @@ EtterTilbakesendingTilSaksbehandler.args = {
   closeEvent: action('button-click'),
   behandling: {
     uuid: '1',
-    status: behandlingStatus.FATTER_VEDTAK,
-    type: behandlingType.FORSTEGANGSSOKNAD,
+    status: BehandlingStatus.FATTER_VEDTAK,
+    type: BehandlingType.FORSTEGANGSSOKNAD,
     behandlingsresultat: {
-      type: behandlingResultatType.OPPHOR,
+      type: BehandlingResultatType.OPPHOR,
     },
   } as BehandlingAppKontekst,
   allAksjonspunktApproved: false,

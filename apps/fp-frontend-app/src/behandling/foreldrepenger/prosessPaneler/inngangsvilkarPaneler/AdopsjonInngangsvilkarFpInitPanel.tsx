@@ -1,31 +1,31 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 
-import { AksjonspunktCode, VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import { AdopsjonVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-adopsjon';
 import { AksessRettigheter } from '@navikt/fp-types';
 
-import InngangsvilkarPanelInitProps from '../../../felles/typer/inngangsvilkarPanelInitProps';
-import InngangsvilkarDefaultInitPanel from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
-import OverstyringPanelDef from '../../../felles/prosess/OverstyringPanelDef';
+import { InngangsvilkarPanelInitProps } from '../../../felles/typer/inngangsvilkarPanelInitProps';
+import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
+import { OverstyringPanelDef } from '../../../felles/prosess/OverstyringPanelDef';
 
 const AKSJONSPUNKT_KODER = [
-  AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
-  AksjonspunktCode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
+  AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+  AksjonspunktKode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
 ];
 
 const VILKAR_KODER = [VilkarType.ADOPSJONSVILKARET_FORELDREPENGER];
 
-interface OwnProps {
+interface Props {
   behandlingVersjon: number;
   rettigheter: AksessRettigheter;
 }
 
-const AdopsjonInngangsvilkarFpInitPanel: FunctionComponent<OwnProps & InngangsvilkarPanelInitProps> = ({
+export const AdopsjonInngangsvilkarFpInitPanel = ({
   behandlingVersjon,
   rettigheter,
   ...props
-}) => {
+}: Props & InngangsvilkarPanelInitProps) => {
   const intl = useIntl();
   return (
     <InngangsvilkarDefaultInitPanel
@@ -40,7 +40,7 @@ const AdopsjonInngangsvilkarFpInitPanel: FunctionComponent<OwnProps & Inngangsvi
           {data.aksjonspunkter.length === 0 && (
             <OverstyringPanelDef
               aksjonspunkter={data.aksjonspunkter}
-              aksjonspunktKode={AksjonspunktCode.OVERSTYRING_AV_ADOPSJONSVILKÅRET_FP}
+              aksjonspunktKode={AksjonspunktKode.OVERSTYRING_AV_ADOPSJONSVILKÅRET_FP}
               vilkar={data.vilkar}
               vilkarKoder={VILKAR_KODER}
               panelTekstKode="Inngangsvilkar.Adopsjonsvilkaret"
@@ -59,5 +59,3 @@ const AdopsjonInngangsvilkarFpInitPanel: FunctionComponent<OwnProps & Inngangsvi
     />
   );
 };
-
-export default AdopsjonInngangsvilkarFpInitPanel;

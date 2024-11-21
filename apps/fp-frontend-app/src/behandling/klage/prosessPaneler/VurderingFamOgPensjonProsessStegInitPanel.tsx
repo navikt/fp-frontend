@@ -1,16 +1,16 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { Fagsak } from '@navikt/fp-types';
 
-import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
-import VurderingFellesProsessStegInitPanel from './VurderingFellesProsessStegInitPanel';
+import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
+import { VurderingFellesProsessStegInitPanel } from './VurderingFellesProsessStegInitPanel';
 
-const AKSJONSPUNKT_KODER = [AksjonspunktCode.BEHANDLE_KLAGE_NFP];
+const AKSJONSPUNKT_KODER = [AksjonspunktKode.BEHANDLE_KLAGE_NFP];
 
-interface OwnProps {
+interface Props {
   fagsak: Fagsak;
   setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void;
   opneSokeside: () => void;
@@ -18,14 +18,14 @@ interface OwnProps {
   hentOgSettBehandling: (keepData?: boolean) => void;
 }
 
-const VurderingFamOgPensjonProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
+export const VurderingFamOgPensjonProsessStegInitPanel = ({
   fagsak,
   setSkalOppdatereEtterBekreftelseAvAp,
   opneSokeside,
   oppdaterProsessStegOgFaktaPanelIUrl,
   hentOgSettBehandling,
   ...props
-}) => (
+}: Props & ProsessPanelInitProps) => (
   <VurderingFellesProsessStegInitPanel
     {...props}
     fagsak={fagsak}
@@ -38,5 +38,3 @@ const VurderingFamOgPensjonProsessStegInitPanel: FunctionComponent<OwnProps & Pr
     hentOgSettBehandling={hentOgSettBehandling}
   />
 );
-
-export default VurderingFamOgPensjonProsessStegInitPanel;

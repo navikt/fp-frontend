@@ -1,15 +1,25 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import { AksessRettigheter, ArbeidsgiverOpplysningerPerId, Vilkar as FpVilkar } from '@navikt/fp-types';
+import {
+  Vilkar,
+  Vilkarperiode,
+  Beregningsgrunnlag,
+  AksessRettigheter,
+  ArbeidsgiverOpplysningerPerId,
+} from '@navikt/fp-types';
 
-import { Vilkar, Vilkarperiode, Beregningsgrunnlag } from '@navikt/ft-types';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
-import { AksjonspunktCode, VilkarType } from '@navikt/fp-kodeverk';
-import { BeregningFaktaIndex, FaktaBeregningAvklaringsbehovCode } from '@navikt/ft-fakta-beregning';
-import FaktaPanelInitProps from '../../felles/typer/faktaPanelInitProps';
-import FaktaDefaultInitPanel from '../../felles/fakta/FaktaDefaultInitPanel';
+import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
+import {
+  BeregningFaktaIndex,
+  FaktaBeregningAvklaringsbehovCode,
+  FtVilkar,
+  FtBeregningsgrunnlag,
+} from '@navikt/ft-fakta-beregning';
+import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
+import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { BehandlingApiKeys, requestBehandlingApi } from '../../../data/behandlingContextApi';
 
 import '@navikt/ft-fakta-beregning/dist/style.css';
@@ -17,13 +27,13 @@ import '@navikt/ft-fakta-beregning/dist/style.css';
 const mapBGKodeTilFpsakKode = (bgKode: string): string => {
   switch (bgKode) {
     case FaktaBeregningAvklaringsbehovCode.AVKLAR_AKTIVITETER:
-      return AksjonspunktCode.AVKLAR_AKTIVITETER;
+      return AksjonspunktKode.AVKLAR_AKTIVITETER;
     case FaktaBeregningAvklaringsbehovCode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER:
-      return AksjonspunktCode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER;
+      return AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER;
     case FaktaBeregningAvklaringsbehovCode.VURDER_FAKTA_FOR_ATFL_SN:
-      return AksjonspunktCode.VURDER_FAKTA_FOR_ATFL_SN;
+      return AksjonspunktKode.VURDER_FAKTA_FOR_ATFL_SN;
     case FaktaBeregningAvklaringsbehovCode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG:
-      return AksjonspunktCode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG;
+      return AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG;
     default:
       throw new Error(`Ukjent avklaringspunkt ${bgKode}`);
   }
@@ -41,7 +51,7 @@ const lagModifisertCallback =
     return submitCallback(transformerteData);
   };
 
-const lagStandardPeriode = (beregningsgrunnlag: Beregningsgrunnlag, bgVilkar: FpVilkar): Vilkarperiode => ({
+const lagStandardPeriode = (beregningsgrunnlag: Beregningsgrunnlag, bgVilkar: Vilkar): Vilkarperiode => ({
   avslagKode: bgVilkar.avslagKode,
   vurderesIBehandlingen: true,
   merknadParametere: {},
@@ -52,7 +62,7 @@ const lagStandardPeriode = (beregningsgrunnlag: Beregningsgrunnlag, bgVilkar: Fp
   vilkarStatus: bgVilkar.vilkarStatus,
 });
 
-const lagBGVilkar = (vilkar?: FpVilkar[], beregningsgrunnlag?: Beregningsgrunnlag): Vilkar => {
+const lagBGVilkar = (vilkar?: Vilkar[], beregningsgrunnlag?: Beregningsgrunnlag): FtVilkar => {
   if (!vilkar) {
     // @ts-ignore BeregningFaktaIndex må kunna ta i mot null
     return null;
@@ -69,7 +79,7 @@ const lagBGVilkar = (vilkar?: FpVilkar[], beregningsgrunnlag?: Beregningsgrunnla
   return nyVK;
 };
 
-const lagFormatertBG = (beregningsgrunnlag: Beregningsgrunnlag): Beregningsgrunnlag[] => {
+const lagFormatertBG = (beregningsgrunnlag: Beregningsgrunnlag): FtBeregningsgrunnlag[] => {
   if (!beregningsgrunnlag) {
     return [];
   }
@@ -77,19 +87,20 @@ const lagFormatertBG = (beregningsgrunnlag: Beregningsgrunnlag): Beregningsgrunn
     ...beregningsgrunnlag,
     vilkårsperiodeFom: beregningsgrunnlag.skjaeringstidspunktBeregning,
   };
+  //@ts-ignore TODO Fiks denne
   return [nyttBG];
 };
 
 const AKSJONSPUNKT_KODER = [
-  AksjonspunktCode.VURDER_FAKTA_FOR_ATFL_SN,
-  AksjonspunktCode.AVKLAR_AKTIVITETER,
-  AksjonspunktCode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER,
-  AksjonspunktCode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG,
+  AksjonspunktKode.VURDER_FAKTA_FOR_ATFL_SN,
+  AksjonspunktKode.AVKLAR_AKTIVITETER,
+  AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER,
+  AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG,
 ];
 
 const OVERSTYRING_AP_CODES = [
-  AksjonspunktCode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER,
-  AksjonspunktCode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG,
+  AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER,
+  AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG,
 ];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.BEREGNINGSGRUNNLAG];
@@ -97,19 +108,16 @@ type EndepunktPanelData = {
   beregningsgrunnlag: Beregningsgrunnlag;
 };
 
-interface OwnProps {
+interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   rettigheter: AksessRettigheter;
 }
 
-/**
- * BeregningFaktaInitPanel
- */
-const BeregningFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = ({
+export const BeregningFaktaInitPanel = ({
   arbeidsgiverOpplysningerPerId,
   rettigheter,
   ...props
-}) => {
+}: Props & FaktaPanelInitProps) => {
   const intl = useIntl();
   return (
     <FaktaDefaultInitPanel<EndepunktPanelData>
@@ -135,5 +143,3 @@ const BeregningFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps>
     />
   );
 };
-
-export default BeregningFaktaInitPanel;

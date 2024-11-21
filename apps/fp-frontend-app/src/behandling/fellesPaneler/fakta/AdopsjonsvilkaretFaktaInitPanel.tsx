@@ -1,21 +1,19 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
-import { Fagsak, FamilieHendelseSamling } from '@navikt/ft-types';
-import { FagsakYtelseType } from '@navikt/ft-kodeverk';
 
-import { AksjonspunktCode, adopsjonsvilkarene } from '@navikt/fp-kodeverk';
+import { FagsakYtelseType, AksjonspunktKode, adopsjonsvilkarene } from '@navikt/fp-kodeverk';
 import { AdopsjonFaktaIndex } from '@navikt/fp-fakta-adopsjon';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import { Soknad } from '@navikt/fp-types';
+import { Fagsak, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
 
-import FaktaPanelInitProps from '../../felles/typer/faktaPanelInitProps';
-import FaktaDefaultInitPanel from '../../felles/fakta/FaktaDefaultInitPanel';
+import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
+import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [
-  AksjonspunktCode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
-  AksjonspunktCode.ADOPSJONSDOKUMENTAJON,
-  AksjonspunktCode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
+  AksjonspunktKode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
+  AksjonspunktKode.ADOPSJONSDOKUMENTAJON,
+  AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
 ];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.FAMILIEHENDELSE, BehandlingApiKeys.SOKNAD];
@@ -24,14 +22,11 @@ type EndepunktPanelData = {
   soknad: Soknad;
 };
 
-interface OwnProps {
+interface Props {
   fagsak: Fagsak;
 }
 
-/**
- * AdopsjonsvilkaretFaktaInitPanel
- */
-const AdopsjonsvilkaretFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = ({ fagsak, ...props }) => (
+export const AdopsjonsvilkaretFaktaInitPanel = ({ fagsak, ...props }: Props & FaktaPanelInitProps) => (
   <FaktaDefaultInitPanel<EndepunktPanelData>
     {...props}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
@@ -49,5 +44,3 @@ const AdopsjonsvilkaretFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelIn
     )}
   />
 );
-
-export default AdopsjonsvilkaretFaktaInitPanel;

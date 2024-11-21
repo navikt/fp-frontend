@@ -17,10 +17,10 @@ import {
   required,
 } from '@navikt/ft-form-validators';
 import { CheckboxField, Datepicker, InputField, SelectField, PeriodFieldArray } from '@navikt/ft-form-hooks';
-import { KodeverkMedNavn } from '@navikt/ft-types';
+import { KodeverkMedNavn } from '@navikt/fp-types';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 
-import { arbeidskategori } from '@navikt/fp-kodeverk';
+import { Arbeidskategori } from '@navikt/fp-kodeverk';
 
 import { gyldigeUttakperioder } from './RenderPermisjonPeriodeFieldArray';
 
@@ -90,7 +90,7 @@ const getValiderArbeidsgiverIdNårRequired =
     const arbeidsgiverIdentifikatorRequired =
       getValues(
         `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}.${index}.arbeidskategoriType`,
-      ) === arbeidskategori.ARBEIDSTAKER;
+      ) === Arbeidskategori.ARBEIDSTAKER;
     return arbeidsgiverIdentifikatorRequired ? required(arbeidsgiverIdentifikator) : undefined;
   };
 
@@ -112,16 +112,16 @@ const defaultGraderingPeriode: GraderingPeriode = {
 };
 
 export const gyldigArbeidskategori = [
-  arbeidskategori.ARBEIDSTAKER,
-  arbeidskategori.SELVSTENDIG_NAERINGSDRIVENDE,
-  arbeidskategori.FRILANSER,
+  Arbeidskategori.ARBEIDSTAKER,
+  Arbeidskategori.SELVSTENDIG_NAERINGSDRIVENDE,
+  Arbeidskategori.FRILANSER,
 ];
 
 const maxValue100 = maxValue(100);
 
 const mapKvoter = (typer: KodeverkMedNavn[]): ReactElement[] =>
   typer
-    .filter(({ kode }) => gyldigeUttakperioder.includes(kode))
+    .filter(({ kode }) => gyldigeUttakperioder.some(ga => ga === kode))
     .map(({ kode, navn }) => (
       <option value={kode} key={kode}>
         {navn}
@@ -130,7 +130,7 @@ const mapKvoter = (typer: KodeverkMedNavn[]): ReactElement[] =>
 
 const mapArbeidskategori = (typer: KodeverkMedNavn[]): ReactElement[] =>
   typer
-    .filter(({ kode }) => gyldigArbeidskategori.includes(kode))
+    .filter(({ kode }) => gyldigArbeidskategori.some(ga => ga === kode))
     .map(({ kode, navn }) => (
       <option value={kode} key={kode}>
         {navn}

@@ -17,10 +17,10 @@ import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
 import { VerticalSpacer, Table } from '@navikt/ft-ui-komponenter';
 import {
-  AksjonspunktCode,
+  AksjonspunktKode,
   KodeverkType,
-  venteArsakType,
-  aksjonspunktStatus,
+  VenteArsakType,
+  AksjonspunktStatus,
   ArbeidsforholdKomplettVurderingType,
 } from '@navikt/fp-kodeverk';
 
@@ -210,7 +210,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
   const lagreOgFortsett = useCallback(() => {
     setErKnappTrykket(true);
     lagreCallback({
-      kode: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
+      kode: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
     });
   }, [behandling.versjon]);
 
@@ -242,8 +242,8 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
   const harBehandletAllePerioder = tabellRader.every(d => !d.årsak || (d.årsak && d.avklaring));
 
   const harIngenAksjonspunkt = aksjonspunkt === undefined;
-  const erAksjonspunktAvsluttet = aksjonspunkt?.status === aksjonspunktStatus.UTFORT;
-  const erAksjonspunktApent = aksjonspunkt?.status === aksjonspunktStatus.OPPRETTET;
+  const erAksjonspunktAvsluttet = aksjonspunkt?.status === AksjonspunktStatus.UTFORT;
+  const erAksjonspunktApent = aksjonspunkt?.status === AksjonspunktStatus.OPPRETTET;
   const erOverstyrerOgHarIngenAksjonspunkt = erOverstyrer && harIngenAksjonspunkt;
 
   const skalViseÅpneForNyVurderingKnapp = !readOnly && (erAksjonspunktAvsluttet || erOverstyrerOgHarIngenAksjonspunkt);
@@ -301,7 +301,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
           <SettPaVentModalIndex
             submitCallback={settPaVent}
             cancelEvent={() => setVisSettPåVentModal(false)}
-            defaultVenteårsak={venteArsakType.VENT_OPDT_INNTEKTSMELDING}
+            defaultVenteårsak={VenteArsakType.VENT_OPDT_INNTEKTSMELDING}
             hasManualPaVent
             ventearsaker={alleKodeverk[KodeverkType.VENT_AARSAK]}
             erTilbakekreving={false}

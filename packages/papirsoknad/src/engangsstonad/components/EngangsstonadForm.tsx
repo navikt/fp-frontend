@@ -4,7 +4,7 @@ import { Form } from '@navikt/ft-form-hooks';
 import { omitOne } from '@navikt/ft-utils';
 
 import { AlleKodeverk } from '@navikt/fp-types';
-import { familieHendelseType } from '@navikt/fp-kodeverk';
+import { FamilieHendelseType } from '@navikt/fp-kodeverk';
 import {
   SoknadData,
   MottattDatoPapirsoknadIndex,
@@ -49,8 +49,8 @@ interface Props {
 }
 
 const EngangsstonadForm = ({ readOnly, soknadData, alleKodeverk, onSubmitUfullstendigsoknad, onSubmit }: Props) => {
-  const erFødsel = soknadData.getFamilieHendelseType() === familieHendelseType.FODSEL;
-  const erAdopsjon = soknadData.getFamilieHendelseType() === familieHendelseType.ADOPSJON;
+  const erFødsel = soknadData.getFamilieHendelseType() === FamilieHendelseType.FODSEL;
+  const erAdopsjon = soknadData.getFamilieHendelseType() === FamilieHendelseType.ADOPSJON;
 
   const formMethods = useForm<FormValues>({
     defaultValues: buildInitialValues(erFødsel, erAdopsjon),

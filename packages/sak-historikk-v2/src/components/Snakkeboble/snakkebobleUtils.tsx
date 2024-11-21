@@ -1,5 +1,5 @@
 import React from 'react';
-import { historikkAktor as HistorikkAktor } from '@navikt/fp-kodeverk';
+import { HistorikkAktor } from '@navikt/fp-kodeverk';
 import { KjønnkodeEnum } from '@navikt/fp-types';
 import { dateFormat, timeFormat } from '@navikt/ft-utils';
 

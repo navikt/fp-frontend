@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Form } from '@navikt/ft-form-hooks';
 import { Alert, Button, VStack } from '@navikt/ds-react';
 
-import { AksjonspunktCode, aksjonspunktStatus } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, DokumentasjonVurderingBehov } from '@navikt/fp-types';
 import { FaktaBegrunnelseTextFieldNew } from '@navikt/fp-fakta-felles';
 import { VurderDokumentasjonAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -41,7 +41,7 @@ const UttakDokumentasjonFaktaForm: FunctionComponent<OwnProps> = ({
     (begrunnelse: string) => {
       setErBekreftKnappTrykket(true);
       submitCallback({
-        kode: AksjonspunktCode.VURDER_UTTAK_DOKUMENTASJON,
+        kode: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
         vurderingBehov: dokBehov,
         begrunnelse,
       });
@@ -74,7 +74,7 @@ const UttakDokumentasjonFaktaForm: FunctionComponent<OwnProps> = ({
 
   return (
     <VStack gap="6">
-      {aksjonspunkter.some(a => a.status === aksjonspunktStatus.OPPRETTET) && (
+      {aksjonspunkter.some(a => a.status === AksjonspunktStatus.OPPRETTET) && (
         <Alert variant="warning">
           <FormattedMessage id="UttakDokumentasjonFaktaForm.AksjonspunktHjelpetekst" />
         </Alert>

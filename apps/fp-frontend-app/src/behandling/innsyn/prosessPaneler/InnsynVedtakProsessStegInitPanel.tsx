@@ -1,18 +1,16 @@
-import React, { FunctionComponent, useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useIntl } from 'react-intl';
-import { AksjonspunktStatus, VilkarUtfallType } from '@navikt/ft-kodeverk';
-import { Dokument } from '@navikt/ft-types';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
-import { AksjonspunktCode, behandlingResultatType } from '@navikt/fp-kodeverk';
+import { AksjonspunktStatus, VilkarUtfallType, AksjonspunktKode, BehandlingResultatType } from '@navikt/fp-kodeverk';
 import { VedtakInnsynProsessIndex, InnsynBrevData } from '@navikt/fp-prosess-vedtak-innsyn';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import { Fagsak, Behandling, ForhåndsvisMeldingParams, Innsyn } from '@navikt/fp-types';
+import { Dokument, Fagsak, Behandling, ForhåndsvisMeldingParams, Innsyn } from '@navikt/fp-types';
 
-import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
-import IverksetterVedtakStatusModal from '../../felles/modaler/vedtak/IverksetterVedtakStatusModal';
-import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
-import useStandardProsessPanelProps from '../../felles/prosess/useStandardProsessPanelProps';
+import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { IverksetterVedtakStatusModal } from '../../felles/modaler/vedtak/IverksetterVedtakStatusModal';
+import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
+import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
 
 const getVedtakStatus = (behandling: Behandling): string => {
@@ -21,8 +19,8 @@ const getVedtakStatus = (behandling: Behandling): string => {
   if (aksjonspunkt.length === 0 || harApentAksjonpunkt) {
     return VilkarUtfallType.IKKE_VURDERT;
   }
-  return behandlingsresultat?.type === behandlingResultatType.INNSYN_INNVILGET ||
-    behandlingsresultat?.type === behandlingResultatType.INNSYN_DELVIS_INNVILGET
+  return behandlingsresultat?.type === BehandlingResultatType.INNSYN_INNVILGET ||
+    behandlingsresultat?.type === BehandlingResultatType.INNSYN_DELVIS_INNVILGET
     ? VilkarUtfallType.OPPFYLT
     : VilkarUtfallType.IKKE_OPPFYLT;
 };
@@ -56,7 +54,7 @@ const getLagringSideeffekter =
     };
   };
 
-const AKSJONSPUNKT_KODER = [AksjonspunktCode.FORESLA_VEDTAK];
+const AKSJONSPUNKT_KODER = [AksjonspunktKode.FORESLA_VEDTAK];
 
 const getEndepunkterPanelData = (saksnummer: string) => [
   { key: BehandlingApiKeys.INNSYN },
@@ -68,18 +66,18 @@ type EndepunktPanelData = {
   innsynDokumenter?: Dokument[];
 };
 
-interface OwnProps {
+interface Props {
   fagsak: Fagsak;
   opneSokeside: () => void;
   setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void;
 }
 
-const InnsynVedtakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
+export const InnsynVedtakProsessStegInitPanel = ({
   fagsak,
   opneSokeside,
   setSkalOppdatereEtterBekreftelseAvAp,
   ...props
-}) => {
+}: Props & ProsessPanelInitProps) => {
   const intl = useIntl();
   const [visIverksetterVedtakModal, toggleIverksetterVedtakModal] = useState(false);
   const lagringSideeffekterCallback = getLagringSideeffekter(
@@ -129,5 +127,3 @@ const InnsynVedtakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPane
     />
   );
 };
-
-export default InnsynVedtakProsessStegInitPanel;

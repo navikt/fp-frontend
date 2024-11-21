@@ -1,16 +1,16 @@
-import React, { FunctionComponent, useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 
 import { Behandling, BehandlingAppKontekst } from '@navikt/fp-types';
 
-import VergeFaktaInitPanel from '../fellesPaneler/fakta/VergeFaktaInitPanel';
-import FaktaPanelInitProps from '../felles/typer/faktaPanelInitProps';
-import ProsessPanelInitProps from '../felles/typer/prosessPanelInitProps';
-import BehandlingContainer from '../felles/BehandlingContainer';
-import AnkeBehandlingProsessStegInitPanel from './prosessPaneler/AnkeBehandlingProsessStegInitPanel';
-import AnkeResultatProsessStegInitPanel from './prosessPaneler/AnkeResultatProsessStegInitPanel';
-import AnkeTrygderettsbehandlingProsessStegInitPanel from './prosessPaneler/AnkeTrygderettsbehandlingProsessStegInitPanel';
+import { VergeFaktaInitPanel } from '../fellesPaneler/fakta/VergeFaktaInitPanel';
+import { FaktaPanelInitProps } from '../felles/typer/faktaPanelInitProps';
+import { ProsessPanelInitProps } from '../felles/typer/prosessPanelInitProps';
+import { BehandlingContainer } from '../felles/BehandlingContainer';
+import { AnkeBehandlingProsessStegInitPanel } from './prosessPaneler/AnkeBehandlingProsessStegInitPanel';
+import { AnkeResultatProsessStegInitPanel } from './prosessPaneler/AnkeResultatProsessStegInitPanel';
+import { AnkeTrygderettsbehandlingProsessStegInitPanel } from './prosessPaneler/AnkeTrygderettsbehandlingProsessStegInitPanel';
 
-interface OwnProps {
+interface Props {
   behandling: Behandling;
   valgtProsessSteg?: string;
   valgtFaktaSteg?: string;
@@ -18,13 +18,13 @@ interface OwnProps {
   alleBehandlinger: BehandlingAppKontekst[];
 }
 
-const AnkePaneler: FunctionComponent<OwnProps> = ({
+const AnkePaneler = ({
   behandling,
   valgtProsessSteg,
   valgtFaktaSteg,
   oppdaterProsessStegOgFaktaPanelIUrl,
   alleBehandlinger,
-}) => {
+}: Props) => {
   const fagsakBehandlingerInfo = useMemo(
     () =>
       alleBehandlinger

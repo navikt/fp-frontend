@@ -2,7 +2,7 @@ import React from 'react';
 import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { fagsakYtelseType, mottakerTyper, tilbakekrevingVidereBehandling, AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { FagsakYtelseType, MottakerType, TilbakekrevingVidereBehandling, AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Behandling, Fagsak, SimuleringResultat, TilbakekrevingValg } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -11,7 +11,7 @@ import SimuleringProsessIndex from './SimuleringProsessIndex';
 
 const fagsak = {
   saksnummer: '123',
-  fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
+  fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
 } as Fagsak;
 
 const behandling = {
@@ -40,7 +40,7 @@ const simuleringResultat = {
     ingenPerioderMedAvvik: false,
     perioderPerMottaker: [
       {
-        mottakerType: mottakerTyper.ARBG,
+        mottakerType: MottakerType.ARBG,
         mottakerIdentifikator: '123',
         mottakerNummer: 'test',
         resultatPerFagområde: [
@@ -157,7 +157,7 @@ export const AksjonspunktVurderFeilutbetaling = Template.bind({});
 AksjonspunktVurderFeilutbetaling.args = {
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.VURDER_FEILUTBETALING,
+      definisjon: AksjonspunktKode.VURDER_FEILUTBETALING,
       begrunnelse: undefined,
     },
   ] as Aksjonspunkt[],
@@ -169,7 +169,7 @@ export const AksjonspunktKontrollerEtterbetaling = Template.bind({});
 AksjonspunktKontrollerEtterbetaling.args = {
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.KONTROLLER_STOR_ETTERBETALING_SØKER,
+      definisjon: AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER,
       begrunnelse: undefined,
     },
   ] as Aksjonspunkt[],
@@ -181,11 +181,11 @@ export const AksjonspunktVurderFeilutbetalingOgEtterbetaling = Template.bind({})
 AksjonspunktVurderFeilutbetalingOgEtterbetaling.args = {
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.VURDER_FEILUTBETALING,
+      definisjon: AksjonspunktKode.VURDER_FEILUTBETALING,
       begrunnelse: undefined,
     },
     {
-      definisjon: AksjonspunktCode.KONTROLLER_STOR_ETTERBETALING_SØKER,
+      definisjon: AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER,
       begrunnelse: undefined,
     },
   ] as Aksjonspunkt[],
@@ -199,7 +199,7 @@ SimuleringspanelUtenAksjonspunkt.args = {
   isAksjonspunktOpen: false,
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   tilbakekrevingvalg: {
-    videreBehandling: tilbakekrevingVidereBehandling.TILBAKEKR_OPPDATER,
+    videreBehandling: TilbakekrevingVidereBehandling.TILBAKEKR_OPPDATER,
     varseltekst: 'varsel-eksempel',
   } as TilbakekrevingValg,
 };

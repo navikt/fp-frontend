@@ -5,18 +5,13 @@ import userEvent from '@testing-library/user-event';
 import MockAdapter from 'axios-mock-adapter';
 import { createIntl } from '@navikt/ft-utils';
 import { RestApiMock } from '@navikt/fp-utils-test';
-import {
-  fagsakYtelseType as FagsakYtelseType,
-  behandlingType as BehandlingType,
-  KodeverkType,
-  dokumentMalType,
-} from '@navikt/fp-kodeverk';
+import { FagsakYtelseType, BehandlingType, KodeverkType, DokumentMalType } from '@navikt/fp-kodeverk';
 import { Fagsak, BehandlingAppKontekst } from '@navikt/fp-types';
 
 import { RawIntlProvider } from 'react-intl';
 import { requestFagsakApi, FagsakApiKeys } from '../../data/fagsakContextApi';
-import MeldingIndex from './MeldingIndex';
-import FagsakData from '../../fagsak/FagsakData';
+import { MeldingIndex } from './MeldingIndex';
+import { FagsakData } from '../../fagsak/FagsakData';
 import messages from '../../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
@@ -26,8 +21,8 @@ describe('<MeldingIndex>', () => {
     { kode: 'Mal1', navn: 'Mal 1', tilgjengelig: true },
     { kode: 'Mal2', navn: 'Mal 2', tilgjengelig: true },
     { kode: 'Mal3', navn: 'Mal 3', tilgjengelig: true },
-    { kode: dokumentMalType.VARSEL_OM_REVURDERING, navn: 'Varsel om revurdering', tilgjengelig: true },
-    { kode: dokumentMalType.INNHENTE_OPPLYSNINGER, navn: 'Innhent', tilgjengelig: true },
+    { kode: DokumentMalType.VARSEL_OM_REVURDERING, navn: 'Varsel om revurdering', tilgjengelig: true },
+    { kode: DokumentMalType.INNHENTE_OPPLYSNINGER, navn: 'Innhent', tilgjengelig: true },
   ];
 
   const valgtBehandling = {
@@ -212,7 +207,7 @@ describe('<MeldingIndex>', () => {
 
     expect(await screen.findByText('Send brev')).toBeInTheDocument();
 
-    await userEvent.selectOptions(utils.getByLabelText('Mal'), dokumentMalType.INNHENTE_OPPLYSNINGER);
+    await userEvent.selectOptions(utils.getByLabelText('Mal'), DokumentMalType.INNHENTE_OPPLYSNINGER);
 
     const begrunnelseInput = utils.getByLabelText('Liste over dokumenter (skriv ett dokument pr. linje)');
     await userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
@@ -229,7 +224,7 @@ describe('<MeldingIndex>', () => {
       expect(axiosMock.history.get.find(a => a.url === FagsakApiKeys.SUBMIT_MESSAGE.name)?.params).toStrictEqual({
         behandlingUuid: '1',
         arsakskode: undefined,
-        brevmalkode: dokumentMalType.INNHENTE_OPPLYSNINGER,
+        brevmalkode: DokumentMalType.INNHENTE_OPPLYSNINGER,
         fritekst: 'Dette er en begrunnelse',
       }),
     );

@@ -1,13 +1,13 @@
-import React, { FunctionComponent, useCallback } from 'react';
+import React, { useCallback } from 'react';
 
 import { Behandling, Fagsak } from '@navikt/fp-types';
 
-import ProsessPanelInitProps from '../felles/typer/prosessPanelInitProps';
-import BehandlingContainer from '../felles/BehandlingContainer';
-import BehandleInnsynProsessStegInitPanel from './prosessPaneler/BehandleInnsynProsessStegInitPanel';
-import InnsynVedtakProsessStegInitPanel from './prosessPaneler/InnsynVedtakProsessStegInitPanel';
+import { ProsessPanelInitProps } from '../felles/typer/prosessPanelInitProps';
+import { BehandlingContainer } from '../felles/BehandlingContainer';
+import { BehandleInnsynProsessStegInitPanel } from './prosessPaneler/BehandleInnsynProsessStegInitPanel';
+import { InnsynVedtakProsessStegInitPanel } from './prosessPaneler/InnsynVedtakProsessStegInitPanel';
 
-interface OwnProps {
+interface Props {
   behandling: Behandling;
   fagsak: Fagsak;
   valgtProsessSteg?: string;
@@ -16,14 +16,14 @@ interface OwnProps {
   setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void;
 }
 
-const InnsynPaneler: FunctionComponent<OwnProps> = ({
+const InnsynPaneler = ({
   behandling,
   fagsak,
   valgtProsessSteg,
   oppdaterProsessStegOgFaktaPanelIUrl,
   opneSokeside,
   setSkalOppdatereEtterBekreftelseAvAp,
-}) => {
+}: Props) => {
   const hentProsessPaneler = useCallback(
     (props: ProsessPanelInitProps) => (
       <>

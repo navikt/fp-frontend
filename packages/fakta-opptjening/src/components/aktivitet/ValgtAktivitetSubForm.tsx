@@ -5,15 +5,15 @@ import { BodyShort, HStack, Label, VStack } from '@navikt/ds-react';
 
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT, formatCurrencyNoKr } from '@navikt/ft-utils';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { opptjeningAktivitetType as OAType } from '@navikt/fp-kodeverk';
+import { OpptjeningAktivitetType } from '@navikt/fp-kodeverk';
 import { ArbeidsgiverOpplysningerPerId, FerdiglignetNæring } from '@navikt/fp-types';
 
 const YTELSE_TYPER = [
-  OAType.SYKEPENGER,
-  OAType.FORELDREPENGER,
-  OAType.PLEIEPENGER,
-  OAType.SVANGERSKAPSPENGER,
-  OAType.UTENLANDSK_ARBEIDSFORHOLD,
+  OpptjeningAktivitetType.SYKEPENGER,
+  OpptjeningAktivitetType.FORELDREPENGER,
+  OpptjeningAktivitetType.PLEIEPENGER,
+  OpptjeningAktivitetType.SVANGERSKAPSPENGER,
+  OpptjeningAktivitetType.UTENLANDSK_ARBEIDSFORHOLD,
 ];
 
 const erAvType = (valgtAktivitetstype?: string, ...opptjeningAktivitetType: string[]): boolean =>
@@ -22,7 +22,9 @@ const erAvType = (valgtAktivitetstype?: string, ...opptjeningAktivitetType: stri
 const formatDato = (dato: string): string => (dato ? dayjs(dato, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
 
 const getOppdragsgiverIntlId = (valgtAktivitetstype?: string): string =>
-  erAvType(valgtAktivitetstype, OAType.FRILANS) ? 'ActivityPanel.Oppdragsgiver' : 'ActivityPanel.Arbeidsgiver';
+  erAvType(valgtAktivitetstype, OpptjeningAktivitetType.FRILANS)
+    ? 'ActivityPanel.Oppdragsgiver'
+    : 'ActivityPanel.Arbeidsgiver';
 
 const finnArbeidsgivertekst = (
   arbeidsgiverReferanse: string,
@@ -70,7 +72,10 @@ const ValgtAktivitetSubForm: FunctionComponent<OwnProps> = ({
   ferdiglignetNæring,
 }) => (
   <VStack gap="4">
-    {erAvType(valgtAktivitetstype, ...[OAType.ARBEID, OAType.NARING, ...YTELSE_TYPER]) && (
+    {erAvType(
+      valgtAktivitetstype,
+      ...[OpptjeningAktivitetType.ARBEID, OpptjeningAktivitetType.NARING, ...YTELSE_TYPER],
+    ) && (
       <HStack gap="4">
         <div>
           <VerticalSpacer eightPx />
@@ -81,7 +86,7 @@ const ValgtAktivitetSubForm: FunctionComponent<OwnProps> = ({
             {finnArbeidsgivertekst(arbeidsgiverReferanse, arbeidsgiverOpplysningerPerId)}
           </BodyShort>
         </div>
-        {erAvType(valgtAktivitetstype, OAType.ARBEID) && (
+        {erAvType(valgtAktivitetstype, OpptjeningAktivitetType.ARBEID) && (
           <div>
             <VerticalSpacer eightPx />
             <Label size="small">
@@ -92,7 +97,7 @@ const ValgtAktivitetSubForm: FunctionComponent<OwnProps> = ({
         )}
       </HStack>
     )}
-    {erAvType(valgtAktivitetstype, OAType.NARING) && (
+    {erAvType(valgtAktivitetstype, OpptjeningAktivitetType.NARING) && (
       <>
         <div>
           <Label size="small">

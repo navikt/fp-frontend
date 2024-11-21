@@ -1,7 +1,7 @@
-import React, { FunctionComponent, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { useIntl } from 'react-intl';
 
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { VarselOmRevurderingProsessIndex } from '@navikt/fp-prosess-varsel-om-revurdering';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import {
@@ -14,10 +14,10 @@ import {
 } from '@navikt/fp-types';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
-import skalViseProsessPanel from '../../felles/prosess/skalViseProsessPanel';
-import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
-import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
-import useStandardProsessPanelProps from '../../felles/prosess/useStandardProsessPanelProps';
+import { skalViseProsessPanel } from '../../felles/prosess/skalViseProsessPanel';
+import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
+import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
 
 const getForhandsvisCallback =
@@ -47,8 +47,8 @@ const getLagringSideeffekter =
   };
 
 const AKSJONSPUNKT_KODER = [
-  AksjonspunktCode.VARSEL_REVURDERING_MANUELL,
-  AksjonspunktCode.VARSEL_REVURDERING_ETTERKONTROLL,
+  AksjonspunktKode.VARSEL_REVURDERING_MANUELL,
+  AksjonspunktKode.VARSEL_REVURDERING_ETTERKONTROLL,
 ];
 
 const ENDEPUNKTER_PANEL_DATA = [
@@ -64,18 +64,18 @@ type EndepunktPanelData = {
   soknadOriginalBehandling: Soknad;
 };
 
-interface OwnProps {
+interface Props {
   setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void;
   fagsak: Fagsak;
   opneSokeside: () => void;
 }
 
-const VarselProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
+export const VarselProsessStegInitPanel = ({
   setSkalOppdatereEtterBekreftelseAvAp,
   fagsak,
   opneSokeside,
   ...props
-}) => {
+}: Props & ProsessPanelInitProps) => {
   const lagringSideEffekter = getLagringSideeffekter(setSkalOppdatereEtterBekreftelseAvAp, opneSokeside);
 
   const { startRequest: forhandsvisMelding } = restBehandlingApiHooks.useRestApiRunner(
@@ -103,5 +103,3 @@ const VarselProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitP
     />
   );
 };
-
-export default VarselProsessStegInitPanel;

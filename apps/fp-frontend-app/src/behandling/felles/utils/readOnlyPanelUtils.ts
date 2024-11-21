@@ -1,5 +1,4 @@
-import { Behandling } from '@navikt/ft-types';
-import { Vilkar, AksessRettigheter } from '@navikt/fp-types';
+import { Behandling, Vilkar, AksessRettigheter } from '@navikt/fp-types';
 
 export const harBehandlingReadOnlyStatus = (behandling: Behandling) => behandling.taskStatus?.readOnly ?? false;
 

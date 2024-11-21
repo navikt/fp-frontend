@@ -1,4 +1,4 @@
-import { historikkAktor as HistorikkAktor } from '@navikt/fp-kodeverk';
+import { HistorikkAktor } from '@navikt/fp-kodeverk';
 
 export type HistorikkinnslagV2 = Readonly<{
   aktør: HistorikkUtfører;

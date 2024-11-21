@@ -3,7 +3,7 @@ import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import { BehandlingAppKontekst } from '@navikt/fp-types';
-import { fagsakYtelseType, behandlingType, behandlingResultatType } from '@navikt/fp-kodeverk';
+import { FagsakYtelseType, BehandlingType, BehandlingResultatType } from '@navikt/fp-kodeverk';
 import MenyHenleggIndex from './MenyHenleggIndex';
 
 export default {
@@ -27,40 +27,40 @@ const Template: StoryFn<{
     valgtBehandling={behandling}
     henleggBehandling={henleggBehandling}
     forhandsvisHenleggBehandling={forhandsvisHenleggBehandling}
-    ytelseType={fagsakYtelseType.FORELDREPENGER}
+    ytelseType={FagsakYtelseType.FORELDREPENGER}
     behandlingResultatTyper={[
       {
-        kode: behandlingResultatType.HENLAGT_KLAGE_TRUKKET,
+        kode: BehandlingResultatType.HENLAGT_KLAGE_TRUKKET,
         kodeverk: 'BEHANDLING_RESULT_TYPE',
         navn: 'Henlagt klage',
       },
       {
-        kode: behandlingResultatType.HENLAGT_SOKNAD_TRUKKET,
+        kode: BehandlingResultatType.HENLAGT_SOKNAD_TRUKKET,
         kodeverk: 'RESULTAT_TYPE',
         navn: 'Henlagt soknad trukket',
       },
       {
-        kode: behandlingResultatType.HENLAGT_FEILOPPRETTET_UTEN_BREV,
+        kode: BehandlingResultatType.HENLAGT_FEILOPPRETTET_UTEN_BREV,
         kodeverk: 'BEHANDLING_RESULT_TYPE',
         navn: 'Henlagt feilopprettet uten brev',
       },
       {
-        kode: behandlingResultatType.HENLAGT_FEILOPPRETTET_MED_BREV,
+        kode: BehandlingResultatType.HENLAGT_FEILOPPRETTET_MED_BREV,
         kodeverk: 'BEHANDLING_RESULT_TYPE',
         navn: 'Henlagt feilopprettet med brev',
       },
       {
-        kode: behandlingResultatType.HENLAGT_INNSYN_TRUKKET,
+        kode: BehandlingResultatType.HENLAGT_INNSYN_TRUKKET,
         kodeverk: 'BEHANDLING_RESULT_TYPE',
         navn: 'Henlagt innsyn',
       },
       {
-        kode: behandlingResultatType.HENLAGT_FEILOPPRETTET,
+        kode: BehandlingResultatType.HENLAGT_FEILOPPRETTET,
         kodeverk: 'RESULTAT_TYPE',
         navn: 'Henlagt feilopprettet',
       },
       {
-        kode: behandlingResultatType.HENLAGT_SOKNAD_MANGLER,
+        kode: BehandlingResultatType.HENLAGT_SOKNAD_MANGLER,
         kodeverk: 'RESULTAT_TYPE',
         navn: 'Henlagt soknad mangler',
       },
@@ -75,7 +75,7 @@ ForFørstegangssøknad.args = {
   behandling: {
     versjon: 2,
     uuid: '23r2323',
-    type: behandlingType.FORSTEGANGSSOKNAD,
+    type: BehandlingType.FORSTEGANGSSOKNAD,
   } as BehandlingAppKontekst,
   henleggBehandling: () => Promise.resolve(),
   lukkModal: action('button-click'),
@@ -87,7 +87,7 @@ ForKlage.args = {
   behandling: {
     versjon: 2,
     uuid: '23r2323',
-    type: behandlingType.KLAGE,
+    type: BehandlingType.KLAGE,
   } as BehandlingAppKontekst,
   henleggBehandling: action('button-click') as (params: HenleggParams) => Promise<any>,
   lukkModal: action('button-click'),
@@ -99,7 +99,7 @@ ForInnsyn.args = {
   behandling: {
     versjon: 2,
     uuid: '23r2323',
-    type: behandlingType.DOKUMENTINNSYN,
+    type: BehandlingType.DOKUMENTINNSYN,
   } as BehandlingAppKontekst,
   henleggBehandling: action('button-click') as (params: HenleggParams) => Promise<any>,
   lukkModal: action('button-click'),
@@ -111,7 +111,7 @@ ForTilbakekreving.args = {
   behandling: {
     versjon: 2,
     uuid: '23r2323',
-    type: behandlingType.TILBAKEKREVING,
+    type: BehandlingType.TILBAKEKREVING,
   } as BehandlingAppKontekst,
   henleggBehandling: action('button-click') as (params: HenleggParams) => Promise<any>,
   lukkModal: action('button-click'),
@@ -123,7 +123,7 @@ ForTilbakekrevingRevurdering.args = {
   behandling: {
     versjon: 2,
     uuid: '23r2323',
-    type: behandlingType.TILBAKEKREVING_REVURDERING,
+    type: BehandlingType.TILBAKEKREVING_REVURDERING,
   } as BehandlingAppKontekst,
   henleggBehandling: action('button-click') as (params: HenleggParams) => Promise<any>,
   lukkModal: action('button-click'),
@@ -135,7 +135,7 @@ ForRevurdering.args = {
   behandling: {
     versjon: 2,
     uuid: '23r2323',
-    type: behandlingType.REVURDERING,
+    type: BehandlingType.REVURDERING,
   } as BehandlingAppKontekst,
   henleggBehandling: action('button-click') as (params: HenleggParams) => Promise<any>,
   lukkModal: action('button-click'),

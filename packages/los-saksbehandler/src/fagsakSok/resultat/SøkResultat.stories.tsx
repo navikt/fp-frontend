@@ -1,5 +1,5 @@
 import React from 'react';
-import { BehandlingStatus, BehandlingType, FagsakStatus, FagsakYtelseType } from '@navikt/ft-kodeverk';
+import { BehandlingStatus, BehandlingType, FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 

@@ -1,20 +1,24 @@
-import React from 'react';
-import { RawIntlProvider } from 'react-intl';
 import { action } from '@storybook/addon-actions';
-import { createIntl } from '@navikt/ft-utils';
 
+import { getIntlDecorator } from '@navikt/fp-storybook-utils';
+import { Meta, StoryObj } from '@storybook/react/*';
 import messages from '../../../../i18n/nb_NO.json';
-import KlageBehandlingModal from './KlageBehandlingModal';
+import { KlageBehandlingModal } from './KlageBehandlingModal';
 
-const intl = createIntl(messages);
+const withIntl = getIntlDecorator(messages);
 
-export default {
+const meta = {
   title: 'app/klage/KlageBehandlingModal',
   component: KlageBehandlingModal,
-};
+  decorators: [withIntl],
+} satisfies Meta<typeof KlageBehandlingModal>;
+export default meta;
 
-export const visModal = () => (
-  <RawIntlProvider value={intl}>
-    <KlageBehandlingModal visModal lukkModal={action('button-click')} />
-  </RawIntlProvider>
-);
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: {
+    visModal: true,
+    lukkModal: action('button-click'),
+  },
+};

@@ -9,10 +9,9 @@ import { CheckboxField, NumberField, SelectField } from '@navikt/ft-form-hooks';
 
 import {
   KodeverkType,
-  oppholdArsakType,
-  oppholdArsakKontoNavn,
-  uttakArbeidType as uttakArbeidTypeKodeverk,
-  periodeResultatType,
+  OppholdArsakType,
+  UttakArbeidType as uttakArbeidTypeKodeverk,
+  PeriodeResultatType,
 } from '@navikt/fp-kodeverk';
 import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, AlleKodeverk, PeriodeSoker } from '@navikt/fp-types';
 
@@ -22,18 +21,27 @@ import styles from './uttakPeriodeInfo.module.css';
 
 const maxValue100 = maxValue(100);
 
+const OppholdArsakKontoNavn = {
+  INGEN: 'Ingen årsak',
+  UTTAK_MØDREKVOTE_ANNEN_FORELDER: 'Mødrekvote',
+  UTTAK_FEDREKVOTE_ANNEN_FORELDER: 'Fedrekvote',
+  UTTAK_FELLESP_ANNEN_FORELDER: 'Fellesperiode',
+  UTTAK_FORELDREPENGER_ANNEN_FORELDER: 'Foreldrepenger',
+  UDEFINERT: '-',
+} as Record<string, string>;
+
 const periodeStatusClassName = (valgtPeriode: PeriodeSoker, erTilknyttetStortinget: boolean): string => {
-  if (valgtPeriode.periodeResultatType === periodeResultatType.INNVILGET && !erTilknyttetStortinget) {
+  if (valgtPeriode.periodeResultatType === PeriodeResultatType.INNVILGET && !erTilknyttetStortinget) {
     return styles.greenDetailsPeriod;
   }
-  if (valgtPeriode.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING || erTilknyttetStortinget) {
+  if (valgtPeriode.periodeResultatType === PeriodeResultatType.MANUELL_BEHANDLING || erTilknyttetStortinget) {
     return styles.orangeDetailsPeriod;
   }
   return styles.redDetailsPeriod;
 };
 
 const periodeIsInnvilget = (valgtPeriode: PeriodeSoker): boolean =>
-  valgtPeriode.periodeResultatType === periodeResultatType.INNVILGET;
+  valgtPeriode.periodeResultatType === PeriodeResultatType.INNVILGET;
 
 const gradertArbforhold = (
   valgtPeriode: PeriodeSoker,
@@ -119,18 +127,18 @@ const stonadskonto = (valgtPeriode: PeriodeSoker, alleKodeverk: AlleKodeverk, ko
 };
 
 const gyldigeÅrsaker = [
-  oppholdArsakType.UTTAK_MØDREKVOTE_ANNEN_FORELDER,
-  oppholdArsakType.UTTAK_FEDREKVOTE_ANNEN_FORELDER,
-  oppholdArsakType.UTTAK_FELLESP_ANNEN_FORELDER,
-  oppholdArsakType.UTTAK_FORELDREPENGER_ANNEN_FORELDER,
+  OppholdArsakType.UTTAK_MØDREKVOTE_ANNEN_FORELDER,
+  OppholdArsakType.UTTAK_FEDREKVOTE_ANNEN_FORELDER,
+  OppholdArsakType.UTTAK_FELLESP_ANNEN_FORELDER,
+  OppholdArsakType.UTTAK_FORELDREPENGER_ANNEN_FORELDER,
 ];
 
 const mapPeriodeTyper = (typer: KodeverkMedNavn[]): ReactElement[] =>
   typer
-    .filter(({ kode }) => gyldigeÅrsaker.includes(kode))
+    .filter(({ kode }) => gyldigeÅrsaker.some(årsak => årsak === kode))
     .map(({ kode }) => (
       <option value={kode} key={kode}>
-        {oppholdArsakKontoNavn[kode]}
+        {OppholdArsakKontoNavn[kode]}
       </option>
     ));
 
@@ -139,7 +147,7 @@ const visGraderingIkkeInnvilget = (
   readOnly: boolean,
   graderingInnvilget?: boolean,
 ): boolean =>
-  valgtPeriode.periodeResultatType === periodeResultatType.INNVILGET &&
+  valgtPeriode.periodeResultatType === PeriodeResultatType.INNVILGET &&
   !!valgtPeriode.gradertAktivitet &&
   graderingInnvilget === false &&
   readOnly;

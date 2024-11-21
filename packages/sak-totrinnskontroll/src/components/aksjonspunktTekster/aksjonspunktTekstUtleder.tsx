@@ -4,9 +4,9 @@ import { FormattedMessage } from 'react-intl';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 
 import {
-  AksjonspunktCode,
-  behandlingResultatType,
-  behandlingStatus as behandlingStatusCode,
+  AksjonspunktKode,
+  BehandlingResultatType,
+  BehandlingStatus,
   isUttakAksjonspunkt,
   isFaktaUttakAksjonspunkt,
 } from '@navikt/fp-kodeverk';
@@ -39,16 +39,16 @@ const buildUttakText = (aksjonspunkt: TotrinnskontrollAksjonspunkt): ReactElemen
           id = 'ToTrinnsForm.AvklarUttak.PeriodeLagtTil';
         } else if (
           uttakperiode.erEndret &&
-          (aksjonspunkt.aksjonspunktKode === AksjonspunktCode.FASTSETT_UTTAKPERIODER ||
-            aksjonspunkt.aksjonspunktKode === AksjonspunktCode.TILKNYTTET_STORTINGET)
+          (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.FASTSETT_UTTAKPERIODER ||
+            aksjonspunkt.aksjonspunktKode === AksjonspunktKode.TILKNYTTET_STORTINGET)
         ) {
           id = 'ToTrinnsForm.ManueltFastsattUttak.PeriodeEndret';
         } else if (
           uttakperiode.erEndret &&
-          aksjonspunkt.aksjonspunktKode === AksjonspunktCode.OVERSTYRING_AV_UTTAKPERIODER
+          aksjonspunkt.aksjonspunktKode === AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER
         ) {
           id = 'ToTrinnsForm.OverstyrUttak.PeriodeEndret';
-        } else if (uttakperiode.erEndret && aksjonspunkt.aksjonspunktKode === AksjonspunktCode.OVERSTYR_FAKTA_UTTAK) {
+        } else if (uttakperiode.erEndret && aksjonspunkt.aksjonspunktKode === AksjonspunktKode.OVERSTYR_FAKTA_UTTAK) {
           id = 'ToTrinnsForm.OverstyrUttak.PeriodeEndret';
         } else if (uttakperiode.erEndret) {
           id = 'ToTrinnsForm.AvklarUttak.PeriodeEndret';
@@ -101,25 +101,25 @@ const getFaktaOmBeregningText = (
 const getTextForKlageHelper = (behandlingsresultat?: Behandlingsresultat): ReactElement => {
   let aksjonspunktTextId = '';
   switch (behandlingsresultat?.type) {
-    case behandlingResultatType.KLAGE_YTELSESVEDTAK_STADFESTET:
+    case BehandlingResultatType.KLAGE_YTELSESVEDTAK_STADFESTET:
       aksjonspunktTextId = 'ToTrinnsForm.Klage.StadfesteYtelsesVedtak';
       break;
-    case behandlingResultatType.KLAGE_YTELSESVEDTAK_OPPHEVET:
+    case BehandlingResultatType.KLAGE_YTELSESVEDTAK_OPPHEVET:
       aksjonspunktTextId = 'ToTrinnsForm.Klage.OppheveYtelsesVedtak';
       break;
-    case behandlingResultatType.KLAGE_AVVIST:
+    case BehandlingResultatType.KLAGE_AVVIST:
       aksjonspunktTextId = 'ToTrinnsForm.Klage.Avvist';
       break;
-    case behandlingResultatType.HJEMSENDE_UTEN_OPPHEVE:
+    case BehandlingResultatType.HJEMSENDE_UTEN_OPPHEVE:
       aksjonspunktTextId = 'ToTrinnsForm.Klage.HjemsendUtenOpphev';
       break;
-    case behandlingResultatType.KLAGE_DELVIS_MEDHOLD:
+    case BehandlingResultatType.KLAGE_DELVIS_MEDHOLD:
       aksjonspunktTextId = 'ToTrinnsForm.Klage.DelvisOmgjortTilGunst';
       break;
-    case behandlingResultatType.KLAGE_OMGJORT_UGUNST:
+    case BehandlingResultatType.KLAGE_OMGJORT_UGUNST:
       aksjonspunktTextId = 'ToTrinnsForm.Klage.OmgjortTilUgunst';
       break;
-    case behandlingResultatType.KLAGE_MEDHOLD:
+    case BehandlingResultatType.KLAGE_MEDHOLD:
       aksjonspunktTextId = 'ToTrinnsForm.Klage.OmgjortTilGunst';
       break;
     default:
@@ -129,7 +129,7 @@ const getTextForKlageHelper = (behandlingsresultat?: Behandlingsresultat): React
 };
 
 const getTextForKlage = (behandlingStaus: string, behandlingsresultat?: Behandlingsresultat): ReactElement[] => {
-  if (behandlingStaus === behandlingStatusCode.FATTER_VEDTAK) {
+  if (behandlingStaus === BehandlingStatus.FATTER_VEDTAK) {
     return [getTextForKlageHelper(behandlingsresultat)];
   }
   return [];
@@ -140,8 +140,8 @@ const buildAvklarAnnenForelderText = (): ReactElement => (
 );
 
 const erKlageAksjonspunkt = (aksjonspunkt: TotrinnskontrollAksjonspunkt): boolean =>
-  aksjonspunkt.aksjonspunktKode === AksjonspunktCode.BEHANDLE_KLAGE_NFP ||
-  aksjonspunkt.aksjonspunktKode === AksjonspunktCode.VURDERING_AV_FORMKRAV_KLAGE_NFP;
+  aksjonspunkt.aksjonspunktKode === AksjonspunktKode.BEHANDLE_KLAGE_NFP ||
+  aksjonspunkt.aksjonspunktKode === AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP;
 
 const getAksjonspunkttekst = (
   isForeldrepenger: boolean,
@@ -151,16 +151,16 @@ const getAksjonspunkttekst = (
   aksjonspunkt: TotrinnskontrollAksjonspunkt,
   behandlingsresultat?: Behandlingsresultat,
 ): ReactElement[] => {
-  if (aksjonspunkt.aksjonspunktKode === AksjonspunktCode.VURDER_PERIODER_MED_OPPTJENING) {
+  if (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING) {
     return buildOpptjeningText(aksjonspunkt);
   }
   if (
     aksjonspunkt.aksjonspunktKode ===
-    AksjonspunktCode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE
+    AksjonspunktKode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE
   ) {
     return [buildVarigEndringBeregningText(aksjonspunkt.beregningDto)];
   }
-  if (aksjonspunkt.aksjonspunktKode === AksjonspunktCode.VURDER_FAKTA_FOR_ATFL_SN) {
+  if (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.VURDER_FAKTA_FOR_ATFL_SN) {
     return getFaktaOmBeregningText(faktaOmBeregningTilfeller, aksjonspunkt.beregningDto);
   }
   if (
@@ -178,10 +178,10 @@ const getAksjonspunkttekst = (
     return buildUttakText(aksjonspunkt);
   }
 
-  if (aksjonspunkt.aksjonspunktKode === AksjonspunktCode.AVKLAR_ANNEN_FORELDER_RETT) {
+  if (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.AVKLAR_ANNEN_FORELDER_RETT) {
     return [buildAvklarAnnenForelderText()];
   }
-  if (aksjonspunkt.aksjonspunktKode === AksjonspunktCode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD) {
+  if (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD) {
     return getTextForForeldreansvarsvilkåretAndreLedd(isForeldrepenger);
   }
   if (erKlageAksjonspunkt(aksjonspunkt)) {

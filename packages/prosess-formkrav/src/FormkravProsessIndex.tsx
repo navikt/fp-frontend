@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { KlageVurdering, StandardProsessPanelProps } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
@@ -33,7 +33,7 @@ const FormkravProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelPro
   lagreFormkravVurdering,
 }) => (
   <RawIntlProvider value={intl}>
-    {aksjonspunkter.some(a => a.definisjon === AksjonspunktCode.VURDERING_AV_FORMKRAV_KLAGE_NFP) && (
+    {aksjonspunkter.some(a => a.definisjon === AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP) && (
       <FormkravKlageFormNfp
         behandlingUuid={behandling.uuid}
         klageVurdering={klageVurdering}

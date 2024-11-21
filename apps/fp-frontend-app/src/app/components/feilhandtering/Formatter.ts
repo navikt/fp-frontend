@@ -1,8 +1,6 @@
-import ErrorMessage from './ErrorMessage';
+import { ErrorMessage } from './ErrorMessage';
 
-interface Formatter<T> {
+export interface Formatter<T> {
   isOfType(type: string): boolean;
   format(errorData: T): ErrorMessage | undefined;
 }
-
-export default Formatter;

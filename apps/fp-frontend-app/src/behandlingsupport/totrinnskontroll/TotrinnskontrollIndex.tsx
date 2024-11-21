@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 import { TotrinnskontrollSakIndex } from '@navikt/fp-sak-totrinnskontroll';
@@ -6,14 +6,14 @@ import { FatterVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { useIntl } from 'react-intl';
-import { behandlingStatus } from '@navikt/fp-kodeverk';
-import FagsakData from '../../fagsak/FagsakData';
-import useVisForhandsvisningAvMelding from '../../data/useVisForhandsvisningAvMelding';
+import { BehandlingStatus } from '@navikt/fp-kodeverk';
+import { FagsakData } from '../../fagsak/FagsakData';
+import { useVisForhandsvisningAvMelding } from '../../data/useVisForhandsvisningAvMelding';
 import { createLocationForSkjermlenke } from '../../app/paths';
 import { useKodeverk } from '../../data/useKodeverk';
-import BeslutterModalIndex from './BeslutterModalIndex';
+import { BeslutterModalIndex } from './BeslutterModalIndex';
 import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
-import SupportHeaderAndContent from '../SupportHeader';
+import { SupportHeaderAndContent } from '../SupportHeader';
 
 type Values = {
   fatterVedtakAksjonspunktDto: {
@@ -43,7 +43,7 @@ const getLagreFunksjon =
     return godkjennTotrinnsaksjonspunkter(params);
   };
 
-interface OwnProps {
+interface Props {
   fagsakData: FagsakData;
   valgtBehandlingUuid: string;
   beslutterFormData?: any;
@@ -55,12 +55,12 @@ interface OwnProps {
  *
  * Containerklass ansvarlig for att rita opp vilkår og aksjonspunkter med toTrinnskontroll
  */
-const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
+export const TotrinnskontrollIndex = ({
   fagsakData,
   valgtBehandlingUuid,
   beslutterFormData,
   setBeslutterFormData,
-}) => {
+}: Props) => {
   const intl = useIntl();
   const [visBeslutterModal, setVisBeslutterModal] = useState(false);
   const [erAlleAksjonspunktGodkjent, setAlleAksjonspunktTilGodkjent] = useState(false);
@@ -107,7 +107,7 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
     return null;
   }
 
-  const erStatusFatterVedtak = valgtBehandling.status === behandlingStatus.FATTER_VEDTAK;
+  const erStatusFatterVedtak = valgtBehandling.status === BehandlingStatus.FATTER_VEDTAK;
 
   return (
     <>
@@ -140,5 +140,3 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-
-export default TotrinnskontrollIndex;

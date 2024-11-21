@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import { StoryFn } from '@storybook/react';
 
-import { fagsakYtelseType, fagsakStatus } from '@navikt/fp-kodeverk';
+import { FagsakYtelseType, FagsakStatus } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 import { FagsakEnkel } from '@navikt/fp-types';
@@ -37,14 +37,14 @@ Default.args = {
   fagsaker: [
     {
       saksnummer: '1',
-      fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
+      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
       relasjonsRolleType: '',
-      status: fagsakStatus.OPPRETTET,
+      status: FagsakStatus.OPPRETTET,
     },
     {
       saksnummer: '2',
-      fagsakYtelseType: fagsakYtelseType.ENGANGSSTONAD,
-      status: fagsakStatus.OPPRETTET,
+      fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
+      status: FagsakStatus.OPPRETTET,
     },
   ] as FagsakEnkel[],
 };

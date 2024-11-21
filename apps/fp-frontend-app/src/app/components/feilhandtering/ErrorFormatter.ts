@@ -1,10 +1,11 @@
-import DefaultFormatter, { ErrorData as ErrorDataDefault } from './DefaultFormatter';
-import RestTimeoutFormatter, { ErrorData as ErrorDataRestDefault } from './RestTimeoutFormatter';
-import RestHaltedOrDelayedFormatter, { ErrorData as ErrorDataHaltedOrDelayed } from './RestHaltedOrDelayedFormatter';
-import RestGatewayTimeoutOrNotFoundFormatter, {
+import { DefaultFormatter, ErrorData as ErrorDataDefault } from './DefaultFormatter';
+import { RestTimeoutFormatter, ErrorData as ErrorDataRestDefault } from './RestTimeoutFormatter';
+import { RestHaltedOrDelayedFormatter, ErrorData as ErrorDataHaltedOrDelayed } from './RestHaltedOrDelayedFormatter';
+import {
+  RestGatewayTimeoutOrNotFoundFormatter,
   ErrorData as ErrorDataTimeoutOrNotFound,
 } from './RestGatewayTimeoutOrNotFoundFormatter';
-import ErrorMessage from './ErrorMessage';
+import { ErrorMessage } from './ErrorMessage';
 
 const defaultFormatter = new DefaultFormatter();
 const formatters = [
@@ -20,7 +21,7 @@ export type InputErrorMessage =
   | ErrorDataHaltedOrDelayed
   | ErrorDataTimeoutOrNotFound;
 
-class ErrorFormatter {
+export class ErrorFormatter {
   format = (errorMessages: InputErrorMessage[], crashMessage?: string): ErrorMessage[] => {
     const allErrorMessages: ErrorMessage[] = [];
     if (crashMessage) {
@@ -46,5 +47,3 @@ class ErrorFormatter {
     return allErrorMessages;
   };
 }
-
-export default ErrorFormatter;

@@ -1,18 +1,18 @@
-import React, { FunctionComponent, ReactElement, useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 
 import { Behandling } from '@navikt/fp-types';
 
-import ProsessContainer from './prosess/ProsessContainer';
-import FaktaContainer from './fakta/FaktaContainer';
-import ProsessPanelInitProps, { ProsessPanelExtraInitProps } from './typer/prosessPanelInitProps';
-import FaktaPanelInitProps from './typer/faktaPanelInitProps';
+import { ProsessContainer } from './prosess/ProsessContainer';
+import { FaktaContainer } from './fakta/FaktaContainer';
+import { ProsessPanelInitProps, ProsessPanelExtraInitProps } from './typer/prosessPanelInitProps';
+import { FaktaPanelInitProps } from './typer/faktaPanelInitProps';
 
 interface FaktaPanelInfo {
   urlCode: string;
   text: string;
 }
 
-interface OwnProps {
+interface Props {
   behandling: Behandling;
   hentFaktaPaneler?: (props: FaktaPanelInitProps) => ReactElement;
   hentProsessPaneler?: (props: ProsessPanelInitProps, ekstraProps: ProsessPanelExtraInitProps) => ReactElement;
@@ -21,14 +21,14 @@ interface OwnProps {
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
 }
 
-const BehandlingContainer: FunctionComponent<OwnProps> = ({
+export const BehandlingContainer = ({
   behandling,
   hentFaktaPaneler,
   hentProsessPaneler,
   valgtProsessSteg,
   valgtFaktaSteg,
   oppdaterProsessStegOgFaktaPanelIUrl,
-}) => {
+}: Props) => {
   const [apentFaktaPanelInfo, setApentFaktaPanel] = useState<FaktaPanelInfo>();
 
   return (
@@ -53,5 +53,3 @@ const BehandlingContainer: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-
-export default BehandlingContainer;

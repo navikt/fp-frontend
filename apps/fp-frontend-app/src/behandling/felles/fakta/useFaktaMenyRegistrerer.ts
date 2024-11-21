@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 
 import { usePrevious } from '@navikt/ft-ui-komponenter';
 
-import FaktaPanelMenyData from '../typer/faktaPanelMenyData';
+import { FaktaPanelMenyData } from '../typer/faktaPanelMenyData';
 
 const DEFAULT_PANEL_VALGT = 'default';
 
-const useFaktaMenyRegistrerer = (
+export const useFaktaMenyRegistrerer = (
   registrerFaktaPanel: (data: FaktaPanelMenyData) => void,
   id: string,
   tekst: string,
@@ -44,5 +44,3 @@ const useFaktaMenyRegistrerer = (
 
   return skalVisesImeny && erPanelValgt;
 };
-
-export default useFaktaMenyRegistrerer;

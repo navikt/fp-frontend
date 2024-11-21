@@ -25,7 +25,7 @@ import {
   MottattDatoFormValues,
   ANDRE_YTELSER_FORM_NAME_PREFIX,
 } from '@navikt/fp-papirsoknad-ui-komponenter';
-import { familieHendelseType, KodeverkType } from '@navikt/fp-kodeverk';
+import { FamilieHendelseType, KodeverkType } from '@navikt/fp-kodeverk';
 
 const FRILANS_NAME_PREFIX = 'frilans';
 
@@ -135,7 +135,7 @@ export const SvangerskapspengerForm = ({
       <OppholdINorgePapirsoknadIndex
         readOnly={readOnly}
         alleKodeverk={alleKodeverk}
-        erAdopsjon={soknadData.getFamilieHendelseType() !== familieHendelseType.ADOPSJON}
+        erAdopsjon={soknadData.getFamilieHendelseType() !== FamilieHendelseType.ADOPSJON}
         mottattDato={mottattDato}
       />
       <InntektsgivendeArbeidPapirsoknadIndex readOnly={readOnly} alleKodeverk={alleKodeverk} />

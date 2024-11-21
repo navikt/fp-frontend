@@ -1,30 +1,27 @@
-import React, { FunctionComponent, useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useIntl } from 'react-intl';
 
-import { vilkarUtfallType, AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { VilkarUtfallType, AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { BeregningsresultatProsessIndex } from '@navikt/fp-prosess-beregningsresultat';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { AksessRettigheter, BeregningsresultatEs } from '@navikt/fp-types';
 
-import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
-import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
+import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingApiKeys, requestBehandlingApi } from '../../../data/behandlingContextApi';
 
-const AKSJONSPUNKT_KODER = [AksjonspunktCode.OVERSTYR_BEREGNING];
+const AKSJONSPUNKT_KODER = [AksjonspunktKode.OVERSTYR_BEREGNING];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.BEREGNINGRESULTAT_ENGANGSSTONAD];
 type EndepunktPanelData = {
   beregningresultatEngangsstonad: BeregningsresultatEs;
 };
 
-interface OwnProps {
+interface Props {
   rettigheter: AksessRettigheter;
 }
 
-const BeregningEsProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
-  rettigheter,
-  ...props
-}) => {
+export const BeregningEsProsessStegInitPanel = ({ rettigheter, ...props }: Props & ProsessPanelInitProps) => {
   const [erOverstyrt, setOverstyrt] = useState(false);
   const toggleOverstyring = useCallback(() => setOverstyrt(!erOverstyrt), [erOverstyrt]);
 
@@ -38,8 +35,8 @@ const BeregningEsProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanel
       skalPanelVisesIMeny={() => true}
       hentOverstyrtStatus={() =>
         requestBehandlingApi.hasPath(BehandlingApiKeys.BEREGNINGRESULTAT_ENGANGSSTONAD.name)
-          ? vilkarUtfallType.OPPFYLT
-          : vilkarUtfallType.IKKE_VURDERT
+          ? VilkarUtfallType.OPPFYLT
+          : VilkarUtfallType.IKKE_VURDERT
       }
       erOverstyrt={erOverstyrt}
       renderPanel={data => (
@@ -53,5 +50,3 @@ const BeregningEsProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanel
     />
   );
 };
-
-export default BeregningEsProsessStegInitPanel;

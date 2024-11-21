@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
-import { dokumentMalType } from '@navikt/fp-kodeverk';
+import { DokumentMalType } from '@navikt/fp-kodeverk';
 import * as stories from './VedtakInnsynProsessIndex.stories';
 
 const { PanelForInnvilgetVedtak, PanelForAvvistVedtak, PanelForAvvistVedtakReadonly } = composeStories(stories);
@@ -28,7 +28,7 @@ describe('<VedtakInnsynProsessIndex>', () => {
 
     await waitFor(() => expect(forhåndsvise).toHaveBeenCalledTimes(1));
     expect(forhåndsvise).toHaveBeenNthCalledWith(1, {
-      dokumentMal: dokumentMalType.INNSYN_SVAR,
+      dokumentMal: DokumentMalType.INNSYN_SVAR,
       fritekst: ' ',
       gjelderVedtak: true,
       mottaker: '',
@@ -63,7 +63,7 @@ describe('<VedtakInnsynProsessIndex>', () => {
 
     await waitFor(() => expect(forhåndsvise).toHaveBeenCalledTimes(1));
     expect(forhåndsvise).toHaveBeenNthCalledWith(1, {
-      dokumentMal: dokumentMalType.INNSYN_SVAR,
+      dokumentMal: DokumentMalType.INNSYN_SVAR,
       fritekst: 'Dette er en fritekst',
       gjelderVedtak: true,
       mottaker: '',
@@ -96,7 +96,7 @@ describe('<VedtakInnsynProsessIndex>', () => {
 
     await waitFor(() => expect(forhåndsvise).toHaveBeenCalledTimes(1));
     expect(forhåndsvise).toHaveBeenNthCalledWith(1, {
-      dokumentMal: dokumentMalType.INNSYN_SVAR,
+      dokumentMal: DokumentMalType.INNSYN_SVAR,
       fritekst: 'Dette er en vurdering',
       gjelderVedtak: true,
       mottaker: '',

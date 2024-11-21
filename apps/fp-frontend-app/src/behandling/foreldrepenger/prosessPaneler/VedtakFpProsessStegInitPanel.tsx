@@ -1,12 +1,12 @@
-import React, { FunctionComponent, useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useIntl } from 'react-intl';
 
 import {
-  vilkarUtfallType,
+  VilkarUtfallType,
   isAvslag,
-  fagsakYtelseType,
-  AksjonspunktCode,
-  aksjonspunktStatus,
+  FagsakYtelseType,
+  AksjonspunktKode,
+  AksjonspunktStatus,
 } from '@navikt/fp-kodeverk';
 import { VedtakProsessIndex, ForhandsvisData } from '@navikt/fp-prosess-vedtak';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
@@ -24,26 +24,26 @@ import {
 } from '@navikt/fp-types';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
-import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
-import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
-import IverksetterVedtakStatusModal from '../../felles/modaler/vedtak/IverksetterVedtakStatusModal';
-import FatterVedtakStatusModal from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
-import useStandardProsessPanelProps from '../../felles/prosess/useStandardProsessPanelProps';
+import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
+import { IverksetterVedtakStatusModal } from '../../felles/modaler/vedtak/IverksetterVedtakStatusModal';
+import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
+import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
 
 const hasOnlyClosedAps = (aksjonspunkter: Aksjonspunkt[], vedtakAksjonspunkter: Aksjonspunkt[]): boolean =>
   aksjonspunkter
     .filter(ap => !vedtakAksjonspunkter.some(vap => vap.definisjon === ap.definisjon))
-    .every(ap => ap.status !== aksjonspunktStatus.OPPRETTET);
+    .every(ap => ap.status !== AksjonspunktStatus.OPPRETTET);
 
 const hasAksjonspunkt = (ap: Aksjonspunkt): boolean =>
-  ap.definisjon === AksjonspunktCode.OVERSTYR_BEREGNING ||
-  ap.definisjon === AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG ||
-  ap.definisjon === AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG ||
-  ap.definisjon === AksjonspunktCode.VURDER_SOKNADSFRIST_FORELDREPENGER;
+  ap.definisjon === AksjonspunktKode.OVERSTYR_BEREGNING ||
+  ap.definisjon === AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG ||
+  ap.definisjon === AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG ||
+  ap.definisjon === AksjonspunktKode.VURDER_SOKNADSFRIST_FORELDREPENGER;
 
 const isAksjonspunktOpenAndOfType = (ap: Aksjonspunkt): boolean =>
-  hasAksjonspunkt(ap) && ap.status === aksjonspunktStatus.OPPRETTET;
+  hasAksjonspunkt(ap) && ap.status === AksjonspunktStatus.OPPRETTET;
 
 const findStatusForVedtak = (
   vilkar: Vilkar[],
@@ -52,31 +52,31 @@ const findStatusForVedtak = (
   behandlingsresultat?: Behandlingsresultat,
 ): string => {
   if (vilkar.length === 0) {
-    return vilkarUtfallType.IKKE_VURDERT;
+    return VilkarUtfallType.IKKE_VURDERT;
   }
 
   if (
     hasOnlyClosedAps(aksjonspunkter, vedtakAksjonspunkter) &&
-    vilkar.some(v => v.vilkarStatus === vilkarUtfallType.IKKE_OPPFYLT)
+    vilkar.some(v => v.vilkarStatus === VilkarUtfallType.IKKE_OPPFYLT)
   ) {
-    return vilkarUtfallType.IKKE_OPPFYLT;
+    return VilkarUtfallType.IKKE_OPPFYLT;
   }
 
   if (
-    vilkar.some(v => v.vilkarStatus === vilkarUtfallType.IKKE_VURDERT) ||
+    vilkar.some(v => v.vilkarStatus === VilkarUtfallType.IKKE_VURDERT) ||
     aksjonspunkter.some(isAksjonspunktOpenAndOfType)
   ) {
-    return vilkarUtfallType.IKKE_VURDERT;
+    return VilkarUtfallType.IKKE_VURDERT;
   }
 
   if (!hasOnlyClosedAps(aksjonspunkter, vedtakAksjonspunkter)) {
-    return vilkarUtfallType.IKKE_VURDERT;
+    return VilkarUtfallType.IKKE_VURDERT;
   }
 
   if (behandlingsresultat && isAvslag(behandlingsresultat.type)) {
-    return vilkarUtfallType.IKKE_OPPFYLT;
+    return VilkarUtfallType.IKKE_OPPFYLT;
   }
-  return vilkarUtfallType.OPPFYLT;
+  return VilkarUtfallType.OPPFYLT;
 };
 
 const getForhandsvisCallback =
@@ -96,13 +96,13 @@ const getForhandsvisCallback =
   };
 
 const IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER = [
-  AksjonspunktCode.FATTER_VEDTAK,
-  AksjonspunktCode.VURDERE_ANNEN_YTELSE,
-  AksjonspunktCode.VURDERE_DOKUMENT,
-  AksjonspunktCode.VURDERE_INNTEKTSMELDING_KLAGE,
-  AksjonspunktCode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST,
-  AksjonspunktCode.KONTROLL_AV_MAUNELT_OPPRETTET_REVURDERINGSBEHANDLING,
-  AksjonspunktCode.FORESLA_VEDTAK_MANUELT,
+  AksjonspunktKode.FATTER_VEDTAK,
+  AksjonspunktKode.VURDERE_ANNEN_YTELSE,
+  AksjonspunktKode.VURDERE_DOKUMENT,
+  AksjonspunktKode.VURDERE_INNTEKTSMELDING_KLAGE,
+  AksjonspunktKode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST,
+  AksjonspunktKode.KONTROLL_AV_MAUNELT_OPPRETTET_REVURDERINGSBEHANDLING,
+  AksjonspunktKode.FORESLA_VEDTAK_MANUELT,
 ];
 
 const getLagringSideeffekter =
@@ -117,7 +117,7 @@ const getLagringSideeffekter =
     // Returner funksjon som blir kjørt etter lagring av aksjonspunkt(er)
     return () => {
       const skalTilTotrinnskontroll = aksjonspunktModels.some(
-        ap => ap.kode === AksjonspunktCode.FORESLA_VEDTAK || ap.skalBrukeOverstyrendeFritekstBrev,
+        ap => ap.kode === AksjonspunktKode.FORESLA_VEDTAK || ap.skalBrukeOverstyrendeFritekstBrev,
       );
       if (skalTilTotrinnskontroll) {
         toggleFatterVedtakModal(true);
@@ -127,7 +127,7 @@ const getLagringSideeffekter =
     };
   };
 
-const AKSJONSPUNKT_KODER = [...IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER, AksjonspunktCode.FORESLA_VEDTAK];
+const AKSJONSPUNKT_KODER = [...IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER, AksjonspunktKode.FORESLA_VEDTAK];
 
 const ENDEPUNKTER_PANEL_DATA = [
   BehandlingApiKeys.TILBAKEKREVINGVALG,
@@ -146,18 +146,18 @@ type EndepunktPanelData = {
   beregningsgrunnlag?: Beregningsgrunnlag;
 };
 
-interface OwnProps {
+interface Props {
   setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void;
   fagsak: Fagsak;
   opneSokeside: () => void;
 }
 
-const VedtakFpProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
+export const VedtakFpProsessStegInitPanel = ({
   setSkalOppdatereEtterBekreftelseAvAp,
   fagsak,
   opneSokeside,
   ...props
-}) => {
+}: Props & ProsessPanelInitProps) => {
   const intl = useIntl();
   const [visIverksetterVedtakModal, toggleIverksetterVedtakModal] = useState(false);
   const [visFatterVedtakModal, toggleFatterVedtakModal] = useState(false);
@@ -212,7 +212,7 @@ const VedtakFpProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelIni
           props.behandling.aksjonspunkt || [],
           standardData.aksjonspunkter,
           standardData.behandling.behandlingsresultat,
-        ) !== vilkarUtfallType.IKKE_VURDERT
+        ) !== VilkarUtfallType.IKKE_VURDERT
       }
       renderPanel={data => (
         <>
@@ -227,7 +227,7 @@ const VedtakFpProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelIni
             tekst={intl.formatMessage({ id: 'FatterVedtakStatusModal.SendtBeslutter' })}
           />
           <VedtakProsessIndex
-            ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
+            ytelseTypeKode={FagsakYtelseType.FORELDREPENGER}
             previewCallback={previewCallback}
             {...data}
             aksjonspunkter={props.behandling.aksjonspunkt}
@@ -238,5 +238,3 @@ const VedtakFpProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelIni
     />
   );
 };
-
-export default VedtakFpProsessStegInitPanel;

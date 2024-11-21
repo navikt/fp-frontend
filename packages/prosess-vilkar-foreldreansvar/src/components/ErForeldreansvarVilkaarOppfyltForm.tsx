@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Label } from '@navikt/ds-react';
 
 import { Form } from '@navikt/ft-form-hooks';
-import { AksjonspunktCode, VilkarType, vilkarUtfallType, KodeverkType, aksjonspunktStatus } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, VilkarType, VilkarUtfallType, KodeverkType, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import {
   ProsessStegBegrunnelseTextFieldNew,
   VilkarResultPicker,
@@ -62,10 +62,10 @@ const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): Ak
     ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
     kode: validerApKodeOgHentApEnum(
       ap.definisjon,
-      AksjonspunktCode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
-      AksjonspunktCode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
-      AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
-      AksjonspunktCode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
+      AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
+      AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
+      AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+      AksjonspunktKode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
     ),
   }));
 
@@ -103,8 +103,8 @@ const ErForeldreansvarVilkaarOppfyltForm: FunctionComponent<OwnProps> = ({
     : VilkarType.FORELDREANSVARSVILKARET_4_LEDD;
   const avslagsarsaker = alleKodeverk[KodeverkType.AVSLAGSARSAK][vilkarTypeKode];
 
-  const isOpenAksjonspunkt = aksjonspunkter.some(ap => ap.status === aksjonspunktStatus.OPPRETTET);
-  const originalErVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
+  const isOpenAksjonspunkt = aksjonspunkter.some(ap => ap.status === AksjonspunktStatus.OPPRETTET);
+  const originalErVilkarOk = isOpenAksjonspunkt ? undefined : VilkarUtfallType.OPPFYLT === status;
 
   const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
 

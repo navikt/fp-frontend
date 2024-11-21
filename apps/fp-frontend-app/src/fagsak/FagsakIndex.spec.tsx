@@ -3,17 +3,17 @@ import { MemoryRouter } from 'react-router-dom';
 import { act } from 'react-dom/test-utils';
 import { RawIntlProvider } from 'react-intl';
 import { render, screen } from '@testing-library/react';
-import { BehandlingType, BehandlingStatus, FagsakStatus, FagsakYtelseType } from '@navikt/ft-kodeverk';
+import { BehandlingType, BehandlingStatus, FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { createIntl } from '@navikt/ft-utils';
 
 import { RestApiMock } from '@navikt/fp-utils-test';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 import { Saksnotat } from '@navikt/fp-types';
-import * as useTrackRouteParam from '../app/useTrackRouteParam';
+import * as All from '../app/useTrackRouteParam';
 import { requestFagsakApi, FagsakApiKeys } from '../data/fagsakContextApi';
 import messages from '../../i18n/nb_NO.json';
-import FagsakIndex from './FagsakIndex';
+import { FagsakIndex } from './FagsakIndex';
 
 const intl = createIntl(messages);
 
@@ -63,7 +63,7 @@ describe('<FagsakIndex>', () => {
     navn: 'Peder Pjokk',
   };
 
-  vi.spyOn(useTrackRouteParam, 'default').mockImplementation(() => ({
+  vi.spyOn(All, 'useTrackRouteParam').mockImplementation(() => ({
     selected: '123456',
     location: {
       key: '1',

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { HistorikkSakIndex } from '@navikt/fp-sak-historikk';
@@ -7,7 +7,7 @@ import { Historikkinnslag } from '@navikt/fp-types';
 import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
 import { pathToBehandling, createLocationForSkjermlenke } from '../../app/paths';
 
-interface OwnProps {
+interface Props {
   saksnummer: string;
   behandlingUuid?: string;
   behandlingVersjon?: number;
@@ -16,13 +16,13 @@ interface OwnProps {
   kjønn: string;
 }
 
-const HistorikkIndex: FunctionComponent<OwnProps> = ({
+export const HistorikkIndex = ({
   saksnummer,
   behandlingUuid,
   historikkinnslagFpSak,
   historikkinnslagFpTilbake,
   kjønn,
-}) => {
+}: Props) => {
   const alleKodeverkFpSak = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK);
   const alleKodeverkFpTilbake = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK_FPTILBAKE);
 
@@ -49,5 +49,3 @@ const HistorikkIndex: FunctionComponent<OwnProps> = ({
     />
   );
 };
-
-export default HistorikkIndex;

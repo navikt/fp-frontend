@@ -5,7 +5,7 @@ import { Heading, Button, HStack } from '@navikt/ds-react';
 
 import { Form } from '@navikt/ft-form-hooks';
 
-import { AksjonspunktCode, KodeverkType, klageVurdering as klageVurderingType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, KodeverkType, KlageVurdering as klageVurderingType } from '@navikt/fp-kodeverk';
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import { KlageVurdering, AlleKodeverk, KlageVurderingResultat, KodeverkMedNavn } from '@navikt/fp-types';
@@ -29,7 +29,7 @@ const transformValues = (values: KlageFormType): KlageVurderingResultatAp => ({
   klageVurdering: values.klageVurdering!,
   fritekstTilBrev: values.fritekstTilBrev,
   begrunnelse: values.begrunnelse,
-  kode: AksjonspunktCode.BEHANDLE_KLAGE_NFP,
+  kode: AksjonspunktKode.BEHANDLE_KLAGE_NFP,
 });
 
 const definertKodeverdiEllerUndefined = (kode: string | undefined): string | undefined => {
@@ -113,7 +113,7 @@ export const BehandleKlageFormNfp: FunctionComponent<OwnProps> = ({
       <Heading size="small">{intl.formatMessage({ id: 'Klage.ResolveKlage.Title' })}</Heading>
       <VerticalSpacer fourPx />
       <AksjonspunktHelpTextTemp isAksjonspunktOpen={!readOnlySubmitButton}>
-        {[<FormattedMessage id="Klage.ResolveKlage.HelpText" key={AksjonspunktCode.BEHANDLE_KLAGE_NFP} />]}
+        {[<FormattedMessage id="Klage.ResolveKlage.HelpText" key={AksjonspunktKode.BEHANDLE_KLAGE_NFP} />]}
       </AksjonspunktHelpTextTemp>
       <KlageVurderingRadioOptionsNfp
         readOnly={readOnly}
@@ -170,7 +170,7 @@ export const BehandleKlageFormNfp: FunctionComponent<OwnProps> = ({
             saveKlage={saveKlage}
             handleSubmit={formMethods.handleSubmit}
             readOnly={readOnly}
-            aksjonspunktCode={AksjonspunktCode.BEHANDLE_KLAGE_NFP}
+            aksjonspunktCode={AksjonspunktKode.BEHANDLE_KLAGE_NFP}
           />
         </HStack>
       </div>

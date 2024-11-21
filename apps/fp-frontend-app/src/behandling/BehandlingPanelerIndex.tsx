@@ -1,4 +1,4 @@
-import React, { FunctionComponent, Suspense, useCallback, useEffect, useState } from 'react';
+import React, { Suspense, useCallback, useEffect, useState } from 'react';
 
 import {
   AksessRettigheter,
@@ -14,14 +14,14 @@ import { RestApiState, useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hoo
 import { parseQueryString, replaceNorwegianCharacters } from '@navikt/ft-utils';
 import { Location } from 'history';
 
-import { BehandlingType, FagsakYtelseType } from '@navikt/ft-kodeverk';
+import { BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { NavigateFunction, useLocation, useNavigate } from 'react-router';
-import BehandlingPaVent from './felles/modaler/paVent/BehandlingPaVent';
-import StandardPropsProvider from './felles/utils/standardPropsStateContext';
+import { BehandlingPaVent } from './felles/modaler/paVent/BehandlingPaVent';
+import { StandardPropsProvider } from './felles/utils/standardPropsStateContext';
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../data/behandlingContextApi';
 import { getFaktaLocation, getLocationWithDefaultProsessStegAndFakta, getProsessStegLocation } from '../app/paths';
-import lazyWithRetry from './lazyUtils';
-import ErrorBoundary from '../app/ErrorBoundary';
+import { lazyWithRetry } from './lazyUtils';
+import { ErrorBoundary } from '../app/ErrorBoundary';
 
 const ForeldrepengerPaneler = lazyWithRetry(() => import('./foreldrepenger/ForeldrepengerPaneler'));
 const EngangsstonadPaneler = lazyWithRetry(() => import('./engangsstonad/EngangsstonadPaneler'));
@@ -77,7 +77,7 @@ const erTilbakekreving = (behandlingTypeKode?: string): boolean =>
   behandlingTypeKode === BehandlingType.TILBAKEKREVING ||
   behandlingTypeKode === BehandlingType.TILBAKEKREVING_REVURDERING;
 
-type OwnProps = {
+type Props = {
   behandling: Behandling;
   hentOgSettBehandling: () => void;
   fagsak: Fagsak;
@@ -87,7 +87,7 @@ type OwnProps = {
   alleBehandlinger: BehandlingAppKontekst[];
 };
 
-const BehandlingPanelerIndex: FunctionComponent<OwnProps> = ({
+export const BehandlingPanelerIndex = ({
   setBehandling,
   behandling,
   kodeverk,
@@ -95,7 +95,7 @@ const BehandlingPanelerIndex: FunctionComponent<OwnProps> = ({
   rettigheter,
   hentOgSettBehandling,
   alleBehandlinger,
-}) => {
+}: Props) => {
   const { addErrorMessage } = useRestApiErrorDispatcher();
 
   const [skalOppdatereEtterBekreftelseAvAp, setSkalOppdatereEtterBekreftelseAvAp] = useState(true);
@@ -284,5 +284,3 @@ const BehandlingPanelerIndex: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-
-export default BehandlingPanelerIndex;

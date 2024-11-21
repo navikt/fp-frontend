@@ -6,7 +6,7 @@ import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { CheckboxField } from '@navikt/ft-form-hooks';
 
 import { AlleKodeverk } from '@navikt/fp-types';
-import { foreldreType as ForeldreType } from '@navikt/fp-kodeverk';
+import { ForeldreType } from '@navikt/fp-kodeverk';
 
 import { PermisjonUtsettelsePanel, FormValues as FormValuesUtsettelse } from './PermisjonUtsettelsePanel';
 import { PermisjonGraderingPanel, FormValues as FormValuesGradering } from './PermisjonGraderingPanel';

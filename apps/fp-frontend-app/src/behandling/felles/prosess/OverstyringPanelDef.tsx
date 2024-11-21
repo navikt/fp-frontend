@@ -1,13 +1,11 @@
-import React, { FunctionComponent, useMemo } from 'react';
-import { Aksjonspunkt, KodeverkMedNavn } from '@navikt/ft-types';
-import { VilkarType } from '@navikt/ft-kodeverk';
+import React, { useMemo } from 'react';
 
 import { VilkarresultatMedOverstyringProsessIndex } from '@navikt/fp-prosess-vilkar-overstyring';
-import { Medlemskap, Vilkar } from '@navikt/fp-types';
-import { KodeverkType, OverstyringAksjonspunkter } from '@navikt/fp-kodeverk';
+import { Aksjonspunkt, KodeverkMedNavn, Medlemskap, Vilkar } from '@navikt/fp-types';
+import { VilkarType, KodeverkType, OverstyringAksjonspunkter } from '@navikt/fp-kodeverk';
 
-import skalViseProsessPanel from './skalViseProsessPanel';
-import useStandardProsessPanelProps from './useStandardProsessPanelProps';
+import { skalViseProsessPanel } from './skalViseProsessPanel';
+import { useStandardProsessPanelProps } from './useStandardProsessPanelProps';
 
 // TODO Spesifikk ES-kodar bør ikkje ligga her
 const avslagsarsakerES = ['1002', '1003', '1032'];
@@ -19,7 +17,7 @@ const filtrerAvslagsarsaker = (
     ? avslagsarsaker[vilkarTypeKode].filter(arsak => !avslagsarsakerES.includes(arsak.kode))
     : avslagsarsaker[vilkarTypeKode];
 
-interface OwnProps {
+interface Props {
   aksjonspunkter: Aksjonspunkt[];
   aksjonspunktKode: OverstyringAksjonspunkter;
   vilkar: Vilkar[];
@@ -32,7 +30,7 @@ interface OwnProps {
   overrideReadOnly: boolean;
 }
 
-const OverstyringPanelDef: FunctionComponent<OwnProps> = ({
+export const OverstyringPanelDef = ({
   aksjonspunkter,
   aksjonspunktKode,
   vilkar,
@@ -43,7 +41,7 @@ const OverstyringPanelDef: FunctionComponent<OwnProps> = ({
   toggleOverstyring,
   kanOverstyreAccess,
   overrideReadOnly,
-}) => {
+}: Props) => {
   const overstyrteAksjonspunkter = useMemo(
     () => aksjonspunkter.filter(ap => aksjonspunktKode === ap.definisjon),
     [aksjonspunkter],
@@ -77,5 +75,3 @@ const OverstyringPanelDef: FunctionComponent<OwnProps> = ({
     />
   );
 };
-
-export default OverstyringPanelDef;

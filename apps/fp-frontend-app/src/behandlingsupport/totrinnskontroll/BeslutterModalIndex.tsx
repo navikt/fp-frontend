@@ -1,15 +1,15 @@
-import React, { FunctionComponent, useCallback } from 'react';
+import React, { useCallback } from 'react';
 
 import { BehandlingAppKontekst } from '@navikt/fp-types';
 import { FatterVedtakTotrinnskontrollModalSakIndex } from '@navikt/fp-sak-totrinnskontroll';
 
-interface OwnProps {
+interface Props {
   behandling: BehandlingAppKontekst;
   pushLocation: (location: string) => void;
   allAksjonspunktApproved: boolean;
 }
 
-const BeslutterModalIndex: FunctionComponent<OwnProps> = ({ behandling, pushLocation, allAksjonspunktApproved }) => {
+export const BeslutterModalIndex = ({ behandling, pushLocation, allAksjonspunktApproved }: Props) => {
   const goToSearchPage = useCallback(() => {
     pushLocation('/');
   }, []);
@@ -22,5 +22,3 @@ const BeslutterModalIndex: FunctionComponent<OwnProps> = ({ behandling, pushLoca
     />
   );
 };
-
-export default BeslutterModalIndex;

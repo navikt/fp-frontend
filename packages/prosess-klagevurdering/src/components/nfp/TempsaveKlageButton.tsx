@@ -3,7 +3,7 @@ import { UseFormHandleSubmit } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 import { Button } from '@navikt/ds-react';
 
-import { klageVurdering as klageVurderingType } from '@navikt/fp-kodeverk';
+import { KlageVurdering as klageVurderingType } from '@navikt/fp-kodeverk';
 import KlageFormType from '../../types/klageFormType';
 
 type FormValues = {

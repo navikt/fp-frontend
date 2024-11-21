@@ -1,8 +1,8 @@
 import { dateFormat, timeFormat } from '@navikt/ft-utils';
 
-import ErrorEventType from './errorEventType';
-import ErrorMessage from './ErrorMessage';
-import Formatter from './Formatter';
+import { ErrorEventType } from './errorEventType';
+import { ErrorMessage } from './ErrorMessage';
+import { Formatter } from './Formatter';
 
 const HALTED_PROCESS_TASK_MESSAGE_CODE = 'Rest.ErrorMessage.General';
 const DELAYED_PROCESS_TASK_MESSAGE_CODE = 'Rest.ErrorMessage.DownTime';
@@ -14,7 +14,7 @@ export type ErrorData = {
   type: string;
 };
 
-class RestHaltedOrDelayedFormatter implements Formatter<ErrorData> {
+export class RestHaltedOrDelayedFormatter implements Formatter<ErrorData> {
   type = ErrorEventType.POLLING_HALTED_OR_DELAYED;
 
   isOfType = (type: string) => type === this.type;
@@ -34,5 +34,3 @@ class RestHaltedOrDelayedFormatter implements Formatter<ErrorData> {
     return undefined;
   };
 }
-
-export default RestHaltedOrDelayedFormatter;

@@ -1,11 +1,10 @@
 import React from 'react';
 import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { Aksjonspunkt } from '@navikt/ft-types';
 
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { AksjonspunktCode, sivilstandType, aksjonspunktStatus, AdresseType } from '@navikt/fp-kodeverk';
-import { Behandling, KjønnkodeEnum, PersonopplysningerBasis, Ytelsefordeling } from '@navikt/fp-types';
+import { AksjonspunktKode, SivilstandType, AksjonspunktStatus, AdresseType } from '@navikt/fp-kodeverk';
+import { Aksjonspunkt, Behandling, KjønnkodeEnum, PersonopplysningerBasis, Ytelsefordeling } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 
@@ -43,7 +42,7 @@ const defaultBruker: PersonopplysningerBasis = {
   navn: 'Espen Utvikler',
   aktoerId: '1',
   kjønn: KjønnkodeEnum.MANN,
-  sivilstand: sivilstandType.SAMBOER,
+  sivilstand: SivilstandType.SAMBOER,
   fødselsdato: '1989-01-01',
   adresser: [adresse1, adresse2],
 };
@@ -51,7 +50,7 @@ const defaultAnnenPart: PersonopplysningerBasis = {
   navn: 'Petra Utvikler',
   aktoerId: '2',
   kjønn: KjønnkodeEnum.KVINNE,
-  sivilstand: sivilstandType.SAMBOER,
+  sivilstand: SivilstandType.SAMBOER,
   fødselsdato: '1989-01-01',
   adresser: [adresse1, adresse2],
 };
@@ -62,7 +61,7 @@ const defaultBarn: PersonopplysningerBasis = {
   adresser: [adresse2],
   aktoerId: '3',
   kjønn: KjønnkodeEnum.KVINNE,
-  sivilstand: sivilstandType.UGIFT,
+  sivilstand: SivilstandType.UGIFT,
 };
 
 const ytelsefordeling = {} as Ytelsefordeling;
@@ -113,13 +112,13 @@ export const ÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg = Template.bind({}
   barn: [defaultBarn],
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG,
+      status: AksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
       kanLoses: true,
     },
   ],
   alleMerknaderFraBeslutter: {
-    [AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG]: merknaderFraBeslutter,
+    [AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG]: merknaderFraBeslutter,
   },
 };

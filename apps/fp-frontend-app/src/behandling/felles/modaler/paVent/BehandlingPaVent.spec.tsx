@@ -1,12 +1,11 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { Aksjonspunkt } from '@navikt/ft-types';
-import { BehandlingStatus, BehandlingType } from '@navikt/ft-kodeverk';
+import { BehandlingStatus, BehandlingType } from '@navikt/fp-kodeverk';
 
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import { Behandling, AlleKodeverk } from '@navikt/fp-types';
+import { Aksjonspunkt, Behandling, AlleKodeverk } from '@navikt/fp-types';
 
-import BehandlingPaVent from './BehandlingPaVent';
+import { BehandlingPaVent } from './BehandlingPaVent';
 
 describe('<BehandlingPaVent>', () => {
   const behandling = {

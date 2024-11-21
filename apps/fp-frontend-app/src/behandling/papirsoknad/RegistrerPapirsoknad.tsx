@@ -1,24 +1,23 @@
-import React, { FunctionComponent, useState, useCallback, useMemo } from 'react';
-import { Aksjonspunkt } from '@navikt/ft-types';
+import React, { useState, useCallback, useMemo } from 'react';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
-import { AlleKodeverk, Behandling, AksessRettigheter, Fagsak } from '@navikt/fp-types';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { Aksjonspunkt, AlleKodeverk, Behandling, AksessRettigheter, Fagsak } from '@navikt/fp-types';
 import { AsyncPollingStatus } from '@navikt/fp-rest-api';
 import { RegistrerPapirsoknadPanel, SoknadRegistrertModal } from '@navikt/fp-papirsoknad';
 
 import { useNavigate } from 'react-router';
-import BehandlingPaVent from '../felles/modaler/paVent/BehandlingPaVent';
+import { BehandlingPaVent } from '../felles/modaler/paVent/BehandlingPaVent';
 
 const getAktivtPapirsoknadApKode = (aksjonspunkter: Aksjonspunkt[]): string =>
   aksjonspunkter
     .map(ap => ap.definisjon)
     .filter(
       kode =>
-        kode === AksjonspunktCode.REGISTRER_PAPIRSOKNAD_ENGANGSSTONAD ||
-        kode === AksjonspunktCode.REGISTRER_PAPIRSOKNAD_FORELDREPENGER ||
-        kode === AksjonspunktCode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER ||
-        kode === AksjonspunktCode.REGISTRER_PAPIRSOKNAD_SVANGERSKAPSPENGER,
+        kode === AksjonspunktKode.REGISTRER_PAPIRSOKNAD_ENGANGSSTONAD ||
+        kode === AksjonspunktKode.REGISTRER_PAPIRSOKNAD_FORELDREPENGER ||
+        kode === AksjonspunktKode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER ||
+        kode === AksjonspunktKode.REGISTRER_PAPIRSOKNAD_SVANGERSKAPSPENGER,
     )[0];
 
 const lagLagreFunksjon =
@@ -52,7 +51,7 @@ const lagLagreFunksjon =
     });
   };
 
-interface OwnProps {
+interface Props {
   fagsak: Fagsak;
   behandling: Behandling;
   kodeverk: AlleKodeverk;
@@ -67,13 +66,7 @@ interface OwnProps {
  * Komponenten tilpasser skjemaet til valgt søknadstype (engagnsstønad eller foreldrepenger), valgt søknadtema (fødsel, adopsjon eller omsorg)
  * og valgt foreldretype (mor, far/medmor eller tredjepart).
  */
-const RegistrerPapirsoknad: FunctionComponent<OwnProps> = ({
-  fagsak,
-  behandling,
-  kodeverk,
-  rettigheter,
-  lagreAksjonspunkt,
-}) => {
+export const RegistrerPapirsoknad = ({ fagsak, behandling, kodeverk, rettigheter, lagreAksjonspunkt }: Props) => {
   const [erAksjonspunktLagret, setAksjonspunktLagret] = useState(false);
   const readOnly = !rettigheter.writeAccess.isEnabled || behandling.behandlingPaaVent;
 
@@ -97,7 +90,7 @@ const RegistrerPapirsoknad: FunctionComponent<OwnProps> = ({
   }
 
   const erEndringssøknad = behandling.aksjonspunkt.some(
-    ap => ap.definisjon === AksjonspunktCode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER,
+    ap => ap.definisjon === AksjonspunktKode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER,
   );
 
   return (
@@ -115,5 +108,3 @@ const RegistrerPapirsoknad: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-
-export default RegistrerPapirsoknad;

@@ -1,4 +1,4 @@
-import React, { createContext, FunctionComponent, ReactElement, useMemo } from 'react';
+import React, { createContext, ReactElement, useMemo } from 'react';
 import { AlleKodeverk, Fagsak, Behandling, AksessRettigheter } from '@navikt/fp-types';
 
 type InputValues = {
@@ -12,13 +12,13 @@ type InputValues = {
   alleKodeverk: AlleKodeverk;
 };
 
-type OwnProps = {
+type Props = {
   children: ReactElement;
 } & InputValues;
 
 export const StandardPropsStateContext = createContext<InputValues>({} as InputValues);
 
-const StandardPropsProvider: FunctionComponent<OwnProps> = ({
+export const StandardPropsProvider = ({
   children,
   behandling,
   fagsak,
@@ -28,7 +28,7 @@ const StandardPropsProvider: FunctionComponent<OwnProps> = ({
   lagreOverstyrteAksjonspunkter,
   oppdaterProsessStegOgFaktaPanelIUrl,
   alleKodeverk,
-}): JSX.Element => {
+}: Props): JSX.Element => {
   const values = useMemo(
     () => ({
       behandling,
@@ -44,5 +44,3 @@ const StandardPropsProvider: FunctionComponent<OwnProps> = ({
   );
   return <StandardPropsStateContext.Provider value={values}>{children}</StandardPropsStateContext.Provider>;
 };
-
-export default StandardPropsProvider;

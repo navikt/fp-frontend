@@ -1,18 +1,18 @@
-import React, { FunctionComponent, ReactElement, useCallback, useState, MouseEvent } from 'react';
+import React, { ReactElement, useCallback, useState, MouseEvent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { HGrid, HStack, Link, VStack } from '@navikt/ds-react';
-import { VilkarUtfallType } from '@navikt/ft-kodeverk';
+import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
-import { Behandling } from '@navikt/ft-types';
+import { Behandling } from '@navikt/fp-types';
 
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
-import ProsessPanelWrapper from './ProsessPanelWrapper';
-import useProsessMenyRegistrerer from './useProsessMenyRegistrerer';
-import InngangsvilkarPanelData from '../typer/inngangsvilkarPanelData';
-import ProsessPanelInitProps from '../typer/prosessPanelInitProps';
-import InngangsvilkarPanelInitProps from '../typer/inngangsvilkarPanelInitProps';
+import { ProsessPanelWrapper } from './ProsessPanelWrapper';
+import { useProsessMenyRegistrerer } from './useProsessMenyRegistrerer';
+import { InngangsvilkarPanelData } from '../typer/inngangsvilkarPanelData';
+import { ProsessPanelInitProps } from '../typer/prosessPanelInitProps';
+import { InngangsvilkarPanelInitProps } from '../typer/inngangsvilkarPanelInitProps';
 
 const harMinstEttDelPanelStatus = (paneler: InngangsvilkarPanelData[], vuType: string): boolean =>
   paneler.some(p => p.status === vuType);
@@ -42,14 +42,14 @@ const getErAksjonspunktOpen = (paneler: InngangsvilkarPanelData[], behandling: B
   );
 };
 
-interface OwnProps {
+interface Props {
   apentFaktaPanelInfo?: { urlCode: string; text: string };
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   leftPanels: (props: InngangsvilkarPanelInitProps) => ReactElement;
   rightPanels?: (props: InngangsvilkarPanelInitProps) => ReactElement;
 }
 
-const InngangsvilkarDefaultInitWrapper: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
+export const InngangsvilkarDefaultInitWrapper = ({
   behandling,
   valgtProsessSteg,
   registrerProsessPanel,
@@ -57,7 +57,7 @@ const InngangsvilkarDefaultInitWrapper: FunctionComponent<OwnProps & ProsessPane
   oppdaterProsessStegOgFaktaPanelIUrl,
   leftPanels,
   rightPanels,
-}) => {
+}: Props & ProsessPanelInitProps) => {
   const intl = useIntl();
 
   const [panelInfo, setPanelInfo] = useState<InngangsvilkarPanelData[]>([]);
@@ -145,5 +145,3 @@ const InngangsvilkarDefaultInitWrapper: FunctionComponent<OwnProps & ProsessPane
     </ProsessPanelWrapper>
   );
 };
-
-export default InngangsvilkarDefaultInitWrapper;

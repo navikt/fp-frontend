@@ -1,16 +1,17 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import { FeilutbetalingAarsak, FeilutbetalingFakta } from '@navikt/ft-types';
 import {
+  FeilutbetalingAarsak,
   FeilutbetalingAksjonspunktCode,
+  FeilutbetalingFakta,
   FeilutbetalingFaktaIndex,
 } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
 import { AlleKodeverkTilbakekreving } from '@navikt/fp-types';
 import { BehandlingApiKeys, requestBehandlingApi } from '../../../data/behandlingContextApi';
-import FaktaDefaultInitPanel from '../../felles/fakta/FaktaDefaultInitPanel';
-import FaktaPanelInitProps from '../../felles/typer/faktaPanelInitProps';
+import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
+import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
 
 import '@navikt/ft-fakta-tilbakekreving-feilutbetaling/dist/style.css';
 
@@ -22,21 +23,18 @@ type EndepunktPanelData = {
   feilutbetalingAarsak: FeilutbetalingAarsak[];
 };
 
-interface OwnProps {
+interface Props {
   tilbakekrevingKodeverk: AlleKodeverkTilbakekreving;
   fagsakYtelseTypeKode: string;
 }
 
-/**
- * FeilutbetalingFaktaInitPanel
- */
-const FeilutbetalingFaktaInitPanel: FunctionComponent<FaktaPanelInitProps & OwnProps> = ({
+export const FeilutbetalingFaktaInitPanel = ({
   behandling,
   valgtFaktaSteg,
   registrerFaktaPanel,
   tilbakekrevingKodeverk,
   fagsakYtelseTypeKode,
-}) => (
+}: FaktaPanelInitProps & Props) => (
   <FaktaDefaultInitPanel<EndepunktPanelData>
     behandling={behandling}
     valgtFaktaSteg={valgtFaktaSteg}
@@ -58,5 +56,3 @@ const FeilutbetalingFaktaInitPanel: FunctionComponent<FaktaPanelInitProps & OwnP
     )}
   />
 );
-
-export default FeilutbetalingFaktaInitPanel;

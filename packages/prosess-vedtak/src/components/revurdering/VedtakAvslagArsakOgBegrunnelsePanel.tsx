@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { Label, BodyShort, Detail } from '@navikt/ds-react';
 
 import { AlleKodeverk, Vilkar, Behandlingsresultat } from '@navikt/fp-types';
-import { vilkarUtfallType, getKodeverknavnFn, KodeverkType } from '@navikt/fp-kodeverk';
+import { VilkarUtfallType, getKodeverknavnFn, KodeverkType } from '@navikt/fp-kodeverk';
 import { TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
 import { decodeHtmlEntity, formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
@@ -21,7 +21,7 @@ const getAvslagArsak = (
   vilkar: Vilkar[],
   behandlingsresultat?: Behandlingsresultat,
 ): string | ReactElement => {
-  const avslatteVilkar = vilkar.filter(v => v.vilkarStatus === vilkarUtfallType.IKKE_OPPFYLT);
+  const avslatteVilkar = vilkar.filter(v => v.vilkarStatus === VilkarUtfallType.IKKE_OPPFYLT);
   if (avslatteVilkar.length === 0) {
     return <FormattedMessage id="VedtakForm.UttaksperioderIkkeGyldig" />;
   }

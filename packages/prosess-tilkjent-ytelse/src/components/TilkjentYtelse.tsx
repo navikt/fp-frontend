@@ -14,7 +14,7 @@ import dayjs from 'dayjs';
 import { BodyShort, Button, Timeline } from '@navikt/ds-react';
 import { DateLabel, FloatRight, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { KodeverkType, fagsakYtelseType, soknadType } from '@navikt/fp-kodeverk';
+import { KodeverkType, FagsakYtelseType, SoknadType } from '@navikt/fp-kodeverk';
 import {
   ArbeidsgiverOpplysningerPerId,
   AlleKodeverk,
@@ -44,7 +44,7 @@ const sjekkOmGradert = (periode: BeregningsresultatPeriode): boolean => {
 
 const getFamilieHendelseData = (familieHendelseSamling: FamilieHendelseSamling): { dato?: string; textId: string } => {
   const familieHendelse = familieHendelseSamling.gjeldende || familieHendelseSamling.oppgitt;
-  if (familieHendelse.soknadType === soknadType.FODSEL) {
+  if (familieHendelse.soknadType === SoknadType.FODSEL) {
     if (familieHendelse.avklartBarn && familieHendelse.avklartBarn.length > 0) {
       return { dato: familieHendelse.avklartBarn[0].fodselsdato, textId: 'TilkjentYtelse.Fodselsdato' };
     }
@@ -263,7 +263,7 @@ const TilkjentYtelse: FunctionComponent<OwnProps> = ({
             selectedItemData={valgtPeriode.periode}
             callbackForward={nextPeriod}
             callbackBackward={prevPeriod}
-            isSoknadSvangerskapspenger={fagsak.fagsakYtelseType === fagsakYtelseType.SVANGERSKAPSPENGER}
+            isSoknadSvangerskapspenger={fagsak.fagsakYtelseType === FagsakYtelseType.SVANGERSKAPSPENGER}
             arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
             lukkPeriode={lukkPeriode}
           />

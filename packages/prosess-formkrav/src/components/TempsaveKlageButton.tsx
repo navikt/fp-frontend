@@ -3,7 +3,7 @@ import { UseFormHandleSubmit } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 import { Button } from '@navikt/ds-react';
 
-import { behandlingType as BehandlingType } from '@navikt/fp-kodeverk';
+import { BehandlingType } from '@navikt/fp-kodeverk';
 import FormkravMellomlagretDataType from '../types/FormkravMellomlagretDataType';
 import AvsluttetBehandling from '../types/avsluttetBehandlingTsType';
 

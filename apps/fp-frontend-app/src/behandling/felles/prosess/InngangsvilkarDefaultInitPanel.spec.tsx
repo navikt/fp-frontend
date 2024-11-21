@@ -1,14 +1,12 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
-import { Aksjonspunkt } from '@navikt/ft-types';
-import { VilkarUtfallType, BehandlingStatus } from '@navikt/ft-kodeverk';
 
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { VilkarUtfallType, BehandlingStatus, AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import { Behandling, Fagsak } from '@navikt/fp-types';
+import { Aksjonspunkt, Behandling, Fagsak } from '@navikt/fp-types';
 
 import * as Felles from './useStandardProsessPanelProps';
-import InngangsvilkarDefaultInitPanel from './InngangsvilkarDefaultInitPanel';
+import { InngangsvilkarDefaultInitPanel } from './InngangsvilkarDefaultInitPanel';
 
 const behandling = {
   uuid: '1',
@@ -30,7 +28,7 @@ const defaultProps = {
   readOnlySubmitButton: false,
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.BEHANDLE_KLAGE_NFP,
+      definisjon: AksjonspunktKode.BEHANDLE_KLAGE_NFP,
       kanLoses: true,
     },
   ] as Aksjonspunkt[],
@@ -42,7 +40,7 @@ const defaultProps = {
 
 describe('<InngangsvilkarDefaultInitPanel>', () => {
   it('skal ikke vise panel når en ikke har åpne aksjonspunkter', async () => {
-    vi.spyOn(Felles, 'default').mockImplementation(() => ({
+    vi.spyOn(Felles, 'useStandardProsessPanelProps').mockImplementation(() => ({
       ...defaultProps,
       aksjonspunkter: [] as Aksjonspunkt[],
     }));
@@ -63,14 +61,14 @@ describe('<InngangsvilkarDefaultInitPanel>', () => {
   });
 
   it('skal vise panel', async () => {
-    vi.spyOn(Felles, 'default').mockImplementation(() => defaultProps);
+    vi.spyOn(Felles, 'useStandardProsessPanelProps').mockImplementation(() => defaultProps);
 
     render(
       <InngangsvilkarDefaultInitPanel
         erPanelValgt
         behandlingVersjon={1}
         registrerInngangsvilkarPanel={() => {}}
-        aksjonspunktKoder={[AksjonspunktCode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR]}
+        aksjonspunktKoder={[AksjonspunktKode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR]}
         renderPanel={() => <div>Dette er komponenten</div>}
         inngangsvilkarPanelKode="test"
         hentInngangsvilkarPanelTekst={() => 'test'}

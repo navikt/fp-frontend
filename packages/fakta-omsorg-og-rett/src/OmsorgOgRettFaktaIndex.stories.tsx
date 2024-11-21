@@ -2,11 +2,10 @@ import React from 'react';
 import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { Behandling, KjønnkodeEnum, PersonopplysningerBasis, Ytelsefordeling } from '@navikt/fp-types';
-import { sivilstandType, AdresseType, AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { Aksjonspunkt, Behandling, KjønnkodeEnum, PersonopplysningerBasis, Ytelsefordeling } from '@navikt/fp-types';
+import { SivilstandType, AdresseType, AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import { Aksjonspunkt } from '@navikt/ft-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 
@@ -45,7 +44,7 @@ const defaultBruker: PersonopplysningerBasis = {
   navn: 'Espen Utvikler',
   aktoerId: '1',
   kjønn: KjønnkodeEnum.MANN,
-  sivilstand: sivilstandType.SAMBOER,
+  sivilstand: SivilstandType.SAMBOER,
   fødselsdato: '1989-01-01',
   adresser: [adresse1, adresse2],
 };
@@ -54,7 +53,7 @@ const defaultAnnenPart: PersonopplysningerBasis = {
   navn: 'Petra Utvikler',
   aktoerId: '2',
   kjønn: KjønnkodeEnum.KVINNE,
-  sivilstand: sivilstandType.SAMBOER,
+  sivilstand: SivilstandType.SAMBOER,
   fødselsdato: '1989-01-01',
   adresser: [adresse1, adresse2],
 };
@@ -65,7 +64,7 @@ const defaultBarn: PersonopplysningerBasis = {
   adresser: [adresse2],
   aktoerId: '3',
   kjønn: KjønnkodeEnum.KVINNE,
-  sivilstand: sivilstandType.UGIFT,
+  sivilstand: SivilstandType.UGIFT,
 };
 
 const Template: StoryFn<{
@@ -100,7 +99,7 @@ export const HarAksjonspunktForAvklarAleneomsorg = Template.bind({});
 HarAksjonspunktForAvklarAleneomsorg.args = {
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
+      definisjon: AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
       kanLoses: true,
     },
   ] as Aksjonspunkt[],
@@ -110,7 +109,7 @@ export const HarAksjonspunktForAvklarAleneomsorgMedFlereBarn = Template.bind({})
 HarAksjonspunktForAvklarAleneomsorgMedFlereBarn.args = {
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
+      definisjon: AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
       kanLoses: true,
     },
   ] as Aksjonspunkt[],
@@ -130,7 +129,7 @@ export const HarAksjonspunktForAvklarAnnenForelderRett = Template.bind({});
 HarAksjonspunktForAvklarAnnenForelderRett.args = {
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.AVKLAR_ANNEN_FORELDER_RETT,
+      definisjon: AksjonspunktKode.AVKLAR_ANNEN_FORELDER_RETT,
       kanLoses: true,
     },
   ] as Aksjonspunkt[],

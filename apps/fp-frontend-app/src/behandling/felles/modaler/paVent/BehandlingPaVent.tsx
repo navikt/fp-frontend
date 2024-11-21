@@ -1,12 +1,11 @@
-import React, { useState, useMemo, useCallback, FunctionComponent, useEffect } from 'react';
-import { isAksjonspunktOpen } from '@navikt/ft-kodeverk';
+import React, { useState, useMemo, useCallback, useEffect } from 'react';
 
 import { AlleKodeverk, AlleKodeverkTilbakekreving, Behandling } from '@navikt/fp-types';
 import { SettPaVentModalIndex, FormValues } from '@navikt/fp-modal-sett-pa-vent';
-import { AksjonspunktCode, KodeverkType } from '@navikt/fp-kodeverk';
+import { isAksjonspunktOpen, AksjonspunktKode, KodeverkType } from '@navikt/fp-kodeverk';
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../../data/behandlingContextApi';
 
-interface BehandlingPaVentProps {
+interface Props {
   behandling: Behandling;
   kodeverk: AlleKodeverk | AlleKodeverkTilbakekreving;
   opneSokeside: () => void;
@@ -14,13 +13,13 @@ interface BehandlingPaVentProps {
   skalIkkeViseModal?: boolean;
 }
 
-const BehandlingPaVent: FunctionComponent<BehandlingPaVentProps> = ({
+export const BehandlingPaVent = ({
   behandling,
   kodeverk,
   opneSokeside,
   erTilbakekreving = false,
   skalIkkeViseModal = false,
-}) => {
+}: Props) => {
   const [skalViseModal, setVisModal] = useState(!skalIkkeViseModal && behandling.behandlingPaaVent);
   const skjulModal = useCallback(() => setVisModal(false), []);
 
@@ -48,7 +47,7 @@ const BehandlingPaVent: FunctionComponent<BehandlingPaVentProps> = ({
     () =>
       behandling.aksjonspunkt
         .filter(ap => isAksjonspunktOpen(ap.status))
-        .some(ap => ap.definisjon === AksjonspunktCode.AUTO_MANUELT_SATT_PÅ_VENT),
+        .some(ap => ap.definisjon === AksjonspunktKode.AUTO_MANUELT_SATT_PÅ_VENT),
     [behandling.aksjonspunkt],
   );
 
@@ -65,5 +64,3 @@ const BehandlingPaVent: FunctionComponent<BehandlingPaVentProps> = ({
     />
   );
 };
-
-export default BehandlingPaVent;

@@ -2,7 +2,7 @@ import React from 'react';
 import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { venteArsakType } from '@navikt/fp-kodeverk';
+import { VenteArsakType } from '@navikt/fp-kodeverk';
 
 import MenySettPaVentIndex from './MenySettPaVentIndex';
 
@@ -20,12 +20,12 @@ const Template: StoryFn<{
     settBehandlingPaVent={settBehandlingPaVent}
     ventearsaker={[
       {
-        kode: venteArsakType.AVV_DOK,
+        kode: VenteArsakType.AVV_DOK,
         kodeverk: 'VENT_ARSAK_TYPE',
         navn: 'Avvent dokumentasjon',
       },
       {
-        kode: venteArsakType.AVV_FODSEL,
+        kode: VenteArsakType.AVV_FODSEL,
         kodeverk: 'VENT_ARSAK_TYPE',
         navn: 'Avvent fødsel',
       },

@@ -3,14 +3,14 @@ import { RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
 import { MemoryRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
-import { BehandlingStatus, BehandlingType } from '@navikt/ft-kodeverk';
+import { BehandlingStatus, BehandlingType } from '@navikt/fp-kodeverk';
 
 import { RestApiMock } from '@navikt/fp-utils-test';
 import { BehandlingAppKontekst, Fagsak, Saksnotat } from '@navikt/fp-types';
 
-import BehandlingSupportIndex from './BehandlingSupportIndex';
+import { BehandlingSupportIndex } from './BehandlingSupportIndex';
 import { FagsakApiKeys, requestFagsakApi } from '../data/fagsakContextApi';
-import FagsakData from '../fagsak/FagsakData';
+import { FagsakData } from '../fagsak/FagsakData';
 import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);

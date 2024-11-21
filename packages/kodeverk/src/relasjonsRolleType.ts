@@ -1,7 +1,5 @@
-const relasjonsRolleType = {
-  MOR: 'MORA',
-  FAR: 'FARA',
-  MEDMOR: 'MMOR',
-};
-
-export default relasjonsRolleType;
+export enum RelasjonsRolleType {
+  MOR = 'MORA',
+  FAR = 'FARA',
+  MEDMOR = 'MMOR',
+}

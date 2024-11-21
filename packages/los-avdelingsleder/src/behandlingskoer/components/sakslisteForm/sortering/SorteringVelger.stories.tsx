@@ -3,7 +3,7 @@ import { action } from '@storybook/addon-actions';
 import { StoryFn } from '@storybook/react';
 import { useForm } from 'react-hook-form';
 import { Form } from '@navikt/ft-form-hooks';
-import { BehandlingType } from '@navikt/ft-kodeverk';
+import { BehandlingType } from '@navikt/fp-kodeverk';
 
 import { RestApiMock } from '@navikt/fp-utils-test';
 import { alleKodeverkLos, getIntlDecorator } from '@navikt/fp-storybook-utils';

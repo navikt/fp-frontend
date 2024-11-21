@@ -8,7 +8,7 @@ import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 import { useStorageToggle } from '@navikt/ft-hooks';
 
 import { AlleKodeverk, AlleKodeverkTilbakekreving, Historikkinnslag } from '@navikt/fp-types';
-import { getKodeverknavnFn, historikkAktor as HistorikkAktor, KodeverkType } from '@navikt/fp-kodeverk';
+import { getKodeverknavnFn, HistorikkAktor, KodeverkType } from '@navikt/fp-kodeverk';
 import Snakkeboble from './maler/felles/snakkeboble';
 
 import styles from './history.module.css';

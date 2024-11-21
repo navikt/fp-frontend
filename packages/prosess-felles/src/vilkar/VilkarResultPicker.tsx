@@ -1,9 +1,8 @@
 import React, { FunctionComponent, ReactElement, useMemo } from 'react';
 import { BodyShort, HStack, VStack } from '@navikt/ds-react';
 import { CheckmarkIcon, XMarkOctagonIcon } from '@navikt/aksel-icons';
-import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 
-import { vilkarUtfallType } from '@navikt/fp-kodeverk';
+import { VilkarUtfallType, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
 import { createIntl } from '@navikt/ft-utils';
 import { required, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
@@ -129,7 +128,7 @@ VilkarResultPicker.buildInitialValues = (
   behandlingsresultat?: Behandlingsresultat,
 ): FormValues => {
   const isOpenAksjonspunkt = aksjonspunkter.some(ap => ap.status === AksjonspunktStatus.OPPRETTET);
-  const erVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
+  const erVilkarOk = isOpenAksjonspunkt ? undefined : VilkarUtfallType.OPPFYLT === status;
   return {
     erVilkarOk,
     avslagskode:

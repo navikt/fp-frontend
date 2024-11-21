@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag } from '@navikt/fp-types';
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { AksjonspunktCode, KodeverkType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, KodeverkType } from '@navikt/fp-kodeverk';
 import { BesteberegningAP } from '@navikt/fp-types-avklar-aksjonspunkter';
 import BesteMånederVisningPanel from './BesteManederVisningPanel';
 import BesteberegningResultatGrunnlagPanel from './BesteberegningResultatGrunnlagPanel';
@@ -43,8 +43,8 @@ const BesteberegningPanel: FunctionComponent<OwnProps> = ({
   const førstePeriode = beregningsgrunnlagPeriode[0];
   const besteberegningAP = aksjonspunkter.find(
     ap =>
-      ap.definisjon === AksjonspunktCode.KONTROLLER_AUTOMATISK_BESTEBEREGNING ||
-      ap.definisjon === AksjonspunktCode.MANUELL_KONTROLL_AV_BESTEBEREGNING,
+      ap.definisjon === AksjonspunktKode.KONTROLLER_AUTOMATISK_BESTEBEREGNING ||
+      ap.definisjon === AksjonspunktKode.MANUELL_KONTROLL_AV_BESTEBEREGNING,
   );
   return (
     <div>

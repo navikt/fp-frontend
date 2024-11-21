@@ -1,16 +1,15 @@
-import React, { FunctionComponent, useEffect, useCallback, useMemo } from 'react';
+import React, { useEffect, useCallback, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 import { RisikoklassifiseringSakIndex, AvklartRisikoklassifiseringAp } from '@navikt/fp-sak-risikoklassifisering';
 
 import { NavAnsatt, AksessRettigheter, Behandling } from '@navikt/fp-types';
-import { KodeverkType } from '@navikt/fp-kodeverk';
+import { AksjonspunktStatus, KodeverkType } from '@navikt/fp-kodeverk';
 
-import useTrackRouteParam from '../../app/useTrackRouteParam';
+import { useTrackRouteParam } from '../../app/useTrackRouteParam';
 import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
 import { getRiskPanelLocationCreator } from '../../app/paths';
-import getAccessRights from '../../app/util/access';
-import FagsakData from '../../fagsak/FagsakData';
+import { getAccessRights } from '../../app/util/access';
+import { FagsakData } from '../../fagsak/FagsakData';
 
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../../data/behandlingContextApi';
 
@@ -22,7 +21,7 @@ const getReadOnly = (navAnsatt: NavAnsatt, rettigheter: AksessRettigheter, erPaa
   return !kanSaksbehandle || !rettigheter.writeAccess.isEnabled;
 };
 
-interface OwnProps {
+interface Props {
   fagsakData: FagsakData;
   behandlingUuid?: string;
   behandlingVersjon?: number;
@@ -36,12 +35,7 @@ interface OwnProps {
  * Viser en av tre komponenter avhengig av: Om ingen klassifisering er utført,
  * om klassifisering er utført og ingen faresignaler er funnet og om klassifisering er utført og faresignaler er funnet
  */
-const RisikoklassifiseringIndex: FunctionComponent<OwnProps> = ({
-  fagsakData,
-  behandlingVersjon,
-  behandlingUuid,
-  setBehandling,
-}) => {
+export const RisikoklassifiseringIndex = ({ fagsakData, behandlingVersjon, behandlingUuid, setBehandling }: Props) => {
   const fagsak = fagsakData.getFagsak();
   const behandling = fagsakData.getBehandling(behandlingUuid);
   const erPaaVent = behandling ? behandling.behandlingPaaVent : false;
@@ -127,5 +121,3 @@ const RisikoklassifiseringIndex: FunctionComponent<OwnProps> = ({
     />
   );
 };
-
-export default RisikoklassifiseringIndex;

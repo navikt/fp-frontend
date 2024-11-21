@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Label } from '@navikt/ds-react';
 
 import { Form } from '@navikt/ft-form-hooks';
-import { VilkarType, AksjonspunktCode, KodeverkType, vilkarUtfallType, aksjonspunktStatus } from '@navikt/fp-kodeverk';
+import { VilkarType, AksjonspunktKode, KodeverkType, VilkarUtfallType, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import {
   VilkarResultPicker,
   ProsessStegBegrunnelseTextFieldNew,
@@ -41,9 +41,9 @@ const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): Ak
     ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
     kode: validerApKodeOgHentApEnum(
       ap.definisjon,
-      AksjonspunktCode.MANUELL_VURDERING_AV_OMSORGSVILKARET,
-      AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
-      AksjonspunktCode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
+      AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKARET,
+      AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+      AksjonspunktKode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
     ),
   }));
 
@@ -89,8 +89,8 @@ const ErOmsorgVilkaarOppfyltForm: FunctionComponent<OwnProps> = ({
 
   const avslagsarsaker = alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.OMSORGSVILKARET];
 
-  const isOpenAksjonspunkt = aksjonspunkter.some(ap => ap.status === aksjonspunktStatus.OPPRETTET);
-  const originalErVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
+  const isOpenAksjonspunkt = aksjonspunkter.some(ap => ap.status === AksjonspunktStatus.OPPRETTET);
+  const originalErVilkarOk = isOpenAksjonspunkt ? undefined : VilkarUtfallType.OPPFYLT === status;
 
   const bTag = useCallback((chunks: any) => <b>{chunks}</b>, []);
 

@@ -4,7 +4,7 @@ import { RestApiMock } from '@navikt/fp-utils-test';
 import { withRouter } from '@navikt/fp-storybook-utils';
 import { NavAnsatt } from '@navikt/fp-types';
 
-import { fagsakStatus, fagsakYtelseType, familieHendelseType } from '@navikt/fp-kodeverk';
+import { FagsakStatus, FagsakYtelseType, FamilieHendelseType } from '@navikt/fp-kodeverk';
 import { requestApi, RestApiPathsKeys } from './data/fpfordelRestApi';
 import JournalforingIndex from './OppgaveJournalføringIndex';
 import Oppgave from './typer/oppgaveTsType';
@@ -36,7 +36,7 @@ const detaljertJournalpostMal = (medBruker: boolean, tilstand: JournalpostTilsta
       navn: 'Svingen sag og høvleri',
       id: '999999999',
     },
-    ytelseType: fagsakYtelseType.FORELDREPENGER,
+    ytelseType: FagsakYtelseType.FORELDREPENGER,
     dokumenter: [
       {
         dokumentId: '999999999',
@@ -61,45 +61,45 @@ const detaljertJournalpostMal = (medBruker: boolean, tilstand: JournalpostTilsta
       ? [
           {
             saksnummer: '125416592',
-            ytelseType: fagsakYtelseType.FORELDREPENGER,
+            ytelseType: FagsakYtelseType.FORELDREPENGER,
             opprettetDato: '2022-01-02',
             førsteUttaksdato: '2022-05-02',
-            status: fagsakStatus.LOPENDE,
+            status: FagsakStatus.LOPENDE,
             familieHendelseJf: {
               familiehHendelseDato: '2022-04-15',
-              familihendelseType: familieHendelseType.FODSEL,
+              familihendelseType: FamilieHendelseType.FODSEL,
             },
           },
           {
             saksnummer: '125416597',
-            ytelseType: fagsakYtelseType.FORELDREPENGER,
+            ytelseType: FagsakYtelseType.FORELDREPENGER,
             opprettetDato: '2022-01-02',
             førsteUttaksdato: '2022-05-02',
-            status: fagsakStatus.UNDER_BEHANDLING,
+            status: FagsakStatus.UNDER_BEHANDLING,
             familieHendelseJf: {
               familiehHendelseDato: '2022-04-15',
-              familihendelseType: familieHendelseType.ADOPSJON,
+              familihendelseType: FamilieHendelseType.ADOPSJON,
             },
           },
           {
             saksnummer: '155462542',
-            ytelseType: fagsakYtelseType.SVANGERSKAPSPENGER,
+            ytelseType: FagsakYtelseType.SVANGERSKAPSPENGER,
             datoOpprettet: '2022-03-02',
-            status: fagsakStatus.AVSLUTTET,
+            status: FagsakStatus.AVSLUTTET,
             familieHendelseJf: {
               familiehHendelseDato: '2022-02-01',
-              familihendelseType: familieHendelseType.TERMIN,
+              familihendelseType: FamilieHendelseType.TERMIN,
             },
           },
           {
             saksnummer: '175419131',
-            ytelseType: fagsakYtelseType.FORELDREPENGER,
+            ytelseType: FagsakYtelseType.FORELDREPENGER,
             datoOpprettet: '2022-01-02',
             førsteUttaksdato: '2022-02-02',
-            status: fagsakStatus.OPPRETTET,
+            status: FagsakStatus.OPPRETTET,
             familieHendelseJf: {
               familiehHendelseDato: '2022-03-01',
-              familihendelseType: familieHendelseType.OMSORG,
+              familihendelseType: FamilieHendelseType.OMSORG,
             },
           },
         ]

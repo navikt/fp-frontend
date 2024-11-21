@@ -6,17 +6,12 @@ import MockAdapter from 'axios-mock-adapter';
 import { createIntl } from '@navikt/ft-utils';
 import { Fagsak, BehandlingAppKontekst, TotrinnskontrollAksjonspunkt, BehandlingÅrsak } from '@navikt/fp-types';
 import { RestApiMock } from '@navikt/fp-utils-test';
-import {
-  fagsakYtelseType as FagsakYtelseType,
-  behandlingType as BehandlingType,
-  KodeverkType,
-  AksjonspunktCode,
-} from '@navikt/fp-kodeverk';
+import { FagsakYtelseType, BehandlingType, KodeverkType, AksjonspunktKode } from '@navikt/fp-kodeverk';
 
 import { RawIntlProvider } from 'react-intl';
-import FagsakData from '../../fagsak/FagsakData';
+import { FagsakData } from '../../fagsak/FagsakData';
 import { requestFagsakApi, FagsakApiKeys } from '../../data/fagsakContextApi';
-import TotrinnskontrollIndex from './TotrinnskontrollIndex';
+import { TotrinnskontrollIndex } from './TotrinnskontrollIndex';
 
 import messages from '../../../i18n/nb_NO.json';
 
@@ -33,25 +28,25 @@ describe('<TotrinnskontrollIndex>', () => {
   const getTotrinnsaksjonspunkterFoedsel = () => ({
     skjermlenkeType: 'FAKTA_OM_FOEDSEL',
     totrinnskontrollAksjonspunkter: [
-      createAksjonspunkt(AksjonspunktCode.SJEKK_MANGLENDE_FODSEL),
-      createAksjonspunkt(AksjonspunktCode.TERMINBEKREFTELSE),
-      createAksjonspunkt(AksjonspunktCode.AUTO_VENT_PÅ_FODSELREGISTRERING),
+      createAksjonspunkt(AksjonspunktKode.SJEKK_MANGLENDE_FODSEL),
+      createAksjonspunkt(AksjonspunktKode.TERMINBEKREFTELSE),
+      createAksjonspunkt(AksjonspunktKode.AUTO_VENT_PÅ_FODSELREGISTRERING),
     ],
   });
 
   const getTotrinnsaksjonspunkterOmsorg = () => ({
     skjermlenkeType: 'FAKTA_FOR_OMSORG',
     totrinnskontrollAksjonspunkter: [
-      createAksjonspunkt(AksjonspunktCode.OMSORGSOVERTAKELSE),
-      createAksjonspunkt(AksjonspunktCode.MANUELL_VURDERING_AV_OMSORGSVILKARET),
+      createAksjonspunkt(AksjonspunktKode.OMSORGSOVERTAKELSE),
+      createAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKARET),
     ],
   });
 
   const getTotrinnsaksjonspunkterForeldreansvar = () => ({
     skjermlenkeType: 'PUNKT_FOR_FORELDREANSVAR',
     totrinnskontrollAksjonspunkter: [
-      createAksjonspunkt(AksjonspunktCode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD),
-      createAksjonspunkt(AksjonspunktCode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD),
+      createAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD),
+      createAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD),
     ],
   });
 

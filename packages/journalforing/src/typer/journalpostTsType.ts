@@ -1,4 +1,4 @@
-import { FagsakYtelseType } from '@navikt/ft-kodeverk';
+import { FagsakYtelseType } from '@navikt/fp-kodeverk';
 import JournalKanal from '../kodeverk/journalKanal';
 import JournalAvsender from './journalAvsenderTsType';
 import JournalBruker from './journalBrukerTsType';

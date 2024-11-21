@@ -5,7 +5,7 @@ import { Location } from 'history';
 import { Button } from '@navikt/ds-react';
 
 import { Form } from '@navikt/ft-form-hooks';
-import { konsekvensForYtelsen, vurderPaNyttArsakType, behandlingType as BehandlingType } from '@navikt/fp-kodeverk';
+import { KonsekvensForYtelsen, VurderPaNyttArsakType, BehandlingType } from '@navikt/fp-kodeverk';
 import { ariaCheck } from '@navikt/ft-form-validators';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 import { VerticalSpacer, AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
@@ -42,22 +42,22 @@ const harIkkeKonsekvenserForYtelsen = (
 
 const finnArsaker = (vurderPaNyttArsaker: string[]) =>
   vurderPaNyttArsaker.reduce((acc, arsak) => {
-    if (arsak === vurderPaNyttArsakType.FEIL_FAKTA) {
+    if (arsak === VurderPaNyttArsakType.FEIL_FAKTA) {
       return { ...acc, feilFakta: true };
     }
-    if (arsak === vurderPaNyttArsakType.FEIL_LOV) {
+    if (arsak === VurderPaNyttArsakType.FEIL_LOV) {
       return { ...acc, feilLov: true };
     }
-    if (arsak === vurderPaNyttArsakType.FEIL_REGEL) {
+    if (arsak === VurderPaNyttArsakType.FEIL_REGEL) {
       return { ...acc, feilSkjønn: true };
     }
-    if (arsak === vurderPaNyttArsakType.SKJØNN) {
+    if (arsak === VurderPaNyttArsakType.SKJØNN) {
       return { ...acc, feilSkjønn: true };
     }
-    if (arsak === vurderPaNyttArsakType.UTREDNING) {
+    if (arsak === VurderPaNyttArsakType.UTREDNING) {
       return { ...acc, feilUtredning: true };
     }
-    if (arsak === vurderPaNyttArsakType.ANNET) {
+    if (arsak === VurderPaNyttArsakType.ANNET) {
       return { ...acc, annet: true };
     }
     return {};
@@ -120,7 +120,7 @@ export const TotrinnskontrollBeslutterForm: FunctionComponent<OwnProps> = ({
   const harIkkeKonsekvensForYtelse = useMemo(
     () =>
       harIkkeKonsekvenserForYtelsen(
-        [konsekvensForYtelsen.ENDRING_I_FORDELING_AV_YTELSEN, konsekvensForYtelsen.INGEN_ENDRING],
+        [KonsekvensForYtelsen.ENDRING_I_FORDELING_AV_YTELSEN, KonsekvensForYtelsen.INGEN_ENDRING],
         behandling.behandlingsresultat,
       ),
     [behandling.behandlingsresultat],

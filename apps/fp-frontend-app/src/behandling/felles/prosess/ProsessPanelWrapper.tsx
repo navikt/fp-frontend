@@ -1,9 +1,9 @@
-import React, { FunctionComponent, ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 import classnames from 'classnames/bind';
 import { FormattedMessage } from 'react-intl';
 import { BodyShort } from '@navikt/ds-react';
 import { LoadingPanel, FadingPanel } from '@navikt/ft-ui-komponenter';
-import { VilkarUtfallType } from '@navikt/ft-kodeverk';
+import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
@@ -16,13 +16,13 @@ interface PanelContainerOwnProps {
   children: any;
 }
 
-const PanelContainer: FunctionComponent<PanelContainerOwnProps> = ({ skalSkjulePanel = false, children }) => (
+const PanelContainer = ({ skalSkjulePanel = false, children }: PanelContainerOwnProps) => (
   <div className={classNames('steg', { skalSkjulePanel })}>
     <FadingPanel>{children}</FadingPanel>
   </div>
 );
 
-interface OwnProps {
+interface Props {
   erPanelValgt: boolean;
   erAksjonspunktOpent: boolean;
   status: string;
@@ -31,14 +31,14 @@ interface OwnProps {
   children: ReactElement | ReactElement[];
 }
 
-const ProsessPanelWrapper: FunctionComponent<OwnProps> = ({
+export const ProsessPanelWrapper = ({
   erPanelValgt,
   erAksjonspunktOpent,
   status,
   dataState,
   skalSkjulePanel = false,
   children,
-}) => {
+}: Props) => {
   if (!erPanelValgt && !skalSkjulePanel) {
     return null;
   }
@@ -60,5 +60,3 @@ const ProsessPanelWrapper: FunctionComponent<OwnProps> = ({
     </PanelContainer>
   );
 };
-
-export default ProsessPanelWrapper;

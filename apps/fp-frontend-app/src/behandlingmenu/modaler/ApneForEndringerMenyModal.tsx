@@ -1,17 +1,16 @@
-import React, { FunctionComponent, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { MenyApneForEndringerIndex } from '@navikt/fp-sak-meny-apne-for-endringer';
-import { BehandlingAppKontekst } from '@navikt/ft-types';
-import { Behandling } from '@navikt/fp-types';
+import { Behandling, BehandlingAppKontekst } from '@navikt/fp-types';
 
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../../data/behandlingContextApi';
 
-interface OwnProps {
+interface Props {
   behandling: BehandlingAppKontekst;
   setBehandling: (behandling?: Behandling) => void;
   lukkModal: () => void;
 }
 
-const ApneForEndringerMenyModal: FunctionComponent<OwnProps> = ({ behandling, setBehandling, lukkModal }) => {
+export const ApneForEndringerMenyModal = ({ behandling, setBehandling, lukkModal }: Props) => {
   const { startRequest: åpneForEndringer } = restBehandlingApiHooks.useRestApiRunner(
     BehandlingApiKeys.OPEN_BEHANDLING_FOR_CHANGES,
   );
@@ -25,5 +24,3 @@ const ApneForEndringerMenyModal: FunctionComponent<OwnProps> = ({ behandling, se
 
   return <MenyApneForEndringerIndex apneBehandlingForEndringer={opneBehandlingForEndringer} lukkModal={lukkModal} />;
 };
-
-export default ApneForEndringerMenyModal;

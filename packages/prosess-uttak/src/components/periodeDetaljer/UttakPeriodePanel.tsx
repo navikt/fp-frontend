@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { AksjonspunktHelpTextHTML, EditedIcon, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Button, HStack, Label, Panel } from '@navikt/ds-react';
-import { behandlingType as BehandlingType, KodeverkType, StonadskontoType } from '@navikt/fp-kodeverk';
+import { BehandlingType, KodeverkType, StonadskontoType } from '@navikt/fp-kodeverk';
 import { calcDays } from '@navikt/ft-utils';
 
 import {

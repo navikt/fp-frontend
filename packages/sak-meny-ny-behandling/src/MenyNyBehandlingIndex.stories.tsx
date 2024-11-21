@@ -2,7 +2,7 @@ import React from 'react';
 import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { fagsakYtelseType, behandlingType, behandlingArsakType } from '@navikt/fp-kodeverk';
+import { FagsakYtelseType, BehandlingType, BehandlingArsakType } from '@navikt/fp-kodeverk';
 import { KodeverkMedNavn } from '@navikt/fp-types';
 import MenyNyBehandlingIndex from './MenyNyBehandlingIndex';
 
@@ -13,32 +13,32 @@ export default {
 
 const behandlingstyper = [
   {
-    kode: behandlingType.FORSTEGANGSSOKNAD,
+    kode: BehandlingType.FORSTEGANGSSOKNAD,
     kodeverk: 'BEHANDLING_TYPE',
     navn: 'Førstegangssøknad',
   },
   {
-    kode: behandlingType.REVURDERING,
+    kode: BehandlingType.REVURDERING,
     kodeverk: 'BEHANDLING_TYPE',
     navn: 'Revurdering',
   },
   {
-    kode: behandlingType.KLAGE,
+    kode: BehandlingType.KLAGE,
     kodeverk: 'BEHANDLING_TYPE',
     navn: 'Klage',
   },
   {
-    kode: behandlingType.DOKUMENTINNSYN,
+    kode: BehandlingType.DOKUMENTINNSYN,
     kodeverk: 'BEHANDLING_TYPE',
     navn: 'Dokumentinnsyn',
   },
   {
-    kode: behandlingType.TILBAKEKREVING,
+    kode: BehandlingType.TILBAKEKREVING,
     kodeverk: 'BEHANDLING_TYPE',
     navn: 'Tilbakekreving',
   },
   {
-    kode: behandlingType.TILBAKEKREVING_REVURDERING,
+    kode: BehandlingType.TILBAKEKREVING_REVURDERING,
     kodeverk: 'BEHANDLING_TYPE',
     navn: 'Tilbakekreving revurdering',
   },
@@ -46,15 +46,15 @@ const behandlingstyper = [
 
 const behandlingOppretting = [
   {
-    behandlingType: behandlingType.FORSTEGANGSSOKNAD,
+    behandlingType: BehandlingType.FORSTEGANGSSOKNAD,
     kanOppretteBehandling: true,
   },
   {
-    behandlingType: behandlingType.REVURDERING,
+    behandlingType: BehandlingType.REVURDERING,
     kanOppretteBehandling: true,
   },
   {
-    behandlingType: behandlingType.KLAGE,
+    behandlingType: BehandlingType.KLAGE,
     kanOppretteBehandling: true,
   },
 ];
@@ -69,7 +69,7 @@ const Template: StoryFn<{
   lukkModal: () => void;
 }> = ({ tilbakekrevingRevurderingArsaker, kanTilbakekrevingOpprettes, lagNyBehandling, lukkModal }) => (
   <MenyNyBehandlingIndex
-    ytelseType={fagsakYtelseType.FORELDREPENGER}
+    ytelseType={FagsakYtelseType.FORELDREPENGER}
     saksnummer="123"
     behandlingUuid="1"
     behandlingVersjon={2}
@@ -78,12 +78,12 @@ const Template: StoryFn<{
     tilbakekrevingRevurderingArsaker={tilbakekrevingRevurderingArsaker}
     revurderingArsaker={[
       {
-        kode: behandlingArsakType.KLAGE_U_INNTK,
+        kode: BehandlingArsakType.KLAGE_U_INNTK,
         kodeverk: 'BEHANDLING_ARSAK_TYPE',
         navn: 'Klage uten inntekt',
       },
       {
-        kode: behandlingArsakType.FØDSEL,
+        kode: BehandlingArsakType.FØDSEL,
         kodeverk: 'BEHANDLING_ARSAK_TYPE',
         navn: 'Fødsel',
       },
@@ -111,12 +111,12 @@ ForTilbakekreving.args = {
   lukkModal: action('button-click'),
   tilbakekrevingRevurderingArsaker: [
     {
-      kode: behandlingArsakType.RE_KLAGE_KA,
+      kode: BehandlingArsakType.RE_KLAGE_KA,
       kodeverk: 'BEHANDLING_ARSAK_TYPE',
       navn: 'Klage KA',
     },
     {
-      kode: behandlingArsakType.RE_KLAGE_NFP,
+      kode: BehandlingArsakType.RE_KLAGE_NFP,
       kodeverk: 'BEHANDLING_ARSAK_TYPE',
       navn: 'Klage NFP',
     },

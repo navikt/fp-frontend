@@ -4,11 +4,11 @@ import { action } from '@storybook/addon-actions';
 
 import {
   AdresseType,
-  navBrukerKjonn,
-  soknadType,
-  AksjonspunktCode,
-  aksjonspunktStatus,
-  sivilstandType,
+  NavBrukerKjonn,
+  SoknadType,
+  AksjonspunktKode,
+  AksjonspunktStatus,
+  SivilstandType,
 } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import {
@@ -45,7 +45,7 @@ const soknad = {
   adopsjonFodelsedatoer: { 1: '2019-01-10', 2: '2019-01-11' } as { [key: number]: string },
   utstedtdato: '2019-01-02',
   antallBarn: 2,
-  soknadType: soknadType.ADOPSJON,
+  soknadType: SoknadType.ADOPSJON,
   farSokerType: 'ADOPTERER_ALENE',
 } as Soknad;
 
@@ -53,8 +53,8 @@ const personoversikt: Personoversikt = {
   bruker: {
     navn: 'Olga Utvikler',
     aktoerId: '2',
-    kjønn: navBrukerKjonn.KVINNE,
-    sivilstand: sivilstandType.GIFT,
+    kjønn: NavBrukerKjonn.KVINNE,
+    sivilstand: SivilstandType.GIFT,
     fødselsdato: '1979-01-01',
     adresser: [
       {
@@ -71,8 +71,8 @@ const personoversikt: Personoversikt = {
   annenPart: {
     navn: 'Espen Utvikler',
     aktoerId: '1',
-    kjønn: navBrukerKjonn.MANN,
-    sivilstand: sivilstandType.GIFT,
+    kjønn: NavBrukerKjonn.MANN,
+    sivilstand: SivilstandType.GIFT,
     fødselsdato: '1989-01-01',
     dødsdato: '2021-01-01',
     adresser: [],
@@ -120,7 +120,7 @@ const Template: StoryFn<{
   <OmsorgOgForeldreansvarFaktaIndex
     submitCallback={submitCallback}
     readOnly={readOnly}
-    harApneAksjonspunkter={aksjonspunkter.some(ap => ap.status === aksjonspunktStatus.OPPRETTET)}
+    harApneAksjonspunkter={aksjonspunkter.some(ap => ap.status === AksjonspunktStatus.OPPRETTET)}
     submittable
     setFormData={() => undefined}
     behandling={behandling}
@@ -138,14 +138,14 @@ export const ÅpentAksjonspunktForOmsorgovertakelse = Template.bind({});
 ÅpentAksjonspunktForOmsorgovertakelse.args = {
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.OMSORGSOVERTAKELSE,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
+      status: AksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
       kanLoses: true,
     },
   ],
   alleMerknaderFraBeslutter: {
-    [AksjonspunktCode.OMSORGSOVERTAKELSE]: merknaderFraBeslutter,
+    [AksjonspunktKode.OMSORGSOVERTAKELSE]: merknaderFraBeslutter,
   },
   readOnly: false,
 };
@@ -163,14 +163,14 @@ UtførtAksjonspunktForOmsorgovertakelse.args = {
   },
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.OMSORGSOVERTAKELSE,
-      status: aksjonspunktStatus.UTFORT,
+      definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
+      status: AksjonspunktStatus.UTFORT,
       begrunnelse: 'dette er en begrunnelse',
       kanLoses: false,
     },
   ],
   alleMerknaderFraBeslutter: {
-    [AksjonspunktCode.OMSORGSOVERTAKELSE]: merknaderFraBeslutter,
+    [AksjonspunktKode.OMSORGSOVERTAKELSE]: merknaderFraBeslutter,
   },
   readOnly: true,
 };
@@ -179,14 +179,14 @@ export const ÅpentAksjonspunktForAvklareVilkårForForeldreansvar = Template.bin
 ÅpentAksjonspunktForAvklareVilkårForForeldreansvar.args = {
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.AVKLAR_VILKAR_FOR_FORELDREANSVAR,
-      status: aksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktKode.AVKLAR_VILKAR_FOR_FORELDREANSVAR,
+      status: AksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
       kanLoses: true,
     },
   ],
   alleMerknaderFraBeslutter: {
-    [AksjonspunktCode.AVKLAR_VILKAR_FOR_FORELDREANSVAR]: merknaderFraBeslutter,
+    [AksjonspunktKode.AVKLAR_VILKAR_FOR_FORELDREANSVAR]: merknaderFraBeslutter,
   },
   readOnly: false,
 };
@@ -195,8 +195,8 @@ export const UtførtAksjonspunktForAvklareVilkårForForeldreansvar = Template.bi
 UtførtAksjonspunktForAvklareVilkårForForeldreansvar.args = {
   aksjonspunkter: [
     {
-      definisjon: AksjonspunktCode.AVKLAR_VILKAR_FOR_FORELDREANSVAR,
-      status: aksjonspunktStatus.UTFORT,
+      definisjon: AksjonspunktKode.AVKLAR_VILKAR_FOR_FORELDREANSVAR,
+      status: AksjonspunktStatus.UTFORT,
       begrunnelse: 'dette er en begrunnelse',
       kanLoses: false,
     },
@@ -210,7 +210,7 @@ UtførtAksjonspunktForAvklareVilkårForForeldreansvar.args = {
     },
   },
   alleMerknaderFraBeslutter: {
-    [AksjonspunktCode.AVKLAR_VILKAR_FOR_FORELDREANSVAR]: merknaderFraBeslutter,
+    [AksjonspunktKode.AVKLAR_VILKAR_FOR_FORELDREANSVAR]: merknaderFraBeslutter,
   },
   readOnly: true,
 };

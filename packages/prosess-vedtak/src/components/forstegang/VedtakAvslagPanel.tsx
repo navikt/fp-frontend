@@ -4,7 +4,7 @@ import { Label, BodyShort } from '@navikt/ds-react';
 
 import { AlleKodeverk, Vilkar, Behandlingsresultat } from '@navikt/fp-types';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { getKodeverknavnFn, vilkarUtfallType, KodeverkType } from '@navikt/fp-kodeverk';
+import { getKodeverknavnFn, VilkarUtfallType, KodeverkType } from '@navikt/fp-kodeverk';
 
 import VedtakFritekstPanel from '../felles/VedtakFritekstPanel';
 
@@ -13,7 +13,7 @@ export const getAvslagArsak = (
   getKodeverkNavn: (kodeverk: string, kodeverkType: KodeverkType, undertype?: string) => string,
   behandlingsresultat?: Behandlingsresultat,
 ): ReactElement | string => {
-  const avslatteVilkar = vilkar.filter(v => v.vilkarStatus === vilkarUtfallType.IKKE_OPPFYLT);
+  const avslatteVilkar = vilkar.filter(v => v.vilkarStatus === VilkarUtfallType.IKKE_OPPFYLT);
   if (avslatteVilkar.length === 0) {
     return <FormattedMessage id="VedtakForm.UttaksperioderIkkeGyldig" />;
   }

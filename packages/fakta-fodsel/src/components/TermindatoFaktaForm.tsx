@@ -7,7 +7,7 @@ import { DateLabel, VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponente
 import { Datepicker, InputField } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidInteger, maxValue, minValue, required } from '@navikt/ft-form-validators';
 import { FaktaBegrunnelseTextFieldNew, isFieldEdited } from '@navikt/fp-fakta-felles';
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, FamilieHendelse, Soknad } from '@navikt/fp-types';
 import { BekreftTerminbekreftelseAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -73,7 +73,7 @@ export const TermindatoFaktaForm: FunctionComponent<OwnProps> & StaticFunctions 
     <>
       <FaktaGruppe
         title={intl.formatMessage({ id: 'TermindatoFaktaForm.ApplicationInformation' })}
-        merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.TERMINBEKREFTELSE]}
+        merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.TERMINBEKREFTELSE]}
       >
         <HStack gap="4">
           <Datepicker
@@ -151,7 +151,7 @@ TermindatoFaktaForm.buildInitialValues = (soknad, familiehendelse, aksjonspunkt)
 };
 
 TermindatoFaktaForm.transformValues = (values: FormValues): BekreftTerminbekreftelseAp => ({
-  kode: AksjonspunktCode.TERMINBEKREFTELSE,
+  kode: AksjonspunktKode.TERMINBEKREFTELSE,
   utstedtdato: values.utstedtdato!,
   termindato: values.termindato!,
   antallBarn: values.antallBarn!,

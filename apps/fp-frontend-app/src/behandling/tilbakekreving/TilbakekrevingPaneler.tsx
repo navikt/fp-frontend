@@ -1,21 +1,21 @@
-import React, { FunctionComponent, useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 
 import { Behandling, BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
 
-import { BehandlingStatus, BehandlingType } from '@navikt/ft-kodeverk';
+import { BehandlingStatus, BehandlingType } from '@navikt/fp-kodeverk';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-import VergeFaktaInitPanel from '../fellesPaneler/fakta/VergeFaktaInitPanel';
-import FaktaPanelInitProps from '../felles/typer/faktaPanelInitProps';
-import ProsessPanelInitProps from '../felles/typer/prosessPanelInitProps';
-import BehandlingContainer from '../felles/BehandlingContainer';
-import ForeldelseProsessInitPanel from './prosessPaneler/ForeldelseProsessInitPanel';
-import TilbakekrevingProsessInitPanel from './prosessPaneler/TilbakekrevingProsessInitPanel';
-import VedtakTilbakekrevingProsessInitPanel from './prosessPaneler/VedtakTilbakekrevingProsessInitPanel';
-import FeilutbetalingFaktaInitPanel from './faktaPaneler/FeilutbetalingFaktaInitPanel';
+import { VergeFaktaInitPanel } from '../fellesPaneler/fakta/VergeFaktaInitPanel';
+import { FaktaPanelInitProps } from '../felles/typer/faktaPanelInitProps';
+import { ProsessPanelInitProps } from '../felles/typer/prosessPanelInitProps';
+import { BehandlingContainer } from '../felles/BehandlingContainer';
+import { ForeldelseProsessInitPanel } from './prosessPaneler/ForeldelseProsessInitPanel';
+import { TilbakekrevingProsessInitPanel } from './prosessPaneler/TilbakekrevingProsessInitPanel';
+import { VedtakTilbakekrevingProsessInitPanel } from './prosessPaneler/VedtakTilbakekrevingProsessInitPanel';
+import { FeilutbetalingFaktaInitPanel } from './faktaPaneler/FeilutbetalingFaktaInitPanel';
 import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
-import BehandlingPaVent from '../felles/modaler/paVent/BehandlingPaVent';
+import { BehandlingPaVent } from '../felles/modaler/paVent/BehandlingPaVent';
 
-interface OwnProps {
+interface Props {
   behandling: Behandling;
   fagsak: Fagsak;
   valgtProsessSteg?: string;
@@ -25,7 +25,7 @@ interface OwnProps {
   alleBehandlinger: BehandlingAppKontekst[];
 }
 
-const TilbakekrevingPaneler: FunctionComponent<OwnProps> = ({
+const TilbakekrevingPaneler = ({
   behandling,
   fagsak,
   valgtProsessSteg,
@@ -33,7 +33,7 @@ const TilbakekrevingPaneler: FunctionComponent<OwnProps> = ({
   oppdaterProsessStegOgFaktaPanelIUrl,
   opneSokeside,
   alleBehandlinger,
-}) => {
+}: Props) => {
   const { data: tilbakekrevingKodeverk } = restFagsakApiHooks.useRestApi(FagsakApiKeys.KODEVERK_FPTILBAKE);
 
   const fagsakBehandlingerInfo = useMemo(

@@ -9,7 +9,7 @@ import {
   RobotSmileIcon,
 } from '@navikt/aksel-icons';
 
-import { historikkAktor as HistorikkAktor, navBrukerKjonn } from '@navikt/fp-kodeverk';
+import { HistorikkAktor, NavBrukerKjonn } from '@navikt/fp-kodeverk';
 
 import { IntlShape, useIntl } from 'react-intl';
 import styles from './snakkeboble.module.css';
@@ -34,12 +34,12 @@ const utledIkon = (intl: IntlShape, aktoer: string, kjoenn?: string) => {
       />
     );
   }
-  if (aktoer === HistorikkAktor.SOKER && kjoenn === navBrukerKjonn.MANN) {
+  if (aktoer === HistorikkAktor.SOKER && kjoenn === NavBrukerKjonn.MANN) {
     return (
       <FigureInwardFillIcon className={styles.imageMann} title={intl.formatMessage({ id: 'Snakkeboble.Soker' })} />
     );
   }
-  if (aktoer === HistorikkAktor.SOKER && kjoenn === navBrukerKjonn.KVINNE) {
+  if (aktoer === HistorikkAktor.SOKER && kjoenn === NavBrukerKjonn.KVINNE) {
     return (
       <FigureOutwardFillIcon className={styles.imageKvinne} title={intl.formatMessage({ id: 'Snakkeboble.Soker' })} />
     );

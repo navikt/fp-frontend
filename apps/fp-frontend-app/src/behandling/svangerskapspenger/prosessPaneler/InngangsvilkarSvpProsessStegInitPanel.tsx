@@ -1,28 +1,28 @@
-import React, { FunctionComponent, useCallback } from 'react';
+import React, { useCallback } from 'react';
 
 import { AksessRettigheter } from '@navikt/fp-types';
 
-import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
-import InngangsvilkarDefaultInitWrapper from '../../felles/prosess/InngangsvilkarDefaultInitWrapper';
-import SvangerskapInngangsvilkarInitPanel from './inngangsvilkarPaneler/SvangerskapInngangsvilkarInitPanel';
-import MedlemskapInngangsvilkarInitPanel from '../../fellesPaneler/prosess/inngangsvilkarPaneler/MedlemskapInngangsvilkarInitPanel';
-import OpptjeningInngangsvilkarInitPanel from './inngangsvilkarPaneler/OpptjeningInngangsvilkarInitPanel';
-import InngangsvilkarPanelInitProps from '../../felles/typer/inngangsvilkarPanelInitProps';
+import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
+import { InngangsvilkarDefaultInitWrapper } from '../../felles/prosess/InngangsvilkarDefaultInitWrapper';
+import { SvangerskapInngangsvilkarInitPanel } from './inngangsvilkarPaneler/SvangerskapInngangsvilkarInitPanel';
+import { MedlemskapInngangsvilkarInitPanel } from '../../fellesPaneler/prosess/inngangsvilkarPaneler/MedlemskapInngangsvilkarInitPanel';
+import { OpptjeningInngangsvilkarInitPanel } from './inngangsvilkarPaneler/OpptjeningInngangsvilkarInitPanel';
+import { InngangsvilkarPanelInitProps } from '../../felles/typer/inngangsvilkarPanelInitProps';
 
-interface OwnProps {
+interface Props {
   apentFaktaPanelInfo?: { urlCode: string; text: string };
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   rettigheter: AksessRettigheter;
 }
 
-const InngangsvilkarSvpProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
+export const InngangsvilkarSvpProsessStegInitPanel = ({
   behandling,
   valgtProsessSteg,
   registrerProsessPanel,
   apentFaktaPanelInfo,
   oppdaterProsessStegOgFaktaPanelIUrl,
   rettigheter,
-}) => {
+}: Props & ProsessPanelInitProps) => {
   const leftPanels = useCallback(
     (props: InngangsvilkarPanelInitProps) => (
       <>
@@ -56,5 +56,3 @@ const InngangsvilkarSvpProsessStegInitPanel: FunctionComponent<OwnProps & Proses
     />
   );
 };
-
-export default InngangsvilkarSvpProsessStegInitPanel;

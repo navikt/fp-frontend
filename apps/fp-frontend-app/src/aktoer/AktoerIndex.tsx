@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { AktorSakIndex } from '@navikt/fp-sak-aktor';
@@ -6,14 +6,11 @@ import { AktorSakIndex } from '@navikt/fp-sak-aktor';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { KodeverkType } from '@navikt/fp-kodeverk';
 
-import useTrackRouteParam from '../app/useTrackRouteParam';
+import { useTrackRouteParam } from '../app/useTrackRouteParam';
 import { restFagsakApiHooks, FagsakApiKeys } from '../data/fagsakContextApi';
 import { pathToFagsak } from '../app/paths';
 
-/**
- * AktoerIndex
- */
-const AktoerIndex: FunctionComponent = () => {
+export const AktoerIndex = () => {
   const { selected: selectedAktoerId } = useTrackRouteParam<string>({
     paramName: 'aktoerId',
     parse: aktoerIdFromUrl => Number.parseInt(aktoerIdFromUrl, 10),
@@ -45,5 +42,3 @@ const AktoerIndex: FunctionComponent = () => {
     />
   );
 };
-
-export default AktoerIndex;

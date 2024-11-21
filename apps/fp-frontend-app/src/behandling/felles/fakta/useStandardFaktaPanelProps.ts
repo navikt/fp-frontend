@@ -1,12 +1,11 @@
 import { useContext, useEffect, useMemo, useState } from 'react';
-import { Behandling, Fagsak } from '@navikt/ft-types';
-import { isAksjonspunktOpen } from '@navikt/ft-kodeverk';
+import { isAksjonspunktOpen } from '@navikt/fp-kodeverk';
 
-import { StandardFaktaPanelProps } from '@navikt/fp-types';
+import { StandardFaktaPanelProps, Behandling, Fagsak } from '@navikt/fp-types';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { erReadOnly } from '../utils/readOnlyPanelUtils';
-import getAlleMerknaderFraBeslutter from '../utils/getAlleMerknaderFraBeslutter';
+import { getAlleMerknaderFraBeslutter } from '../utils/getAlleMerknaderFraBeslutter';
 import { StandardPropsStateContext } from '../utils/standardPropsStateContext';
 
 export const DEFAULT_FAKTA_KODE = 'default';
@@ -58,7 +57,7 @@ const getBekreftAksjonspunktFaktaCallback =
     ).then(() => oppdaterProsessStegOgFaktaPanelIUrl(DEFAULT_PROSESS_STEG_KODE, DEFAULT_FAKTA_KODE));
   };
 
-const useStandardFaktaPanelProps = (
+export const useStandardFaktaPanelProps = (
   aksjonspunktKoder?: string[],
   overstyringApCodes: string[] = [],
 ): StandardFaktaPanelProps => {
@@ -112,5 +111,3 @@ const useStandardFaktaPanelProps = (
     setFormData,
   };
 };
-
-export default useStandardFaktaPanelProps;

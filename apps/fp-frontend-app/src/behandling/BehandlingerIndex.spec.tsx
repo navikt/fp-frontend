@@ -4,8 +4,8 @@ import { render, screen } from '@testing-library/react';
 
 import { Fagsak, BehandlingAppKontekst } from '@navikt/fp-types';
 
-import FagsakData from '../fagsak/FagsakData';
-import BehandlingerIndex from './BehandlingerIndex';
+import { FagsakData } from '../fagsak/FagsakData';
+import { BehandlingerIndex } from './BehandlingerIndex';
 
 describe('BehandlingerIndex', () => {
   it('skal rendre komponent korrekt', async () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { StoryFn } from '@storybook/react';
 
-import { ankeOmgjorArsak, ankeVurderingOmgjoer, ankeVurdering as ankeVurderingKodeverk } from '@navikt/fp-kodeverk';
+import { AnkeOmgjorArsak, AnkeVurderingOmgjoer, AnkeVurdering as ankeVurderingKodeverk } from '@navikt/fp-kodeverk';
 import { AnkeVurdering } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
@@ -25,8 +25,8 @@ ResultatVedOmgjortResultat.args = {
       erMerknaderMottatt: true,
       merknadKommentar: 'Dette er en kommentar',
       trygderettVurdering: ankeVurderingKodeverk.ANKE_OMGJOER,
-      trygderettOmgjoerArsak: ankeOmgjorArsak.NYE_OPPLYSNINGER,
-      trygderettVurderingOmgjoer: ankeVurderingOmgjoer.ANKE_TIL_GUNST,
+      trygderettOmgjoerArsak: AnkeOmgjorArsak.NYE_OPPLYSNINGER,
+      trygderettVurderingOmgjoer: AnkeVurderingOmgjoer.ANKE_TIL_GUNST,
     },
   } as AnkeVurdering,
 };
@@ -38,7 +38,7 @@ ResultatVedOpphevetResultat.args = {
       erMerknaderMottatt: true,
       merknadKommentar: 'Dette er en kommentar',
       trygderettVurdering: ankeVurderingKodeverk.ANKE_OPPHEVE_OG_HJEMSENDE,
-      trygderettOmgjoerArsak: ankeOmgjorArsak.NYE_OPPLYSNINGER,
+      trygderettOmgjoerArsak: AnkeOmgjorArsak.NYE_OPPLYSNINGER,
     },
   } as AnkeVurdering,
 };
@@ -50,7 +50,7 @@ ResultatVedHjemsendtResultat.args = {
       erMerknaderMottatt: true,
       merknadKommentar: 'Dette er en kommentar',
       trygderettVurdering: ankeVurderingKodeverk.ANKE_HJEMSENDE_UTEN_OPPHEV,
-      trygderettOmgjoerArsak: ankeOmgjorArsak.NYE_OPPLYSNINGER,
+      trygderettOmgjoerArsak: AnkeOmgjorArsak.NYE_OPPLYSNINGER,
     },
   } as AnkeVurdering,
 };

@@ -8,7 +8,7 @@ import React, { FunctionComponent, useCallback, useState } from 'react';
 import { UseFormGetValues, useForm } from 'react-hook-form';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Soknad } from '@navikt/fp-types';
 import { OverstyringAvklarStartdatoForPeriodenAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -33,7 +33,7 @@ const buildInitialValues = (soknad: Soknad, aksjonspunkt?: Aksjonspunkt): FormVa
 });
 
 const transformValues = (soknad: Soknad, values: FormValues): OverstyringAvklarStartdatoForPeriodenAp => ({
-  kode: AksjonspunktCode.OVERSTYR_AVKLAR_STARTDATO,
+  kode: AksjonspunktKode.OVERSTYR_AVKLAR_STARTDATO,
   opprinneligDato: soknad.oppgittFordeling?.startDatoForPermisjon,
   startdatoFraSoknad: values.startdatoFraSoknad!,
   begrunnelse: values.begrunnelse,
@@ -111,7 +111,7 @@ const StartdatoForForeldrepengerperiodenForm: FunctionComponent<OwnProps> = ({
           className={styles.aksjonspunktMargin}
           erAksjonspunktApent={false}
           erIkkeGodkjentAvBeslutter={
-            !!alleMerknaderFraBeslutter[AksjonspunktCode.OVERSTYR_AVKLAR_STARTDATO]?.notAccepted
+            !!alleMerknaderFraBeslutter[AksjonspunktKode.OVERSTYR_AVKLAR_STARTDATO]?.notAccepted
           }
         >
           <FlexContainer>

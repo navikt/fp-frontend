@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { BodyShort } from '@navikt/ds-react';
 
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { required } from '@navikt/ft-form-validators';
@@ -40,7 +40,7 @@ const EktefelleFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
   return (
     <FaktaGruppe
       title={intl.formatMessage({ id: 'EktefelleFaktaForm.ApplicationInformation' })}
-      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN]}
+      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN]}
     >
       <div className={styles.container}>
         <BodyShort size="small">
@@ -82,7 +82,7 @@ EktefelleFaktaForm.buildInitialValues = (familiehendelse: FamilieHendelse): Form
 });
 
 EktefelleFaktaForm.transformValues = (ektefellesBarn: boolean): BekreftEktefelleAksjonspunktAp => ({
-  kode: AksjonspunktCode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
+  kode: AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
   ektefellesBarn,
 });
 

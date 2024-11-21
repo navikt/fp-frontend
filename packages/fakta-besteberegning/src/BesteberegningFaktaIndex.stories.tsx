@@ -2,7 +2,7 @@ import React from 'react';
 import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { aksjonspunktStatus, AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktStatus, AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { Behandling, Aksjonspunkt, Beregningsgrunnlag } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -56,7 +56,7 @@ const Template: StoryFn<{
     behandling={behandling}
     beregningsgrunnlag={beregningsgrunnlag}
     arbeidsgiverOpplysninger={arbeidsgiverOpplysninger}
-    harApneAksjonspunkter={aksjonspunkter.some(ap => ap.status === aksjonspunktStatus.OPPRETTET)}
+    harApneAksjonspunkter={aksjonspunkter.some(ap => ap.status === AksjonspunktStatus.OPPRETTET)}
   />
 );
 
@@ -71,7 +71,7 @@ export const BesteberegningMedDagpengerOgArbeidÅpentAksjonspunkt = Template.bin
 BesteberegningMedDagpengerOgArbeidÅpentAksjonspunkt.args = {
   beregningsgrunnlag: scenarioBG,
   aksjonspunkter: [
-    lagAksjonspunkt(AksjonspunktCode.KONTROLLER_AUTOMATISK_BESTEBEREGNING, aksjonspunktStatus.OPPRETTET),
+    lagAksjonspunkt(AksjonspunktKode.KONTROLLER_AUTOMATISK_BESTEBEREGNING, AksjonspunktStatus.OPPRETTET),
   ],
   submitCallback: action('button-click') as (data: any) => Promise<any>,
 };
@@ -81,8 +81,8 @@ BesteberegningMedDagpengerOgArbeidLukketAksjonspunktPåVent.args = {
   beregningsgrunnlag: scenarioBG,
   aksjonspunkter: [
     lagAksjonspunkt(
-      AksjonspunktCode.KONTROLLER_AUTOMATISK_BESTEBEREGNING,
-      aksjonspunktStatus.UTFORT,
+      AksjonspunktKode.KONTROLLER_AUTOMATISK_BESTEBEREGNING,
+      AksjonspunktStatus.UTFORT,
       'Min begrunnelse for at besteberegningen er feil',
     ),
   ],
@@ -92,6 +92,6 @@ BesteberegningMedDagpengerOgArbeidLukketAksjonspunktPåVent.args = {
 export const BesteberegningMedAvvik = Template.bind({});
 BesteberegningMedAvvik.args = {
   beregningsgrunnlag: scenarioBG,
-  aksjonspunkter: [lagAksjonspunkt(AksjonspunktCode.MANUELL_KONTROLL_AV_BESTEBEREGNING, aksjonspunktStatus.OPPRETTET)],
+  aksjonspunkter: [lagAksjonspunkt(AksjonspunktKode.MANUELL_KONTROLL_AV_BESTEBEREGNING, AksjonspunktStatus.OPPRETTET)],
   submitCallback: action('button-click') as (data: any) => Promise<any>,
 };

@@ -1,4 +1,4 @@
-import { FagsakStatus, BehandlingStatus, BehandlingType } from '@navikt/ft-kodeverk';
+import { FagsakStatus, BehandlingStatus, BehandlingType } from '@navikt/fp-kodeverk';
 
 import { NavAnsatt, AksessRettigheter, Aksess } from '@navikt/fp-types';
 
@@ -56,7 +56,7 @@ export const kanOverstyreAccess = accessSelector(
   [BehandlingStatus.BEHANDLING_UTREDES],
 );
 
-const getAccessRights = (
+export const getAccessRights = (
   navAnsatt: NavAnsatt,
   fagsakStatus: string,
   behandlingStatus?: string,
@@ -65,5 +65,3 @@ const getAccessRights = (
   writeAccess: writeAccess(navAnsatt, fagsakStatus, behandlingStatus, behandlingType),
   kanOverstyreAccess: kanOverstyreAccess(navAnsatt, fagsakStatus, behandlingStatus, behandlingType),
 });
-
-export default getAccessRights;

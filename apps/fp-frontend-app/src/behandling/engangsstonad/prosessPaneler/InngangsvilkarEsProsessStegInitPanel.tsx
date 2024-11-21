@@ -1,31 +1,31 @@
-import React, { FunctionComponent, useCallback } from 'react';
+import React, { useCallback } from 'react';
 
 import { AksessRettigheter } from '@navikt/fp-types';
 
-import FodselInngangsvilkarInitPanel from './inngangsvilkarPaneler/FodselInngangsvilkarInitPanel';
-import AdopsjonInngangsvilkarInitPanel from './inngangsvilkarPaneler/AdopsjonInngangsvilkarInitPanel';
-import MedlemskapInngangsvilkarInitPanel from '../../fellesPaneler/prosess/inngangsvilkarPaneler/MedlemskapInngangsvilkarInitPanel';
-import ForeldreansvarInngangsvilkarInitPanel from '../../fellesPaneler/prosess/inngangsvilkarPaneler/ForeldreansvarInngangsvilkarInitPanel';
-import OmsorgInngangsvilkarInitPanel from './inngangsvilkarPaneler/OmsorgInngangsvilkarInitPanel';
-import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
-import InngangsvilkarDefaultInitWrapper from '../../felles/prosess/InngangsvilkarDefaultInitWrapper';
-import InngangsvilkarPanelInitProps from '../../felles/typer/inngangsvilkarPanelInitProps';
-import MedlemskapForutgaendeInngangsvilkarInitPanel from './inngangsvilkarPaneler/MedlemskapForutgaendeInngangsvilkarInitPanel';
+import { FodselInngangsvilkarInitPanel } from './inngangsvilkarPaneler/FodselInngangsvilkarInitPanel';
+import { AdopsjonInngangsvilkarInitPanel } from './inngangsvilkarPaneler/AdopsjonInngangsvilkarInitPanel';
+import { MedlemskapInngangsvilkarInitPanel } from '../../fellesPaneler/prosess/inngangsvilkarPaneler/MedlemskapInngangsvilkarInitPanel';
+import { ForeldreansvarInngangsvilkarInitPanel } from '../../fellesPaneler/prosess/inngangsvilkarPaneler/ForeldreansvarInngangsvilkarInitPanel';
+import { OmsorgInngangsvilkarInitPanel } from './inngangsvilkarPaneler/OmsorgInngangsvilkarInitPanel';
+import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
+import { InngangsvilkarDefaultInitWrapper } from '../../felles/prosess/InngangsvilkarDefaultInitWrapper';
+import { InngangsvilkarPanelInitProps } from '../../felles/typer/inngangsvilkarPanelInitProps';
+import { MedlemskapForutgaendeInngangsvilkarInitPanel } from './inngangsvilkarPaneler/MedlemskapForutgaendeInngangsvilkarInitPanel';
 
-interface OwnProps {
+interface Props {
   apentFaktaPanelInfo?: { urlCode: string; text: string };
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   rettigheter: AksessRettigheter;
 }
 
-const InngangsvilkarEsProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
+export const InngangsvilkarEsProsessStegInitPanel = ({
   behandling,
   valgtProsessSteg,
   registrerProsessPanel,
   apentFaktaPanelInfo,
   oppdaterProsessStegOgFaktaPanelIUrl,
   rettigheter,
-}) => {
+}: Props & ProsessPanelInitProps) => {
   const leftPanels = useCallback(
     (props: InngangsvilkarPanelInitProps) => (
       <>
@@ -59,5 +59,3 @@ const InngangsvilkarEsProsessStegInitPanel: FunctionComponent<OwnProps & Prosess
     />
   );
 };
-
-export default InngangsvilkarEsProsessStegInitPanel;

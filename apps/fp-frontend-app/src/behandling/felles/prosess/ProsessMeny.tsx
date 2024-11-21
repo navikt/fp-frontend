@@ -1,8 +1,8 @@
-import React, { FunctionComponent, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { ProcessMenu, ProcessMenuStepType } from '@navikt/ft-plattform-komponenter';
-import { VilkarUtfallType } from '@navikt/ft-kodeverk';
+import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 
-import ProsessPanelMenyData from '../typer/prosessPanelMenyData';
+import { ProsessPanelMenyData } from '../typer/prosessPanelMenyData';
 import styles from './arrowForProcessMenu.module.css';
 
 const finnProsessmenyType = (status?: string, harApentAksjonspunkt?: boolean): ProcessMenuStepType => {
@@ -18,12 +18,12 @@ const finnProsessmenyType = (status?: string, harApentAksjonspunkt?: boolean): P
   return ProcessMenuStepType.default;
 };
 
-interface OwnProps {
+interface Props {
   menyData: ProsessPanelMenyData[];
   oppdaterProsessPanelIUrl: (index: number) => void;
 }
 
-const ProsessMeny: FunctionComponent<OwnProps> = ({ menyData, oppdaterProsessPanelIUrl }) => {
+export const ProsessMeny = ({ menyData, oppdaterProsessPanelIUrl }: Props) => {
   const steg = useMemo(
     () =>
       menyData.map(data => {
@@ -43,5 +43,3 @@ const ProsessMeny: FunctionComponent<OwnProps> = ({ menyData, oppdaterProsessPan
     <ProcessMenu steps={steg} onClick={oppdaterProsessPanelIUrl} stepArrowContainerStyle={styles.stepArrowContainer} />
   );
 };
-
-export default ProsessMeny;
