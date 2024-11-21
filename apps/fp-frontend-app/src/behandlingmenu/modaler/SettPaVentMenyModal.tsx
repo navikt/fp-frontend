@@ -44,7 +44,6 @@ export const SettPaVentMenyModal = ({ behandling, hentOgSettBehandling, lukkModa
 
   return (
     <MenySettPaVentIndex
-      behandlingVersjon={behandling.versjon}
       settBehandlingPaVent={settBehandlingPåVentOgOppdaterBehandling}
       ventearsaker={menyKodeverk.getKodeverkForValgtBehandling(KodeverkType.VENT_AARSAK)}
       lukkModal={lukkModal}

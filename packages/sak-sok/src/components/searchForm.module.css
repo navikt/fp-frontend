@@ -3,17 +3,9 @@
   width: 600px;
 }
 
-.button {
-  margin-top: 28px;
-}
-
 .advarselIcon {
   color: var(--a-orange-500);
   height: 20px;
   margin-top: 5px;
   width: 20px;
-}
-
-.feilmelding {
-  margin-top: 5px;
 }

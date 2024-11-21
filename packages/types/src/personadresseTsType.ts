@@ -9,5 +9,3 @@ export type Personadresse = Readonly<{
   poststed?: string | null;
   land?: string;
 }>;
-
-export default Personadresse;

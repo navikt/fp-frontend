@@ -1,4 +1,4 @@
-type BeregningsgrunnlagArbeidsforhold = Readonly<{
+export type BeregningsgrunnlagArbeidsforhold = Readonly<{
   arbeidsgiverNavn?: string;
   arbeidsgiverId?: string;
   arbeidsgiverIdVisning?: string;
@@ -18,5 +18,3 @@ type BeregningsgrunnlagArbeidsforhold = Readonly<{
   stillingsNavn?: string;
   stillingsProsent?: number;
 }>;
-
-export default BeregningsgrunnlagArbeidsforhold;

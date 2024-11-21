@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 import { Location } from 'history';
@@ -16,7 +16,7 @@ import {
   TotrinnskontrollSkjermlenkeContext,
 } from '@navikt/fp-types';
 
-import AksjonspunktGodkjenningFieldArray, { AksjonspunktGodkjenningData } from './AksjonspunktGodkjenningFieldArray';
+import { AksjonspunktGodkjenningFieldArray, AksjonspunktGodkjenningData } from './AksjonspunktGodkjenningFieldArray';
 
 import styles from './totrinnskontrollBeslutterForm.module.css';
 
@@ -79,7 +79,7 @@ const buildInitialValues = (totrinnskontrollSkjermlenkeContext: Totrinnskontroll
     })),
 });
 
-interface OwnProps {
+interface Props {
   behandling: BehandlingAppKontekst;
   totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[];
   forhandsvisVedtaksbrev: () => void;
@@ -95,12 +95,7 @@ interface OwnProps {
   setBeslutterFormData: (data?: any) => void;
 }
 
-/*
- * TotrinnskontrollBeslutterForm
- *
- * Presentasjonskomponent. Holds the form of the totrinnkontroll
- */
-export const TotrinnskontrollBeslutterForm: FunctionComponent<OwnProps> = ({
+export const TotrinnskontrollBeslutterForm = ({
   behandling,
   onSubmit,
   forhandsvisVedtaksbrev,
@@ -114,7 +109,7 @@ export const TotrinnskontrollBeslutterForm: FunctionComponent<OwnProps> = ({
   lagLenke,
   beslutterFormData,
   setBeslutterFormData,
-}) => {
+}: Props) => {
   const erKlage = behandling && behandling.type === BehandlingType.KLAGE;
   const erAnke = behandling && behandling.type === BehandlingType.ANKE;
   const harIkkeKonsekvensForYtelse = useMemo(
@@ -203,5 +198,3 @@ export const TotrinnskontrollBeslutterForm: FunctionComponent<OwnProps> = ({
     </Form>
   );
 };
-
-export default TotrinnskontrollBeslutterForm;

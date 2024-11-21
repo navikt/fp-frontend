@@ -1,24 +1,24 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { BehandlingAppKontekst } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
-import FatterVedtakApprovalModal from './components/modal/FatterVedtakApprovalModal';
+import { FatterVedtakApprovalModal } from './components/modal/FatterVedtakApprovalModal';
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-interface OwnProps {
+interface Props {
   behandling: BehandlingAppKontekst;
   closeEvent: () => void;
   allAksjonspunktApproved: boolean;
 }
 
-const FatterVedtakTotrinnskontrollModalSakIndex: FunctionComponent<OwnProps> = ({
+export const FatterVedtakTotrinnskontrollModalSakIndex = ({
   behandling,
   closeEvent,
   allAksjonspunktApproved,
-}) => (
+}: Props) => (
   <RawIntlProvider value={intl}>
     <FatterVedtakApprovalModal
       closeEvent={closeEvent}
@@ -30,5 +30,3 @@ const FatterVedtakTotrinnskontrollModalSakIndex: FunctionComponent<OwnProps> = (
     />
   </RawIntlProvider>
 );
-
-export default FatterVedtakTotrinnskontrollModalSakIndex;

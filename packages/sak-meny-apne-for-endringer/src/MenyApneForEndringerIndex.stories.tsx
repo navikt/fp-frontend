@@ -1,23 +1,18 @@
-import React from 'react';
-import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+import { Meta, StoryObj } from '@storybook/react';
 
-import MenyApneForEndringerIndex from './MenyApneForEndringerIndex';
+import { MenyApneForEndringerIndex } from './MenyApneForEndringerIndex';
 
-export default {
+const meta = {
   title: 'sak/sak-meny-apne-for-endringer',
   component: MenyApneForEndringerIndex,
-};
+  args: {
+    apneBehandlingForEndringer: action('button-click'),
+    lukkModal: action('button-click'),
+  },
+} satisfies Meta<typeof MenyApneForEndringerIndex>;
+export default meta;
 
-const Template: StoryFn<{
-  apneBehandlingForEndringer: () => void;
-  lukkModal: () => void;
-}> = ({ apneBehandlingForEndringer, lukkModal }) => (
-  <MenyApneForEndringerIndex apneBehandlingForEndringer={apneBehandlingForEndringer} lukkModal={lukkModal} />
-);
+type Story = StoryObj<typeof meta>;
 
-export const Default = Template.bind({});
-Default.args = {
-  apneBehandlingForEndringer: action('button-click'),
-  lukkModal: action('button-click'),
-};
+export const Default: Story = {};

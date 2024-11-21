@@ -1,7 +1,7 @@
-import RefusjonTilVurdering, { FaktaOmFordeling } from './beregningsgrunnlagFordelingTsType';
+import { RefusjonTilVurdering, FaktaOmFordeling } from './beregningsgrunnlagFordelingTsType';
 import { Besteberegninggrunnlag } from './besteberegningTsTypes';
-import BeregningsgrunnlagArbeidsforhold from './beregningsgrunnlagArbeidsforholdTsType';
-import FaktaOmBeregning from './beregningsgrunnlagFaktaTsType';
+import { BeregningsgrunnlagArbeidsforhold } from './beregningsgrunnlagArbeidsforholdTsType';
+import { FaktaOmBeregning } from './beregningsgrunnlagFaktaTsType';
 
 export type InntektsgrunnlagInntekt = Readonly<{
   inntektAktivitetType: string;
@@ -104,7 +104,7 @@ export type BeregningsgrunnlagPeriodeProp = Readonly<{
   beregningsgrunnlagPrStatusOgAndel?: BeregningsgrunnlagAndel[];
 }>;
 
-type Beregningsgrunnlag = Readonly<{
+export type Beregningsgrunnlag = Readonly<{
   skjaeringstidspunktBeregning: string;
   dekningsgrad: number;
   grunnbeløp: number;
@@ -120,5 +120,3 @@ type Beregningsgrunnlag = Readonly<{
   refusjonTilVurdering?: RefusjonTilVurdering;
   inntektsgrunnlag?: Inntektsgrunnlag;
 }>;
-
-export default Beregningsgrunnlag;

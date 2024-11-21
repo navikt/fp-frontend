@@ -1,11 +1,11 @@
-import React, { FunctionComponent, useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { BehandlingAppKontekst, KodeverkMedNavn } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
 import { HenleggBehandlingModal, FormValues } from './components/HenleggBehandlingModal';
-import HenlagtBehandlingModal from './components/HenlagtBehandlingModal';
+import { HenlagtBehandlingModal } from './components/HenlagtBehandlingModal';
 
 import messages from '../i18n/nb_NO.json';
 
@@ -13,7 +13,7 @@ const intl = createIntl(messages);
 
 export const getMenytekst = (): string => intl.formatMessage({ id: 'MenyHenleggIndex.HenleggBehandling' });
 
-interface OwnProps {
+interface Props {
   valgtBehandling: BehandlingAppKontekst;
   henleggBehandling: (params: { årsakKode: string; begrunnelse: string; fritekst?: string }) => Promise<any>;
   forhandsvisHenleggBehandling: (erHenleggelse: boolean, data: any) => void;
@@ -23,7 +23,7 @@ interface OwnProps {
   lukkModal: () => void;
 }
 
-const MenyHenleggIndex: FunctionComponent<OwnProps> = ({
+export const MenyHenleggIndex = ({
   valgtBehandling,
   henleggBehandling,
   forhandsvisHenleggBehandling,
@@ -31,7 +31,7 @@ const MenyHenleggIndex: FunctionComponent<OwnProps> = ({
   behandlingResultatTyper,
   gaaTilSokeside,
   lukkModal,
-}) => {
+}: Props) => {
   const [erHenlagt, setErHenlagt] = useState(false);
 
   const submit = useCallback(
@@ -65,5 +65,3 @@ const MenyHenleggIndex: FunctionComponent<OwnProps> = ({
     </RawIntlProvider>
   );
 };
-
-export default MenyHenleggIndex;

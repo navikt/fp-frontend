@@ -1,8 +1,8 @@
-import Aksjonspunkt from './aksjonspunktTsType';
-import Behandling from './behandlingTsType';
-import AlleKodeverk from './kodeverkAlleTsType';
+import { Aksjonspunkt } from './aksjonspunktTsType';
+import { Behandling } from './behandlingTsType';
+import { AlleKodeverk } from './kodeverkAlleTsType';
 
-type StandardFaktaPanelProps = Readonly<{
+export type StandardFaktaPanelProps = Readonly<{
   behandling: Behandling;
   aksjonspunkter: Aksjonspunkt[];
   readOnly: boolean;
@@ -14,5 +14,3 @@ type StandardFaktaPanelProps = Readonly<{
   formData?: any;
   setFormData: (data: any) => void;
 }>;
-
-export default StandardFaktaPanelProps;

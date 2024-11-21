@@ -9,7 +9,7 @@ import { decodeHtmlEntity } from '@navikt/ft-utils';
 import { KodeverkMedNavn, BehandlingAppKontekst, TotrinnskontrollSkjermlenkeContext } from '@navikt/fp-types';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import getAksjonspunkttekst from './aksjonspunktTekster/aksjonspunktTekstUtleder';
+import { getAksjonspunkttekst } from './aksjonspunktTekster/aksjonspunktTekstUtleder';
 
 import styles from './totrinnskontrollSaksbehandlerPanel.module.css';
 

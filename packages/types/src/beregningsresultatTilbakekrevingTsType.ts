@@ -17,9 +17,7 @@ export type BeregningResultatPeriode = {
   riktigYtelseBeløp: number;
 };
 
-type BeregningsresultatTilbakekreving = {
+export type BeregningsresultatTilbakekreving = {
   beregningResultatPerioder: BeregningResultatPeriode[];
   vedtakResultatType: string;
 };
-
-export default BeregningsresultatTilbakekreving;

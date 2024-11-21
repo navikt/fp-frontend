@@ -1,5 +1,4 @@
-import React from 'react';
-import { StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import dayjs from 'dayjs';
 
 import {
@@ -11,7 +10,7 @@ import {
   FamilieHendelseType,
   DiskresjonskodeType,
 } from '@navikt/fp-kodeverk';
-import { Fagsak, FagsakPersoner } from '@navikt/fp-types';
+import { Fagsak } from '@navikt/fp-types';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 
 import { VisittkortSakIndex } from './VisittkortSakIndex';
@@ -19,11 +18,6 @@ import { VisittkortSakIndex } from './VisittkortSakIndex';
 import '@navikt/ds-css';
 
 import '@navikt/ft-plattform-komponenter/dist/style.css';
-
-export default {
-  title: 'sak/sak-visittkort',
-  component: VisittkortSakIndex,
-};
 
 const defaultFagsak = {
   saksnummer: '123456',
@@ -69,124 +63,128 @@ const fagsakPersonerMedAnnenPartUkjent = {
   annenPart: fagsakPersonAnnenPartUkjent,
 };
 
-const Template: StoryFn<{
-  fagsak: Fagsak;
-  fagsakPersoner: FagsakPersoner;
-  harVerge?: boolean;
-  lenkeTilAnnenPart?: string;
-}> = ({ fagsak, fagsakPersoner, lenkeTilAnnenPart, harVerge }) => (
-  <VisittkortSakIndex
-    fagsak={fagsak}
-    fagsakPersoner={fagsakPersoner}
-    lenkeTilAnnenPart={lenkeTilAnnenPart}
-    harVerge={harVerge}
-  />
-);
+const meta = {
+  title: 'sak/sak-visittkort',
+  component: VisittkortSakIndex,
+} satisfies Meta<typeof VisittkortSakIndex>;
+export default meta;
 
-export const UtenAnnenPart = Template.bind({});
-UtenAnnenPart.args = {
-  fagsak: defaultFagsak,
-  fagsakPersoner: fagsakPersonerUtenAnnenPart,
+type Story = StoryObj<typeof meta>;
+
+export const UtenAnnenPart: Story = {
+  args: {
+    fagsak: defaultFagsak,
+    fagsakPersoner: fagsakPersonerUtenAnnenPart,
+  },
 };
 
-export const PersonopplysningerForBeggeParter = Template.bind({});
-PersonopplysningerForBeggeParter.args = {
-  fagsak: defaultFagsak,
-  fagsakPersoner: fagsakPersonerMedAnnenPart,
-  lenkeTilAnnenPart: 'testlenke til annen part',
+export const PersonopplysningerForBeggeParter: Story = {
+  args: {
+    fagsak: defaultFagsak,
+    fagsakPersoner: fagsakPersonerMedAnnenPart,
+    lenkeTilAnnenPart: 'testlenke til annen part',
+  },
 };
 
-export const PersonopplysningerForBeggeParterMedLangtNavn = Template.bind({});
-PersonopplysningerForBeggeParterMedLangtNavn.args = {
-  fagsak: defaultFagsak,
-  fagsakPersoner: {
-    annenPart: { ...fagsakPersonAnnenPart, navn: 'Klara Kuuuuuuuuuuu' },
-    bruker: {
-      ...fagsakPerson,
-      navn: 'Espen Utvikler Utvikler Utvikler Utvikler Utvikler Utvikler Utvikler Utvikler Utvikler',
+export const PersonopplysningerForBeggeParterMedLangtNavn: Story = {
+  args: {
+    fagsak: defaultFagsak,
+    fagsakPersoner: {
+      annenPart: { ...fagsakPersonAnnenPart, navn: 'Klara Kuuuuuuuuuuu' },
+      bruker: {
+        ...fagsakPerson,
+        navn: 'Espen Utvikler Utvikler Utvikler Utvikler Utvikler Utvikler Utvikler Utvikler Utvikler',
+      },
     },
-  },
-  lenkeTilAnnenPart: 'testlenke til annen part',
-};
-
-export const MedDiskresjonskodeOgDødAnnenpart = Template.bind({});
-MedDiskresjonskodeOgDødAnnenpart.args = {
-  fagsak: defaultFagsak,
-  fagsakPersoner: {
-    bruker: { ...fagsakPerson, diskresjonskode: DiskresjonskodeType.KODE6 },
-    annenPart: { ...fagsakPersonAnnenPart, dødsdato: '2024-02-01' },
-  },
-  lenkeTilAnnenPart: 'testlenke til annen part',
-};
-
-export const ForAnnenPartDerAktørIdErUkjent = Template.bind({});
-ForAnnenPartDerAktørIdErUkjent.args = {
-  fagsak: defaultFagsak,
-  fagsakPersoner: fagsakPersonerMedAnnenPartUkjent,
-  lenkeTilAnnenPart: 'testlenke til annen part',
-};
-
-export const MedVergeOgBrukerUnder18 = Template.bind({});
-MedVergeOgBrukerUnder18.args = {
-  fagsak: defaultFagsak,
-  harVerge: true,
-  fagsakPersoner: {
-    bruker: { ...fagsakPerson, fødselsdato: dayjs().subtract(17, 'years').format(ISO_DATE_FORMAT) },
+    lenkeTilAnnenPart: 'testlenke til annen part',
   },
 };
 
-export const FamilieMedDødfødtBarn = Template.bind({});
-FamilieMedDødfødtBarn.args = {
-  fagsak: defaultFagsak,
-  fagsakPersoner: {
-    bruker: fagsakPerson,
-    familiehendelse: {
-      hendelseType: FamilieHendelseType.FODSEL,
-      hendelseDato: '2020-01-21',
-      dødfødsel: true,
-      antallBarn: 1,
+export const MedDiskresjonskodeOgDødAnnenpart: Story = {
+  args: {
+    fagsak: defaultFagsak,
+    fagsakPersoner: {
+      bruker: { ...fagsakPerson, diskresjonskode: DiskresjonskodeType.KODE6 },
+      annenPart: { ...fagsakPersonAnnenPart, dødsdato: '2024-02-01' },
+    },
+    lenkeTilAnnenPart: 'testlenke til annen part',
+  },
+};
+
+export const ForAnnenPartDerAktørIdErUkjent: Story = {
+  args: {
+    fagsak: defaultFagsak,
+    fagsakPersoner: fagsakPersonerMedAnnenPartUkjent,
+    lenkeTilAnnenPart: 'testlenke til annen part',
+  },
+};
+
+export const MedVergeOgBrukerUnder18: Story = {
+  args: {
+    fagsak: defaultFagsak,
+    harVerge: true,
+    fagsakPersoner: {
+      bruker: { ...fagsakPerson, fødselsdato: dayjs().subtract(17, 'years').format(ISO_DATE_FORMAT) },
     },
   },
 };
 
-export const FamilieMedTermin = Template.bind({});
-FamilieMedTermin.args = {
-  fagsak: defaultFagsak,
-  fagsakPersoner: {
-    bruker: fagsakPerson,
-    familiehendelse: {
-      hendelseType: FamilieHendelseType.TERMIN,
-      hendelseDato: '2020-01-21',
-      dødfødsel: false,
-      antallBarn: 1,
+export const FamilieMedDødfødtBarn: Story = {
+  args: {
+    fagsak: defaultFagsak,
+    fagsakPersoner: {
+      bruker: fagsakPerson,
+      familiehendelse: {
+        hendelseType: FamilieHendelseType.FODSEL,
+        hendelseDato: '2020-01-21',
+        dødfødsel: true,
+        antallBarn: 1,
+      },
     },
   },
 };
 
-export const FamilieMedOmsorgovertakelse = Template.bind({});
-FamilieMedOmsorgovertakelse.args = {
-  fagsak: defaultFagsak,
-  fagsakPersoner: {
-    bruker: fagsakPerson,
-    familiehendelse: {
-      hendelseType: FamilieHendelseType.OMSORG,
-      hendelseDato: '2020-01-21',
-      dødfødsel: false,
-      antallBarn: 1,
+export const FamilieMedTermin: Story = {
+  args: {
+    fagsak: defaultFagsak,
+    fagsakPersoner: {
+      bruker: fagsakPerson,
+      familiehendelse: {
+        hendelseType: FamilieHendelseType.TERMIN,
+        hendelseDato: '2020-01-21',
+        dødfødsel: false,
+        antallBarn: 1,
+      },
     },
   },
 };
 
-export const FamilieMedAdopsjon = Template.bind({});
-FamilieMedAdopsjon.args = {
-  fagsak: defaultFagsak,
-  fagsakPersoner: {
-    bruker: fagsakPerson,
-    familiehendelse: {
-      hendelseType: FamilieHendelseType.ADOPSJON,
-      hendelseDato: '2020-01-21',
-      dødfødsel: false,
-      antallBarn: 1,
+export const FamilieMedOmsorgovertakelse: Story = {
+  args: {
+    fagsak: defaultFagsak,
+    fagsakPersoner: {
+      bruker: fagsakPerson,
+      familiehendelse: {
+        hendelseType: FamilieHendelseType.OMSORG,
+        hendelseDato: '2020-01-21',
+        dødfødsel: false,
+        antallBarn: 1,
+      },
+    },
+  },
+};
+
+export const FamilieMedAdopsjon: Story = {
+  args: {
+    fagsak: defaultFagsak,
+    fagsakPersoner: {
+      bruker: fagsakPerson,
+      familiehendelse: {
+        hendelseType: FamilieHendelseType.ADOPSJON,
+        hendelseDato: '2020-01-21',
+        dødfødsel: false,
+        antallBarn: 1,
+      },
     },
   },
 };

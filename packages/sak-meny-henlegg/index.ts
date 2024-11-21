@@ -1,1 +1,1 @@
-export { default as MenyHenleggIndex, getMenytekst } from './src/MenyHenleggIndex';
+export { MenyHenleggIndex, getMenytekst } from './src/MenyHenleggIndex';

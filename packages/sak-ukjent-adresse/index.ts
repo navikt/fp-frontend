@@ -1,1 +1,1 @@
-export { default as UkjentAdresseMeldingIndex } from './src/UkjentAdresseMeldingIndex';
+export { UkjentAdresseMeldingIndex } from './src/UkjentAdresseMeldingIndex';

@@ -1,8 +1,8 @@
-import Aksjonspunkt from './aksjonspunktTsType';
-import Behandling from './behandlingTsType';
-import AlleKodeverkTilbakekreving from './kodeverkAlleTilbakekrevingTsType';
+import { Aksjonspunkt } from './aksjonspunktTsType';
+import { Behandling } from './behandlingTsType';
+import { AlleKodeverkTilbakekreving } from './kodeverkAlleTilbakekrevingTsType';
 
-type StandardFaktaPanelPropsTilbakekreving = Readonly<{
+export type StandardFaktaPanelPropsTilbakekreving = Readonly<{
   behandling: Behandling;
   aksjonspunkter: Aksjonspunkt[];
   readOnly: boolean;
@@ -14,5 +14,3 @@ type StandardFaktaPanelPropsTilbakekreving = Readonly<{
   formData?: any;
   setFormData: (data: any) => void;
 }>;
-
-export default StandardFaktaPanelPropsTilbakekreving;

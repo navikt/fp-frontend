@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { BodyShort, Button, Checkbox, Link, SortState, Table } from '@navikt/ds-react';
 import {
@@ -14,7 +14,7 @@ import { Dokument } from '@navikt/fp-types';
 import { DateTimeLabel } from '@navikt/ft-ui-komponenter';
 import styles from './documentList.module.css';
 
-export interface OwnProps {
+interface Props {
   documents: Dokument[];
   behandlingUuid?: string;
   selectDocumentCallback: (e: React.SyntheticEvent, id?: number | string, dokument?: Dokument) => void;
@@ -70,7 +70,7 @@ const KommunikasjonsretningIkon = ({ kommunikasjonsretning }: { kommunikasjonsre
  * trigget når saksbehandler velger et dokument. Finnes ingen dokumenter blir det kun vist en label
  * som viser at ingen dokumenter finnes på fagsak.
  */
-const DocumentList: FunctionComponent<OwnProps> = ({ documents, behandlingUuid, selectDocumentCallback }) => {
+export const DocumentList = ({ documents, behandlingUuid, selectDocumentCallback }: Props) => {
   const intl = useIntl();
 
   // Logikk for å toggle checkboxes tilpasset fra Aksel-eksempel: https://aksel.nav.no/komponenter/core/table#tabledemo-selectable
@@ -224,5 +224,3 @@ const DocumentList: FunctionComponent<OwnProps> = ({ documents, behandlingUuid, 
     </>
   );
 };
-
-export default DocumentList;

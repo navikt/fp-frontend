@@ -1,14 +1,14 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 
 import { VedtakArbeidsforhold } from '@navikt/fp-types';
 import { BodyShort, Table, VStack } from '@navikt/ds-react';
 import { FormattedMessage } from 'react-intl';
 
-interface OwnProps {
+interface Props {
   alleArbeidsforhold?: VedtakArbeidsforhold[];
 }
 
-const ArbeidsforholdPanel: FunctionComponent<OwnProps> = ({ alleArbeidsforhold }) => (
+export const ArbeidsforholdPanel = ({ alleArbeidsforhold }: Props) => (
   <VStack gap="4">
     <div />
     {!alleArbeidsforhold && (
@@ -54,5 +54,3 @@ const ArbeidsforholdPanel: FunctionComponent<OwnProps> = ({ alleArbeidsforhold }
     )}
   </VStack>
 );
-
-export default ArbeidsforholdPanel;

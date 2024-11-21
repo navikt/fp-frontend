@@ -1,7 +1,7 @@
 import React from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-const getIntlDecorator = (messages: Record<string, string>) => {
+export const getIntlDecorator = (messages: Record<string, string>) => {
   const intl = createIntl(
     {
       locale: 'nb-NO',
@@ -13,5 +13,3 @@ const getIntlDecorator = (messages: Record<string, string>) => {
   const withIntlProvider = (story: any) => <RawIntlProvider value={intl}>{story()}</RawIntlProvider>;
   return withIntlProvider;
 };
-
-export default getIntlDecorator;

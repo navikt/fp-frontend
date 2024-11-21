@@ -1,23 +1,19 @@
-import React from 'react';
-import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { MenyTaAvVentIndex } from './MenyTaAvVentIndex';
 
-export default {
+const meta = {
   title: 'sak/sak-meny-ta-av-vent',
   component: MenyTaAvVentIndex,
-};
+  args: {
+    behandlingVersjon: 2,
+    taBehandlingAvVent: action('button-click'),
+    lukkModal: action('button-click'),
+  },
+} satisfies Meta<typeof MenyTaAvVentIndex>;
+export default meta;
 
-const Template: StoryFn<{
-  taBehandlingAvVent: () => void;
-  lukkModal: () => void;
-}> = ({ taBehandlingAvVent, lukkModal }) => (
-  <MenyTaAvVentIndex behandlingVersjon={2} taBehandlingAvVent={taBehandlingAvVent} lukkModal={lukkModal} />
-);
+type Story = StoryObj<typeof meta>;
 
-export const Default = Template.bind({});
-Default.args = {
-  taBehandlingAvVent: action('button-click'),
-  lukkModal: action('button-click'),
-};
+export const Default: Story = {};

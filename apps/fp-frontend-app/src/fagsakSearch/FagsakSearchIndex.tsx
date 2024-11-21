@@ -52,7 +52,7 @@ export const FagsakSearchIndex = () => {
       fagsaker={fagsaker}
       searchFagsakCallback={searchFagsaker}
       searchResultReceived={sokFerdig}
-      selectFagsakCallback={(e: React.SyntheticEvent, saksnummer?: string) => goToFagsak(saksnummer)}
+      selectFagsakCallback={goToFagsak}
       searchStarted={sokeStatus === RestApiState.LOADING}
       searchResultAccessDenied={searchResultAccessDenied}
       alleKodeverk={alleKodeverk}

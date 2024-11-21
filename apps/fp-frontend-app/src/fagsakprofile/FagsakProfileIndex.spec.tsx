@@ -1,6 +1,5 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { act } from 'react-dom/test-utils';
 import { RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
 import { MemoryRouter } from 'react-router-dom';
@@ -59,22 +58,20 @@ describe('<FagsakProfileIndex>', () => {
       { key: FagsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt } },
     ];
 
-    await act(async () => {
-      render(
-        <RawIntlProvider value={intl}>
-          <RestApiMock data={data} requestApi={requestFagsakApi}>
-            <MemoryRouter>
-              <FagsakProfileIndex
-                fagsakData={new FagsakData(fagsak)}
-                hentOgSettBehandling={vi.fn()}
-                setBehandling={vi.fn()}
-                oppdaterFagsak={vi.fn()}
-              />
-            </MemoryRouter>
-          </RestApiMock>
-        </RawIntlProvider>,
-      );
-    });
+    render(
+      <RawIntlProvider value={intl}>
+        <RestApiMock data={data} requestApi={requestFagsakApi}>
+          <MemoryRouter>
+            <FagsakProfileIndex
+              fagsakData={new FagsakData(fagsak)}
+              hentOgSettBehandling={vi.fn()}
+              setBehandling={vi.fn()}
+              oppdaterFagsak={vi.fn()}
+            />
+          </MemoryRouter>
+        </RestApiMock>
+      </RawIntlProvider>,
+    );
 
     expect(await screen.findByText('123 - Opprettet')).toBeInTheDocument();
     expect(screen.getByText('Førstegangsbehandling')).toBeInTheDocument();
@@ -87,23 +84,21 @@ describe('<FagsakProfileIndex>', () => {
       { key: FagsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt } },
     ];
 
-    await act(async () => {
-      render(
-        <RawIntlProvider value={intl}>
-          <RestApiMock data={data} requestApi={requestFagsakApi}>
-            <MemoryRouter>
-              <FagsakProfileIndex
-                fagsakData={new FagsakData(fagsak)}
-                hentOgSettBehandling={vi.fn()}
-                setBehandling={vi.fn()}
-                oppdaterFagsak={vi.fn()}
-                behandlingUuid="1"
-              />
-            </MemoryRouter>
-          </RestApiMock>
-        </RawIntlProvider>,
-      );
-    });
+    render(
+      <RawIntlProvider value={intl}>
+        <RestApiMock data={data} requestApi={requestFagsakApi}>
+          <MemoryRouter>
+            <FagsakProfileIndex
+              fagsakData={new FagsakData(fagsak)}
+              hentOgSettBehandling={vi.fn()}
+              setBehandling={vi.fn()}
+              oppdaterFagsak={vi.fn()}
+              behandlingUuid="1"
+            />
+          </MemoryRouter>
+        </RestApiMock>
+      </RawIntlProvider>,
+    );
 
     expect(await screen.findByText('123 - Opprettet')).toBeInTheDocument();
     expect(screen.queryByText('Førstegangsbehandling')).not.toBeInTheDocument();

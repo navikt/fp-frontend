@@ -34,10 +34,8 @@ export type DetaljertSimuleringResultat = Readonly<{
   perioderPerMottaker: Mottaker[];
 }>;
 
-type SimuleringResultat = Readonly<{
+export type SimuleringResultat = Readonly<{
   simuleringResultat: DetaljertSimuleringResultat;
   simuleringResultatUtenInntrekk: DetaljertSimuleringResultat;
   slåttAvInntrekk: boolean;
 }>;
-
-export default SimuleringResultat;

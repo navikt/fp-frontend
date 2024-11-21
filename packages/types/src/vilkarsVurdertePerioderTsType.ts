@@ -26,8 +26,6 @@ export type VilkarsVurdertPeriode = {
   feilutbetalingBelop?: number;
 };
 
-type VilkarsVurdertePerioderWrapper = {
+export type VilkarsVurdertePerioderWrapper = {
   vilkarsVurdertePerioder: VilkarsVurdertPeriode[];
 };
-
-export default VilkarsVurdertePerioderWrapper;

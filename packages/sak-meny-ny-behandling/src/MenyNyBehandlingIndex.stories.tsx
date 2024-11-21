@@ -1,17 +1,10 @@
-import React from 'react';
-import { StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import { FagsakYtelseType, BehandlingType, BehandlingArsakType } from '@navikt/fp-kodeverk';
-import { KodeverkMedNavn } from '@navikt/fp-types';
-import MenyNyBehandlingIndex from './MenyNyBehandlingIndex';
+import { MenyNyBehandlingIndex } from './MenyNyBehandlingIndex';
 
-export default {
-  title: 'sak/sak-meny-ny-behandling',
-  component: MenyNyBehandlingIndex,
-};
-
-const behandlingstyper = [
+const BEHANDLINGSTYPER = [
   {
     kode: BehandlingType.FORSTEGANGSSOKNAD,
     kodeverk: 'BEHANDLING_TYPE',
@@ -44,7 +37,7 @@ const behandlingstyper = [
   },
 ];
 
-const behandlingOppretting = [
+const BEHANDLING_OPPRETTING = [
   {
     behandlingType: BehandlingType.FORSTEGANGSSOKNAD,
     kanOppretteBehandling: true,
@@ -59,70 +52,65 @@ const behandlingOppretting = [
   },
 ];
 
-const Template: StoryFn<{
-  tilbakekrevingRevurderingArsaker: KodeverkMedNavn[];
-  kanTilbakekrevingOpprettes: {
-    kanBehandlingOpprettes: boolean;
-    kanRevurderingOpprettes: boolean;
-  };
-  lagNyBehandling: () => void;
-  lukkModal: () => void;
-}> = ({ tilbakekrevingRevurderingArsaker, kanTilbakekrevingOpprettes, lagNyBehandling, lukkModal }) => (
-  <MenyNyBehandlingIndex
-    ytelseType={FagsakYtelseType.FORELDREPENGER}
-    saksnummer="123"
-    behandlingUuid="1"
-    behandlingVersjon={2}
-    lagNyBehandling={lagNyBehandling}
-    behandlingstyper={behandlingstyper}
-    tilbakekrevingRevurderingArsaker={tilbakekrevingRevurderingArsaker}
-    revurderingArsaker={[
-      {
-        kode: BehandlingArsakType.KLAGE_U_INNTK,
-        kodeverk: 'BEHANDLING_ARSAK_TYPE',
-        navn: 'Klage uten inntekt',
-      },
-      {
-        kode: BehandlingArsakType.FØDSEL,
-        kodeverk: 'BEHANDLING_ARSAK_TYPE',
-        navn: 'Fødsel',
-      },
-    ]}
-    behandlingOppretting={behandlingOppretting}
-    kanTilbakekrevingOpprettes={kanTilbakekrevingOpprettes}
-    lukkModal={lukkModal}
-  />
-);
+const REVURDERINGARSAKER = [
+  {
+    kode: BehandlingArsakType.KLAGE_U_INNTK,
+    kodeverk: 'BEHANDLING_ARSAK_TYPE',
+    navn: 'Klage uten inntekt',
+  },
+  {
+    kode: BehandlingArsakType.FØDSEL,
+    kodeverk: 'BEHANDLING_ARSAK_TYPE',
+    navn: 'Fødsel',
+  },
+];
 
-export const Default = Template.bind({});
-Default.args = {
-  lagNyBehandling: action('button-click'),
-  lukkModal: action('button-click'),
-  tilbakekrevingRevurderingArsaker: [],
-  kanTilbakekrevingOpprettes: {
-    kanBehandlingOpprettes: false,
-    kanRevurderingOpprettes: false,
+const meta = {
+  title: 'sak/sak-meny-ny-behandling',
+  component: MenyNyBehandlingIndex,
+  args: {
+    lagNyBehandling: action('button-click'),
+    lukkModal: action('button-click'),
+    ytelseType: FagsakYtelseType.FORELDREPENGER,
+    saksnummer: '123',
+    behandlingUuid: '1',
+    behandlingVersjon: 2,
+    behandlingstyper: BEHANDLINGSTYPER,
+    behandlingOppretting: BEHANDLING_OPPRETTING,
+    revurderingArsaker: REVURDERINGARSAKER,
+  },
+} satisfies Meta<typeof MenyNyBehandlingIndex>;
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: {
+    tilbakekrevingRevurderingArsaker: [],
+    kanTilbakekrevingOpprettes: {
+      kanBehandlingOpprettes: false,
+      kanRevurderingOpprettes: false,
+    },
   },
 };
 
-export const ForTilbakekreving = Template.bind({});
-ForTilbakekreving.args = {
-  lagNyBehandling: action('button-click'),
-  lukkModal: action('button-click'),
-  tilbakekrevingRevurderingArsaker: [
-    {
-      kode: BehandlingArsakType.RE_KLAGE_KA,
-      kodeverk: 'BEHANDLING_ARSAK_TYPE',
-      navn: 'Klage KA',
+export const ForTilbakekreving: Story = {
+  args: {
+    tilbakekrevingRevurderingArsaker: [
+      {
+        kode: BehandlingArsakType.RE_KLAGE_KA,
+        kodeverk: 'BEHANDLING_ARSAK_TYPE',
+        navn: 'Klage KA',
+      },
+      {
+        kode: BehandlingArsakType.RE_KLAGE_NFP,
+        kodeverk: 'BEHANDLING_ARSAK_TYPE',
+        navn: 'Klage NFP',
+      },
+    ],
+    kanTilbakekrevingOpprettes: {
+      kanBehandlingOpprettes: true,
+      kanRevurderingOpprettes: true,
     },
-    {
-      kode: BehandlingArsakType.RE_KLAGE_NFP,
-      kodeverk: 'BEHANDLING_ARSAK_TYPE',
-      navn: 'Klage NFP',
-    },
-  ],
-  kanTilbakekrevingOpprettes: {
-    kanBehandlingOpprettes: true,
-    kanRevurderingOpprettes: true,
   },
 };

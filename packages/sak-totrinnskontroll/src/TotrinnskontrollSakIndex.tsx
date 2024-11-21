@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback, useMemo } from 'react';
+import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 import { Location } from 'history';
 import { createIntl } from '@navikt/ft-utils';
@@ -17,7 +17,7 @@ import { skjermlenkeCodesFpTilbake as skjermlenkeCodes } from '@navikt/fp-konsta
 import { BehandlingAppKontekst, AlleKodeverk, AlleKodeverkTilbakekreving, KodeverkMedNavn } from '@navikt/fp-types';
 import { FatterVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import TotrinnskontrollBeslutterForm, { FormValues } from './components/TotrinnskontrollBeslutterForm';
+import { TotrinnskontrollBeslutterForm, FormValues } from './components/TotrinnskontrollBeslutterForm';
 import { AksjonspunktGodkjenningData } from './components/AksjonspunktGodkjenningFieldArray';
 import { TotrinnskontrollSaksbehandlerPanel } from './components/TotrinnskontrollSaksbehandlerPanel';
 import messages from '../i18n/nb_NO.json';
@@ -56,25 +56,27 @@ const finnFaktaOmBeregningTilfeller = (alleKodeverk: AlleKodeverk | AlleKodeverk
     ? (alleKodeverk as AlleKodeverk)[KodeverkType.FAKTA_OM_BEREGNING_TILFELLE]
     : TOMT_KODEVERK;
 
-interface OwnProps {
+export type ApData = {
+  fatterVedtakAksjonspunktDto: {
+    '@type': AksjonspunktKode.FATTER_VEDTAK | AksjonspunktKodeTilbakekreving.FATTER_VEDTAK;
+  } & FatterVedtakAp;
+  erAlleAksjonspunktGodkjent: boolean;
+};
+
+interface Props {
   behandling: BehandlingAppKontekst;
   location: Location;
   fagsakYtelseType: string;
   alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving;
   readOnly: boolean;
-  onSubmit: (data: {
-    fatterVedtakAksjonspunktDto: {
-      '@type': AksjonspunktKode.FATTER_VEDTAK | AksjonspunktKodeTilbakekreving.FATTER_VEDTAK;
-    } & FatterVedtakAp;
-    erAlleAksjonspunktGodkjent: boolean;
-  }) => Promise<void>;
+  onSubmit: (data: ApData) => Promise<void>;
   forhandsvisVedtaksbrev: () => void;
   createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location | undefined;
   beslutterFormData?: any;
   setBeslutterFormData: (data?: any) => void;
 }
 
-const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
+export const TotrinnskontrollSakIndex = ({
   behandling,
   location,
   fagsakYtelseType,
@@ -85,65 +87,52 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
   createLocationForSkjermlenke,
   beslutterFormData,
   setBeslutterFormData,
-}) => {
+}: Props) => {
   const erTilbakekreving =
     BehandlingType.TILBAKEKREVING === behandling.type || BehandlingType.TILBAKEKREVING_REVURDERING === behandling.type;
 
-  const submitHandler = useCallback(
-    (values: FormValues) => {
-      const aksjonspunktGodkjenningDtos = values.aksjonspunktGodkjenning.map(apData => ({
-        aksjonspunktKode: apData.aksjonspunktKode,
-        godkjent: apData.totrinnskontrollGodkjent,
-        begrunnelse: apData.besluttersBegrunnelse,
-        arsaker: getArsaker(apData),
-      }));
+  const submitHandler = (values: FormValues) => {
+    const aksjonspunktGodkjenningDtos = values.aksjonspunktGodkjenning.map(apData => ({
+      aksjonspunktKode: apData.aksjonspunktKode,
+      godkjent: apData.totrinnskontrollGodkjent,
+      begrunnelse: apData.besluttersBegrunnelse,
+      arsaker: getArsaker(apData),
+    }));
 
-      const kode = erTilbakekreving ? AksjonspunktKodeTilbakekreving.FATTER_VEDTAK : AksjonspunktKode.FATTER_VEDTAK;
-      const fatterVedtakAksjonspunktDto = {
-        '@type': kode,
-        begrunnelse: null,
-        aksjonspunktGodkjenningDtos,
-      };
+    const kode = erTilbakekreving ? AksjonspunktKodeTilbakekreving.FATTER_VEDTAK : AksjonspunktKode.FATTER_VEDTAK;
+    const fatterVedtakAksjonspunktDto = {
+      '@type': kode,
+      begrunnelse: null,
+      aksjonspunktGodkjenningDtos,
+    };
 
-      return onSubmit({
-        // @ts-ignore Fiks denne!
-        fatterVedtakAksjonspunktDto,
-        erAlleAksjonspunktGodkjent: values.aksjonspunktGodkjenning.every(ap => ap.totrinnskontrollGodkjent),
-      });
-    },
-    [erTilbakekreving],
-  );
+    return onSubmit({
+      // @ts-ignore Fiks denne!
+      fatterVedtakAksjonspunktDto,
+      erAlleAksjonspunktGodkjent: values.aksjonspunktGodkjenning.every(ap => ap.totrinnskontrollGodkjent),
+    });
+  };
 
-  const erBehandlingEtterKlage = useMemo(
-    () =>
-      behandling
-        ? behandling.behandlingÅrsaker
-            .map(({ behandlingArsakType }) => behandlingArsakType)
-            .some(
-              bt =>
-                bt === BehandlingArsakType.ETTER_KLAGE ||
-                bt === BehandlingArsakType.KLAGE_U_INNTK ||
-                bt === BehandlingArsakType.KLAGE_M_INNTK,
-            )
-        : false,
-    [behandling],
-  );
+  const erBehandlingEtterKlage = behandling
+    ? behandling.behandlingÅrsaker
+        .map(({ behandlingArsakType }) => behandlingArsakType)
+        .some(
+          bt =>
+            bt === BehandlingArsakType.ETTER_KLAGE ||
+            bt === BehandlingArsakType.KLAGE_U_INNTK ||
+            bt === BehandlingArsakType.KLAGE_M_INNTK,
+        )
+    : false;
 
-  const sorterteTotrinnskontrollSkjermlenkeContext = useMemo(
-    () =>
-      erTilbakekreving
-        ? sorterteSkjermlenkeCodesForTilbakekreving.flatMap(s => {
-            const context = behandling.totrinnskontrollÅrsaker.find(el => el.skjermlenkeType === s.kode);
-            return context ? [context] : [];
-          })
-        : behandling.totrinnskontrollÅrsaker,
-    [erTilbakekreving, behandling.totrinnskontrollÅrsaker],
-  );
+  const sorterteTotrinnskontrollSkjermlenkeContext = erTilbakekreving
+    ? sorterteSkjermlenkeCodesForTilbakekreving.flatMap(s => {
+        const context = behandling.totrinnskontrollÅrsaker.find(el => el.skjermlenkeType === s.kode);
+        return context ? [context] : [];
+      })
+    : behandling.totrinnskontrollÅrsaker;
 
-  const lagLenke = useCallback(
-    (skjermlenkeCode: string): Location | undefined => createLocationForSkjermlenke(location, skjermlenkeCode),
-    [location],
-  );
+  const lagLenke = (skjermlenkeCode: string): Location | undefined =>
+    createLocationForSkjermlenke(location, skjermlenkeCode);
 
   const erStatusFatterVedtak = behandling.status === BehandlingStatus.FATTER_VEDTAK;
   const skjemalenkeTyper = alleKodeverk[KodeverkType.SKJERMLENKE_TYPE];
@@ -184,5 +173,3 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
     </RawIntlProvider>
   );
 };
-
-export default TotrinnskontrollSakIndex;

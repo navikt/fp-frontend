@@ -1,16 +1,16 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Tabs } from '@navikt/ds-react';
 import { Vedtak } from '@navikt/fp-types';
 
-import ArbeidsforholdPanel from './ArbeidsforholdPanel';
-import UtbetalingerPanel from './UtbetalingerPanel';
+import { ArbeidsforholdPanel } from './ArbeidsforholdPanel';
+import { UtbetalingerPanel } from './UtbetalingerPanel';
 
-interface OwnProps {
+interface Props {
   vedtak: Vedtak;
 }
 
-const VedtakDetaljerPanel: FunctionComponent<OwnProps> = ({ vedtak }) => (
+export const VedtakDetaljerPanel = ({ vedtak }: Props) => (
   <Tabs defaultValue="utbetalinger">
     <Tabs.List>
       <Tabs.Tab value="arbeidshforhold" label={<FormattedMessage id="VedtakDetaljerPanel.Arbeidsforhold" />} />
@@ -24,5 +24,3 @@ const VedtakDetaljerPanel: FunctionComponent<OwnProps> = ({ vedtak }) => (
     </Tabs.Panel>
   </Tabs>
 );
-
-export default VedtakDetaljerPanel;

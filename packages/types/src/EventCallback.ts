@@ -1,3 +1,1 @@
-type EventCallback = (event: Event) => void;
-
-export default EventCallback;
+export type EventCallback = (event: Event) => void;

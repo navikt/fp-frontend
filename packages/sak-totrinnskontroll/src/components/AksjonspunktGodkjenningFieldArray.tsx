@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Location } from 'history';
 import { BodyShort } from '@navikt/ds-react';
@@ -7,8 +7,8 @@ import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { KodeverkMedNavn, TotrinnskontrollSkjermlenkeContext, BehandlingAppKontekst } from '@navikt/fp-types';
 
 import { useFieldArray, useFormContext } from 'react-hook-form';
-import getAksjonspunkttekst from './aksjonspunktTekster/aksjonspunktTekstUtleder';
-import GodkjenningPanel from './GodkjenningPanel';
+import { getAksjonspunkttekst } from './aksjonspunktTekster/aksjonspunktTekstUtleder';
+import { GodkjenningPanel } from './GodkjenningPanel';
 
 import styles from './aksjonspunktGodkjenningFieldArray.module.css';
 
@@ -25,7 +25,7 @@ export type AksjonspunktGodkjenningData = {
   annet?: boolean;
 };
 
-type OwnProps = {
+type Props = {
   behandling: BehandlingAppKontekst;
   totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[];
   readOnly: boolean;
@@ -36,7 +36,7 @@ type OwnProps = {
   lagLenke: (skjermlenkeCode: string) => Location | undefined;
 };
 
-const AksjonspunktGodkjenningFieldArray: FunctionComponent<OwnProps> = ({
+export const AksjonspunktGodkjenningFieldArray = ({
   behandling,
   totrinnskontrollSkjermlenkeContext,
   readOnly,
@@ -45,7 +45,7 @@ const AksjonspunktGodkjenningFieldArray: FunctionComponent<OwnProps> = ({
   skjemalenkeTyper,
   faktaOmBeregningTilfeller,
   lagLenke,
-}) => {
+}: Props) => {
   const { control, watch } = useFormContext();
   const { fields } = useFieldArray({
     control,
@@ -108,5 +108,3 @@ const AksjonspunktGodkjenningFieldArray: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-
-export default AksjonspunktGodkjenningFieldArray;

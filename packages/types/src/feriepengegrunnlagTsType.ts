@@ -7,8 +7,6 @@ export type FeriepengegrunnlagAndel = Readonly<{
   arbeidsforholdId?: string;
 }>;
 
-type Feriepengegrunnlag = Readonly<{
+export type Feriepengegrunnlag = Readonly<{
   andeler: FeriepengegrunnlagAndel[];
 }>;
-
-export default Feriepengegrunnlag;

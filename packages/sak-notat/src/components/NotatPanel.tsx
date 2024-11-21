@@ -1,10 +1,10 @@
-import React, { FunctionComponent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import dayjs from 'dayjs';
-import { Alert, BodyShort, Button, Chat } from '@navikt/ds-react';
+import { Alert, BodyShort, Button, Chat, HStack } from '@navikt/ds-react';
 
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Form, TextAreaField } from '@navikt/ft-form-hooks';
 import { Saksnotat } from '@navikt/fp-types';
 import { maxLength, required, hasValidText } from '@navikt/ft-form-validators';
@@ -23,21 +23,15 @@ type FormValues = {
   beskrivelse: string;
 };
 
-interface OwnProps {
+interface Props {
   saksnummer: string;
   notater: Saksnotat[];
-  lagreNotat: (params: { saksnummer: string; notat: string }) => Promise<any>;
+  lagreNotat: (params: { saksnummer: string; notat: string }) => Promise<void | undefined>;
   saksbehandlerNavn: string;
   kanSaksbehandle: boolean;
 }
 
-const NotatPanel: FunctionComponent<OwnProps> = ({
-  saksnummer,
-  notater,
-  lagreNotat,
-  saksbehandlerNavn,
-  kanSaksbehandle,
-}) => {
+export const NotatPanel = ({ saksnummer, notater, lagreNotat, saksbehandlerNavn, kanSaksbehandle }: Props) => {
   const intl = useIntl();
   const formMethods = useForm<FormValues>();
 
@@ -141,16 +135,14 @@ const NotatPanel: FunctionComponent<OwnProps> = ({
               validate={[required, maxLength1000, hasValidText]}
             />
             <VerticalSpacer sixteenPx />
-            <FlexContainer>
-              <FlexRow spaceBetween>
-                <FlexColumn>{intl.formatMessage({ id: 'NotatPanel.KunForSaksbehandler' })}</FlexColumn>
-                <FlexColumn>
-                  <Button size="small">
-                    <FormattedMessage id="NotatPanel.Send" />
-                  </Button>
-                </FlexColumn>
-              </FlexRow>
-            </FlexContainer>
+            <HStack justify="space-between">
+              <BodyShort>
+                <FormattedMessage id="NotatPanel.KunForSaksbehandler" />
+              </BodyShort>
+              <Button size="small">
+                <FormattedMessage id="NotatPanel.Send" />
+              </Button>
+            </HStack>
           </Form>
           <VerticalSpacer thirtyTwoPx />
         </div>
@@ -165,5 +157,3 @@ const NotatPanel: FunctionComponent<OwnProps> = ({
     </div>
   );
 };
-
-export default NotatPanel;

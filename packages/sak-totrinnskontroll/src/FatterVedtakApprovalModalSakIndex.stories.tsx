@@ -1,77 +1,70 @@
-import React from 'react';
-import { StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import { BehandlingType, BehandlingStatus, BehandlingResultatType } from '@navikt/fp-kodeverk';
 import { BehandlingAppKontekst } from '@navikt/fp-types';
-import FatterVedtakTotrinnskontrollModalSakIndex from './FatterVedtakTotrinnskontrollModalSakIndex';
+import { FatterVedtakTotrinnskontrollModalSakIndex } from './FatterVedtakTotrinnskontrollModalSakIndex';
 
-export default {
+const meta = {
   title: 'sak/sak-totrinnskontroll-fatter-vedtak-modal',
   component: FatterVedtakTotrinnskontrollModalSakIndex,
+  args: {
+    closeEvent: action('button-click'),
+  },
+} satisfies Meta<typeof FatterVedtakTotrinnskontrollModalSakIndex>;
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const EtterFatterVedtakOgGodkjent: Story = {
+  args: {
+    behandling: {
+      uuid: '1',
+      status: BehandlingStatus.FATTER_VEDTAK,
+      type: BehandlingType.FORSTEGANGSSOKNAD,
+    } as BehandlingAppKontekst,
+    allAksjonspunktApproved: true,
+  },
 };
 
-const Template: StoryFn<{
-  closeEvent: () => void;
-  behandling: BehandlingAppKontekst;
-  allAksjonspunktApproved: boolean;
-}> = ({ closeEvent, behandling, allAksjonspunktApproved }) => (
-  <FatterVedtakTotrinnskontrollModalSakIndex
-    behandling={behandling}
-    closeEvent={closeEvent}
-    allAksjonspunktApproved={allAksjonspunktApproved}
-  />
-);
-
-export const EtterFatterVedtakOgGodkjent = Template.bind({});
-EtterFatterVedtakOgGodkjent.args = {
-  closeEvent: action('button-click'),
-  behandling: {
-    uuid: '1',
-    status: BehandlingStatus.FATTER_VEDTAK,
-    type: BehandlingType.FORSTEGANGSSOKNAD,
-  } as BehandlingAppKontekst,
-  allAksjonspunktApproved: true,
+export const EtterGodkjenning: Story = {
+  args: {
+    behandling: {
+      uuid: '1',
+      status: BehandlingStatus.FATTER_VEDTAK,
+      type: BehandlingType.FORSTEGANGSSOKNAD,
+      behandlingsresultat: {
+        type: BehandlingResultatType.OPPHOR,
+      },
+    } as BehandlingAppKontekst,
+    allAksjonspunktApproved: true,
+  },
 };
 
-export const EtterGodkjenning = Template.bind({});
-EtterGodkjenning.args = {
-  closeEvent: action('button-click'),
-  behandling: {
-    uuid: '1',
-    status: BehandlingStatus.FATTER_VEDTAK,
-    type: BehandlingType.FORSTEGANGSSOKNAD,
-    behandlingsresultat: {
-      type: BehandlingResultatType.OPPHOR,
-    },
-  } as BehandlingAppKontekst,
-  allAksjonspunktApproved: true,
+export const EtterGodkjenningAvKlage: Story = {
+  args: {
+    behandling: {
+      uuid: '1',
+      status: BehandlingStatus.FATTER_VEDTAK,
+      type: BehandlingType.KLAGE,
+      behandlingsresultat: {
+        type: BehandlingResultatType.OPPHOR,
+      },
+    } as BehandlingAppKontekst,
+    allAksjonspunktApproved: true,
+  },
 };
 
-export const EtterGodkjenningAvKlage = Template.bind({});
-EtterGodkjenningAvKlage.args = {
-  closeEvent: action('button-click'),
-  behandling: {
-    uuid: '1',
-    status: BehandlingStatus.FATTER_VEDTAK,
-    type: BehandlingType.KLAGE,
-    behandlingsresultat: {
-      type: BehandlingResultatType.OPPHOR,
-    },
-  } as BehandlingAppKontekst,
-  allAksjonspunktApproved: true,
-};
-
-export const EtterTilbakesendingTilSaksbehandler = Template.bind({});
-EtterTilbakesendingTilSaksbehandler.args = {
-  closeEvent: action('button-click'),
-  behandling: {
-    uuid: '1',
-    status: BehandlingStatus.FATTER_VEDTAK,
-    type: BehandlingType.FORSTEGANGSSOKNAD,
-    behandlingsresultat: {
-      type: BehandlingResultatType.OPPHOR,
-    },
-  } as BehandlingAppKontekst,
-  allAksjonspunktApproved: false,
+export const EtterTilbakesendingTilSaksbehandler: Story = {
+  args: {
+    behandling: {
+      uuid: '1',
+      status: BehandlingStatus.FATTER_VEDTAK,
+      type: BehandlingType.FORSTEGANGSSOKNAD,
+      behandlingsresultat: {
+        type: BehandlingResultatType.OPPHOR,
+      },
+    } as BehandlingAppKontekst,
+    allAksjonspunktApproved: false,
+  },
 };

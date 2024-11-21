@@ -8,10 +8,8 @@ export type RelatertTilgrensedYtelse = Readonly<{
   }[];
 }>;
 
-type InntektArbeidYtelse = Readonly<{
+export type InntektArbeidYtelse = Readonly<{
   relatertTilgrensendeYtelserForSoker: RelatertTilgrensedYtelse[];
   relatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYtelse[];
   innvilgetRelatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYtelse[];
 }>;
-
-export default InntektArbeidYtelse;

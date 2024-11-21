@@ -8,7 +8,7 @@ export type KlageVurderingResultat = Readonly<{
   begrunnelse?: string;
 }>;
 
-type KlageVurdering = Readonly<{
+export type KlageVurdering = Readonly<{
   klageVurderingResultatNK?: KlageVurderingResultat;
   klageVurderingResultatNFP?: KlageVurderingResultat;
   klageFormkravResultatKA?: {
@@ -35,5 +35,3 @@ type KlageVurdering = Readonly<{
   underBehandlingKabal?: boolean;
   behandletAvKabal?: boolean;
 }>;
-
-export default KlageVurdering;
