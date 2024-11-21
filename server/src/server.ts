@@ -11,9 +11,11 @@ import logger from "./logger.js";
 import { getUserGroups, getUserInfoFromGraphApi } from "./msgraph.js";
 import { setupProxies } from "./reverse-proxy.js";
 import { verifyToken } from "./tokenValidation.js";
+import path from 'node:path';
 
 const server = express();
 const { port } = config.server;
+const spaFilePath = path.resolve("./public", "index.html");
 
 function startApp() {
   server.use(timeout("10m"));
@@ -110,9 +112,10 @@ function startApp() {
   serveViteMode(server, { port: "9010" });
 
   // serve static files
-  server.use(express.static("./"));
+  server.use(express.static("./public"));
   server.use("*", (request, response) => {
-    response.sendFile("index.html");
+    // Siden dette er et internt system med begrenset antall brukere anser vi å sette en rate-limiter som en unødvendig fallgruve. Ignorer dermed denne sonarklagen.
+    response.sendFile(spaFilePath); // NOSONAR: "Missing rate limiting".
   });
 
   server.listen(port, () => logger.info(`Listening on port ${port}`));
