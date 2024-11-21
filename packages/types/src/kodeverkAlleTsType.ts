@@ -1,6 +1,6 @@
 import { VilkarType, KodeverkType } from '@navikt/fp-kodeverk';
 
-import KodeverkMedNavn from './kodeverkMedNavnTsType';
+import { KodeverkMedNavn } from './kodeverkMedNavnTsType';
 
 type Avslagsårsak = Record<VilkarType, KodeverkMedNavn[]>;
 type AlleKodeverkMedSammeVerditype = Record<KodeverkType, KodeverkMedNavn[]>;
