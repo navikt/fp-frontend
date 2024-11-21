@@ -29,7 +29,7 @@ const meta = {
     getKodeverkMedNavn,
   },
   render: storyArgs => {
-    const [args, setArgs] = useState(storyArgs); //NOSONAR
+    const [args, setArgs] = useState(storyArgs);
 
     const toggleVisAlleBehandlinger = () => {
       args.toggleVisAlleBehandlinger?.();

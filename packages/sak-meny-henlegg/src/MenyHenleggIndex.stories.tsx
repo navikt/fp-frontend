@@ -56,7 +56,10 @@ const meta = {
     behandlingResultatTyper: BEHANDLINGRESULTAT_TYPER,
     ytelseType: FagsakYtelseType.FORELDREPENGER,
     gaaTilSokeside: action('button-click'),
-    henleggBehandling: action('button-click') as (params: HenleggParams) => Promise<any>,
+    henleggBehandling: () => {
+      action('button-click') as (params: HenleggParams) => Promise<any>;
+      return Promise.resolve();
+    },
     lukkModal: action('button-click'),
     forhandsvisHenleggBehandling: action('button-click'),
   },

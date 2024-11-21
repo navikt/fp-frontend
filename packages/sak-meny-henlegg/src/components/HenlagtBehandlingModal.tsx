@@ -1,8 +1,7 @@
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { BodyShort, Modal, Button, Label } from '@navikt/ds-react';
+import { BodyShort, Modal, Button, Label, HStack, VStack } from '@navikt/ds-react';
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import styles from './henlagtBehandlingModal.module.css';
 
@@ -28,29 +27,25 @@ export const HenlagtBehandlingModal = ({ showModal, closeEvent }: Props) => {
       onClose={closeEvent}
     >
       <Modal.Body>
-        <FlexContainer>
-          <FlexRow>
-            <FlexColumn>
-              <CheckmarkCircleFillIcon
-                className={styles.image}
-                title={intl.formatMessage({ id: 'HenlagtBehandlingModal.Henlagt' })}
-              />
-            </FlexColumn>
-            <FlexColumn>
+        <HStack justify="space-between">
+          <HStack gap="3">
+            <CheckmarkCircleFillIcon
+              className={styles.image}
+              title={intl.formatMessage({ id: 'HenlagtBehandlingModal.Henlagt' })}
+            />
+            <VStack gap="1">
               <Label size="small">
                 <FormattedMessage id="HenlagtBehandlingModal.BehandlingenErHenlagt" />
               </Label>
               <BodyShort size="small">
                 <FormattedMessage id="HenlagtBehandlingModal.RutetTilForsiden" />
               </BodyShort>
-            </FlexColumn>
-            <FlexColumn className={styles.button}>
-              <Button variant="primary" size="small" onClick={closeEvent} autoFocus type="button">
-                {intl.formatMessage({ id: 'HenlagtBehandlingModal.Ok' })}
-              </Button>
-            </FlexColumn>
-          </FlexRow>
-        </FlexContainer>
+            </VStack>
+          </HStack>
+          <Button variant="primary" size="small" onClick={closeEvent} autoFocus type="button">
+            <FormattedMessage id="HenlagtBehandlingModal.Ok" />
+          </Button>
+        </HStack>
       </Modal.Body>
     </Modal>
   );

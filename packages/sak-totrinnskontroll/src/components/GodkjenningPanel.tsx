@@ -1,14 +1,12 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { UseFormGetValues, useFormContext } from 'react-hook-form';
-import { ErrorMessage, Label, BodyShort } from '@navikt/ds-react';
-import { ArrowBox, FlexColumn, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { ErrorMessage, Label, BodyShort, HStack, VStack } from '@navikt/ds-react';
+import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { CheckboxField, TextAreaField, RadioGroupPanel, useCustomValidation } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required, isRequiredMessage } from '@navikt/ft-form-validators';
 
 import { TotrinnskontrollSkjermlenkeContext } from '@navikt/fp-types';
-
-import styles from './godkjenningPanel.module.css';
 
 const minLength3 = minLength(3);
 const maxLength2000 = maxLength(2000);
@@ -74,51 +72,55 @@ export const GodkjenningPanel = ({ index, totrinnskontrollSkjermlenkeContext, re
         <>
           <VerticalSpacer sixteenPx />
           <ArrowBox alignOffset={totrinnskontrollGodkjent ? 1 : 110}>
-            <Label size="small">
-              <FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Arsak" />
-            </Label>
-            <BodyShort size="small">
-              <FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Forklaring" />
-            </BodyShort>
-            <FlexRow>
-              <FlexColumn className={styles.halfColumn}>
-                <CheckboxField
-                  name={`${fieldIndex}.feilFakta`}
-                  label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Fakta" />}
-                  readOnly={readOnly}
-                />
-                <CheckboxField
-                  name={`${fieldIndex}.feilSkjønn`}
-                  label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Skjønn" />}
-                  readOnly={readOnly}
-                />
-                <CheckboxField
-                  name={`${fieldIndex}.feilLov`}
-                  label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Lovanvendelse" />}
-                  readOnly={readOnly}
-                />
-              </FlexColumn>
-              <FlexColumn className={styles.halfColumn}>
-                <CheckboxField
-                  name={`${fieldIndex}.feilUtredning`}
-                  label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Utredning" />}
-                  readOnly={readOnly}
-                />
-                <CheckboxField
-                  name={`${fieldIndex}.annet`}
-                  label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Annet" />}
-                  readOnly={readOnly}
-                />
-              </FlexColumn>
-            </FlexRow>
-            {errorMessage && <ErrorMessage size="small">{errorMessage}</ErrorMessage>}
-            <VerticalSpacer sixteenPx />
-            <TextAreaField
-              name={`${fieldIndex}.besluttersBegrunnelse`}
-              label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Begrunnelse" />}
-              validate={[required, minLength3, maxLength2000, hasValidText]}
-              readOnly={readOnly}
-            />
+            <VStack gap="2">
+              <Label size="small">
+                <FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Arsak" />
+              </Label>
+              <BodyShort size="small">
+                <FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Forklaring" />
+              </BodyShort>
+              <VStack gap="1">
+                <HStack gap="14">
+                  <CheckboxField
+                    name={`${fieldIndex}.feilFakta`}
+                    label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Fakta" />}
+                    readOnly={readOnly}
+                  />
+                  <CheckboxField
+                    name={`${fieldIndex}.feilUtredning`}
+                    label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Utredning" />}
+                    readOnly={readOnly}
+                  />
+                </HStack>
+                <HStack gap="10">
+                  <CheckboxField
+                    name={`${fieldIndex}.feilSkjønn`}
+                    label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Skjønn" />}
+                    readOnly={readOnly}
+                  />
+                  <CheckboxField
+                    name={`${fieldIndex}.annet`}
+                    label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Annet" />}
+                    readOnly={readOnly}
+                  />
+                </HStack>
+                <HStack gap="10">
+                  <CheckboxField
+                    name={`${fieldIndex}.feilLov`}
+                    label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Lovanvendelse" />}
+                    readOnly={readOnly}
+                  />
+                </HStack>
+              </VStack>
+              {errorMessage && <ErrorMessage size="small">{errorMessage}</ErrorMessage>}
+              <VerticalSpacer sixteenPx />
+              <TextAreaField
+                name={`${fieldIndex}.besluttersBegrunnelse`}
+                label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Begrunnelse" />}
+                validate={[required, minLength3, maxLength2000, hasValidText]}
+                readOnly={readOnly}
+              />
+            </VStack>
           </ArrowBox>
         </>
       )}

@@ -1,8 +1,7 @@
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Button, Modal, Label } from '@navikt/ds-react';
+import { Button, Modal, Label, HStack } from '@navikt/ds-react';
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import styles from './MessagesModal.module.css';
 
@@ -27,26 +26,20 @@ export const MessagesModal = ({ showModal, closeEvent }: Props) => {
       onClose={closeEvent}
     >
       <Modal.Body>
-        <FlexContainer>
-          <FlexRow>
-            <FlexColumn>
-              <CheckmarkCircleFillIcon
-                className={styles.image}
-                title={intl.formatMessage({ id: 'MessagesModal.description' })}
-              />
-            </FlexColumn>
-            <FlexColumn className={styles.text}>
-              <Label size="small">
-                <FormattedMessage id="MessagesModal.text" />
-              </Label>
-            </FlexColumn>
-            <FlexColumn className={styles.button}>
-              <Button size="small" variant="primary" onClick={closeEvent} autoFocus type="button">
-                <FormattedMessage id="MessagesModal.OK" />
-              </Button>
-            </FlexColumn>
-          </FlexRow>
-        </FlexContainer>
+        <HStack justify="space-between" align="center">
+          <HStack gap="2" align="center">
+            <CheckmarkCircleFillIcon
+              className={styles.image}
+              title={intl.formatMessage({ id: 'MessagesModal.description' })}
+            />
+            <Label size="small">
+              <FormattedMessage id="MessagesModal.text" />
+            </Label>
+          </HStack>
+          <Button size="small" variant="primary" onClick={closeEvent} autoFocus type="button">
+            <FormattedMessage id="MessagesModal.OK" />
+          </Button>
+        </HStack>
       </Modal.Body>
     </Modal>
   );

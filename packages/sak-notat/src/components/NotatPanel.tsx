@@ -2,9 +2,9 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import dayjs from 'dayjs';
-import { Alert, BodyShort, Button, Chat } from '@navikt/ds-react';
+import { Alert, BodyShort, Button, Chat, HStack } from '@navikt/ds-react';
 
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Form, TextAreaField } from '@navikt/ft-form-hooks';
 import { Saksnotat } from '@navikt/fp-types';
 import { maxLength, required, hasValidText } from '@navikt/ft-form-validators';
@@ -135,16 +135,14 @@ export const NotatPanel = ({ saksnummer, notater, lagreNotat, saksbehandlerNavn,
               validate={[required, maxLength1000, hasValidText]}
             />
             <VerticalSpacer sixteenPx />
-            <FlexContainer>
-              <FlexRow spaceBetween>
-                <FlexColumn>{intl.formatMessage({ id: 'NotatPanel.KunForSaksbehandler' })}</FlexColumn>
-                <FlexColumn>
-                  <Button size="small">
-                    <FormattedMessage id="NotatPanel.Send" />
-                  </Button>
-                </FlexColumn>
-              </FlexRow>
-            </FlexContainer>
+            <HStack justify="space-between">
+              <BodyShort>
+                <FormattedMessage id="NotatPanel.KunForSaksbehandler" />
+              </BodyShort>
+              <Button size="small">
+                <FormattedMessage id="NotatPanel.Send" />
+              </Button>
+            </HStack>
           </Form>
           <VerticalSpacer thirtyTwoPx />
         </div>

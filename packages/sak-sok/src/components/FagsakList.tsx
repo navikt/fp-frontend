@@ -1,12 +1,10 @@
 import React from 'react';
 
-import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 import { FagsakEnkel, AlleKodeverk } from '@navikt/fp-types';
 import { getKodeverknavnFn, KodeverkType } from '@navikt/fp-kodeverk';
 
-import styles from './fagsakList.module.css';
-
-const headerTextCodes = ['FagsakList.Saksnummer', 'FagsakList.Sakstype', 'FagsakList.Status'];
+import { Table } from '@navikt/ds-react';
+import { FormattedMessage } from 'react-intl';
 
 interface Props {
   fagsaker: FagsakEnkel[];
@@ -23,19 +21,29 @@ export const FagsakList = ({ fagsaker, selectFagsakCallback, alleKodeverk }: Pro
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
 
   return (
-    <Table headerTextCodes={headerTextCodes} classNameTable={styles.table}>
-      {fagsaker.map(fagsak => (
-        <TableRow<string>
-          key={fagsak.saksnummer}
-          id={fagsak.saksnummer}
-          onMouseDown={selectFagsakCallback}
-          onKeyDown={selectFagsakCallback}
-        >
-          <TableColumn>{fagsak.saksnummer}</TableColumn>
-          <TableColumn>{getKodeverknavn(fagsak.fagsakYtelseType, KodeverkType.FAGSAK_YTELSE)}</TableColumn>
-          <TableColumn>{getKodeverknavn(fagsak.status, KodeverkType.FAGSAK_STATUS)}</TableColumn>
-        </TableRow>
-      ))}
+    <Table>
+      <Table.Header>
+        <Table.Row>
+          <Table.HeaderCell scope="col">
+            <FormattedMessage id="FagsakList.Saksnummer" />
+          </Table.HeaderCell>
+          <Table.HeaderCell scope="col">
+            <FormattedMessage id="FagsakList.Sakstype" />
+          </Table.HeaderCell>
+          <Table.HeaderCell scope="col">
+            <FormattedMessage id="FagsakList.Status" />
+          </Table.HeaderCell>
+        </Table.Row>
+      </Table.Header>
+      <Table.Body>
+        {fagsaker.map(fagsak => (
+          <Table.Row key={fagsak.saksnummer} onMouseDown={selectFagsakCallback} onKeyDown={selectFagsakCallback}>
+            <Table.DataCell>{fagsak.saksnummer}</Table.DataCell>
+            <Table.DataCell>{getKodeverknavn(fagsak.fagsakYtelseType, KodeverkType.FAGSAK_YTELSE)}</Table.DataCell>
+            <Table.DataCell>{getKodeverknavn(fagsak.status, KodeverkType.FAGSAK_STATUS)}</Table.DataCell>
+          </Table.Row>
+        ))}
+      </Table.Body>
     </Table>
   );
 };
