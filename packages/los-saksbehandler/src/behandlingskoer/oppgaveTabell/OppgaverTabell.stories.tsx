@@ -136,7 +136,6 @@ export const Default: Story = {
   args: {
     reserverOppgave: action('button-click'),
     valgtSakslisteId: 1,
-    doPolling: false,
     antallOppgaver: 4,
     oppgaverTilBehandling: OPPGAVER_TIL_BEHANDLING,
     reserverteOppgaver: RESERVERTE_OPPGAVER,
@@ -147,7 +146,6 @@ export const TomOppgaveTabell: Story = {
   args: {
     reserverOppgave: action('button-click'),
     valgtSakslisteId: 1,
-    doPolling: false,
   },
 };
 
@@ -162,7 +160,6 @@ export const VisPagineringNårMerEnn15Oppgaver: Story = {
   args: {
     reserverOppgave: action('button-click'),
     valgtSakslisteId: 1,
-    doPolling: false,
     antallOppgaver: 4,
     oppgaverTilBehandling: OPPGAVER_TIL_BEHANDLING,
     reserverteOppgaver: [

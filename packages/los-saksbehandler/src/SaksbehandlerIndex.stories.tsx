@@ -42,15 +42,75 @@ const SAKSLISTER = [
   },
 ] satisfies Saksliste[];
 
+const OPPGAVER_TIL_BEHANDLING = [
+  {
+    id: 1,
+    status: {
+      erReservert: false,
+    },
+    saksnummer: 46435,
+    personnummer: '3433434434',
+    navn: 'Sara Sahara',
+    system: 'SAK',
+    behandlingstype: BehandlingType.FORSTEGANGSSOKNAD,
+    behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
+    opprettetTidspunkt: '2024-11-01',
+    behandlingsfrist: '2024-11-01',
+    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    erTilSaksbehandling: true,
+    behandlingId: '12',
+  },
+  {
+    id: 4,
+    status: {
+      erReservert: false,
+    },
+    saksnummer: 43546,
+    personnummer: '53343423232',
+    navn: 'Petter Utvikler',
+    system: 'SAK',
+    behandlingstype: BehandlingType.FORSTEGANGSSOKNAD,
+    behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
+    opprettetTidspunkt: '2024-01-01',
+    behandlingsfrist: '2024-01-01',
+    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    erTilSaksbehandling: true,
+    behandlingId: '12',
+  },
+  {
+    id: 3,
+    status: {
+      erReservert: false,
+    },
+    saksnummer: 35344,
+    personnummer: '34343535423',
+    navn: 'Helga Tester',
+    system: 'SAK',
+    behandlingstype: BehandlingType.FORSTEGANGSSOKNAD,
+    behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
+    opprettetTidspunkt: '2023-04-01',
+    behandlingsfrist: '2023-04-05',
+    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    erTilSaksbehandling: true,
+    behandlingId: '34',
+  },
+] satisfies Oppgave[];
+
 const RESERVERTE_OPPGAVER = [
   {
     id: 2,
     status: {
       erReservert: true,
       reservertTilTidspunkt: '2019-08-02T00:54:25.455',
+      flyttetReservasjon: {
+        navn: 'Petter',
+        tidspunkt: '2019-08-02T00:54:25.455',
+        uid: 'uid',
+        begrunnelse: 'Denne er flyttet',
+      },
     },
-    saksnummer: 1234,
-    personnummer: '1212',
+    saksnummer: 23233,
+    personnummer: '5434231232',
     navn: 'Espen Utvikler',
     system: 'SAK',
     behandlingstype: BehandlingType.FORSTEGANGSSOKNAD,
@@ -79,8 +139,6 @@ const SAKSLISTE_SAKSBEHANDLERE = [
     navn: 'Auto Joakim',
   },
 ] satisfies Saksbehandler[];
-
-const OPPGAVER_TIL_BEHANDLING = [] satisfies Oppgave[];
 
 const NYE_OG_FERDIGSTILTE_OPPGAVER = [
   {
@@ -140,13 +198,31 @@ const REST_API_DATA = [
   { key: RestApiPathsKeys.RESERVER_OPPGAVE.name, data: undefined },
   { key: RestApiPathsKeys.RESERVERTE_OPPGAVER.name, data: RESERVERTE_OPPGAVER },
   { key: RestApiPathsKeys.SAKSLISTE_SAKSBEHANDLERE.name, data: SAKSLISTE_SAKSBEHANDLERE },
-  { key: RestApiPathsKeys.BEHANDLINGSKO_OPPGAVE_ANTALL.name, data: 1 },
+  { key: RestApiPathsKeys.BEHANDLINGSKO_OPPGAVE_ANTALL.name, data: 100 },
   { key: RestApiPathsKeys.RESERVER_OPPGAVE.name, data: undefined },
   { key: RestApiPathsKeys.SEARCH_FAGSAK.name, data: undefined },
   { key: RestApiPathsKeys.OPPGAVER_FOR_FAGSAKER.name, data: undefined },
   { key: RestApiPathsKeys.OPPGAVER_TIL_BEHANDLING.name, data: OPPGAVER_TIL_BEHANDLING },
   { key: RestApiPathsKeys.HENT_RESERVASJONSSTATUS.name, data: undefined },
-  { key: RestApiPathsKeys.BEHANDLEDE_OPPGAVER.name, data: [] },
+  {
+    key: RestApiPathsKeys.BEHANDLEDE_OPPGAVER.name,
+    data: [
+      {
+        id: 1,
+        personnummer: '343453534',
+        navn: 'Gaute Johansen',
+        saksnummer: 54343,
+        behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
+      } as Oppgave,
+      {
+        id: 2,
+        personnummer: '334342323',
+        navn: 'Olga Mortensen',
+        saksnummer: 13232,
+        behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
+      } as Oppgave,
+    ],
+  },
   { key: RestApiPathsKeys.HENT_NYE_OG_FERDIGSTILTE_OPPGAVER.name, data: NYE_OG_FERDIGSTILTE_OPPGAVER },
   { key: RestApiPathsKeys.FORLENG_OPPGAVERESERVASJON.name, data: {} },
 ];
