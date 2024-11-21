@@ -1,1 +1,1 @@
-export { default as MenySettPaVentIndex, getMenytekst } from './src/MenySettPaVentIndex';
+export { MenySettPaVentIndex, getMenytekst } from './src/MenySettPaVentIndex';
