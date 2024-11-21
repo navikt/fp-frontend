@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 
 import { Button, VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
@@ -33,7 +32,6 @@ const meta = {
       >
         <VStack gap="10">
           <InntektsgivendeArbeidPapirsoknadIndex {...args} />
-          <VerticalSpacer fourtyPx />
           <Button size="small" variant="primary">
             Lagreknapp (Kun for test)
           </Button>
