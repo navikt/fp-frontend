@@ -225,7 +225,7 @@ export const SakslisteVelgerForm = ({
   return (
     <Form formMethods={formMethods} className={styles.container}>
       <VStack gap="6">
-        <HStack justify="space-between" align="center">
+        <HStack justify="space-between" align="end">
           <SelectField
             name="sakslisteId"
             label={intl.formatMessage({ id: 'SakslisteVelgerForm.Saksliste' })}
