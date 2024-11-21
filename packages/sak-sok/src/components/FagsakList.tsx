@@ -8,7 +8,7 @@ import { FormattedMessage } from 'react-intl';
 
 interface Props {
   fagsaker: FagsakEnkel[];
-  selectFagsakCallback: (e: React.SyntheticEvent, saksnummer?: string) => void;
+  selectFagsakCallback: (saksnummer: string) => void;
   alleKodeverk: AlleKodeverk;
 }
 
@@ -37,7 +37,11 @@ export const FagsakList = ({ fagsaker, selectFagsakCallback, alleKodeverk }: Pro
       </Table.Header>
       <Table.Body>
         {fagsaker.map(fagsak => (
-          <Table.Row key={fagsak.saksnummer} onMouseDown={selectFagsakCallback} onKeyDown={selectFagsakCallback}>
+          <Table.Row
+            key={fagsak.saksnummer}
+            onMouseDown={() => selectFagsakCallback(fagsak.saksnummer)}
+            onKeyDown={() => selectFagsakCallback(fagsak.saksnummer)}
+          >
             <Table.DataCell>{fagsak.saksnummer}</Table.DataCell>
             <Table.DataCell>{getKodeverknavn(fagsak.fagsakYtelseType, KodeverkType.FAGSAK_YTELSE)}</Table.DataCell>
             <Table.DataCell>{getKodeverknavn(fagsak.status, KodeverkType.FAGSAK_STATUS)}</Table.DataCell>

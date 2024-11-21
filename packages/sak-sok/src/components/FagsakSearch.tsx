@@ -14,7 +14,7 @@ interface Props {
   fagsaker: FagsakEnkel[];
   searchFagsakCallback: (params?: { searchString: string }) => Promise<FagsakEnkel[] | undefined>;
   searchResultReceived: boolean;
-  selectFagsakCallback: (e: React.SyntheticEvent, saksnummer?: string) => void;
+  selectFagsakCallback: (saksnummer: string) => void;
   searchStarted: boolean;
   searchResultAccessDenied?: {
     feilmelding: string;

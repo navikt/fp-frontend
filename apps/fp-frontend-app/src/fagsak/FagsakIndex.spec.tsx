@@ -1,6 +1,5 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { act } from 'react-dom/test-utils';
 import { RawIntlProvider } from 'react-intl';
 import { render, screen } from '@testing-library/react';
 import { BehandlingType, BehandlingStatus, FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
@@ -106,17 +105,15 @@ describe('<FagsakIndex>', () => {
       { key: FagsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt } },
     ];
 
-    await act(async () => {
-      render(
-        <RawIntlProvider value={intl}>
-          <RestApiMock data={data} requestApi={requestFagsakApi}>
-            <MemoryRouter initialEntries={['/behandling']}>
-              <FagsakIndex />
-            </MemoryRouter>
-          </RestApiMock>
-        </RawIntlProvider>,
-      );
-    });
+    render(
+      <RawIntlProvider value={intl}>
+        <RestApiMock data={data} requestApi={requestFagsakApi}>
+          <MemoryRouter initialEntries={['/behandling']}>
+            <FagsakIndex />
+          </MemoryRouter>
+        </RestApiMock>
+      </RawIntlProvider>,
+    );
 
     expect(await screen.findByText('123456 - Løpende')).toBeInTheDocument();
   });
