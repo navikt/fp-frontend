@@ -1,4 +1,4 @@
-import Personadresse from './personadresseTsType';
+import { Personadresse } from './personadresseTsType';
 
 export type PersonopplysningerBasis = Readonly<{
   navn: string;
@@ -15,5 +15,3 @@ export type Personoversikt = Readonly<{
   annenPart?: PersonopplysningerBasis;
   barn: PersonopplysningerBasis[];
 }>;
-
-export default Personoversikt;

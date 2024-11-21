@@ -1,11 +1,11 @@
-import React, { FunctionComponent, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { BehandlingType } from '@navikt/fp-kodeverk';
 import { KodeverkMedNavn } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
-import NyBehandlingModal, { BehandlingOppretting, FormValues } from './components/NyBehandlingModal';
+import { NyBehandlingModal, BehandlingOppretting, FormValues } from './components/NyBehandlingModal';
 
 import messages from '../i18n/nb_NO.json';
 
@@ -15,7 +15,7 @@ const intl = createIntl(messages);
 
 export const getMenytekst = (): string => intl.formatMessage({ id: 'MenyNyBehandlingIndex.NyForstegangsbehandling' });
 
-interface OwnProps {
+interface Props {
   ytelseType: string;
   saksnummer: string;
   behandlingUuid?: string;
@@ -39,20 +39,14 @@ interface OwnProps {
   lukkModal: () => void;
 }
 
-const MenyNyBehandlingIndex: FunctionComponent<OwnProps> = ({
-  ytelseType,
+export const MenyNyBehandlingIndex = ({
   saksnummer,
   behandlingUuid,
   behandlingVersjon,
   lagNyBehandling,
-  behandlingstyper,
-  tilbakekrevingRevurderingArsaker,
-  revurderingArsaker,
-  behandlingOppretting,
-  kanTilbakekrevingOpprettes,
-  uuidForSistLukkede,
   lukkModal,
-}) => {
+  ...rest
+}: Props) => {
   const submit = useCallback(
     (formValues: FormValues) => {
       const isTilbakekreving =
@@ -72,19 +66,7 @@ const MenyNyBehandlingIndex: FunctionComponent<OwnProps> = ({
   );
   return (
     <RawIntlProvider value={intl}>
-      <NyBehandlingModal
-        ytelseType={ytelseType}
-        cancelEvent={lukkModal}
-        submitCallback={submit}
-        behandlingOppretting={behandlingOppretting}
-        behandlingstyper={behandlingstyper}
-        tilbakekrevingRevurderingArsaker={tilbakekrevingRevurderingArsaker}
-        revurderingArsaker={revurderingArsaker}
-        kanTilbakekrevingOpprettes={kanTilbakekrevingOpprettes}
-        uuidForSistLukkede={uuidForSistLukkede}
-      />
+      <NyBehandlingModal cancelEvent={lukkModal} submitCallback={submit} {...rest} />
     </RawIntlProvider>
   );
 };
-
-export default MenyNyBehandlingIndex;

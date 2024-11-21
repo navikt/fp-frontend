@@ -4,7 +4,7 @@ import { RawIntlProvider } from 'react-intl';
 import { Dokument } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
-import DocumentList from './components/DocumentList';
+import { DocumentList } from './components/DocumentList';
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);

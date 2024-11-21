@@ -1,30 +1,27 @@
-import React from 'react';
-import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { MenyVergeIndex } from './MenyVergeIndex';
 
-export default {
+const meta = {
   title: 'sak/sak-meny-verge',
   component: MenyVergeIndex,
+  args: {
+    lukkModal: action('button-click'),
+  },
+} satisfies Meta<typeof MenyVergeIndex>;
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const LeggeTilVerge: Story = {
+  args: {
+    opprettVerge: action('button-click') as () => Promise<void>,
+  },
 };
 
-const Template: StoryFn<{
-  opprettVerge?: () => Promise<void>;
-  fjernVerge?: () => Promise<void>;
-  lukkModal: () => void;
-}> = ({ opprettVerge, fjernVerge, lukkModal }) => (
-  <MenyVergeIndex opprettVerge={opprettVerge} fjernVerge={fjernVerge} lukkModal={lukkModal} />
-);
-
-export const LeggeTilVerge = Template.bind({});
-LeggeTilVerge.args = {
-  opprettVerge: action('button-click') as () => Promise<void>,
-  lukkModal: action('button-click'),
-};
-
-export const FjerneVerge = Template.bind({});
-FjerneVerge.args = {
-  fjernVerge: action('button-click') as () => Promise<void>,
-  lukkModal: action('button-click'),
+export const FjerneVerge: Story = {
+  args: {
+    fjernVerge: action('button-click') as () => Promise<void>,
+  },
 };

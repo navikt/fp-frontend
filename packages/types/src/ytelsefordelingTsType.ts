@@ -1,4 +1,4 @@
-type Ytelsefordeling = Readonly<{
+export type Ytelsefordeling = Readonly<{
   overstyrtOmsorg?: boolean;
   bekreftetAleneomsorg?: boolean;
   rettigheterAnnenforelder: {
@@ -12,5 +12,3 @@ type Ytelsefordeling = Readonly<{
   gjeldendeDekningsgrad: number;
   førsteUttaksdato: string;
 }>;
-
-export default Ytelsefordeling;

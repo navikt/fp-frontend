@@ -77,7 +77,7 @@ type Annenpart = {
   personstatuser: PersonstatusPeriode[];
 };
 
-type Medlemskap = Readonly<{
+export type Medlemskap = Readonly<{
   manuellBehandlingResultat: ManuellBehandlingResultat | null;
   legacyManuellBehandling: LegacyManuellMedlemskapsBehandling | null;
   regioner: RegionPeriode[];
@@ -89,5 +89,3 @@ type Medlemskap = Readonly<{
   avvik: MedlemskapAvvik[];
   annenpart: Annenpart | null;
 }>;
-
-export default Medlemskap;

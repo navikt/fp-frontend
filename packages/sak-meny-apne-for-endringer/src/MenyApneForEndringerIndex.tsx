@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback } from 'react';
+import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { OkAvbrytModal } from '@navikt/ft-ui-komponenter';
@@ -10,17 +10,17 @@ const intl = createIntl(messages);
 
 export const getMenytekst = () => intl.formatMessage({ id: 'MenyApneForEndringerIndex.ReopenBehandling' });
 
-interface OwnProps {
+interface Props {
   apneBehandlingForEndringer: () => void;
   lukkModal: () => void;
 }
 
-const MenyApneForEndringerIndex: FunctionComponent<OwnProps> = ({ apneBehandlingForEndringer, lukkModal }) => {
-  const submit = useCallback(() => {
+export const MenyApneForEndringerIndex = ({ apneBehandlingForEndringer, lukkModal }: Props) => {
+  const submit = () => {
     apneBehandlingForEndringer();
 
     lukkModal();
-  }, []);
+  };
 
   return (
     <RawIntlProvider value={intl}>
@@ -33,5 +33,3 @@ const MenyApneForEndringerIndex: FunctionComponent<OwnProps> = ({ apneBehandling
     </RawIntlProvider>
   );
 };
-
-export default MenyApneForEndringerIndex;

@@ -55,7 +55,7 @@ export type Sak = {
   nivaa: string;
 };
 
-type InfotrygdVedtak = {
+export type InfotrygdVedtak = {
   vedtakKjeder: {
     opprinneligIdentdato: string;
     behandlingstema: {
@@ -66,5 +66,3 @@ type InfotrygdVedtak = {
   }[];
   saker: Sak[];
 };
-
-export default InfotrygdVedtak;

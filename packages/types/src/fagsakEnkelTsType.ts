@@ -9,7 +9,7 @@ export type Person = Readonly<{
   diskresjonskode?: string;
 }>;
 
-type FagsakEnkel = Readonly<{
+export type FagsakEnkel = Readonly<{
   saksnummer: string;
   fagsakYtelseType: string;
   status: string;
@@ -19,5 +19,3 @@ type FagsakEnkel = Readonly<{
   endret?: string;
   person: Person;
 }>;
-
-export default FagsakEnkel;

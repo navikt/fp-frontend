@@ -19,7 +19,7 @@ export type Søknadsfrist = Readonly<{
   dagerOversittetFrist?: number;
 }>;
 
-type Soknad = Readonly<{
+export type Soknad = Readonly<{
   soknadType: string;
   mottattDato: string;
   begrunnelseForSenInnsending: string | undefined;
@@ -55,5 +55,3 @@ type Soknad = Readonly<{
   adopsjonFodelsedatoer?: Record<number, string>;
   farSokerType?: string;
 }>;
-
-export default Soknad;

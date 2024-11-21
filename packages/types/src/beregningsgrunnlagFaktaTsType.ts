@@ -1,4 +1,4 @@
-import BeregningsgrunnlagArbeidsforhold from './beregningsgrunnlagArbeidsforholdTsType';
+import { BeregningsgrunnlagArbeidsforhold } from './beregningsgrunnlagArbeidsforholdTsType';
 
 export type FaktaOmBeregningAndel = Readonly<{
   arbeidsforhold?: BeregningsgrunnlagArbeidsforhold;
@@ -100,5 +100,3 @@ export type FaktaOmBeregning = Readonly<{
   vurderMottarYtelse?: VurderMottarYtelse;
   arbeidstakerOgFrilanserISammeOrganisasjonListe?: ATFLSammeOrgAndel[];
 }>;
-
-export default FaktaOmBeregning;

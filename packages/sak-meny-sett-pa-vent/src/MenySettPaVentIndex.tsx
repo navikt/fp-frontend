@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback } from 'react';
+import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { KodeverkMedNavn } from '@navikt/fp-types';
@@ -11,33 +11,23 @@ const intl = createIntl(messages);
 
 export const getMenytekst = (): string => intl.formatMessage({ id: 'MenySettPaVentIndex.BehandlingOnHold' });
 
-interface OwnProps {
-  behandlingVersjon?: number;
+interface Props {
   settBehandlingPaVent: (params: FormValues) => void;
   ventearsaker: KodeverkMedNavn[];
   lukkModal: () => void;
   erTilbakekreving: boolean;
 }
 
-const MenySettPaVentIndex: FunctionComponent<OwnProps> = ({
-  behandlingVersjon,
-  settBehandlingPaVent,
-  ventearsaker,
-  lukkModal,
-  erTilbakekreving,
-}) => {
-  const submit = useCallback(
-    (formValues: FormValues) => {
-      const values = {
-        frist: formValues.frist,
-        ventearsak: formValues.ventearsak,
-      };
-      settBehandlingPaVent(values);
+export const MenySettPaVentIndex = ({ settBehandlingPaVent, ventearsaker, lukkModal, erTilbakekreving }: Props) => {
+  const submit = (formValues: FormValues) => {
+    const values = {
+      frist: formValues.frist,
+      ventearsak: formValues.ventearsak,
+    };
+    settBehandlingPaVent(values);
 
-      lukkModal();
-    },
-    [behandlingVersjon],
-  );
+    lukkModal();
+  };
 
   return (
     <RawIntlProvider value={intl}>
@@ -52,5 +42,3 @@ const MenySettPaVentIndex: FunctionComponent<OwnProps> = ({
     </RawIntlProvider>
   );
 };
-
-export default MenySettPaVentIndex;

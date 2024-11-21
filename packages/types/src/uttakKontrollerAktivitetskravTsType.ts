@@ -1,4 +1,4 @@
-type UttakKontrollerAktivitetskrav = Readonly<{
+export type UttakKontrollerAktivitetskrav = Readonly<{
   fom: string;
   tom: string;
   avklaring?: string;
@@ -6,5 +6,3 @@ type UttakKontrollerAktivitetskrav = Readonly<{
   morsAktivitet?: string;
   endret: boolean;
 }>;
-
-export default UttakKontrollerAktivitetskrav;

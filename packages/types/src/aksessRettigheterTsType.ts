@@ -7,5 +7,3 @@ export type AksessRettigheter = {
   writeAccess: Aksess;
   kanOverstyreAccess: Aksess;
 };
-
-export default AksessRettigheter;

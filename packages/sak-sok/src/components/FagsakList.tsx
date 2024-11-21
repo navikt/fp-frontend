@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 
 import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 import { FagsakEnkel, AlleKodeverk } from '@navikt/fp-types';
@@ -8,7 +8,7 @@ import styles from './fagsakList.module.css';
 
 const headerTextCodes = ['FagsakList.Saksnummer', 'FagsakList.Sakstype', 'FagsakList.Status'];
 
-interface OwnProps {
+interface Props {
   fagsaker: FagsakEnkel[];
   selectFagsakCallback: (e: React.SyntheticEvent, saksnummer?: string) => void;
   alleKodeverk: AlleKodeverk;
@@ -17,9 +17,9 @@ interface OwnProps {
 /**
  * FagsakList
  *
- * Presentasjonskomponent. Formaterer fagsak-søkeresultatet for visning i tabell. Sortering av fagsakene blir håndtert her.
+ * Formaterer fagsak-søkeresultatet for visning i tabell. Sortering av fagsakene blir håndtert her.
  */
-const FagsakList: FunctionComponent<OwnProps> = ({ fagsaker, selectFagsakCallback, alleKodeverk }) => {
+export const FagsakList = ({ fagsaker, selectFagsakCallback, alleKodeverk }: Props) => {
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
 
   return (
@@ -39,5 +39,3 @@ const FagsakList: FunctionComponent<OwnProps> = ({ fagsaker, selectFagsakCallbac
     </Table>
   );
 };
-
-export default FagsakList;

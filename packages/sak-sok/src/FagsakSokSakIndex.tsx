@@ -1,15 +1,15 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
 
 import { AlleKodeverk, FagsakEnkel } from '@navikt/fp-types';
 
-import FagsakSearch from './components/FagsakSearch';
+import { FagsakSearch } from './components/FagsakSearch';
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-interface OwnProps {
+interface Props {
   fagsaker?: FagsakEnkel[];
   searchFagsakCallback: (params?: { searchString: string }, keepData?: boolean) => Promise<FagsakEnkel[] | undefined>;
   searchResultReceived: boolean;
@@ -22,9 +22,9 @@ interface OwnProps {
 }
 
 /*
- * NB! Denne komponenten blir kun brukt lokalt. I alle andre miljø brukes FPLOS
+ * NB! Denne komponenten blir kun brukt i Prod om LOS-backend er nede
  */
-const FagsakSokSakIndex: FunctionComponent<OwnProps> = ({
+export const FagsakSokSakIndex = ({
   fagsaker = [],
   searchFagsakCallback,
   searchResultReceived,
@@ -32,7 +32,7 @@ const FagsakSokSakIndex: FunctionComponent<OwnProps> = ({
   searchStarted = false,
   searchResultAccessDenied,
   alleKodeverk,
-}) => (
+}: Props) => (
   <RawIntlProvider value={intl}>
     <FagsakSearch
       fagsaker={fagsaker}
@@ -45,5 +45,3 @@ const FagsakSokSakIndex: FunctionComponent<OwnProps> = ({
     />
   </RawIntlProvider>
 );
-
-export default FagsakSokSakIndex;

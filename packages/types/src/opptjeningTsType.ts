@@ -32,10 +32,8 @@ export type FerdiglignetNæring = {
   beløp: number;
 };
 
-type Opptjening = {
+export type Opptjening = {
   fastsattOpptjening: FastsattOpptjening;
   opptjeningAktivitetList?: OpptjeningAktivitet[];
   ferdiglignetNæring?: FerdiglignetNæring[];
 };
-
-export default Opptjening;

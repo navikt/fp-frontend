@@ -1,9 +1,9 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import MockAdapter from 'axios-mock-adapter';
 import { RequestApi } from '@navikt/fp-rest-api';
 import { RestApiProvider, RestApiErrorProvider } from '@navikt/fp-rest-api-hooks';
-import AxiosMock from './AxiosMock';
-import RestApiGlobalStateMock from './RestApiGlobalStateMock';
+import { AxiosMock } from './AxiosMock';
+import { RestApiGlobalStateMock } from './RestApiGlobalStateMock';
 
 interface Props {
   children: any;
@@ -21,7 +21,7 @@ interface Props {
   setApiMock?: (mockAdapter: MockAdapter) => void;
 }
 
-const RestApiMock: FunctionComponent<Props> = ({ children, data, requestApi, errors, setApiMock }) => (
+export const RestApiMock = ({ children, data, requestApi, errors, setApiMock }: Props) => (
   <RestApiProvider>
     <RestApiErrorProvider initialState={errors ? { errors } : undefined}>
       <RestApiGlobalStateMock data={data.filter(d => d.global)}>
@@ -32,5 +32,3 @@ const RestApiMock: FunctionComponent<Props> = ({ children, data, requestApi, err
     </RestApiErrorProvider>
   </RestApiProvider>
 );
-
-export default RestApiMock;

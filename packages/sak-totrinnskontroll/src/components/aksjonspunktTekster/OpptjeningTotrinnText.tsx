@@ -1,5 +1,5 @@
 import { OpptjeningAktiviteter } from '@navikt/fp-types';
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 const mapAktivitetTextEndring = (aktivitetType?: string, arbeidsgiverNavn?: string, orgnr?: string) => {
@@ -69,16 +69,11 @@ const mapAktivitetTextGodkjenning = (aktivitetType?: string, arbeidsgiverNavn?: 
   return <FormattedMessage id="ToTrinnsForm.Opptjening.GodkjenningAktivitet" values={{ a: aktivitetType }} />;
 };
 
-interface OwnProps {
+interface Props {
   aktivitet: OpptjeningAktiviteter;
 }
 
-/*
- * OpptjeningTotrinnText
- *
-
- */
-export const OpptjeningTotrinnText: FunctionComponent<OwnProps> = ({ aktivitet }) => {
+export const OpptjeningTotrinnText = ({ aktivitet }: Props) => {
   if (aktivitet.erEndring) {
     return mapAktivitetTextEndring(
       aktivitet.aktivitetType ? aktivitet.aktivitetType.toLowerCase() : undefined,
@@ -99,5 +94,3 @@ export const OpptjeningTotrinnText: FunctionComponent<OwnProps> = ({ aktivitet }
     aktivitet.orgnr,
   );
 };
-
-export default OpptjeningTotrinnText;

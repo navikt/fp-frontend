@@ -10,7 +10,7 @@ describe('<TotrinnskontrollSakIndex>', () => {
   it('skal godkjenne begge aksjonspunktene', async () => {
     const lagre = vi.fn();
 
-    render(<ForBeslutter lagre={lagre} />);
+    render(<ForBeslutter onSubmit={lagre} />);
 
     expect(await screen.findByText('Kontroller endrede opplysninger og faglige vurderinger')).toBeInTheDocument();
     expect(screen.getByText('Formkrav klage NFP')).toBeInTheDocument();
@@ -55,7 +55,7 @@ describe('<TotrinnskontrollSakIndex>', () => {
   it('skal sende tilbake til saksbehandler fordi det er feil i fakta og feil i lovanvendelse', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<ForBeslutter lagre={lagre} />);
+    const utils = render(<ForBeslutter onSubmit={lagre} />);
 
     expect(await screen.findByText('Kontroller endrede opplysninger og faglige vurderinger')).toBeInTheDocument();
     expect(screen.getByText('Formkrav klage NFP')).toBeInTheDocument();
@@ -101,7 +101,7 @@ describe('<TotrinnskontrollSakIndex>', () => {
   it('skal vise feilmeldinger når en ikke har fylt ut årsak og begrunnelse', async () => {
     const lagre = vi.fn();
 
-    render(<ForBeslutter lagre={lagre} />);
+    render(<ForBeslutter onSubmit={lagre} />);
 
     expect(await screen.findByText('Kontroller endrede opplysninger og faglige vurderinger')).toBeInTheDocument();
     expect(screen.getByText('Formkrav klage NFP')).toBeInTheDocument();

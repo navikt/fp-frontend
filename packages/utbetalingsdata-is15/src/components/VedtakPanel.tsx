@@ -1,17 +1,17 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { useState } from 'react';
 
 import { Vedtak } from '@navikt/fp-types';
 import { PeriodLabel, DateLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Table, VStack } from '@navikt/ds-react';
 import { FormattedMessage } from 'react-intl';
-import VedtakDetaljerPanel from './detaljer/VedtakDetaljerPanel';
+import { VedtakDetaljerPanel } from './detaljer/VedtakDetaljerPanel';
 
-interface OwnProps {
+interface Props {
   alleVedtak: Vedtak[];
   erForeldrepenger: boolean;
 }
 
-const VedtakPanel: FunctionComponent<OwnProps> = ({ alleVedtak, erForeldrepenger }) => {
+export const VedtakPanel = ({ alleVedtak, erForeldrepenger }: Props) => {
   const [valgtVedtak, setValgtVedtak] = useState<Vedtak>();
 
   return (
@@ -80,5 +80,3 @@ const VedtakPanel: FunctionComponent<OwnProps> = ({ alleVedtak, erForeldrepenger
     </VStack>
   );
 };
-
-export default VedtakPanel;

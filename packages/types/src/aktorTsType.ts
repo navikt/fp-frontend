@@ -1,4 +1,4 @@
-import FagsakEnkel from './fagsakEnkelTsType';
+import { FagsakEnkel } from './fagsakEnkelTsType';
 
 type FagsakPerson = Readonly<{
   navn: string;
@@ -10,9 +10,7 @@ type FagsakPerson = Readonly<{
   aktørId?: string;
 }>;
 
-type Aktor = Readonly<{
+export type Aktor = Readonly<{
   fagsaker: FagsakEnkel[];
   person: FagsakPerson;
 }>;
-
-export default Aktor;

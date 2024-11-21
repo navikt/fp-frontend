@@ -1,14 +1,14 @@
 import React from 'react';
-import { StoryFn } from '@storybook/react';
+import { Meta, StoryFn, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import { BehandlingResultatType, BehandlingType, BehandlingStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { BehandlingAppKontekst, BehandlingÅrsak, TotrinnskontrollSkjermlenkeContext } from '@navikt/fp-types';
 import { withRouter, alleKodeverk } from '@navikt/fp-storybook-utils';
 
-import TotrinnskontrollSakIndex from './TotrinnskontrollSakIndex';
+import { ApData, TotrinnskontrollSakIndex } from './TotrinnskontrollSakIndex';
 
-const location = {
+const LOCATION = {
   key: '1',
   pathname: '',
   search: '',
@@ -16,7 +16,7 @@ const location = {
   hash: '',
 };
 
-const defaultBehandling = {
+const DEFAULT_BEHANDLING = {
   uuid: '1',
   versjon: 2,
   status: BehandlingStatus.FATTER_VEDTAK,
@@ -28,18 +28,7 @@ const defaultBehandling = {
   },
 } as BehandlingAppKontekst;
 
-export default {
-  title: 'sak/sak-totrinnskontroll',
-  component: TotrinnskontrollSakIndex,
-  decorators: [withRouter],
-};
-
-const Template: StoryFn<{
-  lagre: (data: any) => Promise<void>;
-  behandling: BehandlingAppKontekst;
-  totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[];
-  readOnly: boolean;
-}> = ({ behandling, readOnly, lagre }) => (
+const withDiv = (Story: StoryFn) => (
   <div
     style={{
       width: '600px',
@@ -48,103 +37,111 @@ const Template: StoryFn<{
       backgroundColor: 'white',
     }}
   >
-    <TotrinnskontrollSakIndex
-      behandling={behandling}
-      location={location}
-      readOnly={readOnly}
-      onSubmit={lagre}
-      forhandsvisVedtaksbrev={action('button-click')}
-      fagsakYtelseType={FagsakYtelseType.FORELDREPENGER}
-      alleKodeverk={alleKodeverk as any}
-      createLocationForSkjermlenke={() => location}
-      setBeslutterFormData={() => undefined}
-    />
+    <Story />
   </div>
 );
 
-export const ForBeslutter = Template.bind({});
-ForBeslutter.args = {
-  lagre: action('button-click') as any,
-  behandling: {
-    ...defaultBehandling,
-    totrinnskontrollÅrsaker: [
-      {
-        skjermlenkeType: 'FORMKRAV_KLAGE_NFP',
-        totrinnskontrollAksjonspunkter: [
-          {
-            aksjonspunktKode: '5082',
-            opptjeningAktiviteter: [],
-            beregningDto: {
-              fastsattVarigEndringNaering: false,
-              faktaOmBeregningTilfeller: [''],
-            },
-            vurderPaNyttArsaker: [],
-            uttakPerioder: [],
-          },
-        ],
-      },
-      {
-        skjermlenkeType: 'KLAGE_BEH_NFP',
-        totrinnskontrollAksjonspunkter: [
-          {
-            aksjonspunktKode: '5035',
-            opptjeningAktiviteter: [],
-            beregningDto: {
-              fastsattVarigEndringNaering: false,
-              faktaOmBeregningTilfeller: [''],
-            },
-            vurderPaNyttArsaker: [],
-            uttakPerioder: [],
-            arbeidforholdDtos: [],
-          },
-        ],
-      },
-    ] as TotrinnskontrollSkjermlenkeContext[],
+const meta = {
+  title: 'sak/sak-totrinnskontroll',
+  component: TotrinnskontrollSakIndex,
+  args: {
+    onSubmit: action('button-click') as (params: ApData) => Promise<void>,
+    location: LOCATION,
+    forhandsvisVedtaksbrev: action('button-click'),
+    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    alleKodeverk: alleKodeverk as any,
+    createLocationForSkjermlenke: () => LOCATION,
+    setBeslutterFormData: () => undefined,
   },
-  readOnly: false,
+  decorators: [withRouter, withDiv],
+} satisfies Meta<typeof TotrinnskontrollSakIndex>;
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const ForBeslutter: Story = {
+  args: {
+    behandling: {
+      ...DEFAULT_BEHANDLING,
+      totrinnskontrollÅrsaker: [
+        {
+          skjermlenkeType: 'FORMKRAV_KLAGE_NFP',
+          totrinnskontrollAksjonspunkter: [
+            {
+              aksjonspunktKode: '5082',
+              opptjeningAktiviteter: [],
+              beregningDto: {
+                fastsattVarigEndringNaering: false,
+                faktaOmBeregningTilfeller: [''],
+              },
+              vurderPaNyttArsaker: [],
+              uttakPerioder: [],
+            },
+          ],
+        },
+        {
+          skjermlenkeType: 'KLAGE_BEH_NFP',
+          totrinnskontrollAksjonspunkter: [
+            {
+              aksjonspunktKode: '5035',
+              opptjeningAktiviteter: [],
+              beregningDto: {
+                fastsattVarigEndringNaering: false,
+                faktaOmBeregningTilfeller: [''],
+              },
+              vurderPaNyttArsaker: [],
+              uttakPerioder: [],
+              arbeidforholdDtos: [],
+            },
+          ],
+        },
+      ] as TotrinnskontrollSkjermlenkeContext[],
+    },
+    readOnly: false,
+  },
 };
 
-export const ForSaksbehandler = Template.bind({});
-ForSaksbehandler.args = {
-  lagre: action('button-click') as any,
-  behandling: {
-    ...defaultBehandling,
-    status: BehandlingStatus.BEHANDLING_UTREDES,
-    totrinnskontrollÅrsaker: [
-      {
-        skjermlenkeType: 'FORMKRAV_KLAGE_NFP',
-        totrinnskontrollAksjonspunkter: [
-          {
-            aksjonspunktKode: '5082',
-            opptjeningAktiviteter: [],
-            beregningDto: {
-              fastsattVarigEndringNaering: false,
-              faktaOmBeregningTilfeller: [''],
+export const ForSaksbehandler: Story = {
+  args: {
+    behandling: {
+      ...DEFAULT_BEHANDLING,
+      status: BehandlingStatus.BEHANDLING_UTREDES,
+      totrinnskontrollÅrsaker: [
+        {
+          skjermlenkeType: 'FORMKRAV_KLAGE_NFP',
+          totrinnskontrollAksjonspunkter: [
+            {
+              aksjonspunktKode: '5082',
+              opptjeningAktiviteter: [],
+              beregningDto: {
+                fastsattVarigEndringNaering: false,
+                faktaOmBeregningTilfeller: [''],
+              },
+              besluttersBegrunnelse: 'Denne er ikke godkjent fordi...',
+              totrinnskontrollGodkjent: false,
+              vurderPaNyttArsaker: ['FEIL_LOV', 'FEIL_FAKTA'],
+              uttakPerioder: [],
+              arbeidforholdDtos: [],
             },
-            besluttersBegrunnelse: 'Denne er ikke godkjent fordi...',
-            totrinnskontrollGodkjent: false,
-            vurderPaNyttArsaker: ['FEIL_LOV', 'FEIL_FAKTA'],
-            uttakPerioder: [],
-            arbeidforholdDtos: [],
-          },
-        ],
-      },
-      {
-        skjermlenkeType: 'KLAGE_BEH_NFP',
-        totrinnskontrollAksjonspunkter: [
-          {
-            aksjonspunktKode: '5035',
-            opptjeningAktiviteter: [],
-            beregningDto: {
-              fastsattVarigEndringNaering: false,
-              faktaOmBeregningTilfeller: [''],
+          ],
+        },
+        {
+          skjermlenkeType: 'KLAGE_BEH_NFP',
+          totrinnskontrollAksjonspunkter: [
+            {
+              aksjonspunktKode: '5035',
+              opptjeningAktiviteter: [],
+              beregningDto: {
+                fastsattVarigEndringNaering: false,
+                faktaOmBeregningTilfeller: [''],
+              },
+              totrinnskontrollGodkjent: true,
+              uttakPerioder: [],
             },
-            totrinnskontrollGodkjent: true,
-            uttakPerioder: [],
-          },
-        ],
-      },
-    ] as TotrinnskontrollSkjermlenkeContext[],
+          ],
+        },
+      ] as TotrinnskontrollSkjermlenkeContext[],
+    },
+    readOnly: true,
   },
-  readOnly: true,
 };

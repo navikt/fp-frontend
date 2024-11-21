@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import { AksjonspunktKode, AksjonspunktStatus, KodeverkType } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt, Risikoklassifisering } from '@navikt/fp-types';
+import { Aksjonspunkt } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 import { KontrollresultatKode } from './kodeverk/kontrollresultatKode';
@@ -14,62 +14,60 @@ import '@navikt/ds-css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
 import '@navikt/ft-form-hooks/dist/style.css';
 
-const withWidthProvider = (story: any) => <div style={{ width: '600px' }}>{story()}</div>;
-
-export default {
+const meta = {
   title: 'sak/sak-risikoklassifisering',
   component: RisikoklassifiseringSakIndex,
-  decorators: [withWidthProvider],
-};
-
-const Template: StoryFn<{
-  risikoklassifisering?: Risikoklassifisering;
-  aksjonspunkt?: Aksjonspunkt;
-  submitAksjonspunkt: () => Promise<any>;
-}> = ({ risikoklassifisering, aksjonspunkt, submitAksjonspunkt }) => {
-  const [isOpen, setIsOpen] = useState(true);
-
-  return (
-    <RisikoklassifiseringSakIndex
-      risikoklassifisering={risikoklassifisering}
-      aksjonspunkt={aksjonspunkt}
-      isPanelOpen={isOpen}
-      readOnly={false}
-      submitAksjonspunkt={submitAksjonspunkt}
-      toggleRiskPanel={() => setIsOpen(!isOpen)}
-      faresignalVurderinger={alleKodeverk[KodeverkType.FARESIGNAL_VURDERING]}
-    />
-  );
-};
-
-export const IngenRisikoklassifisering = Template.bind({});
-IngenRisikoklassifisering.args = {
-  submitAksjonspunkt: action('button-click') as () => Promise<any>,
-};
-
-export const LavRisikoklassifisering = Template.bind({});
-LavRisikoklassifisering.args = {
-  risikoklassifisering: {
-    kontrollresultat: KontrollresultatKode.IKKE_HOY,
+  args: {
+    faresignalVurderinger: alleKodeverk[KodeverkType.FARESIGNAL_VURDERING],
+    submitAksjonspunkt: action('button-click') as () => Promise<any>,
+    toggleRiskPanel: action('button-click'),
+    isPanelOpen: false,
+    readOnly: false,
   },
-  submitAksjonspunkt: action('button-click') as () => Promise<any>,
-};
+  render: storyArgs => {
+    const [args, setArgs] = useState(storyArgs);
 
-export const HøyRisikoklassifisering = Template.bind({});
-HøyRisikoklassifisering.args = {
-  aksjonspunkt: {
-    definisjon: AksjonspunktKode.VURDER_FARESIGNALER,
-    status: AksjonspunktStatus.OPPRETTET,
-    begrunnelse: undefined,
-  } as Aksjonspunkt,
-  risikoklassifisering: {
-    kontrollresultat: KontrollresultatKode.HOY,
-    medlFaresignaler: {
-      faresignaler: ['Faresignal 1'],
-    },
-    iayFaresignaler: {
-      faresignaler: ['Faresignal 2', 'Faresignal 3', 'Faresignal 4'],
+    const toggleRiskPanel = () => {
+      args.toggleRiskPanel?.();
+      setArgs(oldArgs => ({ ...oldArgs, isPanelOpen: true }));
+    };
+
+    return (
+      <div style={{ width: '600px' }}>
+        <RisikoklassifiseringSakIndex {...args} toggleRiskPanel={toggleRiskPanel} />
+      </div>
+    );
+  },
+} satisfies Meta<typeof RisikoklassifiseringSakIndex>;
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const IngenRisikoklassifisering: Story = {};
+
+export const LavRisikoklassifisering: Story = {
+  args: {
+    risikoklassifisering: {
+      kontrollresultat: KontrollresultatKode.IKKE_HOY,
     },
   },
-  submitAksjonspunkt: action('button-click') as () => Promise<any>,
+};
+
+export const HøyRisikoklassifisering: Story = {
+  args: {
+    aksjonspunkt: {
+      definisjon: AksjonspunktKode.VURDER_FARESIGNALER,
+      status: AksjonspunktStatus.OPPRETTET,
+      begrunnelse: undefined,
+    } as Aksjonspunkt,
+    risikoklassifisering: {
+      kontrollresultat: KontrollresultatKode.HOY,
+      medlFaresignaler: {
+        faresignaler: ['Faresignal 1'],
+      },
+      iayFaresignaler: {
+        faresignaler: ['Faresignal 2', 'Faresignal 3', 'Faresignal 4'],
+      },
+    },
+  },
 };

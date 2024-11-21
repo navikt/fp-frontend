@@ -1,1 +1,1 @@
-export { default as NotatSakIndex } from './src/NotatSakIndex';
+export { NotatSakIndex } from './src/NotatSakIndex';

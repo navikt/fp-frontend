@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { BodyShort, Modal, Button, Label } from '@navikt/ds-react';
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
@@ -6,7 +6,7 @@ import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import styles from './henlagtBehandlingModal.module.css';
 
-interface OwnProps {
+interface Props {
   showModal: boolean;
   closeEvent: () => void;
 }
@@ -14,10 +14,10 @@ interface OwnProps {
 /**
  * HenlagtBehandlingModal
  *
- * Presentasjonskomponent. Denne modalen vises etter en vilkarsvurdering der behandlingsstatusen
+ * Denne modalen vises etter en vilkarsvurdering der behandlingsstatusen
  * er satt til Iverksetter vedtak. Ved å trykke på knapp blir saksbehandler tatt tilbake til sokesiden.
  */
-const HenlagtBehandlingModal: FunctionComponent<OwnProps> = ({ showModal, closeEvent }) => {
+export const HenlagtBehandlingModal = ({ showModal, closeEvent }: Props) => {
   const intl = useIntl();
 
   return (
@@ -55,5 +55,3 @@ const HenlagtBehandlingModal: FunctionComponent<OwnProps> = ({ showModal, closeE
     </Modal>
   );
 };
-
-export default HenlagtBehandlingModal;

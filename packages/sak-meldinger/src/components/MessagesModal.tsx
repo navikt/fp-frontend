@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Button, Modal, Label } from '@navikt/ds-react';
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
@@ -6,7 +6,7 @@ import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import styles from './MessagesModal.module.css';
 
-interface OwnProps {
+interface Props {
   showModal: boolean;
   closeEvent: () => void;
 }
@@ -17,7 +17,7 @@ interface OwnProps {
  * Denne modalen vises etter at et brev har blitt bestilt.
  * Ved å trykke på knapp blir fritekst-feltet tømt.
  */
-const MessagesModal: FunctionComponent<OwnProps> = ({ showModal, closeEvent }) => {
+export const MessagesModal = ({ showModal, closeEvent }: Props) => {
   const intl = useIntl();
   return (
     <Modal
@@ -42,7 +42,7 @@ const MessagesModal: FunctionComponent<OwnProps> = ({ showModal, closeEvent }) =
             </FlexColumn>
             <FlexColumn className={styles.button}>
               <Button size="small" variant="primary" onClick={closeEvent} autoFocus type="button">
-                {intl.formatMessage({ id: 'MessagesModal.OK' })}
+                <FormattedMessage id="MessagesModal.OK" />
               </Button>
             </FlexColumn>
           </FlexRow>
@@ -51,5 +51,3 @@ const MessagesModal: FunctionComponent<OwnProps> = ({ showModal, closeEvent }) =
     </Modal>
   );
 };
-
-export default MessagesModal;

@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { UseFormGetValues, useFormContext } from 'react-hook-form';
 import { ErrorMessage, Label, BodyShort } from '@navikt/ds-react';
@@ -22,13 +22,13 @@ const harIkkeValgtMinstEnFakta = (getValues: UseFormGetValues<any>, fieldIndex: 
   !getValues(`${fieldIndex}.feilUtredning`) &&
   !getValues(`${fieldIndex}.annet`);
 
-type OwnProps = {
+type Props = {
   index: number;
   totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[];
   readOnly: boolean;
 };
 
-const GodkjenningPanel: FunctionComponent<OwnProps> = ({ index, totrinnskontrollSkjermlenkeContext, readOnly }) => {
+export const GodkjenningPanel = ({ index, totrinnskontrollSkjermlenkeContext, readOnly }: Props) => {
   const { watch, getValues } = useFormContext();
 
   const aksjonspunktGodkjenning = watch('aksjonspunktGodkjenning');
@@ -125,5 +125,3 @@ const GodkjenningPanel: FunctionComponent<OwnProps> = ({ index, totrinnskontroll
     </>
   );
 };
-
-export default GodkjenningPanel;

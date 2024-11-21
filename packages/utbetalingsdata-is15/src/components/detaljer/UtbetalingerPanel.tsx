@@ -1,15 +1,15 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 
 import { VedtakUtbetaling } from '@navikt/fp-types';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 import { BodyShort, Table, VStack } from '@navikt/ds-react';
 import { FormattedMessage } from 'react-intl';
 
-interface OwnProps {
+interface Props {
   utbetalinger?: VedtakUtbetaling[];
 }
 
-const UtbetalingerPanel: FunctionComponent<OwnProps> = ({ utbetalinger }) => (
+export const UtbetalingerPanel = ({ utbetalinger }: Props) => (
   <VStack gap="4">
     <div />
     {!utbetalinger && (
@@ -57,5 +57,3 @@ const UtbetalingerPanel: FunctionComponent<OwnProps> = ({ utbetalinger }) => (
     )}
   </VStack>
 );
-
-export default UtbetalingerPanel;

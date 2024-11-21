@@ -1,4 +1,4 @@
-type NavAnsatt = Readonly<{
+export type NavAnsatt = Readonly<{
   navn: string;
   brukernavn: string;
   funksjonellTid?: string;
@@ -8,5 +8,3 @@ type NavAnsatt = Readonly<{
   kanSaksbehandle: boolean;
   kanVeilede: boolean;
 }>;
-
-export default NavAnsatt;

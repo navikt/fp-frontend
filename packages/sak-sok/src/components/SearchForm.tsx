@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import { Button, BodyShort } from '@navikt/ds-react';
@@ -14,7 +14,7 @@ import styles from './searchForm.module.css';
 const isButtonDisabled = (searchStarted: boolean, searchString?: string): boolean =>
   !!(searchStarted || searchString === undefined || searchString.length < 1);
 
-interface OwnProps {
+interface Props {
   searchStarted: boolean;
   searchResultAccessDenied?: {
     feilmelding: string;
@@ -27,7 +27,7 @@ interface OwnProps {
  *
  * Definerer søkefelt og tilhørende søkeknapp.
  */
-const SearchForm: FunctionComponent<OwnProps> = ({ searchStarted, searchResultAccessDenied, searchFagsakCallback }) => {
+export const SearchForm = ({ searchStarted, searchResultAccessDenied, searchFagsakCallback }: Props) => {
   const intl = useIntl();
   const formMethods = useForm({
     defaultValues: {
@@ -82,5 +82,3 @@ const SearchForm: FunctionComponent<OwnProps> = ({ searchStarted, searchResultAc
     </Form>
   );
 };
-
-export default SearchForm;

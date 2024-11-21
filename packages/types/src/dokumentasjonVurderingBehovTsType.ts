@@ -31,7 +31,7 @@ export enum UttakÅrsak {
   AKTIVITETSKRAV_IKKE_OPPGITT = 'AKTIVITETSKRAV_IKKE_OPPGITT',
 }
 
-type DokumentasjonVurderingBehov = Readonly<{
+export type DokumentasjonVurderingBehov = Readonly<{
   fom: string;
   tom: string;
   type: UttakType;
@@ -39,5 +39,3 @@ type DokumentasjonVurderingBehov = Readonly<{
   vurdering?: UttakVurdering | null;
   morsStillingsprosent?: number;
 }>;
-
-export default DokumentasjonVurderingBehov;

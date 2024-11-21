@@ -1,15 +1,15 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 
 import { Box, Table } from '@navikt/ds-react';
 import { Sak } from '@navikt/fp-types';
 import { DateLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { FormattedMessage } from 'react-intl';
 
-interface OwnProps {
+interface Props {
   saker: Sak[];
 }
 
-const SakerPanel: FunctionComponent<OwnProps> = ({ saker }) => (
+export const SakerPanel = ({ saker }: Props) => (
   <>
     <Box background="bg-subtle" padding="5" borderColor="border-default" borderRadius="medium">
       <Table size="small">
@@ -60,5 +60,3 @@ const SakerPanel: FunctionComponent<OwnProps> = ({ saker }) => (
     <VerticalSpacer thirtyTwoPx />
   </>
 );
-
-export default SakerPanel;

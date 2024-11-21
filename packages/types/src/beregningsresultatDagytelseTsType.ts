@@ -20,8 +20,6 @@ export type BeregningsresultatPeriode = Readonly<{
   andeler?: BeregningsresultatPeriodeAndel[];
 }>;
 
-type BeregningsresultatDagytelse = Readonly<{
+export type BeregningsresultatDagytelse = Readonly<{
   perioder?: BeregningsresultatPeriode[];
 }>;
-
-export default BeregningsresultatDagytelse;

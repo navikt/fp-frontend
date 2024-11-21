@@ -1,4 +1,4 @@
-import BeregningsgrunnlagArbeidsforhold from './beregningsgrunnlagArbeidsforholdTsType';
+import { BeregningsgrunnlagArbeidsforhold } from './beregningsgrunnlagArbeidsforholdTsType';
 
 export type TidligereUtbetalinger = Readonly<{
   fom: string;
@@ -23,7 +23,7 @@ export type RefusjonTilVurderingAndel = Readonly<{
   maksTillattDelvisRefusjonPrMnd?: number;
 }>;
 
-type RefusjonTilVurdering = Readonly<{
+export type RefusjonTilVurdering = Readonly<{
   andeler: RefusjonTilVurderingAndel[];
 }>;
 
@@ -91,5 +91,3 @@ type FordelBeregningsgrunnlag = Readonly<{
 export type FaktaOmFordeling = Readonly<{
   fordelBeregningsgrunnlag?: FordelBeregningsgrunnlag;
 }>;
-
-export default RefusjonTilVurdering;

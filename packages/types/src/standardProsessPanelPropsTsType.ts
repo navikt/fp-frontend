@@ -1,10 +1,10 @@
-import Aksjonspunkt from './aksjonspunktTsType';
-import Behandling from './behandlingTsType';
-import Vilkar from './vilkarTsType';
-import AlleKodeverk from './kodeverkAlleTsType';
+import { Aksjonspunkt } from './aksjonspunktTsType';
+import { Behandling } from './behandlingTsType';
+import { Vilkar } from './vilkarTsType';
+import { AlleKodeverk } from './kodeverkAlleTsType';
 import { Fagsak } from './fagsakTsType';
 
-interface StandardProsessPanelProps {
+export interface StandardProsessPanelProps {
   behandling: Behandling;
   fagsak: Fagsak;
   alleKodeverk: AlleKodeverk;
@@ -19,5 +19,3 @@ interface StandardProsessPanelProps {
   formData?: any;
   setFormData: (data: any) => void;
 }
-
-export default StandardProsessPanelProps;

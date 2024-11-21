@@ -83,11 +83,9 @@ export type Inntekt = Readonly<{
   inntekter: Inntektspost[];
 }>;
 
-type ArbeidOgInntektsmelding = Readonly<{
+export type ArbeidOgInntektsmelding = Readonly<{
   inntektsmeldinger: Inntektsmelding[];
   arbeidsforhold: Arbeidsforhold[];
   inntekter: Inntekt[];
   skjæringstidspunkt: string;
 }>;
-
-export default ArbeidOgInntektsmelding;

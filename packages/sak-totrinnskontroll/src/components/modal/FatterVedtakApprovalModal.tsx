@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Modal, Button, Label } from '@navikt/ds-react';
@@ -87,7 +87,7 @@ const utledModalDescriptionTextCode = (
     ? getModalDescriptionTextCode(isBehandlingsresultatOpphor, behandlingTypeKode)
     : 'FatterVedtakApprovalModal.ModalDescription';
 
-interface OwnProps {
+interface Props {
   closeEvent: () => void;
   allAksjonspunktApproved: boolean;
   behandlingsresultat?: Behandling['behandlingsresultat'];
@@ -102,14 +102,14 @@ interface OwnProps {
  * Denne modalen vises en lightbox etter at en beslutter har godkjent alle aksjonspunkter
  * med totrinnskontroll. Ved å trykke på knapp blir beslutter tatt tilbake til sokesiden.
  */
-const FatterVedtakApprovalModal: FunctionComponent<OwnProps> = ({
+export const FatterVedtakApprovalModal = ({
   closeEvent,
   allAksjonspunktApproved,
   behandlingStatusKode,
   behandlingTypeKode,
   behandlingsresultat,
   harSammeResultatSomOriginalBehandling,
-}) => {
+}: Props) => {
   const intl = useIntl();
   const isBehandlingsresultatOpphor =
     !!behandlingsresultat && behandlingsresultat.type === BehandlingResultatType.OPPHOR;
@@ -157,5 +157,3 @@ const FatterVedtakApprovalModal: FunctionComponent<OwnProps> = ({
     </Modal>
   );
 };
-
-export default FatterVedtakApprovalModal;

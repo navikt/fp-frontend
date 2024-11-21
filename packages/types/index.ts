@@ -1,15 +1,15 @@
-export type { default as Aksjonspunkt } from './src/aksjonspunktTsType';
-export type { default as Behandling } from './src/behandlingTsType';
+export type { Aksjonspunkt } from './src/aksjonspunktTsType';
+export type { Behandling } from './src/behandlingTsType';
 export type {
-  default as BehandlingAppKontekst,
+  BehandlingAppKontekst,
   BehandlingTillatteOperasjoner,
   BehandlingÅrsak,
   TotrinnskontrollSkjermlenkeContext,
 } from './src/behandlingAppKontekstTsType';
 export { VergeBehandlingmenyValg } from './src/behandlingAppKontekstTsType';
-export type { default as Behandlingsresultat } from './src/behandlingsresultatTsType';
+export type { Behandlingsresultat } from './src/behandlingsresultatTsType';
 export type {
-  default as Beregningsgrunnlag,
+  Beregningsgrunnlag,
   BeregningsgrunnlagAndel,
   SammenligningsgrunlagProp,
   YtelseGrunnlag,
@@ -21,7 +21,7 @@ export type {
   InntektsgrunnlagInntekt,
 } from './src/beregningsgrunnlagTsType';
 export type {
-  default as FaktaOmBeregning,
+  FaktaOmBeregning,
   FaktaOmBeregningAndel,
   AvklarBeregningAktiviteterMap,
   AvklarBeregningAktiviteter,
@@ -36,7 +36,7 @@ export type {
   RefusjonskravSomKommerForSentListe,
 } from './src/beregningsgrunnlagFaktaTsType';
 export type { Månedsgrunnlag, BesteberegningInntekt, Besteberegninggrunnlag } from './src/besteberegningTsTypes';
-export type { default as BeregningsgrunnlagArbeidsforhold } from './src/beregningsgrunnlagArbeidsforholdTsType';
+export type { BeregningsgrunnlagArbeidsforhold } from './src/beregningsgrunnlagArbeidsforholdTsType';
 export type {
   RefusjonTilVurderingAndel,
   TidligereUtbetalinger,
@@ -46,48 +46,43 @@ export type {
   PerioderMedGraderingEllerRefusjon,
   FaktaOmFordeling,
 } from './src/beregningsgrunnlagFordelingTsType';
-export type { default as Feriepengegrunnlag, FeriepengegrunnlagAndel } from './src/feriepengegrunnlagTsType';
-export type { default as BeregningsresultatEs } from './src/beregningsresultatEsTsType';
+export type { Feriepengegrunnlag, FeriepengegrunnlagAndel } from './src/feriepengegrunnlagTsType';
+export type { BeregningsresultatEs } from './src/beregningsresultatEsTsType';
 export type {
-  default as BeregningsresultatDagytelse,
+  BeregningsresultatDagytelse,
   BeregningsresultatPeriode,
   BeregningsresultatPeriodeAndel,
 } from './src/beregningsresultatDagytelseTsType';
-export type { default as Dokument } from './src/dokumentTsType';
-export type { default as FaktaArbeidsforhold } from './src/faktaArbeidsforholdTsType';
-export type { default as InntektArbeidYtelse, RelatertTilgrensedYtelse } from './src/inntektArbeidYtelseTsType';
-export type { default as KodeverkMedNavn } from './src/kodeverkMedNavnTsType';
-export type { default as AlleKodeverk } from './src/kodeverkAlleTsType';
-export type { default as AlleKodeverkTilbakekreving } from './src/kodeverkAlleTilbakekrevingTsType';
-export type { default as NavAnsatt } from './src/navAnsattTsType';
+export type { Dokument } from './src/dokumentTsType';
+export type { FaktaArbeidsforhold } from './src/faktaArbeidsforholdTsType';
+export type { InntektArbeidYtelse, RelatertTilgrensedYtelse } from './src/inntektArbeidYtelseTsType';
+export type { KodeverkMedNavn } from './src/kodeverkMedNavnTsType';
+export type { AlleKodeverk } from './src/kodeverkAlleTsType';
+export type { AlleKodeverkTilbakekreving } from './src/kodeverkAlleTilbakekrevingTsType';
+export type { NavAnsatt } from './src/navAnsattTsType';
 export type {
-  default as SimuleringResultat,
+  SimuleringResultat,
   DetaljertSimuleringResultat,
   Mottaker,
   SimuleringResultatRad,
   SimuleringResultatPerFagområde,
   SimuleringPeriode,
 } from './src/simuleringResultatTsType';
+export type { Soknad, ManglendeVedleggSoknad, UtlandsoppholdPeriode, Søknadsfrist } from './src/soknadTsType';
 export type {
-  default as Soknad,
-  ManglendeVedleggSoknad,
-  UtlandsoppholdPeriode,
-  Søknadsfrist,
-} from './src/soknadTsType';
-export type {
-  default as UttaksresultatPeriode,
+  UttaksresultatPeriode,
   PeriodeSoker,
   PeriodeSokerAktivitet,
   AarsakFilter,
 } from './src/uttaksresultatPeriodeTsType';
 export type {
-  default as UttakStonadskontoer,
+  UttakStonadskontoer,
   Stonadskonto,
   AktivitetSaldo,
   AktivitetIdentifikator,
 } from './src/uttakStonadskontoerTsType';
-export type { default as Vilkar } from './src/vilkarTsType';
-export type { default as Ytelsefordeling } from './src/ytelsefordelingTsType';
+export type { Vilkar } from './src/vilkarTsType';
+export type { Ytelsefordeling } from './src/ytelsefordelingTsType';
 export type { FamilieHendelse, FamilieHendelseSamling, AvklartBarn } from './src/familieHendelseTsType';
 export type {
   Fagsak,
@@ -99,10 +94,10 @@ export type {
   BehandlingOppretting,
   Saksmarkering,
 } from './src/fagsakTsType';
-export type { default as FagsakEnkel, Person } from './src/fagsakEnkelTsType';
-export type { default as FagsakDataFpTilbake } from './src/fagsakTilbakekrevingTsType';
+export type { FagsakEnkel, Person } from './src/fagsakEnkelTsType';
+export type { FagsakDataFpTilbake } from './src/fagsakTilbakekrevingTsType';
 export type {
-  default as Medlemskap,
+  Medlemskap,
   ManuellBehandlingResultat,
   LegacyManuellMedlemskapsBehandling,
   LegacyMedlemPeriode,
@@ -113,58 +108,55 @@ export type {
   OppholdstillatelsePeriode,
 } from './src/medlemskapTsType';
 export { MedlemskapAvvik } from './src/medlemskapTsType';
-export type { default as Risikoklassifisering } from './src/risikoklassifiseringTsType';
-export type { default as AnkeVurdering } from './src/ankeVurderingTsType';
-export type { default as KlageVurdering, KlageVurderingResultat } from './src/klageVurderingTsType';
-export type { default as Innsyn, InnsynDokument, InnsynVedtaksdokument } from './src/innsynTsType';
+export type { Risikoklassifisering } from './src/risikoklassifiseringTsType';
+export type { AnkeVurdering } from './src/ankeVurderingTsType';
+export type { KlageVurdering, KlageVurderingResultat } from './src/klageVurderingTsType';
+export type { Innsyn, InnsynDokument, InnsynVedtaksdokument } from './src/innsynTsType';
 export type {
-  default as Opptjening,
+  Opptjening,
   OpptjeningAktivitet,
   FastsattOpptjening,
   FastsattOpptjeningAktivitet,
   FerdiglignetNæring,
 } from './src/opptjeningTsType';
-export type { default as TilbakekrevingValg } from './src/tilbakekrevingValgTsType';
-export type {
-  default as TotrinnskontrollAksjonspunkt,
-  OpptjeningAktiviteter,
-} from './src/totrinnskontrollAksjonspunktTsType';
+export type { TilbakekrevingValg } from './src/tilbakekrevingValgTsType';
+export type { TotrinnskontrollAksjonspunkt, OpptjeningAktiviteter } from './src/totrinnskontrollAksjonspunktTsType';
 export type { Historikkinnslag, HistorikkInnslagDokumentLink } from './src/historikkinnslagTsType';
 export type {
-  default as ArbeidsgiverOpplysningerPerId,
+  ArbeidsgiverOpplysningerPerId,
   ArbeidsgiverOpplysningerWrapper,
   ArbeidsgiverOpplysninger,
 } from './src/arbeidsgiverOpplysningerTsType';
 export type {
-  default as BeregningsresultatTilbakekreving,
+  BeregningsresultatTilbakekreving,
   BeregningResultatPeriode,
 } from './src/beregningsresultatTilbakekrevingTsType';
-export type { default as UttakKontrollerAktivitetskrav } from './src/uttakKontrollerAktivitetskravTsType';
-export type { default as Aktivitetskrav } from './src/aktivitetskravTsType';
-export type { default as Aktor } from './src/aktorTsType';
+export type { UttakKontrollerAktivitetskrav } from './src/uttakKontrollerAktivitetskravTsType';
+export type { Aktivitetskrav } from './src/aktivitetskravTsType';
+export type { Aktor } from './src/aktorTsType';
 export type { Kjønnkode } from './src/Kjonnkode';
 export { KjønnkodeEnum } from './src/Kjonnkode';
-export type { default as Personoversikt, PersonopplysningerBasis } from './src/personoversiktTsType';
-export type { default as Personadresse } from './src/personadresseTsType';
-export type { default as KontrollerFaktaPeriode } from './src/kontrollerFaktaPeriode';
-export type { default as AksessRettigheter, Aksess } from './src/aksessRettigheterTsType';
-export type { default as StandardFaktaPanelProps } from './src/standardFaktaPanelPropsTsType';
-export type { default as StandardFaktaPanelPropsTilbakekreving } from './src/standardFaktaPanelPropsTilbakekrevingTsType';
-export type { default as StandardProsessPanelProps } from './src/standardProsessPanelPropsTsType';
-export type { default as StandardProsessPanelPropsTilbakekreving } from './src/standardProsessPanelPropsTilbakekrevingTsType';
-export type { default as Verge } from './src/vergeTsType';
-export type { default as ForhåndsvisMeldingParams } from './src/forhåndsvisMeldingParamsTsType';
-export type { default as ManueltArbeidsforhold } from './src/manueltArbeidsforholdTsType';
-export type { default as ManglendeInntektsmeldingVurdering } from './src/manglendeInntektsmeldingVurderingTsType';
-export type { default as DokumentasjonVurderingBehov } from './src/dokumentasjonVurderingBehovTsType';
+export type { Personoversikt, PersonopplysningerBasis } from './src/personoversiktTsType';
+export type { Personadresse } from './src/personadresseTsType';
+export type { KontrollerFaktaPeriode } from './src/kontrollerFaktaPeriode';
+export type { AksessRettigheter, Aksess } from './src/aksessRettigheterTsType';
+export type { StandardFaktaPanelProps } from './src/standardFaktaPanelPropsTsType';
+export type { StandardFaktaPanelPropsTilbakekreving } from './src/standardFaktaPanelPropsTilbakekrevingTsType';
+export type { StandardProsessPanelProps } from './src/standardProsessPanelPropsTsType';
+export type { StandardProsessPanelPropsTilbakekreving } from './src/standardProsessPanelPropsTilbakekrevingTsType';
+export type { Verge } from './src/vergeTsType';
+export type { ForhåndsvisMeldingParams } from './src/forhåndsvisMeldingParamsTsType';
+export type { ManueltArbeidsforhold } from './src/manueltArbeidsforholdTsType';
+export type { ManglendeInntektsmeldingVurdering } from './src/manglendeInntektsmeldingVurderingTsType';
+export type { DokumentasjonVurderingBehov } from './src/dokumentasjonVurderingBehovTsType';
 export { UttakType, UttakVurdering, UttakÅrsak } from './src/dokumentasjonVurderingBehovTsType';
 export type {
-  default as VilkarsVurdertePerioderWrapper,
+  VilkarsVurdertePerioderWrapper,
   VilkarsVurdertPeriode,
   AktsomhetInfo,
 } from './src/vilkarsVurdertePerioderTsType';
 export type {
-  default as ArbeidOgInntektsmelding,
+  ArbeidOgInntektsmelding,
   Inntekt,
   Arbeidsforhold as AoIArbeidsforhold,
   Inntektsmelding,
@@ -173,18 +165,12 @@ export type {
 } from './src/arbeidOgInntektsmeldingTsType';
 export { AksjonspunktÅrsak } from './src/arbeidOgInntektsmeldingTsType';
 export type {
-  default as FodselOgTilrettelegging,
+  FodselOgTilrettelegging,
   ArbeidsforholdFodselOgTilrettelegging,
   ArbeidsforholdTilretteleggingDato,
   Permisjon,
   SvpAvklartOppholdPeriode,
 } from './src/fodselOgTilretteleggingTsType';
 export { SvpTilretteleggingFomKilde } from './src/fodselOgTilretteleggingTsType';
-export type {
-  default as InfotrygdVedtak,
-  Vedtak,
-  VedtakArbeidsforhold,
-  VedtakUtbetaling,
-  Sak,
-} from './src/infotrygdVedtakTsType';
+export type { InfotrygdVedtak, Vedtak, VedtakArbeidsforhold, VedtakUtbetaling, Sak } from './src/infotrygdVedtakTsType';
 export type { Vilkarperiode } from './src/vilkarperiodeTsType';

@@ -1,4 +1,4 @@
-type Behandlingsresultat = Readonly<{
+export type Behandlingsresultat = Readonly<{
   id: number;
   type: string;
   avslagsarsak?: string;
@@ -14,5 +14,3 @@ type Behandlingsresultat = Readonly<{
   };
   opphørsdato?: string;
 }>;
-
-export default Behandlingsresultat;

@@ -15,7 +15,7 @@ const intl = createIntl(messages);
  * Viser en info tekst som informerer saksbehandlere at brukeren i behandlingen
  * har ikke en registrert adresse.
  */
-const UkjentAdresseMeldingIndex: FunctionComponent = () => (
+export const UkjentAdresseMeldingIndex: FunctionComponent = () => (
   <RawIntlProvider value={intl}>
     <div className={styles.ukjentAdresseMargins}>
       <AksjonspunktHelpTextHTML>
@@ -26,5 +26,3 @@ const UkjentAdresseMeldingIndex: FunctionComponent = () => (
     </div>
   </RawIntlProvider>
 );
-
-export default UkjentAdresseMeldingIndex;
