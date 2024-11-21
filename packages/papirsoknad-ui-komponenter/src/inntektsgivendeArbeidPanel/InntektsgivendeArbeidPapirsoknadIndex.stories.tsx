@@ -22,7 +22,7 @@ const meta = {
   },
   render: function Render(args, { parameters: { submitCallback } }) {
     const formMethods = useForm({
-      defaultValues: InntektsgivendeArbeidPapirsoknadIndex.buildInitialValues(),
+      defaultValues: InntektsgivendeArbeidPapirsoknadIndex.initialValues(),
     });
 
     return (

@@ -30,4 +30,4 @@ export const PermisjonIndex = ({ foreldreType, readOnly, alleKodeverk, erEndring
 
 PermisjonIndex.transformValues = PermisjonPanel.transformValues;
 
-PermisjonIndex.buildInitialValues = PermisjonPanel.buildInitialValues;
+PermisjonIndex.initialValues = PermisjonPanel.initialValues;

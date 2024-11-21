@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { AlleKodeverk } from '@navikt/fp-types';
 import {
   SprakPapirsoknadIndex,
@@ -8,26 +8,22 @@ import {
   OmsorgOgAdopsjonPapirsoknadIndex,
   OmsorgOgAdopsjonFormValues,
   SoknadData,
-  OmsorgOgAdopsjonTransformedFormValues,
+  SprakFormValues,
+  RettigheterFormValues,
 } from '@navikt/fp-papirsoknad-ui-komponenter';
 import { FamilieHendelseType } from '@navikt/fp-kodeverk';
 
-import { HStack } from '@navikt/ds-react';
-import styles from './registreringAdopsjonOgOmsorgGrid.module.css';
-
-const OMSORG_FORM_NAME_PREFIX = 'omsorg';
-
 export type FormValues = {
-  rettigheter?: string;
-  foedselsDato?: string;
-  [OMSORG_FORM_NAME_PREFIX]?: OmsorgOgAdopsjonFormValues;
-} & OppholdINorgeFormValues;
+  foedselsDato?: string; // kan denne fjernes
+} & RettigheterFormValues &
+  OmsorgOgAdopsjonFormValues &
+  OppholdINorgeFormValues &
+  SprakFormValues;
 
-export type TransformedFormValues = Omit<FormValues, 'omsorg'> & {
-  [OMSORG_FORM_NAME_PREFIX]?: OmsorgOgAdopsjonTransformedFormValues;
-};
+export type TransformedFormValues = Omit<FormValues, 'omsorg'> &
+  ReturnType<typeof OmsorgOgAdopsjonPapirsoknadIndex.transformValues>;
 
-interface OwnProps {
+interface Props {
   readOnly: boolean;
   soknadData: SoknadData;
   alleKodeverk: AlleKodeverk;
@@ -35,53 +31,40 @@ interface OwnProps {
   mottattDato?: string;
 }
 
-interface StaticFunctions {
-  buildInitialValues: () => FormValues;
-  transformValues: (values: FormValues) => TransformedFormValues;
-}
-
 /*
  * RegistreringAdopsjonOgOmsorgGrid
  *
  * Form som brukes ved adopsjon for tilleggsopplysninger.
  */
-const RegistreringAdopsjonOgOmsorgGrid: FunctionComponent<OwnProps> & StaticFunctions = ({
-  readOnly,
-  soknadData,
-  alleKodeverk,
-  fodselsdato,
-  mottattDato,
-}) => (
-  <HStack justify="space-between">
-    <div className={styles.col}>
-      <RettigheterPapirsoknadIndex readOnly={readOnly} soknadData={soknadData} />
-      <OppholdINorgePapirsoknadIndex
-        readOnly={readOnly}
-        alleKodeverk={alleKodeverk}
-        erAdopsjon={soknadData.getFamilieHendelseType() !== FamilieHendelseType.ADOPSJON}
-        mottattDato={mottattDato}
-      />
-      <SprakPapirsoknadIndex readOnly={readOnly} />
-    </div>
-    <div className={styles.col}>
-      <OmsorgOgAdopsjonPapirsoknadIndex
-        readOnly={readOnly}
-        familieHendelseType={soknadData.getFamilieHendelseType()}
-        isForeldrepengerFagsak={false}
-        fodselsdato={fodselsdato}
-      />
-    </div>
-  </HStack>
+const RegistreringAdopsjonOgOmsorgGrid = ({ readOnly, soknadData, alleKodeverk, fodselsdato, mottattDato }: Props) => (
+  <>
+    <RettigheterPapirsoknadIndex readOnly={readOnly} soknadData={soknadData} />
+    <OmsorgOgAdopsjonPapirsoknadIndex
+      readOnly={readOnly}
+      familieHendelseType={soknadData.getFamilieHendelseType()}
+      isForeldrepengerFagsak={false}
+      fodselsdato={fodselsdato}
+    />
+    <OppholdINorgePapirsoknadIndex
+      readOnly={readOnly}
+      alleKodeverk={alleKodeverk}
+      erAdopsjon={soknadData.getFamilieHendelseType() !== FamilieHendelseType.ADOPSJON}
+      mottattDato={mottattDato}
+    />
+    <SprakPapirsoknadIndex readOnly={readOnly} />
+  </>
 );
 
 RegistreringAdopsjonOgOmsorgGrid.transformValues = (values: FormValues): TransformedFormValues => ({
+  ...RettigheterPapirsoknadIndex.transformValues(values),
+  ...OmsorgOgAdopsjonPapirsoknadIndex.transformValues(values),
   ...OppholdINorgePapirsoknadIndex.transformValues(values),
-  [OMSORG_FORM_NAME_PREFIX]: OmsorgOgAdopsjonPapirsoknadIndex.transformValues(values[OMSORG_FORM_NAME_PREFIX]!),
+  ...SprakPapirsoknadIndex.transformValues(values),
 });
 
-RegistreringAdopsjonOgOmsorgGrid.buildInitialValues = () => ({
-  [OMSORG_FORM_NAME_PREFIX]: {},
-  ...OppholdINorgePapirsoknadIndex.buildInitialValues(),
+RegistreringAdopsjonOgOmsorgGrid.initialValues = () => ({
+  ...OmsorgOgAdopsjonPapirsoknadIndex.initialValues(),
+  ...OppholdINorgePapirsoknadIndex.initialValues(),
 });
 
 export default RegistreringAdopsjonOgOmsorgGrid;

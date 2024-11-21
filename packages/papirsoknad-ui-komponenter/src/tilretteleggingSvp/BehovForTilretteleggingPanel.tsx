@@ -18,7 +18,7 @@ import messages from '../../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 const tilretteleggingForArbeidsgiverFieldArrayName = 'tilretteleggingForArbeidsgiver';
-const TILRETTELEGGING_NAME_PREFIX = 'tilretteleggingArbeidsforhold';
+export const TILRETTELEGGING_NAME_PREFIX = 'tilretteleggingArbeidsforhold';
 
 export type Tilrettelegging = {
   tilretteleggingType: string;
@@ -181,8 +181,55 @@ export const BehovForTilretteleggingPanel = ({ readOnly }: Props) => {
   );
 };
 
-BehovForTilretteleggingPanel.buildInitialValues = (): FormValues => ({
+BehovForTilretteleggingPanel.initialValues = (): FormValues => ({
   [TILRETTELEGGING_NAME_PREFIX]: {
     [tilretteleggingForArbeidsgiverFieldArrayName]: [{}],
   },
+});
+
+type TilretteleggingArbeidsforhold = {
+  '@type': string;
+  behovsdato?: string;
+  organisasjonsnummer?: string;
+  tilrettelegginger?: Tilrettelegging[];
+};
+
+const transformTilretteleggingsArbeidsforhold = (
+  tilretteleggingArbeidsforhold: FormValues['tilretteleggingArbeidsforhold'],
+): TilretteleggingArbeidsforhold[] => {
+  let transformerteVerdier = [] as TilretteleggingArbeidsforhold[];
+
+  if (
+    tilretteleggingArbeidsforhold?.sokForArbeidsgiver &&
+    tilretteleggingArbeidsforhold?.tilretteleggingForArbeidsgiver
+  ) {
+    transformerteVerdier = transformerteVerdier.concat(
+      tilretteleggingArbeidsforhold.tilretteleggingForArbeidsgiver.map(ta => ({
+        '@type': 'VI',
+        behovsdato: ta.behovsdato,
+        organisasjonsnummer: ta.organisasjonsnummer,
+        tilrettelegginger: ta.tilretteleggingArbeidsgiver,
+      })),
+    );
+  }
+  if (tilretteleggingArbeidsforhold?.sokForFrilans) {
+    transformerteVerdier.push({
+      '@type': 'FR',
+      behovsdato: tilretteleggingArbeidsforhold.behovsdatoFrilans,
+      tilrettelegginger: tilretteleggingArbeidsforhold.tilretteleggingFrilans,
+    });
+  }
+  if (tilretteleggingArbeidsforhold?.sokForSelvstendigNaringsdrivende) {
+    transformerteVerdier.push({
+      '@type': 'SN',
+      behovsdato: tilretteleggingArbeidsforhold.behovsdatoSN,
+      tilrettelegginger: tilretteleggingArbeidsforhold.tilretteleggingSelvstendigNaringsdrivende,
+    });
+  }
+
+  return transformerteVerdier;
+};
+
+BehovForTilretteleggingPanel.transformValues = ({ tilretteleggingArbeidsforhold }: FormValues) => ({
+  [TILRETTELEGGING_NAME_PREFIX]: transformTilretteleggingsArbeidsforhold(tilretteleggingArbeidsforhold),
 });

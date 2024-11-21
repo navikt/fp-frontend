@@ -1,8 +1,9 @@
-import React, { ReactElement, ReactNode, useMemo } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
-import { Heading } from '@navikt/ds-react';
+import React, { ReactElement, useMemo } from 'react';
+import { useFormContext } from 'react-hook-form';
+import { useIntl } from 'react-intl';
+import { Heading, VStack } from '@navikt/ds-react';
 import { CheckboxField, InputField, RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
-import { ArrowBox, BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
 import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 import { KanIkkeOppgiAnnenForelderArsak, KodeverkType, Landkode } from '@navikt/fp-kodeverk';
@@ -13,11 +14,9 @@ import {
   harSammeFodselsnummerSomSoker,
 } from '@navikt/ft-form-validators';
 
-import { useFormContext } from 'react-hook-form';
 import styles from './annenForelderPanel.module.css';
-
-const ANNEN_FORELDER_NAME_PREFIX = 'annenForelder';
-const KAN_IKKE_OPPGI_NAME_PREFIX = 'kanIkkeOppgiBegrunnelse';
+import { AnnenForelderSubFormValues, AnnenForelderFormValues } from '../types';
+import { ANNEN_FORELDER_NAME_PREFIX, KAN_IKKE_OPPGI_NAME_PREFIX } from '../constant';
 
 const filtrerLandOgLagOptions = (landkoder: KodeverkMedNavn[]): ReactElement[] =>
   landkoder
@@ -30,39 +29,23 @@ const filtrerLandOgLagOptions = (landkoder: KodeverkMedNavn[]): ReactElement[] =
 
 interface Props {
   readOnly?: boolean;
-  permisjonRettigheterPanel?: ReactNode;
   alleKodeverk: AlleKodeverk;
   fagsakPersonnummer: string;
 }
-
-export type FormValues = {
-  kanIkkeOppgiAnnenForelder?: boolean;
-  kanIkkeOppgiBegrunnelse: {
-    arsak: string;
-    land: string;
-    utenlandskFoedselsnummer: string;
-  };
-  foedselsnummer?: string;
-};
 
 /*
  * AnnenForelderForm
  *
  * Form som brukes ved registrering av annen forelder.
  */
-export const AnnenForelderPanel = ({
-  readOnly = true,
-  permisjonRettigheterPanel,
-  alleKodeverk,
-  fagsakPersonnummer,
-}: Props) => {
+export const AnnenForelderPanel = ({ readOnly = true, alleKodeverk, fagsakPersonnummer }: Props) => {
   const { formatMessage } = useIntl();
 
   const {
     watch,
     trigger,
     formState: { isSubmitted },
-  } = useFormContext<{ [ANNEN_FORELDER_NAME_PREFIX]: FormValues }>();
+  } = useFormContext<AnnenForelderFormValues>();
 
   const kanIkkeOppgiAnnenForelder = watch(`${ANNEN_FORELDER_NAME_PREFIX}.kanIkkeOppgiAnnenForelder`);
   const kanIkkeOppgiBegrunnelse = watch(`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}`);
@@ -71,11 +54,7 @@ export const AnnenForelderPanel = ({
   const sorterteLand = useMemo(() => landkoder.slice().sort((a, b) => a.navn.localeCompare(b.navn)), [landkoder]);
 
   return (
-    <BorderBox>
-      <Heading size="small">
-        <FormattedMessage id="Registrering.TheOtherParent.Title" />
-      </Heading>
-      <VerticalSpacer sixteenPx />
+    <>
       <InputField
         name={`${ANNEN_FORELDER_NAME_PREFIX}.foedselsnummer`}
         label={formatMessage({ id: 'Registrering.TheOtherParent.Fodselsnummer' })}
@@ -94,7 +73,6 @@ export const AnnenForelderPanel = ({
         }
         disabled={kanIkkeOppgiAnnenForelder}
       />
-      <VerticalSpacer sixteenPx />
       <CheckboxField
         name={`${ANNEN_FORELDER_NAME_PREFIX}.kanIkkeOppgiAnnenForelder`}
         label={formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent' })}
@@ -102,9 +80,8 @@ export const AnnenForelderPanel = ({
         onChange={() => (isSubmitted ? trigger() : undefined)}
       />
       {kanIkkeOppgiAnnenForelder === true && (
-        <>
-          <VerticalSpacer eightPx />
-          <ArrowBox>
+        <ArrowBox>
+          <VStack gap="4">
             <Heading size="small">
               {formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.Reason.Title' })}
             </Heading>
@@ -126,7 +103,6 @@ export const AnnenForelderPanel = ({
             />
             {kanIkkeOppgiBegrunnelse?.arsak === KanIkkeOppgiAnnenForelderArsak.IKKE_NORSK_FNR && (
               <>
-                <VerticalSpacer sixteenPx />
                 <SelectField
                   name={`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}.land`}
                   label={formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.Land' })}
@@ -135,7 +111,7 @@ export const AnnenForelderPanel = ({
                   className={styles.inputBredde}
                   readOnly={readOnly}
                 />
-                <VerticalSpacer sixteenPx />
+
                 <InputField
                   name={`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}.utenlandskFoedselsnummer`}
                   label={formatMessage({
@@ -147,11 +123,30 @@ export const AnnenForelderPanel = ({
                 />
               </>
             )}
-          </ArrowBox>
-        </>
+          </VStack>
+        </ArrowBox>
       )}
-      <VerticalSpacer sixteenPx />
-      {permisjonRettigheterPanel}
-    </BorderBox>
+    </>
   );
+};
+
+AnnenForelderPanel.transformValues = ({
+  foedselsnummer,
+  kanIkkeOppgiAnnenForelder,
+  kanIkkeOppgiBegrunnelse: { arsak, land, utenlandskFoedselsnummer } = {},
+}: AnnenForelderSubFormValues): AnnenForelderSubFormValues => {
+  if (kanIkkeOppgiAnnenForelder) {
+    const erUkjentFar = arsak === kanIkkeOppgiAnnenForelderArsak.IKKE_NORSK_FNR;
+    return {
+      foedselsnummer: undefined,
+      kanIkkeOppgiAnnenForelder: true,
+      kanIkkeOppgiBegrunnelse: erUkjentFar ? { arsak, land, utenlandskFoedselsnummer } : { arsak },
+    };
+  }
+
+  return {
+    foedselsnummer,
+    kanIkkeOppgiAnnenForelder: false,
+    kanIkkeOppgiBegrunnelse: undefined,
+  };
 };

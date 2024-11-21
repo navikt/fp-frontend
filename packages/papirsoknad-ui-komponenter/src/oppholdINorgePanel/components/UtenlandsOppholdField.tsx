@@ -1,5 +1,4 @@
 import React, { ReactElement, useMemo } from 'react';
-import classnames from 'classnames/bind';
 import { useIntl } from 'react-intl';
 import { Datepicker, SelectField, PeriodFieldArray } from '@navikt/ft-form-hooks';
 import { Landkode } from '@navikt/fp-kodeverk';
@@ -13,17 +12,14 @@ import {
   required,
 } from '@navikt/ft-form-validators';
 import { UseFormGetValues, useFieldArray, useFormContext } from 'react-hook-form';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import { AvsnittSkiller, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import styles from './utenlandsOppholdField.module.css';
-
-const classNames = classnames.bind(styles);
+import { HStack } from '@navikt/ds-react';
 
 const defaultUtenlandsOpphold = {
-  land: '',
-  periodeFom: '',
-  periodeTom: '',
+  land: undefined,
+  periodeFom: undefined,
+  periodeTom: undefined,
 };
 
 export type FormValues = {
@@ -112,76 +108,62 @@ export const UtenlandsOppholdField = ({ erTidligereOpphold = false, mottattDato,
       titleText={intl.formatMessage({ id: 'Registrering.RegistreringOpphold.AngiOpphold' })}
       bodyText={intl.formatMessage({ id: 'Registrering.RegistreringOpphold.Add' })}
       emptyPeriodTemplate={defaultUtenlandsOpphold}
-      createAddButtonInsteadOfImageLink
       readOnly={readOnly}
       remove={remove}
       append={append}
     >
       {(field, index, getRemoveButton) => (
         <React.Fragment key={field.id}>
-          {index > 0 && (
-            <>
-              <AvsnittSkiller />
-              <VerticalSpacer sixteenPx />
-            </>
-          )}
-          <SelectField
-            name={`${name}.${index}.land`}
-            label={intl.formatMessage({ id: 'Registrering.RegistreringOpphold.Country' })}
-            selectValues={land}
-            className={styles.selectBredde}
-            readOnly={readOnly}
-            validate={[required]}
-          />
-          <VerticalSpacer sixteenPx />
-          <FlexContainer>
-            <FlexRow className={classNames({ datesRowWithRemoveButton: index > 0 })}>
-              <FlexColumn>
-                <Datepicker
-                  name={`${name}.${index}.periodeFom`}
-                  label={intl.formatMessage({ id: 'Registrering.RegistreringOpphold.periodeFom' })}
-                  isReadOnly={readOnly}
-                  validate={[
-                    required,
-                    hasValidDate,
-                    getValiderFørEllerEtter(getValues, name, index, true),
-                    () => {
-                      const fomVerdi = getValue(getValues, `${name}.${index}.periodeFom`);
-                      if (erTidligereOpphold) {
-                        return dateBeforeOrEqual(moment().format(ISO_DATE_FORMAT))(fomVerdi);
-                      }
-                      return mottattDato ? dateAfterOrEqual(mottattDato)(fomVerdi) : undefined;
-                    },
-                    getOverlappingValidator(getValues, name),
-                  ]}
-                  onChange={() => (isSubmitted ? trigger() : undefined)}
-                />
-              </FlexColumn>
-              <FlexColumn>
-                <Datepicker
-                  name={`${name}.${index}.periodeTom`}
-                  label={intl.formatMessage({ id: 'Registrering.RegistreringOpphold.periodeTom' })}
-                  isReadOnly={readOnly}
-                  validate={[
-                    required,
-                    hasValidDate,
-                    getValiderFørEllerEtter(getValues, name, index, false),
-                    () => {
-                      const tomVerdi = getValue(getValues, `${name}.${index}.periodeTom`);
-                      if (erTidligereOpphold) {
-                        return dateBeforeOrEqual(moment().format(ISO_DATE_FORMAT))(tomVerdi);
-                      }
-                      return mottattDato ? dateAfterOrEqual(mottattDato)(tomVerdi) : undefined;
-                    },
-                    getOverlappingValidator(getValues, name),
-                  ]}
-                  onChange={() => (isSubmitted ? trigger() : undefined)}
-                />
-              </FlexColumn>
-              {getRemoveButton && <FlexColumn>{getRemoveButton()}</FlexColumn>}
-            </FlexRow>
-          </FlexContainer>
-          <VerticalSpacer sixteenPx />
+          <HStack key={field.id} gap="4" paddingBlock="2">
+            <SelectField
+              name={`${name}.${index}.land`}
+              label={intl.formatMessage({ id: 'Registrering.RegistreringOpphold.Country' })}
+              selectValues={land}
+              readOnly={readOnly}
+              validate={[required]}
+            />
+
+            <Datepicker
+              name={`${name}.${index}.periodeFom`}
+              label={intl.formatMessage({ id: 'Registrering.RegistreringOpphold.periodeFom' })}
+              isReadOnly={readOnly}
+              validate={[
+                required,
+                hasValidDate,
+                getValiderFørEllerEtter(getValues, name, index, true),
+                () => {
+                  const fomVerdi = getValue(getValues, `${name}.${index}.periodeFom`);
+                  if (erTidligereOpphold) {
+                    return dateBeforeOrEqual(dayjs().format(ISO_DATE_FORMAT))(fomVerdi);
+                  }
+                  return mottattDato ? dateAfterOrEqual(mottattDato)(fomVerdi) : undefined;
+                },
+                getOverlappingValidator(getValues, name),
+              ]}
+              onChange={() => (isSubmitted ? trigger() : undefined)}
+            />
+
+            <Datepicker
+              name={`${name}.${index}.periodeTom`}
+              label={intl.formatMessage({ id: 'Registrering.RegistreringOpphold.periodeTom' })}
+              isReadOnly={readOnly}
+              validate={[
+                required,
+                hasValidDate,
+                getValiderFørEllerEtter(getValues, name, index, false),
+                () => {
+                  const tomVerdi = getValue(getValues, `${name}.${index}.periodeTom`);
+                  if (erTidligereOpphold) {
+                    return dateBeforeOrEqual(dayjs().format(ISO_DATE_FORMAT))(tomVerdi);
+                  }
+                  return mottattDato ? dateAfterOrEqual(mottattDato)(tomVerdi) : undefined;
+                },
+                getOverlappingValidator(getValues, name),
+              ]}
+              onChange={() => (isSubmitted ? trigger() : undefined)}
+            />
+            {getRemoveButton && <div>{getRemoveButton()}</div>}
+          </HStack>
         </React.Fragment>
       )}
     </PeriodFieldArray>

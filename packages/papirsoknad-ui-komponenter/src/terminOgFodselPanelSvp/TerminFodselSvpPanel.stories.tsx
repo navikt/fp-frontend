@@ -5,11 +5,11 @@ import { useForm } from 'react-hook-form';
 import { Button, VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 
-import { FodselPapirsoknadIndex } from './FodselPapirsoknadIndex';
+import { TerminOgFodselPanelSvp } from './TerminOgFodselPanelSvp';
 
 const meta = {
-  title: 'papirsoknad/ui-komponenter/fodsel',
-  component: FodselPapirsoknadIndex,
+  title: 'papirsoknad/ui-komponenter/termin-og-fodsel-svp',
+  component: TerminOgFodselPanelSvp,
   parameters: {
     submitCallback: action('onSubmit'),
   },
@@ -22,7 +22,7 @@ const meta = {
     return (
       <Form formMethods={formMethods} onSubmit={submitCallback}>
         <VStack gap="10">
-          <FodselPapirsoknadIndex {...args} />
+          <TerminOgFodselPanelSvp {...args} />
           <Button size="small" variant="primary">
             Lagreknapp (Kun for test)
           </Button>
@@ -30,20 +30,8 @@ const meta = {
       </Form>
     );
   },
-} satisfies Meta<typeof FodselPapirsoknadIndex>;
+} satisfies Meta<typeof TerminOgFodselPanelSvp>;
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
-
-export const ForeldrepengeSak: Story = {
-  args: {
-    erForeldrepenger: true,
-  },
-};
-
-export const ErIkkeForeldrepengeSak: Story = {
-  args: {
-    erForeldrepenger: false,
-  },
-};
+export const Default: StoryObj<typeof meta> = {};

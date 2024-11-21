@@ -22,3 +22,5 @@ export const LagreSoknadPapirsoknadIndex = ({ readOnly, onSubmitUfullstendigsokn
     />
   </RawIntlProvider>
 );
+
+LagreSoknadPapirsoknadIndex.transformValues = LagreSoknadPanel.transformValues;

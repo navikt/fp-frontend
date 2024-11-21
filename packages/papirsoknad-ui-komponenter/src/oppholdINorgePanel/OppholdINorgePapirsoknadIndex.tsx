@@ -27,6 +27,6 @@ export const OppholdINorgePapirsoknadIndex = ({ readOnly, erAdopsjon, alleKodeve
   </RawIntlProvider>
 );
 
-OppholdINorgePapirsoknadIndex.buildInitialValues = OppholdINorgePanel.buildInitialValues;
+OppholdINorgePapirsoknadIndex.initialValues = OppholdINorgePanel.initialValues;
 
 OppholdINorgePapirsoknadIndex.transformValues = OppholdINorgePanel.transformValues;

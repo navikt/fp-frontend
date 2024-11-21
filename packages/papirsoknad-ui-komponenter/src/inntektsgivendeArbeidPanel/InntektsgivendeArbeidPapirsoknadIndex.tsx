@@ -19,4 +19,6 @@ export const InntektsgivendeArbeidPapirsoknadIndex = ({ readOnly, alleKodeverk }
   </RawIntlProvider>
 );
 
-InntektsgivendeArbeidPapirsoknadIndex.buildInitialValues = () => InntektsgivendeArbeidPanel.buildInitialValues();
+InntektsgivendeArbeidPapirsoknadIndex.initialValues = InntektsgivendeArbeidPanel.initialValues;
+
+InntektsgivendeArbeidPapirsoknadIndex.transformValues = InntektsgivendeArbeidPanel.transformValues;

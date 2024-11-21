@@ -77,7 +77,7 @@ PermisjonGraderingPanel.transformValues = (formValues: FormValues) => {
   });
 };
 
-PermisjonGraderingPanel.buildInitialValues = () => ({
+PermisjonGraderingPanel.initialValues = () => ({
   [GRADERING_PERIODE_FIELD_ARRAY_NAME]: [{}],
   skalGradere: false,
 });

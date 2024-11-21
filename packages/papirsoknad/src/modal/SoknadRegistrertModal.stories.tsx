@@ -4,7 +4,6 @@ import { Meta, StoryObj } from '@storybook/react';
 import { SoknadRegistrertModal } from './SoknadRegistrertModal';
 
 const meta = {
-  title: 'papirsoknad/modal/SoknadRegistrertModal',
   component: SoknadRegistrertModal,
   decorators: [withRouter],
 } satisfies Meta<typeof SoknadRegistrertModal>;

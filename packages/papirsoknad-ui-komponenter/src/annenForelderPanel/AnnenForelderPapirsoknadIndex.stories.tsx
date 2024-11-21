@@ -15,17 +15,21 @@ const meta = {
   args: {
     readOnly: false,
     alleKodeverk: alleKodeverk as any,
-    permisjonRettigheterPanel: <div>Dummy for panel Permisjon-rettigheter</div>,
     fagsakPersonnummer: '07078518434',
   },
   parameters: {
     submitCallback: action('onSubmit'),
   },
   render: function Render(args, { parameters: { submitCallback } }) {
-    const formMethods = useForm();
+    const formMethods = useForm({
+      defaultValues: AnnenForelderPapirsoknadIndex.initialValues(),
+    });
 
     return (
-      <Form formMethods={formMethods} onSubmit={submitCallback}>
+      <Form
+        formMethods={formMethods}
+        onSubmit={values => submitCallback(AnnenForelderPapirsoknadIndex.transformValues(values))}
+      >
         <VStack gap="10">
           <AnnenForelderPapirsoknadIndex {...args} />
           <Button size="small" variant="primary">
@@ -39,4 +43,14 @@ const meta = {
 
 export default meta;
 
-export const Default: StoryObj<typeof meta> = {};
+export const SokerErMor: StoryObj<typeof meta> = {
+  args: {
+    sokerErMor: true,
+  },
+};
+
+export const SokerErFar: StoryObj<typeof meta> = {
+  args: {
+    sokerErMor: false,
+  },
+};

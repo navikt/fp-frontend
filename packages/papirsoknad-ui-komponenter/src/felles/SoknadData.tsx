@@ -9,7 +9,7 @@ export class SoknadData {
 
   foreldreType: string;
 
-  constructor(selectedFagsakYtelseType: string, selectedFamilieHendelseType: any, selectedForeldreType: string) {
+  constructor(selectedFagsakYtelseType: string, selectedFamilieHendelseType: string, selectedForeldreType: string) {
     this.fagsakYtelseType = notNull(selectedFagsakYtelseType);
     if (selectedFagsakYtelseType === FagsakYtelseType.SVANGERSKAPSPENGER) {
       this.familieHendelseType = FamilieHendelseType.FODSEL;

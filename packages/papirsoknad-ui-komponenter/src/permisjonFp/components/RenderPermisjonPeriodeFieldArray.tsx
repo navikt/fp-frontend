@@ -1,5 +1,5 @@
 import React, { ReactElement, useEffect } from 'react';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { UseFormGetValues, useFieldArray, useFormContext } from 'react-hook-form';
 import { Label, Alert, Button } from '@navikt/ds-react';
@@ -60,7 +60,7 @@ export const PERIODS_WITH_NO_MORS_AKTIVITET = [
 const getLabel = (erForsteRad: boolean, text: string): string => (erForsteRad ? text : '');
 
 const erPeriodeFormFør01012019 = (periodeFom: string | undefined): boolean =>
-  !!periodeFom && moment(periodeFom, ISO_DATE_FORMAT).isBefore(moment('2019-01-01'));
+  !!periodeFom && dayjs(periodeFom, ISO_DATE_FORMAT).isBefore(dayjs('2019-01-01'));
 
 export type FormValues = {
   periodeType: string;

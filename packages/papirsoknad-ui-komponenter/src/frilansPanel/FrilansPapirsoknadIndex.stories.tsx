@@ -1,13 +1,11 @@
 import React from 'react';
+import { useForm } from 'react-hook-form';
 import { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { useForm } from 'react-hook-form';
 import { Button, VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 
-import { FormValues } from './components/FrilansPanel';
 import { FrilansPapirsoknadIndex } from './FrilansPapirsoknadIndex';
-import { FRILANS_NAME_PREFIX } from './components/FrilansOppdragForFamilieFieldArray';
 
 const meta = {
   title: 'papirsoknad/ui-komponenter/frilans',
@@ -20,15 +18,13 @@ const meta = {
   },
   render: function Render(args, { parameters: { submitCallback } }) {
     const formMethods = useForm({
-      defaultValues: { [FRILANS_NAME_PREFIX]: FrilansPapirsoknadIndex.buildInitialValues() },
+      defaultValues: FrilansPapirsoknadIndex.initialValues(),
     });
 
     return (
       <Form
         formMethods={formMethods}
-        onSubmit={(values: { [FRILANS_NAME_PREFIX]: FormValues }) =>
-          submitCallback({ [FRILANS_NAME_PREFIX]: FrilansPapirsoknadIndex.transformValues(values.frilans) })
-        }
+        onSubmit={values => submitCallback(FrilansPapirsoknadIndex.transformValues(values))}
       >
         <VStack gap="10">
           <FrilansPapirsoknadIndex {...args} />

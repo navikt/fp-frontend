@@ -60,7 +60,7 @@ export const PermisjonUtsettelsePanel = ({ readOnly, alleKodeverk }: Props) => {
   );
 };
 
-PermisjonUtsettelsePanel.buildInitialValues = () => ({
+PermisjonUtsettelsePanel.initialValues = () => ({
   [UTSETTELSE_PERIODE_FIELD_ARRAY_NAME]: [{}],
   skalUtsette: false,
 });

@@ -4,13 +4,13 @@ import userEvent from '@testing-library/user-event';
 
 import * as stories from './AnnenForelderPapirsoknadIndex.stories';
 
-const { Default } = composeStories(stories);
+const { SokerErMor } = composeStories(stories);
 
 describe('<AnnenForelderPapirsoknadIndex>', () => {
   it('skal validere fødselsnummer', async () => {
     const lagre = vi.fn();
 
-    await Default.run({
+    await SokerErMor.run({
       parameters: {
         submitCallback: lagre,
       },
@@ -19,7 +19,7 @@ describe('<AnnenForelderPapirsoknadIndex>', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    expect(await screen.findByText('Feltet må fylles ut')).toBeInTheDocument();
+    expect(screen.getAllByText('Feltet må fylles ut')).toHaveLength(2);
 
     const fødselsnummer = screen.getByLabelText('Fødselsnummer/D-nummer');
     await userEvent.type(fødselsnummer, '03');
@@ -29,6 +29,7 @@ describe('<AnnenForelderPapirsoknadIndex>', () => {
     expect(await screen.findByText('Feltet må være et fødselsnummer (11 siffer)')).toBeInTheDocument();
 
     await userEvent.type(fødselsnummer, '232334232');
+    await userEvent.click(screen.getByText('Ja'));
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
@@ -48,19 +49,23 @@ describe('<AnnenForelderPapirsoknadIndex>', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, {
+    await waitFor(() => expect(lagre).toHaveBeenCalledOnce());
+    expect(lagre).toHaveBeenCalledWith({
       annenForelder: {
         foedselsnummer: '30013726678',
-        kanIkkeOppgiAnnenForelder: undefined,
+        kanIkkeOppgiAnnenForelder: false,
+        sokerHarAleneomsorg: true,
+        annenForelderRettEØS: undefined,
+        morMottarUføretrygd: undefined,
+        denAndreForelderenHarRettPaForeldrepenger: undefined,
       },
     });
   });
 
-  it('skal ikke kunne oppgi annen forelder', async () => {
+  it('skal håndtere "Kan ikke oppgi annen forelder"', async () => {
     const lagre = vi.fn();
 
-    await Default.run({
+    await SokerErMor.run({
       parameters: {
         submitCallback: lagre,
       },
@@ -76,10 +81,11 @@ describe('<AnnenForelderPapirsoknadIndex>', () => {
     const fødselsnummer = screen.getByLabelText('Utenlandsk fødselsnummer');
     await userEvent.type(fødselsnummer, '032323');
 
+    await userEvent.click(screen.getByText('Ja'));
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, {
+    await waitFor(() => expect(lagre).toHaveBeenCalledOnce());
+    expect(lagre).toHaveBeenCalledWith({
       annenForelder: {
         foedselsnummer: undefined,
         kanIkkeOppgiAnnenForelder: true,
@@ -88,6 +94,7 @@ describe('<AnnenForelderPapirsoknadIndex>', () => {
           land: 'AND',
           utenlandskFoedselsnummer: '032323',
         },
+        sokerHarAleneomsorg: true,
       },
     });
   });

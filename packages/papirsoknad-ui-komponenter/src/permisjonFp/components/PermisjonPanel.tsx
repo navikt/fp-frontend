@@ -42,11 +42,11 @@ type TidsromPermisjon = {
   FormValuesGradering &
   VirtuellFeilType;
 
-export type FormValues = {
+export type PermisjonFormValues = {
   [TIDSROM_PERMISJON_FORM_NAME_PREFIX]?: TidsromPermisjon;
 };
 
-const getIsRequired = (getValues: UseFormGetValues<FormValues>) => {
+const getIsRequired = (getValues: UseFormGetValues<PermisjonFormValues>) => {
   const fulltUttak = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.fulltUttak`) || false;
   const skalGradere = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalGradere`) || false;
   const skalUtsette = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalUtsette`) || false;
@@ -69,7 +69,7 @@ interface Props {
 export const PermisjonPanel = ({ foreldreType, readOnly, alleKodeverk, erEndringssøknad }: Props) => {
   const intl = useIntl();
 
-  const { watch, setError, clearErrors, getValues, formState } = useFormContext<FormValues>();
+  const { watch, setError, clearErrors, getValues, formState } = useFormContext<PermisjonFormValues>();
   const fulltUttak = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.fulltUttak`) || false;
 
   const isError = getIsRequired(getValues);
@@ -132,7 +132,7 @@ export const PermisjonPanel = ({ foreldreType, readOnly, alleKodeverk, erEndring
   );
 };
 
-PermisjonPanel.transformValues = (values: FormValues) => {
+PermisjonPanel.transformValues = (values: PermisjonFormValues) => {
   const permisjonValues = values[TIDSROM_PERMISJON_FORM_NAME_PREFIX]!;
   const newValues = permisjonValues;
   const permisjonsdata = permisjonValues[PERMISJON_PERIODE_FIELD_ARRAY_NAME];
@@ -163,12 +163,12 @@ PermisjonPanel.transformValues = (values: FormValues) => {
   return newValues;
 };
 
-PermisjonPanel.buildInitialValues = (): any => ({
+PermisjonPanel.initialValues = (): any => ({
   [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: {
-    ...PermisjonUtsettelsePanel.buildInitialValues(),
-    ...PermisjonGraderingPanel.buildInitialValues(),
-    ...PermisjonOverforingAvKvoterPanel.buildInitialValues(),
-    ...PermisjonOppholdPanel.buildInitialValues(),
+    ...PermisjonUtsettelsePanel.initialValues(),
+    ...PermisjonGraderingPanel.initialValues(),
+    ...PermisjonOverforingAvKvoterPanel.initialValues(),
+    ...PermisjonOppholdPanel.initialValues(),
     [PERMISJON_PERIODE_FIELD_ARRAY_NAME]: [{}],
     fulltUttak: false,
   },

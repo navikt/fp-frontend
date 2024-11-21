@@ -39,11 +39,13 @@ describe('<OmsorgOgAdopsjonPapirsoknadIndex>', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, {
-      antallBarn: 1,
-      foedselsDato: ['2022-05-27'],
-      omsorgsovertakelsesdato: '2022-05-30',
+    await waitFor(() => expect(lagre).toHaveBeenCalledOnce());
+    expect(lagre).toHaveBeenCalledWith({
+      omsorg: {
+        antallBarn: 1,
+        foedselsDato: ['2022-05-27'],
+        omsorgsovertakelsesdato: '2022-05-30',
+      },
     });
   });
 
@@ -75,11 +77,13 @@ describe('<OmsorgOgAdopsjonPapirsoknadIndex>', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, {
-      antallBarn: 2,
-      foedselsDato: ['2022-05-27', '2022-05-26'],
-      omsorgsovertakelsesdato: '2022-05-30',
+    await waitFor(() => expect(lagre).toHaveBeenCalledOnce());
+    expect(lagre).toHaveBeenCalledWith({
+      omsorg: {
+        antallBarn: 2,
+        foedselsDato: ['2022-05-27', '2022-05-26'],
+        omsorgsovertakelsesdato: '2022-05-30',
+      },
     });
   });
 
@@ -123,12 +127,14 @@ describe('<OmsorgOgAdopsjonPapirsoknadIndex>', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, {
-      ankomstdato: '2022-05-22',
-      antallBarn: 2,
-      foedselsDato: ['2022-05-27', '2022-05-26'],
-      omsorgsovertakelsesdato: '2022-05-30',
+    await waitFor(() => expect(lagre).toHaveBeenCalledOnce());
+    expect(lagre).toHaveBeenCalledWith({
+      omsorg: {
+        ankomstdato: '2022-05-22',
+        antallBarn: 2,
+        foedselsDato: ['2022-05-27', '2022-05-26'],
+        omsorgsovertakelsesdato: '2022-05-30',
+      },
     });
   });
 });

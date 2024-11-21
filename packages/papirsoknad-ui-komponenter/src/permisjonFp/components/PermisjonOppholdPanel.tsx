@@ -53,7 +53,7 @@ export const PermisjonOppholdPanel = ({ readOnly, alleKodeverk }: Props) => {
   );
 };
 
-PermisjonOppholdPanel.buildInitialValues = () => ({
+PermisjonOppholdPanel.initialValues = () => ({
   [OPPHOLD_PERIODE_FIELD_ARRAY_NAME]: [{}],
   skalHaOpphold: false,
 });

@@ -7,7 +7,7 @@ import { Form } from '@navikt/ft-form-hooks';
 
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
-import { FormValues } from './components/OppholdINorgePanel';
+import { OppholdINorgeFormValues } from './components/OppholdINorgePanel';
 import { OppholdINorgePapirsoknadIndex } from './OppholdINorgePapirsoknadIndex';
 
 const meta = {
@@ -23,13 +23,15 @@ const meta = {
   },
   render: function Render(args, { parameters: { submitCallback } }) {
     const formMethods = useForm({
-      defaultValues: OppholdINorgePapirsoknadIndex.buildInitialValues(),
+      defaultValues: OppholdINorgePapirsoknadIndex.initialValues(),
     });
 
     return (
       <Form
         formMethods={formMethods}
-        onSubmit={(values: FormValues) => submitCallback(OppholdINorgePapirsoknadIndex.transformValues(values))}
+        onSubmit={(values: OppholdINorgeFormValues) =>
+          submitCallback(OppholdINorgePapirsoknadIndex.transformValues(values))
+        }
       >
         <VStack gap="10">
           <OppholdINorgePapirsoknadIndex {...args} />

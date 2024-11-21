@@ -1,5 +1,5 @@
 import React, { ReactElement, useEffect } from 'react';
-import moment from 'moment/moment';
+import dayjs from 'dayjs';
 import { UseFormGetValues, useFieldArray, useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Alert, Label } from '@navikt/ds-react';
@@ -187,7 +187,7 @@ export const RenderGraderingPeriodeFieldArray = ({ graderingKvoter, readOnly, ar
     >
       {(field, index, getRemoveButton) => {
         const { harSamtidigUttak, periodeFom } = graderingValues[index];
-        const periodeFomForTidlig = periodeFom && moment(periodeFom, ISO_DATE_FORMAT).isBefore(moment('2019-01-01'));
+        const periodeFomForTidlig = periodeFom && dayjs(periodeFom, ISO_DATE_FORMAT).isBefore(dayjs('2019-01-01'));
         const namePart1 = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}.${index}`;
         return (
           <div key={field.id} className={index !== fields.length - 1 ? styles.notLastRow : ''}>

@@ -42,3 +42,6 @@ export const DekningsgradIndex = ({ readOnly }: Props) => (
     />
   </BorderBox>
 );
+
+DekningsgradIndex.initialValues = () => ({ dekningsgrad: undefined });
+DekningsgradIndex.transformValues = ({ dekningsgrad }: FormValues) => ({ dekningsgrad });

@@ -15,7 +15,7 @@ interface Props {
   fodselsdato?: string | string[];
 }
 
-const OmsorgOgAdopsjonPapirsoknadIndex = ({
+export const OmsorgOgAdopsjonPapirsoknadIndex = ({
   readOnly,
   familieHendelseType,
   isForeldrepengerFagsak,
@@ -31,6 +31,5 @@ const OmsorgOgAdopsjonPapirsoknadIndex = ({
   </RawIntlProvider>
 );
 
+OmsorgOgAdopsjonPapirsoknadIndex.initialValues = OmsorgOgAdopsjonPanel.initialValues;
 OmsorgOgAdopsjonPapirsoknadIndex.transformValues = OmsorgOgAdopsjonPanel.transformValues;
-
-export default OmsorgOgAdopsjonPapirsoknadIndex;

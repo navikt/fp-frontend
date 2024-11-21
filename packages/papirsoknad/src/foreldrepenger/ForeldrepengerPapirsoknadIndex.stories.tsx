@@ -10,7 +10,6 @@ import { ForeldrepengerPapirsoknadIndex } from './ForeldrepengerPapirsoknadIndex
 import messages from '../../i18n/nb_NO.json';
 
 const meta = {
-  title: 'papirsoknad/foreldrepenger',
   component: ForeldrepengerPapirsoknadIndex,
   decorators: [withRouter, getIntlDecorator(messages)],
   args: {

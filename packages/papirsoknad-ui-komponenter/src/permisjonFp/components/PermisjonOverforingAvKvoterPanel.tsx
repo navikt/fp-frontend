@@ -90,7 +90,7 @@ export const PermisjonOverforingAvKvoterPanel = ({ foreldreType, alleKodeverk, r
   );
 };
 
-PermisjonOverforingAvKvoterPanel.buildInitialValues = () => ({
+PermisjonOverforingAvKvoterPanel.initialValues = () => ({
   skalOvertaKvote: false,
   overforingsperioder: [{}],
 });

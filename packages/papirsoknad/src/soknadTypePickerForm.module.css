@@ -1,12 +1,3 @@
 .container {
-  background-color: var(--a-gray-100);
-}
-
-.colWidth {
-  width: 33%;
-}
-
-.pushRight {
-  margin-right: 100px;
-  text-align: right;
+  background-color: --bg-subtle;
 }

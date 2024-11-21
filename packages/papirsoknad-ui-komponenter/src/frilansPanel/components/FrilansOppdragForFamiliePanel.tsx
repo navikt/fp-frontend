@@ -1,67 +1,55 @@
 import React from 'react';
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 import { Label } from '@navikt/ds-react';
-import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { RadioGroupPanel } from '@navikt/ft-form-hooks';
-import { required } from '@navikt/ft-form-validators';
+import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
-import { useFormContext } from 'react-hook-form';
-import {
-  FrilansOppdragForFamilieFieldArray,
-  FRILANS_NAME_PREFIX,
-  defaultFrilansPeriode,
-  FormValues as FieldArrayFormValues,
-} from './FrilansOppdragForFamilieFieldArray';
-
-export type FormValues = {
-  harHattOppdragForFamilie?: boolean;
-} & FieldArrayFormValues;
+import { FrilansOppdragForFamilieFieldArray } from './FrilansOppdragForFamilieFieldArray';
+import { FrilansFormValues, FrilansSubFormValues } from '../types';
+import { TrueFalseInput } from '../../felles/TrueFalseInput';
+import { FRILANS_NAME_PREFIX } from '../constants';
 
 interface Props {
   readOnly: boolean;
 }
 
 export const FrilansOppdragForFamiliePanel = ({ readOnly }: Props) => {
-  const { watch } = useFormContext<{ [FRILANS_NAME_PREFIX]: FormValues }>();
+  const { watch } = useFormContext<FrilansFormValues>();
   const harHattOppdragForFamilie = watch(`${FRILANS_NAME_PREFIX}.harHattOppdragForFamilie`);
 
   return (
     <>
-      <RadioGroupPanel
+      <TrueFalseInput
         name={`${FRILANS_NAME_PREFIX}.harHattOppdragForFamilie`}
         label={<FormattedMessage id="Registrering.FrilansOppdrag.HarHattOppdragForFamilie" />}
-        validate={[required]}
-        isReadOnly={readOnly}
-        isHorizontal
-        isTrueOrFalseSelection
-        radios={[
-          {
-            label: <FormattedMessage id="Registrering.FrilansOppdrag.Yes" />,
-            value: 'true',
-          },
-          {
-            label: <FormattedMessage id="Registrering.FrilansOppdrag.No" />,
-            value: 'false',
-          },
-        ]}
+        readOnly={readOnly}
       />
       {harHattOppdragForFamilie && (
-        <>
-          <VerticalSpacer eightPx />
-          <ArrowBox>
-            <Label size="small">
-              <FormattedMessage id="Registrering.FrilansOppdrag.OppgiPeriode" />
-            </Label>
-            <VerticalSpacer fourPx />
-            <FrilansOppdragForFamilieFieldArray readOnly={readOnly} />
-          </ArrowBox>
-        </>
+        <ArrowBox>
+          <Label size="small">
+            <FormattedMessage id="Registrering.FrilansOppdrag.OppgiPeriode" />
+          </Label>
+          <FrilansOppdragForFamilieFieldArray readOnly={readOnly} />
+        </ArrowBox>
       )}
     </>
   );
 };
 
-FrilansOppdragForFamiliePanel.buildInitialValues = (): FormValues => ({
-  oppdragPerioder: [defaultFrilansPeriode],
-  perioder: undefined,
+FrilansOppdragForFamiliePanel.initialValues = (): FrilansSubFormValues => ({
+  oppdragPerioder: [
+    {
+      fomDato: '',
+      tomDato: '',
+      oppdragsgiver: '',
+    },
+  ],
+});
+
+FrilansOppdragForFamiliePanel.transformValues = ({
+  harHattOppdragForFamilie,
+  oppdragPerioder,
+}: FrilansSubFormValues): FrilansSubFormValues => ({
+  harHattOppdragForFamilie,
+  oppdragPerioder: harHattOppdragForFamilie ? oppdragPerioder : undefined,
 });

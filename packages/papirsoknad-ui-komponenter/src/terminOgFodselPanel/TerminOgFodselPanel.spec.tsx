@@ -4,11 +4,11 @@ import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 
-import * as stories from './FodselPapirsoknadIndex.stories';
+import * as stories from './TerminOgFodselPanel.stories';
 
 const { ForeldrepengeSak, ErIkkeForeldrepengeSak } = composeStories(stories);
 
-describe('<FodselPapirsoknadIndex>', () => {
+describe('<TerminOgFodselPanel>', () => {
   it('skal velge at barnet er født for foreldrepengersak', async () => {
     const lagre = vi.fn();
 
@@ -32,7 +32,7 @@ describe('<FodselPapirsoknadIndex>', () => {
 
     expect(await screen.findAllByText('Feltet må fylles ut')).toHaveLength(2);
 
-    const fødtInput = screen.getByLabelText('Når ble barnet født?');
+    const fødtInput = screen.getByLabelText('Fødselsdato');
     await userEvent.type(fødtInput, dayjs().subtract(10, 'day').format(DDMMYYYY_DATE_FORMAT));
     fireEvent.blur(fødtInput);
     await userEvent.type(screen.getByLabelText('Antall barn'), '2');
@@ -40,7 +40,7 @@ describe('<FodselPapirsoknadIndex>', () => {
     expect(screen.getByText('Rett til prematuruker vil kun sjekkes når du også oppgir termindato')).toBeInTheDocument();
 
     const termindatoInput = screen.getByLabelText('Termindato');
-    await userEvent.type(termindatoInput, '14.09.2022');
+    await userEvent.type(termindatoInput, dayjs().subtract(15, 'day').format(DDMMYYYY_DATE_FORMAT));
     fireEvent.blur(termindatoInput);
 
     expect(screen.queryByText('Utstedt dato fra terminbekreftelsen')).not.toBeInTheDocument();
@@ -49,10 +49,10 @@ describe('<FodselPapirsoknadIndex>', () => {
 
     expect(lagre).toHaveBeenCalledOnce();
     expect(lagre).toHaveBeenCalledWith({
-      antallBarn: '2',
+      antallBarn: 2,
       erBarnetFodt: true,
       foedselsDato: dayjs().subtract(10, 'day').format(ISO_DATE_FORMAT),
-      termindato: '2022-09-14',
+      termindato: dayjs().subtract(15, 'day').format(ISO_DATE_FORMAT),
     });
   });
 
@@ -68,7 +68,7 @@ describe('<FodselPapirsoknadIndex>', () => {
 
     await userEvent.click(screen.getByText('Ja'));
 
-    await userEvent.type(screen.getByLabelText('Når ble barnet født?'), '14.09.2022');
+    await userEvent.type(screen.getByLabelText('Fødselsdato'), '14.09.2022');
 
     expect(
       screen.queryByText('Rett til prematuruker vil kun sjekkes når du også oppgir termindato'),
@@ -84,7 +84,7 @@ describe('<FodselPapirsoknadIndex>', () => {
 
     expect(lagre).toHaveBeenCalledOnce();
     expect(lagre).toHaveBeenCalledWith({
-      antallBarn: '1',
+      antallBarn: 1,
       erBarnetFodt: true,
       foedselsDato: '2022-09-14',
       termindato: '2022-09-13',
@@ -133,7 +133,7 @@ describe('<FodselPapirsoknadIndex>', () => {
 
     expect(lagre).toHaveBeenCalledOnce();
     expect(lagre).toHaveBeenCalledWith({
-      antallBarnFraTerminbekreftelse: '2',
+      antallBarnFraTerminbekreftelse: 2,
       erBarnetFodt: false,
       terminbekreftelseDato: '2022-05-27',
       termindato: '2022-09-13',

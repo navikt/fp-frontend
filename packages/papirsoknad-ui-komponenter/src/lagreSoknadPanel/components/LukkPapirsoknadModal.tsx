@@ -2,10 +2,7 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 import { Link } from 'react-router-dom';
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
-import { Label, BodyShort, Button, Modal } from '@navikt/ds-react';
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-
-import styles from './lukkPapirsoknadModal.module.css';
+import { BodyShort, Button, Modal, HStack, Heading } from '@navikt/ds-react';
 
 interface Props {
   showModal: boolean;
@@ -27,30 +24,30 @@ export const LukkPapirsoknadModal = ({ showModal, handleSubmit, cancelEvent }: P
       aria-label={intl.formatMessage({ id: 'ModalLukkPapirSoknad.ModalDescription' })}
       onClose={cancelEvent}
     >
+      <Modal.Header>
+        <HStack gap="4">
+          <ExclamationmarkTriangleFillIcon
+            color="var(--a-orange-500)"
+            width={35}
+            height={35}
+            title={intl.formatMessage({ id: 'ModalLukkPapirSoknad.Avslutt' })}
+          />
+          <Heading size="medium" id="modal-heading">
+            {intl.formatMessage({ id: 'ModalLukkPapirSoknad.Title' })}
+          </Heading>
+        </HStack>
+      </Modal.Header>
       <Modal.Body>
-        <FlexContainer>
-          <FlexRow>
-            <FlexColumn>
-              <ExclamationmarkTriangleFillIcon
-                className={styles.image}
-                title={intl.formatMessage({ id: 'ModalLukkPapirSoknad.Avslutt' })}
-              />
-            </FlexColumn>
-            <FlexColumn>
-              <Label size="small">{intl.formatMessage({ id: 'ModalLukkPapirSoknad.AvslutterRegistrering' })}</Label>
-              <VerticalSpacer fourPx />
-              <BodyShort size="small">{intl.formatMessage({ id: 'ModalLukkPapirSoknad.BekreftAvslag' })}</BodyShort>
-            </FlexColumn>
-          </FlexRow>
-        </FlexContainer>
+        <BodyShort weight="semibold">{intl.formatMessage({ id: 'ModalLukkPapirSoknad.Opplysninger' })}</BodyShort>
+        <BodyShort>{intl.formatMessage({ id: 'ModalLukkPapirSoknad.Bekreft' })}</BodyShort>
       </Modal.Body>
       <Modal.Footer>
         <Link to="/">
-          <Button size="small" variant="primary" onClick={() => handleSubmit()} type="button">
+          <Button variant="primary" onClick={() => handleSubmit()} type="button">
             {intl.formatMessage({ id: 'ModalLukkPapirSoknad.Ok' })}
           </Button>
         </Link>
-        <Button size="small" variant="secondary" onClick={cancelEvent} type="button">
+        <Button variant="secondary" onClick={cancelEvent} type="button">
           {intl.formatMessage({ id: 'ModalLukkPapirSoknad.Avbryt' })}
         </Button>
       </Modal.Footer>

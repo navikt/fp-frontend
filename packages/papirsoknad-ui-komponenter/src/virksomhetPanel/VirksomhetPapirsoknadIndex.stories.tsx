@@ -20,10 +20,13 @@ const meta = {
     alleKodeverk: alleKodeverk as any,
   },
   render: function Render(args, { parameters: { submitCallback } }) {
-    const formMethods = useForm();
+    const formMethods = useForm({ defaultValues: VirksomhetPapirsoknadIndex.initialValues() });
 
     return (
-      <Form formMethods={formMethods} onSubmit={submitCallback}>
+      <Form
+        formMethods={formMethods}
+        onSubmit={values => submitCallback(VirksomhetPapirsoknadIndex.transformValues(values))}
+      >
         <VStack gap="10">
           <VirksomhetPapirsoknadIndex {...args} />
           <Button size="small" variant="primary">

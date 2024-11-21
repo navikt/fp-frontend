@@ -16,9 +16,8 @@ describe('<InntektsgivendeArbeidPapirsoknadIndex>', () => {
       },
     });
 
-    expect(await screen.findByText('Inntektsgivende arbeid i Norge')).toBeInTheDocument();
+    expect(await screen.findByText('Inntektsgivende arbeid i utlandet')).toBeInTheDocument();
     expect(screen.getByText(/Vedtaksløsningen foretar oppslag av norske arbeidsforhold /)).toBeInTheDocument();
-    expect(screen.getByText('Inntektsgivende arbeid i utlandet')).toBeInTheDocument();
 
     const arbeidsgiverInput = screen.getByLabelText('Arbeidsgiver');
     await userEvent.type(arbeidsgiverInput, 'test-arbeidsgiver');

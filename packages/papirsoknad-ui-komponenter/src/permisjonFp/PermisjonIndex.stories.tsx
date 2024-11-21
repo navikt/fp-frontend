@@ -10,7 +10,7 @@ import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { ForeldreType } from '@navikt/fp-kodeverk';
 
 import { PermisjonIndex } from './PermisjonIndex';
-import { TIDSROM_PERMISJON_FORM_NAME_PREFIX, FormValues } from './components/PermisjonPanel';
+import { TIDSROM_PERMISJON_FORM_NAME_PREFIX, PermisjonFormValues } from './components/PermisjonPanel';
 
 const meta = {
   title: 'papirsoknad/ui-komponenter/permisjon',
@@ -24,13 +24,13 @@ const meta = {
   },
   render: function Render(args, { parameters: { submitCallback } }) {
     const formMethods = useForm({
-      defaultValues: PermisjonIndex.buildInitialValues(),
+      defaultValues: PermisjonIndex.initialValues(),
     });
 
     return (
       <Form
         formMethods={formMethods}
-        onSubmit={(values: FormValues) =>
+        onSubmit={(values: PermisjonFormValues) =>
           submitCallback({ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: PermisjonIndex.transformValues(values) })
         }
       >

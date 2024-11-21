@@ -10,7 +10,6 @@ import { SvangerskapspengerPapirsoknadIndex } from './SvangerskapspengerPapirsok
 import messages from '../../i18n/nb_NO.json';
 
 const meta = {
-  title: 'papirsoknad/svangerskapspenger',
   component: SvangerskapspengerPapirsoknadIndex,
   decorators: [withRouter, getIntlDecorator(messages)],
   args: {
@@ -34,12 +33,6 @@ type Story = StoryObj<typeof meta>;
 export const ForMorVedFødsel: Story = {
   args: {
     soknadData: new SoknadData(FagsakYtelseType.SVANGERSKAPSPENGER, FamilieHendelseType.FODSEL, ForeldreType.MOR),
-  },
-};
-
-export const ForMorVedAdopsjon: Story = {
-  args: {
-    soknadData: new SoknadData(FagsakYtelseType.SVANGERSKAPSPENGER, FamilieHendelseType.ADOPSJON, ForeldreType.MOR),
   },
 };
 

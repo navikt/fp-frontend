@@ -1,7 +1,8 @@
 import React, { ReactElement } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Datepicker, InputField, RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
-import { ArrowBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { useFormContext } from 'react-hook-form';
+import { Datepicker, InputField, SelectField } from '@navikt/ft-form-hooks';
+import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import {
   dateBeforeOrEqualToToday,
   hasValidDate,
@@ -13,8 +14,11 @@ import {
 import { KodeverkType } from '@navikt/fp-kodeverk';
 import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
-import { useFormContext } from 'react-hook-form';
+import { TrueFalseInput } from '../../felles/TrueFalseInput';
+import { VIRKSOMHET_FORM_NAME_PREFIX } from '../constants';
+import { VirksomhetFormValues } from '../types';
 import styles from './virksomhetIdentifikasjonPanel.module.css';
+import { HStack, VStack } from '@navikt/ds-react';
 
 const countrySelectValues = (countryCodes: KodeverkMedNavn[]): ReactElement[] =>
   countryCodes.map(({ kode, navn }) => (
@@ -24,18 +28,10 @@ const countrySelectValues = (countryCodes: KodeverkMedNavn[]): ReactElement[] =>
   ));
 
 interface Props {
-  readOnly?: boolean;
+  readOnly: boolean;
   alleKodeverk: AlleKodeverk;
+  index: number;
 }
-
-export type FormValues = {
-  fom?: string;
-  tom?: string;
-  navn?: string;
-  virksomhetRegistrertINorge?: boolean;
-  organisasjonsnummer?: string;
-  landJobberFra?: string;
-};
 
 /**
  * VirksomhetIdentifikasjonPanel
@@ -43,101 +39,63 @@ export type FormValues = {
  * Komponenten vises som del av skjermbildet for registrering av
  * papirsøknad dersom søknad gjelder foreldrepenger og saksbehandler skal legge til ny virksomhet for søker.
  */
-export const VirksomhetIdentifikasjonPanel = ({ readOnly = true, alleKodeverk }: Props) => {
+export const VirksomhetIdentifikasjonPanel = ({ index, readOnly, alleKodeverk }: Props) => {
   const intl = useIntl();
   const sortedCountriesByName = alleKodeverk[KodeverkType.LANDKODER]
     .slice()
     .sort((a, b) => a.navn.localeCompare(b.navn));
 
-  const { watch, getValues } = useFormContext<FormValues>();
-
-  const virksomhetRegistrertINorge = watch('virksomhetRegistrertINorge');
+  const { getValues } = useFormContext<VirksomhetFormValues>();
 
   return (
-    <>
-      <InputField
-        name="navn"
-        validate={[required]}
-        label={<FormattedMessage id="Registrering.VirksomhetIdentifikasjonPanel.Name" />}
-        className={styles.navnBredde}
-        readOnly={readOnly}
-      />
-      <VerticalSpacer sixteenPx />
-      <RadioGroupPanel
-        name="virksomhetRegistrertINorge"
-        label={<FormattedMessage id="Registrering.VirksomhetIdentifikasjonPanel.RegisteredInNorway" />}
-        validate={[required]}
-        isReadOnly={readOnly}
-        isTrueOrFalseSelection
-        isHorizontal
-        radios={[
-          {
-            label: intl.formatMessage({ id: 'Registrering.VirksomhetIdentifikasjonPanel.Yes' }),
-            value: 'true',
-          },
-          {
-            label: intl.formatMessage({ id: 'Registrering.VirksomhetIdentifikasjonPanel.No' }),
-            value: 'false',
-          },
-        ]}
-      />
-      {virksomhetRegistrertINorge && (
-        <>
-          <VerticalSpacer eightPx />
-          <div className={styles.orgNrBredde}>
-            <ArrowBox>
-              <InputField
-                name="organisasjonsnummer"
-                readOnly={readOnly}
-                validate={[required, hasValidInteger, hasValidOrgNumber]}
-                label={<FormattedMessage id="Registrering.VirksomhetIdentifikasjonPanel.OrganizationNumber" />}
-              />
-            </ArrowBox>
-          </div>
-          <VerticalSpacer sixteenPx />
-        </>
-      )}
-      {!virksomhetRegistrertINorge && virksomhetRegistrertINorge !== undefined && (
-        <>
-          <VerticalSpacer eightPx />
-          <ArrowBox alignOffset={57}>
+    <TrueFalseInput
+      name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.virksomhetRegistrertINorge`}
+      label={<FormattedMessage id="Registrering.VirksomhetIdentifikasjonPanel.RegisteredInNorway" />}
+      readOnly={readOnly}
+      trueContent={
+        <ArrowBox marginTop={8}>
+          <InputField
+            name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.organisasjonsnummer`}
+            readOnly={readOnly}
+            validate={[required, hasValidInteger, hasValidOrgNumber]}
+            label={<FormattedMessage id="Registrering.VirksomhetIdentifikasjonPanel.OrganizationNumber" />}
+          />
+        </ArrowBox>
+      }
+      falseContent={
+        <ArrowBox marginTop={8}>
+          <VStack gap="4">
             <SelectField
-              name="landJobberFra"
+              name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.landJobberFra`}
               className={styles.landBredde}
               selectValues={countrySelectValues(sortedCountriesByName)}
               validate={[required]}
               label={intl.formatMessage({ id: 'Registrering.VirksomhetIdentifikasjonPanel.Country' })}
             />
-            <VerticalSpacer sixteenPx />
-            <FlexContainer>
-              <FlexRow>
-                <FlexColumn>
-                  <Datepicker
-                    isReadOnly={readOnly}
-                    validate={[required, hasValidDate, dateBeforeOrEqualToToday]}
-                    name="fom"
-                    label={intl.formatMessage({ id: 'Registrering.VirksomhetIdentifikasjonPanel.periodeFom' })}
-                  />
-                </FlexColumn>
-                <FlexColumn>
-                  <Datepicker
-                    isReadOnly={readOnly}
-                    validate={[
-                      hasValidDate,
-                      tomDato => {
-                        const fom = getValues('fom');
-                        return fom ? validPeriodeFomTom(fom, tomDato) : null;
-                      },
-                    ]}
-                    name="tom"
-                    label={intl.formatMessage({ id: 'Registrering.VirksomhetIdentifikasjonPanel.periodeTom' })}
-                  />
-                </FlexColumn>
-              </FlexRow>
-            </FlexContainer>
-          </ArrowBox>
-        </>
-      )}
-    </>
+
+            <HStack gap="4">
+              <Datepicker
+                isReadOnly={readOnly}
+                validate={[required, hasValidDate, dateBeforeOrEqualToToday]}
+                name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.fom`}
+                label={intl.formatMessage({ id: 'Registrering.VirksomhetIdentifikasjonPanel.periodeFom' })}
+              />
+              <Datepicker
+                isReadOnly={readOnly}
+                validate={[
+                  hasValidDate,
+                  tomDato => {
+                    const fom = getValues(`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.fom`);
+                    return fom ? validPeriodeFomTom(fom, tomDato) : null;
+                  },
+                ]}
+                name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.tom`}
+                label={intl.formatMessage({ id: 'Registrering.VirksomhetIdentifikasjonPanel.periodeTom' })}
+              />
+            </HStack>
+          </VStack>
+        </ArrowBox>
+      }
+    />
   );
 };

@@ -1,31 +1,51 @@
-import React, { useEffect } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
-import { ErrorMessage, Label } from '@navikt/ds-react';
-import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import React from 'react';
+import { FormattedMessage } from 'react-intl';
+import { Label, VStack } from '@navikt/ds-react';
+import { ArrowBox } from '@navikt/ft-ui-komponenter';
 import { hasValidDate, hasValidInteger, required, hasValidText } from '@navikt/ft-form-validators';
-import { CheckboxField, Datepicker, InputField, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
+import { CheckboxPanel, Datepicker, InputField, TextAreaField } from '@navikt/ft-form-hooks';
 
-import { useFormContext } from 'react-hook-form';
 import styles from './virksomhetStartetEndretPanel.module.css';
-
-type VirtuellFeilType = {
-  ingenArsakValgt?: boolean;
-};
-
-export type FormValues = {
-  varigEndretEllerStartetSisteFireAr?: boolean;
-  harVarigEndring?: boolean;
-  varigEndringGjeldendeFom?: string;
-  erNyoppstartet?: boolean;
-  erNyIArbeidslivet?: boolean;
-  nyIArbeidslivetFom?: string;
-  beskrivelseAvEndring?: string;
-  inntekt?: number;
-};
+import { StartedEndretFormValues } from '../types';
+import { VIRKSOMHET_FORM_NAME_PREFIX } from '../constants';
+import { TrueFalseInput } from '../../felles/TrueFalseInput';
 
 interface Props {
   readOnly: boolean;
+  index: number;
 }
+
+const aarsaker = ({ readOnly, index }: Props) => [
+  {
+    value: 'harVarigEndring',
+    label: <FormattedMessage id="Registrering.VirksomhetStartetPanel.HarVarigEndring" />,
+    element: (
+      <ArrowBox>
+        <Datepicker
+          name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.varigEndringGjeldendeFom`}
+          isReadOnly={readOnly}
+          validate={[hasValidDate, required]}
+          label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.GjeldendeFom" />}
+        />
+      </ArrowBox>
+    ),
+  },
+  { value: 'erNyoppstartet', label: <FormattedMessage id="Registrering.VirksomhetStartetPanel.ErNyoppstartet" /> },
+  {
+    value: 'erNyIArbeidslivet',
+    label: <FormattedMessage id="Registrering.VirksomhetStartetPanel.NyIArbeidslivet" />,
+    element: (
+      <ArrowBox>
+        <Datepicker
+          name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.nyIArbeidslivetFom`}
+          isReadOnly={readOnly}
+          validate={[hasValidDate, required]}
+          label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.GjeldendeFom" />}
+        />
+      </ArrowBox>
+    ),
+  },
+];
 
 /**
  * VirksomhetStartetEndretPanel
@@ -33,109 +53,64 @@ interface Props {
  * Komponenten vises som del av skjermbildet for registrering av
  * papirsøknad dersom søknad gjelder foreldrepenger og saksbehandler skal legge til ny virksomhet for søker.
  */
-export const VirksomhetStartetEndretPanel = ({ readOnly }: Props) => {
-  const intl = useIntl();
-  const { watch, setError, clearErrors, formState } = useFormContext<FormValues & VirtuellFeilType>();
-  const varigEndretEllerStartetSisteFireAr = watch('varigEndretEllerStartetSisteFireAr') || false;
-  const harVarigEndring = watch('harVarigEndring') || false;
-  const erNyoppstartet = watch('erNyoppstartet') || false;
-  const erNyIArbeidslivet = watch('erNyIArbeidslivet') || false;
-
-  const isError = !harVarigEndring && !erNyoppstartet && !erNyIArbeidslivet;
-
-  useEffect(() => {
-    if (isError && varigEndretEllerStartetSisteFireAr) {
-      setError('ingenArsakValgt', {
-        type: 'custom',
-        message: intl.formatMessage({ id: 'Registrering.VirksomhetStartetPanel.MaFylleUtEnArsak' }),
-      });
-    }
-    if (!isError || !varigEndretEllerStartetSisteFireAr) {
-      clearErrors('ingenArsakValgt');
-    }
-  }, [isError, varigEndretEllerStartetSisteFireAr]);
-
+export const VirksomhetStartetEndretPanel = ({ readOnly, index }: Props) => {
   return (
-    <>
-      <VerticalSpacer sixteenPx />
-      <RadioGroupPanel
-        name="varigEndretEllerStartetSisteFireAr"
-        label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.NewlyStartedOrChanged" />}
-        isReadOnly={readOnly}
-        isTrueOrFalseSelection
-        isHorizontal
-        radios={[
-          {
-            label: <FormattedMessage id="Registrering.VirksomhetStartetPanel.Yes" />,
-            value: 'true',
-          },
-          {
-            label: <FormattedMessage id="Registrering.VirksomhetStartetPanel.No" />,
-            value: 'false',
-          },
-        ]}
-      />
-      {varigEndretEllerStartetSisteFireAr && (
-        <div>
-          <VerticalSpacer eightPx />
-          <ArrowBox>
+    <TrueFalseInput
+      name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.varigEndretEllerStartetSisteFireAr`}
+      label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.NewlyStartedOrChanged" />}
+      readOnly={readOnly}
+      trueContent={
+        <ArrowBox marginTop={8}>
+          <VStack gap="4">
             <Label size="small">
               <FormattedMessage id="Registrering.VirksomhetStartetPanel.Reason" />
             </Label>
-            <VerticalSpacer fourPx />
-            <CheckboxField
-              name="harVarigEndring"
-              label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.HarVarigEndring" />}
+            <CheckboxPanel
+              validate={[required]}
+              name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.arsaker`}
+              checkboxes={[
+                {
+                  value: 'harVarigEndring',
+                  label: <FormattedMessage id="Registrering.VirksomhetStartetPanel.HarVarigEndring" />,
+                  element: (
+                    <ArrowBox>
+                      <Datepicker
+                        name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.varigEndringGjeldendeFom`}
+                        isReadOnly={readOnly}
+                        validate={[hasValidDate, required]}
+                        label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.GjeldendeFom" />}
+                      />
+                    </ArrowBox>
+                  ),
+                },
+                {
+                  value: 'erNyoppstartet',
+                  label: <FormattedMessage id="Registrering.VirksomhetStartetPanel.ErNyoppstartet" />,
+                },
+                {
+                  value: 'erNyIArbeidslivet',
+                  label: <FormattedMessage id="Registrering.VirksomhetStartetPanel.NyIArbeidslivet" />,
+                  element: (
+                    <ArrowBox>
+                      <Datepicker
+                        name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.nyIArbeidslivetFom`}
+                        isReadOnly={readOnly}
+                        validate={[hasValidDate, required]}
+                        label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.GjeldendeFom" />}
+                      />
+                    </ArrowBox>
+                  ),
+                },
+              ]}
             />
-            <VerticalSpacer fourPx />
-            {harVarigEndring && (
-              <>
-                <VerticalSpacer sixteenPx />
-                <ArrowBox>
-                  <Datepicker
-                    name="varigEndringGjeldendeFom"
-                    isReadOnly={readOnly}
-                    validate={[hasValidDate, required]}
-                    label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.GjeldendeFom" />}
-                  />
-                </ArrowBox>
-              </>
-            )}
-            <CheckboxField
-              name="erNyoppstartet"
-              label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.ErNyoppstartet" />}
-            />
-            <VerticalSpacer fourPx />
-            <CheckboxField
-              name="erNyIArbeidslivet"
-              label={<FormattedMessage id="Registrering.VirksomhetNyIArbeidslivetPanel.ErNyIArbeidslivet" />}
-            />
-            <VerticalSpacer fourPx />
-            {erNyIArbeidslivet && (
-              <>
-                <VerticalSpacer sixteenPx />
-                <ArrowBox>
-                  <Datepicker
-                    name="nyIArbeidslivetFom"
-                    isReadOnly={readOnly}
-                    validate={[hasValidDate, required]}
-                    label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.GjeldendeFom" />}
-                  />
-                </ArrowBox>
-              </>
-            )}
-            {formState.isSubmitted && formState.errors?.ingenArsakValgt?.message && (
-              <ErrorMessage>{formState.errors?.ingenArsakValgt?.message}</ErrorMessage>
-            )}
-            <VerticalSpacer sixteenPx />
+
             <TextAreaField
-              name="beskrivelseAvEndring"
+              name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.beskrivelseAvEndring`}
               label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.VirksomhetEndretBeskrivelse" />}
               validate={[hasValidText]}
             />
-            <VerticalSpacer sixteenPx />
             <InputField
-              name="inntekt"
+              name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.inntekt`}
               label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.Inntekt" />}
               readOnly={readOnly}
               validate={[hasValidInteger, required]}
@@ -145,10 +120,31 @@ export const VirksomhetStartetEndretPanel = ({ readOnly }: Props) => {
                 return Number.isNaN(parsedValue) ? value : parsedValue;
               }}
             />
-          </ArrowBox>
-        </div>
-      )}
-      <VerticalSpacer eightPx />
-    </>
+          </VStack>
+        </ArrowBox>
+      }
+    />
   );
 };
+
+VirksomhetStartetEndretPanel.transformValues = ({
+  varigEndretEllerStartetSisteFireAr,
+  varigEndretEllerStartetSisteFireArArsak,
+  varigEndringGjeldendeFom,
+  nyIArbeidslivetFom,
+  beskrivelseAvEndring,
+  inntekt,
+}: StartedEndretFormValues) => ({
+  varigEndretEllerStartetSisteFireAr,
+  ...(varigEndretEllerStartetSisteFireAr
+    ? {
+        harVarigEndring: varigEndretEllerStartetSisteFireArArsak.includes('harVarigEndring'),
+        varigEndringGjeldendeFom,
+        erNyoppstartet: varigEndretEllerStartetSisteFireArArsak.includes('erNyoppstartet'),
+        erNyIArbeidslivet: varigEndretEllerStartetSisteFireArArsak.includes('erNyIArbeidslivet'),
+        nyIArbeidslivetFom,
+        beskrivelseAvEndring,
+        inntekt,
+      }
+    : {}),
+});
