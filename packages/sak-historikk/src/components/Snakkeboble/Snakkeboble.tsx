@@ -3,7 +3,7 @@ import { Location } from 'history';
 
 import { BodyShort, Chat, VStack } from '@navikt/ds-react';
 import { KodeverkType } from '@navikt/fp-kodeverk';
-import { HistorikkinnslagV2 } from '@navikt/fp-types';
+import { Historikkinnslag } from '@navikt/fp-types';
 
 import { HistorikkDokumentLenke } from './HistorikkDokumentLenke';
 import { formatDate, getStyle, parseBoldText, utledPlassering } from './snakkebobleUtils';
@@ -14,7 +14,7 @@ interface Props {
   behandlingLocation: Location;
   createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location | undefined;
   getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string;
-  historikkInnslag: HistorikkinnslagV2;
+  historikkInnslag: Historikkinnslag;
   kjønn: string;
   saksnummer: string;
 }

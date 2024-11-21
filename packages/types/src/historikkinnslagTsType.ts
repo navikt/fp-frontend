@@ -1,64 +1,24 @@
-import { HistorikkInnslagDokumentLink } from './historikkinnslagTsTypeV2';
+import { HistorikkAktor } from '@navikt/fp-kodeverk';
 
-export type HistorikkinnslagEndretFelt = {
-  endretFeltNavn: string;
-  navnVerdi?: string;
-  klNavn?: string;
-  fraVerdi?: string | number | boolean;
-  tilVerdi?: string | number | boolean;
-  klFraVerdi?: string;
-  klTilVerdi?: string;
-};
-
-export type HistorikkInnslagOpplysning = {
-  opplysningType: string;
-  tilVerdi?: string;
-};
-
-export type HistorikkInnslagAksjonspunkt = {
-  aksjonspunktKode: string;
-  godkjent: boolean;
-  aksjonspunktBegrunnelse?: string;
-};
-
-export type HistorikkinnslagDel = {
-  begrunnelsetekst?: string;
-  begrunnelseFritekst?: string;
-  hendelse?: {
-    navn?: string;
-    verdi?: string;
-  };
-  opplysninger: HistorikkInnslagOpplysning[];
-  soeknadsperiode?: {
-    soeknadsperiodeType?: string;
-    navnVerdi?: string;
-    tilVerdi?: string;
-  };
-  skjermlenke?: string;
-  årsaktekst?: string;
-  tema?: {
-    endretFeltNavn: string;
-    klNavn: string;
-    navnVerdi: string;
-  };
-  gjeldendeFra?: {
-    fra?: string;
-    navn?: string;
-    verdi?: string;
-  };
-  resultat?: string;
-  endredeFelter: HistorikkinnslagEndretFelt[];
-  aksjonspunkter?: HistorikkInnslagAksjonspunkt[];
-};
-
-type Historikkinnslag = Readonly<{
-  opprettetAv?: string;
+export type Historikkinnslag = Readonly<{
+  aktør: HistorikkUtfører;
   opprettetTidspunkt: string;
-  type: string;
   behandlingUuid: string;
-  aktoer: string;
-  dokumentLinks?: HistorikkInnslagDokumentLink[];
-  historikkinnslagDeler: HistorikkinnslagDel[];
+  skjermlenke?: string;
+  dokumenter?: HistorikkInnslagDokumentLink[];
+  tittel: string;
+  body: string[];
 }>;
 
-export default Historikkinnslag;
+type HistorikkUtfører = {
+  type: HistorikkAktor;
+  ident: string;
+};
+
+export type HistorikkInnslagDokumentLink = Readonly<{
+  dokumentId?: string;
+  journalpostId?: string;
+  tag: string;
+  url?: string;
+  utgått: boolean;
+}>;

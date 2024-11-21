@@ -1,30 +1,30 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 import { Location } from 'history';
-
-import { Historikkinnslag, AlleKodeverk, AlleKodeverkTilbakekreving } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
+import { AlleKodeverk, AlleKodeverkTilbakekreving, Historikkinnslag } from '@navikt/fp-types';
 
-import History from './components/History';
+import { Historikk } from './components/Historikk';
+
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-interface OwnProps {
+interface Props {
   historikkFpSak?: Historikkinnslag[];
   historikkFpTilbake?: Historikkinnslag[];
   alleKodeverkFpTilbake?: AlleKodeverkTilbakekreving;
   alleKodeverkFpSak: AlleKodeverk;
-  saksnummer?: string;
+  saksnummer: string;
   getBehandlingLocation: (behandlingUuid: string) => Location;
   createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location | undefined;
   valgtBehandlingUuid?: string;
   kjønn: string;
 }
 
-const HistorikkSakIndex: FunctionComponent<OwnProps> = ({
-  historikkFpSak,
-  historikkFpTilbake,
+const HistorikkSakIndex = ({
+  historikkFpSak = [],
+  historikkFpTilbake = [],
   alleKodeverkFpTilbake,
   alleKodeverkFpSak,
   saksnummer,
@@ -32,18 +32,18 @@ const HistorikkSakIndex: FunctionComponent<OwnProps> = ({
   createLocationForSkjermlenke,
   valgtBehandlingUuid,
   kjønn,
-}) => (
+}: Props) => (
   <RawIntlProvider value={intl}>
-    <History
+    <Historikk
+      valgtBehandlingUuid={valgtBehandlingUuid}
       historikkFpSak={historikkFpSak}
       historikkFpTilbake={historikkFpTilbake}
       alleKodeverkFpTilbake={alleKodeverkFpTilbake}
       alleKodeverkFpSak={alleKodeverkFpSak}
+      kjønn={kjønn}
       saksnummer={saksnummer}
       getBehandlingLocation={getBehandlingLocation}
       createLocationForSkjermlenke={createLocationForSkjermlenke}
-      valgtBehandlingUuid={valgtBehandlingUuid}
-      kjønn={kjønn}
     />
   </RawIntlProvider>
 );
