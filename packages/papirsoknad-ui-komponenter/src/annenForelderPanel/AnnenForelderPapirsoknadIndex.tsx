@@ -3,7 +3,7 @@ import { FormattedMessage, RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
 import { AlleKodeverk } from '@navikt/fp-types';
 
-import { AnnenForelderPanel } from './components/AnnenForelderPanel';
+import { OppgiAnnenForelderPanel } from './components/OppgiAnnenForelderPanel';
 
 import messages from '../../i18n/nb_NO.json';
 import { PermisjonRettigheterPanel } from './components/PermisjonRettigheterPanel';
@@ -28,14 +28,16 @@ export const AnnenForelderPapirsoknadIndex = ({ readOnly, alleKodeverk, fagsakPe
         <Heading size="small">
           <FormattedMessage id="Registrering.TheOtherParent.Title" />
         </Heading>
-        <AnnenForelderPanel readOnly={readOnly} fagsakPersonnummer={fagsakPersonnummer} alleKodeverk={alleKodeverk} />
+        <OppgiAnnenForelderPanel
+          readOnly={readOnly}
+          fagsakPersonnummer={fagsakPersonnummer}
+          alleKodeverk={alleKodeverk}
+        />
         <PermisjonRettigheterPanel readOnly={readOnly} sokerErMor={sokerErMor} />
       </VStack>
     </BorderBox>
   </RawIntlProvider>
 );
-
-AnnenForelderPapirsoknadIndex.PREFIX = ANNEN_FORELDER_NAME_PREFIX;
 
 AnnenForelderPapirsoknadIndex.initialValues = (): AnnenForelderFormValues => ({
   [ANNEN_FORELDER_NAME_PREFIX]: {},
@@ -46,6 +48,6 @@ AnnenForelderPapirsoknadIndex.transformValues = ({
 }: AnnenForelderFormValues): AnnenForelderFormValues => ({
   [ANNEN_FORELDER_NAME_PREFIX]: {
     ...PermisjonRettigheterPanel.transformValues(annenForelder),
-    ...AnnenForelderPanel.transformValues(annenForelder),
+    ...OppgiAnnenForelderPanel.transformValues(annenForelder),
   },
 });

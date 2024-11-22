@@ -33,12 +33,7 @@ interface Props {
   fagsakPersonnummer: string;
 }
 
-/*
- * AnnenForelderForm
- *
- * Form som brukes ved registrering av annen forelder.
- */
-export const AnnenForelderPanel = ({ readOnly = true, alleKodeverk, fagsakPersonnummer }: Props) => {
+export const OppgiAnnenForelderPanel = ({ readOnly = true, alleKodeverk, fagsakPersonnummer }: Props) => {
   const { formatMessage } = useIntl();
 
   const {
@@ -130,7 +125,7 @@ export const AnnenForelderPanel = ({ readOnly = true, alleKodeverk, fagsakPerson
   );
 };
 
-AnnenForelderPanel.transformValues = ({
+OppgiAnnenForelderPanel.transformValues = ({
   foedselsnummer,
   kanIkkeOppgiAnnenForelder,
   kanIkkeOppgiBegrunnelse: { arsak, land, utenlandskFoedselsnummer } = {},

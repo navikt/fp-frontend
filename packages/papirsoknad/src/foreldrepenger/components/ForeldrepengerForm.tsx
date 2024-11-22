@@ -93,9 +93,9 @@ export const ForeldrepengerForm = ({
 
   const andreYtelserKodeverk = alleKodeverk[KodeverkType.ARBEID_TYPE];
 
-  const sokerHarAleneomsorg = formMethods.watch(`${AnnenForelderPapirsoknadIndex.PREFIX}.sokerHarAleneomsorg`);
+  const sokerHarAleneomsorg = formMethods.watch(`annenForelder.sokerHarAleneomsorg`);
   const denAndreForelderenHarRettPaForeldrepenger = formMethods.watch(
-    `${AnnenForelderPapirsoknadIndex.PREFIX}.denAndreForelderenHarRettPaForeldrepenger`,
+    `annenForelder.denAndreForelderenHarRettPaForeldrepenger`,
   );
   const annenForelderInformertRequired = !sokerHarAleneomsorg && denAndreForelderenHarRettPaForeldrepenger !== false;
 
