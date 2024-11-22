@@ -19,14 +19,14 @@
     "storybook": "storybook dev --quiet -p 7006"
   },
   "dependencies": {
-    "@navikt/aksel-icons": "7.5.1",
-    "@navikt/ds-css": "7.5.1",
-    "@navikt/ds-react": "7.5.1",
+    "@navikt/aksel-icons": "7.5.3",
+    "@navikt/ds-css": "7.5.3",
+    "@navikt/ds-react": "7.5.3",
     "@navikt/fp-fakta-felles": "workspace:*",
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-types": "workspace:*",
-    "@navikt/ft-ui-komponenter": "2.6.1",
-    "@navikt/ft-utils": "2.5.0",
+    "@navikt/ft-ui-komponenter": "2.6.2",
+    "@navikt/ft-utils": "2.5.1",
     "react": "18.3.1",
     "react-hook-form": "7.53.1",
     "react-intl": "6.6.8"
