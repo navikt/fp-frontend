@@ -1,12 +1,13 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+
 import { BodyShort } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { AlleKodeverk, FagsakEnkel } from '@navikt/fp-types';
 
-import { SearchForm } from './SearchForm';
 import { FagsakList } from './FagsakList';
+import { SearchForm } from './SearchForm';
 
 import styles from './fagsakSearch.module.css';
 

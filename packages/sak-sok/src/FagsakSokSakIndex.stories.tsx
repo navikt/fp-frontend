@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
+
 import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
-import { FagsakYtelseType, FagsakStatus } from '@navikt/fp-kodeverk';
+import { FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-
 import { FagsakEnkel } from '@navikt/fp-types';
 
 import { FagsakSokSakIndex } from './FagsakSokSakIndex';

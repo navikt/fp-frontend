@@ -1,7 +1,10 @@
 import React from 'react';
+
 import MockAdapter from 'axios-mock-adapter';
+
 import { RequestApi } from '@navikt/fp-rest-api';
-import { RestApiProvider, RestApiErrorProvider } from '@navikt/fp-rest-api-hooks';
+import { RestApiErrorProvider, RestApiProvider } from '@navikt/fp-rest-api-hooks';
+
 import { AxiosMock } from './AxiosMock';
 import { RestApiGlobalStateMock } from './RestApiGlobalStateMock';
 

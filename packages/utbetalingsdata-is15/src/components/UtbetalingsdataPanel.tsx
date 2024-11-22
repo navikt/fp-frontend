@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { VStack, ExpansionCard, HStack, Search, Heading } from '@navikt/ds-react';
-import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
-import { isValidFodselsnummer } from '@navikt/ft-utils';
-import { InfotrygdVedtak } from '@navikt/fp-types';
+import { ExpansionCard, Heading, HStack, Search, VStack } from '@navikt/ds-react';
 import { DateLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { isValidFodselsnummer } from '@navikt/ft-utils';
 
-import { VedtakPanel } from './VedtakPanel';
+import { RestApiState } from '@navikt/fp-rest-api-hooks';
+import { InfotrygdVedtak } from '@navikt/fp-types';
+
 import { SakerPanel } from './SakerPanel';
+import { VedtakPanel } from './VedtakPanel';
 
 import styles from './utbetalingsdataPanel.module.css';
 

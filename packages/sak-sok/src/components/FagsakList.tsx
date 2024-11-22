@@ -1,10 +1,10 @@
 import React from 'react';
-
-import { FagsakEnkel, AlleKodeverk } from '@navikt/fp-types';
-import { getKodeverknavnFn, KodeverkType } from '@navikt/fp-kodeverk';
+import { FormattedMessage } from 'react-intl';
 
 import { Table } from '@navikt/ds-react';
-import { FormattedMessage } from 'react-intl';
+
+import { getKodeverknavnFn, KodeverkType } from '@navikt/fp-kodeverk';
+import { AlleKodeverk, FagsakEnkel } from '@navikt/fp-types';
 
 interface Props {
   fagsaker: FagsakEnkel[];
