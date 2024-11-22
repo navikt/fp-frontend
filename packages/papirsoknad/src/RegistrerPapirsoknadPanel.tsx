@@ -11,7 +11,8 @@ import { AlleKodeverk, Fagsak } from '@navikt/fp-types';
 import { EngangsstonadPapirsoknadIndex } from './engangsstonad/EngangsstonadPapirsoknadIndex';
 import { ForeldrepengerPapirsoknadIndex } from './foreldrepenger/ForeldrepengerPapirsoknadIndex';
 import { SvangerskapspengerPapirsoknadIndex } from './svangerskapspenger/SvangerskapspengerPapirsoknadIndex';
-import SoknadTypePickerForm from './SoknadTypePickerForm';
+import { SoknadTypePickerForm } from './SoknadTypePickerForm';
+
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);

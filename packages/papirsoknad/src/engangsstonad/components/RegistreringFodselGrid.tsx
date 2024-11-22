@@ -6,21 +6,10 @@ import {
   SprakPapirsoknadIndex,
   RettigheterPapirsoknadIndex,
   OppholdINorgePapirsoknadIndex,
-  OppholdINorgeFormValues,
   TerminOgFodselPanel,
-  TerminOgFodselFormValues,
   OmsorgOgAdopsjonPapirsoknadIndex,
-  OmsorgOgAdopsjonFormValues,
   SoknadData,
-  SprakFormValues,
-  RettigheterFormValues,
 } from '@navikt/fp-papirsoknad-ui-komponenter';
-
-export type FormValues = RettigheterFormValues &
-  OmsorgOgAdopsjonFormValues &
-  OppholdINorgeFormValues &
-  TerminOgFodselFormValues &
-  SprakFormValues;
 
 interface Props {
   readOnly: boolean;
@@ -53,17 +42,19 @@ const RegistreringFodselGrid = ({ readOnly, soknadData, alleKodeverk, fodselsdat
   </>
 );
 
-RegistreringFodselGrid.transformValues = (values: FormValues) => ({
+RegistreringFodselGrid.initialValues = () => ({
+  ...RettigheterPapirsoknadIndex.initialValues(),
+  ...OppholdINorgePapirsoknadIndex.initialValues(),
+  ...OmsorgOgAdopsjonPapirsoknadIndex.initialValues(),
+  ...TerminOgFodselPanel.initialValues(),
+  ...SprakPapirsoknadIndex.initialValues(),
+});
+
+RegistreringFodselGrid.transformValues = (values: ReturnType<typeof RegistreringFodselGrid.initialValues>) => ({
   ...RettigheterPapirsoknadIndex.transformValues(values),
   ...OppholdINorgePapirsoknadIndex.transformValues(values),
   ...OmsorgOgAdopsjonPapirsoknadIndex.transformValues(values),
   ...TerminOgFodselPanel.transformValues(values),
   ...SprakPapirsoknadIndex.transformValues(values),
 });
-
-RegistreringFodselGrid.initialValues = () => ({
-  ...OppholdINorgePapirsoknadIndex.initialValues(),
-  ...OmsorgOgAdopsjonPapirsoknadIndex.initialValues(),
-});
-
 export default RegistreringFodselGrid;

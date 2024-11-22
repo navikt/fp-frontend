@@ -86,6 +86,12 @@ export const TerminOgFodselPanelSvp = ({ readOnly }: Props) => {
   );
 };
 
+TerminOgFodselPanelSvp.initialValues = (): FormValues => ({
+  termindato: undefined,
+  foedselsDato: undefined,
+  erBarnetFodt: false,
+});
+
 TerminOgFodselPanelSvp.transformValues = ({ erBarnetFodt, foedselsDato, termindato }: FormValues) => ({
   erBarnetFodt,
   termindato,

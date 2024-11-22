@@ -12,6 +12,7 @@ const intl = createIntl(messages);
 interface Props {
   readOnly: boolean;
 }
+
 const sprakvalg = {
   BOKMAL: 'NB',
   NYNORSK: 'NN',
@@ -49,4 +50,5 @@ export const SprakPapirsoknadIndex = ({ readOnly }: Props) => (
   </BorderBox>
 );
 
+SprakPapirsoknadIndex.initialValues = (): SprakFormValues => ({ språkkode: undefined });
 SprakPapirsoknadIndex.transformValues = ({ språkkode }: SprakFormValues) => ({ språkkode });

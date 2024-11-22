@@ -8,15 +8,11 @@ import {
   SoknadData,
   MottattDatoPapirsoknadIndex,
   LagreSoknadPapirsoknadIndex,
-  MottattDatoFormValues,
-  LagreSoknadFormValues,
 } from '@navikt/fp-papirsoknad-ui-komponenter';
 
-import RegistreringAdopsjonOgOmsorgGrid, { FormValues as FormValuesAdopsjon } from './RegistreringAdopsjonOgOmsorgGrid';
-import RegistreringFodselGrid, { FormValues as FormValuesFodsel } from './RegistreringFodselGrid';
+import RegistreringAdopsjonOgOmsorgGrid from './RegistreringAdopsjonOgOmsorgGrid';
+import RegistreringFodselGrid from './RegistreringFodselGrid';
 import { HGrid } from '@navikt/ds-react';
-
-type FormValues = MottattDatoFormValues & (FormValuesFodsel | FormValuesAdopsjon) & LagreSoknadFormValues;
 
 const getComponentForFamiliehendelse = (familieHendelse: string) => {
   if (familieHendelse === FamilieHendelseType.FODSEL) {
@@ -35,6 +31,12 @@ interface Props {
   onSubmitUfullstendigsoknad: () => Promise<any>;
   onSubmit: (values: any) => Promise<any>;
 }
+const initialValues = () => ({
+  ...MottattDatoPapirsoknadIndex.initialValues(),
+  ...RegistreringFodselGrid.initialValues(),
+  ...RegistreringAdopsjonOgOmsorgGrid.initialValues(),
+  ...LagreSoknadPapirsoknadIndex.initialValues(),
+});
 
 export const EngangsstonadForm = ({
   readOnly,
@@ -44,14 +46,15 @@ export const EngangsstonadForm = ({
   onSubmit,
 }: Props) => {
   const ComponentForFamilieHendelse = getComponentForFamiliehendelse(soknadData.getFamilieHendelseType());
-  const formMethods = useForm<FormValues>({
-    defaultValues: ComponentForFamilieHendelse.initialValues(),
+
+  const formMethods = useForm({
+    defaultValues: initialValues(),
   });
 
   const foedselsDatoFraTerminOgFodelsPanel = formMethods.watch('foedselsDato');
   const mottattDato = formMethods.watch('mottattDato');
 
-  const transformValues = (values: FormValues) => {
+  const transformValues = (values: ReturnType<typeof initialValues>) => {
     return {
       ...MottattDatoPapirsoknadIndex.transformValues(values),
       ...ComponentForFamilieHendelse.transformValues(values),
@@ -60,7 +63,7 @@ export const EngangsstonadForm = ({
   };
 
   return (
-    <Form formMethods={formMethods} onSubmit={(values: FormValues) => onSubmit(transformValues(values))}>
+    <Form formMethods={formMethods} onSubmit={values => onSubmit(transformValues(values))}>
       <HGrid columns={{ sm: 1, md: 2 }} gap="4">
         <MottattDatoPapirsoknadIndex readOnly={readOnly} />
         <ComponentForFamilieHendelse

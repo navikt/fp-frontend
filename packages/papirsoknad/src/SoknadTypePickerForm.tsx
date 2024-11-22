@@ -103,5 +103,3 @@ export const SoknadTypePickerForm = ({ setSoknadData, fagsakYtelseType, alleKode
     </Form>
   );
 };
-
-export default SoknadTypePickerForm;

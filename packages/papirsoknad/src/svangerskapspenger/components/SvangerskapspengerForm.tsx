@@ -9,74 +9,32 @@ import {
   SoknadData,
   MottattDatoPapirsoknadIndex,
   FrilansPapirsoknadIndex,
-  FrilansFormValues,
   OppholdINorgePapirsoknadIndex,
-  OppholdINorgeFormValues,
   SprakPapirsoknadIndex,
   LagreSoknadPapirsoknadIndex,
   VirksomhetPapirsoknadIndex,
   InntektsgivendeArbeidPapirsoknadIndex,
-  InntektsgivendeArbeidFormValues,
   AndreYtelserPapirsoknadIndex,
-  AndreYtelserFormValue,
   BehovForTilretteleggingPanel,
-  BehovForTilretteleggingFormValues,
   TerminOgFodselPanelSvp,
-  TerminOgFodselSvpFormValues,
-  MottattDatoFormValues,
-  VirksomhetFormValues,
-  LagreSoknadFormValues,
-  SprakFormValues,
 } from '@navikt/fp-papirsoknad-ui-komponenter';
 
-type FormValues = AndreYtelserFormValue &
-  MottattDatoFormValues &
-  OppholdINorgeFormValues &
-  FrilansFormValues &
-  InntektsgivendeArbeidFormValues &
-  TerminOgFodselSvpFormValues &
-  BehovForTilretteleggingFormValues &
-  VirksomhetFormValues &
-  SprakFormValues &
-  LagreSoknadFormValues;
-
-type TransformValuesUnion<T extends { transformValues: (values: FormValues, ...args: any) => any }[]> =
-  T[number] extends infer U
-    ? U extends { transformValues: (values: FormValues) => any }
-      ? ReturnType<U['transformValues']>
-      : never
-    : never;
-
-type TransformedFormValues = TransformValuesUnion<
-  [
-    typeof MottattDatoPapirsoknadIndex,
-    typeof OppholdINorgePapirsoknadIndex,
-    typeof InntektsgivendeArbeidPapirsoknadIndex,
-    typeof VirksomhetPapirsoknadIndex,
-    typeof FrilansPapirsoknadIndex,
-    typeof AndreYtelserPapirsoknadIndex,
-    typeof TerminOgFodselPanelSvp,
-    typeof BehovForTilretteleggingPanel,
-    typeof SprakPapirsoknadIndex,
-    typeof LagreSoknadPapirsoknadIndex,
-  ]
->;
-
-export type TransformedFormValuess = Omit<FormValues, 'andreYtelser' | 'egenVirksomhet'> &
-  ReturnType<typeof AndreYtelserPapirsoknadIndex.transformValues> &
-  ReturnType<typeof BehovForTilretteleggingPanel.transformValues> &
-  ReturnType<typeof VirksomhetPapirsoknadIndex.transformValues>;
-
-const buildInitialValues = (andreYtelser: KodeverkMedNavn[]): FormValues => ({
-  ...AndreYtelserPapirsoknadIndex.initialValues(andreYtelser),
-  ...InntektsgivendeArbeidPapirsoknadIndex.initialValues(),
+const buildInitialValues = (andreYtelser: KodeverkMedNavn[]) => ({
+  ...MottattDatoPapirsoknadIndex.initialValues(),
   ...OppholdINorgePapirsoknadIndex.initialValues(),
-  ...BehovForTilretteleggingPanel.initialValues(),
-  ...FrilansPapirsoknadIndex.initialValues(),
+  ...InntektsgivendeArbeidPapirsoknadIndex.initialValues(),
   ...VirksomhetPapirsoknadIndex.initialValues(),
+  ...FrilansPapirsoknadIndex.initialValues(),
+  ...AndreYtelserPapirsoknadIndex.initialValues(andreYtelser),
+  ...TerminOgFodselPanelSvp.initialValues(),
+  ...BehovForTilretteleggingPanel.initialValues(),
+  ...SprakPapirsoknadIndex.initialValues(),
+  ...LagreSoknadPapirsoknadIndex.initialValues(),
 });
 
-const transformValues = (formValues: FormValues, andreYtelserKodeverk: KodeverkMedNavn[]): TransformedFormValues => ({
+type FormValues = ReturnType<typeof buildInitialValues>;
+
+const transformValues = (formValues: FormValues, andreYtelserKodeverk: KodeverkMedNavn[]) => ({
   ...MottattDatoPapirsoknadIndex.transformValues(formValues),
   ...OppholdINorgePapirsoknadIndex.transformValues(formValues),
   ...InntektsgivendeArbeidPapirsoknadIndex.transformValues(formValues),

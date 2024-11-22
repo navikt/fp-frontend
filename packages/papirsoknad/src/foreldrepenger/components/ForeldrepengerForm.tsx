@@ -7,80 +7,43 @@ import {
   SoknadData,
   MottattDatoPapirsoknadIndex,
   FrilansPapirsoknadIndex,
-  FrilansFormValues,
   OppholdINorgePapirsoknadIndex,
-  OppholdINorgeFormValues,
   SprakPapirsoknadIndex,
   LagreSoknadPapirsoknadIndex,
   VirksomhetPapirsoknadIndex,
   OmsorgOgAdopsjonPapirsoknadIndex,
-  OmsorgOgAdopsjonFormValues,
   InntektsgivendeArbeidPapirsoknadIndex,
   AndreYtelserPapirsoknadIndex,
-  AndreYtelserFormValue,
   RettigheterPapirsoknadIndex,
   AnnenForelderPapirsoknadIndex,
-  AnnenForelderFormValues,
   TerminOgFodselPanel,
   BekreftelsePanel,
   DekningsgradIndex,
   PermisjonIndex,
-  MottattDatoFormValues,
-  VirksomhetFormValues,
-  DekningsgradFormValues,
-  TerminOgFodselFormValues,
-  LagreSoknadFormValues,
-  RettigheterFormValues,
-  SprakFormValues,
-  BekreftelseFormValues,
-  PermisjonFormValues,
-  InntektsgivendeArbeidFormValues,
 } from '@navikt/fp-papirsoknad-ui-komponenter';
 import { HGrid } from '@navikt/ds-react';
 
-type FormValues = MottattDatoFormValues &
-  OppholdINorgeFormValues &
-  InntektsgivendeArbeidFormValues &
-  VirksomhetFormValues &
-  FrilansFormValues &
-  AndreYtelserFormValue &
-  DekningsgradFormValues &
-  TerminOgFodselFormValues &
-  RettigheterFormValues &
-  OmsorgOgAdopsjonFormValues &
-  AnnenForelderFormValues &
-  PermisjonFormValues &
-  BekreftelseFormValues &
-  SprakFormValues &
-  LagreSoknadFormValues;
-
-type TransformedFormValues = MottattDatoFormValues &
-  OppholdINorgeFormValues &
-  InntektsgivendeArbeidFormValues &
-  ReturnType<typeof VirksomhetPapirsoknadIndex.transformValues> &
-  FrilansFormValues &
-  ReturnType<typeof AndreYtelserPapirsoknadIndex.transformValues> &
-  DekningsgradFormValues &
-  TerminOgFodselFormValues &
-  RettigheterFormValues &
-  ReturnType<typeof OmsorgOgAdopsjonPapirsoknadIndex.transformValues> &
-  AnnenForelderFormValues &
-  PermisjonFormValues &
-  BekreftelseFormValues &
-  SprakFormValues &
-  LagreSoknadFormValues;
-
-const buildInitialValues = (andreYtelser: KodeverkMedNavn[]): FormValues => ({
+const buildInitialValues = (andreYtelser: KodeverkMedNavn[]) => ({
+  ...MottattDatoPapirsoknadIndex.initialValues(),
+  ...OppholdINorgePapirsoknadIndex.initialValues(),
+  ...InntektsgivendeArbeidPapirsoknadIndex.initialValues(),
+  ...VirksomhetPapirsoknadIndex.initialValues(),
   ...FrilansPapirsoknadIndex.initialValues(),
   ...AndreYtelserPapirsoknadIndex.initialValues(andreYtelser),
-  ...InntektsgivendeArbeidPapirsoknadIndex.initialValues(),
+  ...DekningsgradIndex.initialValues(),
+  ...TerminOgFodselPanel.initialValues(),
+  ...RettigheterPapirsoknadIndex.initialValues(),
   ...OmsorgOgAdopsjonPapirsoknadIndex.initialValues(),
-  ...OppholdINorgePapirsoknadIndex.initialValues(),
+  ...AnnenForelderPapirsoknadIndex.initialValues(),
   ...PermisjonIndex.initialValues(),
-  ...VirksomhetPapirsoknadIndex.initialValues(),
+  ...BekreftelsePanel.initialValues(),
+  ...SprakPapirsoknadIndex.initialValues(),
+  ...LagreSoknadPapirsoknadIndex.initialValues(),
 });
 
-const transformValues = (formValues: FormValues, andreYtelserKodeverk: KodeverkMedNavn[]): TransformedFormValues => {
+type FormValues = ReturnType<typeof buildInitialValues>;
+
+const transformValues = (formValues: FormValues, andreYtelserKodeverk: KodeverkMedNavn[]) => {
   return {
     ...MottattDatoPapirsoknadIndex.transformValues(formValues),
     ...OppholdINorgePapirsoknadIndex.transformValues(formValues),
