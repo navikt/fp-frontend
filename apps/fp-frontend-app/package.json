@@ -22,8 +22,8 @@
     "storybook": "storybook dev --quiet -p 7001"
   },
   "dependencies": {
-    "@formatjs/intl-datetimeformat": "6.16.4",
-    "@formatjs/intl-numberformat": "8.14.4",
+    "@formatjs/intl-datetimeformat": "6.16.5",
+    "@formatjs/intl-numberformat": "8.14.5",
     "@navikt/aksel-icons": "7.5.3",
     "@navikt/ds-css": "7.5.3",
     "@navikt/ds-css-internal": "^3.4.3",
@@ -134,8 +134,8 @@
     "react-modal": "3.16.1",
     "react-popper": "2.3.0",
     "react-responsive": "10.0.0",
-    "react-router": "6.27.0",
-    "react-router-dom": "6.27.0",
+    "react-router": "6.28.0",
+    "react-router-dom": "6.28.0",
     "rollup-plugin-sourcemaps": "0.6.3"
   },
   "devDependencies": {
