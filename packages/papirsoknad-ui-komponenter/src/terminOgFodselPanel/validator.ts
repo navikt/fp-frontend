@@ -35,11 +35,11 @@ export const terminBekreftelseBeforeTodayOrTermindato = (
   return dateBeforeOrEqual(grenseDato)(terminbekreftelseDato);
 };
 
-export const terminErRundtFodselsdato = (fodselsdato?: string, termindato?: string) => {
+export const terminErRundtFodselsdato = (fodselsdato: string | undefined, termindato: string | undefined) => {
   const fodsels = fodselsdato ? dayjs(fodselsdato, ISO_DATE_FORMAT) : undefined;
   const termin = dayjs(termindato, ISO_DATE_FORMAT);
 
-  if (!fodsels || !fodsels.isValid() || !termin || !termin.isValid()) {
+  if (!fodsels?.isValid() || !termin?.isValid()) {
     return null;
   }
   const tidligsteTermin = fodsels.subtract(3, 'weeks').subtract(1, 'day');
