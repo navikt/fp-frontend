@@ -11,14 +11,14 @@ const intl = createIntl(messages);
 interface Props {
   readOnly: boolean;
   familieHendelseType: string;
-  isForeldrepengerFagsak: boolean;
+  isForeldrepengerFagsak?: boolean;
   fodselsdato?: string | string[];
 }
 
 export const OmsorgOgAdopsjonPapirsoknadIndex = ({
   readOnly,
   familieHendelseType,
-  isForeldrepengerFagsak,
+  isForeldrepengerFagsak = false,
   fodselsdato,
 }: Props) => (
   <RawIntlProvider value={intl}>

@@ -1,8 +1,8 @@
 import React, { ReactElement, useEffect } from 'react';
-import { UseFormGetValues, useFieldArray, useFormContext } from 'react-hook-form';
+import { useFieldArray, useFormContext, UseFormGetValues } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
-import { Datepicker, SelectField, PeriodFieldArray } from '@navikt/ft-form-hooks';
+import { Datepicker, PeriodFieldArray, SelectField } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   dateBeforeOrEqual,
@@ -14,33 +14,21 @@ import { KodeverkMedNavn } from '@navikt/fp-types';
 import { OppholdArsakType } from '@navikt/fp-kodeverk';
 
 import styles from './renderOppholdPeriodeFieldArray.module.css';
+import { OPPHOLD_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
+import { OppholdPeriode, PermisjonFormValues } from '../../types';
 
-export const TIDSROM_PERMISJON_FORM_NAME_PREFIX = 'tidsromPermisjon';
-export const OPPHOLD_PERIODE_FIELD_ARRAY_NAME = 'oppholdPerioder';
+const FA_PREFIX = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}`;
+const getPrefix = (index: number) => `${FA_PREFIX}.${index}` as const;
 
-type Periode = {
-  periodeFom: string;
-  periodeTom: string;
-  årsak: string;
+const getOverlappingValidator = (getValues: UseFormGetValues<PermisjonFormValues>) => () => {
+  const perioder = getValues(`${FA_PREFIX}`) || [];
+  const periodeMap = perioder
+    .filter(({ periodeFom, periodeTom }) => periodeFom !== '' && periodeTom !== '')
+    .map(({ periodeFom, periodeTom }) => [periodeFom, periodeTom]);
+  return periodeMap.length > 0 ? dateRangesNotOverlapping(periodeMap) : undefined;
 };
 
-export type FormValues = Periode[];
-
-const getOverlappingValidator =
-  (
-    getValues: UseFormGetValues<{
-      [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: { [OPPHOLD_PERIODE_FIELD_ARRAY_NAME]: FormValues };
-    }>,
-  ) =>
-  () => {
-    const perioder = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}`);
-    const periodeMap = perioder
-      .filter(({ periodeFom, periodeTom }) => periodeFom !== '' && periodeTom !== '')
-      .map(({ periodeFom, periodeTom }) => [periodeFom, periodeTom]);
-    return periodeMap.length > 0 ? dateRangesNotOverlapping(periodeMap) : undefined;
-  };
-
-const defaultOppholdPeriode: Periode = {
+const defaultOppholdPeriode: OppholdPeriode = {
   periodeFom: '',
   periodeTom: '',
   årsak: '',
@@ -80,15 +68,11 @@ export const RenderOppholdPeriodeFieldArray = ({ oppholdsReasons, readOnly }: Pr
     getValues,
     trigger,
     formState: { isSubmitted },
-  } = useFormContext<{
-    [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: {
-      [OPPHOLD_PERIODE_FIELD_ARRAY_NAME]: FormValues;
-    };
-  }>();
+  } = useFormContext<PermisjonFormValues>();
 
   const { fields, remove, append } = useFieldArray({
     control,
-    name: `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}`,
+    name: `${FA_PREFIX}`,
   });
 
   useEffect(() => {
@@ -112,18 +96,14 @@ export const RenderOppholdPeriodeFieldArray = ({ oppholdsReasons, readOnly }: Pr
             <FlexRow>
               <FlexColumn>
                 <Datepicker
-                  name={`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`}
+                  name={`${getPrefix(index)}.periodeFom`}
                   label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.periodeFom' }) : ''}
                   validate={[
                     required,
                     hasValidDate,
                     () => {
-                      const fomVerdi = getValues(
-                        `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`,
-                      );
-                      const tomVerdi = getValues(
-                        `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`,
-                      );
+                      const fomVerdi = getValues(`${getPrefix(index)}.periodeFom`);
+                      const tomVerdi = getValues(`${getPrefix(index)}.periodeTom`);
                       return tomVerdi && fomVerdi ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : null;
                     },
                     getOverlappingValidator(getValues),
@@ -133,18 +113,14 @@ export const RenderOppholdPeriodeFieldArray = ({ oppholdsReasons, readOnly }: Pr
               </FlexColumn>
               <FlexColumn>
                 <Datepicker
-                  name={`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`}
+                  name={`${getPrefix(index)}.periodeTom`}
                   label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.periodeTom' }) : ''}
                   validate={[
                     required,
                     hasValidDate,
                     () => {
-                      const fomVerdi = getValues(
-                        `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`,
-                      );
-                      const tomVerdi = getValues(
-                        `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`,
-                      );
+                      const fomVerdi = getValues(`${getPrefix(index)}.periodeFom`);
+                      const tomVerdi = getValues(`${getPrefix(index)}.periodeTom`);
                       return tomVerdi && fomVerdi ? dateAfterOrEqual(fomVerdi)(tomVerdi) : null;
                     },
                     getOverlappingValidator(getValues),
@@ -154,7 +130,7 @@ export const RenderOppholdPeriodeFieldArray = ({ oppholdsReasons, readOnly }: Pr
               </FlexColumn>
               <FlexColumn>
                 <SelectField
-                  name={`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}.${index}.årsak`}
+                  name={`${getPrefix(index)}.årsak`}
                   label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.Opphold.Arsak' }) : ''}
                   selectValues={mapTyper(oppholdsReasons)}
                   validate={[required]}

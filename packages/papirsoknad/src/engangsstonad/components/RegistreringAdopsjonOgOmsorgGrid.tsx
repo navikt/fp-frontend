@@ -13,12 +13,7 @@ import {
 } from '@navikt/fp-papirsoknad-ui-komponenter';
 import { FamilieHendelseType } from '@navikt/fp-kodeverk';
 
-export type FormValues = {
-  foedselsDato?: string; // kan denne fjernes
-} & RettigheterFormValues &
-  OmsorgOgAdopsjonFormValues &
-  OppholdINorgeFormValues &
-  SprakFormValues;
+export type FormValues = RettigheterFormValues & OmsorgOgAdopsjonFormValues & OppholdINorgeFormValues & SprakFormValues;
 
 export type TransformedFormValues = Omit<FormValues, 'omsorg'> &
   ReturnType<typeof OmsorgOgAdopsjonPapirsoknadIndex.transformValues>;
@@ -42,7 +37,6 @@ const RegistreringAdopsjonOgOmsorgGrid = ({ readOnly, soknadData, alleKodeverk, 
     <OmsorgOgAdopsjonPapirsoknadIndex
       readOnly={readOnly}
       familieHendelseType={soknadData.getFamilieHendelseType()}
-      isForeldrepengerFagsak={false}
       fodselsdato={fodselsdato}
     />
     <OppholdINorgePapirsoknadIndex

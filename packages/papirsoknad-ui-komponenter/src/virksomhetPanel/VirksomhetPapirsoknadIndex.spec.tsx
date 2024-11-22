@@ -3,6 +3,7 @@ import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
 
 import * as stories from './VirksomhetPapirsoknadIndex.stories';
+import { expect } from 'vitest';
 
 const { Default } = composeStories(stories);
 
@@ -50,10 +51,11 @@ describe('<VirksomhetPapirsoknadIndex>', () => {
       screen.getByText('Ja, søker har arbeidet i egen næringsvirksomhet i løpet av de 10 siste månedene'),
     );
 
-    expect(await screen.findByText('Navn på foretaket')).toBeInTheDocument();
+    expect(await screen.findByText('Søkers virksomheter')).toBeInTheDocument();
+    expect(screen.getByText('Navn på foretaket')).toBeInTheDocument();
 
     const navnPåForetaketInput = screen.getByLabelText('Navn på foretaket');
-    await userEvent.type(navnPåForetaketInput, 'Bedrift1');
+    await userEvent.type(navnPåForetaketInput, 'Bedriften AS');
 
     await userEvent.click(screen.getAllByText('Nei')[0]);
 
@@ -67,11 +69,15 @@ describe('<VirksomhetPapirsoknadIndex>', () => {
     await userEvent.type(tilOgMedInput, '2022-06-03');
     fireEvent.blur(tilOgMedInput);
 
-    await userEvent.click(screen.getByText('Fiske'));
+    await userEvent.click(screen.getByLabelText('Fiske'));
 
+    expect(
+      screen.getByText('Er virksomheten blitt varig endret, nyoppstartet eller er søker ny i arbeidslivet?'),
+    ).toBeInTheDocument();
     await userEvent.click(screen.getAllByText('Ja')[1]);
 
-    await userEvent.click(screen.getByText('Varig endring i næring'));
+    expect(screen.getByText('Årsak')).toBeInTheDocument();
+    await userEvent.click(screen.getByLabelText('Varig endring i næring'));
 
     const gjeldendeFomInput = screen.getByLabelText('Gjeldende f.o.m.');
     await userEvent.type(gjeldendeFomInput, '2022-05-03');
@@ -89,9 +95,9 @@ describe('<VirksomhetPapirsoknadIndex>', () => {
 
     await userEvent.click(screen.getByText('Ja, har nære venner eller er i familie tilknyttet næringen'));
 
-    await userEvent.click(screen.getByText('Lagre'));
+    await userEvent.click(screen.getByLabelText('Vis mindre'));
 
-    expect(await screen.findByText('Navn på virksomhet')).toBeInTheDocument();
+    expect(screen.getByText('Bedriften AS')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
@@ -102,8 +108,8 @@ describe('<VirksomhetPapirsoknadIndex>', () => {
         virksomheter: [
           {
             beskrivelseAvEndring: 'Dette er en endring',
-            erNyIArbeidslivet: undefined,
-            erNyoppstartet: undefined,
+            erNyIArbeidslivet: false,
+            erNyoppstartet: false,
             familieEllerVennerTilknyttetNaringen: true,
             fom: '2022-06-01',
             tom: '2022-06-03',
@@ -111,14 +117,14 @@ describe('<VirksomhetPapirsoknadIndex>', () => {
             harVarigEndring: true,
             inntekt: 500000,
             landJobberFra: 'AND',
-            navn: 'Bedrift1',
+            navn: 'Bedriften AS',
             navnRegnskapsforer: 'Espen Utvikler',
             tlfRegnskapsforer: '555454534',
             typeVirksomhet: {
-              ANNEN: undefined,
-              DAGMAMMA: undefined,
+              ANNEN: false,
+              DAGMAMMA: false,
               FISKE: true,
-              JORDBRUK_SKOGBRUK: undefined,
+              JORDBRUK_SKOGBRUK: false,
             },
             varigEndretEllerStartetSisteFireAr: true,
             varigEndringGjeldendeFom: '2022-05-03',

@@ -10,7 +10,7 @@ import messages from '../../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 export type FormValues = {
-  dekningsgrad: string;
+  dekningsgrad?: string;
 };
 
 interface Props {
@@ -43,5 +43,5 @@ export const DekningsgradIndex = ({ readOnly }: Props) => (
   </BorderBox>
 );
 
-DekningsgradIndex.initialValues = () => ({ dekningsgrad: undefined });
+DekningsgradIndex.initialValues = (): FormValues => ({ dekningsgrad: undefined });
 DekningsgradIndex.transformValues = ({ dekningsgrad }: FormValues) => ({ dekningsgrad });

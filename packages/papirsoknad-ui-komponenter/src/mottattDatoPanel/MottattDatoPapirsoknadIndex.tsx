@@ -13,8 +13,8 @@ import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-const minMottattdato = () => dayjs().subtract(1, 'year');
-const maxMottattdato = () => dayjs().subtract(0, 'year');
+export const minMottattdato = () => dayjs().subtract(1, 'year').subtract(1, 'day');
+export const maxMottattdato = () => dayjs();
 
 export type MottattDatoFormValues = {
   mottattDato?: string;
@@ -43,4 +43,7 @@ export const MottattDatoPapirsoknadIndex = ({ readOnly }: Props) => (
   </RawIntlProvider>
 );
 
+MottattDatoPapirsoknadIndex.initialValues = (): MottattDatoFormValues => ({
+  mottattDato: undefined,
+});
 MottattDatoPapirsoknadIndex.transformValues = ({ mottattDato }: MottattDatoFormValues) => ({ mottattDato });

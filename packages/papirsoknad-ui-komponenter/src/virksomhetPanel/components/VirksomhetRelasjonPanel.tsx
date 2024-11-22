@@ -20,6 +20,7 @@ export const VirksomhetRelasjonPanel = ({ readOnly, index }: Props) => (
     name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.familieEllerVennerTilknyttetNaringen`}
     label={<FormattedMessage id="Registrering.VirksomhetRelasjonPanel.Relation" />}
     readOnly={readOnly}
+    isHorizontal={false}
     trueLabel={<FormattedMessage id="Registrering.VirksomhetRelasjonPanel.Yes" />}
     falseLabel={<FormattedMessage id="Registrering.VirksomhetRelasjonPanel.No" />}
   />

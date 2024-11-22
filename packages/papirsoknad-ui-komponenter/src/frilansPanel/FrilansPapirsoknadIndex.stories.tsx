@@ -8,7 +8,7 @@ import { Form } from '@navikt/ft-form-hooks';
 import { FrilansPapirsoknadIndex } from './FrilansPapirsoknadIndex';
 
 const meta = {
-  title: 'papirsoknad/ui-komponenter/frilans',
+  title: 'ui-komponenter/frilans',
   component: FrilansPapirsoknadIndex,
   parameters: {
     submitCallback: action('onSubmit'),

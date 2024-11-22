@@ -1,24 +1,15 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Label } from '@navikt/ds-react';
+import { Label, VStack } from '@navikt/ds-react';
 import { CheckboxField } from '@navikt/ft-form-hooks';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
 import { AlleKodeverk } from '@navikt/fp-types';
 
 import { useFormContext } from 'react-hook-form';
-import {
-  RenderOppholdPeriodeFieldArray,
-  OPPHOLD_PERIODE_FIELD_ARRAY_NAME,
-  TIDSROM_PERMISJON_FORM_NAME_PREFIX,
-  FormValues as PeriodeFormValues,
-} from './RenderOppholdPeriodeFieldArray';
-
-export type FormValues = {
-  skalHaOpphold?: boolean;
-  [OPPHOLD_PERIODE_FIELD_ARRAY_NAME]?: PeriodeFormValues;
-};
+import { RenderOppholdPeriodeFieldArray } from './RenderOppholdPeriodeFieldArray';
+import { OPPHOLD_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
+import { FormValuesOpphold } from '../../types';
 
 interface Props {
   readOnly: boolean;
@@ -34,26 +25,25 @@ interface Props {
 export const PermisjonOppholdPanel = ({ readOnly, alleKodeverk }: Props) => {
   const oppholdsReasons = alleKodeverk[KodeverkType.OPPHOLD_ARSAK];
 
-  const { watch } = useFormContext<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: FormValues }>();
+  const { watch } = useFormContext<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: FormValuesOpphold }>();
   const skalHaOpphold = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalHaOpphold`) || false;
 
   return (
-    <div>
+    <VStack gap="2">
       <Label size="small">
         <FormattedMessage id="Registrering.Permisjon.Opphold.Title" />
       </Label>
-      <VerticalSpacer sixteenPx />
       <CheckboxField
         readOnly={readOnly}
         name={`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalHaOpphold`}
         label={<FormattedMessage id="Registrering.Permisjon.Opphold.OppholdUttaket" />}
       />
       {skalHaOpphold && <RenderOppholdPeriodeFieldArray oppholdsReasons={oppholdsReasons} readOnly={readOnly} />}
-    </div>
+    </VStack>
   );
 };
 
-PermisjonOppholdPanel.initialValues = () => ({
-  [OPPHOLD_PERIODE_FIELD_ARRAY_NAME]: [{}],
+PermisjonOppholdPanel.initialValues = (): FormValuesOpphold => ({
+  [OPPHOLD_PERIODE_FIELD_ARRAY_NAME]: [],
   skalHaOpphold: false,
 });

@@ -2,7 +2,7 @@ import { fireEvent, screen } from '@testing-library/react';
 import dayjs from 'dayjs';
 import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
-import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 
 import * as stories from './TerminFodselSvpPanel.stories';
 import { expect } from 'vitest';
@@ -12,8 +12,8 @@ const { Default } = composeStories(stories);
 describe('<TerminOgFodselPanelSvp>', () => {
   it('skal velge termindato og fødselsdato', async () => {
     const lagre = vi.fn();
-    const foedselsDato = dayjs().subtract(1, 'day').format(ISO_DATE_FORMAT);
-    const termindato = dayjs().subtract(1, 'week').format(ISO_DATE_FORMAT);
+    const foedselsDato = dayjs().subtract(1, 'day');
+    const termindato = dayjs().subtract(1, 'week');
 
     await Default.run({ parameters: { submitCallback: lagre } });
 
@@ -22,10 +22,10 @@ describe('<TerminOgFodselPanelSvp>', () => {
     await userEvent.click(screen.getByText('Ja'));
 
     const fødselsdatoFelt = screen.getByLabelText('Fødselsdato');
-    await userEvent.type(fødselsdatoFelt, foedselsDato);
+    await userEvent.type(fødselsdatoFelt, foedselsDato.format(DDMMYYYY_DATE_FORMAT));
 
     const termindatoFelt = screen.getByLabelText('Termindato');
-    await userEvent.type(termindatoFelt, termindato);
+    await userEvent.type(termindatoFelt, termindato.format(DDMMYYYY_DATE_FORMAT));
     fireEvent.blur(termindatoFelt);
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
@@ -33,8 +33,8 @@ describe('<TerminOgFodselPanelSvp>', () => {
     expect(lagre).toHaveBeenCalledOnce();
     expect(lagre).toHaveBeenCalledWith({
       erBarnetFodt: true,
-      foedselsDato,
-      termindato,
+      foedselsDato: foedselsDato.format(ISO_DATE_FORMAT),
+      termindato: termindato.format(ISO_DATE_FORMAT),
     });
   });
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { createIntl } from '@navikt/ft-utils';
-import { familieHendelseType, foreldreType } from '@navikt/fp-kodeverk';
+import { FamilieHendelseType, ForeldreType } from '@navikt/fp-kodeverk';
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 import { Heading, VStack } from '@navikt/ds-react';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
@@ -26,7 +26,7 @@ export type RettigheterFormValues = {
   rettigheter?: string;
 };
 
-const options = [
+const baseOptions = [
   {
     label: intl.formatMessage({ id: 'Registrering.Rettigheter.AnnenForelderDoed' }),
     value: rettighet.ANNEN_FORELDER_DOED,
@@ -47,11 +47,12 @@ const options = [
 
 export const RettigheterPapirsoknadIndex = ({ readOnly, soknadData }: Props) => {
   const visMannAdoptererAlene =
-    soknadData.getFamilieHendelseType() !== familieHendelseType.FODSEL &&
-    soknadData.getForeldreType() === foreldreType.FAR;
-  if (!visMannAdoptererAlene) {
-    options.splice(2, 1);
-  }
+    soknadData.getFamilieHendelseType() !== FamilieHendelseType.FODSEL &&
+    soknadData.getForeldreType() === ForeldreType.FAR;
+
+  const options = visMannAdoptererAlene
+    ? baseOptions
+    : baseOptions.filter(option => option.value !== rettighet.MANN_ADOPTERER_ALENE);
 
   return (
     <BorderBox>
@@ -62,6 +63,10 @@ export const RettigheterPapirsoknadIndex = ({ readOnly, soknadData }: Props) => 
     </BorderBox>
   );
 };
+
+RettigheterPapirsoknadIndex.initialValues = (): RettigheterFormValues => ({
+  rettigheter: undefined,
+});
 
 RettigheterPapirsoknadIndex.transformValues = ({ rettigheter }: RettigheterFormValues) =>
   rettigheter === rettighet.IKKE_RELEVANT ? {} : { rettigheter };

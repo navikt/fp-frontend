@@ -1,9 +1,9 @@
 import React, { ReactElement, useEffect } from 'react';
 import dayjs from 'dayjs';
-import { UseFormGetValues, useFieldArray, useFormContext } from 'react-hook-form';
+import { useFieldArray, useFormContext, UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Alert, Label } from '@navikt/ds-react';
-import { VerticalSpacer, FlexColumn, FlexContainer, FlexRow, AvsnittSkiller } from '@navikt/ft-ui-komponenter';
+import { AvsnittSkiller, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import {
   dateAfterOrEqual,
   dateBeforeOrEqual,
@@ -16,63 +16,35 @@ import {
   maxValue,
   required,
 } from '@navikt/ft-form-validators';
-import { CheckboxField, Datepicker, InputField, SelectField, PeriodFieldArray } from '@navikt/ft-form-hooks';
+import { CheckboxField, Datepicker, InputField, PeriodFieldArray, SelectField } from '@navikt/ft-form-hooks';
 import { KodeverkMedNavn } from '@navikt/fp-types';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 
 import { Arbeidskategori } from '@navikt/fp-kodeverk';
 
-import { gyldigeUttakperioder } from './RenderPermisjonPeriodeFieldArray';
+import { gyldigeUttakperioder } from '../fulltUttak/RenderPermisjonPeriodeFieldArray';
 
 import styles from './renderGraderingPeriodeFieldArray.module.css';
-
-export const TIDSROM_PERMISJON_FORM_NAME_PREFIX = 'tidsromPermisjon';
-export const GRADERING_PERIODE_FIELD_ARRAY_NAME = 'graderingPeriode';
+import { GRADERING_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
+import { GraderingPeriode, PermisjonFormValues } from '../../types';
 
 const maxLength9OrFodselsnr = maxLengthOrFodselsnr(9);
 
-type GraderingPeriode = {
-  periodeFom: string;
-  periodeTom: string;
-  periodeForGradering: string;
-  prosentandelArbeid: string;
-  skalGraderes: boolean;
-  arbeidsgiverIdentifikator?: string;
-  arbeidskategoriType?: string;
-  flerbarnsdager?: boolean;
-  harSamtidigUttak?: boolean;
-  samtidigUttaksprosent?: string;
+const FA_PREFIX = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}`;
+const getPrefix = (index: number) => `${FA_PREFIX}.${index}` as const;
+
+const getOverlappingValidator = (getValues: UseFormGetValues<PermisjonFormValues>) => () => {
+  const perioder = getValues(`${FA_PREFIX}`) || [];
+  const periodeMap = perioder
+    .filter(({ periodeFom, periodeTom }) => periodeFom !== '' && periodeTom !== '')
+    .map(({ periodeFom, periodeTom }) => [periodeFom, periodeTom]);
+  return periodeMap.length > 0 ? dateRangesNotOverlapping(periodeMap) : undefined;
 };
 
-export type FormValues = GraderingPeriode[];
-
-const getOverlappingValidator =
-  (
-    getValues: UseFormGetValues<{
-      [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: { [GRADERING_PERIODE_FIELD_ARRAY_NAME]: FormValues };
-    }>,
-  ) =>
-  () => {
-    const perioder = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}`);
-    const periodeMap = perioder
-      .filter(({ periodeFom, periodeTom }) => periodeFom !== '' && periodeTom !== '')
-      .map(({ periodeFom, periodeTom }) => [periodeFom, periodeTom]);
-    return periodeMap.length > 0 ? dateRangesNotOverlapping(periodeMap) : undefined;
-  };
-
 const getValiderFørEllerEtter =
-  (
-    getValues: UseFormGetValues<{ tidsromPermisjon: { [GRADERING_PERIODE_FIELD_ARRAY_NAME]: FormValues } }>,
-    index: number,
-    sjekkFør: boolean,
-  ) =>
-  () => {
-    const fomVerdi = getValues(
-      `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`,
-    );
-    const tomVerdi = getValues(
-      `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`,
-    );
+  (getValues: UseFormGetValues<PermisjonFormValues>, index: number, sjekkFør: boolean) => () => {
+    const fomVerdi = getValues(`${getPrefix(index)}.periodeFom`);
+    const tomVerdi = getValues(`${getPrefix(index)}.periodeTom`);
 
     if (!tomVerdi || !fomVerdi) {
       return null;
@@ -82,15 +54,9 @@ const getValiderFørEllerEtter =
   };
 
 const getValiderArbeidsgiverIdNårRequired =
-  (
-    getValues: UseFormGetValues<{ tidsromPermisjon: { [GRADERING_PERIODE_FIELD_ARRAY_NAME]: FormValues } }>,
-    index: number,
-  ) =>
-  (arbeidsgiverIdentifikator: string) => {
+  (getValues: UseFormGetValues<PermisjonFormValues>, index: number) => (arbeidsgiverIdentifikator: string) => {
     const arbeidsgiverIdentifikatorRequired =
-      getValues(
-        `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}.${index}.arbeidskategoriType`,
-      ) === Arbeidskategori.ARBEIDSTAKER;
+      getValues(`${getPrefix(index)}.arbeidskategoriType`) === Arbeidskategori.ARBEIDSTAKER;
     return arbeidsgiverIdentifikatorRequired ? required(arbeidsgiverIdentifikator) : undefined;
   };
 
@@ -157,18 +123,14 @@ export const RenderGraderingPeriodeFieldArray = ({ graderingKvoter, readOnly, ar
     getValues,
     trigger,
     formState: { isSubmitted },
-  } = useFormContext<{
-    [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: {
-      [GRADERING_PERIODE_FIELD_ARRAY_NAME]: FormValues;
-    };
-  }>();
+  } = useFormContext<PermisjonFormValues>();
 
   const { fields, remove, append } = useFieldArray({
     control,
-    name: `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}`,
+    name: `${FA_PREFIX}`,
   });
 
-  const graderingValues = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}`);
+  const graderingValues = watch(`${FA_PREFIX}`) || [];
 
   useEffect(() => {
     if (fields.length === 0) {
@@ -188,7 +150,7 @@ export const RenderGraderingPeriodeFieldArray = ({ graderingKvoter, readOnly, ar
       {(field, index, getRemoveButton) => {
         const { harSamtidigUttak, periodeFom } = graderingValues[index];
         const periodeFomForTidlig = periodeFom && dayjs(periodeFom, ISO_DATE_FORMAT).isBefore(dayjs('2019-01-01'));
-        const namePart1 = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}.${index}`;
+        const namePart1 = `${getPrefix(index)}`;
         return (
           <div key={field.id} className={index !== fields.length - 1 ? styles.notLastRow : ''}>
             {index > 0 && (

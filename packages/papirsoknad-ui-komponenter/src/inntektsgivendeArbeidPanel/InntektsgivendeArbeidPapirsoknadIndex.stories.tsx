@@ -11,7 +11,7 @@ import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { InntektsgivendeArbeidPapirsoknadIndex } from './InntektsgivendeArbeidPapirsoknadIndex';
 
 const meta = {
-  title: 'papirsoknad/ui-komponenter/inntektsgivende-arbeid',
+  title: 'ui-komponenter/inntektsgivende-arbeid',
   component: InntektsgivendeArbeidPapirsoknadIndex,
   args: {
     readOnly: false,
@@ -26,7 +26,10 @@ const meta = {
     });
 
     return (
-      <Form formMethods={formMethods} onSubmit={submitCallback}>
+      <Form
+        formMethods={formMethods}
+        onSubmit={val => submitCallback(InntektsgivendeArbeidPapirsoknadIndex.transformValues(val))}
+      >
         <VStack gap="10">
           <InntektsgivendeArbeidPapirsoknadIndex {...args} />
           <VerticalSpacer fourtyPx />

@@ -10,7 +10,7 @@ import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { VirksomhetPapirsoknadIndex } from './VirksomhetPapirsoknadIndex';
 
 const meta = {
-  title: 'papirsoknad/ui-komponenter/virksomhet',
+  title: 'ui-komponenter/virksomhet',
   component: VirksomhetPapirsoknadIndex,
   parameters: {
     submitCallback: action('onSubmit'),

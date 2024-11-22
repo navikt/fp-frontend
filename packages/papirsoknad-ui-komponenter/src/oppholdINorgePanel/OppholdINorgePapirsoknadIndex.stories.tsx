@@ -11,7 +11,7 @@ import { OppholdINorgeFormValues } from './components/OppholdINorgePanel';
 import { OppholdINorgePapirsoknadIndex } from './OppholdINorgePapirsoknadIndex';
 
 const meta = {
-  title: 'papirsoknad/ui-komponenter/opphold-i-norge',
+  title: 'ui-komponenter/opphold-i-norge',
   component: OppholdINorgePapirsoknadIndex,
   parameters: {
     submitCallback: action('onSubmit'),

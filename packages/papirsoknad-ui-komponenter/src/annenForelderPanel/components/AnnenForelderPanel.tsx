@@ -136,7 +136,7 @@ AnnenForelderPanel.transformValues = ({
   kanIkkeOppgiBegrunnelse: { arsak, land, utenlandskFoedselsnummer } = {},
 }: AnnenForelderSubFormValues): AnnenForelderSubFormValues => {
   if (kanIkkeOppgiAnnenForelder) {
-    const erUkjentFar = arsak === kanIkkeOppgiAnnenForelderArsak.IKKE_NORSK_FNR;
+    const erUkjentFar = arsak === KanIkkeOppgiAnnenForelderArsak.IKKE_NORSK_FNR;
     return {
       foedselsnummer: undefined,
       kanIkkeOppgiAnnenForelder: true,

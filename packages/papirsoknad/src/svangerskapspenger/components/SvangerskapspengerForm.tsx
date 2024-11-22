@@ -40,7 +40,29 @@ type FormValues = AndreYtelserFormValue &
   SprakFormValues &
   LagreSoknadFormValues;
 
-export type TransformedFormValues = Omit<FormValues, 'andreYtelser' | 'egenVirksomhet'> &
+type TransformValuesUnion<T extends { transformValues: (values: FormValues, ...args: any) => any }[]> =
+  T[number] extends infer U
+    ? U extends { transformValues: (values: FormValues) => any }
+      ? ReturnType<U['transformValues']>
+      : never
+    : never;
+
+type TransformedFormValues = TransformValuesUnion<
+  [
+    typeof MottattDatoPapirsoknadIndex,
+    typeof OppholdINorgePapirsoknadIndex,
+    typeof InntektsgivendeArbeidPapirsoknadIndex,
+    typeof VirksomhetPapirsoknadIndex,
+    typeof FrilansPapirsoknadIndex,
+    typeof AndreYtelserPapirsoknadIndex,
+    typeof TerminOgFodselPanelSvp,
+    typeof BehovForTilretteleggingPanel,
+    typeof SprakPapirsoknadIndex,
+    typeof LagreSoknadPapirsoknadIndex,
+  ]
+>;
+
+export type TransformedFormValuess = Omit<FormValues, 'andreYtelser' | 'egenVirksomhet'> &
   ReturnType<typeof AndreYtelserPapirsoknadIndex.transformValues> &
   ReturnType<typeof BehovForTilretteleggingPanel.transformValues> &
   ReturnType<typeof VirksomhetPapirsoknadIndex.transformValues>;

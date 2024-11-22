@@ -1,10 +1,9 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Form } from '@navikt/ft-form-hooks';
-import { omitOne } from '@navikt/ft-utils';
 
 import { AlleKodeverk } from '@navikt/fp-types';
-import { familieHendelseType } from '@navikt/fp-kodeverk';
+import { FamilieHendelseType } from '@navikt/fp-kodeverk';
 import {
   SoknadData,
   MottattDatoPapirsoknadIndex,
@@ -20,13 +19,13 @@ import { HGrid } from '@navikt/ds-react';
 type FormValues = MottattDatoFormValues & (FormValuesFodsel | FormValuesAdopsjon) & LagreSoknadFormValues;
 
 const getComponentForFamiliehendelse = (familieHendelse: string) => {
-  if (familieHendelse === familieHendelseType.FODSEL) {
+  if (familieHendelse === FamilieHendelseType.FODSEL) {
     return RegistreringFodselGrid;
   }
-  if (familieHendelse === familieHendelseType.ADOPSJON) {
+  if (familieHendelse === FamilieHendelseType.ADOPSJON) {
     return RegistreringAdopsjonOgOmsorgGrid;
   }
-  throw Error(`Unsupported familieHendelseType i papirsoknad for engangsstønad: ${familieHendelse}`);
+  throw Error(`Unsupported FamilieHendelseType i papirsoknad for engangsstønad: ${familieHendelse}`);
 };
 
 interface Props {

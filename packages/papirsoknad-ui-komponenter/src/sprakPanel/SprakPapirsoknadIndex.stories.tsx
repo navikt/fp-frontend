@@ -8,7 +8,7 @@ import { Form } from '@navikt/ft-form-hooks';
 import { SprakPapirsoknadIndex } from './SprakPapirsoknadIndex';
 
 const meta = {
-  title: 'papirsoknad/ui-komponenter/sprak',
+  title: 'ui-komponenter/sprak',
   component: SprakPapirsoknadIndex,
   parameters: {
     submitCallback: action('onSubmit'),
@@ -20,7 +20,7 @@ const meta = {
     const formMethods = useForm();
 
     return (
-      <Form formMethods={formMethods} onSubmit={submitCallback}>
+      <Form formMethods={formMethods} onSubmit={val => submitCallback(SprakPapirsoknadIndex.transformValues(val))}>
         <VStack gap="10">
           <SprakPapirsoknadIndex {...args} />
           <Button size="small" variant="primary">

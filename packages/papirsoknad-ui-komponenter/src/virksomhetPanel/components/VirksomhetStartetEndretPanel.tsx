@@ -20,7 +20,7 @@ const aarsaker = ({ readOnly, index }: Props) => [
     value: 'harVarigEndring',
     label: <FormattedMessage id="Registrering.VirksomhetStartetPanel.HarVarigEndring" />,
     element: (
-      <ArrowBox>
+      <ArrowBox marginTop={8}>
         <Datepicker
           name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.varigEndringGjeldendeFom`}
           isReadOnly={readOnly}
@@ -35,7 +35,7 @@ const aarsaker = ({ readOnly, index }: Props) => [
     value: 'erNyIArbeidslivet',
     label: <FormattedMessage id="Registrering.VirksomhetStartetPanel.NyIArbeidslivet" />,
     element: (
-      <ArrowBox>
+      <ArrowBox marginTop={8}>
         <Datepicker
           name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.nyIArbeidslivetFom`}
           isReadOnly={readOnly}
@@ -67,41 +67,8 @@ export const VirksomhetStartetEndretPanel = ({ readOnly, index }: Props) => {
             </Label>
             <CheckboxPanel
               validate={[required]}
-              name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.arsaker`}
-              checkboxes={[
-                {
-                  value: 'harVarigEndring',
-                  label: <FormattedMessage id="Registrering.VirksomhetStartetPanel.HarVarigEndring" />,
-                  element: (
-                    <ArrowBox>
-                      <Datepicker
-                        name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.varigEndringGjeldendeFom`}
-                        isReadOnly={readOnly}
-                        validate={[hasValidDate, required]}
-                        label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.GjeldendeFom" />}
-                      />
-                    </ArrowBox>
-                  ),
-                },
-                {
-                  value: 'erNyoppstartet',
-                  label: <FormattedMessage id="Registrering.VirksomhetStartetPanel.ErNyoppstartet" />,
-                },
-                {
-                  value: 'erNyIArbeidslivet',
-                  label: <FormattedMessage id="Registrering.VirksomhetStartetPanel.NyIArbeidslivet" />,
-                  element: (
-                    <ArrowBox>
-                      <Datepicker
-                        name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.nyIArbeidslivetFom`}
-                        isReadOnly={readOnly}
-                        validate={[hasValidDate, required]}
-                        label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.GjeldendeFom" />}
-                      />
-                    </ArrowBox>
-                  ),
-                },
-              ]}
+              name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.varigEndretEllerStartetSisteFireArArsak`}
+              checkboxes={aarsaker({ readOnly, index })}
             />
 
             <TextAreaField
@@ -134,17 +101,23 @@ VirksomhetStartetEndretPanel.transformValues = ({
   nyIArbeidslivetFom,
   beskrivelseAvEndring,
   inntekt,
-}: StartedEndretFormValues) => ({
-  varigEndretEllerStartetSisteFireAr,
-  ...(varigEndretEllerStartetSisteFireAr
-    ? {
-        harVarigEndring: varigEndretEllerStartetSisteFireArArsak.includes('harVarigEndring'),
-        varigEndringGjeldendeFom,
-        erNyoppstartet: varigEndretEllerStartetSisteFireArArsak.includes('erNyoppstartet'),
-        erNyIArbeidslivet: varigEndretEllerStartetSisteFireArArsak.includes('erNyIArbeidslivet'),
-        nyIArbeidslivetFom,
-        beskrivelseAvEndring,
-        inntekt,
-      }
-    : {}),
-});
+}: StartedEndretFormValues) => {
+  const harVarigEndring = varigEndretEllerStartetSisteFireArArsak.includes('harVarigEndring');
+  const erNyoppstartet = varigEndretEllerStartetSisteFireArArsak.includes('erNyoppstartet');
+  const erNyIArbeidslivet = varigEndretEllerStartetSisteFireArArsak.includes('erNyIArbeidslivet');
+
+  return {
+    varigEndretEllerStartetSisteFireAr,
+    ...(varigEndretEllerStartetSisteFireAr
+      ? {
+          harVarigEndring,
+          ...(harVarigEndring ? { varigEndringGjeldendeFom } : {}),
+          erNyoppstartet,
+          erNyIArbeidslivet,
+          ...(erNyIArbeidslivet ? { nyIArbeidslivetFom } : {}),
+          beskrivelseAvEndring,
+          inntekt,
+        }
+      : {}),
+  };
+};

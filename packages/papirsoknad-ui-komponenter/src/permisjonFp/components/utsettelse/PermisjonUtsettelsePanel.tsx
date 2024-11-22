@@ -1,24 +1,15 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Label } from '@navikt/ds-react';
+import { Label, VStack } from '@navikt/ds-react';
 import { CheckboxField } from '@navikt/ft-form-hooks';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { AlleKodeverk } from '@navikt/fp-types';
 import { KodeverkType } from '@navikt/fp-kodeverk';
 
 import { useFormContext } from 'react-hook-form';
-import {
-  RenderUtsettelsePeriodeFieldArray,
-  UTSETTELSE_PERIODE_FIELD_ARRAY_NAME,
-  TIDSROM_PERMISJON_FORM_NAME_PREFIX,
-  FormValues as UtsettelsePeriodeFormValues,
-} from './RenderUtsettelsePeriodeFieldArray';
-
-export type FormValues = {
-  skalUtsette?: boolean;
-  [UTSETTELSE_PERIODE_FIELD_ARRAY_NAME]?: UtsettelsePeriodeFormValues;
-};
+import { RenderUtsettelsePeriodeFieldArray } from './RenderUtsettelsePeriodeFieldArray';
+import { UTSETTELSE_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
+import { FormValuesUtsettelse, PermisjonFormValues } from '../../types';
 
 interface Props {
   readOnly: boolean;
@@ -35,15 +26,14 @@ export const PermisjonUtsettelsePanel = ({ readOnly, alleKodeverk }: Props) => {
   const utsettelseReasons = alleKodeverk[KodeverkType.UTSETTELSE_AARSAK_TYPE];
   const utsettelseKvoter = alleKodeverk[KodeverkType.UTTAK_PERIODE_TYPE];
 
-  const { watch } = useFormContext<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: FormValues }>();
+  const { watch } = useFormContext<PermisjonFormValues>();
   const skalUtsette = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalUtsette`) || false;
 
   return (
-    <>
+    <VStack gap="2">
       <Label size="small">
         <FormattedMessage id="Registrering.Permisjon.Utsettelse.Title" />
       </Label>
-      <VerticalSpacer sixteenPx />
       <CheckboxField
         readOnly={readOnly}
         name={`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalUtsette`}
@@ -56,11 +46,11 @@ export const PermisjonUtsettelsePanel = ({ readOnly, alleKodeverk }: Props) => {
           readOnly={readOnly}
         />
       )}
-    </>
+    </VStack>
   );
 };
 
-PermisjonUtsettelsePanel.initialValues = () => ({
-  [UTSETTELSE_PERIODE_FIELD_ARRAY_NAME]: [{}],
+PermisjonUtsettelsePanel.initialValues = (): FormValuesUtsettelse => ({
+  [UTSETTELSE_PERIODE_FIELD_ARRAY_NAME]: [],
   skalUtsette: false,
 });

@@ -72,25 +72,15 @@ export const VirksomhetRad = ({ open, readOnly = false, alleKodeverk, index, fie
 };
 
 VirksomhetRad.initialValues = (): RegistrerVirksomhetFormValues => ({
-  navn: undefined,
-  virksomhetRegistrertINorge: undefined,
-  organisasjonsnummer: undefined,
-  familieEllerVennerTilknyttetNaringen: undefined,
-
-  fom: undefined,
-  tom: undefined,
-  landJobberFra: undefined,
-  harRegnskapsforer: undefined,
-  navnRegnskapsforer: undefined,
-  tlfRegnskapsforer: undefined,
-
-  varigEndretEllerStartetSisteFireAr: undefined,
   varigEndretEllerStartetSisteFireArArsak: [],
   typeVirksomhet: [],
 });
 
 VirksomhetRad.transformValues = (values: RegistrerVirksomhetFormValues) => ({
-  ...values,
+  navn: values.navn,
+  ...VirksomhetIdentifikasjonPanel.transformValues(values),
   ...VirksomhetTypeNaringPanel.transformValues(values),
   ...VirksomhetStartetEndretPanel.transformValues(values),
+  ...VirksomhetRegnskapPanel.transformValues(values),
+  familieEllerVennerTilknyttetNaringen: values.familieEllerVennerTilknyttetNaringen,
 });

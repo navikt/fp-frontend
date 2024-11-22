@@ -1,42 +1,30 @@
 import React, { ReactElement, useEffect } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { UseFormGetValues, useFieldArray, useFormContext } from 'react-hook-form';
+import { useFieldArray, useFormContext, UseFormGetValues } from 'react-hook-form';
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
-import { Datepicker, SelectField, PeriodFieldArray } from '@navikt/ft-form-hooks';
+import { Datepicker, PeriodFieldArray, SelectField } from '@navikt/ft-form-hooks';
 import {
-  required,
-  hasValidDate,
-  dateRangesNotOverlapping,
   dateAfterOrEqual,
   dateBeforeOrEqual,
+  dateRangesNotOverlapping,
+  hasValidDate,
+  required,
 } from '@navikt/ft-form-validators';
+import { OVERFORING_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
+import { OverforingPeriode, PermisjonFormValues } from '../../types';
 
-export const TIDSROM_PERMISJON_FORM_NAME_PREFIX = 'tidsromPermisjon';
-export const OVERFORING_PERIODE_FIELD_ARRAY_NAME = 'overforingsperioder';
+const FA_PREFIX = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OVERFORING_PERIODE_FIELD_ARRAY_NAME}`;
+const getPrefix = (index: number) => `${FA_PREFIX}.${index}` as const;
 
-type Periode = {
-  periodeFom: string;
-  periodeTom: string;
-  overforingArsak: string;
+const getOverlappingValidator = (getValues: UseFormGetValues<PermisjonFormValues>) => () => {
+  const perioder = getValues(FA_PREFIX) || [];
+  const periodeMap = perioder
+    .filter(({ periodeFom, periodeTom }) => periodeFom !== '' && periodeTom !== '')
+    .map(({ periodeFom, periodeTom }) => [periodeFom, periodeTom]);
+  return periodeMap.length > 0 ? dateRangesNotOverlapping(periodeMap) : undefined;
 };
 
-export type FormValues = Periode[];
-
-const getOverlappingValidator =
-  (
-    getValues: UseFormGetValues<{
-      [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: { [OVERFORING_PERIODE_FIELD_ARRAY_NAME]: FormValues };
-    }>,
-  ) =>
-  () => {
-    const perioder = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OVERFORING_PERIODE_FIELD_ARRAY_NAME}`);
-    const periodeMap = perioder
-      .filter(({ periodeFom, periodeTom }) => periodeFom !== '' && periodeTom !== '')
-      .map(({ periodeFom, periodeTom }) => [periodeFom, periodeTom]);
-    return periodeMap.length > 0 ? dateRangesNotOverlapping(periodeMap) : undefined;
-  };
-
-const defaultOverforingPeriode: Periode = {
+const defaultOverforingPeriode: OverforingPeriode = {
   periodeFom: '',
   periodeTom: '',
   overforingArsak: '',
@@ -60,15 +48,11 @@ export const RenderOverforingAvKvoterFieldArray = ({ selectValues, readOnly }: P
     getValues,
     trigger,
     formState: { isSubmitted },
-  } = useFormContext<{
-    [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: {
-      [OVERFORING_PERIODE_FIELD_ARRAY_NAME]: FormValues;
-    };
-  }>();
+  } = useFormContext<PermisjonFormValues>();
 
   const { fields, remove, append } = useFieldArray({
     control,
-    name: `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OVERFORING_PERIODE_FIELD_ARRAY_NAME}`,
+    name: FA_PREFIX,
   });
 
   useEffect(() => {
@@ -77,7 +61,6 @@ export const RenderOverforingAvKvoterFieldArray = ({ selectValues, readOnly }: P
     }
   }, []);
 
-  const fieldArrayName = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OVERFORING_PERIODE_FIELD_ARRAY_NAME}`;
   return (
     <PeriodFieldArray
       fields={fields}
@@ -92,7 +75,7 @@ export const RenderOverforingAvKvoterFieldArray = ({ selectValues, readOnly }: P
           <FlexRow>
             <FlexColumn>
               <SelectField
-                name={`${fieldArrayName}.${index}.overforingArsak`}
+                name={`${getPrefix(index)}.overforingArsak`}
                 label={
                   index === 0
                     ? intl.formatMessage({ id: 'Registrering.Permisjon.OverforingAvKvote.Arsak.AngiArsak' })
@@ -107,17 +90,13 @@ export const RenderOverforingAvKvoterFieldArray = ({ selectValues, readOnly }: P
               <FlexColumn>
                 <Datepicker
                   isReadOnly={readOnly}
-                  name={`${fieldArrayName}.${index}.periodeFom`}
+                  name={`${getPrefix(index)}.periodeFom`}
                   validate={[
                     required,
                     hasValidDate,
                     () => {
-                      const fomVerdi = getValues(
-                        `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OVERFORING_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`,
-                      );
-                      const tomVerdi = getValues(
-                        `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OVERFORING_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`,
-                      );
+                      const fomVerdi = getValues(`${getPrefix(index)}.periodeFom`);
+                      const tomVerdi = getValues(`${getPrefix(index)}.periodeTom`);
                       return tomVerdi && fomVerdi ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : null;
                     },
                     getOverlappingValidator(getValues),
@@ -129,17 +108,13 @@ export const RenderOverforingAvKvoterFieldArray = ({ selectValues, readOnly }: P
               <FlexColumn>
                 <Datepicker
                   isReadOnly={readOnly}
-                  name={`${fieldArrayName}.${index}.periodeTom`}
+                  name={`${getPrefix(index)}.periodeTom`}
                   validate={[
                     required,
                     hasValidDate,
                     () => {
-                      const fomVerdi = getValues(
-                        `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OVERFORING_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`,
-                      );
-                      const tomVerdi = getValues(
-                        `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OVERFORING_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`,
-                      );
+                      const fomVerdi = getValues(`${getPrefix(index)}.periodeFom`);
+                      const tomVerdi = getValues(`${getPrefix(index)}.periodeTom`);
                       return tomVerdi && fomVerdi ? dateAfterOrEqual(fomVerdi)(tomVerdi) : null;
                     },
                     getOverlappingValidator(getValues),

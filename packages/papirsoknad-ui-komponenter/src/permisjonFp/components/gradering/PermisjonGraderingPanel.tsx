@@ -1,23 +1,14 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Label } from '@navikt/ds-react';
+import { Label, VStack } from '@navikt/ds-react';
 import { CheckboxField } from '@navikt/ft-form-hooks';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { KodeverkType, Arbeidskategori } from '@navikt/fp-kodeverk';
+import { Arbeidskategori, KodeverkType } from '@navikt/fp-kodeverk';
 import { AlleKodeverk } from '@navikt/fp-types';
 
 import { useFormContext } from 'react-hook-form';
-import {
-  RenderGraderingPeriodeFieldArray,
-  TIDSROM_PERMISJON_FORM_NAME_PREFIX,
-  GRADERING_PERIODE_FIELD_ARRAY_NAME,
-  FormValues as GraderingPeriodeFormValues,
-} from './RenderGraderingPeriodeFieldArray';
-
-export type FormValues = {
-  skalGradere?: boolean;
-  [GRADERING_PERIODE_FIELD_ARRAY_NAME]?: GraderingPeriodeFormValues;
-};
+import { RenderGraderingPeriodeFieldArray } from './RenderGraderingPeriodeFieldArray';
+import { GRADERING_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
+import { FormValuesGradering } from '../../types';
 
 interface Props {
   readOnly: boolean;
@@ -34,15 +25,14 @@ export const PermisjonGraderingPanel = ({ readOnly, alleKodeverk }: Props) => {
   const graderingKvoter = alleKodeverk[KodeverkType.UTTAK_PERIODE_TYPE];
   const arbeidskategoriTyper = alleKodeverk[KodeverkType.ARBEIDSKATEGORI];
 
-  const { watch } = useFormContext<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: FormValues }>();
+  const { watch } = useFormContext<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: FormValuesGradering }>();
   const skalGradere = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalGradere`) || false;
 
   return (
-    <div>
+    <VStack gap="2">
       <Label size="small">
         <FormattedMessage id="Registrering.Permisjon.Gradering.Title" />
       </Label>
-      <VerticalSpacer sixteenPx />
       <CheckboxField
         readOnly={readOnly}
         name={`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalGradere`}
@@ -55,11 +45,11 @@ export const PermisjonGraderingPanel = ({ readOnly, alleKodeverk }: Props) => {
           readOnly={readOnly}
         />
       )}
-    </div>
+    </VStack>
   );
 };
 
-PermisjonGraderingPanel.transformValues = (formValues: FormValues) => {
+PermisjonGraderingPanel.transformValues = (formValues: FormValuesGradering) => {
   const perioder = formValues[GRADERING_PERIODE_FIELD_ARRAY_NAME];
   if (!perioder) {
     return [];
@@ -77,7 +67,7 @@ PermisjonGraderingPanel.transformValues = (formValues: FormValues) => {
   });
 };
 
-PermisjonGraderingPanel.initialValues = () => ({
-  [GRADERING_PERIODE_FIELD_ARRAY_NAME]: [{}],
+PermisjonGraderingPanel.initialValues = (): FormValuesGradering => ({
+  [GRADERING_PERIODE_FIELD_ARRAY_NAME]: [],
   skalGradere: false,
 });

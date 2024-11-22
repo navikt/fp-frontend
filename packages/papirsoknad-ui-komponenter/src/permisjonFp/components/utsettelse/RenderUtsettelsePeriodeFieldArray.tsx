@@ -1,8 +1,8 @@
-import React, { ReactElement, useEffect, useCallback } from 'react';
+import React, { ReactElement, useCallback, useEffect } from 'react';
 import { useIntl } from 'react-intl';
-import { UseFormGetValues, useFieldArray, useFormContext } from 'react-hook-form';
+import { useFieldArray, useFormContext, UseFormGetValues } from 'react-hook-form';
 import { AvsnittSkiller, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { Datepicker, SelectField, PeriodFieldArray } from '@navikt/ft-form-hooks';
+import { Datepicker, PeriodFieldArray, SelectField } from '@navikt/ft-form-hooks';
 import { KodeverkMedNavn } from '@navikt/fp-types';
 
 import {
@@ -12,58 +12,34 @@ import {
   hasValidDate,
   required,
 } from '@navikt/ft-form-validators';
-import { gyldigeUttakperioder } from './RenderPermisjonPeriodeFieldArray';
+import { gyldigeUttakperioder } from '../fulltUttak/RenderPermisjonPeriodeFieldArray';
 
 import styles from './renderUtsettelsePeriodeFieldArray.module.css';
+import { TIDSROM_PERMISJON_FORM_NAME_PREFIX, UTSETTELSE_PERIODE_FIELD_ARRAY_NAME } from '../../constants';
+import { PermisjonFormValues, UtsettelsPeriode } from '../../types';
 
-export const TIDSROM_PERMISJON_FORM_NAME_PREFIX = 'tidsromPermisjon';
-export const UTSETTELSE_PERIODE_FIELD_ARRAY_NAME = 'utsettelsePeriode';
-
-type PeriodeData = {
-  periodeFom: string;
-  periodeTom: string;
-  arsakForUtsettelse: string;
-  periodeForUtsettelse?: string;
-  erArbeidstaker?: string;
-};
-
-export type FormValues = PeriodeData[];
-
-const defaultUtsettelsePeriode: PeriodeData = {
+const defaultUtsettelsePeriode: UtsettelsPeriode = {
   periodeFom: '',
   periodeTom: '',
   arsakForUtsettelse: '',
 };
 
-const getOverlappingValidator =
-  (
-    getValues: UseFormGetValues<{
-      [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: { [UTSETTELSE_PERIODE_FIELD_ARRAY_NAME]: FormValues };
-    }>,
-  ) =>
-  () => {
-    const perioder = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${UTSETTELSE_PERIODE_FIELD_ARRAY_NAME}`);
-    const periodeMap = perioder
-      .filter(({ periodeFom, periodeTom }) => periodeFom !== '' && periodeTom !== '')
-      .map(({ periodeFom, periodeTom }) => [periodeFom, periodeTom]);
-    return periodeMap.length > 0 ? dateRangesNotOverlapping(periodeMap) : undefined;
-  };
+const FA_PREFIX = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${UTSETTELSE_PERIODE_FIELD_ARRAY_NAME}`;
+const getPrefix = (index: number) => `${FA_PREFIX}.${index}` as const;
+
+const getOverlappingValidator = (getValues: UseFormGetValues<PermisjonFormValues>) => () => {
+  const perioder = getValues(`${FA_PREFIX}`) || [];
+  const periodeMap = perioder
+    .filter(({ periodeFom, periodeTom }) => periodeFom !== '' && periodeTom !== '')
+    .map(({ periodeFom, periodeTom }) => [periodeFom, periodeTom]);
+  return periodeMap.length > 0 ? dateRangesNotOverlapping(periodeMap) : undefined;
+};
 
 const getValiderFomTomRekkefølge =
-  (
-    getValues: UseFormGetValues<{
-      [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: { [UTSETTELSE_PERIODE_FIELD_ARRAY_NAME]: FormValues };
-    }>,
-    index: number,
-    erFør: boolean,
-  ) =>
-  () => {
-    const fomVerdi = getValues(
-      `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${UTSETTELSE_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`,
-    );
-    const tomVerdi = getValues(
-      `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${UTSETTELSE_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`,
-    );
+  (getValues: UseFormGetValues<PermisjonFormValues>, index: number, erFør: boolean) => () => {
+    const prefix = `${getPrefix(index)}` as const;
+    const fomVerdi = getValues(`${prefix}.periodeFom`);
+    const tomVerdi = getValues(`${prefix}.periodeTom`);
     if (!tomVerdi && !fomVerdi) {
       return null;
     }
@@ -105,11 +81,7 @@ export const RenderUtsettelsePeriodeFieldArray = ({ utsettelseReasons, utsettels
     getValues,
     trigger,
     formState: { isSubmitted },
-  } = useFormContext<{
-    [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: {
-      [UTSETTELSE_PERIODE_FIELD_ARRAY_NAME]: FormValues;
-    };
-  }>();
+  } = useFormContext<PermisjonFormValues>();
 
   const { fields, remove, append } = useFieldArray({
     control,
@@ -124,7 +96,6 @@ export const RenderUtsettelsePeriodeFieldArray = ({ utsettelseReasons, utsettels
 
   const triggerValidationOnChange = useCallback(() => (isSubmitted ? trigger() : undefined), [isSubmitted, trigger]);
 
-  const fieldArrayName = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${UTSETTELSE_PERIODE_FIELD_ARRAY_NAME}`;
   return (
     <PeriodFieldArray
       fields={fields}
@@ -146,7 +117,7 @@ export const RenderUtsettelsePeriodeFieldArray = ({ utsettelseReasons, utsettels
             <FlexRow>
               <FlexColumn>
                 <SelectField
-                  name={`${fieldArrayName}.${index}.periodeForUtsettelse`}
+                  name={`${getPrefix(index)}.periodeForUtsettelse`}
                   label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.Utsettelse.Periode' }) : ''}
                   selectValues={mapKvoter(utsettelseKvoter)}
                   validate={[required]}
@@ -154,7 +125,7 @@ export const RenderUtsettelsePeriodeFieldArray = ({ utsettelseReasons, utsettels
               </FlexColumn>
               <FlexColumn>
                 <Datepicker
-                  name={`${fieldArrayName}.${index}.periodeFom`}
+                  name={`${getPrefix(index)}.periodeFom`}
                   label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.periodeFom' }) : ''}
                   validate={[
                     required,
@@ -167,7 +138,7 @@ export const RenderUtsettelsePeriodeFieldArray = ({ utsettelseReasons, utsettels
               </FlexColumn>
               <FlexColumn>
                 <Datepicker
-                  name={`${fieldArrayName}.${index}.periodeTom`}
+                  name={`${getPrefix(index)}.periodeTom`}
                   label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.periodeTom' }) : ''}
                   validate={[
                     required,
@@ -180,7 +151,7 @@ export const RenderUtsettelsePeriodeFieldArray = ({ utsettelseReasons, utsettels
               </FlexColumn>
               <FlexColumn>
                 <SelectField
-                  name={`${fieldArrayName}.${index}.arsakForUtsettelse`}
+                  name={`${getPrefix(index)}.arsakForUtsettelse`}
                   label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.Utsettelse.Arsak' }) : ''}
                   selectValues={mapTyper(utsettelseReasons)}
                   validate={[required]}
@@ -193,7 +164,7 @@ export const RenderUtsettelsePeriodeFieldArray = ({ utsettelseReasons, utsettels
               <FlexColumn>
                 <SelectField
                   label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.ArbeidskategoriLabel' }) : ''}
-                  name={`${fieldArrayName}.${index}.erArbeidstaker`}
+                  name={`${getPrefix(index)}.erArbeidstaker`}
                   selectValues={[
                     <option value="true" key="true">
                       {intl.formatMessage({ id: 'Registrering.Permisjon.ErArbeidstaker' })}
@@ -204,10 +175,7 @@ export const RenderUtsettelsePeriodeFieldArray = ({ utsettelseReasons, utsettels
                   ]}
                   validate={[
                     erArbeidstaker => {
-                      const typeArbeidRequired =
-                        getValues(
-                          `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${UTSETTELSE_PERIODE_FIELD_ARRAY_NAME}.${index}.arsakForUtsettelse`,
-                        ) === 'ARBEID';
+                      const typeArbeidRequired = getValues(`${getPrefix(index)}.arsakForUtsettelse`) === 'ARBEID';
                       return typeArbeidRequired ? required(erArbeidstaker) : undefined;
                     },
                   ]}

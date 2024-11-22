@@ -4,18 +4,18 @@ import userEvent from '@testing-library/user-event';
 
 import * as stories from './RettigheterPapirsoknadIndex.stories';
 
-const { Default, FarAdopterer } = composeStories(stories);
+const { MorFødsel, FarAdopterer } = composeStories(stories);
 
 describe('<RettigheterPapirsoknadIndex>', () => {
   it('skal velge at andre forelderen er død', async () => {
     const lagre = vi.fn();
 
-    await Default.run({ parameters: { submitCallback: lagre } });
+    await MorFødsel.run({ parameters: { submitCallback: lagre } });
 
     expect(await screen.findByText('Rettigheter')).toBeInTheDocument();
     expect(screen.queryByText('Mann adopterer alene')).not.toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('Den andre forelderen er død'));
+    await userEvent.click(screen.getByLabelText('Den andre forelderen er død'));
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
@@ -32,7 +32,8 @@ describe('<RettigheterPapirsoknadIndex>', () => {
 
     expect(await screen.findByText('Rettigheter')).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('Mann adopterer alene'));
+    expect(await screen.findByText('Mann adopterer alene')).toBeInTheDocument();
+    await userEvent.click(screen.getByLabelText('Mann adopterer alene'));
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 

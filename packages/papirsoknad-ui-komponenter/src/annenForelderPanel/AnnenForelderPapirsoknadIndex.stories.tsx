@@ -10,7 +10,7 @@ import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { AnnenForelderPapirsoknadIndex } from './AnnenForelderPapirsoknadIndex';
 
 const meta = {
-  title: 'papirsoknad/ui-komponenter/annen-forelder',
+  title: 'ui-komponenter/annen-forelder',
   component: AnnenForelderPapirsoknadIndex,
   args: {
     readOnly: false,

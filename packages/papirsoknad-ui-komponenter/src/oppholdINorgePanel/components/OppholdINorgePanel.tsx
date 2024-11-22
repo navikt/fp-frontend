@@ -7,7 +7,6 @@ import { Heading, VStack } from '@navikt/ds-react';
 import { AlleKodeverk } from '@navikt/fp-types';
 import { UtenlandsOppholdField, FormValues as FormValuesFieldArray } from './UtenlandsOppholdField';
 import { TrueFalseInput } from '../../felles/TrueFalseInput';
-import { OppholdINorgePapirsoknadIndex } from '../OppholdINorgePapirsoknadIndex';
 
 export type OppholdINorgeFormValues = {
   oppholdINorge?: boolean;

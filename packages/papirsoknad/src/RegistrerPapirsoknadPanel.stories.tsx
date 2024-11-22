@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 import { RegistrerPapirsoknadPanel } from './RegistrerPapirsoknadPanel';
 import { Fagsak } from '@navikt/fp-types';
-import { fagsakYtelseType } from '@navikt/fp-kodeverk';
+import { FagsakYtelseType } from '@navikt/fp-kodeverk';
 
 const meta = {
   component: RegistrerPapirsoknadPanel,
@@ -30,7 +30,7 @@ type Story = StoryObj<typeof meta>;
 export const ForeldrepengerFørstegang: Story = {
   args: {
     fagsak: {
-      fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
+      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
       bruker: { fødselsnummer: '00000000000' },
     } as Fagsak,
     erEndringssøknad: false,
@@ -40,7 +40,7 @@ export const ForeldrepengerFørstegang: Story = {
 export const ForeldrepengerEndring: Story = {
   args: {
     fagsak: {
-      fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
+      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
       bruker: { fødselsnummer: '00000000000' },
     } as Fagsak,
     erEndringssøknad: true,
@@ -50,7 +50,7 @@ export const ForeldrepengerEndring: Story = {
 export const SvangerskapspengerFørstegang: Story = {
   args: {
     fagsak: {
-      fagsakYtelseType: fagsakYtelseType.SVANGERSKAPSPENGER,
+      fagsakYtelseType: FagsakYtelseType.SVANGERSKAPSPENGER,
       bruker: { fødselsnummer: '00000000000' },
     } as Fagsak,
     erEndringssøknad: false,
@@ -60,7 +60,7 @@ export const SvangerskapspengerFørstegang: Story = {
 export const SvangerskapspengerEndring: Story = {
   args: {
     fagsak: {
-      fagsakYtelseType: fagsakYtelseType.SVANGERSKAPSPENGER,
+      fagsakYtelseType: FagsakYtelseType.SVANGERSKAPSPENGER,
       bruker: { fødselsnummer: '00000000000' },
     } as Fagsak,
     erEndringssøknad: true,
@@ -69,7 +69,7 @@ export const SvangerskapspengerEndring: Story = {
 export const EngangsstonadFørstegang: Story = {
   args: {
     fagsak: {
-      fagsakYtelseType: fagsakYtelseType.ENGANGSSTONAD,
+      fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
       bruker: { fødselsnummer: '00000000000' },
     } as Fagsak,
     erEndringssøknad: false,
@@ -79,7 +79,7 @@ export const EngangsstonadFørstegang: Story = {
 export const EngangsstonadEndring: Story = {
   args: {
     fagsak: {
-      fagsakYtelseType: fagsakYtelseType.ENGANGSSTONAD,
+      fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
       bruker: { fødselsnummer: '00000000000' },
     } as Fagsak,
     erEndringssøknad: true,

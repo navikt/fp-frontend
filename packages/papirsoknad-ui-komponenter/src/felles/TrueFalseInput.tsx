@@ -1,13 +1,18 @@
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
 import { required } from '@navikt/ft-form-validators';
+import { createIntl } from '@navikt/ft-utils';
+
+import messages from '../../i18n/nb_NO.json';
+
+const intl = createIntl(messages);
 
 type Props = {
   name: string;
   label: React.ReactNode;
   readOnly: boolean;
   isHorizontal?: boolean;
+  isRequired?: boolean;
   trueLabel?: React.ReactNode;
   trueContent?: React.ReactElement;
   falseLabel?: React.ReactNode;
@@ -23,23 +28,24 @@ export const TrueFalseInput = ({
   trueContent,
   falseLabel,
   falseContent,
+  isRequired = true,
 }: Props) => {
   return (
     <RadioGroupPanel
       name={name}
       label={label}
-      validate={[required]}
+      validate={isRequired ? [required] : []}
       isReadOnly={readOnly}
       isTrueOrFalseSelection
       isHorizontal={isHorizontal}
       radios={[
         {
-          label: trueLabel ?? <FormattedMessage id="Registrering.Yes" />,
+          label: trueLabel ?? intl.formatMessage({ id: 'Registrering.Yes' }),
           value: 'true',
           element: trueContent,
         },
         {
-          label: falseLabel ?? <FormattedMessage id="Registrering.No" />,
+          label: falseLabel ?? intl.formatMessage({ id: 'Registrering.No' }),
           value: 'false',
           element: falseContent,
         },

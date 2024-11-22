@@ -10,7 +10,7 @@ import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { AndreYtelserPapirsoknadIndex } from './AndreYtelserPapirsoknadIndex';
 
 const meta = {
-  title: 'papirsoknad/ui-komponenter/andre-ytelser',
+  title: 'ui-komponenter/andre-ytelser',
   component: AndreYtelserPapirsoknadIndex,
   parameters: {
     submitCallback: action('onSubmit'),

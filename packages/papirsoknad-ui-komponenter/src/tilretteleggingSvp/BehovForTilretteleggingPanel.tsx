@@ -186,7 +186,6 @@ BehovForTilretteleggingPanel.initialValues = (): FormValues => ({
     [tilretteleggingForArbeidsgiverFieldArrayName]: [{}],
   },
 });
-
 type TilretteleggingArbeidsforhold = {
   '@type': string;
   behovsdato?: string;

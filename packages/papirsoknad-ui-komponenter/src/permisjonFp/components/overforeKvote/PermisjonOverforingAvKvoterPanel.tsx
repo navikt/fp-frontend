@@ -1,18 +1,14 @@
 import React, { ReactElement } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
-import { Label } from '@navikt/ds-react';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { Label, VStack } from '@navikt/ds-react';
 import { CheckboxField } from '@navikt/ft-form-hooks';
-import { KodeverkType, OverforingArsak, ForeldreType } from '@navikt/fp-kodeverk';
+import { ForeldreType, KodeverkType, OverforingArsak } from '@navikt/fp-kodeverk';
 import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
 import { useFormContext } from 'react-hook-form';
-import {
-  RenderOverforingAvKvoterFieldArray,
-  FormValues as KvoterPerioderFormValues,
-  TIDSROM_PERMISJON_FORM_NAME_PREFIX,
-  OVERFORING_PERIODE_FIELD_ARRAY_NAME,
-} from './RenderOverforingAvKvoterFieldArray';
+import { RenderOverforingAvKvoterFieldArray } from './RenderOverforingAvKvoterFieldArray';
+import { FormValuesOverforing, PermisjonFormValues } from '../../types';
+import { TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
 
 const getText = (intl: IntlShape, kode: string, navn: string): string => {
   if (kode === OverforingArsak.INSTITUSJONSOPPHOLD_ANNEN_FORELDER) {
@@ -47,11 +43,6 @@ const mapArsaker = (
       ),
     );
 
-export type FormValues = {
-  skalOvertaKvote: boolean;
-  [OVERFORING_PERIODE_FIELD_ARRAY_NAME]?: KvoterPerioderFormValues;
-};
-
 interface Props {
   foreldreType: string;
   readOnly: boolean;
@@ -71,26 +62,25 @@ export const PermisjonOverforingAvKvoterPanel = ({ foreldreType, alleKodeverk, r
   const overtaKvoteReasons = alleKodeverk[KodeverkType.OVERFOERING_AARSAK_TYPE];
   const selectValues = mapArsaker(overtaKvoteReasons, foreldreType === ForeldreType.MOR, erEndringssøknad, intl);
 
-  const { watch } = useFormContext<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: FormValues }>();
+  const { watch } = useFormContext<PermisjonFormValues>();
   const skalOvertaKvote = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalOvertaKvote`) || false;
 
   return (
-    <>
+    <VStack gap="2">
       <Label size="small">
         <FormattedMessage id="Registrering.Permisjon.OverforingAvKvote.OvertaKvoten" />
       </Label>
-      <VerticalSpacer sixteenPx />
       <CheckboxField
         readOnly={readOnly}
         name={`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalOvertaKvote`}
         label={<FormattedMessage id="Registrering.Permisjon.OverforingAvKvote.OvertaKvote" />}
       />
       {skalOvertaKvote && <RenderOverforingAvKvoterFieldArray selectValues={selectValues} readOnly={readOnly} />}
-    </>
+    </VStack>
   );
 };
 
-PermisjonOverforingAvKvoterPanel.initialValues = () => ({
+PermisjonOverforingAvKvoterPanel.initialValues = (): FormValuesOverforing => ({
   skalOvertaKvote: false,
-  overforingsperioder: [{}],
+  overforingsperioder: [],
 });

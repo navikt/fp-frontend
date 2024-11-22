@@ -8,7 +8,7 @@ import { Form } from '@navikt/ft-form-hooks';
 import { TerminOgFodselPanelSvp } from './TerminOgFodselPanelSvp';
 
 const meta = {
-  title: 'papirsoknad/ui-komponenter/termin-og-fodsel-svp',
+  title: 'ui-komponenter/termin-og-fodsel-svp',
   component: TerminOgFodselPanelSvp,
   parameters: {
     submitCallback: action('onSubmit'),
@@ -20,7 +20,7 @@ const meta = {
     const formMethods = useForm();
 
     return (
-      <Form formMethods={formMethods} onSubmit={submitCallback}>
+      <Form formMethods={formMethods} onSubmit={val => submitCallback(TerminOgFodselPanelSvp.transformValues(val))}>
         <VStack gap="10">
           <TerminOgFodselPanelSvp {...args} />
           <Button size="small" variant="primary">

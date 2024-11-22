@@ -10,7 +10,7 @@ import { FamilieHendelseType } from '@navikt/fp-kodeverk';
 import { OmsorgOgAdopsjonPapirsoknadIndex } from './OmsorgOgAdopsjonPapirsoknadIndex';
 
 const meta = {
-  title: 'papirsoknad/ui-komponenter/omsorg-og-adopsjon',
+  title: 'ui-komponenter/omsorg-og-adopsjon',
   component: OmsorgOgAdopsjonPapirsoknadIndex,
   args: {
     isForeldrepengerFagsak: false,

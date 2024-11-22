@@ -8,7 +8,7 @@ import { Form } from '@navikt/ft-form-hooks';
 import { TerminOgFodselPanel } from './TerminOgFodselPanel';
 
 const meta = {
-  title: 'papirsoknad/ui-komponenter/termin-og-fodsel',
+  title: 'ui-komponenter/termin-og-fodsel',
   component: TerminOgFodselPanel,
   parameters: {
     submitCallback: action('onSubmit'),

@@ -179,6 +179,9 @@ export const TerminOgFodselPanel = ({ readOnly, erForeldrepenger = false }: Prop
   );
 };
 
+TerminOgFodselPanel.initialValues = (): FormValues => ({
+  erBarnetFodt: undefined,
+});
 TerminOgFodselPanel.transformValues = ({
   antallBarn,
   erBarnetFodt,

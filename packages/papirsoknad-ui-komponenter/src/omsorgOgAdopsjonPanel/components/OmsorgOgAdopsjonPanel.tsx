@@ -80,7 +80,9 @@ export const OmsorgOgAdopsjonPanel = ({
         <Heading size="small">
           <FormattedMessage
             id={
-              familieHendelseType === FamilieHendelseType.ADOPSJON ? 'Registrering.Adopsjon.Title' : 'Registrering.Adopsjon.OmsorgTitle'
+              familieHendelseType === FamilieHendelseType.ADOPSJON
+                ? 'Registrering.Adopsjon.Title'
+                : 'Registrering.Adopsjon.OmsorgTitle'
             }
           />
         </Heading>
@@ -165,7 +167,7 @@ export const OmsorgOgAdopsjonPanel = ({
   );
 };
 
-OmsorgOgAdopsjonPanel.initialValues = () => ({ [OMSORG_NAME_PREFIX]: {} });
+OmsorgOgAdopsjonPanel.initialValues = (): OmsorgOgAdopsjonFormValues => ({ [OMSORG_NAME_PREFIX]: {} });
 
 OmsorgOgAdopsjonPanel.transformValues = ({ omsorg }: OmsorgOgAdopsjonFormValues): TransformedFormValue => ({
   [OMSORG_NAME_PREFIX]: {

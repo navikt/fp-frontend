@@ -1,8 +1,9 @@
 import React, { ReactElement } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useFormContext } from 'react-hook-form';
+import { HStack, VStack } from '@navikt/ds-react';
 import { Datepicker, InputField, SelectField } from '@navikt/ft-form-hooks';
-import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { ArrowBox } from '@navikt/ft-ui-komponenter';
 import {
   dateBeforeOrEqualToToday,
   hasValidDate,
@@ -16,9 +17,8 @@ import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
 import { TrueFalseInput } from '../../felles/TrueFalseInput';
 import { VIRKSOMHET_FORM_NAME_PREFIX } from '../constants';
-import { VirksomhetFormValues } from '../types';
+import { RegistrerVirksomhetFormValues, VirksomhetFormValues } from '../types';
 import styles from './virksomhetIdentifikasjonPanel.module.css';
-import { HStack, VStack } from '@navikt/ds-react';
 
 const countrySelectValues = (countryCodes: KodeverkMedNavn[]): ReactElement[] =>
   countryCodes.map(({ kode, navn }) => (
@@ -63,7 +63,7 @@ export const VirksomhetIdentifikasjonPanel = ({ index, readOnly, alleKodeverk }:
         </ArrowBox>
       }
       falseContent={
-        <ArrowBox marginTop={8}>
+        <ArrowBox alignOffset={58} marginTop={8}>
           <VStack gap="4">
             <SelectField
               name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.landJobberFra`}
@@ -99,3 +99,18 @@ export const VirksomhetIdentifikasjonPanel = ({ index, readOnly, alleKodeverk }:
     />
   );
 };
+
+VirksomhetIdentifikasjonPanel.transformValues = ({
+  virksomhetRegistrertINorge,
+  organisasjonsnummer,
+  landJobberFra,
+  fom,
+  tom,
+}: RegistrerVirksomhetFormValues) => ({
+  virksomhetRegistrertINorge,
+  organisasjonsnummer: virksomhetRegistrertINorge ? organisasjonsnummer : undefined,
+
+  landJobberFra: virksomhetRegistrertINorge === false ? landJobberFra : undefined,
+  fom: virksomhetRegistrertINorge === false ? fom : undefined,
+  tom: virksomhetRegistrertINorge === false ? tom : undefined,
+});

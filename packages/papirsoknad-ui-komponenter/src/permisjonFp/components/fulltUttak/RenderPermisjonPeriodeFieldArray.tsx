@@ -1,11 +1,11 @@
 import React, { ReactElement, useEffect } from 'react';
 import dayjs from 'dayjs';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { UseFormGetValues, useFieldArray, useFormContext } from 'react-hook-form';
-import { Label, Alert, Button } from '@navikt/ds-react';
+import { useFieldArray, useFormContext, UseFormGetValues } from 'react-hook-form';
+import { Alert, Button, Label } from '@navikt/ds-react';
 import { XMarkIcon } from '@navikt/aksel-icons';
-import { VerticalSpacer, FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
-import { CheckboxField, Datepicker, SelectField, PeriodFieldArray, InputField } from '@navikt/ft-form-hooks';
+import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { CheckboxField, Datepicker, InputField, PeriodFieldArray, SelectField } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   dateBeforeOrEqual,
@@ -21,11 +21,13 @@ import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { KodeverkType, UttakPeriodeType } from '@navikt/fp-kodeverk';
 
 import styles from './renderPermisjonPeriodeFieldArray.module.css';
+import { PermisjonFormValues, PermisjonPeriode } from '../../types';
+import { PERMISJON_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
+
+const FA_PREFIX = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}`;
+const getPrefix = (index: number) => `${FA_PREFIX}.${index}` as const;
 
 const maxValue100 = maxValue(100);
-
-const TIDSROM_PERMISJON_FORM_NAME_PREFIX = 'tidsromPermisjon';
-export const PERMISJON_PERIODE_FIELD_ARRAY_NAME = 'permisjonsPerioder';
 
 export const gyldigeUttakperioder = [
   UttakPeriodeType.FELLESPERIODE,
@@ -62,45 +64,18 @@ const getLabel = (erForsteRad: boolean, text: string): string => (erForsteRad ? 
 const erPeriodeFormFør01012019 = (periodeFom: string | undefined): boolean =>
   !!periodeFom && dayjs(periodeFom, ISO_DATE_FORMAT).isBefore(dayjs('2019-01-01'));
 
-export type FormValues = {
-  periodeType: string;
-  periodeFom: string;
-  periodeTom: string;
-  flerbarnsdager?: boolean;
-  morsAktivitet?: string;
-  harSamtidigUttak?: boolean;
-  samtidigUttaksprosent?: number;
+const getOverlappingValidator = (getValues: UseFormGetValues<PermisjonFormValues>) => () => {
+  const perioder = getValues(FA_PREFIX) || [];
+  const periodeMap = perioder
+    .filter(({ periodeFom, periodeTom }) => periodeFom !== '' && periodeTom !== '')
+    .map(({ periodeFom, periodeTom }) => [periodeFom, periodeTom]);
+  return dateRangesNotOverlapping(periodeMap);
 };
 
-const getOverlappingValidator =
-  (
-    getValues: UseFormGetValues<{
-      [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: { [PERMISJON_PERIODE_FIELD_ARRAY_NAME]: FormValues[] };
-    }>,
-  ) =>
-  () => {
-    const perioder = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}`);
-    const periodeMap = perioder
-      .filter(({ periodeFom, periodeTom }) => periodeFom !== '' && periodeTom !== '')
-      .map(({ periodeFom, periodeTom }) => [periodeFom, periodeTom]);
-    return dateRangesNotOverlapping(periodeMap);
-  };
-
 const getValiderFomOgTomVerdi =
-  (
-    getValues: UseFormGetValues<{
-      [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: { [PERMISJON_PERIODE_FIELD_ARRAY_NAME]: FormValues[] };
-    }>,
-    index: number,
-    erFør: boolean,
-  ) =>
-  () => {
-    const fomVerdi = getValues(
-      `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`,
-    );
-    const tomVerdi = getValues(
-      `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`,
-    );
+  (getValues: UseFormGetValues<PermisjonFormValues>, index: number, erFør: boolean) => () => {
+    const fomVerdi = getValues(`${getPrefix(index)}.periodeFom`);
+    const tomVerdi = getValues(`${getPrefix(index)}.periodeTom`);
     if (!tomVerdi || !fomVerdi) {
       return null;
     }
@@ -135,15 +110,11 @@ export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKod
     trigger,
     watch,
     formState: { isSubmitted },
-  } = useFormContext<{
-    [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: {
-      [PERMISJON_PERIODE_FIELD_ARRAY_NAME]: FormValues[];
-    };
-  }>();
+  } = useFormContext<PermisjonFormValues>();
 
   const { fields, remove, append } = useFieldArray({
     control,
-    name: `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}`,
+    name: FA_PREFIX,
   });
 
   useEffect(() => {
@@ -165,7 +136,7 @@ export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKod
       {(field, index) => {
         const erForsteRad = index === 0;
 
-        const periode = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}.${index}`);
+        const periode = watch(getPrefix(index));
 
         const periodeFomForTidlig = erPeriodeFormFør01012019(periode.periodeFom);
         const visEllerSkulOverskriftStyle = erForsteRad ? styles.visOverskrift : styles.skjulOverskrift;
@@ -173,7 +144,6 @@ export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKod
         const skalDisableMorsAktivitet =
           PERIODS_WITH_NO_MORS_AKTIVITET.some(pma => pma === periode.periodeType) || periode.periodeType === '';
 
-        const namePart1 = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}.${index}`;
         return (
           <div key={field.id}>
             <FlexContainer>
@@ -181,7 +151,7 @@ export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKod
                 <FlexColumn className={styles.selectFieldWidth}>
                   <SelectField
                     readOnly={readOnly}
-                    name={`${namePart1}.periodeType`}
+                    name={`${getPrefix(index)}.periodeType`}
                     label={getLabel(erForsteRad, intl.formatMessage({ id: 'Registrering.Permisjon.periodeType' }))}
                     selectValues={mapPeriodeTyper(periodeTyper)}
                     validate={[required]}
@@ -190,7 +160,7 @@ export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKod
                 <FlexColumn>
                   <Datepicker
                     isReadOnly={readOnly}
-                    name={`${namePart1}.periodeFom`}
+                    name={`${getPrefix(index)}.periodeFom`}
                     label={getLabel(erForsteRad, intl.formatMessage({ id: 'Registrering.Permisjon.periodeFom' }))}
                     validate={[
                       required,
@@ -204,7 +174,7 @@ export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKod
                 <FlexColumn>
                   <Datepicker
                     isReadOnly={readOnly}
-                    name={`${namePart1}.periodeTom`}
+                    name={`${getPrefix(index)}.periodeTom`}
                     label={getLabel(erForsteRad, intl.formatMessage({ id: 'Registrering.Permisjon.periodeTom' }))}
                     validate={[
                       required,
@@ -220,7 +190,7 @@ export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKod
                     <SelectField
                       readOnly={readOnly}
                       disabled={skalDisableMorsAktivitet}
-                      name={`${namePart1}.morsAktivitet`}
+                      name={`${getPrefix(index)}.morsAktivitet`}
                       label={getLabel(
                         erForsteRad,
                         intl.formatMessage({ id: 'Registrering.Permisjon.Fellesperiode.morsAktivitet' }),
@@ -234,18 +204,18 @@ export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKod
                   <Label size="small" className={visEllerSkulOverskriftStyle}>
                     <FormattedMessage id="Registrering.Permisjon.Flerbarnsdager" />
                   </Label>
-                  <CheckboxField readOnly={readOnly} name={`${namePart1}.flerbarnsdager`} label=" " />
+                  <CheckboxField readOnly={readOnly} name={`${getPrefix(index)}.flerbarnsdager`} label=" " />
                 </FlexColumn>
                 <FlexColumn className={styles.smalHeader}>
                   <Label size="small" className={visEllerSkulOverskriftStyle}>
                     <FormattedMessage id="Registrering.Permisjon.HarSamtidigUttak" />
                   </Label>
-                  <CheckboxField readOnly={readOnly} name={`${namePart1}.harSamtidigUttak`} label=" " />
+                  <CheckboxField readOnly={readOnly} name={`${getPrefix(index)}.harSamtidigUttak`} label=" " />
                 </FlexColumn>
                 {periode.harSamtidigUttak && (
                   <FlexColumn className={erForsteRad ? '' : styles.alignSamtidigUttak}>
                     <InputField
-                      name={`${namePart1}.samtidigUttaksprosent`}
+                      name={`${getPrefix(index)}.samtidigUttaksprosent`}
                       validate={[hasValidDecimal, maxValue100]}
                       label={intl.formatMessage({ id: 'Registrering.Permisjon.SamtidigUttaksprosent' })}
                       normalizeOnBlur={value => (Number.isNaN(value) ? value : parseFloat(value.toString()).toFixed(2))}
@@ -285,7 +255,7 @@ export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKod
   );
 };
 
-RenderPermisjonPeriodeFieldArray.transformValues = (values: FormValues[]) =>
+RenderPermisjonPeriodeFieldArray.transformValues = (values: PermisjonPeriode[]) =>
   values.map(value => {
     if (PERIODS_WITH_NO_MORS_AKTIVITET.some(pma => pma === value.periodeType)) {
       return {

@@ -10,7 +10,7 @@ import { RettigheterPapirsoknadIndex } from './RettigheterPapirsoknadIndex';
 import { SoknadData } from '../felles/SoknadData';
 
 const meta = {
-  title: 'papirsoknad/ui-komponenter/rettigheter',
+  title: 'ui-komponenter/rettigheter',
   component: RettigheterPapirsoknadIndex,
   args: {
     readOnly: false,
@@ -19,7 +19,10 @@ const meta = {
     const formMethods = useForm();
 
     return (
-      <Form formMethods={formMethods} onSubmit={submitCallback}>
+      <Form
+        formMethods={formMethods}
+        onSubmit={val => submitCallback(RettigheterPapirsoknadIndex.transformValues(val))}
+      >
         <VStack gap="10">
           <RettigheterPapirsoknadIndex {...args} />
           <Button size="small" variant="primary">
@@ -35,12 +38,23 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const MorFødsel: Story = {
   args: {
     soknadData: new SoknadData(FagsakYtelseType.FORELDREPENGER, FamilieHendelseType.FODSEL, ForeldreType.MOR),
   },
 };
 
+export const FarFodsel: Story = {
+  args: {
+    soknadData: new SoknadData(FagsakYtelseType.FORELDREPENGER, FamilieHendelseType.FODSEL, ForeldreType.FAR),
+  },
+};
+
+export const MorAdopterer: Story = {
+  args: {
+    soknadData: new SoknadData(FagsakYtelseType.FORELDREPENGER, FamilieHendelseType.ADOPSJON, ForeldreType.MOR),
+  },
+};
 export const FarAdopterer: Story = {
   args: {
     soknadData: new SoknadData(FagsakYtelseType.FORELDREPENGER, FamilieHendelseType.ADOPSJON, ForeldreType.FAR),

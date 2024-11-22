@@ -16,16 +16,11 @@ import {
   RettigheterFormValues,
 } from '@navikt/fp-papirsoknad-ui-komponenter';
 
-export type FormValues = {
-  foedselsData?: string; // brukes denne?
-} & RettigheterFormValues &
+export type FormValues = RettigheterFormValues &
   OmsorgOgAdopsjonFormValues &
   OppholdINorgeFormValues &
   TerminOgFodselFormValues &
   SprakFormValues;
-
-export type TransformedFormValues = Omit<FormValues, 'omsorg'> &
-  ReturnType<typeof OmsorgOgAdopsjonPapirsoknadIndex.transformValues>;
 
 interface Props {
   readOnly: boolean;
@@ -44,7 +39,6 @@ const RegistreringFodselGrid = ({ readOnly, soknadData, alleKodeverk, fodselsdat
       <OmsorgOgAdopsjonPapirsoknadIndex
         readOnly={readOnly}
         familieHendelseType={soknadData.getFamilieHendelseType()}
-        isForeldrepengerFagsak={false}
         fodselsdato={fodselsdato}
       />
     )}
@@ -59,7 +53,7 @@ const RegistreringFodselGrid = ({ readOnly, soknadData, alleKodeverk, fodselsdat
   </>
 );
 
-RegistreringFodselGrid.transformValues = (values: FormValues): TransformedFormValues => ({
+RegistreringFodselGrid.transformValues = (values: FormValues) => ({
   ...RettigheterPapirsoknadIndex.transformValues(values),
   ...OppholdINorgePapirsoknadIndex.transformValues(values),
   ...OmsorgOgAdopsjonPapirsoknadIndex.transformValues(values),

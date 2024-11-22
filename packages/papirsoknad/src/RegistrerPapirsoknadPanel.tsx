@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
-import { Heading, Panel, VStack } from '@navikt/ds-react';
+import { Heading, VStack } from '@navikt/ds-react';
 import { createIntl } from '@navikt/ft-utils';
 import { FagsakYtelseType } from '@navikt/ft-kodeverk';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
@@ -13,8 +13,6 @@ import { ForeldrepengerPapirsoknadIndex } from './foreldrepenger/ForeldrepengerP
 import { SvangerskapspengerPapirsoknadIndex } from './svangerskapspenger/SvangerskapspengerPapirsoknadIndex';
 import SoknadTypePickerForm from './SoknadTypePickerForm';
 import messages from '../i18n/nb_NO.json';
-
-import styles from './registrerPapirsoknadPanel.module.css';
 
 const intl = createIntl(messages);
 
@@ -65,52 +63,50 @@ export const RegistrerPapirsoknadPanel = ({
 
   return (
     <RawIntlProvider value={intl}>
-      <Panel className={styles.panel}>
-        <VStack gap="4">
-          <Heading size="small">
-            <FormattedMessage id="Registrering.RegistrereSoknad" />
-          </Heading>
-          {!readOnly && (
-            <AksjonspunktHelpTextHTML>
-              <FormattedMessage key="regOpplysninger" id="Registrering.RegistrerAlleOpplysninger" />
-            </AksjonspunktHelpTextHTML>
-          )}
-          <SoknadTypePickerForm
-            setSoknadData={setSoknadData}
-            fagsakYtelseType={fagsak.fagsakYtelseType}
+      <VStack gap="4">
+        <Heading size="small">
+          <FormattedMessage id="Registrering.RegistrereSoknad" />
+        </Heading>
+        {!readOnly && (
+          <AksjonspunktHelpTextHTML>
+            <FormattedMessage id="Registrering.RegistrerAlleOpplysninger" />
+          </AksjonspunktHelpTextHTML>
+        )}
+        <SoknadTypePickerForm
+          setSoknadData={setSoknadData}
+          fagsakYtelseType={fagsak.fagsakYtelseType}
+          alleKodeverk={kodeverk}
+        />
+        {soknadData && soknadData.getFagsakYtelseType() === FagsakYtelseType.ENGANGSSTONAD && (
+          <EngangsstonadPapirsoknadIndex
+            onSubmitUfullstendigsoknad={lagreOgAvslutt}
+            onSubmit={lagre}
+            readOnly={readOnly}
+            soknadData={soknadData}
             alleKodeverk={kodeverk}
           />
-          {soknadData && soknadData.getFagsakYtelseType() === FagsakYtelseType.ENGANGSSTONAD && (
-            <EngangsstonadPapirsoknadIndex
-              onSubmitUfullstendigsoknad={lagreOgAvslutt}
-              onSubmit={lagre}
-              readOnly={readOnly}
-              soknadData={soknadData}
-              alleKodeverk={kodeverk}
-            />
-          )}
-          {soknadData && soknadData.getFagsakYtelseType() === FagsakYtelseType.FORELDREPENGER && (
-            <ForeldrepengerPapirsoknadIndex
-              onSubmitUfullstendigsoknad={lagreOgAvslutt}
-              onSubmit={lagre}
-              readOnly={readOnly}
-              soknadData={soknadData}
-              alleKodeverk={kodeverk}
-              fagsakPersonnummer={fagsak.bruker.fødselsnummer}
-              erEndringssøknad={erEndringssøknad}
-            />
-          )}
-          {soknadData && soknadData.getFagsakYtelseType() === FagsakYtelseType.SVANGERSKAPSPENGER && (
-            <SvangerskapspengerPapirsoknadIndex
-              onSubmitUfullstendigsoknad={lagreOgAvslutt}
-              onSubmit={lagre}
-              readOnly={readOnly}
-              soknadData={soknadData}
-              alleKodeverk={kodeverk}
-            />
-          )}
-        </VStack>
-      </Panel>
+        )}
+        {soknadData && soknadData.getFagsakYtelseType() === FagsakYtelseType.FORELDREPENGER && (
+          <ForeldrepengerPapirsoknadIndex
+            onSubmitUfullstendigsoknad={lagreOgAvslutt}
+            onSubmit={lagre}
+            readOnly={readOnly}
+            soknadData={soknadData}
+            alleKodeverk={kodeverk}
+            fagsakPersonnummer={fagsak.bruker.fødselsnummer}
+            erEndringssøknad={erEndringssøknad}
+          />
+        )}
+        {soknadData && soknadData.getFagsakYtelseType() === FagsakYtelseType.SVANGERSKAPSPENGER && (
+          <SvangerskapspengerPapirsoknadIndex
+            onSubmitUfullstendigsoknad={lagreOgAvslutt}
+            onSubmit={lagre}
+            readOnly={readOnly}
+            soknadData={soknadData}
+            alleKodeverk={kodeverk}
+          />
+        )}
+      </VStack>
     </RawIntlProvider>
   );
 };

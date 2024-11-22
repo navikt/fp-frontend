@@ -16,7 +16,7 @@ describe('<BekreftelsePanel>', () => {
     });
 
     expect(await screen.findByText('Bekreftelse')).toBeInTheDocument();
-    expect(screen.getByLabelText('Annen forelder er kjent med hvilke perioder det er søkt om')).toBeInTheDocument();
+    expect(screen.getByText('Annen forelder er kjent med hvilke perioder det er søkt om')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
@@ -36,7 +36,7 @@ describe('<BekreftelsePanel>', () => {
     });
 
     expect(await screen.findByText('Bekreftelse')).toBeInTheDocument();
-    expect(screen.getByLabelText('Annen forelder er kjent med hvilke perioder det er søkt om')).toBeInTheDocument();
+    expect(screen.getByText('Annen forelder er kjent med hvilke perioder det er søkt om')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Ja'));
 

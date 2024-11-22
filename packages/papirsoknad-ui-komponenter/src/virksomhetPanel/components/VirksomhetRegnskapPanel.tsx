@@ -1,14 +1,13 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { VStack } from '@navikt/ds-react';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 import { InputField } from '@navikt/ft-form-hooks';
 import { required, hasValidInteger, hasValidText } from '@navikt/ft-form-validators';
 
-import { useFormContext } from 'react-hook-form';
 import { VIRKSOMHET_FORM_NAME_PREFIX } from '../constants';
 import { TrueFalseInput } from '../../felles/TrueFalseInput';
-import { VirksomhetFormValues } from '../types';
-import { VStack } from '@navikt/ds-react';
+import { RegistrerVirksomhetFormValues } from '../types';
 
 interface Props {
   readOnly: boolean;
@@ -48,3 +47,13 @@ export const VirksomhetRegnskapPanel = ({ index, readOnly }: Props) => {
     />
   );
 };
+
+VirksomhetRegnskapPanel.transformValues = ({
+  harRegnskapsforer,
+  navnRegnskapsforer,
+  tlfRegnskapsforer,
+}: RegistrerVirksomhetFormValues) => ({
+  harRegnskapsforer,
+  ...(harRegnskapsforer ? { navnRegnskapsforer } : {}),
+  ...(harRegnskapsforer ? { tlfRegnskapsforer } : {}),
+});

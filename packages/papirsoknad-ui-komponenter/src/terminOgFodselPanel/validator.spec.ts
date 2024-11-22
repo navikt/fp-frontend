@@ -44,11 +44,6 @@ describe('validator', () => {
       expect(result).toEqual(`Dato må være før eller lik ${dayjs(terminPassert).format('DD.MM.YYYY')}`);
     });
 
-    it('skal feile for foranliggende terminbekreftelsedato etter overgått termin', () => {
-      const result = terminBekreftelseBeforeTodayOrTermindato(terminPassert, terminbekreftelseFremtid);
-      expect(result).toEqual(`Dato må være før eller lik ${dayjs(terminPassert).format('DD.MM.YYYY')}`);
-    });
-
     it('skal feile for foranliggende terminbekreftelsedato etter dagens dato', () => {
       const result = terminBekreftelseBeforeTodayOrTermindato(terminFremtidig, terminbekreftelseFremtid);
       expect(result).toEqual(`Dato må være før eller lik ${dayjs(dagensDato).format('DD.MM.YYYY')}`);

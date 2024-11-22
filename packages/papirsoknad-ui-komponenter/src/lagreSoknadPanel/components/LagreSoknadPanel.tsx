@@ -93,6 +93,12 @@ export const LagreSoknadPanel = ({ submitting, onSubmitUfullstendigsoknad, readO
   );
 };
 
+LagreSoknadPanel.initialValues = (): LagreSoknadFormValues => ({
+  kommentarEndring: undefined,
+  registrerVerge: false,
+  ufullstendigSoeknad: false,
+});
+
 LagreSoknadPanel.transformValues = ({
   kommentarEndring,
   registrerVerge,

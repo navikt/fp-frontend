@@ -37,9 +37,7 @@ export type { FormValues as DekningsgradFormValues } from './src/dekningsgradFp/
 export { BekreftelsePanel } from './src/bekreftelseFp/BekreftelsePanel';
 export type { BekreftelseFormValues } from './src/bekreftelseFp/BekreftelsePanel';
 
-export { TIDSROM_PERMISJON_FORM_NAME_PREFIX } from './src/permisjonFp/components/PermisjonPanel';
 export { PermisjonIndex } from './src/permisjonFp/PermisjonIndex';
-export type { PermisjonFormValues } from './src/permisjonFp/components/PermisjonPanel';
 
 export { SoknadData } from './src/felles/SoknadData';
 
@@ -55,3 +53,4 @@ export {
 } from './src/tilretteleggingSvp/BehovForTilretteleggingPanel';
 export type { Tilrettelegging } from './src/tilretteleggingSvp/BehovForTilretteleggingPanel';
 export type { FormValues as BehovForTilretteleggingFormValues } from './src/tilretteleggingSvp/BehovForTilretteleggingPanel';
+export { PermisjonFormValues } from './src/permisjonFp/types';

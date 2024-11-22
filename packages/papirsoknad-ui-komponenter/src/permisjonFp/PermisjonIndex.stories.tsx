@@ -10,10 +10,10 @@ import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { ForeldreType } from '@navikt/fp-kodeverk';
 
 import { PermisjonIndex } from './PermisjonIndex';
-import { TIDSROM_PERMISJON_FORM_NAME_PREFIX, PermisjonFormValues } from './components/PermisjonPanel';
+import { PermisjonFormValues } from './types';
 
 const meta = {
-  title: 'papirsoknad/ui-komponenter/permisjon',
+  title: 'ui-komponenter/permisjon',
   component: PermisjonIndex,
   parameters: {
     submitCallback: action('onSubmit'),
@@ -30,9 +30,7 @@ const meta = {
     return (
       <Form
         formMethods={formMethods}
-        onSubmit={(values: PermisjonFormValues) =>
-          submitCallback({ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: PermisjonIndex.transformValues(values) })
-        }
+        onSubmit={(values: PermisjonFormValues) => submitCallback(PermisjonIndex.transformValues(values))}
       >
         <PermisjonIndex {...args} />
         <VerticalSpacer fourtyPx />

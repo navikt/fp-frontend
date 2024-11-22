@@ -1,10 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Alert, Button, Modal } from '@navikt/ds-react';
+import { Alert, BodyShort, Button, HStack, Modal } from '@navikt/ds-react';
 import { createIntl } from '@navikt/ft-utils';
 
 import messages from '../../i18n/nb_NO.json';
-import styles from './soknadRegistrertModal.module.css';
 
 const intl = createIntl(messages);
 
@@ -19,24 +18,23 @@ interface Props {
  */
 export const SoknadRegistrertModal = ({ isOpen = false }: Props) => (
   <Modal
-    className={styles.modalStyle}
     open={isOpen}
     aria-label={intl.formatMessage({ id: 'SoknadRegistrertModal.ContentLabel' })}
     onClose={() => undefined}
   >
-    <Modal.Body>
-      <Alert size="small" variant="success" className={styles.alertStyle}>
-        <div className={styles.left}>
-          <p className={styles.reduceMargin}>{intl.formatMessage({ id: 'SoknadRegistrertModal.InfoTextOne' })}</p>
-          <p className={styles.reduceMargin}>{intl.formatMessage({ id: 'SoknadRegistrertModal.InfoTextTwo' })}</p>
-        </div>
-        <div className={styles.right}>
+    <Modal.Body style={{ padding: 4 }}>
+      <Alert variant="success">
+        <HStack justify="space-between" gap="4" align="center">
+          <div>
+            <BodyShort size="small">{intl.formatMessage({ id: 'SoknadRegistrertModal.InfoTextOne' })}</BodyShort>
+            <BodyShort size="small">{intl.formatMessage({ id: 'SoknadRegistrertModal.InfoTextTwo' })}</BodyShort>
+          </div>
           <Link to="/">
-            <Button size="small" variant="primary">
+            <Button size="small" variant="primary" type="button">
               {intl.formatMessage({ id: 'SoknadRegistrertModal.OkButtonText' })}
             </Button>
           </Link>
-        </div>
+        </HStack>
       </Alert>
     </Modal.Body>
   </Modal>
