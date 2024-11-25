@@ -1,4 +1,4 @@
-import{j as b}from"./jsx-runtime-DR9Q75dM.js";import{r as k,a as na,R as K}from"./index-DRjF_FHU.js";import{F as il,r as sl}from"./index-rX-Bn4lm.js";import{d as Pn}from"./dayjs.min-DjnMOTGP.js";/**
+import{j as b}from"./jsx-runtime-DR9Q75dM.js";import{r as k,a as na,R as K}from"./index-DRjF_FHU.js";import{F as il,r as sl}from"./index-rX-Bn4lm.js";import{a as Pn}from"./dayjs.min-DN4LN79F.js";/**
  * @remix-run/router v1.20.0
  *
  * Copyright (c) Remix Software Inc.
