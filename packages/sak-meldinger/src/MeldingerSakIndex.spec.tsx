@@ -13,7 +13,7 @@ const brukerenHarIkkeAdresseText =
 describe('<MeldingerSakIndex>', () => {
   it('skal bruke default mal og sende brev', async () => {
     const lagre = vi.fn();
-    const utils = render(<Default lagre={lagre} />);
+    const utils = render(<Default submitCallback={lagre} />);
     expect(await screen.findByText('Mal')).toBeInTheDocument();
 
     const begrunnelseInput = utils.getByLabelText('Liste over dokumenter (skriv ett dokument pr. linje)');
@@ -30,7 +30,7 @@ describe('<MeldingerSakIndex>', () => {
 
   it('skal få feilmelding når en ikke har fylt ut liste over dokumenter', async () => {
     const lagre = vi.fn();
-    render(<Default lagre={lagre} />);
+    render(<Default submitCallback={lagre} />);
     expect(await screen.findByText('Mal')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Send brev'));
@@ -41,7 +41,7 @@ describe('<MeldingerSakIndex>', () => {
 
   it('skal vise feltet årsak men ikke fritekst når en velger mal Revurderingsdokumentasjon og ikke Annet', async () => {
     const lagre = vi.fn();
-    const utils = render(<Default lagre={lagre} />);
+    const utils = render(<Default submitCallback={lagre} />);
     expect(await screen.findByText('Mal')).toBeInTheDocument();
 
     await userEvent.selectOptions(utils.getByLabelText('Mal'), DokumentMalType.VARSEL_OM_REVURDERING);
@@ -59,7 +59,7 @@ describe('<MeldingerSakIndex>', () => {
 
   it('skal vise feltet årsak og fritekst når en velger mal Revurderingsdokumentasjon og Annet', async () => {
     const lagre = vi.fn();
-    const utils = render(<Default lagre={lagre} />);
+    const utils = render(<Default submitCallback={lagre} />);
     expect(await screen.findByText('Mal')).toBeInTheDocument();
 
     await userEvent.selectOptions(utils.getByLabelText('Mal'), DokumentMalType.VARSEL_OM_REVURDERING);
@@ -81,7 +81,7 @@ describe('<MeldingerSakIndex>', () => {
 
   it('skal ikke vise årsaksverdi Barn ikke registrert for Svangerskapspenger', async () => {
     const lagre = vi.fn();
-    const utils = render(<ForSvangerskapspenger lagre={lagre} />);
+    const utils = render(<ForSvangerskapspenger submitCallback={lagre} />);
     expect(await screen.findByText('Mal')).toBeInTheDocument();
 
     await userEvent.selectOptions(utils.getByLabelText('Mal'), DokumentMalType.VARSEL_OM_REVURDERING);
@@ -93,7 +93,7 @@ describe('<MeldingerSakIndex>', () => {
 
   it('skal vise melding til saksbehandler at bruker ikke har en adresse registrert', async () => {
     const lagre = vi.fn();
-    const utils = render(<BrukerManglerAdresse lagre={lagre} />);
+    const utils = render(<BrukerManglerAdresse submitCallback={lagre} />);
     expect(await screen.findByText('Mal')).toBeInTheDocument();
 
     await userEvent.selectOptions(utils.getByLabelText('Mal'), DokumentMalType.VARSEL_OM_REVURDERING);

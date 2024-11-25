@@ -1,77 +1,80 @@
 import React, { useState } from 'react';
-import { StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import { DekoratorMedFeilviserSakIndex } from './DekoratorMedFeilviserSakIndex';
-import { Feilmelding } from './typer/feilmeldingTsType';
+import { action } from '@storybook/addon-actions';
 
 import '@navikt/ft-ui-komponenter/dist/style.css';
 import '@navikt/ft-plattform-komponenter/dist/style.css';
 
-export default {
+const meta = {
   title: 'sak/sak-dekoratør',
   component: DekoratorMedFeilviserSakIndex,
-};
-
-const Template: StoryFn<{
-  kanJournalføre?: boolean;
-  feilmeldinger?: Feilmelding[];
-}> = ({ kanJournalføre, feilmeldinger = [] }) => {
-  const [errorMessages, setErrorMessages] = useState(feilmeldinger);
-  return (
-    <div style={{ marginLeft: '-56px' }}>
-      <DekoratorMedFeilviserSakIndex
-        tittel="Svangerskap, fødsel og adopsjon"
-        tittelLenke="/fpsak"
-        navAnsattNavn="Espen Utvikler"
-        fjernFeilmeldinger={() => setErrorMessages([])}
-        setSiteHeight={() => undefined}
-        feilmeldinger={errorMessages}
-        eksterneLenker={[
-          {
-            tekst: 'Nav',
-          },
-        ]}
-        interneLenker={
-          kanJournalføre
-            ? [
-                {
-                  tekst: 'Journal',
-                },
-              ]
-            : []
-        }
-      />
-    </div>
-  );
-};
-
-export const UtenFeilmeldinger = Template.bind({});
-UtenFeilmeldinger.args = {
-  feilmeldinger: [],
-  kanJournalføre: true,
-};
-
-export const MedFeilmeldinger = Template.bind({});
-MedFeilmeldinger.args = {
-  feilmeldinger: [
-    {
-      melding: 'Feilmelding 1',
-    },
-    {
-      melding: 'Spesialtegn-test: Høna &amp; egget og &#34;test1&#34; og &#39;test2&#39;',
-    },
-  ],
-};
-
-export const MedFeilmeldingDetaljer = Template.bind({});
-MedFeilmeldingDetaljer.args = {
-  feilmeldinger: [
-    {
-      melding:
-        'Noe feilet. Feilen kan være forbigående. Prøv og behandle saken litt senere. Om feilen oppstår igjen meld den inn via porten.',
-      tilleggsInfo: {
-        melding: 'test',
-        ekstra: 'test2',
+  args: {
+    tittel: 'Svangerskap, fødsel og adopsjon',
+    tittelLenke: '/fpsak',
+    navAnsattNavn: 'Espen Utvikler',
+    setSiteHeight: action('button-click'),
+    fjernFeilmeldinger: action('button-click'),
+    eksterneLenker: [
+      {
+        tekst: 'Nav',
       },
-    },
-  ],
+    ],
+  },
+  render: storyArgs => {
+    const [args, setArgs] = useState(storyArgs);
+
+    const fjernFeilmeldinger = () => {
+      args.fjernFeilmeldinger?.();
+      setArgs(oldArgs => ({ ...oldArgs, feilmeldinger: [] }));
+    };
+
+    return (
+      <div style={{ marginLeft: '-56px' }}>
+        <DekoratorMedFeilviserSakIndex {...args} fjernFeilmeldinger={fjernFeilmeldinger} />
+      </div>
+    );
+  },
+} satisfies Meta<typeof DekoratorMedFeilviserSakIndex>;
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const UtenFeilmeldinger: Story = {
+  args: {
+    feilmeldinger: [],
+    interneLenker: [
+      {
+        tekst: 'Journal',
+      },
+    ],
+  },
+};
+
+export const MedFeilmeldinger: Story = {
+  args: {
+    feilmeldinger: [
+      {
+        melding: 'Feilmelding 1',
+      },
+      {
+        melding: 'Spesialtegn-test: Høna &amp; egget og &#34;test1&#34; og &#39;test2&#39;',
+      },
+    ],
+  },
+};
+
+export const MedFeilmeldingDetaljer: Story = {
+  args: {
+    feilmeldinger: [
+      {
+        melding:
+          'Noe feilet. Feilen kan være forbigående. Prøv og behandle saken litt senere. Om feilen oppstår igjen meld den inn via porten.',
+        tilleggsInfo: {
+          melding: 'test',
+          ekstra: 'test2',
+        },
+      },
+    ],
+  },
 };

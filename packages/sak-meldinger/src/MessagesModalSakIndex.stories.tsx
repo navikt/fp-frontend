@@ -1,19 +1,18 @@
-import React from 'react';
-import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+import { Meta, StoryObj } from '@storybook/react';
 
-import MessagesModalSakIndex from './MessagesModalSakIndex';
+import { MessagesModalSakIndex } from './MessagesModalSakIndex';
 
-export default {
+const meta = {
   title: 'sak/sak-meldinger/modal',
   component: MessagesModalSakIndex,
-};
+  args: {
+    showModal: true,
+    closeEvent: action('button-click'),
+  },
+} satisfies Meta<typeof MessagesModalSakIndex>;
+export default meta;
 
-const Template: StoryFn<{ closeEvent: () => void }> = ({ closeEvent }) => (
-  <MessagesModalSakIndex showModal closeEvent={closeEvent} />
-);
+type Story = StoryObj<typeof meta>;
 
-export const Default = Template.bind({});
-Default.args = {
-  closeEvent: action('button-click') as () => Promise<any>,
-};
+export const Default: Story = {};

@@ -1,17 +1,17 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { RawIntlProvider } from 'react-intl';
+import React, { useEffect, useState } from 'react';
+import { action } from '@storybook/addon-actions';
 import { VilkarUtfallType } from '@navikt/fp-kodeverk';
-import { createIntl } from '@navikt/ft-utils';
 
 import { Behandling } from '@navikt/fp-types';
-
 import { BehandlingContainer } from './BehandlingContainer';
 import { FaktaPanelInitProps } from './typer/faktaPanelInitProps';
 import { ProsessPanelInitProps } from './typer/prosessPanelInitProps';
 
 import messages from '../../../i18n/nb_NO.json';
+import { Meta, StoryObj } from '@storybook/react/*';
+import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
-const intl = createIntl(messages);
+const withIntl = getIntlDecorator(messages);
 
 const FaktaPanelTest1 = ({ registrerFaktaPanel, valgtFaktaSteg }: FaktaPanelInitProps) => {
   useEffect(() => {
@@ -82,53 +82,66 @@ const ProsessPanelTest2 = ({ registrerProsessPanel, valgtProsessSteg }: ProsessP
   return <div>Dette er et testpanel for fødsel</div>;
 };
 
-export default {
+const meta = {
   title: 'app/behandling-container',
   component: BehandlingContainer,
-};
+  decorators: [withIntl],
+  args: {
+    behandling: {} as Behandling,
+    oppdaterProsessStegOgFaktaPanelIUrl: action('button-click'),
+    valgtFaktaSteg: 'default',
+    valgtProsessSteg: 'default',
+  },
+  render: storyArgs => {
+    const [args, setArgs] = useState(storyArgs);
 
-export const VisKunFaktaPaneler = () => {
-  const [valgtFaktaPanel, setValgtFaktaPanel] = useState<string | undefined>('default');
-  const faktaPaneler = useCallback(
-    (props: FaktaPanelInitProps) => (
+    const oppdaterProsessStegOgFaktaPanelIUrl = (punktnavn?: string, faktanavn?: string) => {
+      args.oppdaterProsessStegOgFaktaPanelIUrl?.(punktnavn, faktanavn);
+      setArgs(oldArgs => ({ ...oldArgs, valgtProsessSteg: punktnavn, valgtFaktaSteg: faktanavn }));
+    };
+
+    return <BehandlingContainer {...args} oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl} />;
+  },
+} satisfies Meta<typeof BehandlingContainer>;
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const VisKunFaktaPaneler: Story = {
+  args: {
+    hentFaktaPaneler: (props: FaktaPanelInitProps) => (
       <>
         <FaktaPanelTest1 {...props} />
         <FaktaPanelTest2 {...props} />
       </>
     ),
-    [],
-  );
-  return (
-    <RawIntlProvider value={intl}>
-      <BehandlingContainer
-        behandling={{} as Behandling}
-        valgtFaktaSteg={valgtFaktaPanel}
-        oppdaterProsessStegOgFaktaPanelIUrl={(_prosessPanel?: string, faktaPanel?: string) =>
-          setValgtFaktaPanel(faktaPanel)
-        }
-        hentFaktaPaneler={faktaPaneler}
-      />
-    </RawIntlProvider>
-  );
+  },
 };
 
-export const VisKunProsessPaneler = () => {
-  const [valgtProsessPanel, setValgtProsessPanel] = useState<string | undefined>('default');
-  const prosessPaneler = useCallback(
-    (props: ProsessPanelInitProps) => (
+export const VisKunProsessPaneler: Story = {
+  args: {
+    hentProsessPaneler: (props: ProsessPanelInitProps) => (
       <>
         <ProsessPanelTest1 {...props} />
         <ProsessPanelTest2 {...props} />
       </>
     ),
-    [],
-  );
-  return (
-    <BehandlingContainer
-      behandling={{} as Behandling}
-      valgtProsessSteg={valgtProsessPanel}
-      oppdaterProsessStegOgFaktaPanelIUrl={(prosessPanel?: string) => setValgtProsessPanel(prosessPanel)}
-      hentProsessPaneler={prosessPaneler}
-    />
-  );
+  },
+};
+
+export const VisBeggePaneler: Story = {
+  args: {
+    hentProsessPaneler: (props: ProsessPanelInitProps) => (
+      <>
+        <ProsessPanelTest1 {...props} />
+        <ProsessPanelTest2 {...props} />
+      </>
+    ),
+    hentFaktaPaneler: (props: FaktaPanelInitProps) => (
+      <>
+        <FaktaPanelTest1 {...props} />
+        <FaktaPanelTest2 {...props} />
+      </>
+    ),
+  },
 };

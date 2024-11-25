@@ -10,6 +10,8 @@ import { BehandlingPollingTimoutModal } from '../timeoutModal/BehandlingPollingT
 import { OppgaveMedReservertIndikator, OppgaveRad } from './OppgaveRad';
 import styles from './oppgaverTabell.module.css';
 
+const isDevelopmentOrTest = import.meta.env.MODE === 'development' || import.meta.env.MODE === 'test';
+
 const EMPTY_ARRAY: Oppgave[] = [];
 
 type TableHeaders =
@@ -67,10 +69,9 @@ interface Props {
   reserverOppgave: (oppgave: Oppgave) => void;
   antallOppgaver?: number;
   valgtSakslisteId: number;
-  doPolling?: boolean;
 }
 
-export const OppgaverTabell = ({ reserverOppgave, antallOppgaver = 0, valgtSakslisteId, doPolling = true }: Props) => {
+export const OppgaverTabell = ({ reserverOppgave, antallOppgaver = 0, valgtSakslisteId }: Props) => {
   const [sidetall, setSidetall] = useState(1);
   const raderPerSide = 15;
 
@@ -87,7 +88,7 @@ export const OppgaverTabell = ({ reserverOppgave, antallOppgaver = 0, valgtSaksl
     hentReserverteOppgaver(undefined, true);
     hentOppgaverTilBehandling(oppgaveIder ? { sakslisteId, oppgaveIder } : { sakslisteId }, keepData)
       .then(response =>
-        !response || typeof response === 'string' || !doPolling
+        !response || typeof response === 'string' || isDevelopmentOrTest
           ? Promise.resolve()
           : fetchSakslisteOppgaverPolling(true, sakslisteId, response.map(o => o.id).join(',')),
       )

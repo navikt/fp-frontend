@@ -1,4 +1,4 @@
-type Risikoklassifisering = Readonly<{
+export type Risikoklassifisering = Readonly<{
   kontrollresultat: string;
   faresignalVurdering?: string;
   iayFaresignaler?: {
@@ -8,5 +8,3 @@ type Risikoklassifisering = Readonly<{
     faresignaler: string[];
   };
 }>;
-
-export default Risikoklassifisering;

@@ -5,12 +5,11 @@ import { HistorikkSakIndex } from '@navikt/fp-sak-historikk';
 import { Historikkinnslag } from '@navikt/fp-types';
 
 import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
-import { pathToBehandling, createLocationForSkjermlenke } from '../../app/paths';
+import { createLocationForSkjermlenke, pathToBehandling } from '../../app/paths';
 
 interface Props {
   saksnummer: string;
   behandlingUuid?: string;
-  behandlingVersjon?: number;
   historikkinnslagFpSak?: Historikkinnslag[];
   historikkinnslagFpTilbake?: Historikkinnslag[];
   kjønn: string;

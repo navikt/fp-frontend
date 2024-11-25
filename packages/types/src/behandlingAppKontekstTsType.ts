@@ -1,7 +1,7 @@
-import Aksjonspunkt from './aksjonspunktTsType';
-import Behandlingsresultat from './behandlingsresultatTsType';
-import Risikoklassifisering from './risikoklassifiseringTsType';
-import TotrinnskontrollAksjonspunkt from './totrinnskontrollAksjonspunktTsType';
+import { Aksjonspunkt } from './aksjonspunktTsType';
+import { Behandlingsresultat } from './behandlingsresultatTsType';
+import { Risikoklassifisering } from './risikoklassifiseringTsType';
+import { TotrinnskontrollAksjonspunkt } from './totrinnskontrollAksjonspunktTsType';
 
 export type BehandlingFellesData = Readonly<{
   versjon: number;
@@ -71,7 +71,7 @@ export type BehandlingTillatteOperasjoner = Readonly<{
   vergeBehandlingsmeny: VergeBehandlingmenyValg;
 }>;
 
-type BehandlingAppKontekst = BehandlingFellesData &
+export type BehandlingAppKontekst = BehandlingFellesData &
   Readonly<{
     behandlingTillatteOperasjoner: BehandlingTillatteOperasjoner;
     brevmaler: Brevmal[];
@@ -81,5 +81,3 @@ type BehandlingAppKontekst = BehandlingFellesData &
     kontrollResultat: Risikoklassifisering;
     ugunstAksjonspunkt: boolean;
   }>;
-
-export default BehandlingAppKontekst;

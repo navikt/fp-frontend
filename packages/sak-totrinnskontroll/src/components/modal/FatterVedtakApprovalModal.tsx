@@ -1,8 +1,7 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Modal, Button, Label } from '@navikt/ds-react';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
+import { BodyShort, Modal, Button, Label, HStack, VStack } from '@navikt/ds-react';
 
 import { BehandlingType, BehandlingResultatType, BehandlingStatus } from '@navikt/fp-kodeverk';
 import { Behandling } from '@navikt/fp-types';
@@ -87,7 +86,7 @@ const utledModalDescriptionTextCode = (
     ? getModalDescriptionTextCode(isBehandlingsresultatOpphor, behandlingTypeKode)
     : 'FatterVedtakApprovalModal.ModalDescription';
 
-interface OwnProps {
+interface Props {
   closeEvent: () => void;
   allAksjonspunktApproved: boolean;
   behandlingsresultat?: Behandling['behandlingsresultat'];
@@ -102,14 +101,14 @@ interface OwnProps {
  * Denne modalen vises en lightbox etter at en beslutter har godkjent alle aksjonspunkter
  * med totrinnskontroll. Ved å trykke på knapp blir beslutter tatt tilbake til sokesiden.
  */
-const FatterVedtakApprovalModal: FunctionComponent<OwnProps> = ({
+export const FatterVedtakApprovalModal = ({
   closeEvent,
   allAksjonspunktApproved,
   behandlingStatusKode,
   behandlingTypeKode,
   behandlingsresultat,
   harSammeResultatSomOriginalBehandling,
-}) => {
+}: Props) => {
   const intl = useIntl();
   const isBehandlingsresultatOpphor =
     !!behandlingsresultat && behandlingsresultat.type === BehandlingResultatType.OPPHOR;
@@ -133,29 +132,23 @@ const FatterVedtakApprovalModal: FunctionComponent<OwnProps> = ({
   return (
     <Modal width="small" open aria-label={intl.formatMessage({ id: modalDescriptionTextCode })} onClose={closeEvent}>
       <Modal.Body>
-        <FlexContainer>
-          <FlexRow>
-            <FlexColumn>
-              <CheckmarkCircleFillIcon className={styles.image} title={intl.formatMessage({ id: altImgTextCode })} />
-            </FlexColumn>
-            <FlexColumn>
+        <HStack justify="space-between" align="center">
+          <HStack gap="2">
+            <CheckmarkCircleFillIcon className={styles.image} title={intl.formatMessage({ id: altImgTextCode })} />
+            <VStack gap="1">
               <Label size="small">
                 <FormattedMessage id={infoTextCode} />
               </Label>
               <BodyShort size="small">
                 <FormattedMessage id="FatterVedtakApprovalModal.GoToSearchPage" />
               </BodyShort>
-            </FlexColumn>
-            <FlexColumn className={styles.button}>
-              <Button size="small" variant="primary" onClick={closeEvent} autoFocus type="button">
-                <FormattedMessage id="FatterVedtakApprovalModal.Ok" />
-              </Button>
-            </FlexColumn>
-          </FlexRow>
-        </FlexContainer>
+            </VStack>
+          </HStack>
+          <Button size="small" variant="primary" onClick={closeEvent} autoFocus type="button">
+            <FormattedMessage id="FatterVedtakApprovalModal.Ok" />
+          </Button>
+        </HStack>
       </Modal.Body>
     </Modal>
   );
 };
-
-export default FatterVedtakApprovalModal;

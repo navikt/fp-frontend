@@ -1,6 +1,6 @@
-import FaktaArbeidsforhold from './faktaArbeidsforholdTsType';
+import { FaktaArbeidsforhold } from './faktaArbeidsforholdTsType';
 
-type KontrollerFaktaPeriode = Readonly<{
+export type KontrollerFaktaPeriode = Readonly<{
   fom: string;
   tom: string;
   uttakPeriodeType?: string;
@@ -15,5 +15,3 @@ type KontrollerFaktaPeriode = Readonly<{
   periodeKilde: string;
   begrunnelse?: string;
 }>;
-
-export default KontrollerFaktaPeriode;

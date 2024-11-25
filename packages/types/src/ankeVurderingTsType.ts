@@ -1,4 +1,4 @@
-type AnkeVurdering = Readonly<{
+export type AnkeVurdering = Readonly<{
   ankeVurderingResultat?: {
     ankeVurdering?: string;
     ankeVurderingOmgjoer?: string;
@@ -22,5 +22,3 @@ type AnkeVurdering = Readonly<{
   underBehandlingKabalTrygderett?: boolean;
   behandletAvKabal?: boolean;
 }>;
-
-export default AnkeVurdering;

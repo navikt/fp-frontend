@@ -1,17 +1,21 @@
 import React from 'react';
-import { StoryFn } from '@storybook/react';
+import { Meta, StoryFn, StoryObj } from '@storybook/react';
 
-import UkjentAdresseMelding from './UkjentAdresseMeldingIndex';
+import { UkjentAdresseMeldingIndex } from './UkjentAdresseMeldingIndex';
 
-const withWidthProvider = (story: any) => <div style={{ width: '600px' }}>{story()}</div>;
+const withWidthProvider = (Story: StoryFn) => (
+  <div style={{ width: '600px' }}>
+    <Story />
+  </div>
+);
 
-export default {
+const meta = {
   title: 'sak/sak-ukjent-adresse',
-  component: UkjentAdresseMelding,
+  component: UkjentAdresseMeldingIndex,
   decorators: [withWidthProvider],
-};
+} satisfies Meta<typeof UkjentAdresseMeldingIndex>;
+export default meta;
 
-const Template: StoryFn = () => <UkjentAdresseMelding />;
+type Story = StoryObj<typeof meta>;
 
-export const IngenAdresse = Template.bind({});
-IngenAdresse.args = {};
+export const IngenAdresse: Story = {};

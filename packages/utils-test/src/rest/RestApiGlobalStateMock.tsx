@@ -1,4 +1,4 @@
-import { FunctionComponent, useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { RestApiDispatchContext } from '@navikt/fp-rest-api-hooks';
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
   }[];
 }
 
-const RestApiGlobalStateMock: FunctionComponent<Props> = ({ children, data }) => {
+export const RestApiGlobalStateMock = ({ children, data }: Props) => {
   const [erFerdig, setFerdig] = useState(false);
   const dispatch = useContext(RestApiDispatchContext);
 
@@ -22,5 +22,3 @@ const RestApiGlobalStateMock: FunctionComponent<Props> = ({ children, data }) =>
 
   return erFerdig ? children : null;
 };
-
-export default RestApiGlobalStateMock;

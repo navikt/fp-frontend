@@ -1,8 +1,8 @@
-import Aksjonspunkt from './aksjonspunktTsType';
+import { Aksjonspunkt } from './aksjonspunktTsType';
 import { BehandlingFellesData } from './behandlingAppKontekstTsType';
-import Vilkar from './vilkarTsType';
+import { Vilkar } from './vilkarTsType';
 
-type Behandling = BehandlingFellesData &
+export type Behandling = BehandlingFellesData &
   Readonly<{
     aksjonspunkt: Aksjonspunkt[];
     harSøknad: boolean;
@@ -17,5 +17,3 @@ type Behandling = BehandlingFellesData &
     vilkår: Vilkar[];
     alleUttaksperioderAvslått: boolean;
   }>;
-
-export default Behandling;

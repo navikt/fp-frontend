@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MockAdapter from 'axios-mock-adapter';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { RequestApi } from '@navikt/fp-rest-api';
@@ -14,7 +14,7 @@ interface Props {
   setApiMock?: (mockAdapter: MockAdapter) => void;
 }
 
-const AxiosMock: FunctionComponent<Props> = ({ children, data, requestApi, setApiMock = () => undefined }) => {
+export const AxiosMock = ({ children, data, requestApi, setApiMock = () => undefined }: Props) => {
   const [showChildren, setShowChildren] = useState(false);
 
   useEffect(() => {
@@ -53,5 +53,3 @@ const AxiosMock: FunctionComponent<Props> = ({ children, data, requestApi, setAp
   }, []);
   return showChildren ? children : <LoadingPanel />;
 };
-
-export default AxiosMock;

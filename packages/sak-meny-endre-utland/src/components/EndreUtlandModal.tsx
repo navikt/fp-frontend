@@ -1,5 +1,5 @@
 import { Button, Heading, Modal } from '@navikt/ds-react';
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -13,7 +13,7 @@ export type FormValues = {
   fagsakMarkeringer: string[];
 };
 
-interface OwnProps {
+interface Props {
   saksnummer: string;
   fagsakMarkeringer?: Saksmarkering[];
   cancelEvent: () => void;
@@ -27,13 +27,13 @@ interface OwnProps {
  * Denne modalen vises etter at en saksbehandler har valgt opprett ny 1.gangsbehandling i behandlingsmenyen.
  * Ved å trykke på ok skal ny behandling(1.gangsbehandling) av sak opprettes.
  */
-const EndreUtlandModal: FunctionComponent<OwnProps> = ({
+export const EndreUtlandModal = ({
   submitCallback,
   cancelEvent,
   saksnummer,
   fagsakMarkeringer,
   fagsakMarkeringerKodeverk,
-}) => {
+}: Props) => {
   const intl = useIntl();
 
   const formMethods = useForm<FormValues>({
@@ -78,5 +78,3 @@ const EndreUtlandModal: FunctionComponent<OwnProps> = ({
     </Form>
   );
 };
-
-export default EndreUtlandModal;

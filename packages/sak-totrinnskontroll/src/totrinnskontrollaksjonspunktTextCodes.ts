@@ -1,6 +1,6 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
-const totrinnskontrollaksjonspunktTextCodes = {
+export const totrinnskontrollaksjonspunktTextCodes = {
   [AksjonspunktKode.ADOPSJONSDOKUMENTAJON]: 'ToTrinnsForm.Adopsjon.KontrollerOpplysninger',
   [AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN]: 'ToTrinnsForm.Adopsjon.VurderEktefellesBarn',
   [AksjonspunktKode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE]: 'ToTrinnsForm.Adopsjon.VurderMannAdoptererAlene',
@@ -75,5 +75,3 @@ const totrinnskontrollaksjonspunktTextCodes = {
 } as Record<string, string>;
 
 export const totrinnsTilbakekrevingkontrollaksjonspunktTextCodes = {} as Record<string, string>;
-
-export default totrinnskontrollaksjonspunktTextCodes;

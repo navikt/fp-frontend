@@ -1,38 +1,24 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
 
 import { Saksnotat } from '@navikt/fp-types';
 
 import messages from '../i18n/nb_NO.json';
-import NotatPanel from './components/NotatPanel';
+import { NotatPanel } from './components/NotatPanel';
 
 const intl = createIntl(messages);
 
-interface OwnProps {
+interface Props {
   saksnummer: string;
   notater: Saksnotat[];
-  lagreNotat: (params: { saksnummer: string; notat: string }) => Promise<any>;
+  lagreNotat: (params: { saksnummer: string; notat: string }) => Promise<void | undefined>;
   saksbehandlerNavn: string;
   kanSaksbehandle: boolean;
 }
 
-const NotatSakIndex: FunctionComponent<OwnProps> = ({
-  saksnummer,
-  notater,
-  lagreNotat,
-  saksbehandlerNavn,
-  kanSaksbehandle,
-}) => (
+export const NotatSakIndex = (props: Props) => (
   <RawIntlProvider value={intl}>
-    <NotatPanel
-      saksnummer={saksnummer}
-      notater={notater}
-      lagreNotat={lagreNotat}
-      saksbehandlerNavn={saksbehandlerNavn}
-      kanSaksbehandle={kanSaksbehandle}
-    />
+    <NotatPanel {...props} />
   </RawIntlProvider>
 );
-
-export default NotatSakIndex;

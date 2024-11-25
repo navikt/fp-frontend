@@ -1,4 +1,4 @@
-type Aktivitetskrav = Readonly<{
+export type Aktivitetskrav = Readonly<{
   fom: string;
   tom: string;
   behov: string;
@@ -6,5 +6,3 @@ type Aktivitetskrav = Readonly<{
   vurdering?: string;
   endret: boolean;
 }>;
-
-export default Aktivitetskrav;

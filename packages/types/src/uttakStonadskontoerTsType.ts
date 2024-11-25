@@ -23,9 +23,7 @@ export type Stonadskonto = Readonly<{
   };
 }>;
 
-type UttakStonadskontoer = Readonly<{
+export type UttakStonadskontoer = Readonly<{
   stonadskontoer: Record<StonadskontoType, Stonadskonto>;
   tapteDagerFpff: number;
 }>;
-
-export default UttakStonadskontoer;

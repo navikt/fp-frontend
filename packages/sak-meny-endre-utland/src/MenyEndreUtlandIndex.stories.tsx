@@ -1,33 +1,25 @@
-import React from 'react';
-import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+import { Meta, StoryObj } from '@storybook/react';
 
-import MenyEndreUtlandIndex from './MenyEndreUtlandIndex';
 import { FagsakMarkeringKode } from '@navikt/fp-kodeverk';
+import { MenyEndreUtlandIndex } from './MenyEndreUtlandIndex';
 
-export default {
+const meta = {
   title: 'sak/sak-meny-endre-utland',
   component: MenyEndreUtlandIndex,
-};
-
-const Template: StoryFn<{
-  endreFagsakMarkering: () => void;
-  lukkModal: () => void;
-}> = ({ endreFagsakMarkering, lukkModal }) => (
-  <MenyEndreUtlandIndex
-    saksnummer="123"
-    endreFagsakMarkering={endreFagsakMarkering}
-    lukkModal={lukkModal}
-    fagsakMarkeringerKodeverk={[
+  args: {
+    saksnummer: '123',
+    endreFagsakMarkering: action('button-click'),
+    lukkModal: action('button-click'),
+    fagsakMarkeringerKodeverk: [
       { kode: FagsakMarkeringKode.BOSATT_UTLAND, navn: 'Bosatt utland', kodeverk: 'FAGSAK_MARKERING' },
       { kode: FagsakMarkeringKode.EØS_BOSATT_NORGE, navn: 'EØS bosatt Norge', kodeverk: 'FAGSAK_MARKERING' },
       { kode: FagsakMarkeringKode.SELVSTENDIG_NÆRING, navn: 'Næringsdrivende', kodeverk: 'FAGSAK_MARKERING' },
-    ]}
-  />
-);
+    ],
+  },
+} satisfies Meta<typeof MenyEndreUtlandIndex>;
+export default meta;
 
-export const Default = Template.bind({});
-Default.args = {
-  endreFagsakMarkering: action('button-click'),
-  lukkModal: action('button-click'),
-};
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {};

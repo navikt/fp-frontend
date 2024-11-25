@@ -1,4 +1,4 @@
-type Verge = {
+export type Verge = {
   navn?: string;
   fnr?: string;
   gyldigFom?: string;
@@ -6,5 +6,3 @@ type Verge = {
   vergeType?: string;
   organisasjonsnummer?: string;
 };
-
-export default Verge;

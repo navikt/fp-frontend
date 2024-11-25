@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement, useMemo } from 'react';
+import React, { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Modal, Button, Heading } from '@navikt/ds-react';
@@ -117,7 +117,7 @@ export type FormValues = {
   behandlingArsakType?: string;
 };
 
-interface OwnProps {
+interface Props {
   ytelseType: string;
   cancelEvent: () => void;
   submitCallback: (
@@ -140,10 +140,10 @@ interface OwnProps {
 /**
  * NyBehandlingModal
  *
- * Presentasjonskomponent. Denne modalen vises etter at en saksbehandler har valgt opprett ny 1.gangsbehandling i behandlingsmenyen.
+ * Denne modalen vises etter at en saksbehandler har valgt opprett ny 1.gangsbehandling i behandlingsmenyen.
  * Ved å trykke på ok skal ny behandling(1.gangsbehandling) av sak opprettes.
  */
-const NyBehandlingModal: FunctionComponent<OwnProps> = ({
+export const NyBehandlingModal = ({
   submitCallback,
   cancelEvent,
   behandlingstyper,
@@ -153,7 +153,7 @@ const NyBehandlingModal: FunctionComponent<OwnProps> = ({
   kanTilbakekrevingOpprettes,
   revurderingArsaker,
   tilbakekrevingRevurderingArsaker,
-}) => {
+}: Props) => {
   const intl = useIntl();
 
   const formMethods = useForm<FormValues>();
@@ -167,7 +167,7 @@ const NyBehandlingModal: FunctionComponent<OwnProps> = ({
 
   const valgtBehandlingTypeKode = formMethods.watch('behandlingType');
 
-  const behandlingTyper = useMemo(() => getBehandlingTyper(behandlingstyper), [behandlingstyper]);
+  const behandlingTyper = getBehandlingTyper(behandlingstyper);
   const enabledBehandlingstyper = getEnabledBehandlingstyper(
     behandlingTyper,
     behandlingOppretting,
@@ -238,5 +238,3 @@ const NyBehandlingModal: FunctionComponent<OwnProps> = ({
     </Form>
   );
 };
-
-export default NyBehandlingModal;

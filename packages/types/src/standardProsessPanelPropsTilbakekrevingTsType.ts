@@ -1,9 +1,9 @@
-import Aksjonspunkt from './aksjonspunktTsType';
-import Behandling from './behandlingTsType';
-import Vilkar from './vilkarTsType';
-import AlleKodeverkTilbakekreving from './kodeverkAlleTilbakekrevingTsType';
+import { Aksjonspunkt } from './aksjonspunktTsType';
+import { Behandling } from './behandlingTsType';
+import { Vilkar } from './vilkarTsType';
+import { AlleKodeverkTilbakekreving } from './kodeverkAlleTilbakekrevingTsType';
 
-interface StandardProsessPanelPropsTilbakekreving {
+export interface StandardProsessPanelPropsTilbakekreving {
   behandling: Behandling;
   alleKodeverk: AlleKodeverkTilbakekreving;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
@@ -17,5 +17,3 @@ interface StandardProsessPanelPropsTilbakekreving {
   formData?: any;
   setFormData: (data: any) => void;
 }
-
-export default StandardProsessPanelPropsTilbakekreving;

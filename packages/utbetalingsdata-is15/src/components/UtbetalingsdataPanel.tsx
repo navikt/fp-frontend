@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { VStack, ExpansionCard, HStack, Search, Heading } from '@navikt/ds-react';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
@@ -7,36 +7,32 @@ import { isValidFodselsnummer } from '@navikt/ft-utils';
 import { InfotrygdVedtak } from '@navikt/fp-types';
 import { DateLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import VedtakPanel from './VedtakPanel';
+import { VedtakPanel } from './VedtakPanel';
+import { SakerPanel } from './SakerPanel';
 
 import styles from './utbetalingsdataPanel.module.css';
-import SakerPanel from './SakerPanel';
 
 const FORELDREPENGER_KODER = ['AP', 'FØ'];
 
-interface OwnProps {
+interface Props {
   søkInfotrygdVedtak: (params: { searchString: string }) => Promise<InfotrygdVedtak | undefined>;
   infotrygdVedtakState: RestApiState;
   infotrygdVedtak?: InfotrygdVedtak;
 }
 
-const UtbetalingsdataPanel: FunctionComponent<OwnProps> = ({
-  søkInfotrygdVedtak,
-  infotrygdVedtakState,
-  infotrygdVedtak,
-}) => {
+export const UtbetalingsdataPanel = ({ søkInfotrygdVedtak, infotrygdVedtakState, infotrygdVedtak }: Props) => {
   const intl = useIntl();
 
   const [error, setError] = useState<string>();
 
-  const startSøk = useCallback((value: string) => {
+  const startSøk = (value: string) => {
     if (value && isValidFodselsnummer(value)) {
       setError(undefined);
       søkInfotrygdVedtak({ searchString: value });
     } else {
       setError(intl.formatMessage({ id: 'UtbetalingsdataPanel.UgyldigFnr' }));
     }
-  }, []);
+  };
 
   return (
     <VStack gap="5" className={styles.container}>
@@ -57,7 +53,7 @@ const UtbetalingsdataPanel: FunctionComponent<OwnProps> = ({
           <Search.Button type="button" loading={infotrygdVedtakState === RestApiState.LOADING} />
         </Search>
       </div>
-      {infotrygdVedtak && !error && (
+      {infotrygdVedtakState === RestApiState.SUCCESS && infotrygdVedtak && !error && (
         <>
           <VerticalSpacer sixteenPx />
           <Heading size="small">
@@ -108,5 +104,3 @@ const UtbetalingsdataPanel: FunctionComponent<OwnProps> = ({
     </VStack>
   );
 };
-
-export default UtbetalingsdataPanel;

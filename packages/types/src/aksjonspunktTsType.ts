@@ -1,4 +1,4 @@
-type Aksjonspunkt = Readonly<{
+export type Aksjonspunkt = Readonly<{
   definisjon: string;
   status: string;
   begrunnelse?: string;
@@ -12,5 +12,3 @@ type Aksjonspunkt = Readonly<{
   endretAv?: string;
   endretTidspunkt?: string;
 }>;
-
-export default Aksjonspunkt;

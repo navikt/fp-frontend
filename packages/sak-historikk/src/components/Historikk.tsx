@@ -5,7 +5,7 @@ import { Location } from 'history';
 
 import { useStorageToggle } from '@navikt/ft-hooks';
 import { Box, Checkbox, Heading, HStack, VStack } from '@navikt/ds-react';
-import { AlleKodeverk, AlleKodeverkTilbakekreving, HistorikkinnslagV2 } from '@navikt/fp-types';
+import { AlleKodeverk, AlleKodeverkTilbakekreving, Historikkinnslag } from '@navikt/fp-types';
 import { getKodeverknavnFn } from '@navikt/fp-kodeverk';
 
 import { Snakkeboble } from './Snakkeboble/Snakkeboble';
@@ -13,13 +13,13 @@ import { EnvironmentWrapper } from './EnvironmentWrapper';
 
 import styles from './historikk.module.css';
 
-type HistorikkMedTilbakekrevingIndikator = HistorikkinnslagV2 & {
+type HistorikkMedTilbakekrevingIndikator = Historikkinnslag & {
   erTilbakekreving?: boolean;
 };
 
 const sortAndTagTilbakekreving = (
-  historikkFpsak: HistorikkinnslagV2[] = [],
-  historikkFptilbake: HistorikkinnslagV2[] = [],
+  historikkFpsak: Historikkinnslag[] = [],
+  historikkFptilbake: Historikkinnslag[] = [],
 ): HistorikkMedTilbakekrevingIndikator[] => {
   const historikkFraTilbakekrevingMedMarkor = historikkFptilbake.map(ht => ({ ...ht, erTilbakekreving: true }));
   return [...historikkFpsak, ...historikkFraTilbakekrevingMedMarkor].sort((a, b) =>
@@ -29,8 +29,8 @@ const sortAndTagTilbakekreving = (
 
 interface Props {
   valgtBehandlingUuid?: string;
-  historikkFpSak: HistorikkinnslagV2[];
-  historikkFpTilbake: HistorikkinnslagV2[];
+  historikkFpSak: Historikkinnslag[];
+  historikkFpTilbake: Historikkinnslag[];
   alleKodeverkFpTilbake?: AlleKodeverkTilbakekreving;
   alleKodeverkFpSak: AlleKodeverk;
   kjønn: string;
@@ -48,8 +48,8 @@ export const Historikk = ({
   valgtBehandlingUuid,
   historikkFpSak,
   historikkFpTilbake,
-  alleKodeverkFpSak,
-  alleKodeverkFpTilbake,
+  alleKodeverkFpSak, // TODO: Kodeverk brukes bare får å hente navn på aktør
+  alleKodeverkFpTilbake, // TODO: Kodeverk brukes bare får å hente navn på aktør
   kjønn,
   saksnummer,
   getBehandlingLocation,
@@ -116,7 +116,6 @@ export const Historikk = ({
             if (!getKodeverknavn) {
               return null;
             }
-
             return (
               <EnvironmentWrapper
                 shouldRender={isDevMode}

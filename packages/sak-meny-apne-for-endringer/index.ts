@@ -1,1 +1,1 @@
-export { default as MenyApneForEndringerIndex, getMenytekst } from './src/MenyApneForEndringerIndex';
+export { MenyApneForEndringerIndex, getMenytekst } from './src/MenyApneForEndringerIndex';

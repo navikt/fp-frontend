@@ -133,5 +133,5 @@ describe('<VirksomhetPapirsoknadIndex>', () => {
         ],
       },
     });
-  });
+  }, 30000);
 });

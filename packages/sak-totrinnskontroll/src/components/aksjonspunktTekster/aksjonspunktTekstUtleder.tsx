@@ -12,10 +12,11 @@ import {
 } from '@navikt/fp-kodeverk';
 import { KodeverkMedNavn, TotrinnskontrollAksjonspunkt, Behandlingsresultat } from '@navikt/fp-types';
 
-import totrinnskontrollaksjonspunktTextCodes, {
+import {
+  totrinnskontrollaksjonspunktTextCodes,
   totrinnsTilbakekrevingkontrollaksjonspunktTextCodes,
 } from '../../totrinnskontrollaksjonspunktTextCodes';
-import OpptjeningTotrinnText from './OpptjeningTotrinnText';
+import { OpptjeningTotrinnText } from './OpptjeningTotrinnText';
 
 const formatDate = (date?: string): string => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
 
@@ -143,7 +144,7 @@ const erKlageAksjonspunkt = (aksjonspunkt: TotrinnskontrollAksjonspunkt): boolea
   aksjonspunkt.aksjonspunktKode === AksjonspunktKode.BEHANDLE_KLAGE_NFP ||
   aksjonspunkt.aksjonspunktKode === AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP;
 
-const getAksjonspunkttekst = (
+export const getAksjonspunkttekst = (
   isForeldrepenger: boolean,
   behandlingStatus: string,
   faktaOmBeregningTilfeller: KodeverkMedNavn[],
@@ -192,5 +193,3 @@ const getAksjonspunkttekst = (
   }
   return getTextFromAksjonspunktkode(aksjonspunkt);
 };
-
-export default getAksjonspunkttekst;

@@ -1,4 +1,4 @@
-type ManueltArbeidsforhold = Readonly<{
+export type ManueltArbeidsforhold = Readonly<{
   behandlingUuid: string;
   behandlingVersjon: number;
   begrunnelse: string;
@@ -10,5 +10,3 @@ type ManueltArbeidsforhold = Readonly<{
   stillingsprosent: number;
   vurdering: string;
 }>;
-
-export default ManueltArbeidsforhold;

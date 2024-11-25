@@ -1,2 +1,2 @@
-export { default as TotrinnskontrollSakIndex } from './src/TotrinnskontrollSakIndex';
-export { default as FatterVedtakTotrinnskontrollModalSakIndex } from './src/FatterVedtakTotrinnskontrollModalSakIndex';
+export { TotrinnskontrollSakIndex } from './src/TotrinnskontrollSakIndex';
+export { FatterVedtakTotrinnskontrollModalSakIndex } from './src/FatterVedtakTotrinnskontrollModalSakIndex';

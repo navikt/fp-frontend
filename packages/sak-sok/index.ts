@@ -1,1 +1,1 @@
-export { default as FagsakSokSakIndex } from './src/FagsakSokSakIndex';
+export { FagsakSokSakIndex } from './src/FagsakSokSakIndex';

@@ -1,12 +1,11 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { BodyShort, Modal, Button, Label } from '@navikt/ds-react';
+import { BodyShort, Modal, Button, Label, HStack, VStack } from '@navikt/ds-react';
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import styles from './henlagtBehandlingModal.module.css';
 
-interface OwnProps {
+interface Props {
   showModal: boolean;
   closeEvent: () => void;
 }
@@ -14,10 +13,10 @@ interface OwnProps {
 /**
  * HenlagtBehandlingModal
  *
- * Presentasjonskomponent. Denne modalen vises etter en vilkarsvurdering der behandlingsstatusen
+ * Denne modalen vises etter en vilkarsvurdering der behandlingsstatusen
  * er satt til Iverksetter vedtak. Ved å trykke på knapp blir saksbehandler tatt tilbake til sokesiden.
  */
-const HenlagtBehandlingModal: FunctionComponent<OwnProps> = ({ showModal, closeEvent }) => {
+export const HenlagtBehandlingModal = ({ showModal, closeEvent }: Props) => {
   const intl = useIntl();
 
   return (
@@ -28,32 +27,26 @@ const HenlagtBehandlingModal: FunctionComponent<OwnProps> = ({ showModal, closeE
       onClose={closeEvent}
     >
       <Modal.Body>
-        <FlexContainer>
-          <FlexRow>
-            <FlexColumn>
-              <CheckmarkCircleFillIcon
-                className={styles.image}
-                title={intl.formatMessage({ id: 'HenlagtBehandlingModal.Henlagt' })}
-              />
-            </FlexColumn>
-            <FlexColumn>
+        <HStack justify="space-between">
+          <HStack gap="3">
+            <CheckmarkCircleFillIcon
+              className={styles.image}
+              title={intl.formatMessage({ id: 'HenlagtBehandlingModal.Henlagt' })}
+            />
+            <VStack gap="1">
               <Label size="small">
                 <FormattedMessage id="HenlagtBehandlingModal.BehandlingenErHenlagt" />
               </Label>
               <BodyShort size="small">
                 <FormattedMessage id="HenlagtBehandlingModal.RutetTilForsiden" />
               </BodyShort>
-            </FlexColumn>
-            <FlexColumn className={styles.button}>
-              <Button variant="primary" size="small" onClick={closeEvent} autoFocus type="button">
-                {intl.formatMessage({ id: 'HenlagtBehandlingModal.Ok' })}
-              </Button>
-            </FlexColumn>
-          </FlexRow>
-        </FlexContainer>
+            </VStack>
+          </HStack>
+          <Button variant="primary" size="small" onClick={closeEvent} autoFocus type="button">
+            <FormattedMessage id="HenlagtBehandlingModal.Ok" />
+          </Button>
+        </HStack>
       </Modal.Body>
     </Modal>
   );
 };
-
-export default HenlagtBehandlingModal;

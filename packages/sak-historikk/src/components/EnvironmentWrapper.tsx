@@ -1,13 +1,15 @@
 import React, { PropsWithChildren, useRef, useState } from 'react';
 import { Historikkinnslag } from '@navikt/fp-types';
-import { Detail, Label, Popover } from '@navikt/ds-react';
+import { Detail, Popover } from '@navikt/ds-react';
 
 export const EnvironmentWrapper = ({
   historikkinnslag,
-  malType,
   shouldRender,
   children,
-}: PropsWithChildren<{ historikkinnslag: Historikkinnslag; malType: string; shouldRender: boolean }>) => {
+}: PropsWithChildren<{
+  historikkinnslag: Historikkinnslag;
+  shouldRender: boolean;
+}>) => {
   const [hoverState, setHoverState] = useState(false);
   const hoverRef = useRef<HTMLDivElement>(null);
 
@@ -24,7 +26,6 @@ export const EnvironmentWrapper = ({
           onClose={() => setHoverState(false)}
         >
           <Popover.Content>
-            <Label>{malType}</Label>
             <Detail as="pre">{JSON.stringify(historikkinnslag, null, 2)}</Detail>
           </Popover.Content>
         </Popover>

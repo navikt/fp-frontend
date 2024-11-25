@@ -49,11 +49,9 @@ export type ArbeidsforholdFodselOgTilrettelegging = Readonly<{
   stillingsprosentStartTilrettelegging: number;
 }>;
 
-type FodselOgTilrettelegging = Readonly<{
+export type FodselOgTilrettelegging = Readonly<{
   termindato?: string;
   fødselsdato?: string;
   arbeidsforholdListe: ArbeidsforholdFodselOgTilrettelegging[];
   saksbehandlet: boolean;
 }>;
-
-export default FodselOgTilrettelegging;

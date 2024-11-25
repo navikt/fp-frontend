@@ -1,5 +1,5 @@
 import React from 'react';
-import { StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { ForbiddenPage } from './ForbiddenPage';
 import { NotFoundPage } from './NotFoundPage';
@@ -8,18 +8,29 @@ import { IngenBehandlingValgtPanel } from './IngenBehandlingValgtPanel';
 
 import '@navikt/ds-css';
 
-export default {
+const meta = {
   title: 'sak/sak-infosider',
+} satisfies Meta;
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const HarIkkeTilgang: Story = {
+  render: () => <ForbiddenPage renderSomLenke={tekst => <a href="test">{tekst}</a>} />,
 };
 
-export const HarIkkeTilgang: StoryFn = () => <ForbiddenPage renderSomLenke={tekst => <a href="test">{tekst}</a>} />;
+export const SideIkkeFunnet: Story = {
+  render: () => <NotFoundPage renderSomLenke={tekst => <a href="test">{tekst}</a>} />,
+};
 
-export const SideIkkeFunnet: StoryFn = () => <NotFoundPage renderSomLenke={tekst => <a href="test">{tekst}</a>} />;
+export const IkkeInnloggetBruker: Story = {
+  render: () => <UnauthorizedPage renderSomLenke={tekst => <a href="test">{tekst}</a>} />,
+};
 
-export const IkkeInnloggetBruker: StoryFn = () => (
-  <UnauthorizedPage renderSomLenke={tekst => <a href="test">{tekst}</a>} />
-);
+export const BehandlingErIkkeValgt: Story = {
+  render: () => <IngenBehandlingValgtPanel numBehandlinger={2} />,
+};
 
-export const BehandlingErIkkeValgt: StoryFn = () => <IngenBehandlingValgtPanel numBehandlinger={2} />;
-
-export const BehandlingerFinnesIkke: StoryFn = () => <IngenBehandlingValgtPanel numBehandlinger={0} />;
+export const BehandlingerFinnesIkke: Story = {
+  render: () => <IngenBehandlingValgtPanel numBehandlinger={0} />,
+};

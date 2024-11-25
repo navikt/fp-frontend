@@ -8,7 +8,7 @@ import {
 } from '@navikt/fp-kodeverk';
 import { Behandlingsresultat, KodeverkMedNavn, TotrinnskontrollAksjonspunkt } from '@navikt/fp-types';
 
-import getAksjonspunkttekst from './aksjonspunktTekstUtleder';
+import { getAksjonspunkttekst } from './aksjonspunktTekstUtleder';
 
 const behandlingStatusFVED = BehandlingStatus.FATTER_VEDTAK;
 

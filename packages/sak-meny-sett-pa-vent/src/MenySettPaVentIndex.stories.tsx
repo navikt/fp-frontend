@@ -1,24 +1,26 @@
-import React from 'react';
-import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { VenteArsakType } from '@navikt/fp-kodeverk';
 
-import MenySettPaVentIndex from './MenySettPaVentIndex';
+import { MenySettPaVentIndex } from './MenySettPaVentIndex';
 
-export default {
+const meta = {
   title: 'sak/sak-meny-sett-pa-vent',
   component: MenySettPaVentIndex,
-};
+  args: {
+    settBehandlingPaVent: action('button-click'),
+    lukkModal: action('button-click'),
+    erTilbakekreving: false,
+  },
+} satisfies Meta<typeof MenySettPaVentIndex>;
+export default meta;
 
-const Template: StoryFn<{
-  settBehandlingPaVent: () => void;
-  lukkModal: () => void;
-}> = ({ settBehandlingPaVent, lukkModal }) => (
-  <MenySettPaVentIndex
-    behandlingVersjon={2}
-    settBehandlingPaVent={settBehandlingPaVent}
-    ventearsaker={[
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: {
+    ventearsaker: [
       {
         kode: VenteArsakType.AVV_DOK,
         kodeverk: 'VENT_ARSAK_TYPE',
@@ -29,14 +31,6 @@ const Template: StoryFn<{
         kodeverk: 'VENT_ARSAK_TYPE',
         navn: 'Avvent fødsel',
       },
-    ]}
-    lukkModal={lukkModal}
-    erTilbakekreving={false}
-  />
-);
-
-export const Default = Template.bind({});
-Default.args = {
-  settBehandlingPaVent: action('button-click'),
-  lukkModal: action('button-click'),
+    ],
+  },
 };

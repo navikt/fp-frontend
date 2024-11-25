@@ -1,4 +1,4 @@
-type ManglendeInntektsmeldingVurdering = Readonly<{
+export type ManglendeInntektsmeldingVurdering = Readonly<{
   behandlingUuid: string;
   behandlingVersjon: number;
   vurdering: string;
@@ -6,5 +6,3 @@ type ManglendeInntektsmeldingVurdering = Readonly<{
   arbeidsgiverIdent: string;
   internArbeidsforholdRef?: string;
 }>;
-
-export default ManglendeInntektsmeldingVurdering;

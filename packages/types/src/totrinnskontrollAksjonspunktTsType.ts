@@ -14,7 +14,7 @@ export type OpptjeningAktiviteter = Readonly<{
   privatpersonFødselsdato?: string;
 }>;
 
-type TotrinnskontrollAksjonspunkt = Readonly<{
+export type TotrinnskontrollAksjonspunkt = Readonly<{
   aksjonspunktKode: string;
   opptjeningAktiviteter?: OpptjeningAktiviteter[];
   beregningDto?: {
@@ -34,5 +34,3 @@ type TotrinnskontrollAksjonspunkt = Readonly<{
     erEndret: boolean;
   }[];
 }>;
-
-export default TotrinnskontrollAksjonspunkt;
