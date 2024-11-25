@@ -20,7 +20,7 @@ const meta = {
   parameters: {
     submitCallback: action('onSubmit'),
   },
-  render: function Render(args, { parameters: { submitCallback } }) {
+  render: (args, { parameters: { submitCallback } }) => {
     const formMethods = useForm({ defaultValues: OmsorgOgAdopsjonPapirsoknadIndex.initialValues() });
 
     return (

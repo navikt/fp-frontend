@@ -16,7 +16,7 @@ const meta = {
   args: {
     readOnly: false,
   },
-  render: function Render(args, { parameters: { submitCallback } }) {
+  render: (args, { parameters: { submitCallback } }) => {
     const formMethods = useForm({
       defaultValues: FrilansPapirsoknadIndex.initialValues(),
     });
