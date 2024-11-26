@@ -58,31 +58,33 @@ export const LagreSoknadPanel = ({ submitting, onSubmitUfullstendigsoknad, readO
             readOnly={readOnly}
           />
         </div>
-        {!ufullstendigSoeknad && (
-          <Button
-            id="saveButton"
-            size="small"
-            variant="primary"
-            loading={submitting}
-            disabled={readOnly || submitting}
-            onClick={ariaCheck}
-          >
-            <FormattedMessage id="Registrering.SaveApplication.SaveButton" />
-          </Button>
-        )}
-        {ufullstendigSoeknad && (
-          <Button
-            id="endButton"
-            onClick={toggleLukkPapirsoknadModal}
-            size="small"
-            variant="primary"
-            loading={submitting}
-            disabled={readOnly || submitting}
-            type="button"
-          >
-            <FormattedMessage id="Registrering.SaveApplication.EndButton" />
-          </Button>
-        )}
+        <div>
+          {!ufullstendigSoeknad && (
+            <Button
+              id="saveButton"
+              size="small"
+              variant="primary"
+              loading={submitting}
+              disabled={readOnly || submitting}
+              onClick={ariaCheck}
+            >
+              <FormattedMessage id="Registrering.SaveApplication.SaveButton" />
+            </Button>
+          )}
+          {ufullstendigSoeknad && (
+            <Button
+              id="endButton"
+              onClick={toggleLukkPapirsoknadModal}
+              size="small"
+              variant="primary"
+              loading={submitting}
+              disabled={readOnly || submitting}
+              type="button"
+            >
+              <FormattedMessage id="Registrering.SaveApplication.EndButton" />
+            </Button>
+          )}
+        </div>
         <LukkPapirsoknadModal
           handleSubmit={onSubmitUfullstendigsoknad}
           showModal={showLukkSoknadModal}

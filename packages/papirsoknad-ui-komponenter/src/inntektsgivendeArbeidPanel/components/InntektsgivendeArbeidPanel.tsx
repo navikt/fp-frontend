@@ -22,10 +22,10 @@ export const InntektsgivendeArbeidPanel = ({ readOnly, alleKodeverk }: Props) =>
   <BorderBox>
     <VStack gap="4">
       <Heading size="small">
-        <FormattedMessage id="Registrering.InntektsgivendeArbeid.ArbeidINorge.Title" />
+        <FormattedMessage id="Registrering.InntektsgivendeArbeid.ArbeidIUtland.Title" />
       </Heading>
       <Detail>
-        <FormattedMessage id="Registrering.InntektsgivendeArbeid.ArbeidINorge.SkalIkkeRegistrereArbeidsforhold" />
+        <FormattedMessage id="Registrering.InntektsgivendeArbeid.ArbeidIUtland.SkalIkkeRegistrereArbeidsforhold" />
       </Detail>
       <RenderInntektsgivendeArbeidFieldArray readOnly={readOnly} alleKodeverk={alleKodeverk} />
     </VStack>
@@ -33,18 +33,14 @@ export const InntektsgivendeArbeidPanel = ({ readOnly, alleKodeverk }: Props) =>
 );
 
 InntektsgivendeArbeidPanel.initialValues = (): InntektsgivendeArbeidFormValues => ({
-  [INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME]: [
-    {
-      arbeidsgiver: '',
-      periodeFom: '',
-      periodeTom: '',
-      land: '',
-    },
-  ],
+  [INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME]: [],
 });
 
+const isEmpty = (val: string | undefined): boolean => val === undefined || val === '';
 InntektsgivendeArbeidPanel.transformValues = ({
   arbeidsforhold,
 }: InntektsgivendeArbeidFormValues): InntektsgivendeArbeidFormValues => ({
-  arbeidsforhold,
+  arbeidsforhold: arbeidsforhold?.filter(
+    a => !(isEmpty(a.arbeidsgiver) && isEmpty(a.land) && isEmpty(a.periodeFom) && isEmpty(a.periodeTom)),
+  ),
 });

@@ -67,7 +67,7 @@ export const PermisjonOverforingAvKvoterPanel = ({ foreldreType, alleKodeverk, r
 
   return (
     <VStack gap="2">
-      <Label size="small">
+      <Label>
         <FormattedMessage id="Registrering.Permisjon.OverforingAvKvote.OvertaKvoten" />
       </Label>
       <CheckboxField

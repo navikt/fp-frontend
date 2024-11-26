@@ -1,7 +1,6 @@
 import React, { ReactElement, useEffect } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useFieldArray, useFormContext, UseFormGetValues } from 'react-hook-form';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 import { Datepicker, PeriodFieldArray, SelectField } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
@@ -10,6 +9,8 @@ import {
   hasValidDate,
   required,
 } from '@navikt/ft-form-validators';
+
+import { FieldArrayRow } from '../../../felles/FieldArrayRow';
 import { OVERFORING_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
 import { OverforingPeriode, PermisjonFormValues } from '../../types';
 
@@ -65,68 +66,57 @@ export const RenderOverforingAvKvoterFieldArray = ({ selectValues, readOnly }: P
     <PeriodFieldArray
       fields={fields}
       emptyPeriodTemplate={defaultOverforingPeriode}
-      bodyText={intl.formatMessage({ id: 'Registrering.Permisjon.Utsettelse.LeggTilPeriode' })}
+      bodyText={intl.formatMessage({ id: 'Registrering.Permisjon.nyPeriode' })}
       readOnly={readOnly}
       append={append}
       remove={remove}
     >
-      {(field, index, getRemoveButton) => (
-        <FlexContainer wrap key={field.id}>
-          <FlexRow>
-            <FlexColumn>
-              <SelectField
-                name={`${getPrefix(index)}.overforingArsak`}
-                label={
-                  index === 0
-                    ? intl.formatMessage({ id: 'Registrering.Permisjon.OverforingAvKvote.Arsak.AngiArsak' })
-                    : ''
-                }
-                selectValues={selectValues}
-                validate={[required]}
-                readOnly={readOnly}
-              />
-            </FlexColumn>
-            <>
-              <FlexColumn>
-                <Datepicker
-                  isReadOnly={readOnly}
-                  name={`${getPrefix(index)}.periodeFom`}
-                  validate={[
-                    required,
-                    hasValidDate,
-                    () => {
-                      const fomVerdi = getValues(`${getPrefix(index)}.periodeFom`);
-                      const tomVerdi = getValues(`${getPrefix(index)}.periodeTom`);
-                      return tomVerdi && fomVerdi ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : null;
-                    },
-                    getOverlappingValidator(getValues),
-                  ]}
-                  label={index === 0 ? <FormattedMessage id="Registrering.Permisjon.OverforingAvKvote.fomDato" /> : ''}
-                  onChange={() => (isSubmitted ? trigger() : undefined)}
-                />
-              </FlexColumn>
-              <FlexColumn>
-                <Datepicker
-                  isReadOnly={readOnly}
-                  name={`${getPrefix(index)}.periodeTom`}
-                  validate={[
-                    required,
-                    hasValidDate,
-                    () => {
-                      const fomVerdi = getValues(`${getPrefix(index)}.periodeFom`);
-                      const tomVerdi = getValues(`${getPrefix(index)}.periodeTom`);
-                      return tomVerdi && fomVerdi ? dateAfterOrEqual(fomVerdi)(tomVerdi) : null;
-                    },
-                    getOverlappingValidator(getValues),
-                  ]}
-                  label={index === 0 ? <FormattedMessage id="Registrering.Permisjon.OverforingAvKvote.tomDato" /> : ''}
-                  onChange={() => (isSubmitted ? trigger() : undefined)}
-                />
-              </FlexColumn>
-              {getRemoveButton && <FlexColumn>{getRemoveButton()}</FlexColumn>}
-            </>
-          </FlexRow>
-        </FlexContainer>
+      {(field, index) => (
+        <FieldArrayRow key={field.id} readOnly={readOnly} remove={remove} index={index}>
+          <div>
+            <SelectField
+              name={`${getPrefix(index)}.overforingArsak`}
+              label={intl.formatMessage({ id: 'Registrering.Permisjon.OverforingAvKvote.Arsak.AngiArsak' })}
+              selectValues={selectValues}
+              validate={[required]}
+              readOnly={readOnly}
+            />
+          </div>
+
+          <Datepicker
+            isReadOnly={readOnly}
+            name={`${getPrefix(index)}.periodeFom`}
+            validate={[
+              required,
+              hasValidDate,
+              () => {
+                const fomVerdi = getValues(`${getPrefix(index)}.periodeFom`);
+                const tomVerdi = getValues(`${getPrefix(index)}.periodeTom`);
+                return tomVerdi && fomVerdi ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : null;
+              },
+              getOverlappingValidator(getValues),
+            ]}
+            label={<FormattedMessage id="Registrering.Permisjon.OverforingAvKvote.fomDato" />}
+            onChange={() => (isSubmitted ? trigger() : undefined)}
+          />
+
+          <Datepicker
+            isReadOnly={readOnly}
+            name={`${getPrefix(index)}.periodeTom`}
+            validate={[
+              required,
+              hasValidDate,
+              () => {
+                const fomVerdi = getValues(`${getPrefix(index)}.periodeFom`);
+                const tomVerdi = getValues(`${getPrefix(index)}.periodeTom`);
+                return tomVerdi && fomVerdi ? dateAfterOrEqual(fomVerdi)(tomVerdi) : null;
+              },
+              getOverlappingValidator(getValues),
+            ]}
+            label={<FormattedMessage id="Registrering.Permisjon.OverforingAvKvote.tomDato" />}
+            onChange={() => (isSubmitted ? trigger() : undefined)}
+          />
+        </FieldArrayRow>
       )}
     </PeriodFieldArray>
   );

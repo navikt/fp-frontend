@@ -30,7 +30,7 @@ export const PermisjonOppholdPanel = ({ readOnly, alleKodeverk }: Props) => {
 
   return (
     <VStack gap="2">
-      <Label size="small">
+      <Label>
         <FormattedMessage id="Registrering.Permisjon.Opphold.Title" />
       </Label>
       <CheckboxField

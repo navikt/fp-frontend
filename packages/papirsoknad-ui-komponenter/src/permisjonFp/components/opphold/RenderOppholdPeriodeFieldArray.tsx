@@ -1,7 +1,6 @@
 import React, { ReactElement, useEffect } from 'react';
 import { useFieldArray, useFormContext, UseFormGetValues } from 'react-hook-form';
 import { useIntl } from 'react-intl';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 import { Datepicker, PeriodFieldArray, SelectField } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
@@ -13,9 +12,9 @@ import {
 import { KodeverkMedNavn } from '@navikt/fp-types';
 import { OppholdArsakType } from '@navikt/fp-kodeverk';
 
-import styles from './renderOppholdPeriodeFieldArray.module.css';
 import { OPPHOLD_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
 import { OppholdPeriode, PermisjonFormValues } from '../../types';
+import { FieldArrayRow } from '../../../felles/FieldArrayRow';
 
 const FA_PREFIX = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}`;
 const getPrefix = (index: number) => `${FA_PREFIX}.${index}` as const;
@@ -85,61 +84,54 @@ export const RenderOppholdPeriodeFieldArray = ({ oppholdsReasons, readOnly }: Pr
     <PeriodFieldArray
       fields={fields}
       emptyPeriodTemplate={defaultOppholdPeriode}
-      bodyText={intl.formatMessage({ id: 'Registrering.Permisjon.Opphold.LeggTilPeriode' })}
+      bodyText={intl.formatMessage({ id: 'Registrering.Permisjon.nyPeriode' })}
       readOnly={readOnly}
       append={append}
       remove={remove}
     >
-      {(field, index, getRemoveButton) => (
-        <div key={field.id} className={index !== fields.length - 1 ? styles.notLastRow : ''}>
-          <FlexContainer wrap>
-            <FlexRow>
-              <FlexColumn>
-                <Datepicker
-                  name={`${getPrefix(index)}.periodeFom`}
-                  label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.periodeFom' }) : ''}
-                  validate={[
-                    required,
-                    hasValidDate,
-                    () => {
-                      const fomVerdi = getValues(`${getPrefix(index)}.periodeFom`);
-                      const tomVerdi = getValues(`${getPrefix(index)}.periodeTom`);
-                      return tomVerdi && fomVerdi ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : null;
-                    },
-                    getOverlappingValidator(getValues),
-                  ]}
-                  onChange={() => (isSubmitted ? trigger() : undefined)}
-                />
-              </FlexColumn>
-              <FlexColumn>
-                <Datepicker
-                  name={`${getPrefix(index)}.periodeTom`}
-                  label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.periodeTom' }) : ''}
-                  validate={[
-                    required,
-                    hasValidDate,
-                    () => {
-                      const fomVerdi = getValues(`${getPrefix(index)}.periodeFom`);
-                      const tomVerdi = getValues(`${getPrefix(index)}.periodeTom`);
-                      return tomVerdi && fomVerdi ? dateAfterOrEqual(fomVerdi)(tomVerdi) : null;
-                    },
-                    getOverlappingValidator(getValues),
-                  ]}
-                  onChange={() => (isSubmitted ? trigger() : undefined)}
-                />
-              </FlexColumn>
-              <FlexColumn>
-                <SelectField
-                  name={`${getPrefix(index)}.årsak`}
-                  label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.Opphold.Arsak' }) : ''}
-                  selectValues={mapTyper(oppholdsReasons)}
-                  validate={[required]}
-                />
-              </FlexColumn>
-              {getRemoveButton && <FlexColumn>{getRemoveButton()}</FlexColumn>}
-            </FlexRow>
-          </FlexContainer>
-        </div>
+      {(field, index) => (
+        <FieldArrayRow key={field.id} readOnly={readOnly} remove={remove} index={index}>
+          <Datepicker
+            name={`${getPrefix(index)}.periodeFom`}
+            label={intl.formatMessage({ id: 'Registrering.Permisjon.periodeFom' })}
+            validate={[
+              required,
+              hasValidDate,
+              () => {
+                const fomVerdi = getValues(`${getPrefix(index)}.periodeFom`);
+                const tomVerdi = getValues(`${getPrefix(index)}.periodeTom`);
+                return tomVerdi && fomVerdi ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : null;
+              },
+              getOverlappingValidator(getValues),
+            ]}
+            onChange={() => (isSubmitted ? trigger() : undefined)}
+          />
+
+          <Datepicker
+            name={`${getPrefix(index)}.periodeTom`}
+            label={intl.formatMessage({ id: 'Registrering.Permisjon.periodeTom' })}
+            validate={[
+              required,
+              hasValidDate,
+              () => {
+                const fomVerdi = getValues(`${getPrefix(index)}.periodeFom`);
+                const tomVerdi = getValues(`${getPrefix(index)}.periodeTom`);
+                return tomVerdi && fomVerdi ? dateAfterOrEqual(fomVerdi)(tomVerdi) : null;
+              },
+              getOverlappingValidator(getValues),
+            ]}
+            onChange={() => (isSubmitted ? trigger() : undefined)}
+          />
+
+          <div>
+            <SelectField
+              name={`${getPrefix(index)}.årsak`}
+              label={intl.formatMessage({ id: 'Registrering.Permisjon.Opphold.Arsak' })}
+              selectValues={mapTyper(oppholdsReasons)}
+              validate={[required]}
+            />
+          </div>
+        </FieldArrayRow>
       )}
     </PeriodFieldArray>
   );

@@ -1,7 +1,6 @@
 import React, { ReactElement } from 'react';
 import { useIntl } from 'react-intl';
 import { useFieldArray, useFormContext } from 'react-hook-form';
-import { HStack } from '@navikt/ds-react';
 import { maxLength, hasValidDate } from '@navikt/ft-form-validators';
 import { Datepicker, InputField, SelectField, PeriodFieldArray } from '@navikt/ft-form-hooks';
 import { KodeverkType, Landkode } from '@navikt/fp-kodeverk';
@@ -9,6 +8,7 @@ import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
 import { InntektsgivendeArbeidFormValues } from '../types';
 import { INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME } from '../constants';
+import { FieldArrayRow } from '../../felles/FieldArrayRow';
 
 const maxLength50 = maxLength(50);
 
@@ -49,11 +49,12 @@ export const RenderInntektsgivendeArbeidFieldArray = ({ alleKodeverk, readOnly }
       fields={fields}
       bodyText={intl.formatMessage({ id: 'Registrering.InntektsgivendeArbeid.LeggTilArbeidsforhold' })}
       readOnly={readOnly}
+      emptyPeriodTemplate={{ arbeidsgiver: '', periodeFom: '', periodeTom: '', land: '' }}
       remove={remove}
       append={append}
     >
-      {(field, index, getRemoveButton) => (
-        <HStack key={field.id} gap="4" paddingBlock="2">
+      {(field, index) => (
+        <FieldArrayRow key={field.id} remove={remove} index={index} readOnly={readOnly}>
           <InputField
             readOnly={readOnly}
             name={`${INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME}.${index}.arbeidsgiver`}
@@ -61,6 +62,7 @@ export const RenderInntektsgivendeArbeidFieldArray = ({ alleKodeverk, readOnly }
             validate={[maxLength50]}
             maxLength={99}
           />
+
           <Datepicker
             isReadOnly={readOnly}
             name={`${INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME}.${index}.periodeFom`}
@@ -78,9 +80,9 @@ export const RenderInntektsgivendeArbeidFieldArray = ({ alleKodeverk, readOnly }
             name={`${INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME}.${index}.land`}
             label={intl.formatMessage({ id: 'Registrering.InntektsgivendeArbeid.Land' })}
             selectValues={countrySelectValues(sortedCountriesByName)}
+            size="small"
           />
-          {getRemoveButton && <div>{getRemoveButton()}</div>}
-        </HStack>
+        </FieldArrayRow>
       )}
     </PeriodFieldArray>
   );

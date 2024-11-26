@@ -2,8 +2,8 @@ import React, { ReactElement, useEffect } from 'react';
 import dayjs from 'dayjs';
 import { useFieldArray, useFormContext, UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Alert, Label } from '@navikt/ds-react';
-import { AvsnittSkiller, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { Alert } from '@navikt/ds-react';
+
 import {
   dateAfterOrEqual,
   dateBeforeOrEqual,
@@ -24,9 +24,9 @@ import { Arbeidskategori } from '@navikt/fp-kodeverk';
 
 import { gyldigeUttakperioder } from '../fulltUttak/RenderPermisjonPeriodeFieldArray';
 
-import styles from './renderGraderingPeriodeFieldArray.module.css';
 import { GRADERING_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
 import { GraderingPeriode, PermisjonFormValues } from '../../types';
+import { FieldArrayRow } from '../../../felles/FieldArrayRow';
 
 const maxLength9OrFodselsnr = maxLengthOrFodselsnr(9);
 
@@ -142,137 +142,100 @@ export const RenderGraderingPeriodeFieldArray = ({ graderingKvoter, readOnly, ar
     <PeriodFieldArray
       fields={fields}
       emptyPeriodTemplate={defaultGraderingPeriode}
-      bodyText={intl.formatMessage({ id: 'Registrering.Permisjon.Gradering.LeggTilPeriode' })}
+      bodyText={intl.formatMessage({ id: 'Registrering.Permisjon.nyPeriode' })}
       readOnly={readOnly}
       remove={remove}
       append={append}
     >
-      {(field, index, getRemoveButton) => {
+      {(field, index) => {
         const { harSamtidigUttak, periodeFom } = graderingValues[index];
         const periodeFomForTidlig = periodeFom && dayjs(periodeFom, ISO_DATE_FORMAT).isBefore(dayjs('2019-01-01'));
-        const namePart1 = `${getPrefix(index)}`;
+
         return (
-          <div key={field.id} className={index !== fields.length - 1 ? styles.notLastRow : ''}>
-            {index > 0 && (
-              <>
-                <AvsnittSkiller />
-                <VerticalSpacer sixteenPx />
-              </>
+          <FieldArrayRow key={field.id} readOnly={readOnly} remove={remove} index={index}>
+            <SelectField
+              name={`${getPrefix(index)}.periodeForGradering`}
+              selectValues={mapKvoter(graderingKvoter)}
+              label={intl.formatMessage({ id: 'Registrering.Permisjon.Gradering.Periode' })}
+              validate={[required]}
+            />
+
+            <Datepicker
+              label={intl.formatMessage({ id: 'Registrering.Permisjon.periodeFom' })}
+              name={`${getPrefix(index)}.periodeFom`}
+              validate={[
+                required,
+                hasValidDate,
+                getValiderFørEllerEtter(getValues, index, true),
+                getOverlappingValidator(getValues),
+              ]}
+              onChange={() => (isSubmitted ? trigger() : undefined)}
+            />
+
+            <Datepicker
+              label={intl.formatMessage({ id: 'Registrering.Permisjon.periodeTom' })}
+              name={`${getPrefix(index)}.periodeTom`}
+              validate={[
+                required,
+                hasValidDate,
+                getValiderFørEllerEtter(getValues, index, false),
+                getOverlappingValidator(getValues),
+              ]}
+              onChange={() => (isSubmitted ? trigger() : undefined)}
+            />
+            <InputField
+              label={<FormattedMessage id="Registrering.Permisjon.Gradering.Prosentandel" />}
+              name={`${getPrefix(index)}.prosentandelArbeid`}
+              validate={[required, hasValidDecimal, maxValue100]}
+              normalizeOnBlur={value => (Number.isNaN(value) ? value : parseFloat(value.toString()).toFixed(2))}
+            />
+
+            <InputField
+              label={intl.formatMessage({ id: 'Registrering.Permisjon.Orgnr' })}
+              name={`${getPrefix(index)}.arbeidsgiverIdentifikator`}
+              validate={[
+                getValiderArbeidsgiverIdNårRequired(getValues, index),
+                hasValidInteger,
+                validerAtArbeidsgiverIdErGyldig,
+              ]}
+            />
+            <SelectField
+              label={intl.formatMessage({ id: 'Registrering.Permisjon.ArbeidskategoriLabel' })}
+              name={`${getPrefix(index)}.arbeidskategoriType`}
+              selectValues={mapArbeidskategori(arbeidskategoriTyper)}
+              validate={[required]}
+              onChange={() => (isSubmitted ? trigger() : undefined)}
+            />
+
+            <CheckboxField
+              name={`${getPrefix(index)}.skalGraderes`}
+              label={<FormattedMessage id="Registrering.Permisjon.Gradering.SkalGraderes" />}
+            />
+
+            <CheckboxField
+              readOnly={readOnly}
+              name={`${getPrefix(index)}.flerbarnsdager`}
+              label={<FormattedMessage id="Registrering.Permisjon.Flerbarnsdager" />}
+            />
+
+            <CheckboxField
+              name={`${getPrefix(index)}.harSamtidigUttak`}
+              label={<FormattedMessage id="Registrering.Permisjon.HarSamtidigUttak" />}
+            />
+            {harSamtidigUttak && (
+              <InputField
+                name={`${getPrefix(index)}.samtidigUttaksprosent`}
+                validate={[required, hasValidDecimal, maxValue100]}
+                label={intl.formatMessage({ id: 'Registrering.Permisjon.SamtidigUttaksprosent' })}
+              />
             )}
-            <FlexContainer wrap>
-              <FlexRow>
-                <FlexColumn>
-                  <SelectField
-                    name={`${namePart1}.periodeForGradering`}
-                    selectValues={mapKvoter(graderingKvoter)}
-                    label={intl.formatMessage({ id: 'Registrering.Permisjon.Gradering.Periode' })}
-                    validate={[required]}
-                  />
-                </FlexColumn>
-                <FlexColumn>
-                  <Datepicker
-                    label={intl.formatMessage({ id: 'Registrering.Permisjon.periodeFom' })}
-                    name={`${namePart1}.periodeFom`}
-                    validate={[
-                      required,
-                      hasValidDate,
-                      getValiderFørEllerEtter(getValues, index, true),
-                      getOverlappingValidator(getValues),
-                    ]}
-                    onChange={() => (isSubmitted ? trigger() : undefined)}
-                  />
-                </FlexColumn>
-                <FlexColumn>
-                  <Datepicker
-                    label={intl.formatMessage({ id: 'Registrering.Permisjon.periodeTom' })}
-                    name={`${namePart1}.periodeTom`}
-                    validate={[
-                      required,
-                      hasValidDate,
-                      getValiderFørEllerEtter(getValues, index, false),
-                      getOverlappingValidator(getValues),
-                    ]}
-                    onChange={() => (isSubmitted ? trigger() : undefined)}
-                  />
-                </FlexColumn>
-                <FlexColumn className={styles.prosentHeader}>
-                  <InputField
-                    label={<FormattedMessage id="Registrering.Permisjon.Gradering.Prosentandel" />}
-                    name={`${namePart1}.prosentandelArbeid`}
-                    validate={[required, hasValidDecimal, maxValue100]}
-                    normalizeOnBlur={value => (Number.isNaN(value) ? value : parseFloat(value.toString()).toFixed(2))}
-                  />
-                </FlexColumn>
-                <FlexColumn>
-                  <InputField
-                    label={intl.formatMessage({ id: 'Registrering.Permisjon.Orgnr' })}
-                    name={`${namePart1}.arbeidsgiverIdentifikator`}
-                    validate={[
-                      getValiderArbeidsgiverIdNårRequired(getValues, index),
-                      hasValidInteger,
-                      validerAtArbeidsgiverIdErGyldig,
-                    ]}
-                  />
-                </FlexColumn>
-              </FlexRow>
-              <VerticalSpacer eightPx />
-              <FlexRow>
-                <FlexColumn>
-                  <SelectField
-                    label={intl.formatMessage({ id: 'Registrering.Permisjon.ArbeidskategoriLabel' })}
-                    name={`${namePart1}.arbeidskategoriType`}
-                    selectValues={mapArbeidskategori(arbeidskategoriTyper)}
-                    validate={[required]}
-                    onChange={() => (isSubmitted ? trigger() : undefined)}
-                  />
-                </FlexColumn>
-                <FlexColumn>
-                  <div className={styles.graderesHeader}>
-                    <Label size="small">
-                      <FormattedMessage id="Registrering.Permisjon.Gradering.SkalGraderes" />
-                    </Label>
-                  </div>
-                  <CheckboxField name={`${namePart1}.skalGraderes`} label=" " />
-                </FlexColumn>
-                <FlexColumn>
-                  <div className={styles.smalHeader}>
-                    <Label size="small">
-                      <FormattedMessage id="Registrering.Permisjon.Flerbarnsdager" />
-                    </Label>
-                    <CheckboxField readOnly={readOnly} name={`${namePart1}.flerbarnsdager`} label=" " />
-                  </div>
-                </FlexColumn>
-                <FlexColumn>
-                  <div className={styles.smalHeader}>
-                    <Label size="small">
-                      <FormattedMessage id="Registrering.Permisjon.HarSamtidigUttak" />
-                    </Label>
-                  </div>
-                  <CheckboxField name={`${namePart1}.harSamtidigUttak`} label="" />
-                </FlexColumn>
-                <FlexColumn>
-                  {harSamtidigUttak && (
-                    <InputField
-                      name={`${namePart1}.samtidigUttaksprosent`}
-                      validate={[required, hasValidDecimal, maxValue100]}
-                      label={intl.formatMessage({ id: 'Registrering.Permisjon.SamtidigUttaksprosent' })}
-                    />
-                  )}
-                </FlexColumn>
-                {getRemoveButton && <FlexColumn className={styles.placeRemoveButton}>{getRemoveButton()}</FlexColumn>}
-              </FlexRow>
-              {periodeFomForTidlig && (
-                <div>
-                  <FlexRow wrap>
-                    <Alert size="small" variant="warning">
-                      <FormattedMessage id="Registrering.Permisjon.PeriodeFomForTidlig" />
-                    </Alert>
-                  </FlexRow>
-                  <VerticalSpacer eightPx />
-                </div>
-              )}
-            </FlexContainer>
-          </div>
+
+            {periodeFomForTidlig && (
+              <Alert size="small" variant="warning">
+                <FormattedMessage id="Registrering.Permisjon.PeriodeFomForTidlig" />
+              </Alert>
+            )}
+          </FieldArrayRow>
         );
       }}
     </PeriodFieldArray>

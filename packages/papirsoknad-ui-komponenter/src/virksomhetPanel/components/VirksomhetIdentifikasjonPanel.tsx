@@ -110,7 +110,11 @@ VirksomhetIdentifikasjonPanel.transformValues = ({
   virksomhetRegistrertINorge,
   organisasjonsnummer: virksomhetRegistrertINorge ? organisasjonsnummer : undefined,
 
-  landJobberFra: virksomhetRegistrertINorge === false ? landJobberFra : undefined,
-  fom: virksomhetRegistrertINorge === false ? fom : undefined,
-  tom: virksomhetRegistrertINorge === false ? tom : undefined,
+  ...(virksomhetRegistrertINorge === false
+    ? {
+        landJobberFra,
+        fom,
+        tom,
+      }
+    : {}),
 });

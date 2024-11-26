@@ -2,9 +2,7 @@ import React, { ReactElement, useEffect } from 'react';
 import dayjs from 'dayjs';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useFieldArray, useFormContext, UseFormGetValues } from 'react-hook-form';
-import { Alert, Button, Label } from '@navikt/ds-react';
-import { XMarkIcon } from '@navikt/aksel-icons';
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { Alert } from '@navikt/ds-react';
 import { CheckboxField, Datepicker, InputField, PeriodFieldArray, SelectField } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
@@ -20,9 +18,9 @@ import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 
 import { KodeverkType, UttakPeriodeType } from '@navikt/fp-kodeverk';
 
-import styles from './renderPermisjonPeriodeFieldArray.module.css';
 import { PermisjonFormValues, PermisjonPeriode } from '../../types';
 import { PERMISJON_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
+import { FieldArrayRow } from '../../../felles/FieldArrayRow';
 
 const FA_PREFIX = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}`;
 const getPrefix = (index: number) => `${FA_PREFIX}.${index}` as const;
@@ -139,116 +137,85 @@ export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKod
         const periode = watch(getPrefix(index));
 
         const periodeFomForTidlig = erPeriodeFormFør01012019(periode.periodeFom);
-        const visEllerSkulOverskriftStyle = erForsteRad ? styles.visOverskrift : styles.skjulOverskrift;
 
         const skalDisableMorsAktivitet =
           PERIODS_WITH_NO_MORS_AKTIVITET.some(pma => pma === periode.periodeType) || periode.periodeType === '';
 
         return (
-          <div key={field.id}>
-            <FlexContainer>
-              <FlexRow wrap>
-                <FlexColumn className={styles.selectFieldWidth}>
-                  <SelectField
-                    readOnly={readOnly}
-                    name={`${getPrefix(index)}.periodeType`}
-                    label={getLabel(erForsteRad, intl.formatMessage({ id: 'Registrering.Permisjon.periodeType' }))}
-                    selectValues={mapPeriodeTyper(periodeTyper)}
-                    validate={[required]}
-                  />
-                </FlexColumn>
-                <FlexColumn>
-                  <Datepicker
-                    isReadOnly={readOnly}
-                    name={`${getPrefix(index)}.periodeFom`}
-                    label={getLabel(erForsteRad, intl.formatMessage({ id: 'Registrering.Permisjon.periodeFom' }))}
-                    validate={[
-                      required,
-                      hasValidDate,
-                      getValiderFomOgTomVerdi(getValues, index, true),
-                      getOverlappingValidator(getValues),
-                    ]}
-                    onChange={() => (isSubmitted ? trigger() : undefined)}
-                  />
-                </FlexColumn>
-                <FlexColumn>
-                  <Datepicker
-                    isReadOnly={readOnly}
-                    name={`${getPrefix(index)}.periodeTom`}
-                    label={getLabel(erForsteRad, intl.formatMessage({ id: 'Registrering.Permisjon.periodeTom' }))}
-                    validate={[
-                      required,
-                      hasValidDate,
-                      getValiderFomOgTomVerdi(getValues, index, false),
-                      getOverlappingValidator(getValues),
-                    ]}
-                    onChange={() => (isSubmitted ? trigger() : undefined)}
-                  />
-                </FlexColumn>
-                {!sokerErMor && (
-                  <FlexColumn>
-                    <SelectField
-                      readOnly={readOnly}
-                      disabled={skalDisableMorsAktivitet}
-                      name={`${getPrefix(index)}.morsAktivitet`}
-                      label={getLabel(
-                        erForsteRad,
-                        intl.formatMessage({ id: 'Registrering.Permisjon.Fellesperiode.morsAktivitet' }),
-                      )}
-                      selectValues={mapAktiviteter(morsAktivitetTyper)}
-                      hideValueOnDisable
-                    />
-                  </FlexColumn>
+          <FieldArrayRow key={field.id} readOnly={readOnly} remove={remove} index={index}>
+            <div>
+              <SelectField
+                readOnly={readOnly}
+                name={`${getPrefix(index)}.periodeType`}
+                label={getLabel(erForsteRad, intl.formatMessage({ id: 'Registrering.Permisjon.periodeType' }))}
+                selectValues={mapPeriodeTyper(periodeTyper)}
+                validate={[required]}
+              />
+            </div>
+            <Datepicker
+              isReadOnly={readOnly}
+              name={`${getPrefix(index)}.periodeFom`}
+              label={getLabel(erForsteRad, intl.formatMessage({ id: 'Registrering.Permisjon.periodeFom' }))}
+              validate={[
+                required,
+                hasValidDate,
+                getValiderFomOgTomVerdi(getValues, index, true),
+                getOverlappingValidator(getValues),
+              ]}
+              onChange={() => (isSubmitted ? trigger() : undefined)}
+            />
+            <Datepicker
+              isReadOnly={readOnly}
+              name={`${getPrefix(index)}.periodeTom`}
+              label={getLabel(erForsteRad, intl.formatMessage({ id: 'Registrering.Permisjon.periodeTom' }))}
+              validate={[
+                required,
+                hasValidDate,
+                getValiderFomOgTomVerdi(getValues, index, false),
+                getOverlappingValidator(getValues),
+              ]}
+              onChange={() => (isSubmitted ? trigger() : undefined)}
+            />
+            {!sokerErMor && (
+              <SelectField
+                readOnly={readOnly}
+                disabled={skalDisableMorsAktivitet}
+                name={`${getPrefix(index)}.morsAktivitet`}
+                label={getLabel(
+                  erForsteRad,
+                  intl.formatMessage({ id: 'Registrering.Permisjon.Fellesperiode.morsAktivitet' }),
                 )}
-                <FlexColumn className={styles.smalHeader}>
-                  <Label size="small" className={visEllerSkulOverskriftStyle}>
-                    <FormattedMessage id="Registrering.Permisjon.Flerbarnsdager" />
-                  </Label>
-                  <CheckboxField readOnly={readOnly} name={`${getPrefix(index)}.flerbarnsdager`} label=" " />
-                </FlexColumn>
-                <FlexColumn className={styles.smalHeader}>
-                  <Label size="small" className={visEllerSkulOverskriftStyle}>
-                    <FormattedMessage id="Registrering.Permisjon.HarSamtidigUttak" />
-                  </Label>
-                  <CheckboxField readOnly={readOnly} name={`${getPrefix(index)}.harSamtidigUttak`} label=" " />
-                </FlexColumn>
-                {periode.harSamtidigUttak && (
-                  <FlexColumn className={erForsteRad ? '' : styles.alignSamtidigUttak}>
-                    <InputField
-                      name={`${getPrefix(index)}.samtidigUttaksprosent`}
-                      validate={[hasValidDecimal, maxValue100]}
-                      label={intl.formatMessage({ id: 'Registrering.Permisjon.SamtidigUttaksprosent' })}
-                      normalizeOnBlur={value => (Number.isNaN(value) ? value : parseFloat(value.toString()).toFixed(2))}
-                    />
-                  </FlexColumn>
-                )}
-                <FlexColumn>
-                  {!readOnly && (
-                    <Button
-                      className={erForsteRad ? styles.buttonRemoveFirst : styles.buttonRemove}
-                      type="button"
-                      variant="tertiary-neutral"
-                      icon={<XMarkIcon />}
-                      onClick={() => {
-                        remove(index);
-                      }}
-                    />
-                  )}
-                </FlexColumn>
-              </FlexRow>
-              {periodeFomForTidlig && (
-                <>
-                  <FlexRow wrap>
-                    <Alert size="small" variant="warning">
-                      <FormattedMessage id="Registrering.Permisjon.PeriodeFomForTidlig" />
-                    </Alert>
-                  </FlexRow>
-                  <VerticalSpacer sixteenPx />
-                </>
-              )}
-            </FlexContainer>
-            <VerticalSpacer eightPx />
-          </div>
+                selectValues={mapAktiviteter(morsAktivitetTyper)}
+                hideValueOnDisable
+              />
+            )}
+
+            <CheckboxField
+              readOnly={readOnly}
+              name={`${getPrefix(index)}.flerbarnsdager`}
+              label={<FormattedMessage id="Registrering.Permisjon.Flerbarnsdager" />}
+            />
+            <CheckboxField
+              readOnly={readOnly}
+              name={`${getPrefix(index)}.harSamtidigUttak`}
+              label={<FormattedMessage id="Registrering.Permisjon.HarSamtidigUttak" />}
+            />
+
+            {periode.harSamtidigUttak && (
+              <InputField
+                name={`${getPrefix(index)}.samtidigUttaksprosent`}
+                validate={[hasValidDecimal, maxValue100]}
+                label={intl.formatMessage({ id: 'Registrering.Permisjon.SamtidigUttaksprosent' })}
+                normalizeOnBlur={value => (Number.isNaN(value) ? value : parseFloat(value.toString()).toFixed(2))}
+              />
+            )}
+
+            {periodeFomForTidlig && (
+              <Alert size="small" variant="warning">
+                <FormattedMessage id="Registrering.Permisjon.PeriodeFomForTidlig" />
+              </Alert>
+            )}
+          </FieldArrayRow>
         );
       }}
     </PeriodFieldArray>

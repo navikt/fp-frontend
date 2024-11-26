@@ -21,7 +21,7 @@ export const PermisjonFulltUttak = ({ foreldreType, readOnly, alleKodeverk }: Pr
 
   return (
     <VStack gap="2">
-      <Label size="small">
+      <Label>
         <FormattedMessage id="Registrering.Permisjon.FulltUttak" />
       </Label>
       <CheckboxField

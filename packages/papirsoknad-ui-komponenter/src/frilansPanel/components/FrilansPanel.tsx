@@ -2,8 +2,6 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Detail, Heading, VStack } from '@navikt/ds-react';
 import { ArrowBox, BorderBox } from '@navikt/ft-ui-komponenter';
-import { required } from '@navikt/ft-form-validators';
-import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 
 import { FrilansPerioderFieldArray } from './FrilansPerioderFieldArray';
 import { FrilansOppdragForFamiliePanel } from './FrilansOppdragForFamiliePanel';
@@ -23,47 +21,35 @@ export const FrilansPanel = ({ readOnly }: Props) => (
         <FormattedMessage id="Registrering.Frilans.Title" />
       </Heading>
 
-      <RadioGroupPanel
+      <TrueFalseInput
         name={`${FRILANS_NAME_PREFIX}.harSokerPeriodeMedFrilans`}
         label={<FormattedMessage id="Registrering.Frilans.HarFrilansvirksomhet" />}
-        validate={[required]}
-        isReadOnly={readOnly}
-        isTrueOrFalseSelection
-        radios={[
-          {
-            label: <FormattedMessage id="Registrering.No" />,
-            value: 'false',
-          },
-          {
-            label: <FormattedMessage id="Registrering.Yes" />,
-            value: 'true',
-            element: (
-              <ArrowBox marginTop={8}>
-                <VStack gap="4">
-                  <Detail>
-                    <FormattedMessage id="Registrering.Frilans.OppgiPeriode" />
-                  </Detail>
+        readOnly={readOnly}
+        trueContent={
+          <ArrowBox marginTop={8}>
+            <VStack gap="4">
+              <Detail>
+                <FormattedMessage id="Registrering.Frilans.OppgiPeriode" />
+              </Detail>
 
-                  <FrilansPerioderFieldArray readOnly={readOnly} />
+              <FrilansPerioderFieldArray readOnly={readOnly} />
 
-                  <TrueFalseInput
-                    name={`${FRILANS_NAME_PREFIX}.erNyoppstartetFrilanser`}
-                    label={<FormattedMessage id="Registrering.Frilans.ErNyoppstartedFrilanser" />}
-                    readOnly={readOnly}
-                  />
+              <TrueFalseInput
+                name={`${FRILANS_NAME_PREFIX}.erNyoppstartetFrilanser`}
+                label={<FormattedMessage id="Registrering.Frilans.ErNyoppstartedFrilanser" />}
+                readOnly={readOnly}
+              />
 
-                  <TrueFalseInput
-                    name={`${FRILANS_NAME_PREFIX}.harInntektFraFosterhjem`}
-                    label={<FormattedMessage id="Registrering.Frilans.HarInntektFraForsterhjem" />}
-                    readOnly={readOnly}
-                  />
+              <TrueFalseInput
+                name={`${FRILANS_NAME_PREFIX}.harInntektFraFosterhjem`}
+                label={<FormattedMessage id="Registrering.Frilans.HarInntektFraForsterhjem" />}
+                readOnly={readOnly}
+              />
 
-                  <FrilansOppdragForFamiliePanel readOnly={readOnly} />
-                </VStack>
-              </ArrowBox>
-            ),
-          },
-        ]}
+              <FrilansOppdragForFamiliePanel readOnly={readOnly} />
+            </VStack>
+          </ArrowBox>
+        }
       />
     </VStack>
   </BorderBox>

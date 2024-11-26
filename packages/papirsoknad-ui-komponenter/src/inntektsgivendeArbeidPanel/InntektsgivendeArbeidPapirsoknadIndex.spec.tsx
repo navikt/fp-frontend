@@ -19,6 +19,8 @@ describe('<InntektsgivendeArbeidPapirsoknadIndex>', () => {
     expect(await screen.findByText('Inntektsgivende arbeid i utlandet')).toBeInTheDocument();
     expect(screen.getByText(/Vedtaksløsningen foretar oppslag av norske arbeidsforhold /)).toBeInTheDocument();
 
+    await userEvent.click(screen.getByLabelText('Legg til utenlandsk arbeidsforhold'));
+
     const arbeidsgiverInput = screen.getByLabelText('Arbeidsgiver');
     await userEvent.type(arbeidsgiverInput, 'test-arbeidsgiver');
 
@@ -44,6 +46,31 @@ describe('<InntektsgivendeArbeidPapirsoknadIndex>', () => {
           land: 'AND',
         },
       ],
+    });
+  });
+
+  it('skal håndtere tomt felt i inntektsgivende arbeid i utland', async () => {
+    const lagre = vi.fn();
+
+    await Default.run({
+      parameters: {
+        submitCallback: lagre,
+      },
+    });
+
+    expect(await screen.findByText('Inntektsgivende arbeid i utlandet')).toBeInTheDocument();
+    expect(screen.getByText(/Vedtaksløsningen foretar oppslag av norske arbeidsforhold /)).toBeInTheDocument();
+
+    await userEvent.click(screen.getByLabelText('Legg til utenlandsk arbeidsforhold'));
+
+    const arbeidsgiverInput = screen.getByLabelText('Arbeidsgiver');
+    await userEvent.clear(arbeidsgiverInput);
+
+    await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
+
+    expect(lagre).toHaveBeenCalledOnce();
+    expect(lagre).toHaveBeenCalledWith({
+      arbeidsforhold: [],
     });
   });
 });
