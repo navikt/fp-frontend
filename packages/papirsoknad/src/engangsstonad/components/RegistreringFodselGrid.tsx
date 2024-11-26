@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 
 import { AlleKodeverk } from '@navikt/fp-types';
 import { FamilieHendelseType, ForeldreType } from '@navikt/fp-kodeverk';
@@ -6,37 +6,12 @@ import {
   SprakPapirsoknadIndex,
   RettigheterPapirsoknadIndex,
   OppholdINorgePapirsoknadIndex,
-  OppholdINorgeFormValues,
-  FodselPapirsoknadIndex,
-  FodselFormValues,
+  TerminOgFodselPanel,
   OmsorgOgAdopsjonPapirsoknadIndex,
-  OmsorgOgAdopsjonFormValues,
   SoknadData,
-  OmsorgOgAdopsjonTransformedFormValues,
 } from '@navikt/fp-papirsoknad-ui-komponenter';
-import { HStack } from '@navikt/ds-react';
 
-import styles from './registreringFodselGrid.module.css';
-
-const OMSORG_FORM_NAME_PREFIX = 'omsorg';
-
-export type FormValues = {
-  rettigheter?: string;
-  foedselsData?: string;
-  [OMSORG_FORM_NAME_PREFIX]?: OmsorgOgAdopsjonFormValues;
-} & OppholdINorgeFormValues &
-  FodselFormValues;
-
-export type TransformedFormValues = Omit<FormValues, 'omsorg'> & {
-  [OMSORG_FORM_NAME_PREFIX]?: OmsorgOgAdopsjonTransformedFormValues;
-};
-
-interface StaticFunctions {
-  buildInitialValues: () => FormValues;
-  transformValues: (values: FormValues) => TransformedFormValues;
-}
-
-interface OwnProps {
+interface Props {
   readOnly: boolean;
   soknadData: SoknadData;
   alleKodeverk: AlleKodeverk;
@@ -44,48 +19,42 @@ interface OwnProps {
   mottattDato?: string;
 }
 
-const RegistreringFodselGrid: FunctionComponent<OwnProps> & StaticFunctions = ({
-  readOnly,
-  soknadData,
-  alleKodeverk,
-  fodselsdato,
-  mottattDato,
-}) => (
-  <HStack justify="space-between">
-    <div className={styles.col}>
-      {soknadData.getForeldreType() !== ForeldreType.MOR && (
-        <RettigheterPapirsoknadIndex readOnly={readOnly} soknadData={soknadData} />
-      )}
-      <OppholdINorgePapirsoknadIndex
+const RegistreringFodselGrid = ({ readOnly, soknadData, alleKodeverk, fodselsdato, mottattDato }: Props) => (
+  <>
+    {soknadData.getForeldreType() !== ForeldreType.MOR && (
+      <RettigheterPapirsoknadIndex readOnly={readOnly} soknadData={soknadData} />
+    )}
+    {soknadData.getForeldreType() !== ForeldreType.MOR && (
+      <OmsorgOgAdopsjonPapirsoknadIndex
         readOnly={readOnly}
-        erAdopsjon={soknadData.getFamilieHendelseType() !== FamilieHendelseType.ADOPSJON}
-        alleKodeverk={alleKodeverk}
-        mottattDato={mottattDato}
+        familieHendelseType={soknadData.getFamilieHendelseType()}
+        fodselsdato={fodselsdato}
       />
-      <SprakPapirsoknadIndex readOnly={readOnly} />
-    </div>
-    <div className={styles.col}>
-      {soknadData.getForeldreType() !== ForeldreType.MOR && (
-        <OmsorgOgAdopsjonPapirsoknadIndex
-          readOnly={readOnly}
-          familieHendelseType={soknadData.getFamilieHendelseType()}
-          isForeldrepengerFagsak={false}
-          fodselsdato={fodselsdato}
-        />
-      )}
-      <FodselPapirsoknadIndex readOnly={readOnly} erForeldrepenger={false} />
-    </div>
-  </HStack>
+    )}
+    <OppholdINorgePapirsoknadIndex
+      readOnly={readOnly}
+      erAdopsjon={soknadData.getFamilieHendelseType() === FamilieHendelseType.ADOPSJON}
+      alleKodeverk={alleKodeverk}
+      mottattDato={mottattDato}
+    />
+    <TerminOgFodselPanel readOnly={readOnly} erForeldrepenger={false} />
+    <SprakPapirsoknadIndex readOnly={readOnly} />
+  </>
 );
 
-RegistreringFodselGrid.transformValues = values => ({
+RegistreringFodselGrid.initialValues = () => ({
+  ...RettigheterPapirsoknadIndex.initialValues(),
+  ...OppholdINorgePapirsoknadIndex.initialValues(),
+  ...OmsorgOgAdopsjonPapirsoknadIndex.initialValues(),
+  ...TerminOgFodselPanel.initialValues(),
+  ...SprakPapirsoknadIndex.initialValues(),
+});
+
+RegistreringFodselGrid.transformValues = (values: ReturnType<typeof RegistreringFodselGrid.initialValues>) => ({
+  ...RettigheterPapirsoknadIndex.transformValues(values),
   ...OppholdINorgePapirsoknadIndex.transformValues(values),
-  [OMSORG_FORM_NAME_PREFIX]: OmsorgOgAdopsjonPapirsoknadIndex.transformValues(values[OMSORG_FORM_NAME_PREFIX]!),
+  ...OmsorgOgAdopsjonPapirsoknadIndex.transformValues(values),
+  ...TerminOgFodselPanel.transformValues(values),
+  ...SprakPapirsoknadIndex.transformValues(values),
 });
-
-RegistreringFodselGrid.buildInitialValues = () => ({
-  ...OppholdINorgePapirsoknadIndex.buildInitialValues(),
-  [OMSORG_FORM_NAME_PREFIX]: {},
-});
-
 export default RegistreringFodselGrid;

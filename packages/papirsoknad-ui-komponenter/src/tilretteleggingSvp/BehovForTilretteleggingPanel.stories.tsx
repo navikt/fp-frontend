@@ -8,7 +8,7 @@ import { Form } from '@navikt/ft-form-hooks';
 import { BehovForTilretteleggingPanel } from './BehovForTilretteleggingPanel';
 
 const meta = {
-  title: 'papirsoknad/ui-komponenter/tilrettelegging-svp',
+  title: 'ui-komponenter/tilrettelegging-svp',
   component: BehovForTilretteleggingPanel,
   parameters: {
     submitCallback: action('onSubmit'),
@@ -16,11 +16,16 @@ const meta = {
   args: {
     readOnly: false,
   },
-  render: function Render(args, { parameters: { submitCallback } }) {
-    const formMethods = useForm();
+  render: (args, { parameters: { submitCallback } }) => {
+    const formMethods = useForm({
+      defaultValues: BehovForTilretteleggingPanel.initialValues(),
+    });
 
     return (
-      <Form formMethods={formMethods} onSubmit={submitCallback}>
+      <Form
+        formMethods={formMethods}
+        onSubmit={val => submitCallback(BehovForTilretteleggingPanel.transformValues(val))}
+      >
         <VStack gap="10">
           <BehovForTilretteleggingPanel {...args} />
           <Button size="small" variant="primary">

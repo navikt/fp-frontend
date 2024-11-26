@@ -11,14 +11,14 @@ const intl = createIntl(messages);
 interface Props {
   readOnly: boolean;
   familieHendelseType: string;
-  isForeldrepengerFagsak: boolean;
+  isForeldrepengerFagsak?: boolean;
   fodselsdato?: string | string[];
 }
 
-const OmsorgOgAdopsjonPapirsoknadIndex = ({
+export const OmsorgOgAdopsjonPapirsoknadIndex = ({
   readOnly,
   familieHendelseType,
-  isForeldrepengerFagsak,
+  isForeldrepengerFagsak = false,
   fodselsdato,
 }: Props) => (
   <RawIntlProvider value={intl}>
@@ -31,6 +31,5 @@ const OmsorgOgAdopsjonPapirsoknadIndex = ({
   </RawIntlProvider>
 );
 
+OmsorgOgAdopsjonPapirsoknadIndex.initialValues = OmsorgOgAdopsjonPanel.initialValues;
 OmsorgOgAdopsjonPapirsoknadIndex.transformValues = OmsorgOgAdopsjonPanel.transformValues;
-
-export default OmsorgOgAdopsjonPapirsoknadIndex;

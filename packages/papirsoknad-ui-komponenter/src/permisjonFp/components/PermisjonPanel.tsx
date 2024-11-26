@@ -1,52 +1,29 @@
 import React, { useEffect } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { UseFormGetValues, useFormContext } from 'react-hook-form';
-import { Label, Heading, ErrorMessage } from '@navikt/ds-react';
-import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { CheckboxField } from '@navikt/ft-form-hooks';
+import { useFormContext, UseFormGetValues } from 'react-hook-form';
+import { ErrorMessage, Heading, VStack } from '@navikt/ds-react';
+import { BorderBox } from '@navikt/ft-ui-komponenter';
 
 import { AlleKodeverk } from '@navikt/fp-types';
-import { ForeldreType } from '@navikt/fp-kodeverk';
 
-import { PermisjonUtsettelsePanel, FormValues as FormValuesUtsettelse } from './PermisjonUtsettelsePanel';
-import { PermisjonGraderingPanel, FormValues as FormValuesGradering } from './PermisjonGraderingPanel';
-import { GRADERING_PERIODE_FIELD_ARRAY_NAME } from './RenderGraderingPeriodeFieldArray';
+import { PermisjonFulltUttak } from './fulltUttak/PermisjonFulltUttak';
+import { PermisjonUtsettelsePanel } from './utsettelse/PermisjonUtsettelsePanel';
+import { PermisjonGraderingPanel } from './gradering/PermisjonGraderingPanel';
+import { PermisjonOverforingAvKvoterPanel } from './overforeKvote/PermisjonOverforingAvKvoterPanel';
+import { RenderPermisjonPeriodeFieldArray } from './fulltUttak/RenderPermisjonPeriodeFieldArray';
+import { PermisjonOppholdPanel } from './opphold/PermisjonOppholdPanel';
+
 import {
-  PermisjonOverforingAvKvoterPanel,
-  FormValues as FormValuesOverforing,
-} from './PermisjonOverforingAvKvoterPanel';
-import {
-  RenderPermisjonPeriodeFieldArray,
+  GRADERING_PERIODE_FIELD_ARRAY_NAME,
+  OPPHOLD_PERIODE_FIELD_ARRAY_NAME,
+  OVERFORING_PERIODE_FIELD_ARRAY_NAME,
   PERMISJON_PERIODE_FIELD_ARRAY_NAME,
-  FormValues as FormValuesPermisjon,
-} from './RenderPermisjonPeriodeFieldArray';
-import { PermisjonOppholdPanel, FormValues as FormValuesOpphold } from './PermisjonOppholdPanel';
-import { UTSETTELSE_PERIODE_FIELD_ARRAY_NAME } from './RenderUtsettelsePeriodeFieldArray';
-import { OVERFORING_PERIODE_FIELD_ARRAY_NAME } from './RenderOverforingAvKvoterFieldArray';
-import { OPPHOLD_PERIODE_FIELD_ARRAY_NAME } from './RenderOppholdPeriodeFieldArray';
+  TIDSROM_PERMISJON_FORM_NAME_PREFIX,
+  UTSETTELSE_PERIODE_FIELD_ARRAY_NAME,
+} from '../constants';
+import { PermisjonFormValues } from '../types';
 
-import styles from './permisjonPanel.module.css';
-
-export const TIDSROM_PERMISJON_FORM_NAME_PREFIX = 'tidsromPermisjon';
-
-type VirtuellFeilType = {
-  notRegisteredInput?: string;
-};
-
-type TidsromPermisjon = {
-  fulltUttak: boolean;
-  [PERMISJON_PERIODE_FIELD_ARRAY_NAME]?: FormValuesPermisjon[];
-} & FormValuesUtsettelse &
-  FormValuesOpphold &
-  FormValuesOverforing &
-  FormValuesGradering &
-  VirtuellFeilType;
-
-export type FormValues = {
-  [TIDSROM_PERMISJON_FORM_NAME_PREFIX]?: TidsromPermisjon;
-};
-
-const getIsRequired = (getValues: UseFormGetValues<FormValues>) => {
+const getIsRequired = (getValues: UseFormGetValues<PermisjonFormValues>) => {
   const fulltUttak = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.fulltUttak`) || false;
   const skalGradere = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalGradere`) || false;
   const skalUtsette = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalUtsette`) || false;
@@ -69,8 +46,7 @@ interface Props {
 export const PermisjonPanel = ({ foreldreType, readOnly, alleKodeverk, erEndringssøknad }: Props) => {
   const intl = useIntl();
 
-  const { watch, setError, clearErrors, getValues, formState } = useFormContext<FormValues>();
-  const fulltUttak = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.fulltUttak`) || false;
+  const { setError, clearErrors, getValues, formState } = useFormContext<PermisjonFormValues>();
 
   const isError = getIsRequired(getValues);
   useEffect(() => {
@@ -87,52 +63,31 @@ export const PermisjonPanel = ({ foreldreType, readOnly, alleKodeverk, erEndring
 
   return (
     <BorderBox>
-      <div className={styles.flexContainer}>
+      <VStack gap="4">
         <Heading size="small">
           <FormattedMessage id="Registrering.Permisjon.Title" />
         </Heading>
-        <VerticalSpacer sixteenPx />
-        <VerticalSpacer eightPx />
-        <Label size="small">
-          <FormattedMessage id="Registrering.Permisjon.FulltUttak" />
-        </Label>
-        <VerticalSpacer eightPx />
-        <CheckboxField
-          readOnly={readOnly}
-          name={`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.fulltUttak`}
-          label={<FormattedMessage id="Registrering.Permisjon.FulltUttak" />}
-        />
-        {fulltUttak && (
-          <RenderPermisjonPeriodeFieldArray
-            sokerErMor={foreldreType === ForeldreType.MOR}
-            readOnly={readOnly}
-            alleKodeverk={alleKodeverk}
-          />
-        )}
-        <VerticalSpacer twentyPx />
+        <PermisjonFulltUttak foreldreType={foreldreType} readOnly={readOnly} alleKodeverk={alleKodeverk} />
         <PermisjonOverforingAvKvoterPanel
           readOnly={readOnly}
           foreldreType={foreldreType}
           alleKodeverk={alleKodeverk}
           erEndringssøknad={erEndringssøknad}
         />
-        <VerticalSpacer twentyPx />
         <PermisjonUtsettelsePanel readOnly={readOnly} alleKodeverk={alleKodeverk} />
-        <VerticalSpacer twentyPx />
         <PermisjonGraderingPanel readOnly={readOnly} alleKodeverk={alleKodeverk} />
-        <VerticalSpacer twentyPx />
         <PermisjonOppholdPanel readOnly={readOnly} alleKodeverk={alleKodeverk} />
         {formState.isSubmitted && formState.errors[TIDSROM_PERMISJON_FORM_NAME_PREFIX]?.notRegisteredInput?.message && (
           <ErrorMessage>
             {formState.errors[TIDSROM_PERMISJON_FORM_NAME_PREFIX]?.notRegisteredInput?.message}
           </ErrorMessage>
         )}
-      </div>
+      </VStack>
     </BorderBox>
   );
 };
 
-PermisjonPanel.transformValues = (values: FormValues) => {
+PermisjonPanel.transformValues = (values: PermisjonFormValues) => {
   const permisjonValues = values[TIDSROM_PERMISJON_FORM_NAME_PREFIX]!;
   const newValues = permisjonValues;
   const permisjonsdata = permisjonValues[PERMISJON_PERIODE_FIELD_ARRAY_NAME];
@@ -160,16 +115,15 @@ PermisjonPanel.transformValues = (values: FormValues) => {
     newValues[OPPHOLD_PERIODE_FIELD_ARRAY_NAME] = undefined;
   }
 
-  return newValues;
+  return { [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: newValues };
 };
 
-PermisjonPanel.buildInitialValues = (): any => ({
+PermisjonPanel.initialValues = (): PermisjonFormValues => ({
   [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: {
-    ...PermisjonUtsettelsePanel.buildInitialValues(),
-    ...PermisjonGraderingPanel.buildInitialValues(),
-    ...PermisjonOverforingAvKvoterPanel.buildInitialValues(),
-    ...PermisjonOppholdPanel.buildInitialValues(),
-    [PERMISJON_PERIODE_FIELD_ARRAY_NAME]: [{}],
-    fulltUttak: false,
+    ...PermisjonFulltUttak.initialValues(),
+    ...PermisjonOverforingAvKvoterPanel.initialValues(),
+    ...PermisjonUtsettelsePanel.initialValues(),
+    ...PermisjonGraderingPanel.initialValues(),
+    ...PermisjonOppholdPanel.initialValues(),
   },
 });

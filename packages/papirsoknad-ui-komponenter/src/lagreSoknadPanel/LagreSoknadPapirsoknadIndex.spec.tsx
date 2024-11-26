@@ -3,6 +3,7 @@ import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
 
 import * as stories from './LagreSoknadPapirsoknadIndex.stories';
+import { expect } from 'vitest';
 
 const { Default } = composeStories(stories);
 
@@ -18,7 +19,8 @@ describe('<LagreSoknadPapirsoknadIndex>', () => {
 
     expect(await screen.findByText('Ferdigstill registrering')).toBeInTheDocument();
 
-    const textareaInput = screen.getByLabelText('Ved endring av opplysningene er begrunnelse obligatorisk');
+    const textareaInput = screen.getByLabelText('Begrunnelse');
+    expect(screen.getByText('Ved endring av opplysningene er begrunnelse obligatorisk')).toBeInTheDocument();
     await userEvent.type(textareaInput, 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Verge/fullmektig skal knyttes til saken'));
@@ -51,7 +53,8 @@ describe('<LagreSoknadPapirsoknadIndex>', () => {
 
     expect(await screen.findByText('Ferdigstill registrering')).toBeInTheDocument();
 
-    const textareaInput = screen.getByLabelText('Ved endring av opplysningene er begrunnelse obligatorisk');
+    const textareaInput = screen.getByLabelText('Begrunnelse');
+    expect(screen.getByText('Ved endring av opplysningene er begrunnelse obligatorisk')).toBeInTheDocument();
     await userEvent.type(textareaInput, 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Søkers opplysningsplikt er ikke overholdt'));
@@ -61,7 +64,7 @@ describe('<LagreSoknadPapirsoknadIndex>', () => {
     await userEvent.click(screen.getByText('Bekreft og avslutt behandling'));
 
     expect(await screen.findByText(/Avslutter registrering av søknaden/)).toBeInTheDocument();
-    expect(screen.getByText('Bekreft at søknaden skal avslås')).toBeInTheDocument();
+    expect(screen.getByText(/Bekreft at søknaden skal avslås/)).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('OK'));
 

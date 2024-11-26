@@ -67,23 +67,17 @@ describe('<FrilansPapirsoknadIndex>', () => {
     expect(lagre).toHaveBeenCalledOnce();
     expect(lagre).toHaveBeenCalledWith({
       frilans: {
-        erNyoppstartetFrilanser: false,
-        harHattOppdragForFamilie: false,
-        harInntektFraFosterhjem: true,
         harSokerPeriodeMedFrilans: true,
-        oppdragPerioder: [
-          {
-            fomDato: '',
-            oppdragsgiver: '',
-            tomDato: '',
-          },
-        ],
         perioder: [
           {
             periodeFom: '2022-05-27',
             periodeTom: '2022-06-15',
           },
         ],
+        erNyoppstartetFrilanser: false,
+        harInntektFraFosterhjem: true,
+        harHattOppdragForFamilie: false,
+        oppdragPerioder: undefined,
       },
     });
   });
@@ -141,21 +135,21 @@ describe('<FrilansPapirsoknadIndex>', () => {
     expect(lagre).toHaveBeenCalledOnce();
     expect(lagre).toHaveBeenCalledWith({
       frilans: {
-        erNyoppstartetFrilanser: false,
-        harHattOppdragForFamilie: true,
-        harInntektFraFosterhjem: true,
         harSokerPeriodeMedFrilans: true,
+        perioder: [
+          {
+            periodeFom: '2022-05-27',
+            periodeTom: '2022-06-15',
+          },
+        ],
+        erNyoppstartetFrilanser: false,
+        harInntektFraFosterhjem: true,
+        harHattOppdragForFamilie: true,
         oppdragPerioder: [
           {
             fomDato: '2022-05-28',
             oppdragsgiver: 'test-oppdragsgiver',
             tomDato: '2022-06-15',
-          },
-        ],
-        perioder: [
-          {
-            periodeFom: '2022-05-27',
-            periodeTom: '2022-06-15',
           },
         ],
       },

@@ -18,3 +18,6 @@ export const VirksomhetPapirsoknadIndex = ({ readOnly, alleKodeverk }: Props) =>
     <EgenVirksomhetPanel readOnly={readOnly} alleKodeverk={alleKodeverk} />
   </RawIntlProvider>
 );
+
+VirksomhetPapirsoknadIndex.initialValues = EgenVirksomhetPanel.initialValues;
+VirksomhetPapirsoknadIndex.transformValues = EgenVirksomhetPanel.transformValues;

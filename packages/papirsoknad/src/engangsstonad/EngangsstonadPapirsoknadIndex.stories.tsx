@@ -10,7 +10,6 @@ import { EngangsstonadPapirsoknadIndex } from './EngangsstonadPapirsoknadIndex';
 import messages from '../../i18n/nb_NO.json';
 
 const meta = {
-  title: 'papirsoknad/engangstonad',
   component: EngangsstonadPapirsoknadIndex,
   decorators: [withRouter, getIntlDecorator(messages)],
   args: {
@@ -37,14 +36,19 @@ export const ForMorVedFødsel: Story = {
   },
 };
 
+export const ForFarVedFødsel: Story = {
+  args: {
+    soknadData: new SoknadData(FagsakYtelseType.ENGANGSSTONAD, FamilieHendelseType.FODSEL, ForeldreType.FAR),
+  },
+};
+
 export const ForMorVedAdopsjon: Story = {
   args: {
     soknadData: new SoknadData(FagsakYtelseType.ENGANGSSTONAD, FamilieHendelseType.ADOPSJON, ForeldreType.MOR),
   },
 };
-
-export const ForFarVedFødsel: Story = {
+export const ForFarVedAdopsjon: Story = {
   args: {
-    soknadData: new SoknadData(FagsakYtelseType.ENGANGSSTONAD, FamilieHendelseType.FODSEL, ForeldreType.FAR),
+    soknadData: new SoknadData(FagsakYtelseType.ENGANGSSTONAD, FamilieHendelseType.ADOPSJON, ForeldreType.FAR),
   },
 };

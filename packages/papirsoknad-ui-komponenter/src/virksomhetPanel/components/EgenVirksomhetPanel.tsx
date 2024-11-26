@@ -1,21 +1,16 @@
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Heading } from '@navikt/ds-react';
+import { Heading, VStack } from '@navikt/ds-react';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
-import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { BorderBox } from '@navikt/ft-ui-komponenter';
 import { required } from '@navikt/ft-form-validators';
 import { AlleKodeverk } from '@navikt/fp-types';
 
 import { useFormContext } from 'react-hook-form';
-import {
-  RegistrerVirksomhetPanel,
-  EGEN_VIRKSOMHET_NAME_PREFIX,
-  FormValues as VirksomhetFormValues,
-} from './RegistrerVirksomhetPanel';
-
-export type FormValues = {
-  harArbeidetIEgenVirksomhet: boolean;
-} & VirksomhetFormValues;
+import { RegistrerVirksomhetPanel } from './RegistrerVirksomhetPanel';
+import { VirksomhetFormValues } from '../types';
+import { EGEN_VIRKSOMHET_NAME_PREFIX } from '../constants';
+import { VirksomhetRad } from './VirksomhetRad';
 
 interface Props {
   alleKodeverk: AlleKodeverk;
@@ -31,33 +26,44 @@ interface Props {
 export const EgenVirksomhetPanel = ({ readOnly = true, alleKodeverk }: Props) => {
   const intl = useIntl();
 
-  const { watch } = useFormContext<{ [EGEN_VIRKSOMHET_NAME_PREFIX]: FormValues }>();
+  const { watch } = useFormContext<VirksomhetFormValues>();
   const harArbeidetIEgenVirksomhet = watch(`${EGEN_VIRKSOMHET_NAME_PREFIX}.harArbeidetIEgenVirksomhet`) || null;
 
   return (
     <BorderBox>
-      <Heading size="small">
-        <FormattedMessage id="Registrering.EgenVirksomhet.Title" />
-      </Heading>
-      <VerticalSpacer sixteenPx />
-      <RadioGroupPanel
-        name={`${EGEN_VIRKSOMHET_NAME_PREFIX}.harArbeidetIEgenVirksomhet`}
-        validate={[required]}
-        isReadOnly={readOnly}
-        hideLegend
-        isTrueOrFalseSelection
-        radios={[
-          {
-            label: intl.formatMessage({ id: 'Registrering.EgenVirksomhet.No' }),
-            value: 'false',
-          },
-          {
-            label: intl.formatMessage({ id: 'Registrering.EgenVirksomhet.Yes' }),
-            value: 'true',
-          },
-        ]}
-      />
-      {harArbeidetIEgenVirksomhet && <RegistrerVirksomhetPanel readOnly={readOnly} alleKodeverk={alleKodeverk} />}
+      <VStack gap="4">
+        <Heading size="small">
+          <FormattedMessage id="Registrering.EgenVirksomhet.Title" />
+        </Heading>
+
+        <RadioGroupPanel
+          name={`${EGEN_VIRKSOMHET_NAME_PREFIX}.harArbeidetIEgenVirksomhet`}
+          validate={[required]}
+          isReadOnly={readOnly}
+          hideLegend
+          isTrueOrFalseSelection
+          radios={[
+            {
+              label: intl.formatMessage({ id: 'Registrering.EgenVirksomhet.No' }),
+              value: 'false',
+            },
+            {
+              label: intl.formatMessage({ id: 'Registrering.EgenVirksomhet.Yes' }),
+              value: 'true',
+            },
+          ]}
+        />
+        {harArbeidetIEgenVirksomhet && <RegistrerVirksomhetPanel readOnly={readOnly} alleKodeverk={alleKodeverk} />}
+      </VStack>
     </BorderBox>
   );
 };
+
+EgenVirksomhetPanel.initialValues = (): VirksomhetFormValues => ({
+  [EGEN_VIRKSOMHET_NAME_PREFIX]: {
+    harArbeidetIEgenVirksomhet: undefined,
+    virksomheter: [VirksomhetRad.initialValues()],
+  },
+});
+
+EgenVirksomhetPanel.transformValues = RegistrerVirksomhetPanel.transformValues;

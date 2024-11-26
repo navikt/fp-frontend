@@ -12,7 +12,6 @@ import {
   FormValues as PerioderFormValues,
   ANDRE_YTELSER_PERIODE_SUFFIX,
   ANDRE_YTELSER_NAME_PREFIX,
-  TransformValues,
 } from './RenderAndreYtelserPerioderFieldArray';
 
 const removeArbeidstyper = (
@@ -30,10 +29,17 @@ const removeArbeidstyper = (
   );
 };
 
-export type FormValues = {
+export type AndreYtelserFormValue = {
   [ANDRE_YTELSER_NAME_PREFIX]?: {
     [key: string]: PerioderFormValues[];
   };
+};
+export type TransformValues = {
+  [ANDRE_YTELSER_NAME_PREFIX]: {
+    periodeFom: string;
+    periodeTom: string;
+    ytelseType: string;
+  }[];
 };
 
 interface Props {
@@ -48,7 +54,7 @@ interface Props {
  * Komponenten vises som del av skjermbildet for registrering av papirsøknad dersom søknad gjelder foreldrepenger.
  */
 export const AndreYtelserPanel = ({ readOnly, kunMiliterEllerSiviltjeneste = false, alleKodeverk }: Props) => {
-  const { watch } = useFormContext<{ [ANDRE_YTELSER_NAME_PREFIX]: FormValues }>();
+  const { watch } = useFormContext<AndreYtelserFormValue>();
   const selectedYtelser = watch(ANDRE_YTELSER_NAME_PREFIX);
 
   const andreYtelser = alleKodeverk[KodeverkType.ARBEID_TYPE];
@@ -90,7 +96,7 @@ export const AndreYtelserPanel = ({ readOnly, kunMiliterEllerSiviltjeneste = fal
   );
 };
 
-AndreYtelserPanel.buildInitialValues = (andreYtelser: KodeverkMedNavn[]): FormValues => {
+AndreYtelserPanel.initialValues = (andreYtelser: KodeverkMedNavn[]): AndreYtelserFormValue => {
   const ytelseInitialValues = {} as Record<string, PerioderFormValues[]>;
   removeArbeidstyper(andreYtelser).forEach(ay => {
     const ytelsePeriodeFieldName = `${ay.kode}_${ANDRE_YTELSER_PERIODE_SUFFIX}`;
@@ -99,19 +105,23 @@ AndreYtelserPanel.buildInitialValues = (andreYtelser: KodeverkMedNavn[]): FormVa
   return { [ANDRE_YTELSER_NAME_PREFIX]: ytelseInitialValues };
 };
 
-AndreYtelserPanel.transformValues = (values: FormValues, andreYtelser: KodeverkMedNavn[]): TransformValues[] => {
-  const ytelseValues = values[ANDRE_YTELSER_NAME_PREFIX];
-  const newValues: TransformValues[] = [];
+AndreYtelserPanel.transformValues = (
+  { andreYtelser }: AndreYtelserFormValue,
+  kodeverkAndreYtelser: KodeverkMedNavn[],
+): TransformValues => {
+  const newValues: TransformValues['andreYtelser'] = [];
 
-  andreYtelser
-    .filter(ay => ytelseValues?.[ay.kode])
+  kodeverkAndreYtelser
+    .filter(ay => andreYtelser?.[ay.kode])
     .forEach(ay => {
       const ytelsePerioderFieldName = `${ay.kode}_${ANDRE_YTELSER_PERIODE_SUFFIX}`;
-      const ytelsePerioder = ytelseValues ? ytelseValues[ytelsePerioderFieldName] : undefined;
+      const ytelsePerioder = andreYtelser ? andreYtelser[ytelsePerioderFieldName] : undefined;
       if (ytelsePerioder) {
-        RenderAndreYtelserPerioderFieldArray.transformValues(ytelsePerioder, ay.kode).forEach(tv => newValues.push(tv));
+        ytelsePerioder
+          .map(RenderAndreYtelserPerioderFieldArray.transformValues)
+          .forEach(tv => newValues.push({ ...tv, ytelseType: ay.kode }));
       }
     });
 
-  return newValues;
+  return { [ANDRE_YTELSER_NAME_PREFIX]: newValues };
 };

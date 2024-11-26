@@ -1,15 +1,22 @@
 import React, { useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { RadioGroupPanel } from '@navikt/ft-form-hooks';
-import { ArrowBox, BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { KodeverkType } from '@navikt/fp-kodeverk';
-import { Heading } from '@navikt/ds-react';
-import { required } from '@navikt/ft-form-validators';
-import { AlleKodeverk } from '@navikt/fp-types';
 import { useFormContext } from 'react-hook-form';
+import { ArrowBox, BorderBox } from '@navikt/ft-ui-komponenter';
+import { KodeverkType } from '@navikt/fp-kodeverk';
+import { Heading, VStack } from '@navikt/ds-react';
+import { AlleKodeverk } from '@navikt/fp-types';
 import { UtenlandsOppholdField, FormValues as FormValuesFieldArray } from './UtenlandsOppholdField';
+import { TrueFalseInput } from '../../felles/TrueFalseInput';
 
-export type FormValues = {
+export type OppholdINorgeFormValues = {
+  oppholdINorge?: boolean;
+  oppholdSisteTolvINorge?: boolean;
+  oppholdNesteTolvINorge?: boolean;
+  tidligereOppholdUtenlands?: FormValuesFieldArray[];
+  fremtidigeOppholdUtenlands?: FormValuesFieldArray[];
+};
+
+export type TranformFormValues = {
   oppholdINorge?: boolean;
   harTidligereOppholdUtenlands?: boolean;
   harFremtidigeOppholdUtenlands?: boolean;
@@ -38,108 +45,79 @@ export const OppholdINorgePanel = ({ readOnly = true, alleKodeverk, mottattDato,
     [alleKodeverk],
   );
 
-  const { watch } = useFormContext<any>();
-  const harTidligereOppholdUtenlands = watch('harTidligereOppholdUtenlands') || false;
-  const harFremtidigeOppholdUtenlands = watch('harFremtidigeOppholdUtenlands') || false;
+  const { watch } = useFormContext<OppholdINorgeFormValues>();
+  const skalViseTidligereOppholdInput = !watch('oppholdSisteTolvINorge', true);
+  const skalViseFremtidigeOppholdInput = !watch('oppholdNesteTolvINorge', true);
 
   return (
     <BorderBox>
-      <Heading size="small">
-        <FormattedMessage id="Registrering.Opphold" />
-      </Heading>
-      <VerticalSpacer sixteenPx />
-      <RadioGroupPanel
-        name="oppholdINorge"
-        label={
-          <FormattedMessage id={erAdopsjon ? 'Registrering.OppholdVedAdopsjon' : 'Registrering.OppholdVedFodsel'} />
-        }
-        validate={[required]}
-        isReadOnly={readOnly}
-        isTrueOrFalseSelection
-        isHorizontal
-        radios={[
-          {
-            label: formatMessage({ id: 'Registrering.Opphold.Yes' }),
-            value: 'true',
-          },
-          {
-            label: formatMessage({ id: 'Registrering.Opphold.No' }),
-            value: 'false',
-          },
-        ]}
-      />
-      <VerticalSpacer sixteenPx />
-      <RadioGroupPanel
-        name="harTidligereOppholdUtenlands"
-        label={<FormattedMessage id="Registrering.OppholdSisteTolv" />}
-        validate={[required]}
-        isReadOnly={readOnly}
-        isTrueOrFalseSelection
-        isHorizontal
-        radios={[
-          {
-            label: formatMessage({ id: 'Registrering.Opphold.Yes' }),
-            value: 'false',
-          },
-          {
-            label: formatMessage({ id: 'Registrering.Opphold.No' }),
-            value: 'true',
-          },
-        ]}
-      />
-      {harTidligereOppholdUtenlands ? (
-        <>
-          <VerticalSpacer eightPx />
-          <ArrowBox alignOffset={64}>
-            <UtenlandsOppholdField
-              erTidligereOpphold
-              mottattDato={mottattDato}
-              countryCodes={sortedCountriesByName}
-              readOnly={readOnly}
-            />
-          </ArrowBox>
-        </>
-      ) : null}
-      <VerticalSpacer sixteenPx />
-      <RadioGroupPanel
-        name="harFremtidigeOppholdUtenlands"
-        label={<FormattedMessage id="Registrering.OppholdNesteTolv" />}
-        validate={[required]}
-        isReadOnly={readOnly}
-        isTrueOrFalseSelection
-        isHorizontal
-        radios={[
-          {
-            label: formatMessage({ id: 'Registrering.Opphold.Yes' }),
-            value: 'false',
-          },
-          {
-            label: formatMessage({ id: 'Registrering.Opphold.No' }),
-            value: 'true',
-          },
-        ]}
-      />
-      {harFremtidigeOppholdUtenlands ? (
-        <>
-          <VerticalSpacer eightPx />
-          <ArrowBox alignOffset={64}>
-            <UtenlandsOppholdField mottattDato={mottattDato} countryCodes={sortedCountriesByName} readOnly={readOnly} />
-          </ArrowBox>
-        </>
-      ) : null}
+      <VStack gap="4">
+        <Heading size="small">
+          <FormattedMessage id="Registrering.Opphold" />
+        </Heading>
+
+        <TrueFalseInput
+          name="oppholdINorge"
+          label={formatMessage({
+            id: erAdopsjon ? 'Registrering.OppholdVedAdopsjon' : 'Registrering.OppholdVedFodsel',
+          })}
+          readOnly={readOnly}
+        />
+
+        <VStack gap="2">
+          <TrueFalseInput
+            name="oppholdSisteTolvINorge"
+            label={<FormattedMessage id="Registrering.OppholdSisteTolv" />}
+            readOnly={readOnly}
+          />
+          {skalViseTidligereOppholdInput && (
+            <ArrowBox alignOffset={58}>
+              <UtenlandsOppholdField
+                erTidligereOpphold
+                mottattDato={mottattDato}
+                countryCodes={sortedCountriesByName}
+                readOnly={readOnly}
+              />
+            </ArrowBox>
+          )}
+        </VStack>
+
+        <VStack gap="2">
+          <TrueFalseInput
+            name="oppholdNesteTolvINorge"
+            label={<FormattedMessage id="Registrering.OppholdNesteTolv" />}
+            readOnly={readOnly}
+          />
+          {skalViseFremtidigeOppholdInput && (
+            <ArrowBox alignOffset={58}>
+              <UtenlandsOppholdField
+                mottattDato={mottattDato}
+                countryCodes={sortedCountriesByName}
+                readOnly={readOnly}
+              />
+            </ArrowBox>
+          )}
+        </VStack>
+      </VStack>
     </BorderBox>
   );
 };
 
-OppholdINorgePanel.buildInitialValues = (): FormValues => ({
+OppholdINorgePanel.initialValues = (): OppholdINorgeFormValues => ({
   tidligereOppholdUtenlands: [{ periodeFom: undefined, periodeTom: undefined }],
   fremtidigeOppholdUtenlands: [{ periodeFom: undefined, periodeTom: undefined }],
 });
 
-OppholdINorgePanel.transformValues = (formValues: FormValues): FormValues => ({
-  ...formValues,
-  fremtidigeOppholdUtenlands: formValues.harFremtidigeOppholdUtenlands
-    ? formValues.fremtidigeOppholdUtenlands
-    : undefined,
-  tidligereOppholdUtenlands: formValues.harTidligereOppholdUtenlands ? formValues.tidligereOppholdUtenlands : undefined,
+OppholdINorgePanel.transformValues = ({
+  oppholdINorge,
+  oppholdSisteTolvINorge,
+  oppholdNesteTolvINorge,
+  tidligereOppholdUtenlands,
+  fremtidigeOppholdUtenlands,
+}: OppholdINorgeFormValues): TranformFormValues => ({
+  oppholdINorge,
+  harTidligereOppholdUtenlands: !oppholdSisteTolvINorge,
+  harFremtidigeOppholdUtenlands: !oppholdNesteTolvINorge,
+  tidligereOppholdUtenlands: oppholdSisteTolvINorge ? undefined : tidligereOppholdUtenlands,
+  fremtidigeOppholdUtenlands: oppholdNesteTolvINorge ? undefined : fremtidigeOppholdUtenlands,
 });

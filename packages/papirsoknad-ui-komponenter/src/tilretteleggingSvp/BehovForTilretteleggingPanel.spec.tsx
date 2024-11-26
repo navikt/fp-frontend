@@ -73,19 +73,19 @@ describe('<BehovForTilretteleggingPanel>', () => {
 
     expect(lagre).toHaveBeenCalledOnce();
     expect(lagre).toHaveBeenCalledWith({
-      tilretteleggingArbeidsforhold: {
-        behovsdatoSN: '2022-05-01',
-        sokForArbeidsgiver: false,
-        sokForFrilans: false,
-        sokForSelvstendigNaringsdrivende: true,
-        tilretteleggingSelvstendigNaringsdrivende: [
-          {
-            dato: '2022-05-30',
-            stillingsprosent: '100',
-            tilretteleggingType: 'HEL_TILRETTELEGGING',
-          },
-        ],
-      },
+      tilretteleggingArbeidsforhold: [
+        {
+          '@type': 'SN',
+          behovsdato: '2022-05-01',
+          tilrettelegginger: [
+            {
+              dato: '2022-05-30',
+              stillingsprosent: '100',
+              tilretteleggingType: 'HEL_TILRETTELEGGING',
+            },
+          ],
+        },
+      ],
     });
   });
 });

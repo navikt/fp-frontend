@@ -1,101 +1,50 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
+import { HGrid } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
+import { FamilieHendelseType, KodeverkType } from '@navikt/fp-kodeverk';
 
 import {
   SoknadData,
   MottattDatoPapirsoknadIndex,
   FrilansPapirsoknadIndex,
-  FrilansFormValues,
   OppholdINorgePapirsoknadIndex,
-  OppholdINorgeFormValues,
   SprakPapirsoknadIndex,
   LagreSoknadPapirsoknadIndex,
   VirksomhetPapirsoknadIndex,
   InntektsgivendeArbeidPapirsoknadIndex,
-  IArbeidFormValues,
   AndreYtelserPapirsoknadIndex,
-  AndreYtelserFormValue,
   BehovForTilretteleggingPanel,
-  BehovForTilretteleggingFormValues,
-  TerminFodselSvpPanel,
-  TerminFodselSvpFormValues,
-  Tilrettelegging,
-  MottattDatoFormValues,
-  ANDRE_YTELSER_FORM_NAME_PREFIX,
+  TerminOgFodselPanelSvp,
 } from '@navikt/fp-papirsoknad-ui-komponenter';
-import { FamilieHendelseType, KodeverkType } from '@navikt/fp-kodeverk';
 
-const FRILANS_NAME_PREFIX = 'frilans';
-
-type FormValues = {
-  rettigheter?: string;
-  [FRILANS_NAME_PREFIX]: FrilansFormValues;
-} & AndreYtelserFormValue &
-  IArbeidFormValues &
-  OppholdINorgeFormValues &
-  BehovForTilretteleggingFormValues &
-  TerminFodselSvpFormValues &
-  MottattDatoFormValues;
-
-const buildInitialValues = (andreYtelser: KodeverkMedNavn[]): FormValues => ({
-  ...AndreYtelserPapirsoknadIndex.buildInitialValues(andreYtelser),
-  ...InntektsgivendeArbeidPapirsoknadIndex.buildInitialValues(),
-  ...OppholdINorgePapirsoknadIndex.buildInitialValues(),
-  ...BehovForTilretteleggingPanel.buildInitialValues(),
-  [FRILANS_NAME_PREFIX]: FrilansPapirsoknadIndex.buildInitialValues(),
+const buildInitialValues = (andreYtelser: KodeverkMedNavn[]) => ({
+  ...MottattDatoPapirsoknadIndex.initialValues(),
+  ...OppholdINorgePapirsoknadIndex.initialValues(),
+  ...InntektsgivendeArbeidPapirsoknadIndex.initialValues(),
+  ...VirksomhetPapirsoknadIndex.initialValues(),
+  ...FrilansPapirsoknadIndex.initialValues(),
+  ...AndreYtelserPapirsoknadIndex.initialValues(andreYtelser),
+  ...TerminOgFodselPanelSvp.initialValues(),
+  ...BehovForTilretteleggingPanel.initialValues(),
+  ...SprakPapirsoknadIndex.initialValues(),
+  ...LagreSoknadPapirsoknadIndex.initialValues(),
 });
 
-type TilretteleggingArbeidsforhold = {
-  '@type': string;
-  behovsdato?: string;
-  organisasjonsnummer?: string;
-  tilrettelegginger?: Tilrettelegging[];
-};
+type FormValues = ReturnType<typeof buildInitialValues>;
 
-const transformTilretteleggingsArbeidsforhold = (formValues: FormValues): TilretteleggingArbeidsforhold[] => {
-  let transformerteVerdier = [] as TilretteleggingArbeidsforhold[];
-
-  const { tilretteleggingArbeidsforhold } = formValues;
-
-  if (
-    tilretteleggingArbeidsforhold?.sokForArbeidsgiver &&
-    tilretteleggingArbeidsforhold?.tilretteleggingForArbeidsgiver
-  ) {
-    transformerteVerdier = transformerteVerdier.concat(
-      tilretteleggingArbeidsforhold.tilretteleggingForArbeidsgiver.map(ta => ({
-        '@type': 'VI',
-        behovsdato: ta.behovsdato,
-        organisasjonsnummer: ta.organisasjonsnummer,
-        tilrettelegginger: ta.tilretteleggingArbeidsgiver,
-      })),
-    );
-  }
-  if (tilretteleggingArbeidsforhold?.sokForFrilans) {
-    transformerteVerdier.push({
-      '@type': 'FR',
-      behovsdato: tilretteleggingArbeidsforhold.behovsdatoFrilans,
-      tilrettelegginger: tilretteleggingArbeidsforhold.tilretteleggingFrilans,
-    });
-  }
-  if (tilretteleggingArbeidsforhold?.sokForSelvstendigNaringsdrivende) {
-    transformerteVerdier.push({
-      '@type': 'SN',
-      behovsdato: tilretteleggingArbeidsforhold.behovsdatoSN,
-      tilrettelegginger: tilretteleggingArbeidsforhold.tilretteleggingSelvstendigNaringsdrivende,
-    });
-  }
-
-  return transformerteVerdier;
-};
-
-const transformValues = (formValues: FormValues, andreYtelserKodeverk: KodeverkMedNavn[]): any => ({
+const transformValues = (formValues: FormValues, andreYtelserKodeverk: KodeverkMedNavn[]) => ({
+  ...MottattDatoPapirsoknadIndex.transformValues(formValues),
   ...OppholdINorgePapirsoknadIndex.transformValues(formValues),
-  foedselsDato: formValues.foedselsDato,
-  tilretteleggingArbeidsforhold: transformTilretteleggingsArbeidsforhold(formValues),
-  [FRILANS_NAME_PREFIX]: FrilansPapirsoknadIndex.transformValues(formValues[FRILANS_NAME_PREFIX]),
-  [ANDRE_YTELSER_FORM_NAME_PREFIX]: AndreYtelserPapirsoknadIndex.transformValues(formValues, andreYtelserKodeverk),
+  ...InntektsgivendeArbeidPapirsoknadIndex.transformValues(formValues),
+  ...VirksomhetPapirsoknadIndex.transformValues(formValues),
+  ...FrilansPapirsoknadIndex.transformValues(formValues),
+  ...AndreYtelserPapirsoknadIndex.transformValues(formValues, andreYtelserKodeverk),
+  ...TerminOgFodselPanelSvp.transformValues(formValues),
+  ...BehovForTilretteleggingPanel.transformValues(formValues),
+  ...SprakPapirsoknadIndex.transformValues(formValues),
+  ...LagreSoknadPapirsoknadIndex.transformValues(formValues),
 });
 
 interface Props {
@@ -119,32 +68,32 @@ export const SvangerskapspengerForm = ({
   onSubmitUfullstendigsoknad,
 }: Props) => {
   const formMethods = useForm<FormValues>({
-    defaultValues: useMemo(() => buildInitialValues(alleKodeverk[KodeverkType.ARBEID_TYPE]), []),
+    defaultValues: buildInitialValues(alleKodeverk[KodeverkType.ARBEID_TYPE]),
   });
-
-  const andreYtelserKodeverk = alleKodeverk[KodeverkType.ARBEID_TYPE];
 
   const mottattDato = formMethods.watch('mottattDato');
 
   return (
     <Form
       formMethods={formMethods}
-      onSubmit={(values: FormValues) => onSubmit(transformValues(values, andreYtelserKodeverk))}
+      onSubmit={(values: FormValues) => onSubmit(transformValues(values, alleKodeverk[KodeverkType.ARBEID_TYPE]))}
     >
-      <MottattDatoPapirsoknadIndex readOnly={readOnly} />
-      <OppholdINorgePapirsoknadIndex
-        readOnly={readOnly}
-        alleKodeverk={alleKodeverk}
-        erAdopsjon={soknadData.getFamilieHendelseType() !== FamilieHendelseType.ADOPSJON}
-        mottattDato={mottattDato}
-      />
-      <InntektsgivendeArbeidPapirsoknadIndex readOnly={readOnly} alleKodeverk={alleKodeverk} />
-      <VirksomhetPapirsoknadIndex readOnly={readOnly} alleKodeverk={alleKodeverk} />
-      <FrilansPapirsoknadIndex readOnly={readOnly} />
-      <AndreYtelserPapirsoknadIndex readOnly={readOnly} kunMiliterEllerSiviltjeneste alleKodeverk={alleKodeverk} />
-      <TerminFodselSvpPanel readOnly={readOnly} />
-      <BehovForTilretteleggingPanel readOnly={readOnly} />
-      <SprakPapirsoknadIndex readOnly={readOnly} />
+      <HGrid columns={{ sm: 1, md: 2 }} gap="4">
+        <MottattDatoPapirsoknadIndex readOnly={readOnly} />
+        <OppholdINorgePapirsoknadIndex
+          readOnly={readOnly}
+          alleKodeverk={alleKodeverk}
+          erAdopsjon={soknadData.getFamilieHendelseType() !== FamilieHendelseType.ADOPSJON}
+          mottattDato={mottattDato}
+        />
+        <InntektsgivendeArbeidPapirsoknadIndex readOnly={readOnly} alleKodeverk={alleKodeverk} />
+        <VirksomhetPapirsoknadIndex readOnly={readOnly} alleKodeverk={alleKodeverk} />
+        <FrilansPapirsoknadIndex readOnly={readOnly} />
+        <AndreYtelserPapirsoknadIndex readOnly={readOnly} kunMiliterEllerSiviltjeneste alleKodeverk={alleKodeverk} />
+        <TerminOgFodselPanelSvp readOnly={readOnly} />
+        <BehovForTilretteleggingPanel readOnly={readOnly} />
+        <SprakPapirsoknadIndex readOnly={readOnly} />
+      </HGrid>
       <LagreSoknadPapirsoknadIndex
         readOnly={readOnly}
         onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}

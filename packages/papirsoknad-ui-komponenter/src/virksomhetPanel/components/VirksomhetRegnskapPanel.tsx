@@ -1,20 +1,17 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { InputField, RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { VStack } from '@navikt/ds-react';
+import { ArrowBox } from '@navikt/ft-ui-komponenter';
+import { InputField } from '@navikt/ft-form-hooks';
 import { required, hasValidInteger, hasValidText } from '@navikt/ft-form-validators';
 
-import { useFormContext } from 'react-hook-form';
-import styles from './virksomhetRegnskapPanel.module.css';
-
-export type FormValues = {
-  harRegnskapsforer?: boolean;
-  navnRegnskapsforer?: string;
-  tlfRegnskapsforer?: string;
-};
+import { VIRKSOMHET_FORM_NAME_PREFIX } from '../constants';
+import { TrueFalseInput } from '../../felles/TrueFalseInput';
+import { RegistrerVirksomhetFormValues } from '../types';
 
 interface Props {
-  readOnly?: boolean;
+  readOnly: boolean;
+  index: number;
 }
 
 /**
@@ -23,52 +20,40 @@ interface Props {
  * Komponenten vises som del av skjermbildet for registrering av papirsøknad dersom
  * søknad gjelder foreldrepenger og saksbehandler skal legge til ny virksomhet for søker.
  */
-export const VirksomhetRegnskapPanel = ({ readOnly = true }: Props) => {
-  const { watch } = useFormContext<FormValues>();
-  const harRegnskapsforer = watch('harRegnskapsforer') || false;
-
+export const VirksomhetRegnskapPanel = ({ index, readOnly }: Props) => {
   return (
-    <>
-      <RadioGroupPanel
-        name="harRegnskapsforer"
-        label={<FormattedMessage id="Registrering.VirksomhetRegnskapPanel.Accountant" />}
-        isReadOnly={readOnly}
-        isTrueOrFalseSelection
-        isHorizontal
-        radios={[
-          {
-            label: <FormattedMessage id="Registrering.VirksomhetRegnskapPanel.Yes" />,
-            value: 'true',
-          },
-          {
-            label: <FormattedMessage id="Registrering.VirksomhetRegnskapPanel.No" />,
-            value: 'false',
-          },
-        ]}
-      />
-      {harRegnskapsforer && (
-        <>
-          <VerticalSpacer eightPx />
-          <ArrowBox>
+    <TrueFalseInput
+      name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.harRegnskapsforer`}
+      label={<FormattedMessage id="Registrering.VirksomhetRegnskapPanel.Accountant" />}
+      readOnly={readOnly}
+      trueContent={
+        <ArrowBox marginTop={8}>
+          <VStack gap="4">
             <InputField
-              name="navnRegnskapsforer"
-              className={styles.navnBredde}
+              name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.navnRegnskapsforer`}
               readOnly={readOnly}
               validate={[required, hasValidText]}
               label={<FormattedMessage id="Registrering.VirksomhetRegnskapPanel.AccountantName" />}
             />
-            <VerticalSpacer sixteenPx />
             <InputField
-              name="tlfRegnskapsforer"
+              name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.tlfRegnskapsforer`}
               readOnly={readOnly}
               validate={[required, hasValidInteger]}
-              className={styles.tlfBredde}
               label={<FormattedMessage id="Registrering.VirksomhetRegnskapPanel.AccountantPhone" />}
             />
-          </ArrowBox>
-          <VerticalSpacer sixteenPx />
-        </>
-      )}
-    </>
+          </VStack>
+        </ArrowBox>
+      }
+    />
   );
 };
+
+VirksomhetRegnskapPanel.transformValues = ({
+  harRegnskapsforer,
+  navnRegnskapsforer,
+  tlfRegnskapsforer,
+}: RegistrerVirksomhetFormValues) => ({
+  harRegnskapsforer,
+  ...(harRegnskapsforer ? { navnRegnskapsforer } : {}),
+  ...(harRegnskapsforer ? { tlfRegnskapsforer } : {}),
+});

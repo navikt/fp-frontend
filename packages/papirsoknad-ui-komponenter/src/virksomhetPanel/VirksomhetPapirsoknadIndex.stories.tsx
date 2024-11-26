@@ -10,7 +10,7 @@ import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { VirksomhetPapirsoknadIndex } from './VirksomhetPapirsoknadIndex';
 
 const meta = {
-  title: 'papirsoknad/ui-komponenter/virksomhet',
+  title: 'ui-komponenter/virksomhet',
   component: VirksomhetPapirsoknadIndex,
   parameters: {
     submitCallback: action('onSubmit'),
@@ -19,11 +19,14 @@ const meta = {
     readOnly: false,
     alleKodeverk: alleKodeverk as any,
   },
-  render: function Render(args, { parameters: { submitCallback } }) {
-    const formMethods = useForm();
+  render: (args, { parameters: { submitCallback } }) => {
+    const formMethods = useForm({ defaultValues: VirksomhetPapirsoknadIndex.initialValues() });
 
     return (
-      <Form formMethods={formMethods} onSubmit={submitCallback}>
+      <Form
+        formMethods={formMethods}
+        onSubmit={values => submitCallback(VirksomhetPapirsoknadIndex.transformValues(values))}
+      >
         <VStack gap="10">
           <VirksomhetPapirsoknadIndex {...args} />
           <Button size="small" variant="primary">

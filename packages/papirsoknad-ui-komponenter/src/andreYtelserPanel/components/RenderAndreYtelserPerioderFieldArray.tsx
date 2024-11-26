@@ -16,14 +16,8 @@ export type FormValues = {
   periodeTom: string;
 };
 
-export type TransformValues = {
-  ytelseType: string;
-  periodeFom: string;
-  periodeTom: string;
-};
-
 const getValue = (
-  getValues: UseFormGetValues<{ [ANDRE_YTELSER_NAME_PREFIX]: FormValues }>,
+  getValues: UseFormGetValues<FormValues>,
   fieldName: string,
   // @ts-ignore
 ): string => getValues(fieldName);
@@ -46,7 +40,7 @@ export const RenderAndreYtelserPerioderFieldArray = ({ readOnly, name }: Props) 
     control,
     trigger,
     formState: { isSubmitted },
-  } = useFormContext<{ [ANDRE_YTELSER_NAME_PREFIX]: FormValues }>();
+  } = useFormContext<FormValues>();
   const { fields, remove, append } = useFieldArray({
     control,
     // @ts-ignore Usikker på korleis ein fiksar denne (Dynamisk name basert på verdiar fra backend)
@@ -112,9 +106,7 @@ export const RenderAndreYtelserPerioderFieldArray = ({ readOnly, name }: Props) 
   );
 };
 
-RenderAndreYtelserPerioderFieldArray.transformValues = (values: FormValues[], ytelseType: string): TransformValues[] =>
-  values.map(ytelsePeriode => ({
-    ytelseType,
-    periodeFom: ytelsePeriode.periodeFom,
-    periodeTom: ytelsePeriode.periodeTom,
-  }));
+RenderAndreYtelserPerioderFieldArray.transformValues = ({ periodeFom, periodeTom }: FormValues): FormValues => ({
+  periodeFom,
+  periodeTom,
+});

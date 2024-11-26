@@ -7,10 +7,10 @@ import { Form } from '@navikt/ft-form-hooks';
 
 import { FamilieHendelseType } from '@navikt/fp-kodeverk';
 
-import OmsorgOgAdopsjonPapirsoknadIndex from './OmsorgOgAdopsjonPapirsoknadIndex';
+import { OmsorgOgAdopsjonPapirsoknadIndex } from './OmsorgOgAdopsjonPapirsoknadIndex';
 
 const meta = {
-  title: 'papirsoknad/ui-komponenter/omsorg-og-adopsjon',
+  title: 'ui-komponenter/omsorg-og-adopsjon',
   component: OmsorgOgAdopsjonPapirsoknadIndex,
   args: {
     isForeldrepengerFagsak: false,
@@ -20,13 +20,13 @@ const meta = {
   parameters: {
     submitCallback: action('onSubmit'),
   },
-  render: function Render(args, { parameters: { submitCallback } }) {
-    const formMethods = useForm();
+  render: (args, { parameters: { submitCallback } }) => {
+    const formMethods = useForm({ defaultValues: OmsorgOgAdopsjonPapirsoknadIndex.initialValues() });
 
     return (
       <Form
         formMethods={formMethods}
-        onSubmit={values => submitCallback(OmsorgOgAdopsjonPapirsoknadIndex.transformValues(values.omsorg))}
+        onSubmit={values => submitCallback(OmsorgOgAdopsjonPapirsoknadIndex.transformValues(values))}
       >
         <VStack gap="10">
           <OmsorgOgAdopsjonPapirsoknadIndex {...args} />

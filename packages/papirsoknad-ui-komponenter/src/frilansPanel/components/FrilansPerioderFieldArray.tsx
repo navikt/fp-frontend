@@ -1,23 +1,16 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 import { UseFormGetValues, useFieldArray, useFormContext } from 'react-hook-form';
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Datepicker, PeriodFieldArray } from '@navikt/ft-form-hooks';
 import { required, hasValidDate, dateBeforeOrEqual, dateAfterOrEqual } from '@navikt/ft-form-validators';
 
-import styles from './frilansPerioderFieldArray.module.css';
+import { FrilansFormValues, FrilansSubFormValues } from '../types';
 
-const FRILANS_NAME_PREFIX = 'frilans';
-
-export type FormValues = {
-  perioder?: {
-    periodeFom: string;
-    periodeTom?: string;
-  }[];
-};
+import { FRILANS_NAME_PREFIX } from '../constants';
+import { HStack } from '@navikt/ds-react';
 
 const getValue = (
-  getValues: UseFormGetValues<{ [FRILANS_NAME_PREFIX]: FormValues }>,
+  getValues: UseFormGetValues<FrilansFormValues>,
   fieldName: string,
   // @ts-ignore
 ): string => getValues(fieldName);
@@ -39,7 +32,7 @@ export const FrilansPerioderFieldArray = ({ readOnly }: Props) => {
     getValues,
     formState: { isSubmitted },
     trigger,
-  } = useFormContext<{ [FRILANS_NAME_PREFIX]: FormValues }>();
+  } = useFormContext<FrilansFormValues>();
   const { fields, remove, append } = useFieldArray({
     control,
     name: `${FRILANS_NAME_PREFIX}.perioder`,
@@ -56,48 +49,43 @@ export const FrilansPerioderFieldArray = ({ readOnly }: Props) => {
       {(field, index, getRemoveButton) => {
         const namePart1 = `${FRILANS_NAME_PREFIX}.perioder.${index}`;
         return (
-          <div key={field.id} className={index !== fields.length - 1 ? styles.notLastRow : ''}>
-            <FlexContainer>
-              <FlexRow>
-                <FlexColumn>
-                  <Datepicker
-                    name={`${namePart1}.periodeFom`}
-                    label={index === 0 ? intl.formatMessage({ id: 'Registrering.Frilans.periodeFom' }) : ''}
-                    validate={[
-                      required,
-                      hasValidDate,
-                      () => {
-                        const fomVerdi = getValue(getValues, `${namePart1}.periodeFom`);
-                        const tomVerdi = getValue(getValues, `${namePart1}.periodeTom`);
-                        return tomVerdi && fomVerdi ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : null;
-                      },
-                    ]}
-                    onChange={() => (isSubmitted ? trigger() : undefined)}
-                  />
-                </FlexColumn>
-                <FlexColumn>
-                  <Datepicker
-                    name={`${namePart1}.periodeTom`}
-                    label={index === 0 ? intl.formatMessage({ id: 'Registrering.Frilans.periodeTom' }) : ''}
-                    validate={[
-                      required,
-                      hasValidDate,
-                      () => {
-                        const fomVerdi = getValue(getValues, `${namePart1}.periodeFom`);
-                        const tomVerdi = getValue(getValues, `${namePart1}.periodeTom`);
-                        return tomVerdi && fomVerdi ? dateAfterOrEqual(fomVerdi)(tomVerdi) : null;
-                      },
-                    ]}
-                    onChange={() => (isSubmitted ? trigger() : undefined)}
-                  />
-                </FlexColumn>
-                {getRemoveButton && <FlexColumn>{getRemoveButton()}</FlexColumn>}
-              </FlexRow>
-            </FlexContainer>
-            <VerticalSpacer sixteenPx />
-          </div>
+          <HStack key={field.id} gap="4" paddingBlock="2">
+            <Datepicker
+              name={`${namePart1}.periodeFom`}
+              label={index === 0 ? intl.formatMessage({ id: 'Registrering.Frilans.periodeFom' }) : ''}
+              validate={[
+                required,
+                hasValidDate,
+                () => {
+                  const fomVerdi = getValue(getValues, `${namePart1}.periodeFom`);
+                  const tomVerdi = getValue(getValues, `${namePart1}.periodeTom`);
+                  return tomVerdi && fomVerdi ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : null;
+                },
+              ]}
+              onChange={() => (isSubmitted ? trigger() : undefined)}
+            />
+            <Datepicker
+              name={`${namePart1}.periodeTom`}
+              label={index === 0 ? intl.formatMessage({ id: 'Registrering.Frilans.periodeTom' }) : ''}
+              validate={[
+                required,
+                hasValidDate,
+                () => {
+                  const fomVerdi = getValue(getValues, `${namePart1}.periodeFom`);
+                  const tomVerdi = getValue(getValues, `${namePart1}.periodeTom`);
+                  return tomVerdi && fomVerdi ? dateAfterOrEqual(fomVerdi)(tomVerdi) : null;
+                },
+              ]}
+              onChange={() => (isSubmitted ? trigger() : undefined)}
+            />
+            {getRemoveButton && <div>{getRemoveButton()}</div>}
+          </HStack>
         );
       }}
     </PeriodFieldArray>
   );
 };
+
+FrilansPerioderFieldArray.initialValues = (): FrilansSubFormValues => ({
+  perioder: [{ periodeFom: '', periodeTom: '' }],
+});

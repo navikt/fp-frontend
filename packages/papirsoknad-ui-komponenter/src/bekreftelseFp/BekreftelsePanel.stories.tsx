@@ -8,7 +8,7 @@ import { Form } from '@navikt/ft-form-hooks';
 import { BekreftelsePanel } from './BekreftelsePanel';
 
 const meta = {
-  title: 'papirsoknad/ui-komponenter/bekreftelse',
+  title: 'ui-komponenter/bekreftelse',
   component: BekreftelsePanel,
   parameters: {
     submitCallback: action('onSubmit'),
@@ -16,11 +16,11 @@ const meta = {
   args: {
     readOnly: false,
   },
-  render: function Render(args, { parameters: { submitCallback } }) {
+  render: (args, { parameters: { submitCallback } }) => {
     const formMethods = useForm();
 
     return (
-      <Form formMethods={formMethods} onSubmit={submitCallback}>
+      <Form formMethods={formMethods} onSubmit={val => submitCallback(BekreftelsePanel.tranformValues(val))}>
         <VStack gap="10">
           <BekreftelsePanel {...args} />
           <Button size="small" variant="primary">

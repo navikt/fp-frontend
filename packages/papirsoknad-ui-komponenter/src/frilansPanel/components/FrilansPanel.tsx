@@ -1,24 +1,14 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Detail, Heading } from '@navikt/ds-react';
-import { ArrowBox, BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { required } from '@navikt/ft-form-validators';
-import { RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { Detail, Heading, VStack } from '@navikt/ds-react';
+import { ArrowBox, BorderBox } from '@navikt/ft-ui-komponenter';
 
-import { FrilansPerioderFieldArray, FormValues as PerioderFormValues } from './FrilansPerioderFieldArray';
-import {
-  FrilansOppdragForFamiliePanel,
-  FormValues as FormValuesOppdragForFamilie,
-} from './FrilansOppdragForFamiliePanel';
+import { FrilansPerioderFieldArray } from './FrilansPerioderFieldArray';
+import { FrilansOppdragForFamiliePanel } from './FrilansOppdragForFamiliePanel';
 
-export const FRILANS_NAME_PREFIX = 'frilans';
-
-export type FormValues = {
-  harSokerPeriodeMedFrilans?: boolean;
-  erNyoppstartetFrilanser?: boolean;
-  harInntektFraFosterhjem?: boolean;
-} & FormValuesOppdragForFamilie &
-  PerioderFormValues;
+import { FrilansFormValues } from '../types';
+import { FRILANS_NAME_PREFIX } from '../constants';
+import { TrueFalseInput } from '../../felles/TrueFalseInput';
 
 interface Props {
   readOnly: boolean;
@@ -26,95 +16,63 @@ interface Props {
 
 export const FrilansPanel = ({ readOnly }: Props) => (
   <BorderBox>
-    <Heading size="small">
-      <FormattedMessage id="Registrering.Frilans.Title" />
-    </Heading>
-    <VerticalSpacer sixteenPx />
-    <RadioGroupPanel
-      name={`${FRILANS_NAME_PREFIX}.harSokerPeriodeMedFrilans`}
-      label={<FormattedMessage id="Registrering.Frilans.HarFrilansvirksomhet" />}
-      validate={[required]}
-      isReadOnly={readOnly}
-      isTrueOrFalseSelection
-      radios={[
-        {
-          label: <FormattedMessage id="Registrering.Frilans.No" />,
-          value: 'false',
-        },
-        {
-          label: <FormattedMessage id="Registrering.Frilans.Yes" />,
-          value: 'true',
-          element: (
-            <>
-              <VerticalSpacer eightPx />
-              <ArrowBox>
-                <Detail>
-                  <FormattedMessage id="Registrering.Frilans.OppgiPeriode" />
-                </Detail>
-                <VerticalSpacer eightPx />
-                <FrilansPerioderFieldArray readOnly={readOnly} />
-                <VerticalSpacer fourPx />
-                <RadioGroupPanel
-                  name={`${FRILANS_NAME_PREFIX}.erNyoppstartetFrilanser`}
-                  label={<FormattedMessage id="Registrering.Frilans.ErNyoppstartedFrilanser" />}
-                  validate={[required]}
-                  isReadOnly={readOnly}
-                  isHorizontal
-                  isTrueOrFalseSelection
-                  radios={[
-                    {
-                      label: <FormattedMessage id="Registrering.Frilans.Yes" />,
-                      value: 'true',
-                    },
-                    {
-                      label: <FormattedMessage id="Registrering.Frilans.No" />,
-                      value: 'false',
-                    },
-                  ]}
-                />
-                <VerticalSpacer sixteenPx />
-                <RadioGroupPanel
-                  name={`${FRILANS_NAME_PREFIX}.harInntektFraFosterhjem`}
-                  label={<FormattedMessage id="Registrering.Frilans.HarInntektFraForsterhjem" />}
-                  validate={[required]}
-                  isReadOnly={readOnly}
-                  isHorizontal
-                  isTrueOrFalseSelection
-                  radios={[
-                    {
-                      label: <FormattedMessage id="Registrering.Frilans.Yes" />,
-                      value: 'true',
-                    },
-                    {
-                      label: <FormattedMessage id="Registrering.Frilans.No" />,
-                      value: 'false',
-                    },
-                  ]}
-                />
-                <VerticalSpacer sixteenPx />
-                <FrilansOppdragForFamiliePanel readOnly={readOnly} />
-              </ArrowBox>
-            </>
-          ),
-        },
-      ]}
-    />
+    <VStack gap="4">
+      <Heading size="small">
+        <FormattedMessage id="Registrering.Frilans.Title" />
+      </Heading>
+
+      <TrueFalseInput
+        name={`${FRILANS_NAME_PREFIX}.harSokerPeriodeMedFrilans`}
+        label={<FormattedMessage id="Registrering.Frilans.HarFrilansvirksomhet" />}
+        readOnly={readOnly}
+        trueContent={
+          <ArrowBox marginTop={8}>
+            <VStack gap="4">
+              <Detail>
+                <FormattedMessage id="Registrering.Frilans.OppgiPeriode" />
+              </Detail>
+
+              <FrilansPerioderFieldArray readOnly={readOnly} />
+
+              <TrueFalseInput
+                name={`${FRILANS_NAME_PREFIX}.erNyoppstartetFrilanser`}
+                label={<FormattedMessage id="Registrering.Frilans.ErNyoppstartedFrilanser" />}
+                readOnly={readOnly}
+              />
+
+              <TrueFalseInput
+                name={`${FRILANS_NAME_PREFIX}.harInntektFraFosterhjem`}
+                label={<FormattedMessage id="Registrering.Frilans.HarInntektFraForsterhjem" />}
+                readOnly={readOnly}
+              />
+
+              <FrilansOppdragForFamiliePanel readOnly={readOnly} />
+            </VStack>
+          </ArrowBox>
+        }
+      />
+    </VStack>
   </BorderBox>
 );
 
-FrilansPanel.buildInitialValues = (): FormValues => ({
-  ...FrilansOppdragForFamiliePanel.buildInitialValues(),
-  perioder: [
-    {
-      periodeFom: '',
-      periodeTom: '',
-    },
-  ],
+FrilansPanel.initialValues = (): FrilansFormValues => ({
+  [FRILANS_NAME_PREFIX]: {
+    ...FrilansPerioderFieldArray.initialValues(),
+    ...FrilansOppdragForFamiliePanel.initialValues(),
+  },
 });
 
-FrilansPanel.transformValues = (formValues: FormValues): FormValues =>
-  formValues.harSokerPeriodeMedFrilans
-    ? formValues
-    : {
-        harSokerPeriodeMedFrilans: formValues.harSokerPeriodeMedFrilans,
-      };
+FrilansPanel.transformValues = ({ frilans }: FrilansFormValues): FrilansFormValues => ({
+  [FRILANS_NAME_PREFIX]:
+    frilans.harSokerPeriodeMedFrilans === false
+      ? {
+          harSokerPeriodeMedFrilans: false,
+        }
+      : {
+          harSokerPeriodeMedFrilans: true,
+          perioder: frilans.perioder,
+          erNyoppstartetFrilanser: frilans.erNyoppstartetFrilanser,
+          harInntektFraFosterhjem: frilans.harInntektFraFosterhjem,
+          ...FrilansOppdragForFamiliePanel.transformValues(frilans),
+        },
+});

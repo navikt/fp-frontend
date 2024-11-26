@@ -7,11 +7,11 @@ import { Form } from '@navikt/ft-form-hooks';
 
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
-import { FormValues } from './components/OppholdINorgePanel';
+import { OppholdINorgeFormValues } from './components/OppholdINorgePanel';
 import { OppholdINorgePapirsoknadIndex } from './OppholdINorgePapirsoknadIndex';
 
 const meta = {
-  title: 'papirsoknad/ui-komponenter/opphold-i-norge',
+  title: 'ui-komponenter/opphold-i-norge',
   component: OppholdINorgePapirsoknadIndex,
   parameters: {
     submitCallback: action('onSubmit'),
@@ -21,15 +21,17 @@ const meta = {
     alleKodeverk: alleKodeverk as any,
     mottattDato: '2022-05-30',
   },
-  render: function Render(args, { parameters: { submitCallback } }) {
+  render: (args, { parameters: { submitCallback } }) => {
     const formMethods = useForm({
-      defaultValues: OppholdINorgePapirsoknadIndex.buildInitialValues(),
+      defaultValues: OppholdINorgePapirsoknadIndex.initialValues(),
     });
 
     return (
       <Form
         formMethods={formMethods}
-        onSubmit={(values: FormValues) => submitCallback(OppholdINorgePapirsoknadIndex.transformValues(values))}
+        onSubmit={(values: OppholdINorgeFormValues) =>
+          submitCallback(OppholdINorgePapirsoknadIndex.transformValues(values))
+        }
       >
         <VStack gap="10">
           <OppholdINorgePapirsoknadIndex {...args} />

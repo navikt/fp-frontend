@@ -8,7 +8,7 @@ import { Form } from '@navikt/ft-form-hooks';
 import { DekningsgradIndex } from './DekningsgradIndex';
 
 const meta = {
-  title: 'papirsoknad/ui-komponenter/dekningsgrad',
+  title: 'ui-komponenter/dekningsgrad',
   component: DekningsgradIndex,
   parameters: {
     submitCallback: action('onSubmit'),
@@ -16,11 +16,13 @@ const meta = {
   args: {
     readOnly: false,
   },
-  render: function Render(args, { parameters: { submitCallback } }) {
-    const formMethods = useForm();
+  render: (args, { parameters: { submitCallback } }) => {
+    const formMethods = useForm({
+      defaultValues: DekningsgradIndex.initialValues(),
+    });
 
     return (
-      <Form formMethods={formMethods} onSubmit={submitCallback}>
+      <Form formMethods={formMethods} onSubmit={val => submitCallback(DekningsgradIndex.transformValues(val))}>
         <VStack gap="10">
           <DekningsgradIndex {...args} />
           <Button size="small" variant="primary">

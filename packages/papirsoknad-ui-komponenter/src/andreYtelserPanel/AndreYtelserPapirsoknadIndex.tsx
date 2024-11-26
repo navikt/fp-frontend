@@ -1,9 +1,9 @@
 import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
-import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
+import { AlleKodeverk } from '@navikt/fp-types';
 
-import { AndreYtelserPanel, FormValues } from './components/AndreYtelserPanel';
+import { AndreYtelserPanel } from './components/AndreYtelserPanel';
 import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
@@ -24,8 +24,6 @@ export const AndreYtelserPapirsoknadIndex = ({ readOnly, alleKodeverk, kunMilite
   </RawIntlProvider>
 );
 
-AndreYtelserPapirsoknadIndex.buildInitialValues = (andreYtelser: KodeverkMedNavn[]) =>
-  AndreYtelserPanel.buildInitialValues(andreYtelser);
+AndreYtelserPapirsoknadIndex.initialValues = AndreYtelserPanel.initialValues;
 
-AndreYtelserPapirsoknadIndex.transformValues = (values: FormValues, andreYtelser: KodeverkMedNavn[]) =>
-  AndreYtelserPanel.transformValues(values, andreYtelser);
+AndreYtelserPapirsoknadIndex.transformValues = AndreYtelserPanel.transformValues;

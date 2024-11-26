@@ -8,16 +8,19 @@ import { useForm } from 'react-hook-form';
 import { Form } from '@navikt/ft-form-hooks';
 
 const meta = {
-  title: 'papirsoknad/ui-komponenter/lagre-soknad',
+  title: 'ui-komponenter/lagre-soknad',
   component: LagreSoknadPapirsoknadIndex,
   decorators: [withRouter],
   parameters: {
     submitCallback: action('onSubmit'),
   },
-  render: function Render(args, { parameters: { submitCallback } }) {
+  render: (args, { parameters: { submitCallback } }) => {
     const formMethods = useForm();
     return (
-      <Form formMethods={formMethods} onSubmit={submitCallback}>
+      <Form
+        formMethods={formMethods}
+        onSubmit={val => submitCallback(LagreSoknadPapirsoknadIndex.transformValues(val))}
+      >
         <LagreSoknadPapirsoknadIndex {...args} />
       </Form>
     );

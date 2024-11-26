@@ -2,7 +2,7 @@ import React from 'react';
 import { AlleKodeverk } from '@navikt/fp-types';
 import { SoknadData } from '@navikt/fp-papirsoknad-ui-komponenter';
 
-import EngangsstonadForm from './components/EngangsstonadForm';
+import { EngangsstonadForm } from './components/EngangsstonadForm';
 
 interface Props {
   onSubmitUfullstendigsoknad: () => Promise<any>;

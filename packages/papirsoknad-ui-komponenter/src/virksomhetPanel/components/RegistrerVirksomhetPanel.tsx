@@ -1,25 +1,14 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { PlusCircleIcon, XMarkIcon } from '@navikt/aksel-icons';
-import { Label, BodyShort, Detail, ErrorMessage, Link } from '@navikt/ds-react';
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { useFieldArray, useFormContext } from 'react-hook-form';
+import { PlusCircleIcon } from '@navikt/aksel-icons';
+import { Button, ErrorMessage, Table } from '@navikt/ds-react';
 import { AlleKodeverk } from '@navikt/fp-types';
 
-import { useFieldArray, useFormContext } from 'react-hook-form';
+import { VirksomhetRad } from './VirksomhetRad';
 
-import { RegistrerVirksomhetModalForm, FormValues as ModalFormValues } from './RegistrerVirksomhetModalForm';
-
-import styles from './registrerVirksomhetPanel.module.css';
-
-export const EGEN_VIRKSOMHET_NAME_PREFIX = 'egenVirksomhet';
-
-type VirtueltValideringsfeilFelt = {
-  notRegisteredInput?: string;
-};
-
-export type FormValues = {
-  virksomheter: ModalFormValues[];
-};
+import { VirksomhetFormValues } from '../types';
+import { EGEN_VIRKSOMHET_NAME_PREFIX } from '../constants';
 
 interface Props {
   readOnly?: boolean;
@@ -35,107 +24,68 @@ interface Props {
  */
 export const RegistrerVirksomhetPanel = ({ readOnly = false, alleKodeverk }: Props) => {
   const intl = useIntl();
-  const [virksomhetIndex, setVirksomhetIndex] = useState<number>();
 
-  const { control, setError, formState, clearErrors } = useFormContext<{
-    [EGEN_VIRKSOMHET_NAME_PREFIX]: FormValues & VirtueltValideringsfeilFelt;
-  }>();
-  const { fields, remove, append, update } = useFieldArray({
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext<VirksomhetFormValues>();
+
+  const { fields, remove, append } = useFieldArray({
     control,
     name: `${EGEN_VIRKSOMHET_NAME_PREFIX}.virksomheter`,
+    rules: {
+      required: intl.formatMessage({ id: 'Registrering.RegistrerVirksomhetPanel.ArrayMinLength' }),
+    },
   });
 
-  const visModal = useCallback(
-    (index?: number): void => {
-      setVirksomhetIndex(index !== undefined ? index : -1);
-    },
-    [setVirksomhetIndex],
-  );
-
-  const lukkModal = useCallback((): void => {
-    setVirksomhetIndex(undefined);
-  }, [setVirksomhetIndex]);
-
-  const leggTilVirksomhet = useCallback(
-    (virksomhet: ModalFormValues) => {
-      const justertVirksomhet = {
-        ...virksomhet,
-        landJobberFra: virksomhet.virksomhetRegistrertINorge ? 'NOR' : virksomhet.landJobberFra,
-        varigEndringGjeldendeFom: virksomhet.nyIArbeidslivetFom || virksomhet.varigEndringGjeldendeFom,
-      };
-
-      if (virksomhetIndex === -1) {
-        append(justertVirksomhet);
-      } else if (virksomhetIndex !== undefined) {
-        update(virksomhetIndex, justertVirksomhet);
-      }
-
-      lukkModal();
-    },
-    [append, update, lukkModal, virksomhetIndex],
-  );
-
-  useEffect(() => {
-    if (fields.length === 0) {
-      setError(`${EGEN_VIRKSOMHET_NAME_PREFIX}.notRegisteredInput`, {
-        type: 'custom',
-        message: intl.formatMessage({ id: 'Registrering.RegistrerVirksomhetPanel.ArrayMinLength' }),
-      });
-    }
-    if (fields.length > 0) {
-      clearErrors(`${EGEN_VIRKSOMHET_NAME_PREFIX}.notRegisteredInput`);
-    }
-  }, [fields.length]);
-
   return (
-    <div className={styles.fieldsList}>
-      {fields.length > 0 && (
-        <React.Fragment key={1}>
-          <Label size="small">
-            <FormattedMessage id="Registrering.RegistrerVirksomhetPanel.Name" />
-          </Label>
-          <hr className={styles.divider} />
+    <>
+      <Table>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell colSpan={3}>
+              <FormattedMessage id="Registrering.RegistrerVirksomhetPanel.Name" />
+            </Table.HeaderCell>
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
           {fields.map((field, index) => (
-            <FlexContainer key={field.id}>
-              <FlexRow>
-                <FlexColumn>
-                  <Link className={styles.customLink} onClick={() => visModal(index)} onKeyDown={() => visModal(index)}>
-                    <BodyShort size="small">{field.navn}</BodyShort>
-                  </Link>
-                </FlexColumn>
-                <FlexColumn>
-                  <XMarkIcon
-                    className={styles.removeButton}
-                    onClick={() => remove(index)}
-                    onKeyDown={() => remove(index)}
-                  />
-                </FlexColumn>
-              </FlexRow>
-              <hr className={styles.divider} />
-              <VerticalSpacer eightPx />
-            </FlexContainer>
+            <VirksomhetRad
+              key={field.id}
+              field={field}
+              index={index}
+              open={index + 1 === fields.length}
+              remove={() => remove(index)}
+              alleKodeverk={alleKodeverk}
+              readOnly={readOnly}
+            />
           ))}
-        </React.Fragment>
+        </Table.Body>
+      </Table>
+
+      {errors[EGEN_VIRKSOMHET_NAME_PREFIX]?.virksomheter?.root?.message && (
+        <ErrorMessage>{errors[EGEN_VIRKSOMHET_NAME_PREFIX]?.virksomheter.root?.message}</ErrorMessage>
       )}
-      <Link onClick={() => visModal()} onKeyDown={e => (e.nativeEvent.code === 'Space' ? visModal() : false)}>
-        <PlusCircleIcon className={styles.addCircleIcon} />
-        <Detail className={styles.imageText}>
+      <div>
+        <Button
+          size="small"
+          variant="tertiary"
+          type="button"
+          onClick={() => append(VirksomhetRad.initialValues())}
+          icon={<PlusCircleIcon aria-hidden />}
+        >
           <FormattedMessage id="Registrering.RegistrerVirksomhetPanel.Add" />
-        </Detail>
-      </Link>
-      {formState.isSubmitted && formState.errors[EGEN_VIRKSOMHET_NAME_PREFIX]?.notRegisteredInput?.message && (
-        <ErrorMessage>{formState.errors[EGEN_VIRKSOMHET_NAME_PREFIX]?.notRegisteredInput?.message}</ErrorMessage>
-      )}
-      {virksomhetIndex !== undefined && (
-        <RegistrerVirksomhetModalForm
-          showModal
-          virksomhet={virksomhetIndex !== -1 && fields.length > virksomhetIndex ? fields[virksomhetIndex] : undefined}
-          onSubmit={leggTilVirksomhet}
-          closeEvent={lukkModal}
-          readOnly={readOnly}
-          alleKodeverk={alleKodeverk}
-        />
-      )}
-    </div>
+        </Button>
+      </div>
+    </>
   );
 };
+
+RegistrerVirksomhetPanel.transformValues = ({
+  egenVirksomhet: { harArbeidetIEgenVirksomhet, virksomheter },
+}: VirksomhetFormValues) => ({
+  egenVirksomhet: {
+    harArbeidetIEgenVirksomhet,
+    virksomheter: harArbeidetIEgenVirksomhet ? virksomheter.map(v => VirksomhetRad.transformValues(v)) : undefined,
+  },
+});

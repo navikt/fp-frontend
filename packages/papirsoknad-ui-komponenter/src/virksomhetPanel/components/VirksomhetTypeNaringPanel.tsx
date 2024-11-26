@@ -1,14 +1,11 @@
-import React, { Fragment, useEffect, useMemo } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Label, ErrorMessage } from '@navikt/ds-react';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { CheckboxField } from '@navikt/ft-form-hooks';
+import { CheckboxPanel } from '@navikt/ft-form-hooks';
 import { AlleKodeverk } from '@navikt/fp-types';
-import { NaringsvirksomhetType, KodeverkType } from '@navikt/fp-kodeverk';
-import { isRequiredMessage } from '@navikt/ft-form-validators';
-import { useFormContext } from 'react-hook-form';
-
-const TYPE_VIRKSOMHET_PREFIX = 'typeVirksomhet';
+import { KodeverkType, NaringsvirksomhetType } from '@navikt/fp-kodeverk';
+import { VIRKSOMHET_FORM_NAME_PREFIX } from '../constants';
+import { RegistrerVirksomhetFormValues } from '../types';
+import { required } from '@navikt/ft-form-validators';
 
 const naringsvirksomhetTypeOrder = {
   [NaringsvirksomhetType.DAGMAMMA]: 1,
@@ -24,17 +21,16 @@ const compare = (arg1: number, arg2: number): number => {
   return arg1 < arg2 ? -1 : 0;
 };
 
-type VirtualErrorField = {
-  notRegisteredInput?: string;
-};
-
-export type FormValues = {
-  [TYPE_VIRKSOMHET_PREFIX]: Record<string, boolean>;
-};
+const naringvirksomhetTyper = (alleKodeverk: AlleKodeverk) =>
+  alleKodeverk[KodeverkType.VIRKSOMHET_TYPE]
+    .filter(t => t.kode !== NaringsvirksomhetType.FRILANSER)
+    .sort((a, b) => compare(naringsvirksomhetTypeOrder[a.kode], naringsvirksomhetTypeOrder[b.kode]))
+    .map(t => ({ value: t.kode, label: t.navn }));
 
 interface Props {
   readOnly: boolean;
   alleKodeverk: AlleKodeverk;
+  index: number;
 }
 
 /**
@@ -43,55 +39,23 @@ interface Props {
  * Presentasjonskomponent. Komponenten vises som del av skjermbildet for registrering av
  * papirsøknad dersom søknad gjelder foreldrepenger og saksbehandler skal legge til ny virksomhet for søker.
  */
-export const VirksomhetTypeNaringPanel = ({ readOnly, alleKodeverk }: Props) => {
-  const virksomhetTyper = alleKodeverk[KodeverkType.VIRKSOMHET_TYPE];
-  const naringvirksomhetTyper = useMemo(
-    () =>
-      virksomhetTyper
-        .filter(t => t.kode !== NaringsvirksomhetType.FRILANSER)
-        .sort((a, b) => compare(naringsvirksomhetTypeOrder[a.kode], naringsvirksomhetTypeOrder[b.kode])),
-    [],
-  );
-
-  const { watch, setError, formState, clearErrors } = useFormContext<FormValues & VirtualErrorField>();
-
-  const checkboxVerdier = watch(TYPE_VIRKSOMHET_PREFIX);
-
-  const isError = !checkboxVerdier || !Object.values(checkboxVerdier).some(v => v === true);
-
-  useEffect(() => {
-    if (isError) {
-      setError('notRegisteredInput', {
-        type: 'custom',
-        message: isRequiredMessage(),
-      });
-    }
-    if (!isError) {
-      clearErrors('notRegisteredInput');
-    }
-  }, [isError]);
-
+export const VirksomhetTypeNaringPanel = ({ readOnly, alleKodeverk, index }: Props) => {
   return (
-    <>
-      <VerticalSpacer eightPx />
-      <Label size="small">
-        <FormattedMessage id="Registrering.VirksomhetNaeringTypePanel.Title" />
-      </Label>
-      <VerticalSpacer fourPx />
-      {naringvirksomhetTyper.map(nv => (
-        <Fragment key={nv.kode}>
-          <VerticalSpacer fourPx />
-          <CheckboxField
-            name={`${TYPE_VIRKSOMHET_PREFIX}.${nv.kode}`}
-            key={nv.kode}
-            label={nv.navn}
-            readOnly={readOnly}
-          />
-        </Fragment>
-      ))}
-      {formState.isSubmitted && formState.errors.notRegisteredInput?.message && (
-        <ErrorMessage>{formState.errors.notRegisteredInput?.message}</ErrorMessage>
-      )}
-    </>
+    <CheckboxPanel
+      label={<FormattedMessage id="Registrering.VirksomhetNaeringTypePanel.Title" />}
+      name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.typeVirksomhet`}
+      validate={[required]}
+      checkboxes={naringvirksomhetTyper(alleKodeverk)}
+      isReadOnly={readOnly}
+    />
   );
 };
+
+VirksomhetTypeNaringPanel.transformValues = ({ typeVirksomhet }: RegistrerVirksomhetFormValues) => ({
+  typeVirksomhet: {
+    ANNEN: typeVirksomhet.includes(NaringsvirksomhetType.ANNEN),
+    FISKE: typeVirksomhet.includes(NaringsvirksomhetType.FISKE),
+    DAGMAMMA: typeVirksomhet.includes(NaringsvirksomhetType.DAGMAMMA),
+    JORDBRUK_SKOGBRUK: typeVirksomhet.includes(NaringsvirksomhetType.JORDBRUK_ELLER_SKOGBRUK),
+  },
+});

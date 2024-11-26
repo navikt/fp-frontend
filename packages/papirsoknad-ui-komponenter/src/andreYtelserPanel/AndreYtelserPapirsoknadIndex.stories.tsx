@@ -10,7 +10,7 @@ import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { AndreYtelserPapirsoknadIndex } from './AndreYtelserPapirsoknadIndex';
 
 const meta = {
-  title: 'papirsoknad/ui-komponenter/andre-ytelser',
+  title: 'ui-komponenter/andre-ytelser',
   component: AndreYtelserPapirsoknadIndex,
   parameters: {
     submitCallback: action('onSubmit'),
@@ -19,9 +19,9 @@ const meta = {
     readOnly: false,
     alleKodeverk: alleKodeverk as any,
   },
-  render: function Render(args, { parameters: { submitCallback } }) {
+  render: (args, { parameters: { submitCallback } }) => {
     const formMethods = useForm({
-      defaultValues: AndreYtelserPapirsoknadIndex.buildInitialValues(alleKodeverk[KodeverkType.ARBEID_TYPE]),
+      defaultValues: AndreYtelserPapirsoknadIndex.initialValues(alleKodeverk[KodeverkType.ARBEID_TYPE]),
     });
 
     return (

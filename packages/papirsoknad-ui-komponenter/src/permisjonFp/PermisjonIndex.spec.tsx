@@ -241,7 +241,7 @@ describe('<PermisjonIndex>', () => {
             periodeTom: '2022-06-20',
             prosentandelArbeid: '100.00',
             samtidigUttaksprosent: '100',
-            skalGraderes: undefined,
+            skalGraderes: false,
           },
         ],
         oppholdPerioder: undefined,
