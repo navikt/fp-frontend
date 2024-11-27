@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
+
 import { ChevronDownIcon, ChevronUpIcon } from '@navikt/aksel-icons';
 
 import styles from './collapseButton.module.css';

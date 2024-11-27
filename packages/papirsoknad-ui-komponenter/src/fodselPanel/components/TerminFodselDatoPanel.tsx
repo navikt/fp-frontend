@@ -1,11 +1,9 @@
 import React from 'react';
+import { useFormContext,UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { UseFormGetValues, useFormContext } from 'react-hook-form';
-import dayjs from 'dayjs';
-import { Alert, Label, Heading } from '@navikt/ds-react';
-import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
+
+import { Alert, Heading,Label } from '@navikt/ds-react';
 import { Datepicker, InputField, RadioGroupPanel } from '@navikt/ft-form-hooks';
-import { ArrowBox, BorderBox, VerticalSpacer, FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 import {
   dateBeforeOrEqual,
   dateBeforeOrEqualToToday,
@@ -15,7 +13,9 @@ import {
   minValue,
   required,
 } from '@navikt/ft-form-validators';
-
+import { ArrowBox, BorderBox, FlexColumn, FlexContainer, FlexRow,VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import dayjs from 'dayjs';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 
 dayjs.extend(isSameOrBefore);

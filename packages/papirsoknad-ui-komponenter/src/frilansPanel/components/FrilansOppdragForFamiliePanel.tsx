@@ -1,16 +1,17 @@
 import React from 'react';
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
+
 import { Label } from '@navikt/ds-react';
-import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
+import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { useFormContext } from 'react-hook-form';
 import {
-  FrilansOppdragForFamilieFieldArray,
-  FRILANS_NAME_PREFIX,
   defaultFrilansPeriode,
   FormValues as FieldArrayFormValues,
+  FRILANS_NAME_PREFIX,
+  FrilansOppdragForFamilieFieldArray,
 } from './FrilansOppdragForFamilieFieldArray';
 
 export type FormValues = {

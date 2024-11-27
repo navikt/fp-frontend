@@ -1,16 +1,17 @@
 import React, { ComponentProps } from 'react';
-import { Meta, StoryObj } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
 
+import { action } from '@storybook/addon-actions';
+import { Meta, StoryObj } from '@storybook/react';
+
+import { BehandlingStatus } from '@navikt/fp-kodeverk';
+import { Oppgave } from '@navikt/fp-los-felles';
 import { alleKodeverkLos, getIntlDecorator } from '@navikt/fp-storybook-utils';
 import { RestApiMock } from '@navikt/fp-utils-test';
-import { Oppgave } from '@navikt/fp-los-felles';
 
-import { RestApiGlobalStatePathsKeys, RestApiPathsKeys, requestApi } from '../../data/fplosSaksbehandlerRestApi';
+import { requestApi,RestApiGlobalStatePathsKeys, RestApiPathsKeys } from '../../data/fplosSaksbehandlerRestApi';
 import { SistBehandledeSaker } from './SistBehandledeSaker';
 
 import messages from '../../../i18n/nb_NO.json';
-import { BehandlingStatus } from '@navikt/fp-kodeverk';
 
 const withIntl = getIntlDecorator(messages);
 

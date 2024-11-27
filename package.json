@@ -18,6 +18,7 @@
     "tsc:changed": "lerna run tsc --stream --since origin/master",
     "eslint": "lerna run eslint --stream",
     "eslint:changed": "lerna run eslint --stream --since origin/master",
+    "eslint:fix": "lerna run eslint:fix --stream",
     "stylelint": "lerna run stylelint --stream",
     "prettier": "lerna run prettier --stream",
     "clean": "lerna run clean --stream",

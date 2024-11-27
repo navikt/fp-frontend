@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
-import { formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
-import { hasValidText, required } from '@navikt/ft-form-validators';
 import { TextAreaField } from '@navikt/ft-form-hooks';
+import { hasValidText, required } from '@navikt/ft-form-validators';
+import { formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
 import styles from './fritekstKlageBrevTextField.module.css';
 

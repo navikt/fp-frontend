@@ -1,18 +1,21 @@
-import React, { FunctionComponent, useState, useEffect, useCallback } from 'react';
+import React, { FunctionComponent, useCallback,useEffect, useState } from 'react';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { NavAnsatt } from '@navikt/fp-types';
+
 import { restApiHooks, RestApiPathsKeys } from '../../data/fpfordelRestApi';
-import OppgaveOversikt from '../../typer/oppgaveTsType';
-import JournalpostDetaljer from './JournalpostDetaljer';
-import styles from './journalpostIndex.module.css';
-import Journalpost from '../../typer/journalpostTsType';
-import JournalDokument from '../../typer/journalDokumentTsType';
 import JournalførSubmitValue from '../../typer/ferdigstillJournalføringSubmit';
-import DokumentIndex from './pdf/DokumentIndex';
+import JournalDokument from '../../typer/journalDokumentTsType';
+import Journalpost from '../../typer/journalpostTsType';
 import OppdaterMedBruker from '../../typer/oppdaterBrukerTsType';
+import OppgaveOversikt from '../../typer/oppgaveTsType';
 import ReserverOppgaveType from '../../typer/reserverOppgaveType';
+import JournalpostDetaljer from './JournalpostDetaljer';
+import DokumentIndex from './pdf/DokumentIndex';
+
+import styles from './journalpostIndex.module.css';
 
 type OwnProps = Readonly<{
   oppgave?: OppgaveOversikt;

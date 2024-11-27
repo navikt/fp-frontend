@@ -1,12 +1,14 @@
 import React, { Fragment, useEffect, useMemo } from 'react';
-import { FormattedMessage } from 'react-intl';
-import { Label, ErrorMessage } from '@navikt/ds-react';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { CheckboxField } from '@navikt/ft-form-hooks';
-import { AlleKodeverk } from '@navikt/fp-types';
-import { NaringsvirksomhetType, KodeverkType } from '@navikt/fp-kodeverk';
-import { isRequiredMessage } from '@navikt/ft-form-validators';
 import { useFormContext } from 'react-hook-form';
+import { FormattedMessage } from 'react-intl';
+
+import { ErrorMessage,Label } from '@navikt/ds-react';
+import { CheckboxField } from '@navikt/ft-form-hooks';
+import { isRequiredMessage } from '@navikt/ft-form-validators';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
+import { KodeverkType,NaringsvirksomhetType } from '@navikt/fp-kodeverk';
+import { AlleKodeverk } from '@navikt/fp-types';
 
 const TYPE_VIRKSOMHET_PREFIX = 'typeVirksomhet';
 

@@ -1,7 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Location } from 'history';
+
 import { Heading } from '@navikt/ds-react';
+import { Location } from 'history';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
 

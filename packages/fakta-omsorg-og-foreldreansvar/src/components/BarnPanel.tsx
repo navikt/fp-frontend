@@ -1,10 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, WrappedComponentProps } from 'react-intl';
-import moment from 'moment';
-import { Label, BodyShort } from '@navikt/ds-react';
 
+import { BodyShort,Label } from '@navikt/ds-react';
+import { FaktaGruppe,VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
-import { VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
+import moment from 'moment';
+
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { Soknad } from '@navikt/fp-types';
 

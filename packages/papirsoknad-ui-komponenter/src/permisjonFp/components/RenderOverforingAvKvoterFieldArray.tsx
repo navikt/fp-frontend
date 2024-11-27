@@ -1,15 +1,16 @@
 import React, { ReactElement, useEffect } from 'react';
+import { useFieldArray, useFormContext,UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { UseFormGetValues, useFieldArray, useFormContext } from 'react-hook-form';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
-import { Datepicker, SelectField, PeriodFieldArray } from '@navikt/ft-form-hooks';
+
+import { Datepicker, PeriodFieldArray,SelectField } from '@navikt/ft-form-hooks';
 import {
-  required,
-  hasValidDate,
-  dateRangesNotOverlapping,
   dateAfterOrEqual,
   dateBeforeOrEqual,
+  dateRangesNotOverlapping,
+  hasValidDate,
+  required,
 } from '@navikt/ft-form-validators';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 export const TIDSROM_PERMISJON_FORM_NAME_PREFIX = 'tidsromPermisjon';
 export const OVERFORING_PERIODE_FIELD_ARRAY_NAME = 'overforingsperioder';

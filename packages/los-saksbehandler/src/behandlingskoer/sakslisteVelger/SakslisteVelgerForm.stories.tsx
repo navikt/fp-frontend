@@ -1,14 +1,15 @@
 import React, { ComponentProps } from 'react';
-import { BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
+
 import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
+import { BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { alleKodeverkLos, getIntlDecorator } from '@navikt/fp-storybook-utils';
 import { RestApiMock } from '@navikt/fp-utils-test';
 
-import { RestApiGlobalStatePathsKeys, RestApiPathsKeys, requestApi } from '../../data/fplosSaksbehandlerRestApi';
-import { KoSortering } from '../../kodeverk/KoSortering';
+import { requestApi,RestApiGlobalStatePathsKeys, RestApiPathsKeys } from '../../data/fplosSaksbehandlerRestApi';
 import { AndreKriterierType } from '../../kodeverk/andreKriterierType';
+import { KoSortering } from '../../kodeverk/KoSortering';
 import { Saksbehandler } from '../../typer/saksbehandlerTsType';
 import { Saksliste } from '../../typer/sakslisteTsType';
 import { SakslisteVelgerForm } from './SakslisteVelgerForm';

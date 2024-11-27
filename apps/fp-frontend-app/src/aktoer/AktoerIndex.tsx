@@ -1,14 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
+
+import { KodeverkType } from '@navikt/fp-kodeverk';
+import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { AktorSakIndex } from '@navikt/fp-sak-aktor';
 
-import { RestApiState } from '@navikt/fp-rest-api-hooks';
-import { KodeverkType } from '@navikt/fp-kodeverk';
-
-import { useTrackRouteParam } from '../app/useTrackRouteParam';
-import { restFagsakApiHooks, FagsakApiKeys } from '../data/fagsakContextApi';
 import { pathToFagsak } from '../app/paths';
+import { useTrackRouteParam } from '../app/useTrackRouteParam';
+import { FagsakApiKeys,restFagsakApiHooks } from '../data/fagsakContextApi';
 
 export const AktoerIndex = () => {
   const { selected: selectedAktoerId } = useTrackRouteParam<string>({

@@ -1,20 +1,22 @@
 import React, { useCallback, useState } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
-import { Heading, Panel } from '@navikt/ds-react';
-import { createIntl } from '@navikt/ft-utils';
-import { FagsakYtelseType } from '@navikt/fp-kodeverk';
-import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
+import { Heading, Panel } from '@navikt/ds-react';
+import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { createIntl } from '@navikt/ft-utils';
+
+import { FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { SoknadData } from '@navikt/fp-papirsoknad-ui-komponenter';
 import { AlleKodeverk, Fagsak } from '@navikt/fp-types';
 
 import { EngangsstonadPapirsoknadIndex } from './engangsstonad/EngangsstonadPapirsoknadIndex';
 import { ForeldrepengerPapirsoknadIndex } from './foreldrepenger/ForeldrepengerPapirsoknadIndex';
-import { SvangerskapspengerPapirsoknadIndex } from './svangerskapspenger/SvangerskapspengerPapirsoknadIndex';
 import SoknadTypePickerForm from './SoknadTypePickerForm';
-import messages from '../i18n/nb_NO.json';
+import { SvangerskapspengerPapirsoknadIndex } from './svangerskapspenger/SvangerskapspengerPapirsoknadIndex';
 
 import styles from './registrerPapirsoknadPanel.module.css';
+
+import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 

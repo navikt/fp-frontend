@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
+
 import { AksessRettigheter, AlleKodeverk, Behandling, Fagsak } from '@navikt/fp-types';
 
-import { RegistrerPapirsoknad } from './RegistrerPapirsoknad';
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../../data/behandlingContextApi';
+import { RegistrerPapirsoknad } from './RegistrerPapirsoknad';
 
 const useSetBehandlingVedEndring = (setBehandling: (behandling: Behandling) => void, behandling?: Behandling): void => {
   useEffect(() => {

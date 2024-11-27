@@ -1,5 +1,7 @@
 import React, { FC, forwardRef, ForwardRefExoticComponent, PropsWithChildren, ReactNode } from 'react';
+
 import { BodyShort, Box, Detail, HStack, Label, VStack } from '@navikt/ds-react';
+
 import { FaktaKilde, getLabelForFaktaKilde } from './FaktaKilde';
 
 const FaktaGruppe = forwardRef((props, ref) => (

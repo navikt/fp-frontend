@@ -3,8 +3,8 @@ import React, { FunctionComponent } from 'react';
 import { Aksjonspunkt, Behandling, FastsattOpptjening } from '@navikt/fp-types';
 import { AvklarOpptjeningsvilkaretAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import OpptjeningVilkarView from './OpptjeningVilkarView';
 import OpptjeningVilkarAksjonspunktPanel, { FormValues } from './OpptjeningVilkarAksjonspunktPanel';
+import OpptjeningVilkarView from './OpptjeningVilkarView';
 
 interface OwnProps {
   behandlingsresultat?: Behandling['behandlingsresultat'];

@@ -1,27 +1,28 @@
 import React, { FunctionComponent, useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
-import { Button, Label, BodyShort, Heading } from '@navikt/ds-react';
 
-import { dateFormat } from '@navikt/ft-utils';
-import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
+import { BodyShort, Button, Heading,Label } from '@navikt/ds-react';
 import { Form, TextAreaField } from '@navikt/ft-form-hooks';
+import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import {
-  Aksjonspunkt,
-  ArbeidOgInntektsmelding,
-  ArbeidsgiverOpplysningerPerId,
-  AoIArbeidsforhold,
-  AlleKodeverk,
-} from '@navikt/fp-types';
-import {
-  VerticalSpacer,
   AksjonspunktHelpTextHTML,
+  FlexColumn,
   FlexContainer,
   FlexRow,
-  FlexColumn,
+  VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
+import { dateFormat } from '@navikt/ft-utils';
+
+import { AksjonspunktKode,AksjonspunktStatus } from '@navikt/fp-kodeverk';
+import {
+  Aksjonspunkt,
+  AlleKodeverk,
+  AoIArbeidsforhold,
+  ArbeidOgInntektsmelding,
+  ArbeidsgiverOpplysningerPerId,
+} from '@navikt/fp-types';
 import { VurderArbeidsforholdPermisjonAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { AksjonspunktStatus, AksjonspunktKode } from '@navikt/fp-kodeverk';
 
 import ArbeidsforholdFieldArray from './ArbeidsforholdFieldArray';
 

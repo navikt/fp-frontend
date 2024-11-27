@@ -1,13 +1,14 @@
-import React, { FunctionComponent, useMemo, useState, useCallback } from 'react';
-import { FormattedMessage, useIntl, IntlShape } from 'react-intl';
-import { Label, BodyShort, HStack } from '@navikt/ds-react';
+import React, { FunctionComponent, useCallback,useMemo, useState } from 'react';
+import { FormattedMessage, IntlShape,useIntl } from 'react-intl';
 
+import { BodyShort, HStack,Label } from '@navikt/ds-react';
 import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
+
 import { StonadskontoType, UttakArbeidType as uttakArbeidTypeKodeverk } from '@navikt/fp-kodeverk';
 import { AktivitetIdentifikator, AktivitetSaldo, ArbeidsgiverOpplysningerPerId, Stonadskonto } from '@navikt/fp-types';
 
-import uttakArbeidTypeTekstCodes from '../../utils/uttakArbeidTypeCodes';
 import lagVisningsNavn from '../../utils/lagVisningsNavn';
+import uttakArbeidTypeTekstCodes from '../../utils/uttakArbeidTypeCodes';
 import StonadsdagerTab, { finnAntallUkerOgDager } from './StonadsdagerTab';
 
 import styles from './disponibleStonadskontoerPanel.module.css';

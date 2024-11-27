@@ -1,19 +1,20 @@
 import React, { ReactElement, ReactNode, useMemo } from 'react';
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
+
 import { Heading } from '@navikt/ds-react';
 import { CheckboxField, InputField, RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
-import { ArrowBox, BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-
-import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
-import { KanIkkeOppgiAnnenForelderArsak, KodeverkType, Landkode } from '@navikt/fp-kodeverk';
 import {
+  harSammeFodselsnummerSomSoker,
   hasValidFodselsnummer,
   hasValidFodselsnummerFormat,
   required,
-  harSammeFodselsnummerSomSoker,
 } from '@navikt/ft-form-validators';
+import { ArrowBox, BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { useFormContext } from 'react-hook-form';
+import { KanIkkeOppgiAnnenForelderArsak, KodeverkType, Landkode } from '@navikt/fp-kodeverk';
+import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
+
 import styles from './annenForelderPanel.module.css';
 
 const ANNEN_FORELDER_NAME_PREFIX = 'annenForelder';

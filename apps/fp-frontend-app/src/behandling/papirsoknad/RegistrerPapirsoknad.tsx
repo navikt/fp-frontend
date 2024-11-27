@@ -1,12 +1,13 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo,useState } from 'react';
+import { useNavigate } from 'react-router';
+
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt, AlleKodeverk, Behandling, AksessRettigheter, Fagsak } from '@navikt/fp-types';
-import { AsyncPollingStatus } from '@navikt/fp-rest-api';
 import { RegistrerPapirsoknadPanel, SoknadRegistrertModal } from '@navikt/fp-papirsoknad';
+import { AsyncPollingStatus } from '@navikt/fp-rest-api';
+import { AksessRettigheter, Aksjonspunkt, AlleKodeverk, Behandling, Fagsak } from '@navikt/fp-types';
 
-import { useNavigate } from 'react-router';
 import { BehandlingPaVent } from '../felles/modaler/paVent/BehandlingPaVent';
 
 const getAktivtPapirsoknadApKode = (aksjonspunkter: Aksjonspunkt[]): string =>

@@ -1,9 +1,9 @@
 import React, { ReactElement, useEffect } from 'react';
-import moment from 'moment/moment';
-import { UseFormGetValues, useFieldArray, useFormContext } from 'react-hook-form';
+import { useFieldArray, useFormContext,UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
+
 import { Alert, Label } from '@navikt/ds-react';
-import { VerticalSpacer, FlexColumn, FlexContainer, FlexRow, AvsnittSkiller } from '@navikt/ft-ui-komponenter';
+import { CheckboxField, Datepicker, InputField, PeriodFieldArray,SelectField } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   dateBeforeOrEqual,
@@ -16,11 +16,12 @@ import {
   maxValue,
   required,
 } from '@navikt/ft-form-validators';
-import { CheckboxField, Datepicker, InputField, SelectField, PeriodFieldArray } from '@navikt/ft-form-hooks';
-import { KodeverkMedNavn } from '@navikt/fp-types';
+import { AvsnittSkiller,FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import moment from 'moment/moment';
 
 import { Arbeidskategori } from '@navikt/fp-kodeverk';
+import { KodeverkMedNavn } from '@navikt/fp-types';
 
 import { gyldigeUttakperioder } from './RenderPermisjonPeriodeFieldArray';
 

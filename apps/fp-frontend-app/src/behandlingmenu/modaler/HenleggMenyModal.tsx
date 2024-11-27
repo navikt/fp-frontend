@@ -1,13 +1,14 @@
 import React, { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { KodeverkType } from '@navikt/fp-kodeverk';
-import { BehandlingAppKontekst } from '@navikt/fp-types';
-import { MenyHenleggIndex } from '@navikt/fp-sak-meny-henlegg';
 
-import { useVisForhandsvisningAvMelding } from '../../data/useVisForhandsvisningAvMelding';
-import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
-import { MenyKodeverk } from '../MenyKodeverk';
+import { KodeverkType } from '@navikt/fp-kodeverk';
+import { MenyHenleggIndex } from '@navikt/fp-sak-meny-henlegg';
+import { BehandlingAppKontekst } from '@navikt/fp-types';
+
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../../data/behandlingContextApi';
+import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
+import { useVisForhandsvisningAvMelding } from '../../data/useVisForhandsvisningAvMelding';
+import { MenyKodeverk } from '../MenyKodeverk';
 
 interface Props {
   behandling: BehandlingAppKontekst;

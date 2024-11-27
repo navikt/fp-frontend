@@ -1,10 +1,11 @@
 import React from 'react';
+
 import { Meta, StoryObj } from '@storybook/react';
 
 import { ForbiddenPage } from './ForbiddenPage';
+import { IngenBehandlingValgtPanel } from './IngenBehandlingValgtPanel';
 import { NotFoundPage } from './NotFoundPage';
 import { UnauthorizedPage } from './UnauthorizedPage';
-import { IngenBehandlingValgtPanel } from './IngenBehandlingValgtPanel';
 
 import '@navikt/ds-css';
 

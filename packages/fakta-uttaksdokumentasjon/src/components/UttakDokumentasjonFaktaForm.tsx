@@ -1,12 +1,13 @@
 import React, { FunctionComponent, useCallback, useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Form } from '@navikt/ft-form-hooks';
-import { Alert, Button, VStack } from '@navikt/ds-react';
 
+import { Alert, Button, VStack } from '@navikt/ds-react';
+import { Form } from '@navikt/ft-form-hooks';
+
+import { FaktaBegrunnelseTextFieldNew } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, DokumentasjonVurderingBehov } from '@navikt/fp-types';
-import { FaktaBegrunnelseTextFieldNew } from '@navikt/fp-fakta-felles';
 import { VurderDokumentasjonAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import UttakDokumentasjonFaktaTable from './UttakDokumentasjonFaktaTable/UttakDokumentasjonFaktaTable';

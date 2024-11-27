@@ -1,17 +1,17 @@
-import React, { useMemo, useCallback } from 'react';
-import { useIntl, IntlShape } from 'react-intl';
-import { decodeHtmlEntity } from '@navikt/ft-utils';
+import React, { useCallback,useMemo } from 'react';
+import { IntlShape,useIntl } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
+
+import { decodeHtmlEntity } from '@navikt/ft-utils';
+
+import { RETTSKILDE_URL,SYSTEMRUTINE_URL } from '@navikt/fp-konstanter';
+import { useRestApiError, useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 import { DekoratorMedFeilviserSakIndex, Feilmelding } from '@navikt/fp-sak-dekorator';
 
-import { useRestApiError, useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
-import { SYSTEMRUTINE_URL, RETTSKILDE_URL } from '@navikt/fp-konstanter';
-
+import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
+import { AVDELINGSLEDER_PATH, JOURNALFØRING_PATH, UTBETALINGSDATA_PATH } from '../paths';
 import { ErrorFormatter } from './feilhandtering/ErrorFormatter';
 import { ErrorMessage } from './feilhandtering/ErrorMessage';
-
-import { AVDELINGSLEDER_PATH, JOURNALFØRING_PATH, UTBETALINGSDATA_PATH } from '../paths';
-import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
 
 type QueryStrings = {
   errorcode?: string;

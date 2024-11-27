@@ -1,8 +1,9 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 import { Link } from 'react-router-dom';
+
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
-import { Label, BodyShort, Button, Modal } from '@navikt/ds-react';
+import { BodyShort, Button, Label, Modal } from '@navikt/ds-react';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import styles from './lukkPapirsoknadModal.module.css';

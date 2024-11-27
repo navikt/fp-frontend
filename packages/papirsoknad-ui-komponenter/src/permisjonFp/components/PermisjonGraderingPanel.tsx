@@ -1,17 +1,19 @@
 import React from 'react';
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
+
 import { Label } from '@navikt/ds-react';
 import { CheckboxField } from '@navikt/ft-form-hooks';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { KodeverkType, Arbeidskategori } from '@navikt/fp-kodeverk';
+
+import { Arbeidskategori,KodeverkType } from '@navikt/fp-kodeverk';
 import { AlleKodeverk } from '@navikt/fp-types';
 
-import { useFormContext } from 'react-hook-form';
 import {
+  FormValues as GraderingPeriodeFormValues,
+  GRADERING_PERIODE_FIELD_ARRAY_NAME,
   RenderGraderingPeriodeFieldArray,
   TIDSROM_PERMISJON_FORM_NAME_PREFIX,
-  GRADERING_PERIODE_FIELD_ARRAY_NAME,
-  FormValues as GraderingPeriodeFormValues,
 } from './RenderGraderingPeriodeFieldArray';
 
 export type FormValues = {

@@ -1,7 +1,8 @@
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { BodyShort, Modal, Button, Label, HStack, VStack } from '@navikt/ds-react';
+
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
+import { BodyShort, Button, HStack, Label, Modal, VStack } from '@navikt/ds-react';
 
 import styles from './henlagtBehandlingModal.module.css';
 

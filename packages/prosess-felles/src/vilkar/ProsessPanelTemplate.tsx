@@ -1,13 +1,15 @@
-import React, { ReactNode, FunctionComponent } from 'react';
-import { Heading, Detail, Label, BodyShort } from '@navikt/ds-react';
+import React, { FunctionComponent,ReactNode } from 'react';
+
 import { CheckmarkCircleFillIcon, XMarkOctagonFillIcon } from '@navikt/aksel-icons';
-import { FlexContainer, FlexRow, FlexColumn, VerticalSpacer, AksjonspunktBox } from '@navikt/ft-ui-komponenter';
+import { BodyShort,Detail, Heading, Label } from '@navikt/ds-react';
+import { AksjonspunktBox,FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 
 import ProsessStegSubmitButton from '../ProsessStegSubmitButtonNew';
-import messages from '../../i18n/nb_NO.json';
 
 import styles from './prosessPanelTemplate.module.css';
+
+import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 

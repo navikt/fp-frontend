@@ -1,12 +1,13 @@
 import React, { useMemo } from 'react';
+import { useFieldArray, useFormContext,UseFormGetValues } from 'react-hook-form';
 import { IntlShape, useIntl } from 'react-intl';
-import moment from 'moment';
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
+
 import { Datepicker, InputField, PeriodFieldArray } from '@navikt/ft-form-hooks';
 import { dateAfterOrEqual, dateBeforeOrEqual, hasValidDate, maxLength } from '@navikt/ft-form-validators';
+import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import moment from 'moment';
 
-import { UseFormGetValues, useFieldArray, useFormContext } from 'react-hook-form';
 import styles from './frilansOppdragForFamilieFieldArray.module.css';
 
 export const FRILANS_NAME_PREFIX = 'frilans';

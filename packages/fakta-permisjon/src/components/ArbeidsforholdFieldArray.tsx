@@ -1,13 +1,13 @@
 import React, { FunctionComponent } from 'react';
+import { useFieldArray, useFormContext } from 'react-hook-form';
 
 import {
-  ArbeidOgInntektsmelding,
-  AoIArbeidsforhold,
-  ArbeidsgiverOpplysningerPerId,
   AlleKodeverk,
+  AoIArbeidsforhold,
+  ArbeidOgInntektsmelding,
+  ArbeidsgiverOpplysningerPerId,
 } from '@navikt/fp-types';
 
-import { useFieldArray, useFormContext } from 'react-hook-form';
 import ArbeidsforholdField from './ArbeidsforholdField';
 
 const FIELD_ARRAY_NAME = 'arbeidsforhold';

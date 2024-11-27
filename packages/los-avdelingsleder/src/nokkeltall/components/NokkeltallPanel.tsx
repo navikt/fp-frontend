@@ -1,16 +1,17 @@
-import React, { useRef, FunctionComponent } from 'react';
+import React, { FunctionComponent,useRef } from 'react';
+
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { getValueFromLocalStorage } from '../../data/localStorageHelper';
+import BehandlingVentefrist from '../../typer/behandlingVentefristTsType';
 import OppgaverForAvdeling from '../../typer/oppgaverForAvdelingTsType';
 import OppgaveForDato from '../../typer/oppgaverForDatoTsType';
 import OppgaverForForsteStonadsdag from '../../typer/oppgaverForForsteStonadsdagTsType';
-import BehandlingVentefrist from '../../typer/behandlingVentefristTsType';
 import OppgaverSomErApneEllerPaVent from '../../typer/oppgaverSomErApneEllerPaVentTsType';
-import FordelingAvBehandlingstypePanel from './fordelingAvBehandlingstype/FordelingAvBehandlingstypePanel';
-import TilBehandlingPanel from './tilBehandling/TilBehandlingPanel';
 import OppgaverPerForsteStonadsdagPanel from './antallBehandlingerPerForsteStonadsdag/OppgaverPerForsteStonadsdagPanel';
 import OppgaverSomErApneEllerPaVentPanel from './apneOgPaVentBehandlinger/OppgaverSomErApneEllerPaVentPanel';
+import FordelingAvBehandlingstypePanel from './fordelingAvBehandlingstype/FordelingAvBehandlingstypePanel';
+import TilBehandlingPanel from './tilBehandling/TilBehandlingPanel';
 import VentefristUtløperPanel from './ventefristUtløper/VentefristUtløperPanel';
 
 interface OwnProps {

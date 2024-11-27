@@ -1,10 +1,12 @@
 import React, { FunctionComponent, useCallback, useEffect } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { ArrowDownIcon } from '@navikt/aksel-icons';
 import { HStack } from '@navikt/ds-react';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
 import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
+
 import { restApiHooks, RestApiPathsKeys } from '../../data/fplosRestApi';
 import Saksliste from '../../typer/sakslisteAvdelingTsType';
 import GjeldendeSakslisterTabell from './GjeldendeSakslisterTabell';

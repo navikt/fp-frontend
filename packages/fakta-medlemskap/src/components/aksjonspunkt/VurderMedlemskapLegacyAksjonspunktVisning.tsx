@@ -1,9 +1,11 @@
 import React, { FC, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
+
 import { BodyShort, Box, Heading, HStack, Label, VStack } from '@navikt/ds-react';
+import { AvsnittSkiller, DateLabel } from '@navikt/ft-ui-komponenter';
+
 import { KodeverkType } from '@navikt/fp-kodeverk';
 import { AlleKodeverk, LegacyManuellMedlemskapsBehandling, LegacyMedlemPeriode } from '@navikt/fp-types';
-import { AvsnittSkiller, DateLabel } from '@navikt/ft-ui-komponenter';
 
 interface Props {
   alleKodeverk: AlleKodeverk;

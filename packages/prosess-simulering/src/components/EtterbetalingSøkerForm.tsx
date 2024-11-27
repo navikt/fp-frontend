@@ -1,14 +1,16 @@
 import React, { FunctionComponent } from 'react';
-import { useIntl, FormattedMessage } from 'react-intl';
-import { ReadMore, VStack } from '@navikt/ds-react';
+import { FormattedMessage,useIntl } from 'react-intl';
 
+import { ReadMore, VStack } from '@navikt/ds-react';
 import { TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
+
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt } from '@navikt/fp-types';
 import { KontrollerEtterbetalingTilSøkerAP } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import FormValues, { EtterbetalingSøkerFormValues } from '../../types/FormValues';
+
 import styles from './etterbetalingSøkerForm.module.css';
 
 const minLength3 = minLength(3);

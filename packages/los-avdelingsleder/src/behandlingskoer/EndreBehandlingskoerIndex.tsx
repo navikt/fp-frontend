@@ -1,7 +1,8 @@
-import React, { FunctionComponent, useState, useCallback } from 'react';
+import React, { FunctionComponent, useCallback,useState } from 'react';
+
+import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
 
 import EndreSakslisterPanel from './components/EndreSakslisterPanel';
-import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
 
 interface OwnProps {
   valgtAvdelingEnhet: string;

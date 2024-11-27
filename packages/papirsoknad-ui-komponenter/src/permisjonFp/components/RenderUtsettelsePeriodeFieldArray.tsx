@@ -1,10 +1,8 @@
-import React, { ReactElement, useEffect, useCallback } from 'react';
+import React, { ReactElement, useCallback,useEffect } from 'react';
+import { useFieldArray, useFormContext,UseFormGetValues } from 'react-hook-form';
 import { useIntl } from 'react-intl';
-import { UseFormGetValues, useFieldArray, useFormContext } from 'react-hook-form';
-import { AvsnittSkiller, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { Datepicker, SelectField, PeriodFieldArray } from '@navikt/ft-form-hooks';
-import { KodeverkMedNavn } from '@navikt/fp-types';
 
+import { Datepicker, PeriodFieldArray,SelectField } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   dateBeforeOrEqual,
@@ -12,6 +10,10 @@ import {
   hasValidDate,
   required,
 } from '@navikt/ft-form-validators';
+import { AvsnittSkiller, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
+import { KodeverkMedNavn } from '@navikt/fp-types';
+
 import { gyldigeUttakperioder } from './RenderPermisjonPeriodeFieldArray';
 
 import styles from './renderUtsettelsePeriodeFieldArray.module.css';

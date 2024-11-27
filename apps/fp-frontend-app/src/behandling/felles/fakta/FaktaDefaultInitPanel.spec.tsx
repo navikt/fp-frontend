@@ -1,13 +1,14 @@
 import React from 'react';
+
 import { render, screen } from '@testing-library/react';
 
 import { AksjonspunktKode, BehandlingStatus } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import { Aksjonspunkt, Behandling } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { Aksjonspunkt, Behandling } from '@navikt/fp-types';
 
-import * as Felles from './useStandardFaktaPanelProps';
 import { FaktaDefaultInitPanel } from './FaktaDefaultInitPanel';
+import * as Felles from './useStandardFaktaPanelProps';
 
 const behandling = {
   uuid: '1',

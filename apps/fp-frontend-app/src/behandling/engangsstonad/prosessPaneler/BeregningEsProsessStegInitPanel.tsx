@@ -1,14 +1,14 @@
 import React, { useCallback, useState } from 'react';
 import { useIntl } from 'react-intl';
 
-import { VilkarUtfallType, AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { BeregningsresultatProsessIndex } from '@navikt/fp-prosess-beregningsresultat';
+import { AksjonspunktKode,VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
+import { BeregningsresultatProsessIndex } from '@navikt/fp-prosess-beregningsresultat';
 import { AksessRettigheter, BeregningsresultatEs } from '@navikt/fp-types';
 
+import { BehandlingApiKeys, requestBehandlingApi } from '../../../data/behandlingContextApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
-import { BehandlingApiKeys, requestBehandlingApi } from '../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.OVERSTYR_BEREGNING];
 

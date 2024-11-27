@@ -1,12 +1,12 @@
-import { RestApiConfigBuilder, createRequestApi, RestKey } from '@navikt/fp-rest-api';
-import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
-import { FagsakEnkel, AlleKodeverk } from '@navikt/fp-types';
 import { Oppgave, OppgaveStatus, SaksbehandlerProfil } from '@navikt/fp-los-felles';
+import { createRequestApi, RestApiConfigBuilder, RestKey } from '@navikt/fp-rest-api';
+import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
+import { AlleKodeverk,FagsakEnkel } from '@navikt/fp-types';
 
+import { Driftsmelding } from '../typer/driftsmeldingTsType';
 import { NyeOgFerdigstilteOppgaver } from '../typer/nyeOgFerdigstilteOppgaverTsType';
 import { Saksbehandler } from '../typer/saksbehandlerTsType';
 import { Saksliste } from '../typer/sakslisteTsType';
-import { Driftsmelding } from '../typer/driftsmeldingTsType';
 
 export const RestApiGlobalStatePathsKeys = {
   KODEVERK_LOS: new RestKey<AlleKodeverk, void>('KODEVERK_LOS'),

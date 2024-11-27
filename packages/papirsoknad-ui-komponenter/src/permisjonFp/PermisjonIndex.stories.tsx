@@ -1,16 +1,17 @@
 import React from 'react';
-import { Meta, StoryObj } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
 import { useForm } from 'react-hook-form';
+
 import { Button } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { action } from '@storybook/addon-actions';
+import { Meta, StoryObj } from '@storybook/react';
 
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { ForeldreType } from '@navikt/fp-kodeverk';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
+import { FormValues,TIDSROM_PERMISJON_FORM_NAME_PREFIX } from './components/PermisjonPanel';
 import { PermisjonIndex } from './PermisjonIndex';
-import { TIDSROM_PERMISJON_FORM_NAME_PREFIX, FormValues } from './components/PermisjonPanel';
 
 const meta = {
   title: 'papirsoknad/ui-komponenter/permisjon',

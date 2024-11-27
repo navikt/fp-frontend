@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from 'react';
-import dayjs from 'dayjs';
 import { FormattedMessage } from 'react-intl';
-import { Label, BodyShort } from '@navikt/ds-react';
 
-import { DDMMYYYY_DATE_FORMAT, formatCurrencyNoKr } from '@navikt/ft-utils';
+import { BodyShort,Label } from '@navikt/ds-react';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { DDMMYYYY_DATE_FORMAT, formatCurrencyNoKr } from '@navikt/ft-utils';
+import dayjs from 'dayjs';
 
 import styles from './simuleringSummary.module.css';
 

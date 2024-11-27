@@ -1,22 +1,23 @@
 import React, { FunctionComponent, useCallback, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import moment from 'moment';
-import { Detail, Heading, Panel, BodyShort } from '@navikt/ds-react';
 
+import { BodyShort,Detail, Heading, Panel } from '@navikt/ds-react';
 import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
-import {
-  KodeverkType,
-  SoknadType,
-  VilkarUtfallType,
-  getKodeverknavnFn,
-  AksjonspunktKode,
-  AksjonspunktStatus,
-  VilkarType,
-} from '@navikt/fp-kodeverk';
-import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { required } from '@navikt/ft-form-validators';
 import { DateLabel, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import moment from 'moment';
+
+import {
+  AksjonspunktKode,
+  AksjonspunktStatus,
+  getKodeverknavnFn,
+  KodeverkType,
+  SoknadType,
+  VilkarType,
+  VilkarUtfallType,
+} from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import { Aksjonspunkt, AlleKodeverk, Behandling, FamilieHendelse, Soknad } from '@navikt/fp-types';
 import { SoknadsfristAp } from '@navikt/fp-types-avklar-aksjonspunkter';

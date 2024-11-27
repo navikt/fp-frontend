@@ -1,8 +1,9 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
+
+import { Heading } from '@navikt/ds-react';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { Heading } from '@navikt/ds-react';
 
 import { FamilieHendelseType, ForeldreType } from '@navikt/fp-kodeverk';
 

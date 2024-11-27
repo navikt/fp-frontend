@@ -1,10 +1,13 @@
-import { AlleKodeverk, Medlemskap } from '@navikt/fp-types';
-import { formaterUtenlandsopphold, getSisteBostedsLand, getSistePersonstatus, getSisteRegion } from './situasjonUtils';
-import { AdresseType } from '@navikt/fp-kodeverk';
-import { expect } from 'vitest';
 import { createIntl } from '@navikt/ft-utils';
-import messages from '../../../i18n/nb_NO.json';
+import { expect } from 'vitest';
+
+import { AdresseType } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { AlleKodeverk, Medlemskap } from '@navikt/fp-types';
+
+import { formaterUtenlandsopphold, getSisteBostedsLand, getSistePersonstatus, getSisteRegion } from './situasjonUtils';
+
+import messages from '../../../i18n/nb_NO.json';
 
 const defaultMedlemskapProps: Medlemskap = {
   regioner: [],

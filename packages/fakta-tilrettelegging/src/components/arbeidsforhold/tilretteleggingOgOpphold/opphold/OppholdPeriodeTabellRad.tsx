@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+
 import { Table, Tag } from '@navikt/ds-react';
-import { ArbeidsforholdFodselOgTilrettelegging, SvpAvklartOppholdPeriode } from '@navikt/fp-types';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
+
+import { ArbeidsforholdFodselOgTilrettelegging, SvpAvklartOppholdPeriode } from '@navikt/fp-types';
 
 import { OppholdForm } from './OppholdForm';
 

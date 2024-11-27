@@ -1,13 +1,14 @@
 import React from 'react';
-import { StoryFn } from '@storybook/react';
+
 import { action } from '@storybook/addon-actions';
+import { StoryFn } from '@storybook/react';
 
-import { RestApiMock } from '@navikt/fp-utils-test';
-import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
+import { getIntlDecorator } from '@navikt/fp-storybook-utils';
+import { RestApiMock } from '@navikt/fp-utils-test';
 
+import { requestApi,RestApiPathsKeys } from '../../data/fplosRestApi';
 import LeggTilSaksbehandlerForm from './LeggTilSaksbehandlerForm';
-import { RestApiPathsKeys, requestApi } from '../../data/fplosRestApi';
 
 import messages from '../../../i18n/nb_NO.json';
 

@@ -1,7 +1,9 @@
 import React from 'react';
-import { render, screen, waitFor, fireEvent } from '@testing-library/react';
+
 import { composeStories } from '@storybook/react';
+import { fireEvent,render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+
 import * as stories from './OmsorgOgForeldreansvarFaktaIndex.stories';
 
 const { ÅpentAksjonspunktForOmsorgovertakelse, ÅpentAksjonspunktForAvklareVilkårForForeldreansvar } =

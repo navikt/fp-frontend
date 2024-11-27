@@ -1,15 +1,17 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { KlageVurdering, StandardProsessPanelProps } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
-import messages from '../i18n/nb_NO.json';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { KlageVurdering, StandardProsessPanelProps } from '@navikt/fp-types';
+
 import BehandleKlageFormKa from './components/ka/BehandleKlageFormKa';
 import BehandleKlageFormNfp from './components/nfp/BehandleKlageFormNfp';
 import { BrevData } from './components/nfp/PreviewKlageLink';
 import { TransformedValues } from './components/nfp/TempsaveKlageButton';
+
+import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 

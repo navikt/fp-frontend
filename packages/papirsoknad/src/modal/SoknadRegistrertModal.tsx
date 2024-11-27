@@ -1,11 +1,13 @@
 import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 import { Link } from 'react-router-dom';
+
 import { Alert, Button, Modal } from '@navikt/ds-react';
 import { createIntl } from '@navikt/ft-utils';
 
-import messages from '../../i18n/nb_NO.json';
 import styles from './soknadRegistrertModal.module.css';
+
+import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 

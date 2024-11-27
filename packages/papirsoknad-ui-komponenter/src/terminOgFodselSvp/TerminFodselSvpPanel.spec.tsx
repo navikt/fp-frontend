@@ -1,8 +1,8 @@
-import { fireEvent, screen } from '@testing-library/react';
-import dayjs from 'dayjs';
-import { composeStories } from '@storybook/react';
-import userEvent from '@testing-library/user-event';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { composeStories } from '@storybook/react';
+import { fireEvent, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import dayjs from 'dayjs';
 
 import * as stories from './TerminFodselSvpPanel.stories';
 

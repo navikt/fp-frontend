@@ -1,10 +1,13 @@
 import React, { ReactElement } from 'react';
 import { RawIntlProvider } from 'react-intl';
-import { BehandlingAppKontekst, KodeverkMedNavn } from '@navikt/fp-types';
-import { KodeverkType } from '@navikt/fp-kodeverk';
+
 import { createIntl } from '@navikt/ft-utils';
 
+import { KodeverkType } from '@navikt/fp-kodeverk';
+import { BehandlingAppKontekst, KodeverkMedNavn } from '@navikt/fp-types';
+
 import { BehandlingerListe } from './components/BehandlingerListe';
+
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);

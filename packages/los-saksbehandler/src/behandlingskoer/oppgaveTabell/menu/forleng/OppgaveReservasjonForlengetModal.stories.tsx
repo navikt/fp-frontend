@@ -1,11 +1,12 @@
 import { action } from '@storybook/addon-actions';
+import { Meta, StoryObj } from '@storybook/react/*';
+
 import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
 import { OppgaveReservasjonForlengetModal } from './OppgaveReservasjonForlengetModal';
 
 import messages from '../../../../../i18n/nb_NO.json';
-import { Meta, StoryObj } from '@storybook/react/*';
 
 const withIntl = getIntlDecorator(messages);
 

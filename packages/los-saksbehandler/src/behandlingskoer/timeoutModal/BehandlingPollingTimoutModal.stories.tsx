@@ -1,9 +1,10 @@
+import { Meta, StoryObj } from '@storybook/react/*';
+
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
 import { BehandlingPollingTimoutModal } from './BehandlingPollingTimoutModal';
 
 import messages from '../../../i18n/nb_NO.json';
-import { Meta, StoryObj } from '@storybook/react/*';
 
 const withIntl = getIntlDecorator(messages);
 

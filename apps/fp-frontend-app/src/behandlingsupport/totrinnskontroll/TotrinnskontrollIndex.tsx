@@ -1,19 +1,20 @@
-import React, { useState, useCallback } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import React, { useCallback,useState } from 'react';
+import { useIntl } from 'react-intl';
+import { useLocation,useNavigate } from 'react-router-dom';
 
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
+import { BehandlingStatus } from '@navikt/fp-kodeverk';
 import { TotrinnskontrollSakIndex } from '@navikt/fp-sak-totrinnskontroll';
 import { FatterVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { useIntl } from 'react-intl';
-import { BehandlingStatus } from '@navikt/fp-kodeverk';
-import { FagsakData } from '../../fagsak/FagsakData';
-import { useVisForhandsvisningAvMelding } from '../../data/useVisForhandsvisningAvMelding';
 import { createLocationForSkjermlenke } from '../../app/paths';
-import { useKodeverk } from '../../data/useKodeverk';
-import { BeslutterModalIndex } from './BeslutterModalIndex';
 import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
+import { useKodeverk } from '../../data/useKodeverk';
+import { useVisForhandsvisningAvMelding } from '../../data/useVisForhandsvisningAvMelding';
+import { FagsakData } from '../../fagsak/FagsakData';
 import { SupportHeaderAndContent } from '../SupportHeader';
+import { BeslutterModalIndex } from './BeslutterModalIndex';
 
 type Values = {
   fatterVedtakAksjonspunktDto: {

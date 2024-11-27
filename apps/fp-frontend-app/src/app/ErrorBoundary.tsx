@@ -1,6 +1,8 @@
-import React, { Component, ReactNode, ErrorInfo } from 'react';
-import { captureException, withScope } from '@sentry/browser';
+import React, { Component, ErrorInfo,ReactNode } from 'react';
+
 import { ErrorMessage } from '@navikt/ds-react';
+import { captureException, withScope } from '@sentry/browser';
+
 import { ErrorPage } from '@navikt/fp-sak-infosider';
 
 interface OwnProps {

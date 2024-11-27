@@ -1,10 +1,11 @@
 import React from 'react';
-import dayjs from 'dayjs';
 import { useIntl } from 'react-intl';
-import { Heading, Detail, HStack, VStack } from '@navikt/ds-react';
+
+import { FigureInwardFillIcon, FigureOutwardFillIcon } from '@navikt/aksel-icons';
+import { Detail, Heading, HStack, VStack } from '@navikt/ds-react';
+import dayjs from 'dayjs';
 
 import { KjønnkodeEnum, Person } from '@navikt/fp-types';
-import { FigureInwardFillIcon, FigureOutwardFillIcon } from '@navikt/aksel-icons';
 
 import { Aldersvisning } from './Aldersvisning';
 import { MerkePanel } from './Merkepanel';

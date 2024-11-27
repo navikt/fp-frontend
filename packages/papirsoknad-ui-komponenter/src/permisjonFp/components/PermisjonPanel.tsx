@@ -1,29 +1,30 @@
 import React, { useEffect } from 'react';
+import { useFormContext,UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { UseFormGetValues, useFormContext } from 'react-hook-form';
-import { Label, Heading, ErrorMessage } from '@navikt/ds-react';
-import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
+import { ErrorMessage,Heading, Label } from '@navikt/ds-react';
 import { CheckboxField } from '@navikt/ft-form-hooks';
+import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { AlleKodeverk } from '@navikt/fp-types';
 import { ForeldreType } from '@navikt/fp-kodeverk';
+import { AlleKodeverk } from '@navikt/fp-types';
 
-import { PermisjonUtsettelsePanel, FormValues as FormValuesUtsettelse } from './PermisjonUtsettelsePanel';
-import { PermisjonGraderingPanel, FormValues as FormValuesGradering } from './PermisjonGraderingPanel';
-import { GRADERING_PERIODE_FIELD_ARRAY_NAME } from './RenderGraderingPeriodeFieldArray';
+import { FormValues as FormValuesGradering,PermisjonGraderingPanel } from './PermisjonGraderingPanel';
+import { FormValues as FormValuesOpphold,PermisjonOppholdPanel } from './PermisjonOppholdPanel';
 import {
-  PermisjonOverforingAvKvoterPanel,
   FormValues as FormValuesOverforing,
+  PermisjonOverforingAvKvoterPanel,
 } from './PermisjonOverforingAvKvoterPanel';
-import {
-  RenderPermisjonPeriodeFieldArray,
-  PERMISJON_PERIODE_FIELD_ARRAY_NAME,
-  FormValues as FormValuesPermisjon,
-} from './RenderPermisjonPeriodeFieldArray';
-import { PermisjonOppholdPanel, FormValues as FormValuesOpphold } from './PermisjonOppholdPanel';
-import { UTSETTELSE_PERIODE_FIELD_ARRAY_NAME } from './RenderUtsettelsePeriodeFieldArray';
-import { OVERFORING_PERIODE_FIELD_ARRAY_NAME } from './RenderOverforingAvKvoterFieldArray';
+import { FormValues as FormValuesUtsettelse,PermisjonUtsettelsePanel } from './PermisjonUtsettelsePanel';
+import { GRADERING_PERIODE_FIELD_ARRAY_NAME } from './RenderGraderingPeriodeFieldArray';
 import { OPPHOLD_PERIODE_FIELD_ARRAY_NAME } from './RenderOppholdPeriodeFieldArray';
+import { OVERFORING_PERIODE_FIELD_ARRAY_NAME } from './RenderOverforingAvKvoterFieldArray';
+import {
+  FormValues as FormValuesPermisjon,
+  PERMISJON_PERIODE_FIELD_ARRAY_NAME,
+  RenderPermisjonPeriodeFieldArray,
+} from './RenderPermisjonPeriodeFieldArray';
+import { UTSETTELSE_PERIODE_FIELD_ARRAY_NAME } from './RenderUtsettelsePeriodeFieldArray';
 
 import styles from './permisjonPanel.module.css';
 

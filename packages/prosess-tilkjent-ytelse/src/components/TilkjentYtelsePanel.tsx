@@ -1,24 +1,26 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
+
 import { BodyShort, Heading, Label } from '@navikt/ds-react';
+import { EditedIcon, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   Aksjonspunkt,
+  AlleKodeverk,
   ArbeidsgiverOpplysningerPerId,
   BeregningsresultatDagytelse,
+  Fagsak,
+  FamilieHendelseSamling,
   Feriepengegrunnlag,
-  AlleKodeverk,
+  Kjønnkode,
   Personoversikt,
   Soknad,
-  Kjønnkode,
-  FamilieHendelseSamling,
-  Fagsak,
 } from '@navikt/fp-types';
 
-import { EditedIcon, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import FeriepengerIndex from './feriepenger/FeriepengerIndex';
 import TilkjentYtelse from './TilkjentYtelse';
+
 import styles from './tilkjentYtelse.module.css';
 
 const finnTilbaketrekkAksjonspunktBegrunnelse = (alleAksjonspunkter: Aksjonspunkt[]): string | undefined =>

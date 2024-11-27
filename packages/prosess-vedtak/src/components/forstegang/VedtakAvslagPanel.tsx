@@ -1,10 +1,11 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Label, BodyShort } from '@navikt/ds-react';
 
-import { AlleKodeverk, Vilkar, Behandlingsresultat } from '@navikt/fp-types';
+import { BodyShort,Label } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { getKodeverknavnFn, VilkarUtfallType, KodeverkType } from '@navikt/fp-kodeverk';
+
+import { getKodeverknavnFn, KodeverkType,VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AlleKodeverk, Behandlingsresultat,Vilkar } from '@navikt/fp-types';
 
 import VedtakFritekstPanel from '../felles/VedtakFritekstPanel';
 

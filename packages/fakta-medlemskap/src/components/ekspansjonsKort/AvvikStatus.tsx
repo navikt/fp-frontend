@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { CircleFillIcon } from '@navikt/aksel-icons';
 
 const AvvikStatus = ({ harAvvik }: { harAvvik: boolean }) => (

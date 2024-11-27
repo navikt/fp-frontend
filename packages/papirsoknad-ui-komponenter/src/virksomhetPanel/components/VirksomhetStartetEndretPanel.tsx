@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
-import { ErrorMessage, Label } from '@navikt/ds-react';
-import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { hasValidDate, hasValidInteger, required, hasValidText } from '@navikt/ft-form-validators';
-import { CheckboxField, Datepicker, InputField, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
-
 import { useFormContext } from 'react-hook-form';
+import { FormattedMessage, useIntl } from 'react-intl';
+
+import { ErrorMessage, Label } from '@navikt/ds-react';
+import { CheckboxField, Datepicker, InputField, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
+import { hasValidDate, hasValidInteger, hasValidText,required } from '@navikt/ft-form-validators';
+import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
 import styles from './virksomhetStartetEndretPanel.module.css';
 
 type VirtuellFeilType = {

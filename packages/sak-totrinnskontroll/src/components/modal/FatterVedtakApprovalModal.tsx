@@ -1,9 +1,10 @@
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Modal, Button, Label, HStack, VStack } from '@navikt/ds-react';
 
-import { BehandlingType, BehandlingResultatType, BehandlingStatus } from '@navikt/fp-kodeverk';
+import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
+import { BodyShort, Button, HStack, Label, Modal, VStack } from '@navikt/ds-react';
+
+import { BehandlingResultatType, BehandlingStatus,BehandlingType } from '@navikt/fp-kodeverk';
 import { Behandling } from '@navikt/fp-types';
 
 import styles from './fatterVedtakApprovalModal.module.css';

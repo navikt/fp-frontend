@@ -1,9 +1,10 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
-import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { required } from '@navikt/ft-form-validators';
-import { RadioGroupPanel } from '@navikt/ft-form-hooks';
+
 import { Heading } from '@navikt/ds-react';
+import { RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { required } from '@navikt/ft-form-validators';
+import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 const sprakvalg = {
   BOKMAL: 'NB',

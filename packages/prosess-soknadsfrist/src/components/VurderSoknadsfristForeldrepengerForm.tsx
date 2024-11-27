@@ -1,10 +1,10 @@
 import React, { FunctionComponent, useMemo } from 'react';
-import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import moment from 'moment';
-import { Label, BodyShort, Detail, Heading, Panel } from '@navikt/ds-react';
+import { FormattedMessage } from 'react-intl';
 
-import { Form, Datepicker, RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { BodyShort, Detail, Heading, Label, Panel } from '@navikt/ds-react';
+import { Datepicker, Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { dateBeforeOrEqualToToday, hasValidDate, required } from '@navikt/ft-form-validators';
 import {
   AksjonspunktHelpTextTemp,
   ArrowBox,
@@ -14,11 +14,12 @@ import {
   VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
-import { dateBeforeOrEqualToToday, hasValidDate, required } from '@navikt/ft-form-validators';
+import moment from 'moment';
+
+import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import { Aksjonspunkt, Søknadsfrist } from '@navikt/fp-types';
 import { VurderSoknadsfristAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 
 import styles from './vurderSoknadsfristForeldrepengerForm.module.css';
 

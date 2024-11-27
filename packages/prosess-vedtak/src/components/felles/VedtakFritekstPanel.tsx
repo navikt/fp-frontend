@@ -1,12 +1,13 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
+
 import { Detail } from '@navikt/ds-react';
+import { TextAreaField } from '@navikt/ft-form-hooks';
+import { hasValidText, maxLength, minLength } from '@navikt/ft-form-validators';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { decodeHtmlEntity, formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
 import { Behandlingsresultat } from '@navikt/fp-types';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { TextAreaField } from '@navikt/ft-form-hooks';
-import { decodeHtmlEntity, formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
-import { hasValidText, maxLength, minLength } from '@navikt/ft-form-validators';
 
 import styles from './vedtakFritekstPanel.module.css';
 

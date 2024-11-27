@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-import { Response } from './ResponseTsType';
-import AsyncPollingStatus from './asyncPollingStatus';
-import RequestRunner, { REQUEST_POLLING_CANCELLED } from './RequestRunner';
-import NotificationMapper from './NotificationMapper';
 import HttpClientApi from '../HttpClientApiTsType';
+import AsyncPollingStatus from './asyncPollingStatus';
+import NotificationMapper from './NotificationMapper';
+import RequestRunner, { REQUEST_POLLING_CANCELLED } from './RequestRunner';
+import { Response } from './ResponseTsType';
 
 class NotificationHelper {
   mapper: NotificationMapper;

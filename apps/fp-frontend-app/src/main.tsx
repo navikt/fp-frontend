@@ -1,13 +1,15 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+
 import { Event, EventHint, init, Integrations } from '@sentry/browser';
 import dayjs from 'dayjs';
-import 'dayjs/locale/nb.js';
 
 import { RestApiErrorProvider, RestApiProvider } from '@navikt/fp-rest-api-hooks';
 
 import { AppIndex } from './app/AppIndex';
+
+import 'dayjs/locale/nb.js';
 
 dayjs.locale('nb');
 

@@ -1,24 +1,25 @@
 import React, { useCallback, useState } from 'react';
 import { useIntl } from 'react-intl';
 
-import { VilkarUtfallType, AksjonspunktStatus, BehandlingResultatType, AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { VedtakKlageProsessIndex, VedtakKlageBrevData } from '@navikt/fp-prosess-vedtak-klage';
+import { forhandsvisDokument } from '@navikt/ft-utils';
+
+import { AksjonspunktKode,AksjonspunktStatus, BehandlingResultatType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
+import { VedtakKlageBrevData,VedtakKlageProsessIndex } from '@navikt/fp-prosess-vedtak-klage';
 import {
+  Aksjonspunkt,
   Behandling,
   Behandlingsresultat,
   Fagsak,
-  Aksjonspunkt,
   ForhåndsvisMeldingParams,
   KlageVurdering,
 } from '@navikt/fp-types';
-import { forhandsvisDokument } from '@navikt/ft-utils';
 
-import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
-import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
-import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
-import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
+import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
+import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
+import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 
 const lagForhandsvisCallback =
   (

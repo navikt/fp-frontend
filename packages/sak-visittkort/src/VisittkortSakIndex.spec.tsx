@@ -1,8 +1,10 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+
 import { composeStories } from '@storybook/react';
-import * as stories from './VisittkortSakIndex.stories';
+import { render, screen } from '@testing-library/react';
 import { expect } from 'vitest';
+
+import * as stories from './VisittkortSakIndex.stories';
 
 const {
   UtenAnnenPart,

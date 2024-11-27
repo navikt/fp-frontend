@@ -1,10 +1,11 @@
 import React, { FunctionComponent } from 'react';
-import dayjs from 'dayjs';
 import { FormattedMessage } from 'react-intl';
-import { BodyShort, HStack, Label, VStack } from '@navikt/ds-react';
 
-import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT, formatCurrencyNoKr } from '@navikt/ft-utils';
+import { BodyShort, HStack, Label, VStack } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { DDMMYYYY_DATE_FORMAT, formatCurrencyNoKr,ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import dayjs from 'dayjs';
+
 import { OpptjeningAktivitetType } from '@navikt/fp-kodeverk';
 import { ArbeidsgiverOpplysningerPerId, FerdiglignetNæring } from '@navikt/fp-types';
 

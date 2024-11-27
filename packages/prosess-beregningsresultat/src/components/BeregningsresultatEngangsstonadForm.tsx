@@ -1,15 +1,16 @@
-import React, { FunctionComponent, useState, useCallback } from 'react';
+import React, { FunctionComponent, useCallback,useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
-import { Label, Detail, Heading } from '@navikt/ds-react';
 
-import { Aksjonspunkt, BeregningsresultatEs } from '@navikt/fp-types';
-import { VerticalSpacer, OverstyringKnapp, FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
+import { Detail, Heading,Label } from '@navikt/ds-react';
+import { Form,InputField } from '@navikt/ft-form-hooks';
 import { hasValidInteger, maxValue, minValue, required } from '@navikt/ft-form-validators';
-import { formatCurrencyWithKr, decodeHtmlEntity } from '@navikt/ft-utils';
-import { InputField, Form } from '@navikt/ft-form-hooks';
+import { FlexColumn, FlexContainer, FlexRow,OverstyringKnapp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { decodeHtmlEntity,formatCurrencyWithKr } from '@navikt/ft-utils';
+
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { OverstyringPanel } from '@navikt/fp-prosess-felles';
+import { Aksjonspunkt, BeregningsresultatEs } from '@navikt/fp-types';
 import { OverstyringBeregningAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import styles from './beregningsresultatEngangsstonadForm.module.css';

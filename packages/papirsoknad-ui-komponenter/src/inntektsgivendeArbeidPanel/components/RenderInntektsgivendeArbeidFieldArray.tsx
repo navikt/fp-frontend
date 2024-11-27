@@ -1,12 +1,14 @@
 import React, { ReactElement } from 'react';
+import { useFieldArray, useFormContext } from 'react-hook-form';
 import { useIntl } from 'react-intl';
-import { maxLength, hasValidDate } from '@navikt/ft-form-validators';
+
+import { Datepicker, InputField, PeriodFieldArray,SelectField } from '@navikt/ft-form-hooks';
+import { hasValidDate,maxLength } from '@navikt/ft-form-validators';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { Datepicker, InputField, SelectField, PeriodFieldArray } from '@navikt/ft-form-hooks';
+
 import { KodeverkType, Landkode } from '@navikt/fp-kodeverk';
 import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
-import { useFieldArray, useFormContext } from 'react-hook-form';
 import styles from './renderInntektsgivendeArbeidFieldArray.module.css';
 
 const maxLength50 = maxLength(50);

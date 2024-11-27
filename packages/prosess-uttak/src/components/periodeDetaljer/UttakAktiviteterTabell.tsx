@@ -1,7 +1,9 @@
 import React, { FunctionComponent, ReactElement, useMemo } from 'react';
+import { useFieldArray, useFormContext,UseFormGetValues } from 'react-hook-form';
 import { IntlShape, useIntl } from 'react-intl';
+
 import { BodyShort, HStack } from '@navikt/ds-react';
-import { SelectField, NumberField } from '@navikt/ft-form-hooks';
+import { NumberField,SelectField } from '@navikt/ft-form-hooks';
 import {
   hasValidDecimal,
   hasValidInteger,
@@ -13,12 +15,11 @@ import {
 } from '@navikt/ft-form-validators';
 import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 
-import { UttakPeriodeType, UttakArbeidType } from '@navikt/fp-kodeverk';
+import { UttakArbeidType,UttakPeriodeType } from '@navikt/fp-kodeverk';
 import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, PeriodeSoker, PeriodeSokerAktivitet } from '@navikt/fp-types';
 
-import { UseFormGetValues, useFieldArray, useFormContext } from 'react-hook-form';
-import uttakArbeidTypeTekstCodes from '../../utils/uttakArbeidTypeCodes';
 import lagVisningsNavn from '../../utils/lagVisningsNavn';
+import uttakArbeidTypeTekstCodes from '../../utils/uttakArbeidTypeCodes';
 import { UttakAktivitetType } from './UttakAktivitetType';
 
 import styles from './uttakAktiviteterTabell.module.css';

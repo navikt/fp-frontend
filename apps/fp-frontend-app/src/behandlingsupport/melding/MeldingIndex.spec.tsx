@@ -1,17 +1,20 @@
 import React from 'react';
+import { RawIntlProvider } from 'react-intl';
 import { MemoryRouter } from 'react-router-dom';
+
+import { createIntl } from '@navikt/ft-utils';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import MockAdapter from 'axios-mock-adapter';
-import { createIntl } from '@navikt/ft-utils';
-import { RestApiMock } from '@navikt/fp-utils-test';
-import { FagsakYtelseType, BehandlingType, KodeverkType, DokumentMalType } from '@navikt/fp-kodeverk';
-import { Fagsak, BehandlingAppKontekst } from '@navikt/fp-types';
 
-import { RawIntlProvider } from 'react-intl';
-import { requestFagsakApi, FagsakApiKeys } from '../../data/fagsakContextApi';
-import { MeldingIndex } from './MeldingIndex';
+import { BehandlingType, DokumentMalType,FagsakYtelseType, KodeverkType } from '@navikt/fp-kodeverk';
+import { BehandlingAppKontekst,Fagsak } from '@navikt/fp-types';
+import { RestApiMock } from '@navikt/fp-utils-test';
+
+import { FagsakApiKeys,requestFagsakApi } from '../../data/fagsakContextApi';
 import { FagsakData } from '../../fagsak/FagsakData';
+import { MeldingIndex } from './MeldingIndex';
+
 import messages from '../../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);

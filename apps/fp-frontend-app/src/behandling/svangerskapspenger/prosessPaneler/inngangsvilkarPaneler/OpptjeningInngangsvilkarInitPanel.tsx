@@ -1,14 +1,14 @@
 import React from 'react';
+import { useIntl } from 'react-intl';
 
 import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
-import { AksessRettigheter, Opptjening } from '@navikt/fp-types';
 import { OpptjeningVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-opptjening';
+import { AksessRettigheter, Opptjening } from '@navikt/fp-types';
 
-import { useIntl } from 'react-intl';
-import { InngangsvilkarPanelInitProps } from '../../../felles/typer/inngangsvilkarPanelInitProps';
+import { BehandlingApiKeys } from '../../../../data/behandlingContextApi';
 import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 import { OverstyringPanelDef } from '../../../felles/prosess/OverstyringPanelDef';
-import { BehandlingApiKeys } from '../../../../data/behandlingContextApi';
+import { InngangsvilkarPanelInitProps } from '../../../felles/typer/inngangsvilkarPanelInitProps';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_OPPTJENINGSVILKARET];
 

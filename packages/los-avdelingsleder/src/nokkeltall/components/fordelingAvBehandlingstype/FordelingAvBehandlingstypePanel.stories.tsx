@@ -1,12 +1,12 @@
 import React from 'react';
+
 import { StoryFn } from '@storybook/react';
+
 import { BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
-
+import { alleKodeverkLos,getIntlDecorator } from '@navikt/fp-storybook-utils';
 import { RestApiMock } from '@navikt/fp-utils-test';
-import { getIntlDecorator, alleKodeverkLos } from '@navikt/fp-storybook-utils';
 
-import { RestApiGlobalStatePathsKeys, requestApi } from '../../../data/fplosRestApi';
-
+import { requestApi,RestApiGlobalStatePathsKeys } from '../../../data/fplosRestApi';
 import OppgaverForAvdeling from '../../../typer/oppgaverForAvdelingTsType';
 import { FordelingAvBehandlingstypePanel } from './FordelingAvBehandlingstypePanel';
 

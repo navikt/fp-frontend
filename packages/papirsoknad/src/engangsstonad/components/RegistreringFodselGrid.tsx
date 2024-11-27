@@ -1,20 +1,21 @@
 import React, { FunctionComponent } from 'react';
 
-import { AlleKodeverk } from '@navikt/fp-types';
+import { HStack } from '@navikt/ds-react';
+
 import { FamilieHendelseType, ForeldreType } from '@navikt/fp-kodeverk';
 import {
-  SprakPapirsoknadIndex,
-  RettigheterPapirsoknadIndex,
-  OppholdINorgePapirsoknadIndex,
-  OppholdINorgeFormValues,
-  FodselPapirsoknadIndex,
   FodselFormValues,
-  OmsorgOgAdopsjonPapirsoknadIndex,
+  FodselPapirsoknadIndex,
   OmsorgOgAdopsjonFormValues,
-  SoknadData,
+  OmsorgOgAdopsjonPapirsoknadIndex,
   OmsorgOgAdopsjonTransformedFormValues,
+  OppholdINorgeFormValues,
+  OppholdINorgePapirsoknadIndex,
+  RettigheterPapirsoknadIndex,
+  SoknadData,
+  SprakPapirsoknadIndex,
 } from '@navikt/fp-papirsoknad-ui-komponenter';
-import { HStack } from '@navikt/ds-react';
+import { AlleKodeverk } from '@navikt/fp-types';
 
 import styles from './registreringFodselGrid.module.css';
 

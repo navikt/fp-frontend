@@ -1,14 +1,15 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+
 import { Panel } from '@navikt/ds-react';
+import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktStatus } from '@navikt/fp-kodeverk';
-import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { Risikoklassifisering, Aksjonspunkt, KodeverkMedNavn } from '@navikt/fp-types';
+import { Aksjonspunkt, KodeverkMedNavn,Risikoklassifisering } from '@navikt/fp-types';
 
-import { Faresignaler } from './Faresignaler';
-import { AvklarFaresignalerForm } from './AvklarFaresignalerForm';
 import { AvklartRisikoklassifiseringAp } from '../types/AvklartRisikoklassifiseringAp';
+import { AvklarFaresignalerForm } from './AvklarFaresignalerForm';
+import { Faresignaler } from './Faresignaler';
 
 interface Props {
   risikoklassifisering: Risikoklassifisering;

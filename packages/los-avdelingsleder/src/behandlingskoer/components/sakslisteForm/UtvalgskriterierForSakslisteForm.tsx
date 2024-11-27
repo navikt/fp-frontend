@@ -1,18 +1,19 @@
-import React, { FunctionComponent, useEffect, useCallback, useMemo } from 'react';
-import { useIntl, FormattedMessage, IntlShape } from 'react-intl';
+import React, { FunctionComponent, useCallback, useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
-import { Heading, BodyShort, Panel, VStack, HStack } from '@navikt/ds-react';
-import { required, minLength, maxLength, hasValidName } from '@navikt/ft-form-validators';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { FormattedMessage, IntlShape,useIntl } from 'react-intl';
+
+import { BodyShort, Heading, HStack,Panel, VStack } from '@navikt/ds-react';
 import { Form, InputField } from '@navikt/ft-form-hooks';
+import { hasValidName,maxLength, minLength, required } from '@navikt/ft-form-validators';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { restApiHooks, RestApiPathsKeys } from '../../../data/fplosRestApi';
-import BehandlingstypeVelger from './filtrering/BehandlingstypeVelger';
+import Saksliste from '../../../typer/sakslisteAvdelingTsType';
 import AndreKriterierVelger from './filtrering/AndreKriterierVelger';
+import BehandlingstypeVelger from './filtrering/BehandlingstypeVelger';
 import FagsakYtelseTypeVelger from './filtrering/FagsakYtelseTypeVelger';
 import SorteringVelger from './sortering/SorteringVelger';
 import useDebounce from './useDebounce';
-import Saksliste from '../../../typer/sakslisteAvdelingTsType';
 
 import styles from './utvalgskriterierForSakslisteForm.module.css';
 

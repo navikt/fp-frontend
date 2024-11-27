@@ -1,10 +1,11 @@
 import React, { ReactNode } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
-import { Heading } from '@navikt/ds-react';
 
+import { Heading } from '@navikt/ds-react';
 import { createIntl } from '@navikt/ft-utils';
 
 import styles from './errorPageWrapper.module.css';
+
 import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);

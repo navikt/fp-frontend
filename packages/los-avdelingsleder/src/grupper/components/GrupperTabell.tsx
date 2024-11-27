@@ -1,8 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { BodyShort, Label, Table } from '@navikt/ds-react';
+
 import { XMarkIcon } from '@navikt/aksel-icons';
+import { BodyShort, Label, Table } from '@navikt/ds-react';
+
 import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
+
 import SaksbehandlereOgSaksbehandlerGrupper from '../../typer/saksbehandlereOgSaksbehandlerGrupper ';
 import GruppeSaksbehandlere from './GruppeSaksbehandlere';
 

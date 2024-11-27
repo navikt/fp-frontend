@@ -1,5 +1,7 @@
 import React from 'react';
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
+
 import { Label } from '@navikt/ds-react';
 import { CheckboxField } from '@navikt/ft-form-hooks';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -7,12 +9,11 @@ import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { KodeverkType } from '@navikt/fp-kodeverk';
 import { AlleKodeverk } from '@navikt/fp-types';
 
-import { useFormContext } from 'react-hook-form';
 import {
-  RenderOppholdPeriodeFieldArray,
-  OPPHOLD_PERIODE_FIELD_ARRAY_NAME,
-  TIDSROM_PERMISJON_FORM_NAME_PREFIX,
   FormValues as PeriodeFormValues,
+  OPPHOLD_PERIODE_FIELD_ARRAY_NAME,
+  RenderOppholdPeriodeFieldArray,
+  TIDSROM_PERMISJON_FORM_NAME_PREFIX,
 } from './RenderOppholdPeriodeFieldArray';
 
 export type FormValues = {

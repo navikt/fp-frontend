@@ -1,18 +1,20 @@
 import React, { FunctionComponent } from 'react';
-import { AlleKodeverk } from '@navikt/fp-types';
-import {
-  SprakPapirsoknadIndex,
-  RettigheterPapirsoknadIndex,
-  OppholdINorgePapirsoknadIndex,
-  OppholdINorgeFormValues,
-  OmsorgOgAdopsjonPapirsoknadIndex,
-  OmsorgOgAdopsjonFormValues,
-  SoknadData,
-  OmsorgOgAdopsjonTransformedFormValues,
-} from '@navikt/fp-papirsoknad-ui-komponenter';
-import { FamilieHendelseType } from '@navikt/fp-kodeverk';
 
 import { HStack } from '@navikt/ds-react';
+
+import { FamilieHendelseType } from '@navikt/fp-kodeverk';
+import {
+  OmsorgOgAdopsjonFormValues,
+  OmsorgOgAdopsjonPapirsoknadIndex,
+  OmsorgOgAdopsjonTransformedFormValues,
+  OppholdINorgeFormValues,
+  OppholdINorgePapirsoknadIndex,
+  RettigheterPapirsoknadIndex,
+  SoknadData,
+  SprakPapirsoknadIndex,
+} from '@navikt/fp-papirsoknad-ui-komponenter';
+import { AlleKodeverk } from '@navikt/fp-types';
+
 import styles from './registreringAdopsjonOgOmsorgGrid.module.css';
 
 const OMSORG_FORM_NAME_PREFIX = 'omsorg';

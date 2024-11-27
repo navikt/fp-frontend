@@ -1,11 +1,12 @@
 import React from 'react';
+
 import { action } from '@storybook/addon-actions';
 import { StoryFn } from '@storybook/react';
 
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
-import SletteSakslisteModal from './SletteSakslisteModal';
 import Saksliste from '../../typer/sakslisteAvdelingTsType';
+import SletteSakslisteModal from './SletteSakslisteModal';
 
 import messages from '../../../i18n/nb_NO.json';
 

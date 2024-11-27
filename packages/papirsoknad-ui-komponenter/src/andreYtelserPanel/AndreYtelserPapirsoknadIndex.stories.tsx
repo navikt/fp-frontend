@@ -1,10 +1,12 @@
 import React from 'react';
-import { Meta, StoryObj } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
 import { useForm } from 'react-hook-form';
-import { Form } from '@navikt/ft-form-hooks';
-import { KodeverkType } from '@navikt/fp-kodeverk';
+
 import { Button, VStack } from '@navikt/ds-react';
+import { Form } from '@navikt/ft-form-hooks';
+import { action } from '@storybook/addon-actions';
+import { Meta, StoryObj } from '@storybook/react';
+
+import { KodeverkType } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 import { AndreYtelserPapirsoknadIndex } from './AndreYtelserPapirsoknadIndex';

@@ -1,6 +1,8 @@
 import React, { ReactNode } from 'react';
 import { RawIntlProvider } from 'react-intl';
+
 import { createIntl } from '@navikt/ft-utils';
+
 import { AlleKodeverk } from '@navikt/fp-types';
 
 import { AnnenForelderPanel } from './components/AnnenForelderPanel';

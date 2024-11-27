@@ -1,6 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
+import { createIntl } from '@navikt/ft-utils';
+
 import {
   ArbeidOgInntektsmelding,
   ArbeidsgiverOpplysningerPerId,
@@ -8,11 +10,11 @@ import {
   ManueltArbeidsforhold,
   StandardFaktaPanelProps,
 } from '@navikt/fp-types';
-import { createIntl } from '@navikt/ft-utils';
 
 import ArbeidOgInntektFaktaPanel from './components/ArbeidOgInntektFaktaPanel';
-import messages from '../i18n/nb_NO.json';
 import { DirtyFormProvider } from './DirtyFormProvider';
+
+import messages from '../i18n/nb_NO.json';
 
 interface OwnProps {
   saksnummer: string;

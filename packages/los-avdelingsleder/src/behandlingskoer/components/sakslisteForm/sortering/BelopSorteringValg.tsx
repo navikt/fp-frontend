@@ -1,11 +1,12 @@
 import React, { FunctionComponent } from 'react';
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
-import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { hasValidPosOrNegInteger } from '@navikt/ft-form-validators';
+
 import { Detail, HStack } from '@navikt/ds-react';
 import { InputField } from '@navikt/ft-form-hooks';
+import { hasValidPosOrNegInteger } from '@navikt/ft-form-validators';
+import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { useFormContext } from 'react-hook-form';
 import useDebounce from '../useDebounce';
 
 import styles from './sorteringVelger.module.css';

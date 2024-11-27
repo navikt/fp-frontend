@@ -1,10 +1,11 @@
 import React from 'react';
-import { StoryFn } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
 
-import { AksjonspunktKode, Avslagsarsak, VilkarUtfallType, AksjonspunktStatus } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt, Behandling, Fagsak, Vilkar } from '@navikt/fp-types';
+import { action } from '@storybook/addon-actions';
+import { StoryFn } from '@storybook/react';
+
+import { AksjonspunktKode, AksjonspunktStatus,Avslagsarsak, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { Aksjonspunkt, Behandling, Fagsak, Vilkar } from '@navikt/fp-types';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import AdopsjonVilkarProsessIndex from './AdopsjonVilkarProsessIndex';

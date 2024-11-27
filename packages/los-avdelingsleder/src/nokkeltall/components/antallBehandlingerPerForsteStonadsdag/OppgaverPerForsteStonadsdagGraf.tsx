@@ -1,9 +1,11 @@
 import React, { FunctionComponent, useMemo } from 'react';
-import dayjs from 'dayjs';
-import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
-import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
+
 import { Panel } from '@navikt/ds-react';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
+import dayjs from 'dayjs';
+import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
+import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
+
 import { ReactECharts } from '@navikt/fp-los-felles';
 
 import OppgaverForForsteStonadsdag from '../../../typer/oppgaverForForsteStonadsdagTsType';

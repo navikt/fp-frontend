@@ -3,10 +3,10 @@ import React from 'react';
 import { AksjonspunktKode, AksjonspunktStatus, VilkarType } from '@navikt/fp-kodeverk';
 import { AksessRettigheter, Medlemskap } from '@navikt/fp-types';
 
-import { InngangsvilkarPanelInitProps } from '../../../felles/typer/inngangsvilkarPanelInitProps';
+import { BehandlingApiKeys } from '../../../../data/behandlingContextApi';
 import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 import { OverstyringPanelDef } from '../../../felles/prosess/OverstyringPanelDef';
-import { BehandlingApiKeys } from '../../../../data/behandlingContextApi';
+import { InngangsvilkarPanelInitProps } from '../../../felles/typer/inngangsvilkarPanelInitProps';
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,

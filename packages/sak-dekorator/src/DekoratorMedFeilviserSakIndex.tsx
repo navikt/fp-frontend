@@ -1,16 +1,17 @@
 import React, { useEffect, useRef } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
+
+import { ExternalLinkIcon, MenuGridIcon } from '@navikt/aksel-icons';
+import { Dropdown, InternalHeader, Link, Spacer } from '@navikt/ds-react';
 import { createIntl } from '@navikt/ft-utils';
 
-import { Dropdown, InternalHeader, Link, Spacer } from '@navikt/ds-react';
-import { ExternalLinkIcon, MenuGridIcon } from '@navikt/aksel-icons';
 import { FeilmeldingPanel } from './components/FeilmeldingPanel';
+import { DekoratorLenke } from './typer/dekoratorLenke';
 import { Feilmelding } from './typer/feilmeldingTsType';
 
-import messages from '../i18n/nb_NO.json';
-
 import styles from './dekoratorMedFeilviserSakIndex.module.css';
-import { DekoratorLenke } from './typer/dekoratorLenke';
+
+import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 

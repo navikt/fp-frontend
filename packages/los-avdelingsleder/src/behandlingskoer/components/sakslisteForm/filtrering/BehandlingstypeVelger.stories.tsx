@@ -1,14 +1,15 @@
 import React from 'react';
+import { useForm } from 'react-hook-form';
+
+import { Form } from '@navikt/ft-form-hooks';
 import { action } from '@storybook/addon-actions';
 import { StoryFn } from '@storybook/react';
-import { useForm } from 'react-hook-form';
-import { Form } from '@navikt/ft-form-hooks';
+
 import { BehandlingType } from '@navikt/fp-kodeverk';
-
+import { alleKodeverkLos,getIntlDecorator } from '@navikt/fp-storybook-utils';
 import { RestApiMock } from '@navikt/fp-utils-test';
-import { getIntlDecorator, alleKodeverkLos } from '@navikt/fp-storybook-utils';
 
-import { RestApiGlobalStatePathsKeys, RestApiPathsKeys, requestApi } from '../../../../data/fplosRestApi';
+import { requestApi,RestApiGlobalStatePathsKeys, RestApiPathsKeys } from '../../../../data/fplosRestApi';
 import BehandlingstypeVelger from './BehandlingstypeVelger';
 
 import messages from '../../../../../i18n/nb_NO.json';

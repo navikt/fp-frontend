@@ -1,13 +1,16 @@
 import React, { FunctionComponent, ReactElement, useMemo } from 'react';
-import { Label, Detail, Tag, Button, TagProps, CopyButton, HStack, VStack } from '@navikt/ds-react';
-import { TabsAddIcon } from '@navikt/aksel-icons';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { FormattedMessage } from 'react-intl';
+
+import { TabsAddIcon } from '@navikt/aksel-icons';
+import { Button, CopyButton, Detail, HStack, Label, Tag, TagProps, VStack } from '@navikt/ds-react';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
-import { FagsakStatus, FamilieHendelseType } from '@navikt/fp-kodeverk';
 import dayjs from 'dayjs';
-import { finnYtelseTekst } from './VelgSakForm';
+
+import { FagsakStatus, FamilieHendelseType } from '@navikt/fp-kodeverk';
+
 import JournalFagsak, { FamilieHendelse } from '../../../typer/journalFagsakTsType';
+import { finnYtelseTekst } from './VelgSakForm';
 
 import styles from './sakDetaljer.module.css';
 

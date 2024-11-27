@@ -1,9 +1,10 @@
 import React from 'react';
-import { createIntl } from '@navikt/ft-utils';
+
 import { Heading } from '@navikt/ds-react';
-import { BorderBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Datepicker } from '@navikt/ft-form-hooks';
 import { dateBeforeOrEqualToToday, hasValidDate, required } from '@navikt/ft-form-validators';
+import { BorderBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { createIntl } from '@navikt/ft-utils';
 
 import messages from '../../i18n/nb_NO.json';
 

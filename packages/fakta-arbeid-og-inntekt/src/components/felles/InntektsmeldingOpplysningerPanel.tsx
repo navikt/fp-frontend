@@ -1,13 +1,14 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Link, Label, BodyShort, Detail, VStack, HStack } from '@navikt/ds-react';
-import { DateLabel, PeriodLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { FileFillIcon, PhoneFillIcon } from '@navikt/aksel-icons';
 
-import { Inntektsmelding, AoIArbeidsforhold, AlleKodeverk } from '@navikt/fp-types';
+import { FileFillIcon, PhoneFillIcon } from '@navikt/aksel-icons';
+import { BodyShort, Detail, HStack,Label, Link, VStack } from '@navikt/ds-react';
+import { DateLabel, PeriodLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { formatCurrencyNoKr } from '@navikt/ft-utils';
-import { KodeverkType, getKodeverknavnFraKode } from '@navikt/fp-kodeverk';
+
+import { getKodeverknavnFraKode,KodeverkType } from '@navikt/fp-kodeverk';
 import { hentDokumentLenke } from '@navikt/fp-konstanter';
+import { AlleKodeverk,AoIArbeidsforhold, Inntektsmelding } from '@navikt/fp-types';
 
 import styles from './inntektsmeldingOpplysningerPanel.module.css';
 

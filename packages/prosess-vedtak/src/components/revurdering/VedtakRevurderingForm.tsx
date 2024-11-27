@@ -1,30 +1,32 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { IntlShape, useIntl } from 'react-intl';
+
+import { Form } from '@navikt/ft-form-hooks';
+import { DDMMYYYY_DATE_FORMAT, decodeHtmlEntity } from '@navikt/ft-utils';
 import moment from 'moment';
 
-import { DDMMYYYY_DATE_FORMAT, decodeHtmlEntity } from '@navikt/ft-utils';
 import {
-  KodeverkType,
+  AksjonspunktKode,
+  BehandlingArsakType,
+  DokumentMalType,
+  FagsakYtelseType,
+  getKodeverknavnFn,
   isAvslag,
   isInnvilget,
   isOpphor,
-  BehandlingArsakType,
-  getKodeverknavnFn,
-  FagsakYtelseType,
-  AksjonspunktKode,
-  DokumentMalType,
+  KodeverkType,
 } from '@navikt/fp-kodeverk';
-import { Form } from '@navikt/ft-form-hooks';
+import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import {
+  Aksjonspunkt,
   AlleKodeverk,
   Behandling,
   BeregningsresultatDagytelse,
   BeregningsresultatEs,
-  Vilkar,
-  Aksjonspunkt,
   SimuleringResultat,
   TilbakekrevingValg,
+  Vilkar,
 } from '@navikt/fp-types';
 import {
   ForeslaVedtakAp,
@@ -35,14 +37,13 @@ import {
   VurdereDokumentForVedtakAp,
   VurdereInntektsmeldingKlageForVedtakAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 
 import VedtakResultType from '../../kodeverk/vedtakResultType';
-import VedtakInnvilgetRevurderingPanel from './VedtakInnvilgetRevurderingPanel';
-import VedtakAvslagArsakOgBegrunnelsePanel from './VedtakAvslagArsakOgBegrunnelsePanel';
-import VedtakOpphorRevurderingPanel from './VedtakOpphorRevurderingPanel';
 import VedtakFellesPanel from '../felles/VedtakFellesPanel';
 import { getTilbakekrevingText } from '../felles/VedtakHelper';
+import VedtakAvslagArsakOgBegrunnelsePanel from './VedtakAvslagArsakOgBegrunnelsePanel';
+import VedtakInnvilgetRevurderingPanel from './VedtakInnvilgetRevurderingPanel';
+import VedtakOpphorRevurderingPanel from './VedtakOpphorRevurderingPanel';
 
 type RevurderingVedtakAksjonspunkter =
   | ForeslaVedtakAp

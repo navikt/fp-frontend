@@ -1,11 +1,12 @@
 import React, { FunctionComponent, useMemo } from 'react';
-import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
-import { Label, BodyShort, Heading } from '@navikt/ds-react';
 
-import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import { Soknad } from '@navikt/fp-types';
+import { BodyShort, Heading,Label } from '@navikt/ds-react';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import moment from 'moment';
+
+import { Soknad } from '@navikt/fp-types';
 
 import styles from './fodselSammenligningOtherPanel.module.css';
 

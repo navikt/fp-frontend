@@ -2,14 +2,15 @@ import React from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
 import { BodyShort, Box, Detail, HStack, Label, VStack } from '@navikt/ds-react';
-import { AlleKodeverk, KjønnkodeEnum, Personadresse } from '@navikt/fp-types';
-import { KodeverkType } from '@navikt/fp-kodeverk';
+import { Gender, GenderIcon } from '@navikt/ft-plattform-komponenter';
 import { createIntl, dateFormat } from '@navikt/ft-utils';
 
-import { Gender, GenderIcon } from '@navikt/ft-plattform-komponenter';
+import { KodeverkType } from '@navikt/fp-kodeverk';
+import { AlleKodeverk, KjønnkodeEnum, Personadresse } from '@navikt/fp-types';
+
+import { AdresseTabell } from '../adresser/AdresseTabell';
 
 import messages from '../../../i18n/nb_NO.json';
-import { AdresseTabell } from '../adresser/AdresseTabell';
 
 const intl = createIntl(messages);
 

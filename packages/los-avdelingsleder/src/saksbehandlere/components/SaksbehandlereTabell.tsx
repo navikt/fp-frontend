@@ -1,12 +1,14 @@
-import React, { FunctionComponent, useState, useCallback, useMemo } from 'react';
+import React, { FunctionComponent, useCallback, useMemo,useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { BodyShort, Table } from '@navikt/ds-react';
+
 import { XMarkIcon } from '@navikt/aksel-icons';
+import { BodyShort, Table } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
 import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
 
+import { restApiHooks,RestApiPathsKeys } from '../../data/fplosRestApi';
 import SletteSaksbehandlerModal from './SletteSaksbehandlerModal';
-import { RestApiPathsKeys, restApiHooks } from '../../data/fplosRestApi';
 
 import styles from './saksbehandlereTabell.module.css';
 

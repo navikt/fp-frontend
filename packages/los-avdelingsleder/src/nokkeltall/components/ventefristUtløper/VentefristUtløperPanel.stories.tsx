@@ -1,17 +1,18 @@
 import React from 'react';
-import dayjs from 'dayjs';
-import { StoryFn } from '@storybook/react';
+
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { StoryFn } from '@storybook/react';
+import dayjs from 'dayjs';
+
 import { FagsakYtelseType } from '@navikt/fp-kodeverk';
-
+import { alleKodeverkLos,getIntlDecorator } from '@navikt/fp-storybook-utils';
 import { RestApiMock } from '@navikt/fp-utils-test';
-import { getIntlDecorator, alleKodeverkLos } from '@navikt/fp-storybook-utils';
 
+import { requestApi,RestApiGlobalStatePathsKeys } from '../../../data/fplosRestApi';
 import BehandlingVentefrist from '../../../typer/behandlingVentefristTsType';
-import { RestApiGlobalStatePathsKeys, requestApi } from '../../../data/fplosRestApi';
+import VentefristUtløperPanel from './VentefristUtløperPanel';
 
 import messages from '../../../../i18n/nb_NO.json';
-import VentefristUtløperPanel from './VentefristUtløperPanel';
 
 const withIntl = getIntlDecorator(messages);
 

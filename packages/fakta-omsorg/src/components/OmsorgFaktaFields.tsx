@@ -1,7 +1,8 @@
 import React, { FunctionComponent, useCallback } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { required } from '@navikt/ft-form-validators';
+
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { required } from '@navikt/ft-form-validators';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode, AksjonspunktStatus, hasAksjonspunkt } from '@navikt/fp-kodeverk';

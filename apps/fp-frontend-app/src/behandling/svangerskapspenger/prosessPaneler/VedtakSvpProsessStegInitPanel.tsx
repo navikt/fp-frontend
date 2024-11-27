@@ -1,15 +1,17 @@
 import React, { useCallback, useState } from 'react';
 import { useIntl } from 'react-intl';
 
+import { forhandsvisDokument } from '@navikt/ft-utils';
+
 import {
-  isAvslag,
-  FagsakYtelseType,
   AksjonspunktKode,
-  VilkarUtfallType,
   AksjonspunktStatus,
+  FagsakYtelseType,
+  isAvslag,
+  VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
-import { VedtakProsessIndex, ForhandsvisData } from '@navikt/fp-prosess-vedtak';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
+import { ForhandsvisData,VedtakProsessIndex } from '@navikt/fp-prosess-vedtak';
 import {
   Aksjonspunkt,
   Behandling,
@@ -22,14 +24,13 @@ import {
   TilbakekrevingValg,
   Vilkar,
 } from '@navikt/fp-types';
-import { forhandsvisDokument } from '@navikt/ft-utils';
 
-import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
-import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
-import { IverksetterVedtakStatusModal } from '../../felles/modaler/vedtak/IverksetterVedtakStatusModal';
-import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
-import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
+import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
+import { IverksetterVedtakStatusModal } from '../../felles/modaler/vedtak/IverksetterVedtakStatusModal';
+import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
+import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 
 const hasOnlyClosedAps = (aksjonspunkter: Aksjonspunkt[], vedtakAksjonspunkter: Aksjonspunkt[]): boolean =>
   aksjonspunkter

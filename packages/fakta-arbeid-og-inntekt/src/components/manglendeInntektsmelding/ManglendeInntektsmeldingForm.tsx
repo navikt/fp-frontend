@@ -1,11 +1,14 @@
-import React, { FunctionComponent, useMemo, useCallback, useRef, useState } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import React, { FunctionComponent, useCallback, useMemo, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Alert, BodyShort, Button, HStack, Popover } from '@navikt/ds-react';
-import { QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
+import { FormattedMessage, useIntl } from 'react-intl';
 
-import { required, hasValidText, maxLength, minLength } from '@navikt/ft-form-validators';
-import { TextAreaField, RadioGroupPanel, Form } from '@navikt/ft-form-hooks';
+import { QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
+import { Alert, BodyShort, Button, HStack, Popover } from '@navikt/ds-react';
+import { Form,RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
+import { hasValidText, maxLength, minLength,required } from '@navikt/ft-form-validators';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
+import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 import {
   AlleKodeverk,
   AoIArbeidsforhold,
@@ -13,12 +16,10 @@ import {
   Inntektspost,
   ManglendeInntektsmeldingVurdering,
 } from '@navikt/fp-types';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 
+import { useSetDirtyForm } from '../../DirtyFormProvider';
 import ArbeidsforholdOgInntektRadData from '../../types/arbeidsforholdOgInntekt';
 import ArbeidsforholdInformasjonPanel from '../felles/ArbeidsforholdInformasjonPanel';
-import { useSetDirtyForm } from '../../DirtyFormProvider';
 
 import styles from './manglendeInntektsmeldingForm.module.css';
 

@@ -1,11 +1,13 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { Dokument, Innsyn, StandardProsessPanelProps } from '@navikt/fp-types';
-import { createIntl } from '@navikt/ft-utils';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
+import { createIntl } from '@navikt/ft-utils';
+
+import { Dokument, Innsyn, StandardProsessPanelProps } from '@navikt/fp-types';
 
 import InnsynForm from './components/InnsynForm';
+
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);

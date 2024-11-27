@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 
-import { Oppgave, OppgaveStatus } from '@navikt/fp-los-felles';
-
-import { Saksliste } from '../typer/sakslisteTsType';
-import { OppgaveErReservertAvAnnenModal } from '../reservertAvAnnen/OppgaveErReservertAvAnnenModal';
-import { RestApiPathsKeys, restApiHooks } from '../data/fplosSaksbehandlerRestApi';
-import { SakslistePanel } from './SakslistePanel';
-import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
+
+import { Oppgave, OppgaveStatus } from '@navikt/fp-los-felles';
+import { RestApiState } from '@navikt/fp-rest-api-hooks';
+
+import { restApiHooks,RestApiPathsKeys } from '../data/fplosSaksbehandlerRestApi';
+import { OppgaveErReservertAvAnnenModal } from '../reservertAvAnnen/OppgaveErReservertAvAnnenModal';
+import { Saksliste } from '../typer/sakslisteTsType';
+import { SakslistePanel } from './SakslistePanel';
 
 const EMPTY_ARRAY: Saksliste[] = [];
 

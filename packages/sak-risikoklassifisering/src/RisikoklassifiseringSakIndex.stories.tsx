@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import { Meta, StoryObj } from '@storybook/react';
+
 import { action } from '@storybook/addon-actions';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, KodeverkType } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { Aksjonspunkt } from '@navikt/fp-types';
 
 import { KontrollresultatKode } from './kodeverk/kontrollresultatKode';
 import { RisikoklassifiseringSakIndex } from './RisikoklassifiseringSakIndex';
 
 import '@navikt/ds-css';
-
 import '@navikt/ft-ui-komponenter/dist/style.css';
 import '@navikt/ft-form-hooks/dist/style.css';
 

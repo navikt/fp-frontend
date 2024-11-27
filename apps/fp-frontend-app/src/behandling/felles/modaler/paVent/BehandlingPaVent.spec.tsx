@@ -1,9 +1,10 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import { BehandlingStatus, BehandlingType } from '@navikt/fp-kodeverk';
 
+import { render, screen } from '@testing-library/react';
+
+import { BehandlingStatus, BehandlingType } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import { Aksjonspunkt, Behandling, AlleKodeverk } from '@navikt/fp-types';
+import { Aksjonspunkt, AlleKodeverk,Behandling } from '@navikt/fp-types';
 
 import { BehandlingPaVent } from './BehandlingPaVent';
 

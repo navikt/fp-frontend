@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 
 export type FormValues = {

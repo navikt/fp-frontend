@@ -1,28 +1,28 @@
 import React, { FunctionComponent, useMemo, useState } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm, UseFormGetValues } from 'react-hook-form';
+import { FormattedMessage, useIntl } from 'react-intl';
+
 import { TrashFillIcon } from '@navikt/aksel-icons';
-import { Heading, Button, Spacer, HStack } from '@navikt/ds-react';
-import { VerticalSpacer, OkAvbrytModal } from '@navikt/ft-ui-komponenter';
+import { Button, Heading, HStack,Spacer } from '@navikt/ds-react';
+import { Datepicker, Form,InputField, TextAreaField } from '@navikt/ft-form-hooks';
+import {
+  dateAfterOrEqual,
+  hasValidDate,
+  hasValidInteger,
+  hasValidText,
+  maxLength,
+  maxValue,
+  minLength,
+  minValue,
+  required,
+} from '@navikt/ft-form-validators';
+import { OkAvbrytModal,VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 import { ManueltArbeidsforhold } from '@navikt/fp-types';
-import {
-  hasValidText,
-  maxLength,
-  minLength,
-  hasValidDate,
-  hasValidInteger,
-  required,
-  minValue,
-  maxValue,
-  dateAfterOrEqual,
-} from '@navikt/ft-form-validators';
-import { TextAreaField, Datepicker, InputField, Form } from '@navikt/ft-form-hooks';
-
-import ArbeidsforholdOgInntektRadData from '../../types/arbeidsforholdOgInntekt';
 
 import { useSetDirtyForm } from '../../DirtyFormProvider';
+import ArbeidsforholdOgInntektRadData from '../../types/arbeidsforholdOgInntekt';
 
 export const MANUELT_ORG_NR = '342352362';
 

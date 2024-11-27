@@ -1,9 +1,12 @@
 import React, { FunctionComponent, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Button, Table, Tag } from '@navikt/ds-react';
+
 import { ChevronRightIcon } from '@navikt/aksel-icons';
+import { Button, Table, Tag } from '@navikt/ds-react';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
+
 import { NavAnsatt } from '@navikt/fp-types';
+
 import Oppgave from '../../typer/oppgaveTsType';
 import ReserverOppgaveType from '../../typer/reserverOppgaveType';
 import { finnYtelseTekst } from '../journalpost/innhold/VelgSakForm';

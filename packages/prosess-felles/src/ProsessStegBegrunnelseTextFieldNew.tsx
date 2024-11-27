@@ -1,14 +1,15 @@
 import React, { FunctionComponent } from 'react';
+import { useFormContext } from 'react-hook-form';
 
 import { TextAreaField } from '@navikt/ft-form-hooks';
-import { decodeHtmlEntity, createIntl, formaterFritekst } from '@navikt/ft-utils';
 import { hasValidText, maxLength, minLength, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
+import { createIntl, decodeHtmlEntity, formaterFritekst } from '@navikt/ft-utils';
+
 import { Aksjonspunkt } from '@navikt/fp-types';
 
-import { useFormContext } from 'react-hook-form';
-import messages from '../i18n/nb_NO.json';
-
 import styles from './prosessStegBegrunnelseTextField.module.css';
+
+import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 

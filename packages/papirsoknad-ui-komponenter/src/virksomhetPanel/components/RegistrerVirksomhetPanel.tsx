@@ -1,13 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { useFieldArray, useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
+
 import { PlusCircleIcon, XMarkIcon } from '@navikt/aksel-icons';
-import { Label, BodyShort, Detail, ErrorMessage, Link } from '@navikt/ds-react';
+import { BodyShort, Detail, ErrorMessage, Label, Link } from '@navikt/ds-react';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
 import { AlleKodeverk } from '@navikt/fp-types';
 
-import { useFieldArray, useFormContext } from 'react-hook-form';
-
-import { RegistrerVirksomhetModalForm, FormValues as ModalFormValues } from './RegistrerVirksomhetModalForm';
+import { FormValues as ModalFormValues,RegistrerVirksomhetModalForm } from './RegistrerVirksomhetModalForm';
 
 import styles from './registrerVirksomhetPanel.module.css';
 

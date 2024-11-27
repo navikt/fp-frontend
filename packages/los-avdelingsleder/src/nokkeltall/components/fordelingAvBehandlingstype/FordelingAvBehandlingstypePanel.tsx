@@ -1,17 +1,18 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
+import { FormattedMessage } from 'react-intl';
+
 import { Label } from '@navikt/ds-react';
 import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { KodeverkMedNavn } from '@navikt/fp-types';
-import { FagsakYtelseType, KodeverkType } from '@navikt/fp-kodeverk';
 
-import OppgaverForAvdeling from '../../../typer/oppgaverForAvdelingTsType';
-import FordelingAvBehandlingstypeGraf from './FordelingAvBehandlingstypeGraf';
+import { FagsakYtelseType, KodeverkType } from '@navikt/fp-kodeverk';
+import { KodeverkMedNavn } from '@navikt/fp-types';
 
 import StoreValuesInLocalStorage from '../../../data/StoreValuesInLocalStorage';
 import useLosKodeverk from '../../../data/useLosKodeverk';
+import OppgaverForAvdeling from '../../../typer/oppgaverForAvdelingTsType';
+import FordelingAvBehandlingstypeGraf from './FordelingAvBehandlingstypeGraf';
 
 const finnFagsakYtelseTypeNavn = (fagsakYtelseTyper: KodeverkMedNavn[], valgtFagsakYtelseType: string) => {
   const type = fagsakYtelseTyper.find(fyt => fyt.kode === valgtFagsakYtelseType);

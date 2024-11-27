@@ -1,9 +1,9 @@
-import { useState, useEffect, useContext, DependencyList } from 'react';
+import { DependencyList,useContext, useEffect, useState } from 'react';
 
 import { RequestApi, RestKey } from '@navikt/fp-rest-api';
 
-import { RestApiDispatchContext } from './RestApiContext';
 import RestApiState from '../RestApiState';
+import { RestApiDispatchContext } from './RestApiContext';
 
 export interface RestApiData<T> {
   state: RestApiState;

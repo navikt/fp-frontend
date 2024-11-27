@@ -1,7 +1,8 @@
-import { getIntlDecorator } from '@navikt/fp-storybook-utils';
-import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
+
+import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
 import { OppgaveErReservertAvAnnenModal } from './OppgaveErReservertAvAnnenModal';
 

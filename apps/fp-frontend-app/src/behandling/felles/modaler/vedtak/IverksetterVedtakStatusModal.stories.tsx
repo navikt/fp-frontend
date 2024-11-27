@@ -1,10 +1,12 @@
-import { BehandlingResultatType } from '@navikt/fp-kodeverk';
 import { action } from '@storybook/addon-actions';
-
-import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 import { Meta, StoryObj } from '@storybook/react/*';
-import messages from '../../../../../i18n/nb_NO.json';
+
+import { BehandlingResultatType } from '@navikt/fp-kodeverk';
+import { getIntlDecorator } from '@navikt/fp-storybook-utils';
+
 import { IverksetterVedtakStatusModal } from './IverksetterVedtakStatusModal';
+
+import messages from '../../../../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
 

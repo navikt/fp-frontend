@@ -1,14 +1,14 @@
 import React, { useCallback } from 'react';
 import { useIntl } from 'react-intl';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ArbeidOgInntektFaktaIndex } from '@navikt/fp-fakta-arbeid-og-inntekt';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import { ArbeidsgiverOpplysningerPerId, ArbeidOgInntektsmelding, AksessRettigheter } from '@navikt/fp-types';
+import { AksessRettigheter,ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
-import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
-import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { BehandlingApiKeys, requestBehandlingApi, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
+import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
+import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING];
 

@@ -1,14 +1,16 @@
 import React from 'react';
-import { AlleKodeverk, MedlemskapAvvik, OppholdstillatelsePeriode } from '@navikt/fp-types';
 import { FormattedMessage, useIntl } from 'react-intl';
+
 import { BodyLong, BodyShort, Box, ReadMore, Table } from '@navikt/ds-react';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
-import { KodeverkType } from '@navikt/fp-kodeverk';
+import { TIDENES_ENDE } from '@navikt/ft-utils';
+
 import { FaktaKilde, sorterPerioder } from '@navikt/fp-fakta-felles';
+import { KodeverkType } from '@navikt/fp-kodeverk';
+import { AlleKodeverk, MedlemskapAvvik, OppholdstillatelsePeriode } from '@navikt/fp-types';
 
 import EkspansjonsKort from '../ekspansjonsKort/EkspansjonsKort';
 import { relevantForOppholdstillatelser } from '../ekspansjonsKort/medlemsAvvik';
-import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 interface Props {
   oppholdstillatelser: OppholdstillatelsePeriode[];

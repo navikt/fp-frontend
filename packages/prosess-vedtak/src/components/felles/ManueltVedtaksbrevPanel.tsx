@@ -1,18 +1,18 @@
 import React, { FunctionComponent, MouseEvent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { BodyShort, Label, Alert, Link, Detail } from '@navikt/ds-react';
-import { ArrowForwardIcon } from '@navikt/aksel-icons';
-import {
-  FlexContainer,
-  FlexRow,
-  FlexColumn,
-  EditedIcon,
-  AvsnittSkiller,
-  VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
 
+import { ArrowForwardIcon } from '@navikt/aksel-icons';
+import { Alert, BodyShort, Detail,Label, Link } from '@navikt/ds-react';
 import { TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
+import {
+  AvsnittSkiller,
+  EditedIcon,
+  FlexColumn,
+  FlexContainer,
+  FlexRow,
+  VerticalSpacer,
+} from '@navikt/ft-ui-komponenter';
 import { formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
 import styles from './manueltVedtaksbrevPanel.module.css';

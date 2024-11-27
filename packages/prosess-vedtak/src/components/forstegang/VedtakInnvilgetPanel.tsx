@@ -1,11 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
-import { Label, Detail } from '@navikt/ds-react';
 
-import { Behandlingsresultat, BeregningsresultatDagytelse, BeregningsresultatEs } from '@navikt/fp-types';
-import { FagsakYtelseType } from '@navikt/fp-kodeverk';
-import { formatCurrencyWithKr } from '@navikt/ft-utils';
+import { Detail,Label } from '@navikt/ds-react';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { formatCurrencyWithKr } from '@navikt/ft-utils';
+
+import { FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { Behandlingsresultat, BeregningsresultatDagytelse, BeregningsresultatEs } from '@navikt/fp-types';
 
 import VedtakFritekstPanel from '../felles/VedtakFritekstPanel';
 

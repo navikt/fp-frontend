@@ -1,44 +1,45 @@
 import React, { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
+
 import { Form } from '@navikt/ft-form-hooks';
 import { omitOne } from '@navikt/ft-utils';
 
-import { KodeverkMedNavn, AlleKodeverk } from '@navikt/fp-types';
-import { ForeldreType, KodeverkType, FamilieHendelseType } from '@navikt/fp-kodeverk';
+import { FamilieHendelseType,ForeldreType, KodeverkType } from '@navikt/fp-kodeverk';
 import {
-  SoknadData,
-  MottattDatoPapirsoknadIndex,
-  FrilansPapirsoknadIndex,
-  FrilansFormValues,
-  OppholdINorgePapirsoknadIndex,
-  OppholdINorgeFormValues,
-  SprakPapirsoknadIndex,
-  LagreSoknadPapirsoknadIndex,
-  VirksomhetPapirsoknadIndex,
-  OmsorgOgAdopsjonPapirsoknadIndex,
-  OmsorgOgAdopsjonFormValues,
-  InntektsgivendeArbeidPapirsoknadIndex,
-  IArbeidFormValues,
-  AndreYtelserPapirsoknadIndex,
-  AndreYtelserFormValue,
-  RettigheterPapirsoknadIndex,
-  AnnenForelderPapirsoknadIndex,
-  AnnenForelderFormValues,
-  FodselPapirsoknadIndex,
-  BekreftelsePanel,
-  DekningsgradIndex,
-  PermisjonRettigheterPanel,
-  PermisjonIndex,
-  FormValuesPermisjon,
-  PermRettigheterFormValues,
-  MottattDatoFormValues,
-  VirksomhetFormValues,
-  DekningsgradFormValues,
-  FodselFormValues,
   ANDRE_YTELSER_FORM_NAME_PREFIX,
+  AndreYtelserFormValue,
+  AndreYtelserPapirsoknadIndex,
+  AnnenForelderFormValues,
+  AnnenForelderPapirsoknadIndex,
+  BekreftelsePanel,
+  DekningsgradFormValues,
+  DekningsgradIndex,
+  FodselFormValues,
+  FodselPapirsoknadIndex,
+  FormValuesPermisjon,
+  FrilansFormValues,
+  FrilansPapirsoknadIndex,
+  IArbeidFormValues,
+  InntektsgivendeArbeidPapirsoknadIndex,
+  LagreSoknadPapirsoknadIndex,
+  MottattDatoFormValues,
+  MottattDatoPapirsoknadIndex,
+  OmsorgOgAdopsjonFormValues,
+  OmsorgOgAdopsjonPapirsoknadIndex,
+  OppholdINorgeFormValues,
+  OppholdINorgePapirsoknadIndex,
+  PermisjonIndex,
+  PermisjonRettigheterPanel,
+  PermRettigheterFormValues,
   rettighet,
+  RettigheterPapirsoknadIndex,
+  SoknadData,
+  SprakPapirsoknadIndex,
   TIDSROM_PERMISJON_FORM_NAME_PREFIX,
+  VirksomhetFormValues,
+  VirksomhetPapirsoknadIndex,
 } from '@navikt/fp-papirsoknad-ui-komponenter';
+import { AlleKodeverk,KodeverkMedNavn } from '@navikt/fp-types';
 
 const ANNEN_FORELDER_FORM_NAME_PREFIX = 'annenForelder';
 const OMSORG_FORM_NAME_PREFIX = 'omsorg';

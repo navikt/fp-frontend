@@ -1,31 +1,33 @@
 import React from 'react';
-import { StoryFn } from '@storybook/react';
+
+import { TIDENES_ENDE } from '@navikt/ft-utils';
 import { action } from '@storybook/addon-actions';
+import { StoryFn } from '@storybook/react';
 
 import {
   AdresseType,
-  NavBrukerKjonn,
-  SoknadType,
   AksjonspunktKode,
   AksjonspunktStatus,
+  NavBrukerKjonn,
   SivilstandType,
+  SoknadType,
 } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import {
+  Aksjonspunkt,
   Behandling,
   FamilieHendelseSamling,
   InntektArbeidYtelse,
-  Soknad,
-  Aksjonspunkt,
   Personoversikt,
+  Soknad,
 } from '@navikt/fp-types';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
+
 import OmsorgOgForeldreansvarFaktaIndex from './OmsorgOgForeldreansvarFaktaIndex';
 
 import '@navikt/ds-css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
 import '@navikt/ft-form-hooks/dist/style.css';
-import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 const behandling = {
   uuid: '1',

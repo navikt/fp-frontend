@@ -1,8 +1,9 @@
 import React from 'react';
-import dayjs from 'dayjs';
 import { FormattedMessage } from 'react-intl';
+
 import { Heading, VStack } from '@navikt/ds-react';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import dayjs from 'dayjs';
 
 import { NyeOgFerdigstilteOppgaver } from '../../../typer/nyeOgFerdigstilteOppgaverTsType';
 import { NyeOgFerdigstilteOppgaverForSisteSyvGraf } from './NyeOgFerdigstilteOppgaverForSisteSyvGraf';

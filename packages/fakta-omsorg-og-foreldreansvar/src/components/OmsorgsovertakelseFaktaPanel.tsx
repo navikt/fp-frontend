@@ -1,13 +1,14 @@
 import React, { FunctionComponent } from 'react';
-import { useIntl, FormattedMessage } from 'react-intl';
-import { BodyShort, HStack, Label } from '@navikt/ds-react';
+import { FormattedMessage,useIntl } from 'react-intl';
 
+import { BodyShort, HStack, Label } from '@navikt/ds-react';
 import { Datepicker } from '@navikt/ft-form-hooks';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
-import { FamilieHendelse, Soknad } from '@navikt/fp-types';
+
 import { FieldEditedInfo } from '@navikt/fp-fakta-felles';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { FamilieHendelse, Soknad } from '@navikt/fp-types';
 
 const getAntallBarn = (soknad: Soknad, familiehendelse: FamilieHendelse): number => {
   const antallBarn = soknad.antallBarn ? soknad.antallBarn : NaN;

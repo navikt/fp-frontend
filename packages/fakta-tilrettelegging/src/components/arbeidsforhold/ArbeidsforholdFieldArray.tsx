@@ -1,8 +1,11 @@
 import React from 'react';
-import dayjs from 'dayjs';
-import { BodyShort, ExpansionCard, Heading, HStack, Tag } from '@navikt/ds-react';
-import { Buildings3Icon, ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 import { useFieldArray, useFormContext } from 'react-hook-form';
+import { FormattedMessage } from 'react-intl';
+
+import { Buildings3Icon, ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
+import { BodyShort, ExpansionCard, Heading, HStack, Tag } from '@navikt/ds-react';
+import dayjs from 'dayjs';
+
 import {
   AoIArbeidsforhold,
   ArbeidsforholdFodselOgTilrettelegging,
@@ -10,9 +13,9 @@ import {
   KodeverkMedNavn,
 } from '@navikt/fp-types';
 
-import { FormattedMessage } from 'react-intl';
-import styles from './arbeidsforholdFieldArray.module.css';
 import { ArbeidsforholdPanel } from './ArbeidsforholdPanel';
+
+import styles from './arbeidsforholdFieldArray.module.css';
 
 const getEndCharFromId = (id?: string): string => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
 

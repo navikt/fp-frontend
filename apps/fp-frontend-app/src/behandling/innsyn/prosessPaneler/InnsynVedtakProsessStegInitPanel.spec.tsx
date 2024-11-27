@@ -1,27 +1,28 @@
 import React from 'react';
 import { RawIntlProvider } from 'react-intl';
-import { render, screen, waitFor } from '@testing-library/react';
-import MockAdapter from 'axios-mock-adapter';
-import userEvent from '@testing-library/user-event';
-import { createIntl } from '@navikt/ft-utils';
 
-import { RestApiMock } from '@navikt/fp-utils-test';
+import { createIntl } from '@navikt/ft-utils';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import MockAdapter from 'axios-mock-adapter';
+
 import {
-  AksjonspunktStatus,
-  FagsakYtelseType,
-  BehandlingStatus,
-  VilkarUtfallType,
   AksjonspunktKode,
+  AksjonspunktStatus,
+  BehandlingStatus,
   DokumentMalType,
+  FagsakYtelseType,
+  VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, Behandling, Fagsak } from '@navikt/fp-types';
+import { RestApiMock } from '@navikt/fp-utils-test';
 
+import { BehandlingApiKeys, requestBehandlingApi } from '../../../data/behandlingContextApi';
 import * as Felles from '../../felles/prosess/useStandardProsessPanelProps';
 import { InnsynVedtakProsessStegInitPanel } from './InnsynVedtakProsessStegInitPanel';
 
 import messages from '../../../../i18n/nb_NO.json';
-import { BehandlingApiKeys, requestBehandlingApi } from '../../../data/behandlingContextApi';
 
 const intl = createIntl(messages);
 

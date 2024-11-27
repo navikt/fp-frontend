@@ -1,9 +1,10 @@
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Modal, Button, BodyShort, Detail, Heading, HStack, VStack } from '@navikt/ds-react';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
+import { BodyShort, Button, Detail, Heading, HStack, Modal, VStack } from '@navikt/ds-react';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
 import { Feilmelding } from '../typer/feilmeldingTsType';
 
 import styles from './feilmeldingsdetaljerModal.module.css';

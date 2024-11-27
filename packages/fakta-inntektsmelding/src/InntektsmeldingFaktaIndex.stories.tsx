@@ -1,13 +1,16 @@
-import { InntektsmeldingFaktaIndex } from '@navikt/fp-fakta-inntektsmelding';
-import { StoryFn } from '@storybook/react';
-import { ArbeidsgiverOpplysninger, Behandling, BehandlingAppKontekst, Fagsak, Inntektsmelding } from '@navikt/fp-types';
 import React from 'react';
+
+import { StoryFn } from '@storybook/react';
+
+import { InntektsmeldingFaktaIndex } from '@navikt/fp-fakta-inntektsmelding';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { ArbeidsgiverOpplysninger, Behandling, BehandlingAppKontekst, Fagsak, Inntektsmelding } from '@navikt/fp-types';
+
 import { InntektsmeldingFaktaProps } from './InntektsmeldingFaktaIndex';
 
 import '@navikt/ds-css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
 import '@navikt/ft-form-hooks/dist/style.css';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 export default {
   title: 'fakta/fakta-inntektsmelding',

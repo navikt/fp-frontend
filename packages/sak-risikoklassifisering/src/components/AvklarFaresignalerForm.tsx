@@ -1,16 +1,17 @@
 import React, { useMemo } from 'react';
-import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import { Button } from '@navikt/ds-react';
+import { FormattedMessage } from 'react-intl';
 
-import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { Button } from '@navikt/ds-react';
+import { Form,RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
 import { ariaCheck, hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
-import { RadioGroupPanel, TextAreaField, Form } from '@navikt/ft-form-hooks';
-import { Risikoklassifisering, Aksjonspunkt, KodeverkMedNavn } from '@navikt/fp-types';
+import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { Aksjonspunkt, KodeverkMedNavn,Risikoklassifisering } from '@navikt/fp-types';
 
 import { FaresignalVurdering } from '../kodeverk/faresignalVurdering';
 import { AvklartRisikoklassifiseringAp } from '../types/AvklartRisikoklassifiseringAp';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
 const maxLength1500 = maxLength(1500);
 const minLength3 = minLength(3);

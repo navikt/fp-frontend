@@ -2,6 +2,7 @@ import React from 'react';
 
 import { FileIcon } from '@navikt/aksel-icons';
 import { BodyShort, HStack } from '@navikt/ds-react';
+
 import { HistorikkInnslagDokumentLink } from '@navikt/fp-types';
 
 const DOCUMENT_SERVER_URL = '/fpsak/api/dokument/hent-dokument';

@@ -1,6 +1,8 @@
 import React from 'react';
 import { RawIntlProvider } from 'react-intl';
+
 import { createIntl } from '@navikt/ft-utils';
+
 import { AlleKodeverk } from '@navikt/fp-types';
 
 import { OppholdINorgePanel } from './components/OppholdINorgePanel';

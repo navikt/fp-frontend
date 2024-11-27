@@ -1,8 +1,8 @@
-import dayjs from 'dayjs';
-import { fireEvent, screen } from '@testing-library/react';
-import { composeStories } from '@storybook/react';
-import userEvent from '@testing-library/user-event';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
+import { composeStories } from '@storybook/react';
+import { fireEvent, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import dayjs from 'dayjs';
 
 import * as stories from './MottattDatoPapirsoknadIndex.stories';
 

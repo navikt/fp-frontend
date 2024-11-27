@@ -1,11 +1,11 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 
-import { VilkarType, AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode,VilkarType } from '@navikt/fp-kodeverk';
 import { OmsorgVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-omsorg';
 
-import { InngangsvilkarPanelInitProps } from '../../../felles/typer/inngangsvilkarPanelInitProps';
 import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
+import { InngangsvilkarPanelInitProps } from '../../../felles/typer/inngangsvilkarPanelInitProps';
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,

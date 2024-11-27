@@ -1,16 +1,16 @@
-import React, { useCallback, useMemo, useEffect } from 'react';
+import React, { useCallback, useEffect,useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { BehandlingType, BehandlingStatus, KodeverkType } from '@navikt/fp-kodeverk';
 
-import { MenyNyBehandlingIndex, FormValues as NyBehandlingFormValues } from '@navikt/fp-sak-meny-ny-behandling';
+import { BehandlingStatus, BehandlingType, KodeverkType } from '@navikt/fp-kodeverk';
+import { FormValues as NyBehandlingFormValues,MenyNyBehandlingIndex } from '@navikt/fp-sak-meny-ny-behandling';
 import { BehandlingAppKontekst } from '@navikt/fp-types';
 
-import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
-import { useGetEnabledApplikasjonContext } from '../../app/useGetEnabledApplikasjonContext';
 import { ApplicationContextPath } from '../../app/ApplicationContextPath';
-import { MenyKodeverk } from '../MenyKodeverk';
-import { FagsakData } from '../../fagsak/FagsakData';
 import { getLocationWithDefaultProsessStegAndFakta, pathToBehandling } from '../../app/paths';
+import { useGetEnabledApplikasjonContext } from '../../app/useGetEnabledApplikasjonContext';
+import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
+import { FagsakData } from '../../fagsak/FagsakData';
+import { MenyKodeverk } from '../MenyKodeverk';
 
 const BEHANDLINGSTYPER_SOM_SKAL_KUNNE_OPPRETTES = [
   BehandlingType.FORSTEGANGSSOKNAD,

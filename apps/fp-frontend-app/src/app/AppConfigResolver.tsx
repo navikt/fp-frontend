@@ -1,6 +1,7 @@
 import React, { ReactElement, useEffect } from 'react';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
+
 import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 
 import { requestFagsakApi } from '../data/fagsakContextApi';

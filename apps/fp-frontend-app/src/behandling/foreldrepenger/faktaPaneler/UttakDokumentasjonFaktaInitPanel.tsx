@@ -1,15 +1,14 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { UttakDokumentasjonFaktaIndex } from '@navikt/fp-fakta-uttaksdokumentasjon';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { DokumentasjonVurderingBehov } from '@navikt/fp-types';
 
-import { FaktaPanelCode } from '@navikt/fp-konstanter';
-
-import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
-import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { BehandlingApiKeys, requestBehandlingApi } from '../../../data/behandlingContextApi';
+import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
+import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON];
 

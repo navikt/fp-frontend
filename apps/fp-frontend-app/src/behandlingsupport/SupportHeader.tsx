@@ -1,11 +1,14 @@
 import React, { ReactNode } from 'react';
 import { useIntl } from 'react-intl';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
+
 import { Heading } from '@navikt/ds-react';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
+
 import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 
-import styles from './supportHeader.module.css';
 import { ErrorBoundary } from '../app/ErrorBoundary';
+
+import styles from './supportHeader.module.css';
 
 type Props = {
   tekst: string;

@@ -1,10 +1,10 @@
 import React from 'react';
+import { useFormContext } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
 import { VStack } from '@navikt/ds-react';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import { useFormContext } from 'react-hook-form';
 
 const ANNEN_FORELDER_NAME_PREFIX = 'annenForelder';
 

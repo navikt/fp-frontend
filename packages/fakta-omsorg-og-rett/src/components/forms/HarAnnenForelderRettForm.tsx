@@ -1,14 +1,16 @@
 import React, { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
+
 import { Button, Label, VStack } from '@navikt/ds-react';
 import { Form, TextAreaField } from '@navikt/ft-form-hooks';
-import { decodeHtmlEntity } from '@navikt/ft-utils';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
+import { decodeHtmlEntity } from '@navikt/ft-utils';
+
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
 import { AvklarAnnenforelderHarRettAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
 import { HarAnnenForelderRettFelter } from './HarAnnenForelderRettFelter';
 

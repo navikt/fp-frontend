@@ -4,9 +4,9 @@ import { useIntl } from 'react-intl';
 import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 
-import { skalViseProsessPanel } from '../../felles/prosess/skalViseProsessPanel';
-import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { OverstyringPanelDef } from '../../felles/prosess/OverstyringPanelDef';
+import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { skalViseProsessPanel } from '../../felles/prosess/skalViseProsessPanel';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 
 const AKSJONSPUNKT_KODE = AksjonspunktKode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR;

@@ -1,10 +1,12 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
+
 import { SectorChartIcon } from '@navikt/aksel-icons';
+import { Box, Detail, Heading, HStack, VStack } from '@navikt/ds-react';
+
 import { NyeOgFerdigstilteOppgaver } from '../../typer/nyeOgFerdigstilteOppgaverTsType';
 import { NyeOgFerdigstilteOppgaverForIdagPanel } from './nyeOgFerdigstilteOppgaverForIdag/NyeOgFerdigstilteOppgaverForIdagPanel';
 import { NyeOgFerdigstilteOppgaverForSisteSyvPanel } from './nyeOgFerdigstilteOppgaverForSisteSyv/NyeOgFerdigstilteOppgaverForSisteSyvPanel';
-import { Box, Detail, HStack, Heading, VStack } from '@navikt/ds-react';
-import { FormattedMessage } from 'react-intl';
 
 import styles from './saksbehandlerNokkeltallPanel.module.css';
 

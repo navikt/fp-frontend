@@ -1,11 +1,12 @@
 import React from 'react';
+
+import { TIDENES_ENDE } from '@navikt/ft-utils';
 import { render, screen, within } from '@testing-library/react';
 import { expect } from 'vitest';
 
 import { AdresseType, SivilstandType } from '@navikt/fp-kodeverk';
-import { AlleKodeverk, KjønnkodeEnum, Personoversikt } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import { TIDENES_ENDE } from '@navikt/ft-utils';
+import { AlleKodeverk, KjønnkodeEnum, Personoversikt } from '@navikt/fp-types';
 
 import { PersonopplysningerForFamilie } from './PersonopplysningerForFamilie';
 

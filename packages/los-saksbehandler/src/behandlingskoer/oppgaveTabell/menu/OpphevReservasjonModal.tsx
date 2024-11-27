@@ -1,9 +1,11 @@
 import React from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
+import { FormattedMessage, useIntl } from 'react-intl';
+
 import { Button, Heading, Modal as NavModal } from '@navikt/ds-react';
-import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { Form, TextAreaField } from '@navikt/ft-form-hooks';
+import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
+
 import { Oppgave } from '@navikt/fp-los-felles';
 
 import { restApiHooks, RestApiPathsKeys } from '../../../data/fplosSaksbehandlerRestApi';

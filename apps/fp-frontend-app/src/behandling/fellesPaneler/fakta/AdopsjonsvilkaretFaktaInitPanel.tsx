@@ -1,14 +1,14 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 
-import { FagsakYtelseType, AksjonspunktKode, adopsjonsvilkarene } from '@navikt/fp-kodeverk';
 import { AdopsjonFaktaIndex } from '@navikt/fp-fakta-adopsjon';
+import { adopsjonsvilkarene,AksjonspunktKode, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { Fagsak, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
 
-import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
-import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
+import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
+import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,

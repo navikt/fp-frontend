@@ -1,12 +1,13 @@
-import React, { FunctionComponent, useState, useMemo, useCallback } from 'react';
-import dayjs from 'dayjs';
-import { BodyShort, Label, Timeline } from '@navikt/ds-react';
+import React, { FunctionComponent, useCallback,useMemo, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { DoorOpenIcon, CheckmarkCircleIcon, XMarkOctagonIcon } from '@navikt/aksel-icons';
+
+import { CheckmarkCircleIcon, DoorOpenIcon, XMarkOctagonIcon } from '@navikt/aksel-icons';
+import { BodyShort, Label, Timeline } from '@navikt/ds-react';
+import { DateLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import dayjs from 'dayjs';
 
 import { FastsattOpptjeningAktivitet } from '@navikt/fp-types';
 
-import { DateLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import opptjeningAktivitetKlassifisering from '../kodeverk/opptjeningAktivitetKlassifisering';
 import TimeLineData from './TimeLineData';
 

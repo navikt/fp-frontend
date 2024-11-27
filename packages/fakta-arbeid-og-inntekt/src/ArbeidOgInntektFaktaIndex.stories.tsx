@@ -1,7 +1,10 @@
 import React from 'react';
-import { StoryFn } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
 
+import { action } from '@storybook/addon-actions';
+import { StoryFn } from '@storybook/react';
+
+import { AksjonspunktKode, AksjonspunktStatus, ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import {
   Aksjonspunkt,
   AksjonspunktÅrsak,
@@ -9,9 +12,8 @@ import {
   ArbeidsgiverOpplysningerPerId,
   Behandling,
 } from '@navikt/fp-types';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import { AksjonspunktKode, AksjonspunktStatus, ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
+
 import ArbeidOgInntektFaktaIndex from './ArbeidOgInntektFaktaIndex';
 
 import '@navikt/ds-css';

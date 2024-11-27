@@ -1,6 +1,9 @@
 import React, { FunctionComponent } from 'react';
+
 import { ToggleGroup } from '@navikt/ds-react';
+
 import JournalDokument from '../../../typer/journalDokumentTsType';
+
 import styles from './dokumentVelger.module.css';
 
 const FORKORTET = '...';

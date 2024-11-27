@@ -1,15 +1,16 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Detail, Heading } from '@navikt/ds-react';
-import { ArrowBox, BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { required } from '@navikt/ft-form-validators';
-import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 
-import { FrilansPerioderFieldArray, FormValues as PerioderFormValues } from './FrilansPerioderFieldArray';
+import { Detail, Heading } from '@navikt/ds-react';
+import { RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { required } from '@navikt/ft-form-validators';
+import { ArrowBox, BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
 import {
-  FrilansOppdragForFamiliePanel,
   FormValues as FormValuesOppdragForFamilie,
+  FrilansOppdragForFamiliePanel,
 } from './FrilansOppdragForFamiliePanel';
+import { FormValues as PerioderFormValues,FrilansPerioderFieldArray } from './FrilansPerioderFieldArray';
 
 export const FRILANS_NAME_PREFIX = 'frilans';
 

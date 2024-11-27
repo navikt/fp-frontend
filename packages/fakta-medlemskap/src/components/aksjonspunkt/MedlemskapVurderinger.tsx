@@ -1,21 +1,22 @@
 import React from 'react';
-import { RawIntlProvider } from 'react-intl';
 import { useFormContext } from 'react-hook-form';
+import { RawIntlProvider } from 'react-intl';
 
 import { VStack } from '@navikt/ds-react';
 import { Datepicker, RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
-import { KodeverkMedNavn } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
+import { KodeverkMedNavn } from '@navikt/fp-types';
+
 import {
-  SØKER_INNFLYTTET_FOR_SENT_KODE,
   MedlemskapVurdering,
+  SØKER_INNFLYTTET_FOR_SENT_KODE,
   VurderMedlemskapFormValues,
 } from '../../types/vurderingMedlemskapForm';
+import { lagVurderingsAlternativer } from './lagVurderingsAlternativer';
 
 import messages from '../../../i18n/nb_NO.json';
-import { lagVurderingsAlternativer } from './lagVurderingsAlternativer';
 
 const intl = createIntl(messages);
 

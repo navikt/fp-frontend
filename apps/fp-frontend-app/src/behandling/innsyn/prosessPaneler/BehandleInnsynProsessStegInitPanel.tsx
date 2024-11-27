@@ -2,13 +2,13 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { InnsynProsessIndex } from '@navikt/fp-prosess-innsyn';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
+import { InnsynProsessIndex } from '@navikt/fp-prosess-innsyn';
 import { Dokument, Fagsak, Innsyn } from '@navikt/fp-types';
 
+import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
-import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_INNSYN];
 

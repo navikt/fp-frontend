@@ -1,24 +1,23 @@
-import React, { ReactNode, FunctionComponent } from 'react';
+import React, { FunctionComponent,ReactNode } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { BodyShort, Label, Button } from '@navikt/ds-react';
-import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 
+import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
+import { BodyShort, Button,Label } from '@navikt/ds-react';
+import { TextAreaField } from '@navikt/ft-form-hooks';
+import { hasValidText, maxLength, minLength } from '@navikt/ft-form-validators';
 import {
+  AksjonspunktBox,
+  EditedIcon,
+  FlexColumn,
   FlexContainer,
   FlexRow,
-  FlexColumn,
-  EditedIcon,
   VerticalSpacer,
-  AksjonspunktBox,
 } from '@navikt/ft-ui-komponenter';
-
-import { TextAreaField } from '@navikt/ft-form-hooks';
 import { createIntl } from '@navikt/ft-utils';
-import { hasValidText, maxLength, minLength } from '@navikt/ft-form-validators';
-
-import messages from '../../i18n/nb_NO.json';
 
 import styles from './overstyringPanel.module.css';
+
+import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 

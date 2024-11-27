@@ -1,8 +1,11 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+
 import { composeStories } from '@storybook/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+
 import { DokumentMalType } from '@navikt/fp-kodeverk';
+
 import * as stories from './VedtakProsessIndex.stories';
 
 const {

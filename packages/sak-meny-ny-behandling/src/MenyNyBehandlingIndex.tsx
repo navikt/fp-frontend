@@ -1,11 +1,12 @@
 import React, { useCallback } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { BehandlingType } from '@navikt/fp-kodeverk';
-import { KodeverkMedNavn } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
-import { NyBehandlingModal, BehandlingOppretting, FormValues } from './components/NyBehandlingModal';
+import { BehandlingType } from '@navikt/fp-kodeverk';
+import { KodeverkMedNavn } from '@navikt/fp-types';
+
+import { BehandlingOppretting, FormValues,NyBehandlingModal } from './components/NyBehandlingModal';
 
 import messages from '../i18n/nb_NO.json';
 

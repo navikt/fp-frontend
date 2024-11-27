@@ -1,22 +1,21 @@
+import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { Meta, StoryObj } from '@storybook/react';
 import dayjs from 'dayjs';
 
 import {
-  NavBrukerKjonn,
-  FagsakStatus,
-  PersonstatusType,
-  FagsakYtelseType,
-  RelasjonsRolleType,
-  FamilieHendelseType,
   DiskresjonskodeType,
+  FagsakStatus,
+  FagsakYtelseType,
+  FamilieHendelseType,
+  NavBrukerKjonn,
+  PersonstatusType,
+  RelasjonsRolleType,
 } from '@navikt/fp-kodeverk';
 import { Fagsak } from '@navikt/fp-types';
-import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 
 import { VisittkortSakIndex } from './VisittkortSakIndex';
 
 import '@navikt/ds-css';
-
 import '@navikt/ft-plattform-komponenter/dist/style.css';
 
 const defaultFagsak = {

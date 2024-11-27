@@ -1,8 +1,9 @@
 import React from 'react';
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
+
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import { useFormContext } from 'react-hook-form';
 
 type FormValues = {
   harAnnenForelderRett: boolean;

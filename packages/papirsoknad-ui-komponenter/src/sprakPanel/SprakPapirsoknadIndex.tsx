@@ -4,6 +4,7 @@ import { RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
 
 import { SprakPanel } from './components/SprakPanel';
+
 import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);

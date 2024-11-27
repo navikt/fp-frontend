@@ -1,9 +1,11 @@
+import { Meta, StoryObj } from '@storybook/react';
+
 import { withRouter } from '@navikt/fp-storybook-utils';
+import withIntl from '@navikt/fp-storybook-utils/decorators/withIntl';
+
+import { SoknadRegistrertModal } from './SoknadRegistrertModal';
 
 import messages from '../../i18n/nb_NO.json';
-import { SoknadRegistrertModal } from './SoknadRegistrertModal';
-import { Meta, StoryObj } from '@storybook/react';
-import withIntl from '@navikt/fp-storybook-utils/decorators/withIntl';
 
 const meta = {
   title: 'papirsoknad/modal/SoknadRegistrertModal',

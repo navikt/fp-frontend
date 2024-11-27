@@ -1,11 +1,13 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { KodeverkMedNavn, Medlemskap, StandardProsessPanelProps } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
+
 import { OverstyringAksjonspunkter } from '@navikt/fp-kodeverk';
+import { KodeverkMedNavn, Medlemskap, StandardProsessPanelProps } from '@navikt/fp-types';
 
 import VilkarresultatMedOverstyringForm from './components/VilkarresultatMedOverstyringForm';
+
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);

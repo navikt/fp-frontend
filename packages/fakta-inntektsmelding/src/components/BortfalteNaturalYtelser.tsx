@@ -1,11 +1,13 @@
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { KodeverkType } from '@navikt/fp-kodeverk';
-import { sorterPerioder } from '@navikt/fp-fakta-felles';
+
 import { VStack } from '@navikt/ds-react';
-import { AktivNaturalYtelse, AlleKodeverk, Inntektsmelding } from '@navikt/fp-types';
-import { addDaysToDate, formatCurrencyNoKr, TIDENES_ENDE } from '@navikt/ft-utils';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
+import { addDaysToDate, formatCurrencyNoKr, TIDENES_ENDE } from '@navikt/ft-utils';
+
+import { sorterPerioder } from '@navikt/fp-fakta-felles';
+import { KodeverkType } from '@navikt/fp-kodeverk';
+import { AktivNaturalYtelse, AlleKodeverk, Inntektsmelding } from '@navikt/fp-types';
 
 import { InntektsmeldingInfoBlokk } from './InntektsmeldingInfoBlokk';
 

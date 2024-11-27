@@ -1,16 +1,16 @@
 import React, { ReactElement } from 'react';
 
-import { RestApiState } from '@navikt/fp-rest-api-hooks';
-import { RestKey } from '@navikt/fp-rest-api';
-import { StandardProsessPanelProps } from '@navikt/fp-types';
-import { ProsessStegCode } from '@navikt/fp-konstanter';
-
 import { VilkarUtfallType } from '@navikt/fp-kodeverk';
-import { ProsessPanelInitProps } from '../typer/prosessPanelInitProps';
-import { useStandardProsessPanelProps } from './useStandardProsessPanelProps';
-import { useProsessMenyRegistrerer } from './useProsessMenyRegistrerer';
-import { ProsessPanelWrapper } from './ProsessPanelWrapper';
+import { ProsessStegCode } from '@navikt/fp-konstanter';
+import { RestKey } from '@navikt/fp-rest-api';
+import { RestApiState } from '@navikt/fp-rest-api-hooks';
+import { StandardProsessPanelProps } from '@navikt/fp-types';
+
 import { restBehandlingApiHooks } from '../../../data/behandlingContextApi';
+import { ProsessPanelInitProps } from '../typer/prosessPanelInitProps';
+import { ProsessPanelWrapper } from './ProsessPanelWrapper';
+import { useProsessMenyRegistrerer } from './useProsessMenyRegistrerer';
+import { useStandardProsessPanelProps } from './useStandardProsessPanelProps';
 
 export type Props<PANEL_DATA> = {
   panelEndepunkter?: RestKey<any, any>[] | { key: RestKey<any, any>; params?: any }[];

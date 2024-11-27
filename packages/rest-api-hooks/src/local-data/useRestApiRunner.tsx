@@ -1,6 +1,6 @@
-import { useState, useCallback } from 'react';
+import { useCallback,useState } from 'react';
 
-import { REQUEST_POLLING_CANCELLED, ErrorType, RequestApi, RestKey } from '@navikt/fp-rest-api';
+import { ErrorType, REQUEST_POLLING_CANCELLED, RequestApi, RestKey } from '@navikt/fp-rest-api';
 
 import RestApiState from '../RestApiState';
 

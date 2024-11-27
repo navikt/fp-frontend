@@ -1,12 +1,14 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+
 import { Detail, Heading } from '@navikt/ds-react';
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
 import { AlleKodeverk } from '@navikt/fp-types';
 
 import {
-  RenderInntektsgivendeArbeidFieldArray,
   INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME,
+  RenderInntektsgivendeArbeidFieldArray,
 } from './RenderInntektsgivendeArbeidFieldArray';
 
 interface Props {

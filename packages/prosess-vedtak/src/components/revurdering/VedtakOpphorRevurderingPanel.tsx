@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Label, BodyShort } from '@navikt/ds-react';
+
+import { BodyShort,Label } from '@navikt/ds-react';
 
 import { Behandlingsresultat } from '@navikt/fp-types';
 

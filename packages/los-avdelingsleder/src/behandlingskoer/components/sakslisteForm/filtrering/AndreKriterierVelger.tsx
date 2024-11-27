@@ -1,10 +1,11 @@
 import React, { Fragment, FunctionComponent } from 'react';
-import { FormattedMessage } from 'react-intl';
-import { Label } from '@navikt/ds-react';
-import { VerticalSpacer, ArrowBox } from '@navikt/ft-ui-komponenter';
-import { CheckboxField, RadioGroupPanel } from '@navikt/ft-form-hooks';
-
 import { useFormContext } from 'react-hook-form';
+import { FormattedMessage } from 'react-intl';
+
+import { Label } from '@navikt/ds-react';
+import { CheckboxField, RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { ArrowBox,VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
 import { restApiHooks, RestApiPathsKeys } from '../../../../data/fplosRestApi';
 import useLosKodeverk from '../../../../data/useLosKodeverk';
 

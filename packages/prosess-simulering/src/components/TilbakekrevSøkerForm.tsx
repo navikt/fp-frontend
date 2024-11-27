@@ -1,20 +1,21 @@
 import React, { FunctionComponent, useCallback } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { BodyShort, HStack, Link, Tooltip, VStack } from '@navikt/ds-react';
 
+import { QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
+import { BodyShort, HStack, Link, Tooltip, VStack } from '@navikt/ds-react';
 import { RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
+import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
-import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
-import { FagsakYtelseType, AksjonspunktKode, TilbakekrevingVidereBehandling } from '@navikt/fp-kodeverk';
+
+import { AksjonspunktKode, FagsakYtelseType, TilbakekrevingVidereBehandling } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Fagsak, TilbakekrevingValg } from '@navikt/fp-types';
 import { VurderFeilutbetalingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import { QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
+import FormValues, { FeilutbetalingFormValues } from '../../types/FormValues';
 
 import styles from './tilbakekrevSøkerForm.module.css';
-import FormValues, { FeilutbetalingFormValues } from '../../types/FormValues';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);

@@ -1,13 +1,15 @@
 import React, { FunctionComponent } from 'react';
+
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
 import { NavAnsatt } from '@navikt/fp-types';
 
-import Oppgave from '../typer/oppgaveTsType';
-import OppgaveTabell from './oppgaver/OppgaveTabell';
-import JournalpostIndex from './journalpost/JournalpostIndex';
 import JournalførSubmitValue from '../typer/ferdigstillJournalføringSubmit';
-import ReserverOppgaveType from '../typer/reserverOppgaveType';
 import Journalpost from '../typer/journalpostTsType';
+import Oppgave from '../typer/oppgaveTsType';
+import ReserverOppgaveType from '../typer/reserverOppgaveType';
+import JournalpostIndex from './journalpost/JournalpostIndex';
+import OppgaveTabell from './oppgaver/OppgaveTabell';
 
 import styles from './journalføringIndex.module.css';
 

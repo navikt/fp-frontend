@@ -1,10 +1,8 @@
 import React, { ReactElement, useMemo } from 'react';
-import classnames from 'classnames/bind';
+import { useFieldArray, useFormContext,UseFormGetValues } from 'react-hook-form';
 import { useIntl } from 'react-intl';
-import { Datepicker, SelectField, PeriodFieldArray } from '@navikt/ft-form-hooks';
-import { Landkode } from '@navikt/fp-kodeverk';
-import { KodeverkMedNavn } from '@navikt/fp-types';
 
+import { Datepicker, PeriodFieldArray,SelectField } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   dateBeforeOrEqual,
@@ -12,10 +10,14 @@ import {
   hasValidDate,
   required,
 } from '@navikt/ft-form-validators';
-import { UseFormGetValues, useFieldArray, useFormContext } from 'react-hook-form';
-import moment from 'moment';
-import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { AvsnittSkiller, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import classnames from 'classnames/bind';
+import moment from 'moment';
+
+import { Landkode } from '@navikt/fp-kodeverk';
+import { KodeverkMedNavn } from '@navikt/fp-types';
+
 import styles from './utenlandsOppholdField.module.css';
 
 const classNames = classnames.bind(styles);

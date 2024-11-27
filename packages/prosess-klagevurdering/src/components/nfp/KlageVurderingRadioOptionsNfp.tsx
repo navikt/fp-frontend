@@ -1,13 +1,14 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
+import { RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
+import { required } from '@navikt/ft-form-validators';
+import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
 import {
   KlageVurdering as klageVurderingType,
   KlageVurderingOmgjoer as klageVurderingOmgjoerType,
 } from '@navikt/fp-kodeverk';
-import { required } from '@navikt/ft-form-validators';
-import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
 import { KodeverkMedNavn } from '@navikt/fp-types';
 
 import styles from './klageVurderingRadioOptionsNfp.module.css';

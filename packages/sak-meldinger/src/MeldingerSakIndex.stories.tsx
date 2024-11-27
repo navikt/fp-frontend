@@ -1,6 +1,7 @@
 import React from 'react';
-import { Meta, StoryFn, StoryObj } from '@storybook/react';
+
 import { action } from '@storybook/addon-actions';
+import { Meta, StoryFn, StoryObj } from '@storybook/react';
 
 import { DokumentMalType, FagsakYtelseType, UgunstAarsakType } from '@navikt/fp-kodeverk';
 

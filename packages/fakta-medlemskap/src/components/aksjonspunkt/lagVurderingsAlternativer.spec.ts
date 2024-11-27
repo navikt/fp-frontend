@@ -1,4 +1,5 @@
 import { expect } from 'vitest';
+
 import { FagsakYtelseType } from '@navikt/fp-kodeverk';
 
 import { lagVurderingsAlternativer } from './lagVurderingsAlternativer';

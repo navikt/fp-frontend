@@ -1,5 +1,5 @@
-import { screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import * as stories from './BekreftelsePanel.stories';

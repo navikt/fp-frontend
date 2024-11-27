@@ -1,9 +1,10 @@
 import React from 'react';
+import { useFieldArray, useFormContext,UseFormGetValues } from 'react-hook-form';
 import { useIntl } from 'react-intl';
-import { UseFormGetValues, useFieldArray, useFormContext } from 'react-hook-form';
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
 import { Datepicker, PeriodFieldArray } from '@navikt/ft-form-hooks';
-import { required, hasValidDate, dateBeforeOrEqual, dateAfterOrEqual } from '@navikt/ft-form-validators';
+import { dateAfterOrEqual,dateBeforeOrEqual, hasValidDate, required } from '@navikt/ft-form-validators';
+import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import styles from './frilansPerioderFieldArray.module.css';
 

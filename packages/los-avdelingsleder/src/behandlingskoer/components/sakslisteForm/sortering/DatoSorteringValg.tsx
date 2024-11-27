@@ -1,16 +1,16 @@
 import React, { FunctionComponent } from 'react';
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
+
+import { Detail, HStack } from '@navikt/ds-react';
+import { CheckboxField, Datepicker,InputField } from '@navikt/ft-form-hooks';
+import { hasValidDate, hasValidPosOrNegInteger } from '@navikt/ft-form-validators';
+import { ArrowBox,DateLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
-import { Detail, HStack } from '@navikt/ds-react';
-import { DateLabel, VerticalSpacer, ArrowBox } from '@navikt/ft-ui-komponenter';
-import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import { hasValidDate, hasValidPosOrNegInteger } from '@navikt/ft-form-validators';
-import { InputField, CheckboxField, Datepicker } from '@navikt/ft-form-hooks';
 
-import { useFormContext } from 'react-hook-form';
 import { restApiHooks, RestApiPathsKeys } from '../../../../data/fplosRestApi';
-
 import useDebounce from '../useDebounce';
 
 import styles from './sorteringVelger.module.css';

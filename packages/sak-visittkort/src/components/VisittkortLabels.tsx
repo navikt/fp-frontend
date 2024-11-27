@@ -1,10 +1,12 @@
 import React from 'react';
-import dayjs from 'dayjs';
-import { useIntl, FormattedMessage } from 'react-intl';
+import { FormattedMessage,useIntl } from 'react-intl';
+
 import { Tag, Tooltip } from '@navikt/ds-react';
+import { dateFormat } from '@navikt/ft-utils';
+import dayjs from 'dayjs';
+
 import { DiskresjonskodeType } from '@navikt/fp-kodeverk';
 import { FagsakPerson } from '@navikt/fp-types';
-import { dateFormat } from '@navikt/ft-utils';
 
 interface Props {
   fagsakPerson: FagsakPerson;

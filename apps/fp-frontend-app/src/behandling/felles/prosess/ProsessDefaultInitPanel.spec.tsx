@@ -1,13 +1,14 @@
 import React from 'react';
+
 import { render, screen } from '@testing-library/react';
 
+import { AksjonspunktKode,BehandlingStatus, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import { Aksjonspunkt, Behandling, Fagsak } from '@navikt/fp-types';
-import { BehandlingStatus, VilkarUtfallType, AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { Aksjonspunkt, Behandling, Fagsak } from '@navikt/fp-types';
 
-import * as Felles from './useStandardProsessPanelProps';
 import { ProsessDefaultInitPanel } from './ProsessDefaultInitPanel';
+import * as Felles from './useStandardProsessPanelProps';
 
 const behandling = {
   uuid: '1',

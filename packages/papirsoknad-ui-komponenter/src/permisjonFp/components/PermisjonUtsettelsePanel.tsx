@@ -1,18 +1,19 @@
 import React from 'react';
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
+
 import { Label } from '@navikt/ds-react';
 import { CheckboxField } from '@navikt/ft-form-hooks';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { AlleKodeverk } from '@navikt/fp-types';
 import { KodeverkType } from '@navikt/fp-kodeverk';
+import { AlleKodeverk } from '@navikt/fp-types';
 
-import { useFormContext } from 'react-hook-form';
 import {
-  RenderUtsettelsePeriodeFieldArray,
-  UTSETTELSE_PERIODE_FIELD_ARRAY_NAME,
-  TIDSROM_PERMISJON_FORM_NAME_PREFIX,
   FormValues as UtsettelsePeriodeFormValues,
+  RenderUtsettelsePeriodeFieldArray,
+  TIDSROM_PERMISJON_FORM_NAME_PREFIX,
+  UTSETTELSE_PERIODE_FIELD_ARRAY_NAME,
 } from './RenderUtsettelsePeriodeFieldArray';
 
 export type FormValues = {

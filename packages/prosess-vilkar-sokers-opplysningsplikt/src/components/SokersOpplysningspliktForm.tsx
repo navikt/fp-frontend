@@ -1,30 +1,31 @@
 import React, { FunctionComponent, ReactElement, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
-import moment from 'moment';
-import { FormattedMessage, useIntl, IntlShape } from 'react-intl';
-import { BodyShort } from '@navikt/ds-react';
+import { FormattedMessage, IntlShape,useIntl } from 'react-intl';
 
+import { BodyShort } from '@navikt/ds-react';
 import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
-import { ProsessStegBegrunnelseTextFieldNew, ProsessPanelTemplate } from '@navikt/fp-prosess-felles';
-import {
-  VilkarUtfallType,
-  KodeverkType,
-  VilkarType,
-  getKodeverknavnFn,
-  AksjonspunktKode,
-  AksjonspunktStatus,
-} from '@navikt/fp-kodeverk';
+import { required } from '@navikt/ft-form-validators';
 import { Table, TableColumn, TableRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT, isObject } from '@navikt/ft-utils';
-import { required } from '@navikt/ft-form-validators';
+import moment from 'moment';
+
+import {
+  AksjonspunktKode,
+  AksjonspunktStatus,
+  getKodeverknavnFn,
+  KodeverkType,
+  VilkarType,
+  VilkarUtfallType,
+} from '@navikt/fp-kodeverk';
+import { ProsessPanelTemplate,ProsessStegBegrunnelseTextFieldNew } from '@navikt/fp-prosess-felles';
 import {
   Aksjonspunkt,
+  AlleKodeverk,
+  ArbeidsgiverOpplysninger,
   ArbeidsgiverOpplysningerPerId,
   Behandling,
   ManglendeVedleggSoknad,
   Soknad,
-  ArbeidsgiverOpplysninger,
-  AlleKodeverk,
 } from '@navikt/fp-types';
 import {
   BekreftSokersOpplysningspliktManuAp,

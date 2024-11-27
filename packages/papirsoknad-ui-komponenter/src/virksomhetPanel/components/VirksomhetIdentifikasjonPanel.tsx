@@ -1,7 +1,8 @@
 import React, { ReactElement } from 'react';
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
+
 import { Datepicker, InputField, RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
-import { ArrowBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import {
   dateBeforeOrEqualToToday,
   hasValidDate,
@@ -10,10 +11,11 @@ import {
   required,
   validPeriodeFomTom,
 } from '@navikt/ft-form-validators';
+import { ArrowBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
 import { KodeverkType } from '@navikt/fp-kodeverk';
 import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
-import { useFormContext } from 'react-hook-form';
 import styles from './virksomhetIdentifikasjonPanel.module.css';
 
 const countrySelectValues = (countryCodes: KodeverkMedNavn[]): ReactElement[] =>

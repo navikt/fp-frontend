@@ -1,9 +1,9 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { DokumentMalType, KlageVurdering as klageVurderingType } from '@navikt/fp-kodeverk';
-
 import { Link } from '@navikt/ds-react';
+
+import { DokumentMalType, KlageVurdering as klageVurderingType } from '@navikt/fp-kodeverk';
 
 const getBrevKode = (klageVurdertAvKa: boolean, klageVurdering?: string): string | undefined => {
   switch (klageVurdering) {

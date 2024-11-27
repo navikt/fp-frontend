@@ -5,9 +5,9 @@ import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import { AdopsjonVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-adopsjon';
 import { AksessRettigheter } from '@navikt/fp-types';
 
-import { InngangsvilkarPanelInitProps } from '../../../felles/typer/inngangsvilkarPanelInitProps';
 import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 import { OverstyringPanelDef } from '../../../felles/prosess/OverstyringPanelDef';
+import { InngangsvilkarPanelInitProps } from '../../../felles/typer/inngangsvilkarPanelInitProps';
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,

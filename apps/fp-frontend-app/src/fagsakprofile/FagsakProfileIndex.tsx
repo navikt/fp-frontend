@@ -1,24 +1,26 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { Navigate, NavLink, useLocation, useMatch } from 'react-router-dom';
-import { Location } from 'history';
+import React, { useCallback,useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Box, HStack, Spacer, Tag, Link, Label, VStack } from '@navikt/ds-react';
-import { BehandlingVelgerSakIndex } from '@navikt/fp-sak-behandling-velger';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { KodeverkType } from '@navikt/fp-kodeverk';
-import { Behandling, BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
-import { UkjentAdresseMeldingIndex } from '@navikt/fp-sak-ukjent-adresse';
-import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
-import { FagsakProfilSakIndex } from '@navikt/fp-sak-fagsak-profil';
-import { AAREG_URL, AINNTEKT_URL, GOSYS_URL, getModiaUrl } from '@navikt/fp-konstanter';
+import { Navigate, NavLink, useLocation, useMatch } from 'react-router-dom';
 
-import { FagsakApiKeys, restFagsakApiHooks } from '../data/fagsakContextApi';
+import { Box, HStack, Label, Link, Spacer, Tag, VStack } from '@navikt/ds-react';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { Location } from 'history';
+
+import { KodeverkType } from '@navikt/fp-kodeverk';
+import { AAREG_URL, AINNTEKT_URL, getModiaUrl,GOSYS_URL } from '@navikt/fp-konstanter';
+import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
+import { BehandlingVelgerSakIndex } from '@navikt/fp-sak-behandling-velger';
+import { FagsakProfilSakIndex } from '@navikt/fp-sak-fagsak-profil';
+import { UkjentAdresseMeldingIndex } from '@navikt/fp-sak-ukjent-adresse';
+import { Behandling, BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
+
+import { ErrorBoundary } from '../app/ErrorBoundary';
 import { getLocationWithDefaultProsessStegAndFakta, pathToBehandling, pathToBehandlinger } from '../app/paths';
 import { BehandlingMenuIndex } from '../behandlingmenu/BehandlingMenuIndex';
-import { RisikoklassifiseringIndex } from './risikoklassifisering/RisikoklassifiseringIndex';
+import { FagsakApiKeys, restFagsakApiHooks } from '../data/fagsakContextApi';
 import { useFpSakKodeverkMedNavn, useGetKodeverkFn } from '../data/useKodeverk';
 import { FagsakData } from '../fagsak/FagsakData';
-import { ErrorBoundary } from '../app/ErrorBoundary';
+import { RisikoklassifiseringIndex } from './risikoklassifisering/RisikoklassifiseringIndex';
 
 import styles from './fagsakProfileIndex.module.css';
 

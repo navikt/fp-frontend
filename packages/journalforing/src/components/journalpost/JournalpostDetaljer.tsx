@@ -1,32 +1,34 @@
 import React, { FunctionComponent, useCallback } from 'react';
-import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import { Alert, BodyLong, Heading, VStack } from '@navikt/ds-react';
+import { FormattedMessage } from 'react-intl';
 
+import { Alert, BodyLong, Heading, VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
+
 import { NavAnsatt } from '@navikt/fp-types';
-import VelgSakForm, { transformValues as transformValuesSak } from './innhold/VelgSakForm';
-import Journalpost from '../../typer/journalpostTsType';
+
+import { erEndeligJournalført } from '../../kodeverk/journalpostTilstand';
+import OppgaveKilde from '../../kodeverk/oppgaveKilde';
 import JournalførSubmitValue, {
   DokumentTittelSubmitValue,
   OppdaterJournalførTittlerSubmitValue,
 } from '../../typer/ferdigstillJournalføringSubmit';
+import ForhåndsvisBrukerRespons from '../../typer/forhåndsvisBrukerResponsTsType';
+import JournalFagsak from '../../typer/journalFagsakTsType';
+import JournalføringFormValues from '../../typer/journalføringFormValues';
+import Journalpost from '../../typer/journalpostTsType';
+import OppdaterMedBruker from '../../typer/oppdaterBrukerTsType';
 import Oppgave from '../../typer/oppgaveTsType';
-import SakDetaljer from './innhold/SakDetaljer';
+import ReserverOppgaveType from '../../typer/reserverOppgaveType';
+import BrukerAvsenderPanel from './innhold/BrukerAvsenderPanel';
 import DokumentForm, {
   buildInitialValues as buildInitialValuesFlereDokumenter,
   transformValues as transformValuesFlereDokumenter,
 } from './innhold/DokumentForm';
-import BrukerAvsenderPanel from './innhold/BrukerAvsenderPanel';
-import JournalføringFormValues from '../../typer/journalføringFormValues';
-import OppdaterMedBruker from '../../typer/oppdaterBrukerTsType';
 import JournalpostTittelForm from './innhold/JournalpostTittelForm';
-import ForhåndsvisBrukerRespons from '../../typer/forhåndsvisBrukerResponsTsType';
-import ReserverOppgaveType from '../../typer/reserverOppgaveType';
-import OppgaveKilde from '../../kodeverk/oppgaveKilde';
 import Reservasjonspanel from './innhold/Reservasjonspanel';
-import { erEndeligJournalført } from '../../kodeverk/journalpostTilstand';
-import JournalFagsak from '../../typer/journalFagsakTsType';
+import SakDetaljer from './innhold/SakDetaljer';
+import VelgSakForm, { transformValues as transformValuesSak } from './innhold/VelgSakForm';
 
 const dokumentTittelSkalStyresAvJournalpost = (jp: Journalpost): boolean => jp.dokumenter?.length === 1;
 

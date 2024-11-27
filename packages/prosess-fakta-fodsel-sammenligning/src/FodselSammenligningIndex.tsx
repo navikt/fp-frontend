@@ -1,10 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { AvklartBarn, FamilieHendelse, Soknad } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
+import { AvklartBarn, FamilieHendelse, Soknad } from '@navikt/fp-types';
+
 import FodselSammenligningPanel from './components/FodselSammenligningPanel';
+
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);

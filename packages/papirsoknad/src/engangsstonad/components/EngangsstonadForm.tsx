@@ -1,17 +1,18 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+
 import { Form } from '@navikt/ft-form-hooks';
 import { omitOne } from '@navikt/ft-utils';
 
-import { AlleKodeverk } from '@navikt/fp-types';
 import { FamilieHendelseType } from '@navikt/fp-kodeverk';
 import {
-  SoknadData,
-  MottattDatoPapirsoknadIndex,
   LagreSoknadPapirsoknadIndex,
-  rettighet,
   MottattDatoFormValues,
+  MottattDatoPapirsoknadIndex,
+  rettighet,
+  SoknadData,
 } from '@navikt/fp-papirsoknad-ui-komponenter';
+import { AlleKodeverk } from '@navikt/fp-types';
 
 import RegistreringAdopsjonOgOmsorgGrid, { FormValues as FormValuesAdopsjon } from './RegistreringAdopsjonOgOmsorgGrid';
 import RegistreringFodselGrid, { FormValues as FormValuesFodsel } from './RegistreringFodselGrid';

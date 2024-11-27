@@ -1,14 +1,15 @@
 import React, { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Button, HStack, Link, VStack } from '@navikt/ds-react';
 
-import { DokumentMalType, UgunstAarsakType, FagsakYtelseType } from '@navikt/fp-kodeverk';
-import { KodeverkMedNavn } from '@navikt/fp-types';
+import { Button, HStack, Link, VStack } from '@navikt/ds-react';
+import { Form,SelectField, TextAreaField } from '@navikt/ft-form-hooks';
 import { ariaCheck, hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
-import { SelectField, TextAreaField, Form } from '@navikt/ft-form-hooks';
+
+import { DokumentMalType, FagsakYtelseType,UgunstAarsakType } from '@navikt/fp-kodeverk';
 import { UkjentAdresseMeldingIndex } from '@navikt/fp-sak-ukjent-adresse';
+import { KodeverkMedNavn } from '@navikt/fp-types';
 
 import styles from './messages.module.css';
 

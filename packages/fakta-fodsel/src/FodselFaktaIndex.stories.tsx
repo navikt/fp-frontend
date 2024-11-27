@@ -1,11 +1,13 @@
 import React from 'react';
-import { StoryFn } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
 
-import { AksjonspunktKode, AksjonspunktStatus, SoknadType, BehandlingType } from '@navikt/fp-kodeverk';
-import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { Behandling, FamilieHendelse, FamilieHendelseSamling, Soknad, Aksjonspunkt } from '@navikt/fp-types';
+import { action } from '@storybook/addon-actions';
+import { StoryFn } from '@storybook/react';
+
+import { AksjonspunktKode, AksjonspunktStatus, BehandlingType,SoknadType } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { Aksjonspunkt,Behandling, FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
+import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
+
 import FodselFaktaIndex from './FodselFaktaIndex';
 
 import '@navikt/ds-css';

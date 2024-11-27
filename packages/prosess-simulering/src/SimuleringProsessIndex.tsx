@@ -1,16 +1,18 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import {
-  Fagsak,
-  SimuleringResultat,
-  TilbakekrevingValg,
-  StandardProsessPanelProps,
-  ArbeidsgiverOpplysningerPerId,
-} from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
+import {
+  ArbeidsgiverOpplysningerPerId,
+  Fagsak,
+  SimuleringResultat,
+  StandardProsessPanelProps,
+  TilbakekrevingValg,
+} from '@navikt/fp-types';
+
 import SimuleringPanel from './components/SimuleringPanel';
+
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);

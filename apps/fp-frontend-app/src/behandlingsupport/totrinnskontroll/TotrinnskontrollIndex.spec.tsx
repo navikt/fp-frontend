@@ -1,16 +1,18 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { RawIntlProvider } from 'react-intl';
 import { MemoryRouter } from 'react-router-dom';
+
+import { createIntl } from '@navikt/ft-utils';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import MockAdapter from 'axios-mock-adapter';
-import { createIntl } from '@navikt/ft-utils';
-import { Fagsak, BehandlingAppKontekst, TotrinnskontrollAksjonspunkt, BehandlingÅrsak } from '@navikt/fp-types';
-import { RestApiMock } from '@navikt/fp-utils-test';
-import { FagsakYtelseType, BehandlingType, KodeverkType, AksjonspunktKode } from '@navikt/fp-kodeverk';
 
-import { RawIntlProvider } from 'react-intl';
+import { AksjonspunktKode,BehandlingType, FagsakYtelseType, KodeverkType } from '@navikt/fp-kodeverk';
+import { BehandlingAppKontekst, BehandlingÅrsak,Fagsak, TotrinnskontrollAksjonspunkt } from '@navikt/fp-types';
+import { RestApiMock } from '@navikt/fp-utils-test';
+
+import { FagsakApiKeys,requestFagsakApi } from '../../data/fagsakContextApi';
 import { FagsakData } from '../../fagsak/FagsakData';
-import { requestFagsakApi, FagsakApiKeys } from '../../data/fagsakContextApi';
 import { TotrinnskontrollIndex } from './TotrinnskontrollIndex';
 
 import messages from '../../../i18n/nb_NO.json';

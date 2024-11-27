@@ -1,10 +1,11 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
-import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { InputField, RadioGroupPanel } from '@navikt/ft-form-hooks';
-import { required, hasValidInteger, hasValidText } from '@navikt/ft-form-validators';
-
 import { useFormContext } from 'react-hook-form';
+import { FormattedMessage } from 'react-intl';
+
+import { InputField, RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { hasValidInteger, hasValidText,required } from '@navikt/ft-form-validators';
+import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
 import styles from './virksomhetRegnskapPanel.module.css';
 
 export type FormValues = {

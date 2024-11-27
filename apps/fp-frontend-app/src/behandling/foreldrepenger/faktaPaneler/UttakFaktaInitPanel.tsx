@@ -1,21 +1,21 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { UttakFaktaIndex } from '@navikt/fp-fakta-uttak';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import {
   AksessRettigheter,
   ArbeidsgiverOpplysningerPerId,
+  Fagsak,
   FaktaArbeidsforhold,
   KontrollerFaktaPeriode,
   Ytelsefordeling,
-  Fagsak,
 } from '@navikt/fp-types';
 
-import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
-import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { BehandlingApiKeys, requestBehandlingApi } from '../../../data/behandlingContextApi';
+import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
+import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,

@@ -1,22 +1,24 @@
 import React, { FunctionComponent, useCallback, useEffect, useMemo } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import moment from 'moment';
-import { Label } from '@navikt/ds-react';
+import { FormattedMessage, useIntl } from 'react-intl';
 
+import { Label } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import moment from 'moment';
+
 import {
+  AksjonspunktKode,
+  AksjonspunktStatus,
+  KodeverkType,
+  TilretteleggingType,
   VilkarType,
   VilkarUtfallType,
-  KodeverkType,
-  AksjonspunktKode,
-  TilretteleggingType,
-  AksjonspunktStatus,
 } from '@navikt/fp-kodeverk';
 import {
+  ProsessPanelTemplate,
   ProsessStegBegrunnelseTextFieldNew,
   VilkarResultPicker,
-  ProsessPanelTemplate,
 } from '@navikt/fp-prosess-felles';
 import {
   Aksjonspunkt,
@@ -27,7 +29,6 @@ import {
   FodselOgTilrettelegging,
 } from '@navikt/fp-types';
 import { BekreftSvangerskapspengervilkarAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 const finnesUttakPåArbfor = (arbfor: ArbeidsforholdFodselOgTilrettelegging): boolean => {
   const finnesAnnenTilretteleggingEnnHel = arbfor.tilretteleggingDatoer.some(

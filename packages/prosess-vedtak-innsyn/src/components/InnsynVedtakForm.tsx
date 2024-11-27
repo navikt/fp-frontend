@@ -1,14 +1,15 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Label, BodyShort, Heading, HStack, Link } from '@navikt/ds-react';
 
-import { AksjonspunktKode, Kommunikasjonsretning, InnsynResultatType, DokumentMalType } from '@navikt/fp-kodeverk';
-import { ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { BodyShort, Heading, HStack, Label, Link } from '@navikt/ds-react';
 import { Form, TextAreaField } from '@navikt/ft-form-hooks';
-import { decodeHtmlEntity, formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 import { hasValidText, maxLength, minLength } from '@navikt/ft-form-validators';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { decodeHtmlEntity, formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
+
+import { AksjonspunktKode, DokumentMalType,InnsynResultatType, Kommunikasjonsretning } from '@navikt/fp-kodeverk';
+import { ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import { Aksjonspunkt, Dokument, InnsynDokument } from '@navikt/fp-types';
 import { ForeslaVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 

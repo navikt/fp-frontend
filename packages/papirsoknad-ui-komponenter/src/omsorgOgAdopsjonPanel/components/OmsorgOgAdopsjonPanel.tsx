@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
+import { useFieldArray, useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
+
 import { Heading } from '@navikt/ds-react';
-import { BorderBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { Datepicker, InputField, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import {
   dateBeforeOrEqualToToday,
   hasValidDate,
@@ -11,11 +13,10 @@ import {
   minValue,
   required,
 } from '@navikt/ft-form-validators';
-import { Datepicker, InputField, RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { BorderBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { FamilieHendelseType } from '@navikt/fp-kodeverk';
 
-import { useFieldArray, useFormContext } from 'react-hook-form';
 import styles from './omsorgOgAdopsjonPanel.module.css';
 
 const MAX_ANTALL_BARN = 10;

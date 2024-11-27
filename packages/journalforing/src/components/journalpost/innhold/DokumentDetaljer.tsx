@@ -1,12 +1,14 @@
-import React, { FunctionComponent, useState, useCallback } from 'react';
+import React, { FunctionComponent, useCallback,useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Label, Button, CheckboxGroup, Checkbox, HStack, Spacer } from '@navikt/ds-react';
-import { hasValidText, required } from '@navikt/ft-form-validators';
-import { TabsAddIcon, PencilIcon } from '@navikt/aksel-icons';
+
+import { PencilIcon,TabsAddIcon } from '@navikt/aksel-icons';
+import { Button, Checkbox, CheckboxGroup, HStack, Label, Spacer } from '@navikt/ds-react';
 import { InputField, SelectField } from '@navikt/ft-form-hooks';
-import JournalDokument from '../../../typer/journalDokumentTsType';
+import { hasValidText, required } from '@navikt/ft-form-validators';
+
 import { listeMedTittler } from '../../../kodeverk/dokumentTittel';
 import { erKanalSomErÅpenForEndring } from '../../../kodeverk/journalKanal';
+import JournalDokument from '../../../typer/journalDokumentTsType';
 import Journalpost from '../../../typer/journalpostTsType';
 
 import styles from './dokumentDetaljer.module.css';

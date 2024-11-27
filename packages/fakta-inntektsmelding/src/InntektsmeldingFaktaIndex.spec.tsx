@@ -1,9 +1,11 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import * as stories from './InntektsmeldingFaktaIndex.stories';
+import React from 'react';
+
 import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React from 'react';
+
+import * as stories from './InntektsmeldingFaktaIndex.stories';
 
 const { InntektsmeldingDefault } = composeStories(stories);
 

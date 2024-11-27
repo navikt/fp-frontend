@@ -1,8 +1,10 @@
-import crypto from 'crypto';
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+
 import { composeStories } from '@storybook/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import crypto from 'crypto';
+
 import * as stories from './OpptjeningVilkarProsessIndex.stories';
 
 const { ÅpentAksjonspunkt, HarIkkeAksjonspunkt, ÅpentAksjonspunktMenUtenAktiviteter } = composeStories(stories);

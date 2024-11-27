@@ -1,9 +1,11 @@
 import React from 'react';
-import { render, screen, within } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+
 import { composeStories } from '@storybook/react';
-import * as stories from './MedlemskapFaktaIndex.stories';
+import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { describe, expect, it } from 'vitest';
+
+import * as stories from './MedlemskapFaktaIndex.stories';
 
 const { Default } = composeStories(stories);
 

@@ -1,13 +1,16 @@
 import React from 'react';
-import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { FormattedMessage } from 'react-intl';
+
 import { VStack } from '@navikt/ds-react';
-import { StandardFaktaPanelProps } from '@navikt/fp-types';
-import { AksjonspunktKode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
+import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
+
 import { PersonopplysningerForFamilie } from '@navikt/fp-fakta-felles';
-import { AleneomsorgForm, FormValues as AleneomsorgFormValues } from './forms/AleneomsorgForm';
-import { HarAnnenForelderRettForm, FormValues as RettFormValues } from './forms/HarAnnenForelderRettForm';
+import { AksjonspunktKode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
+import { StandardFaktaPanelProps } from '@navikt/fp-types';
+
 import { OmsorgOgRettProps } from '../OmsorgOgRettFaktaIndex';
+import { AleneomsorgForm, FormValues as AleneomsorgFormValues } from './forms/AleneomsorgForm';
+import { FormValues as RettFormValues,HarAnnenForelderRettForm } from './forms/HarAnnenForelderRettForm';
 
 export const OmsorgOgRettInfoPanel = ({
   readOnly,

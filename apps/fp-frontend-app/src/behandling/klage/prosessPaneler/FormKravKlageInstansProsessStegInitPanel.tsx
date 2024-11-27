@@ -1,15 +1,14 @@
 import React, { useMemo } from 'react';
 import { useIntl } from 'react-intl';
 
-import { FormkravMellomlagretDataType, FormkravProsessIndex } from '@navikt/fp-prosess-formkrav';
+import { AksjonspunktKode, BehandlingStatus, BehandlingType, isKlageAvvist } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
+import { FormkravMellomlagretDataType, FormkravProsessIndex } from '@navikt/fp-prosess-formkrav';
 import { KlageVurdering } from '@navikt/fp-types';
 
-import { BehandlingStatus, BehandlingType, AksjonspunktKode, isKlageAvvist } from '@navikt/fp-kodeverk';
-
+import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
-import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_FORMKRAV_NK];
 

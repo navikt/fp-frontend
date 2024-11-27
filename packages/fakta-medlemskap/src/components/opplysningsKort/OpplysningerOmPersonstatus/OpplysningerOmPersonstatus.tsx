@@ -1,14 +1,16 @@
 import React, { FC } from 'react';
-import { AlleKodeverk, MedlemskapAvvik, Medlemskap } from '@navikt/fp-types';
-import { Detail, Label, VStack } from '@navikt/ds-react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { FaktaKilde } from '@navikt/fp-fakta-felles';
 
-import { relevantForPersonstatus } from '../../ekspansjonsKort/medlemsAvvik';
+import { Detail, Label, VStack } from '@navikt/ds-react';
+import { AvsnittSkiller } from '@navikt/ft-ui-komponenter';
+
+import { FaktaKilde } from '@navikt/fp-fakta-felles';
+import { AlleKodeverk, Medlemskap,MedlemskapAvvik } from '@navikt/fp-types';
+
 import EkspansjonsKort from '../../ekspansjonsKort/EkspansjonsKort';
+import { relevantForPersonstatus } from '../../ekspansjonsKort/medlemsAvvik';
 import PersonstatusVisning from './PersonstatusVisning';
 import RegionVisning from './RegionVisning';
-import { AvsnittSkiller } from '@navikt/ft-ui-komponenter';
 
 interface Props {
   medlemskap: Medlemskap;

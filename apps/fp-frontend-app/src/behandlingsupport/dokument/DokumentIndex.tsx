@@ -1,15 +1,15 @@
 import React, { useMemo } from 'react';
+import { useIntl } from 'react-intl';
+
+import { LoadingPanel, usePrevious,VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
+import { hentDokumentLenke } from '@navikt/fp-konstanter';
+import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { DokumenterSakIndex } from '@navikt/fp-sak-dokumenter';
-import { LoadingPanel, VerticalSpacer, usePrevious } from '@navikt/ft-ui-komponenter';
 import { Dokument } from '@navikt/fp-types';
 
-import { RestApiState } from '@navikt/fp-rest-api-hooks';
-import { hentDokumentLenke } from '@navikt/fp-konstanter';
-
-import { useIntl } from 'react-intl';
 import { useBehandlingEndret } from '../../behandling/useBehandlingEndret';
 import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
-
 import { SupportHeaderAndContent } from '../SupportHeader';
 
 const selectDocument =

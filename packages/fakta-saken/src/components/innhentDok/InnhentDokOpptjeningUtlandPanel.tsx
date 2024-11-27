@@ -1,13 +1,14 @@
 import React, { FunctionComponent, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Heading } from '@navikt/ds-react';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { FaktaBegrunnelseTextFieldNew, FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
-import { AksjonspunktBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { Heading } from '@navikt/ds-react';
+import { Form,RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import { RadioGroupPanel, Form } from '@navikt/ft-form-hooks';
+import { AksjonspunktBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
+import { FaktaBegrunnelseTextFieldNew, FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt } from '@navikt/fp-types';
 import { MerkOpptjeningUtlandAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 

@@ -1,5 +1,6 @@
-import { screen } from '@testing-library/react';
 import { composeStories } from '@storybook/react';
+import { screen } from '@testing-library/react';
+
 import * as stories from './SistBehandledeSaker.stories';
 
 const { Default, IngenBehandlinger } = composeStories(stories);

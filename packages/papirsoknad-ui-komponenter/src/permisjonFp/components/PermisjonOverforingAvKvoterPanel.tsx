@@ -1,17 +1,19 @@
 import React, { ReactElement } from 'react';
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+
 import { Label } from '@navikt/ds-react';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { CheckboxField } from '@navikt/ft-form-hooks';
-import { KodeverkType, OverforingArsak, ForeldreType } from '@navikt/fp-kodeverk';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
+import { ForeldreType,KodeverkType, OverforingArsak } from '@navikt/fp-kodeverk';
 import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
-import { useFormContext } from 'react-hook-form';
 import {
-  RenderOverforingAvKvoterFieldArray,
   FormValues as KvoterPerioderFormValues,
-  TIDSROM_PERMISJON_FORM_NAME_PREFIX,
   OVERFORING_PERIODE_FIELD_ARRAY_NAME,
+  RenderOverforingAvKvoterFieldArray,
+  TIDSROM_PERMISJON_FORM_NAME_PREFIX,
 } from './RenderOverforingAvKvoterFieldArray';
 
 const getText = (intl: IntlShape, kode: string, navn: string): string => {

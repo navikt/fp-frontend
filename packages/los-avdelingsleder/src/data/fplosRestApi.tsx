@@ -1,17 +1,17 @@
-import { RestApiConfigBuilder, createRequestApi, RestKey } from '@navikt/fp-rest-api';
+import { Oppgave, SaksbehandlerProfil } from '@navikt/fp-los-felles';
+import { createRequestApi, RestApiConfigBuilder, RestKey } from '@navikt/fp-rest-api';
 import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
 import { AlleKodeverk } from '@navikt/fp-types';
-import { Oppgave, SaksbehandlerProfil } from '@navikt/fp-los-felles';
 
 import Avdeling from '../typer/avdelingTsType';
-import SakslisteAvdeling from '../typer/sakslisteAvdelingTsType';
+import BehandlingVentefrist from '../typer/behandlingVentefristTsType';
 import OppgaverForAvdeling from '../typer/oppgaverForAvdelingTsType';
 import OppgaveForDato from '../typer/oppgaverForDatoTsType';
-import BehandlingVentefrist from '../typer/behandlingVentefristTsType';
 import OppgaverForForsteStonadsdag from '../typer/oppgaverForForsteStonadsdagTsType';
 import OppgaverSomErApneEllerPaVent from '../typer/oppgaverSomErApneEllerPaVentTsType';
 import Reservasjon from '../typer/reservasjonTsType';
 import SaksbehandlereOgSaksbehandlerGrupper from '../typer/saksbehandlereOgSaksbehandlerGrupper ';
+import SakslisteAvdeling from '../typer/sakslisteAvdelingTsType';
 
 export const RestApiGlobalStatePathsKeys = {
   KODEVERK_LOS: new RestKey<AlleKodeverk, void>('KODEVERK_LOS'),

@@ -1,9 +1,10 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+
 import { Heading } from '@navikt/ds-react';
 import { Datepicker } from '@navikt/ft-form-hooks';
-import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { dateBeforeOrEqualToToday, hasValidDate, required } from '@navikt/ft-form-validators';
+import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 export type FormValues = {
   mottattDato?: string;

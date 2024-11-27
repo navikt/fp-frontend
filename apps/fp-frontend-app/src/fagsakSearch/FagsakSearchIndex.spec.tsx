@@ -1,12 +1,13 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
+
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { FagsakEnkel, KjønnkodeEnum } from '@navikt/fp-types';
 import { RestApiMock } from '@navikt/fp-utils-test';
 
-import { requestFagsakApi, FagsakApiKeys } from '../data/fagsakContextApi';
+import { FagsakApiKeys,requestFagsakApi } from '../data/fagsakContextApi';
 import { FagsakSearchIndex } from './FagsakSearchIndex';
 
 const mockHistoryPush = vi.fn();

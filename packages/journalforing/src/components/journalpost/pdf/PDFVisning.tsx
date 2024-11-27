@@ -1,5 +1,7 @@
 import React, { FunctionComponent } from 'react';
+
 import JournalDokument from '../../../typer/journalDokumentTsType';
+
 import styles from './dokumentIndex.module.css';
 
 type OwnProps = Readonly<{

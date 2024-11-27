@@ -1,26 +1,27 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 
-import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import {
-  Vilkar,
-  Vilkarperiode,
-  Beregningsgrunnlag,
-  AksessRettigheter,
-  ArbeidsgiverOpplysningerPerId,
-} from '@navikt/fp-types';
-
-import { TIDENES_ENDE } from '@navikt/ft-utils';
-import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import {
   BeregningFaktaIndex,
   FaktaBeregningAvklaringsbehovCode,
-  FtVilkar,
   FtBeregningsgrunnlag,
+  FtVilkar,
 } from '@navikt/ft-fakta-beregning';
-import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
-import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
+import { TIDENES_ENDE } from '@navikt/ft-utils';
+
+import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
+import {
+  AksessRettigheter,
+  ArbeidsgiverOpplysningerPerId,
+  Beregningsgrunnlag,
+  Vilkar,
+  Vilkarperiode,
+} from '@navikt/fp-types';
+
 import { BehandlingApiKeys, requestBehandlingApi } from '../../../data/behandlingContextApi';
+import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
+import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
 
 import '@navikt/ft-fakta-beregning/dist/style.css';
 

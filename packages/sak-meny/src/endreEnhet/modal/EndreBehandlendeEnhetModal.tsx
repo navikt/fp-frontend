@@ -1,9 +1,9 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Modal, Heading, Button } from '@navikt/ds-react';
 
-import { SelectField, TextAreaField, Form } from '@navikt/ft-form-hooks';
+import { Button,Heading, Modal } from '@navikt/ds-react';
+import { Form,SelectField, TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, required } from '@navikt/ft-form-validators';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 

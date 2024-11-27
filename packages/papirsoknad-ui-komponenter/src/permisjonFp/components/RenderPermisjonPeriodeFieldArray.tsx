@@ -1,11 +1,10 @@
 import React, { ReactElement, useEffect } from 'react';
-import moment from 'moment';
+import { useFieldArray, useFormContext,UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { UseFormGetValues, useFieldArray, useFormContext } from 'react-hook-form';
-import { Label, Alert, Button } from '@navikt/ds-react';
+
 import { XMarkIcon } from '@navikt/aksel-icons';
-import { VerticalSpacer, FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
-import { CheckboxField, Datepicker, SelectField, PeriodFieldArray, InputField } from '@navikt/ft-form-hooks';
+import { Alert, Button,Label } from '@navikt/ds-react';
+import { CheckboxField, Datepicker, InputField,PeriodFieldArray, SelectField } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   dateBeforeOrEqual,
@@ -15,10 +14,12 @@ import {
   maxValue,
   required,
 } from '@navikt/ft-form-validators';
-import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
+import { FlexColumn, FlexContainer, FlexRow,VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import moment from 'moment';
 
 import { KodeverkType, UttakPeriodeType } from '@navikt/fp-kodeverk';
+import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
 import styles from './renderPermisjonPeriodeFieldArray.module.css';
 

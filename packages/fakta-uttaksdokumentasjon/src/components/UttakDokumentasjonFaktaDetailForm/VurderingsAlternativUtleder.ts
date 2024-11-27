@@ -1,7 +1,9 @@
-import { UttakType, UttakÅrsak } from '@navikt/fp-types';
 import { IntlShape } from 'react-intl';
-import { erUttaksperiodeMedAktivitetskravArbeid } from './DokumentasjonVurderingBehovFormMapper';
+
+import { UttakÅrsak,UttakType } from '@navikt/fp-types';
+
 import { VurderingsAlternativ } from '../../../types/FormValues';
+import { erUttaksperiodeMedAktivitetskravArbeid } from './DokumentasjonVurderingBehovFormMapper';
 
 type RadioProps = {
   value: string;

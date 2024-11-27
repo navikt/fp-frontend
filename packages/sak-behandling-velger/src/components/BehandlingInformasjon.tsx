@@ -1,10 +1,12 @@
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
+
 import { ChevronDownIcon, ChevronUpIcon, StarFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Label, HStack, Spacer, VStack, Box } from '@navikt/ds-react';
-import { Tooltip, VerticalSpacer, DateTimeLabel } from '@navikt/ft-ui-komponenter';
+import { BodyShort, Box,HStack, Label, Spacer, VStack } from '@navikt/ds-react';
+import { DateTimeLabel,Tooltip, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
+import { BehandlingArsakType,BehandlingType, KodeverkType } from '@navikt/fp-kodeverk';
 import { BehandlingAppKontekst, KodeverkMedNavn } from '@navikt/fp-types';
-import { KodeverkType, BehandlingType, BehandlingArsakType } from '@navikt/fp-kodeverk';
 
 import styles from './behandlingInformasjon.module.css';
 

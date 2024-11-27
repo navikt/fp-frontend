@@ -1,16 +1,18 @@
 import React from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import { Button, Modal, Heading } from '@navikt/ds-react';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { FormattedMessage, useIntl } from 'react-intl';
+
+import { Button, Heading,Modal } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
 import { AlleKodeverk } from '@navikt/fp-types';
 
-import { VirksomhetIdentifikasjonPanel, FormValues as IdFormValues } from './VirksomhetIdentifikasjonPanel';
-import { VirksomhetRegnskapPanel, FormValues as RegnskapFormValues } from './VirksomhetRegnskapPanel';
-import { VirksomhetStartetEndretPanel, FormValues as StartedEndretFormValues } from './VirksomhetStartetEndretPanel';
-import { VirksomhetRelasjonPanel, FormValues as RelasjonFormValues } from './VirksomhetRelasjonPanel';
-import { VirksomhetTypeNaringPanel, FormValues as TypeNaringFormValues } from './VirksomhetTypeNaringPanel';
+import { FormValues as IdFormValues,VirksomhetIdentifikasjonPanel } from './VirksomhetIdentifikasjonPanel';
+import { FormValues as RegnskapFormValues,VirksomhetRegnskapPanel } from './VirksomhetRegnskapPanel';
+import { FormValues as RelasjonFormValues,VirksomhetRelasjonPanel } from './VirksomhetRelasjonPanel';
+import { FormValues as StartedEndretFormValues,VirksomhetStartetEndretPanel } from './VirksomhetStartetEndretPanel';
+import { FormValues as TypeNaringFormValues,VirksomhetTypeNaringPanel } from './VirksomhetTypeNaringPanel';
 
 import styles from './registrerVirksomhetModalForm.module.css';
 

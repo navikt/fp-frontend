@@ -1,12 +1,13 @@
 import React from 'react';
-import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
+
 import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
+import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 import { RestApiMock } from '@navikt/fp-utils-test';
 
-import { RestApiPathsKeys, requestApi } from '../../../data/fplosSaksbehandlerRestApi';
+import { requestApi,RestApiPathsKeys } from '../../../data/fplosSaksbehandlerRestApi';
 import { OpphevReservasjonModal } from './OpphevReservasjonModal';
 
 import messages from '../../../../i18n/nb_NO.json';

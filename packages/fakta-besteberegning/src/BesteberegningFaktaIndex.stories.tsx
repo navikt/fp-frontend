@@ -1,11 +1,13 @@
 import React from 'react';
-import { StoryFn } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
 
-import { AksjonspunktStatus, AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { Behandling, Aksjonspunkt, Beregningsgrunnlag } from '@navikt/fp-types';
+import { action } from '@storybook/addon-actions';
+import { StoryFn } from '@storybook/react';
+
+import { AksjonspunktKode,AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { Aksjonspunkt, Behandling, Beregningsgrunnlag } from '@navikt/fp-types';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
+
 import BesteberegningFaktaIndex from './BesteberegningFaktaIndex';
 import { beregningsgrunnlag as scenarioBG } from './scenario/BesteberegningScenario';
 

@@ -1,12 +1,14 @@
 import React, { useMemo } from 'react';
-import dayjs from 'dayjs';
 import { FormattedMessage } from 'react-intl';
+
 import { Heading, VStack } from '@navikt/ds-react';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import dayjs from 'dayjs';
+
 import { KodeverkType } from '@navikt/fp-kodeverk';
 
-import { NyeOgFerdigstilteOppgaver } from '../../../typer/nyeOgFerdigstilteOppgaverTsType';
 import useLosKodeverk from '../../../data/useLosKodeverk';
+import { NyeOgFerdigstilteOppgaver } from '../../../typer/nyeOgFerdigstilteOppgaverTsType';
 import { NyeOgFerdigstilteOppgaverForIdagGraf } from './NyeOgFerdigstilteOppgaverForIdagGraf';
 
 export const getNyeOgFerdigstilteForIDag = (

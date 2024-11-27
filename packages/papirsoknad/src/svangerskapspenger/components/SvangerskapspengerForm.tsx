@@ -1,31 +1,32 @@
 import React, { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
-import { Form } from '@navikt/ft-form-hooks';
-import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
-import {
-  SoknadData,
-  MottattDatoPapirsoknadIndex,
-  FrilansPapirsoknadIndex,
-  FrilansFormValues,
-  OppholdINorgePapirsoknadIndex,
-  OppholdINorgeFormValues,
-  SprakPapirsoknadIndex,
-  LagreSoknadPapirsoknadIndex,
-  VirksomhetPapirsoknadIndex,
-  InntektsgivendeArbeidPapirsoknadIndex,
-  IArbeidFormValues,
-  AndreYtelserPapirsoknadIndex,
-  AndreYtelserFormValue,
-  BehovForTilretteleggingPanel,
-  BehovForTilretteleggingFormValues,
-  TerminFodselSvpPanel,
-  TerminFodselSvpFormValues,
-  Tilrettelegging,
-  MottattDatoFormValues,
-  ANDRE_YTELSER_FORM_NAME_PREFIX,
-} from '@navikt/fp-papirsoknad-ui-komponenter';
+import { Form } from '@navikt/ft-form-hooks';
+
 import { FamilieHendelseType, KodeverkType } from '@navikt/fp-kodeverk';
+import {
+  ANDRE_YTELSER_FORM_NAME_PREFIX,
+  AndreYtelserFormValue,
+  AndreYtelserPapirsoknadIndex,
+  BehovForTilretteleggingFormValues,
+  BehovForTilretteleggingPanel,
+  FrilansFormValues,
+  FrilansPapirsoknadIndex,
+  IArbeidFormValues,
+  InntektsgivendeArbeidPapirsoknadIndex,
+  LagreSoknadPapirsoknadIndex,
+  MottattDatoFormValues,
+  MottattDatoPapirsoknadIndex,
+  OppholdINorgeFormValues,
+  OppholdINorgePapirsoknadIndex,
+  SoknadData,
+  SprakPapirsoknadIndex,
+  TerminFodselSvpFormValues,
+  TerminFodselSvpPanel,
+  Tilrettelegging,
+  VirksomhetPapirsoknadIndex,
+} from '@navikt/fp-papirsoknad-ui-komponenter';
+import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
 const FRILANS_NAME_PREFIX = 'frilans';
 

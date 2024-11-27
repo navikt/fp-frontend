@@ -1,7 +1,8 @@
 import React from 'react';
-import { useIntl, FormattedMessage } from 'react-intl';
-import { Button, HStack, Label, Modal as NavModal } from '@navikt/ds-react';
+import { FormattedMessage,useIntl } from 'react-intl';
+
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
+import { Button, HStack, Label, Modal as NavModal } from '@navikt/ds-react';
 
 import styles from './behandlingPollingTimoutModal.module.css';
 

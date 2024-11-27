@@ -1,8 +1,9 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
-import { Modal, Button, Label, BodyShort, HStack } from '@navikt/ds-react';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
+import { BodyShort, Button, HStack,Label, Modal } from '@navikt/ds-react';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import styles from './fatterVedtakStatusModal.module.css';
 

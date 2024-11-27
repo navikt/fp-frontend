@@ -1,11 +1,11 @@
 import React from 'react';
-import { StoryFn } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
 
-import { Behandling, Aksjonspunkt, Fagsak } from '@navikt/fp-types';
+import { action } from '@storybook/addon-actions';
+import { StoryFn } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { Aksjonspunkt, Behandling, Fagsak } from '@navikt/fp-types';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import BeregningsresultatProsessIndex from './BeregningsresultatProsessIndex';

@@ -1,19 +1,21 @@
 import React from 'react';
-import { StoryFn } from '@storybook/react';
+
+import { TIDENES_ENDE } from '@navikt/ft-utils';
 import { action } from '@storybook/addon-actions';
+import { StoryFn } from '@storybook/react';
+
 import {
+  AdresseType,
   AksjonspunktKode,
   AksjonspunktStatus,
   BehandlingStatus,
   BehandlingType,
   FagsakYtelseType,
-  AdresseType,
   PersonstatusType,
   Region,
 } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt, Behandling, Fagsak, MedlemskapAvvik, Medlemskap, Soknad } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import { TIDENES_ENDE } from '@navikt/ft-utils';
+import { Aksjonspunkt, Behandling, Fagsak, Medlemskap, MedlemskapAvvik, Soknad } from '@navikt/fp-types';
 
 import MedlemskapFaktaIndex from './MedlemskapFaktaIndex';
 
