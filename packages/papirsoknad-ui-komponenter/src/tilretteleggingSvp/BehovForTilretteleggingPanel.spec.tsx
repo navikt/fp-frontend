@@ -35,7 +35,7 @@ describe('<BehovForTilretteleggingPanel>', () => {
     expect(lagre).not.toHaveBeenCalled();
   });
 
-  it('skal velge delvis fylle ut skjema', async () => {
+  it('skal delvis fylle ut skjema og få feilmeldinger', async () => {
     const lagre = vi.fn();
 
     await Default.run({
@@ -57,7 +57,7 @@ describe('<BehovForTilretteleggingPanel>', () => {
     expect(lagre).toHaveBeenCalledTimes(0);
   });
 
-  it('skal velge at det søkes om tilrettelegging for alle arbeidstyper', async () => {
+  it('skal søkes om tilrettelegging for alle arbeidstyper', async () => {
     const lagre = vi.fn();
 
     await Default.run({
@@ -78,7 +78,9 @@ describe('<BehovForTilretteleggingPanel>', () => {
 
     // Selvstendig næringsdrivende
     const næringsdrivende = within(
-      screen.getByText('Søkes det om svangerskapspenger som selvstendig næringsdrivende?').closest('fieldset')!,
+      screen
+        .getByText('Søkes det om svangerskapspenger som selvstendig næringsdrivende?')
+        .closest('fieldset') as HTMLElement,
     );
 
     await userEvent.type(
@@ -93,7 +95,9 @@ describe('<BehovForTilretteleggingPanel>', () => {
     await userEvent.type(næringsdrivende.getByLabelText('Stillingsprosent'), '80');
 
     // Frilans
-    const frilans = within(screen.getByText('Søkes det om svangerskapspenger som frilanser?').closest('fieldset')!);
+    const frilans = within(
+      screen.getByText('Søkes det om svangerskapspenger som frilanser?').closest('fieldset') as HTMLElement,
+    );
 
     await userEvent.type(
       frilans.getByLabelText('Jordmor/lege oppgir at tilrettelegging er nødvendig fra og med'),
@@ -108,7 +112,7 @@ describe('<BehovForTilretteleggingPanel>', () => {
 
     // Arbeidstaker
     const arbeidstaker = within(
-      screen.getByText('Søkes det om svangerskapspenger som arbeidstaker?').closest('fieldset')!,
+      screen.getByText('Søkes det om svangerskapspenger som arbeidstaker?').closest('fieldset') as HTMLElement,
     );
 
     await userEvent.type(arbeidstaker.getByLabelText('Arbeidsgivers orgnr/fnr'), '000000000');

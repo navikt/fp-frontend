@@ -24,11 +24,6 @@ interface Props {
   name: string;
 }
 
-/**
- * BehovForTilrettteleggingFieldArray
- *
- * Viser inputfelter for tilrettelegging av arbeidsforhold for selvstendig næringsdrivende eller frilans.
- */
 export const BehovForTilretteleggingFieldArray = ({ readOnly, name }: Props) => {
   const intl = useIntl();
 

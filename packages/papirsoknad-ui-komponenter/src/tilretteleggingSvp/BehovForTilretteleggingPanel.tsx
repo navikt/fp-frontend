@@ -27,11 +27,6 @@ interface Props {
   readOnly: boolean;
 }
 
-/*
- * BehovForTilretteleggingPanel
- *
- * Form som brukes for registrere om det er behov for tilrettelegging.
- */
 export const BehovForTilretteleggingPanel = ({ readOnly }: Props) => {
   const { watch, setError, clearErrors, formState } = useFormContext<FormValues>();
 

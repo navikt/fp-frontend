@@ -28,11 +28,6 @@ interface Props {
 const FA_PREFIX = `${TILRETTELEGGING_NAME_PREFIX}.${TILRETTELEGGING_FOR_ARBEIDSGIVER_FIELD_ARRAY_NAME}`;
 const getPrefix = (index: number) => `${FA_PREFIX}.${index}`;
 
-/*
- * TilretteleggingForArbeidsgiverFieldArray
- *
- * Form som brukes for registrere om det er behov for tilrettelegging for arbeidsgiver.
- */
 export const TilretteleggingForArbeidsgiverFieldArray = ({ readOnly }: Props) => {
   const intl = useIntl();
 
