@@ -7,8 +7,8 @@ const config: StorybookConfig = {
     name: '@storybook/react-vite',
     options: {},
   },
-  viteFinal: async config => ({
-    ...config,
+  viteFinal: async viteConfig => ({
+    ...viteConfig,
     // @ts-ignore
     plugins: config.plugins?.filter(p => p?.name !== 'vite:dts'),
   }),
