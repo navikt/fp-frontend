@@ -1,6 +1,7 @@
 import { useCallback, useEffect } from 'react';
+import { useFormContext,UseFormTrigger } from 'react-hook-form';
+
 import debounce from 'lodash.debounce';
-import { UseFormTrigger, useFormContext } from 'react-hook-form';
 
 export const getTimeoutValue = () => (process.env.NODE_ENV === 'test' ? 0 : 1000);
 

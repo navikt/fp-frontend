@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { TrashIcon } from '@navikt/aksel-icons';
 import { Button, HStack } from '@navikt/ds-react';
 import { AvsnittSkiller } from '@navikt/ft-ui-komponenter';

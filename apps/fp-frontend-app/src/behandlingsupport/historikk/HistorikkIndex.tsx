@@ -4,8 +4,8 @@ import { useLocation } from 'react-router-dom';
 import { HistorikkSakIndex } from '@navikt/fp-sak-historikk';
 import { Historikkinnslag } from '@navikt/fp-types';
 
-import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
 import { createLocationForSkjermlenke, pathToBehandling } from '../../app/paths';
+import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
 
 interface Props {
   saksnummer: string;

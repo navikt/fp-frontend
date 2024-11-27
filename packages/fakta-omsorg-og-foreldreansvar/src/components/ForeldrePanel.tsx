@@ -1,11 +1,12 @@
 import React, { useMemo } from 'react';
 import { FormattedMessage, WrappedComponentProps } from 'react-intl';
-import { Label, BodyShort, Heading, VStack } from '@navikt/ds-react';
 
+import { BodyShort, Heading, Label, VStack } from '@navikt/ds-react';
 import { DateLabel, FaktaGruppe } from '@navikt/ft-ui-komponenter';
-import { AksjonspunktKode, NavBrukerKjonn, AdresseType } from '@navikt/fp-kodeverk';
-import { PersonopplysningerBasis, Personoversikt } from '@navikt/fp-types';
+
 import { formaterAdresse, getNyesteAdresse } from '@navikt/fp-fakta-felles';
+import { AdresseType,AksjonspunktKode, NavBrukerKjonn } from '@navikt/fp-kodeverk';
+import { PersonopplysningerBasis, Personoversikt } from '@navikt/fp-types';
 
 const lagSøkerdata = ({ aktoerId, navn, kjønn, adresser, dødsdato }: PersonopplysningerBasis) => {
   const postadr = getNyesteAdresse(adresser, AdresseType.POSTADRESSE);

@@ -1,25 +1,26 @@
-import React, { FunctionComponent, useMemo, useCallback, ReactNode } from 'react';
-
-import { KodeverkMedNavn, Opptjening, OpptjeningAktivitet } from '@navikt/fp-types';
-import dayjs from 'dayjs';
+import React, { FunctionComponent, ReactNode,useCallback, useMemo } from 'react';
+import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 
 import {
-  WalletIcon,
-  HandHeartIcon,
-  StrollerIcon,
-  PersonPregnantIcon,
-  StethoscopeIcon,
+  CheckmarkCircleIcon,
   EarthIcon,
   ExclamationmarkTriangleIcon,
-  CheckmarkCircleIcon,
+  HandHeartIcon,
+  PersonPregnantIcon,
+  StethoscopeIcon,
+  StrollerIcon,
+  WalletIcon,
   XMarkOctagonIcon,
 } from '@navikt/aksel-icons';
 import { BodyShort, Label, Timeline } from '@navikt/ds-react';
-import { OpptjeningAktivitetType } from '@navikt/fp-kodeverk';
-import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
-import { FormValues } from '../aktivitet/ValgtAktivitetForm';
+import dayjs from 'dayjs';
+
+import { OpptjeningAktivitetType } from '@navikt/fp-kodeverk';
+import { KodeverkMedNavn, Opptjening, OpptjeningAktivitet } from '@navikt/fp-types';
+
 import { finnOpptjeningFom, finnOpptjeningTom } from '../../utils/opptjeningDatoUtil';
+import { FormValues } from '../aktivitet/ValgtAktivitetForm';
 
 const finnStatus = (erGodkjent: boolean): 'success' | 'warning' | 'danger' => {
   if (erGodkjent === false) {

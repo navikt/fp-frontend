@@ -1,8 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { BodyShort, Button, HStack, Label, Modal, VStack } from '@navikt/ds-react';
 
+import { BodyShort, Button, HStack, Label, Modal, VStack } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
 import { ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 
 interface OwnProps {

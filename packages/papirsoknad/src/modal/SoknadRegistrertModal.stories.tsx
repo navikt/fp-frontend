@@ -1,5 +1,6 @@
-import { withRouter } from '@navikt/fp-storybook-utils';
 import { Meta, StoryObj } from '@storybook/react';
+
+import { withRouter } from '@navikt/fp-storybook-utils';
 
 import { SoknadRegistrertModal } from './SoknadRegistrertModal';
 

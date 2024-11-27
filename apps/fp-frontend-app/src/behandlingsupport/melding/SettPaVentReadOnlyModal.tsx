@@ -1,9 +1,10 @@
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import dayjs from 'dayjs';
-import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import { Button, Modal, Heading, Label, BodyShort, HStack, VStack } from '@navikt/ds-react';
+
+import { BodyShort, Button, Heading, HStack, Label, Modal, VStack } from '@navikt/ds-react';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
+import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import dayjs from 'dayjs';
 
 import { KodeverkMedNavn } from '@navikt/fp-types';
 

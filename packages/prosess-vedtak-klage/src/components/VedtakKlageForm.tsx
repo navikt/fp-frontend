@@ -1,20 +1,21 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
+
 import { BodyShort, Heading, Label } from '@navikt/ds-react';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import {
-  KlageVurdering as klageVurderingCodes,
-  BehandlingResultatType,
-  isKlageOmgjort,
-  KodeverkType,
-  getKodeverknavnFn,
   AksjonspunktKode,
   AksjonspunktStatus,
+  BehandlingResultatType,
+  getKodeverknavnFn,
+  isKlageOmgjort,
+  KlageVurdering as klageVurderingCodes,
+  KodeverkType,
 } from '@navikt/fp-kodeverk';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { Aksjonspunkt, KlageVurdering, AlleKodeverk, Behandlingsresultat } from '@navikt/fp-types';
-import { ForeslaVedtakAp, ForeslaVedtakManueltAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
+import { Aksjonspunkt, AlleKodeverk, Behandlingsresultat,KlageVurdering } from '@navikt/fp-types';
+import { ForeslaVedtakAp, ForeslaVedtakManueltAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { VedtakKlageSubmitPanel } from './VedtakKlageSubmitPanel';
 

@@ -1,29 +1,31 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import { Route, Navigate, useLocation, Routes } from 'react-router-dom';
+import React, { useCallback, useEffect,useState } from 'react';
 import { useIntl } from 'react-intl';
+import { Navigate, Route, Routes,useLocation } from 'react-router-dom';
+
+import { DataFetchPendingModal,LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { Location } from 'history';
-import { VisittkortSakIndex } from '@navikt/fp-sak-visittkort';
-import { LoadingPanel, DataFetchPendingModal } from '@navikt/ft-ui-komponenter';
+
 import { BehandlingType } from '@navikt/fp-kodeverk';
 import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
+import { VisittkortSakIndex } from '@navikt/fp-sak-visittkort';
 import { AnnenPartBehandling, Behandling } from '@navikt/fp-types';
 
-import { BehandlingerIndex } from '../behandling/BehandlingerIndex';
-import { useTrackRouteParam } from '../app/useTrackRouteParam';
-import { BehandlingSupportIndex } from '../behandlingsupport/BehandlingSupportIndex';
-import { FagsakProfileIndex } from '../fagsakprofile/FagsakProfileIndex';
-import {
-  pathToMissingPage,
-  erUrlUnderBehandling,
-  erBehandlingValgt,
-  behandlingerRoutePath,
-  pathToAnnenPart,
-} from '../app/paths';
-import { FagsakGrid } from './components/FagsakGrid';
-import { requestFagsakApi } from '../data/fagsakContextApi';
-import { useHentFagsak } from './useHentFagsak';
 import { ErrorBoundary } from '../app/ErrorBoundary';
+import {
+  behandlingerRoutePath,
+  erBehandlingValgt,
+  erUrlUnderBehandling,
+  pathToAnnenPart,
+  pathToMissingPage,
+} from '../app/paths';
+import { useTrackRouteParam } from '../app/useTrackRouteParam';
+import { BehandlingerIndex } from '../behandling/BehandlingerIndex';
+import { BehandlingSupportIndex } from '../behandlingsupport/BehandlingSupportIndex';
 import { BehandlingApiKeys, requestBehandlingApi, restBehandlingApiHooks } from '../data/behandlingContextApi';
+import { requestFagsakApi } from '../data/fagsakContextApi';
+import { FagsakProfileIndex } from '../fagsakprofile/FagsakProfileIndex';
+import { FagsakGrid } from './components/FagsakGrid';
+import { useHentFagsak } from './useHentFagsak';
 
 const finnLenkeTilAnnenPart = (annenPartBehandling: AnnenPartBehandling): string =>
   pathToAnnenPart(annenPartBehandling.saksnummer, annenPartBehandling.behandlingUuid);

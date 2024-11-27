@@ -1,7 +1,9 @@
 import React from 'react';
+
+import { dateFormat, timeFormat } from '@navikt/ft-utils';
+
 import { HistorikkAktor } from '@navikt/fp-kodeverk';
 import { KjønnkodeEnum } from '@navikt/fp-types';
-import { dateFormat, timeFormat } from '@navikt/ft-utils';
 
 import styles from '../snakkeboble.module.css';
 

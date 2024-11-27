@@ -1,8 +1,8 @@
 import EventType from '../eventType';
+import { ErrorResponse } from '../ResponseTsType';
 import ErrorType from './errorTsType';
 import { isHandledError } from './ErrorTypes';
 import TimeoutError from './TimeoutError';
-import { ErrorResponse } from '../ResponseTsType';
 
 type NotificationEmitter = (eventType: keyof typeof EventType, data?: any, isPollingRequest?: boolean) => void;
 

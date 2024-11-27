@@ -1,12 +1,13 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Label, BodyShort, Detail, Link } from '@navikt/ds-react';
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { PhoneFillIcon, FileFillIcon } from '@navikt/aksel-icons';
 
-import { Inntektsmelding } from '@navikt/fp-types';
+import { FileFillIcon,PhoneFillIcon } from '@navikt/aksel-icons';
+import { BodyShort, Detail, Label, Link } from '@navikt/ds-react';
+import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { formatCurrencyNoKr } from '@navikt/ft-utils';
+
 import { hentDokumentLenke } from '@navikt/fp-konstanter';
+import { Inntektsmelding } from '@navikt/fp-types';
 
 import styles from './inntektsmeldingOpplysningerPanel.module.css';
 

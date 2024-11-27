@@ -1,10 +1,11 @@
 import React from 'react';
-import { Meta, StoryFn, StoryObj } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
 
-import { BehandlingResultatType, BehandlingType, BehandlingStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { action } from '@storybook/addon-actions';
+import { Meta, StoryFn, StoryObj } from '@storybook/react';
+
+import { BehandlingResultatType, BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { alleKodeverk,withRouter } from '@navikt/fp-storybook-utils';
 import { BehandlingAppKontekst, BehandlingÅrsak, TotrinnskontrollSkjermlenkeContext } from '@navikt/fp-types';
-import { withRouter, alleKodeverk } from '@navikt/fp-storybook-utils';
 
 import { ApData, TotrinnskontrollSakIndex } from './TotrinnskontrollSakIndex';
 

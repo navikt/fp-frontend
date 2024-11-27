@@ -1,12 +1,14 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+
 import { Detail, Heading, VStack } from '@navikt/ds-react';
 import { BorderBox } from '@navikt/ft-ui-komponenter';
+
 import { AlleKodeverk } from '@navikt/fp-types';
 
-import { RenderInntektsgivendeArbeidFieldArray } from './RenderInntektsgivendeArbeidFieldArray';
-import { InntektsgivendeArbeidFormValues } from '../types';
 import { INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME } from '../constants';
+import { InntektsgivendeArbeidFormValues } from '../types';
+import { RenderInntektsgivendeArbeidFieldArray } from './RenderInntektsgivendeArbeidFieldArray';
 
 interface Props {
   readOnly: boolean;

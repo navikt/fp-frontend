@@ -1,15 +1,16 @@
 import React from 'react';
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
+
 import { Label, VStack } from '@navikt/ds-react';
 import { CheckboxField } from '@navikt/ft-form-hooks';
 
-import { AlleKodeverk } from '@navikt/fp-types';
 import { KodeverkType } from '@navikt/fp-kodeverk';
+import { AlleKodeverk } from '@navikt/fp-types';
 
-import { useFormContext } from 'react-hook-form';
-import { RenderUtsettelsePeriodeFieldArray } from './RenderUtsettelsePeriodeFieldArray';
-import { UTSETTELSE_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
+import { TIDSROM_PERMISJON_FORM_NAME_PREFIX,UTSETTELSE_PERIODE_FIELD_ARRAY_NAME } from '../../constants';
 import { FormValuesUtsettelse, PermisjonFormValues } from '../../types';
+import { RenderUtsettelsePeriodeFieldArray } from './RenderUtsettelsePeriodeFieldArray';
 
 interface Props {
   readOnly: boolean;

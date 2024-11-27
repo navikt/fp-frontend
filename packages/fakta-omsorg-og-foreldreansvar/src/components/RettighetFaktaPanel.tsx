@@ -1,12 +1,13 @@
 import React, { FunctionComponent } from 'react';
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
+
 import { BodyShort } from '@navikt/ds-react';
+import { DateLabel, FaktaGruppe,VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode, KodeverkType } from '@navikt/fp-kodeverk';
-import { DateLabel, VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { RelatertTilgrensedYtelse, Soknad } from '@navikt/fp-types';
 
-import { useFormContext } from 'react-hook-form';
 import styles from './rettighetFaktaPanel.module.css';
 
 const getLopendeOrAvsluttetYtelser = (

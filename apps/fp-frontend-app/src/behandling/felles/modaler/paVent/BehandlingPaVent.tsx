@@ -1,8 +1,9 @@
-import React, { useState, useMemo, useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect,useMemo, useState } from 'react';
 
+import { AksjonspunktKode, isAksjonspunktOpen, KodeverkType } from '@navikt/fp-kodeverk';
+import { FormValues,SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
 import { AlleKodeverk, AlleKodeverkTilbakekreving, Behandling } from '@navikt/fp-types';
-import { SettPaVentModalIndex, FormValues } from '@navikt/fp-modal-sett-pa-vent';
-import { isAksjonspunktOpen, AksjonspunktKode, KodeverkType } from '@navikt/fp-kodeverk';
+
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../../data/behandlingContextApi';
 
 interface Props {

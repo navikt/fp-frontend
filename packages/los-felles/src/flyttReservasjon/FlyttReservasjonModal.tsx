@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
-import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import { Label, Button, BodyShort, Modal as NavModal, HStack, VStack } from '@navikt/ds-react';
-import { Form, TextAreaField, InputField } from '@navikt/ft-form-hooks';
+import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+
+import { BodyShort, Button, HStack, Label, Modal as NavModal, VStack } from '@navikt/ds-react';
+import { Form, InputField,TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
-import SaksbehandlerProfil from '../typer/saksbehandlerProfilTsType';
 
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
+
+import SaksbehandlerProfil from '../typer/saksbehandlerProfilTsType';
 
 import styles from './flyttReservasjonModal.module.css';
 

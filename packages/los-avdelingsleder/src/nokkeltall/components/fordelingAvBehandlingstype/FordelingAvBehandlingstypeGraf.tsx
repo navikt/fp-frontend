@@ -1,6 +1,8 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { useIntl } from 'react-intl';
+
 import { Panel } from '@navikt/ds-react';
+
 import { BehandlingType } from '@navikt/fp-kodeverk';
 import { ReactECharts } from '@navikt/fp-los-felles';
 import { KodeverkMedNavn } from '@navikt/fp-types';

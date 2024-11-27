@@ -1,20 +1,22 @@
 import React, { FunctionComponent, ReactElement, useCallback, useEffect, useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
-import dayjs from 'dayjs';
-import { required } from '@navikt/ft-form-validators';
-import { DDMMYYYY_DATE_FORMAT, guid } from '@navikt/ft-utils';
-import { SelectField, NumberField, CheckboxField } from '@navikt/ft-form-hooks';
-import { FlexColumn, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { Alert } from '@navikt/ds-react';
-import { UttakArbeidType, KodeverkType } from '@navikt/fp-kodeverk';
 
+import { Alert } from '@navikt/ds-react';
+import { CheckboxField,NumberField, SelectField } from '@navikt/ft-form-hooks';
+import { required } from '@navikt/ft-form-validators';
+import { FlexColumn, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { DDMMYYYY_DATE_FORMAT, guid } from '@navikt/ft-utils';
+import dayjs from 'dayjs';
+
+import { KodeverkType,UttakArbeidType } from '@navikt/fp-kodeverk';
 import {
-  ArbeidsgiverOpplysninger,
   AlleKodeverk,
+  ArbeidsgiverOpplysninger,
   ArbeidsgiverOpplysningerPerId,
   FaktaArbeidsforhold,
 } from '@navikt/fp-types';
-import { useFormContext } from 'react-hook-form';
+
 import KontrollerFaktaPeriodeMedApMarkering from '../typer/kontrollerFaktaPeriodeMedApMarkering';
 
 import styles from './graderingOgSamtidigUttakPanel.module.css';

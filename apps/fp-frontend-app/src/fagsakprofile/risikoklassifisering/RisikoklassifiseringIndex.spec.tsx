@@ -1,15 +1,16 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { render, screen } from '@testing-library/react';
-import { KontrollresultatKode } from '@navikt/fp-sak-risikoklassifisering';
 
+import { render, screen } from '@testing-library/react';
+
+import { KontrollresultatKode } from '@navikt/fp-sak-risikoklassifisering';
+import { BehandlingAppKontekst,Fagsak } from '@navikt/fp-types';
 import { RestApiMock } from '@navikt/fp-utils-test';
-import { Fagsak, BehandlingAppKontekst } from '@navikt/fp-types';
 
 import * as All from '../../app/useTrackRouteParam';
-import { RisikoklassifiseringIndex } from './RisikoklassifiseringIndex';
-import { requestFagsakApi, FagsakApiKeys } from '../../data/fagsakContextApi';
+import { FagsakApiKeys,requestFagsakApi } from '../../data/fagsakContextApi';
 import { FagsakData } from '../../fagsak/FagsakData';
+import { RisikoklassifiseringIndex } from './RisikoklassifiseringIndex';
 
 const lagRisikoklassifisering = (kode: string) => ({
   kontrollresultat: kode,

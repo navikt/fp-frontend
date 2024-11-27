@@ -1,26 +1,27 @@
-import React, { ReactNode, useMemo, useState, useCallback } from 'react';
+import React, { ReactNode, useCallback,useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Datepicker, Form, TextAreaField } from '@navikt/ft-form-hooks';
-import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
-import { dateRangesNotOverlapping, hasValidDate, hasValidText, maxLength, required } from '@navikt/ft-form-validators';
 
+import { Alert, HStack, VStack } from '@navikt/ds-react';
+import { Datepicker, Form, TextAreaField } from '@navikt/ft-form-hooks';
+import { dateRangesNotOverlapping, hasValidDate, hasValidText, maxLength, required } from '@navikt/ft-form-validators';
+import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
+
+import { FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   Aksjonspunkt,
+  AoIArbeidsforhold,
+  ArbeidsforholdFodselOgTilrettelegging,
   ArbeidsgiverOpplysningerPerId,
   FodselOgTilrettelegging,
-  ArbeidsforholdFodselOgTilrettelegging,
-  AoIArbeidsforhold,
   KodeverkMedNavn,
 } from '@navikt/fp-types';
 import { BekreftSvangerskapspengerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
-import { Alert, HStack, VStack } from '@navikt/ds-react';
 
+import { TilretteleggingFormValues } from '../types/TilretteleggingFormValues';
 import { ArbeidsforholdFieldArray } from './arbeidsforhold/ArbeidsforholdFieldArray';
 import { filtrerVelferdspermisjoner } from './arbeidsforhold/ArbeidsforholdPanel';
-import { TilretteleggingFormValues } from '../types/TilretteleggingFormValues';
 
 const maxLength1500 = maxLength(1500);
 

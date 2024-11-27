@@ -1,18 +1,19 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+
+import { HGrid } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 
-import { AlleKodeverk } from '@navikt/fp-types';
 import { FamilieHendelseType } from '@navikt/fp-kodeverk';
 import {
-  SoknadData,
-  MottattDatoPapirsoknadIndex,
   LagreSoknadPapirsoknadIndex,
+  MottattDatoPapirsoknadIndex,
+  SoknadData,
 } from '@navikt/fp-papirsoknad-ui-komponenter';
+import { AlleKodeverk } from '@navikt/fp-types';
 
 import RegistreringAdopsjonOgOmsorgGrid from './RegistreringAdopsjonOgOmsorgGrid';
 import RegistreringFodselGrid from './RegistreringFodselGrid';
-import { HGrid } from '@navikt/ds-react';
 
 const getComponentForFamiliehendelse = (familieHendelse: string) => {
   if (familieHendelse === FamilieHendelseType.FODSEL) {

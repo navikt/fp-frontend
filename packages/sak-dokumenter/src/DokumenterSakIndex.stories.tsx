@@ -1,6 +1,7 @@
 import React from 'react';
-import { Meta, StoryFn, StoryObj } from '@storybook/react';
+
 import { action } from '@storybook/addon-actions';
+import { Meta, StoryFn, StoryObj } from '@storybook/react';
 
 import { Kommunikasjonsretning } from '@navikt/fp-kodeverk';
 import { Dokument } from '@navikt/fp-types';

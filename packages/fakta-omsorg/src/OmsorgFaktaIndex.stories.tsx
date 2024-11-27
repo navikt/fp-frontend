@@ -1,12 +1,13 @@
 import React from 'react';
-import { StoryFn } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
 
-import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { AksjonspunktKode, SivilstandType, AksjonspunktStatus, AdresseType } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt, Behandling, KjønnkodeEnum, PersonopplysningerBasis, Ytelsefordeling } from '@navikt/fp-types';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
+import { action } from '@storybook/addon-actions';
+import { StoryFn } from '@storybook/react';
+
+import { AdresseType,AksjonspunktKode, AksjonspunktStatus, SivilstandType } from '@navikt/fp-kodeverk';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { Aksjonspunkt, Behandling, KjønnkodeEnum, PersonopplysningerBasis, Ytelsefordeling } from '@navikt/fp-types';
+import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import OmsorgFaktaIndex from './OmsorgFaktaIndex';
 

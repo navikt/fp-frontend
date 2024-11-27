@@ -1,9 +1,12 @@
 import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { BehandlingAppKontekst } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
+
+import { BehandlingAppKontekst } from '@navikt/fp-types';
+
 import { FatterVedtakApprovalModal } from './components/modal/FatterVedtakApprovalModal';
+
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);

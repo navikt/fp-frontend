@@ -1,5 +1,12 @@
 import React, { Suspense, useCallback, useEffect, useState } from 'react';
+import { NavigateFunction, useLocation, useNavigate } from 'react-router';
 
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
+import { parseQueryString, replaceNorwegianCharacters } from '@navikt/ft-utils';
+import { Location } from 'history';
+
+import { BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { RestApiState, useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 import {
   AksessRettigheter,
   AlleKodeverk,
@@ -9,19 +16,13 @@ import {
   Fagsak,
   Personoversikt,
 } from '@navikt/fp-types';
-import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-import { RestApiState, useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
-import { parseQueryString, replaceNorwegianCharacters } from '@navikt/ft-utils';
-import { Location } from 'history';
 
-import { BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
-import { NavigateFunction, useLocation, useNavigate } from 'react-router';
+import { ErrorBoundary } from '../app/ErrorBoundary';
+import { getFaktaLocation, getLocationWithDefaultProsessStegAndFakta, getProsessStegLocation } from '../app/paths';
+import { BehandlingApiKeys, restBehandlingApiHooks } from '../data/behandlingContextApi';
 import { BehandlingPaVent } from './felles/modaler/paVent/BehandlingPaVent';
 import { StandardPropsProvider } from './felles/utils/standardPropsStateContext';
-import { BehandlingApiKeys, restBehandlingApiHooks } from '../data/behandlingContextApi';
-import { getFaktaLocation, getLocationWithDefaultProsessStegAndFakta, getProsessStegLocation } from '../app/paths';
 import { lazyWithRetry } from './lazyUtils';
-import { ErrorBoundary } from '../app/ErrorBoundary';
 
 const ForeldrepengerPaneler = lazyWithRetry(() => import('./foreldrepenger/ForeldrepengerPaneler'));
 const EngangsstonadPaneler = lazyWithRetry(() => import('./engangsstonad/EngangsstonadPaneler'));

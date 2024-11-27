@@ -1,4 +1,4 @@
-import { useState, useEffect, DependencyList } from 'react';
+import { DependencyList,useEffect, useState } from 'react';
 
 import { REQUEST_POLLING_CANCELLED, RequestApi, RestKey } from '@navikt/fp-rest-api';
 

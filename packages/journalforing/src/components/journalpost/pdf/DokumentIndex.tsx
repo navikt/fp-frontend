@@ -1,10 +1,13 @@
-import React, { FunctionComponent, useState, useEffect } from 'react';
+import React, { FunctionComponent, useEffect,useState } from 'react';
 import { FormattedMessage } from 'react-intl';
+
 import { Heading } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
 import JournalDokument from '../../../typer/journalDokumentTsType';
-import PDFVisning from './PDFVisning';
 import DokumentVelger from './DokumentVelger';
+import PDFVisning from './PDFVisning';
+
 import styles from './dokumentIndex.module.css';
 
 type OwnProps = {

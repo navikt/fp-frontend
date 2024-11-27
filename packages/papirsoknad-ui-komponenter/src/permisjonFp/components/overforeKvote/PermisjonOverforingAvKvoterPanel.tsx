@@ -1,14 +1,16 @@
 import React, { ReactElement } from 'react';
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+
 import { Label, VStack } from '@navikt/ds-react';
 import { CheckboxField } from '@navikt/ft-form-hooks';
+
 import { ForeldreType, KodeverkType, OverforingArsak } from '@navikt/fp-kodeverk';
 import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
-import { useFormContext } from 'react-hook-form';
-import { RenderOverforingAvKvoterFieldArray } from './RenderOverforingAvKvoterFieldArray';
-import { FormValuesOverforing, PermisjonFormValues } from '../../types';
 import { TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
+import { FormValuesOverforing, PermisjonFormValues } from '../../types';
+import { RenderOverforingAvKvoterFieldArray } from './RenderOverforingAvKvoterFieldArray';
 
 const getText = (intl: IntlShape, kode: string, navn: string): string => {
   if (kode === OverforingArsak.INSTITUSJONSOPPHOLD_ANNEN_FORELDER) {

@@ -1,9 +1,10 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
+
+import { BodyShort, Table, VStack } from '@navikt/ds-react';
+import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 
 import { VedtakUtbetaling } from '@navikt/fp-types';
-import { PeriodLabel } from '@navikt/ft-ui-komponenter';
-import { BodyShort, Table, VStack } from '@navikt/ds-react';
-import { FormattedMessage } from 'react-intl';
 
 interface Props {
   utbetalinger?: VedtakUtbetaling[];

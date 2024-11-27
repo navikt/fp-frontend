@@ -1,13 +1,14 @@
 import React from 'react';
-import dayjs from 'dayjs';
-import { Meta, StoryObj } from '@storybook/react';
+
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { Meta, StoryObj } from '@storybook/react';
+import dayjs from 'dayjs';
+
 import { BehandlingType } from '@navikt/fp-kodeverk';
-
+import { alleKodeverkLos,getIntlDecorator } from '@navikt/fp-storybook-utils';
 import { RestApiMock } from '@navikt/fp-utils-test';
-import { getIntlDecorator, alleKodeverkLos } from '@navikt/fp-storybook-utils';
 
-import { RestApiGlobalStatePathsKeys, requestApi } from '../../../data/fplosSaksbehandlerRestApi';
+import { requestApi,RestApiGlobalStatePathsKeys } from '../../../data/fplosSaksbehandlerRestApi';
 import { NyeOgFerdigstilteOppgaverForIdagPanel } from './NyeOgFerdigstilteOppgaverForIdagPanel';
 
 import messages from '../../../../i18n/nb_NO.json';

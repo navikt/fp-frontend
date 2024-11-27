@@ -1,14 +1,14 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
-import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 
-import { AnkeProsessIndex } from '@navikt/fp-prosess-anke';
+import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
+import { AnkeProsessIndex } from '@navikt/fp-prosess-anke';
 import { AnkeVurdering } from '@navikt/fp-types';
 
+import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
-import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.ANKE_VURDERING];
 type EndepunktPanelData = {

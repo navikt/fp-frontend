@@ -1,11 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
+
 import { BodyShort } from '@navikt/ds-react';
+import { RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { required } from '@navikt/ft-form-validators';
+import { FaktaGruppe,VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { RadioGroupPanel } from '@navikt/ft-form-hooks';
-import { VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
-import { required } from '@navikt/ft-form-validators';
 import { FamilieHendelse } from '@navikt/fp-types';
 import { BekreftEktefelleAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 

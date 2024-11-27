@@ -1,21 +1,22 @@
 import React, { FC, PropsWithChildren, useCallback, useState } from 'react';
-import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
+import { FormattedMessage } from 'react-intl';
 
 import { Button, VStack } from '@navikt/ds-react';
-import { AksjonspunktKode, BehandlingType, KodeverkType, VilkarType } from '@navikt/fp-kodeverk';
-import { FaktaBegrunnelseTextFieldNew } from '@navikt/fp-fakta-felles';
 import { Form } from '@navikt/ft-form-hooks';
-import { Aksjonspunkt, AlleKodeverk, Behandling, ManuellBehandlingResultat } from '@navikt/fp-types';
-import { VurderMedlemskapAp, VurderForutgaendeMedlemskapAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import InfoBox from '../InfoBox';
-import { MedlemskapVurderinger } from './MedlemskapVurderinger';
+import { FaktaBegrunnelseTextFieldNew } from '@navikt/fp-fakta-felles';
+import { AksjonspunktKode, BehandlingType, KodeverkType, VilkarType } from '@navikt/fp-kodeverk';
+import { Aksjonspunkt, AlleKodeverk, Behandling, ManuellBehandlingResultat } from '@navikt/fp-types';
+import { VurderForutgaendeMedlemskapAp,VurderMedlemskapAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+
 import {
-  SØKER_INNFLYTTET_FOR_SENT_KODE,
   MedlemskapVurdering,
+  SØKER_INNFLYTTET_FOR_SENT_KODE,
   VurderMedlemskapFormValues,
 } from '../../types/vurderingMedlemskapForm';
+import InfoBox from '../InfoBox';
+import { MedlemskapVurderinger } from './MedlemskapVurderinger';
 
 interface Props {
   submittable: boolean;

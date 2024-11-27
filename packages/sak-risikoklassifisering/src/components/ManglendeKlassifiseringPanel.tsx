@@ -1,8 +1,8 @@
 import React from 'react';
-import { Box, HStack, Label } from '@navikt/ds-react';
-import { HourglassTopFilledIcon } from '@navikt/aksel-icons';
-
 import { FormattedMessage, useIntl } from 'react-intl';
+
+import { HourglassTopFilledIcon } from '@navikt/aksel-icons';
+import { Box, HStack, Label } from '@navikt/ds-react';
 
 /**
  * ManglendeKlassifiseringPanel

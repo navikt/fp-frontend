@@ -6,6 +6,7 @@ import { createIntl } from '@navikt/ft-utils';
 import { AlleKodeverk } from '@navikt/fp-types';
 
 import { PermisjonPanel } from './components/PermisjonPanel';
+
 import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);

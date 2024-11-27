@@ -1,14 +1,15 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
-import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
-import { Aksjonspunkt, ManuellBehandlingResultat, MedlemskapAvvik, Medlemskap } from '@navikt/fp-types';
+
+import { ExclamationmarkIcon, XMarkOctagonIcon } from '@navikt/aksel-icons';
 import { Alert, VStack } from '@navikt/ds-react';
+import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
+
 import { AksjonspunktStatus } from '@navikt/fp-kodeverk';
+import { Aksjonspunkt, ManuellBehandlingResultat, Medlemskap,MedlemskapAvvik } from '@navikt/fp-types';
 
 import { MedlemskapVurdering } from '../types/vurderingMedlemskapForm';
 import InfoBox from './InfoBox';
-
-import { ExclamationmarkIcon, XMarkOctagonIcon } from '@navikt/aksel-icons';
 
 interface Props {
   aksjonspunkter: Aksjonspunkt[];

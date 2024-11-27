@@ -1,12 +1,15 @@
 import React, { Suspense, useEffect, useMemo } from 'react';
+
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
+
 import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 import { Behandling } from '@navikt/fp-types';
+
+import { ErrorBoundary } from '../app/ErrorBoundary';
 import { useTrackRouteParam } from '../app/useTrackRouteParam';
 import { getAccessRights } from '../app/util/access';
-import { FagsakApiKeys, restFagsakApiHooks } from '../data/fagsakContextApi';
 import { requestBehandlingApi } from '../data/behandlingContextApi';
-import { ErrorBoundary } from '../app/ErrorBoundary';
+import { FagsakApiKeys, restFagsakApiHooks } from '../data/fagsakContextApi';
 import { FagsakData } from '../fagsak/FagsakData';
 import { BehandlingPanelerIndex } from './BehandlingPanelerIndex';
 import { lazyWithRetry } from './lazyUtils';

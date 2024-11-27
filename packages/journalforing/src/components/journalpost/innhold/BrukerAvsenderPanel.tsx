@@ -1,13 +1,16 @@
-import React, { FunctionComponent, useMemo, ReactElement, useState, useCallback } from 'react';
-import { BodyShort, Heading, Search, Alert, Button, CopyButton, HStack, VStack } from '@navikt/ds-react';
-import { isValidFodselsnummer } from '@navikt/ft-utils';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { Buildings3Icon, FigureInwardIcon, SilhouetteIcon, FigureOutwardIcon } from '@navikt/aksel-icons';
+import React, { FunctionComponent, ReactElement, useCallback,useMemo, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import styles from './brukerAvsenderPanel.module.css';
+
+import { Buildings3Icon, FigureInwardIcon, FigureOutwardIcon,SilhouetteIcon } from '@navikt/aksel-icons';
+import { Alert, BodyShort, Button, CopyButton, Heading, HStack, Search, VStack } from '@navikt/ds-react';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { isValidFodselsnummer } from '@navikt/ft-utils';
+
+import ForhåndsvisBrukerRespons from '../../../typer/forhåndsvisBrukerResponsTsType';
 import Journalpost from '../../../typer/journalpostTsType';
 import OppdaterMedBruker from '../../../typer/oppdaterBrukerTsType';
-import ForhåndsvisBrukerRespons from '../../../typer/forhåndsvisBrukerResponsTsType';
+
+import styles from './brukerAvsenderPanel.module.css';
 
 const finnKjønnBilde = (brukerFnr: string): ReactElement => {
   if (!brukerFnr || brukerFnr.length !== 11) {

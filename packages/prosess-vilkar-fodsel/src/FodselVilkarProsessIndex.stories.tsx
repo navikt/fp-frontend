@@ -1,13 +1,14 @@
 import React from 'react';
-import { StoryFn } from '@storybook/react';
+
 import { action } from '@storybook/addon-actions';
+import { StoryFn } from '@storybook/react';
 
 import {
   AksjonspunktKode,
   AksjonspunktStatus,
-  VilkarUtfallType,
   Avslagsarsak,
   FagsakYtelseType,
+  VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, Behandling, Fagsak, Vilkar } from '@navikt/fp-types';

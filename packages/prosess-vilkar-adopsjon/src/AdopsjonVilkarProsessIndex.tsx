@@ -1,10 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { StandardProsessPanelProps } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
+import { StandardProsessPanelProps } from '@navikt/fp-types';
+
 import AdopsjonVilkarForm from './components/AdopsjonVilkarForm';
+
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);

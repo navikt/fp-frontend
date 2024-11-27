@@ -1,15 +1,16 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useIntl } from 'react-intl';
-import moment from 'moment';
-import { Location } from 'history';
 
-import { useStorageToggle } from '@navikt/ft-hooks';
 import { Box, Checkbox, Heading, HStack, VStack } from '@navikt/ds-react';
-import { AlleKodeverk, AlleKodeverkTilbakekreving, Historikkinnslag } from '@navikt/fp-types';
-import { getKodeverknavnFn } from '@navikt/fp-kodeverk';
+import { useStorageToggle } from '@navikt/ft-hooks';
+import { Location } from 'history';
+import moment from 'moment';
 
-import { Snakkeboble } from './Snakkeboble/Snakkeboble';
+import { getKodeverknavnFn } from '@navikt/fp-kodeverk';
+import { AlleKodeverk, AlleKodeverkTilbakekreving, Historikkinnslag } from '@navikt/fp-types';
+
 import { EnvironmentWrapper } from './EnvironmentWrapper';
+import { Snakkeboble } from './Snakkeboble/Snakkeboble';
 
 import styles from './historikk.module.css';
 

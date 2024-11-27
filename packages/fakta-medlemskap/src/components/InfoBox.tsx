@@ -1,5 +1,6 @@
-import { Box, HStack } from '@navikt/ds-react';
 import React, { ComponentType, PropsWithChildren, SVGProps } from 'react';
+
+import { Box, HStack } from '@navikt/ds-react';
 
 type InfoBoxSizeProp = 'small' | 'medium';
 

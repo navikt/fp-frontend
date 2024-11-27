@@ -1,18 +1,22 @@
 import React, { FunctionComponent, ReactElement, useCallback, useMemo } from 'react';
-import { Alert, BodyShort, Button, HStack } from '@navikt/ds-react';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+
+import { Alert, BodyShort, Button, HStack } from '@navikt/ds-react';
 import { RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
 import { FagsakYtelseType } from '@navikt/fp-kodeverk';
-import { useFormContext } from 'react-hook-form';
+
+import { erEndeligJournalført } from '../../../kodeverk/journalpostTilstand';
+import Sakstype from '../../../kodeverk/sakstype';
 import { JournalførSakSubmitValue } from '../../../typer/ferdigstillJournalføringSubmit';
-import Journalpost from '../../../typer/journalpostTsType';
 import JournalFagsak from '../../../typer/journalFagsakTsType';
 import JournalføringFormValues from '../../../typer/journalføringFormValues';
+import Journalpost from '../../../typer/journalpostTsType';
+
 import styles from './velgSakForm.module.css';
-import Sakstype from '../../../kodeverk/sakstype';
-import { erEndeligJournalført } from '../../../kodeverk/journalpostTilstand';
 
 const TOM_ARRAY: JournalFagsak[] = [];
 

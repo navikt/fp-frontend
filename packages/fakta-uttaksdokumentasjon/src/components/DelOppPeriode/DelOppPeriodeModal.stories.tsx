@@ -1,9 +1,10 @@
 import React from 'react';
-import { StoryFn } from '@storybook/react';
+
 import { action } from '@storybook/addon-actions';
+import { StoryFn } from '@storybook/react';
 
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
-import { UttakType, UttakÅrsak } from '@navikt/fp-types';
+import { UttakÅrsak,UttakType } from '@navikt/fp-types';
 
 import DelOppPeriodeModal from './DelOppPeriodeModal';
 

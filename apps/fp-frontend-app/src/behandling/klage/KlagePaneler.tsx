@@ -2,15 +2,15 @@ import React, { useCallback, useMemo } from 'react';
 
 import { Behandling, BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
 
-import { FormKravFamOgPensjonProsessStegInitPanel } from './prosessPaneler/FormKravFamOgPensjonProsessStegInitPanel';
-import { VurderingFamOgPensjonProsessStegInitPanel } from './prosessPaneler/VurderingFamOgPensjonProsessStegInitPanel';
-import { FormKravKlageInstansProsessStegInitPanel } from './prosessPaneler/FormKravKlageInstansProsessStegInitPanel';
-import { VurderingKlageInstansProsessStegInitPanel } from './prosessPaneler/VurderingKlageInstansProsessStegInitPanel';
-import { KlageresultatProsessStegInitPanel } from './prosessPaneler/KlageresultatProsessStegInitPanel';
-import { VergeFaktaInitPanel } from '../fellesPaneler/fakta/VergeFaktaInitPanel';
+import { BehandlingContainer } from '../felles/BehandlingContainer';
 import { FaktaPanelInitProps } from '../felles/typer/faktaPanelInitProps';
 import { ProsessPanelInitProps } from '../felles/typer/prosessPanelInitProps';
-import { BehandlingContainer } from '../felles/BehandlingContainer';
+import { VergeFaktaInitPanel } from '../fellesPaneler/fakta/VergeFaktaInitPanel';
+import { FormKravFamOgPensjonProsessStegInitPanel } from './prosessPaneler/FormKravFamOgPensjonProsessStegInitPanel';
+import { FormKravKlageInstansProsessStegInitPanel } from './prosessPaneler/FormKravKlageInstansProsessStegInitPanel';
+import { KlageresultatProsessStegInitPanel } from './prosessPaneler/KlageresultatProsessStegInitPanel';
+import { VurderingFamOgPensjonProsessStegInitPanel } from './prosessPaneler/VurderingFamOgPensjonProsessStegInitPanel';
+import { VurderingKlageInstansProsessStegInitPanel } from './prosessPaneler/VurderingKlageInstansProsessStegInitPanel';
 
 interface Props {
   behandling: Behandling;

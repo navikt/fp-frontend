@@ -1,7 +1,8 @@
 import React, { FunctionComponent, useCallback, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
-import classnames from 'classnames/bind';
+
 import { BodyShort, Detail, VStack } from '@navikt/ds-react';
+import classnames from 'classnames/bind';
 
 import { StonadskontoType } from '@navikt/fp-kodeverk';
 import { Stonadskonto } from '@navikt/fp-types';

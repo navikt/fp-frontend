@@ -1,14 +1,16 @@
 import React, { FunctionComponent } from 'react';
-import dayjs from 'dayjs';
-import { useIntl, FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
+import { FormattedMessage,useIntl } from 'react-intl';
+
 import { HStack, Label } from '@navikt/ds-react';
+import { Form, RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import dayjs from 'dayjs';
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
-import { KodeverkMedNavn } from '@navikt/fp-types';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
 import { FagsakYtelseType, KodeverkType } from '@navikt/fp-kodeverk';
-import { Form, RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
+import { KodeverkMedNavn } from '@navikt/fp-types';
 
 import StoreValuesInLocalStorage from '../../../data/StoreValuesInLocalStorage';
 import useLosKodeverk from '../../../data/useLosKodeverk';

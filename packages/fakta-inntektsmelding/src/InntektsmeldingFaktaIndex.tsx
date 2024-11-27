@@ -1,4 +1,12 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
+import React, { useState } from 'react';
+import { FormattedMessage, RawIntlProvider } from 'react-intl';
+
+import { CircleFillIcon, CoffeeIcon } from '@navikt/aksel-icons';
+import { BodyShort, HStack, SortState, Table } from '@navikt/ds-react';
+import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
+import { createIntl, formatCurrencyNoKr } from '@navikt/ft-utils';
+
 import {
   AlleKodeverk,
   ArbeidsgiverOpplysningerPerId,
@@ -7,15 +15,12 @@ import {
   Fagsak,
   Inntektsmelding,
 } from '@navikt/fp-types';
-import React, { useState } from 'react';
-import { BodyShort, HStack, SortState, Table } from '@navikt/ds-react';
-import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
-import { createIntl, formatCurrencyNoKr } from '@navikt/ft-utils';
-import { CircleFillIcon, CoffeeIcon } from '@navikt/aksel-icons';
-import { FormattedMessage, RawIntlProvider } from 'react-intl';
-import messages from '../i18n/nb_NO.json';
+
 import { InntektsmeldingInnhold } from './components/InntektsmeldingInnhold';
+
 import styles from './inntektsmeldingFakta.module.css';
+
+import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 

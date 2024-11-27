@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+
 import { MenyTaAvVentIndex } from '@navikt/fp-sak-meny';
 import { Behandling, BehandlingAppKontekst } from '@navikt/fp-types';
 

@@ -1,10 +1,13 @@
 import React, { ReactElement, ReactNode } from 'react';
-import { RawIntlProvider, FormattedMessage } from 'react-intl';
+import { FormattedMessage,RawIntlProvider } from 'react-intl';
+
 import { BodyShort } from '@navikt/ds-react';
-import { Aktor, KodeverkMedNavn } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
+import { Aktor, KodeverkMedNavn } from '@navikt/fp-types';
+
 import { AktoerGrid } from './components/AktoerGrid';
+
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);

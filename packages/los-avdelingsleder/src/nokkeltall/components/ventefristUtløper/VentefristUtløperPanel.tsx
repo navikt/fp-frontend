@@ -1,15 +1,17 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
+import { FormattedMessage } from 'react-intl';
+
 import { HStack, Label } from '@navikt/ds-react';
 import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
 import { FagsakYtelseType, KodeverkType } from '@navikt/fp-kodeverk';
 import { KodeverkMedNavn } from '@navikt/fp-types';
 
-import BehandlingVentefrist from '../../../typer/behandlingVentefristTsType';
 import StoreValuesInLocalStorage from '../../../data/StoreValuesInLocalStorage';
 import useLosKodeverk from '../../../data/useLosKodeverk';
+import BehandlingVentefrist from '../../../typer/behandlingVentefristTsType';
 import VentefristUtløperGraf from './VentefristUtløperGraf';
 
 const finnFagsakYtelseTypeNavn = (fagsakYtelseTyper: KodeverkMedNavn[], valgtFagsakYtelseType: string): string => {

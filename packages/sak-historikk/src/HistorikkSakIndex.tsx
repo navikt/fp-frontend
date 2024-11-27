@@ -1,7 +1,9 @@
 import React from 'react';
 import { RawIntlProvider } from 'react-intl';
-import { Location } from 'history';
+
 import { createIntl } from '@navikt/ft-utils';
+import { Location } from 'history';
+
 import { AlleKodeverk, AlleKodeverkTilbakekreving, Historikkinnslag } from '@navikt/fp-types';
 
 import { Historikk } from './components/Historikk';

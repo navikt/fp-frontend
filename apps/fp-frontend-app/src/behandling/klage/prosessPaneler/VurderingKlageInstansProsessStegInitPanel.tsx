@@ -1,9 +1,9 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { Fagsak } from '@navikt/fp-types';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { VurderingFellesProsessStegInitPanel } from './VurderingFellesProsessStegInitPanel';

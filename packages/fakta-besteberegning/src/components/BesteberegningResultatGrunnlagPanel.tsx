@@ -1,10 +1,11 @@
 import React, { FunctionComponent } from 'react';
-import { BeregningsgrunnlagAndel, BeregningsgrunnlagPeriodeProp, Månedsgrunnlag } from '@navikt/fp-types';
-import { BodyShort, Label } from '@navikt/ds-react';
-import { formatCurrencyNoKr } from '@navikt/ft-utils';
-import { VerticalSpacer, Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
-
 import { FormattedMessage } from 'react-intl';
+
+import { BodyShort, Label } from '@navikt/ds-react';
+import { Table, TableColumn, TableRow,VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { formatCurrencyNoKr } from '@navikt/ft-utils';
+
+import { BeregningsgrunnlagAndel, BeregningsgrunnlagPeriodeProp, Månedsgrunnlag } from '@navikt/fp-types';
 
 interface OwnProps {
   periode: BeregningsgrunnlagPeriodeProp;

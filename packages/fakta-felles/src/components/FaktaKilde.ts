@@ -1,4 +1,5 @@
 import { createIntl } from '@navikt/ft-utils';
+
 import assertUnreachable from '@navikt/fp-fakta-uttaksdokumentasjon/src/utils/switchCaseUtils';
 
 import messages from '../../i18n/nb_NO.json';

@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Button, Modal as NavModal, Heading } from '@navikt/ds-react';
+
+import { Button, Heading,Modal as NavModal } from '@navikt/ds-react';
 
 import Saksliste from '../../typer/sakslisteAvdelingTsType';
 

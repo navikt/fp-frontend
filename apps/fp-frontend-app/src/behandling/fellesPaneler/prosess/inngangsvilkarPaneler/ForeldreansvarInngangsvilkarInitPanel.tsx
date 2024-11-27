@@ -1,12 +1,12 @@
 import React from 'react';
 import { IntlShape, useIntl } from 'react-intl';
 
-import { VilkarType, AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode,VilkarType } from '@navikt/fp-kodeverk';
 import { ForeldreansvarVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-foreldreansvar';
 import { Aksjonspunkt } from '@navikt/fp-types';
 
-import { InngangsvilkarPanelInitProps } from '../../../felles/typer/inngangsvilkarPanelInitProps';
 import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
+import { InngangsvilkarPanelInitProps } from '../../../felles/typer/inngangsvilkarPanelInitProps';
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,

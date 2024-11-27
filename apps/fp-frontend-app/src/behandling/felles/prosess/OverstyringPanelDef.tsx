@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
 
+import { KodeverkType, OverstyringAksjonspunkter,VilkarType } from '@navikt/fp-kodeverk';
 import { VilkarresultatMedOverstyringProsessIndex } from '@navikt/fp-prosess-vilkar-overstyring';
 import { Aksjonspunkt, KodeverkMedNavn, Medlemskap, Vilkar } from '@navikt/fp-types';
-import { VilkarType, KodeverkType, OverstyringAksjonspunkter } from '@navikt/fp-kodeverk';
 
 import { skalViseProsessPanel } from './skalViseProsessPanel';
 import { useStandardProsessPanelProps } from './useStandardProsessPanelProps';

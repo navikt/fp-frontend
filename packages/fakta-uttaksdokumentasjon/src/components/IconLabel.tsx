@@ -1,6 +1,7 @@
-import { BodyShort, HStack } from '@navikt/ds-react';
 import React, { FC } from 'react';
 import { FormattedMessage } from 'react-intl';
+
+import { BodyShort, HStack } from '@navikt/ds-react';
 
 interface IconLabelProps {
   icon: React.ReactElement;

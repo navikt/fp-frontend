@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import MockAdapter from 'axios-mock-adapter';
+
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
+import MockAdapter from 'axios-mock-adapter';
+
 import { RequestApi } from '@navikt/fp-rest-api';
 
 interface Props {

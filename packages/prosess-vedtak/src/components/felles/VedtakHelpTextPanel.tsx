@@ -1,10 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+
 import { Alert, BodyShort } from '@navikt/ds-react';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt } from '@navikt/fp-types';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 const findHelpTexts = (intl: IntlShape, aksjonspunkter: Aksjonspunkt[]): string[] => {
   const helpTexts = [];

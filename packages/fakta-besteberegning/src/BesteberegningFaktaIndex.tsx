@@ -1,20 +1,21 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import {
-  Aksjonspunkt,
-  ArbeidsgiverOpplysningerPerId,
-  Beregningsgrunnlag,
-  AlleKodeverk,
-  StandardFaktaPanelProps,
-} from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
 import { getKodeverknavnFn } from '@navikt/fp-kodeverk';
+import {
+  Aksjonspunkt,
+  AlleKodeverk,
+  ArbeidsgiverOpplysningerPerId,
+  Beregningsgrunnlag,
+  StandardFaktaPanelProps,
+} from '@navikt/fp-types';
 
-import messages from '../i18n/nb_NO.json';
 import BesteberegningPanel from './components/BesteberegningPanel';
 import { FormValues } from './components/KontrollerBesteberegningPanel';
+
+import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 

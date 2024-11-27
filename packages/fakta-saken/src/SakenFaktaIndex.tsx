@@ -1,10 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { Fagsak, Soknad, StandardFaktaPanelProps } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
+import { Fagsak, Soknad, StandardFaktaPanelProps } from '@navikt/fp-types';
+
 import SakenFaktaPanel from './components/SakenFaktaPanel';
+
 import messages from '../i18n/nb_NO.json';
 
 interface OwnProps {

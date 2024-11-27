@@ -1,9 +1,10 @@
 import React from 'react';
+
 import { StoryFn } from '@storybook/react';
 
-import { AksjonspunktÅrsak, ArbeidOgInntektsmelding, Behandling } from '@navikt/fp-types';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { AksjonspunktÅrsak, ArbeidOgInntektsmelding, Behandling } from '@navikt/fp-types';
 
 import ArbeidsforholdFaktaIndex from './ArbeidsforholdFaktaIndex';
 import BekreftetPermisjonStatus from './kodeverk/bekreftetPermisjonStatus';

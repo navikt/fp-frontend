@@ -1,15 +1,18 @@
-import { BodyShort, HStack, Label, UNSAFE_Combobox, VStack } from '@navikt/ds-react';
-import { Form, InputField } from '@navikt/ft-form-hooks';
-import { hasValidName, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
+
 import { XMarkIcon } from '@navikt/aksel-icons';
+import { BodyShort, HStack, Label, UNSAFE_Combobox, VStack } from '@navikt/ds-react';
+import { Form, InputField } from '@navikt/ft-form-hooks';
+import { hasValidName, maxLength, minLength, required } from '@navikt/ft-form-validators';
+
 import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
+
+import useDebounce from '../../behandlingskoer/components/sakslisteForm/useDebounce';
 import { SaksbehandlerGruppe } from '../../typer/saksbehandlereOgSaksbehandlerGrupper ';
 
 import styles from './gruppeSaksbehandlere.module.css';
-import useDebounce from '../../behandlingskoer/components/sakslisteForm/useDebounce';
 
 const minLength3 = minLength(3);
 const maxLength100 = maxLength(100);

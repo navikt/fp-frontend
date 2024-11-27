@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
+
 import { render, screen } from '@testing-library/react';
 
 import { RestApiErrorProvider } from './RestApiErrorContext';
-import useRestApiErrorDispatcher from './useRestApiErrorDispatcher';
 import useRestApiError from './useRestApiError';
+import useRestApiErrorDispatcher from './useRestApiErrorDispatcher';
 
 const TestErrorMessage = ({ skalFjerne = false }) => {
   const { addErrorMessage, removeErrorMessages } = useRestApiErrorDispatcher();

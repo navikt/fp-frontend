@@ -1,35 +1,36 @@
-import React, { FunctionComponent, useCallback, useMemo, useState, MouseEvent } from 'react';
+import React, { FunctionComponent, MouseEvent,useCallback, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
+
+import { BodyShort, Button,Detail, Heading } from '@navikt/ds-react';
+import { Form, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
+import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
+import { AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { formaterFritekst, getLanguageFromSprakkode,ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import classNames from 'classnames';
 import moment from 'moment';
-import { Heading, Detail, BodyShort, Button } from '@navikt/ds-react';
 
-import { Form, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
 import {
+  AksjonspunktKode,
+  AksjonspunktStatus,
   BehandlingType,
   DokumentMalType,
-  UgunstAarsakType,
-  AksjonspunktKode,
   KodeverkType,
-  AksjonspunktStatus,
+  UgunstAarsakType,
 } from '@navikt/fp-kodeverk';
-import { AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { hasValidText, minLength, maxLength, required } from '@navikt/ft-form-validators';
-import { ISO_DATE_FORMAT, formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
+import { FormValues as ModalFormValues,SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
 import { FodselSammenligningIndex } from '@navikt/fp-prosess-fakta-fodsel-sammenligning';
-import { SettPaVentModalIndex, FormValues as ModalFormValues } from '@navikt/fp-modal-sett-pa-vent';
+import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import {
   Aksjonspunkt,
-  FamilieHendelseSamling,
-  Soknad,
-  FamilieHendelse,
   AlleKodeverk,
   Behandling,
+  FamilieHendelse,
+  FamilieHendelseSamling,
   KodeverkMedNavn,
+  Soknad,
 } from '@navikt/fp-types';
 import { VarselRevurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 
 import styles from './varselOmRevurderingForm.module.css';
 

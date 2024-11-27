@@ -1,10 +1,11 @@
 import React from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
+
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
+import { createIntl } from '@navikt/ft-utils';
 
 import messages from '../../../i18n/nb_NO.json';
-import { createIntl } from '@navikt/ft-utils';
 
 const intl = createIntl(messages);
 

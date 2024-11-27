@@ -1,22 +1,24 @@
 import React, { ReactElement, useMemo } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useIntl } from 'react-intl';
+
 import { Heading, VStack } from '@navikt/ds-react';
 import { CheckboxField, InputField, RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
-import { ArrowBox } from '@navikt/ft-ui-komponenter';
-
-import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
-import { KanIkkeOppgiAnnenForelderArsak, KodeverkType, Landkode } from '@navikt/fp-kodeverk';
 import {
+  harSammeFodselsnummerSomSoker,
   hasValidFodselsnummer,
   hasValidFodselsnummerFormat,
   required,
-  harSammeFodselsnummerSomSoker,
 } from '@navikt/ft-form-validators';
+import { ArrowBox } from '@navikt/ft-ui-komponenter';
+
+import { KanIkkeOppgiAnnenForelderArsak, KodeverkType, Landkode } from '@navikt/fp-kodeverk';
+import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
+
+import { ANNEN_FORELDER_NAME_PREFIX, KAN_IKKE_OPPGI_NAME_PREFIX } from '../constant';
+import { AnnenForelderFormValues,AnnenForelderSubFormValues } from '../types';
 
 import styles from './annenForelderPanel.module.css';
-import { AnnenForelderSubFormValues, AnnenForelderFormValues } from '../types';
-import { ANNEN_FORELDER_NAME_PREFIX, KAN_IKKE_OPPGI_NAME_PREFIX } from '../constant';
 
 const filtrerLandOgLagOptions = (landkoder: KodeverkMedNavn[]): ReactElement[] =>
   landkoder

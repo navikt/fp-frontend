@@ -1,9 +1,11 @@
 import { action } from '@storybook/addon-actions';
+import { Meta, StoryObj } from '@storybook/react/*';
 
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
-import { Meta, StoryObj } from '@storybook/react/*';
-import messages from '../../../i18n/nb_NO.json';
+
 import { SettPaVentReadOnlyModal } from './SettPaVentReadOnlyModal';
+
+import messages from '../../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
 

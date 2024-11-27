@@ -1,7 +1,17 @@
-import React, { FunctionComponent, useState, useEffect, useCallback, useRef } from 'react';
+import React, { FunctionComponent, useCallback, useEffect, useRef,useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Button, Alert } from '@navikt/ds-react';
 
+import { Alert,Button } from '@navikt/ds-react';
+import { Table,VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
+import {
+  AksjonspunktKode,
+  AksjonspunktStatus,
+  ArbeidsforholdKomplettVurderingType,
+  KodeverkType,
+  VenteArsakType,
+} from '@navikt/fp-kodeverk';
+import { SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
 import {
   Aksjonspunkt,
   AlleKodeverk,
@@ -14,20 +24,11 @@ import {
   ManueltArbeidsforhold,
 } from '@navikt/fp-types';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
-import { VerticalSpacer, Table } from '@navikt/ft-ui-komponenter';
-import {
-  AksjonspunktKode,
-  KodeverkType,
-  VenteArsakType,
-  AksjonspunktStatus,
-  ArbeidsforholdKomplettVurderingType,
-} from '@navikt/fp-kodeverk';
 
-import ArbeidsforholdRad from './ArbeidsforholdRad';
-import ArbeidsforholdOgInntektRadData, { Avklaring } from '../types/arbeidsforholdOgInntekt';
-import ArbeidsOgInntektOverstyrPanel from './ArbeidsOgInntektOverstyrPanel';
 import { useIsFormDirty } from '../DirtyFormProvider';
+import ArbeidsforholdOgInntektRadData, { Avklaring } from '../types/arbeidsforholdOgInntekt';
+import ArbeidsforholdRad from './ArbeidsforholdRad';
+import ArbeidsOgInntektOverstyrPanel from './ArbeidsOgInntektOverstyrPanel';
 
 import styles from './arbeidOgInntektFaktaPanel.module.css';
 

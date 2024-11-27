@@ -2,30 +2,31 @@ import React, { FunctionComponent, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { IntlShape, useIntl } from 'react-intl';
 
+import { Form } from '@navikt/ft-form-hooks';
+import { decodeHtmlEntity } from '@navikt/ft-utils';
+
 import {
-  AlleKodeverk,
-  Behandling,
-  BeregningsresultatDagytelse,
-  BeregningsresultatEs,
-  Vilkar,
-  Aksjonspunkt,
-  SimuleringResultat,
-  TilbakekrevingValg,
-  Behandlingsresultat,
-} from '@navikt/fp-types';
-import {
+  AksjonspunktKode,
+  BehandlingArsakType as klageBehandlingArsakType,
+  BehandlingResultatType,
+  DokumentMalType,
+  FagsakYtelseType,
   isAvslag,
   isInnvilget,
   isKlageOmgjort,
-  BehandlingResultatType,
-  BehandlingArsakType as klageBehandlingArsakType,
-  FagsakYtelseType,
-  AksjonspunktKode,
-  DokumentMalType,
 } from '@navikt/fp-kodeverk';
-import { decodeHtmlEntity } from '@navikt/ft-utils';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
-import { Form } from '@navikt/ft-form-hooks';
+import {
+  Aksjonspunkt,
+  AlleKodeverk,
+  Behandling,
+  Behandlingsresultat,
+  BeregningsresultatDagytelse,
+  BeregningsresultatEs,
+  SimuleringResultat,
+  TilbakekrevingValg,
+  Vilkar,
+} from '@navikt/fp-types';
 import {
   ForeslaVedtakAp,
   ForeslaVedtakManueltAp,
@@ -33,10 +34,10 @@ import {
   VurdereDokumentForVedtakAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import { getTilbakekrevingText } from '../felles/VedtakHelper';
-import VedtakInnvilgetPanel from './VedtakInnvilgetPanel';
-import VedtakAvslagPanel from './VedtakAvslagPanel';
 import VedtakFellesPanel from '../felles/VedtakFellesPanel';
+import { getTilbakekrevingText } from '../felles/VedtakHelper';
+import VedtakAvslagPanel from './VedtakAvslagPanel';
+import VedtakInnvilgetPanel from './VedtakInnvilgetPanel';
 
 export const finnAvslagResultatText = (behandlingResultatTypeKode: string, ytelseType: string): string => {
   if (behandlingResultatTypeKode === BehandlingResultatType.KLAGE_YTELSESVEDTAK_OPPHEVET) {

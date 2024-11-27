@@ -1,23 +1,24 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+
 import { HGrid } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
-import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
-import { FamilieHendelseType, KodeverkType } from '@navikt/fp-kodeverk';
 
+import { FamilieHendelseType, KodeverkType } from '@navikt/fp-kodeverk';
 import {
-  SoknadData,
-  MottattDatoPapirsoknadIndex,
-  FrilansPapirsoknadIndex,
-  OppholdINorgePapirsoknadIndex,
-  SprakPapirsoknadIndex,
-  LagreSoknadPapirsoknadIndex,
-  VirksomhetPapirsoknadIndex,
-  InntektsgivendeArbeidPapirsoknadIndex,
   AndreYtelserPapirsoknadIndex,
   BehovForTilretteleggingPanel,
+  FrilansPapirsoknadIndex,
+  InntektsgivendeArbeidPapirsoknadIndex,
+  LagreSoknadPapirsoknadIndex,
+  MottattDatoPapirsoknadIndex,
+  OppholdINorgePapirsoknadIndex,
+  SoknadData,
+  SprakPapirsoknadIndex,
   TerminOgFodselPanelSvp,
+  VirksomhetPapirsoknadIndex,
 } from '@navikt/fp-papirsoknad-ui-komponenter';
+import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
 const buildInitialValues = (andreYtelser: KodeverkMedNavn[]) => ({
   ...MottattDatoPapirsoknadIndex.initialValues(),

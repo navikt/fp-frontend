@@ -1,17 +1,18 @@
 import React, { FunctionComponent, ReactElement, useMemo } from 'react';
-import { BodyShort, HStack, VStack } from '@navikt/ds-react';
-import { CheckmarkIcon, XMarkOctagonIcon } from '@navikt/aksel-icons';
-
-import { VilkarUtfallType, AksjonspunktStatus } from '@navikt/fp-kodeverk';
-import { RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
-import { createIntl } from '@navikt/ft-utils';
-import { required, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
-import { Aksjonspunkt, Behandlingsresultat, KodeverkMedNavn } from '@navikt/fp-types';
 import { useFormContext } from 'react-hook-form';
 
-import messages from '../../i18n/nb_NO.json';
+import { CheckmarkIcon, XMarkOctagonIcon } from '@navikt/aksel-icons';
+import { BodyShort, HStack, VStack } from '@navikt/ds-react';
+import { RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
+import { required, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
+import { createIntl } from '@navikt/ft-utils';
+
+import { AksjonspunktStatus,VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { Aksjonspunkt, Behandlingsresultat, KodeverkMedNavn } from '@navikt/fp-types';
 
 import styles from './vilkarResultPicker.module.css';
+
+import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 

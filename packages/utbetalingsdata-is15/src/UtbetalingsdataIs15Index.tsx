@@ -1,11 +1,14 @@
 import React from 'react';
 import { RawIntlProvider } from 'react-intl';
+
 import { createIntl } from '@navikt/ft-utils';
+
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { InfotrygdVedtak } from '@navikt/fp-types';
 
-import messages from '../i18n/nb_NO.json';
 import { UtbetalingsdataPanel } from './components/UtbetalingsdataPanel';
+
+import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 

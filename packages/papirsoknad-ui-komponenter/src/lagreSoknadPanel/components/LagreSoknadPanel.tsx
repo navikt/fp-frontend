@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
 import { useFormContext } from 'react-hook-form';
+import { FormattedMessage, useIntl } from 'react-intl';
+
 import { Button, Heading, VStack } from '@navikt/ds-react';
 import { CheckboxField, TextAreaField } from '@navikt/ft-form-hooks';
 import { ariaCheck, hasValidText, maxLength } from '@navikt/ft-form-validators';

@@ -1,11 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
-import { createIntl } from '@navikt/ft-utils';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
+import { createIntl } from '@navikt/ft-utils';
+
+import styles from './ukjentAdresseMeldingIndex.module.css';
 
 import messages from '../i18n/nb_NO.json';
-import styles from './ukjentAdresseMeldingIndex.module.css';
 
 const intl = createIntl(messages);
 

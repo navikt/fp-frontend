@@ -1,9 +1,11 @@
 import React, { useCallback } from 'react';
 import { useIntl } from 'react-intl';
 
+import { forhandsvisDokument } from '@navikt/ft-utils';
+
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { VarselOmRevurderingProsessIndex } from '@navikt/fp-prosess-varsel-om-revurdering';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
+import { VarselOmRevurderingProsessIndex } from '@navikt/fp-prosess-varsel-om-revurdering';
 import {
   Behandling,
   Fagsak,
@@ -12,13 +14,12 @@ import {
   ForhåndsvisMeldingParams,
   Soknad,
 } from '@navikt/fp-types';
-import { forhandsvisDokument } from '@navikt/ft-utils';
 
-import { skalViseProsessPanel } from '../../felles/prosess/skalViseProsessPanel';
-import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
-import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
-import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
+import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { skalViseProsessPanel } from '../../felles/prosess/skalViseProsessPanel';
+import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
+import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 
 const getForhandsvisCallback =
   (

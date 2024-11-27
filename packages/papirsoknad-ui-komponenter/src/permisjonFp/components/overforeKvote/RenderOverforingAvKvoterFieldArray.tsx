@@ -1,6 +1,7 @@
 import React, { ReactElement, useEffect } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
 import { useFieldArray, useFormContext, UseFormGetValues } from 'react-hook-form';
+import { FormattedMessage, useIntl } from 'react-intl';
+
 import { Datepicker, PeriodFieldArray, SelectField } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,

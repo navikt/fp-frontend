@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 
-import { BehandlingAppKontekst } from '@navikt/fp-types';
 import { FatterVedtakTotrinnskontrollModalSakIndex } from '@navikt/fp-sak-totrinnskontroll';
+import { BehandlingAppKontekst } from '@navikt/fp-types';
 
 interface Props {
   behandling: BehandlingAppKontekst;

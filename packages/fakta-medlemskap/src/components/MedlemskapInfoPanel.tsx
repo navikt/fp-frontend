@@ -1,19 +1,20 @@
 import React, { FC } from 'react';
+import { FormattedMessage } from 'react-intl';
+
 import { VStack } from '@navikt/ds-react';
+
 import { AksjonspunktStatus } from '@navikt/fp-kodeverk';
 
 import { MedlemskapFaktaProps } from '../MedlemskapFaktaIndex';
-
-import AksjonspunktHelpText from './AksjonspunktHelpText';
-import SituasjonsOversikt from './situasjon/SituasjonOversikt';
-import OpplysningerOmUtenlandsopphold from './opplysningsKort/OpplysningerOmUtenlandsopphold';
 import VurderMedlemskapAksjonspunktForm from './aksjonspunkt/VurderMedlemskapAksjonspunktForm';
 import VurderMedlemskapLegacyAksjonspunktVisning from './aksjonspunkt/VurderMedlemskapLegacyAksjonspunktVisning';
-import OpplysningerOmAdresser from './opplysningsKort/OpplysningerOmAdresser';
-import OpplysningerOmPersonstatus from './opplysningsKort/OpplysningerOmPersonstatus/OpplysningerOmPersonstatus';
+import AksjonspunktHelpText from './AksjonspunktHelpText';
 import OpplysningerFraMedlemskapsregister from './opplysningsKort/OpplysningerFraMedlemskapsregister';
+import OpplysningerOmAdresser from './opplysningsKort/OpplysningerOmAdresser';
 import OpplysningerOmOppholdstillatelser from './opplysningsKort/OpplysningerOmOppholdstillatelser';
-import { FormattedMessage } from 'react-intl';
+import OpplysningerOmPersonstatus from './opplysningsKort/OpplysningerOmPersonstatus/OpplysningerOmPersonstatus';
+import OpplysningerOmUtenlandsopphold from './opplysningsKort/OpplysningerOmUtenlandsopphold';
+import SituasjonsOversikt from './situasjon/SituasjonOversikt';
 
 /**
  * MedlemskapInfoPanel

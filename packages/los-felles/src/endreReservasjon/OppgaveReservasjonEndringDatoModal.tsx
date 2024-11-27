@@ -1,11 +1,12 @@
 import React from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import dayjs from 'dayjs';
+import { FormattedMessage, useIntl } from 'react-intl';
+
 import { Button, Heading, Modal as NavModal } from '@navikt/ds-react';
-import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import { dateAfterOrEqualToToday, dateBeforeOrEqual, hasValidDate } from '@navikt/ft-form-validators';
 import { Datepicker, Form } from '@navikt/ft-form-hooks';
+import { dateAfterOrEqualToToday, dateBeforeOrEqual, hasValidDate } from '@navikt/ft-form-validators';
+import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import dayjs from 'dayjs';
 
 import Oppgave from '../typer/oppgaveTsType';
 

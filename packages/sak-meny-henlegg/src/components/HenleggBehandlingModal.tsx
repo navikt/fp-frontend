@@ -1,15 +1,16 @@
 import React, { useMemo } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import { Button, Heading, HStack, Label, Link, Modal, VStack } from '@navikt/ds-react';
+import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BehandlingType, BehandlingResultatType, FagsakYtelseType, DokumentMalType } from '@navikt/fp-kodeverk';
-import { SelectField, TextAreaField, Form } from '@navikt/ft-form-hooks';
+import { Button, Heading, HStack, Label, Link, Modal, VStack } from '@navikt/ds-react';
+import { Form,SelectField, TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, required } from '@navikt/ft-form-validators';
+import { formaterFritekst } from '@navikt/ft-utils';
+
+import { BehandlingResultatType, BehandlingType, DokumentMalType,FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { KodeverkMedNavn } from '@navikt/fp-types';
 
 import styles from './henleggBehandlingModal.module.css';
-import { formaterFritekst } from '@navikt/ft-utils';
 
 const maxLength1500 = maxLength(1500);
 

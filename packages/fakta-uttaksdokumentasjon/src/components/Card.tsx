@@ -1,4 +1,5 @@
 import React, { FC, PropsWithChildren } from 'react';
+
 import { Box, HStack, VStack } from '@navikt/ds-react';
 
 const CardWrapper: FC<PropsWithChildren> = ({ children }: PropsWithChildren) => <div>{children}</div>;

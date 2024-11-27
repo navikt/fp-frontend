@@ -1,14 +1,16 @@
 import React, { FC, ReactElement } from 'react';
-import { MedlemskapAvvik, Soknad, UtlandsoppholdPeriode } from '@navikt/fp-types';
-import { BodyShort, Label } from '@navikt/ds-react';
 import { FormattedMessage, useIntl } from 'react-intl';
+
+import { BodyShort, Label } from '@navikt/ds-react';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
+import { TIDENES_ENDE } from '@navikt/ft-utils';
+
+import { FaktaKilde } from '@navikt/fp-fakta-felles';
+import { MedlemskapAvvik, Soknad, UtlandsoppholdPeriode } from '@navikt/fp-types';
 
 import { toTitleCapitalization } from '../../utils/stringUtils';
-import { relevantForUtenlandsopphold } from '../ekspansjonsKort/medlemsAvvik';
 import EkspansjonsKort from '../ekspansjonsKort/EkspansjonsKort';
-import { TIDENES_ENDE } from '@navikt/ft-utils';
-import { FaktaKilde } from '@navikt/fp-fakta-felles';
+import { relevantForUtenlandsopphold } from '../ekspansjonsKort/medlemsAvvik';
 
 const UtenlandsoppholdListe: FC<{ utlandsopphold: UtlandsoppholdPeriode[]; label: ReactElement }> = ({
   utlandsopphold,

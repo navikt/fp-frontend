@@ -1,14 +1,16 @@
 import React from 'react';
-import { StoryFn } from '@storybook/react';
+
 import { action } from '@storybook/addon-actions';
+import { StoryFn } from '@storybook/react';
 
 import {
   AksjonspunktKode,
-  Avslagsarsak,
   AksjonspunktStatus,
-  VilkarUtfallType,
+  Avslagsarsak,
   TilretteleggingType,
+  VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import {
   Aksjonspunkt,
   ArbeidsforholdFodselOgTilrettelegging,
@@ -17,7 +19,6 @@ import {
   FodselOgTilrettelegging,
   Vilkar,
 } from '@navikt/fp-types';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import SvangerskapVilkarProsessIndex from './SvangerskapVilkarProsessIndex';

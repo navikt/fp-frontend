@@ -1,9 +1,11 @@
 import React from 'react';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import dayjs from 'dayjs';
-import { composeStories } from '@storybook/react';
-import userEvent from '@testing-library/user-event';
+
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { composeStories } from '@storybook/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import dayjs from 'dayjs';
+
 import * as stories from './ArbeidOgInntektFaktaIndex.stories';
 
 const {

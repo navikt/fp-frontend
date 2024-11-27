@@ -1,15 +1,15 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 
-import { VilkarType, BehandlingType, AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { SokersOpplysningspliktVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-sokers-opplysningsplikt';
+import { AksjonspunktKode,BehandlingType, VilkarType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
+import { SokersOpplysningspliktVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-sokers-opplysningsplikt';
 import { ArbeidsgiverOpplysningerPerId, Soknad } from '@navikt/fp-types';
 
-import { skalViseProsessPanel } from '../../felles/prosess/skalViseProsessPanel';
-import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
-import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
+import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { skalViseProsessPanel } from '../../felles/prosess/skalViseProsessPanel';
+import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.SOKERS_OPPLYSNINGSPLIKT_OVST,

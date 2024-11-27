@@ -1,5 +1,6 @@
 import { composeStories } from '@storybook/react';
 import { screen } from '@testing-library/react';
+
 import * as stories from './OppgaverTabell.stories';
 
 const { Default, TomOppgaveTabell } = composeStories(stories);

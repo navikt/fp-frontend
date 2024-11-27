@@ -1,10 +1,12 @@
 import React from 'react';
+
 import { Heading, VStack } from '@navikt/ds-react';
-import { createIntl } from '@navikt/ft-utils';
 import { BorderBox } from '@navikt/ft-ui-komponenter';
+import { createIntl } from '@navikt/ft-utils';
+
+import { TrueFalseInput } from '../felles/TrueFalseInput';
 
 import messages from '../../i18n/nb_NO.json';
-import { TrueFalseInput } from '../felles/TrueFalseInput';
 
 const intl = createIntl(messages);
 

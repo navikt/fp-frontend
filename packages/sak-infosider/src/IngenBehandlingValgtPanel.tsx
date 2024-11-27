@@ -1,12 +1,12 @@
 import React from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
-import { Alert, BodyShort } from '@navikt/ds-react';
 
+import { Alert, BodyShort } from '@navikt/ds-react';
 import { createIntl } from '@navikt/ft-utils';
 
-import messages from '../i18n/nb_NO.json';
-
 import styles from './ingenBehandlingValgtPanel.module.css';
+
+import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 

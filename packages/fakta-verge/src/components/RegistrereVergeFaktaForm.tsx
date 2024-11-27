@@ -1,9 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import { WrappedComponentProps } from 'react-intl';
 
-import { hasValidDate, hasValidFodselsnummer, hasValidName, required } from '@navikt/ft-form-validators';
-import { VerticalSpacer, FaktaGruppe, FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 import { Datepicker, InputField, SelectField } from '@navikt/ft-form-hooks';
+import { hasValidDate, hasValidFodselsnummer, hasValidName, required } from '@navikt/ft-form-validators';
+import { FaktaGruppe, FlexColumn, FlexContainer, FlexRow,VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
 import { AksjonspunktKode, VergeType } from '@navikt/fp-kodeverk';
 import { KodeverkMedNavn, Verge } from '@navikt/fp-types';
 

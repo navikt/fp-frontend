@@ -1,18 +1,20 @@
 import React, { useEffect } from 'react';
-import { RawIntlProvider, FormattedMessage } from 'react-intl';
+import { useFormContext } from 'react-hook-form';
+import { FormattedMessage,RawIntlProvider } from 'react-intl';
+
 import { ErrorMessage, Heading } from '@navikt/ds-react';
-import { RadioGroupPanel, Datepicker } from '@navikt/ft-form-hooks';
-import { BorderBox, ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { Datepicker,RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
+import { ArrowBox, BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 
-import { useFormContext } from 'react-hook-form';
 import {
   BehovForTilretteleggingFieldArray,
   frilansFieldArrayName,
   selvstendigNaringsdrivendeFieldArrayName,
 } from './BehovForTilretteleggingFieldArray';
 import { TilretteleggingForArbeidsgiverFieldArray } from './TilretteleggingForArbeidsgiverFieldArray';
+
 import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);

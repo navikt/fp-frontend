@@ -1,19 +1,20 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import dayjs from 'dayjs';
-import { Label, Detail, BodyShort, HStack } from '@navikt/ds-react';
-import { calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
+
+import { BodyShort, Detail, HStack,Label } from '@navikt/ds-react';
+import { CheckboxField, NumberField, SelectField } from '@navikt/ft-form-hooks';
 import { hasValidDecimal, maxValue, notDash, required } from '@navikt/ft-form-validators';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { CheckboxField, NumberField, SelectField } from '@navikt/ft-form-hooks';
+import { calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
+import dayjs from 'dayjs';
 
 import {
   KodeverkType,
   OppholdArsakType,
-  UttakArbeidType as uttakArbeidTypeKodeverk,
   PeriodeResultatType,
+  UttakArbeidType as uttakArbeidTypeKodeverk,
 } from '@navikt/fp-kodeverk';
-import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, AlleKodeverk, PeriodeSoker } from '@navikt/fp-types';
+import { AlleKodeverk, ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, PeriodeSoker } from '@navikt/fp-types';
 
 import uttakArbeidTypeTekstCodes from '../../utils/uttakArbeidTypeCodes';
 

@@ -1,13 +1,12 @@
 import React from 'react';
-import dayjs from 'dayjs';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
 import { Heading } from '@navikt/ds-react';
 import { Datepicker } from '@navikt/ft-form-hooks';
-import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { dateAfterOrEqual, dateBeforeOrEqualToToday, hasValidDate, required } from '@navikt/ft-form-validators';
-
+import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
+import dayjs from 'dayjs';
 
 import messages from '../../i18n/nb_NO.json';
 

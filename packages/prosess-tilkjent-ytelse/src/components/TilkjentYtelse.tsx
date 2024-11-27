@@ -1,28 +1,29 @@
-import React, { FunctionComponent, useState, useMemo, useCallback } from 'react';
+import React, { FunctionComponent, useCallback,useMemo, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
+
 import {
-  ArrowRightIcon,
   ArrowLeftIcon,
-  PlusIcon,
+  ArrowRightIcon,
+  CheckmarkCircleIcon,
+  FigureOutwardFillIcon,
   MinusIcon,
   PercentIcon,
-  CheckmarkCircleIcon,
+  PlusIcon,
   SilhouetteFillIcon,
-  FigureOutwardFillIcon,
 } from '@navikt/aksel-icons';
-import dayjs from 'dayjs';
 import { BodyShort, Button, Timeline } from '@navikt/ds-react';
 import { DateLabel, FloatRight, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import dayjs from 'dayjs';
 
-import { KodeverkType, FagsakYtelseType, SoknadType } from '@navikt/fp-kodeverk';
+import { FagsakYtelseType, KodeverkType, SoknadType } from '@navikt/fp-kodeverk';
 import {
-  ArbeidsgiverOpplysningerPerId,
   AlleKodeverk,
-  Kjønnkode,
+  ArbeidsgiverOpplysningerPerId,
   BeregningsresultatPeriode,
-  KjønnkodeEnum,
-  FamilieHendelseSamling,
   Fagsak,
+  FamilieHendelseSamling,
+  Kjønnkode,
+  KjønnkodeEnum,
 } from '@navikt/fp-types';
 
 import TilkjentYtelseTimelineData from './TilkjentYtelseTimelineData';

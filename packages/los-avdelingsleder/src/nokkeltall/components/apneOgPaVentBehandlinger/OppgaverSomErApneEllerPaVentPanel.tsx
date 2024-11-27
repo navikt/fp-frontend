@@ -1,15 +1,17 @@
 import React, { FunctionComponent, useMemo } from 'react';
-import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
+import { FormattedMessage } from 'react-intl';
+
 import { HStack, Label } from '@navikt/ds-react';
+import { CheckboxField,Form } from '@navikt/ft-form-hooks';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { Form, CheckboxField } from '@navikt/ft-form-hooks';
+
 import { BehandlingType, KodeverkType } from '@navikt/fp-kodeverk';
 
-import OppgaverSomErApneEllerPaVent from '../../../typer/oppgaverSomErApneEllerPaVentTsType';
-import OppgaverSomErApneEllerPaVentGraf from './OppgaverSomErApneEllerPaVentGraf';
 import StoreValuesInLocalStorage from '../../../data/StoreValuesInLocalStorage';
 import useLosKodeverk from '../../../data/useLosKodeverk';
+import OppgaverSomErApneEllerPaVent from '../../../typer/oppgaverSomErApneEllerPaVentTsType';
+import OppgaverSomErApneEllerPaVentGraf from './OppgaverSomErApneEllerPaVentGraf';
 
 const formName = 'oppgaverSomErApneEllerPaVent';
 

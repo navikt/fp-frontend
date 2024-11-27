@@ -1,30 +1,31 @@
-import React, { useCallback, useState, useEffect } from 'react';
-import { Link, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import React, { useCallback, useEffect,useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
+import { Link, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+
 import { Heading } from '@navikt/ds-react';
-import { NotFoundPage } from '@navikt/fp-sak-infosider';
 
-import { SaksbehandlerIndex } from '@navikt/fp-los-saksbehandler';
 import { OppgaveJournalføringIndex } from '@navikt/fp-journalforing';
-import { UtbetalingsdataIs15Index } from '@navikt/fp-utbetalingsdata-is15';
 import { AvdelingslederIndex } from '@navikt/fp-los-avdelingsleder';
+import { SaksbehandlerIndex } from '@navikt/fp-los-saksbehandler';
 import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
+import { NotFoundPage } from '@navikt/fp-sak-infosider';
 import { NavAnsatt } from '@navikt/fp-types';
+import { UtbetalingsdataIs15Index } from '@navikt/fp-utbetalingsdata-is15';
 
+import { AktoerIndex } from '../../aktoer/AktoerIndex';
+import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
+import { FagsakIndex } from '../../fagsak/FagsakIndex';
+import { FagsakSearchIndex } from '../../fagsakSearch/FagsakSearchIndex';
 import {
   aktoerRoutePath,
+  avdelingslederRoutePath,
   fagsakRoutePath,
   getFagsakHref,
   journalføringRoutePath,
-  avdelingslederRoutePath,
   utbetalingsdataIs15RoutePath,
 } from '../paths';
-import { FagsakIndex } from '../../fagsak/FagsakIndex';
-import { AktoerIndex } from '../../aktoer/AktoerIndex';
-import { FagsakSearchIndex } from '../../fagsakSearch/FagsakSearchIndex';
 
 import styles from './home.module.css';
-import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
 
 interface Props {
   headerHeight: number;

@@ -1,23 +1,24 @@
-import React, { FunctionComponent, useState, useEffect, useCallback, useMemo, ReactElement } from 'react';
+import React, { FunctionComponent, ReactElement,useCallback, useEffect, useMemo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
+
+import { BodyShort, Button, Label } from '@navikt/ds-react';
+import { AksjonspunktHelpTextTemp, DateLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { addDaysToDate,ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
-import { Button, BodyShort, Label } from '@navikt/ds-react';
 
 import { AksjonspunktKode, KodeverkType } from '@navikt/fp-kodeverk';
-import { ISO_DATE_FORMAT, addDaysToDate } from '@navikt/ft-utils';
-import { AksjonspunktHelpTextTemp, DateLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import {
-  ArbeidsgiverOpplysningerPerId,
   AlleKodeverk,
-  OpptjeningAktivitet,
-  Opptjening,
-  KodeverkMedNavn,
+  ArbeidsgiverOpplysningerPerId,
   FerdiglignetNæring,
+  KodeverkMedNavn,
+  Opptjening,
+  OpptjeningAktivitet,
 } from '@navikt/fp-types';
 import { AvklarAktivitetsPerioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import OpptjeningTidslinje from './tidslinje/OpptjeningTidslinje';
 import ValgtAktivitetForm, { FormValues } from './aktivitet/ValgtAktivitetForm';
+import OpptjeningTidslinje from './tidslinje/OpptjeningTidslinje';
 
 import styles from './opptjeningFaktaPanel.module.css';
 

@@ -1,8 +1,9 @@
 import React from 'react';
 
-import { SistBehandledeSaker } from './sistBehandlede/SistBehandledeSaker';
-import { SaksbehandlerNokkeltallIndex } from './nokkeltall/SaksbehandlerNokkeltallIndex';
 import { VStack } from '@navikt/ds-react';
+
+import { SaksbehandlerNokkeltallIndex } from './nokkeltall/SaksbehandlerNokkeltallIndex';
+import { SistBehandledeSaker } from './sistBehandlede/SistBehandledeSaker';
 
 interface Props {
   valgtSakslisteId?: number;

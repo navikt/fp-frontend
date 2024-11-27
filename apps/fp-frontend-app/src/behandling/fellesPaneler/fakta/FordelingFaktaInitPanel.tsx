@@ -1,20 +1,21 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
-import { TIDENES_ENDE } from '@navikt/ft-utils';
+
 import {
-  FordelBeregningsgrunnlagFaktaIndex,
   FaktaFordelBeregningAvklaringsbehovCode,
-  FtVilkar,
+  FordelBeregningsgrunnlagFaktaIndex,
   FtBeregningsgrunnlag,
+  FtVilkar,
 } from '@navikt/ft-fakta-fordel-beregningsgrunnlag';
+import { TIDENES_ENDE } from '@navikt/ft-utils';
 
+import { AksjonspunktKode,VilkarType } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import { Beregningsgrunnlag, Vilkar, Vilkarperiode, ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
-import { VilkarType, AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { ArbeidsgiverOpplysningerPerId,Beregningsgrunnlag, Vilkar, Vilkarperiode } from '@navikt/fp-types';
 
-import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
-import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
+import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
+import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
 
 import '@navikt/ft-fakta-fordel-beregningsgrunnlag/dist/style.css';
 

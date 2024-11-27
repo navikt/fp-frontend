@@ -1,8 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Label, BodyShort } from '@navikt/ds-react';
+
+import { BodyShort,Label } from '@navikt/ds-react';
+import { PeriodLabel,VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
 import { AoIArbeidsforhold } from '@navikt/fp-types';
-import { VerticalSpacer, PeriodLabel } from '@navikt/ft-ui-komponenter';
 
 interface OwnProps {
   arbeidsforhold: AoIArbeidsforhold;

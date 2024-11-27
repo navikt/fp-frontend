@@ -1,15 +1,16 @@
-import React, { useCallback, FunctionComponent, useMemo } from 'react';
+import React, { FunctionComponent, useCallback, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Label } from '@navikt/ds-react';
 
+import { Label } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
-import { VilkarUtfallType, AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
+import { AksjonspunktKode, AksjonspunktStatus,VilkarUtfallType } from '@navikt/fp-kodeverk';
 import {
-  VilkarResultPicker,
-  ProsessStegBegrunnelseTextFieldNew,
   ProsessPanelTemplate,
+  ProsessStegBegrunnelseTextFieldNew,
+  VilkarResultPicker,
 } from '@navikt/fp-prosess-felles';
 import { Aksjonspunkt, Behandling, Behandlingsresultat, FastsattOpptjening } from '@navikt/fp-types';
 import { AvklarOpptjeningsvilkaretAp } from '@navikt/fp-types-avklar-aksjonspunkter';

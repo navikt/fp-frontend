@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
-import { FormattedMessage } from 'react-intl';
 import { FieldArrayWithId, useFormContext } from 'react-hook-form';
-import { BodyShort, Button, Table, VStack } from '@navikt/ds-react';
+import { FormattedMessage } from 'react-intl';
+
 import { TrashIcon } from '@navikt/aksel-icons';
-import { AlleKodeverk } from '@navikt/fp-types';
+import { BodyShort, Button, Table, VStack } from '@navikt/ds-react';
 import { InputField } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
+import { AlleKodeverk } from '@navikt/fp-types';
+
+import { VIRKSOMHET_FORM_NAME_PREFIX } from '../constants';
+import { RegistrerVirksomhetFormValues, VirksomhetFormValues } from '../types';
 import { VirksomhetIdentifikasjonPanel } from './VirksomhetIdentifikasjonPanel';
 import { VirksomhetRegnskapPanel } from './VirksomhetRegnskapPanel';
-import { VirksomhetStartetEndretPanel } from './VirksomhetStartetEndretPanel';
 import { VirksomhetRelasjonPanel } from './VirksomhetRelasjonPanel';
+import { VirksomhetStartetEndretPanel } from './VirksomhetStartetEndretPanel';
 import { VirksomhetTypeNaringPanel } from './VirksomhetTypeNaringPanel';
-
-import { RegistrerVirksomhetFormValues, VirksomhetFormValues } from '../types';
-import { VIRKSOMHET_FORM_NAME_PREFIX } from '../constants';
 
 interface Props {
   index: number;

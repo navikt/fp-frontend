@@ -1,12 +1,13 @@
+import React, { FunctionComponent, useCallback, useState } from 'react';
+import { useForm,UseFormGetValues } from 'react-hook-form';
+import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+
 import { PencilFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, HStack, Heading } from '@navikt/ds-react';
+import { BodyShort, Button, Heading,HStack } from '@navikt/ds-react';
 import { Datepicker, Form, TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { AksjonspunktBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
-import React, { FunctionComponent, useCallback, useState } from 'react';
-import { UseFormGetValues, useForm } from 'react-hook-form';
-import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Soknad } from '@navikt/fp-types';

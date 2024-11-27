@@ -1,10 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
-import moment from 'moment';
-import { BodyShort, Link } from '@navikt/ds-react';
 
-import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { BodyShort, Link } from '@navikt/ds-react';
 import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
+import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import moment from 'moment';
+
 import { RelatertTilgrensedYtelse } from '@navikt/fp-types';
 
 import styles from './personYtelserTable.module.css';

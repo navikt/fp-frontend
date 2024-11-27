@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+
 import { Alert, BodyShort, Button, HStack, Modal } from '@navikt/ds-react';
 import { createIntl } from '@navikt/ft-utils';
 

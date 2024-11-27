@@ -1,30 +1,31 @@
-import React, { useCallback, FunctionComponent, useMemo, useState, useRef } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import React, { FunctionComponent, useCallback, useMemo, useRef,useState } from 'react';
 import { useForm, UseFormGetValues } from 'react-hook-form';
-import { Alert, BodyShort, Button, HStack, Popover } from '@navikt/ds-react';
-import { QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
+import { FormattedMessage, useIntl } from 'react-intl';
 
+import { QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
+import { Alert, BodyShort, Button, HStack, Popover } from '@navikt/ds-react';
+import { Datepicker, Form,InputField, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
 import {
-  hasValidText,
-  maxLength,
-  minLength,
+  dateAfterOrEqual,
   hasValidDate,
   hasValidInteger,
-  required,
-  minValue,
+  hasValidText,
+  maxLength,
   maxValue,
-  dateAfterOrEqual,
+  minLength,
+  minValue,
+  required,
 } from '@navikt/ft-form-validators';
-import { TextAreaField, RadioGroupPanel, Datepicker, InputField, Form } from '@navikt/ft-form-hooks';
-import { Inntektsmelding, ManueltArbeidsforhold, ManglendeInntektsmeldingVurdering } from '@navikt/fp-types';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 
-import InntektsmeldingOpplysningerPanel from '../felles/InntektsmeldingOpplysningerPanel';
+import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
+import { Inntektsmelding, ManglendeInntektsmeldingVurdering,ManueltArbeidsforhold } from '@navikt/fp-types';
+
+import { useSetDirtyForm } from '../../DirtyFormProvider';
 import ArbeidsforholdOgInntektRadData from '../../types/arbeidsforholdOgInntekt';
+import InntektsmeldingOpplysningerPanel from '../felles/InntektsmeldingOpplysningerPanel';
 
 import styles from './manglendeArbeidsforholdForm.module.css';
-import { useSetDirtyForm } from '../../DirtyFormProvider';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);

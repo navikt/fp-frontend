@@ -1,10 +1,11 @@
 import { FagsakYtelseType } from '@navikt/fp-kodeverk';
+
 import JournalKanal from '../kodeverk/journalKanal';
+import JournalpostTilstand from '../kodeverk/journalpostTilstand';
 import JournalAvsender from './journalAvsenderTsType';
 import JournalBruker from './journalBrukerTsType';
 import JournalDokument from './journalDokumentTsType';
 import JournalFagsak from './journalFagsakTsType';
-import JournalpostTilstand from '../kodeverk/journalpostTilstand';
 
 type Journalpost = Readonly<{
   journalpostId: string;

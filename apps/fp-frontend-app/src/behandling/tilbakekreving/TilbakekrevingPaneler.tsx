@@ -1,19 +1,20 @@
 import React, { useCallback, useMemo } from 'react';
 
-import { Behandling, BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 
 import { BehandlingStatus, BehandlingType } from '@navikt/fp-kodeverk';
-import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-import { VergeFaktaInitPanel } from '../fellesPaneler/fakta/VergeFaktaInitPanel';
+import { Behandling, BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
+
+import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
+import { BehandlingContainer } from '../felles/BehandlingContainer';
+import { BehandlingPaVent } from '../felles/modaler/paVent/BehandlingPaVent';
 import { FaktaPanelInitProps } from '../felles/typer/faktaPanelInitProps';
 import { ProsessPanelInitProps } from '../felles/typer/prosessPanelInitProps';
-import { BehandlingContainer } from '../felles/BehandlingContainer';
+import { VergeFaktaInitPanel } from '../fellesPaneler/fakta/VergeFaktaInitPanel';
+import { FeilutbetalingFaktaInitPanel } from './faktaPaneler/FeilutbetalingFaktaInitPanel';
 import { ForeldelseProsessInitPanel } from './prosessPaneler/ForeldelseProsessInitPanel';
 import { TilbakekrevingProsessInitPanel } from './prosessPaneler/TilbakekrevingProsessInitPanel';
 import { VedtakTilbakekrevingProsessInitPanel } from './prosessPaneler/VedtakTilbakekrevingProsessInitPanel';
-import { FeilutbetalingFaktaInitPanel } from './faktaPaneler/FeilutbetalingFaktaInitPanel';
-import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
-import { BehandlingPaVent } from '../felles/modaler/paVent/BehandlingPaVent';
 
 interface Props {
   behandling: Behandling;

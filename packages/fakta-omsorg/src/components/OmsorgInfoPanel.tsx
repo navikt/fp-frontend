@@ -1,18 +1,20 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import { Form } from '@navikt/ft-form-hooks';
+import { FormattedMessage } from 'react-intl';
+
 import { VStack } from '@navikt/ds-react';
+import { Form } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
+
 import {
-  PersonopplysningerForFamilie,
   FaktaBegrunnelseTextFieldNew,
   FaktaSubmitButtonNew,
+  PersonopplysningerForFamilie,
 } from '@navikt/fp-fakta-felles';
 import { Aksjonspunkt, Personoversikt, StandardFaktaPanelProps, Ytelsefordeling } from '@navikt/fp-types';
 import { BekreftOmsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import { OmsorgFaktaFields, FormValues as OmsorgFormValues } from './OmsorgFaktaFields';
+import { FormValues as OmsorgFormValues,OmsorgFaktaFields } from './OmsorgFaktaFields';
 
 const buildInitialValues = (ytelsefordeling: Ytelsefordeling, aksjonspunkter: Aksjonspunkt[]): FormValues => {
   return {

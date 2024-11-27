@@ -1,9 +1,8 @@
-import dayjs from 'dayjs';
-import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
-import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
-
 import { dateBeforeOrEqual, maxValue, minValue } from '@navikt/ft-form-validators';
 import { createIntl, ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import dayjs from 'dayjs';
+import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
+import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 
 import messages from '../../i18n/nb_NO.json';
 

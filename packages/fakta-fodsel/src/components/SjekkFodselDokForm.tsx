@@ -1,17 +1,18 @@
 import React, { FunctionComponent } from 'react';
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Label } from '@navikt/ds-react';
 
-import { FaktaBegrunnelseTextFieldNew, isFieldEdited } from '@navikt/fp-fakta-felles';
-import { ArrowBox, VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
-import { FodselSammenligningIndex } from '@navikt/fp-prosess-fakta-fodsel-sammenligning';
+import { Label } from '@navikt/ds-react';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
+import { ArrowBox, FaktaGruppe,VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
+import { FaktaBegrunnelseTextFieldNew, isFieldEdited } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt, FamilieHendelse, FamilieHendelseSamling, Soknad, AvklartBarn } from '@navikt/fp-types';
+import { FodselSammenligningIndex } from '@navikt/fp-prosess-fakta-fodsel-sammenligning';
+import { Aksjonspunkt, AvklartBarn,FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
 import { SjekkManglendeFodselAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import { useFormContext } from 'react-hook-form';
 import AvklartBarnFieldArray from './AvklartBarnFieldArray';
 
 import styles from './SjekkFodselDokForm.module.css';

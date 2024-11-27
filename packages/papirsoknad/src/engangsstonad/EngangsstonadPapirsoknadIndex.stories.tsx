@@ -1,10 +1,10 @@
-import { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+import { Meta, StoryObj } from '@storybook/react';
 
-import { FagsakYtelseType, ForeldreType, FamilieHendelseType } from '@navikt/fp-kodeverk';
+import { FagsakYtelseType, FamilieHendelseType,ForeldreType } from '@navikt/fp-kodeverk';
+import { SoknadData } from '@navikt/fp-papirsoknad-ui-komponenter';
 import { alleKodeverk, getIntlDecorator, withRouter } from '@navikt/fp-storybook-utils';
 
-import { SoknadData } from '@navikt/fp-papirsoknad-ui-komponenter';
 import { EngangsstonadPapirsoknadIndex } from './EngangsstonadPapirsoknadIndex';
 
 import messages from '../../i18n/nb_NO.json';

@@ -1,10 +1,8 @@
-import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
-import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import React from 'react';
-import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { useIntl } from 'react-intl';
-import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
+
 import { InntektsmeldingFaktaIndex } from '@navikt/fp-fakta-inntektsmelding';
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import {
   ArbeidsgiverOpplysningerPerId,
   Behandling,
@@ -12,6 +10,10 @@ import {
   Fagsak,
   Inntektsmelding,
 } from '@navikt/fp-types';
+
+import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
+import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
+import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.INNTEKTSMELDINGER];
 type EndepunktPanelData = {

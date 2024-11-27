@@ -1,9 +1,14 @@
 import React, { ComponentProps } from 'react';
-import { RestApiErrorProvider, RestApiProvider } from '@navikt/fp-rest-api-hooks';
-import { alleKodeverk, alleKodeverkTilbakekreving } from '@navikt/fp-storybook-utils';
+import { MemoryRouter } from 'react-router-dom';
+
 import { Meta, StoryObj } from '@storybook/react';
 import MockAdapter from 'axios-mock-adapter';
-import { MemoryRouter } from 'react-router-dom';
+
+import { RestApiErrorProvider, RestApiProvider } from '@navikt/fp-rest-api-hooks';
+import { alleKodeverk, alleKodeverkTilbakekreving } from '@navikt/fp-storybook-utils';
+
+import { requestBehandlingApi } from '../data/behandlingContextApi';
+import { requestFagsakApi } from '../data/fagsakContextApi';
 import { AppIndex } from './AppIndex';
 
 import alleInntektsmeldinger from '../../.storybook/testdata/alleInntektsmeldinger.json';
@@ -22,8 +27,6 @@ import inntektArbeidYtelseData from '../../.storybook/testdata/inntektArbeidYtel
 import medlemskapData from '../../.storybook/testdata/medlemskap.json';
 import personoversiktData from '../../.storybook/testdata/personoversikt.json';
 import soknadData from '../../.storybook/testdata/soknad.json';
-import { requestBehandlingApi } from '../data/behandlingContextApi';
-import { requestFagsakApi } from '../data/fagsakContextApi';
 
 const meta = {
   title: 'app/app',

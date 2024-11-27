@@ -1,18 +1,20 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
+
 import {
-  TilbakekrevingProsessIndex,
-  ForeldelseAksjonspunktCodes,
   DetaljerteFeilutbetalingsperioder,
   FeilutbetalingPerioderWrapper,
+  ForeldelseAksjonspunktCodes,
+  TilbakekrevingProsessIndex,
 } from '@navikt/ft-prosess-tilbakekreving';
-import { VilkarUtfallType, isAksjonspunktOpen, KodeverkType } from '@navikt/fp-kodeverk';
-import { ProsessStegCode } from '@navikt/fp-konstanter';
 
-import { VilkarsVurdertePerioderWrapper, Aksjonspunkt, AlleKodeverkTilbakekreving } from '@navikt/fp-types';
+import { isAksjonspunktOpen, KodeverkType,VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { ProsessStegCode } from '@navikt/fp-konstanter';
+import { Aksjonspunkt, AlleKodeverkTilbakekreving,VilkarsVurdertePerioderWrapper } from '@navikt/fp-types';
+
+import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
-import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
 
 import '@navikt/ft-prosess-tilbakekreving/dist/style.css';
 

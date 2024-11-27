@@ -1,22 +1,22 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { FagsakYtelseType, AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { Fagsak, Aksjonspunkt, Soknad } from '@navikt/fp-types';
+import { HStack, VStack } from '@navikt/ds-react';
+import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
+import { AksjonspunktKode,FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { Aksjonspunkt, Fagsak, Soknad } from '@navikt/fp-types';
 import {
   AvklarDekningsgradAp,
   MerkOpptjeningUtlandAp,
   OverstyringAvklarStartdatoForPeriodenAp,
   OverstyringDekningsgradAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-
-import { HStack, VStack } from '@navikt/ds-react';
-import InnhentDokOpptjeningUtlandPanel from './innhentDok/InnhentDokOpptjeningUtlandPanel';
-import StartdatoForForeldrepengerperiodenForm from './startdatoForForeldrepenger/StartdatoForForeldrepengerperiodenForm';
 
 import DekningradApForm from './dekningsgrad/DekningradApForm';
 import DekningradForm from './dekningsgrad/DekningradForm';
+import InnhentDokOpptjeningUtlandPanel from './innhentDok/InnhentDokOpptjeningUtlandPanel';
+import StartdatoForForeldrepengerperiodenForm from './startdatoForForeldrepenger/StartdatoForForeldrepengerperiodenForm';
 
 interface OwnProps {
   fagsak: Fagsak;

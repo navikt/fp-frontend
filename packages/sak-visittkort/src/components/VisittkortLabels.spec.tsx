@@ -1,9 +1,13 @@
 import React from 'react';
 import { RawIntlProvider } from 'react-intl';
-import { render, screen } from '@testing-library/react';
-import { DiskresjonskodeType, NavBrukerKjonn } from '@navikt/fp-kodeverk';
+
 import { createIntl } from '@navikt/ft-utils';
+import { render, screen } from '@testing-library/react';
+
+import { DiskresjonskodeType, NavBrukerKjonn } from '@navikt/fp-kodeverk';
+
 import { VisittkortLabels } from './VisittkortLabels';
+
 import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);

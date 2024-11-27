@@ -1,15 +1,16 @@
 import React from 'react';
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
+
 import { Label, VStack } from '@navikt/ds-react';
 import { CheckboxField } from '@navikt/ft-form-hooks';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
 import { AlleKodeverk } from '@navikt/fp-types';
 
-import { useFormContext } from 'react-hook-form';
-import { RenderOppholdPeriodeFieldArray } from './RenderOppholdPeriodeFieldArray';
 import { OPPHOLD_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
 import { FormValuesOpphold } from '../../types';
+import { RenderOppholdPeriodeFieldArray } from './RenderOppholdPeriodeFieldArray';
 
 interface Props {
   readOnly: boolean;

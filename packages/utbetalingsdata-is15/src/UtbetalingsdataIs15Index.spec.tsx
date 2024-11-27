@@ -1,7 +1,9 @@
 import React from 'react';
+
+import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { composeStories } from '@storybook/react';
+
 import * as stories from './UtbetalingsdataIs15Index.stories';
 
 const { Default, IngenData } = composeStories(stories);

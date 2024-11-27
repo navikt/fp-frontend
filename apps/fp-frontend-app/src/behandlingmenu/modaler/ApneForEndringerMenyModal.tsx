@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+
 import { MenyApneForEndringerIndex } from '@navikt/fp-sak-meny-apne-for-endringer';
 import { Behandling, BehandlingAppKontekst } from '@navikt/fp-types';
 

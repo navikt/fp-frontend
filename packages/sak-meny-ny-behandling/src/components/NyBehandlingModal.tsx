@@ -1,12 +1,13 @@
 import React, { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Modal, Button, Heading } from '@navikt/ds-react';
 
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { CheckboxField, SelectField, Form } from '@navikt/ft-form-hooks';
+import { Button, Heading,Modal } from '@navikt/ds-react';
+import { CheckboxField, Form,SelectField } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import { FagsakYtelseType, BehandlingType, BehandlingArsakType } from '@navikt/fp-kodeverk';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
+import { BehandlingArsakType,BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { KodeverkMedNavn } from '@navikt/fp-types';
 
 import styles from './nyBehandlingModal.module.css';

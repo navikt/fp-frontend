@@ -1,11 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
-import { DokumentTittelSubmitValue } from '../../../typer/ferdigstillJournalføringSubmit';
 
+import { DokumentTittelSubmitValue } from '../../../typer/ferdigstillJournalføringSubmit';
 import JournalDokument from '../../../typer/journalDokumentTsType';
 import JournalføringFormValues, { DokumentTittelFormValues } from '../../../typer/journalføringFormValues';
-import DokumentDetaljer from './DokumentDetaljer';
 import Journalpost from '../../../typer/journalpostTsType';
+import DokumentDetaljer from './DokumentDetaljer';
 
 const TOM_DOK_LISTE: JournalDokument[] = [];
 

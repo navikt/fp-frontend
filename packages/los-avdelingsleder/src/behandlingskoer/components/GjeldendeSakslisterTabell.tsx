@@ -1,15 +1,17 @@
-import React, { useState, KeyboardEvent, FunctionComponent, useEffect, useRef, useCallback, ReactElement } from 'react';
+import React, { FunctionComponent, KeyboardEvent, ReactElement,useCallback, useEffect, useRef, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { BodyShort, Detail, Label, Heading, Link, Table, HStack } from '@navikt/ds-react';
-import { KodeverkMedNavn } from '@navikt/fp-types';
-import { VerticalSpacer, DateLabel } from '@navikt/ft-ui-komponenter';
-import { KodeverkType } from '@navikt/fp-kodeverk';
+
 import { PlusCircleIcon, XMarkIcon } from '@navikt/aksel-icons';
+import { BodyShort, Detail, Heading, HStack,Label, Link, Table } from '@navikt/ds-react';
+import { DateLabel,VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
+import { KodeverkType } from '@navikt/fp-kodeverk';
+import { KodeverkMedNavn } from '@navikt/fp-types';
 
 import { restApiHooks, RestApiPathsKeys } from '../../data/fplosRestApi';
 import useLosKodeverk from '../../data/useLosKodeverk';
-import SletteSakslisteModal from './SletteSakslisteModal';
 import Saksliste from '../../typer/sakslisteAvdelingTsType';
+import SletteSakslisteModal from './SletteSakslisteModal';
 
 import styles from './gjeldendeSakslisterTabell.module.css';
 

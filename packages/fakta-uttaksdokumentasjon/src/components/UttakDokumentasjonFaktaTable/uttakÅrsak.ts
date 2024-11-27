@@ -1,4 +1,5 @@
 import { UttakÅrsak } from '@navikt/fp-types';
+
 import assertUnreachable from '../../utils/switchCaseUtils';
 
 const getUttakÅrsakTekst = (årsak: UttakÅrsak) => {

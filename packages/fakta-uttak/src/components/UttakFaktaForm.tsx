@@ -1,9 +1,10 @@
-import React, { useCallback, FunctionComponent, useState, useEffect, useMemo } from 'react';
+import React, { FunctionComponent, useCallback, useEffect, useMemo,useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
-import dayjs from 'dayjs';
-import { Form } from '@navikt/ft-form-hooks';
+
 import { ErrorSummary, Heading } from '@navikt/ds-react';
+import { Form } from '@navikt/ft-form-hooks';
+import { dateRangesNotOverlapping } from '@navikt/ft-form-validators';
 import {
   AksjonspunktHelpTextHTML,
   FlexColumn,
@@ -13,29 +14,29 @@ import {
   VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
+import dayjs from 'dayjs';
 
-import { FaktaSubmitButtonNew, FaktaBegrunnelseTextFieldNew, validerApKodeOgHentApEnum } from '@navikt/fp-fakta-felles';
+import { FaktaBegrunnelseTextFieldNew, FaktaSubmitButtonNew, validerApKodeOgHentApEnum } from '@navikt/fp-fakta-felles';
 import {
-  Aksjonspunkt,
-  KontrollerFaktaPeriode,
-  Ytelsefordeling,
-  AlleKodeverk,
-  ArbeidsgiverOpplysningerPerId,
-  FaktaArbeidsforhold,
-  Fagsak,
-} from '@navikt/fp-types';
-import { BekreftUttaksperioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import {
+  AksjonspunktKode,
   AksjonspunktStatus,
   FamilieHendelseType,
   isAksjonspunktOpen,
-  AksjonspunktKode,
   RelasjonsRolleType,
 } from '@navikt/fp-kodeverk';
+import {
+  Aksjonspunkt,
+  AlleKodeverk,
+  ArbeidsgiverOpplysningerPerId,
+  Fagsak,
+  FaktaArbeidsforhold,
+  KontrollerFaktaPeriode,
+  Ytelsefordeling,
+} from '@navikt/fp-types';
+import { BekreftUttaksperioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import { dateRangesNotOverlapping } from '@navikt/ft-form-validators';
-import UttakFaktaTable from './UttakFaktaTable';
 import KontrollerFaktaPeriodeMedApMarkering, { PeriodeApType } from '../typer/kontrollerFaktaPeriodeMedApMarkering';
+import UttakFaktaTable from './UttakFaktaTable';
 
 const finnAksjonspunktTekster = (aksjonspunkter: Aksjonspunkt[], ytelsefordeling: Ytelsefordeling) =>
   aksjonspunkter

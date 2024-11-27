@@ -1,11 +1,13 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { RawIntlProvider } from 'react-intl';
+
+import { createIntl } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { StandardFaktaPanelProps, DokumentasjonVurderingBehov } from '@navikt/fp-types';
-import { createIntl } from '@navikt/ft-utils';
+import { DokumentasjonVurderingBehov,StandardFaktaPanelProps } from '@navikt/fp-types';
 
 import UttakDokumentasjonFaktaForm from './components/UttakDokumentasjonFaktaForm';
+
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);

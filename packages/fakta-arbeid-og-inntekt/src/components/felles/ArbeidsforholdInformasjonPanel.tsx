@@ -1,12 +1,13 @@
-import React, { FunctionComponent, useState, useMemo } from 'react';
+import React, { FunctionComponent, useMemo,useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-import dayjs from 'dayjs';
-import { Label, BodyShort, Link, VStack, HStack, Spacer } from '@navikt/ds-react';
-import { ChevronDownIcon, ChevronUpIcon } from '@navikt/aksel-icons';
 
-import { formatCurrencyNoKr, ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import { AlleKodeverk, AoIArbeidsforhold, Inntektsmelding, Inntektspost } from '@navikt/fp-types';
+import { ChevronDownIcon, ChevronUpIcon } from '@navikt/aksel-icons';
+import { BodyShort, HStack, Label, Link, Spacer,VStack } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { formatCurrencyNoKr, ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import dayjs from 'dayjs';
+
+import { AlleKodeverk, AoIArbeidsforhold, Inntektsmelding, Inntektspost } from '@navikt/fp-types';
 
 import InntektsmeldingerPanel from './InntektsmeldingerPanel';
 

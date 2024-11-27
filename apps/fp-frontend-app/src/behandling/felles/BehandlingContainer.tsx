@@ -2,10 +2,10 @@ import React, { ReactElement, useState } from 'react';
 
 import { Behandling } from '@navikt/fp-types';
 
-import { ProsessContainer } from './prosess/ProsessContainer';
 import { FaktaContainer } from './fakta/FaktaContainer';
-import { ProsessPanelInitProps, ProsessPanelExtraInitProps } from './typer/prosessPanelInitProps';
+import { ProsessContainer } from './prosess/ProsessContainer';
 import { FaktaPanelInitProps } from './typer/faktaPanelInitProps';
+import { ProsessPanelExtraInitProps,ProsessPanelInitProps } from './typer/prosessPanelInitProps';
 
 interface FaktaPanelInfo {
   urlCode: string;

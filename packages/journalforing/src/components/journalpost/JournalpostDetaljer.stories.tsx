@@ -1,20 +1,22 @@
 import React from 'react';
-import { StoryFn } from '@storybook/react';
+
 import { action } from '@storybook/addon-actions';
-import { getIntlDecorator } from '@navikt/fp-storybook-utils';
+import { StoryFn } from '@storybook/react';
 
 import { FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 import { NavAnsatt } from '@navikt/fp-types';
-import JournalpostDetaljer from './JournalpostDetaljer';
-import JournalførSubmitValue from '../../typer/ferdigstillJournalføringSubmit';
+
+import DokumentTittel from '../../kodeverk/dokumentTittel';
 import JournalKanal from '../../kodeverk/journalKanal';
+import OppgaveKilde from '../../kodeverk/oppgaveKilde';
+import JournalførSubmitValue from '../../typer/ferdigstillJournalføringSubmit';
 import Journalpost from '../../typer/journalpostTsType';
+import Oppgave from '../../typer/oppgaveTsType';
+import ReserverOppgaveType from '../../typer/reserverOppgaveType';
+import JournalpostDetaljer from './JournalpostDetaljer';
 
 import messages from '../../../i18n/nb_NO.json';
-import Oppgave from '../../typer/oppgaveTsType';
-import DokumentTittel from '../../kodeverk/dokumentTittel';
-import ReserverOppgaveType from '../../typer/reserverOppgaveType';
-import OppgaveKilde from '../../kodeverk/oppgaveKilde';
 
 const withIntl = getIntlDecorator(messages);
 

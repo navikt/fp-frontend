@@ -3,8 +3,9 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ArrowForwardIcon } from '@navikt/aksel-icons';
 import { BodyLong, Button, Modal } from '@navikt/ds-react';
-import { Fagsak, Inntektsmelding } from '@navikt/fp-types';
+
 import { hentDokumentLenke } from '@navikt/fp-konstanter';
+import { Fagsak, Inntektsmelding } from '@navikt/fp-types';
 
 export const LastNedPdfKnapp = ({ inntektsmelding, fagsak }: { fagsak: Fagsak; inntektsmelding: Inntektsmelding }) => {
   return (

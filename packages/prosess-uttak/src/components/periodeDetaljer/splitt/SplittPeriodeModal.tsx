@@ -1,12 +1,12 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import dayjs from 'dayjs';
+import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+
 import { BodyShort, Button, Detail, Heading, HStack, Modal, VStack } from '@navikt/ds-react';
 import { Datepicker, Form } from '@navikt/ft-form-hooks';
-
-import { calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
+import { calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
+import dayjs from 'dayjs';
 
 import styles from './splittPeriodeModal.module.css';
 

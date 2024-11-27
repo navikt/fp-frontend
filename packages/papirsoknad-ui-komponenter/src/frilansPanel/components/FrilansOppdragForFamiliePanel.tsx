@@ -1,13 +1,14 @@
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
+
 import { Label } from '@navikt/ds-react';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
-import { FrilansOppdragForFamilieFieldArray } from './FrilansOppdragForFamilieFieldArray';
-import { FrilansFormValues, FrilansSubFormValues } from '../types';
 import { TrueFalseInput } from '../../felles/TrueFalseInput';
 import { FRILANS_NAME_PREFIX } from '../constants';
+import { FrilansFormValues, FrilansSubFormValues } from '../types';
+import { FrilansOppdragForFamilieFieldArray } from './FrilansOppdragForFamilieFieldArray';
 
 interface Props {
   readOnly: boolean;

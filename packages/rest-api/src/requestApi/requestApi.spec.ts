@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-import RequestApi from './RequestApi';
 import RequestConfig from '../RequestConfig';
+import RequestApi from './RequestApi';
 import { Response } from './ResponseTsType';
 
 const httpClientGeneralMock = (response: Response) => ({

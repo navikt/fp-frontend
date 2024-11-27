@@ -1,8 +1,11 @@
 import React from 'react';
+
 import { Meta, StoryObj } from '@storybook/react';
-import { FagsakEnkel } from '@navikt/fp-types';
-import { NavBrukerKjonn, FagsakStatus, FagsakYtelseType, KodeverkType } from '@navikt/fp-kodeverk';
+
+import { FagsakStatus, FagsakYtelseType, KodeverkType,NavBrukerKjonn } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { FagsakEnkel } from '@navikt/fp-types';
+
 import { AktorSakIndex } from './AktorSakIndex';
 
 import '@navikt/ft-ui-komponenter/dist/style.css';

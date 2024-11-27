@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
+
 import { RestApiDispatchContext } from '@navikt/fp-rest-api-hooks';
 
 interface Props {

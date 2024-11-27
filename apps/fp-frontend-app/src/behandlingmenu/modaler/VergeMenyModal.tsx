@@ -1,10 +1,11 @@
 import React from 'react';
-import { MenyVergeIndex } from '@navikt/fp-sak-meny';
-import { VergeBehandlingmenyValg, Behandling, BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
-
 import { useLocation, useNavigate } from 'react-router-dom';
-import { BehandlingApiKeys, restBehandlingApiHooks } from '../../data/behandlingContextApi';
+
+import { MenyVergeIndex } from '@navikt/fp-sak-meny';
+import { Behandling, BehandlingAppKontekst, Fagsak,VergeBehandlingmenyValg } from '@navikt/fp-types';
+
 import { getLocationWithDefaultProsessStegAndFakta, pathToBehandling } from '../../app/paths';
+import { BehandlingApiKeys, restBehandlingApiHooks } from '../../data/behandlingContextApi';
 
 interface Props {
   fagsak: Fagsak;

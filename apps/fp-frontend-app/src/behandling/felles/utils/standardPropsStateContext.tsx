@@ -1,5 +1,6 @@
 import React, { createContext, ReactElement, useMemo } from 'react';
-import { AlleKodeverk, Fagsak, Behandling, AksessRettigheter } from '@navikt/fp-types';
+
+import { AksessRettigheter,AlleKodeverk, Behandling, Fagsak } from '@navikt/fp-types';
 
 type InputValues = {
   behandling: Behandling;

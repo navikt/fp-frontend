@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react';
 
 import { restApiHooks, RestApiPathsKeys } from '../data/fplosRestApi';
+import BehandlingVentefrist from '../typer/behandlingVentefristTsType';
 import OppgaverForAvdeling from '../typer/oppgaverForAvdelingTsType';
 import OppgaveForDato from '../typer/oppgaverForDatoTsType';
-import BehandlingVentefrist from '../typer/behandlingVentefristTsType';
 import OppgaverForForsteStonadsdag from '../typer/oppgaverForForsteStonadsdagTsType';
 import OppgaverSomErApneEllerPaVent from '../typer/oppgaverSomErApneEllerPaVentTsType';
 import NokkeltallPanel from './components/NokkeltallPanel';

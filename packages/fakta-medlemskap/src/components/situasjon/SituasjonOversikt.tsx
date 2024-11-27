@@ -1,7 +1,8 @@
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
+
+import { FaktaBox, FaktaGruppe, FaktaKilde } from '@navikt/fp-fakta-felles';
 import { AlleKodeverk, Medlemskap, Soknad } from '@navikt/fp-types';
-import { FaktaGruppe, FaktaBox, FaktaKilde } from '@navikt/fp-fakta-felles';
 
 import { formaterUtenlandsopphold, getSisteBostedsLand, getSistePersonstatus, getSisteRegion } from './situasjonUtils';
 

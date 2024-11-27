@@ -1,18 +1,20 @@
 import React, { ReactElement } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
+import { FormattedMessage, useIntl } from 'react-intl';
+
 import { VStack } from '@navikt/ds-react';
-import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
-import { FaktaBegrunnelseTextFieldNew, FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
 import { Form } from '@navikt/ft-form-hooks';
+import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
+
+import { FaktaBegrunnelseTextFieldNew, FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, getKodeverknavnFn, hasAksjonspunkt, KodeverkType } from '@navikt/fp-kodeverk';
 import {
   Aksjonspunkt,
+  AlleKodeverk,
   FamilieHendelse,
   Personoversikt,
   RelatertTilgrensedYtelse,
   Soknad,
-  AlleKodeverk,
   StandardFaktaPanelProps,
 } from '@navikt/fp-types';
 import {

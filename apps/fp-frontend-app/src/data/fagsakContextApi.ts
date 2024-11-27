@@ -1,17 +1,17 @@
-import { RestApiConfigBuilder, createRequestApi, RestKey, Link } from '@navikt/fp-rest-api';
+import { createRequestApi, Link,RestApiConfigBuilder, RestKey } from '@navikt/fp-rest-api';
 import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
 import {
-  Dokument,
   Aktor,
-  ForhåndsvisMeldingParams,
-  FagsakEnkel,
-  Fagsak,
-  FagsakDataFpTilbake,
-  NavAnsatt,
-  Behandling,
   AlleKodeverk,
   AlleKodeverkTilbakekreving,
+  Behandling,
+  Dokument,
+  Fagsak,
+  FagsakDataFpTilbake,
+  FagsakEnkel,
+  ForhåndsvisMeldingParams,
   InfotrygdVedtak,
+  NavAnsatt,
 } from '@navikt/fp-types';
 
 type BehandlendeEnheter = {

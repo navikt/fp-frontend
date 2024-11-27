@@ -1,10 +1,12 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { RawIntlProvider } from 'react-intl';
+
 import { createIntl } from '@navikt/ft-utils';
+import { render, screen } from '@testing-library/react';
+
 import { RestApiMock } from '@navikt/fp-utils-test';
 
-import { RawIntlProvider } from 'react-intl';
-import { requestFagsakApi, FagsakApiKeys } from '../../data/fagsakContextApi';
+import { FagsakApiKeys,requestFagsakApi } from '../../data/fagsakContextApi';
 import { DokumentIndex } from './DokumentIndex';
 
 import messages from '../../../i18n/nb_NO.json';

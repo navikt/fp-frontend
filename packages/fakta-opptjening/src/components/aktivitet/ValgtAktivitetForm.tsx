@@ -1,26 +1,27 @@
 import React, { FunctionComponent, ReactElement, useCallback } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import { Button, Label, Heading, BodyShort, HStack, VStack } from '@navikt/ds-react';
-import dayjs from 'dayjs';
+import { FormattedMessage, useIntl } from 'react-intl';
+
 import { ArrowLeftIcon, ArrowRightIcon, XMarkIcon } from '@navikt/aksel-icons';
+import { BodyShort, Button, Heading, HStack, Label, VStack } from '@navikt/ds-react';
+import { Form,RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
+import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
+import { FaktaGruppe,VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { DDMMYYYY_DATE_FORMAT,findDifferenceInMonthsAndDays } from '@navikt/ft-utils';
+import dayjs from 'dayjs';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
-import { findDifferenceInMonthsAndDays, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
-import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
-import { RadioGroupPanel, TextAreaField, Form } from '@navikt/ft-form-hooks';
 import {
-  ArbeidsgiverOpplysningerPerId,
-  KodeverkMedNavn,
   AlleKodeverk,
-  OpptjeningAktivitet,
+  ArbeidsgiverOpplysningerPerId,
   FerdiglignetNæring,
+  KodeverkMedNavn,
   Opptjening,
+  OpptjeningAktivitet,
 } from '@navikt/fp-types';
 
-import ValgtAktivitetSubForm from './ValgtAktivitetSubForm';
 import { finnOpptjeningFom, finnOpptjeningTom } from '../../utils/opptjeningDatoUtil';
+import ValgtAktivitetSubForm from './ValgtAktivitetSubForm';
 
 import styles from './valgtAktivitetForm.module.css';
 

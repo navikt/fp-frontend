@@ -1,13 +1,16 @@
-import React, { FunctionComponent, useState, useCallback } from 'react';
-import { Heading, Button, CheckboxGroup, Checkbox, HStack } from '@navikt/ds-react';
+import React, { FunctionComponent, useCallback,useState } from 'react';
 import { FormattedMessage } from 'react-intl';
+
 import { PencilIcon } from '@navikt/aksel-icons';
-import { SelectField, InputField } from '@navikt/ft-form-hooks';
+import { Button, Checkbox, CheckboxGroup, Heading, HStack } from '@navikt/ds-react';
+import { InputField,SelectField } from '@navikt/ft-form-hooks';
 import { hasValidText, required } from '@navikt/ft-form-validators';
-import Journalpost from '../../../typer/journalpostTsType';
-import styles from './journalpostTittelForm.module.css';
+
 import { listeMedTittler } from '../../../kodeverk/dokumentTittel';
 import { erKanalSomErÅpenForEndring } from '../../../kodeverk/journalKanal';
+import Journalpost from '../../../typer/journalpostTsType';
+
+import styles from './journalpostTittelForm.module.css';
 
 type OwnProps = Readonly<{
   journalpost: Journalpost;

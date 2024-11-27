@@ -1,11 +1,13 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Label } from '@navikt/ds-react';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { CheckboxField } from '@navikt/ft-form-hooks';
-import { KodeverkType } from '@navikt/fp-kodeverk';
 
+import { Label } from '@navikt/ds-react';
+import { CheckboxField } from '@navikt/ft-form-hooks';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
+import { KodeverkType } from '@navikt/fp-kodeverk';
 import { KodeverkMedNavn } from '@navikt/fp-types';
+
 import { restApiHooks, RestApiPathsKeys } from '../../../../data/fplosRestApi';
 import useLosKodeverk from '../../../../data/useLosKodeverk';
 

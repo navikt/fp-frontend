@@ -1,12 +1,13 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { VStack } from '@navikt/ds-react';
-import { ArrowBox } from '@navikt/ft-ui-komponenter';
-import { InputField } from '@navikt/ft-form-hooks';
-import { required, hasValidInteger, hasValidText } from '@navikt/ft-form-validators';
 
-import { VIRKSOMHET_FORM_NAME_PREFIX } from '../constants';
+import { VStack } from '@navikt/ds-react';
+import { InputField } from '@navikt/ft-form-hooks';
+import { hasValidInteger, hasValidText,required } from '@navikt/ft-form-validators';
+import { ArrowBox } from '@navikt/ft-ui-komponenter';
+
 import { TrueFalseInput } from '../../felles/TrueFalseInput';
+import { VIRKSOMHET_FORM_NAME_PREFIX } from '../constants';
 import { RegistrerVirksomhetFormValues } from '../types';
 
 interface Props {

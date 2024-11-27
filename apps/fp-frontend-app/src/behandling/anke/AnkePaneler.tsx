@@ -2,10 +2,10 @@ import React, { useCallback, useMemo } from 'react';
 
 import { Behandling, BehandlingAppKontekst } from '@navikt/fp-types';
 
-import { VergeFaktaInitPanel } from '../fellesPaneler/fakta/VergeFaktaInitPanel';
+import { BehandlingContainer } from '../felles/BehandlingContainer';
 import { FaktaPanelInitProps } from '../felles/typer/faktaPanelInitProps';
 import { ProsessPanelInitProps } from '../felles/typer/prosessPanelInitProps';
-import { BehandlingContainer } from '../felles/BehandlingContainer';
+import { VergeFaktaInitPanel } from '../fellesPaneler/fakta/VergeFaktaInitPanel';
 import { AnkeBehandlingProsessStegInitPanel } from './prosessPaneler/AnkeBehandlingProsessStegInitPanel';
 import { AnkeResultatProsessStegInitPanel } from './prosessPaneler/AnkeResultatProsessStegInitPanel';
 import { AnkeTrygderettsbehandlingProsessStegInitPanel } from './prosessPaneler/AnkeTrygderettsbehandlingProsessStegInitPanel';

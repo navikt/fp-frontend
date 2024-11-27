@@ -1,17 +1,18 @@
 import React, { Fragment } from 'react';
-import dayjs from 'dayjs';
-import { ChevronRightIcon } from '@navikt/aksel-icons';
-import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import { DateLabel } from '@navikt/ft-ui-komponenter';
-import { FagsakEnkel } from '@navikt/fp-types';
-import { FagsakStatus, KodeverkType, getKodeverknavnFraKode } from '@navikt/fp-kodeverk';
-import { Oppgave } from '@navikt/fp-los-felles';
-
-import useLosKodeverk from '../../data/useLosKodeverk';
-import { restApiHooks, RestApiGlobalStatePathsKeys } from '../../data/fplosSaksbehandlerRestApi';
-
-import { Table } from '@navikt/ds-react';
 import { FormattedMessage } from 'react-intl';
+
+import { ChevronRightIcon } from '@navikt/aksel-icons';
+import { Table } from '@navikt/ds-react';
+import { DateLabel } from '@navikt/ft-ui-komponenter';
+import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import dayjs from 'dayjs';
+
+import { FagsakStatus, getKodeverknavnFraKode,KodeverkType } from '@navikt/fp-kodeverk';
+import { Oppgave } from '@navikt/fp-los-felles';
+import { FagsakEnkel } from '@navikt/fp-types';
+
+import { RestApiGlobalStatePathsKeys,restApiHooks } from '../../data/fplosSaksbehandlerRestApi';
+import useLosKodeverk from '../../data/useLosKodeverk';
 
 const sorterFagsaker = (fagsak1: FagsakEnkel, fagsak2: FagsakEnkel) => {
   if (fagsak1.status === FagsakStatus.AVSLUTTET && fagsak2.status !== FagsakStatus.AVSLUTTET) {

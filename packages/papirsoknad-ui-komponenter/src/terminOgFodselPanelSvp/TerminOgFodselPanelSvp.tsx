@@ -1,8 +1,7 @@
 import React from 'react';
 import { useFormContext, UseFormGetValues } from 'react-hook-form';
-import { createIntl } from '@navikt/ft-utils';
+
 import { Heading, VStack } from '@navikt/ds-react';
-import { BorderBox } from '@navikt/ft-ui-komponenter';
 import { Datepicker } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
@@ -11,7 +10,10 @@ import {
   hasValidDate,
   required,
 } from '@navikt/ft-form-validators';
+import { BorderBox } from '@navikt/ft-ui-komponenter';
+import { createIntl } from '@navikt/ft-utils';
 
+import { ErBarnetFodt } from '../terminOgFodselPanel/components/ErBarnetFodt';
 import {
   maxFodselsdato,
   maxTermindato,
@@ -19,7 +21,6 @@ import {
   minTermindato,
   terminErRundtFodselsdato,
 } from '../terminOgFodselPanel/validator';
-import { ErBarnetFodt } from '../terminOgFodselPanel/components/ErBarnetFodt';
 
 import messages from '../../i18n/nb_NO.json';
 

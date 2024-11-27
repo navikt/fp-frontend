@@ -1,10 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { FamilieHendelseSamling, Soknad, StandardFaktaPanelProps } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
+import { FamilieHendelseSamling, Soknad, StandardFaktaPanelProps } from '@navikt/fp-types';
+
 import AdopsjonInfoPanel from './components/AdopsjonInfoPanel';
+
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);

@@ -1,17 +1,18 @@
 import React from 'react';
-import { StoryFn } from '@storybook/react';
+
 import { action } from '@storybook/addon-actions';
+import { StoryFn } from '@storybook/react';
 
 import {
-  VilkarType,
+  AksjonspunktKode,
   AksjonspunktStatus,
-  VilkarUtfallType,
   Avslagsarsak,
   SoknadType,
-  AksjonspunktKode,
+  VilkarType,
+  VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt, Behandling, Fagsak, FamilieHendelseSamling, Soknad, Vilkar } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { Aksjonspunkt, Behandling, Fagsak, FamilieHendelseSamling, Soknad, Vilkar } from '@navikt/fp-types';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import SoknadsfristVilkarProsessIndex from './SoknadsfristVilkarProsessIndex';

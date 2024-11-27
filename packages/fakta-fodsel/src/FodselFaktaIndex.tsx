@@ -1,10 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { StandardFaktaPanelProps, FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
+import { FamilieHendelse, FamilieHendelseSamling, Soknad,StandardFaktaPanelProps } from '@navikt/fp-types';
+
 import FodselInfoPanel from './components/FodselInfoPanel';
+
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);

@@ -1,15 +1,15 @@
 import React, { FunctionComponent, ReactElement } from 'react';
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
-import { Label, BodyShort, Detail } from '@navikt/ds-react';
 
-import { AlleKodeverk, Vilkar, Behandlingsresultat } from '@navikt/fp-types';
-import { VilkarUtfallType, getKodeverknavnFn, KodeverkType } from '@navikt/fp-kodeverk';
+import { BodyShort, Detail,Label } from '@navikt/ds-react';
 import { TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
-import { decodeHtmlEntity, formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { decodeHtmlEntity, formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
-import { useFormContext } from 'react-hook-form';
+import { getKodeverknavnFn, KodeverkType,VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AlleKodeverk, Behandlingsresultat,Vilkar } from '@navikt/fp-types';
 
 import styles from './vedtakAvslagArsakOgBegrunnelsePanel.module.css';
 

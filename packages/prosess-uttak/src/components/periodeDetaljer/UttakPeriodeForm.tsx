@@ -1,13 +1,14 @@
-import React, { useCallback, ReactElement, FunctionComponent, useMemo, useEffect } from 'react';
-import { Alert, Button, HStack } from '@navikt/ds-react';
-import dayjs from 'dayjs';
+import React, { FunctionComponent, ReactElement, useCallback, useEffect,useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
-import { Form, TextAreaField, RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
+
+import { Alert, Button, HStack } from '@navikt/ds-react';
+import { Form, RadioGroupPanel, SelectField,TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, notDash, required } from '@navikt/ft-form-validators';
 import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import dayjs from 'dayjs';
 
-import { KodeverkType, OppholdArsakType, UtsettelseArsakCode, PeriodeResultatType } from '@navikt/fp-kodeverk';
+import { KodeverkType, OppholdArsakType, PeriodeResultatType,UtsettelseArsakCode } from '@navikt/fp-kodeverk';
 import {
   AarsakFilter,
   AlleKodeverk,
@@ -18,8 +19,8 @@ import {
 } from '@navikt/fp-types';
 
 import UttakAktiviteterTabell, { finnArbeidsforholdNavnOgProsentArbeid } from './UttakAktiviteterTabell';
-import UttakPeriodeInfo from './UttakPeriodeInfo';
 import { UttakAktivitet, UttakAktivitetType } from './UttakAktivitetType';
+import UttakPeriodeInfo from './UttakPeriodeInfo';
 
 import styles from './uttakPeriodeForm.module.css';
 

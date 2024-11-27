@@ -1,10 +1,12 @@
 import React from 'react';
-import dayjs from 'dayjs';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Tag, BodyShort } from '@navikt/ds-react';
-import { FagsakHendelse } from '@navikt/fp-types';
-import { FamilieHendelseType } from '@navikt/fp-kodeverk';
+
+import { BodyShort,Tag } from '@navikt/ds-react';
 import { dateFormat } from '@navikt/ft-utils';
+import dayjs from 'dayjs';
+
+import { FamilieHendelseType } from '@navikt/fp-kodeverk';
+import { FagsakHendelse } from '@navikt/fp-types';
 
 const finnFodselsdatoTekstkode = (antallBarn: number): string => {
   if (antallBarn === 1) {

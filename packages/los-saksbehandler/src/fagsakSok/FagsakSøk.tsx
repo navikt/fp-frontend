@@ -1,11 +1,13 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { BodyShort, VStack } from '@navikt/ds-react';
-import { FagsakEnkel } from '@navikt/fp-types';
-import { Oppgave } from '@navikt/fp-los-felles';
 
-import { PersonInfo } from './person/PersonInfo';
+import { BodyShort, VStack } from '@navikt/ds-react';
+
+import { Oppgave } from '@navikt/fp-los-felles';
+import { FagsakEnkel } from '@navikt/fp-types';
+
 import { SøkForm } from './form/SøkForm';
+import { PersonInfo } from './person/PersonInfo';
 import { SøkResultat } from './resultat/SøkResultat';
 
 const skalViseListe = (fagsaker: FagsakEnkel[], fagsakOppgaver: Oppgave[]): boolean => {

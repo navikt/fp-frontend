@@ -1,9 +1,11 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+
 import { composeStories } from '@storybook/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import * as stories from './OmsorgOgRettFaktaIndex.stories';
 import { expect } from 'vitest';
+
+import * as stories from './OmsorgOgRettFaktaIndex.stories';
 
 const {
   HarAksjonspunktForAvklarAleneomsorg,

@@ -1,14 +1,15 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
+
 import { BodyShort, Heading, Label } from '@navikt/ds-react';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import {
-  KodeverkType,
   KlageVurdering as klageVurderingType,
   KlageVurderingOmgjoer as klageVurderingOmgjoerType,
+  KodeverkType,
 } from '@navikt/fp-kodeverk';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { KlageVurdering, AlleKodeverk } from '@navikt/fp-types';
+import { AlleKodeverk,KlageVurdering } from '@navikt/fp-types';
 
 interface OwnProps {
   alleKodeverk: AlleKodeverk;

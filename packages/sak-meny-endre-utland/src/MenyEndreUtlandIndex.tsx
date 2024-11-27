@@ -3,10 +3,11 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
+import { KodeverkMedNavn, Saksmarkering } from '@navikt/fp-types';
+
 import { EndreUtlandModal, FormValues } from './components/EndreUtlandModal';
 
 import messages from '../i18n/nb_NO.json';
-import { KodeverkMedNavn, Saksmarkering } from '@navikt/fp-types';
 
 const intl = createIntl(messages);
 

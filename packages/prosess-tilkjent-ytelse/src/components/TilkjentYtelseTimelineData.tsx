@@ -1,27 +1,28 @@
 import React, { FunctionComponent, ReactElement, useCallback } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import dayjs from 'dayjs';
-import { Label, BodyShort, Button, Panel } from '@navikt/ds-react';
 
-import { KodeverkType, AktivitetStatus, getKodeverknavnFn } from '@navikt/fp-kodeverk';
+import { ArrowLeftIcon, ArrowRightIcon, XMarkIcon } from '@navikt/aksel-icons';
+import { BodyShort, Button, Label, Panel } from '@navikt/ds-react';
 import {
+  FlexColumn,
+  FlexContainer,
+  FlexRow,
   Table,
   TableColumn,
   TableRow,
   VerticalSpacer,
-  FlexContainer,
-  FlexRow,
-  FlexColumn,
 } from '@navikt/ft-ui-komponenter';
 import { calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
+import dayjs from 'dayjs';
+
+import { AktivitetStatus, getKodeverknavnFn,KodeverkType } from '@navikt/fp-kodeverk';
 import {
-  ArbeidsgiverOpplysningerPerId,
-  BeregningsresultatPeriodeAndel,
   AlleKodeverk,
+  ArbeidsgiverOpplysningerPerId,
   BeregningsresultatPeriode,
+  BeregningsresultatPeriodeAndel,
 } from '@navikt/fp-types';
 
-import { ArrowLeftIcon, ArrowRightIcon, XMarkIcon } from '@navikt/aksel-icons';
 import styles from './tilkjentYtelseTimelineData.module.css';
 
 // TODO Kva er dette? Kodeverk-navn skal hentast fra databasen!

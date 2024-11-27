@@ -1,10 +1,12 @@
 import React from 'react';
-import dayjs from 'dayjs';
 import { FormattedMessage } from 'react-intl';
+
 import { BodyShort } from '@navikt/ds-react';
-import { FagsakHendelse } from '@navikt/fp-types';
-import { FamilieHendelseType } from '@navikt/fp-kodeverk';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
+import dayjs from 'dayjs';
+
+import { FamilieHendelseType } from '@navikt/fp-kodeverk';
+import { FagsakHendelse } from '@navikt/fp-types';
 
 interface Props {
   familiehendelse: FagsakHendelse;

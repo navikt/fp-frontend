@@ -1,32 +1,33 @@
-import React, { FunctionComponent, useCallback, useState, useRef } from 'react';
-import { useIntl, FormattedMessage } from 'react-intl';
-import { Label, BodyShort, Detail, Popover, Button } from '@navikt/ds-react';
+import React, { FunctionComponent, useCallback, useRef,useState } from 'react';
+import { FormattedMessage,useIntl } from 'react-intl';
+
+import { CheckmarkIcon, ExclamationmarkTriangleFillIcon, QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
+import { BodyShort, Button,Detail, Label, Popover } from '@navikt/ds-react';
+import { RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { required } from '@navikt/ft-form-validators';
 import {
+  DateLabel,
   FlexColumn,
   FlexContainer,
   FlexRow,
+  PeriodLabel,
   Tooltip,
   VerticalSpacer,
-  PeriodLabel,
-  DateLabel,
 } from '@navikt/ft-ui-komponenter';
-import { CheckmarkIcon, ExclamationmarkTriangleFillIcon, QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
-
-import { required } from '@navikt/ft-form-validators';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
-import { RadioGroupPanel } from '@navikt/ft-form-hooks';
+
+import { getKodeverknavnFraKode,KodeverkType } from '@navikt/fp-kodeverk';
 import {
-  ArbeidOgInntektsmelding,
+  AlleKodeverk,
   AoIArbeidsforhold,
+  ArbeidOgInntektsmelding,
   ArbeidsgiverOpplysningerPerId,
   Inntektsmelding,
-  AlleKodeverk,
 } from '@navikt/fp-types';
-import { KodeverkType, getKodeverknavnFraKode } from '@navikt/fp-kodeverk';
 
 import BekreftetPermisjonStatus from '../kodeverk/BekreftetPermisjonStatus';
-import InntektsmeldingOpplysningerPanel from './InntektsmeldingOpplysningerPanel';
 import ArbeidsforholdBoks from './ArbeidsforholdBoks';
+import InntektsmeldingOpplysningerPanel from './InntektsmeldingOpplysningerPanel';
 import InntektsposterPanel from './InntektsposterPanel';
 
 import styles from './arbeidsforholdField.module.css';

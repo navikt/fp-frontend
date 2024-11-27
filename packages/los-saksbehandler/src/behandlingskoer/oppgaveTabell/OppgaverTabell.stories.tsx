@@ -1,15 +1,15 @@
 import React, { ComponentProps } from 'react';
-import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
+
 import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
+import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { Oppgave } from '@navikt/fp-los-felles';
 import { alleKodeverkLos, getIntlDecorator } from '@navikt/fp-storybook-utils';
 import { RestApiMock } from '@navikt/fp-utils-test';
 
+import { requestApi,RestApiGlobalStatePathsKeys, RestApiPathsKeys } from '../../data/fplosSaksbehandlerRestApi';
 import { OppgaverTabell } from './OppgaverTabell';
-
-import { RestApiGlobalStatePathsKeys, RestApiPathsKeys, requestApi } from '../../data/fplosSaksbehandlerRestApi';
 
 import messages from '../../../i18n/nb_NO.json';
 

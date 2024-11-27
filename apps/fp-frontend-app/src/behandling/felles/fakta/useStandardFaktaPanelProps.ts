@@ -1,11 +1,11 @@
 import { useContext, useEffect, useMemo, useState } from 'react';
-import { isAksjonspunktOpen } from '@navikt/fp-kodeverk';
 
-import { StandardFaktaPanelProps, Behandling, Fagsak } from '@navikt/fp-types';
+import { isAksjonspunktOpen } from '@navikt/fp-kodeverk';
+import { Behandling, Fagsak,StandardFaktaPanelProps } from '@navikt/fp-types';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import { erReadOnly } from '../utils/readOnlyPanelUtils';
 import { getAlleMerknaderFraBeslutter } from '../utils/getAlleMerknaderFraBeslutter';
+import { erReadOnly } from '../utils/readOnlyPanelUtils';
 import { StandardPropsStateContext } from '../utils/standardPropsStateContext';
 
 export const DEFAULT_FAKTA_KODE = 'default';

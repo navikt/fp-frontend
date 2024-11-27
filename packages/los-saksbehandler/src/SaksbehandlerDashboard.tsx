@@ -9,10 +9,10 @@ import {
   restApiHooks,
   RestApiPathsKeys,
 } from './data/fplosSaksbehandlerRestApi';
+import { DriftsmeldingPanel } from './driftsmelding/DriftsmeldingPanel';
 import { FagsakSøkIndex } from './fagsakSok/FagsakSøkIndex';
 import { SaksstøttePaneler } from './saksstotte/SaksstøttePaneler';
 
-import { DriftsmeldingPanel } from './driftsmelding/DriftsmeldingPanel';
 import styles from './saksbehandlerDashboard.module.css';
 
 interface Props {

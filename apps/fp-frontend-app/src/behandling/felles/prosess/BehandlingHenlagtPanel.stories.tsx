@@ -1,5 +1,7 @@
-import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 import { Meta, StoryObj } from '@storybook/react/*';
+
+import { getIntlDecorator } from '@navikt/fp-storybook-utils';
+
 import { BehandlingHenlagtPanel } from './BehandlingHenlagtPanel';
 
 const messages = {

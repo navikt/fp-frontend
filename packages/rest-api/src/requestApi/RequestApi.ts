@@ -1,10 +1,11 @@
 import { AxiosInstance } from 'axios';
+
 import HttpClientApi from '../HttpClientApiTsType';
-import NotificationMapper from './NotificationMapper';
+import RequestConfig, { RequestType } from '../RequestConfig';
 import Link from './LinkTsType';
+import NotificationMapper from './NotificationMapper';
 import RequestRunner from './RequestRunner';
 import ResponseCache from './ResponseCache';
-import RequestConfig, { RequestType } from '../RequestConfig';
 
 const DEFAULT_CATEGORY = 'DEFAULT_CATEGORY';
 

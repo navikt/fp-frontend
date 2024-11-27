@@ -1,14 +1,14 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 
-import { VilkarUtfallType, VilkarType, AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { OpptjeningFaktaIndex } from '@navikt/fp-fakta-opptjening';
+import { AksjonspunktKode,VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { ArbeidsgiverOpplysningerPerId, Opptjening } from '@navikt/fp-types';
 
-import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
-import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
+import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
+import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING];
 

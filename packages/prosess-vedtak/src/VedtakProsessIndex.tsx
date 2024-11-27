@@ -1,21 +1,23 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { AksjonspunktKode, BehandlingType, AksjonspunktStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { createIntl } from '@navikt/ft-utils';
+
+import { AksjonspunktKode, AksjonspunktStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import {
+  Aksjonspunkt,
+  Beregningsgrunnlag,
   BeregningsresultatDagytelse,
   BeregningsresultatEs,
-  Vilkar,
-  TilbakekrevingValg,
   SimuleringResultat,
-  Beregningsgrunnlag,
-  Aksjonspunkt,
   StandardProsessPanelProps,
+  TilbakekrevingValg,
+  Vilkar,
 } from '@navikt/fp-types';
-import { createIntl } from '@navikt/ft-utils';
 
 import VedtakForm, { ForhandsvisData } from './components/forstegang/VedtakForm';
 import VedtakRevurderingForm from './components/revurdering/VedtakRevurderingForm';
+
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);

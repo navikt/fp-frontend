@@ -1,4 +1,5 @@
-import { DokumentasjonVurderingBehov, UttakType, UttakVurdering, UttakÅrsak } from '@navikt/fp-types';
+import { DokumentasjonVurderingBehov, UttakÅrsak,UttakType, UttakVurdering } from '@navikt/fp-types';
+
 import FormValues, { VurderingsAlternativ } from '../../../types/FormValues';
 import assertUnreachable from '../../utils/switchCaseUtils';
 

@@ -1,10 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Modal, Button, BodyShort, Link, HStack, VStack } from '@navikt/ds-react';
-import { CheckmarkCircleIcon } from '@navikt/aksel-icons';
 
+import { CheckmarkCircleIcon } from '@navikt/aksel-icons';
+import { BodyShort, Button, HStack, Link, Modal, VStack } from '@navikt/ds-react';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
+
 import SaksnummerType from '../../../typer/saksnummerTsType';
+
 import styles from './journalførtSubmitModal.module.css';
 
 const velgSakLenke = (saksnummer: string): string => `/fagsak/${saksnummer}/`;

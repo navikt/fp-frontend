@@ -1,12 +1,14 @@
 import React, { FunctionComponent, useCallback, useMemo } from 'react';
-import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
+import { FormattedMessage } from 'react-intl';
+
 import { CheckmarkCircleFillIcon, XMarkOctagonFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Detail, Heading, HStack, Label, VStack } from '@navikt/ds-react';
-import { OverstyringKnapp } from '@navikt/ft-ui-komponenter';
-
 import { Form } from '@navikt/ft-form-hooks';
-import { Aksjonspunkt, Behandling, KodeverkMedNavn, ManuellBehandlingResultat } from '@navikt/fp-types';
+import { OverstyringKnapp } from '@navikt/ft-ui-komponenter';
+import { decodeHtmlEntity } from '@navikt/ft-utils';
+
+import { createMedlemskapInitialValues,MedlemskapVurdering, MedlemskapVurderinger } from '@navikt/fp-fakta-medlemskap';
 import {
   AksjonspunktKode,
   AksjonspunktStatus,
@@ -15,7 +17,7 @@ import {
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
 import { OverstyringPanel, VilkarResultPicker } from '@navikt/fp-prosess-felles';
-import { decodeHtmlEntity } from '@navikt/ft-utils';
+import { Aksjonspunkt, Behandling, KodeverkMedNavn, ManuellBehandlingResultat } from '@navikt/fp-types';
 import {
   OverstyringAp,
   OverstyringMedlemskapsvilkaretAp,
@@ -24,7 +26,6 @@ import {
 } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import styles from './vilkarresultatMedOverstyringForm.module.css';
-import { MedlemskapVurderinger, MedlemskapVurdering, createMedlemskapInitialValues } from '@navikt/fp-fakta-medlemskap';
 
 const isOverridden = (aksjonspunkter: Aksjonspunkt[], aksjonspunktCode: string): boolean =>
   aksjonspunkter.some(ap => ap.definisjon === aksjonspunktCode);

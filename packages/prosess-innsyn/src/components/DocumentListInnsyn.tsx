@@ -1,13 +1,14 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
-import { BodyShort, Heading } from '@navikt/ds-react';
 
+import { ChevronDownDoubleIcon, ChevronLeftDoubleIcon, ChevronRightDoubleIcon } from '@navikt/aksel-icons';
+import { BodyShort, Heading } from '@navikt/ds-react';
 import { CheckboxField } from '@navikt/ft-form-hooks';
 import { DateTimeLabel, Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
+
 import { Kommunikasjonsretning } from '@navikt/fp-kodeverk';
-import { Dokument } from '@navikt/fp-types';
 import { hentDokumentLenke } from '@navikt/fp-konstanter';
-import { ChevronDownDoubleIcon, ChevronLeftDoubleIcon, ChevronRightDoubleIcon } from '@navikt/aksel-icons';
+import { Dokument } from '@navikt/fp-types';
 
 import styles from './documentListInnsyn.module.css';
 

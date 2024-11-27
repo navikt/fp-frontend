@@ -1,13 +1,16 @@
 import React, { FunctionComponent } from 'react';
-import { BodyShort, Table } from '@navikt/ds-react';
-
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { FormattedMessage } from 'react-intl';
+
+import { BodyShort, Table } from '@navikt/ds-react';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
 import { NavAnsatt } from '@navikt/fp-types';
+
 import Oppgave from '../../typer/oppgaveTsType';
-import OppgaveTabellRad from './OppgaveTabellRad';
-import styles from './oppgaveTabell.module.css';
 import ReserverOppgaveType from '../../typer/reserverOppgaveType';
+import OppgaveTabellRad from './OppgaveTabellRad';
+
+import styles from './oppgaveTabell.module.css';
 
 type OwnProps = Readonly<{
   oppgaver: Oppgave[];

@@ -1,12 +1,14 @@
 import React, { FunctionComponent, ReactElement } from 'react';
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Label, BodyShort, VStack, HGrid } from '@navikt/ds-react';
 
-import { VerticalSpacer, FaktaGruppe, EditedIcon } from '@navikt/ft-ui-komponenter';
-import { AksjonspunktKode, VilkarType, KodeverkType } from '@navikt/fp-kodeverk';
+import { BodyShort, HGrid,Label, VStack } from '@navikt/ds-react';
 import { SelectField } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import { isFieldEdited, FieldEditedInfo } from '@navikt/fp-fakta-felles';
+import { EditedIcon,FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
+import { FieldEditedInfo,isFieldEdited } from '@navikt/fp-fakta-felles';
+import { AksjonspunktKode, KodeverkType,VilkarType } from '@navikt/fp-kodeverk';
 import {
   Aksjonspunkt,
   FamilieHendelse,
@@ -21,11 +23,10 @@ import {
   AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import { useFormContext } from 'react-hook-form';
-import OmsorgsovertakelseFaktaPanel, { FormValues as OmsorgFormValues } from './OmsorgsovertakelseFaktaPanel';
-import RettighetFaktaPanel, { FormValues as RettighetFormValues } from './RettighetFaktaPanel';
 import BarnPanel from './BarnPanel';
 import ForeldrePanel from './ForeldrePanel';
+import OmsorgsovertakelseFaktaPanel, { FormValues as OmsorgFormValues } from './OmsorgsovertakelseFaktaPanel';
+import RettighetFaktaPanel, { FormValues as RettighetFormValues } from './RettighetFaktaPanel';
 
 import styles from './omsorgOgForeldreansvarFaktaForm.module.css';
 

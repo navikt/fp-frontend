@@ -1,8 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { BodyShort, Label } from '@navikt/ds-react';
 
+import { BodyShort, Label } from '@navikt/ds-react';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
+
 import { Risikoklassifisering } from '@navikt/fp-types';
 
 export const FarePanel: FunctionComponent<{

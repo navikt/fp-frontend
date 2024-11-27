@@ -1,14 +1,16 @@
-import React, { FunctionComponent, useState, useMemo } from 'react';
-import { useIntl, FormattedMessage } from 'react-intl';
+import React, { FunctionComponent, useMemo,useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { FormattedMessage,useIntl } from 'react-intl';
+
 import { BodyShort, Button, HStack, Label } from '@navikt/ds-react';
 import { Form, InputField } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { RestApiState } from '@navikt/fp-rest-api-hooks';
-import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
 
-import { RestApiPathsKeys, restApiHooks } from '../../data/fplosRestApi';
+import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
+import { RestApiState } from '@navikt/fp-rest-api-hooks';
+
+import { restApiHooks,RestApiPathsKeys } from '../../data/fplosRestApi';
 
 import styles from './leggTilSaksbehandlerForm.module.css';
 

@@ -1,27 +1,29 @@
-import React, { useEffect, ReactNode, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+
 import {
-  SackKronerIcon,
-  FunnelIcon,
-  PlusIcon,
-  PersonHeadsetIcon,
   ArrowsUpDownIcon,
-  DocPencilIcon,
   ChevronDownIcon,
   ChevronUpIcon,
+  DocPencilIcon,
+  FunnelIcon,
+  PersonHeadsetIcon,
+  PlusIcon,
+  SackKronerIcon,
 } from '@navikt/aksel-icons';
-import { BodyShort, HStack, Label, VStack, Box, Heading, Button } from '@navikt/ds-react';
+import { BodyShort, Box, Button,Heading, HStack, Label, VStack } from '@navikt/ds-react';
 import { Form, SelectField } from '@navikt/ft-form-hooks';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
-import { useForm } from 'react-hook-form';
-import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
-import { KodeverkType, getKodeverknavnFraKode } from '@navikt/fp-kodeverk';
+
+import { getKodeverknavnFraKode,KodeverkType } from '@navikt/fp-kodeverk';
 import { AlleKodeverk } from '@navikt/fp-types';
 
-import styles from './sakslisteVelgerForm.module.css';
-
-import { RestApiGlobalStatePathsKeys, RestApiPathsKeys, restApiHooks } from '../../data/fplosSaksbehandlerRestApi';
+import { RestApiGlobalStatePathsKeys, restApiHooks,RestApiPathsKeys } from '../../data/fplosSaksbehandlerRestApi';
 import { Saksliste } from '../../typer/sakslisteTsType';
+
+import styles from './sakslisteVelgerForm.module.css';
 
 const getDefaultSaksliste = (
   sorterteSakslister: Saksliste[],

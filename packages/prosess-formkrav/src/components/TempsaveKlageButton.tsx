@@ -1,11 +1,13 @@
 import React, { FunctionComponent } from 'react';
 import { UseFormHandleSubmit } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
+
 import { Button } from '@navikt/ds-react';
 
 import { BehandlingType } from '@navikt/fp-kodeverk';
-import FormkravMellomlagretDataType from '../types/FormkravMellomlagretDataType';
+
 import AvsluttetBehandling from '../types/avsluttetBehandlingTsType';
+import FormkravMellomlagretDataType from '../types/FormkravMellomlagretDataType';
 
 export const IKKE_PA_KLAGD_VEDTAK = 'ikkePaklagdVedtak';
 

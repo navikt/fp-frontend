@@ -1,8 +1,9 @@
 import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 import { MemoryRouter } from 'react-router-dom';
-import { render, screen } from '@testing-library/react';
+
 import { createIntl } from '@navikt/ft-utils';
+import { render, screen } from '@testing-library/react';
 
 import { Home } from './Home';
 

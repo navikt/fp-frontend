@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import { Meta, StoryObj } from '@storybook/react';
-import { InfotrygdVedtak } from '@navikt/fp-types';
-import { RestApiState } from '@navikt/fp-rest-api-hooks';
-import { action } from '@storybook/addon-actions';
+
 import { VStack } from '@navikt/ds-react';
+import { action } from '@storybook/addon-actions';
+import { Meta, StoryObj } from '@storybook/react';
+
+import { RestApiState } from '@navikt/fp-rest-api-hooks';
+import { InfotrygdVedtak } from '@navikt/fp-types';
+
 import { UtbetalingsdataIs15Index } from './UtbetalingsdataIs15Index';
 
 const meta = {

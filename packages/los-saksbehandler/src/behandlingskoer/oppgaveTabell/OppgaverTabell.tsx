@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { FormattedMessage } from 'react-intl';
+
 import { BodyShort, HStack, Label, Pagination, SortState, Table, VStack } from '@navikt/ds-react';
+
 import { Oppgave } from '@navikt/fp-los-felles';
 import { TimeoutError } from '@navikt/fp-rest-api';
-import { FormattedMessage } from 'react-intl';
 
 import { requestApi, restApiHooks, RestApiPathsKeys } from '../../data/fplosSaksbehandlerRestApi';
 import { BehandlingPollingTimoutModal } from '../timeoutModal/BehandlingPollingTimoutModal';
-
 import { OppgaveMedReservertIndikator, OppgaveRad } from './OppgaveRad';
+
 import styles from './oppgaverTabell.module.css';
 
 const isDevelopmentOrTest = import.meta.env.MODE === 'development' || import.meta.env.MODE === 'test';

@@ -1,23 +1,24 @@
-import React, { ReactElement, FunctionComponent, useCallback, useState } from 'react';
-import dayjs from 'dayjs';
+import React, { FunctionComponent, ReactElement, useCallback, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { AksjonspunktHelpTextHTML, EditedIcon, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { Button, HStack, Label, Panel } from '@navikt/ds-react';
-import { BehandlingType, KodeverkType, StonadskontoType } from '@navikt/fp-kodeverk';
-import { calcDays } from '@navikt/ft-utils';
 
+import { ArrowLeftIcon, ArrowRightIcon, ScissorsIcon, XMarkIcon } from '@navikt/aksel-icons';
+import { Button, HStack, Label, Panel } from '@navikt/ds-react';
+import { AksjonspunktHelpTextHTML, EditedIcon, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { calcDays } from '@navikt/ft-utils';
+import dayjs from 'dayjs';
+
+import { BehandlingType, KodeverkType, StonadskontoType } from '@navikt/fp-kodeverk';
 import {
   AlleKodeverk,
   ArbeidsgiverOpplysningerPerId,
+  Behandling,
   PeriodeSoker,
+  PeriodeSokerAktivitet,
   UttaksresultatPeriode,
   UttakStonadskontoer,
-  PeriodeSokerAktivitet,
-  Behandling,
   Ytelsefordeling,
 } from '@navikt/fp-types';
 
-import { ArrowLeftIcon, ArrowRightIcon, ScissorsIcon, XMarkIcon } from '@navikt/aksel-icons';
 import SplittPeriodeModal from './splitt/SplittPeriodeModal';
 import UttakPeriodeForm from './UttakPeriodeForm';
 

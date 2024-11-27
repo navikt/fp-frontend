@@ -1,12 +1,14 @@
 import React, { FunctionComponent, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Link, Label, BodyShort, HStack, VStack, Spacer, Tooltip, Detail } from '@navikt/ds-react';
-import { VerticalSpacer, PeriodLabel, AvsnittSkiller, DateLabel } from '@navikt/ft-ui-komponenter';
-import { ChevronDownIcon, ChevronUpIcon, ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 
-import { KodeverkType, getKodeverknavnFraKode } from '@navikt/fp-kodeverk';
+import { ChevronDownIcon, ChevronUpIcon, ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
+import { BodyShort, Detail,HStack, Label, Link, Spacer, Tooltip, VStack } from '@navikt/ds-react';
+import { AvsnittSkiller, DateLabel,PeriodLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
+
+import { getKodeverknavnFraKode,KodeverkType } from '@navikt/fp-kodeverk';
 import { AlleKodeverk, AoIArbeidsforhold, Inntektsmelding } from '@navikt/fp-types';
+
 import InntektsmeldingOpplysningerPanel from './InntektsmeldingOpplysningerPanel';
 
 import styles from './inntektsmeldingerPanel.module.css';

@@ -1,20 +1,21 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback,useState } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 
-import { KodeverkMedNavn } from '@navikt/fp-types';
-import { BehandlingType, KodeverkType, VenteArsakType, DokumentMalType } from '@navikt/fp-kodeverk';
-import { MeldingerSakIndex, MessagesModalSakIndex, FormValues } from '@navikt/fp-sak-meldinger';
-import { RestApiState } from '@navikt/fp-rest-api-hooks';
-
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { FormattedMessage, useIntl } from 'react-intl';
 import { Alert } from '@navikt/ds-react';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
+import { BehandlingType, DokumentMalType,KodeverkType, VenteArsakType } from '@navikt/fp-kodeverk';
+import { RestApiState } from '@navikt/fp-rest-api-hooks';
+import { FormValues,MeldingerSakIndex, MessagesModalSakIndex } from '@navikt/fp-sak-meldinger';
+import { KodeverkMedNavn } from '@navikt/fp-types';
+
+import { FagsakApiKeys, restFagsakApiHooks,SubmitMessageParams } from '../../data/fagsakContextApi';
 import { useFpSakKodeverk } from '../../data/useKodeverk';
-import { useVisForhandsvisningAvMelding, ForhandsvisFunksjon } from '../../data/useVisForhandsvisningAvMelding';
-import { FagsakApiKeys, SubmitMessageParams, restFagsakApiHooks } from '../../data/fagsakContextApi';
+import { ForhandsvisFunksjon,useVisForhandsvisningAvMelding } from '../../data/useVisForhandsvisningAvMelding';
 import { FagsakData } from '../../fagsak/FagsakData';
-import { SettPaVentReadOnlyModal } from './SettPaVentReadOnlyModal';
 import { SupportHeaderAndContent } from '../SupportHeader';
+import { SettPaVentReadOnlyModal } from './SettPaVentReadOnlyModal';
 
 import styles from './MeldingIndex.module.css';
 

@@ -1,13 +1,14 @@
-import React, { FunctionComponent, useState, useCallback, useEffect } from 'react';
+import React, { FunctionComponent, useCallback, useEffect,useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { ChevronLeftIcon, MagnifyingGlassIcon } from '@navikt/aksel-icons';
-import { Button, HStack, Heading, Link } from '@navikt/ds-react';
+import { Button, Heading, HStack, Link } from '@navikt/ds-react';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import styles from './header.module.css';
 import Journalpost from '../../typer/journalpostTsType';
 import JournalpostSøkModal from './JournalpostSøkModal';
+
+import styles from './header.module.css';
 
 type OwnProps = Readonly<{
   hentJournalpost: (journalpostId: string) => void;

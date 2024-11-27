@@ -1,11 +1,12 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+
 import { IngenBehandlingValgtPanel } from '@navikt/fp-sak-infosider';
 import { Behandling } from '@navikt/fp-types';
 
 import { behandlingRoutePath } from '../app/paths';
-import { BehandlingIndex } from './BehandlingIndex';
 import { FagsakData } from '../fagsak/FagsakData';
+import { BehandlingIndex } from './BehandlingIndex';
 
 interface Props {
   fagsakData: FagsakData;

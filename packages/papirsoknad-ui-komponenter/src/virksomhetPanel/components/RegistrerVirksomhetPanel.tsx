@@ -1,14 +1,15 @@
 import React from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
 import { useFieldArray, useFormContext } from 'react-hook-form';
+import { FormattedMessage, useIntl } from 'react-intl';
+
 import { PlusCircleIcon } from '@navikt/aksel-icons';
 import { Button, ErrorMessage, Table } from '@navikt/ds-react';
+
 import { AlleKodeverk } from '@navikt/fp-types';
 
-import { VirksomhetRad } from './VirksomhetRad';
-
-import { VirksomhetFormValues } from '../types';
 import { EGEN_VIRKSOMHET_NAME_PREFIX } from '../constants';
+import { VirksomhetFormValues } from '../types';
+import { VirksomhetRad } from './VirksomhetRad';
 
 interface Props {
   readOnly?: boolean;

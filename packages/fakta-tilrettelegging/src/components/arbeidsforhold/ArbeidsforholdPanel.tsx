@@ -1,19 +1,20 @@
 import React, { useMemo } from 'react';
-import { Label, VStack } from '@navikt/ds-react';
+import { useFormContext,UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
-import { UseFormGetValues, useFormContext } from 'react-hook-form';
+
+import { Label, VStack } from '@navikt/ds-react';
+import { CheckboxField, Datepicker } from '@navikt/ft-form-hooks';
+import { hasValidDate, required } from '@navikt/ft-form-validators';
+import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
+import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 import minMax from 'dayjs/plugin/minMax';
 
-import { CheckboxField, Datepicker } from '@navikt/ft-form-hooks';
-import { hasValidDate, required } from '@navikt/ft-form-validators';
-import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
-import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { ArbeidsforholdFodselOgTilrettelegging, Permisjon } from '@navikt/fp-types';
 
+import { finnProsentSvangerskapspenger } from './tilretteleggingOgOpphold/tilrettelegging/TilretteleggingForm';
 import { TilretteleggingOgOppholdPerioderPanel } from './tilretteleggingOgOpphold/TilretteleggingOgOppholdPerioderPanel';
 import { VelferdspermisjonPanel } from './velferdspermisjon/VelferdspermisjonPanel';
-import { finnProsentSvangerskapspenger } from './tilretteleggingOgOpphold/tilrettelegging/TilretteleggingForm';
 
 dayjs.extend(minMax);
 

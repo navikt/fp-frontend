@@ -1,17 +1,18 @@
 import React, { useCallback, useState } from 'react';
 import { useIntl } from 'react-intl';
+
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
-import { AksjonspunktStatus, VilkarUtfallType, AksjonspunktKode, BehandlingResultatType } from '@navikt/fp-kodeverk';
-import { VedtakInnsynProsessIndex, InnsynBrevData } from '@navikt/fp-prosess-vedtak-innsyn';
+import { AksjonspunktKode, AksjonspunktStatus, BehandlingResultatType,VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import { Dokument, Fagsak, Behandling, ForhåndsvisMeldingParams, Innsyn } from '@navikt/fp-types';
+import { InnsynBrevData,VedtakInnsynProsessIndex } from '@navikt/fp-prosess-vedtak-innsyn';
+import { Behandling, Dokument, Fagsak, ForhåndsvisMeldingParams, Innsyn } from '@navikt/fp-types';
 
-import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
-import { IverksetterVedtakStatusModal } from '../../felles/modaler/vedtak/IverksetterVedtakStatusModal';
-import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
-import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
+import { IverksetterVedtakStatusModal } from '../../felles/modaler/vedtak/IverksetterVedtakStatusModal';
+import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
+import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 
 const getVedtakStatus = (behandling: Behandling): string => {
   const { aksjonspunkt, behandlingsresultat } = behandling;

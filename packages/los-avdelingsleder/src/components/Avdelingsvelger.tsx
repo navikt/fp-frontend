@@ -1,4 +1,5 @@
-import React, { useCallback, FunctionComponent } from 'react';
+import React, { FunctionComponent,useCallback } from 'react';
+
 import { Select } from '@navikt/ds-react';
 
 import { setValueInLocalStorage } from '../data/localStorageHelper';

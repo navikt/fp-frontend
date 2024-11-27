@@ -1,10 +1,12 @@
 import React from 'react';
-import { ClockDashedIcon, ChevronRightCircleFillIcon } from '@navikt/aksel-icons';
 import { FormattedMessage } from 'react-intl';
-import { BodyShort, Heading, VStack, HStack, Table } from '@navikt/ds-react';
+
+import { ChevronRightCircleFillIcon,ClockDashedIcon } from '@navikt/aksel-icons';
+import { BodyShort, Heading, HStack, Table,VStack } from '@navikt/ds-react';
+
 import { Oppgave } from '@navikt/fp-los-felles';
 
-import { RestApiPathsKeys, restApiHooks } from '../../data/fplosSaksbehandlerRestApi';
+import { restApiHooks,RestApiPathsKeys } from '../../data/fplosSaksbehandlerRestApi';
 
 import styles from './sistBehandledeSaker.module.css';
 

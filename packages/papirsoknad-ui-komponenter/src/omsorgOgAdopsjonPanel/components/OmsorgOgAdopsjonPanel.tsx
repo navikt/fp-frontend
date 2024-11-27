@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
 import { useFieldArray, useFormContext } from 'react-hook-form';
+import { FormattedMessage, useIntl } from 'react-intl';
+
 import { Heading, HStack, VStack } from '@navikt/ds-react';
-import { BorderBox } from '@navikt/ft-ui-komponenter';
+import { Datepicker, InputField, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import {
   dateBeforeOrEqualToToday,
   hasValidDate,
@@ -12,7 +13,7 @@ import {
   minValue,
   required,
 } from '@navikt/ft-form-validators';
-import { Datepicker, InputField, RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { BorderBox } from '@navikt/ft-ui-komponenter';
 
 import { FamilieHendelseType } from '@navikt/fp-kodeverk';
 

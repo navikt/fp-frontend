@@ -1,15 +1,16 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
+
 import { createIntl } from '@navikt/ft-utils';
 
 import {
-  KontrollerFaktaPeriode,
-  Ytelsefordeling,
-  ArbeidsgiverOpplysningerPerId,
-  FaktaArbeidsforhold,
   Aksjonspunkt,
   AlleKodeverk,
+  ArbeidsgiverOpplysningerPerId,
   Fagsak,
+  FaktaArbeidsforhold,
+  KontrollerFaktaPeriode,
+  Ytelsefordeling,
 } from '@navikt/fp-types';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 

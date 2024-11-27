@@ -1,9 +1,10 @@
 import React from 'react';
+
 import { action } from '@storybook/addon-actions';
 import { StoryFn } from '@storybook/react';
 
-import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
+import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
 import SletteSaksbehandlerModal from './SletteSaksbehandlerModal';
 

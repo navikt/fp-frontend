@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { usePrevious } from '@navikt/ft-ui-komponenter';
+
 import { ProsessPanelMenyData } from '../typer/prosessPanelMenyData';
 
 const DEFAULT_PANEL_VALGT = 'default';
