@@ -1,18 +1,20 @@
-import { BodyShort, Box, Button, HStack, Heading, VStack } from '@navikt/ds-react';
-import { Form, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
 import React, { FunctionComponent } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { AksjonspunktStatus, NavBrukerKjonn, AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { BodyShort, Box, Button, Heading, HStack, VStack } from '@navikt/ds-react';
+import { Form, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
+import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
+import { AksjonspunktBox } from '@navikt/ft-ui-komponenter';
+import dayjs from 'dayjs';
+
+import { AksjonspunktKode,AksjonspunktStatus, NavBrukerKjonn } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Fagsak, Soknad } from '@navikt/fp-types';
 import { AvklarDekningsgradAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
-import dayjs from 'dayjs';
-import { AksjonspunktBox } from '@navikt/ft-ui-komponenter';
-import WomanIcon from '../../icons/Woman';
+
 import ManIcon from '../../icons/Man';
 import UnknownIcon from '../../icons/Unknown';
+import WomanIcon from '../../icons/Woman';
 
 import styles from './dekningradApForm.module.css';
 

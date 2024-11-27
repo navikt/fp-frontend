@@ -1,9 +1,9 @@
 import React, { ReactElement, useEffect } from 'react';
-import dayjs from 'dayjs';
 import { useFieldArray, useFormContext, UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Alert } from '@navikt/ds-react';
 
+import { Alert } from '@navikt/ds-react';
+import { CheckboxField, Datepicker, InputField, PeriodFieldArray, SelectField } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   dateBeforeOrEqual,
@@ -16,17 +16,16 @@ import {
   maxValue,
   required,
 } from '@navikt/ft-form-validators';
-import { CheckboxField, Datepicker, InputField, PeriodFieldArray, SelectField } from '@navikt/ft-form-hooks';
-import { KodeverkMedNavn } from '@navikt/fp-types';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import dayjs from 'dayjs';
 
 import { Arbeidskategori } from '@navikt/fp-kodeverk';
+import { KodeverkMedNavn } from '@navikt/fp-types';
 
-import { gyldigeUttakperioder } from '../fulltUttak/RenderPermisjonPeriodeFieldArray';
-
+import { FieldArrayRow } from '../../../felles/FieldArrayRow';
 import { GRADERING_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
 import { GraderingPeriode, PermisjonFormValues } from '../../types';
-import { FieldArrayRow } from '../../../felles/FieldArrayRow';
+import { gyldigeUttakperioder } from '../fulltUttak/RenderPermisjonPeriodeFieldArray';
 
 const maxLength9OrFodselsnr = maxLengthOrFodselsnr(9);
 

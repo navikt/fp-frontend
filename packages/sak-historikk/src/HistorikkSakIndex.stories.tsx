@@ -1,11 +1,13 @@
 import React from 'react';
+
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Historikkinnslag } from '@navikt/fp-types';
-import { alleKodeverk, alleKodeverkTilbakekreving, withRouter } from '@navikt/fp-storybook-utils';
-import HistorikkSakIndex from './HistorikkSakIndex';
 import { HistorikkAktor, NavBrukerKjonn } from '@navikt/fp-kodeverk';
 import { skjermlenkeCodes } from '@navikt/fp-konstanter';
+import { alleKodeverk, alleKodeverkTilbakekreving, withRouter } from '@navikt/fp-storybook-utils';
+import { Historikkinnslag } from '@navikt/fp-types';
+
+import HistorikkSakIndex from './HistorikkSakIndex';
 
 const historikkInnslag: Historikkinnslag[] = [
   {

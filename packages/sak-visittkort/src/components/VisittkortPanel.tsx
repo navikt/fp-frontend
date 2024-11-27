@@ -1,12 +1,14 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
-import { PersonCard, EmptyPersonCard, Gender } from '@navikt/ft-plattform-komponenter';
-import { Fagsak, FagsakPersoner } from '@navikt/fp-types';
-import { RelasjonsRolleType, NavBrukerKjonn } from '@navikt/fp-kodeverk';
 
 import { HStack, Spacer } from '@navikt/ds-react';
-import { VisittkortLabels } from './VisittkortLabels';
+import { EmptyPersonCard, Gender,PersonCard } from '@navikt/ft-plattform-komponenter';
+
+import { NavBrukerKjonn,RelasjonsRolleType } from '@navikt/fp-kodeverk';
+import { Fagsak, FagsakPersoner } from '@navikt/fp-types';
+
 import { VisittkortBarnInfoPanel } from './VisittkortBarnInfoPanel';
+import { VisittkortLabels } from './VisittkortLabels';
 
 import styles from './visittkortPanel.module.css';
 

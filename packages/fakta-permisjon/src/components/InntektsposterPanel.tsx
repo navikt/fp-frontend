@@ -1,11 +1,12 @@
 import React, { FunctionComponent, useMemo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-import dayjs from 'dayjs';
-import { Link, Label, BodyShort } from '@navikt/ds-react';
-import { FlexColumn, FlexContainer, FlexRow, FloatRight } from '@navikt/ft-ui-komponenter';
-import { ChevronDownIcon, ChevronUpIcon } from '@navikt/aksel-icons';
 
+import { ChevronDownIcon, ChevronUpIcon } from '@navikt/aksel-icons';
+import { BodyShort,Label, Link } from '@navikt/ds-react';
+import { FlexColumn, FlexContainer, FlexRow, FloatRight } from '@navikt/ft-ui-komponenter';
 import { formatCurrencyNoKr, ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import dayjs from 'dayjs';
+
 import { Inntektspost } from '@navikt/fp-types';
 
 import styles from './inntektsposterPanel.module.css';

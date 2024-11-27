@@ -1,10 +1,12 @@
 import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { KodeverkMedNavn } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
+import { KodeverkMedNavn } from '@navikt/fp-types';
+
 import { FagsakProfile } from './components/FagsakProfile';
+
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);

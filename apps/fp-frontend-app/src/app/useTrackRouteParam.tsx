@@ -1,7 +1,7 @@
-import { useLocation, useParams, Params } from 'react-router-dom';
-import { Location } from 'history';
+import { Params,useLocation, useParams } from 'react-router-dom';
 
 import { parseQueryString } from '@navikt/ft-utils';
+import { Location } from 'history';
 
 const defaultConfig = {
   paramName: '',

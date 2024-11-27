@@ -1,6 +1,7 @@
 import React, { ReactElement } from 'react';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
+
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
 interface Props {

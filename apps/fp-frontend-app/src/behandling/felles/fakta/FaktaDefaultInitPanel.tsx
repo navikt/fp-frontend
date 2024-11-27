@@ -1,15 +1,15 @@
 import React, { ReactElement } from 'react';
 
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
+import { RestKey } from '@navikt/fp-rest-api';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { StandardFaktaPanelProps } from '@navikt/fp-types';
-import { RestKey } from '@navikt/fp-rest-api';
-import { FaktaPanelCode } from '@navikt/fp-konstanter';
 
-import { FaktaPanelInitProps } from '../typer/faktaPanelInitProps';
-import { useStandardFaktaPanelProps } from './useStandardFaktaPanelProps';
-import { useFaktaMenyRegistrerer } from './useFaktaMenyRegistrerer';
-import { FaktaPanelWrapper } from './FaktaPanelWrapper';
 import { restBehandlingApiHooks } from '../../../data/behandlingContextApi';
+import { FaktaPanelInitProps } from '../typer/faktaPanelInitProps';
+import { FaktaPanelWrapper } from './FaktaPanelWrapper';
+import { useFaktaMenyRegistrerer } from './useFaktaMenyRegistrerer';
+import { useStandardFaktaPanelProps } from './useStandardFaktaPanelProps';
 
 export type Props<PANEL_DATA> = {
   panelEndepunkter?: RestKey<any, any>[];

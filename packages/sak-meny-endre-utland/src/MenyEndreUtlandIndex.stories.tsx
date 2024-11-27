@@ -2,6 +2,7 @@ import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { FagsakMarkeringKode } from '@navikt/fp-kodeverk';
+
 import { MenyEndreUtlandIndex } from './MenyEndreUtlandIndex';
 
 const meta = {

@@ -1,21 +1,22 @@
 import React, { FunctionComponent } from 'react';
 import { useForm } from 'react-hook-form';
-import dayjs from 'dayjs';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Button, Modal, BodyShort, Heading } from '@navikt/ds-react';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 
-import { Datepicker, SelectField, Form } from '@navikt/ft-form-hooks';
+import { BodyShort, Button, Heading,Modal } from '@navikt/ds-react';
+import { Datepicker, Form,SelectField } from '@navikt/ft-form-hooks';
 import {
   ariaCheck,
   dateAfterOrEqualToToday,
+  dateBeforeToday,
   hasValidDate,
   required,
-  dateBeforeToday,
 } from '@navikt/ft-form-validators';
-import { KodeverkMedNavn } from '@navikt/fp-types';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import dayjs from 'dayjs';
+
 import { VenteArsakType } from '@navikt/fp-kodeverk';
+import { KodeverkMedNavn } from '@navikt/fp-types';
 
 import styles from './settPaVentModal.module.css';
 

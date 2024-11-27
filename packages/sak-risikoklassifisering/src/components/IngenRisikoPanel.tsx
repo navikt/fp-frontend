@@ -1,7 +1,8 @@
 import React from 'react';
-import { Box, HStack, Label } from '@navikt/ds-react';
-import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
 import { FormattedMessage, useIntl } from 'react-intl';
+
+import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
+import { Box, HStack, Label } from '@navikt/ds-react';
 
 /**
  * IngenRisikoPanel

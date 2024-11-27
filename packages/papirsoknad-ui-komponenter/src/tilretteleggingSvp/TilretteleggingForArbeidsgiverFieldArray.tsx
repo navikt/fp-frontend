@@ -1,11 +1,12 @@
 import React from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
-import { Button } from '@navikt/ds-react';
-import { VerticalSpacer, FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
-import { Datepicker, InputField } from '@navikt/ft-form-hooks';
-import { required, hasValidOrgNumberOrFodselsnr, hasNoWhiteSpace } from '@navikt/ft-form-validators';
-
 import { useFieldArray, useFormContext } from 'react-hook-form';
+import { FormattedMessage, useIntl } from 'react-intl';
+
+import { Button } from '@navikt/ds-react';
+import { Datepicker, InputField } from '@navikt/ft-form-hooks';
+import { hasNoWhiteSpace,hasValidOrgNumberOrFodselsnr, required } from '@navikt/ft-form-validators';
+import { FlexColumn, FlexContainer, FlexRow,VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
 import {
   BehovForTilretteleggingFieldArray,
   behovForTilretteleggingFieldArrayName,

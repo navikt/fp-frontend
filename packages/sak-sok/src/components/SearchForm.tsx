@@ -1,11 +1,12 @@
 import React from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import { Button, BodyShort, HStack, VStack } from '@navikt/ds-react';
-import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
+import { FormattedMessage, useIntl } from 'react-intl';
 
-import { hasValidSaksnummerOrFodselsnummerFormat } from '@navikt/ft-form-validators';
+import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
+import { BodyShort, Button, HStack, VStack } from '@navikt/ds-react';
 import { Form, InputField } from '@navikt/ft-form-hooks';
+import { hasValidSaksnummerOrFodselsnummerFormat } from '@navikt/ft-form-validators';
+
 import { FagsakEnkel } from '@navikt/fp-types';
 
 import styles from './searchForm.module.css';

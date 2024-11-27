@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+
 import { action } from '@storybook/addon-actions';
 import { StoryFn } from '@storybook/react';
 
-import { RestApiMock } from '@navikt/fp-utils-test';
 import { alleKodeverkLos, getIntlDecorator } from '@navikt/fp-storybook-utils';
+import { RestApiMock } from '@navikt/fp-utils-test';
 
-import { RestApiGlobalStatePathsKeys, RestApiPathsKeys, requestApi } from '../../data/fplosRestApi';
+import { requestApi,RestApiGlobalStatePathsKeys, RestApiPathsKeys } from '../../data/fplosRestApi';
 import Saksliste from '../../typer/sakslisteAvdelingTsType';
 import GjeldendeSakslisterTabell from './GjeldendeSakslisterTabell';
 

@@ -1,5 +1,6 @@
-import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import React from 'react';
+
+import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
 

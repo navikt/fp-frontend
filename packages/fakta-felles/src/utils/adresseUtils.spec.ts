@@ -1,6 +1,8 @@
-import { erPersonAdresserLike, formaterAdresse, getNyesteAdresse } from './adresseUtils';
-import { AdresseType } from '@navikt/fp-kodeverk';
 import { expect } from 'vitest';
+
+import { AdresseType } from '@navikt/fp-kodeverk';
+
+import { erPersonAdresserLike, formaterAdresse, getNyesteAdresse } from './adresseUtils';
 
 const defaultPeriode = {
   fom: '2014-09-17',

@@ -1,7 +1,7 @@
 import React, { ReactElement, useEffect } from 'react';
-import dayjs from 'dayjs';
-import { FormattedMessage, useIntl } from 'react-intl';
 import { useFieldArray, useFormContext, UseFormGetValues } from 'react-hook-form';
+import { FormattedMessage, useIntl } from 'react-intl';
+
 import { Alert } from '@navikt/ds-react';
 import { CheckboxField, Datepicker, InputField, PeriodFieldArray, SelectField } from '@navikt/ft-form-hooks';
 import {
@@ -13,14 +13,15 @@ import {
   maxValue,
   required,
 } from '@navikt/ft-form-validators';
-import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import dayjs from 'dayjs';
 
 import { KodeverkType, UttakPeriodeType } from '@navikt/fp-kodeverk';
+import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
-import { PermisjonFormValues, PermisjonPeriode } from '../../types';
-import { PERMISJON_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
 import { FieldArrayRow } from '../../../felles/FieldArrayRow';
+import { PERMISJON_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
+import { PermisjonFormValues, PermisjonPeriode } from '../../types';
 
 const FA_PREFIX = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}`;
 const getPrefix = (index: number) => `${FA_PREFIX}.${index}` as const;

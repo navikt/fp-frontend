@@ -1,10 +1,12 @@
 import React, { ReactElement, ReactNode } from 'react';
 import { FormattedMessage } from 'react-intl';
+
 import { LinkPanel } from '@navikt/ds-react';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
+import { RelasjonsRolleType } from '@navikt/fp-kodeverk';
 import { VisittkortSakIndex } from '@navikt/fp-sak-visittkort';
 import { Aktor, Fagsak, KodeverkMedNavn } from '@navikt/fp-types';
-import { RelasjonsRolleType } from '@navikt/fp-kodeverk';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import styles from './aktoerGrid.module.css';
 

@@ -1,23 +1,24 @@
 import React, { useCallback } from 'react';
 import { useIntl } from 'react-intl';
 
+import { forhandsvisDokument } from '@navikt/ft-utils';
+
 import { AksjonspunktKode, VilkarUtfallType } from '@navikt/fp-kodeverk';
-import { SimuleringProsessIndex } from '@navikt/fp-prosess-simulering';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
+import { SimuleringProsessIndex } from '@navikt/fp-prosess-simulering';
 import {
+  ArbeidsgiverOpplysningerPerId,
   Behandling,
   Fagsak,
   SimuleringResultat,
   TilbakekrevingValg,
-  ArbeidsgiverOpplysningerPerId,
 } from '@navikt/fp-types';
-import { forhandsvisDokument } from '@navikt/ft-utils';
 
-import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
-import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
-import { ProsessPanelMenyData } from '../../felles/typer/prosessPanelMenyData';
-import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingApiKeys, requestBehandlingApi, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
+import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
+import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
+import { ProsessPanelMenyData } from '../../felles/typer/prosessPanelMenyData';
 
 const getForhandsvisFptilbakeCallback =
   (

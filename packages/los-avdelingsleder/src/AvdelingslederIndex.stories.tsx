@@ -1,12 +1,13 @@
 import React from 'react';
+
 import { StoryFn } from '@storybook/react';
 
-import { RestApiMock } from '@navikt/fp-utils-test';
 import { alleKodeverkLos, withRouter } from '@navikt/fp-storybook-utils';
 import { NavAnsatt } from '@navikt/fp-types';
+import { RestApiMock } from '@navikt/fp-utils-test';
 
-import { RestApiGlobalStatePathsKeys, RestApiPathsKeys, requestApi } from './data/fplosRestApi';
 import AvdelingslederIndex from './AvdelingslederIndex';
+import { requestApi,RestApiGlobalStatePathsKeys, RestApiPathsKeys } from './data/fplosRestApi';
 import Avdeling from './typer/avdelingTsType';
 
 export default {

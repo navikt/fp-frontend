@@ -1,15 +1,16 @@
 import React from 'react';
+
 import { action } from '@storybook/addon-actions';
 import { StoryFn } from '@storybook/react';
 
+import { AksjonspunktKode,AksjonspunktStatus, RelasjonsRolleType, UttakPeriodeType } from '@navikt/fp-kodeverk';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, Fagsak, KontrollerFaktaPeriode, Ytelsefordeling } from '@navikt/fp-types';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import { RelasjonsRolleType, AksjonspunktStatus, UttakPeriodeType, AksjonspunktKode } from '@navikt/fp-kodeverk';
 
-import UttakFaktaIndex from './UttakFaktaIndex';
-import UtsettelseÅrsak from './kodeverk/utsettelseÅrsak';
 import OverføringÅrsak from './kodeverk/overføringÅrsak';
+import UtsettelseÅrsak from './kodeverk/utsettelseÅrsak';
+import UttakFaktaIndex from './UttakFaktaIndex';
 
 import '@navikt/ds-css';
 import '@navikt/ft-ui-komponenter/dist/style.css';

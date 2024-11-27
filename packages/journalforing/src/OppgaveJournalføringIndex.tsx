@@ -1,20 +1,24 @@
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
-import { createIntl } from '@navikt/ft-utils';
+
 import { Heading } from '@navikt/ds-react';
-import { NavAnsatt } from '@navikt/fp-types';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
+import { createIntl } from '@navikt/ft-utils';
+
 import { RestApiState, useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
-import messages from '../i18n/nb_NO.json';
-import JournalforingPanel from './components/JournalforingPanel';
-import JournalføringIndex from './components/JournalføringIndex';
-import { requestApi, restApiHooks, RestApiPathsKeys } from './data/fpfordelRestApi';
-import Oppgave from './typer/oppgaveTsType';
-import JournalførSubmitValue from './typer/ferdigstillJournalføringSubmit';
-import JournalførtSubmitModal from './components/journalpost/modal/JournalførtSubmitModal';
-import ReserverOppgaveType from './typer/reserverOppgaveType';
-import Journalpost from './typer/journalpostTsType';
+import { NavAnsatt } from '@navikt/fp-types';
+
 import JournalføringHeader from './components/header/JournalføringHeader';
+import JournalføringIndex from './components/JournalføringIndex';
+import JournalforingPanel from './components/JournalforingPanel';
+import JournalførtSubmitModal from './components/journalpost/modal/JournalførtSubmitModal';
+import { requestApi, restApiHooks, RestApiPathsKeys } from './data/fpfordelRestApi';
+import JournalførSubmitValue from './typer/ferdigstillJournalføringSubmit';
+import Journalpost from './typer/journalpostTsType';
+import Oppgave from './typer/oppgaveTsType';
+import ReserverOppgaveType from './typer/reserverOppgaveType';
+
+import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 const TOM_ARRAY: Oppgave[] = [];

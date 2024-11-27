@@ -1,9 +1,11 @@
 import React, { FunctionComponent } from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import { Button, VStack } from '@navikt/ds-react';
-import { RestApiState } from '@navikt/fp-rest-api-hooks';
-import { FormattedMessage } from 'react-intl';
+
 import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
+import { RestApiState } from '@navikt/fp-rest-api-hooks';
+
 import SaksbehandlereOgSaksbehandlerGrupper from '../../typer/saksbehandlereOgSaksbehandlerGrupper ';
 import GrupperTabell from './GrupperTabell';
 

@@ -1,6 +1,8 @@
 import React, { PropsWithChildren, useRef, useState } from 'react';
-import { Historikkinnslag } from '@navikt/fp-types';
+
 import { Detail, Popover } from '@navikt/ds-react';
+
+import { Historikkinnslag } from '@navikt/fp-types';
 
 export const EnvironmentWrapper = ({
   historikkinnslag,

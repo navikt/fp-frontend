@@ -1,17 +1,18 @@
 import React, { FunctionComponent, useCallback, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Label } from '@navikt/ds-react';
 
-import { AksjonspunktKode, VilkarType, VilkarUtfallType, KodeverkType, AksjonspunktStatus } from '@navikt/fp-kodeverk';
+import { Label } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
-import { Aksjonspunkt, AlleKodeverk, Behandling, Vilkar } from '@navikt/fp-types';
+
+import { AksjonspunktKode, AksjonspunktStatus,KodeverkType, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import {
-  ProsessStegBegrunnelseTextFieldNew,
-  VilkarResultPicker,
   ProsessPanelTemplate,
+  ProsessStegBegrunnelseTextFieldNew,
   validerApKodeOgHentApEnum,
+  VilkarResultPicker,
 } from '@navikt/fp-prosess-felles';
+import { Aksjonspunkt, AlleKodeverk, Behandling, Vilkar } from '@navikt/fp-types';
 import {
   VurdereYtelseSammeBarnAnnenForelderAp,
   VurdereYtelseSammeBarnSokerAp,

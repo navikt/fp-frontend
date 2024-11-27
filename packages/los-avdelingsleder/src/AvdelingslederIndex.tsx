@@ -1,32 +1,33 @@
-import React, { FunctionComponent, useState, useEffect, useCallback } from 'react';
-import { RawIntlProvider, FormattedMessage } from 'react-intl';
+import React, { FunctionComponent, useCallback,useEffect, useState } from 'react';
+import { FormattedMessage,RawIntlProvider } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
-import { Location } from 'history';
+
 import { Heading, Panel, Tabs } from '@navikt/ds-react';
 import { LoadingPanel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { formatQueryString, parseQueryString, createIntl } from '@navikt/ft-utils';
+import { createIntl,formatQueryString, parseQueryString } from '@navikt/ft-utils';
+import { Location } from 'history';
 
-import { NavAnsatt } from '@navikt/fp-types';
 import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
 import { RestApiState, useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
+import { NavAnsatt } from '@navikt/fp-types';
 
-import useTrackRouteParam from './useTrackRouteParam';
-import { requestApi, RestApiPathsKeys, RestApiGlobalStatePathsKeys, restApiHooks } from './data/fplosRestApi';
-import AvdelingslederDashboard from './components/AvdelingslederDashboard';
-import IkkeTilgangTilAvdelingslederPanel from './components/IkkeTilgangTilAvdelingslederPanel';
 import AvdelingslederPanels from './avdelingslederPanels';
-import NokkeltallIndex from './nokkeltall/NokkeltallIndex';
-import EndreSaksbehandlereIndex from './saksbehandlere/EndreSaksbehandlereIndex';
 import EndreBehandlingskoerIndex from './behandlingskoer/EndreBehandlingskoerIndex';
-import ReservasjonerIndex from './reservasjoner/ReservasjonerIndex';
-import Avdeling from './typer/avdelingTsType';
-import { getValueFromLocalStorage, removeValueFromLocalStorage } from './data/localStorageHelper';
+import AvdelingslederDashboard from './components/AvdelingslederDashboard';
 import Avdelingsvelger from './components/Avdelingsvelger';
+import IkkeTilgangTilAvdelingslederPanel from './components/IkkeTilgangTilAvdelingslederPanel';
+import { requestApi, RestApiGlobalStatePathsKeys, restApiHooks,RestApiPathsKeys } from './data/fplosRestApi';
+import { getValueFromLocalStorage, removeValueFromLocalStorage } from './data/localStorageHelper';
+import GrupperIndex from './grupper/GrupperIndex';
+import NokkeltallIndex from './nokkeltall/NokkeltallIndex';
+import ReservasjonerIndex from './reservasjoner/ReservasjonerIndex';
+import EndreSaksbehandlereIndex from './saksbehandlere/EndreSaksbehandlereIndex';
+import Avdeling from './typer/avdelingTsType';
+import useTrackRouteParam from './useTrackRouteParam';
 
 import styles from './avdelingslederIndex.module.css';
 
 import messages from '../i18n/nb_NO.json';
-import GrupperIndex from './grupper/GrupperIndex';
 
 const intl = createIntl(messages);
 

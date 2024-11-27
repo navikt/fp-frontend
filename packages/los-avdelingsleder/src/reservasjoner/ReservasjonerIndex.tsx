@@ -1,6 +1,6 @@
-import React, { FunctionComponent, useEffect, useCallback } from 'react';
+import React, { FunctionComponent, useCallback,useEffect } from 'react';
 
-import { restApiHooks, RestApiPathsKeys, RestApiGlobalStatePathsKeys } from '../data/fplosRestApi';
+import { RestApiGlobalStatePathsKeys,restApiHooks, RestApiPathsKeys } from '../data/fplosRestApi';
 import Reservasjon from '../typer/reservasjonTsType';
 import ReservasjonerTabell from './components/ReservasjonerTabell';
 

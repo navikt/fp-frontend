@@ -1,7 +1,8 @@
-import dayjs from 'dayjs';
-import { terminBekreftelseBeforeTodayOrTermindato, terminErRundtFodselsdato } from './validator';
-import { expect } from 'vitest';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import dayjs from 'dayjs';
+import { expect } from 'vitest';
+
+import { terminBekreftelseBeforeTodayOrTermindato, terminErRundtFodselsdato } from './validator';
 
 const terminFremtidig = dayjs().add(5, 'weeks').format(ISO_DATE_FORMAT);
 const terminPassert = dayjs().subtract(5, 'weeks').format(ISO_DATE_FORMAT);

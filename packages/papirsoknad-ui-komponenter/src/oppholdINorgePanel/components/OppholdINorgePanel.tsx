@@ -1,12 +1,15 @@
 import React, { useMemo } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
 import { useFormContext } from 'react-hook-form';
-import { ArrowBox, BorderBox } from '@navikt/ft-ui-komponenter';
-import { KodeverkType } from '@navikt/fp-kodeverk';
+import { FormattedMessage, useIntl } from 'react-intl';
+
 import { Heading, VStack } from '@navikt/ds-react';
+import { ArrowBox, BorderBox } from '@navikt/ft-ui-komponenter';
+
+import { KodeverkType } from '@navikt/fp-kodeverk';
 import { AlleKodeverk } from '@navikt/fp-types';
-import { UtenlandsOppholdField, FormValues as FormValuesFieldArray } from './UtenlandsOppholdField';
+
 import { TrueFalseInput } from '../../felles/TrueFalseInput';
+import { FormValues as FormValuesFieldArray,UtenlandsOppholdField } from './UtenlandsOppholdField';
 
 export type OppholdINorgeFormValues = {
   oppholdINorge?: boolean;

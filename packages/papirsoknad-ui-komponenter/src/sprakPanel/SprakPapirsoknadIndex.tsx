@@ -1,9 +1,10 @@
 import React from 'react';
+
 import { Heading, VStack } from '@navikt/ds-react';
-import { createIntl } from '@navikt/ft-utils';
-import { BorderBox } from '@navikt/ft-ui-komponenter';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
+import { BorderBox } from '@navikt/ft-ui-komponenter';
+import { createIntl } from '@navikt/ft-utils';
 
 import messages from '../../i18n/nb_NO.json';
 

@@ -1,12 +1,13 @@
 import React, { FunctionComponent } from 'react';
+import { useFieldArray, useFormContext } from 'react-hook-form';
 import { useIntl } from 'react-intl';
+
+import { HStack } from '@navikt/ds-react';
+import { Datepicker, PeriodFieldArray } from '@navikt/ft-form-hooks';
+import { dateBeforeOrEqualToToday,hasValidDate, required } from '@navikt/ft-form-validators';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { hasValidDate, required, dateBeforeOrEqualToToday } from '@navikt/ft-form-validators';
 import { AvklartBarn } from '@navikt/fp-types';
-import { Datepicker, PeriodFieldArray } from '@navikt/ft-form-hooks';
-import { useFieldArray, useFormContext } from 'react-hook-form';
-import { HStack } from '@navikt/ds-react';
 
 const FIELD_ARRAY_NAME = 'avklartBarn';
 

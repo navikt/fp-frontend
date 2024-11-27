@@ -1,9 +1,11 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
-import { Tag, BodyShort, Heading, HStack, VStack } from '@navikt/ds-react';
+
+import { BodyShort, Heading, HStack, Tag, VStack } from '@navikt/ds-react';
 import { Tooltip } from '@navikt/ft-ui-komponenter';
-import { KodeverkMedNavn } from '@navikt/fp-types';
+
 import { FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { KodeverkMedNavn } from '@navikt/fp-types';
 
 const visSakDekningsgrad = (saksKode: string, dekningsgrad?: number): boolean => {
   const erForeldrepenger = saksKode === FagsakYtelseType.FORELDREPENGER;

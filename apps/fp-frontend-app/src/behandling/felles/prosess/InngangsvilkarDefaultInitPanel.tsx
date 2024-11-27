@@ -1,15 +1,16 @@
 import React, { ReactElement } from 'react';
 
-import { RestApiState } from '@navikt/fp-rest-api-hooks';
-import { RestKey } from '@navikt/fp-rest-api';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
+
+import { RestKey } from '@navikt/fp-rest-api';
+import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { StandardProsessPanelProps } from '@navikt/fp-types';
 
+import { restBehandlingApiHooks } from '../../../data/behandlingContextApi';
 import { InngangsvilkarPanelInitProps } from '../typer/inngangsvilkarPanelInitProps';
-import { useStandardProsessPanelProps } from './useStandardProsessPanelProps';
 import { skalViseProsessPanel } from './skalViseProsessPanel';
 import { useInngangsvilkarRegistrerer } from './useInngangsvilkarRegistrerer';
-import { restBehandlingApiHooks } from '../../../data/behandlingContextApi';
+import { useStandardProsessPanelProps } from './useStandardProsessPanelProps';
 
 export type Props<PANEL_DATA> = {
   behandlingVersjon: number;

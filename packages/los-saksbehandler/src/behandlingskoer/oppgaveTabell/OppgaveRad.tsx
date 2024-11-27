@@ -1,15 +1,17 @@
 import React, { ReactNode, useRef, useState } from 'react';
-import { ChatElipsisIcon, CheckmarkIcon, FilesIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, CopyButton, HStack, Label, Popover, Table, Tooltip, VStack } from '@navikt/ds-react';
-import { getKodeverknavnFraKode, KodeverkType } from '@navikt/fp-kodeverk';
-import { Oppgave, OppgaveStatus } from '@navikt/fp-los-felles';
-import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
-import { getDateAndTime } from '@navikt/ft-utils';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { RestApiGlobalStatePathsKeys, restApiHooks } from '../../data/fplosSaksbehandlerRestApi';
+import { ChatElipsisIcon, CheckmarkIcon, FilesIcon } from '@navikt/aksel-icons';
+import { BodyShort, Button, CopyButton, HStack, Label, Popover, Table, Tooltip, VStack } from '@navikt/ds-react';
+import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
+import { getDateAndTime } from '@navikt/ft-utils';
 
+import { getKodeverknavnFraKode, KodeverkType } from '@navikt/fp-kodeverk';
+import { Oppgave, OppgaveStatus } from '@navikt/fp-los-felles';
+
+import { RestApiGlobalStatePathsKeys, restApiHooks } from '../../data/fplosSaksbehandlerRestApi';
 import { OppgaveHandlingerMenu } from './menu/OppgaveHandlingerMenu';
+
 import styles from './oppgaveRad.module.css';
 
 export type OppgaveMedReservertIndikator = Oppgave & {

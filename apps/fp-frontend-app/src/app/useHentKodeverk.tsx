@@ -1,8 +1,8 @@
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
-import { useGetEnabledApplikasjonContext } from './useGetEnabledApplikasjonContext';
-import { ApplicationContextPath } from './ApplicationContextPath';
 import { FagsakApiKeys, restFagsakApiHooks } from '../data/fagsakContextApi';
+import { ApplicationContextPath } from './ApplicationContextPath';
+import { useGetEnabledApplikasjonContext } from './useGetEnabledApplikasjonContext';
 
 const NO_PARAMS = undefined;
 

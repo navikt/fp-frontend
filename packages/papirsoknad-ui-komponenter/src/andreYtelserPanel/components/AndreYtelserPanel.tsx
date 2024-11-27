@@ -1,17 +1,19 @@
 import React, { useMemo } from 'react';
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
+
 import { Heading } from '@navikt/ds-react';
 import { CheckboxField } from '@navikt/ft-form-hooks';
 import { ArrowBox, BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
-import { ArbeidType, KodeverkType } from '@navikt/fp-kodeverk';
 
-import { useFormContext } from 'react-hook-form';
+import { ArbeidType, KodeverkType } from '@navikt/fp-kodeverk';
+import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
+
 import {
-  RenderAndreYtelserPerioderFieldArray,
-  FormValues as PerioderFormValues,
-  ANDRE_YTELSER_PERIODE_SUFFIX,
   ANDRE_YTELSER_NAME_PREFIX,
+  ANDRE_YTELSER_PERIODE_SUFFIX,
+  FormValues as PerioderFormValues,
+  RenderAndreYtelserPerioderFieldArray,
 } from './RenderAndreYtelserPerioderFieldArray';
 
 const removeArbeidstyper = (

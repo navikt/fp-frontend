@@ -1,13 +1,13 @@
 import React from 'react';
 import { IntlShape, useIntl } from 'react-intl';
 
-import { AksjonspunktKode, VilkarType, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, FagsakYtelseType,VilkarType } from '@navikt/fp-kodeverk';
 import { FodselVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-fodsel';
-import { Aksjonspunkt, AksessRettigheter } from '@navikt/fp-types';
+import { AksessRettigheter,Aksjonspunkt } from '@navikt/fp-types';
 
-import { InngangsvilkarPanelInitProps } from '../../../felles/typer/inngangsvilkarPanelInitProps';
 import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 import { OverstyringPanelDef } from '../../../felles/prosess/OverstyringPanelDef';
+import { InngangsvilkarPanelInitProps } from '../../../felles/typer/inngangsvilkarPanelInitProps';
 
 const AKSJONSPUNKT_TEKST_PER_KODE = {
   [AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN]: 'SRBVilkarForm.VurderSammeBarn',

@@ -1,6 +1,7 @@
 import React, { ReactElement, useEffect } from 'react';
 import { useFieldArray, useFormContext, UseFormGetValues } from 'react-hook-form';
 import { useIntl } from 'react-intl';
+
 import { Datepicker, PeriodFieldArray, SelectField } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
@@ -9,12 +10,13 @@ import {
   hasValidDate,
   required,
 } from '@navikt/ft-form-validators';
-import { KodeverkMedNavn } from '@navikt/fp-types';
-import { OppholdArsakType } from '@navikt/fp-kodeverk';
 
+import { OppholdArsakType } from '@navikt/fp-kodeverk';
+import { KodeverkMedNavn } from '@navikt/fp-types';
+
+import { FieldArrayRow } from '../../../felles/FieldArrayRow';
 import { OPPHOLD_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
 import { OppholdPeriode, PermisjonFormValues } from '../../types';
-import { FieldArrayRow } from '../../../felles/FieldArrayRow';
 
 const FA_PREFIX = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}`;
 const getPrefix = (index: number) => `${FA_PREFIX}.${index}` as const;

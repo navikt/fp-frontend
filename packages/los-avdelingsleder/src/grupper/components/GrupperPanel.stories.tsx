@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 
+import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
+import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
-import { RestApiState } from '@navikt/fp-rest-api-hooks';
-import messages from '../../../i18n/nb_NO.json';
 import SaksbehandlereOgSaksbehandlerGrupper, {
   SaksbehandlerGruppe,
 } from '../../typer/saksbehandlereOgSaksbehandlerGrupper ';
 import GrupperPanel from './GrupperPanel';
-import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
+
+import messages from '../../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
 

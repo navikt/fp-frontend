@@ -1,18 +1,19 @@
-import React, { ReactElement, useCallback, useState, MouseEvent } from 'react';
+import React, { MouseEvent,ReactElement, useCallback, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { HGrid, HStack, Link, VStack } from '@navikt/ds-react';
-import { VilkarUtfallType } from '@navikt/fp-kodeverk';
-import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
-import { Behandling } from '@navikt/fp-types';
 
+import { HGrid, HStack, Link, VStack } from '@navikt/ds-react';
+import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
+
+import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
+import { Behandling } from '@navikt/fp-types';
 
+import { InngangsvilkarPanelData } from '../typer/inngangsvilkarPanelData';
+import { InngangsvilkarPanelInitProps } from '../typer/inngangsvilkarPanelInitProps';
+import { ProsessPanelInitProps } from '../typer/prosessPanelInitProps';
 import { ProsessPanelWrapper } from './ProsessPanelWrapper';
 import { useProsessMenyRegistrerer } from './useProsessMenyRegistrerer';
-import { InngangsvilkarPanelData } from '../typer/inngangsvilkarPanelData';
-import { ProsessPanelInitProps } from '../typer/prosessPanelInitProps';
-import { InngangsvilkarPanelInitProps } from '../typer/inngangsvilkarPanelInitProps';
 
 const harMinstEttDelPanelStatus = (paneler: InngangsvilkarPanelData[], vuType: string): boolean =>
   paneler.some(p => p.status === vuType);

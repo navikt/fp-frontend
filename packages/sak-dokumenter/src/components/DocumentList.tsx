@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { BodyShort, Button, Checkbox, Link, SortState, Table } from '@navikt/ds-react';
+
 import {
   ChevronLeftCircleFillIcon,
   ChevronRightCircleFillIcon,
   NotePencilFillIcon,
   StarFillIcon,
 } from '@navikt/aksel-icons';
+import { BodyShort, Button, Checkbox, Link, SortState, Table } from '@navikt/ds-react';
+import { DateTimeLabel } from '@navikt/ft-ui-komponenter';
 
 import { Kommunikasjonsretning } from '@navikt/fp-kodeverk';
 import { Dokument } from '@navikt/fp-types';
 
-import { DateTimeLabel } from '@navikt/ft-ui-komponenter';
 import styles from './documentList.module.css';
 
 interface Props {

@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
+
 import {
   ArbeidsgiverOpplysningerPerId,
   BeregningsresultatDagytelse,
@@ -14,6 +15,7 @@ import {
 } from '@navikt/fp-types';
 
 import TilkjentYtelsePanel from './components/TilkjentYtelsePanel';
+
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);

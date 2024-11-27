@@ -1,18 +1,20 @@
 import React from 'react';
-import { StoryFn } from '@storybook/react';
+
 import { action } from '@storybook/addon-actions';
+import { StoryFn } from '@storybook/react';
 
 import {
   AksjonspunktKode,
-  BehandlingType,
-  BehandlingStatus,
   AksjonspunktStatus,
+  BehandlingStatus,
+  BehandlingType,
   FagsakYtelseType,
   NavBrukerKjonn,
 } from '@navikt/fp-kodeverk';
-import { Behandling, Aksjonspunkt, Soknad, Fagsak } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { Aksjonspunkt, Behandling, Fagsak,Soknad } from '@navikt/fp-types';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
+
 import SakenFaktaIndex from './SakenFaktaIndex';
 
 import '@navikt/ds-css';

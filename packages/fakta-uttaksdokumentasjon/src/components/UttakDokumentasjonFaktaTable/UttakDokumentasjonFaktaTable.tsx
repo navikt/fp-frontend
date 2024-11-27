@@ -1,13 +1,17 @@
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
+
 import { BodyShort, Table } from '@navikt/ds-react';
-import { DokumentasjonVurderingBehov, UttakType } from '@navikt/fp-types';
 import { calcDaysAndWeeks } from '@navikt/ft-utils';
-import UttakDokumentasjonFaktaDetailForm from '../UttakDokumentasjonFaktaDetailForm';
-import styles from './uttakDokumentasjonFaktaTable.module.css';
-import UttakVurderingStatus from './UttakVurderingStatus';
-import getUttakÅrsakTekst from './uttakÅrsak';
+
+import { DokumentasjonVurderingBehov, UttakType } from '@navikt/fp-types';
+
 import { getFormatertPeriode } from '../../utils/periodeUtils';
+import UttakDokumentasjonFaktaDetailForm from '../UttakDokumentasjonFaktaDetailForm';
+import getUttakÅrsakTekst from './uttakÅrsak';
+import UttakVurderingStatus from './UttakVurderingStatus';
+
+import styles from './uttakDokumentasjonFaktaTable.module.css';
 
 const finnType = (type: UttakType) => {
   if (type === UttakType.UTSETTELSE) {

@@ -1,11 +1,12 @@
-import React, { FunctionComponent, useState, useCallback } from 'react';
+import React, { FunctionComponent, useCallback,useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Link } from '@navikt/ds-react';
-import { ChevronDownIcon, ChevronUpIcon } from '@navikt/aksel-icons';
 
+import { ChevronDownIcon, ChevronUpIcon } from '@navikt/aksel-icons';
+import { Link } from '@navikt/ds-react';
 import { DateLabel, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { InnsynVedtaksdokument, KodeverkMedNavn } from '@navikt/fp-types';
+
 import { hentVedtakDokumentLenke } from '@navikt/fp-konstanter';
+import { InnsynVedtaksdokument, KodeverkMedNavn } from '@navikt/fp-types';
 
 interface OwnProps {
   behandlingTypes: KodeverkMedNavn[];

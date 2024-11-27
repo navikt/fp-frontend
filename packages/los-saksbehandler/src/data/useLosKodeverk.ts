@@ -1,4 +1,5 @@
 import { KodeverkMedNavn } from '@navikt/fp-types';
+
 import { RestApiGlobalStatePathsKeys, restApiHooks } from './fplosSaksbehandlerRestApi';
 
 /**

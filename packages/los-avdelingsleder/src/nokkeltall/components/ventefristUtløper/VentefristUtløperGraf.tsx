@@ -1,8 +1,10 @@
 import React, { FunctionComponent, useMemo } from 'react';
-import dayjs from 'dayjs';
-import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
+
 import { Panel } from '@navikt/ds-react';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
+import dayjs from 'dayjs';
+import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
+
 import { ReactECharts } from '@navikt/fp-los-felles';
 
 import BehandlingVentefrist from '../../../typer/behandlingVentefristTsType';

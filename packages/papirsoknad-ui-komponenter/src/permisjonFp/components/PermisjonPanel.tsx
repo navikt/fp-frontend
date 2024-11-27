@@ -1,17 +1,11 @@
 import React, { useEffect } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
 import { useFormContext, UseFormGetValues } from 'react-hook-form';
+import { FormattedMessage, useIntl } from 'react-intl';
+
 import { ErrorMessage, Heading, VStack } from '@navikt/ds-react';
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 
 import { AlleKodeverk } from '@navikt/fp-types';
-
-import { PermisjonFulltUttak } from './fulltUttak/PermisjonFulltUttak';
-import { PermisjonUtsettelsePanel } from './utsettelse/PermisjonUtsettelsePanel';
-import { PermisjonGraderingPanel } from './gradering/PermisjonGraderingPanel';
-import { PermisjonOverforingAvKvoterPanel } from './overforeKvote/PermisjonOverforingAvKvoterPanel';
-import { RenderPermisjonPeriodeFieldArray } from './fulltUttak/RenderPermisjonPeriodeFieldArray';
-import { PermisjonOppholdPanel } from './opphold/PermisjonOppholdPanel';
 
 import {
   GRADERING_PERIODE_FIELD_ARRAY_NAME,
@@ -22,6 +16,12 @@ import {
   UTSETTELSE_PERIODE_FIELD_ARRAY_NAME,
 } from '../constants';
 import { PermisjonFormValues } from '../types';
+import { PermisjonFulltUttak } from './fulltUttak/PermisjonFulltUttak';
+import { RenderPermisjonPeriodeFieldArray } from './fulltUttak/RenderPermisjonPeriodeFieldArray';
+import { PermisjonGraderingPanel } from './gradering/PermisjonGraderingPanel';
+import { PermisjonOppholdPanel } from './opphold/PermisjonOppholdPanel';
+import { PermisjonOverforingAvKvoterPanel } from './overforeKvote/PermisjonOverforingAvKvoterPanel';
+import { PermisjonUtsettelsePanel } from './utsettelse/PermisjonUtsettelsePanel';
 
 const getIsRequired = (getValues: UseFormGetValues<PermisjonFormValues>) => {
   const fulltUttak = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.fulltUttak`) || false;

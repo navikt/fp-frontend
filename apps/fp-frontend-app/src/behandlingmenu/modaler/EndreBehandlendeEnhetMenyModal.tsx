@@ -1,9 +1,10 @@
 import React, { useCallback } from 'react';
+
 import { MenyEndreBehandlendeEnhetIndex } from '@navikt/fp-sak-meny';
 import { BehandlingAppKontekst } from '@navikt/fp-types';
 
-import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../../data/behandlingContextApi';
+import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
 
 interface Props {
   behandling: BehandlingAppKontekst;

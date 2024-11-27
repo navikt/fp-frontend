@@ -1,48 +1,49 @@
-import { FormkravMellomlagretDataType } from '@navikt/fp-prosess-formkrav';
-import { RestApiConfigBuilder, RestKey, createRequestApi } from '@navikt/fp-rest-api';
-import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
-import {
-  ArbeidOgInntektsmelding,
-  Behandling,
-  ArbeidsgiverOpplysningerWrapper,
-  Beregningsgrunnlag,
-  BeregningsresultatDagytelse,
-  Feriepengegrunnlag,
-  ForhåndsvisMeldingParams,
-  InntektArbeidYtelse,
-  ManglendeInntektsmeldingVurdering,
-  ManueltArbeidsforhold,
-  Medlemskap,
-  Opptjening,
-  Personoversikt,
-  SimuleringResultat,
-  Soknad,
-  TilbakekrevingValg,
-  Verge,
-  Ytelsefordeling,
-  Innsyn,
-  Dokument,
-  FamilieHendelse,
-  FamilieHendelseSamling,
-  KlageVurdering,
-  AnkeVurdering,
-  FodselOgTilrettelegging,
-  PeriodeSoker,
-  FaktaArbeidsforhold,
-  UttaksresultatPeriode,
-  UttakStonadskontoer,
-  KontrollerFaktaPeriode,
-  UttakKontrollerAktivitetskrav,
-  DokumentasjonVurderingBehov,
-  BeregningsresultatEs,
-  BeregningsresultatTilbakekreving,
-  Inntektsmelding,
-  VilkarsVurdertePerioderWrapper,
-} from '@navikt/fp-types';
 import { FeilutbetalingAarsak, FeilutbetalingFakta } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
 import { DetaljerteFeilutbetalingsperioder } from '@navikt/ft-prosess-tilbakekreving';
 import { FeilutbetalingPerioderWrapper } from '@navikt/ft-prosess-tilbakekreving-foreldelse';
 import { Vedtaksbrev } from '@navikt/ft-prosess-tilbakekreving-vedtak';
+
+import { FormkravMellomlagretDataType } from '@navikt/fp-prosess-formkrav';
+import { createRequestApi,RestApiConfigBuilder, RestKey } from '@navikt/fp-rest-api';
+import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
+import {
+  AnkeVurdering,
+  ArbeidOgInntektsmelding,
+  ArbeidsgiverOpplysningerWrapper,
+  Behandling,
+  Beregningsgrunnlag,
+  BeregningsresultatDagytelse,
+  BeregningsresultatEs,
+  BeregningsresultatTilbakekreving,
+  Dokument,
+  DokumentasjonVurderingBehov,
+  FaktaArbeidsforhold,
+  FamilieHendelse,
+  FamilieHendelseSamling,
+  Feriepengegrunnlag,
+  FodselOgTilrettelegging,
+  ForhåndsvisMeldingParams,
+  Innsyn,
+  InntektArbeidYtelse,
+  Inntektsmelding,
+  KlageVurdering,
+  KontrollerFaktaPeriode,
+  ManglendeInntektsmeldingVurdering,
+  ManueltArbeidsforhold,
+  Medlemskap,
+  Opptjening,
+  PeriodeSoker,
+  Personoversikt,
+  SimuleringResultat,
+  Soknad,
+  TilbakekrevingValg,
+  UttakKontrollerAktivitetskrav,
+  UttaksresultatPeriode,
+  UttakStonadskontoer,
+  Verge,
+  VilkarsVurdertePerioderWrapper,
+  Ytelsefordeling,
+} from '@navikt/fp-types';
 
 export type SettPaVentParams = {
   ventearsak?: string;

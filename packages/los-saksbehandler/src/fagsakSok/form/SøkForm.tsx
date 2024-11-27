@@ -1,12 +1,13 @@
 import React from 'react';
-import { CheckboxField, Form, InputField } from '@navikt/ft-form-hooks';
-import { hasValidSaksnummerOrFodselsnummerFormat } from '@navikt/ft-form-validators';
 import { useForm } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
-import { MagnifyingGlassIcon, ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
-import styles from './SøkForm.module.css';
+import { ExclamationmarkTriangleFillIcon,MagnifyingGlassIcon } from '@navikt/aksel-icons';
 import { Button, HStack, VStack } from '@navikt/ds-react';
+import { CheckboxField, Form, InputField } from '@navikt/ft-form-hooks';
+import { hasValidSaksnummerOrFodselsnummerFormat } from '@navikt/ft-form-validators';
+
+import styles from './SøkForm.module.css';
 
 type FormValues = {
   skalReservere: boolean;

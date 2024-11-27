@@ -1,6 +1,7 @@
-import { OpptjeningAktiviteter } from '@navikt/fp-types';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+
+import { OpptjeningAktiviteter } from '@navikt/fp-types';
 
 const mapAktivitetTextEndring = (aktivitetType?: string, arbeidsgiverNavn?: string, orgnr?: string) => {
   if (arbeidsgiverNavn && orgnr) {

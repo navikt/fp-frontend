@@ -1,8 +1,9 @@
 import { useCallback, useMemo, useState } from 'react';
+
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
-import { useGetEnabledApplikasjonContext } from '../app/useGetEnabledApplikasjonContext';
 import { ApplicationContextPath } from '../app/ApplicationContextPath';
+import { useGetEnabledApplikasjonContext } from '../app/useGetEnabledApplikasjonContext';
 import { useBehandlingEndret } from '../behandling/useBehandlingEndret';
 import { FagsakApiKeys, LinkCategory, requestFagsakApi, restFagsakApiHooks } from '../data/fagsakContextApi';
 import { FagsakData } from './FagsakData';

@@ -1,13 +1,13 @@
 import React from 'react';
+import { useFieldArray, useFormContext,UseFormGetValues } from 'react-hook-form';
 import { useIntl } from 'react-intl';
-import { UseFormGetValues, useFieldArray, useFormContext } from 'react-hook-form';
-import { Datepicker, PeriodFieldArray } from '@navikt/ft-form-hooks';
-import { required, hasValidDate, dateBeforeOrEqual, dateAfterOrEqual } from '@navikt/ft-form-validators';
 
-import { FrilansFormValues, FrilansSubFormValues } from '../types';
+import { HStack } from '@navikt/ds-react';
+import { Datepicker, PeriodFieldArray } from '@navikt/ft-form-hooks';
+import { dateAfterOrEqual,dateBeforeOrEqual, hasValidDate, required } from '@navikt/ft-form-validators';
 
 import { FRILANS_NAME_PREFIX } from '../constants';
-import { HStack } from '@navikt/ds-react';
+import { FrilansFormValues, FrilansSubFormValues } from '../types';
 
 const getValue = (
   getValues: UseFormGetValues<FrilansFormValues>,

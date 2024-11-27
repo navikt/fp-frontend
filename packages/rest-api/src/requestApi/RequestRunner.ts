@@ -1,12 +1,12 @@
 import { ResponseType } from 'axios';
 
-import EventType from './eventType';
-import AsyncPollingStatus from './asyncPollingStatus';
 import HttpClientApi from '../HttpClientApiTsType';
-import { Response } from './ResponseTsType';
 import RequestAdditionalConfig from '../RequestAdditionalConfigTsType';
-import TimeoutError from './error/TimeoutError';
+import AsyncPollingStatus from './asyncPollingStatus';
 import RequestErrorEventHandler from './error/RequestErrorEventHandler';
+import TimeoutError from './error/TimeoutError';
+import EventType from './eventType';
+import { Response } from './ResponseTsType';
 
 const HTTP_ACCEPTED = 202;
 const MAX_POLLING_ATTEMPTS = 50;

@@ -1,9 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
+
 import { BodyShort, Heading, Label } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { AnkeVurderingOmgjoer, AnkeVurdering as ankeVurderingType, KodeverkType } from '@navikt/fp-kodeverk';
+import { AnkeVurdering as ankeVurderingType, AnkeVurderingOmgjoer, KodeverkType } from '@navikt/fp-kodeverk';
 import { AlleKodeverk, AnkeVurdering } from '@navikt/fp-types';
 
 interface OwnProps {

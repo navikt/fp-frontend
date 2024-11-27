@@ -1,7 +1,8 @@
-import { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+import { Meta, StoryObj } from '@storybook/react';
 
-import { FagsakYtelseType, BehandlingType, BehandlingArsakType } from '@navikt/fp-kodeverk';
+import { BehandlingArsakType,BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
+
 import { MenyNyBehandlingIndex } from './MenyNyBehandlingIndex';
 
 const BEHANDLINGSTYPER = [

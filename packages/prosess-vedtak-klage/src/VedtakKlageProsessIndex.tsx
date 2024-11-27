@@ -1,10 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { KlageVurdering, StandardProsessPanelProps } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
-import { VedtakKlageForm, ForhandsvisData } from './components/VedtakKlageForm';
+import { KlageVurdering, StandardProsessPanelProps } from '@navikt/fp-types';
+
+import { ForhandsvisData,VedtakKlageForm } from './components/VedtakKlageForm';
+
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);

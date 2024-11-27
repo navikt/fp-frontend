@@ -1,10 +1,11 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
+
 import { render, screen } from '@testing-library/react';
 
 import { RestApiMock } from '@navikt/fp-utils-test';
 
-import { requestFagsakApi, FagsakApiKeys } from '../../data/fagsakContextApi';
+import { FagsakApiKeys,requestFagsakApi } from '../../data/fagsakContextApi';
 import { HistorikkIndex } from './HistorikkIndex';
 
 describe('<HistorikkIndex>', () => {

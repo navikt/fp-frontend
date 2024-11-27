@@ -1,30 +1,32 @@
 import React from 'react';
-import { StoryFn } from '@storybook/react';
+
 import { action } from '@storybook/addon-actions';
+import { StoryFn } from '@storybook/react';
 
 import {
-  Behandling,
-  BeregningsresultatEs,
-  Beregningsgrunnlag,
-  BeregningsresultatDagytelse,
-  Vilkar,
-  Aksjonspunkt,
-  Fagsak,
-} from '@navikt/fp-types';
-import {
-  BehandlingArsakType,
-  VilkarUtfallType,
-  KonsekvensForYtelsen,
-  BehandlingResultatType,
-  VilkarType,
-  BehandlingType,
-  BehandlingStatus,
-  FagsakYtelseType,
-  AksjonspunktStatus,
   AksjonspunktKode,
+  AksjonspunktStatus,
+  BehandlingArsakType,
+  BehandlingResultatType,
+  BehandlingStatus,
+  BehandlingType,
+  FagsakYtelseType,
+  KonsekvensForYtelsen,
+  VilkarType,
+  VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import {
+  Aksjonspunkt,
+  Behandling,
+  Beregningsgrunnlag,
+  BeregningsresultatDagytelse,
+  BeregningsresultatEs,
+  Fagsak,
+  Vilkar,
+} from '@navikt/fp-types';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
+
 import VedtakProsessIndex from './VedtakProsessIndex';
 
 const defaultBehandling = {

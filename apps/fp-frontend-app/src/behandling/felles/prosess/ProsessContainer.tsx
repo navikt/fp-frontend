@@ -1,12 +1,13 @@
 import React, { ReactElement, useCallback, useMemo, useState } from 'react';
+
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 
 import { Behandling } from '@navikt/fp-types';
 
+import { ProsessPanelExtraInitProps,ProsessPanelInitProps } from '../typer/prosessPanelInitProps';
+import { ProsessPanelMenyData } from '../typer/prosessPanelMenyData';
 import { BehandlingHenlagtPanel } from './BehandlingHenlagtPanel';
 import { ProsessMeny } from './ProsessMeny';
-import { ProsessPanelMenyData } from '../typer/prosessPanelMenyData';
-import { ProsessPanelInitProps, ProsessPanelExtraInitProps } from '../typer/prosessPanelInitProps';
 
 import styles from './prosessContainer.module.css';
 

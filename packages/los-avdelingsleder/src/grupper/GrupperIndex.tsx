@@ -1,8 +1,10 @@
 import React, { FunctionComponent, useEffect } from 'react';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
+
 import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
-import { RestApiPathsKeys, restApiHooks } from '../data/fplosRestApi';
+
+import { restApiHooks,RestApiPathsKeys } from '../data/fplosRestApi';
 import GrupperPanel from './components/GrupperPanel';
 
 interface OwnProps {

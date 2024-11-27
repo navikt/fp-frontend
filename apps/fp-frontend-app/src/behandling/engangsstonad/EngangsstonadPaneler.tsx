@@ -3,22 +3,22 @@ import React, { useCallback } from 'react';
 import { AksessRettigheter, ArbeidsgiverOpplysningerPerId, Behandling, Fagsak, Personoversikt } from '@navikt/fp-types';
 
 import { BehandlingContainer } from '../felles/BehandlingContainer';
-import { SakenFaktaInitPanel } from '../fellesPaneler/fakta/SakenFaktaInitPanel';
-import { YtelserFaktaInitPanel } from '../fellesPaneler/fakta/YtelserFaktaInitPanel';
-import { VergeFaktaInitPanel } from '../fellesPaneler/fakta/VergeFaktaInitPanel';
-import { OmsorgvilkaretFaktaInitPanel } from '../fellesPaneler/fakta/OmsorgvilkaretFaktaInitPanel';
+import { FaktaPanelInitProps } from '../felles/typer/faktaPanelInitProps';
+import { ProsessPanelExtraInitProps,ProsessPanelInitProps } from '../felles/typer/prosessPanelInitProps';
 import { AdopsjonsvilkaretFaktaInitPanel } from '../fellesPaneler/fakta/AdopsjonsvilkaretFaktaInitPanel';
 import { FodselvilkaretFaktaInitPanel } from '../fellesPaneler/fakta/FodselvilkaretFaktaInitPanel';
-import { VarselProsessStegInitPanel } from '../fellesPaneler/prosess/VarselProsessStegInitPanel';
-import { InngangsvilkarEsProsessStegInitPanel } from './prosessPaneler/InngangsvilkarEsProsessStegInitPanel';
-import { OpplysningspliktProsessStegInitPanel } from '../fellesPaneler/prosess/OpplysningspliktProsessStegInitPanel';
-import { BeregningEsProsessStegInitPanel } from './prosessPaneler/BeregningEsProsessStegInitPanel';
-import { SimuleringProsessStegInitPanel } from '../fellesPaneler/prosess/SimuleringProsessStegInitPanel';
-import { VedtakEsProsessStegInitPanel } from './prosessPaneler/VedtakEsProsessStegInitPanel';
-import { SoknadsfristEsProsessStegInitPanel } from './prosessPaneler/SoknadsfristEsProsessStegInitPanel';
-import { FaktaPanelInitProps } from '../felles/typer/faktaPanelInitProps';
-import { ProsessPanelInitProps, ProsessPanelExtraInitProps } from '../felles/typer/prosessPanelInitProps';
 import { MedlemskapsvilkaretFaktaInitPanel } from '../fellesPaneler/fakta/MedlemskapsvilkaretFaktaInitPanel';
+import { OmsorgvilkaretFaktaInitPanel } from '../fellesPaneler/fakta/OmsorgvilkaretFaktaInitPanel';
+import { SakenFaktaInitPanel } from '../fellesPaneler/fakta/SakenFaktaInitPanel';
+import { VergeFaktaInitPanel } from '../fellesPaneler/fakta/VergeFaktaInitPanel';
+import { YtelserFaktaInitPanel } from '../fellesPaneler/fakta/YtelserFaktaInitPanel';
+import { OpplysningspliktProsessStegInitPanel } from '../fellesPaneler/prosess/OpplysningspliktProsessStegInitPanel';
+import { SimuleringProsessStegInitPanel } from '../fellesPaneler/prosess/SimuleringProsessStegInitPanel';
+import { VarselProsessStegInitPanel } from '../fellesPaneler/prosess/VarselProsessStegInitPanel';
+import { BeregningEsProsessStegInitPanel } from './prosessPaneler/BeregningEsProsessStegInitPanel';
+import { InngangsvilkarEsProsessStegInitPanel } from './prosessPaneler/InngangsvilkarEsProsessStegInitPanel';
+import { SoknadsfristEsProsessStegInitPanel } from './prosessPaneler/SoknadsfristEsProsessStegInitPanel';
+import { VedtakEsProsessStegInitPanel } from './prosessPaneler/VedtakEsProsessStegInitPanel';
 
 interface Props {
   behandling: Behandling;

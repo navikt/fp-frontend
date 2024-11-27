@@ -3,6 +3,7 @@ import { Meta, StoryObj } from '@storybook/react';
 
 import { BehandlingResultatType, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { BehandlingAppKontekst } from '@navikt/fp-types';
+
 import { MenyHenleggIndex } from './MenyHenleggIndex';
 
 const BEHANDLINGRESULTAT_TYPER = [

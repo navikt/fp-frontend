@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import { Meta, StoryObj } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
-import { BehandlingAppKontekst, Behandlingsresultat, KodeverkMedNavn } from '@navikt/fp-types';
-import { KodeverkType, BehandlingType, BehandlingStatus } from '@navikt/fp-kodeverk';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
-import '@navikt/ft-ui-komponenter/dist/style.css';
+import { action } from '@storybook/addon-actions';
+import { Meta, StoryObj } from '@storybook/react';
+
+import { BehandlingStatus,BehandlingType, KodeverkType } from '@navikt/fp-kodeverk';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { BehandlingAppKontekst, Behandlingsresultat, KodeverkMedNavn } from '@navikt/fp-types';
 
 import { BehandlingVelgerSakIndex } from './BehandlingVelgerSakIndex';
+
+import '@navikt/ft-ui-komponenter/dist/style.css';
 
 const getKodeverkMedNavn = (kode: string, kodeverk: KodeverkType) => {
   // @ts-ignore

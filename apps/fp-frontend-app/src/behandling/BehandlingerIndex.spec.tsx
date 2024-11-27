@@ -1,8 +1,9 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
+
 import { render, screen } from '@testing-library/react';
 
-import { Fagsak, BehandlingAppKontekst } from '@navikt/fp-types';
+import { BehandlingAppKontekst,Fagsak } from '@navikt/fp-types';
 
 import { FagsakData } from '../fagsak/FagsakData';
 import { BehandlingerIndex } from './BehandlingerIndex';

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-import initRestMethods from './initRestMethods';
 import HttpClientApi from '../HttpClientApiTsType';
+import initRestMethods from './initRestMethods';
 
 /**
  * getAxiosHttpClientApi

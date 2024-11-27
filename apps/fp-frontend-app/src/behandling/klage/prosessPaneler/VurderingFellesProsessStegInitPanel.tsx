@@ -1,20 +1,21 @@
 import React, { useCallback, useState } from 'react';
 
-import { KlageVurdering as KlageVurderingKodeverk, AksjonspunktKode } from '@navikt/fp-kodeverk';
-import {
-  KlagevurderingProsessIndex,
-  AksjonspunktVerdier,
-  KlageVurderingBrevData,
-} from '@navikt/fp-prosess-klagevurdering';
-import { Behandling, Fagsak, ForhåndsvisMeldingParams, KlageVurdering } from '@navikt/fp-types';
-import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
-import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
-import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
-import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
-import { KlageBehandlingModal } from '../modaler/KlageBehandlingModal';
+import { AksjonspunktKode,KlageVurdering as KlageVurderingKodeverk } from '@navikt/fp-kodeverk';
+import { ProsessStegCode } from '@navikt/fp-konstanter';
+import {
+  AksjonspunktVerdier,
+  KlageVurderingBrevData,
+  KlagevurderingProsessIndex,
+} from '@navikt/fp-prosess-klagevurdering';
+import { Behandling, Fagsak, ForhåndsvisMeldingParams, KlageVurdering } from '@navikt/fp-types';
+
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
+import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
+import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
+import { KlageBehandlingModal } from '../modaler/KlageBehandlingModal';
 
 const lagForhandsvisCallback =
   (

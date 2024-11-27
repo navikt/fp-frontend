@@ -1,29 +1,29 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useCallback,useEffect, useState } from 'react';
 import { RawIntlProvider } from 'react-intl';
-import moment from 'moment';
+import { Link, useLocation } from 'react-router-dom';
+
 import { createIntl, parseQueryString } from '@navikt/ft-utils';
+import moment from 'moment';
+
+import { EventType } from '@navikt/fp-rest-api';
+import { useRestApiError } from '@navikt/fp-rest-api-hooks';
 import { ForbiddenPage, UnauthorizedPage } from '@navikt/fp-sak-infosider';
 
-import { useRestApiError } from '@navikt/fp-rest-api-hooks';
-import { EventType } from '@navikt/fp-rest-api';
-
 import { FagsakApiKeys, restFagsakApiHooks } from '../data/fagsakContextApi';
-import { ErrorBoundary } from './ErrorBoundary';
 import { AppConfigResolver } from './AppConfigResolver';
-import { Home } from './components/Home';
 import { Dekorator } from './components/Dekorator';
+import { Home } from './components/Home';
+import { ErrorBoundary } from './ErrorBoundary';
+
+import '../globalCss/global.module.css';
 
 import messages from '../../i18n/nb_NO.json';
 
 import '@navikt/ds-css';
 import '@navikt/ds-css-internal';
-
 import '@navikt/ft-ui-komponenter/dist/style.css';
 import '@navikt/ft-form-hooks/dist/style.css';
 import '@navikt/ft-plattform-komponenter/dist/style.css';
-
-import '../globalCss/global.module.css';
 
 const EMPTY_ARRAY = [] as any[];
 

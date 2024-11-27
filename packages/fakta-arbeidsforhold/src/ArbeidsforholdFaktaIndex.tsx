@@ -1,10 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { ArbeidsgiverOpplysningerPerId, StandardFaktaPanelProps, ArbeidOgInntektsmelding } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
+import { ArbeidOgInntektsmelding,ArbeidsgiverOpplysningerPerId, StandardFaktaPanelProps } from '@navikt/fp-types';
+
 import ArbeidsforholdInfoPanel from './components/ArbeidsforholdInfoPanel';
+
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);

@@ -1,6 +1,6 @@
+import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import moment from 'moment';
 
-import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { ArbeidsgiverOpplysninger } from '@navikt/fp-types';
 
 // vanlig arbeidsgivernavn (orgnr)...arbeidsforholdid

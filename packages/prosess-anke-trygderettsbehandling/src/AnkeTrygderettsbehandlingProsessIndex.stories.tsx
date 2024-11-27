@@ -1,9 +1,10 @@
 import React from 'react';
+
 import { StoryFn } from '@storybook/react';
 
-import { AnkeOmgjorArsak, AnkeVurderingOmgjoer, AnkeVurdering as ankeVurderingKodeverk } from '@navikt/fp-kodeverk';
-import { AnkeVurdering } from '@navikt/fp-types';
+import { AnkeOmgjorArsak, AnkeVurdering as ankeVurderingKodeverk,AnkeVurderingOmgjoer } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { AnkeVurdering } from '@navikt/fp-types';
 
 import AnkeTrygderettsbehandlingProsessIndex from './AnkeTrygderettsbehandlingProsessIndex';
 

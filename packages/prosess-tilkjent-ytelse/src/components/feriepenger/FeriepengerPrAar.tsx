@@ -1,12 +1,13 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
-import dayjs from 'dayjs';
-import { Label, BodyShort } from '@navikt/ds-react';
 
-import { ArbeidsgiverOpplysningerPerId, FeriepengegrunnlagAndel, AlleKodeverk } from '@navikt/fp-types';
-import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
-import { KodeverkType, getKodeverknavnFn } from '@navikt/fp-kodeverk';
+import { BodyShort,Label } from '@navikt/ds-react';
 import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
+import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
+import dayjs from 'dayjs';
+
+import { getKodeverknavnFn,KodeverkType } from '@navikt/fp-kodeverk';
+import { AlleKodeverk,ArbeidsgiverOpplysningerPerId, FeriepengegrunnlagAndel } from '@navikt/fp-types';
 
 const finnAlleAndelerForOpptjeningsår = (
   andeler: FeriepengegrunnlagAndel[],

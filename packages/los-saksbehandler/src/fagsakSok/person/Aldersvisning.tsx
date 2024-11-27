@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+
 import { BodyShort } from '@navikt/ds-react';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 

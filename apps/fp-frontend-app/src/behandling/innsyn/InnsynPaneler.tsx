@@ -2,8 +2,8 @@ import React, { useCallback } from 'react';
 
 import { Behandling, Fagsak } from '@navikt/fp-types';
 
-import { ProsessPanelInitProps } from '../felles/typer/prosessPanelInitProps';
 import { BehandlingContainer } from '../felles/BehandlingContainer';
+import { ProsessPanelInitProps } from '../felles/typer/prosessPanelInitProps';
 import { BehandleInnsynProsessStegInitPanel } from './prosessPaneler/BehandleInnsynProsessStegInitPanel';
 import { InnsynVedtakProsessStegInitPanel } from './prosessPaneler/InnsynVedtakProsessStegInitPanel';
 

@@ -1,10 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { InntektArbeidYtelse } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
+import { InntektArbeidYtelse } from '@navikt/fp-types';
+
 import YtelserFaktaPanel from './components/YtelserFaktaPanel';
+
 import messages from '../i18n/nb_NO.json';
 
 interface OwnProps {

@@ -1,8 +1,7 @@
 import React, { FunctionComponent, ReactElement, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
-import dayjs from 'dayjs';
-import norskFormat from 'dayjs/locale/nb';
-import { Label, BodyShort } from '@navikt/ds-react';
+
+import { BodyShort,Label } from '@navikt/ds-react';
 import {
   FlexColumn,
   FlexContainer,
@@ -12,9 +11,12 @@ import {
   TableRow,
   VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
-import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT, formatCurrencyNoKr } from '@navikt/ft-utils';
-import { BesteberegningInntekt, Månedsgrunnlag, ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
+import { DDMMYYYY_DATE_FORMAT, formatCurrencyNoKr,ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import dayjs from 'dayjs';
+import norskFormat from 'dayjs/locale/nb';
+
 import { KodeverkType } from '@navikt/fp-kodeverk';
+import { ArbeidsgiverOpplysningerPerId,BesteberegningInntekt, Månedsgrunnlag } from '@navikt/fp-types';
 
 import styles from './besteManederVisningPanel.module.css';
 

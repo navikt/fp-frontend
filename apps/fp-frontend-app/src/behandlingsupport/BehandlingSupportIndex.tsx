@@ -1,8 +1,7 @@
 import React, { FunctionComponent, useCallback, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useIntl } from 'react-intl';
+import { useNavigate } from 'react-router-dom';
 
-import { Tabs } from '@navikt/ds-react';
 import {
   ArrowUndoIcon,
   ClockDashedIcon,
@@ -11,15 +10,17 @@ import {
   PaperplaneIcon,
   PersonCheckmarkFillIcon,
 } from '@navikt/aksel-icons';
+import { Tabs } from '@navikt/ds-react';
+
 import { getSupportPanelLocationCreator } from '../app/paths';
-import { HistorikkIndex } from './historikk/HistorikkIndex';
-import { MeldingIndex } from './melding/MeldingIndex';
-import { DokumentIndex } from './dokument/DokumentIndex';
-import { TotrinnskontrollIndex } from './totrinnskontroll/TotrinnskontrollIndex';
 import { useTrackRouteParam } from '../app/useTrackRouteParam';
 import { FagsakData } from '../fagsak/FagsakData';
+import { DokumentIndex } from './dokument/DokumentIndex';
+import { HistorikkIndex } from './historikk/HistorikkIndex';
+import { MeldingIndex } from './melding/MeldingIndex';
 import { NotatIndex } from './notat/NotatIndex';
 import { SupportTabs } from './supportTabs';
+import { TotrinnskontrollIndex } from './totrinnskontroll/TotrinnskontrollIndex';
 
 import styles from './behandlingSupportIndex.module.css';
 

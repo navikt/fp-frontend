@@ -1,9 +1,9 @@
 import React, { ReactElement, useMemo } from 'react';
+import { useFieldArray, useFormContext,UseFormGetValues } from 'react-hook-form';
 import { useIntl } from 'react-intl';
-import { Datepicker, SelectField, PeriodFieldArray } from '@navikt/ft-form-hooks';
-import { Landkode } from '@navikt/fp-kodeverk';
-import { KodeverkMedNavn } from '@navikt/fp-types';
 
+import { HStack } from '@navikt/ds-react';
+import { Datepicker, PeriodFieldArray,SelectField } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   dateBeforeOrEqual,
@@ -11,10 +11,11 @@ import {
   hasValidDate,
   required,
 } from '@navikt/ft-form-validators';
-import { UseFormGetValues, useFieldArray, useFormContext } from 'react-hook-form';
-import dayjs from 'dayjs';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import { HStack } from '@navikt/ds-react';
+import dayjs from 'dayjs';
+
+import { Landkode } from '@navikt/fp-kodeverk';
+import { KodeverkMedNavn } from '@navikt/fp-types';
 
 const defaultUtenlandsOpphold = {
   land: undefined,

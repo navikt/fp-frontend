@@ -2,8 +2,8 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { AksjonspunktKode, VilkarUtfallType } from '@navikt/fp-kodeverk';
-import { UttakProsessIndex } from '@navikt/fp-prosess-uttak';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
+import { UttakProsessIndex } from '@navikt/fp-prosess-uttak';
 import {
   AksessRettigheter,
   ArbeidsgiverOpplysningerPerId,
@@ -16,9 +16,9 @@ import {
   Ytelsefordeling,
 } from '@navikt/fp-types';
 
+import { BehandlingApiKeys, requestBehandlingApi, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
-import { BehandlingApiKeys, requestBehandlingApi, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
 
 const getStatusFromUttakresultat = (behandling: Behandling): string => {
   const harLenke = requestBehandlingApi.hasPath(BehandlingApiKeys.UTTAKSRESULTAT_PERIODER.name);

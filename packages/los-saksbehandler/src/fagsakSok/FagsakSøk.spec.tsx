@@ -1,7 +1,9 @@
 import React from 'react';
-import dayjs from 'dayjs';
-import { render, screen } from '@testing-library/react';
+
 import { composeStories } from '@storybook/react';
+import { render, screen } from '@testing-library/react';
+import dayjs from 'dayjs';
+
 import * as stories from './FagsakSøk.stories';
 
 const { Default, IngentingBleFunnet } = composeStories(stories);

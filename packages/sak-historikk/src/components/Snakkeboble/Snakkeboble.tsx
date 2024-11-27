@@ -1,14 +1,15 @@
 import React from 'react';
-import { Location } from 'history';
 
 import { BodyShort, Chat, VStack } from '@navikt/ds-react';
+import { Location } from 'history';
+
 import { KodeverkType } from '@navikt/fp-kodeverk';
 import { Historikkinnslag } from '@navikt/fp-types';
 
-import { HistorikkDokumentLenke } from './HistorikkDokumentLenke';
-import { formatDate, getStyle, parseBoldText, utledPlassering } from './snakkebobleUtils';
 import { Avatar } from './Avatar';
+import { HistorikkDokumentLenke } from './HistorikkDokumentLenke';
 import { Skjermlenke } from './Skjermlenke';
+import { formatDate, getStyle, parseBoldText, utledPlassering } from './snakkebobleUtils';
 
 interface Props {
   behandlingLocation: Location;

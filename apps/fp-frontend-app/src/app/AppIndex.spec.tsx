@@ -1,15 +1,15 @@
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
-import { render, screen } from '@testing-library/react';
 import { Context as ResponsiveContext } from 'react-responsive';
-import userEvent from '@testing-library/user-event';
+import { MemoryRouter } from 'react-router-dom';
+
 import { composeStories } from '@storybook/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { RestApiMock } from '@navikt/fp-utils-test';
 
+import { FagsakApiKeys,requestFagsakApi } from '../data/fagsakContextApi';
 import { AppIndex } from './AppIndex';
-import { requestFagsakApi, FagsakApiKeys } from '../data/fagsakContextApi';
-
 import * as stories from './AppIndex.stories';
 
 const { BekreftAdopsjon } = composeStories(stories);

@@ -1,7 +1,10 @@
-import { Personopplysninger } from './Personopplysninger';
 import React from 'react';
-import { AlleKodeverk, Personoversikt } from '@navikt/fp-types';
+
 import { VStack } from '@navikt/ds-react';
+
+import { AlleKodeverk, Personoversikt } from '@navikt/fp-types';
+
+import { Personopplysninger } from './Personopplysninger';
 
 interface Props {
   alleKodeverk: AlleKodeverk;

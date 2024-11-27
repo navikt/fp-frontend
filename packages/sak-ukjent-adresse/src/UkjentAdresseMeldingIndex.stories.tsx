@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Meta, StoryFn, StoryObj } from '@storybook/react';
 
 import { UkjentAdresseMeldingIndex } from './UkjentAdresseMeldingIndex';

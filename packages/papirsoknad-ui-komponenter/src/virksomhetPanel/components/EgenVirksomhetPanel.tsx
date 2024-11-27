@@ -1,15 +1,17 @@
 import React from 'react';
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
+
 import { Heading, VStack } from '@navikt/ds-react';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
-import { BorderBox } from '@navikt/ft-ui-komponenter';
 import { required } from '@navikt/ft-form-validators';
+import { BorderBox } from '@navikt/ft-ui-komponenter';
+
 import { AlleKodeverk } from '@navikt/fp-types';
 
-import { useFormContext } from 'react-hook-form';
-import { RegistrerVirksomhetPanel } from './RegistrerVirksomhetPanel';
-import { VirksomhetFormValues } from '../types';
 import { EGEN_VIRKSOMHET_NAME_PREFIX } from '../constants';
+import { VirksomhetFormValues } from '../types';
+import { RegistrerVirksomhetPanel } from './RegistrerVirksomhetPanel';
 import { VirksomhetRad } from './VirksomhetRad';
 
 interface Props {

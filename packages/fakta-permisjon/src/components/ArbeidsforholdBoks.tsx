@@ -1,4 +1,5 @@
 import React, { FunctionComponent, ReactElement } from 'react';
+
 import classnames from 'classnames/bind';
 
 import styles from './arbeidsforholdBoks.module.css';

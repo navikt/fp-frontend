@@ -1,10 +1,12 @@
 import React, { FunctionComponent, useMemo } from 'react';
-import dayjs from 'dayjs';
+
 import { Panel } from '@navikt/ds-react';
-import { KodeverkMedNavn } from '@navikt/fp-types';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import dayjs from 'dayjs';
+
 import { BehandlingType } from '@navikt/fp-kodeverk';
 import { ReactECharts } from '@navikt/fp-los-felles';
+import { KodeverkMedNavn } from '@navikt/fp-types';
 
 const behandlingstypeOrder = [
   BehandlingType.TILBAKEKREVING_REVURDERING,

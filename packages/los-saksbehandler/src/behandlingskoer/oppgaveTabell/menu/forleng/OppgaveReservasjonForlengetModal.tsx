@@ -1,7 +1,8 @@
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
+
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
-import { Modal as NavModal, Button, BodyShort, Label, HStack, VStack } from '@navikt/ds-react';
+import { BodyShort, Button, HStack, Label, Modal as NavModal, VStack } from '@navikt/ds-react';
 import { getDateAndTime } from '@navikt/ft-utils';
 
 import { Oppgave } from '@navikt/fp-los-felles';

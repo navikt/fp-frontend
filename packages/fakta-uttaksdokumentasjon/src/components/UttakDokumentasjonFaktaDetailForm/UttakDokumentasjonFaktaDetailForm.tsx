@@ -1,26 +1,28 @@
 import React, { FunctionComponent, ReactNode, useCallback, useState } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
 import { useFieldArray, useForm } from 'react-hook-form';
-import dayjs from 'dayjs';
+import { FormattedMessage, useIntl } from 'react-intl';
+
 import { BodyShort, Button, HStack, Label, Link, ReadMore, VStack } from '@navikt/ds-react';
+import { Form, NumberField, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { maxValue, minValue, required } from '@navikt/ft-form-validators';
 import { calcDaysAndWeeks, ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import { Form, NumberField, RadioGroupPanel } from '@navikt/ft-form-hooks';
-import { DokumentasjonVurderingBehov } from '@navikt/fp-types';
-import { FOLKETRYGDLOVEN_KAP14_13_URL } from '@navikt/fp-konstanter';
-import { Boks } from '@navikt/fp-fakta-felles';
+import dayjs from 'dayjs';
 
+import { Boks } from '@navikt/fp-fakta-felles';
+import { FOLKETRYGDLOVEN_KAP14_13_URL } from '@navikt/fp-konstanter';
+import { DokumentasjonVurderingBehov } from '@navikt/fp-types';
+
+import FormValues, { VurderingsAlternativ } from '../../../types/FormValues';
+import { getFormatertPeriode, periodeErMerEnnEnDag } from '../../utils/periodeUtils';
+import Card from '../Card';
 import { DelOppPeriodeButton, DelOppPeriodeModal } from '../DelOppPeriode';
+import SlåSammenPeriodeButton from '../SlåSammenPeriodeButton';
 import {
   erUttaksperiodeMedAktivitetskravArbeid,
   fraFormValues,
   tilFormValues,
 } from './DokumentasjonVurderingBehovFormMapper';
 import lagVurderingsAlternativer from './VurderingsAlternativUtleder';
-import FormValues, { VurderingsAlternativ } from '../../../types/FormValues';
-import SlåSammenPeriodeButton from '../SlåSammenPeriodeButton';
-import { getFormatertPeriode, periodeErMerEnnEnDag } from '../../utils/periodeUtils';
-import Card from '../Card';
 
 const ReadMoreLink = (msg: ReactNode[]) => (
   <Link inlineText href={FOLKETRYGDLOVEN_KAP14_13_URL} className="lenke" rel="noreferrer" target="_blank">

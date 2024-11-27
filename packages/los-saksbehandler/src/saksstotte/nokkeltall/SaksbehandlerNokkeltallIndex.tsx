@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { RestApiPathsKeys, restApiHooks } from '../../data/fplosSaksbehandlerRestApi';
-
+import { restApiHooks,RestApiPathsKeys } from '../../data/fplosSaksbehandlerRestApi';
 import { SaksbehandlerNokkeltallPanel } from './SaksbehandlerNokkeltallPanel';
 
 interface Props {

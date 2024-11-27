@@ -1,19 +1,21 @@
-import { ExpansionCard, Label, Panel, Table, VStack } from '@navikt/ds-react';
-import { Form } from '@navikt/ft-form-hooks';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import React, { FunctionComponent, useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
+
+import { ExpansionCard, Label, Panel, Table, VStack } from '@navikt/ds-react';
+import { Form } from '@navikt/ft-form-hooks';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
 import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
 
 import { restApiHooks, RestApiPathsKeys } from '../../../data/fplosRestApi';
-import Saksliste from '../../../typer/sakslisteAvdelingTsType';
-
 import SaksbehandlereOgSaksbehandlerGrupper, {
   SaksbehandlerGruppe,
 } from '../../../typer/saksbehandlereOgSaksbehandlerGrupper ';
-import styles from './saksbehandlereForSakslisteForm.module.css';
+import Saksliste from '../../../typer/sakslisteAvdelingTsType';
 import ValgAvSaksbehandlere from './ValgAvSaksbehandlere';
+
+import styles from './saksbehandlereForSakslisteForm.module.css';
 
 const sortSaksbehandlere = (saksbehandlere: SaksbehandlerProfil[]) =>
   saksbehandlere && saksbehandlere instanceof Array

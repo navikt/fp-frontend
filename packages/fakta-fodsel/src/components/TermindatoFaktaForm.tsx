@@ -1,17 +1,18 @@
 import React, { FunctionComponent } from 'react';
-import moment from 'moment';
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Alert, Label, BodyShort, HStack } from '@navikt/ds-react';
 
-import { DateLabel, VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
+import { Alert, BodyShort, HStack,Label } from '@navikt/ds-react';
 import { Datepicker, InputField } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidInteger, maxValue, minValue, required } from '@navikt/ft-form-validators';
+import { DateLabel, FaktaGruppe,VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import moment from 'moment';
+
 import { FaktaBegrunnelseTextFieldNew, isFieldEdited } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, FamilieHendelse, Soknad } from '@navikt/fp-types';
 import { BekreftTerminbekreftelseAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import { useFormContext } from 'react-hook-form';
 import styles from './termindatoFaktaForm.module.css';
 
 const minValue1 = minValue(1);

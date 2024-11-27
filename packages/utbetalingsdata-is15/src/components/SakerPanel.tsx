@@ -1,9 +1,10 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import { Box, Table } from '@navikt/ds-react';
-import { Sak } from '@navikt/fp-types';
 import { DateLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { FormattedMessage } from 'react-intl';
+
+import { Sak } from '@navikt/fp-types';
 
 interface Props {
   saker: Sak[];

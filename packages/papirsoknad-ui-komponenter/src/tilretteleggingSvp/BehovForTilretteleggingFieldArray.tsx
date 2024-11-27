@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
+import { useFieldArray, useFormContext } from 'react-hook-form';
 import { useIntl } from 'react-intl';
+
+import { Datepicker, InputField, PeriodFieldArray,SelectField } from '@navikt/ft-form-hooks';
+import { maxValue,required } from '@navikt/ft-form-validators';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { required, maxValue } from '@navikt/ft-form-validators';
-import { Datepicker, InputField, SelectField, PeriodFieldArray } from '@navikt/ft-form-hooks';
 
 import { TilretteleggingType } from '@navikt/fp-kodeverk';
 
-import { useFieldArray, useFormContext } from 'react-hook-form';
 import styles from './behovForTilretteleggingFieldArray.module.css';
 
 const maxValue3 = maxValue(100);

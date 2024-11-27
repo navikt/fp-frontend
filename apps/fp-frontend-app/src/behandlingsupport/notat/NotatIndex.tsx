@@ -1,9 +1,9 @@
 import React, { useCallback } from 'react';
-
-import { Fagsak } from '@navikt/fp-types';
-import { NotatSakIndex } from '@navikt/fp-sak-notat';
-
 import { useIntl } from 'react-intl';
+
+import { NotatSakIndex } from '@navikt/fp-sak-notat';
+import { Fagsak } from '@navikt/fp-types';
+
 import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
 import { SupportHeaderAndContent } from '../SupportHeader';
 

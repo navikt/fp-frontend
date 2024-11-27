@@ -1,12 +1,14 @@
 import React, { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
-import { Heading, Button, VStack, HStack, Box } from '@navikt/ds-react';
+
+import { Box,Button, Heading, HStack, VStack } from '@navikt/ds-react';
 import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
-import { FamilieHendelseType, FagsakYtelseType, KodeverkType } from '@navikt/fp-kodeverk';
 import { required } from '@navikt/ft-form-validators';
-import { AlleKodeverk } from '@navikt/fp-types';
+
+import { FagsakYtelseType, FamilieHendelseType, KodeverkType } from '@navikt/fp-kodeverk';
 import { SoknadData } from '@navikt/fp-papirsoknad-ui-komponenter';
+import { AlleKodeverk } from '@navikt/fp-types';
 
 export const SØKNAD_TYPER = [FamilieHendelseType.ADOPSJON, FamilieHendelseType.FODSEL];
 

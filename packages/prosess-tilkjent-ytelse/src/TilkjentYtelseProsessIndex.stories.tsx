@@ -1,17 +1,18 @@
 import React from 'react';
-import { StoryFn } from '@storybook/react';
+
 import { action } from '@storybook/addon-actions';
+import { StoryFn } from '@storybook/react';
 
 import {
-  AktivitetStatus,
-  AksjonspunktStatus,
-  ArbeidsforholdHandlingType,
-  StonadskontoType,
-  NavBrukerKjonn,
-  FagsakYtelseType,
-  SoknadType,
   AksjonspunktKode,
+  AksjonspunktStatus,
+  AktivitetStatus,
+  ArbeidsforholdHandlingType,
+  FagsakYtelseType,
+  NavBrukerKjonn,
   RelasjonsRolleType,
+  SoknadType,
+  StonadskontoType,
 } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import {

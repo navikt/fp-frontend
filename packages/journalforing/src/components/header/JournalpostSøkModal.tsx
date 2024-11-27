@@ -1,11 +1,11 @@
 import React, { FunctionComponent, useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { hasValidInteger, minLength, required } from '@navikt/ft-form-validators';
-import { Form, InputField } from '@navikt/ft-form-hooks';
-
-import { Button, Modal, Heading, VStack, HStack, Label, BodyShort } from '@navikt/ds-react';
 import { FormattedMessage, useIntl } from 'react-intl';
+
+import { BodyShort,Button, Heading, HStack, Label, Modal, VStack } from '@navikt/ds-react';
+import { Form, InputField } from '@navikt/ft-form-hooks';
+import { hasValidInteger, minLength, required } from '@navikt/ft-form-validators';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 type Formvalues = {
   journalpostId: string;

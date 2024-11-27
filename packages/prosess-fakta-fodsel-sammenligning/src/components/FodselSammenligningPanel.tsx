@@ -1,10 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import moment from 'moment';
-import { Tag, BodyShort, Heading } from '@navikt/ds-react';
 
+import { BodyShort, Heading,Tag } from '@navikt/ds-react';
 import { FlexColumn, FlexContainer, FlexRow, Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import moment from 'moment';
+
 import { BehandlingType } from '@navikt/fp-kodeverk';
 import { AvklartBarn, FamilieHendelse, Soknad } from '@navikt/fp-types';
 

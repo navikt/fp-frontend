@@ -1,5 +1,5 @@
-import RestKey from './RestKey';
 import RestApiConfigBuilder from './RestApiConfigBuilder';
+import RestKey from './RestKey';
 
 describe('RestApiConfigBuilder', () => {
   it('skal lage config med to rest endepunkter', () => {

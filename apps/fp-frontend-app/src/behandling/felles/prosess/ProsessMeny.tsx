@@ -1,8 +1,11 @@
 import React, { useMemo } from 'react';
+
 import { ProcessMenu, ProcessMenuStepType } from '@navikt/ft-plattform-komponenter';
+
 import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 
 import { ProsessPanelMenyData } from '../typer/prosessPanelMenyData';
+
 import styles from './arrowForProcessMenu.module.css';
 
 const finnProsessmenyType = (status?: string, harApentAksjonspunkt?: boolean): ProcessMenuStepType => {

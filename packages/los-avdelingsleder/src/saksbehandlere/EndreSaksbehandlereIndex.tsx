@@ -1,5 +1,7 @@
 import React, { FunctionComponent } from 'react';
+
 import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
+
 import SaksbehandlerePanel from './components/SaksbehandlerePanel';
 
 interface OwnProps {

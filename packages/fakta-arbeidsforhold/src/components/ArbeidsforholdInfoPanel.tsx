@@ -1,18 +1,19 @@
 import React, { FunctionComponent, useCallback, useMemo, useState } from 'react';
-import moment from 'moment';
-import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { FormattedMessage } from 'react-intl';
+
 import { Heading } from '@navikt/ds-react';
+import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import moment from 'moment';
 
 import {
-  ArbeidOgInntektsmelding,
   AoIArbeidsforhold,
+  ArbeidOgInntektsmelding,
   ArbeidsgiverOpplysningerPerId,
   Inntektsmelding,
 } from '@navikt/fp-types';
 
-import { FormattedMessage } from 'react-intl';
-import PersonArbeidsforholdTable, { erMatch } from './arbeidsforholdTabell/PersonArbeidsforholdTable';
 import ArbeidsforholdDetail from './arbeidsforholdDetaljer/ArbeidsforholdDetail';
+import PersonArbeidsforholdTable, { erMatch } from './arbeidsforholdTabell/PersonArbeidsforholdTable';
 
 const harInntektmelding = (arbeidsforhold: AoIArbeidsforhold, inntektsmeldinger: Inntektsmelding[]): boolean =>
   inntektsmeldinger.some(im => erMatch(arbeidsforhold, im));

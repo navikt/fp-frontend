@@ -1,34 +1,35 @@
 import React, { FunctionComponent, ReactElement, ReactNode, useMemo, useState } from 'react';
-import dayjs from 'dayjs';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
-import { DDMMYY_DATE_FORMAT, ISO_DATE_FORMAT, calcDaysAndWeeks } from '@navikt/ft-utils';
+
 import {
-  FigureCombinationIcon,
-  PlusIcon,
-  MinusIcon,
   ArrowLeftIcon,
   ArrowRightIcon,
-  PersonPregnantIcon,
-  StrollerIcon,
-  PercentIcon,
   DoorOpenIcon,
-  PersonPencilIcon,
-  PauseIcon,
+  FigureCombinationIcon,
   FigureOutwardFillIcon,
+  MinusIcon,
+  PauseIcon,
+  PercentIcon,
+  PersonPencilIcon,
+  PersonPregnantIcon,
+  PlusIcon,
   SilhouetteFillIcon,
+  StrollerIcon,
 } from '@navikt/aksel-icons';
 import { BodyShort, Button, Label, Timeline } from '@navikt/ds-react';
 import { DateLabel, FloatRight, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { calcDaysAndWeeks,DDMMYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import dayjs from 'dayjs';
 
-import { AlleKodeverk, Fagsak, PeriodeSoker } from '@navikt/fp-types';
 import {
-  KodeverkType,
   BehandlingStatus,
+  KodeverkType,
   OppholdArsakType,
   PeriodeResultatType,
   RelasjonsRolleType,
   UttakPeriodeType,
 } from '@navikt/fp-kodeverk';
+import { AlleKodeverk, Fagsak, PeriodeSoker } from '@navikt/fp-types';
 
 import styles from './uttakTidslinje.module.css';
 

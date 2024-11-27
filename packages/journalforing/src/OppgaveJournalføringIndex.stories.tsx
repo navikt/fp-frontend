@@ -1,21 +1,23 @@
 import React from 'react';
+
 import { StoryFn } from '@storybook/react';
-import { RestApiMock } from '@navikt/fp-utils-test';
-import { withRouter } from '@navikt/fp-storybook-utils';
-import { NavAnsatt } from '@navikt/fp-types';
 
 import { FagsakStatus, FagsakYtelseType, FamilieHendelseType } from '@navikt/fp-kodeverk';
+import { withRouter } from '@navikt/fp-storybook-utils';
+import { NavAnsatt } from '@navikt/fp-types';
+import { RestApiMock } from '@navikt/fp-utils-test';
+
 import { requestApi, RestApiPathsKeys } from './data/fpfordelRestApi';
-import JournalforingIndex from './OppgaveJournalføringIndex';
-import Oppgave from './typer/oppgaveTsType';
-import Journalpost from './typer/journalpostTsType';
 import JournalKanal from './kodeverk/journalKanal';
+import JournalpostTilstand, { erEndeligJournalført } from './kodeverk/journalpostTilstand';
+import OppgaveKilde from './kodeverk/oppgaveKilde';
+import JournalforingIndex from './OppgaveJournalføringIndex';
+import Journalpost from './typer/journalpostTsType';
+import Oppgave from './typer/oppgaveTsType';
 
 import '@navikt/ds-css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
 import '@navikt/ft-form-hooks/dist/style.css';
-import OppgaveKilde from './kodeverk/oppgaveKilde';
-import JournalpostTilstand, { erEndeligJournalført } from './kodeverk/journalpostTilstand';
 
 const detaljertJournalpostMal = (medBruker: boolean, tilstand: JournalpostTilstand): Journalpost =>
   ({

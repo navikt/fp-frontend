@@ -1,9 +1,10 @@
 import React, { FunctionComponent } from 'react';
-import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
+
 import { BodyShort, Heading, Label } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import moment from 'moment';
 
 import { AnkeVurdering as AnkeVurderingKodeverk, AnkeVurderingOmgjoer, KodeverkType } from '@navikt/fp-kodeverk';
 import { AlleKodeverk, AnkeVurdering } from '@navikt/fp-types';

@@ -1,9 +1,11 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
-import { Modal, Button, BodyShort, Label, HStack } from '@navikt/ds-react';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { BehandlingResultatType } from '@navikt/fp-kodeverk';
+
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
+import { BodyShort, Button, HStack,Label, Modal } from '@navikt/ds-react';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
+import { BehandlingResultatType } from '@navikt/fp-kodeverk';
 
 import styles from './iverksetterVedtakStatusModal.module.css';
 

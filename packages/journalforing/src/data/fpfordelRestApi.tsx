@@ -1,12 +1,13 @@
 import { createRequestApi, RestApiConfigBuilder, RestKey } from '@navikt/fp-rest-api';
 import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
+
 import JournalførSubmitValue from '../typer/ferdigstillJournalføringSubmit';
-import Journalpost from '../typer/journalpostTsType';
-import Oppgave from '../typer/oppgaveTsType';
-import SaksnummerType from '../typer/saksnummerTsType';
-import OppdaterMedBruker from '../typer/oppdaterBrukerTsType';
 import ForhåndsvisBrukerRespons from '../typer/forhåndsvisBrukerResponsTsType';
+import Journalpost from '../typer/journalpostTsType';
+import OppdaterMedBruker from '../typer/oppdaterBrukerTsType';
+import Oppgave from '../typer/oppgaveTsType';
 import ReserverOppgaveType from '../typer/reserverOppgaveType';
+import SaksnummerType from '../typer/saksnummerTsType';
 
 export const RestApiPathsKeys = {
   ALLE_JOURNAL_OPPGAVER: new RestKey<Oppgave[], { ident: string }>('ALLE_JOURNAL_OPPGAVER'),

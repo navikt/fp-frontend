@@ -1,18 +1,19 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
-import classnames from 'classnames/bind';
-import dayjs from 'dayjs';
-import { BodyShort } from '@navikt/ds-react';
 
+import { BodyShort } from '@navikt/ds-react';
 import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 import { formatCurrencyNoKr, getRangeOfMonths } from '@navikt/ft-utils';
+import classnames from 'classnames/bind';
+import dayjs from 'dayjs';
+
 import { MottakerType } from '@navikt/fp-kodeverk';
 import {
+  ArbeidsgiverOpplysningerPerId,
   DetaljertSimuleringResultat,
   Mottaker,
   SimuleringResultatPerFagområde,
   SimuleringResultatRad,
-  ArbeidsgiverOpplysningerPerId,
 } from '@navikt/fp-types';
 
 import CollapseButton from './CollapseButton';

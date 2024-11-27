@@ -1,4 +1,4 @@
-import { useState, useEffect, DependencyList, useRef } from 'react';
+import { DependencyList, useEffect, useRef,useState } from 'react';
 
 import { RequestApi, RestKey } from '@navikt/fp-rest-api';
 

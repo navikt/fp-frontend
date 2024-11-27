@@ -1,10 +1,11 @@
 import React from 'react';
+
 import { action } from '@storybook/addon-actions';
 import { StoryFn } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, OpptjeningAktivitetType } from '@navikt/fp-kodeverk';
-import { Behandling, Aksjonspunkt, Opptjening } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { Aksjonspunkt, Behandling, Opptjening } from '@navikt/fp-types';
 
 import OpptjeningFaktaIndex from './OpptjeningFaktaIndex';
 

@@ -1,29 +1,31 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import dayjs from 'dayjs';
-import classnames from 'classnames/bind';
-import { BodyShort, Label } from '@navikt/ds-react';
-import { CheckmarkIcon, ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 
+import { CheckmarkIcon, ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
+import { BodyShort, Label } from '@navikt/ds-react';
+import { DateLabel, ExpandableTableRow,PeriodLabel, TableColumn } from '@navikt/ft-ui-komponenter';
+import { TIDENES_ENDE } from '@navikt/ft-utils';
+import classnames from 'classnames/bind';
+import dayjs from 'dayjs';
+
+import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 import {
-  AoIArbeidsforhold,
-  ManglendeInntektsmeldingVurdering,
-  ManueltArbeidsforhold,
   AksjonspunktÅrsak,
+  AlleKodeverk,
+  AoIArbeidsforhold,
   ArbeidOgInntektsmelding,
   Inntektsmelding,
-  AlleKodeverk,
+  ManglendeInntektsmeldingVurdering,
+  ManueltArbeidsforhold,
 } from '@navikt/fp-types';
-import { TableColumn, PeriodLabel, DateLabel, ExpandableTableRow } from '@navikt/ft-ui-komponenter';
-import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
-import { TIDENES_ENDE } from '@navikt/ft-utils';
-import ManueltLagtTilArbeidsforholdForm from './manuelt/ManueltLagtTilArbeidsforholdForm';
-import ManglendeArbeidsforholdForm from './manglendeArbeidsforhold/ManglendeArbeidsforholdForm';
+
+import ArbeidsforholdOgInntektRadData, { Avklaring } from '../types/arbeidsforholdOgInntekt';
 import ArbeidsforholdInformasjonPanel from './felles/ArbeidsforholdInformasjonPanel';
 import InntektsmeldingerPanel from './felles/InntektsmeldingerPanel';
 import InntektsmeldingOpplysningerPanel from './felles/InntektsmeldingOpplysningerPanel';
+import ManglendeArbeidsforholdForm from './manglendeArbeidsforhold/ManglendeArbeidsforholdForm';
 import ManglendeInntektsmeldingForm from './manglendeInntektsmelding/ManglendeInntektsmeldingForm';
-import ArbeidsforholdOgInntektRadData, { Avklaring } from '../types/arbeidsforholdOgInntekt';
+import ManueltLagtTilArbeidsforholdForm from './manuelt/ManueltLagtTilArbeidsforholdForm';
 
 import styles from './arbeidsforholdRad.module.css';
 

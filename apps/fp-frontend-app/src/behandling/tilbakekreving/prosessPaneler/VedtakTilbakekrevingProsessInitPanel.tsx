@@ -1,21 +1,23 @@
 import React, { useCallback, useState } from 'react';
 import { useIntl } from 'react-intl';
-import { ProsessStegCode } from '@navikt/fp-konstanter';
 
-import { BehandlingArsakType, VilkarUtfallType, VedtakResultatType } from '@navikt/fp-kodeverk';
-import { BeregningsresultatTilbakekreving, AlleKodeverkTilbakekreving, Behandlingsresultat } from '@navikt/fp-types';
-import { WarningModal } from '@navikt/ft-ui-komponenter';
 import {
-  VedtakTilbakekrevingProsessIndex,
-  VedtakAksjonspunktCode,
   ForhandsvisData,
+  VedtakAksjonspunktCode,
   Vedtaksbrev,
+  VedtakTilbakekrevingProsessIndex,
 } from '@navikt/ft-prosess-tilbakekreving-vedtak';
+import { WarningModal } from '@navikt/ft-ui-komponenter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
-import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
-import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
+
+import { BehandlingArsakType, VedtakResultatType,VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { ProsessStegCode } from '@navikt/fp-konstanter';
+import { AlleKodeverkTilbakekreving, Behandlingsresultat,BeregningsresultatTilbakekreving } from '@navikt/fp-types';
+
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
 import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
+import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 
 import '@navikt/ft-prosess-tilbakekreving-vedtak/dist/style.css';
 

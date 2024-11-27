@@ -1,11 +1,11 @@
 import { DefaultFormatter, ErrorData as ErrorDataDefault } from './DefaultFormatter';
-import { RestTimeoutFormatter, ErrorData as ErrorDataRestDefault } from './RestTimeoutFormatter';
-import { RestHaltedOrDelayedFormatter, ErrorData as ErrorDataHaltedOrDelayed } from './RestHaltedOrDelayedFormatter';
-import {
-  RestGatewayTimeoutOrNotFoundFormatter,
-  ErrorData as ErrorDataTimeoutOrNotFound,
-} from './RestGatewayTimeoutOrNotFoundFormatter';
 import { ErrorMessage } from './ErrorMessage';
+import {
+  ErrorData as ErrorDataTimeoutOrNotFound,
+  RestGatewayTimeoutOrNotFoundFormatter,
+} from './RestGatewayTimeoutOrNotFoundFormatter';
+import { ErrorData as ErrorDataHaltedOrDelayed,RestHaltedOrDelayedFormatter } from './RestHaltedOrDelayedFormatter';
+import { ErrorData as ErrorDataRestDefault,RestTimeoutFormatter } from './RestTimeoutFormatter';
 
 const defaultFormatter = new DefaultFormatter();
 const formatters = [

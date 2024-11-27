@@ -1,14 +1,15 @@
 import React from 'react';
+
+import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
-import { RestApiMock } from '@navikt/fp-utils-test';
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
+import { RestApiMock } from '@navikt/fp-utils-test';
 
+import { requestApi,RestApiPathsKeys } from '../data/fplosSaksbehandlerRestApi';
 import { FagsakSøkIndex } from './FagsakSøkIndex';
-import { RestApiPathsKeys, requestApi } from '../data/fplosSaksbehandlerRestApi';
 
 import messages from '../../i18n/nb_NO.json';
-import { action } from '@storybook/addon-actions';
 
 const withIntl = getIntlDecorator(messages);
 

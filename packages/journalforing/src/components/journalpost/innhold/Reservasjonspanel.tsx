@@ -1,10 +1,12 @@
 import React, { FunctionComponent, useCallback } from 'react';
-import { BodyLong, Tag, Button, HStack } from '@navikt/ds-react';
 import { FormattedMessage } from 'react-intl';
+
+import { BodyLong, Button, HStack,Tag } from '@navikt/ds-react';
+
 import { NavAnsatt } from '@navikt/fp-types';
-import ReserverOppgaveType from '../../../typer/reserverOppgaveType';
 
 import Oppgave from '../../../typer/oppgaveTsType';
+import ReserverOppgaveType from '../../../typer/reserverOppgaveType';
 
 type OwnProps = Readonly<{
   oppgave: Oppgave;

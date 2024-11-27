@@ -1,12 +1,13 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
-import { BodyShort } from '@navikt/ds-react';
-import { StarFillIcon } from '@navikt/aksel-icons';
 
+import { StarFillIcon } from '@navikt/aksel-icons';
+import { BodyShort } from '@navikt/ds-react';
 import { DateLabel, PeriodLabel, Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 import { decodeHtmlEntity, TIDENES_ENDE } from '@navikt/ft-utils';
-import { ArbeidsgiverOpplysningerPerId, AoIArbeidsforhold, Inntektsmelding } from '@navikt/fp-types';
+
 import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
+import { AoIArbeidsforhold, ArbeidsgiverOpplysningerPerId, Inntektsmelding } from '@navikt/fp-types';
 
 import IngenArbeidsforholdRegistrert from './IngenArbeidsforholdRegistrert';
 

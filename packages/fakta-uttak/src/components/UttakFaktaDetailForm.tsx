@@ -1,24 +1,25 @@
-import React, { FunctionComponent, useCallback, useState, useMemo, useEffect } from 'react';
-import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
-import dayjs from 'dayjs';
+import React, { FunctionComponent, useCallback, useEffect,useMemo, useState } from 'react';
 import { useForm, UseFormGetValues } from 'react-hook-form';
-import { hasValidDate, required } from '@navikt/ft-form-validators';
-import { Datepicker, RadioGroupPanel, Form, SelectField, CheckboxField } from '@navikt/ft-form-hooks';
-import { FlexColumn, FlexContainer, FlexRow, OkAvbrytModal, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+
 import { TrashIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, Label } from '@navikt/ds-react';
+import { CheckboxField,Datepicker, Form, RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
+import { hasValidDate, required } from '@navikt/ft-form-validators';
+import { FlexColumn, FlexContainer, FlexRow, OkAvbrytModal, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { omitMany } from '@navikt/ft-utils';
+import dayjs from 'dayjs';
 
+import { KodeverkType, RelasjonsRolleType, StonadskontoType } from '@navikt/fp-kodeverk';
 import { AlleKodeverk, ArbeidsgiverOpplysningerPerId, Fagsak, FaktaArbeidsforhold } from '@navikt/fp-types';
-import { RelasjonsRolleType, KodeverkType, StonadskontoType } from '@navikt/fp-kodeverk';
 
 import FordelingPeriodeKilde from '../kodeverk/fordelingPeriodeKilde';
-
-import styles from './uttakFaktaDetailForm.module.css';
 import KontrollerFaktaPeriodeMedApMarkering from '../typer/kontrollerFaktaPeriodeMedApMarkering';
 import GraderingOgSamtidigUttakPanel, {
   FormValues as FormValuesGraderingOgSamtidigUttak,
 } from './GraderingOgSamtidigUttakPanel';
+
+import styles from './uttakFaktaDetailForm.module.css';
 
 type FormValues = FormValuesGraderingOgSamtidigUttak & {
   arsakstype: string;

@@ -1,10 +1,11 @@
 import { action } from '@storybook/addon-actions';
+import { Meta, StoryObj } from '@storybook/react/*';
+
+import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
 import { FatterVedtakStatusModal } from './FatterVedtakStatusModal';
 
-import { Meta, StoryObj } from '@storybook/react/*';
 import messages from '../../../../../i18n/nb_NO.json';
-import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
 const withIntl = getIntlDecorator(messages);
 

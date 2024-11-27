@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
-import { Button } from '@navikt/ds-react';
 import { FormattedMessage } from 'react-intl';
+
 import { ScissorsIcon } from '@navikt/aksel-icons';
+import { Button } from '@navikt/ds-react';
 
 interface Props {
   onClick: () => void;

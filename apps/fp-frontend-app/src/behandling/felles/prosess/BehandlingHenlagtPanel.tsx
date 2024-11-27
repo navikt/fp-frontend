@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { BodyShort } from '@navikt/ds-react';
-import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 
+import { BodyShort } from '@navikt/ds-react';
+
+import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
-import { ProsessPanelWrapper } from './ProsessPanelWrapper';
 import { ProsessPanelMenyData } from '../typer/prosessPanelMenyData';
+import { ProsessPanelWrapper } from './ProsessPanelWrapper';
 
 const ID = 'henlagt';
 

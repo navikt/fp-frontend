@@ -1,11 +1,9 @@
 import React from 'react';
-import { RawIntlProvider } from 'react-intl';
 import { useFormContext, UseFormGetValues } from 'react-hook-form';
+import { RawIntlProvider } from 'react-intl';
 
 import { Alert, Heading, HStack, Label, VStack } from '@navikt/ds-react';
-import { BorderBox } from '@navikt/ft-ui-komponenter';
 import { Datepicker, InputField } from '@navikt/ft-form-hooks';
-import { createIntl } from '@navikt/ft-utils';
 import {
   dateAfterOrEqual,
   dateBeforeOrEqual,
@@ -14,6 +12,8 @@ import {
   hasValidInteger,
   required,
 } from '@navikt/ft-form-validators';
+import { BorderBox } from '@navikt/ft-ui-komponenter';
+import { createIntl } from '@navikt/ft-utils';
 
 import { ErBarnetFodt } from './components/ErBarnetFodt';
 import {

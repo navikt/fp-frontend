@@ -1,12 +1,11 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
+import { AksjonspunktStatus, AksjonspunktType,isAksjonspunktOpen, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Behandling, Fagsak, StandardProsessPanelProps, Vilkar } from '@navikt/fp-types';
-
-import { AksjonspunktStatus, isAksjonspunktOpen, VilkarUtfallType, AksjonspunktType } from '@navikt/fp-kodeverk';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import { erReadOnly } from '../utils/readOnlyPanelUtils';
 import { getAlleMerknaderFraBeslutter } from '../utils/getAlleMerknaderFraBeslutter';
+import { erReadOnly } from '../utils/readOnlyPanelUtils';
 import { StandardPropsStateContext } from '../utils/standardPropsStateContext';
 
 export const DEFAULT_FAKTA_KODE = 'default';

@@ -1,10 +1,13 @@
 import React from 'react';
-import { expect, vi, describe, it } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+
 import { composeStories } from '@storybook/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { describe, expect, it,vi } from 'vitest';
+
+import { UttakÅrsak,UttakType, UttakVurdering } from '@navikt/fp-types';
+
 import * as stories from './UttakDokumentasjonFaktaIndex.stories';
-import { UttakType, UttakVurdering, UttakÅrsak } from '@navikt/fp-types';
 
 const {
   AksjonspunktMedUavklartePerioder,

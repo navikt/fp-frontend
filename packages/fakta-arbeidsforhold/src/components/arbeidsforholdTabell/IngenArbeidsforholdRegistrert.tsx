@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { BodyShort } from '@navikt/ds-react';
 
-import { Table, TableRow, TableColumn } from '@navikt/ft-ui-komponenter';
+import { BodyShort } from '@navikt/ds-react';
+import { Table, TableColumn,TableRow } from '@navikt/ft-ui-komponenter';
 
 interface OwnProps {
   headerColumnContent: React.ReactElement[];

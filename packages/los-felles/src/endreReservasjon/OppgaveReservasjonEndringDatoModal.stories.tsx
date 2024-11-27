@@ -1,13 +1,14 @@
 import React from 'react';
+
 import { action } from '@storybook/addon-actions';
 import { StoryFn } from '@storybook/react';
+import dayjs from 'dayjs';
 
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
 import { OppgaveReservasjonEndringDatoModal } from './OppgaveReservasjonEndringDatoModal';
 
 import messages from '../../i18n/nb_NO.json';
-import dayjs from 'dayjs';
 
 const withIntl = getIntlDecorator(messages);
 

@@ -1,6 +1,7 @@
 import React from 'react';
-import { Detail, HStack, VStack } from '@navikt/ds-react';
+
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
+import { Detail, HStack, VStack } from '@navikt/ds-react';
 
 import { Driftsmelding } from '../typer/driftsmeldingTsType';
 

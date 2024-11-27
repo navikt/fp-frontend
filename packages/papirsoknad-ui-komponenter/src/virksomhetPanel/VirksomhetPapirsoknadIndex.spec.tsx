@@ -1,9 +1,9 @@
-import { fireEvent, screen } from '@testing-library/react';
 import { composeStories } from '@storybook/react';
+import { fireEvent, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { expect } from 'vitest';
 
 import * as stories from './VirksomhetPapirsoknadIndex.stories';
-import { expect } from 'vitest';
 
 const { Default } = composeStories(stories);
 

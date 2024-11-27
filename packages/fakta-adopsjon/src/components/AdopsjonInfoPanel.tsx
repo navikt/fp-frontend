@@ -1,28 +1,29 @@
 import React, { FunctionComponent, ReactElement, useCallback, useMemo } from 'react';
-import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
+import { FormattedMessage } from 'react-intl';
+
+import { HStack } from '@navikt/ds-react';
+import { Form } from '@navikt/ft-form-hooks';
+import { AksjonspunktHelpTextTemp,VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import {
+  FaktaBegrunnelseFormValues,
   FaktaBegrunnelseTextFieldNew,
   FaktaSubmitButtonNew,
-  isFieldEdited,
   FieldEditedInfo,
-  FaktaBegrunnelseFormValues,
+  isFieldEdited,
 } from '@navikt/fp-fakta-felles';
-import { Aksjonspunkt, FamilieHendelse, AlleKodeverk, Soknad } from '@navikt/fp-types';
-import { VerticalSpacer, AksjonspunktHelpTextTemp } from '@navikt/ft-ui-komponenter';
 import { AksjonspunktKode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
-import { Form } from '@navikt/ft-form-hooks';
+import { Aksjonspunkt, AlleKodeverk, FamilieHendelse, Soknad } from '@navikt/fp-types';
 import {
   BekreftDokumentertDatoAksjonspunktAp,
   BekreftEktefelleAksjonspunktAp,
   BekreftMannAdoptererAksjonspunktAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import { HStack } from '@navikt/ds-react';
-import MannAdoptererAleneFaktaForm, { FormValues as MannAdoptererFormValues } from './MannAdoptererAleneFaktaForm';
-import EktefelleFaktaForm, { FormValues as EktefelleFormValues } from './EktefelleFaktaForm';
 import DokumentasjonFaktaForm, { FormValues as DokFormValues } from './DokumentasjonFaktaForm';
+import EktefelleFaktaForm, { FormValues as EktefelleFormValues } from './EktefelleFaktaForm';
+import MannAdoptererAleneFaktaForm, { FormValues as MannAdoptererFormValues } from './MannAdoptererAleneFaktaForm';
 
 import styles from './adopsjonInfoPanel.module.css';
 

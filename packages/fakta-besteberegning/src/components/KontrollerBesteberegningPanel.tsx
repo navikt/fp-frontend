@@ -1,11 +1,13 @@
 import React, { FunctionComponent, useState } from 'react';
-import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
+import { FormattedMessage } from 'react-intl';
+
+import { CheckboxField,Form } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { Aksjonspunkt } from '@navikt/fp-types';
+
 import { FaktaBegrunnelseTextFieldNew, FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
-import { AksjonspunktStatus, AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { Form, CheckboxField } from '@navikt/ft-form-hooks';
+import { AksjonspunktKode,AksjonspunktStatus } from '@navikt/fp-kodeverk';
+import { Aksjonspunkt } from '@navikt/fp-types';
 import { ManuellKontrollBesteberegningAP } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 export const buildInitialValues = (aksjonspunkt: Aksjonspunkt): FormValues => {

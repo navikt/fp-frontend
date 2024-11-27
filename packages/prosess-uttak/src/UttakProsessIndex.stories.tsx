@@ -1,26 +1,27 @@
 import React from 'react';
-import { StoryFn } from '@storybook/react';
+
 import { action } from '@storybook/addon-actions';
+import { StoryFn } from '@storybook/react';
 
 import {
+  AksjonspunktKode,
+  AksjonspunktStatus,
+  AksjonspunktType,
+  NavBrukerKjonn,
+  RelasjonsRolleType,
+  UtsettelseArsakCode,
+} from '@navikt/fp-kodeverk';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import {
+  Aksjonspunkt,
   Behandling,
+  Fagsak,
   FamilieHendelseSamling,
   Personoversikt,
   Soknad,
   UttaksresultatPeriode,
   UttakStonadskontoer,
-  Aksjonspunkt,
-  Fagsak,
 } from '@navikt/fp-types';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import {
-  UtsettelseArsakCode,
-  AksjonspunktKode,
-  AksjonspunktType,
-  AksjonspunktStatus,
-  NavBrukerKjonn,
-  RelasjonsRolleType,
-} from '@navikt/fp-kodeverk';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import UttakProsessIndex from './UttakProsessIndex';

@@ -1,13 +1,14 @@
 import React from 'react';
-import { Meta, StoryObj } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
 import { useForm } from 'react-hook-form';
+
 import { Button } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { action } from '@storybook/addon-actions';
+import { Meta, StoryObj } from '@storybook/react';
 
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { ForeldreType } from '@navikt/fp-kodeverk';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 import { PermisjonIndex } from './PermisjonIndex';
 import { PermisjonFormValues } from './types';

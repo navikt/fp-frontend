@@ -1,7 +1,8 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
-import { SideMenu } from '@navikt/ft-plattform-komponenter';
+
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
+import { SideMenu } from '@navikt/ft-plattform-komponenter';
 
 import { FaktaPanelMenyData } from '../typer/faktaPanelMenyData';
 

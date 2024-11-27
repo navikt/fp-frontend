@@ -1,5 +1,6 @@
-import React, { useCallback, KeyboardEvent, MouseEvent } from 'react';
+import React, { KeyboardEvent, MouseEvent,useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
+
 import { Button, HStack, Link } from '@navikt/ds-react';
 
 interface Props {

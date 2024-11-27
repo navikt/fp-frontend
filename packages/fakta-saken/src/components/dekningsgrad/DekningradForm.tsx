@@ -1,15 +1,16 @@
-import { Label, BodyShort, Box, Button, HStack, Heading, VStack } from '@navikt/ds-react';
-import { Form, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
 import React, { FunctionComponent, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
+import { PencilFillIcon, PencilIcon } from '@navikt/aksel-icons';
+import { BodyShort, Box, Button, Heading, HStack, Label, VStack } from '@navikt/ds-react';
+import { Form, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
+import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
+
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Fagsak, Soknad } from '@navikt/fp-types';
 import { OverstyringDekningsgradAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { PencilFillIcon, PencilIcon } from '@navikt/aksel-icons';
 
-import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import styles from './dekningradForm.module.css';
 
 const minLength3 = minLength(3);

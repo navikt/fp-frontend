@@ -1,14 +1,15 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Heading, Accordion } from '@navikt/ds-react';
+
+import { Accordion,Heading } from '@navikt/ds-react';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import {
+  AlleKodeverk,
   ArbeidsgiverOpplysningerPerId,
   Feriepengegrunnlag,
   FeriepengegrunnlagAndel,
-  AlleKodeverk,
 } from '@navikt/fp-types';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import FeriepengerPrAar from './FeriepengerPrAar';
 

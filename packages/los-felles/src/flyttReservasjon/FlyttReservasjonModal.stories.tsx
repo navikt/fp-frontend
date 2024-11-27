@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
+
 import { action } from '@storybook/addon-actions';
 import { StoryFn } from '@storybook/react';
 
-import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
+import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
-import { FlyttReservasjonModal } from './FlyttReservasjonModal';
 import SaksbehandlerProfil from '../typer/saksbehandlerProfilTsType';
+import { FlyttReservasjonModal } from './FlyttReservasjonModal';
 
 import messages from '../../i18n/nb_NO.json';
 

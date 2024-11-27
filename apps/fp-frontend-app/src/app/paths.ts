@@ -1,6 +1,6 @@
+import { buildPath, formatQueryString, parseQueryString } from '@navikt/ft-utils';
 import { Location, Search } from 'history';
 
-import { buildPath, formatQueryString, parseQueryString } from '@navikt/ft-utils';
 import { skjermlenkeCodes } from '@navikt/fp-konstanter';
 
 export const AVDELINGSLEDER_PATH = 'avdelingsleder';

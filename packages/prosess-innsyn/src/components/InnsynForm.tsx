@@ -1,22 +1,23 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import moment from 'moment';
-import { Heading } from '@navikt/ds-react';
 
-import {
-  Kommunikasjonsretning,
-  AksjonspunktKode,
-  KodeverkType,
-  InnsynResultatType as innsynResultatTyperKV,
-  AksjonspunktStatus,
-} from '@navikt/fp-kodeverk';
-import { Form, Datepicker, RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { Heading } from '@navikt/ds-react';
+import { Datepicker, Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import { hasValidDate, required } from '@navikt/ft-form-validators';
+import moment from 'moment';
+
+import {
+  AksjonspunktKode,
+  AksjonspunktStatus,
+  InnsynResultatType as innsynResultatTyperKV,
+  KodeverkType,
+  Kommunikasjonsretning,
+} from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
-import { Aksjonspunkt, Dokument, InnsynDokument, InnsynVedtaksdokument, AlleKodeverk } from '@navikt/fp-types';
+import { Aksjonspunkt, AlleKodeverk,Dokument, InnsynDokument, InnsynVedtaksdokument } from '@navikt/fp-types';
 import { VurderInnsynAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import DocumentListInnsyn from './DocumentListInnsyn';

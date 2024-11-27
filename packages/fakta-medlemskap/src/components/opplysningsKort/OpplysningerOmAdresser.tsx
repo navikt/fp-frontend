@@ -1,8 +1,10 @@
 import React, { FC } from 'react';
-import { AlleKodeverk, MedlemskapAvvik, Medlemskap } from '@navikt/fp-types';
 import { useIntl } from 'react-intl';
+
 import { AvsnittSkiller } from '@navikt/ft-ui-komponenter';
+
 import { erPersonAdresserLike, FaktaKilde, Personopplysninger } from '@navikt/fp-fakta-felles';
+import { AlleKodeverk, Medlemskap,MedlemskapAvvik } from '@navikt/fp-types';
 
 import EkspansjonsKort from '../ekspansjonsKort/EkspansjonsKort';
 import { relevantForAdresser } from '../ekspansjonsKort/medlemsAvvik';

@@ -1,10 +1,11 @@
 import React, { ReactElement } from 'react';
-import classnames from 'classnames/bind';
 import { FormattedMessage } from 'react-intl';
-import { BodyShort } from '@navikt/ds-react';
-import { LoadingPanel, FadingPanel } from '@navikt/ft-ui-komponenter';
-import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 
+import { BodyShort } from '@navikt/ds-react';
+import { FadingPanel,LoadingPanel } from '@navikt/ft-ui-komponenter';
+import classnames from 'classnames/bind';
+
+import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
 import styles from './prosessPanelWrapper.module.css';

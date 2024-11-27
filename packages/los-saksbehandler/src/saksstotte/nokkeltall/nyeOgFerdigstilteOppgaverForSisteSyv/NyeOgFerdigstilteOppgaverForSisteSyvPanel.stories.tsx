@@ -1,13 +1,13 @@
-import dayjs from 'dayjs';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import { BehandlingType } from '@navikt/fp-kodeverk';
+import { Meta, StoryObj } from '@storybook/react/*';
+import dayjs from 'dayjs';
 
+import { BehandlingType } from '@navikt/fp-kodeverk';
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
 import { NyeOgFerdigstilteOppgaverForSisteSyvPanel } from './NyeOgFerdigstilteOppgaverForSisteSyvPanel';
 
 import messages from '../../../../i18n/nb_NO.json';
-import { Meta, StoryObj } from '@storybook/react/*';
 
 const withIntl = getIntlDecorator(messages);
 

@@ -1,21 +1,22 @@
 import React from 'react';
-import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
+
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 import dayjs from 'dayjs';
 
+import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { Oppgave } from '@navikt/fp-los-felles';
 import { alleKodeverkLos } from '@navikt/fp-storybook-utils';
 import { RestApiMock } from '@navikt/fp-utils-test';
 
-import { RestApiGlobalStatePathsKeys, RestApiPathsKeys, requestApi } from './data/fplosSaksbehandlerRestApi';
+import { requestApi,RestApiGlobalStatePathsKeys, RestApiPathsKeys } from './data/fplosSaksbehandlerRestApi';
 import { AndreKriterierType } from './kodeverk/andreKriterierType';
 import { KoSortering } from './kodeverk/KoSortering';
 import { SaksbehandlerIndex } from './SaksbehandlerIndex';
-import { action } from '@storybook/addon-actions';
-import { Saksliste } from './typer/sakslisteTsType';
-import { Oppgave } from '@navikt/fp-los-felles';
-import { Saksbehandler } from './typer/saksbehandlerTsType';
 import { NyeOgFerdigstilteOppgaver } from './typer/nyeOgFerdigstilteOppgaverTsType';
+import { Saksbehandler } from './typer/saksbehandlerTsType';
+import { Saksliste } from './typer/sakslisteTsType';
 
 const SAKSLISTER = [
   {

@@ -1,16 +1,17 @@
 import React, { ReactElement } from 'react';
-import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
+
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import moment from 'moment';
 
 import {
   AksjonspunktKode,
   BehandlingResultatType,
   BehandlingStatus,
-  isUttakAksjonspunkt,
   isFaktaUttakAksjonspunkt,
+  isUttakAksjonspunkt,
 } from '@navikt/fp-kodeverk';
-import { KodeverkMedNavn, TotrinnskontrollAksjonspunkt, Behandlingsresultat } from '@navikt/fp-types';
+import { Behandlingsresultat,KodeverkMedNavn, TotrinnskontrollAksjonspunkt } from '@navikt/fp-types';
 
 import {
   totrinnskontrollaksjonspunktTextCodes,

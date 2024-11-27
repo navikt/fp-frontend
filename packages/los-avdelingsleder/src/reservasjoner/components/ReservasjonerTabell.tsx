@@ -1,12 +1,13 @@
-import React, { FunctionComponent, useState, useCallback, useMemo } from 'react';
-import { Label, BodyShort, Table, VStack } from '@navikt/ds-react';
+import React, { FunctionComponent, useCallback, useMemo,useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { getDateAndTime } from '@navikt/ft-utils';
-import { PersonGroupIcon, CalendarIcon, XMarkIcon } from '@navikt/aksel-icons';
 
+import { CalendarIcon, PersonGroupIcon, XMarkIcon } from '@navikt/aksel-icons';
+import { BodyShort, Label, Table, VStack } from '@navikt/ds-react';
+import { getDateAndTime } from '@navikt/ft-utils';
+
+import { getKodeverknavnFraKode,KodeverkType } from '@navikt/fp-kodeverk';
+import { FlyttReservasjonModal,OppgaveReservasjonEndringDatoModal } from '@navikt/fp-los-felles';
 import { AlleKodeverk } from '@navikt/fp-types';
-import { OppgaveReservasjonEndringDatoModal, FlyttReservasjonModal } from '@navikt/fp-los-felles';
-import { KodeverkType, getKodeverknavnFraKode } from '@navikt/fp-kodeverk';
 
 import { restApiHooks, RestApiPathsKeys } from '../../data/fplosRestApi';
 import Reservasjon from '../../typer/reservasjonTsType';

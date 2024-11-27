@@ -1,9 +1,12 @@
-import { BodyLong, Box, HStack } from '@navikt/ds-react';
 import React, { FC } from 'react';
-import AvvikStatus from './AvvikStatus';
 import { FormattedMessage } from 'react-intl';
-import { MedlemskapAvvik } from '@navikt/fp-types';
+
+import { BodyLong, Box, HStack } from '@navikt/ds-react';
+
 import assertUnreachable from '@navikt/fp-fakta-uttaksdokumentasjon/src/utils/switchCaseUtils';
+import { MedlemskapAvvik } from '@navikt/fp-types';
+
+import AvvikStatus from './AvvikStatus';
 
 const getFormateringsIdForAvvik = (avvik: MedlemskapAvvik) => {
   switch (avvik) {

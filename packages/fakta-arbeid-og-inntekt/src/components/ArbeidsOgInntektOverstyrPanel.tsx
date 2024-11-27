@@ -1,21 +1,22 @@
-import React, { FunctionComponent, useState, useCallback, useMemo } from 'react';
+import React, { FunctionComponent, useCallback, useMemo,useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Alert, BodyShort, Heading, Button, HStack, Spacer } from '@navikt/ds-react';
-import { PlusCircleIcon } from '@navikt/aksel-icons';
 
+import { PlusCircleIcon } from '@navikt/aksel-icons';
+import { Alert, BodyShort, Button, Heading, HStack, Spacer } from '@navikt/ds-react';
+import { AksjonspunktHelpTextHTML, OverstyringKnapp,VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { dateFormat } from '@navikt/ft-utils';
+
+import { AksjonspunktStatus,ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 import {
   Aksjonspunkt,
+  AksjonspunktÅrsak,
   ArbeidOgInntektsmelding,
   Behandling,
   ManueltArbeidsforhold,
-  AksjonspunktÅrsak,
 } from '@navikt/fp-types';
-import { VerticalSpacer, AksjonspunktHelpTextHTML, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
-import { ArbeidsforholdKomplettVurderingType, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 
-import ManueltLagtTilArbeidsforholdForm, { MANUELT_ORG_NR } from './manuelt/ManueltLagtTilArbeidsforholdForm';
 import ArbeidsforholdOgInntektRadData from '../types/arbeidsforholdOgInntekt';
+import ManueltLagtTilArbeidsforholdForm, { MANUELT_ORG_NR } from './manuelt/ManueltLagtTilArbeidsforholdForm';
 
 import styles from './arbeidsOgInntektOverstyrPanel.module.css';
 

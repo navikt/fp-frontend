@@ -1,22 +1,22 @@
-import React, { FunctionComponent, useMemo, useState, useCallback, ReactNode, MouseEvent } from 'react';
+import React, { FunctionComponent, MouseEvent,ReactNode, useCallback, useMemo, useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Label, Button, Link, BodyShort, Heading } from '@navikt/ds-react';
+
 import { ArrowForwardIcon, CheckmarkCircleFillIcon, PencilIcon, XMarkOctagonFillIcon } from '@navikt/aksel-icons';
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer, OkAvbrytModal } from '@navikt/ft-ui-komponenter';
+import { BodyShort, Button, Heading,Label, Link } from '@navikt/ds-react';
+import { FlexColumn, FlexContainer, FlexRow, OkAvbrytModal,VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import {
+  AksjonspunktKode,
   Avslagsarsak,
   BehandlingStatus as behandlingStatusCode,
-  KonsekvensForYtelsen,
   isAvslag,
   isInnvilget,
   isOpphor,
-  AksjonspunktKode,
+  KonsekvensForYtelsen,
 } from '@navikt/fp-kodeverk';
 import { AsyncPollingStatus } from '@navikt/fp-rest-api';
-import { Behandling, Aksjonspunkt, Behandlingsresultat } from '@navikt/fp-types';
-
-import { useFormContext } from 'react-hook-form';
+import { Aksjonspunkt, Behandling, Behandlingsresultat } from '@navikt/fp-types';
 
 import ManueltVedtaksbrevPanel from './ManueltVedtaksbrevPanel';
 import VedtakHelpTextPanel from './VedtakHelpTextPanel';

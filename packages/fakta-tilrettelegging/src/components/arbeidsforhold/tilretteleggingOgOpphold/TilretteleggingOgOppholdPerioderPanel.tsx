@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
 import { useFieldArray } from 'react-hook-form';
+import { FormattedMessage } from 'react-intl';
+
+import { PlusIcon } from '@navikt/aksel-icons';
+import { Button, HStack, Table, VStack } from '@navikt/ds-react';
+import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import dayjs from 'dayjs';
+
 import {
   ArbeidsforholdFodselOgTilrettelegging,
   ArbeidsforholdTilretteleggingDato,
@@ -7,13 +14,8 @@ import {
   SvpTilretteleggingFomKilde,
 } from '@navikt/fp-types';
 
-import { Button, HStack, Table, VStack } from '@navikt/ds-react';
-import { FormattedMessage } from 'react-intl';
-import { PlusIcon } from '@navikt/aksel-icons';
-import dayjs from 'dayjs';
-import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import { TilretteleggingPeriodeTabellRad } from './tilrettelegging/TilretteleggingPeriodeTabellRad';
 import { OppholdPeriodeTabellRad } from './opphold/OppholdPeriodeTabellRad';
+import { TilretteleggingPeriodeTabellRad } from './tilrettelegging/TilretteleggingPeriodeTabellRad';
 
 const finnTilrettelegging = (
   alleFomDatoerSortert: string[],

@@ -1,10 +1,13 @@
 import React, { FunctionComponent } from 'react';
-import { Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag } from '@navikt/fp-types';
+
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
 import { AksjonspunktKode, KodeverkType } from '@navikt/fp-kodeverk';
+import { Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag } from '@navikt/fp-types';
 import { BesteberegningAP } from '@navikt/fp-types-avklar-aksjonspunkter';
-import BesteMånederVisningPanel from './BesteManederVisningPanel';
+
 import BesteberegningResultatGrunnlagPanel from './BesteberegningResultatGrunnlagPanel';
+import BesteMånederVisningPanel from './BesteManederVisningPanel';
 import KontrollerBesteberegningPanel, { FormValues } from './KontrollerBesteberegningPanel';
 
 interface OwnProps {

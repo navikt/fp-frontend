@@ -1,22 +1,22 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 
-import { ProsessStegCode } from '@navikt/fp-konstanter';
-import { Beregningsgrunnlag, Vilkarperiode, ArbeidsgiverOpplysningerPerId, Vilkar as FpVilkar } from '@navikt/fp-types';
-import { TIDENES_ENDE } from '@navikt/ft-utils';
-
-import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import {
   BeregningAksjonspunktSubmitType,
   BeregningsgrunnlagProsessIndex,
-  ProsessBeregningsgrunnlagAvklaringsbehovCode,
-  FtVilkar,
   FtBeregningsgrunnlag,
+  FtVilkar,
+  ProsessBeregningsgrunnlagAvklaringsbehovCode,
 } from '@navikt/ft-prosess-beregningsgrunnlag';
+import { TIDENES_ENDE } from '@navikt/ft-utils';
 
+import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
+import { ProsessStegCode } from '@navikt/fp-konstanter';
+import { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkar as FpVilkar,Vilkarperiode } from '@navikt/fp-types';
+
+import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
-import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
 
 import '@navikt/ft-prosess-beregningsgrunnlag/dist/style.css';
 

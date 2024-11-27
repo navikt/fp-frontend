@@ -1,16 +1,18 @@
 import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 
+import { createIntl } from '@navikt/ft-utils';
+
 import {
-  StandardFaktaPanelProps,
   FamilieHendelseSamling,
   InntektArbeidYtelse,
   Personoversikt,
   Soknad,
+  StandardFaktaPanelProps,
 } from '@navikt/fp-types';
-import { createIntl } from '@navikt/ft-utils';
 
 import { OmsorgOgForeldreansvarInfoPanel } from './components/OmsorgOgForeldreansvarInfoPanel';
+
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);

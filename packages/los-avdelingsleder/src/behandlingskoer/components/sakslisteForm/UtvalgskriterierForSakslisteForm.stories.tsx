@@ -1,16 +1,16 @@
 import React from 'react';
+
 import { action } from '@storybook/addon-actions';
 import { StoryFn } from '@storybook/react';
+
 import { BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
-
+import { alleKodeverkLos,getIntlDecorator } from '@navikt/fp-storybook-utils';
 import { RestApiMock } from '@navikt/fp-utils-test';
-import { getIntlDecorator, alleKodeverkLos } from '@navikt/fp-storybook-utils';
 
-import UtvalgskriterierForSakslisteForm from './UtvalgskriterierForSakslisteForm';
-import koSortering from '../../../kodeverk/KoSortering';
+import { requestApi,RestApiGlobalStatePathsKeys, RestApiPathsKeys } from '../../../data/fplosRestApi';
 import andreKriterierType from '../../../kodeverk/andreKriterierType';
-
-import { RestApiGlobalStatePathsKeys, RestApiPathsKeys, requestApi } from '../../../data/fplosRestApi';
+import koSortering from '../../../kodeverk/KoSortering';
+import UtvalgskriterierForSakslisteForm from './UtvalgskriterierForSakslisteForm';
 
 import messages from '../../../../i18n/nb_NO.json';
 

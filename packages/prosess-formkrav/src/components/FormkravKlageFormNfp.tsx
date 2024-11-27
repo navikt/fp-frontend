@@ -1,29 +1,29 @@
-import React, { FunctionComponent, useMemo, ReactElement } from 'react';
+import React, { FunctionComponent, ReactElement,useMemo } from 'react';
 import { useForm } from 'react-hook-form';
+import { FormattedMessage, IntlShape,useIntl } from 'react-intl';
 
+import { Detail, Heading, HStack, VStack } from '@navikt/ds-react';
 import { Form, RadioGroupPanel, SelectField, TextAreaField } from '@navikt/ft-form-hooks';
-import { AksjonspunktKode, KodeverkType, getKodeverknavnFn } from '@navikt/fp-kodeverk';
-import { KlageVurdering, AlleKodeverk } from '@navikt/fp-types';
-import { KlageFormkravAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import moment from 'moment';
-import { FormattedMessage, useIntl, IntlShape } from 'react-intl';
-import { Detail, HStack, Heading, VStack } from '@navikt/ds-react';
-
-import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
+import { hasValidText,required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { DATE_TIME_FORMAT, formaterFritekst } from '@navikt/ft-utils';
-import { required, hasValidText } from '@navikt/ft-form-validators';
+import moment from 'moment';
+
+import { AksjonspunktKode, getKodeverknavnFn,KodeverkType } from '@navikt/fp-kodeverk';
+import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
+import { AlleKodeverk,KlageVurdering } from '@navikt/fp-types';
+import { KlageFormkravAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import AvsluttetBehandling from '../types/avsluttetBehandlingTsType';
-
-import styles from './formkravKlageFormNfp.module.css';
+import FormkravMellomlagretDataType from '../types/FormkravMellomlagretDataType';
 import TempsaveKlageButton, {
-  IKKE_PA_KLAGD_VEDTAK,
   erTilbakekreving,
+  IKKE_PA_KLAGD_VEDTAK,
   påklagdTilbakekrevingInfo,
   skalLagreFritekstfelt,
 } from './TempsaveKlageButton';
-import FormkravMellomlagretDataType from '../types/FormkravMellomlagretDataType';
+
+import styles from './formkravKlageFormNfp.module.css';
 
 export const getPaKlagdVedtak = (klageFormkavResultat?: KlageVurdering['klageFormkravResultatKA']): string =>
   klageFormkavResultat?.paKlagdBehandlingUuid ? `${klageFormkavResultat.paKlagdBehandlingUuid}` : IKKE_PA_KLAGD_VEDTAK;

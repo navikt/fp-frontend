@@ -1,17 +1,19 @@
 import React, { FunctionComponent, useMemo } from 'react';
-import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
-import dayjs from 'dayjs';
 import { useForm } from 'react-hook-form';
+import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+
 import { ScissorsIcon } from '@navikt/aksel-icons';
 import { BodyShort, Box, Button, Heading, HStack, Label, Modal, VStack } from '@navikt/ds-react';
 import { Datepicker, Form } from '@navikt/ft-form-hooks';
-import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
+import { PeriodLabel } from '@navikt/ft-ui-komponenter';
+import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import dayjs from 'dayjs';
 
-import styles from './delOppPeriodeModal.module.css';
 import { VurderingsBehovPeriode } from '../../../types/FormValues';
 import { getFormatertPeriode, splitPeriodePåDato } from '../../utils/periodeUtils';
+
+import styles from './delOppPeriodeModal.module.css';
 
 const validerInnenforIntervall = (fom: string, tom: string, intl: IntlShape) => (dato: string) => {
   if (!dayjs(dato).isBefore(fom) && dayjs(dato).isBefore(tom)) {

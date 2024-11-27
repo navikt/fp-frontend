@@ -1,9 +1,12 @@
 import React from 'react';
-import { Inntektsmelding } from '@navikt/fp-types';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { formatCurrencyNoKr } from '@navikt/ft-utils';
+
 import { VStack } from '@navikt/ds-react';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
+import { formatCurrencyNoKr } from '@navikt/ft-utils';
+
+import { Inntektsmelding } from '@navikt/fp-types';
+
 import { InntektsmeldingInfoBlokk } from './InntektsmeldingInfoBlokk';
 
 export const Refusjon = ({ inntektsmelding }: { inntektsmelding: Inntektsmelding }) => {

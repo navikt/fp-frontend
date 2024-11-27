@@ -1,14 +1,16 @@
 import React, { FunctionComponent } from 'react';
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
+
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
+
 import { BehandlingType } from '@navikt/fp-kodeverk';
 
-import { useFormContext } from 'react-hook-form';
+import { restApiHooks, RestApiPathsKeys } from '../../../../data/fplosRestApi';
 import useLosKodeverk from '../../../../data/useLosKodeverk';
 import KoSorteringType from '../../../../typer/koSorteringTsType';
-import { restApiHooks, RestApiPathsKeys } from '../../../../data/fplosRestApi';
-import DatoSorteringValg from './DatoSorteringValg';
 import BelopSorteringValg from './BelopSorteringValg';
+import DatoSorteringValg from './DatoSorteringValg';
 
 interface OwnProps {
   valgtSakslisteId: number;

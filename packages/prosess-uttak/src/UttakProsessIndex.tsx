@@ -1,19 +1,20 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
+import { createIntl } from '@navikt/ft-utils';
+
 import {
   ArbeidsgiverOpplysningerPerId,
-  StandardProsessPanelProps,
+  Fagsak,
   FamilieHendelseSamling,
+  PeriodeSoker,
   Personoversikt,
   Soknad,
+  StandardProsessPanelProps,
   UttaksresultatPeriode,
   UttakStonadskontoer,
   Ytelsefordeling,
-  PeriodeSoker,
-  Fagsak,
 } from '@navikt/fp-types';
-import { createIntl } from '@navikt/ft-utils';
 
 import UttakProsessPanel from './components/UttakProsessPanel';
 

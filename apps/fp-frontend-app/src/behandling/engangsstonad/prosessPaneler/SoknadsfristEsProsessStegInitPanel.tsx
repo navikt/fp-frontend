@@ -1,16 +1,16 @@
 import React, { useCallback, useState } from 'react';
 import { useIntl } from 'react-intl';
 
-import { SoknadsfristVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-soknadsfrist';
 import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
+import { SoknadsfristVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-soknadsfrist';
 import { AksessRettigheter, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
 
-import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
-import { OverstyringPanelDef } from '../../felles/prosess/OverstyringPanelDef';
-import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
-import { skalViseProsessPanel } from '../../felles/prosess/skalViseProsessPanel';
 import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
+import { OverstyringPanelDef } from '../../felles/prosess/OverstyringPanelDef';
+import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { skalViseProsessPanel } from '../../felles/prosess/skalViseProsessPanel';
+import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.SOKNADSFRISTVILKARET, AksjonspunktKode.OVERSTYR_SOKNADSFRISTVILKAR];
 

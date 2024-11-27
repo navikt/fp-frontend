@@ -1,10 +1,12 @@
-import React, { ReactElement, useState, useCallback, useMemo } from 'react';
+import React, { ReactElement, useCallback, useMemo,useState } from 'react';
+
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
+
 import { Behandling } from '@navikt/fp-types';
 
-import { FaktaMeny } from './FaktaMeny';
-import { FaktaPanelMenyData } from '../typer/faktaPanelMenyData';
 import { FaktaPanelInitProps } from '../typer/faktaPanelInitProps';
+import { FaktaPanelMenyData } from '../typer/faktaPanelMenyData';
+import { FaktaMeny } from './FaktaMeny';
 
 import styles from './faktaContainer.module.css';
 

@@ -1,10 +1,10 @@
 import React from 'react';
-import moment from 'moment';
-import { render, screen, waitFor } from '@testing-library/react';
-import { composeStories } from '@storybook/react';
-import userEvent from '@testing-library/user-event';
 
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { composeStories } from '@storybook/react';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import moment from 'moment';
 
 import * as stories from './VarselOmRevurderingProsessIndex.stories';
 

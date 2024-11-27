@@ -1,27 +1,29 @@
 import React, { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
+
+import { HGrid } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
-import { KodeverkMedNavn, AlleKodeverk } from '@navikt/fp-types';
-import { ForeldreType, KodeverkType, FamilieHendelseType } from '@navikt/fp-kodeverk';
+
+import { FamilieHendelseType,ForeldreType, KodeverkType } from '@navikt/fp-kodeverk';
 import {
-  SoknadData,
-  MottattDatoPapirsoknadIndex,
-  FrilansPapirsoknadIndex,
-  OppholdINorgePapirsoknadIndex,
-  SprakPapirsoknadIndex,
-  LagreSoknadPapirsoknadIndex,
-  VirksomhetPapirsoknadIndex,
-  OmsorgOgAdopsjonPapirsoknadIndex,
-  InntektsgivendeArbeidPapirsoknadIndex,
   AndreYtelserPapirsoknadIndex,
-  RettigheterPapirsoknadIndex,
   AnnenForelderPapirsoknadIndex,
-  TerminOgFodselPanel,
   BekreftelsePanel,
   DekningsgradIndex,
+  FrilansPapirsoknadIndex,
+  InntektsgivendeArbeidPapirsoknadIndex,
+  LagreSoknadPapirsoknadIndex,
+  MottattDatoPapirsoknadIndex,
+  OmsorgOgAdopsjonPapirsoknadIndex,
+  OppholdINorgePapirsoknadIndex,
   PermisjonIndex,
+  RettigheterPapirsoknadIndex,
+  SoknadData,
+  SprakPapirsoknadIndex,
+  TerminOgFodselPanel,
+  VirksomhetPapirsoknadIndex,
 } from '@navikt/fp-papirsoknad-ui-komponenter';
-import { HGrid } from '@navikt/ds-react';
+import { AlleKodeverk,KodeverkMedNavn } from '@navikt/fp-types';
 
 const buildInitialValues = (andreYtelser: KodeverkMedNavn[]) => ({
   ...MottattDatoPapirsoknadIndex.initialValues(),

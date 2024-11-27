@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 
+import { Oppgave,OppgaveStatus } from '@navikt/fp-los-felles';
 import { errorOfType, ErrorTypes, getErrorResponseData } from '@navikt/fp-rest-api';
 import { FagsakEnkel } from '@navikt/fp-types';
-import { OppgaveStatus, Oppgave } from '@navikt/fp-los-felles';
 
-import { FagsakSøk } from './FagsakSøk';
-import { RestApiPathsKeys, restApiHooks } from '../data/fplosSaksbehandlerRestApi';
+import { restApiHooks,RestApiPathsKeys } from '../data/fplosSaksbehandlerRestApi';
 import { OppgaveErReservertAvAnnenModal } from '../reservertAvAnnen/OppgaveErReservertAvAnnenModal';
+import { FagsakSøk } from './FagsakSøk';
 
 const EMPTY_ARRAY_FAGSAK: FagsakEnkel[] = [];
 const EMPTY_ARRAY_OPPGAVER: Oppgave[] = [];

@@ -1,9 +1,5 @@
 import React, { useState } from 'react';
-import { FlyttReservasjonModal, Oppgave, OppgaveReservasjonEndringDatoModal } from '@navikt/fp-los-felles';
 import { FormattedMessage, useIntl } from 'react-intl';
-
-import { restApiHooks, RestApiPathsKeys } from '../../../data/fplosSaksbehandlerRestApi';
-import { OppgaveReservasjonForlengetModal } from './forleng/OppgaveReservasjonForlengetModal';
 
 import {
   ArrowUndoIcon,
@@ -13,8 +9,14 @@ import {
   PersonHeadsetIcon,
 } from '@navikt/aksel-icons';
 import { ActionMenu, Button } from '@navikt/ds-react';
-import styles from './oppgaveHandlingerMenu.module.css';
+
+import { FlyttReservasjonModal, Oppgave, OppgaveReservasjonEndringDatoModal } from '@navikt/fp-los-felles';
+
+import { restApiHooks, RestApiPathsKeys } from '../../../data/fplosSaksbehandlerRestApi';
+import { OppgaveReservasjonForlengetModal } from './forleng/OppgaveReservasjonForlengetModal';
 import { OpphevReservasjonModal } from './OpphevReservasjonModal';
+
+import styles from './oppgaveHandlingerMenu.module.css';
 
 interface Props {
   oppgave: Oppgave;

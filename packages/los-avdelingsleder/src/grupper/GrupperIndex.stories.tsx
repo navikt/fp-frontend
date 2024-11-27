@@ -1,12 +1,13 @@
 import React from 'react';
 
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
-
 import { RestApiMock } from '@navikt/fp-utils-test';
-import messages from '../../i18n/nb_NO.json';
-import { RestApiPathsKeys, requestApi } from '../data/fplosRestApi';
+
+import { requestApi,RestApiPathsKeys } from '../data/fplosRestApi';
 import SaksbehandlereOgSaksbehandlerGrupper from '../typer/saksbehandlereOgSaksbehandlerGrupper ';
 import GrupperIndex from './GrupperIndex';
+
+import messages from '../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
 

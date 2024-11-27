@@ -1,5 +1,7 @@
 import React, { FunctionComponent, useState } from 'react';
-import { ArbeidsgiverOpplysningerPerId, Feriepengegrunnlag, AlleKodeverk } from '@navikt/fp-types';
+
+import { AlleKodeverk,ArbeidsgiverOpplysningerPerId, Feriepengegrunnlag } from '@navikt/fp-types';
+
 import FeriepengerPanel from './FeriepengerPanel';
 
 interface OwnProps {

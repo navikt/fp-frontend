@@ -1,5 +1,6 @@
-import { MedlemskapVurdering } from '../../types/vurderingMedlemskapForm';
 import { FagsakYtelseType } from '@navikt/fp-kodeverk';
+
+import { MedlemskapVurdering } from '../../types/vurderingMedlemskapForm';
 
 const oppfylt = {
   label: 'Oppfylt',

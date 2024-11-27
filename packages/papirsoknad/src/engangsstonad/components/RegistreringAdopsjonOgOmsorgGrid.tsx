@@ -1,13 +1,14 @@
 import React from 'react';
-import { AlleKodeverk } from '@navikt/fp-types';
-import {
-  SprakPapirsoknadIndex,
-  RettigheterPapirsoknadIndex,
-  OppholdINorgePapirsoknadIndex,
-  OmsorgOgAdopsjonPapirsoknadIndex,
-  SoknadData,
-} from '@navikt/fp-papirsoknad-ui-komponenter';
+
 import { FamilieHendelseType } from '@navikt/fp-kodeverk';
+import {
+  OmsorgOgAdopsjonPapirsoknadIndex,
+  OppholdINorgePapirsoknadIndex,
+  RettigheterPapirsoknadIndex,
+  SoknadData,
+  SprakPapirsoknadIndex,
+} from '@navikt/fp-papirsoknad-ui-komponenter';
+import { AlleKodeverk } from '@navikt/fp-types';
 
 interface Props {
   readOnly: boolean;

@@ -1,25 +1,27 @@
 import React from 'react';
 import { RawIntlProvider } from 'react-intl';
-import { Location } from 'history';
+
 import { createIntl } from '@navikt/ft-utils';
+import { Location } from 'history';
 
 import {
-  KodeverkType,
-  BehandlingStatus,
   AksjonspunktKode,
   AksjonspunktKodeTilbakekreving,
-  FagsakYtelseType,
-  BehandlingType,
   BehandlingArsakType,
+  BehandlingStatus,
+  BehandlingType,
+  FagsakYtelseType,
+  KodeverkType,
   VurderPaNyttArsakType,
 } from '@navikt/fp-kodeverk';
 import { skjermlenkeCodesFpTilbake as skjermlenkeCodes } from '@navikt/fp-konstanter';
-import { BehandlingAppKontekst, AlleKodeverk, AlleKodeverkTilbakekreving, KodeverkMedNavn } from '@navikt/fp-types';
+import { AlleKodeverk, AlleKodeverkTilbakekreving, BehandlingAppKontekst, KodeverkMedNavn } from '@navikt/fp-types';
 import { FatterVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import { TotrinnskontrollBeslutterForm, FormValues } from './components/TotrinnskontrollBeslutterForm';
 import { AksjonspunktGodkjenningData } from './components/AksjonspunktGodkjenningFieldArray';
+import { FormValues,TotrinnskontrollBeslutterForm } from './components/TotrinnskontrollBeslutterForm';
 import { TotrinnskontrollSaksbehandlerPanel } from './components/TotrinnskontrollSaksbehandlerPanel';
+
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);

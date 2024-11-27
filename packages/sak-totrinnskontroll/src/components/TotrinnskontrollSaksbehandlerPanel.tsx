@@ -1,14 +1,15 @@
 import React, { ReactNode, useCallback } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { NavLink } from 'react-router-dom';
+
+import { CheckmarkIcon,XMarkOctagonIcon } from '@navikt/aksel-icons';
 import { BodyShort, HStack } from '@navikt/ds-react';
-import { Location } from 'history';
-import { XMarkOctagonIcon, CheckmarkIcon } from '@navikt/aksel-icons';
-import { decodeHtmlEntity } from '@navikt/ft-utils';
-
-import { KodeverkMedNavn, BehandlingAppKontekst, TotrinnskontrollSkjermlenkeContext } from '@navikt/fp-types';
-
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { decodeHtmlEntity } from '@navikt/ft-utils';
+import { Location } from 'history';
+
+import { BehandlingAppKontekst, KodeverkMedNavn, TotrinnskontrollSkjermlenkeContext } from '@navikt/fp-types';
+
 import { getAksjonspunkttekst } from './aksjonspunktTekster/aksjonspunktTekstUtleder';
 
 import styles from './totrinnskontrollSaksbehandlerPanel.module.css';

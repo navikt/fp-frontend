@@ -1,5 +1,7 @@
 import React, { FunctionComponent } from 'react';
+
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
 import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
 
 import LeggTilSaksbehandlerForm from './LeggTilSaksbehandlerForm';

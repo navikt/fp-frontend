@@ -1,17 +1,16 @@
-import React, { useEffect, useCallback, useMemo } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { RisikoklassifiseringSakIndex, AvklartRisikoklassifiseringAp } from '@navikt/fp-sak-risikoklassifisering';
+import React, { useCallback, useEffect, useMemo } from 'react';
+import { useLocation,useNavigate } from 'react-router-dom';
 
-import { NavAnsatt, AksessRettigheter, Behandling } from '@navikt/fp-types';
 import { AksjonspunktStatus, KodeverkType } from '@navikt/fp-kodeverk';
+import { AvklartRisikoklassifiseringAp,RisikoklassifiseringSakIndex } from '@navikt/fp-sak-risikoklassifisering';
+import { AksessRettigheter, Behandling,NavAnsatt } from '@navikt/fp-types';
 
-import { useTrackRouteParam } from '../../app/useTrackRouteParam';
-import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
 import { getRiskPanelLocationCreator } from '../../app/paths';
+import { useTrackRouteParam } from '../../app/useTrackRouteParam';
 import { getAccessRights } from '../../app/util/access';
-import { FagsakData } from '../../fagsak/FagsakData';
-
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../../data/behandlingContextApi';
+import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
+import { FagsakData } from '../../fagsak/FagsakData';
 
 const getReadOnly = (navAnsatt: NavAnsatt, rettigheter: AksessRettigheter, erPaaVent: boolean) => {
   if (erPaaVent) {

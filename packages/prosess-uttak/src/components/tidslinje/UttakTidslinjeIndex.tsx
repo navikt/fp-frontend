@@ -1,19 +1,20 @@
-import React, { useMemo, FunctionComponent } from 'react';
-import dayjs from 'dayjs';
-import { calcDays, ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import React, { FunctionComponent,useMemo } from 'react';
 
+import { calcDays, ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import dayjs from 'dayjs';
+
+import { BehandlingType,OppholdArsakType, SoknadType } from '@navikt/fp-kodeverk';
 import {
+  AlleKodeverk,
   Behandling,
+  Fagsak,
+  FamilieHendelse,
   FamilieHendelseSamling,
+  PeriodeSoker,
   Personoversikt,
   Soknad,
-  FamilieHendelse,
   Ytelsefordeling,
-  PeriodeSoker,
-  Fagsak,
-  AlleKodeverk,
 } from '@navikt/fp-types';
-import { SoknadType, OppholdArsakType, BehandlingType } from '@navikt/fp-kodeverk';
 
 import UttakTidslinje, { PeriodeSøkerMedTidslinjedata, TidslinjeTimes } from './UttakTidslinje';
 

@@ -1,10 +1,12 @@
 import React, { FC, PropsWithChildren } from 'react';
-import { MedlemskapAvvik } from '@navikt/fp-types';
-import { Box, ExpansionCard, HStack, VStack } from '@navikt/ds-react';
-import { FaktaKilde, getLabelForFaktaKilde } from '@navikt/fp-fakta-felles';
 
-import AvvikStatus from './AvvikStatus';
+import { Box, ExpansionCard, HStack, VStack } from '@navikt/ds-react';
+
+import { FaktaKilde, getLabelForFaktaKilde } from '@navikt/fp-fakta-felles';
+import { MedlemskapAvvik } from '@navikt/fp-types';
+
 import AvvikMerknad from './AvvikMerknad';
+import AvvikStatus from './AvvikStatus';
 
 interface Props {
   kilde: FaktaKilde;

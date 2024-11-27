@@ -1,17 +1,18 @@
 import React from 'react';
 
+import { VStack } from '@navikt/ds-react';
+
 import { Oppgave } from '@navikt/fp-los-felles';
 
+import { restApiHooks,RestApiPathsKeys } from '../data/fplosSaksbehandlerRestApi';
 import {
   getValueFromLocalStorage,
-  setValueInLocalStorage,
   removeValueFromLocalStorage,
+  setValueInLocalStorage,
 } from '../data/localStorageHelper';
 import { Saksliste } from '../typer/sakslisteTsType';
-import { RestApiPathsKeys, restApiHooks } from '../data/fplosSaksbehandlerRestApi';
-import { SakslisteVelgerForm } from './sakslisteVelger/SakslisteVelgerForm';
 import { OppgaverTabell } from './oppgaveTabell/OppgaverTabell';
-import { VStack } from '@navikt/ds-react';
+import { SakslisteVelgerForm } from './sakslisteVelger/SakslisteVelgerForm';
 
 interface Props {
   valgtSakslisteId?: number;

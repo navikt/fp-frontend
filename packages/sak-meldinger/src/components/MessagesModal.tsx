@@ -1,7 +1,8 @@
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Button, Modal, Label, HStack } from '@navikt/ds-react';
+
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
+import { Button, HStack,Label, Modal } from '@navikt/ds-react';
 
 import styles from './MessagesModal.module.css';
 

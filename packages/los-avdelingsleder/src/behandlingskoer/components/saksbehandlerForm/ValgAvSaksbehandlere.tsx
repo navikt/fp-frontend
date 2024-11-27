@@ -1,6 +1,7 @@
+import React, { FunctionComponent } from 'react';
+
 import { HStack, VStack } from '@navikt/ds-react';
 import { CheckboxField } from '@navikt/ft-form-hooks';
-import React, { FunctionComponent } from 'react';
 
 import { restApiHooks, RestApiPathsKeys } from '../../../data/fplosRestApi';
 import Saksliste from '../../../typer/sakslisteAvdelingTsType';

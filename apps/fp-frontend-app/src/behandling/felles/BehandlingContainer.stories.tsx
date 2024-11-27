@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { action } from '@storybook/addon-actions';
-import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 
+import { action } from '@storybook/addon-actions';
+import { Meta, StoryObj } from '@storybook/react/*';
+
+import { VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 import { Behandling } from '@navikt/fp-types';
+
 import { BehandlingContainer } from './BehandlingContainer';
 import { FaktaPanelInitProps } from './typer/faktaPanelInitProps';
 import { ProsessPanelInitProps } from './typer/prosessPanelInitProps';
 
 import messages from '../../../i18n/nb_NO.json';
-import { Meta, StoryObj } from '@storybook/react/*';
-import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
 const withIntl = getIntlDecorator(messages);
 

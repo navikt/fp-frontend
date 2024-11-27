@@ -1,16 +1,17 @@
-import React, { useCallback, FunctionComponent } from 'react';
+import React, { FunctionComponent,useCallback } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
-import dayjs from 'dayjs';
-import { Table, ExpandableTableRow, TableColumn, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { calcDaysAndWeeks, dateFormat } from '@navikt/ft-utils';
-import { Button, Heading } from '@navikt/ds-react';
+
 import { PlusCircleIcon } from '@navikt/aksel-icons';
+import { Button, Heading } from '@navikt/ds-react';
+import { ExpandableTableRow, Table, TableColumn, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { calcDaysAndWeeks, dateFormat } from '@navikt/ft-utils';
+import dayjs from 'dayjs';
 
-import { AlleKodeverk, ArbeidsgiverOpplysningerPerId, Fagsak, FaktaArbeidsforhold } from '@navikt/fp-types';
 import { KodeverkType } from '@navikt/fp-kodeverk';
+import { AlleKodeverk, ArbeidsgiverOpplysningerPerId, Fagsak, FaktaArbeidsforhold } from '@navikt/fp-types';
 
-import UttakFaktaDetailForm, { utledÅrsakstype, Årsakstype } from './UttakFaktaDetailForm';
 import KontrollerFaktaPeriodeMedApMarkering from '../typer/kontrollerFaktaPeriodeMedApMarkering';
+import UttakFaktaDetailForm, { Årsakstype,utledÅrsakstype } from './UttakFaktaDetailForm';
 
 import styles from './uttakFaktaTable.module.css';
 

@@ -1,11 +1,12 @@
 import React, { FunctionComponent } from 'react';
-import moment from 'moment';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { BodyShort, Heading, Label } from '@navikt/ds-react';
-import { DATE_TIME_FORMAT } from '@navikt/ft-utils';
-import { KodeverkType } from '@navikt/fp-kodeverk';
 
+import { BodyShort, Heading, Label } from '@navikt/ds-react';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { DATE_TIME_FORMAT } from '@navikt/ft-utils';
+import moment from 'moment';
+
+import { KodeverkType } from '@navikt/fp-kodeverk';
 import { AlleKodeverk, KlageVurdering } from '@navikt/fp-types';
 
 import AvsluttetBehandling from '../types/avsluttetBehandlingTsType';

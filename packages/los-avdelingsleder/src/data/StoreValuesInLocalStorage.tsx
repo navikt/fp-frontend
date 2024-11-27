@@ -1,4 +1,5 @@
 import { FunctionComponent, useEffect } from 'react';
+
 import { setValueInLocalStorage } from './localStorageHelper';
 
 interface OwnProps {

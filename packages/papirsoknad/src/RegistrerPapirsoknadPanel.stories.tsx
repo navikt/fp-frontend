@@ -1,10 +1,13 @@
-import { alleKodeverk, getIntlDecorator, withRouter } from '@navikt/fp-storybook-utils';
-import messages from '../i18n/nb_NO.json';
 import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
-import { RegistrerPapirsoknadPanel } from './RegistrerPapirsoknadPanel';
-import { Fagsak } from '@navikt/fp-types';
+
 import { FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { alleKodeverk, getIntlDecorator, withRouter } from '@navikt/fp-storybook-utils';
+import { Fagsak } from '@navikt/fp-types';
+
+import { RegistrerPapirsoknadPanel } from './RegistrerPapirsoknadPanel';
+
+import messages from '../i18n/nb_NO.json';
 
 const meta = {
   component: RegistrerPapirsoknadPanel,
