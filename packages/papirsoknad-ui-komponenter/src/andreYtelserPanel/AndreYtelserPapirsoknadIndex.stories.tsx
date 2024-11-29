@@ -6,7 +6,6 @@ import { Form } from '@navikt/ft-form-hooks';
 import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
-import { KodeverkType } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 import { AndreYtelserPapirsoknadIndex } from './AndreYtelserPapirsoknadIndex';
@@ -23,15 +22,13 @@ const meta = {
   },
   render: (args, { parameters: { submitCallback } }) => {
     const formMethods = useForm({
-      defaultValues: AndreYtelserPapirsoknadIndex.initialValues(alleKodeverk[KodeverkType.ARBEID_TYPE]),
+      defaultValues: AndreYtelserPapirsoknadIndex.initialValues(),
     });
 
     return (
       <Form
         formMethods={formMethods}
-        onSubmit={(values: any) =>
-          submitCallback(AndreYtelserPapirsoknadIndex.transformValues(values, alleKodeverk[KodeverkType.ARBEID_TYPE]))
-        }
+        onSubmit={(values: any) => submitCallback(AndreYtelserPapirsoknadIndex.transformValues(values))}
       >
         <VStack gap="10">
           <AndreYtelserPapirsoknadIndex {...args} />
