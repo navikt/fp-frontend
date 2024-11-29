@@ -1,52 +1,37 @@
-import React from 'react';
-import { useFieldArray, useFormContext,UseFormGetValues } from 'react-hook-form';
+import React, { useEffect } from 'react';
+import { useFieldArray, useFormContext } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
+import { TrashIcon } from '@navikt/aksel-icons';
+import { Button, HStack } from '@navikt/ds-react';
 import { Datepicker, PeriodFieldArray } from '@navikt/ft-form-hooks';
-import { dateAfterOrEqual, dateBeforeOrEqual,hasValidDate, required } from '@navikt/ft-form-validators';
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { dateAfterOrEqual, dateBeforeOrEqual, hasValidDate, required } from '@navikt/ft-form-validators';
 
-import styles from './renderAndreYtelserPerioderFieldArray.module.css';
-
-export const ANDRE_YTELSER_NAME_PREFIX = 'andreYtelser';
-
-export const ANDRE_YTELSER_PERIODE_SUFFIX = 'PERIODER';
-
-export type FormValues = {
-  periodeFom: string;
-  periodeTom: string;
-};
-
-const getValue = (
-  getValues: UseFormGetValues<FormValues>,
-  fieldName: string,
-  // @ts-ignore
-): string => getValues(fieldName);
+import { ANDRE_YTELSER_NAME_PREFIX, ANDRE_YTELSER_PERIODER_NAME } from '../constants';
+import { AndreYtelserFormValue } from '../types';
 
 interface Props {
   readOnly: boolean;
-  name: string;
+  name: `${typeof ANDRE_YTELSER_NAME_PREFIX}.${typeof ANDRE_YTELSER_PERIODER_NAME}.${string}`;
 }
 
-/**
- * RenderAndreYtelserPerioderFieldArray
- *
- * Viser inputfelter for fra og til dato for perioder for andre ytelser
- */
 export const RenderAndreYtelserPerioderFieldArray = ({ readOnly, name }: Props) => {
   const intl = useIntl();
-
   const {
     getValues,
     control,
     trigger,
     formState: { isSubmitted },
-  } = useFormContext<FormValues>();
+  } = useFormContext<AndreYtelserFormValue>();
   const { fields, remove, append } = useFieldArray({
     control,
-    // @ts-ignore Usikker på korleis ein fiksar denne (Dynamisk name basert på verdiar fra backend)
-    name: `${ANDRE_YTELSER_NAME_PREFIX}.${name}`,
+    name,
   });
+  useEffect(() => {
+    if (fields.length === 0) {
+      append({ periodeFom: '', periodeTom: '' });
+    }
+  }, []);
 
   return (
     <PeriodFieldArray
@@ -56,58 +41,51 @@ export const RenderAndreYtelserPerioderFieldArray = ({ readOnly, name }: Props) 
       append={append}
       remove={remove}
     >
-      {(field, index, getRemoveButton) => {
-        const namePart1 = `${ANDRE_YTELSER_NAME_PREFIX}.${name}.${index}`;
+      {(field, index) => {
+        const fieldNamePrefix = `${name}.${index}` as const;
         return (
-          <div key={field.id}>
-            <div className={index !== fields.length - 1 ? styles.notLastRow : ''}>
-              <FlexContainer>
-                <FlexRow>
-                  <FlexColumn>
-                    <Datepicker
-                      name={`${namePart1}.periodeFom`}
-                      label={index === 0 ? intl.formatMessage({ id: 'Registrering.AndreYtelser.periodeFom' }) : ''}
-                      validate={[
-                        required,
-                        hasValidDate,
-                        () => {
-                          const fomVerdi = getValue(getValues, `${namePart1}.periodeFom`);
-                          const tomVerdi = getValue(getValues, `${namePart1}.periodeTom`);
-                          return tomVerdi && fomVerdi ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : null;
-                        },
-                      ]}
-                      onChange={() => (isSubmitted ? trigger() : undefined)}
-                    />
-                  </FlexColumn>
-                  <FlexColumn>
-                    <Datepicker
-                      name={`${namePart1}.periodeTom`}
-                      label={index === 0 ? intl.formatMessage({ id: 'Registrering.AndreYtelser.periodeTom' }) : ''}
-                      validate={[
-                        required,
-                        hasValidDate,
-                        () => {
-                          const fomVerdi = getValue(getValues, `${namePart1}.periodeFom`);
-                          const tomVerdi = getValue(getValues, `${namePart1}.periodeTom`);
-                          return tomVerdi && fomVerdi ? dateAfterOrEqual(fomVerdi)(tomVerdi) : null;
-                        },
-                      ]}
-                      onChange={() => (isSubmitted ? trigger() : undefined)}
-                    />
-                  </FlexColumn>
-                  {getRemoveButton && <FlexColumn>{getRemoveButton()}</FlexColumn>}
-                </FlexRow>
-              </FlexContainer>
-            </div>
-            <VerticalSpacer sixteenPx />
-          </div>
+          <HStack key={field.id} gap="2">
+            <Datepicker
+              name={`${fieldNamePrefix}.periodeFom`}
+              label={index === 0 ? intl.formatMessage({ id: 'Registrering.AndreYtelser.periodeFom' }) : ''}
+              validate={[
+                required,
+                hasValidDate,
+                () => {
+                  const { periodeFom, periodeTom } = getValues(`${name}.${index}`);
+                  return periodeTom && periodeFom ? dateBeforeOrEqual(periodeTom)(periodeFom) : null;
+                },
+              ]}
+              onChange={() => (isSubmitted ? trigger() : undefined)}
+            />
+
+            <Datepicker
+              name={`${name}.${index}.periodeTom`}
+              label={index === 0 ? intl.formatMessage({ id: 'Registrering.AndreYtelser.periodeTom' }) : ''}
+              validate={[
+                required,
+                hasValidDate,
+                () => {
+                  const { periodeFom, periodeTom } = getValues(`${name}.${index}`);
+                  return periodeFom && periodeTom ? dateAfterOrEqual(periodeFom)(periodeTom) : null;
+                },
+              ]}
+              onChange={() => (isSubmitted ? trigger() : undefined)}
+            />
+            {!readOnly && index > 0 && (
+              <div>
+                <Button
+                  size="small"
+                  type="button"
+                  variant="tertiary-neutral"
+                  icon={<TrashIcon />}
+                  onClick={() => remove(index)}
+                />
+              </div>
+            )}
+          </HStack>
         );
       }}
     </PeriodFieldArray>
   );
 };
-
-RenderAndreYtelserPerioderFieldArray.transformValues = ({ periodeFom, periodeTom }: FormValues): FormValues => ({
-  periodeFom,
-  periodeTom,
-});

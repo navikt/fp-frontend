@@ -1,6 +1,7 @@
 import { composeStories } from '@storybook/react';
-import { fireEvent,screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { expect } from 'vitest';
 
 import * as stories from './AndreYtelserPapirsoknadIndex.stories';
 
@@ -26,11 +27,9 @@ describe('<AndreYtelserPapirsoknadIndex>', () => {
 
     const fomInput = screen.getByLabelText('F.o.m.');
     await userEvent.type(fomInput, '14.09.2022');
-    fireEvent.blur(fomInput);
 
     const tomInput = screen.getByLabelText('T.o.m.');
     await userEvent.type(tomInput, '13.09.2022');
-    fireEvent.blur(tomInput);
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
@@ -39,7 +38,6 @@ describe('<AndreYtelserPapirsoknadIndex>', () => {
 
     await userEvent.clear(tomInput);
     await userEvent.type(tomInput, '15.09.2022');
-    fireEvent.blur(tomInput);
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
@@ -66,28 +64,20 @@ describe('<AndreYtelserPapirsoknadIndex>', () => {
 
     expect(await screen.findByText('Andre inntektskilder')).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('Militær eller siviltjeneste'));
+    await userEvent.click(screen.getByLabelText('Militær eller siviltjeneste'));
 
-    expect(await screen.findByText('F.o.m.')).toBeInTheDocument();
+    await userEvent.click(screen.getByLabelText('Legg til periode'));
 
-    const fomInput = screen.getByLabelText('F.o.m.');
-    await userEvent.type(fomInput, '14.09.2022');
-    fireEvent.blur(fomInput);
-
-    const tomInput = screen.getByLabelText('T.o.m.');
-    await userEvent.type(tomInput, '15.09.2022');
-    fireEvent.blur(tomInput);
-
-    await userEvent.click(screen.getAllByText('Legg til periode')[0]);
+    expect(screen.getByText('F.o.m.')).toBeInTheDocument();
+    expect(screen.getByText('T.o.m.')).toBeInTheDocument();
 
     const datoInputs = await screen.findAllByRole('textbox');
     expect(datoInputs).toHaveLength(4);
+    await userEvent.type(datoInputs[0], '14.09.2022');
+    await userEvent.type(datoInputs[1], '15.09.2022');
 
     await userEvent.type(datoInputs[2], '10.10.2022');
-    fireEvent.blur(datoInputs[2]);
-
     await userEvent.type(datoInputs[3], '11.10.2022');
-    fireEvent.blur(datoInputs[3]);
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
@@ -105,6 +95,53 @@ describe('<AndreYtelserPapirsoknadIndex>', () => {
           ytelseType: 'MILITÆR_ELLER_SIVILTJENESTE',
         },
       ],
+    });
+  });
+
+  it('skal delvis fylle ut skjema og få feilmeldinger', async () => {
+    const lagre = vi.fn();
+
+    await Default.run({
+      parameters: {
+        submitCallback: lagre,
+      },
+    });
+
+    expect(await screen.findByText('Andre inntektskilder')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByLabelText('Etterlønn eller sluttpakke'));
+    await userEvent.click(screen.getByLabelText('Ventelønn eller vartpenger'));
+    await userEvent.click(screen.getByLabelText('Militær eller siviltjeneste'));
+
+    await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
+
+    expect(await screen.findAllByText('Feltet må fylles ut')).toHaveLength(6);
+
+    expect(lagre).toHaveBeenCalledTimes(0);
+  });
+
+  it('skal ikke beholde perioder når valg skrus av igjen', async () => {
+    const lagre = vi.fn();
+
+    await Default.run({
+      parameters: {
+        submitCallback: lagre,
+      },
+    });
+
+    await userEvent.click(screen.getByLabelText('Etterlønn eller sluttpakke'));
+
+    await userEvent.type(screen.getByLabelText('F.o.m.'), '14.09.2022');
+
+    await userEvent.type(screen.getByLabelText('T.o.m.'), '15.09.2022');
+
+    await userEvent.click(screen.getByLabelText('Etterlønn eller sluttpakke'));
+
+    await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
+
+    expect(lagre).toHaveBeenCalledOnce();
+    expect(lagre).toHaveBeenCalledWith({
+      andreYtelser: [],
     });
   });
 });
