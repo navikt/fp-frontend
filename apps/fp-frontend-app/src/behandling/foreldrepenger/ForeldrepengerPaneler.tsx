@@ -11,7 +11,7 @@ import {
 
 import { BehandlingContainer } from '../felles/BehandlingContainer';
 import { FaktaPanelInitProps } from '../felles/typer/faktaPanelInitProps';
-import { ProsessPanelExtraInitProps,ProsessPanelInitProps } from '../felles/typer/prosessPanelInitProps';
+import { ProsessPanelExtraInitProps, ProsessPanelInitProps } from '../felles/typer/prosessPanelInitProps';
 import { AdopsjonsvilkaretFaktaInitPanel } from '../fellesPaneler/fakta/AdopsjonsvilkaretFaktaInitPanel';
 import { ArbeidOgInntektFaktaInitPanel } from '../fellesPaneler/fakta/ArbeidOgInntektFaktaInitPanel';
 import { ArbeidsforholdFaktaInitPanel } from '../fellesPaneler/fakta/ArbeidsforholdFaktaInitPanel';
@@ -20,7 +20,7 @@ import { FodselvilkaretFaktaInitPanel } from '../fellesPaneler/fakta/Fodselvilka
 import { FordelingFaktaInitPanel } from '../fellesPaneler/fakta/FordelingFaktaInitPanel';
 import { InntektsmeldingerFaktaInitPanel } from '../fellesPaneler/fakta/InntektsmeldingerFaktaInitPanel';
 import { MedlemskapsvilkaretFaktaInitPanel } from '../fellesPaneler/fakta/MedlemskapsvilkaretFaktaInitPanel';
-import { OmsorgvilkaretFaktaInitPanel } from '../fellesPaneler/fakta/OmsorgvilkaretFaktaInitPanel';
+import { OmsorgOgForeldreansvarFaktaInitPanel } from '../fellesPaneler/fakta/OmsorgOgForeldreansvarFaktaInitPanel';
 import { OpptjeningsvilkaretFaktaInitPanel } from '../fellesPaneler/fakta/OpptjeningsvilkaretFaktaInitPanel';
 import { PermisjonFaktaInitPanel } from '../fellesPaneler/fakta/PermisjonFaktaInitPanel';
 import { SakenFaktaInitPanel } from '../fellesPaneler/fakta/SakenFaktaInitPanel';
@@ -92,7 +92,7 @@ const ForeldrepengerPaneler = ({
         <ArbeidsforholdFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
         <YtelserFaktaInitPanel {...props} />
         <VergeFaktaInitPanel {...props} />
-        <OmsorgvilkaretFaktaInitPanel {...props} personoversikt={personoversikt} />
+        <OmsorgOgForeldreansvarFaktaInitPanel {...props} personoversikt={personoversikt} />
         <AdopsjonsvilkaretFaktaInitPanel {...props} fagsak={fagsak} />
         <FodselvilkaretFaktaInitPanel {...props} />
         <MedlemskapsvilkaretFaktaInitPanel {...props} fagsak={fagsak} />
