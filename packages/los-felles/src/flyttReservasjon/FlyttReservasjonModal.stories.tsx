@@ -1,60 +1,55 @@
 import React, { useState } from 'react';
 
 import { action } from '@storybook/addon-actions';
-import { StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
-import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
-import SaksbehandlerProfil from '../typer/saksbehandlerProfilTsType';
 import { FlyttReservasjonModal } from './FlyttReservasjonModal';
 
 import messages from '../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
 
-export default {
+const meta = {
   title: 'los/FlyttReservasjonModal',
   component: FlyttReservasjonModal,
   decorators: [withIntl],
+  args: {
+    closeModal: action('button-click'),
+    hentSaksbehandler: action('button-click'),
+    resetHentSaksbehandler: action('button-click'),
+    hentSaksbehandlerIsPending: false,
+    hentSaksbehandlerIsSuccess: false,
+    flyttOppgavereservasjon: () => Promise.resolve(),
+  },
+  render: storyArgs => {
+    const [args, setArgs] = useState(storyArgs);
+
+    const hentSaksbehandler = (brukerIdent: string) => {
+      args.hentSaksbehandler?.(brukerIdent);
+      setArgs(oldArgs => ({ ...oldArgs, hentSaksbehandlerIsPending: false, hentSaksbehandlerIsSuccess: true }));
+    };
+
+    return <FlyttReservasjonModal {...args} hentSaksbehandler={hentSaksbehandler} />;
+  },
+} satisfies Meta<typeof FlyttReservasjonModal>;
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: {
+    saksbehandler: undefined,
+  },
 };
 
-const Template: StoryFn<{
-  saksbehandler: SaksbehandlerProfil;
-  hentReserverteOppgaver: (params: any, keepData: boolean) => void;
-}> = ({ saksbehandler, hentReserverteOppgaver }) => {
-  const [harHentet, setHentet] = useState(false);
-  const hentSaksbehandler = () => {
-    setHentet(true);
-    return Promise.resolve(saksbehandler);
-  };
-
-  return (
-    <FlyttReservasjonModal
-      oppgaveId={1}
-      closeModal={action('button-click')}
-      hentReserverteOppgaver={hentReserverteOppgaver}
-      flyttOppgavereservasjon={() => Promise.resolve()}
-      hentSaksbehandler={hentSaksbehandler}
-      hentSaksbehandlerState={harHentet ? RestApiState.SUCCESS : RestApiState.NOT_STARTED}
-      saksbehandler={saksbehandler}
-      resetHentSaksbehandler={() => undefined}
-    />
-  );
-};
-
-export const Default = Template.bind({});
-Default.args = {
-  hentReserverteOppgaver: action('button-click'),
-  saksbehandler: undefined,
-};
-
-export const MedTreffPåSøk = Template.bind({});
-MedTreffPåSøk.args = {
-  hentReserverteOppgaver: action('button-click'),
-  saksbehandler: {
-    brukerIdent: 'R232323',
-    navn: 'Espen Utvikler',
-    ansattAvdeling: 'Avdeling A',
+export const MedTreffPåSøk: Story = {
+  args: {
+    saksbehandler: {
+      brukerIdent: 'R232323',
+      navn: 'Espen Utvikler',
+      ansattAvdeling: 'Avdeling A',
+    },
   },
 };

@@ -1,15 +1,28 @@
-import React, { useEffect,useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { Oppgave,OppgaveStatus } from '@navikt/fp-los-felles';
+import { useMutation } from '@tanstack/react-query';
+
+import { Oppgave, OppgaveStatus } from '@navikt/fp-los-felles';
 import { errorOfType, ErrorTypes, getErrorResponseData } from '@navikt/fp-rest-api';
 import { FagsakEnkel } from '@navikt/fp-types';
 
-import { restApiHooks,RestApiPathsKeys } from '../data/fplosSaksbehandlerRestApi';
+import {
+  getOppgaverForFagsaker,
+  getReservasjonsstatus,
+  reserverOppgavePost,
+  søkFagsakPost,
+} from '../data/fplosSaksbehandlerApi';
 import { OppgaveErReservertAvAnnenModal } from '../reservertAvAnnen/OppgaveErReservertAvAnnenModal';
 import { FagsakSøk } from './FagsakSøk';
+import { SøkFormValues } from './form/SøkForm';
 
 const EMPTY_ARRAY_FAGSAK: FagsakEnkel[] = [];
 const EMPTY_ARRAY_OPPGAVER: Oppgave[] = [];
+
+type SøkValues = {
+  searchString: string;
+  skalReservere: boolean;
+};
 
 interface Props {
   åpneFagsak: (saksnummer: string, behandlingUuid?: string) => void;
@@ -29,19 +42,40 @@ export const FagsakSøkIndex = ({ åpneFagsak, kanSaksbehandle }: Props) => {
   const [sokStartet, setSokStartet] = useState(false);
   const [sokFerdig, setSokFerdig] = useState(false);
 
-  const { startRequest: reserverOppgave } = restApiHooks.useRestApiRunner(RestApiPathsKeys.RESERVER_OPPGAVE);
+  const { mutateAsync: reserverOppgave } = useMutation({
+    mutationFn: reserverOppgavePost,
+  });
+
+  const { mutateAsync: hentOppgaverForFagsaker, data: fagsakOppgaver = EMPTY_ARRAY_OPPGAVER } = useMutation({
+    mutationFn: getOppgaverForFagsaker,
+    onSuccess: () => {
+      setSokStartet(false);
+      setSokFerdig(true);
+    },
+  });
+
   const {
-    startRequest: sokFagsak,
-    resetRequestData: resetFagsakSok,
+    mutateAsync: søkFagsak,
     data: fagsaker = EMPTY_ARRAY_FAGSAK,
     error: fagsakError,
-  } = restApiHooks.useRestApiRunner(RestApiPathsKeys.SEARCH_FAGSAK);
-  const { startRequest: hentOppgaverForFagsaker, data: fagsakOppgaver = EMPTY_ARRAY_OPPGAVER } =
-    restApiHooks.useRestApiRunner(RestApiPathsKeys.OPPGAVER_FOR_FAGSAKER);
-  const { startRequest: hentReservasjonsstatus } = restApiHooks.useRestApiRunner(
-    RestApiPathsKeys.HENT_RESERVASJONSSTATUS,
-  );
+    reset: resetFagsakSøk,
+  } = useMutation({
+    mutationFn: (values: SøkFormValues) => søkFagsakPost(values.searchString, values.skalReservere),
+    onSuccess: fagsakerResultat => {
+      if (fagsakerResultat && fagsakerResultat.length > 0) {
+        hentOppgaverForFagsaker(fagsakerResultat);
+      } else {
+        setSokStartet(false);
+        setSokFerdig(true);
+      }
+    },
+  });
 
+  const { mutateAsync: hentReservasjonsstatus } = useMutation({
+    mutationFn: getReservasjonsstatus,
+  });
+
+  //FIXME Feilhåndtering
   const searchResultAccessDenied =
     fagsakError && errorOfType(ErrorTypes.MANGLER_TILGANG_FEIL, fagsakError)
       ? getErrorResponseData(fagsakError)
@@ -60,7 +94,7 @@ export const FagsakSøkIndex = ({ åpneFagsak, kanSaksbehandle }: Props) => {
 
   useEffect(
     () => () => {
-      resetFagsakSok();
+      resetFagsakSøk();
     },
     [],
   );
@@ -83,14 +117,14 @@ export const FagsakSøkIndex = ({ åpneFagsak, kanSaksbehandle }: Props) => {
       setReservertAvAnnenSaksbehandler(true);
     } else if (!skalReservere) {
       if (skalSjekkeOmReservert) {
-        hentReservasjonsstatus({ oppgaveId: oppgave.id }).then(status => {
+        hentReservasjonsstatus(oppgave.id).then(status => {
           goToFagsakEllerApneModal(oppgave, status);
         });
       } else {
         åpneFagsak(oppgave.saksnummer.toString(), oppgave.behandlingId);
       }
     } else {
-      reserverOppgave({ oppgaveId: oppgave.id }).then(data => {
+      reserverOppgave(oppgave.id).then(data => {
         goToFagsakEllerApneModal(oppgave, data);
       });
     }
@@ -100,24 +134,11 @@ export const FagsakSøkIndex = ({ åpneFagsak, kanSaksbehandle }: Props) => {
     velgFagsakOperasjoner(oppgave, true);
   };
 
-  const sokFagsakFn = (values: { searchString: string; skalReservere: boolean }) => {
+  const sokFagsakFn = (values: SøkValues) => {
     setSkalReservere(values.skalReservere);
     setSokStartet(true);
     setSokFerdig(false);
-
-    return sokFagsak(values).then(fagsakerResultat => {
-      if (fagsakerResultat && fagsakerResultat.length > 0) {
-        hentOppgaverForFagsaker({
-          saksnummerListe: fagsakerResultat.map(fagsak => `${fagsak.saksnummer}`).join(','),
-        }).then(() => {
-          setSokStartet(false);
-          setSokFerdig(true);
-        });
-      } else {
-        setSokStartet(false);
-        setSokFerdig(true);
-      }
-    });
+    return søkFagsak(values);
   };
 
   const lukkErReservertModalOgOpneOppgave = (oppgave: Oppgave) => {
@@ -127,7 +148,7 @@ export const FagsakSøkIndex = ({ åpneFagsak, kanSaksbehandle }: Props) => {
   };
 
   const resetSearch = () => {
-    resetFagsakSok();
+    resetFagsakSøk();
     setSokStartet(false);
     setSokFerdig(false);
   };

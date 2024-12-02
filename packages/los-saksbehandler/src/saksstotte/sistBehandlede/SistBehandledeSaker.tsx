@@ -1,12 +1,13 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { ChevronRightCircleFillIcon,ClockDashedIcon } from '@navikt/aksel-icons';
-import { BodyShort, Heading, HStack, Table,VStack } from '@navikt/ds-react';
+import { ChevronRightCircleFillIcon, ClockDashedIcon } from '@navikt/aksel-icons';
+import { BodyShort, Heading, HStack, Table, VStack } from '@navikt/ds-react';
+import { useQuery } from '@tanstack/react-query';
 
 import { Oppgave } from '@navikt/fp-los-felles';
 
-import { restApiHooks,RestApiPathsKeys } from '../../data/fplosSaksbehandlerRestApi';
+import { behandlendeOppgaverOptions } from '../../data/fplosSaksbehandlerApi';
 
 import styles from './sistBehandledeSaker.module.css';
 
@@ -22,7 +23,7 @@ interface Props {
  * Denne komponenten viser de siste fagsakene en nav-ansatt har behandlet.
  */
 export const SistBehandledeSaker = ({ åpneFagsak }: Props) => {
-  const { data: sistBehandledeSaker = EMPTY_ARRAY } = restApiHooks.useRestApi(RestApiPathsKeys.BEHANDLEDE_OPPGAVER);
+  const { data: sistBehandledeSaker = EMPTY_ARRAY } = useQuery(behandlendeOppgaverOptions());
 
   return (
     <VStack gap="2">

@@ -1,14 +1,17 @@
 import React from 'react';
 
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { Meta, StoryObj } from '@storybook/react';
+import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
+import { http, HttpResponse } from 'msw';
 
 import { BehandlingType } from '@navikt/fp-kodeverk';
-import { alleKodeverkLos,getIntlDecorator } from '@navikt/fp-storybook-utils';
-import { RestApiMock } from '@navikt/fp-utils-test';
+import { alleKodeverkLos, getIntlDecorator } from '@navikt/fp-storybook-utils';
 
-import { requestApi,RestApiGlobalStatePathsKeys } from '../../../data/fplosSaksbehandlerRestApi';
+import { losKodeverkOptions, LosUrl } from '../../../data/fplosSaksbehandlerApi';
+import { withQueryClient } from '../../../data/withQueryClientProvider';
 import { NyeOgFerdigstilteOppgaverForIdagPanel } from './NyeOgFerdigstilteOppgaverForIdagPanel';
 
 import messages from '../../../../i18n/nb_NO.json';
@@ -18,15 +21,16 @@ const withIntl = getIntlDecorator(messages);
 const meta = {
   title: 'saksstotte/NyeOgFerdigstilteOppgaverForIdagPanel',
   component: NyeOgFerdigstilteOppgaverForIdagPanel,
-  decorators: [withIntl],
+  decorators: [withIntl, withQueryClient],
+  parameters: {
+    msw: {
+      handlers: [http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos))],
+    },
+  },
   render: props => {
-    const data = [{ key: RestApiGlobalStatePathsKeys.KODEVERK_LOS.name, data: alleKodeverkLos, global: true }];
-
-    return (
-      <RestApiMock data={data} requestApi={requestApi}>
-        <NyeOgFerdigstilteOppgaverForIdagPanel {...props} />
-      </RestApiMock>
-    );
+    //Må hente data til cache før testa komponent blir kalla
+    const alleKodeverk = useQuery(losKodeverkOptions()).data;
+    return alleKodeverk ? <NyeOgFerdigstilteOppgaverForIdagPanel {...props} /> : <LoadingPanel />;
   },
 } satisfies Meta<typeof NyeOgFerdigstilteOppgaverForIdagPanel>;
 export default meta;

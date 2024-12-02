@@ -2,7 +2,7 @@ import React from 'react';
 
 import { VStack } from '@navikt/ds-react';
 
-import { SaksbehandlerNokkeltallIndex } from './nokkeltall/SaksbehandlerNokkeltallIndex';
+import { SaksbehandlerNokkeltallPanel } from './nokkeltall/SaksbehandlerNokkeltallPanel';
 import { SistBehandledeSaker } from './sistBehandlede/SistBehandledeSaker';
 
 interface Props {
@@ -13,6 +13,6 @@ interface Props {
 export const SaksstøttePaneler = ({ valgtSakslisteId, åpneFagsak }: Props) => (
   <VStack gap="6">
     <SistBehandledeSaker åpneFagsak={åpneFagsak} />
-    {valgtSakslisteId && <SaksbehandlerNokkeltallIndex valgtSakslisteId={valgtSakslisteId} />}
+    {valgtSakslisteId && <SaksbehandlerNokkeltallPanel valgtSakslisteId={valgtSakslisteId} />}
   </VStack>
 );

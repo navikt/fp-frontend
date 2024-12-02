@@ -1,12 +1,13 @@
-import React, { FunctionComponent, useCallback, useMemo,useState } from 'react';
+import React, { FunctionComponent, useCallback, useMemo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { CalendarIcon, PersonGroupIcon, XMarkIcon } from '@navikt/aksel-icons';
 import { BodyShort, Label, Table, VStack } from '@navikt/ds-react';
 import { getDateAndTime } from '@navikt/ft-utils';
 
-import { getKodeverknavnFraKode,KodeverkType } from '@navikt/fp-kodeverk';
-import { FlyttReservasjonModal,OppgaveReservasjonEndringDatoModal } from '@navikt/fp-los-felles';
+import { getKodeverknavnFraKode, KodeverkType } from '@navikt/fp-kodeverk';
+import { FlyttReservasjonModal, OppgaveReservasjonEndringDatoModal } from '@navikt/fp-los-felles';
+import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { AlleKodeverk } from '@navikt/fp-types';
 
 import { restApiHooks, RestApiPathsKeys } from '../../data/fplosRestApi';
@@ -61,7 +62,26 @@ const ReservasjonerTabell: FunctionComponent<OwnProps> = ({
     RestApiPathsKeys.ENDRE_OPPGAVERESERVASJON,
   );
 
+  const endreOppgaveres = (reserverTil: string) => {
+    if (!valgtReservasjon) {
+      throw new Error('Reservasjon må være valgt');
+    }
+    endreOppgavereservasjon({ oppgaveId: valgtReservasjon.oppgaveId, reserverTil }).then(() => {
+      closeReservasjonEndringDatoModal();
+      hentAvdelingensReservasjoner();
+    });
+  };
+
   const { startRequest: flyttOppgavereservasjon } = restApiHooks.useRestApiRunner(RestApiPathsKeys.FLYTT_RESERVASJON);
+
+  const flyttOppgaveres = (params: { brukerIdent: string; begrunnelse: string }) => {
+    if (!valgtReservasjon) {
+      throw new Error('Reservasjon må være valgt');
+    }
+    flyttOppgavereservasjon({ oppgaveId: valgtReservasjon.oppgaveId, ...params }).then(() => {
+      hentAvdelingensReservasjoner();
+    });
+  };
 
   const {
     startRequest: hentSaksbehandler,
@@ -142,20 +162,16 @@ const ReservasjonerTabell: FunctionComponent<OwnProps> = ({
         <OppgaveReservasjonEndringDatoModal
           closeModal={closeReservasjonEndringDatoModal}
           reserverTilDefault={valgtReservasjon.reservertTilTidspunkt}
-          endreReserverasjonState={closeReservasjonEndringDatoModal}
-          hentReserverteOppgaver={hentAvdelingensReservasjoner}
-          oppgaveId={valgtReservasjon.oppgaveId}
-          endreOppgavereservasjon={endreOppgavereservasjon}
+          endreOppgavereservasjon={endreOppgaveres}
         />
       )}
       {valgtReservasjon && showFlyttReservasjonModal && (
         <FlyttReservasjonModal
           closeModal={closeFlytteModal}
-          oppgaveId={valgtReservasjon.oppgaveId}
-          hentReserverteOppgaver={hentAvdelingensReservasjoner}
-          flyttOppgavereservasjon={flyttOppgavereservasjon}
-          hentSaksbehandler={hentSaksbehandler}
-          hentSaksbehandlerState={hentSaksbehandlerState}
+          flyttOppgavereservasjon={flyttOppgaveres}
+          hentSaksbehandler={(brukerIdent: string) => hentSaksbehandler({ brukerIdent })}
+          hentSaksbehandlerIsPending={hentSaksbehandlerState === RestApiState.LOADING}
+          hentSaksbehandlerIsSuccess={hentSaksbehandlerState === RestApiState.SUCCESS}
           saksbehandler={saksbehandler}
           resetHentSaksbehandler={resetHentSaksbehandler}
         />

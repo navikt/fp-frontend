@@ -6,10 +6,10 @@ import { BodyShort, Button, CopyButton, HStack, Label, Popover, Table, Tooltip, 
 import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
 import { getDateAndTime } from '@navikt/ft-utils';
 
-import { getKodeverknavnFraKode, KodeverkType } from '@navikt/fp-kodeverk';
+import { KodeverkType } from '@navikt/fp-kodeverk';
 import { Oppgave, OppgaveStatus } from '@navikt/fp-los-felles';
 
-import { RestApiGlobalStatePathsKeys, restApiHooks } from '../../data/fplosSaksbehandlerRestApi';
+import { useLosKodeverk } from '../../data/useLosKodeverk';
 import { OppgaveHandlingerMenu } from './menu/OppgaveHandlingerMenu';
 
 import styles from './oppgaveRad.module.css';
@@ -76,12 +76,12 @@ const NotatKnapp = ({ oppgave }: { oppgave: Oppgave }) => {
 interface Props {
   oppgave: OppgaveMedReservertIndikator;
   reserverOppgave: (oppgave: Oppgave) => void;
-  hentReserverteOppgaver: (params?: void, keepData?: boolean) => void;
+  hentReserverteOppgaver: () => void;
 }
 
 export const OppgaveRad = ({ oppgave, reserverOppgave, hentReserverteOppgaver }: Props) => {
   const intl = useIntl();
-  const alleKodeverk = restApiHooks.useGlobalStateRestApiData(RestApiGlobalStatePathsKeys.KODEVERK_LOS);
+  const behandlingTyper = useLosKodeverk(KodeverkType.BEHANDLING_TYPE);
 
   const [enableTableEvents, setEnableTableEvents] = useState(true);
 
@@ -123,9 +123,7 @@ export const OppgaveRad = ({ oppgave, reserverOppgave, hentReserverteOppgaver }:
           </Tooltip>
         </HStack>
       </Table.DataCell>
-      <Table.DataCell>
-        {getKodeverknavnFraKode(alleKodeverk, KodeverkType.BEHANDLING_TYPE, oppgave.behandlingstype)}
-      </Table.DataCell>
+      <Table.DataCell>{behandlingTyper.find(b => b.kode === oppgave.behandlingstype)?.navn}</Table.DataCell>
       <Table.DataCell>
         {oppgave.opprettetTidspunkt && <DateLabel dateString={oppgave.opprettetTidspunkt} />}
       </Table.DataCell>

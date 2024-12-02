@@ -3587,6 +3587,8 @@ __metadata:
     "@storybook/addon-actions": 8.4.2
     "@storybook/react": 8.4.2
     "@storybook/react-vite": 8.4.2
+    "@tanstack/react-query": 5.59.16
+    "@tanstack/react-query-devtools": ^5.59.16
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.0.1
     "@testing-library/user-event": 14.5.2
@@ -3595,7 +3597,10 @@ __metadata:
     echarts: 5.5.1
     eslint: 9.14.0
     history: 5.3.0
+    ky: ^1.7.2
     lodash.debounce: 4.0.8
+    msw: 2.5.2
+    msw-storybook-addon: ^2.0.2
     react: 18.3.1
     react-dom: 18.3.1
     react-hook-form: 7.53.1
@@ -7386,14 +7391,14 @@ __metadata:
   linkType: hard
 
 "@tanstack/react-query-devtools@npm:^5.59.16":
-  version: 5.62.2
-  resolution: "@tanstack/react-query-devtools@npm:5.62.2"
+  version: 5.61.5
+  resolution: "@tanstack/react-query-devtools@npm:5.61.5"
   dependencies:
     "@tanstack/query-devtools": 5.61.4
   peerDependencies:
-    "@tanstack/react-query": ^5.62.2
+    "@tanstack/react-query": ^5.61.5
     react: ^18 || ^19
-  checksum: 5a01a2ebff96d13572afc72f7f167c612d3417a17006759e4fc12b7f2bc428b58693ea7f467e286edcff7c5e454d937da9857b8cc99a7d02ad66b3eaab2d3b8d
+  checksum: 12a33b170d3cac4cc48aa26aadcab886bc79bff67ca89f21b25fc332e8d79ad80c6749a6cca68583d5420a3d37dec8628cefcb8d4428ab3fb30bb416b8e51fb7
   languageName: node
   linkType: hard
 

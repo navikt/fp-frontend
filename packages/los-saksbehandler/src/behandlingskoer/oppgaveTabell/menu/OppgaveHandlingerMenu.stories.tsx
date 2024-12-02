@@ -1,13 +1,12 @@
-import React from 'react';
-
 import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
+import { http, HttpResponse } from 'msw';
 
 import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
-import { RestApiMock } from '@navikt/fp-utils-test';
 
-import { requestApi,RestApiPathsKeys } from '../../../data/fplosSaksbehandlerRestApi';
+import { LosUrl } from '../../../data/fplosSaksbehandlerApi';
+import { withQueryClient } from '../../../data/withQueryClientProvider';
 import { OppgaveHandlingerMenu } from './OppgaveHandlingerMenu';
 
 import messages from '../../../../i18n/nb_NO.json';
@@ -17,30 +16,25 @@ const withIntl = getIntlDecorator(messages);
 const meta = {
   title: 'behandlingskoer/OppgaveHandlingerMenu',
   component: OppgaveHandlingerMenu,
-  decorators: [withIntl],
-  render: ({ oppgave }) => {
-    const data = [
-      { key: RestApiPathsKeys.OPPHEV_OPPGAVERESERVASJON.name, data: {} },
-      {
-        key: RestApiPathsKeys.FLYTT_RESERVASJON_SAKSBEHANDLER_SOK.name,
-        data: {
-          brukerIdent: 'teasdfa',
-          navn: 'Espen Utvikler',
-        },
-      },
-      { key: RestApiPathsKeys.FLYTT_RESERVASJON.name, data: {} },
-      { key: RestApiPathsKeys.FORLENG_OPPGAVERESERVASJON.name, data: {} },
-    ];
-
-    return (
-      <RestApiMock data={data} requestApi={requestApi}>
-        <OppgaveHandlingerMenu
-          oppgave={oppgave}
-          hentReserverteOppgaver={action('button-click')}
-          setEnableTableEvents={action('button-click')}
-        />
-      </RestApiMock>
-    );
+  decorators: [withIntl, withQueryClient],
+  parameters: {
+    msw: {
+      handlers: [
+        http.post(LosUrl.OPPHEV_OPPGAVERESERVASJON, () => HttpResponse.json({})),
+        http.post(LosUrl.FLYTT_RESERVASJON_SAKSBEHANDLER_SOK, () =>
+          HttpResponse.json({
+            brukerIdent: 'teasdfa',
+            navn: 'Espen Utvikler',
+          }),
+        ),
+        http.post(LosUrl.FLYTT_RESERVASJON, () => HttpResponse.json({})),
+        http.post(LosUrl.FORLENG_OPPGAVERESERVASJON, () => HttpResponse.json({})),
+      ],
+    },
+  },
+  args: {
+    hentReserverteOppgaver: action('button-click'),
+    setEnableTableEvents: action('button-click'),
   },
 } satisfies Meta<typeof OppgaveHandlingerMenu>;
 export default meta;
@@ -72,7 +66,5 @@ export const Default: Story = {
       erTilSaksbehandling: true,
       behandlingId: '1',
     },
-    hentReserverteOppgaver: action('button-click'),
-    setEnableTableEvents: action('button-click'),
   },
 };

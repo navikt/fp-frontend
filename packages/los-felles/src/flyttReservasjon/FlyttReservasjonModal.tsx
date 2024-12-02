@@ -3,10 +3,8 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 
 import { BodyShort, Button, HStack, Label, Modal as NavModal, VStack } from '@navikt/ds-react';
-import { Form, InputField,TextAreaField } from '@navikt/ft-form-hooks';
+import { Form, InputField, TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
-
-import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
 import SaksbehandlerProfil from '../typer/saksbehandlerProfilTsType';
 
@@ -17,8 +15,8 @@ const maxLength500 = maxLength(500);
 const minLength7 = minLength(7);
 const maxLength7 = maxLength(7);
 
-const formatText = (state: RestApiState, intl: IntlShape, saksbehandler?: SaksbehandlerProfil): string => {
-  if (state === RestApiState.SUCCESS && !saksbehandler) {
+const formatText = (intl: IntlShape, saksbehandler?: SaksbehandlerProfil): string => {
+  if (!saksbehandler) {
     return intl.formatMessage({ id: 'LeggTilSaksbehandlerForm.FinnesIkke' });
   }
 
@@ -33,13 +31,12 @@ type LagreFormValues = {
 };
 
 interface Props {
-  oppgaveId: number;
   flyttetBegrunnelse?: string;
   closeModal: () => void;
-  hentReserverteOppgaver: (params: any, keepData: boolean) => void;
-  flyttOppgavereservasjon: (params: { oppgaveId: number; brukerIdent: string; begrunnelse: string }) => Promise<void>;
-  hentSaksbehandler: (params: { brukerIdent: string }) => Promise<SaksbehandlerProfil | undefined>;
-  hentSaksbehandlerState: RestApiState;
+  flyttOppgavereservasjon: (params: { brukerIdent: string; begrunnelse: string }) => void;
+  hentSaksbehandler: (brukerIdent: string) => void;
+  hentSaksbehandlerIsPending: boolean;
+  hentSaksbehandlerIsSuccess: boolean;
   saksbehandler?: SaksbehandlerProfil;
   resetHentSaksbehandler: () => void;
 }
@@ -50,26 +47,16 @@ interface Props {
  * Modal som lar en søke opp en saksbehandler som saken skal flyttes til. En kan også begrunne hvorfor saken skal flyttes.
  */
 export const FlyttReservasjonModal = ({
-  oppgaveId,
   flyttetBegrunnelse,
   closeModal,
-  hentReserverteOppgaver,
   flyttOppgavereservasjon,
   hentSaksbehandler,
-  hentSaksbehandlerState,
+  hentSaksbehandlerIsPending,
+  hentSaksbehandlerIsSuccess,
   saksbehandler,
   resetHentSaksbehandler,
 }: Props) => {
   const intl = useIntl();
-
-  const finnSaksbehandler = (formValues: SøkFormValues) => hentSaksbehandler({ brukerIdent: formValues.brukerIdent });
-
-  const flyttReservasjon = (brukerident: string, begrunnelse: string) =>
-    flyttOppgavereservasjon({
-      oppgaveId,
-      brukerIdent: brukerident,
-      begrunnelse,
-    }).then(() => hentReserverteOppgaver({}, true));
 
   useEffect(
     () => () => {
@@ -100,7 +87,10 @@ export const FlyttReservasjonModal = ({
       </NavModal.Header>
       <NavModal.Body>
         <VStack gap="4">
-          <Form formMethods={søkFormMethods} onSubmit={finnSaksbehandler}>
+          <Form
+            formMethods={søkFormMethods}
+            onSubmit={(formValues: SøkFormValues) => hentSaksbehandler(formValues.brukerIdent)}
+          >
             <HStack gap="4" align="end">
               <InputField
                 name="brukerIdent"
@@ -112,21 +102,22 @@ export const FlyttReservasjonModal = ({
               <Button
                 size="small"
                 variant="primary"
-                loading={hentSaksbehandlerState === RestApiState.LOADING}
-                disabled={!brukerIdentValue || hentSaksbehandlerState === RestApiState.LOADING}
+                loading={hentSaksbehandlerIsPending}
+                disabled={!brukerIdentValue || hentSaksbehandlerIsPending}
               >
                 <FormattedMessage id="FlyttReservasjonModal.Sok" />
               </Button>
             </HStack>
-            {hentSaksbehandlerState === RestApiState.SUCCESS && (
-              <BodyShort size="small">{formatText(hentSaksbehandlerState, intl, saksbehandler)}</BodyShort>
-            )}
+            {hentSaksbehandlerIsSuccess && <BodyShort size="small">{formatText(intl, saksbehandler)}</BodyShort>}
           </Form>
           <Form
             formMethods={lagreFormMethods}
             onSubmit={values => {
               closeModal();
-              flyttReservasjon(saksbehandler ? saksbehandler.brukerIdent : '', values.begrunnelse);
+              flyttOppgavereservasjon({
+                brukerIdent: saksbehandler ? saksbehandler.brukerIdent : '',
+                begrunnelse: values.begrunnelse,
+              });
             }}
           >
             <TextAreaField

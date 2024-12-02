@@ -1,14 +1,17 @@
 import React from 'react';
 
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
+import { useQuery } from '@tanstack/react-query';
+import { http, HttpResponse } from 'msw';
 
 import { BehandlingStatus, BehandlingType, FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
-import { alleKodeverkLos,getIntlDecorator } from '@navikt/fp-storybook-utils';
+import { alleKodeverkLos, getIntlDecorator } from '@navikt/fp-storybook-utils';
 import { KjønnkodeEnum } from '@navikt/fp-types';
-import { RestApiMock } from '@navikt/fp-utils-test';
 
-import { requestApi,RestApiGlobalStatePathsKeys } from '../data/fplosSaksbehandlerRestApi';
+import { losKodeverkOptions, LosUrl } from '../data/fplosSaksbehandlerApi';
+import { withQueryClient } from '../data/withQueryClientProvider';
 import { FagsakSøk } from './FagsakSøk';
 
 import messages from '../../i18n/nb_NO.json';
@@ -18,15 +21,25 @@ const withIntl = getIntlDecorator(messages);
 const meta = {
   title: 'søk/FagsakSøk',
   component: FagsakSøk,
-  decorators: [withIntl],
+  decorators: [withIntl, withQueryClient],
+  parameters: {
+    msw: {
+      handlers: [http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos))],
+    },
+  },
+  args: {
+    kanSaksbehandle: true,
+    searchResultReceived: true,
+    searchStarted: false,
+    searchFagsakCallback: action('button-click'),
+    åpneFagsak: action('button-click'),
+    selectOppgaveCallback: action('button-click'),
+    resetSearch: action('button-click'),
+  },
   render: props => {
-    const data = [{ key: RestApiGlobalStatePathsKeys.KODEVERK_LOS.name, data: alleKodeverkLos, global: true }];
-
-    return (
-      <RestApiMock data={data} requestApi={requestApi}>
-        <FagsakSøk {...props} />
-      </RestApiMock>
-    );
+    //Må hente data til cache før testa komponent blir kalla
+    const alleKodeverk = useQuery(losKodeverkOptions()).data;
+    return alleKodeverk ? <FagsakSøk {...props} /> : <LoadingPanel />;
   },
 } satisfies Meta<typeof FagsakSøk>;
 export default meta;
@@ -35,13 +48,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    searchFagsakCallback: action('button-click'),
-    searchResultReceived: true,
-    åpneFagsak: action('button-click'),
-    selectOppgaveCallback: action('button-click'),
-    searchStarted: false,
-    resetSearch: action('button-click'),
-    kanSaksbehandle: true,
     fagsaker: [
       {
         saksnummer: '12213234',
@@ -99,7 +105,6 @@ export const Default: Story = {
 
 export const IngentingBleFunnet: Story = {
   args: {
-    ...Default.args,
     fagsaker: [],
     fagsakOppgaver: [],
   },

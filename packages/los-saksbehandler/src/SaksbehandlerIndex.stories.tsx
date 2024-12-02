@@ -1,16 +1,14 @@
-import React from 'react';
-
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 import dayjs from 'dayjs';
+import { http, HttpResponse } from 'msw';
 
 import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { Oppgave } from '@navikt/fp-los-felles';
 import { alleKodeverkLos } from '@navikt/fp-storybook-utils';
-import { RestApiMock } from '@navikt/fp-utils-test';
 
-import { requestApi,RestApiGlobalStatePathsKeys, RestApiPathsKeys } from './data/fplosSaksbehandlerRestApi';
+import { LosUrl } from './data/fplosSaksbehandlerApi';
 import { AndreKriterierType } from './kodeverk/andreKriterierType';
 import { KoSortering } from './kodeverk/KoSortering';
 import { SaksbehandlerIndex } from './SaksbehandlerIndex';
@@ -192,50 +190,47 @@ const NYE_OG_FERDIGSTILTE_OPPGAVER = [
   },
 ] satisfies NyeOgFerdigstilteOppgaver[];
 
-const REST_API_DATA = [
-  { key: RestApiGlobalStatePathsKeys.KODEVERK_LOS.name, data: alleKodeverkLos, global: true },
-  { key: RestApiPathsKeys.DRIFTSMELDINGER.name, data: [] },
-  { key: RestApiPathsKeys.SAKSLISTE.name, data: SAKSLISTER },
-  { key: RestApiPathsKeys.RESERVER_OPPGAVE.name, data: undefined },
-  { key: RestApiPathsKeys.RESERVERTE_OPPGAVER.name, data: RESERVERTE_OPPGAVER },
-  { key: RestApiPathsKeys.SAKSLISTE_SAKSBEHANDLERE.name, data: SAKSLISTE_SAKSBEHANDLERE },
-  { key: RestApiPathsKeys.BEHANDLINGSKO_OPPGAVE_ANTALL.name, data: 100 },
-  { key: RestApiPathsKeys.RESERVER_OPPGAVE.name, data: undefined },
-  { key: RestApiPathsKeys.SEARCH_FAGSAK.name, data: undefined },
-  { key: RestApiPathsKeys.OPPGAVER_FOR_FAGSAKER.name, data: undefined },
-  { key: RestApiPathsKeys.OPPGAVER_TIL_BEHANDLING.name, data: OPPGAVER_TIL_BEHANDLING },
-  { key: RestApiPathsKeys.HENT_RESERVASJONSSTATUS.name, data: undefined },
+const BEHANDLEDE_OPPGAVER = [
   {
-    key: RestApiPathsKeys.BEHANDLEDE_OPPGAVER.name,
-    data: [
-      {
-        id: 1,
-        personnummer: '343453534',
-        navn: 'Gaute Johansen',
-        saksnummer: 54343,
-        behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
-      } as Oppgave,
-      {
-        id: 2,
-        personnummer: '334342323',
-        navn: 'Olga Mortensen',
-        saksnummer: 13232,
-        behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
-      } as Oppgave,
-    ],
-  },
-  { key: RestApiPathsKeys.HENT_NYE_OG_FERDIGSTILTE_OPPGAVER.name, data: NYE_OG_FERDIGSTILTE_OPPGAVER },
-  { key: RestApiPathsKeys.FORLENG_OPPGAVERESERVASJON.name, data: {} },
+    id: 1,
+    personnummer: '343453534',
+    navn: 'Gaute Johansen',
+    saksnummer: 54343,
+    behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
+  } as Oppgave,
+  {
+    id: 2,
+    personnummer: '334342323',
+    navn: 'Olga Mortensen',
+    saksnummer: 13232,
+    behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
+  } as Oppgave,
 ];
 
 const meta = {
   title: 'SaksbehandlerIndex',
   component: SaksbehandlerIndex,
-  render: props => (
-    <RestApiMock data={REST_API_DATA} requestApi={requestApi}>
-      <SaksbehandlerIndex {...props} />
-    </RestApiMock>
-  ),
+  parameters: {
+    msw: {
+      handlers: [
+        http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
+        http.get(LosUrl.DRIFTSMELDINGER, () => HttpResponse.json([])),
+        http.get(LosUrl.SAKSLISTE, () => HttpResponse.json(SAKSLISTER)),
+        http.get(LosUrl.RESERVER_OPPGAVE, () => new HttpResponse(null, { status: 200 })),
+        http.get(LosUrl.RESERVERTE_OPPGAVER, () => HttpResponse.json(RESERVERTE_OPPGAVER)),
+        http.get(LosUrl.SAKSLISTE_SAKSBEHANDLERE, () => HttpResponse.json(SAKSLISTE_SAKSBEHANDLERE)),
+        http.get(LosUrl.BEHANDLINGSKO_OPPGAVE_ANTALL, () => HttpResponse.json(100)),
+        http.get(LosUrl.RESERVER_OPPGAVE, () => new HttpResponse(null, { status: 200 })),
+        http.get(LosUrl.SØK_FAGSAK, () => new HttpResponse(null, { status: 200 })),
+        http.get(LosUrl.OPPGAVER_FOR_FAGSAKER, () => new HttpResponse(null, { status: 200 })),
+        http.get(LosUrl.OPPGAVER_TIL_BEHANDLING, () => HttpResponse.json(OPPGAVER_TIL_BEHANDLING)),
+        http.get(LosUrl.HENT_RESERVASJONSSTATUS, () => new HttpResponse(null, { status: 200 })),
+        http.get(LosUrl.BEHANDLEDE_OPPGAVER, () => HttpResponse.json(BEHANDLEDE_OPPGAVER)),
+        http.get(LosUrl.HENT_NYE_OG_FERDIGSTILTE_OPPGAVER, () => HttpResponse.json(NYE_OG_FERDIGSTILTE_OPPGAVER)),
+        http.get(LosUrl.FORLENG_OPPGAVERESERVASJON, () => new HttpResponse(null, { status: 200 })),
+      ],
+    },
+  },
 } satisfies Meta<typeof SaksbehandlerIndex>;
 export default meta;
 
