@@ -36,7 +36,7 @@ export const FodselvilkaretFaktaInitPanel = (props: FaktaPanelInitProps) => {
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       faktaPanelKode={FaktaPanelCode.FODSELSVILKARET}
-      faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FodselInfoPanel.Fodsel' })}
+      faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.Fodsel' })}
       skalPanelVisesIMeny={() => vilkår.some(v => fodselsvilkarene.some(fv => fv === v.vilkarType))}
       renderPanel={data => <FodselFaktaIndex {...data} />}
     />

@@ -33,7 +33,7 @@ export const PermisjonFaktaInitPanel = ({
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={FaktaPanelCode.PERMISJON}
-    faktaPanelMenyTekst={useIntl().formatMessage({ id: 'PermisjonFaktaInitPanel.Title' })}
+    faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.Permisjon' })}
     skalPanelVisesIMeny={() => AKSJONSPUNKT_KODER.some(kode => hasAksjonspunkt(kode, props.behandling.aksjonspunkt))}
     renderPanel={data => (
       <PermisjonFaktaIndex

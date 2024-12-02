@@ -31,7 +31,7 @@ export const OmsorgOgRettFaktaInitPanel = ({ personoversikt, ...props }: Props &
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={FaktaPanelCode.OMSORG_OG_RETT}
-    faktaPanelMenyTekst={useIntl().formatMessage({ id: 'OmsorgInfoPanel.OmsorgOgRett' })}
+    faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.OmsorgOgRett' })}
     skalPanelVisesIMeny={() => AKSJONSPUNKT_KODER.some(kode => hasAksjonspunkt(kode, props.behandling.aksjonspunkt))}
     renderPanel={data => <OmsorgOgRettFaktaIndex personoversikt={personoversikt} {...data} />}
   />

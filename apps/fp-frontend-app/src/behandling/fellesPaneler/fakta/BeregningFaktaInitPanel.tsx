@@ -128,7 +128,7 @@ export const BeregningFaktaInitPanel = ({
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       overstyringApKoder={OVERSTYRING_AP_CODES}
       faktaPanelKode={FaktaPanelCode.BEREGNING}
-      faktaPanelMenyTekst={intl.formatMessage({ id: 'BeregningInfoPanel.Title' })}
+      faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Beregning' })}
       skalPanelVisesIMeny={() => requestBehandlingApi.hasPath(BehandlingApiKeys.BEREGNINGSGRUNNLAG.name)}
       renderPanel={data => (
         <BeregningFaktaIndex

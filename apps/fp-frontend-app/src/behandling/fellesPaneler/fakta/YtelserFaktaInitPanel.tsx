@@ -20,7 +20,7 @@ export const YtelserFaktaInitPanel = (props: FaktaPanelInitProps) => (
     {...props}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     faktaPanelKode={FaktaPanelCode.YTELSER}
-    faktaPanelMenyTekst={useIntl().formatMessage({ id: 'YtelserFaktaIndex.Ytelser' })}
+    faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.Ytelser' })}
     skalPanelVisesIMeny={() => true}
     renderPanel={data => <YtelserFaktaIndex {...data} />}
   />

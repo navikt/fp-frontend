@@ -33,7 +33,7 @@ export const AdopsjonsvilkaretFaktaInitPanel = ({ fagsak, ...props }: Props & Fa
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={FaktaPanelCode.ADOPSJONSVILKARET}
-    faktaPanelMenyTekst={useIntl().formatMessage({ id: 'AdopsjonInfoPanel.Adopsjon' })}
+    faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.Adopsjon' })}
     skalPanelVisesIMeny={() => props.behandling.vilkår.some(v => adopsjonsvilkarene.some(av => av === v.vilkarType))}
     renderPanel={data => (
       <AdopsjonFaktaIndex

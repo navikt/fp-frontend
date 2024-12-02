@@ -32,7 +32,7 @@ export const MedlemskapsvilkaretFaktaInitPanel = ({ ...props }: FaktaPanelInitPr
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={FaktaPanelCode.MEDLEMSKAPSVILKARET}
-    faktaPanelMenyTekst={useIntl().formatMessage({ id: 'MedlemskapInfoPanel.Medlemskap' })}
+    faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.Medlemskap' })}
     skalPanelVisesIMeny={() => props.behandling.harSøknad}
     renderPanel={data => <MedlemskapFaktaIndex fagsak={props.fagsak} {...data} />}
   />

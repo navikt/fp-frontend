@@ -15,10 +15,6 @@
   "TotrinnskontrollIndex.Godkjenning": "Godkjenning",
   "TotrinnskontrollIndex.FraBeslutter": "Fra beslutter",
 
-  "Behandlingspunkt.AnkeResultat": "Resultat",
-  "Behandlingspunkt.AnkeMerknader": "Trygderetten",
-  "Behandlingspunkt.Ankebehandling": "Ankebehandling",
-
   "AnkeVurderingModal.VedtakOversendt": "Behandlingen er sendt.",
   "AnkeVurderingModal.Ferdigbehandlet": "Anken er ferdigbehandlet.",
   "AnkeVurderingModal.SettVent": "Behandlingen er satt på vent.",
@@ -28,14 +24,6 @@
 
   "FatterVedtakStatusModal.GoToSearchPage": "Du kommer nå til forsiden.",
   "FatterVedtakStatusModal.Ok": "OK",
-
-  "UttakInfoPanel.FaktaUttak": "Uttak",
-  "UttakDokumentasjonFaktaInitPanel.FaktaUttakDokumentasjon": "Uttaksdokumentasjon",
-  "OmsorgInfoPanel.Omsorg": "Omsorg",
-  "OmsorgInfoPanel.OmsorgOgRett": "Omsorg og rett",
-  "BesteberegningInfoPanel.Title": "Besteberegning",
-
-  "Behandlingspunkt.Uttak": "Uttak",
 
   "ErrorBoundary.Error": "Det har oppstått en teknisk feil i visning av {name}. Meld feilen i Porten. Ta med feilmeldingsteksten.",
 
@@ -60,48 +48,69 @@
 
   "Los.IkkeTilgjengelig": "FPLOS er ikke tilgjengelig",
 
-  "Behandlingspunkt.Inngangsvilkar": "Inngangsvilkår",
   "InngangsvilkarProsessStegPanelDef.AvventerAvklaringAv": "Avventer avklaring av fakta om ",
   "ProsessPanelWrapper.IkkeBehandlet": "Dette steget er ikke behandlet",
   "BehandlingHenlagtPanel.Header": "Henlagt",
   "BehandlingHenlagtPanel.Henlagt": "Behandlingen er henlagt",
-  "FaktaPanel.FaktaOm": "Fakta om",
-  "HelpText.Aksjonspunkt": "Aksjonspunkt",
 
-  "Behandlingspunkt.Vedtak": "Vedtak",
-  "Behandlingspunkt.Innsyn": "Behandle innsyn",
+  "FaktaMeny.FaktaOm": "Fakta om",
 
   "SettPaVentReadOnlyModal.ModalDescriptionErPaVent": "Behandlingen er satt på vent",
   "SettPaVentReadOnlyModal.Forsiden": "Gå til forsiden",
   "SettPaVentReadOnlyModal.Arsak": "Årsak",
   "SettPaVentReadOnlyModal.Frist": "Frist",
 
-  "Behandlingspunkt.CheckKlageNFP": "Behandling Vedtaksinstans",
-  "Behandlingspunkt.FormkravKlageKA": "Formkrav Klageinstans",
-  "Behandlingspunkt.CheckKlageNK": "Behandling Klageinstans",
-  "Behandlingspunkt.ResultatKlage": "Resultat",
-  "Behandlingspunkt.FormkravKlageNFP": "Formkrav Vedtaksinstans",
-  "RegistrereVergeInfoPanel.Info": "Verge/fullmektig",
-
   "KlageVurderingModal.VedtakOversendt": "Innstilling er sendt til Nav klageinstans.",
   "KlageVurderingModal.ModalDescription": "Vedtaket er stadfestet. Du kommer nå til forsiden",
+
   "KlageVurderingModal.GoToSearchPage": "Du kommer nå til forsiden",
   "KlageVurderingModal.Ok": "OK",
 
   "FatterVedtakStatusModal.KlagenErFerdigbehandlet": "Klagen er ferdigbehandlet",
 
-  "SakenFaktaPanel.Title": "Saken",
-  "AdopsjonInfoPanel.Adopsjon": "Adopsjon",
-  "FodselInfoPanel.Fodsel": "Fødsel",
-  "MedlemskapInfoPanel.Medlemskap": "Medlemskap",
-  "OmsorgOgForeldreansvarInfoPanel.Title": "Omsorg og foreldreansvar",
-  "YtelserFaktaIndex.Ytelser": "Ytelser",
+  "FaktaInitPanel.Title.Adopsjon": "Adopsjon",
+  "FaktaInitPanel.Title.ArbeidOgInntekt": "Arbeid og inntekt",
+  "FaktaInitPanel.Title.Arbeidsforhold": "Arbeidsforhold",
+  "FaktaInitPanel.Title.Beregning": "Beregning",
+  "FaktaInitPanel.Title.Besteberegning": "Besteberegning",
+  "FaktaInitPanel.Title.Fodsel": "Fødsel",
+  "FaktaInitPanel.Title.FodselOgTilrettelegging": "Fødsel og tilrettelegging",
+  "FaktaInitPanel.Title.Fordeling": "Fordeling",
+  "FaktaInitPanel.Title.Inntektsmelding": "Inntektsmelding",
+  "FaktaInitPanel.Title.Medlemskap": "Medlemskap",
+  "FaktaInitPanel.Title.Omsorg": "Omsorg",
+  "FaktaInitPanel.Title.OmsorgOgForeldreansvar": "Omsorg og foreldreansvar",
+  "FaktaInitPanel.Title.OmsorgOgRett": "Omsorg og rett",
+  "FaktaInitPanel.Title.Opptjening": "Opptjening",
+  "FaktaInitPanel.Title.Permisjon": "Permisjon",
+  "FaktaInitPanel.Title.Saken": "Saken",
+  "FaktaInitPanel.Title.Uttak": "Uttak",
+  "FaktaInitPanel.Title.UttakDokumentasjon": "Uttaksdokumentasjon",
+  "FaktaInitPanel.Title.Ytelser": "Ytelser",
+  "FaktaInitPanel.Title.Verge": "Verge/fullmektig",
 
-  "Behandlingspunkt.CheckVarselRevurdering": "Varsel",
-  "Behandlingspunkt.Opplysningsplikt": "Opplysningsplikt",
+
+  "Behandlingspunkt.ResultatKlage": "Resultat",
+  "Behandlingspunkt.Ankebehandling": "Ankebehandling",
+  "Behandlingspunkt.AnkeMerknader": "Trygderetten",
+  "Behandlingspunkt.AnkeResultat": "Resultat",
   "Behandlingspunkt.Avregning": "Simulering",
   "Behandlingspunkt.Beregning": "Beregning",
+  "Behandlingspunkt.CheckKlageNK": "Behandling Klageinstans",
+  "Behandlingspunkt.CheckKlageNFP": "Behandling Vedtaksinstans",
+  "Behandlingspunkt.CheckVarselRevurdering": "Varsel",
+  "Behandlingspunkt.Foreldelse": "Foreldelse",
+  "Behandlingspunkt.FormkravKlageKA": "Formkrav Klageinstans",
+  "Behandlingspunkt.FormkravKlageNFP": "Formkrav Vedtaksinstans",
+  "Behandlingspunkt.FortsattMedlemskap": "Fortsatt medlem",
+  "Behandlingspunkt.Inngangsvilkar": "Inngangsvilkår",
+  "Behandlingspunkt.Innsyn": "Behandle innsyn",
+  "Behandlingspunkt.Opplysningsplikt": "Opplysningsplikt",
   "Behandlingspunkt.Soknadsfristvilkaret": "Søknadsfrist",
+  "Behandlingspunkt.Tilbakekreving": "Tilbakekreving",
+  "Behandlingspunkt.TilkjentYtelse": "Tilkjent ytelse",
+  "Behandlingspunkt.Uttak": "Uttak",
+  "Behandlingspunkt.Vedtak": "Vedtak",
 
   "SRBVilkarForm.VurderSammeBarn": "Vurder om tidligere utbetalte foreldrepenger eller engangsstønad gjelder for samme barn. Dersom det gjelder for samme barn er dette vilkåret ikke oppfylt.",
   "SRBVilkarForm.VurderAnnenForelderSammeBarn": "Vurder om annen forelders foreldrepenger eller engangsstønad gjelder samme barn og påvirker utfall.",
@@ -109,26 +118,11 @@
   "ErForeldreansvarVilkaarOppfyltForm.4LeddParagraf": "Vurder om vilkårene i § 14-17 fjerde ledd for far er oppfylt (når far overtar foreldreansvaret alene)",
   "ErOmsorgVilkaarOppfyltForm.Paragraf": "Vurder om vilkårene i § 14-17 tredje ledd for far er oppfylt (når mor dør ifm fødsel/omsorgsovertakelse)",
 
-  "ArbeidsforholdInfoPanel.Title": "Arbeidsforhold",
-  "OpptjeningInfoPanel.KontrollerFaktaForOpptjening": "Opptjening",
-  "BeregningInfoPanel.Title": "Beregning",
-  "FordelBeregningsgrunnlag.Title": "Fordeling",
-  "FodselOgTilretteleggingInfoPanel.FaktaFodselOgTilrettelegging": "Fødsel og tilrettelegging",
-  "ArbeidOgInntektInfoPanel.Title": "Arbeid og inntekt",
-  "PermisjonFaktaInitPanel.Title": "Permisjon",
-  "InntektsmeldingerInfoPanel.Title": "Inntektsmelding",
-
-  "Behandlingspunkt.FortsattMedlemskap": "Fortsatt medlem",
-  "Behandlingspunkt.TilkjentYtelse": "Tilkjent ytelse",
 
   "SvangerskapVilkarForm.FyllerVilkår": "Kontroller at søker fyller vilkårene i § 14-4 første eller andre ledd og tredje ledd, første punktum",
 
-  "Behandlingspunkt.Tilbakekreving": "Tilbakekreving",
-  "Behandlingspunkt.Foreldelse": "Foreldelse",
   "TilbakekrevingFakta.FaktaFeilutbetaling": "Feilutbetaling",
   "ProsessPanelWrapper.Henlagt": "Behandlingen er henlagt",
-
-  "SubmitButton.ConfirmInformation": "Bekreft og fortsett",
 
   "FatterTilbakekrevingVedtakStatusModal.Sendt": "Forslag til vedtak er sendt til beslutter",
   "BehandlingTilbakekrevingIndex.ApenRevurdering": "Det finnes en åpen revurdering som kan påvirke denne tilbakekrevingsbehandlingen. Vurder konsekvens ved behandling.",

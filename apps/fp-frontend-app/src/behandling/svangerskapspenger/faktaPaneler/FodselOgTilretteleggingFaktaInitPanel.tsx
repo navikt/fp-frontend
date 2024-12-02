@@ -27,7 +27,7 @@ interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
-export const FodseltilretteleggingFaktaInitPanel = ({
+export const FodselOgTilretteleggingFaktaInitPanel = ({
   arbeidsgiverOpplysningerPerId,
   ...props
 }: Props & FaktaPanelInitProps) => (
@@ -38,7 +38,7 @@ export const FodseltilretteleggingFaktaInitPanel = ({
     overstyringApKoder={OVERSTYRING_AP_CODES}
     faktaPanelKode={FaktaPanelCode.FODSELTILRETTELEGGING}
     faktaPanelMenyTekst={useIntl().formatMessage({
-      id: 'FodselOgTilretteleggingInfoPanel.FaktaFodselOgTilrettelegging',
+      id: 'FaktaInitPanel.Title.FodselOgTilrettelegging',
     })}
     skalPanelVisesIMeny={() => true}
     renderPanel={data => (

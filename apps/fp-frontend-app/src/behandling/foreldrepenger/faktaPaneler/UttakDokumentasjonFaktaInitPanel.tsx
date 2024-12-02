@@ -24,7 +24,7 @@ export const UttakDokumentasjonFaktaInitPanel = (props: FaktaPanelInitProps) => 
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={FaktaPanelCode.UTTAK_DOKUMENTASJON}
-    faktaPanelMenyTekst={useIntl().formatMessage({ id: 'UttakDokumentasjonFaktaInitPanel.FaktaUttakDokumentasjon' })}
+    faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.UttakDokumentasjon' })}
     skalPanelVisesIMeny={() => requestBehandlingApi.hasPath(BehandlingApiKeys.DOKUMENTASJON_VURDERING_BEHOV.name)}
     renderPanel={data => <UttakDokumentasjonFaktaIndex {...data} />}
   />

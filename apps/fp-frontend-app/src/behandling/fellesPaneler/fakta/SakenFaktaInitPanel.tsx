@@ -45,7 +45,7 @@ export const SakenFaktaInitPanel = ({ fagsak, rettigheter, ...props }: Props & F
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     overstyringApKoder={OVERSTYRING_AP_CODES}
     faktaPanelKode={FaktaPanelCode.SAKEN}
-    faktaPanelMenyTekst={useIntl().formatMessage({ id: 'SakenFaktaPanel.Title' })}
+    faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.Saken' })}
     skalPanelVisesIMeny={() => true}
     renderPanel={data => (
       <SakenFaktaIndex {...data} fagsak={fagsak} kanOverstyreAccess={rettigheter.kanOverstyreAccess.isEnabled} />

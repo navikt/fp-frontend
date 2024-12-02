@@ -31,7 +31,7 @@ export const OpptjeningsvilkaretFaktaInitPanel = ({
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={FaktaPanelCode.OPPTJENINGSVILKARET}
-    faktaPanelMenyTekst={useIntl().formatMessage({ id: 'OpptjeningInfoPanel.KontrollerFaktaForOpptjening' })}
+    faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.Opptjening' })}
     skalPanelVisesIMeny={() =>
       props.behandling.vilkår.some(v => v.vilkarType === VilkarType.OPPTJENINGSVILKARET) &&
       props.behandling.vilkår.some(
