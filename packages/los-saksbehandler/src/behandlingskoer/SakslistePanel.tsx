@@ -1,10 +1,11 @@
 import React from 'react';
 
 import { VStack } from '@navikt/ds-react';
+import { useMutation } from '@tanstack/react-query';
 
 import { Oppgave } from '@navikt/fp-los-felles';
 
-import { restApiHooks,RestApiPathsKeys } from '../data/fplosSaksbehandlerRestApi';
+import { getBehandlingskøOppgaveAntall } from '../data/fplosSaksbehandlerApi';
 import {
   getValueFromLocalStorage,
   removeValueFromLocalStorage,
@@ -22,9 +23,9 @@ interface Props {
 }
 
 export const SakslistePanel = ({ reserverOppgave, sakslister, setValgtSakslisteId, valgtSakslisteId }: Props) => {
-  const { startRequest: fetchAntallOppgaver, data: antallOppgaver } = restApiHooks.useRestApiRunner(
-    RestApiPathsKeys.BEHANDLINGSKO_OPPGAVE_ANTALL,
-  );
+  const { mutate: fetchAntallOppgaver, data: antallOppgaver } = useMutation({
+    mutationFn: getBehandlingskøOppgaveAntall,
+  });
 
   return (
     <VStack gap="8">

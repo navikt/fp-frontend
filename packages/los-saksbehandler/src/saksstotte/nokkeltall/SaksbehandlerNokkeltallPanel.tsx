@@ -3,19 +3,22 @@ import { FormattedMessage } from 'react-intl';
 
 import { SectorChartIcon } from '@navikt/aksel-icons';
 import { Box, Detail, Heading, HStack, VStack } from '@navikt/ds-react';
+import { useQuery } from '@tanstack/react-query';
 
-import { NyeOgFerdigstilteOppgaver } from '../../typer/nyeOgFerdigstilteOppgaverTsType';
+import { hentNyeOgFerdigstilteOppgaverOptions } from '../../data/fplosSaksbehandlerApi';
 import { NyeOgFerdigstilteOppgaverForIdagPanel } from './nyeOgFerdigstilteOppgaverForIdag/NyeOgFerdigstilteOppgaverForIdagPanel';
 import { NyeOgFerdigstilteOppgaverForSisteSyvPanel } from './nyeOgFerdigstilteOppgaverForSisteSyv/NyeOgFerdigstilteOppgaverForSisteSyvPanel';
 
 import styles from './saksbehandlerNokkeltallPanel.module.css';
 
 interface Props {
-  nyeOgFerdigstilteOppgaver?: NyeOgFerdigstilteOppgaver[];
+  valgtSakslisteId: number;
 }
 
-export const SaksbehandlerNokkeltallPanel = ({ nyeOgFerdigstilteOppgaver }: Props) => {
+export const SaksbehandlerNokkeltallPanel = ({ valgtSakslisteId }: Props) => {
   const HEIGHT = 250;
+
+  const nyeOgFerdigstilteOppgaver = useQuery(hentNyeOgFerdigstilteOppgaverOptions(valgtSakslisteId)).data;
 
   return (
     <VStack gap="4">

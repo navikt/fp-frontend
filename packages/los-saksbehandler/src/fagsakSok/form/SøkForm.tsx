@@ -2,20 +2,20 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
-import { ExclamationmarkTriangleFillIcon,MagnifyingGlassIcon } from '@navikt/aksel-icons';
+import { ExclamationmarkTriangleFillIcon, MagnifyingGlassIcon } from '@navikt/aksel-icons';
 import { Button, HStack, VStack } from '@navikt/ds-react';
 import { CheckboxField, Form, InputField } from '@navikt/ft-form-hooks';
 import { hasValidSaksnummerOrFodselsnummerFormat } from '@navikt/ft-form-validators';
 
 import styles from './SøkForm.module.css';
 
-type FormValues = {
+export type SøkFormValues = {
   skalReservere: boolean;
   searchString: string;
 };
 
 interface Props {
-  onSubmit: (values: { searchString: string; skalReservere: boolean }) => void;
+  onSubmit: (values: SøkFormValues) => void;
   searchStarted: boolean;
   searchResultAccessDenied?: {
     feilmelding?: string;
@@ -31,12 +31,12 @@ interface Props {
  */
 export const SøkForm = ({ onSubmit, searchResultAccessDenied, searchStarted, resetSearch, kanSaksbehandle }: Props) => {
   const intl = useIntl();
-  const formMethods = useForm<FormValues>();
+  const formMethods = useForm<SøkFormValues>();
 
   const searchStringValue = formMethods.watch('searchString');
 
   return (
-    <Form<FormValues> onSubmit={onSubmit} formMethods={formMethods}>
+    <Form<SøkFormValues> onSubmit={onSubmit} formMethods={formMethods}>
       <VStack gap="2">
         <HStack gap="8">
           <HStack gap="0">

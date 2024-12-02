@@ -2,17 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, HStack, Label, Pagination, SortState, Table, VStack } from '@navikt/ds-react';
+import { useQuery } from '@tanstack/react-query';
 
 import { Oppgave } from '@navikt/fp-los-felles';
 import { TimeoutError } from '@navikt/fp-rest-api';
 
-import { requestApi, restApiHooks, RestApiPathsKeys } from '../../data/fplosSaksbehandlerRestApi';
+import { oppgaverTilBehandlingOptions, reserverteOppgaverOptions } from '../../data/fplosSaksbehandlerApi';
 import { BehandlingPollingTimoutModal } from '../timeoutModal/BehandlingPollingTimoutModal';
 import { OppgaveMedReservertIndikator, OppgaveRad } from './OppgaveRad';
 
 import styles from './oppgaverTabell.module.css';
-
-const isDevelopmentOrTest = import.meta.env.MODE === 'development' || import.meta.env.MODE === 'test';
 
 const EMPTY_ARRAY: Oppgave[] = [];
 
@@ -77,37 +76,25 @@ export const OppgaverTabell = ({ reserverOppgave, antallOppgaver = 0, valgtSaksl
   const [sidetall, setSidetall] = useState(1);
   const raderPerSide = 15;
 
-  const { startRequest: hentReserverteOppgaver, data: reserverteOppgaver = EMPTY_ARRAY } =
-    restApiHooks.useRestApiRunner(RestApiPathsKeys.RESERVERTE_OPPGAVER);
+  const [sakslisteId, setSakslisteId] = useState(valgtSakslisteId);
+  const [oppgaveIder, setOppgaveIder] = useState<string>();
 
-  const {
-    startRequest: hentOppgaverTilBehandling,
-    data: oppgaverTilBehandling = EMPTY_ARRAY,
-    error: hentOppgaverTilBehandlingError,
-  } = restApiHooks.useRestApiRunner(RestApiPathsKeys.OPPGAVER_TIL_BEHANDLING);
+  const { data: reserverteOppgaver = EMPTY_ARRAY, refetch: refetchReserverteOppgaver } = useQuery({
+    ...reserverteOppgaverOptions(),
+    refetchInterval: () => (import.meta.env.MODE === 'test' ? false : 1000),
+  });
 
-  const fetchSakslisteOppgaverPolling = (keepData: boolean, sakslisteId: number, oppgaveIder?: string) => {
-    hentReserverteOppgaver(undefined, true);
-    hentOppgaverTilBehandling(oppgaveIder ? { sakslisteId, oppgaveIder } : { sakslisteId }, keepData)
-      .then(response =>
-        !response || typeof response === 'string' || isDevelopmentOrTest
-          ? Promise.resolve()
-          : fetchSakslisteOppgaverPolling(true, sakslisteId, response.map(o => o.id).join(',')),
-      )
-      .catch(err => console.log(err));
-  };
+  //FIXME Håndter Timeout spesielt
+  const { data: oppgaverTilBehandling = EMPTY_ARRAY, error: hentOppgaverTilBehandlingError } = useQuery({
+    ...oppgaverTilBehandlingOptions(sakslisteId, oppgaveIder),
+    // FIXME Før var det ein mekanikk for å utvida intervallet etterkvart
+    refetchInterval: () => (import.meta.env.MODE === 'test' ? false : 1000),
+  });
 
   useEffect(() => {
-    requestApi.cancelRequest(RestApiPathsKeys.OPPGAVER_TIL_BEHANDLING.name);
-    fetchSakslisteOppgaverPolling(false, valgtSakslisteId);
-  }, [valgtSakslisteId]);
-
-  useEffect(
-    () => () => {
-      requestApi.cancelRequest(RestApiPathsKeys.OPPGAVER_TIL_BEHANDLING.name);
-    },
-    [],
-  );
+    setSakslisteId(valgtSakslisteId);
+    setOppgaveIder(oppgaverTilBehandling.map(o => o.id).join(','));
+  }, [valgtSakslisteId, oppgaverTilBehandling]);
 
   const alleOppgaver = slaSammenOgMarkerReserverte(reserverteOppgaver, oppgaverTilBehandling);
 
@@ -195,7 +182,7 @@ export const OppgaverTabell = ({ reserverOppgave, antallOppgaver = 0, valgtSaksl
                 <OppgaveRad
                   key={oppgave.id}
                   oppgave={oppgave}
-                  hentReserverteOppgaver={hentReserverteOppgaver}
+                  hentReserverteOppgaver={refetchReserverteOppgaver}
                   reserverOppgave={reserverOppgave}
                 />
               ))}

@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
-import { RestApiState, useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
+import { useQuery } from '@tanstack/react-query';
 
 import { BehandlingskoerIndex } from './behandlingskoer/BehandlingskoerIndex';
-import {
-  requestApi,
-  RestApiGlobalStatePathsKeys,
-  restApiHooks,
-  RestApiPathsKeys,
-} from './data/fplosSaksbehandlerRestApi';
+import { driftsmeldingerOptions, losKodeverkOptions } from './data/fplosSaksbehandlerApi';
 import { DriftsmeldingPanel } from './driftsmelding/DriftsmeldingPanel';
 import { FagsakSøkIndex } from './fagsakSok/FagsakSøkIndex';
 import { SaksstøttePaneler } from './saksstotte/SaksstøttePaneler';
@@ -24,33 +19,22 @@ interface Props {
 export const SaksbehandlerDashboard = ({ setLosErIkkeTilgjengelig, åpneFagsak, kanSaksbehandle }: Props) => {
   const [valgtSakslisteId, setValgtSakslisteId] = useState<number>();
 
-  const { addErrorMessage } = useRestApiErrorDispatcher();
-  requestApi.setAddErrorMessageHandler(addErrorMessage);
-
-  // TODO (TOR) Skriv om henting av kodeverk. Vanskeleg å forstå
-  const kodeverk = restApiHooks.useGlobalStateRestApiData(RestApiGlobalStatePathsKeys.KODEVERK_LOS);
-  const kodeverkData = restApiHooks.useGlobalStateRestApi(RestApiGlobalStatePathsKeys.KODEVERK_LOS, undefined, {
-    suspendRequest: !!kodeverk,
-  });
-
-  const driftsmeldingerData = restApiHooks.useRestApi(RestApiPathsKeys.DRIFTSMELDINGER);
+  const alleKodeverkQuery = useQuery(losKodeverkOptions());
+  const driftsmeldingerQuery = useQuery(driftsmeldingerOptions());
 
   useEffect(() => {
-    if (driftsmeldingerData.state === RestApiState.ERROR || kodeverkData.state === RestApiState.ERROR) {
+    if (driftsmeldingerQuery.isError || alleKodeverkQuery.isError) {
       setLosErIkkeTilgjengelig();
     }
-  }, [driftsmeldingerData.state, kodeverkData.state]);
+  }, [driftsmeldingerQuery.isError, alleKodeverkQuery.isError]);
 
-  if (
-    driftsmeldingerData.state !== RestApiState.SUCCESS ||
-    (kodeverkData.state !== RestApiState.SUCCESS && !kodeverk)
-  ) {
+  if (driftsmeldingerQuery.isPending || alleKodeverkQuery.isPending) {
     return null;
   }
 
   return (
     <>
-      {driftsmeldingerData.data && <DriftsmeldingPanel driftsmeldinger={driftsmeldingerData.data} />}
+      {driftsmeldingerQuery.data && <DriftsmeldingPanel driftsmeldinger={driftsmeldingerQuery.data} />}
       <div className={styles.gridContainer}>
         <div className={styles.leftColumn}>
           <BehandlingskoerIndex

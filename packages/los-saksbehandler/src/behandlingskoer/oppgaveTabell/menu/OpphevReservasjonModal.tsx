@@ -5,10 +5,11 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Button, Heading, Modal as NavModal } from '@navikt/ds-react';
 import { Form, TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
+import { useMutation } from '@tanstack/react-query';
 
 import { Oppgave } from '@navikt/fp-los-felles';
 
-import { restApiHooks, RestApiPathsKeys } from '../../../data/fplosSaksbehandlerRestApi';
+import { postOpphevReservasjon } from '../../../data/fplosSaksbehandlerApi';
 
 import styles from './opphevReservasjonModal.module.css';
 
@@ -22,7 +23,7 @@ type FormValues = {
 type Props = Readonly<{
   oppgave: Oppgave;
   closeModal: () => void;
-  hentReserverteOppgaver: (params?: void, keepData?: boolean) => void;
+  hentReserverteOppgaver: () => void;
 }>;
 
 /**
@@ -33,20 +34,18 @@ type Props = Readonly<{
 export const OpphevReservasjonModal = ({ closeModal, oppgave, hentReserverteOppgaver }: Props) => {
   const intl = useIntl();
 
-  const { startRequest: opphevOppgavereservasjon } = restApiHooks.useRestApiRunner(
-    RestApiPathsKeys.OPPHEV_OPPGAVERESERVASJON,
-  );
-
-  const opphevReservasjon = (formValues: FormValues) =>
-    opphevOppgavereservasjon({ oppgaveId: oppgave.id, begrunnelse: formValues.begrunnelse }).then(() => {
+  const { mutate: opphevOppgavereservasjon } = useMutation({
+    mutationFn: (values: FormValues) => postOpphevReservasjon(oppgave.id, values.begrunnelse),
+    onSuccess: () => {
       closeModal();
-      hentReserverteOppgaver(undefined, true);
-    });
+      hentReserverteOppgaver();
+    },
+  });
 
   const formMethods = useForm<FormValues>();
 
   return (
-    <Form formMethods={formMethods} onSubmit={opphevReservasjon}>
+    <Form formMethods={formMethods} onSubmit={values => opphevOppgavereservasjon(values)}>
       <NavModal
         width="small"
         open
