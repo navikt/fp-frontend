@@ -9,9 +9,9 @@ import {
 } from '@navikt/ft-fakta-fordel-beregningsgrunnlag';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 
-import { AksjonspunktKode,VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, hasAksjonspunkt, VilkarType } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import { ArbeidsgiverOpplysningerPerId,Beregningsgrunnlag, Vilkar, Vilkarperiode } from '@navikt/fp-types';
+import { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkar, Vilkarperiode } from '@navikt/fp-types';
 
 import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
@@ -101,11 +101,7 @@ export const FordelingFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId, ...prop
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={FaktaPanelCode.FORDELING}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FordelBeregningsgrunnlag.Title' })}
-    skalPanelVisesIMeny={() =>
-      !!props.behandling &&
-      !!props.behandling.aksjonspunkt &&
-      !!props.behandling.aksjonspunkt.some(ap => AKSJONSPUNKT_KODER.some(kode => kode === ap.definisjon))
-    }
+    skalPanelVisesIMeny={() => AKSJONSPUNKT_KODER.some(kode => hasAksjonspunkt(kode, props.behandling.aksjonspunkt))}
     renderPanel={data => (
       <FordelBeregningsgrunnlagFaktaIndex
         {...data}
