@@ -13,6 +13,7 @@ import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.DOKUMENTASJON_VURDERING_BEHOV];
+
 type EndepunktPanelData = {
   dokumentasjonVurderingBehov: DokumentasjonVurderingBehov[];
 };

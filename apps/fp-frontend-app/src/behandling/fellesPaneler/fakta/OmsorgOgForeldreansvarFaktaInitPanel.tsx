@@ -17,6 +17,7 @@ const ENDEPUNKTER_PANEL_DATA = [
   BehandlingApiKeys.FAMILIEHENDELSE,
   BehandlingApiKeys.INNTEKT_ARBEID_YTELSE,
 ];
+
 type EndepunktPanelData = {
   soknad: Soknad;
   familiehendelse: FamilieHendelseSamling;

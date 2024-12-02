@@ -16,6 +16,7 @@ const AKSJONSPUNKT_KODER = [
 ];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.YTELSEFORDELING];
+
 type EndepunktPanelData = {
   ytelsefordeling: Ytelsefordeling;
 };

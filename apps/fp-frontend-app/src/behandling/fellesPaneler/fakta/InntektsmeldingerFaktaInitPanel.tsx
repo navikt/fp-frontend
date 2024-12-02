@@ -16,6 +16,7 @@ import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel'
 import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.INNTEKTSMELDINGER];
+
 type EndepunktPanelData = {
   inntektsmeldinger: Inntektsmelding[];
 };

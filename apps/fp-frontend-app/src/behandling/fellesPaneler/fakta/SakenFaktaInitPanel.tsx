@@ -20,6 +20,7 @@ const AKSJONSPUNKT_KODER = [
 const OVERSTYRING_AP_CODES = [AksjonspunktKode.OVERSTYR_AVKLAR_STARTDATO, AksjonspunktKode.OVERSTYR_DEKNINGSGRAD];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.UTLAND_DOK_STATUS, BehandlingApiKeys.SOKNAD];
+
 type EndepunktPanelData = {
   utlandDokStatus?: {
     dokStatus?: string;

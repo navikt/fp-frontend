@@ -105,6 +105,7 @@ const OVERSTYRING_AP_CODES = [
 ];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.BEREGNINGSGRUNNLAG];
+
 type EndepunktPanelData = {
   beregningsgrunnlag: Beregningsgrunnlag;
 };

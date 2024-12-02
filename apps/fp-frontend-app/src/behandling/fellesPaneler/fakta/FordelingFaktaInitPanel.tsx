@@ -86,6 +86,7 @@ const lagFormatertBG = (beregningsgrunnlag: Beregningsgrunnlag): FtBeregningsgru
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.FORDEL_BEREGNINGSGRUNNLAG, AksjonspunktKode.VURDER_REFUSJON_BERGRUNN];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.BEREGNINGSGRUNNLAG];
+
 type EndepunktPanelData = {
   beregningsgrunnlag: Beregningsgrunnlag;
 };

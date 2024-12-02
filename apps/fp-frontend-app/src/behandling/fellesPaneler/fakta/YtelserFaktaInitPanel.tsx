@@ -10,6 +10,7 @@ import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel'
 import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.INNTEKT_ARBEID_YTELSE];
+
 type EndepunktPanelData = {
   inntektArbeidYtelse: InntektArbeidYtelse;
 };

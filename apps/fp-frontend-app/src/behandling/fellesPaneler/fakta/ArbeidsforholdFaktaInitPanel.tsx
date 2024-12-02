@@ -13,6 +13,7 @@ import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.AVKLAR_ARBEIDSFORHOLD];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.ARBEID_OG_INNTEKT];
+
 type EndepunktPanelData = {
   arbeidOgInntekt: ArbeidOgInntektsmelding;
 };

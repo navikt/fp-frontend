@@ -2,7 +2,7 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { AdopsjonFaktaIndex } from '@navikt/fp-fakta-adopsjon';
-import { adopsjonsvilkarene,AksjonspunktKode, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { adopsjonsvilkarene, AksjonspunktKode, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { Fagsak, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
 
@@ -17,6 +17,7 @@ const AKSJONSPUNKT_KODER = [
 ];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.FAMILIEHENDELSE, BehandlingApiKeys.SOKNAD];
+
 type EndepunktPanelData = {
   familiehendelse: FamilieHendelseSamling;
   soknad: Soknad;
@@ -33,9 +34,7 @@ export const AdopsjonsvilkaretFaktaInitPanel = ({ fagsak, ...props }: Props & Fa
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={FaktaPanelCode.ADOPSJONSVILKARET}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'AdopsjonInfoPanel.Adopsjon' })}
-    skalPanelVisesIMeny={() =>
-      !!props.behandling.vilkår && props.behandling.vilkår.some(v => adopsjonsvilkarene.some(av => av === v.vilkarType))
-    }
+    skalPanelVisesIMeny={() => props.behandling.vilkår.some(v => adopsjonsvilkarene.some(av => av === v.vilkarType))}
     renderPanel={data => (
       <AdopsjonFaktaIndex
         isForeldrepengerFagsak={fagsak.fagsakYtelseType === FagsakYtelseType.FORELDREPENGER}

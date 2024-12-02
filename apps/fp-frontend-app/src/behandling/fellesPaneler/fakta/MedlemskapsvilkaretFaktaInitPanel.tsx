@@ -16,6 +16,7 @@ const AKSJONSPUNKT_KODER: AksjonspunktKode[] = [
 ];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.MEDLEMSKAP, BehandlingApiKeys.SOKNAD];
+
 type EndepunktPanelData = {
   medlemskap: Medlemskap;
   soknad: Soknad;

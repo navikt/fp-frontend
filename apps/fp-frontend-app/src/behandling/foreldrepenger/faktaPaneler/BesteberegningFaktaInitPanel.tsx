@@ -10,7 +10,13 @@ import { BehandlingApiKeys, requestBehandlingApi } from '../../../data/behandlin
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
 
+const AKSJONSPUNKT_KODER = [
+  AksjonspunktKode.KONTROLLER_AUTOMATISK_BESTEBEREGNING,
+  AksjonspunktKode.MANUELL_KONTROLL_AV_BESTEBEREGNING,
+];
+
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.BEREGNINGSGRUNNLAG];
+
 type EndepunktPanelData = {
   beregningsgrunnlag: Beregningsgrunnlag;
 };
@@ -25,10 +31,7 @@ export const BesteberegningFaktaInitPanel = ({
 }: Props & FaktaPanelInitProps) => (
   <FaktaDefaultInitPanel<EndepunktPanelData>
     {...props}
-    aksjonspunktKoder={[
-      AksjonspunktKode.KONTROLLER_AUTOMATISK_BESTEBEREGNING,
-      AksjonspunktKode.MANUELL_KONTROLL_AV_BESTEBEREGNING,
-    ]}
+    aksjonspunktKoder={AKSJONSPUNKT_KODER}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     faktaPanelKode={FaktaPanelCode.BESTEBEREGNING}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'BesteberegningInfoPanel.Title' })}

@@ -32,6 +32,7 @@ const ENDEPUNKTER_PANEL_DATA = [
   BehandlingApiKeys.FAKTA_ARBEIDSFORHOLD,
   BehandlingApiKeys.YTELSEFORDELING,
 ];
+
 type EndepunktPanelData = {
   uttakKontrollerFaktaPerioderV2: KontrollerFaktaPeriode[];
   faktaArbeidsforhold: FaktaArbeidsforhold[];
