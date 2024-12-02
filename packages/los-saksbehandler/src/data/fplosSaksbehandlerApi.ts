@@ -47,6 +47,7 @@ export const losKodeverkOptions = () =>
   queryOptions({
     queryKey: [LosUrl.KODEVERK_LOS],
     queryFn: () => ky.get(LosUrl.KODEVERK_LOS).json<AlleKodeverk>(),
+    staleTime: Infinity,
   });
 
 export const driftsmeldingerOptions = () =>

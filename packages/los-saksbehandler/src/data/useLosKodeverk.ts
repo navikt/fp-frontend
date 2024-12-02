@@ -10,10 +10,6 @@ import { losKodeverkOptions } from './fplosSaksbehandlerApi';
 export const useLosKodeverk = <T = KodeverkMedNavn>(kodeverkType: string): T[] => {
   const alleKodeverk = useQuery(losKodeverkOptions()).data;
 
-  if (alleKodeverk === undefined) {
-    throw new Error('Kodeverk skal være hentet');
-  }
-
-  //@ts-ignore Fiks denne
-  return alleKodeverk[kodeverkType];
+  //@ts-expect-error Fiks denne
+  return alleKodeverk && alleKodeverk[kodeverkType] ? alleKodeverk[kodeverkType] : [];
 };

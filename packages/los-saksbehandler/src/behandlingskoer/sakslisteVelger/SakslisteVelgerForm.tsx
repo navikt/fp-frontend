@@ -63,11 +63,10 @@ const getFormDefaultValues = (
   };
 };
 
-const getAndreKriterier = (
-  intl: IntlShape,
-  andreKriterierTyper: KodeverkMedNavn[],
-  saksliste?: Saksliste,
-): ReactNode => {
+const AndreKriterier = ({ saksliste }: { saksliste?: Saksliste }): ReactNode => {
+  const intl = useIntl();
+  const andreKriterierTyper = useLosKodeverk('AndreKriterierType');
+
   if (saksliste && saksliste.andreKriterier.length > 0) {
     return (
       <VStack gap="1">
@@ -191,7 +190,6 @@ export const SakslisteVelgerForm = ({
   const behandlingsTyper = useLosKodeverk(KodeverkType.BEHANDLING_TYPE);
   const fagsakYtelseTyper = useLosKodeverk(KodeverkType.FAGSAK_YTELSE);
   // TODO Lag ein eigen KodeverkType for LOS
-  const andreKriterierTyper = useLosKodeverk('AndreKriterierType');
   const køSorteringTyper = useLosKodeverk('KøSortering');
 
   const sorterteSakslister = sakslister.toSorted((saksliste1, saksliste2) =>
@@ -313,7 +311,7 @@ export const SakslisteVelgerForm = ({
                         </Label>
                         <FunnelIcon aria-hidden className={styles.grayout} />
                       </HStack>
-                      {getAndreKriterier(intl, andreKriterierTyper, valgtSaksliste)}
+                      <AndreKriterier saksliste={valgtSaksliste} />
                     </VStack>
                   </Box>
                   <Box background="surface-neutral-subtle" padding="4" borderRadius="xlarge" width="200px">
