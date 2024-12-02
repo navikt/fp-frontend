@@ -58,29 +58,29 @@ const ReservasjonerTabell: FunctionComponent<OwnProps> = ({
     [reservasjoner],
   );
 
-  const { startRequest: endreOppgavereservasjon } = restApiHooks.useRestApiRunner(
+  const { startRequest: endreOppgavereservasjonRequest } = restApiHooks.useRestApiRunner(
     RestApiPathsKeys.ENDRE_OPPGAVERESERVASJON,
   );
 
-  const endreOppgaveres = (reserverTil: string) => {
+  const endreOppgavereservasjon = async (reserverTil: string) => {
     if (!valgtReservasjon) {
       throw new Error('Reservasjon må være valgt');
     }
-    endreOppgavereservasjon({ oppgaveId: valgtReservasjon.oppgaveId, reserverTil }).then(() => {
-      closeReservasjonEndringDatoModal();
-      hentAvdelingensReservasjoner();
-    });
+    await endreOppgavereservasjonRequest({ oppgaveId: valgtReservasjon.oppgaveId, reserverTil });
+    closeReservasjonEndringDatoModal();
+    hentAvdelingensReservasjoner();
   };
 
-  const { startRequest: flyttOppgavereservasjon } = restApiHooks.useRestApiRunner(RestApiPathsKeys.FLYTT_RESERVASJON);
+  const { startRequest: flyttOppgavereservasjonRequest } = restApiHooks.useRestApiRunner(
+    RestApiPathsKeys.FLYTT_RESERVASJON,
+  );
 
-  const flyttOppgaveres = (params: { brukerIdent: string; begrunnelse: string }) => {
+  const flyttOppgavereservasjon = async (params: { brukerIdent: string; begrunnelse: string }) => {
     if (!valgtReservasjon) {
       throw new Error('Reservasjon må være valgt');
     }
-    flyttOppgavereservasjon({ oppgaveId: valgtReservasjon.oppgaveId, ...params }).then(() => {
-      hentAvdelingensReservasjoner();
-    });
+    await flyttOppgavereservasjonRequest({ oppgaveId: valgtReservasjon.oppgaveId, ...params });
+    hentAvdelingensReservasjoner();
   };
 
   const {
@@ -162,13 +162,13 @@ const ReservasjonerTabell: FunctionComponent<OwnProps> = ({
         <OppgaveReservasjonEndringDatoModal
           closeModal={closeReservasjonEndringDatoModal}
           reserverTilDefault={valgtReservasjon.reservertTilTidspunkt}
-          endreOppgavereservasjon={endreOppgaveres}
+          endreOppgavereservasjon={endreOppgavereservasjon}
         />
       )}
       {valgtReservasjon && showFlyttReservasjonModal && (
         <FlyttReservasjonModal
           closeModal={closeFlytteModal}
-          flyttOppgavereservasjon={flyttOppgaveres}
+          flyttOppgavereservasjon={flyttOppgavereservasjon}
           hentSaksbehandler={(brukerIdent: string) => hentSaksbehandler({ brukerIdent })}
           hentSaksbehandlerIsPending={hentSaksbehandlerState === RestApiState.LOADING}
           hentSaksbehandlerIsSuccess={hentSaksbehandlerState === RestApiState.SUCCESS}

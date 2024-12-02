@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { useMutation } from '@tanstack/react-query';
 
@@ -39,19 +39,18 @@ export const FagsakSøkIndex = ({ åpneFagsak, kanSaksbehandle }: Props) => {
   const [skalReservere, setSkalReservere] = useState(false);
   const [reservertAvAnnenSaksbehandler, setReservertAvAnnenSaksbehandler] = useState(false);
   const [reservertOppgave, setReservertOppgave] = useState<Oppgave>();
-  const [sokStartet, setSokStartet] = useState(false);
-  const [sokFerdig, setSokFerdig] = useState(false);
 
   const { mutateAsync: reserverOppgave } = useMutation({
     mutationFn: reserverOppgavePost,
   });
 
-  const { mutateAsync: hentOppgaverForFagsaker, data: fagsakOppgaver = EMPTY_ARRAY_OPPGAVER } = useMutation({
+  const {
+    mutateAsync: hentOppgaverForFagsaker,
+    data: fagsakOppgaver = EMPTY_ARRAY_OPPGAVER,
+    isPending: isHentOppgaverPending,
+    isSuccess: isHentOppgaverSuccess,
+  } = useMutation({
     mutationFn: getOppgaverForFagsaker,
-    onSuccess: () => {
-      setSokStartet(false);
-      setSokFerdig(true);
-    },
   });
 
   const {
@@ -59,14 +58,19 @@ export const FagsakSøkIndex = ({ åpneFagsak, kanSaksbehandle }: Props) => {
     data: fagsaker = EMPTY_ARRAY_FAGSAK,
     error: fagsakError,
     reset: resetFagsakSøk,
+    isPending: isSøkFagsakPending,
+    isSuccess: isSøkFagsakSuccess,
   } = useMutation({
     mutationFn: (values: SøkFormValues) => søkFagsakPost(values.searchString, values.skalReservere),
-    onSuccess: fagsakerResultat => {
+    onSuccess: async fagsakerResultat => {
       if (fagsakerResultat && fagsakerResultat.length > 0) {
-        hentOppgaverForFagsaker(fagsakerResultat);
-      } else {
-        setSokStartet(false);
-        setSokFerdig(true);
+        const oppgaver = await hentOppgaverForFagsaker(fagsakerResultat);
+        if (oppgaver.length === 1) {
+          // eslint-disable-next-line @typescript-eslint/no-use-before-define
+          velgFagsakOperasjoner(oppgaver[0], false);
+        } else if (oppgaver.length === 0 && fagsakerResultat) {
+          åpneFagsak(fagsakerResultat[0].saksnummer);
+        }
       }
     },
   });
@@ -81,23 +85,7 @@ export const FagsakSøkIndex = ({ åpneFagsak, kanSaksbehandle }: Props) => {
       ? getErrorResponseData(fagsakError)
       : undefined;
 
-  useEffect(() => {
-    if (sokFerdig && fagsaker.length === 1) {
-      if (fagsakOppgaver.length === 1) {
-        // eslint-disable-next-line @typescript-eslint/no-use-before-define
-        velgFagsakOperasjoner(fagsakOppgaver[0], false);
-      } else if (fagsakOppgaver.length === 0) {
-        åpneFagsak(fagsaker[0].saksnummer);
-      }
-    }
-  }, [sokFerdig, fagsaker, fagsakOppgaver]);
-
-  useEffect(
-    () => () => {
-      resetFagsakSøk();
-    },
-    [],
-  );
+  const erSøkFerdig = isSøkFagsakSuccess && isHentOppgaverSuccess;
 
   const goToFagsakEllerApneModal = (oppgave: Oppgave, oppgaveStatus?: OppgaveStatus) => {
     if (
@@ -136,8 +124,6 @@ export const FagsakSøkIndex = ({ åpneFagsak, kanSaksbehandle }: Props) => {
 
   const sokFagsakFn = (values: SøkValues) => {
     setSkalReservere(values.skalReservere);
-    setSokStartet(true);
-    setSokFerdig(false);
     return søkFagsak(values);
   };
 
@@ -147,24 +133,18 @@ export const FagsakSøkIndex = ({ åpneFagsak, kanSaksbehandle }: Props) => {
     åpneFagsak(oppgave.saksnummer.toString(), oppgave.behandlingId);
   };
 
-  const resetSearch = () => {
-    resetFagsakSøk();
-    setSokStartet(false);
-    setSokFerdig(false);
-  };
-
   return (
     <>
       <FagsakSøk
         fagsaker={fagsaker || []}
         fagsakOppgaver={fagsakOppgaver || []}
         searchFagsakCallback={sokFagsakFn}
-        searchResultReceived={sokFerdig}
+        searchResultReceived={erSøkFerdig}
         åpneFagsak={åpneFagsak}
         selectOppgaveCallback={reserverOppgaveOgApne}
-        searchStarted={sokStartet}
+        searchStarted={isHentOppgaverPending || isSøkFagsakPending}
         searchResultAccessDenied={searchResultAccessDenied}
-        resetSearch={resetSearch}
+        resetSearch={resetFagsakSøk}
         kanSaksbehandle={kanSaksbehandle}
       />
       {reservertAvAnnenSaksbehandler && reservertOppgave && (
