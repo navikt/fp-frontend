@@ -76,23 +76,16 @@ export const OppgaverTabell = ({ reserverOppgave, antallOppgaver = 0, valgtSaksl
   const [sidetall, setSidetall] = useState(1);
   const raderPerSide = 15;
 
-  const [sakslisteId, setSakslisteId] = useState(valgtSakslisteId);
   const [oppgaveIder, setOppgaveIder] = useState<string>();
 
-  const { data: reserverteOppgaver = EMPTY_ARRAY, refetch: refetchReserverteOppgaver } = useQuery({
-    ...reserverteOppgaverOptions(),
-    refetchInterval: () => (import.meta.env.MODE === 'test' ? false : 1000),
-  });
+  const { data: reserverteOppgaver = EMPTY_ARRAY } = useQuery(reserverteOppgaverOptions());
 
   //FIXME Håndter Timeout spesielt
-  const { data: oppgaverTilBehandling = EMPTY_ARRAY, error: hentOppgaverTilBehandlingError } = useQuery({
-    ...oppgaverTilBehandlingOptions(sakslisteId, oppgaveIder),
-    // FIXME Før var det ein mekanikk for å utvida intervallet etterkvart
-    refetchInterval: () => (import.meta.env.MODE === 'test' ? false : 1000),
-  });
+  const { data: oppgaverTilBehandling = EMPTY_ARRAY, error: hentOppgaverTilBehandlingError } = useQuery(
+    oppgaverTilBehandlingOptions(valgtSakslisteId, oppgaveIder),
+  );
 
   useEffect(() => {
-    setSakslisteId(valgtSakslisteId);
     setOppgaveIder(oppgaverTilBehandling.map(o => o.id).join(','));
   }, [valgtSakslisteId, oppgaverTilBehandling]);
 
@@ -179,12 +172,7 @@ export const OppgaverTabell = ({ reserverOppgave, antallOppgaver = 0, valgtSaksl
             </Table.Header>
             <Table.Body>
               {oppgaverSomSkalVisesITabell.map(oppgave => (
-                <OppgaveRad
-                  key={oppgave.id}
-                  oppgave={oppgave}
-                  hentReserverteOppgaver={refetchReserverteOppgaver}
-                  reserverOppgave={reserverOppgave}
-                />
+                <OppgaveRad key={oppgave.id} oppgave={oppgave} reserverOppgave={reserverOppgave} />
               ))}
             </Table.Body>
           </Table>

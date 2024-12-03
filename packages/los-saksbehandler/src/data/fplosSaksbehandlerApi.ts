@@ -66,6 +66,7 @@ export const reserverteOppgaverOptions = () =>
   queryOptions({
     queryKey: [LosUrl.RESERVERTE_OPPGAVER],
     queryFn: () => ky.get(LosUrl.RESERVERTE_OPPGAVER).json<Oppgave[]>(),
+    refetchInterval: () => (isTest ? false : 1000),
   });
 
 export const oppgaverTilBehandlingOptions = (sakslisteId: number, oppgaveIder?: string) =>
@@ -82,6 +83,7 @@ export const oppgaverTilBehandlingOptions = (sakslisteId: number, oppgaveIder?: 
             : { sakslisteId },
         })
         .json<Oppgave[]>(),
+    refetchInterval: () => (isTest ? false : 1000),
   });
 
 export const getOppgaverForFagsaker = (fagsaker: FagsakEnkel[]) =>

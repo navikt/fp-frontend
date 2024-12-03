@@ -11,10 +11,10 @@ const { Default } = composeStories(stories);
 
 describe('<OpphevReservasjonModal>', () => {
   it('skal vise modal for oppheving av reservasjon', async () => {
-    const hentReserverteOppgaver = vi.fn();
+    const closeModal = vi.fn();
 
     await applyRequestHandlers(Default.parameters.msw);
-    const utils = render(<Default hentReserverteOppgaver={hentReserverteOppgaver} />);
+    const utils = render(<Default closeModal={closeModal} />);
 
     expect(await screen.findByText('Når en reservert sak frigjøres er begrunnelse obligatorisk')).toBeInTheDocument();
 
@@ -23,6 +23,6 @@ describe('<OpphevReservasjonModal>', () => {
 
     await userEvent.click(screen.getByText('OK'));
 
-    await waitFor(() => expect(hentReserverteOppgaver).toHaveBeenCalledTimes(1));
+    await waitFor(() => expect(closeModal).toHaveBeenCalledTimes(1));
   });
 });
