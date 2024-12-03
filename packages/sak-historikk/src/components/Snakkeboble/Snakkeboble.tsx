@@ -42,12 +42,14 @@ export const Snakkeboble = ({
       <Chat.Bubble>
         {tittel && <BodyShort size="small">{tittel}</BodyShort>}
 
-        <Skjermlenke
-          skjermlenke={skjermlenke}
-          behandlingLocation={behandlingLocation}
-          getKodeverknavn={getKodeverknavn}
-          createLocationForSkjermlenke={createLocationForSkjermlenke}
-        />
+        {skjermlenke && (
+          <Skjermlenke
+            skjermlenke={skjermlenke}
+            behandlingLocation={behandlingLocation}
+            getKodeverknavn={getKodeverknavn}
+            createLocationForSkjermlenke={createLocationForSkjermlenke}
+          />
+        )}
 
         {body.map((linje, index) => (
           <BodyShort key={index} size="small">
