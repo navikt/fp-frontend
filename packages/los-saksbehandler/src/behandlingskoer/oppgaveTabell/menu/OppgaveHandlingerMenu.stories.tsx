@@ -33,7 +33,6 @@ const meta = {
     },
   },
   args: {
-    hentReserverteOppgaver: action('button-click'),
     setEnableTableEvents: action('button-click'),
   },
 } satisfies Meta<typeof OppgaveHandlingerMenu>;

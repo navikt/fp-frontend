@@ -24,7 +24,6 @@ const meta = {
   },
   args: {
     closeModal: action('button-click'),
-    hentReserverteOppgaver: action('button-click'),
   },
 } satisfies Meta<typeof OpphevReservasjonModal>;
 export default meta;

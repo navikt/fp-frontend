@@ -9,7 +9,7 @@ import {
   PersonHeadsetIcon,
 } from '@navikt/aksel-icons';
 import { ActionMenu, Button } from '@navikt/ds-react';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { FlyttReservasjonModal, Oppgave, OppgaveReservasjonEndringDatoModal } from '@navikt/fp-los-felles';
 
@@ -18,6 +18,7 @@ import {
   flyttReservasjonPost,
   flyttReservasjonSaksbehandlerSøkPost,
   forlengReservasjonPost,
+  LosUrl,
 } from '../../../data/fplosSaksbehandlerApi';
 import { OppgaveReservasjonForlengetModal } from './forleng/OppgaveReservasjonForlengetModal';
 import { OpphevReservasjonModal } from './OpphevReservasjonModal';
@@ -26,12 +27,12 @@ import styles from './oppgaveHandlingerMenu.module.css';
 
 interface Props {
   oppgave: Oppgave;
-  hentReserverteOppgaver: () => void;
   setEnableTableEvents: (shouldDisable: boolean) => void;
 }
 
-export const OppgaveHandlingerMenu = ({ oppgave, hentReserverteOppgaver, setEnableTableEvents }: Props) => {
+export const OppgaveHandlingerMenu = ({ oppgave, setEnableTableEvents }: Props) => {
   const intl = useIntl();
+  const queryClient = useQueryClient();
 
   const [visOpphevReservasjonModal, setVisOpphevReservasjonModal] = useState(false);
   const [visForlengetReservasjonModal, setVisForlengetReservasjonModal] = useState(false);
@@ -42,7 +43,11 @@ export const OppgaveHandlingerMenu = ({ oppgave, hentReserverteOppgaver, setEnab
     mutationFn: (reserverTil: string) => endreReservasjonPost(oppgave.id, reserverTil),
     onSuccess: () => {
       setVisForlengetReservasjonModal(true);
-      hentReserverteOppgaver();
+
+      queryClient.invalidateQueries({
+        queryKey: [LosUrl.RESERVERTE_OPPGAVER],
+      });
+
       setVisReservasjonEndringDatoModal(false);
     },
   });
@@ -51,7 +56,9 @@ export const OppgaveHandlingerMenu = ({ oppgave, hentReserverteOppgaver, setEnab
     mutationFn: (values: { brukerIdent: string; begrunnelse: string }) =>
       flyttReservasjonPost(oppgave.id, values.brukerIdent, values.begrunnelse),
     onSuccess: () => {
-      hentReserverteOppgaver();
+      queryClient.invalidateQueries({
+        queryKey: [LosUrl.RESERVERTE_OPPGAVER],
+      });
     },
   });
 
@@ -59,7 +66,9 @@ export const OppgaveHandlingerMenu = ({ oppgave, hentReserverteOppgaver, setEnab
     mutationFn: () => forlengReservasjonPost(oppgave.id),
     onSuccess: () => {
       setVisForlengetReservasjonModal(true);
-      hentReserverteOppgaver();
+      queryClient.invalidateQueries({
+        queryKey: [LosUrl.RESERVERTE_OPPGAVER],
+      });
     },
   });
 
@@ -112,11 +121,7 @@ export const OppgaveHandlingerMenu = ({ oppgave, hentReserverteOppgaver, setEnab
         </ActionMenu.Content>
       </ActionMenu>
       {visOpphevReservasjonModal && (
-        <OpphevReservasjonModal
-          oppgave={oppgave}
-          closeModal={() => setVisOpphevReservasjonModal(false)}
-          hentReserverteOppgaver={hentReserverteOppgaver}
-        />
+        <OpphevReservasjonModal oppgave={oppgave} closeModal={() => setVisOpphevReservasjonModal(false)} />
       )}
       {visReservasjonEndringDatoModal && (
         <OppgaveReservasjonEndringDatoModal

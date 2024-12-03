@@ -5,11 +5,11 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Button, Heading, Modal as NavModal } from '@navikt/ds-react';
 import { Form, TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { Oppgave } from '@navikt/fp-los-felles';
 
-import { postOpphevReservasjon } from '../../../data/fplosSaksbehandlerApi';
+import { LosUrl, postOpphevReservasjon } from '../../../data/fplosSaksbehandlerApi';
 
 import styles from './opphevReservasjonModal.module.css';
 
@@ -23,7 +23,6 @@ type FormValues = {
 type Props = Readonly<{
   oppgave: Oppgave;
   closeModal: () => void;
-  hentReserverteOppgaver: () => void;
 }>;
 
 /**
@@ -31,14 +30,17 @@ type Props = Readonly<{
  *
  * Modal som lar en begrunne hvorfor en sak skal frigjøres.
  */
-export const OpphevReservasjonModal = ({ closeModal, oppgave, hentReserverteOppgaver }: Props) => {
+export const OpphevReservasjonModal = ({ closeModal, oppgave }: Props) => {
   const intl = useIntl();
+  const queryClient = useQueryClient();
 
   const { mutate: opphevOppgavereservasjon } = useMutation({
     mutationFn: (values: FormValues) => postOpphevReservasjon(oppgave.id, values.begrunnelse),
     onSuccess: () => {
       closeModal();
-      hentReserverteOppgaver();
+      queryClient.invalidateQueries({
+        queryKey: [LosUrl.RESERVERTE_OPPGAVER],
+      });
     },
   });
 
