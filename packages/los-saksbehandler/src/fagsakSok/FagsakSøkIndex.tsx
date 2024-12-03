@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
 import { useMutation } from '@tanstack/react-query';
+import { HTTPError } from 'ky';
 
 import { Oppgave, OppgaveStatus } from '@navikt/fp-los-felles';
-import { errorOfType, ErrorTypes, getErrorResponseData } from '@navikt/fp-rest-api';
 import { FagsakEnkel } from '@navikt/fp-types';
 
 import {
@@ -79,11 +79,9 @@ export const FagsakSøkIndex = ({ åpneFagsak, kanSaksbehandle }: Props) => {
     mutationFn: getReservasjonsstatus,
   });
 
-  //FIXME Feilhåndtering
   const searchResultAccessDenied =
-    fagsakError && errorOfType(ErrorTypes.MANGLER_TILGANG_FEIL, fagsakError)
-      ? getErrorResponseData(fagsakError)
-      : undefined;
+    //@ts-expect-error response.data når ein refaktorerar feilhåndteringa
+    fagsakError instanceof HTTPError && fagsakError.response.status === 403 ? fagsakError.response?.data : undefined;
 
   const erSøkFerdig = isSøkFagsakSuccess && isHentOppgaverSuccess;
 
