@@ -2,7 +2,7 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { ArbeidsforholdFaktaIndex } from '@navikt/fp-fakta-arbeidsforhold';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
@@ -13,6 +13,7 @@ import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.AVKLAR_ARBEIDSFORHOLD];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.ARBEID_OG_INNTEKT];
+
 type EndepunktPanelData = {
   arbeidOgInntekt: ArbeidOgInntektsmelding;
 };
@@ -35,10 +36,8 @@ export const ArbeidsforholdFaktaInitPanel = ({
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={FaktaPanelCode.ARBEIDSFORHOLD}
-    faktaPanelMenyTekst={useIntl().formatMessage({ id: 'ArbeidsforholdInfoPanel.Title' })}
-    skalPanelVisesIMeny={() =>
-      props?.behandling?.aksjonspunkt?.some(ap => AKSJONSPUNKT_KODER.some(kode => kode === ap.definisjon))
-    }
+    faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.Arbeidsforhold' })}
+    skalPanelVisesIMeny={() => AKSJONSPUNKT_KODER.some(kode => hasAksjonspunkt(kode, props.behandling.aksjonspunkt))}
     renderPanel={data => (
       <ArbeidsforholdFaktaIndex arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId} {...data} />
     )}

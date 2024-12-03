@@ -13,6 +13,7 @@ import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.YTELSEFORDELING];
+
 type EndepunktPanelData = {
   ytelsefordeling: Ytelsefordeling;
 };
@@ -27,7 +28,7 @@ export const OmsorgFaktaInitPanel = ({ personoversikt, ...props }: Props & Fakta
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={FaktaPanelCode.OMSORG}
-    faktaPanelMenyTekst={useIntl().formatMessage({ id: 'OmsorgInfoPanel.Omsorg' })}
+    faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.Omsorg' })}
     skalPanelVisesIMeny={() => AKSJONSPUNKT_KODER.some(kode => hasAksjonspunkt(kode, props.behandling.aksjonspunkt))}
     renderPanel={data => <OmsorgFaktaIndex personoversikt={personoversikt} {...data} />}
   />

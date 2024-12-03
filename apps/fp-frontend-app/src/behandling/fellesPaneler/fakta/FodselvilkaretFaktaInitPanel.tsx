@@ -18,6 +18,7 @@ const ENDEPUNKTER_PANEL_DATA = [
   BehandlingApiKeys.SOKNAD,
   BehandlingApiKeys.SOKNAD_ORIGINAL_BEHANDLING,
 ];
+
 type EndepunktPanelData = {
   familiehendelse: FamilieHendelseSamling;
   familiehendelseOriginalBehandling?: FamilieHendelse;
@@ -35,8 +36,8 @@ export const FodselvilkaretFaktaInitPanel = (props: FaktaPanelInitProps) => {
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       faktaPanelKode={FaktaPanelCode.FODSELSVILKARET}
-      faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FodselInfoPanel.Fodsel' })}
-      skalPanelVisesIMeny={() => !!vilkår && vilkår.some(v => fodselsvilkarene.some(fv => fv === v.vilkarType))}
+      faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.Fodsel' })}
+      skalPanelVisesIMeny={() => vilkår.some(v => fodselsvilkarene.some(fv => fv === v.vilkarType))}
       renderPanel={data => <FodselFaktaIndex {...data} />}
     />
   );

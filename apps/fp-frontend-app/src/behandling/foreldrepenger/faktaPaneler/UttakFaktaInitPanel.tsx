@@ -32,6 +32,7 @@ const ENDEPUNKTER_PANEL_DATA = [
   BehandlingApiKeys.FAKTA_ARBEIDSFORHOLD,
   BehandlingApiKeys.YTELSEFORDELING,
 ];
+
 type EndepunktPanelData = {
   uttakKontrollerFaktaPerioderV2: KontrollerFaktaPeriode[];
   faktaArbeidsforhold: FaktaArbeidsforhold[];
@@ -56,7 +57,7 @@ export const UttakFaktaInitPanel = ({
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     overstyringApKoder={OVERSTYRING_AP_CODES}
     faktaPanelKode={FaktaPanelCode.UTTAK}
-    faktaPanelMenyTekst={useIntl().formatMessage({ id: 'UttakInfoPanel.FaktaUttak' })}
+    faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.Uttak' })}
     skalPanelVisesIMeny={() =>
       props.behandling.harSattEndringsdato &&
       requestBehandlingApi.hasPath(BehandlingApiKeys.UTTAK_KONTROLLER_FAKTA_PERIODER_V2.name)
