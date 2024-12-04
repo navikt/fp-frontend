@@ -2,7 +2,7 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { VergeFaktaIndex } from '@navikt/fp-fakta-verge';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { Verge } from '@navikt/fp-types';
 
@@ -25,8 +25,8 @@ export const VergeFaktaInitPanel = ({ valgtFaktaSteg, behandling, registrerFakta
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={FaktaPanelCode.VERGE}
-    faktaPanelMenyTekst={useIntl().formatMessage({ id: 'RegistrereVergeInfoPanel.Info' })}
-    skalPanelVisesIMeny={() => !!behandling.aksjonspunkt?.some(ap => ap.definisjon === AKSJONSPUNKT_KODER[0])}
+    faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.Verge' })}
+    skalPanelVisesIMeny={() => AKSJONSPUNKT_KODER.some(kode => hasAksjonspunkt(kode, behandling.aksjonspunkt))}
     renderPanel={data => <VergeFaktaIndex {...data} />}
   />
 );

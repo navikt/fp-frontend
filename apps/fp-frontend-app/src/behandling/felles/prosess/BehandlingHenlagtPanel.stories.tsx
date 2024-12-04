@@ -1,12 +1,11 @@
-import { Meta, StoryObj } from '@storybook/react/*';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
 import { BehandlingHenlagtPanel } from './BehandlingHenlagtPanel';
 
-const messages = {
-  'BehandlingHenlagtPanel.Henlagt': 'Behandling er henlagt',
-};
+import messages from '../../../../i18n/nb_NO.json';
+
 const withIntl = getIntlDecorator(messages);
 
 const meta = {
@@ -14,6 +13,7 @@ const meta = {
   component: BehandlingHenlagtPanel,
   decorators: [withIntl],
 } satisfies Meta<typeof BehandlingHenlagtPanel>;
+
 export default meta;
 
 type Story = StoryObj<typeof meta>;

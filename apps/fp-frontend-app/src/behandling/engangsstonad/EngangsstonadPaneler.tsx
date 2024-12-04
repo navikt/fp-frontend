@@ -4,11 +4,11 @@ import { AksessRettigheter, ArbeidsgiverOpplysningerPerId, Behandling, Fagsak, P
 
 import { BehandlingContainer } from '../felles/BehandlingContainer';
 import { FaktaPanelInitProps } from '../felles/typer/faktaPanelInitProps';
-import { ProsessPanelExtraInitProps,ProsessPanelInitProps } from '../felles/typer/prosessPanelInitProps';
+import { ProsessPanelExtraInitProps, ProsessPanelInitProps } from '../felles/typer/prosessPanelInitProps';
 import { AdopsjonsvilkaretFaktaInitPanel } from '../fellesPaneler/fakta/AdopsjonsvilkaretFaktaInitPanel';
 import { FodselvilkaretFaktaInitPanel } from '../fellesPaneler/fakta/FodselvilkaretFaktaInitPanel';
 import { MedlemskapsvilkaretFaktaInitPanel } from '../fellesPaneler/fakta/MedlemskapsvilkaretFaktaInitPanel';
-import { OmsorgvilkaretFaktaInitPanel } from '../fellesPaneler/fakta/OmsorgvilkaretFaktaInitPanel';
+import { OmsorgOgForeldreansvarFaktaInitPanel } from '../fellesPaneler/fakta/OmsorgOgForeldreansvarFaktaInitPanel';
 import { SakenFaktaInitPanel } from '../fellesPaneler/fakta/SakenFaktaInitPanel';
 import { VergeFaktaInitPanel } from '../fellesPaneler/fakta/VergeFaktaInitPanel';
 import { YtelserFaktaInitPanel } from '../fellesPaneler/fakta/YtelserFaktaInitPanel';
@@ -51,7 +51,7 @@ const EngangsstonadPaneler = ({
         <SakenFaktaInitPanel {...props} fagsak={fagsak} rettigheter={rettigheter} />
         <YtelserFaktaInitPanel {...props} />
         <VergeFaktaInitPanel {...props} />
-        <OmsorgvilkaretFaktaInitPanel {...props} personoversikt={personoversikt} />
+        <OmsorgOgForeldreansvarFaktaInitPanel {...props} personoversikt={personoversikt} />
         <AdopsjonsvilkaretFaktaInitPanel {...props} fagsak={fagsak} />
         <FodselvilkaretFaktaInitPanel {...props} />
         <MedlemskapsvilkaretFaktaInitPanel {...props} fagsak={fagsak} />

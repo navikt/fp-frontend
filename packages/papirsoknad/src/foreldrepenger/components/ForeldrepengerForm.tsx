@@ -1,10 +1,10 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 
 import { HGrid } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 
-import { FamilieHendelseType,ForeldreType, KodeverkType } from '@navikt/fp-kodeverk';
+import { FamilieHendelseType, ForeldreType } from '@navikt/fp-kodeverk';
 import {
   AndreYtelserPapirsoknadIndex,
   AnnenForelderPapirsoknadIndex,
@@ -23,15 +23,15 @@ import {
   TerminOgFodselPanel,
   VirksomhetPapirsoknadIndex,
 } from '@navikt/fp-papirsoknad-ui-komponenter';
-import { AlleKodeverk,KodeverkMedNavn } from '@navikt/fp-types';
+import { AlleKodeverk } from '@navikt/fp-types';
 
-const buildInitialValues = (andreYtelser: KodeverkMedNavn[]) => ({
+const buildInitialValues = () => ({
   ...MottattDatoPapirsoknadIndex.initialValues(),
   ...OppholdINorgePapirsoknadIndex.initialValues(),
   ...InntektsgivendeArbeidPapirsoknadIndex.initialValues(),
   ...VirksomhetPapirsoknadIndex.initialValues(),
   ...FrilansPapirsoknadIndex.initialValues(),
-  ...AndreYtelserPapirsoknadIndex.initialValues(andreYtelser),
+  ...AndreYtelserPapirsoknadIndex.initialValues(),
   ...DekningsgradIndex.initialValues(),
   ...TerminOgFodselPanel.initialValues(),
   ...RettigheterPapirsoknadIndex.initialValues(),
@@ -45,14 +45,14 @@ const buildInitialValues = (andreYtelser: KodeverkMedNavn[]) => ({
 
 type FormValues = ReturnType<typeof buildInitialValues>;
 
-const transformValues = (formValues: FormValues, andreYtelserKodeverk: KodeverkMedNavn[]) => {
+const transformValues = (formValues: FormValues) => {
   return {
     ...MottattDatoPapirsoknadIndex.transformValues(formValues),
     ...OppholdINorgePapirsoknadIndex.transformValues(formValues),
     ...InntektsgivendeArbeidPapirsoknadIndex.transformValues(formValues),
     ...VirksomhetPapirsoknadIndex.transformValues(formValues),
     ...FrilansPapirsoknadIndex.transformValues(formValues),
-    ...AndreYtelserPapirsoknadIndex.transformValues(formValues, andreYtelserKodeverk),
+    ...AndreYtelserPapirsoknadIndex.transformValues(formValues),
     ...DekningsgradIndex.transformValues(formValues),
     ...TerminOgFodselPanel.transformValues(formValues),
     ...RettigheterPapirsoknadIndex.transformValues(formValues),
@@ -90,10 +90,8 @@ export const ForeldrepengerForm = ({
   erEndringssøknad,
 }: Props) => {
   const formMethods = useForm<FormValues>({
-    defaultValues: useMemo(() => buildInitialValues(alleKodeverk[KodeverkType.ARBEID_TYPE]), []),
+    defaultValues: buildInitialValues(),
   });
-
-  const andreYtelserKodeverk = alleKodeverk[KodeverkType.ARBEID_TYPE];
 
   const sokerHarAleneomsorg = formMethods.watch(`annenForelder.sokerHarAleneomsorg`);
   const denAndreForelderenHarRettPaForeldrepenger = formMethods.watch(
@@ -105,10 +103,7 @@ export const ForeldrepengerForm = ({
   const mottattDato = formMethods.watch('mottattDato');
 
   return (
-    <Form
-      formMethods={formMethods}
-      onSubmit={(values: FormValues) => onSubmit(transformValues(values, andreYtelserKodeverk))}
-    >
+    <Form formMethods={formMethods} onSubmit={(values: FormValues) => onSubmit(transformValues(values))}>
       <HGrid columns={{ sm: 1, md: 2 }} gap="4">
         <MottattDatoPapirsoknadIndex readOnly={readOnly} />
         <OppholdINorgePapirsoknadIndex

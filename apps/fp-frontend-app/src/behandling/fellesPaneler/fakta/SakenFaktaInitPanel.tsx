@@ -20,6 +20,7 @@ const AKSJONSPUNKT_KODER = [
 const OVERSTYRING_AP_CODES = [AksjonspunktKode.OVERSTYR_AVKLAR_STARTDATO, AksjonspunktKode.OVERSTYR_DEKNINGSGRAD];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.UTLAND_DOK_STATUS, BehandlingApiKeys.SOKNAD];
+
 type EndepunktPanelData = {
   utlandDokStatus?: {
     dokStatus?: string;
@@ -44,7 +45,7 @@ export const SakenFaktaInitPanel = ({ fagsak, rettigheter, ...props }: Props & F
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     overstyringApKoder={OVERSTYRING_AP_CODES}
     faktaPanelKode={FaktaPanelCode.SAKEN}
-    faktaPanelMenyTekst={useIntl().formatMessage({ id: 'SakenFaktaPanel.Title' })}
+    faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.Saken' })}
     skalPanelVisesIMeny={() => true}
     renderPanel={data => (
       <SakenFaktaIndex {...data} fagsak={fagsak} kanOverstyreAccess={rettigheter.kanOverstyreAccess.isEnabled} />

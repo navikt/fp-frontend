@@ -10,6 +10,7 @@ import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel'
 import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.INNTEKT_ARBEID_YTELSE];
+
 type EndepunktPanelData = {
   inntektArbeidYtelse: InntektArbeidYtelse;
 };
@@ -19,7 +20,7 @@ export const YtelserFaktaInitPanel = (props: FaktaPanelInitProps) => (
     {...props}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     faktaPanelKode={FaktaPanelCode.YTELSER}
-    faktaPanelMenyTekst={useIntl().formatMessage({ id: 'YtelserFaktaIndex.Ytelser' })}
+    faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.Ytelser' })}
     skalPanelVisesIMeny={() => true}
     renderPanel={data => <YtelserFaktaIndex {...data} />}
   />

@@ -2,7 +2,7 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { TilretteleggingFaktaIndex } from '@navikt/fp-fakta-tilrettelegging';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId, FodselOgTilrettelegging } from '@navikt/fp-types';
 
@@ -27,7 +27,7 @@ interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
-export const FodseltilretteleggingFaktaInitPanel = ({
+export const FodselOgTilretteleggingFaktaInitPanel = ({
   arbeidsgiverOpplysningerPerId,
   ...props
 }: Props & FaktaPanelInitProps) => (
@@ -38,7 +38,7 @@ export const FodseltilretteleggingFaktaInitPanel = ({
     overstyringApKoder={OVERSTYRING_AP_CODES}
     faktaPanelKode={FaktaPanelCode.FODSELTILRETTELEGGING}
     faktaPanelMenyTekst={useIntl().formatMessage({
-      id: 'FodselOgTilretteleggingInfoPanel.FaktaFodselOgTilrettelegging',
+      id: 'FaktaInitPanel.Title.FodselOgTilrettelegging',
     })}
     skalPanelVisesIMeny={() => true}
     renderPanel={data => (
@@ -46,10 +46,7 @@ export const FodseltilretteleggingFaktaInitPanel = ({
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         {...data}
         readOnly={
-          data.readOnly ||
-          !props.behandling.aksjonspunkt.some((ap: { definisjon: any }) =>
-            AKSJONSPUNKT_KODER.some(kode => kode === ap.definisjon),
-          )
+          data.readOnly || !AKSJONSPUNKT_KODER.some(kode => hasAksjonspunkt(kode, props.behandling.aksjonspunkt))
         }
       />
     )}

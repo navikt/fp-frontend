@@ -15,7 +15,7 @@ export const FaktaMeny = ({ menyData, oppdaterFaktaPanelIUrl }: Props) => {
   const intl = useIntl();
   return (
     <SideMenu
-      heading={intl.formatMessage({ id: 'FaktaPanel.FaktaOm' })}
+      heading={intl.formatMessage({ id: 'FaktaMeny.FaktaOm' })}
       links={menyData.map(data => ({
         label: data.tekst || '',
         active: data.erAktiv,

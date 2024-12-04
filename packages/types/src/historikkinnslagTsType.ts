@@ -4,15 +4,15 @@ export type Historikkinnslag = Readonly<{
   aktør: HistorikkUtfører;
   opprettetTidspunkt: string;
   behandlingUuid: string;
-  skjermlenke?: string;
-  dokumenter?: HistorikkInnslagDokumentLink[];
-  tittel: string;
+  skjermlenke: string | null;
+  dokumenter: HistorikkInnslagDokumentLink[];
+  tittel: string | null;
   body: string[];
 }>;
 
 type HistorikkUtfører = {
   type: HistorikkAktor;
-  ident: string;
+  ident: string | null;
 };
 
 export type HistorikkInnslagDokumentLink = Readonly<{

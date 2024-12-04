@@ -17,6 +17,7 @@ const ENDEPUNKTER_PANEL_DATA = [
   BehandlingApiKeys.FAMILIEHENDELSE,
   BehandlingApiKeys.INNTEKT_ARBEID_YTELSE,
 ];
+
 type EndepunktPanelData = {
   soknad: Soknad;
   familiehendelse: FamilieHendelseSamling;
@@ -27,13 +28,13 @@ interface Props {
   personoversikt: Personoversikt;
 }
 
-export const OmsorgvilkaretFaktaInitPanel = ({ personoversikt, ...props }: Props & FaktaPanelInitProps) => (
+export const OmsorgOgForeldreansvarFaktaInitPanel = ({ personoversikt, ...props }: Props & FaktaPanelInitProps) => (
   <FaktaDefaultInitPanel<EndepunktPanelData>
     {...props}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={FaktaPanelCode.OMSORGSVILKARET}
-    faktaPanelMenyTekst={useIntl().formatMessage({ id: 'OmsorgOgForeldreansvarInfoPanel.Omsorg' })}
+    faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.OmsorgOgForeldreansvar' })}
     skalPanelVisesIMeny={() => AKSJONSPUNKT_KODER.some(kode => hasAksjonspunkt(kode, props.behandling.aksjonspunkt))}
     renderPanel={data => <OmsorgOgForeldreansvarFaktaIndex personoversikt={personoversikt} {...data} />}
   />

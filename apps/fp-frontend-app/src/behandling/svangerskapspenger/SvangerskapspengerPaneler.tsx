@@ -11,7 +11,7 @@ import {
 
 import { BehandlingContainer } from '../felles/BehandlingContainer';
 import { FaktaPanelInitProps } from '../felles/typer/faktaPanelInitProps';
-import { ProsessPanelExtraInitProps,ProsessPanelInitProps } from '../felles/typer/prosessPanelInitProps';
+import { ProsessPanelExtraInitProps, ProsessPanelInitProps } from '../felles/typer/prosessPanelInitProps';
 import { ArbeidOgInntektFaktaInitPanel } from '../fellesPaneler/fakta/ArbeidOgInntektFaktaInitPanel';
 import { ArbeidsforholdFaktaInitPanel } from '../fellesPaneler/fakta/ArbeidsforholdFaktaInitPanel';
 import { BeregningFaktaInitPanel } from '../fellesPaneler/fakta/BeregningFaktaInitPanel';
@@ -28,7 +28,7 @@ import { FortsattMedlemskapProsessStegInitPanel } from '../fellesPaneler/prosess
 import { OpplysningspliktProsessStegInitPanel } from '../fellesPaneler/prosess/OpplysningspliktProsessStegInitPanel';
 import { SimuleringProsessStegInitPanel } from '../fellesPaneler/prosess/SimuleringProsessStegInitPanel';
 import { SoknadsfristProsessStegInitPanel } from '../fellesPaneler/prosess/SoknadsfristProsessStegInitPanel';
-import { FodseltilretteleggingFaktaInitPanel } from './faktaPaneler/FodseltilretteleggingFaktaInitPanel';
+import { FodselOgTilretteleggingFaktaInitPanel } from './faktaPaneler/FodselOgTilretteleggingFaktaInitPanel';
 import { InngangsvilkarSvpProsessStegInitPanel } from './prosessPaneler/InngangsvilkarSvpProsessStegInitPanel';
 import { TilkjentYtelseProsessStegInitPanel } from './prosessPaneler/TilkjentYtelseProsessStegInitPanel';
 import { VedtakSvpProsessStegInitPanel } from './prosessPaneler/VedtakSvpProsessStegInitPanel';
@@ -83,7 +83,7 @@ const SvangerskapspengerPaneler = ({
         <ArbeidsforholdFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
         <YtelserFaktaInitPanel {...props} />
         <VergeFaktaInitPanel {...props} />
-        <FodseltilretteleggingFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+        <FodselOgTilretteleggingFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
         <MedlemskapsvilkaretFaktaInitPanel {...props} fagsak={fagsak} />
         <OpptjeningsvilkaretFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
         <PermisjonFaktaInitPanel
