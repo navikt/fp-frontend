@@ -54,6 +54,25 @@ export const getBehandlingskøOppgaveAntall = (sakslisteId: number) =>
 export const getReservasjonsstatus = (oppgaveId: number) =>
   kyExtended.get(LosUrl.HENT_RESERVASJONSSTATUS, { searchParams: { oppgaveId } }).json<OppgaveStatus>();
 
+export const getOppgaverTilBehandling = (sakslisteId: number, oppgaveIder?: string) =>
+  kyExtended.get<Oppgave[]>(LosUrl.OPPGAVER_TIL_BEHANDLING, {
+    searchParams: oppgaveIder
+      ? {
+          sakslisteId,
+          oppgaveIder,
+        }
+      : { sakslisteId },
+  });
+
+export const doGetRequest = <T>(url: string) => kyExtended.get(url).json<T>();
+
+export const getOppgaverForFagsaker = (fagsaker: FagsakEnkel[]) =>
+  kyExtended
+    .get(LosUrl.OPPGAVER_FOR_FAGSAKER, {
+      searchParams: { saksnummerListe: fagsaker.map(f => `${f.saksnummer}`).join(',') },
+    })
+    .json<Oppgave[]>();
+
 export const losKodeverkOptions = () =>
   queryOptions({
     queryKey: [LosUrl.KODEVERK_LOS],
@@ -78,41 +97,6 @@ export const reserverteOppgaverOptions = () =>
     queryKey: [LosUrl.RESERVERTE_OPPGAVER],
     queryFn: () => kyExtended.get(LosUrl.RESERVERTE_OPPGAVER).json<Oppgave[]>(),
   });
-
-export const getOppgaverTilBehandling = (sakslisteId: number, oppgaveIder?: string) =>
-  kyExtended.get<Oppgave[]>(LosUrl.OPPGAVER_TIL_BEHANDLING, {
-    searchParams: oppgaveIder
-      ? {
-          sakslisteId,
-          oppgaveIder,
-        }
-      : { sakslisteId },
-  });
-
-export const doRequest = <T>(location: string) => kyExtended.get(location).json<T>();
-
-export const oppgaverTilBehandlingOptions = (sakslisteId: number, oppgaveIder?: string) =>
-  queryOptions({
-    queryKey: [LosUrl.OPPGAVER_TIL_BEHANDLING, sakslisteId, oppgaveIder],
-    queryFn: () =>
-      kyExtended
-        .get(LosUrl.OPPGAVER_TIL_BEHANDLING, {
-          searchParams: oppgaveIder
-            ? {
-                sakslisteId,
-                oppgaveIder,
-              }
-            : { sakslisteId },
-        })
-        .json<Oppgave[]>(),
-  });
-
-export const getOppgaverForFagsaker = (fagsaker: FagsakEnkel[]) =>
-  kyExtended
-    .get(LosUrl.OPPGAVER_FOR_FAGSAKER, {
-      searchParams: { saksnummerListe: fagsaker.map(f => `${f.saksnummer}`).join(',') },
-    })
-    .json<Oppgave[]>();
 
 export const hentNyeOgFerdigstilteOppgaverOptions = (sakslisteId: number) =>
   queryOptions({

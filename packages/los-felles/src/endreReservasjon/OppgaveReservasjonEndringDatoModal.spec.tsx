@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { composeStories } from '@storybook/react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -18,12 +19,12 @@ describe('<OppgaveReservasjonEndringDatoModal>', () => {
     expect(await screen.findByText('Velg dato som reservasjonen avsluttes')).toBeInTheDocument();
 
     const datoInput = screen.getByRole('textbox', { hidden: true });
-    await userEvent.type(datoInput, dayjs().format('DD.MM.YYYY'));
+    await userEvent.type(datoInput, dayjs().format(DDMMYYYY_DATE_FORMAT));
 
     expect(await screen.findByText('OK')).toBeInTheDocument();
     await userEvent.click(screen.getByText('OK'));
 
     await waitFor(() => expect(endreOppgavereservasjon).toHaveBeenCalledTimes(1));
-    expect(endreOppgavereservasjon).toHaveBeenNthCalledWith(1, '2024-12-02');
+    expect(endreOppgavereservasjon).toHaveBeenNthCalledWith(1, dayjs().format(ISO_DATE_FORMAT));
   });
 });
