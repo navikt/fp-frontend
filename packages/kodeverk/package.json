@@ -13,8 +13,8 @@
     "clean": "rm -rf ./dist ./node_modules"
   },
   "devDependencies": {
-    "eslint": "9.14.0",
-    "typescript": "5.6.3",
+    "eslint": "9.16.0",
+    "typescript": "5.7.2",
     "vite": "5.4.10"
   }
 }
