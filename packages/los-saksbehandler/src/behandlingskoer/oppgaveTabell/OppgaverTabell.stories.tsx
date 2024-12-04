@@ -8,6 +8,7 @@ import { http, HttpResponse } from 'msw';
 
 import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { Oppgave } from '@navikt/fp-los-felles';
+import { AsyncPollingStatus } from '@navikt/fp-rest-api';
 import { alleKodeverkLos, getIntlDecorator } from '@navikt/fp-storybook-utils';
 
 import { losKodeverkOptions, LosUrl } from '../../data/fplosSaksbehandlerApi';
@@ -137,7 +138,19 @@ export const Default: Story = {
         http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
         http.get(LosUrl.FORLENG_OPPGAVERESERVASJON, () => new HttpResponse(null, { status: 200 })),
         http.get(LosUrl.RESERVERTE_OPPGAVER, () => HttpResponse.json(RESERVERTE_OPPGAVER)),
-        http.get(LosUrl.OPPGAVER_TIL_BEHANDLING, () => HttpResponse.json(OPPGAVER_TIL_BEHANDLING)),
+        http.get(LosUrl.OPPGAVER_TIL_BEHANDLING, t => {
+          const doPolling = t.request.url.includes('oppgaveIder');
+          return doPolling
+            ? new HttpResponse(null, { status: 202, headers: { location: 'http://www.test.com/api/status' } })
+            : new HttpResponse(null, { status: 202, headers: { location: 'http://www.test.com/api/result' } });
+        }),
+        http.get('http://www.test.com/api/status', () =>
+          HttpResponse.json({
+            status: AsyncPollingStatus.PENDING,
+            pollIntervalMillis: 100000000,
+          }),
+        ),
+        http.get('http://www.test.com/api/result', () => HttpResponse.json(OPPGAVER_TIL_BEHANDLING)),
       ],
     },
   },
@@ -153,7 +166,19 @@ export const TomOppgaveTabell: Story = {
         http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
         http.get(LosUrl.FORLENG_OPPGAVERESERVASJON, () => new HttpResponse(null, { status: 200 })),
         http.get(LosUrl.RESERVERTE_OPPGAVER, () => HttpResponse.json([])),
-        http.get(LosUrl.OPPGAVER_TIL_BEHANDLING, () => HttpResponse.json([])),
+        http.get(LosUrl.OPPGAVER_TIL_BEHANDLING, t => {
+          const doPolling = t.request.url.includes('oppgaveIder');
+          return doPolling
+            ? new HttpResponse(null, { status: 202, headers: { location: 'http://www.test.com/api/status' } })
+            : new HttpResponse(null, { status: 202, headers: { location: 'http://www.test.com/api/result' } });
+        }),
+        http.get('http://www.test.com/api/status', () =>
+          HttpResponse.json({
+            status: AsyncPollingStatus.PENDING,
+            pollIntervalMillis: 100000000,
+          }),
+        ),
+        http.get('http://www.test.com/api/result', () => HttpResponse.json([])),
       ],
     },
   },
@@ -184,7 +209,19 @@ export const VisPagineringNårMerEnn15Oppgaver: Story = {
             ...oppdatertId(RESERVERTE_OPPGAVER, 70),
           ]),
         ),
-        http.get(LosUrl.OPPGAVER_TIL_BEHANDLING, () => HttpResponse.json(OPPGAVER_TIL_BEHANDLING)),
+        http.get(LosUrl.OPPGAVER_TIL_BEHANDLING, t => {
+          const doPolling = t.request.url.includes('oppgaveIder');
+          return doPolling
+            ? new HttpResponse(null, { status: 202, headers: { location: 'http://www.test.com/api/status' } })
+            : new HttpResponse(null, { status: 202, headers: { location: 'http://www.test.com/api/result' } });
+        }),
+        http.get('http://www.test.com/api/status', () =>
+          HttpResponse.json({
+            status: AsyncPollingStatus.PENDING,
+            pollIntervalMillis: 100000000,
+          }),
+        ),
+        http.get('http://www.test.com/api/result', () => HttpResponse.json(OPPGAVER_TIL_BEHANDLING)),
       ],
     },
   },

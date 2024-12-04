@@ -1,20 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, HStack, Label, Pagination, SortState, Table, VStack } from '@navikt/ds-react';
-import { useQuery } from '@tanstack/react-query';
 
 import { Oppgave } from '@navikt/fp-los-felles';
 
-import { oppgaverTilBehandlingOptions, reserverteOppgaverOptions } from '../../data/fplosSaksbehandlerApi';
 import { BehandlingPollingTimoutModal } from '../timeoutModal/BehandlingPollingTimoutModal';
 import { OppgaveMedReservertIndikator, OppgaveRad } from './OppgaveRad';
+import { useOppgavePolling } from './useOppgavePolling';
 
 import styles from './oppgaverTabell.module.css';
-
-const isTest = import.meta.env.MODE === 'test';
-
-const EMPTY_ARRAY: Oppgave[] = [];
 
 type TableHeaders =
   | 'navn'
@@ -67,8 +62,6 @@ const slaSammenOgMarkerReserverte = (
   return markedAsUnderBehandling.concat(notMarked.slice(0, 3));
 };
 
-const MAX_POLLING_ATTEMPTS = 1800;
-
 interface Props {
   reserverOppgave: (oppgave: Oppgave) => void;
   antallOppgaver?: number;
@@ -79,27 +72,8 @@ export const OppgaverTabell = ({ reserverOppgave, antallOppgaver = 0, valgtSaksl
   const [sidetall, setSidetall] = useState(1);
   const raderPerSide = 15;
 
-  const [oppgaveIder, setOppgaveIder] = useState<string>();
-
-  const countRef = useRef(0);
-  const { data: oppgaverTilBehandling = EMPTY_ARRAY } = useQuery({
-    ...oppgaverTilBehandlingOptions(valgtSakslisteId, oppgaveIder),
-    refetchInterval: () => {
-      countRef.current += 1;
-      return isTest ? false : 1000;
-    },
-    enabled: countRef.current < MAX_POLLING_ATTEMPTS,
-  });
-
-  const { data: reserverteOppgaver = EMPTY_ARRAY } = useQuery({
-    ...reserverteOppgaverOptions(),
-    refetchInterval: () => (isTest ? false : 1000),
-    enabled: countRef.current < MAX_POLLING_ATTEMPTS,
-  });
-
-  useEffect(() => {
-    setOppgaveIder(oppgaverTilBehandling.map(o => o.id).join(','));
-  }, [valgtSakslisteId, oppgaverTilBehandling]);
+  const { oppgaverTilBehandling, reserverteOppgaver, isMaxPollingAttemptsReached } =
+    useOppgavePolling(valgtSakslisteId);
 
   const alleOppgaver = slaSammenOgMarkerReserverte(reserverteOppgaver, oppgaverTilBehandling);
 
@@ -132,7 +106,7 @@ export const OppgaverTabell = ({ reserverOppgave, antallOppgaver = 0, valgtSaksl
 
   return (
     <div className={styles.tabell}>
-      {countRef.current === MAX_POLLING_ATTEMPTS && <BehandlingPollingTimoutModal />}
+      {isMaxPollingAttemptsReached && <BehandlingPollingTimoutModal />}
       <VStack gap="2" className={styles.headerPadding}>
         <HStack gap="2">
           <Label size="small">

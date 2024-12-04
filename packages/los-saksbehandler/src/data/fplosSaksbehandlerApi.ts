@@ -79,6 +79,18 @@ export const reserverteOppgaverOptions = () =>
     queryFn: () => kyExtended.get(LosUrl.RESERVERTE_OPPGAVER).json<Oppgave[]>(),
   });
 
+export const getOppgaverTilBehandling = (sakslisteId: number, oppgaveIder?: string) =>
+  kyExtended.get<Oppgave[]>(LosUrl.OPPGAVER_TIL_BEHANDLING, {
+    searchParams: oppgaveIder
+      ? {
+          sakslisteId,
+          oppgaveIder,
+        }
+      : { sakslisteId },
+  });
+
+export const doRequest = <T>(location: string) => kyExtended.get(location).json<T>();
+
 export const oppgaverTilBehandlingOptions = (sakslisteId: number, oppgaveIder?: string) =>
   queryOptions({
     queryKey: [LosUrl.OPPGAVER_TIL_BEHANDLING, sakslisteId, oppgaveIder],
@@ -118,7 +130,7 @@ export const behandlendeOppgaverOptions = () =>
   });
 
 export const søkFagsakPost = (searchString: string, skalReservere: boolean) =>
-  kyExtended.post(LosUrl.SØK_FAGSAK, { searchParams: { searchString, skalReservere } }).json<FagsakEnkel[]>();
+  kyExtended.post(LosUrl.SØK_FAGSAK, { json: { searchString, skalReservere } }).json<FagsakEnkel[]>();
 
 export const postOpphevReservasjon = (oppgaveId: number, begrunnelse: string) =>
   kyExtended.post(LosUrl.OPPHEV_OPPGAVERESERVASJON, { json: { oppgaveId, begrunnelse } });
