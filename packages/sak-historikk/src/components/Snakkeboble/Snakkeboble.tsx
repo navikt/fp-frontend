@@ -9,7 +9,7 @@ import { Historikkinnslag } from '@navikt/fp-types';
 import { Avatar } from './Avatar';
 import { HistorikkDokumentLenke } from './HistorikkDokumentLenke';
 import { Skjermlenke } from './Skjermlenke';
-import { formatDate, getStyle, utledPlassering } from './snakkebobleUtils';
+import { formatDate, getStyle, parseBoldText, utledPlassering } from './snakkebobleUtils';
 
 interface Props {
   behandlingLocation: Location;
@@ -54,10 +54,10 @@ export const Snakkeboble = ({
         {linjer.map((linje, index) =>
           linje.type === 'TEKST' ? (
             <BodyShort key={index} size="small">
-              parseBoldText(linje.tekst)
+              {parseBoldText(linje.tekst)}
             </BodyShort>
           ) : (
-            <br />
+            <br key={index} />
           ),
         )}
 
