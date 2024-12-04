@@ -48,7 +48,6 @@ export const FagsakSøkIndex = ({ åpneFagsak, kanSaksbehandle }: Props) => {
     mutateAsync: hentOppgaverForFagsaker,
     data: fagsakOppgaver = EMPTY_ARRAY_OPPGAVER,
     isPending: isHentOppgaverPending,
-    isSuccess: isHentOppgaverSuccess,
   } = useMutation({
     mutationFn: getOppgaverForFagsaker,
   });
@@ -83,7 +82,7 @@ export const FagsakSøkIndex = ({ åpneFagsak, kanSaksbehandle }: Props) => {
     //@ts-expect-error response.data når ein refaktorerar feilhåndteringa
     fagsakError instanceof HTTPError && fagsakError.response.status === 403 ? fagsakError.response?.data : undefined;
 
-  const erSøkFerdig = isSøkFagsakSuccess && isHentOppgaverSuccess;
+  const erSøkFerdig = isSøkFagsakSuccess && !isHentOppgaverPending;
 
   const goToFagsakEllerApneModal = (oppgave: Oppgave, oppgaveStatus?: OppgaveStatus) => {
     if (

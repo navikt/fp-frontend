@@ -6,6 +6,7 @@ import { http, HttpResponse } from 'msw';
 
 import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { Oppgave } from '@navikt/fp-los-felles';
+import { AsyncPollingStatus } from '@navikt/fp-rest-api';
 import { alleKodeverkLos } from '@navikt/fp-storybook-utils';
 
 import { LosUrl } from './data/fplosSaksbehandlerApi';
@@ -223,7 +224,19 @@ const meta = {
         http.get(LosUrl.RESERVER_OPPGAVE, () => new HttpResponse(null, { status: 200 })),
         http.get(LosUrl.SØK_FAGSAK, () => new HttpResponse(null, { status: 200 })),
         http.get(LosUrl.OPPGAVER_FOR_FAGSAKER, () => new HttpResponse(null, { status: 200 })),
-        http.get(LosUrl.OPPGAVER_TIL_BEHANDLING, () => HttpResponse.json(OPPGAVER_TIL_BEHANDLING)),
+        http.get(LosUrl.OPPGAVER_TIL_BEHANDLING, t => {
+          const doPolling = t.request.url.includes('oppgaveIder');
+          return doPolling
+            ? new HttpResponse(null, { status: 202, headers: { location: 'http://www.test.com/api/status' } })
+            : new HttpResponse(null, { status: 202, headers: { location: 'http://www.test.com/api/result' } });
+        }),
+        http.get('http://www.test.com/api/status', () =>
+          HttpResponse.json({
+            status: AsyncPollingStatus.PENDING,
+            pollIntervalMillis: 100000000,
+          }),
+        ),
+        http.get('http://www.test.com/api/result', () => HttpResponse.json(OPPGAVER_TIL_BEHANDLING)),
         http.get(LosUrl.HENT_RESERVASJONSSTATUS, () => new HttpResponse(null, { status: 200 })),
         http.get(LosUrl.BEHANDLEDE_OPPGAVER, () => HttpResponse.json(BEHANDLEDE_OPPGAVER)),
         http.get(LosUrl.HENT_NYE_OG_FERDIGSTILTE_OPPGAVER, () => HttpResponse.json(NYE_OG_FERDIGSTILTE_OPPGAVER)),
