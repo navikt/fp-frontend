@@ -6,7 +6,7 @@ import { Oppgave } from '@navikt/fp-los-felles';
 import { AsyncPollingStatus, EventType } from '@navikt/fp-rest-api';
 import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 
-import { doRequest, getOppgaverTilBehandling, reserverteOppgaverOptions } from '../../data/fplosSaksbehandlerApi';
+import { doGetRequest, getOppgaverTilBehandling, reserverteOppgaverOptions } from '../../data/fplosSaksbehandlerApi';
 
 //TODO (TOR) Vurder å bruke Websocket i staden for denne pollemekanismen. Alternativt gå spesifikt mot status og resultat-tjenestane
 
@@ -39,7 +39,7 @@ const pollOgHentData = async (
   getSakslisteId: () => number,
   pollingCounter = 0,
 ) => {
-  const response = await doRequest<PollingResponse | Oppgave[]>(location);
+  const response = await doGetRequest<PollingResponse | Oppgave[]>(location);
   if (getSakslisteId() !== valgtSakslisteId) {
     return [];
   }
