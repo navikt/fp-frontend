@@ -57,7 +57,7 @@ export const Snakkeboble = ({
               {parseBoldText(linje.tekst)}
             </BodyShort>
           ) : (
-            <BodyShort key={index} size="small" /> // TODO: Legg til komponent for linjeskift. BR hadde for mye mellomrom.
+            <div key={index} style={{ marginTop: '10px' }} /> // TODO: OK å bruke div er med margin
           ),
         )}
 

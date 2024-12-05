@@ -61,6 +61,12 @@ const historikkInnslag: Historikkinnslag[] = [
       },
       { type: 'TEKST', tekst: 'Dette er ein lang begrunnelsestekst' },
       { type: 'LINJESKIFT' },
+      {
+        type: 'TEKST',
+        tekst:
+          '__Behandlende enhet__ endret fra 4867 NAV Familie- og pensjonsytelser Foreldrepenger til __4806 NAV Familie- og pensjonsytelser Drammen__',
+      },
+      { type: 'TEKST', tekst: 'Dette er ein lang begrunnelsestekst' },
       { type: 'TEKST', tekst: 'Personopplysning' },
     ],
   },
