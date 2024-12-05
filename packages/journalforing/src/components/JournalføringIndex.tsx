@@ -14,10 +14,8 @@ import { OppgaveTabell } from './oppgaver/OppgaveTabell';
 import styles from './journalføringIndex.module.css';
 
 type Props = Readonly<{
-  oppgaver: Oppgave[];
   navAnsatt: NavAnsatt;
   velgOppgaveOgHentJournalpost: (oppgave: Oppgave) => void;
-  hentJournalpost: (journalpostId: string) => void;
   avbrytVisningAvJournalpost: () => void;
   valgtOppgave?: Oppgave;
   valgtJournalpost?: Journalpost;
@@ -30,7 +28,6 @@ type Props = Readonly<{
  * JournalføringIndex - Styrer logikk rundt valg av oppgave i listen med oppgaver
  */
 export const JournalføringIndex = ({
-  oppgaver,
   navAnsatt,
   valgtOppgave,
   valgtJournalpost,
@@ -40,12 +37,11 @@ export const JournalføringIndex = ({
   reserverOppgave,
   flyttTilGosys,
 }: Props) => (
-  <>
+  <div className={styles.container}>
     <VerticalSpacer sixteenPx />
     {!valgtJournalpost && (
       <div className={styles.sentrertInnhold}>
         <OppgaveTabell
-          oppgaver={oppgaver}
           velgOppgaveOgHentJournalpost={velgOppgaveOgHentJournalpost}
           navAnsatt={navAnsatt}
           reserverOppgave={reserverOppgave}
@@ -63,5 +59,5 @@ export const JournalføringIndex = ({
         flyttTilGosys={flyttTilGosys}
       />
     )}
-  </>
+  </div>
 );

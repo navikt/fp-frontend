@@ -8,3 +8,8 @@
   margin-bottom: auto;
   margin-top: auto;
 }
+
+.container {
+  padding-left: 8px;
+  padding-right: 8px;
+}

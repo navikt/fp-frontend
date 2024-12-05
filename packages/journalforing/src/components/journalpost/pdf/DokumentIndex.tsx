@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Heading } from '@navikt/ds-react';
@@ -15,12 +15,8 @@ type Props = {
 };
 
 export const DokumentIndex = ({ dokumenter }: Props) => {
-  const [valgtDokument, setValgtDokument] = useState<JournalDokument | undefined>();
-
-  useEffect(() => {
-    const initieltDokumnet = dokumenter && dokumenter.length > 0 ? dokumenter[0] : undefined;
-    setValgtDokument(initieltDokumnet);
-  }, [dokumenter]);
+  const initieltDokumnet = dokumenter && dokumenter.length > 0 ? dokumenter[0] : undefined;
+  const [valgtDokument, setValgtDokument] = useState<JournalDokument | undefined>(initieltDokumnet);
 
   if (!valgtDokument || !dokumenter) {
     return (

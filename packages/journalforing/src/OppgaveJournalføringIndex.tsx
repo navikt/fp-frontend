@@ -14,7 +14,6 @@ import { NavAnsatt } from '@navikt/fp-types';
 
 import { JournalføringHeader } from './components/header/JournalføringHeader';
 import { JournalføringIndex } from './components/JournalføringIndex';
-import { JournalforingPanel } from './components/JournalforingPanel';
 import { JournalførtSubmitModal } from './components/journalpost/modal/JournalførtSubmitModal';
 import {
   ferdigstillJournalføring,
@@ -31,7 +30,6 @@ import { ReserverOppgaveType } from './typer/reserverOppgaveType';
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
-const TOMT_ARRAY = new Array<Oppgave>();
 
 const createQueryClient = (addErrorMessage: (data: any) => void) =>
   new QueryClient({
@@ -87,8 +85,6 @@ export const OppgaveJournalføringIndex = (props: Props) => {
 export const JournalforingIndex = ({ navAnsatt }: Props) => {
   const [valgtOppgave, setValgtOppgave] = useState<Oppgave | undefined>(undefined);
   const [visModal, setVisModal] = useState(false);
-  const [harSøktOgFunnetIngenMatch, setHarSøktOgFunnetIngenMatch] = useState(false);
-  const [isLoadingSubmit, setIsLoadingSubmit] = useState(false);
 
   const {
     data: alleOppgaver,
@@ -100,28 +96,32 @@ export const JournalforingIndex = ({ navAnsatt }: Props) => {
     mutate: hentJournalpost,
     data: valgtJournalpost,
     reset: resetValgtJournalpost,
+    status: hentJournalpostStatus,
   } = useMutation({
     mutationFn: hentJournalpostDetaljer,
-    onSuccess: journalpost => {
-      setHarSøktOgFunnetIngenMatch(!journalpost);
-    },
   });
 
-  const { mutate: submitJournalføringNySak, data: saksnumerJournalføringNySak } = useMutation({
+  const {
+    mutate: submitJournalføringNySak,
+    data: saksnumerJournalføringNySak,
+    isPending: submitJournalføringIsPending,
+  } = useMutation({
     mutationFn: ferdigstillJournalføring,
     onSuccess: () => {
       innhentAlleOppgaverPåNytt();
       avbrytVisningAvJournalpost();
-      setIsLoadingSubmit(false);
     },
   });
 
-  const { mutate: knyttTilAnnenSak, data: saksnummerNySakKnyttAnnenSak } = useMutation({
+  const {
+    mutate: knyttTilAnnenSak,
+    data: saksnummerNySakKnyttAnnenSak,
+    isPending: knyttTilAnnenSakIsPending,
+  } = useMutation({
     mutationFn: knyttJournalpostTilAnnenSak,
     onSuccess: () => {
       innhentAlleOppgaverPåNytt();
       avbrytVisningAvJournalpost();
-      setIsLoadingSubmit(false);
     },
   });
 
@@ -141,7 +141,6 @@ export const JournalforingIndex = ({ navAnsatt }: Props) => {
 
   const avbrytVisningAvJournalpost = () => {
     setValgtOppgave(undefined);
-    setHarSøktOgFunnetIngenMatch(false);
     resetValgtJournalpost();
   };
 
@@ -158,7 +157,6 @@ export const JournalforingIndex = ({ navAnsatt }: Props) => {
   };
 
   const journalførCallback = (data: JournalførSubmitValue, erAlleredeJournalført: boolean) => {
-    setIsLoadingSubmit(true);
     setVisModal(true);
     if (erAlleredeJournalført) {
       knyttTilAnnenSak(data);
@@ -183,14 +181,14 @@ export const JournalforingIndex = ({ navAnsatt }: Props) => {
     <>
       <JournalføringHeader
         avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
-        harSøktOgFunnetIngenMatch={harSøktOgFunnetIngenMatch}
+        harHentetFerdigJournalpost={hentJournalpostStatus === 'success'}
         valgtJournalpost={valgtJournalpost}
         hentJournalpost={hentJournalpost}
         antallOppgaver={alleOppgaver ? alleOppgaver.length : undefined}
       />
       {visModal && (
         <JournalførtSubmitModal
-          isLoading={isLoadingSubmit}
+          isLoading={knyttTilAnnenSakIsPending || submitJournalføringIsPending}
           lukkModal={() => {
             setVisModal(false);
           }}
@@ -198,20 +196,16 @@ export const JournalforingIndex = ({ navAnsatt }: Props) => {
           saksnummer={saksnumerJournalføringNySak || saksnummerNySakKnyttAnnenSak}
         />
       )}
-      <JournalforingPanel>
-        <JournalføringIndex
-          valgtOppgave={valgtOppgave}
-          valgtJournalpost={valgtJournalpost}
-          oppgaver={alleOppgaver || TOMT_ARRAY}
-          navAnsatt={navAnsatt}
-          velgOppgaveOgHentJournalpost={velgOppgaveOgHentJournalpost}
-          hentJournalpost={hentJournalpost}
-          avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
-          submitJournalføring={journalførCallback}
-          reserverOppgave={reserverCallback}
-          flyttTilGosys={flyttTilGosys}
-        />
-      </JournalforingPanel>
+      <JournalføringIndex
+        valgtOppgave={valgtOppgave}
+        valgtJournalpost={valgtJournalpost}
+        navAnsatt={navAnsatt}
+        velgOppgaveOgHentJournalpost={velgOppgaveOgHentJournalpost}
+        avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
+        submitJournalføring={journalførCallback}
+        reserverOppgave={reserverCallback}
+        flyttTilGosys={flyttTilGosys}
+      />
     </>
   );
 };

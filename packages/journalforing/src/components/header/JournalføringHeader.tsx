@@ -14,7 +14,7 @@ type Props = Readonly<{
   hentJournalpost: (journalpostId: string) => void;
   avbrytVisningAvJournalpost: () => void;
   valgtJournalpost?: Journalpost;
-  harSøktOgFunnetIngenMatch: boolean;
+  harHentetFerdigJournalpost: boolean;
   antallOppgaver?: number;
 }>;
 
@@ -25,17 +25,14 @@ export const JournalføringHeader = ({
   valgtJournalpost,
   hentJournalpost,
   avbrytVisningAvJournalpost,
-  harSøktOgFunnetIngenMatch,
+  harHentetFerdigJournalpost,
   antallOppgaver,
 }: Props) => {
   const [åpenSøkemodal, setÅpenSøkemodal] = useState(false);
-  const lukkModal = () => {
-    setÅpenSøkemodal(false);
-  };
 
   useEffect(() => {
     if (valgtJournalpost) {
-      lukkModal();
+      setÅpenSøkemodal(false);
     }
   }, [valgtJournalpost]);
 
@@ -69,9 +66,11 @@ export const JournalføringHeader = ({
             </Button>
             <JournalpostSøkModal
               hentJournalpost={hentJournalpost}
-              lukkModal={lukkModal}
+              lukkModal={() => {
+                setÅpenSøkemodal(false);
+              }}
               erÅpen={åpenSøkemodal}
-              harSøktOgFunnetIngenMatch={harSøktOgFunnetIngenMatch}
+              harSøktOgFunnetIngenMatch={harHentetFerdigJournalpost && !valgtJournalpost}
             />
           </>
         )}
