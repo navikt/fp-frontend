@@ -1,18 +1,16 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 
-import JournalDokument from '../../../typer/journalDokumentTsType';
+import { JournalDokument } from '../../../typer/journalDokumentTsType';
 
 import styles from './dokumentIndex.module.css';
 
-type OwnProps = Readonly<{
+type Props = Readonly<{
   dokument: JournalDokument;
 }>;
 
 /**
  * PDFVisning - Panel for å vise valgt dokument
  */
-const PDFVisning: FunctionComponent<OwnProps> = ({ dokument }) => (
+export const PDFVisning = ({ dokument }: Props) => (
   <iframe id="iframepdf" src={dokument.lenke} className={styles.iframe} title={dokument.tittel} />
 );
-
-export default PDFVisning;

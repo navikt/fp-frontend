@@ -1,19 +1,19 @@
-import React, { FunctionComponent, useCallback,useState } from 'react';
+import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { PencilIcon,TabsAddIcon } from '@navikt/aksel-icons';
+import { PencilIcon, TabsAddIcon } from '@navikt/aksel-icons';
 import { Button, Checkbox, CheckboxGroup, HStack, Label, Spacer } from '@navikt/ds-react';
 import { InputField, SelectField } from '@navikt/ft-form-hooks';
 import { hasValidText, required } from '@navikt/ft-form-validators';
 
 import { listeMedTittler } from '../../../kodeverk/dokumentTittel';
 import { erKanalSomErÅpenForEndring } from '../../../kodeverk/journalKanal';
-import JournalDokument from '../../../typer/journalDokumentTsType';
-import Journalpost from '../../../typer/journalpostTsType';
+import { JournalDokument } from '../../../typer/journalDokumentTsType';
+import { Journalpost } from '../../../typer/journalpostTsType';
 
 import styles from './dokumentDetaljer.module.css';
 
-type OwnProps = Readonly<{
+type Props = Readonly<{
   dokument: JournalDokument;
   docFieldIndex: number;
   journalpost: Journalpost;
@@ -23,27 +23,15 @@ type OwnProps = Readonly<{
 /**
  * DokumentDetaljer - Inneholder detaljer om et dokument på journalposten
  */
-const DokumentDetaljer: FunctionComponent<OwnProps> = ({
+export const DokumentDetaljer = ({
   dokument,
   docFieldIndex,
   journalpost,
   dokumentTittelStyresAvJournalpostTittel,
-}) => {
+}: Props) => {
   const [kanRedigeres, setKanRedigeres] = useState<boolean>(!dokument.tittel);
   const [harToggletFritekst, setHarToggletFritekst] = useState(false);
-  const tittler = listeMedTittler.map(tittel => (
-    <option value={tittel} key={tittel}>
-      {tittel}
-    </option>
-  ));
 
-  const endreFritekstToggle = useCallback(() => {
-    setHarToggletFritekst(!harToggletFritekst);
-  }, [harToggletFritekst]);
-
-  const toggleRedigering = useCallback(() => {
-    setKanRedigeres(!kanRedigeres);
-  }, [kanRedigeres]);
   const inputFieldName = dokumentTittelStyresAvJournalpostTittel
     ? 'journalpostTittel'
     : `journalpostDokumenter.${docFieldIndex}.tittel`;
@@ -96,7 +84,11 @@ const DokumentDetaljer: FunctionComponent<OwnProps> = ({
                 label={undefined}
                 validate={[required]}
                 className={styles.input}
-                selectValues={tittler}
+                selectValues={listeMedTittler.map(tittel => (
+                  <option value={tittel} key={tittel}>
+                    {tittel}
+                  </option>
+                ))}
               />
             )}
           </HStack>
@@ -104,7 +96,9 @@ const DokumentDetaljer: FunctionComponent<OwnProps> = ({
             <CheckboxGroup
               legend="Brukt fritekst"
               hideLegend
-              onChange={endreFritekstToggle}
+              onChange={() => {
+                setHarToggletFritekst(!harToggletFritekst);
+              }}
               value={[harToggletFritekst]}
             >
               <Checkbox value>
@@ -121,7 +115,9 @@ const DokumentDetaljer: FunctionComponent<OwnProps> = ({
             <Button
               icon={<PencilIcon aria-hidden />}
               className={styles.editButton}
-              onClick={toggleRedigering}
+              onClick={() => {
+                setKanRedigeres(!kanRedigeres);
+              }}
               type="button"
               variant="tertiary"
             />
@@ -133,4 +129,3 @@ const DokumentDetaljer: FunctionComponent<OwnProps> = ({
     </div>
   );
 };
-export default DokumentDetaljer;

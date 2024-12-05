@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Table } from '@navikt/ds-react';
@@ -6,13 +6,13 @@ import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { NavAnsatt } from '@navikt/fp-types';
 
-import Oppgave from '../../typer/oppgaveTsType';
-import ReserverOppgaveType from '../../typer/reserverOppgaveType';
-import OppgaveTabellRad from './OppgaveTabellRad';
+import { Oppgave } from '../../typer/oppgaveTsType';
+import { ReserverOppgaveType } from '../../typer/reserverOppgaveType';
+import { OppgaveTabellRad } from './OppgaveTabellRad';
 
 import styles from './oppgaveTabell.module.css';
 
-type OwnProps = Readonly<{
+type Props = Readonly<{
   oppgaver: Oppgave[];
   velgOppgaveOgHentJournalpost: (oppgave: Oppgave) => void;
   navAnsatt: NavAnsatt;
@@ -22,12 +22,7 @@ type OwnProps = Readonly<{
 /**
  * OppgaveTabell - Presenterer liste over oppgaver og tar inn callback for å sette valgt oppgave
  */
-const OppgaveTabell: FunctionComponent<OwnProps> = ({
-  oppgaver,
-  velgOppgaveOgHentJournalpost,
-  navAnsatt,
-  reserverOppgave,
-}) => {
+export const OppgaveTabell = ({ oppgaver, velgOppgaveOgHentJournalpost, navAnsatt, reserverOppgave }: Props) => {
   if (oppgaver.length < 1) {
     return (
       <>
@@ -39,6 +34,7 @@ const OppgaveTabell: FunctionComponent<OwnProps> = ({
       </>
     );
   }
+
   return (
     <div>
       <Table>
@@ -83,4 +79,3 @@ const OppgaveTabell: FunctionComponent<OwnProps> = ({
     </div>
   );
 };
-export default OppgaveTabell;

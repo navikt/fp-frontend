@@ -1,17 +1,19 @@
-import React, { FunctionComponent, useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BodyShort,Button, Heading, HStack, Label, Modal, VStack } from '@navikt/ds-react';
+import { BodyShort, Button, Heading, HStack, Label, Modal, VStack } from '@navikt/ds-react';
 import { Form, InputField } from '@navikt/ft-form-hooks';
 import { hasValidInteger, minLength, required } from '@navikt/ft-form-validators';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
+const MIN_LENGTH_9 = minLength(9);
 
 type Formvalues = {
   journalpostId: string;
 };
 
-type OwnProps = Readonly<{
+type Props = Readonly<{
   hentJournalpost: (journalpostId: string) => void;
   lukkModal: () => void;
   erÅpen: boolean;
@@ -21,27 +23,14 @@ type OwnProps = Readonly<{
 /**
  * JournalpostSøkModal - Modal for å søke etter en journalpost ved ID
  */
-const JournalpostSøkModal: FunctionComponent<OwnProps> = ({
-  hentJournalpost,
-  lukkModal,
-  erÅpen,
-  harSøktOgFunnetIngenMatch,
-}) => {
+export const JournalpostSøkModal = ({ hentJournalpost, lukkModal, erÅpen, harSøktOgFunnetIngenMatch }: Props) => {
   const intl = useIntl();
   const [lasterJournalpost, setLasterJournalpost] = useState(false);
+
   const formMethods = useForm({
     defaultValues: {} as Formvalues,
   });
 
-  const submit = useCallback(
-    (data: Formvalues) => {
-      setLasterJournalpost(true);
-      hentJournalpost(data.journalpostId);
-      setLasterJournalpost(false);
-    },
-    [hentJournalpost],
-  );
-  const minLength9 = minLength(9);
   return (
     <Modal open={erÅpen} onClose={lukkModal} aria-label="journalpost-modal">
       <Modal.Header>
@@ -50,7 +39,14 @@ const JournalpostSøkModal: FunctionComponent<OwnProps> = ({
         </Heading>
       </Modal.Header>
       <Modal.Body>
-        <Form<Formvalues> formMethods={formMethods} onSubmit={submit}>
+        <Form<Formvalues>
+          formMethods={formMethods}
+          onSubmit={(data: Formvalues) => {
+            setLasterJournalpost(true);
+            hentJournalpost(data.journalpostId);
+            setLasterJournalpost(false);
+          }}
+        >
           <VStack gap="1" justify="start">
             <Label>
               <FormattedMessage id="Journalpost.Søk.JournalpostID" />
@@ -62,7 +58,7 @@ const JournalpostSøkModal: FunctionComponent<OwnProps> = ({
           <HStack gap="2">
             <InputField
               name="journalpostId"
-              validate={[required, hasValidInteger, minLength9]}
+              validate={[required, hasValidInteger, MIN_LENGTH_9]}
               size="medium"
               hideLabel
               label={intl.formatMessage({ id: 'Journalpost.Søk.JournalpostID' })}
@@ -82,4 +78,3 @@ const JournalpostSøkModal: FunctionComponent<OwnProps> = ({
     </Modal>
   );
 };
-export default JournalpostSøkModal;

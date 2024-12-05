@@ -1,25 +1,27 @@
-import React, { FunctionComponent, useEffect,useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Heading } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import JournalDokument from '../../../typer/journalDokumentTsType';
-import DokumentVelger from './DokumentVelger';
-import PDFVisning from './PDFVisning';
+import { JournalDokument } from '../../../typer/journalDokumentTsType';
+import { DokumentVelger } from './DokumentVelger';
+import { PDFVisning } from './PDFVisning';
 
 import styles from './dokumentIndex.module.css';
 
-type OwnProps = {
+type Props = {
   dokumenter?: JournalDokument[];
 };
 
-const DokumentIndex: FunctionComponent<OwnProps> = ({ dokumenter }) => {
+export const DokumentIndex = ({ dokumenter }: Props) => {
   const [valgtDokument, setValgtDokument] = useState<JournalDokument | undefined>();
+
   useEffect(() => {
     const initieltDokumnet = dokumenter && dokumenter.length > 0 ? dokumenter[0] : undefined;
     setValgtDokument(initieltDokumnet);
   }, [dokumenter]);
+
   if (!valgtDokument || !dokumenter) {
     return (
       <div>
@@ -29,6 +31,7 @@ const DokumentIndex: FunctionComponent<OwnProps> = ({ dokumenter }) => {
       </div>
     );
   }
+
   return (
     <div className={styles.pdfContainer}>
       <DokumentVelger setValgtDokument={setValgtDokument} valgtDokument={valgtDokument} dokumenter={dokumenter} />
@@ -37,5 +40,3 @@ const DokumentIndex: FunctionComponent<OwnProps> = ({ dokumenter }) => {
     </div>
   );
 };
-
-export default DokumentIndex;

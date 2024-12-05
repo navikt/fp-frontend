@@ -1,19 +1,19 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { NavAnsatt } from '@navikt/fp-types';
 
-import JournalførSubmitValue from '../typer/ferdigstillJournalføringSubmit';
-import Journalpost from '../typer/journalpostTsType';
-import Oppgave from '../typer/oppgaveTsType';
-import ReserverOppgaveType from '../typer/reserverOppgaveType';
-import JournalpostIndex from './journalpost/JournalpostIndex';
-import OppgaveTabell from './oppgaver/OppgaveTabell';
+import { JournalførSubmitValue } from '../typer/ferdigstillJournalføringSubmit';
+import { Journalpost } from '../typer/journalpostTsType';
+import { Oppgave } from '../typer/oppgaveTsType';
+import { ReserverOppgaveType } from '../typer/reserverOppgaveType';
+import { JournalpostIndex } from './journalpost/JournalpostIndex';
+import { OppgaveTabell } from './oppgaver/OppgaveTabell';
 
 import styles from './journalføringIndex.module.css';
 
-type OwnProps = Readonly<{
+type Props = Readonly<{
   oppgaver: Oppgave[];
   navAnsatt: NavAnsatt;
   velgOppgaveOgHentJournalpost: (oppgave: Oppgave) => void;
@@ -29,7 +29,7 @@ type OwnProps = Readonly<{
 /**
  * JournalføringIndex - Styrer logikk rundt valg av oppgave i listen med oppgaver
  */
-const JournalføringIndex: FunctionComponent<OwnProps> = ({
+export const JournalføringIndex = ({
   oppgaver,
   navAnsatt,
   valgtOppgave,
@@ -39,7 +39,7 @@ const JournalføringIndex: FunctionComponent<OwnProps> = ({
   submitJournalføring,
   reserverOppgave,
   flyttTilGosys,
-}) => (
+}: Props) => (
   <>
     <VerticalSpacer sixteenPx />
     {!valgtJournalpost && (
@@ -65,4 +65,3 @@ const JournalføringIndex: FunctionComponent<OwnProps> = ({
     )}
   </>
 );
-export default JournalføringIndex;

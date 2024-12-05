@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement, useMemo } from 'react';
+import React, { ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { TabsAddIcon } from '@navikt/aksel-icons';
@@ -9,7 +9,7 @@ import dayjs from 'dayjs';
 
 import { FagsakStatus, FamilieHendelseType } from '@navikt/fp-kodeverk';
 
-import JournalFagsak, { FamilieHendelse } from '../../../typer/journalFagsakTsType';
+import { FamilieHendelse, JournalFagsak } from '../../../typer/journalFagsakTsType';
 import { finnYtelseTekst } from './VelgSakForm';
 
 import styles from './sakDetaljer.module.css';
@@ -63,16 +63,17 @@ const lagEtikett = (fagsakStatus: string): ReactElement | null => {
   const props = finnTagProps(fagsakStatus);
   return props ? <Tag {...props} /> : null;
 };
-type OwnProps = Readonly<{
+
+type Props = Readonly<{
   sak: JournalFagsak;
 }>;
 
 /**
  * SakDetaljer - Inneholder detaljer om en sak som kan knyttes til journalposten
  */
-const SakDetaljer: FunctionComponent<OwnProps> = ({ sak }) => {
-  const famTekst = useMemo(() => utledFamileihendelsetekst(sak.familieHendelseJf), [sak]);
-  const lenke = velgSakLenke(sak.saksnummer);
+export const SakDetaljer = ({ sak }: Props) => {
+  const famTekst = utledFamileihendelsetekst(sak.familieHendelseJf);
+
   return (
     <div className={styles.sakContainer}>
       <div className={styles.sakDataFelt}>
@@ -121,7 +122,7 @@ const SakDetaljer: FunctionComponent<OwnProps> = ({ sak }) => {
         <div>
           <Button
             as="a"
-            href={lenke}
+            href={velgSakLenke(sak.saksnummer)}
             target="_blank"
             rel="noreferrer"
             variant="tertiary"
@@ -132,4 +133,3 @@ const SakDetaljer: FunctionComponent<OwnProps> = ({ sak }) => {
     </div>
   );
 };
-export default SakDetaljer;

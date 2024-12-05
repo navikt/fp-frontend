@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { ChevronRightIcon } from '@navikt/aksel-icons';
@@ -7,42 +7,28 @@ import { DateLabel } from '@navikt/ft-ui-komponenter';
 
 import { NavAnsatt } from '@navikt/fp-types';
 
-import Oppgave from '../../typer/oppgaveTsType';
-import ReserverOppgaveType from '../../typer/reserverOppgaveType';
+import { Oppgave } from '../../typer/oppgaveTsType';
+import { ReserverOppgaveType } from '../../typer/reserverOppgaveType';
 import { finnYtelseTekst } from '../journalpost/innhold/VelgSakForm';
 
 import styles from './oppgaveTabellRad.module.css';
 
-type OwnProps = Readonly<{
+type Props = Readonly<{
   oppgave: Oppgave;
   velgOppgaveOgHentJournalpost: (oppgave: Oppgave) => void;
   navAnsatt: NavAnsatt;
   reserverOppgave: (data: ReserverOppgaveType) => void;
 }>;
 
-const OppgaveTabellRad: FunctionComponent<OwnProps> = ({
-  oppgave,
-  velgOppgaveOgHentJournalpost,
-  navAnsatt,
-  reserverOppgave,
-}) => {
-  const setOppgave = useCallback(() => {
-    velgOppgaveOgHentJournalpost(oppgave);
-  }, [oppgave]);
-
-  const reserverOppgaveAction = useCallback(
-    (e: React.SyntheticEvent) => {
-      e.stopPropagation();
-      reserverOppgave({
-        journalpostId: oppgave.journalpostId,
-        reserverFor: navAnsatt.brukernavn,
-      });
-    },
-    [oppgave],
-  );
-
+export const OppgaveTabellRad = ({ oppgave, velgOppgaveOgHentJournalpost, navAnsatt, reserverOppgave }: Props) => {
   return (
-    <Table.Row onClick={setOppgave} shadeOnHover className={styles.tabellRad}>
+    <Table.Row
+      onClick={() => {
+        velgOppgaveOgHentJournalpost(oppgave);
+      }}
+      shadeOnHover
+      className={styles.tabellRad}
+    >
       <Table.DataCell>
         <DateLabel dateString={oppgave.opprettetDato} />
       </Table.DataCell>
@@ -62,7 +48,18 @@ const OppgaveTabellRad: FunctionComponent<OwnProps> = ({
           </Tag>
         )}
         {!oppgave.reservertAv && (
-          <Button size="small" variant="tertiary" onClick={reserverOppgaveAction} type="button">
+          <Button
+            size="small"
+            variant="tertiary"
+            onClick={(e: React.SyntheticEvent) => {
+              e.stopPropagation();
+              reserverOppgave({
+                journalpostId: oppgave.journalpostId,
+                reserverFor: navAnsatt.brukernavn,
+              });
+            }}
+            type="button"
+          >
             <FormattedMessage id="Oppgavetabell.SettPåMeg" />
           </Button>
         )}
@@ -73,12 +70,18 @@ const OppgaveTabellRad: FunctionComponent<OwnProps> = ({
       </Table.DataCell>
       <Table.DataCell>{oppgave.enhetId}</Table.DataCell>
       <Table.DataCell>
-        <Button size="small" variant="tertiary" disabled={false} onClick={setOppgave} type="button">
+        <Button
+          size="small"
+          variant="tertiary"
+          disabled={false}
+          onClick={() => {
+            velgOppgaveOgHentJournalpost(oppgave);
+          }}
+          type="button"
+        >
           <ChevronRightIcon className={styles.nesteIkon} />
         </Button>
       </Table.DataCell>
     </Table.Row>
   );
 };
-
-export default OppgaveTabellRad;
