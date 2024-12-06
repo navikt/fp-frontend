@@ -1,15 +1,28 @@
-import React, { useEffect,useState } from 'react';
+import React, { useState } from 'react';
 
-import { Oppgave,OppgaveStatus } from '@navikt/fp-los-felles';
-import { errorOfType, ErrorTypes, getErrorResponseData } from '@navikt/fp-rest-api';
+import { useMutation } from '@tanstack/react-query';
+import { HTTPError } from 'ky';
+
+import { Oppgave, OppgaveStatus } from '@navikt/fp-los-felles';
 import { FagsakEnkel } from '@navikt/fp-types';
 
-import { restApiHooks,RestApiPathsKeys } from '../data/fplosSaksbehandlerRestApi';
+import {
+  getOppgaverForFagsaker,
+  getReservasjonsstatus,
+  reserverOppgavePost,
+  søkFagsakPost,
+} from '../data/fplosSaksbehandlerApi';
 import { OppgaveErReservertAvAnnenModal } from '../reservertAvAnnen/OppgaveErReservertAvAnnenModal';
 import { FagsakSøk } from './FagsakSøk';
+import { SøkFormValues } from './form/SøkForm';
 
 const EMPTY_ARRAY_FAGSAK: FagsakEnkel[] = [];
 const EMPTY_ARRAY_OPPGAVER: Oppgave[] = [];
+
+type SøkValues = {
+  searchString: string;
+  skalReservere: boolean;
+};
 
 interface Props {
   åpneFagsak: (saksnummer: string, behandlingUuid?: string) => void;
@@ -26,44 +39,52 @@ export const FagsakSøkIndex = ({ åpneFagsak, kanSaksbehandle }: Props) => {
   const [skalReservere, setSkalReservere] = useState(false);
   const [reservertAvAnnenSaksbehandler, setReservertAvAnnenSaksbehandler] = useState(false);
   const [reservertOppgave, setReservertOppgave] = useState<Oppgave>();
-  const [sokStartet, setSokStartet] = useState(false);
-  const [sokFerdig, setSokFerdig] = useState(false);
 
-  const { startRequest: reserverOppgave } = restApiHooks.useRestApiRunner(RestApiPathsKeys.RESERVER_OPPGAVE);
+  const { mutateAsync: reserverOppgave } = useMutation({
+    mutationFn: reserverOppgavePost,
+  });
+
   const {
-    startRequest: sokFagsak,
-    resetRequestData: resetFagsakSok,
+    mutateAsync: hentOppgaverForFagsaker,
+    data: fagsakOppgaver = EMPTY_ARRAY_OPPGAVER,
+    isPending: isHentOppgaverPending,
+  } = useMutation({
+    mutationFn: getOppgaverForFagsaker,
+  });
+
+  const {
+    mutateAsync: søkFagsak,
     data: fagsaker = EMPTY_ARRAY_FAGSAK,
     error: fagsakError,
-  } = restApiHooks.useRestApiRunner(RestApiPathsKeys.SEARCH_FAGSAK);
-  const { startRequest: hentOppgaverForFagsaker, data: fagsakOppgaver = EMPTY_ARRAY_OPPGAVER } =
-    restApiHooks.useRestApiRunner(RestApiPathsKeys.OPPGAVER_FOR_FAGSAKER);
-  const { startRequest: hentReservasjonsstatus } = restApiHooks.useRestApiRunner(
-    RestApiPathsKeys.HENT_RESERVASJONSSTATUS,
-  );
+    reset: resetFagsakSøk,
+    isPending: isSøkFagsakPending,
+    isSuccess: isSøkFagsakSuccess,
+  } = useMutation({
+    mutationFn: async (values: SøkFormValues) => {
+      const fagsakerResultat = await søkFagsakPost(values.searchString, values.skalReservere);
+      if (fagsakerResultat.length === 0) {
+        return [];
+      }
+      const oppgaver = await hentOppgaverForFagsaker(fagsakerResultat);
+      if (oppgaver.length === 1) {
+        velgFagsakOperasjoner(oppgaver[0], false);
+      } else if (oppgaver.length === 0 && fagsakerResultat) {
+        åpneFagsak(fagsakerResultat[0].saksnummer);
+      }
+
+      return fagsakerResultat;
+    },
+  });
+
+  const { mutateAsync: hentReservasjonsstatus } = useMutation({
+    mutationFn: getReservasjonsstatus,
+  });
 
   const searchResultAccessDenied =
-    fagsakError && errorOfType(ErrorTypes.MANGLER_TILGANG_FEIL, fagsakError)
-      ? getErrorResponseData(fagsakError)
-      : undefined;
+    //@ts-expect-error response.data når ein refaktorerar feilhåndteringa
+    fagsakError instanceof HTTPError && fagsakError.response.status === 403 ? fagsakError.response?.data : undefined;
 
-  useEffect(() => {
-    if (sokFerdig && fagsaker.length === 1) {
-      if (fagsakOppgaver.length === 1) {
-        // eslint-disable-next-line @typescript-eslint/no-use-before-define
-        velgFagsakOperasjoner(fagsakOppgaver[0], false);
-      } else if (fagsakOppgaver.length === 0) {
-        åpneFagsak(fagsaker[0].saksnummer);
-      }
-    }
-  }, [sokFerdig, fagsaker, fagsakOppgaver]);
-
-  useEffect(
-    () => () => {
-      resetFagsakSok();
-    },
-    [],
-  );
+  const erSøkFerdig = isSøkFagsakSuccess && !isHentOppgaverPending;
 
   const goToFagsakEllerApneModal = (oppgave: Oppgave, oppgaveStatus?: OppgaveStatus) => {
     if (
@@ -83,14 +104,14 @@ export const FagsakSøkIndex = ({ åpneFagsak, kanSaksbehandle }: Props) => {
       setReservertAvAnnenSaksbehandler(true);
     } else if (!skalReservere) {
       if (skalSjekkeOmReservert) {
-        hentReservasjonsstatus({ oppgaveId: oppgave.id }).then(status => {
+        hentReservasjonsstatus(oppgave.id).then(status => {
           goToFagsakEllerApneModal(oppgave, status);
         });
       } else {
         åpneFagsak(oppgave.saksnummer.toString(), oppgave.behandlingId);
       }
     } else {
-      reserverOppgave({ oppgaveId: oppgave.id }).then(data => {
+      reserverOppgave(oppgave.id).then(data => {
         goToFagsakEllerApneModal(oppgave, data);
       });
     }
@@ -100,24 +121,9 @@ export const FagsakSøkIndex = ({ åpneFagsak, kanSaksbehandle }: Props) => {
     velgFagsakOperasjoner(oppgave, true);
   };
 
-  const sokFagsakFn = (values: { searchString: string; skalReservere: boolean }) => {
+  const sokFagsakFn = (values: SøkValues) => {
     setSkalReservere(values.skalReservere);
-    setSokStartet(true);
-    setSokFerdig(false);
-
-    return sokFagsak(values).then(fagsakerResultat => {
-      if (fagsakerResultat && fagsakerResultat.length > 0) {
-        hentOppgaverForFagsaker({
-          saksnummerListe: fagsakerResultat.map(fagsak => `${fagsak.saksnummer}`).join(','),
-        }).then(() => {
-          setSokStartet(false);
-          setSokFerdig(true);
-        });
-      } else {
-        setSokStartet(false);
-        setSokFerdig(true);
-      }
-    });
+    return søkFagsak(values);
   };
 
   const lukkErReservertModalOgOpneOppgave = (oppgave: Oppgave) => {
@@ -126,24 +132,18 @@ export const FagsakSøkIndex = ({ åpneFagsak, kanSaksbehandle }: Props) => {
     åpneFagsak(oppgave.saksnummer.toString(), oppgave.behandlingId);
   };
 
-  const resetSearch = () => {
-    resetFagsakSok();
-    setSokStartet(false);
-    setSokFerdig(false);
-  };
-
   return (
     <>
       <FagsakSøk
         fagsaker={fagsaker || []}
         fagsakOppgaver={fagsakOppgaver || []}
         searchFagsakCallback={sokFagsakFn}
-        searchResultReceived={sokFerdig}
+        searchResultReceived={erSøkFerdig}
         åpneFagsak={åpneFagsak}
         selectOppgaveCallback={reserverOppgaveOgApne}
-        searchStarted={sokStartet}
+        searchStarted={isHentOppgaverPending || isSøkFagsakPending}
         searchResultAccessDenied={searchResultAccessDenied}
-        resetSearch={resetSearch}
+        resetSearch={resetFagsakSøk}
         kanSaksbehandle={kanSaksbehandle}
       />
       {reservertAvAnnenSaksbehandler && reservertOppgave && (

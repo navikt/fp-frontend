@@ -104,5 +104,10 @@
     "packages/**/*.{ts,tsx,js,jsx, css}": "prettier --write"
   },
   "version": "0.0.0",
-  "packageManager": "yarn@3.4.1"
+  "packageManager": "yarn@3.4.1",
+  "msw": {
+    "workerDirectory": [
+      "test"
+    ]
+  }
 }

@@ -7,12 +7,11 @@ import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { FagsakStatus, getKodeverknavnFraKode,KodeverkType } from '@navikt/fp-kodeverk';
+import { FagsakStatus, KodeverkType } from '@navikt/fp-kodeverk';
 import { Oppgave } from '@navikt/fp-los-felles';
 import { FagsakEnkel } from '@navikt/fp-types';
 
-import { RestApiGlobalStatePathsKeys,restApiHooks } from '../../data/fplosSaksbehandlerRestApi';
-import useLosKodeverk from '../../data/useLosKodeverk';
+import { useLosKodeverk } from '../../data/useLosKodeverk';
 
 const sorterFagsaker = (fagsak1: FagsakEnkel, fagsak2: FagsakEnkel) => {
   if (fagsak1.status === FagsakStatus.AVSLUTTET && fagsak2.status !== FagsakStatus.AVSLUTTET) {
@@ -41,8 +40,7 @@ interface Props {
 export const SøkResultat = ({ fagsaker, fagsakOppgaver, åpneFagsak, selectOppgaveCallback }: Props) => {
   const fagsakStatuser = useLosKodeverk(KodeverkType.FAGSAK_STATUS);
   const fagsakYtelseTyper = useLosKodeverk(KodeverkType.FAGSAK_YTELSE);
-
-  const alleKodeverk = restApiHooks.useGlobalStateRestApiData(RestApiGlobalStatePathsKeys.KODEVERK_LOS);
+  const behandlingTyper = useLosKodeverk(KodeverkType.BEHANDLING_TYPE);
 
   const sorterteFagsaker = [...fagsaker].sort(sorterFagsaker);
 
@@ -57,12 +55,14 @@ export const SøkResultat = ({ fagsaker, fagsakOppgaver, åpneFagsak, selectOppg
             <FormattedMessage id="FagsakList.Behandlingstype" />
           </Table.HeaderCell>
           <Table.HeaderCell scope="col">
+            <FormattedMessage id="FagsakList.Stonadstype" />
+          </Table.HeaderCell>
+          <Table.HeaderCell scope="col">
             <FormattedMessage id="FagsakList.Status" />
           </Table.HeaderCell>
           <Table.HeaderCell scope="col">
             <FormattedMessage id="FagsakList.BarnFodt" />
           </Table.HeaderCell>
-          <Table.HeaderCell scope="col" />
           <Table.HeaderCell scope="col" />
         </Table.Row>
       </Table.Header>
@@ -80,16 +80,12 @@ export const SøkResultat = ({ fagsaker, fagsakOppgaver, åpneFagsak, selectOppg
             >
               <Table.DataCell />
               <Table.DataCell>
-                {getKodeverknavnFraKode(alleKodeverk, KodeverkType.FAGSAK_YTELSE, oppgave.fagsakYtelseType)}
+                {fagsakYtelseTyper.find(type => type.kode === oppgave.fagsakYtelseType)?.navn}
               </Table.DataCell>
               <Table.DataCell>
-                {getKodeverknavnFraKode(alleKodeverk, KodeverkType.BEHANDLING_TYPE, oppgave.behandlingstype)}
+                {behandlingTyper.find(type => type.kode === oppgave.behandlingstype)?.navn}
               </Table.DataCell>
-              <Table.DataCell>
-                {oppgave.behandlingStatus
-                  ? getKodeverknavnFraKode(alleKodeverk, KodeverkType.BEHANDLING_STATUS, oppgave.behandlingStatus)
-                  : ''}
-              </Table.DataCell>
+              <Table.DataCell />
               <Table.DataCell>{fagsak.barnFødt ? <DateLabel dateString={fagsak.barnFødt} /> : null}</Table.DataCell>
               <Table.DataCell>
                 <ChevronRightIcon />

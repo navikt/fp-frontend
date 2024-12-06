@@ -1,14 +1,17 @@
 import React from 'react';
 
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
+import { useQuery } from '@tanstack/react-query';
+import { http, HttpResponse } from 'msw';
 
 import { BehandlingStatus, BehandlingType, FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { alleKodeverkLos, getIntlDecorator } from '@navikt/fp-storybook-utils';
 import { KjønnkodeEnum } from '@navikt/fp-types';
-import { RestApiMock } from '@navikt/fp-utils-test';
 
-import { requestApi,RestApiGlobalStatePathsKeys } from '../../data/fplosSaksbehandlerRestApi';
+import { losKodeverkOptions, LosUrl } from '../../data/fplosSaksbehandlerApi';
+import { withQueryClient } from '../../data/withQueryClientProvider';
 import { SøkResultat } from './SøkResultat';
 
 import messages from '../../../i18n/nb_NO.json';
@@ -18,15 +21,20 @@ const withIntl = getIntlDecorator(messages);
 const meta = {
   title: 'søk/SøkResultat',
   component: SøkResultat,
-  decorators: [withIntl],
+  decorators: [withIntl, withQueryClient],
+  args: {
+    åpneFagsak: action('button-click'),
+    selectOppgaveCallback: action('button-click'),
+  },
+  parameters: {
+    msw: {
+      handlers: [http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos))],
+    },
+  },
   render: props => {
-    const data = [{ key: RestApiGlobalStatePathsKeys.KODEVERK_LOS.name, data: alleKodeverkLos, global: true }];
-
-    return (
-      <RestApiMock data={data} requestApi={requestApi}>
-        <SøkResultat {...props} />
-      </RestApiMock>
-    );
+    //Må hente data til cache før testa komponent blir kalla
+    const alleKodeverk = useQuery(losKodeverkOptions()).data;
+    return alleKodeverk ? <SøkResultat {...props} /> : <LoadingPanel />;
   },
 } satisfies Meta<typeof SøkResultat>;
 export default meta;
@@ -35,8 +43,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    åpneFagsak: action('button-click'),
-    selectOppgaveCallback: action('button-click'),
     fagsaker: [
       {
         saksnummer: '12213234',

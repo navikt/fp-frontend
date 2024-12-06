@@ -1,13 +1,12 @@
-import React from 'react';
-
 import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
+import { http, HttpResponse } from 'msw';
 
 import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
-import { RestApiMock } from '@navikt/fp-utils-test';
 
-import { requestApi,RestApiPathsKeys } from '../../../data/fplosSaksbehandlerRestApi';
+import { LosUrl } from '../../../data/fplosSaksbehandlerApi';
+import { withQueryClient } from '../../../data/withQueryClientProvider';
 import { OpphevReservasjonModal } from './OpphevReservasjonModal';
 
 import messages from '../../../../i18n/nb_NO.json';
@@ -17,19 +16,14 @@ const withIntl = getIntlDecorator(messages);
 const meta = {
   title: 'behandlingskoer/OpphevReservasjonModal',
   component: OpphevReservasjonModal,
-  decorators: [withIntl],
-  render: ({ oppgave, hentReserverteOppgaver }) => {
-    const data = [{ key: RestApiPathsKeys.OPPHEV_OPPGAVERESERVASJON.name, data: {} }];
-
-    return (
-      <RestApiMock data={data} requestApi={requestApi}>
-        <OpphevReservasjonModal
-          oppgave={oppgave}
-          closeModal={action('button-click')}
-          hentReserverteOppgaver={hentReserverteOppgaver}
-        />
-      </RestApiMock>
-    );
+  decorators: [withIntl, withQueryClient],
+  parameters: {
+    msw: {
+      handlers: [http.post(LosUrl.OPPHEV_OPPGAVERESERVASJON, () => HttpResponse.json({}))],
+    },
+  },
+  args: {
+    closeModal: action('button-click'),
   },
 } satisfies Meta<typeof OpphevReservasjonModal>;
 export default meta;
@@ -38,8 +32,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    closeModal: action('button-click'),
-    hentReserverteOppgaver: action('button-click'),
     oppgave: {
       id: 1,
       status: {

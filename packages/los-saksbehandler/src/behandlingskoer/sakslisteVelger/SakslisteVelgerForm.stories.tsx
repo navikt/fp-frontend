@@ -1,79 +1,72 @@
-import React, { ComponentProps } from 'react';
+import React from 'react';
 
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
+import { useQuery } from '@tanstack/react-query';
+import { http, HttpResponse } from 'msw';
 
 import { BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { alleKodeverkLos, getIntlDecorator } from '@navikt/fp-storybook-utils';
-import { RestApiMock } from '@navikt/fp-utils-test';
 
-import { requestApi,RestApiGlobalStatePathsKeys, RestApiPathsKeys } from '../../data/fplosSaksbehandlerRestApi';
+import { losKodeverkOptions, LosUrl } from '../../data/fplosSaksbehandlerApi';
+import { withQueryClient } from '../../data/withQueryClientProvider';
 import { AndreKriterierType } from '../../kodeverk/andreKriterierType';
 import { KoSortering } from '../../kodeverk/KoSortering';
-import { Saksbehandler } from '../../typer/saksbehandlerTsType';
-import { Saksliste } from '../../typer/sakslisteTsType';
 import { SakslisteVelgerForm } from './SakslisteVelgerForm';
 
 import messages from '../../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
 
-type StoryProps = {
-  saksbehandlere: Saksbehandler[];
-  sakslister: Saksliste[];
-} & ComponentProps<typeof SakslisteVelgerForm>;
-
 const meta = {
   title: 'behandlingskoer/SakslisteVelgerForm',
   component: SakslisteVelgerForm,
-  decorators: [withIntl],
-  render: props => {
-    const data = [
-      { key: RestApiPathsKeys.SAKSLISTE_SAKSBEHANDLERE.name, data: props.saksbehandlere },
-      { key: RestApiGlobalStatePathsKeys.KODEVERK_LOS.name, data: alleKodeverkLos, global: true },
-    ];
-
-    return (
-      <RestApiMock data={data} requestApi={requestApi}>
-        <SakslisteVelgerForm
-          sakslister={props.sakslister}
-          setValgtSakslisteId={action('button-click')}
-          fetchAntallOppgaver={action('button-click')}
-          getValueFromLocalStorage={() => ''}
-          setValueInLocalStorage={action('button-click')}
-          removeValueFromLocalStorage={action('button-click')}
-        />
-      </RestApiMock>
-    );
+  decorators: [withIntl, withQueryClient],
+  parameters: {
+    msw: {
+      handlers: [
+        http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
+        http.get(LosUrl.SAKSLISTE_SAKSBEHANDLERE, () =>
+          HttpResponse.json([
+            {
+              brukerIdent: {
+                brukerIdent: '32434',
+                verdi: '32434',
+              },
+              navn: 'Espen Utvikler',
+            },
+            {
+              brukerIdent: {
+                brukerIdent: '31111',
+                verdi: '32111',
+              },
+              navn: 'Auto Joakim',
+            },
+          ]),
+        ),
+      ],
+    },
   },
-} satisfies Meta<StoryProps>;
+  args: {
+    setValgtSakslisteId: action('button-click'),
+    fetchAntallOppgaver: action('button-click'),
+    setValueInLocalStorage: action('button-click'),
+    removeValueFromLocalStorage: action('button-click'),
+    getValueFromLocalStorage: () => '',
+  },
+  render: props => {
+    //Må hente data til cache før testa komponent blir kalla
+    const alleKodeverk = useQuery(losKodeverkOptions()).data;
+    return alleKodeverk ? <SakslisteVelgerForm {...props} /> : <LoadingPanel />;
+  },
+} satisfies Meta<typeof SakslisteVelgerForm>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    setValgtSakslisteId: action('button-click'),
-    fetchAntallOppgaver: action('button-click'),
-    getValueFromLocalStorage: () => '',
-    setValueInLocalStorage: action('button-click'),
-    removeValueFromLocalStorage: action('button-click'),
-    saksbehandlere: [
-      {
-        brukerIdent: {
-          brukerIdent: '32434',
-          verdi: '32434',
-        },
-        navn: 'Espen Utvikler',
-      },
-      {
-        brukerIdent: {
-          brukerIdent: '31111',
-          verdi: '32111',
-        },
-        navn: 'Auto Joakim',
-      },
-    ],
     sakslister: [
       {
         sakslisteId: 1,
@@ -99,23 +92,6 @@ export const Default: Story = {
 
 export const MedToSakslister: Story = {
   args: {
-    ...Default.args,
-    saksbehandlere: [
-      {
-        brukerIdent: {
-          brukerIdent: '32434',
-          verdi: '32434',
-        },
-        navn: 'Espen Utvikler',
-      },
-      {
-        brukerIdent: {
-          brukerIdent: '31111',
-          verdi: '32111',
-        },
-        navn: 'Auto Joakim',
-      },
-    ],
     sakslister: [
       {
         sakslisteId: 1,
@@ -159,71 +135,58 @@ export const MedToSakslister: Story = {
 
 export const MedIngenSakslister: Story = {
   args: {
-    ...Default.args,
-    saksbehandlere: [
-      {
-        brukerIdent: {
-          brukerIdent: '32434',
-          verdi: '32434',
-        },
-        navn: 'Espen Utvikler',
-      },
-      {
-        brukerIdent: {
-          brukerIdent: '31111',
-          verdi: '32111',
-        },
-        navn: 'Auto Joakim',
-      },
-    ],
     sakslister: [],
   },
 };
 
 export const MedFlereEnnTreSaksbehandlere: Story = {
+  parameters: {
+    msw: {
+      handlers: [
+        http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
+        http.get(LosUrl.SAKSLISTE_SAKSBEHANDLERE, () =>
+          HttpResponse.json([
+            {
+              brukerIdent: {
+                brukerIdent: '32434',
+                verdi: '32434',
+              },
+              navn: 'Espen Utvikler',
+            },
+            {
+              brukerIdent: {
+                brukerIdent: '31111',
+                verdi: '32111',
+              },
+              navn: 'Auto Joakim',
+            },
+            {
+              brukerIdent: {
+                brukerIdent: '3111123',
+                verdi: '3211123',
+              },
+              navn: 'Hans Haugerud',
+            },
+            {
+              brukerIdent: {
+                brukerIdent: '232323',
+                verdi: '23343',
+              },
+              navn: 'Olav Hellerud',
+            },
+            {
+              brukerIdent: {
+                brukerIdent: '311112',
+                verdi: '321112',
+              },
+              navn: 'Bente Frogner',
+            },
+          ]),
+        ),
+      ],
+    },
+  },
   args: {
-    setValgtSakslisteId: action('button-click'),
-    fetchAntallOppgaver: action('button-click'),
-    getValueFromLocalStorage: () => '',
-    setValueInLocalStorage: action('button-click'),
-    removeValueFromLocalStorage: action('button-click'),
-    saksbehandlere: [
-      {
-        brukerIdent: {
-          brukerIdent: '32434',
-          verdi: '32434',
-        },
-        navn: 'Espen Utvikler',
-      },
-      {
-        brukerIdent: {
-          brukerIdent: '31111',
-          verdi: '32111',
-        },
-        navn: 'Auto Joakim',
-      },
-      {
-        brukerIdent: {
-          brukerIdent: '3111123',
-          verdi: '3211123',
-        },
-        navn: 'Hans Haugerud',
-      },
-      {
-        brukerIdent: {
-          brukerIdent: '232323',
-          verdi: '23343',
-        },
-        navn: 'Olav Hellerud',
-      },
-      {
-        brukerIdent: {
-          brukerIdent: '311112',
-          verdi: '321112',
-        },
-        navn: 'Bente Frogner',
-      },
-    ],
     sakslister: [
       {
         sakslisteId: 1,

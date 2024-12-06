@@ -9,10 +9,17 @@ import {
   PersonHeadsetIcon,
 } from '@navikt/aksel-icons';
 import { ActionMenu, Button } from '@navikt/ds-react';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { FlyttReservasjonModal, Oppgave, OppgaveReservasjonEndringDatoModal } from '@navikt/fp-los-felles';
 
-import { restApiHooks, RestApiPathsKeys } from '../../../data/fplosSaksbehandlerRestApi';
+import {
+  endreReservasjonPost,
+  flyttReservasjonPost,
+  flyttReservasjonSaksbehandlerSøkPost,
+  forlengReservasjonPost,
+  LosUrl,
+} from '../../../data/fplosSaksbehandlerApi';
 import { OppgaveReservasjonForlengetModal } from './forleng/OppgaveReservasjonForlengetModal';
 import { OpphevReservasjonModal } from './OpphevReservasjonModal';
 
@@ -20,41 +27,60 @@ import styles from './oppgaveHandlingerMenu.module.css';
 
 interface Props {
   oppgave: Oppgave;
-  hentReserverteOppgaver: (params?: void, keepData?: boolean) => void;
   setEnableTableEvents: (shouldDisable: boolean) => void;
 }
 
-export const OppgaveHandlingerMenu = ({ oppgave, hentReserverteOppgaver, setEnableTableEvents }: Props) => {
+export const OppgaveHandlingerMenu = ({ oppgave, setEnableTableEvents }: Props) => {
   const intl = useIntl();
+  const queryClient = useQueryClient();
 
   const [visOpphevReservasjonModal, setVisOpphevReservasjonModal] = useState(false);
   const [visForlengetReservasjonModal, setVisForlengetReservasjonModal] = useState(false);
   const [visReservasjonEndringDatoModal, setVisReservasjonEndringDatoModal] = useState(false);
   const [visFlyttReservasjonModal, setVisFlyttReservasjonModal] = useState(false);
 
-  const { startRequest: endreOppgavereservasjon } = restApiHooks.useRestApiRunner(
-    RestApiPathsKeys.ENDRE_OPPGAVERESERVASJON,
-  );
+  const { mutate: endreOppgavereservasjon } = useMutation({
+    mutationFn: (reserverTil: string) => endreReservasjonPost(oppgave.id, reserverTil),
+    onSuccess: () => {
+      setVisForlengetReservasjonModal(true);
 
-  const { startRequest: flyttOppgavereservasjon } = restApiHooks.useRestApiRunner(RestApiPathsKeys.FLYTT_RESERVASJON);
+      queryClient.invalidateQueries({
+        queryKey: [LosUrl.RESERVERTE_OPPGAVER],
+      });
+
+      setVisReservasjonEndringDatoModal(false);
+    },
+  });
+
+  const { mutate: flyttOppgavereservasjon } = useMutation({
+    mutationFn: (values: { brukerIdent: string; begrunnelse: string }) =>
+      flyttReservasjonPost(oppgave.id, values.brukerIdent, values.begrunnelse),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [LosUrl.RESERVERTE_OPPGAVER],
+      });
+    },
+  });
+
+  const { mutate: forlengOppgavereservasjon } = useMutation({
+    mutationFn: () => forlengReservasjonPost(oppgave.id),
+    onSuccess: () => {
+      setVisForlengetReservasjonModal(true);
+      queryClient.invalidateQueries({
+        queryKey: [LosUrl.RESERVERTE_OPPGAVER],
+      });
+    },
+  });
 
   const {
-    startRequest: hentSaksbehandler,
-    state: hentSaksbehandlerState,
+    mutate: hentSaksbehandler,
     data: saksbehandler,
-    resetRequestData: resetHentSaksbehandler,
-  } = restApiHooks.useRestApiRunner(RestApiPathsKeys.FLYTT_RESERVASJON_SAKSBEHANDLER_SOK);
-
-  const { startRequest: forlengOppgavereservasjon } = restApiHooks.useRestApiRunner(
-    RestApiPathsKeys.FORLENG_OPPGAVERESERVASJON,
-  );
-
-  const forlengReserverasjon = () => {
-    forlengOppgavereservasjon({ oppgaveId: oppgave.id }).then(() => {
-      setVisForlengetReservasjonModal(true);
-      hentReserverteOppgaver(undefined, true);
-    });
-  };
+    reset: resetHentSaksbehandler,
+    isPending,
+    isSuccess,
+  } = useMutation({
+    mutationFn: (brukerIdent: string) => flyttReservasjonSaksbehandlerSøkPost(brukerIdent),
+  });
 
   return (
     <>
@@ -76,7 +102,7 @@ export const OppgaveHandlingerMenu = ({ oppgave, hentReserverteOppgaver, setEnab
             <ActionMenu.Item onSelect={() => setVisOpphevReservasjonModal(true)} icon={<ArrowUndoIcon aria-hidden />}>
               <FormattedMessage id="OppgaveHandlingerMenu.LeggTilbake" values={{ br: <br /> }} />
             </ActionMenu.Item>
-            <ActionMenu.Item onSelect={forlengReserverasjon} icon={<HourglassTopFilledIcon aria-hidden />}>
+            <ActionMenu.Item onSelect={() => forlengOppgavereservasjon()} icon={<HourglassTopFilledIcon aria-hidden />}>
               <FormattedMessage id="OppgaveHandlingerMenu.ForlengReservasjon" values={{ br: <br /> }} />
             </ActionMenu.Item>
             <ActionMenu.Item
@@ -95,19 +121,12 @@ export const OppgaveHandlingerMenu = ({ oppgave, hentReserverteOppgaver, setEnab
         </ActionMenu.Content>
       </ActionMenu>
       {visOpphevReservasjonModal && (
-        <OpphevReservasjonModal
-          oppgave={oppgave}
-          closeModal={() => setVisOpphevReservasjonModal(false)}
-          hentReserverteOppgaver={hentReserverteOppgaver}
-        />
+        <OpphevReservasjonModal oppgave={oppgave} closeModal={() => setVisOpphevReservasjonModal(false)} />
       )}
       {visReservasjonEndringDatoModal && (
         <OppgaveReservasjonEndringDatoModal
           closeModal={() => setVisReservasjonEndringDatoModal(false)}
           reserverTilDefault={oppgave.status.reservertTilTidspunkt}
-          oppgaveId={oppgave.id}
-          hentReserverteOppgaver={hentReserverteOppgaver}
-          endreReserverasjonState={() => setVisForlengetReservasjonModal(true)}
           endreOppgavereservasjon={endreOppgavereservasjon}
         />
       )}
@@ -116,13 +135,12 @@ export const OppgaveHandlingerMenu = ({ oppgave, hentReserverteOppgaver, setEnab
       )}
       {visFlyttReservasjonModal && (
         <FlyttReservasjonModal
-          oppgaveId={oppgave.id}
           flyttetBegrunnelse={oppgave.status.flyttetReservasjon?.begrunnelse}
           closeModal={() => setVisFlyttReservasjonModal(false)}
-          hentReserverteOppgaver={hentReserverteOppgaver}
           flyttOppgavereservasjon={flyttOppgavereservasjon}
           hentSaksbehandler={hentSaksbehandler}
-          hentSaksbehandlerState={hentSaksbehandlerState}
+          hentSaksbehandlerIsPending={isPending}
+          hentSaksbehandlerIsSuccess={isSuccess}
           saksbehandler={saksbehandler}
           resetHentSaksbehandler={resetHentSaksbehandler}
         />

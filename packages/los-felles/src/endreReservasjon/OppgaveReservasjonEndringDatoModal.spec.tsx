@@ -1,7 +1,8 @@
 import React from 'react';
 
+import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { composeStories } from '@storybook/react';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import dayjs from 'dayjs';
 
@@ -11,21 +12,19 @@ const { Default } = composeStories(stories);
 
 describe('<OppgaveReservasjonEndringDatoModal>', () => {
   it('skal vise modal for oppheving av reservasjon og velge dato', async () => {
-    const endreReserverasjonState = vi.fn();
+    const endreOppgavereservasjon = vi.fn();
 
-    render(<Default endreReserverasjonState={endreReserverasjonState} />);
+    render(<Default endreOppgavereservasjon={endreOppgavereservasjon} />);
 
     expect(await screen.findByText('Velg dato som reservasjonen avsluttes')).toBeInTheDocument();
 
     const datoInput = screen.getByRole('textbox', { hidden: true });
-    console.log('datoInput', dayjs().format('DD.MM.YYYY'));
-    await userEvent.type(datoInput, dayjs().format('DD.MM.YYYY'));
-    fireEvent.blur(datoInput);
+    await userEvent.type(datoInput, dayjs().format(DDMMYYYY_DATE_FORMAT));
 
     expect(await screen.findByText('OK')).toBeInTheDocument();
     await userEvent.click(screen.getByText('OK'));
 
-    await waitFor(() => expect(endreReserverasjonState).toHaveBeenCalledTimes(1));
-    expect(endreReserverasjonState).toHaveBeenNthCalledWith(1);
+    await waitFor(() => expect(endreOppgavereservasjon).toHaveBeenCalledTimes(1));
+    expect(endreOppgavereservasjon).toHaveBeenNthCalledWith(1, dayjs().format(ISO_DATE_FORMAT));
   });
 });

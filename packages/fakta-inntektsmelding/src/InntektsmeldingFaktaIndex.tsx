@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
 import React, { useState } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
@@ -34,11 +33,7 @@ export type InntektsmeldingFaktaProps = {
 
 type TableHeaders = keyof Pick<
   Inntektsmelding,
-  | 'innsendingstidspunkt'
-  | 'arbeidsgiverIdent'
-  | 'startDatoPermisjon'
-  | 'inntektPrMnd'
-  | 'tilknyttedeBehandlingIder'
+  'innsendingstidspunkt' | 'arbeidsgiverIdent' | 'startDatoPermisjon' | 'inntektPrMnd' | 'tilknyttedeBehandlingIder'
 >;
 
 export const InntektsmeldingFaktaIndex = ({

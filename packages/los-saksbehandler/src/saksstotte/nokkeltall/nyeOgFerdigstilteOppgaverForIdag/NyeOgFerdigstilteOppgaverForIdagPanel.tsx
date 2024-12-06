@@ -7,7 +7,7 @@ import dayjs from 'dayjs';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
 
-import useLosKodeverk from '../../../data/useLosKodeverk';
+import { useLosKodeverk } from '../../../data/useLosKodeverk';
 import { NyeOgFerdigstilteOppgaver } from '../../../typer/nyeOgFerdigstilteOppgaverTsType';
 import { NyeOgFerdigstilteOppgaverForIdagGraf } from './NyeOgFerdigstilteOppgaverForIdagGraf';
 

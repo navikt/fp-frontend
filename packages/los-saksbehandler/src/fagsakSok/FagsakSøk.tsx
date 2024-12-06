@@ -6,7 +6,7 @@ import { BodyShort, VStack } from '@navikt/ds-react';
 import { Oppgave } from '@navikt/fp-los-felles';
 import { FagsakEnkel } from '@navikt/fp-types';
 
-import { SøkForm } from './form/SøkForm';
+import { SøkForm, SøkFormValues } from './form/SøkForm';
 import { PersonInfo } from './person/PersonInfo';
 import { SøkResultat } from './resultat/SøkResultat';
 
@@ -24,7 +24,7 @@ const skalViseListe = (fagsaker: FagsakEnkel[], fagsakOppgaver: Oppgave[]): bool
 interface Props {
   fagsaker: FagsakEnkel[];
   fagsakOppgaver: Oppgave[];
-  searchFagsakCallback: (values: { searchString: string; skalReservere: boolean }) => void;
+  searchFagsakCallback: (values: SøkFormValues) => void;
   searchResultReceived: boolean;
   åpneFagsak: (saksnummer: string, behandlingUuid?: string) => void;
   selectOppgaveCallback: (oppgave: Oppgave) => void;

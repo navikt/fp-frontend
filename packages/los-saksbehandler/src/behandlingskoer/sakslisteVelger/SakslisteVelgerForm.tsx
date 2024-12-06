@@ -12,15 +12,17 @@ import {
   PlusIcon,
   SackKronerIcon,
 } from '@navikt/aksel-icons';
-import { BodyShort, Box, Button,Heading, HStack, Label, VStack } from '@navikt/ds-react';
+import { BodyShort, Box, Button, Heading, HStack, Label, VStack } from '@navikt/ds-react';
 import { Form, SelectField } from '@navikt/ft-form-hooks';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
+import { useMutation } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 
-import { getKodeverknavnFraKode,KodeverkType } from '@navikt/fp-kodeverk';
-import { AlleKodeverk } from '@navikt/fp-types';
+import { KodeverkType } from '@navikt/fp-kodeverk';
+import { KodeverkMedNavn } from '@navikt/fp-types';
 
-import { RestApiGlobalStatePathsKeys, restApiHooks,RestApiPathsKeys } from '../../data/fplosSaksbehandlerRestApi';
+import { getSakslisteSaksbehandlere } from '../../data/fplosSaksbehandlerApi';
+import { useLosKodeverk } from '../../data/useLosKodeverk';
 import { Saksliste } from '../../typer/sakslisteTsType';
 
 import styles from './sakslisteVelgerForm.module.css';
@@ -41,7 +43,7 @@ const getDefaultSaksliste = (
   return sorterteSakslister.length > 0 ? sorterteSakslister[0].sakslisteId : undefined;
 };
 
-const getInitialValues = (
+const getFormDefaultValues = (
   sorterteSakslister: Saksliste[],
   getValueFromLocalStorage: (key: string) => string | undefined,
   removeValueFromLocalStorage: (key: string) => void,
@@ -61,18 +63,21 @@ const getInitialValues = (
   };
 };
 
-const getAndreKriterier = (intl: IntlShape, alleKodeverk: AlleKodeverk, saksliste?: Saksliste): ReactNode => {
+const AndreKriterier = ({ saksliste }: { saksliste?: Saksliste }): ReactNode => {
+  const intl = useIntl();
+  const andreKriterierTyper = useLosKodeverk('AndreKriterierType');
+
   if (saksliste && saksliste.andreKriterier.length > 0) {
     return (
       <VStack gap="1">
         {saksliste.andreKriterier.map(ak => (
           <BodyShort key={ak.andreKriterierType}>
             {ak.inkluder
-              ? getKodeverknavnFraKode(alleKodeverk, 'AndreKriterierType', ak.andreKriterierType)
+              ? andreKriterierTyper.find(akt => akt.kode === ak.andreKriterierType)?.navn
               : intl.formatMessage(
                   { id: 'SakslisteVelgerForm.Uten' },
                   {
-                    kriterie: getKodeverknavnFraKode(alleKodeverk, 'AndreKriterierType', ak.andreKriterierType),
+                    kriterie: andreKriterierTyper.find(akt => akt.kode === ak.andreKriterierType)?.navn,
                   },
                 )}
           </BodyShort>
@@ -106,17 +111,17 @@ const getNavn = (values: TextValues, intl: IntlShape): string => {
 
 const getSorteringsnavnForPeriode = (
   intl: IntlShape,
-  alleKodeverk: AlleKodeverk,
+  køSorteringTyper: KodeverkMedNavn[],
   sorteringType: string,
   fomDato?: string,
   tomDato?: string,
 ): string => {
   if (!fomDato && !tomDato) {
-    return getKodeverknavnFraKode(alleKodeverk, 'KøSortering', sorteringType);
+    return køSorteringTyper.find(kst => kst.kode === sorteringType)?.navn ?? '';
   }
 
   const values = {
-    navn: getKodeverknavnFraKode(alleKodeverk, 'KøSortering', sorteringType),
+    navn: køSorteringTyper.find(kst => kst.kode === sorteringType)?.navn ?? '',
     fomDato: fomDato ? dayjs(fomDato).format(DDMMYYYY_DATE_FORMAT) : undefined,
     tomDato: tomDato ? dayjs(tomDato).format(DDMMYYYY_DATE_FORMAT) : undefined,
     br: <br />,
@@ -126,16 +131,16 @@ const getSorteringsnavnForPeriode = (
 
 const getSorteringsnavnForDynamiskPeriode = (
   intl: IntlShape,
-  alleKodeverk: AlleKodeverk,
+  køSorteringTyper: KodeverkMedNavn[],
   sorteringType: string,
   fra?: number,
   til?: number,
 ): string => {
   if (!fra && !til) {
-    return getKodeverknavnFraKode(alleKodeverk, 'KøSortering', sorteringType);
+    return køSorteringTyper.find(kst => kst.kode === sorteringType)?.navn ?? '';
   }
   const values = {
-    navn: getKodeverknavnFraKode(alleKodeverk, 'KøSortering', sorteringType),
+    navn: køSorteringTyper.find(kst => kst.kode === sorteringType)?.navn ?? '',
     fomDato: fra ? dayjs().add(fra, 'days').format(DDMMYYYY_DATE_FORMAT) : undefined,
     tomDato: til ? dayjs().add(til, 'days').format(DDMMYYYY_DATE_FORMAT) : undefined,
     br: <br />,
@@ -143,7 +148,7 @@ const getSorteringsnavnForDynamiskPeriode = (
   return getNavn(values, intl);
 };
 
-const getSorteringsnavn = (intl: IntlShape, alleKodeverk: AlleKodeverk, saksliste?: Saksliste): string => {
+const getSorteringsnavn = (intl: IntlShape, køSorteringTyper: KodeverkMedNavn[], saksliste?: Saksliste): string => {
   if (!saksliste?.sortering) {
     return '';
   }
@@ -151,8 +156,8 @@ const getSorteringsnavn = (intl: IntlShape, alleKodeverk: AlleKodeverk, sakslist
   const { erDynamiskPeriode, sorteringType, fra, til, fomDato, tomDato } = saksliste.sortering;
 
   return erDynamiskPeriode
-    ? getSorteringsnavnForDynamiskPeriode(intl, alleKodeverk, sorteringType, fra, til)
-    : getSorteringsnavnForPeriode(intl, alleKodeverk, sorteringType, fomDato, tomDato);
+    ? getSorteringsnavnForDynamiskPeriode(intl, køSorteringTyper, sorteringType, fra, til)
+    : getSorteringsnavnForPeriode(intl, køSorteringTyper, sorteringType, fomDato, tomDato);
 };
 
 type FormValues = {
@@ -162,7 +167,7 @@ type FormValues = {
 interface Props {
   sakslister: Saksliste[];
   setValgtSakslisteId: (sakslisteId: number) => void;
-  fetchAntallOppgaver: (data: { sakslisteId: number }) => void;
+  fetchAntallOppgaver: (sakslisteId: number) => void;
   getValueFromLocalStorage: (key: string) => string | undefined;
   setValueInLocalStorage: (key: string, value: string) => void;
   removeValueFromLocalStorage: (key: string) => void;
@@ -182,28 +187,33 @@ export const SakslisteVelgerForm = ({
 
   const [visAlleSaksbehandlere, setVisAlleSaksbehandlere] = useState(false);
 
-  const sorterteSakslister = [...sakslister].sort((saksliste1, saksliste2) =>
+  const behandlingsTyper = useLosKodeverk(KodeverkType.BEHANDLING_TYPE);
+  const fagsakYtelseTyper = useLosKodeverk(KodeverkType.FAGSAK_YTELSE);
+  // TODO Lag ein eigen KodeverkType for LOS
+  const køSorteringTyper = useLosKodeverk('KøSortering');
+
+  const sorterteSakslister = sakslister.toSorted((saksliste1, saksliste2) =>
     saksliste1.navn.localeCompare(saksliste2.navn),
   );
 
-  const { data: saksbehandlere, startRequest: fetchSaksbehandlere } = restApiHooks.useRestApiRunner(
-    RestApiPathsKeys.SAKSLISTE_SAKSBEHANDLERE,
-  );
-  const alleKodeverk = restApiHooks.useGlobalStateRestApiData(RestApiGlobalStatePathsKeys.KODEVERK_LOS);
+  const { mutate: fetchSaksbehandlere, data: saksbehandlere } = useMutation({
+    mutationFn: getSakslisteSaksbehandlere,
+  });
 
   const formMethods = useForm<FormValues>({
-    defaultValues: getInitialValues(sorterteSakslister, getValueFromLocalStorage, removeValueFromLocalStorage),
+    defaultValues: getFormDefaultValues(sorterteSakslister, getValueFromLocalStorage, removeValueFromLocalStorage),
   });
 
   const sakslisteId = formMethods.watch('sakslisteId');
 
+  // (TOR) Prøv å refaktorer dette
   useEffect(() => {
     if (sakslisteId) {
       setValueInLocalStorage('sakslisteId', sakslisteId);
       const id = parseInt(sakslisteId, 10);
       setValgtSakslisteId(id);
-      fetchSaksbehandlere({ sakslisteId: id });
-      fetchAntallOppgaver({ sakslisteId: id });
+      fetchSaksbehandlere(id);
+      fetchAntallOppgaver(id);
     }
   }, [sakslisteId]);
 
@@ -264,9 +274,7 @@ export const SakslisteVelgerForm = ({
                       {valgtSaksliste.fagsakYtelseTyper.length > 0 ? (
                         <VStack gap="1">
                           {valgtSaksliste.fagsakYtelseTyper.map(type => (
-                            <BodyShort key={type}>
-                              {getKodeverknavnFraKode(alleKodeverk, KodeverkType.FAGSAK_YTELSE, type)}
-                            </BodyShort>
+                            <BodyShort key={type}>{fagsakYtelseTyper.find(fyt => fyt.kode === type)?.navn}</BodyShort>
                           ))}
                         </VStack>
                       ) : (
@@ -287,9 +295,7 @@ export const SakslisteVelgerForm = ({
                       {valgtSaksliste.behandlingTyper.length > 0 ? (
                         <VStack gap="1">
                           {valgtSaksliste.behandlingTyper.map(type => (
-                            <BodyShort key={type}>
-                              {getKodeverknavnFraKode(alleKodeverk, KodeverkType.BEHANDLING_TYPE, type)}
-                            </BodyShort>
+                            <BodyShort key={type}>{behandlingsTyper.find(bt => bt.kode === type)?.navn}</BodyShort>
                           ))}
                         </VStack>
                       ) : (
@@ -305,7 +311,7 @@ export const SakslisteVelgerForm = ({
                         </Label>
                         <FunnelIcon aria-hidden className={styles.grayout} />
                       </HStack>
-                      {getAndreKriterier(intl, alleKodeverk, valgtSaksliste)}
+                      <AndreKriterier saksliste={valgtSaksliste} />
                     </VStack>
                   </Box>
                   <Box background="surface-neutral-subtle" padding="4" borderRadius="xlarge" width="200px">
@@ -316,7 +322,7 @@ export const SakslisteVelgerForm = ({
                         </Label>
                         <ArrowsUpDownIcon aria-hidden className={styles.grayout} />
                       </HStack>
-                      <BodyShort>{getSorteringsnavn(intl, alleKodeverk, valgtSaksliste)}</BodyShort>
+                      <BodyShort>{getSorteringsnavn(intl, køSorteringTyper, valgtSaksliste)}</BodyShort>
                     </VStack>
                   </Box>
                 </HStack>
