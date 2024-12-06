@@ -1,20 +1,16 @@
-import React from 'react';
-
 import { action } from '@storybook/addon-actions';
-import { StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 import { NavAnsatt } from '@navikt/fp-types';
 
-import DokumentTittel from '../../kodeverk/dokumentTittel';
-import JournalKanal from '../../kodeverk/journalKanal';
-import OppgaveKilde from '../../kodeverk/oppgaveKilde';
-import JournalførSubmitValue from '../../typer/ferdigstillJournalføringSubmit';
-import Journalpost from '../../typer/journalpostTsType';
-import Oppgave from '../../typer/oppgaveTsType';
-import ReserverOppgaveType from '../../typer/reserverOppgaveType';
-import JournalpostDetaljer from './JournalpostDetaljer';
+import { withQueryClient } from '../../data/withQueryClientProvider';
+import { DokumentTittel } from '../../kodeverk/dokumentTittel';
+import { JournalKanal } from '../../kodeverk/journalKanal';
+import { OppgaveKilde } from '../../kodeverk/oppgaveKilde';
+import { Journalpost } from '../../typer/journalpostTsType';
+import { JournalpostDetaljer } from './JournalpostDetaljer';
 
 import messages from '../../../i18n/nb_NO.json';
 
@@ -95,71 +91,51 @@ const detaljertJournalpostMal = {
   ],
 } as Journalpost;
 
-export default {
+const meta = {
   title: 'journalføring/journalføring/Journalpost',
   component: JournalpostDetaljer,
-  decorators: [withIntl],
+  decorators: [withIntl, withQueryClient],
+  args: {
+    lasterBruker: false,
+    submitJournalføring: action('button-click'),
+    reserverOppgave: action('button-click'),
+    avbrytVisningAvJournalpost: action('button-click'),
+    knyttJournalpostTilBruker: action('button-click'),
+    forhåndsvisBruker: action('button-click'),
+    flyttTilGosys: action('button-click'),
+  },
+} satisfies Meta<typeof JournalpostDetaljer>;
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const VisOppgaveForSubmitReservertAvMeg: Story = {
+  args: {
+    oppgave: { ...defaultOppgave, reservertAv: saksbehandler },
+    journalpost: detaljertJournalpostMal,
+    navAnsatt: navAnsattDefault,
+  },
 };
 
-const Template: StoryFn<{
-  detaljertJournalpost: Journalpost;
-  oppgave: Oppgave;
-  submitJournalføring: (data: JournalførSubmitValue) => void;
-  reserverOppgave: (data: ReserverOppgaveType) => void;
-  navAnsatt: NavAnsatt;
-}> = ({ detaljertJournalpost, oppgave, submitJournalføring, reserverOppgave, navAnsatt }) => (
-  <JournalpostDetaljer
-    lasterBruker={false}
-    avbrytVisningAvJournalpost={action('button-click') as () => void}
-    oppgave={oppgave}
-    journalpost={detaljertJournalpost}
-    submitJournalføring={submitJournalføring}
-    knyttJournalpostTilBruker={action('button-click') as () => void}
-    forhåndsvisBruker={action('button-click') as () => void}
-    reserverOppgave={reserverOppgave}
-    navAnsatt={navAnsatt}
-    flyttTilGosys={action('button-click') as () => void}
-  />
-);
-
-export const VisOppgaveForSubmitReservertAvMeg = Template.bind({});
-VisOppgaveForSubmitReservertAvMeg.args = {
-  oppgave: { ...defaultOppgave, reservertAv: saksbehandler },
-  detaljertJournalpost: detaljertJournalpostMal,
-  submitJournalføring: action('button-click') as (data: JournalførSubmitValue) => void,
-  reserverOppgave: action('button-click') as (data: ReserverOppgaveType) => void,
-  navAnsatt: navAnsattDefault,
+export const VisOppgaveReservertAvAndre: Story = {
+  args: {
+    ...VisOppgaveForSubmitReservertAvMeg.args,
+    navAnsatt: {
+      brukernavn: 'X123456',
+    } as NavAnsatt,
+  },
 };
 
-export const VisOppgaveReservertAvAndre = Template.bind({});
-VisOppgaveReservertAvAndre.args = {
-  oppgave: { ...defaultOppgave, reservertAv: saksbehandler },
-  detaljertJournalpost: detaljertJournalpostMal,
-  submitJournalføring: action('button-click') as (data: JournalførSubmitValue) => void,
-  reserverOppgave: action('button-click') as (data: ReserverOppgaveType) => void,
-  navAnsatt: {
-    brukernavn: 'X123456',
-  } as NavAnsatt,
+export const VisOppgaveIkkeReservert: Story = {
+  args: {
+    ...VisOppgaveReservertAvAndre.args,
+    oppgave: defaultOppgave,
+  },
 };
 
-export const VisOppgaveIkkeReservert = Template.bind({});
-VisOppgaveIkkeReservert.args = {
-  oppgave: defaultOppgave,
-  detaljertJournalpost: detaljertJournalpostMal,
-  submitJournalføring: action('button-click') as (data: JournalførSubmitValue) => void,
-  reserverOppgave: action('button-click') as (data: ReserverOppgaveType) => void,
-  navAnsatt: {
-    brukernavn: 'X123456',
-  } as NavAnsatt,
-};
-
-export const VisFlyttTilGosysOmKildeGosys = Template.bind({});
-VisFlyttTilGosysOmKildeGosys.args = {
-  oppgave: { ...defaultOppgave, kilde: OppgaveKilde.LOKAL },
-  detaljertJournalpost: detaljertJournalpostMal,
-  submitJournalføring: action('button-click') as (data: JournalførSubmitValue) => void,
-  reserverOppgave: action('button-click') as (data: ReserverOppgaveType) => void,
-  navAnsatt: {
-    brukernavn: 'X123456',
-  } as NavAnsatt,
+export const VisFlyttTilGosysOmKildeGosys: Story = {
+  args: {
+    ...VisOppgaveReservertAvAndre.args,
+    oppgave: { ...defaultOppgave, kilde: OppgaveKilde.LOKAL },
+  },
 };

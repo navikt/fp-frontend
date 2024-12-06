@@ -1,14 +1,14 @@
-import React, { FunctionComponent, useCallback } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { BodyLong, Button, HStack,Tag } from '@navikt/ds-react';
+import { BodyLong, Button, HStack, Tag } from '@navikt/ds-react';
 
 import { NavAnsatt } from '@navikt/fp-types';
 
-import Oppgave from '../../../typer/oppgaveTsType';
-import ReserverOppgaveType from '../../../typer/reserverOppgaveType';
+import { Oppgave } from '../../../typer/oppgaveTsType';
+import { ReserverOppgaveType } from '../../../typer/reserverOppgaveType';
 
-type OwnProps = Readonly<{
+type Props = Readonly<{
   oppgave: Oppgave;
   navAnsatt: NavAnsatt;
   reserverOppgave: (data: ReserverOppgaveType) => void;
@@ -17,8 +17,8 @@ type OwnProps = Readonly<{
 /**
  * Reservasjonspanel - Inneholder informasjon om hvem som har reservert saken og mulighet for å reservere saken på saksbehandler
  */
-const Reservasjonspanel: FunctionComponent<OwnProps> = ({ oppgave, reserverOppgave, navAnsatt }) => {
-  const reserverOppgaveAction = useCallback(() => {
+export const Reservasjonspanel = ({ oppgave, reserverOppgave, navAnsatt }: Props) => {
+  const reserverOppgaveAction = () => {
     if (!oppgave) {
       throw new Error('Prøver å reservere uten å ha valgt oppgave, ugyldig tilstand.');
     }
@@ -27,7 +27,7 @@ const Reservasjonspanel: FunctionComponent<OwnProps> = ({ oppgave, reserverOppga
       journalpostId: oppgave.journalpostId,
       reserverFor: reservasjonFor,
     });
-  }, [reserverOppgave]);
+  };
 
   return (
     <div>
@@ -66,4 +66,3 @@ const Reservasjonspanel: FunctionComponent<OwnProps> = ({ oppgave, reserverOppga
     </div>
   );
 };
-export default Reservasjonspanel;

@@ -1,17 +1,17 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { CheckmarkCircleIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, HStack, Link, Modal, VStack } from '@navikt/ds-react';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 
-import SaksnummerType from '../../../typer/saksnummerTsType';
+import { SaksnummerType } from '../../../typer/saksnummerTsType';
 
 import styles from './journalførtSubmitModal.module.css';
 
 const velgSakLenke = (saksnummer: string): string => `/fagsak/${saksnummer}/`;
 
-type OwnProps = Readonly<{
+type Props = Readonly<{
   saksnummer?: SaksnummerType;
   lukkModal: () => void;
   showModal: boolean;
@@ -21,11 +21,13 @@ type OwnProps = Readonly<{
 /**
  * JournalførtSubmitModal - Viser modal som gir saksnummer journalposten ble ført på
  */
-const JournalførtSubmitModal: FunctionComponent<OwnProps> = ({ saksnummer, lukkModal, showModal, isLoading }) => {
+export const JournalførtSubmitModal = ({ saksnummer, lukkModal, showModal, isLoading }: Props) => {
   if (!showModal) {
     return null;
   }
+
   const lenke = saksnummer?.saksnummer ? velgSakLenke(saksnummer?.saksnummer) : undefined;
+
   return (
     <Modal width="small" open={showModal} onClose={lukkModal} aria-label="journalpost-modal">
       <Modal.Body>
@@ -67,4 +69,3 @@ const JournalførtSubmitModal: FunctionComponent<OwnProps> = ({ saksnummer, lukk
     </Modal>
   );
 };
-export default JournalførtSubmitModal;

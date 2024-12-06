@@ -1,24 +1,22 @@
-import React, { FunctionComponent, useCallback,useEffect, useState } from 'react';
+import React from 'react';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { useMutation } from '@tanstack/react-query';
 
-import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { NavAnsatt } from '@navikt/fp-types';
 
-import { restApiHooks, RestApiPathsKeys } from '../../data/fpfordelRestApi';
-import JournalførSubmitValue from '../../typer/ferdigstillJournalføringSubmit';
-import JournalDokument from '../../typer/journalDokumentTsType';
-import Journalpost from '../../typer/journalpostTsType';
-import OppdaterMedBruker from '../../typer/oppdaterBrukerTsType';
-import OppgaveOversikt from '../../typer/oppgaveTsType';
-import ReserverOppgaveType from '../../typer/reserverOppgaveType';
-import JournalpostDetaljer from './JournalpostDetaljer';
-import DokumentIndex from './pdf/DokumentIndex';
+import { hentBruker, oppdaterMedBruker } from '../../data/fpFordelApi';
+import { JournalførSubmitValue } from '../../typer/ferdigstillJournalføringSubmit';
+import { Journalpost } from '../../typer/journalpostTsType';
+import { Oppgave } from '../../typer/oppgaveTsType';
+import { ReserverOppgaveType } from '../../typer/reserverOppgaveType';
+import { JournalpostDetaljer } from './JournalpostDetaljer';
+import { DokumentIndex } from './pdf/DokumentIndex';
 
 import styles from './journalpostIndex.module.css';
 
-type OwnProps = Readonly<{
-  oppgave?: OppgaveOversikt;
+type Props = Readonly<{
+  oppgave?: Oppgave;
   journalpost: Journalpost;
   avbrytVisningAvJournalpost: () => void;
   navAnsatt: NavAnsatt;
@@ -30,7 +28,7 @@ type OwnProps = Readonly<{
 /**
  * JournalpostIndex - Komponent som holder på og styrer logikk rundt detaljert visning av journalpost
  */
-const JournalpostIndex: FunctionComponent<OwnProps> = ({
+export const JournalpostIndex = ({
   oppgave,
   journalpost,
   avbrytVisningAvJournalpost,
@@ -38,39 +36,22 @@ const JournalpostIndex: FunctionComponent<OwnProps> = ({
   navAnsatt,
   reserverOppgave,
   flyttTilGosys,
-}) => {
-  const [valgtDokument, setValgtDokument] = useState<JournalDokument | undefined>(undefined);
-
-  const { startRequest: oppdaterMedBrukerKall, data: journalpostOppdatertMedSøker } = restApiHooks.useRestApiRunner(
-    RestApiPathsKeys.OPPDATER_MED_BRUKER,
-  );
+}: Props) => {
+  const { mutate: knyttJournalpostTilBruker, data: journalpostOppdatertMedSøker } = useMutation({
+    mutationFn: oppdaterMedBruker,
+  });
 
   const {
-    startRequest: hentBrukerKall,
+    mutate: hentBrukerKall,
     data: hentetNavn,
-    state: hentBrukerState,
-  } = restApiHooks.useRestApiRunner(RestApiPathsKeys.HENT_BRUKER);
-
-  const knyttJournalpostTilBruker = useCallback(
-    (data: OppdaterMedBruker) => {
-      oppdaterMedBrukerKall(data);
-    },
-    [oppdaterMedBrukerKall],
-  );
-
-  const hentBrukerCallback = useCallback(
-    (data: string) => {
-      hentBrukerKall({ fødselsnummer: data });
-    },
-    [hentBrukerKall],
-  );
+    status: hentBrukerState,
+  } = useMutation({
+    mutationFn: hentBruker,
+  });
 
   // Åpner første dokument som standard valg når vi er ferdig med å laste
-  useEffect(() => {
-    const doks = journalpost.dokumenter;
-    const dok = doks && doks.length > 0 ? doks[0] : undefined;
-    setValgtDokument(dok);
-  }, [journalpost]);
+  const { dokumenter } = journalpost;
+  const valgtDokument = dokumenter && dokumenter.length > 0 ? dokumenter[0] : undefined;
 
   return (
     <div className={styles.container}>
@@ -82,9 +63,11 @@ const JournalpostIndex: FunctionComponent<OwnProps> = ({
           oppgave={oppgave}
           submitJournalføring={submitJournalføring}
           knyttJournalpostTilBruker={knyttJournalpostTilBruker}
-          forhåndsvisBruker={hentBrukerCallback}
+          forhåndsvisBruker={(fødselsnummer: string) => {
+            hentBrukerKall(fødselsnummer);
+          }}
           brukerTilForhåndsvisning={hentetNavn}
-          lasterBruker={hentBrukerState === RestApiState.LOADING}
+          lasterBruker={hentBrukerState === 'pending'}
           reserverOppgave={reserverOppgave}
           navAnsatt={navAnsatt}
           flyttTilGosys={flyttTilGosys}
@@ -99,5 +82,3 @@ const JournalpostIndex: FunctionComponent<OwnProps> = ({
     </div>
   );
 };
-
-export default JournalpostIndex;

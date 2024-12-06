@@ -1,14 +1,14 @@
-import React, { FunctionComponent, ReactElement, useCallback,useMemo, useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Buildings3Icon, FigureInwardIcon, FigureOutwardIcon,SilhouetteIcon } from '@navikt/aksel-icons';
+import { Buildings3Icon, FigureInwardIcon, FigureOutwardIcon, SilhouetteIcon } from '@navikt/aksel-icons';
 import { Alert, BodyShort, Button, CopyButton, Heading, HStack, Search, VStack } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { isValidFodselsnummer } from '@navikt/ft-utils';
 
-import ForhåndsvisBrukerRespons from '../../../typer/forhåndsvisBrukerResponsTsType';
-import Journalpost from '../../../typer/journalpostTsType';
-import OppdaterMedBruker from '../../../typer/oppdaterBrukerTsType';
+import { ForhåndsvisBrukerRespons } from '../../../typer/forhåndsvisBrukerResponsTsType';
+import { Journalpost } from '../../../typer/journalpostTsType';
+import { OppdaterMedBruker } from '../../../typer/oppdaterBrukerTsType';
 
 import styles from './brukerAvsenderPanel.module.css';
 
@@ -34,7 +34,14 @@ const finnAvsenderBilde = (journalpost: Journalpost): ReactElement => {
   return <SilhouetteIcon className={styles.ikon} />;
 };
 
-const lagBrukerAvsenderRad = (navn: string, id: string, ikon: ReactElement, title?: string): ReactElement => (
+interface BrukerAvsenderRadProps {
+  navn: string;
+  id: string;
+  ikon: ReactElement;
+  title?: string;
+}
+
+const BrukerAvsenderRad = ({ navn, id, ikon, title }: BrukerAvsenderRadProps): ReactElement => (
   <div className={styles.kolBredde}>
     {title && (
       <Heading size="small">
@@ -59,7 +66,7 @@ const lagBrukerAvsenderRad = (navn: string, id: string, ikon: ReactElement, titl
   </div>
 );
 
-type OwnProps = Readonly<{
+type Props = Readonly<{
   journalpost: Journalpost;
   hentForhåndsvisningAvSøker: (fnr: string) => void;
   skalKunneEndreSøker: boolean;
@@ -71,19 +78,17 @@ type OwnProps = Readonly<{
 /**
  * BrukerAvsenderPanel - Inneholder detaljer om bruker og avsender
  */
-const BrukerAvsenderPanel: FunctionComponent<OwnProps> = ({
+export const BrukerAvsenderPanel = ({
   journalpost,
   hentForhåndsvisningAvSøker,
   skalKunneEndreSøker,
   brukerTilForhåndsvisning,
   knyttSøkerTilJournalpost,
   lasterBruker,
-}) => {
+}: Props) => {
   const intl = useIntl();
   const [søkerFeilmelding, setSøkerFeilmelding] = useState<string | undefined>(undefined);
   const [fnrSomSkalForhåndsvises, setFnrSomSkalForhåndsvises] = useState<string | undefined>(undefined);
-  const brukerBilde = useMemo(() => finnKjønnBilde(journalpost.bruker?.fnr), [journalpost]);
-  const avsenderBilde = useMemo(() => finnAvsenderBilde(journalpost), [journalpost]);
 
   const knyttSøkerTilJP = () => {
     if (fnrSomSkalForhåndsvises) {
@@ -106,15 +111,12 @@ const BrukerAvsenderPanel: FunctionComponent<OwnProps> = ({
     }
   };
 
-  const oppdaterMedBrukerKlikk = useCallback(
-    (e: any) => {
-      if (e.key === 'Enter') {
-        const fnr = e.target?.value;
-        forhåndsvisSøker(fnr);
-      }
-    },
-    [hentForhåndsvisningAvSøker, søkerFeilmelding],
-  );
+  const oppdaterMedBrukerKlikk = (e: any) => {
+    if (e.key === 'Enter') {
+      const fnr = e.target?.value;
+      forhåndsvisSøker(fnr);
+    }
+  };
 
   return (
     <div className={styles.brukerAvsenderRad}>
@@ -144,11 +146,11 @@ const BrukerAvsenderPanel: FunctionComponent<OwnProps> = ({
               {søkerFeilmelding && <BodyShort className={styles.error}>{søkerFeilmelding}</BodyShort>}
               {brukerTilForhåndsvisning && (
                 <>
-                  {lagBrukerAvsenderRad(
-                    brukerTilForhåndsvisning.navn,
-                    brukerTilForhåndsvisning.fødselsnummer,
-                    finnKjønnBilde(brukerTilForhåndsvisning.fødselsnummer),
-                  )}
+                  <BrukerAvsenderRad
+                    navn={brukerTilForhåndsvisning.navn}
+                    id={brukerTilForhåndsvisning.fødselsnummer}
+                    ikon={finnKjønnBilde(brukerTilForhåndsvisning.fødselsnummer)}
+                  />
                   <VerticalSpacer sixteenPx />
                   <Button type="button" onClick={knyttSøkerTilJP}>
                     <FormattedMessage id="ValgtOppgave.Søk.KnyttTil" />
@@ -159,21 +161,22 @@ const BrukerAvsenderPanel: FunctionComponent<OwnProps> = ({
           </>
         )}
       </div>
-
       {journalpost.bruker?.navn && (
-        <>{lagBrukerAvsenderRad(journalpost.bruker.navn, journalpost.bruker.fnr, brukerBilde, 'ValgtOppgave.Bruker')}</>
+        <BrukerAvsenderRad
+          navn={journalpost.bruker.navn}
+          id={journalpost.bruker.fnr}
+          ikon={finnKjønnBilde(journalpost.bruker?.fnr)}
+          title="ValgtOppgave.Bruker"
+        />
       )}
       {journalpost.avsender?.navn && (
-        <>
-          {lagBrukerAvsenderRad(
-            journalpost.avsender.navn,
-            journalpost.avsender.id,
-            avsenderBilde,
-            'ValgtOppgave.Avsender',
-          )}
-        </>
+        <BrukerAvsenderRad
+          navn={journalpost.avsender.navn}
+          id={journalpost.avsender.id}
+          ikon={finnAvsenderBilde(journalpost)}
+          title="ValgtOppgave.Avsender"
+        />
       )}
     </div>
   );
 };
-export default BrukerAvsenderPanel;

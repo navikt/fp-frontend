@@ -1,5 +1,3 @@
-type SaksnummerType = Readonly<{
+export type SaksnummerType = Readonly<{
   saksnummer: string;
 }>;
-
-export default SaksnummerType;

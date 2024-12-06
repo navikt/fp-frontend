@@ -1,25 +1,38 @@
-import React from 'react';
-
-import { StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
+import { http, HttpResponse } from 'msw';
 
 import { FagsakStatus, FagsakYtelseType, FamilieHendelseType } from '@navikt/fp-kodeverk';
 import { withRouter } from '@navikt/fp-storybook-utils';
 import { NavAnsatt } from '@navikt/fp-types';
-import { RestApiMock } from '@navikt/fp-utils-test';
 
-import { requestApi, RestApiPathsKeys } from './data/fpfordelRestApi';
-import JournalKanal from './kodeverk/journalKanal';
-import JournalpostTilstand, { erEndeligJournalført } from './kodeverk/journalpostTilstand';
-import OppgaveKilde from './kodeverk/oppgaveKilde';
-import JournalforingIndex from './OppgaveJournalføringIndex';
-import Journalpost from './typer/journalpostTsType';
-import Oppgave from './typer/oppgaveTsType';
+import { FpFordelUrl } from './data/fpFordelApi';
+import { JournalKanal } from './kodeverk/journalKanal';
+import { erEndeligJournalført, JournalpostTilstand } from './kodeverk/journalpostTilstand';
+import { OppgaveKilde } from './kodeverk/oppgaveKilde';
+import { OppgaveJournalføringIndex } from './OppgaveJournalføringIndex';
+import { Journalpost } from './typer/journalpostTsType';
 
 import '@navikt/ds-css';
-import '@navikt/ft-ui-komponenter/dist/style.css';
 import '@navikt/ft-form-hooks/dist/style.css';
+import '@navikt/ft-ui-komponenter/dist/style.css';
 
-const detaljertJournalpostMal = (medBruker: boolean, tilstand: JournalpostTilstand): Journalpost =>
+const meta = {
+  title: 'journalføring/journalføring/OppgaveJournalføringIndex',
+  component: OppgaveJournalføringIndex,
+  decorators: [withRouter],
+  args: {
+    navAnsatt: {
+      kanOppgavestyre: true,
+      kanBehandleKode6: true,
+      brukernavn: 'X123456',
+    } as NavAnsatt,
+  },
+} satisfies Meta<typeof OppgaveJournalføringIndex>;
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+const getDetaljertJournalpostMal = (medBruker: boolean, tilstand: JournalpostTilstand): Journalpost =>
   ({
     journalpostId: '986547336994',
     tittel: 'Inntektsmelding',
@@ -108,145 +121,158 @@ const detaljertJournalpostMal = (medBruker: boolean, tilstand: JournalpostTilsta
       : [],
   }) as Journalpost;
 
-export default {
-  title: 'journalføring/journalføring/JournalforingIndex',
-  component: JournalforingIndex,
-  decorators: [withRouter],
-};
-
-const navAnsattDefault = {
-  kanOppgavestyre: true,
-  kanBehandleKode6: true,
-  brukernavn: 'X123456',
-} as NavAnsatt;
-
-const Template: StoryFn<{
-  alleOppgaver?: Oppgave[];
-  navAnsatt: NavAnsatt;
-  detaljertJournalpost: Journalpost | undefined;
-  responsFraBrukerSøk: Journalpost | undefined;
-}> = ({ alleOppgaver, detaljertJournalpost, navAnsatt, responsFraBrukerSøk }) => {
-  const responsHentBruker = responsFraBrukerSøk
-    ? { navn: responsFraBrukerSøk.bruker.navn, fødselsnummer: responsFraBrukerSøk.bruker.fnr }
-    : undefined;
-  const data = [
-    { key: RestApiPathsKeys.ALLE_JOURNAL_OPPGAVER.name, data: alleOppgaver || undefined },
-    { key: RestApiPathsKeys.HENT_JOURNALPOST_DETALJER.name, data: detaljertJournalpost || undefined },
-    { key: RestApiPathsKeys.FERDIGSTILL_JOURNALFØRING.name, data: { saksnummer: '12345678' } },
-    { key: RestApiPathsKeys.HENT_BRUKER.name, data: responsHentBruker },
-    { key: RestApiPathsKeys.OPPDATER_MED_BRUKER.name, data: responsFraBrukerSøk },
-  ];
-
-  return (
-    <RestApiMock data={data} requestApi={requestApi}>
-      <JournalforingIndex navAnsatt={navAnsatt} />
-    </RestApiMock>
-  );
-};
-
-const defaultOppgaver = [
-  {
-    journalpostId: '12345125',
-    aktørId: '9996923456799',
-    fødselsnummer: '12048714373',
-    opprettetDato: '2022-01-01',
-    frist: '2022-02-01',
-    ytelseType: 'FP',
-    enhetId: '4016',
-    beskrivelse: 'Inntektsmelding',
-    reservertAv: 'X123456',
-    kilde: OppgaveKilde.GOSYS,
-  },
-  {
-    journalpostId: '245745871',
-    aktørId: '274572457624',
-    fødselsnummer: '12018847182',
-    opprettetDato: '2022-01-01',
-    frist: '2022-03-01',
-    ytelseType: 'SVP',
-    enhetId: '4008',
-    beskrivelse: 'Inntektsmelding',
-    reservertAv: 'Y654321',
-    kilde: OppgaveKilde.LOKAL,
-  },
-  {
-    journalpostId: '345681257',
-    opprettetDato: '2022-01-01',
-    frist: '2022-01-01',
-    ytelseType: 'FP',
-    enhetId: '4008',
-    beskrivelse: 'Søknad',
-    kilde: OppgaveKilde.GOSYS,
-  },
-];
-
-export const ViseOppgaverIListe = Template.bind({});
-ViseOppgaverIListe.args = {
-  alleOppgaver: [
-    {
-      journalpostId: '12345125',
-      aktørId: '9996923456799',
-      fødselsnummer: '12048714373',
-      opprettetDato: '2022-01-01',
-      frist: '2022-02-01',
-      ytelseType: 'FP',
-      enhetId: '4016',
-      beskrivelse: 'Inntektsmelding',
-      reservertAv: 'Y654321',
-      kilde: OppgaveKilde.LOKAL,
+export const ViseOppgaverIListe: Story = {
+  parameters: {
+    msw: {
+      handlers: [
+        http.get(FpFordelUrl.ALLE_JOURNAL_OPPGAVER, () =>
+          HttpResponse.json([
+            {
+              journalpostId: '12345125',
+              aktørId: '9996923456799',
+              fødselsnummer: '12048714373',
+              opprettetDato: '2022-01-01',
+              frist: '2022-02-01',
+              ytelseType: 'FP',
+              enhetId: '4016',
+              beskrivelse: 'Inntektsmelding',
+              reservertAv: 'Y654321',
+              kilde: OppgaveKilde.LOKAL,
+            },
+            {
+              journalpostId: '245745871',
+              aktørId: '274572457624',
+              fødselsnummer: '12018847182',
+              opprettetDato: '2022-01-01',
+              frist: '2022-03-01',
+              ytelseType: 'SVP',
+              enhetId: '4008',
+              beskrivelse: 'Inntektsmelding',
+              kilde: OppgaveKilde.GOSYS,
+            },
+            {
+              journalpostId: '345681257',
+              opprettetDato: '2022-01-01',
+              frist: '2022-01-01',
+              ytelseType: 'FP',
+              enhetId: '4008',
+              beskrivelse: 'Søknad',
+              reservertAv: 'X123456',
+              kilde: OppgaveKilde.GOSYS,
+            },
+          ]),
+        ),
+        http.get(FpFordelUrl.HENT_JOURNALPOST_DETALJER, () =>
+          HttpResponse.json(getDetaljertJournalpostMal(true, JournalpostTilstand.MOTTATT)),
+        ),
+        http.post(FpFordelUrl.FERDIGSTILL_JOURNALFØRING, () => HttpResponse.json({ saksnummer: '12345678' })),
+        http.post(FpFordelUrl.HENT_BRUKER, () =>
+          HttpResponse.json({ navn: 'Søker Søkersen', fødselsnummer: '15529115072' }),
+        ),
+        http.post(FpFordelUrl.OPPDATER_MED_BRUKER, () =>
+          HttpResponse.json(getDetaljertJournalpostMal(true, JournalpostTilstand.MOTTATT)),
+        ),
+      ],
     },
-    {
-      journalpostId: '245745871',
-      aktørId: '274572457624',
-      fødselsnummer: '12018847182',
-      opprettetDato: '2022-01-01',
-      frist: '2022-03-01',
-      ytelseType: 'SVP',
-      enhetId: '4008',
-      beskrivelse: 'Inntektsmelding',
-      kilde: OppgaveKilde.GOSYS,
+  },
+};
+
+export const ViseOppgaverUtenBruker: Story = {
+  parameters: {
+    msw: {
+      handlers: [
+        http.get(FpFordelUrl.ALLE_JOURNAL_OPPGAVER, () =>
+          HttpResponse.json([
+            {
+              journalpostId: '12345125',
+              aktørId: '9996923456799',
+              fødselsnummer: '12048714373',
+              opprettetDato: '2022-01-01',
+              frist: '2022-02-01',
+              ytelseType: 'FP',
+              enhetId: '4016',
+              beskrivelse: 'Inntektsmelding',
+              reservertAv: 'X123456',
+              kilde: OppgaveKilde.GOSYS,
+            },
+            {
+              journalpostId: '245745871',
+              aktørId: '274572457624',
+              fødselsnummer: '12018847182',
+              opprettetDato: '2022-01-01',
+              frist: '2022-03-01',
+              ytelseType: 'SVP',
+              enhetId: '4008',
+              beskrivelse: 'Inntektsmelding',
+              reservertAv: 'Y654321',
+              kilde: OppgaveKilde.LOKAL,
+            },
+            {
+              journalpostId: '345681257',
+              opprettetDato: '2022-01-01',
+              frist: '2022-01-01',
+              ytelseType: 'FP',
+              enhetId: '4008',
+              beskrivelse: 'Søknad',
+              kilde: OppgaveKilde.GOSYS,
+            },
+          ]),
+        ),
+        http.get(FpFordelUrl.HENT_JOURNALPOST_DETALJER, () =>
+          HttpResponse.json(getDetaljertJournalpostMal(false, JournalpostTilstand.MOTTATT)),
+        ),
+        http.post(FpFordelUrl.FERDIGSTILL_JOURNALFØRING, () => HttpResponse.json({ saksnummer: '12345678' })),
+        http.post(FpFordelUrl.HENT_BRUKER, () =>
+          HttpResponse.json({ navn: 'Søker Søkersen', fødselsnummer: '15529115072' }),
+        ),
+        http.post(FpFordelUrl.OPPDATER_MED_BRUKER, () =>
+          HttpResponse.json(getDetaljertJournalpostMal(true, JournalpostTilstand.MOTTATT)),
+        ),
+      ],
     },
-    {
-      journalpostId: '345681257',
-      opprettetDato: '2022-01-01',
-      frist: '2022-01-01',
-      ytelseType: 'FP',
-      enhetId: '4008',
-      beskrivelse: 'Søknad',
-      reservertAv: 'X123456',
-      kilde: OppgaveKilde.GOSYS,
+  },
+};
+
+export const SøkeOppJournalpostSomLiggerPåAnnenSak: Story = {
+  parameters: {
+    msw: {
+      handlers: [
+        http.get(FpFordelUrl.ALLE_JOURNAL_OPPGAVER, () => HttpResponse.json([])),
+        http.get(FpFordelUrl.HENT_JOURNALPOST_DETALJER, () =>
+          HttpResponse.json(getDetaljertJournalpostMal(true, JournalpostTilstand.JOURNALFOERT)),
+        ),
+        http.post(FpFordelUrl.FERDIGSTILL_JOURNALFØRING, () => HttpResponse.json({ saksnummer: '12345678' })),
+      ],
     },
-  ],
-  detaljertJournalpost: detaljertJournalpostMal(true, JournalpostTilstand.MOTTATT),
-  navAnsatt: navAnsattDefault,
-  responsFraBrukerSøk: detaljertJournalpostMal(true, JournalpostTilstand.MOTTATT),
+  },
 };
 
-export const ViseOppgaverUtenBruker = Template.bind({});
-ViseOppgaverUtenBruker.args = {
-  alleOppgaver: defaultOppgaver,
-  detaljertJournalpost: detaljertJournalpostMal(false, JournalpostTilstand.MOTTATT),
-  navAnsatt: navAnsattDefault,
-  responsFraBrukerSøk: detaljertJournalpostMal(true, JournalpostTilstand.MOTTATT),
+export const FinnerIkkeJournalpostVedSøkOgIngenOppgaver: Story = {
+  parameters: {
+    msw: {
+      handlers: [
+        http.get(FpFordelUrl.ALLE_JOURNAL_OPPGAVER, () => HttpResponse.json([])),
+        http.get(FpFordelUrl.HENT_JOURNALPOST_DETALJER, () => HttpResponse.json(undefined)),
+        http.post(FpFordelUrl.FERDIGSTILL_JOURNALFØRING, () => HttpResponse.json({ saksnummer: '12345678' })),
+      ],
+    },
+  },
 };
 
-export const SøkeOppJournalpostSomLiggerPåAnnenSak = Template.bind({});
-SøkeOppJournalpostSomLiggerPåAnnenSak.args = {
-  alleOppgaver: [],
-  detaljertJournalpost: detaljertJournalpostMal(true, JournalpostTilstand.JOURNALFOERT),
-  navAnsatt: navAnsattDefault,
-};
-
-export const FinnerIkkeJournalpostVedSøkOgIngenOppgaver = Template.bind({});
-FinnerIkkeJournalpostVedSøkOgIngenOppgaver.args = {
-  alleOppgaver: [],
-  detaljertJournalpost: undefined,
-  navAnsatt: navAnsattDefault,
-};
-
-export const IngenOppgaver = Template.bind({});
-IngenOppgaver.args = {
-  alleOppgaver: [],
-  navAnsatt: navAnsattDefault,
-  responsFraBrukerSøk: detaljertJournalpostMal(true, JournalpostTilstand.MOTTATT),
+export const IngenOppgaver: Story = {
+  parameters: {
+    msw: {
+      handlers: [
+        http.get(FpFordelUrl.ALLE_JOURNAL_OPPGAVER, () => HttpResponse.json([])),
+        http.get(FpFordelUrl.HENT_JOURNALPOST_DETALJER, () => HttpResponse.json(undefined)),
+        http.post(FpFordelUrl.FERDIGSTILL_JOURNALFØRING, () => HttpResponse.json({ saksnummer: '12345678' })),
+        http.post(FpFordelUrl.HENT_BRUKER, () =>
+          HttpResponse.json({ navn: 'Søker Søkersen', fødselsnummer: '15529115072' }),
+        ),
+        http.post(FpFordelUrl.OPPDATER_MED_BRUKER, () =>
+          HttpResponse.json(getDetaljertJournalpostMal(true, JournalpostTilstand.MOTTATT)),
+        ),
+      ],
+    },
+  },
 };

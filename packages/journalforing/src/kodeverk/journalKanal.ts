@@ -1,4 +1,4 @@
-enum JournalKanal {
+export enum JournalKanal {
   SELVBETJENING = 'NAV_NO',
   ALTINN = 'ALTINN',
   EESSI = 'EESSI',
@@ -11,5 +11,3 @@ const KANALER_SOM_ALDRI_SKAL_ENDRES = [JournalKanal.ALTINN, JournalKanal.SELVBET
 
 export const erKanalSomErÅpenForEndring = (kanal?: JournalKanal) =>
   !!kanal && !KANALER_SOM_ALDRI_SKAL_ENDRES.includes(kanal);
-
-export default JournalKanal;

@@ -4,7 +4,7 @@ import { composeStories } from '@storybook/react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import Sakstype from '../../kodeverk/sakstype';
+import { Sakstype } from '../../kodeverk/sakstype';
 import * as stories from './JournalpostDetaljer.stories';
 
 const { VisOppgaveForSubmitReservertAvMeg, VisFlyttTilGosysOmKildeGosys } = composeStories(stories);

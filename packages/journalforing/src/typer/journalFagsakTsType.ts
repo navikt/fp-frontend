@@ -5,7 +5,7 @@ export type FamilieHendelse = Readonly<{
   familihendelseType?: FamilieHendelseType;
 }>;
 
-type JournalFagsak = Readonly<{
+export type JournalFagsak = Readonly<{
   saksnummer: string;
   ytelseType: FagsakYtelseType;
   opprettetDato: string;
@@ -13,5 +13,3 @@ type JournalFagsak = Readonly<{
   status: FagsakStatus;
   familieHendelseJf?: FamilieHendelse;
 }>;
-
-export default JournalFagsak;

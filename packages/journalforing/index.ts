@@ -1,1 +1,1 @@
-export { default as OppgaveJournalføringIndex } from './src/OppgaveJournalføringIndex';
+export { OppgaveJournalføringIndex } from './src/OppgaveJournalføringIndex';
