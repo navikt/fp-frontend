@@ -1,10 +1,10 @@
-import React, { FunctionComponent, ReactElement, useCallback, useEffect, useMemo,useState } from 'react';
+import React, { FunctionComponent, ReactElement, useCallback, useEffect, useMemo, useState } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 
-import { Alert, Button, Heading,HStack } from '@navikt/ds-react';
+import { Alert, Button, Heading, HStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML, OverstyringKnapp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktKode, AksjonspunktStatus,PeriodeResultatType, StonadskontoType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus, PeriodeResultatType, StonadskontoType } from '@navikt/fp-kodeverk';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import {
   Aksjonspunkt,
@@ -116,7 +116,7 @@ const validerPerioder = (perioder: PeriodeSoker[], stønadskonto: UttakStonadsko
   }
 
   // TODO Dette ser feil ut. Burde det vera const konto = stønadskonto.stonadskontoer[StonadskontoType.FLERBARNSDAGER];
-  // @ts-ignore Fiks
+  // @ts-expect-error Fiks
   const konto = stønadskonto[StonadskontoType.FLERBARNSDAGER];
   if (feil.length === 0 && konto && !konto.gyldigForbruk) {
     feil.push(intl.formatMessage({ id: 'UttakPanel.InvalidTrekkDagerFlerbarnsdager' }, { maxDays: konto.maxDager }));

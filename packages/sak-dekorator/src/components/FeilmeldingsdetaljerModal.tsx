@@ -48,7 +48,7 @@ export const FeilmeldingsdetaljerModal = ({ skalViseModal, lukkModal, feilmeldin
                 <React.Fragment key={edKey}>
                   <Detail>{`${capitalizeFirstLetters(edKey)}:`}</Detail>
                   <div>
-                    {/* @ts-ignore Fiks */}
+                    {/* @ts-expect-error Fiks */}
                     <BodyShort size="small">{feilmeldingsdetaljer[edKey]}</BodyShort>
                   </div>
                   <VerticalSpacer eightPx />

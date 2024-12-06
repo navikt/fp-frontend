@@ -17,7 +17,7 @@ import {
   Kommunikasjonsretning,
 } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
-import { Aksjonspunkt, AlleKodeverk,Dokument, InnsynDokument, InnsynVedtaksdokument } from '@navikt/fp-types';
+import { Aksjonspunkt, AlleKodeverk, Dokument, InnsynDokument, InnsynVedtaksdokument } from '@navikt/fp-types';
 import { VurderInnsynAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import DocumentListInnsyn from './DocumentListInnsyn';
@@ -61,7 +61,7 @@ const getDocumentsStatus = (values: FormValues, documents: Dokument[]) =>
   documents.map(document => ({
     dokumentId: document.dokumentId,
     journalpostId: document.journalpostId,
-    // @ts-ignore Fiks
+    // @ts-expect-error Fiks
     fikkInnsyn: !!values[`dokument_${document.dokumentId}`],
   }));
 
@@ -71,13 +71,13 @@ const getFilteredValues = (values: FormValues) =>
     .reduce(
       (acc, valueKey) => ({
         ...acc,
-        // @ts-ignore Fiks
+        // @ts-expect-error Fiks
         [valueKey]: values[valueKey],
       }),
       {},
     );
 
-// @ts-ignore Fiks
+// @ts-expect-error Fiks
 const transformValues = (values: FormValues, documents: Dokument[]): VurderInnsynAp => ({
   kode: AksjonspunktKode.VURDER_INNSYN,
   innsynDokumenter: getDocumentsStatus(values, documents),

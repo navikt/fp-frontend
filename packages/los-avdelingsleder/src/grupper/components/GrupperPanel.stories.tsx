@@ -61,7 +61,7 @@ const endreSaksbehandlere = (gruppeSaksbehandlere: SaksbehandlerProfil[], bruker
       ansattAvdeling: null,
     });
   }
-  // @ts-ignore
+  // @ts-expect-error
   return gruppeSaksbehandlere.filter(s => s.saksbehandlerDto.brukerIdent !== brukerIdent);
 };
 

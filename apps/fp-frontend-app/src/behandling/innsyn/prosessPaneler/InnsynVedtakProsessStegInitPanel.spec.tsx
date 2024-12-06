@@ -37,7 +37,7 @@ const behandling = {
   behandlingPaaVent: false,
 } as Behandling;
 
-// @ts-ignore Fiks
+// @ts-expect-error Fiks
 const kodeverk = alleKodeverk as AlleKodeverk;
 
 const aksjonspunkter = [
