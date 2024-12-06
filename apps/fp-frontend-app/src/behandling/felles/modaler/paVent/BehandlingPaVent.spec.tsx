@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react';
 
 import { BehandlingStatus, BehandlingType } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import { Aksjonspunkt, AlleKodeverk,Behandling } from '@navikt/fp-types';
+import { Aksjonspunkt, AlleKodeverk, Behandling } from '@navikt/fp-types';
 
 import { BehandlingPaVent } from './BehandlingPaVent';
 
@@ -20,7 +20,7 @@ describe('<BehandlingPaVent>', () => {
     venteArsakKode: '',
   } as Behandling;
   const aksjonspunkter = [] as Aksjonspunkt[];
-  // @ts-ignore
+  // @ts-expect-error
   const kodeverk = alleKodeverk as AlleKodeverk;
 
   it('skal ikke vise modal når behandling ikke er på vent', async () => {

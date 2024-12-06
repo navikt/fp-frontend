@@ -1,4 +1,4 @@
-import React, { Component, ErrorInfo,ReactNode } from 'react';
+import React, { Component, ErrorInfo, ReactNode } from 'react';
 
 import { ErrorMessage } from '@navikt/ds-react';
 import { captureException, withScope } from '@sentry/browser';
@@ -36,7 +36,7 @@ export class ErrorBoundary extends Component<OwnProps, State> {
 
     withScope(scope => {
       Object.keys(info).forEach(key => {
-        // @ts-ignore Fiks
+        // @ts-expect-error Fiks
         scope.setExtra(key, info[key]);
         captureException(error);
       });

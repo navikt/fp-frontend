@@ -22,7 +22,7 @@ describe('<FaktaDefaultInitPanel>', () => {
   vi.spyOn(Felles, 'useStandardFaktaPanelProps').mockImplementation(() => ({
     behandling,
     submitCallback,
-    // @ts-ignore Fiks
+    // @ts-expect-error Fiks
     alleKodeverk,
     readOnly: false,
     aksjonspunkter: [

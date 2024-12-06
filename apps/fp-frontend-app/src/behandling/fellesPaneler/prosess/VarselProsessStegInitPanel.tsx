@@ -99,7 +99,7 @@ export const VarselProsessStegInitPanel = ({
       prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.CheckVarselRevurdering' })}
       skalPanelVisesIMeny={data => skalViseProsessPanel(data.aksjonspunkter)}
       lagringSideEffekter={lagringSideEffekter}
-      // @ts-ignore
+      // @ts-expect-error
       renderPanel={data => <VarselOmRevurderingProsessIndex previewCallback={previewCallback} {...data} />}
     />
   );

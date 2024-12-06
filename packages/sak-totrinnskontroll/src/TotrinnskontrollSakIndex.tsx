@@ -19,7 +19,7 @@ import { AlleKodeverk, AlleKodeverkTilbakekreving, BehandlingAppKontekst, Kodeve
 import { FatterVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { AksjonspunktGodkjenningData } from './components/AksjonspunktGodkjenningFieldArray';
-import { FormValues,TotrinnskontrollBeslutterForm } from './components/TotrinnskontrollBeslutterForm';
+import { FormValues, TotrinnskontrollBeslutterForm } from './components/TotrinnskontrollBeslutterForm';
 import { TotrinnskontrollSaksbehandlerPanel } from './components/TotrinnskontrollSaksbehandlerPanel';
 
 import messages from '../i18n/nb_NO.json';
@@ -109,7 +109,7 @@ export const TotrinnskontrollSakIndex = ({
     };
 
     return onSubmit({
-      // @ts-ignore Fiks denne!
+      // @ts-expect-error Fiks denne!
       fatterVedtakAksjonspunktDto,
       erAlleAksjonspunktGodkjent: values.aksjonspunktGodkjenning.every(ap => ap.totrinnskontrollGodkjent),
     });

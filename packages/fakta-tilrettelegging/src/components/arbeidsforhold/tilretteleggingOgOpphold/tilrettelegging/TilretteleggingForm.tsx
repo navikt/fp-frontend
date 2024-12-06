@@ -264,7 +264,7 @@ export const TilretteleggingForm = ({
                       velferdspermisjonprosent,
                       value,
                     );
-                    // @ts-ignore Fiks
+                    // @ts-expect-error Fiks
                     formMethods.setValue(`${index}.overstyrtUtbetalingsgrad`, utbetalingsgrad, { shouldDirty: true });
                   }}
                 />

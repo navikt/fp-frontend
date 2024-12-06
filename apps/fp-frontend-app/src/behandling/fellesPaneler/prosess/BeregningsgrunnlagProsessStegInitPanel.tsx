@@ -12,7 +12,7 @@ import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkar as FpVilkar,Vilkarperiode } from '@navikt/fp-types';
+import { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkar as FpVilkar, Vilkarperiode } from '@navikt/fp-types';
 
 import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
@@ -63,7 +63,7 @@ const lagStandardPeriode = (beregningsgrunnlag: Beregningsgrunnlag, bgVilkar: Fp
 const lagBGVilkar = (vilkar: FpVilkar[], beregningsgrunnlag?: Beregningsgrunnlag): FtVilkar => {
   const bgVilkar = vilkar.find(v => v.vilkarType && v.vilkarType === VilkarType.BEREGNINGSGRUNNLAGVILKARET);
   if (!bgVilkar || !beregningsgrunnlag) {
-    // @ts-ignore Fiks BeregningsgrunnlagProsessIndex så den kan håndtera null
+    // @ts-expect-error Fiks BeregningsgrunnlagProsessIndex så den kan håndtera null
     return null;
   }
   const nyVK = {
@@ -81,7 +81,7 @@ const lagFormatertBG = (beregningsgrunnlag?: Beregningsgrunnlag): FtBeregningsgr
     ...beregningsgrunnlag,
     vilkårsperiodeFom: beregningsgrunnlag.skjaeringstidspunktBeregning,
   };
-  //@ts-ignore TODO Fiks denne
+  // @ts-expect-error TODO Fiks denne
   return [nyttBG];
 };
 

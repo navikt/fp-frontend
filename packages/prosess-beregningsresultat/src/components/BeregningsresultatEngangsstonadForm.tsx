@@ -1,12 +1,12 @@
-import React, { FunctionComponent, useCallback,useState } from 'react';
+import React, { FunctionComponent, useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
-import { Detail, Heading,Label } from '@navikt/ds-react';
-import { Form,InputField } from '@navikt/ft-form-hooks';
+import { Detail, Heading, Label } from '@navikt/ds-react';
+import { Form, InputField } from '@navikt/ft-form-hooks';
 import { hasValidInteger, maxValue, minValue, required } from '@navikt/ft-form-validators';
-import { FlexColumn, FlexContainer, FlexRow,OverstyringKnapp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { decodeHtmlEntity,formatCurrencyWithKr } from '@navikt/ft-utils';
+import { FlexColumn, FlexContainer, FlexRow, OverstyringKnapp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { decodeHtmlEntity, formatCurrencyWithKr } from '@navikt/ft-utils';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { OverstyringPanel } from '@navikt/fp-prosess-felles';
@@ -181,7 +181,7 @@ const BeregningsresultatEngangsstonadForm: FunctionComponent<OwnProps> = ({
                   <InputField
                     name="beregnetTilkjentYtelse"
                     parse={value => {
-                      // @ts-ignore Fiks
+                      // @ts-expect-error Fiks
                       const parsedValue = parseInt(value, 10);
                       return Number.isNaN(parsedValue) ? value : parsedValue;
                     }}

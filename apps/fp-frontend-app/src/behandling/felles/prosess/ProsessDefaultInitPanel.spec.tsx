@@ -2,7 +2,7 @@ import React from 'react';
 
 import { render, screen } from '@testing-library/react';
 
-import { AksjonspunktKode,BehandlingStatus, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, BehandlingStatus, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, Behandling, Fagsak } from '@navikt/fp-types';
@@ -17,7 +17,7 @@ const behandling = {
   behandlingPaaVent: false,
 } as Behandling;
 
-// @ts-ignore Fiks
+// @ts-expect-error Fiks
 const kodeverk = alleKodeverk as AlleKodeverk;
 
 const defaultProps = {

@@ -1,10 +1,10 @@
 import React from 'react';
-import { useFieldArray, useFormContext,UseFormGetValues } from 'react-hook-form';
+import { useFieldArray, useFormContext, UseFormGetValues } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
 import { HStack } from '@navikt/ds-react';
 import { Datepicker, PeriodFieldArray } from '@navikt/ft-form-hooks';
-import { dateAfterOrEqual,dateBeforeOrEqual, hasValidDate, required } from '@navikt/ft-form-validators';
+import { dateAfterOrEqual, dateBeforeOrEqual, hasValidDate, required } from '@navikt/ft-form-validators';
 
 import { FRILANS_NAME_PREFIX } from '../constants';
 import { FrilansFormValues, FrilansSubFormValues } from '../types';
@@ -12,7 +12,7 @@ import { FrilansFormValues, FrilansSubFormValues } from '../types';
 const getValue = (
   getValues: UseFormGetValues<FrilansFormValues>,
   fieldName: string,
-  // @ts-ignore
+  // @ts-expect-error
 ): string => getValues(fieldName);
 
 interface Props {

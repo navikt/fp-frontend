@@ -5,12 +5,12 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Label } from '@navikt/ds-react';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import { ArrowBox, FaktaGruppe,VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { ArrowBox, FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { FaktaBegrunnelseTextFieldNew, isFieldEdited } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FodselSammenligningIndex } from '@navikt/fp-prosess-fakta-fodsel-sammenligning';
-import { Aksjonspunkt, AvklartBarn,FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
+import { Aksjonspunkt, AvklartBarn, FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
 import { SjekkManglendeFodselAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import AvklartBarnFieldArray from './AvklartBarnFieldArray';
@@ -128,7 +128,7 @@ const lagBarn = (antallBarnFraSoknad: number): AvklartBarn[] => {
   }
   const childrenArray: AvklartBarn[] = [];
   while (antallBarn > 0) {
-    // @ts-ignore Fiks
+    // @ts-expect-error Fiks
     childrenArray.push({ fodselsdato: undefined, dodsdato: undefined });
     antallBarn -= 1;
   }

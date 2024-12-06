@@ -8,13 +8,13 @@ export const getKodeverknavnFraKode = (
   kode: string,
   undertype?: string,
 ): string => {
-  // @ts-ignore fiks
+  // @ts-expect-error fiks
   let kodeverkForType: KodeverkMedNavn[] = alleKodeverk[kodeverkType];
   if (!kodeverkForType || kodeverkForType.length === 0) {
     return '';
   }
   if (undertype) {
-    // @ts-ignore Må endra kodeverket-typen til å støtta undertype
+    // @ts-expect-error Må endra kodeverket-typen til å støtta undertype
     kodeverkForType = kodeverkForType[undertype];
   }
 

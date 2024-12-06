@@ -21,7 +21,7 @@ const getIsVilkarTypeEdited = (familiehendelse: FamilieHendelse): boolean => has
 const getIsAdopsjonFodelsedatoerEdited = (
   soknad: Soknad,
   familiehendelse: FamilieHendelse,
-  // @ts-ignore diff bør endrast så den gir ein meir forutsigbar output
+  // @ts-expect-error diff bør endrast så den gir ein meir forutsigbar output
 ): Record<string, boolean> => diff(soknad.adopsjonFodelsedatoer, familiehendelse.adopsjonFodelsedatoer);
 
 const getIsOmsorgsovertakelseDatoEdited = (soknad: Soknad, familiehendelse: FamilieHendelse): boolean =>

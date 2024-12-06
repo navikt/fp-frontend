@@ -118,7 +118,7 @@ export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKod
 
   useEffect(() => {
     if (fields.length === 0) {
-      // @ts-ignore Fiks
+      // @ts-expect-error Fiks
       append({});
     }
   }, []);

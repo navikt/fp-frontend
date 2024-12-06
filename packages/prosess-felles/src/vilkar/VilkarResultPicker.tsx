@@ -7,7 +7,7 @@ import { RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
 import { required, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
 
-import { AksjonspunktStatus,VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktStatus, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Behandlingsresultat, KodeverkMedNavn } from '@navikt/fp-types';
 
 import styles from './vilkarResultPicker.module.css';
@@ -88,7 +88,7 @@ const VilkarResultPicker: FunctionComponent<OwnProps> & StaticFunctions = ({
       {(!readOnly || erVilkarOk === undefined) && (
         <RadioGroupPanel
           name="erVilkarOk"
-          // @ts-ignore Fiks denne!
+          // @ts-expect-error Fiks denne!
           validate={radioValidators}
           isReadOnly={readOnly}
           isTrueOrFalseSelection

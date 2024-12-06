@@ -28,20 +28,20 @@ init({
   integrations: [new Integrations.Breadcrumbs({ console: false })],
   beforeSend: (event: Event, hint: EventHint) => {
     const exception = hint.originalException;
-    // @ts-ignore
+    // @ts-expect-error
     if (exception.isAxiosError) {
-      // @ts-ignore
+      // @ts-expect-error
       const requestUrl = new URL(exception.request.responseURL);
       event.fingerprint = [
         '{{ default }}',
-        // @ts-ignore
+        // @ts-expect-error
         String(exception.name),
-        // @ts-ignore
+        // @ts-expect-error
         String(exception.message),
         String(requestUrl.pathname),
       ];
       event.extra = event.extra ? event.extra : {};
-      // @ts-ignore
+      // @ts-expect-error
       event.extra.callId = exception.response.config.headers['Nav-Callid'];
     }
     return event;
