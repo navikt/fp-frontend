@@ -71,19 +71,25 @@ const hentOppgaver = async (valgtSakslisteId: number, getSakslisteId: () => numb
 };
 
 export const useOppgavePolling = (valgtSakslisteId: number) => {
-  const [oppgaverTilBehandling, setOppgaverTilBehandling] = useState<Oppgave[]>([]);
+  const { addErrorMessage } = useRestApiErrorDispatcher();
+  const [oppgaverTilBehandling, setOppgaverTilBehandling] = useState<Oppgave[]>(EMPTY_ARRAY);
 
   const idRef = useRef(valgtSakslisteId);
   const getSakslisteId = () => idRef.current;
 
   const {
     mutateAsync: pollEtterOppgaver,
-    data: tilBehandling,
+    data: tilBehandling = EMPTY_ARRAY,
     isSuccess,
-    error,
+    error: tilBehandlingError,
   } = useMutation({
     mutationFn: (values: { oppgaveIder?: string }) =>
       hentOppgaver(valgtSakslisteId, getSakslisteId, values.oppgaveIder),
+    onError: error => {
+      if (error.message !== MAX_POLLING_REACHED) {
+        addErrorMessage({ type: EventType.REQUEST_ERROR, feilmelding: error?.message });
+      }
+    },
   });
 
   const { data: reserverteOppgaver, refetch } = useQuery({
@@ -111,17 +117,9 @@ export const useOppgavePolling = (valgtSakslisteId: number) => {
     };
   }, [valgtSakslisteId]);
 
-  const { addErrorMessage } = useRestApiErrorDispatcher();
-  useEffect(() => {
-    if (error && error?.message !== MAX_POLLING_REACHED) {
-      addErrorMessage({ type: EventType.REQUEST_ERROR, feilmelding: error?.message });
-    }
-  }, [error]);
-
   return {
-    oppgaverTilBehandling:
-      oppgaverTilBehandling && oppgaverTilBehandling.length > 0 ? oppgaverTilBehandling : EMPTY_ARRAY,
-    reserverteOppgaver: reserverteOppgaver && reserverteOppgaver.length > 0 ? reserverteOppgaver : EMPTY_ARRAY,
-    isMaxPollingAttemptsReached: error?.message === MAX_POLLING_REACHED,
+    oppgaverTilBehandling,
+    reserverteOppgaver,
+    isMaxPollingAttemptsReached: tilBehandlingError?.message === MAX_POLLING_REACHED,
   };
 };
