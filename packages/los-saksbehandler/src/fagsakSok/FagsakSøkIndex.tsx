@@ -60,17 +60,19 @@ export const FagsakSøkIndex = ({ åpneFagsak, kanSaksbehandle }: Props) => {
     isPending: isSøkFagsakPending,
     isSuccess: isSøkFagsakSuccess,
   } = useMutation({
-    mutationFn: (values: SøkFormValues) => søkFagsakPost(values.searchString, values.skalReservere),
-    onSuccess: async fagsakerResultat => {
-      if (fagsakerResultat && fagsakerResultat.length > 0) {
-        const oppgaver = await hentOppgaverForFagsaker(fagsakerResultat);
-        if (oppgaver.length === 1) {
-          // eslint-disable-next-line @typescript-eslint/no-use-before-define
-          velgFagsakOperasjoner(oppgaver[0], false);
-        } else if (oppgaver.length === 0 && fagsakerResultat) {
-          åpneFagsak(fagsakerResultat[0].saksnummer);
-        }
+    mutationFn: async (values: SøkFormValues) => {
+      const fagsakerResultat = await søkFagsakPost(values.searchString, values.skalReservere);
+      if (fagsakerResultat.length === 0) {
+        return [];
       }
+      const oppgaver = await hentOppgaverForFagsaker(fagsakerResultat);
+      if (oppgaver.length === 1) {
+        velgFagsakOperasjoner(oppgaver[0], false);
+      } else if (oppgaver.length === 0 && fagsakerResultat) {
+        åpneFagsak(fagsakerResultat[0].saksnummer);
+      }
+
+      return fagsakerResultat;
     },
   });
 
