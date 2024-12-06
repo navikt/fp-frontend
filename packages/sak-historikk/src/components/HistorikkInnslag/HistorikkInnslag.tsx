@@ -8,8 +8,8 @@ import { Historikkinnslag } from '@navikt/fp-types';
 
 import { Avatar } from './Avatar';
 import { HistorikkDokumentLenke } from './HistorikkDokumentLenke';
+import { formatDateTime, parseBoldText } from './historikkInnslagUtils';
 import { Skjermlenke } from './Skjermlenke';
-import { formatDateTime, parseBoldText } from './snakkebobleUtils';
 
 interface Props {
   behandlingLocation: Location;
