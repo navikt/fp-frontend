@@ -137,6 +137,7 @@ describe('<VirksomhetPapirsoknadIndex>', () => {
 
   it(
     'skal velge at søker har arbeidet i egen næringsvirksomhet og ikke oppgi virksomhet',
+    { timeout: 30000 },
     async () => {
       const lagre = vi.fn();
 
@@ -159,6 +160,5 @@ describe('<VirksomhetPapirsoknadIndex>', () => {
 
       expect(lagre).toHaveBeenCalledTimes(0);
     },
-    { timeout: 30000 },
   );
 });
