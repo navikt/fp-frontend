@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Meta, StoryFn, StoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { HistorikkAktor } from '@navikt/fp-kodeverk';
 import { skjermlenkeCodes } from '@navikt/fp-konstanter';
