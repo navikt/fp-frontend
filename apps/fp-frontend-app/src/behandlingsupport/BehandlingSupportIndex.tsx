@@ -161,7 +161,6 @@ export const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
           behandlingUuid={behandlingUuid}
           historikkinnslagFpSak={fagsakData.getHistorikkFpSak()}
           historikkinnslagFpTilbake={fagsakData.getHistorikkFpTilbake()}
-          kjønn={fagsak.bruker.kjønn}
         />
       </Tabs.Panel>
       <Tabs.Panel value={SupportTabs.MELDINGER}>

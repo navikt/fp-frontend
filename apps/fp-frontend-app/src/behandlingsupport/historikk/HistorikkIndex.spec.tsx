@@ -5,7 +5,7 @@ import { render, screen } from '@testing-library/react';
 
 import { RestApiMock } from '@navikt/fp-utils-test';
 
-import { FagsakApiKeys,requestFagsakApi } from '../../data/fagsakContextApi';
+import { FagsakApiKeys, requestFagsakApi } from '../../data/fagsakContextApi';
 import { HistorikkIndex } from './HistorikkIndex';
 
 describe('<HistorikkIndex>', () => {
@@ -19,7 +19,7 @@ describe('<HistorikkIndex>', () => {
     render(
       <RestApiMock data={data} requestApi={requestFagsakApi}>
         <MemoryRouter>
-          <HistorikkIndex saksnummer="12345" behandlingUuid="1" kjønn="K" />
+          <HistorikkIndex saksnummer="12345" behandlingUuid="1" />
         </MemoryRouter>
       </RestApiMock>,
     );

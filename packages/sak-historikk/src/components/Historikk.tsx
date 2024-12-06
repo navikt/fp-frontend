@@ -3,14 +3,14 @@ import { useIntl } from 'react-intl';
 
 import { Box, Checkbox, Heading, HStack, VStack } from '@navikt/ds-react';
 import { useStorageToggle } from '@navikt/ft-hooks';
+import dayjs from 'dayjs';
 import { Location } from 'history';
-import moment from 'moment';
 
 import { getKodeverknavnFn } from '@navikt/fp-kodeverk';
 import { AlleKodeverk, AlleKodeverkTilbakekreving, Historikkinnslag } from '@navikt/fp-types';
 
 import { EnvironmentWrapper } from './EnvironmentWrapper';
-import { Snakkeboble } from './Snakkeboble/Snakkeboble';
+import { HistorikkInnslag } from './HistorikkInnslag/HistorikkInnslag';
 
 import styles from './historikk.module.css';
 
@@ -24,7 +24,7 @@ const sortAndTagTilbakekreving = (
 ): HistorikkMedTilbakekrevingIndikator[] => {
   const historikkFraTilbakekrevingMedMarkor = historikkFptilbake.map(ht => ({ ...ht, erTilbakekreving: true }));
   return [...historikkFpsak, ...historikkFraTilbakekrevingMedMarkor].sort((a, b) =>
-    moment(b.opprettetTidspunkt).diff(moment(a.opprettetTidspunkt)),
+    dayjs(b.opprettetTidspunkt).diff(dayjs(a.opprettetTidspunkt)),
   );
 };
 
@@ -34,7 +34,6 @@ interface Props {
   historikkFpTilbake: Historikkinnslag[];
   alleKodeverkFpTilbake?: AlleKodeverkTilbakekreving;
   alleKodeverkFpSak: AlleKodeverk;
-  kjønn: string;
   saksnummer: string;
   getBehandlingLocation: (behandlingUuid: string) => Location;
   createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location | undefined;
@@ -51,7 +50,6 @@ export const Historikk = ({
   historikkFpTilbake,
   alleKodeverkFpSak, // TODO: Kodeverk brukes bare får å hente navn på aktør
   alleKodeverkFpTilbake, // TODO: Kodeverk brukes bare får å hente navn på aktør
-  kjønn,
   saksnummer,
   getBehandlingLocation,
   createLocationForSkjermlenke,
@@ -110,7 +108,7 @@ export const Historikk = ({
         className={styles.overflow}
         ref={el => el && setTop(el.getBoundingClientRect().top)}
       >
-        <VStack gap="4" padding="4">
+        <VStack gap="2" padding="4">
           {filtrerteInnslag.map(historikkinnslag => {
             const getKodeverknavn = historikkinnslag.erTilbakekreving ? getKodeverknavnFpTilbake : getKodeverknavnFpSak;
 
@@ -123,13 +121,14 @@ export const Historikk = ({
                 key={historikkinnslag.opprettetTidspunkt}
                 historikkinnslag={historikkinnslag}
               >
-                <Snakkeboble
+                <HistorikkInnslag
                   saksnummer={saksnummer}
                   historikkInnslag={historikkinnslag}
-                  kjønn={kjønn}
                   createLocationForSkjermlenke={createLocationForSkjermlenke}
-                  behandlingLocation={getBehandlingLocation(historikkinnslag.behandlingUuid)}
                   getKodeverknavn={getKodeverknavn}
+                  behandlingLocation={
+                    historikkinnslag.behandlingUuid ? getBehandlingLocation(historikkinnslag.behandlingUuid) : undefined
+                  }
                 />
               </EnvironmentWrapper>
             );
