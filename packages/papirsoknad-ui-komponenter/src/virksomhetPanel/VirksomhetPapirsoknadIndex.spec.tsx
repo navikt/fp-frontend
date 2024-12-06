@@ -1,5 +1,5 @@
 import { composeStories } from '@storybook/react';
-import { fireEvent, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { expect } from 'vitest';
 
@@ -61,13 +61,8 @@ describe('<VirksomhetPapirsoknadIndex>', () => {
 
     await userEvent.selectOptions(screen.getByLabelText('Hvilket land er virksomheten registrert i?'), 'AND');
 
-    const fraOgMedInput = screen.getByLabelText('Fra og med');
-    await userEvent.type(fraOgMedInput, '2022-06-01');
-    fireEvent.blur(fraOgMedInput);
-
-    const tilOgMedInput = screen.getByLabelText('Til og med');
-    await userEvent.type(tilOgMedInput, '2022-06-03');
-    fireEvent.blur(tilOgMedInput);
+    await userEvent.type(screen.getByLabelText('Fra og med'), '2022-06-01');
+    await userEvent.type(screen.getByLabelText('Til og med'), '2022-06-03');
 
     await userEvent.click(screen.getByLabelText('Fiske'));
 
@@ -79,9 +74,7 @@ describe('<VirksomhetPapirsoknadIndex>', () => {
     expect(screen.getByText('Årsak')).toBeInTheDocument();
     await userEvent.click(screen.getByLabelText('Varig endring i næring'));
 
-    const gjeldendeFomInput = screen.getByLabelText('Gjeldende f.o.m.');
-    await userEvent.type(gjeldendeFomInput, '2022-05-03');
-    fireEvent.blur(gjeldendeFomInput);
+    await userEvent.type(screen.getByLabelText('Gjeldende f.o.m.'), '2022-05-03');
 
     await userEvent.type(screen.getByLabelText('Beskriv endringen i næring'), 'Dette er en endring');
 
