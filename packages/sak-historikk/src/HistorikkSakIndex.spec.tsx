@@ -23,18 +23,18 @@ describe('<HistorikkSakIndex>', () => {
     await BehandlingErValgt.run();
     expect(await screen.findByText(/Historikk/)).toBeInTheDocument();
 
-    expect(screen.getAllByTestId('historikkinnslag', { exact: false })).toHaveLength(10);
+    expect(screen.getAllByTestId('historikkinnslag')).toHaveLength(10);
 
     await userEvent.click(screen.getByText('Filtrer på behandling'));
 
-    expect(await screen.findAllByTestId('historikkinnslag', { exact: false })).toHaveLength(1);
+    expect(await screen.findAllByTestId('historikkinnslag')).toHaveLength(1);
   });
 
   it('skal sortere og vise nyeste historikkinnslag først', async () => {
     await BehandlingIkkeErValgt.run();
     expect(await screen.findByText(/Historikk/)).toBeInTheDocument();
 
-    const historikkinnslag = screen.getAllByTestId('historikkinnslag', { exact: false });
+    const historikkinnslag = screen.getAllByTestId('historikkinnslag');
     expect(historikkinnslag).toHaveLength(10);
   });
 });
