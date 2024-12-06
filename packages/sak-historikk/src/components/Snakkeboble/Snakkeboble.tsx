@@ -24,7 +24,7 @@ export const Snakkeboble = ({
   behandlingLocation,
   createLocationForSkjermlenke,
   getKodeverknavn,
-  historikkInnslag: { aktør, opprettetTidspunkt, tittel, body, dokumenter, skjermlenke },
+  historikkInnslag: { aktør, opprettetTidspunkt, tittel, linjer, dokumenter, skjermlenke },
   kjønn,
   saksnummer,
 }: Props) => {
@@ -51,11 +51,15 @@ export const Snakkeboble = ({
           />
         )}
 
-        {body.map((linje, index) => (
-          <BodyShort key={index} size="small">
-            {parseBoldText(linje)}
-          </BodyShort>
-        ))}
+        {linjer.map((linje, index) =>
+          linje.type === 'TEKST' ? (
+            <BodyShort key={index} size="small">
+              {parseBoldText(linje.tekst)}
+            </BodyShort>
+          ) : (
+            <div key={index} style={{ marginTop: '10px' }} /> // TODO: OK å bruke div er med margin
+          ),
+        )}
 
         {dokumenter && (
           <VStack gap="1">

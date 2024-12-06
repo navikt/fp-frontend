@@ -16,7 +16,7 @@ const historikkInnslag: Historikkinnslag[] = [
     opprettetTidspunkt: '2019-09-19T12:16:14.499',
     tittel: 'Dette er en tittel',
     skjermlenke: null,
-    body: [],
+    linjer: [],
     dokumenter: [{ dokumentId: '1', journalpostId: '2', tag: 'Vedlegg', url: 'www.test.no', utgått: false }],
   },
   {
@@ -26,7 +26,7 @@ const historikkInnslag: Historikkinnslag[] = [
     tittel: 'Dette er en tittel',
     skjermlenke: skjermlenkeCodes.FAKTA_OM_AKTIVITETSKRAV.kode,
     dokumenter: [],
-    body: [],
+    linjer: [],
   },
   {
     behandlingUuid: '999952',
@@ -35,7 +35,7 @@ const historikkInnslag: Historikkinnslag[] = [
     tittel: 'Dette er en tittel',
     skjermlenke: null,
     dokumenter: [],
-    body: [],
+    linjer: [],
   },
   {
     behandlingUuid: '999952',
@@ -44,7 +44,7 @@ const historikkInnslag: Historikkinnslag[] = [
     tittel: 'Dette er en inntektsmelding',
     skjermlenke: null,
     dokumenter: [],
-    body: [],
+    linjer: [],
   },
   {
     behandlingUuid: '999952',
@@ -53,10 +53,21 @@ const historikkInnslag: Historikkinnslag[] = [
     tittel: 'Dette er en en besluttning',
     skjermlenke: null,
     dokumenter: [],
-    body: [
-      '__Behandlende enhet__ endret fra 4867 NAV Familie- og pensjonsytelser Foreldrepenger til __4806 NAV Familie- og pensjonsytelser Drammen__',
-      'Dette er ein lang begrunnelsestekst',
-      'Personopplysning',
+    linjer: [
+      {
+        type: 'TEKST',
+        tekst:
+          '__Behandlende enhet__ endret fra 4867 NAV Familie- og pensjonsytelser Foreldrepenger til __4806 NAV Familie- og pensjonsytelser Drammen__',
+      },
+      { type: 'TEKST', tekst: 'Dette er ein lang begrunnelsestekst' },
+      { type: 'LINJESKIFT' },
+      {
+        type: 'TEKST',
+        tekst:
+          '__Behandlende enhet__ endret fra 4867 NAV Familie- og pensjonsytelser Foreldrepenger til __4806 NAV Familie- og pensjonsytelser Drammen__',
+      },
+      { type: 'TEKST', tekst: 'Dette er ein lang begrunnelsestekst' },
+      { type: 'TEKST', tekst: 'Personopplysning' },
     ],
   },
 ];

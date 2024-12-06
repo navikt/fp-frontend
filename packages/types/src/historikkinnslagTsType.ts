@@ -7,8 +7,15 @@ export type Historikkinnslag = Readonly<{
   skjermlenke: string | null;
   dokumenter: HistorikkInnslagDokumentLink[];
   tittel: string | null;
-  body: string[];
+  linjer: Linje[];
 }>;
+
+type Linje =
+  | {
+      type: 'TEKST';
+      tekst: string;
+    }
+  | { type: 'LINJESKIFT' };
 
 type HistorikkUtfører = {
   type: HistorikkAktor;
