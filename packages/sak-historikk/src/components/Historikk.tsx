@@ -35,7 +35,7 @@ interface Props {
   alleKodeverkFpTilbake?: AlleKodeverkTilbakekreving;
   alleKodeverkFpSak: AlleKodeverk;
   saksnummer: string;
-  getBehandlingLocation: (behandlingUuid: string | null) => Location;
+  getBehandlingLocation: (behandlingUuid: string) => Location;
   createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location | undefined;
 }
 
@@ -125,8 +125,10 @@ export const Historikk = ({
                   saksnummer={saksnummer}
                   historikkInnslag={historikkinnslag}
                   createLocationForSkjermlenke={createLocationForSkjermlenke}
-                  behandlingLocation={getBehandlingLocation(historikkinnslag.behandlingUuid)}
                   getKodeverknavn={getKodeverknavn}
+                  behandlingLocation={
+                    historikkinnslag.behandlingUuid ? getBehandlingLocation(historikkinnslag.behandlingUuid) : undefined
+                  }
                 />
               </EnvironmentWrapper>
             );

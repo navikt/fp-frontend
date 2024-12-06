@@ -12,7 +12,7 @@ import { formatDateTime, parseBoldText } from './historikkInnslagUtils';
 import { Skjermlenke } from './Skjermlenke';
 
 interface Props {
-  behandlingLocation: Location;
+  behandlingLocation?: Location;
   createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location | undefined;
   getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string;
   historikkInnslag: Historikkinnslag;

@@ -8,7 +8,7 @@ import { KodeverkType } from '@navikt/fp-kodeverk';
 
 interface Props {
   skjermlenke?: string;
-  behandlingLocation: Location;
+  behandlingLocation: Location | undefined;
   getKodeverknavn: (kode: string, kodeverk: KodeverkType, undertype?: string) => string;
   createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeKode: string) => Location | undefined;
 }
@@ -25,7 +25,7 @@ export const Skjermlenke = ({
   getKodeverknavn,
   createLocationForSkjermlenke,
 }: Props) => {
-  if (!skjermlenke) {
+  if (!skjermlenke || !behandlingLocation) {
     return null;
   }
 
