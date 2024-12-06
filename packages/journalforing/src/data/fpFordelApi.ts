@@ -41,6 +41,7 @@ export const hentAlleJournalOppgaver = (ident?: string) =>
     queryFn: () =>
       kyExtended.get(FpFordelUrl.ALLE_JOURNAL_OPPGAVER, { searchParams: { ident: ident ?? '' } }).json<Oppgave[]>(),
     enabled: ident !== undefined,
+    staleTime: Infinity,
   });
 
 export const hentJournalpostDetaljer = (journalpostId: string) =>

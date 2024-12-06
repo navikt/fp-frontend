@@ -70,17 +70,7 @@ export const OppgaveTabellRad = ({ oppgave, velgOppgaveOgHentJournalpost, navAns
       </Table.DataCell>
       <Table.DataCell>{oppgave.enhetId}</Table.DataCell>
       <Table.DataCell>
-        <Button
-          size="small"
-          variant="tertiary"
-          disabled={false}
-          onClick={() => {
-            velgOppgaveOgHentJournalpost(oppgave);
-          }}
-          type="button"
-        >
-          <ChevronRightIcon className={styles.nesteIkon} />
-        </Button>
+        <ChevronRightIcon className={styles.nesteIkon} />
       </Table.DataCell>
     </Table.Row>
   );
