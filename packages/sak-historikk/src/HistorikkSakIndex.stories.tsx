@@ -1,6 +1,6 @@
 import React from 'react';
 
-import type { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryFn, StoryObj } from '@storybook/react';
 
 import { HistorikkAktor } from '@navikt/fp-kodeverk';
 import { skjermlenkeCodes } from '@navikt/fp-konstanter';
@@ -214,7 +214,7 @@ const historikkInnslag: Historikkinnslag[] = [
 const meta = {
   title: 'sak-historikk',
   component: HistorikkSakIndex,
-  decorators: [withRouter, (story: any) => <div style={{ width: '600px' }}>{story()}</div>],
+  decorators: [withRouter, story => <div style={{ width: '600px' }}>{story()}</div>],
   args: {
     valgtBehandlingUuid: undefined,
     historikkFpSak: historikkInnslag,
