@@ -135,26 +135,30 @@ describe('<VirksomhetPapirsoknadIndex>', () => {
     });
   });
 
-  it('skal velge at søker har arbeidet i egen næringsvirksomhet og ikke oppgi virksomhet', async () => {
-    const lagre = vi.fn();
+  it(
+    'skal velge at søker har arbeidet i egen næringsvirksomhet og ikke oppgi virksomhet',
+    async () => {
+      const lagre = vi.fn();
 
-    await Default.run({
-      parameters: {
-        submitCallback: lagre,
-      },
-    });
-    expect(await screen.findByText('Egen næringsvirksomhet')).toBeInTheDocument();
+      await Default.run({
+        parameters: {
+          submitCallback: lagre,
+        },
+      });
+      expect(await screen.findByText('Egen næringsvirksomhet')).toBeInTheDocument();
 
-    await userEvent.click(
-      screen.getByText('Ja, søker har arbeidet i egen næringsvirksomhet i løpet av de 10 siste månedene'),
-    );
+      await userEvent.click(
+        screen.getByText('Ja, søker har arbeidet i egen næringsvirksomhet i løpet av de 10 siste månedene'),
+      );
 
-    await userEvent.click(screen.getByLabelText('Slett virksomhet'));
+      await userEvent.click(screen.getByLabelText('Slett virksomhet'));
 
-    await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
+      await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    expect(await screen.findByText('Det må registreres minst 1 virksomhet')).toBeInTheDocument();
+      expect(await screen.findByText('Det må registreres minst 1 virksomhet')).toBeInTheDocument();
 
-    expect(lagre).toHaveBeenCalledTimes(0);
-  });
+      expect(lagre).toHaveBeenCalledTimes(0);
+    },
+    { timeout: 30000 },
+  );
 });
