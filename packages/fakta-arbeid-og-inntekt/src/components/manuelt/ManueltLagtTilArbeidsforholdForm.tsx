@@ -3,8 +3,8 @@ import { useForm, UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { TrashFillIcon } from '@navikt/aksel-icons';
-import { Button, Heading, HStack,Spacer } from '@navikt/ds-react';
-import { Datepicker, Form,InputField, TextAreaField } from '@navikt/ft-form-hooks';
+import { Button, Heading, HStack, Spacer } from '@navikt/ds-react';
+import { Datepicker, Form, InputField, TextAreaField } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   hasValidDate,
@@ -16,7 +16,7 @@ import {
   minValue,
   required,
 } from '@navikt/ft-form-validators';
-import { OkAvbrytModal,VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { OkAvbrytModal, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 import { ManueltArbeidsforhold } from '@navikt/fp-types';
@@ -140,7 +140,7 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
       ...formValues,
     };
 
-    // @ts-ignore Fiks
+    // @ts-expect-error Fiks
     return registrerArbeidsforhold(params).then(() => {
       oppdaterTabell(getOppdaterTabell(formValues));
 
@@ -160,7 +160,7 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
       vurdering: ArbeidsforholdKomplettVurderingType.FJERN_FRA_BEHANDLINGEN,
       ...formValues,
     };
-    // @ts-ignore Fiks
+    // @ts-expect-error Fiks
     registrerArbeidsforhold(params).then(
       getOppdaterTabellOgLukkRad(oppdaterTabell, lukkArbeidsforholdRad, erNyttArbeidsforhold),
     );

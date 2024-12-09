@@ -47,6 +47,7 @@ export default [
       'react/prop-types': OFF,
       'jsx-a11y/no-autofocus': OFF,
       'no-duplicate-imports': ERROR,
+      'react/react-in-jsx-scope': OFF,
 
       // Note: you must disable the base rule as it can report incorrect errors
       'no-use-before-define': OFF,

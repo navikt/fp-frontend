@@ -1,7 +1,7 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BodyShort, Detail, HStack,Label } from '@navikt/ds-react';
+import { BodyShort, Detail, HStack, Label } from '@navikt/ds-react';
 import { CheckboxField, NumberField, SelectField } from '@navikt/ft-form-hooks';
 import { hasValidDecimal, maxValue, notDash, required } from '@navikt/ft-form-validators';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -207,7 +207,7 @@ const UttakPeriodeInfo: FunctionComponent<OwnProps> = ({
               label={intl.formatMessage({ id: 'UttakActivity.SamtidigUttak' })}
               readOnly={isReadOnly}
               validate={[
-                // @ts-ignore FIX type i CheckboxField
+                // @ts-expect-error FIX type i CheckboxField
                 (samtidigUttak: boolean) =>
                   erOppfylt && samtidigUttak !== true && valgtInnvilgelsesÅrsak === '2038'
                     ? intl.formatMessage({ id: 'ValidationMessage.SamtidigUttakErObligatorisk' })

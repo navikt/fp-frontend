@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { useFieldArray, useFormContext,UseFormGetValues } from 'react-hook-form';
+import { useFieldArray, useFormContext, UseFormGetValues } from 'react-hook-form';
 import { IntlShape, useIntl } from 'react-intl';
 
 import { HStack } from '@navikt/ds-react';
@@ -14,7 +14,7 @@ import { FrilansFormValues } from '../types';
 const getValue = (
   getValues: UseFormGetValues<FrilansFormValues>,
   fieldName: string,
-  // @ts-ignore
+  // @ts-expect-error
 ): string => getValues(fieldName);
 
 const sortFomDates = (

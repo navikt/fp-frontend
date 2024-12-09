@@ -1,5 +1,5 @@
-import { BehandlingType,KodeverkType } from '@navikt/fp-kodeverk';
-import { AlleKodeverk, AlleKodeverkTilbakekreving,KodeverkMedNavn } from '@navikt/fp-types';
+import { BehandlingType, KodeverkType } from '@navikt/fp-kodeverk';
+import { AlleKodeverk, AlleKodeverkTilbakekreving, KodeverkMedNavn } from '@navikt/fp-types';
 
 import { FagsakApiKeys, restFagsakApiHooks } from './fagsakContextApi';
 
@@ -21,7 +21,7 @@ export function useKodeverk(behandlingType?: string): AlleKodeverk | AlleKodever
  */
 export function useFpSakKodeverk<T = KodeverkMedNavn>(kodeverkType: string): T[] {
   const alleKodeverk = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK);
-  // @ts-ignore Fiks
+  // @ts-expect-error Fiks
   return alleKodeverk[kodeverkType];
 }
 
@@ -31,7 +31,7 @@ export function useFpSakKodeverk<T = KodeverkMedNavn>(kodeverkType: string): T[]
  */
 export function useFpTilbakeKodeverk<T = KodeverkMedNavn>(kodeverkType: string): T[] {
   const alleKodeverk = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK_FPTILBAKE);
-  // @ts-ignore Fiks
+  // @ts-expect-error Fiks
   return alleKodeverk ? alleKodeverk[kodeverkType] : undefined;
 }
 
@@ -65,7 +65,7 @@ export function useGetKodeverkFn() {
   return (kode: string, kodeverk: KodeverkType, behandlingType: string = BehandlingType.FORSTEGANGSSOKNAD) => {
     const kodeverkForType =
       behandlingType === BehandlingType.TILBAKEKREVING || behandlingType === BehandlingType.TILBAKEKREVING_REVURDERING
-        ? // @ts-ignore Fiks
+        ? // @ts-expect-error Fiks
           alleFpTilbakeKodeverk[kodeverk]
         : alleFpSakKodeverk[kodeverk];
     if (!kodeverkForType || kodeverkForType.length === 0) {

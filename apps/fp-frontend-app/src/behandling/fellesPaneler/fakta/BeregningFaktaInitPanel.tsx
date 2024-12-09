@@ -65,12 +65,12 @@ const lagStandardPeriode = (beregningsgrunnlag: Beregningsgrunnlag, bgVilkar: Vi
 
 const lagBGVilkar = (vilkar?: Vilkar[], beregningsgrunnlag?: Beregningsgrunnlag): FtVilkar => {
   if (!vilkar) {
-    // @ts-ignore BeregningFaktaIndex må kunna ta i mot null
+    // @ts-expect-error BeregningFaktaIndex må kunna ta i mot null
     return null;
   }
   const bgVilkar = vilkar.find(v => v.vilkarType && v.vilkarType === VilkarType.BEREGNINGSGRUNNLAGVILKARET);
   if (!bgVilkar || !beregningsgrunnlag) {
-    // @ts-ignore BeregningFaktaIndex må kunna ta i mot null
+    // @ts-expect-error BeregningFaktaIndex må kunna ta i mot null
     return null;
   }
   const nyVK = {
@@ -88,7 +88,7 @@ const lagFormatertBG = (beregningsgrunnlag: Beregningsgrunnlag): FtBeregningsgru
     ...beregningsgrunnlag,
     vilkårsperiodeFom: beregningsgrunnlag.skjaeringstidspunktBeregning,
   };
-  //@ts-ignore TODO Fiks denne
+  // @ts-expect-error TODO Fiks denne
   return [nyttBG];
 };
 

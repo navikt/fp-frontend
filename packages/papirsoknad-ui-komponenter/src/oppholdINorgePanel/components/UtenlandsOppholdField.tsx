@@ -1,9 +1,9 @@
 import React, { ReactElement, useMemo } from 'react';
-import { useFieldArray, useFormContext,UseFormGetValues } from 'react-hook-form';
+import { useFieldArray, useFormContext, UseFormGetValues } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
 import { HStack } from '@navikt/ds-react';
-import { Datepicker, PeriodFieldArray,SelectField } from '@navikt/ft-form-hooks';
+import { Datepicker, PeriodFieldArray, SelectField } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   dateBeforeOrEqual,
@@ -34,7 +34,7 @@ type Keys = 'tidligereOppholdUtenlands' | 'fremtidigeOppholdUtenlands';
 const getValue = (
   getValues: UseFormGetValues<{ [K in Keys]: FormValues[] }>,
   fieldName: string,
-  // @ts-ignore
+  // @ts-expect-error
 ): string => getValues(fieldName);
 
 const getOverlappingValidator = (getValues: UseFormGetValues<{ [K in Keys]: FormValues[] }>, name: Keys) => () => {
@@ -42,7 +42,7 @@ const getOverlappingValidator = (getValues: UseFormGetValues<{ [K in Keys]: Form
   const periodeMap = perioder
     .filter(({ periodeFom, periodeTom }) => periodeFom && periodeFom !== '' && periodeTom && periodeTom !== '')
     .map(({ periodeFom, periodeTom }) => [periodeFom, periodeTom]);
-  // @ts-ignore Fiks
+  // @ts-expect-error Fiks
   return periodeMap.length > 0 ? dateRangesNotOverlapping(periodeMap) : undefined;
 };
 

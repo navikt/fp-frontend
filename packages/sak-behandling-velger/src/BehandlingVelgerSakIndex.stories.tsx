@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
-import { BehandlingStatus,BehandlingType, KodeverkType } from '@navikt/fp-kodeverk';
+import { BehandlingStatus, BehandlingType, KodeverkType } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { BehandlingAppKontekst, Behandlingsresultat, KodeverkMedNavn } from '@navikt/fp-types';
 
@@ -12,7 +12,7 @@ import { BehandlingVelgerSakIndex } from './BehandlingVelgerSakIndex';
 import '@navikt/ft-ui-komponenter/dist/style.css';
 
 const getKodeverkMedNavn = (kode: string, kodeverk: KodeverkType) => {
-  // @ts-ignore
+  // @ts-expect-error
   const kodeverkForType = alleKodeverk[kodeverk] as KodeverkMedNavn[];
   if (!kodeverkForType || kodeverkForType.length === 0) {
     throw Error(`Det finnes ingen kodeverk for type ${kodeverk} med kode ${kode}`);

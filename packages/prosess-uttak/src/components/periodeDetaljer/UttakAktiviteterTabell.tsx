@@ -1,9 +1,9 @@
 import React, { FunctionComponent, ReactElement, useMemo } from 'react';
-import { useFieldArray, useFormContext,UseFormGetValues } from 'react-hook-form';
+import { useFieldArray, useFormContext, UseFormGetValues } from 'react-hook-form';
 import { IntlShape, useIntl } from 'react-intl';
 
 import { BodyShort, HStack } from '@navikt/ds-react';
-import { NumberField,SelectField } from '@navikt/ft-form-hooks';
+import { NumberField, SelectField } from '@navikt/ft-form-hooks';
 import {
   hasValidDecimal,
   hasValidInteger,
@@ -15,7 +15,7 @@ import {
 } from '@navikt/ft-form-validators';
 import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 
-import { UttakArbeidType,UttakPeriodeType } from '@navikt/fp-kodeverk';
+import { UttakArbeidType, UttakPeriodeType } from '@navikt/fp-kodeverk';
 import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, PeriodeSoker, PeriodeSokerAktivitet } from '@navikt/fp-types';
 
 import lagVisningsNavn from '../../utils/lagVisningsNavn';
@@ -258,26 +258,25 @@ const UttakAktiviteterTabell: FunctionComponent<OwnProps> = ({
                   <div className={styles.utbetalingsgrad}>
                     <NumberField
                       name={`aktiviteter.${index}.utbetalingsgrad`}
-                      // @ts-ignore Fiks typen til utbetalingsgrad. Bør vera number
                       validate={[
                         required,
                         minValue0,
                         maxProsentValue100,
                         hasValidDecimal,
-                        // @ts-ignore Fiks typen til utbetalingsgrad. Bør vera number
+                        // @ts-expect-error Fiks typen til utbetalingsgrad. Bør vera number
                         sjekkOmUtbetalingsgradMårVæreHøyereEnn0(
                           intl,
                           valgtPeriode,
                           samletUtbetalingsgradForAndreAktiviteter,
                           erOppfylt,
                         ),
-                        // @ts-ignore Fiks typen til utbetalingsgrad. Bør vera number
+                        // @ts-expect-error Fiks typen til utbetalingsgrad. Bør vera number
                         sjekkOmUtbetalingsgradEr0OmAvslått(intl, erOppfylt, utsettelseType),
-                        // @ts-ignore Fiks typen til utbetalingsgrad. Bør vera number
+                        // @ts-expect-error Fiks typen til utbetalingsgrad. Bør vera number
                         sjekkOmDetErTrektMinstEnDagNårUtbetalingsgradErMerEnn0(intl, getValues, index),
-                        // @ts-ignore Fiks typen til utbetalingsgrad. Bør vera number
+                        // @ts-expect-error Fiks typen til utbetalingsgrad. Bør vera number
                         sjekkOmUtbetalingsgradErHøyereEnnSamtidigUttaksprosent(intl, getValues),
-                        // @ts-ignore Fiks typen til utbetalingsgrad. Bør vera number
+                        // @ts-expect-error Fiks typen til utbetalingsgrad. Bør vera number
                         (utbetalingsgrad: string) => {
                           const harUtsettelsestype = utsettelseType && utsettelseType !== '-';
                           return harUtsettelsestype && getValues('erOppfylt') && parseFloat(utbetalingsgrad) > 0
