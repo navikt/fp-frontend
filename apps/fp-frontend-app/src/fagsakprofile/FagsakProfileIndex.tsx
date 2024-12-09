@@ -1,4 +1,4 @@
-import React, { useCallback,useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Navigate, NavLink, useLocation, useMatch } from 'react-router-dom';
 
@@ -7,7 +7,7 @@ import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Location } from 'history';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
-import { AAREG_URL, AINNTEKT_URL, getModiaUrl,GOSYS_URL } from '@navikt/fp-konstanter';
+import { AAREG_URL, AINNTEKT_URL, getModiaUrl, GOSYS_URL } from '@navikt/fp-konstanter';
 import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 import { BehandlingVelgerSakIndex } from '@navikt/fp-sak-behandling-velger';
 import { FagsakProfilSakIndex } from '@navikt/fp-sak-fagsak-profil';
@@ -139,7 +139,6 @@ export const FagsakProfileIndex = ({
                     {behandlingInfoKomponent}
                   </NavLink>
                 )}
-                // @ts-ignore TODO Ikkje send med ned heile kodeverket
                 getKodeverkMedNavn={getKodeverkFn}
               />
             </ErrorBoundary>

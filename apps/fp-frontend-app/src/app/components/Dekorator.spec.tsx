@@ -8,7 +8,7 @@ import { render, screen } from '@testing-library/react';
 import { EventType } from '@navikt/fp-rest-api';
 import { RestApiMock } from '@navikt/fp-utils-test';
 
-import { FagsakApiKeys,requestFagsakApi } from '../../data/fagsakContextApi';
+import { FagsakApiKeys, requestFagsakApi } from '../../data/fagsakContextApi';
 import { Dekorator } from './Dekorator';
 
 import messages from '../../../i18n/nb_NO.json';
@@ -28,7 +28,6 @@ const mockHistoryPush = vi.fn();
 vi.mock('react-router-dom', async () => {
   const actual = await vi.importActual('react-router-dom');
   return {
-    // @ts-ignore
     ...actual,
     useNavigate: () => mockHistoryPush,
   };

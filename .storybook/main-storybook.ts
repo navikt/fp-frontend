@@ -9,7 +9,7 @@ const config: StorybookConfig = {
   },
   viteFinal: async config => ({
     ...config,
-    // @ts-ignore
+    // @ts-expect-error
     plugins: config.plugins?.filter(p => p?.name !== 'vite:dts'),
   }),
 };

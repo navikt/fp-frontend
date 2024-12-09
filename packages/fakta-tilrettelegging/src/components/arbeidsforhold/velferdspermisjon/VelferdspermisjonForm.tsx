@@ -71,7 +71,7 @@ export const VelferdspermisjonForm = ({
     return Promise.resolve();
   };
 
-  // @ts-ignore Fiks denne
+  // @ts-expect-error Fiks denne
   const erGyldig = formMethods.watch(`${permisjonIndex}.erGyldig`);
 
   return (

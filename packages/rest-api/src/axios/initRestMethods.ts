@@ -8,7 +8,7 @@ const cancellable = (axiosInstance: AxiosInstance, config: AxiosRequestConfig): 
       cancel = c;
     }),
   });
-  // @ts-ignore Fiks
+  // @ts-expect-error Fiks
   request.cancel = cancel;
   return request.catch((error: Error) => (axios.isCancel(error) ? Promise.reject(new Error()) : Promise.reject(error)));
 };

@@ -8,7 +8,7 @@ import { RestApiGlobalStatePathsKeys, restApiHooks } from './fplosSaksbehandlerR
  */
 function useLosKodeverk<T = KodeverkMedNavn>(kodeverkType: string): T[] {
   const alleKodeverk = restApiHooks.useGlobalStateRestApiData(RestApiGlobalStatePathsKeys.KODEVERK_LOS);
-  // @ts-ignore Fiks
+  // @ts-expect-error Fiks
   return alleKodeverk[kodeverkType];
 }
 

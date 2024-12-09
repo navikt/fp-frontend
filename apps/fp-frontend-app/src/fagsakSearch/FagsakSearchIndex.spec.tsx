@@ -7,7 +7,7 @@ import userEvent from '@testing-library/user-event';
 import { FagsakEnkel, KjønnkodeEnum } from '@navikt/fp-types';
 import { RestApiMock } from '@navikt/fp-utils-test';
 
-import { FagsakApiKeys,requestFagsakApi } from '../data/fagsakContextApi';
+import { FagsakApiKeys, requestFagsakApi } from '../data/fagsakContextApi';
 import { FagsakSearchIndex } from './FagsakSearchIndex';
 
 const mockHistoryPush = vi.fn();
@@ -15,7 +15,6 @@ const mockHistoryPush = vi.fn();
 vi.mock('react-router-dom', async () => {
   const actual = await vi.importActual('react-router-dom');
   return {
-    // @ts-ignore
     ...actual,
     useNavigate: () => mockHistoryPush,
   };
