@@ -1,14 +1,14 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { Heading } from '@navikt/ds-react';
+import { BodyShort } from '@navikt/ds-react';
 import { Location } from 'history';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
 
 interface Props {
   skjermlenke?: string;
-  behandlingLocation: Location;
+  behandlingLocation: Location | undefined;
   getKodeverknavn: (kode: string, kodeverk: KodeverkType, undertype?: string) => string;
   createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeKode: string) => Location | undefined;
 }
@@ -25,7 +25,7 @@ export const Skjermlenke = ({
   getKodeverknavn,
   createLocationForSkjermlenke,
 }: Props) => {
-  if (!skjermlenke) {
+  if (!skjermlenke || !behandlingLocation) {
     return null;
   }
 
@@ -35,10 +35,10 @@ export const Skjermlenke = ({
   }
 
   return (
-    <Heading size="xsmall">
+    <BodyShort size="medium">
       <NavLink to={location} onClick={scrollUp}>
         {getKodeverknavn(skjermlenke, KodeverkType.SKJERMLENKE_TYPE)}
       </NavLink>
-    </Heading>
+    </BodyShort>
   );
 };

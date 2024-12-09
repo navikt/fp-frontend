@@ -3,9 +3,9 @@ import { HistorikkAktor } from '@navikt/fp-kodeverk';
 export type Historikkinnslag = Readonly<{
   aktør: HistorikkUtfører;
   opprettetTidspunkt: string;
-  behandlingUuid: string;
+  behandlingUuid: string | null;
   skjermlenke: string | null;
-  dokumenter: HistorikkInnslagDokumentLink[];
+  dokumenter: HistorikkInnslagDokumentLink[] | null;
   tittel: string | null;
   linjer: Linje[];
 }>;

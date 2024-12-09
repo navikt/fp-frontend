@@ -12,7 +12,6 @@ interface Props {
   behandlingUuid?: string;
   historikkinnslagFpSak?: Historikkinnslag[];
   historikkinnslagFpTilbake?: Historikkinnslag[];
-  kjønn: string;
 }
 
 export const HistorikkIndex = ({
@@ -20,7 +19,6 @@ export const HistorikkIndex = ({
   behandlingUuid,
   historikkinnslagFpSak,
   historikkinnslagFpTilbake,
-  kjønn,
 }: Props) => {
   const alleKodeverkFpSak = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK);
   const alleKodeverkFpTilbake = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK_FPTILBAKE);
@@ -44,7 +42,6 @@ export const HistorikkIndex = ({
       getBehandlingLocation={getBehandlingLocation}
       createLocationForSkjermlenke={createLocationForSkjermlenke}
       valgtBehandlingUuid={behandlingUuid}
-      kjønn={kjønn}
     />
   );
 };
