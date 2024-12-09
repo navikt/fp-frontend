@@ -1,8 +1,8 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 
 import { ToggleGroup } from '@navikt/ds-react';
 
-import JournalDokument from '../../../typer/journalDokumentTsType';
+import { JournalDokument } from '../../../typer/journalDokumentTsType';
 
 import styles from './dokumentVelger.module.css';
 
@@ -19,13 +19,13 @@ const lagForkortetNavn = (dok: JournalDokument): string => {
   return dok.tittel;
 };
 
-type OwnProps = {
+type Props = {
   setValgtDokument: (dok: JournalDokument) => void;
   valgtDokument: JournalDokument;
   dokumenter: JournalDokument[];
 };
 
-const DokumentVelger: FunctionComponent<OwnProps> = ({ setValgtDokument, valgtDokument, dokumenter }) => {
+export const DokumentVelger = ({ setValgtDokument, valgtDokument, dokumenter }: Props) => {
   if (dokumenter.length < 2) {
     return null;
   }
@@ -49,5 +49,3 @@ const DokumentVelger: FunctionComponent<OwnProps> = ({ setValgtDokument, valgtDo
     </div>
   );
 };
-
-export default DokumentVelger;

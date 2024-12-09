@@ -1,157 +1,171 @@
-import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
 import { Heading } from '@navikt/ds-react';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
+import { QueryCache, QueryClient, QueryClientProvider, useMutation, useQuery } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { HTTPError } from 'ky';
 
-import { RestApiState, useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
+import { EventType } from '@navikt/fp-rest-api';
+import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 import { NavAnsatt } from '@navikt/fp-types';
 
-import JournalføringHeader from './components/header/JournalføringHeader';
-import JournalføringIndex from './components/JournalføringIndex';
-import JournalforingPanel from './components/JournalforingPanel';
-import JournalførtSubmitModal from './components/journalpost/modal/JournalførtSubmitModal';
-import { requestApi, restApiHooks, RestApiPathsKeys } from './data/fpfordelRestApi';
-import JournalførSubmitValue from './typer/ferdigstillJournalføringSubmit';
-import Journalpost from './typer/journalpostTsType';
-import Oppgave from './typer/oppgaveTsType';
-import ReserverOppgaveType from './typer/reserverOppgaveType';
+import { JournalføringHeader } from './components/header/JournalføringHeader';
+import { JournalføringIndex } from './components/JournalføringIndex';
+import { JournalførtSubmitModal } from './components/journalpost/modal/JournalførtSubmitModal';
+import {
+  ferdigstillJournalføring,
+  flyttOppgaveTilGosys,
+  hentAlleJournalOppgaver,
+  hentJournalpostDetaljer,
+  knyttJournalpostTilAnnenSak,
+  reserverBruker,
+} from './data/fpFordelApi';
+import { JournalførSubmitValue } from './typer/ferdigstillJournalføringSubmit';
+import { Oppgave } from './typer/oppgaveTsType';
+import { ReserverOppgaveType } from './typer/reserverOppgaveType';
 
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
-const TOM_ARRAY: Oppgave[] = [];
 
-interface OwnProps {
+const createQueryClient = (addErrorMessage: (data: any) => void) =>
+  new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: process.env.NODE_ENV === 'test' ? false : 3,
+        staleTime: 100,
+      },
+    },
+    queryCache: new QueryCache({
+      onError: error => {
+        // TODO Dette er ein forenkela kopi av dagens feilhåndtering. Refaktorer og flytt når Tanstack Query blir brukt over alt
+        if (error instanceof HTTPError) {
+          if (error.response.status === 403) {
+            addErrorMessage({ type: EventType.REQUEST_FORBIDDEN, feilmelding: error.message });
+          } else if (error.response.status === 401) {
+            addErrorMessage({ type: EventType.REQUEST_UNAUTHORIZED, feilmelding: error.message });
+          } else if (error.response.status === 504 || error.response.status === 404) {
+            addErrorMessage({
+              type: EventType.REQUEST_GATEWAY_TIMEOUT_OR_NOT_FOUND,
+              //@ts-expect-error
+              location: error.response?.config?.url,
+            });
+          } else {
+            addErrorMessage({ type: EventType.REQUEST_ERROR, feilmelding: error.message });
+          }
+        } else {
+          addErrorMessage({ type: EventType.REQUEST_ERROR, feilmelding: error.message });
+        }
+      },
+    }),
+  });
+
+interface Props {
   navAnsatt?: NavAnsatt;
 }
 
-/**
- * JournalforingIndex - Toppkomponent, orkestrerer restkall for journalføring
- */
-const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
-  const [valgtOppgave, setValgtOppgave] = useState<Oppgave | undefined>(undefined);
-  const [valgtJournalpost, setValgtJournalpost] = useState<Journalpost | undefined>(undefined);
-  const [visModal, setVisModal] = useState(false);
-  const [harSøktOgFunnetIngenMatch, setHarSøktOgFunnetIngenMatch] = useState(false);
-  const [isLoadingSubmit, setIsLoadingSubmit] = useState(false);
-
-  const avbrytVisningAvJournalpost = useCallback(() => {
-    setValgtOppgave(undefined);
-    setHarSøktOgFunnetIngenMatch(false);
-    setValgtJournalpost(undefined);
-  }, [valgtOppgave]);
-
-  const {
-    startRequest: innhentAlleOppgaver,
-    data: alleOppgaver = TOM_ARRAY,
-    state: innhentOppgaverState,
-  } = restApiHooks.useRestApiRunner(RestApiPathsKeys.ALLE_JOURNAL_OPPGAVER);
-
+export const OppgaveJournalføringIndex = (props: Props) => {
   const { addErrorMessage } = useRestApiErrorDispatcher();
-  requestApi.setAddErrorMessageHandler(addErrorMessage);
+  const queryClient = useMemo(() => createQueryClient(addErrorMessage), []);
 
-  const lukkModal = useCallback(() => {
-    setVisModal(false);
-  }, []);
+  return (
+    <RawIntlProvider value={intl}>
+      <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools /> <JournalforingIndex {...props} />
+      </QueryClientProvider>
+    </RawIntlProvider>
+  );
+};
+
+/**
+ * Toppkomponent, orkestrerer restkall for journalføring
+ */
+export const JournalforingIndex = ({ navAnsatt }: Props) => {
+  const [valgtOppgave, setValgtOppgave] = useState<Oppgave | undefined>(undefined);
+  const [visModal, setVisModal] = useState(false);
 
   const {
-    startRequest: hentJournalpostKall,
-    data: hentetJournalpost,
-    state: hentJournalpostState,
-  } = restApiHooks.useRestApiRunner(RestApiPathsKeys.HENT_JOURNALPOST_DETALJER);
+    data: alleOppgaver,
+    refetch: innhentAlleOppgaverPåNytt,
+    status,
+  } = useQuery(hentAlleJournalOppgaver(navAnsatt?.brukernavn));
 
-  const { startRequest: submitJournalføringNySak, data: saksnumerJournalføringNySak } = restApiHooks.useRestApiRunner(
-    RestApiPathsKeys.FERDIGSTILL_JOURNALFØRING,
-  );
+  const {
+    mutate: hentJournalpost,
+    data: valgtJournalpost,
+    reset: resetValgtJournalpost,
+    status: hentJournalpostStatus,
+  } = useMutation({
+    mutationFn: hentJournalpostDetaljer,
+  });
 
-  const { startRequest: knyttTilAnnenSak, data: saksnummerNySakKnyttAnnenSak } = restApiHooks.useRestApiRunner(
-    RestApiPathsKeys.KNYTT_JOURNALPOST_TIL_ANNEN_SAK,
-  );
-
-  const { startRequest: reserverOppgave } = restApiHooks.useRestApiRunner(RestApiPathsKeys.RESERVER_OPPGAVE);
-
-  const { startRequest: flyttTilGosys } = restApiHooks.useRestApiRunner(RestApiPathsKeys.FLYTT_OPPGAVE_TIL_GOSYS);
-
-  const reserverCallback = useCallback(
-    (data: ReserverOppgaveType) => {
-      reserverOppgave(data).then(() => {
-        if (navAnsatt?.brukernavn) {
-          innhentAlleOppgaver({ ident: navAnsatt.brukernavn }, true);
-        }
-      });
-      if (valgtOppgave) {
-        setValgtOppgave({ ...valgtOppgave, reservertAv: data.reserverFor });
-      }
+  const {
+    mutate: submitJournalføringNySak,
+    data: saksnumerJournalføringNySak,
+    isPending: submitJournalføringIsPending,
+  } = useMutation({
+    mutationFn: ferdigstillJournalføring,
+    onSuccess: () => {
+      innhentAlleOppgaverPåNytt();
+      avbrytVisningAvJournalpost();
     },
-    [valgtOppgave],
-  );
+  });
 
-  const hentJournalpost = useCallback(
-    (journalpostId: string) => {
-      hentJournalpostKall({ journalpostId });
+  const {
+    mutate: knyttTilAnnenSak,
+    data: saksnummerNySakKnyttAnnenSak,
+    isPending: knyttTilAnnenSakIsPending,
+  } = useMutation({
+    mutationFn: knyttJournalpostTilAnnenSak,
+    onSuccess: () => {
+      innhentAlleOppgaverPåNytt();
+      avbrytVisningAvJournalpost();
     },
-    [valgtJournalpost],
-  );
+  });
 
-  const velgOppgaveOgHentJournalpost = useCallback((oppgave: Oppgave) => {
+  const { mutate: reserverOppgave } = useMutation({
+    mutationFn: reserverBruker,
+    onSuccess: () => {
+      innhentAlleOppgaverPåNytt();
+    },
+  });
+
+  const { mutate: flyttTilGosys } = useMutation({
+    mutationFn: flyttOppgaveTilGosys,
+    onSuccess: () => {
+      innhentAlleOppgaverPåNytt();
+    },
+  });
+
+  const avbrytVisningAvJournalpost = () => {
+    setValgtOppgave(undefined);
+    resetValgtJournalpost();
+  };
+
+  const reserverCallback = (data: ReserverOppgaveType) => {
+    reserverOppgave(data);
+    if (valgtOppgave) {
+      setValgtOppgave({ ...valgtOppgave, reservertAv: data.reserverFor });
+    }
+  };
+
+  const velgOppgaveOgHentJournalpost = (oppgave: Oppgave) => {
     setValgtOppgave(oppgave);
     hentJournalpost(oppgave.journalpostId);
-  }, []);
+  };
 
-  const journalførCallback = useCallback(
-    (data: JournalførSubmitValue, erAlleredeJournalført: boolean) => {
-      setIsLoadingSubmit(true);
-      setVisModal(true);
-      if (erAlleredeJournalført) {
-        knyttTilAnnenSak(data).then(() => {
-          if (navAnsatt?.brukernavn) {
-            innhentAlleOppgaver({ ident: navAnsatt.brukernavn });
-            avbrytVisningAvJournalpost();
-            setIsLoadingSubmit(false);
-          }
-        });
-      } else {
-        submitJournalføringNySak(data).then(() => {
-          if (navAnsatt?.brukernavn) {
-            innhentAlleOppgaver({ ident: navAnsatt.brukernavn });
-            avbrytVisningAvJournalpost();
-            setIsLoadingSubmit(false);
-          }
-        });
-      }
-    },
-    [valgtOppgave],
-  );
-
-  const flyttOppgaveTilGosysCallback = useCallback(
-    (data: string) => {
-      flyttTilGosys({ journalpostId: data }).then(() => {
-        if (navAnsatt?.brukernavn) {
-          innhentAlleOppgaver({ ident: navAnsatt.brukernavn }, true);
-        }
-      });
-    },
-    [valgtOppgave],
-  );
-
-  useEffect(() => {
-    if (navAnsatt) {
-      innhentAlleOppgaver({ ident: navAnsatt.brukernavn });
+  const journalførCallback = (data: JournalførSubmitValue, erAlleredeJournalført: boolean) => {
+    setVisModal(true);
+    if (erAlleredeJournalført) {
+      knyttTilAnnenSak(data);
+    } else {
+      submitJournalføringNySak(data);
     }
-  }, [navAnsatt]);
+  };
 
-  useEffect(() => {
-    if (hentJournalpostState === RestApiState.SUCCESS) {
-      setValgtJournalpost(hentetJournalpost);
-      setHarSøktOgFunnetIngenMatch(!valgtJournalpost);
-    }
-  }, [hentJournalpostState]);
-
-  if (innhentOppgaverState === RestApiState.NOT_STARTED || innhentOppgaverState === RestApiState.LOADING) {
-    return <LoadingPanel />;
-  }
   if (!navAnsatt) {
     return (
       <Heading size="medium">
@@ -159,39 +173,40 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
       </Heading>
     );
   }
+
+  if (status === 'pending') {
+    return <LoadingPanel />;
+  }
+
   return (
-    <RawIntlProvider value={intl}>
+    <>
       <JournalføringHeader
         avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
-        harSøktOgFunnetIngenMatch={harSøktOgFunnetIngenMatch}
+        harHentetFerdigJournalpost={hentJournalpostStatus === 'success'}
         valgtJournalpost={valgtJournalpost}
         hentJournalpost={hentJournalpost}
         antallOppgaver={alleOppgaver ? alleOppgaver.length : undefined}
       />
       {visModal && (
         <JournalførtSubmitModal
-          isLoading={isLoadingSubmit}
-          lukkModal={lukkModal}
+          isLoading={knyttTilAnnenSakIsPending || submitJournalføringIsPending}
+          lukkModal={() => {
+            setVisModal(false);
+          }}
           showModal={visModal}
           saksnummer={saksnumerJournalføringNySak || saksnummerNySakKnyttAnnenSak}
         />
       )}
-      <JournalforingPanel>
-        <JournalføringIndex
-          valgtOppgave={valgtOppgave}
-          valgtJournalpost={valgtJournalpost}
-          oppgaver={alleOppgaver}
-          navAnsatt={navAnsatt}
-          velgOppgaveOgHentJournalpost={velgOppgaveOgHentJournalpost}
-          hentJournalpost={hentJournalpost}
-          avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
-          submitJournalføring={journalførCallback}
-          reserverOppgave={reserverCallback}
-          flyttTilGosys={flyttOppgaveTilGosysCallback}
-        />
-      </JournalforingPanel>
-    </RawIntlProvider>
+      <JournalføringIndex
+        valgtOppgave={valgtOppgave}
+        valgtJournalpost={valgtJournalpost}
+        navAnsatt={navAnsatt}
+        velgOppgaveOgHentJournalpost={velgOppgaveOgHentJournalpost}
+        avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
+        submitJournalføring={journalførCallback}
+        reserverOppgave={reserverCallback}
+        flyttTilGosys={flyttTilGosys}
+      />
+    </>
   );
 };
-
-export default JournalforingIndex;

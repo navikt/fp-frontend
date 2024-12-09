@@ -1,4 +1,4 @@
-import Sakstype from '../kodeverk/sakstype';
+import { Sakstype } from '../kodeverk/sakstype';
 
 export type DokumentTittelSubmitValue = Readonly<{
   dokumentId: string;
@@ -27,5 +27,3 @@ export type JournalførSubmitValue = JournalførSakSubmitValue &
     enhetId: string;
     oppdaterTitlerDto?: OppdaterJournalførTittlerSubmitValue;
   }>;
-
-export default JournalførSubmitValue;
