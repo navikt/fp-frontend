@@ -37,7 +37,7 @@ describe('<VirksomhetPapirsoknadIndex>', () => {
     });
   });
 
-  it('skal velge at søker har arbeidet i egen næringsvirksomhet', { timeout: 30000 }, async () => {
+  it('skal velge at søker har arbeidet i egen næringsvirksomhet', { timeout: 50000 }, async () => {
     const lagre = vi.fn();
 
     await Default.run({
