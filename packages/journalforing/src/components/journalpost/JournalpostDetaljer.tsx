@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
@@ -8,27 +8,29 @@ import { Form } from '@navikt/ft-form-hooks';
 import { NavAnsatt } from '@navikt/fp-types';
 
 import { erEndeligJournalført } from '../../kodeverk/journalpostTilstand';
-import OppgaveKilde from '../../kodeverk/oppgaveKilde';
-import JournalførSubmitValue, {
+import { OppgaveKilde } from '../../kodeverk/oppgaveKilde';
+import {
   DokumentTittelSubmitValue,
+  JournalførSubmitValue,
   OppdaterJournalførTittlerSubmitValue,
 } from '../../typer/ferdigstillJournalføringSubmit';
-import ForhåndsvisBrukerRespons from '../../typer/forhåndsvisBrukerResponsTsType';
-import JournalFagsak from '../../typer/journalFagsakTsType';
-import JournalføringFormValues from '../../typer/journalføringFormValues';
-import Journalpost from '../../typer/journalpostTsType';
-import OppdaterMedBruker from '../../typer/oppdaterBrukerTsType';
-import Oppgave from '../../typer/oppgaveTsType';
-import ReserverOppgaveType from '../../typer/reserverOppgaveType';
-import BrukerAvsenderPanel from './innhold/BrukerAvsenderPanel';
-import DokumentForm, {
+import { ForhåndsvisBrukerRespons } from '../../typer/forhåndsvisBrukerResponsTsType';
+import { JournalFagsak } from '../../typer/journalFagsakTsType';
+import { JournalføringFormValues } from '../../typer/journalføringFormValues';
+import { Journalpost } from '../../typer/journalpostTsType';
+import { OppdaterMedBruker } from '../../typer/oppdaterBrukerTsType';
+import { Oppgave } from '../../typer/oppgaveTsType';
+import { ReserverOppgaveType } from '../../typer/reserverOppgaveType';
+import { BrukerAvsenderPanel } from './innhold/BrukerAvsenderPanel';
+import {
   buildInitialValues as buildInitialValuesFlereDokumenter,
+  DokumentForm,
   transformValues as transformValuesFlereDokumenter,
 } from './innhold/DokumentForm';
-import JournalpostTittelForm from './innhold/JournalpostTittelForm';
-import Reservasjonspanel from './innhold/Reservasjonspanel';
-import SakDetaljer from './innhold/SakDetaljer';
-import VelgSakForm, { transformValues as transformValuesSak } from './innhold/VelgSakForm';
+import { JournalpostTittelForm } from './innhold/JournalpostTittelForm';
+import { Reservasjonspanel } from './innhold/Reservasjonspanel';
+import { SakDetaljer } from './innhold/SakDetaljer';
+import { transformValues as transformValuesSak, VelgSakForm } from './innhold/VelgSakForm';
 
 const dokumentTittelSkalStyresAvJournalpost = (jp: Journalpost): boolean => jp.dokumenter?.length === 1;
 
@@ -99,7 +101,7 @@ const transformValues = (
   };
 };
 
-type OwnProps = Readonly<{
+type Props = Readonly<{
   journalpost: Journalpost;
   oppgave?: Oppgave;
   avbrytVisningAvJournalpost: () => void;
@@ -116,7 +118,7 @@ type OwnProps = Readonly<{
 /**
  * JournalpostDetaljer - Viser detaljer om valgt journalpost
  */
-const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
+export const JournalpostDetaljer = ({
   journalpost,
   oppgave,
   avbrytVisningAvJournalpost,
@@ -128,16 +130,12 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
   reserverOppgave,
   navAnsatt,
   flyttTilGosys,
-}) => {
-  const skalKunneEndreSøker = !journalpost.bruker;
-  const erLokalOppgave: boolean = oppgave?.kilde === OppgaveKilde.LOKAL;
-  const skalBareKunneEndreSak = erEndeligJournalført(journalpost.tilstand);
-
-  const saker = journalpost.fagsaker || [];
+}: Props) => {
   const formMethods = useForm<JournalføringFormValues>({
     defaultValues: buildInitialValues(journalpost),
   });
-  const submitJournal = useCallback((values: JournalføringFormValues) => {
+
+  const submitJournal = (values: JournalføringFormValues) => {
     if (erEndeligJournalført(journalpost.tilstand)) {
       submitJournalføring(transformValues(values, journalpost, journalpost.journalførendeEnhet), true);
     } else {
@@ -146,7 +144,12 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
       }
       submitJournalføring(transformValues(values, journalpost, oppgave.enhetId), false);
     }
-  }, []);
+  };
+
+  const skalKunneEndreSøker = !journalpost.bruker;
+  const skalBareKunneEndreSak = erEndeligJournalført(journalpost.tilstand);
+
+  const saker = journalpost.fagsaker || [];
 
   const isSubmittable = formMethods.formState.isDirty;
 
@@ -217,7 +220,7 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
             journalpost={journalpost}
             avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
             erKlarForJournalføring={!skalKunneEndreSøker}
-            erLokalOppgave={erLokalOppgave}
+            erLokalOppgave={oppgave?.kilde === OppgaveKilde.LOKAL}
             flyttTilGosys={flyttTilGosys}
           />
         </div>
@@ -225,4 +228,3 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
     </Form>
   );
 };
-export default JournalpostDetaljer;

@@ -3,11 +3,9 @@ export type DokumentTittelFormValues = Readonly<{
   tittel?: string;
 }>;
 
-type JournalføringFormValues = Readonly<{
+export type JournalføringFormValues = Readonly<{
   saksnummerValg?: string;
   ytelsetypeValg?: string;
   journalpostTittel?: string;
   journalpostDokumenter?: DokumentTittelFormValues[];
 }>;
-
-export default JournalføringFormValues;

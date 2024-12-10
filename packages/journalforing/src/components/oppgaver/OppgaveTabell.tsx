@@ -1,19 +1,20 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Table } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { useQuery } from '@tanstack/react-query';
 
 import { NavAnsatt } from '@navikt/fp-types';
 
-import Oppgave from '../../typer/oppgaveTsType';
-import ReserverOppgaveType from '../../typer/reserverOppgaveType';
-import OppgaveTabellRad from './OppgaveTabellRad';
+import { hentAlleJournalOppgaver } from '../../data/fpFordelApi';
+import { Oppgave } from '../../typer/oppgaveTsType';
+import { ReserverOppgaveType } from '../../typer/reserverOppgaveType';
+import { OppgaveTabellRad } from './OppgaveTabellRad';
 
 import styles from './oppgaveTabell.module.css';
 
-type OwnProps = Readonly<{
-  oppgaver: Oppgave[];
+type Props = Readonly<{
   velgOppgaveOgHentJournalpost: (oppgave: Oppgave) => void;
   navAnsatt: NavAnsatt;
   reserverOppgave: (data: ReserverOppgaveType) => void;
@@ -22,13 +23,10 @@ type OwnProps = Readonly<{
 /**
  * OppgaveTabell - Presenterer liste over oppgaver og tar inn callback for å sette valgt oppgave
  */
-const OppgaveTabell: FunctionComponent<OwnProps> = ({
-  oppgaver,
-  velgOppgaveOgHentJournalpost,
-  navAnsatt,
-  reserverOppgave,
-}) => {
-  if (oppgaver.length < 1) {
+export const OppgaveTabell = ({ velgOppgaveOgHentJournalpost, navAnsatt, reserverOppgave }: Props) => {
+  const { data: oppgaver } = useQuery(hentAlleJournalOppgaver(navAnsatt.brukernavn));
+
+  if ((oppgaver || []).length < 1) {
     return (
       <>
         <VerticalSpacer eightPx />
@@ -39,6 +37,7 @@ const OppgaveTabell: FunctionComponent<OwnProps> = ({
       </>
     );
   }
+
   return (
     <div>
       <Table>
@@ -69,7 +68,7 @@ const OppgaveTabell: FunctionComponent<OwnProps> = ({
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {oppgaver.map(oppgave => (
+          {(oppgaver || []).map(oppgave => (
             <OppgaveTabellRad
               oppgave={oppgave}
               velgOppgaveOgHentJournalpost={velgOppgaveOgHentJournalpost}
@@ -83,4 +82,3 @@ const OppgaveTabell: FunctionComponent<OwnProps> = ({
     </div>
   );
 };
-export default OppgaveTabell;

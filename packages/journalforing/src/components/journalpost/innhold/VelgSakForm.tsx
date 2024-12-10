@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement, useCallback, useMemo } from 'react';
+import React, { ReactElement } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 
@@ -10,11 +10,11 @@ import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { FagsakYtelseType } from '@navikt/fp-kodeverk';
 
 import { erEndeligJournalført } from '../../../kodeverk/journalpostTilstand';
-import Sakstype from '../../../kodeverk/sakstype';
+import { Sakstype } from '../../../kodeverk/sakstype';
 import { JournalførSakSubmitValue } from '../../../typer/ferdigstillJournalføringSubmit';
-import JournalFagsak from '../../../typer/journalFagsakTsType';
-import JournalføringFormValues from '../../../typer/journalføringFormValues';
-import Journalpost from '../../../typer/journalpostTsType';
+import { JournalFagsak } from '../../../typer/journalFagsakTsType';
+import { JournalføringFormValues } from '../../../typer/journalføringFormValues';
+import { Journalpost } from '../../../typer/journalpostTsType';
 
 import styles from './velgSakForm.module.css';
 
@@ -122,7 +122,7 @@ const lagRadioOptions = (journalpost: Journalpost, intl: IntlShape, fetTekst: an
   return radioOptions;
 };
 
-type OwnProps = Readonly<{
+type Props = Readonly<{
   journalpost: Journalpost;
   isSubmittable: boolean;
   avbrytVisningAvJournalpost: () => void;
@@ -134,26 +134,21 @@ type OwnProps = Readonly<{
 /**
  * VelgSakForm - Inneholder formen som lar saksbehandler velge en sak og journalføre dokumentet på, evt opprette ny sak.
  */
-const VelgSakForm: FunctionComponent<OwnProps> = ({
+export const VelgSakForm = ({
   journalpost,
   isSubmittable,
   avbrytVisningAvJournalpost,
   erKlarForJournalføring,
   erLokalOppgave,
   flyttTilGosys,
-}) => {
+}: Props) => {
   const intl = useIntl();
+
   const finnesSaker = journalpost.fagsaker && journalpost.fagsaker.length > 0;
+  const fetTekst = (chunks: any) => <b>{chunks}</b>;
+
   const formMethods = useFormContext<JournalføringFormValues>();
   const sakValg = formMethods.watch(radioFieldName);
-  const skalOppretteSak = sakValg === LAG_NY_SAK;
-  const skalFørePåGenerellSak = sakValg === LAG_GENERELL_SAK;
-  const fetTekst = useCallback((chunks: any) => <b>{chunks}</b>, []);
-  const radioOptions = useMemo(() => lagRadioOptions(journalpost, intl, fetTekst), [journalpost]);
-
-  const flyttOppgaveTilGosysAction = useCallback(() => {
-    flyttTilGosys(journalpost.journalpostId);
-  }, [flyttTilGosys]);
 
   return (
     <>
@@ -178,9 +173,9 @@ const VelgSakForm: FunctionComponent<OwnProps> = ({
           hideLegend
           label={intl.formatMessage({ id: 'ValgtOppgave.RelaterteSaker' })}
           validate={[required]}
-          radios={radioOptions}
+          radios={lagRadioOptions(journalpost, intl, fetTekst)}
         />
-        {skalOppretteSak && (
+        {sakValg === LAG_NY_SAK && (
           <>
             <VerticalSpacer eightPx />
             <SelectField
@@ -197,7 +192,7 @@ const VelgSakForm: FunctionComponent<OwnProps> = ({
             <VerticalSpacer twentyPx />
           </>
         )}
-        {skalFørePåGenerellSak && (
+        {sakValg === LAG_GENERELL_SAK && (
           <>
             <VerticalSpacer eightPx />
             <Alert variant="info">
@@ -217,7 +212,14 @@ const VelgSakForm: FunctionComponent<OwnProps> = ({
           </Button>
           {erLokalOppgave && (
             <div className={styles.colMargin}>
-              <Button size="small" variant="primary" type="button" onClick={flyttOppgaveTilGosysAction}>
+              <Button
+                size="small"
+                variant="primary"
+                type="button"
+                onClick={() => {
+                  flyttTilGosys(journalpost.journalpostId);
+                }}
+              >
                 <FormattedMessage id="ValgtOppgave.Flytt.Til.Gosys" />
               </Button>
             </div>
@@ -227,4 +229,3 @@ const VelgSakForm: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-export default VelgSakForm;

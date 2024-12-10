@@ -1,4 +1,4 @@
-enum DokumentTittel {
+export enum DokumentTittel {
   SØKNAD_FORELDREPEMGER_ENDRING_KVOTE = 'Søknad om endring av uttak av foreldrepenger eller overføring av kvote',
   SØKNAD_ENGANGSSTØNAD_ADOPSJON = 'Søknad om engangsstønad ved adopsjon',
   SØKNAD_ENGANGSSTØNAD_FØDSEL = 'Søknad om engangsstønad ved fødsel',
@@ -36,5 +36,3 @@ enum DokumentTittel {
 export const listeMedTittler = Object.values(DokumentTittel)
   .filter(tittel => Number.isNaN(Number(tittel)))
   .sort((t1, t2) => t1.localeCompare(t2));
-
-export default DokumentTittel;

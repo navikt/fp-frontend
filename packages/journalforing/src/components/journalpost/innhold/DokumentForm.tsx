@@ -1,11 +1,11 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 
 import { DokumentTittelSubmitValue } from '../../../typer/ferdigstillJournalføringSubmit';
-import JournalDokument from '../../../typer/journalDokumentTsType';
-import JournalføringFormValues, { DokumentTittelFormValues } from '../../../typer/journalføringFormValues';
-import Journalpost from '../../../typer/journalpostTsType';
-import DokumentDetaljer from './DokumentDetaljer';
+import { JournalDokument } from '../../../typer/journalDokumentTsType';
+import { DokumentTittelFormValues, JournalføringFormValues } from '../../../typer/journalføringFormValues';
+import { Journalpost } from '../../../typer/journalpostTsType';
+import { DokumentDetaljer } from './DokumentDetaljer';
 
 const TOM_DOK_LISTE: JournalDokument[] = [];
 
@@ -47,7 +47,7 @@ export const transformValues = (
     .map(dokVal => ({ dokumentId: dokVal.dokumentId, tittel: finnTittelEllerFeil(dokVal) }));
 };
 
-type OwnProps = Readonly<{
+type Props = Readonly<{
   journalpost: Journalpost;
   dokumentTittelStyresAvJournalpostTittel: boolean;
 }>;
@@ -55,7 +55,7 @@ type OwnProps = Readonly<{
 /**
  * DokumentForm - Inneholder form behandling av dokumenter og setter opp visning av hvert dokument
  */
-const DokumentForm: FunctionComponent<OwnProps> = ({ journalpost, dokumentTittelStyresAvJournalpostTittel }) => {
+export const DokumentForm = ({ journalpost, dokumentTittelStyresAvJournalpostTittel }: Props) => {
   const { control } = useFormContext<JournalføringFormValues>();
   const { fields } = useFieldArray({
     control,
@@ -75,4 +75,3 @@ const DokumentForm: FunctionComponent<OwnProps> = ({ journalpost, dokumentTittel
     </>
   );
 };
-export default DokumentForm;
