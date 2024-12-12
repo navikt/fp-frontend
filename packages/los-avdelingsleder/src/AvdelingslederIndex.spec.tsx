@@ -2,6 +2,7 @@ import React from 'react';
 
 import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
+import { applyRequestHandlers } from 'msw-storybook-addon';
 
 import * as stories from './AvdelingslederIndex.stories';
 
@@ -10,11 +11,13 @@ const { Default, HarIkkeTilgang, LasteIkonFørValgtAvdelingErSatt, SkalFiltrereB
 
 describe('<AvdelingslederIndex>', () => {
   it.skip('skal vise lasteikon før valgt avdeling er satt', async () => {
+    await applyRequestHandlers(LasteIkonFørValgtAvdelingErSatt.parameters.msw);
     render(<LasteIkonFørValgtAvdelingErSatt />);
     expect(await screen.findByText('venter...')).toBeInTheDocument();
   });
 
   it('skal vise avdelingsleder dashboard etter at valgt avdeling er satt', async () => {
+    await applyRequestHandlers(Default.parameters.msw);
     render(<Default />);
     expect(await screen.findByText('Gjeldende behandlingskøer')).toBeInTheDocument();
     expect(screen.getByText('Nøkkeltall')).toBeInTheDocument();
@@ -26,11 +29,13 @@ describe('<AvdelingslederIndex>', () => {
   });
 
   it('skal vise at en ikke har tilgang til avdelingsleder-siden', async () => {
+    await applyRequestHandlers(HarIkkeTilgang.parameters.msw);
     render(<HarIkkeTilgang />);
     expect(await screen.findByText('Du har ikke tilgang til å bruke dette programmet')).toBeInTheDocument();
   });
 
   it('skal filtere bort avdelinger som krever kode 6 når avdelingsleder ikke har tilgang til dette', async () => {
+    await applyRequestHandlers(SkalFiltrereBortAvdelingerSomKreverKode6.parameters.msw);
     render(<SkalFiltrereBortAvdelingerSomKreverKode6 />);
     expect(await screen.findByText('Gjeldende behandlingskøer')).toBeInTheDocument();
     expect(screen.getByText('123 Nav Vikafossen')).toBeInTheDocument();

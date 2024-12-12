@@ -1,1 +1,1 @@
-export { default as AvdelingslederIndex } from './src/AvdelingslederIndex';
+export { AvdelingslederIndex } from './src/AvdelingslederIndex';
