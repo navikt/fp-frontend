@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 
 import { Form } from '@navikt/ft-form-hooks';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
@@ -34,8 +33,6 @@ const meta = {
   args: {
     valgtSakslisteId: 1,
     valgtAvdelingEnhet: 'Nav Vikafossen',
-    hentAvdelingensSakslister: action('button-click'),
-    hentAntallOppgaver: action('button-click'),
   },
   render: args => {
     const formMethods = useForm({

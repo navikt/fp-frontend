@@ -3,32 +3,34 @@ import { FormattedMessage } from 'react-intl';
 
 import { Label, VStack } from '@navikt/ds-react';
 import { CheckboxField } from '@navikt/ft-form-hooks';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
 
-import { lagreSakslisteFagsakYtelseType } from '../../../data/fplosAvdelingslederApi';
+import { lagreSakslisteFagsakYtelseType, LosUrl } from '../../../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
 
 interface Props {
   valgtSakslisteId: number;
   valgtAvdelingEnhet: string;
-  hentAvdelingensSakslister: () => void;
-  hentAntallOppgaver: () => void;
 }
 
-export const FagsakYtelseTypeVelger = ({
-  valgtSakslisteId,
-  valgtAvdelingEnhet,
-  hentAvdelingensSakslister,
-  hentAntallOppgaver,
-}: Props) => {
+export const FagsakYtelseTypeVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }: Props) => {
+  const queryClient = useQueryClient();
+
   const { mutate: lagreFagsakYtelseType } = useMutation({
     mutationFn: (values: { sakslisteId: number; avdelingEnhet: string; fagsakYtelseType: string; checked: boolean }) =>
       lagreSakslisteFagsakYtelseType(values.sakslisteId, values.avdelingEnhet, values.fagsakYtelseType, values.checked),
     onSuccess: () => {
-      hentAntallOppgaver();
-      hentAvdelingensSakslister();
+      queryClient.invalidateQueries({
+        queryKey: [LosUrl.OPPGAVE_ANTALL],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [LosUrl.OPPGAVE_AVDELING_ANTALL],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [LosUrl.SAKSLISTER_FOR_AVDELING],
+      });
     },
   });
 

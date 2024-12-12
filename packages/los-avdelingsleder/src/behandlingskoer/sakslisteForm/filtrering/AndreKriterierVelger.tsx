@@ -5,9 +5,9 @@ import { FormattedMessage } from 'react-intl';
 import { Label, VStack } from '@navikt/ds-react';
 import { CheckboxField, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { lagreSakslisteAndreKriterier } from '../../../data/fplosAvdelingslederApi';
+import { lagreSakslisteAndreKriterier, LosUrl } from '../../../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
 
 import styles from './andreKriterierVelger.module.css';
@@ -15,16 +15,10 @@ import styles from './andreKriterierVelger.module.css';
 interface Props {
   valgtSakslisteId: number;
   valgtAvdelingEnhet: string;
-  hentAvdelingensSakslister: () => void;
-  hentAntallOppgaver: () => void;
 }
 
-export const AndreKriterierVelger = ({
-  valgtSakslisteId,
-  valgtAvdelingEnhet,
-  hentAvdelingensSakslister,
-  hentAntallOppgaver,
-}: Props) => {
+export const AndreKriterierVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }: Props) => {
+  const queryClient = useQueryClient();
   const { setValue, watch } = useFormContext();
 
   const values = watch();
@@ -41,8 +35,15 @@ export const AndreKriterierVelger = ({
         valuesToStore.inkluder,
       ),
     onSuccess: () => {
-      hentAntallOppgaver();
-      hentAvdelingensSakslister();
+      queryClient.invalidateQueries({
+        queryKey: [LosUrl.OPPGAVE_ANTALL],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [LosUrl.OPPGAVE_AVDELING_ANTALL],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [LosUrl.SAKSLISTER_FOR_AVDELING],
+      });
     },
   });
 

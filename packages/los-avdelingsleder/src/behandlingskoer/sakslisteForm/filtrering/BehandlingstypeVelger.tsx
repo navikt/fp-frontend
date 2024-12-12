@@ -3,11 +3,11 @@ import { FormattedMessage } from 'react-intl';
 
 import { Label, VStack } from '@navikt/ds-react';
 import { CheckboxField } from '@navikt/ft-form-hooks';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { BehandlingType, KodeverkType } from '@navikt/fp-kodeverk';
 
-import { lagreSakslisteBehandlingstype } from '../../../data/fplosAvdelingslederApi';
+import { lagreSakslisteBehandlingstype, LosUrl } from '../../../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
 
 const behandlingstypeOrder = Object.values(BehandlingType);
@@ -15,16 +15,11 @@ const behandlingstypeOrder = Object.values(BehandlingType);
 interface Props {
   valgtSakslisteId: number;
   valgtAvdelingEnhet: string;
-  hentAvdelingensSakslister: () => void;
-  hentAntallOppgaver: () => void;
 }
 
-export const BehandlingstypeVelger = ({
-  valgtSakslisteId,
-  valgtAvdelingEnhet,
-  hentAvdelingensSakslister,
-  hentAntallOppgaver,
-}: Props) => {
+export const BehandlingstypeVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }: Props) => {
+  const queryClient = useQueryClient();
+
   const { mutate: lagreBehandlingstype } = useMutation({
     mutationFn: (valuesToStore: { behandlingType: string; checked: boolean }) =>
       lagreSakslisteBehandlingstype(
@@ -34,8 +29,15 @@ export const BehandlingstypeVelger = ({
         valuesToStore.checked,
       ),
     onSuccess: () => {
-      hentAntallOppgaver();
-      hentAvdelingensSakslister();
+      queryClient.invalidateQueries({
+        queryKey: [LosUrl.OPPGAVE_ANTALL],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [LosUrl.OPPGAVE_AVDELING_ANTALL],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [LosUrl.SAKSLISTER_FOR_AVDELING],
+      });
     },
   });
 

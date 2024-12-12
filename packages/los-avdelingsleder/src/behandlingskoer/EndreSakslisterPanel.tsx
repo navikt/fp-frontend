@@ -1,25 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ArrowDownIcon } from '@navikt/aksel-icons';
 import { HStack } from '@navikt/ds-react';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
 
 import {
-  getOppgaverForAvdelingAntall,
-  getSakslisterForAvdeling,
+  oppgaverForAvdelingAntallOptions,
   opprettNySaksliste,
+  sakslisterForAvdelingOptions,
 } from '../data/fplosAvdelingslederApi';
-import { SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType';
 import { GjeldendeSakslisterTabell } from './GjeldendeSakslisterTabell';
 import { SaksbehandlereForSakslisteForm } from './saksbehandlerForm/SaksbehandlereForSakslisteForm';
 import { UtvalgskriterierForSakslisteForm } from './sakslisteForm/UtvalgskriterierForSakslisteForm';
 
 import styles from './endreSakslisterPanel.module.css';
-
-const EMPTY_ARRAY: SakslisteAvdeling[] = [];
 
 interface Props {
   valgtAvdelingEnhet: string;
@@ -30,24 +27,14 @@ export const EndreSakslisterPanel = ({ valgtAvdelingEnhet, avdelingensSaksbehand
   const intl = useIntl();
   const [valgtSakslisteId, setValgtSakslisteId] = useState<number>();
 
-  const { mutate: hentOppgaverForAvdelingAntall, data: oppgaverForAvdelingAntall } = useMutation({
-    mutationFn: () => getOppgaverForAvdelingAntall(valgtAvdelingEnhet),
-  });
-
-  const { mutate: hentAvdelingensSakslister, data: sakslister = EMPTY_ARRAY } = useMutation({
-    mutationFn: () => getSakslisterForAvdeling(valgtAvdelingEnhet),
-  });
-
-  useEffect(() => {
-    hentOppgaverForAvdelingAntall();
-    hentAvdelingensSakslister();
-  }, [valgtAvdelingEnhet]);
+  const { data: oppgaverForAvdelingAntall } = useQuery(oppgaverForAvdelingAntallOptions(valgtAvdelingEnhet));
+  const { data: sakslister, refetch: refetchSakslister } = useQuery(sakslisterForAvdelingOptions(valgtAvdelingEnhet));
 
   const { mutate: lagNySakslisteOgHentAvdelingensSakslisterPåNytt, data: nySakslisteObject } = useMutation({
     mutationFn: async () => {
       const nySaksliste = await opprettNySaksliste(valgtAvdelingEnhet);
       setValgtSakslisteId(undefined);
-      hentAvdelingensSakslister();
+      refetchSakslister();
       return nySaksliste;
     },
   });
@@ -66,7 +53,6 @@ export const EndreSakslisterPanel = ({ valgtAvdelingEnhet, avdelingensSaksbehand
       oppgaverForAvdelingAntall={oppgaverForAvdelingAntall}
       lagNySaksliste={lagNySakslisteOgHentAvdelingensSakslisterPåNytt}
       resetValgtSakslisteId={() => setValgtSakslisteId(undefined)}
-      hentAvdelingensSakslister={hentAvdelingensSakslister}
       content={
         <div
           style={{
@@ -80,8 +66,6 @@ export const EndreSakslisterPanel = ({ valgtAvdelingEnhet, avdelingensSaksbehand
               <UtvalgskriterierForSakslisteForm
                 valgtSaksliste={valgtSaksliste}
                 valgtAvdelingEnhet={valgtAvdelingEnhet}
-                hentAvdelingensSakslister={hentAvdelingensSakslister}
-                hentOppgaverForAvdelingAntall={hentOppgaverForAvdelingAntall}
               />
               <HStack gap="4" justify="center">
                 <ArrowDownIcon
@@ -94,7 +78,6 @@ export const EndreSakslisterPanel = ({ valgtAvdelingEnhet, avdelingensSaksbehand
                 valgtSaksliste={valgtSaksliste}
                 valgtAvdelingEnhet={valgtAvdelingEnhet}
                 avdelingensSaksbehandlere={avdelingensSaksbehandlere}
-                hentAvdelingensSakslister={hentAvdelingensSakslister}
               />
             </React.Fragment>
           )}

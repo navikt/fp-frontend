@@ -41,7 +41,6 @@ const createQueryClient = (addErrorMessage: (data: any) => void) =>
     defaultOptions: {
       queries: {
         retry: process.env.NODE_ENV === 'test' ? false : 3,
-        staleTime: 100,
       },
     },
     queryCache: new QueryCache({

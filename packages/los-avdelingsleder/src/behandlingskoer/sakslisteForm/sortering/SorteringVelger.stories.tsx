@@ -2,7 +2,6 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Form } from '@navikt/ft-form-hooks';
-import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 import { http, HttpResponse } from 'msw';
 
@@ -36,8 +35,6 @@ const meta = {
   args: {
     valgtSakslisteId: 1,
     valgtAvdelingEnhet: 'Nav Vikafossen',
-    hentAvdelingensSakslister: action('button-click'),
-    hentAntallOppgaver: action('button-click'),
   },
   render: args => {
     const formMethods = useForm({

@@ -72,11 +72,19 @@ export const LosUrl = {
   OPPRETT_NY_SAKSBEHANDLER: wrapUrl('/fplos/api/avdelingsleder/saksbehandlere'),
 };
 
-export const getOppgaverForAvdelingAntall = (avdelingEnhet: string) =>
-  kyExtended.get(LosUrl.OPPGAVE_AVDELING_ANTALL, { searchParams: { avdelingEnhet } }).json<number>();
+export const oppgaverForAvdelingAntallOptions = (avdelingEnhet: string) =>
+  queryOptions({
+    queryKey: [LosUrl.OPPGAVE_AVDELING_ANTALL, avdelingEnhet],
+    queryFn: () => kyExtended.get(LosUrl.OPPGAVE_AVDELING_ANTALL, { searchParams: { avdelingEnhet } }).json<number>(),
+  });
 
-export const getSakslisterForAvdeling = (avdelingEnhet: string) =>
-  kyExtended.get(LosUrl.SAKSLISTER_FOR_AVDELING, { searchParams: { avdelingEnhet } }).json<SakslisteAvdeling[]>();
+export const sakslisterForAvdelingOptions = (avdelingEnhet: string) =>
+  queryOptions({
+    queryKey: [LosUrl.SAKSLISTER_FOR_AVDELING, avdelingEnhet],
+    queryFn: () =>
+      kyExtended.get(LosUrl.SAKSLISTER_FOR_AVDELING, { searchParams: { avdelingEnhet } }).json<SakslisteAvdeling[]>(),
+    initialData: [],
+  });
 
 export const saksbehandlareForAvdelingOptions = (avdelingEnhet?: string) =>
   queryOptions({

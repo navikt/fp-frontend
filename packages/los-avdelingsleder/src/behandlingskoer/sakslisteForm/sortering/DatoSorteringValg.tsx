@@ -7,7 +7,7 @@ import { CheckboxField, Datepicker, InputField } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidPosOrNegInteger } from '@navikt/ft-form-validators';
 import { ArrowBox, DateLabel } from '@navikt/ft-ui-komponenter';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 
@@ -15,6 +15,7 @@ import {
   lagreSakslisteSorteringDynamiskPeriode,
   lagreSakslisteSorteringIntervall,
   lagreSakslisteSorteringTidsintervallDato,
+  LosUrl,
 } from '../../../data/fplosAvdelingslederApi';
 import { useDebounce } from '../useDebounce';
 
@@ -26,33 +27,40 @@ interface Props {
   valgtSakslisteId: number;
   valgtAvdelingEnhet: string;
   erDynamiskPeriode: boolean;
-  hentAvdelingensSakslister: () => void;
-  hentAntallOppgaver: () => void;
 }
 
-export const DatoSorteringValg = ({
-  valgtSakslisteId,
-  valgtAvdelingEnhet,
-  erDynamiskPeriode,
-  hentAvdelingensSakslister,
-  hentAntallOppgaver,
-}: Props) => {
+export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, erDynamiskPeriode }: Props) => {
+  const queryClient = useQueryClient();
   const intl = useIntl();
 
   const { mutate: lagreSakslisteSorteringTidsintervallDager } = useMutation({
     mutationFn: (valuesToStore: { fra: number; til: number }) =>
       lagreSakslisteSorteringIntervall(valgtSakslisteId, valuesToStore.fra, valuesToStore.til, valgtAvdelingEnhet),
     onSuccess: () => {
-      hentAntallOppgaver();
-      hentAvdelingensSakslister();
+      queryClient.invalidateQueries({
+        queryKey: [LosUrl.OPPGAVE_ANTALL],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [LosUrl.OPPGAVE_AVDELING_ANTALL],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [LosUrl.SAKSLISTER_FOR_AVDELING],
+      });
     },
   });
 
   const { mutate: lagreSakslisteSorteringErDynamiskPeriode } = useMutation({
     mutationFn: () => lagreSakslisteSorteringDynamiskPeriode(valgtSakslisteId, valgtAvdelingEnhet),
     onSuccess: () => {
-      hentAntallOppgaver();
-      hentAvdelingensSakslister();
+      queryClient.invalidateQueries({
+        queryKey: [LosUrl.OPPGAVE_ANTALL],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [LosUrl.OPPGAVE_AVDELING_ANTALL],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [LosUrl.SAKSLISTER_FOR_AVDELING],
+      });
     },
   });
 
@@ -65,8 +73,15 @@ export const DatoSorteringValg = ({
         valuesToStore.tomDato,
       ),
     onSuccess: () => {
-      hentAntallOppgaver();
-      hentAvdelingensSakslister();
+      queryClient.invalidateQueries({
+        queryKey: [LosUrl.OPPGAVE_ANTALL],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [LosUrl.OPPGAVE_AVDELING_ANTALL],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [LosUrl.SAKSLISTER_FOR_AVDELING],
+      });
     },
   });
 

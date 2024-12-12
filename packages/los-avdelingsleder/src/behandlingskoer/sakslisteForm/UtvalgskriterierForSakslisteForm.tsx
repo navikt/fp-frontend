@@ -5,9 +5,9 @@ import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { BodyShort, Box, Heading, HStack, VStack } from '@navikt/ds-react';
 import { Form, InputField } from '@navikt/ft-form-hooks';
 import { hasValidName, maxLength, minLength, required } from '@navikt/ft-form-validators';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
-import { lagreSakslisteNavn, oppgaveAntallOptions } from '../../data/fplosAvdelingslederApi';
+import { lagreSakslisteNavn, LosUrl, oppgaveAntallOptions } from '../../data/fplosAvdelingslederApi';
 import { SakslisteAvdeling } from '../../typer/sakslisteAvdelingTsType';
 import { AndreKriterierVelger } from './filtrering/AndreKriterierVelger';
 import { BehandlingstypeVelger } from './filtrering/BehandlingstypeVelger';
@@ -70,32 +70,21 @@ const buildDefaultValues = (intl: IntlShape, valgtSaksliste: SakslisteAvdeling):
 interface Props {
   valgtSaksliste: SakslisteAvdeling;
   valgtAvdelingEnhet: string;
-  hentAvdelingensSakslister: () => void;
-  hentOppgaverForAvdelingAntall: () => void;
 }
 
-export const UtvalgskriterierForSakslisteForm = ({
-  valgtSaksliste,
-  valgtAvdelingEnhet,
-  hentAvdelingensSakslister,
-  hentOppgaverForAvdelingAntall,
-}: Props) => {
+export const UtvalgskriterierForSakslisteForm = ({ valgtSaksliste, valgtAvdelingEnhet }: Props) => {
+  const queryClient = useQueryClient();
   const intl = useIntl();
 
-  const { data: antallOppgaver, refetch } = useQuery(
-    oppgaveAntallOptions(valgtSaksliste.sakslisteId, valgtAvdelingEnhet),
-  );
-
-  const hentAntallOppgaver = () => {
-    refetch();
-    hentOppgaverForAvdelingAntall();
-  };
+  const { data: antallOppgaver } = useQuery(oppgaveAntallOptions(valgtSaksliste.sakslisteId, valgtAvdelingEnhet));
 
   const { mutate: lagreSakslistensNavn } = useMutation({
     mutationFn: (values: { sakslisteId: number; navn: string; avdelingEnhet: string }) =>
       lagreSakslisteNavn(values.sakslisteId, values.navn, values.avdelingEnhet),
     onSuccess: () => {
-      hentAvdelingensSakslister();
+      queryClient.invalidateQueries({
+        queryKey: [LosUrl.SAKSLISTER_FOR_AVDELING],
+      });
     },
   });
 
@@ -142,23 +131,16 @@ export const UtvalgskriterierForSakslisteForm = ({
                 <FagsakYtelseTypeVelger
                   valgtSakslisteId={valgtSaksliste.sakslisteId}
                   valgtAvdelingEnhet={valgtAvdelingEnhet}
-                  hentAvdelingensSakslister={hentAvdelingensSakslister}
-                  hentAntallOppgaver={hentAntallOppgaver}
                 />
                 <BehandlingstypeVelger
                   valgtSakslisteId={valgtSaksliste.sakslisteId}
                   valgtAvdelingEnhet={valgtAvdelingEnhet}
-                  hentAvdelingensSakslister={hentAvdelingensSakslister}
-                  hentAntallOppgaver={hentAntallOppgaver}
                 />
               </div>
               <div>
                 <AndreKriterierVelger
                   valgtSakslisteId={valgtSaksliste.sakslisteId}
                   valgtAvdelingEnhet={valgtAvdelingEnhet}
-                  values={values}
-                  hentAvdelingensSakslister={hentAvdelingensSakslister}
-                  hentAntallOppgaver={hentAntallOppgaver}
                 />
               </div>
               <div>
@@ -167,8 +149,6 @@ export const UtvalgskriterierForSakslisteForm = ({
                   valgteBehandlingtyper={valgtSaksliste.behandlingTyper}
                   valgtAvdelingEnhet={valgtAvdelingEnhet}
                   erDynamiskPeriode={!!values.erDynamiskPeriode}
-                  hentAvdelingensSakslister={hentAvdelingensSakslister}
-                  hentAntallOppgaver={hentAntallOppgaver}
                 />
               </div>
             </HStack>

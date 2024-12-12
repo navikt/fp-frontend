@@ -27,7 +27,6 @@ const meta = {
     },
   },
   args: {
-    hentAvdelingensSakslister: action('button-click'),
     setValgtSakslisteId: action('button-click'),
     resetValgtSakslisteId: action('button-click'),
     lagNySaksliste: action('button-click'),

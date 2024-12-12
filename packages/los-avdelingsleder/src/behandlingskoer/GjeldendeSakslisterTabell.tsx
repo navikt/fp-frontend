@@ -4,12 +4,12 @@ import { FormattedMessage } from 'react-intl';
 import { PlusCircleIcon, XMarkIcon } from '@navikt/aksel-icons';
 import { BodyShort, Detail, Heading, HStack, Label, Link, Table, VStack } from '@navikt/ds-react';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
 import { KodeverkMedNavn } from '@navikt/fp-types';
 
-import { slettSaksliste } from '../data/fplosAvdelingslederApi';
+import { LosUrl, slettSaksliste } from '../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../data/useLosKodeverk';
 import { SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType';
 import { SletteSakslisteModal } from './SletteSakslisteModal';
@@ -63,7 +63,6 @@ interface Props {
   oppgaverForAvdelingAntall?: number;
   lagNySaksliste: () => void;
   resetValgtSakslisteId: () => void;
-  hentAvdelingensSakslister: () => void;
   content: ReactElement;
 }
 
@@ -80,9 +79,10 @@ export const GjeldendeSakslisterTabell = ({
   oppgaverForAvdelingAntall,
   lagNySaksliste,
   resetValgtSakslisteId,
-  hentAvdelingensSakslister,
   content,
 }: Props) => {
+  const queryClient = useQueryClient();
+
   const [valgtSakslisteForSletting, setValgtSakslisteForSletting] = useState<SakslisteAvdeling>();
   const tabRef = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -93,7 +93,9 @@ export const GjeldendeSakslisterTabell = ({
     mutationFn: (values: { sakslisteId: number }) => slettSaksliste(values.sakslisteId, valgtAvdelingEnhet),
     onSuccess: () => {
       resetValgtSakslisteId();
-      hentAvdelingensSakslister();
+      queryClient.invalidateQueries({
+        queryKey: [LosUrl.SAKSLISTER_FOR_AVDELING],
+      });
     },
   });
 

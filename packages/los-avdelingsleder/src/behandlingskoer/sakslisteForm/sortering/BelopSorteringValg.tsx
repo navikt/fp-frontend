@@ -6,9 +6,9 @@ import { Detail, HStack } from '@navikt/ds-react';
 import { InputField } from '@navikt/ft-form-hooks';
 import { hasValidPosOrNegInteger } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { lagreSakslisteSorteringIntervall } from '../../../data/fplosAvdelingslederApi';
+import { lagreSakslisteSorteringIntervall, LosUrl } from '../../../data/fplosAvdelingslederApi';
 import { useDebounce } from '../useDebounce';
 
 import styles from './sorteringVelger.module.css';
@@ -16,16 +16,11 @@ import styles from './sorteringVelger.module.css';
 interface Props {
   valgtSakslisteId: number;
   valgtAvdelingEnhet: string;
-  hentAvdelingensSakslister: () => void;
-  hentAntallOppgaver: () => void;
 }
 
-export const BelopSorteringValg = ({
-  valgtSakslisteId,
-  valgtAvdelingEnhet,
-  hentAvdelingensSakslister,
-  hentAntallOppgaver,
-}: Props) => {
+export const BelopSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet }: Props) => {
+  const queryClient = useQueryClient();
+
   const { watch, trigger } = useFormContext();
   const fraVerdi = watch('fra');
   const tilVerdi = watch('til');
@@ -34,8 +29,15 @@ export const BelopSorteringValg = ({
     mutationFn: (valuesToStore: { fra: number; til: number }) =>
       lagreSakslisteSorteringIntervall(valgtSakslisteId, valuesToStore.fra, valuesToStore.til, valgtAvdelingEnhet),
     onSuccess: () => {
-      hentAntallOppgaver();
-      hentAvdelingensSakslister();
+      queryClient.invalidateQueries({
+        queryKey: [LosUrl.OPPGAVE_ANTALL],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [LosUrl.OPPGAVE_AVDELING_ANTALL],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [LosUrl.SAKSLISTER_FOR_AVDELING],
+      });
     },
   });
 

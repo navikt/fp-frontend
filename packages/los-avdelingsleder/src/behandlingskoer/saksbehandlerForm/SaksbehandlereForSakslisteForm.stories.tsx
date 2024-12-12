@@ -1,4 +1,3 @@
-import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 import { http, HttpResponse } from 'msw';
 
@@ -18,7 +17,6 @@ const meta = {
   decorators: [withIntl, withQueryClient],
   args: {
     valgtAvdelingEnhet: 'Nav Vikafossen',
-    hentAvdelingensSakslister: action('button-click'),
   },
 } satisfies Meta<typeof SaksbehandlereForSakslisteForm>;
 export default meta;

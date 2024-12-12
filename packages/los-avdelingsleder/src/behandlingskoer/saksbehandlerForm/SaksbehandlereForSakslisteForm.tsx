@@ -21,14 +21,12 @@ interface Props {
   valgtSaksliste: SakslisteAvdeling;
   avdelingensSaksbehandlere: SaksbehandlerProfil[];
   valgtAvdelingEnhet: string;
-  hentAvdelingensSakslister: () => void;
 }
 
 export const SaksbehandlereForSakslisteForm = ({
   avdelingensSaksbehandlere = [],
   valgtSaksliste,
   valgtAvdelingEnhet,
-  hentAvdelingensSakslister,
 }: Props) => {
   const intl = useIntl();
 
@@ -94,7 +92,6 @@ export const SaksbehandlereForSakslisteForm = ({
                           }))}
                           valgtSaksliste={valgtSaksliste}
                           valgtAvdelingEnhet={valgtAvdelingEnhet}
-                          hentAvdelingensSakslister={hentAvdelingensSakslister}
                         />
                       }
                     >
@@ -111,7 +108,6 @@ export const SaksbehandlereForSakslisteForm = ({
               saksbehandlere={sorterteAvdelingensSaksbehandlere}
               valgtSaksliste={valgtSaksliste}
               valgtAvdelingEnhet={valgtAvdelingEnhet}
-              hentAvdelingensSakslister={hentAvdelingensSakslister}
             />
           )}
           {harGrupper && (
@@ -129,7 +125,6 @@ export const SaksbehandlereForSakslisteForm = ({
                   saksbehandlere={sorterteAvdelingensSaksbehandlere}
                   valgtSaksliste={valgtSaksliste}
                   valgtAvdelingEnhet={valgtAvdelingEnhet}
-                  hentAvdelingensSakslister={hentAvdelingensSakslister}
                 />
               </ExpansionCard.Content>
             </ExpansionCard>

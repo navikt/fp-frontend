@@ -2,32 +2,30 @@ import React from 'react';
 
 import { HStack, VStack } from '@navikt/ds-react';
 import { CheckboxField } from '@navikt/ft-form-hooks';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { lagreSakslisteSaksbehandler } from '../../data/fplosAvdelingslederApi';
+import { lagreSakslisteSaksbehandler, LosUrl } from '../../data/fplosAvdelingslederApi';
 import { SakslisteAvdeling } from '../../typer/sakslisteAvdelingTsType';
 
 interface Props {
   valgtSaksliste: SakslisteAvdeling;
   valgtAvdelingEnhet: string;
-  hentAvdelingensSakslister: () => void;
   saksbehandlere: {
     brukerIdent: string;
     navn: string;
   }[];
 }
 
-export const ValgAvSaksbehandlere = ({
-  valgtSaksliste,
-  valgtAvdelingEnhet,
-  hentAvdelingensSakslister,
-  saksbehandlere,
-}: Props) => {
+export const ValgAvSaksbehandlere = ({ valgtSaksliste, valgtAvdelingEnhet, saksbehandlere }: Props) => {
+  const queryClient = useQueryClient();
+
   const { mutate: knyttSaksbehandlerTilSaksliste } = useMutation({
     mutationFn: (values: { brukerIdent: string; checked: boolean }) =>
       lagreSakslisteSaksbehandler(valgtSaksliste.sakslisteId, values.brukerIdent, values.checked, valgtAvdelingEnhet),
     onSuccess: () => {
-      hentAvdelingensSakslister();
+      queryClient.invalidateQueries({
+        queryKey: [LosUrl.SAKSLISTER_FOR_AVDELING],
+      });
     },
   });
 

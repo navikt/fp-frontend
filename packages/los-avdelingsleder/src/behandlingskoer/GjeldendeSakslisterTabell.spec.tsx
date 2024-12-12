@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { composeStories } from '@storybook/react';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { applyRequestHandlers } from 'msw-storybook-addon';
 
@@ -22,19 +22,14 @@ describe('<GjeldendeSakslisterTabell>', () => {
     expect(await screen.findByText('Ny liste')).toBeInTheDocument();
   });
 
-  it('skal vise slette kø ved å trykke på ikon for sletting og så velge ja i dialog', async () => {
-    const hentAvdelingensSakslister = vi.fn();
+  it('skal vise slette kø ved å trykke på ikon for sletting', async () => {
     await applyRequestHandlers(TabellNårDetFinnesEnBehandlingskø.parameters.msw);
-    render(<TabellNårDetFinnesEnBehandlingskø hentAvdelingensSakslister={hentAvdelingensSakslister} />);
+    render(<TabellNårDetFinnesEnBehandlingskø />);
     expect(await screen.findByText('Navn')).toBeInTheDocument();
 
     await userEvent.click(screen.getAllByRole('img')[1]);
 
     expect(await screen.findByText('Ønsker du å slette Saksliste 1?')).toBeInTheDocument();
-
-    await userEvent.click(screen.getByText('Ja'));
-
-    await waitFor(() => expect(hentAvdelingensSakslister).toHaveBeenCalledTimes(1));
   });
 
   it('skal legge til en ny kø ved bruk av tastaturet (enter)', async () => {

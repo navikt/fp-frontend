@@ -3,11 +3,11 @@ import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { BehandlingType } from '@navikt/fp-kodeverk';
 
-import { lagreSakslisteSortering } from '../../../data/fplosAvdelingslederApi';
+import { lagreSakslisteSortering, LosUrl } from '../../../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
 import { KøSorteringType } from '../../../typer/koSorteringTsType';
 import { BelopSorteringValg } from './BelopSorteringValg';
@@ -27,8 +27,6 @@ interface Props {
   valgteBehandlingtyper?: string[];
   valgtAvdelingEnhet: string;
   erDynamiskPeriode: boolean;
-  hentAvdelingensSakslister: () => void;
-  hentAntallOppgaver: () => void;
 }
 
 export const SorteringVelger = ({
@@ -36,17 +34,23 @@ export const SorteringVelger = ({
   valgteBehandlingtyper,
   valgtAvdelingEnhet,
   erDynamiskPeriode,
-  hentAvdelingensSakslister,
-  hentAntallOppgaver,
 }: Props) => {
+  const queryClient = useQueryClient();
   const { resetField } = useFormContext();
 
   const { mutate: lagreSortering } = useMutation({
     mutationFn: (valuesToStore: { sorteringType: string }) =>
       lagreSakslisteSortering(valgtSakslisteId, valuesToStore.sorteringType, valgtAvdelingEnhet),
     onSuccess: () => {
-      hentAntallOppgaver();
-      hentAvdelingensSakslister();
+      queryClient.invalidateQueries({
+        queryKey: [LosUrl.OPPGAVE_ANTALL],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [LosUrl.OPPGAVE_AVDELING_ANTALL],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [LosUrl.SAKSLISTER_FOR_AVDELING],
+      });
     },
   });
 
@@ -82,17 +86,10 @@ export const SorteringVelger = ({
                   valgtSakslisteId={valgtSakslisteId}
                   valgtAvdelingEnhet={valgtAvdelingEnhet}
                   erDynamiskPeriode={erDynamiskPeriode}
-                  hentAvdelingensSakslister={hentAvdelingensSakslister}
-                  hentAntallOppgaver={hentAntallOppgaver}
                 />
               )}
               {koSortering.felttype === 'HELTALL' && (
-                <BelopSorteringValg
-                  valgtSakslisteId={valgtSakslisteId}
-                  valgtAvdelingEnhet={valgtAvdelingEnhet}
-                  hentAvdelingensSakslister={hentAvdelingensSakslister}
-                  hentAntallOppgaver={hentAntallOppgaver}
-                />
+                <BelopSorteringValg valgtSakslisteId={valgtSakslisteId} valgtAvdelingEnhet={valgtAvdelingEnhet} />
               )}
             </>
           ),

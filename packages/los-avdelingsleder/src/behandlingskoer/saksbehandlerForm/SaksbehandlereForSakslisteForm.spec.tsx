@@ -1,8 +1,7 @@
 import React from 'react';
 
 import { composeStories } from '@storybook/react';
-import { render, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { render, screen } from '@testing-library/react';
 import { applyRequestHandlers } from 'msw-storybook-addon';
 
 import * as stories from './SaksbehandlereForSakslisteForm.stories';
@@ -23,27 +22,6 @@ describe('<SaksbehandlereForSakslisteForm>', () => {
     expect(await screen.findByText('Saksbehandlere')).toBeInTheDocument();
     expect(screen.getByText('Espen Utvikler')).toBeInTheDocument();
     expect(screen.getByText('Steffen')).toBeInTheDocument();
-  });
-
-  it('skal lagre og hente listen med saksbehandlere på nytt når en velger en av saksbehandlerene', async () => {
-    const hentAvdelingensSakslister = vi.fn();
-
-    await applyRequestHandlers(ToSaksbehandlere.parameters.msw);
-    render(<ToSaksbehandlere hentAvdelingensSakslister={hentAvdelingensSakslister} />);
-    expect(await screen.findByText('Saksbehandlere')).toBeInTheDocument();
-    expect(screen.getByText('Espen Utvikler')).toBeInTheDocument();
-    expect(screen.getByText('Steffen')).toBeInTheDocument();
-
-    expect(screen.getAllByRole('checkbox')).toHaveLength(2);
-    expect(screen.getAllByRole('checkbox')[0]).not.toBeChecked();
-    expect(screen.getAllByRole('checkbox')[1]).toBeChecked();
-
-    await userEvent.click(screen.getAllByRole('checkbox')[0]);
-
-    await waitFor(() => expect(hentAvdelingensSakslister).toHaveBeenCalledTimes(1));
-
-    expect(screen.getAllByRole('checkbox')[0]).toBeChecked();
-    expect(screen.getAllByRole('checkbox')[1]).toBeChecked();
   });
 
   it.skip('skal vise gruppe og liste med alle saksbehandlere', async () => {

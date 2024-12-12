@@ -1,4 +1,3 @@
-import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 import { http, HttpResponse } from 'msw';
 
@@ -37,8 +36,6 @@ const meta = {
   },
   args: {
     valgtAvdelingEnhet: '',
-    hentAvdelingensSakslister: action('button-click'),
-    hentOppgaverForAvdelingAntall: action('button-click'),
   },
 } satisfies Meta<typeof UtvalgskriterierForSakslisteForm>;
 export default meta;
