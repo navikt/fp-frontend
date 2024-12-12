@@ -5,8 +5,14 @@ export const RETTSKILDE_URL = 'https://lovdata.no/pro/sso/login/nav';
 
 export const AINNTEKT_URL = 'https://arbeid-og-inntekt.nais.adeo.no'; // /?0#!empty';
 export const AAREG_URL = 'https://arbeid-og-inntekt.nais.adeo.no/';
-export const GOSYS_URL = 'https://gosys.intern.nav.no/gosys/bruker/brukeroversikt.jsf?execution=e3s1';
+
 export const FOLKETRYGDLOVEN_KAP14_13_URL = 'https://lovdata.no/nav/folketrygdloven/kap14/%C2%A714-13';
+
+export const getGosysUrl = (fødselsnummer: string) => {
+  const { host } = window.location;
+  const envPrefix = host.includes('dev') ? 'dev.' : '';
+  return `https://gosys.${envPrefix}intern.nav.no/gosys/bruker/brukeroversikt.jsf?fodselsnummer=${fødselsnummer}`;
+};
 
 export const getModiaUrl = (fødselsnummer: string) =>
   `https://app.adeo.no/modiapersonoversikt/person/${fødselsnummer}/meldinger/`;

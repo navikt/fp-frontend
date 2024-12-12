@@ -1,13 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { Navigate, NavLink, useLocation, useMatch } from 'react-router-dom';
 
-import { Box, HStack, Label, Link, Spacer, Tag, VStack } from '@navikt/ds-react';
+import { HStack, VStack } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Location } from 'history';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
-import { AAREG_URL, AINNTEKT_URL, getModiaUrl, GOSYS_URL } from '@navikt/fp-konstanter';
 import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 import { BehandlingVelgerSakIndex } from '@navikt/fp-sak-behandling-velger';
 import { FagsakProfilSakIndex } from '@navikt/fp-sak-fagsak-profil';
@@ -20,6 +19,7 @@ import { BehandlingMenuIndex } from '../behandlingmenu/BehandlingMenuIndex';
 import { FagsakApiKeys, restFagsakApiHooks } from '../data/fagsakContextApi';
 import { useFpSakKodeverkMedNavn, useGetKodeverkFn } from '../data/useKodeverk';
 import { FagsakData } from '../fagsak/FagsakData';
+import { EksterneRessurser } from './EksterneRessurser';
 import { RisikoklassifiseringIndex } from './risikoklassifisering/RisikoklassifiseringIndex';
 
 import styles from './fagsakProfileIndex.module.css';
@@ -155,42 +155,7 @@ export const FagsakProfileIndex = ({
             setBehandling={setBehandling}
           />
         </ErrorBoundary>
-        <Box padding="4" background="bg-subtle" borderRadius="large">
-          <HStack gap="6" align="center" wrap={false}>
-            <Label size="small">
-              <FormattedMessage id="FagsakProfileIndex.Lenke" />
-            </Label>
-            <Spacer />
-            <HStack gap="4">
-              <Link href={getModiaUrl(fagsak.bruker.fødselsnummer)} target="_blank">
-                <Tag size="small" variant="neutral-filled">
-                  <FormattedMessage id="FagsakProfileIndex.Modia" />
-                </Tag>
-              </Link>
-              <Link href={GOSYS_URL} target="_blank">
-                <Tag size="small" variant="neutral-filled">
-                  <FormattedMessage id="FagsakProfileIndex.Gosys" />
-                </Tag>
-              </Link>
-              <Link
-                href={ainntektHref ? `${ainntektHref}?saksnummer=${fagsak.saksnummer}` : AINNTEKT_URL}
-                target="_blank"
-              >
-                <Tag size="small" variant="neutral-filled">
-                  <FormattedMessage id="FagsakProfileIndex.AInntekt" />
-                </Tag>
-              </Link>
-              <Link
-                href={arbeidstakerHref ? `${arbeidstakerHref}?saksnummer=${fagsak.saksnummer}` : AAREG_URL}
-                target="_blank"
-              >
-                <Tag size="small" variant="neutral-filled">
-                  <FormattedMessage id="FagsakProfileIndex.AAreg" />
-                </Tag>
-              </Link>
-            </HStack>
-          </HStack>
-        </Box>
+        <EksterneRessurser fagsak={fagsak} ainntektHref={ainntektHref} arbeidstakerHref={arbeidstakerHref} />
       </VStack>
       <VerticalSpacer sixteenPx />
     </div>
