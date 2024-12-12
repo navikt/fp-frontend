@@ -17,7 +17,7 @@ export const FaktaMeny = ({ menyData, oppdaterFaktaPanelIUrl }: Props) => {
     <SideMenu
       heading={intl.formatMessage({ id: 'FaktaMeny.FaktaOm' })}
       links={menyData.map(data => ({
-        label: data.tekst || '',
+        label: data.tekst ?? '',
         active: data.erAktiv,
         icon: data.harApneAksjonspunkter ? <ExclamationmarkTriangleFillIcon color="var(--a-orange-600)" /> : undefined,
       }))}

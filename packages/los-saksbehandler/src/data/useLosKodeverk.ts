@@ -11,5 +11,5 @@ export const useLosKodeverk = <T = KodeverkMedNavn>(kodeverkType: string): T[] =
   const alleKodeverk = useQuery(losKodeverkOptions()).data;
 
   //@ts-expect-error Fiks denne
-  return alleKodeverk && alleKodeverk[kodeverkType] ? alleKodeverk[kodeverkType] : [];
+  return alleKodeverk?.[kodeverkType] ?? [];
 };
