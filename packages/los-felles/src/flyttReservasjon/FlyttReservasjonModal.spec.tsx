@@ -36,8 +36,8 @@ describe('<FlyttReservasjonModal>', () => {
   });
 
   it('skal vise finne brukerident og så lagre begrunnelse for flytting', async () => {
-    const hentReserverteOppgaver = vi.fn();
-    const utils = render(<MedTreffPåSøk hentReserverteOppgaver={hentReserverteOppgaver} />);
+    const flyttOppgavereservasjon = vi.fn();
+    const utils = render(<MedTreffPåSøk flyttOppgavereservasjon={flyttOppgavereservasjon} />);
 
     expect(await screen.findByText('Flytt reservasjonen til annen saksbehandler')).toBeInTheDocument();
 
@@ -59,7 +59,10 @@ describe('<FlyttReservasjonModal>', () => {
 
     await userEvent.click(screen.getByText('OK'));
 
-    await waitFor(() => expect(hentReserverteOppgaver).toHaveBeenCalledTimes(1));
-    expect(hentReserverteOppgaver).toHaveBeenNthCalledWith(1, {}, true);
+    await waitFor(() => expect(flyttOppgavereservasjon).toHaveBeenCalledTimes(1));
+    expect(flyttOppgavereservasjon).toHaveBeenNthCalledWith(1, {
+      begrunnelse: 'Dette er en begrunnelse',
+      brukerIdent: 'R232323',
+    });
   });
 });

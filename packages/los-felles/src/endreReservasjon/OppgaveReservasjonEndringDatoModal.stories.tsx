@@ -1,7 +1,5 @@
-import React from 'react';
-
 import { action } from '@storybook/addon-actions';
-import { StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import dayjs from 'dayjs';
 
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
@@ -12,33 +10,23 @@ import messages from '../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
 
-export default {
+const meta = {
   title: 'los/OppgaveReservasjonEndringDatoModal',
   component: OppgaveReservasjonEndringDatoModal,
   decorators: [withIntl],
-};
+  args: {
+    closeModal: action('button-click'),
+    endreOppgavereservasjon: action('button-click'),
+  },
+} satisfies Meta<typeof OppgaveReservasjonEndringDatoModal>;
+export default meta;
 
-const Template: StoryFn<{ endreReserverasjonState: () => void; reserverTilDefault?: string }> = ({
-  endreReserverasjonState,
-  reserverTilDefault,
-}) => (
-  <OppgaveReservasjonEndringDatoModal
-    closeModal={action('button-click')}
-    reserverTilDefault={reserverTilDefault}
-    oppgaveId={1}
-    endreReserverasjonState={endreReserverasjonState}
-    hentReserverteOppgaver={action('button-click')}
-    endreOppgavereservasjon={() => Promise.resolve([])}
-  />
-);
+type Story = StoryObj<typeof meta>;
 
-export const Default = Template.bind({});
-Default.args = {
-  endreReserverasjonState: action('button-click'),
-};
+export const Default: Story = {};
 
-export const MedDefaultverdi = Template.bind({});
-MedDefaultverdi.args = {
-  endreReserverasjonState: action('button-click'),
-  reserverTilDefault: dayjs().add(1, 'week').format('YYYY-MM-DD'),
+export const MedDefaultverdi: Story = {
+  args: {
+    reserverTilDefault: dayjs().add(1, 'week').format('YYYY-MM-DD'),
+  },
 };

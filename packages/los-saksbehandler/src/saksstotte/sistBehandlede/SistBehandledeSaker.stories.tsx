@@ -1,63 +1,55 @@
-import React, { ComponentProps } from 'react';
-
 import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
+import { http, HttpResponse } from 'msw';
 
 import { BehandlingStatus } from '@navikt/fp-kodeverk';
 import { Oppgave } from '@navikt/fp-los-felles';
-import { alleKodeverkLos, getIntlDecorator } from '@navikt/fp-storybook-utils';
-import { RestApiMock } from '@navikt/fp-utils-test';
+import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
-import { requestApi,RestApiGlobalStatePathsKeys, RestApiPathsKeys } from '../../data/fplosSaksbehandlerRestApi';
+import { LosUrl } from '../../data/fplosSaksbehandlerApi';
+import { withQueryClient } from '../../data/withQueryClientProvider';
 import { SistBehandledeSaker } from './SistBehandledeSaker';
 
 import messages from '../../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
 
-type StoryArgs = {
-  behandledeOppgaver?: Oppgave[];
-} & ComponentProps<typeof SistBehandledeSaker>;
-
 const meta = {
   title: 'saksstotte/SistBehandledeSaker',
   component: SistBehandledeSaker,
-  decorators: [withIntl],
-  render: ({ behandledeOppgaver, åpneFagsak }) => {
-    const data = [
-      { key: RestApiPathsKeys.BEHANDLEDE_OPPGAVER.name, data: behandledeOppgaver },
-      { key: RestApiGlobalStatePathsKeys.KODEVERK_LOS.name, data: alleKodeverkLos, global: true },
-    ];
-
-    return (
-      <RestApiMock data={data} requestApi={requestApi}>
-        <SistBehandledeSaker åpneFagsak={åpneFagsak} />
-      </RestApiMock>
-    );
+  decorators: [withIntl, withQueryClient],
+  args: {
+    åpneFagsak: action('button-click'),
   },
-} satisfies Meta<StoryArgs>;
+} satisfies Meta<typeof SistBehandledeSaker>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: {
-    åpneFagsak: action('button-click'),
-    behandledeOppgaver: [
-      {
-        id: 1,
-        personnummer: '334342323',
-        navn: 'Espen Utvikler',
-        saksnummer: 13232323,
-        behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
-      } as Oppgave,
-    ],
+  parameters: {
+    msw: {
+      handlers: [
+        http.get(LosUrl.BEHANDLEDE_OPPGAVER, () =>
+          HttpResponse.json([
+            {
+              id: 1,
+              personnummer: '334342323',
+              navn: 'Espen Utvikler',
+              saksnummer: 13232323,
+              behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
+            } as Oppgave,
+          ]),
+        ),
+      ],
+    },
   },
 };
 
 export const IngenBehandlinger: Story = {
-  args: {
-    åpneFagsak: action('button-click'),
-    behandledeOppgaver: [],
+  parameters: {
+    msw: {
+      handlers: [http.get(LosUrl.BEHANDLEDE_OPPGAVER, () => HttpResponse.json([]))],
+    },
   },
 };

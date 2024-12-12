@@ -2,7 +2,7 @@ import { setProjectAnnotations } from '@storybook/react';
 import * as matchers from '@testing-library/jest-dom/matchers';
 import { beforeAll, expect, vi } from 'vitest';
 
-import * as globalStorybookConfig from './.storybook/preview-storybook';
+import { default as globalStorybookConfig } from './.storybook/preview';
 
 import 'vitest-canvas-mock';
 
