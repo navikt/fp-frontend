@@ -15,6 +15,7 @@
     "stylelint": "stylelint \"src/**/*.module.css\"",
     "prettier": "prettier --write src",
     "dev": "vite build --mode development --watch",
+    "clean": "rm -rf ./dist ./node_modules ./coverage ./.storybook-static-build",
     "build-storybook": "storybook build -o .storybook-static-build",
     "storybook": "storybook dev --quiet -p 7041"
   },
