@@ -70,7 +70,7 @@ describe('<SakenFaktaIndex>', () => {
     render(<StartdatoForForeldrepengerOgDekningsgrad submitCallback={lagre} />);
 
     expect(await screen.findByText('Startdato for foreldrepengeperioden')).toBeInTheDocument();
-    expect(screen.getByText('Tuesday 1 january 2019')).toBeInTheDocument();
+    expect(screen.getByText('Tirsdag 1 januar 2019')).toBeInTheDocument();
 
     expect(screen.queryByText('Startdato som skal benyttes (fra søknad eller fødsel)')).not.toBeInTheDocument();
 
@@ -154,11 +154,11 @@ describe('<SakenFaktaIndex>', () => {
     ).toBeInTheDocument();
 
     expect(screen.getByText('Helga Utvikler')).toBeInTheDocument();
-    expect(screen.getByText('Søknad sendt 2 January 2019')).toBeInTheDocument();
+    expect(screen.getByText('Søknad sendt 2 januar 2019')).toBeInTheDocument();
     expect(screen.getByText('Har valgt 100% foreldrepenger')).toBeInTheDocument();
 
     expect(screen.getByText('Espen Utvikler')).toBeInTheDocument();
-    expect(screen.getByText('Søknad sendt 1 January 2019')).toBeInTheDocument();
+    expect(screen.getByText('Søknad sendt 1 januar 2019')).toBeInTheDocument();
     expect(screen.getByText('Har valgt 80% foreldrepenger')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('80'));
