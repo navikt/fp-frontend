@@ -10,8 +10,8 @@ export const FOLKETRYGDLOVEN_KAP14_13_URL = 'https://lovdata.no/nav/folketrygdlo
 
 export const getGosysUrl = (fødselsnummer: string) => {
   const { host } = window.location;
-  const envPrefix = host.includes('dev') ? 'dev.' : '';
-  return `https://gosys.${envPrefix}intern.nav.no/gosys/bruker/brukeroversikt.jsf?fodselsnummer=${fødselsnummer}`;
+  const envPrefix = host.includes('dev') ? '-q2.dev' : '';
+  return `https://gosys${envPrefix}.intern.nav.no/gosys/bruker/brukeroversikt.jsf?fodselsnummer=${fødselsnummer}`;
 };
 
 export const getModiaUrl = (fødselsnummer: string) =>
