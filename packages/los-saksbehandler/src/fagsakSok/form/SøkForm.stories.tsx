@@ -13,6 +13,10 @@ const meta = {
   title: 'søk/SøkForm',
   component: SøkForm,
   decorators: [withIntl],
+  args: {
+    onSubmit: action('button-click'),
+    resetSearch: action('button-click'),
+  },
 } satisfies Meta<typeof SøkForm>;
 export default meta;
 
@@ -20,30 +24,28 @@ type Story = StoryObj<typeof meta>;
 
 export const Søkeskjema: Story = {
   args: {
-    onSubmit: action('button-click'),
     searchStarted: false,
-    resetSearch: action('button-click'),
     kanSaksbehandle: true,
   },
 };
 
 export const SøkeskjemaNårEnIkkeKanVelgeÅReservere: Story = {
   args: {
-    ...Søkeskjema.args,
+    searchStarted: false,
     kanSaksbehandle: false,
   },
 };
 
 export const SøkeskjemaNårSøkPågår: Story = {
   args: {
-    ...Søkeskjema.args,
     searchStarted: true,
+    kanSaksbehandle: true,
   },
 };
 
 export const SøkeskjemaMedFeilmelding: Story = {
   args: {
-    ...Søkeskjema.args,
+    kanSaksbehandle: true,
     searchStarted: true,
     searchResultAccessDenied: { feilmelding: 'Dette er en feilmelding' },
   },

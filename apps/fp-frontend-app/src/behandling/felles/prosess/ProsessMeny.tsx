@@ -32,7 +32,7 @@ export const ProsessMeny = ({ menyData, oppdaterProsessPanelIUrl }: Props) => {
       menyData.map(data => {
         const type = finnProsessmenyType(data.status, data.harApentAksjonspunkt);
         return {
-          label: data.tekst || '',
+          label: data.tekst ?? '',
           isActive: data.erAktiv,
           isDisabled: false,
           isFinished: type === ProcessMenuStepType.success,

@@ -36,7 +36,7 @@ export const JournalføringHeader = ({
     }
   }, [valgtJournalpost]);
 
-  const harHentetOppgaver = antallOppgaver || antallOppgaver === 0;
+  const harHentetOppgaver = antallOppgaver ?? antallOppgaver === 0;
 
   return (
     <div className={styles.header}>

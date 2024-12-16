@@ -1,20 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, HStack, Label, Pagination, SortState, Table, VStack } from '@navikt/ds-react';
 
 import { Oppgave } from '@navikt/fp-los-felles';
-import { TimeoutError } from '@navikt/fp-rest-api';
 
-import { requestApi, restApiHooks, RestApiPathsKeys } from '../../data/fplosSaksbehandlerRestApi';
 import { BehandlingPollingTimoutModal } from '../timeoutModal/BehandlingPollingTimoutModal';
 import { OppgaveMedReservertIndikator, OppgaveRad } from './OppgaveRad';
+import { useOppgavePolling } from './useOppgavePolling';
 
 import styles from './oppgaverTabell.module.css';
-
-const isDevelopmentOrTest = import.meta.env.MODE === 'development' || import.meta.env.MODE === 'test';
-
-const EMPTY_ARRAY: Oppgave[] = [];
 
 type TableHeaders =
   | 'navn'
@@ -77,37 +72,8 @@ export const OppgaverTabell = ({ reserverOppgave, antallOppgaver = 0, valgtSaksl
   const [sidetall, setSidetall] = useState(1);
   const raderPerSide = 15;
 
-  const { startRequest: hentReserverteOppgaver, data: reserverteOppgaver = EMPTY_ARRAY } =
-    restApiHooks.useRestApiRunner(RestApiPathsKeys.RESERVERTE_OPPGAVER);
-
-  const {
-    startRequest: hentOppgaverTilBehandling,
-    data: oppgaverTilBehandling = EMPTY_ARRAY,
-    error: hentOppgaverTilBehandlingError,
-  } = restApiHooks.useRestApiRunner(RestApiPathsKeys.OPPGAVER_TIL_BEHANDLING);
-
-  const fetchSakslisteOppgaverPolling = (keepData: boolean, sakslisteId: number, oppgaveIder?: string) => {
-    hentReserverteOppgaver(undefined, true);
-    hentOppgaverTilBehandling(oppgaveIder ? { sakslisteId, oppgaveIder } : { sakslisteId }, keepData)
-      .then(response =>
-        !response || typeof response === 'string' || isDevelopmentOrTest
-          ? Promise.resolve()
-          : fetchSakslisteOppgaverPolling(true, sakslisteId, response.map(o => o.id).join(',')),
-      )
-      .catch(err => console.log(err));
-  };
-
-  useEffect(() => {
-    requestApi.cancelRequest(RestApiPathsKeys.OPPGAVER_TIL_BEHANDLING.name);
-    fetchSakslisteOppgaverPolling(false, valgtSakslisteId);
-  }, [valgtSakslisteId]);
-
-  useEffect(
-    () => () => {
-      requestApi.cancelRequest(RestApiPathsKeys.OPPGAVER_TIL_BEHANDLING.name);
-    },
-    [],
-  );
+  const { oppgaverTilBehandling, reserverteOppgaver, isMaxPollingAttemptsReached } =
+    useOppgavePolling(valgtSakslisteId);
 
   const alleOppgaver = slaSammenOgMarkerReserverte(reserverteOppgaver, oppgaverTilBehandling);
 
@@ -140,7 +106,7 @@ export const OppgaverTabell = ({ reserverOppgave, antallOppgaver = 0, valgtSaksl
 
   return (
     <div className={styles.tabell}>
-      {hentOppgaverTilBehandlingError instanceof TimeoutError && <BehandlingPollingTimoutModal />}
+      {isMaxPollingAttemptsReached && <BehandlingPollingTimoutModal />}
       <VStack gap="2" className={styles.headerPadding}>
         <HStack gap="2">
           <Label size="small">
@@ -192,12 +158,7 @@ export const OppgaverTabell = ({ reserverOppgave, antallOppgaver = 0, valgtSaksl
             </Table.Header>
             <Table.Body>
               {oppgaverSomSkalVisesITabell.map(oppgave => (
-                <OppgaveRad
-                  key={oppgave.id}
-                  oppgave={oppgave}
-                  hentReserverteOppgaver={hentReserverteOppgaver}
-                  reserverOppgave={reserverOppgave}
-                />
+                <OppgaveRad key={oppgave.id} oppgave={oppgave} reserverOppgave={reserverOppgave} />
               ))}
             </Table.Body>
           </Table>

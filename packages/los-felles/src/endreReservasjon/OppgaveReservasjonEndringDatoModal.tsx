@@ -8,8 +8,6 @@ import { dateAfterOrEqualToToday, dateBeforeOrEqual, hasValidDate } from '@navik
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import Oppgave from '../typer/oppgaveTsType';
-
 const thirtyDaysFromNow = (): dayjs.Dayjs => {
   return dayjs().startOf('day').add(30, 'days');
 };
@@ -21,28 +19,15 @@ type FormValues = {
 interface Props {
   closeModal: () => void;
   reserverTilDefault?: string;
-  oppgaveId: number;
-  endreReserverasjonState: () => void;
-  hentReserverteOppgaver: (params: any, keepData: boolean) => void;
-  endreOppgavereservasjon: (input: { oppgaveId: number; reserverTil: string }) => Promise<Oppgave[] | undefined>;
+  endreOppgavereservasjon: (reserverTil: string) => void;
 }
 
 export const OppgaveReservasjonEndringDatoModal = ({
   closeModal,
   reserverTilDefault,
-  oppgaveId,
-  hentReserverteOppgaver,
-  endreReserverasjonState,
   endreOppgavereservasjon,
 }: Props) => {
   const intl = useIntl();
-
-  const endreOppgaveReservasjonFn = (reserverTil: string) =>
-    endreOppgavereservasjon({ oppgaveId, reserverTil }).then(() => {
-      endreReserverasjonState();
-      hentReserverteOppgaver({}, true);
-      closeModal();
-    });
 
   const søkFormMethods = useForm<FormValues>({
     defaultValues: {
@@ -51,7 +36,7 @@ export const OppgaveReservasjonEndringDatoModal = ({
   });
 
   return (
-    <Form<FormValues> formMethods={søkFormMethods} onSubmit={values => endreOppgaveReservasjonFn(values.reserverTil)}>
+    <Form<FormValues> formMethods={søkFormMethods} onSubmit={values => endreOppgavereservasjon(values.reserverTil)}>
       <NavModal
         width="small"
         open
