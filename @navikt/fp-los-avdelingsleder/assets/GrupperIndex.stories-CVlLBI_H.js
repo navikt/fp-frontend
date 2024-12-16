@@ -1,9 +1,0 @@
-import{j as r}from"./jsx-runtime-QvZ8i92b.js";import{m as o}from"./nb_NO-Zqge3fS6.js";import{g as d}from"./withIntl-Bv-P8ZIY.js";import{R as l}from"./RestApiMock-CCcMv-43.js";import"./index-uubelm5h.js";import"./useRestApiRunner-Dz_KBbnA.js";import{a as m,r as u}from"./fplosRestApi-DIvKj8Ld.js";import{G as p}from"./GrupperIndex-lfLEg40I.js";import"./index-C5xsJX-I.js";import"./index.es-DGARnTEE.js";import"./Modal-nRd4VDWO.js";import"./dayjs.min-BsYQKNhR.js";import"./GrupperPanel-8uw3c9Nx.js";import"./index.es-C82Zs4UF.js";import"./VStack-C7XzQG3E.js";import"./index.es-BjtZFtlt.js";import"./useDebounce-CwIbLCG-.js";import"./Table-Dp5M2zv1.js";const v=d(o),g=[{brukerIdent:"ident1",navn:"Anders Utvikler",ansattAvdeling:null},{brukerIdent:"ident12",navn:"Espen Utvikler",ansattAvdeling:null},{brukerIdent:"ident4",navn:"Olga Utvikler",ansattAvdeling:null},{brukerIdent:"ident3",navn:"Klara Utvikler",ansattAvdeling:null}],t=[{brukerIdent:"ident1",navn:"Anders Utvikler",ansattAvdeling:null}],k={saksbehandlere:t,saksbehandlerGrupper:[{gruppeId:1,gruppeNavn:"gruppenavn",saksbehandlere:t}]},K={title:"los/avdelingsleder/grupper/GrupperIndex",component:p,decorators:[v]},c=()=>{const i=[{key:m.HENT_GRUPPER.name,data:k}];return r.jsx(l,{data:i,requestApi:u,children:r.jsx(p,{valgtAvdelingEnhet:"test",avdelingensSaksbehandlere:g})})},e=c.bind({});var n,a,s;e.parameters={...e.parameters,docs:{...(n=e.parameters)==null?void 0:n.docs,source:{originalSource:`() => {
-  const data = [{
-    key: RestApiPathsKeys.HENT_GRUPPER.name,
-    data: saksbehandlereOgSaksbehandlerGrupper
-  }];
-  return <RestApiMock data={data} requestApi={requestApi}>
-      <GrupperIndex valgtAvdelingEnhet="test" avdelingensSaksbehandlere={avdelingensSaksbehandlere} />
-    </RestApiMock>;
-}`,...(s=(a=e.parameters)==null?void 0:a.docs)==null?void 0:s.source}}};const M=["Default"];export{e as Default,M as __namedExportsOrder,K as default};
