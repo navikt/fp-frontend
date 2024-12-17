@@ -12,10 +12,7 @@ const markor = (h: Historikkinnslag, erTilbakekreving: boolean) => ({ ...h, erTi
 export const sortAndTagTilbakekreving = (
   historikkFpsak: Historikkinnslag[] = [],
   historikkFptilbake: Historikkinnslag[] = [],
-): HistorikkMedTilbakekrevingIndikator[] => {
-  const historikkMedMarkor = [
-    ...historikkFpsak.map(h => markor(h, false)),
-    ...historikkFptilbake.map(h => markor(h, true)),
-  ];
-  return historikkMedMarkor.sort(sortNewestByOpprettetTidspunkt);
-};
+): HistorikkMedTilbakekrevingIndikator[] =>
+  [...historikkFpsak.map(h => markor(h, false)), ...historikkFptilbake.map(h => markor(h, true))].sort(
+    sortNewestByOpprettetTidspunkt,
+  );
