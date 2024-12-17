@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@sentry/browser": "7.119.2",
-    "axios": "1.7.7"
+    "axios": "1.7.9"
   },
   "devDependencies": {
     "axios-mock-adapter": "2.1.0",
