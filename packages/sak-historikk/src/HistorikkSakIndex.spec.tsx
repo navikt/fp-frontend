@@ -6,7 +6,7 @@ import * as stories from './HistorikkSakIndex.stories';
 
 const { BehandlingIkkeErValgt, BehandlingErValgt } = composeStories(stories);
 
-describe('<HistorikkSakIndex>', () => {
+describe('HistorikkSakIndex', () => {
   it('skal vise historikk uten behandlingsfilter når ingen behandlinger er valgt', async () => {
     await BehandlingIkkeErValgt.run();
     expect(await screen.findByText(/Historikk/)).toBeInTheDocument();

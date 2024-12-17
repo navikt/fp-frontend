@@ -3,30 +3,16 @@ import { useIntl } from 'react-intl';
 
 import { Box, Checkbox, Heading, HStack, VStack } from '@navikt/ds-react';
 import { useStorageToggle } from '@navikt/ft-hooks';
-import dayjs from 'dayjs';
 import { Location } from 'history';
 
 import { getKodeverknavnFn } from '@navikt/fp-kodeverk';
 import { AlleKodeverk, AlleKodeverkTilbakekreving, Historikkinnslag } from '@navikt/fp-types';
 
+import { sortAndTagTilbakekreving } from '../utils/historikkUtils';
 import { EnvironmentWrapper } from './EnvironmentWrapper';
 import { HistorikkInnslag } from './HistorikkInnslag/HistorikkInnslag';
 
 import styles from './historikk.module.css';
-
-type HistorikkMedTilbakekrevingIndikator = Historikkinnslag & {
-  erTilbakekreving?: boolean;
-};
-
-const sortAndTagTilbakekreving = (
-  historikkFpsak: Historikkinnslag[] = [],
-  historikkFptilbake: Historikkinnslag[] = [],
-): HistorikkMedTilbakekrevingIndikator[] => {
-  const historikkFraTilbakekrevingMedMarkor = historikkFptilbake.map(ht => ({ ...ht, erTilbakekreving: true }));
-  return [...historikkFpsak, ...historikkFraTilbakekrevingMedMarkor].sort((a, b) =>
-    dayjs(b.opprettetTidspunkt).diff(dayjs(a.opprettetTidspunkt)),
-  );
-};
 
 interface Props {
   valgtBehandlingUuid?: string;
