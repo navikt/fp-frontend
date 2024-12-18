@@ -58,14 +58,11 @@ export const UttakFaktaInitPanel = ({
     overstyringApKoder={OVERSTYRING_AP_CODES}
     faktaPanelKode={FaktaPanelCode.UTTAK}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.Uttak' })}
-    skalPanelVisesIMeny={() =>
-      props.behandling.harSattEndringsdato &&
-      requestBehandlingApi.hasPath(BehandlingApiKeys.UTTAK_KONTROLLER_FAKTA_PERIODER_V2.name)
-    }
+    skalPanelVisesIMeny={() => requestBehandlingApi.hasPath(BehandlingApiKeys.UTTAK_KONTROLLER_FAKTA_PERIODER_V2.name)}
     renderPanel={data => (
       <UttakFaktaIndex
         fagsak={fagsak}
-        kanOverstyre={rettigheter.kanOverstyreAccess.isEnabled}
+        kanOverstyre={rettigheter.kanOverstyreAccess.isEnabled && props.behandling.harSattEndringsdato}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         {...data}
         uttakKontrollerFaktaPerioder={data.uttakKontrollerFaktaPerioderV2}

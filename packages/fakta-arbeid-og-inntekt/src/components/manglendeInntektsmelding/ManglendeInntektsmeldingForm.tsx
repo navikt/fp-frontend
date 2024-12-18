@@ -4,8 +4,8 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
 import { Alert, BodyShort, Button, HStack, Popover } from '@navikt/ds-react';
-import { Form,RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
-import { hasValidText, maxLength, minLength,required } from '@navikt/ft-form-validators';
+import { Form, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
+import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
@@ -127,7 +127,23 @@ const ManglendeInntektsmeldingForm: FunctionComponent<OwnProps> = ({
   const svgRef = useRef<SVGSVGElement>(null);
   const [openState, setOpenState] = useState(false);
   const toggleHjelpetekst = useCallback(() => setOpenState(gammelVerdi => !gammelVerdi), []);
-
+  const radioOptions = [
+    {
+      label: intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.TarKontakt' }),
+      value: ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING,
+    },
+    {
+      label: intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.GåVidere' }),
+      value: ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING,
+    },
+  ];
+  // Dette valget skal ikke være tilgjengelig hvis arbeidsgiver ikke er en bedrift
+  if (radData.arbeidsgiverIdent.length === 9) {
+    radioOptions.splice(1, 0, {
+      label: intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.MeldingArbeidsgiverNavNo' }),
+      value: ArbeidsforholdKomplettVurderingType.MELDING_TIL_ARBEIDSGIVER_NAV_NO,
+    });
+  }
   return (
     <>
       <ArbeidsforholdInformasjonPanel
@@ -183,16 +199,7 @@ const ManglendeInntektsmeldingForm: FunctionComponent<OwnProps> = ({
           }
           validate={[required]}
           isReadOnly={isReadOnly}
-          radios={[
-            {
-              label: intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.TarKontakt' }),
-              value: ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING,
-            },
-            {
-              label: intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.GåVidere' }),
-              value: ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING,
-            },
-          ]}
+          radios={radioOptions}
         />
         <VerticalSpacer sixteenPx />
         <TextAreaField

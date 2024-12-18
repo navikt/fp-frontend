@@ -1,8 +1,8 @@
-import React, { FunctionComponent, useCallback, useEffect, useRef,useState } from 'react';
+import React, { FunctionComponent, useCallback, useEffect, useRef, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { Alert,Button } from '@navikt/ds-react';
-import { Table,VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { Alert, Button } from '@navikt/ds-react';
+import { Table, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import {
   AksjonspunktKode,
@@ -237,6 +237,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
     d =>
       d.avklaring?.saksbehandlersVurdering ===
         ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING ||
+      d.avklaring?.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MELDING_TIL_ARBEIDSGIVER_NAV_NO ||
       d.avklaring?.saksbehandlersVurdering ===
         ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD,
   );

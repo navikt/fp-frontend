@@ -65,11 +65,15 @@ export const FagsakSøkIndex = ({ åpneFagsak, kanSaksbehandle }: Props) => {
       if (fagsakerResultat.length === 0) {
         return [];
       }
+
       const oppgaver = await hentOppgaverForFagsaker(fagsakerResultat);
-      if (oppgaver.length === 1) {
-        velgFagsakOperasjoner(oppgaver[0], false);
-      } else if (oppgaver.length === 0 && fagsakerResultat) {
-        åpneFagsak(fagsakerResultat[0].saksnummer);
+
+      if (fagsakerResultat.length === 1) {
+        if (oppgaver.length === 1) {
+          velgFagsakOperasjoner(oppgaver[0], false);
+        } else if (oppgaver.length === 0 && fagsakerResultat) {
+          åpneFagsak(fagsakerResultat[0].saksnummer);
+        }
       }
 
       return fagsakerResultat;
