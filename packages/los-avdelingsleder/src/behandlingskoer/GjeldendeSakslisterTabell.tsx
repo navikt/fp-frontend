@@ -63,7 +63,7 @@ interface Props {
   oppgaverForAvdelingAntall?: number;
   lagNySaksliste: () => void;
   resetValgtSakslisteId: () => void;
-  content: ReactElement;
+  children: ReactElement;
 }
 
 const wait = (ms: number): Promise<any> =>
@@ -79,7 +79,7 @@ export const GjeldendeSakslisterTabell = ({
   oppgaverForAvdelingAntall,
   lagNySaksliste,
   resetValgtSakslisteId,
-  content,
+  children,
 }: Props) => {
   const queryClient = useQueryClient();
 
@@ -162,7 +162,7 @@ export const GjeldendeSakslisterTabell = ({
                 key={saksliste.sakslisteId}
                 className={saksliste.sakslisteId === valgtSakslisteId ? styles.isSelected : undefined}
                 onOpenChange={isOpen => setValgtSaksliste(isOpen, saksliste.sakslisteId)}
-                content={saksliste.sakslisteId === valgtSakslisteId ? content : undefined}
+                content={saksliste.sakslisteId === valgtSakslisteId ? children : undefined}
                 open={saksliste.sakslisteId === valgtSakslisteId}
               >
                 <Table.DataCell>{saksliste.navn}</Table.DataCell>

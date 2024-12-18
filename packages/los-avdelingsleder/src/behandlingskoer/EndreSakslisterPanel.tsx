@@ -31,11 +31,10 @@ export const EndreSakslisterPanel = ({ valgtAvdelingEnhet, avdelingensSaksbehand
   const { data: sakslister, refetch: refetchSakslister } = useQuery(sakslisterForAvdelingOptions(valgtAvdelingEnhet));
 
   const { mutate: lagNySakslisteOgHentAvdelingensSakslisterPåNytt, data: nySakslisteObject } = useMutation({
-    mutationFn: async () => {
-      const nySaksliste = await opprettNySaksliste(valgtAvdelingEnhet);
+    mutationFn: () => opprettNySaksliste(valgtAvdelingEnhet),
+    onSuccess: () => {
       setValgtSakslisteId(undefined);
       refetchSakslister();
-      return nySaksliste;
     },
   });
 
@@ -53,36 +52,32 @@ export const EndreSakslisterPanel = ({ valgtAvdelingEnhet, avdelingensSaksbehand
       oppgaverForAvdelingAntall={oppgaverForAvdelingAntall}
       lagNySaksliste={lagNySakslisteOgHentAvdelingensSakslisterPåNytt}
       resetValgtSakslisteId={() => setValgtSakslisteId(undefined)}
-      content={
-        <div
-          style={{
-            marginBottom: '20px',
-            marginLeft: '-55px',
-            marginRight: '-55px',
-          }}
-        >
-          {valgtSakId && valgtSaksliste && (
-            <React.Fragment key={valgtSaksliste.sakslisteId}>
-              <UtvalgskriterierForSakslisteForm
-                valgtSaksliste={valgtSaksliste}
-                valgtAvdelingEnhet={valgtAvdelingEnhet}
+    >
+      <div
+        style={{
+          marginBottom: '20px',
+          marginLeft: '-55px',
+          marginRight: '-55px',
+        }}
+      >
+        {valgtSakId && valgtSaksliste && (
+          <React.Fragment key={valgtSaksliste.sakslisteId}>
+            <UtvalgskriterierForSakslisteForm valgtSaksliste={valgtSaksliste} valgtAvdelingEnhet={valgtAvdelingEnhet} />
+            <HStack gap="4" justify="center">
+              <ArrowDownIcon
+                className={styles.arrow}
+                title={intl.formatMessage({ id: 'EndreSakslisterPanel.Saksbehandlere' })}
               />
-              <HStack gap="4" justify="center">
-                <ArrowDownIcon
-                  className={styles.arrow}
-                  title={intl.formatMessage({ id: 'EndreSakslisterPanel.Saksbehandlere' })}
-                />
-                <FormattedMessage id="EndreSakslisterPanel.KnyttetMotSaksbehandlere" />
-              </HStack>
-              <SaksbehandlereForSakslisteForm
-                valgtSaksliste={valgtSaksliste}
-                valgtAvdelingEnhet={valgtAvdelingEnhet}
-                avdelingensSaksbehandlere={avdelingensSaksbehandlere}
-              />
-            </React.Fragment>
-          )}
-        </div>
-      }
-    />
+              <FormattedMessage id="EndreSakslisterPanel.KnyttetMotSaksbehandlere" />
+            </HStack>
+            <SaksbehandlereForSakslisteForm
+              valgtSaksliste={valgtSaksliste}
+              valgtAvdelingEnhet={valgtAvdelingEnhet}
+              avdelingensSaksbehandlere={avdelingensSaksbehandlere}
+            />
+          </React.Fragment>
+        )}
+      </div>
+    </GjeldendeSakslisterTabell>
   );
 };

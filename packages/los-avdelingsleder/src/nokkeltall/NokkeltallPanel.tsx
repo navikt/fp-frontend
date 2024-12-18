@@ -1,5 +1,3 @@
-import React, { useRef } from 'react';
-
 import { VStack } from '@navikt/ds-react';
 
 import { getValueFromLocalStorage } from '../data/localStorageHelper';
@@ -16,33 +14,29 @@ interface Props {
 export const NokkeltallPanel = ({ valgtAvdelingEnhet }: Props) => {
   const height = 300;
 
-  const ref = useRef<HTMLDivElement>(null);
-
   return (
-    <div ref={ref}>
-      <VStack gap="4">
-        <TilBehandlingPanel
-          height={height}
-          valgtAvdelingEnhet={valgtAvdelingEnhet}
-          getValueFromLocalStorage={getValueFromLocalStorage}
-        />
-        <FordelingAvBehandlingstypePanel
-          height={height}
-          valgtAvdelingEnhet={valgtAvdelingEnhet}
-          getValueFromLocalStorage={getValueFromLocalStorage}
-        />
-        <VentefristUtløperPanel
-          height={height}
-          valgtAvdelingEnhet={valgtAvdelingEnhet}
-          getValueFromLocalStorage={getValueFromLocalStorage}
-        />
-        <OppgaverPerForsteStonadsdagPanel height={height} valgtAvdelingEnhet={valgtAvdelingEnhet} />
-        <OppgaverSomErApneEllerPaVentPanel
-          height={height}
-          valgtAvdelingEnhet={valgtAvdelingEnhet}
-          getValueFromLocalStorage={getValueFromLocalStorage}
-        />
-      </VStack>
-    </div>
+    <VStack gap="4">
+      <TilBehandlingPanel
+        height={height}
+        valgtAvdelingEnhet={valgtAvdelingEnhet}
+        getValueFromLocalStorage={getValueFromLocalStorage}
+      />
+      <FordelingAvBehandlingstypePanel
+        height={height}
+        valgtAvdelingEnhet={valgtAvdelingEnhet}
+        getValueFromLocalStorage={getValueFromLocalStorage}
+      />
+      <VentefristUtløperPanel
+        height={height}
+        valgtAvdelingEnhet={valgtAvdelingEnhet}
+        getValueFromLocalStorage={getValueFromLocalStorage}
+      />
+      <OppgaverPerForsteStonadsdagPanel height={height} valgtAvdelingEnhet={valgtAvdelingEnhet} />
+      <OppgaverSomErApneEllerPaVentPanel
+        height={height}
+        valgtAvdelingEnhet={valgtAvdelingEnhet}
+        getValueFromLocalStorage={getValueFromLocalStorage}
+      />
+    </VStack>
   );
 };
