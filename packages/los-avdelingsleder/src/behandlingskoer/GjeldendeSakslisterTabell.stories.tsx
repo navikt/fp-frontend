@@ -31,7 +31,7 @@ const meta = {
     resetValgtSakslisteId: action('button-click'),
     lagNySaksliste: action('button-click'),
     valgtAvdelingEnhet: '1',
-    content: <div>test</div>,
+    children: <div>test</div>,
   },
   render: storyArgs => {
     const [args, setArgs] = useState(storyArgs);
