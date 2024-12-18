@@ -133,7 +133,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     expect(await screen.findByTitle('Lukk rad')).toBeInTheDocument();
 
     const radioknapper = screen.getAllByRole('radio', { hidden: true });
-    expect(radioknapper).toHaveLength(2);
+    expect(radioknapper).toHaveLength(3);
     expect(radioknapper[0]).toBeDisabled();
     expect(radioknapper[0]).toBeChecked();
     expect(radioknapper[1]).toBeDisabled();
@@ -189,6 +189,37 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     expect(settPåVent).toHaveBeenNthCalledWith(1, {
       frist,
       ventearsak: 'VENT_OPDT_INNTEKTSMELDING',
+    });
+  });
+
+  it('skal avklare manglende arbeidsforhold og sende arbeidsgiver en melding på Min side - arbeidsgiver', async () => {
+    const bekrefteAksjonspunkt = vi.fn(() => Promise.resolve());
+    const lagreVurdering = vi.fn(() => Promise.resolve());
+    const settPåVent = vi.fn(() => Promise.resolve());
+
+    const utils = render(
+      <InnhentInntektsmelding
+        submitCallback={bekrefteAksjonspunkt}
+        lagreVurdering={lagreVurdering}
+        settBehandlingPåVentCallback={settPåVent}
+      />,
+    );
+
+    expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Send påminnelse via Min side - arbeidsgiver på nav.no'));
+
+    await userEvent.type(utils.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
+
+    await userEvent.click(screen.getByText('Lagre'));
+
+    await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(1));
+    expect(lagreVurdering).toHaveBeenNthCalledWith(1, {
+      arbeidsgiverIdent: '910909088',
+      begrunnelse: 'Dette er en begrunnelse',
+      behandlingUuid: '1223-2323-2323-22332',
+      internArbeidsforholdRef: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
+      vurdering: 'MELDING_TIL_ARBEIDSGIVER_NAV_NO',
     });
   });
 

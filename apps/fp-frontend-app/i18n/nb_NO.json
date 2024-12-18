@@ -130,11 +130,11 @@
 
   "BehandlingMenuIndex.Behandlingsmeny": "Behandlingsmeny",
 
-  "FagsakProfileIndex.Lenke": "Finn søker andre steder",
-  "FagsakProfileIndex.Modia": "Modia",
-  "FagsakProfileIndex.Gosys": "Gosys",
-  "FagsakProfileIndex.AInntekt": "A-inntekt",
-  "FagsakProfileIndex.AAreg": "AA-reg",
+  "EksterneRessurser.Lenke": "Finn søker andre steder",
+  "EksterneRessurser.Modia": "Modia",
+  "EksterneRessurser.Gosys": "Gosys",
+  "EksterneRessurser.AInntekt": "A-inntekt",
+  "EksterneRessurser.AAreg": "AA-reg",
 
   "Rest.ErrorMessage.General": "Noe feilet. Feilen kan være forbigående. Prøv og behandle saken litt senere. Om feilen oppstår igjen meld den inn via porten.",
   "Rest.ErrorMessage.DownTime": "Saksbehandlingsløsningen venter på et annet system som har nedetid nå. Du trenger ikke melde inn en feil, men prøv igjen {date} kl. {time}.\n{message}",
