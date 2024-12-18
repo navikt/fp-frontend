@@ -34,8 +34,6 @@ export const ProsessMeny = ({ menyData, oppdaterProsessPanelIUrl }: Props) => {
         return {
           label: data.tekst ?? '',
           isActive: data.erAktiv,
-          isDisabled: false,
-          isFinished: type === ProcessMenuStepType.success,
           type,
         };
       }),
