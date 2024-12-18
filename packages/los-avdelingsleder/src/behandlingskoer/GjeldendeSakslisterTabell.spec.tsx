@@ -30,6 +30,10 @@ describe('<GjeldendeSakslisterTabell>', () => {
     await userEvent.click(screen.getAllByRole('img')[1]);
 
     expect(await screen.findByText('Ønsker du å slette Saksliste 1?')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Ja'));
+
+    expect(screen.queryByText('Ønsker du å slette Saksliste 1?')).not.toBeInTheDocument();
   });
 
   it('skal legge til en ny kø ved bruk av tastaturet (enter)', async () => {
