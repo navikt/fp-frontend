@@ -21,7 +21,7 @@ export const minTerminbekreftelseDato = () => dayjs().subtract(5, 'year');
 export const maxTerminbekreftelseDato = () => dayjs().subtract(0, 'year');
 
 export const minTermindato = () => dayjs().subtract(5, 'year');
-export const maxTermindato = () => dayjs().add(6, 'months');
+export const maxTermindato = () => dayjs().add(9, 'months');
 
 export const terminBekreftelseBeforeTodayOrTermindato = (
   termindato: string | undefined,
