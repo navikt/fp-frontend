@@ -1,4 +1,4 @@
-import { Params,useLocation, useParams } from 'react-router-dom';
+import { Params, useLocation, useParams } from 'react-router-dom';
 
 import { parseQueryString } from '@navikt/ft-utils';
 import { Location } from 'history';
@@ -20,7 +20,7 @@ const mapMatchToParam = (params: Params, location: Location, trackingConfig: Req
   return trackingConfig.parse(newParams[trackingConfig.paramName]);
 };
 
-function useTrackRouteParam<T>(config: Config): { location: Location; selected: T } {
+export function useTrackRouteParam<T>(config: Config): { location: Location; selected: T } {
   const trackingConfig = { ...defaultConfig, ...config };
 
   const location = useLocation();
@@ -32,5 +32,3 @@ function useTrackRouteParam<T>(config: Config): { location: Location; selected: 
     selected: paramFromUrl,
   };
 }
-
-export default useTrackRouteParam;

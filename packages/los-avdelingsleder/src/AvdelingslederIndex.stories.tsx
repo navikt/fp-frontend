@@ -1,105 +1,129 @@
-import React from 'react';
-
-import { StoryFn } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
+import { Meta, StoryObj } from '@storybook/react';
+import { http, HttpResponse } from 'msw';
 
 import { alleKodeverkLos, withRouter } from '@navikt/fp-storybook-utils';
 import { NavAnsatt } from '@navikt/fp-types';
-import { RestApiMock } from '@navikt/fp-utils-test';
 
-import AvdelingslederIndex from './AvdelingslederIndex';
-import { requestApi,RestApiGlobalStatePathsKeys, RestApiPathsKeys } from './data/fplosRestApi';
-import Avdeling from './typer/avdelingTsType';
+import { AvdelingslederIndexIntlWrapper } from './AvdelingslederIndex';
+import { LosUrl } from './data/fplosAvdelingslederApi';
+import { withQueryClient } from './data/withQueryClientProvider';
 
-export default {
+const HANDLERS = [
+  http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
+  http.get(LosUrl.SAKSBEHANDLERE_FOR_AVDELING, () => HttpResponse.json([])),
+  http.get(LosUrl.OPPGAVE_ANTALL, () => HttpResponse.json(1)),
+  http.get(LosUrl.OPPGAVE_AVDELING_ANTALL, () => HttpResponse.json(1)),
+  http.get(LosUrl.SAKSLISTER_FOR_AVDELING, () => HttpResponse.json([])),
+  http.post(LosUrl.LAGRE_SAKSLISTE_NAVN, () => new HttpResponse(null, { status: 200 })),
+  http.post(LosUrl.LAGRE_SAKSLISTE_SORTERING, () => new HttpResponse(null, { status: 200 })),
+  http.post(LosUrl.LAGRE_SAKSLISTE_SORTERING_INTERVALL, () => new HttpResponse(null, { status: 200 })),
+  http.post(LosUrl.LAGRE_SAKSLISTE_SORTERING_DYNAMISK_PERIDE, () => new HttpResponse(null, { status: 200 })),
+  http.post(LosUrl.LAGRE_SAKSLISTE_FAGSAK_YTELSE_TYPE, () => new HttpResponse(null, { status: 200 })),
+  http.post(LosUrl.LAGRE_SAKSLISTE_BEHANDLINGSTYPE, () => new HttpResponse(null, { status: 200 })),
+  http.post(LosUrl.LAGRE_SAKSLISTE_ANDRE_KRITERIER, () => new HttpResponse(null, { status: 200 })),
+  http.get(LosUrl.HENT_OPPGAVER_FOR_AVDELING, () => HttpResponse.json([])),
+  http.get(LosUrl.HENT_OPPGAVER_PER_DATO, () => HttpResponse.json([])),
+  http.get(LosUrl.HENT_OPPGAVER_APNE_ELLER_PA_VENT, () => HttpResponse.json([])),
+  http.get(LosUrl.HENT_BEHANDLINGER_FRISTUTLOP, () => HttpResponse.json([])),
+  http.get(LosUrl.HENT_OPPGAVER_PER_FORSTE_STONADSDAG, () => HttpResponse.json([])),
+  http.get(LosUrl.RESERVASJONER_FOR_AVDELING, () => HttpResponse.json([])),
+];
+
+const meta = {
   title: 'los/avdelingsleder/AvdelingslederIndex',
-  component: AvdelingslederIndex,
-  decorators: [withRouter],
-};
+  component: AvdelingslederIndexIntlWrapper,
+  decorators: [withRouter, withQueryClient],
+  args: {
+    setLosErIkkeTilgjengelig: action('button-click'),
+  },
+} satisfies Meta<typeof AvdelingslederIndexIntlWrapper>;
+export default meta;
 
-const navAnsattDefault = {
-  kanOppgavestyre: true,
-  kanBehandleKode6: true,
-} as NavAnsatt;
+type Story = StoryObj<typeof meta>;
 
-const Template: StoryFn<{ avdelinger?: Avdeling[]; navAnsatt: NavAnsatt }> = ({ avdelinger, navAnsatt }) => {
-  const data = [
-    { key: RestApiGlobalStatePathsKeys.KODEVERK_LOS.name, data: alleKodeverkLos, global: true },
-    { key: RestApiPathsKeys.AVDELINGER.name, data: avdelinger },
-    { key: RestApiPathsKeys.SAKSBEHANDLERE_FOR_AVDELING.name, data: [] },
-    { key: RestApiPathsKeys.OPPGAVE_ANTALL.name, data: 1 },
-    { key: RestApiPathsKeys.LAGRE_SAKSLISTE_NAVN.name, data: undefined },
-    { key: RestApiPathsKeys.LAGRE_SAKSLISTE_SORTERING.name, data: undefined },
-    { key: RestApiPathsKeys.LAGRE_SAKSLISTE_SORTERING_INTERVALL.name, data: undefined },
-    { key: RestApiPathsKeys.LAGRE_SAKSLISTE_SORTERING_DYNAMISK_PERIDE.name, data: undefined },
-    { key: RestApiPathsKeys.LAGRE_SAKSLISTE_SORTERING_TIDSINTERVALL_DATO.name, data: undefined },
-    { key: RestApiPathsKeys.LAGRE_SAKSLISTE_FAGSAK_YTELSE_TYPE.name, data: undefined },
-    { key: RestApiPathsKeys.LAGRE_SAKSLISTE_BEHANDLINGSTYPE.name, data: undefined },
-    { key: RestApiPathsKeys.LAGRE_SAKSLISTE_ANDRE_KRITERIER.name, data: undefined },
-    { key: RestApiPathsKeys.OPPGAVE_AVDELING_ANTALL.name, data: 1 },
-    { key: RestApiPathsKeys.SAKSLISTER_FOR_AVDELING.name, data: [] },
-    { key: RestApiPathsKeys.HENT_OPPGAVER_FOR_AVDELING.name, data: [] },
-    { key: RestApiPathsKeys.HENT_OPPGAVER_PER_DATO.name, data: [] },
-    { key: RestApiPathsKeys.HENT_OPPGAVER_APNE_ELLER_PA_VENT.name, data: [] },
-    { key: RestApiPathsKeys.HENT_BEHANDLINGER_FRISTUTLOP.name, data: [] },
-    { key: RestApiPathsKeys.HENT_OPPGAVER_PER_FORSTE_STONADSDAG.name, data: [] },
-    { key: RestApiPathsKeys.RESERVASJONER_FOR_AVDELING.name, data: [] },
-  ];
-
-  return (
-    <RestApiMock data={data} requestApi={requestApi}>
-      <AvdelingslederIndex setLosErIkkeTilgjengelig={() => undefined} navAnsatt={navAnsatt} />
-    </RestApiMock>
-  );
-};
-
-export const Default = Template.bind({});
-Default.args = {
-  avdelinger: [
-    {
-      avdelingEnhet: '1234',
-      navn: 'Nav Oslo',
-      kreverKode6: true,
+export const Default: Story = {
+  parameters: {
+    msw: {
+      handlers: HANDLERS.concat(
+        http.get(LosUrl.AVDELINGER, () =>
+          HttpResponse.json([
+            {
+              avdelingEnhet: '1234',
+              navn: 'Nav Oslo',
+              kreverKode6: true,
+            },
+            {
+              avdelingEnhet: '123',
+              navn: 'Nav Vikafossen',
+              kreverKode6: false,
+            },
+          ]),
+        ),
+      ),
     },
-    {
-      avdelingEnhet: '123',
-      navn: 'Nav Vikafossen',
-      kreverKode6: false,
-    },
-  ],
-  navAnsatt: navAnsattDefault,
+  },
+  args: {
+    navAnsatt: {
+      kanOppgavestyre: true,
+      kanBehandleKode6: true,
+    } as NavAnsatt,
+  },
 };
 
-export const LasteIkonFørValgtAvdelingErSatt = Template.bind({});
-LasteIkonFørValgtAvdelingErSatt.args = {
-  avdelinger: [],
-  navAnsatt: navAnsattDefault,
+export const LasteIkonFørValgtAvdelingErSatt: Story = {
+  parameters: {
+    msw: {
+      handlers: HANDLERS.concat(http.get(LosUrl.AVDELINGER, () => HttpResponse.json([]))),
+    },
+  },
+  args: {
+    navAnsatt: {
+      kanOppgavestyre: true,
+      kanBehandleKode6: true,
+    } as NavAnsatt,
+  },
 };
 
-export const HarIkkeTilgang = Template.bind({});
-HarIkkeTilgang.args = {
-  avdelinger: [],
-  navAnsatt: {
-    kanOppgavestyre: false,
-    kanBehandleKode6: false,
-  } as NavAnsatt,
+export const HarIkkeTilgang: Story = {
+  parameters: {
+    msw: {
+      handlers: HANDLERS.concat(http.get(LosUrl.AVDELINGER, () => HttpResponse.json([]))),
+    },
+  },
+  args: {
+    navAnsatt: {
+      kanOppgavestyre: false,
+      kanBehandleKode6: false,
+    } as NavAnsatt,
+  },
 };
 
-export const SkalFiltrereBortAvdelingerSomKreverKode6 = Template.bind({});
-SkalFiltrereBortAvdelingerSomKreverKode6.args = {
-  avdelinger: [
-    {
-      avdelingEnhet: '1234',
-      navn: 'Nav Oslo',
-      kreverKode6: true,
+export const SkalFiltrereBortAvdelingerSomKreverKode6: Story = {
+  parameters: {
+    msw: {
+      handlers: HANDLERS.concat(
+        http.get(LosUrl.AVDELINGER, () =>
+          HttpResponse.json([
+            {
+              avdelingEnhet: '1234',
+              navn: 'Nav Oslo',
+              kreverKode6: true,
+            },
+            {
+              avdelingEnhet: '123',
+              navn: 'Nav Vikafossen',
+              kreverKode6: false,
+            },
+          ]),
+        ),
+      ),
     },
-    {
-      avdelingEnhet: '123',
-      navn: 'Nav Vikafossen',
-      kreverKode6: false,
-    },
-  ],
-  navAnsatt: {
-    kanOppgavestyre: true,
-    kanBehandleKode6: false,
-  } as NavAnsatt,
+  },
+  args: {
+    navAnsatt: {
+      kanOppgavestyre: true,
+      kanBehandleKode6: false,
+    } as NavAnsatt,
+  },
 };

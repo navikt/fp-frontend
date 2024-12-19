@@ -3,7 +3,7 @@ type AnnetKriterie = Readonly<{
   inkluder: boolean;
 }>;
 
-type SakslisteAvdeling = Readonly<{
+export type SakslisteAvdeling = Readonly<{
   sakslisteId: number;
   navn?: string;
   behandlingTyper?: string[];
@@ -21,5 +21,3 @@ type SakslisteAvdeling = Readonly<{
   saksbehandlerIdenter: string[];
   antallBehandlinger: number;
 }>;
-
-export default SakslisteAvdeling;

@@ -1,21 +1,20 @@
-import React from 'react';
-
-import { StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
-import IkkeTilgangTilAvdelingslederPanel from './IkkeTilgangTilAvdelingslederPanel';
+import { IkkeTilgangTilAvdelingslederPanel } from './IkkeTilgangTilAvdelingslederPanel';
 
 import messages from '../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
 
-export default {
+const meta = {
   title: 'los/avdelingsleder/IkkeTilgangTilAvdelingslederPanel',
   component: IkkeTilgangTilAvdelingslederPanel,
   decorators: [withIntl],
-};
+} satisfies Meta<typeof IkkeTilgangTilAvdelingslederPanel>;
+export default meta;
 
-const Template: StoryFn = () => <IkkeTilgangTilAvdelingslederPanel />;
+type Story = StoryObj<typeof meta>;
 
-export const IkkeTilgangTilAvdelingsleder = Template.bind({});
+export const IkkeTilgangTilAvdelingsleder: Story = {};
