@@ -1,9 +1,10 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { ChevronDownIcon } from '@navikt/aksel-icons';
 import { Button } from '@navikt/ds-react';
 import { Dropdown } from '@navikt/ds-react-internal';
+import { useQuery } from '@tanstack/react-query';
 
 import { getEndreEnhetMenytekst, getTaAvVentMenytekst, getVergeMenytekst } from '@navikt/fp-sak-meny';
 import { getMenytekst as getApneForEndringerMenytekst } from '@navikt/fp-sak-meny-apne-for-endringer';
@@ -13,7 +14,8 @@ import { getMenytekst as getNyBehandlingMenytekst } from '@navikt/fp-sak-meny-ny
 import { getMenytekst as getSettPaVentMenytekst } from '@navikt/fp-sak-meny-sett-pa-vent';
 import { Behandling, BehandlingAppKontekst, Fagsak, VergeBehandlingmenyValg } from '@navikt/fp-types';
 
-import { FagsakApiKeys, restFagsakApiHooks } from '../data/fagsakContextApi';
+import { initFetchOptions } from '../data/fagsakApi';
+import { notEmpty } from '../data/notEmpty';
 import { FagsakData } from '../fagsak/FagsakData';
 import { ApneForEndringerMenyModal } from './modaler/ApneForEndringerMenyModal';
 import { EndreBehandlendeEnhetMenyModal } from './modaler/EndreBehandlendeEnhetMenyModal';
@@ -86,26 +88,19 @@ interface Props {
   behandlingUuid?: string;
   setBehandling: (behandling: Behandling | undefined) => void;
   hentOgSettBehandling: () => void;
-  oppdaterFagsak: () => void;
 }
 
-export const BehandlingMenuIndex = ({
-  fagsakData,
-  behandlingUuid,
-  setBehandling,
-  hentOgSettBehandling,
-  oppdaterFagsak,
-}: Props) => {
-  const initFetchData = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
-  const { innloggetBruker: navAnsatt } = initFetchData;
+export const BehandlingMenuIndex = ({ fagsakData, behandlingUuid, setBehandling, hentOgSettBehandling }: Props) => {
+  const { data: initFetchData } = useQuery(initFetchOptions());
+  const { innloggetBruker: navAnsatt } = notEmpty(initFetchData);
 
   const [valgtModal, setValgtModal] = useState<string | undefined>();
-  const lukkModal = useCallback(() => setValgtModal(undefined), []);
+  const lukkModal = () => setValgtModal(undefined);
 
   const fagsak = fagsakData.getFagsak();
   const behandling = fagsakData.getBehandling(behandlingUuid);
 
-  const menyData = useMemo(() => hentMenyData(behandling, fagsak), [behandling, fagsak]);
+  const menyData = hentMenyData(behandling, fagsak);
 
   if (navAnsatt.kanVeilede) {
     return null;
@@ -147,7 +142,6 @@ export const BehandlingMenuIndex = ({
         <EndreFagsakMarkeringMenyModal
           saksnummer={fagsak.saksnummer}
           fagsakMarkeringer={fagsak.fagsakMarkeringer}
-          oppdaterFagsak={oppdaterFagsak}
           hentOgSettBehandling={hentOgSettBehandling}
           lukkModal={lukkModal}
         />

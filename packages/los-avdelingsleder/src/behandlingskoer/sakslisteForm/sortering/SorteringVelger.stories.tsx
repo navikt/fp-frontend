@@ -6,10 +6,9 @@ import { Meta, StoryObj } from '@storybook/react';
 import { http, HttpResponse } from 'msw';
 
 import { BehandlingType } from '@navikt/fp-kodeverk';
-import { alleKodeverkLos, getIntlDecorator } from '@navikt/fp-storybook-utils';
+import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { LosUrl } from '../../../data/fplosAvdelingslederApi';
-import { withQueryClient } from '../../../data/withQueryClientProvider';
 import { KøSortering } from '../../../kodeverk/KoSortering';
 import { SorteringVelger } from './SorteringVelger';
 

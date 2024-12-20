@@ -2,10 +2,9 @@ import { Meta, StoryObj } from '@storybook/react';
 import { http, HttpResponse } from 'msw';
 
 import { BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
-import { alleKodeverkLos, getIntlDecorator } from '@navikt/fp-storybook-utils';
+import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { LosUrl } from '../data/fplosAvdelingslederApi';
-import { withQueryClient } from '../data/withQueryClientProvider';
 import { AndreKriterierType } from '../kodeverk/andreKriterierType';
 import { KøSortering } from '../kodeverk/KoSortering';
 import { SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType';

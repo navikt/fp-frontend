@@ -3,13 +3,13 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Button, HStack, Link, VStack } from '@navikt/ds-react';
-import { Form,SelectField, TextAreaField } from '@navikt/ft-form-hooks';
+import { Form, SelectField, TextAreaField } from '@navikt/ft-form-hooks';
 import { ariaCheck, hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
-import { DokumentMalType, FagsakYtelseType,UgunstAarsakType } from '@navikt/fp-kodeverk';
+import { DokumentMalType, FagsakYtelseType, UgunstAarsakType } from '@navikt/fp-kodeverk';
 import { UkjentAdresseMeldingIndex } from '@navikt/fp-sak-ukjent-adresse';
-import { KodeverkMedNavn } from '@navikt/fp-types';
+import { BehandlingAppKontekst, KodeverkMedNavn } from '@navikt/fp-types';
 
 import styles from './messages.module.css';
 
@@ -63,13 +63,13 @@ const getfiltrerteRevurderingVarslingArsaker = (
   return revurderingVarslingArsaker;
 };
 
-const buildInitalValues = (templates?: Template[], isKontrollerRevurderingApOpen?: boolean): FormValues => {
+const buildInitalValues = (behandling: BehandlingAppKontekst): FormValues => {
   const initialValues = {
-    brevmalkode: templates?.[0]?.kode ?? undefined,
+    brevmalkode: behandling.brevmaler[0]?.kode ?? undefined,
     fritekst: '',
   };
 
-  if (isKontrollerRevurderingApOpen) {
+  if (behandling.ugunstAksjonspunkt) {
     return { ...initialValues, brevmalkode: DokumentMalType.VARSEL_OM_REVURDERING };
   }
   return { ...initialValues };
@@ -84,13 +84,10 @@ const transformValues = (values: FormValues) => {
 };
 
 interface Props {
+  behandling: BehandlingAppKontekst;
   submitCallback: (values: FormValues) => void;
   previewCallback: (brevmalkode?: string, fritekst?: string, arsakskode?: string) => void;
-  // TODO (TOR) Er templates optional eller ikkje?
-  templates: Template[];
-  sprakKode?: string;
   revurderingVarslingArsak: KodeverkMedNavn[];
-  isKontrollerRevurderingApOpen?: boolean;
   fagsakYtelseType: string;
   kanVeilede: boolean;
   meldingFormData?: any;
@@ -105,21 +102,19 @@ interface Props {
  * og fritekst som skal flettes inn i brevet skrives inn i et eget felt.
  */
 export const Messages = ({
-  templates,
+  behandling,
   previewCallback,
   submitCallback,
-  sprakKode,
   revurderingVarslingArsak,
   fagsakYtelseType,
   kanVeilede,
   meldingFormData,
   setMeldingFormData,
-  isKontrollerRevurderingApOpen,
   brukerManglerAdresse,
 }: Props) => {
   const intl = useIntl();
   const formMethods = useForm<FormValues>({
-    defaultValues: meldingFormData || buildInitalValues(templates, isKontrollerRevurderingApOpen),
+    defaultValues: meldingFormData || buildInitalValues(behandling),
   });
 
   const brevmalkode = formMethods.watch('brevmalkode');
@@ -131,7 +126,7 @@ export const Messages = ({
     [],
   );
 
-  if (!sprakKode) {
+  if (!behandling.sprakkode) {
     return null;
   }
 
@@ -144,7 +139,7 @@ export const Messages = ({
     e.preventDefault();
   };
 
-  const language = getLanguageFromSprakkode(sprakKode);
+  const language = getLanguageFromSprakkode(behandling.sprakkode);
 
   const erVarselOmRevurdering = brevmalkode === DokumentMalType.VARSEL_OM_REVURDERING;
 
@@ -159,9 +154,9 @@ export const Messages = ({
           name="brevmalkode"
           label={intl.formatMessage({ id: 'Messages.Template' })}
           validate={[required]}
-          selectValues={templates.map(template => (
-            <option key={template.kode} value={template.kode} disabled={!template.tilgjengelig}>
-              {template.navn}
+          selectValues={behandling.brevmaler.map(mal => (
+            <option key={mal.kode} value={mal.kode} disabled={!mal.tilgjengelig}>
+              {mal.navn}
             </option>
           ))}
           className={styles.bredde}

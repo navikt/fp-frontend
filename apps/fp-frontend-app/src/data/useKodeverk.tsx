@@ -1,18 +1,22 @@
+import { useQuery } from '@tanstack/react-query';
+
 import { BehandlingType, KodeverkType } from '@navikt/fp-kodeverk';
 import { AlleKodeverk, AlleKodeverkTilbakekreving, KodeverkMedNavn } from '@navikt/fp-types';
 
-import { FagsakApiKeys, restFagsakApiHooks } from './fagsakContextApi';
+import { useFagsakApi } from './fagsakApi';
+import { notEmpty } from './notEmpty';
 
 /**
  * Hook som henter kodeverk knyttet til behandlingstype
  */
 export function useKodeverk(behandlingType?: string): AlleKodeverk | AlleKodeverkTilbakekreving {
-  const alleKodeverkFpSak = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK);
-  const alleKodeverkFpTilbake = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK_FPTILBAKE);
+  const api = useFagsakApi();
+  const { data: alleKodeverkFpSak } = useQuery(api.kodeverkOptions());
+  const { data: alleKodeverkFpTilbake } = useQuery(api.fptilbake.kodeverkOptions());
 
   const erTilbakekreving =
     BehandlingType.TILBAKEKREVING === behandlingType || BehandlingType.TILBAKEKREVING_REVURDERING === behandlingType;
-  return erTilbakekreving ? alleKodeverkFpTilbake : alleKodeverkFpSak;
+  return notEmpty(erTilbakekreving ? alleKodeverkFpTilbake : alleKodeverkFpSak);
 }
 
 /**
@@ -20,9 +24,10 @@ export function useKodeverk(behandlingType?: string): AlleKodeverk | AlleKodever
  * må @see useGlobalStateRestApi først brukes for å hente data fra backend
  */
 export function useFpSakKodeverk<T = KodeverkMedNavn>(kodeverkType: string): T[] {
-  const alleKodeverk = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK);
+  const { kodeverkOptions } = useFagsakApi();
+  const { data: alleKodeverk } = useQuery(kodeverkOptions());
   // @ts-expect-error Fiks
-  return alleKodeverk[kodeverkType];
+  return notEmpty(alleKodeverk)[kodeverkType];
 }
 
 /**
@@ -30,7 +35,8 @@ export function useFpSakKodeverk<T = KodeverkMedNavn>(kodeverkType: string): T[]
  * må @see useGlobalStateRestApi først brukes for å hente data fra backend
  */
 export function useFpTilbakeKodeverk<T = KodeverkMedNavn>(kodeverkType: string): T[] {
-  const alleKodeverk = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK_FPTILBAKE);
+  const api = useFagsakApi();
+  const { data: alleKodeverk } = useQuery(api.fptilbake.kodeverkOptions());
   // @ts-expect-error Fiks
   return alleKodeverk ? alleKodeverk[kodeverkType] : undefined;
 }
@@ -59,15 +65,16 @@ export function useFpSakKodeverkMedNavn(kode: string, kodeverk: KodeverkType): K
  * må @see useGlobalStateRestApi først brukes for å hente data fra backend
  */
 export function useGetKodeverkFn() {
-  const alleFpSakKodeverk = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK);
-  const alleFpTilbakeKodeverk = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK_FPTILBAKE);
+  const api = useFagsakApi();
+  const { data: alleFpSakKodeverk } = useQuery(api.kodeverkOptions());
+  const { data: alleKodeverkFpTilbake } = useQuery(api.fptilbake.kodeverkOptions());
 
   return (kode: string, kodeverk: KodeverkType, behandlingType: string = BehandlingType.FORSTEGANGSSOKNAD) => {
     const kodeverkForType =
       behandlingType === BehandlingType.TILBAKEKREVING || behandlingType === BehandlingType.TILBAKEKREVING_REVURDERING
         ? // @ts-expect-error Fiks
-          alleFpTilbakeKodeverk[kodeverk]
-        : alleFpSakKodeverk[kodeverk];
+          notEmpty(alleKodeverkFpTilbake)[kodeverk]
+        : notEmpty(alleFpSakKodeverk)[kodeverk];
     if (!kodeverkForType || kodeverkForType.length === 0) {
       throw Error(`Det finnes ingen kodeverk for type ${kodeverk} med kode ${kode}`);
     }

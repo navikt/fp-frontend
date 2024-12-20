@@ -2,10 +2,9 @@ import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
-import { getIntlDecorator } from '@navikt/fp-storybook-utils';
+import { getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 import { NavAnsatt } from '@navikt/fp-types';
 
-import { withQueryClient } from '../../data/withQueryClientProvider';
 import { DokumentTittel } from '../../kodeverk/dokumentTittel';
 import { JournalKanal } from '../../kodeverk/journalKanal';
 import { OppgaveKilde } from '../../kodeverk/oppgaveKilde';

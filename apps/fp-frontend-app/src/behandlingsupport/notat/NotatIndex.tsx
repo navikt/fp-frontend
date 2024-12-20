@@ -1,27 +1,35 @@
-import React, { useCallback } from 'react';
 import { useIntl } from 'react-intl';
+
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { NotatSakIndex } from '@navikt/fp-sak-notat';
 import { Fagsak } from '@navikt/fp-types';
 
-import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
+import { FagsakRel, initFetchOptions, useFagsakApi } from '../../data/fagsakApi';
+import { notEmpty } from '../../data/notEmpty';
 import { SupportHeaderAndContent } from '../SupportHeader';
 
 interface Props {
   fagsak: Fagsak;
-  oppdaterFagsak: () => void;
 }
 
-export const NotatIndex = ({ fagsak, oppdaterFagsak }: Props) => {
+export const NotatIndex = ({ fagsak }: Props) => {
+  const queryClient = useQueryClient();
+  const api = useFagsakApi();
   const intl = useIntl();
-  const { startRequest: lagreNotat } = restFagsakApiHooks.useRestApiRunner(FagsakApiKeys.LAGRE_NOTAT);
-  const lagre = useCallback(
-    (params: { saksnummer: string; notat: string }) => lagreNotat(params).then(() => oppdaterFagsak()),
-    [],
-  );
 
-  const initFetch = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
-  const { innloggetBruker } = initFetch;
+  const { mutate: lagreNotat } = useMutation({
+    mutationFn: (valuesToStore: { saksnummer: string; notat: string }) =>
+      api.lagreNotat(valuesToStore.saksnummer, valuesToStore.notat),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [FagsakRel.FETCH_FAGSAK],
+      });
+    },
+  });
+
+  const { data: initFetch } = useQuery(initFetchOptions());
+  const { innloggetBruker } = notEmpty(initFetch);
 
   return (
     <SupportHeaderAndContent
@@ -32,7 +40,7 @@ export const NotatIndex = ({ fagsak, oppdaterFagsak }: Props) => {
       <NotatSakIndex
         saksnummer={fagsak.saksnummer}
         notater={fagsak.notater}
-        lagreNotat={lagre}
+        lagreNotat={lagreNotat}
         saksbehandlerNavn={innloggetBruker.brukernavn}
         kanSaksbehandle={innloggetBruker.kanSaksbehandle}
       />

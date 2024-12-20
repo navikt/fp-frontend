@@ -1,12 +1,14 @@
-import { FagsakApiKeys, restFagsakApiHooks } from '../data/fagsakContextApi';
+import { useQuery } from '@tanstack/react-query';
+
+import { initFetchFpTilbakeOptions } from '../data/fagsakApi';
 import { ApplicationContextPath } from './ApplicationContextPath';
 
 export const useGetEnabledApplikasjonContext = (): ApplicationContextPath[] => {
   const enabledApplicationContexts = [ApplicationContextPath.FPSAK];
 
-  const initFpTilbake = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH_FPTILBAKE);
+  const { status } = useQuery(initFetchFpTilbakeOptions());
 
-  if (initFpTilbake) {
+  if (status !== 'error') {
     enabledApplicationContexts.push(ApplicationContextPath.FPTILBAKE);
   }
 

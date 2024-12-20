@@ -3,10 +3,9 @@ import { Meta, StoryObj } from '@storybook/react';
 import { http, HttpResponse } from 'msw';
 
 import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
-import { getIntlDecorator } from '@navikt/fp-storybook-utils';
+import { getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { LosUrl } from '../../../data/fplosSaksbehandlerApi';
-import { withQueryClient } from '../../../data/withQueryClientProvider';
 import { OppgaveHandlingerMenu } from './OppgaveHandlingerMenu';
 
 import messages from '../../../../i18n/nb_NO.json';

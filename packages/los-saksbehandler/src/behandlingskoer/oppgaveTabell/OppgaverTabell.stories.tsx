@@ -9,10 +9,9 @@ import { http, HttpResponse } from 'msw';
 import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { Oppgave } from '@navikt/fp-los-felles';
 import { AsyncPollingStatus } from '@navikt/fp-rest-api';
-import { alleKodeverkLos, getIntlDecorator } from '@navikt/fp-storybook-utils';
+import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { losKodeverkOptions, LosUrl } from '../../data/fplosSaksbehandlerApi';
-import { withQueryClient } from '../../data/withQueryClientProvider';
 import { OppgaverTabell } from './OppgaverTabell';
 
 import messages from '../../../i18n/nb_NO.json';

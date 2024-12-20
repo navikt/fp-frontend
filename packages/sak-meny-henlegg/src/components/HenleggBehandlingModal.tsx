@@ -3,11 +3,11 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Button, Heading, HStack, Label, Link, Modal, VStack } from '@navikt/ds-react';
-import { Form,SelectField, TextAreaField } from '@navikt/ft-form-hooks';
+import { Form, SelectField, TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, required } from '@navikt/ft-form-validators';
 import { formaterFritekst } from '@navikt/ft-utils';
 
-import { BehandlingResultatType, BehandlingType, DokumentMalType,FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { BehandlingResultatType, BehandlingType, DokumentMalType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { KodeverkMedNavn } from '@navikt/fp-types';
 
 import styles from './henleggBehandlingModal.module.css';
@@ -20,8 +20,8 @@ const previewHenleggBehandlingDoc =
   (
     previewHenleggBehandling: (erHenleggelse: boolean, data: any) => void,
     ytelseType: string,
+    behandlingUuid: string,
     fritekst?: string,
-    behandlingUuid?: string,
   ) =>
   (e: React.MouseEvent | React.KeyboardEvent): void => {
     // TODO Hardkoda verdiar. Er dette eit kodeverk?
@@ -119,7 +119,7 @@ interface Props {
   handleSubmit: (values: FormValues) => void;
   cancelEvent: () => void;
   previewHenleggBehandling: (erHenleggelse: boolean, data: any) => void;
-  behandlingUuid?: string;
+  behandlingUuid: string;
   ytelseType: string;
   behandlingResultatTyper: KodeverkMedNavn[];
   behandlingType: string;
@@ -203,12 +203,12 @@ export const HenleggBehandlingModal = ({
                 <Label size="small">{intl.formatMessage({ id: 'HenleggBehandlingModal.SokerInformeres' })}</Label>
                 <Link
                   href="#"
-                  onClick={previewHenleggBehandlingDoc(previewHenleggBehandling, ytelseType, fritekst, behandlingUuid)}
+                  onClick={previewHenleggBehandlingDoc(previewHenleggBehandling, ytelseType, behandlingUuid, fritekst)}
                   onKeyDown={previewHenleggBehandlingDoc(
                     previewHenleggBehandling,
                     ytelseType,
-                    fritekst,
                     behandlingUuid,
+                    fritekst,
                   )}
                 >
                   <FormattedMessage id="HenleggBehandlingModal.ForhandsvisBrev" />

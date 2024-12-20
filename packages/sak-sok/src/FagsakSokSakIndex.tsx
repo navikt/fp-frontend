@@ -13,7 +13,7 @@ const intl = createIntl(messages);
 
 interface Props {
   fagsaker?: FagsakEnkel[];
-  searchFagsakCallback: (params?: { searchString: string }, keepData?: boolean) => Promise<FagsakEnkel[] | undefined>;
+  searchFagsakCallback: (params: { searchString: string }) => void;
   searchResultReceived: boolean;
   selectFagsakCallback: (saksnummer: string) => void;
   searchStarted?: boolean;

@@ -1,15 +1,18 @@
-import React, { useCallback,useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { RawIntlProvider } from 'react-intl';
 import { Link, useLocation } from 'react-router-dom';
 
 import { createIntl, parseQueryString } from '@navikt/ft-utils';
+import { QueryCache, QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { HTTPError } from 'ky';
 import moment from 'moment';
 
 import { EventType } from '@navikt/fp-rest-api';
-import { useRestApiError } from '@navikt/fp-rest-api-hooks';
+import { useRestApiError, useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 import { ForbiddenPage, UnauthorizedPage } from '@navikt/fp-sak-infosider';
 
-import { FagsakApiKeys, restFagsakApiHooks } from '../data/fagsakContextApi';
+import { initFetchOptions } from '../data/fagsakApi';
 import { AppConfigResolver } from './AppConfigResolver';
 import { Dekorator } from './components/Dekorator';
 import { Home } from './components/Home';
@@ -29,17 +32,65 @@ const EMPTY_ARRAY = [] as any[];
 
 const intl = createIntl(messages);
 
+const createQueryClient = (addErrorMessage: (data: any) => void) =>
+  new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: process.env.NODE_ENV === 'test' ? false : 3,
+      },
+    },
+    queryCache: new QueryCache({
+      onError: error => {
+        // eslint-disable-next-line no-console
+        console.log(error);
+
+        // TODO Dette er ein forenkela kopi av dagens feilhåndtering. Refaktorer og flytt når Tanstack Query blir brukt over alt
+        if (error instanceof HTTPError) {
+          if (error.response.status === 403) {
+            addErrorMessage({ type: EventType.REQUEST_FORBIDDEN, feilmelding: error.message });
+          } else if (error.response.status === 401) {
+            addErrorMessage({ type: EventType.REQUEST_UNAUTHORIZED, feilmelding: error.message });
+          } else if (error.response.status === 504 || error.response.status === 404) {
+            addErrorMessage({
+              type: EventType.REQUEST_GATEWAY_TIMEOUT_OR_NOT_FOUND,
+              //@ts-expect-error
+              location: error.response?.config?.url,
+            });
+          } else {
+            addErrorMessage({ type: EventType.REQUEST_ERROR, feilmelding: error.message });
+          }
+        } else {
+          addErrorMessage({ type: EventType.REQUEST_ERROR, feilmelding: error.message });
+        }
+      },
+    }),
+  });
+
+export const AppIndexWrapper = () => {
+  const { addErrorMessage } = useRestApiErrorDispatcher();
+  const queryClient = useMemo(() => createQueryClient(addErrorMessage), []);
+
+  return (
+    <RawIntlProvider value={intl}>
+      <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools />
+        <AppIndex />
+      </QueryClientProvider>
+    </RawIntlProvider>
+  );
+};
+
 /**
  * AppIndex
  *
- * Container komponent. Dette er toppkomponenten i applikasjonen. Denne vil rendre header
+ * Dette er toppkomponenten i applikasjonen. Denne vil rendre header
  * og home-komponentene. Home-komponenten vil rendre barn-komponenter via ruter.
  */
 export const AppIndex = () => {
   const [headerHeight, setHeaderHeight] = useState(0);
   const [crashMessage, setCrashMessage] = useState<string>();
 
-  const initFetch = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
+  const { data: initFetch } = useQuery(initFetchOptions());
   const navAnsatt = initFetch?.innloggetBruker;
 
   const location = useLocation();
@@ -73,26 +124,22 @@ export const AppIndex = () => {
   const shouldRenderHome = !crashMessage && !hasForbiddenOrUnauthorizedErrors;
 
   return (
-    <RawIntlProvider value={intl}>
-      <ErrorBoundary errorMessageCallback={addErrorMessageAndSetAsCrashed}>
-        <AppConfigResolver>
-          <>
-            <Dekorator
-              hideErrorMessages={hasForbiddenOrUnauthorizedErrors}
-              queryStrings={queryStrings}
-              setSiteHeight={setSiteHeight}
-              crashMessage={crashMessage}
-            />
-            <ErrorBoundary errorMessageCallback={addErrorMessageAndSetAsCrashed} showChild>
-              {shouldRenderHome && <Home headerHeight={headerHeight} navAnsatt={navAnsatt} />}
-            </ErrorBoundary>
-            {forbiddenErrors.length > 0 && <ForbiddenPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />}
-            {unauthorizedErrors.length > 0 && (
-              <UnauthorizedPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />
-            )}
-          </>
-        </AppConfigResolver>
-      </ErrorBoundary>
-    </RawIntlProvider>
+    <ErrorBoundary errorMessageCallback={addErrorMessageAndSetAsCrashed}>
+      <AppConfigResolver>
+        <>
+          <Dekorator
+            hideErrorMessages={hasForbiddenOrUnauthorizedErrors}
+            queryStrings={queryStrings}
+            setSiteHeight={setSiteHeight}
+            crashMessage={crashMessage}
+          />
+          <ErrorBoundary errorMessageCallback={addErrorMessageAndSetAsCrashed} showChild>
+            {shouldRenderHome && <Home headerHeight={headerHeight} navAnsatt={navAnsatt} />}
+          </ErrorBoundary>
+          {forbiddenErrors.length > 0 && <ForbiddenPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />}
+          {unauthorizedErrors.length > 0 && <UnauthorizedPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />}
+        </>
+      </AppConfigResolver>
+    </ErrorBoundary>
   );
 };

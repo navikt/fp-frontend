@@ -14,7 +14,7 @@ const intl = createIntl(messages);
 interface Props {
   saksnummer: string;
   notater: Saksnotat[];
-  lagreNotat: (params: { saksnummer: string; notat: string }) => Promise<void | undefined>;
+  lagreNotat: (params: { saksnummer: string; notat: string }) => void;
   saksbehandlerNavn: string;
   kanSaksbehandle: boolean;
 }

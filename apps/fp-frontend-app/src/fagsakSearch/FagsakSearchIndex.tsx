@@ -1,24 +1,27 @@
-import React, { useEffect, useMemo } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { errorOfType, ErrorTypes, getErrorResponseData } from '@navikt/fp-rest-api';
-import { RestApiState } from '@navikt/fp-rest-api-hooks';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { HTTPError } from 'ky';
+
 import { FagsakSokSakIndex } from '@navikt/fp-sak-sok';
 import { FagsakEnkel } from '@navikt/fp-types';
 
 import { pathToFagsak } from '../app/paths';
-import { FagsakApiKeys, restFagsakApiHooks } from '../data/fagsakContextApi';
+import { useFagsakApi } from '../data/fagsakApi';
+import { notEmpty } from '../data/notEmpty';
 
 const EMPTY_ARRAY = [] as FagsakEnkel[];
 
 /**
  * FagsakSearchIndex
  *
- * Container komponent. Har ansvar for å vise søkeskjermbildet og å håndtere fagsaksøket
+ * Har ansvar for å vise søkeskjermbildet og å håndtere fagsaksøket
  * mot server og lagringen av resultatet i klientens state.
  */
 export const FagsakSearchIndex = () => {
-  const alleKodeverk = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK);
+  const { kodeverkOptions, søkFagsak } = useFagsakApi();
+  const { data: alleKodeverk } = useQuery(kodeverkOptions());
 
   const navigate = useNavigate();
   const goToFagsak = (saksnummer?: string) => {
@@ -28,34 +31,34 @@ export const FagsakSearchIndex = () => {
   };
 
   const {
-    startRequest: searchFagsaker,
+    mutate: searchFagsaker,
     data: fagsaker = EMPTY_ARRAY,
-    state: sokeStatus,
-    error,
-  } = restFagsakApiHooks.useRestApiRunner(FagsakApiKeys.SEARCH_FAGSAK);
+    status: søkeStatus,
+    error: fagsakError,
+  } = useMutation({
+    mutationFn: (valuesToStore: { searchString: string }) => søkFagsak(valuesToStore.searchString),
+    onSuccess: resultatFagsaker => {
+      if (resultatFagsaker.length === 1) {
+        goToFagsak(resultatFagsaker[0].saksnummer);
+      }
+    },
+  });
 
-  const searchResultAccessDenied = useMemo(
-    () => (errorOfType(ErrorTypes.MANGLER_TILGANG_FEIL, error) ? getErrorResponseData(error) : undefined),
-    [error],
-  );
-
-  const sokFerdig = sokeStatus === RestApiState.SUCCESS;
-
-  useEffect(() => {
-    if (sokFerdig && fagsaker.length === 1) {
-      goToFagsak(fagsaker[0].saksnummer);
-    }
-  }, [sokFerdig, fagsaker]);
+  const searchResultAccessDenied =
+    fagsakError && fagsakError instanceof HTTPError && fagsakError.response.status === 403
+      ? //@ts-expect-error response.data når ein refaktorerar feilhåndteringa
+        fagsakError.response?.data
+      : undefined;
 
   return (
     <FagsakSokSakIndex
       fagsaker={fagsaker}
       searchFagsakCallback={searchFagsaker}
-      searchResultReceived={sokFerdig}
+      searchResultReceived={søkeStatus === 'success'}
       selectFagsakCallback={goToFagsak}
-      searchStarted={sokeStatus === RestApiState.LOADING}
+      searchStarted={søkeStatus === 'pending'}
       searchResultAccessDenied={searchResultAccessDenied}
-      alleKodeverk={alleKodeverk}
+      alleKodeverk={notEmpty(alleKodeverk)}
     />
   );
 };

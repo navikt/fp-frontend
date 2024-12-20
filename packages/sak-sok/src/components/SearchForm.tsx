@@ -7,8 +7,6 @@ import { BodyShort, Button, HStack, VStack } from '@navikt/ds-react';
 import { Form, InputField } from '@navikt/ft-form-hooks';
 import { hasValidSaksnummerOrFodselsnummerFormat } from '@navikt/ft-form-validators';
 
-import { FagsakEnkel } from '@navikt/fp-types';
-
 import styles from './searchForm.module.css';
 
 const isButtonDisabled = (searchStarted: boolean, searchString?: string): boolean =>
@@ -19,7 +17,7 @@ interface Props {
   searchResultAccessDenied?: {
     feilmelding: string;
   };
-  searchFagsakCallback: (params?: { searchString: string }) => Promise<FagsakEnkel[] | undefined>;
+  searchFagsakCallback: (params: { searchString: string }) => void;
 }
 
 /**

@@ -2,12 +2,11 @@ import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 import { http, HttpResponse } from 'msw';
 
-import { alleKodeverkLos, withRouter } from '@navikt/fp-storybook-utils';
+import { alleKodeverkLos, withQueryClient, withRouter } from '@navikt/fp-storybook-utils';
 import { NavAnsatt } from '@navikt/fp-types';
 
 import { AvdelingslederIndexIntlWrapper } from './AvdelingslederIndex';
 import { LosUrl } from './data/fplosAvdelingslederApi';
-import { withQueryClient } from './data/withQueryClientProvider';
 
 const HANDLERS = [
   http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),

@@ -1,9 +1,10 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { Navigate, NavLink, useLocation, useMatch } from 'react-router-dom';
 
 import { HStack, VStack } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { useQuery } from '@tanstack/react-query';
 import { Location } from 'history';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
@@ -16,7 +17,8 @@ import { Behandling, BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
 import { ErrorBoundary } from '../app/ErrorBoundary';
 import { getLocationWithDefaultProsessStegAndFakta, pathToBehandling, pathToBehandlinger } from '../app/paths';
 import { BehandlingMenuIndex } from '../behandlingmenu/BehandlingMenuIndex';
-import { FagsakApiKeys, restFagsakApiHooks } from '../data/fagsakContextApi';
+import { initFetchOptions } from '../data/fagsakApi';
+import { notEmpty } from '../data/notEmpty';
 import { useFpSakKodeverkMedNavn, useGetKodeverkFn } from '../data/useKodeverk';
 import { FagsakData } from '../fagsak/FagsakData';
 import { EksterneRessurser } from './EksterneRessurser';
@@ -47,7 +49,6 @@ interface Props {
   behandlingVersjon?: number;
   setBehandling: (behandling: Behandling | undefined) => void;
   hentOgSettBehandling: () => void;
-  oppdaterFagsak: () => void;
 }
 
 export const FagsakProfileIndex = ({
@@ -56,11 +57,10 @@ export const FagsakProfileIndex = ({
   behandlingVersjon,
   setBehandling,
   hentOgSettBehandling,
-  oppdaterFagsak,
 }: Props) => {
   const intl = useIntl();
   const [showAll, setShowAll] = useState(!behandlingUuid);
-  const toggleShowAll = useCallback(() => setShowAll(!showAll), [showAll]);
+  const toggleShowAll = () => setShowAll(!showAll);
 
   const getKodeverkFn = useGetKodeverkFn();
 
@@ -68,12 +68,13 @@ export const FagsakProfileIndex = ({
   const fagsakStatusMedNavn = useFpSakKodeverkMedNavn(fagsak.status, KodeverkType.FAGSAK_STATUS);
   const fagsakYtelseTypeMedNavn = useFpSakKodeverkMedNavn(fagsak.fagsakYtelseType, KodeverkType.FAGSAK_YTELSE);
 
-  const { sakLinks } = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
+  const { data } = useQuery(initFetchOptions());
 
   const location = useLocation();
 
-  const arbeidstakerHref = sakLinks?.find(l => l.rel === 'arbeidstaker-redirect')?.href;
-  const ainntektHref = sakLinks?.find(l => l.rel === 'ainntekt-redirect')?.href;
+  const sakLinks = notEmpty(data).sakLinks;
+  const arbeidstakerHref = sakLinks.find(l => l.rel === 'arbeidstaker-redirect')?.href;
+  const ainntektHref = sakLinks.find(l => l.rel === 'ainntekt-redirect')?.href;
 
   const { addErrorMessage } = useRestApiErrorDispatcher();
 
@@ -84,14 +85,11 @@ export const FagsakProfileIndex = ({
   const match = useMatch('/fagsak/:saksnummer/');
   const shouldRedirectToBehandlinger = !!match;
 
-  const getBehandlingLocation = useCallback(
-    (valgtBehandlingUuid: string) =>
-      getLocationWithDefaultProsessStegAndFakta({
-        ...location,
-        pathname: pathToBehandling(fagsak.saksnummer, valgtBehandlingUuid),
-      }),
-    [fagsak.saksnummer],
-  );
+  const getBehandlingLocation = (valgtBehandlingUuid: string) =>
+    getLocationWithDefaultProsessStegAndFakta({
+      ...location,
+      pathname: pathToBehandling(fagsak.saksnummer, valgtBehandlingUuid),
+    });
 
   return (
     <div className={styles.panelPadding}>
@@ -121,7 +119,6 @@ export const FagsakProfileIndex = ({
                   behandlingUuid={behandlingUuid}
                   setBehandling={setBehandling}
                   hentOgSettBehandling={hentOgSettBehandling}
-                  oppdaterFagsak={oppdaterFagsak}
                 />
               </ErrorBoundary>
             </HStack>
