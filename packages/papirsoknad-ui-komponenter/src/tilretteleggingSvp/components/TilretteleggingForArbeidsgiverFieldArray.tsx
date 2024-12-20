@@ -2,19 +2,12 @@ import React, { useEffect } from 'react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { XMarkIcon } from '@navikt/aksel-icons';
-import { Button, HStack, VStack } from '@navikt/ds-react';
-import { Datepicker, InputField } from '@navikt/ft-form-hooks';
-import { hasNoWhiteSpace, hasValidOrgNumberOrFodselsnr, required } from '@navikt/ft-form-validators';
-import { AvsnittSkiller } from '@navikt/ft-ui-komponenter';
+import { PlusCircleIcon } from '@navikt/aksel-icons';
+import { Button, ErrorMessage, Table, VStack } from '@navikt/ds-react';
 
-import {
-  BEHOV_FOR_TILRETTELEGGING_FIELD_ARRAY_NAME,
-  TILRETTELEGGING_FOR_ARBEIDSGIVER_FIELD_ARRAY_NAME,
-  TILRETTELEGGING_NAME_PREFIX,
-} from '../constants';
+import { TILRETTELEGGING_FOR_ARBEIDSGIVER_FIELD_ARRAY_NAME, TILRETTELEGGING_NAME_PREFIX } from '../constants';
 import { FormValues } from '../types';
-import { BehovForTilretteleggingFieldArray } from './BehovForTilretteleggingFieldArray';
+import { RegistrerArbeidsgiverRad } from './RegistrerArbeidgiverRad';
 
 const defaultArbeidsgiver = {
   organisasjonsnummer: '',
@@ -26,15 +19,20 @@ interface Props {
 }
 
 const FA_PREFIX = `${TILRETTELEGGING_NAME_PREFIX}.${TILRETTELEGGING_FOR_ARBEIDSGIVER_FIELD_ARRAY_NAME}`;
-const getPrefix = (index: number) => `${FA_PREFIX}.${index}`;
 
 export const TilretteleggingForArbeidsgiverFieldArray = ({ readOnly }: Props) => {
   const intl = useIntl();
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext<FormValues>();
 
-  const { control } = useFormContext<FormValues>();
   const { fields, append, remove } = useFieldArray({
     control,
     name: FA_PREFIX,
+    rules: {
+      required: intl.formatMessage({ id: 'TilretteleggingForArbeidsgiverFieldArray.ArrayMinLength' }),
+    },
   });
 
   const leggTilArbeidsgiver = () => {
@@ -48,46 +46,46 @@ export const TilretteleggingForArbeidsgiverFieldArray = ({ readOnly }: Props) =>
   }, []);
 
   return (
-    <>
-      {fields.map((field, index: number) => (
-        <div key={field.id}>
-          {index > 0 && <AvsnittSkiller spaceUnder spaceAbove />}
-          <HStack wrap={false} justify="space-between">
-            <VStack>
-              <HStack gap="4">
-                <InputField
-                  readOnly={readOnly}
-                  name={`${getPrefix(index)}.organisasjonsnummer`}
-                  label={intl.formatMessage({ id: 'TilretteleggingForArbeidsgiverFieldArray.OrgNr' })}
-                  validate={[required, (value: any) => hasNoWhiteSpace(value.toString()), hasValidOrgNumberOrFodselsnr]}
-                  maxLength={99}
-                />
+    <VStack gap="4">
+      <Table>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell style={{ width: '48px' }} />
+            <Table.HeaderCell>
+              <FormattedMessage id="TilretteleggingForArbeidsgiverFieldArray.Title" />
+            </Table.HeaderCell>
+            <Table.HeaderCell style={{ width: '48px' }} />
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          {fields.map((field, index: number) => (
+            <RegistrerArbeidsgiverRad
+              key={field.id}
+              index={index}
+              open={index + 1 === fields.length}
+              remove={() => remove(index)}
+              readOnly={readOnly}
+            />
+          ))}
+        </Table.Body>
+      </Table>
 
-                <Datepicker
-                  name={`${getPrefix(index)}.behovsdato`}
-                  label={intl.formatMessage({ id: 'TilretteleggingForArbeidsgiverFieldArray.TilretteleggingFra' })}
-                  validate={[required]}
-                  isReadOnly={readOnly}
-                />
-              </HStack>
-
-              <BehovForTilretteleggingFieldArray
-                name={`${getPrefix(index)}.${BEHOV_FOR_TILRETTELEGGING_FIELD_ARRAY_NAME}`}
-                readOnly={readOnly}
-              />
-            </VStack>
-            {!readOnly && index > 0 && (
-              <div>
-                <Button type="button" variant="tertiary-neutral" icon={<XMarkIcon />} onClick={() => remove(index)} />
-              </div>
-            )}
-          </HStack>
-        </div>
-      ))}
-
-      <Button size="small" variant="secondary" onClick={leggTilArbeidsgiver} type="button">
-        <FormattedMessage id="TilretteleggingForArbeidsgiverFieldArray.LeggTilArbeidsgiver" />
-      </Button>
-    </>
+      {errors[TILRETTELEGGING_NAME_PREFIX]?.[TILRETTELEGGING_FOR_ARBEIDSGIVER_FIELD_ARRAY_NAME]?.root?.message && (
+        <ErrorMessage>
+          {errors[TILRETTELEGGING_NAME_PREFIX]?.[TILRETTELEGGING_FOR_ARBEIDSGIVER_FIELD_ARRAY_NAME].root?.message}
+        </ErrorMessage>
+      )}
+      <div>
+        <Button
+          size="small"
+          variant="tertiary"
+          onClick={leggTilArbeidsgiver}
+          type="button"
+          icon={<PlusCircleIcon aria-hidden />}
+        >
+          <FormattedMessage id="TilretteleggingForArbeidsgiverFieldArray.LeggTilArbeidsgiver" />
+        </Button>
+      </div>
+    </VStack>
   );
 };
