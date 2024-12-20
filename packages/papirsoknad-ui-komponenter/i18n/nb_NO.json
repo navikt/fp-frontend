@@ -145,9 +145,11 @@
   "BehovForTilretteleggingPanel.BehovForTilrettelegging": "Behov for tilrettelegging",
   "BehovForTilretteleggingPanel.TilretteleggingFra": "Jordmor/lege oppgir at tilrettelegging er nødvendig fra og med",
   "BehovForTilretteleggingPanel.SokForSelvstendigNaringsdrivende": "Søkes det om svangerskapspenger som selvstendig næringsdrivende?",
-
   "BehovForTilretteleggingPanel.SokForFrilans": "Søkes det om svangerskapspenger som frilanser?",
   "BehovForTilretteleggingPanel.SokForArbeidsgiver": "Søkes det om svangerskapspenger som arbeidstaker?",
+  "BehovForTilretteleggingPanel.TittelSN": "Tilretteleggingsbehov for selvstendig næringsdrivende",
+  "BehovForTilretteleggingPanel.TittelFrilans": "Tilretteleggingsbehov for frilanser",
+  "BehovForTilretteleggingPanel.TittelArbeidstaker": "Tilretteleggingsbehov for arbeidstaker",
   "BehovForTilretteleggingPanel.MinstEnMaaVereJa": "Minst ett av spørsmålene må besvares med alternativ Ja",
 
   "BehovForTilrettteleggingFieldArray.LeggTilTilretteleggingsbehov": "Legg til tilretteleggingsbehov",
@@ -158,9 +160,11 @@
   "BehovForTilrettteleggingFieldArray.RedusertArbeid": "b) kan gjennomføres slik at arbeidstakeren kan fortsette med redusert arbeidstid fra og med",
   "BehovForTilrettteleggingFieldArray.KanIkkeGjennomfores": "c) kan ikke gjennomføres og arbeidstakeren må midlertidig gå ut av sitt arbeid fra og med",
 
-  "TilretteleggingForArbeidsgiverFieldArray.OrgNr": "Arbeidsgivers orgnr/fnr",
-  "TilretteleggingForArbeidsgiverFieldArray.TilretteleggingFra": "Jordmor/lege oppgir at tilrettelegging er nødvendig fra og med",
+  "TilretteleggingForArbeidsgiverFieldArray.Title": "Arbeidsgivere med tilretteleggingsbehov",
+  "TilretteleggingForArbeidsgiverFieldArray.ArrayMinLength": "Det må registreres minst 1 arbeidsforhold",
   "TilretteleggingForArbeidsgiverFieldArray.LeggTilArbeidsgiver": "Legg til arbeidsgiver",
+  "RegistrerArbeidsgiverRad.OrgNr": "Arbeidsgivers orgnr/fnr",
+  "RegistrerArbeidsgiverRad.TilretteleggingFra": "Jordmor/lege oppgir at tilrettelegging er nødvendig fra og med",
 
   "Registrering.Dekningsgrad.Title": "Dekningsgrad",
   "Registrering.Dekningsgrad.prosent.80": "80 prosent",

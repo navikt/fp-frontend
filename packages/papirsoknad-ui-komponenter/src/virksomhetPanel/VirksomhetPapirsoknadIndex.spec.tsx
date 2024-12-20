@@ -7,7 +7,7 @@ import * as stories from './VirksomhetPapirsoknadIndex.stories';
 
 const { Default } = composeStories(stories);
 
-describe('<VirksomhetPapirsoknadIndex>', () => {
+describe('VirksomhetPapirsoknadIndex', () => {
   it('skal velge at søker ikke har arbeidet i egen næringsvirksomhet', async () => {
     const lagre = vi.fn();
 
@@ -61,8 +61,8 @@ describe('<VirksomhetPapirsoknadIndex>', () => {
 
     await userEvent.selectOptions(screen.getByLabelText('Hvilket land er virksomheten registrert i?'), 'AND');
 
-    await userEvent.type(screen.getByLabelText('Fra og med'), '2022-06-01');
-    await userEvent.type(screen.getByLabelText('Til og med'), '2022-06-03');
+    await userEvent.type(screen.getByLabelText('Fra og med'), '01.06.2022');
+    await userEvent.type(screen.getByLabelText('Til og med'), '03.06.2022');
 
     await userEvent.click(screen.getByLabelText('Fiske'));
 
@@ -74,7 +74,7 @@ describe('<VirksomhetPapirsoknadIndex>', () => {
     expect(screen.getByText('Årsak')).toBeInTheDocument();
     await userEvent.click(screen.getByLabelText('Varig endring i næring'));
 
-    await userEvent.type(screen.getByLabelText('Gjeldende f.o.m.'), '2022-05-03');
+    await userEvent.type(screen.getByLabelText('Gjeldende f.o.m.'), '03.05.2022');
 
     await userEvent.type(screen.getByLabelText('Beskriv endringen i næring'), 'Dette er en endring');
 
@@ -145,7 +145,7 @@ describe('<VirksomhetPapirsoknadIndex>', () => {
         screen.getByText('Ja, søker har arbeidet i egen næringsvirksomhet i løpet av de 10 siste månedene'),
       );
 
-      await userEvent.click(screen.getByLabelText('Slett virksomhet'));
+      await userEvent.click(screen.getByLabelText('Slett rad'));
 
       await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 

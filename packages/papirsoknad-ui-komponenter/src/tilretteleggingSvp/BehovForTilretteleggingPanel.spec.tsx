@@ -1,6 +1,7 @@
 import { composeStories } from '@storybook/react';
 import { screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { expect } from 'vitest';
 
 import { TilretteleggingType } from '@navikt/fp-kodeverk';
 
@@ -8,7 +9,7 @@ import * as stories from './BehovForTilretteleggingPanel.stories';
 
 const { Default } = composeStories(stories);
 
-describe('<BehovForTilretteleggingPanel>', () => {
+describe('BehovForTilretteleggingPanel', () => {
   it('skal velge nei på alle de obligatoriske spørsmålene og da få feilmelding', async () => {
     const lagre = vi.fn();
 
@@ -169,4 +170,30 @@ describe('<BehovForTilretteleggingPanel>', () => {
       ],
     });
   });
+
+  it(
+    'skal slette alle arbeidsgivere og gi beskje om at den trenger minst et element i arbeidsgiiverlisten',
+    { timeout: 30000 },
+    async () => {
+      const lagre = vi.fn();
+
+      await Default.run({
+        parameters: {
+          submitCallback: lagre,
+        },
+      });
+
+      await userEvent.click(screen.getAllByText('Nei')[0]);
+      await userEvent.click(screen.getAllByText('Nei')[1]);
+      await userEvent.click(screen.getAllByText('Ja')[2]);
+
+      await userEvent.click(screen.getByLabelText('Slett rad'));
+
+      await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
+
+      expect(await screen.findByText('Det må registreres minst 1 arbeidsforhold')).toBeInTheDocument();
+
+      expect(lagre).toHaveBeenCalledTimes(0);
+    },
+  );
 });

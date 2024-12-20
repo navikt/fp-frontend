@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useFormContext, UseFormGetValues } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ErrorMessage, Heading, VStack } from '@navikt/ds-react';
@@ -23,14 +23,6 @@ import { PermisjonOppholdPanel } from './opphold/PermisjonOppholdPanel';
 import { PermisjonOverforingAvKvoterPanel } from './overforeKvote/PermisjonOverforingAvKvoterPanel';
 import { PermisjonUtsettelsePanel } from './utsettelse/PermisjonUtsettelsePanel';
 
-const getIsRequired = (getValues: UseFormGetValues<PermisjonFormValues>) => {
-  const fulltUttak = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.fulltUttak`) || false;
-  const skalGradere = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalGradere`) || false;
-  const skalUtsette = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalUtsette`) || false;
-  const skalOvertaKvote = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalOvertaKvote`) || false;
-  return !fulltUttak && !skalGradere && !skalUtsette && !skalOvertaKvote;
-};
-
 interface Props {
   foreldreType: string;
   readOnly: boolean;
@@ -46,20 +38,25 @@ interface Props {
 export const PermisjonPanel = ({ foreldreType, readOnly, alleKodeverk, erEndringssøknad }: Props) => {
   const intl = useIntl();
 
-  const { setError, clearErrors, getValues, formState } = useFormContext<PermisjonFormValues>();
+  const { setError, clearErrors, formState, watch } = useFormContext<PermisjonFormValues>();
+  const [fulltUttak, skalGradere, skalUtsette, skalOvertaKvote] = watch([
+    `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.fulltUttak`,
+    `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalGradere`,
+    `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalUtsette`,
+    `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalOvertaKvote`,
+  ]);
 
-  const isError = getIsRequired(getValues);
   useEffect(() => {
+    const isError = !fulltUttak && !skalGradere && !skalUtsette && !skalOvertaKvote;
     if (isError) {
       setError(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.notRegisteredInput`, {
         type: 'custom',
         message: intl.formatMessage({ id: 'PermisjonPanel.MinstEnPeriodeRequired' }),
       });
-    }
-    if (!isError) {
+    } else {
       clearErrors(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.notRegisteredInput`);
     }
-  }, [isError]);
+  }, [fulltUttak, skalGradere, skalUtsette, skalOvertaKvote]);
 
   return (
     <BorderBox>
