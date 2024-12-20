@@ -13,7 +13,7 @@ import styles from './fagsakSearch.module.css';
 
 interface Props {
   fagsaker: FagsakEnkel[];
-  searchFagsakCallback: (params?: { searchString: string }) => Promise<FagsakEnkel[] | undefined>;
+  searchFagsakCallback: (params: { searchString: string }) => void;
   searchResultReceived: boolean;
   selectFagsakCallback: (saksnummer: string) => void;
   searchStarted: boolean;

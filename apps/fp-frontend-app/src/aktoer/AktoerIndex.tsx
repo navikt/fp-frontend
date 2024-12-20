@@ -1,15 +1,15 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
+import { useQuery } from '@tanstack/react-query';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
-import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { AktorSakIndex } from '@navikt/fp-sak-aktor';
 
 import { pathToFagsak } from '../app/paths';
 import { useTrackRouteParam } from '../app/useTrackRouteParam';
-import { FagsakApiKeys,restFagsakApiHooks } from '../data/fagsakContextApi';
+import { aktørInfoOptions } from '../data/fagsakApi';
+import { useFpSakKodeverk } from '../data/useKodeverk';
 
 export const AktoerIndex = () => {
   const { selected: selectedAktoerId } = useTrackRouteParam<string>({
@@ -17,24 +17,21 @@ export const AktoerIndex = () => {
     parse: aktoerIdFromUrl => Number.parseInt(aktoerIdFromUrl, 10),
   });
 
-  const alleKodeverk = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK);
+  const { data: aktørInfo, status } = useQuery(aktørInfoOptions(selectedAktoerId));
 
-  const { data, state } = restFagsakApiHooks.useRestApi(
-    FagsakApiKeys.AKTOER_INFO,
-    { aktoerId: selectedAktoerId },
-    { keepData: true, suspendRequest: !selectedAktoerId, updateTriggers: [selectedAktoerId] },
-  );
+  const fagsakStatuser = useFpSakKodeverk(KodeverkType.FAGSAK_STATUS);
+  const fagsakYtelser = useFpSakKodeverk(KodeverkType.FAGSAK_YTELSE);
 
-  if (state === RestApiState.NOT_STARTED || state === RestApiState.LOADING) {
+  if (status !== 'success') {
     return <LoadingPanel />;
   }
 
   return (
     <AktorSakIndex
       valgtAktorId={selectedAktoerId}
-      aktorInfo={data}
-      fagsakStatuser={alleKodeverk[KodeverkType.FAGSAK_STATUS]}
-      fagsakYtelseTyper={alleKodeverk[KodeverkType.FAGSAK_YTELSE]}
+      aktorInfo={aktørInfo}
+      fagsakStatuser={fagsakStatuser}
+      fagsakYtelseTyper={fagsakYtelser}
       renderSomLenke={(className, fagsakKomponent, saksnummer) => (
         <Link to={pathToFagsak(saksnummer)} className={className}>
           {fagsakKomponent}

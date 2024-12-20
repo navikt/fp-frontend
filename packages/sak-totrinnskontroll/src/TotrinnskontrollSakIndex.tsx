@@ -71,7 +71,7 @@ interface Props {
   fagsakYtelseType: string;
   alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving;
   readOnly: boolean;
-  onSubmit: (data: ApData) => Promise<void>;
+  onSubmit: (data: ApData) => void;
   forhandsvisVedtaksbrev: () => void;
   createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location | undefined;
   beslutterFormData?: any;

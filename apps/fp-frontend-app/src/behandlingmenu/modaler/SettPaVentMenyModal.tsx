@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import { useQuery } from '@tanstack/react-query';
 
 import { BehandlingType, KodeverkType } from '@navikt/fp-kodeverk';
 import { FormValues } from '@navikt/fp-modal-sett-pa-vent';
@@ -6,7 +6,8 @@ import { MenySettPaVentIndex } from '@navikt/fp-sak-meny-sett-pa-vent';
 import { BehandlingAppKontekst } from '@navikt/fp-types';
 
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../../data/behandlingContextApi';
-import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
+import { useFagsakApi } from '../../data/fagsakApi';
+import { notEmpty } from '../../data/notEmpty';
 import { MenyKodeverk } from '../MenyKodeverk';
 
 interface Props {
@@ -16,31 +17,31 @@ interface Props {
 }
 
 export const SettPaVentMenyModal = ({ behandling, hentOgSettBehandling, lukkModal }: Props) => {
-  const alleFpSakKodeverk = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK);
-  const alleFpTilbakeKodeverk = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK_FPTILBAKE);
+  const api = useFagsakApi();
+
+  const { data: alleFpSakKodeverk } = useQuery(api.kodeverkOptions());
+  const { data: alleFpTilbakeKodeverk } = useQuery(api.fptilbake.kodeverkOptions());
+
   const menyKodeverk = new MenyKodeverk(behandling.type)
-    .medFpSakKodeverk(alleFpSakKodeverk)
-    .medFpTilbakeKodeverk(alleFpTilbakeKodeverk);
+    .medFpSakKodeverk(notEmpty(alleFpSakKodeverk))
+    .medFpTilbakeKodeverk(notEmpty(alleFpTilbakeKodeverk));
 
   const { startRequest: settBehandlingPåVent } = restBehandlingApiHooks.useRestApiRunner(
     BehandlingApiKeys.BEHANDLING_ON_HOLD,
   );
 
-  const settBehandlingPåVentOgOppdaterBehandling = useCallback(
-    (formValues: FormValues) => {
-      if (formValues.frist && formValues.ventearsak) {
-        settBehandlingPåVent({
-          frist: formValues.frist,
-          ventearsak: formValues.ventearsak,
-          behandlingUuid: behandling?.uuid,
-          behandlingVersjon: behandling?.versjon,
-        }).then(() => {
-          hentOgSettBehandling();
-        });
-      }
-    },
-    [behandling],
-  );
+  const settBehandlingPåVentOgOppdaterBehandling = (formValues: FormValues) => {
+    if (formValues.frist && formValues.ventearsak) {
+      settBehandlingPåVent({
+        frist: formValues.frist,
+        ventearsak: formValues.ventearsak,
+        behandlingUuid: behandling?.uuid,
+        behandlingVersjon: behandling?.versjon,
+      }).then(() => {
+        hentOgSettBehandling();
+      });
+    }
+  };
 
   return (
     <MenySettPaVentIndex

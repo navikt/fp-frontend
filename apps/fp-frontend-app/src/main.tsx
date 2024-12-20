@@ -1,4 +1,3 @@
-import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 
@@ -7,7 +6,7 @@ import dayjs from 'dayjs';
 
 import { RestApiErrorProvider, RestApiProvider } from '@navikt/fp-rest-api-hooks';
 
-import { AppIndex } from './app/AppIndex';
+import { AppIndexWrapper } from './app/AppIndex';
 
 import 'dayjs/locale/nb.js';
 
@@ -54,7 +53,7 @@ root.render(
   <BrowserRouter basename="/">
     <RestApiProvider>
       <RestApiErrorProvider>
-        <AppIndex />
+        <AppIndexWrapper />
       </RestApiErrorProvider>
     </RestApiProvider>
   </BrowserRouter>,

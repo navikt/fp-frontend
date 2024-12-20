@@ -1,12 +1,14 @@
-import React, { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { useQuery } from '@tanstack/react-query';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
 import { MenyHenleggIndex } from '@navikt/fp-sak-meny-henlegg';
 import { BehandlingAppKontekst } from '@navikt/fp-types';
 
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../../data/behandlingContextApi';
-import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
+import { useFagsakApi } from '../../data/fagsakApi';
+import { notEmpty } from '../../data/notEmpty';
 import { useVisForhandsvisningAvMelding } from '../../data/useVisForhandsvisningAvMelding';
 import { MenyKodeverk } from '../MenyKodeverk';
 
@@ -17,30 +19,34 @@ interface Props {
 }
 
 export const HenleggMenyModal = ({ behandling, fagsakYtelseType, lukkModal }: Props) => {
-  const alleFpSakKodeverk = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK);
-  const alleFpTilbakeKodeverk = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK_FPTILBAKE);
+  const api = useFagsakApi();
+
+  const { data: alleFpSakKodeverk } = useQuery(api.kodeverkOptions());
+  const { data: alleFpTilbakeKodeverk } = useQuery(api.fptilbake.kodeverkOptions());
+
   const menyKodeverk = new MenyKodeverk(behandling?.type)
-    .medFpSakKodeverk(alleFpSakKodeverk)
-    .medFpTilbakeKodeverk(alleFpTilbakeKodeverk);
+    .medFpSakKodeverk(notEmpty(alleFpSakKodeverk))
+    .medFpTilbakeKodeverk(notEmpty(alleFpTilbakeKodeverk));
 
   const navigate = useNavigate();
-  const gåTilSokeside = useCallback(() => navigate('/'), [navigate]);
+  const gåTilSokeside = () => navigate('/');
 
-  const forhåndsvisHenleggBehandling = useVisForhandsvisningAvMelding(behandling?.type);
+  const forhåndsvisHenleggBehandling = useVisForhandsvisningAvMelding(behandling);
 
   const { startRequest: henleggBehandling } = restBehandlingApiHooks.useRestApiRunner(
     BehandlingApiKeys.HENLEGG_BEHANDLING,
   );
 
-  const henleggBehandlingOgOppdaterBehandling = useCallback(
-    (formValues: { årsakKode: string; begrunnelse: string; fritekst?: string }) =>
-      henleggBehandling({
-        ...formValues,
-        behandlingUuid: behandling?.uuid,
-        behandlingVersjon: behandling?.versjon,
-      }),
-    [behandling],
-  );
+  const henleggBehandlingOgOppdaterBehandling = (formValues: {
+    årsakKode: string;
+    begrunnelse: string;
+    fritekst?: string;
+  }) =>
+    henleggBehandling({
+      ...formValues,
+      behandlingUuid: behandling?.uuid,
+      behandlingVersjon: behandling?.versjon,
+    });
 
   return (
     <MenyHenleggIndex

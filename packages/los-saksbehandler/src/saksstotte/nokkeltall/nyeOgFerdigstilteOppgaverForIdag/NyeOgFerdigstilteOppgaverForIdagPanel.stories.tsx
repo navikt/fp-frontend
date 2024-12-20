@@ -8,10 +8,9 @@ import dayjs from 'dayjs';
 import { http, HttpResponse } from 'msw';
 
 import { BehandlingType } from '@navikt/fp-kodeverk';
-import { alleKodeverkLos, getIntlDecorator } from '@navikt/fp-storybook-utils';
+import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { losKodeverkOptions, LosUrl } from '../../../data/fplosSaksbehandlerApi';
-import { withQueryClient } from '../../../data/withQueryClientProvider';
 import { NyeOgFerdigstilteOppgaverForIdagPanel } from './NyeOgFerdigstilteOppgaverForIdagPanel';
 
 import messages from '../../../../i18n/nb_NO.json';

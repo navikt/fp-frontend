@@ -1,15 +1,17 @@
-import React, { ComponentProps } from 'react';
+import { ComponentProps } from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
 import { Meta, StoryObj } from '@storybook/react';
 import MockAdapter from 'axios-mock-adapter';
+import { http, HttpResponse } from 'msw';
 
 import { RestApiErrorProvider, RestApiProvider } from '@navikt/fp-rest-api-hooks';
 import { alleKodeverk, alleKodeverkTilbakekreving } from '@navikt/fp-storybook-utils';
 
 import { requestBehandlingApi } from '../data/behandlingContextApi';
-import { requestFagsakApi } from '../data/fagsakContextApi';
-import { AppIndex } from './AppIndex';
+import { FagsakRel, FagsakUrl } from '../data/fagsakApi';
+import { notEmpty } from '../data/notEmpty';
+import { AppIndexWrapper } from './AppIndex';
 
 import alleInntektsmeldinger from '../../.storybook/testdata/alleInntektsmeldinger.json';
 import arbeidOgInntektData from '../../.storybook/testdata/arbeidOgInntekt.json';
@@ -28,32 +30,33 @@ import medlemskapData from '../../.storybook/testdata/medlemskap.json';
 import personoversiktData from '../../.storybook/testdata/personoversikt.json';
 import soknadData from '../../.storybook/testdata/soknad.json';
 
+const getHrefFromLinks = (rel: string) =>
+  notEmpty(
+    initFetchData.links.find(link => link.rel === rel) ??
+      initFetchData.sakLinks.find(link => link.rel === rel) ??
+      initFetchTilbakeData.links.find(link => link.rel === rel) ??
+      initFetchTilbakeData.sakLinks.find(link => link.rel === rel),
+  ).href;
+
+const HANDLERS = [
+  http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchData)),
+  http.get(FagsakUrl.INIT_FETCH_FPTILBAKE, () => HttpResponse.json(initFetchTilbakeData)),
+  http.get(getHrefFromLinks(FagsakRel.KODEVERK), () => HttpResponse.json(alleKodeverk)),
+  http.get(getHrefFromLinks(FagsakRel.KODEVERK_FPTILBAKE), () => HttpResponse.json(alleKodeverkTilbakekreving)),
+  http.get(getHrefFromLinks(FagsakRel.FETCH_FAGSAKDATA_FPTILBAKE), () => HttpResponse.json(fagsakFullTilbakeData)),
+  http.get(getHrefFromLinks(FagsakRel.ALL_DOCUMENTS), () => HttpResponse.json(dokumenterData)),
+];
+
 const meta = {
   title: 'app/app',
-  component: AppIndex,
-  render: ({ bekreftAdopsjon = false, risikoAp = false }) => {
+  component: AppIndexWrapper,
+  render: ({ bekreftAdopsjon = false }) => {
     const fagsakId = '3';
     const behandlingUuid = '7d198233-b499-4aaf-a01b-be97958e20ce';
 
-    const apiMockFagsak = new MockAdapter(requestFagsakApi.getAxios());
     const apiMockBehandling = new MockAdapter(requestBehandlingApi.getAxios());
 
-    apiMockFagsak.onGet('/fpsak/api/init-fetch').replyOnce(200, initFetchData);
-    apiMockFagsak.onGet('/fptilbake/api/init-fetch').replyOnce(200, initFetchTilbakeData);
-    apiMockFagsak.onGet('/fpsak/api/kodeverk').replyOnce(200, alleKodeverk);
-    apiMockFagsak.onGet('/fptilbake/api/kodeverk').replyOnce(200, alleKodeverkTilbakekreving);
-
-    if (bekreftAdopsjon) {
-      apiMockFagsak.onGet('/fpsak/api/fagsak/full').replyOnce(200, fagsakFullData);
-    }
-    if (risikoAp) {
-      apiMockFagsak.onGet('/fpsak/api/fagsak/full').replyOnce(200, fagsakFullRisikoApData);
-    }
-
-    apiMockFagsak.onGet('/fptilbake/api/behandlinger/fagsak-full').replyOnce(200, fagsakFullTilbakeData);
-    apiMockFagsak.onGet('/fpsak/api/dokument/hent-dokumentliste').replyOnce(200, dokumenterData);
-
-    apiMockBehandling.onPost('/fpsak/api/behandlinger').replyOnce(200, behandlingV1Data);
+    apiMockBehandling.onPost('/fpsak/api/behandlinger').reply(200, behandlingV1Data);
 
     apiMockBehandling
       .onGet(`/fpsak/api/behandling/arbeidsgivere-opplysninger?uuid=${behandlingUuid}`)
@@ -76,8 +79,6 @@ const meta = {
       // Bekreft Fakta-Adopsjon
       apiMockBehandling.onPost('/fpsak/api/behandling/aksjonspunkt').replyOnce(200, behandlingV2Data);
       apiMockBehandling.onPost('/fpsak/api/behandlinger').replyOnce(200, behandlingV2Data);
-      apiMockFagsak.onGet('/fpsak/api/fagsak/full').replyOnce(200, fagsakFullData);
-      apiMockFagsak.onGet('/fptilbake/api/behandlinger/fagsak-full').replyOnce(200, fagsakFullTilbakeData);
       apiMockBehandling
         .onGet(`/fpsak/api/behandling/person/medlemskap-v2?uuid=${behandlingUuid}`)
         .replyOnce(200, medlemskapData);
@@ -92,30 +93,39 @@ const meta = {
       .reply(200, alleInntektsmeldinger);
 
     return (
-      <div>
-        <MemoryRouter initialEntries={[`/fagsak/${fagsakId}/`]}>
-          <RestApiProvider>
-            <RestApiErrorProvider>
-              <AppIndex />
-            </RestApiErrorProvider>
-          </RestApiProvider>
-        </MemoryRouter>
-      </div>
+      <MemoryRouter initialEntries={[`/fagsak/${fagsakId}/`]}>
+        <RestApiProvider>
+          <RestApiErrorProvider>
+            <AppIndexWrapper />
+          </RestApiErrorProvider>
+        </RestApiProvider>
+      </MemoryRouter>
     );
   },
-} satisfies Meta<{ bekreftAdopsjon?: boolean; risikoAp?: boolean } & ComponentProps<typeof AppIndex>>;
+} satisfies Meta<{ bekreftAdopsjon?: boolean } & ComponentProps<typeof AppIndexWrapper>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
 export const BekreftAdopsjon: Story = {
+  parameters: {
+    msw: {
+      handlers: HANDLERS.concat([
+        http.get(getHrefFromLinks(FagsakRel.FETCH_FAGSAK), () => HttpResponse.json(fagsakFullData)),
+      ]),
+    },
+  },
   args: {
     bekreftAdopsjon: true,
   },
 };
 
 export const RisikoAksjonspunkt: Story = {
-  args: {
-    risikoAp: true,
+  parameters: {
+    msw: {
+      handlers: HANDLERS.concat([
+        http.get(getHrefFromLinks(FagsakRel.FETCH_FAGSAK), () => HttpResponse.json(fagsakFullRisikoApData)),
+      ]),
+    },
   },
 };

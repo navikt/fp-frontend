@@ -1,11 +1,15 @@
 import { forhandsvisDokument } from '@navikt/ft-utils';
+import { useMutation } from '@tanstack/react-query';
 
 import { BehandlingType } from '@navikt/fp-kodeverk';
+import { BehandlingAppKontekst } from '@navikt/fp-types';
 
-import { FagsakApiKeys, restFagsakApiHooks } from './fagsakContextApi';
+import { forhåndsvisTilbakekreving, forhåndsvisTilbakekrevingHenleggelse, useFagsakBehandlingApi } from './fagsakApi';
+
+//TODO (TOR) Må gå gjennom og rydda i typane her. Trur kanskje det er best å bryta opp denne hooken
 
 type ForhandsvisData = {
-  behandlingUuid?: string;
+  behandlingUuid: string;
   fritekst?: string;
   gjelderVedtak?: boolean;
 };
@@ -25,25 +29,42 @@ export type ForhandsvisFunksjon = (
   data: ForhandsvisDataFormidling | ForhandsvisDataTilbakekreving,
 ) => void;
 
-export const useVisForhandsvisningAvMelding = (behandlingType?: string): ForhandsvisFunksjon => {
-  const { startRequest: forhandsvisTilbakekrevingHenleggelse } = restFagsakApiHooks.useRestApiRunner(
-    FagsakApiKeys.PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE,
-  );
-  const { startRequest: forhandsvisTilbakekreving } = restFagsakApiHooks.useRestApiRunner(
-    FagsakApiKeys.PREVIEW_MESSAGE_TILBAKEKREVING,
-  );
-  const { startRequest: forhandsvisMelding } = restFagsakApiHooks.useRestApiRunner(FagsakApiKeys.PREVIEW_MESSAGE_MENU);
+export const useVisForhandsvisningAvMelding = (behandling: BehandlingAppKontekst): ForhandsvisFunksjon => {
+  const api = useFagsakBehandlingApi(behandling);
+
+  const { mutate: forhandsvisTilbakekrevingHenleggelseMelding } = useMutation({
+    mutationFn: (values: ForhandsvisData) =>
+      forhåndsvisTilbakekrevingHenleggelse(values.behandlingUuid, values.fritekst ?? ''),
+    onSuccess: response => {
+      forhandsvisDokument(response);
+    },
+  });
+
+  const { mutate: forhåndsvisTilbakekrevingMelding } = useMutation({
+    mutationFn: (values: ForhandsvisDataTilbakekreving) =>
+      forhåndsvisTilbakekreving(values.behandlingUuid, values.brevmalkode, values.fritekst ?? ''),
+    onSuccess: response => {
+      forhandsvisDokument(response);
+    },
+  });
+
+  const { mutate: forhåndsvisMelding } = useMutation({
+    mutationFn: (values: ForhandsvisDataFormidling) => api.forhåndsvisMelding(values),
+    onSuccess: response => {
+      forhandsvisDokument(response);
+    },
+  });
 
   const erTilbakekreving =
-    BehandlingType.TILBAKEKREVING === behandlingType || BehandlingType.TILBAKEKREVING_REVURDERING === behandlingType;
+    BehandlingType.TILBAKEKREVING === behandling.type || BehandlingType.TILBAKEKREVING_REVURDERING === behandling.type;
 
   return (erHenleggelse: boolean, data: ForhandsvisDataFormidling | ForhandsvisDataTilbakekreving): void => {
     if (erTilbakekreving && erHenleggelse) {
-      forhandsvisTilbakekrevingHenleggelse(data).then(response => forhandsvisDokument(response));
+      forhandsvisTilbakekrevingHenleggelseMelding(data);
     } else if (erTilbakekreving) {
-      forhandsvisTilbakekreving(data).then(response => forhandsvisDokument(response));
+      forhåndsvisTilbakekrevingMelding(data as ForhandsvisDataTilbakekreving);
     } else {
-      forhandsvisMelding(data as ForhandsvisDataFormidling).then(response => forhandsvisDokument(response));
+      forhåndsvisMelding(data);
     }
   };
 };
