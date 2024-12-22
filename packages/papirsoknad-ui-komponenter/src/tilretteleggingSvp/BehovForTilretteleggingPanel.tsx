@@ -13,7 +13,7 @@ import { BehovForTilretteleggingFieldArray } from './components/BehovForTilrette
 import { TilretteleggingForArbeidsgiverFieldArray } from './components/TilretteleggingForArbeidsgiverFieldArray';
 import {
   FRILANS_FIELD_ARRAY_NAME,
-  SELVSTENDIG_NARINGS_DRIVENDE_FIELD_ARRAY_NAME,
+  SELVSTENDIG_NARINGSDRIVENDE_FIELD_ARRAY_NAME,
   TILRETTELEGGING_NAME_PREFIX,
 } from './constants';
 import { transformTilretteleggingsArbeidsforhold } from './transformer';
@@ -30,10 +30,14 @@ interface Props {
 export const BehovForTilretteleggingPanel = ({ readOnly }: Props) => {
   const { watch, setError, clearErrors, formState } = useFormContext<FormValues>();
 
-  const { sokForSelvstendigNaringsdrivende, sokForFrilans, sokForArbeidsgiver } = watch(TILRETTELEGGING_NAME_PREFIX);
+  const [sokSN, sokFrilans, sokArbeid] = watch([
+    `${TILRETTELEGGING_NAME_PREFIX}.sokForSelvstendigNaringsdrivende`,
+    `${TILRETTELEGGING_NAME_PREFIX}.sokForFrilans`,
+    `${TILRETTELEGGING_NAME_PREFIX}.sokForArbeidsgiver`,
+  ]);
 
   useEffect(() => {
-    const isError = !sokForSelvstendigNaringsdrivende && !sokForFrilans && !sokForArbeidsgiver;
+    const isError = !sokSN && !sokFrilans && !sokArbeid;
     if (isError) {
       setError(`${TILRETTELEGGING_NAME_PREFIX}.notRegisteredInput`, {
         type: 'custom',
@@ -42,7 +46,7 @@ export const BehovForTilretteleggingPanel = ({ readOnly }: Props) => {
     } else {
       clearErrors(`${TILRETTELEGGING_NAME_PREFIX}.notRegisteredInput`);
     }
-  }, [sokForArbeidsgiver, sokForFrilans, sokForArbeidsgiver]);
+  }, [sokSN, sokFrilans, sokArbeid]);
 
   return (
     <RawIntlProvider value={intl}>
@@ -62,16 +66,21 @@ export const BehovForTilretteleggingPanel = ({ readOnly }: Props) => {
             readOnly={readOnly}
             trueContent={
               <ArrowBox marginTop={4}>
-                <Datepicker
-                  name={`${TILRETTELEGGING_NAME_PREFIX}.behovsdatoSN`}
-                  label={intl.formatMessage({ id: 'BehovForTilretteleggingPanel.TilretteleggingFra' })}
-                  validate={[required]}
-                  isReadOnly={readOnly}
-                />
-                <BehovForTilretteleggingFieldArray
-                  name={`${TILRETTELEGGING_NAME_PREFIX}.${SELVSTENDIG_NARINGS_DRIVENDE_FIELD_ARRAY_NAME}`}
-                  readOnly={readOnly}
-                />
+                <VStack gap="4">
+                  <Heading size="small">
+                    <FormattedMessage id="BehovForTilretteleggingPanel.TittelSN" />
+                  </Heading>
+                  <Datepicker
+                    name={`${TILRETTELEGGING_NAME_PREFIX}.behovsdatoSN`}
+                    label={intl.formatMessage({ id: 'BehovForTilretteleggingPanel.TilretteleggingFra' })}
+                    validate={[required]}
+                    isReadOnly={readOnly}
+                  />
+                  <BehovForTilretteleggingFieldArray
+                    name={`${TILRETTELEGGING_NAME_PREFIX}.${SELVSTENDIG_NARINGSDRIVENDE_FIELD_ARRAY_NAME}`}
+                    readOnly={readOnly}
+                  />
+                </VStack>
               </ArrowBox>
             }
           />
@@ -82,16 +91,21 @@ export const BehovForTilretteleggingPanel = ({ readOnly }: Props) => {
             readOnly={readOnly}
             trueContent={
               <ArrowBox marginTop={4}>
-                <Datepicker
-                  name={`${TILRETTELEGGING_NAME_PREFIX}.behovsdatoFrilans`}
-                  label={intl.formatMessage({ id: 'BehovForTilretteleggingPanel.TilretteleggingFra' })}
-                  validate={[required]}
-                  isReadOnly={readOnly}
-                />
-                <BehovForTilretteleggingFieldArray
-                  name={`${TILRETTELEGGING_NAME_PREFIX}.${FRILANS_FIELD_ARRAY_NAME}`}
-                  readOnly={readOnly}
-                />
+                <VStack gap="4">
+                  <Heading size="small">
+                    <FormattedMessage id="BehovForTilretteleggingPanel.TittelFrilans" />
+                  </Heading>
+                  <Datepicker
+                    name={`${TILRETTELEGGING_NAME_PREFIX}.behovsdatoFrilans`}
+                    label={intl.formatMessage({ id: 'BehovForTilretteleggingPanel.TilretteleggingFra' })}
+                    validate={[required]}
+                    isReadOnly={readOnly}
+                  />
+                  <BehovForTilretteleggingFieldArray
+                    name={`${TILRETTELEGGING_NAME_PREFIX}.${FRILANS_FIELD_ARRAY_NAME}`}
+                    readOnly={readOnly}
+                  />
+                </VStack>
               </ArrowBox>
             }
           />
@@ -101,7 +115,12 @@ export const BehovForTilretteleggingPanel = ({ readOnly }: Props) => {
             readOnly={readOnly}
             trueContent={
               <ArrowBox marginTop={4}>
-                <TilretteleggingForArbeidsgiverFieldArray readOnly={readOnly} />
+                <VStack gap="4">
+                  <Heading size="small">
+                    <FormattedMessage id="BehovForTilretteleggingPanel.TittelArbeidstaker" />
+                  </Heading>
+                  <TilretteleggingForArbeidsgiverFieldArray readOnly={readOnly} />
+                </VStack>
               </ArrowBox>
             }
           />

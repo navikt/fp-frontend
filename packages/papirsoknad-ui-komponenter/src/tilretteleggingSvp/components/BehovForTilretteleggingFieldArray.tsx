@@ -2,13 +2,13 @@ import React, { useEffect } from 'react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
-import { TrashIcon } from '@navikt/aksel-icons';
-import { Button, HStack } from '@navikt/ds-react';
+import { Box } from '@navikt/ds-react';
 import { Datepicker, InputField, PeriodFieldArray, SelectField } from '@navikt/ft-form-hooks';
 import { maxValue, required } from '@navikt/ft-form-validators';
 
 import { TilretteleggingType } from '@navikt/fp-kodeverk';
 
+import { FieldArrayRow } from '../../felles/FieldArrayRow';
 import { Tilrettelegging } from '../types';
 
 const maxValue3 = maxValue(100);
@@ -40,25 +40,21 @@ export const BehovForTilretteleggingFieldArray = ({ readOnly, name }: Props) => 
   }, []);
 
   return (
-    <PeriodFieldArray
-      fields={fields}
-      emptyPeriodTemplate={defaultTilrettelegging}
-      bodyText={intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.LeggTilTilretteleggingsbehov' })}
-      readOnly={readOnly}
-      append={append}
-      remove={remove}
-    >
-      {(field, index) => (
-        <HStack key={field.id} wrap={false} gap="4">
-          <HStack gap="4">
+    <Box background="surface-action-subtle" padding="3" style={{ borderLeft: '4px solid var(--a-lightblue-700)' }}>
+      <PeriodFieldArray
+        fields={fields}
+        emptyPeriodTemplate={defaultTilrettelegging}
+        bodyText={intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.LeggTilTilretteleggingsbehov' })}
+        readOnly={readOnly}
+        append={append}
+        remove={remove}
+      >
+        {(field, index) => (
+          <FieldArrayRow key={field.id} readOnly={readOnly} remove={remove} index={index}>
             <SelectField
               readOnly={readOnly}
               name={`${name}.${index}.tilretteleggingType`}
-              label={
-                index === 0
-                  ? intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.BehovForTilrettelegging' })
-                  : ''
-              }
+              label={intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.BehovForTilrettelegging' })}
               validate={[required]}
               selectValues={[
                 <option value={TilretteleggingType.HEL_TILRETTELEGGING} key={TilretteleggingType.HEL_TILRETTELEGGING}>
@@ -82,32 +78,20 @@ export const BehovForTilretteleggingFieldArray = ({ readOnly, name }: Props) => 
             <Datepicker
               isReadOnly={readOnly}
               name={`${name}.${index}.dato`}
-              label={index === 0 ? intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.FraDato' }) : ''}
+              label={intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.FraDato' })}
               validate={[required]}
             />
 
             <InputField
               readOnly={readOnly}
               name={`${name}.${index}.stillingsprosent`}
-              label={
-                index === 0 ? intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.Stillingsprosent' }) : ''
-              }
+              label={intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.Stillingsprosent' })}
               validate={[required, maxValue3]}
               maxLength={99}
             />
-          </HStack>
-
-          {!readOnly && index > 0 && (
-            <Button
-              size="small"
-              type="button"
-              variant="tertiary-neutral"
-              icon={<TrashIcon />}
-              onClick={() => remove(index)}
-            />
-          )}
-        </HStack>
-      )}
-    </PeriodFieldArray>
+          </FieldArrayRow>
+        )}
+      </PeriodFieldArray>
+    </Box>
   );
 };

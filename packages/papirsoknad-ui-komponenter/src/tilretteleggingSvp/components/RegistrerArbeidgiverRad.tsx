@@ -1,0 +1,86 @@
+import React, { useState } from 'react';
+import { useFormContext } from 'react-hook-form';
+import { useIntl } from 'react-intl';
+
+import { ChevronDownIcon, ChevronUpIcon, TrashIcon } from '@navikt/aksel-icons';
+import { BodyShort, Box, Button, HStack, Table, VStack } from '@navikt/ds-react';
+import { Datepicker, InputField } from '@navikt/ft-form-hooks';
+import { hasNoWhiteSpace, hasValidOrgNumberOrFodselsnr, required } from '@navikt/ft-form-validators';
+
+import {
+  BEHOV_FOR_TILRETTELEGGING_FIELD_ARRAY_NAME,
+  TILRETTELEGGING_FOR_ARBEIDSGIVER_FIELD_ARRAY_NAME,
+  TILRETTELEGGING_NAME_PREFIX,
+} from '../constants';
+import { FormValues } from '../types';
+import { BehovForTilretteleggingFieldArray } from './BehovForTilretteleggingFieldArray';
+
+const FA_PREFIX = `${TILRETTELEGGING_NAME_PREFIX}.${TILRETTELEGGING_FOR_ARBEIDSGIVER_FIELD_ARRAY_NAME}`;
+const getPrefix = (index: number) => `${FA_PREFIX}.${index}`;
+
+interface Props {
+  index: number;
+  readOnly?: boolean;
+  remove: () => void;
+  open: boolean;
+}
+
+export const RegistrerArbeidsgiverRad = ({ open, readOnly = false, index, remove }: Props) => {
+  const { getFieldState, watch } = useFormContext<FormValues>();
+  const { error } = getFieldState(`${FA_PREFIX}.${index}`);
+  const organisasjonsnummer = watch(`${FA_PREFIX}.${index}.organisasjonsnummer`);
+  const [isOpen, setIsOpen] = useState(open);
+  const intl = useIntl();
+
+  return (
+    <Table.Row shadeOnHover={false} style={{ backgroundColor: error && !isOpen ? 'var(--a-red-50)' : 'none' }}>
+      <Table.DataCell valign="top">
+        <Button
+          type="button"
+          variant="tertiary-neutral"
+          onClick={() => setIsOpen(curr => !curr)}
+          icon={isOpen ? <ChevronUpIcon aria-label="Vis mindre" /> : <ChevronDownIcon aria-label="Vis mer" />}
+        />
+      </Table.DataCell>
+      <Table.DataCell valign="top">
+        <Box hidden={isOpen} paddingBlock="3">
+          <BodyShort weight="semibold">{organisasjonsnummer}</BodyShort>
+        </Box>
+        <VStack gap="4" hidden={!isOpen}>
+          <HStack gap="4">
+            <InputField
+              readOnly={readOnly}
+              name={`${getPrefix(index)}.organisasjonsnummer`}
+              label={intl.formatMessage({ id: 'RegistrerArbeidsgiverRad.OrgNr' })}
+              validate={[
+                required,
+                (value: string | number) => hasNoWhiteSpace(value.toString()),
+                hasValidOrgNumberOrFodselsnr,
+              ]}
+              maxLength={99}
+            />
+            <Datepicker
+              name={`${getPrefix(index)}.behovsdato`}
+              label={intl.formatMessage({ id: 'RegistrerArbeidsgiverRad.TilretteleggingFra' })}
+              validate={[required]}
+              isReadOnly={readOnly}
+            />
+          </HStack>
+          <BehovForTilretteleggingFieldArray
+            name={`${getPrefix(index)}.${BEHOV_FOR_TILRETTELEGGING_FIELD_ARRAY_NAME}`}
+            readOnly={readOnly}
+          />
+        </VStack>
+      </Table.DataCell>
+      <Table.DataCell valign="top" align="right">
+        <Button
+          type="button"
+          variant="tertiary-neutral"
+          onClick={remove}
+          onKeyDown={remove}
+          icon={<TrashIcon aria-label="Slett rad" />}
+        />
+      </Table.DataCell>
+    </Table.Row>
+  );
+};

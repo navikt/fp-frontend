@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -38,22 +38,32 @@ export const RegistrerVirksomhetPanel = ({ readOnly = false, alleKodeverk }: Pro
       required: intl.formatMessage({ id: 'Registrering.RegistrerVirksomhetPanel.ArrayMinLength' }),
     },
   });
+  const leggTilVirksomhet = () => {
+    append(VirksomhetRad.initialValues());
+  };
+
+  useEffect(() => {
+    if (fields.length === 0) {
+      leggTilVirksomhet();
+    }
+  }, []);
 
   return (
     <>
       <Table>
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell colSpan={3}>
+            <Table.HeaderCell style={{ width: '48px' }} />
+            <Table.HeaderCell>
               <FormattedMessage id="Registrering.RegistrerVirksomhetPanel.Name" />
             </Table.HeaderCell>
+            <Table.HeaderCell style={{ width: '48px' }} />
           </Table.Row>
         </Table.Header>
         <Table.Body>
           {fields.map((field, index) => (
             <VirksomhetRad
               key={field.id}
-              field={field}
               index={index}
               open={index + 1 === fields.length}
               remove={() => remove(index)}
@@ -72,7 +82,7 @@ export const RegistrerVirksomhetPanel = ({ readOnly = false, alleKodeverk }: Pro
           size="small"
           variant="tertiary"
           type="button"
-          onClick={() => append(VirksomhetRad.initialValues())}
+          onClick={leggTilVirksomhet}
           icon={<PlusCircleIcon aria-hidden />}
         >
           <FormattedMessage id="Registrering.RegistrerVirksomhetPanel.Add" />
