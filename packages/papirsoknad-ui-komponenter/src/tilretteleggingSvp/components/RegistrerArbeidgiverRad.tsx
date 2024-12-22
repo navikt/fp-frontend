@@ -52,7 +52,11 @@ export const RegistrerArbeidsgiverRad = ({ open, readOnly = false, index, remove
               readOnly={readOnly}
               name={`${getPrefix(index)}.organisasjonsnummer`}
               label={intl.formatMessage({ id: 'RegistrerArbeidsgiverRad.OrgNr' })}
-              validate={[required, (value: any) => hasNoWhiteSpace(value.toString()), hasValidOrgNumberOrFodselsnr]}
+              validate={[
+                required,
+                (value: string | number) => hasNoWhiteSpace(value.toString()),
+                hasValidOrgNumberOrFodselsnr,
+              ]}
               maxLength={99}
             />
             <Datepicker
