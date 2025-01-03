@@ -119,5 +119,5 @@ VirksomhetIdentifikasjonPanel.transformValues = ({
         fom,
         tom,
       }
-    : {}),
+    : { landJobberFra: 'NOR' }),
 });
