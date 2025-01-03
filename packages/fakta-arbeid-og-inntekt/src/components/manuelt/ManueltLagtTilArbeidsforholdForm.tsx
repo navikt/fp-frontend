@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useForm, UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -22,7 +22,7 @@ import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 import { ManueltArbeidsforhold } from '@navikt/fp-types';
 
 import { useSetDirtyForm } from '../../DirtyFormProvider';
-import ArbeidsforholdOgInntektRadData from '../../types/arbeidsforholdOgInntekt';
+import { ArbeidsforholdOgInntektRadData } from '../../types/arbeidsforholdOgInntekt';
 
 export const MANUELT_ORG_NR = '342352362';
 
@@ -83,7 +83,7 @@ const getOppdaterTabellOgLukkRad =
     }
   };
 
-interface OwnProps {
+interface Props {
   behandlingUuid: string;
   behandlingVersjon: number;
   isReadOnly: boolean;
@@ -95,7 +95,7 @@ interface OwnProps {
   erNyttArbeidsforhold?: boolean;
 }
 
-const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
+export const ManueltLagtTilArbeidsforholdForm = ({
   behandlingUuid,
   behandlingVersjon,
   isReadOnly,
@@ -105,7 +105,7 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
   erOverstyrt,
   oppdaterTabell,
   erNyttArbeidsforhold = false,
-}) => {
+}: Props) => {
   const intl = useIntl();
   const [visSletteDialog, setVisSletteDialog] = useState(false);
 
@@ -273,5 +273,3 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-
-export default ManueltLagtTilArbeidsforholdForm;

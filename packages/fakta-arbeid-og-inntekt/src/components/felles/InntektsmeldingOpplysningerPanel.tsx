@@ -1,18 +1,18 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { FileFillIcon, PhoneFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Detail, HStack,Label, Link, VStack } from '@navikt/ds-react';
+import { BodyShort, Detail, HStack, Label, Link, VStack } from '@navikt/ds-react';
 import { DateLabel, PeriodLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { formatCurrencyNoKr } from '@navikt/ft-utils';
 
-import { getKodeverknavnFraKode,KodeverkType } from '@navikt/fp-kodeverk';
+import { getKodeverknavnFraKode, KodeverkType } from '@navikt/fp-kodeverk';
 import { hentDokumentLenke } from '@navikt/fp-konstanter';
-import { AlleKodeverk,AoIArbeidsforhold, Inntektsmelding } from '@navikt/fp-types';
+import { AlleKodeverk, AoIArbeidsforhold, Inntektsmelding } from '@navikt/fp-types';
 
 import styles from './inntektsmeldingOpplysningerPanel.module.css';
 
-interface OwnProps {
+interface Props {
   saksnummer: string;
   arbeidsforhold?: AoIArbeidsforhold;
   inntektsmelding: Inntektsmelding;
@@ -22,7 +22,7 @@ interface OwnProps {
   ikkeVisInfo?: boolean;
 }
 
-const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
+export const InntektsmeldingOpplysningerPanel = ({
   saksnummer,
   arbeidsforhold,
   inntektsmelding,
@@ -30,7 +30,7 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
   alleKodeverk,
   arbeidsgiverFødselsdato,
   ikkeVisInfo,
-}) => (
+}: Props) => (
   <>
     <VerticalSpacer eightPx />
     {!ikkeVisInfo && arbeidsgiverFødselsdato && (
@@ -161,5 +161,3 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
     <VerticalSpacer thirtyTwoPx />
   </>
 );
-
-export default InntektsmeldingOpplysningerPanel;

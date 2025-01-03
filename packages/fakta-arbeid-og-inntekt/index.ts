@@ -1,1 +1,1 @@
-export { default as ArbeidOgInntektFaktaIndex } from './src/ArbeidOgInntektFaktaIndex';
+export { ArbeidOgInntektFaktaIndex } from './src/ArbeidOgInntektFaktaIndex';

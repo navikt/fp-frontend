@@ -1,19 +1,15 @@
-import React, { createContext, FunctionComponent, ReactNode, useContext, useEffect, useMemo,useState } from 'react';
+import React, { createContext, PropsWithChildren, useContext, useEffect, useMemo, useState } from 'react';
 
 export const DirtyFormContext = createContext<{
   isDirty: boolean;
   setDirty: React.Dispatch<React.SetStateAction<boolean>>;
 }>({ isDirty: false, setDirty: () => undefined });
 
-interface OwnProps {
-  children: ReactNode;
-}
-
 /**
  * Håndterer state for data som skal hentes fra backend kun en gang og som en trenger aksess til
  * mange steder i applikasjonen.
  */
-export const DirtyFormProvider: FunctionComponent<OwnProps> = ({ children }): JSX.Element => {
+export const DirtyFormProvider = ({ children }: PropsWithChildren) => {
   const [isDirty, setDirty] = useState(false);
   const value = useMemo(() => ({ isDirty, setDirty }), [isDirty, setDirty]);
 

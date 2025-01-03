@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Alert, Button } from '@navikt/ds-react';
@@ -26,9 +26,9 @@ import {
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { useIsFormDirty } from '../DirtyFormProvider';
-import ArbeidsforholdOgInntektRadData, { Avklaring } from '../types/arbeidsforholdOgInntekt';
-import ArbeidsforholdRad from './ArbeidsforholdRad';
-import ArbeidsOgInntektOverstyrPanel from './ArbeidsOgInntektOverstyrPanel';
+import { ArbeidsforholdOgInntektRadData, Avklaring } from '../types/arbeidsforholdOgInntekt';
+import { ArbeidsforholdRad } from './ArbeidsforholdRad';
+import { ArbeidsOgInntektOverstyrPanel } from './ArbeidsOgInntektOverstyrPanel';
 
 import styles from './arbeidOgInntektFaktaPanel.module.css';
 
@@ -134,7 +134,7 @@ const finnUløstArbeidsforholdIndex = (tabellData: ArbeidsforholdOgInntektRadDat
   return index !== -1 ? [index] : [];
 };
 
-interface OwnProps {
+interface Props {
   saksnummer: string;
   behandling: Behandling;
   aksjonspunkt?: Aksjonspunkt;
@@ -152,7 +152,7 @@ interface OwnProps {
   åpneForNyVurdering: () => void;
 }
 
-const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
+export const ArbeidOgInntektFaktaPanel = ({
   saksnummer,
   behandling,
   aksjonspunkt,
@@ -168,7 +168,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
   settBehandlingPåVentCallback,
   alleKodeverk,
   åpneForNyVurdering,
-}) => {
+}: Props) => {
   const [erKnappTrykket, setErKnappTrykket] = useState(false);
   const [visSettPåVentModal, setVisSettPåVentModal] = useState(false);
   const [erOverstyrt, setErOverstyrt] = useState(false);
@@ -346,5 +346,3 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-
-export default ArbeidOgInntektFaktaPanel;

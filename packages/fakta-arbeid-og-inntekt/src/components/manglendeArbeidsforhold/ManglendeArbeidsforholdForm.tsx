@@ -1,10 +1,10 @@
-import React, { FunctionComponent, useCallback, useMemo, useRef,useState } from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 import { useForm, UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
 import { Alert, BodyShort, Button, HStack, Popover } from '@navikt/ds-react';
-import { Datepicker, Form,InputField, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
+import { Datepicker, Form, InputField, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   hasValidDate,
@@ -19,11 +19,11 @@ import {
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
-import { Inntektsmelding, ManglendeInntektsmeldingVurdering,ManueltArbeidsforhold } from '@navikt/fp-types';
+import { Inntektsmelding, ManglendeInntektsmeldingVurdering, ManueltArbeidsforhold } from '@navikt/fp-types';
 
 import { useSetDirtyForm } from '../../DirtyFormProvider';
-import ArbeidsforholdOgInntektRadData from '../../types/arbeidsforholdOgInntekt';
-import InntektsmeldingOpplysningerPanel from '../felles/InntektsmeldingOpplysningerPanel';
+import { ArbeidsforholdOgInntektRadData } from '../../types/arbeidsforholdOgInntekt';
+import { InntektsmeldingOpplysningerPanel } from '../felles/InntektsmeldingOpplysningerPanel';
 
 import styles from './manglendeArbeidsforholdForm.module.css';
 
@@ -82,7 +82,7 @@ const getOppdaterTabell =
     );
   };
 
-interface OwnProps {
+interface Props {
   saksnummer: string;
   behandlingUuid: string;
   behandlingVersjon: number;
@@ -98,7 +98,7 @@ interface OwnProps {
   arbeidsgiverFødselsdato?: string;
 }
 
-const ManglendeArbeidsforholdForm: FunctionComponent<OwnProps> = ({
+export const ManglendeArbeidsforholdForm = ({
   saksnummer,
   behandlingUuid,
   behandlingVersjon,
@@ -112,7 +112,7 @@ const ManglendeArbeidsforholdForm: FunctionComponent<OwnProps> = ({
   oppdaterTabell,
   skalViseArbeidsforholdId,
   arbeidsgiverFødselsdato,
-}) => {
+}: Props) => {
   const intl = useIntl();
 
   const defaultValues = useMemo<FormValues>(
@@ -298,5 +298,3 @@ const ManglendeArbeidsforholdForm: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-
-export default ManglendeArbeidsforholdForm;

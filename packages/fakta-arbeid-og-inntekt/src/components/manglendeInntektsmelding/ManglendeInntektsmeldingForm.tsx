@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -18,8 +18,8 @@ import {
 } from '@navikt/fp-types';
 
 import { useSetDirtyForm } from '../../DirtyFormProvider';
-import ArbeidsforholdOgInntektRadData from '../../types/arbeidsforholdOgInntekt';
-import ArbeidsforholdInformasjonPanel from '../felles/ArbeidsforholdInformasjonPanel';
+import { ArbeidsforholdOgInntektRadData } from '../../types/arbeidsforholdOgInntekt';
+import { ArbeidsforholdInformasjonPanel } from '../felles/ArbeidsforholdInformasjonPanel';
 
 import styles from './manglendeInntektsmeldingForm.module.css';
 
@@ -54,7 +54,7 @@ const getOppdaterTabell =
     );
   };
 
-interface OwnProps {
+interface Props {
   saksnummer: string;
   behandlingUuid: string;
   behandlingVersjon: number;
@@ -71,7 +71,7 @@ interface OwnProps {
   arbeidsgiverFødselsdato?: string;
 }
 
-const ManglendeInntektsmeldingForm: FunctionComponent<OwnProps> = ({
+export const ManglendeInntektsmeldingForm = ({
   saksnummer,
   behandlingUuid,
   behandlingVersjon,
@@ -86,7 +86,7 @@ const ManglendeInntektsmeldingForm: FunctionComponent<OwnProps> = ({
   oppdaterTabell,
   alleKodeverk,
   arbeidsgiverFødselsdato,
-}) => {
+}: Props) => {
   const intl = useIntl();
 
   const defaultValues = useMemo<FormValues>(
@@ -243,5 +243,3 @@ const ManglendeInntektsmeldingForm: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-
-export default ManglendeInntektsmeldingForm;
