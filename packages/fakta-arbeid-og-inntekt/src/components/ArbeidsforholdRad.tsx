@@ -1,9 +1,9 @@
-import React, { FunctionComponent, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { CheckmarkIcon, ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Label } from '@navikt/ds-react';
-import { DateLabel, ExpandableTableRow,PeriodLabel, TableColumn } from '@navikt/ft-ui-komponenter';
+import { DateLabel, ExpandableTableRow, PeriodLabel, TableColumn } from '@navikt/ft-ui-komponenter';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 import classnames from 'classnames/bind';
 import dayjs from 'dayjs';
@@ -19,13 +19,13 @@ import {
   ManueltArbeidsforhold,
 } from '@navikt/fp-types';
 
-import ArbeidsforholdOgInntektRadData, { Avklaring } from '../types/arbeidsforholdOgInntekt';
-import ArbeidsforholdInformasjonPanel from './felles/ArbeidsforholdInformasjonPanel';
-import InntektsmeldingerPanel from './felles/InntektsmeldingerPanel';
-import InntektsmeldingOpplysningerPanel from './felles/InntektsmeldingOpplysningerPanel';
-import ManglendeArbeidsforholdForm from './manglendeArbeidsforhold/ManglendeArbeidsforholdForm';
-import ManglendeInntektsmeldingForm from './manglendeInntektsmelding/ManglendeInntektsmeldingForm';
-import ManueltLagtTilArbeidsforholdForm from './manuelt/ManueltLagtTilArbeidsforholdForm';
+import { ArbeidsforholdOgInntektRadData, Avklaring } from '../types/arbeidsforholdOgInntekt';
+import { ArbeidsforholdInformasjonPanel } from './felles/ArbeidsforholdInformasjonPanel';
+import { InntektsmeldingerPanel } from './felles/InntektsmeldingerPanel';
+import { InntektsmeldingOpplysningerPanel } from './felles/InntektsmeldingOpplysningerPanel';
+import { ManglendeArbeidsforholdForm } from './manglendeArbeidsforhold/ManglendeArbeidsforholdForm';
+import { ManglendeInntektsmeldingForm } from './manglendeInntektsmelding/ManglendeInntektsmeldingForm';
+import { ManueltLagtTilArbeidsforholdForm } from './manuelt/ManueltLagtTilArbeidsforholdForm';
 
 import styles from './arbeidsforholdRad.module.css';
 
@@ -84,7 +84,7 @@ const finnInntektsmelding = (
   return im;
 };
 
-interface OwnProps {
+interface Props {
   saksnummer: string;
   behandlingUuid: string;
   behandlingVersjon: number;
@@ -100,7 +100,7 @@ interface OwnProps {
   alleKodeverk: AlleKodeverk;
 }
 
-const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
+export const ArbeidsforholdRad = ({
   saksnummer,
   behandlingUuid,
   behandlingVersjon,
@@ -114,7 +114,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
   toggleÅpenRad,
   erRadÅpen,
   alleKodeverk,
-}) => {
+}: Props) => {
   const intl = useIntl();
 
   const { arbeidsgiverNavn, arbeidsgiverIdent, årsak, avklaring, arbeidsgiverFødselsdato } = radData;
@@ -287,5 +287,3 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
     </ExpandableTableRow>
   );
 };
-
-export default ArbeidsforholdRad;

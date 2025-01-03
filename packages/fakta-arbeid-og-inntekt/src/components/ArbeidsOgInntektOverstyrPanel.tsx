@@ -1,12 +1,12 @@
-import React, { FunctionComponent, useCallback, useMemo,useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { PlusCircleIcon } from '@navikt/aksel-icons';
 import { Alert, BodyShort, Button, Heading, HStack, Spacer } from '@navikt/ds-react';
-import { AksjonspunktHelpTextHTML, OverstyringKnapp,VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { AksjonspunktHelpTextHTML, OverstyringKnapp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { dateFormat } from '@navikt/ft-utils';
 
-import { AksjonspunktStatus,ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
+import { AksjonspunktStatus, ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 import {
   Aksjonspunkt,
   AksjonspunktÅrsak,
@@ -15,8 +15,8 @@ import {
   ManueltArbeidsforhold,
 } from '@navikt/fp-types';
 
-import ArbeidsforholdOgInntektRadData from '../types/arbeidsforholdOgInntekt';
-import ManueltLagtTilArbeidsforholdForm, { MANUELT_ORG_NR } from './manuelt/ManueltLagtTilArbeidsforholdForm';
+import { ArbeidsforholdOgInntektRadData } from '../types/arbeidsforholdOgInntekt';
+import { MANUELT_ORG_NR, ManueltLagtTilArbeidsforholdForm } from './manuelt/ManueltLagtTilArbeidsforholdForm';
 
 import styles from './arbeidsOgInntektOverstyrPanel.module.css';
 
@@ -40,7 +40,7 @@ const finnAksjonspunktTekstKoder = (
   return koder;
 };
 
-interface OwnProps {
+interface Props {
   behandling: Behandling;
   aksjonspunkt?: Aksjonspunkt;
   readOnly: boolean;
@@ -53,7 +53,7 @@ interface OwnProps {
   oppdaterTabell: (data: (rader: ArbeidsforholdOgInntektRadData[]) => ArbeidsforholdOgInntektRadData[]) => void;
 }
 
-const ArbeidsOgInntektOverstyrPanel: FunctionComponent<OwnProps> = ({
+export const ArbeidsOgInntektOverstyrPanel = ({
   behandling,
   aksjonspunkt,
   readOnly,
@@ -64,7 +64,7 @@ const ArbeidsOgInntektOverstyrPanel: FunctionComponent<OwnProps> = ({
   settÅpneRadIndexer,
   setErOverstyrt,
   oppdaterTabell,
-}) => {
+}: Props) => {
   const intl = useIntl();
   const { arbeidsforhold, inntektsmeldinger } = arbeidOgInntekt;
 
@@ -155,5 +155,3 @@ const ArbeidsOgInntektOverstyrPanel: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-
-export default ArbeidsOgInntektOverstyrPanel;

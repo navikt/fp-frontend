@@ -1,15 +1,15 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ChevronDownIcon, ChevronUpIcon, ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Detail,HStack, Label, Link, Spacer, Tooltip, VStack } from '@navikt/ds-react';
-import { AvsnittSkiller, DateLabel,PeriodLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { BodyShort, Detail, HStack, Label, Link, Spacer, Tooltip, VStack } from '@navikt/ds-react';
+import { AvsnittSkiller, DateLabel, PeriodLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 
-import { getKodeverknavnFraKode,KodeverkType } from '@navikt/fp-kodeverk';
+import { getKodeverknavnFraKode, KodeverkType } from '@navikt/fp-kodeverk';
 import { AlleKodeverk, AoIArbeidsforhold, Inntektsmelding } from '@navikt/fp-types';
 
-import InntektsmeldingOpplysningerPanel from './InntektsmeldingOpplysningerPanel';
+import { InntektsmeldingOpplysningerPanel } from './InntektsmeldingOpplysningerPanel';
 
 import styles from './inntektsmeldingerPanel.module.css';
 
@@ -34,7 +34,7 @@ const delOppAId = (eksternArbeidsforholdId: string): string => {
   return oppdeltId.join('-');
 };
 
-interface OwnProps {
+interface Props {
   saksnummer: string;
   arbeidsforholdForRad: AoIArbeidsforhold[];
   inntektsmeldingerForRad: Inntektsmelding[];
@@ -42,13 +42,13 @@ interface OwnProps {
   arbeidsgiverFødselsdato?: string;
 }
 
-const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
+export const InntektsmeldingerPanel = ({
   saksnummer,
   arbeidsforholdForRad,
   inntektsmeldingerForRad,
   alleKodeverk,
   arbeidsgiverFødselsdato,
-}) => {
+}: Props) => {
   const intl = useIntl();
   const [visInfoOmIm, setVisInfoOmIm] = useState<Record<string, boolean>>({});
 
@@ -267,5 +267,3 @@ const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-
-export default InntektsmeldingerPanel;
