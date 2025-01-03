@@ -94,7 +94,6 @@ export const sakslisteOptions = () =>
 
 export const reserverteOppgaverOptions = () =>
   queryOptions({
-    initialData: [],
     queryKey: [LosUrl.RESERVERTE_OPPGAVER],
     queryFn: () => kyExtended.get(LosUrl.RESERVERTE_OPPGAVER).json<Oppgave[]>(),
   });

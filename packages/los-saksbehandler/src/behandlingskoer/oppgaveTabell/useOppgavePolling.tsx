@@ -92,9 +92,7 @@ export const useOppgavePolling = (valgtSakslisteId: number) => {
     },
   });
 
-  const { data: reserverteOppgaver, refetch } = useQuery({
-    ...reserverteOppgaverOptions(),
-  });
+  const { data: reserverteOppgaver = EMPTY_ARRAY, refetch } = useQuery(reserverteOppgaverOptions());
 
   useEffect(() => {
     pollEtterOppgaver({ oppgaveIder: undefined });
