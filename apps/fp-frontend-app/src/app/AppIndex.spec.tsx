@@ -1,56 +1,17 @@
-import React from 'react';
 import { Context as ResponsiveContext } from 'react-responsive';
-import { MemoryRouter } from 'react-router-dom';
 
 import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { applyRequestHandlers } from 'msw-storybook-addon';
 
-import { RestApiMock } from '@navikt/fp-utils-test';
-
-import { FagsakApiKeys,requestFagsakApi } from '../data/fagsakContextApi';
-import { AppIndex } from './AppIndex';
 import * as stories from './AppIndex.stories';
 
-const { BekreftAdopsjon } = composeStories(stories);
+const { BekreftAdopsjon, RisikoAksjonspunkt } = composeStories(stories);
 
-describe('<AppIndex>', () => {
-  it.skip('skal vise hjem-skjermbilde', async () => {
-    const data = [
-      { key: FagsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: { navn: 'Peder' } } },
-      { key: FagsakApiKeys.KODEVERK.name, global: true, data: {} },
-      { key: FagsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: {} },
-    ];
-
-    render(
-      <RestApiMock data={data} requestApi={requestFagsakApi}>
-        <MemoryRouter>
-          <AppIndex />
-        </MemoryRouter>
-      </RestApiMock>,
-    );
-
-    expect(await screen.findByText('Svangerskap, fødsel og adopsjon')).toBeInTheDocument();
-  });
-
-  it.skip('skal vise query-feilmelding', async () => {
-    const data = [
-      { key: FagsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: { navn: 'Peder' } } },
-      { key: FagsakApiKeys.KODEVERK.name, global: true, data: {} },
-      { key: FagsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: {} },
-    ];
-
-    render(
-      <RestApiMock data={data} requestApi={requestFagsakApi}>
-        <MemoryRouter initialEntries={['/test?errormessage=Det+finnes+ingen+sak+med+denne+referansen%3A+266']}>
-          <AppIndex />
-        </MemoryRouter>
-      </RestApiMock>,
-    );
-    expect(await screen.findByText('Det finnes ingen sak med denne referansen: 266')).toBeInTheDocument();
-  });
-
-  it.skip('skal rendre app med korrekt informasjon', async () => {
+describe('AppIndex', () => {
+  it('skal rendre app med korrekt informasjon', async () => {
+    await applyRequestHandlers(BekreftAdopsjon.parameters.msw);
     render(
       <ResponsiveContext.Provider value={{ width: 1000 }}>
         <BekreftAdopsjon />
@@ -69,7 +30,7 @@ describe('<AppIndex>', () => {
     expect(await screen.findByText('Ingen faresignaler oppdaget')).toBeInTheDocument();
 
     expect(screen.getByText('Filtrer på behandling')).toBeInTheDocument();
-    expect(screen.getByText('Behandling startet')).toBeInTheDocument();
+    expect(screen.getByText('Dette er en inntektsmelding')).toBeInTheDocument();
 
     expect(screen.getByText('Førstegangsbehandling')).toBeInTheDocument();
     expect(screen.getByText('Behandlingsstatus')).toBeInTheDocument();
@@ -85,7 +46,7 @@ describe('<AppIndex>', () => {
     expect(await screen.findByText('Hjort Brit')).toBeInTheDocument();
     expect(screen.getByText('Hjort Gabriel')).toBeInTheDocument();
 
-    // TOD Fiks dette. Ser ikkje ut som lazy-loading lar seg testa
+    // TODO Fiks dette. Ser ikkje ut som lazy-loading lar seg testa
     /* expect(await screen.findByText('Opplysningsplikt')).toBeInTheDocument();
     expect(screen.getByText('Inngangsvilkår')).toBeInTheDocument();
     expect(screen.getByText('Beregning')).toBeInTheDocument();
@@ -104,10 +65,32 @@ describe('<AppIndex>', () => {
     screen.getByText('Kontroller mot opplysningene fra adopsjonsdokumentasjonen'); */
   });
 
+  // TODO Fiks test når behandling-api er over på tanstack-query
   it.skip('skal bekrefte aksjonspunkt', async () => {
+    await applyRequestHandlers(BekreftAdopsjon.parameters.msw);
     const utils = await render(
       <ResponsiveContext.Provider value={{ width: 1000 }}>
         <BekreftAdopsjon />
+      </ResponsiveContext.Provider>,
+    );
+
+    expect(await screen.findByText('Adopsjonsopplysninger fra søknad')).toBeInTheDocument();
+
+    const begrunnValgInput = utils.getByLabelText('Begrunn endringene');
+    await userEvent.type(begrunnValgInput, 'Dette er en begrunnelse');
+
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    expect(await screen.findByText('Fakta om medlemskap')).toBeInTheDocument();
+    expect(screen.getByText('Vurder om søker har gyldig medlemskap i perioden')).toBeInTheDocument();
+  });
+
+  // TODO Fiks test når behandling-api er over på tanstack-query
+  it.skip('skal vise risikoaksjonspunkt', async () => {
+    await applyRequestHandlers(RisikoAksjonspunkt.parameters.msw);
+    const utils = await render(
+      <ResponsiveContext.Provider value={{ width: 1000 }}>
+        <RisikoAksjonspunkt />
       </ResponsiveContext.Provider>,
     );
 

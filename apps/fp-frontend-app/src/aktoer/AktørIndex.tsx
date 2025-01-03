@@ -4,14 +4,15 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
-import { AktorSakIndex } from '@navikt/fp-sak-aktor';
+import { AktørSakIndex } from '@navikt/fp-sak-aktor';
+import { ErrorPage } from '@navikt/fp-sak-infosider';
 
 import { pathToFagsak } from '../app/paths';
 import { useTrackRouteParam } from '../app/useTrackRouteParam';
 import { aktørInfoOptions } from '../data/fagsakApi';
 import { useFpSakKodeverk } from '../data/useKodeverk';
 
-export const AktoerIndex = () => {
+export const AktørIndex = () => {
   const { selected: selectedAktoerId } = useTrackRouteParam<string>({
     paramName: 'aktoerId',
     parse: aktoerIdFromUrl => Number.parseInt(aktoerIdFromUrl, 10),
@@ -22,12 +23,15 @@ export const AktoerIndex = () => {
   const fagsakStatuser = useFpSakKodeverk(KodeverkType.FAGSAK_STATUS);
   const fagsakYtelser = useFpSakKodeverk(KodeverkType.FAGSAK_YTELSE);
 
-  if (status !== 'success') {
+  if (status === 'pending') {
     return <LoadingPanel />;
+  }
+  if (status === 'error') {
+    return <ErrorPage />;
   }
 
   return (
-    <AktorSakIndex
+    <AktørSakIndex
       valgtAktorId={selectedAktoerId}
       aktorInfo={aktørInfo}
       fagsakStatuser={fagsakStatuser}

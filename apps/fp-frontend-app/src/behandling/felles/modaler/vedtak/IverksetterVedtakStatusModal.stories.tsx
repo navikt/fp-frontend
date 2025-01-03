@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import { Meta, StoryObj } from '@storybook/react/*';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { BehandlingResultatType } from '@navikt/fp-kodeverk';
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';

@@ -13,7 +13,7 @@ import { NotFoundPage } from '@navikt/fp-sak-infosider';
 import { NavAnsatt } from '@navikt/fp-types';
 import { UtbetalingsdataIs15Index } from '@navikt/fp-utbetalingsdata-is15';
 
-import { AktoerIndex } from '../../aktoer/AktoerIndex';
+import { AktørIndex } from '../../aktoer/AktørIndex';
 import { useFagsakApi } from '../../data/fagsakApi';
 import { FagsakIndex } from '../../fagsak/FagsakIndex';
 import { FagsakSearchIndex } from '../../fagsakSearch/FagsakSearchIndex';
@@ -118,7 +118,7 @@ export const Home = ({ headerHeight, navAnsatt }: Props) => {
           }
         />
         <Route path={fagsakRoutePath} element={<FagsakIndex />} />
-        <Route path={aktoerRoutePath} element={<AktoerIndex />} />
+        <Route path={aktoerRoutePath} element={<AktørIndex />} />
         <Route path="*" element={<NotFoundPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />} />
       </Routes>
     </div>

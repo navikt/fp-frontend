@@ -6,13 +6,13 @@ import { http, HttpResponse } from 'msw';
 import { alleKodeverk, withQueryClient, withRouter } from '@navikt/fp-storybook-utils';
 import { FagsakEnkel, KjønnkodeEnum } from '@navikt/fp-types';
 
-import { FagsakRel, FagsakUrl, initFetchOptions, useFagsakApi } from '../data/fagsakApi';
+import { FagsakRel, FagsakUrl, initFetchOptions, useFagsakApi, wrapUrl } from '../data/fagsakApi';
 import { notEmpty } from '../data/notEmpty';
 import { FagsakSearchIndex } from './FagsakSearchIndex';
 
 import initFetchData from '../../.storybook/testdata/initFetch.json';
 
-const getHref = (rel: string) => notEmpty(initFetchData.links.find(link => link.rel === rel)).href;
+const getHref = (rel: string) => wrapUrl(notEmpty(initFetchData.links.find(link => link.rel === rel)).href);
 
 const FAGSAK_1 = {
   saksnummer: '12345',

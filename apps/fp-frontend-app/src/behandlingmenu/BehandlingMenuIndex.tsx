@@ -37,52 +37,6 @@ enum ModalType {
   TA_AV_VENT = 'TA_AV_VENT',
 }
 
-const hentMenyData = (behandling: BehandlingAppKontekst | undefined, fagsak: Fagsak) => {
-  const erPaVent = behandling ? behandling.behandlingPaaVent : false;
-  const behandlingTillatteOperasjoner = behandling?.behandlingTillatteOperasjoner;
-
-  const vergeMenyvalg = behandlingTillatteOperasjoner?.vergeBehandlingsmeny;
-  const skalViseFjernVerge =
-    vergeMenyvalg === VergeBehandlingmenyValg.FJERN && !!behandling?.uuid && !!behandling?.versjon;
-  const skalViseOpprettVerge =
-    vergeMenyvalg === VergeBehandlingmenyValg.OPPRETT && !!behandling?.uuid && !!behandling?.versjon;
-
-  return {
-    [ModalType.TA_AV_VENT]: {
-      disabled: !behandlingTillatteOperasjoner?.behandlingKanGjenopptas,
-      text: getTaAvVentMenytekst(),
-    },
-    [ModalType.SETT_PÅ_VENT]: {
-      disabled: !behandlingTillatteOperasjoner?.behandlingKanSettesPaVent,
-      text: getSettPaVentMenytekst(),
-    },
-    [ModalType.HENLEGG]: {
-      disabled: !behandlingTillatteOperasjoner?.behandlingKanHenlegges,
-      text: getHenleggMenytekst(),
-    },
-    [ModalType.ENDRE_BEHANDLENDE_ENHET]: {
-      disabled: !behandlingTillatteOperasjoner?.behandlingKanBytteEnhet,
-      text: getEndreEnhetMenytekst(),
-    },
-    [ModalType.ÅPNE_FOR_ENDRINGER]: {
-      disabled: !behandlingTillatteOperasjoner?.behandlingKanOpnesForEndringer,
-      text: getApneForEndringerMenytekst(),
-    },
-    [ModalType.NY_BEHANDLING]: {
-      disabled: fagsak.sakSkalTilInfotrygd,
-      text: getNyBehandlingMenytekst(),
-    },
-    [ModalType.ENDRE_FAGSAK_MARKERING]: {
-      disabled: fagsak.sakSkalTilInfotrygd,
-      text: getEndreUtlandMenytekst(),
-    },
-    [ModalType.VERGE]: {
-      disabled: !(!erPaVent && (skalViseOpprettVerge || skalViseFjernVerge)),
-      text: getVergeMenytekst(skalViseOpprettVerge),
-    },
-  } as Record<string, { disabled: boolean; text: string }>;
-};
-
 interface Props {
   fagsakData: FagsakData;
   behandlingUuid?: string;
@@ -174,4 +128,50 @@ export const BehandlingMenuIndex = ({ fagsakData, behandlingUuid, setBehandling,
       )}
     </>
   );
+};
+
+const hentMenyData = (behandling: BehandlingAppKontekst | undefined, fagsak: Fagsak) => {
+  const erPaVent = behandling ? behandling.behandlingPaaVent : false;
+  const behandlingTillatteOperasjoner = behandling?.behandlingTillatteOperasjoner;
+
+  const vergeMenyvalg = behandlingTillatteOperasjoner?.vergeBehandlingsmeny;
+  const skalViseFjernVerge =
+    vergeMenyvalg === VergeBehandlingmenyValg.FJERN && !!behandling?.uuid && !!behandling?.versjon;
+  const skalViseOpprettVerge =
+    vergeMenyvalg === VergeBehandlingmenyValg.OPPRETT && !!behandling?.uuid && !!behandling?.versjon;
+
+  return {
+    [ModalType.TA_AV_VENT]: {
+      disabled: !behandlingTillatteOperasjoner?.behandlingKanGjenopptas,
+      text: getTaAvVentMenytekst(),
+    },
+    [ModalType.SETT_PÅ_VENT]: {
+      disabled: !behandlingTillatteOperasjoner?.behandlingKanSettesPaVent,
+      text: getSettPaVentMenytekst(),
+    },
+    [ModalType.HENLEGG]: {
+      disabled: !behandlingTillatteOperasjoner?.behandlingKanHenlegges,
+      text: getHenleggMenytekst(),
+    },
+    [ModalType.ENDRE_BEHANDLENDE_ENHET]: {
+      disabled: !behandlingTillatteOperasjoner?.behandlingKanBytteEnhet,
+      text: getEndreEnhetMenytekst(),
+    },
+    [ModalType.ÅPNE_FOR_ENDRINGER]: {
+      disabled: !behandlingTillatteOperasjoner?.behandlingKanOpnesForEndringer,
+      text: getApneForEndringerMenytekst(),
+    },
+    [ModalType.NY_BEHANDLING]: {
+      disabled: fagsak.sakSkalTilInfotrygd,
+      text: getNyBehandlingMenytekst(),
+    },
+    [ModalType.ENDRE_FAGSAK_MARKERING]: {
+      disabled: fagsak.sakSkalTilInfotrygd,
+      text: getEndreUtlandMenytekst(),
+    },
+    [ModalType.VERGE]: {
+      disabled: !(!erPaVent && (skalViseOpprettVerge || skalViseFjernVerge)),
+      text: getVergeMenytekst(skalViseOpprettVerge),
+    },
+  } as Record<string, { disabled: boolean; text: string }>;
 };

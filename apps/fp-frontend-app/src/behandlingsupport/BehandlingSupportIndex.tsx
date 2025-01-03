@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback, useState } from 'react';
+import { FunctionComponent, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 
@@ -24,24 +24,7 @@ import { TotrinnskontrollIndex } from './totrinnskontroll/TotrinnskontrollIndex'
 
 import styles from './behandlingSupportIndex.module.css';
 
-const utledAktivtPanel = (
-  skalViseFraBeslutter: boolean,
-  skalViseTilGodkjenning: boolean,
-  valgtSupportPanel: string,
-): string => {
-  if (valgtSupportPanel) {
-    return valgtSupportPanel;
-  }
-  if (skalViseFraBeslutter) {
-    return SupportTabs.FRA_BESLUTTER;
-  }
-  if (skalViseTilGodkjenning) {
-    return SupportTabs.TIL_BESLUTTER;
-  }
-  return SupportTabs.HISTORIKK;
-};
-
-interface OwnProps {
+interface Props {
   fagsakData: FagsakData;
   behandlingUuid?: string;
   behandlingVersjon?: number;
@@ -54,7 +37,7 @@ interface OwnProps {
  * Har ansvar for å lage navigasjonsrad med korrekte navigasjonsvalg, og route til rett
  * støttepanelkomponent ihht. gitt parameter i URL-en.
  */
-export const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
+export const BehandlingSupportIndex: FunctionComponent<Props> = ({
   fagsakData,
   behandlingUuid,
   behandlingVersjon,
@@ -82,13 +65,10 @@ export const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
 
   const aktivtSupportPanel = utledAktivtPanel(skalViseFraBeslutter, skalViseTilGodkjenning, valgtSupportPanel);
 
-  const changeRouteCallback = useCallback(
-    (supportPanel: string) => {
-      const getSupportPanelLocation = getSupportPanelLocationCreator(location);
-      navigate(getSupportPanelLocation(supportPanel));
-    },
-    [location],
-  );
+  const changeRouteCallback = (supportPanel: string) => {
+    const getSupportPanelLocation = getSupportPanelLocationCreator(location);
+    navigate(getSupportPanelLocation(supportPanel));
+  };
 
   return (
     <Tabs value={aktivtSupportPanel} onChange={changeRouteCallback}>
@@ -184,4 +164,21 @@ export const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
       </Tabs.Panel>
     </Tabs>
   );
+};
+
+const utledAktivtPanel = (
+  skalViseFraBeslutter: boolean,
+  skalViseTilGodkjenning: boolean,
+  valgtSupportPanel: string,
+): string => {
+  if (valgtSupportPanel) {
+    return valgtSupportPanel;
+  }
+  if (skalViseFraBeslutter) {
+    return SupportTabs.FRA_BESLUTTER;
+  }
+  if (skalViseTilGodkjenning) {
+    return SupportTabs.TIL_BESLUTTER;
+  }
+  return SupportTabs.HISTORIKK;
 };

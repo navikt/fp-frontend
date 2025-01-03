@@ -7156,5 +7156,42 @@
       "kodeverk": "ADRESSE_TYPE",
       "navn": "Ukjent adresse"
     }
+  ],
+  "FagsakMarkering": [
+    {
+      "kode": "SAMMENSATT_KONTROLL",
+      "kodeverk": "FAGSAK_MARKERING",
+      "navn": "Sammensatt kontroll"
+    },
+    {
+      "kode": "EØS_BOSATT_NORGE",
+      "kodeverk": "FAGSAK_MARKERING",
+      "navn": "EØS bosatt Norge"
+    },
+    {
+      "kode": "SELVSTENDIG_NÆRING",
+      "kodeverk": "FAGSAK_MARKERING",
+      "navn": "Næringsdrivende"
+    },
+    {
+      "kode": "BARE_FAR_RETT",
+      "kodeverk": "FAGSAK_MARKERING",
+      "navn": "Bare far har rett"
+    },
+    {
+      "kode": "BOSATT_UTLAND",
+      "kodeverk": "FAGSAK_MARKERING",
+      "navn": "Bosatt utland"
+    },
+    {
+      "kode": "DØD_DØDFØDSEL",
+      "kodeverk": "FAGSAK_MARKERING",
+      "navn": "Død eller dødfødsel"
+    },
+    {
+      "kode": "PRAKSIS_UTSETTELSE",
+      "kodeverk": "FAGSAK_MARKERING",
+      "navn": "Praksis utsettelse"
+    }
   ]
 }

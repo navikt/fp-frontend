@@ -2,12 +2,12 @@ import React from 'react';
 
 import { render, screen } from '@testing-library/react';
 
-import { BehandlingResultatType, BehandlingStatus,BehandlingType } from '@navikt/fp-kodeverk';
+import { BehandlingResultatType, BehandlingStatus, BehandlingType } from '@navikt/fp-kodeverk';
 import { BehandlingAppKontekst } from '@navikt/fp-types';
 
 import { BeslutterModalIndex } from './BeslutterModalIndex';
 
-describe('<BeslutterModalIndex>', () => {
+describe('BeslutterModalIndex', () => {
   const behandling = {
     uuid: '1',
     versjon: 2,

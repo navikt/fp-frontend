@@ -9,7 +9,7 @@ import { RestApiErrorProvider, RestApiProvider } from '@navikt/fp-rest-api-hooks
 import { alleKodeverk, alleKodeverkTilbakekreving } from '@navikt/fp-storybook-utils';
 
 import { requestBehandlingApi } from '../data/behandlingContextApi';
-import { FagsakRel, FagsakUrl } from '../data/fagsakApi';
+import { FagsakRel, FagsakUrl, wrapUrl } from '../data/fagsakApi';
 import { notEmpty } from '../data/notEmpty';
 import { AppIndexWrapper } from './AppIndex';
 
@@ -30,21 +30,23 @@ import medlemskapData from '../../.storybook/testdata/medlemskap.json';
 import personoversiktData from '../../.storybook/testdata/personoversikt.json';
 import soknadData from '../../.storybook/testdata/soknad.json';
 
-const getHrefFromLinks = (rel: string) =>
-  notEmpty(
-    initFetchData.links.find(link => link.rel === rel) ??
-      initFetchData.sakLinks.find(link => link.rel === rel) ??
-      initFetchTilbakeData.links.find(link => link.rel === rel) ??
-      initFetchTilbakeData.sakLinks.find(link => link.rel === rel),
-  ).href;
+const getHref = (rel: string) =>
+  wrapUrl(
+    notEmpty(
+      initFetchData.links.find(link => link.rel === rel) ??
+        initFetchData.sakLinks.find(link => link.rel === rel) ??
+        initFetchTilbakeData.links.find(link => link.rel === rel) ??
+        initFetchTilbakeData.sakLinks.find(link => link.rel === rel),
+    ).href,
+  );
 
 const HANDLERS = [
   http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchData)),
   http.get(FagsakUrl.INIT_FETCH_FPTILBAKE, () => HttpResponse.json(initFetchTilbakeData)),
-  http.get(getHrefFromLinks(FagsakRel.KODEVERK), () => HttpResponse.json(alleKodeverk)),
-  http.get(getHrefFromLinks(FagsakRel.KODEVERK_FPTILBAKE), () => HttpResponse.json(alleKodeverkTilbakekreving)),
-  http.get(getHrefFromLinks(FagsakRel.FETCH_FAGSAKDATA_FPTILBAKE), () => HttpResponse.json(fagsakFullTilbakeData)),
-  http.get(getHrefFromLinks(FagsakRel.ALL_DOCUMENTS), () => HttpResponse.json(dokumenterData)),
+  http.get(getHref(FagsakRel.KODEVERK), () => HttpResponse.json(alleKodeverk)),
+  http.get(getHref(FagsakRel.KODEVERK_FPTILBAKE), () => HttpResponse.json(alleKodeverkTilbakekreving)),
+  http.get(getHref(FagsakRel.FETCH_FAGSAKDATA_FPTILBAKE), () => HttpResponse.json(fagsakFullTilbakeData)),
+  http.get(getHref(FagsakRel.ALL_DOCUMENTS), () => HttpResponse.json(dokumenterData)),
 ];
 
 const meta = {
@@ -110,9 +112,7 @@ type Story = StoryObj<typeof meta>;
 export const BekreftAdopsjon: Story = {
   parameters: {
     msw: {
-      handlers: HANDLERS.concat([
-        http.get(getHrefFromLinks(FagsakRel.FETCH_FAGSAK), () => HttpResponse.json(fagsakFullData)),
-      ]),
+      handlers: HANDLERS.concat([http.get(getHref(FagsakRel.FETCH_FAGSAK), () => HttpResponse.json(fagsakFullData))]),
     },
   },
   args: {
@@ -124,7 +124,7 @@ export const RisikoAksjonspunkt: Story = {
   parameters: {
     msw: {
       handlers: HANDLERS.concat([
-        http.get(getHrefFromLinks(FagsakRel.FETCH_FAGSAK), () => HttpResponse.json(fagsakFullRisikoApData)),
+        http.get(getHref(FagsakRel.FETCH_FAGSAK), () => HttpResponse.json(fagsakFullRisikoApData)),
       ]),
     },
   },

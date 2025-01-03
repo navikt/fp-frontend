@@ -1,5 +1,3 @@
-import React, { useCallback } from 'react';
-
 import { MenyApneForEndringerIndex } from '@navikt/fp-sak-meny-apne-for-endringer';
 import { Behandling, BehandlingAppKontekst } from '@navikt/fp-types';
 
@@ -16,12 +14,12 @@ export const ApneForEndringerMenyModal = ({ behandling, setBehandling, lukkModal
     BehandlingApiKeys.OPEN_BEHANDLING_FOR_CHANGES,
   );
 
-  const opneBehandlingForEndringer = useCallback(() => {
+  const opneBehandlingForEndringer = () => {
     åpneForEndringer({
       behandlingUuid: behandling.uuid,
       behandlingVersjon: behandling.versjon,
     }).then(setBehandling);
-  }, [behandling]);
+  };
 
   return <MenyApneForEndringerIndex apneBehandlingForEndringer={opneBehandlingForEndringer} lukkModal={lukkModal} />;
 };

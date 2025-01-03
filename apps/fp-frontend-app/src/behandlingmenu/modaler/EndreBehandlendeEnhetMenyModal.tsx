@@ -1,5 +1,3 @@
-import { useCallback } from 'react';
-
 import { useQuery } from '@tanstack/react-query';
 
 import { MenyEndreBehandlendeEnhetIndex } from '@navikt/fp-sak-meny';
@@ -22,18 +20,15 @@ export const EndreBehandlendeEnhetMenyModal = ({ behandling, hentOgSettBehandlin
     BehandlingApiKeys.BEHANDLING_NY_BEHANDLENDE_ENHET,
   );
 
-  const endreBehandlendeEnhet = useCallback(
-    (formValues: { enhetNavn: string; enhetId: string; begrunnelse: string }) => {
-      nyBehandlendeEnhet({
-        ...formValues,
-        behandlingUuid: behandling?.uuid,
-        behandlingVersjon: behandling?.versjon,
-      }).then(() => {
-        hentOgSettBehandling();
-      });
-    },
-    [behandling],
-  );
+  const endreBehandlendeEnhet = (formValues: { enhetNavn: string; enhetId: string; begrunnelse: string }) => {
+    nyBehandlendeEnhet({
+      ...formValues,
+      behandlingUuid: behandling?.uuid,
+      behandlingVersjon: behandling?.versjon,
+    }).then(() => {
+      hentOgSettBehandling();
+    });
+  };
 
   return (
     <MenyEndreBehandlendeEnhetIndex

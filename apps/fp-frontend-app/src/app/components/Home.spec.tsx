@@ -1,26 +1,33 @@
-import React from 'react';
-import { RawIntlProvider } from 'react-intl';
-import { MemoryRouter } from 'react-router-dom';
-
-import { createIntl } from '@navikt/ft-utils';
+import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
+import { applyRequestHandlers } from 'msw-storybook-addon';
 
-import { Home } from './Home';
+import * as stories from './Home.stories';
 
-import messages from '../../../i18n/nb_NO.json';
+const { VisAktør, VisSøk, VisLosIkkeTilgjengelig, VisSideIkkeFunnet } = composeStories(stories);
 
-const intl = createIntl(messages);
+describe('Home', () => {
+  it('skal rendre aktør-panel', async () => {
+    await applyRequestHandlers(VisAktør.parameters.msw);
+    render(<VisAktør />);
+    expect(await screen.findByText('Espen Utvikler')).toBeInTheDocument();
+  });
 
-describe('<Home>', () => {
-  it('skal rendre komponent', async () => {
-    render(
-      <MemoryRouter initialEntries={['/test']}>
-        <RawIntlProvider value={intl}>
-          <Home headerHeight={48} />
-        </RawIntlProvider>
-      </MemoryRouter>,
-    );
+  it('skal rendre søke-panel', async () => {
+    await applyRequestHandlers(VisSøk.parameters.msw);
+    render(<VisSøk />);
+    expect(await screen.findByText('Søk på sak eller person')).toBeInTheDocument();
+  });
 
+  it('skal rendre los-ikke-tilgjengelig-panel', async () => {
+    await applyRequestHandlers(VisLosIkkeTilgjengelig.parameters.msw);
+    render(<VisLosIkkeTilgjengelig />);
+    expect(await screen.findByText('FPLOS er ikke tilgjengelig')).toBeInTheDocument();
+  });
+
+  it('skal rendre side-ikke-funnet-panel', async () => {
+    await applyRequestHandlers(VisSideIkkeFunnet.parameters.msw);
+    render(<VisSideIkkeFunnet />);
     expect(await screen.findByText('Beklager, vi finner ikke siden du leter etter.')).toBeInTheDocument();
   });
 });

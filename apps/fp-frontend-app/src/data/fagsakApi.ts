@@ -70,10 +70,11 @@ const kyExtended = ky.extend({
 
 //MÅ være en gyldig URL for at KY skal fungere i test
 const isTest = import.meta.env.MODE === 'test';
-const wrapUrl = (url: string) => (isTest ? `http://www.test.com${url}` : url);
+export const wrapUrl = (url: string) => (isTest ? `http://www.test.com${url}` : url);
 
 const getUrlFromRel = (rel: string, links: Link[] = []): string => {
-  return links.find(l => l.rel === rel)?.href ?? '';
+  const link = links.find(l => l.rel === rel);
+  return link ? wrapUrl(link.href) : '';
 };
 
 export const FagsakUrl = {
