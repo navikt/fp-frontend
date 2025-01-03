@@ -128,7 +128,7 @@ const FAGSAK = {
 } as Fagsak;
 
 const meta = {
-  title: 'app/TotrinnskontrollIndex',
+  title: 'fagsak/TotrinnskontrollIndex',
   decorators: [withIntl, withRouter, withQueryClient],
   component: TotrinnskontrollIndex,
   parameters: {

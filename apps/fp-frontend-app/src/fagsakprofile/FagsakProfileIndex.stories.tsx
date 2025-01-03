@@ -111,7 +111,7 @@ const FAGSAK = {
 } as Fagsak;
 
 const meta = {
-  title: 'app/FagsakProfileIndex',
+  title: 'fagsak/FagsakProfileIndex',
   decorators: [withIntl, withRouter, withQueryClient],
   component: FagsakProfileIndex,
   parameters: {

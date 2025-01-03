@@ -73,7 +73,7 @@ const FAGSAK = {
 } as Fagsak;
 
 const meta = {
-  title: 'app/BehandlingMenuIndex',
+  title: 'fagsak/BehandlingMenuIndex',
   decorators: [withIntl, withRouter, withQueryClient],
   component: BehandlingMenuIndex,
   parameters: {

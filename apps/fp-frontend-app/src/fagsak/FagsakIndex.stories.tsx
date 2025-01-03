@@ -94,7 +94,7 @@ const fagsakFpTilbake = {
 };
 
 const meta = {
-  title: 'app/FagsakIndex',
+  title: 'fagsak/FagsakIndex',
   decorators: [withIntl, withQueryClient],
   component: FagsakIndex,
   parameters: {

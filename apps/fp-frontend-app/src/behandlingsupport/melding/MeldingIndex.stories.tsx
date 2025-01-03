@@ -87,7 +87,7 @@ const FAGSAK = {
 } as Fagsak;
 
 const meta = {
-  title: 'app/MeldingIndex',
+  title: 'fagsak/MeldingIndex',
   decorators: [withIntl, withRouter, withQueryClient],
   component: MeldingIndex,
   parameters: {

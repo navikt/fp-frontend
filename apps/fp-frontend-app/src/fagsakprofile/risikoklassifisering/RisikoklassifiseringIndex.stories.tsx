@@ -90,7 +90,7 @@ const FAGSAK = {
 } as Fagsak;
 
 const meta = {
-  title: 'app/RisikoklassifiseringIndex',
+  title: 'fagsak/RisikoklassifiseringIndex',
   decorators: [withIntl, withRouter, withQueryClient],
   component: RisikoklassifiseringIndex,
   parameters: {

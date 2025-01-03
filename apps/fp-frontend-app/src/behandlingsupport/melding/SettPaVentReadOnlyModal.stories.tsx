@@ -18,7 +18,7 @@ const VENTEARSAKER = [
 ];
 
 const meta = {
-  title: 'app/settpavent/SettPaVentReadOnlyModal',
+  title: 'fagsak/SettPaVentReadOnlyModal',
   component: SettPaVentReadOnlyModal,
   decorators: [withIntl],
 } satisfies Meta<typeof SettPaVentReadOnlyModal>;

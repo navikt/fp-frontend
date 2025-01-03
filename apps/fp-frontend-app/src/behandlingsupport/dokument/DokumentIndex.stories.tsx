@@ -18,7 +18,7 @@ const withIntl = getIntlDecorator(messages);
 const getHref = (rel: string) => wrapUrl(notEmpty(initFetchData.sakLinks.find(link => link.rel === rel)).href);
 
 const meta = {
-  title: 'app/DokumentIndex',
+  title: 'fagsak/DokumentIndex',
   decorators: [withIntl, withQueryClient],
   component: DokumentIndex,
   args: {

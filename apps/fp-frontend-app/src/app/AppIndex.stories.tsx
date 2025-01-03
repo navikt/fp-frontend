@@ -50,7 +50,7 @@ const HANDLERS = [
 ];
 
 const meta = {
-  title: 'app/app',
+  title: 'app/AppIndex',
   component: AppIndexWrapper,
   render: ({ bekreftAdopsjon = false }) => {
     const fagsakId = '3';

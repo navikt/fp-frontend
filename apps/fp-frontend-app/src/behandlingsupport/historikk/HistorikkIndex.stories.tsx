@@ -29,7 +29,7 @@ const getHref = (rel: string) =>
   );
 
 const meta = {
-  title: 'app/HistorikkIndex',
+  title: 'fagsak/HistorikkIndex',
   decorators: [withIntl, withRouter, withQueryClient],
   component: HistorikkIndex,
   parameters: {

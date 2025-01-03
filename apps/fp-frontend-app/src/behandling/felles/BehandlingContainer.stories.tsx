@@ -85,7 +85,7 @@ const ProsessPanelTest2 = ({ registrerProsessPanel, valgtProsessSteg }: ProsessP
 };
 
 const meta = {
-  title: 'app/behandling-container',
+  title: 'behandling/behandling-container',
   component: BehandlingContainer,
   decorators: [withIntl],
   args: {

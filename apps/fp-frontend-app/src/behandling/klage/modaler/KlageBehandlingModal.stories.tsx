@@ -10,7 +10,7 @@ import messages from '../../../../i18n/nb_NO.json';
 const withIntl = getIntlDecorator(messages);
 
 const meta = {
-  title: 'app/klage/KlageBehandlingModal',
+  title: 'behandling/klage/KlageBehandlingModal',
   component: KlageBehandlingModal,
   decorators: [withIntl],
 } satisfies Meta<typeof KlageBehandlingModal>;

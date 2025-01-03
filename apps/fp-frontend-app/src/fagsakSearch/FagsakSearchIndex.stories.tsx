@@ -37,7 +37,7 @@ const FAGSAK_2: Partial<FagsakEnkel> = {
 const FAGSAKER = [FAGSAK_1, FAGSAK_2];
 
 const meta = {
-  title: 'app/FagsakSearchIndex',
+  title: 'fagsak/FagsakSearchIndex',
   decorators: [withRouter, withQueryClient],
   component: FagsakSearchIndex,
   parameters: {
