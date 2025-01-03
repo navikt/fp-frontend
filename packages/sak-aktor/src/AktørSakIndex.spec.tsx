@@ -3,11 +3,11 @@ import React from 'react';
 import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
 
-import * as stories from './AktorSakIndex.stories';
+import * as stories from './AktørSakIndex.stories';
 
 const { Default, UgyldigAktørId } = composeStories(stories);
 
-describe('<AktorSakIndex>', () => {
+describe('AktørSakIndex', () => {
   it('skal vise to fagsaker til aktør', async () => {
     render(<Default />);
     expect(await screen.findByText('Espen Utvikler')).toBeInTheDocument();

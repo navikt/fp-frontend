@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
-import { FagsakStatus,FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { FagsakEnkel } from '@navikt/fp-types';
 
@@ -22,7 +22,7 @@ const meta = {
   render: storyArgs => {
     const [args, setArgs] = useState(storyArgs);
 
-    const searchFagsakCallback = (params?: { searchString: string }) => {
+    const searchFagsakCallback = (params: { searchString: string }) => {
       args.searchFagsakCallback?.(params);
       setArgs(oldArgs => ({ ...oldArgs, searchResultReceived: true }));
       return Promise.resolve<FagsakEnkel[] | undefined>(args.fagsaker);

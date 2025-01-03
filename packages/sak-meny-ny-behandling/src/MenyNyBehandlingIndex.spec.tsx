@@ -21,11 +21,14 @@ describe('<MenyNyBehandlingIndex>', () => {
 
     await waitFor(() => expect(lukkModal).toHaveBeenCalledTimes(1));
     await waitFor(() => expect(lagNyBehandling).toHaveBeenCalledTimes(1));
-    expect(lagNyBehandling).toHaveBeenNthCalledWith(1, false, {
-      behandlingType: 'BT-003',
-      eksternUuid: undefined,
-      fagsakYtelseType: 'FP',
-      saksnummer: '123',
+    expect(lagNyBehandling).toHaveBeenNthCalledWith(1, {
+      isTilbakekreving: false,
+      params: {
+        behandlingType: 'BT-003',
+        eksternUuid: undefined,
+        fagsakYtelseType: 'FP',
+        saksnummer: '123',
+      },
     });
 
     expect(utils.queryByRole('checkbox', { hidden: true })).not.toBeInTheDocument();
@@ -45,12 +48,15 @@ describe('<MenyNyBehandlingIndex>', () => {
 
     await waitFor(() => expect(lukkModal).toHaveBeenCalledTimes(1));
     await waitFor(() => expect(lagNyBehandling).toHaveBeenCalledTimes(1));
-    expect(lagNyBehandling).toHaveBeenNthCalledWith(1, false, {
-      behandlingType: 'BT-002',
-      eksternUuid: undefined,
-      fagsakYtelseType: 'FP',
-      nyBehandlingEtterKlage: true,
-      saksnummer: '123',
+    expect(lagNyBehandling).toHaveBeenNthCalledWith(1, {
+      isTilbakekreving: false,
+      params: {
+        behandlingType: 'BT-002',
+        eksternUuid: undefined,
+        fagsakYtelseType: 'FP',
+        nyBehandlingEtterKlage: true,
+        saksnummer: '123',
+      },
     });
   });
 
@@ -66,12 +72,15 @@ describe('<MenyNyBehandlingIndex>', () => {
 
     await waitFor(() => expect(lukkModal).toHaveBeenCalledTimes(1));
     await waitFor(() => expect(lagNyBehandling).toHaveBeenCalledTimes(1));
-    expect(lagNyBehandling).toHaveBeenNthCalledWith(1, false, {
-      behandlingType: 'BT-002',
-      eksternUuid: undefined,
-      fagsakYtelseType: 'FP',
-      nyBehandlingEtterKlage: undefined,
-      saksnummer: '123',
+    expect(lagNyBehandling).toHaveBeenNthCalledWith(1, {
+      isTilbakekreving: false,
+      params: {
+        behandlingType: 'BT-002',
+        eksternUuid: undefined,
+        fagsakYtelseType: 'FP',
+        nyBehandlingEtterKlage: undefined,
+        saksnummer: '123',
+      },
     });
   });
 
@@ -89,12 +98,15 @@ describe('<MenyNyBehandlingIndex>', () => {
 
     await waitFor(() => expect(lukkModal).toHaveBeenCalledTimes(1));
     await waitFor(() => expect(lagNyBehandling).toHaveBeenCalledTimes(1));
-    expect(lagNyBehandling).toHaveBeenNthCalledWith(1, false, {
-      behandlingType: 'BT-004',
-      behandlingArsakType: 'RE-KLAG-U-INNTK',
-      eksternUuid: undefined,
-      fagsakYtelseType: 'FP',
-      saksnummer: '123',
+    expect(lagNyBehandling).toHaveBeenNthCalledWith(1, {
+      isTilbakekreving: false,
+      params: {
+        behandlingType: 'BT-004',
+        behandlingArsakType: 'RE-KLAG-U-INNTK',
+        eksternUuid: undefined,
+        fagsakYtelseType: 'FP',
+        saksnummer: '123',
+      },
     });
   });
 

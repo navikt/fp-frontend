@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { VStack } from '@navikt/ds-react';
 import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
-import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { InfotrygdVedtak } from '@navikt/fp-types';
 
 import { UtbetalingsdataIs15Index } from './UtbetalingsdataIs15Index';
@@ -13,7 +12,8 @@ const meta = {
   title: 'utbetalingsdata/UtbetalingsdataIs15Index',
   component: UtbetalingsdataIs15Index,
   args: {
-    infotrygdVedtakState: RestApiState.NOT_STARTED,
+    isPending: false,
+    isSuccess: false,
     søkInfotrygdVedtak: action('button-click') as (params: { searchString: string }) => Promise<InfotrygdVedtak>,
   },
   render: storyArgs => {
@@ -21,7 +21,7 @@ const meta = {
 
     const søkInfotrygdVedtak = (params: { searchString: string }) => {
       args.søkInfotrygdVedtak?.(params);
-      setArgs(oldArgs => ({ ...oldArgs, infotrygdVedtakState: RestApiState.SUCCESS }));
+      setArgs(oldArgs => ({ ...oldArgs, isSuccess: true }));
       return Promise.resolve<InfotrygdVedtak | undefined>(args.infotrygdVedtak);
     };
 

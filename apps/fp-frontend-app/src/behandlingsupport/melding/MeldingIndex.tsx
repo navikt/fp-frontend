@@ -1,101 +1,26 @@
-import React, { useCallback,useState } from 'react';
+import { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 
 import { Alert } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { BehandlingType, DokumentMalType,KodeverkType, VenteArsakType } from '@navikt/fp-kodeverk';
-import { RestApiState } from '@navikt/fp-rest-api-hooks';
-import { FormValues,MeldingerSakIndex, MessagesModalSakIndex } from '@navikt/fp-sak-meldinger';
-import { KodeverkMedNavn } from '@navikt/fp-types';
+import { BehandlingType, DokumentMalType, KodeverkType, VenteArsakType } from '@navikt/fp-kodeverk';
+import { FormValues, MeldingerSakIndex, MessagesModalSakIndex } from '@navikt/fp-sak-meldinger';
+import { BehandlingAppKontekst, KodeverkMedNavn } from '@navikt/fp-types';
 
-import { FagsakApiKeys, restFagsakApiHooks,SubmitMessageParams } from '../../data/fagsakContextApi';
+import { initFetchOptions, SubmitMessageParams, useFagsakBehandlingApi } from '../../data/fagsakApi';
+import { notEmpty } from '../../data/notEmpty';
 import { useFpSakKodeverk } from '../../data/useKodeverk';
-import { ForhandsvisFunksjon,useVisForhandsvisningAvMelding } from '../../data/useVisForhandsvisningAvMelding';
+import { ForhandsvisFunksjon, useVisForhandsvisningAvMelding } from '../../data/useVisForhandsvisningAvMelding';
 import { FagsakData } from '../../fagsak/FagsakData';
 import { SupportHeaderAndContent } from '../SupportHeader';
 import { SettPaVentReadOnlyModal } from './SettPaVentReadOnlyModal';
 
 import styles from './MeldingIndex.module.css';
 
-const getSubmitCallback =
-  (
-    setShowMessageModal: (showModal: boolean) => void,
-    submitMessage: (
-      params?: SubmitMessageParams | undefined,
-      keepData?: boolean | undefined,
-    ) => Promise<void | undefined>,
-    hentOgSettBehandling: () => void,
-    setShowSettPaVentModal: (erInnhentetEllerForlenget: boolean) => void,
-    setMeldingFormData: (data?: any) => void,
-    behandlingTypeKode?: string,
-    behandlingUuid?: string,
-  ) =>
-  (values: FormValues) => {
-    const skalSettePåVent =
-      values.brevmalkode === DokumentMalType.INNHENTE_OPPLYSNINGER ||
-      values.brevmalkode === DokumentMalType.VARSEL_OM_REVURDERING ||
-      values.brevmalkode === DokumentMalType.ETTERLYS_INNTEKTSMELDING;
-    const erTilbakekreving =
-      BehandlingType.TILBAKEKREVING === behandlingTypeKode ||
-      BehandlingType.TILBAKEKREVING_REVURDERING === behandlingTypeKode;
-
-    setShowMessageModal(!skalSettePåVent);
-
-    const data = erTilbakekreving
-      ? {
-          behandlingUuid,
-          fritekst: values.fritekst,
-          brevmalkode: values.brevmalkode,
-        }
-      : {
-          behandlingUuid,
-          brevmalkode: values.brevmalkode,
-          fritekst: values.fritekst,
-          arsakskode: values.arsakskode,
-        };
-    return submitMessage(data).then(() => {
-      setMeldingFormData();
-      if (skalSettePåVent) {
-        setShowSettPaVentModal(true);
-      } else {
-        hentOgSettBehandling();
-      }
-    });
-  };
-
-const getPreviewCallback =
-  (fagsakYtelseType: string, fetchPreview: ForhandsvisFunksjon, behandlingTypeKode?: string, behandlingUuid?: string) =>
-  (dokumentMal?: string, fritekst?: string, aarsakskode?: string) => {
-    const erTilbakekreving =
-      BehandlingType.TILBAKEKREVING === behandlingTypeKode ||
-      BehandlingType.TILBAKEKREVING_REVURDERING === behandlingTypeKode;
-    const data = erTilbakekreving
-      ? {
-          behandlingUuid,
-          fritekst: fritekst || ' ',
-          brevmalkode: dokumentMal,
-        }
-      : {
-          behandlingUuid,
-          fagsakYtelseType,
-          fritekst: fritekst || ' ',
-          arsakskode: aarsakskode || null,
-          dokumentMal,
-        };
-    fetchPreview(false, data);
-  };
-
-const finnKanIkkeLagreMeldingTekst = (kanVeilede: boolean, behandlingKanSendeMelding?: boolean) => {
-  if (!behandlingKanSendeMelding) {
-    return 'MeldingIndex.IkkeTilgjengeligPaVent';
-  }
-  if (kanVeilede) {
-    return 'MeldingIndex.IkkeTilgjengeligVeileder';
-  }
-  return 'MeldingIndex.IkkeTilgjengeligAvsluttet';
-};
+const EMPTY_ARRAY = [] as KodeverkMedNavn[];
 
 interface Props {
   fagsakData: FagsakData;
@@ -104,8 +29,6 @@ interface Props {
   setMeldingFormData: (data?: any) => void;
   hentOgSettBehandling: () => void;
 }
-
-const EMPTY_ARRAY = [] as KodeverkMedNavn[];
 
 /**
  * MeldingIndex
@@ -126,51 +49,49 @@ export const MeldingIndex = ({
   const navigate = useNavigate();
 
   const fagsak = fagsakData.getFagsak();
-  const valgtBehandling = fagsakData.getBehandling(valgtBehandlingUuid);
+  const valgtBehandling = notEmpty(fagsakData.getBehandling(valgtBehandlingUuid));
 
-  const initFetchData = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
+  const api = useFagsakBehandlingApi(valgtBehandling);
+
+  const { data: initFetch } = useQuery(initFetchOptions());
+  const {
+    innloggetBruker: { kanVeilede },
+  } = notEmpty(initFetch);
 
   const ventearsaker = useFpSakKodeverk(KodeverkType.VENT_AARSAK) || EMPTY_ARRAY;
   const revurderingVarslingArsak = useFpSakKodeverk(KodeverkType.REVURDERING_VARSLING_ÅRSAK);
 
-  const { startRequest: submitMessage, state: submitState } = restFagsakApiHooks.useRestApiRunner(
-    FagsakApiKeys.SUBMIT_MESSAGE,
+  const { mutateAsync: sendMelding, status: meldingStatus } = useMutation({
+    mutationFn: (valuesToStore: SubmitMessageParams) => api.sendMelding(valuesToStore),
+  });
+
+  const submitCallback = getSubmitCallback(
+    setShowMessageModal,
+    sendMelding,
+    hentOgSettBehandling,
+    setShowSettPaVentModal,
+    setMeldingFormData,
+    valgtBehandling,
   );
 
-  const submitCallback = useCallback(
-    getSubmitCallback(
-      setShowMessageModal,
-      submitMessage,
-      hentOgSettBehandling,
-      setShowSettPaVentModal,
-      setMeldingFormData,
-      valgtBehandling?.type,
-      valgtBehandling?.uuid,
-    ),
-    [valgtBehandling?.uuid, valgtBehandling?.versjon],
-  );
-
-  const handleSubmitFromModal = useCallback(() => {
+  const handleSubmitFromModal = () => {
     navigate('/');
-  }, []);
+  };
 
-  const fetchPreview = useVisForhandsvisningAvMelding(valgtBehandling?.type);
+  const fetchPreview = useVisForhandsvisningAvMelding(valgtBehandling);
 
-  const previewCallback = useCallback(
-    getPreviewCallback(fagsak.fagsakYtelseType, fetchPreview, valgtBehandling?.type, valgtBehandling?.uuid),
-    [valgtBehandling?.uuid, valgtBehandling?.versjon],
-  );
+  const previewCallback = getPreviewCallback(fagsak.fagsakYtelseType, fetchPreview, valgtBehandling);
 
-  const afterSubmit = useCallback(() => {
+  const afterSubmit = () => {
     setShowMessageModal(false);
     return hentOgSettBehandling();
-  }, []);
+  };
 
-  const submitFinished = submitState === RestApiState.SUCCESS;
+  const submitFinished = meldingStatus === 'success';
 
-  const behandlingTillatteOperasjoner = valgtBehandling?.behandlingTillatteOperasjoner;
+  const behandlingTillatteOperasjoner = valgtBehandling.behandlingTillatteOperasjoner;
   const kanSendeMelding =
-    !initFetchData.innloggetBruker.kanVeilede &&
+    !kanVeilede &&
     fagsakData.getAlleBehandlinger().some(b => !b.avsluttet) &&
     behandlingTillatteOperasjoner?.behandlingKanSendeMelding;
 
@@ -187,10 +108,7 @@ export const MeldingIndex = ({
             <VerticalSpacer fourtyPx />
             <Alert variant="info">
               <FormattedMessage
-                id={finnKanIkkeLagreMeldingTekst(
-                  initFetchData.innloggetBruker.kanVeilede,
-                  behandlingTillatteOperasjoner?.behandlingKanSendeMelding,
-                )}
+                id={finnKanIkkeLagreMeldingTekst(kanVeilede, behandlingTillatteOperasjoner?.behandlingKanSendeMelding)}
               />
             </Alert>
           </div>
@@ -198,13 +116,11 @@ export const MeldingIndex = ({
         {kanSendeMelding && (
           <MeldingerSakIndex
             submitCallback={submitCallback}
-            sprakKode={valgtBehandling?.sprakkode}
+            behandling={valgtBehandling}
             previewCallback={previewCallback}
             revurderingVarslingArsak={revurderingVarslingArsak}
-            templates={valgtBehandling?.brevmaler}
-            isKontrollerRevurderingApOpen={valgtBehandling?.ugunstAksjonspunkt}
             fagsakYtelseType={fagsak.fagsakYtelseType}
-            kanVeilede={initFetchData.innloggetBruker.kanVeilede}
+            kanVeilede={kanVeilede}
             meldingFormData={meldingFormData}
             setMeldingFormData={setMeldingFormData}
             brukerManglerAdresse={fagsak.brukerManglerAdresse}
@@ -220,4 +136,78 @@ export const MeldingIndex = ({
       )}
     </>
   );
+};
+
+const getSubmitCallback =
+  (
+    setShowMessageModal: (showModal: boolean) => void,
+    submitMessage: (params: SubmitMessageParams) => Promise<unknown>,
+    hentOgSettBehandling: () => void,
+    setShowSettPaVentModal: (erInnhentetEllerForlenget: boolean) => void,
+    setMeldingFormData: (data?: any) => void,
+    behandling: BehandlingAppKontekst,
+  ) =>
+  (values: FormValues) => {
+    const skalSettePåVent =
+      values.brevmalkode === DokumentMalType.INNHENTE_OPPLYSNINGER ||
+      values.brevmalkode === DokumentMalType.VARSEL_OM_REVURDERING ||
+      values.brevmalkode === DokumentMalType.ETTERLYS_INNTEKTSMELDING;
+    const erTilbakekreving =
+      BehandlingType.TILBAKEKREVING === behandling.type ||
+      BehandlingType.TILBAKEKREVING_REVURDERING === behandling.type;
+
+    setShowMessageModal(!skalSettePåVent);
+
+    const data = erTilbakekreving
+      ? {
+          behandlingUuid: behandling.uuid,
+          fritekst: values.fritekst,
+          brevmalkode: values.brevmalkode,
+        }
+      : {
+          behandlingUuid: behandling.uuid,
+          brevmalkode: values.brevmalkode,
+          fritekst: values.fritekst,
+          arsakskode: values.arsakskode,
+        };
+    return submitMessage(data).then(() => {
+      setMeldingFormData();
+      if (skalSettePåVent) {
+        setShowSettPaVentModal(true);
+      } else {
+        hentOgSettBehandling();
+      }
+    });
+  };
+
+const getPreviewCallback =
+  (fagsakYtelseType: string, fetchPreview: ForhandsvisFunksjon, behandling: BehandlingAppKontekst) =>
+  (dokumentMal?: string, fritekst?: string, aarsakskode?: string) => {
+    const erTilbakekreving =
+      BehandlingType.TILBAKEKREVING === behandling.type ||
+      BehandlingType.TILBAKEKREVING_REVURDERING === behandling.type;
+    const data = erTilbakekreving
+      ? {
+          behandlingUuid: behandling.uuid,
+          fritekst: fritekst || ' ',
+          brevmalkode: dokumentMal,
+        }
+      : {
+          behandlingUuid: behandling.uuid,
+          fagsakYtelseType,
+          fritekst: fritekst || ' ',
+          arsakskode: aarsakskode || null,
+          dokumentMal,
+        };
+    fetchPreview(false, data);
+  };
+
+const finnKanIkkeLagreMeldingTekst = (kanVeilede: boolean, behandlingKanSendeMelding?: boolean) => {
+  if (!behandlingKanSendeMelding) {
+    return 'MeldingIndex.IkkeTilgjengeligPaVent';
+  }
+  if (kanVeilede) {
+    return 'MeldingIndex.IkkeTilgjengeligVeileder';
+  }
+  return 'MeldingIndex.IkkeTilgjengeligAvsluttet';
 };

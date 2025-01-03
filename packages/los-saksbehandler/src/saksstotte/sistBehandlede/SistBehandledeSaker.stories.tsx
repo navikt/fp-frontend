@@ -4,10 +4,9 @@ import { http, HttpResponse } from 'msw';
 
 import { BehandlingStatus } from '@navikt/fp-kodeverk';
 import { Oppgave } from '@navikt/fp-los-felles';
-import { getIntlDecorator } from '@navikt/fp-storybook-utils';
+import { getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { LosUrl } from '../../data/fplosSaksbehandlerApi';
-import { withQueryClient } from '../../data/withQueryClientProvider';
 import { SistBehandledeSaker } from './SistBehandledeSaker';
 
 import messages from '../../../i18n/nb_NO.json';

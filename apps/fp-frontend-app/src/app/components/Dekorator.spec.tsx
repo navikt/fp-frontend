@@ -1,77 +1,37 @@
-import React from 'react';
-import { RawIntlProvider } from 'react-intl';
-import { MemoryRouter } from 'react-router';
-
-import { createIntl } from '@navikt/ft-utils';
+import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
+import { applyRequestHandlers } from 'msw-storybook-addon';
 
-import { EventType } from '@navikt/fp-rest-api';
-import { RestApiMock } from '@navikt/fp-utils-test';
+import * as stories from './Dekorator.stories';
 
-import { FagsakApiKeys, requestFagsakApi } from '../../data/fagsakContextApi';
-import { Dekorator } from './Dekorator';
+const { Default, VisFeilmeldingSomLiggIUrl, VisTekniskFeilmelding, SkjulFeilmelding } = composeStories(stories);
 
-import messages from '../../../i18n/nb_NO.json';
-
-const navAnsatt = {
-  brukernavn: 'Peder',
-  kanBehandleKode6: false,
-  kanOverstyre: false,
-  kanOppgavestyre: true,
-  kanSaksbehandle: true,
-  kanVeilede: false,
-  navn: 'Peder Pjokk',
-};
-
-const mockHistoryPush = vi.fn();
-
-vi.mock('react-router-dom', async () => {
-  const actual = await vi.importActual('react-router-dom');
-  return {
-    ...actual,
-    useNavigate: () => mockHistoryPush,
-  };
-});
-
-const intl = createIntl(messages);
-
-describe('<Dekorator>', () => {
+describe('Dekorator', () => {
   it('skal vise dekorator', async () => {
-    const data = [{ key: FagsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt } }];
-
-    render(
-      <MemoryRouter initialEntries={[`/fagsak/1/`]}>
-        <RawIntlProvider value={intl}>
-          <RestApiMock data={data} requestApi={requestFagsakApi}>
-            <Dekorator queryStrings={{}} setSiteHeight={vi.fn()} />
-          </RestApiMock>
-        </RawIntlProvider>
-      </MemoryRouter>,
-    );
-
+    await applyRequestHandlers(Default.parameters.msw);
+    render(<Default />);
     expect(await screen.findByText('Svangerskap, fødsel og adopsjon')).toBeInTheDocument();
   });
 
-  it('skal vise feilmeldinger', async () => {
-    const data = [{ key: FagsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt } }];
-
-    const errors = [
-      {
-        type: EventType.REQUEST_ERROR,
-        feilmelding: 'Dette er en feilmelding',
-      },
-    ];
-
-    render(
-      <MemoryRouter initialEntries={[`/fagsak/1/`]}>
-        <RawIntlProvider value={intl}>
-          <RestApiMock data={data} requestApi={requestFagsakApi} errors={errors}>
-            <Dekorator queryStrings={{}} setSiteHeight={vi.fn()} />
-          </RestApiMock>
-        </RawIntlProvider>
-      </MemoryRouter>,
-    );
+  it('skal vise feilmeldinger som ligger i URL', async () => {
+    await applyRequestHandlers(VisFeilmeldingSomLiggIUrl.parameters.msw);
+    render(<VisFeilmeldingSomLiggIUrl />);
 
     expect(await screen.findByText('Dette er en feilmelding')).toBeInTheDocument();
+  });
+
+  it('skal vise feilmeldinger som oppstår ved kodefeil', async () => {
+    await applyRequestHandlers(VisTekniskFeilmelding.parameters.msw);
+    render(<VisTekniskFeilmelding />);
+
+    expect(await screen.findByText('test is undefined')).toBeInTheDocument();
+  });
+
+  it('skal ikke vise feilmelding når den er skjult manuelt', async () => {
+    await applyRequestHandlers(SkjulFeilmelding.parameters.msw);
+    render(<SkjulFeilmelding />);
+
+    expect(await screen.findByText('Svangerskap, fødsel og adopsjon')).toBeInTheDocument();
+    expect(screen.queryByText('test is undefined')).not.toBeInTheDocument();
   });
 });

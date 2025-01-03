@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import { Meta, StoryObj } from '@storybook/react/*';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
@@ -10,7 +10,7 @@ import messages from '../../../../../i18n/nb_NO.json';
 const withIntl = getIntlDecorator(messages);
 
 const meta = {
-  title: 'app/vedtak/FatterVedtakStatusModal',
+  title: 'behandling/vedtak/FatterVedtakStatusModal',
   component: FatterVedtakStatusModal,
   decorators: [withIntl],
 } satisfies Meta<typeof FatterVedtakStatusModal>;

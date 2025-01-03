@@ -7,7 +7,7 @@ import { http, HttpResponse } from 'msw';
 import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { Oppgave } from '@navikt/fp-los-felles';
 import { AsyncPollingStatus } from '@navikt/fp-rest-api';
-import { alleKodeverkLos } from '@navikt/fp-storybook-utils';
+import { alleKodeverkLos, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { LosUrl } from './data/fplosSaksbehandlerApi';
 import { AndreKriterierType } from './kodeverk/andreKriterierType';
@@ -210,6 +210,7 @@ const BEHANDLEDE_OPPGAVER = [
 
 const meta = {
   title: 'SaksbehandlerIndex',
+  decorators: [withQueryClient],
   component: SaksbehandlerIndex,
   parameters: {
     msw: {

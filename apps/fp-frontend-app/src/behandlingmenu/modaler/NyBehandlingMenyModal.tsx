@@ -1,14 +1,17 @@
-import React, { useCallback, useEffect,useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import { useQuery } from '@tanstack/react-query';
+
 import { BehandlingStatus, BehandlingType, KodeverkType } from '@navikt/fp-kodeverk';
-import { FormValues as NyBehandlingFormValues,MenyNyBehandlingIndex } from '@navikt/fp-sak-meny-ny-behandling';
-import { BehandlingAppKontekst } from '@navikt/fp-types';
+import { MenyNyBehandlingIndex } from '@navikt/fp-sak-meny-ny-behandling';
+import { Behandling, BehandlingAppKontekst } from '@navikt/fp-types';
 
 import { ApplicationContextPath } from '../../app/ApplicationContextPath';
 import { getLocationWithDefaultProsessStegAndFakta, pathToBehandling } from '../../app/paths';
 import { useGetEnabledApplikasjonContext } from '../../app/useGetEnabledApplikasjonContext';
-import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
+import { initFetchOptions, useFagsakApi } from '../../data/fagsakApi';
+import { notEmpty } from '../../data/notEmpty';
+import { useLagNyBehandling } from '../../data/useLagNyBehandling';
 import { FagsakData } from '../../fagsak/FagsakData';
 import { MenyKodeverk } from '../MenyKodeverk';
 
@@ -42,73 +45,50 @@ export const NyBehandlingMenyModal = ({ fagsakData, behandlingUuid, lukkModal }:
   const alleBehandlinger = fagsakData.getAlleBehandlinger();
   const behandling = fagsakData.getBehandling(behandlingUuid);
 
-  const initFetchData = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
-  const { innloggetBruker: navAnsatt } = initFetchData;
-
-  const { startRequest: sjekkTilbakeKanOpprettes, data: kanBehandlingOpprettes = false } =
-    restFagsakApiHooks.useRestApiRunner(FagsakApiKeys.KAN_TILBAKEKREVING_OPPRETTES);
-  const { startRequest: sjekkTilbakeRevurdKanOpprettes, data: kanRevurderingOpprettes = false } =
-    restFagsakApiHooks.useRestApiRunner(FagsakApiKeys.KAN_TILBAKEKREVING_REVURDERING_OPPRETTES);
+  const uuidForSistLukkede = getUuidForSisteLukkedeForsteEllerRevurd(alleBehandlinger);
 
   const erTilbakekrevingAktivert = useGetEnabledApplikasjonContext().includes(ApplicationContextPath.FPTILBAKE);
 
-  const alleFpSakKodeverk = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK);
-  const alleFpTilbakeKodeverk = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK_FPTILBAKE);
-  const menyKodeverk = new MenyKodeverk(behandling?.type)
-    .medFpSakKodeverk(alleFpSakKodeverk)
-    .medFpTilbakeKodeverk(alleFpTilbakeKodeverk);
+  const api = useFagsakApi();
 
-  const { startRequest: lagNyBehandlingFpSak } = restFagsakApiHooks.useRestApiRunner(
-    FagsakApiKeys.NEW_BEHANDLING_FPSAK,
+  const { data: alleFpSakKodeverk } = useQuery(api.kodeverkOptions());
+  const { data: alleFpTilbakeKodeverk } = useQuery(api.fptilbake.kodeverkOptions());
+
+  const { data: initFetchData } = useQuery(initFetchOptions());
+  const { innloggetBruker: navAnsatt } = notEmpty(initFetchData);
+
+  const isEnabled = erTilbakekrevingAktivert && !navAnsatt.kanVeilede && uuidForSistLukkede !== undefined;
+  const { data: kanBehandlingOpprettes = false } = useQuery(
+    api.fptilbake.kanTilbakekrevingOpprettesOptions(isEnabled, fagsak.saksnummer, uuidForSistLukkede),
   );
-  const { startRequest: lagNyBehandlingFpTilbake } = restFagsakApiHooks.useRestApiRunner(
-    FagsakApiKeys.NEW_BEHANDLING_FPTILBAKE,
+
+  const erTilbakekreving =
+    behandling?.type === BehandlingType.TILBAKEKREVING ||
+    behandling?.type === BehandlingType.TILBAKEKREVING_REVURDERING;
+  const isRevurderingOpprettedAktivert =
+    erTilbakekrevingAktivert && !navAnsatt.kanVeilede && erTilbakekreving && !!behandlingUuid;
+  const { data: kanRevurderingOpprettes = false } = useQuery(
+    api.fptilbake.kanTilbakekrevingRevurderingOpprettesOptions(isRevurderingOpprettedAktivert, uuidForSistLukkede),
   );
+
+  const menyKodeverk = new MenyKodeverk(behandling?.type)
+    .medFpSakKodeverk(notEmpty(alleFpSakKodeverk))
+    .medFpTilbakeKodeverk(notEmpty(alleFpTilbakeKodeverk));
 
   const navigate = useNavigate();
   const location = useLocation();
 
-  const lagNyBehandling = useCallback(
-    (
-      isTilbakekreving: boolean,
-      params: {
-        saksnummer: string;
-        behandlingUuid?: string;
-      } & NyBehandlingFormValues,
-    ): void => {
-      const lagNy = isTilbakekreving ? lagNyBehandlingFpTilbake : lagNyBehandlingFpSak;
-      lagNy(params).then(b => {
-        const pathname = pathToBehandling(fagsak.saksnummer, b?.uuid);
-        navigate(getLocationWithDefaultProsessStegAndFakta({ ...location, pathname }));
-      });
-    },
-    [],
-  );
+  const gåTilNyBehandling = (nyBehandling: Behandling) => {
+    const pathname = pathToBehandling(fagsak.saksnummer, nyBehandling?.uuid);
+    navigate(getLocationWithDefaultProsessStegAndFakta({ ...location, pathname }));
+  };
 
-  const uuidForSistLukkede = useMemo(
-    () => getUuidForSisteLukkedeForsteEllerRevurd(alleBehandlinger),
-    [alleBehandlinger],
-  );
-
-  useEffect(() => {
-    if (erTilbakekrevingAktivert && !navAnsatt.kanVeilede) {
-      if (uuidForSistLukkede !== undefined) {
-        sjekkTilbakeKanOpprettes({ saksnummer: fagsak.saksnummer, uuid: uuidForSistLukkede });
-      }
-      const erTilbakekreving =
-        behandling?.type === BehandlingType.TILBAKEKREVING ||
-        behandling?.type === BehandlingType.TILBAKEKREVING_REVURDERING;
-      if (erTilbakekreving && behandlingUuid) {
-        sjekkTilbakeRevurdKanOpprettes({ uuid: behandlingUuid });
-      }
-    }
-  }, [fagsak.saksnummer, behandlingUuid]);
+  const { lagNyBehandling } = useLagNyBehandling(gåTilNyBehandling);
 
   return (
     <MenyNyBehandlingIndex
       saksnummer={fagsak.saksnummer}
       behandlingUuid={behandling?.uuid}
-      behandlingVersjon={behandling?.versjon}
       uuidForSistLukkede={uuidForSistLukkede}
       behandlingOppretting={fagsakData.getBehandlingOppretting()}
       kanTilbakekrevingOpprettes={{

@@ -1,15 +1,13 @@
 {
   "innloggetBruker": {
-    "navAnsatt": {
-      "brukernavn": "saksbeh",
-      "navn": "Sara Saksbehandler",
-      "kanSaksbehandle": true,
-      "kanVeilede": false,
-      "kanOverstyre": false,
-      "kanOppgavestyre": false,
-      "kanBehandleKode6": false,
-      "funksjonellTid": "2023-06-09T10:49:51.447269271"
-    }
+    "brukernavn": "saksbeh",
+    "navn": "Sara Saksbehandler",
+    "kanSaksbehandle": true,
+    "kanVeilede": false,
+    "kanOverstyre": false,
+    "kanOppgavestyre": false,
+    "kanBehandleKode6": false,
+    "funksjonellTid": "2023-06-09T10:49:51.447269271"
   },
   "behandlendeEnheter": [
     {
@@ -31,6 +29,12 @@
       "rel": "kodeverk",
       "requestPayload": null,
       "type": "GET"
+    },
+    {
+      "href": "/fpsak/api/infotrygd/sok",
+      "rel": "infotrygd-søk",
+      "requestPayload": null,
+      "type": "POST"
     },
     {
       "href": "/fpsak/api/fagsak/sok",
@@ -57,6 +61,24 @@
       "rel": "endre-utland-markering",
       "requestPayload": null,
       "type": "POST"
+    },
+    {
+      "href": "/fpsak/api/fagsak/notat",
+      "rel": "lagre-notat",
+      "requestPayload": null,
+      "type": "POST"
+    },
+    {
+      "href": "/fpsak/api/register/redirect-to/aa-reg",
+      "rel": "arbeidstaker-redirect",
+      "requestPayload": null,
+      "type": "GET"
+    },
+    {
+      "href": "/fpsak/api/register/redirect-to/a-inntekt",
+      "rel": "ainntekt-redirect",
+      "requestPayload": null,
+      "type": "GET"
     }
   ]
 }

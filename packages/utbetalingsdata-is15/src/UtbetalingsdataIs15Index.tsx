@@ -3,7 +3,6 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { InfotrygdVedtak } from '@navikt/fp-types';
 
 import { UtbetalingsdataPanel } from './components/UtbetalingsdataPanel';
@@ -13,8 +12,9 @@ import messages from '../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 interface Props {
-  søkInfotrygdVedtak: (params: { searchString: string }) => Promise<InfotrygdVedtak | undefined>;
-  infotrygdVedtakState: RestApiState;
+  søkInfotrygdVedtak: (params: { searchString: string }) => void;
+  isPending: boolean;
+  isSuccess: boolean;
   infotrygdVedtak?: InfotrygdVedtak;
 }
 

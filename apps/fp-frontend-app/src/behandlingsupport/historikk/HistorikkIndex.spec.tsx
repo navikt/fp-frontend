@@ -1,29 +1,15 @@
-import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
-
+import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
+import { applyRequestHandlers } from 'msw-storybook-addon';
 
-import { RestApiMock } from '@navikt/fp-utils-test';
+import * as stories from './HistorikkIndex.stories';
 
-import { FagsakApiKeys, requestFagsakApi } from '../../data/fagsakContextApi';
-import { HistorikkIndex } from './HistorikkIndex';
+const { Default } = composeStories(stories);
 
-describe('<HistorikkIndex>', () => {
-  it('skal prøve å hente historikk og så vise historikk-panel', async () => {
-    const data = [
-      { key: FagsakApiKeys.INIT_FETCH_FPTILBAKE.name, global: true, data: {} },
-      { key: FagsakApiKeys.KODEVERK.name, global: true, data: {} },
-      { key: FagsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: {} },
-    ];
-
-    render(
-      <RestApiMock data={data} requestApi={requestFagsakApi}>
-        <MemoryRouter>
-          <HistorikkIndex saksnummer="12345" behandlingUuid="1" />
-        </MemoryRouter>
-      </RestApiMock>,
-    );
-
+describe('HistorikkIndex', () => {
+  it('skal vise historikk-panel', async () => {
+    await applyRequestHandlers(Default.parameters.msw);
+    render(<Default />);
     expect(await screen.findByText('Filtrer på behandling')).toBeInTheDocument();
   });
 });

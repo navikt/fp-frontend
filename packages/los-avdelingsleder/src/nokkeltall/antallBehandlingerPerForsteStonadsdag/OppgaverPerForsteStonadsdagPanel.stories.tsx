@@ -3,10 +3,9 @@ import { Meta, StoryObj } from '@storybook/react/*';
 import dayjs from 'dayjs';
 import { http, HttpResponse } from 'msw';
 
-import { getIntlDecorator } from '@navikt/fp-storybook-utils';
+import { getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { LosUrl } from '../../data/fplosAvdelingslederApi';
-import { withQueryClient } from '../../data/withQueryClientProvider';
 import { OppgaverPerForsteStonadsdagPanel } from './OppgaverPerForsteStonadsdagPanel';
 
 import messages from '../../../i18n/nb_NO.json';

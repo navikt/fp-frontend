@@ -4,7 +4,7 @@ import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 
 import { Alert, BodyShort, Button, Chat, HStack } from '@navikt/ds-react';
 import { Form, TextAreaField } from '@navikt/ft-form-hooks';
-import { hasValidText,maxLength, required } from '@navikt/ft-form-validators';
+import { hasValidText, maxLength, required } from '@navikt/ft-form-validators';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
 
@@ -27,7 +27,7 @@ type FormValues = {
 interface Props {
   saksnummer: string;
   notater: Saksnotat[];
-  lagreNotat: (params: { saksnummer: string; notat: string }) => Promise<void | undefined>;
+  lagreNotat: (params: { saksnummer: string; notat: string }) => void;
   saksbehandlerNavn: string;
   kanSaksbehandle: boolean;
 }

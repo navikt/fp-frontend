@@ -1,59 +1,43 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useEffect } from 'react';
 
-import { RestApiState } from '@navikt/fp-rest-api-hooks';
+import { useQuery } from '@tanstack/react-query';
 
 import { ApplicationContextPath } from '../app/ApplicationContextPath';
 import { useGetEnabledApplikasjonContext } from '../app/useGetEnabledApplikasjonContext';
 import { useBehandlingEndret } from '../behandling/useBehandlingEndret';
-import { FagsakApiKeys, LinkCategory, requestFagsakApi, restFagsakApiHooks } from '../data/fagsakContextApi';
+import { useFagsakApi } from '../data/fagsakApi';
 import { FagsakData } from './FagsakData';
 
 export const useHentFagsak = (
   saksnummer: string,
   behandlingUuid?: string,
   behandlingVersjon?: number,
-): [harHentet: boolean, fagsakData: FagsakData | undefined, oppdaterFagsak: () => void] => {
+): [harHentet: boolean, fagsakData: FagsakData | undefined] => {
+  const api = useFagsakApi();
   const erBehandlingEndretFraUndefined = useBehandlingEndret(behandlingUuid, behandlingVersjon);
   const enabledApplicationContexts = useGetEnabledApplikasjonContext();
   const skalHenteFraFpTilbake = enabledApplicationContexts.includes(ApplicationContextPath.FPTILBAKE);
 
-  const [trigger, setTrigger] = useState(0);
-  const oppdaterFagsak = useCallback(() => setTrigger(old => old + 1), []);
+  const { data: fagsak, refetch: refetchFagsak } = useQuery(api.hentFagsakOptions(saksnummer));
 
-  const { data: fagsak } = restFagsakApiHooks.useRestApi(
-    FagsakApiKeys.FETCH_FAGSAK,
-    { saksnummer },
-    {
-      updateTriggers: [behandlingUuid, behandlingVersjon, trigger],
-      suspendRequest: !saksnummer || erBehandlingEndretFraUndefined,
-      keepData: true,
-    },
-  );
+  const {
+    data: fagsakDataTilbake,
+    status: fagsakDataTilbakeStatus,
+    refetch: refetchFpTilbakeFagsak,
+  } = useQuery(api.fptilbake.hentFagsakOptions(skalHenteFraFpTilbake, saksnummer));
 
-  const { data: fagsakDataTilbake, state: fagsakDataTilbakeState } = restFagsakApiHooks.useRestApi(
-    FagsakApiKeys.FETCH_FAGSAKDATA_FPTILBAKE,
-    { saksnummer },
-    {
-      updateTriggers: [behandlingUuid, behandlingVersjon, trigger],
-      suspendRequest: !skalHenteFraFpTilbake || !saksnummer || erBehandlingEndretFraUndefined,
-      keepData: true,
-    },
-  );
+  useEffect(() => {
+    if (!erBehandlingEndretFraUndefined) {
+      refetchFagsak();
+      refetchFpTilbakeFagsak();
+    }
+  }, [behandlingUuid, behandlingVersjon]);
 
   const harHentetFpSak = !!fagsak;
-  const harHentetFpTilbake =
-    !skalHenteFraFpTilbake || !!fagsakDataTilbake || fagsakDataTilbakeState === RestApiState.ERROR;
+  const harHentetFpTilbake = !skalHenteFraFpTilbake || !!fagsakDataTilbake || fagsakDataTilbakeStatus === 'error';
 
   const harHentetData = harHentetFpSak && harHentetFpTilbake;
-  const fagsakData = useMemo(
-    () => (harHentetData ? new FagsakData(fagsak, fagsakDataTilbake) : undefined),
-    [harHentetData, fagsak, fagsakDataTilbake],
-  );
+  const fagsakData = harHentetData ? new FagsakData(fagsak, fagsakDataTilbake) : undefined;
 
-  const behandling = fagsakData?.getBehandling(behandlingUuid);
-  if (behandling) {
-    requestFagsakApi.setLinks(behandling.links, LinkCategory.BEHANDLING);
-  }
-
-  return [harHentetData, fagsakData, oppdaterFagsak];
+  return [harHentetData, fagsakData];
 };

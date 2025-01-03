@@ -9,7 +9,7 @@ import * as stories from './SakslisteVelgerForm.stories';
 
 const { Default, MedToSakslister, MedFlereEnnTreSaksbehandlere } = composeStories(stories);
 
-describe('<SakslisteVelgerForm>', () => {
+describe('SakslisteVelgerForm', () => {
   it('skal vise dropdown med en saksliste', async () => {
     await applyRequestHandlers(Default.parameters.msw);
     const { getByText } = render(<Default />);

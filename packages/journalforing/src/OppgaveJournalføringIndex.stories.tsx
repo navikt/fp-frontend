@@ -2,7 +2,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import { http, HttpResponse } from 'msw';
 
 import { FagsakStatus, FagsakYtelseType, FamilieHendelseType } from '@navikt/fp-kodeverk';
-import { withRouter } from '@navikt/fp-storybook-utils';
+import { withQueryClient, withRouter } from '@navikt/fp-storybook-utils';
 import { NavAnsatt } from '@navikt/fp-types';
 
 import { FpFordelUrl } from './data/fpFordelApi';
@@ -19,7 +19,7 @@ import '@navikt/ft-ui-komponenter/dist/style.css';
 const meta = {
   title: 'journalføring/journalføring/OppgaveJournalføringIndex',
   component: OppgaveJournalføringIndex,
-  decorators: [withRouter],
+  decorators: [withRouter, withQueryClient],
   args: {
     navAnsatt: {
       kanOppgavestyre: true,

@@ -1,7 +1,7 @@
 import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
-import { BehandlingArsakType,BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { BehandlingArsakType, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 
 import { MenyNyBehandlingIndex } from './MenyNyBehandlingIndex';
 
@@ -75,7 +75,6 @@ const meta = {
     ytelseType: FagsakYtelseType.FORELDREPENGER,
     saksnummer: '123',
     behandlingUuid: '1',
-    behandlingVersjon: 2,
     behandlingstyper: BEHANDLINGSTYPER,
     behandlingOppretting: BEHANDLING_OPPRETTING,
     revurderingArsaker: REVURDERINGARSAKER,
