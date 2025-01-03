@@ -4,6 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { Meta, StoryFn, StoryObj } from '@storybook/react';
 
 import { DokumentMalType, FagsakYtelseType, UgunstAarsakType } from '@navikt/fp-kodeverk';
+import { BehandlingAppKontekst } from '@navikt/fp-types';
 
 import { MeldingerSakIndex } from './MeldingerSakIndex';
 
@@ -51,11 +52,12 @@ const meta = {
   component: MeldingerSakIndex,
   decorators: [withStyleProvider],
   args: {
-    isKontrollerRevurderingApOpen: false,
     kanVeilede: false,
     revurderingVarslingArsak: REVURDERING_VARSLING_ARSAK,
-    templates: TEMPLATES,
-    sprakKode: 'NO',
+    behandling: {
+      brevmaler: TEMPLATES,
+      sprakkode: 'NO',
+    } as BehandlingAppKontekst,
     previewCallback: action('button-click'),
     submitCallback: action('button-click'),
     setMeldingFormData: action('button-click'),
