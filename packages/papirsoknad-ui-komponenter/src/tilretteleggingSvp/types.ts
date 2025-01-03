@@ -1,7 +1,7 @@
 import {
   BEHOV_FOR_TILRETTELEGGING_FIELD_ARRAY_NAME,
   FRILANS_FIELD_ARRAY_NAME,
-  SELVSTENDIG_NARINGS_DRIVENDE_FIELD_ARRAY_NAME,
+  SELVSTENDIG_NARINGSDRIVENDE_FIELD_ARRAY_NAME,
   TILRETTELEGGING_FOR_ARBEIDSGIVER_FIELD_ARRAY_NAME,
   TILRETTELEGGING_NAME_PREFIX,
 } from './constants';
@@ -18,18 +18,18 @@ type VirtuellFeilType = {
 
 export type FormValues = {
   [TILRETTELEGGING_NAME_PREFIX]: {
+    sokForArbeidsgiver?: boolean;
     [TILRETTELEGGING_FOR_ARBEIDSGIVER_FIELD_ARRAY_NAME]?: {
       behovsdato?: string;
       organisasjonsnummer?: string;
       [BEHOV_FOR_TILRETTELEGGING_FIELD_ARRAY_NAME]?: Tilrettelegging[];
     }[];
-    sokForArbeidsgiver?: boolean;
     sokForFrilans?: boolean;
     behovsdatoFrilans?: string;
     [FRILANS_FIELD_ARRAY_NAME]?: Tilrettelegging[];
     sokForSelvstendigNaringsdrivende?: boolean;
     behovsdatoSN?: string;
-    [SELVSTENDIG_NARINGS_DRIVENDE_FIELD_ARRAY_NAME]?: Tilrettelegging[];
+    [SELVSTENDIG_NARINGSDRIVENDE_FIELD_ARRAY_NAME]?: Tilrettelegging[];
   } & VirtuellFeilType;
 };
 

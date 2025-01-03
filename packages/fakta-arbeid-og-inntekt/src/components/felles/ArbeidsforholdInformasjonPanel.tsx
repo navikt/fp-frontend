@@ -1,15 +1,15 @@
-import React, { FunctionComponent, useMemo,useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { ChevronDownIcon, ChevronUpIcon } from '@navikt/aksel-icons';
-import { BodyShort, HStack, Label, Link, Spacer,VStack } from '@navikt/ds-react';
+import { BodyShort, HStack, Label, Link, Spacer, VStack } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { formatCurrencyNoKr, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import { AlleKodeverk, AoIArbeidsforhold, Inntektsmelding, Inntektspost } from '@navikt/fp-types';
 
-import InntektsmeldingerPanel from './InntektsmeldingerPanel';
+import { InntektsmeldingerPanel } from './InntektsmeldingerPanel';
 
 import styles from './arbeidsforholdInformasjonPanel.module.css';
 
@@ -45,7 +45,7 @@ const behandleInntektsposter = (
   return poster;
 };
 
-interface OwnProps {
+interface Props {
   saksnummer: string;
   skjæringspunktDato: string;
   inntektsposter?: Inntektspost[];
@@ -55,7 +55,7 @@ interface OwnProps {
   arbeidsgiverFødselsdato?: string;
 }
 
-const ArbeidsforholdInformasjonPanel: FunctionComponent<OwnProps> = ({
+export const ArbeidsforholdInformasjonPanel = ({
   saksnummer,
   skjæringspunktDato,
   inntektsposter = [],
@@ -63,7 +63,7 @@ const ArbeidsforholdInformasjonPanel: FunctionComponent<OwnProps> = ({
   inntektsmeldingerForRad = EMPTY_ARRAY,
   alleKodeverk,
   arbeidsgiverFødselsdato,
-}) => {
+}: Props) => {
   const [visAlleMåneder, toggleMånedvisning] = useState(false);
 
   const sorterteInntektsposter = useMemo(
@@ -143,5 +143,3 @@ const ArbeidsforholdInformasjonPanel: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-
-export default ArbeidsforholdInformasjonPanel;

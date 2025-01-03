@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
@@ -11,12 +11,12 @@ import {
   StandardFaktaPanelProps,
 } from '@navikt/fp-types';
 
-import ArbeidOgInntektFaktaPanel from './components/ArbeidOgInntektFaktaPanel';
+import { ArbeidOgInntektFaktaPanel } from './components/ArbeidOgInntektFaktaPanel';
 import { DirtyFormProvider } from './DirtyFormProvider';
 
 import messages from '../i18n/nb_NO.json';
 
-interface OwnProps {
+interface Props {
   saksnummer: string;
   arbeidOgInntekt: ArbeidOgInntektsmelding;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -29,7 +29,7 @@ interface OwnProps {
 
 const intl = createIntl(messages);
 
-const ArbeidOgInntektFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
+export const ArbeidOgInntektFaktaIndex = ({
   saksnummer,
   behandling,
   submitCallback,
@@ -45,7 +45,7 @@ const ArbeidOgInntektFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanel
   settBehandlingPåVentCallback,
   alleKodeverk,
   åpneForNyVurdering,
-}) => (
+}: Props & StandardFaktaPanelProps) => (
   <RawIntlProvider value={intl}>
     <DirtyFormProvider>
       <ArbeidOgInntektFaktaPanel
@@ -68,5 +68,3 @@ const ArbeidOgInntektFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanel
     </DirtyFormProvider>
   </RawIntlProvider>
 );
-
-export default ArbeidOgInntektFaktaIndex;

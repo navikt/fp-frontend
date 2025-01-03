@@ -7,12 +7,10 @@ export type Avklaring = {
   stillingsprosent?: number;
 };
 
-type ArbeidsforholdOgInntektRadData = {
+export type ArbeidsforholdOgInntektRadData = {
   arbeidsgiverIdent: string;
   arbeidsgiverNavn: string;
   arbeidsgiverFødselsdato?: string;
   årsak?: string;
   avklaring?: Avklaring;
 };
-
-export default ArbeidsforholdOgInntektRadData;
