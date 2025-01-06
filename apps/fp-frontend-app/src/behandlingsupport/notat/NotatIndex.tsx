@@ -28,8 +28,8 @@ export const NotatIndex = ({ fagsak }: Props) => {
     },
   });
 
-  const { data: initFetch } = useQuery(initFetchOptions());
-  const { innloggetBruker } = notEmpty(initFetch);
+  const initFetchQuery = useQuery(initFetchOptions());
+  const { innloggetBruker } = notEmpty(initFetchQuery.data);
 
   return (
     <SupportHeaderAndContent

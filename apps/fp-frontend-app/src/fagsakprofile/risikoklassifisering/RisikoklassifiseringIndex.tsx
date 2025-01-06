@@ -60,10 +60,10 @@ export const RisikoklassifiseringIndex = ({ fagsakData, behandlingVersjon, behan
   const location = useLocation();
 
   const { kodeverkOptions } = useFagsakApi();
-  const { data: initFetchData } = useQuery(initFetchOptions());
+  const initFetchQuery = useQuery(initFetchOptions());
   const { data: alleKodeverk } = useQuery(kodeverkOptions());
 
-  const navAnsatt = notEmpty(initFetchData).innloggetBruker;
+  const navAnsatt = notEmpty(initFetchQuery.data).innloggetBruker;
   const rettigheter = getAccessRights(navAnsatt, fagsak.status, behandlingStatus, behandlingType);
   const readOnly = getReadOnly(navAnsatt, rettigheter, erPaaVent);
 

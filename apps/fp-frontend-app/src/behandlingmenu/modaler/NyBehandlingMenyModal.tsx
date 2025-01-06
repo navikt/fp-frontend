@@ -54,8 +54,8 @@ export const NyBehandlingMenyModal = ({ fagsakData, behandlingUuid, lukkModal }:
   const { data: alleFpSakKodeverk } = useQuery(api.kodeverkOptions());
   const { data: alleFpTilbakeKodeverk } = useQuery(api.fptilbake.kodeverkOptions());
 
-  const { data: initFetchData } = useQuery(initFetchOptions());
-  const { innloggetBruker: navAnsatt } = notEmpty(initFetchData);
+  const initFetchQuery = useQuery(initFetchOptions());
+  const { innloggetBruker: navAnsatt } = notEmpty(initFetchQuery.data);
 
   const isEnabled = erTilbakekrevingAktivert && !navAnsatt.kanVeilede && uuidForSistLukkede !== undefined;
   const { data: kanBehandlingOpprettes = false } = useQuery(

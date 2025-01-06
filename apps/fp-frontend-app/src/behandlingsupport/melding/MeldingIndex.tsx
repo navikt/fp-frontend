@@ -53,10 +53,10 @@ export const MeldingIndex = ({
 
   const api = useFagsakBehandlingApi(valgtBehandling);
 
-  const { data: initFetch } = useQuery(initFetchOptions());
+  const initFetchQuery = useQuery(initFetchOptions());
   const {
     innloggetBruker: { kanVeilede },
-  } = notEmpty(initFetch);
+  } = notEmpty(initFetchQuery.data);
 
   const ventearsaker = useFpSakKodeverk(KodeverkType.VENT_AARSAK) || EMPTY_ARRAY;
   const revurderingVarslingArsak = useFpSakKodeverk(KodeverkType.REVURDERING_VARSLING_ÅRSAK);

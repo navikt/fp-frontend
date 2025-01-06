@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useMemo } from 'react';
+import { Suspense, useEffect } from 'react';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
@@ -59,12 +59,14 @@ export const BehandlingIndex = ({
   const api = useFagsakApi();
 
   const { data: kodeverk } = useQuery(api.kodeverkOptions());
-  const { data: initFetchData } = useQuery(initFetchOptions());
+  const initFetchQuery = useQuery(initFetchOptions());
 
   const fagsak = fagsakData.getFagsak();
-  const rettigheter = useMemo(
-    () => getAccessRights(notEmpty(initFetchData).innloggetBruker, fagsak.status, behandling?.status, behandling?.type),
-    [fagsak.status, behandling?.uuid, behandling?.status, behandling?.type],
+  const rettigheter = getAccessRights(
+    notEmpty(initFetchQuery.data).innloggetBruker,
+    fagsak.status,
+    behandling?.status,
+    behandling?.type,
   );
 
   if (!behandling) {

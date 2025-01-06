@@ -55,8 +55,8 @@ export const TotrinnskontrollIndex = ({
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { data: initFetch } = useQuery(initFetchOptions());
-  const { brukernavn, kanVeilede } = notEmpty(initFetch).innloggetBruker;
+  const initFetchQuery = useQuery(initFetchOptions());
+  const { brukernavn, kanVeilede } = notEmpty(initFetchQuery.data).innloggetBruker;
 
   const alleKodeverk = useKodeverk(valgtBehandling.type);
 

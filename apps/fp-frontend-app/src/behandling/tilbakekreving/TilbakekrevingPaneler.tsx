@@ -38,66 +38,51 @@ const TilbakekrevingPaneler = ({
 
   const { data: tilbakekrevingKodeverk } = useQuery(api.fptilbake.kodeverkOptions());
 
-  const fagsakBehandlingerInfo = alleBehandlinger
-    .filter(b => !b.behandlingHenlagt)
-    .map(b => ({
-      uuid: b.uuid,
-      type: b.type,
-      status: b.status,
-      opprettet: b.opprettet,
-      avsluttet: b.avsluttet,
-      resultatType: b.behandlingsresultat?.type,
-    }));
+  const fagsakBehandlingerInfo = alleBehandlinger.filter(b => !b.behandlingHenlagt);
 
   const harApenRevurdering = fagsakBehandlingerInfo.some(
     b => b.type === BehandlingType.REVURDERING && b.status !== BehandlingStatus.AVSLUTTET,
   );
 
-  const hentFaktaPaneler = (props: FaktaPanelInitProps) => {
-    if (tilbakekrevingKodeverk) {
-      return (
-        <>
-          <FeilutbetalingFaktaInitPanel
-            tilbakekrevingKodeverk={tilbakekrevingKodeverk}
-            fagsakYtelseTypeKode={fagsak.fagsakYtelseType}
-            {...props}
-          />
-          <VergeFaktaInitPanel {...props} />
-        </>
-      );
-    }
-    return <>placeholder</>;
-  };
-
-  const hentProsessPaneler = (props: ProsessPanelInitProps) => {
-    if (tilbakekrevingKodeverk) {
-      return (
-        <>
-          <ForeldelseProsessInitPanel
-            {...props}
-            relasjonsRolleType={fagsak.relasjonsRolleType}
-            tilbakekrevingKodeverk={tilbakekrevingKodeverk}
-          />
-          <TilbakekrevingProsessInitPanel
-            {...props}
-            relasjonsRolleType={fagsak.relasjonsRolleType}
-            tilbakekrevingKodeverk={tilbakekrevingKodeverk}
-          />
-          <VedtakTilbakekrevingProsessInitPanel
-            {...props}
-            harApenRevurdering={harApenRevurdering}
-            opneSokeside={opneSokeside}
-            tilbakekrevingKodeverk={tilbakekrevingKodeverk}
-          />
-        </>
-      );
-    }
-    return <>placeholder</>;
-  };
-
   if (!tilbakekrevingKodeverk) {
     return <LoadingPanel />;
   }
+
+  const hentFaktaPaneler = (props: FaktaPanelInitProps) => {
+    return (
+      <>
+        <FeilutbetalingFaktaInitPanel
+          tilbakekrevingKodeverk={tilbakekrevingKodeverk}
+          fagsakYtelseTypeKode={fagsak.fagsakYtelseType}
+          {...props}
+        />
+        <VergeFaktaInitPanel {...props} />
+      </>
+    );
+  };
+
+  const hentProsessPaneler = (props: ProsessPanelInitProps) => {
+    return (
+      <>
+        <ForeldelseProsessInitPanel
+          {...props}
+          relasjonsRolleType={fagsak.relasjonsRolleType}
+          tilbakekrevingKodeverk={tilbakekrevingKodeverk}
+        />
+        <TilbakekrevingProsessInitPanel
+          {...props}
+          relasjonsRolleType={fagsak.relasjonsRolleType}
+          tilbakekrevingKodeverk={tilbakekrevingKodeverk}
+        />
+        <VedtakTilbakekrevingProsessInitPanel
+          {...props}
+          harApenRevurdering={harApenRevurdering}
+          opneSokeside={opneSokeside}
+          tilbakekrevingKodeverk={tilbakekrevingKodeverk}
+        />
+      </>
+    );
+  };
 
   return (
     <>

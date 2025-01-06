@@ -27,7 +27,8 @@ const wait = (ms: number) =>
   });
 
 export const isPollingResponse = (response: PollingResponse | Behandling): response is PollingResponse => {
-  return (response as PollingResponse).status !== undefined;
+  const pollingResponse = response as PollingResponse;
+  return pollingResponse.pending !== undefined && pollingResponse.location !== undefined;
 };
 
 const pollOgHentData = async (location: string, pollingCounter = 0) => {

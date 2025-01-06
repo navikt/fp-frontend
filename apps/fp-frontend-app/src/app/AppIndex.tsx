@@ -1,9 +1,9 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { RawIntlProvider } from 'react-intl';
 import { Link, useLocation } from 'react-router-dom';
 
 import { createIntl, parseQueryString } from '@navikt/ft-utils';
-import { QueryCache, QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
+import { MutationCache, QueryCache, QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { HTTPError } from 'ky';
 import moment from 'moment';
@@ -24,51 +24,17 @@ import messages from '../../i18n/nb_NO.json';
 
 import '@navikt/ds-css';
 import '@navikt/ds-css-internal';
-import '@navikt/ft-ui-komponenter/dist/style.css';
 import '@navikt/ft-form-hooks/dist/style.css';
 import '@navikt/ft-plattform-komponenter/dist/style.css';
+import '@navikt/ft-ui-komponenter/dist/style.css';
 
 const EMPTY_ARRAY = [] as any[];
 
 const intl = createIntl(messages);
 
-const createQueryClient = (addErrorMessage: (data: any) => void) =>
-  new QueryClient({
-    defaultOptions: {
-      queries: {
-        retry: process.env.NODE_ENV === 'test' ? false : 3,
-      },
-    },
-    queryCache: new QueryCache({
-      onError: error => {
-        // eslint-disable-next-line no-console
-        console.log(error);
-
-        // TODO Dette er ein forenkela kopi av dagens feilhåndtering. Refaktorer og flytt når Tanstack Query blir brukt over alt
-        if (error instanceof HTTPError) {
-          if (error.response.status === 403) {
-            addErrorMessage({ type: EventType.REQUEST_FORBIDDEN, feilmelding: error.message });
-          } else if (error.response.status === 401) {
-            addErrorMessage({ type: EventType.REQUEST_UNAUTHORIZED, feilmelding: error.message });
-          } else if (error.response.status === 504 || error.response.status === 404) {
-            addErrorMessage({
-              type: EventType.REQUEST_GATEWAY_TIMEOUT_OR_NOT_FOUND,
-              //@ts-expect-error
-              location: error.response?.config?.url,
-            });
-          } else {
-            addErrorMessage({ type: EventType.REQUEST_ERROR, feilmelding: error.message });
-          }
-        } else {
-          addErrorMessage({ type: EventType.REQUEST_ERROR, feilmelding: error.message });
-        }
-      },
-    }),
-  });
-
 export const AppIndexWrapper = () => {
   const { addErrorMessage } = useRestApiErrorDispatcher();
-  const queryClient = useMemo(() => createQueryClient(addErrorMessage), []);
+  const queryClient = useMemo(() => createQueryClient(getErrorHandler(addErrorMessage)), []);
 
   return (
     <RawIntlProvider value={intl}>
@@ -90,8 +56,8 @@ export const AppIndex = () => {
   const [headerHeight, setHeaderHeight] = useState(0);
   const [crashMessage, setCrashMessage] = useState<string>();
 
-  const { data: initFetch } = useQuery(initFetchOptions());
-  const navAnsatt = initFetch?.innloggetBruker;
+  const initFetchQuery = useQuery(initFetchOptions());
+  const navAnsatt = initFetchQuery.data?.innloggetBruker;
 
   const location = useLocation();
 
@@ -107,10 +73,10 @@ export const AppIndex = () => {
     }
   }, [navAnsatt?.funksjonellTid]);
 
-  const setSiteHeight = useCallback((newHeaderHeight: number): void => {
+  const setSiteHeight = (newHeaderHeight: number): void => {
     document.documentElement.setAttribute('style', `height: calc(100% - ${newHeaderHeight}px)`);
     setHeaderHeight(newHeaderHeight);
-  }, []);
+  };
 
   const addErrorMessageAndSetAsCrashed = (error: string) => {
     setCrashMessage(error);
@@ -142,4 +108,43 @@ export const AppIndex = () => {
       </AppConfigResolver>
     </ErrorBoundary>
   );
+};
+
+const createQueryClient = (errorHandler: (error: Error) => void) =>
+  new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: process.env.NODE_ENV === 'test' ? false : 3,
+      },
+    },
+    queryCache: new QueryCache({
+      onError: errorHandler,
+    }),
+    mutationCache: new MutationCache({
+      onError: errorHandler,
+    }),
+  });
+
+const getErrorHandler = (addErrorMessage: (data: any) => void) => (error: Error) => {
+  // eslint-disable-next-line no-console
+  console.log(error);
+
+  // TODO Dette er ein forenkela kopi av dagens feilhåndtering. Refaktorer og flytt når Tanstack Query blir brukt over alt
+  if (error instanceof HTTPError) {
+    if (error.response.status === 403) {
+      addErrorMessage({ type: EventType.REQUEST_FORBIDDEN, feilmelding: error.message });
+    } else if (error.response.status === 401) {
+      addErrorMessage({ type: EventType.REQUEST_UNAUTHORIZED, feilmelding: error.message });
+    } else if (error.response.status === 504 || error.response.status === 404) {
+      addErrorMessage({
+        type: EventType.REQUEST_GATEWAY_TIMEOUT_OR_NOT_FOUND,
+        //@ts-expect-error
+        location: error.response?.config?.url,
+      });
+    } else {
+      addErrorMessage({ type: EventType.REQUEST_ERROR, feilmelding: error.message });
+    }
+  } else {
+    addErrorMessage({ type: EventType.REQUEST_ERROR, feilmelding: error.message });
+  }
 };

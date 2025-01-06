@@ -32,8 +32,8 @@ interface Props {
 export const Dekorator = ({ queryStrings, setSiteHeight, crashMessage, hideErrorMessages = false }: Props) => {
   const intl = useIntl();
 
-  const { data: initFetch } = useQuery(initFetchOptions());
-  const { innloggetBruker: navAnsatt } = notEmpty(initFetch);
+  const initFetchQuery = useQuery(initFetchOptions());
+  const { innloggetBruker: navAnsatt } = notEmpty(initFetchQuery.data);
 
   const navigate = useNavigate();
   const visLos = (e: React.SyntheticEvent) => {
@@ -135,7 +135,7 @@ const lagFeilmeldinger = (
   }
   errorMessages.forEach(message => {
     let msg = {
-      melding: message.code ? intl.formatMessage({ id: message.code }, message.params) : message.text,
+      melding: message.code ? intl.formatMessage({ id: message.code }, message.params) : (message.text ?? ''),
       tilleggsInfo: undefined,
     } as Feilmelding;
     if (message.params && message.params.errorDetails) {

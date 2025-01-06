@@ -14,7 +14,7 @@ interface Props {
 }
 
 export const EndreBehandlendeEnhetMenyModal = ({ behandling, hentOgSettBehandling, lukkModal }: Props) => {
-  const { data: initFetchData } = useQuery(initFetchOptions());
+  const initFetchQuery = useQuery(initFetchOptions());
 
   const { startRequest: nyBehandlendeEnhet } = restBehandlingApiHooks.useRestApiRunner(
     BehandlingApiKeys.BEHANDLING_NY_BEHANDLENDE_ENHET,
@@ -36,7 +36,7 @@ export const EndreBehandlendeEnhetMenyModal = ({ behandling, hentOgSettBehandlin
       behandlendeEnhetId={behandling?.behandlendeEnhetId}
       behandlendeEnhetNavn={behandling?.behandlendeEnhetNavn}
       nyBehandlendeEnhet={endreBehandlendeEnhet}
-      behandlendeEnheter={notEmpty(initFetchData).behandlendeEnheter}
+      behandlendeEnheter={notEmpty(initFetchQuery.data).behandlendeEnheter}
       lukkModal={lukkModal}
     />
   );

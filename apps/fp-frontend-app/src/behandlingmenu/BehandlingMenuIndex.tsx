@@ -45,8 +45,8 @@ interface Props {
 }
 
 export const BehandlingMenuIndex = ({ fagsakData, behandlingUuid, setBehandling, hentOgSettBehandling }: Props) => {
-  const { data: initFetchData } = useQuery(initFetchOptions());
-  const { innloggetBruker: navAnsatt } = notEmpty(initFetchData);
+  const initFetchQuery = useQuery(initFetchOptions());
+  const { innloggetBruker: navAnsatt } = notEmpty(initFetchQuery.data);
 
   const [valgtModal, setValgtModal] = useState<string | undefined>();
   const lukkModal = () => setValgtModal(undefined);

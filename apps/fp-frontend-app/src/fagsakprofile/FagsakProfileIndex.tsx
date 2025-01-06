@@ -68,11 +68,11 @@ export const FagsakProfileIndex = ({
   const fagsakStatusMedNavn = useFpSakKodeverkMedNavn(fagsak.status, KodeverkType.FAGSAK_STATUS);
   const fagsakYtelseTypeMedNavn = useFpSakKodeverkMedNavn(fagsak.fagsakYtelseType, KodeverkType.FAGSAK_YTELSE);
 
-  const { data } = useQuery(initFetchOptions());
+  const initFetchQuery = useQuery(initFetchOptions());
 
   const location = useLocation();
 
-  const sakLinks = notEmpty(data).sakLinks;
+  const sakLinks = notEmpty(initFetchQuery.data).sakLinks;
   const arbeidstakerHref = sakLinks.find(l => l.rel === 'arbeidstaker-redirect')?.href;
   const ainntektHref = sakLinks.find(l => l.rel === 'ainntekt-redirect')?.href;
 

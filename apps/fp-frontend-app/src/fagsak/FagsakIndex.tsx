@@ -86,7 +86,7 @@ export const FagsakIndex = () => {
     if (behandlingUuid) {
       hentOgSettBehandling();
     }
-  }, [behandlingUuid, hentOgSettBehandling]);
+  }, [behandlingUuid, fagsakBehandling?.uuid]);
 
   useEffect(
     () => () => {

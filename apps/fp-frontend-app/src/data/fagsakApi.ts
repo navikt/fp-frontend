@@ -128,25 +128,25 @@ export const aktørInfoOptions = (aktørId?: string) =>
 export const forhåndsvisTilbakekreving = (behandlingUuid: string, brevmalkode: string, fritekst: string) =>
   kyExtended
     .post(FagsakUrl.PREVIEW_MESSAGE_TILBAKEKREVING, {
-      json: { searchString: { behandlingUuid, brevmalkode, fritekst } },
+      json: { behandlingUuid, brevmalkode, fritekst },
     })
     .blob();
 
 export const forhåndsvisTilbakekrevingHenleggelse = (behandlingUuid: string, fritekst: string) =>
   kyExtended
     .post(FagsakUrl.PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE, {
-      json: { searchString: { behandlingUuid, fritekst } },
+      json: { behandlingUuid, fritekst },
     })
     .blob();
 
 export const lagNyBehandling = (params: NyBehandlingParams) =>
   kyExtended.put<Behandling>(FagsakUrl.NEW_BEHANDLING_FPSAK, {
-    json: { searchString: params },
+    json: params,
   });
 
 export const lagNyTilbakekrevingBehandling = (params: NyBehandlingParams) =>
   kyExtended.post<Behandling>(FagsakUrl.NEW_BEHANDLING_FPTILBAKE, {
-    json: { searchString: params },
+    json: params,
   });
 
 export const doGetRequest = <T>(url: string) => kyExtended.get(url).json<T>();
@@ -243,35 +243,35 @@ export const getSøkFagsak = (links?: Link[]) => (searchString: string) =>
 export const getEndreSakMarkering = (links?: Link[]) => (params: EndreUtlandFormValues) =>
   kyExtended
     .post(getUrlFromRel(FagsakRel.ENDRE_SAK_MARKERING, links), {
-      json: { searchString: params },
+      json: params,
     })
     .json();
 
 export const getLagreNotat = (links?: Link[]) => (saksnummer: string, notat: string) =>
   kyExtended
     .post(getUrlFromRel(FagsakRel.LAGRE_NOTAT, links), {
-      json: { searchString: { saksnummer, notat } },
+      json: { saksnummer, notat },
     })
     .json();
 
 export const getForhåndsvisMelding = (links?: Link[]) => (params: ForhåndsvisMeldingParams) =>
   kyExtended
     .post(getUrlFromRel(FagsakRel.PREVIEW_MESSAGE_MENU, links), {
-      json: { searchString: params },
+      json: params,
     })
     .blob();
 
 export const getLagreTotrinnsaksjonspunkt = (links?: Link[]) => (params: BekreftedeTotrinnsaksjonspunkter) =>
   kyExtended
     .post(getUrlFromRel(FagsakRel.SAVE_TOTRINNSAKSJONSPUNKT, links), {
-      json: { searchString: params },
+      json: params,
     })
     .json<Behandling>();
 
 export const getSendMelding = (links?: Link[]) => (params: SubmitMessageParams) =>
   kyExtended
     .post(getUrlFromRel(FagsakRel.SUBMIT_MESSAGE, links), {
-      json: { searchString: params },
+      json: params,
     })
     .json();
 
