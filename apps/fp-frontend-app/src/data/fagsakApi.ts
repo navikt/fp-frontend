@@ -172,14 +172,14 @@ const getKodeverkFpTilbakeOptions =
       staleTime: Infinity,
     });
 
-export const getHentFagsakOptions = (links?: Link[]) => (saksnummer: string) =>
+const getHentFagsakOptions = (links?: Link[]) => (saksnummer: string) =>
   queryOptions({
     queryKey: [FagsakRel.FETCH_FAGSAK, saksnummer],
     queryFn: () =>
       kyExtended.get(getUrlFromRel(FagsakRel.FETCH_FAGSAK, links), { searchParams: { saksnummer } }).json<Fagsak>(),
   });
 
-export const getHentFagsakFpTilbakeOptions = (links?: Link[]) => (isEnabled: boolean, saksnummer: string) =>
+const getHentFagsakFpTilbakeOptions = (links?: Link[]) => (isEnabled: boolean, saksnummer: string) =>
   queryOptions({
     queryKey: [FagsakRel.FETCH_FAGSAKDATA_FPTILBAKE, saksnummer],
     queryFn: () =>
@@ -189,7 +189,7 @@ export const getHentFagsakFpTilbakeOptions = (links?: Link[]) => (isEnabled: boo
     enabled: isEnabled,
   });
 
-export const getHentDokumenter =
+const getHentDokumenter =
   (links?: Link[]) => (isEnabled: boolean, saksnummer: string, behandlingUuid?: string, behandlingVersjon?: number) =>
     queryOptions({
       queryKey: [FagsakRel.ALL_DOCUMENTS, saksnummer, behandlingUuid, behandlingVersjon],
@@ -200,7 +200,7 @@ export const getHentDokumenter =
       enabled: isEnabled,
     });
 
-export const getKanTilbakekrevingOpprettesOptions =
+const getKanTilbakekrevingOpprettesOptions =
   (links?: Link[]) => (isEnabled: boolean, saksnummer: string, uuid?: string) =>
     queryOptions({
       queryKey: [FagsakRel.KAN_TILBAKEKREVING_OPPRETTES, saksnummer, uuid],
@@ -213,62 +213,61 @@ export const getKanTilbakekrevingOpprettesOptions =
       enabled: isEnabled,
     });
 
-export const getKanTilbakekrevingRevurderingOpprettesOptions =
-  (links?: Link[]) => (isEnabled: boolean, uuid?: string) =>
-    queryOptions({
-      queryKey: [FagsakRel.KAN_TILBAKEKREVING_REVURDERING_OPPRETTES, uuid],
-      queryFn: () =>
-        kyExtended
-          .get(getUrlFromRel(FagsakRel.KAN_TILBAKEKREVING_REVURDERING_OPPRETTES, links), {
-            searchParams: { uuid: uuid ?? '' },
-          })
-          .json<boolean>(),
-      enabled: isEnabled,
-    });
+const getKanTilbakekrevingRevurderingOpprettesOptions = (links?: Link[]) => (isEnabled: boolean, uuid?: string) =>
+  queryOptions({
+    queryKey: [FagsakRel.KAN_TILBAKEKREVING_REVURDERING_OPPRETTES, uuid],
+    queryFn: () =>
+      kyExtended
+        .get(getUrlFromRel(FagsakRel.KAN_TILBAKEKREVING_REVURDERING_OPPRETTES, links), {
+          searchParams: { uuid: uuid ?? '' },
+        })
+        .json<boolean>(),
+    enabled: isEnabled,
+  });
 
-export const getSøkInfotrygd = (links?: Link[]) => (searchString: string) =>
+const getSøkInfotrygd = (links?: Link[]) => (searchString: string) =>
   kyExtended
     .post(getUrlFromRel(FagsakRel.SEARCH_UTBETALINGSDATA_IS15, links), {
       json: { searchString },
     })
     .json<InfotrygdVedtak>();
 
-export const getSøkFagsak = (links?: Link[]) => (searchString: string) =>
+const getSøkFagsak = (links?: Link[]) => (searchString: string) =>
   kyExtended
     .post(getUrlFromRel(FagsakRel.SEARCH_FAGSAK, links), {
       json: { searchString },
     })
     .json<FagsakEnkel[]>();
 
-export const getEndreSakMarkering = (links?: Link[]) => (params: EndreUtlandFormValues) =>
+const getEndreSakMarkering = (links?: Link[]) => (params: EndreUtlandFormValues) =>
   kyExtended
     .post(getUrlFromRel(FagsakRel.ENDRE_SAK_MARKERING, links), {
       json: params,
     })
     .json();
 
-export const getLagreNotat = (links?: Link[]) => (saksnummer: string, notat: string) =>
+const getLagreNotat = (links?: Link[]) => (saksnummer: string, notat: string) =>
   kyExtended
     .post(getUrlFromRel(FagsakRel.LAGRE_NOTAT, links), {
       json: { saksnummer, notat },
     })
     .json();
 
-export const getForhåndsvisMelding = (links?: Link[]) => (params: ForhåndsvisMeldingParams) =>
+const getForhåndsvisMelding = (links?: Link[]) => (params: ForhåndsvisMeldingParams) =>
   kyExtended
     .post(getUrlFromRel(FagsakRel.PREVIEW_MESSAGE_MENU, links), {
       json: params,
     })
     .blob();
 
-export const getLagreTotrinnsaksjonspunkt = (links?: Link[]) => (params: BekreftedeTotrinnsaksjonspunkter) =>
+const getLagreTotrinnsaksjonspunkt = (links?: Link[]) => (params: BekreftedeTotrinnsaksjonspunkter) =>
   kyExtended
     .post(getUrlFromRel(FagsakRel.SAVE_TOTRINNSAKSJONSPUNKT, links), {
       json: params,
     })
     .json<Behandling>();
 
-export const getSendMelding = (links?: Link[]) => (params: SubmitMessageParams) =>
+const getSendMelding = (links?: Link[]) => (params: SubmitMessageParams) =>
   kyExtended
     .post(getUrlFromRel(FagsakRel.SUBMIT_MESSAGE, links), {
       json: params,
