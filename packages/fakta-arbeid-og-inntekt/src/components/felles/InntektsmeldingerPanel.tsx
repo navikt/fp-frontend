@@ -2,16 +2,15 @@ import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ChevronDownIcon, ChevronUpIcon, ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Detail, HStack, Label, Link, Spacer, Tooltip, VStack } from '@navikt/ds-react';
-import { AvsnittSkiller, DateLabel, PeriodLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { TIDENES_ENDE } from '@navikt/ft-utils';
+import { BodyShort, HStack, Label, Link, Spacer, Tooltip, VStack } from '@navikt/ds-react';
+import { AvsnittSkiller, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { dateFormat } from '@navikt/ft-utils';
 
+import { formaterPeriode } from '@navikt/fp-fakta-felles';
 import { getKodeverknavnFraKode, KodeverkType } from '@navikt/fp-kodeverk';
 import { AlleKodeverk, AoIArbeidsforhold, Inntektsmelding } from '@navikt/fp-types';
 
 import { InntektsmeldingOpplysningerPanel } from './InntektsmeldingOpplysningerPanel';
-
-import styles from './inntektsmeldingerPanel.module.css';
 
 const erMatch = (arbeidsforhold: AoIArbeidsforhold, inntektsmelding: Inntektsmelding): boolean =>
   inntektsmelding.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent &&
@@ -50,8 +49,6 @@ export const InntektsmeldingerPanel = ({
   arbeidsgiverFødselsdato,
 }: Props) => {
   const intl = useIntl();
-  const [visInfoOmIm, setVisInfoOmIm] = useState<Record<string, boolean>>({});
-
   const harEttArbeidsforhold = arbeidsforholdForRad.length === 1;
 
   const inntektsmeldingForArbeidsforhold = harEttArbeidsforhold
@@ -65,165 +62,144 @@ export const InntektsmeldingerPanel = ({
           <Label size="small">
             <FormattedMessage id="ArbeidsforholdInformasjonPanel.Fodselsdato" />
           </Label>
-          <Detail>
-            <DateLabel dateString={arbeidsgiverFødselsdato} />
-          </Detail>
+          <BodyShort size="small">{dateFormat(arbeidsgiverFødselsdato)}</BodyShort>
         </HStack>
       )}
+
       {!arbeidsgiverFødselsdato && arbeidsforholdForRad.length > 0 && (
         <HStack gap="4">
           <Label size="small">
             <FormattedMessage id="ArbeidsforholdInformasjonPanel.Orgnr" />
           </Label>
-          <Detail>{arbeidsforholdForRad[0].arbeidsgiverIdent}</Detail>
+          <BodyShort size="small">{arbeidsforholdForRad[0].arbeidsgiverIdent}</BodyShort>
         </HStack>
       )}
+
       {!harEttArbeidsforhold && (
         <>
           <VerticalSpacer eightPx />
-          <AvsnittSkiller dividerParagraf className={styles.skiller} />
+          <AvsnittSkiller dividerParagraf />
           <VerticalSpacer sixteenPx />
           {arbeidsforholdForRad.map(a => {
             const inntektsmelding = inntektsmeldingerForRad.find(i => erMatch(a, i));
+            const [visInfoOmIm, setVisInfoOmIm] = useState<boolean>(false);
+
             return (
               <React.Fragment key={`${a.arbeidsgiverIdent}${a.internArbeidsforholdId}`}>
-                <VStack gap="2">
-                  <HStack gap="4">
-                    <Label size="small">
-                      <FormattedMessage id="ArbeidsforholdInformasjonPanel.ArbeidsforholdId" />
-                    </Label>
-                    <div>
-                      {a.eksternArbeidsforholdId && a.eksternArbeidsforholdId.length < 50 && (
-                        <div>
-                          <BodyShort size="small">{a.eksternArbeidsforholdId}</BodyShort>
-                        </div>
-                      )}
-                      {a.eksternArbeidsforholdId && a.eksternArbeidsforholdId.length >= 50 && (
+                <HStack gap="4" wrap={false} justify="space-between">
+                  <VStack gap="2">
+                    <HStack gap="4" wrap={false}>
+                      <Label size="small">
+                        <FormattedMessage id="ArbeidsforholdInformasjonPanel.ArbeidsforholdId" />
+                      </Label>
+                      {a.eksternArbeidsforholdId ? (
                         <Tooltip content={delOppAId(a.eksternArbeidsforholdId)}>
-                          <BodyShort size="small">{`${a.eksternArbeidsforholdId.substring(0, 50)}...`}</BodyShort>
+                          <BodyShort size="small">
+                            {a.eksternArbeidsforholdId.length > 50
+                              ? a.eksternArbeidsforholdId.slice(0, 50).concat('...')
+                              : a.eksternArbeidsforholdId}
+                          </BodyShort>
                         </Tooltip>
+                      ) : (
+                        <BodyShort size="small">-</BodyShort>
                       )}
-                      {!a.eksternArbeidsforholdId && <BodyShort size="small">-</BodyShort>}
-                    </div>
-                    {inntektsmelding && (
-                      <>
-                        <Spacer />
-                        <Label size="small">
-                          <FormattedMessage id="ArbeidsforholdInformasjonPanel.ImMottatt" />
-                        </Label>
-                      </>
-                    )}
-                    {!inntektsmelding && (
-                      <>
-                        <Spacer />
-                        <div>
-                          <ExclamationmarkTriangleFillIcon
-                            className={styles.aksjonpunktImage}
-                            title={intl.formatMessage({ id: 'ArbeidsforholdRad.Aksjonspunkt' })}
-                          />
-                          <div className={styles.ikkeMottatt}>
-                            <Label size="small">
-                              <FormattedMessage id="ArbeidsforholdInformasjonPanel.ImIkkeMottatt" />
-                            </Label>
-                          </div>
-                        </div>
-                      </>
-                    )}
-                  </HStack>
-                  <HStack gap="4">
-                    <Label size="small">
-                      <FormattedMessage id="ArbeidsforholdInformasjonPanel.Periode" />
-                    </Label>
-                    <BodyShort size="small">
-                      <PeriodLabel dateStringFom={a.fom} dateStringTom={a.tom !== TIDENES_ENDE ? a.tom : undefined} />
-                    </BodyShort>
-                    {inntektsmelding && (
-                      <>
-                        <Spacer />
-                        <BodyShort size="small">
-                          <DateLabel dateString={inntektsmelding.motattDato} />
-                        </BodyShort>
-                      </>
-                    )}
-                  </HStack>
-                  <HStack gap="4">
-                    <Label size="small">
-                      <FormattedMessage id="ArbeidsforholdInformasjonPanel.Stillingsprosent" />
-                    </Label>
-                    <BodyShort size="small">{`${a.stillingsprosent}%`}</BodyShort>
-                  </HStack>
-                  {a.permisjonOgMangel && (
+                    </HStack>
+
                     <HStack gap="4">
                       <Label size="small">
-                        {getKodeverknavnFraKode(
-                          alleKodeverk,
-                          KodeverkType.PERMISJONSBESKRIVELSE_TYPE,
-                          a.permisjonOgMangel.type,
-                        )}
+                        <FormattedMessage id="ArbeidsforholdInformasjonPanel.Periode" />
                       </Label>
-                      <BodyShort size="small">
-                        <PeriodLabel
-                          dateStringFom={a.permisjonOgMangel.permisjonFom}
-                          dateStringTom={a.permisjonOgMangel.permisjonTom}
-                        />
-                      </BodyShort>
-                    </HStack>
-                  )}
-                  {inntektsmelding && (
-                    <>
-                      {a.internArbeidsforholdId && visInfoOmIm[a.internArbeidsforholdId] && (
-                        <InntektsmeldingOpplysningerPanel
-                          saksnummer={saksnummer}
-                          inntektsmelding={inntektsmelding}
-                          skalViseArbeidsforholdId={false}
-                        />
+                      <BodyShort size="small">{formaterPeriode(a)}</BodyShort>
+                      {inntektsmelding && (
+                        <>
+                          <Spacer />
+                        </>
                       )}
-                      <VerticalSpacer fourPx />
-                      <Link
-                        onClick={e => {
-                          e.preventDefault();
-                          setVisInfoOmIm(info => {
-                            if (!a.internArbeidsforholdId) {
-                              return info;
-                            }
-                            const status = info[a.internArbeidsforholdId];
-                            return {
-                              ...info,
-                              [a.internArbeidsforholdId]: status === undefined || status === false,
-                            };
-                          });
-                        }}
-                        href=""
-                      >
-                        <span>
-                          <BodyShort size="small" className={styles.inline}>
+                    </HStack>
+
+                    <HStack gap="4">
+                      <Label size="small">
+                        <FormattedMessage id="ArbeidsforholdInformasjonPanel.Stillingsprosent" />
+                      </Label>
+                      <BodyShort size="small">{`${a.stillingsprosent}%`}</BodyShort>
+                    </HStack>
+
+                    {a.permisjonOgMangel && (
+                      <HStack gap="4">
+                        <Label size="small">
+                          {getKodeverknavnFraKode(
+                            alleKodeverk,
+                            KodeverkType.PERMISJONSBESKRIVELSE_TYPE,
+                            a.permisjonOgMangel.type,
+                          )}
+                        </Label>
+                        <BodyShort size="small">
+                          {formaterPeriode({
+                            fom: a.permisjonOgMangel.permisjonFom,
+                            tom: a.permisjonOgMangel.permisjonTom,
+                          })}
+                        </BodyShort>
+                      </HStack>
+                    )}
+
+                    {inntektsmelding && (
+                      <>
+                        {visInfoOmIm && (
+                          <InntektsmeldingOpplysningerPanel
+                            saksnummer={saksnummer}
+                            inntektsmelding={inntektsmelding}
+                            skalViseArbeidsforholdId={false}
+                          />
+                        )}
+                        <Link
+                          href=""
+                          onClick={e => {
+                            e.preventDefault();
+                            setVisInfoOmIm(v => !v);
+                          }}
+                        >
+                          <BodyShort size="small" as="span">
                             <FormattedMessage
                               id={
-                                !a.internArbeidsforholdId || !visInfoOmIm[a.internArbeidsforholdId]
-                                  ? 'ArbeidsforholdInformasjonPanel.ApneImInfo'
-                                  : 'ArbeidsforholdInformasjonPanel.LukkeImInfo'
+                                visInfoOmIm
+                                  ? 'ArbeidsforholdInformasjonPanel.LukkeImInfo'
+                                  : 'ArbeidsforholdInformasjonPanel.ApneImInfo'
                               }
                             />
                           </BodyShort>
-                        </span>
-                        {a.internArbeidsforholdId && visInfoOmIm[a.internArbeidsforholdId] ? (
-                          <ChevronUpIcon className={styles.arrow} />
-                        ) : (
-                          <ChevronDownIcon className={styles.arrow} />
-                        )}
-                      </Link>
-                    </>
+                          {visInfoOmIm ? <ChevronUpIcon /> : <ChevronDownIcon />}
+                        </Link>
+                      </>
+                    )}
+                  </VStack>
+                  {inntektsmelding ? (
+                    <div>
+                      <Label size="small">
+                        <FormattedMessage id="ArbeidsforholdInformasjonPanel.ImMottatt" />
+                      </Label>
+                      <BodyShort size="small">{dateFormat(inntektsmelding.motattDato)}</BodyShort>
+                    </div>
+                  ) : (
+                    <HStack gap="4">
+                      <ExclamationmarkTriangleFillIcon
+                        title={intl.formatMessage({ id: 'ArbeidsforholdRad.Aksjonspunkt' })}
+                        width={24}
+                        height={24}
+                        color="var(--a-icon-warning)"
+                      />
+                      <Label size="small">
+                        <FormattedMessage id="ArbeidsforholdInformasjonPanel.ImIkkeMottatt" />
+                      </Label>
+                    </HStack>
                   )}
-                </VStack>
-                <VerticalSpacer sixteenPx />
-                <AvsnittSkiller dividerParagraf className={styles.skiller} />
-                <VerticalSpacer sixteenPx />
+                </HStack>
+                <AvsnittSkiller dividerParagraf spaceAbove spaceUnder />
               </React.Fragment>
             );
           })}
         </>
       )}
-      <VerticalSpacer eightPx />
+
       {harEttArbeidsforhold && !!inntektsmeldingForArbeidsforhold && (
         <InntektsmeldingOpplysningerPanel
           saksnummer={saksnummer}
@@ -234,6 +210,7 @@ export const InntektsmeldingerPanel = ({
           ikkeVisInfo
         />
       )}
+
       {harEttArbeidsforhold && inntektsmeldingerForRad.length === 0 && (
         <>
           <HStack gap="4">
@@ -243,24 +220,21 @@ export const InntektsmeldingerPanel = ({
             <BodyShort size="small">{`${arbeidsforholdForRad[0].stillingsprosent}%`}</BodyShort>
           </HStack>
           {arbeidsforholdForRad[0].permisjonOgMangel && (
-            <>
-              <VerticalSpacer eightPx />
-              <HStack gap="4">
-                <Label size="small">
-                  {getKodeverknavnFraKode(
-                    alleKodeverk,
-                    KodeverkType.PERMISJONSBESKRIVELSE_TYPE,
-                    arbeidsforholdForRad[0].permisjonOgMangel.type,
-                  )}
-                </Label>
-                <BodyShort size="small">
-                  <PeriodLabel
-                    dateStringFom={arbeidsforholdForRad[0].permisjonOgMangel.permisjonFom}
-                    dateStringTom={arbeidsforholdForRad[0].permisjonOgMangel.permisjonTom}
-                  />
-                </BodyShort>
-              </HStack>
-            </>
+            <HStack gap="4">
+              <Label size="small">
+                {
+                  alleKodeverk[KodeverkType.PERMISJONSBESKRIVELSE_TYPE].find(
+                    k => k.kode === arbeidsforholdForRad[0].permisjonOgMangel?.type,
+                  )?.navn
+                }
+              </Label>
+              <BodyShort size="small">
+                {formaterPeriode({
+                  fom: arbeidsforholdForRad[0].permisjonOgMangel.permisjonFom,
+                  tom: arbeidsforholdForRad[0].permisjonOgMangel.permisjonTom,
+                })}
+              </BodyShort>
+            </HStack>
           )}
         </>
       )}

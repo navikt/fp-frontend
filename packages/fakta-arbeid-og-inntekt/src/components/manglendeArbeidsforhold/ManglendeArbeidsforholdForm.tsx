@@ -24,8 +24,6 @@ import { useSetDirtyForm } from '../../DirtyFormProvider';
 import { ArbeidsforholdOgInntektRadData } from '../../types/arbeidsforholdOgInntekt';
 import { InntektsmeldingOpplysningerPanel } from '../felles/InntektsmeldingOpplysningerPanel';
 
-import styles from './manglendeArbeidsforholdForm.module.css';
-
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 const minValue1 = minValue(1);

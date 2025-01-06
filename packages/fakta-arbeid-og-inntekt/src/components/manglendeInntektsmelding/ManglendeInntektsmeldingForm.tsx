@@ -5,7 +5,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Alert, Button, HelpText, HStack, VStack } from '@navikt/ds-react';
 import { Form, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 import {
@@ -19,8 +18,6 @@ import {
 import { useSetDirtyForm } from '../../DirtyFormProvider';
 import { ArbeidsforholdOgInntektRadData } from '../../types/arbeidsforholdOgInntekt';
 import { ArbeidsforholdInformasjonPanel } from '../felles/ArbeidsforholdInformasjonPanel';
-
-import styles from './manglendeInntektsmeldingForm.module.css';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);

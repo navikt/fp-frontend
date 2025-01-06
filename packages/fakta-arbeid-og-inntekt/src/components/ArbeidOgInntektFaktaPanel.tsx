@@ -30,17 +30,6 @@ import { ArbeidsforholdOgInntektRadData, Avklaring } from '../types/arbeidsforho
 import { ArbeidsforholdRad } from './ArbeidsforholdRad';
 import { ArbeidsOgInntektOverstyrPanel } from './ArbeidsOgInntektOverstyrPanel';
 
-import styles from './arbeidOgInntektFaktaPanel.module.css';
-
-const HEADER_TEXT_IDS = [
-  'EMPTY1',
-  'ArbeidOgInntektFaktaPanel.Arbeidsforhold',
-  'ArbeidOgInntektFaktaPanel.Periode',
-  'ArbeidOgInntektFaktaPanel.Kilde',
-  'ArbeidOgInntektFaktaPanel.InntektsmeldingMottatt',
-  'EMPTY2',
-];
-
 const sorterTabell = (radX: ArbeidsforholdOgInntektRadData, radY: ArbeidsforholdOgInntektRadData): number => {
   const radXHarAp = radX.årsak;
   const radYHarAp = radY.årsak;
