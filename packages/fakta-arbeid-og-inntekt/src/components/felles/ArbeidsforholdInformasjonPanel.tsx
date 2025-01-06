@@ -84,7 +84,7 @@ export const ArbeidsforholdInformasjonPanel = ({
         alleKodeverk={alleKodeverk}
         arbeidsgiverFødselsdato={arbeidsgiverFødselsdato}
       />
-      <VerticalSpacer thirtyTwoPx />
+      <VerticalSpacer sixteenPx />
       {visInntektsposter && (
         <>
           <Label size="small">

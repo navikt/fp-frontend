@@ -260,7 +260,6 @@ export const ManueltLagtTilArbeidsforholdForm = ({
             )}
           </HStack>
         )}
-        <VerticalSpacer fourtyPx />
       </Form>
       {visSletteDialog && (
         <OkAvbrytModal

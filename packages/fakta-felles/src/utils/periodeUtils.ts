@@ -1,4 +1,6 @@
-import { TIDENES_ENDE } from '@navikt/ft-utils';
+import React from 'react';
+
+import { dateFormat, TIDENES_ENDE } from '@navikt/ft-utils';
 
 type Periode = { fom?: string | null; tom?: string | null };
 
@@ -20,4 +22,10 @@ export const sorterPerioder = (a: Periode, b: Periode) => {
     if (dateAStart < dateBStart) return 1;
   }
   return 0;
+};
+
+export const formaterPeriode = (periode?: Periode) => {
+  if (periode && periode?.fom)
+    return `${dateFormat(periode.fom)} – ${periode?.tom && periode.tom !== TIDENES_ENDE ? dateFormat(periode.tom) : ''}`;
+  return '-';
 };

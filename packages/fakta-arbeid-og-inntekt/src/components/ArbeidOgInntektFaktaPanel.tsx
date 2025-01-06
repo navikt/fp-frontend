@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { Alert, Button } from '@navikt/ds-react';
-import { Table, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { Alert, Button, Table } from '@navikt/ds-react';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import {
   AksjonspunktKode,
@@ -268,25 +268,47 @@ export const ArbeidOgInntektFaktaPanel = ({
         setErOverstyrt={setErOverstyrt}
         oppdaterTabell={oppdaterTabellData}
       />
-      <Table ref={tableRef} headerTextCodes={HEADER_TEXT_IDS} noHover hasGrayHeader>
-        {tabellRader.map((radData, index) => (
-          <ArbeidsforholdRad
-            key={`${radData.arbeidsgiverNavn}${radData.arbeidsgiverIdent}${index}`} // nosonar
-            arbeidOgInntekt={arbeidOgInntekt}
-            saksnummer={saksnummer}
-            behandlingUuid={behandling.uuid}
-            behandlingVersjon={behandling.versjon}
-            radData={radData}
-            isReadOnly={readOnly || erAksjonspunktAvsluttet || harIngenAksjonspunkt}
-            registrerArbeidsforhold={registrerArbeidsforhold}
-            lagreVurdering={lagreVurdering}
-            toggleÅpenRad={() => toggleÅpenRad(index)}
-            erOverstyrt={erOverstyrt}
-            oppdaterTabell={oppdaterTabellData}
-            erRadÅpen={åpneRadIndexer.includes(index)}
-            alleKodeverk={alleKodeverk}
-          />
-        ))}
+      <Table ref={tableRef}>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell>
+              <FormattedMessage id="ArbeidOgInntektFaktaPanel.Status" />
+            </Table.HeaderCell>
+            <Table.HeaderCell>
+              <FormattedMessage id="ArbeidOgInntektFaktaPanel.Arbeidsforhold" />
+            </Table.HeaderCell>
+            <Table.HeaderCell>
+              <FormattedMessage id="ArbeidOgInntektFaktaPanel.Periode" />
+            </Table.HeaderCell>
+            <Table.HeaderCell>
+              <FormattedMessage id="ArbeidOgInntektFaktaPanel.Kilde" />
+            </Table.HeaderCell>
+            <Table.HeaderCell>
+              <FormattedMessage id="ArbeidOgInntektFaktaPanel.InntektsmeldingMottatt" />
+            </Table.HeaderCell>
+            <Table.HeaderCell />
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          {tabellRader.map((radData, index) => (
+            <ArbeidsforholdRad
+              key={`${radData.arbeidsgiverNavn}${radData.arbeidsgiverIdent}${index}`} // nosonar
+              arbeidOgInntekt={arbeidOgInntekt}
+              saksnummer={saksnummer}
+              behandlingUuid={behandling.uuid}
+              behandlingVersjon={behandling.versjon}
+              radData={radData}
+              isReadOnly={readOnly || erAksjonspunktAvsluttet || harIngenAksjonspunkt}
+              registrerArbeidsforhold={registrerArbeidsforhold}
+              lagreVurdering={lagreVurdering}
+              toggleÅpenRad={() => toggleÅpenRad(index)}
+              erOverstyrt={erOverstyrt}
+              oppdaterTabell={oppdaterTabellData}
+              erRadÅpen={åpneRadIndexer.includes(index)}
+              alleKodeverk={alleKodeverk}
+            />
+          ))}
+        </Table.Body>
       </Table>
       <VerticalSpacer sixteenPx />
       {skalViseSettPåVentKnapp && (
@@ -325,11 +347,9 @@ export const ArbeidOgInntektFaktaPanel = ({
       )}
       {skalViseÅpneForNyVurderingKnapp && (
         <>
-          <div className={styles.alertStripe}>
-            <Alert variant="info">
-              <FormattedMessage id="ArbeidOgInntektFaktaPanel.ApneForNyRevurderingForklaring" />
-            </Alert>
-          </div>
+          <Alert variant="info">
+            <FormattedMessage id="ArbeidOgInntektFaktaPanel.ApneForNyRevurderingForklaring" />
+          </Alert>
           <VerticalSpacer sixteenPx />
           <Button
             size="small"

@@ -1,9 +1,8 @@
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import React, { useMemo } from 'react';
 import { useForm, UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
-import { Alert, BodyShort, Button, HStack, Popover } from '@navikt/ds-react';
+import { Alert, Button, HelpText, HStack } from '@navikt/ds-react';
 import { Datepicker, Form, InputField, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
@@ -169,10 +168,6 @@ export const ManglendeArbeidsforholdForm = ({
       .finally(() => formMethods.reset(formValues));
   };
 
-  const buttonRef = useRef<SVGSVGElement>(null);
-  const [openState, setOpenState] = useState(false);
-  const toggleHjelpetekst = useCallback(() => setOpenState(gammelVerdi => !gammelVerdi), []);
-
   return (
     <>
       <InntektsmeldingOpplysningerPanel
@@ -182,36 +177,19 @@ export const ManglendeArbeidsforholdForm = ({
         arbeidsgiverFødselsdato={arbeidsgiverFødselsdato}
       />
       <VerticalSpacer fourtyPx />
-      <div className={styles.alertStripe}>
-        <Alert variant="info">
-          <FormattedMessage id="ManglendeOpplysningerForm.ErMottattMenIkkeReg" />
-        </Alert>
-      </div>
+      <Alert variant="info">
+        <FormattedMessage id="ManglendeOpplysningerForm.ErMottattMenIkkeReg" />
+      </Alert>
       <VerticalSpacer thirtyTwoPx />
       <Form formMethods={formMethods} onSubmit={lagre}>
         <RadioGroupPanel
           name="saksbehandlersVurdering"
           label={
-            <HStack gap="2">
+            <HStack gap="2" align="center">
               <FormattedMessage id="ManglendeOpplysningerForm.SkalBrukeInntekstmelding" />
-              <QuestionmarkDiamondIcon
-                className={styles.svg}
-                ref={buttonRef}
-                onClick={toggleHjelpetekst}
-                title={intl.formatMessage({ id: 'ManglendeOpplysningerForm.AltHjelpetekst' })}
-              />
-              <Popover
-                open={openState}
-                onClose={toggleHjelpetekst}
-                anchorEl={buttonRef.current}
-                className={styles.hjelpetekst}
-              >
-                <Popover.Content className={styles.hjelpetekstInnhold}>
-                  <BodyShort>
-                    <FormattedMessage id="ManglendeOpplysningerForm.Hjelpetekst" />
-                  </BodyShort>
-                </Popover.Content>
-              </Popover>
+              <HelpText title={intl.formatMessage({ id: 'ManglendeOpplysningerForm.AltHjelpetekst' })}>
+                <FormattedMessage id="ManglendeOpplysningerForm.Hjelpetekst" />
+              </HelpText>
             </HStack>
           }
           validate={[required]}
@@ -293,7 +271,6 @@ export const ManglendeArbeidsforholdForm = ({
             </Button>
           </HStack>
         )}
-        <VerticalSpacer fourtyPx />
       </Form>
     </>
   );

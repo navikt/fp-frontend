@@ -115,11 +115,9 @@ export const ArbeidsOgInntektOverstyrPanel = ({
         </AksjonspunktHelpTextHTML>
       )}
       {arbeidsforhold.length === 0 && inntektsmeldinger.length === 0 && erOverstyrer && (
-        <div className={styles.alertStripe}>
-          <Alert variant="info">
-            <FormattedMessage id="ArbeidOgInntektFaktaPanel.IngenArbeidsforhold" />
-          </Alert>
-        </div>
+        <Alert variant="info">
+          <FormattedMessage id="ArbeidOgInntektFaktaPanel.IngenArbeidsforhold" />
+        </Alert>
       )}
       <VerticalSpacer sixteenPx />
       {erOverstyrt && harIngenArbeidsforholdSomErManueltLagtTil && !skalVisePanelForÅLeggeTilArbeidsforhold && (

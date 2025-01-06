@@ -4,7 +4,7 @@ export { default as FaktaSubmitButtonNew } from './src/components/FaktaSubmitBut
 export { default as isFieldEdited } from './src/utils/isFieldEdited';
 export type { FieldEditedInfo } from './src/utils/isFieldEdited';
 
-export { sorterPerioder } from './src/utils/periodeUtils';
+export { sorterPerioder, formaterPeriode } from './src/utils/periodeUtils';
 export { formaterAdresse, getNyesteAdresse, erPersonAdresserLike } from './src/utils/adresseUtils';
 
 export { default as validerApKodeOgHentApEnum } from './src/utils/validerApKodeOgHentApEnum';

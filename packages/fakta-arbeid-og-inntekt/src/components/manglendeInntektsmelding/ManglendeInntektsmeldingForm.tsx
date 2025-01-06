@@ -1,9 +1,8 @@
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import React, { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
-import { Alert, BodyShort, Button, HStack, Popover } from '@navikt/ds-react';
+import { Alert, Button, HelpText, HStack, VStack } from '@navikt/ds-react';
 import { Form, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -124,9 +123,6 @@ export const ManglendeInntektsmeldingForm = ({
       .finally(() => formMethods.reset(formValues));
   };
 
-  const svgRef = useRef<SVGSVGElement>(null);
-  const [openState, setOpenState] = useState(false);
-  const toggleHjelpetekst = useCallback(() => setOpenState(gammelVerdi => !gammelVerdi), []);
   const radioOptions = [
     {
       label: intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.TarKontakt' }),
@@ -156,89 +152,68 @@ export const ManglendeInntektsmeldingForm = ({
         arbeidsgiverFødselsdato={arbeidsgiverFødselsdato}
       />
       <Form formMethods={formMethods} onSubmit={lagre}>
-        {!erEttArbeidsforhold && inntektsmeldingerForRad.length > 0 && (
-          <div className={styles.alertStripe}>
+        <VStack gap="4">
+          {!erEttArbeidsforhold && inntektsmeldingerForRad.length > 0 && (
             <Alert variant="info">
               <FormattedMessage id="InntektsmeldingInnhentesForm.InnehentAlle" />
             </Alert>
-            <VerticalSpacer sixteenPx />
-          </div>
-        )}
-        <RadioGroupPanel
-          name="saksbehandlersVurdering"
-          label={
-            <HStack gap="2">
-              <FormattedMessage id="InntektsmeldingInnhentesForm.MåInnhentes" />
-              <QuestionmarkDiamondIcon
-                ref={svgRef}
-                onClick={toggleHjelpetekst}
-                className={styles.svg}
-                title={intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.AltHjelpetekst' })}
+          )}
+          <RadioGroupPanel
+            name="saksbehandlersVurdering"
+            label={
+              <HStack gap="2" align="center">
+                <FormattedMessage id="InntektsmeldingInnhentesForm.MåInnhentes" />
+                <HelpText title={intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.AltHjelpetekst' })}>
+                  <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel1" />
+                  <br />
+                  <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel2" />
+                  <br />
+                  <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel3" />
+                </HelpText>
+              </HStack>
+            }
+            validate={[required]}
+            isReadOnly={isReadOnly}
+            radios={radioOptions}
+          />
+          <TextAreaField
+            label={
+              <FormattedMessage
+                id={
+                  erEttArbeidsforhold
+                    ? 'InntektsmeldingInnhentesForm.Begrunn'
+                    : 'InntektsmeldingInnhentesForm.Kommentar'
+                }
               />
-              <Popover
-                open={openState}
-                onClose={toggleHjelpetekst}
-                anchorEl={svgRef.current}
-                className={styles.hjelpetekst}
+            }
+            name="begrunnelse"
+            validate={[required, minLength3, maxLength1500, hasValidText]}
+            maxLength={1500}
+            readOnly={isReadOnly}
+          />
+          {!isReadOnly && (
+            <HStack gap="4">
+              <Button
+                size="small"
+                variant="secondary"
+                loading={formMethods.formState.isSubmitting}
+                disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
               >
-                <Popover.Content className={styles.hjelpetekstInnhold}>
-                  <BodyShort>
-                    <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel1" />
-                  </BodyShort>
-                  <VerticalSpacer eightPx />
-                  <BodyShort>
-                    <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel2" />
-                  </BodyShort>
-                  <VerticalSpacer eightPx />
-                  <BodyShort>
-                    <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel3" />
-                  </BodyShort>
-                </Popover.Content>
-              </Popover>
+                <FormattedMessage id="InntektsmeldingInnhentesForm.Lagre" />
+              </Button>
+              <Button
+                size="small"
+                variant="tertiary"
+                loading={false}
+                disabled={formMethods.formState.isSubmitting}
+                onClick={avbryt}
+                type="button"
+              >
+                <FormattedMessage id="InntektsmeldingInnhentesForm.Avbryt" />
+              </Button>
             </HStack>
-          }
-          validate={[required]}
-          isReadOnly={isReadOnly}
-          radios={radioOptions}
-        />
-        <VerticalSpacer sixteenPx />
-        <TextAreaField
-          label={
-            <FormattedMessage
-              id={
-                erEttArbeidsforhold ? 'InntektsmeldingInnhentesForm.Begrunn' : 'InntektsmeldingInnhentesForm.Kommentar'
-              }
-            />
-          }
-          name="begrunnelse"
-          validate={[required, minLength3, maxLength1500, hasValidText]}
-          maxLength={1500}
-          readOnly={isReadOnly}
-        />
-        <VerticalSpacer twentyPx />
-        {!isReadOnly && (
-          <HStack gap="4">
-            <Button
-              size="small"
-              variant="secondary"
-              loading={formMethods.formState.isSubmitting}
-              disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
-            >
-              <FormattedMessage id="InntektsmeldingInnhentesForm.Lagre" />
-            </Button>
-            <Button
-              size="small"
-              variant="tertiary"
-              loading={false}
-              disabled={formMethods.formState.isSubmitting}
-              onClick={avbryt}
-              type="button"
-            >
-              <FormattedMessage id="InntektsmeldingInnhentesForm.Avbryt" />
-            </Button>
-          </HStack>
-        )}
-        <VerticalSpacer fourtyPx />
+          )}
+        </VStack>
       </Form>
     </>
   );

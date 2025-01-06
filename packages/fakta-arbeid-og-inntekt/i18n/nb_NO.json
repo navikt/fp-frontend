@@ -1,5 +1,7 @@
 {
   "ArbeidOgInntektFaktaPanel.Overskrift": "Fakta om arbeid og inntekt",
+  "ArbeidOgInntektFaktaPanel.Status": "Status",
+
   "ArbeidOgInntektFaktaPanel.Arbeidsforhold": "Arbeidsforhold",
   "ArbeidOgInntektFaktaPanel.Periode": "Periode",
   "ArbeidOgInntektFaktaPanel.Kilde": "Kilde",
@@ -19,6 +21,8 @@
   "ArbeidsforholdRad.Inntektsmelding": "Inntektsmelding",
   "ArbeidsforholdRad.Aksjonspunkt": "Åpent aksjonspunkt",
   "ArbeidsforholdRad.Ok": "Arbeidsforhold er OK",
+  "ArbeidsforholdRad.Aksjonspunkt.Label": "Obs",
+  "ArbeidsforholdRad.Ok.Label": "OK",
   "ArbeidsforholdRad.Mottatt": "Mottatt",
   "ArbeidsforholdRad.IkkeMottatt": "Ikke mottatt",
 
