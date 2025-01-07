@@ -2,7 +2,7 @@ import React, { useCallback, useMemo, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { PlusCircleIcon } from '@navikt/aksel-icons';
-import { Alert, BodyShort, Button, Heading, HStack, Spacer } from '@navikt/ds-react';
+import { Alert, BodyShort, Button, Heading, HStack, Spacer, VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML, OverstyringKnapp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { dateFormat } from '@navikt/ft-utils';
 
@@ -16,29 +16,8 @@ import {
 } from '@navikt/fp-types';
 
 import { ArbeidsforholdOgInntektRadData } from '../types/arbeidsforholdOgInntekt';
+import { AksjonspunktVisning } from './Aksjonspunkt';
 import { MANUELT_ORG_NR, ManueltLagtTilArbeidsforholdForm } from './manuelt/ManueltLagtTilArbeidsforholdForm';
-
-import styles from './arbeidsOgInntektOverstyrPanel.module.css';
-
-const finnAksjonspunktTekstKoder = (
-  tabellData: ArbeidsforholdOgInntektRadData[],
-  aksjonspunkt?: Aksjonspunkt,
-): string[] => {
-  const harManglendeInntektsmeldinger = tabellData.some(d => d.årsak === AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING);
-  const harManglandeOpplysninger = tabellData.some(
-    d => d.årsak === AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD,
-  );
-  const erApÅpent = aksjonspunkt?.status === AksjonspunktStatus.OPPRETTET;
-
-  const koder = [];
-  if (erApÅpent && harManglendeInntektsmeldinger) {
-    koder.push('ArbeidOgInntektFaktaPanel.InnhentManglendeInntektsmelding');
-  }
-  if (erApÅpent && harManglandeOpplysninger) {
-    koder.push('ArbeidOgInntektFaktaPanel.AvklarManglendeOpplysninger');
-  }
-  return koder;
-};
 
 interface Props {
   behandling: Behandling;
@@ -51,6 +30,7 @@ interface Props {
   settÅpneRadIndexer: React.Dispatch<React.SetStateAction<number[]>>;
   setErOverstyrt: React.Dispatch<React.SetStateAction<boolean>>;
   oppdaterTabell: (data: (rader: ArbeidsforholdOgInntektRadData[]) => ArbeidsforholdOgInntektRadData[]) => void;
+  erAksjonspunktApent: boolean;
 }
 
 export const ArbeidsOgInntektOverstyrPanel = ({
@@ -64,6 +44,7 @@ export const ArbeidsOgInntektOverstyrPanel = ({
   settÅpneRadIndexer,
   setErOverstyrt,
   oppdaterTabell,
+  erAksjonspunktApent,
 }: Props) => {
   const intl = useIntl();
   const { arbeidsforhold, inntektsmeldinger } = arbeidOgInntekt;
@@ -84,14 +65,7 @@ export const ArbeidsOgInntektOverstyrPanel = ({
     }
   }, [tabellData, settÅpneRadIndexer]);
 
-  const aksjonspunktTekstKoder = useMemo(
-    () => finnAksjonspunktTekstKoder(tabellData, aksjonspunkt),
-    [behandling.versjon],
-  );
-
   const harIngenArbeidsforholdSomErManueltLagtTil = tabellData.every(data => data.arbeidsgiverIdent !== MANUELT_ORG_NR);
-
-  const erAksjonspunktÅpent = aksjonspunkt?.status === AksjonspunktStatus.OPPRETTET;
 
   return (
     <>
@@ -99,56 +73,45 @@ export const ArbeidsOgInntektOverstyrPanel = ({
         <Heading size="small">
           <FormattedMessage id="ArbeidOgInntektFaktaPanel.Overskrift" />
         </Heading>
-        {erOverstyrer && erAksjonspunktÅpent && !readOnly && <OverstyringKnapp onClick={toggleOverstyring} />}
+        {erOverstyrer && erAksjonspunktApent && !readOnly && <OverstyringKnapp onClick={toggleOverstyring} />}
         <Spacer />
-        <BodyShort size="small">
+        <BodyShort>
           <FormattedMessage
             id="ArbeidOgInntektFaktaPanel.Skjaringstidspunkt"
             values={{ skjæringspunktDato: dateFormat(arbeidOgInntekt.skjæringstidspunkt) }}
           />
         </BodyShort>
       </HStack>
-      <VerticalSpacer thirtyTwoPx />
-      {aksjonspunktTekstKoder.length > 0 && (
-        <AksjonspunktHelpTextHTML>
-          {aksjonspunktTekstKoder.map(kode => intl.formatMessage({ id: kode })).join(' ')}
-        </AksjonspunktHelpTextHTML>
-      )}
+
+      <AksjonspunktVisning behandling={behandling} tabellData={tabellData} aksjonspunkt={aksjonspunkt} />
+
       {arbeidsforhold.length === 0 && inntektsmeldinger.length === 0 && erOverstyrer && (
-        <Alert variant="info">
+        <Alert variant="info" size="small">
           <FormattedMessage id="ArbeidOgInntektFaktaPanel.IngenArbeidsforhold" />
         </Alert>
       )}
-      <VerticalSpacer sixteenPx />
       {erOverstyrt && harIngenArbeidsforholdSomErManueltLagtTil && !skalVisePanelForÅLeggeTilArbeidsforhold && (
-        <>
-          <VerticalSpacer twentyPx />
-          <Button
-            size="small"
-            variant="tertiary"
-            icon={<PlusCircleIcon aria-hidden />}
-            onClick={() => toggleVisningAvLeggTilArbeidsforhold(true)}
-          >
-            <FormattedMessage id="ArbeidOgInntektFaktaPanel.LeggTilArbeidsforhold" />
-          </Button>
-          <VerticalSpacer thirtyTwoPx />
-        </>
+        <Button
+          size="small"
+          variant="tertiary"
+          icon={<PlusCircleIcon aria-hidden />}
+          onClick={() => toggleVisningAvLeggTilArbeidsforhold(true)}
+        >
+          <FormattedMessage id="ArbeidOgInntektFaktaPanel.LeggTilArbeidsforhold" />
+        </Button>
       )}
-      <VerticalSpacer thirtyTwoPx />
+
       {skalVisePanelForÅLeggeTilArbeidsforhold && (
-        <>
-          <ManueltLagtTilArbeidsforholdForm
-            behandlingUuid={behandling.uuid}
-            behandlingVersjon={behandling.versjon}
-            isReadOnly={false}
-            registrerArbeidsforhold={registrerArbeidsforhold}
-            lukkArbeidsforholdRad={() => toggleVisningAvLeggTilArbeidsforhold(false)}
-            oppdaterTabell={oppdaterTabell}
-            erOverstyrt
-            erNyttArbeidsforhold
-          />
-          <VerticalSpacer fourtyPx />
-        </>
+        <ManueltLagtTilArbeidsforholdForm
+          behandlingUuid={behandling.uuid}
+          behandlingVersjon={behandling.versjon}
+          isReadOnly={false}
+          registrerArbeidsforhold={registrerArbeidsforhold}
+          lukkArbeidsforholdRad={() => toggleVisningAvLeggTilArbeidsforhold(false)}
+          oppdaterTabell={oppdaterTabell}
+          erOverstyrt={erOverstyrt}
+          erNyttArbeidsforhold
+        />
       )}
     </>
   );

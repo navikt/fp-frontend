@@ -3,7 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { CheckmarkCircleFillIcon, ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, HStack, Table, VStack } from '@navikt/ds-react';
-import { DateLabel } from '@navikt/ft-ui-komponenter';
+import { dateFormat } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import { formaterPeriode } from '@navikt/fp-fakta-felles';
@@ -110,6 +110,7 @@ export const ArbeidsforholdRad = ({
   lagreVurdering,
   toggleÅpenRad,
   alleKodeverk,
+  erRadÅpen,
 }: Props) => {
   const intl = useIntl();
 
@@ -149,6 +150,7 @@ export const ArbeidsforholdRad = ({
       expandOnRowClick
       shadeOnHover
       togglePlacement="right"
+      defaultOpen={erRadÅpen}
       content={
         <VStack className={`${styles.container} ${harÅpentAksjonspunkt ? styles.openAksjonspunkt : undefined}`}>
           {erManueltOpprettet && (
@@ -163,6 +165,7 @@ export const ArbeidsforholdRad = ({
               oppdaterTabell={oppdaterTabell}
             />
           )}
+
           {harArbeidsforholdOgInntektsmelding && (
             <InntektsmeldingerPanel
               saksnummer={saksnummer}
@@ -170,8 +173,10 @@ export const ArbeidsforholdRad = ({
               inntektsmeldingerForRad={inntektsmeldingerForRad}
               alleKodeverk={alleKodeverk}
               arbeidsgiverFødselsdato={arbeidsgiverFødselsdato}
+              arbeidsgiverNavn={arbeidsgiverNavn}
             />
           )}
+
           {harKunInntektsmeldingOgIkkeÅrsak && (
             <InntektsmeldingOpplysningerPanel
               saksnummer={saksnummer}
@@ -182,9 +187,11 @@ export const ArbeidsforholdRad = ({
               )}
               skalViseArbeidsforholdId={false}
               alleKodeverk={alleKodeverk}
+              arbeidsgiverNavn={arbeidsgiverNavn}
               arbeidsgiverFødselsdato={arbeidsgiverFødselsdato}
             />
           )}
+
           {manglerInntektsmelding && (
             <ManglendeInntektsmeldingForm
               saksnummer={saksnummer}
@@ -203,6 +210,7 @@ export const ArbeidsforholdRad = ({
               arbeidsgiverFødselsdato={arbeidsgiverFødselsdato}
             />
           )}
+
           {manglerArbeidsforhold && (
             <ManglendeArbeidsforholdForm
               saksnummer={saksnummer}
@@ -217,8 +225,10 @@ export const ArbeidsforholdRad = ({
               lukkArbeidsforholdRad={toggleÅpenRad}
               oppdaterTabell={oppdaterTabell}
               skalViseArbeidsforholdId={inntektsmeldingerForRad.length > 1}
+              alleKodeverk={alleKodeverk}
             />
           )}
+
           {harArbeidsforholdUtenInntektsmeldingMenIngenÅrsak && (
             <ArbeidsforholdInformasjonPanel
               saksnummer={saksnummer}
@@ -227,6 +237,7 @@ export const ArbeidsforholdRad = ({
               arbeidsforholdForRad={arbeidsforholdForRad}
               alleKodeverk={alleKodeverk}
               arbeidsgiverFødselsdato={arbeidsgiverFødselsdato}
+              arbeidsgiverNavn={arbeidsgiverNavn}
             />
           )}
         </VStack>
@@ -269,9 +280,10 @@ export const ArbeidsforholdRad = ({
       </Table.DataCell>
       <Table.DataCell>
         <BodyShort>
-          {arbeidsforholdForRad.length < 2 && inntektsmeldingerForRad.length === 1 && (
-            <DateLabel dateString={inntektsmeldingerForRad[0].motattDato} />
-          )}
+          {arbeidsforholdForRad.length < 2 &&
+            inntektsmeldingerForRad.length === 1 &&
+            dateFormat(inntektsmeldingerForRad[0].motattDato)}
+
           {!manglerInntektsmelding &&
             arbeidsforholdForRad.length > 1 &&
             inntektsmeldingerForRad.length === arbeidsforholdForRad.length && (

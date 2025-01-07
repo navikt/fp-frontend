@@ -11,12 +11,6 @@
   "InntektsmeldingFaktaPanel.tabell.cell.behandling.andre": "Andre",
   "InntektsmeldingFaktaPanel.tabell.cell.behandling.ingen": "Ingen",
 
-  "InntektsmeldingFaktaPanel.modal.heading": "All informasjon fra PDF’en er tilgjengelig i faktapanelet",
-  "InntektsmeldingFaktaPanel.modal.trigger": "Åpne PDF",
-  "InntektsmeldingFaktaPanel.modal.body": "PDF’en du skal åpne inneholder ikke noe annet enn det som står i faktapanelet. Du kan likevel åpne den hvis du ønsker det.",
-  "InntektsmeldingFaktaPanel.modal.button.primary": "Last ned som PDF",
-  "InntektsmeldingFaktaPanel.modal.button.secondary": "Avbryt",
-
   "InntektsmeldingFaktaPanel.behandling.heading": "Behandling",
   "InntektsmeldingFaktaPanel.behandling.bruktKunIDenne": "Brukt i denne behandlingen",
   "InntektsmeldingFaktaPanel.behandling.ikkeBruktINoen": "Ikke brukt i noen behandlinger",
@@ -27,27 +21,8 @@
 
   "InntektsmeldingFaktaPanel.innsendingstidspunkt": "Inntektsmelding sendt",
 
-  "InntektsmeldingFaktaPanel.arbeidsgiver.heading": "Arbeidsgiver",
-  "InntektsmeldingFaktaPanel.arbeidsgiver.navn": "Virksomhetsnavn",
-  "InntektsmeldingFaktaPanel.arbeidsgiver.underenhet": "Org.nr. for underenhet",
-
-  "InntektsmeldingFaktaPanel.kontaktperson.heading": "Kontaktperson fra arbeidsgiver",
-  "InntektsmeldingFaktaPanel.kontaktperson.navn": "Navn",
-  "InntektsmeldingFaktaPanel.kontaktperson.telefon": "Telefonnummer",
-
-  "InntektsmeldingFaktaPanel.månedsinntekt.heading": "Månedsinntekt",
-
   "InntektsmeldingFaktaPanel.startDato.heading": "Første dag med {ytelse}",
   "InntektsmeldingFaktaPanel.startDato.fraArbeidsgiver": "Oppgitt av arbeidsgiver",
-
-  "InntektsmeldingFaktaPanel.kilde.heading": "Kilde",
-  "InntektsmeldingFaktaPanel.kilde.nav": "Nav",
-  "InntektsmeldingFaktaPanel.kilde.altinn": "Altinn",
-  "InntektsmeldingFaktaPanel.kilde.lps": "Arbeidsgiver sitt lønns- og personalsystem(LPS)",
-
-  "InntektsmeldingFaktaPanel.refusjon.heading": "Refusjon",
-  "InntektsmeldingFaktaPanel.refusjon.ingen": "Ingen refusjon",
-  "InntektsmeldingFaktaPanel.refusjon.endring.periode": "Refusjonsbeløp på {kroner} fra {fom}",
 
   "InntektsmeldingFaktaPanel.bortfalteNaturalytelser.heading": "Naturalytelser som faller bort",
   "InntektsmeldingFaktaPanel.bortfalteNaturalytelser.ingen": "Ingen",

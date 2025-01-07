@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { useForm, UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Alert, Button, HelpText, HStack } from '@navikt/ds-react';
+import { Alert, Button, HelpText, HStack, ReadMore } from '@navikt/ds-react';
 import { Datepicker, Form, InputField, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
@@ -18,7 +18,12 @@ import {
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
-import { Inntektsmelding, ManglendeInntektsmeldingVurdering, ManueltArbeidsforhold } from '@navikt/fp-types';
+import {
+  AlleKodeverk,
+  Inntektsmelding,
+  ManglendeInntektsmeldingVurdering,
+  ManueltArbeidsforhold,
+} from '@navikt/fp-types';
 
 import { useSetDirtyForm } from '../../DirtyFormProvider';
 import { ArbeidsforholdOgInntektRadData } from '../../types/arbeidsforholdOgInntekt';
@@ -93,6 +98,7 @@ interface Props {
   oppdaterTabell: (data: (rader: ArbeidsforholdOgInntektRadData[]) => ArbeidsforholdOgInntektRadData[]) => void;
   skalViseArbeidsforholdId: boolean;
   arbeidsgiverFødselsdato?: string;
+  alleKodeverk: AlleKodeverk;
 }
 
 export const ManglendeArbeidsforholdForm = ({
@@ -109,6 +115,7 @@ export const ManglendeArbeidsforholdForm = ({
   oppdaterTabell,
   skalViseArbeidsforholdId,
   arbeidsgiverFødselsdato,
+  alleKodeverk,
 }: Props) => {
   const intl = useIntl();
 
@@ -172,24 +179,19 @@ export const ManglendeArbeidsforholdForm = ({
         saksnummer={saksnummer}
         inntektsmelding={inntektsmelding}
         skalViseArbeidsforholdId={skalViseArbeidsforholdId}
+        arbeidsgiverNavn={arbeidsgiverNavn}
         arbeidsgiverFødselsdato={arbeidsgiverFødselsdato}
+        alleKodeverk={alleKodeverk}
       />
       <VerticalSpacer fourtyPx />
-      <Alert variant="info">
+      <Alert variant="info" size="small">
         <FormattedMessage id="ManglendeOpplysningerForm.ErMottattMenIkkeReg" />
       </Alert>
       <VerticalSpacer thirtyTwoPx />
       <Form formMethods={formMethods} onSubmit={lagre}>
         <RadioGroupPanel
           name="saksbehandlersVurdering"
-          label={
-            <HStack gap="2" align="center">
-              <FormattedMessage id="ManglendeOpplysningerForm.SkalBrukeInntekstmelding" />
-              <HelpText title={intl.formatMessage({ id: 'ManglendeOpplysningerForm.AltHjelpetekst' })}>
-                <FormattedMessage id="ManglendeOpplysningerForm.Hjelpetekst" />
-              </HelpText>
-            </HStack>
-          }
+          label={<FormattedMessage id="ManglendeOpplysningerForm.SkalBrukeInntekstmelding" />}
           validate={[required]}
           isReadOnly={isReadOnly}
           radios={[
@@ -207,6 +209,9 @@ export const ManglendeArbeidsforholdForm = ({
             },
           ]}
         />
+        <ReadMore header={intl.formatMessage({ id: 'ManglendeOpplysningerForm.ReadMore.header' })}>
+          <FormattedMessage id="ManglendeOpplysningerForm.ReadMore.content" />
+        </ReadMore>
         {saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING && (
           <>
             <VerticalSpacer eightPx />

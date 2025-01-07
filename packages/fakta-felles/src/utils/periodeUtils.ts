@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { dateFormat, TIDENES_ENDE } from '@navikt/ft-utils';
 
 type Periode = { fom?: string | null; tom?: string | null };

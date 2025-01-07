@@ -3,7 +3,7 @@ import { useForm, UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { TrashFillIcon } from '@navikt/aksel-icons';
-import { Button, Heading, HStack, Spacer } from '@navikt/ds-react';
+import { Button, Heading, HStack, Spacer, VStack } from '@navikt/ds-react';
 import { Datepicker, Form, InputField, TextAreaField } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
@@ -16,7 +16,7 @@ import {
   minValue,
   required,
 } from '@navikt/ft-form-validators';
-import { OkAvbrytModal, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { OkAvbrytModal } from '@navikt/ft-ui-komponenter';
 
 import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 import { ManueltArbeidsforhold } from '@navikt/fp-types';
@@ -169,97 +169,95 @@ export const ManueltLagtTilArbeidsforholdForm = ({
   return (
     <>
       {!radData && (
-        <>
-          <Heading size="small">
-            <FormattedMessage id="LeggTilArbeidsforholdForm.LeggTilArbeidsforhold" />
-          </Heading>
-          <VerticalSpacer sixteenPx />
-        </>
+        <Heading size="small">
+          <FormattedMessage id="LeggTilArbeidsforholdForm.LeggTilArbeidsforhold" />
+        </Heading>
       )}
-      <VerticalSpacer eightPx />
       <Form formMethods={formMethods} onSubmit={lagreArbeidsforhold}>
-        <HStack gap="4">
-          {erOverstyrt && (
-            <>
-              <InputField
-                name="arbeidsgiverNavn"
-                label={<FormattedMessage id="LeggTilArbeidsforholdForm.Arbeidsgiver" />}
-                validate={[required]}
-                readOnly={isReadOnly || !erOverstyrt}
-              />
-              <Datepicker
-                name="fom"
-                label={<FormattedMessage id="LeggTilArbeidsforholdForm.PeriodeFra" />}
-                validate={[required, hasValidDate]}
-                isReadOnly={isReadOnly || !erOverstyrt}
-              />
-              <Datepicker
-                name="tom"
-                label={<FormattedMessage id="LeggTilArbeidsforholdForm.PeriodeTil" />}
-                validate={[hasValidDate, validerPeriodeRekkefølge(formMethods.getValues)]}
-                isReadOnly={isReadOnly || !erOverstyrt}
-              />
-            </>
-          )}
-          <InputField
-            name="stillingsprosent"
-            label={<FormattedMessage id="LeggTilArbeidsforholdForm.Stillingsprosent" />}
-            parse={value => {
-              const parsedValue = parseInt(value.toString(), 10);
-              return Number.isNaN(parsedValue) ? value : parsedValue;
-            }}
-            validate={[required, hasValidInteger, minValue1, maxValue100]}
-            readOnly={isReadOnly || !erOverstyrt}
-            maxLength={3}
-          />
-        </HStack>
-        <VerticalSpacer twentyPx />
-        <TextAreaField
-          label={<FormattedMessage id="LeggTilArbeidsforholdForm.Begrunn" />}
-          name="begrunnelse"
-          validate={[required, minLength3, maxLength1500, hasValidText]}
-          maxLength={1500}
-          readOnly={isReadOnly || !erOverstyrt}
-        />
-        <VerticalSpacer twentyPx />
-        {erOverstyrt && (
+        <VStack gap="5">
           <HStack gap="4">
-            <Button
-              size="small"
-              variant="secondary"
-              loading={formMethods.formState.isSubmitting}
-              disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
-            >
-              <FormattedMessage id="LeggTilArbeidsforholdForm.Lagre" />
-            </Button>
-            <Button
-              size="small"
-              variant="tertiary"
-              loading={false}
-              disabled={formMethods.formState.isSubmitting}
-              onClick={lukkRadOgResetForm}
-              type="button"
-            >
-              <FormattedMessage id="LeggTilArbeidsforholdForm.Avbryt" />
-            </Button>
-            {radData && (
+            {erOverstyrt && (
               <>
-                <Spacer />
-                <Button
-                  size="small"
-                  variant="tertiary"
-                  loading={false}
-                  disabled={formMethods.formState.isSubmitting}
-                  onClick={() => setVisSletteDialog(true)}
-                  type="button"
-                  icon={<TrashFillIcon aria-hidden />}
-                >
-                  <FormattedMessage id="LeggTilArbeidsforholdForm.Slett" />
-                </Button>
+                <InputField
+                  name="arbeidsgiverNavn"
+                  label={<FormattedMessage id="LeggTilArbeidsforholdForm.Arbeidsgiver" />}
+                  validate={[required]}
+                  readOnly={isReadOnly || !erOverstyrt}
+                />
+                <Datepicker
+                  name="fom"
+                  label={<FormattedMessage id="LeggTilArbeidsforholdForm.PeriodeFra" />}
+                  validate={[required, hasValidDate]}
+                  isReadOnly={isReadOnly || !erOverstyrt}
+                />
+                <Datepicker
+                  name="tom"
+                  label={<FormattedMessage id="LeggTilArbeidsforholdForm.PeriodeTil" />}
+                  validate={[hasValidDate, validerPeriodeRekkefølge(formMethods.getValues)]}
+                  isReadOnly={isReadOnly || !erOverstyrt}
+                />
               </>
             )}
+            <InputField
+              name="stillingsprosent"
+              label={<FormattedMessage id="LeggTilArbeidsforholdForm.Stillingsprosent" />}
+              parse={value => {
+                const parsedValue = parseInt(value.toString(), 10);
+                return Number.isNaN(parsedValue) ? value : parsedValue;
+              }}
+              validate={[required, hasValidInteger, minValue1, maxValue100]}
+              readOnly={isReadOnly || !erOverstyrt}
+              maxLength={3}
+            />
           </HStack>
-        )}
+
+          <TextAreaField
+            label={<FormattedMessage id="LeggTilArbeidsforholdForm.Begrunn" />}
+            name="begrunnelse"
+            validate={[required, minLength3, maxLength1500, hasValidText]}
+            maxLength={1500}
+            readOnly={isReadOnly || !erOverstyrt}
+          />
+
+          {erOverstyrt && (
+            <HStack gap="4">
+              <Button
+                size="small"
+                variant="secondary"
+                loading={formMethods.formState.isSubmitting}
+                disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
+              >
+                <FormattedMessage id="LeggTilArbeidsforholdForm.Lagre" />
+              </Button>
+              <Button
+                size="small"
+                variant="tertiary"
+                loading={false}
+                disabled={formMethods.formState.isSubmitting}
+                onClick={lukkRadOgResetForm}
+                type="button"
+              >
+                <FormattedMessage id="LeggTilArbeidsforholdForm.Avbryt" />
+              </Button>
+              {radData && (
+                <>
+                  <Spacer />
+                  <Button
+                    size="small"
+                    variant="tertiary"
+                    loading={false}
+                    disabled={formMethods.formState.isSubmitting}
+                    onClick={() => setVisSletteDialog(true)}
+                    type="button"
+                    icon={<TrashFillIcon aria-hidden />}
+                  >
+                    <FormattedMessage id="LeggTilArbeidsforholdForm.Slett" />
+                  </Button>
+                </>
+              )}
+            </HStack>
+          )}
+        </VStack>
       </Form>
       {visSletteDialog && (
         <OkAvbrytModal

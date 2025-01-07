@@ -1,24 +1,19 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { ChevronDownIcon, ChevronUpIcon } from '@navikt/aksel-icons';
-import { BodyShort, HStack, Label, Link, Spacer, VStack } from '@navikt/ds-react';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { formatCurrencyNoKr, ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { BodyShort, HStack, Label, Spacer, VStack } from '@navikt/ds-react';
+import { formatCurrencyNoKr, formatCurrencyWithKr, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import { AlleKodeverk, AoIArbeidsforhold, Inntektsmelding, Inntektspost } from '@navikt/fp-types';
 
+import { ExpandableContent } from './ExpandableContent';
 import { InntektsmeldingerPanel } from './InntektsmeldingerPanel';
-
-import styles from './arbeidsforholdInformasjonPanel.module.css';
 
 type ForenkletInntektspost = {
   beløp: number;
   fom: string;
 };
-
-const EMPTY_ARRAY = [] as Inntektsmelding[];
 
 const behandleInntektsposter = (
   skjæringspunktDato: string,
@@ -52,6 +47,7 @@ interface Props {
   arbeidsforholdForRad: AoIArbeidsforhold[];
   inntektsmeldingerForRad?: Inntektsmelding[];
   alleKodeverk: AlleKodeverk;
+  arbeidsgiverNavn: string;
   arbeidsgiverFødselsdato?: string;
 }
 
@@ -60,12 +56,11 @@ export const ArbeidsforholdInformasjonPanel = ({
   skjæringspunktDato,
   inntektsposter = [],
   arbeidsforholdForRad,
-  inntektsmeldingerForRad = EMPTY_ARRAY,
+  inntektsmeldingerForRad = [],
   alleKodeverk,
   arbeidsgiverFødselsdato,
+  arbeidsgiverNavn,
 }: Props) => {
-  const [visAlleMåneder, toggleMånedvisning] = useState(false);
-
   const sorterteInntektsposter = useMemo(
     () => behandleInntektsposter(skjæringspunktDato, inntektsposter),
     [inntektsposter],
@@ -82,11 +77,18 @@ export const ArbeidsforholdInformasjonPanel = ({
         arbeidsforholdForRad={arbeidsforholdForRad}
         inntektsmeldingerForRad={inntektsmeldingerForRad}
         alleKodeverk={alleKodeverk}
+        arbeidsgiverNavn={arbeidsgiverNavn}
         arbeidsgiverFødselsdato={arbeidsgiverFødselsdato}
       />
-      <VerticalSpacer sixteenPx />
+
+      {!visInntektsposter && (
+        <Label size="small">
+          <FormattedMessage id="ArbeidsforholdInformasjonPanel.IngenInntekt" />
+        </Label>
+      )}
+
       {visInntektsposter && (
-        <>
+        <VStack gap="2">
           <Label size="small">
             <FormattedMessage
               id={
@@ -96,50 +98,29 @@ export const ArbeidsforholdInformasjonPanel = ({
               }
             />
           </Label>
-          <VerticalSpacer fourPx />
-          <VStack>
-            {sorterteInntektsposter
-              .filter((_inntekt, index) => (visAlleMåneder ? true : index < 3))
-              .map(inntekt => (
-                <HStack gap="2" className={styles.bredde} key={inntekt.fom}>
-                  <BodyShort size="small">
-                    <FormattedMessage id={`ArbeidsforholdInformasjonPanel.${dayjs(inntekt.fom).month() + 1}`} />
-                  </BodyShort>
-                  <BodyShort size="small">{dayjs(inntekt.fom).year()}</BodyShort>
-                  <Spacer />
-                  <BodyShort size="small">{formatCurrencyNoKr(inntekt.beløp)}</BodyShort>
-                </HStack>
-              ))}
-          </VStack>
-          <VerticalSpacer fourPx />
-          <Link
-            onClick={e => {
-              e.preventDefault();
-              toggleMånedvisning(!visAlleMåneder);
-            }}
-            href=""
-          >
-            <span>
-              <BodyShort size="small" className={styles.inline}>
-                <FormattedMessage
-                  id={
-                    visAlleMåneder
-                      ? 'ArbeidsforholdInformasjonPanel.FaerreManeder'
-                      : 'ArbeidsforholdInformasjonPanel.TidligereManeder'
-                  }
-                />
-              </BodyShort>
-            </span>
-            {visAlleMåneder ? <ChevronUpIcon className={styles.arrow} /> : <ChevronDownIcon className={styles.arrow} />}
-          </Link>
-        </>
+
+          <ExpandableContent
+            linkTextExpanded={<FormattedMessage id="ArbeidsforholdInformasjonPanel.FaerreManeder" />}
+            linkTextClosed={<FormattedMessage id="ArbeidsforholdInformasjonPanel.TidligereManeder" />}
+            renderContent={isExpanded => (
+              <VStack maxWidth="250px" paddingBlock="2">
+                {sorterteInntektsposter
+                  .filter((_inntekt, index) => (isExpanded ? true : index < 3))
+                  .map(inntekt => (
+                    <HStack gap="2" key={inntekt.fom} style={{ borderBottom: '1px solid var(--a-border-default)' }}>
+                      <BodyShort style={{ width: '40px' }}>
+                        <FormattedMessage id={`ArbeidsforholdInformasjonPanel.${dayjs(inntekt.fom).month() + 1}`} />
+                      </BodyShort>
+                      <BodyShort>{dayjs(inntekt.fom).format('YY')}</BodyShort>
+                      <Spacer />
+                      <BodyShort>{formatCurrencyWithKr(inntekt.beløp)}</BodyShort>
+                    </HStack>
+                  ))}
+              </VStack>
+            )}
+          />
+        </VStack>
       )}
-      {!visInntektsposter && (
-        <Label size="small">
-          <FormattedMessage id="ArbeidsforholdInformasjonPanel.IngenInntekt" />
-        </Label>
-      )}
-      <VerticalSpacer thirtyTwoPx />
     </>
   );
 };

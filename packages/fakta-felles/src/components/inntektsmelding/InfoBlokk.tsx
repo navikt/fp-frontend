@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Label, VStack } from '@navikt/ds-react';
 
-export const InntektsmeldingInfoBlokk = ({ tittel, children }: { tittel: string; children: React.ReactNode }) => {
+export const InfoBlokk = ({ tittel, children }: { tittel: string | React.ReactNode; children: React.ReactNode }) => {
   return (
     <VStack>
       <Label size="medium">{tittel}</Label>

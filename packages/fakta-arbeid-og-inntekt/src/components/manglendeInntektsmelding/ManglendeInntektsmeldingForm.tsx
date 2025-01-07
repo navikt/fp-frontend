@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Alert, Button, HelpText, HStack, VStack } from '@navikt/ds-react';
+import { Alert, Button, HelpText, HStack, ReadMore, VStack } from '@navikt/ds-react';
 import { Form, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 
@@ -138,7 +138,7 @@ export const ManglendeInntektsmeldingForm = ({
     });
   }
   return (
-    <>
+    <VStack gap="8">
       <ArbeidsforholdInformasjonPanel
         saksnummer={saksnummer}
         skjæringspunktDato={skjæringspunktDato}
@@ -147,32 +147,33 @@ export const ManglendeInntektsmeldingForm = ({
         inntektsmeldingerForRad={inntektsmeldingerForRad}
         alleKodeverk={alleKodeverk}
         arbeidsgiverFødselsdato={arbeidsgiverFødselsdato}
+        arbeidsgiverNavn={radData.arbeidsgiverNavn}
       />
+
       <Form formMethods={formMethods} onSubmit={lagre}>
         <VStack gap="4">
           {!erEttArbeidsforhold && inntektsmeldingerForRad.length > 0 && (
-            <Alert variant="info">
+            <Alert variant="info" size="small">
               <FormattedMessage id="InntektsmeldingInnhentesForm.InnehentAlle" />
             </Alert>
           )}
+
           <RadioGroupPanel
             name="saksbehandlersVurdering"
-            label={
-              <HStack gap="2" align="center">
-                <FormattedMessage id="InntektsmeldingInnhentesForm.MåInnhentes" />
-                <HelpText title={intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.AltHjelpetekst' })}>
-                  <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel1" />
-                  <br />
-                  <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel2" />
-                  <br />
-                  <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel3" />
-                </HelpText>
-              </HStack>
-            }
+            label={<FormattedMessage id="InntektsmeldingInnhentesForm.MåInnhentes" />}
             validate={[required]}
             isReadOnly={isReadOnly}
             radios={radioOptions}
           />
+
+          <ReadMore header={intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.ReadMore.header' })}>
+            <FormattedMessage id="InntektsmeldingInnhentesForm.ReadMore.del1" />
+            <br />
+            <FormattedMessage id="InntektsmeldingInnhentesForm.ReadMore.del2" />
+            <br />
+            <FormattedMessage id="InntektsmeldingInnhentesForm.ReadMore.del3" />
+          </ReadMore>
+
           <TextAreaField
             label={
               <FormattedMessage
@@ -188,6 +189,7 @@ export const ManglendeInntektsmeldingForm = ({
             maxLength={1500}
             readOnly={isReadOnly}
           />
+
           {!isReadOnly && (
             <HStack gap="4">
               <Button
@@ -212,6 +214,6 @@ export const ManglendeInntektsmeldingForm = ({
           )}
         </VStack>
       </Form>
-    </>
+    </VStack>
   );
 };
