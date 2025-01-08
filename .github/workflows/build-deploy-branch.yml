@@ -19,6 +19,7 @@ jobs:
       runs-on: 'ubuntu-latest-8-cores'
       node-version: '22.6.0'
       push-image: true
+      branch: ${{ inputs.branch }}
     secrets: inherit
 
   deploy-dev:
