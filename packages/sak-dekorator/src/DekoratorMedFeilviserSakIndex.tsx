@@ -19,7 +19,7 @@ interface Props {
   tittel: string;
   tittelLenke?: string;
   tittelCallback?: (event: React.SyntheticEvent) => void;
-  navAnsattNavn?: string;
+  navAnsattNavn: string;
   feilmeldinger: Feilmelding[];
   fjernFeilmeldinger: () => void;
   setSiteHeight: (height: number) => void;
@@ -40,7 +40,7 @@ export const DekoratorMedFeilviserSakIndex = ({
   tittel,
   tittelLenke,
   tittelCallback,
-  navAnsattNavn = '',
+  navAnsattNavn,
   feilmeldinger,
   fjernFeilmeldinger,
   setSiteHeight,

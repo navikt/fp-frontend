@@ -1,1 +1,1 @@
-export { AktorSakIndex } from './src/AktorSakIndex';
+export { AktørSakIndex } from './src/AktørSakIndex';

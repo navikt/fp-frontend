@@ -1,9 +1,10 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { ChevronDownIcon } from '@navikt/aksel-icons';
 import { Button } from '@navikt/ds-react';
 import { Dropdown } from '@navikt/ds-react-internal';
+import { useQuery } from '@tanstack/react-query';
 
 import { getEndreEnhetMenytekst, getTaAvVentMenytekst, getVergeMenytekst } from '@navikt/fp-sak-meny';
 import { getMenytekst as getApneForEndringerMenytekst } from '@navikt/fp-sak-meny-apne-for-endringer';
@@ -13,7 +14,8 @@ import { getMenytekst as getNyBehandlingMenytekst } from '@navikt/fp-sak-meny-ny
 import { getMenytekst as getSettPaVentMenytekst } from '@navikt/fp-sak-meny-sett-pa-vent';
 import { Behandling, BehandlingAppKontekst, Fagsak, VergeBehandlingmenyValg } from '@navikt/fp-types';
 
-import { FagsakApiKeys, restFagsakApiHooks } from '../data/fagsakContextApi';
+import { initFetchOptions } from '../data/fagsakApi';
+import { notEmpty } from '../data/notEmpty';
 import { FagsakData } from '../fagsak/FagsakData';
 import { ApneForEndringerMenyModal } from './modaler/ApneForEndringerMenyModal';
 import { EndreBehandlendeEnhetMenyModal } from './modaler/EndreBehandlendeEnhetMenyModal';
@@ -34,6 +36,99 @@ enum ModalType {
   SETT_PÅ_VENT = 'SETT_PÅ_VENT',
   TA_AV_VENT = 'TA_AV_VENT',
 }
+
+interface Props {
+  fagsakData: FagsakData;
+  behandlingUuid?: string;
+  setBehandling: (behandling: Behandling | undefined) => void;
+  hentOgSettBehandling: () => void;
+}
+
+export const BehandlingMenuIndex = ({ fagsakData, behandlingUuid, setBehandling, hentOgSettBehandling }: Props) => {
+  const initFetchQuery = useQuery(initFetchOptions());
+  const { innloggetBruker: navAnsatt } = notEmpty(initFetchQuery.data);
+
+  const [valgtModal, setValgtModal] = useState<string | undefined>();
+  const lukkModal = () => setValgtModal(undefined);
+
+  const fagsak = fagsakData.getFagsak();
+  const behandling = fagsakData.getBehandling(behandlingUuid);
+
+  const menyData = hentMenyData(behandling, fagsak);
+
+  if (navAnsatt.kanVeilede) {
+    return null;
+  }
+
+  return (
+    <>
+      <Dropdown>
+        <Button
+          size="small"
+          as={Dropdown.Toggle}
+          iconPosition="right"
+          variant="secondary"
+          icon={<ChevronDownIcon aria-hidden />}
+        >
+          <FormattedMessage id="BehandlingMenuIndex.Behandlingsmeny" />
+        </Button>
+        <Dropdown.Menu>
+          <Dropdown.Menu.List>
+            {Object.keys(menyData)
+              .filter(key => !menyData[key].disabled)
+              .map(key => (
+                <Dropdown.Menu.List.Item
+                  key={key}
+                  onClick={() => {
+                    setValgtModal(key);
+                  }}
+                >
+                  {menyData[key].text}
+                </Dropdown.Menu.List.Item>
+              ))}
+          </Dropdown.Menu.List>
+        </Dropdown.Menu>
+      </Dropdown>
+      {valgtModal === ModalType.NY_BEHANDLING && (
+        <NyBehandlingMenyModal fagsakData={fagsakData} behandlingUuid={behandlingUuid} lukkModal={lukkModal} />
+      )}
+      {valgtModal === ModalType.ENDRE_FAGSAK_MARKERING && (
+        <EndreFagsakMarkeringMenyModal
+          saksnummer={fagsak.saksnummer}
+          fagsakMarkeringer={fagsak.fagsakMarkeringer}
+          hentOgSettBehandling={hentOgSettBehandling}
+          lukkModal={lukkModal}
+        />
+      )}
+      {valgtModal === ModalType.VERGE && behandling && (
+        <VergeMenyModal fagsak={fagsak} behandling={behandling} setBehandling={setBehandling} lukkModal={lukkModal} />
+      )}
+      {valgtModal === ModalType.ÅPNE_FOR_ENDRINGER && behandling && (
+        <ApneForEndringerMenyModal behandling={behandling} setBehandling={setBehandling} lukkModal={lukkModal} />
+      )}
+      {valgtModal === ModalType.ENDRE_BEHANDLENDE_ENHET && behandling && (
+        <EndreBehandlendeEnhetMenyModal
+          behandling={behandling}
+          hentOgSettBehandling={hentOgSettBehandling}
+          lukkModal={lukkModal}
+        />
+      )}
+      {valgtModal === ModalType.HENLEGG && behandling && (
+        <HenleggMenyModal behandling={behandling} fagsakYtelseType={fagsak.fagsakYtelseType} lukkModal={lukkModal} />
+      )}
+      {valgtModal === ModalType.SETT_PÅ_VENT && behandling && (
+        <SettPaVentMenyModal
+          behandling={behandling}
+          hentOgSettBehandling={hentOgSettBehandling}
+          lukkModal={lukkModal}
+        />
+      )}
+      {valgtModal === ModalType.TA_AV_VENT && behandling && (
+        <TaAvVentMenyModal behandling={behandling} setBehandling={setBehandling} lukkModal={lukkModal} />
+      )}
+    </>
+  );
+};
 
 const hentMenyData = (behandling: BehandlingAppKontekst | undefined, fagsak: Fagsak) => {
   const erPaVent = behandling ? behandling.behandlingPaaVent : false;
@@ -79,105 +174,4 @@ const hentMenyData = (behandling: BehandlingAppKontekst | undefined, fagsak: Fag
       text: getVergeMenytekst(skalViseOpprettVerge),
     },
   } as Record<string, { disabled: boolean; text: string }>;
-};
-
-interface Props {
-  fagsakData: FagsakData;
-  behandlingUuid?: string;
-  setBehandling: (behandling: Behandling | undefined) => void;
-  hentOgSettBehandling: () => void;
-  oppdaterFagsak: () => void;
-}
-
-export const BehandlingMenuIndex = ({
-  fagsakData,
-  behandlingUuid,
-  setBehandling,
-  hentOgSettBehandling,
-  oppdaterFagsak,
-}: Props) => {
-  const initFetchData = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
-  const { innloggetBruker: navAnsatt } = initFetchData;
-
-  const [valgtModal, setValgtModal] = useState<string | undefined>();
-  const lukkModal = useCallback(() => setValgtModal(undefined), []);
-
-  const fagsak = fagsakData.getFagsak();
-  const behandling = fagsakData.getBehandling(behandlingUuid);
-
-  const menyData = useMemo(() => hentMenyData(behandling, fagsak), [behandling, fagsak]);
-
-  if (navAnsatt.kanVeilede) {
-    return null;
-  }
-
-  return (
-    <>
-      <Dropdown>
-        <Button
-          size="small"
-          as={Dropdown.Toggle}
-          iconPosition="right"
-          variant="secondary"
-          icon={<ChevronDownIcon aria-hidden />}
-        >
-          <FormattedMessage id="BehandlingMenuIndex.Behandlingsmeny" />
-        </Button>
-        <Dropdown.Menu>
-          <Dropdown.Menu.List>
-            {Object.keys(menyData)
-              .filter(key => !menyData[key].disabled)
-              .map(key => (
-                <Dropdown.Menu.List.Item
-                  key={key}
-                  onClick={() => {
-                    setValgtModal(key);
-                  }}
-                >
-                  {menyData[key].text}
-                </Dropdown.Menu.List.Item>
-              ))}
-          </Dropdown.Menu.List>
-        </Dropdown.Menu>
-      </Dropdown>
-      {valgtModal === ModalType.NY_BEHANDLING && (
-        <NyBehandlingMenyModal fagsakData={fagsakData} behandlingUuid={behandlingUuid} lukkModal={lukkModal} />
-      )}
-      {valgtModal === ModalType.ENDRE_FAGSAK_MARKERING && (
-        <EndreFagsakMarkeringMenyModal
-          saksnummer={fagsak.saksnummer}
-          fagsakMarkeringer={fagsak.fagsakMarkeringer}
-          oppdaterFagsak={oppdaterFagsak}
-          hentOgSettBehandling={hentOgSettBehandling}
-          lukkModal={lukkModal}
-        />
-      )}
-      {valgtModal === ModalType.VERGE && behandling && (
-        <VergeMenyModal fagsak={fagsak} behandling={behandling} setBehandling={setBehandling} lukkModal={lukkModal} />
-      )}
-      {valgtModal === ModalType.ÅPNE_FOR_ENDRINGER && behandling && (
-        <ApneForEndringerMenyModal behandling={behandling} setBehandling={setBehandling} lukkModal={lukkModal} />
-      )}
-      {valgtModal === ModalType.ENDRE_BEHANDLENDE_ENHET && behandling && (
-        <EndreBehandlendeEnhetMenyModal
-          behandling={behandling}
-          hentOgSettBehandling={hentOgSettBehandling}
-          lukkModal={lukkModal}
-        />
-      )}
-      {valgtModal === ModalType.HENLEGG && behandling && (
-        <HenleggMenyModal behandling={behandling} fagsakYtelseType={fagsak.fagsakYtelseType} lukkModal={lukkModal} />
-      )}
-      {valgtModal === ModalType.SETT_PÅ_VENT && behandling && (
-        <SettPaVentMenyModal
-          behandling={behandling}
-          hentOgSettBehandling={hentOgSettBehandling}
-          lukkModal={lukkModal}
-        />
-      )}
-      {valgtModal === ModalType.TA_AV_VENT && behandling && (
-        <TaAvVentMenyModal behandling={behandling} setBehandling={setBehandling} lukkModal={lukkModal} />
-      )}
-    </>
-  );
 };

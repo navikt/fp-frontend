@@ -1,8 +1,9 @@
-import React, { useCallback, useEffect,useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Link, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 
 import { Heading } from '@navikt/ds-react';
+import { useMutation } from '@tanstack/react-query';
 
 import { OppgaveJournalføringIndex } from '@navikt/fp-journalforing';
 import { AvdelingslederIndex } from '@navikt/fp-los-avdelingsleder';
@@ -12,8 +13,8 @@ import { NotFoundPage } from '@navikt/fp-sak-infosider';
 import { NavAnsatt } from '@navikt/fp-types';
 import { UtbetalingsdataIs15Index } from '@navikt/fp-utbetalingsdata-is15';
 
-import { AktoerIndex } from '../../aktoer/AktoerIndex';
-import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
+import { AktørIndex } from '../../aktoer/AktørIndex';
+import { useFagsakApi } from '../../data/fagsakApi';
 import { FagsakIndex } from '../../fagsak/FagsakIndex';
 import { FagsakSearchIndex } from '../../fagsakSearch/FagsakSearchIndex';
 import {
@@ -39,12 +40,13 @@ interface Props {
  */
 export const Home = ({ headerHeight, navAnsatt }: Props) => {
   const intl = useIntl();
+  const { søkInfotrygd } = useFagsakApi();
   const { addErrorMessage, removeErrorMessages } = useRestApiErrorDispatcher();
 
   const [erLosTilgjengelig, setLosErTilgjengelig] = useState(true);
-  const setLosErIkkeTilgjengelig = useCallback(() => {
+  const setLosErIkkeTilgjengelig = () => {
     setLosErTilgjengelig(false);
-  }, []);
+  };
 
   useEffect(() => {
     if (!erLosTilgjengelig) {
@@ -53,12 +55,9 @@ export const Home = ({ headerHeight, navAnsatt }: Props) => {
   }, [erLosTilgjengelig]);
 
   const navigate = useNavigate();
-  const åpneFagsak = useCallback(
-    (saksnummer: string, behandlingUuid?: string) => {
-      navigate(getFagsakHref(saksnummer, behandlingUuid));
-    },
-    [navigate],
-  );
+  const åpneFagsak = (saksnummer: string, behandlingUuid?: string) => {
+    navigate(getFagsakHref(saksnummer, behandlingUuid));
+  };
 
   const location = useLocation();
   useEffect(() => {
@@ -69,10 +68,13 @@ export const Home = ({ headerHeight, navAnsatt }: Props) => {
   }, [location]);
 
   const {
-    startRequest: søkInfotrygVedtak,
-    state: infotrygdVedtakState,
+    mutate: søkInfotrygVedtak,
+    isPending: søkInfotrygdIsPending,
+    isSuccess: søkInfotrygdIsSuccess,
     data: infotrygdVedtak,
-  } = restFagsakApiHooks.useRestApiRunner(FagsakApiKeys.SEARCH_UTBETALINGSDATA_IS15);
+  } = useMutation({
+    mutationFn: (valuesToSave: { searchString: string }) => søkInfotrygd(valuesToSave.searchString),
+  });
 
   return (
     <div className={styles.content} style={{ margin: `${headerHeight}px auto 0` }}>
@@ -109,13 +111,14 @@ export const Home = ({ headerHeight, navAnsatt }: Props) => {
           element={
             <UtbetalingsdataIs15Index
               søkInfotrygdVedtak={søkInfotrygVedtak}
-              infotrygdVedtakState={infotrygdVedtakState}
+              isPending={søkInfotrygdIsPending}
+              isSuccess={søkInfotrygdIsSuccess}
               infotrygdVedtak={infotrygdVedtak}
             />
           }
         />
         <Route path={fagsakRoutePath} element={<FagsakIndex />} />
-        <Route path={aktoerRoutePath} element={<AktoerIndex />} />
+        <Route path={aktoerRoutePath} element={<AktørIndex />} />
         <Route path="*" element={<NotFoundPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />} />
       </Routes>
     </div>

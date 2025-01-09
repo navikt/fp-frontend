@@ -1,8 +1,8 @@
-import React, { useCallback, useEffect,useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
-import { Navigate, Route, Routes,useLocation } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 
-import { DataFetchPendingModal,LoadingPanel } from '@navikt/ft-ui-komponenter';
+import { DataFetchPendingModal, LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { Location } from 'history';
 
 import { BehandlingType } from '@navikt/fp-kodeverk';
@@ -22,7 +22,6 @@ import { useTrackRouteParam } from '../app/useTrackRouteParam';
 import { BehandlingerIndex } from '../behandling/BehandlingerIndex';
 import { BehandlingSupportIndex } from '../behandlingsupport/BehandlingSupportIndex';
 import { BehandlingApiKeys, requestBehandlingApi, restBehandlingApiHooks } from '../data/behandlingContextApi';
-import { requestFagsakApi } from '../data/fagsakContextApi';
 import { FagsakProfileIndex } from '../fagsakprofile/FagsakProfileIndex';
 import { FagsakGrid } from './components/FagsakGrid';
 import { useHentFagsak } from './useHentFagsak';
@@ -51,24 +50,17 @@ export const FagsakIndex = () => {
 
   const [behandlingUuid, setBehandlingUuid] = useState<string | undefined>();
   const [behandling, setBehandling] = useState<Behandling>();
-  const resetApiOgSettBehandling = useCallback(
-    (hentetBehandling: Behandling | undefined) => {
-      if (hentetBehandling) {
-        requestBehandlingApi.resetCache();
-        requestBehandlingApi.resetLinks();
-        requestBehandlingApi.setLinks(hentetBehandling.links);
+  const resetApiOgSettBehandling = (hentetBehandling: Behandling | undefined) => {
+    if (hentetBehandling) {
+      requestBehandlingApi.resetCache();
+      requestBehandlingApi.resetLinks();
+      requestBehandlingApi.setLinks(hentetBehandling.links);
 
-        setBehandling(hentetBehandling);
-      }
-    },
-    [requestFagsakApi, requestBehandlingApi],
-  );
+      setBehandling(hentetBehandling);
+    }
+  };
 
-  const [harHentetFagsak, fagsakData, oppdaterFagsak] = useHentFagsak(
-    selectedSaksnummer,
-    behandlingUuid,
-    behandling?.versjon,
-  );
+  const [harHentetFagsak, fagsakData] = useHentFagsak(selectedSaksnummer, behandlingUuid, behandling?.versjon);
 
   const fagsakBehandling = fagsakData?.getBehandling(behandlingUuid);
   const erTilbakekreving =
@@ -80,29 +72,24 @@ export const FagsakIndex = () => {
     BehandlingApiKeys.BEHANDLING_TILBAKE,
   );
 
-  const hentOgSettBehandling = useCallback(
-    (keepData = false) => {
-      if (behandlingUuid && fagsakBehandling) {
-        if (erTilbakekreving) {
-          hentTilbakekrevingBehandling({ behandlingUuid }, keepData).then(resetApiOgSettBehandling);
-        } else {
-          hentBehandling({ behandlingUuid }, keepData).then(resetApiOgSettBehandling);
-        }
+  const hentOgSettBehandling = (keepData = false) => {
+    if (behandlingUuid && fagsakBehandling) {
+      if (erTilbakekreving) {
+        hentTilbakekrevingBehandling({ behandlingUuid }, keepData).then(resetApiOgSettBehandling);
+      } else {
+        hentBehandling({ behandlingUuid }, keepData).then(resetApiOgSettBehandling);
       }
-    },
-    [behandlingUuid, fagsakBehandling],
-  );
+    }
+  };
 
   useEffect(() => {
     if (behandlingUuid) {
       hentOgSettBehandling();
     }
-  }, [behandlingUuid, hentOgSettBehandling]);
+  }, [behandlingUuid, fagsakBehandling?.uuid]);
 
   useEffect(
     () => () => {
-      requestFagsakApi.resetCache();
-      requestFagsakApi.resetLinks();
       requestBehandlingApi.resetCache();
       requestBehandlingApi.resetLinks();
     },
@@ -152,7 +139,6 @@ export const FagsakIndex = () => {
             setBehandling={resetApiOgSettBehandling}
             hentOgSettBehandling={hentOgSettBehandling}
             behandlingVersjon={behandling?.versjon}
-            oppdaterFagsak={oppdaterFagsak}
           />
         }
         supportContent={
@@ -161,7 +147,6 @@ export const FagsakIndex = () => {
             behandlingUuid={behandlingUuid}
             behandlingVersjon={behandling?.versjon}
             hentOgSettBehandling={hentOgSettBehandling}
-            oppdaterFagsak={oppdaterFagsak}
           />
         }
         visittkortContent={() => {

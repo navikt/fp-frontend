@@ -1,108 +1,34 @@
-import React from 'react';
-import { RawIntlProvider } from 'react-intl';
-import { MemoryRouter } from 'react-router-dom';
-
-import { createIntl } from '@navikt/ft-utils';
+import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
+import { applyRequestHandlers } from 'msw-storybook-addon';
 
-import { BehandlingStatus, BehandlingType, FagsakStatus,FagsakYtelseType } from '@navikt/fp-kodeverk';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import { BehandlingAppKontekst, BehandlingOppretting,Fagsak } from '@navikt/fp-types';
-import { RestApiMock } from '@navikt/fp-utils-test';
+import * as stories from './FagsakProfileIndex.stories';
 
-import { FagsakApiKeys,requestFagsakApi } from '../data/fagsakContextApi';
-import { FagsakData } from '../fagsak/FagsakData';
-import { FagsakProfileIndex } from './FagsakProfileIndex';
+const { BehandlingErValgt, BehandlingErIkkeValgt } = composeStories(stories);
 
-import messages from '../../i18n/nb_NO.json';
+describe('FagsakProfileIndex', () => {
+  it('skal vise en behandling i liste når behandling er valgt', async () => {
+    await applyRequestHandlers(BehandlingErValgt.parameters.msw);
+    render(<BehandlingErValgt />);
 
-describe('<FagsakProfileIndex>', () => {
-  const behandling = {
-    uuid: 'test',
-    type: BehandlingType.FORSTEGANGSSOKNAD,
-    status: BehandlingStatus.OPPRETTET,
-    behandlendeEnhetId: 'test',
-    behandlendeEnhetNavn: 'Nav Vikafossen',
-    opprettet: '2017-08-02T00:54:25.455',
-  } as BehandlingAppKontekst;
+    expect(await screen.findByText('Foreldrepenger')).toBeInTheDocument();
+    expect(screen.getByText('123 - Under behandling')).toBeInTheDocument();
+    expect(screen.getByText('Behandlingsmeny')).toBeInTheDocument();
+    expect(screen.getByText('Venter på mulige faresignaler')).toBeInTheDocument();
+    expect(screen.getByText('Finn søker andre steder')).toBeInTheDocument();
 
-  const fagsak = {
-    saksnummer: '123',
-    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
-    status: FagsakStatus.OPPRETTET,
-    behandlinger: [behandling] as BehandlingAppKontekst[],
-    behandlingTypeKanOpprettes: [] as BehandlingOppretting[],
-    brukerManglerAdresse: false,
-    bruker: {
-      navn: 'Espen Utvikler',
-      fødselsnummer: '123456',
-      kjønn: 'M',
-      fødselsdato: '2000-01-01',
-    },
-    fagsakMarkeringer: undefined,
-  } as Fagsak;
-
-  const navAnsatt = {
-    brukernavn: 'Peder',
-    kanBehandleKode6: false,
-    kanOverstyre: false,
-    kanSaksbehandle: true,
-    kanVeilede: false,
-    navn: 'Peder Pjokk',
-  };
-
-  const intl = createIntl(messages);
-
-  it('skal rendre komponent og vise alle behandlinger når ingen behandling er valgt', async () => {
-    const data = [
-      { key: FagsakApiKeys.KODEVERK.name, global: true, data: alleKodeverk },
-      { key: FagsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: {} },
-      { key: FagsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt } },
-    ];
-
-    render(
-      <RawIntlProvider value={intl}>
-        <RestApiMock data={data} requestApi={requestFagsakApi}>
-          <MemoryRouter>
-            <FagsakProfileIndex
-              fagsakData={new FagsakData(fagsak)}
-              hentOgSettBehandling={vi.fn()}
-              setBehandling={vi.fn()}
-              oppdaterFagsak={vi.fn()}
-            />
-          </MemoryRouter>
-        </RestApiMock>
-      </RawIntlProvider>,
-    );
-
-    expect(await screen.findByText('123 - Opprettet')).toBeInTheDocument();
     expect(screen.getByText('Førstegangsbehandling')).toBeInTheDocument();
+    expect(screen.queryByText('Revurdering')).not.toBeInTheDocument();
   });
 
-  it('skal ikke vise alle behandlinger når behandling er valgt', async () => {
-    const data = [
-      { key: FagsakApiKeys.KODEVERK.name, global: true, data: alleKodeverk },
-      { key: FagsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: {} },
-      { key: FagsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt } },
-    ];
+  it('skal vise alle behandlinger i liste når ingen behandling er valgt', async () => {
+    await applyRequestHandlers(BehandlingErIkkeValgt.parameters.msw);
+    render(<BehandlingErIkkeValgt />);
 
-    render(
-      <RawIntlProvider value={intl}>
-        <RestApiMock data={data} requestApi={requestFagsakApi}>
-          <MemoryRouter>
-            <FagsakProfileIndex
-              fagsakData={new FagsakData(fagsak)}
-              hentOgSettBehandling={vi.fn()}
-              setBehandling={vi.fn()}
-              oppdaterFagsak={vi.fn()}
-              behandlingUuid="1"
-            />
-          </MemoryRouter>
-        </RestApiMock>
-      </RawIntlProvider>,
-    );
+    expect(await screen.findByText('Foreldrepenger')).toBeInTheDocument();
+    expect(screen.getByText('123 - Under behandling')).toBeInTheDocument();
 
-    expect(await screen.findByText('123 - Opprettet')).toBeInTheDocument();
-    expect(screen.queryByText('Førstegangsbehandling')).not.toBeInTheDocument();
+    expect(screen.getByText('Førstegangsbehandling')).toBeInTheDocument();
+    expect(screen.getByText('Revurdering')).toBeInTheDocument();
   });
 });

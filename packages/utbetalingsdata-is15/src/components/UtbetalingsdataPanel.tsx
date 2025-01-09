@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { ExpansionCard, Heading,HStack, Search, VStack } from '@navikt/ds-react';
+import { ExpansionCard, Heading, HStack, Search, VStack } from '@navikt/ds-react';
 import { DateLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { isValidFodselsnummer } from '@navikt/ft-utils';
 
-import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { InfotrygdVedtak } from '@navikt/fp-types';
 
 import { SakerPanel } from './SakerPanel';
@@ -16,12 +15,13 @@ import styles from './utbetalingsdataPanel.module.css';
 const FORELDREPENGER_KODER = ['AP', 'FØ'];
 
 interface Props {
-  søkInfotrygdVedtak: (params: { searchString: string }) => Promise<InfotrygdVedtak | undefined>;
-  infotrygdVedtakState: RestApiState;
+  søkInfotrygdVedtak: (params: { searchString: string }) => void;
+  isPending: boolean;
+  isSuccess: boolean;
   infotrygdVedtak?: InfotrygdVedtak;
 }
 
-export const UtbetalingsdataPanel = ({ søkInfotrygdVedtak, infotrygdVedtakState, infotrygdVedtak }: Props) => {
+export const UtbetalingsdataPanel = ({ søkInfotrygdVedtak, isPending, isSuccess, infotrygdVedtak }: Props) => {
   const intl = useIntl();
 
   const [error, setError] = useState<string>();
@@ -51,10 +51,10 @@ export const UtbetalingsdataPanel = ({ søkInfotrygdVedtak, infotrygdVedtakState
           onSearchClick={startSøk}
           autoComplete="off"
         >
-          <Search.Button type="button" loading={infotrygdVedtakState === RestApiState.LOADING} />
+          <Search.Button type="button" loading={isPending} />
         </Search>
       </div>
-      {infotrygdVedtakState === RestApiState.SUCCESS && infotrygdVedtak && !error && (
+      {isSuccess && infotrygdVedtak && !error && (
         <>
           <VerticalSpacer sixteenPx />
           <Heading size="small">

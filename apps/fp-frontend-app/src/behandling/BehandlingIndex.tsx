@@ -1,6 +1,7 @@
-import React, { Suspense, useEffect, useMemo } from 'react';
+import { Suspense, useEffect } from 'react';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
+import { useQuery } from '@tanstack/react-query';
 
 import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 import { Behandling } from '@navikt/fp-types';
@@ -9,7 +10,8 @@ import { ErrorBoundary } from '../app/ErrorBoundary';
 import { useTrackRouteParam } from '../app/useTrackRouteParam';
 import { getAccessRights } from '../app/util/access';
 import { requestBehandlingApi } from '../data/behandlingContextApi';
-import { FagsakApiKeys, restFagsakApiHooks } from '../data/fagsakContextApi';
+import { initFetchOptions, useFagsakApi } from '../data/fagsakApi';
+import { notEmpty } from '../data/notEmpty';
 import { FagsakData } from '../fagsak/FagsakData';
 import { BehandlingPanelerIndex } from './BehandlingPanelerIndex';
 import { lazyWithRetry } from './lazyUtils';
@@ -54,13 +56,17 @@ export const BehandlingIndex = ({
     setBehandlingUuid(behandlingUuid);
   }, [behandlingUuid]);
 
-  const kodeverk = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK);
-  const initFetchData = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
+  const api = useFagsakApi();
+
+  const { data: kodeverk } = useQuery(api.kodeverkOptions());
+  const initFetchQuery = useQuery(initFetchOptions());
 
   const fagsak = fagsakData.getFagsak();
-  const rettigheter = useMemo(
-    () => getAccessRights(initFetchData.innloggetBruker, fagsak.status, behandling?.status, behandling?.type),
-    [fagsak.status, behandling?.uuid, behandling?.status, behandling?.type],
+  const rettigheter = getAccessRights(
+    notEmpty(initFetchQuery.data).innloggetBruker,
+    fagsak.status,
+    behandling?.status,
+    behandling?.type,
   );
 
   if (!behandling) {
@@ -89,7 +95,7 @@ export const BehandlingIndex = ({
       <BehandlingPanelerIndex
         key={behandling.uuid}
         behandling={behandling}
-        kodeverk={kodeverk}
+        kodeverk={notEmpty(kodeverk)}
         fagsak={fagsak}
         rettigheter={rettigheter}
         setBehandling={setBehandling}

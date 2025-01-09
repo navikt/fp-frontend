@@ -4,10 +4,9 @@ import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 import { http, HttpResponse } from 'msw';
 
-import { alleKodeverkLos, getIntlDecorator } from '@navikt/fp-storybook-utils';
+import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { LosUrl } from '../data/fplosAvdelingslederApi';
-import { withQueryClient } from '../data/withQueryClientProvider';
 import { GjeldendeSakslisterTabell } from './GjeldendeSakslisterTabell';
 
 import messages from '../../i18n/nb_NO.json';

@@ -1,15 +1,14 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 
-import { LoadingPanel, usePrevious,VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { LoadingPanel, usePrevious, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { useQuery } from '@tanstack/react-query';
 
 import { hentDokumentLenke } from '@navikt/fp-konstanter';
-import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { DokumenterSakIndex } from '@navikt/fp-sak-dokumenter';
 import { Dokument } from '@navikt/fp-types';
 
-import { useBehandlingEndret } from '../../behandling/useBehandlingEndret';
-import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
+import { useFagsakApi } from '../../data/fagsakApi';
 import { SupportHeaderAndContent } from '../SupportHeader';
 
 const selectDocument =
@@ -47,28 +46,23 @@ const EMPTY_ARRAY = [] as Dokument[];
 /**
  * DokumentIndex
  *
- * Container komponent. Har ansvar for å hente sakens dokumenter fra state og rendre det i en liste.
+ *  Har ansvar for å hente sakens dokumenter fra state og rendre det i en liste.
  */
 export const DokumentIndex = ({ behandlingUuid, behandlingVersjon, saksnummer }: Props) => {
+  const api = useFagsakApi();
   const intl = useIntl();
   const forrigeSaksnummer = usePrevious(saksnummer);
-  const erBehandlingEndretFraUndefined = useBehandlingEndret(behandlingUuid, behandlingVersjon);
 
-  const { data: alleDokumenter = EMPTY_ARRAY, state } = restFagsakApiHooks.useRestApi(
-    FagsakApiKeys.ALL_DOCUMENTS,
-    { saksnummer },
-    {
-      updateTriggers: [behandlingUuid, behandlingVersjon],
-      suspendRequest: !!forrigeSaksnummer && erBehandlingEndretFraUndefined,
-      keepData: true,
-    },
+  const isEnabled = !forrigeSaksnummer;
+  const { data: alleDokumenter = EMPTY_ARRAY, status } = useQuery(
+    api.hentDokumenter(isEnabled, saksnummer, behandlingUuid, behandlingVersjon),
   );
 
-  const sorterteDokumenter = useMemo(() => [...alleDokumenter].sort(sorterDokumenter), [alleDokumenter]);
-
-  if (state === RestApiState.LOADING) {
+  if (status === 'pending') {
     return <LoadingPanel />;
   }
+
+  const sorterteDokumenter = alleDokumenter.toSorted(sorterDokumenter);
 
   return (
     <SupportHeaderAndContent

@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
@@ -6,7 +6,7 @@ import { createIntl } from '@navikt/ft-utils';
 import { BehandlingType } from '@navikt/fp-kodeverk';
 import { KodeverkMedNavn } from '@navikt/fp-types';
 
-import { BehandlingOppretting, FormValues,NyBehandlingModal } from './components/NyBehandlingModal';
+import { BehandlingOppretting, FormValues, NyBehandlingModal } from './components/NyBehandlingModal';
 
 import messages from '../i18n/nb_NO.json';
 
@@ -20,14 +20,13 @@ interface Props {
   ytelseType: string;
   saksnummer: string;
   behandlingUuid?: string;
-  behandlingVersjon?: number;
-  lagNyBehandling: (
-    isTilbakekreving: boolean,
-    data: {
+  lagNyBehandling: (values: {
+    isTilbakekreving: boolean;
+    params: {
       saksnummer: string;
       behandlingUuid?: string;
-    } & FormValues,
-  ) => void;
+    } & FormValues;
+  }) => void;
   behandlingstyper: KodeverkMedNavn[];
   tilbakekrevingRevurderingArsaker: KodeverkMedNavn[];
   revurderingArsaker: KodeverkMedNavn[];
@@ -40,31 +39,21 @@ interface Props {
   lukkModal: () => void;
 }
 
-export const MenyNyBehandlingIndex = ({
-  saksnummer,
-  behandlingUuid,
-  behandlingVersjon,
-  lagNyBehandling,
-  lukkModal,
-  ...rest
-}: Props) => {
-  const submit = useCallback(
-    (formValues: FormValues) => {
-      const isTilbakekreving =
-        !!formValues.behandlingType && TILBAKEKREVING_BEHANDLINGSTYPER.some(bt => bt === formValues.behandlingType);
-      const tilbakekrevingBehandlingUuid = behandlingUuid && isTilbakekreving ? { behandlingUuid } : {};
-      const params = {
-        saksnummer,
-        ...tilbakekrevingBehandlingUuid,
-        ...formValues,
-      };
+export const MenyNyBehandlingIndex = ({ saksnummer, behandlingUuid, lagNyBehandling, lukkModal, ...rest }: Props) => {
+  const submit = (formValues: FormValues) => {
+    const isTilbakekreving =
+      !!formValues.behandlingType && TILBAKEKREVING_BEHANDLINGSTYPER.some(bt => bt === formValues.behandlingType);
+    const tilbakekrevingBehandlingUuid = behandlingUuid && isTilbakekreving ? { behandlingUuid } : {};
+    const params = {
+      saksnummer,
+      ...tilbakekrevingBehandlingUuid,
+      ...formValues,
+    };
 
-      lagNyBehandling(isTilbakekreving, params);
+    lagNyBehandling({ isTilbakekreving, params });
 
-      lukkModal();
-    },
-    [behandlingUuid, behandlingVersjon],
-  );
+    lukkModal();
+  };
   return (
     <RawIntlProvider value={intl}>
       <NyBehandlingModal cancelEvent={lukkModal} submitCallback={submit} {...rest} />

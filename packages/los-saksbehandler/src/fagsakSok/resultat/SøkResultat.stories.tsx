@@ -7,11 +7,10 @@ import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 
 import { BehandlingStatus, BehandlingType, FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
-import { alleKodeverkLos, getIntlDecorator } from '@navikt/fp-storybook-utils';
+import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 import { KjønnkodeEnum } from '@navikt/fp-types';
 
 import { losKodeverkOptions, LosUrl } from '../../data/fplosSaksbehandlerApi';
-import { withQueryClient } from '../../data/withQueryClientProvider';
 import { SøkResultat } from './SøkResultat';
 
 import messages from '../../../i18n/nb_NO.json';

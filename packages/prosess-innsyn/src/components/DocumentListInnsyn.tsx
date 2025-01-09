@@ -52,7 +52,7 @@ interface OwnProps {
  * trigget når saksbehandler velger et dokument. Finnes ingen dokumenter blir det kun vist en label
  * som viser at ingen dokumenter finnes på fagsak.
  */
-const DocumentListInnsyn: FunctionComponent<OwnProps> = ({ documents, saksNr, readOnly }) => {
+const DocumentListInnsyn: FunctionComponent<OwnProps> = ({ documents, saksNr, readOnly = false }) => {
   const intl = useIntl();
   if (documents.length === 0) {
     return (
@@ -110,10 +110,6 @@ const DocumentListInnsyn: FunctionComponent<OwnProps> = ({ documents, saksNr, re
       </Table>
     </>
   );
-};
-
-DocumentListInnsyn.defaultProps = {
-  readOnly: false,
 };
 
 export default DocumentListInnsyn;

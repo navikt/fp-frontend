@@ -1,5 +1,3 @@
-import React, { useCallback } from 'react';
-
 import { MenyTaAvVentIndex } from '@navikt/fp-sak-meny';
 import { Behandling, BehandlingAppKontekst } from '@navikt/fp-types';
 
@@ -16,12 +14,12 @@ export const TaAvVentMenyModal = ({ behandling, setBehandling, lukkModal }: Prop
     BehandlingApiKeys.RESUME_BEHANDLING,
   );
 
-  const taBehandlingAvVentOgOppdaterBehandling = useCallback(() => {
+  const taBehandlingAvVentOgOppdaterBehandling = () => {
     taBehandlingAvVent({
       behandlingUuid: behandling.uuid,
       behandlingVersjon: behandling.versjon,
     }).then(setBehandling);
-  }, [behandling]);
+  };
 
   return (
     <MenyTaAvVentIndex

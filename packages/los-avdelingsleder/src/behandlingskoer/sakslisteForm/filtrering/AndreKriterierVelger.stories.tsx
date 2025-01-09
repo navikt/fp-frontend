@@ -7,10 +7,9 @@ import { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 
-import { alleKodeverkLos, getIntlDecorator } from '@navikt/fp-storybook-utils';
+import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { losKodeverkOptions, LosUrl } from '../../../data/fplosAvdelingslederApi';
-import { withQueryClient } from '../../../data/withQueryClientProvider';
 import { AndreKriterierType } from '../../../kodeverk/andreKriterierType';
 import { AndreKriterierVelger } from './AndreKriterierVelger';
 

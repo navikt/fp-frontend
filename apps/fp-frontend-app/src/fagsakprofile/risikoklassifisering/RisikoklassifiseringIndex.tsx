@@ -1,15 +1,18 @@
-import React, { useCallback, useEffect, useMemo } from 'react';
-import { useLocation,useNavigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+
+import { useQuery } from '@tanstack/react-query';
 
 import { AksjonspunktStatus, KodeverkType } from '@navikt/fp-kodeverk';
-import { AvklartRisikoklassifiseringAp,RisikoklassifiseringSakIndex } from '@navikt/fp-sak-risikoklassifisering';
-import { AksessRettigheter, Behandling,NavAnsatt } from '@navikt/fp-types';
+import { AvklartRisikoklassifiseringAp, RisikoklassifiseringSakIndex } from '@navikt/fp-sak-risikoklassifisering';
+import { AksessRettigheter, Behandling, NavAnsatt } from '@navikt/fp-types';
 
 import { getRiskPanelLocationCreator } from '../../app/paths';
 import { useTrackRouteParam } from '../../app/useTrackRouteParam';
 import { getAccessRights } from '../../app/util/access';
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../../data/behandlingContextApi';
-import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
+import { initFetchOptions, useFagsakApi } from '../../data/fagsakApi';
+import { notEmpty } from '../../data/notEmpty';
 import { FagsakData } from '../../fagsak/FagsakData';
 
 const getReadOnly = (navAnsatt: NavAnsatt, rettigheter: AksessRettigheter, erPaaVent: boolean) => {
@@ -56,18 +59,17 @@ export const RisikoklassifiseringIndex = ({ fagsakData, behandlingVersjon, behan
   const navigate = useNavigate();
   const location = useLocation();
 
-  const alleKodeverk = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK);
-  const initFetchData = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
-  const navAnsatt = initFetchData.innloggetBruker;
-  const rettigheter = useMemo(
-    () => getAccessRights(navAnsatt, fagsak.status, behandlingStatus, behandlingType),
-    [fagsak.status, behandlingStatus, behandlingType],
-  );
-  const readOnly = useMemo(() => getReadOnly(navAnsatt, rettigheter, erPaaVent), [rettigheter, erPaaVent]);
+  const { kodeverkOptions } = useFagsakApi();
+  const initFetchQuery = useQuery(initFetchOptions());
+  const { data: alleKodeverk } = useQuery(kodeverkOptions());
 
-  const toggleRiskPanel = useCallback(() => {
+  const navAnsatt = notEmpty(initFetchQuery.data).innloggetBruker;
+  const rettigheter = getAccessRights(navAnsatt, fagsak.status, behandlingStatus, behandlingType);
+  const readOnly = getReadOnly(navAnsatt, rettigheter, erPaaVent);
+
+  const toggleRiskPanel = () => {
     navigate(getRiskPanelLocationCreator(location)(!isRiskPanelOpen));
-  }, [location, isRiskPanelOpen]);
+  };
 
   useEffect(() => {
     if (!!risikoAksjonspunkt && risikoAksjonspunkt.status === AksjonspunktStatus.OPPRETTET && !isRiskPanelOpen) {
@@ -82,31 +84,28 @@ export const RisikoklassifiseringIndex = ({ fagsakData, behandlingVersjon, behan
     BehandlingApiKeys.SAVE_AKSJONSPUNKT,
   );
 
-  const submitAksjonspunkt = useCallback(
-    (aksjonspunkt: AvklartRisikoklassifiseringAp) => {
-      if (!behandlingUuid || !behandlingVersjon) {
-        return Promise.reject();
-      }
-      const params = {
-        behandlingUuid,
-        saksnummer: fagsak.saksnummer,
-        behandlingVersjon,
-        bekreftedeAksjonspunktDtoer: [
-          {
-            '@type': aksjonspunkt.kode,
-            ...aksjonspunkt,
-          },
-        ],
-      };
+  const submitAksjonspunkt = (aksjonspunkt: AvklartRisikoklassifiseringAp) => {
+    if (!behandlingUuid || !behandlingVersjon) {
+      return Promise.reject();
+    }
+    const params = {
+      behandlingUuid,
+      saksnummer: fagsak.saksnummer,
+      behandlingVersjon,
+      bekreftedeAksjonspunktDtoer: [
+        {
+          '@type': aksjonspunkt.kode,
+          ...aksjonspunkt,
+        },
+      ],
+    };
 
-      return lagreRisikoklassifiseringAksjonspunkt(params).then(oppdatertBehandling => {
-        if (oppdatertBehandling) {
-          setBehandling(oppdatertBehandling);
-        }
-      });
-    },
-    [behandlingUuid, behandlingVersjon],
-  );
+    return lagreRisikoklassifiseringAksjonspunkt(params).then(oppdatertBehandling => {
+      if (oppdatertBehandling) {
+        setBehandling(oppdatertBehandling);
+      }
+    });
+  };
 
   return (
     <RisikoklassifiseringSakIndex
@@ -116,7 +115,7 @@ export const RisikoklassifiseringIndex = ({ fagsakData, behandlingVersjon, behan
       readOnly={readOnly}
       submitAksjonspunkt={submitAksjonspunkt}
       toggleRiskPanel={toggleRiskPanel}
-      faresignalVurderinger={alleKodeverk[KodeverkType.FARESIGNAL_VURDERING]}
+      faresignalVurderinger={notEmpty(alleKodeverk)[KodeverkType.FARESIGNAL_VURDERING]}
     />
   );
 };

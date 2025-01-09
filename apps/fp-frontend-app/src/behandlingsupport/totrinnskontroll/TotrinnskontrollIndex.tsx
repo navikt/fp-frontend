@@ -1,15 +1,17 @@
-import React, { useCallback,useState } from 'react';
+import { useState } from 'react';
 import { useIntl } from 'react-intl';
-import { useLocation,useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { BehandlingStatus } from '@navikt/fp-kodeverk';
 import { TotrinnskontrollSakIndex } from '@navikt/fp-sak-totrinnskontroll';
 import { FatterVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { createLocationForSkjermlenke } from '../../app/paths';
-import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
+import { BekreftedeTotrinnsaksjonspunkter, initFetchOptions, useFagsakBehandlingApi } from '../../data/fagsakApi';
+import { notEmpty } from '../../data/notEmpty';
 import { useKodeverk } from '../../data/useKodeverk';
 import { useVisForhandsvisningAvMelding } from '../../data/useVisForhandsvisningAvMelding';
 import { FagsakData } from '../../fagsak/FagsakData';
@@ -23,27 +25,6 @@ type Values = {
   erAlleAksjonspunktGodkjent: boolean;
 };
 
-const getLagreFunksjon =
-  (
-    saksnummer: string,
-    setAlleAksjonspunktTilGodkjent: (erGodkjent: boolean) => void,
-    setVisBeslutterModal: (visModal: boolean) => void,
-    godkjennTotrinnsaksjonspunkter: (params: any) => Promise<any>,
-    behandlingUuid?: string,
-    behandlingVersjon?: number,
-  ) =>
-  (totrinnskontrollData: Values) => {
-    const params = {
-      saksnummer,
-      behandlingUuid,
-      behandlingVersjon,
-      bekreftedeAksjonspunktDtoer: [totrinnskontrollData.fatterVedtakAksjonspunktDto],
-    };
-    setAlleAksjonspunktTilGodkjent(totrinnskontrollData.erAlleAksjonspunktGodkjent);
-    setVisBeslutterModal(true);
-    return godkjennTotrinnsaksjonspunkter(params);
-  };
-
 interface Props {
   fagsakData: FagsakData;
   valgtBehandlingUuid: string;
@@ -54,7 +35,7 @@ interface Props {
 /**
  * TotrinnskontrollIndex
  *
- * Containerklass ansvarlig for att rita opp vilkår og aksjonspunkter med toTrinnskontroll
+ * Ansvarlig for att rita opp vilkår og aksjonspunkter med toTrinnskontroll
  */
 export const TotrinnskontrollIndex = ({
   fagsakData,
@@ -67,46 +48,46 @@ export const TotrinnskontrollIndex = ({
   const [erAlleAksjonspunktGodkjent, setAlleAksjonspunktTilGodkjent] = useState(false);
 
   const fagsak = fagsakData.getFagsak();
-  const valgtBehandling = fagsakData.getBehandling(valgtBehandlingUuid);
+  const valgtBehandling = notEmpty(fagsakData.getBehandling(valgtBehandlingUuid));
+
+  const api = useFagsakBehandlingApi(valgtBehandling);
 
   const location = useLocation();
   const navigate = useNavigate();
 
-  const initFetchData = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
-  const { brukernavn, kanVeilede } = initFetchData.innloggetBruker;
+  const initFetchQuery = useQuery(initFetchOptions());
+  const { brukernavn, kanVeilede } = notEmpty(initFetchQuery.data).innloggetBruker;
 
-  const alleKodeverk = useKodeverk(valgtBehandling?.type);
+  const alleKodeverk = useKodeverk(valgtBehandling.type);
 
-  const { startRequest: godkjennTotrinnsaksjonspunkter } = restFagsakApiHooks.useRestApiRunner(
-    FagsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT,
-  );
+  const { mutate: godkjennTotrinnsaksjonspunkter } = useMutation({
+    mutationFn: (valuesToStore: BekreftedeTotrinnsaksjonspunkter) => api.lagreTotrinnsaksjonspunkt(valuesToStore),
+  });
 
-  const forhandsvisMelding = useVisForhandsvisningAvMelding(valgtBehandling?.type);
+  const forhandsvisMelding = useVisForhandsvisningAvMelding(valgtBehandling);
 
-  const forhandsvisVedtaksbrev = useCallback(() => {
-    if (valgtBehandling) {
-      forhandsvisMelding(false, {
-        behandlingUuid: valgtBehandling.uuid,
-        fagsakYtelseType: fagsak.fagsakYtelseType,
-        gjelderVedtak: true,
-      });
-    }
-  }, [valgtBehandling, fagsak]);
-  const onSubmit = useCallback(
-    getLagreFunksjon(
-      fagsak.saksnummer,
-      setAlleAksjonspunktTilGodkjent,
-      setVisBeslutterModal,
-      godkjennTotrinnsaksjonspunkter,
-      valgtBehandling?.uuid,
-      valgtBehandling?.versjon,
-    ),
-    [fagsak, valgtBehandling?.uuid, valgtBehandling?.versjon, setVisBeslutterModal, godkjennTotrinnsaksjonspunkter],
-  );
+  const forhandsvisVedtaksbrev = () => {
+    forhandsvisMelding(false, {
+      behandlingUuid: valgtBehandling.uuid,
+      fagsakYtelseType: fagsak.fagsakYtelseType,
+      gjelderVedtak: true,
+    });
+  };
 
-  if (!valgtBehandling?.totrinnskontrollÅrsaker) {
+  if (!valgtBehandling.totrinnskontrollÅrsaker) {
     return null;
   }
+
+  const onSubmit = (totrinnskontrollData: Values) => {
+    const params = {
+      behandlingUuid: valgtBehandling.uuid,
+      behandlingVersjon: valgtBehandling.versjon,
+      bekreftedeAksjonspunktDtoer: [totrinnskontrollData.fatterVedtakAksjonspunktDto],
+    };
+    setAlleAksjonspunktTilGodkjent(totrinnskontrollData.erAlleAksjonspunktGodkjent);
+    setVisBeslutterModal(true);
+    godkjennTotrinnsaksjonspunkter(params);
+  };
 
   const erStatusFatterVedtak = valgtBehandling.status === BehandlingStatus.FATTER_VEDTAK;
 

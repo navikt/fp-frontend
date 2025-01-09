@@ -1,67 +1,21 @@
-import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
-
+import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
+import { applyRequestHandlers } from 'msw-storybook-addon';
 
-import { KontrollresultatKode } from '@navikt/fp-sak-risikoklassifisering';
-import { BehandlingAppKontekst,Fagsak } from '@navikt/fp-types';
-import { RestApiMock } from '@navikt/fp-utils-test';
+import * as stories from './RisikoklassifiseringIndex.stories';
 
-import * as All from '../../app/useTrackRouteParam';
-import { FagsakApiKeys,requestFagsakApi } from '../../data/fagsakContextApi';
-import { FagsakData } from '../../fagsak/FagsakData';
-import { RisikoklassifiseringIndex } from './RisikoklassifiseringIndex';
+const { FaresignalerOppdaget, VenterPåFaresignalerNårBehandlingIkkeErValgt } = composeStories(stories);
 
-const lagRisikoklassifisering = (kode: string) => ({
-  kontrollresultat: kode,
-  medlFaresignaler: undefined,
-  iayFaresignaler: undefined,
-});
-
-const behandling = {
-  uuid: '1',
-  kontrollResultat: lagRisikoklassifisering(KontrollresultatKode.HOY),
-} as BehandlingAppKontekst;
-
-const fagsak = {
-  saksnummer: '123456',
-  behandlinger: [behandling],
-} as Fagsak;
-
-const location = {
-  key: '1',
-  hash: '23',
-  pathname: '/test/',
-  state: {},
-  search: '',
-};
-
-const navAnsatt = { navn: 'Ann S. Att', kanSaksbehandle: true };
-
-describe('<RisikoklassifiseringIndex>', () => {
-  vi.spyOn(All, 'useTrackRouteParam').mockImplementation(() => ({
-    selected: true,
-    location,
-  }));
-
-  it('skal rendere komponent', async () => {
-    const data = [
-      { key: FagsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt } },
-      { key: FagsakApiKeys.KODEVERK.name, global: true, data: {} },
-    ];
-
-    render(
-      <RestApiMock data={data} requestApi={requestFagsakApi}>
-        <MemoryRouter>
-          <RisikoklassifiseringIndex
-            fagsakData={new FagsakData(fagsak)}
-            behandlingVersjon={1}
-            behandlingUuid="1"
-            setBehandling={vi.fn()}
-          />
-        </MemoryRouter>
-      </RestApiMock>,
-    );
+describe('RisikoklassifiseringIndex', () => {
+  it('skal vise at faresignaler er oppdaget', async () => {
+    await applyRequestHandlers(FaresignalerOppdaget.parameters.msw);
+    render(<FaresignalerOppdaget />);
     expect(await screen.findByText('Faresignaler oppdaget')).toBeInTheDocument();
+  });
+
+  it('skal vise at en venter på faresignaler når behandling ikke er valgt', async () => {
+    await applyRequestHandlers(VenterPåFaresignalerNårBehandlingIkkeErValgt.parameters.msw);
+    render(<VenterPåFaresignalerNårBehandlingIkkeErValgt />);
+    expect(await screen.findByText('Venter på mulige faresignaler')).toBeInTheDocument();
   });
 });

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { action } from '@storybook/addon-actions';
-import { Meta, StoryObj } from '@storybook/react/*';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
@@ -85,7 +85,7 @@ const ProsessPanelTest2 = ({ registrerProsessPanel, valgtProsessSteg }: ProsessP
 };
 
 const meta = {
-  title: 'app/behandling-container',
+  title: 'behandling/behandling-container',
   component: BehandlingContainer,
   decorators: [withIntl],
   args: {

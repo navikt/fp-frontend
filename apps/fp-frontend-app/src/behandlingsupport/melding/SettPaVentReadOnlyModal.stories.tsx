@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import { Meta, StoryObj } from '@storybook/react/*';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
@@ -18,7 +18,7 @@ const VENTEARSAKER = [
 ];
 
 const meta = {
-  title: 'app/settpavent/SettPaVentReadOnlyModal',
+  title: 'fagsak/SettPaVentReadOnlyModal',
   component: SettPaVentReadOnlyModal,
   decorators: [withIntl],
 } satisfies Meta<typeof SettPaVentReadOnlyModal>;

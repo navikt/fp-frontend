@@ -2,11 +2,11 @@ import React from 'react';
 
 import { Meta, StoryObj } from '@storybook/react';
 
-import { FagsakStatus, FagsakYtelseType, KodeverkType,NavBrukerKjonn } from '@navikt/fp-kodeverk';
+import { FagsakStatus, FagsakYtelseType, KodeverkType, NavBrukerKjonn } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { FagsakEnkel } from '@navikt/fp-types';
 
-import { AktorSakIndex } from './AktorSakIndex';
+import { AktørSakIndex } from './AktørSakIndex';
 
 import '@navikt/ft-ui-komponenter/dist/style.css';
 import '@navikt/ft-plattform-komponenter/dist/style.css';
@@ -21,7 +21,7 @@ const FAGSAK = {
 
 const meta = {
   title: 'sak/sak-aktor',
-  component: AktorSakIndex,
+  component: AktørSakIndex,
   args: {
     valgtAktorId: '123',
     fagsakStatuser: alleKodeverk[KodeverkType.FAGSAK_STATUS],
@@ -32,7 +32,7 @@ const meta = {
       </button>
     ),
   },
-} satisfies Meta<typeof AktorSakIndex>;
+} satisfies Meta<typeof AktørSakIndex>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;

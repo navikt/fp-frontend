@@ -1,11 +1,13 @@
-import React, { useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
+
+import { useQuery } from '@tanstack/react-query';
 
 import { HistorikkSakIndex } from '@navikt/fp-sak-historikk';
 import { Historikkinnslag } from '@navikt/fp-types';
 
 import { createLocationForSkjermlenke, pathToBehandling } from '../../app/paths';
-import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
+import { useFagsakApi } from '../../data/fagsakApi';
+import { notEmpty } from '../../data/notEmpty';
 
 interface Props {
   saksnummer: string;
@@ -20,24 +22,25 @@ export const HistorikkIndex = ({
   historikkinnslagFpSak,
   historikkinnslagFpTilbake,
 }: Props) => {
-  const alleKodeverkFpSak = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK);
-  const alleKodeverkFpTilbake = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK_FPTILBAKE);
+  const {
+    kodeverkOptions,
+    fptilbake: { kodeverkOptions: fptilbakeKodeverkOptions },
+  } = useFagsakApi();
+  const { data: alleKodeverkFpSak } = useQuery(kodeverkOptions());
+  const { data: alleKodeverkFpTilbake } = useQuery(fptilbakeKodeverkOptions());
 
   const location = useLocation();
-  const getBehandlingLocation = useCallback(
-    (bUuid: string) => ({
-      ...location,
-      pathname: pathToBehandling(saksnummer, bUuid),
-    }),
-    [location],
-  );
+  const getBehandlingLocation = (bUuid: string) => ({
+    ...location,
+    pathname: pathToBehandling(saksnummer, bUuid),
+  });
 
   return (
     <HistorikkSakIndex
       historikkFpSak={historikkinnslagFpSak}
       historikkFpTilbake={historikkinnslagFpTilbake}
       alleKodeverkFpTilbake={alleKodeverkFpTilbake}
-      alleKodeverkFpSak={alleKodeverkFpSak}
+      alleKodeverkFpSak={notEmpty(alleKodeverkFpSak)}
       saksnummer={saksnummer}
       getBehandlingLocation={getBehandlingLocation}
       createLocationForSkjermlenke={createLocationForSkjermlenke}

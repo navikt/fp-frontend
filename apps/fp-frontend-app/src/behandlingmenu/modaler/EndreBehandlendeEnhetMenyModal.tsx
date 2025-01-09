@@ -1,10 +1,11 @@
-import React, { useCallback } from 'react';
+import { useQuery } from '@tanstack/react-query';
 
 import { MenyEndreBehandlendeEnhetIndex } from '@navikt/fp-sak-meny';
 import { BehandlingAppKontekst } from '@navikt/fp-types';
 
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../../data/behandlingContextApi';
-import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
+import { initFetchOptions } from '../../data/fagsakApi';
+import { notEmpty } from '../../data/notEmpty';
 
 interface Props {
   behandling: BehandlingAppKontekst;
@@ -13,24 +14,21 @@ interface Props {
 }
 
 export const EndreBehandlendeEnhetMenyModal = ({ behandling, hentOgSettBehandling, lukkModal }: Props) => {
-  const initFetchData = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
+  const initFetchQuery = useQuery(initFetchOptions());
 
   const { startRequest: nyBehandlendeEnhet } = restBehandlingApiHooks.useRestApiRunner(
     BehandlingApiKeys.BEHANDLING_NY_BEHANDLENDE_ENHET,
   );
 
-  const endreBehandlendeEnhet = useCallback(
-    (formValues: { enhetNavn: string; enhetId: string; begrunnelse: string }) => {
-      nyBehandlendeEnhet({
-        ...formValues,
-        behandlingUuid: behandling?.uuid,
-        behandlingVersjon: behandling?.versjon,
-      }).then(() => {
-        hentOgSettBehandling();
-      });
-    },
-    [behandling],
-  );
+  const endreBehandlendeEnhet = (formValues: { enhetNavn: string; enhetId: string; begrunnelse: string }) => {
+    nyBehandlendeEnhet({
+      ...formValues,
+      behandlingUuid: behandling?.uuid,
+      behandlingVersjon: behandling?.versjon,
+    }).then(() => {
+      hentOgSettBehandling();
+    });
+  };
 
   return (
     <MenyEndreBehandlendeEnhetIndex
@@ -38,7 +36,7 @@ export const EndreBehandlendeEnhetMenyModal = ({ behandling, hentOgSettBehandlin
       behandlendeEnhetId={behandling?.behandlendeEnhetId}
       behandlendeEnhetNavn={behandling?.behandlendeEnhetNavn}
       nyBehandlendeEnhet={endreBehandlendeEnhet}
-      behandlendeEnheter={initFetchData.behandlendeEnheter}
+      behandlendeEnheter={notEmpty(initFetchQuery.data).behandlendeEnheter}
       lukkModal={lukkModal}
     />
   );
