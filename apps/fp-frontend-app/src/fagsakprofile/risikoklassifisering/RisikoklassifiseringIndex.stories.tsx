@@ -20,7 +20,13 @@ import {
   withQueryClient,
   withRouter,
 } from '@navikt/fp-storybook-utils';
-import { BehandlingAppKontekst, BehandlingOppretting, Fagsak, VergeBehandlingmenyValg } from '@navikt/fp-types';
+import {
+  Behandling,
+  BehandlingAppKontekst,
+  BehandlingOppretting,
+  Fagsak,
+  VergeBehandlingmenyValg,
+} from '@navikt/fp-types';
 
 import { FagsakRel, FagsakUrl, initFetchOptions, useFagsakApi, wrapUrl } from '../../data/fagsakApi';
 import { notEmpty } from '../../data/notEmpty';
@@ -126,8 +132,10 @@ type Story = StoryObj<typeof meta>;
 export const FaresignalerOppdaget: Story = {
   args: {
     fagsakData: new FagsakData(FAGSAK),
-    behandlingUuid: '1',
-    behandlingVersjon: 1,
+    behandling: {
+      uuid: '1',
+      versjon: 1,
+    } as Behandling,
   },
 };
 

@@ -1,40 +1,44 @@
-import React from 'react';
 import { useIntl } from 'react-intl';
+
+import { useQuery } from '@tanstack/react-query';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { InnsynProsessIndex } from '@navikt/fp-prosess-innsyn';
-import { Dokument, Fagsak, Innsyn } from '@navikt/fp-types';
+import { Fagsak } from '@navikt/fp-types';
 
-import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
-import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { useBehandlingApi } from '../../../data/behandlingApi';
+import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanelNew';
+import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_INNSYN];
-
-const getEndepunkterPanelData = (saksnummer: string) => [
-  { key: BehandlingApiKeys.INNSYN_DOKUMENTER, params: { saksnummer } },
-  { key: BehandlingApiKeys.INNSYN },
-];
-type EndepunktPanelData = {
-  innsynDokumenter?: Dokument[];
-  innsyn: Innsyn;
-};
 
 interface Props {
   fagsak: Fagsak;
 }
 
-export const BehandleInnsynProsessStegInitPanel = ({ fagsak, ...props }: Props & ProsessPanelInitProps) => (
-  <ProsessDefaultInitPanel<EndepunktPanelData>
-    {...props}
-    panelEndepunkter={getEndepunkterPanelData(fagsak.saksnummer)}
-    aksjonspunktKoder={AKSJONSPUNKT_KODER}
-    prosessPanelKode={ProsessStegCode.BEHANDLE_INNSYN}
-    prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.Innsyn' })}
-    skalPanelVisesIMeny={() => true}
-    renderPanel={data => (
-      <InnsynProsessIndex saksnummer={fagsak.saksnummer} alleDokumenter={data.innsynDokumenter} {...data} />
-    )}
-  />
-);
+export const BehandleInnsynProsessStegInitPanel = ({ fagsak, ...props }: Props & ProsessPanelInitProps) => {
+  const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
+  const api = useBehandlingApi(props.behandling);
+
+  const { data: innsynDokumenter } = useQuery(api.innsyn.innsynDokumenterOptions(fagsak, props.behandling));
+  const { data: innsyn } = useQuery(api.innsyn.innsynOptions(props.behandling));
+
+  return (
+    <ProsessDefaultInitPanel
+      {...props}
+      standardPanelProps={standardPanelProps}
+      prosessPanelKode={ProsessStegCode.BEHANDLE_INNSYN}
+      prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.Innsyn' })}
+      skalPanelVisesIMeny
+    >
+      <InnsynProsessIndex
+        innsyn={innsyn}
+        saksnummer={fagsak.saksnummer}
+        alleDokumenter={innsynDokumenter}
+        {...standardPanelProps}
+      />
+    </ProsessDefaultInitPanel>
+  );
+};

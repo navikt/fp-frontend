@@ -5,7 +5,7 @@ import { createIntl } from '@navikt/ft-utils';
 
 import { KlageVurdering, StandardProsessPanelProps } from '@navikt/fp-types';
 
-import { ForhandsvisData,VedtakKlageForm } from './components/VedtakKlageForm';
+import { ForhandsvisData, VedtakKlageForm } from './components/VedtakKlageForm';
 
 import messages from '../i18n/nb_NO.json';
 
@@ -13,7 +13,7 @@ const intl = createIntl(messages);
 
 interface OwnProps {
   klageVurdering: KlageVurdering;
-  previewVedtakCallback: (data: ForhandsvisData) => Promise<any>;
+  previewVedtakCallback: (data: ForhandsvisData) => void;
 }
 
 const VedtakKlageProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({

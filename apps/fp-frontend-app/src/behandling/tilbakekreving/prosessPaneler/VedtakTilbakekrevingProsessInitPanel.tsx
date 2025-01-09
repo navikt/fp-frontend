@@ -31,31 +31,6 @@ type EndepunktPanelData = {
 
 const tilbakekrevingÅrsakTyperKlage = [BehandlingArsakType.RE_KLAGE_KA, BehandlingArsakType.RE_KLAGE_NFP];
 
-const erTilbakekrevingÅrsakKlage = (årsak: string): boolean =>
-  !!årsak && tilbakekrevingÅrsakTyperKlage.some(å => å === årsak);
-
-const getVedtakStatus = (beregningsresultat?: Behandlingsresultat): string => {
-  if (!beregningsresultat) {
-    return VilkarUtfallType.IKKE_VURDERT;
-  }
-  const { type } = beregningsresultat;
-
-  if (type === VedtakResultatType.INGEN_TILBAKEBETALING) {
-    return VilkarUtfallType.IKKE_OPPFYLT;
-  }
-
-  return type === VedtakResultatType.DELVIS_TILBAKEBETALING || type === VedtakResultatType.FULL_TILBAKEBETALING
-    ? VilkarUtfallType.OPPFYLT
-    : VilkarUtfallType.IKKE_VURDERT;
-};
-
-const getLagringSideeffekter =
-  (toggleFatterVedtakModal: (skalFatterModal: boolean) => void) =>
-  () =>
-  // Returner funksjon som blir kjørt etter lagring av aksjonspunkt(er)
-  () => {
-    toggleFatterVedtakModal(true);
-  };
 interface Props {
   tilbakekrevingKodeverk: AlleKodeverkTilbakekreving;
   opneSokeside: () => void;
@@ -131,3 +106,29 @@ export const VedtakTilbakekrevingProsessInitPanel = ({
     </>
   );
 };
+
+const erTilbakekrevingÅrsakKlage = (årsak: string): boolean =>
+  !!årsak && tilbakekrevingÅrsakTyperKlage.some(å => å === årsak);
+
+const getVedtakStatus = (beregningsresultat?: Behandlingsresultat): string => {
+  if (!beregningsresultat) {
+    return VilkarUtfallType.IKKE_VURDERT;
+  }
+  const { type } = beregningsresultat;
+
+  if (type === VedtakResultatType.INGEN_TILBAKEBETALING) {
+    return VilkarUtfallType.IKKE_OPPFYLT;
+  }
+
+  return type === VedtakResultatType.DELVIS_TILBAKEBETALING || type === VedtakResultatType.FULL_TILBAKEBETALING
+    ? VilkarUtfallType.OPPFYLT
+    : VilkarUtfallType.IKKE_VURDERT;
+};
+
+const getLagringSideeffekter =
+  (toggleFatterVedtakModal: (skalFatterModal: boolean) => void) =>
+  () =>
+  // Returner funksjon som blir kjørt etter lagring av aksjonspunkt(er)
+  () => {
+    toggleFatterVedtakModal(true);
+  };

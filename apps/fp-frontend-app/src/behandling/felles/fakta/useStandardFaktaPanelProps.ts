@@ -1,9 +1,10 @@
 import { useContext, useEffect, useMemo, useState } from 'react';
 
 import { isAksjonspunktOpen } from '@navikt/fp-kodeverk';
-import { Behandling, Fagsak,StandardFaktaPanelProps } from '@navikt/fp-types';
+import { Behandling, Fagsak, StandardFaktaPanelProps } from '@navikt/fp-types';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
+import { AksjonspunktArgs, OverstyrteAksjonspunktArgs } from '../../../data/behandlingApi';
 import { getAlleMerknaderFraBeslutter } from '../utils/getAlleMerknaderFraBeslutter';
 import { erReadOnly } from '../utils/readOnlyPanelUtils';
 import { StandardPropsStateContext } from '../utils/standardPropsStateContext';
@@ -16,8 +17,8 @@ const getBekreftAksjonspunktFaktaCallback =
     fagsak: Fagsak,
     behandling: Behandling,
     oppdaterProsessStegOgFaktaPanelIUrl: (prosessPanel?: string, faktanavn?: string) => void,
-    lagreAksjonspunkter: (params: any, keepData?: boolean) => Promise<Behandling | undefined>,
-    lagreOverstyrteAksjonspunkter?: (params: any, keepData?: boolean) => Promise<Behandling | undefined>,
+    lagreAksjonspunkter: (params: AksjonspunktArgs) => Promise<Behandling>,
+    lagreOverstyrteAksjonspunkter: (params: OverstyrteAksjonspunktArgs) => Promise<Behandling>,
     overstyringApCodes?: string[],
   ) =>
   (aksjonspunkter: FaktaAksjonspunkt | FaktaAksjonspunkt[]): Promise<void> => {
@@ -38,23 +39,17 @@ const getBekreftAksjonspunktFaktaCallback =
         throw Error('Det har oppstått en teknisk feil ved lagring av aksjonspunkter. Meld feilen i Porten.');
       }
       if (overstyringApCodes.includes(model[0].kode)) {
-        return lagreOverstyrteAksjonspunkter(
-          {
-            ...params,
-            overstyrteAksjonspunktDtoer: model,
-          },
-          true,
-        ).then(() => oppdaterProsessStegOgFaktaPanelIUrl(DEFAULT_PROSESS_STEG_KODE, DEFAULT_FAKTA_KODE));
+        return lagreOverstyrteAksjonspunkter({
+          ...params,
+          overstyrteAksjonspunktDtoer: model,
+        }).then(() => oppdaterProsessStegOgFaktaPanelIUrl(DEFAULT_PROSESS_STEG_KODE, DEFAULT_FAKTA_KODE));
       }
     }
 
-    return lagreAksjonspunkter(
-      {
-        ...params,
-        bekreftedeAksjonspunktDtoer: model,
-      },
-      true,
-    ).then(() => oppdaterProsessStegOgFaktaPanelIUrl(DEFAULT_PROSESS_STEG_KODE, DEFAULT_FAKTA_KODE));
+    return lagreAksjonspunkter({
+      ...params,
+      bekreftedeAksjonspunktDtoer: model,
+    }).then(() => oppdaterProsessStegOgFaktaPanelIUrl(DEFAULT_PROSESS_STEG_KODE, DEFAULT_FAKTA_KODE));
   };
 
 export const useStandardFaktaPanelProps = (

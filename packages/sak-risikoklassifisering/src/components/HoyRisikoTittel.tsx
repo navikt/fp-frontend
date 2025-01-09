@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { XMarkOctagonFillIcon } from '@navikt/aksel-icons';
 import { ExpansionCard, HStack, Label } from '@navikt/ds-react';
 
-import { Aksjonspunkt, KodeverkMedNavn,Risikoklassifisering } from '@navikt/fp-types';
+import { Aksjonspunkt, KodeverkMedNavn, Risikoklassifisering } from '@navikt/fp-types';
 
 import { AvklartRisikoklassifiseringAp } from '../types/AvklartRisikoklassifiseringAp';
 import { HoyRisikoPanel } from './HoyRisikoPanel';
@@ -15,7 +15,7 @@ interface Props {
   risikoklassifisering: Risikoklassifisering;
   aksjonspunkt?: Aksjonspunkt;
   readOnly: boolean;
-  submitCallback: (data: AvklartRisikoklassifiseringAp) => Promise<void>;
+  submitCallback?: (data: AvklartRisikoklassifiseringAp) => void;
   isRiskPanelOpen: boolean;
   toggleRiskPanel: () => void;
   faresignalVurderinger: KodeverkMedNavn[];

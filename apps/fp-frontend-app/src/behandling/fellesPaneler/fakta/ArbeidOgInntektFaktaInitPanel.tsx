@@ -1,12 +1,20 @@
-import React, { useCallback } from 'react';
 import { useIntl } from 'react-intl';
+
+import { useMutation } from '@tanstack/react-query';
 
 import { ArbeidOgInntektFaktaIndex } from '@navikt/fp-fakta-arbeid-og-inntekt';
 import { AksjonspunktKode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import { AksessRettigheter, ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
+import {
+  AksessRettigheter,
+  ArbeidOgInntektsmelding,
+  ArbeidsgiverOpplysningerPerId,
+  ManglendeInntektsmeldingVurdering,
+  ManueltArbeidsforhold,
+} from '@navikt/fp-types';
 
-import { BehandlingApiKeys, requestBehandlingApi, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
+import { useBehandlingApi } from '../../../data/behandlingApi';
+import { BehandlingApiKeys, requestBehandlingApi } from '../../../data/behandlingContextApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
 
@@ -35,35 +43,35 @@ export const ArbeidOgInntektFaktaInitPanel = ({
 }: Props & FaktaPanelInitProps) => {
   const intl = useIntl();
 
-  const { startRequest: registrerArbeidsforhold } = restBehandlingApiHooks.useRestApiRunner(
-    BehandlingApiKeys.ARBEID_OG_INNTEKT_REGISTRER_ARBEIDSFORHOLD,
-  );
-  const { startRequest: lagreVurdering } = restBehandlingApiHooks.useRestApiRunner(
-    BehandlingApiKeys.ARBEID_OG_INNTEKT_LAGRE_VURDERING,
-  );
-  const { startRequest: settBehandlingPåVent } = restBehandlingApiHooks.useRestApiRunner(
-    BehandlingApiKeys.BEHANDLING_ON_HOLD,
-  );
-  const { startRequest: åpneForNyVurdering } = restBehandlingApiHooks.useRestApiRunner(
-    BehandlingApiKeys.ARBEID_OG_INNTEKT_ÅPNE_FOR_NY_VURDERING,
-  );
-  const åpneForNyVurderingOgOppfriskBehandling = useCallback(() => {
-    åpneForNyVurdering({
-      behandlingUuid,
-      behandlingVersjon: props.behandling.versjon,
-    }).then(() => hentOgSettBehandling());
-  }, [props.behandling.versjon]);
+  const api = useBehandlingApi(props.behandling);
 
-  const settBehandlingPåVentOgOppfriskBehandling = useCallback(
-    (params: { frist?: string; ventearsak: string }) =>
-      settBehandlingPåVent({
-        frist: params.frist ?? '',
-        ventearsak: params.ventearsak,
+  const { mutate: settBehandlingPåVent } = useMutation({
+    mutationFn: (values: { frist?: string; ventearsak: string }) =>
+      api.settBehandlingPåVent({
+        frist: values.frist ?? '',
+        ventearsak: values.ventearsak,
         behandlingUuid,
         behandlingVersjon: props.behandling.versjon,
-      }).then(() => hentOgSettBehandling()),
-    [props.behandling.versjon],
-  );
+      }),
+    onSuccess: () => hentOgSettBehandling(),
+  });
+
+  const { mutateAsync: registrerArbeidsforhold } = useMutation({
+    mutationFn: (values: ManueltArbeidsforhold) => api.registrerArbeidsforholdForAOI(values),
+  });
+
+  const { mutateAsync: lagreVurdering } = useMutation({
+    mutationFn: (values: ManglendeInntektsmeldingVurdering) => api.lagreVurderingForAOI(values),
+  });
+
+  const { mutate: åpneForNyVurdering } = useMutation({
+    mutationFn: () =>
+      api.åpneForNyVurderingAOI({
+        behandlingUuid,
+        behandlingVersjon: props.behandling.versjon,
+      }),
+    onSuccess: () => hentOgSettBehandling(),
+  });
 
   return (
     <FaktaDefaultInitPanel<EndepunktPanelData>
@@ -83,8 +91,8 @@ export const ArbeidOgInntektFaktaInitPanel = ({
           erOverstyrer={rettigheter.kanOverstyreAccess.isEnabled}
           registrerArbeidsforhold={registrerArbeidsforhold}
           lagreVurdering={lagreVurdering}
-          settBehandlingPåVentCallback={settBehandlingPåVentOgOppfriskBehandling}
-          åpneForNyVurdering={åpneForNyVurderingOgOppfriskBehandling}
+          settBehandlingPåVentCallback={settBehandlingPåVent}
+          åpneForNyVurdering={åpneForNyVurdering}
           {...data}
         />
       )}

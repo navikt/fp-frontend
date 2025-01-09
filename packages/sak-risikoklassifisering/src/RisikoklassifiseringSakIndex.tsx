@@ -3,7 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { Aksjonspunkt, KodeverkMedNavn,Risikoklassifisering } from '@navikt/fp-types';
+import { Aksjonspunkt, KodeverkMedNavn, Risikoklassifisering } from '@navikt/fp-types';
 
 import { HoyRisikoTittel } from './components/HoyRisikoTittel';
 import { IngenRisikoPanel } from './components/IngenRisikoPanel';
@@ -27,7 +27,7 @@ interface Props {
   risikoklassifisering?: Risikoklassifisering;
   isPanelOpen: boolean;
   readOnly: boolean;
-  submitAksjonspunkt: (data: AvklartRisikoklassifiseringAp) => Promise<void>;
+  submitAksjonspunkt?: (data: AvklartRisikoklassifiseringAp) => void;
   toggleRiskPanel: () => void;
   faresignalVurderinger: KodeverkMedNavn[];
 }

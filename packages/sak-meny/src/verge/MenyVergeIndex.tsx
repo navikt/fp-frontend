@@ -1,4 +1,3 @@
-import React, { useCallback } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { OkAvbrytModal } from '@navikt/ft-ui-komponenter';
@@ -14,20 +13,20 @@ export const getMenytekst = (erOpprettVerge: boolean): string =>
   });
 
 interface Props {
-  fjernVerge?: () => Promise<void>;
-  opprettVerge?: () => Promise<void>;
+  fjernVerge?: () => void;
+  opprettVerge?: () => void;
   lukkModal: () => void;
 }
 
 export const MenyVergeIndex = ({ fjernVerge, opprettVerge, lukkModal }: Props) => {
-  const submit = useCallback(() => {
+  const submit = () => {
     lukkModal();
     const operasjon = opprettVerge || fjernVerge;
     if (operasjon) {
-      return operasjon();
+      operasjon();
     }
     throw Error('Skal alltid ha enten opprettVerge eller fjernVerge');
-  }, [opprettVerge, fjernVerge]);
+  };
 
   return (
     <RawIntlProvider value={intl}>

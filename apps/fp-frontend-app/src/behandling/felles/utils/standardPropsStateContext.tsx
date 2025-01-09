@@ -2,13 +2,15 @@ import React, { createContext, JSX, ReactElement, useMemo } from 'react';
 
 import { AksessRettigheter, AlleKodeverk, Behandling, Fagsak } from '@navikt/fp-types';
 
+import { AksjonspunktArgs, OverstyrteAksjonspunktArgs } from '../../../data/behandlingApi';
+
 type InputValues = {
   behandling: Behandling;
   fagsak: Fagsak;
   rettigheter: AksessRettigheter;
   hasFetchError: boolean;
-  lagreAksjonspunkter: (params: any, keepData?: boolean) => Promise<Behandling | undefined>;
-  lagreOverstyrteAksjonspunkter?: (params: any, keepData?: boolean) => Promise<Behandling | undefined>;
+  lagreAksjonspunkter: (params: AksjonspunktArgs) => Promise<Behandling>;
+  lagreOverstyrteAksjonspunkter: (params: OverstyrteAksjonspunktArgs) => Promise<Behandling>;
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   alleKodeverk: AlleKodeverk;
 };
