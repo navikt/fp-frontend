@@ -13,9 +13,9 @@ export const getMenytekst = (): string =>
   intl.formatMessage({ id: 'MenyEndreBehandlendeEnhetIndex.ByttBehandlendeEnhet' });
 
 interface Props {
-  behandlingVersjon?: number;
-  behandlendeEnhetId?: string;
-  behandlendeEnhetNavn?: string;
+  behandlingVersjon: number;
+  behandlendeEnhetId: string;
+  behandlendeEnhetNavn: string;
   nyBehandlendeEnhet: (params: { enhetNavn: string; enhetId: string; begrunnelse: string }) => void;
   behandlendeEnheter: {
     enhetId: string;
@@ -39,15 +39,13 @@ export const MenyEndreBehandlendeEnhetIndex = ({
 
   const submit = useCallback(
     (formValues: FormValues) => {
-      if (behandlingVersjon) {
-        const nyEnhet = filtrerteBehandlendeEnheter[parseInt(formValues.nyEnhet, 10)];
-        const values = {
-          enhetNavn: nyEnhet.enhetNavn,
-          enhetId: nyEnhet.enhetId,
-          begrunnelse: formValues.begrunnelse,
-        };
-        nyBehandlendeEnhet(values);
-      }
+      const nyEnhet = filtrerteBehandlendeEnheter[parseInt(formValues.nyEnhet, 10)];
+      const values = {
+        enhetNavn: nyEnhet.enhetNavn,
+        enhetId: nyEnhet.enhetId,
+        begrunnelse: formValues.begrunnelse,
+      };
+      nyBehandlendeEnhet(values);
 
       lukkModal();
     },

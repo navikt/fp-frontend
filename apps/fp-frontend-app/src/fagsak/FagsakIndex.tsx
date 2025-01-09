@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 
@@ -21,7 +21,8 @@ import {
 import { useTrackRouteParam } from '../app/useTrackRouteParam';
 import { BehandlingerIndex } from '../behandling/BehandlingerIndex';
 import { BehandlingSupportIndex } from '../behandlingsupport/BehandlingSupportIndex';
-import { BehandlingApiKeys, requestBehandlingApi, restBehandlingApiHooks } from '../data/behandlingContextApi';
+import { requestBehandlingApi } from '../data/behandlingContextApi';
+import { useHentBehandling } from '../data/useHentBehandling';
 import { FagsakProfileIndex } from '../fagsakprofile/FagsakProfileIndex';
 import { FagsakGrid } from './components/FagsakGrid';
 import { useHentFagsak } from './useHentFagsak';
@@ -61,29 +62,15 @@ export const FagsakIndex = () => {
   };
 
   const [harHentetFagsak, fagsakData] = useHentFagsak(selectedSaksnummer, behandlingUuid, behandling?.versjon);
-
   const fagsakBehandling = fagsakData?.getBehandling(behandlingUuid);
   const erTilbakekreving =
     fagsakBehandling?.type === BehandlingType.TILBAKEKREVING ||
     fagsakBehandling?.type === BehandlingType.TILBAKEKREVING_REVURDERING;
 
-  const { startRequest: hentBehandling } = restBehandlingApiHooks.useRestApiRunner(BehandlingApiKeys.BEHANDLING);
-  const { startRequest: hentTilbakekrevingBehandling } = restBehandlingApiHooks.useRestApiRunner(
-    BehandlingApiKeys.BEHANDLING_TILBAKE,
-  );
-
-  const hentOgSettBehandling = (keepData = false) => {
-    if (behandlingUuid && fagsakBehandling) {
-      if (erTilbakekreving) {
-        hentTilbakekrevingBehandling({ behandlingUuid }, keepData).then(resetApiOgSettBehandling);
-      } else {
-        hentBehandling({ behandlingUuid }, keepData).then(resetApiOgSettBehandling);
-      }
-    }
-  };
+  const { hentOgSettBehandling } = useHentBehandling(erTilbakekreving, setBehandling, behandlingUuid);
 
   useEffect(() => {
-    if (behandlingUuid) {
+    if (behandlingUuid && fagsakBehandling) {
       hentOgSettBehandling();
     }
   }, [behandlingUuid, fagsakBehandling?.uuid]);
@@ -138,7 +125,7 @@ export const FagsakIndex = () => {
             behandlingUuid={behandlingUuid}
             setBehandling={resetApiOgSettBehandling}
             hentOgSettBehandling={hentOgSettBehandling}
-            behandlingVersjon={behandling?.versjon}
+            behandling={behandling}
           />
         }
         supportContent={

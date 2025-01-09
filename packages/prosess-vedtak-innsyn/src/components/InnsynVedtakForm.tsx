@@ -8,7 +8,7 @@ import { hasValidText, maxLength, minLength } from '@navikt/ft-form-validators';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { decodeHtmlEntity, formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
-import { AksjonspunktKode, DokumentMalType,InnsynResultatType, Kommunikasjonsretning } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, DokumentMalType, InnsynResultatType, Kommunikasjonsretning } from '@navikt/fp-kodeverk';
 import { ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import { Aksjonspunkt, Dokument, InnsynDokument } from '@navikt/fp-types';
 import { ForeslaVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -28,7 +28,7 @@ export type ForhandsvisData = {
 };
 
 const getPreviewCallback =
-  (previewCallback: (data: ForhandsvisData) => Promise<any>, begrunnelse?: string) =>
+  (previewCallback: (data: ForhandsvisData) => void, begrunnelse?: string) =>
   (e: React.KeyboardEvent | React.MouseEvent): void => {
     e.preventDefault();
 
@@ -99,7 +99,7 @@ interface OwnProps {
   saksNr: string;
   aksjonspunkter: Aksjonspunkt[];
   submitCallback: (data: ForeslaVedtakAp) => Promise<void>;
-  previewCallback: (data: ForhandsvisData) => Promise<any>;
+  previewCallback: (data: ForhandsvisData) => void;
   readOnly: boolean;
   formData?: FormValues;
   setFormData: (data: FormValues) => void;

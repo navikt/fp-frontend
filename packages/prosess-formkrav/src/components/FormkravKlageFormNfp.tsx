@@ -1,17 +1,17 @@
-import React, { FunctionComponent, ReactElement,useMemo } from 'react';
+import React, { FunctionComponent, ReactElement, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
-import { FormattedMessage, IntlShape,useIntl } from 'react-intl';
+import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 
 import { Detail, Heading, HStack, VStack } from '@navikt/ds-react';
 import { Form, RadioGroupPanel, SelectField, TextAreaField } from '@navikt/ft-form-hooks';
-import { hasValidText,required } from '@navikt/ft-form-validators';
+import { hasValidText, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { DATE_TIME_FORMAT, formaterFritekst } from '@navikt/ft-utils';
 import moment from 'moment';
 
-import { AksjonspunktKode, getKodeverknavnFn,KodeverkType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, getKodeverknavnFn, KodeverkType } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
-import { AlleKodeverk,KlageVurdering } from '@navikt/fp-types';
+import { AlleKodeverk, KlageVurdering } from '@navikt/fp-types';
 import { KlageFormkravAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import AvsluttetBehandling from '../types/avsluttetBehandlingTsType';
@@ -99,7 +99,7 @@ interface OwnProps {
   alleKodeverk: AlleKodeverk;
   avsluttedeBehandlinger: AvsluttetBehandling[];
   readOnly: boolean;
-  lagreFormkravVurdering: (data: FormkravMellomlagretDataType) => Promise<any>;
+  lagreFormkravVurdering: (data: FormkravMellomlagretDataType) => void;
   formData?: FormValues;
   setFormData: (data: FormValues) => void;
 }

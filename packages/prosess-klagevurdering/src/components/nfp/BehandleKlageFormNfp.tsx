@@ -6,7 +6,7 @@ import { Button, Heading, HStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktKode, KlageVurdering as klageVurderingType,KodeverkType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, KlageVurdering as klageVurderingType, KodeverkType } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import { AlleKodeverk, KlageVurdering, KlageVurderingResultat, KodeverkMedNavn } from '@navikt/fp-types';
 import { KlageVurderingResultatAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -15,7 +15,7 @@ import KlageFormType from '../../types/klageFormType';
 import BekreftOgSubmitKlageModal from './BekreftOgSubmitKlageModal';
 import FritekstBrevTextField from './FritekstKlageBrevTextField';
 import KlageVurderingRadioOptionsNfp from './KlageVurderingRadioOptionsNfp';
-import { BrevData,PreviewKlageLink } from './PreviewKlageLink';
+import { BrevData, PreviewKlageLink } from './PreviewKlageLink';
 import TempsaveKlageButton, { TransformedValues } from './TempsaveKlageButton';
 
 import styles from './behandleKlageFormNfp.module.css';
@@ -53,8 +53,8 @@ const buildInitialValues = (klageVurderingResultat?: KlageVurderingResultat): Kl
 });
 
 interface OwnProps {
-  previewCallback: (data: BrevData) => Promise<any>;
-  saveKlage: (data: TransformedValues) => Promise<any>;
+  previewCallback: (data: BrevData) => void;
+  saveKlage: (data: TransformedValues) => void;
   readOnly: boolean;
   readOnlySubmitButton?: boolean;
   sprakkode: string;

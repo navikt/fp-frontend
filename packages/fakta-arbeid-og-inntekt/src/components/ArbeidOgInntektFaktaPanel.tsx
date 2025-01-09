@@ -146,7 +146,7 @@ interface Props {
   registrerArbeidsforhold: (params: ManueltArbeidsforhold) => Promise<void>;
   lagreVurdering: (params: ManglendeInntektsmeldingVurdering) => Promise<void>;
   lagreCallback: (aksjonspunktData: FaktaAksjonspunkt) => Promise<void>;
-  settBehandlingPåVentCallback: (params: { frist?: string; ventearsak: string }) => Promise<any>;
+  settBehandlingPåVentCallback: (params: { frist?: string; ventearsak: string }) => void;
   erOverstyrer: boolean;
   alleKodeverk: AlleKodeverk;
   åpneForNyVurdering: () => void;

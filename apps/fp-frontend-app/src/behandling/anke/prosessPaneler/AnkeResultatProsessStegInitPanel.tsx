@@ -1,13 +1,15 @@
-import React from 'react';
 import { useIntl } from 'react-intl';
+
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
+import { useQuery } from '@tanstack/react-query';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { AnkeResultatProsessIndex } from '@navikt/fp-prosess-anke-resultat';
-import { AnkeVurdering } from '@navikt/fp-types';
 
-import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
-import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { useBehandlingApi } from '../../../data/behandlingApi';
+import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanelNew';
+import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 
 const AKSJONSPUNKT_KODER = [
@@ -16,24 +18,27 @@ const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.FORESLA_VEDTAK_MANUELT,
 ];
 
-const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.ANKE_VURDERING];
-type EndepunktPanelData = {
-  ankeVurdering: AnkeVurdering;
-};
-
 export const AnkeResultatProsessStegInitPanel = ({ ...props }: ProsessPanelInitProps) => {
   const intl = useIntl();
+
+  const api = useBehandlingApi(props.behandling);
+  const { data: ankeVurdering } = useQuery(api.anke.ankeVurderingOptions(props.behandling));
+
+  const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
+
   return (
-    <ProsessDefaultInitPanel<EndepunktPanelData>
+    <ProsessDefaultInitPanel
       {...props}
-      panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
-      aksjonspunktKoder={AKSJONSPUNKT_KODER}
+      standardPanelProps={standardPanelProps}
       prosessPanelKode={ProsessStegCode.ANKE_RESULTAT}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.AnkeResultat' })}
-      skalPanelVisesIMeny={() => true}
-      renderPanel={data => (
-        <AnkeResultatProsessIndex ankeVurdering={data.ankeVurdering} alleKodeverk={data.alleKodeverk} />
+      skalPanelVisesIMeny
+    >
+      {ankeVurdering ? (
+        <AnkeResultatProsessIndex ankeVurdering={ankeVurdering} alleKodeverk={standardPanelProps.alleKodeverk} />
+      ) : (
+        <LoadingPanel />
       )}
-    />
+    </ProsessDefaultInitPanel>
   );
 };
