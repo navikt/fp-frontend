@@ -1,13 +1,12 @@
 import React, { useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { CheckmarkIcon, ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Label } from '@navikt/ds-react';
-import { DateLabel, ExpandableTableRow, PeriodLabel, TableColumn } from '@navikt/ft-ui-komponenter';
-import { TIDENES_ENDE } from '@navikt/ft-utils';
-import classnames from 'classnames/bind';
+import { CheckmarkCircleFillIcon, ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
+import { BodyShort, HStack, Table, VStack } from '@navikt/ds-react';
+import { dateFormat } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
+import { formaterPeriode } from '@navikt/fp-fakta-felles';
 import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 import {
   AksjonspunktÅrsak,
@@ -28,8 +27,6 @@ import { ManglendeInntektsmeldingForm } from './manglendeInntektsmelding/Manglen
 import { ManueltLagtTilArbeidsforholdForm } from './manuelt/ManueltLagtTilArbeidsforholdForm';
 
 import styles from './arbeidsforholdRad.module.css';
-
-const classNames = classnames.bind(styles);
 
 const finnKildekode = (erManueltOpprettet: boolean, harArbeidsforhold: boolean): string => {
   if (erManueltOpprettet) {
@@ -112,8 +109,8 @@ export const ArbeidsforholdRad = ({
   registrerArbeidsforhold,
   lagreVurdering,
   toggleÅpenRad,
-  erRadÅpen,
   alleKodeverk,
+  erRadÅpen,
 }: Props) => {
   const intl = useIntl();
 
@@ -149,10 +146,13 @@ export const ArbeidsforholdRad = ({
   )?.inntekter;
 
   return (
-    <ExpandableTableRow
-      alignWithColumn={1}
+    <Table.ExpandableRow
+      expandOnRowClick
+      shadeOnHover
+      togglePlacement="right"
+      defaultOpen={erRadÅpen}
       content={
-        <>
+        <VStack className={`${styles.container} ${harÅpentAksjonspunkt ? styles.openAksjonspunkt : undefined}`}>
           {erManueltOpprettet && (
             <ManueltLagtTilArbeidsforholdForm
               behandlingUuid={behandlingUuid}
@@ -165,6 +165,7 @@ export const ArbeidsforholdRad = ({
               oppdaterTabell={oppdaterTabell}
             />
           )}
+
           {harArbeidsforholdOgInntektsmelding && (
             <InntektsmeldingerPanel
               saksnummer={saksnummer}
@@ -172,8 +173,10 @@ export const ArbeidsforholdRad = ({
               inntektsmeldingerForRad={inntektsmeldingerForRad}
               alleKodeverk={alleKodeverk}
               arbeidsgiverFødselsdato={arbeidsgiverFødselsdato}
+              arbeidsgiverNavn={arbeidsgiverNavn}
             />
           )}
+
           {harKunInntektsmeldingOgIkkeÅrsak && (
             <InntektsmeldingOpplysningerPanel
               saksnummer={saksnummer}
@@ -184,9 +187,11 @@ export const ArbeidsforholdRad = ({
               )}
               skalViseArbeidsforholdId={false}
               alleKodeverk={alleKodeverk}
+              arbeidsgiverNavn={arbeidsgiverNavn}
               arbeidsgiverFødselsdato={arbeidsgiverFødselsdato}
             />
           )}
+
           {manglerInntektsmelding && (
             <ManglendeInntektsmeldingForm
               saksnummer={saksnummer}
@@ -205,6 +210,7 @@ export const ArbeidsforholdRad = ({
               arbeidsgiverFødselsdato={arbeidsgiverFødselsdato}
             />
           )}
+
           {manglerArbeidsforhold && (
             <ManglendeArbeidsforholdForm
               saksnummer={saksnummer}
@@ -219,8 +225,10 @@ export const ArbeidsforholdRad = ({
               lukkArbeidsforholdRad={toggleÅpenRad}
               oppdaterTabell={oppdaterTabell}
               skalViseArbeidsforholdId={inntektsmeldingerForRad.length > 1}
+              alleKodeverk={alleKodeverk}
             />
           )}
+
           {harArbeidsforholdUtenInntektsmeldingMenIngenÅrsak && (
             <ArbeidsforholdInformasjonPanel
               saksnummer={saksnummer}
@@ -229,50 +237,53 @@ export const ArbeidsforholdRad = ({
               arbeidsforholdForRad={arbeidsforholdForRad}
               alleKodeverk={alleKodeverk}
               arbeidsgiverFødselsdato={arbeidsgiverFødselsdato}
+              arbeidsgiverNavn={arbeidsgiverNavn}
             />
           )}
-        </>
+        </VStack>
       }
-      showContent={erRadÅpen}
-      toggleContent={toggleÅpenRad}
-      isApLeftBorder={harÅpentAksjonspunkt}
     >
-      <TableColumn className={classNames('ikon', erRadÅpen ? 'imageColTopPadding' : undefined)}>
-        {!harÅpentAksjonspunkt && (
-          <CheckmarkIcon title={intl.formatMessage({ id: 'ArbeidsforholdRad.Ok' })} className={styles.checkmarkIcon} />
-        )}
-        {harÅpentAksjonspunkt && (
-          <ExclamationmarkTriangleFillIcon
-            title={intl.formatMessage({ id: 'ArbeidsforholdRad.Aksjonspunkt' })}
-            className={styles.exclamationmarkIcon}
-          />
-        )}
-      </TableColumn>
-      <TableColumn className={erRadÅpen ? styles.colTopPadding : undefined}>
-        {erRadÅpen && <Label size="small">{arbeidsgiverNavn}</Label>}
-        {!erRadÅpen && <BodyShort size="small">{arbeidsgiverNavn}</BodyShort>}
-      </TableColumn>
-      <TableColumn className={erRadÅpen ? styles.colTopPadding : undefined}>
-        <BodyShort>
-          {periode?.fom && (
-            <PeriodLabel
-              dateStringFom={periode.fom}
-              dateStringTom={periode.tom !== TIDENES_ENDE ? periode.tom : undefined}
+      <Table.DataCell>
+        <HStack gap="1" align="center">
+          {harÅpentAksjonspunkt ? (
+            <ExclamationmarkTriangleFillIcon
+              title={intl.formatMessage({ id: 'ArbeidsforholdRad.Aksjonspunkt' })}
+              width={24}
+              height={24}
+              color="var(--a-icon-warning)"
+            />
+          ) : (
+            <CheckmarkCircleFillIcon
+              title={intl.formatMessage({ id: 'ArbeidsforholdRad.Ok' })}
+              width={24}
+              height={24}
+              color="var(--a-green-400)"
             />
           )}
-          {!periode && '-'}
-        </BodyShort>
-      </TableColumn>
-      <TableColumn className={erRadÅpen ? styles.colTopPadding : undefined}>
+          <BodyShort>
+            <FormattedMessage
+              id={harÅpentAksjonspunkt ? 'ArbeidsforholdRad.Aksjonspunkt.Label' : 'ArbeidsforholdRad.Ok.Label'}
+            />
+          </BodyShort>
+        </HStack>
+      </Table.DataCell>
+      <Table.DataCell>
+        <BodyShort>{arbeidsgiverNavn}</BodyShort>
+      </Table.DataCell>
+      <Table.DataCell>
+        <BodyShort>{formaterPeriode(periode)}</BodyShort>
+      </Table.DataCell>
+      <Table.DataCell>
         <BodyShort>
           <FormattedMessage id={finnKildekode(erManueltOpprettet, arbeidsforholdForRad.length > 0)} />
         </BodyShort>
-      </TableColumn>
-      <TableColumn className={erRadÅpen ? styles.colTopPadding : undefined}>
+      </Table.DataCell>
+      <Table.DataCell>
         <BodyShort>
-          {arbeidsforholdForRad.length < 2 && inntektsmeldingerForRad.length === 1 && (
-            <DateLabel dateString={inntektsmeldingerForRad[0].motattDato} />
-          )}
+          {arbeidsforholdForRad.length < 2 &&
+            inntektsmeldingerForRad.length === 1 &&
+            dateFormat(inntektsmeldingerForRad[0].motattDato)}
+
           {!manglerInntektsmelding &&
             arbeidsforholdForRad.length > 1 &&
             inntektsmeldingerForRad.length === arbeidsforholdForRad.length && (
@@ -283,7 +294,7 @@ export const ArbeidsforholdRad = ({
             <FormattedMessage id="ArbeidsforholdRad.IkkeMottatt" />
           )}
         </BodyShort>
-      </TableColumn>
-    </ExpandableTableRow>
+      </Table.DataCell>
+    </Table.ExpandableRow>
   );
 };

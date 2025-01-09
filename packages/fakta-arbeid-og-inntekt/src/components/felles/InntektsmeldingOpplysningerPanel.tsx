@@ -1,23 +1,27 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { FileFillIcon, PhoneFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Detail, HStack, Label, Link, VStack } from '@navikt/ds-react';
-import { DateLabel, PeriodLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { formatCurrencyNoKr } from '@navikt/ft-utils';
+import { BodyShort, HGrid, VStack } from '@navikt/ds-react';
 
-import { getKodeverknavnFraKode, KodeverkType } from '@navikt/fp-kodeverk';
-import { hentDokumentLenke } from '@navikt/fp-konstanter';
+import {
+  Arbeidsgiver,
+  InfoBlokk,
+  KontaktPerson,
+  LastNedPdfKnapp,
+  Månedsinntekt,
+  PermisjonOgMangel,
+  Refusjon,
+  Stillingsprosent,
+} from '@navikt/fp-fakta-felles';
 import { AlleKodeverk, AoIArbeidsforhold, Inntektsmelding } from '@navikt/fp-types';
-
-import styles from './inntektsmeldingOpplysningerPanel.module.css';
 
 interface Props {
   saksnummer: string;
   arbeidsforhold?: AoIArbeidsforhold;
   inntektsmelding: Inntektsmelding;
   skalViseArbeidsforholdId: boolean;
-  alleKodeverk?: AlleKodeverk;
+  alleKodeverk: AlleKodeverk;
+  arbeidsgiverNavn: string;
   arbeidsgiverFødselsdato?: string;
   ikkeVisInfo?: boolean;
 }
@@ -28,136 +32,46 @@ export const InntektsmeldingOpplysningerPanel = ({
   inntektsmelding,
   skalViseArbeidsforholdId,
   alleKodeverk,
+  arbeidsgiverNavn,
   arbeidsgiverFødselsdato,
   ikkeVisInfo,
 }: Props) => (
-  <>
-    <VerticalSpacer eightPx />
-    {!ikkeVisInfo && arbeidsgiverFødselsdato && (
-      <HStack gap="4">
-        <Label size="small">
-          <FormattedMessage id="ArbeidsforholdInformasjonPanel.Fodselsdato" />
-        </Label>
-        <Detail>
-          <DateLabel dateString={arbeidsgiverFødselsdato} />
-        </Detail>
-      </HStack>
-    )}
-    {!ikkeVisInfo && !arbeidsgiverFødselsdato && (
-      <HStack gap="4">
-        <Label size="small">
-          <FormattedMessage id="ArbeidsforholdInformasjonPanel.Orgnr" />
-        </Label>
-        <Detail>{inntektsmelding.arbeidsgiverIdent}</Detail>
-      </HStack>
-    )}
-    <VerticalSpacer eightPx />
-    {skalViseArbeidsforholdId && (
-      <>
-        <HStack gap="4">
-          <Label size="small">
-            <FormattedMessage id="InntektsmeldingOpplysningerPanel.ArbeidsforholdId" />
-          </Label>
-          <BodyShort size="small">{inntektsmelding.eksternArbeidsforholdId}</BodyShort>
-        </HStack>
-        <VerticalSpacer eightPx />
-      </>
-    )}
-    {arbeidsforhold && (
-      <>
-        <HStack gap="4">
-          <Label size="small">
-            <FormattedMessage id="InntektsmeldingOpplysningerPanel.Stillingsprosent" />
-          </Label>
-          <BodyShort size="small">
-            {arbeidsforhold.stillingsprosent ? `${arbeidsforhold.stillingsprosent}%` : '-'}
-          </BodyShort>
-        </HStack>
-        {arbeidsforhold.permisjonOgMangel && (
-          <>
-            <VerticalSpacer eightPx />
-            <HStack gap="4">
-              <Label size="small">
-                {getKodeverknavnFraKode(
-                  alleKodeverk,
-                  KodeverkType.PERMISJONSBESKRIVELSE_TYPE,
-                  arbeidsforhold.permisjonOgMangel.type,
-                )}
-              </Label>
-              <BodyShort size="small">
-                <PeriodLabel
-                  dateStringFom={arbeidsforhold.permisjonOgMangel.permisjonFom}
-                  dateStringTom={arbeidsforhold.permisjonOgMangel.permisjonTom}
-                />
-              </BodyShort>
-            </HStack>
-          </>
-        )}
-        <VerticalSpacer eightPx />
-      </>
-    )}
-    <HStack gap="4">
-      <Label size="small">
-        <FormattedMessage id="InntektsmeldingOpplysningerPanel.Inntektsmelding" />
-      </Label>
-      <BodyShort size="small">{formatCurrencyNoKr(inntektsmelding.inntektPrMnd)}</BodyShort>
-    </HStack>
-    <VerticalSpacer eightPx />
-    <HStack gap="4">
-      <Label size="small">
-        <FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjon" />
-      </Label>
-      <BodyShort size="small">
-        <FormattedMessage
-          id={
-            inntektsmelding.refusjonPrMnd
-              ? 'InntektsmeldingOpplysningerPanel.Ja'
-              : 'InntektsmeldingOpplysningerPanel.Nei'
-          }
+  <VStack gap="2">
+    <HGrid columns={3} gap="2">
+      {!ikkeVisInfo && (
+        <Arbeidsgiver
+          arbeidsgiverFødselsdato={arbeidsgiverFødselsdato}
+          arbeidsgiverNavn={arbeidsgiverNavn}
+          arbeidsgiverIdent={inntektsmelding.arbeidsgiverIdent}
         />
-      </BodyShort>
-    </HStack>
-    <VerticalSpacer eightPx />
-    {inntektsmelding.refusjonPrMnd !== undefined && inntektsmelding.refusjonPrMnd !== null && (
-      <>
-        <HStack gap="4">
-          <Label size="small">
-            <FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjonsbeløp" />
-          </Label>
-          <BodyShort size="small">{formatCurrencyNoKr(inntektsmelding.refusjonPrMnd)}</BodyShort>
-        </HStack>
-        <VerticalSpacer eightPx />
-      </>
-    )}
-    <Link
-      href={hentDokumentLenke(saksnummer, inntektsmelding.journalpostId, inntektsmelding.dokumentId)}
-      target="_blank"
-    >
-      <span>
-        <BodyShort size="small" className={styles.inline}>
-          <FormattedMessage id="InntektsmeldingOpplysningerPanel.ÅpneInntektsmelding" />
-        </BodyShort>
-      </span>
-      <FileFillIcon className={styles.docIcon} />
-    </Link>
-    <VerticalSpacer sixteenPx />
-    <HStack gap="4">
-      <PhoneFillIcon className={styles.phoneIcon} />
-      <div>
-        <VStack>
-          <Label size="small">
-            <FormattedMessage id="InntektsmeldingOpplysningerPanel.Kontaktinfo" />
-          </Label>
-          <Detail>{inntektsmelding.kontaktpersonNavn}</Detail>
-          <Detail>
-            <FormattedMessage
-              id="InntektsmeldingOpplysningerPanel.Tlf"
-              values={{ nr: inntektsmelding.kontaktpersonNummer }}
-            />
-          </Detail>
-        </VStack>
-      </div>
-    </HStack>
-    <VerticalSpacer thirtyTwoPx />
-  </>
+      )}
+
+      <KontaktPerson inntektsmelding={inntektsmelding} />
+
+      {skalViseArbeidsforholdId && (
+        <InfoBlokk tittel={<FormattedMessage id="InntektsmeldingOpplysningerPanel.ArbeidsforholdId" />}>
+          <BodyShort>{inntektsmelding.eksternArbeidsforholdId}</BodyShort>
+        </InfoBlokk>
+      )}
+
+      {arbeidsforhold && <Stillingsprosent stillingsprosent={arbeidsforhold.stillingsprosent} />}
+
+      {arbeidsforhold?.permisjonOgMangel && (
+        <PermisjonOgMangel
+          type={arbeidsforhold.permisjonOgMangel.type}
+          alleKodeverk={alleKodeverk}
+          fom={arbeidsforhold.permisjonOgMangel.permisjonFom}
+          tom={arbeidsforhold.permisjonOgMangel.permisjonTom}
+        />
+      )}
+
+      <Månedsinntekt inntektsmelding={inntektsmelding} />
+
+      <Refusjon inntektsmelding={inntektsmelding} />
+    </HGrid>
+
+    <div>
+      <LastNedPdfKnapp saksnummer={saksnummer} inntektsmelding={inntektsmelding} />
+    </div>
+  </VStack>
 );

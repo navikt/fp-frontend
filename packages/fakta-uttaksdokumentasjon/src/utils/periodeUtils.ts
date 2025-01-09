@@ -1,11 +1,7 @@
-import { dateFormat, ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 type Periode = { fom: string; tom: string };
-
-export function getFormatertPeriode(periode: Periode) {
-  return `${dateFormat(periode.fom)} – ${dateFormat(periode.tom)}`;
-}
 
 export function splitPeriodePåDato(periode: Periode, splitDato: string): [Periode, Periode] {
   return [

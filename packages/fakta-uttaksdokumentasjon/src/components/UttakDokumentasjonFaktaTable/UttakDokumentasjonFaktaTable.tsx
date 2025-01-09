@@ -4,9 +4,9 @@ import { FormattedMessage } from 'react-intl';
 import { BodyShort, Table } from '@navikt/ds-react';
 import { calcDaysAndWeeks } from '@navikt/ft-utils';
 
+import { formaterPeriode } from '@navikt/fp-fakta-felles';
 import { DokumentasjonVurderingBehov, UttakType } from '@navikt/fp-types';
 
-import { getFormatertPeriode } from '../../utils/periodeUtils';
 import UttakDokumentasjonFaktaDetailForm from '../UttakDokumentasjonFaktaDetailForm';
 import getUttakÅrsakTekst from './uttakÅrsak';
 import UttakVurderingStatus from './UttakVurderingStatus';
@@ -102,7 +102,7 @@ const UttakDokumentasjonFaktaTable: FunctionComponent<OwnProps> = ({
           const kolonner = (
             <>
               <Table.DataCell>
-                <BodyShort weight="semibold">{getFormatertPeriode(behov)}</BodyShort>
+                <BodyShort weight="semibold">{formaterPeriode(behov)}</BodyShort>
               </Table.DataCell>
               <Table.DataCell>
                 <BodyShort>{calcDaysAndWeeks(behov.fom, behov.tom).formattedString}</BodyShort>

@@ -1,28 +1,40 @@
 import React, { useRef } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage, RawIntlProvider, useIntl } from 'react-intl';
 
 import { ArrowForwardIcon } from '@navikt/aksel-icons';
 import { BodyLong, Button, Modal } from '@navikt/ds-react';
+import { createIntl } from '@navikt/ft-utils';
 
 import { hentDokumentLenke } from '@navikt/fp-konstanter';
 import { Fagsak, Inntektsmelding } from '@navikt/fp-types';
 
-export const LastNedPdfKnapp = ({ inntektsmelding, fagsak }: { fagsak: Fagsak; inntektsmelding: Inntektsmelding }) => {
+import messages from '../../../i18n/nb_NO.json';
+
+const intl = createIntl(messages);
+export const LastNedPdfKnapp = ({
+  inntektsmelding,
+  saksnummer,
+}: {
+  saksnummer: string;
+  inntektsmelding: Inntektsmelding;
+}) => {
   return (
-    <Button
-      type="button"
-      onClick={() => {
-        window.open(
-          hentDokumentLenke(fagsak.saksnummer, inntektsmelding.journalpostId, inntektsmelding.dokumentId),
-          '_blank',
-        );
-      }}
-      variant="secondary"
-      size="small"
-      icon={<ArrowForwardIcon />}
-    >
-      <FormattedMessage id="InntektsmeldingFaktaPanel.modal.trigger" />
-    </Button>
+    <RawIntlProvider value={intl}>
+      <Button
+        type="button"
+        onClick={() => {
+          window.open(
+            hentDokumentLenke(saksnummer, inntektsmelding.journalpostId, inntektsmelding.dokumentId),
+            '_blank',
+          );
+        }}
+        variant="secondary"
+        size="small"
+        icon={<ArrowForwardIcon />}
+      >
+        <FormattedMessage id="Inntektsmelding.LastNedPDF.trigger" />
+      </Button>
+    </RawIntlProvider>
   );
 };
 // TODO: denne skal taes i bruk når all info fra PDF er tilgjengelig i GUI.
@@ -32,15 +44,15 @@ const LastNedPdfModalKnapp = ({ inntektsmelding, fagsak }: { fagsak: Fagsak; inn
   const intl = useIntl();
 
   return (
-    <>
+    <RawIntlProvider value={intl}>
       <Button icon={<ArrowForwardIcon />} variant="secondary" size="small" onClick={() => ref.current?.showModal()}>
-        <FormattedMessage id="InntektsmeldingFaktaPanel.modal.trigger" />
+        <FormattedMessage id="Inntektsmelding.LastNedPDF.trigger" />
       </Button>
 
-      <Modal ref={ref} header={{ heading: intl.formatMessage({ id: 'InntektsmeldingFaktaPanel.modal.heading' }) }}>
+      <Modal ref={ref} header={{ heading: intl.formatMessage({ id: 'Inntektsmelding.LastNedPDF.heading' }) }}>
         <Modal.Body>
           <BodyLong>
-            <FormattedMessage id="InntektsmeldingFaktaPanel.modal.body" />
+            <FormattedMessage id="Inntektsmelding.LastNedPDF.body" />
           </BodyLong>
         </Modal.Body>
         <Modal.Footer>
@@ -55,13 +67,13 @@ const LastNedPdfModalKnapp = ({ inntektsmelding, fagsak }: { fagsak: Fagsak; inn
             }}
             variant="primary"
           >
-            <FormattedMessage id="InntektsmeldingFaktaPanel.modal.button.primary" />
+            <FormattedMessage id="Inntektsmelding.LastNedPDF.button.primary" />
           </Button>
           <Button type="button" variant="secondary" onClick={() => ref.current?.close()}>
-            <FormattedMessage id="InntektsmeldingFaktaPanel.modal.button.secondary" />
+            <FormattedMessage id="Inntektsmelding.LastNedPDF.button.secondary" />
           </Button>
         </Modal.Footer>
       </Modal>
-    </>
+    </RawIntlProvider>
   );
 };
