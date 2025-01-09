@@ -1,5 +1,3 @@
-import React, { useCallback } from 'react';
-
 import { Behandling, Fagsak } from '@navikt/fp-types';
 
 import { BehandlingContainer } from '../felles/BehandlingContainer';
@@ -24,27 +22,22 @@ const InnsynPaneler = ({
   opneSokeside,
   setSkalOppdatereEtterBekreftelseAvAp,
 }: Props) => {
-  const hentProsessPaneler = useCallback(
-    (props: ProsessPanelInitProps) => (
-      <>
-        <BehandleInnsynProsessStegInitPanel {...props} fagsak={fagsak} />
-        <InnsynVedtakProsessStegInitPanel
-          {...props}
-          fagsak={fagsak}
-          opneSokeside={opneSokeside}
-          setSkalOppdatereEtterBekreftelseAvAp={setSkalOppdatereEtterBekreftelseAvAp}
-        />
-      </>
-    ),
-    [fagsak, opneSokeside, setSkalOppdatereEtterBekreftelseAvAp],
-  );
-
   return (
     <BehandlingContainer
       behandling={behandling}
       valgtProsessSteg={valgtProsessSteg}
       oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-      hentProsessPaneler={hentProsessPaneler}
+      hentProsessPaneler={(props: ProsessPanelInitProps) => (
+        <>
+          <BehandleInnsynProsessStegInitPanel {...props} fagsak={fagsak} />
+          <InnsynVedtakProsessStegInitPanel
+            {...props}
+            fagsak={fagsak}
+            opneSokeside={opneSokeside}
+            setSkalOppdatereEtterBekreftelseAvAp={setSkalOppdatereEtterBekreftelseAvAp}
+          />
+        </>
+      )}
     />
   );
 };

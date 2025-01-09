@@ -16,8 +16,8 @@ const intl = createIntl(messages);
 
 interface Props {
   klageVurdering: KlageVurdering;
-  previewCallback: (data: BrevData) => Promise<void>;
-  saveKlage: (data: TransformedValues) => Promise<void>;
+  previewCallback: (data: BrevData) => void;
+  saveKlage: (data: TransformedValues) => void;
 }
 
 export const KlagevurderingProsessIndex = ({

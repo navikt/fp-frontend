@@ -1,5 +1,3 @@
-import React, { useCallback, useMemo } from 'react';
-
 import { Behandling, BehandlingAppKontekst } from '@navikt/fp-types';
 
 import { BehandlingContainer } from '../felles/BehandlingContainer';
@@ -25,42 +23,23 @@ const AnkePaneler = ({
   oppdaterProsessStegOgFaktaPanelIUrl,
   alleBehandlinger,
 }: Props) => {
-  const fagsakBehandlingerInfo = useMemo(
-    () =>
-      alleBehandlinger
-        .filter(b => !b.behandlingHenlagt)
-        .map(b => ({
-          uuid: b.uuid,
-          type: b.type,
-          status: b.status,
-          opprettet: b.opprettet,
-          avsluttet: b.avsluttet,
-          resultatType: b.behandlingsresultat?.type,
-        })),
-    [alleBehandlinger],
-  );
-
-  const hentFaktaPaneler = useCallback((props: FaktaPanelInitProps) => <VergeFaktaInitPanel {...props} />, []);
-
-  const hentProsessPaneler = useCallback(
-    (props: ProsessPanelInitProps) => (
-      <>
-        <AnkeBehandlingProsessStegInitPanel {...props} alleBehandlinger={fagsakBehandlingerInfo} />
-        <AnkeResultatProsessStegInitPanel {...props} />
-        <AnkeTrygderettsbehandlingProsessStegInitPanel {...props} />
-      </>
-    ),
-    [],
-  );
-
   return (
     <BehandlingContainer
       behandling={behandling}
       valgtProsessSteg={valgtProsessSteg}
       valgtFaktaSteg={valgtFaktaSteg}
       oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-      hentFaktaPaneler={hentFaktaPaneler}
-      hentProsessPaneler={hentProsessPaneler}
+      hentFaktaPaneler={(props: FaktaPanelInitProps) => <VergeFaktaInitPanel {...props} />}
+      hentProsessPaneler={(props: ProsessPanelInitProps) => (
+        <>
+          <AnkeBehandlingProsessStegInitPanel
+            {...props}
+            alleBehandlinger={alleBehandlinger.filter(b => !b.behandlingHenlagt)}
+          />
+          <AnkeResultatProsessStegInitPanel {...props} />
+          <AnkeTrygderettsbehandlingProsessStegInitPanel {...props} />
+        </>
+      )}
     />
   );
 };

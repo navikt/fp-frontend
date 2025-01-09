@@ -46,7 +46,7 @@ const finnFagsakMarkeringTekst = (fagsak: Fagsak): string[] => {
 interface Props {
   fagsakData: FagsakData;
   behandlingUuid?: string;
-  behandlingVersjon?: number;
+  behandling?: Behandling;
   setBehandling: (behandling: Behandling | undefined) => void;
   hentOgSettBehandling: () => void;
 }
@@ -54,7 +54,7 @@ interface Props {
 export const FagsakProfileIndex = ({
   fagsakData,
   behandlingUuid,
-  behandlingVersjon,
+  behandling,
   setBehandling,
   hentOgSettBehandling,
 }: Props) => {
@@ -119,6 +119,7 @@ export const FagsakProfileIndex = ({
                   behandlingUuid={behandlingUuid}
                   setBehandling={setBehandling}
                   hentOgSettBehandling={hentOgSettBehandling}
+                  behandling={behandling}
                 />
               </ErrorBoundary>
             </HStack>
@@ -145,12 +146,7 @@ export const FagsakProfileIndex = ({
           errorMessageCallback={addErrorMessage}
           errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Risikoklassifisering' })}
         >
-          <RisikoklassifiseringIndex
-            fagsakData={fagsakData}
-            behandlingUuid={behandlingUuid}
-            behandlingVersjon={behandlingVersjon}
-            setBehandling={setBehandling}
-          />
+          <RisikoklassifiseringIndex fagsakData={fagsakData} behandling={behandling} setBehandling={setBehandling} />
         </ErrorBoundary>
         <EksterneRessurser fagsak={fagsak} ainntektHref={ainntektHref} arbeidstakerHref={arbeidstakerHref} />
       </VStack>
