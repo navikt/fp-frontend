@@ -1,7 +1,7 @@
-import React, { ReactElement, useState } from 'react';
+import { ReactElement, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Buildings3Icon, FigureInwardIcon, FigureOutwardIcon, SilhouetteIcon } from '@navikt/aksel-icons';
+import { Buildings3Icon, SilhouetteIcon } from '@navikt/aksel-icons';
 import { Alert, BodyShort, Button, CopyButton, Heading, HStack, Search, VStack } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { isValidFodselsnummer } from '@navikt/ft-utils';
@@ -12,24 +12,10 @@ import { OppdaterMedBruker } from '../../../typer/oppdaterBrukerTsType';
 
 import styles from './brukerAvsenderPanel.module.css';
 
-const finnKjønnBilde = (brukerFnr: string): ReactElement => {
-  if (!brukerFnr || brukerFnr.length !== 11) {
-    return <SilhouetteIcon className={styles.ikon} />;
-  }
-  const tall = parseInt(brukerFnr.charAt(8), 10);
-  return tall % 2 === 0 ? <FigureOutwardIcon className={styles.ikon} /> : <FigureInwardIcon className={styles.ikon} />;
-};
-
 const finnAvsenderBilde = (journalpost: Journalpost): ReactElement => {
   const avsenderId = journalpost.avsender?.id;
-  if (!avsenderId) {
-    return <SilhouetteIcon className={styles.ikon} />;
-  }
-  if (avsenderId.length === 9) {
+  if (avsenderId && avsenderId.length === 9) {
     return <Buildings3Icon className={styles.ikon} />;
-  }
-  if (avsenderId.length === 11) {
-    return finnKjønnBilde(journalpost.bruker.fnr);
   }
   return <SilhouetteIcon className={styles.ikon} />;
 };
@@ -149,7 +135,7 @@ export const BrukerAvsenderPanel = ({
                   <BrukerAvsenderRad
                     navn={brukerTilForhåndsvisning.navn}
                     id={brukerTilForhåndsvisning.fødselsnummer}
-                    ikon={finnKjønnBilde(brukerTilForhåndsvisning.fødselsnummer)}
+                    ikon={<SilhouetteIcon className={styles.ikon} />}
                   />
                   <VerticalSpacer sixteenPx />
                   <Button type="button" onClick={knyttSøkerTilJP}>
@@ -165,7 +151,7 @@ export const BrukerAvsenderPanel = ({
         <BrukerAvsenderRad
           navn={journalpost.bruker.navn}
           id={journalpost.bruker.fnr}
-          ikon={finnKjønnBilde(journalpost.bruker?.fnr)}
+          ikon={<SilhouetteIcon className={styles.ikon} />}
           title="ValgtOppgave.Bruker"
         />
       )}
