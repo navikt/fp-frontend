@@ -1,7 +1,7 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 
-import { LoadingPanel, usePrevious, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { LoadingPanel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
 import { hentDokumentLenke } from '@navikt/fp-konstanter';
@@ -51,11 +51,9 @@ const EMPTY_ARRAY = [] as Dokument[];
 export const DokumentIndex = ({ behandlingUuid, behandlingVersjon, saksnummer }: Props) => {
   const api = useFagsakApi();
   const intl = useIntl();
-  const forrigeSaksnummer = usePrevious(saksnummer);
 
-  const isEnabled = !forrigeSaksnummer;
   const { data: alleDokumenter = EMPTY_ARRAY, status } = useQuery(
-    api.hentDokumenter(isEnabled, saksnummer, behandlingUuid, behandlingVersjon),
+    api.hentDokumenter(saksnummer, behandlingUuid, behandlingVersjon),
   );
 
   if (status === 'pending') {

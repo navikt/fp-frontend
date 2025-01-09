@@ -190,14 +190,13 @@ const getHentFagsakFpTilbakeOptions = (links?: Link[]) => (isEnabled: boolean, s
   });
 
 const getHentDokumenter =
-  (links?: Link[]) => (isEnabled: boolean, saksnummer: string, behandlingUuid?: string, behandlingVersjon?: number) =>
+  (links?: Link[]) => (saksnummer: string, behandlingUuid?: string, behandlingVersjon?: number) =>
     queryOptions({
       queryKey: [FagsakRel.ALL_DOCUMENTS, saksnummer, behandlingUuid, behandlingVersjon],
       queryFn: () =>
         kyExtended
           .get(getUrlFromRel(FagsakRel.ALL_DOCUMENTS, links), { searchParams: { saksnummer } })
           .json<Dokument[]>(),
-      enabled: isEnabled,
     });
 
 const getKanTilbakekrevingOpprettesOptions =
