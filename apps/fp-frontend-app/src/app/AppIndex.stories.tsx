@@ -5,10 +5,9 @@ import { Meta, StoryObj } from '@storybook/react';
 import MockAdapter from 'axios-mock-adapter';
 import { http, HttpResponse } from 'msw';
 
-import { RestApiErrorProvider, RestApiProvider } from '@navikt/fp-rest-api-hooks';
+import { RestApiErrorProvider } from '@navikt/fp-rest-api';
 import { alleKodeverk, alleKodeverkTilbakekreving } from '@navikt/fp-storybook-utils';
 
-import { requestBehandlingApi } from '../data/behandlingContextApi';
 import { FagsakRel, FagsakUrl, wrapUrl } from '../data/fagsakApi';
 import { notEmpty } from '../data/notEmpty';
 import { AppIndexWrapper } from './AppIndex';

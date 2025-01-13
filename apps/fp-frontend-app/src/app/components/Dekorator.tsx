@@ -6,7 +6,7 @@ import { decodeHtmlEntity } from '@navikt/ft-utils';
 import { useQuery } from '@tanstack/react-query';
 
 import { RETTSKILDE_URL, SYSTEMRUTINE_URL } from '@navikt/fp-konstanter';
-import { useRestApiError, useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
+import { useRestApiError, useRestApiErrorDispatcher } from '@navikt/fp-rest-api';
 import { DekoratorMedFeilviserSakIndex, Feilmelding } from '@navikt/fp-sak-dekorator';
 
 import { initFetchOptions } from '../../data/fagsakApi';

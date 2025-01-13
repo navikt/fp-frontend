@@ -84,7 +84,6 @@
     "@navikt/fp-prosess-vilkar-soknadsfrist": "workspace:*",
     "@navikt/fp-prosess-vilkar-svangerskap": "workspace:*",
     "@navikt/fp-rest-api": "workspace:*",
-    "@navikt/fp-rest-api-hooks": "workspace:*",
     "@navikt/fp-sak-aktor": "workspace:*",
     "@navikt/fp-sak-behandling-velger": "workspace:*",
     "@navikt/fp-sak-dekorator": "workspace:*",

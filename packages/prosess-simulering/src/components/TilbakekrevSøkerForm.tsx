@@ -65,7 +65,7 @@ interface OwnProps {
   sprakkode: string;
   aksjonspunkt?: Aksjonspunkt;
   readOnly: boolean;
-  previewCallback: (mottaker: string, fritekst: string) => Promise<any>;
+  previewCallback: (params: { mottaker: string; fritekst: string }) => void;
 }
 
 const TilbakekrevSøkerForm: FunctionComponent<OwnProps> = ({
@@ -85,7 +85,7 @@ const TilbakekrevSøkerForm: FunctionComponent<OwnProps> = ({
 
   const previewMessage = useCallback(
     (e: React.MouseEvent): void => {
-      previewCallback('', varseltekst || ' ');
+      previewCallback({ mottaker: '', fritekst: varseltekst ?? ' ' });
       e.preventDefault();
     },
     [varseltekst],

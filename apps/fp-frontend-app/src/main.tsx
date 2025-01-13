@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Event, EventHint, init, Integrations } from '@sentry/browser';
 import dayjs from 'dayjs';
 
-import { RestApiErrorProvider, RestApiProvider } from '@navikt/fp-rest-api-hooks';
+import { RestApiErrorProvider } from '@navikt/fp-rest-api';
 
 import { AppIndexWrapper } from './app/AppIndex';
 
@@ -51,10 +51,8 @@ const root = createRoot(app);
 
 root.render(
   <BrowserRouter basename="/">
-    <RestApiProvider>
-      <RestApiErrorProvider>
-        <AppIndexWrapper />
-      </RestApiErrorProvider>
-    </RestApiProvider>
+    <RestApiErrorProvider>
+      <AppIndexWrapper />
+    </RestApiErrorProvider>
   </BrowserRouter>,
 );

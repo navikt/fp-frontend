@@ -1,4 +1,3 @@
-import React from 'react';
 import { useIntl } from 'react-intl';
 
 import {
@@ -7,7 +6,9 @@ import {
   FtBeregningsgrunnlag,
   FtVilkar,
 } from '@navikt/ft-fakta-beregning';
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
+import { useQuery } from '@tanstack/react-query';
 
 import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
@@ -19,11 +20,70 @@ import {
   Vilkarperiode,
 } from '@navikt/fp-types';
 
-import { BehandlingApiKeys, requestBehandlingApi } from '../../../data/behandlingContextApi';
+import { BehandlingRel, useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
+import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
 
 import '@navikt/ft-fakta-beregning/dist/style.css';
+
+const AKSJONSPUNKT_KODER = [
+  AksjonspunktKode.VURDER_FAKTA_FOR_ATFL_SN,
+  AksjonspunktKode.AVKLAR_AKTIVITETER,
+  AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER,
+  AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG,
+];
+
+const OVERSTYRING_AP_CODES = [
+  AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER,
+  AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG,
+];
+
+interface Props {
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  rettigheter: AksessRettigheter;
+}
+
+export const BeregningFaktaInitPanel = ({
+  arbeidsgiverOpplysningerPerId,
+  rettigheter,
+  ...props
+}: Props & FaktaPanelInitProps) => {
+  const intl = useIntl();
+
+  const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER, OVERSTYRING_AP_CODES);
+
+  const api = useBehandlingApi(props.behandling);
+
+  const { data: beregningsgrunnlag } = useQuery(api.beregningsgrunnlagOptions(props.behandling));
+
+  return (
+    <FaktaDefaultInitPanel
+      {...props}
+      standardPanelProps={standardPanelProps}
+      faktaPanelKode={FaktaPanelCode.BEREGNING}
+      faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Beregning' })}
+      skalPanelVisesIMeny={standardPanelProps.behandling.links.some(
+        link => link.rel === BehandlingRel.BEREGNINGSGRUNNLAG,
+      )}
+    >
+      {beregningsgrunnlag ? (
+        <BeregningFaktaIndex
+          {...standardPanelProps}
+          kodeverkSamling={standardPanelProps.alleKodeverk}
+          vilkar={lagBGVilkar(props.behandling?.vilkår, beregningsgrunnlag)}
+          beregningsgrunnlag={lagFormatertBG(beregningsgrunnlag)}
+          submitCallback={lagModifisertCallback(standardPanelProps.submitCallback)}
+          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+          erOverstyrer={rettigheter.kanOverstyreAccess.isEnabled}
+          skalKunneOverstyreAktiviteter
+        />
+      ) : (
+        <LoadingPanel />
+      )}
+    </FaktaDefaultInitPanel>
+  );
+};
 
 const mapBGKodeTilFpsakKode = (bgKode: string): string => {
   switch (bgKode) {
@@ -89,58 +149,4 @@ const lagFormatertBG = (beregningsgrunnlag: Beregningsgrunnlag): FtBeregningsgru
     vilkårsperiodeFom: beregningsgrunnlag.skjaeringstidspunktBeregning,
   };
   return [nyttBG];
-};
-
-const AKSJONSPUNKT_KODER = [
-  AksjonspunktKode.VURDER_FAKTA_FOR_ATFL_SN,
-  AksjonspunktKode.AVKLAR_AKTIVITETER,
-  AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER,
-  AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG,
-];
-
-const OVERSTYRING_AP_CODES = [
-  AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER,
-  AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG,
-];
-
-const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.BEREGNINGSGRUNNLAG];
-
-type EndepunktPanelData = {
-  beregningsgrunnlag: Beregningsgrunnlag;
-};
-
-interface Props {
-  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  rettigheter: AksessRettigheter;
-}
-
-export const BeregningFaktaInitPanel = ({
-  arbeidsgiverOpplysningerPerId,
-  rettigheter,
-  ...props
-}: Props & FaktaPanelInitProps) => {
-  const intl = useIntl();
-  return (
-    <FaktaDefaultInitPanel<EndepunktPanelData>
-      {...props}
-      panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
-      aksjonspunktKoder={AKSJONSPUNKT_KODER}
-      overstyringApKoder={OVERSTYRING_AP_CODES}
-      faktaPanelKode={FaktaPanelCode.BEREGNING}
-      faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Beregning' })}
-      skalPanelVisesIMeny={() => requestBehandlingApi.hasPath(BehandlingApiKeys.BEREGNINGSGRUNNLAG.name)}
-      renderPanel={data => (
-        <BeregningFaktaIndex
-          {...data}
-          kodeverkSamling={data.alleKodeverk}
-          vilkar={lagBGVilkar(props.behandling?.vilkår, data.beregningsgrunnlag)}
-          beregningsgrunnlag={lagFormatertBG(data.beregningsgrunnlag)}
-          submitCallback={lagModifisertCallback(data.submitCallback)}
-          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          erOverstyrer={rettigheter.kanOverstyreAccess.isEnabled}
-          skalKunneOverstyreAktiviteter
-        />
-      )}
-    />
-  );
 };

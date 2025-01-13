@@ -21,7 +21,7 @@ import {
 import { useTrackRouteParam } from '../app/useTrackRouteParam';
 import { BehandlingerIndex } from '../behandling/BehandlingerIndex';
 import { BehandlingSupportIndex } from '../behandlingsupport/BehandlingSupportIndex';
-import { requestBehandlingApi } from '../data/behandlingContextApi';
+import { useRequestPendingContext } from '../data/RequestPendingContext';
 import { useHentBehandling } from '../data/useHentBehandling';
 import { FagsakProfileIndex } from '../fagsakprofile/FagsakProfileIndex';
 import { FagsakGrid } from './components/FagsakGrid';
@@ -41,7 +41,7 @@ const finnSkalIkkeHenteData = (location: Location, selectedSaksnummer?: string, 
 export const FagsakIndex = () => {
   const intl = useIntl();
 
-  const [requestPendingMessage, setRequestPendingMessage] = useState<string>();
+  const { isRequestPending } = useRequestPendingContext();
 
   const { addErrorMessage } = useRestApiErrorDispatcher();
 
@@ -53,10 +53,6 @@ export const FagsakIndex = () => {
   const [behandling, setBehandling] = useState<Behandling>();
   const resetApiOgSettBehandling = (hentetBehandling: Behandling | undefined) => {
     if (hentetBehandling) {
-      requestBehandlingApi.resetCache();
-      requestBehandlingApi.resetLinks();
-      requestBehandlingApi.setLinks(hentetBehandling.links);
-
       setBehandling(hentetBehandling);
     }
   };
@@ -74,14 +70,6 @@ export const FagsakIndex = () => {
       hentOgSettBehandling();
     }
   }, [behandlingUuid, fagsakBehandling?.uuid]);
-
-  useEffect(
-    () => () => {
-      requestBehandlingApi.resetCache();
-      requestBehandlingApi.resetLinks();
-    },
-    [],
-  );
 
   const location = useLocation();
   const skalIkkeHenteData = finnSkalIkkeHenteData(location, selectedSaksnummer, behandlingUuid);
@@ -112,7 +100,6 @@ export const FagsakIndex = () => {
                   behandling={behandling}
                   setBehandling={resetApiOgSettBehandling}
                   hentOgSettBehandling={hentOgSettBehandling}
-                  setRequestPendingMessage={setRequestPendingMessage}
                   setBehandlingUuid={setBehandlingUuid}
                 />
               }
@@ -161,7 +148,7 @@ export const FagsakIndex = () => {
           );
         }}
       />
-      {requestPendingMessage && <DataFetchPendingModal pendingMessage={requestPendingMessage} />}
+      {isRequestPending && <DataFetchPendingModal pendingMessage="" />}
     </>
   );
 };

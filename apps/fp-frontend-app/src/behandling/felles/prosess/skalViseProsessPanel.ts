@@ -1,8 +1,9 @@
+import { VilkarType } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Vilkar } from '@navikt/fp-types';
 
 export const skalViseProsessPanel = (
   aksjonspunkter: Aksjonspunkt[] = [],
-  vilkarKoder: string[] = [],
+  vilkarKoder: VilkarType[] = [],
   vilkar: Vilkar[] = [],
 ): boolean => {
   const harAksjonspunkter = aksjonspunkter.length > 0;

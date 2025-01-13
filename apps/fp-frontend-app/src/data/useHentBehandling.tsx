@@ -1,11 +1,11 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { EventType } from '@navikt/fp-rest-api';
-import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
+import { EventType, useRestApiErrorDispatcher } from '@navikt/fp-rest-api';
 import { Behandling } from '@navikt/fp-types';
 
 import { hentBehandling, hentBehandlingTilbakekreving } from './behandlingApi';
 import { notEmpty } from './notEmpty';
+import { useRequestPendingContext } from './RequestPendingContext';
 import { doPolling } from './useBehandlingPollingOperasjoner';
 
 export const useHentBehandling = (
@@ -14,13 +14,14 @@ export const useHentBehandling = (
   behandlingUuid?: string,
 ) => {
   const { addErrorMessage } = useRestApiErrorDispatcher();
+  const { setIsRequestPending } = useRequestPendingContext();
 
   const { mutate: hentOgSettBehandling } = useMutation({
     mutationFn: async () => {
       const response = erTilbakekreving
         ? await hentBehandlingTilbakekreving(notEmpty(behandlingUuid))
         : await hentBehandling(notEmpty(behandlingUuid));
-      return doPolling(response);
+      return doPolling(response, setIsRequestPending);
     },
     onSuccess: setBehandling,
     onError: error => {

@@ -1,50 +1,23 @@
-import React, { useCallback } from 'react';
 import { useIntl } from 'react-intl';
 
 import { forhandsvisDokument } from '@navikt/ft-utils';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { AksjonspunktKode, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { SimuleringProsessIndex } from '@navikt/fp-prosess-simulering';
-import {
-  ArbeidsgiverOpplysningerPerId,
-  Behandling,
-  Fagsak,
-  SimuleringResultat,
-  TilbakekrevingValg,
-} from '@navikt/fp-types';
+import { ArbeidsgiverOpplysningerPerId, Fagsak } from '@navikt/fp-types';
 
-import { BehandlingApiKeys, requestBehandlingApi, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
+import { BehandlingRel, forhåndsvisTilbakekrevingMelding, useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { ProsessPanelMenyData } from '../../felles/typer/prosessPanelMenyData';
 
-const getForhandsvisFptilbakeCallback =
-  (
-    forhandsvisTilbakekrevingMelding: (params?: any, keepData?: boolean) => Promise<Behandling | undefined>,
-    fagsak: Fagsak,
-    behandling: Behandling,
-  ) =>
-  (mottaker: string, fritekst: string) => {
-    const data = {
-      behandlingUuid: behandling.uuid,
-      fagsakYtelseType: fagsak.fagsakYtelseType,
-      varseltekst: fritekst,
-    };
-    return forhandsvisTilbakekrevingMelding(data).then(response => forhandsvisDokument(response));
-  };
-
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.VURDER_FEILUTBETALING,
   AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER,
 ];
-
-const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.TILBAKEKREVINGVALG, BehandlingApiKeys.SIMULERING_RESULTAT];
-type EndepunktPanelData = {
-  tilbakekrevingvalg?: TilbakekrevingValg;
-  simuleringResultat?: SimuleringResultat;
-};
 
 interface Props {
   menyData: ProsessPanelMenyData[];
@@ -58,43 +31,50 @@ export const SimuleringProsessStegInitPanel = ({
   arbeidsgiverOpplysningerPerId,
   ...props
 }: Props & ProsessPanelInitProps) => {
-  const { startRequest: forhandsvisTilbakekrevingMelding } = restBehandlingApiHooks.useRestApiRunner(
-    BehandlingApiKeys.PREVIEW_TILBAKEKREVING_MESSAGE,
-  );
+  const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
 
-  const standardPanelProps = useStandardProsessPanelProps();
+  const api = useBehandlingApi(props.behandling);
 
-  const previewFptilbakeCallback = useCallback(
-    getForhandsvisFptilbakeCallback(forhandsvisTilbakekrevingMelding, fagsak, standardPanelProps.behandling),
-    [standardPanelProps.behandling.versjon],
+  const { data: tilbakekrevingValg } = useQuery(api.tilbakekrevingValgOptions(props.behandling));
+  const { data: simuleringResultat } = useQuery(api.simuleringResultatOptions(props.behandling));
+
+  const { mutate: forhåndsvis } = useMutation({
+    mutationFn: (values: { mottaker: string; fritekst: string }) =>
+      forhåndsvisTilbakekrevingMelding({
+        behandlingUuid: standardPanelProps.behandling.uuid,
+        fagsakYtelseType: fagsak.fagsakYtelseType,
+        varseltekst: values.fritekst,
+      }),
+    onSuccess: forhandsvisDokument,
+  });
+
+  const harVedtakspanel = menyData.some(
+    d => d.id === ProsessStegCode.VEDTAK && (d.status !== VilkarUtfallType.IKKE_VURDERT || d.harApentAksjonspunkt),
   );
+  const skalPanelVisesIMeny =
+    standardPanelProps.behandling.links.some(link => link.rel === BehandlingRel.SIMULERING_RESULTAT) ||
+    !harVedtakspanel;
 
   return (
-    <ProsessDefaultInitPanel<EndepunktPanelData>
+    <ProsessDefaultInitPanel
       {...props}
-      panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
-      aksjonspunktKoder={AKSJONSPUNKT_KODER}
+      standardPanelProps={standardPanelProps}
       prosessPanelKode={ProsessStegCode.SIMULERING}
       prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.Avregning' })}
-      skalPanelVisesIMeny={() => {
-        const harVedtakspanel = menyData.some(
-          d =>
-            d.id === ProsessStegCode.VEDTAK && (d.status !== VilkarUtfallType.IKKE_VURDERT || d.harApentAksjonspunkt),
-        );
-        return requestBehandlingApi.hasPath(BehandlingApiKeys.SIMULERING_RESULTAT.name) || !harVedtakspanel;
-      }}
-      hentOverstyrtStatus={() =>
-        requestBehandlingApi.hasPath(BehandlingApiKeys.SIMULERING_RESULTAT.name)
+      skalPanelVisesIMeny={skalPanelVisesIMeny}
+      hentOverstyrtStatus={
+        standardPanelProps.behandling.links.some(link => link.rel === BehandlingRel.SIMULERING_RESULTAT)
           ? VilkarUtfallType.OPPFYLT
           : VilkarUtfallType.IKKE_VURDERT
       }
-      renderPanel={data => (
-        <SimuleringProsessIndex
-          previewFptilbakeCallback={previewFptilbakeCallback}
-          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          {...data}
-        />
-      )}
-    />
+    >
+      <SimuleringProsessIndex
+        tilbakekrevingvalg={tilbakekrevingValg}
+        simuleringResultat={simuleringResultat}
+        previewFptilbakeCallback={forhåndsvis}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        {...standardPanelProps}
+      />
+    </ProsessDefaultInitPanel>
   );
 };

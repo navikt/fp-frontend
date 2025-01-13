@@ -2,7 +2,7 @@ import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { BehandlingResultatType, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
-import { BehandlingAppKontekst } from '@navikt/fp-types';
+import { Behandling } from '@navikt/fp-types';
 
 import { MenyHenleggIndex } from './MenyHenleggIndex';
 
@@ -75,7 +75,7 @@ export const ForFørstegangssøknad: Story = {
       versjon: 2,
       uuid: '23r2323',
       type: BehandlingType.FORSTEGANGSSOKNAD,
-    } as BehandlingAppKontekst,
+    } as Behandling,
   },
 };
 
@@ -85,7 +85,7 @@ export const ForKlage: Story = {
       versjon: 2,
       uuid: '23r2323',
       type: BehandlingType.KLAGE,
-    } as BehandlingAppKontekst,
+    } as Behandling,
   },
 };
 
@@ -95,7 +95,7 @@ export const ForInnsyn: Story = {
       versjon: 2,
       uuid: '23r2323',
       type: BehandlingType.DOKUMENTINNSYN,
-    } as BehandlingAppKontekst,
+    } as Behandling,
   },
 };
 
@@ -105,7 +105,7 @@ export const ForTilbakekreving: Story = {
       versjon: 2,
       uuid: '23r2323',
       type: BehandlingType.TILBAKEKREVING,
-    } as BehandlingAppKontekst,
+    } as Behandling,
   },
 };
 
@@ -115,7 +115,7 @@ export const ForTilbakekrevingRevurdering: Story = {
       versjon: 2,
       uuid: '23r2323',
       type: BehandlingType.TILBAKEKREVING_REVURDERING,
-    } as BehandlingAppKontekst,
+    } as Behandling,
   },
 };
 
@@ -125,6 +125,6 @@ export const ForRevurdering: Story = {
       versjon: 2,
       uuid: '23r2323',
       type: BehandlingType.REVURDERING,
-    } as BehandlingAppKontekst,
+    } as Behandling,
   },
 };

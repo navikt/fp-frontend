@@ -1,4 +1,3 @@
-import React from 'react';
 import { useIntl } from 'react-intl';
 
 import {
@@ -9,13 +8,15 @@ import {
   ProsessBeregningsgrunnlagAvklaringsbehovCode,
 } from '@navikt/ft-prosess-beregningsgrunnlag';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
+import { useQuery } from '@tanstack/react-query';
 
 import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkar as FpVilkar, Vilkarperiode } from '@navikt/fp-types';
 
-import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
+import { useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 
 import '@navikt/ft-prosess-beregningsgrunnlag/dist/style.css';
@@ -93,11 +94,6 @@ const AKSJONSPUNKT_KODER = [
 
 const VILKAR_KODER = [VilkarType.BEREGNINGSGRUNNLAGVILKARET];
 
-const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.BEREGNINGSGRUNNLAG];
-type EndepunktPanelData = {
-  beregningsgrunnlag?: Beregningsgrunnlag;
-};
-
 interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
@@ -105,24 +101,31 @@ interface Props {
 export const BeregningsgrunnlagProsessStegInitPanel = ({
   arbeidsgiverOpplysningerPerId,
   ...props
-}: Props & ProsessPanelInitProps) => (
-  <ProsessDefaultInitPanel<EndepunktPanelData>
-    {...props}
-    panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
-    aksjonspunktKoder={AKSJONSPUNKT_KODER}
-    vilkarKoder={VILKAR_KODER}
-    prosessPanelKode={ProsessStegCode.BEREGNINGSGRUNNLAG}
-    prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.Beregning' })}
-    skalPanelVisesIMeny={() => true}
-    renderPanel={data => (
+}: Props & ProsessPanelInitProps) => {
+  const intl = useIntl();
+
+  const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, VILKAR_KODER);
+
+  const api = useBehandlingApi(props.behandling);
+
+  const { data: beregningsgrunnlag } = useQuery(api.beregningsgrunnlagOptions(props.behandling));
+
+  return (
+    <ProsessDefaultInitPanel
+      {...props}
+      standardPanelProps={standardPanelProps}
+      prosessPanelKode={ProsessStegCode.BEREGNINGSGRUNNLAG}
+      prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Beregning' })}
+      skalPanelVisesIMeny
+    >
       <BeregningsgrunnlagProsessIndex
-        {...data}
-        kodeverkSamling={data.alleKodeverk}
-        beregningsgrunnlagsvilkar={lagBGVilkar(data.vilkar, data.beregningsgrunnlag)}
-        beregningsgrunnlagListe={lagFormatertBG(data.beregningsgrunnlag)}
+        {...standardPanelProps}
+        kodeverkSamling={standardPanelProps.alleKodeverk}
+        beregningsgrunnlagsvilkar={lagBGVilkar(standardPanelProps.vilkar, beregningsgrunnlag)}
+        beregningsgrunnlagListe={lagFormatertBG(beregningsgrunnlag)}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-        submitCallback={lagModifisertCallback(data.submitCallback)}
+        submitCallback={lagModifisertCallback(standardPanelProps.submitCallback)}
       />
-    )}
-  />
-);
+    </ProsessDefaultInitPanel>
+  );
+};

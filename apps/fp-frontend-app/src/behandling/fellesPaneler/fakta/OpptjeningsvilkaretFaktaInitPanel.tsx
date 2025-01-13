@@ -1,22 +1,18 @@
-import React from 'react';
 import { useIntl } from 'react-intl';
+
+import { useQuery } from '@tanstack/react-query';
 
 import { OpptjeningFaktaIndex } from '@navikt/fp-fakta-opptjening';
 import { AksjonspunktKode, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import { ArbeidsgiverOpplysningerPerId, Opptjening } from '@navikt/fp-types';
+import { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
-import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
+import { useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
+import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING];
-
-const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.OPPTJENING];
-
-type EndepunktPanelData = {
-  opptjening?: Opptjening;
-};
 
 interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -25,21 +21,33 @@ interface Props {
 export const OpptjeningsvilkaretFaktaInitPanel = ({
   arbeidsgiverOpplysningerPerId,
   ...props
-}: Props & FaktaPanelInitProps) => (
-  <FaktaDefaultInitPanel<EndepunktPanelData>
-    {...props}
-    panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
-    aksjonspunktKoder={AKSJONSPUNKT_KODER}
-    faktaPanelKode={FaktaPanelCode.OPPTJENINGSVILKARET}
-    faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.Opptjening' })}
-    skalPanelVisesIMeny={() =>
-      props.behandling.vilkår.some(v => v.vilkarType === VilkarType.OPPTJENINGSVILKARET) &&
-      props.behandling.vilkår.some(
-        v => v.vilkarType === VilkarType.MEDLEMSKAPSVILKARET && v.vilkarStatus === VilkarUtfallType.OPPFYLT,
-      )
-    }
-    renderPanel={data => (
-      <OpptjeningFaktaIndex arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId} {...data} />
-    )}
-  />
-);
+}: Props & FaktaPanelInitProps) => {
+  const intl = useIntl();
+
+  const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
+
+  const api = useBehandlingApi(props.behandling);
+
+  const { data: opptjening } = useQuery(api.opptjeningOptions(props.behandling));
+
+  return (
+    <FaktaDefaultInitPanel
+      {...props}
+      standardPanelProps={standardPanelProps}
+      faktaPanelKode={FaktaPanelCode.OPPTJENINGSVILKARET}
+      faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Opptjening' })}
+      skalPanelVisesIMeny={
+        props.behandling.vilkår.some(v => v.vilkarType === VilkarType.OPPTJENINGSVILKARET) &&
+        props.behandling.vilkår.some(
+          v => v.vilkarType === VilkarType.MEDLEMSKAPSVILKARET && v.vilkarStatus === VilkarUtfallType.OPPFYLT,
+        )
+      }
+    >
+      <OpptjeningFaktaIndex
+        opptjening={opptjening}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        {...standardPanelProps}
+      />
+    </FaktaDefaultInitPanel>
+  );
+};

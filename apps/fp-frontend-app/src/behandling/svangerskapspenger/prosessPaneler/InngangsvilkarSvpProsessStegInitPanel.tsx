@@ -1,5 +1,3 @@
-import React, { useCallback } from 'react';
-
 import { AksessRettigheter } from '@navikt/fp-types';
 
 import { InngangsvilkarDefaultInitWrapper } from '../../felles/prosess/InngangsvilkarDefaultInitWrapper';
@@ -22,37 +20,25 @@ export const InngangsvilkarSvpProsessStegInitPanel = ({
   apentFaktaPanelInfo,
   oppdaterProsessStegOgFaktaPanelIUrl,
   rettigheter,
-}: Props & ProsessPanelInitProps) => {
-  const leftPanels = useCallback(
-    (props: InngangsvilkarPanelInitProps) => (
+}: Props & ProsessPanelInitProps) => (
+  <InngangsvilkarDefaultInitWrapper
+    behandling={behandling}
+    valgtProsessSteg={valgtProsessSteg}
+    registrerProsessPanel={registrerProsessPanel}
+    apentFaktaPanelInfo={apentFaktaPanelInfo}
+    oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+    leftPanels={(props: InngangsvilkarPanelInitProps) => (
       <>
-        <SvangerskapInngangsvilkarInitPanel behandlingVersjon={behandling.versjon} {...props} />
+        <SvangerskapInngangsvilkarInitPanel {...props} />
         <MedlemskapInngangsvilkarInitPanel
           behandlingVersjon={behandling.versjon}
           rettigheter={rettigheter}
           {...props}
         />
       </>
-    ),
-    [behandling.versjon, rettigheter],
-  );
-
-  const rightPanels = useCallback(
-    (props: InngangsvilkarPanelInitProps) => (
+    )}
+    rightPanels={(props: InngangsvilkarPanelInitProps) => (
       <OpptjeningInngangsvilkarInitPanel behandlingVersjon={behandling.versjon} rettigheter={rettigheter} {...props} />
-    ),
-    [behandling.versjon, rettigheter],
-  );
-
-  return (
-    <InngangsvilkarDefaultInitWrapper
-      behandling={behandling}
-      valgtProsessSteg={valgtProsessSteg}
-      registrerProsessPanel={registrerProsessPanel}
-      apentFaktaPanelInfo={apentFaktaPanelInfo}
-      oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-      leftPanels={leftPanels}
-      rightPanels={rightPanels}
-    />
-  );
-};
+    )}
+  />
+);

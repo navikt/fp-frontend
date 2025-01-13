@@ -15,7 +15,7 @@ interface Props {
   soknad: Soknad;
   soknadOriginalBehandling: Soknad;
   familiehendelseOriginalBehandling: FamilieHendelse;
-  previewCallback: (data: ForhandsvisData) => Promise<any>;
+  previewCallback: (data: ForhandsvisData) => void;
 }
 
 export const VarselOmRevurderingProsessIndex = ({

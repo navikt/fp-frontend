@@ -1,5 +1,3 @@
-import React, { useCallback } from 'react';
-
 import {
   AksessRettigheter,
   ArbeidsgiverOpplysningerPerId,
@@ -61,9 +59,13 @@ const SvangerskapspengerPaneler = ({
   personoversikt,
   rettigheter,
   hentOgSettBehandling,
-}: Props) => {
-  const faktaPaneler = useCallback(
-    (props: FaktaPanelInitProps) => (
+}: Props) => (
+  <BehandlingContainer
+    behandling={behandling}
+    valgtProsessSteg={valgtProsessSteg}
+    valgtFaktaSteg={valgtFaktaSteg}
+    oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+    hentFaktaPaneler={(props: FaktaPanelInitProps) => (
       <>
         <SakenFaktaInitPanel {...props} fagsak={fagsak} rettigheter={rettigheter} />
         <ArbeidOgInntektFaktaInitPanel
@@ -94,12 +96,8 @@ const SvangerskapspengerPaneler = ({
         <BeregningFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} rettigheter={rettigheter} />
         <FordelingFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
       </>
-    ),
-    [personoversikt, behandling, rettigheter, fagsak, arbeidsgivere, hentOgSettBehandling],
-  );
-
-  const prosessPaneler = useCallback(
-    (props: ProsessPanelInitProps, ekstraProps: ProsessPanelExtraInitProps) => (
+    )}
+    hentProsessPaneler={(props: ProsessPanelInitProps, ekstraProps: ProsessPanelExtraInitProps) => (
       <>
         <OpplysningspliktProsessStegInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
         <InngangsvilkarSvpProsessStegInitPanel
@@ -128,28 +126,8 @@ const SvangerskapspengerPaneler = ({
           toggleOppdatereFagsakContext={toggleOppdateringAvFagsakOgBehandling}
         />
       </>
-    ),
-    [
-      personoversikt,
-      fagsak,
-      opneSokeside,
-      toggleOppdateringAvFagsakOgBehandling,
-      arbeidsgivere,
-      rettigheter,
-      oppdaterProsessStegOgFaktaPanelIUrl,
-    ],
-  );
-
-  return (
-    <BehandlingContainer
-      behandling={behandling}
-      valgtProsessSteg={valgtProsessSteg}
-      valgtFaktaSteg={valgtFaktaSteg}
-      oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-      hentFaktaPaneler={faktaPaneler}
-      hentProsessPaneler={prosessPaneler}
-    />
-  );
-};
+    )}
+  />
+);
 
 export default SvangerskapspengerPaneler;

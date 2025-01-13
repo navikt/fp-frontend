@@ -1,7 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { AsyncPollingStatus, EventType } from '@navikt/fp-rest-api';
-import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
+import { AsyncPollingStatus, EventType, useRestApiErrorDispatcher } from '@navikt/fp-rest-api';
 import { Behandling } from '@navikt/fp-types';
 
 import { doGetRequest, lagNyBehandling, lagNyTilbakekrevingBehandling, NyBehandlingParams } from './fagsakApi';

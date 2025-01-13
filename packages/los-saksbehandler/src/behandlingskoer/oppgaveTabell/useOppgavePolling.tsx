@@ -3,8 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { Oppgave } from '@navikt/fp-los-felles';
-import { AsyncPollingStatus, EventType } from '@navikt/fp-rest-api';
-import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
+import { AsyncPollingStatus, EventType, useRestApiErrorDispatcher } from '@navikt/fp-rest-api';
 
 import { doGetRequest, getOppgaverTilBehandling, reserverteOppgaverOptions } from '../../data/fplosSaksbehandlerApi';
 
