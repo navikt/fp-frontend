@@ -1,13 +1,15 @@
-import React from 'react';
 import { useIntl } from 'react-intl';
+
+import { useQuery } from '@tanstack/react-query';
 
 import { SakenFaktaIndex } from '@navikt/fp-fakta-saken';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import { AksessRettigheter, Fagsak, Soknad } from '@navikt/fp-types';
+import { AksessRettigheter, Fagsak } from '@navikt/fp-types';
 
-import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
+import { useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
+import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
 
 const AKSJONSPUNKT_KODER = [
@@ -19,15 +21,6 @@ const AKSJONSPUNKT_KODER = [
 
 const OVERSTYRING_AP_CODES = [AksjonspunktKode.OVERSTYR_AVKLAR_STARTDATO, AksjonspunktKode.OVERSTYR_DEKNINGSGRAD];
 
-const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.UTLAND_DOK_STATUS, BehandlingApiKeys.SOKNAD];
-
-type EndepunktPanelData = {
-  utlandDokStatus?: {
-    dokStatus?: string;
-  };
-  soknad: Soknad;
-};
-
 interface Props {
   fagsak: Fagsak;
   rettigheter: AksessRettigheter;
@@ -38,17 +31,31 @@ interface Props {
  *
  * Dette faktapanelet skal alltid vises
  */
-export const SakenFaktaInitPanel = ({ fagsak, rettigheter, ...props }: Props & FaktaPanelInitProps) => (
-  <FaktaDefaultInitPanel<EndepunktPanelData>
-    {...props}
-    panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
-    aksjonspunktKoder={AKSJONSPUNKT_KODER}
-    overstyringApKoder={OVERSTYRING_AP_CODES}
-    faktaPanelKode={FaktaPanelCode.SAKEN}
-    faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.Saken' })}
-    skalPanelVisesIMeny={() => true}
-    renderPanel={data => (
-      <SakenFaktaIndex {...data} fagsak={fagsak} kanOverstyreAccess={rettigheter.kanOverstyreAccess.isEnabled} />
-    )}
-  />
-);
+export const SakenFaktaInitPanel = ({ fagsak, rettigheter, ...props }: Props & FaktaPanelInitProps) => {
+  const intl = useIntl();
+
+  const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER, OVERSTYRING_AP_CODES);
+
+  const api = useBehandlingApi(props.behandling);
+
+  const { data: søknad } = useQuery(api.søknadOptions(props.behandling));
+  const { data: utlandDokStatus } = useQuery(api.utlandDokStatusOptions(props.behandling));
+
+  return (
+    <FaktaDefaultInitPanel
+      {...props}
+      standardPanelProps={standardPanelProps}
+      faktaPanelKode={FaktaPanelCode.SAKEN}
+      faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Saken' })}
+      skalPanelVisesIMeny
+    >
+      <SakenFaktaIndex
+        soknad={søknad}
+        utlandDokStatus={utlandDokStatus}
+        {...standardPanelProps}
+        fagsak={fagsak}
+        kanOverstyreAccess={rettigheter.kanOverstyreAccess.isEnabled}
+      />
+    </FaktaDefaultInitPanel>
+  );
+};

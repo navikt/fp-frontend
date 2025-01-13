@@ -8,7 +8,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Location } from 'history';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
-import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
+import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api';
 import { BehandlingVelgerSakIndex } from '@navikt/fp-sak-behandling-velger';
 import { FagsakProfilSakIndex } from '@navikt/fp-sak-fagsak-profil';
 import { UkjentAdresseMeldingIndex } from '@navikt/fp-sak-ukjent-adresse';

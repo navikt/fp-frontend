@@ -19,7 +19,6 @@
   },
   "dependencies": {
     "@navikt/ds-react": "7.9.2",
-    "@navikt/fp-rest-api-hooks": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/ft-ui-komponenter": "3.0.0",
     "@navikt/ft-utils": "3.0.0",

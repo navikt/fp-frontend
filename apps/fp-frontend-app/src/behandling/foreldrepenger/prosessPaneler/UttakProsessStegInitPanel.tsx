@@ -1,27 +1,20 @@
-import React from 'react';
 import { useIntl } from 'react-intl';
+
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { AksjonspunktKode, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { UttakProsessIndex } from '@navikt/fp-prosess-uttak';
-import {
-  AksessRettigheter,
-  ArbeidsgiverOpplysningerPerId,
-  Behandling,
-  FamilieHendelseSamling,
-  Personoversikt,
-  Soknad,
-  UttaksresultatPeriode,
-  UttakStonadskontoer,
-  Ytelsefordeling,
-} from '@navikt/fp-types';
+import { AksessRettigheter, ArbeidsgiverOpplysningerPerId, Behandling, Personoversikt } from '@navikt/fp-types';
 
-import { BehandlingApiKeys, requestBehandlingApi, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
+import { BehandlingRel, useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 
 const getStatusFromUttakresultat = (behandling: Behandling): string => {
-  const harLenke = requestBehandlingApi.hasPath(BehandlingApiKeys.UTTAKSRESULTAT_PERIODER.name);
+  const harLenke = behandling.links.some(link => link.rel === BehandlingRel.UTTAKSRESULTAT_PERIODER);
   if (!harLenke) {
     return VilkarUtfallType.IKKE_VURDERT;
   }
@@ -42,21 +35,6 @@ const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.KONTROLLER_TILSTØTENDE_YTELSER_OPPHØRT,
 ];
 
-const ENDEPUNKTER_PANEL_DATA = [
-  BehandlingApiKeys.UTTAKSRESULTAT_PERIODER,
-  BehandlingApiKeys.FAMILIEHENDELSE,
-  BehandlingApiKeys.UTTAK_STONADSKONTOER,
-  BehandlingApiKeys.SOKNAD,
-  BehandlingApiKeys.YTELSEFORDELING,
-];
-type EndepunktPanelData = {
-  familiehendelse: FamilieHendelseSamling;
-  uttakStonadskontoer: UttakStonadskontoer;
-  soknad: Soknad;
-  ytelsefordeling: Ytelsefordeling;
-  uttaksresultatPerioder: UttaksresultatPeriode;
-};
-
 interface Props {
   rettigheter: AksessRettigheter;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -70,27 +48,46 @@ export const UttakProsessStegInitPanel = ({
   ...props
 }: Props & ProsessPanelInitProps) => {
   const intl = useIntl();
-  const { startRequest: oppdaterStønadskontoer } = restBehandlingApiHooks.useRestApiRunner(
-    BehandlingApiKeys.STONADSKONTOER_GITT_UTTAKSPERIODER,
-  );
+
+  const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
+
+  const api = useBehandlingApi(props.behandling);
+
+  const { data: uttaksresultatPerioder } = useQuery(api.uttaksresultatPerioderOptions(props.behandling));
+  const { data: familiehendelse } = useQuery(api.familiehendelseOptions(props.behandling));
+  const { data: søknad } = useQuery(api.søknadOptions(props.behandling));
+  const { data: uttakStønadskontoer } = useQuery(api.uttakStønadskontoerOptions(props.behandling));
+  const { data: ytelsefordeling } = useQuery(api.ytelsefordelingOptions(props.behandling));
+
+  const { mutateAsync: oppdaterStønadskontoer } = useMutation({
+    mutationFn: api.oppdaterStønadskontoer,
+  });
+
   return (
-    <ProsessDefaultInitPanel<EndepunktPanelData>
+    <ProsessDefaultInitPanel
       {...props}
-      panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
-      aksjonspunktKoder={AKSJONSPUNKT_KODER}
+      standardPanelProps={standardPanelProps}
       prosessPanelKode={ProsessStegCode.UTTAK}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Uttak' })}
-      skalPanelVisesIMeny={() => true}
-      hentOverstyrtStatus={() => getStatusFromUttakresultat(props.behandling)}
-      renderPanel={data => (
+      skalPanelVisesIMeny
+      hentOverstyrtStatus={getStatusFromUttakresultat(props.behandling)}
+    >
+      {uttaksresultatPerioder && familiehendelse && søknad && uttakStønadskontoer && ytelsefordeling ? (
         <UttakProsessIndex
           kanOverstyre={rettigheter.kanOverstyreAccess.isEnabled}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           personoversikt={personoversikt}
           oppdaterStønadskontoer={oppdaterStønadskontoer}
-          {...data}
+          uttaksresultatPerioder={uttaksresultatPerioder}
+          familiehendelse={familiehendelse}
+          soknad={søknad}
+          uttakStonadskontoer={uttakStønadskontoer}
+          ytelsefordeling={ytelsefordeling}
+          {...standardPanelProps}
         />
+      ) : (
+        <LoadingPanel />
       )}
-    />
+    </ProsessDefaultInitPanel>
   );
 };

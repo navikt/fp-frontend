@@ -1,6 +1,12 @@
 import { useContext, useEffect, useState } from 'react';
 
-import { AksjonspunktStatus, AksjonspunktType, isAksjonspunktOpen, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import {
+  AksjonspunktStatus,
+  AksjonspunktType,
+  isAksjonspunktOpen,
+  VilkarType,
+  VilkarUtfallType,
+} from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Behandling, Fagsak, StandardProsessPanelProps, Vilkar } from '@navikt/fp-types';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -87,7 +93,7 @@ const finnStatus = (vilkar: Vilkar[], aksjonspunkter: Aksjonspunkt[]) => {
 
 export const useStandardProsessPanelProps = (
   aksjonspunktKoder?: string[],
-  vilkarKoder?: string[],
+  vilkarKoder?: VilkarType[],
   lagringSideEffekter?: (aksjonspunktModeller: any) => () => void,
 ): StandardProsessPanelProps => {
   const [formData, setFormData] = useState();
@@ -102,9 +108,11 @@ export const useStandardProsessPanelProps = (
   }, [value.behandling.versjon]);
 
   const aksjonspunkterForSteg =
-    aksjonspunkter && aksjonspunktKoder ? aksjonspunkter.filter(ap => aksjonspunktKoder.includes(ap.definisjon)) : [];
+    aksjonspunkter && aksjonspunktKoder
+      ? aksjonspunkter.filter(ap => aksjonspunktKoder.some(ak => ak === ap.definisjon))
+      : [];
 
-  const vilkarForSteg = vilkår && vilkarKoder ? vilkår.filter(v => vilkarKoder.includes(v.vilkarType)) : [];
+  const vilkarForSteg = vilkår && vilkarKoder ? vilkår.filter(v => vilkarKoder.some(vk => vk === v.vilkarType)) : [];
 
   const isReadOnly = erReadOnly(value.behandling, vilkarForSteg, value.rettigheter, value.hasFetchError);
 

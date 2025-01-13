@@ -12,7 +12,7 @@ import { Aksjonspunkt, Behandlingsresultat, Fagsak, ForhåndsvisMeldingParams } 
 
 import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingApi';
 import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
-import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanelNew';
+import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 

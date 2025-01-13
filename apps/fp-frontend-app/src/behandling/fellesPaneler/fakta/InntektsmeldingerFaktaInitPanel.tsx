@@ -1,25 +1,16 @@
-import React from 'react';
 import { useIntl } from 'react-intl';
+
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
+import { useQuery } from '@tanstack/react-query';
 
 import { InntektsmeldingFaktaIndex } from '@navikt/fp-fakta-inntektsmelding';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import {
-  ArbeidsgiverOpplysningerPerId,
-  Behandling,
-  BehandlingAppKontekst,
-  Fagsak,
-  Inntektsmelding,
-} from '@navikt/fp-types';
+import { ArbeidsgiverOpplysningerPerId, Behandling, BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
 
-import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
+import { useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
+import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
-
-const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.INNTEKTSMELDINGER];
-
-type EndepunktPanelData = {
-  inntektsmeldinger: Inntektsmelding[];
-};
 
 type Props = {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -33,21 +24,35 @@ export const InntektsmeldingerFaktaInitPanel = ({
   fagsak,
   alleBehandlinger,
   ...props
-}: FaktaPanelInitProps & Props) => (
-  <FaktaDefaultInitPanel<EndepunktPanelData>
-    {...props}
-    panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
-    faktaPanelKode={FaktaPanelCode.INNTEKTSMELDINGER}
-    faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.Inntektsmelding' })}
-    skalPanelVisesIMeny={() => true}
-    renderPanel={data => (
-      <InntektsmeldingFaktaIndex
-        {...data}
-        fagsak={fagsak}
-        alleBehandlinger={alleBehandlinger}
-        behandling={props.behandling}
-        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-      />
-    )}
-  />
-);
+}: FaktaPanelInitProps & Props) => {
+  const intl = useIntl();
+
+  const standardPanelProps = useStandardFaktaPanelProps();
+
+  const api = useBehandlingApi(props.behandling);
+
+  const { data: inntektsmeldinger } = useQuery(api.inntektsmeldingerOptions(props.behandling));
+
+  return (
+    <FaktaDefaultInitPanel
+      {...props}
+      standardPanelProps={standardPanelProps}
+      faktaPanelKode={FaktaPanelCode.INNTEKTSMELDINGER}
+      faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Inntektsmelding' })}
+      skalPanelVisesIMeny
+    >
+      {inntektsmeldinger ? (
+        <InntektsmeldingFaktaIndex
+          {...standardPanelProps}
+          inntektsmeldinger={inntektsmeldinger}
+          fagsak={fagsak}
+          alleBehandlinger={alleBehandlinger}
+          behandling={props.behandling}
+          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        />
+      ) : (
+        <LoadingPanel />
+      )}
+    </FaktaDefaultInitPanel>
+  );
+};
