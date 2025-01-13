@@ -13,7 +13,7 @@ import {
   ManueltArbeidsforhold,
 } from '@navikt/fp-types';
 
-import { BehandlingRel, useBehandlingApi } from '../../../data/behandlingApi';
+import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
@@ -79,7 +79,7 @@ export const ArbeidOgInntektFaktaInitPanel = ({
       faktaPanelKode={FaktaPanelCode.ARBEID_OG_INNTEKT}
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.ArbeidOgInntekt' })}
       skalPanelVisesIMeny={
-        standardPanelProps.behandling.links.some(link => link.rel === BehandlingRel.ARBEID_OG_INNTEKT) &&
+        harLenke(props.behandling, 'ARBEID_OG_INNTEKT') &&
         !hasAksjonspunkt(AksjonspunktKode.AVKLAR_ARBEIDSFORHOLD, props.behandling.aksjonspunkt)
       }
     >

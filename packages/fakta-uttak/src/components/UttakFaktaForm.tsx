@@ -161,7 +161,7 @@ interface OwnProps {
   ytelsefordeling: Ytelsefordeling;
   uttakKontrollerFaktaPerioder: KontrollerFaktaPeriode[];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  faktaArbeidsforhold: FaktaArbeidsforhold[];
+  faktaArbeidsforhold?: FaktaArbeidsforhold[];
   alleKodeverk: AlleKodeverk;
   aksjonspunkter: Aksjonspunkt[];
   readOnly: boolean;

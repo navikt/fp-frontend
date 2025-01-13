@@ -10,7 +10,7 @@ import { useQuery } from '@tanstack/react-query';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { AlleKodeverkTilbakekreving } from '@navikt/fp-types';
 
-import { BehandlingRel, useBehandlingApi } from '../../../data/behandlingApi';
+import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
@@ -47,7 +47,7 @@ export const FeilutbetalingFaktaInitPanel = ({
       registrerFaktaPanel={registrerFaktaPanel}
       faktaPanelKode={FaktaPanelCode.FEILUTBETALING}
       faktaPanelMenyTekst={intl.formatMessage({ id: 'TilbakekrevingFakta.FaktaFeilutbetaling' })}
-      skalPanelVisesIMeny={behandling.links.some(link => link.rel === BehandlingRel.FEILUTBETALING_FAKTA)}
+      skalPanelVisesIMeny={harLenke(behandling, 'FEILUTBETALING_FAKTA')}
     >
       {feilutbetalingFakta && feilutbetalingÅrsak ? (
         <FeilutbetalingFaktaIndex
