@@ -8,7 +8,7 @@ import { KodeverkType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { AlleKodeverkTilbakekreving } from '@navikt/fp-types';
 
-import { BehandlingRel, BeregnBeløpParams, useBehandlingApi } from '../../../data/behandlingApi';
+import { BeregnBeløpParams, harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
@@ -43,9 +43,7 @@ export const ForeldelseProsessInitPanel = ({ ...props }: Props & ProsessPanelIni
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Foreldelse' })}
       skalPanelVisesIMeny
       hentOverstyrtStatus={
-        props.behandling.links.some(link => link.rel === BehandlingRel.PERIODER_FORELDELSE)
-          ? VilkarUtfallType.OPPFYLT
-          : VilkarUtfallType.IKKE_VURDERT
+        harLenke(props.behandling, 'PERIODER_FORELDELSE') ? VilkarUtfallType.OPPFYLT : VilkarUtfallType.IKKE_VURDERT
       }
     >
       {perioderForeldelse ? (

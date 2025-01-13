@@ -9,7 +9,7 @@ import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { BeregningsresultatProsessIndex } from '@navikt/fp-prosess-beregningsresultat';
 import { AksessRettigheter } from '@navikt/fp-types';
 
-import { BehandlingRel, useBehandlingApi } from '../../../data/behandlingApi';
+import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
@@ -40,7 +40,7 @@ export const BeregningEsProsessStegInitPanel = ({ rettigheter, ...props }: Props
       prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.Beregning' })}
       skalPanelVisesIMeny
       hentOverstyrtStatus={
-        props.behandling.links.some(link => link.rel === BehandlingRel.BEREGNINGRESULTAT_ENGANGSSTONAD)
+        harLenke(props.behandling, 'BEREGNINGRESULTAT_ENGANGSSTONAD')
           ? VilkarUtfallType.OPPFYLT
           : VilkarUtfallType.IKKE_VURDERT
       }

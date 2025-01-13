@@ -7,7 +7,7 @@ import { UttakDokumentasjonFaktaIndex } from '@navikt/fp-fakta-uttaksdokumentasj
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 
-import { BehandlingRel, useBehandlingApi } from '../../../data/behandlingApi';
+import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
@@ -26,9 +26,7 @@ export const UttakDokumentasjonFaktaInitPanel = (props: FaktaPanelInitProps) => 
       standardPanelProps={standardPanelProps}
       faktaPanelKode={FaktaPanelCode.UTTAK_DOKUMENTASJON}
       faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.UttakDokumentasjon' })}
-      skalPanelVisesIMeny={props.behandling.links.some(
-        link => link.rel === BehandlingRel.DOKUMENTASJON_VURDERING_BEHOV,
-      )}
+      skalPanelVisesIMeny={harLenke(props.behandling, 'DOKUMENTASJON_VURDERING_BEHOV')}
     >
       {dokumentasjonVurderingBehov ? (
         <UttakDokumentasjonFaktaIndex

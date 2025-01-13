@@ -20,7 +20,7 @@ import {
   Vilkarperiode,
 } from '@navikt/fp-types';
 
-import { BehandlingRel, useBehandlingApi } from '../../../data/behandlingApi';
+import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
@@ -63,9 +63,7 @@ export const BeregningFaktaInitPanel = ({
       standardPanelProps={standardPanelProps}
       faktaPanelKode={FaktaPanelCode.BEREGNING}
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Beregning' })}
-      skalPanelVisesIMeny={standardPanelProps.behandling.links.some(
-        link => link.rel === BehandlingRel.BEREGNINGSGRUNNLAG,
-      )}
+      skalPanelVisesIMeny={harLenke(props.behandling, 'BEREGNINGSGRUNNLAG')}
     >
       {beregningsgrunnlag ? (
         <BeregningFaktaIndex

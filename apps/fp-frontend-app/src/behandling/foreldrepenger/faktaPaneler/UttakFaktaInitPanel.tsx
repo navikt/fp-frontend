@@ -8,7 +8,7 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { AksessRettigheter, ArbeidsgiverOpplysningerPerId, Fagsak } from '@navikt/fp-types';
 
-import { BehandlingRel, useBehandlingApi } from '../../../data/behandlingApi';
+import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
@@ -51,11 +51,9 @@ export const UttakFaktaInitPanel = ({
       standardPanelProps={standardPanelProps}
       faktaPanelKode={FaktaPanelCode.UTTAK}
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Uttak' })}
-      skalPanelVisesIMeny={standardPanelProps.behandling.links.some(
-        link => link.rel === BehandlingRel.UTTAK_KONTROLLER_FAKTA_PERIODER_V2,
-      )}
+      skalPanelVisesIMeny={harLenke(props.behandling, 'UTTAK_KONTROLLER_FAKTA_PERIODER_V2')}
     >
-      {ytelsefordeling && uttakKontrollerFaktaPerioder && faktaArbeidsforhold ? (
+      {ytelsefordeling && uttakKontrollerFaktaPerioder ? (
         <UttakFaktaIndex
           fagsak={fagsak}
           kanOverstyre={rettigheter.kanOverstyreAccess.isEnabled && props.behandling.harSattEndringsdato}

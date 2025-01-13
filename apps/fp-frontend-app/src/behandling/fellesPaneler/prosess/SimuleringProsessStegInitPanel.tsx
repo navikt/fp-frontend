@@ -8,7 +8,7 @@ import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { SimuleringProsessIndex } from '@navikt/fp-prosess-simulering';
 import { ArbeidsgiverOpplysningerPerId, Fagsak } from '@navikt/fp-types';
 
-import { BehandlingRel, forhåndsvisTilbakekrevingMelding, useBehandlingApi } from '../../../data/behandlingApi';
+import { forhåndsvisTilbakekrevingMelding, harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
@@ -51,9 +51,6 @@ export const SimuleringProsessStegInitPanel = ({
   const harVedtakspanel = menyData.some(
     d => d.id === ProsessStegCode.VEDTAK && (d.status !== VilkarUtfallType.IKKE_VURDERT || d.harApentAksjonspunkt),
   );
-  const skalPanelVisesIMeny =
-    standardPanelProps.behandling.links.some(link => link.rel === BehandlingRel.SIMULERING_RESULTAT) ||
-    !harVedtakspanel;
 
   return (
     <ProsessDefaultInitPanel
@@ -61,11 +58,9 @@ export const SimuleringProsessStegInitPanel = ({
       standardPanelProps={standardPanelProps}
       prosessPanelKode={ProsessStegCode.SIMULERING}
       prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.Avregning' })}
-      skalPanelVisesIMeny={skalPanelVisesIMeny}
+      skalPanelVisesIMeny={harLenke(props.behandling, 'SIMULERING_RESULTAT') || !harVedtakspanel}
       hentOverstyrtStatus={
-        standardPanelProps.behandling.links.some(link => link.rel === BehandlingRel.SIMULERING_RESULTAT)
-          ? VilkarUtfallType.OPPFYLT
-          : VilkarUtfallType.IKKE_VURDERT
+        harLenke(props.behandling, 'SIMULERING_RESULTAT') ? VilkarUtfallType.OPPFYLT : VilkarUtfallType.IKKE_VURDERT
       }
     >
       <SimuleringProsessIndex
