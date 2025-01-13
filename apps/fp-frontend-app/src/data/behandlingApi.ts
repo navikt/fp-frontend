@@ -111,9 +111,12 @@ const kyExtended = ky.extend({
 const isTest = import.meta.env.MODE === 'test';
 export const wrapUrl = (url: string) => (isTest ? `http://www.test.com${url}` : url);
 
-const getUrlFromRel = (rel: string, links: Link[] = []): string => {
+const getUrlFromRel = (rel: string, links: Link[]): string => {
   const link = links.find(l => l.rel === rel);
-  return link ? wrapUrl(link.href) : '';
+  if (link) {
+    return wrapUrl(link.href);
+  }
+  throw new Error(`Rel ${rel} mangler lenke i behandling-dto`);
 };
 
 export const BehandlingUrl = {
@@ -182,8 +185,11 @@ export const BehandlingRel = {
   UPDATE_ON_HOLD: 'endre-pa-vent',
 };
 
+export const harLenke = (behandling: Behandling, rel: keyof typeof BehandlingRel) =>
+  behandling.links.some(link => link.rel === BehandlingRel[rel]);
+
 const getArbeidsgiverOversiktOptions =
-  (links?: Link[]) => (behandlingVersjon: number, erFørstegangssøknadEllerRevurdering: boolean) =>
+  (links: Link[]) => (behandlingVersjon: number, erFørstegangssøknadEllerRevurdering: boolean) =>
     queryOptions({
       queryKey: [BehandlingRel.ARBEIDSGIVERE_OVERSIKT, behandlingVersjon],
       queryFn: () =>
@@ -194,7 +200,7 @@ const getArbeidsgiverOversiktOptions =
     });
 
 const getBehandlingPersonoversiktOptions =
-  (links?: Link[]) => (behandlingVersjon: number, erFørstegangssøknadEllerRevurdering: boolean) =>
+  (links: Link[]) => (behandlingVersjon: number, erFørstegangssøknadEllerRevurdering: boolean) =>
     queryOptions({
       queryKey: [BehandlingRel.BEHANDLING_PERSONOVERSIKT, behandlingVersjon],
       queryFn: () =>
@@ -202,20 +208,20 @@ const getBehandlingPersonoversiktOptions =
       enabled: erFørstegangssøknadEllerRevurdering,
     });
 
-const getAnkeVurderingOptions = (links?: Link[]) => (behandling: Behandling) =>
+const getAnkeVurderingOptions = (links: Link[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.ANKE_VURDERING, behandling.uuid, behandling.versjon],
     queryFn: () => kyExtended.get(getUrlFromRel(BehandlingRel.ANKE_VURDERING, links)).json<AnkeVurdering>(),
   });
 
-const getKlageVurderingOptions = (links?: Link[]) => (behandling: Behandling) =>
+const getKlageVurderingOptions = (links: Link[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.KLAGE_VURDERING, behandling.uuid, behandling.versjon],
     queryFn: () => kyExtended.get(getUrlFromRel(BehandlingRel.KLAGE_VURDERING, links)).json<KlageVurdering>(),
   });
 
 //TODO (TOR) Denne lenka får med uuid fra backend, men treng saksnummer. Sett heller saksnummer backend så slepp ein det her
-const getInnsynDokumenterOptions = (links?: Link[]) => (fagsak: Fagsak, behandling: Behandling) =>
+const getInnsynDokumenterOptions = (links: Link[]) => (fagsak: Fagsak, behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.INNSYN_DOKUMENTER, fagsak.saksnummer, behandling.uuid, behandling.versjon],
     queryFn: () =>
@@ -228,20 +234,20 @@ const getInnsynDokumenterOptions = (links?: Link[]) => (fagsak: Fagsak, behandli
         .json<Dokument[]>(),
   });
 
-const getInnsynOptions = (links?: Link[]) => (behandling: Behandling) =>
+const getInnsynOptions = (links: Link[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.INNSYN, behandling.uuid, behandling.versjon],
     queryFn: () => kyExtended.get(getUrlFromRel(BehandlingRel.INNSYN, links)).json<Innsyn>(),
   });
 
-const getPerioderForeldelseOptions = (links?: Link[]) => (behandling: Behandling) =>
+const getPerioderForeldelseOptions = (links: Link[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.PERIODER_FORELDELSE, behandling.uuid, behandling.versjon],
     queryFn: () =>
       kyExtended.get(getUrlFromRel(BehandlingRel.PERIODER_FORELDELSE, links)).json<FeilutbetalingPerioderWrapper>(),
   });
 
-const getVilkårsvurderingsperioderOptions = (links?: Link[]) => (behandling: Behandling) =>
+const getVilkårsvurderingsperioderOptions = (links: Link[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.VILKARVURDERINGSPERIODER, behandling.uuid, behandling.versjon],
     queryFn: () =>
@@ -250,85 +256,89 @@ const getVilkårsvurderingsperioderOptions = (links?: Link[]) => (behandling: Be
         .json<DetaljerteFeilutbetalingsperioder>(),
   });
 
-const getVilkårsvurderingOptions = (links?: Link[]) => (behandling: Behandling) =>
+const getVilkårsvurderingOptions = (links: Link[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.VILKARVURDERING, behandling.uuid, behandling.versjon],
     queryFn: () =>
       kyExtended.get(getUrlFromRel(BehandlingRel.VILKARVURDERING, links)).json<VilkarsVurdertePerioderWrapper>(),
   });
 
-const getBeregningsresultatOptions = (links?: Link[]) => (behandling: Behandling) =>
+const getBeregningsresultatOptions = (links: Link[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.BEREGNINGSRESULTAT, behandling.uuid, behandling.versjon],
     queryFn: () =>
       kyExtended.get(getUrlFromRel(BehandlingRel.BEREGNINGSRESULTAT, links)).json<BeregningsresultatTilbakekreving>(),
   });
 
-const getVedtaksbrevOptions = (links?: Link[]) => (behandling: Behandling) =>
+const getVedtaksbrevOptions = (links: Link[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.VEDTAKSBREV, behandling.uuid, behandling.versjon],
     queryFn: () => kyExtended.get(getUrlFromRel(BehandlingRel.VEDTAKSBREV, links)).json<Vedtaksbrev>(),
   });
 
-const getFeilutbetalingFaktaOptions = (links?: Link[]) => (behandling: Behandling) =>
+const getFeilutbetalingFaktaOptions = (links: Link[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.FEILUTBETALING_FAKTA, behandling.uuid, behandling.versjon],
     queryFn: () => kyExtended.get(getUrlFromRel(BehandlingRel.FEILUTBETALING_FAKTA, links)).json<FeilutbetalingFakta>(),
   });
 
-const getFeilutbetalingÅrsakOptions = (links?: Link[]) => (behandling: Behandling) =>
+const getFeilutbetalingÅrsakOptions = (links: Link[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.FEILUTBETALING_AARSAK, behandling.uuid, behandling.versjon],
     queryFn: () =>
       kyExtended.get(getUrlFromRel(BehandlingRel.FEILUTBETALING_AARSAK, links)).json<FeilutbetalingAarsak[]>(),
   });
 
-const getBeregningsresultatDagytelseOptions = (links?: Link[]) => (behandling: Behandling) =>
+const getBeregningsresultatDagytelseOptions = (links: Link[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.BEREGNINGRESULTAT_DAGYTELSE, behandling.uuid, behandling.versjon],
     queryFn: () =>
       kyExtended
         .get(getUrlFromRel(BehandlingRel.BEREGNINGRESULTAT_DAGYTELSE, links))
         .json<BeregningsresultatDagytelse>(),
+    enabled: harLenke(behandling, 'BEREGNINGRESULTAT_DAGYTELSE'),
   });
 
-const getFamiliehendelseOptions = (links?: Link[]) => (behandling: Behandling) =>
+const getFamiliehendelseOptions = (links: Link[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.FAMILIEHENDELSE, behandling.uuid, behandling.versjon],
     queryFn: () => kyExtended.get(getUrlFromRel(BehandlingRel.FAMILIEHENDELSE, links)).json<FamilieHendelseSamling>(),
   });
 
-const getSøknadOptions = (links?: Link[]) => (behandling: Behandling) =>
+const getSøknadOptions = (links: Link[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.SOKNAD, behandling.uuid, behandling.versjon],
     queryFn: () => kyExtended.get(getUrlFromRel(BehandlingRel.SOKNAD, links)).json<Soknad>(),
   });
 
-const getFeriepengegrunnlagOptions = (links?: Link[]) => (behandling: Behandling) =>
+const getFeriepengegrunnlagOptions = (links: Link[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.FERIEPENGEGRUNNLAG, behandling.uuid, behandling.versjon],
     queryFn: () => kyExtended.get(getUrlFromRel(BehandlingRel.FERIEPENGEGRUNNLAG, links)).json<Feriepengegrunnlag>(),
   });
 
-const getTilbakekrevingValgOptions = (links?: Link[]) => (behandling: Behandling) =>
+const getTilbakekrevingValgOptions = (links: Link[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.TILBAKEKREVINGVALG, behandling.uuid, behandling.versjon],
     queryFn: () => kyExtended.get(getUrlFromRel(BehandlingRel.TILBAKEKREVINGVALG, links)).json<TilbakekrevingValg>(),
+    enabled: harLenke(behandling, 'TILBAKEKREVINGVALG'),
   });
 
-const getBeregningsgrunnlagOptions = (links?: Link[]) => (behandling: Behandling) =>
+const getBeregningsgrunnlagOptions = (links: Link[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.BEREGNINGSGRUNNLAG, behandling.uuid, behandling.versjon],
     queryFn: () => kyExtended.get(getUrlFromRel(BehandlingRel.BEREGNINGSGRUNNLAG, links)).json<Beregningsgrunnlag>(),
+    enabled: harLenke(behandling, 'BEREGNINGSGRUNNLAG'),
   });
 
-const getSimuleringResultatOptions = (links?: Link[]) => (behandling: Behandling) =>
+const getSimuleringResultatOptions = (links: Link[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.SIMULERING_RESULTAT, behandling.uuid, behandling.versjon],
     queryFn: () => kyExtended.get(getUrlFromRel(BehandlingRel.SIMULERING_RESULTAT, links)).json<SimuleringResultat>(),
+    enabled: harLenke(behandling, 'SIMULERING_RESULTAT'),
   });
 
-const getBeregningDagytelseOriginalBehandlingOptions = (links?: Link[]) => (behandling: Behandling) =>
+const getBeregningDagytelseOriginalBehandlingOptions = (links: Link[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.BEREGNINGSRESULTAT_DAGYTELSE_ORIGINAL_BEHANDLING, behandling.uuid, behandling.versjon],
     queryFn: () =>
@@ -336,16 +346,17 @@ const getBeregningDagytelseOriginalBehandlingOptions = (links?: Link[]) => (beha
         'beregningsresultat-engangsstonad'?: BeregningsresultatEs;
         'beregningsresultat-foreldrepenger'?: BeregningsresultatDagytelse;
       }>(),
+    enabled: harLenke(behandling, 'BEREGNINGSRESULTAT_DAGYTELSE_ORIGINAL_BEHANDLING'),
   });
 
-const getArbeidOgInntektOptions = (links?: Link[]) => (behandling: Behandling) =>
+const getArbeidOgInntektOptions = (links: Link[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.ARBEID_OG_INNTEKT, behandling.uuid, behandling.versjon],
     queryFn: () =>
       kyExtended.get(getUrlFromRel(BehandlingRel.ARBEID_OG_INNTEKT, links)).json<ArbeidOgInntektsmelding>(),
   });
 
-const getSvangerskapspengerTilretteleggingOptions = (links?: Link[]) => (behandling: Behandling) =>
+const getSvangerskapspengerTilretteleggingOptions = (links: Link[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.SVANGERSKAPSPENGER_TILRETTELEGGING, behandling.uuid, behandling.versjon],
     queryFn: () =>
@@ -354,54 +365,57 @@ const getSvangerskapspengerTilretteleggingOptions = (links?: Link[]) => (behandl
         .json<FodselOgTilrettelegging>(),
   });
 
-const getOpptjeningOptions = (links?: Link[]) => (behandling: Behandling) =>
+const getOpptjeningOptions = (links: Link[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.OPPTJENING, behandling.uuid, behandling.versjon],
     queryFn: () => kyExtended.get(getUrlFromRel(BehandlingRel.OPPTJENING, links)).json<Opptjening>(),
   });
 
-const getBeregningsresultatEngangsstønadOptions = (links?: Link[]) => (behandling: Behandling) =>
+const getBeregningsresultatEngangsstønadOptions = (links: Link[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.BEREGNINGRESULTAT_ENGANGSSTONAD, behandling.uuid, behandling.versjon],
     queryFn: () =>
       kyExtended.get(getUrlFromRel(BehandlingRel.BEREGNINGRESULTAT_ENGANGSSTONAD, links)).json<BeregningsresultatEs>(),
   });
 
-const getMedlemskapOptions = (links?: Link[]) => (behandling: Behandling) =>
+const getMedlemskapOptions = (links: Link[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.MEDLEMSKAP, behandling.uuid, behandling.versjon],
     queryFn: () => kyExtended.get(getUrlFromRel(BehandlingRel.MEDLEMSKAP, links)).json<Medlemskap>(),
   });
 
-const getUttaksresultatPerioderOptions = (links?: Link[]) => (behandling: Behandling) =>
+const getUttaksresultatPerioderOptions = (links: Link[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.UTTAKSRESULTAT_PERIODER, behandling.uuid, behandling.versjon],
     queryFn: () =>
       kyExtended.get(getUrlFromRel(BehandlingRel.UTTAKSRESULTAT_PERIODER, links)).json<UttaksresultatPeriode>(),
+    enabled: harLenke(behandling, 'UTTAKSRESULTAT_PERIODER'),
   });
 
-const getUttakStønadskontoerOptions = (links?: Link[]) => (behandling: Behandling) =>
+const getUttakStønadskontoerOptions = (links: Link[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.UTTAK_STONADSKONTOER, behandling.uuid, behandling.versjon],
     queryFn: () => kyExtended.get(getUrlFromRel(BehandlingRel.UTTAK_STONADSKONTOER, links)).json<UttakStonadskontoer>(),
+    enabled: harLenke(behandling, 'UTTAK_STONADSKONTOER'),
   });
 
-const getYtelsefordelingOptions = (links?: Link[]) => (behandling: Behandling) =>
+const getYtelsefordelingOptions = (links: Link[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.YTELSEFORDELING, behandling.uuid, behandling.versjon],
     queryFn: () => kyExtended.get(getUrlFromRel(BehandlingRel.YTELSEFORDELING, links)).json<Ytelsefordeling>(),
   });
 
-const getDokumentasjonVurderingBehovOptions = (links?: Link[]) => (behandling: Behandling) =>
+const getDokumentasjonVurderingBehovOptions = (links: Link[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.DOKUMENTASJON_VURDERING_BEHOV, behandling.uuid, behandling.versjon],
     queryFn: () =>
       kyExtended
         .get(getUrlFromRel(BehandlingRel.DOKUMENTASJON_VURDERING_BEHOV, links))
         .json<DokumentasjonVurderingBehov[]>(),
+    enabled: harLenke(behandling, 'DOKUMENTASJON_VURDERING_BEHOV'),
   });
 
-const getUttakKontrollerFaktaPerioderOptions = (links?: Link[]) => (behandling: Behandling) =>
+const getUttakKontrollerFaktaPerioderOptions = (links: Link[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.UTTAK_KONTROLLER_FAKTA_PERIODER_V2, behandling.uuid, behandling.versjon],
     queryFn: () =>
@@ -410,52 +424,55 @@ const getUttakKontrollerFaktaPerioderOptions = (links?: Link[]) => (behandling: 
         .json<KontrollerFaktaPeriode[]>(),
   });
 
-const getFaktaArbeidsforholdOptions = (links?: Link[]) => (behandling: Behandling) =>
+const getFaktaArbeidsforholdOptions = (links: Link[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.FAKTA_ARBEIDSFORHOLD, behandling.uuid, behandling.versjon],
     queryFn: () =>
       kyExtended.get(getUrlFromRel(BehandlingRel.FAKTA_ARBEIDSFORHOLD, links)).json<FaktaArbeidsforhold[]>(),
+    enabled: harLenke(behandling, 'FAKTA_ARBEIDSFORHOLD'),
   });
 
-const getFamiliehendelseOrigninalBehandlingOptions = (links?: Link[]) => (behandling: Behandling) =>
+const getFamiliehendelseOrigninalBehandlingOptions = (links: Link[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.FAMILIEHENDELSE_ORIGINAL_BEHANDLING, behandling.uuid, behandling.versjon],
     queryFn: () =>
       kyExtended.get(getUrlFromRel(BehandlingRel.FAMILIEHENDELSE_ORIGINAL_BEHANDLING, links)).json<FamilieHendelse>(),
   });
 
-const getSøknadOriginalBehandlingOptions = (links?: Link[]) => (behandling: Behandling) =>
+const getSøknadOriginalBehandlingOptions = (links: Link[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.SOKNAD_ORIGINAL_BEHANDLING, behandling.uuid, behandling.versjon],
     queryFn: () => kyExtended.get(getUrlFromRel(BehandlingRel.SOKNAD_ORIGINAL_BEHANDLING, links)).json<Soknad>(),
   });
 
-const getInntektsmeldingerOptions = (links?: Link[]) => (behandling: Behandling) =>
+const getInntektsmeldingerOptions = (links: Link[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.INNTEKTSMELDINGER, behandling.uuid, behandling.versjon],
     queryFn: () => kyExtended.get(getUrlFromRel(BehandlingRel.INNTEKTSMELDINGER, links)).json<Inntektsmelding[]>(),
   });
 
-const getInntektArbeidYtelseOptions = (links?: Link[]) => (behandling: Behandling) =>
+const getInntektArbeidYtelseOptions = (links: Link[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.INNTEKT_ARBEID_YTELSE, behandling.uuid, behandling.versjon],
     queryFn: () =>
       kyExtended.get(getUrlFromRel(BehandlingRel.INNTEKT_ARBEID_YTELSE, links)).json<InntektArbeidYtelse>(),
   });
 
-const getUtlandDokStatusOptions = (links?: Link[]) => (behandling: Behandling) =>
+const getUtlandDokStatusOptions = (links: Link[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.UTLAND_DOK_STATUS, behandling.uuid, behandling.versjon],
     queryFn: () =>
       kyExtended.get(getUrlFromRel(BehandlingRel.UTLAND_DOK_STATUS, links)).json<{
         dokStatus?: string;
       }>(),
+    enabled: harLenke(behandling, 'UTLAND_DOK_STATUS'),
   });
 
-const getVergeOptions = (links?: Link[]) => (behandling: Behandling) =>
+const getVergeOptions = (links: Link[]) => (behandling: Behandling, isEnabled: boolean) =>
   queryOptions({
     queryKey: [BehandlingRel.VERGE, behandling.uuid, behandling.versjon],
     queryFn: () => kyExtended.get(getUrlFromRel(BehandlingRel.VERGE, links)).json<Verge>(),
+    enabled: isEnabled,
   });
 
 export const hentBehandling = (behandlingUuid: string) =>
@@ -495,12 +512,12 @@ export const forhåndsvisTilbakekrevingMelding = (params: {
 
 export const doGetRequest = <T>(url: string) => kyExtended.get(url).json<T>();
 
-const getÅpneBehandlingForEndring = (links?: Link[]) => (behandlingUuid: string, behandlingVersjon: number) =>
+const getÅpneBehandlingForEndring = (links: Link[]) => (behandlingUuid: string, behandlingVersjon: number) =>
   kyExtended.post(getUrlFromRel(BehandlingRel.OPEN_BEHANDLING_FOR_CHANGES, links), {
     json: { behandlingUuid, behandlingVersjon },
   });
 
-const getNyBehandlendeEnhet = (links?: Link[]) => (params: NyBehandlendeEnhet) =>
+const getNyBehandlendeEnhet = (links: Link[]) => (params: NyBehandlendeEnhet) =>
   kyExtended
     .post(getUrlFromRel(BehandlingRel.BEHANDLING_NY_BEHANDLENDE_ENHET, links), {
       json: params,
@@ -508,7 +525,7 @@ const getNyBehandlendeEnhet = (links?: Link[]) => (params: NyBehandlendeEnhet) =
     .json<void>();
 
 const getHenleggBehandling =
-  (links?: Link[]) =>
+  (links: Link[]) =>
   (params: { behandlingUuid: string; årsakKode: string; begrunnelse: string; behandlingVersjon: number }) =>
     kyExtended
       .post(getUrlFromRel(BehandlingRel.HENLEGG_BEHANDLING, links), {
@@ -517,7 +534,7 @@ const getHenleggBehandling =
       .json<void>();
 
 const getSettBehandlingPåVent =
-  (links?: Link[]) =>
+  (links: Link[]) =>
   (params: { behandlingUuid: string; behandlingVersjon: number; frist: string; ventearsak: string }) =>
     kyExtended
       .post(getUrlFromRel(BehandlingRel.BEHANDLING_ON_HOLD, links), {
@@ -525,60 +542,60 @@ const getSettBehandlingPåVent =
       })
       .json<void>();
 
-const getOppdaterPåVent = (links?: Link[]) => (params: SettPaVentParams) =>
+const getOppdaterPåVent = (links: Link[]) => (params: SettPaVentParams) =>
   kyExtended
     .post(getUrlFromRel(BehandlingRel.UPDATE_ON_HOLD, links), {
       json: params,
     })
     .json<void>();
 
-const getFortsettBehandling = (links?: Link[]) => (params: { behandlingUuid: string; behandlingVersjon: number }) =>
+const getFortsettBehandling = (links: Link[]) => (params: { behandlingUuid: string; behandlingVersjon: number }) =>
   kyExtended.post<Behandling>(getUrlFromRel(BehandlingRel.RESUME_BEHANDLING, links), {
     json: params,
   });
 
-const getOpprettVerge = (links?: Link[]) => (params: { behandlingUuid: string; behandlingVersjon: number }) =>
+const getOpprettVerge = (links: Link[]) => (params: { behandlingUuid: string; behandlingVersjon: number }) =>
   kyExtended.post<Behandling>(getUrlFromRel(BehandlingRel.VERGE_OPPRETT, links), {
     json: params,
   });
 
-const getFjernVerge = (links?: Link[]) => (params: { behandlingUuid: string; behandlingVersjon: number }) =>
+const getFjernVerge = (links: Link[]) => (params: { behandlingUuid: string; behandlingVersjon: number }) =>
   kyExtended.post<Behandling>(getUrlFromRel(BehandlingRel.VERGE_FJERN, links), {
     json: params,
   });
 
-const getLagreAksjonspunkt = (links?: Link[]) => (params: AksjonspunktArgs) =>
+const getLagreAksjonspunkt = (links: Link[]) => (params: AksjonspunktArgs) =>
   kyExtended.post<Behandling>(getUrlFromRel(BehandlingRel.SAVE_AKSJONSPUNKT, links), {
     json: params,
   });
 
-const getLagreOverstyrtAksjonspunkt = (links?: Link[]) => (params: OverstyrteAksjonspunktArgs) =>
+const getLagreOverstyrtAksjonspunkt = (links: Link[]) => (params: OverstyrteAksjonspunktArgs) =>
   kyExtended.post<Behandling>(getUrlFromRel(BehandlingRel.SAVE_OVERSTYRT_AKSJONSPUNKT, links), {
     json: params,
   });
 
-const getRegistrerArbeidsforholdForAOI = (links?: Link[]) => (params: ManueltArbeidsforhold) =>
+const getRegistrerArbeidsforholdForAOI = (links: Link[]) => (params: ManueltArbeidsforhold) =>
   kyExtended
     .post(getUrlFromRel(BehandlingRel.ARBEID_OG_INNTEKT_REGISTRER_ARBEIDSFORHOLD, links), {
       json: params,
     })
     .json<void>();
 
-const getLagreVurderingForAOI = (links?: Link[]) => (params: ManglendeInntektsmeldingVurdering) =>
+const getLagreVurderingForAOI = (links: Link[]) => (params: ManglendeInntektsmeldingVurdering) =>
   kyExtended
     .post(getUrlFromRel(BehandlingRel.ARBEID_OG_INNTEKT_LAGRE_VURDERING, links), {
       json: params,
     })
     .json<void>();
 
-const getÅpneForNyVurderingAOI = (links?: Link[]) => (params: { behandlingUuid: string; behandlingVersjon: number }) =>
+const getÅpneForNyVurderingAOI = (links: Link[]) => (params: { behandlingUuid: string; behandlingVersjon: number }) =>
   kyExtended
     .post(getUrlFromRel(BehandlingRel.ARBEID_OG_INNTEKT_ÅPNE_FOR_NY_VURDERING, links), {
       json: params,
     })
     .json<void>();
 
-const getMellomlagreFormkravVurdering = (links?: Link[]) => (params: FormkravMellomlagretDataType) =>
+const getMellomlagreFormkravVurdering = (links: Link[]) => (params: FormkravMellomlagretDataType) =>
   kyExtended
     .post(getUrlFromRel(BehandlingRel.SAVE_FORMKRAV_VURDERING, links), {
       json: params,
@@ -586,7 +603,7 @@ const getMellomlagreFormkravVurdering = (links?: Link[]) => (params: FormkravMel
     .json<void>();
 
 const getMellomlagreKlageVurdering =
-  (links?: Link[]) =>
+  (links: Link[]) =>
   (
     params: AksjonspunktVerdier & {
       behandlingUuid: string;
@@ -598,14 +615,14 @@ const getMellomlagreKlageVurdering =
       })
       .json<void>();
 
-const getBeregneBeløp = (links?: Link[]) => (params: BeregnBeløpParams) =>
+const getBeregneBeløp = (links: Link[]) => (params: BeregnBeløpParams) =>
   kyExtended
     .post(getUrlFromRel(BehandlingRel.BEREGNE_BELØP, links), {
       json: params,
     })
     .json<void>();
 
-const getOppdaterStønadskontoer = (links?: Link[]) => (params: { behandlingUuid: string; perioder: PeriodeSoker[] }) =>
+const getOppdaterStønadskontoer = (links: Link[]) => (params: { behandlingUuid: string; perioder: PeriodeSoker[] }) =>
   kyExtended
     .post(getUrlFromRel(BehandlingRel.STONADSKONTOER_GITT_UTTAKSPERIODER, links), {
       json: params,
@@ -613,7 +630,7 @@ const getOppdaterStønadskontoer = (links?: Link[]) => (params: { behandlingUuid
     .json<void>();
 
 export const useBehandlingApi = (behandling: Behandling) => {
-  const links = behandling.links;
+  const { links } = behandling;
   return {
     arbeidsgiverOversiktOptions: getArbeidsgiverOversiktOptions(links),
     behandlingPersonoversiktOptions: getBehandlingPersonoversiktOptions(links),

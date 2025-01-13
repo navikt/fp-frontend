@@ -20,7 +20,9 @@ export const VergeFaktaInitPanel = ({ valgtFaktaSteg, behandling, registrerFakta
 
   const api = useBehandlingApi(standardPanelProps.behandling);
 
-  const { data: verge } = useQuery(api.vergeOptions(standardPanelProps.behandling));
+  const skalPanelVisesIMeny = AKSJONSPUNKT_KODER.some(kode => hasAksjonspunkt(kode, behandling.aksjonspunkt));
+
+  const { data: verge } = useQuery(api.vergeOptions(standardPanelProps.behandling, skalPanelVisesIMeny));
 
   return (
     <FaktaDefaultInitPanel
@@ -30,7 +32,7 @@ export const VergeFaktaInitPanel = ({ valgtFaktaSteg, behandling, registrerFakta
       registrerFaktaPanel={registrerFaktaPanel}
       faktaPanelKode={FaktaPanelCode.VERGE}
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Verge' })}
-      skalPanelVisesIMeny={AKSJONSPUNKT_KODER.some(kode => hasAksjonspunkt(kode, behandling.aksjonspunkt))}
+      skalPanelVisesIMeny={skalPanelVisesIMeny}
     >
       <VergeFaktaIndex verge={verge} {...standardPanelProps} />
     </FaktaDefaultInitPanel>

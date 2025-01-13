@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback, useEffect, useMemo,useState } from 'react';
+import React, { FunctionComponent, useCallback, useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 
@@ -161,7 +161,7 @@ interface OwnProps {
   ytelsefordeling: Ytelsefordeling;
   uttakKontrollerFaktaPerioder: KontrollerFaktaPeriode[];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  faktaArbeidsforhold: FaktaArbeidsforhold[];
+  faktaArbeidsforhold?: FaktaArbeidsforhold[];
   alleKodeverk: AlleKodeverk;
   aksjonspunkter: Aksjonspunkt[];
   readOnly: boolean;

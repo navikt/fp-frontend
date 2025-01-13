@@ -8,14 +8,13 @@ import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { UttakProsessIndex } from '@navikt/fp-prosess-uttak';
 import { AksessRettigheter, ArbeidsgiverOpplysningerPerId, Behandling, Personoversikt } from '@navikt/fp-types';
 
-import { BehandlingRel, useBehandlingApi } from '../../../data/behandlingApi';
+import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 
 const getStatusFromUttakresultat = (behandling: Behandling): string => {
-  const harLenke = behandling.links.some(link => link.rel === BehandlingRel.UTTAKSRESULTAT_PERIODER);
-  if (!harLenke) {
+  if (!harLenke(behandling, 'UTTAKSRESULTAT_PERIODER')) {
     return VilkarUtfallType.IKKE_VURDERT;
   }
   return behandling.alleUttaksperioderAvslått ? VilkarUtfallType.IKKE_OPPFYLT : VilkarUtfallType.OPPFYLT;
