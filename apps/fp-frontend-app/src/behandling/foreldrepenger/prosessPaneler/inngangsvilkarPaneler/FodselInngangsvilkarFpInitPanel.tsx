@@ -1,12 +1,13 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 
-import { AksjonspunktKode, FagsakYtelseType,VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, FagsakYtelseType, VilkarType } from '@navikt/fp-kodeverk';
 import { FodselVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-fodsel';
 import { AksessRettigheter } from '@navikt/fp-types';
 
 import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 import { OverstyringPanelDef } from '../../../felles/prosess/OverstyringPanelDef';
+import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandardProsessPanelProps';
 import { InngangsvilkarPanelInitProps } from '../../../felles/typer/inngangsvilkarPanelInitProps';
 
 const AKSJONSPUNKT_KODER = [
@@ -27,38 +28,41 @@ export const FodselInngangsvilkarFpInitPanel = ({
   ...props
 }: Props & InngangsvilkarPanelInitProps) => {
   const intl = useIntl();
+
+  const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, VILKAR_KODER);
+
   return (
     <InngangsvilkarDefaultInitPanel
       {...props}
       behandlingVersjon={behandlingVersjon}
-      aksjonspunktKoder={AKSJONSPUNKT_KODER}
+      standardPanelProps={standardPanelProps}
       vilkarKoder={VILKAR_KODER}
       inngangsvilkarPanelKode="FODSEL"
-      hentInngangsvilkarPanelTekst={() => intl.formatMessage({ id: 'SRBVilkarForm.VurderSammeBarn' })}
-      renderPanel={(data, erOverstyrt, toggleOverstyring) => (
+      hentInngangsvilkarPanelTekst={intl.formatMessage({ id: 'SRBVilkarForm.VurderSammeBarn' })}
+      renderPanel={({ erOverstyrt, toggleOverstyring }) => (
         <>
-          {data.aksjonspunkter.length === 0 && (
+          {standardPanelProps.aksjonspunkter.length === 0 && (
             <OverstyringPanelDef
-              aksjonspunkter={data.aksjonspunkter}
+              aksjonspunkter={standardPanelProps.aksjonspunkter}
               aksjonspunktKode={
-                data.vilkar.some(v => v.vilkarType === VilkarType.FODSELSVILKARET_MOR)
+                standardPanelProps.vilkar.some(v => v.vilkarType === VilkarType.FODSELSVILKARET_MOR)
                   ? AksjonspunktKode.OVERSTYR_FODSELSVILKAR
                   : AksjonspunktKode.OVERSTYR_FODSELSVILKAR_FAR_MEDMOR
               }
-              vilkar={data.vilkar}
+              vilkar={standardPanelProps.vilkar}
               vilkarKoder={VILKAR_KODER}
               panelTekstKode="Inngangsvilkar.Fodselsvilkaret"
               toggleOverstyring={toggleOverstyring}
               erOverstyrt={erOverstyrt}
               overrideReadOnly={
-                data.isReadOnly ||
-                (props.harInngangsvilkarApentAksjonspunkt && !(data.isAksjonspunktOpen || erOverstyrt))
+                standardPanelProps.isReadOnly ||
+                (props.harInngangsvilkarApentAksjonspunkt && !(standardPanelProps.isAksjonspunktOpen || erOverstyrt))
               }
               kanOverstyreAccess={rettigheter.kanOverstyreAccess}
             />
           )}
-          {data.aksjonspunkter.length > 0 && (
-            <FodselVilkarProsessIndex ytelseTypeKode={FagsakYtelseType.FORELDREPENGER} {...data} />
+          {standardPanelProps.aksjonspunkter.length > 0 && (
+            <FodselVilkarProsessIndex ytelseTypeKode={FagsakYtelseType.FORELDREPENGER} {...standardPanelProps} />
           )}
         </>
       )}

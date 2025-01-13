@@ -1,43 +1,50 @@
-import React from 'react';
 import { useIntl } from 'react-intl';
 
-import { AksjonspunktKode,VilkarType } from '@navikt/fp-kodeverk';
-import { SvangerskapVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-svangerskap';
-import { FodselOgTilrettelegging } from '@navikt/fp-types';
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
+import { useQuery } from '@tanstack/react-query';
 
-import { BehandlingApiKeys } from '../../../../data/behandlingContextApi';
+import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
+import { SvangerskapVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-svangerskap';
+
+import { useBehandlingApi } from '../../../../data/behandlingApi';
 import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
+import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandardProsessPanelProps';
 import { InngangsvilkarPanelInitProps } from '../../../felles/typer/inngangsvilkarPanelInitProps';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.SVANGERSKAPSVILKARET];
 
 const VILKAR_KODER = [VilkarType.SVANGERSKAPVILKARET];
 
-const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.SVANGERSKAPSPENGER_TILRETTELEGGING];
-
-type EndepunktPanelData = {
-  svangerskapspengerTilrettelegging: FodselOgTilrettelegging;
-};
-
-interface Props {
-  behandlingVersjon: number;
-}
-
-export const SvangerskapInngangsvilkarInitPanel = ({
-  behandlingVersjon,
-  ...props
-}: Props & InngangsvilkarPanelInitProps) => {
+export const SvangerskapInngangsvilkarInitPanel = (props: InngangsvilkarPanelInitProps) => {
   const intl = useIntl();
+  const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, VILKAR_KODER);
+
+  const api = useBehandlingApi(standardPanelProps.behandling);
+
+  const { data: svangerskapspengerTilrettelegging } = useQuery(
+    api.svp.svangerskapspengerTilretteleggingOptions(standardPanelProps.behandling),
+  );
+
   return (
-    <InngangsvilkarDefaultInitPanel<EndepunktPanelData>
+    <InngangsvilkarDefaultInitPanel
       {...props}
-      behandlingVersjon={behandlingVersjon}
-      panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
-      aksjonspunktKoder={AKSJONSPUNKT_KODER}
+      behandlingVersjon={standardPanelProps.behandling.versjon}
       vilkarKoder={VILKAR_KODER}
+      standardPanelProps={standardPanelProps}
       inngangsvilkarPanelKode="SVANGERSKAP"
-      hentInngangsvilkarPanelTekst={() => intl.formatMessage({ id: 'SvangerskapVilkarForm.FyllerVilkår' })}
-      renderPanel={data => <SvangerskapVilkarProsessIndex {...data} />}
+      hentInngangsvilkarPanelTekst={intl.formatMessage({ id: 'SvangerskapVilkarForm.FyllerVilkår' })}
+      renderPanel={() => (
+        <>
+          {svangerskapspengerTilrettelegging ? (
+            <SvangerskapVilkarProsessIndex
+              svangerskapspengerTilrettelegging={svangerskapspengerTilrettelegging}
+              {...standardPanelProps}
+            />
+          ) : (
+            <LoadingPanel />
+          )}
+        </>
+      )}
     />
   );
 };

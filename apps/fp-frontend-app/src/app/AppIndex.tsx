@@ -8,8 +8,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { HTTPError } from 'ky';
 import moment from 'moment';
 
-import { EventType } from '@navikt/fp-rest-api';
-import { useRestApiError, useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
+import { EventType, useRestApiError, useRestApiErrorDispatcher } from '@navikt/fp-rest-api';
 import { ForbiddenPage, UnauthorizedPage } from '@navikt/fp-sak-infosider';
 
 import { initFetchOptions } from '../data/fagsakApi';

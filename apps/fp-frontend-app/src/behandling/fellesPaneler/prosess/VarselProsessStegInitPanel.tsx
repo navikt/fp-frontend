@@ -1,41 +1,19 @@
-import React, { useCallback } from 'react';
 import { useIntl } from 'react-intl';
 
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { VarselOmRevurderingProsessIndex } from '@navikt/fp-prosess-varsel-om-revurdering';
-import {
-  Behandling,
-  Fagsak,
-  FamilieHendelse,
-  FamilieHendelseSamling,
-  ForhåndsvisMeldingParams,
-  Soknad,
-} from '@navikt/fp-types';
+import { Fagsak, ForhåndsvisMeldingParams } from '@navikt/fp-types';
 
-import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
+import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { skalViseProsessPanel } from '../../felles/prosess/skalViseProsessPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
-
-const getForhandsvisCallback =
-  (
-    forhandsvisMelding: (params: ForhåndsvisMeldingParams, keepData?: boolean) => Promise<unknown>,
-    fagsak: Fagsak,
-    behandling: Behandling,
-  ) =>
-  (data: { mottaker: string; dokumentMal: string; fritekst: string }) => {
-    const brevData = {
-      ...data,
-      behandlingUuid: behandling.uuid,
-      fagsakYtelseType: fagsak.fagsakYtelseType,
-    };
-
-    return forhandsvisMelding(brevData).then(response => forhandsvisDokument(response));
-  };
 
 const getLagringSideeffekter =
   (setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void, opneSokeside: () => void) => () => {
@@ -52,19 +30,6 @@ const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.VARSEL_REVURDERING_ETTERKONTROLL,
 ];
 
-const ENDEPUNKTER_PANEL_DATA = [
-  BehandlingApiKeys.FAMILIEHENDELSE,
-  BehandlingApiKeys.FAMILIEHENDELSE_ORIGINAL_BEHANDLING,
-  BehandlingApiKeys.SOKNAD,
-  BehandlingApiKeys.SOKNAD_ORIGINAL_BEHANDLING,
-];
-type EndepunktPanelData = {
-  familiehendelse: FamilieHendelseSamling;
-  familiehendelseOriginalBehandling: FamilieHendelse;
-  soknad: Soknad;
-  soknadOriginalBehandling: Soknad;
-};
-
 interface Props {
   setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void;
   fagsak: Fagsak;
@@ -77,30 +42,50 @@ export const VarselProsessStegInitPanel = ({
   opneSokeside,
   ...props
 }: Props & ProsessPanelInitProps) => {
+  const intl = useIntl();
+
   const lagringSideEffekter = getLagringSideeffekter(setSkalOppdatereEtterBekreftelseAvAp, opneSokeside);
+  const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, [], lagringSideEffekter);
 
-  const { startRequest: forhandsvisMelding } = restBehandlingApiHooks.useRestApiRunner(
-    BehandlingApiKeys.PREVIEW_MESSAGE,
+  const api = useBehandlingApi(props.behandling);
+
+  const { data: familiehendelse } = useQuery(api.familiehendelseOptions(props.behandling));
+  const { data: søknad } = useQuery(api.søknadOptions(props.behandling));
+  const { data: familiehendelseOrigninalBehandling } = useQuery(
+    api.familiehendelseOrigninalBehandlingOptions(props.behandling),
   );
+  const { data: søknadOriginalBehandling } = useQuery(api.søknadOriginalBehandlingOptions(props.behandling));
 
-  const standardPanelProps = useStandardProsessPanelProps();
-
-  const previewCallback = useCallback(
-    getForhandsvisCallback(forhandsvisMelding, fagsak, standardPanelProps.behandling),
-    [standardPanelProps.behandling.versjon],
-  );
+  const { mutate: forhåndsvis } = useMutation({
+    mutationFn: (values: ForhåndsvisMeldingParams) =>
+      forhåndsvisMelding({
+        ...values,
+        behandlingUuid: props.behandling.uuid,
+        fagsakYtelseType: fagsak.fagsakYtelseType,
+      }),
+    onSuccess: forhandsvisDokument,
+  });
 
   return (
-    <ProsessDefaultInitPanel<EndepunktPanelData>
+    <ProsessDefaultInitPanel
       {...props}
-      panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
-      aksjonspunktKoder={AKSJONSPUNKT_KODER}
+      standardPanelProps={standardPanelProps}
       prosessPanelKode={ProsessStegCode.VARSEL}
-      prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.CheckVarselRevurdering' })}
-      skalPanelVisesIMeny={data => skalViseProsessPanel(data.aksjonspunkter)}
-      lagringSideEffekter={lagringSideEffekter}
-      // @ts-expect-error
-      renderPanel={data => <VarselOmRevurderingProsessIndex previewCallback={previewCallback} {...data} />}
-    />
+      prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.CheckVarselRevurdering' })}
+      skalPanelVisesIMeny={skalViseProsessPanel(standardPanelProps.aksjonspunkter)}
+    >
+      {familiehendelse && søknad && familiehendelseOrigninalBehandling && søknadOriginalBehandling ? (
+        <VarselOmRevurderingProsessIndex
+          familiehendelse={familiehendelse}
+          soknad={søknad}
+          familiehendelseOriginalBehandling={familiehendelseOrigninalBehandling}
+          soknadOriginalBehandling={søknadOriginalBehandling}
+          previewCallback={forhåndsvis}
+          {...standardPanelProps}
+        />
+      ) : (
+        <LoadingPanel />
+      )}
+    </ProsessDefaultInitPanel>
   );
 };

@@ -1,14 +1,16 @@
 import { useMutation } from '@tanstack/react-query';
 import { KyResponse } from 'ky';
 
-import { AsyncPollingStatus, EventType } from '@navikt/fp-rest-api';
-import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
+import { AsyncPollingStatus, EventType, useRestApiErrorDispatcher } from '@navikt/fp-rest-api';
 import { Behandling } from '@navikt/fp-types';
 
 import { AksjonspunktArgs, OverstyrteAksjonspunktArgs, useBehandlingApi } from './behandlingApi';
 import { doGetRequest } from './fagsakApi';
+import { useRequestPendingContext } from './RequestPendingContext';
 
 //TODO (TOR) Vurder å bruke Websocket i staden for denne pollemekanismen.
+
+type PollingPendingFn = (isPending: boolean) => void;
 
 const HTTP_ACCEPTED = 202;
 const MAX_POLLING_ATTEMPTS = 1800;
@@ -31,13 +33,15 @@ export const useBehandlingPollingOperasjoner = (
   const { pollForResponse: api } = useBehandlingApi(behandling);
   const onError = getOnError(addErrorMessage);
 
+  const { setIsRequestPending } = useRequestPendingContext();
+
   const { mutate: opprettVerge } = useMutation({
     mutationFn: async () => {
       const response = await api.opprettVerge({
         behandlingUuid: behandling.uuid,
         behandlingVersjon: behandling.versjon,
       });
-      return doPolling(response);
+      return doPolling(response, setIsRequestPending);
     },
     onSuccess,
     onError,
@@ -46,7 +50,7 @@ export const useBehandlingPollingOperasjoner = (
   const { mutate: fjernVerge } = useMutation({
     mutationFn: async () => {
       const response = await api.fjernVerge({ behandlingUuid: behandling.uuid, behandlingVersjon: behandling.versjon });
-      return doPolling(response);
+      return doPolling(response, setIsRequestPending);
     },
     onSuccess,
     onError,
@@ -55,7 +59,7 @@ export const useBehandlingPollingOperasjoner = (
   const { mutateAsync: lagreAksjonspunkter } = useMutation({
     mutationFn: async (values: AksjonspunktArgs) => {
       const response = await api.lagreAksjonspunkt(values);
-      return doPolling(response);
+      return doPolling(response, setIsRequestPending);
     },
     onSuccess,
     onError,
@@ -64,7 +68,7 @@ export const useBehandlingPollingOperasjoner = (
   const { mutateAsync: lagreOverstyrteAksjonspunkter } = useMutation({
     mutationFn: async (values: OverstyrteAksjonspunktArgs) => {
       const response = await api.lagreOverstyrtAksjonspunkt(values);
-      return doPolling(response);
+      return doPolling(response, setIsRequestPending);
     },
     onSuccess,
     onError,
@@ -73,7 +77,7 @@ export const useBehandlingPollingOperasjoner = (
   const { mutate: åpneForEndringer } = useMutation({
     mutationFn: async () => {
       const response = await api.åpneBehandlingForEndring(behandling.uuid, behandling.versjon);
-      return doPolling(response);
+      return doPolling(response, setIsRequestPending);
     },
     onSuccess,
     onError,
@@ -85,7 +89,7 @@ export const useBehandlingPollingOperasjoner = (
         behandlingUuid: behandling.uuid,
         behandlingVersjon: behandling.versjon,
       });
-      return doPolling(response);
+      return doPolling(response, setIsRequestPending);
     },
     onSuccess,
     onError,
@@ -101,18 +105,18 @@ export const useBehandlingPollingOperasjoner = (
   };
 };
 
-export const doPolling = async <T,>(response: KyResponse<T>) => {
+export const doPolling = async <T,>(response: KyResponse<T>, setPollingPending: PollingPendingFn) => {
   if (response.status === HTTP_ACCEPTED) {
     const location = response.headers.get('location');
     if (location === null) {
       throw new Error('Location i response er ikke angitt');
     }
-    return await pollOgHentData(location);
+    return await pollOgHentData(setPollingPending, location);
   }
   throw new Error('Responderte ikke med 202 - Accepted');
 };
 
-const pollOgHentData = async (location: string, pollingCounter = 0) => {
+const pollOgHentData = async (setPollingPending: PollingPendingFn, location: string, pollingCounter = 0) => {
   const response = await doGetRequest<PollingResponse | Behandling>(location);
 
   if (isPollingResponse(response)) {
@@ -122,10 +126,16 @@ const pollOgHentData = async (location: string, pollingCounter = 0) => {
     const { pollIntervalMillis } = response;
     const interval =
       pollingCounter < 30 ? pollIntervalMillis : pollIntervalMillis + (pollingCounter - 30) * pollIntervalMillis;
+
+    setPollingPending(true);
+
     await wait(interval);
 
-    return await pollOgHentData(location, pollingCounter + 1);
+    return await pollOgHentData(setPollingPending, location, pollingCounter + 1);
   }
+
+  setPollingPending(false);
+
   return response;
 };
 

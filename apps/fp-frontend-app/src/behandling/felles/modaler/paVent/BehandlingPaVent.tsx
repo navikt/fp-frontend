@@ -1,10 +1,12 @@
-import React, { useCallback, useEffect,useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
+
+import { useMutation } from '@tanstack/react-query';
 
 import { AksjonspunktKode, isAksjonspunktOpen, KodeverkType } from '@navikt/fp-kodeverk';
-import { FormValues,SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
+import { FormValues, SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
 import { AlleKodeverk, AlleKodeverkTilbakekreving, Behandling } from '@navikt/fp-types';
 
-import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../../data/behandlingContextApi';
+import { useBehandlingApi } from '../../../../data/behandlingApi';
 
 interface Props {
   behandling: Behandling;
@@ -22,9 +24,19 @@ export const BehandlingPaVent = ({
   skalIkkeViseModal = false,
 }: Props) => {
   const [skalViseModal, setVisModal] = useState(!skalIkkeViseModal && behandling.behandlingPaaVent);
-  const skjulModal = useCallback(() => setVisModal(false), []);
+  const skjulModal = () => setVisModal(false);
 
-  const { startRequest: endrePaVent } = restBehandlingApiHooks.useRestApiRunner(BehandlingApiKeys.UPDATE_ON_HOLD);
+  const behandlingApi = useBehandlingApi(behandling);
+
+  const { mutate: endrePaVent } = useMutation({
+    mutationFn: (values: FormValues) =>
+      behandlingApi.oppdaterPåVent({
+        ...values,
+        behandlingUuid: behandling.uuid,
+        behandlingVersjon: behandling.versjon,
+      }),
+    onSuccess: () => opneSokeside(),
+  });
 
   useEffect(() => {
     if (!skalIkkeViseModal) {
@@ -32,29 +44,13 @@ export const BehandlingPaVent = ({
     }
   }, [behandling.versjon, skalIkkeViseModal]);
 
-  const oppdaterPaVentData = useCallback(
-    (formData: FormValues) =>
-      endrePaVent({
-        ...formData,
-        behandlingUuid: behandling.uuid,
-        behandlingVersjon: behandling.versjon,
-      }).then(() => {
-        opneSokeside();
-      }),
-    [behandling.versjon],
-  );
-
-  const erManueltSattPaVent = useMemo(
-    () =>
-      behandling.aksjonspunkt
-        .filter(ap => isAksjonspunktOpen(ap.status))
-        .some(ap => ap.definisjon === AksjonspunktKode.AUTO_MANUELT_SATT_PÅ_VENT),
-    [behandling.aksjonspunkt],
-  );
+  const erManueltSattPaVent = behandling.aksjonspunkt
+    .filter(ap => isAksjonspunktOpen(ap.status))
+    .some(ap => ap.definisjon === AksjonspunktKode.AUTO_MANUELT_SATT_PÅ_VENT);
 
   return (
     <SettPaVentModalIndex
-      submitCallback={oppdaterPaVentData}
+      submitCallback={endrePaVent}
       cancelEvent={skjulModal}
       frist={behandling.fristBehandlingPåVent || behandling.fristBehandlingPaaVent}
       ventearsak={behandling.venteArsakKode}

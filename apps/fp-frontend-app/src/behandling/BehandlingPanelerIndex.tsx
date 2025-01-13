@@ -7,7 +7,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Location } from 'history';
 
 import { BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
-import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
+import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api';
 import { ErrorPage } from '@navikt/fp-sak-infosider';
 import { AksessRettigheter, AlleKodeverk, Behandling, BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
 

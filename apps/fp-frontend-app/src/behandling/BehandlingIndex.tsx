@@ -3,13 +3,12 @@ import { Suspense, useEffect } from 'react';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
-import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
+import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api';
 import { Behandling } from '@navikt/fp-types';
 
 import { ErrorBoundary } from '../app/ErrorBoundary';
 import { useTrackRouteParam } from '../app/useTrackRouteParam';
 import { getAccessRights } from '../app/util/access';
-import { requestBehandlingApi } from '../data/behandlingContextApi';
 import { initFetchOptions, useFagsakApi } from '../data/fagsakApi';
 import { notEmpty } from '../data/notEmpty';
 import { FagsakData } from '../fagsak/FagsakData';
@@ -23,7 +22,6 @@ interface Props {
   setBehandling: (behandling: Behandling) => void;
   hentOgSettBehandling: () => void;
   fagsakData: FagsakData;
-  setRequestPendingMessage: (message?: string) => void;
   setBehandlingUuid: (uuid: string) => void;
 }
 
@@ -37,15 +35,9 @@ export const BehandlingIndex = ({
   setBehandling,
   hentOgSettBehandling,
   fagsakData,
-  setRequestPendingMessage,
   setBehandlingUuid,
 }: Props) => {
   const { addErrorMessage } = useRestApiErrorDispatcher();
-
-  useEffect(() => {
-    requestBehandlingApi.setRequestPendingHandler(setRequestPendingMessage);
-    requestBehandlingApi.setAddErrorMessageHandler(addErrorMessage);
-  }, []);
 
   const { selected: behandlingUuid } = useTrackRouteParam<string>({
     paramName: 'behandlingUuid',

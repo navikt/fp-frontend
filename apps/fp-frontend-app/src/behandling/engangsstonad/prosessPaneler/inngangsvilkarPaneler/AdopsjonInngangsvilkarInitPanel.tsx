@@ -1,12 +1,12 @@
-import React from 'react';
 import { IntlShape, useIntl } from 'react-intl';
 
 import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import { AdopsjonVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-adopsjon';
-import { AksessRettigheter,Aksjonspunkt } from '@navikt/fp-types';
+import { AksessRettigheter, Aksjonspunkt } from '@navikt/fp-types';
 
 import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 import { OverstyringPanelDef } from '../../../felles/prosess/OverstyringPanelDef';
+import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandardProsessPanelProps';
 import { InngangsvilkarPanelInitProps } from '../../../felles/typer/inngangsvilkarPanelInitProps';
 
 const AKSJONSPUNKT_TEKST_PER_KODE = {
@@ -38,33 +38,36 @@ export const AdopsjonInngangsvilkarInitPanel = ({
   ...props
 }: Props & InngangsvilkarPanelInitProps) => {
   const intl = useIntl();
+
+  const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, VILKAR_KODER);
+
   return (
     <InngangsvilkarDefaultInitPanel
       {...props}
+      standardPanelProps={standardPanelProps}
       behandlingVersjon={behandlingVersjon}
-      aksjonspunktKoder={AKSJONSPUNKT_KODER}
       vilkarKoder={VILKAR_KODER}
       inngangsvilkarPanelKode="ADOPSJON"
-      hentInngangsvilkarPanelTekst={data => hentAksjonspunktTekst(intl, data.aksjonspunkter)}
-      renderPanel={(data, erOverstyrt, toggleOverstyring) => (
+      hentInngangsvilkarPanelTekst={hentAksjonspunktTekst(intl, standardPanelProps.aksjonspunkter)}
+      renderPanel={({ erOverstyrt, toggleOverstyring }) => (
         <>
-          {data.aksjonspunkter.length === 0 && (
+          {standardPanelProps.aksjonspunkter.length === 0 && (
             <OverstyringPanelDef
-              aksjonspunkter={data.aksjonspunkter}
+              aksjonspunkter={standardPanelProps.aksjonspunkter}
               aksjonspunktKode={AksjonspunktKode.OVERSTYR_ADOPSJONSVILKAR}
-              vilkar={data.vilkar}
+              vilkar={standardPanelProps.vilkar}
               vilkarKoder={VILKAR_KODER}
               panelTekstKode="Inngangsvilkar.Adopsjonsvilkaret"
               toggleOverstyring={toggleOverstyring}
               erOverstyrt={erOverstyrt}
               overrideReadOnly={
-                data.isReadOnly ||
-                (props.harInngangsvilkarApentAksjonspunkt && !(data.isAksjonspunktOpen || erOverstyrt))
+                standardPanelProps.isReadOnly ||
+                (props.harInngangsvilkarApentAksjonspunkt && !(standardPanelProps.isAksjonspunktOpen || erOverstyrt))
               }
               kanOverstyreAccess={rettigheter.kanOverstyreAccess}
             />
           )}
-          {data.aksjonspunkter.length > 0 && <AdopsjonVilkarProsessIndex {...data} />}
+          {standardPanelProps.aksjonspunkter.length > 0 && <AdopsjonVilkarProsessIndex {...standardPanelProps} />}
         </>
       )}
     />

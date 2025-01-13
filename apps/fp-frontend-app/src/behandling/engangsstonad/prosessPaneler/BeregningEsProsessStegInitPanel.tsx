@@ -1,21 +1,20 @@
-import React, { useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useIntl } from 'react-intl';
 
-import { AksjonspunktKode,VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
+import { useQuery } from '@tanstack/react-query';
+
+import { AksjonspunktKode, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { BeregningsresultatProsessIndex } from '@navikt/fp-prosess-beregningsresultat';
-import { AksessRettigheter, BeregningsresultatEs } from '@navikt/fp-types';
+import { AksessRettigheter } from '@navikt/fp-types';
 
-import { BehandlingApiKeys, requestBehandlingApi } from '../../../data/behandlingContextApi';
+import { BehandlingRel, useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.OVERSTYR_BEREGNING];
-
-const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.BEREGNINGRESULTAT_ENGANGSSTONAD];
-type EndepunktPanelData = {
-  beregningresultatEngangsstonad: BeregningsresultatEs;
-};
 
 interface Props {
   rettigheter: AksessRettigheter;
@@ -25,28 +24,39 @@ export const BeregningEsProsessStegInitPanel = ({ rettigheter, ...props }: Props
   const [erOverstyrt, setOverstyrt] = useState(false);
   const toggleOverstyring = useCallback(() => setOverstyrt(!erOverstyrt), [erOverstyrt]);
 
+  const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
+
+  const api = useBehandlingApi(props.behandling);
+
+  const { data: beregningsresultatEngangsstønad } = useQuery(
+    api.es.beregningsresultatEngangsstønadOptions(props.behandling),
+  );
+
   return (
-    <ProsessDefaultInitPanel<EndepunktPanelData>
+    <ProsessDefaultInitPanel
       {...props}
-      panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
-      aksjonspunktKoder={AKSJONSPUNKT_KODER}
+      standardPanelProps={standardPanelProps}
       prosessPanelKode={ProsessStegCode.BEREGNING}
       prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.Beregning' })}
-      skalPanelVisesIMeny={() => true}
-      hentOverstyrtStatus={() =>
-        requestBehandlingApi.hasPath(BehandlingApiKeys.BEREGNINGRESULTAT_ENGANGSSTONAD.name)
+      skalPanelVisesIMeny
+      hentOverstyrtStatus={
+        props.behandling.links.some(link => link.rel === BehandlingRel.BEREGNINGRESULTAT_ENGANGSSTONAD)
           ? VilkarUtfallType.OPPFYLT
           : VilkarUtfallType.IKKE_VURDERT
       }
       erOverstyrt={erOverstyrt}
-      renderPanel={data => (
+    >
+      {beregningsresultatEngangsstønad ? (
         <BeregningsresultatProsessIndex
-          overrideReadOnly={data.isReadOnly}
+          beregningresultatEngangsstonad={beregningsresultatEngangsstønad}
+          overrideReadOnly={standardPanelProps.isReadOnly}
           kanOverstyreAccess={rettigheter.kanOverstyreAccess}
           toggleOverstyring={toggleOverstyring}
-          {...data}
+          {...standardPanelProps}
         />
+      ) : (
+        <LoadingPanel />
       )}
-    />
+    </ProsessDefaultInitPanel>
   );
 };
