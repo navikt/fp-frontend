@@ -22,22 +22,24 @@ const InnsynPaneler = ({
   opneSokeside,
   setSkalOppdatereEtterBekreftelseAvAp,
 }: Props) => {
+  const hentProsessPaneler = (props: ProsessPanelInitProps) => (
+    <>
+      <BehandleInnsynProsessStegInitPanel {...props} fagsak={fagsak} />
+      <InnsynVedtakProsessStegInitPanel
+        {...props}
+        fagsak={fagsak}
+        opneSokeside={opneSokeside}
+        setSkalOppdatereEtterBekreftelseAvAp={setSkalOppdatereEtterBekreftelseAvAp}
+      />
+    </>
+  );
+
   return (
     <BehandlingContainer
       behandling={behandling}
       valgtProsessSteg={valgtProsessSteg}
       oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-      hentProsessPaneler={(props: ProsessPanelInitProps) => (
-        <>
-          <BehandleInnsynProsessStegInitPanel {...props} fagsak={fagsak} />
-          <InnsynVedtakProsessStegInitPanel
-            {...props}
-            fagsak={fagsak}
-            opneSokeside={opneSokeside}
-            setSkalOppdatereEtterBekreftelseAvAp={setSkalOppdatereEtterBekreftelseAvAp}
-          />
-        </>
-      )}
+      hentProsessPaneler={hentProsessPaneler}
     />
   );
 };

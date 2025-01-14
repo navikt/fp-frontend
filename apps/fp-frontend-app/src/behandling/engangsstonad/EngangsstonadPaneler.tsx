@@ -45,54 +45,58 @@ const EngangsstonadPaneler = ({
 }: Props) => {
   const emptyArbeidsgiverOpplysningerPerId = {};
 
+  const hentProsessPaneler = (props: ProsessPanelInitProps, ekstraProps: ProsessPanelExtraInitProps) => (
+    <>
+      <VarselProsessStegInitPanel
+        {...props}
+        fagsak={fagsak}
+        opneSokeside={opneSokeside}
+        setSkalOppdatereEtterBekreftelseAvAp={setSkalOppdatereEtterBekreftelseAvAp}
+      />
+      <OpplysningspliktProsessStegInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+      <InngangsvilkarEsProsessStegInitPanel
+        {...props}
+        rettigheter={rettigheter}
+        oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+        apentFaktaPanelInfo={ekstraProps.apentFaktaPanelInfo}
+      />
+      <SoknadsfristEsProsessStegInitPanel {...props} rettigheter={rettigheter} />
+      <BeregningEsProsessStegInitPanel {...props} rettigheter={rettigheter} />
+      <SimuleringProsessStegInitPanel
+        {...props}
+        fagsak={fagsak}
+        menyData={ekstraProps.allMenyData}
+        arbeidsgiverOpplysningerPerId={emptyArbeidsgiverOpplysningerPerId}
+      />
+      <VedtakEsProsessStegInitPanel
+        {...props}
+        fagsak={fagsak}
+        opneSokeside={opneSokeside}
+        setSkalOppdatereEtterBekreftelseAvAp={setSkalOppdatereEtterBekreftelseAvAp}
+      />
+    </>
+  );
+
+  const hentFaktaPaneler = (props: FaktaPanelInitProps) => (
+    <>
+      <SakenFaktaInitPanel {...props} fagsak={fagsak} rettigheter={rettigheter} />
+      <YtelserFaktaInitPanel {...props} />
+      <VergeFaktaInitPanel {...props} />
+      <OmsorgOgForeldreansvarFaktaInitPanel {...props} personoversikt={personoversikt} />
+      <AdopsjonsvilkaretFaktaInitPanel {...props} fagsak={fagsak} />
+      <FodselvilkaretFaktaInitPanel {...props} />
+      <MedlemskapsvilkaretFaktaInitPanel {...props} fagsak={fagsak} />
+    </>
+  );
+
   return (
     <BehandlingContainer
       behandling={behandling}
       valgtProsessSteg={valgtProsessSteg}
       valgtFaktaSteg={valgtFaktaSteg}
       oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-      hentFaktaPaneler={(props: FaktaPanelInitProps) => (
-        <>
-          <SakenFaktaInitPanel {...props} fagsak={fagsak} rettigheter={rettigheter} />
-          <YtelserFaktaInitPanel {...props} />
-          <VergeFaktaInitPanel {...props} />
-          <OmsorgOgForeldreansvarFaktaInitPanel {...props} personoversikt={personoversikt} />
-          <AdopsjonsvilkaretFaktaInitPanel {...props} fagsak={fagsak} />
-          <FodselvilkaretFaktaInitPanel {...props} />
-          <MedlemskapsvilkaretFaktaInitPanel {...props} fagsak={fagsak} />
-        </>
-      )}
-      hentProsessPaneler={(props: ProsessPanelInitProps, ekstraProps: ProsessPanelExtraInitProps) => (
-        <>
-          <VarselProsessStegInitPanel
-            {...props}
-            fagsak={fagsak}
-            opneSokeside={opneSokeside}
-            setSkalOppdatereEtterBekreftelseAvAp={setSkalOppdatereEtterBekreftelseAvAp}
-          />
-          <OpplysningspliktProsessStegInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-          <InngangsvilkarEsProsessStegInitPanel
-            {...props}
-            rettigheter={rettigheter}
-            oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-            apentFaktaPanelInfo={ekstraProps.apentFaktaPanelInfo}
-          />
-          <SoknadsfristEsProsessStegInitPanel {...props} rettigheter={rettigheter} />
-          <BeregningEsProsessStegInitPanel {...props} rettigheter={rettigheter} />
-          <SimuleringProsessStegInitPanel
-            {...props}
-            fagsak={fagsak}
-            menyData={ekstraProps.allMenyData}
-            arbeidsgiverOpplysningerPerId={emptyArbeidsgiverOpplysningerPerId}
-          />
-          <VedtakEsProsessStegInitPanel
-            {...props}
-            fagsak={fagsak}
-            opneSokeside={opneSokeside}
-            setSkalOppdatereEtterBekreftelseAvAp={setSkalOppdatereEtterBekreftelseAvAp}
-          />
-        </>
-      )}
+      hentFaktaPaneler={hentFaktaPaneler}
+      hentProsessPaneler={hentProsessPaneler}
     />
   );
 };
