@@ -12,7 +12,7 @@ import { useTrackRouteParam } from '../../app/useTrackRouteParam';
 import { getAccessRights } from '../../app/util/access';
 import { initFetchOptions, useFagsakApi } from '../../data/fagsakApi';
 import { notEmpty } from '../../data/notEmpty';
-import { useBehandlingPollingOperasjoner } from '../../data/useBehandlingPollingOperasjoner';
+import { useBehandlingPollingOperasjoner } from '../../data/polling/useBehandlingPollingOperasjoner';
 import { FagsakData } from '../../fagsak/FagsakData';
 
 interface Props {

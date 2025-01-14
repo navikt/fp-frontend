@@ -1,4 +1,4 @@
-import React, { createContext, ReactElement, useContext, useState } from 'react';
+import { createContext, ReactElement, useContext, useState } from 'react';
 
 const RequestPendingContext = createContext<{
   isRequestPending: boolean;

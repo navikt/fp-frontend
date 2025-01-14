@@ -22,10 +22,10 @@ export const MenyVergeIndex = ({ fjernVerge, opprettVerge, lukkModal }: Props) =
   const submit = () => {
     lukkModal();
     const operasjon = opprettVerge || fjernVerge;
-    if (operasjon) {
-      operasjon();
+    if (!operasjon) {
+      throw Error('Skal alltid ha enten opprettVerge eller fjernVerge');
     }
-    throw Error('Skal alltid ha enten opprettVerge eller fjernVerge');
+    operasjon();
   };
 
   return (
