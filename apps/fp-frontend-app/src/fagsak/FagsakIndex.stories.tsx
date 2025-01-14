@@ -1,9 +1,8 @@
 import { MemoryRouter, Route, Routes } from 'react-router';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryFn, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
-import MockAdapter from 'axios-mock-adapter';
 import { http, HttpResponse } from 'msw';
 
 import { BehandlingStatus, BehandlingType, FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
@@ -15,9 +14,10 @@ import {
 } from '@navikt/fp-storybook-utils';
 import { BehandlingAppKontekst, BehandlingOppretting, Fagsak, VergeBehandlingmenyValg } from '@navikt/fp-types';
 
-import { requestBehandlingApi } from '../data/behandlingContextApi';
+import { BehandlingUrl } from '../data/behandlingApi';
 import { FagsakRel, FagsakUrl, initFetchOptions, useFagsakApi, wrapUrl } from '../data/fagsakApi';
 import { notEmpty } from '../data/notEmpty';
+import { RequestPendingProvider } from '../data/RequestPendingContext';
 import { FagsakIndex } from './FagsakIndex';
 
 import behandlingV1Data from '../../.storybook/testdata/behandlingV1.json';
@@ -26,6 +26,14 @@ import initFetchTilbake from '../../.storybook/testdata/initFetchTilbake.json';
 import messages from '../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
+
+const withRequestPendingProvider = (Story: StoryFn) => {
+  return (
+    <RequestPendingProvider>
+      <Story />
+    </RequestPendingProvider>
+  );
+};
 
 const getHref = (rel: string) =>
   wrapUrl(
@@ -95,7 +103,7 @@ const fagsakFpTilbake = {
 
 const meta = {
   title: 'fagsak/FagsakIndex',
-  decorators: [withIntl, withQueryClient],
+  decorators: [withIntl, withQueryClient, withRequestPendingProvider],
   component: FagsakIndex,
   parameters: {
     msw: {
@@ -106,13 +114,11 @@ const meta = {
         http.get(getHref(FagsakRel.KODEVERK_FPTILBAKE), () => HttpResponse.json(alleKodeverkTilbakekreving)),
         http.get(getHref(FagsakRel.FETCH_FAGSAK), () => HttpResponse.json(FAGSAK)),
         http.get(getHref(FagsakRel.FETCH_FAGSAKDATA_FPTILBAKE), () => HttpResponse.json(fagsakFpTilbake)),
+        http.post(BehandlingUrl.BEHANDLING, () => HttpResponse.json(behandlingV1Data)),
       ],
     },
   },
   render: () => {
-    const apiMockBehandling = new MockAdapter(requestBehandlingApi.getAxios());
-    apiMockBehandling.onPost('/fpsak/api/behandlinger').reply(200, behandlingV1Data);
-
     //Må hente data til cache før testa komponent blir kalla
     const { status } = useQuery(initFetchOptions());
     const { kodeverkOptions, fptilbake } = useFagsakApi();
