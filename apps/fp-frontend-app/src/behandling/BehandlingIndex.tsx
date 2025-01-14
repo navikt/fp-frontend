@@ -9,7 +9,7 @@ import { Behandling } from '@navikt/fp-types';
 import { ErrorBoundary } from '../app/ErrorBoundary';
 import { useTrackRouteParam } from '../app/useTrackRouteParam';
 import { getAccessRights } from '../app/util/access';
-import { initFetchOptions, useFagsakApi } from '../data/fagsakApi';
+import { initFetchOptions } from '../data/fagsakApi';
 import { notEmpty } from '../data/notEmpty';
 import { FagsakData } from '../fagsak/FagsakData';
 import { BehandlingPanelerIndex } from './BehandlingPanelerIndex';
@@ -22,7 +22,7 @@ interface Props {
   setBehandling: (behandling: Behandling) => void;
   hentOgSettBehandling: () => void;
   fagsakData: FagsakData;
-  setBehandlingUuid: (uuid: string) => void;
+  setBehandlingUuidFraUrl: (uuid: string) => void;
 }
 
 /**
@@ -35,7 +35,7 @@ export const BehandlingIndex = ({
   setBehandling,
   hentOgSettBehandling,
   fagsakData,
-  setBehandlingUuid,
+  setBehandlingUuidFraUrl,
 }: Props) => {
   const { addErrorMessage } = useRestApiErrorDispatcher();
 
@@ -45,13 +45,14 @@ export const BehandlingIndex = ({
   });
 
   useEffect(() => {
-    setBehandlingUuid(behandlingUuid);
+    setBehandlingUuidFraUrl(behandlingUuid);
   }, [behandlingUuid]);
 
-  const api = useFagsakApi();
-
-  const { data: kodeverk } = useQuery(api.kodeverkOptions());
   const initFetchQuery = useQuery(initFetchOptions());
+
+  if (!behandling) {
+    return <LoadingPanel />;
+  }
 
   const fagsak = fagsakData.getFagsak();
   const rettigheter = getAccessRights(
@@ -61,10 +62,6 @@ export const BehandlingIndex = ({
     behandling?.type,
   );
 
-  if (!behandling) {
-    return <LoadingPanel />;
-  }
-
   if (behandling.erAktivPapirsoknad) {
     return (
       <Suspense fallback={<LoadingPanel />}>
@@ -73,7 +70,6 @@ export const BehandlingIndex = ({
             key={behandling.uuid}
             behandling={behandling}
             setBehandling={setBehandling}
-            kodeverk={kodeverk}
             fagsak={fagsak}
             rettigheter={rettigheter}
           />
@@ -87,7 +83,6 @@ export const BehandlingIndex = ({
       <BehandlingPanelerIndex
         key={behandling.uuid}
         behandling={behandling}
-        kodeverk={notEmpty(kodeverk)}
         fagsak={fagsak}
         rettigheter={rettigheter}
         setBehandling={setBehandling}
