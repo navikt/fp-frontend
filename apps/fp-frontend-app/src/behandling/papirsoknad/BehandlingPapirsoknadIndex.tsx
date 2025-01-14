@@ -1,6 +1,6 @@
 import { AksessRettigheter, Behandling, Fagsak } from '@navikt/fp-types';
 
-import { useBehandlingPollingOperasjoner } from '../../data/useBehandlingPollingOperasjoner';
+import { useBehandlingPollingOperasjoner } from '../../data/polling/useBehandlingPollingOperasjoner';
 import { RegistrerPapirsoknad } from './RegistrerPapirsoknad';
 
 type Props = {

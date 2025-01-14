@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { Meta, StoryObj } from '@storybook/react';
 import { http, HttpResponse } from 'msw';
 
-import { AsyncPollingStatus, RestApiErrorProvider } from '@navikt/fp-rest-api';
+import { ApiPollingStatus, RestApiErrorProvider } from '@navikt/fp-rest-api';
 import { alleKodeverk, alleKodeverkTilbakekreving } from '@navikt/fp-storybook-utils';
 
 import { BehandlingRel, BehandlingUrl } from '../data/behandlingApi';
@@ -59,7 +59,7 @@ const HANDLERS = [
     'http://www.test.com/api/status',
     () =>
       HttpResponse.json({
-        status: AsyncPollingStatus.PENDING,
+        status: ApiPollingStatus.PENDING,
         pollIntervalMillis: 100000000,
       }),
     { once: true },
@@ -112,7 +112,7 @@ export const BekreftAdopsjon: Story = {
           'http://www.test.com/api/status',
           () =>
             HttpResponse.json({
-              status: AsyncPollingStatus.PENDING,
+              status: ApiPollingStatus.PENDING,
               pollIntervalMillis: 100000000,
             }),
           { once: true },

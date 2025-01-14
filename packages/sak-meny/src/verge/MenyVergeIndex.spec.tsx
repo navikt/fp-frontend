@@ -8,7 +8,7 @@ import * as stories from './MenyVergeIndex.stories';
 
 const { LeggeTilVerge, FjerneVerge } = composeStories(stories);
 
-describe('<MenyVergeIndex>', () => {
+describe('MenyVergeIndex', () => {
   it('skal vise modal for opprett og så velge å opprette verge', async () => {
     const opprettVerge = vi.fn();
     const lukkModal = vi.fn();

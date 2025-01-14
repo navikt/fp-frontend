@@ -1,10 +1,12 @@
 /**
  * ErrorEventType
  *
- * Dette er eventer som skal spesialformateres. Eventene her speiler eventene i eventType i rest-api.
+ * Dette er eventer som skal spesialformateres.
  */
 export enum ErrorEventType {
   POLLING_TIMEOUT = 'POLLING_TIMEOUT',
-  POLLING_HALTED_OR_DELAYED = 'POLLING_HALTED_OR_DELAYED',
+  REQUEST_ERROR = 'REQUEST_ERROR',
   REQUEST_GATEWAY_TIMEOUT_OR_NOT_FOUND = 'REQUEST_GATEWAY_TIMEOUT_OR_NOT_FOUND',
+  REQUEST_FORBIDDEN = 'REQUEST_FORBIDDEN',
+  REQUEST_UNAUTHORIZED = 'REQUEST_UNAUTHORIZED',
 }

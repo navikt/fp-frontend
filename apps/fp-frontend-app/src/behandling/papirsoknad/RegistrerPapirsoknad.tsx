@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { RegistrerPapirsoknadPanel, SoknadRegistrertModal } from '@navikt/fp-papirsoknad';
-import { AsyncPollingStatus } from '@navikt/fp-rest-api';
+import { ApiPollingStatus } from '@navikt/fp-rest-api';
 import { AksessRettigheter, Aksjonspunkt, Behandling, Fagsak } from '@navikt/fp-types';
 
 import { AksjonspunktArgs } from '../../data/behandlingApi';
@@ -49,7 +49,7 @@ const lagLagreFunksjon =
       bekreftedeAksjonspunktDtoer: manuellRegistreringDtoList,
     };
     return lagreAksjonspunkt(params).then(returnertBehandling => {
-      if (returnertBehandling?.taskStatus?.status !== AsyncPollingStatus.HALTED) {
+      if (returnertBehandling?.taskStatus?.status !== ApiPollingStatus.HALTED) {
         setAksjonspunktLagret(true);
       }
     });

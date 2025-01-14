@@ -63,7 +63,7 @@ export const VedtakTilbakekrevingProsessInitPanel = ({
     onSuccess: forhandsvisDokument,
   });
 
-  return beregningsresultat && vedtaksbrev ? (
+  return (
     <>
       <FatterVedtakStatusModal
         visModal={visFatterVedtakModal}
@@ -89,21 +89,23 @@ export const VedtakTilbakekrevingProsessInitPanel = ({
         skalPanelVisesIMeny
         hentOverstyrtStatus={getVedtakStatus(props.behandling.behandlingsresultat)}
       >
-        <VedtakTilbakekrevingProsessIndex
-          beregningsresultat={beregningsresultat}
-          vedtaksbrev={vedtaksbrev}
-          kodeverkSamlingFpTilbake={tilbakekrevingKodeverk}
-          //TODO (TOR) Her må ein fiksa retur-typen
-          //@ts-expect-error
-          fetchPreviewVedtaksbrev={forhandsvisVedtaksbrev}
-          erRevurderingTilbakekrevingKlage={erRevurderingTilbakekrevingKlage || false}
-          erRevurderingTilbakekrevingFeilBeløpBortfalt={erRevurderingTilbakekrevingFeilBeløpBortfalt || false}
-          {...standardPanelProps}
-        />
+        {beregningsresultat && vedtaksbrev ? (
+          <VedtakTilbakekrevingProsessIndex
+            beregningsresultat={beregningsresultat}
+            vedtaksbrev={vedtaksbrev}
+            kodeverkSamlingFpTilbake={tilbakekrevingKodeverk}
+            //TODO (TOR) Her må ein fiksa retur-typen
+            //@ts-expect-error
+            fetchPreviewVedtaksbrev={forhandsvisVedtaksbrev}
+            erRevurderingTilbakekrevingKlage={erRevurderingTilbakekrevingKlage || false}
+            erRevurderingTilbakekrevingFeilBeløpBortfalt={erRevurderingTilbakekrevingFeilBeløpBortfalt || false}
+            {...standardPanelProps}
+          />
+        ) : (
+          <LoadingPanel />
+        )}
       </ProsessDefaultInitPanel>
     </>
-  ) : (
-    <LoadingPanel />
   );
 };
 
