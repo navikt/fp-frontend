@@ -1,6 +1,6 @@
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { action } from '@storybook/addon-actions';
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryFn, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 
@@ -30,6 +30,7 @@ import {
 
 import { FagsakRel, FagsakUrl, initFetchOptions, useFagsakApi, wrapUrl } from '../../data/fagsakApi';
 import { notEmpty } from '../../data/notEmpty';
+import { RequestPendingProvider } from '../../data/RequestPendingContext';
 import { FagsakData } from '../../fagsak/FagsakData';
 import { RisikoklassifiseringIndex } from './RisikoklassifiseringIndex';
 
@@ -38,6 +39,14 @@ import initFetchTilbake from '../../../.storybook/testdata/initFetchTilbake.json
 import messages from '../../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
+
+const withRequestPendingProvider = (Story: StoryFn) => {
+  return (
+    <RequestPendingProvider>
+      <Story />
+    </RequestPendingProvider>
+  );
+};
 
 const getHref = (rel: string) =>
   wrapUrl(
@@ -97,7 +106,7 @@ const FAGSAK = {
 
 const meta = {
   title: 'fagsak/RisikoklassifiseringIndex',
-  decorators: [withIntl, withRouter, withQueryClient],
+  decorators: [withIntl, withRouter, withQueryClient, withRequestPendingProvider],
   component: RisikoklassifiseringIndex,
   parameters: {
     msw: {
