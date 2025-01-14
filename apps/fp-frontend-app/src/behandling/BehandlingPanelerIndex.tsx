@@ -9,11 +9,12 @@ import { Location } from 'history';
 import { BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api';
 import { ErrorPage } from '@navikt/fp-sak-infosider';
-import { AksessRettigheter, AlleKodeverk, Behandling, BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
+import { AksessRettigheter, Behandling, BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
 
 import { ErrorBoundary } from '../app/ErrorBoundary';
 import { getFaktaLocation, getLocationWithDefaultProsessStegAndFakta, getProsessStegLocation } from '../app/paths';
 import { useBehandlingApi } from '../data/behandlingApi';
+import { useFagsakApi } from '../data/fagsakApi';
 import { useBehandlingPollingOperasjoner } from '../data/useBehandlingPollingOperasjoner';
 import { BehandlingPaVent } from './felles/modaler/paVent/BehandlingPaVent';
 import { StandardPropsProvider } from './felles/utils/standardPropsStateContext';
@@ -33,14 +34,12 @@ type Props = {
   fagsak: Fagsak;
   rettigheter: AksessRettigheter;
   setBehandling: (behandling: Behandling) => void;
-  kodeverk: AlleKodeverk;
   alleBehandlinger: BehandlingAppKontekst[];
 };
 
 export const BehandlingPanelerIndex = ({
   setBehandling,
   behandling,
-  kodeverk,
   fagsak,
   rettigheter,
   hentOgSettBehandling,
@@ -74,18 +73,22 @@ export const BehandlingPanelerIndex = ({
   const erFørstegangssøknadEllerRevurdering =
     behandling.type === BehandlingType.FORSTEGANGSSOKNAD || behandling.type === BehandlingType.REVURDERING;
 
-  const api = useBehandlingApi(behandling);
+  const fagsakApi = useFagsakApi();
+  const { data: kodeverk } = useQuery(fagsakApi.kodeverkOptions());
+
+  const behandlingApi = useBehandlingApi(behandling);
 
   const arbeidsgivereOversiktQuery = useQuery(
-    api.arbeidsgiverOversiktOptions(behandling.versjon, erFørstegangssøknadEllerRevurdering),
+    behandlingApi.arbeidsgiverOversiktOptions(behandling.versjon, erFørstegangssøknadEllerRevurdering),
   );
   const behandlingPersonoversiktQuery = useQuery(
-    api.behandlingPersonoversiktOptions(behandling.versjon, erFørstegangssøknadEllerRevurdering),
+    behandlingApi.behandlingPersonoversiktOptions(behandling.versjon, erFørstegangssøknadEllerRevurdering),
   );
 
   if (
-    erFørstegangssøknadEllerRevurdering &&
-    (arbeidsgivereOversiktQuery.isPending || behandlingPersonoversiktQuery.isPending)
+    kodeverk === undefined ||
+    (erFørstegangssøknadEllerRevurdering &&
+      (arbeidsgivereOversiktQuery.isPending || behandlingPersonoversiktQuery.isPending))
   ) {
     return <LoadingPanel />;
   }

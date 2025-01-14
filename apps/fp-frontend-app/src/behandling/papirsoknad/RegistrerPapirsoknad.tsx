@@ -2,13 +2,15 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
+import { useQuery } from '@tanstack/react-query';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { RegistrerPapirsoknadPanel, SoknadRegistrertModal } from '@navikt/fp-papirsoknad';
 import { AsyncPollingStatus } from '@navikt/fp-rest-api';
-import { AksessRettigheter, Aksjonspunkt, AlleKodeverk, Behandling, Fagsak } from '@navikt/fp-types';
+import { AksessRettigheter, Aksjonspunkt, Behandling, Fagsak } from '@navikt/fp-types';
 
 import { AksjonspunktArgs } from '../../data/behandlingApi';
+import { useFagsakApi } from '../../data/fagsakApi';
 import { BehandlingPaVent } from '../felles/modaler/paVent/BehandlingPaVent';
 
 const getAktivtPapirsoknadApKode = (aksjonspunkter: Aksjonspunkt[]): string =>
@@ -56,7 +58,6 @@ const lagLagreFunksjon =
 interface Props {
   fagsak: Fagsak;
   behandling: Behandling;
-  kodeverk: AlleKodeverk;
   rettigheter: AksessRettigheter;
   lagreAksjonspunkt: (params: AksjonspunktArgs) => Promise<Behandling>;
 }
@@ -68,10 +69,13 @@ interface Props {
  * Komponenten tilpasser skjemaet til valgt søknadstype (engagnsstønad eller foreldrepenger), valgt søknadtema (fødsel, adopsjon eller omsorg)
  * og valgt foreldretype (mor, far/medmor eller tredjepart).
  */
-export const RegistrerPapirsoknad = ({ fagsak, behandling, kodeverk, rettigheter, lagreAksjonspunkt }: Props) => {
+export const RegistrerPapirsoknad = ({ fagsak, behandling, rettigheter, lagreAksjonspunkt }: Props) => {
   const [erAksjonspunktLagret, setAksjonspunktLagret] = useState(false);
 
-  if (!behandling.aksjonspunkt) {
+  const fagsakApi = useFagsakApi();
+  const { data: kodeverk } = useQuery(fagsakApi.kodeverkOptions());
+
+  if (!behandling.aksjonspunkt || kodeverk === undefined) {
     return <LoadingPanel />;
   }
 
