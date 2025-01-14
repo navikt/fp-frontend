@@ -1,19 +1,17 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { EventType, useRestApiErrorDispatcher } from '@navikt/fp-rest-api';
 import { Behandling } from '@navikt/fp-types';
 
-import { hentBehandling, hentBehandlingTilbakekreving } from './behandlingApi';
-import { notEmpty } from './notEmpty';
-import { useRequestPendingContext } from './RequestPendingContext';
-import { doPolling } from './useBehandlingPollingOperasjoner';
+import { hentBehandling, hentBehandlingTilbakekreving } from '../behandlingApi';
+import { notEmpty } from '../notEmpty';
+import { useRequestPendingContext } from '../polling/RequestPendingContext';
+import { doPolling } from './pollingUtils';
 
 export const useHentBehandling = (
   erTilbakekreving: boolean,
   setBehandling: (behandling: Behandling) => void,
   behandlingUuid?: string,
 ) => {
-  const { addErrorMessage } = useRestApiErrorDispatcher();
   const { setIsRequestPending } = useRequestPendingContext();
 
   const { mutate: hentOgSettBehandling } = useMutation({
@@ -24,9 +22,6 @@ export const useHentBehandling = (
       return doPolling(response, setIsRequestPending);
     },
     onSuccess: setBehandling,
-    onError: error => {
-      addErrorMessage({ type: EventType.REQUEST_ERROR, feilmelding: error?.message });
-    },
   });
 
   return {

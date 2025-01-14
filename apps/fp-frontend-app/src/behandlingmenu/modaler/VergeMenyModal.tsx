@@ -4,7 +4,7 @@ import { MenyVergeIndex } from '@navikt/fp-sak-meny';
 import { Behandling, BehandlingAppKontekst, Fagsak, VergeBehandlingmenyValg } from '@navikt/fp-types';
 
 import { getLocationWithDefaultProsessStegAndFakta, pathToBehandling } from '../../app/paths';
-import { useBehandlingPollingOperasjoner } from '../../data/useBehandlingPollingOperasjoner';
+import { useBehandlingPollingOperasjoner } from '../../data/polling/useBehandlingPollingOperasjoner';
 
 interface Props {
   fagsak: Fagsak;

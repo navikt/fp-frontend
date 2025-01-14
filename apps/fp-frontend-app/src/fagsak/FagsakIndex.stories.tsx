@@ -17,7 +17,7 @@ import { BehandlingAppKontekst, BehandlingOppretting, Fagsak, VergeBehandlingmen
 import { BehandlingUrl } from '../data/behandlingApi';
 import { FagsakRel, FagsakUrl, initFetchOptions, useFagsakApi, wrapUrl } from '../data/fagsakApi';
 import { notEmpty } from '../data/notEmpty';
-import { RequestPendingProvider } from '../data/RequestPendingContext';
+import { RequestPendingProvider } from '../data/polling/RequestPendingContext';
 import { FagsakIndex } from './FagsakIndex';
 
 import behandlingV1Data from '../../.storybook/testdata/behandlingV1.json';

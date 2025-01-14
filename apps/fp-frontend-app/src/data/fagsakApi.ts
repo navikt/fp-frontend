@@ -1,13 +1,13 @@
 import { queryOptions, useQuery } from '@tanstack/react-query';
 import ky from 'ky';
 
-import { Link } from '@navikt/fp-rest-api';
 import { FormValues as EndreUtlandFormValues } from '@navikt/fp-sak-meny-endre-utland';
 import { FormValues } from '@navikt/fp-sak-meny-ny-behandling';
 import {
   Aktor,
   AlleKodeverk,
   AlleKodeverkTilbakekreving,
+  ApiLink,
   Behandling,
   BehandlingAppKontekst,
   Dokument,
@@ -28,13 +28,13 @@ type BehandlendeEnheter = {
 export type InitDataFpSak = {
   behandlendeEnheter: BehandlendeEnheter;
   innloggetBruker: NavAnsatt;
-  links: Link[];
-  sakLinks: Link[];
+  links: ApiLink[];
+  sakLinks: ApiLink[];
 };
 
 type InitDataFpTilbake = {
-  links: Link[];
-  sakLinks: Link[];
+  links: ApiLink[];
+  sakLinks: ApiLink[];
 };
 
 export type BekreftedeTotrinnsaksjonspunkter = {
@@ -72,7 +72,7 @@ const kyExtended = ky.extend({
 const isTest = import.meta.env.MODE === 'test';
 export const wrapUrl = (url: string) => (isTest ? `http://www.test.com${url}` : url);
 
-const getUrlFromRel = (rel: keyof typeof FagsakRel, links: Link[] = []): string => {
+const getUrlFromRel = (rel: keyof typeof FagsakRel, links: ApiLink[] = []): string => {
   const link = links.find(l => l.rel === FagsakRel[rel]);
   return link ? wrapUrl(link.href) : '';
 };
@@ -152,7 +152,7 @@ export const lagNyTilbakekrevingBehandling = (params: NyBehandlingParams) =>
 export const doGetRequest = <T>(url: string) => kyExtended.get(url).json<T>();
 
 const getKodeverkOptions =
-  (links?: Link[]) =>
+  (links?: ApiLink[]) =>
   (skalHenteKodeverk = true) =>
     queryOptions({
       queryKey: [FagsakRel.KODEVERK],
@@ -162,7 +162,7 @@ const getKodeverkOptions =
     });
 
 const getKodeverkFpTilbakeOptions =
-  (links?: Link[]) =>
+  (links?: ApiLink[]) =>
   (skalHenteKodeverk = true) =>
     queryOptions({
       queryKey: [FagsakRel.KODEVERK_FPTILBAKE],
@@ -171,14 +171,14 @@ const getKodeverkFpTilbakeOptions =
       staleTime: Infinity,
     });
 
-const getHentFagsakOptions = (links?: Link[]) => (saksnummer: string) =>
+const getHentFagsakOptions = (links?: ApiLink[]) => (saksnummer: string) =>
   queryOptions({
     queryKey: [FagsakRel.FETCH_FAGSAK, saksnummer],
     queryFn: () =>
       kyExtended.get(getUrlFromRel('FETCH_FAGSAK', links), { searchParams: { saksnummer } }).json<Fagsak>(),
   });
 
-const getHentFagsakFpTilbakeOptions = (links?: Link[]) => (isEnabled: boolean, saksnummer: string) =>
+const getHentFagsakFpTilbakeOptions = (links?: ApiLink[]) => (isEnabled: boolean, saksnummer: string) =>
   queryOptions({
     queryKey: [FagsakRel.FETCH_FAGSAKDATA_FPTILBAKE, saksnummer],
     queryFn: () =>
@@ -189,7 +189,7 @@ const getHentFagsakFpTilbakeOptions = (links?: Link[]) => (isEnabled: boolean, s
   });
 
 const getHentDokumenter =
-  (links?: Link[]) => (saksnummer: string, behandlingUuid?: string, behandlingVersjon?: number) =>
+  (links?: ApiLink[]) => (saksnummer: string, behandlingUuid?: string, behandlingVersjon?: number) =>
     queryOptions({
       queryKey: [FagsakRel.ALL_DOCUMENTS, saksnummer, behandlingUuid, behandlingVersjon],
       queryFn: () =>
@@ -197,7 +197,7 @@ const getHentDokumenter =
     });
 
 const getKanTilbakekrevingOpprettesOptions =
-  (links?: Link[]) => (isEnabled: boolean, saksnummer: string, uuid?: string) =>
+  (links?: ApiLink[]) => (isEnabled: boolean, saksnummer: string, uuid?: string) =>
     queryOptions({
       queryKey: [FagsakRel.KAN_TILBAKEKREVING_OPPRETTES, saksnummer, uuid],
       queryFn: () =>
@@ -209,7 +209,7 @@ const getKanTilbakekrevingOpprettesOptions =
       enabled: isEnabled,
     });
 
-const getKanTilbakekrevingRevurderingOpprettesOptions = (links?: Link[]) => (isEnabled: boolean, uuid?: string) =>
+const getKanTilbakekrevingRevurderingOpprettesOptions = (links?: ApiLink[]) => (isEnabled: boolean, uuid?: string) =>
   queryOptions({
     queryKey: [FagsakRel.KAN_TILBAKEKREVING_REVURDERING_OPPRETTES, uuid],
     queryFn: () =>
@@ -221,49 +221,49 @@ const getKanTilbakekrevingRevurderingOpprettesOptions = (links?: Link[]) => (isE
     enabled: isEnabled,
   });
 
-const getSøkInfotrygd = (links?: Link[]) => (searchString: string) =>
+const getSøkInfotrygd = (links?: ApiLink[]) => (searchString: string) =>
   kyExtended
     .post(getUrlFromRel('SEARCH_UTBETALINGSDATA_IS15', links), {
       json: { searchString },
     })
     .json<InfotrygdVedtak>();
 
-const getSøkFagsak = (links?: Link[]) => (searchString: string) =>
+const getSøkFagsak = (links?: ApiLink[]) => (searchString: string) =>
   kyExtended
     .post(getUrlFromRel('SEARCH_FAGSAK', links), {
       json: { searchString },
     })
     .json<FagsakEnkel[]>();
 
-const getEndreSakMarkering = (links?: Link[]) => (params: EndreUtlandFormValues) =>
+const getEndreSakMarkering = (links?: ApiLink[]) => (params: EndreUtlandFormValues) =>
   kyExtended
     .post(getUrlFromRel('ENDRE_SAK_MARKERING', links), {
       json: params,
     })
     .json();
 
-const getLagreNotat = (links?: Link[]) => (saksnummer: string, notat: string) =>
+const getLagreNotat = (links?: ApiLink[]) => (saksnummer: string, notat: string) =>
   kyExtended
     .post(getUrlFromRel('LAGRE_NOTAT', links), {
       json: { saksnummer, notat },
     })
     .json();
 
-const getForhåndsvisMelding = (links?: Link[]) => (params: ForhåndsvisMeldingParams) =>
+const getForhåndsvisMelding = (links?: ApiLink[]) => (params: ForhåndsvisMeldingParams) =>
   kyExtended
     .post(getUrlFromRel('PREVIEW_MESSAGE_MENU', links), {
       json: params,
     })
     .blob();
 
-const getLagreTotrinnsaksjonspunkt = (links?: Link[]) => (params: BekreftedeTotrinnsaksjonspunkter) =>
+const getLagreTotrinnsaksjonspunkt = (links?: ApiLink[]) => (params: BekreftedeTotrinnsaksjonspunkter) =>
   kyExtended
     .post(getUrlFromRel('SAVE_TOTRINNSAKSJONSPUNKT', links), {
       json: params,
     })
     .json<Behandling>();
 
-const getSendMelding = (links?: Link[]) => (params: SubmitMessageParams) =>
+const getSendMelding = (links?: ApiLink[]) => (params: SubmitMessageParams) =>
   kyExtended
     .post(getUrlFromRel('SUBMIT_MESSAGE', links), {
       json: params,

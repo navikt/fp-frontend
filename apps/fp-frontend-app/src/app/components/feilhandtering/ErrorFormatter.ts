@@ -4,22 +4,12 @@ import {
   ErrorData as ErrorDataTimeoutOrNotFound,
   RestGatewayTimeoutOrNotFoundFormatter,
 } from './RestGatewayTimeoutOrNotFoundFormatter';
-import { ErrorData as ErrorDataHaltedOrDelayed,RestHaltedOrDelayedFormatter } from './RestHaltedOrDelayedFormatter';
-import { ErrorData as ErrorDataRestDefault,RestTimeoutFormatter } from './RestTimeoutFormatter';
+import { ErrorData as ErrorDataRestDefault, RestTimeoutFormatter } from './RestTimeoutFormatter';
 
 const defaultFormatter = new DefaultFormatter();
-const formatters = [
-  new RestTimeoutFormatter(),
-  new RestHaltedOrDelayedFormatter(),
-  new RestGatewayTimeoutOrNotFoundFormatter(),
-  defaultFormatter,
-];
+const formatters = [new RestTimeoutFormatter(), new RestGatewayTimeoutOrNotFoundFormatter(), defaultFormatter];
 
-export type InputErrorMessage =
-  | ErrorDataDefault
-  | ErrorDataRestDefault
-  | ErrorDataHaltedOrDelayed
-  | ErrorDataTimeoutOrNotFound;
+export type InputErrorMessage = ErrorDataDefault | ErrorDataRestDefault | ErrorDataTimeoutOrNotFound;
 
 export class ErrorFormatter {
   format = (errorMessages: InputErrorMessage[], crashMessage?: string): ErrorMessage[] => {

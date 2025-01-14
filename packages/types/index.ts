@@ -173,3 +173,4 @@ export type {
 export { SvpTilretteleggingFomKilde } from './src/fodselOgTilretteleggingTsType';
 export type { InfotrygdVedtak, Vedtak, VedtakArbeidsforhold, VedtakUtbetaling, Sak } from './src/infotrygdVedtakTsType';
 export type { Vilkarperiode } from './src/vilkarperiodeTsType';
+export type { ApiLink } from './src/apiLink';

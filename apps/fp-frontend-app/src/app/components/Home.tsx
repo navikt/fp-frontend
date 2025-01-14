@@ -15,7 +15,7 @@ import { UtbetalingsdataIs15Index } from '@navikt/fp-utbetalingsdata-is15';
 
 import { AktørIndex } from '../../aktoer/AktørIndex';
 import { useFagsakApi } from '../../data/fagsakApi';
-import { RequestPendingProvider } from '../../data/RequestPendingContext';
+import { RequestPendingProvider } from '../../data/polling/RequestPendingContext';
 import { FagsakIndex } from '../../fagsak/FagsakIndex';
 import { FagsakSearchIndex } from '../../fagsakSearch/FagsakSearchIndex';
 import {

@@ -15,7 +15,7 @@ import { ErrorBoundary } from '../app/ErrorBoundary';
 import { getFaktaLocation, getLocationWithDefaultProsessStegAndFakta, getProsessStegLocation } from '../app/paths';
 import { useBehandlingApi } from '../data/behandlingApi';
 import { useFagsakApi } from '../data/fagsakApi';
-import { useBehandlingPollingOperasjoner } from '../data/useBehandlingPollingOperasjoner';
+import { useBehandlingPollingOperasjoner } from '../data/polling/useBehandlingPollingOperasjoner';
 import { BehandlingPaVent } from './felles/modaler/paVent/BehandlingPaVent';
 import { StandardPropsProvider } from './felles/utils/standardPropsStateContext';
 import { lazyWithRetry } from './lazyUtils';
@@ -79,10 +79,10 @@ export const BehandlingPanelerIndex = ({
   const behandlingApi = useBehandlingApi(behandling);
 
   const arbeidsgivereOversiktQuery = useQuery(
-    behandlingApi.arbeidsgiverOversiktOptions(behandling.versjon, erFørstegangssøknadEllerRevurdering),
+    behandlingApi.arbeidsgiverOversiktOptions(behandling, erFørstegangssøknadEllerRevurdering),
   );
   const behandlingPersonoversiktQuery = useQuery(
-    behandlingApi.behandlingPersonoversiktOptions(behandling.versjon, erFørstegangssøknadEllerRevurdering),
+    behandlingApi.behandlingPersonoversiktOptions(behandling, erFørstegangssøknadEllerRevurdering),
   );
 
   if (

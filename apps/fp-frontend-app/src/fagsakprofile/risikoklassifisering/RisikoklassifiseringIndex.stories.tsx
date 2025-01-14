@@ -30,7 +30,7 @@ import {
 
 import { FagsakRel, FagsakUrl, initFetchOptions, useFagsakApi, wrapUrl } from '../../data/fagsakApi';
 import { notEmpty } from '../../data/notEmpty';
-import { RequestPendingProvider } from '../../data/RequestPendingContext';
+import { RequestPendingProvider } from '../../data/polling/RequestPendingContext';
 import { FagsakData } from '../../fagsak/FagsakData';
 import { RisikoklassifiseringIndex } from './RisikoklassifiseringIndex';
 

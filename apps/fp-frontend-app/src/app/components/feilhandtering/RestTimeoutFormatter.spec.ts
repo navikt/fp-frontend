@@ -8,7 +8,7 @@ describe('RestTimeoutFormatter', () => {
   });
 
   it('skal ikke håndtere feil når feildata er av annen type', () => {
-    expect(new RestTimeoutFormatter().isOfType(ErrorEventType.POLLING_HALTED_OR_DELAYED)).toBe(false);
+    expect(new RestTimeoutFormatter().isOfType(ErrorEventType.REQUEST_ERROR)).toBe(false);
   });
 
   it('skal formatere feil når en har fått timeout', () => {

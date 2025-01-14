@@ -8,12 +8,14 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { HTTPError } from 'ky';
 import moment from 'moment';
 
-import { EventType, useRestApiError, useRestApiErrorDispatcher } from '@navikt/fp-rest-api';
+import { useRestApiError, useRestApiErrorDispatcher } from '@navikt/fp-rest-api';
 import { ForbiddenPage, UnauthorizedPage } from '@navikt/fp-sak-infosider';
 
 import { initFetchOptions } from '../data/fagsakApi';
+import { PollingTimeoutError } from '../data/polling/pollingUtils';
 import { AppConfigResolver } from './AppConfigResolver';
 import { Dekorator } from './components/Dekorator';
+import { ErrorEventType } from './components/feilhandtering/errorEventType';
 import { Home } from './components/Home';
 import { ErrorBoundary } from './ErrorBoundary';
 
@@ -83,9 +85,9 @@ export const AppIndex = () => {
 
   const errorMessages = useRestApiError() || EMPTY_ARRAY;
   const queryStrings = parseQueryString(location.search);
-  const forbiddenErrors = errorMessages.filter(o => o.type === EventType.REQUEST_FORBIDDEN);
-  const unauthorizedErrors = errorMessages.filter(o => o.type === EventType.REQUEST_UNAUTHORIZED);
-  const hasForbiddenOrUnauthorizedErrors = forbiddenErrors.length > 0 || unauthorizedErrors.length > 0;
+  const hasForbiddenErrors = errorMessages.some(o => o.type === ErrorEventType.REQUEST_FORBIDDEN);
+  const hasUnauthorizedErrors = errorMessages.some(o => o.type === ErrorEventType.REQUEST_UNAUTHORIZED);
+  const hasForbiddenOrUnauthorizedErrors = hasForbiddenErrors || hasUnauthorizedErrors;
   const shouldRenderHome = !crashMessage && !hasForbiddenOrUnauthorizedErrors;
 
   return (
@@ -101,8 +103,8 @@ export const AppIndex = () => {
           <ErrorBoundary errorMessageCallback={addErrorMessageAndSetAsCrashed} showChild>
             {shouldRenderHome && <Home headerHeight={headerHeight} navAnsatt={navAnsatt} />}
           </ErrorBoundary>
-          {forbiddenErrors.length > 0 && <ForbiddenPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />}
-          {unauthorizedErrors.length > 0 && <UnauthorizedPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />}
+          {hasForbiddenErrors && <ForbiddenPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />}
+          {hasUnauthorizedErrors && <UnauthorizedPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />}
         </>
       </AppConfigResolver>
     </ErrorBoundary>
@@ -129,21 +131,24 @@ const getErrorHandler = (addErrorMessage: (data: any) => void) => (error: Error)
   console.log(error);
 
   // TODO Dette er ein forenkela kopi av dagens feilhåndtering. Refaktorer og flytt når Tanstack Query blir brukt over alt
-  if (error instanceof HTTPError) {
+
+  if (error instanceof PollingTimeoutError) {
+    addErrorMessage({ type: ErrorEventType.POLLING_TIMEOUT, message: error.message, location: error.location });
+  } else if (error instanceof HTTPError) {
     if (error.response.status === 403) {
-      addErrorMessage({ type: EventType.REQUEST_FORBIDDEN, feilmelding: error.message });
+      addErrorMessage({ type: ErrorEventType.REQUEST_FORBIDDEN, feilmelding: error.message });
     } else if (error.response.status === 401) {
-      addErrorMessage({ type: EventType.REQUEST_UNAUTHORIZED, feilmelding: error.message });
+      addErrorMessage({ type: ErrorEventType.REQUEST_UNAUTHORIZED, feilmelding: error.message });
     } else if (error.response.status === 504 || error.response.status === 404) {
       addErrorMessage({
-        type: EventType.REQUEST_GATEWAY_TIMEOUT_OR_NOT_FOUND,
+        type: ErrorEventType.REQUEST_GATEWAY_TIMEOUT_OR_NOT_FOUND,
         //@ts-expect-error
         location: error.response?.config?.url,
       });
     } else {
-      addErrorMessage({ type: EventType.REQUEST_ERROR, feilmelding: error.message });
+      addErrorMessage({ type: ErrorEventType.REQUEST_ERROR, feilmelding: error.message });
     }
   } else {
-    addErrorMessage({ type: EventType.REQUEST_ERROR, feilmelding: error.message });
+    addErrorMessage({ type: ErrorEventType.REQUEST_ERROR, feilmelding: error.message });
   }
 };

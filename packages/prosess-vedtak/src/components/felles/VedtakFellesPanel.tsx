@@ -1,10 +1,10 @@
-import React, { FunctionComponent, MouseEvent,ReactNode, useCallback, useMemo, useState } from 'react';
+import React, { FunctionComponent, MouseEvent, ReactNode, useCallback, useMemo, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ArrowForwardIcon, CheckmarkCircleFillIcon, PencilIcon, XMarkOctagonFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, Heading,Label, Link } from '@navikt/ds-react';
-import { FlexColumn, FlexContainer, FlexRow, OkAvbrytModal,VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { BodyShort, Button, Heading, Label, Link } from '@navikt/ds-react';
+import { FlexColumn, FlexContainer, FlexRow, OkAvbrytModal, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import {
   AksjonspunktKode,
@@ -15,7 +15,7 @@ import {
   isOpphor,
   KonsekvensForYtelsen,
 } from '@navikt/fp-kodeverk';
-import { AsyncPollingStatus } from '@navikt/fp-rest-api';
+import { ApiPollingStatus } from '@navikt/fp-rest-api';
 import { Aksjonspunkt, Behandling, Behandlingsresultat } from '@navikt/fp-types';
 
 import ManueltVedtaksbrevPanel from './ManueltVedtaksbrevPanel';
@@ -116,8 +116,8 @@ const VedtakFellesPanel: FunctionComponent<OwnProps> = ({
   const skalViseLink = finnSkalViseLink(behandlingsresultat);
   const kanBehandles =
     !behandlingHenlagt &&
-    taskStatus?.status !== AsyncPollingStatus.HALTED &&
-    taskStatus?.status !== AsyncPollingStatus.DELAYED;
+    taskStatus?.status !== ApiPollingStatus.HALTED &&
+    taskStatus?.status !== ApiPollingStatus.DELAYED;
 
   const harIkkeKonsekvensForYtelse = useMemo(
     () =>

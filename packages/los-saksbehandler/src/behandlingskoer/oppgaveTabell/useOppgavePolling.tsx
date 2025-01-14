@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { Oppgave } from '@navikt/fp-los-felles';
-import { AsyncPollingStatus, EventType, useRestApiErrorDispatcher } from '@navikt/fp-rest-api';
+import { ApiPollingStatus, useRestApiErrorDispatcher } from '@navikt/fp-rest-api';
 
 import { doGetRequest, getOppgaverTilBehandling, reserverteOppgaverOptions } from '../../data/fplosSaksbehandlerApi';
 
@@ -15,7 +15,7 @@ const MAX_POLLING_ATTEMPTS = 1800;
 const MAX_POLLING_REACHED = 'MAX_POLLING';
 
 type PollingResponse = {
-  status: AsyncPollingStatus;
+  status: ApiPollingStatus;
   message: string;
   pollIntervalMillis: number;
   location: string;
@@ -86,7 +86,7 @@ export const useOppgavePolling = (valgtSakslisteId: number) => {
       hentOppgaver(valgtSakslisteId, getSakslisteId, values.oppgaveIder),
     onError: error => {
       if (error.message !== MAX_POLLING_REACHED) {
-        addErrorMessage({ type: EventType.REQUEST_ERROR, feilmelding: error?.message });
+        addErrorMessage({ type: 'REQUEST_ERROR', feilmelding: error?.message });
       }
     },
   });
