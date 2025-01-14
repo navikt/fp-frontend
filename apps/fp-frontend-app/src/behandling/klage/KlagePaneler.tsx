@@ -35,46 +35,49 @@ const KlagePaneler = ({
 }: Props) => {
   const alleIkkeHenlagteBehandlinger = alleBehandlinger.filter(b => !b.behandlingHenlagt);
 
+  const hentFaktaPaneler = (props: FaktaPanelInitProps) => <VergeFaktaInitPanel {...props} />;
+  const hentProsessPaneler = (props: ProsessPanelInitProps) => (
+    <>
+      <FormKravFamOgPensjonProsessStegInitPanel
+        {...props}
+        alleBehandlinger={alleIkkeHenlagteBehandlinger}
+        hentOgSettBehandling={hentOgSettBehandling}
+      />
+      <VurderingFamOgPensjonProsessStegInitPanel
+        {...props}
+        fagsak={fagsak}
+        opneSokeside={opneSokeside}
+        setSkalOppdatereEtterBekreftelseAvAp={setSkalOppdatereEtterBekreftelseAvAp}
+        oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+        hentOgSettBehandling={hentOgSettBehandling}
+      />
+      <FormKravKlageInstansProsessStegInitPanel
+        {...props}
+        alleBehandlinger={alleIkkeHenlagteBehandlinger}
+        hentOgSettBehandling={hentOgSettBehandling}
+      />
+      <VurderingKlageInstansProsessStegInitPanel
+        {...props}
+        fagsak={fagsak}
+        hentOgSettBehandling={hentOgSettBehandling}
+      />
+      <KlageresultatProsessStegInitPanel
+        {...props}
+        fagsak={fagsak}
+        opneSokeside={opneSokeside}
+        setSkalOppdatereEtterBekreftelseAvAp={setSkalOppdatereEtterBekreftelseAvAp}
+      />
+    </>
+  );
+
   return (
     <BehandlingContainer
       behandling={behandling}
       valgtProsessSteg={valgtProsessSteg}
       valgtFaktaSteg={valgtFaktaSteg}
       oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-      hentFaktaPaneler={(props: FaktaPanelInitProps) => <VergeFaktaInitPanel {...props} />}
-      hentProsessPaneler={(props: ProsessPanelInitProps) => (
-        <>
-          <FormKravFamOgPensjonProsessStegInitPanel
-            {...props}
-            alleBehandlinger={alleIkkeHenlagteBehandlinger}
-            hentOgSettBehandling={hentOgSettBehandling}
-          />
-          <VurderingFamOgPensjonProsessStegInitPanel
-            {...props}
-            fagsak={fagsak}
-            opneSokeside={opneSokeside}
-            setSkalOppdatereEtterBekreftelseAvAp={setSkalOppdatereEtterBekreftelseAvAp}
-            oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-            hentOgSettBehandling={hentOgSettBehandling}
-          />
-          <FormKravKlageInstansProsessStegInitPanel
-            {...props}
-            alleBehandlinger={alleIkkeHenlagteBehandlinger}
-            hentOgSettBehandling={hentOgSettBehandling}
-          />
-          <VurderingKlageInstansProsessStegInitPanel
-            {...props}
-            fagsak={fagsak}
-            hentOgSettBehandling={hentOgSettBehandling}
-          />
-          <KlageresultatProsessStegInitPanel
-            {...props}
-            fagsak={fagsak}
-            opneSokeside={opneSokeside}
-            setSkalOppdatereEtterBekreftelseAvAp={setSkalOppdatereEtterBekreftelseAvAp}
-          />
-        </>
-      )}
+      hentFaktaPaneler={hentFaktaPaneler}
+      hentProsessPaneler={hentProsessPaneler}
     />
   );
 };

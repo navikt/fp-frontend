@@ -20,25 +20,25 @@ export const InngangsvilkarSvpProsessStegInitPanel = ({
   apentFaktaPanelInfo,
   oppdaterProsessStegOgFaktaPanelIUrl,
   rettigheter,
-}: Props & ProsessPanelInitProps) => (
-  <InngangsvilkarDefaultInitWrapper
-    behandling={behandling}
-    valgtProsessSteg={valgtProsessSteg}
-    registrerProsessPanel={registrerProsessPanel}
-    apentFaktaPanelInfo={apentFaktaPanelInfo}
-    oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-    leftPanels={(props: InngangsvilkarPanelInitProps) => (
-      <>
-        <SvangerskapInngangsvilkarInitPanel {...props} />
-        <MedlemskapInngangsvilkarInitPanel
-          behandlingVersjon={behandling.versjon}
-          rettigheter={rettigheter}
-          {...props}
-        />
-      </>
-    )}
-    rightPanels={(props: InngangsvilkarPanelInitProps) => (
-      <OpptjeningInngangsvilkarInitPanel behandlingVersjon={behandling.versjon} rettigheter={rettigheter} {...props} />
-    )}
-  />
-);
+}: Props & ProsessPanelInitProps) => {
+  const leftPanels = (props: InngangsvilkarPanelInitProps) => (
+    <>
+      <SvangerskapInngangsvilkarInitPanel {...props} />
+      <MedlemskapInngangsvilkarInitPanel behandlingVersjon={behandling.versjon} rettigheter={rettigheter} {...props} />
+    </>
+  );
+  const rightPanels = (props: InngangsvilkarPanelInitProps) => (
+    <OpptjeningInngangsvilkarInitPanel behandlingVersjon={behandling.versjon} rettigheter={rettigheter} {...props} />
+  );
+  return (
+    <InngangsvilkarDefaultInitWrapper
+      behandling={behandling}
+      valgtProsessSteg={valgtProsessSteg}
+      registrerProsessPanel={registrerProsessPanel}
+      apentFaktaPanelInfo={apentFaktaPanelInfo}
+      oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+      leftPanels={leftPanels}
+      rightPanels={rightPanels}
+    />
+  );
+};
