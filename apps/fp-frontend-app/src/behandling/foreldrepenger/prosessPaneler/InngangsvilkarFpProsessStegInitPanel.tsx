@@ -24,6 +24,18 @@ export const InngangsvilkarFpProsessStegInitPanel = ({
   oppdaterProsessStegOgFaktaPanelIUrl,
   rettigheter,
 }: Props & ProsessPanelInitProps) => {
+  const leftPanels = (props: InngangsvilkarPanelInitProps) => (
+    <>
+      <FodselInngangsvilkarFpInitPanel behandlingVersjon={behandling.versjon} rettigheter={rettigheter} {...props} />
+      <AdopsjonInngangsvilkarFpInitPanel behandlingVersjon={behandling.versjon} rettigheter={rettigheter} {...props} />
+      <OmsorgInngangsvilkarFpInitPanel behandlingVersjon={behandling.versjon} {...props} />
+      <MedlemskapInngangsvilkarInitPanel behandlingVersjon={behandling.versjon} rettigheter={rettigheter} {...props} />
+      <ForeldreansvarInngangsvilkarInitPanel behandlingVersjon={behandling.versjon} {...props} />
+    </>
+  );
+  const rightPanels = (props: InngangsvilkarPanelInitProps) => (
+    <OpptjeningInngangsvilkarFpInitPanel behandlingVersjon={behandling?.versjon} rettigheter={rettigheter} {...props} />
+  );
   return (
     <InngangsvilkarDefaultInitWrapper
       behandling={behandling}
@@ -31,34 +43,8 @@ export const InngangsvilkarFpProsessStegInitPanel = ({
       registrerProsessPanel={registrerProsessPanel}
       apentFaktaPanelInfo={apentFaktaPanelInfo}
       oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-      leftPanels={(props: InngangsvilkarPanelInitProps) => (
-        <>
-          <FodselInngangsvilkarFpInitPanel
-            behandlingVersjon={behandling.versjon}
-            rettigheter={rettigheter}
-            {...props}
-          />
-          <AdopsjonInngangsvilkarFpInitPanel
-            behandlingVersjon={behandling.versjon}
-            rettigheter={rettigheter}
-            {...props}
-          />
-          <OmsorgInngangsvilkarFpInitPanel behandlingVersjon={behandling.versjon} {...props} />
-          <MedlemskapInngangsvilkarInitPanel
-            behandlingVersjon={behandling.versjon}
-            rettigheter={rettigheter}
-            {...props}
-          />
-          <ForeldreansvarInngangsvilkarInitPanel behandlingVersjon={behandling.versjon} {...props} />
-        </>
-      )}
-      rightPanels={(props: InngangsvilkarPanelInitProps) => (
-        <OpptjeningInngangsvilkarFpInitPanel
-          behandlingVersjon={behandling?.versjon}
-          rettigheter={rettigheter}
-          {...props}
-        />
-      )}
+      leftPanels={leftPanels}
+      rightPanels={rightPanels}
     />
   );
 };

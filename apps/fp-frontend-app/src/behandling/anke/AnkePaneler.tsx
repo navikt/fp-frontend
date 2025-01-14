@@ -23,23 +23,25 @@ const AnkePaneler = ({
   oppdaterProsessStegOgFaktaPanelIUrl,
   alleBehandlinger,
 }: Props) => {
+  const hentFaktaPaneler = (props: FaktaPanelInitProps) => <VergeFaktaInitPanel {...props} />;
+  const hentProsessPaneler = (props: ProsessPanelInitProps) => (
+    <>
+      <AnkeBehandlingProsessStegInitPanel
+        {...props}
+        alleBehandlinger={alleBehandlinger.filter(b => !b.behandlingHenlagt)}
+      />
+      <AnkeResultatProsessStegInitPanel {...props} />
+      <AnkeTrygderettsbehandlingProsessStegInitPanel {...props} />
+    </>
+  );
   return (
     <BehandlingContainer
       behandling={behandling}
       valgtProsessSteg={valgtProsessSteg}
       valgtFaktaSteg={valgtFaktaSteg}
       oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-      hentFaktaPaneler={(props: FaktaPanelInitProps) => <VergeFaktaInitPanel {...props} />}
-      hentProsessPaneler={(props: ProsessPanelInitProps) => (
-        <>
-          <AnkeBehandlingProsessStegInitPanel
-            {...props}
-            alleBehandlinger={alleBehandlinger.filter(b => !b.behandlingHenlagt)}
-          />
-          <AnkeResultatProsessStegInitPanel {...props} />
-          <AnkeTrygderettsbehandlingProsessStegInitPanel {...props} />
-        </>
-      )}
+      hentFaktaPaneler={hentFaktaPaneler}
+      hentProsessPaneler={hentProsessPaneler}
     />
   );
 };
