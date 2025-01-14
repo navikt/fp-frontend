@@ -49,30 +49,25 @@ export const FagsakIndex = () => {
     paramName: 'saksnummer',
   });
 
-  const [behandlingUuid, setBehandlingUuid] = useState<string | undefined>();
+  const [behandlingUuidFraUrl, setBehandlingUuidFraUrl] = useState<string | undefined>();
   const [behandling, setBehandling] = useState<Behandling>();
-  const resetApiOgSettBehandling = (hentetBehandling: Behandling | undefined) => {
-    if (hentetBehandling) {
-      setBehandling(hentetBehandling);
-    }
-  };
 
-  const [harHentetFagsak, fagsakData] = useHentFagsak(selectedSaksnummer, behandlingUuid, behandling?.versjon);
-  const fagsakBehandling = fagsakData?.getBehandling(behandlingUuid);
+  const [harHentetFagsak, fagsakData] = useHentFagsak(selectedSaksnummer, behandlingUuidFraUrl, behandling?.versjon);
+  const fagsakBehandling = fagsakData?.getBehandling(behandlingUuidFraUrl);
   const erTilbakekreving =
     fagsakBehandling?.type === BehandlingType.TILBAKEKREVING ||
     fagsakBehandling?.type === BehandlingType.TILBAKEKREVING_REVURDERING;
 
-  const { hentOgSettBehandling } = useHentBehandling(erTilbakekreving, setBehandling, behandlingUuid);
+  const { hentOgSettBehandling } = useHentBehandling(erTilbakekreving, setBehandling, behandlingUuidFraUrl);
 
   useEffect(() => {
-    if (behandlingUuid && fagsakBehandling) {
+    if (behandlingUuidFraUrl && fagsakBehandling) {
       hentOgSettBehandling();
     }
-  }, [behandlingUuid, fagsakBehandling?.uuid]);
+  }, [behandlingUuidFraUrl, fagsakBehandling?.uuid]);
 
   const location = useLocation();
-  const skalIkkeHenteData = finnSkalIkkeHenteData(location, selectedSaksnummer, behandlingUuid);
+  const skalIkkeHenteData = finnSkalIkkeHenteData(location, selectedSaksnummer, behandlingUuidFraUrl);
 
   if (!fagsakData) {
     if (!harHentetFagsak) {
@@ -98,9 +93,9 @@ export const FagsakIndex = () => {
                 <BehandlingerIndex
                   fagsakData={fagsakData}
                   behandling={behandling}
-                  setBehandling={resetApiOgSettBehandling}
+                  setBehandling={setBehandling}
                   hentOgSettBehandling={hentOgSettBehandling}
-                  setBehandlingUuid={setBehandlingUuid}
+                  setBehandlingUuidFraUrl={setBehandlingUuidFraUrl}
                 />
               }
             />
@@ -109,8 +104,8 @@ export const FagsakIndex = () => {
         profileAndNavigationContent={
           <FagsakProfileIndex
             fagsakData={fagsakData}
-            behandlingUuid={behandlingUuid}
-            setBehandling={resetApiOgSettBehandling}
+            behandlingUuid={behandlingUuidFraUrl}
+            setBehandling={setBehandling}
             hentOgSettBehandling={hentOgSettBehandling}
             behandling={behandling}
           />
@@ -118,7 +113,7 @@ export const FagsakIndex = () => {
         supportContent={
           <BehandlingSupportIndex
             fagsakData={fagsakData}
-            behandlingUuid={behandlingUuid}
+            behandlingUuid={behandlingUuidFraUrl}
             behandlingVersjon={behandling?.versjon}
             hentOgSettBehandling={hentOgSettBehandling}
           />

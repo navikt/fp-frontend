@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import { isAksjonspunktOpen } from '@navikt/fp-kodeverk';
 import { Behandling, Fagsak, StandardFaktaPanelProps } from '@navikt/fp-types';
@@ -67,29 +67,19 @@ export const useStandardFaktaPanelProps = (
 
   const { aksjonspunkt } = value.behandling;
 
-  const aksjonspunkterForSteg = useMemo(
-    () =>
-      aksjonspunkt && aksjonspunktKoder ? aksjonspunkt.filter(ap => aksjonspunktKoder.includes(ap.definisjon)) : [],
-    [aksjonspunkt, aksjonspunktKoder],
-  );
+  const aksjonspunkterForSteg =
+    aksjonspunkt && aksjonspunktKoder ? aksjonspunkt.filter(ap => aksjonspunktKoder.includes(ap.definisjon)) : [];
 
   const readOnly = erReadOnly(value.behandling, [], value.rettigheter, value.hasFetchError);
-  const alleMerknaderFraBeslutter = useMemo(
-    () => getAlleMerknaderFraBeslutter(value.behandling, aksjonspunkterForSteg),
-    [value.behandling.versjon, aksjonspunkterForSteg],
-  );
+  const alleMerknaderFraBeslutter = getAlleMerknaderFraBeslutter(value.behandling, aksjonspunkterForSteg);
 
-  const submitCallback = useMemo(
-    () =>
-      getBekreftAksjonspunktFaktaCallback(
-        value.fagsak,
-        value.behandling,
-        value.oppdaterProsessStegOgFaktaPanelIUrl,
-        value.lagreAksjonspunkter,
-        value.lagreOverstyrteAksjonspunkter,
-        overstyringApCodes,
-      ),
-    [value.behandling.versjon, overstyringApCodes],
+  const submitCallback = getBekreftAksjonspunktFaktaCallback(
+    value.fagsak,
+    value.behandling,
+    value.oppdaterProsessStegOgFaktaPanelIUrl,
+    value.lagreAksjonspunkter,
+    value.lagreOverstyrteAksjonspunkter,
+    overstyringApCodes,
   );
 
   return {
