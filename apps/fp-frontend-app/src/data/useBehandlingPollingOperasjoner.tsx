@@ -109,11 +109,11 @@ export const doPolling = async <T,>(response: KyResponse<T>, setPollingPending: 
   if (response.status === HTTP_ACCEPTED) {
     const location = response.headers.get('location');
     if (location === null) {
-      throw new Error('Location i response er ikke angitt');
+      throw new Error(`Location i response er ikke angitt for URL: ${response.url}`);
     }
     return await pollOgHentData(setPollingPending, location);
   }
-  throw new Error('Responderte ikke med 202 - Accepted');
+  throw new Error(`Responderte ikke med 202 - Accepted: ${response.url}`);
 };
 
 const pollOgHentData = async (setPollingPending: PollingPendingFn, location: string, pollingCounter = 0) => {

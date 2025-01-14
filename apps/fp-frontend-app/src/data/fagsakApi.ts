@@ -72,8 +72,8 @@ const kyExtended = ky.extend({
 const isTest = import.meta.env.MODE === 'test';
 export const wrapUrl = (url: string) => (isTest ? `http://www.test.com${url}` : url);
 
-const getUrlFromRel = (rel: string, links: Link[] = []): string => {
-  const link = links.find(l => l.rel === rel);
+const getUrlFromRel = (rel: keyof typeof FagsakRel, links: Link[] = []): string => {
+  const link = links.find(l => l.rel === FagsakRel[rel]);
   return link ? wrapUrl(link.href) : '';
 };
 
@@ -156,7 +156,7 @@ const getKodeverkOptions =
   (skalHenteKodeverk = true) =>
     queryOptions({
       queryKey: [FagsakRel.KODEVERK],
-      queryFn: () => kyExtended.get(getUrlFromRel(FagsakRel.KODEVERK, links)).json<AlleKodeverk>(),
+      queryFn: () => kyExtended.get(getUrlFromRel('KODEVERK', links)).json<AlleKodeverk>(),
       enabled: skalHenteKodeverk,
       staleTime: Infinity,
     });
@@ -166,8 +166,7 @@ const getKodeverkFpTilbakeOptions =
   (skalHenteKodeverk = true) =>
     queryOptions({
       queryKey: [FagsakRel.KODEVERK_FPTILBAKE],
-      queryFn: () =>
-        kyExtended.get(getUrlFromRel(FagsakRel.KODEVERK_FPTILBAKE, links)).json<AlleKodeverkTilbakekreving>(),
+      queryFn: () => kyExtended.get(getUrlFromRel('KODEVERK_FPTILBAKE', links)).json<AlleKodeverkTilbakekreving>(),
       enabled: skalHenteKodeverk,
       staleTime: Infinity,
     });
@@ -176,7 +175,7 @@ const getHentFagsakOptions = (links?: Link[]) => (saksnummer: string) =>
   queryOptions({
     queryKey: [FagsakRel.FETCH_FAGSAK, saksnummer],
     queryFn: () =>
-      kyExtended.get(getUrlFromRel(FagsakRel.FETCH_FAGSAK, links), { searchParams: { saksnummer } }).json<Fagsak>(),
+      kyExtended.get(getUrlFromRel('FETCH_FAGSAK', links), { searchParams: { saksnummer } }).json<Fagsak>(),
   });
 
 const getHentFagsakFpTilbakeOptions = (links?: Link[]) => (isEnabled: boolean, saksnummer: string) =>
@@ -184,7 +183,7 @@ const getHentFagsakFpTilbakeOptions = (links?: Link[]) => (isEnabled: boolean, s
     queryKey: [FagsakRel.FETCH_FAGSAKDATA_FPTILBAKE, saksnummer],
     queryFn: () =>
       kyExtended
-        .get(getUrlFromRel(FagsakRel.FETCH_FAGSAKDATA_FPTILBAKE, links), { searchParams: { saksnummer } })
+        .get(getUrlFromRel('FETCH_FAGSAKDATA_FPTILBAKE', links), { searchParams: { saksnummer } })
         .json<FagsakDataFpTilbake>(),
     enabled: isEnabled,
   });
@@ -194,9 +193,7 @@ const getHentDokumenter =
     queryOptions({
       queryKey: [FagsakRel.ALL_DOCUMENTS, saksnummer, behandlingUuid, behandlingVersjon],
       queryFn: () =>
-        kyExtended
-          .get(getUrlFromRel(FagsakRel.ALL_DOCUMENTS, links), { searchParams: { saksnummer } })
-          .json<Dokument[]>(),
+        kyExtended.get(getUrlFromRel('ALL_DOCUMENTS', links), { searchParams: { saksnummer } }).json<Dokument[]>(),
     });
 
 const getKanTilbakekrevingOpprettesOptions =
@@ -205,7 +202,7 @@ const getKanTilbakekrevingOpprettesOptions =
       queryKey: [FagsakRel.KAN_TILBAKEKREVING_OPPRETTES, saksnummer, uuid],
       queryFn: () =>
         kyExtended
-          .get(getUrlFromRel(FagsakRel.KAN_TILBAKEKREVING_OPPRETTES, links), {
+          .get(getUrlFromRel('KAN_TILBAKEKREVING_OPPRETTES', links), {
             searchParams: { saksnummer, uuid: uuid ?? '' },
           })
           .json<boolean>(),
@@ -217,7 +214,7 @@ const getKanTilbakekrevingRevurderingOpprettesOptions = (links?: Link[]) => (isE
     queryKey: [FagsakRel.KAN_TILBAKEKREVING_REVURDERING_OPPRETTES, uuid],
     queryFn: () =>
       kyExtended
-        .get(getUrlFromRel(FagsakRel.KAN_TILBAKEKREVING_REVURDERING_OPPRETTES, links), {
+        .get(getUrlFromRel('KAN_TILBAKEKREVING_REVURDERING_OPPRETTES', links), {
           searchParams: { uuid: uuid ?? '' },
         })
         .json<boolean>(),
@@ -226,49 +223,49 @@ const getKanTilbakekrevingRevurderingOpprettesOptions = (links?: Link[]) => (isE
 
 const getSøkInfotrygd = (links?: Link[]) => (searchString: string) =>
   kyExtended
-    .post(getUrlFromRel(FagsakRel.SEARCH_UTBETALINGSDATA_IS15, links), {
+    .post(getUrlFromRel('SEARCH_UTBETALINGSDATA_IS15', links), {
       json: { searchString },
     })
     .json<InfotrygdVedtak>();
 
 const getSøkFagsak = (links?: Link[]) => (searchString: string) =>
   kyExtended
-    .post(getUrlFromRel(FagsakRel.SEARCH_FAGSAK, links), {
+    .post(getUrlFromRel('SEARCH_FAGSAK', links), {
       json: { searchString },
     })
     .json<FagsakEnkel[]>();
 
 const getEndreSakMarkering = (links?: Link[]) => (params: EndreUtlandFormValues) =>
   kyExtended
-    .post(getUrlFromRel(FagsakRel.ENDRE_SAK_MARKERING, links), {
+    .post(getUrlFromRel('ENDRE_SAK_MARKERING', links), {
       json: params,
     })
     .json();
 
 const getLagreNotat = (links?: Link[]) => (saksnummer: string, notat: string) =>
   kyExtended
-    .post(getUrlFromRel(FagsakRel.LAGRE_NOTAT, links), {
+    .post(getUrlFromRel('LAGRE_NOTAT', links), {
       json: { saksnummer, notat },
     })
     .json();
 
 const getForhåndsvisMelding = (links?: Link[]) => (params: ForhåndsvisMeldingParams) =>
   kyExtended
-    .post(getUrlFromRel(FagsakRel.PREVIEW_MESSAGE_MENU, links), {
+    .post(getUrlFromRel('PREVIEW_MESSAGE_MENU', links), {
       json: params,
     })
     .blob();
 
 const getLagreTotrinnsaksjonspunkt = (links?: Link[]) => (params: BekreftedeTotrinnsaksjonspunkter) =>
   kyExtended
-    .post(getUrlFromRel(FagsakRel.SAVE_TOTRINNSAKSJONSPUNKT, links), {
+    .post(getUrlFromRel('SAVE_TOTRINNSAKSJONSPUNKT', links), {
       json: params,
     })
     .json<Behandling>();
 
 const getSendMelding = (links?: Link[]) => (params: SubmitMessageParams) =>
   kyExtended
-    .post(getUrlFromRel(FagsakRel.SUBMIT_MESSAGE, links), {
+    .post(getUrlFromRel('SUBMIT_MESSAGE', links), {
       json: params,
     })
     .json();
