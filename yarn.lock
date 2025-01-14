@@ -3315,7 +3315,6 @@ __metadata:
     "@navikt/fp-prosess-vilkar-soknadsfrist": "workspace:*"
     "@navikt/fp-prosess-vilkar-svangerskap": "workspace:*"
     "@navikt/fp-rest-api": "workspace:*"
-    "@navikt/fp-rest-api-hooks": "workspace:*"
     "@navikt/fp-sak-aktor": "workspace:*"
     "@navikt/fp-sak-behandling-velger": "workspace:*"
     "@navikt/fp-sak-dekorator": "workspace:*"
@@ -3402,7 +3401,6 @@ __metadata:
     "@navikt/ds-react-internal": 3.4.3
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-rest-api": "workspace:*"
-    "@navikt/fp-rest-api-hooks": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-utils-test": "workspace:*"
@@ -3465,7 +3463,6 @@ __metadata:
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-los-felles": "workspace:*"
     "@navikt/fp-rest-api": "workspace:*"
-    "@navikt/fp-rest-api-hooks": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-utils-test": "workspace:*"
@@ -3511,7 +3508,6 @@ __metadata:
     "@navikt/ds-react": 7.10.0
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-rest-api": "workspace:*"
-    "@navikt/fp-rest-api-hooks": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-form-hooks": 6.1.3
@@ -3552,7 +3548,6 @@ __metadata:
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-los-felles": "workspace:*"
     "@navikt/fp-rest-api": "workspace:*"
-    "@navikt/fp-rest-api-hooks": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-utils-test": "workspace:*"
@@ -4586,22 +4581,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-rest-api-hooks@workspace:*, @navikt/fp-rest-api-hooks@workspace:packages/rest-api-hooks":
-  version: 0.0.0-use.local
-  resolution: "@navikt/fp-rest-api-hooks@workspace:packages/rest-api-hooks"
-  dependencies:
-    "@navikt/fp-rest-api": "workspace:*"
-    "@testing-library/dom": 10.4.0
-    "@testing-library/react": 16.2.0
-    cross-env: 7.0.3
-    eslint: 9.19.0
-    react: 19.0.0
-    typescript: 5.7.3
-    vite: 6.0.11
-    vitest: 3.0.4
-  languageName: unknown
-  linkType: soft
-
 "@navikt/fp-rest-api@workspace:*, @navikt/fp-rest-api@workspace:packages/rest-api":
   version: 0.0.0-use.local
   resolution: "@navikt/fp-rest-api@workspace:packages/rest-api"
@@ -5291,10 +5270,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-utbetalingsdata-is15@workspace:packages/utbetalingsdata-is15"
   dependencies:
-    "@formatjs/cli-lib": 6.6.6
-    "@navikt/ds-css": 7.10.0
-    "@navikt/ds-react": 7.10.0
-    "@navikt/fp-rest-api-hooks": "workspace:*"
+    "@formatjs/cli-lib": 6.6.3
+    "@navikt/ds-css": 7.8.0
+    "@navikt/ds-react": 7.8.0
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-ui-komponenter": 3.1.2
     "@navikt/ft-utils": 3.1.2
@@ -5320,16 +5298,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-utils-test@workspace:packages/utils-test"
   dependencies:
-    "@navikt/fp-rest-api": "workspace:*"
-    "@navikt/fp-rest-api-hooks": "workspace:*"
-    "@navikt/ft-ui-komponenter": 3.1.2
-    "@testing-library/jest-dom": 6.6.3
-    axios-mock-adapter: 2.1.0
-    eslint: 9.19.0
-    react: 19.0.0
-    react-intl: 7.1.5
-    typescript: 5.7.3
-    vite: 6.0.11
+    eslint: 9.14.0
+    react: 18.3.1
+    react-intl: 6.6.8
+    typescript: 5.6.3
+    vite: 5.4.10
   languageName: unknown
   linkType: soft
 

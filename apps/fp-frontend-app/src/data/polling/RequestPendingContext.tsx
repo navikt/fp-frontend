@@ -1,4 +1,4 @@
-import { createContext, ReactElement, useContext, useState } from 'react';
+import { createContext, ReactElement, useContext, useMemo, useState } from 'react';
 
 const RequestPendingContext = createContext<{
   isRequestPending: boolean;
@@ -8,11 +8,15 @@ const RequestPendingContext = createContext<{
 const RequestPendingProvider = ({ children }: { children: ReactElement }) => {
   const [isRequestPending, setIsRequestPending] = useState(false);
 
-  return (
-    <RequestPendingContext.Provider value={{ isRequestPending, setIsRequestPending }}>
-      {children}
-    </RequestPendingContext.Provider>
+  const value = useMemo(
+    () => ({
+      isRequestPending,
+      setIsRequestPending,
+    }),
+    [isRequestPending, setIsRequestPending],
   );
+
+  return <RequestPendingContext.Provider value={value}>{children}</RequestPendingContext.Provider>;
 };
 
 const useRequestPendingContext = () => {
