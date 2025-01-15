@@ -4,14 +4,14 @@ import { Behandling } from '@navikt/fp-types';
 
 import { AksjonspunktArgs, OverstyrteAksjonspunktArgs, useBehandlingApi } from '../behandlingApi';
 import { useRequestPendingContext } from '../polling/RequestPendingContext';
-import { doPolling } from './pollingUtils';
+import { doPolling, useTaskStatusChecker } from './pollingUtils';
 
 export const useBehandlingPollingOperasjoner = (
   behandling: Behandling,
   onSuccess: (behandling: Behandling) => void,
 ) => {
   const { pollingApi } = useBehandlingApi(behandling);
-
+  const { onBehandlingSuccess } = useTaskStatusChecker(onSuccess);
   const { setIsRequestPending } = useRequestPendingContext();
 
   const { mutate: opprettVerge } = useMutation({
@@ -22,7 +22,7 @@ export const useBehandlingPollingOperasjoner = (
       });
       return doPolling(response, setIsRequestPending);
     },
-    onSuccess,
+    onSuccess: onBehandlingSuccess,
   });
 
   const { mutate: fjernVerge } = useMutation({
@@ -33,7 +33,7 @@ export const useBehandlingPollingOperasjoner = (
       });
       return doPolling(response, setIsRequestPending);
     },
-    onSuccess,
+    onSuccess: onBehandlingSuccess,
   });
 
   const { mutateAsync: lagreAksjonspunkter } = useMutation({
@@ -41,7 +41,7 @@ export const useBehandlingPollingOperasjoner = (
       const response = await pollingApi.lagreAksjonspunkt(values);
       return doPolling(response, setIsRequestPending);
     },
-    onSuccess,
+    onSuccess: onBehandlingSuccess,
   });
 
   const { mutateAsync: lagreOverstyrteAksjonspunkter } = useMutation({
@@ -49,7 +49,7 @@ export const useBehandlingPollingOperasjoner = (
       const response = await pollingApi.lagreOverstyrtAksjonspunkt(values);
       return doPolling(response, setIsRequestPending);
     },
-    onSuccess,
+    onSuccess: onBehandlingSuccess,
   });
 
   const { mutate: åpneForEndringer } = useMutation({
@@ -57,7 +57,7 @@ export const useBehandlingPollingOperasjoner = (
       const response = await pollingApi.åpneBehandlingForEndring(behandling.uuid, behandling.versjon);
       return doPolling(response, setIsRequestPending);
     },
-    onSuccess,
+    onSuccess: onBehandlingSuccess,
   });
 
   const { mutate: gjenopptaBehandling } = useMutation({
@@ -68,7 +68,7 @@ export const useBehandlingPollingOperasjoner = (
       });
       return doPolling(response, setIsRequestPending);
     },
-    onSuccess,
+    onSuccess: onBehandlingSuccess,
   });
 
   return {
