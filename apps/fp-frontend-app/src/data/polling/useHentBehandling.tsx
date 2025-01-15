@@ -5,7 +5,7 @@ import { Behandling } from '@navikt/fp-types';
 import { hentBehandling, hentBehandlingTilbakekreving } from '../behandlingApi';
 import { notEmpty } from '../notEmpty';
 import { useRequestPendingContext } from '../polling/RequestPendingContext';
-import { doPolling } from './pollingUtils';
+import { doPolling, useTaskStatusChecker } from './pollingUtils';
 
 export const useHentBehandling = (
   erTilbakekreving: boolean,
@@ -13,6 +13,7 @@ export const useHentBehandling = (
   behandlingUuid?: string,
 ) => {
   const { setIsRequestPending } = useRequestPendingContext();
+  const { onBehandlingSuccess } = useTaskStatusChecker(setBehandling);
 
   const { mutate: hentOgSettBehandling } = useMutation({
     mutationFn: async () => {
@@ -21,7 +22,7 @@ export const useHentBehandling = (
         : await hentBehandling(notEmpty(behandlingUuid));
       return doPolling(response, setIsRequestPending);
     },
-    onSuccess: setBehandling,
+    onSuccess: onBehandlingSuccess,
   });
 
   return {

@@ -1,8 +1,9 @@
-import { KyResponse } from 'ky';
+import { HTTPError, KyResponse } from 'ky';
 
-import { ApiPollingStatus } from '@navikt/fp-rest-api';
+import { ApiPollingStatus, useRestApiErrorDispatcher } from '@navikt/fp-rest-api';
 import { Behandling } from '@navikt/fp-types';
 
+import { ErrorEventType } from '../../app/components/feilhandtering/errorEventType';
 import { doGetRequest } from '../fagsakApi';
 
 //TODO (TOR) Vurder å bruke Websocket i staden for denne pollemekanismen.
@@ -19,6 +20,7 @@ type PollingResponse = {
   location: string;
   readOnly: string;
   pending: string;
+  eta?: string;
 };
 
 export class PollingTimeoutError extends Error {
@@ -36,8 +38,21 @@ export const doPolling = async <T>(response: KyResponse<T>, setPollingPending: P
     if (location === null) {
       throw new Error(`Location i response er ikke angitt for URL: ${response.url}`);
     }
-    return await pollOgHentData(setPollingPending, location);
+
+    try {
+      return await pollOgHentData(setPollingPending, location);
+    } catch (error) {
+      if (error instanceof HTTPError) {
+        const data = await error.response.json();
+        if (isPollingDelayedOrHalted(data)) {
+          //Ikke vent på at behandling blir oppdatert, men hent gammel versjon (som da er read only)
+          return await doGetRequest<Behandling>(data.location);
+        }
+      }
+      throw error;
+    }
   }
+
   throw new Error(`Responderte ikke med 202 - Accepted: ${response.url}`);
 };
 
@@ -70,7 +85,33 @@ const isPollingResponse = (response: PollingResponse | Behandling): response is 
   return pollingResponse.pending !== undefined && pollingResponse.location !== undefined;
 };
 
+const isPollingDelayedOrHalted = (response: PollingResponse): boolean => {
+  const pollingResponse = response as PollingResponse;
+  return pollingResponse.status === ApiPollingStatus.DELAYED || response.status === ApiPollingStatus.HALTED;
+};
+
 const wait = (ms: number) =>
   new Promise(resolve => {
     setTimeout(resolve, ms);
   });
+
+export const useTaskStatusChecker = (setBehandling: (behandling: Behandling) => void) => {
+  const { addErrorMessage } = useRestApiErrorDispatcher();
+
+  const onBehandlingSuccess = (behandling: Behandling) => {
+    if (
+      behandling.taskStatus?.status === ApiPollingStatus.HALTED ||
+      behandling.taskStatus?.status === ApiPollingStatus.DELAYED
+    ) {
+      addErrorMessage({
+        type: ErrorEventType.POLLING_HALTED_OR_DELAYED,
+        message: behandling.taskStatus.message,
+        status: behandling.taskStatus.status,
+      });
+    }
+
+    setBehandling(behandling);
+  };
+
+  return { onBehandlingSuccess };
+};

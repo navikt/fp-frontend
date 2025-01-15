@@ -3,11 +3,12 @@ import { useMutation } from '@tanstack/react-query';
 import { Behandling } from '@navikt/fp-types';
 
 import { lagNyBehandling, lagNyTilbakekrevingBehandling, NyBehandlingParams } from '../fagsakApi';
-import { doPolling } from './pollingUtils';
+import { doPolling, useTaskStatusChecker } from './pollingUtils';
 import { useRequestPendingContext } from './RequestPendingContext';
 
 export const useLagNyBehandling = (gåTilNyBehandling: (behandling: Behandling) => void) => {
   const { setIsRequestPending } = useRequestPendingContext();
+  const { onBehandlingSuccess } = useTaskStatusChecker(gåTilNyBehandling);
 
   const { mutate } = useMutation({
     mutationFn: async (valuesToStore: { isTilbakekreving: boolean; params: NyBehandlingParams }) => {
@@ -16,9 +17,7 @@ export const useLagNyBehandling = (gåTilNyBehandling: (behandling: Behandling) 
         : await lagNyBehandling(valuesToStore.params);
       return doPolling(response, setIsRequestPending);
     },
-    onSuccess: (nyBehandling: Behandling) => {
-      gåTilNyBehandling(nyBehandling);
-    },
+    onSuccess: onBehandlingSuccess,
   });
 
   return {
