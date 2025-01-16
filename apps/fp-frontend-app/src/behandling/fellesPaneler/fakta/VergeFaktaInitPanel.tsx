@@ -23,7 +23,7 @@ export const VergeFaktaInitPanel = ({ valgtFaktaSteg, behandling, registrerFakta
 
   const skalPanelVisesIMeny = AKSJONSPUNKT_KODER.some(kode => hasAksjonspunkt(kode, behandling.aksjonspunkt));
 
-  const { data: verge, isSuccess } = useQuery(api.vergeOptions(standardPanelProps.behandling, skalPanelVisesIMeny));
+  const { data: verge, isFetching } = useQuery(api.vergeOptions(standardPanelProps.behandling, skalPanelVisesIMeny));
 
   return (
     <FaktaDefaultInitPanel
@@ -35,7 +35,7 @@ export const VergeFaktaInitPanel = ({ valgtFaktaSteg, behandling, registrerFakta
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Verge' })}
       skalPanelVisesIMeny={skalPanelVisesIMeny}
     >
-      {isSuccess ? <VergeFaktaIndex verge={verge} {...standardPanelProps} /> : <LoadingPanel />}
+      {!isFetching ? <VergeFaktaIndex verge={verge} {...standardPanelProps} /> : <LoadingPanel />}
     </FaktaDefaultInitPanel>
   );
 };
