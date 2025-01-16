@@ -1,5 +1,6 @@
 import { useIntl } from 'react-intl';
 
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
@@ -33,12 +34,16 @@ export const BehandleInnsynProsessStegInitPanel = ({ fagsak, ...props }: Props &
       prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.Innsyn' })}
       skalPanelVisesIMeny
     >
-      <InnsynProsessIndex
-        innsyn={innsyn}
-        saksnummer={fagsak.saksnummer}
-        alleDokumenter={innsynDokumenter}
-        {...standardPanelProps}
-      />
+      {innsyn ? (
+        <InnsynProsessIndex
+          innsyn={innsyn}
+          saksnummer={fagsak.saksnummer}
+          alleDokumenter={innsynDokumenter}
+          {...standardPanelProps}
+        />
+      ) : (
+        <LoadingPanel />
+      )}
     </ProsessDefaultInitPanel>
   );
 };

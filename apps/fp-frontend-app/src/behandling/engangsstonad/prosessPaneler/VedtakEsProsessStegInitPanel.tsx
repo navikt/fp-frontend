@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react';
 import { useIntl } from 'react-intl';
 
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
@@ -70,14 +71,20 @@ export const VedtakEsProsessStegInitPanel = ({
 
   const api = useBehandlingApi(props.behandling);
 
-  const { data: beregningDagytelseOriginalBehandling } = useQuery(
+  const { data: beregningDagytelseOriginalBehandling, isSuccess: isBogSuccess } = useQuery(
     api.beregningDagytelseOriginalBehandlingOptions(props.behandling),
   );
-  const { data: beregningsresultatEngangsstønad } = useQuery(
+  const { data: beregningsresultatEngangsstønad, isSuccess: isBeSuccess } = useQuery(
     api.es.beregningsresultatEngangsstønadOptions(props.behandling),
   );
-  const { data: simuleringResultat } = useQuery(api.simuleringResultatOptions(props.behandling));
-  const { data: tilbakekrevingValg } = useQuery(api.tilbakekrevingValgOptions(props.behandling));
+  const { data: simuleringResultat, isSuccess: isSrSuccess } = useQuery(
+    api.simuleringResultatOptions(props.behandling),
+  );
+  const { data: tilbakekrevingValg, isSuccess: isTvSuccess } = useQuery(
+    api.tilbakekrevingValgOptions(props.behandling),
+  );
+
+  const isSuccess = isBogSuccess && isBeSuccess && isSrSuccess && isTvSuccess;
 
   const { mutate: forhåndsvis } = useMutation({
     mutationFn: (values: ForhåndsvisMeldingParams) =>
@@ -125,17 +132,21 @@ export const VedtakEsProsessStegInitPanel = ({
           lukkModal={lukkFatterModal}
           tekst={intl.formatMessage({ id: 'FatterVedtakStatusModal.SendtBeslutter' })}
         />
-        <VedtakProsessIndex
-          ytelseTypeKode={FagsakYtelseType.ENGANGSSTONAD}
-          previewCallback={forhåndsvis}
-          beregningsresultatOriginalBehandling={beregningDagytelseOriginalBehandling}
-          beregningresultatEngangsstonad={beregningsresultatEngangsstønad}
-          simuleringResultat={simuleringResultat}
-          tilbakekrevingvalg={tilbakekrevingValg}
-          {...standardPanelProps}
-          aksjonspunkter={props.behandling.aksjonspunkt}
-          vilkar={vilkår}
-        />
+        {isSuccess ? (
+          <VedtakProsessIndex
+            ytelseTypeKode={FagsakYtelseType.ENGANGSSTONAD}
+            previewCallback={forhåndsvis}
+            beregningsresultatOriginalBehandling={beregningDagytelseOriginalBehandling}
+            beregningresultatEngangsstonad={beregningsresultatEngangsstønad}
+            simuleringResultat={simuleringResultat}
+            tilbakekrevingvalg={tilbakekrevingValg}
+            {...standardPanelProps}
+            aksjonspunkter={props.behandling.aksjonspunkt}
+            vilkar={vilkår}
+          />
+        ) : (
+          <LoadingPanel />
+        )}
       </>
     </ProsessDefaultInitPanel>
   );

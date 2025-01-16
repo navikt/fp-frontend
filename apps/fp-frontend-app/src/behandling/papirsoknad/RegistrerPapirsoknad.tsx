@@ -75,6 +75,11 @@ export const RegistrerPapirsoknad = ({ fagsak, behandling, rettigheter, lagreAks
   const fagsakApi = useFagsakApi();
   const { data: kodeverk } = useQuery(fagsakApi.kodeverkOptions());
 
+  const navigate = useNavigate();
+  const opneSokeside = () => {
+    navigate('/');
+  };
+
   if (!behandling.aksjonspunkt || kodeverk === undefined) {
     return <LoadingPanel />;
   }
@@ -85,11 +90,6 @@ export const RegistrerPapirsoknad = ({ fagsak, behandling, rettigheter, lagreAks
 
   const lagreUfullstendig = (fagsakYtelseType: string, familieHendelseType: string, foreldreType: string) =>
     lagre({ ufullstendigSoeknad: true }, fagsakYtelseType, familieHendelseType, foreldreType);
-
-  const navigate = useNavigate();
-  const opneSokeside = () => {
-    navigate('/');
-  };
 
   const erEndringssøknad = behandling.aksjonspunkt.some(
     ap => ap.definisjon === AksjonspunktKode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER,
