@@ -32,7 +32,7 @@ export const FordelingFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId, ...prop
 
   const api = useBehandlingApi(props.behandling);
 
-  const { data: beregningsgrunnlag } = useQuery(api.beregningsgrunnlagOptions(props.behandling));
+  const { data: beregningsgrunnlag, isFetching } = useQuery(api.beregningsgrunnlagOptions(props.behandling));
 
   return (
     <FaktaDefaultInitPanel
@@ -42,7 +42,7 @@ export const FordelingFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId, ...prop
       faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.Fordeling' })}
       skalPanelVisesIMeny={AKSJONSPUNKT_KODER.some(kode => hasAksjonspunkt(kode, props.behandling.aksjonspunkt))}
     >
-      {beregningsgrunnlag ? (
+      {!isFetching ? (
         <FordelBeregningsgrunnlagFaktaIndex
           {...standardPanelProps}
           kodeverkSamling={standardPanelProps.alleKodeverk}
@@ -109,7 +109,7 @@ const lagBGVilkar = (vilkar: Vilkar[], beregningsgrunnlag?: Beregningsgrunnlag):
   return nyVK;
 };
 
-const lagFormatertBG = (beregningsgrunnlag: Beregningsgrunnlag): FtBeregningsgrunnlag[] => {
+const lagFormatertBG = (beregningsgrunnlag?: Beregningsgrunnlag): FtBeregningsgrunnlag[] => {
   if (!beregningsgrunnlag) {
     return [];
   }
