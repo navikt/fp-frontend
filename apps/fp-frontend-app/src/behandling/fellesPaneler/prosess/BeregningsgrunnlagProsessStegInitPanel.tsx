@@ -110,7 +110,7 @@ export const BeregningsgrunnlagProsessStegInitPanel = ({
 
   const api = useBehandlingApi(props.behandling);
 
-  const { data: beregningsgrunnlag, isSuccess } = useQuery(api.beregningsgrunnlagOptions(props.behandling));
+  const { data: beregningsgrunnlag, isFetching } = useQuery(api.beregningsgrunnlagOptions(props.behandling));
 
   return (
     <ProsessDefaultInitPanel
@@ -120,7 +120,7 @@ export const BeregningsgrunnlagProsessStegInitPanel = ({
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Beregning' })}
       skalPanelVisesIMeny
     >
-      {isSuccess ? (
+      {!isFetching ? (
         <BeregningsgrunnlagProsessIndex
           {...standardPanelProps}
           kodeverkSamling={standardPanelProps.alleKodeverk}

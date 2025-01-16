@@ -29,7 +29,7 @@ export const OpptjeningsvilkaretFaktaInitPanel = ({
 
   const api = useBehandlingApi(props.behandling);
 
-  const { data: opptjening, isSuccess } = useQuery(api.opptjeningOptions(props.behandling));
+  const { data: opptjening, isFetching } = useQuery(api.opptjeningOptions(props.behandling));
 
   return (
     <FaktaDefaultInitPanel
@@ -44,7 +44,7 @@ export const OpptjeningsvilkaretFaktaInitPanel = ({
         )
       }
     >
-      {isSuccess ? (
+      {!isFetching ? (
         <OpptjeningFaktaIndex
           opptjening={opptjening}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}

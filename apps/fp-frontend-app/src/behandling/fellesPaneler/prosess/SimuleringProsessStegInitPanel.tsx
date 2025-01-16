@@ -36,7 +36,7 @@ export const SimuleringProsessStegInitPanel = ({
 
   const api = useBehandlingApi(props.behandling);
 
-  const { data: tilbakekrevingValg, isSuccess } = useQuery(api.tilbakekrevingValgOptions(props.behandling));
+  const { data: tilbakekrevingValg, isFetching } = useQuery(api.tilbakekrevingValgOptions(props.behandling));
   const { data: simuleringResultat } = useQuery(api.simuleringResultatOptions(props.behandling));
 
   const { mutate: forhåndsvis } = useMutation({
@@ -64,7 +64,7 @@ export const SimuleringProsessStegInitPanel = ({
         harLenke(props.behandling, 'SIMULERING_RESULTAT') ? VilkarUtfallType.OPPFYLT : VilkarUtfallType.IKKE_VURDERT
       }
     >
-      {isSuccess ? (
+      {!isFetching ? (
         <SimuleringProsessIndex
           tilbakekrevingvalg={tilbakekrevingValg}
           simuleringResultat={simuleringResultat}
