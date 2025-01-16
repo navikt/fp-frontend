@@ -55,7 +55,7 @@ export const BeregningFaktaInitPanel = ({
 
   const api = useBehandlingApi(props.behandling);
 
-  const { data: beregningsgrunnlag } = useQuery(api.beregningsgrunnlagOptions(props.behandling));
+  const { data: beregningsgrunnlag, isFetching } = useQuery(api.beregningsgrunnlagOptions(props.behandling));
 
   return (
     <FaktaDefaultInitPanel
@@ -65,7 +65,7 @@ export const BeregningFaktaInitPanel = ({
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Beregning' })}
       skalPanelVisesIMeny={harLenke(props.behandling, 'BEREGNINGSGRUNNLAG')}
     >
-      {beregningsgrunnlag ? (
+      {!isFetching ? (
         <BeregningFaktaIndex
           {...standardPanelProps}
           kodeverkSamling={standardPanelProps.alleKodeverk}
@@ -138,7 +138,7 @@ const lagBGVilkar = (vilkar?: Vilkar[], beregningsgrunnlag?: Beregningsgrunnlag)
   return nyVK;
 };
 
-const lagFormatertBG = (beregningsgrunnlag: Beregningsgrunnlag): FtBeregningsgrunnlag[] => {
+const lagFormatertBG = (beregningsgrunnlag?: Beregningsgrunnlag): FtBeregningsgrunnlag[] => {
   if (!beregningsgrunnlag) {
     return [];
   }
