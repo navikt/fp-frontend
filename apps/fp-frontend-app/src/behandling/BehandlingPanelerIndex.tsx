@@ -51,7 +51,7 @@ export const BehandlingPanelerIndex = ({
 
   const { lagreAksjonspunkter, lagreOverstyrteAksjonspunkter } = useBehandlingPollingOperasjoner(
     behandling,
-    (oppdatertBehandling: Behandling) => {
+    oppdatertBehandling => {
       if (oppdatertBehandling && skalOppdatereEtterBekreftelseAvAp) {
         setBehandling(oppdatertBehandling);
       }
