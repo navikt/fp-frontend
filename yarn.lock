@@ -3399,7 +3399,6 @@ __metadata:
     "@navikt/fp-prosess-vilkar-sokers-opplysningsplikt": "workspace:*"
     "@navikt/fp-prosess-vilkar-soknadsfrist": "workspace:*"
     "@navikt/fp-prosess-vilkar-svangerskap": "workspace:*"
-    "@navikt/fp-rest-api": "workspace:*"
     "@navikt/fp-sak-aktor": "workspace:*"
     "@navikt/fp-sak-behandling-velger": "workspace:*"
     "@navikt/fp-sak-dekorator": "workspace:*"
@@ -3485,7 +3484,6 @@ __metadata:
     "@navikt/ds-react": 7.8.0
     "@navikt/ds-react-internal": 3.4.3
     "@navikt/fp-kodeverk": "workspace:*"
-    "@navikt/fp-rest-api": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-utils-test": "workspace:*"
@@ -3547,7 +3545,6 @@ __metadata:
     "@navikt/ds-react": 7.8.0
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-los-felles": "workspace:*"
-    "@navikt/fp-rest-api": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-utils-test": "workspace:*"
@@ -3592,7 +3589,6 @@ __metadata:
     "@navikt/ds-css": 7.8.0
     "@navikt/ds-react": 7.8.0
     "@navikt/fp-kodeverk": "workspace:*"
-    "@navikt/fp-rest-api": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-form-hooks": 5.2.9
@@ -3631,8 +3627,8 @@ __metadata:
     "@navikt/ds-css": 7.8.0
     "@navikt/ds-react": 7.8.0
     "@navikt/fp-kodeverk": "workspace:*"
+    "@navikt/fp-konstanter": "workspace:*"
     "@navikt/fp-los-felles": "workspace:*"
-    "@navikt/fp-rest-api": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-utils-test": "workspace:*"
@@ -4329,8 +4325,8 @@ __metadata:
     "@navikt/ds-css": 7.8.0
     "@navikt/ds-react": 7.8.0
     "@navikt/fp-kodeverk": "workspace:*"
+    "@navikt/fp-konstanter": "workspace:*"
     "@navikt/fp-prosess-felles": "workspace:*"
-    "@navikt/fp-rest-api": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
@@ -4660,21 +4656,6 @@ __metadata:
     react-intl: 6.6.8
     storybook: 8.4.2
     stylelint: 16.10.0
-    typescript: 5.6.3
-    vite: 5.4.10
-    vitest: 2.1.4
-  languageName: unknown
-  linkType: soft
-
-"@navikt/fp-rest-api@workspace:*, @navikt/fp-rest-api@workspace:packages/rest-api":
-  version: 0.0.0-use.local
-  resolution: "@navikt/fp-rest-api@workspace:packages/rest-api"
-  dependencies:
-    "@sentry/browser": 7.119.2
-    axios: 1.7.7
-    axios-mock-adapter: 2.1.0
-    cross-env: 7.0.3
-    eslint: 9.14.0
     typescript: 5.6.3
     vite: 5.4.10
     vitest: 2.1.4
