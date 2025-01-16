@@ -2,15 +2,14 @@ import React, { useEffect } from 'react';
 
 import { render, screen } from '@testing-library/react';
 
-import { RestApiErrorProvider } from './RestApiErrorContext';
-import useRestApiError from './useRestApiError';
-import useRestApiErrorDispatcher from './useRestApiErrorDispatcher';
+import { ErrorType } from './errorType';
+import { RestApiErrorProvider, useRestApiError, useRestApiErrorDispatcher } from './RestApiErrorContext';
 
 const TestErrorMessage = ({ skalFjerne = false }) => {
   const { addErrorMessage, removeErrorMessages } = useRestApiErrorDispatcher();
   useEffect(() => {
-    addErrorMessage('Feilmeldingstest 1');
-    addErrorMessage('Feilmeldingstest 2');
+    addErrorMessage({ type: ErrorType.GENERAL_ERROR, message: 'Feilmeldingstest 1' });
+    addErrorMessage({ type: ErrorType.GENERAL_ERROR, message: 'Feilmeldingstest 2' });
 
     if (skalFjerne) {
       removeErrorMessages();
@@ -22,7 +21,7 @@ const TestErrorMessage = ({ skalFjerne = false }) => {
     <>
       Feilmeldinger:
       {feilmeldinger.map(feil => (
-        <span key={feil}>{feil}</span>
+        <span key={feil.type}>{feil.type}</span>
       ))}
     </>
   );

@@ -24,7 +24,6 @@
     "@navikt/ds-react": "7.9.2",
     "@navikt/ds-react-internal": "3.4.3",
     "@navikt/fp-kodeverk": "workspace:*",
-    "@navikt/fp-rest-api": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/ft-form-hooks": "6.0.0",
     "@navikt/ft-form-validators": "3.0.0",

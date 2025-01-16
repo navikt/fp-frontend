@@ -1,5 +1,5 @@
 // Definerer koder for alle fakta-penelene. Desse verdien blir vist i URL og brukt i historikk-elementene.
-enum FaktaPanelCode {
+export enum FaktaPanelCode {
   ADOPSJONSVILKARET = 'adopsjonsvilkaaret',
   ARBEIDSFORHOLD = 'arbeidsforhold',
   ARBEID_OG_INNTEKT = 'arbeidoginntekt',
@@ -23,5 +23,3 @@ enum FaktaPanelCode {
   YTELSER = 'ytelser',
   UTTAK_DOKUMENTASJON = 'uttakdokumentasjon',
 }
-
-export default FaktaPanelCode;
