@@ -1,10 +1,12 @@
-import React, { KeyboardEvent, MouseEvent,useCallback } from 'react';
+import React, { KeyboardEvent, MouseEvent, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Button, HStack, Link } from '@navikt/ds-react';
 
+import { ForhandsvisData } from './VedtakKlageForm';
+
 interface Props {
-  previewVedtakCallback: () => Promise<any>;
+  previewVedtakCallback: (data: ForhandsvisData) => void;
   behandlingPaaVent: boolean;
   readOnly: boolean;
   lagreVedtak: () => void;
@@ -20,7 +22,9 @@ export const VedtakKlageSubmitPanel = ({
 }: Props) => {
   const forhåndsvis = useCallback((e: KeyboardEvent | MouseEvent) => {
     e.preventDefault();
-    previewVedtakCallback();
+    previewVedtakCallback({
+      gjelderVedtak: true,
+    });
   }, []);
 
   return (

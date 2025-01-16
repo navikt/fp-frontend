@@ -1,53 +1,40 @@
-import React, { ReactElement } from 'react';
+import { ReactElement } from 'react';
 
 import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import { RestKey } from '@navikt/fp-rest-api';
-import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { StandardProsessPanelProps } from '@navikt/fp-types';
 
-import { restBehandlingApiHooks } from '../../../data/behandlingContextApi';
 import { ProsessPanelInitProps } from '../typer/prosessPanelInitProps';
 import { ProsessPanelWrapper } from './ProsessPanelWrapper';
 import { useProsessMenyRegistrerer } from './useProsessMenyRegistrerer';
-import { useStandardProsessPanelProps } from './useStandardProsessPanelProps';
 
-export type Props<PANEL_DATA> = {
-  panelEndepunkter?: RestKey<any, any>[] | { key: RestKey<any, any>; params?: any }[];
-  aksjonspunktKoder?: string[];
-  vilkarKoder?: string[];
-  skalPanelVisesIMeny: (data: StandardProsessPanelProps) => boolean;
-  hentOverstyrtStatus?: (standardData: StandardProsessPanelProps) => string;
-  renderPanel: (data: PANEL_DATA & StandardProsessPanelProps) => ReactElement;
+export type Props = {
+  skalPanelVisesIMeny: boolean;
+  hentOverstyrtStatus?: string;
   prosessPanelKode: ProsessStegCode;
   prosessPanelMenyTekst: string;
-  lagringSideEffekter?: (aksjonspunktModeller: any) => () => void;
   erOverstyrt?: boolean;
-  hentSkalMarkeresSomAktiv?: (standardData: StandardProsessPanelProps) => boolean;
+  hentSkalMarkeresSomAktiv?: boolean;
+  standardPanelProps: StandardProsessPanelProps;
+  children: ReactElement;
 };
 
-export const ProsessDefaultInitPanel = <PANEL_DATA,>({
+export const ProsessDefaultInitPanel = ({
   valgtProsessSteg,
   behandling,
   registrerProsessPanel,
-  panelEndepunkter = [],
-  aksjonspunktKoder,
-  vilkarKoder,
   skalPanelVisesIMeny,
-  renderPanel,
   prosessPanelKode,
   prosessPanelMenyTekst,
-  lagringSideEffekter,
   hentOverstyrtStatus,
   erOverstyrt = false,
   hentSkalMarkeresSomAktiv,
-}: Props<PANEL_DATA> & ProsessPanelInitProps) => {
-  const standardPanelProps = useStandardProsessPanelProps(aksjonspunktKoder, vilkarKoder, lagringSideEffekter);
+  standardPanelProps,
+  children,
+}: Props & ProsessPanelInitProps) => {
+  const status = hentOverstyrtStatus ?? standardPanelProps.status;
 
-  const status = hentOverstyrtStatus ? hentOverstyrtStatus(standardPanelProps) : standardPanelProps.status;
-
-  const skalMarkeresSomAktiv =
-    hentSkalMarkeresSomAktiv && hentSkalMarkeresSomAktiv(standardPanelProps) && !behandling.behandlingHenlagt;
+  const skalMarkeresSomAktiv = hentSkalMarkeresSomAktiv && !behandling.behandlingHenlagt;
 
   const harApentAksjonspunkt = erOverstyrt || standardPanelProps.isAksjonspunktOpen;
 
@@ -55,39 +42,22 @@ export const ProsessDefaultInitPanel = <PANEL_DATA,>({
     registrerProsessPanel,
     prosessPanelKode,
     prosessPanelMenyTekst,
-    skalPanelVisesIMeny(standardPanelProps),
+    skalPanelVisesIMeny,
     harApentAksjonspunkt,
     status,
     skalMarkeresSomAktiv || harApentAksjonspunkt,
     valgtProsessSteg,
   );
 
-  const formatertePanelEndepunkter = panelEndepunkter.map((e: any) => (e instanceof RestKey ? { key: e } : e));
-  const skalIkkeHenteData =
-    !erPanelValgt ||
-    formatertePanelEndepunkter.length === 0 ||
-    (status === VilkarUtfallType.IKKE_VURDERT && !harApentAksjonspunkt);
-
-  const { data: panelData, state: panelDataState } = restBehandlingApiHooks.useMultipleRestApi<PANEL_DATA, any>(
-    formatertePanelEndepunkter,
-    {
-      updateTriggers: [erPanelValgt, behandling.versjon, status, harApentAksjonspunkt],
-      suspendRequest: skalIkkeHenteData,
-      isCachingOn: true,
-    },
-  );
+  const skalHenteData = erPanelValgt && (harApentAksjonspunkt || status !== VilkarUtfallType.IKKE_VURDERT);
 
   return (
     <ProsessPanelWrapper
       erPanelValgt={erPanelValgt}
       erAksjonspunktOpent={standardPanelProps.isAksjonspunktOpen}
       status={status}
-      dataState={formatertePanelEndepunkter.length > 0 ? panelDataState : RestApiState.SUCCESS}
     >
-      {renderPanel({
-        ...(panelData as PANEL_DATA),
-        ...standardPanelProps,
-      })}
+      {skalHenteData ? children : null}
     </ProsessPanelWrapper>
   );
 };

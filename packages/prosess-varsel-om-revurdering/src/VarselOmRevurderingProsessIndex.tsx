@@ -16,7 +16,7 @@ interface OwnProps {
   soknad: Soknad;
   soknadOriginalBehandling: Soknad;
   familiehendelseOriginalBehandling: FamilieHendelse;
-  previewCallback: (data: ForhandsvisData) => Promise<any>;
+  previewCallback: (data: ForhandsvisData) => void;
 }
 
 const VarselOmRevurderingProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({

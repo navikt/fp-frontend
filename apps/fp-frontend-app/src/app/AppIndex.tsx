@@ -8,11 +8,12 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { HTTPError } from 'ky';
 import moment from 'moment';
 
-import { EventType } from '@navikt/fp-rest-api';
-import { useRestApiError, useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 import { ForbiddenPage, UnauthorizedPage } from '@navikt/fp-sak-infosider';
 
+import { ErrorType, FpError } from '../data/error/errorType';
+import { useRestApiError, useRestApiErrorDispatcher } from '../data/error/RestApiErrorContext';
 import { initFetchOptions } from '../data/fagsakApi';
+import { PollingTimeoutError } from '../data/polling/pollingUtils';
 import { AppConfigResolver } from './AppConfigResolver';
 import { Dekorator } from './components/Dekorator';
 import { Home } from './components/Home';
@@ -84,9 +85,9 @@ export const AppIndex = () => {
 
   const errorMessages = useRestApiError() || EMPTY_ARRAY;
   const queryStrings = parseQueryString(location.search);
-  const forbiddenErrors = errorMessages.filter(o => o.type === EventType.REQUEST_FORBIDDEN);
-  const unauthorizedErrors = errorMessages.filter(o => o.type === EventType.REQUEST_UNAUTHORIZED);
-  const hasForbiddenOrUnauthorizedErrors = forbiddenErrors.length > 0 || unauthorizedErrors.length > 0;
+  const hasForbiddenErrors = errorMessages.some(o => o.type === ErrorType.REQUEST_FORBIDDEN);
+  const hasUnauthorizedErrors = errorMessages.some(o => o.type === ErrorType.REQUEST_UNAUTHORIZED);
+  const hasForbiddenOrUnauthorizedErrors = hasForbiddenErrors || hasUnauthorizedErrors;
   const shouldRenderHome = !crashMessage && !hasForbiddenOrUnauthorizedErrors;
 
   return (
@@ -102,8 +103,8 @@ export const AppIndex = () => {
           <ErrorBoundary errorMessageCallback={addErrorMessageAndSetAsCrashed} showChild>
             {shouldRenderHome && <Home headerHeight={headerHeight} navAnsatt={navAnsatt} />}
           </ErrorBoundary>
-          {forbiddenErrors.length > 0 && <ForbiddenPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />}
-          {unauthorizedErrors.length > 0 && <UnauthorizedPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />}
+          {hasForbiddenErrors && <ForbiddenPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />}
+          {hasUnauthorizedErrors && <UnauthorizedPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />}
         </>
       </AppConfigResolver>
     </ErrorBoundary>
@@ -125,26 +126,27 @@ const createQueryClient = (errorHandler: (error: Error) => void) =>
     }),
   });
 
-const getErrorHandler = (addErrorMessage: (data: any) => void) => (error: Error) => {
+const getErrorHandler = (addErrorMessage: (data: FpError) => void) => (error: Error) => {
   // eslint-disable-next-line no-console
   console.log(error);
 
-  // TODO Dette er ein forenkela kopi av dagens feilhåndtering. Refaktorer og flytt når Tanstack Query blir brukt over alt
-  if (error instanceof HTTPError) {
+  if (error instanceof PollingTimeoutError) {
+    addErrorMessage({ type: ErrorType.POLLING_TIMEOUT, message: error.message, location: error.location });
+  } else if (error instanceof HTTPError) {
     if (error.response.status === 403) {
-      addErrorMessage({ type: EventType.REQUEST_FORBIDDEN, feilmelding: error.message });
+      addErrorMessage({ type: ErrorType.REQUEST_FORBIDDEN, message: error.message });
     } else if (error.response.status === 401) {
-      addErrorMessage({ type: EventType.REQUEST_UNAUTHORIZED, feilmelding: error.message });
+      addErrorMessage({ type: ErrorType.REQUEST_UNAUTHORIZED, message: error.message });
     } else if (error.response.status === 504 || error.response.status === 404) {
       addErrorMessage({
-        type: EventType.REQUEST_GATEWAY_TIMEOUT_OR_NOT_FOUND,
+        type: ErrorType.REQUEST_GATEWAY_TIMEOUT_OR_NOT_FOUND,
         //@ts-expect-error
         location: error.response?.config?.url,
       });
     } else {
-      addErrorMessage({ type: EventType.REQUEST_ERROR, feilmelding: error.message });
+      addErrorMessage({ type: ErrorType.GENERAL_ERROR, message: error.message });
     }
   } else {
-    addErrorMessage({ type: EventType.REQUEST_ERROR, feilmelding: error.message });
+    addErrorMessage({ type: ErrorType.GENERAL_ERROR, message: error.message });
   }
 };

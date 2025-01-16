@@ -1,10 +1,10 @@
-import React, { FunctionComponent, useCallback, useEffect,useMemo, useState } from 'react';
+import React, { FunctionComponent, useCallback, useEffect, useMemo, useState } from 'react';
 import { useForm, UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 
 import { TrashIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, Label } from '@navikt/ds-react';
-import { CheckboxField,Datepicker, Form, RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
+import { CheckboxField, Datepicker, Form, RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { FlexColumn, FlexContainer, FlexRow, OkAvbrytModal, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { omitMany } from '@navikt/ft-utils';
@@ -101,7 +101,7 @@ interface OwnProps {
   fagsak: Fagsak;
   valgtPeriode?: KontrollerFaktaPeriodeMedApMarkering;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  faktaArbeidsforhold: FaktaArbeidsforhold[];
+  faktaArbeidsforhold?: FaktaArbeidsforhold[];
   slettPeriode?: () => void;
   avbrytEditering: () => void;
   readOnly: boolean;

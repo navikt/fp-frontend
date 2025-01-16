@@ -1,5 +1,5 @@
 // Definerer alle prosess-steg. Desse verdien blir vist i URL og brukt i historikk-elementene.
-enum ProsessStegCode {
+export enum ProsessStegCode {
   DEFAULT = 'default',
   INNGANGSVILKAR = 'inngangsvilkar',
   BEHANDLE_INNSYN = 'behandle_innsyn',
@@ -24,5 +24,3 @@ enum ProsessStegCode {
   ANKE_MERKNADER = 'ankemerknader',
   ANKE_RESULTAT = 'ankeresultat',
 }
-
-export default ProsessStegCode;

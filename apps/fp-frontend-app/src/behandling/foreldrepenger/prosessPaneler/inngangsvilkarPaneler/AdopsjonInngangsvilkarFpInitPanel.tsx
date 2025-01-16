@@ -7,6 +7,7 @@ import { AksessRettigheter } from '@navikt/fp-types';
 
 import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 import { OverstyringPanelDef } from '../../../felles/prosess/OverstyringPanelDef';
+import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandardProsessPanelProps';
 import { InngangsvilkarPanelInitProps } from '../../../felles/typer/inngangsvilkarPanelInitProps';
 
 const AKSJONSPUNKT_KODER = [
@@ -27,33 +28,35 @@ export const AdopsjonInngangsvilkarFpInitPanel = ({
   ...props
 }: Props & InngangsvilkarPanelInitProps) => {
   const intl = useIntl();
+
+  const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, VILKAR_KODER);
+
   return (
     <InngangsvilkarDefaultInitPanel
       {...props}
       behandlingVersjon={behandlingVersjon}
-      aksjonspunktKoder={AKSJONSPUNKT_KODER}
-      vilkarKoder={VILKAR_KODER}
+      standardPanelProps={standardPanelProps}
       inngangsvilkarPanelKode="ADOPSJON"
-      hentInngangsvilkarPanelTekst={() => intl.formatMessage({ id: 'SRBVilkarForm.VurderSammeBarn' })}
-      renderPanel={(data, erOverstyrt, toggleOverstyring) => (
+      hentInngangsvilkarPanelTekst={intl.formatMessage({ id: 'SRBVilkarForm.VurderSammeBarn' })}
+      renderPanel={({ erOverstyrt, toggleOverstyring }) => (
         <>
-          {data.aksjonspunkter.length === 0 && (
+          {standardPanelProps.aksjonspunkter.length === 0 && (
             <OverstyringPanelDef
-              aksjonspunkter={data.aksjonspunkter}
+              aksjonspunkter={standardPanelProps.aksjonspunkter}
               aksjonspunktKode={AksjonspunktKode.OVERSTYRING_AV_ADOPSJONSVILKÅRET_FP}
-              vilkar={data.vilkar}
+              vilkar={standardPanelProps.vilkar}
               vilkarKoder={VILKAR_KODER}
               panelTekstKode="Inngangsvilkar.Adopsjonsvilkaret"
               toggleOverstyring={toggleOverstyring}
               erOverstyrt={erOverstyrt}
               overrideReadOnly={
-                data.isReadOnly ||
-                (props.harInngangsvilkarApentAksjonspunkt && !(data.isAksjonspunktOpen || erOverstyrt))
+                standardPanelProps.isReadOnly ||
+                (props.harInngangsvilkarApentAksjonspunkt && !(standardPanelProps.isAksjonspunktOpen || erOverstyrt))
               }
               kanOverstyreAccess={rettigheter.kanOverstyreAccess}
             />
           )}
-          {data.aksjonspunkter.length > 0 && <AdopsjonVilkarProsessIndex {...data} />}
+          {standardPanelProps.aksjonspunkter.length > 0 && <AdopsjonVilkarProsessIndex {...standardPanelProps} />}
         </>
       )}
     />

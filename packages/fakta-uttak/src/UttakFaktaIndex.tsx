@@ -25,7 +25,7 @@ interface OwnProps {
   ytelsefordeling: Ytelsefordeling;
   uttakKontrollerFaktaPerioder: KontrollerFaktaPeriode[];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  faktaArbeidsforhold: FaktaArbeidsforhold[];
+  faktaArbeidsforhold?: FaktaArbeidsforhold[];
   kanOverstyre: boolean;
   aksjonspunkter: Aksjonspunkt[];
   readOnly: boolean;

@@ -65,7 +65,7 @@ describe('AppIndex', () => {
     screen.getByText('Kontroller mot opplysningene fra adopsjonsdokumentasjonen'); */
   });
 
-  // TODO Fiks test når behandling-api er over på tanstack-query
+  // TODO Fiks dette. Er det lazy-loadinga som er problemet?
   it.skip('skal bekrefte aksjonspunkt', async () => {
     await applyRequestHandlers(BekreftAdopsjon.parameters.msw);
     const utils = await render(
@@ -74,6 +74,7 @@ describe('AppIndex', () => {
       </ResponsiveContext.Provider>,
     );
 
+    expect(await screen.findByText('Svangerskap, fødsel og adopsjon')).toBeInTheDocument();
     expect(await screen.findByText('Adopsjonsopplysninger fra søknad')).toBeInTheDocument();
 
     const begrunnValgInput = utils.getByLabelText('Begrunn endringene');
@@ -85,7 +86,7 @@ describe('AppIndex', () => {
     expect(screen.getByText('Vurder om søker har gyldig medlemskap i perioden')).toBeInTheDocument();
   });
 
-  // TODO Fiks test når behandling-api er over på tanstack-query
+  // TODO Fiks dette. Er det lazy-loadinga som er problemet?
   it.skip('skal vise risikoaksjonspunkt', async () => {
     await applyRequestHandlers(RisikoAksjonspunkt.parameters.msw);
     const utils = await render(

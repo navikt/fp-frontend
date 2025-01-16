@@ -1,12 +1,12 @@
-import React, { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { BehandlingAppKontekst, KodeverkMedNavn } from '@navikt/fp-types';
+import { Behandling, KodeverkMedNavn } from '@navikt/fp-types';
 
 import { HenlagtBehandlingModal } from './components/HenlagtBehandlingModal';
-import { FormValues,HenleggBehandlingModal } from './components/HenleggBehandlingModal';
+import { FormValues, HenleggBehandlingModal } from './components/HenleggBehandlingModal';
 
 import messages from '../i18n/nb_NO.json';
 
@@ -15,7 +15,7 @@ const intl = createIntl(messages);
 export const getMenytekst = (): string => intl.formatMessage({ id: 'MenyHenleggIndex.HenleggBehandling' });
 
 interface Props {
-  valgtBehandling: BehandlingAppKontekst;
+  valgtBehandling: Behandling;
   henleggBehandling: (params: { årsakKode: string; begrunnelse: string; fritekst?: string }) => Promise<any>;
   forhandsvisHenleggBehandling: (erHenleggelse: boolean, data: any) => void;
   ytelseType: string;
@@ -35,19 +35,16 @@ export const MenyHenleggIndex = ({
 }: Props) => {
   const [erHenlagt, setErHenlagt] = useState(false);
 
-  const submit = useCallback(
-    (formValues: FormValues) => {
-      const henleggBehandlingDto = {
-        årsakKode: formValues.årsakKode ?? '',
-        begrunnelse: formValues.begrunnelse ?? '',
-        fritekst: formValues.fritekst,
-      };
-      henleggBehandling(henleggBehandlingDto).then(() => {
-        setErHenlagt(true);
-      });
-    },
-    [valgtBehandling],
-  );
+  const submit = (formValues: FormValues) => {
+    const henleggBehandlingDto = {
+      årsakKode: formValues.årsakKode ?? '',
+      begrunnelse: formValues.begrunnelse ?? '',
+      fritekst: formValues.fritekst,
+    };
+    henleggBehandling(henleggBehandlingDto).then(() => {
+      setErHenlagt(true);
+    });
+  };
 
   return (
     <RawIntlProvider value={intl}>

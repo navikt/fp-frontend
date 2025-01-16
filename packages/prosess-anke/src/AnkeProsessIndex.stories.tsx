@@ -2,11 +2,11 @@ import React from 'react';
 
 import { StoryFn } from '@storybook/react';
 
-import { AnkeOmgjorArsak, AnkeVurdering as AnkeVurderingKodeverk,AnkeVurderingOmgjoer } from '@navikt/fp-kodeverk';
+import { AnkeOmgjorArsak, AnkeVurdering as AnkeVurderingKodeverk, AnkeVurderingOmgjoer } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { AnkeVurdering } from '@navikt/fp-types';
 
-import AnkeProsessIndex from './AnkeProsessIndex';
+import { AnkeProsessIndex } from './AnkeProsessIndex';
 
 export default {
   title: 'prosess/anke/prosess-anke',

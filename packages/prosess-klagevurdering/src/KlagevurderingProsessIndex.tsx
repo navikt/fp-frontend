@@ -17,8 +17,8 @@ const intl = createIntl(messages);
 
 interface OwnProps {
   klageVurdering: KlageVurdering;
-  previewCallback: (data: BrevData) => Promise<any>;
-  saveKlage: (data: TransformedValues) => Promise<any>;
+  previewCallback: (data: BrevData) => void;
+  saveKlage: (data: TransformedValues) => void;
 }
 
 const KlagevurderingProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({

@@ -1,12 +1,11 @@
-import React, { ReactElement } from 'react';
+import { ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort } from '@navikt/ds-react';
-import { FadingPanel,LoadingPanel } from '@navikt/ft-ui-komponenter';
+import { FadingPanel } from '@navikt/ft-ui-komponenter';
 import classnames from 'classnames/bind';
 
 import { VilkarUtfallType } from '@navikt/fp-kodeverk';
-import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
 import styles from './prosessPanelWrapper.module.css';
 
@@ -27,16 +26,14 @@ interface Props {
   erPanelValgt: boolean;
   erAksjonspunktOpent: boolean;
   status: string;
-  dataState: RestApiState;
   skalSkjulePanel?: boolean;
-  children: ReactElement | ReactElement[];
+  children: ReactElement | ReactElement[] | null;
 }
 
 export const ProsessPanelWrapper = ({
   erPanelValgt,
   erAksjonspunktOpent,
   status,
-  dataState,
   skalSkjulePanel = false,
   children,
 }: Props) => {
@@ -54,10 +51,5 @@ export const ProsessPanelWrapper = ({
     );
   }
 
-  return (
-    <PanelContainer skalSkjulePanel={skalSkjulePanel}>
-      {dataState !== RestApiState.SUCCESS && <LoadingPanel />}
-      {dataState === RestApiState.SUCCESS && children}
-    </PanelContainer>
-  );
+  return <PanelContainer skalSkjulePanel={skalSkjulePanel}>{children}</PanelContainer>;
 };

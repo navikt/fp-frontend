@@ -1,20 +1,16 @@
-import React from 'react';
 import { useIntl } from 'react-intl';
+
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
+import { useQuery } from '@tanstack/react-query';
 
 import { UttakFaktaIndex } from '@navikt/fp-fakta-uttak';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import {
-  AksessRettigheter,
-  ArbeidsgiverOpplysningerPerId,
-  Fagsak,
-  FaktaArbeidsforhold,
-  KontrollerFaktaPeriode,
-  Ytelsefordeling,
-} from '@navikt/fp-types';
+import { AksessRettigheter, ArbeidsgiverOpplysningerPerId, Fagsak } from '@navikt/fp-types';
 
-import { BehandlingApiKeys, requestBehandlingApi } from '../../../data/behandlingContextApi';
+import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
+import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
 
 const AKSJONSPUNKT_KODER = [
@@ -27,18 +23,6 @@ const AKSJONSPUNKT_KODER = [
 
 const OVERSTYRING_AP_CODES = [AksjonspunktKode.OVERSTYR_FAKTA_UTTAK];
 
-const ENDEPUNKTER_PANEL_DATA = [
-  BehandlingApiKeys.UTTAK_KONTROLLER_FAKTA_PERIODER_V2,
-  BehandlingApiKeys.FAKTA_ARBEIDSFORHOLD,
-  BehandlingApiKeys.YTELSEFORDELING,
-];
-
-type EndepunktPanelData = {
-  uttakKontrollerFaktaPerioderV2: KontrollerFaktaPeriode[];
-  faktaArbeidsforhold: FaktaArbeidsforhold[];
-  ytelsefordeling: Ytelsefordeling;
-};
-
 interface Props {
   rettigheter: AksessRettigheter;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -50,23 +34,38 @@ export const UttakFaktaInitPanel = ({
   arbeidsgiverOpplysningerPerId,
   fagsak,
   ...props
-}: Props & FaktaPanelInitProps) => (
-  <FaktaDefaultInitPanel<EndepunktPanelData>
-    {...props}
-    panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
-    aksjonspunktKoder={AKSJONSPUNKT_KODER}
-    overstyringApKoder={OVERSTYRING_AP_CODES}
-    faktaPanelKode={FaktaPanelCode.UTTAK}
-    faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.Uttak' })}
-    skalPanelVisesIMeny={() => requestBehandlingApi.hasPath(BehandlingApiKeys.UTTAK_KONTROLLER_FAKTA_PERIODER_V2.name)}
-    renderPanel={data => (
-      <UttakFaktaIndex
-        fagsak={fagsak}
-        kanOverstyre={rettigheter.kanOverstyreAccess.isEnabled && props.behandling.harSattEndringsdato}
-        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-        {...data}
-        uttakKontrollerFaktaPerioder={data.uttakKontrollerFaktaPerioderV2}
-      />
-    )}
-  />
-);
+}: Props & FaktaPanelInitProps) => {
+  const intl = useIntl();
+
+  const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER, OVERSTYRING_AP_CODES);
+
+  const api = useBehandlingApi(props.behandling);
+
+  const { data: ytelsefordeling } = useQuery(api.ytelsefordelingOptions(props.behandling));
+  const { data: uttakKontrollerFaktaPerioder } = useQuery(api.uttakKontrollerFaktaPerioderOptions(props.behandling));
+  const { data: faktaArbeidsforhold } = useQuery(api.faktaArbeidsforholdOptions(props.behandling));
+
+  return (
+    <FaktaDefaultInitPanel
+      {...props}
+      standardPanelProps={standardPanelProps}
+      faktaPanelKode={FaktaPanelCode.UTTAK}
+      faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Uttak' })}
+      skalPanelVisesIMeny={harLenke(props.behandling, 'UTTAK_KONTROLLER_FAKTA_PERIODER_V2')}
+    >
+      {ytelsefordeling && uttakKontrollerFaktaPerioder ? (
+        <UttakFaktaIndex
+          fagsak={fagsak}
+          kanOverstyre={rettigheter.kanOverstyreAccess.isEnabled && props.behandling.harSattEndringsdato}
+          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+          uttakKontrollerFaktaPerioder={uttakKontrollerFaktaPerioder}
+          ytelsefordeling={ytelsefordeling}
+          faktaArbeidsforhold={faktaArbeidsforhold}
+          {...standardPanelProps}
+        />
+      ) : (
+        <LoadingPanel />
+      )}
+    </FaktaDefaultInitPanel>
+  );
+};

@@ -1,9 +1,16 @@
-import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
-import { AksjonspunktStatus, AksjonspunktType,isAksjonspunktOpen, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import {
+  AksjonspunktStatus,
+  AksjonspunktType,
+  isAksjonspunktOpen,
+  VilkarType,
+  VilkarUtfallType,
+} from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Behandling, Fagsak, StandardProsessPanelProps, Vilkar } from '@navikt/fp-types';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
+import { AksjonspunktArgs, OverstyrteAksjonspunktArgs } from '../../../data/behandlingApi';
 import { getAlleMerknaderFraBeslutter } from '../utils/getAlleMerknaderFraBeslutter';
 import { erReadOnly } from '../utils/readOnlyPanelUtils';
 import { StandardPropsStateContext } from '../utils/standardPropsStateContext';
@@ -17,8 +24,8 @@ const getBekreftAksjonspunktProsessCallback =
     fagsak: Fagsak,
     behandling: Behandling,
     aksjonspunkter: Aksjonspunkt[],
-    lagreAksjonspunkter: (params: any, keepData?: boolean) => Promise<any>,
-    lagreOverstyrteAksjonspunkter?: (params: any, keepData?: boolean) => Promise<any>,
+    lagreAksjonspunkter: (params: AksjonspunktArgs) => Promise<Behandling>,
+    lagreOverstyrteAksjonspunkter: (params: OverstyrteAksjonspunktArgs) => Promise<Behandling>,
   ) =>
   (aksjonspunkterSomSkalLagres: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => {
     const apListe = Array.isArray(aksjonspunkterSomSkalLagres)
@@ -52,23 +59,17 @@ const getBekreftAksjonspunktProsessCallback =
       }
 
       if (aksjonspunkterTilLagring.length === 0 || erOverstyringsaksjonspunkter) {
-        return lagreOverstyrteAksjonspunkter(
-          {
-            ...params,
-            overstyrteAksjonspunktDtoer: models,
-          },
-          true,
-        ).then(etterLagringCallback);
+        return lagreOverstyrteAksjonspunkter({
+          ...params,
+          overstyrteAksjonspunktDtoer: models,
+        }).then(etterLagringCallback);
       }
     }
 
-    return lagreAksjonspunkter(
-      {
-        ...params,
-        bekreftedeAksjonspunktDtoer: models,
-      },
-      true,
-    ).then(etterLagringCallback);
+    return lagreAksjonspunkter({
+      ...params,
+      bekreftedeAksjonspunktDtoer: models,
+    }).then(etterLagringCallback);
   };
 
 const finnStatus = (vilkar: Vilkar[], aksjonspunkter: Aksjonspunkt[]) => {
@@ -92,7 +93,7 @@ const finnStatus = (vilkar: Vilkar[], aksjonspunkter: Aksjonspunkt[]) => {
 
 export const useStandardProsessPanelProps = (
   aksjonspunktKoder?: string[],
-  vilkarKoder?: string[],
+  vilkarKoder?: VilkarType[],
   lagringSideEffekter?: (aksjonspunktModeller: any) => () => void,
 ): StandardProsessPanelProps => {
   const [formData, setFormData] = useState();
@@ -106,53 +107,36 @@ export const useStandardProsessPanelProps = (
     }
   }, [value.behandling.versjon]);
 
-  const aksjonspunkterForSteg = useMemo(
-    () =>
-      aksjonspunkter && aksjonspunktKoder ? aksjonspunkter.filter(ap => aksjonspunktKoder.includes(ap.definisjon)) : [],
-    [aksjonspunkter, aksjonspunktKoder],
-  );
+  const aksjonspunkterForSteg =
+    aksjonspunkter && aksjonspunktKoder
+      ? aksjonspunkter.filter(ap => aksjonspunktKoder.some(ak => ak === ap.definisjon))
+      : [];
 
-  const vilkarForSteg = useMemo(
-    () => (vilkår && vilkarKoder ? vilkår.filter(v => vilkarKoder.includes(v.vilkarType)) : []),
-    [vilkår, vilkarKoder],
-  );
+  const vilkarForSteg = vilkår && vilkarKoder ? vilkår.filter(v => vilkarKoder.some(vk => vk === v.vilkarType)) : [];
 
   const isReadOnly = erReadOnly(value.behandling, vilkarForSteg, value.rettigheter, value.hasFetchError);
 
-  const alleMerknaderFraBeslutter = useMemo(
-    () => getAlleMerknaderFraBeslutter(value.behandling, aksjonspunkterForSteg),
-    [value.behandling.versjon, aksjonspunkterForSteg],
-  );
+  const alleMerknaderFraBeslutter = getAlleMerknaderFraBeslutter(value.behandling, aksjonspunkterForSteg);
 
   const harApneAksjonspunkter = aksjonspunkterForSteg.some(
     ap => ap.status === AksjonspunktStatus.OPPRETTET && ap.kanLoses,
   );
 
-  const status = useMemo(
-    () => finnStatus(vilkarForSteg, aksjonspunkterForSteg),
-    [vilkarForSteg, aksjonspunkterForSteg],
-  );
+  const status = finnStatus(vilkarForSteg, aksjonspunkterForSteg);
 
   const readOnlySubmitButton = !aksjonspunkterForSteg.some(ap => ap.kanLoses) || VilkarUtfallType.OPPFYLT === status;
 
-  const standardlagringSideEffekter = useCallback(
-    () => () => {
-      value.oppdaterProsessStegOgFaktaPanelIUrl(DEFAULT_PROSESS_STEG_KODE, DEFAULT_FAKTA_KODE);
-    },
-    [],
-  );
+  const standardlagringSideEffekter = () => () => {
+    value.oppdaterProsessStegOgFaktaPanelIUrl(DEFAULT_PROSESS_STEG_KODE, DEFAULT_FAKTA_KODE);
+  };
 
-  const submitCallback = useMemo(
-    () =>
-      getBekreftAksjonspunktProsessCallback(
-        lagringSideEffekter || standardlagringSideEffekter,
-        value.fagsak,
-        value.behandling,
-        aksjonspunkterForSteg,
-        value.lagreAksjonspunkter,
-        value.lagreOverstyrteAksjonspunkter,
-      ),
-    [value.behandling.versjon, aksjonspunkterForSteg],
+  const submitCallback = getBekreftAksjonspunktProsessCallback(
+    lagringSideEffekter || standardlagringSideEffekter,
+    value.fagsak,
+    value.behandling,
+    aksjonspunkterForSteg,
+    value.lagreAksjonspunkter,
+    value.lagreOverstyrteAksjonspunkter,
   );
 
   return {

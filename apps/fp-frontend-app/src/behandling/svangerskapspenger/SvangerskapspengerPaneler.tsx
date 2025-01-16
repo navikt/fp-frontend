@@ -1,5 +1,3 @@
-import React, { useCallback } from 'react';
-
 import {
   AksessRettigheter,
   ArbeidsgiverOpplysningerPerId,
@@ -62,82 +60,68 @@ const SvangerskapspengerPaneler = ({
   rettigheter,
   hentOgSettBehandling,
 }: Props) => {
-  const faktaPaneler = useCallback(
-    (props: FaktaPanelInitProps) => (
-      <>
-        <SakenFaktaInitPanel {...props} fagsak={fagsak} rettigheter={rettigheter} />
-        <ArbeidOgInntektFaktaInitPanel
-          {...props}
-          saksnummer={fagsak.saksnummer}
-          behandlingUuid={behandling.uuid}
-          rettigheter={rettigheter}
-          arbeidsgiverOpplysningerPerId={arbeidsgivere}
-          hentOgSettBehandling={hentOgSettBehandling}
-        />
-        <InntektsmeldingerFaktaInitPanel
-          fagsak={fagsak}
-          alleBehandlinger={alleBehandlinger}
-          arbeidsgiverOpplysningerPerId={arbeidsgivere}
-          {...props}
-        />
-        <ArbeidsforholdFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-        <YtelserFaktaInitPanel {...props} />
-        <VergeFaktaInitPanel {...props} />
-        <FodselOgTilretteleggingFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-        <MedlemskapsvilkaretFaktaInitPanel {...props} fagsak={fagsak} />
-        <OpptjeningsvilkaretFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-        <PermisjonFaktaInitPanel
-          {...props}
-          saksnummer={fagsak.saksnummer}
-          arbeidsgiverOpplysningerPerId={arbeidsgivere}
-        />
-        <BeregningFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} rettigheter={rettigheter} />
-        <FordelingFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-      </>
-    ),
-    [personoversikt, behandling, rettigheter, fagsak, arbeidsgivere, hentOgSettBehandling],
+  const hentProsessPaneler = (props: ProsessPanelInitProps, ekstraProps: ProsessPanelExtraInitProps) => (
+    <>
+      <OpplysningspliktProsessStegInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+      <InngangsvilkarSvpProsessStegInitPanel
+        {...props}
+        rettigheter={rettigheter}
+        oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+      />
+      <BeregningsgrunnlagProsessStegInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+      <SoknadsfristProsessStegInitPanel {...props} />
+      <FortsattMedlemskapProsessStegInitPanel {...props} />
+      <TilkjentYtelseProsessStegInitPanel
+        {...props}
+        arbeidsgiverOpplysningerPerId={arbeidsgivere}
+        personoversikt={personoversikt}
+      />
+      <SimuleringProsessStegInitPanel
+        {...props}
+        fagsak={fagsak}
+        menyData={ekstraProps.allMenyData}
+        arbeidsgiverOpplysningerPerId={arbeidsgivere}
+      />
+      <VedtakSvpProsessStegInitPanel
+        {...props}
+        fagsak={fagsak}
+        opneSokeside={opneSokeside}
+        toggleOppdatereFagsakContext={toggleOppdateringAvFagsakOgBehandling}
+      />
+    </>
   );
 
-  const prosessPaneler = useCallback(
-    (props: ProsessPanelInitProps, ekstraProps: ProsessPanelExtraInitProps) => (
-      <>
-        <OpplysningspliktProsessStegInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-        <InngangsvilkarSvpProsessStegInitPanel
-          {...props}
-          rettigheter={rettigheter}
-          oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-        />
-        <BeregningsgrunnlagProsessStegInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-        <SoknadsfristProsessStegInitPanel {...props} />
-        <FortsattMedlemskapProsessStegInitPanel {...props} />
-        <TilkjentYtelseProsessStegInitPanel
-          {...props}
-          arbeidsgiverOpplysningerPerId={arbeidsgivere}
-          personoversikt={personoversikt}
-        />
-        <SimuleringProsessStegInitPanel
-          {...props}
-          fagsak={fagsak}
-          menyData={ekstraProps.allMenyData}
-          arbeidsgiverOpplysningerPerId={arbeidsgivere}
-        />
-        <VedtakSvpProsessStegInitPanel
-          {...props}
-          fagsak={fagsak}
-          opneSokeside={opneSokeside}
-          toggleOppdatereFagsakContext={toggleOppdateringAvFagsakOgBehandling}
-        />
-      </>
-    ),
-    [
-      personoversikt,
-      fagsak,
-      opneSokeside,
-      toggleOppdateringAvFagsakOgBehandling,
-      arbeidsgivere,
-      rettigheter,
-      oppdaterProsessStegOgFaktaPanelIUrl,
-    ],
+  const hentFaktaPaneler = (props: FaktaPanelInitProps) => (
+    <>
+      <SakenFaktaInitPanel {...props} fagsak={fagsak} rettigheter={rettigheter} />
+      <ArbeidOgInntektFaktaInitPanel
+        {...props}
+        saksnummer={fagsak.saksnummer}
+        behandlingUuid={behandling.uuid}
+        rettigheter={rettigheter}
+        arbeidsgiverOpplysningerPerId={arbeidsgivere}
+        hentOgSettBehandling={hentOgSettBehandling}
+      />
+      <InntektsmeldingerFaktaInitPanel
+        fagsak={fagsak}
+        alleBehandlinger={alleBehandlinger}
+        arbeidsgiverOpplysningerPerId={arbeidsgivere}
+        {...props}
+      />
+      <ArbeidsforholdFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+      <YtelserFaktaInitPanel {...props} />
+      <VergeFaktaInitPanel {...props} />
+      <FodselOgTilretteleggingFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+      <MedlemskapsvilkaretFaktaInitPanel {...props} fagsak={fagsak} />
+      <OpptjeningsvilkaretFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+      <PermisjonFaktaInitPanel
+        {...props}
+        saksnummer={fagsak.saksnummer}
+        arbeidsgiverOpplysningerPerId={arbeidsgivere}
+      />
+      <BeregningFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} rettigheter={rettigheter} />
+      <FordelingFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+    </>
   );
 
   return (
@@ -146,10 +130,9 @@ const SvangerskapspengerPaneler = ({
       valgtProsessSteg={valgtProsessSteg}
       valgtFaktaSteg={valgtFaktaSteg}
       oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-      hentFaktaPaneler={faktaPaneler}
-      hentProsessPaneler={prosessPaneler}
+      hentFaktaPaneler={hentFaktaPaneler}
+      hentProsessPaneler={hentProsessPaneler}
     />
   );
 };
-
 export default SvangerskapspengerPaneler;

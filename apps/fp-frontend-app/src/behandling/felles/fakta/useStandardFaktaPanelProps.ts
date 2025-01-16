@@ -1,9 +1,10 @@
-import { useContext, useEffect, useMemo, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import { isAksjonspunktOpen } from '@navikt/fp-kodeverk';
-import { Behandling, Fagsak,StandardFaktaPanelProps } from '@navikt/fp-types';
+import { Behandling, Fagsak, StandardFaktaPanelProps } from '@navikt/fp-types';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
+import { AksjonspunktArgs, OverstyrteAksjonspunktArgs } from '../../../data/behandlingApi';
 import { getAlleMerknaderFraBeslutter } from '../utils/getAlleMerknaderFraBeslutter';
 import { erReadOnly } from '../utils/readOnlyPanelUtils';
 import { StandardPropsStateContext } from '../utils/standardPropsStateContext';
@@ -16,8 +17,8 @@ const getBekreftAksjonspunktFaktaCallback =
     fagsak: Fagsak,
     behandling: Behandling,
     oppdaterProsessStegOgFaktaPanelIUrl: (prosessPanel?: string, faktanavn?: string) => void,
-    lagreAksjonspunkter: (params: any, keepData?: boolean) => Promise<Behandling | undefined>,
-    lagreOverstyrteAksjonspunkter?: (params: any, keepData?: boolean) => Promise<Behandling | undefined>,
+    lagreAksjonspunkter: (params: AksjonspunktArgs) => Promise<Behandling>,
+    lagreOverstyrteAksjonspunkter: (params: OverstyrteAksjonspunktArgs) => Promise<Behandling>,
     overstyringApCodes?: string[],
   ) =>
   (aksjonspunkter: FaktaAksjonspunkt | FaktaAksjonspunkt[]): Promise<void> => {
@@ -38,23 +39,17 @@ const getBekreftAksjonspunktFaktaCallback =
         throw Error('Det har oppstått en teknisk feil ved lagring av aksjonspunkter. Meld feilen i Porten.');
       }
       if (overstyringApCodes.includes(model[0].kode)) {
-        return lagreOverstyrteAksjonspunkter(
-          {
-            ...params,
-            overstyrteAksjonspunktDtoer: model,
-          },
-          true,
-        ).then(() => oppdaterProsessStegOgFaktaPanelIUrl(DEFAULT_PROSESS_STEG_KODE, DEFAULT_FAKTA_KODE));
+        return lagreOverstyrteAksjonspunkter({
+          ...params,
+          overstyrteAksjonspunktDtoer: model,
+        }).then(() => oppdaterProsessStegOgFaktaPanelIUrl(DEFAULT_PROSESS_STEG_KODE, DEFAULT_FAKTA_KODE));
       }
     }
 
-    return lagreAksjonspunkter(
-      {
-        ...params,
-        bekreftedeAksjonspunktDtoer: model,
-      },
-      true,
-    ).then(() => oppdaterProsessStegOgFaktaPanelIUrl(DEFAULT_PROSESS_STEG_KODE, DEFAULT_FAKTA_KODE));
+    return lagreAksjonspunkter({
+      ...params,
+      bekreftedeAksjonspunktDtoer: model,
+    }).then(() => oppdaterProsessStegOgFaktaPanelIUrl(DEFAULT_PROSESS_STEG_KODE, DEFAULT_FAKTA_KODE));
   };
 
 export const useStandardFaktaPanelProps = (
@@ -72,29 +67,19 @@ export const useStandardFaktaPanelProps = (
 
   const { aksjonspunkt } = value.behandling;
 
-  const aksjonspunkterForSteg = useMemo(
-    () =>
-      aksjonspunkt && aksjonspunktKoder ? aksjonspunkt.filter(ap => aksjonspunktKoder.includes(ap.definisjon)) : [],
-    [aksjonspunkt, aksjonspunktKoder],
-  );
+  const aksjonspunkterForSteg =
+    aksjonspunkt && aksjonspunktKoder ? aksjonspunkt.filter(ap => aksjonspunktKoder.includes(ap.definisjon)) : [];
 
   const readOnly = erReadOnly(value.behandling, [], value.rettigheter, value.hasFetchError);
-  const alleMerknaderFraBeslutter = useMemo(
-    () => getAlleMerknaderFraBeslutter(value.behandling, aksjonspunkterForSteg),
-    [value.behandling.versjon, aksjonspunkterForSteg],
-  );
+  const alleMerknaderFraBeslutter = getAlleMerknaderFraBeslutter(value.behandling, aksjonspunkterForSteg);
 
-  const submitCallback = useMemo(
-    () =>
-      getBekreftAksjonspunktFaktaCallback(
-        value.fagsak,
-        value.behandling,
-        value.oppdaterProsessStegOgFaktaPanelIUrl,
-        value.lagreAksjonspunkter,
-        value.lagreOverstyrteAksjonspunkter,
-        overstyringApCodes,
-      ),
-    [value.behandling.versjon, overstyringApCodes],
+  const submitCallback = getBekreftAksjonspunktFaktaCallback(
+    value.fagsak,
+    value.behandling,
+    value.oppdaterProsessStegOgFaktaPanelIUrl,
+    value.lagreAksjonspunkter,
+    value.lagreOverstyrteAksjonspunkter,
+    overstyringApCodes,
   );
 
   return {
