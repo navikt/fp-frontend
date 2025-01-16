@@ -7,6 +7,7 @@ import {
   FtVilkar,
   ProsessBeregningsgrunnlagAvklaringsbehovCode,
 } from '@navikt/ft-prosess-beregningsgrunnlag';
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 import { useQuery } from '@tanstack/react-query';
 
@@ -109,7 +110,7 @@ export const BeregningsgrunnlagProsessStegInitPanel = ({
 
   const api = useBehandlingApi(props.behandling);
 
-  const { data: beregningsgrunnlag } = useQuery(api.beregningsgrunnlagOptions(props.behandling));
+  const { data: beregningsgrunnlag, isSuccess } = useQuery(api.beregningsgrunnlagOptions(props.behandling));
 
   return (
     <ProsessDefaultInitPanel
@@ -119,14 +120,18 @@ export const BeregningsgrunnlagProsessStegInitPanel = ({
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Beregning' })}
       skalPanelVisesIMeny
     >
-      <BeregningsgrunnlagProsessIndex
-        {...standardPanelProps}
-        kodeverkSamling={standardPanelProps.alleKodeverk}
-        beregningsgrunnlagsvilkar={lagBGVilkar(standardPanelProps.vilkar, beregningsgrunnlag)}
-        beregningsgrunnlagListe={lagFormatertBG(beregningsgrunnlag)}
-        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-        submitCallback={lagModifisertCallback(standardPanelProps.submitCallback)}
-      />
+      {isSuccess ? (
+        <BeregningsgrunnlagProsessIndex
+          {...standardPanelProps}
+          kodeverkSamling={standardPanelProps.alleKodeverk}
+          beregningsgrunnlagsvilkar={lagBGVilkar(standardPanelProps.vilkar, beregningsgrunnlag)}
+          beregningsgrunnlagListe={lagFormatertBG(beregningsgrunnlag)}
+          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+          submitCallback={lagModifisertCallback(standardPanelProps.submitCallback)}
+        />
+      ) : (
+        <LoadingPanel />
+      )}
     </ProsessDefaultInitPanel>
   );
 };

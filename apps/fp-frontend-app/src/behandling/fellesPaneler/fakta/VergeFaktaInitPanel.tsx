@@ -1,5 +1,6 @@
 import { useIntl } from 'react-intl';
 
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
 import { VergeFaktaIndex } from '@navikt/fp-fakta-verge';
@@ -22,7 +23,7 @@ export const VergeFaktaInitPanel = ({ valgtFaktaSteg, behandling, registrerFakta
 
   const skalPanelVisesIMeny = AKSJONSPUNKT_KODER.some(kode => hasAksjonspunkt(kode, behandling.aksjonspunkt));
 
-  const { data: verge } = useQuery(api.vergeOptions(standardPanelProps.behandling, skalPanelVisesIMeny));
+  const { data: verge, isSuccess } = useQuery(api.vergeOptions(standardPanelProps.behandling, skalPanelVisesIMeny));
 
   return (
     <FaktaDefaultInitPanel
@@ -34,7 +35,7 @@ export const VergeFaktaInitPanel = ({ valgtFaktaSteg, behandling, registrerFakta
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Verge' })}
       skalPanelVisesIMeny={skalPanelVisesIMeny}
     >
-      <VergeFaktaIndex verge={verge} {...standardPanelProps} />
+      {isSuccess ? <VergeFaktaIndex verge={verge} {...standardPanelProps} /> : <LoadingPanel />}
     </FaktaDefaultInitPanel>
   );
 };
