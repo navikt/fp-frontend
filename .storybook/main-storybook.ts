@@ -1,4 +1,5 @@
 import type { StorybookConfig } from '@storybook/react-vite';
+import { mergeConfig } from 'vite';
 
 const config: StorybookConfig = {
   stories: ['../src/**/*.stories.@(ts|tsx)'],
@@ -7,11 +8,13 @@ const config: StorybookConfig = {
     name: '@storybook/react-vite',
     options: {},
   },
-  viteFinal: async config => ({
-    ...config,
-    // @ts-expect-error
-    plugins: config.plugins?.filter(p => p?.name !== 'vite:dts'),
-  }),
+  async viteFinal(c) {
+    return mergeConfig(c, {
+      //@ts-expect-error Kvifor eksisterar ikkje name her?
+      plugins: c.plugins?.filter(p => p?.name !== 'vite:dts'),
+    });
+  },
+  staticDirs: ['../../../.storybook/mock'],
 };
 
 export default config;
