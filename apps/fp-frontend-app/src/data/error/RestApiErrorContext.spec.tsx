@@ -21,7 +21,7 @@ const TestErrorMessage = ({ skalFjerne = false }) => {
     <>
       Feilmeldinger:
       {feilmeldinger.map(feil => (
-        <span key={feil.type}>{feil.type}</span>
+        <span key={feil.type}>{feil.type === ErrorType.GENERAL_ERROR ? feil.message : ''}</span>
       ))}
     </>
   );
