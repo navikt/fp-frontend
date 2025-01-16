@@ -1,5 +1,6 @@
 import { useIntl } from 'react-intl';
 
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
@@ -35,7 +36,7 @@ export const SimuleringProsessStegInitPanel = ({
 
   const api = useBehandlingApi(props.behandling);
 
-  const { data: tilbakekrevingValg } = useQuery(api.tilbakekrevingValgOptions(props.behandling));
+  const { data: tilbakekrevingValg, isSuccess } = useQuery(api.tilbakekrevingValgOptions(props.behandling));
   const { data: simuleringResultat } = useQuery(api.simuleringResultatOptions(props.behandling));
 
   const { mutate: forhåndsvis } = useMutation({
@@ -63,13 +64,17 @@ export const SimuleringProsessStegInitPanel = ({
         harLenke(props.behandling, 'SIMULERING_RESULTAT') ? VilkarUtfallType.OPPFYLT : VilkarUtfallType.IKKE_VURDERT
       }
     >
-      <SimuleringProsessIndex
-        tilbakekrevingvalg={tilbakekrevingValg}
-        simuleringResultat={simuleringResultat}
-        previewFptilbakeCallback={forhåndsvis}
-        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-        {...standardPanelProps}
-      />
+      {isSuccess ? (
+        <SimuleringProsessIndex
+          tilbakekrevingvalg={tilbakekrevingValg}
+          simuleringResultat={simuleringResultat}
+          previewFptilbakeCallback={forhåndsvis}
+          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+          {...standardPanelProps}
+        />
+      ) : (
+        <LoadingPanel />
+      )}
     </ProsessDefaultInitPanel>
   );
 };

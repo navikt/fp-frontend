@@ -1,5 +1,6 @@
 import { useIntl } from 'react-intl';
 
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
 import { OpptjeningFaktaIndex } from '@navikt/fp-fakta-opptjening';
@@ -28,7 +29,7 @@ export const OpptjeningsvilkaretFaktaInitPanel = ({
 
   const api = useBehandlingApi(props.behandling);
 
-  const { data: opptjening } = useQuery(api.opptjeningOptions(props.behandling));
+  const { data: opptjening, isSuccess } = useQuery(api.opptjeningOptions(props.behandling));
 
   return (
     <FaktaDefaultInitPanel
@@ -43,11 +44,15 @@ export const OpptjeningsvilkaretFaktaInitPanel = ({
         )
       }
     >
-      <OpptjeningFaktaIndex
-        opptjening={opptjening}
-        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-        {...standardPanelProps}
-      />
+      {isSuccess ? (
+        <OpptjeningFaktaIndex
+          opptjening={opptjening}
+          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+          {...standardPanelProps}
+        />
+      ) : (
+        <LoadingPanel />
+      )}
     </FaktaDefaultInitPanel>
   );
 };

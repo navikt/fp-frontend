@@ -27,7 +27,7 @@ export const MedlemskapInngangsvilkarInitPanel = ({
 
   const api = useBehandlingApi(standardPanelProps.behandling);
 
-  const { data: medlemskap } = useQuery(api.medlemskapOptions(standardPanelProps.behandling));
+  const { data: medlemskap, isSuccess } = useQuery(api.medlemskapOptions(standardPanelProps.behandling));
 
   const harMedlemskapsAksjonspunkt = standardPanelProps.aksjonspunkter.some(
     ap => ap.definisjon === AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET && ap.status !== AksjonspunktStatus.AVBRUTT,
@@ -46,7 +46,7 @@ export const MedlemskapInngangsvilkarInitPanel = ({
       hentInngangsvilkarPanelTekst=""
       renderPanel={({ erOverstyrt, toggleOverstyring }) => (
         <>
-          {!harÅpentMedlemskapAksjonspunkt && (
+          {!harÅpentMedlemskapAksjonspunkt && isSuccess && (
             <OverstyringPanelDef
               aksjonspunkter={standardPanelProps.aksjonspunkter}
               aksjonspunktKode={AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR}

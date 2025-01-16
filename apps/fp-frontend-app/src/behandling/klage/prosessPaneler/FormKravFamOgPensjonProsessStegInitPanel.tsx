@@ -1,5 +1,6 @@
 import { useIntl } from 'react-intl';
 
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { AksjonspunktKode, BehandlingStatus, BehandlingType, isKlageAvvist } from '@navikt/fp-kodeverk';
@@ -37,7 +38,7 @@ export const FormKravFamOgPensjonProsessStegInitPanel = ({
 
   const api = useBehandlingApi(props.behandling);
 
-  const { data: klageVurdering } = useQuery(api.klage.klageVurderingOptions(props.behandling));
+  const { data: klageVurdering, isSuccess } = useQuery(api.klage.klageVurderingOptions(props.behandling));
 
   const { mutate: lagreFormkravVurdering } = useMutation({
     mutationFn: (values: FormkravMellomlagretDataType) => api.klage.mellomlagreFormkravVurdering(values),
@@ -52,12 +53,16 @@ export const FormKravFamOgPensjonProsessStegInitPanel = ({
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.FormkravKlageNFP' })}
       skalPanelVisesIMeny
     >
-      <FormkravProsessIndex
-        klageVurdering={klageVurdering}
-        avsluttedeBehandlinger={avsluttedeBehandlinger}
-        lagreFormkravVurdering={lagreFormkravVurdering}
-        {...standardPanelProps}
-      />
+      {isSuccess ? (
+        <FormkravProsessIndex
+          klageVurdering={klageVurdering}
+          avsluttedeBehandlinger={avsluttedeBehandlinger}
+          lagreFormkravVurdering={lagreFormkravVurdering}
+          {...standardPanelProps}
+        />
+      ) : (
+        <LoadingPanel />
+      )}
     </ProsessDefaultInitPanel>
   );
 };
