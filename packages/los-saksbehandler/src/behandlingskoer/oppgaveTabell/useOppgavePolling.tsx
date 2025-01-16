@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 
 import { useMutation, useQuery } from '@tanstack/react-query';
 
+import { ApiPollingStatus } from '@navikt/fp-konstanter';
 import { Oppgave } from '@navikt/fp-los-felles';
-import { ApiPollingStatus, useRestApiErrorDispatcher } from '@navikt/fp-rest-api';
 
 import { doGetRequest, getOppgaverTilBehandling, reserverteOppgaverOptions } from '../../data/fplosSaksbehandlerApi';
 
@@ -70,7 +70,6 @@ const hentOppgaver = async (valgtSakslisteId: number, getSakslisteId: () => numb
 };
 
 export const useOppgavePolling = (valgtSakslisteId: number) => {
-  const { addErrorMessage } = useRestApiErrorDispatcher();
   const [oppgaverTilBehandling, setOppgaverTilBehandling] = useState<Oppgave[]>(EMPTY_ARRAY);
 
   const idRef = useRef(valgtSakslisteId);
@@ -84,11 +83,6 @@ export const useOppgavePolling = (valgtSakslisteId: number) => {
   } = useMutation({
     mutationFn: (values: { oppgaveIder?: string }) =>
       hentOppgaver(valgtSakslisteId, getSakslisteId, values.oppgaveIder),
-    onError: error => {
-      if (error.message !== MAX_POLLING_REACHED) {
-        addErrorMessage({ type: 'REQUEST_ERROR', feilmelding: error?.message });
-      }
-    },
   });
 
   const { data: reserverteOppgaver = EMPTY_ARRAY, refetch } = useQuery(reserverteOppgaverOptions());

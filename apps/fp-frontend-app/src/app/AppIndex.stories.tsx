@@ -4,10 +4,11 @@ import { MemoryRouter } from 'react-router-dom';
 import { Meta, StoryObj } from '@storybook/react';
 import { http, HttpResponse } from 'msw';
 
-import { ApiPollingStatus, RestApiErrorProvider } from '@navikt/fp-rest-api';
+import { ApiPollingStatus } from '@navikt/fp-konstanter';
 import { alleKodeverk, alleKodeverkTilbakekreving } from '@navikt/fp-storybook-utils';
 
 import { BehandlingRel, BehandlingUrl } from '../data/behandlingApi';
+import { RestApiErrorProvider } from '../data/error/RestApiErrorContext';
 import { FagsakRel, FagsakUrl, wrapUrl } from '../data/fagsakApi';
 import { notEmpty } from '../data/notEmpty';
 import { AppIndexWrapper } from './AppIndex';

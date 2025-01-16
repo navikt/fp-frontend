@@ -8,7 +8,6 @@ import { useQuery } from '@tanstack/react-query';
 import { Location } from 'history';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
-import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api';
 import { BehandlingVelgerSakIndex } from '@navikt/fp-sak-behandling-velger';
 import { FagsakProfilSakIndex } from '@navikt/fp-sak-fagsak-profil';
 import { UkjentAdresseMeldingIndex } from '@navikt/fp-sak-ukjent-adresse';
@@ -17,6 +16,7 @@ import { Behandling, BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
 import { ErrorBoundary } from '../app/ErrorBoundary';
 import { getLocationWithDefaultProsessStegAndFakta, pathToBehandling, pathToBehandlinger } from '../app/paths';
 import { BehandlingMenuIndex } from '../behandlingmenu/BehandlingMenuIndex';
+import { useRestApiErrorDispatcher } from '../data/error/RestApiErrorContext';
 import { initFetchOptions } from '../data/fagsakApi';
 import { notEmpty } from '../data/notEmpty';
 import { useFpSakKodeverkMedNavn, useGetKodeverkFn } from '../data/useKodeverk';

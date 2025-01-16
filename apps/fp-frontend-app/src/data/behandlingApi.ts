@@ -392,6 +392,7 @@ const getBeregningsresultatEngangsstønadOptions = (links: ApiLink[]) => (behand
   queryOptions({
     queryKey: [BehandlingRel.BEREGNINGRESULTAT_ENGANGSSTONAD, behandling.uuid, behandling.versjon],
     queryFn: () => kyExtended.get(getUrlFromRel('BEREGNINGRESULTAT_ENGANGSSTONAD', links)).json<BeregningsresultatEs>(),
+    enabled: harLenke(behandling, 'BEREGNINGRESULTAT_ENGANGSSTONAD'),
     staleTime: Infinity,
   });
 

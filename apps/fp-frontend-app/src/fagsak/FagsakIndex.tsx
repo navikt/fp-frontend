@@ -6,7 +6,6 @@ import { DataFetchPendingModal, LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { Location } from 'history';
 
 import { BehandlingType, RelasjonsRolleType } from '@navikt/fp-kodeverk';
-import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 import { VisittkortSakIndex } from '@navikt/fp-sak-visittkort';
 import { AnnenPartBehandling, Behandling } from '@navikt/fp-types';
 
@@ -21,6 +20,7 @@ import {
 import { useTrackRouteParam } from '../app/useTrackRouteParam';
 import { BehandlingerIndex } from '../behandling/BehandlingerIndex';
 import { BehandlingSupportIndex } from '../behandlingsupport/BehandlingSupportIndex';
+import { useRestApiErrorDispatcher } from '../data/error/RestApiErrorContext';
 import { useRequestPendingContext } from '../data/polling/RequestPendingContext';
 import { useHentBehandling } from '../data/polling/useHentBehandling';
 import { FagsakProfileIndex } from '../fagsakprofile/FagsakProfileIndex';

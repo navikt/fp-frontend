@@ -3,12 +3,12 @@ import { Suspense, useEffect } from 'react';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
-import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api';
 import { Behandling } from '@navikt/fp-types';
 
 import { ErrorBoundary } from '../app/ErrorBoundary';
 import { useTrackRouteParam } from '../app/useTrackRouteParam';
 import { getAccessRights } from '../app/util/access';
+import { useRestApiErrorDispatcher } from '../data/error/RestApiErrorContext';
 import { initFetchOptions } from '../data/fagsakApi';
 import { notEmpty } from '../data/notEmpty';
 import { FagsakData } from '../fagsak/FagsakData';

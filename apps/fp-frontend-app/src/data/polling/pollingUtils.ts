@@ -1,9 +1,10 @@
 import { HTTPError, KyResponse } from 'ky';
 
-import { ApiPollingStatus, useRestApiErrorDispatcher } from '@navikt/fp-rest-api';
+import { ApiPollingStatus } from '@navikt/fp-konstanter';
 import { Behandling } from '@navikt/fp-types';
 
-import { ErrorEventType } from '../../app/components/feilhandtering/errorEventType';
+import { ErrorType } from '../error/errorType';
+import { useRestApiErrorDispatcher } from '../error/RestApiErrorContext';
 import { doGetRequest } from '../fagsakApi';
 
 //TODO (TOR) Vurder å bruke Websocket i staden for denne pollemekanismen.
@@ -45,6 +46,7 @@ export const doPolling = async <T>(response: KyResponse<T>, setPollingPending: P
       if (error instanceof HTTPError) {
         const data = await error.response.json();
         if (isPollingDelayedOrHalted(data)) {
+          setPollingPending(false);
           //Ikke vent på at behandling blir oppdatert, men hent gammel versjon (som da er read only)
           return await doGetRequest<Behandling>(data.location);
         }
@@ -99,14 +101,21 @@ export const useTaskStatusChecker = (setBehandling: (behandling: Behandling) => 
   const { addErrorMessage } = useRestApiErrorDispatcher();
 
   const onBehandlingSuccess = (behandling: Behandling) => {
-    if (
-      behandling.taskStatus?.status === ApiPollingStatus.HALTED ||
-      behandling.taskStatus?.status === ApiPollingStatus.DELAYED
-    ) {
+    if (behandling.taskStatus?.status === ApiPollingStatus.HALTED) {
+      const { message, status } = behandling.taskStatus;
       addErrorMessage({
-        type: ErrorEventType.POLLING_HALTED_OR_DELAYED,
-        message: behandling.taskStatus.message,
-        status: behandling.taskStatus.status,
+        type: ErrorType.POLLING_HALTED_OR_DELAYED,
+        message,
+        status,
+      });
+    }
+    if (behandling.taskStatus?.status === ApiPollingStatus.DELAYED) {
+      const { message, status, eta } = behandling.taskStatus;
+      addErrorMessage({
+        type: ErrorType.POLLING_HALTED_OR_DELAYED,
+        message,
+        status,
+        eta: eta ?? '',
       });
     }
 

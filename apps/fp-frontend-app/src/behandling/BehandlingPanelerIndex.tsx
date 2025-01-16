@@ -7,13 +7,13 @@ import { useQuery } from '@tanstack/react-query';
 import { Location } from 'history';
 
 import { BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
-import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api';
 import { ErrorPage } from '@navikt/fp-sak-infosider';
 import { AksessRettigheter, Behandling, BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
 
 import { ErrorBoundary } from '../app/ErrorBoundary';
 import { getFaktaLocation, getLocationWithDefaultProsessStegAndFakta, getProsessStegLocation } from '../app/paths';
 import { useBehandlingApi } from '../data/behandlingApi';
+import { useRestApiErrorDispatcher } from '../data/error/RestApiErrorContext';
 import { useFagsakApi } from '../data/fagsakApi';
 import { useBehandlingPollingOperasjoner } from '../data/polling/useBehandlingPollingOperasjoner';
 import { BehandlingPaVent } from './felles/modaler/paVent/BehandlingPaVent';

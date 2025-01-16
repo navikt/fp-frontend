@@ -4,9 +4,8 @@ import { useIntl } from 'react-intl';
 import { Heading } from '@navikt/ds-react';
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
-import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api';
-
 import { ErrorBoundary } from '../app/ErrorBoundary';
+import { useRestApiErrorDispatcher } from '../data/error/RestApiErrorContext';
 
 import styles from './supportHeader.module.css';
 

@@ -7,8 +7,8 @@ import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 
 import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { ApiPollingStatus } from '@navikt/fp-konstanter';
 import { Oppgave } from '@navikt/fp-los-felles';
-import { ApiPollingStatus } from '@navikt/fp-rest-api';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { losKodeverkOptions, LosUrl } from '../../data/fplosSaksbehandlerApi';

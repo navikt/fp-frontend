@@ -1,5 +1,5 @@
-import FaktaPanelCode from './faktaPanelCodes';
-import ProsessStegCode from './prosessStegCodes';
+import { FaktaPanelCode } from './faktaPanelCodes';
+import { ProsessStegCode } from './prosessStegCodes';
 
 type SkjermlenkeData = Record<string, { kode: string; faktaNavn: string; punktNavn: string }>;
 
@@ -264,6 +264,4 @@ export const skjermlenkeCodesFpTilbake: SkjermlenkeData = {
   },
 };
 
-const skjermlenkeCodes = { ...skjermlenkeCodesFpsak, ...skjermlenkeCodesFpTilbake };
-
-export default skjermlenkeCodes;
+export const skjermlenkeCodes = { ...skjermlenkeCodesFpsak, ...skjermlenkeCodesFpTilbake };
