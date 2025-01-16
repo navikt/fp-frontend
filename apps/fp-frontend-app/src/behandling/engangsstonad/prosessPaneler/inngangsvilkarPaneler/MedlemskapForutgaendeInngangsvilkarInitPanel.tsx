@@ -30,7 +30,7 @@ export const MedlemskapForutgaendeInngangsvilkarInitPanel = ({
 
   const api = useBehandlingApi(standardPanelProps.behandling);
 
-  const { data: medlemskap, isSuccess } = useQuery(api.medlemskapOptions(standardPanelProps.behandling));
+  const { data: medlemskap, isFetching } = useQuery(api.medlemskapOptions(standardPanelProps.behandling));
 
   const harMedlemskapsAksjonspunkt = standardPanelProps.aksjonspunkter.some(
     ap =>
@@ -53,7 +53,7 @@ export const MedlemskapForutgaendeInngangsvilkarInitPanel = ({
       hentInngangsvilkarPanelTekst=""
       renderPanel={({ erOverstyrt, toggleOverstyring }) => (
         <>
-          {!harÅpentMedlemskapAksjonspunkt && isSuccess && (
+          {!harÅpentMedlemskapAksjonspunkt && !isFetching && (
             <OverstyringPanelDef
               aksjonspunkter={standardPanelProps.aksjonspunkter}
               aksjonspunktKode={AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE}

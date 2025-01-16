@@ -38,7 +38,7 @@ export const FormKravKlageInstansProsessStegInitPanel = ({
 
   const api = useBehandlingApi(props.behandling);
 
-  const { data: klageVurdering, isSuccess } = useQuery(api.klage.klageVurderingOptions(props.behandling));
+  const { data: klageVurdering, isFetching } = useQuery(api.klage.klageVurderingOptions(props.behandling));
 
   const { mutate: lagreFormkravVurdering } = useMutation({
     mutationFn: (values: FormkravMellomlagretDataType) => api.klage.mellomlagreFormkravVurdering(values),
@@ -53,7 +53,7 @@ export const FormKravKlageInstansProsessStegInitPanel = ({
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.FormkravKlageKA' })}
       skalPanelVisesIMeny
     >
-      {isSuccess ? (
+      {!isFetching ? (
         <FormkravProsessIndex
           klageVurdering={klageVurdering}
           avsluttedeBehandlinger={avsluttedeBehandlinger}

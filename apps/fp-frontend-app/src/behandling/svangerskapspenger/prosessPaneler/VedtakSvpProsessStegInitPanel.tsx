@@ -71,23 +71,23 @@ export const VedtakSvpProsessStegInitPanel = ({
 
   const api = useBehandlingApi(props.behandling);
 
-  const { data: beregningsresultatDagytelse, isSuccess: isBdSuccess } = useQuery(
+  const { data: beregningsresultatDagytelse, isFetching: isBdFetching } = useQuery(
     api.beregningsresultatDagytelseOptions(props.behandling),
   );
-  const { data: tilbakekrevingValg, isSuccess: isTvSuccess } = useQuery(
+  const { data: tilbakekrevingValg, isFetching: isTvFetching } = useQuery(
     api.tilbakekrevingValgOptions(props.behandling),
   );
-  const { data: beregningsgrunnlag, isSuccess: isBgSuccess } = useQuery(
+  const { data: beregningsgrunnlag, isFetching: isBgFetching } = useQuery(
     api.beregningsgrunnlagOptions(props.behandling),
   );
-  const { data: simuleringResultat, isSuccess: isSrSuccess } = useQuery(
+  const { data: simuleringResultat, isFetching: isSrFetching } = useQuery(
     api.simuleringResultatOptions(props.behandling),
   );
-  const { data: beregingDagytelseOriginalBehandling, isSuccess: isBdobSuccess } = useQuery(
+  const { data: beregingDagytelseOriginalBehandling, isFetching: isBdobFetching } = useQuery(
     api.beregningDagytelseOriginalBehandlingOptions(props.behandling),
   );
 
-  const isSuccess = isBdSuccess && isTvSuccess && isBgSuccess && isSrSuccess && isBdobSuccess;
+  const isNotFetching = !isBdFetching && !isTvFetching && !isBgFetching && !isSrFetching && !isBdobFetching;
 
   const { mutate: forhåndsvis } = useMutation({
     mutationFn: (values: ForhåndsvisMeldingParams) =>
@@ -133,7 +133,7 @@ export const VedtakSvpProsessStegInitPanel = ({
           lukkModal={lukkFatterModal}
           tekst={intl.formatMessage({ id: 'FatterVedtakStatusModal.SendtBeslutter' })}
         />
-        {isSuccess ? (
+        {isNotFetching ? (
           <VedtakProsessIndex
             ytelseTypeKode={FagsakYtelseType.SVANGERSKAPSPENGER}
             previewCallback={forhåndsvis}

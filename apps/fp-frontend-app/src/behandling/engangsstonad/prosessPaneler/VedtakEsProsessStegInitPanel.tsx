@@ -71,20 +71,20 @@ export const VedtakEsProsessStegInitPanel = ({
 
   const api = useBehandlingApi(props.behandling);
 
-  const { data: beregningDagytelseOriginalBehandling, isSuccess: isBogSuccess } = useQuery(
+  const { data: beregningDagytelseOriginalBehandling, isFetching: isBogFetching } = useQuery(
     api.beregningDagytelseOriginalBehandlingOptions(props.behandling),
   );
-  const { data: beregningsresultatEngangsstønad, isSuccess: isBeSuccess } = useQuery(
+  const { data: beregningsresultatEngangsstønad, isFetching: isBeFetching } = useQuery(
     api.es.beregningsresultatEngangsstønadOptions(props.behandling),
   );
-  const { data: simuleringResultat, isSuccess: isSrSuccess } = useQuery(
+  const { data: simuleringResultat, isFetching: isSrFetching } = useQuery(
     api.simuleringResultatOptions(props.behandling),
   );
-  const { data: tilbakekrevingValg, isSuccess: isTvSuccess } = useQuery(
+  const { data: tilbakekrevingValg, isFetching: isTvFetching } = useQuery(
     api.tilbakekrevingValgOptions(props.behandling),
   );
 
-  const isSuccess = isBogSuccess && isBeSuccess && isSrSuccess && isTvSuccess;
+  const isNotFetching = !isBogFetching && !isBeFetching && !isSrFetching && !isTvFetching;
 
   const { mutate: forhåndsvis } = useMutation({
     mutationFn: (values: ForhåndsvisMeldingParams) =>
@@ -132,7 +132,7 @@ export const VedtakEsProsessStegInitPanel = ({
           lukkModal={lukkFatterModal}
           tekst={intl.formatMessage({ id: 'FatterVedtakStatusModal.SendtBeslutter' })}
         />
-        {isSuccess ? (
+        {isNotFetching ? (
           <VedtakProsessIndex
             ytelseTypeKode={FagsakYtelseType.ENGANGSSTONAD}
             previewCallback={forhåndsvis}
