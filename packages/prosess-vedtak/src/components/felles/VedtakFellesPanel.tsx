@@ -15,7 +15,7 @@ import {
   isOpphor,
   KonsekvensForYtelsen,
 } from '@navikt/fp-kodeverk';
-import { ApiPollingStatus } from '@navikt/fp-rest-api';
+import { ApiPollingStatus } from '@navikt/fp-konstanter';
 import { Aksjonspunkt, Behandling, Behandlingsresultat } from '@navikt/fp-types';
 
 import ManueltVedtaksbrevPanel from './ManueltVedtaksbrevPanel';

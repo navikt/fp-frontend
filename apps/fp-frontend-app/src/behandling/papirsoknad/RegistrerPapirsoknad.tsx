@@ -5,8 +5,8 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { ApiPollingStatus } from '@navikt/fp-konstanter';
 import { RegistrerPapirsoknadPanel, SoknadRegistrertModal } from '@navikt/fp-papirsoknad';
-import { ApiPollingStatus } from '@navikt/fp-rest-api';
 import { AksessRettigheter, Aksjonspunkt, Behandling, Fagsak } from '@navikt/fp-types';
 
 import { AksjonspunktArgs } from '../../data/behandlingApi';
