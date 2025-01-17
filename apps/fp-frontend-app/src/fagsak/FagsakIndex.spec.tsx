@@ -12,9 +12,9 @@ describe('FagsakIndex', () => {
     render(<Default />);
 
     expect(await screen.findByText('Foreldrepenger')).toBeInTheDocument();
-    expect(screen.getByText('352018689 - Under behandling')).toBeInTheDocument();
+    expect(await screen.findByText('352018689 - Under behandling')).toBeInTheDocument();
 
-    expect(screen.getByText('Behandlingsmeny')).toBeInTheDocument();
+    expect(await screen.findByText('Behandlingsmeny')).toBeInTheDocument();
 
     expect(screen.getByText('Revurdering')).toBeInTheDocument();
     expect(screen.getByText('Behandling utredes')).toBeInTheDocument();

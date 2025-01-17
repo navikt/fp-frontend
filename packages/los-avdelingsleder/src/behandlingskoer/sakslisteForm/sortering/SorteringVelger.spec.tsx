@@ -16,35 +16,35 @@ const {
 describe('<SorteringVelger>', () => {
   it('skal vise tre sorteringsvalg når mange behandlingstyper er valgt', async () => {
     await applyRequestHandlers(SorteringsvelgerNårMangeBehandlingstyperErValgt.parameters.msw);
-    const { getByLabelText } = render(<SorteringsvelgerNårMangeBehandlingstyperErValgt />);
+    render(<SorteringsvelgerNårMangeBehandlingstyperErValgt />);
     expect(await screen.findByText('Dato for behandlingsfrist')).toBeInTheDocument();
-    expect(getByLabelText('Dato for behandlingsfrist')).toBeChecked();
-    expect(getByLabelText('Dato for opprettelse av behandling')).not.toBeChecked();
-    expect(getByLabelText('Dato for første stønadsdag')).not.toBeChecked();
+    expect(await screen.findByLabelText('Dato for behandlingsfrist')).toBeChecked();
+    expect(screen.getByLabelText('Dato for opprettelse av behandling')).not.toBeChecked();
+    expect(screen.getByLabelText('Dato for første stønadsdag')).not.toBeChecked();
     expect(screen.queryByText('Feilutbetalt beløp')).not.toBeInTheDocument();
     expect(screen.queryByText('Dato for første feilutbetaling')).not.toBeInTheDocument();
   });
 
   it('skal vise datovelger der dynamisk periode ikke er valgt', async () => {
     await applyRequestHandlers(SorteringsvelgerNårMangeBehandlingstyperErValgt.parameters.msw);
-    const { getByLabelText } = render(<SorteringsvelgerNårMangeBehandlingstyperErValgt />);
+    render(<SorteringsvelgerNårMangeBehandlingstyperErValgt />);
     expect(await screen.findByText('Dato for behandlingsfrist')).toBeInTheDocument();
-    expect(screen.getByText('Ta kun med behandlinger med dato')).toBeInTheDocument();
+    expect(await screen.findByText('Ta kun med behandlinger med dato')).toBeInTheDocument();
     expect(screen.getByText('F.o.m.')).toBeInTheDocument();
     expect(screen.getByText('T.o.m.')).toBeInTheDocument();
 
-    expect(getByLabelText('Dynamisk periode')).not.toBeChecked();
+    expect(screen.getByLabelText('Dynamisk periode')).not.toBeChecked();
   });
 
   it('skal vise datovelger der dynamisk periode er valgt', async () => {
     await applyRequestHandlers(SorteringsvelgerNårDynamiskPeriodeErValgt.parameters.msw);
-    const { getByLabelText } = render(<SorteringsvelgerNårDynamiskPeriodeErValgt />);
+    render(<SorteringsvelgerNårDynamiskPeriodeErValgt />);
     expect(await screen.findByText('Dato for behandlingsfrist')).toBeInTheDocument();
-    expect(screen.getByText('Ta kun med behandlinger med dato')).toBeInTheDocument();
+    expect(await screen.findByText('Ta kun med behandlinger med dato')).toBeInTheDocument();
     expect(screen.getByText('F.o.m.')).toBeInTheDocument();
     expect(screen.getByText('T.o.m.')).toBeInTheDocument();
 
-    expect(getByLabelText('Dynamisk periode')).toBeChecked();
+    expect(screen.getByLabelText('Dynamisk periode')).toBeChecked();
   });
 
   it('skal vise vis beløpvelger når Feilutbetalt beløp er valgt', async () => {
@@ -91,12 +91,12 @@ describe('<SorteringVelger>', () => {
 
   it('skal vise fem sorteringsvalg når kun tilbakekreving er valgt', async () => {
     await applyRequestHandlers(SorteringsvelgerNårKunTilbakekrevingErValgt.parameters.msw);
-    const { getByLabelText } = render(<SorteringsvelgerNårKunTilbakekrevingErValgt />);
+    render(<SorteringsvelgerNårKunTilbakekrevingErValgt />);
     expect(await screen.findByText('Dato for behandlingsfrist')).toBeInTheDocument();
-    expect(getByLabelText('Dato for behandlingsfrist')).toBeChecked();
-    expect(getByLabelText('Dato for opprettelse av behandling')).not.toBeChecked();
-    expect(getByLabelText('Dato for første stønadsdag')).not.toBeChecked();
-    expect(getByLabelText('Feilutbetalt beløp')).not.toBeChecked();
-    expect(getByLabelText('Dato for første feilutbetaling')).not.toBeChecked();
+    expect(await screen.findByLabelText('Dato for behandlingsfrist')).toBeChecked();
+    expect(screen.getByLabelText('Dato for opprettelse av behandling')).not.toBeChecked();
+    expect(screen.getByLabelText('Dato for første stønadsdag')).not.toBeChecked();
+    expect(screen.getByLabelText('Feilutbetalt beløp')).not.toBeChecked();
+    expect(screen.getByLabelText('Dato for første feilutbetaling')).not.toBeChecked();
   });
 });
