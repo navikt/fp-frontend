@@ -99,14 +99,14 @@ type TextValues = {
   br: JSX.Element;
 };
 
-const getNavn = (values: TextValues, intl: IntlShape): string => {
+const getNavn = (values: TextValues, intl: IntlShape) => {
   if (!values.fomDato) {
-    return intl.formatMessage({ id: 'SakslisteVelgerForm.SorteringsinfoTom' }, values) as string;
+    return intl.formatMessage({ id: 'SakslisteVelgerForm.SorteringsinfoTom' }, values);
   }
   if (!values.tomDato) {
-    return intl.formatMessage({ id: 'SakslisteVelgerForm.SorteringsinfoFom' }, values) as string;
+    return intl.formatMessage({ id: 'SakslisteVelgerForm.SorteringsinfoFom' }, values);
   }
-  return intl.formatMessage({ id: 'SakslisteVelgerForm.Sorteringsinfo' }, values) as string;
+  return intl.formatMessage({ id: 'SakslisteVelgerForm.Sorteringsinfo' }, values);
 };
 
 const getSorteringsnavnForPeriode = (
@@ -115,7 +115,7 @@ const getSorteringsnavnForPeriode = (
   sorteringType: string,
   fomDato?: string,
   tomDato?: string,
-): string => {
+) => {
   if (!fomDato && !tomDato) {
     return køSorteringTyper.find(kst => kst.kode === sorteringType)?.navn ?? '';
   }
@@ -135,7 +135,7 @@ const getSorteringsnavnForDynamiskPeriode = (
   sorteringType: string,
   fra?: number,
   til?: number,
-): string => {
+) => {
   if (!fra && !til) {
     return køSorteringTyper.find(kst => kst.kode === sorteringType)?.navn ?? '';
   }
@@ -148,7 +148,7 @@ const getSorteringsnavnForDynamiskPeriode = (
   return getNavn(values, intl);
 };
 
-const getSorteringsnavn = (intl: IntlShape, køSorteringTyper: KodeverkMedNavn[], saksliste?: Saksliste): string => {
+const getSorteringsnavn = (intl: IntlShape, køSorteringTyper: KodeverkMedNavn[], saksliste?: Saksliste) => {
   if (!saksliste?.sortering) {
     return '';
   }

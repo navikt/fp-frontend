@@ -14,7 +14,7 @@ describe('<ReservasjonerTabell>', () => {
     render(<ViseAtIngenReservasjonerBleFunnet />);
 
     expect(await screen.findByText('Reservasjoner for avdelingen')).toBeInTheDocument();
-    expect(screen.getByText('Ingen reservasjoner funnet')).toBeInTheDocument();
+    expect(await screen.findByText('Ingen reservasjoner funnet')).toBeInTheDocument();
   });
 
   it('skal vise to reservasjoner i tabell', async () => {

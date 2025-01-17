@@ -11,12 +11,14 @@ describe('Dekorator', () => {
     await applyRequestHandlers(Default.parameters.msw);
     render(<Default />);
     expect(await screen.findByText('Svangerskap, fødsel og adopsjon')).toBeInTheDocument();
+    expect(await screen.findByText('Sara Saksbehandler')).toBeInTheDocument();
   });
 
   it('skal vise feilmeldinger som ligger i URL', async () => {
     await applyRequestHandlers(VisFeilmeldingSomLiggIUrl.parameters.msw);
     render(<VisFeilmeldingSomLiggIUrl />);
 
+    expect(await screen.findByText('Svangerskap, fødsel og adopsjon')).toBeInTheDocument();
     expect(await screen.findByText('Dette er en feilmelding')).toBeInTheDocument();
   });
 
@@ -24,6 +26,7 @@ describe('Dekorator', () => {
     await applyRequestHandlers(VisTekniskFeilmelding.parameters.msw);
     render(<VisTekniskFeilmelding />);
 
+    expect(await screen.findByText('Svangerskap, fødsel og adopsjon')).toBeInTheDocument();
     expect(await screen.findByText('test is undefined')).toBeInTheDocument();
   });
 
@@ -32,6 +35,7 @@ describe('Dekorator', () => {
     render(<SkjulFeilmelding />);
 
     expect(await screen.findByText('Svangerskap, fødsel og adopsjon')).toBeInTheDocument();
+    expect(await screen.findByText('Sara Saksbehandler')).toBeInTheDocument();
     expect(screen.queryByText('test is undefined')).not.toBeInTheDocument();
   });
 });

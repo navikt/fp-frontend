@@ -10,6 +10,7 @@ describe('HistorikkIndex', () => {
   it('skal vise historikk-panel', async () => {
     await applyRequestHandlers(Default.parameters.msw);
     render(<Default />);
+    expect(await screen.findByText('Historikk')).toBeInTheDocument();
     expect(await screen.findByText('Filtrer på behandling')).toBeInTheDocument();
   });
 });

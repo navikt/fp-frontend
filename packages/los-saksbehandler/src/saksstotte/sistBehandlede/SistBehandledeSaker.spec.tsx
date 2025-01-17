@@ -21,6 +21,6 @@ describe('<SistBehandledeSaker>', () => {
     await applyRequestHandlers(IngenBehandlinger.parameters.msw);
     render(<IngenBehandlinger />);
     expect(await screen.findByText('Dine siste reserverte behandlinger')).toBeInTheDocument();
-    expect(screen.getByText('Ingen behandlinger')).toBeInTheDocument();
+    expect(await screen.findByText('Ingen behandlinger')).toBeInTheDocument();
   });
 });
