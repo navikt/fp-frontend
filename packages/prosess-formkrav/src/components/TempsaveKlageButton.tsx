@@ -95,9 +95,9 @@ const TempsaveKlageButton: FunctionComponent<OwnProps> = ({
   behandlingUuid,
   saveKlage,
   avsluttedeBehandlinger,
-  spinner,
+  spinner = false,
   aksjonspunktCode,
-  readOnly,
+  readOnly = false,
   handleSubmit,
 }) => {
   if (!readOnly) {
@@ -116,11 +116,6 @@ const TempsaveKlageButton: FunctionComponent<OwnProps> = ({
     );
   }
   return null;
-};
-
-TempsaveKlageButton.defaultProps = {
-  spinner: false,
-  readOnly: false,
 };
 
 export default TempsaveKlageButton;

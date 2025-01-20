@@ -1,9 +1,10 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
-import { StoryFn } from '@storybook/react';
+import { ReactRenderer } from '@storybook/react';
+import type { DecoratorFunction } from '@storybook/types';
 
-export const withRouter = (Story: StoryFn) => (
+export const withRouter: DecoratorFunction<ReactRenderer> = Story => (
   <BrowserRouter basename="/">
     <Story />
   </BrowserRouter>

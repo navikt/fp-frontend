@@ -12,7 +12,7 @@ interface OwnProps {
   readOnly?: boolean;
 }
 
-const FritekstKlageBrevTextField: FunctionComponent<OwnProps> = ({ sprakkode, readOnly }) => (
+const FritekstKlageBrevTextField: FunctionComponent<OwnProps> = ({ sprakkode, readOnly = true }) => (
   <div className={styles.fritekstTilBrevTextArea}>
     <TextAreaField
       name="fritekstTilBrev"
@@ -30,9 +30,5 @@ const FritekstKlageBrevTextField: FunctionComponent<OwnProps> = ({ sprakkode, re
     />
   </div>
 );
-
-FritekstKlageBrevTextField.defaultProps = {
-  readOnly: true,
-};
 
 export default FritekstKlageBrevTextField;

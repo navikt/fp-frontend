@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { BodyShort } from '@navikt/ds-react';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import { FaktaGruppe,VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FamilieHendelse } from '@navikt/fp-types';
@@ -34,7 +34,7 @@ interface StaticFunctions {
  */
 const EktefelleFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly,
-  ektefellesBarnIsEdited,
+  ektefellesBarnIsEdited = false,
   alleMerknaderFraBeslutter,
 }) => {
   const intl = useIntl();
@@ -71,10 +71,6 @@ const EktefelleFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
       </div>
     </FaktaGruppe>
   );
-};
-
-EktefelleFaktaForm.defaultProps = {
-  ektefellesBarnIsEdited: false,
 };
 
 EktefelleFaktaForm.buildInitialValues = (familiehendelse: FamilieHendelse): FormValues => ({

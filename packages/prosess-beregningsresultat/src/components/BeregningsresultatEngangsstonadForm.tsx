@@ -61,7 +61,11 @@ const BeregningsresultatEngangsstonadForm: FunctionComponent<OwnProps> = ({
   overrideReadOnly,
   kanOverstyre,
   toggleOverstyring,
-  behandlingResultatstruktur,
+  behandlingResultatstruktur = {
+    beregnetTilkjentYtelse: 0,
+    antallBarn: 0,
+    satsVerdi: 0,
+  },
   aksjonspunkter,
   erIkkeGodkjentAvBeslutter,
   formData,
@@ -203,14 +207,6 @@ const BeregningsresultatEngangsstonadForm: FunctionComponent<OwnProps> = ({
       )}
     </Form>
   );
-};
-
-BeregningsresultatEngangsstonadForm.defaultProps = {
-  behandlingResultatstruktur: {
-    beregnetTilkjentYtelse: 0,
-    antallBarn: 0,
-    satsVerdi: 0,
-  },
 };
 
 export default BeregningsresultatEngangsstonadForm;

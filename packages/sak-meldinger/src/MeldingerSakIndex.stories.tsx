@@ -1,14 +1,13 @@
-import React from 'react';
-
 import { action } from '@storybook/addon-actions';
-import { Meta, StoryFn, StoryObj } from '@storybook/react';
+import { Meta, ReactRenderer, StoryObj } from '@storybook/react';
+import { DecoratorFunction } from '@storybook/types';
 
 import { DokumentMalType, FagsakYtelseType, UgunstAarsakType } from '@navikt/fp-kodeverk';
 import { BehandlingAppKontekst } from '@navikt/fp-types';
 
 import { MeldingerSakIndex } from './MeldingerSakIndex';
 
-const withStyleProvider = (Story: StoryFn) => (
+const withStyleProvider: DecoratorFunction<ReactRenderer> = Story => (
   <div
     style={{
       width: '600px',

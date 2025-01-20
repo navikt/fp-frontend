@@ -1,6 +1,5 @@
-import React from 'react';
-
-import { Meta, StoryFn, StoryObj } from '@storybook/react';
+import { Meta, ReactRenderer, StoryObj } from '@storybook/react';
+import { DecoratorFunction } from 'storybook/internal/types';
 
 import { FagsakStatus, FagsakYtelseType, KodeverkType } from '@navikt/fp-kodeverk';
 
@@ -8,7 +7,7 @@ import { FagsakProfilSakIndex } from './FagsakProfilSakIndex';
 
 import '@navikt/ft-ui-komponenter/dist/style.css';
 
-const withStylerovider = (Story: StoryFn) => (
+const withStylerovider: DecoratorFunction<ReactRenderer> = Story => (
   <div style={{ width: '600px', backgroundColor: 'white', padding: '30px' }}>
     <Story />
   </div>

@@ -1,4 +1,4 @@
-import { DependencyList, useEffect, useRef,useState } from 'react';
+import { DependencyList, useEffect, useRef, useState } from 'react';
 
 import { RequestApi, RestKey } from '@navikt/fp-rest-api';
 
@@ -53,7 +53,7 @@ const getUseMultipleRestApi = (requestApi: RequestApi) =>
 
     const allOptions = { ...defaultOptions, ...options };
 
-    const ref = useRef<DependencyList>();
+    const ref = useRef<DependencyList>(null);
     useEffect(() => {
       ref.current = allOptions.updateTriggers;
     }, [options.updateTriggers]);

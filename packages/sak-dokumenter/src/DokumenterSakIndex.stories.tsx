@@ -1,7 +1,6 @@
-import React from 'react';
-
 import { action } from '@storybook/addon-actions';
-import { Meta, StoryFn, StoryObj } from '@storybook/react';
+import { Meta, ReactRenderer, StoryObj } from '@storybook/react';
+import { DecoratorFunction } from '@storybook/types';
 
 import { Kommunikasjonsretning } from '@navikt/fp-kodeverk';
 import { Dokument } from '@navikt/fp-types';
@@ -10,7 +9,7 @@ import { DokumenterSakIndex } from './DokumenterSakIndex';
 
 import '@navikt/ft-ui-komponenter/dist/style.css';
 
-const withStyleProvider = (Story: StoryFn) => (
+const withStyleProvider: DecoratorFunction<ReactRenderer> = Story => (
   <div
     style={{
       width: '700px',

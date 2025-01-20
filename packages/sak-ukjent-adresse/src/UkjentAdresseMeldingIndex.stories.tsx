@@ -1,10 +1,9 @@
-import React from 'react';
-
-import { Meta, StoryFn, StoryObj } from '@storybook/react';
+import { Meta, ReactRenderer, StoryObj } from '@storybook/react';
+import { DecoratorFunction } from 'storybook/internal/types';
 
 import { UkjentAdresseMeldingIndex } from './UkjentAdresseMeldingIndex';
 
-const withWidthProvider = (Story: StoryFn) => (
+const withWidthProvider: DecoratorFunction<ReactRenderer> = Story => (
   <div style={{ width: '600px' }}>
     <Story />
   </div>
