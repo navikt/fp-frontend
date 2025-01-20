@@ -4,9 +4,9 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Button, Heading, HStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
-import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktKode, KlageVurdering as klageVurderingType,KodeverkType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, KlageVurdering as klageVurderingType, KodeverkType } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import { AlleKodeverk, KlageVurdering, KlageVurderingResultat, KodeverkMedNavn } from '@navikt/fp-types';
 import { KlageVurderingResultatAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -15,7 +15,7 @@ import KlageFormType from '../../types/klageFormType';
 import BekreftOgSubmitKlageModal from './BekreftOgSubmitKlageModal';
 import FritekstBrevTextField from './FritekstKlageBrevTextField';
 import KlageVurderingRadioOptionsNfp from './KlageVurderingRadioOptionsNfp';
-import { BrevData,PreviewKlageLink } from './PreviewKlageLink';
+import { BrevData, PreviewKlageLink } from './PreviewKlageLink';
 import TempsaveKlageButton, { TransformedValues } from './TempsaveKlageButton';
 
 import styles from './behandleKlageFormNfp.module.css';
@@ -112,9 +112,11 @@ export const BehandleKlageFormNfp: FunctionComponent<OwnProps> = ({
     >
       <Heading size="small">{intl.formatMessage({ id: 'Klage.ResolveKlage.Title' })}</Heading>
       <VerticalSpacer fourPx />
-      <AksjonspunktHelpTextTemp isAksjonspunktOpen={!readOnlySubmitButton}>
-        {[<FormattedMessage id="Klage.ResolveKlage.HelpText" key={AksjonspunktKode.BEHANDLE_KLAGE_NFP} />]}
-      </AksjonspunktHelpTextTemp>
+      {!readOnlySubmitButton && (
+        <AksjonspunktHelpTextHTML>
+          {[<FormattedMessage id="Klage.ResolveKlage.HelpText" key={AksjonspunktKode.BEHANDLE_KLAGE_NFP} />]}
+        </AksjonspunktHelpTextHTML>
+      )}
       <KlageVurderingRadioOptionsNfp
         readOnly={readOnly}
         klageVurdering={formValues.klageVurdering}

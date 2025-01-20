@@ -5,7 +5,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Heading } from '@navikt/ds-react';
 import { Datepicker, Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
-import { AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { AksjonspunktHelpTextHTML, ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import moment from 'moment';
 
@@ -175,9 +175,11 @@ const InnsynForm: FunctionComponent<OwnProps> = ({
         <FormattedMessage id="InnsynForm.Innsynsbehandling" />
       </Heading>
       <VerticalSpacer twentyPx />
-      <AksjonspunktHelpTextTemp isAksjonspunktOpen={isApOpen}>
-        {[<FormattedMessage id="InnsynForm.VurderKravetOmInnsyn" key="1" />]}
-      </AksjonspunktHelpTextTemp>
+      {isApOpen && (
+        <AksjonspunktHelpTextHTML>
+          {[<FormattedMessage id="InnsynForm.VurderKravetOmInnsyn" key="1" />]}
+        </AksjonspunktHelpTextHTML>
+      )}
       <VerticalSpacer twentyPx />
       <Datepicker
         name="mottattDato"

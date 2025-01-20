@@ -1,12 +1,12 @@
-import React, { FunctionComponent, MouseEvent,useCallback, useMemo, useState } from 'react';
+import React, { FunctionComponent, MouseEvent, useCallback, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BodyShort, Button,Detail, Heading } from '@navikt/ds-react';
+import { BodyShort, Button, Detail, Heading } from '@navikt/ds-react';
 import { Form, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
-import { AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { formaterFritekst, getLanguageFromSprakkode,ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { AksjonspunktHelpTextHTML, ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { formaterFritekst, getLanguageFromSprakkode, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import classNames from 'classnames';
 import moment from 'moment';
 
@@ -18,7 +18,7 @@ import {
   KodeverkType,
   UgunstAarsakType,
 } from '@navikt/fp-kodeverk';
-import { FormValues as ModalFormValues,SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
+import { FormValues as ModalFormValues, SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
 import { FodselSammenligningIndex } from '@navikt/fp-prosess-fakta-fodsel-sammenligning';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import {
@@ -159,9 +159,9 @@ const VarselOmRevurderingForm: FunctionComponent<OwnProps> = ({
         <VerticalSpacer eightPx />
         {!readOnly && aksjonspunkter[0].status === AksjonspunktStatus.OPPRETTET && (
           <>
-            <AksjonspunktHelpTextTemp isAksjonspunktOpen>
+            <AksjonspunktHelpTextHTML>
               {[<FormattedMessage key="1" id="VarselOmRevurderingForm.VarselOmRevurderingVurder" />]}
-            </AksjonspunktHelpTextTemp>
+            </AksjonspunktHelpTextHTML>
             <VerticalSpacer twentyPx />
             {erAutomatiskRevurdering && (
               <>

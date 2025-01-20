@@ -1,9 +1,9 @@
-import React, { FunctionComponent, ReactElement,useCallback, useEffect, useMemo, useState } from 'react';
+import React, { FunctionComponent, ReactElement, useCallback, useEffect, useMemo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Button, Label } from '@navikt/ds-react';
-import { AksjonspunktHelpTextTemp, DateLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { addDaysToDate,ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { AksjonspunktHelpTextHTML, DateLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { addDaysToDate, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import { AksjonspunktKode, KodeverkType } from '@navikt/fp-kodeverk';
@@ -204,9 +204,11 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
     <div className={styles.container}>
       {hasAksjonspunkt && (
         <>
-          <AksjonspunktHelpTextTemp isAksjonspunktOpen={hasOpenAksjonspunkter}>
-            {getAksjonspunktHelpTexts(filtrerteOgSorterteOpptjeningsaktiviteter)}
-          </AksjonspunktHelpTextTemp>
+          {hasOpenAksjonspunkter && (
+            <AksjonspunktHelpTextHTML>
+              {getAksjonspunktHelpTexts(filtrerteOgSorterteOpptjeningsaktiviteter)}
+            </AksjonspunktHelpTextHTML>
+          )}
           <VerticalSpacer twentyPx />
         </>
       )}
