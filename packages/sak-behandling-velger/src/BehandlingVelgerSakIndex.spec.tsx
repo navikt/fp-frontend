@@ -20,8 +20,8 @@ describe('<BehandlingVelgerSakIndex>', () => {
     expect(screen.getByText(/02.08.2017/)).toBeInTheDocument();
     expect(screen.getByText(/02.08.2017/)).toBeInTheDocument();
     expect(screen.getByText('Enhet')).toBeInTheDocument();
-    expect(screen.getByText('Nav familie- og pensjonsytelser Bergen')).toBeInTheDocument();
     expect(screen.getByText('4812')).toBeInTheDocument();
+    expect(screen.getByLabelText('Nav familie- og pensjonsytelser Bergen')).toBeInTheDocument();
   });
 
   it('skal ekspandere behandlingslisten og da vise alle behandlinger', async () => {
