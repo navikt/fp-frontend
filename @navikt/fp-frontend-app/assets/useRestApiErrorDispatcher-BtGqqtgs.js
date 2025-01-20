@@ -1,1 +1,0 @@
-import{r as e}from"./index-DRjF_FHU.js";import{R as a}from"./useRestApiRunner-illtjj-y.js";const i=()=>{const r=e.useContext(a),s=e.useCallback(o=>{r&&r({type:"add",data:o})},[]),t=e.useCallback(()=>{r&&r({type:"remove"})},[]);return{addErrorMessage:s,removeErrorMessages:t}};export{i as u};

@@ -1,0 +1,1 @@
+import{j as o}from"./jsx-runtime-BDPtolqC.js";import{d as s}from"./nb-BCVdthPF.js";import"./index-D1iumpf7.js";s.locale("nb");const a=[r=>o.jsx("div",{style:{margin:"40px"},children:o.jsx(r,{})})];export{a as decorators};

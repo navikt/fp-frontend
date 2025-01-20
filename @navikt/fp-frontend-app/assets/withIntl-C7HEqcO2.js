@@ -1,1 +1,0 @@
-import{j as o}from"./jsx-runtime-DR9Q75dM.js";import{f as n,P as a,g as s}from"./withQueryClient-BF6cwJb8.js";const m=t=>{const r=n({locale:"nb-NO",messages:t},s());return e=>o.jsx(a,{value:r,children:e()})};export{m as g};

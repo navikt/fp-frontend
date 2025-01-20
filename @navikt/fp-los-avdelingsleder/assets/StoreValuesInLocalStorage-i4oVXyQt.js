@@ -1,0 +1,1 @@
+import{r as t}from"./index-B54hSm9S.js";const n=o=>{const e=window.localStorage.getItem(o);return e!=="undefined"&&e!==null?e:void 0},a=(o,e)=>{window.localStorage.setItem(o,e)},l=o=>{window.localStorage.removeItem(o)},s=({stateKey:o,values:e})=>(t.useEffect(()=>{a(o,JSON.stringify(e))},[e]),null);export{s as S,n as g,l as r,a as s};

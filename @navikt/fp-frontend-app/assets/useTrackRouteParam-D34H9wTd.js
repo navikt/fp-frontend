@@ -1,1 +1,0 @@
-import{l as o}from"./index.es-Bt-4RxCK.js";import{d as t,e as p}from"./withQueryClient-BF6cwJb8.js";const c={paramName:"",parse:r=>r,isQueryParam:!1},u=(r,s,a)=>{const e=a.isQueryParam?o(s.search):r;return a.paramName&&a.parse?a.parse(e[a.paramName]):void 0};function P(r){const s={...c,...r},a=t(),e=p(),m=u(e,a,s);return{location:a,selected:m}}export{P as u};
