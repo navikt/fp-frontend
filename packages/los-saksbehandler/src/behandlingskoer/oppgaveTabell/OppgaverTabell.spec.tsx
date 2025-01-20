@@ -23,7 +23,7 @@ describe('<OppgaverTabell>', () => {
     await applyRequestHandlers(TomOppgaveTabell.parameters.msw);
     await TomOppgaveTabell.run();
     expect(await screen.findByText('Neste i køen')).toBeInTheDocument();
-    expect(screen.getByText('0 reservert på deg, 0 i køen totalt')).toBeInTheDocument();
+    expect(await screen.findByText('0 reservert på deg, 0 i køen totalt')).toBeInTheDocument();
     expect(screen.getByText('Det er ingen behandlinger i køen')).toBeInTheDocument();
   });
 });

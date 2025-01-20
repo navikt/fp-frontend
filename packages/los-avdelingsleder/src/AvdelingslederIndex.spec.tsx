@@ -20,7 +20,7 @@ describe('<AvdelingslederIndex>', () => {
     await applyRequestHandlers(Default.parameters.msw);
     render(<Default />);
     expect(await screen.findByText('Gjeldende behandlingskøer')).toBeInTheDocument();
-    expect(screen.getByText('Nøkkeltall')).toBeInTheDocument();
+    expect(await screen.findByText('Nøkkeltall')).toBeInTheDocument();
     expect(screen.getByText('Saksbehandlere')).toBeInTheDocument();
     expect(screen.getByText('Reservasjoner')).toBeInTheDocument();
     expect(screen.getByText('Gjeldende behandlingskøer')).toBeInTheDocument();
@@ -38,7 +38,7 @@ describe('<AvdelingslederIndex>', () => {
     await applyRequestHandlers(SkalFiltrereBortAvdelingerSomKreverKode6.parameters.msw);
     render(<SkalFiltrereBortAvdelingerSomKreverKode6 />);
     expect(await screen.findByText('Gjeldende behandlingskøer')).toBeInTheDocument();
-    expect(screen.getByText('123 Nav Vikafossen')).toBeInTheDocument();
+    expect(await screen.findByText('123 Nav Vikafossen')).toBeInTheDocument();
     expect(screen.queryByText('1234 Nav Oslo')).not.toBeInTheDocument();
   });
 });

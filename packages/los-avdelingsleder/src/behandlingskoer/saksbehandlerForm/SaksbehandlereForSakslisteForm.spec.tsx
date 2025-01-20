@@ -13,14 +13,14 @@ describe('<SaksbehandlereForSakslisteForm>', () => {
     await applyRequestHandlers(IngenSaksbehandlere.parameters.msw);
     render(<IngenSaksbehandlere />);
     expect(await screen.findByText('Saksbehandlere')).toBeInTheDocument();
-    expect(screen.getByText('Avdelingen har ingen saksbehandlere tilknyttet')).toBeInTheDocument();
+    expect(await screen.findByText('Avdelingen har ingen saksbehandlere tilknyttet')).toBeInTheDocument();
   });
 
   it('skal vise to saksbehandlere i listen', async () => {
     await applyRequestHandlers(ToSaksbehandlere.parameters.msw);
     render(<ToSaksbehandlere />);
     expect(await screen.findByText('Saksbehandlere')).toBeInTheDocument();
-    expect(screen.getByText('Espen Utvikler')).toBeInTheDocument();
+    expect(await screen.findByText('Espen Utvikler')).toBeInTheDocument();
     expect(screen.getByText('Steffen')).toBeInTheDocument();
   });
 
