@@ -81,7 +81,7 @@ const RegistrereVergeInfoPanel: FunctionComponent<PureOwnProps> = ({
     <>
       {hasOpenAksjonspunkter && (
         <AksjonspunktHelpTextHTML>
-          {[intl.formatMessage({ id: 'RegistrereVergeInfoPanel.CheckInformation' })]}
+          {intl.formatMessage({ id: 'RegistrereVergeInfoPanel.CheckInformation' })}
         </AksjonspunktHelpTextHTML>
       )}
       <Form

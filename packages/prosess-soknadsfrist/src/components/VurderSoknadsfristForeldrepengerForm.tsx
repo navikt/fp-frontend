@@ -107,16 +107,13 @@ const VurderSoknadsfristForeldrepengerForm: FunctionComponent<OwnProps> = ({
       <VerticalSpacer twentyPx />
       {isApOpen && (
         <AksjonspunktHelpTextHTML>
-          {[
-            <FormattedMessage
-              key="VurderSoknadsfristForeldrepengerForm"
-              id="VurderSoknadsfristForeldrepengerForm.AksjonspunktHelpText"
-              values={{
-                numberOfDays: søknadsfrist?.dagerOversittetFrist,
-                soknadsfristdato: soknadsfristdato ? moment(soknadsfristdato).format(DDMMYYYY_DATE_FORMAT) : '',
-              }}
-            />,
-          ]}
+          <FormattedMessage
+            id="VurderSoknadsfristForeldrepengerForm.AksjonspunktHelpText"
+            values={{
+              numberOfDays: søknadsfrist?.dagerOversittetFrist,
+              soknadsfristdato: soknadsfristdato ? moment(soknadsfristdato).format(DDMMYYYY_DATE_FORMAT) : '',
+            }}
+          />
         </AksjonspunktHelpTextHTML>
       )}
       <VerticalSpacer twentyPx />

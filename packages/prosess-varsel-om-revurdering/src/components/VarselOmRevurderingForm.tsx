@@ -160,7 +160,7 @@ const VarselOmRevurderingForm: FunctionComponent<OwnProps> = ({
         {!readOnly && aksjonspunkter[0].status === AksjonspunktStatus.OPPRETTET && (
           <>
             <AksjonspunktHelpTextHTML>
-              {[<FormattedMessage key="1" id="VarselOmRevurderingForm.VarselOmRevurderingVurder" />]}
+              <FormattedMessage id="VarselOmRevurderingForm.VarselOmRevurderingVurder" />
             </AksjonspunktHelpTextHTML>
             <VerticalSpacer twentyPx />
             {erAutomatiskRevurdering && (

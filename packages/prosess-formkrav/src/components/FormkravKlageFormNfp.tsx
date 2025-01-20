@@ -146,7 +146,7 @@ const FormkravKlageFormNfp: FunctionComponent<OwnProps> = ({
       <VStack gap="6">
         {!readOnlySubmitButton && (
           <AksjonspunktHelpTextHTML>
-            {[<FormattedMessage id="Klage.Formkrav.HelpText" key={AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP} />]}
+            <FormattedMessage id="Klage.Formkrav.HelpText" />
           </AksjonspunktHelpTextHTML>
         )}
         <VStack gap="6">

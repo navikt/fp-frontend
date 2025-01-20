@@ -177,7 +177,7 @@ const InnsynForm: FunctionComponent<OwnProps> = ({
       <VerticalSpacer twentyPx />
       {isApOpen && (
         <AksjonspunktHelpTextHTML>
-          {[<FormattedMessage id="InnsynForm.VurderKravetOmInnsyn" key="1" />]}
+          <FormattedMessage id="InnsynForm.VurderKravetOmInnsyn" />
         </AksjonspunktHelpTextHTML>
       )}
       <VerticalSpacer twentyPx />
