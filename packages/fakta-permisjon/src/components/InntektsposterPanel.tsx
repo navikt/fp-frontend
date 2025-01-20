@@ -2,7 +2,7 @@ import React, { FunctionComponent, useMemo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { ChevronDownIcon, ChevronUpIcon } from '@navikt/aksel-icons';
-import { BodyShort,Label, Link } from '@navikt/ds-react';
+import { BodyShort, Label, Link } from '@navikt/ds-react';
 import { FlexColumn, FlexContainer, FlexRow, FloatRight } from '@navikt/ft-ui-komponenter';
 import { formatCurrencyNoKr, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';

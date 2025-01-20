@@ -11,7 +11,7 @@ describe('<FagsakProfile>', () => {
   it('skal vise fagsak-profil', async () => {
     render(<Default />);
     expect(await screen.findByText('Foreldrepenger')).toBeInTheDocument();
-    expect(screen.getByText('Dekningsgraden er 100%')).toBeInTheDocument();
+    expect(screen.getByLabelText('Dekningsgraden er 100%')).toBeInTheDocument();
     expect(screen.getByText('232341251 - Opprettet')).toBeInTheDocument();
     expect(screen.getByText('Næring')).toBeInTheDocument();
     expect(screen.getByText('Utland')).toBeInTheDocument();
