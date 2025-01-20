@@ -1,22 +1,14 @@
-import React, { FunctionComponent, useCallback, useRef,useState } from 'react';
-import { FormattedMessage,useIntl } from 'react-intl';
+import React, { FunctionComponent, useCallback, useRef, useState } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { CheckmarkIcon, ExclamationmarkTriangleFillIcon, QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button,Detail, Label, Popover } from '@navikt/ds-react';
+import { BodyShort, Button, Detail, Label, Popover, Tooltip } from '@navikt/ds-react';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import {
-  DateLabel,
-  FlexColumn,
-  FlexContainer,
-  FlexRow,
-  PeriodLabel,
-  Tooltip,
-  VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
+import { DateLabel, FlexColumn, FlexContainer, FlexRow, PeriodLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 
-import { getKodeverknavnFraKode,KodeverkType } from '@navikt/fp-kodeverk';
+import { getKodeverknavnFraKode, KodeverkType } from '@navikt/fp-kodeverk';
 import {
   AlleKodeverk,
   AoIArbeidsforhold,
@@ -42,7 +34,7 @@ const erMatch = (arbeidsforhold: AoIArbeidsforhold, inntektsmelding: Inntektsmel
 const delOppAId = (eksternArbeidsforholdId: string) => {
   const lengde = Math.ceil(eksternArbeidsforholdId.length / 25);
   const oppdeltId = Array.from({ length: lengde }, (_x, i) => eksternArbeidsforholdId.slice(i * 25, i * 25 + 25));
-  return <p>{oppdeltId.join('-')}</p>;
+  return oppdeltId.join('-');
 };
 
 interface OwnProps {
@@ -176,7 +168,7 @@ const ArbeidsforholdField: FunctionComponent<OwnProps> = ({
                             <BodyShort size="small">{arbeidsforhold.eksternArbeidsforholdId}</BodyShort>
                           )}
                           {arbeidsforhold.eksternArbeidsforholdId.length >= 50 && (
-                            <Tooltip content={delOppAId(arbeidsforhold.eksternArbeidsforholdId)} alignBottom>
+                            <Tooltip content={delOppAId(arbeidsforhold.eksternArbeidsforholdId)} placement="bottom">
                               <BodyShort size="small">{`${arbeidsforhold.eksternArbeidsforholdId.substring(
                                 0,
                                 50,

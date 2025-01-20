@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { FileFillIcon,PhoneFillIcon } from '@navikt/aksel-icons';
+import { FileFillIcon, PhoneFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Detail, Label, Link } from '@navikt/ds-react';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { formatCurrencyNoKr } from '@navikt/ft-utils';
