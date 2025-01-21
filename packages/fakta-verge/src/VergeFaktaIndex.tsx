@@ -1,4 +1,3 @@
-import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
@@ -16,7 +15,7 @@ type OwnProps = {
   alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving;
 };
 
-const VergeFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
+export const VergeFaktaIndex = ({
   verge = {},
   aksjonspunkter,
   alleMerknaderFraBeslutter,
@@ -27,7 +26,7 @@ const VergeFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = (
   submittable,
   formData,
   setFormData,
-}) => (
+}: OwnProps & StandardFaktaPanelProps) => (
   <RawIntlProvider value={intl}>
     <RegistrereVergeInfoPanel
       verge={verge}
@@ -43,5 +42,3 @@ const VergeFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = (
     />
   </RawIntlProvider>
 );
-
-export default VergeFaktaIndex;

@@ -1,14 +1,11 @@
-import React from 'react';
-
 import { action } from '@storybook/addon-actions';
-import { StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, Behandling, Fagsak, Soknad } from '@navikt/fp-types';
-import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import VurderSoknadsfristForeldrepengerIndex from './VurderSoknadsfristForeldrepengerIndex';
+import { VurderSoknadsfristForeldrepengerIndex } from './VurderSoknadsfristForeldrepengerIndex';
 
 const behandling = {
   uuid: '1',
@@ -26,40 +23,33 @@ const soknad = {
   },
 } as Soknad;
 
-export default {
+const meta = {
   title: 'prosess/prosess-soknadsfrist',
   component: VurderSoknadsfristForeldrepengerIndex,
-};
+  args: {
+    behandling,
+    alleKodeverk: alleKodeverk as any,
+    isReadOnly: false,
+    isAksjonspunktOpen: true,
+    readOnlySubmitButton: false,
+    status: '',
+    vilkar: [],
+    alleMerknaderFraBeslutter: {},
+    setFormData: () => undefined,
+    soknad,
+    aksjonspunkter: [
+      {
+        definisjon: AksjonspunktKode.VURDER_SOKNADSFRIST_FORELDREPENGER,
+        status: AksjonspunktStatus.OPPRETTET,
+        begrunnelse: undefined,
+      },
+    ] as Aksjonspunkt[],
+    fagsak: {} as Fagsak,
+    submitCallback: action('button-click') as (data: any) => Promise<void>,
+  },
+} satisfies Meta<typeof VurderSoknadsfristForeldrepengerIndex>;
+export default meta;
 
-const Template: StoryFn<{
-  submitCallback: (aksjonspunktData: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>;
-}> = ({ submitCallback }) => (
-  <VurderSoknadsfristForeldrepengerIndex
-    behandling={behandling}
-    alleKodeverk={alleKodeverk as any}
-    submitCallback={submitCallback}
-    isReadOnly={false}
-    isAksjonspunktOpen
-    readOnlySubmitButton={false}
-    status=""
-    vilkar={[]}
-    alleMerknaderFraBeslutter={{}}
-    setFormData={() => undefined}
-    soknad={soknad}
-    aksjonspunkter={
-      [
-        {
-          definisjon: AksjonspunktKode.VURDER_SOKNADSFRIST_FORELDREPENGER,
-          status: AksjonspunktStatus.OPPRETTET,
-          begrunnelse: undefined,
-        },
-      ] as Aksjonspunkt[]
-    }
-    fagsak={{} as Fagsak}
-  />
-);
+type Story = StoryObj<typeof meta>;
 
-export const PanelForSoknadsfrist = Template.bind({});
-PanelForSoknadsfrist.args = {
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-};
+export const PanelForSoknadsfrist: Story = {};

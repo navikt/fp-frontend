@@ -1,1 +1,1 @@
-export { default as SoknadsfristVilkarProsessIndex } from './src/SoknadsfristVilkarProsessIndex';
+export { SoknadsfristVilkarProsessIndex } from './src/SoknadsfristVilkarProsessIndex';

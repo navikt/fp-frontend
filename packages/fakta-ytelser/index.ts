@@ -1,1 +1,1 @@
-export { default as YtelserFaktaIndex } from './src/YtelserFaktaIndex';
+export { YtelserFaktaIndex } from './src/YtelserFaktaIndex';

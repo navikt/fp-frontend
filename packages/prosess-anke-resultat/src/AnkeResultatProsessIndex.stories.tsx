@@ -1,12 +1,10 @@
-import React from 'react';
+import { Meta, StoryObj } from '@storybook/react';
 
-import { StoryFn } from '@storybook/react';
-
-import { AnkeVurdering as AnkeVurderingKodeverk,AnkeVurderingOmgjoer } from '@navikt/fp-kodeverk';
+import { AnkeVurdering as AnkeVurderingKodeverk, AnkeVurderingOmgjoer } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { AnkeVurdering } from '@navikt/fp-types';
 
-import AnkeResultatProsessIndex from './AnkeResultatProsessIndex';
+import { AnkeResultatProsessIndex } from './AnkeResultatProsessIndex';
 
 const ankeVurderingResultat = {
   ankeVurdering: AnkeVurderingKodeverk.ANKE_AVVIS,
@@ -19,52 +17,56 @@ const ankeVurderingResultat = {
   begrunnelse: 'Dette er en begrunnelse',
 };
 
-export default {
+const meta = {
   title: 'prosess/anke/prosess-anke-resultat',
   component: AnkeResultatProsessIndex,
+  args: {
+    alleKodeverk: alleKodeverk as any,
+  },
+} satisfies Meta<typeof AnkeResultatProsessIndex>;
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const ResultatVedStadfestYtelsesvedtak: Story = {
+  args: {
+    ankeVurdering: {
+      ankeVurderingResultat: {
+        ...ankeVurderingResultat,
+        ankeVurdering: AnkeVurderingKodeverk.ANKE_STADFESTE_YTELSESVEDTAK,
+      },
+    } as AnkeVurdering,
+  },
 };
 
-const Template: StoryFn<{
-  ankeVurdering: AnkeVurdering;
-}> = ({ ankeVurdering }) => (
-  <AnkeResultatProsessIndex alleKodeverk={alleKodeverk as any} ankeVurdering={ankeVurdering} />
-);
-
-export const ResultatVedStadfestYtelsesvedtak = Template.bind({});
-ResultatVedStadfestYtelsesvedtak.args = {
-  ankeVurdering: {
-    ankeVurderingResultat: {
-      ...ankeVurderingResultat,
-      ankeVurdering: AnkeVurderingKodeverk.ANKE_STADFESTE_YTELSESVEDTAK,
-    },
-  } as AnkeVurdering,
+export const ResultatVedOppheveOgHjemsende: Story = {
+  args: {
+    ankeVurdering: {
+      ankeVurderingResultat: {
+        ...ankeVurderingResultat,
+        ankeVurdering: AnkeVurderingKodeverk.ANKE_OPPHEVE_OG_HJEMSENDE,
+      },
+    } as AnkeVurdering,
+  },
 };
 
-export const ResultatVedOppheveOgHjemsende = Template.bind({});
-ResultatVedOppheveOgHjemsende.args = {
-  ankeVurdering: {
-    ankeVurderingResultat: {
-      ...ankeVurderingResultat,
-      ankeVurdering: AnkeVurderingKodeverk.ANKE_OPPHEVE_OG_HJEMSENDE,
-    },
-  } as AnkeVurdering,
+export const ResultatVedOmgjør: Story = {
+  args: {
+    ankeVurdering: {
+      ankeVurderingResultat: {
+        ...ankeVurderingResultat,
+        ankeVurdering: AnkeVurderingKodeverk.ANKE_OMGJOER,
+        ankeVurderingOmgjoer: AnkeVurderingOmgjoer.ANKE_TIL_UGUNST,
+        ankeOmgjoerArsakNavn: 'Testårsak',
+      },
+    } as AnkeVurdering,
+  },
 };
 
-export const ResultatVedOmgjør = Template.bind({});
-ResultatVedOmgjør.args = {
-  ankeVurdering: {
-    ankeVurderingResultat: {
-      ...ankeVurderingResultat,
-      ankeVurdering: AnkeVurderingKodeverk.ANKE_OMGJOER,
-      ankeVurderingOmgjoer: AnkeVurderingOmgjoer.ANKE_TIL_UGUNST,
-      ankeOmgjoerArsakNavn: 'Testårsak',
-    },
-  } as AnkeVurdering,
-};
-
-export const ResultatVedAvvis = Template.bind({});
-ResultatVedAvvis.args = {
-  ankeVurdering: {
-    ankeVurderingResultat,
-  } as AnkeVurdering,
+export const ResultatVedAvvis: Story = {
+  args: {
+    ankeVurdering: {
+      ankeVurderingResultat,
+    } as AnkeVurdering,
+  },
 };

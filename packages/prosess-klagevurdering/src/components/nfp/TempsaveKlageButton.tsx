@@ -44,7 +44,7 @@ const transformValues = (values: FormValues, aksjonspunktCode: string): Transfor
 
 interface OwnProps {
   aksjonspunktCode: string;
-  saveKlage: (data: TransformedValues) => Promise<any>;
+  saveKlage: (data: TransformedValues) => Promise<void>;
   spinner?: boolean;
   readOnly?: boolean;
   handleSubmit: UseFormHandleSubmit<KlageFormType>;

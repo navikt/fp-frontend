@@ -1,1 +1,1 @@
-export { default as FodselSammenligningIndex } from './src/FodselSammenligningIndex';
+export { FodselSammenligningIndex } from './src/FodselSammenligningIndex';

@@ -15,7 +15,7 @@ describe('<VedtakInnsynProsessIndex>', () => {
     const lagre = vi.fn();
     const forhåndsvise = vi.fn();
 
-    render(<PanelForInnvilgetVedtak submitCallback={lagre} forhandsvisCallback={forhåndsvise} />);
+    render(<PanelForInnvilgetVedtak submitCallback={lagre} previewCallback={forhåndsvise} />);
 
     expect(await screen.findByText('Forslag til vedtak')).toBeInTheDocument();
     expect(screen.getByText('Resultat')).toBeInTheDocument();
@@ -51,7 +51,7 @@ describe('<VedtakInnsynProsessIndex>', () => {
     const lagre = vi.fn();
     const forhåndsvise = vi.fn();
 
-    const utils = render(<PanelForAvvistVedtak submitCallback={lagre} forhandsvisCallback={forhåndsvise} />);
+    const utils = render(<PanelForAvvistVedtak submitCallback={lagre} previewCallback={forhåndsvise} />);
 
     expect(await screen.findByText('Forslag til vedtak')).toBeInTheDocument();
     expect(screen.getByText('Resultat')).toBeInTheDocument();
@@ -85,7 +85,7 @@ describe('<VedtakInnsynProsessIndex>', () => {
   it('skal vise avslått panel i readonly etter at behandling er avsluttet', async () => {
     const forhåndsvise = vi.fn();
 
-    render(<PanelForAvvistVedtakReadonly forhandsvisCallback={forhåndsvise} />);
+    render(<PanelForAvvistVedtakReadonly previewCallback={forhåndsvise} />);
 
     expect(await screen.findByText('Vedtak')).toBeInTheDocument();
     expect(screen.getByText('Resultat')).toBeInTheDocument();

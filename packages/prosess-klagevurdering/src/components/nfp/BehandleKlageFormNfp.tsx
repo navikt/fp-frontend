@@ -53,8 +53,8 @@ const buildInitialValues = (klageVurderingResultat?: KlageVurderingResultat): Kl
 });
 
 interface OwnProps {
-  previewCallback: (data: BrevData) => Promise<any>;
-  saveKlage: (data: TransformedValues) => Promise<any>;
+  previewCallback: (data: BrevData) => Promise<void>;
+  saveKlage: (data: TransformedValues) => Promise<void>;
   readOnly: boolean;
   readOnlySubmitButton?: boolean;
   sprakkode: string;

@@ -1,1 +1,1 @@
-export { default as SimuleringProsessIndex } from './src/SimuleringProsessIndex';
+export { SimuleringProsessIndex } from './src/SimuleringProsessIndex';

@@ -1,4 +1,3 @@
-import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
@@ -11,12 +10,12 @@ import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-interface OwnProps {
+interface Props {
   isForeldreansvar2Ledd: boolean;
   isEngangsstonad: boolean;
 }
 
-const ForeldreansvarVilkarProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
+export const ForeldreansvarVilkarProsessIndex = ({
   behandling,
   aksjonspunkter,
   isEngangsstonad,
@@ -29,7 +28,7 @@ const ForeldreansvarVilkarProsessIndex: FunctionComponent<OwnProps & StandardPro
   alleMerknaderFraBeslutter,
   formData,
   setFormData,
-}) => (
+}: Props & StandardProsessPanelProps) => (
   <RawIntlProvider value={intl}>
     <ErForeldreansvarVilkaarOppfyltForm
       behandlingsresultat={behandling.behandlingsresultat}
@@ -47,5 +46,3 @@ const ForeldreansvarVilkarProsessIndex: FunctionComponent<OwnProps & StandardPro
     />
   </RawIntlProvider>
 );
-
-export default ForeldreansvarVilkarProsessIndex;

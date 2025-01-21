@@ -1,24 +1,16 @@
-import React from 'react';
-
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 import { action } from '@storybook/addon-actions';
-import { StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
-import { AdresseType, AksjonspunktKode,SivilstandType } from '@navikt/fp-kodeverk';
+import { AdresseType, AksjonspunktKode, SivilstandType } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, Behandling, KjønnkodeEnum, PersonopplysningerBasis, Ytelsefordeling } from '@navikt/fp-types';
-import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import OmsorgOgRettFaktaIndex from './OmsorgOgRettFaktaIndex';
+import { OmsorgOgRettFaktaIndex } from './OmsorgOgRettFaktaIndex';
 
 import '@navikt/ds-css';
-import '@navikt/ft-ui-komponenter/dist/style.css';
 import '@navikt/ft-form-hooks/dist/style.css';
-
-export default {
-  title: 'fakta/fakta-omsorg-og-rett',
-  component: OmsorgOgRettFaktaIndex,
-};
+import '@navikt/ft-ui-komponenter/dist/style.css';
 
 const adresse1 = {
   fom: '2023-01-01',
@@ -67,70 +59,69 @@ const defaultBarn: PersonopplysningerBasis = {
   sivilstand: SivilstandType.UGIFT,
 };
 
-const Template: StoryFn<{
-  aksjonspunkter: Aksjonspunkt[];
-  submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
-  bruker: PersonopplysningerBasis;
-  annenPart?: PersonopplysningerBasis;
-  barn: PersonopplysningerBasis[];
-}> = ({
-  aksjonspunkter,
-  submitCallback = action('button-click') as (data: any) => Promise<any>,
-  annenPart = defaultAnnenPart,
-  bruker = defaultBruker,
-  barn = [defaultBarn],
-}) => (
-  <OmsorgOgRettFaktaIndex
-    behandling={{ uuid: 'test' } as Behandling}
-    personoversikt={{ barn, annenPart, bruker }}
-    ytelsefordeling={{} as Ytelsefordeling}
-    submittable
-    harApneAksjonspunkter
-    alleMerknaderFraBeslutter={{}}
-    readOnly={false}
-    aksjonspunkter={aksjonspunkter}
-    alleKodeverk={alleKodeverk as any}
-    submitCallback={submitCallback}
-    setFormData={() => undefined}
-  />
-);
+const meta = {
+  title: 'fakta/fakta-omsorg-og-rett',
+  component: OmsorgOgRettFaktaIndex,
+  args: {
+    behandling: { uuid: 'test' } as Behandling,
+    personoversikt: { barn: [defaultBarn], annenPart: defaultAnnenPart, bruker: defaultBruker },
+    ytelsefordeling: {} as Ytelsefordeling,
+    submittable: true,
+    harApneAksjonspunkter: true,
+    alleMerknaderFraBeslutter: {},
+    readOnly: false,
+    alleKodeverk: alleKodeverk as any,
+    submitCallback: action('button-click') as (data: any) => Promise<void>,
+    setFormData: () => undefined,
+  },
+} satisfies Meta<typeof OmsorgOgRettFaktaIndex>;
+export default meta;
 
-export const HarAksjonspunktForAvklarAleneomsorg = Template.bind({});
-HarAksjonspunktForAvklarAleneomsorg.args = {
-  aksjonspunkter: [
-    {
-      definisjon: AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
-      kanLoses: true,
-    },
-  ] as Aksjonspunkt[],
+type Story = StoryObj<typeof meta>;
+
+export const HarAksjonspunktForAvklarAleneomsorg: Story = {
+  args: {
+    aksjonspunkter: [
+      {
+        definisjon: AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
+        kanLoses: true,
+      },
+    ] as Aksjonspunkt[],
+  },
 };
 
-export const HarAksjonspunktForAvklarAleneomsorgMedFlereBarn = Template.bind({});
-HarAksjonspunktForAvklarAleneomsorgMedFlereBarn.args = {
-  aksjonspunkter: [
-    {
-      definisjon: AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
-      kanLoses: true,
+export const HarAksjonspunktForAvklarAleneomsorgMedFlereBarn: Story = {
+  args: {
+    aksjonspunkter: [
+      {
+        definisjon: AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
+        kanLoses: true,
+      },
+    ] as Aksjonspunkt[],
+    personoversikt: {
+      barn: [
+        defaultBarn,
+        {
+          ...defaultBarn,
+          navn: 'Petter Tester',
+          fødselsdato: '2018-01-01',
+          aktoerId: '4',
+          kjønn: KjønnkodeEnum.MANN,
+        },
+      ],
+      annenPart: defaultAnnenPart,
+      bruker: defaultBruker,
     },
-  ] as Aksjonspunkt[],
-  barn: [
-    defaultBarn,
-    {
-      ...defaultBarn,
-      navn: 'Petter Tester',
-      fødselsdato: '2018-01-01',
-      aktoerId: '4',
-      kjønn: KjønnkodeEnum.MANN,
-    },
-  ],
+  },
 };
 
-export const HarAksjonspunktForAvklarAnnenForelderRett = Template.bind({});
-HarAksjonspunktForAvklarAnnenForelderRett.args = {
-  aksjonspunkter: [
-    {
-      definisjon: AksjonspunktKode.AVKLAR_ANNEN_FORELDER_RETT,
-      kanLoses: true,
-    },
-  ] as Aksjonspunkt[],
+export const HarAksjonspunktForAvklarAnnenForelderRett: Story = {
+  args: {
+    aksjonspunkter: [
+      {
+        definisjon: AksjonspunktKode.AVKLAR_ANNEN_FORELDER_RETT,
+        kanLoses: true,
+      },
+    ] as Aksjonspunkt[],
+  },
 };

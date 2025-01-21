@@ -1,4 +1,3 @@
-import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
@@ -47,7 +46,7 @@ const skalSkriveFritekstGrunnetFastsettingAvBeregning = (
   return !!behandlingHarLøstBGAP || !!andelSomErManueltFastsatt;
 };
 
-interface OwnProps {
+interface Props {
   beregningresultatDagytelse?: BeregningsresultatDagytelse;
   beregningresultatEngangsstonad?: BeregningsresultatEs;
   tilbakekrevingvalg?: TilbakekrevingValg;
@@ -62,7 +61,7 @@ interface OwnProps {
   ytelseTypeKode: string;
 }
 
-const VedtakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
+export const VedtakProsessIndex = ({
   behandling,
   beregningresultatDagytelse,
   beregningresultatEngangsstonad,
@@ -79,7 +78,7 @@ const VedtakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps
   alleKodeverk,
   formData,
   setFormData,
-}) => {
+}: Props & StandardProsessPanelProps) => {
   const beregningErManueltFastsatt = skalSkriveFritekstGrunnetFastsettingAvBeregning(
     aksjonspunkter,
     beregningsgrunnlag,
@@ -137,5 +136,3 @@ const VedtakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps
     </RawIntlProvider>
   );
 };
-
-export default VedtakProsessIndex;

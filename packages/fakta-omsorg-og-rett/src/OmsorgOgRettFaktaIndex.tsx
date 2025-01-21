@@ -16,10 +16,8 @@ export interface OmsorgOgRettProps {
   ytelsefordeling: Ytelsefordeling;
 }
 
-const OmsorgOgRettFaktaIndex = (props: OmsorgOgRettProps & StandardFaktaPanelProps) => (
+export const OmsorgOgRettFaktaIndex = (props: OmsorgOgRettProps & StandardFaktaPanelProps) => (
   <RawIntlProvider value={intl}>
     <OmsorgOgRettInfoPanel {...props} />
   </RawIntlProvider>
 );
-
-export default OmsorgOgRettFaktaIndex;

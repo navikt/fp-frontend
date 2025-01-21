@@ -24,7 +24,7 @@ interface Props {
   inntektArbeidYtelse: InntektArbeidYtelse;
 }
 
-const OmsorgOgForeldreansvarFaktaIndex = ({
+export const OmsorgOgForeldreansvarFaktaIndex = ({
   familiehendelse,
   soknad,
   personoversikt,
@@ -43,5 +43,3 @@ const OmsorgOgForeldreansvarFaktaIndex = ({
     />
   </RawIntlProvider>
 );
-
-export default OmsorgOgForeldreansvarFaktaIndex;

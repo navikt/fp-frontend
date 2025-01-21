@@ -1,7 +1,5 @@
-import React from 'react';
-
 import { action } from '@storybook/addon-actions';
-import { StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import {
   AksjonspunktKode,
@@ -19,9 +17,8 @@ import {
   FodselOgTilrettelegging,
   Vilkar,
 } from '@navikt/fp-types';
-import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import SvangerskapVilkarProsessIndex from './SvangerskapVilkarProsessIndex';
+import { SvangerskapVilkarProsessIndex } from './SvangerskapVilkarProsessIndex';
 
 const defaultBehandling = {
   uuid: '1',
@@ -29,128 +26,105 @@ const defaultBehandling = {
   behandlingsresultat: {},
 } as Behandling;
 
-export default {
+const meta = {
   title: 'prosess/prosess-vilkar-svangerskap',
   component: SvangerskapVilkarProsessIndex,
-};
-
-const Template: StoryFn<{
-  submitCallback: (aksjonspunktData: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>;
-  behandling: Behandling;
-  aksjonspunkter: Aksjonspunkt[];
-  isReadOnly: boolean;
-  readOnlySubmitButton: boolean;
-  status: string;
-  svangerskapspengerTilrettelegging?: FodselOgTilrettelegging;
-}> = ({
-  submitCallback,
-  behandling,
-  aksjonspunkter,
-  isReadOnly,
-  readOnlySubmitButton,
-  status,
-  svangerskapspengerTilrettelegging = {} as FodselOgTilrettelegging,
-}) => (
-  <SvangerskapVilkarProsessIndex
-    alleKodeverk={alleKodeverk as any}
-    submitCallback={submitCallback}
-    isReadOnly={isReadOnly}
-    isAksjonspunktOpen
-    readOnlySubmitButton={readOnlySubmitButton}
-    alleMerknaderFraBeslutter={{}}
-    setFormData={() => undefined}
-    behandling={behandling}
-    aksjonspunkter={aksjonspunkter}
-    status={status}
-    svangerskapspengerTilrettelegging={svangerskapspengerTilrettelegging}
-    vilkar={
-      [
-        {
-          lovReferanse: '§§Dette er en lovreferanse',
-        },
-      ] as Vilkar[]
-    }
-    fagsak={{} as Fagsak}
-  />
-);
-
-export const ÅpentAksjonspunktSkalIkkeKunneInnvilge = Template.bind({});
-ÅpentAksjonspunktSkalIkkeKunneInnvilge.args = {
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-  behandling: defaultBehandling,
-  aksjonspunkter: [
-    {
-      definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
-      status: AksjonspunktStatus.OPPRETTET,
-      begrunnelse: undefined,
-    },
-  ] as Aksjonspunkt[],
-  isReadOnly: false,
-  readOnlySubmitButton: false,
-  status: VilkarUtfallType.IKKE_VURDERT,
-};
-
-export const ÅpentAksjonspunktSkalKunneInnvilge = Template.bind({});
-ÅpentAksjonspunktSkalKunneInnvilge.args = {
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-  behandling: defaultBehandling,
-  aksjonspunkter: [
-    {
-      definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
-      status: AksjonspunktStatus.OPPRETTET,
-      begrunnelse: undefined,
-    },
-  ] as Aksjonspunkt[],
-  isReadOnly: false,
-  readOnlySubmitButton: false,
-  status: VilkarUtfallType.IKKE_VURDERT,
-  svangerskapspengerTilrettelegging: {
-    arbeidsforholdListe: [
+  args: {
+    submitCallback: action('button-click') as (data: any) => Promise<void>,
+    alleKodeverk: alleKodeverk as any,
+    isAksjonspunktOpen: true,
+    alleMerknaderFraBeslutter: {},
+    setFormData: () => undefined,
+    svangerskapspengerTilrettelegging: {} as FodselOgTilrettelegging,
+    vilkar: [
       {
-        tilretteleggingDatoer: [
-          {
-            type: TilretteleggingType.DELVIS_TILRETTELEGGING,
-          },
-        ],
-      } as ArbeidsforholdFodselOgTilrettelegging,
-    ],
-  } as FodselOgTilrettelegging,
+        lovReferanse: '§§Dette er en lovreferanse',
+      },
+    ] as Vilkar[],
+    fagsak: {} as Fagsak,
+  },
+} satisfies Meta<typeof SvangerskapVilkarProsessIndex>;
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const ÅpentAksjonspunktSkalIkkeKunneInnvilge: Story = {
+  args: {
+    behandling: defaultBehandling,
+    aksjonspunkter: [
+      {
+        definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
+        status: AksjonspunktStatus.OPPRETTET,
+        begrunnelse: undefined,
+      },
+    ] as Aksjonspunkt[],
+    isReadOnly: false,
+    readOnlySubmitButton: false,
+    status: VilkarUtfallType.IKKE_VURDERT,
+  },
 };
 
-export const OppfyltVilkår = Template.bind({});
-OppfyltVilkår.args = {
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-  behandling: defaultBehandling,
-  aksjonspunkter: [
-    {
-      definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
-      status: AksjonspunktStatus.UTFORT,
-      begrunnelse: 'Dette vilkåret er godkjent',
-    },
-  ] as Aksjonspunkt[],
-  isReadOnly: true,
-  readOnlySubmitButton: true,
-  status: VilkarUtfallType.OPPFYLT,
+export const ÅpentAksjonspunktSkalKunneInnvilge: Story = {
+  args: {
+    behandling: defaultBehandling,
+    aksjonspunkter: [
+      {
+        definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
+        status: AksjonspunktStatus.OPPRETTET,
+        begrunnelse: undefined,
+      },
+    ] as Aksjonspunkt[],
+    isReadOnly: false,
+    readOnlySubmitButton: false,
+    status: VilkarUtfallType.IKKE_VURDERT,
+    svangerskapspengerTilrettelegging: {
+      arbeidsforholdListe: [
+        {
+          tilretteleggingDatoer: [
+            {
+              type: TilretteleggingType.DELVIS_TILRETTELEGGING,
+            },
+          ],
+        } as ArbeidsforholdFodselOgTilrettelegging,
+      ],
+    } as FodselOgTilrettelegging,
+  },
 };
 
-export const AvslåttVilkår = Template.bind({});
-AvslåttVilkår.args = {
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-  behandling: {
-    uuid: '1',
-    versjon: 1,
-    behandlingsresultat: {
-      avslagsarsak: Avslagsarsak.INGEN_BEREGNINGSREGLER,
-    },
-  } as Behandling,
-  aksjonspunkter: [
-    {
-      definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
-      status: AksjonspunktStatus.UTFORT,
-      begrunnelse: 'Dette vilkåret er avslått',
-    },
-  ] as Aksjonspunkt[],
-  isReadOnly: true,
-  readOnlySubmitButton: true,
-  status: VilkarUtfallType.IKKE_OPPFYLT,
+export const OppfyltVilkår: Story = {
+  args: {
+    behandling: defaultBehandling,
+    aksjonspunkter: [
+      {
+        definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
+        status: AksjonspunktStatus.UTFORT,
+        begrunnelse: 'Dette vilkåret er godkjent',
+      },
+    ] as Aksjonspunkt[],
+    isReadOnly: true,
+    readOnlySubmitButton: true,
+    status: VilkarUtfallType.OPPFYLT,
+  },
+};
+
+export const AvslåttVilkår: Story = {
+  args: {
+    behandling: {
+      uuid: '1',
+      versjon: 1,
+      behandlingsresultat: {
+        avslagsarsak: Avslagsarsak.INGEN_BEREGNINGSREGLER,
+      },
+    } as Behandling,
+    aksjonspunkter: [
+      {
+        definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
+        status: AksjonspunktStatus.UTFORT,
+        begrunnelse: 'Dette vilkåret er avslått',
+      },
+    ] as Aksjonspunkt[],
+    isReadOnly: true,
+    readOnlySubmitButton: true,
+    status: VilkarUtfallType.IKKE_OPPFYLT,
+  },
 };

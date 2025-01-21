@@ -1,1 +1,1 @@
-export { default as UttakFaktaIndex } from './src/UttakFaktaIndex';
+export { UttakFaktaIndex } from './src/UttakFaktaIndex';

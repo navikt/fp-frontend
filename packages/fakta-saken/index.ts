@@ -1,1 +1,1 @@
-export { default as SakenFaktaIndex } from './src/SakenFaktaIndex';
+export { SakenFaktaIndex } from './src/SakenFaktaIndex';

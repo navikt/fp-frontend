@@ -1,1 +1,1 @@
-export { default as UttakDokumentasjonFaktaIndex } from './src/UttakDokumentasjonFaktaIndex';
+export { UttakDokumentasjonFaktaIndex } from './src/UttakDokumentasjonFaktaIndex';

@@ -1,9 +1,8 @@
-import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { FamilieHendelse, FamilieHendelseSamling, Soknad,StandardFaktaPanelProps } from '@navikt/fp-types';
+import { FamilieHendelse, FamilieHendelseSamling, Soknad, StandardFaktaPanelProps } from '@navikt/fp-types';
 
 import FodselInfoPanel from './components/FodselInfoPanel';
 
@@ -11,14 +10,14 @@ import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-interface OwnProps {
+interface Props {
   soknad: Soknad;
   familiehendelse: FamilieHendelseSamling;
   soknadOriginalBehandling?: Soknad;
   familiehendelseOriginalBehandling?: FamilieHendelse;
 }
 
-const FodselFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
+export const FodselFaktaIndex = ({
   behandling,
   soknad,
   familiehendelse,
@@ -32,7 +31,7 @@ const FodselFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = 
   readOnly,
   formData,
   setFormData,
-}) => (
+}: Props & StandardFaktaPanelProps) => (
   <RawIntlProvider value={intl}>
     <FodselInfoPanel
       behandlingType={behandling.type}
@@ -51,5 +50,3 @@ const FodselFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = 
     />
   </RawIntlProvider>
 );
-
-export default FodselFaktaIndex;

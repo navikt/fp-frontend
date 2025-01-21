@@ -1,14 +1,11 @@
-import React from 'react';
-
 import { action } from '@storybook/addon-actions';
-import { StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode,AksjonspunktStatus, BehandlingType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus, BehandlingType } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, Behandling, Fagsak, FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
-import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import VarselOmRevurderingProsessIndex from './VarselOmRevurderingProsessIndex';
+import { VarselOmRevurderingProsessIndex } from './VarselOmRevurderingProsessIndex';
 
 const defaultBehandling = {
   uuid: '1',
@@ -66,50 +63,43 @@ const aksjonspunkter = [
   },
 ] as Aksjonspunkt[];
 
-export default {
+const meta = {
   title: 'prosess/prosess-varsel-om-revurdering',
   component: VarselOmRevurderingProsessIndex,
+  args: {
+    alleKodeverk: alleKodeverk as any,
+    aksjonspunkter,
+    isReadOnly: false,
+    isAksjonspunktOpen: true,
+    readOnlySubmitButton: true,
+    status: '',
+    vilkar: [],
+    alleMerknaderFraBeslutter: {},
+    setFormData: () => undefined,
+    familiehendelse: familieHendelse,
+    soknad,
+    soknadOriginalBehandling,
+    familiehendelseOriginalBehandling,
+    fagsak: {} as Fagsak,
+    submitCallback: action('button-click') as (data: void) => Promise<any>,
+    previewCallback: action('button-click') as any,
+  },
+} satisfies Meta<typeof VarselOmRevurderingProsessIndex>;
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const ForFørstegangsbehandling: Story = {
+  args: {
+    behandling: defaultBehandling,
+  },
 };
 
-const Template: StoryFn<{
-  submitCallback: (aksjonspunktData: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>;
-  previewCallback: (data: any) => Promise<any>;
-  behandling: Behandling;
-}> = ({ submitCallback, previewCallback, behandling }) => (
-  <VarselOmRevurderingProsessIndex
-    behandling={behandling}
-    alleKodeverk={alleKodeverk as any}
-    aksjonspunkter={aksjonspunkter}
-    submitCallback={submitCallback}
-    isReadOnly={false}
-    isAksjonspunktOpen
-    readOnlySubmitButton
-    status=""
-    vilkar={[]}
-    alleMerknaderFraBeslutter={{}}
-    setFormData={() => undefined}
-    familiehendelse={familieHendelse}
-    soknad={soknad}
-    soknadOriginalBehandling={soknadOriginalBehandling}
-    familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
-    previewCallback={previewCallback}
-    fagsak={{} as Fagsak}
-  />
-);
-
-export const ForFørstegangsbehandling = Template.bind({});
-ForFørstegangsbehandling.args = {
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-  previewCallback: action('button-click') as any,
-  behandling: defaultBehandling,
-};
-
-export const ForRevurdering = Template.bind({});
-ForRevurdering.args = {
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-  previewCallback: action('button-click') as any,
-  behandling: {
-    ...defaultBehandling,
-    type: BehandlingType.REVURDERING,
+export const ForRevurdering: Story = {
+  args: {
+    behandling: {
+      ...defaultBehandling,
+      type: BehandlingType.REVURDERING,
+    },
   },
 };

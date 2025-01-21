@@ -1,4 +1,3 @@
-import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
@@ -11,11 +10,11 @@ import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-interface OwnProps {
+interface Props {
   ytelseTypeKode: string;
 }
 
-const FodselVilkarProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
+export const FodselVilkarProsessIndex = ({
   behandling,
   aksjonspunkter,
   status,
@@ -29,7 +28,7 @@ const FodselVilkarProsessIndex: FunctionComponent<OwnProps & StandardProsessPane
   alleMerknaderFraBeslutter,
   formData,
   setFormData,
-}) => (
+}: Props & StandardProsessPanelProps) => (
   <RawIntlProvider value={intl}>
     <FodselVilkarForm
       behandlingsresultat={behandling.behandlingsresultat}
@@ -48,5 +47,3 @@ const FodselVilkarProsessIndex: FunctionComponent<OwnProps & StandardProsessPane
     />
   </RawIntlProvider>
 );
-
-export default FodselVilkarProsessIndex;

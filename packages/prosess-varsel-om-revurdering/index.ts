@@ -1,1 +1,1 @@
-export { default as VarselOmRevurderingProsessIndex } from './src/VarselOmRevurderingProsessIndex';
+export { VarselOmRevurderingProsessIndex } from './src/VarselOmRevurderingProsessIndex';

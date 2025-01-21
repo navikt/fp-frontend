@@ -1,4 +1,3 @@
-import React, { FC } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
@@ -19,10 +18,8 @@ interface Props {
 
 export type MedlemskapFaktaProps = Props & StandardFaktaPanelProps;
 
-const MedlemskapFaktaIndex: FC<MedlemskapFaktaProps> = props => (
+export const MedlemskapFaktaIndex = (props: MedlemskapFaktaProps) => (
   <RawIntlProvider value={intl}>
     <MedlemskapInfoPanel {...props} />
   </RawIntlProvider>
 );
-
-export default MedlemskapFaktaIndex;

@@ -1,13 +1,11 @@
-import React from 'react';
-
 import { action } from '@storybook/addon-actions';
-import { StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, OpptjeningAktivitetType } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import { Aksjonspunkt, Behandling, Opptjening } from '@navikt/fp-types';
+import { Behandling, Opptjening } from '@navikt/fp-types';
 
-import OpptjeningFaktaIndex from './OpptjeningFaktaIndex';
+import { OpptjeningFaktaIndex } from './OpptjeningFaktaIndex';
 
 const behandling = {
   uuid: '1',
@@ -26,268 +24,266 @@ const arbeidsgiverOpplysningerPerId = {
   },
 };
 
-export default {
+const meta = {
   title: 'fakta/fakta-opptjening',
   component: OpptjeningFaktaIndex,
-};
-
-const Template: StoryFn<{
-  aksjonspunkter: Aksjonspunkt[];
-  opptjening: Opptjening;
-  submitCallback: (data: any) => Promise<void>;
-}> = ({ aksjonspunkter, opptjening, submitCallback }) => (
-  <OpptjeningFaktaIndex
-    behandling={behandling as Behandling}
-    opptjening={opptjening}
-    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    aksjonspunkter={aksjonspunkter}
-    alleKodeverk={alleKodeverk as any}
-    alleMerknaderFraBeslutter={{
+  args: {
+    behandling: behandling as Behandling,
+    arbeidsgiverOpplysningerPerId,
+    alleKodeverk: alleKodeverk as any,
+    alleMerknaderFraBeslutter: {
       [AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING]: merknaderFraBeslutter,
-    }}
-    submitCallback={submitCallback}
-    readOnly={false}
-    harApneAksjonspunkter
-    submittable
-    setFormData={() => undefined}
-  />
-);
+    },
+    submitCallback: action('button-click') as (data: any) => Promise<void>,
+    readOnly: false,
+    harApneAksjonspunkter: true,
+    submittable: true,
+    setFormData: () => undefined,
+  },
+} satisfies Meta<typeof OpptjeningFaktaIndex>;
+export default meta;
 
-export const MedAksjonspunkt = Template.bind({});
-MedAksjonspunkt.args = {
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-  aksjonspunkter: [
-    {
-      definisjon: AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
-      status: AksjonspunktStatus.OPPRETTET,
-      begrunnelse: undefined,
-      kanLoses: true,
-    },
-  ],
-  opptjening: {
-    fastsattOpptjening: {
-      opptjeningFom: '2018-12-25',
-      opptjeningTom: '2019-10-24',
-      opptjeningperiode: {
-        måneder: 0,
-        dager: 0,
-      },
-      fastsattOpptjeningAktivitetList: [],
-    },
-    opptjeningAktivitetList: [
+type Story = StoryObj<typeof meta>;
+
+export const MedAksjonspunkt: Story = {
+  args: {
+    submitCallback: action('button-click') as (data: any) => Promise<any>,
+    aksjonspunkter: [
       {
-        aktivitetType: OpptjeningAktivitetType.ARBEID,
-        opptjeningFom: '2019-02-11',
-        opptjeningTom: '2019-03-24',
-        arbeidsgiverReferanse: '3',
-        arbeidsforholdRef: 'e5ec2632-0e31-4c8f-8190-d942053f8474',
-        stillingsandel: 100,
-        naringRegistreringsdato: '1995-09-14',
-        erGodkjent: true,
-        erEndret: false,
+        definisjon: AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
+        status: AksjonspunktStatus.OPPRETTET,
+        begrunnelse: undefined,
+        kanLoses: true,
       },
-      {
-        aktivitetType: OpptjeningAktivitetType.ARBEID,
-        opptjeningFom: '2019-05-11',
-        opptjeningTom: '2019-07-24',
-        arbeidsgiverReferanse: '3',
-        arbeidsforholdRef: 'e5ec2632-0e31-4c8f-8190-d942053f8474',
-        stillingsandel: 100,
-        naringRegistreringsdato: '1995-09-14',
-        erGodkjent: true,
-        erEndret: false,
-      },
-      {
-        aktivitetType: OpptjeningAktivitetType.NARING,
-        opptjeningFom: '2019-02-11',
+    ],
+    opptjening: {
+      fastsattOpptjening: {
+        opptjeningFom: '2018-12-25',
         opptjeningTom: '2019-10-24',
-        arbeidsgiverReferanse: '1',
-        stillingsandel: 100,
-        naringRegistreringsdato: '1995-09-14',
-        erEndret: false,
+        opptjeningperiode: {
+          måneder: 0,
+          dager: 0,
+        },
+        fastsattOpptjeningAktivitetList: [],
       },
-      {
-        aktivitetType: OpptjeningAktivitetType.AAP,
-        opptjeningFom: '2019-02-11',
-        opptjeningTom: '2019-06-24',
-        arbeidsgiverReferanse: '1',
-        stillingsandel: 100,
-        naringRegistreringsdato: '1995-09-14',
-        erEndret: false,
-        erGodkjent: false,
-      },
-      {
-        aktivitetType: OpptjeningAktivitetType.SYKEPENGER,
-        opptjeningFom: '2018-12-11',
-        opptjeningTom: '2019-04-24',
-        arbeidsgiverReferanse: '1',
-        stillingsandel: 100,
-        naringRegistreringsdato: '1995-09-14',
-        erEndret: false,
-      },
-      {
-        aktivitetType: OpptjeningAktivitetType.ARBEID,
-        opptjeningFom: '2018-01-01',
-        opptjeningTom: '2018-11-01',
-        arbeidsgiverReferanse: '1',
-        arbeidsforholdRef: 'e5ec2632-0e31-4c8f-8190-d942053f847b',
-        stillingsandel: 100,
-        naringRegistreringsdato: '1995-09-14',
-        erGodkjent: true,
-        erEndret: false,
-      },
-    ],
-    ferdiglignetNæring: [
-      {
-        år: '2016',
-        beløp: 100000,
-      },
-      {
-        år: '2017',
-        beløp: 150000,
-      },
-      {
-        år: '2018',
-        beløp: 200000,
-      },
-    ],
-  } as Opptjening,
+      opptjeningAktivitetList: [
+        {
+          aktivitetType: OpptjeningAktivitetType.ARBEID,
+          opptjeningFom: '2019-02-11',
+          opptjeningTom: '2019-03-24',
+          arbeidsgiverReferanse: '3',
+          arbeidsforholdRef: 'e5ec2632-0e31-4c8f-8190-d942053f8474',
+          stillingsandel: 100,
+          naringRegistreringsdato: '1995-09-14',
+          erGodkjent: true,
+          erEndret: false,
+        },
+        {
+          aktivitetType: OpptjeningAktivitetType.ARBEID,
+          opptjeningFom: '2019-05-11',
+          opptjeningTom: '2019-07-24',
+          arbeidsgiverReferanse: '3',
+          arbeidsforholdRef: 'e5ec2632-0e31-4c8f-8190-d942053f8474',
+          stillingsandel: 100,
+          naringRegistreringsdato: '1995-09-14',
+          erGodkjent: true,
+          erEndret: false,
+        },
+        {
+          aktivitetType: OpptjeningAktivitetType.NARING,
+          opptjeningFom: '2019-02-11',
+          opptjeningTom: '2019-10-24',
+          arbeidsgiverReferanse: '1',
+          stillingsandel: 100,
+          naringRegistreringsdato: '1995-09-14',
+          erEndret: false,
+        },
+        {
+          aktivitetType: OpptjeningAktivitetType.AAP,
+          opptjeningFom: '2019-02-11',
+          opptjeningTom: '2019-06-24',
+          arbeidsgiverReferanse: '1',
+          stillingsandel: 100,
+          naringRegistreringsdato: '1995-09-14',
+          erEndret: false,
+          erGodkjent: false,
+        },
+        {
+          aktivitetType: OpptjeningAktivitetType.SYKEPENGER,
+          opptjeningFom: '2018-12-11',
+          opptjeningTom: '2019-04-24',
+          arbeidsgiverReferanse: '1',
+          stillingsandel: 100,
+          naringRegistreringsdato: '1995-09-14',
+          erEndret: false,
+        },
+        {
+          aktivitetType: OpptjeningAktivitetType.ARBEID,
+          opptjeningFom: '2018-01-01',
+          opptjeningTom: '2018-11-01',
+          arbeidsgiverReferanse: '1',
+          arbeidsforholdRef: 'e5ec2632-0e31-4c8f-8190-d942053f847b',
+          stillingsandel: 100,
+          naringRegistreringsdato: '1995-09-14',
+          erGodkjent: true,
+          erEndret: false,
+        },
+      ],
+      ferdiglignetNæring: [
+        {
+          år: '2016',
+          beløp: 100000,
+        },
+        {
+          år: '2017',
+          beløp: 150000,
+        },
+        {
+          år: '2018',
+          beløp: 200000,
+        },
+      ],
+    } as Opptjening,
+  },
 };
 
-export const UtenAksjonspunkt = Template.bind({});
-UtenAksjonspunkt.args = {
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-  aksjonspunkter: [],
-  opptjening: {
-    fastsattOpptjening: {
-      opptjeningFom: '2018-11-30',
-      opptjeningTom: '2019-09-29',
-      opptjeningperiode: {
-        dager: 4,
-        måneder: 10,
+export const UtenAksjonspunkt: Story = {
+  args: {
+    submitCallback: action('button-click') as (data: any) => Promise<any>,
+    aksjonspunkter: [],
+    opptjening: {
+      fastsattOpptjening: {
+        opptjeningFom: '2018-11-30',
+        opptjeningTom: '2019-09-29',
+        opptjeningperiode: {
+          dager: 4,
+          måneder: 10,
+        },
       },
-    },
-    opptjeningAktivitetList: [
-      {
-        opptjeningFom: '2017-01-01',
-        opptjeningTom: '9999-12-31',
-        aktivitetType: OpptjeningAktivitetType.ARBEID,
-        arbeidsgiverReferanse: '1',
-        arbeidsforholdRef: 'bf623ff9-6ffb-4a81-b9f1-2648e5530a47',
-        erEndret: false,
-        erGodkjent: true,
-        naringRegistreringsdato: '1995-09-14',
-        stillingsandel: 50,
-      },
-      {
-        opptjeningFom: '2017-01-01',
-        opptjeningTom: '9999-12-31',
-        aktivitetType: OpptjeningAktivitetType.DAGPENGER,
-        arbeidsgiverReferanse: '1',
-        arbeidsforholdRef: 'bf623ff9-6ffb-4a81-b9f1-2648e5530a47',
-        erEndret: false,
-        erGodkjent: true,
-        naringRegistreringsdato: '1995-09-14',
-        stillingsandel: 50,
-      },
-    ],
-  } as Opptjening,
+      opptjeningAktivitetList: [
+        {
+          opptjeningFom: '2017-01-01',
+          opptjeningTom: '9999-12-31',
+          aktivitetType: OpptjeningAktivitetType.ARBEID,
+          arbeidsgiverReferanse: '1',
+          arbeidsforholdRef: 'bf623ff9-6ffb-4a81-b9f1-2648e5530a47',
+          erEndret: false,
+          erGodkjent: true,
+          naringRegistreringsdato: '1995-09-14',
+          stillingsandel: 50,
+        },
+        {
+          opptjeningFom: '2017-01-01',
+          opptjeningTom: '9999-12-31',
+          aktivitetType: OpptjeningAktivitetType.DAGPENGER,
+          arbeidsgiverReferanse: '1',
+          arbeidsforholdRef: 'bf623ff9-6ffb-4a81-b9f1-2648e5530a47',
+          erEndret: false,
+          erGodkjent: true,
+          naringRegistreringsdato: '1995-09-14',
+          stillingsandel: 50,
+        },
+      ],
+    } as Opptjening,
+  },
 };
 
-export const MedToLikePerioderForSammeAktivitetstype = Template.bind({});
-MedToLikePerioderForSammeAktivitetstype.args = {
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-  aksjonspunkter: [
-    {
-      definisjon: AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
-      status: AksjonspunktStatus.OPPRETTET,
-      begrunnelse: undefined,
-      kanLoses: true,
-    },
-  ],
-  opptjening: {
-    fastsattOpptjening: {
-      opptjeningFom: '2018-12-25',
-      opptjeningTom: '2019-10-24',
-      opptjeningperiode: {
-        måneder: 0,
-        dager: 0,
-      },
-      fastsattOpptjeningAktivitetList: [],
-    },
-    opptjeningAktivitetList: [
+export const MedToLikePerioderForSammeAktivitetstype: Story = {
+  args: {
+    submitCallback: action('button-click') as (data: any) => Promise<any>,
+    aksjonspunkter: [
       {
-        aktivitetType: OpptjeningAktivitetType.NARING,
-        opptjeningFom: '1995-09-14',
-        opptjeningTom: '9999-12-31',
-        arbeidsgiverReferanse: '1',
-        arbeidsforholdRef: 'e5ec2632-0e31-4c8f-8190-d942053f847b',
-        stillingsandel: 100,
-        naringRegistreringsdato: '1995-09-14',
-        erEndret: false,
-      },
-      {
-        aktivitetType: OpptjeningAktivitetType.NARING,
-        opptjeningFom: '1995-09-14',
-        opptjeningTom: '9999-12-31',
-        arbeidsgiverReferanse: '2',
-        arbeidsforholdRef: 'e5ec2632-0e31-4c8f-8190-d942053f847b',
-        stillingsandel: 100,
-        naringRegistreringsdato: '1995-09-14',
-        erGodkjent: true,
-        erEndret: false,
+        definisjon: AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
+        status: AksjonspunktStatus.OPPRETTET,
+        begrunnelse: undefined,
+        kanLoses: true,
       },
     ],
-    ferdiglignetNæring: [
-      {
-        år: '2016',
-        beløp: 100000,
+    opptjening: {
+      fastsattOpptjening: {
+        opptjeningFom: '2018-12-25',
+        opptjeningTom: '2019-10-24',
+        opptjeningperiode: {
+          måneder: 0,
+          dager: 0,
+        },
+        fastsattOpptjeningAktivitetList: [],
       },
-      {
-        år: '2017',
-        beløp: 150000,
-      },
-      {
-        år: '2018',
-        beløp: 200000,
-      },
-    ],
-  } as Opptjening,
+      opptjeningAktivitetList: [
+        {
+          aktivitetType: OpptjeningAktivitetType.NARING,
+          opptjeningFom: '1995-09-14',
+          opptjeningTom: '9999-12-31',
+          arbeidsgiverReferanse: '1',
+          arbeidsforholdRef: 'e5ec2632-0e31-4c8f-8190-d942053f847b',
+          stillingsandel: 100,
+          naringRegistreringsdato: '1995-09-14',
+          erEndret: false,
+        },
+        {
+          aktivitetType: OpptjeningAktivitetType.NARING,
+          opptjeningFom: '1995-09-14',
+          opptjeningTom: '9999-12-31',
+          arbeidsgiverReferanse: '2',
+          arbeidsforholdRef: 'e5ec2632-0e31-4c8f-8190-d942053f847b',
+          stillingsandel: 100,
+          naringRegistreringsdato: '1995-09-14',
+          erGodkjent: true,
+          erEndret: false,
+        },
+      ],
+      ferdiglignetNæring: [
+        {
+          år: '2016',
+          beløp: 100000,
+        },
+        {
+          år: '2017',
+          beløp: 150000,
+        },
+        {
+          år: '2018',
+          beløp: 200000,
+        },
+      ],
+    } as Opptjening,
+  },
 };
 
-export const MedAlleOpptjeningsaktiviteterFiltrertBort = Template.bind({});
-MedAlleOpptjeningsaktiviteterFiltrertBort.args = {
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-  aksjonspunkter: [
-    {
-      definisjon: AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
-      status: AksjonspunktStatus.OPPRETTET,
-      begrunnelse: undefined,
-      kanLoses: true,
-    },
-  ],
-  opptjening: {
-    fastsattOpptjening: {
-      opptjeningFom: '2018-12-25',
-      opptjeningTom: '2019-10-24',
-      opptjeningperiode: {
-        måneder: 0,
-        dager: 0,
-      },
-      fastsattOpptjeningAktivitetList: [],
-    },
-    opptjeningAktivitetList: [
+export const MedAlleOpptjeningsaktiviteterFiltrertBort: Story = {
+  args: {
+    submitCallback: action('button-click') as (data: any) => Promise<any>,
+    aksjonspunkter: [
       {
-        aktivitetType: OpptjeningAktivitetType.ARBEID,
-        opptjeningFom: '2020-12-25',
-        opptjeningTom: '2021-10-24',
-        arbeidsgiverReferanse: '3',
-        arbeidsforholdRef: 'e5ec2632-0e31-4c8f-8190-d942053f8474',
-        stillingsandel: 100,
-        naringRegistreringsdato: '1995-09-14',
-        erGodkjent: true,
-        erEndret: false,
+        definisjon: AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
+        status: AksjonspunktStatus.OPPRETTET,
+        begrunnelse: undefined,
+        kanLoses: true,
       },
     ],
-  } as Opptjening,
+    opptjening: {
+      fastsattOpptjening: {
+        opptjeningFom: '2018-12-25',
+        opptjeningTom: '2019-10-24',
+        opptjeningperiode: {
+          måneder: 0,
+          dager: 0,
+        },
+        fastsattOpptjeningAktivitetList: [],
+      },
+      opptjeningAktivitetList: [
+        {
+          aktivitetType: OpptjeningAktivitetType.ARBEID,
+          opptjeningFom: '2020-12-25',
+          opptjeningTom: '2021-10-24',
+          arbeidsgiverReferanse: '3',
+          arbeidsforholdRef: 'e5ec2632-0e31-4c8f-8190-d942053f8474',
+          stillingsandel: 100,
+          naringRegistreringsdato: '1995-09-14',
+          erGodkjent: true,
+          erEndret: false,
+        },
+      ],
+    } as Opptjening,
+  },
 };

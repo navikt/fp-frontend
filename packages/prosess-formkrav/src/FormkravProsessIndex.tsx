@@ -1,4 +1,3 @@
-import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
@@ -15,13 +14,13 @@ import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-interface OwnProps {
+interface Props {
   klageVurdering?: KlageVurdering;
   avsluttedeBehandlinger: AvsluttetBehandling[];
   lagreFormkravVurdering: (data: FormkravMellomlagretDataType) => Promise<void>;
 }
 
-const FormkravProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
+export const FormkravProsessIndex = ({
   behandling,
   klageVurdering = {},
   avsluttedeBehandlinger,
@@ -33,7 +32,7 @@ const FormkravProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelPro
   formData,
   setFormData,
   lagreFormkravVurdering,
-}) => (
+}: Props & StandardProsessPanelProps) => (
   <RawIntlProvider value={intl}>
     {aksjonspunkter.some(a => a.definisjon === AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP) && (
       <FormkravKlageFormNfp
@@ -58,5 +57,3 @@ const FormkravProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelPro
     )}
   </RawIntlProvider>
 );
-
-export default FormkravProsessIndex;

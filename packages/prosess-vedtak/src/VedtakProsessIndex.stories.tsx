@@ -1,7 +1,5 @@
-import React from 'react';
-
 import { action } from '@storybook/addon-actions';
-import { StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import {
   AksjonspunktKode,
@@ -25,9 +23,8 @@ import {
   Fagsak,
   Vilkar,
 } from '@navikt/fp-types';
-import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import VedtakProsessIndex from './VedtakProsessIndex';
+import { VedtakProsessIndex } from './VedtakProsessIndex';
 
 const defaultBehandling = {
   uuid: '1',
@@ -68,569 +65,535 @@ const defaultberegningresultatDagytelse = {
   beregnetTilkjentYtelse: 10000,
 } as BeregningsresultatDagytelse;
 
-export default {
+const meta = {
   title: 'prosess/prosess-vedtak',
   component: VedtakProsessIndex,
-};
+  args: {
+    submitCallback: action('button-click') as (data: any) => Promise<void>,
+    aksjonspunkter: defaultAksjonspunkter,
+    isAksjonspunktOpen: true,
+    readOnlySubmitButton: false,
+    status: '',
+    vilkar: defaultVilkar,
+    alleMerknaderFraBeslutter: {},
+    setFormData: () => undefined,
+    previewCallback: action('button-click') as any,
+    alleKodeverk: alleKodeverk as any,
+    fagsak: {} as Fagsak,
+  },
+} satisfies Meta<typeof VedtakProsessIndex>;
+export default meta;
 
-const Template: StoryFn<{
-  behandling: Behandling;
-  beregningresultatDagytelse?: BeregningsresultatDagytelse;
-  beregningresultatEngangsstonad?: BeregningsresultatEs;
-  ytelseTypeKode: string;
-  isReadOnly: boolean;
-  submitCallback: (aksjonspunktData: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>;
-  beregningsgrunnlag?: Beregningsgrunnlag;
-  aksjonspunkter?: Aksjonspunkt[];
-  beregningsresultatOriginalBehandling?: {
-    'beregningsresultat-engangsstonad'?: BeregningsresultatEs;
-    'beregningsresultat-foreldrepenger'?: BeregningsresultatDagytelse;
-  };
-  vilkar?: Vilkar[];
-  previewCallback?: (data: any) => Promise<any>;
-}> = ({
-  behandling,
-  beregningresultatDagytelse,
-  beregningresultatEngangsstonad,
-  ytelseTypeKode,
-  isReadOnly,
-  submitCallback,
-  beregningsgrunnlag,
-  aksjonspunkter,
-  beregningsresultatOriginalBehandling,
-  vilkar,
-  previewCallback,
-}) => (
-  <VedtakProsessIndex
-    behandling={behandling}
-    aksjonspunkter={aksjonspunkter || defaultAksjonspunkter}
-    submitCallback={submitCallback}
-    isReadOnly={isReadOnly}
-    isAksjonspunktOpen
-    readOnlySubmitButton={false}
-    status=""
-    vilkar={vilkar || defaultVilkar}
-    alleMerknaderFraBeslutter={{}}
-    setFormData={() => undefined}
-    beregningresultatDagytelse={beregningresultatDagytelse}
-    beregningresultatEngangsstonad={beregningresultatEngangsstonad}
-    previewCallback={previewCallback || (action('button-click') as any)}
-    ytelseTypeKode={ytelseTypeKode}
-    alleKodeverk={alleKodeverk as any}
-    beregningsgrunnlag={beregningsgrunnlag}
-    beregningsresultatOriginalBehandling={beregningsresultatOriginalBehandling}
-    fagsak={{} as Fagsak}
-  />
-);
+type Story = StoryObj<typeof meta>;
 
 /*
  * Førstegangssøknad - Foreldrepenger
  */
 
-export const InnvilgetForeldrepengerTilGodkjenningForSaksbehandler = Template.bind({});
-InnvilgetForeldrepengerTilGodkjenningForSaksbehandler.args = {
-  behandling: defaultBehandling,
-  beregningresultatDagytelse: defaultberegningresultatDagytelse,
-  ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
-  isReadOnly: false,
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
+export const InnvilgetForeldrepengerTilGodkjenningForSaksbehandler: Story = {
+  args: {
+    behandling: defaultBehandling,
+    beregningresultatDagytelse: defaultberegningresultatDagytelse,
+    ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
+    isReadOnly: false,
+  },
 };
 
-export const GodkjentForeldrepengerForSaksbehandler = Template.bind({});
-GodkjentForeldrepengerForSaksbehandler.args = {
-  behandling: {
-    ...defaultBehandling,
-    status: BehandlingStatus.AVSLUTTET,
-  } as Behandling,
-  beregningresultatDagytelse: defaultberegningresultatDagytelse,
-  ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
-  isReadOnly: true,
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
+export const GodkjentForeldrepengerForSaksbehandler: Story = {
+  args: {
+    behandling: {
+      ...defaultBehandling,
+      status: BehandlingStatus.AVSLUTTET,
+    } as Behandling,
+    beregningresultatDagytelse: defaultberegningresultatDagytelse,
+    ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
+    isReadOnly: true,
+  },
 };
 
-export const GodkjentForeldrepengerMedManueltBrevForSaksbehandlerMedOverstyring = Template.bind({});
-GodkjentForeldrepengerMedManueltBrevForSaksbehandlerMedOverstyring.args = {
-  behandling: {
-    ...defaultBehandling,
-    status: BehandlingStatus.AVSLUTTET,
-    behandlingsresultat: {
-      vedtaksbrev: 'FRITEKST',
-      overskrift: 'Dette er en overskrift',
-      fritekstbrev: 'Dette er innholdet i brevet',
-      type: BehandlingResultatType.INNVILGET,
-    },
-  } as Behandling,
-  beregningresultatDagytelse: defaultberegningresultatDagytelse,
-  ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
-  isReadOnly: true,
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
+export const GodkjentForeldrepengerMedManueltBrevForSaksbehandlerMedOverstyring: Story = {
+  args: {
+    behandling: {
+      ...defaultBehandling,
+      status: BehandlingStatus.AVSLUTTET,
+      behandlingsresultat: {
+        vedtaksbrev: 'FRITEKST',
+        overskrift: 'Dette er en overskrift',
+        fritekstbrev: 'Dette er innholdet i brevet',
+        type: BehandlingResultatType.INNVILGET,
+      },
+    } as Behandling,
+    beregningresultatDagytelse: defaultberegningresultatDagytelse,
+    ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
+    isReadOnly: true,
+  },
 };
 
-export const AvslåttForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyring = Template.bind({});
-AvslåttForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyring.args = {
-  behandling: {
-    ...defaultBehandling,
-    behandlingsresultat: {
-      type: BehandlingResultatType.AVSLATT,
-      avslagsarsakFritekst: 'Dette er ein fritekst',
-    },
-  } as Behandling,
-  beregningresultatDagytelse: defaultberegningresultatDagytelse,
-  ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
-  isReadOnly: false,
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
+export const AvslåttForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyring: Story = {
+  args: {
+    behandling: {
+      ...defaultBehandling,
+      behandlingsresultat: {
+        type: BehandlingResultatType.AVSLATT,
+        avslagsarsakFritekst: 'Dette er ein fritekst',
+      },
+    } as Behandling,
+    beregningresultatDagytelse: defaultberegningresultatDagytelse,
+    ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
+    isReadOnly: false,
+  },
 };
 
-export const GodkjentAvslagForForeldrepengerForSaksbehandlerMedOverstyring = Template.bind({});
-GodkjentAvslagForForeldrepengerForSaksbehandlerMedOverstyring.args = {
-  behandling: {
-    ...defaultBehandling,
-    status: BehandlingStatus.AVSLUTTET,
-    behandlingsresultat: {
-      type: BehandlingResultatType.AVSLATT,
-    },
-  } as Behandling,
-  beregningresultatDagytelse: defaultberegningresultatDagytelse,
-  ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
-  isReadOnly: true,
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
+export const GodkjentAvslagForForeldrepengerForSaksbehandlerMedOverstyring: Story = {
+  args: {
+    behandling: {
+      ...defaultBehandling,
+      status: BehandlingStatus.AVSLUTTET,
+      behandlingsresultat: {
+        type: BehandlingResultatType.AVSLATT,
+      },
+    } as Behandling,
+    beregningresultatDagytelse: defaultberegningresultatDagytelse,
+    ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
+    isReadOnly: true,
+  },
 };
 
-export const InnvilgetForeldrepengerDerBeregningErManueltFastsatt = Template.bind({});
-InnvilgetForeldrepengerDerBeregningErManueltFastsatt.args = {
-  behandling: defaultBehandling,
-  beregningresultatDagytelse: defaultberegningresultatDagytelse,
-  ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
-  beregningsgrunnlag: {
-    beregningsgrunnlagPeriode: [
+export const InnvilgetForeldrepengerDerBeregningErManueltFastsatt: Story = {
+  args: {
+    behandling: defaultBehandling,
+    beregningresultatDagytelse: defaultberegningresultatDagytelse,
+    ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
+    beregningsgrunnlag: {
+      beregningsgrunnlagPeriode: [
+        {
+          beregningsgrunnlagPrStatusOgAndel: [
+            {
+              overstyrtPrAar: 0,
+            },
+          ],
+        },
+      ],
+    } as Beregningsgrunnlag,
+    isReadOnly: false,
+  },
+};
+
+export const AvslåttForeldrepengerDerBeregningErManueltFastsatt: Story = {
+  args: {
+    behandling: {
+      ...defaultBehandling,
+      behandlingsresultat: {
+        type: BehandlingResultatType.AVSLATT,
+        avslagsarsakFritekst: 'Dette er ein fritekst',
+      },
+    } as Behandling,
+    beregningresultatDagytelse: defaultberegningresultatDagytelse,
+    ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
+    beregningsgrunnlag: {
+      beregningsgrunnlagPeriode: [
+        {
+          beregningsgrunnlagPrStatusOgAndel: [
+            {
+              overstyrtPrAar: 0,
+            },
+          ],
+        },
+      ],
+    } as Beregningsgrunnlag,
+    isReadOnly: false,
+  },
+};
+
+export const TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = {
+  args: {
+    behandling: defaultBehandling,
+    beregningresultatDagytelse: defaultberegningresultatDagytelse,
+    ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
+    beregningsgrunnlag: {
+      beregningsgrunnlagPeriode: [
+        {
+          beregningsgrunnlagPrStatusOgAndel: [
+            {
+              overstyrtPrAar: 0,
+            },
+          ],
+        },
+      ],
+    } as Beregningsgrunnlag,
+    aksjonspunkter: [
+      ...defaultAksjonspunkter,
       {
-        beregningsgrunnlagPrStatusOgAndel: [
-          {
-            overstyrtPrAar: 0,
-          },
-        ],
+        definisjon: AksjonspunktKode.VURDERE_ANNEN_YTELSE,
+        status: AksjonspunktStatus.OPPRETTET,
+        begrunnelse: undefined,
+        kanLoses: false,
+        toTrinnsBehandling: true,
+      },
+      {
+        definisjon: AksjonspunktKode.VURDERE_DOKUMENT,
+        status: AksjonspunktStatus.OPPRETTET,
+        begrunnelse: undefined,
+        kanLoses: false,
+      },
+      {
+        definisjon: AksjonspunktKode.VURDERE_INNTEKTSMELDING_KLAGE,
+        status: AksjonspunktStatus.OPPRETTET,
+        begrunnelse: undefined,
+        kanLoses: false,
+      },
+      {
+        definisjon: AksjonspunktKode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST,
+        status: AksjonspunktStatus.OPPRETTET,
+        begrunnelse: undefined,
+        kanLoses: false,
+        toTrinnsBehandling: true,
       },
     ],
-  } as Beregningsgrunnlag,
-  isReadOnly: false,
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-};
-
-export const AvslåttForeldrepengerDerBeregningErManueltFastsatt = Template.bind({});
-AvslåttForeldrepengerDerBeregningErManueltFastsatt.args = {
-  behandling: {
-    ...defaultBehandling,
-    behandlingsresultat: {
-      type: BehandlingResultatType.AVSLATT,
-      avslagsarsakFritekst: 'Dette er ein fritekst',
-    },
-  } as Behandling,
-  beregningresultatDagytelse: defaultberegningresultatDagytelse,
-  ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
-  beregningsgrunnlag: {
-    beregningsgrunnlagPeriode: [
-      {
-        beregningsgrunnlagPrStatusOgAndel: [
-          {
-            overstyrtPrAar: 0,
-          },
-        ],
-      },
-    ],
-  } as Beregningsgrunnlag,
-  isReadOnly: false,
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-};
-
-export const TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil = Template.bind({});
-TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil.args = {
-  behandling: defaultBehandling,
-  beregningresultatDagytelse: defaultberegningresultatDagytelse,
-  ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
-  beregningsgrunnlag: {
-    beregningsgrunnlagPeriode: [
-      {
-        beregningsgrunnlagPrStatusOgAndel: [
-          {
-            overstyrtPrAar: 0,
-          },
-        ],
-      },
-    ],
-  } as Beregningsgrunnlag,
-  aksjonspunkter: [
-    ...defaultAksjonspunkter,
-    {
-      definisjon: AksjonspunktKode.VURDERE_ANNEN_YTELSE,
-      status: AksjonspunktStatus.OPPRETTET,
-      begrunnelse: undefined,
-      kanLoses: false,
-      toTrinnsBehandling: true,
-    },
-    {
-      definisjon: AksjonspunktKode.VURDERE_DOKUMENT,
-      status: AksjonspunktStatus.OPPRETTET,
-      begrunnelse: undefined,
-      kanLoses: false,
-    },
-    {
-      definisjon: AksjonspunktKode.VURDERE_INNTEKTSMELDING_KLAGE,
-      status: AksjonspunktStatus.OPPRETTET,
-      begrunnelse: undefined,
-      kanLoses: false,
-    },
-    {
-      definisjon: AksjonspunktKode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST,
-      status: AksjonspunktStatus.OPPRETTET,
-      begrunnelse: undefined,
-      kanLoses: false,
-      toTrinnsBehandling: true,
-    },
-  ],
-  isReadOnly: false,
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
+    isReadOnly: false,
+  },
 };
 
 /*
  * Førstegangssøknad - Engangsstøand
  */
 
-export const InnvilgetEngangsstønadTilGodkjenningForSaksbehandlerUtenOverstyring = Template.bind({});
-InnvilgetEngangsstønadTilGodkjenningForSaksbehandlerUtenOverstyring.args = {
-  behandling: defaultBehandling,
-  beregningresultatEngangsstonad: {
-    antallBarn: 2,
-    beregnetTilkjentYtelse: 10000,
-  } as BeregningsresultatEs,
-  ytelseTypeKode: FagsakYtelseType.ENGANGSSTONAD,
-  isReadOnly: false,
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-};
-
-export const GodkjentEngangsstønadForSaksbehandlerUtenOverstyring = Template.bind({});
-GodkjentEngangsstønadForSaksbehandlerUtenOverstyring.args = {
-  behandling: {
-    ...defaultBehandling,
-    status: BehandlingStatus.AVSLUTTET,
+export const InnvilgetEngangsstønadTilGodkjenningForSaksbehandlerUtenOverstyring: Story = {
+  args: {
+    behandling: defaultBehandling,
+    beregningresultatEngangsstonad: {
+      antallBarn: 2,
+      beregnetTilkjentYtelse: 10000,
+    } as BeregningsresultatEs,
+    ytelseTypeKode: FagsakYtelseType.ENGANGSSTONAD,
+    isReadOnly: false,
   },
-  beregningresultatEngangsstonad: {
-    antallBarn: 2,
-    beregnetTilkjentYtelse: 10000,
-  } as BeregningsresultatEs,
-  ytelseTypeKode: FagsakYtelseType.ENGANGSSTONAD,
-  isReadOnly: true,
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
 };
 
-export const InnvilgetEngangsstønadTilGodkjenningForSaksbehandlerMedOverstyring = Template.bind({});
-InnvilgetEngangsstønadTilGodkjenningForSaksbehandlerMedOverstyring.args = {
-  behandling: defaultBehandling,
-  beregningresultatEngangsstonad: {
-    antallBarn: 2,
-    beregnetTilkjentYtelse: 10000,
-  } as BeregningsresultatEs,
-  ytelseTypeKode: FagsakYtelseType.ENGANGSSTONAD,
-  isReadOnly: false,
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-};
-
-export const InnvilgetEngangsstønadDerBeregningErManueltFastsatt = Template.bind({});
-InnvilgetEngangsstønadDerBeregningErManueltFastsatt.args = {
-  behandling: defaultBehandling,
-  beregningresultatEngangsstonad: {
-    antallBarn: 2,
-    beregnetTilkjentYtelse: 10000,
-  } as BeregningsresultatEs,
-  ytelseTypeKode: FagsakYtelseType.ENGANGSSTONAD,
-  beregningsgrunnlag: {
-    beregningsgrunnlagPeriode: [
-      {
-        beregningsgrunnlagPrStatusOgAndel: [
-          {
-            overstyrtPrAar: 0,
-          },
-        ],
-      },
-    ],
-  } as Beregningsgrunnlag,
-  isReadOnly: false,
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-};
-
-export const AvslåttEngangsstønadDerBeregningErManueltFastsatt = Template.bind({});
-AvslåttEngangsstønadDerBeregningErManueltFastsatt.args = {
-  behandling: {
-    ...defaultBehandling,
-    behandlingsresultat: {
-      type: BehandlingResultatType.AVSLATT,
-      avslagsarsakFritekst: 'Dette er ein fritekst',
+export const GodkjentEngangsstønadForSaksbehandlerUtenOverstyring: Story = {
+  args: {
+    behandling: {
+      ...defaultBehandling,
+      status: BehandlingStatus.AVSLUTTET,
     },
-  } as Behandling,
-  beregningresultatEngangsstonad: {
-    antallBarn: 2,
-    beregnetTilkjentYtelse: 10000,
-  } as BeregningsresultatEs,
-  ytelseTypeKode: FagsakYtelseType.ENGANGSSTONAD,
-  isReadOnly: false,
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
+    beregningresultatEngangsstonad: {
+      antallBarn: 2,
+      beregnetTilkjentYtelse: 10000,
+    } as BeregningsresultatEs,
+    ytelseTypeKode: FagsakYtelseType.ENGANGSSTONAD,
+    isReadOnly: true,
+  },
+};
+
+export const InnvilgetEngangsstønadTilGodkjenningForSaksbehandlerMedOverstyring: Story = {
+  args: {
+    behandling: defaultBehandling,
+    beregningresultatEngangsstonad: {
+      antallBarn: 2,
+      beregnetTilkjentYtelse: 10000,
+    } as BeregningsresultatEs,
+    ytelseTypeKode: FagsakYtelseType.ENGANGSSTONAD,
+    isReadOnly: false,
+  },
+};
+
+export const InnvilgetEngangsstønadDerBeregningErManueltFastsatt: Story = {
+  args: {
+    behandling: defaultBehandling,
+    beregningresultatEngangsstonad: {
+      antallBarn: 2,
+      beregnetTilkjentYtelse: 10000,
+    } as BeregningsresultatEs,
+    ytelseTypeKode: FagsakYtelseType.ENGANGSSTONAD,
+    beregningsgrunnlag: {
+      beregningsgrunnlagPeriode: [
+        {
+          beregningsgrunnlagPrStatusOgAndel: [
+            {
+              overstyrtPrAar: 0,
+            },
+          ],
+        },
+      ],
+    } as Beregningsgrunnlag,
+    isReadOnly: false,
+  },
+};
+
+export const AvslåttEngangsstønadDerBeregningErManueltFastsatt: Story = {
+  args: {
+    behandling: {
+      ...defaultBehandling,
+      behandlingsresultat: {
+        type: BehandlingResultatType.AVSLATT,
+        avslagsarsakFritekst: 'Dette er ein fritekst',
+      },
+    } as Behandling,
+    beregningresultatEngangsstonad: {
+      antallBarn: 2,
+      beregnetTilkjentYtelse: 10000,
+    } as BeregningsresultatEs,
+    ytelseTypeKode: FagsakYtelseType.ENGANGSSTONAD,
+    isReadOnly: false,
+  },
 };
 
 /*
  * Førstegangssøknad - Svangerskapspenger
  */
 
-export const InnvilgetSvangerskapspengerTilGodkjenningForSaksbehandlerMedOverstyring = Template.bind({});
-InnvilgetSvangerskapspengerTilGodkjenningForSaksbehandlerMedOverstyring.args = {
-  behandling: defaultBehandling,
-  ytelseTypeKode: FagsakYtelseType.SVANGERSKAPSPENGER,
-  isReadOnly: false,
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
+export const InnvilgetSvangerskapspengerTilGodkjenningForSaksbehandlerMedOverstyring: Story = {
+  args: {
+    behandling: defaultBehandling,
+    ytelseTypeKode: FagsakYtelseType.SVANGERSKAPSPENGER,
+    isReadOnly: false,
+  },
 };
 
 /*
  * Revurdering - Foreldrepenger
  */
 
-export const InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerUtenOverstyring = Template.bind({});
-InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerUtenOverstyring.args = {
-  behandling: {
-    ...defaultBehandling,
-    type: BehandlingType.REVURDERING,
-    behandlingsresultat: {
-      type: BehandlingResultatType.INNVILGET,
-      konsekvenserForYtelsen: [
-        KonsekvensForYtelsen.ENDRING_I_BEREGNING_OG_UTTAK,
-        KonsekvensForYtelsen.FORELDREPENGER_OPPHORER,
-      ],
-    },
-  } as Behandling,
-  beregningresultatDagytelse: defaultberegningresultatDagytelse,
-  ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
-  isReadOnly: false,
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-};
-
-export const GodkjentRevurderingForeldrepengerForSaksbehandlerUtenOverstyring = Template.bind({});
-GodkjentRevurderingForeldrepengerForSaksbehandlerUtenOverstyring.args = {
-  behandling: {
-    ...defaultBehandling,
-    type: BehandlingType.REVURDERING,
-    status: BehandlingStatus.AVSLUTTET,
-    behandlingsresultat: {
-      type: BehandlingResultatType.INNVILGET,
-      konsekvenserForYtelsen: [
-        KonsekvensForYtelsen.ENDRING_I_BEREGNING_OG_UTTAK,
-        KonsekvensForYtelsen.FORELDREPENGER_OPPHORER,
-      ],
-    },
-  } as Behandling,
-  beregningresultatDagytelse: defaultberegningresultatDagytelse,
-  ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
-  isReadOnly: false,
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-};
-
-export const InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyring = Template.bind({});
-InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyring.args = {
-  behandling: {
-    ...defaultBehandling,
-    type: BehandlingType.REVURDERING,
-    behandlingsresultat: {
-      type: BehandlingResultatType.INNVILGET,
-      konsekvenserForYtelsen: [
-        KonsekvensForYtelsen.ENDRING_I_BEREGNING_OG_UTTAK,
-        KonsekvensForYtelsen.FORELDREPENGER_OPPHORER,
-      ],
-    },
-  } as Behandling,
-  beregningresultatDagytelse: defaultberegningresultatDagytelse,
-  ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
-  isReadOnly: false,
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-};
-
-export const GodkjentRevurderingForeldrepengerForSaksbehandlerMedOverstyring = Template.bind({});
-GodkjentRevurderingForeldrepengerForSaksbehandlerMedOverstyring.args = {
-  behandling: {
-    ...defaultBehandling,
-    type: BehandlingType.REVURDERING,
-    status: BehandlingStatus.AVSLUTTET,
-    behandlingsresultat: {
-      type: BehandlingResultatType.INNVILGET,
-      konsekvenserForYtelsen: [
-        KonsekvensForYtelsen.ENDRING_I_BEREGNING_OG_UTTAK,
-        KonsekvensForYtelsen.FORELDREPENGER_OPPHORER,
-      ],
-    },
-  } as Behandling,
-  beregningresultatDagytelse: defaultberegningresultatDagytelse,
-  ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
-  isReadOnly: true,
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-};
-
-export const GodkjentRevurderingForeldrepengerMedManueltBrevForSaksbehandlerMedOverstyring = Template.bind({});
-GodkjentRevurderingForeldrepengerMedManueltBrevForSaksbehandlerMedOverstyring.args = {
-  behandling: {
-    ...defaultBehandling,
-    type: BehandlingType.REVURDERING,
-    status: BehandlingStatus.AVSLUTTET,
-    behandlingsresultat: {
-      vedtaksbrev: 'FRITEKST',
-      overskrift: 'Dette er en overskrift',
-      fritekstbrev: 'Dette er innholdet i brevet',
-      type: BehandlingResultatType.INNVILGET,
-      konsekvenserForYtelsen: [KonsekvensForYtelsen.FORELDREPENGER_OPPHORER],
-    },
-  } as Behandling,
-  beregningresultatDagytelse: defaultberegningresultatDagytelse,
-  ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
-  isReadOnly: true,
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-};
-
-export const AvslåttRevurderingForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyring = Template.bind({});
-AvslåttRevurderingForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyring.args = {
-  behandling: {
-    ...defaultBehandling,
-    type: BehandlingType.REVURDERING,
-    behandlingsresultat: {
-      type: BehandlingResultatType.AVSLATT,
-      avslagsarsakFritekst: 'Dette er ein fritekst',
-    },
-  } as Behandling,
-  beregningsresultatOriginalBehandling: {
-    'beregningsresultat-foreldrepenger': {
-      ...defaultberegningresultatDagytelse,
-    },
+export const InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerUtenOverstyring: Story = {
+  args: {
+    behandling: {
+      ...defaultBehandling,
+      type: BehandlingType.REVURDERING,
+      behandlingsresultat: {
+        type: BehandlingResultatType.INNVILGET,
+        konsekvenserForYtelsen: [
+          KonsekvensForYtelsen.ENDRING_I_BEREGNING_OG_UTTAK,
+          KonsekvensForYtelsen.FORELDREPENGER_OPPHORER,
+        ],
+      },
+    } as Behandling,
+    beregningresultatDagytelse: defaultberegningresultatDagytelse,
+    ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
+    isReadOnly: false,
   },
-  ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
-  isReadOnly: false,
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
 };
 
-export const GodkjentRevurderingAvslagForForeldrepengerForSaksbehandlerMedOverstyring = Template.bind({});
-GodkjentRevurderingAvslagForForeldrepengerForSaksbehandlerMedOverstyring.args = {
-  behandling: {
-    ...defaultBehandling,
-    type: BehandlingType.REVURDERING,
-    status: BehandlingStatus.AVSLUTTET,
-    behandlingsresultat: {
-      type: BehandlingResultatType.AVSLATT,
-    },
-  } as Behandling,
-  beregningsresultatOriginalBehandling: {
-    'beregningsresultat-foreldrepenger': {
-      ...defaultberegningresultatDagytelse,
-    },
+export const GodkjentRevurderingForeldrepengerForSaksbehandlerUtenOverstyring: Story = {
+  args: {
+    behandling: {
+      ...defaultBehandling,
+      type: BehandlingType.REVURDERING,
+      status: BehandlingStatus.AVSLUTTET,
+      behandlingsresultat: {
+        type: BehandlingResultatType.INNVILGET,
+        konsekvenserForYtelsen: [
+          KonsekvensForYtelsen.ENDRING_I_BEREGNING_OG_UTTAK,
+          KonsekvensForYtelsen.FORELDREPENGER_OPPHORER,
+        ],
+      },
+    } as Behandling,
+    beregningresultatDagytelse: defaultberegningresultatDagytelse,
+    ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
+    isReadOnly: false,
   },
-  ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
-  isReadOnly: true,
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
 };
 
-export const OpphørForRevurderingForeldrepengerForSaksbehandlerMedOverstyring = Template.bind({});
-OpphørForRevurderingForeldrepengerForSaksbehandlerMedOverstyring.args = {
-  behandling: {
-    ...defaultBehandling,
-    type: BehandlingType.REVURDERING,
-    behandlingsresultat: {
-      type: BehandlingResultatType.OPPHOR,
-      opphørsdato: '2024-11-01',
-    },
-  } as Behandling,
-  beregningresultatDagytelse: defaultberegningresultatDagytelse,
-  ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
-  isReadOnly: true,
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-};
-
-export const InnvilgetForRevurderingForeldrepengerDerBeregningErManueltFastsatt = Template.bind({});
-InnvilgetForRevurderingForeldrepengerDerBeregningErManueltFastsatt.args = {
-  behandling: {
-    ...defaultBehandling,
-    type: BehandlingType.REVURDERING,
-    behandlingsresultat: {
-      type: BehandlingResultatType.INNVILGET,
-      konsekvenserForYtelsen: [KonsekvensForYtelsen.ENDRING_I_BEREGNING_OG_UTTAK],
-    },
-  } as Behandling,
-  beregningresultatDagytelse: defaultberegningresultatDagytelse,
-  ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
-  beregningsgrunnlag: {
-    beregningsgrunnlagPeriode: [
-      {
-        beregningsgrunnlagPrStatusOgAndel: [
-          {
-            overstyrtPrAar: 0,
-          },
+export const InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyring: Story = {
+  args: {
+    behandling: {
+      ...defaultBehandling,
+      type: BehandlingType.REVURDERING,
+      behandlingsresultat: {
+        type: BehandlingResultatType.INNVILGET,
+        konsekvenserForYtelsen: [
+          KonsekvensForYtelsen.ENDRING_I_BEREGNING_OG_UTTAK,
+          KonsekvensForYtelsen.FORELDREPENGER_OPPHORER,
         ],
       },
-    ],
-  } as Beregningsgrunnlag,
-  isReadOnly: false,
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
+    } as Behandling,
+    beregningresultatDagytelse: defaultberegningresultatDagytelse,
+    ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
+    isReadOnly: false,
+  },
 };
 
-export const AvslåttForRevurderingForeldrepengerDerSøknadsfristvilkåretIkkeErOppfylt = Template.bind({});
-AvslåttForRevurderingForeldrepengerDerSøknadsfristvilkåretIkkeErOppfylt.args = {
-  behandling: {
-    ...defaultBehandling,
-    type: BehandlingType.REVURDERING,
-    behandlingsresultat: {
-      type: BehandlingResultatType.AVSLATT,
-      konsekvenserForYtelsen: [KonsekvensForYtelsen.ENDRING_I_BEREGNING_OG_UTTAK],
-      avslagsarsak: '1007',
-    },
-  } as Behandling,
-  beregningresultatDagytelse: defaultberegningresultatDagytelse,
-  ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
-  beregningsgrunnlag: {
-    beregningsgrunnlagPeriode: [
-      {
-        beregningsgrunnlagPrStatusOgAndel: [
-          {
-            overstyrtPrAar: 0,
-          },
+export const GodkjentRevurderingForeldrepengerForSaksbehandlerMedOverstyring: Story = {
+  args: {
+    behandling: {
+      ...defaultBehandling,
+      type: BehandlingType.REVURDERING,
+      status: BehandlingStatus.AVSLUTTET,
+      behandlingsresultat: {
+        type: BehandlingResultatType.INNVILGET,
+        konsekvenserForYtelsen: [
+          KonsekvensForYtelsen.ENDRING_I_BEREGNING_OG_UTTAK,
+          KonsekvensForYtelsen.FORELDREPENGER_OPPHORER,
         ],
       },
-    ],
-  } as Beregningsgrunnlag,
-  vilkar: [
-    {
-      lovReferanse: '§§Dette er en lovreferanse',
-      vilkarType: VilkarType.SOKNADFRISTVILKARET,
-      vilkarStatus: VilkarUtfallType.IKKE_OPPFYLT,
-      overstyrbar: true,
-    },
-  ],
-  isReadOnly: false,
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
+    } as Behandling,
+    beregningresultatDagytelse: defaultberegningresultatDagytelse,
+    ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
+    isReadOnly: true,
+  },
 };
 
-export const OpphørForRevurderingForeldrepengerDerBeregningErManueltFastsatt = Template.bind({});
-OpphørForRevurderingForeldrepengerDerBeregningErManueltFastsatt.args = {
-  behandling: {
-    ...defaultBehandling,
-    type: BehandlingType.REVURDERING,
-    behandlingsresultat: {
-      type: BehandlingResultatType.OPPHOR,
-      opphørsdato: '2024-11-01',
+export const GodkjentRevurderingForeldrepengerMedManueltBrevForSaksbehandlerMedOverstyring: Story = {
+  args: {
+    behandling: {
+      ...defaultBehandling,
+      type: BehandlingType.REVURDERING,
+      status: BehandlingStatus.AVSLUTTET,
+      behandlingsresultat: {
+        vedtaksbrev: 'FRITEKST',
+        overskrift: 'Dette er en overskrift',
+        fritekstbrev: 'Dette er innholdet i brevet',
+        type: BehandlingResultatType.INNVILGET,
+        konsekvenserForYtelsen: [KonsekvensForYtelsen.FORELDREPENGER_OPPHORER],
+      },
+    } as Behandling,
+    beregningresultatDagytelse: defaultberegningresultatDagytelse,
+    ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
+    isReadOnly: true,
+  },
+};
+
+export const AvslåttRevurderingForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyring: Story = {
+  args: {
+    behandling: {
+      ...defaultBehandling,
+      type: BehandlingType.REVURDERING,
+      behandlingsresultat: {
+        type: BehandlingResultatType.AVSLATT,
+        avslagsarsakFritekst: 'Dette er ein fritekst',
+      },
+    } as Behandling,
+    beregningsresultatOriginalBehandling: {
+      'beregningsresultat-foreldrepenger': {
+        ...defaultberegningresultatDagytelse,
+      },
     },
-  } as Behandling,
-  beregningresultatDagytelse: defaultberegningresultatDagytelse,
-  ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
-  beregningsgrunnlag: {
-    beregningsgrunnlagPeriode: [
+    ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
+    isReadOnly: false,
+  },
+};
+
+export const GodkjentRevurderingAvslagForForeldrepengerForSaksbehandlerMedOverstyring: Story = {
+  args: {
+    behandling: {
+      ...defaultBehandling,
+      type: BehandlingType.REVURDERING,
+      status: BehandlingStatus.AVSLUTTET,
+      behandlingsresultat: {
+        type: BehandlingResultatType.AVSLATT,
+      },
+    } as Behandling,
+    beregningsresultatOriginalBehandling: {
+      'beregningsresultat-foreldrepenger': {
+        ...defaultberegningresultatDagytelse,
+      },
+    },
+    ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
+    isReadOnly: true,
+  },
+};
+
+export const OpphørForRevurderingForeldrepengerForSaksbehandlerMedOverstyring: Story = {
+  args: {
+    behandling: {
+      ...defaultBehandling,
+      type: BehandlingType.REVURDERING,
+      behandlingsresultat: {
+        type: BehandlingResultatType.OPPHOR,
+        opphørsdato: '2024-11-01',
+      },
+    } as Behandling,
+    beregningresultatDagytelse: defaultberegningresultatDagytelse,
+    ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
+    isReadOnly: true,
+  },
+};
+
+export const InnvilgetForRevurderingForeldrepengerDerBeregningErManueltFastsatt: Story = {
+  args: {
+    behandling: {
+      ...defaultBehandling,
+      type: BehandlingType.REVURDERING,
+      behandlingsresultat: {
+        type: BehandlingResultatType.INNVILGET,
+        konsekvenserForYtelsen: [KonsekvensForYtelsen.ENDRING_I_BEREGNING_OG_UTTAK],
+      },
+    } as Behandling,
+    beregningresultatDagytelse: defaultberegningresultatDagytelse,
+    ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
+    beregningsgrunnlag: {
+      beregningsgrunnlagPeriode: [
+        {
+          beregningsgrunnlagPrStatusOgAndel: [
+            {
+              overstyrtPrAar: 0,
+            },
+          ],
+        },
+      ],
+    } as Beregningsgrunnlag,
+    isReadOnly: false,
+  },
+};
+
+export const AvslåttForRevurderingForeldrepengerDerSøknadsfristvilkåretIkkeErOppfylt: Story = {
+  args: {
+    behandling: {
+      ...defaultBehandling,
+      type: BehandlingType.REVURDERING,
+      behandlingsresultat: {
+        type: BehandlingResultatType.AVSLATT,
+        konsekvenserForYtelsen: [KonsekvensForYtelsen.ENDRING_I_BEREGNING_OG_UTTAK],
+        avslagsarsak: '1007',
+      },
+    } as Behandling,
+    beregningresultatDagytelse: defaultberegningresultatDagytelse,
+    ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
+    beregningsgrunnlag: {
+      beregningsgrunnlagPeriode: [
+        {
+          beregningsgrunnlagPrStatusOgAndel: [
+            {
+              overstyrtPrAar: 0,
+            },
+          ],
+        },
+      ],
+    } as Beregningsgrunnlag,
+    vilkar: [
       {
-        beregningsgrunnlagPrStatusOgAndel: [
-          {
-            overstyrtPrAar: 0,
-          },
-        ],
+        lovReferanse: '§§Dette er en lovreferanse',
+        vilkarType: VilkarType.SOKNADFRISTVILKARET,
+        vilkarStatus: VilkarUtfallType.IKKE_OPPFYLT,
+        overstyrbar: true,
       },
     ],
-  } as Beregningsgrunnlag,
-  isReadOnly: false,
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
+    isReadOnly: false,
+  },
+};
+
+export const OpphørForRevurderingForeldrepengerDerBeregningErManueltFastsatt: Story = {
+  args: {
+    behandling: {
+      ...defaultBehandling,
+      type: BehandlingType.REVURDERING,
+      behandlingsresultat: {
+        type: BehandlingResultatType.OPPHOR,
+        opphørsdato: '2024-11-01',
+      },
+    } as Behandling,
+    beregningresultatDagytelse: defaultberegningresultatDagytelse,
+    ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
+    beregningsgrunnlag: {
+      beregningsgrunnlagPeriode: [
+        {
+          beregningsgrunnlagPrStatusOgAndel: [
+            {
+              overstyrtPrAar: 0,
+            },
+          ],
+        },
+      ],
+    } as Beregningsgrunnlag,
+    isReadOnly: false,
+  },
 };

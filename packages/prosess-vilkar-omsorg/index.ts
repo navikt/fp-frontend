@@ -1,1 +1,1 @@
-export { default as OmsorgVilkarProsessIndex } from './src/OmsorgVilkarProsessIndex';
+export { OmsorgVilkarProsessIndex } from './src/OmsorgVilkarProsessIndex';

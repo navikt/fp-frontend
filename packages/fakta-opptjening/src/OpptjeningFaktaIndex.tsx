@@ -1,9 +1,8 @@
-import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { ArbeidsgiverOpplysningerPerId, Opptjening,StandardFaktaPanelProps } from '@navikt/fp-types';
+import { ArbeidsgiverOpplysningerPerId, Opptjening, StandardFaktaPanelProps } from '@navikt/fp-types';
 
 import OpptjeningFaktaPanel from './components/OpptjeningFaktaPanel';
 
@@ -11,12 +10,12 @@ import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-interface OwnProps {
+interface Props {
   opptjening?: Opptjening;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
-const OpptjeningFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
+export const OpptjeningFaktaIndex = ({
   opptjening,
   aksjonspunkter,
   alleMerknaderFraBeslutter,
@@ -27,7 +26,7 @@ const OpptjeningFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps
   arbeidsgiverOpplysningerPerId,
   formData,
   setFormData,
-}) => {
+}: Props & StandardFaktaPanelProps) => {
   const fastsattOpptjening = opptjening ? opptjening.fastsattOpptjening : undefined;
   const opptjeningAktiviteter = opptjening ? opptjening.opptjeningAktivitetList : undefined;
   const ferdiglignetNæring = opptjening?.ferdiglignetNæring || [];
@@ -50,5 +49,3 @@ const OpptjeningFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps
     </RawIntlProvider>
   );
 };
-
-export default OpptjeningFaktaIndex;

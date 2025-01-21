@@ -1,1 +1,1 @@
-export { default as BeregningsresultatProsessIndex } from './src/BeregningsresultatProsessIndex';
+export { BeregningsresultatProsessIndex } from './src/BeregningsresultatProsessIndex';

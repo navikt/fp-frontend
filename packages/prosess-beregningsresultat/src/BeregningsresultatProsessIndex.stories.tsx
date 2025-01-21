@@ -1,14 +1,11 @@
-import React from 'react';
-
 import { action } from '@storybook/addon-actions';
-import { StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, Behandling, Fagsak } from '@navikt/fp-types';
-import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import BeregningsresultatProsessIndex from './BeregningsresultatProsessIndex';
+import { BeregningsresultatProsessIndex } from './BeregningsresultatProsessIndex';
 
 const behandling = {
   uuid: '1',
@@ -28,57 +25,53 @@ const defaultAksjonspunkter = [
   },
 ] as Aksjonspunkt[];
 
-export default {
+const meta = {
   title: 'prosess/prosess-beregningsresultat',
   component: BeregningsresultatProsessIndex,
+  args: {
+    behandling,
+    alleKodeverk: alleKodeverk as any,
+    submitCallback: action('button-click') as (data: any) => Promise<void>,
+    isReadOnly: false,
+    isAksjonspunktOpen: true,
+    readOnlySubmitButton: false,
+    status: '',
+    vilkar: [],
+    alleMerknaderFraBeslutter: {},
+    setFormData: () => undefined,
+    beregningresultatEngangsstonad: beregningsresultat,
+    overrideReadOnly: false,
+    toggleOverstyring: action('button-click'),
+    fagsak: {} as Fagsak,
+  },
+} satisfies Meta<typeof BeregningsresultatProsessIndex>;
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const SaksbehandlerKanIkkeOverstyre: Story = {
+  args: {
+    aksjonspunkter: defaultAksjonspunkter,
+    kanOverstyreAccess: { isEnabled: false },
+  },
 };
 
-const Template: StoryFn<{
-  aksjonspunkter: Aksjonspunkt[];
-  kanOverstyreAccess: { isEnabled: boolean };
-  submitCallback?: (aksjonspunktData: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>;
-  isReadOnly?: boolean;
-}> = ({ aksjonspunkter, kanOverstyreAccess, submitCallback, isReadOnly = false }) => (
-  <BeregningsresultatProsessIndex
-    behandling={behandling}
-    alleKodeverk={alleKodeverk as any}
-    aksjonspunkter={aksjonspunkter}
-    submitCallback={submitCallback || (action('button-click') as (data: any) => Promise<any>)}
-    isReadOnly={isReadOnly}
-    isAksjonspunktOpen
-    readOnlySubmitButton={false}
-    status=""
-    vilkar={[]}
-    alleMerknaderFraBeslutter={{}}
-    setFormData={() => undefined}
-    beregningresultatEngangsstonad={beregningsresultat}
-    overrideReadOnly={false}
-    kanOverstyreAccess={kanOverstyreAccess}
-    toggleOverstyring={action('button-click')}
-    fagsak={{} as Fagsak}
-  />
-);
-
-export const SaksbehandlerKanIkkeOverstyre = Template.bind({});
-SaksbehandlerKanIkkeOverstyre.args = {
-  aksjonspunkter: defaultAksjonspunkter,
-  kanOverstyreAccess: { isEnabled: false },
+export const SaksbehandlerKanOverstyre: Story = {
+  args: {
+    aksjonspunkter: defaultAksjonspunkter,
+    kanOverstyreAccess: { isEnabled: true },
+  },
 };
 
-export const SaksbehandlerKanOverstyre = Template.bind({});
-SaksbehandlerKanOverstyre.args = {
-  aksjonspunkter: defaultAksjonspunkter,
-  kanOverstyreAccess: { isEnabled: true },
-};
-
-export const OverstyrtReadonlyPanel = Template.bind({});
-OverstyrtReadonlyPanel.args = {
-  aksjonspunkter: [
-    {
-      definisjon: AksjonspunktKode.OVERSTYR_BEREGNING,
-      begrunnelse: 'Dette er en begrunnelse',
-    },
-  ] as Aksjonspunkt[],
-  kanOverstyreAccess: { isEnabled: true },
-  isReadOnly: true,
+export const OverstyrtReadonlyPanel: Story = {
+  args: {
+    aksjonspunkter: [
+      {
+        definisjon: AksjonspunktKode.OVERSTYR_BEREGNING,
+        begrunnelse: 'Dette er en begrunnelse',
+      },
+    ] as Aksjonspunkt[],
+    kanOverstyreAccess: { isEnabled: true },
+    isReadOnly: true,
+  },
 };

@@ -1,4 +1,3 @@
-import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
@@ -11,13 +10,13 @@ import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-interface OwnProps {
+interface Props {
   soknad: Soknad;
   familiehendelse: FamilieHendelseSamling;
   isForeldrepengerFagsak: boolean;
 }
 
-const AdopsjonFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
+export const AdopsjonFaktaIndex = ({
   soknad,
   familiehendelse,
   aksjonspunkter,
@@ -30,7 +29,7 @@ const AdopsjonFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> 
   submittable,
   formData,
   setFormData,
-}) => (
+}: Props & StandardFaktaPanelProps) => (
   <RawIntlProvider value={intl}>
     <AdopsjonInfoPanel
       soknad={soknad}
@@ -48,5 +47,3 @@ const AdopsjonFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> 
     />
   </RawIntlProvider>
 );
-
-export default AdopsjonFaktaIndex;

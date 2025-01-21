@@ -1,1 +1,1 @@
-export { default as AdopsjonFaktaIndex } from './src/AdopsjonFaktaIndex';
+export { AdopsjonFaktaIndex } from './src/AdopsjonFaktaIndex';

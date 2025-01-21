@@ -1,19 +1,16 @@
-import React from 'react';
-
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 import { action } from '@storybook/addon-actions';
-import { StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
-import { AdresseType,AksjonspunktKode, AksjonspunktStatus, SivilstandType } from '@navikt/fp-kodeverk';
+import { AdresseType, AksjonspunktKode, AksjonspunktStatus, SivilstandType } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import { Aksjonspunkt, Behandling, KjønnkodeEnum, PersonopplysningerBasis, Ytelsefordeling } from '@navikt/fp-types';
-import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { Behandling, KjønnkodeEnum, PersonopplysningerBasis, Ytelsefordeling } from '@navikt/fp-types';
 
-import OmsorgFaktaIndex from './OmsorgFaktaIndex';
+import { OmsorgFaktaIndex } from './OmsorgFaktaIndex';
 
 import '@navikt/ds-css';
-import '@navikt/ft-ui-komponenter/dist/style.css';
 import '@navikt/ft-form-hooks/dist/style.css';
+import '@navikt/ft-ui-komponenter/dist/style.css';
 
 const behandling = {
   uuid: '1',
@@ -71,55 +68,37 @@ const merknaderFraBeslutter = {
   notAccepted: false,
 };
 
-export default {
+const meta = {
   title: 'fakta/fakta-omsorg',
   component: OmsorgFaktaIndex,
-};
+  args: {
+    submitCallback: action('button-click') as (data: any) => Promise<void>,
+    readOnly: false,
+    harApneAksjonspunkter: true,
+    submittable: true,
+    setFormData: () => undefined,
+    behandling,
+    ytelsefordeling,
+    alleKodeverk: alleKodeverk as any,
+  },
+} satisfies Meta<typeof OmsorgFaktaIndex>;
+export default meta;
 
-const Template: StoryFn<{
-  aksjonspunkter: Aksjonspunkt[];
-  submitCallback?: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
-  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
-  bruker?: PersonopplysningerBasis;
-  annenPart?: PersonopplysningerBasis;
-  barn?: PersonopplysningerBasis[];
-}> = ({
-  aksjonspunkter,
-  submitCallback = action('button-click') as (data: any) => Promise<any>,
-  alleMerknaderFraBeslutter,
-  annenPart = defaultAnnenPart,
-  bruker = defaultBruker,
-  barn = [defaultBarn],
-}) => (
-  <OmsorgFaktaIndex
-    submitCallback={submitCallback}
-    readOnly={false}
-    harApneAksjonspunkter
-    submittable
-    setFormData={() => undefined}
-    behandling={behandling}
-    ytelsefordeling={ytelsefordeling}
-    personoversikt={{ barn, annenPart, bruker }}
-    aksjonspunkter={aksjonspunkter}
-    alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-    alleKodeverk={alleKodeverk as any}
-  />
-);
+type Story = StoryObj<typeof meta>;
 
-export const ÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg = Template.bind({});
-ÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg.args = {
-  annenPart: defaultAnnenPart,
-  bruker: defaultBruker,
-  barn: [defaultBarn],
-  aksjonspunkter: [
-    {
-      definisjon: AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG,
-      status: AksjonspunktStatus.OPPRETTET,
-      begrunnelse: undefined,
-      kanLoses: true,
+export const ÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg: Story = {
+  args: {
+    personoversikt: { barn: [defaultBarn], annenPart: defaultAnnenPart, bruker: defaultBruker },
+    aksjonspunkter: [
+      {
+        definisjon: AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG,
+        status: AksjonspunktStatus.OPPRETTET,
+        begrunnelse: undefined,
+        kanLoses: true,
+      },
+    ],
+    alleMerknaderFraBeslutter: {
+      [AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG]: merknaderFraBeslutter,
     },
-  ],
-  alleMerknaderFraBeslutter: {
-    [AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG]: merknaderFraBeslutter,
   },
 };

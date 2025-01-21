@@ -1,1 +1,1 @@
-export { default as OpptjeningFaktaIndex } from './src/OpptjeningFaktaIndex';
+export { OpptjeningFaktaIndex } from './src/OpptjeningFaktaIndex';

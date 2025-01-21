@@ -1,1 +1,1 @@
-export { default as UttakProsessIndex } from './src/UttakProsessIndex';
+export { UttakProsessIndex } from './src/UttakProsessIndex';

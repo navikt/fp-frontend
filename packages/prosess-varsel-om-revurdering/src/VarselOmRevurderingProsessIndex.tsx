@@ -1,4 +1,3 @@
-import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
@@ -11,7 +10,7 @@ import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-interface OwnProps {
+interface Props {
   familiehendelse: FamilieHendelseSamling;
   soknad: Soknad;
   soknadOriginalBehandling: Soknad;
@@ -19,7 +18,7 @@ interface OwnProps {
   previewCallback: (data: ForhandsvisData) => Promise<any>;
 }
 
-const VarselOmRevurderingProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
+export const VarselOmRevurderingProsessIndex = ({
   behandling,
   familiehendelse,
   soknad,
@@ -32,7 +31,7 @@ const VarselOmRevurderingProsessIndex: FunctionComponent<OwnProps & StandardPros
   alleKodeverk,
   formData,
   setFormData,
-}) => (
+}: Props & StandardProsessPanelProps) => (
   <RawIntlProvider value={intl}>
     <VarselOmRevurderingForm
       behandlingArsaker={behandling.behandlingÅrsaker}
@@ -52,5 +51,3 @@ const VarselOmRevurderingProsessIndex: FunctionComponent<OwnProps & StandardPros
     />
   </RawIntlProvider>
 );
-
-export default VarselOmRevurderingProsessIndex;

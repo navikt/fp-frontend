@@ -1,1 +1,1 @@
-export { default as VilkarresultatMedOverstyringProsessIndex } from './src/VilkarresultatMedOverstyringProsessIndex';
+export { VilkarresultatMedOverstyringProsessIndex } from './src/VilkarresultatMedOverstyringProsessIndex';
