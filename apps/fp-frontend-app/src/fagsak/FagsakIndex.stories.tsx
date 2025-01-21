@@ -1,9 +1,10 @@
 import { MemoryRouter, Route, Routes } from 'react-router';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-import { Meta, StoryFn, StoryObj } from '@storybook/react';
+import { Meta, ReactRenderer, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
+import { DecoratorFunction } from 'storybook/internal/types';
 
 import { BehandlingStatus, BehandlingType, FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import {
@@ -27,7 +28,7 @@ import messages from '../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
 
-const withRequestPendingProvider = (Story: StoryFn) => {
+const withRequestPendingProvider: DecoratorFunction<ReactRenderer> = Story => {
   return (
     <RequestPendingProvider>
       <Story />

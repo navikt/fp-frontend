@@ -3360,9 +3360,7 @@ __metadata:
     "@tanstack/react-query-devtools": ^5.64.2
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.1
-    axios: 1.7.9
-    axios-mock-adapter: 2.1.0
+    "@testing-library/user-event": 14.6.0
     classnames: 2.5.1
     core-js: 3.40.0
     dayjs: 1.11.13
@@ -5251,9 +5249,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-utbetalingsdata-is15@workspace:packages/utbetalingsdata-is15"
   dependencies:
-    "@formatjs/cli-lib": 6.6.3
-    "@navikt/ds-css": 7.8.0
-    "@navikt/ds-react": 7.8.0
+    "@formatjs/cli-lib": 6.6.6
+    "@navikt/ds-css": 7.9.2
+    "@navikt/ds-react": 7.9.2
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-ui-komponenter": 3.1.2
     "@navikt/ft-utils": 3.1.2
@@ -5279,11 +5277,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-utils-test@workspace:packages/utils-test"
   dependencies:
-    eslint: 9.14.0
-    react: 18.3.1
-    react-intl: 6.6.8
-    typescript: 5.6.3
-    vite: 5.4.10
+    eslint: 9.18.0
+    react: 19.0.0
+    react-intl: 7.1.3
+    typescript: 5.7.3
+    vite: 6.0.8
   languageName: unknown
   linkType: soft
 
@@ -8657,29 +8655,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios-mock-adapter@npm:2.1.0":
-  version: 2.1.0
-  resolution: "axios-mock-adapter@npm:2.1.0"
-  dependencies:
-    fast-deep-equal: ^3.1.3
-    is-buffer: ^2.0.5
-  peerDependencies:
-    axios: ">= 0.17.0"
-  checksum: bdebba1adc7c812734b8a2b2c5e82619f4c84ce0a96712dcdd6881266495ef40e9d68d939b6a847093dbdd1bd88c3285d6a49bdfe8e7e7aa75f0878b24e4b6ad
-  languageName: node
-  linkType: hard
-
-"axios@npm:1.7.9":
-  version: 1.7.9
-  resolution: "axios@npm:1.7.9"
-  dependencies:
-    follow-redirects: ^1.15.6
-    form-data: ^4.0.0
-    proxy-from-env: ^1.1.0
-  checksum: cb8ce291818effda09240cb60f114d5625909b345e10f389a945320e06acf0bc949d0f8422d25720f5dd421362abee302c99f5e97edec4c156c8939814b23d19
-  languageName: node
-  linkType: hard
-
 "axios@npm:^1.7.4":
   version: 1.7.7
   resolution: "axios@npm:1.7.7"
@@ -11461,7 +11436,6 @@ __metadata:
     "@types/react-test-renderer": 19.0.0
     "@vitejs/plugin-react": 4.3.4
     "@vitest/coverage-c8": 0.33.0
-    axios-mock-adapter: 2.1.0
     cross-env: 7.0.3
     dotenv: 16.4.7
     eslint: 9.19.0
@@ -12619,13 +12593,6 @@ __metadata:
     call-bound: ^1.0.2
     has-tostringtag: ^1.0.2
   checksum: 2672609f0f2536172873810a38ec006a415e43ddc6a240f7638a1659cb20dfa91cc75c8a1bed36247bb046aa8f0eab945f20d1203bc69606418bd129c745f861
-  languageName: node
-  linkType: hard
-
-"is-buffer@npm:^2.0.5":
-  version: 2.0.5
-  resolution: "is-buffer@npm:2.0.5"
-  checksum: 764c9ad8b523a9f5a32af29bdf772b08eb48c04d2ad0a7240916ac2688c983bf5f8504bf25b35e66240edeb9d9085461f9b5dae1f3d2861c6b06a65fe983de42
   languageName: node
   linkType: hard
 
