@@ -2,8 +2,8 @@ import React, { FunctionComponent } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BodyShort, Button, Heading,Modal } from '@navikt/ds-react';
-import { Datepicker, Form,SelectField } from '@navikt/ft-form-hooks';
+import { BodyShort, Button, Heading, Modal } from '@navikt/ds-react';
+import { Datepicker, Form, SelectField } from '@navikt/ft-form-hooks';
 import {
   ariaCheck,
   dateAfterOrEqualToToday,

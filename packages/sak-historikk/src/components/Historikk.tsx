@@ -92,6 +92,7 @@ export const Historikk = ({
       <div
         style={{ height: `calc(100vh - ${top}px)` }}
         className={styles.overflow}
+        //@ts-expect-error Fix denne
         ref={el => el && setTop(el.getBoundingClientRect().top)}
       >
         <VStack gap="2" padding="4">

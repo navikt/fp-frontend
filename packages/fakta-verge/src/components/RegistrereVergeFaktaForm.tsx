@@ -3,7 +3,7 @@ import { WrappedComponentProps } from 'react-intl';
 
 import { Datepicker, InputField, SelectField } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidFodselsnummer, hasValidName, required } from '@navikt/ft-form-validators';
-import { FaktaGruppe, FlexColumn, FlexContainer, FlexRow,VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { FaktaGruppe, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode, VergeType } from '@navikt/fp-kodeverk';
 import { KodeverkMedNavn, Verge } from '@navikt/fp-types';
@@ -122,10 +122,6 @@ const RegistrereVergeFaktaForm: FunctionComponent<OwnProps & WrappedComponentPro
     </FlexContainer>
   </FaktaGruppe>
 );
-
-RegistrereVergeFaktaForm.defaultProps = {
-  vergetyper: [],
-};
 
 RegistrereVergeFaktaForm.buildInitialValues = (verge: Verge): FormValues => ({
   navn: verge.navn,

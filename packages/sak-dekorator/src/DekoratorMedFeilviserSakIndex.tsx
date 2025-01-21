@@ -47,9 +47,11 @@ export const DekoratorMedFeilviserSakIndex = ({
   interneLenker = EMPTY_ARRAY,
   eksterneLenker,
 }: Props) => {
-  const fixedHeaderRef = useRef<any>();
+  const fixedHeaderRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    setSiteHeight(fixedHeaderRef.current.clientHeight);
+    if (fixedHeaderRef.current) {
+      setSiteHeight(fixedHeaderRef.current.clientHeight);
+    }
   }, [feilmeldinger.length]);
 
   return (

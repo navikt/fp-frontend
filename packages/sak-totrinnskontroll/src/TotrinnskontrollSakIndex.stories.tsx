@@ -1,10 +1,9 @@
-import React from 'react';
-
 import { action } from '@storybook/addon-actions';
-import { Meta, StoryFn, StoryObj } from '@storybook/react';
+import { Meta, ReactRenderer, StoryObj } from '@storybook/react';
+import { DecoratorFunction } from '@storybook/types';
 
 import { BehandlingResultatType, BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
-import { alleKodeverk,withRouter } from '@navikt/fp-storybook-utils';
+import { alleKodeverk, withRouter } from '@navikt/fp-storybook-utils';
 import { BehandlingAppKontekst, BehandlingÅrsak, TotrinnskontrollSkjermlenkeContext } from '@navikt/fp-types';
 
 import { ApData, TotrinnskontrollSakIndex } from './TotrinnskontrollSakIndex';
@@ -29,7 +28,7 @@ const DEFAULT_BEHANDLING = {
   },
 } as BehandlingAppKontekst;
 
-const withDiv = (Story: StoryFn) => (
+const withDiv: DecoratorFunction<ReactRenderer> = Story => (
   <div
     style={{
       width: '600px',

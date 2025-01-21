@@ -11,7 +11,7 @@ import {
   isFaktaUttakAksjonspunkt,
   isUttakAksjonspunkt,
 } from '@navikt/fp-kodeverk';
-import { Behandlingsresultat,KodeverkMedNavn, TotrinnskontrollAksjonspunkt } from '@navikt/fp-types';
+import { Behandlingsresultat, KodeverkMedNavn, TotrinnskontrollAksjonspunkt } from '@navikt/fp-types';
 
 import {
   totrinnskontrollaksjonspunktTextCodes,
