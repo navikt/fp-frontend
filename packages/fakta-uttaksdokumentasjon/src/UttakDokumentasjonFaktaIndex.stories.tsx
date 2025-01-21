@@ -1,25 +1,15 @@
-import React from 'react';
-
 import { action } from '@storybook/addon-actions';
-import { StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import {
-  Aksjonspunkt,
-  Behandling,
-  DokumentasjonVurderingBehov,
-  UttakÅrsak,
-  UttakType,
-  UttakVurdering,
-} from '@navikt/fp-types';
-import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { Behandling, DokumentasjonVurderingBehov, UttakÅrsak, UttakType, UttakVurdering } from '@navikt/fp-types';
 
-import UttakDokumentasjonFaktaIndex from './UttakDokumentasjonFaktaIndex';
+import { UttakDokumentasjonFaktaIndex } from './UttakDokumentasjonFaktaIndex';
 
 import '@navikt/ds-css';
-import '@navikt/ft-ui-komponenter/dist/style.css';
 import '@navikt/ft-form-hooks/dist/style.css';
+import '@navikt/ft-ui-komponenter/dist/style.css';
 
 const behandling = {
   uuid: '1',
@@ -53,54 +43,36 @@ const opprettetDokumentasjonVurderingBehovListe = [
   },
 ] as DokumentasjonVurderingBehov[];
 
-export default {
+const meta = {
   title: 'fakta/fakta-uttaksdokumentasjon',
   component: UttakDokumentasjonFaktaIndex,
-};
+  args: {
+    behandling,
+    alleKodeverk: alleKodeverk as any,
+    alleMerknaderFraBeslutter: {},
+    setFormData: () => undefined,
+    submitCallback: action('button-click') as (data: any) => Promise<void>,
+  },
+} satisfies Meta<typeof UttakDokumentasjonFaktaIndex>;
+export default meta;
 
-const Template: StoryFn<{
-  aksjonspunkter: Aksjonspunkt[];
-  dokumentasjonVurderingBehov: DokumentasjonVurderingBehov[];
-  submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
-  readOnly: boolean;
-  submittable: boolean;
-  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
-}> = ({
-  aksjonspunkter,
-  dokumentasjonVurderingBehov,
-  submitCallback,
-  readOnly,
-  submittable,
-  alleMerknaderFraBeslutter = {},
-}) => (
-  <UttakDokumentasjonFaktaIndex
-    behandling={behandling}
-    dokumentasjonVurderingBehov={dokumentasjonVurderingBehov}
-    alleKodeverk={alleKodeverk as any}
-    aksjonspunkter={aksjonspunkter}
-    submitCallback={submitCallback}
-    readOnly={readOnly}
-    harApneAksjonspunkter={aksjonspunkter.some(ap => ap.status === AksjonspunktStatus.OPPRETTET)}
-    submittable={submittable}
-    alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-    setFormData={() => undefined}
-  />
-);
+type Story = StoryObj<typeof meta>;
 
-export const AksjonspunktMedUavklartePerioder = Template.bind({});
-AksjonspunktMedUavklartePerioder.args = {
-  aksjonspunkter: [
-    {
-      definisjon: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
-      status: AksjonspunktStatus.OPPRETTET,
-      begrunnelse: undefined,
-      kanLoses: true,
-    },
-  ],
-  dokumentasjonVurderingBehov: opprettetDokumentasjonVurderingBehovListe,
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-  readOnly: false,
-  submittable: true,
+export const AksjonspunktMedUavklartePerioder: Story = {
+  args: {
+    aksjonspunkter: [
+      {
+        definisjon: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
+        status: AksjonspunktStatus.OPPRETTET,
+        begrunnelse: undefined,
+        kanLoses: true,
+      },
+    ],
+    harApneAksjonspunkter: true,
+    dokumentasjonVurderingBehov: opprettetDokumentasjonVurderingBehovListe,
+    readOnly: false,
+    submittable: true,
+  },
 };
 
 const utfortDokumentasjonVurderingBehovListe = [
@@ -135,52 +107,55 @@ const utfortDokumentasjonVurderingBehovListe = [
   },
 ] as DokumentasjonVurderingBehov[];
 
-export const AksjonspunktSomErBekreftetOgBehandlingAvsluttet = Template.bind({});
-AksjonspunktSomErBekreftetOgBehandlingAvsluttet.args = {
-  aksjonspunkter: [
-    {
-      definisjon: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
-      status: AksjonspunktStatus.UTFORT,
-      begrunnelse: 'Dette er en begrunnelse',
-      kanLoses: false,
-    },
-  ],
-  dokumentasjonVurderingBehov: utfortDokumentasjonVurderingBehovListe,
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-  readOnly: true,
-  submittable: false,
+export const AksjonspunktSomErBekreftetOgBehandlingAvsluttet: Story = {
+  args: {
+    aksjonspunkter: [
+      {
+        definisjon: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
+        status: AksjonspunktStatus.UTFORT,
+        begrunnelse: 'Dette er en begrunnelse',
+        kanLoses: false,
+      },
+    ],
+    harApneAksjonspunkter: false,
+    dokumentasjonVurderingBehov: utfortDokumentasjonVurderingBehovListe,
+    readOnly: true,
+    submittable: false,
+  },
 };
 
-export const AksjonspunktErBekreftetMenBehandlingErÅpen = Template.bind({});
-AksjonspunktErBekreftetMenBehandlingErÅpen.args = {
-  aksjonspunkter: [
-    {
-      definisjon: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
-      status: AksjonspunktStatus.UTFORT,
-      begrunnelse: undefined,
-      kanLoses: true,
-    },
-  ],
-  dokumentasjonVurderingBehov: [
-    {
-      fom: '2022-12-08',
-      tom: '2022-12-13',
-      type: UttakType.UTTAK,
-      årsak: UttakÅrsak.HV_ØVELSE,
-      vurdering: UttakVurdering.GODKJENT,
-    },
-  ],
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-  readOnly: false,
-  submittable: true,
-  alleMerknaderFraBeslutter: {},
+export const AksjonspunktErBekreftetMenBehandlingErÅpen: Story = {
+  args: {
+    aksjonspunkter: [
+      {
+        definisjon: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
+        status: AksjonspunktStatus.UTFORT,
+        begrunnelse: undefined,
+        kanLoses: true,
+      },
+    ],
+    harApneAksjonspunkter: false,
+    dokumentasjonVurderingBehov: [
+      {
+        fom: '2022-12-08',
+        tom: '2022-12-13',
+        type: UttakType.UTTAK,
+        årsak: UttakÅrsak.HV_ØVELSE,
+        vurdering: UttakVurdering.GODKJENT,
+      },
+    ],
+    readOnly: false,
+    submittable: true,
+    alleMerknaderFraBeslutter: {},
+  },
 };
 
-export const UavklartePerioderMenIkkeAksjonspunktEnnå = Template.bind({});
-UavklartePerioderMenIkkeAksjonspunktEnnå.args = {
-  aksjonspunkter: [],
-  dokumentasjonVurderingBehov: opprettetDokumentasjonVurderingBehovListe,
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-  readOnly: false,
-  submittable: true,
+export const UavklartePerioderMenIkkeAksjonspunktEnnå: Story = {
+  args: {
+    aksjonspunkter: [],
+    harApneAksjonspunkter: false,
+    dokumentasjonVurderingBehov: opprettetDokumentasjonVurderingBehovListe,
+    readOnly: false,
+    submittable: true,
+  },
 };

@@ -1,4 +1,3 @@
-import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
@@ -19,7 +18,7 @@ import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-interface OwnProps {
+interface Props {
   beregningsgrunnlag: Beregningsgrunnlag;
   arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId;
   alleKodeverk: AlleKodeverk;
@@ -28,7 +27,7 @@ interface OwnProps {
   aksjonspunkter: Aksjonspunkt[];
 }
 
-const BesteberegningFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
+export const BesteberegningFaktaIndex = ({
   beregningsgrunnlag,
   arbeidsgiverOpplysninger,
   alleKodeverk,
@@ -38,7 +37,7 @@ const BesteberegningFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelP
   formData,
   setFormData,
   submittable,
-}) => (
+}: Props & StandardFaktaPanelProps) => (
   <RawIntlProvider value={intl}>
     <BesteberegningPanel
       beregningsgrunnlag={beregningsgrunnlag}
@@ -53,5 +52,3 @@ const BesteberegningFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelP
     />
   </RawIntlProvider>
 );
-
-export default BesteberegningFaktaIndex;

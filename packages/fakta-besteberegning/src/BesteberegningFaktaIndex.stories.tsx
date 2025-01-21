@@ -1,19 +1,16 @@
-import React from 'react';
-
 import { action } from '@storybook/addon-actions';
-import { StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode,AksjonspunktStatus } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import { Aksjonspunkt, Behandling, Beregningsgrunnlag } from '@navikt/fp-types';
-import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { Behandling } from '@navikt/fp-types';
 
-import BesteberegningFaktaIndex from './BesteberegningFaktaIndex';
+import { BesteberegningFaktaIndex } from './BesteberegningFaktaIndex';
 import { beregningsgrunnlag as scenarioBG } from './scenario/BesteberegningScenario';
 
 import '@navikt/ds-css';
-import '@navikt/ft-ui-komponenter/dist/style.css';
 import '@navikt/ft-form-hooks/dist/style.css';
+import '@navikt/ft-ui-komponenter/dist/style.css';
 
 const arbeidsgiverOpplysninger = {
   974652269: {
@@ -36,64 +33,65 @@ const lagAksjonspunkt = (apKode: string, status: string, begrunnelse?: string) =
   begrunnelse,
 });
 
-export default {
+const meta = {
   title: 'fakta/fakta-besteberegning',
   component: BesteberegningFaktaIndex,
+  args: {
+    submitCallback: action('button-click') as (data: any) => Promise<void>,
+    readOnly: false,
+    submittable: true,
+    alleMerknaderFraBeslutter: {},
+    alleKodeverk: alleKodeverk as any,
+    setFormData: () => undefined,
+    arbeidsgiverOpplysninger,
+    behandling: {
+      uuid: '1',
+      versjon: 1,
+    } as Behandling,
+  },
+} satisfies Meta<typeof BesteberegningFaktaIndex>;
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const BesteberegningMedDagpengerOgArbeid: Story = {
+  args: {
+    aksjonspunkter: [],
+    harApneAksjonspunkter: false,
+    beregningsgrunnlag: scenarioBG,
+  },
 };
 
-const Template: StoryFn<{
-  aksjonspunkter: Aksjonspunkt[];
-  beregningsgrunnlag: Beregningsgrunnlag;
-  behandling: Behandling;
-  submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
-}> = ({ aksjonspunkter, beregningsgrunnlag, behandling, submitCallback }) => (
-  <BesteberegningFaktaIndex
-    aksjonspunkter={aksjonspunkter}
-    submitCallback={submitCallback}
-    readOnly={false}
-    submittable
-    alleMerknaderFraBeslutter={{}}
-    alleKodeverk={alleKodeverk as any}
-    setFormData={() => undefined}
-    behandling={behandling}
-    beregningsgrunnlag={beregningsgrunnlag}
-    arbeidsgiverOpplysninger={arbeidsgiverOpplysninger}
-    harApneAksjonspunkter={aksjonspunkter.some(ap => ap.status === AksjonspunktStatus.OPPRETTET)}
-  />
-);
-
-export const BesteberegningMedDagpengerOgArbeid = Template.bind({});
-BesteberegningMedDagpengerOgArbeid.args = {
-  aksjonspunkter: [],
-  beregningsgrunnlag: scenarioBG,
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
+export const BesteberegningMedDagpengerOgArbeidÅpentAksjonspunkt: Story = {
+  args: {
+    beregningsgrunnlag: scenarioBG,
+    aksjonspunkter: [
+      lagAksjonspunkt(AksjonspunktKode.KONTROLLER_AUTOMATISK_BESTEBEREGNING, AksjonspunktStatus.OPPRETTET),
+    ],
+    harApneAksjonspunkter: true,
+  },
 };
 
-export const BesteberegningMedDagpengerOgArbeidÅpentAksjonspunkt = Template.bind({});
-BesteberegningMedDagpengerOgArbeidÅpentAksjonspunkt.args = {
-  beregningsgrunnlag: scenarioBG,
-  aksjonspunkter: [
-    lagAksjonspunkt(AksjonspunktKode.KONTROLLER_AUTOMATISK_BESTEBEREGNING, AksjonspunktStatus.OPPRETTET),
-  ],
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
+export const BesteberegningMedDagpengerOgArbeidLukketAksjonspunktPåVent: Story = {
+  args: {
+    beregningsgrunnlag: scenarioBG,
+    aksjonspunkter: [
+      lagAksjonspunkt(
+        AksjonspunktKode.KONTROLLER_AUTOMATISK_BESTEBEREGNING,
+        AksjonspunktStatus.UTFORT,
+        'Min begrunnelse for at besteberegningen er feil',
+      ),
+    ],
+    harApneAksjonspunkter: false,
+  },
 };
 
-export const BesteberegningMedDagpengerOgArbeidLukketAksjonspunktPåVent = Template.bind({});
-BesteberegningMedDagpengerOgArbeidLukketAksjonspunktPåVent.args = {
-  beregningsgrunnlag: scenarioBG,
-  aksjonspunkter: [
-    lagAksjonspunkt(
-      AksjonspunktKode.KONTROLLER_AUTOMATISK_BESTEBEREGNING,
-      AksjonspunktStatus.UTFORT,
-      'Min begrunnelse for at besteberegningen er feil',
-    ),
-  ],
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-};
-
-export const BesteberegningMedAvvik = Template.bind({});
-BesteberegningMedAvvik.args = {
-  beregningsgrunnlag: scenarioBG,
-  aksjonspunkter: [lagAksjonspunkt(AksjonspunktKode.MANUELL_KONTROLL_AV_BESTEBEREGNING, AksjonspunktStatus.OPPRETTET)],
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
+export const BesteberegningMedAvvik: Story = {
+  args: {
+    beregningsgrunnlag: scenarioBG,
+    aksjonspunkter: [
+      lagAksjonspunkt(AksjonspunktKode.MANUELL_KONTROLL_AV_BESTEBEREGNING, AksjonspunktStatus.OPPRETTET),
+    ],
+    harApneAksjonspunkter: true,
+  },
 };

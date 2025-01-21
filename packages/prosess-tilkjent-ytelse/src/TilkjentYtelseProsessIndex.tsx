@@ -1,4 +1,3 @@
-import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
@@ -20,7 +19,7 @@ import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-interface OwnProps {
+interface Props {
   beregningresultat: BeregningsresultatDagytelse;
   familiehendelse: FamilieHendelseSamling;
   personoversikt: Personoversikt;
@@ -30,7 +29,7 @@ interface OwnProps {
   feriepengegrunnlag?: Feriepengegrunnlag;
 }
 
-const TilkjentYtelseProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
+export const TilkjentYtelseProsessIndex = ({
   beregningresultat,
   familiehendelse,
   personoversikt,
@@ -40,7 +39,7 @@ const TilkjentYtelseProsessIndex: FunctionComponent<OwnProps & StandardProsessPa
   alleKodeverk,
   arbeidsgiverOpplysningerPerId,
   feriepengegrunnlag,
-}) => (
+}: Props & StandardProsessPanelProps) => (
   <RawIntlProvider value={intl}>
     <TilkjentYtelsePanel
       beregningresultat={beregningresultat}
@@ -55,5 +54,3 @@ const TilkjentYtelseProsessIndex: FunctionComponent<OwnProps & StandardProsessPa
     />
   </RawIntlProvider>
 );
-
-export default TilkjentYtelseProsessIndex;

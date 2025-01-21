@@ -1,1 +1,1 @@
-export { default as SvangerskapVilkarProsessIndex } from './src/SvangerskapVilkarProsessIndex';
+export { SvangerskapVilkarProsessIndex } from './src/SvangerskapVilkarProsessIndex';

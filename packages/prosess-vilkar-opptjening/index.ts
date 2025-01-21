@@ -1,1 +1,1 @@
-export { default as OpptjeningVilkarProsessIndex } from './src/OpptjeningVilkarProsessIndex';
+export { OpptjeningVilkarProsessIndex } from './src/OpptjeningVilkarProsessIndex';

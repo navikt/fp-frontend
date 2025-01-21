@@ -1,1 +1,1 @@
-export { default as PermisjonFaktaIndex } from './src/PermisjonFaktaIndex';
+export { PermisjonFaktaIndex } from './src/PermisjonFaktaIndex';

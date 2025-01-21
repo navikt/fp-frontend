@@ -1,1 +1,1 @@
-export { default as OmsorgOgForeldreansvarFaktaIndex } from './src/OmsorgOgForeldreansvarFaktaIndex';
+export { OmsorgOgForeldreansvarFaktaIndex } from './src/OmsorgOgForeldreansvarFaktaIndex';

@@ -1,18 +1,15 @@
-import React from 'react';
-
 import { action } from '@storybook/addon-actions';
-import { StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, AksjonspunktStatus, BehandlingType,SoknadType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus, BehandlingType, SoknadType } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import { Aksjonspunkt,Behandling, FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
-import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { Behandling, FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
 
-import FodselFaktaIndex from './FodselFaktaIndex';
+import { FodselFaktaIndex } from './FodselFaktaIndex';
 
 import '@navikt/ds-css';
-import '@navikt/ft-ui-komponenter/dist/style.css';
 import '@navikt/ft-form-hooks/dist/style.css';
+import '@navikt/ft-ui-komponenter/dist/style.css';
 
 const behandling = {
   uuid: '1',
@@ -80,81 +77,71 @@ const merknaderFraBeslutter = {
   notAccepted: false,
 };
 
-export default {
+const meta = {
   title: 'fakta/fakta-fodsel',
   component: FodselFaktaIndex,
-};
-
-const Template: StoryFn<{
-  aksjonspunkter: Aksjonspunkt[];
-  submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
-  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
-  readOnly: boolean;
-  harApneAksjonspunkter: boolean;
-}> = ({
-  aksjonspunkter,
-  submitCallback,
-  alleMerknaderFraBeslutter,
-  readOnly = false,
-  harApneAksjonspunkter = true,
-}) => (
-  <FodselFaktaIndex
-    submitCallback={submitCallback}
-    readOnly={readOnly}
-    harApneAksjonspunkter={harApneAksjonspunkter}
-    submittable
-    alleKodeverk={alleKodeverk as any}
-    setFormData={() => undefined}
-    behandling={behandling}
-    soknad={soknad}
-    familiehendelse={familieHendelse}
-    soknadOriginalBehandling={soknadOriginalBehandling}
-    familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
-    aksjonspunkter={aksjonspunkter}
-    alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-  />
-);
-
-export const AksjonspunktTerminbekreftelse = Template.bind({});
-AksjonspunktTerminbekreftelse.args = {
-  aksjonspunkter: defaultAksjonspunkter,
-  alleMerknaderFraBeslutter: {
-    [AksjonspunktKode.TERMINBEKREFTELSE]: merknaderFraBeslutter,
+  args: {
+    submitCallback: action('button-click') as (data: any) => Promise<void>,
+    readOnly: false,
+    harApneAksjonspunkter: true,
+    submittable: true,
+    alleKodeverk: alleKodeverk as any,
+    setFormData: () => undefined,
+    behandling,
+    soknad,
+    familiehendelse: familieHendelse,
+    soknadOriginalBehandling,
+    familiehendelseOriginalBehandling,
   },
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-};
+} satisfies Meta<typeof FodselFaktaIndex>;
+export default meta;
 
-export const AksjonspunktSjekkManglendeFødsel = Template.bind({});
-AksjonspunktSjekkManglendeFødsel.args = {
-  aksjonspunkter: defaultAksjonspunkter.map(a => ({
-    ...a,
-    definisjon: AksjonspunktKode.SJEKK_MANGLENDE_FODSEL,
-  })),
-  alleMerknaderFraBeslutter: {
-    [AksjonspunktKode.SJEKK_MANGLENDE_FODSEL]: merknaderFraBeslutter,
+type Story = StoryObj<typeof meta>;
+
+export const AksjonspunktTerminbekreftelse: Story = {
+  args: {
+    aksjonspunkter: defaultAksjonspunkter,
+    alleMerknaderFraBeslutter: {
+      [AksjonspunktKode.TERMINBEKREFTELSE]: merknaderFraBeslutter,
+    },
+    submitCallback: action('button-click') as (data: any) => Promise<any>,
   },
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
 };
 
-export const ReadonlyPanel = Template.bind({});
-ReadonlyPanel.args = {
-  readOnly: true,
-  harApneAksjonspunkter: false,
-  aksjonspunkter: defaultAksjonspunkter.map(a => ({
-    ...a,
-    status: AksjonspunktStatus.UTFORT,
-    definisjon: AksjonspunktKode.SJEKK_MANGLENDE_FODSEL,
-    begrunnelse: 'Dette er en begrunnelse',
-  })),
-  alleMerknaderFraBeslutter: {
-    [AksjonspunktKode.SJEKK_MANGLENDE_FODSEL]: merknaderFraBeslutter,
+export const AksjonspunktSjekkManglendeFødsel: Story = {
+  args: {
+    aksjonspunkter: defaultAksjonspunkter.map(a => ({
+      ...a,
+      definisjon: AksjonspunktKode.SJEKK_MANGLENDE_FODSEL,
+    })),
+    alleMerknaderFraBeslutter: {
+      [AksjonspunktKode.SJEKK_MANGLENDE_FODSEL]: merknaderFraBeslutter,
+    },
+    submitCallback: action('button-click') as (data: any) => Promise<any>,
   },
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
 };
 
-export const PanelForFødselssammenligningNårDetIkkeFinnesAksjonspunkter = Template.bind({});
-PanelForFødselssammenligningNårDetIkkeFinnesAksjonspunkter.args = {
-  aksjonspunkter: [],
-  alleMerknaderFraBeslutter: {},
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
+export const ReadonlyPanel: Story = {
+  args: {
+    readOnly: true,
+    harApneAksjonspunkter: false,
+    aksjonspunkter: defaultAksjonspunkter.map(a => ({
+      ...a,
+      status: AksjonspunktStatus.UTFORT,
+      definisjon: AksjonspunktKode.SJEKK_MANGLENDE_FODSEL,
+      begrunnelse: 'Dette er en begrunnelse',
+    })),
+    alleMerknaderFraBeslutter: {
+      [AksjonspunktKode.SJEKK_MANGLENDE_FODSEL]: merknaderFraBeslutter,
+    },
+    submitCallback: action('button-click') as (data: any) => Promise<any>,
+  },
+};
+
+export const PanelForFødselssammenligningNårDetIkkeFinnesAksjonspunkter: Story = {
+  args: {
+    aksjonspunkter: [],
+    alleMerknaderFraBeslutter: {},
+    submitCallback: action('button-click') as (data: any) => Promise<any>,
+  },
 };

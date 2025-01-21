@@ -1,1 +1,1 @@
-export { default as BesteberegningFaktaIndex } from './src/BesteberegningFaktaIndex';
+export { BesteberegningFaktaIndex } from './src/BesteberegningFaktaIndex';

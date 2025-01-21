@@ -1,1 +1,1 @@
-export { default as FodselFaktaIndex } from './src/FodselFaktaIndex';
+export { FodselFaktaIndex } from './src/FodselFaktaIndex';

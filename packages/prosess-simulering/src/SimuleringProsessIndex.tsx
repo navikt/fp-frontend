@@ -1,4 +1,3 @@
-import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
@@ -17,7 +16,7 @@ import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-interface OwnProps {
+interface Props {
   fagsak: Fagsak;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   simuleringResultat?: SimuleringResultat;
@@ -25,7 +24,7 @@ interface OwnProps {
   previewFptilbakeCallback: (mottaker: string, fritekst: string) => Promise<any>;
 }
 
-const SimuleringProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
+export const SimuleringProsessIndex = ({
   fagsak,
   behandling,
   aksjonspunkter,
@@ -38,7 +37,7 @@ const SimuleringProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelP
   previewFptilbakeCallback,
   formData,
   setFormData,
-}) => (
+}: Props & StandardProsessPanelProps) => (
   <RawIntlProvider value={intl}>
     <SimuleringPanel
       fagsak={fagsak}
@@ -56,5 +55,3 @@ const SimuleringProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelP
     />
   </RawIntlProvider>
 );
-
-export default SimuleringProsessIndex;

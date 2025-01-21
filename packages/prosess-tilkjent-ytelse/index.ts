@@ -1,1 +1,1 @@
-export { default as TilkjentYtelseProsessIndex } from './src/TilkjentYtelseProsessIndex';
+export { TilkjentYtelseProsessIndex } from './src/TilkjentYtelseProsessIndex';

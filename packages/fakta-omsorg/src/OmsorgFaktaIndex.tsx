@@ -16,10 +16,8 @@ interface Props {
   personoversikt: Personoversikt;
 }
 
-const OmsorgFaktaIndex = ({ ytelsefordeling, personoversikt, ...rest }: Props & StandardFaktaPanelProps) => (
+export const OmsorgFaktaIndex = ({ ytelsefordeling, personoversikt, ...rest }: Props & StandardFaktaPanelProps) => (
   <RawIntlProvider value={intl}>
     <OmsorgInfoPanel ytelsefordeling={ytelsefordeling} personoversikt={personoversikt} {...rest} />
   </RawIntlProvider>
 );
-
-export default OmsorgFaktaIndex;

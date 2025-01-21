@@ -1,4 +1,3 @@
-import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
@@ -11,7 +10,7 @@ import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-interface OwnProps {
+interface Props {
   beregningresultatEngangsstonad: BeregningsresultatEs;
   overrideReadOnly: boolean;
   kanOverstyreAccess: {
@@ -20,7 +19,7 @@ interface OwnProps {
   toggleOverstyring: (fn: (oldArray: []) => void) => void;
 }
 
-const BeregningsresultatProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
+export const BeregningsresultatProsessIndex = ({
   beregningresultatEngangsstonad,
   aksjonspunkter,
   overrideReadOnly,
@@ -30,7 +29,7 @@ const BeregningsresultatProsessIndex: FunctionComponent<OwnProps & StandardProse
   alleMerknaderFraBeslutter,
   formData,
   setFormData,
-}) => (
+}: Props & StandardProsessPanelProps) => (
   <RawIntlProvider value={intl}>
     <BeregningsresultatEngangsstonadForm
       behandlingResultatstruktur={beregningresultatEngangsstonad}
@@ -45,5 +44,3 @@ const BeregningsresultatProsessIndex: FunctionComponent<OwnProps & StandardProse
     />
   </RawIntlProvider>
 );
-
-export default BeregningsresultatProsessIndex;

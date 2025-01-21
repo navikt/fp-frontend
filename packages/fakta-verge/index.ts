@@ -1,1 +1,1 @@
-export { default as VergeFaktaIndex } from './src/VergeFaktaIndex';
+export { VergeFaktaIndex } from './src/VergeFaktaIndex';

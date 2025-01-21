@@ -1,17 +1,15 @@
-import React from 'react';
-
 import { action } from '@storybook/addon-actions';
-import { StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { Behandling } from '@navikt/fp-types';
 
-import VergeFaktaIndex from './VergeFaktaIndex';
+import { VergeFaktaIndex } from './VergeFaktaIndex';
 
 import '@navikt/ds-css';
-import '@navikt/ft-ui-komponenter/dist/style.css';
 import '@navikt/ft-form-hooks/dist/style.css';
+import '@navikt/ft-ui-komponenter/dist/style.css';
 
 const aksjonspunkter = [
   {
@@ -28,36 +26,32 @@ const merknaderFraBeslutter = {
   notAccepted: false,
 };
 
-export default {
+const meta = {
   title: 'fakta/fakta-verge',
   component: VergeFaktaIndex,
-};
-
-const Template: StoryFn<{
-  behandling: Behandling;
-  submitCallback: (aksjonspunktData: any) => Promise<void>;
-}> = ({ behandling, submitCallback }) => (
-  <VergeFaktaIndex
-    submitCallback={submitCallback}
-    readOnly={false}
-    harApneAksjonspunkter
-    submittable
-    setFormData={() => undefined}
-    behandling={behandling}
-    verge={verge}
-    aksjonspunkter={aksjonspunkter}
-    alleKodeverk={alleKodeverk as any}
-    alleMerknaderFraBeslutter={{
+  args: {
+    submitCallback: action('button-click') as (data: any) => Promise<void>,
+    readOnly: false,
+    harApneAksjonspunkter: true,
+    submittable: true,
+    setFormData: () => undefined,
+    verge,
+    aksjonspunkter,
+    alleKodeverk: alleKodeverk as any,
+    alleMerknaderFraBeslutter: {
       [AksjonspunktKode.AVKLAR_VERGE]: merknaderFraBeslutter,
-    }}
-  />
-);
+    },
+  },
+} satisfies Meta<typeof VergeFaktaIndex>;
+export default meta;
 
-export const Default = Template.bind({});
-Default.args = {
-  behandling: {
-    uuid: '1',
-    versjon: 1,
-  } as Behandling,
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: {
+    behandling: {
+      uuid: '1',
+      versjon: 1,
+    } as Behandling,
+  },
 };

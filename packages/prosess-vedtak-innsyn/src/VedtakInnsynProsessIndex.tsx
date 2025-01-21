@@ -1,4 +1,3 @@
-import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
@@ -11,14 +10,14 @@ import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-interface OwnProps {
+interface Props {
   innsyn: Innsyn;
   saksnummer: string;
   alleDokumenter?: Dokument[];
   previewCallback: (data: ForhandsvisData) => Promise<any>;
 }
 
-const VedtakInnsynProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
+export const VedtakInnsynProsessIndex = ({
   behandling,
   innsyn,
   saksnummer,
@@ -29,7 +28,7 @@ const VedtakInnsynProsessIndex: FunctionComponent<OwnProps & StandardProsessPane
   isReadOnly,
   formData,
   setFormData,
-}) => (
+}: Props & StandardProsessPanelProps) => (
   <RawIntlProvider value={intl}>
     <InnsynVedtakForm
       sprakkode={behandling.sprakkode}
@@ -47,5 +46,3 @@ const VedtakInnsynProsessIndex: FunctionComponent<OwnProps & StandardProsessPane
     />
   </RawIntlProvider>
 );
-
-export default VedtakInnsynProsessIndex;

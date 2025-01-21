@@ -1,7 +1,5 @@
-import React from 'react';
-
 import { action } from '@storybook/addon-actions';
-import { StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import {
   AksjonspunktKode,
@@ -22,12 +20,11 @@ import {
   Fagsak,
   FamilieHendelse,
   FamilieHendelseSamling,
-  Feriepengegrunnlag,
   Personoversikt,
   Soknad,
 } from '@navikt/fp-types';
 
-import TilkjentYtelseProsessIndex from './TilkjentYtelseProsessIndex';
+import { TilkjentYtelseProsessIndex } from './TilkjentYtelseProsessIndex';
 
 const fagsak = {
   fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
@@ -111,86 +108,84 @@ const arbeidsgiverOpplysningerPerId = {
   },
 };
 
-export default {
+const meta = {
   title: 'prosess/prosess-tilkjent-ytelse',
   component: TilkjentYtelseProsessIndex,
-};
+  args: {
+    submitCallback: action('button-click') as (data: any) => Promise<any>,
+    readOnlySubmitButton: true,
+    behandling,
+    alleKodeverk: alleKodeverk as any,
+    isReadOnly: false,
+    isAksjonspunktOpen: true,
+    status: '',
+    vilkar: [],
+    alleMerknaderFraBeslutter: {},
+    setFormData: () => undefined,
+    beregningresultat,
+    familiehendelse: defaultFamiliehendelse,
+    personoversikt,
+    soknad: søknad,
+    fagsak,
+    arbeidsgiverOpplysningerPerId,
+  },
+} satisfies Meta<typeof TilkjentYtelseProsessIndex>;
+export default meta;
 
-const Template: StoryFn<{
-  aksjonspunkter: Aksjonspunkt[];
-  feriepengegrunnlag?: Feriepengegrunnlag;
-  familiehendelse?: FamilieHendelseSamling;
-}> = ({ aksjonspunkter, feriepengegrunnlag, familiehendelse = defaultFamiliehendelse }) => (
-  <TilkjentYtelseProsessIndex
-    submitCallback={action('button-click') as (data: any) => Promise<any>}
-    readOnlySubmitButton
-    behandling={behandling}
-    alleKodeverk={alleKodeverk as any}
-    aksjonspunkter={aksjonspunkter}
-    isReadOnly={false}
-    isAksjonspunktOpen
-    status=""
-    vilkar={[]}
-    alleMerknaderFraBeslutter={{}}
-    setFormData={() => undefined}
-    beregningresultat={beregningresultat}
-    familiehendelse={familiehendelse}
-    personoversikt={personoversikt}
-    soknad={søknad}
-    fagsak={fagsak}
-    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    feriepengegrunnlag={feriepengegrunnlag}
-  />
-);
+type Story = StoryObj<typeof meta>;
 
-export const UtenAksjonspunkt = Template.bind({});
-UtenAksjonspunkt.args = {
-  aksjonspunkter: [],
-};
-
-export const UtførtAksjonspunkt = Template.bind({});
-UtførtAksjonspunkt.args = {
-  aksjonspunkter: [
-    {
-      begrunnelse: 'Dette er en begrunnelse saksbehandler tidligere har gjort.',
-      definisjon: AksjonspunktKode.VURDER_TILBAKETREKK,
-      status: AksjonspunktStatus.UTFORT,
-    },
-  ] as Aksjonspunkt[],
-};
-
-export const MedFeriepengegrunnlag = Template.bind({});
-MedFeriepengegrunnlag.args = {
-  aksjonspunkter: [
-    {
-      definisjon: AksjonspunktKode.VURDER_TILBAKETREKK,
-      status: AksjonspunktStatus.OPPRETTET,
-    },
-  ] as Aksjonspunkt[],
-  feriepengegrunnlag: {
-    andeler: [
-      {
-        aktivitetStatus: AktivitetStatus.ARBEIDSTAKER,
-        opptjeningsår: 2,
-        årsbeløp: 500000,
-        erBrukerMottaker: true,
-      },
-    ],
+export const UtenAksjonspunkt: Story = {
+  args: {
+    aksjonspunkter: [],
   },
 };
 
-export const MedBarnFodtLengeForForstePeriode = Template.bind({});
-MedBarnFodtLengeForForstePeriode.args = {
-  aksjonspunkter: [],
-  familiehendelse: {
-    ...defaultFamiliehendelse,
-    gjeldende: {
-      avklartBarn: [
+export const UtførtAksjonspunkt: Story = {
+  args: {
+    aksjonspunkter: [
+      {
+        begrunnelse: 'Dette er en begrunnelse saksbehandler tidligere har gjort.',
+        definisjon: AksjonspunktKode.VURDER_TILBAKETREKK,
+        status: AksjonspunktStatus.UTFORT,
+      },
+    ] as Aksjonspunkt[],
+  },
+};
+
+export const MedFeriepengegrunnlag: Story = {
+  args: {
+    aksjonspunkter: [
+      {
+        definisjon: AksjonspunktKode.VURDER_TILBAKETREKK,
+        status: AksjonspunktStatus.OPPRETTET,
+      },
+    ] as Aksjonspunkt[],
+    feriepengegrunnlag: {
+      andeler: [
         {
-          fodselsdato: '2017-01-01',
+          aktivitetStatus: AktivitetStatus.ARBEIDSTAKER,
+          opptjeningsår: 2,
+          årsbeløp: 500000,
+          erBrukerMottaker: true,
         },
       ],
-      soknadType: SoknadType.FODSEL,
-    } as FamilieHendelse,
+    },
+  },
+};
+
+export const MedBarnFodtLengeForForstePeriode: Story = {
+  args: {
+    aksjonspunkter: [],
+    familiehendelse: {
+      ...defaultFamiliehendelse,
+      gjeldende: {
+        avklartBarn: [
+          {
+            fodselsdato: '2017-01-01',
+          },
+        ],
+        soknadType: SoknadType.FODSEL,
+      } as FamilieHendelse,
+    },
   },
 };

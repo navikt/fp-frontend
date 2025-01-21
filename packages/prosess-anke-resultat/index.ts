@@ -1,1 +1,1 @@
-export { default as AnkeResultatProsessIndex } from './src/AnkeResultatProsessIndex';
+export { AnkeResultatProsessIndex } from './src/AnkeResultatProsessIndex';

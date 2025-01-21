@@ -1,14 +1,11 @@
-import React from 'react';
-
 import { action } from '@storybook/addon-actions';
-import { StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode,FagsakYtelseType, MottakerType, TilbakekrevingVidereBehandling } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, FagsakYtelseType, MottakerType, TilbakekrevingVidereBehandling } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, Behandling, Fagsak, SimuleringResultat, TilbakekrevingValg } from '@navikt/fp-types';
-import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import SimuleringProsessIndex from './SimuleringProsessIndex';
+import { SimuleringProsessIndex } from './SimuleringProsessIndex';
 
 const fagsak = {
   saksnummer: '123',
@@ -123,84 +120,76 @@ const simuleringResultat = {
   slåttAvInntrekk: false,
 } as SimuleringResultat;
 
-export default {
+const meta = {
   title: 'prosess/prosess-simulering',
   component: SimuleringProsessIndex,
+  args: {
+    behandling,
+    submitCallback: action('button-click') as (data: any) => Promise<any>,
+    alleKodeverk: alleKodeverk as any,
+    isReadOnly: false,
+    readOnlySubmitButton: false,
+    status: '',
+    vilkar: [],
+    alleMerknaderFraBeslutter: {},
+    setFormData: () => undefined,
+    fagsak,
+    arbeidsgiverOpplysningerPerId,
+    simuleringResultat,
+    previewFptilbakeCallback: action('button-click') as (data: any) => Promise<any>,
+  },
+} satisfies Meta<typeof SimuleringProsessIndex>;
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const AksjonspunktVurderFeilutbetaling: Story = {
+  args: {
+    aksjonspunkter: [
+      {
+        definisjon: AksjonspunktKode.VURDER_FEILUTBETALING,
+        begrunnelse: undefined,
+      },
+    ] as Aksjonspunkt[],
+    isAksjonspunktOpen: true,
+  },
 };
 
-const Template: StoryFn<{
-  aksjonspunkter: Aksjonspunkt[];
-  submitCallback: (aksjonspunktData: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>;
-  tilbakekrevingvalg?: TilbakekrevingValg;
-  isAksjonspunktOpen: boolean;
-}> = ({ aksjonspunkter, submitCallback, tilbakekrevingvalg, isAksjonspunktOpen }) => (
-  <SimuleringProsessIndex
-    behandling={behandling}
-    alleKodeverk={alleKodeverk as any}
-    submitCallback={submitCallback}
-    isReadOnly={false}
-    isAksjonspunktOpen={isAksjonspunktOpen}
-    readOnlySubmitButton={false}
-    status=""
-    vilkar={[]}
-    alleMerknaderFraBeslutter={{}}
-    setFormData={() => undefined}
-    fagsak={fagsak}
-    aksjonspunkter={aksjonspunkter}
-    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    simuleringResultat={simuleringResultat}
-    tilbakekrevingvalg={tilbakekrevingvalg}
-    previewFptilbakeCallback={action('button-click') as (data: any) => Promise<any>}
-  />
-);
-
-export const AksjonspunktVurderFeilutbetaling = Template.bind({});
-AksjonspunktVurderFeilutbetaling.args = {
-  aksjonspunkter: [
-    {
-      definisjon: AksjonspunktKode.VURDER_FEILUTBETALING,
-      begrunnelse: undefined,
-    },
-  ] as Aksjonspunkt[],
-  isAksjonspunktOpen: true,
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
+export const AksjonspunktKontrollerEtterbetaling: Story = {
+  args: {
+    aksjonspunkter: [
+      {
+        definisjon: AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER,
+        begrunnelse: undefined,
+      },
+    ] as Aksjonspunkt[],
+    isAksjonspunktOpen: true,
+  },
 };
 
-export const AksjonspunktKontrollerEtterbetaling = Template.bind({});
-AksjonspunktKontrollerEtterbetaling.args = {
-  aksjonspunkter: [
-    {
-      definisjon: AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER,
-      begrunnelse: undefined,
-    },
-  ] as Aksjonspunkt[],
-  isAksjonspunktOpen: true,
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
+export const AksjonspunktVurderFeilutbetalingOgEtterbetaling: Story = {
+  args: {
+    aksjonspunkter: [
+      {
+        definisjon: AksjonspunktKode.VURDER_FEILUTBETALING,
+        begrunnelse: undefined,
+      },
+      {
+        definisjon: AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER,
+        begrunnelse: undefined,
+      },
+    ] as Aksjonspunkt[],
+    isAksjonspunktOpen: true,
+  },
 };
 
-export const AksjonspunktVurderFeilutbetalingOgEtterbetaling = Template.bind({});
-AksjonspunktVurderFeilutbetalingOgEtterbetaling.args = {
-  aksjonspunkter: [
-    {
-      definisjon: AksjonspunktKode.VURDER_FEILUTBETALING,
-      begrunnelse: undefined,
-    },
-    {
-      definisjon: AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER,
-      begrunnelse: undefined,
-    },
-  ] as Aksjonspunkt[],
-  isAksjonspunktOpen: true,
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-};
-
-export const SimuleringspanelUtenAksjonspunkt = Template.bind({});
-SimuleringspanelUtenAksjonspunkt.args = {
-  aksjonspunkter: [],
-  isAksjonspunktOpen: false,
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-  tilbakekrevingvalg: {
-    videreBehandling: TilbakekrevingVidereBehandling.TILBAKEKR_OPPDATER,
-    varseltekst: 'varsel-eksempel',
-  } as TilbakekrevingValg,
+export const SimuleringspanelUtenAksjonspunkt: Story = {
+  args: {
+    aksjonspunkter: [],
+    isAksjonspunktOpen: false,
+    tilbakekrevingvalg: {
+      videreBehandling: TilbakekrevingVidereBehandling.TILBAKEKR_OPPDATER,
+      varseltekst: 'varsel-eksempel',
+    } as TilbakekrevingValg,
+  },
 };

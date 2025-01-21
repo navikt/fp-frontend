@@ -1,18 +1,15 @@
-import React from 'react';
-
 import { action } from '@storybook/addon-actions';
-import { StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode,AksjonspunktStatus, SoknadType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus, SoknadType } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import { Aksjonspunkt,Behandling, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
-import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { Behandling, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
 
-import AdopsjonFaktaIndex from './AdopsjonFaktaIndex';
+import { AdopsjonFaktaIndex } from './AdopsjonFaktaIndex';
 
 import '@navikt/ds-css';
-import '@navikt/ft-ui-komponenter/dist/style.css';
 import '@navikt/ft-form-hooks/dist/style.css';
+import '@navikt/ft-ui-komponenter/dist/style.css';
 
 const behandling = {
   uuid: '1',
@@ -43,96 +40,87 @@ const merknaderFraBeslutter = {
   notAccepted: false,
 };
 
-const setFormData = () => undefined;
-
-export default {
+const meta = {
   title: 'fakta/fakta-adopsjon',
   component: AdopsjonFaktaIndex,
+  args: {
+    soknad,
+    familiehendelse: familieHendelse,
+    readOnly: false,
+    harApneAksjonspunkter: true,
+    submittable: true,
+    setFormData: () => undefined,
+    behandling: behandling,
+    submitCallback: action('button-click') as (data: any) => Promise<void>,
+    isForeldrepengerFagsak: true,
+    alleKodeverk: alleKodeverk as any,
+  },
+} satisfies Meta<typeof AdopsjonFaktaIndex>;
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const AksjonspunktForAdopsjonsvilkåret: Story = {
+  args: {
+    aksjonspunkter: [
+      {
+        definisjon: AksjonspunktKode.ADOPSJONSDOKUMENTAJON,
+        status: AksjonspunktStatus.OPPRETTET,
+        begrunnelse: undefined,
+        kanLoses: true,
+      },
+    ],
+    alleMerknaderFraBeslutter: {
+      [AksjonspunktKode.ADOPSJONSDOKUMENTAJON]: merknaderFraBeslutter,
+    },
+  },
 };
 
-const Template: StoryFn<{
-  aksjonspunkter: Aksjonspunkt[];
-  submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
-  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
-  isForeldrepengerFagsak?: boolean;
-}> = ({ aksjonspunkter, submitCallback, alleMerknaderFraBeslutter, isForeldrepengerFagsak = true }) => (
-  <AdopsjonFaktaIndex
-    soknad={soknad}
-    familiehendelse={familieHendelse}
-    submitCallback={submitCallback}
-    readOnly={false}
-    harApneAksjonspunkter
-    submittable
-    alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-    setFormData={setFormData}
-    behandling={behandling}
-    aksjonspunkter={aksjonspunkter}
-    alleKodeverk={alleKodeverk as any}
-    isForeldrepengerFagsak={isForeldrepengerFagsak}
-  />
-);
-
-export const AksjonspunktForAdopsjonsvilkåret = Template.bind({});
-AksjonspunktForAdopsjonsvilkåret.args = {
-  aksjonspunkter: [
-    {
-      definisjon: AksjonspunktKode.ADOPSJONSDOKUMENTAJON,
-      status: AksjonspunktStatus.OPPRETTET,
-      begrunnelse: undefined,
-      kanLoses: true,
+export const AksjonspunktForOmSøkerErMannSomAdoptererAlene: Story = {
+  args: {
+    aksjonspunkter: [
+      {
+        definisjon: AksjonspunktKode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
+        status: AksjonspunktStatus.OPPRETTET,
+        begrunnelse: undefined,
+        kanLoses: true,
+      },
+    ],
+    alleMerknaderFraBeslutter: {
+      [AksjonspunktKode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE]: merknaderFraBeslutter,
     },
-  ],
-  alleMerknaderFraBeslutter: {
-    [AksjonspunktKode.ADOPSJONSDOKUMENTAJON]: merknaderFraBeslutter,
   },
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
 };
 
-export const AksjonspunktForOmSøkerErMannSomAdoptererAlene = Template.bind({});
-AksjonspunktForOmSøkerErMannSomAdoptererAlene.args = {
-  aksjonspunkter: [
-    {
-      definisjon: AksjonspunktKode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
-      status: AksjonspunktStatus.OPPRETTET,
-      begrunnelse: undefined,
-      kanLoses: true,
+export const AksjonspunktForOmAdopsjonGjelderEktefellesBarn: Story = {
+  args: {
+    aksjonspunkter: [
+      {
+        definisjon: AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
+        status: AksjonspunktStatus.OPPRETTET,
+        begrunnelse: undefined,
+        kanLoses: true,
+      },
+    ],
+    alleMerknaderFraBeslutter: {
+      [AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN]: merknaderFraBeslutter,
     },
-  ],
-  alleMerknaderFraBeslutter: {
-    [AksjonspunktKode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE]: merknaderFraBeslutter,
   },
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
 };
 
-export const AksjonspunktForOmAdopsjonGjelderEktefellesBarn = Template.bind({});
-AksjonspunktForOmAdopsjonGjelderEktefellesBarn.args = {
-  aksjonspunkter: [
-    {
-      definisjon: AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
-      status: AksjonspunktStatus.OPPRETTET,
-      begrunnelse: undefined,
-      kanLoses: true,
+export const IkkeVisBarnetsAnkomstDatoForEngangsstønad: Story = {
+  args: {
+    aksjonspunkter: [
+      {
+        definisjon: AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
+        status: AksjonspunktStatus.OPPRETTET,
+        begrunnelse: undefined,
+        kanLoses: true,
+      },
+    ],
+    alleMerknaderFraBeslutter: {
+      [AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN]: merknaderFraBeslutter,
     },
-  ],
-  alleMerknaderFraBeslutter: {
-    [AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN]: merknaderFraBeslutter,
+    isForeldrepengerFagsak: false,
   },
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-};
-
-export const IkkeVisBarnetsAnkomstDatoForEngangsstønad = Template.bind({});
-IkkeVisBarnetsAnkomstDatoForEngangsstønad.args = {
-  aksjonspunkter: [
-    {
-      definisjon: AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
-      status: AksjonspunktStatus.OPPRETTET,
-      begrunnelse: undefined,
-      kanLoses: true,
-    },
-  ],
-  alleMerknaderFraBeslutter: {
-    [AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN]: merknaderFraBeslutter,
-  },
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-  isForeldrepengerFagsak: false,
 };

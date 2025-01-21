@@ -18,8 +18,8 @@ describe('<KlagevurderingProsessIndex>', () => {
     const utils = render(
       <KlagevurderingMedAksjonspunktNfp
         submitCallback={lagre}
-        mellomlagre={mellomlagre}
-        forhandsvisCallback={forhåndsvise}
+        saveKlage={mellomlagre}
+        previewCallback={forhåndsvise}
       />,
     );
 

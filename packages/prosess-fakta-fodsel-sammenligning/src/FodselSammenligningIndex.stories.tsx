@@ -1,11 +1,9 @@
-import React from 'react';
-
-import { StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { BehandlingType } from '@navikt/fp-kodeverk';
 import { AvklartBarn, FamilieHendelse, Soknad } from '@navikt/fp-types';
 
-import FodselSammenligningIndex from './FodselSammenligningIndex';
+import { FodselSammenligningIndex } from './FodselSammenligningIndex';
 
 import '@navikt/ds-css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
@@ -35,43 +33,40 @@ const familiehendelse = {
   antallBarnTermin: 1,
 } as FamilieHendelse;
 
-export default {
+const meta = {
   title: 'prosessOgFakta/prosess-fakta-fodsel-sammenligning',
   component: FodselSammenligningIndex,
-};
-
-const Template: StoryFn<{
-  behandlingsTypeKode: string;
-  vedtaksDatoSomSvangerskapsuke?: number;
-  familiehendelseOriginalBehandling?: FamilieHendelse;
-}> = ({ behandlingsTypeKode, vedtaksDatoSomSvangerskapsuke, familiehendelseOriginalBehandling }) => (
-  <FodselSammenligningIndex
-    behandlingsTypeKode={behandlingsTypeKode}
-    avklartBarn={avklartBarn}
-    termindato="2019-01-01"
-    soknad={soknad}
-    familiehendelseOriginalBehandling={familiehendelseOriginalBehandling || familiehendelse}
-    vedtaksDatoSomSvangerskapsuke={vedtaksDatoSomSvangerskapsuke}
-  />
-);
-
-export const PanelForNårBehandlingstypeErRevurdering = Template.bind({});
-PanelForNårBehandlingstypeErRevurdering.args = {
-  behandlingsTypeKode: BehandlingType.REVURDERING,
-};
-
-export const PanelForNårBehandlingstypeErFørstegangssoknad = Template.bind({});
-PanelForNårBehandlingstypeErFørstegangssoknad.args = {
-  behandlingsTypeKode: BehandlingType.FORSTEGANGSSOKNAD,
-};
-
-export const PanelForMedVisningAvSvangerskapsuke = Template.bind({});
-PanelForMedVisningAvSvangerskapsuke.args = {
-  behandlingsTypeKode: BehandlingType.REVURDERING,
-  vedtaksDatoSomSvangerskapsuke: 43,
-  familiehendelseOriginalBehandling: {
-    avklartBarn: [] as AvklartBarn[],
+  args: {
+    avklartBarn,
     termindato: '2019-01-01',
-    antallBarnTermin: 1,
-  } as FamilieHendelse,
+    soknad,
+    familiehendelseOriginalBehandling: familiehendelse,
+  },
+} satisfies Meta<typeof FodselSammenligningIndex>;
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const PanelForNårBehandlingstypeErRevurdering: Story = {
+  args: {
+    behandlingsTypeKode: BehandlingType.REVURDERING,
+  },
+};
+
+export const PanelForNårBehandlingstypeErFørstegangssoknad: Story = {
+  args: {
+    behandlingsTypeKode: BehandlingType.FORSTEGANGSSOKNAD,
+  },
+};
+
+export const PanelForMedVisningAvSvangerskapsuke: Story = {
+  args: {
+    behandlingsTypeKode: BehandlingType.REVURDERING,
+    vedtaksDatoSomSvangerskapsuke: 43,
+    familiehendelseOriginalBehandling: {
+      avklartBarn: [] as AvklartBarn[],
+      termindato: '2019-01-01',
+      antallBarnTermin: 1,
+    } as FamilieHendelse,
+  },
 };

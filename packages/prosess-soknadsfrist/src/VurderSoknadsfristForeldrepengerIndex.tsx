@@ -1,4 +1,3 @@
-import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
@@ -11,11 +10,11 @@ import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-interface OwnProps {
+interface Props {
   soknad: Soknad;
 }
 
-const VurderSoknadsfristForeldrepengerIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
+export const VurderSoknadsfristForeldrepengerIndex = ({
   soknad,
   aksjonspunkter,
   submitCallback,
@@ -24,7 +23,7 @@ const VurderSoknadsfristForeldrepengerIndex: FunctionComponent<OwnProps & Standa
   isAksjonspunktOpen,
   formData,
   setFormData,
-}) => (
+}: Props & StandardProsessPanelProps) => (
   <RawIntlProvider value={intl}>
     <VurderSoknadsfristForeldrepengerForm
       mottattDato={soknad.mottattDato}
@@ -39,5 +38,3 @@ const VurderSoknadsfristForeldrepengerIndex: FunctionComponent<OwnProps & Standa
     />
   </RawIntlProvider>
 );
-
-export default VurderSoknadsfristForeldrepengerIndex;

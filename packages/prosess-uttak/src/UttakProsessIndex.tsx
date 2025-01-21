@@ -1,4 +1,3 @@
-import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
@@ -22,7 +21,7 @@ import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-interface OwnProps {
+interface Props {
   uttakStonadskontoer: UttakStonadskontoer;
   soknad: Soknad;
   uttaksresultatPerioder: UttaksresultatPeriode;
@@ -35,7 +34,7 @@ interface OwnProps {
   fagsak: Fagsak;
 }
 
-const UttakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
+export const UttakProsessIndex = ({
   behandling,
   uttaksresultatPerioder,
   uttakStonadskontoer,
@@ -53,7 +52,7 @@ const UttakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps>
   formData,
   setFormData,
   fagsak,
-}) => (
+}: Props & StandardProsessPanelProps) => (
   <RawIntlProvider value={intl}>
     <UttakProsessPanel
       behandling={behandling}
@@ -76,5 +75,3 @@ const UttakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps>
     />
   </RawIntlProvider>
 );
-
-export default UttakProsessIndex;

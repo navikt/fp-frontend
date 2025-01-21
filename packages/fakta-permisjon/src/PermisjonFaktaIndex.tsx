@@ -1,4 +1,3 @@
-import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
@@ -9,7 +8,7 @@ import PermisjonFaktaPanel from './components/PermisjonFaktaPanel';
 
 import messages from '../i18n/nb_NO.json';
 
-interface OwnProps {
+interface Props {
   saksnummer: string;
   arbeidOgInntekt: ArbeidOgInntektsmelding;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -17,7 +16,7 @@ interface OwnProps {
 
 const intl = createIntl(messages);
 
-const PermisjonFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
+export const PermisjonFaktaIndex = ({
   saksnummer,
   submitCallback,
   aksjonspunkter,
@@ -27,7 +26,7 @@ const PermisjonFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps>
   arbeidOgInntekt,
   arbeidsgiverOpplysningerPerId,
   alleKodeverk,
-}) => (
+}: Props & StandardFaktaPanelProps) => (
   <RawIntlProvider value={intl}>
     <PermisjonFaktaPanel
       saksnummer={saksnummer}
@@ -42,5 +41,3 @@ const PermisjonFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps>
     />
   </RawIntlProvider>
 );
-
-export default PermisjonFaktaIndex;

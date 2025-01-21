@@ -1,4 +1,3 @@
-import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
@@ -11,7 +10,7 @@ import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-interface OwnProps {
+interface Props {
   behandlingsTypeKode: string;
   avklartBarn?: AvklartBarn[];
   termindato?: string;
@@ -21,7 +20,7 @@ interface OwnProps {
   familiehendelseOriginalBehandling?: FamilieHendelse;
 }
 
-const FodselSammenligningIndex: FunctionComponent<OwnProps> = ({
+export const FodselSammenligningIndex = ({
   behandlingsTypeKode,
   avklartBarn = [],
   termindato,
@@ -29,7 +28,7 @@ const FodselSammenligningIndex: FunctionComponent<OwnProps> = ({
   soknad,
   soknadOriginalBehandling,
   familiehendelseOriginalBehandling,
-}) => {
+}: Props) => {
   const nrOfDodfodteBarn = avklartBarn.reduce((ab, barn) => ab + (barn.dodsdato ? 1 : 0), 0);
   return (
     <RawIntlProvider value={intl}>
@@ -46,5 +45,3 @@ const FodselSammenligningIndex: FunctionComponent<OwnProps> = ({
     </RawIntlProvider>
   );
 };
-
-export default FodselSammenligningIndex;

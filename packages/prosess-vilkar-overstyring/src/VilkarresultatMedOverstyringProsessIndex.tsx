@@ -1,4 +1,3 @@
-import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
@@ -12,7 +11,7 @@ import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-interface OwnProps {
+interface Props {
   medlemskap?: Medlemskap;
   overrideReadOnly: boolean;
   kanOverstyreAccess: {
@@ -26,7 +25,7 @@ interface OwnProps {
   lovReferanse?: string;
 }
 
-const VilkarresultatMedOverstyringProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
+export const VilkarresultatMedOverstyringProsessIndex = ({
   behandling,
   medlemskap,
   aksjonspunkter,
@@ -34,7 +33,7 @@ const VilkarresultatMedOverstyringProsessIndex: FunctionComponent<OwnProps & Sta
   alleMerknaderFraBeslutter,
   fagsak,
   ...rest
-}) => (
+}: Props & StandardProsessPanelProps) => (
   <RawIntlProvider value={intl}>
     <VilkarresultatMedOverstyringForm
       ytelseType={fagsak.fagsakYtelseType}
@@ -48,5 +47,3 @@ const VilkarresultatMedOverstyringProsessIndex: FunctionComponent<OwnProps & Sta
     />
   </RawIntlProvider>
 );
-
-export default VilkarresultatMedOverstyringProsessIndex;

@@ -1,4 +1,3 @@
-import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
@@ -15,13 +14,13 @@ import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-interface OwnProps {
+interface Props {
   klageVurdering: KlageVurdering;
-  previewCallback: (data: BrevData) => Promise<any>;
-  saveKlage: (data: TransformedValues) => Promise<any>;
+  previewCallback: (data: BrevData) => Promise<void>;
+  saveKlage: (data: TransformedValues) => Promise<void>;
 }
 
-const KlagevurderingProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
+export const KlagevurderingProsessIndex = ({
   behandling,
   klageVurdering,
   alleKodeverk,
@@ -33,7 +32,7 @@ const KlagevurderingProsessIndex: FunctionComponent<OwnProps & StandardProsessPa
   aksjonspunkter,
   formData,
   setFormData,
-}) => (
+}: Props & StandardProsessPanelProps) => (
   <RawIntlProvider value={intl}>
     {klageVurdering.klageVurderingResultatNK && (
       <BehandleKlageFormKa klageVurdering={klageVurdering} alleKodeverk={alleKodeverk} />
@@ -55,5 +54,3 @@ const KlagevurderingProsessIndex: FunctionComponent<OwnProps & StandardProsessPa
     )}
   </RawIntlProvider>
 );
-
-export default KlagevurderingProsessIndex;

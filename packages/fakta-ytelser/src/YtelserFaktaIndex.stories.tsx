@@ -1,10 +1,6 @@
-import React from 'react';
+import { Meta, StoryObj } from '@storybook/react';
 
-import { StoryFn } from '@storybook/react';
-
-import { InntektArbeidYtelse } from '@navikt/fp-types';
-
-import YtelserFaktaIndex from './YtelserFaktaIndex';
+import { YtelserFaktaIndex } from './YtelserFaktaIndex';
 
 import '@navikt/ds-css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
@@ -49,50 +45,52 @@ const defaultInntektArbeidYtelse = {
   skalKunneLeggeTilNyeArbeidsforhold: true,
 };
 
-export default {
+const meta = {
   title: 'fakta/fakta-ytelser',
   component: YtelserFaktaIndex,
-};
+} satisfies Meta<typeof YtelserFaktaIndex>;
+export default meta;
 
-const Template: StoryFn<{
-  inntektArbeidYtelse: InntektArbeidYtelse;
-}> = ({ inntektArbeidYtelse }) => <YtelserFaktaIndex inntektArbeidYtelse={inntektArbeidYtelse} />;
+type Story = StoryObj<typeof meta>;
 
-export const YtelserForHovedsøker = Template.bind({});
-YtelserForHovedsøker.args = {
-  inntektArbeidYtelse: defaultInntektArbeidYtelse,
-};
-
-export const YtelserForHovedsøkerOgAnnenPart = Template.bind({});
-YtelserForHovedsøkerOgAnnenPart.args = {
-  inntektArbeidYtelse: {
-    ...defaultInntektArbeidYtelse,
-    relatertTilgrensendeYtelserForAnnenForelder: [
-      {
-        relatertYtelseNavn: 'Dagpenger',
-        tilgrensendeYtelserListe: [
-          {
-            periodeFraDato: '2020-02-03',
-            periodeTilDato: '2020-02-04',
-            statusNavn: 'Avsluttet',
-            saksNummer: '123',
-          },
-        ],
-      },
-    ],
+export const YtelserForHovedsøker: Story = {
+  args: {
+    inntektArbeidYtelse: defaultInntektArbeidYtelse,
   },
 };
 
-export const UtenTilgrensedeYtelser = Template.bind({});
-UtenTilgrensedeYtelser.args = {
-  inntektArbeidYtelse: {
-    relatertTilgrensendeYtelserForSoker: [
-      {
-        relatertYtelseNavn: 'Svangerskapspenger',
-        tilgrensendeYtelserListe: [],
-      },
-    ],
-    relatertTilgrensendeYtelserForAnnenForelder: [],
-    innvilgetRelatertTilgrensendeYtelserForAnnenForelder: [],
+export const YtelserForHovedsøkerOgAnnenPart: Story = {
+  args: {
+    inntektArbeidYtelse: {
+      ...defaultInntektArbeidYtelse,
+      relatertTilgrensendeYtelserForAnnenForelder: [
+        {
+          relatertYtelseNavn: 'Dagpenger',
+          tilgrensendeYtelserListe: [
+            {
+              periodeFraDato: '2020-02-03',
+              periodeTilDato: '2020-02-04',
+              statusNavn: 'Avsluttet',
+              saksNummer: '123',
+            },
+          ],
+        },
+      ],
+    },
+  },
+};
+
+export const UtenTilgrensedeYtelser: Story = {
+  args: {
+    inntektArbeidYtelse: {
+      relatertTilgrensendeYtelserForSoker: [
+        {
+          relatertYtelseNavn: 'Svangerskapspenger',
+          tilgrensendeYtelserListe: [],
+        },
+      ],
+      relatertTilgrensendeYtelserForAnnenForelder: [],
+      innvilgetRelatertTilgrensendeYtelserForAnnenForelder: [],
+    },
   },
 };

@@ -1,1 +1,1 @@
-export { default as VurderSoknadsfristForeldrepengerIndex } from './src/VurderSoknadsfristForeldrepengerIndex';
+export { VurderSoknadsfristForeldrepengerIndex } from './src/VurderSoknadsfristForeldrepengerIndex';

@@ -1,1 +1,1 @@
-export { default as ForeldreansvarVilkarProsessIndex } from './src/ForeldreansvarVilkarProsessIndex';
+export { ForeldreansvarVilkarProsessIndex } from './src/ForeldreansvarVilkarProsessIndex';
