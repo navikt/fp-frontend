@@ -1,8 +1,7 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 
-import { BodyShort, Heading, HStack, Tag, VStack } from '@navikt/ds-react';
-import { Tooltip } from '@navikt/ft-ui-komponenter';
+import { BodyShort, Heading, HStack, Tag, Tooltip, VStack } from '@navikt/ds-react';
 
 import { FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { KodeverkMedNavn } from '@navikt/fp-types';
@@ -40,7 +39,10 @@ export const FagsakProfile = ({
       <HStack gap="4">
         <Heading size="medium">{fagsakYtelseType.navn}</Heading>
         {visSakDekningsgrad(fagsakYtelseType.kode, dekningsgrad) && (
-          <Tooltip content={intl.formatMessage({ id: 'FagsakProfile.Dekningsgrad' }, { dekningsgrad })} alignBottom>
+          <Tooltip
+            content={intl.formatMessage({ id: 'FagsakProfile.Dekningsgrad' }, { dekningsgrad })}
+            placement="bottom"
+          >
             <Tag variant="info">{`${dekningsgrad}%`}</Tag>
           </Tooltip>
         )}
@@ -52,7 +54,7 @@ export const FagsakProfile = ({
             <Tooltip
               key={tekst}
               content={intl.formatMessage({ id: 'FagsakProfile.FagsakMarkering' }, { tekst })}
-              alignBottom
+              placement="bottom"
             >
               <Tag size="small" variant="alt1">
                 {tekst}

@@ -2,7 +2,7 @@ import React, { FunctionComponent, useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, Button, Heading,Label } from '@navikt/ds-react';
+import { BodyShort, Button, Heading, Label } from '@navikt/ds-react';
 import { Form, TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import {
@@ -14,7 +14,7 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import { dateFormat } from '@navikt/ft-utils';
 
-import { AksjonspunktKode,AksjonspunktStatus } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import {
   Aksjonspunkt,
   AlleKodeverk,

@@ -2,10 +2,10 @@ import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ChevronDownIcon, ChevronUpIcon, StarFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Box,HStack, Label, Spacer, VStack } from '@navikt/ds-react';
-import { DateTimeLabel,Tooltip, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { BodyShort, Box, HStack, Label, Spacer, Tooltip, VStack } from '@navikt/ds-react';
+import { DateTimeLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { BehandlingArsakType,BehandlingType, KodeverkType } from '@navikt/fp-kodeverk';
+import { BehandlingArsakType, BehandlingType, KodeverkType } from '@navikt/fp-kodeverk';
 import { BehandlingAppKontekst, KodeverkMedNavn } from '@navikt/fp-types';
 
 import styles from './behandlingInformasjon.module.css';
@@ -149,7 +149,7 @@ export const BehandlingInformasjon = ({
             <BodyShort size="small" className={styles.inline}>
               <FormattedMessage id="BehandlingPickerItemContent.Enhet" />
             </BodyShort>
-            <Tooltip content={behandling.behandlendeEnhetNavn} alignLeft>
+            <Tooltip content={behandling.behandlendeEnhetNavn} placement="left">
               <BodyShort size="small" className={styles.inline}>
                 {behandling.behandlendeEnhetId}
               </BodyShort>

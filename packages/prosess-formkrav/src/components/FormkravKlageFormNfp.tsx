@@ -1,17 +1,17 @@
-import React, { FunctionComponent, ReactElement,useMemo } from 'react';
+import React, { FunctionComponent, ReactElement, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
-import { FormattedMessage, IntlShape,useIntl } from 'react-intl';
+import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 
 import { Detail, Heading, HStack, VStack } from '@navikt/ds-react';
 import { Form, RadioGroupPanel, SelectField, TextAreaField } from '@navikt/ft-form-hooks';
-import { hasValidText,required } from '@navikt/ft-form-validators';
-import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { hasValidText, required } from '@navikt/ft-form-validators';
+import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { DATE_TIME_FORMAT, formaterFritekst } from '@navikt/ft-utils';
 import moment from 'moment';
 
-import { AksjonspunktKode, getKodeverknavnFn,KodeverkType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, getKodeverknavnFn, KodeverkType } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
-import { AlleKodeverk,KlageVurdering } from '@navikt/fp-types';
+import { AlleKodeverk, KlageVurdering } from '@navikt/fp-types';
 import { KlageFormkravAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import AvsluttetBehandling from '../types/avsluttetBehandlingTsType';
@@ -144,9 +144,11 @@ const FormkravKlageFormNfp: FunctionComponent<OwnProps> = ({
       <Detail>{intl.formatMessage({ id: getLovHjemmeler(AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP) })}</Detail>
       <VerticalSpacer sixteenPx />
       <VStack gap="6">
-        <AksjonspunktHelpTextTemp isAksjonspunktOpen={!readOnlySubmitButton}>
-          {[<FormattedMessage id="Klage.Formkrav.HelpText" key={AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP} />]}
-        </AksjonspunktHelpTextTemp>
+        {!readOnlySubmitButton && (
+          <AksjonspunktHelpTextHTML>
+            <FormattedMessage id="Klage.Formkrav.HelpText" />
+          </AksjonspunktHelpTextHTML>
+        )}
         <VStack gap="6">
           <HStack gap="10">
             <div>

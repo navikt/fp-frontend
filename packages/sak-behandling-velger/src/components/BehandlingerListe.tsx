@@ -1,7 +1,7 @@
 import React, { ReactElement, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { Box,Label } from '@navikt/ds-react';
+import { Box, Label } from '@navikt/ds-react';
 import moment from 'moment';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';

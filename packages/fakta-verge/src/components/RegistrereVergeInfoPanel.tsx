@@ -3,11 +3,11 @@ import { useForm } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
 import { Form } from '@navikt/ft-form-hooks';
-import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { FaktaBegrunnelseTextFieldNew, FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, KodeverkType } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt, AlleKodeverk, AlleKodeverkTilbakekreving,Verge } from '@navikt/fp-types';
+import { Aksjonspunkt, AlleKodeverk, AlleKodeverkTilbakekreving, Verge } from '@navikt/fp-types';
 import { AvklarVergeAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import RegistrereVergeFaktaForm, { FormValues as RegistrereFormValues } from './RegistrereVergeFaktaForm';
@@ -79,9 +79,11 @@ const RegistrereVergeInfoPanel: FunctionComponent<PureOwnProps> = ({
 
   return (
     <>
-      <AksjonspunktHelpTextTemp isAksjonspunktOpen={hasOpenAksjonspunkter}>
-        {[intl.formatMessage({ id: 'RegistrereVergeInfoPanel.CheckInformation' })]}
-      </AksjonspunktHelpTextTemp>
+      {hasOpenAksjonspunkter && (
+        <AksjonspunktHelpTextHTML>
+          {intl.formatMessage({ id: 'RegistrereVergeInfoPanel.CheckInformation' })}
+        </AksjonspunktHelpTextHTML>
+      )}
       <Form
         formMethods={formMethods}
         onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
