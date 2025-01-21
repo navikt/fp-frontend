@@ -48,7 +48,7 @@ export const FaktaBegrunnelseTextField = ({
 
   const getLabel = () => {
     if (isReadOnly) return hasReadOnlyLabel ? intl.formatMessage({ id: 'FaktaBegrunnelseTextField.Begrunnelse' }) : '';
-    return label || intl.formatMessage({ id: code });
+    return label ?? intl.formatMessage({ id: code });
   };
   return (
     <RawIntlProvider value={intl}>

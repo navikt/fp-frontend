@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
