@@ -14,13 +14,13 @@ dayjs.extend(isSameOrAfter);
 export const validateMinAntallBarn = minValue(1);
 export const validateMaxAntallBarn = maxValue(9);
 
-export const minFodselsdato = () => dayjs().subtract(5, 'year');
+export const minFodselsdato = () => dayjs().subtract(8, 'year');
 export const maxFodselsdato = () => dayjs();
 
-export const minTerminbekreftelseDato = () => dayjs().subtract(5, 'year');
+export const minTerminbekreftelseDato = () => dayjs().subtract(8, 'year');
 export const maxTerminbekreftelseDato = () => dayjs().subtract(0, 'year');
 
-export const minTermindato = () => dayjs().subtract(5, 'year');
+export const minTermindato = () => dayjs().subtract(8, 'year');
 export const maxTermindato = () => dayjs().add(9, 'months');
 
 export const terminBekreftelseBeforeTodayOrTermindato = (
