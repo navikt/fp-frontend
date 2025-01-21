@@ -3,12 +3,12 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { Form } from '@navikt/ft-form-hooks';
-import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
 import { FodselSammenligningIndex } from '@navikt/fp-prosess-fakta-fodsel-sammenligning';
-import { Aksjonspunkt, AvklartBarn,FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
+import { Aksjonspunkt, AvklartBarn, FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
 import { BekreftTerminbekreftelseAp, SjekkManglendeFodselAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import SjekkFodselDokForm, { FormValues as SjekkFodselDokFormValues } from './SjekkFodselDokForm';
@@ -119,9 +119,7 @@ const FodselInfoPanel: FunctionComponent<OwnProps> = ({
 
   return (
     <>
-      <AksjonspunktHelpTextTemp isAksjonspunktOpen={hasOpenAksjonspunkter}>
-        {getHelpTexts(aksjonspunkter)}
-      </AksjonspunktHelpTextTemp>
+      {hasOpenAksjonspunkter && <AksjonspunktHelpTextHTML>{getHelpTexts(aksjonspunkter)}</AksjonspunktHelpTextHTML>}
       <VerticalSpacer sixteenPx />
       <Form
         formMethods={formMethods}

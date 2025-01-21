@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 
 import { HStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
-import { AksjonspunktHelpTextTemp,VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import {
   FaktaBegrunnelseFormValues,
@@ -154,9 +154,7 @@ const AdopsjonInfoPanel: FunctionComponent<OwnProps> = ({
 
   return (
     <>
-      <AksjonspunktHelpTextTemp isAksjonspunktOpen={hasOpenAksjonspunkter}>
-        {getHelpTexts(aksjonspunkter)}
-      </AksjonspunktHelpTextTemp>
+      {hasOpenAksjonspunkter && <AksjonspunktHelpTextHTML>{getHelpTexts(aksjonspunkter)}</AksjonspunktHelpTextHTML>}
       <Form formMethods={formMethods} onSubmit={onSubmit} setDataOnUnmount={setFormData}>
         <VerticalSpacer eightPx />
         <HStack gap="4" wrap>

@@ -6,7 +6,7 @@ import { BodyShort, Detail, Heading, Label, Panel } from '@navikt/ds-react';
 import { Datepicker, Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { dateBeforeOrEqualToToday, hasValidDate, required } from '@navikt/ft-form-validators';
 import {
-  AksjonspunktHelpTextTemp,
+  AksjonspunktHelpTextHTML,
   ArrowBox,
   FlexColumn,
   FlexContainer,
@@ -105,18 +105,17 @@ const VurderSoknadsfristForeldrepengerForm: FunctionComponent<OwnProps> = ({
         <FormattedMessage id="VurderSoknadsfristForeldrepengerForm.Soknadsfrist" />
       </Heading>
       <VerticalSpacer twentyPx />
-      <AksjonspunktHelpTextTemp isAksjonspunktOpen={isApOpen}>
-        {[
+      {isApOpen && (
+        <AksjonspunktHelpTextHTML>
           <FormattedMessage
-            key="VurderSoknadsfristForeldrepengerForm"
             id="VurderSoknadsfristForeldrepengerForm.AksjonspunktHelpText"
             values={{
               numberOfDays: søknadsfrist?.dagerOversittetFrist,
               soknadsfristdato: soknadsfristdato ? moment(soknadsfristdato).format(DDMMYYYY_DATE_FORMAT) : '',
             }}
-          />,
-        ]}
-      </AksjonspunktHelpTextTemp>
+          />
+        </AksjonspunktHelpTextHTML>
+      )}
       <VerticalSpacer twentyPx />
       <FlexContainer>
         <FlexRow>
