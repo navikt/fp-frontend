@@ -13,7 +13,7 @@ const {
   HarAksjonspunktForAvklarAnnenForelderRett,
 } = composeStories(stories);
 
-describe('<OmsorgOgRettFaktaIndex>', () => {
+describe('OmsorgOgRettFaktaIndex', () => {
   it('skal velge å ha aleneomsorg for barnet', async () => {
     const lagreVurdering = vi.fn(() => Promise.resolve());
 
@@ -35,7 +35,7 @@ describe('<OmsorgOgRettFaktaIndex>', () => {
 
     await userEvent.click(screen.getByLabelText('Søker har aleneomsorg for barnet'));
 
-    await userEvent.type(utils.getByLabelText('Begrunn vurderingen'), 'Dette er en begrunnelse');
+    await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
@@ -62,7 +62,7 @@ describe('<OmsorgOgRettFaktaIndex>', () => {
     expect(screen.getByText('Har annen forelder rett til foreldrepenger i Norge?')).toBeInTheDocument();
     await userEvent.click(screen.getByText('Ja'));
 
-    await userEvent.type(utils.getByLabelText('Begrunn vurderingen'), 'Dette er en begrunnelse');
+    await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
@@ -95,7 +95,7 @@ describe('<OmsorgOgRettFaktaIndex>', () => {
     expect(screen.getByText('Har annen forelder rett til foreldrepenger i Norge?')).toBeInTheDocument();
     await userEvent.click(screen.getByText('Ja'));
 
-    await userEvent.type(utils.getByLabelText('Begrunn vurderingen'), 'Dette er en begrunnelse');
+    await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
@@ -124,7 +124,7 @@ describe('<OmsorgOgRettFaktaIndex>', () => {
     expect(await screen.findByText('Mottar annen forelder uføretrygd, jfr 14-14 tredje ledd?')).toBeInTheDocument();
     await userEvent.click(screen.getAllByText('Ja')[2]);
 
-    await userEvent.type(utils.getByLabelText('Begrunn vurderingen'), 'Dette er en begrunnelse');
+    await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 

@@ -10,7 +10,7 @@ import { StandardFaktaPanelProps } from '@navikt/fp-types';
 
 import { OmsorgOgRettProps } from '../OmsorgOgRettFaktaIndex';
 import { AleneomsorgForm, FormValues as AleneomsorgFormValues } from './forms/AleneomsorgForm';
-import { FormValues as RettFormValues,HarAnnenForelderRettForm } from './forms/HarAnnenForelderRettForm';
+import { FormValues as RettFormValues, HarAnnenForelderRettForm } from './forms/HarAnnenForelderRettForm';
 
 export const OmsorgOgRettInfoPanel = ({
   readOnly,
@@ -18,6 +18,7 @@ export const OmsorgOgRettInfoPanel = ({
   ytelsefordeling,
   alleKodeverk,
   aksjonspunkter,
+  submittable,
   submitCallback,
   formData,
   setFormData,
@@ -38,24 +39,29 @@ export const OmsorgOgRettInfoPanel = ({
           {harAPAnnenForelderRett && <FormattedMessage id="OmsorgOgRettInfoPanel.VurderAndreForelderRett" />}
         </AksjonspunktHelpTextHTML>
       )}
+
       <PersonopplysningerForFamilie alleKodeverk={alleKodeverk} personoversikt={personoversikt} />
+
       {harAPAleneomsorg && (
         <AleneomsorgForm
           ytelsefordeling={ytelsefordeling}
           readOnly={readOnly}
           formData={formData as AleneomsorgFormValues}
           setFormData={setFormData}
+          submittable={submittable}
           submitCallback={submitCallback}
           alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
           aksjonspunkt={aksjonspunkter[0]}
         />
       )}
+
       {harAPAnnenForelderRett && (
         <HarAnnenForelderRettForm
           ytelsefordeling={ytelsefordeling}
           readOnly={readOnly}
           formData={formData as RettFormValues}
           setFormData={setFormData}
+          submittable={submittable}
           submitCallback={submitCallback}
           alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
           aksjonspunkt={aksjonspunkter[0]}

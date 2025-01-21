@@ -1,11 +1,11 @@
-import React, { FunctionComponent } from 'react';
-import { FormattedMessage,RawIntlProvider } from 'react-intl';
+import React from 'react';
+import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
 import { Button } from '@navikt/ds-react';
 import { ariaCheck } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
 
-import messages from '../../i18n/nb_NO.json';
+import messages from '../../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
@@ -16,7 +16,7 @@ const isDisabled = (isDirty: boolean, isSubmitting: boolean, isSubmittable: bool
   return !isDirty;
 };
 
-interface OwnProps {
+interface Props {
   buttonText?: string;
   isReadOnly: boolean;
   isSubmittable: boolean;
@@ -28,14 +28,7 @@ interface OwnProps {
 /**
  * FaktaSubmitButton
  */
-export const FaktaSubmitButton: FunctionComponent<OwnProps> = ({
-  isReadOnly,
-  isSubmittable,
-  buttonText,
-  onClick,
-  isSubmitting,
-  isDirty,
-}) => (
+export const FaktaSubmitButton = ({ isReadOnly, isSubmittable, buttonText, onClick, isSubmitting, isDirty }: Props) => (
   <RawIntlProvider value={intl}>
     {!isReadOnly && (
       <Button

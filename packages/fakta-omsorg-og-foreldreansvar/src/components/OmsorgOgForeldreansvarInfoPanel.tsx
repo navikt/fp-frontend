@@ -33,7 +33,7 @@ const transformValues = (
   aksjonspunkt: Aksjonspunkt,
 ): AvklarFaktaForForeldreansvarAksjonspunktAp | AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp => ({
   ...OmsorgOgForeldreansvarFaktaForm.transformValues(values, aksjonspunkt),
-  ...{ begrunnelse: values.begrunnelse },
+  ...FaktaBegrunnelseTextFieldNew.transformValues(values),
 });
 
 const buildInitialValues = (
@@ -55,7 +55,7 @@ const buildInitialValues = (
       innvilgetRelatertTilgrensendeYtelserForAnnenForelder,
       getKodeverknavnFn(alleKodeverk),
     ),
-    ...FaktaBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkt),
+    ...FaktaBegrunnelseTextFieldNew.initialValues(aksjonspunkt),
   };
 };
 

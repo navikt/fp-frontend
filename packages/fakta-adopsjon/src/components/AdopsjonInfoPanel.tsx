@@ -69,7 +69,7 @@ const buildInitialValues = (
     ...DokumentasjonFaktaForm.buildInitialValues(soknad, familiehendelse),
     ...omAdopsjonGjelderEktefellesBarn,
     ...mannAdoptererAleneValues,
-    ...FaktaBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter[0]),
+    ...FaktaBegrunnelseTextFieldNew.initialValues(aksjonspunkter[0]),
   };
 };
 

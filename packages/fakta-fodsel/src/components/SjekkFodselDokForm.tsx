@@ -149,7 +149,7 @@ SjekkFodselDokForm.buildInitialValues = (soknad, familiehendelse, aksjonspunkt):
     familiehendelse.avklartBarn && familiehendelse.avklartBarn.length > 0
       ? familiehendelse.avklartBarn
       : lagBarn(soknad.antallBarn || 0),
-  ...FaktaBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkt),
+  ...FaktaBegrunnelseTextFieldNew.initialValues(aksjonspunkt),
 });
 
 SjekkFodselDokForm.transformValues = (values: FormValues, avklartBarn: AvklartBarn[]): SjekkManglendeFodselAp => ({

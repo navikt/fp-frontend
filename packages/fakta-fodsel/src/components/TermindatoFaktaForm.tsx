@@ -2,10 +2,10 @@ import React, { FunctionComponent } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Alert, BodyShort, HStack,Label } from '@navikt/ds-react';
+import { Alert, BodyShort, HStack, Label } from '@navikt/ds-react';
 import { Datepicker, InputField } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidInteger, maxValue, minValue, required } from '@navikt/ft-form-validators';
-import { DateLabel, FaktaGruppe,VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { DateLabel, FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import moment from 'moment';
 
 import { FaktaBegrunnelseTextFieldNew, isFieldEdited } from '@navikt/fp-fakta-felles';
@@ -147,7 +147,7 @@ TermindatoFaktaForm.buildInitialValues = (soknad, familiehendelse, aksjonspunkt)
     utstedtdato: familiehendelse.utstedtdato ? familiehendelse.utstedtdato : soknad.utstedtdato,
     termindato: familiehendelse.termindato ? familiehendelse.termindato : soknad.termindato,
     antallBarn: familiehendelse.antallBarnTermin ? familiehendelse.antallBarnTermin : antallBarn,
-    ...FaktaBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkt),
+    ...FaktaBegrunnelseTextFieldNew.initialValues(aksjonspunkt),
   };
 };
 

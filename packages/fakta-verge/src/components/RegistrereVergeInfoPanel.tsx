@@ -6,7 +6,7 @@ import { Form } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { FaktaBegrunnelseTextFieldNew, FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode, KodeverkType } from '@navikt/fp-kodeverk';
+import { KodeverkType } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, AlleKodeverk, AlleKodeverkTilbakekreving, Verge } from '@navikt/fp-types';
 import { AvklarVergeAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -17,15 +17,13 @@ type FormValues = RegistrereFormValues & {
 };
 
 const buildInitialValues = (verge: Verge, aksjonspunkter: Aksjonspunkt[]): FormValues => ({
-  begrunnelse: FaktaBegrunnelseTextFieldNew.buildInitialValues(
-    aksjonspunkter.filter(ap => ap.definisjon === AksjonspunktKode.AVKLAR_VERGE)[0],
-  ).begrunnelse,
+  ...FaktaBegrunnelseTextFieldNew.initialValues(aksjonspunkter),
   ...RegistrereVergeFaktaForm.buildInitialValues(verge || {}),
 });
 
 const transformValues = (values: FormValues): AvklarVergeAp => ({
   ...RegistrereVergeFaktaForm.transformValues(values),
-  ...{ begrunnelse: values.begrunnelse },
+  ...FaktaBegrunnelseTextFieldNew.transformValues(values),
 });
 
 interface PureOwnProps {

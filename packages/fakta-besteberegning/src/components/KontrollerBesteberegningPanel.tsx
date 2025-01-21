@@ -2,18 +2,18 @@ import React, { FunctionComponent, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
-import { CheckboxField,Form } from '@navikt/ft-form-hooks';
+import { CheckboxField, Form } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { FaktaBegrunnelseTextFieldNew, FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode,AksjonspunktStatus } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt } from '@navikt/fp-types';
 import { ManuellKontrollBesteberegningAP } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 export const buildInitialValues = (aksjonspunkt: Aksjonspunkt): FormValues => {
   const apErLøst = aksjonspunkt.status === AksjonspunktStatus.UTFORT;
   return {
-    ...FaktaBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkt),
+    ...FaktaBegrunnelseTextFieldNew.initialValues(aksjonspunkt),
     besteberegningErKorrektValg: apErLøst ? true : undefined,
   };
 };

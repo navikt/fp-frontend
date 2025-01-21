@@ -1,20 +1,20 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
-import { createIntl,decodeHtmlEntity } from '@navikt/ft-utils';
+import { createIntl, decodeHtmlEntity } from '@navikt/ft-utils';
 
 import { Aksjonspunkt } from '@navikt/fp-types';
 
-import messages from '../../i18n/nb_NO.json';
+import messages from '../../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 
-type OwnProps = {
+type Props = {
   isReadOnly: boolean;
   isSubmittable: boolean;
   hasBegrunnelse: boolean;
@@ -32,15 +32,10 @@ type TransformedValues = {
   begrunnelse: string;
 };
 
-interface StaticFunctions {
-  buildInitialValues: (aksjonspunkt?: Aksjonspunkt[] | Aksjonspunkt, begrunnelseFieldName?: string) => FormValues;
-  transformValues: (values: FormValues, name?: string) => TransformedValues;
-}
-
 /**
  * FaktaBegrunnelseTextField
  */
-const FaktaBegrunnelseTextField: FunctionComponent<OwnProps> & StaticFunctions = ({
+const FaktaBegrunnelseTextField = ({
   isReadOnly,
   isSubmittable,
   hasBegrunnelse,
@@ -48,7 +43,7 @@ const FaktaBegrunnelseTextField: FunctionComponent<OwnProps> & StaticFunctions =
   hasReadOnlyLabel = false,
   hasVurderingText = false,
   name = 'begrunnelse',
-}) => {
+}: Props) => {
   const code = hasVurderingText ? 'FaktaBegrunnelseTextField.Vurdering' : 'FaktaBegrunnelseTextField.BegrunnEndringene';
 
   const getLabel = () => {
@@ -77,7 +72,7 @@ const getBegrunnelse = (aksjonspunkt?: Aksjonspunkt[] | Aksjonspunkt): string | 
   return !!aksjonspunkt && !Array.isArray(aksjonspunkt) ? aksjonspunkt.begrunnelse : '';
 };
 
-FaktaBegrunnelseTextField.buildInitialValues = (
+FaktaBegrunnelseTextField.initialValues = (
   aksjonspunkt?: Aksjonspunkt[] | Aksjonspunkt,
   begrunnelseFieldName = 'begrunnelse',
 ): FormValues => ({

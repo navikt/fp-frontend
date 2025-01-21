@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Heading } from '@navikt/ds-react';
-import { Form,RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { AksjonspunktBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
@@ -57,7 +57,7 @@ const InnhentDokOpptjeningUtlandPanel: FunctionComponent<OwnProps> = ({
   const formMethods = useForm<FormValues>({
     defaultValues: formData || {
       dokStatus,
-      ...FaktaBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkt),
+      ...FaktaBegrunnelseTextFieldNew.initialValues(aksjonspunkt),
     },
   });
 
