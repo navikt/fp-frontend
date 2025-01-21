@@ -1,4 +1,4 @@
-import { createContext, FunctionComponent, ReactNode, useCallback, useContext, useReducer } from 'react';
+import { createContext, FunctionComponent, JSX, ReactNode, useCallback, useContext, useReducer } from 'react';
 
 import { FpError } from './errorType';
 

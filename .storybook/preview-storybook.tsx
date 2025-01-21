@@ -1,6 +1,5 @@
-import React from 'react';
-
-import { Preview, StoryFn } from '@storybook/react';
+import { Preview, ReactRenderer } from '@storybook/react';
+import { DecoratorFunction } from '@storybook/types';
 import dayjs from 'dayjs';
 import { initialize, mswLoader } from 'msw-storybook-addon';
 
@@ -10,13 +9,13 @@ import 'dayjs/locale/nb.js';
 
 dayjs.locale('nb');
 
-export const decorators = [
-  (Story: StoryFn) => (
-    <div style={{ margin: '40px' }}>
-      <Story />
-    </div>
-  ),
-];
+const withMarginDecorator: DecoratorFunction<ReactRenderer> = Story => (
+  <div style={{ margin: '40px' }}>
+    <Story />
+  </div>
+);
+
+export const decorators = [withMarginDecorator];
 
 const preview: Preview = {
   decorators,
