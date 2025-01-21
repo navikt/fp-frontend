@@ -8,8 +8,8 @@ import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponen
 
 import {
   FaktaBegrunnelseFormValues,
-  FaktaBegrunnelseTextFieldNew,
-  FaktaSubmitButtonNew,
+  FaktaBegrunnelseTextField,
+  FaktaSubmitButton,
   FieldEditedInfo,
   isFieldEdited,
 } from '@navikt/fp-fakta-felles';
@@ -69,7 +69,7 @@ const buildInitialValues = (
     ...DokumentasjonFaktaForm.buildInitialValues(soknad, familiehendelse),
     ...omAdopsjonGjelderEktefellesBarn,
     ...mannAdoptererAleneValues,
-    ...FaktaBegrunnelseTextFieldNew.initialValues(aksjonspunkter[0]),
+    ...FaktaBegrunnelseTextField.initialValues(aksjonspunkter[0]),
   };
 };
 
@@ -187,13 +187,13 @@ const AdopsjonInfoPanel: FunctionComponent<OwnProps> = ({
         {aksjonspunkter && aksjonspunkter.length > 0 && (
           <>
             <VerticalSpacer twentyPx />
-            <FaktaBegrunnelseTextFieldNew
+            <FaktaBegrunnelseTextField
               isSubmittable={submittable}
               isReadOnly={readOnly}
               hasBegrunnelse={!!begrunnelse}
             />
             <VerticalSpacer twentyPx />
-            <FaktaSubmitButtonNew
+            <FaktaSubmitButton
               isSubmittable={submittable}
               isReadOnly={readOnly}
               isSubmitting={formMethods.formState.isSubmitting}

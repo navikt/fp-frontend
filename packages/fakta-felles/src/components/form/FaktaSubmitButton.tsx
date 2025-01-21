@@ -45,5 +45,3 @@ export const FaktaSubmitButton = ({ isReadOnly, isSubmittable, buttonText, onCli
     )}
   </RawIntlProvider>
 );
-
-export default FaktaSubmitButton;

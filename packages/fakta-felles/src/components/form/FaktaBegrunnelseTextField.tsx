@@ -35,7 +35,7 @@ type TransformedValues = {
 /**
  * FaktaBegrunnelseTextField
  */
-const FaktaBegrunnelseTextField = ({
+export const FaktaBegrunnelseTextField = ({
   isReadOnly,
   isSubmittable,
   hasBegrunnelse,
@@ -82,5 +82,3 @@ FaktaBegrunnelseTextField.initialValues = (
 FaktaBegrunnelseTextField.transformValues = (values: FormValues, name = 'begrunnelse'): TransformedValues => ({
   begrunnelse: values[name] as string,
 });
-
-export default FaktaBegrunnelseTextField;

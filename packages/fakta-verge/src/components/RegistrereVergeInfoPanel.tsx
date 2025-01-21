@@ -5,7 +5,7 @@ import { useIntl } from 'react-intl';
 import { Form } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { FaktaBegrunnelseTextFieldNew, FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
+import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { KodeverkType } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, AlleKodeverk, AlleKodeverkTilbakekreving, Verge } from '@navikt/fp-types';
 import { AvklarVergeAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -17,13 +17,13 @@ type FormValues = RegistrereFormValues & {
 };
 
 const buildInitialValues = (verge: Verge, aksjonspunkter: Aksjonspunkt[]): FormValues => ({
-  ...FaktaBegrunnelseTextFieldNew.initialValues(aksjonspunkter),
+  ...FaktaBegrunnelseTextField.initialValues(aksjonspunkter),
   ...RegistrereVergeFaktaForm.buildInitialValues(verge || {}),
 });
 
 const transformValues = (values: FormValues): AvklarVergeAp => ({
   ...RegistrereVergeFaktaForm.transformValues(values),
-  ...FaktaBegrunnelseTextFieldNew.transformValues(values),
+  ...FaktaBegrunnelseTextField.transformValues(values),
 });
 
 interface PureOwnProps {
@@ -95,13 +95,9 @@ const RegistrereVergeInfoPanel: FunctionComponent<PureOwnProps> = ({
           alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
         />
         <VerticalSpacer twentyPx />
-        <FaktaBegrunnelseTextFieldNew
-          isSubmittable={submittable}
-          isReadOnly={readOnly}
-          hasBegrunnelse={!!begrunnelse}
-        />
+        <FaktaBegrunnelseTextField isSubmittable={submittable} isReadOnly={readOnly} hasBegrunnelse={!!begrunnelse} />
         <VerticalSpacer twentyPx />
-        <FaktaSubmitButtonNew
+        <FaktaSubmitButton
           isSubmittable={submittable && !!valgtVergeType}
           isReadOnly={readOnly}
           isSubmitting={formMethods.formState.isSubmitting}

@@ -1,7 +1,7 @@
-export { default as FaktaBegrunnelseTextFieldNew } from './src/components/form/FaktaBegrunnelseTextFieldNew';
-export { default as FaktaSubmitButtonNew } from './src/components/form/FaktaSubmitButtonNew';
+export { FaktaBegrunnelseTextField } from './src/components/form/FaktaBegrunnelseTextField';
+export { FaktaSubmitButton } from './src/components/form/FaktaSubmitButton';
 export { TrueFalseInput } from './src/components/form/TrueFalseInput';
-export type { FormValues as FaktaBegrunnelseFormValues } from './src/components/form/FaktaBegrunnelseTextFieldNew';
+export type { FormValues as FaktaBegrunnelseFormValues } from './src/components/form/FaktaBegrunnelseTextField';
 
 export { default as isFieldEdited } from './src/utils/isFieldEdited';
 export type { FieldEditedInfo } from './src/utils/isFieldEdited';

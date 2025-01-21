@@ -8,7 +8,7 @@ import { hasValidDate, hasValidInteger, maxValue, minValue, required } from '@na
 import { DateLabel, FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import moment from 'moment';
 
-import { FaktaBegrunnelseTextFieldNew, isFieldEdited } from '@navikt/fp-fakta-felles';
+import { FaktaBegrunnelseTextField, isFieldEdited } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, FamilieHendelse, Soknad } from '@navikt/fp-types';
 import { BekreftTerminbekreftelseAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -128,7 +128,7 @@ export const TermindatoFaktaForm: FunctionComponent<OwnProps> & StaticFunctions 
         </FaktaGruppe>
       )}
       <VerticalSpacer sixteenPx />
-      <FaktaBegrunnelseTextFieldNew isSubmittable={submittable} isReadOnly={readOnly} hasBegrunnelse={!!begrunnelse} />
+      <FaktaBegrunnelseTextField isSubmittable={submittable} isReadOnly={readOnly} hasBegrunnelse={!!begrunnelse} />
       {isForTidligTerminbekreftelse && (
         <>
           <VerticalSpacer sixteenPx />
@@ -147,7 +147,7 @@ TermindatoFaktaForm.buildInitialValues = (soknad, familiehendelse, aksjonspunkt)
     utstedtdato: familiehendelse.utstedtdato ? familiehendelse.utstedtdato : soknad.utstedtdato,
     termindato: familiehendelse.termindato ? familiehendelse.termindato : soknad.termindato,
     antallBarn: familiehendelse.antallBarnTermin ? familiehendelse.antallBarnTermin : antallBarn,
-    ...FaktaBegrunnelseTextFieldNew.initialValues(aksjonspunkt),
+    ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
   };
 };
 
@@ -156,7 +156,7 @@ TermindatoFaktaForm.transformValues = (values: FormValues): BekreftTerminbekreft
   utstedtdato: values.utstedtdato!,
   termindato: values.termindato!,
   antallBarn: values.antallBarn!,
-  ...FaktaBegrunnelseTextFieldNew.transformValues(values),
+  ...FaktaBegrunnelseTextField.transformValues(values),
 });
 
 export default TermindatoFaktaForm;

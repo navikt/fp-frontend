@@ -6,11 +6,7 @@ import { VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
-import {
-  FaktaBegrunnelseTextFieldNew,
-  FaktaSubmitButtonNew,
-  PersonopplysningerForFamilie,
-} from '@navikt/fp-fakta-felles';
+import { FaktaBegrunnelseTextField, FaktaSubmitButton, PersonopplysningerForFamilie } from '@navikt/fp-fakta-felles';
 import { Aksjonspunkt, Personoversikt, StandardFaktaPanelProps, Ytelsefordeling } from '@navikt/fp-types';
 import { BekreftOmsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -19,13 +15,13 @@ import { FormValues as OmsorgFormValues, OmsorgFaktaFields } from './OmsorgFakta
 const createInitialValues = (ytelsefordeling: Ytelsefordeling, aksjonspunkter: Aksjonspunkt[]): FormValues => {
   return {
     ...OmsorgFaktaFields.initialValues(ytelsefordeling, aksjonspunkter),
-    ...FaktaBegrunnelseTextFieldNew.initialValues(aksjonspunkter),
+    ...FaktaBegrunnelseTextField.initialValues(aksjonspunkter),
   };
 };
 
 const transformValues = (values: FormValues): BekreftOmsorgVurderingAp => ({
   ...OmsorgFaktaFields.transformValues(values),
-  ...FaktaBegrunnelseTextFieldNew.transformValues(values),
+  ...FaktaBegrunnelseTextField.transformValues(values),
 });
 
 type FormValues = OmsorgFormValues & {
@@ -76,14 +72,14 @@ export const OmsorgInfoPanel = ({
               <OmsorgFaktaFields readOnly={readOnly} alleMerknaderFraBeslutter={alleMerknaderFraBeslutter} />
             )}
 
-            <FaktaBegrunnelseTextFieldNew
+            <FaktaBegrunnelseTextField
               isSubmittable={submittable}
               isReadOnly={readOnly}
               hasBegrunnelse={true}
               hasVurderingText
             />
             <div>
-              <FaktaSubmitButtonNew
+              <FaktaSubmitButton
                 isSubmittable={submittable}
                 isReadOnly={readOnly}
                 isSubmitting={formMethods.formState.isSubmitting}

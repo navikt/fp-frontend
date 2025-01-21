@@ -5,7 +5,7 @@ import { VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
-import { FaktaBegrunnelseTextFieldNew, FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
+import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
 import { AvklarAnnenforelderHarRettAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -53,7 +53,7 @@ export const HarAnnenForelderRettForm = ({
       harAnnenForelderRett: bekreftetAnnenforelderRett,
       mottarAnnenForelderUforetrygd: bekreftetAnnenforelderUføretrygd,
       harAnnenForelderRettEØS: bekreftetAnnenForelderRettEØS,
-      ...FaktaBegrunnelseTextFieldNew.initialValues(aksjonspunkt),
+      ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
     },
   });
 
@@ -67,7 +67,7 @@ export const HarAnnenForelderRettForm = ({
         annenforelderHarRett: feltVerdier.harAnnenForelderRett,
         annenforelderMottarUføretrygd: feltVerdier.mottarAnnenForelderUforetrygd,
         annenForelderHarRettEØS: feltVerdier.harAnnenForelderRettEØS,
-        ...FaktaBegrunnelseTextFieldNew.transformValues(feltVerdier),
+        ...FaktaBegrunnelseTextField.transformValues(feltVerdier),
       }),
     [],
   );
@@ -85,7 +85,7 @@ export const HarAnnenForelderRettForm = ({
             avklareRettEØS={skalAvklareRettEØS}
           />
 
-          <FaktaBegrunnelseTextFieldNew
+          <FaktaBegrunnelseTextField
             isSubmittable={submittable}
             isReadOnly={readOnly}
             hasBegrunnelse={true}
@@ -93,7 +93,7 @@ export const HarAnnenForelderRettForm = ({
           />
 
           <div>
-            <FaktaSubmitButtonNew
+            <FaktaSubmitButton
               isSubmittable={submittable}
               isReadOnly={readOnly}
               isSubmitting={formMethods.formState.isSubmitting}

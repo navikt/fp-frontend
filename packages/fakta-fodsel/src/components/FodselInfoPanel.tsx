@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { Form } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
+import { FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
 import { FodselSammenligningIndex } from '@navikt/fp-prosess-fakta-fodsel-sammenligning';
 import { Aksjonspunkt, AvklartBarn, FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
@@ -153,7 +153,7 @@ const FodselInfoPanel: FunctionComponent<OwnProps> = ({
         {aksjonspunkter.length !== 0 && !readOnly && (
           <>
             <VerticalSpacer twentyPx />
-            <FaktaSubmitButtonNew
+            <FaktaSubmitButton
               isSubmittable={submittable}
               isReadOnly={readOnly}
               isSubmitting={formMethods.formState.isSubmitting}

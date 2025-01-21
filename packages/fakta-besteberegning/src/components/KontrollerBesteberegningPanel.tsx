@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { CheckboxField, Form } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { FaktaBegrunnelseTextFieldNew, FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
+import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt } from '@navikt/fp-types';
 import { ManuellKontrollBesteberegningAP } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -13,7 +13,7 @@ import { ManuellKontrollBesteberegningAP } from '@navikt/fp-types-avklar-aksjons
 export const buildInitialValues = (aksjonspunkt: Aksjonspunkt): FormValues => {
   const apErLøst = aksjonspunkt.status === AksjonspunktStatus.UTFORT;
   return {
-    ...FaktaBegrunnelseTextFieldNew.initialValues(aksjonspunkt),
+    ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
     besteberegningErKorrektValg: apErLøst ? true : undefined,
   };
 };
@@ -81,14 +81,14 @@ const KontrollerBesteberegningPanel: FunctionComponent<OwnProps> = ({
           onChange={() => toggleKnapp(!erKnappEnabled)}
         />
         <VerticalSpacer twentyPx />
-        <FaktaBegrunnelseTextFieldNew
+        <FaktaBegrunnelseTextField
           isSubmittable={submittable}
           isReadOnly={readOnly}
           hasBegrunnelse={!!begrunnelse}
           hasVurderingText
         />
         <VerticalSpacer twentyPx />
-        <FaktaSubmitButtonNew
+        <FaktaSubmitButton
           isSubmittable={submittable && erKnappEnabled}
           isSubmitting={formMethods.formState.isSubmitting}
           isDirty={formMethods.formState.isDirty}
