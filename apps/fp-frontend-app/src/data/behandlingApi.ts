@@ -279,7 +279,10 @@ const getVilkårsvurderingOptions = (links: ApiLink[]) => (behandling: Behandlin
 const getBeregningsresultatOptions = (links: ApiLink[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.BEREGNINGSRESULTAT, behandling.uuid, behandling.versjon],
-    queryFn: () => kyExtended.get(getUrlFromRel('BEREGNINGSRESULTAT', links)).json<BeregningsresultatTilbakekreving>(),
+    queryFn: () =>
+      kyExtended
+        .get(getUrlFromRel('BEREGNINGSRESULTAT', links), { searchParams: { uuid: behandling.uuid } })
+        .json<BeregningsresultatTilbakekreving>(),
     enabled: harLenke(behandling, 'BEREGNINGSRESULTAT'),
     staleTime: Infinity,
   });
@@ -287,7 +290,10 @@ const getBeregningsresultatOptions = (links: ApiLink[]) => (behandling: Behandli
 const getVedtaksbrevOptions = (links: ApiLink[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.VEDTAKSBREV, behandling.uuid, behandling.versjon],
-    queryFn: () => kyExtended.get(getUrlFromRel('VEDTAKSBREV', links)).json<Vedtaksbrev>(),
+    queryFn: () =>
+      kyExtended
+        .get(getUrlFromRel('VEDTAKSBREV', links), { searchParams: { uuid: behandling.uuid } })
+        .json<Vedtaksbrev>(),
     enabled: harLenke(behandling, 'VEDTAKSBREV'),
     staleTime: Infinity,
   });
