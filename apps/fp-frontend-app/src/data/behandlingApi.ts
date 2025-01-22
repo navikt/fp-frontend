@@ -246,7 +246,10 @@ const getInnsynOptions = (links: ApiLink[]) => (behandling: Behandling) =>
 const getPerioderForeldelseOptions = (links: ApiLink[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.PERIODER_FORELDELSE, behandling.uuid, behandling.versjon],
-    queryFn: () => kyExtended.get(getUrlFromRel('PERIODER_FORELDELSE', links)).json<FeilutbetalingPerioderWrapper>(),
+    queryFn: () =>
+      kyExtended
+        .get(getUrlFromRel('PERIODER_FORELDELSE', links), { searchParams: { uuid: behandling.uuid } })
+        .json<FeilutbetalingPerioderWrapper>(),
     enabled: harLenke(behandling, 'PERIODER_FORELDELSE'),
     staleTime: Infinity,
   });
@@ -255,7 +258,9 @@ const getVilkårsvurderingsperioderOptions = (links: ApiLink[]) => (behandling: 
   queryOptions({
     queryKey: [BehandlingRel.VILKARVURDERINGSPERIODER, behandling.uuid, behandling.versjon],
     queryFn: () =>
-      kyExtended.get(getUrlFromRel('VILKARVURDERINGSPERIODER', links)).json<DetaljerteFeilutbetalingsperioder>(),
+      kyExtended
+        .get(getUrlFromRel('VILKARVURDERINGSPERIODER', links), { searchParams: { uuid: behandling.uuid } })
+        .json<DetaljerteFeilutbetalingsperioder>(),
     enabled: harLenke(behandling, 'VILKARVURDERINGSPERIODER'),
     staleTime: Infinity,
   });
@@ -263,7 +268,10 @@ const getVilkårsvurderingsperioderOptions = (links: ApiLink[]) => (behandling: 
 const getVilkårsvurderingOptions = (links: ApiLink[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.VILKARVURDERING, behandling.uuid, behandling.versjon],
-    queryFn: () => kyExtended.get(getUrlFromRel('VILKARVURDERING', links)).json<VilkarsVurdertePerioderWrapper>(),
+    queryFn: () =>
+      kyExtended
+        .get(getUrlFromRel('VILKARVURDERING', links), { searchParams: { uuid: behandling.uuid } })
+        .json<VilkarsVurdertePerioderWrapper>(),
     enabled: harLenke(behandling, 'VILKARVURDERING'),
     staleTime: Infinity,
   });
