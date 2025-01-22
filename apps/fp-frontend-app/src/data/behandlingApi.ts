@@ -287,7 +287,10 @@ const getVedtaksbrevOptions = (links: ApiLink[]) => (behandling: Behandling) =>
 const getFeilutbetalingFaktaOptions = (links: ApiLink[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.FEILUTBETALING_FAKTA, behandling.uuid, behandling.versjon],
-    queryFn: () => kyExtended.get(getUrlFromRel('FEILUTBETALING_FAKTA', links)).json<FeilutbetalingFakta>(),
+    queryFn: () =>
+      kyExtended
+        .get(getUrlFromRel('FEILUTBETALING_FAKTA', links), { searchParams: { uuid: behandling.uuid } })
+        .json<FeilutbetalingFakta>(),
     enabled: harLenke(behandling, 'FEILUTBETALING_FAKTA'),
     staleTime: Infinity,
   });
@@ -370,6 +373,7 @@ const getArbeidOgInntektOptions = (links: ApiLink[]) => (behandling: Behandling)
   queryOptions({
     queryKey: [BehandlingRel.ARBEID_OG_INNTEKT, behandling.uuid, behandling.versjon],
     queryFn: () => kyExtended.get(getUrlFromRel('ARBEID_OG_INNTEKT', links)).json<ArbeidOgInntektsmelding>(),
+    enabled: harLenke(behandling, 'ARBEID_OG_INNTEKT'),
     staleTime: Infinity,
   });
 
