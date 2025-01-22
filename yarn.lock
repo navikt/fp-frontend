@@ -2599,7 +2599,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     eslint: 9.18.0
     fast-glob: ^3.3.3
@@ -2610,8 +2610,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -2637,7 +2637,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     cross-env: 7.0.3
     dayjs: 1.11.13
@@ -2648,8 +2648,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -2673,7 +2673,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     eslint: 9.18.0
     moment: 2.30.1
@@ -2682,8 +2682,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -2707,7 +2707,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     dayjs: 1.11.13
     eslint: 9.18.0
@@ -2717,8 +2717,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -2739,15 +2739,15 @@ __metadata:
     "@navikt/ft-utils": 3.0.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     eslint: 9.18.0
     react: 19.0.0
     react-intl: 7.1.3
     stylelint: ^16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -2772,7 +2772,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     eslint: 9.18.0
     moment: 2.30.1
@@ -2782,8 +2782,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -2805,7 +2805,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     eslint: 9.18.0
     react: 19.0.0
@@ -2814,8 +2814,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -2840,7 +2840,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     eslint: 9.18.0
     lodash: ^4.17.21
@@ -2850,8 +2850,8 @@ __metadata:
     react-intl: 7.1.3
     storybook: 8.5.0
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -2875,7 +2875,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     eslint: 9.18.0
     moment: 2.30.1
@@ -2885,8 +2885,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -2912,7 +2912,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     cross-env: 7.0.3
     eslint: 9.18.0
@@ -2922,8 +2922,8 @@ __metadata:
     react-intl: 7.1.3
     storybook: 8.5.0
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -2949,7 +2949,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     cross-env: 7.0.3
     eslint: 9.18.0
@@ -2959,8 +2959,8 @@ __metadata:
     react-intl: 7.1.3
     storybook: 8.5.0
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -2984,7 +2984,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     dayjs: 1.11.13
     eslint: 9.18.0
@@ -2995,8 +2995,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -3021,7 +3021,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     cross-env: 7.0.3
     dayjs: 1.11.13
@@ -3032,8 +3032,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -3058,7 +3058,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     dayjs: 1.11.13
     eslint: 9.18.0
@@ -3068,8 +3068,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -3095,7 +3095,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     dayjs: 1.11.13
     eslint: 9.18.0
@@ -3107,8 +3107,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -3133,7 +3133,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     cross-env: 7.0.3
     dayjs: 1.11.13
@@ -3144,8 +3144,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -3171,7 +3171,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     dayjs: 1.11.13
     eslint: 9.18.0
@@ -3181,8 +3181,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -3205,7 +3205,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     eslint: 9.18.0
     react: 19.0.0
@@ -3214,8 +3214,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -3235,7 +3235,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     eslint: 9.18.0
     moment: 2.30.1
@@ -3244,8 +3244,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -3362,7 +3362,7 @@ __metadata:
     "@tanstack/react-query-devtools": ^5.64.2
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     axios: 1.7.9
     axios-mock-adapter: 2.1.0
     classnames: 2.5.1
@@ -3387,8 +3387,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -3417,7 +3417,7 @@ __metadata:
     "@tanstack/react-query-devtools": ^5.64.2
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     dayjs: 1.11.13
     eslint: 9.18.0
@@ -3430,8 +3430,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -3441,7 +3441,7 @@ __metadata:
   dependencies:
     eslint: 9.18.0
     typescript: 5.7.3
-    vite: 6.0.8
+    vite: 6.0.11
   languageName: unknown
   linkType: soft
 
@@ -3451,7 +3451,7 @@ __metadata:
   dependencies:
     eslint: 9.18.0
     typescript: 5.7.3
-    vite: 6.0.8
+    vite: 6.0.11
   languageName: unknown
   linkType: soft
 
@@ -3480,7 +3480,7 @@ __metadata:
     "@tanstack/react-query-devtools": ^5.64.2
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     "@types/lodash.debounce": 4.0.9
     cross-env: 7.0.3
     dayjs: 1.11.13
@@ -3498,8 +3498,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -3523,7 +3523,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     dayjs: 1.11.13
     echarts: 5.6.0
@@ -3537,8 +3537,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -3567,7 +3567,7 @@ __metadata:
     "@tanstack/react-query-devtools": ^5.64.2
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     dayjs: 1.11.13
     echarts: 5.6.0
@@ -3585,8 +3585,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -3609,7 +3609,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     dayjs: 1.11.13
     eslint: 9.18.0
@@ -3619,8 +3619,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -3645,7 +3645,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     cross-env: 7.0.3
     dayjs: 1.11.13
@@ -3657,8 +3657,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -3681,7 +3681,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     eslint: 9.18.0
     react: 19.0.0
@@ -3691,8 +3691,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -3712,7 +3712,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     cross-env: 7.0.3
     eslint: 9.18.0
@@ -3721,8 +3721,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -3742,7 +3742,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     cross-env: 7.0.3
     eslint: 9.18.0
@@ -3751,8 +3751,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -3772,7 +3772,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     cross-env: 7.0.3
     eslint: 9.18.0
@@ -3782,8 +3782,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -3807,7 +3807,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     eslint: 9.18.0
     react: 19.0.0
@@ -3816,8 +3816,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -3838,7 +3838,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     eslint: 9.18.0
     moment: 2.30.1
@@ -3847,8 +3847,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -3868,7 +3868,7 @@ __metadata:
     "@navikt/ft-utils": 3.0.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     eslint: 9.18.0
     react: 19.0.0
@@ -3876,8 +3876,8 @@ __metadata:
     react-intl: 7.1.3
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -3901,7 +3901,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     eslint: 9.18.0
     moment: 2.30.1
@@ -3911,8 +3911,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -3938,7 +3938,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     cross-env: 7.0.3
     eslint: 9.18.0
@@ -3949,8 +3949,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -3974,7 +3974,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     cross-env: 7.0.3
     eslint: 9.18.0
@@ -3984,8 +3984,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -4009,7 +4009,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     cross-env: 7.0.3
     dayjs: 1.11.13
@@ -4020,8 +4020,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -4045,7 +4045,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     eslint: 9.18.0
     moment: 2.30.1
@@ -4055,8 +4055,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -4082,7 +4082,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     cross-env: 7.0.3
     dayjs: 1.11.13
@@ -4094,8 +4094,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -4120,7 +4120,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     cross-env: 7.0.3
     dayjs: 1.11.13
@@ -4132,8 +4132,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -4159,7 +4159,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     cross-env: 7.0.3
     eslint: 9.18.0
@@ -4170,8 +4170,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -4196,7 +4196,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     eslint: 9.18.0
     react: 19.0.0
@@ -4205,8 +4205,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -4228,7 +4228,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     cross-env: 7.0.3
     eslint: 9.18.0
@@ -4236,8 +4236,8 @@ __metadata:
     react-intl: 7.1.3
     storybook: 8.5.0
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -4264,7 +4264,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     eslint: 9.18.0
     moment: 2.30.1
@@ -4274,8 +4274,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -4298,7 +4298,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     eslint: 9.18.0
     react: 19.0.0
@@ -4307,8 +4307,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -4331,7 +4331,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     eslint: 9.18.0
     react: 19.0.0
@@ -4340,8 +4340,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -4364,7 +4364,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     eslint: 9.18.0
     react: 19.0.0
@@ -4373,8 +4373,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -4397,7 +4397,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     eslint: 9.18.0
     react: 19.0.0
@@ -4406,8 +4406,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -4431,7 +4431,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     dayjs: 1.11.13
     eslint: 9.18.0
@@ -4442,8 +4442,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -4467,7 +4467,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     eslint: 9.18.0
     moment: 2.30.1
@@ -4477,8 +4477,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -4502,7 +4502,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     eslint: 9.18.0
     moment: 2.30.1
@@ -4512,8 +4512,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -4537,7 +4537,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     eslint: 9.18.0
     moment: 2.30.1
@@ -4547,8 +4547,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -4571,7 +4571,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     eslint: 9.18.0
     moment: 2.30.1
@@ -4581,8 +4581,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -4597,8 +4597,8 @@ __metadata:
     eslint: 9.18.0
     react: 19.0.0
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -4612,8 +4612,8 @@ __metadata:
     cross-env: 7.0.3
     eslint: 9.18.0
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -4641,8 +4641,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -4664,7 +4664,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     eslint: 9.18.0
     history: 5.3.0
@@ -4674,8 +4674,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -4697,7 +4697,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     eslint: 9.18.0
     react: 19.0.0
@@ -4705,8 +4705,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -4727,15 +4727,15 @@ __metadata:
     "@storybook/types": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     eslint: 9.18.0
     react: 19.0.0
     react-intl: 7.1.3
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -4754,15 +4754,15 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     eslint: 9.18.0
     react: 19.0.0
     react-intl: 7.1.3
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -4785,7 +4785,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     dayjs: 1.11.13
     eslint: 9.18.0
@@ -4796,8 +4796,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -4813,15 +4813,15 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     eslint: 9.18.0
     react: 19.0.0
     react-intl: 7.1.3
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -4846,7 +4846,7 @@ __metadata:
     "@storybook/types": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     cross-env: 7.0.3
     eslint: 9.18.0
@@ -4856,8 +4856,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -4877,7 +4877,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     eslint: 9.18.0
     react: 19.0.0
@@ -4885,8 +4885,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -4908,7 +4908,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     eslint: 9.18.0
     react: 19.0.0
@@ -4917,8 +4917,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -4941,7 +4941,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     eslint: 9.18.0
     react: 19.0.0
@@ -4950,8 +4950,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -4973,7 +4973,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     eslint: 9.18.0
     react: 19.0.0
@@ -4982,8 +4982,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -5004,7 +5004,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     dayjs: 1.11.13
     eslint: 9.18.0
@@ -5013,8 +5013,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -5034,7 +5034,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     eslint: 9.18.0
     react: 19.0.0
     react-hook-form: 7.54.2
@@ -5042,8 +5042,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -5065,7 +5065,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     dayjs: 1.11.13
     eslint: 9.18.0
@@ -5075,8 +5075,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -5100,7 +5100,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     eslint: 9.18.0
     react: 19.0.0
     react-dom: 19.0.0
@@ -5109,8 +5109,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -5133,7 +5133,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     eslint: 9.18.0
     react: 19.0.0
@@ -5142,8 +5142,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -5172,7 +5172,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     eslint: 9.18.0
     history: 5.3.0
@@ -5184,8 +5184,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -5202,7 +5202,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     eslint: 9.18.0
     react: 19.0.0
@@ -5211,8 +5211,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -5240,8 +5240,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -5259,7 +5259,7 @@ __metadata:
     react-intl: 7.1.3
     react-router-dom: 7.1.3
     typescript: 5.7.3
-    vite: 6.0.8
+    vite: 6.0.11
   languageName: unknown
   linkType: soft
 
@@ -5273,7 +5273,7 @@ __metadata:
     "@navikt/ft-fakta-fordel-beregningsgrunnlag": 9.0.0
     "@navikt/ft-prosess-beregningsgrunnlag": 8.0.0
     typescript: 5.7.3
-    vite: 6.0.8
+    vite: 6.0.11
   languageName: unknown
   linkType: soft
 
@@ -5283,7 +5283,7 @@ __metadata:
   dependencies:
     "@navikt/fp-kodeverk": "workspace:*"
     typescript: 5.7.3
-    vite: 6.0.8
+    vite: 6.0.11
   languageName: unknown
   linkType: soft
 
@@ -5302,7 +5302,7 @@ __metadata:
     "@storybook/react-vite": 8.5.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     eslint: 9.18.0
     fast-glob: ^3.3.3
@@ -5311,8 +5311,8 @@ __metadata:
     storybook: 8.5.0
     stylelint: 16.13.2
     typescript: 5.7.3
-    vite: 6.0.8
-    vitest: 3.0.2
+    vite: 6.0.11
+    vitest: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -5329,7 +5329,7 @@ __metadata:
     react: 19.0.0
     react-intl: 7.1.3
     typescript: 5.7.3
-    vite: 6.0.8
+    vite: 6.0.11
   languageName: unknown
   linkType: soft
 
@@ -6773,66 +6773,66 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sentry/cli-darwin@npm:2.40.0":
-  version: 2.40.0
-  resolution: "@sentry/cli-darwin@npm:2.40.0"
+"@sentry/cli-darwin@npm:2.41.1":
+  version: 2.41.1
+  resolution: "@sentry/cli-darwin@npm:2.41.1"
   conditions: os=darwin
   languageName: node
   linkType: hard
 
-"@sentry/cli-linux-arm64@npm:2.40.0":
-  version: 2.40.0
-  resolution: "@sentry/cli-linux-arm64@npm:2.40.0"
+"@sentry/cli-linux-arm64@npm:2.41.1":
+  version: 2.41.1
+  resolution: "@sentry/cli-linux-arm64@npm:2.41.1"
   conditions: (os=linux | os=freebsd) & cpu=arm64
   languageName: node
   linkType: hard
 
-"@sentry/cli-linux-arm@npm:2.40.0":
-  version: 2.40.0
-  resolution: "@sentry/cli-linux-arm@npm:2.40.0"
+"@sentry/cli-linux-arm@npm:2.41.1":
+  version: 2.41.1
+  resolution: "@sentry/cli-linux-arm@npm:2.41.1"
   conditions: (os=linux | os=freebsd) & cpu=arm
   languageName: node
   linkType: hard
 
-"@sentry/cli-linux-i686@npm:2.40.0":
-  version: 2.40.0
-  resolution: "@sentry/cli-linux-i686@npm:2.40.0"
+"@sentry/cli-linux-i686@npm:2.41.1":
+  version: 2.41.1
+  resolution: "@sentry/cli-linux-i686@npm:2.41.1"
   conditions: (os=linux | os=freebsd) & (cpu=x86 | cpu=ia32)
   languageName: node
   linkType: hard
 
-"@sentry/cli-linux-x64@npm:2.40.0":
-  version: 2.40.0
-  resolution: "@sentry/cli-linux-x64@npm:2.40.0"
+"@sentry/cli-linux-x64@npm:2.41.1":
+  version: 2.41.1
+  resolution: "@sentry/cli-linux-x64@npm:2.41.1"
   conditions: (os=linux | os=freebsd) & cpu=x64
   languageName: node
   linkType: hard
 
-"@sentry/cli-win32-i686@npm:2.40.0":
-  version: 2.40.0
-  resolution: "@sentry/cli-win32-i686@npm:2.40.0"
+"@sentry/cli-win32-i686@npm:2.41.1":
+  version: 2.41.1
+  resolution: "@sentry/cli-win32-i686@npm:2.41.1"
   conditions: os=win32 & (cpu=x86 | cpu=ia32)
   languageName: node
   linkType: hard
 
-"@sentry/cli-win32-x64@npm:2.40.0":
-  version: 2.40.0
-  resolution: "@sentry/cli-win32-x64@npm:2.40.0"
+"@sentry/cli-win32-x64@npm:2.41.1":
+  version: 2.41.1
+  resolution: "@sentry/cli-win32-x64@npm:2.41.1"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"@sentry/cli@npm:2.40.0":
-  version: 2.40.0
-  resolution: "@sentry/cli@npm:2.40.0"
+"@sentry/cli@npm:2.41.1":
+  version: 2.41.1
+  resolution: "@sentry/cli@npm:2.41.1"
   dependencies:
-    "@sentry/cli-darwin": 2.40.0
-    "@sentry/cli-linux-arm": 2.40.0
-    "@sentry/cli-linux-arm64": 2.40.0
-    "@sentry/cli-linux-i686": 2.40.0
-    "@sentry/cli-linux-x64": 2.40.0
-    "@sentry/cli-win32-i686": 2.40.0
-    "@sentry/cli-win32-x64": 2.40.0
+    "@sentry/cli-darwin": 2.41.1
+    "@sentry/cli-linux-arm": 2.41.1
+    "@sentry/cli-linux-arm64": 2.41.1
+    "@sentry/cli-linux-i686": 2.41.1
+    "@sentry/cli-linux-x64": 2.41.1
+    "@sentry/cli-win32-i686": 2.41.1
+    "@sentry/cli-win32-x64": 2.41.1
     https-proxy-agent: ^5.0.0
     node-fetch: ^2.6.7
     progress: ^2.0.3
@@ -6855,7 +6855,7 @@ __metadata:
       optional: true
   bin:
     sentry-cli: bin/sentry-cli
-  checksum: 2b59d2c3e405d62b63d62ec3833dedb6f0a22d68cffe8ad74ee35306f42171fc56c25d9daff87a459d79b17b86d94be34620185cfeb41eb4a4718f7eef4f811e
+  checksum: 8f5aecf671322f803e5a32696ed0ee0e22f86e3a97d9c6dff0f75b3eaba89533a9ad1d1d87f8b76acc6969696f64f0f00fbd8b4cbc8b365d1d4f3b8d4dcc19f9
   languageName: node
   linkType: hard
 
@@ -7494,12 +7494,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/user-event@npm:14.6.0":
-  version: 14.6.0
-  resolution: "@testing-library/user-event@npm:14.6.0"
+"@testing-library/user-event@npm:14.6.1":
+  version: 14.6.1
+  resolution: "@testing-library/user-event@npm:14.6.1"
   peerDependencies:
     "@testing-library/dom": ">=7.21.4"
-  checksum: 39b078708a8e19e3efa544ac4ee6cfde4b4ec80a386794c13f52e64abbe14aa8ba4790108d8a8d962c3abed365e51a1de705d36c10496700af39c7c450a791d6
+  checksum: 4cb8a81fea1fea83a42619e9545137b51636bb7a3182c596bb468e5664f1e4699a275c2d0fb8b6dcc3fe2684f9d87b0637ab7cb4f566051539146872c9141fcb
   languageName: node
   linkType: hard
 
@@ -7832,15 +7832,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:8.20.0":
-  version: 8.20.0
-  resolution: "@typescript-eslint/eslint-plugin@npm:8.20.0"
+"@typescript-eslint/eslint-plugin@npm:8.21.0":
+  version: 8.21.0
+  resolution: "@typescript-eslint/eslint-plugin@npm:8.21.0"
   dependencies:
     "@eslint-community/regexpp": ^4.10.0
-    "@typescript-eslint/scope-manager": 8.20.0
-    "@typescript-eslint/type-utils": 8.20.0
-    "@typescript-eslint/utils": 8.20.0
-    "@typescript-eslint/visitor-keys": 8.20.0
+    "@typescript-eslint/scope-manager": 8.21.0
+    "@typescript-eslint/type-utils": 8.21.0
+    "@typescript-eslint/utils": 8.21.0
+    "@typescript-eslint/visitor-keys": 8.21.0
     graphemer: ^1.4.0
     ignore: ^5.3.1
     natural-compare: ^1.4.0
@@ -7849,23 +7849,23 @@ __metadata:
     "@typescript-eslint/parser": ^8.0.0 || ^8.0.0-alpha.0
     eslint: ^8.57.0 || ^9.0.0
     typescript: ">=4.8.4 <5.8.0"
-  checksum: f029bfcce3dc12d7b539f86142857d680e06d798eca213d9fb564685d12b479205b7f40b4996e30e3f7301c7bb6d15484741352f54ddd00d74a07ea2aca53cf6
+  checksum: 93a5302b8b46485e9016912758604b49d6abea4ae4d02c9d76f3b8125d5f20e92cacb2f8b21ad68b338e15246d1fcf6f5ccba1aee52281f2ffa6894988d4b135
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:8.20.0":
-  version: 8.20.0
-  resolution: "@typescript-eslint/parser@npm:8.20.0"
+"@typescript-eslint/parser@npm:8.21.0":
+  version: 8.21.0
+  resolution: "@typescript-eslint/parser@npm:8.21.0"
   dependencies:
-    "@typescript-eslint/scope-manager": 8.20.0
-    "@typescript-eslint/types": 8.20.0
-    "@typescript-eslint/typescript-estree": 8.20.0
-    "@typescript-eslint/visitor-keys": 8.20.0
+    "@typescript-eslint/scope-manager": 8.21.0
+    "@typescript-eslint/types": 8.21.0
+    "@typescript-eslint/typescript-estree": 8.21.0
+    "@typescript-eslint/visitor-keys": 8.21.0
     debug: ^4.3.4
   peerDependencies:
     eslint: ^8.57.0 || ^9.0.0
     typescript: ">=4.8.4 <5.8.0"
-  checksum: 00b265ed42ee1d8eb715f9978d701be0958baf7a5be9de74a1b58c09c78e3558e1e6352c4476ec8ea376c28f1437de0b58b3e1e2a9975c489f2ecd369a9050eb
+  checksum: 55f6b265a304bfdb7945db2ad494551ef22e93684b9fd2f12a6c22907b39702e51389dd64c9a22cc532ee0a6a8b4ff2f4936bbc6695d909a074d36783cef8e40
   languageName: node
   linkType: hard
 
@@ -7879,28 +7879,28 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/scope-manager@npm:8.20.0":
-  version: 8.20.0
-  resolution: "@typescript-eslint/scope-manager@npm:8.20.0"
+"@typescript-eslint/scope-manager@npm:8.21.0":
+  version: 8.21.0
+  resolution: "@typescript-eslint/scope-manager@npm:8.21.0"
   dependencies:
-    "@typescript-eslint/types": 8.20.0
-    "@typescript-eslint/visitor-keys": 8.20.0
-  checksum: d90d89f3dc8394e44652526b88c81a977b251702a9dc5be89ac0bf7412d79d18879e03c2d6018980a09bc7c50d28dbf91ba06e056e081e6000783d69bd280761
+    "@typescript-eslint/types": 8.21.0
+    "@typescript-eslint/visitor-keys": 8.21.0
+  checksum: 967f120ee984cbaef2afa8a0e58931ad9aa97cf2c62d4af2f1a844dd11d93e932cdde9bb8b870fddae95afe3c0673d6a4edac9c25cc4b6fb8d2e67114b15f4f1
   languageName: node
   linkType: hard
 
-"@typescript-eslint/type-utils@npm:8.20.0":
-  version: 8.20.0
-  resolution: "@typescript-eslint/type-utils@npm:8.20.0"
+"@typescript-eslint/type-utils@npm:8.21.0":
+  version: 8.21.0
+  resolution: "@typescript-eslint/type-utils@npm:8.21.0"
   dependencies:
-    "@typescript-eslint/typescript-estree": 8.20.0
-    "@typescript-eslint/utils": 8.20.0
+    "@typescript-eslint/typescript-estree": 8.21.0
+    "@typescript-eslint/utils": 8.21.0
     debug: ^4.3.4
     ts-api-utils: ^2.0.0
   peerDependencies:
     eslint: ^8.57.0 || ^9.0.0
     typescript: ">=4.8.4 <5.8.0"
-  checksum: 705a166dc2846f7fe79a123ee623da213a20289fba9c0cbbcc894fe7caaa1d4ddc81bf54db9dc918c29a34294a05768c38a4f00762ba3745e0e94e2e2963f104
+  checksum: 717d8d41ab91da84ae1ef26b74bc05294984ce535e36583438c82dad91ee94a3b4f4e10ef9b92d50a45331d40e7d0dca0e1b9f121183ab33a483796383d912a0
   languageName: node
   linkType: hard
 
@@ -7911,10 +7911,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/types@npm:8.20.0":
-  version: 8.20.0
-  resolution: "@typescript-eslint/types@npm:8.20.0"
-  checksum: 4cb0af48411f282db33e7110e2f97de874c637e7b90ded91b77304e96f49663ca4b7308afc569bdd93766fe5f2c194686e32078d5513b5ba4e7d56191998190c
+"@typescript-eslint/types@npm:8.21.0":
+  version: 8.21.0
+  resolution: "@typescript-eslint/types@npm:8.21.0"
+  checksum: b7d40d38124db69a72af51c61c17978f03d0b451ef99bcc73f591644a46491136615cfd5d1543fe3d01a68cb7478b488c2d10a5a9e466809a007c5508bd9e412
   languageName: node
   linkType: hard
 
@@ -7937,12 +7937,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/typescript-estree@npm:8.20.0":
-  version: 8.20.0
-  resolution: "@typescript-eslint/typescript-estree@npm:8.20.0"
+"@typescript-eslint/typescript-estree@npm:8.21.0":
+  version: 8.21.0
+  resolution: "@typescript-eslint/typescript-estree@npm:8.21.0"
   dependencies:
-    "@typescript-eslint/types": 8.20.0
-    "@typescript-eslint/visitor-keys": 8.20.0
+    "@typescript-eslint/types": 8.21.0
+    "@typescript-eslint/visitor-keys": 8.21.0
     debug: ^4.3.4
     fast-glob: ^3.3.2
     is-glob: ^4.0.3
@@ -7951,22 +7951,22 @@ __metadata:
     ts-api-utils: ^2.0.0
   peerDependencies:
     typescript: ">=4.8.4 <5.8.0"
-  checksum: 9690df2d4ec90966b8d5752ad0f1658a951fe76ea3cae8e6935e698715a25c1eb0b118fa8e044065f04ea9f6bef41d991de5298590ef2a4aa98d435bf1df6e15
+  checksum: 4fb0166352f2ea24b17b8c88b4d4d7b21cf3bc516fd4713a828640439b4abc04ec337bd7d37e3030aec11fd049434406970639c7f8fbd077cad080be3ba45c59
   languageName: node
   linkType: hard
 
-"@typescript-eslint/utils@npm:8.20.0":
-  version: 8.20.0
-  resolution: "@typescript-eslint/utils@npm:8.20.0"
+"@typescript-eslint/utils@npm:8.21.0":
+  version: 8.21.0
+  resolution: "@typescript-eslint/utils@npm:8.21.0"
   dependencies:
     "@eslint-community/eslint-utils": ^4.4.0
-    "@typescript-eslint/scope-manager": 8.20.0
-    "@typescript-eslint/types": 8.20.0
-    "@typescript-eslint/typescript-estree": 8.20.0
+    "@typescript-eslint/scope-manager": 8.21.0
+    "@typescript-eslint/types": 8.21.0
+    "@typescript-eslint/typescript-estree": 8.21.0
   peerDependencies:
     eslint: ^8.57.0 || ^9.0.0
     typescript: ">=4.8.4 <5.8.0"
-  checksum: 5c9d72eb0d4014e41de1faa4597371f19362ce47a491359be408bfba899277f8d5660f014651f7bd41435158ae4655ade205e92f175e2355ca51a07af35a53ed
+  checksum: 0c22254b99ccaa8548e91f98debedfd7756f42036a5eabb58a633208b04949da96c46b712b9a5408be776a8f0dbe1d9d7eb6a2f895253d2dbeccb47941be97db
   languageName: node
   linkType: hard
 
@@ -7994,13 +7994,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/visitor-keys@npm:8.20.0":
-  version: 8.20.0
-  resolution: "@typescript-eslint/visitor-keys@npm:8.20.0"
+"@typescript-eslint/visitor-keys@npm:8.21.0":
+  version: 8.21.0
+  resolution: "@typescript-eslint/visitor-keys@npm:8.21.0"
   dependencies:
-    "@typescript-eslint/types": 8.20.0
+    "@typescript-eslint/types": 8.21.0
     eslint-visitor-keys: ^4.2.0
-  checksum: d0bf89e431a686197c517fbb7d63ce4c8ef31e6629a545fd08198c67810ddd68c047c01fcfed8ffc3fe438654a2647b3dedf28f04beac23a65614b2e788d929a
+  checksum: 07b5c8689c5e0163543d8ef23556ec93088dfa6b98cada5b9047dd9e99b6db74c052eb9b2b8e9d27ea21798ee1078b0533129e2d164fb7ee90ed210ddd6726b8
   languageName: node
   linkType: hard
 
@@ -8034,23 +8034,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitest/expect@npm:3.0.2":
-  version: 3.0.2
-  resolution: "@vitest/expect@npm:3.0.2"
+"@vitest/expect@npm:3.0.3":
+  version: 3.0.3
+  resolution: "@vitest/expect@npm:3.0.3"
   dependencies:
-    "@vitest/spy": 3.0.2
-    "@vitest/utils": 3.0.2
+    "@vitest/spy": 3.0.3
+    "@vitest/utils": 3.0.3
     chai: ^5.1.2
     tinyrainbow: ^2.0.0
-  checksum: cd2b183d7391ca33c93c782be79ef694541bd9bf477b7c42a503530d5a594baf52cf4a249871432a8d76209bc38caaf69a5d569e91d07bac5dcca5c353b29a69
+  checksum: 05ba3ecc198b87c626b7215012884adc1bd182f5468f99f5d753398df3d10fbd9c15dd895668e7caff345985c262b027ede910580aabb061c1f8c60e93288ac1
   languageName: node
   linkType: hard
 
-"@vitest/mocker@npm:3.0.2":
-  version: 3.0.2
-  resolution: "@vitest/mocker@npm:3.0.2"
+"@vitest/mocker@npm:3.0.3":
+  version: 3.0.3
+  resolution: "@vitest/mocker@npm:3.0.3"
   dependencies:
-    "@vitest/spy": 3.0.2
+    "@vitest/spy": 3.0.3
     estree-walker: ^3.0.3
     magic-string: ^0.30.17
   peerDependencies:
@@ -8061,57 +8061,57 @@ __metadata:
       optional: true
     vite:
       optional: true
-  checksum: 0529f9ca28be8940d3cc09e6763c24353d4f5ba393718432b1d5b9175711af76d057e163860cd2fbb900002959528c9d8928e26128a0b4c04bbe55482987cd07
+  checksum: 3fb65d06f14c98533e17f345e3be5a4972bcdb117fd601732f9a9909e24bb0ef4c0d6f90f56b09962dd620d6514e76816e5c1e9f3673152686a41c9b8d3ff95e
   languageName: node
   linkType: hard
 
-"@vitest/pretty-format@npm:3.0.2, @vitest/pretty-format@npm:^3.0.2":
-  version: 3.0.2
-  resolution: "@vitest/pretty-format@npm:3.0.2"
+"@vitest/pretty-format@npm:3.0.3, @vitest/pretty-format@npm:^3.0.3":
+  version: 3.0.3
+  resolution: "@vitest/pretty-format@npm:3.0.3"
   dependencies:
     tinyrainbow: ^2.0.0
-  checksum: 45b835883e1fd85daeb9a3ce67374317484d1cd966733f8ea6758923f3424528172cca0bb41b2b249a01fe6ce6d4eda6088c7599082608857f2a456ba4bb6ed6
+  checksum: 85870262e3ceb492c89dfb88dbbdafff72199521aa1c90928bdc9a32cb34a2fb822265389c87a793f4fb4ef68bf2597ef20e1d37f41c1764045fc47200e9a28a
   languageName: node
   linkType: hard
 
-"@vitest/runner@npm:3.0.2":
-  version: 3.0.2
-  resolution: "@vitest/runner@npm:3.0.2"
+"@vitest/runner@npm:3.0.3":
+  version: 3.0.3
+  resolution: "@vitest/runner@npm:3.0.3"
   dependencies:
-    "@vitest/utils": 3.0.2
+    "@vitest/utils": 3.0.3
     pathe: ^2.0.1
-  checksum: 7d8ff77d7da520c4717e262992e07e7b2c4eb5934f3ae74eb747eeeb56e7d6797a39b2a11a7c7dcc1b2e2b1bbbac78be76d3f6ec545efb2267ecaf3114e771e9
+  checksum: a03e0d9b290b458b647ee3a49879b3c47897ea7b5a3f04fa5518cbb69d7df65eaca07a8d15dd8b76366acff68551ba28b0c2039d418da52217f03e072330b51a
   languageName: node
   linkType: hard
 
-"@vitest/snapshot@npm:3.0.2":
-  version: 3.0.2
-  resolution: "@vitest/snapshot@npm:3.0.2"
+"@vitest/snapshot@npm:3.0.3":
+  version: 3.0.3
+  resolution: "@vitest/snapshot@npm:3.0.3"
   dependencies:
-    "@vitest/pretty-format": 3.0.2
+    "@vitest/pretty-format": 3.0.3
     magic-string: ^0.30.17
     pathe: ^2.0.1
-  checksum: e028cbc2ba9612a9632f7b36caaa40bd568eaf97d69c1811d570719964b299582cbe5afaa045dd39817375997faf541c8655d17657bbbc48d277aa756f1b5601
+  checksum: 4ac5892efb908170f1c4fb59abce37399da37396f7052e8c0229e4c84d9b4062a88f859a2fd6c32d2e3903641a6ee0ac0c8fac311105d18be8ba1f0ec61ffb31
   languageName: node
   linkType: hard
 
-"@vitest/spy@npm:3.0.2":
-  version: 3.0.2
-  resolution: "@vitest/spy@npm:3.0.2"
+"@vitest/spy@npm:3.0.3":
+  version: 3.0.3
+  resolution: "@vitest/spy@npm:3.0.3"
   dependencies:
     tinyspy: ^3.0.2
-  checksum: 01af4e838a5daa84d49008ba3b6fb9f3ee9eb4e2bfbd64161256e26283dc4f466636ce0d135b462c45adb5deb6d3714d95235706307c41ec2e48ac46d8211fa5
+  checksum: db0c229d400b224b58b47e24855e2567cb0fa94cc4b0d64fac558a58b4c745d21c0ef01ca6c537268b933edd66380c7fdd83fa3a6a6c653d6e2bbbd6445d43a5
   languageName: node
   linkType: hard
 
-"@vitest/utils@npm:3.0.2":
-  version: 3.0.2
-  resolution: "@vitest/utils@npm:3.0.2"
+"@vitest/utils@npm:3.0.3":
+  version: 3.0.3
+  resolution: "@vitest/utils@npm:3.0.3"
   dependencies:
-    "@vitest/pretty-format": 3.0.2
+    "@vitest/pretty-format": 3.0.3
     loupe: ^3.1.2
     tinyrainbow: ^2.0.0
-  checksum: fb2e53bd48382d51b4d2f375e1344a64942c5e54fdbba39e2def406386d854a42819611a0411569ebce6e512e51814d92237da58b0ebea64ca222036a9fa79ae
+  checksum: c8fc3dfe94c929e62f1ec391c6c9da1f08cacc4dbded7e9e6bfb13d76ef411c98cc5d48fe3bbfb69c3ad9d8546d6ff0e6d40d391e4adad216f98986106fa1ce7
   languageName: node
   linkType: hard
 
@@ -11518,7 +11518,7 @@ __metadata:
   dependencies:
     "@eslint/js": 9.18.0
     "@navikt/aksel-stylelint": 7.9.2
-    "@sentry/cli": 2.40.0
+    "@sentry/cli": 2.41.1
     "@storybook/addon-essentials": 8.5.0
     "@storybook/addon-links": 8.5.0
     "@storybook/builder-vite": 8.5.0
@@ -11528,7 +11528,7 @@ __metadata:
     "@testing-library/jest-dom": 6.6.3
     "@testing-library/react": 16.2.0
     "@testing-library/react-hooks": 8.0.1
-    "@testing-library/user-event": 14.6.0
+    "@testing-library/user-event": 14.6.1
     "@types/react": 19.0.7
     "@types/react-collapse": 5.0.4
     "@types/react-dom": 19.0.3
@@ -11558,12 +11558,12 @@ __metadata:
     stylelint: 16.13.2
     stylelint-order: 6.0.4
     typescript: 5.7.3
-    typescript-eslint: 8.20.0
-    vite: 6.0.8
+    typescript-eslint: 8.21.0
+    vite: 6.0.11
     vite-plugin-dts: 4.5.0
     vite-plugin-externalize-deps: 0.9.0
     vite-plugin-html: 3.2.2
-    vitest: 3.0.2
+    vitest: 3.0.3
     vitest-canvas-mock: 0.3.3
   languageName: unknown
   linkType: soft
@@ -18183,17 +18183,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript-eslint@npm:8.20.0":
-  version: 8.20.0
-  resolution: "typescript-eslint@npm:8.20.0"
+"typescript-eslint@npm:8.21.0":
+  version: 8.21.0
+  resolution: "typescript-eslint@npm:8.21.0"
   dependencies:
-    "@typescript-eslint/eslint-plugin": 8.20.0
-    "@typescript-eslint/parser": 8.20.0
-    "@typescript-eslint/utils": 8.20.0
+    "@typescript-eslint/eslint-plugin": 8.21.0
+    "@typescript-eslint/parser": 8.21.0
+    "@typescript-eslint/utils": 8.21.0
   peerDependencies:
     eslint: ^8.57.0 || ^9.0.0
     typescript: ">=4.8.4 <5.8.0"
-  checksum: d8b4fbfcbbc0336821ab032cf942427eb9e11607bd340165bef75c7cb850d00c13187e92b29f05e3ada953a437da880ffb00414925da8bcba3faca00d4c646f1
+  checksum: 51d4fd29cf4c5d3c358a03a156875d749c01a241f8705de30806729f0d9290d4c0c63edc978f0603e4bfeb20184699ff83e41317e27034eb70295e1ec07c5384
   languageName: node
   linkType: hard
 
@@ -18513,9 +18513,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-node@npm:3.0.2":
-  version: 3.0.2
-  resolution: "vite-node@npm:3.0.2"
+"vite-node@npm:3.0.3":
+  version: 3.0.3
+  resolution: "vite-node@npm:3.0.3"
   dependencies:
     cac: ^6.7.14
     debug: ^4.4.0
@@ -18524,7 +18524,7 @@ __metadata:
     vite: ^5.0.0 || ^6.0.0
   bin:
     vite-node: vite-node.mjs
-  checksum: cba3cbb82f9bb68c69b67b58c8fba871438dde0866c732f53c8578df3ebda8115eaa13cd1abec95d5da66f60515b9bb508bd67988323b1548566df8accdd61d0
+  checksum: 84673b8c9ba08c1da5c7dc1a79a835b6ae6dc6cfdc55ae6ba31ad0bfb1d1c1215a8102c9230c08ad96e546bb2a2276e68b7a71f934beb574e5cf90293b7f71fd
   languageName: node
   linkType: hard
 
@@ -18582,9 +18582,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:6.0.8":
-  version: 6.0.8
-  resolution: "vite@npm:6.0.8"
+"vite@npm:6.0.11":
+  version: 6.0.11
+  resolution: "vite@npm:6.0.11"
   dependencies:
     esbuild: ^0.24.2
     fsevents: ~2.3.3
@@ -18630,7 +18630,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 29f17bee052185ca0f47d374d9b5ae016e59a909d4a21d40e12e60fb17362eeb2bde476a9d65faecfe67df2dbd80937bfbbd4f81867ae77530587b1a73fd58cc
+  checksum: 9c38d34f4ab08980101b9a50568ebf94c348c2e8a0b7b42dc31995151fadd8033c6b0285c82d87a7ad8ba8c4f6fea020b047fd6787ecf60dff2e13a4c722d8c7
   languageName: node
   linkType: hard
 
@@ -18697,17 +18697,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vitest@npm:3.0.2":
-  version: 3.0.2
-  resolution: "vitest@npm:3.0.2"
+"vitest@npm:3.0.3":
+  version: 3.0.3
+  resolution: "vitest@npm:3.0.3"
   dependencies:
-    "@vitest/expect": 3.0.2
-    "@vitest/mocker": 3.0.2
-    "@vitest/pretty-format": ^3.0.2
-    "@vitest/runner": 3.0.2
-    "@vitest/snapshot": 3.0.2
-    "@vitest/spy": 3.0.2
-    "@vitest/utils": 3.0.2
+    "@vitest/expect": 3.0.3
+    "@vitest/mocker": 3.0.3
+    "@vitest/pretty-format": ^3.0.3
+    "@vitest/runner": 3.0.3
+    "@vitest/snapshot": 3.0.3
+    "@vitest/spy": 3.0.3
+    "@vitest/utils": 3.0.3
     chai: ^5.1.2
     debug: ^4.4.0
     expect-type: ^1.1.0
@@ -18719,13 +18719,13 @@ __metadata:
     tinypool: ^1.0.2
     tinyrainbow: ^2.0.0
     vite: ^5.0.0 || ^6.0.0
-    vite-node: 3.0.2
+    vite-node: 3.0.3
     why-is-node-running: ^2.3.0
   peerDependencies:
     "@edge-runtime/vm": "*"
     "@types/node": ^18.0.0 || ^20.0.0 || >=22.0.0
-    "@vitest/browser": 3.0.2
-    "@vitest/ui": 3.0.2
+    "@vitest/browser": 3.0.3
+    "@vitest/ui": 3.0.3
     happy-dom: "*"
     jsdom: "*"
   peerDependenciesMeta:
@@ -18743,7 +18743,7 @@ __metadata:
       optional: true
   bin:
     vitest: vitest.mjs
-  checksum: 9f427d8eb11ab18e7929817f1af9e4d070df760b7b426e0921ff61a5e93b7972462f9dc8ec92f6cad0b1dbc78d7bd389d571230152ff3a8f3195b126c7971b90
+  checksum: e7f4b6b10a3ccf14d0684f315e8b73b5c8516fdd88d1aa322cb1a71984c4b9727bd2a9ca270f1a1435b2c45bfc9cc3bf7fa4d564dc765d15c8b43e00b3d1c4a3
   languageName: node
   linkType: hard
 
