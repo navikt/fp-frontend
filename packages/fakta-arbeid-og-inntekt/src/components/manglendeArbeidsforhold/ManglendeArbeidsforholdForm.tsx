@@ -1,9 +1,8 @@
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import React, { useMemo } from 'react';
 import { useForm, UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
-import { Alert, BodyShort, Button, HStack, Popover } from '@navikt/ds-react';
+import { Alert, Button, HelpText, HStack, ReadMore } from '@navikt/ds-react';
 import { Datepicker, Form, InputField, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
@@ -19,13 +18,16 @@ import {
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
-import { Inntektsmelding, ManglendeInntektsmeldingVurdering, ManueltArbeidsforhold } from '@navikt/fp-types';
+import {
+  AlleKodeverk,
+  Inntektsmelding,
+  ManglendeInntektsmeldingVurdering,
+  ManueltArbeidsforhold,
+} from '@navikt/fp-types';
 
 import { useSetDirtyForm } from '../../DirtyFormProvider';
 import { ArbeidsforholdOgInntektRadData } from '../../types/arbeidsforholdOgInntekt';
 import { InntektsmeldingOpplysningerPanel } from '../felles/InntektsmeldingOpplysningerPanel';
-
-import styles from './manglendeArbeidsforholdForm.module.css';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
@@ -96,6 +98,7 @@ interface Props {
   oppdaterTabell: (data: (rader: ArbeidsforholdOgInntektRadData[]) => ArbeidsforholdOgInntektRadData[]) => void;
   skalViseArbeidsforholdId: boolean;
   arbeidsgiverFødselsdato?: string;
+  alleKodeverk: AlleKodeverk;
 }
 
 export const ManglendeArbeidsforholdForm = ({
@@ -112,6 +115,7 @@ export const ManglendeArbeidsforholdForm = ({
   oppdaterTabell,
   skalViseArbeidsforholdId,
   arbeidsgiverFødselsdato,
+  alleKodeverk,
 }: Props) => {
   const intl = useIntl();
 
@@ -169,51 +173,25 @@ export const ManglendeArbeidsforholdForm = ({
       .finally(() => formMethods.reset(formValues));
   };
 
-  const buttonRef = useRef<SVGSVGElement>(null);
-  const [openState, setOpenState] = useState(false);
-  const toggleHjelpetekst = useCallback(() => setOpenState(gammelVerdi => !gammelVerdi), []);
-
   return (
     <>
       <InntektsmeldingOpplysningerPanel
         saksnummer={saksnummer}
         inntektsmelding={inntektsmelding}
         skalViseArbeidsforholdId={skalViseArbeidsforholdId}
+        arbeidsgiverNavn={arbeidsgiverNavn}
         arbeidsgiverFødselsdato={arbeidsgiverFødselsdato}
+        alleKodeverk={alleKodeverk}
       />
       <VerticalSpacer fourtyPx />
-      <div className={styles.alertStripe}>
-        <Alert variant="info">
-          <FormattedMessage id="ManglendeOpplysningerForm.ErMottattMenIkkeReg" />
-        </Alert>
-      </div>
+      <Alert variant="info" size="small">
+        <FormattedMessage id="ManglendeOpplysningerForm.ErMottattMenIkkeReg" />
+      </Alert>
       <VerticalSpacer thirtyTwoPx />
       <Form formMethods={formMethods} onSubmit={lagre}>
         <RadioGroupPanel
           name="saksbehandlersVurdering"
-          label={
-            <HStack gap="2">
-              <FormattedMessage id="ManglendeOpplysningerForm.SkalBrukeInntekstmelding" />
-              <QuestionmarkDiamondIcon
-                className={styles.svg}
-                ref={buttonRef}
-                onClick={toggleHjelpetekst}
-                title={intl.formatMessage({ id: 'ManglendeOpplysningerForm.AltHjelpetekst' })}
-              />
-              <Popover
-                open={openState}
-                onClose={toggleHjelpetekst}
-                anchorEl={buttonRef.current}
-                className={styles.hjelpetekst}
-              >
-                <Popover.Content className={styles.hjelpetekstInnhold}>
-                  <BodyShort>
-                    <FormattedMessage id="ManglendeOpplysningerForm.Hjelpetekst" />
-                  </BodyShort>
-                </Popover.Content>
-              </Popover>
-            </HStack>
-          }
+          label={<FormattedMessage id="ManglendeOpplysningerForm.SkalBrukeInntekstmelding" />}
           validate={[required]}
           isReadOnly={isReadOnly}
           radios={[
@@ -231,6 +209,9 @@ export const ManglendeArbeidsforholdForm = ({
             },
           ]}
         />
+        <ReadMore header={intl.formatMessage({ id: 'ManglendeOpplysningerForm.ReadMore.header' })}>
+          <FormattedMessage id="ManglendeOpplysningerForm.ReadMore.content" />
+        </ReadMore>
         {saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING && (
           <>
             <VerticalSpacer eightPx />
@@ -293,7 +274,6 @@ export const ManglendeArbeidsforholdForm = ({
             </Button>
           </HStack>
         )}
-        <VerticalSpacer fourtyPx />
       </Form>
     </>
   );

@@ -3,20 +3,21 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Heading, HGrid, HStack, VStack } from '@navikt/ds-react';
 import { DateTimeLabel } from '@navikt/ft-ui-komponenter';
-import { formatCurrencyNoKr } from '@navikt/ft-utils';
 
+import {
+  Arbeidsgiver,
+  KildeSystem,
+  KontaktPerson,
+  LastNedPdfKnapp,
+  Månedsinntekt,
+  Refusjon,
+} from '@navikt/fp-fakta-felles';
 import { getKodeverknavnFraKode, KodeverkType } from '@navikt/fp-kodeverk';
 import { Inntektsmelding } from '@navikt/fp-types';
 
 import { InntektsmeldingFaktaProps } from '../InntektsmeldingFaktaIndex';
-import { Arbeidsgiver } from './Arbeidsgiver';
 import { BehandlingsOversikt } from './BehandlingsOversikt';
 import { BortfalteNaturalYtelser } from './BortfalteNaturalYtelser';
-import { InntektsmeldingInfoBlokk } from './InntektsmeldingInfoBlokk';
-import { KildeSystem } from './KildeSystem';
-import { KontaktPerson } from './KontaktPerson';
-import { LastNedPdfKnapp } from './LastNedPdf';
-import { Refusjon } from './Refusjon';
 import { Startdato } from './Startdato';
 
 import styles from '../inntektsmeldingFakta.module.css';
@@ -29,8 +30,6 @@ export const InntektsmeldingInnhold = ({
   behandling,
   alleKodeverk,
 }: { inntektsmelding: Inntektsmelding } & InntektsmeldingFaktaProps) => {
-  const intl = useIntl();
-
   return (
     <VStack gap="4" className={styles.container}>
       <HStack gap="4" justify="space-between" align="start">
@@ -38,20 +37,16 @@ export const InntektsmeldingInnhold = ({
           <FormattedMessage id="InntektsmeldingFaktaPanel.innsendingstidspunkt" />{' '}
           <DateTimeLabel dateTimeString={inntektsmelding.innsendingstidspunkt} separator="kl" />
         </Heading>
-        <LastNedPdfKnapp fagsak={fagsak} inntektsmelding={inntektsmelding} />
+        <LastNedPdfKnapp saksnummer={fagsak.saksnummer} inntektsmelding={inntektsmelding} />
       </HStack>
       <HGrid columns={3} gap="8">
         <Arbeidsgiver
-          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+          arbeidsgiverFødselsdato={arbeidsgiverOpplysningerPerId[inntektsmelding.arbeidsgiverIdent]?.fødselsdato}
+          arbeidsgiverNavn={arbeidsgiverOpplysningerPerId[inntektsmelding.arbeidsgiverIdent]?.navn}
           arbeidsgiverIdent={inntektsmelding.arbeidsgiverIdent}
         />
 
-        <InntektsmeldingInfoBlokk
-          tittel={intl.formatMessage({ id: 'InntektsmeldingFaktaPanel.månedsinntekt.heading' })}
-        >
-          <span>{formatCurrencyNoKr(inntektsmelding.inntektPrMnd)}</span>
-          {/*TODO: Få inn endringsgrunn når dette er med i data-modellen*/}
-        </InntektsmeldingInfoBlokk>
+        <Månedsinntekt inntektsmelding={inntektsmelding} />
 
         <BehandlingsOversikt
           alleKodeverk={alleKodeverk}

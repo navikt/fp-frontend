@@ -1,8 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { Alert, Button } from '@navikt/ds-react';
-import { Table, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { Alert, Button, HStack, Table, VStack } from '@navikt/ds-react';
 
 import {
   AksjonspunktKode,
@@ -29,17 +28,6 @@ import { useIsFormDirty } from '../DirtyFormProvider';
 import { ArbeidsforholdOgInntektRadData, Avklaring } from '../types/arbeidsforholdOgInntekt';
 import { ArbeidsforholdRad } from './ArbeidsforholdRad';
 import { ArbeidsOgInntektOverstyrPanel } from './ArbeidsOgInntektOverstyrPanel';
-
-import styles from './arbeidOgInntektFaktaPanel.module.css';
-
-const HEADER_TEXT_IDS = [
-  'EMPTY1',
-  'ArbeidOgInntektFaktaPanel.Arbeidsforhold',
-  'ArbeidOgInntektFaktaPanel.Periode',
-  'ArbeidOgInntektFaktaPanel.Kilde',
-  'ArbeidOgInntektFaktaPanel.InntektsmeldingMottatt',
-  'EMPTY2',
-];
 
 const sorterTabell = (radX: ArbeidsforholdOgInntektRadData, radY: ArbeidsforholdOgInntektRadData): number => {
   const radXHarAp = radX.årsak;
@@ -255,7 +243,7 @@ export const ArbeidOgInntektFaktaPanel = ({
     !readOnly && erAksjonspunktApent && harBehandletAllePerioder && !isDirty && !kanSettePåVent;
 
   return (
-    <>
+    <VStack gap="4">
       <ArbeidsOgInntektOverstyrPanel
         behandling={behandling}
         aksjonspunkt={aksjonspunkt}
@@ -267,28 +255,51 @@ export const ArbeidOgInntektFaktaPanel = ({
         settÅpneRadIndexer={setÅpneRadIndexer}
         setErOverstyrt={setErOverstyrt}
         oppdaterTabell={oppdaterTabellData}
+        erAksjonspunktApent={erAksjonspunktApent}
       />
-      <Table ref={tableRef} headerTextCodes={HEADER_TEXT_IDS} noHover hasGrayHeader>
-        {tabellRader.map((radData, index) => (
-          <ArbeidsforholdRad
-            key={`${radData.arbeidsgiverNavn}${radData.arbeidsgiverIdent}${index}`} // nosonar
-            arbeidOgInntekt={arbeidOgInntekt}
-            saksnummer={saksnummer}
-            behandlingUuid={behandling.uuid}
-            behandlingVersjon={behandling.versjon}
-            radData={radData}
-            isReadOnly={readOnly || erAksjonspunktAvsluttet || harIngenAksjonspunkt}
-            registrerArbeidsforhold={registrerArbeidsforhold}
-            lagreVurdering={lagreVurdering}
-            toggleÅpenRad={() => toggleÅpenRad(index)}
-            erOverstyrt={erOverstyrt}
-            oppdaterTabell={oppdaterTabellData}
-            erRadÅpen={åpneRadIndexer.includes(index)}
-            alleKodeverk={alleKodeverk}
-          />
-        ))}
+      <Table ref={tableRef}>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell>
+              <FormattedMessage id="ArbeidOgInntektFaktaPanel.Status" />
+            </Table.HeaderCell>
+            <Table.HeaderCell>
+              <FormattedMessage id="ArbeidOgInntektFaktaPanel.Arbeidsforhold" />
+            </Table.HeaderCell>
+            <Table.HeaderCell>
+              <FormattedMessage id="ArbeidOgInntektFaktaPanel.Periode" />
+            </Table.HeaderCell>
+            <Table.HeaderCell>
+              <FormattedMessage id="ArbeidOgInntektFaktaPanel.Kilde" />
+            </Table.HeaderCell>
+            <Table.HeaderCell>
+              <FormattedMessage id="ArbeidOgInntektFaktaPanel.InntektsmeldingMottatt" />
+            </Table.HeaderCell>
+            <Table.HeaderCell />
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          {tabellRader.map((radData, index) => (
+            <ArbeidsforholdRad
+              key={`${radData.arbeidsgiverNavn}${radData.arbeidsgiverIdent}${index}`} // nosonar
+              arbeidOgInntekt={arbeidOgInntekt}
+              saksnummer={saksnummer}
+              behandlingUuid={behandling.uuid}
+              behandlingVersjon={behandling.versjon}
+              radData={radData}
+              isReadOnly={readOnly || erAksjonspunktAvsluttet || harIngenAksjonspunkt}
+              registrerArbeidsforhold={registrerArbeidsforhold}
+              lagreVurdering={lagreVurdering}
+              toggleÅpenRad={() => toggleÅpenRad(index)}
+              erOverstyrt={erOverstyrt}
+              oppdaterTabell={oppdaterTabellData}
+              erRadÅpen={åpneRadIndexer.includes(index)}
+              alleKodeverk={alleKodeverk}
+            />
+          ))}
+        </Table.Body>
       </Table>
-      <VerticalSpacer sixteenPx />
+
       {skalViseSettPåVentKnapp && (
         <>
           <Button
@@ -311,6 +322,7 @@ export const ArbeidOgInntektFaktaPanel = ({
           />
         </>
       )}
+
       {skalViseBekrefteKnapp && (
         <Button
           size="small"
@@ -323,26 +335,26 @@ export const ArbeidOgInntektFaktaPanel = ({
           <FormattedMessage id="ArbeidOgInntektFaktaPanel.Bekreft" />
         </Button>
       )}
+
       {skalViseÅpneForNyVurderingKnapp && (
-        <>
-          <div className={styles.alertStripe}>
-            <Alert variant="info">
-              <FormattedMessage id="ArbeidOgInntektFaktaPanel.ApneForNyRevurderingForklaring" />
-            </Alert>
+        <HStack gap="4" align="center">
+          <div>
+            <Button
+              size="small"
+              variant="secondary"
+              disabled={erKnappTrykket}
+              loading={erKnappTrykket}
+              onClick={gjenåpneAksjonspunkt}
+              type="button"
+            >
+              <FormattedMessage id="ArbeidOgInntektFaktaPanel.ApneForNyVurdering" />
+            </Button>
           </div>
-          <VerticalSpacer sixteenPx />
-          <Button
-            size="small"
-            variant="secondary"
-            disabled={erKnappTrykket}
-            loading={erKnappTrykket}
-            onClick={gjenåpneAksjonspunkt}
-            type="button"
-          >
-            <FormattedMessage id="ArbeidOgInntektFaktaPanel.ApneForNyVurdering" />
-          </Button>
-        </>
+          <Alert variant="info" size="small">
+            <FormattedMessage id="ArbeidOgInntektFaktaPanel.ApneForNyRevurderingForklaring" />
+          </Alert>
+        </HStack>
       )}
-    </>
+    </VStack>
   );
 };

@@ -40,5 +40,33 @@
 
   "FaktaKilde.Soknad": "FRA SØKNADEN",
   "FaktaKilde.FREG": "FRA FOLKEREGISTERET",
-  "FaktaKilde.MEDL": "FRA MEDLEMSKAPSREGISTERET"
+  "FaktaKilde.MEDL": "FRA MEDLEMSKAPSREGISTERET",
+
+  "Inntektsmelding.Arbeidsgiver.heading": "Arbeidsgiver",
+  "Inntektsmelding.Arbeidsgiver.navn": "Virksomhetsnavn",
+  "Inntektsmelding.Arbeidsgiver.underenhet": "Org.nr. for underenhet",
+  "Inntektsmelding.Arbeidsgiver.fodselsdato": "Fødselsdato",
+
+  "Inntektsmelding.KildeSystem.heading": "Kilde",
+  "Inntektsmelding.KildeSystem.nav": "Nav",
+  "Inntektsmelding.KildeSystem.altinn": "Altinn",
+  "Inntektsmelding.KildeSystem.lps": "Arbeidsgiver sitt lønns- og personalsystem(LPS)",
+
+  "Inntektsmelding.Kontaktperson.heading": "Kontaktperson fra arbeidsgiver",
+  "Inntektsmelding.Kontaktperson.navn": "Navn",
+  "Inntektsmelding.Kontaktperson.telefon": "Telefonnummer",
+
+  "Inntektsmelding.LastNedPDF.heading": "All informasjon fra PDF’en er tilgjengelig i faktapanelet",
+  "Inntektsmelding.LastNedPDF.trigger": "Åpne PDF",
+  "Inntektsmelding.LastNedPDF.body": "PDF’en du skal åpne inneholder ikke noe annet enn det som står i faktapanelet. Du kan likevel åpne den hvis du ønsker det.",
+  "Inntektsmelding.LastNedPDF.button.primary": "Last ned som PDF",
+  "Inntektsmelding.LastNedPDF.button.secondary": "Avbryt",
+
+  "Inntektsmelding.Månedsinntekt.heading": "Månedsinntekt",
+
+  "Inntektsmelding.Refusjon.heading": "Refusjon",
+  "Inntektsmelding.Refusjon.ingen": "Ingen refusjon",
+  "Inntektsmelding.Refusjon.endring.periode": "Refusjonsbeløp på {kroner} fra {fom}",
+
+  "Inntektsmelding.Stillingsprosent.heading": "Stillingsprosent"
 }
