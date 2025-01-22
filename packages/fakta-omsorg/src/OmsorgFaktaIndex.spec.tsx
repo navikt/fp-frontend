@@ -8,7 +8,7 @@ import * as stories from './OmsorgFaktaIndex.stories';
 
 const { ÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg } = composeStories(stories);
 
-describe('<OmsorgFaktaIndex>', () => {
+describe('OmsorgFaktaIndex', () => {
   it('skal velge at søker har omsorg for barnet', async () => {
     const lagreVurdering = vi.fn(() => Promise.resolve());
 

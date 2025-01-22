@@ -6,26 +6,22 @@ import { VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
-import {
-  FaktaBegrunnelseTextFieldNew,
-  FaktaSubmitButtonNew,
-  PersonopplysningerForFamilie,
-} from '@navikt/fp-fakta-felles';
+import { FaktaBegrunnelseTextField, FaktaSubmitButton, PersonopplysningerForFamilie } from '@navikt/fp-fakta-felles';
 import { Aksjonspunkt, Personoversikt, StandardFaktaPanelProps, Ytelsefordeling } from '@navikt/fp-types';
 import { BekreftOmsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import { FormValues as OmsorgFormValues,OmsorgFaktaFields } from './OmsorgFaktaFields';
+import { FormValues as OmsorgFormValues, OmsorgFaktaFields } from './OmsorgFaktaFields';
 
-const buildInitialValues = (ytelsefordeling: Ytelsefordeling, aksjonspunkter: Aksjonspunkt[]): FormValues => {
+const createInitialValues = (ytelsefordeling: Ytelsefordeling, aksjonspunkter: Aksjonspunkt[]): FormValues => {
   return {
-    ...OmsorgFaktaFields.buildInitialValues(ytelsefordeling, aksjonspunkter),
-    ...FaktaBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
+    ...OmsorgFaktaFields.initialValues(ytelsefordeling, aksjonspunkter),
+    ...FaktaBegrunnelseTextField.initialValues(aksjonspunkter),
   };
 };
 
 const transformValues = (values: FormValues): BekreftOmsorgVurderingAp => ({
-  ...OmsorgFaktaFields.transformOmsorgValues(values),
-  begrunnelse: values.begrunnelse,
+  ...OmsorgFaktaFields.transformValues(values),
+  ...FaktaBegrunnelseTextField.transformValues(values),
 });
 
 type FormValues = OmsorgFormValues & {
@@ -52,8 +48,10 @@ export const OmsorgInfoPanel = ({
   setFormData,
 }: Props & StandardFaktaPanelProps) => {
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || buildInitialValues(ytelsefordeling, aksjonspunkter),
+    defaultValues: formData || createInitialValues(ytelsefordeling, aksjonspunkter),
   });
+
+  const harAksjonspunkt = aksjonspunkter.length > 0;
 
   return (
     <VStack gap="8">
@@ -63,33 +61,34 @@ export const OmsorgInfoPanel = ({
         </AksjonspunktHelpTextHTML>
       )}
       <PersonopplysningerForFamilie alleKodeverk={alleKodeverk} personoversikt={personoversikt} />
-      <Form
-        formMethods={formMethods}
-        onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
-        setDataOnUnmount={setFormData}
-      >
-        <VStack gap="6">
-          <OmsorgFaktaFields
-            readOnly={readOnly}
-            aksjonspunkter={aksjonspunkter}
-            alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-          />
-          <FaktaBegrunnelseTextFieldNew
-            isSubmittable={submittable}
-            isReadOnly={readOnly}
-            hasBegrunnelse={true}
-            hasVurderingText
-          />
-          <div>
-            <FaktaSubmitButtonNew
+      {harAksjonspunkt && (
+        <Form
+          formMethods={formMethods}
+          onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
+          setDataOnUnmount={setFormData}
+        >
+          <VStack gap="6">
+            {harAksjonspunkt && (
+              <OmsorgFaktaFields readOnly={readOnly} alleMerknaderFraBeslutter={alleMerknaderFraBeslutter} />
+            )}
+
+            <FaktaBegrunnelseTextField
               isSubmittable={submittable}
               isReadOnly={readOnly}
-              isSubmitting={formMethods.formState.isSubmitting}
-              isDirty={formMethods.formState.isDirty}
+              hasBegrunnelse={true}
+              hasVurderingText
             />
-          </div>
-        </VStack>
-      </Form>
+            <div>
+              <FaktaSubmitButton
+                isSubmittable={submittable}
+                isReadOnly={readOnly}
+                isSubmitting={formMethods.formState.isSubmitting}
+                isDirty={formMethods.formState.isDirty}
+              />
+            </div>
+          </VStack>
+        </Form>
+      )}
     </VStack>
   );
 };

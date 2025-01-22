@@ -2,20 +2,16 @@ import React, { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
-import { Button, Label, VStack } from '@navikt/ds-react';
-import { Form, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
-import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
+import { VStack } from '@navikt/ds-react';
+import { Form } from '@navikt/ft-form-hooks';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
-import { decodeHtmlEntity } from '@navikt/ft-utils';
 
+import { FaktaBegrunnelseTextField, FaktaSubmitButton, TrueFalseInput } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
 import { BekreftAleneomsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { HarAnnenForelderRettFelter } from './HarAnnenForelderRettFelter';
-
-const minLength3 = minLength(3);
-const maxLength1500 = maxLength(1500);
 
 export type FormValues = {
   harAleneomsorg: boolean;
@@ -29,6 +25,7 @@ interface Props {
   ytelsefordeling: Ytelsefordeling;
   aksjonspunkt: Aksjonspunkt;
   readOnly: boolean;
+  submittable: boolean;
   submitCallback: (aksjonspunktData: BekreftAleneomsorgVurderingAp) => Promise<void>;
   formData?: FormValues;
   setFormData: (data: FormValues) => void;
@@ -40,23 +37,23 @@ export const AleneomsorgForm = ({
   aksjonspunkt,
   readOnly,
   submitCallback,
+  submittable,
   formData,
   setFormData,
   alleMerknaderFraBeslutter,
 }: Props) => {
+  const { bekreftetAnnenforelderRett, bekreftetAnnenforelderUføretrygd, bekreftetAnnenForelderRettEØS } =
+    ytelsefordeling.rettigheterAnnenforelder ?? {};
+
   const formMethods = useForm<FormValues>({
     defaultValues: formData || {
-      harAleneomsorg: ytelsefordeling?.bekreftetAleneomsorg,
-      harAnnenForelderRett: ytelsefordeling?.rettigheterAnnenforelder?.bekreftetAnnenforelderRett,
-      mottarAnnenForelderUforetrygd: ytelsefordeling?.rettigheterAnnenforelder?.bekreftetAnnenforelderUføretrygd,
-      harAnnenForelderRettEØS: ytelsefordeling?.rettigheterAnnenforelder?.bekreftetAnnenForelderRettEØS,
-      begrunnelse: aksjonspunkt.begrunnelse ? decodeHtmlEntity(aksjonspunkt.begrunnelse) : undefined,
+      harAleneomsorg: ytelsefordeling.bekreftetAleneomsorg,
+      harAnnenForelderRett: bekreftetAnnenforelderRett,
+      mottarAnnenForelderUforetrygd: bekreftetAnnenforelderUføretrygd,
+      harAnnenForelderRettEØS: bekreftetAnnenForelderRettEØS,
+      ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
     },
   });
-
-  const harAleneomsorg = formMethods.watch('harAleneomsorg');
-  const skalAvklareUforetrygd = true;
-  const skalAvklareRettEØS = true;
 
   const transformerFeltverdier = useCallback(
     (feltVerdier: FormValues) =>
@@ -66,7 +63,7 @@ export const AleneomsorgForm = ({
         annenforelderHarRett: feltVerdier.harAnnenForelderRett,
         annenforelderMottarUføretrygd: feltVerdier.mottarAnnenForelderUforetrygd,
         annenForelderHarRettEØS: feltVerdier.harAnnenForelderRettEØS,
-        begrunnelse: feltVerdier.begrunnelse,
+        ...FaktaBegrunnelseTextField.transformValues(feltVerdier),
       }),
     [],
   );
@@ -82,53 +79,31 @@ export const AleneomsorgForm = ({
         }
       >
         <VStack gap="6">
-          <RadioGroupPanel
+          <TrueFalseInput
             name="harAleneomsorg"
             label={<FormattedMessage id="AleneomsorgForm.Aleneomsorg" />}
-            validate={[required]}
-            isReadOnly={readOnly}
-            isTrueOrFalseSelection
-            radios={[
-              {
-                label: <FormattedMessage id="AleneomsorgForm.HarAleneomsorg" />,
-                value: 'true',
-              },
-              {
-                label: <FormattedMessage id="AleneomsorgForm.HarIkkeAleneomsorg" values={{ b: bTag }} />,
-                value: 'false',
-              },
-            ]}
-          />
-          {harAleneomsorg === false && (
-            <HarAnnenForelderRettFelter
-              readOnly={readOnly}
-              avklareUforetrygd={skalAvklareUforetrygd}
-              avklareRettEØS={skalAvklareRettEØS}
-            />
-          )}
-          <TextAreaField
-            label={
-              <Label size="small">
-                <FormattedMessage id="AleneomsorgForm.Begrunn" />
-              </Label>
-            }
-            name="begrunnelse"
-            validate={[required, minLength3, maxLength1500, hasValidText]}
-            maxLength={1500}
             readOnly={readOnly}
+            trueLabel={<FormattedMessage id="AleneomsorgForm.HarAleneomsorg" />}
+            falseLabel={<FormattedMessage id="AleneomsorgForm.HarIkkeAleneomsorg" values={{ b: bTag }} />}
+            falseContent={
+              <HarAnnenForelderRettFelter readOnly={readOnly} avklareUforetrygd={true} avklareRettEØS={true} />
+            }
           />
-          {!readOnly && (
-            <div>
-              <Button
-                size="small"
-                variant="primary"
-                disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
-                loading={formMethods.formState.isSubmitting}
-              >
-                <FormattedMessage id="AleneomsorgForm.Bekreft" />
-              </Button>
-            </div>
-          )}
+
+          <FaktaBegrunnelseTextField
+            isSubmittable={submittable}
+            isReadOnly={readOnly}
+            hasBegrunnelse={true}
+            hasVurderingText
+          />
+          <div>
+            <FaktaSubmitButton
+              isSubmittable={submittable}
+              isReadOnly={readOnly}
+              isSubmitting={formMethods.formState.isSubmitting}
+              isDirty={formMethods.formState.isDirty}
+            />
+          </div>
         </VStack>
       </FaktaGruppe>
     </Form>

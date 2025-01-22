@@ -38,6 +38,9 @@
   "FaktaBegrunnelseTextField.Vurdering": "Vurdering",
   "FaktaBegrunnelseTextField.Begrunnelse": "Begrunnelse",
 
+  "TrueFalseInput.True": "Ja",
+  "TrueFalseInput.False": "Nei",
+
   "FaktaKilde.Soknad": "FRA SØKNADEN",
   "FaktaKilde.FREG": "FRA FOLKEREGISTERET",
   "FaktaKilde.MEDL": "FRA MEDLEMSKAPSREGISTERET"

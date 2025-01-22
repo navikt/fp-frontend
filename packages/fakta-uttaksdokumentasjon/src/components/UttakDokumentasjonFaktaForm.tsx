@@ -5,7 +5,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Alert, Button, VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 
-import { FaktaBegrunnelseTextFieldNew } from '@navikt/fp-fakta-felles';
+import { FaktaBegrunnelseTextField } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, DokumentasjonVurderingBehov } from '@navikt/fp-types';
 import { VurderDokumentasjonAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -89,7 +89,7 @@ const UttakDokumentasjonFaktaForm: FunctionComponent<OwnProps> = ({
       />
       <Form formMethods={formMethods} onSubmit={(values: { begrunnelse: string }) => bekreft(values.begrunnelse)}>
         <VStack gap="4">
-          <FaktaBegrunnelseTextFieldNew
+          <FaktaBegrunnelseTextField
             label={intl.formatMessage({ id: 'UttakDokumentasjonFaktaForm.Begrunnelse' })}
             isSubmittable
             isReadOnly={readOnly}

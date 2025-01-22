@@ -5,10 +5,10 @@ import { FormattedMessage } from 'react-intl';
 import { Button, VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 
-import { FaktaBegrunnelseTextFieldNew } from '@navikt/fp-fakta-felles';
+import { FaktaBegrunnelseTextField } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, BehandlingType, KodeverkType, VilkarType } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, AlleKodeverk, Behandling, ManuellBehandlingResultat } from '@navikt/fp-types';
-import { VurderForutgaendeMedlemskapAp,VurderMedlemskapAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { VurderForutgaendeMedlemskapAp, VurderMedlemskapAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import {
   MedlemskapVurdering,
@@ -105,7 +105,7 @@ const VurderMedlemskapAksjonspunktForm: FC<Props> = ({
             readOnly={readOnly}
             ytelse={ytelse}
           />
-          <FaktaBegrunnelseTextFieldNew
+          <FaktaBegrunnelseTextField
             hasReadOnlyLabel
             isReadOnly={readOnly}
             isSubmittable={submittable}

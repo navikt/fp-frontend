@@ -7,7 +7,7 @@ import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { ArrowBox, FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { FaktaBegrunnelseTextFieldNew, isFieldEdited } from '@navikt/fp-fakta-felles';
+import { FaktaBegrunnelseTextField, isFieldEdited } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FodselSammenligningIndex } from '@navikt/fp-prosess-fakta-fodsel-sammenligning';
 import { Aksjonspunkt, AvklartBarn, FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
@@ -116,7 +116,7 @@ export const SjekkFodselDokForm: FunctionComponent<OwnProps> & StaticFunctions =
         )}
       </FaktaGruppe>
       <VerticalSpacer sixteenPx />
-      <FaktaBegrunnelseTextFieldNew isSubmittable={submittable} isReadOnly={readOnly} hasBegrunnelse={!!begrunnelse} />
+      <FaktaBegrunnelseTextField isSubmittable={submittable} isReadOnly={readOnly} hasBegrunnelse={!!begrunnelse} />
     </>
   );
 };
@@ -149,7 +149,7 @@ SjekkFodselDokForm.buildInitialValues = (soknad, familiehendelse, aksjonspunkt):
     familiehendelse.avklartBarn && familiehendelse.avklartBarn.length > 0
       ? familiehendelse.avklartBarn
       : lagBarn(soknad.antallBarn || 0),
-  ...FaktaBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkt),
+  ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
 });
 
 SjekkFodselDokForm.transformValues = (values: FormValues, avklartBarn: AvklartBarn[]): SjekkManglendeFodselAp => ({
@@ -157,7 +157,7 @@ SjekkFodselDokForm.transformValues = (values: FormValues, avklartBarn: AvklartBa
   dokumentasjonForeligger: values.dokumentasjonForeligger!,
   uidentifiserteBarn: ryddOppIAvklarteBarn(values.avklartBarn!),
   brukAntallBarnITps: avklartBarn && !!avklartBarn.length ? values.brukAntallBarnITps! : false,
-  ...FaktaBegrunnelseTextFieldNew.transformValues(values),
+  ...FaktaBegrunnelseTextField.transformValues(values),
 });
 
 export default SjekkFodselDokForm;

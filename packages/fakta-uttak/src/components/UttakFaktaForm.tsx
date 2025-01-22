@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback, useEffect, useMemo,useState } from 'react';
+import React, { FunctionComponent, useCallback, useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 
@@ -16,7 +16,7 @@ import {
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { FaktaBegrunnelseTextFieldNew, FaktaSubmitButtonNew, validerApKodeOgHentApEnum } from '@navikt/fp-fakta-felles';
+import { FaktaBegrunnelseTextField, FaktaSubmitButton, validerApKodeOgHentApEnum } from '@navikt/fp-fakta-felles';
 import {
   AksjonspunktKode,
   AksjonspunktStatus,
@@ -326,11 +326,11 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
       <VerticalSpacer sixteenPx />
       <VerticalSpacer sixteenPx />
       <Form formMethods={formMethods} onSubmit={(values: { begrunnelse: string }) => bekreft(values.begrunnelse)}>
-        <FaktaBegrunnelseTextFieldNew isSubmittable isReadOnly={!erRedigerbart} hasBegrunnelse />
+        <FaktaBegrunnelseTextField isSubmittable isReadOnly={!erRedigerbart} hasBegrunnelse />
         {erRedigerbart && (
           <>
             <VerticalSpacer twentyPx />
-            <FaktaSubmitButtonNew
+            <FaktaSubmitButton
               isSubmittable={isSubmittable}
               isReadOnly={readOnly}
               isSubmitting={formMethods.formState.isSubmitting}

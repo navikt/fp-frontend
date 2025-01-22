@@ -2,13 +2,13 @@ import React, { FunctionComponent } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Alert, BodyShort, HStack,Label } from '@navikt/ds-react';
+import { Alert, BodyShort, HStack, Label } from '@navikt/ds-react';
 import { Datepicker, InputField } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidInteger, maxValue, minValue, required } from '@navikt/ft-form-validators';
-import { DateLabel, FaktaGruppe,VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { DateLabel, FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import moment from 'moment';
 
-import { FaktaBegrunnelseTextFieldNew, isFieldEdited } from '@navikt/fp-fakta-felles';
+import { FaktaBegrunnelseTextField, isFieldEdited } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, FamilieHendelse, Soknad } from '@navikt/fp-types';
 import { BekreftTerminbekreftelseAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -128,7 +128,7 @@ export const TermindatoFaktaForm: FunctionComponent<OwnProps> & StaticFunctions 
         </FaktaGruppe>
       )}
       <VerticalSpacer sixteenPx />
-      <FaktaBegrunnelseTextFieldNew isSubmittable={submittable} isReadOnly={readOnly} hasBegrunnelse={!!begrunnelse} />
+      <FaktaBegrunnelseTextField isSubmittable={submittable} isReadOnly={readOnly} hasBegrunnelse={!!begrunnelse} />
       {isForTidligTerminbekreftelse && (
         <>
           <VerticalSpacer sixteenPx />
@@ -147,7 +147,7 @@ TermindatoFaktaForm.buildInitialValues = (soknad, familiehendelse, aksjonspunkt)
     utstedtdato: familiehendelse.utstedtdato ? familiehendelse.utstedtdato : soknad.utstedtdato,
     termindato: familiehendelse.termindato ? familiehendelse.termindato : soknad.termindato,
     antallBarn: familiehendelse.antallBarnTermin ? familiehendelse.antallBarnTermin : antallBarn,
-    ...FaktaBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkt),
+    ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
   };
 };
 
@@ -156,7 +156,7 @@ TermindatoFaktaForm.transformValues = (values: FormValues): BekreftTerminbekreft
   utstedtdato: values.utstedtdato!,
   termindato: values.termindato!,
   antallBarn: values.antallBarn!,
-  ...FaktaBegrunnelseTextFieldNew.transformValues(values),
+  ...FaktaBegrunnelseTextField.transformValues(values),
 });
 
 export default TermindatoFaktaForm;

@@ -1,90 +1,51 @@
-import React, { FunctionComponent, useCallback } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import React, { useCallback } from 'react';
+import { FormattedMessage } from 'react-intl';
 
-import { RadioGroupPanel } from '@navikt/ft-form-hooks';
-import { required } from '@navikt/ft-form-validators';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktKode, AksjonspunktStatus, hasAksjonspunkt } from '@navikt/fp-kodeverk';
+import { TrueFalseInput } from '@navikt/fp-fakta-felles';
+import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
 import { BekreftOmsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 const { MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG } = AksjonspunktKode;
-
-const getAksjonspunkt = (aksjonspunktCode: string, aksjonspunkter: Aksjonspunkt[]): Aksjonspunkt[] =>
-  aksjonspunkter.filter(ap => ap.definisjon === aksjonspunktCode);
 
 export type FormValues = {
   omsorg?: boolean;
 };
 
 interface Props {
-  aksjonspunkter: Aksjonspunkt[];
   readOnly: boolean;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
 }
 
-interface StaticFunctions {
-  buildInitialValues: (ytelsefordeling: Ytelsefordeling, aksjonspunkter: Aksjonspunkt[]) => FormValues;
-  transformOmsorgValues: (values: FormValues) => BekreftOmsorgVurderingAp;
-  validate?: (values: FormValues) => any;
-}
-
-export const OmsorgFaktaFields: FunctionComponent<Props> & StaticFunctions = ({
-  aksjonspunkter,
-  readOnly,
-  alleMerknaderFraBeslutter,
-}) => {
-  const intl = useIntl();
+export const OmsorgFaktaFields = ({ readOnly, alleMerknaderFraBeslutter }: Props) => {
   const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
 
   return (
-    <>
-      {hasAksjonspunkt(MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG, aksjonspunkter) && (
-        <FaktaGruppe
-          withoutBorder
-          merknaderFraBeslutter={alleMerknaderFraBeslutter[MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG]}
-        >
-          <RadioGroupPanel
-            name="omsorg"
-            label={<FormattedMessage id="OmsorgFaktaFields.OppgittOmsorg" />}
-            validate={[required]}
-            isReadOnly={readOnly}
-            isTrueOrFalseSelection
-            radios={[
-              {
-                label: intl.formatMessage({ id: 'OmsorgFaktaFields.HarOmsorg' }),
-                value: 'true',
-              },
-              {
-                label: <FormattedMessage id="OmsorgFaktaFields.HarIkkeOmsorg" values={{ b: bTag }} />,
-                value: 'false',
-              },
-            ]}
-          />
-        </FaktaGruppe>
-      )}
-    </>
+    <FaktaGruppe
+      withoutBorder
+      merknaderFraBeslutter={alleMerknaderFraBeslutter[MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG]}
+    >
+      <TrueFalseInput
+        name="omsorg"
+        label={<FormattedMessage id="OmsorgFaktaFields.OppgittOmsorg" />}
+        readOnly={readOnly}
+        trueLabel={<FormattedMessage id="OmsorgFaktaFields.HarOmsorg" />}
+        falseLabel={<FormattedMessage id="OmsorgFaktaFields.HarIkkeOmsorg" values={{ b: bTag }} />}
+      />
+    </FaktaGruppe>
   );
 };
 
-OmsorgFaktaFields.buildInitialValues = (
-  ytelsefordeling: Ytelsefordeling,
-  aksjonspunkter: Aksjonspunkt[],
-): FormValues => {
-  const omsorgAp = getAksjonspunkt(MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG, aksjonspunkter);
-  let omsorg;
+OmsorgFaktaFields.initialValues = (ytelsefordeling: Ytelsefordeling, omsorgAp: Aksjonspunkt[]): FormValues => ({
+  omsorg:
+    omsorgAp.length > 0 && omsorgAp[0].status !== AksjonspunktStatus.OPPRETTET
+      ? ytelsefordeling.overstyrtOmsorg
+      : undefined,
+});
 
-  if (omsorgAp.length > 0 && omsorgAp[0].status !== AksjonspunktStatus.OPPRETTET) {
-    omsorg = ytelsefordeling.overstyrtOmsorg;
-  }
-
-  return {
-    omsorg,
-  };
-};
-
-OmsorgFaktaFields.transformOmsorgValues = (values: FormValues): BekreftOmsorgVurderingAp => ({
+OmsorgFaktaFields.transformValues = (values: FormValues): BekreftOmsorgVurderingAp => ({
   kode: MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG,
   omsorg: values.omsorg || false,
 });

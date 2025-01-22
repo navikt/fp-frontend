@@ -1,4 +1,4 @@
-import React, { ReactNode, useCallback,useMemo, useState } from 'react';
+import React, { ReactNode, useCallback, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -7,7 +7,7 @@ import { Datepicker, Form, TextAreaField } from '@navikt/ft-form-hooks';
 import { dateRangesNotOverlapping, hasValidDate, hasValidText, maxLength, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
-import { FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
+import { FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   Aksjonspunkt,
@@ -231,7 +231,7 @@ export const TilretteleggingFaktaForm = ({
           readOnly={readOnly}
         />
         <HStack>
-          <FaktaSubmitButtonNew
+          <FaktaSubmitButton
             isSubmittable={submittable}
             isReadOnly={readOnly}
             isSubmitting={formMethods.formState.isSubmitting}

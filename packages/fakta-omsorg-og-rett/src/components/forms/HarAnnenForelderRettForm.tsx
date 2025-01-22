@@ -1,21 +1,16 @@
 import React, { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
-import { FormattedMessage } from 'react-intl';
 
-import { Button, Label, VStack } from '@navikt/ds-react';
-import { Form, TextAreaField } from '@navikt/ft-form-hooks';
-import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
+import { VStack } from '@navikt/ds-react';
+import { Form } from '@navikt/ft-form-hooks';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
-import { decodeHtmlEntity } from '@navikt/ft-utils';
 
+import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
 import { AvklarAnnenforelderHarRettAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { HarAnnenForelderRettFelter } from './HarAnnenForelderRettFelter';
-
-const minLength3 = minLength(3);
-const maxLength1500 = maxLength(1500);
 
 export type FormValues = {
   harAnnenForelderRett: boolean;
@@ -29,6 +24,7 @@ interface Props {
   aksjonspunkt: Aksjonspunkt;
   readOnly: boolean;
   formData?: FormValues;
+  submittable: boolean;
   setFormData: (data: FormValues) => void;
   submitCallback: (aksjonspunktData: AvklarAnnenforelderHarRettAp) => Promise<void>;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
@@ -40,24 +36,29 @@ export const HarAnnenForelderRettForm = ({
   aksjonspunkt,
   formData,
   setFormData,
+  submittable,
   submitCallback,
   alleMerknaderFraBeslutter,
 }: Props) => {
+  const {
+    bekreftetAnnenforelderRett,
+    bekreftetAnnenforelderUføretrygd,
+    bekreftetAnnenForelderRettEØS,
+    skalAvklareAnnenForelderRettEØS,
+    skalAvklareAnnenforelderUføretrygd,
+  } = ytelsefordeling.rettigheterAnnenforelder ?? {};
+
   const formMethods = useForm<FormValues>({
     defaultValues: formData || {
-      harAnnenForelderRett: ytelsefordeling?.rettigheterAnnenforelder?.bekreftetAnnenforelderRett,
-      mottarAnnenForelderUforetrygd: ytelsefordeling?.rettigheterAnnenforelder?.bekreftetAnnenforelderUføretrygd,
-      harAnnenForelderRettEØS: ytelsefordeling?.rettigheterAnnenforelder?.bekreftetAnnenForelderRettEØS,
-      begrunnelse: aksjonspunkt.begrunnelse ? decodeHtmlEntity(aksjonspunkt.begrunnelse) : undefined,
+      harAnnenForelderRett: bekreftetAnnenforelderRett,
+      mottarAnnenForelderUforetrygd: bekreftetAnnenforelderUføretrygd,
+      harAnnenForelderRettEØS: bekreftetAnnenForelderRettEØS,
+      ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
     },
   });
 
-  const skalAvklareUforetrygd =
-    ytelsefordeling?.rettigheterAnnenforelder?.skalAvklareAnnenforelderUføretrygd ||
-    ytelsefordeling?.rettigheterAnnenforelder?.bekreftetAnnenforelderUføretrygd !== null;
-  const skalAvklareRettEØS =
-    ytelsefordeling?.rettigheterAnnenforelder?.skalAvklareAnnenForelderRettEØS ||
-    ytelsefordeling?.rettigheterAnnenforelder?.bekreftetAnnenForelderRettEØS !== null;
+  const skalAvklareUforetrygd = skalAvklareAnnenforelderUføretrygd || bekreftetAnnenforelderUføretrygd !== null;
+  const skalAvklareRettEØS = skalAvklareAnnenForelderRettEØS || bekreftetAnnenForelderRettEØS !== null;
 
   const transformerFeltverdier = useCallback(
     (feltVerdier: FormValues) =>
@@ -66,7 +67,7 @@ export const HarAnnenForelderRettForm = ({
         annenforelderHarRett: feltVerdier.harAnnenForelderRett,
         annenforelderMottarUføretrygd: feltVerdier.mottarAnnenForelderUforetrygd,
         annenForelderHarRettEØS: feltVerdier.harAnnenForelderRettEØS,
-        begrunnelse: feltVerdier.begrunnelse,
+        ...FaktaBegrunnelseTextField.transformValues(feltVerdier),
       }),
     [],
   );
@@ -83,29 +84,22 @@ export const HarAnnenForelderRettForm = ({
             avklareUforetrygd={skalAvklareUforetrygd}
             avklareRettEØS={skalAvklareRettEØS}
           />
-          <TextAreaField
-            label={
-              <Label size="small">
-                <FormattedMessage id="HarAnnenForelderRettForm.Begrunn" />
-              </Label>
-            }
-            name="begrunnelse"
-            validate={[required, minLength3, maxLength1500, hasValidText]}
-            maxLength={1500}
-            readOnly={readOnly}
+
+          <FaktaBegrunnelseTextField
+            isSubmittable={submittable}
+            isReadOnly={readOnly}
+            hasBegrunnelse={true}
+            hasVurderingText
           />
-          {!readOnly && (
-            <div>
-              <Button
-                size="small"
-                variant="primary"
-                disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
-                loading={formMethods.formState.isSubmitting}
-              >
-                <FormattedMessage id="HarAnnenForelderRettForm.Bekreft" />
-              </Button>
-            </div>
-          )}
+
+          <div>
+            <FaktaSubmitButton
+              isSubmittable={submittable}
+              isReadOnly={readOnly}
+              isSubmitting={formMethods.formState.isSubmitting}
+              isDirty={formMethods.formState.isDirty}
+            />
+          </div>
         </VStack>
       </FaktaGruppe>
     </Form>

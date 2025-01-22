@@ -3,11 +3,11 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Heading } from '@navikt/ds-react';
-import { Form,RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { AksjonspunktBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { FaktaBegrunnelseTextFieldNew, FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
+import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt } from '@navikt/fp-types';
 import { MerkOpptjeningUtlandAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -57,7 +57,7 @@ const InnhentDokOpptjeningUtlandPanel: FunctionComponent<OwnProps> = ({
   const formMethods = useForm<FormValues>({
     defaultValues: formData || {
       dokStatus,
-      ...FaktaBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkt),
+      ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
     },
   });
 
@@ -97,14 +97,14 @@ const InnhentDokOpptjeningUtlandPanel: FunctionComponent<OwnProps> = ({
           ]}
         />
         <VerticalSpacer sixteenPx />
-        <FaktaBegrunnelseTextFieldNew
+        <FaktaBegrunnelseTextField
           isSubmittable={submittable}
           isReadOnly={readOnly}
           hasBegrunnelse={!!begrunnelse}
           label={intl.formatMessage({ id: 'InnhentDokOpptjeningUtlandPanel.Begrunnelse' })}
         />
         <VerticalSpacer sixteenPx />
-        <FaktaSubmitButtonNew
+        <FaktaSubmitButton
           isSubmittable={submittable}
           isSubmitting={formMethods.formState.isSubmitting}
           isDirty={formMethods.formState.isDirty}

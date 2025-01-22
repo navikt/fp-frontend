@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { composeStories } from '@storybook/react';
-import { fireEvent,render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import * as stories from './OmsorgOgForeldreansvarFaktaIndex.stories';
@@ -9,7 +9,7 @@ import * as stories from './OmsorgOgForeldreansvarFaktaIndex.stories';
 const { ÅpentAksjonspunktForOmsorgovertakelse, ÅpentAksjonspunktForAvklareVilkårForForeldreansvar } =
   composeStories(stories);
 
-describe('<OmsorgOgForeldreansvarFaktaIndex>', () => {
+describe('OmsorgOgForeldreansvarFaktaIndex', () => {
   it('skal løse aksjonspunkt for omsorgsovertakelse', async () => {
     const lagre = vi.fn();
 

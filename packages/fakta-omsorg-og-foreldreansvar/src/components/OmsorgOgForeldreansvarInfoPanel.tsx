@@ -6,7 +6,7 @@ import { VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
-import { FaktaBegrunnelseTextFieldNew, FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
+import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, getKodeverknavnFn, hasAksjonspunkt, KodeverkType } from '@navikt/fp-kodeverk';
 import {
   Aksjonspunkt,
@@ -33,7 +33,7 @@ const transformValues = (
   aksjonspunkt: Aksjonspunkt,
 ): AvklarFaktaForForeldreansvarAksjonspunktAp | AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp => ({
   ...OmsorgOgForeldreansvarFaktaForm.transformValues(values, aksjonspunkt),
-  ...{ begrunnelse: values.begrunnelse },
+  ...FaktaBegrunnelseTextField.transformValues(values),
 });
 
 const buildInitialValues = (
@@ -55,7 +55,7 @@ const buildInitialValues = (
       innvilgetRelatertTilgrensendeYtelserForAnnenForelder,
       getKodeverknavnFn(alleKodeverk),
     ),
-    ...FaktaBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkt),
+    ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
   };
 };
 
@@ -134,7 +134,7 @@ export const OmsorgOgForeldreansvarInfoPanel = ({
           gjeldendeFamiliehendelse={gjeldendeFamiliehendelse}
           personoversikt={personoversikt}
         />
-        <FaktaBegrunnelseTextFieldNew
+        <FaktaBegrunnelseTextField
           isSubmittable={submittable}
           isReadOnly={readOnly}
           hasBegrunnelse={!!begrunnelse}
@@ -144,7 +144,7 @@ export const OmsorgOgForeldreansvarInfoPanel = ({
               : 'OmsorgOgForeldreansvarInfoPanel.BegrunnelseTitleEs',
           })}
         />
-        <FaktaSubmitButtonNew
+        <FaktaSubmitButton
           isSubmittable={submittable}
           isSubmitting={formMethods.formState.isSubmitting}
           isDirty={formMethods.formState.isDirty}
