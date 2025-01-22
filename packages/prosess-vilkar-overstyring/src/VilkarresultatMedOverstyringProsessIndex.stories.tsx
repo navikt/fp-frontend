@@ -62,13 +62,13 @@ const meta = {
     lovReferanse: '§ 1-2 3. ledd',
   },
   render: props => {
-    const [erOverstyrt, toggleOverstyring] = useState(props.erOverstyrt);
+    const [erOverstyrt, setErOverstyrt] = useState(props.erOverstyrt);
 
     return (
       <VilkarresultatMedOverstyringProsessIndex
         {...props}
         erOverstyrt={erOverstyrt}
-        toggleOverstyring={() => toggleOverstyring(!erOverstyrt)}
+        toggleOverstyring={() => setErOverstyrt(!erOverstyrt)}
       />
     );
   },

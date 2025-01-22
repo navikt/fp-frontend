@@ -57,14 +57,12 @@ export const SearchForm = ({ searchStarted, searchResultAccessDenied, searchFags
           </Button>
         </HStack>
         {searchResultAccessDenied && (
-          <>
-            <HStack gap="2" align="end">
-              <ExclamationmarkTriangleFillIcon className={styles.advarselIcon} />
-              <BodyShort size="small">
-                <FormattedMessage id={searchResultAccessDenied.feilmelding} />
-              </BodyShort>
-            </HStack>
-          </>
+          <HStack gap="2" align="end">
+            <ExclamationmarkTriangleFillIcon className={styles.advarselIcon} />
+            <BodyShort size="small">
+              <FormattedMessage id={searchResultAccessDenied.feilmelding} />
+            </BodyShort>
+          </HStack>
         )}
       </VStack>
     </Form>

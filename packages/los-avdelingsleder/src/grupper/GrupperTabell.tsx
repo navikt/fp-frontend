@@ -66,7 +66,7 @@ export const GrupperTabell = ({ valgAvdeldingEnhet, grupper, avdelingensSaksbeha
                 }
               >
                 <Table.DataCell scope="row">{saksbehandlerGruppe.gruppeId}</Table.DataCell>
-                <Table.DataCell>{saksbehandlerGruppe.gruppeNavn || '-'}</Table.DataCell>
+                <Table.DataCell>{saksbehandlerGruppe.gruppeNavn ?? '-'}</Table.DataCell>
                 <Table.DataCell>{saksbehandlerGruppe.saksbehandlere.length}</Table.DataCell>
                 <Table.DataCell>
                   <XMarkIcon

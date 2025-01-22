@@ -101,7 +101,7 @@ const PermisjonFaktaPanel: FunctionComponent<OwnProps> = ({
     () => () => {
       setFormData(formMethods.getValues());
     },
-    [],
+    [formMethods.getValues()],
   );
 
   const harÅpentAksjonspunkt = aksjonspunkter.some(a => a.status === AksjonspunktStatus.OPPRETTET);
