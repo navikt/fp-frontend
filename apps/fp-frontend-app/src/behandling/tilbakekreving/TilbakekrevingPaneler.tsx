@@ -35,18 +35,17 @@ const TilbakekrevingPaneler = ({
   alleBehandlinger,
 }: Props) => {
   const api = useFagsakApi();
-
   const { data: tilbakekrevingKodeverk } = useQuery(api.fptilbake.kodeverkOptions());
+
+  if (!tilbakekrevingKodeverk) {
+    return <LoadingPanel />;
+  }
 
   const fagsakBehandlingerInfo = alleBehandlinger.filter(b => !b.behandlingHenlagt);
 
   const harApenRevurdering = fagsakBehandlingerInfo.some(
     b => b.type === BehandlingType.REVURDERING && b.status !== BehandlingStatus.AVSLUTTET,
   );
-
-  if (!tilbakekrevingKodeverk) {
-    return <LoadingPanel />;
-  }
 
   const hentFaktaPaneler = (props: FaktaPanelInitProps) => {
     return (

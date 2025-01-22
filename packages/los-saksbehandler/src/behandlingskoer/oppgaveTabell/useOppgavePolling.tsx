@@ -2,9 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 
 import { useMutation, useQuery } from '@tanstack/react-query';
 
+import { ApiPollingStatus } from '@navikt/fp-konstanter';
 import { Oppgave } from '@navikt/fp-los-felles';
-import { AsyncPollingStatus, EventType } from '@navikt/fp-rest-api';
-import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 
 import { doGetRequest, getOppgaverTilBehandling, reserverteOppgaverOptions } from '../../data/fplosSaksbehandlerApi';
 
@@ -16,7 +15,7 @@ const MAX_POLLING_ATTEMPTS = 1800;
 const MAX_POLLING_REACHED = 'MAX_POLLING';
 
 type PollingResponse = {
-  status: AsyncPollingStatus;
+  status: ApiPollingStatus;
   message: string;
   pollIntervalMillis: number;
   location: string;
@@ -71,7 +70,6 @@ const hentOppgaver = async (valgtSakslisteId: number, getSakslisteId: () => numb
 };
 
 export const useOppgavePolling = (valgtSakslisteId: number) => {
-  const { addErrorMessage } = useRestApiErrorDispatcher();
   const [oppgaverTilBehandling, setOppgaverTilBehandling] = useState<Oppgave[]>(EMPTY_ARRAY);
 
   const idRef = useRef(valgtSakslisteId);
@@ -85,11 +83,6 @@ export const useOppgavePolling = (valgtSakslisteId: number) => {
   } = useMutation({
     mutationFn: (values: { oppgaveIder?: string }) =>
       hentOppgaver(valgtSakslisteId, getSakslisteId, values.oppgaveIder),
-    onError: error => {
-      if (error.message !== MAX_POLLING_REACHED) {
-        addErrorMessage({ type: EventType.REQUEST_ERROR, feilmelding: error?.message });
-      }
-    },
   });
 
   const { data: reserverteOppgaver = EMPTY_ARRAY, refetch } = useQuery(reserverteOppgaverOptions());

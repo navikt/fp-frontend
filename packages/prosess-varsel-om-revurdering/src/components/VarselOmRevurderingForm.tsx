@@ -74,7 +74,7 @@ interface OwnProps {
   familiehendelseOriginalBehandling: FamilieHendelse;
   aksjonspunkter: Aksjonspunkt[];
   submitCallback: (data: VarselRevurderingAp) => Promise<void>;
-  previewCallback: (data: ForhandsvisData) => Promise<any>;
+  previewCallback: (data: ForhandsvisData) => void;
   readOnly: boolean;
   alleKodeverk: AlleKodeverk;
   formData?: FormValues;

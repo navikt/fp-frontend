@@ -5,8 +5,8 @@ import dayjs from 'dayjs';
 import { http, HttpResponse } from 'msw';
 
 import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { ApiPollingStatus } from '@navikt/fp-konstanter';
 import { Oppgave } from '@navikt/fp-los-felles';
-import { AsyncPollingStatus } from '@navikt/fp-rest-api';
 import { alleKodeverkLos, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { LosUrl } from './data/fplosSaksbehandlerApi';
@@ -233,7 +233,7 @@ const meta = {
         }),
         http.get('http://www.test.com/api/status', () =>
           HttpResponse.json({
-            status: AsyncPollingStatus.PENDING,
+            status: ApiPollingStatus.PENDING,
             pollIntervalMillis: 100000000,
           }),
         ),

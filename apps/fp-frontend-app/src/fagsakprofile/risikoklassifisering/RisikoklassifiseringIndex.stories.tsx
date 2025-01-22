@@ -1,6 +1,7 @@
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { action } from '@storybook/addon-actions';
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta, ReactRenderer, StoryObj } from '@storybook/react';
+import { DecoratorFunction } from '@storybook/types';
 import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 
@@ -20,10 +21,17 @@ import {
   withQueryClient,
   withRouter,
 } from '@navikt/fp-storybook-utils';
-import { BehandlingAppKontekst, BehandlingOppretting, Fagsak, VergeBehandlingmenyValg } from '@navikt/fp-types';
+import {
+  Behandling,
+  BehandlingAppKontekst,
+  BehandlingOppretting,
+  Fagsak,
+  VergeBehandlingmenyValg,
+} from '@navikt/fp-types';
 
 import { FagsakRel, FagsakUrl, initFetchOptions, useFagsakApi, wrapUrl } from '../../data/fagsakApi';
 import { notEmpty } from '../../data/notEmpty';
+import { RequestPendingProvider } from '../../data/polling/RequestPendingContext';
 import { FagsakData } from '../../fagsak/FagsakData';
 import { RisikoklassifiseringIndex } from './RisikoklassifiseringIndex';
 
@@ -32,6 +40,14 @@ import initFetchTilbake from '../../../.storybook/testdata/initFetchTilbake.json
 import messages from '../../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
+
+const withRequestPendingProvider: DecoratorFunction<ReactRenderer> = Story => {
+  return (
+    <RequestPendingProvider>
+      <Story />
+    </RequestPendingProvider>
+  );
+};
 
 const getHref = (rel: string) =>
   wrapUrl(
@@ -91,7 +107,7 @@ const FAGSAK = {
 
 const meta = {
   title: 'fagsak/RisikoklassifiseringIndex',
-  decorators: [withIntl, withRouter, withQueryClient],
+  decorators: [withIntl, withRouter, withQueryClient, withRequestPendingProvider],
   component: RisikoklassifiseringIndex,
   parameters: {
     msw: {
@@ -126,8 +142,10 @@ type Story = StoryObj<typeof meta>;
 export const FaresignalerOppdaget: Story = {
   args: {
     fagsakData: new FagsakData(FAGSAK),
-    behandlingUuid: '1',
-    behandlingVersjon: 1,
+    behandling: {
+      uuid: '1',
+      versjon: 1,
+    } as Behandling,
   },
 };
 

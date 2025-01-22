@@ -1,11 +1,12 @@
 import React from 'react';
 import { IntlShape, useIntl } from 'react-intl';
 
-import { AksjonspunktKode,VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import { OmsorgVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-omsorg';
 import { Aksjonspunkt } from '@navikt/fp-types';
 
 import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
+import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandardProsessPanelProps';
 import { InngangsvilkarPanelInitProps } from '../../../felles/typer/inngangsvilkarPanelInitProps';
 
 const AKSJONSPUNKT_TEKST_PER_KODE = {
@@ -37,15 +38,17 @@ export const OmsorgInngangsvilkarInitPanel = ({
   ...props
 }: Props & InngangsvilkarPanelInitProps) => {
   const intl = useIntl();
+  const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, VILKAR_KODER);
+
   return (
     <InngangsvilkarDefaultInitPanel
       {...props}
       behandlingVersjon={behandlingVersjon}
-      aksjonspunktKoder={AKSJONSPUNKT_KODER}
+      standardPanelProps={standardPanelProps}
       vilkarKoder={VILKAR_KODER}
       inngangsvilkarPanelKode="OMSORG"
-      hentInngangsvilkarPanelTekst={data => hentAksjonspunktTekst(intl, data.aksjonspunkter)}
-      renderPanel={data => <OmsorgVilkarProsessIndex {...data} />}
+      hentInngangsvilkarPanelTekst={hentAksjonspunktTekst(intl, standardPanelProps.aksjonspunkter)}
+      renderPanel={() => <OmsorgVilkarProsessIndex {...standardPanelProps} />}
     />
   );
 };

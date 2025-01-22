@@ -21,8 +21,6 @@
   "dependencies": {
     "@navikt/ds-react": "7.9.2",
     "@navikt/fp-kodeverk": "workspace:*",
-    "@navikt/fp-rest-api": "workspace:*",
-    "@navikt/fp-rest-api-hooks": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/ft-form-hooks": "6.0.0",
     "@navikt/ft-form-validators": "3.0.0",

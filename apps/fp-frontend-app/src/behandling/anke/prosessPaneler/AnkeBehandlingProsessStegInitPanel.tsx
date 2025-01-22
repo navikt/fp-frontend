@@ -1,44 +1,47 @@
-import React from 'react';
 import { useIntl } from 'react-intl';
+
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
+import { useQuery } from '@tanstack/react-query';
 
 import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { AnkeProsessIndex } from '@navikt/fp-prosess-anke';
-import { AnkeVurdering } from '@navikt/fp-types';
+import { BehandlingAppKontekst } from '@navikt/fp-types';
 
-import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
+import { useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 
-const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.ANKE_VURDERING];
-type EndepunktPanelData = {
-  ankeVurdering: AnkeVurdering;
-};
-
 interface Props {
-  alleBehandlinger: {
-    uuid: string;
-    type: string;
-    avsluttet?: string;
-    opprettet: string;
-    status: string;
-  }[];
+  alleBehandlinger: BehandlingAppKontekst[];
 }
 
 export const AnkeBehandlingProsessStegInitPanel = ({ alleBehandlinger, ...props }: Props & ProsessPanelInitProps) => {
   const intl = useIntl();
   const { behandling } = props;
+
+  const api = useBehandlingApi(behandling);
+  const { data: ankeVurdering } = useQuery(api.anke.ankeVurderingOptions(behandling));
+
+  const standardPanelProps = useStandardProsessPanelProps();
+
   return (
-    <ProsessDefaultInitPanel<EndepunktPanelData>
+    <ProsessDefaultInitPanel
       {...props}
-      panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
+      standardPanelProps={standardPanelProps}
       prosessPanelKode={ProsessStegCode.ANKEBEHANDLING}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Ankebehandling' })}
-      skalPanelVisesIMeny={() => true}
-      hentOverstyrtStatus={() =>
+      skalPanelVisesIMeny
+      hentOverstyrtStatus={
         behandling.behandlingsresultat?.type ? VilkarUtfallType.OPPFYLT : VilkarUtfallType.IKKE_VURDERT
       }
-      renderPanel={data => <AnkeProsessIndex behandlinger={alleBehandlinger} {...data} />}
-    />
+    >
+      {ankeVurdering ? (
+        <AnkeProsessIndex behandlinger={alleBehandlinger} ankeVurdering={ankeVurdering} {...standardPanelProps} />
+      ) : (
+        <LoadingPanel />
+      )}
+    </ProsessDefaultInitPanel>
   );
 };

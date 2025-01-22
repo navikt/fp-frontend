@@ -5,7 +5,7 @@ import { Behandling } from '@navikt/fp-types';
 import { FaktaContainer } from './fakta/FaktaContainer';
 import { ProsessContainer } from './prosess/ProsessContainer';
 import { FaktaPanelInitProps } from './typer/faktaPanelInitProps';
-import { ProsessPanelExtraInitProps,ProsessPanelInitProps } from './typer/prosessPanelInitProps';
+import { ProsessPanelExtraInitProps, ProsessPanelInitProps } from './typer/prosessPanelInitProps';
 
 interface FaktaPanelInfo {
   urlCode: string;

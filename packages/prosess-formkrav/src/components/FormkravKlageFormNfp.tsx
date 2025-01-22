@@ -99,7 +99,7 @@ interface OwnProps {
   alleKodeverk: AlleKodeverk;
   avsluttedeBehandlinger: AvsluttetBehandling[];
   readOnly: boolean;
-  lagreFormkravVurdering: (data: FormkravMellomlagretDataType) => Promise<any>;
+  lagreFormkravVurdering: (data: FormkravMellomlagretDataType) => void;
   formData?: FormValues;
   setFormData: (data: FormValues) => void;
 }

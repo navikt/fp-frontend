@@ -57,7 +57,7 @@ interface Props {
     'beregningsresultat-foreldrepenger'?: BeregningsresultatDagytelse;
   };
   vilkar: Vilkar[];
-  previewCallback: (data: ForhandsvisData) => Promise<any>;
+  previewCallback: (data: ForhandsvisData) => void;
   ytelseTypeKode: string;
 }
 
