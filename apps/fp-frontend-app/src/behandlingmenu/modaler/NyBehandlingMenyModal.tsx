@@ -68,7 +68,7 @@ export const NyBehandlingMenyModal = ({ fagsakData, behandlingUuid, lukkModal }:
   const isRevurderingOpprettedAktivert =
     erTilbakekrevingAktivert && !navAnsatt.kanVeilede && erTilbakekreving && !!behandlingUuid;
   const { data: kanRevurderingOpprettes = false } = useQuery(
-    api.fptilbake.kanTilbakekrevingRevurderingOpprettesOptions(isRevurderingOpprettedAktivert, uuidForSistLukkede),
+    api.fptilbake.kanTilbakekrevingRevurderingOpprettesOptions(isRevurderingOpprettedAktivert, behandlingUuid),
   );
 
   const menyKodeverk = new MenyKodeverk(behandling?.type)
