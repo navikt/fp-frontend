@@ -2,10 +2,10 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { HStack, Spacer } from '@navikt/ds-react';
-import { EmptyPersonCard, Gender,PersonCard } from '@navikt/ft-plattform-komponenter';
+import { EmptyPersonCard, Gender, PersonCard } from '@navikt/ft-plattform-komponenter';
 
-import { NavBrukerKjonn,RelasjonsRolleType } from '@navikt/fp-kodeverk';
-import { Fagsak, FagsakPersoner } from '@navikt/fp-types';
+import { NavBrukerKjonn } from '@navikt/fp-kodeverk';
+import { FagsakHendelse, FagsakPerson } from '@navikt/fp-types';
 
 import { VisittkortBarnInfoPanel } from './VisittkortBarnInfoPanel';
 import { VisittkortLabels } from './VisittkortLabels';
@@ -20,64 +20,74 @@ const utledKjonn = (kjonn: string): Gender => {
 };
 
 interface Props {
-  fagsak: Fagsak;
-  fagsakPersoner: FagsakPersoner;
+  erMor: boolean;
+  bruker: FagsakPerson;
+  annenPart?: FagsakPerson;
+  familiehendelse?: FagsakHendelse;
   lenkeTilAnnenPart?: string;
   harVerge: boolean;
   erTilbakekreving: boolean;
 }
 
-export const VisittkortPanel = ({ fagsak, fagsakPersoner, lenkeTilAnnenPart, harVerge, erTilbakekreving }: Props) => {
+export const VisittkortPanel = ({
+  erMor,
+  bruker,
+  annenPart,
+  familiehendelse,
+  lenkeTilAnnenPart,
+  harVerge,
+  erTilbakekreving,
+}: Props) => {
   const intl = useIntl();
 
-  const fagsakPerson = fagsakPersoner.bruker;
-  const erMor = fagsak.relasjonsRolleType === RelasjonsRolleType.MOR;
   if (erTilbakekreving && harVerge) {
     return (
       <div className={styles.container}>
         <PersonCard
-          name={fagsakPerson.navn}
-          fodselsnummer={fagsakPerson.fødselsnummer}
-          gender={fagsakPerson.kjønn === NavBrukerKjonn.KVINNE ? Gender.female : Gender.male}
-          renderLabelContent={() => <VisittkortLabels fagsakPerson={fagsakPerson} harVerge={harVerge} />}
+          name={bruker.navn}
+          fodselsnummer={bruker.fødselsnummer}
+          gender={utledKjonn(bruker.kjønn)}
+          renderLabelContent={() => <VisittkortLabels fagsakPerson={bruker} harVerge={harVerge} />}
         />
       </div>
     );
   }
-  const soker = erMor || !fagsakPersoner.annenPart ? fagsakPerson : fagsakPersoner.annenPart;
-  const annenPart = !erMor && fagsakPersoner.annenPart ? fagsakPerson : fagsakPersoner.annenPart;
+
+  const primærBruker = erMor || !annenPart ? bruker : annenPart;
+  const sekundærBruker = !erMor && annenPart ? bruker : annenPart;
 
   return (
     <div className={styles.container}>
       <HStack wrap={false} align="center">
-        {soker.aktørId && (
+        {primærBruker.aktørId ? (
           <PersonCard
-            name={soker.navn}
-            fodselsnummer={soker.fødselsnummer}
-            gender={utledKjonn(soker.kjønn)}
+            name={primærBruker.navn}
+            fodselsnummer={primærBruker.fødselsnummer}
+            gender={utledKjonn(primærBruker.kjønn)}
             url={lenkeTilAnnenPart}
-            renderLabelContent={() => <VisittkortLabels fagsakPerson={soker} harVerge={harVerge} />}
+            renderLabelContent={() => <VisittkortLabels fagsakPerson={primærBruker} harVerge={harVerge} />}
             isActive={erMor}
           />
-        )}
-        {!soker.aktørId && <EmptyPersonCard namePlaceholder={intl.formatMessage({ id: 'VisittkortPanel.Ukjent' })} />}
-        {annenPart?.aktørId && (
-          <PersonCard
-            name={annenPart.navn}
-            fodselsnummer={annenPart.fødselsnummer}
-            gender={utledKjonn(annenPart.kjønn)}
-            url={lenkeTilAnnenPart}
-            renderLabelContent={() => <VisittkortLabels fagsakPerson={annenPart} harVerge={false} />}
-            isActive={!erMor}
-          />
-        )}
-        {annenPart && !annenPart.aktørId && (
+        ) : (
           <EmptyPersonCard namePlaceholder={intl.formatMessage({ id: 'VisittkortPanel.Ukjent' })} />
         )}
-        {fagsakPersoner.familiehendelse && (
+        {sekundærBruker &&
+          (sekundærBruker.aktørId ? (
+            <PersonCard
+              name={sekundærBruker.navn}
+              fodselsnummer={sekundærBruker.fødselsnummer}
+              gender={utledKjonn(sekundærBruker.kjønn)}
+              url={lenkeTilAnnenPart}
+              renderLabelContent={() => <VisittkortLabels fagsakPerson={sekundærBruker} />}
+              isActive={!erMor}
+            />
+          ) : (
+            <EmptyPersonCard namePlaceholder={intl.formatMessage({ id: 'VisittkortPanel.Ukjent' })} />
+          ))}
+        {familiehendelse && (
           <>
             <Spacer />
-            <VisittkortBarnInfoPanel familiehendelse={fagsakPersoner.familiehendelse} />
+            <VisittkortBarnInfoPanel familiehendelse={familiehendelse} />
           </>
         )}
       </HStack>

@@ -5,7 +5,7 @@ import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { DataFetchPendingModal, LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { Location } from 'history';
 
-import { BehandlingType } from '@navikt/fp-kodeverk';
+import { BehandlingType, RelasjonsRolleType } from '@navikt/fp-kodeverk';
 import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 import { VisittkortSakIndex } from '@navikt/fp-sak-visittkort';
 import { AnnenPartBehandling, Behandling } from '@navikt/fp-types';
@@ -160,17 +160,15 @@ export const FagsakIndex = () => {
               errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Visittkort' })}
             >
               <VisittkortSakIndex
+                erMor={fagsak.relasjonsRolleType === RelasjonsRolleType.MOR}
+                bruker={fagsak.bruker}
+                annenPart={fagsak.annenPart}
+                familiehendelse={fagsak.familiehendelse}
+                harVerge={behandling?.harVerge}
+                erTilbakekreving={erTilbakekreving}
                 lenkeTilAnnenPart={
                   fagsak.annenpartBehandling ? finnLenkeTilAnnenPart(fagsak.annenpartBehandling) : undefined
                 }
-                fagsak={fagsak}
-                fagsakPersoner={{
-                  bruker: fagsak.bruker,
-                  annenPart: fagsak.annenPart,
-                  familiehendelse: fagsak.familiehendelse,
-                }}
-                harVerge={behandling?.harVerge}
-                erTilbakekreving={erTilbakekreving}
               />
             </ErrorBoundary>
           );
