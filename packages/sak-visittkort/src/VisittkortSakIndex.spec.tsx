@@ -86,12 +86,12 @@ describe('VisittkortSakIndex', () => {
     expect(screen.getByText('Foreldreansvar 21.01.2020')).toBeInTheDocument();
   });
 
-  it('skal vise visittkort for familie med Adopsjon', async () => {
-    render(<FamilieMedOmsorgovertakelse />);
+  it('skal vise visittkort for familie med adopsjon', async () => {
+    render(<FamilieMedAdopsjon />);
 
     expect(await screen.findByText('Klara Ku')).toBeInTheDocument();
     expect(screen.getByText('656565 78787')).toBeInTheDocument();
 
-    expect(screen.getByText('Foreldreansvar 21.01.2020')).toBeInTheDocument();
+    expect(screen.getByText('Adopsjon 21.01.2020')).toBeInTheDocument();
   });
 });
