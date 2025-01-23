@@ -89,11 +89,23 @@ export const MedVergeOgBrukerUnder18: Story = {
   },
 };
 
+export const FamilieMedFødtBarn: Story = {
+  args: {
+    erMor: true,
+    bruker: fagsakPersonMor,
+    familiehendelse: {
+      hendelseType: FamilieHendelseType.FODSEL,
+      hendelseDato: '2020-01-21',
+      dødfødsel: false,
+      antallBarn: 1,
+    },
+  },
+};
+
 export const FamilieMedDødfødtBarn: Story = {
   args: {
     erMor: true,
     bruker: fagsakPersonMor,
-    annenPart: fagsakPersonFar,
     familiehendelse: {
       hendelseType: FamilieHendelseType.FODSEL,
       hendelseDato: '2020-01-21',

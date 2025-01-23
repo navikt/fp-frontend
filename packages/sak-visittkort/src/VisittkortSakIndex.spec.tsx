@@ -13,6 +13,8 @@ const {
   MedDiskresjonskodeOgDødAnnenpart,
   MedVergeOgBrukerUnder18,
   FamilieMedDødfødtBarn,
+  FamilieMedFødtBarn,
+  FamilieMedTermin,
   FamilieMedOmsorgovertakelse,
   FamilieMedAdopsjon,
 } = composeStories(stories);
@@ -64,34 +66,14 @@ describe('VisittkortSakIndex', () => {
     expect(screen.getByText('Ukjent navn, mangler norsk id-nr')).toBeInTheDocument();
   });
 
-  it('skal vise visittkort for familie med dødfødt barn', async () => {
-    render(<FamilieMedDødfødtBarn />);
-
-    expect(await screen.findByText('Klara Ku')).toBeInTheDocument();
-    expect(screen.getByText('656565 78787')).toBeInTheDocument();
-
-    expect(await screen.findByText('Espen Utvikler')).toBeInTheDocument();
-    expect(screen.getByText('123456 78910')).toBeInTheDocument();
-
-    expect(screen.getByText('Født 21.01.2020')).toBeInTheDocument();
-    expect(screen.getByText('Død')).toBeInTheDocument();
-  });
-
-  it('skal vise visittkort for familie med omsorgsovertakelse', async () => {
-    render(<FamilieMedOmsorgovertakelse />);
-
-    expect(await screen.findByText('Klara Ku')).toBeInTheDocument();
-    expect(screen.getByText('656565 78787')).toBeInTheDocument();
-
-    expect(screen.getByText('Foreldreansvar 21.01.2020')).toBeInTheDocument();
-  });
-
-  it('skal vise visittkort for familie med adopsjon', async () => {
-    render(<FamilieMedAdopsjon />);
-
-    expect(await screen.findByText('Klara Ku')).toBeInTheDocument();
-    expect(screen.getByText('656565 78787')).toBeInTheDocument();
-
-    expect(screen.getByText('Adopsjon 21.01.2020')).toBeInTheDocument();
+  it.each([
+    ['fødsel', ['Født 21.01.2020 (5 år)'], FamilieMedFødtBarn],
+    ['termin', ['Termin 21.01.2020'], FamilieMedTermin],
+    ['omsorgovertakelse', ['Foreldreansvar 21.01.2020'], FamilieMedOmsorgovertakelse],
+    ['adopsjon', ['Adopsjon 21.01.2020'], FamilieMedAdopsjon],
+    ['dødfødsel', ['Født 21.01.2020', 'Død'], FamilieMedDødfødtBarn],
+  ])('skal vise visittkort med familiehendelse: %s', async (_, expected, Component) => {
+    render(<Component />);
+    expected.forEach(text => expect(screen.getByText(text)).toBeInTheDocument());
   });
 });
