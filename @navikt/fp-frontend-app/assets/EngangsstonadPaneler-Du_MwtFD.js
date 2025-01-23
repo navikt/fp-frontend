@@ -1,74 +1,18 @@
-import{j as n}from"./jsx-runtime-CLpGMVip.js";import{r as l}from"./index-B5OHeJSP.js";import{B as be}from"./BehandlingContainer-GMForHQ5.js";import{u as L,h as B,B as w,H as x,P as Z,E as qe,L as H,j as fe}from"./withQueryClient-DTem1OUy.js";import{A}from"./aksjonspunktCodes-BuBbCIxs.js";import"./aktivitetStatus-02fOJoqz.js";import{P as Q}from"./skjermlenkeCodes-1SvLTuBb.js";import{M as g,z as W,_ as X,F as c,d as he,w as je,x as Te,h as d,s as Ae,a as ce,o as _,Z as we,S as Re,K as Be,A as Ie,n as ee,r as Ve,g as Pe,f as Se,p as Fe,Q as Ee}from"./index.es-MxAMIJPu.js";import{B as Ke,u as ne,r as re,X as G,e as V,O as C,Z as Y,a as De,N as Ne,l as Oe,b as Le}from"./index.es-jVWbk6xM.js";import{h as xe}from"./moment-C5S46NFB.js";import{A as M}from"./RisikoklassifiseringIndex-DAHosNOY.js";import{K as z}from"./alleKodeverk-Ck9zwXaq.js";import{K as S}from"./DokumentIndex-WhPHokyB.js";import{P as ae,a as te}from"./OverstyringPanel-DXjMzVqd.js";import{h as se,c as Me}from"./eksterneLenker-DcE6CUbm.js";import{L as O}from"./Link-C9M13KeJ.js";import{B as R,a as Ue}from"./behandlingContextApi-dQIrUR8M.js";import{P as ie,u as He}from"./ProsessDefaultInitPanel-CfqEVh-h.js";import{B as $}from"./behandlingResultatType-DHbqkXMl.js";import{V as P}from"./BehandlingHenlagtPanel-Po6gVo0n.js";import{D as _e}from"./venteArsakType-LWklXP3j.js";import{I as Ge}from"./IverksetterVedtakStatusModal-COb0icoY.js";import"./_commonjsHelpers-Cpj98o6Y.js";import"./index.es-wzSzT7V5.js";import"./useFormField-r8KZLR-A.js";import"./Tooltip-BEOONAwd.js";import"./index-sT6466e8.js";import"./index-DYwZEShM.js";import"./Popover-BOGWOK3_.js";import"./dayjs.min-CJilavqB.js";import"./Checkbox-Dd-5zRqC.js";import"./Tag-Yzdm1MSp.js";import"./initFetch-DK4cSTvy.js";import"./decorators-DIzpaN6C.js";import"./Box-CkfZpuRW.js";import"./paths-BHckLD26.js";import"./useTrackRouteParam-Bh9psqeZ.js";import"./FagsakData-CGqXEUml.js";import"./fagsakYtelseType-CyKFp0BE.js";import"./Table-RfktipKk.js";import"./StarFill-DXI4dcSy.js";import"./SupportHeader-iAZRHVc6.js";import"./useRestApiRunner-PSWluHZJ.js";import"./useRestApiErrorDispatcher-Du6ohLLd.js";import"./ErrorBoundary-DovJ2PZA.js";import"./IngenBehandlingValgtPanel-Dnr5nc8M.js";import"./TotrinnskontrollIndex-BSB5vbEG.js";import"./useMutation-BTY4BAX6.js";import"./behandlingArsakType-CTXggz2Y.js";import"./useKodeverk-DQG-UHsp.js";import"./useVisForhandsvisningAvMelding-pMH3XiJA.js";import"./FagsakIndex-CGjfcygZ.js";import"./VisittkortSakIndex-COWBnVWl.js";import"./Spacer-CXEI7Xul.js";import"./iframe-2knG13q3.js";import"./BehandlingMenuIndex-C7aISpSy.js";import"./BehandlingSupportIndex-D-lZ2V9Q.js";import"./HistorikkIndex-B5LJAxRA.js";import"./kodeverkUtils-DLZgokMR.js";import"./MeldingIndex-Bd0_cEnR.js";import"./UkjentAdresseMeldingIndex-D5CGVu9W.js";import"./SettPaVentReadOnlyModal-c3_jdNf4.js";import"./FagsakProfileIndex-J2SlYpwz.js";import"./bind-oYjWB_aQ.js";var Ce=function(e,t){var r={};for(var a in e)Object.prototype.hasOwnProperty.call(e,a)&&t.indexOf(a)<0&&(r[a]=e[a]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var s=0,a=Object.getOwnPropertySymbols(e);s<a.length;s++)t.indexOf(a[s])<0&&Object.prototype.propertyIsEnumerable.call(e,a[s])&&(r[a[s]]=e[a[s]]);return r};const Ye=l.forwardRef((e,t)=>{var{title:r,titleId:a}=e,s=Ce(e,["title","titleId"]);let i=L();return i=r?a||"title-"+i:void 0,l.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",width:"1em",height:"1em",fill:"none",viewBox:"0 0 24 24",focusable:!1,role:"img",ref:t,"aria-labelledby":i},s),r?l.createElement("title",{id:i},r):null,l.createElement("path",{fill:"currentColor",fillRule:"evenodd",d:"M7.03 7.47a.75.75 0 0 0-1.06 1.06l5.5 5.5a.75.75 0 0 0 1.06 0l5.5-5.5a.75.75 0 0 0-1.06-1.06L12 12.44zm0 4a.75.75 0 0 0-1.06 1.06l5.5 5.5a.75.75 0 0 0 1.06 0l5.5-5.5a.75.75 0 1 0-1.06-1.06L12 16.44z",clipRule:"evenodd"}))});var ze=function(e,t){var r={};for(var a in e)Object.prototype.hasOwnProperty.call(e,a)&&t.indexOf(a)<0&&(r[a]=e[a]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var s=0,a=Object.getOwnPropertySymbols(e);s<a.length;s++)t.indexOf(a[s])<0&&Object.prototype.propertyIsEnumerable.call(e,a[s])&&(r[a[s]]=e[a[s]]);return r};const $e=l.forwardRef((e,t)=>{var{title:r,titleId:a}=e,s=ze(e,["title","titleId"]);let i=L();return i=r?a||"title-"+i:void 0,l.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",width:"1em",height:"1em",fill:"none",viewBox:"0 0 24 24",focusable:!1,role:"img",ref:t,"aria-labelledby":i},s),r?l.createElement("title",{id:i},r):null,l.createElement("path",{fill:"currentColor",fillRule:"evenodd",d:"M16.53 7.03a.75.75 0 0 0-1.06-1.06l-5.5 5.5a.75.75 0 0 0 0 1.06l5.5 5.5a.75.75 0 1 0 1.06-1.06L11.56 12zm-4 0a.75.75 0 0 0-1.06-1.06l-5.5 5.5a.75.75 0 0 0 0 1.06l5.5 5.5a.75.75 0 1 0 1.06-1.06L7.56 12z",clipRule:"evenodd"}))});var Je=function(e,t){var r={};for(var a in e)Object.prototype.hasOwnProperty.call(e,a)&&t.indexOf(a)<0&&(r[a]=e[a]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var s=0,a=Object.getOwnPropertySymbols(e);s<a.length;s++)t.indexOf(a[s])<0&&Object.prototype.propertyIsEnumerable.call(e,a[s])&&(r[a[s]]=e[a[s]]);return r};const Ze=l.forwardRef((e,t)=>{var{title:r,titleId:a}=e,s=Je(e,["title","titleId"]);let i=L();return i=r?a||"title-"+i:void 0,l.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",width:"1em",height:"1em",fill:"none",viewBox:"0 0 24 24",focusable:!1,role:"img",ref:t,"aria-labelledby":i},s),r?l.createElement("title",{id:i},r):null,l.createElement("path",{fill:"currentColor",fillRule:"evenodd",d:"M8.53 5.97a.75.75 0 0 0-1.06 1.06L12.44 12l-4.97 4.97a.75.75 0 1 0 1.06 1.06l5.5-5.5a.75.75 0 0 0 0-1.06zm4 0a.75.75 0 1 0-1.06 1.06L16.44 12l-4.97 4.97a.75.75 0 1 0 1.06 1.06l5.5-5.5a.75.75 0 0 0 0-1.06z",clipRule:"evenodd"}))});var h=(e=>(e.INNVILGET="INNV",e.DELVISTINNVILGET="DELV",e.AVVIST="AVVIST",e))(h||{});const Qe="_checkboxCol_jtrmq_1",We="_linkCol_jtrmq_5",Xe="_imageInn_jtrmq_9",en="_imageSend_jtrmq_16",nn="_imageIntern_jtrmq_22",rn="_noDocuments_jtrmq_29",an="_hidden_jtrmq_35",tn="_table_jtrmq_39",f={checkboxCol:Qe,linkCol:We,imageInn:Xe,imageSend:en,imageIntern:nn,noDocuments:rn,hidden:an,table:tn},sn=(e,t)=>e.kommunikasjonsretning===S.INN?n.jsx(Ze,{title:t.formatMessage({id:"DocumentListInnsyn.Motta"}),className:f.imageInn}):e.kommunikasjonsretning===S.UT?n.jsx($e,{title:t.formatMessage({id:"DocumentListInnsyn.Send"}),className:f.imageSend}):n.jsx(Ye,{title:t.formatMessage({id:"DocumentListInnsyn.Intern"}),className:f.imageIntern}),ln=()=>n.jsx("span",{className:f.hidden,children:"-"}),le=({documents:e,saksNr:t,readOnly:r=!1})=>{const a=B();if(e.length===0)return n.jsx(w,{size:"small",className:f.noDocuments,children:n.jsx(g,{id:"DocumentListInnsyn.NoDocuments"})});const s=r?["DocumentListInnsyn.DocumentType"]:["DocumentListInnsyn.CheckBox","DocumentListInnsyn.Direction","DocumentListInnsyn.DocumentType","DocumentListInnsyn.DateTime"];return n.jsxs(n.Fragment,{children:[n.jsx(x,{size:"small",className:f.noDocuments,children:n.jsx(g,{id:"DocumentListInnsyn.VelgInnsynsDok"})}),n.jsx(W,{headerTextCodes:s,children:e.map(i=>{const u=sn(i,a),o=parseInt(i.dokumentId,10);return n.jsxs(X,{id:o,children:[n.jsx(c,{className:f.checkboxCol,children:n.jsx(Ke,{label:ln(),name:`dokument_${o}`,disabled:r})}),n.jsx(c,{hidden:r,children:u}),n.jsx(c,{className:f.linkCol,children:n.jsx("a",{href:se(t,i.journalpostId,i.dokumentId),className:"lenke lenke--frittstaende",target:"_blank",rel:"noopener noreferrer",children:i.tittel})}),n.jsx(c,{hidden:r,children:i.tidspunkt?n.jsx(he,{dateTimeString:i.tidspunkt}):n.jsx(w,{size:"small",children:n.jsx(g,{id:"DocumentListInnsyn.IProduksjon"})})})]},o)})})]})};le.__docgenInfo={description:`DocumentListInnsyn
+import{j as e}from"./jsx-runtime-CLpGMVip.js";import{r as m}from"./index-B5OHeJSP.js";import{B as he}from"./BehandlingContainer-GMForHQ5.js";import{A as je,F as Ae,O as Te,a as ce,b as Re,c as we,d as Be,V as Se}from"./OmsorgVilkarProsessIndex-ss8A0S4s.js";import{V as P,I as K,O as N,M as Ee,a as Pe,S as ee,s as Ve,b as Oe,c as Fe,Y as Ke,d as Ne,e as Ie,f as De}from"./VedtakProsessIndex-B2I4Y1l7.js";import{V as _e}from"./VergeFaktaInitPanel-BzZo3sj5.js";import{H as M,E,L as V,P as ne,h as S,B as Le}from"./withQueryClient-DTem1OUy.js";import{A as i}from"./aksjonspunktCodes-BuBbCIxs.js";import"./aktivitetStatus-02fOJoqz.js";import{V as h}from"./BehandlingHenlagtPanel-Po6gVo0n.js";import{P as x}from"./skjermlenkeCodes-1SvLTuBb.js";import{s as O,a as c,o as b,M as q,V as Me,h as B,T as C,g as xe,n as re,Z as _,C as J,A as Ue,Q as He}from"./index.es-MxAMIJPu.js";import{u as ae,r as te,H as Ge,e as se,k as Ye,o as Ce,i as Je,Z as $e}from"./index.es-jVWbk6xM.js";import{O as We,P as U,a as ze}from"./OverstyringPanel-DXjMzVqd.js";import{r as Qe,B as A,a as Ze}from"./behandlingContextApi-dQIrUR8M.js";import{P as H,u as Xe}from"./ProsessDefaultInitPanel-DO5l7dPw.js";import{F as ie}from"./fagsakYtelseType-CyKFp0BE.js";import{A as F}from"./RisikoklassifiseringIndex-DAHosNOY.js";import{h as en}from"./moment-C5S46NFB.js";import{K as nn}from"./alleKodeverk-Ck9zwXaq.js";import{g as rn}from"./kodeverkUtils-DLZgokMR.js";import{i as an}from"./behandlingResultatType-DHbqkXMl.js";import{F as tn}from"./FatterVedtakStatusModal-CI7lArWk.js";import{I as sn}from"./IverksetterVedtakStatusModal-COb0icoY.js";import"./_commonjsHelpers-Cpj98o6Y.js";import"./index.es-wzSzT7V5.js";import"./useFormField-r8KZLR-A.js";import"./Link-C9M13KeJ.js";import"./Tooltip-BEOONAwd.js";import"./index-sT6466e8.js";import"./index-DYwZEShM.js";import"./Popover-BOGWOK3_.js";import"./VisittkortSakIndex-COWBnVWl.js";import"./dayjs.min-CJilavqB.js";import"./Tag-Yzdm1MSp.js";import"./Spacer-CXEI7Xul.js";import"./landkoder-DKkdEPDT.js";import"./venteArsakType-LWklXP3j.js";import"./MeldingIndex-Bd0_cEnR.js";import"./initFetch-DK4cSTvy.js";import"./decorators-DIzpaN6C.js";import"./useMutation-BTY4BAX6.js";import"./UkjentAdresseMeldingIndex-D5CGVu9W.js";import"./useKodeverk-DQG-UHsp.js";import"./useVisForhandsvisningAvMelding-pMH3XiJA.js";import"./SupportHeader-iAZRHVc6.js";import"./useRestApiRunner-PSWluHZJ.js";import"./useRestApiErrorDispatcher-Du6ohLLd.js";import"./ErrorBoundary-DovJ2PZA.js";import"./IngenBehandlingValgtPanel-Dnr5nc8M.js";import"./SettPaVentReadOnlyModal-c3_jdNf4.js";import"./BehandlingMenuIndex-C7aISpSy.js";import"./behandlingArsakType-CTXggz2Y.js";import"./FagsakData-CGqXEUml.js";import"./paths-BHckLD26.js";import"./validerApKodeOgHentApEnum-BJOxEDqe.js";import"./Box-CkfZpuRW.js";import"./Pencil-ToYT74sU.js";import"./bind-oYjWB_aQ.js";import"./TotrinnskontrollIndex-BSB5vbEG.js";import"./Table-RfktipKk.js";import"./Kjonnkode-C-fkzSiP.js";import"./FagsakIndex-DtX9vkTD.js";import"./useTrackRouteParam-Bh9psqeZ.js";import"./iframe-Cykfr6h9.js";import"./BehandlingSupportIndex-D-lZ2V9Q.js";import"./DokumentIndex-WhPHokyB.js";import"./eksterneLenker-DcE6CUbm.js";import"./Checkbox-Dd-5zRqC.js";import"./StarFill-DXI4dcSy.js";import"./HistorikkIndex-B5LJAxRA.js";import"./FagsakProfileIndex-J2SlYpwz.js";const ln="_divider_5hs62_1",on="_text_5hs62_6",un="_bredde_5hs62_10",dn="_firstColWidth_5hs62_14",gn="_dividerWidth_5hs62_18",R={divider:ln,text:on,bredde:un,firstColWidth:dn,dividerWidth:gn},kn=Ce(1),mn=Je(5e5),yn=(n,r)=>{const t=n.find(a=>a.definisjon===i.OVERSTYR_BEREGNING);return{begrunnelse:xe(t&&t.begrunnelse?t.begrunnelse:""),beregnetTilkjentYtelse:r==null?void 0:r.beregnetTilkjentYtelse}},pn=n=>({kode:i.OVERSTYR_BEREGNING,beregnetTilkjentYtelse:n.beregnetTilkjentYtelse,begrunnelse:n.begrunnelse}),le=({overrideReadOnly:n,kanOverstyre:r,toggleOverstyring:t,behandlingResultatstruktur:a={beregnetTilkjentYtelse:0,antallBarn:0,satsVerdi:0},aksjonspunkter:s,erIkkeGodkjentAvBeslutter:o,formData:l,setFormData:u,submitCallback:g})=>{const y=ae({defaultValues:l||yn(s,a)}),[k,f]=m.useState(!1),w=m.useCallback(()=>{f(!1),y.reset(),t(p=>p.filter(v=>v!==i.OVERSTYR_BEREGNING))},[]),d=m.useCallback(()=>{f(!0),t(p=>[...p,i.OVERSTYR_BEREGNING])},[]),j=s.some(p=>p.definisjon===i.OVERSTYR_BEREGNING)||!1;return e.jsxs(te,{formMethods:y,onSubmit:p=>g(pn(p)),setDataOnUnmount:u,children:[e.jsx(O,{children:e.jsxs(c,{children:[e.jsx(b,{children:e.jsx(M,{size:"small",children:e.jsx(q,{id:"BeregningEngangsstonadForm.Beregning"})})}),(r||n)&&e.jsx(b,{children:e.jsx(Me,{onClick:d,erOverstyrt:k||!r})})]})}),e.jsx(B,{eightPx:!0}),e.jsxs(O,{children:[e.jsxs(c,{children:[e.jsx(b,{className:R.firstColWidth,children:e.jsx(E,{children:e.jsx(q,{id:"BeregningEngangsstonadForm.Sats"})})}),e.jsx(b,{children:e.jsx(V,{size:"small",children:a!=null&&a.satsVerdi?C(a.satsVerdi):"-"})})]}),e.jsxs(c,{children:[e.jsx(b,{className:R.firstColWidth,children:e.jsx(E,{children:e.jsx(q,{id:"BeregningEngangsstonadForm.AntallBarn"})})}),e.jsx(b,{children:e.jsx(V,{size:"small",children:a!=null&&a.antallBarn?a.antallBarn:"-"})})]}),!k&&!j&&e.jsxs(e.Fragment,{children:[e.jsx(c,{children:e.jsx(b,{className:R.dividerWidth,children:e.jsx("hr",{className:R.divider})})}),e.jsxs(c,{children:[e.jsx(b,{className:R.firstColWidth,children:e.jsx(E,{children:e.jsx(q,{id:"BeregningEngangsstonadForm.BeregnetEngangsstonad"})})}),e.jsx(b,{children:e.jsx(V,{size:"small",children:a!=null&&a.beregnetTilkjentYtelse?C(a.beregnetTilkjentYtelse):"-"})})]})]})]}),(k||j)&&e.jsxs(e.Fragment,{children:[e.jsx(B,{sixteenPx:!0}),e.jsxs(We,{erOverstyrt:k,isSolvable:!0,erVilkarOk:!0,hasAksjonspunkt:j,overrideReadOnly:n,isSubmitting:y.formState.isSubmitting,isPristine:!y.formState.isDirty,toggleAv:w,erIkkeGodkjentAvBeslutter:o,children:[e.jsx(O,{children:e.jsxs(c,{children:[e.jsx(b,{children:e.jsx(V,{size:"small",className:!k||n?"":R.text,children:e.jsx(q,{id:"BeregningEngangsstonadForm.BeregnetEngangsstonad"})})}),e.jsx(b,{children:e.jsx(Ge,{name:"beregnetTilkjentYtelse",parse:p=>{const v=parseInt(p,10);return Number.isNaN(v)?p:v},className:R.bredde,validate:[se,Ye,kn,mn],readOnly:!k||n})}),e.jsx(b,{children:e.jsx(V,{size:"small",className:!k||n?"":R.text,children:e.jsx(q,{id:"BeregningEngangsstonadForm.Kroner"})})})]})}),e.jsx(B,{sixteenPx:!0})]})]})]})};le.__docgenInfo={description:`BeregningsresultatEngangsstonadForm
 
-Presentasjonskomponent. Viser dokumenter i en liste med Checkbox for å velge til innsyn. Tar også inn en callback-funksjon som blir
-trigget når saksbehandler velger et dokument. Finnes ingen dokumenter blir det kun vist en label
-som viser at ingen dokumenter finnes på fagsak.`,methods:[],displayName:"DocumentListInnsyn",props:{saksNr:{required:!0,tsType:{name:"string"},description:""},documents:{required:!0,tsType:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  journalpostId: string;
-  dokumentId: string;
-  behandlingUuidList?: string[];
-  tittel?: string;
-  tidspunkt?: string;
-  kommunikasjonsretning: string;
-  gjelderFor?: string;
-}`,signature:{properties:[{key:"journalpostId",value:{name:"string",required:!0}},{key:"dokumentId",value:{name:"string",required:!0}},{key:"behandlingUuidList",value:{name:"Array",elements:[{name:"string"}],raw:"string[]",required:!1}},{key:"tittel",value:{name:"string",required:!1}},{key:"tidspunkt",value:{name:"string",required:!1}},{key:"kommunikasjonsretning",value:{name:"string",required:!0}},{key:"gjelderFor",value:{name:"string",required:!1}}]}}],raw:`Readonly<{
-  journalpostId: string;
-  dokumentId: string;
-  behandlingUuidList?: string[];
-  tittel?: string;
-  tidspunkt?: string;
-  kommunikasjonsretning: string;
-  gjelderFor?: string;
-}>`}],raw:"Dokument[]"},description:""},readOnly:{required:!1,tsType:{name:"boolean"},description:"",defaultValue:{value:"false",computed:!1}}}};const ue=({vedtaksdokumenter:e,behandlingTypes:t})=>{const[r,a]=l.useState(!1),s=l.useCallback(i=>{a(!r),i.preventDefault()},[r]);return e.length===0?n.jsx(g,{id:"DocumentListInnsyn.Vedtaksdokumentasjon",values:{numberOfDocuments:0}}):n.jsxs(n.Fragment,{children:[n.jsxs(O,{href:"#",onClick:s,children:[n.jsx(g,{id:"DocumentListInnsyn.Vedtaksdokumentasjon",values:{numberOfDocuments:e.length}}),r?n.jsx(je,{}):n.jsx(Te,{})]}),r&&n.jsxs(n.Fragment,{children:[n.jsx(d,{fourPx:!0}),n.jsx(Ae,{children:e.map(i=>{var u;return n.jsxs(ce,{children:[n.jsx(_,{children:n.jsx(we,{dateString:i.opprettetDato})}),n.jsx(_,{children:n.jsx(O,{href:Me(i.behandlingUuid),target:"_blank",children:((u=t.find(o=>o.kode===i.tittel))==null?void 0:u.navn)||"-"})})]},i.behandlingUuid)})})]})]})};ue.__docgenInfo={description:"",methods:[],displayName:"VedtakDocuments",props:{behandlingTypes:{required:!0,tsType:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  kode: string;
-  navn: string;
-  kodeverk: string;
-}`,signature:{properties:[{key:"kode",value:{name:"string",required:!0}},{key:"navn",value:{name:"string",required:!0}},{key:"kodeverk",value:{name:"string",required:!0}}]}}],raw:`Readonly<{
-  kode: string;
-  navn: string;
-  kodeverk: string;
-}>`}],raw:"KodeverkMedNavn[]"},description:""},vedtaksdokumenter:{required:!0,tsType:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  behandlingUuid: string;
-  tittel: string;
-  opprettetDato: string;
-}`,signature:{properties:[{key:"behandlingUuid",value:{name:"string",required:!0}},{key:"tittel",value:{name:"string",required:!0}},{key:"opprettetDato",value:{name:"string",required:!0}}]}}],raw:`Readonly<{
-  behandlingUuid: string;
-  tittel: string;
-  opprettetDato: string;
-}>`}],raw:"InnsynVedtaksdokument[]"},description:""}}};const un=[],on=e=>e.reduce((t,r)=>({[`dokument_${r.dokumentId}`]:r.fikkInnsyn,...t}),{}),gn=(e,t,r,a,s)=>({mottattDato:e,innsynResultatType:t||void 0,fristDato:s||xe().add(3,"days").format(Ie),sattPaVent:a[0].status===M.OPPRETTET?void 0:!!s,...ae.buildInitialValues(a),...on(r||[])}),dn=(e,t)=>t.map(r=>({dokumentId:r.dokumentId,journalpostId:r.journalpostId,fikkInnsyn:!!e[`dokument_${r.dokumentId}`]})),kn=e=>Object.keys(e).filter(t=>!t.startsWith("dokument_")).reduce((t,r)=>({...t,[r]:e[r]}),{}),mn=(e,t)=>({kode:A.VURDER_INNSYN,innsynDokumenter:dn(e,t),...kn(e)}),yn=e=>{const t=e.filter(r=>r.kommunikasjonsretning===S.INN);return e.forEach(r=>!t.some(a=>a.dokumentId===r.dokumentId)&&t.push(r)),t},oe=({readOnly:e,readOnlySubmitButton:t,innsynMottattDato:r,alleKodeverk:a,vedtaksdokumentasjon:s,innsynResultatType:i,fristBehandlingPåVent:u,innsynDokumenter:o,alleDokumenter:k=[],aksjonspunkter:m,submitCallback:j,saksNr:v,formData:F,setFormData:E})=>{const p=B(),K=l.useMemo(()=>gn(r,i,o,m,u),[r,i,u,o,m]),T=ne({defaultValues:F||K}),D=l.useMemo(()=>yn(k),[k]),I=l.useMemo(()=>a[z.INNSYN_RESULTAT_TYPE].filter(q=>q.kode!=="-").sort((q,ve)=>q.navn.localeCompare(ve.navn)).reverse(),[a]),b=m[0].status===M.OPPRETTET,y=T.watch("innsynResultatType"),U=T.watch("sattPaVent");return n.jsxs(re,{formMethods:T,onSubmit:q=>j(mn(q,k)),setDataOnUnmount:E,children:[n.jsx(x,{size:"small",children:n.jsx(g,{id:"InnsynForm.Innsynsbehandling"})}),n.jsx(d,{twentyPx:!0}),b&&n.jsx(Re,{children:n.jsx(g,{id:"InnsynForm.VurderKravetOmInnsyn"})}),n.jsx(d,{twentyPx:!0}),n.jsx(G,{name:"mottattDato",label:p.formatMessage({id:"InnsynForm.DatoMottattKrav"}),isReadOnly:e,isEdited:!b,validate:[V,C]}),n.jsx(d,{sixteenPx:!0}),n.jsx(ue,{vedtaksdokumenter:s||un,behandlingTypes:a[z.BEHANDLING_TYPE]}),n.jsx(d,{twentyPx:!0}),n.jsx(le,{saksNr:v,documents:D,readOnly:e}),n.jsx(ae,{readOnly:e}),n.jsx(d,{sixteenPx:!0}),n.jsx(Y,{name:"innsynResultatType",label:n.jsx(g,{id:"InnsynForm.Resultat"}),validate:[V],isReadOnly:e,isHorizontal:!0,isEdited:!b,radios:I.map(q=>({value:q.kode,label:q.navn}))}),(y===h.INNVILGET||y===h.DELVISTINNVILGET)&&n.jsxs(n.Fragment,{children:[n.jsx(d,{eightPx:!0}),n.jsxs(Be,{alignOffset:y===h.INNVILGET?28:176,children:[n.jsx(Y,{name:"sattPaVent",label:n.jsx(g,{id:"InnsynForm.VelgVidereAksjon"}),validate:[V],isReadOnly:e,isEdited:!b,isHorizontal:!0,isTrueOrFalseSelection:!0,radios:[{value:"true",label:p.formatMessage({id:"InnsynForm.SettBehandlingPåVent"})},{value:"false",label:p.formatMessage({id:"InnsynForm.ForeslåOgFatteVedtak"})}]}),U&&n.jsxs(n.Fragment,{children:[n.jsx(d,{eightPx:!0}),n.jsx(G,{name:"fristDato",label:p.formatMessage({id:"InnsynForm.FristDato"}),isReadOnly:e,isEdited:!b,validate:[V,C]})]})]})]}),n.jsx(d,{sixteenPx:!0}),n.jsx(te,{isReadOnly:e,isSubmittable:!t,isSubmitting:T.formState.isSubmitting,isDirty:T.formState.isDirty,text:U?p.formatMessage({id:"SubmitButton.SettPåVent"}):void 0})]})};oe.__docgenInfo={description:`InnsynForm
-
-Viser panelet som håndterer avklaring av innsyn.`,methods:[],displayName:"InnsynForm",props:{saksNr:{required:!0,tsType:{name:"string"},description:""},fristBehandlingPåVent:{required:!1,tsType:{name:"string"},description:""},innsynMottattDato:{required:!0,tsType:{name:"string"},description:""},innsynDokumenter:{required:!0,tsType:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  journalpostId: string;
-  dokumentId: string;
-  fikkInnsyn: boolean;
-}`,signature:{properties:[{key:"journalpostId",value:{name:"string",required:!0}},{key:"dokumentId",value:{name:"string",required:!0}},{key:"fikkInnsyn",value:{name:"boolean",required:!0}}]}}],raw:`Readonly<{
-  journalpostId: string;
-  dokumentId: string;
-  fikkInnsyn: boolean;
-}>`}],raw:"InnsynDokument[]"},description:""},innsynResultatType:{required:!0,tsType:{name:"string"},description:""},vedtaksdokumentasjon:{required:!0,tsType:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  behandlingUuid: string;
-  tittel: string;
-  opprettetDato: string;
-}`,signature:{properties:[{key:"behandlingUuid",value:{name:"string",required:!0}},{key:"tittel",value:{name:"string",required:!0}},{key:"opprettetDato",value:{name:"string",required:!0}}]}}],raw:`Readonly<{
-  behandlingUuid: string;
-  tittel: string;
-  opprettetDato: string;
-}>`}],raw:"InnsynVedtaksdokument[]"},description:""},alleDokumenter:{required:!1,tsType:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  journalpostId: string;
-  dokumentId: string;
-  behandlingUuidList?: string[];
-  tittel?: string;
-  tidspunkt?: string;
-  kommunikasjonsretning: string;
-  gjelderFor?: string;
-}`,signature:{properties:[{key:"journalpostId",value:{name:"string",required:!0}},{key:"dokumentId",value:{name:"string",required:!0}},{key:"behandlingUuidList",value:{name:"Array",elements:[{name:"string"}],raw:"string[]",required:!1}},{key:"tittel",value:{name:"string",required:!1}},{key:"tidspunkt",value:{name:"string",required:!1}},{key:"kommunikasjonsretning",value:{name:"string",required:!0}},{key:"gjelderFor",value:{name:"string",required:!1}}]}}],raw:`Readonly<{
-  journalpostId: string;
-  dokumentId: string;
-  behandlingUuidList?: string[];
-  tittel?: string;
-  tidspunkt?: string;
-  kommunikasjonsretning: string;
-  gjelderFor?: string;
-}>`}],raw:"Dokument[]"},description:"",defaultValue:{value:"[]",computed:!1}},aksjonspunkter:{required:!0,tsType:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+Viser beregnet engangsstønad. Resultatet kan overstyres av Nav-ansatt med overstyr-rettighet.`,methods:[],displayName:"BeregningsresultatEngangsstonadForm",props:{overrideReadOnly:{required:!0,tsType:{name:"boolean"},description:""},kanOverstyre:{required:!0,tsType:{name:"boolean"},description:""},toggleOverstyring:{required:!0,tsType:{name:"signature",type:"function",raw:"(fn: (oldArray: []) => void) => void",signature:{arguments:[{type:{name:"signature",type:"function",raw:"(oldArray: []) => void",signature:{arguments:[{type:{name:"tuple",raw:"[]",elements:[]},name:"oldArray"}],return:{name:"void"}}},name:"fn"}],return:{name:"void"}}},description:""},behandlingResultatstruktur:{required:!1,tsType:{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  beregnetTilkjentYtelse: number;
+  satsVerdi: number;
+  antallBarn: number;
+}`,signature:{properties:[{key:"beregnetTilkjentYtelse",value:{name:"number",required:!0}},{key:"satsVerdi",value:{name:"number",required:!0}},{key:"antallBarn",value:{name:"number",required:!0}}]}}],raw:`Readonly<{
+  beregnetTilkjentYtelse: number;
+  satsVerdi: number;
+  antallBarn: number;
+}>`},description:"",defaultValue:{value:`{
+  beregnetTilkjentYtelse: 0,
+  antallBarn: 0,
+  satsVerdi: 0,
+}`,computed:!1}},aksjonspunkter:{required:!0,tsType:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
   definisjon: string;
   status: string;
   begrunnelse?: string;
@@ -94,120 +38,30 @@ Viser panelet som håndterer avklaring av innsyn.`,methods:[],displayName:"Innsy
   kanLoses: boolean;
   endretAv?: string;
   endretTidspunkt?: string;
-}>`}],raw:"Aksjonspunkt[]"},description:""},alleKodeverk:{required:!0,tsType:{name:"intersection",raw:"Omit<T, keyof R> & R",elements:[{name:"Omit",elements:[{name:"Record",elements:[{name:"KodeverkType"},{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  kode: string;
-  navn: string;
-  kodeverk: string;
-}`,signature:{properties:[{key:"kode",value:{name:"string",required:!0}},{key:"navn",value:{name:"string",required:!0}},{key:"kodeverk",value:{name:"string",required:!0}}]}}],raw:`Readonly<{
-  kode: string;
-  navn: string;
-  kodeverk: string;
-}>`}],raw:"KodeverkMedNavn[]"}],raw:"Record<KodeverkType, KodeverkMedNavn[]>"},{name:"signature",type:"object",raw:`{
-  Avslagsårsak: Avslagsårsak;
-}`,signature:{properties:[{key:"Avslagsårsak",value:{name:"Record",elements:[{name:"VilkarType"},{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  kode: string;
-  navn: string;
-  kodeverk: string;
-}`,signature:{properties:[{key:"kode",value:{name:"string",required:!0}},{key:"navn",value:{name:"string",required:!0}},{key:"kodeverk",value:{name:"string",required:!0}}]}}],raw:`Readonly<{
-  kode: string;
-  navn: string;
-  kodeverk: string;
-}>`}],raw:"KodeverkMedNavn[]"}],raw:"Record<VilkarType, KodeverkMedNavn[]>",required:!0}}]}}],raw:"Omit<T, keyof R>"},{name:"signature",type:"object",raw:`{
-  Avslagsårsak: Avslagsårsak;
-}`,signature:{properties:[{key:"Avslagsårsak",value:{name:"Record",elements:[{name:"VilkarType"},{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  kode: string;
-  navn: string;
-  kodeverk: string;
-}`,signature:{properties:[{key:"kode",value:{name:"string",required:!0}},{key:"navn",value:{name:"string",required:!0}},{key:"kodeverk",value:{name:"string",required:!0}}]}}],raw:`Readonly<{
-  kode: string;
-  navn: string;
-  kodeverk: string;
-}>`}],raw:"KodeverkMedNavn[]"}],raw:"Record<VilkarType, KodeverkMedNavn[]>",required:!0}}]}}]},description:""},submitCallback:{required:!0,tsType:{name:"signature",type:"function",raw:"(data: VurderInnsynAp) => Promise<void>",signature:{arguments:[{type:{name:"intersection",raw:`{
-  innsynResultatType: string;
-  mottattDato: string;
-  innsynDokumenter: {
-    fikkInnsyn?: boolean;
-    journalpostId?: string;
-    dokumentId?: string;
-  }[];
-  sattPaVent?: boolean;
-  fristDato?: string;
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_INNSYN>`,elements:[{name:"signature",type:"object",raw:`{
-  innsynResultatType: string;
-  mottattDato: string;
-  innsynDokumenter: {
-    fikkInnsyn?: boolean;
-    journalpostId?: string;
-    dokumentId?: string;
-  }[];
-  sattPaVent?: boolean;
-  fristDato?: string;
-}`,signature:{properties:[{key:"innsynResultatType",value:{name:"string",required:!0}},{key:"mottattDato",value:{name:"string",required:!0}},{key:"innsynDokumenter",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
-  fikkInnsyn?: boolean;
-  journalpostId?: string;
-  dokumentId?: string;
-}`,signature:{properties:[{key:"fikkInnsyn",value:{name:"boolean",required:!1}},{key:"journalpostId",value:{name:"string",required:!1}},{key:"dokumentId",value:{name:"string",required:!1}}]}}],raw:`{
-  fikkInnsyn?: boolean;
-  journalpostId?: string;
-  dokumentId?: string;
-}[]`,required:!0}},{key:"sattPaVent",value:{name:"boolean",required:!1}},{key:"fristDato",value:{name:"string",required:!1}}]}},{name:"signature",type:"object",raw:`{
+}>`}],raw:"Aksjonspunkt[]"},description:""},submitCallback:{required:!0,tsType:{name:"signature",type:"function",raw:"(data: OverstyringBeregningAp) => Promise<void>",signature:{arguments:[{type:{name:"intersection",raw:`{
+  beregnetTilkjentYtelse: number;
+} & AksjonspunktTilBekreftelse<AksjonspunktKode.OVERSTYR_BEREGNING>`,elements:[{name:"signature",type:"object",raw:`{
+  beregnetTilkjentYtelse: number;
+}`,signature:{properties:[{key:"beregnetTilkjentYtelse",value:{name:"number",required:!0}}]}},{name:"signature",type:"object",raw:`{
   kode: T;
   begrunnelse?: string;
-}`,signature:{properties:[{key:"kode",value:{name:"unknown",required:!0}},{key:"begrunnelse",value:{name:"string",required:!1}}]}}]},name:"data"}],return:{name:"Promise",elements:[{name:"void"}],raw:"Promise<void>"}}},description:""},readOnly:{required:!0,tsType:{name:"boolean"},description:""},readOnlySubmitButton:{required:!0,tsType:{name:"boolean"},description:""},formData:{required:!1,tsType:{name:"signature",type:"object",raw:`{
-  mottattDato: string;
-  innsynResultatType?: string;
-  fristDato?: string;
-  sattPaVent?: boolean;
+}`,signature:{properties:[{key:"kode",value:{name:"unknown",required:!0}},{key:"begrunnelse",value:{name:"string",required:!1}}]}}]},name:"data"}],return:{name:"Promise",elements:[{name:"void"}],raw:"Promise<void>"}}},description:""},erIkkeGodkjentAvBeslutter:{required:!0,tsType:{name:"boolean"},description:""},formData:{required:!1,tsType:{name:"signature",type:"object",raw:`{
+  beregnetTilkjentYtelse?: number;
   begrunnelse?: string;
-}`,signature:{properties:[{key:"mottattDato",value:{name:"string",required:!0}},{key:"innsynResultatType",value:{name:"string",required:!1}},{key:"fristDato",value:{name:"string",required:!1}},{key:"sattPaVent",value:{name:"boolean",required:!1}},{key:"begrunnelse",value:{name:"string",required:!1}}]}},description:""},setFormData:{required:!0,tsType:{name:"signature",type:"function",raw:"(data: FormValues) => void",signature:{arguments:[{type:{name:"signature",type:"object",raw:`{
-  mottattDato: string;
-  innsynResultatType?: string;
-  fristDato?: string;
-  sattPaVent?: boolean;
+}`,signature:{properties:[{key:"beregnetTilkjentYtelse",value:{name:"number",required:!1}},{key:"begrunnelse",value:{name:"string",required:!1}}]}},description:""},setFormData:{required:!0,tsType:{name:"signature",type:"function",raw:"(data: FormValues) => void",signature:{arguments:[{type:{name:"signature",type:"object",raw:`{
+  beregnetTilkjentYtelse?: number;
   begrunnelse?: string;
-}`,signature:{properties:[{key:"mottattDato",value:{name:"string",required:!0}},{key:"innsynResultatType",value:{name:"string",required:!1}},{key:"fristDato",value:{name:"string",required:!1}},{key:"sattPaVent",value:{name:"boolean",required:!1}},{key:"begrunnelse",value:{name:"string",required:!1}}]}},name:"data"}],return:{name:"void"}}},description:""}}};const pn={"InnsynForm.Innsynsbehandling":"Innsynsbehandling","InnsynForm.VurderKravetOmInnsyn":"Følg manuelle rutiner for innsynsbehandling","InnsynForm.DatoMottattKrav":"Dato for mottatt krav om innsyn","InnsynForm.Resultat":"Resultat","InnsynForm.SettBehandlingPåVent":"Sett behandling på vent i påvente av skanning","InnsynForm.ForeslåOgFatteVedtak":"Foreslå og fatte vedtak","InnsynForm.VelgVidereAksjon":"Velg videre aksjon","InnsynForm.FristDato":"Behandling blir satt på vent med frist","DocumentListInnsyn.Direction":"Inn/ut","DocumentListInnsyn.DocumentType":"Dokument","DocumentListInnsyn.DateTime":"Sendt/mottatt","DocumentListInnsyn.CheckBox":" ","DocumentListInnsyn.NoDocuments":"Det finnes ingen dokumenter på saken","DocumentListInnsyn.Motta":"Inn","DocumentListInnsyn.Send":"Ut","DocumentListInnsyn.Intern":"Intern","DocumentListInnsyn.IProduksjon":"I produksjon","DocumentListInnsyn.VelgInnsynsDok":"Velg innsynsdokumentasjon til søker","DocumentListInnsyn.Vedtaksdokumentasjon":"Vedtaksdokumentasjon på saken ({numberOfDocuments})","DocumentListInnsyn.Empty":" ","Malform.Beskrivelse":"Foretrukket språk","SubmitButton.SettPåVent":"Sett behandling på vent"},vn=ee(pn),ge=({behandling:e,innsyn:t,alleDokumenter:r,saksnummer:a,aksjonspunkter:s,submitCallback:i,isReadOnly:u,readOnlySubmitButton:o,alleKodeverk:k,formData:m,setFormData:j})=>n.jsxs(Z,{value:vn,children:[!t&&n.jsx(Ve,{}),t&&n.jsx(oe,{saksNr:a,fristBehandlingPåVent:e.fristBehandlingPåVent,innsynMottattDato:t.innsynMottattDato,innsynDokumenter:t.dokumenter,innsynResultatType:t.innsynResultatType,vedtaksdokumentasjon:t.vedtaksdokumentasjon,alleDokumenter:r,aksjonspunkter:s,alleKodeverk:k,submitCallback:i,readOnly:u,readOnlySubmitButton:o,formData:m,setFormData:j})]});ge.__docgenInfo={description:"",methods:[],displayName:"InnsynProsessIndex",props:{innsyn:{required:!1,tsType:{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  innsynMottattDato: string;
-  innsynResultatType: string;
-  vedtaksdokumentasjon: InnsynVedtaksdokument[];
-  dokumenter: InnsynDokument[];
-}`,signature:{properties:[{key:"innsynMottattDato",value:{name:"string",required:!0}},{key:"innsynResultatType",value:{name:"string",required:!0}},{key:"vedtaksdokumentasjon",value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  behandlingUuid: string;
-  tittel: string;
-  opprettetDato: string;
-}`,signature:{properties:[{key:"behandlingUuid",value:{name:"string",required:!0}},{key:"tittel",value:{name:"string",required:!0}},{key:"opprettetDato",value:{name:"string",required:!0}}]}}],raw:`Readonly<{
-  behandlingUuid: string;
-  tittel: string;
-  opprettetDato: string;
-}>`}],raw:"InnsynVedtaksdokument[]",required:!0}},{key:"dokumenter",value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  journalpostId: string;
-  dokumentId: string;
-  fikkInnsyn: boolean;
-}`,signature:{properties:[{key:"journalpostId",value:{name:"string",required:!0}},{key:"dokumentId",value:{name:"string",required:!0}},{key:"fikkInnsyn",value:{name:"boolean",required:!0}}]}}],raw:`Readonly<{
-  journalpostId: string;
-  dokumentId: string;
-  fikkInnsyn: boolean;
-}>`}],raw:"InnsynDokument[]",required:!0}}]}}],raw:`Readonly<{
-  innsynMottattDato: string;
-  innsynResultatType: string;
-  vedtaksdokumentasjon: InnsynVedtaksdokument[];
-  dokumenter: InnsynDokument[];
-}>`},description:""},alleDokumenter:{required:!1,tsType:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  journalpostId: string;
-  dokumentId: string;
-  behandlingUuidList?: string[];
-  tittel?: string;
-  tidspunkt?: string;
-  kommunikasjonsretning: string;
-  gjelderFor?: string;
-}`,signature:{properties:[{key:"journalpostId",value:{name:"string",required:!0}},{key:"dokumentId",value:{name:"string",required:!0}},{key:"behandlingUuidList",value:{name:"Array",elements:[{name:"string"}],raw:"string[]",required:!1}},{key:"tittel",value:{name:"string",required:!1}},{key:"tidspunkt",value:{name:"string",required:!1}},{key:"kommunikasjonsretning",value:{name:"string",required:!0}},{key:"gjelderFor",value:{name:"string",required:!1}}]}}],raw:`Readonly<{
-  journalpostId: string;
-  dokumentId: string;
-  behandlingUuidList?: string[];
-  tittel?: string;
-  tidspunkt?: string;
-  kommunikasjonsretning: string;
-  gjelderFor?: string;
-}>`}],raw:"Dokument[]"},description:""},saksnummer:{required:!0,tsType:{name:"string"},description:""},behandling:{required:!0,tsType:{name:"intersection",raw:`BehandlingFellesData &
+}`,signature:{properties:[{key:"beregnetTilkjentYtelse",value:{name:"number",required:!1}},{key:"begrunnelse",value:{name:"string",required:!1}}]}},name:"data"}],return:{name:"void"}}},description:""}}};const vn={"BeregningEngangsstonadForm.Beregning":"Beregning","BeregningEngangsstonadForm.BeregnetEngangsstonad":"Beregnet engangsstønad","BeregningEngangsstonadForm.AntallBarn":"Antall barn","BeregningEngangsstonadForm.Sats":"Sats","BeregningEngangsstonadForm.Kroner":"kr"},bn=re(vn),oe=({beregningresultatEngangsstonad:n,aksjonspunkter:r,overrideReadOnly:t,submitCallback:a,kanOverstyreAccess:s,toggleOverstyring:o,alleMerknaderFraBeslutter:l,formData:u,setFormData:g})=>e.jsx(ne,{value:bn,children:e.jsx(le,{behandlingResultatstruktur:n,aksjonspunkter:r,overrideReadOnly:t,submitCallback:a,kanOverstyre:s.isEnabled,toggleOverstyring:o,erIkkeGodkjentAvBeslutter:r.some(y=>{var k;return(k=l[y.definisjon])==null?void 0:k.notAccepted}),formData:u,setFormData:g})});oe.__docgenInfo={description:"",methods:[],displayName:"BeregningsresultatProsessIndex",props:{beregningresultatEngangsstonad:{required:!0,tsType:{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  beregnetTilkjentYtelse: number;
+  satsVerdi: number;
+  antallBarn: number;
+}`,signature:{properties:[{key:"beregnetTilkjentYtelse",value:{name:"number",required:!0}},{key:"satsVerdi",value:{name:"number",required:!0}},{key:"antallBarn",value:{name:"number",required:!0}}]}}],raw:`Readonly<{
+  beregnetTilkjentYtelse: number;
+  satsVerdi: number;
+  antallBarn: number;
+}>`},description:""},overrideReadOnly:{required:!0,tsType:{name:"boolean"},description:""},kanOverstyreAccess:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  isEnabled: boolean;
+}`,signature:{properties:[{key:"isEnabled",value:{name:"boolean",required:!0}}]}},description:""},toggleOverstyring:{required:!0,tsType:{name:"signature",type:"function",raw:"(fn: (oldArray: []) => void) => void",signature:{arguments:[{type:{name:"signature",type:"function",raw:"(oldArray: []) => void",signature:{arguments:[{type:{name:"tuple",raw:"[]",elements:[]},name:"oldArray"}],return:{name:"void"}}},name:"fn"}],return:{name:"void"}}},description:""},behandling:{required:!0,tsType:{name:"intersection",raw:`BehandlingFellesData &
 Readonly<{
   aksjonspunkt: Aksjonspunkt[];
   harSøknad: boolean;
@@ -913,90 +767,29 @@ Readonly<{
   avslagKode?: string;
   lovReferanse?: string;
   overstyrbar: boolean;
-}>`}],raw:"Vilkar[]"},description:""},isAksjonspunktOpen:{required:!0,tsType:{name:"boolean"},description:""},formData:{required:!1,tsType:{name:"any"},description:""},setFormData:{required:!0,tsType:{name:"signature",type:"function",raw:"(data: any) => void",signature:{arguments:[{type:{name:"any"},name:"data"}],return:{name:"void"}}},description:""}}};const bn=[A.VURDER_INNSYN],qn=e=>[{key:R.INNSYN_DOKUMENTER,params:{saksnummer:e}},{key:R.INNSYN}],de=({fagsak:e,...t})=>n.jsx(ie,{...t,panelEndepunkter:qn(e.saksnummer),aksjonspunktKoder:bn,prosessPanelKode:Q.BEHANDLE_INNSYN,prosessPanelMenyTekst:B().formatMessage({id:"Behandlingspunkt.Innsyn"}),skalPanelVisesIMeny:()=>!0,renderPanel:r=>n.jsx(ge,{saksnummer:e.saksnummer,alleDokumenter:r.innsynDokumenter,...r})});de.__docgenInfo={description:"",methods:[],displayName:"BehandleInnsynProsessStegInitPanel",props:{fagsak:{required:!0,tsType:{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  saksnummer: string;
-  fagsakYtelseType: string;
-  relasjonsRolleType: string;
-  status: string;
-  dekningsgrad: number;
-  aktørId: string;
-  harIkkeRegistrertAdresse: boolean;
-  sakSkalTilInfotrygd: boolean;
-  behandlingTypeKanOpprettes: BehandlingOppretting[];
-  bruker: FagsakPerson;
-  fagsakMarkeringer?: Saksmarkering[];
-  annenPart?: FagsakPerson;
-  familiehendelse?: FagsakHendelse;
-  annenpartBehandling: AnnenPartBehandling;
-  behandlinger: BehandlingAppKontekst[];
-  brukerManglerAdresse: boolean;
-  historikkinnslag: Historikkinnslag[];
-  kontrollResultat: Risikoklassifisering;
-  notater: Saksnotat[];
-}`,signature:{properties:[{key:"saksnummer",value:{name:"string",required:!0}},{key:"fagsakYtelseType",value:{name:"string",required:!0}},{key:"relasjonsRolleType",value:{name:"string",required:!0}},{key:"status",value:{name:"string",required:!0}},{key:"dekningsgrad",value:{name:"number",required:!0}},{key:"aktørId",value:{name:"string",required:!0}},{key:"harIkkeRegistrertAdresse",value:{name:"boolean",required:!0}},{key:"sakSkalTilInfotrygd",value:{name:"boolean",required:!0}},{key:"behandlingTypeKanOpprettes",value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  behandlingType: string;
-  kanOppretteBehandling: boolean;
-}`,signature:{properties:[{key:"behandlingType",value:{name:"string",required:!0}},{key:"kanOppretteBehandling",value:{name:"boolean",required:!0}}]}}],raw:`Readonly<{
-  behandlingType: string;
-  kanOppretteBehandling: boolean;
-}>`}],raw:"BehandlingOppretting[]",required:!0}},{key:"bruker",value:{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  navn: string;
-  fødselsnummer: string;
-  kjønn: string;
-  diskresjonskode?: string;
-  fødselsdato: string;
-  dødsdato?: string;
-  aktørId?: string;
-}`,signature:{properties:[{key:"navn",value:{name:"string",required:!0}},{key:"fødselsnummer",value:{name:"string",required:!0}},{key:"kjønn",value:{name:"string",required:!0}},{key:"diskresjonskode",value:{name:"string",required:!1}},{key:"fødselsdato",value:{name:"string",required:!0}},{key:"dødsdato",value:{name:"string",required:!1}},{key:"aktørId",value:{name:"string",required:!1}}]}}],raw:`Readonly<{
-  navn: string;
-  fødselsnummer: string;
-  kjønn: string;
-  diskresjonskode?: string;
-  fødselsdato: string;
-  dødsdato?: string;
-  aktørId?: string;
-}>`,required:!1}},{key:"fagsakMarkeringer",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
-  fagsakMarkering: string;
-  kortNavn?: string;
-}`,signature:{properties:[{key:"fagsakMarkering",value:{name:"string",required:!0}},{key:"kortNavn",value:{name:"string",required:!1}}]}}],raw:"Saksmarkering[]",required:!1}},{key:"annenPart",value:{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  navn: string;
-  fødselsnummer: string;
-  kjønn: string;
-  diskresjonskode?: string;
-  fødselsdato: string;
-  dødsdato?: string;
-  aktørId?: string;
-}`,signature:{properties:[{key:"navn",value:{name:"string",required:!0}},{key:"fødselsnummer",value:{name:"string",required:!0}},{key:"kjønn",value:{name:"string",required:!0}},{key:"diskresjonskode",value:{name:"string",required:!1}},{key:"fødselsdato",value:{name:"string",required:!0}},{key:"dødsdato",value:{name:"string",required:!1}},{key:"aktørId",value:{name:"string",required:!1}}]}}],raw:`Readonly<{
-  navn: string;
-  fødselsnummer: string;
-  kjønn: string;
-  diskresjonskode?: string;
-  fødselsdato: string;
-  dødsdato?: string;
-  aktørId?: string;
-}>`,required:!1}},{key:"familiehendelse",value:{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  hendelseType: string;
-  hendelseDato?: string;
-  antallBarn: number;
-  dødfødsel: boolean;
-}`,signature:{properties:[{key:"hendelseType",value:{name:"string",required:!0}},{key:"hendelseDato",value:{name:"string",required:!1}},{key:"antallBarn",value:{name:"number",required:!0}},{key:"dødfødsel",value:{name:"boolean",required:!0}}]}}],raw:`Readonly<{
-  hendelseType: string;
-  hendelseDato?: string;
-  antallBarn: number;
-  dødfødsel: boolean;
-}>`,required:!1}},{key:"annenpartBehandling",value:{name:"signature",type:"object",raw:`{
-  saksnummer: string;
-  behandlingUuid: string;
-  relasjonsRolleType: string;
-}`,signature:{properties:[{key:"saksnummer",value:{name:"string",required:!0}},{key:"behandlingUuid",value:{name:"string",required:!0}},{key:"relasjonsRolleType",value:{name:"string",required:!0}}]},required:!0}},{key:"behandlinger",value:{name:"Array",elements:[{name:"intersection",raw:`BehandlingFellesData &
+}>`}],raw:"Vilkar[]"},description:""},isAksjonspunktOpen:{required:!0,tsType:{name:"boolean"},description:""},formData:{required:!1,tsType:{name:"any"},description:""},setFormData:{required:!0,tsType:{name:"signature",type:"function",raw:"(data: any) => void",signature:{arguments:[{type:{name:"any"},name:"data"}],return:{name:"void"}}},description:""}}};const qn=[i.OVERSTYR_BEREGNING],fn=[A.BEREGNINGRESULTAT_ENGANGSSTONAD],ue=({rettigheter:n,...r})=>{const[t,a]=m.useState(!1),s=m.useCallback(()=>a(!t),[t]);return e.jsx(H,{...r,panelEndepunkter:fn,aksjonspunktKoder:qn,prosessPanelKode:x.BEREGNING,prosessPanelMenyTekst:S().formatMessage({id:"Behandlingspunkt.Beregning"}),skalPanelVisesIMeny:()=>!0,hentOverstyrtStatus:()=>Qe.hasPath(A.BEREGNINGRESULTAT_ENGANGSSTONAD.name)?h.OPPFYLT:h.IKKE_VURDERT,erOverstyrt:t,renderPanel:o=>e.jsx(oe,{overrideReadOnly:o.isReadOnly,kanOverstyreAccess:n.kanOverstyreAccess,toggleOverstyring:s,...o})})};ue.__docgenInfo={description:"",methods:[],displayName:"BeregningEsProsessStegInitPanel",props:{rettigheter:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  writeAccess: Aksess;
+  kanOverstyreAccess: Aksess;
+}`,signature:{properties:[{key:"writeAccess",value:{name:"signature",type:"object",raw:`{
+  employeeHasAccess: boolean;
+  isEnabled: boolean;
+}`,signature:{properties:[{key:"employeeHasAccess",value:{name:"boolean",required:!0}},{key:"isEnabled",value:{name:"boolean",required:!0}}]},required:!0}},{key:"kanOverstyreAccess",value:{name:"signature",type:"object",raw:`{
+  employeeHasAccess: boolean;
+  isEnabled: boolean;
+}`,signature:{properties:[{key:"employeeHasAccess",value:{name:"boolean",required:!0}},{key:"isEnabled",value:{name:"boolean",required:!0}}]},required:!0}}]}},description:""},behandling:{required:!0,tsType:{name:"intersection",raw:`BehandlingFellesData &
 Readonly<{
-  behandlingTillatteOperasjoner: BehandlingTillatteOperasjoner;
-  brevmaler: Brevmal[];
-  totrinnskontrollÅrsaker: TotrinnskontrollSkjermlenkeContext[];
-  totrinnskontrollReadonly: boolean;
-  risikoAksjonspunkt: Aksjonspunkt;
-  kontrollResultat: Risikoklassifisering;
-  ugunstAksjonspunkt: boolean;
+  aksjonspunkt: Aksjonspunkt[];
+  harSøknad: boolean;
+  harSattEndringsdato: boolean;
+  sjekkSimuleringResultat: boolean;
+  taskStatus?: {
+    message: string;
+    pending: boolean;
+    status: string;
+    readOnly: boolean;
+  };
+  vilkår: Vilkar[];
+  alleUttaksperioderAvslått: boolean;
 }>`,elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
   versjon: number;
   uuid: string;
@@ -1110,115 +903,19 @@ Readonly<{
   førsteÅrsak?: BehandlingÅrsak;
   fristBehandlingPaaVent?: string;
 }>`},{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  behandlingTillatteOperasjoner: BehandlingTillatteOperasjoner;
-  brevmaler: Brevmal[];
-  totrinnskontrollÅrsaker: TotrinnskontrollSkjermlenkeContext[];
-  totrinnskontrollReadonly: boolean;
-  risikoAksjonspunkt: Aksjonspunkt;
-  kontrollResultat: Risikoklassifisering;
-  ugunstAksjonspunkt: boolean;
-}`,signature:{properties:[{key:"behandlingTillatteOperasjoner",value:{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  behandlingFraBeslutter: boolean;
-  behandlingKanSendeMelding: boolean;
-  behandlingTilGodkjenning: boolean;
-  behandlingKanBytteEnhet: boolean;
-  behandlingKanHenlegges: boolean;
-  behandlingKanGjenopptas: boolean;
-  behandlingKanOpnesForEndringer: boolean;
-  behandlingKanSettesPaVent: boolean;
-  vergeBehandlingsmeny: VergeBehandlingmenyValg;
-}`,signature:{properties:[{key:"behandlingFraBeslutter",value:{name:"boolean",required:!0}},{key:"behandlingKanSendeMelding",value:{name:"boolean",required:!0}},{key:"behandlingTilGodkjenning",value:{name:"boolean",required:!0}},{key:"behandlingKanBytteEnhet",value:{name:"boolean",required:!0}},{key:"behandlingKanHenlegges",value:{name:"boolean",required:!0}},{key:"behandlingKanGjenopptas",value:{name:"boolean",required:!0}},{key:"behandlingKanOpnesForEndringer",value:{name:"boolean",required:!0}},{key:"behandlingKanSettesPaVent",value:{name:"boolean",required:!0}},{key:"vergeBehandlingsmeny",value:{name:"VergeBehandlingmenyValg",required:!0}}]}}],raw:`Readonly<{
-  behandlingFraBeslutter: boolean;
-  behandlingKanSendeMelding: boolean;
-  behandlingTilGodkjenning: boolean;
-  behandlingKanBytteEnhet: boolean;
-  behandlingKanHenlegges: boolean;
-  behandlingKanGjenopptas: boolean;
-  behandlingKanOpnesForEndringer: boolean;
-  behandlingKanSettesPaVent: boolean;
-  vergeBehandlingsmeny: VergeBehandlingmenyValg;
-}>`,required:!0}},{key:"brevmaler",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
-  kode: string;
-  navn: string;
-  tilgjengelig: boolean;
-}`,signature:{properties:[{key:"kode",value:{name:"string",required:!0}},{key:"navn",value:{name:"string",required:!0}},{key:"tilgjengelig",value:{name:"boolean",required:!0}}]}}],raw:"Brevmal[]",required:!0}},{key:"totrinnskontrollÅrsaker",value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  skjermlenkeType: string;
-  totrinnskontrollAksjonspunkter: TotrinnskontrollAksjonspunkt[];
-}`,signature:{properties:[{key:"skjermlenkeType",value:{name:"string",required:!0}},{key:"totrinnskontrollAksjonspunkter",value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  aksjonspunktKode: string;
-  opptjeningAktiviteter?: OpptjeningAktiviteter[];
-  beregningDto?: {
-    fastsattVarigEndringNaering: boolean;
-    faktaOmBeregningTilfeller: string[];
+  aksjonspunkt: Aksjonspunkt[];
+  harSøknad: boolean;
+  harSattEndringsdato: boolean;
+  sjekkSimuleringResultat: boolean;
+  taskStatus?: {
+    message: string;
+    pending: boolean;
+    status: string;
+    readOnly: boolean;
   };
-  besluttersBegrunnelse?: string;
-  totrinnskontrollGodkjent?: boolean;
-  vurderPaNyttArsaker?: string[];
-  uttakPerioder?: {
-    fom: string;
-    tom: string;
-    typeEndring: TypeEndring;
-    erSlettet: boolean;
-    erAvklart: boolean;
-    erLagtTil: boolean;
-    erEndret: boolean;
-  }[];
-}`,signature:{properties:[{key:"aksjonspunktKode",value:{name:"string",required:!0}},{key:"opptjeningAktiviteter",value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  aktivitetType: string;
-  erEndring: boolean;
-  arbeidsgiverNavn?: string;
-  orgnr?: string;
-  godkjent: boolean;
-  privatpersonFødselsdato?: string;
-}`,signature:{properties:[{key:"aktivitetType",value:{name:"string",required:!0}},{key:"erEndring",value:{name:"boolean",required:!0}},{key:"arbeidsgiverNavn",value:{name:"string",required:!1}},{key:"orgnr",value:{name:"string",required:!1}},{key:"godkjent",value:{name:"boolean",required:!0}},{key:"privatpersonFødselsdato",value:{name:"string",required:!1}}]}}],raw:`Readonly<{
-  aktivitetType: string;
-  erEndring: boolean;
-  arbeidsgiverNavn?: string;
-  orgnr?: string;
-  godkjent: boolean;
-  privatpersonFødselsdato?: string;
-}>`}],raw:"OpptjeningAktiviteter[]",required:!1}},{key:"beregningDto",value:{name:"signature",type:"object",raw:`{
-  fastsattVarigEndringNaering: boolean;
-  faktaOmBeregningTilfeller: string[];
-}`,signature:{properties:[{key:"fastsattVarigEndringNaering",value:{name:"boolean",required:!0}},{key:"faktaOmBeregningTilfeller",value:{name:"Array",elements:[{name:"string"}],raw:"string[]",required:!0}}]},required:!1}},{key:"besluttersBegrunnelse",value:{name:"string",required:!1}},{key:"totrinnskontrollGodkjent",value:{name:"boolean",required:!1}},{key:"vurderPaNyttArsaker",value:{name:"Array",elements:[{name:"string"}],raw:"string[]",required:!1}},{key:"uttakPerioder",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
-  fom: string;
-  tom: string;
-  typeEndring: TypeEndring;
-  erSlettet: boolean;
-  erAvklart: boolean;
-  erLagtTil: boolean;
-  erEndret: boolean;
-}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"tom",value:{name:"string",required:!0}},{key:"typeEndring",value:{name:"TypeEndring",required:!0}},{key:"erSlettet",value:{name:"boolean",required:!0}},{key:"erAvklart",value:{name:"boolean",required:!0}},{key:"erLagtTil",value:{name:"boolean",required:!0}},{key:"erEndret",value:{name:"boolean",required:!0}}]}}],raw:`{
-  fom: string;
-  tom: string;
-  typeEndring: TypeEndring;
-  erSlettet: boolean;
-  erAvklart: boolean;
-  erLagtTil: boolean;
-  erEndret: boolean;
-}[]`,required:!1}}]}}],raw:`Readonly<{
-  aksjonspunktKode: string;
-  opptjeningAktiviteter?: OpptjeningAktiviteter[];
-  beregningDto?: {
-    fastsattVarigEndringNaering: boolean;
-    faktaOmBeregningTilfeller: string[];
-  };
-  besluttersBegrunnelse?: string;
-  totrinnskontrollGodkjent?: boolean;
-  vurderPaNyttArsaker?: string[];
-  uttakPerioder?: {
-    fom: string;
-    tom: string;
-    typeEndring: TypeEndring;
-    erSlettet: boolean;
-    erAvklart: boolean;
-    erLagtTil: boolean;
-    erEndret: boolean;
-  }[];
-}>`}],raw:"TotrinnskontrollAksjonspunkt[]",required:!0}}]}}],raw:`Readonly<{
-  skjermlenkeType: string;
-  totrinnskontrollAksjonspunkter: TotrinnskontrollAksjonspunkt[];
-}>`}],raw:"TotrinnskontrollSkjermlenkeContext[]",required:!0}},{key:"totrinnskontrollReadonly",value:{name:"boolean",required:!0}},{key:"risikoAksjonspunkt",value:{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  vilkår: Vilkar[];
+  alleUttaksperioderAvslått: boolean;
+}`,signature:{properties:[{key:"aksjonspunkt",value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
   definisjon: string;
   status: string;
   begrunnelse?: string;
@@ -1244,120 +941,846 @@ Readonly<{
   kanLoses: boolean;
   endretAv?: string;
   endretTidspunkt?: string;
-}>`,required:!0}},{key:"kontrollResultat",value:{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  kontrollresultat: string;
-  faresignalVurdering?: string;
-  iayFaresignaler?: {
-    faresignaler: string[];
-  };
-  medlFaresignaler?: {
-    faresignaler: string[];
-  };
-}`,signature:{properties:[{key:"kontrollresultat",value:{name:"string",required:!0}},{key:"faresignalVurdering",value:{name:"string",required:!1}},{key:"iayFaresignaler",value:{name:"signature",type:"object",raw:`{
-  faresignaler: string[];
-}`,signature:{properties:[{key:"faresignaler",value:{name:"Array",elements:[{name:"string"}],raw:"string[]",required:!0}}]},required:!1}},{key:"medlFaresignaler",value:{name:"signature",type:"object",raw:`{
-  faresignaler: string[];
-}`,signature:{properties:[{key:"faresignaler",value:{name:"Array",elements:[{name:"string"}],raw:"string[]",required:!0}}]},required:!1}}]}}],raw:`Readonly<{
-  kontrollresultat: string;
-  faresignalVurdering?: string;
-  iayFaresignaler?: {
-    faresignaler: string[];
-  };
-  medlFaresignaler?: {
-    faresignaler: string[];
-  };
-}>`,required:!0}},{key:"ugunstAksjonspunkt",value:{name:"boolean",required:!0}}]}}],raw:`Readonly<{
-  behandlingTillatteOperasjoner: BehandlingTillatteOperasjoner;
-  brevmaler: Brevmal[];
-  totrinnskontrollÅrsaker: TotrinnskontrollSkjermlenkeContext[];
-  totrinnskontrollReadonly: boolean;
-  risikoAksjonspunkt: Aksjonspunkt;
-  kontrollResultat: Risikoklassifisering;
-  ugunstAksjonspunkt: boolean;
-}>`}]}],raw:"BehandlingAppKontekst[]",required:!0}},{key:"brukerManglerAdresse",value:{name:"boolean",required:!0}},{key:"historikkinnslag",value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  aktør: HistorikkUtfører;
-  opprettetTidspunkt: string;
-  behandlingUuid: string | null;
-  skjermlenke: string | null;
-  dokumenter: HistorikkInnslagDokumentLink[] | null;
-  tittel: string | null;
-  linjer: Linje[];
-}`,signature:{properties:[{key:"aktør",value:{name:"signature",type:"object",raw:`{
-  type: HistorikkAktor;
-  ident: string | null;
-}`,signature:{properties:[{key:"type",value:{name:"HistorikkAktor",required:!0}},{key:"ident",value:{name:"union",raw:"string | null",elements:[{name:"string"},{name:"null"}],required:!0}}]},required:!0}},{key:"opprettetTidspunkt",value:{name:"string",required:!0}},{key:"behandlingUuid",value:{name:"union",raw:"string | null",elements:[{name:"string"},{name:"null"}],required:!0}},{key:"skjermlenke",value:{name:"union",raw:"string | null",elements:[{name:"string"},{name:"null"}],required:!0}},{key:"dokumenter",value:{name:"union",raw:"HistorikkInnslagDokumentLink[] | null",elements:[{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  dokumentId?: string;
-  journalpostId?: string;
-  tag: string;
-  url?: string;
-  utgått: boolean;
-}`,signature:{properties:[{key:"dokumentId",value:{name:"string",required:!1}},{key:"journalpostId",value:{name:"string",required:!1}},{key:"tag",value:{name:"string",required:!0}},{key:"url",value:{name:"string",required:!1}},{key:"utgått",value:{name:"boolean",required:!0}}]}}],raw:`Readonly<{
-  dokumentId?: string;
-  journalpostId?: string;
-  tag: string;
-  url?: string;
-  utgått: boolean;
-}>`}],raw:"HistorikkInnslagDokumentLink[]"},{name:"null"}],required:!0}},{key:"tittel",value:{name:"union",raw:"string | null",elements:[{name:"string"},{name:"null"}],required:!0}},{key:"linjer",value:{name:"Array",elements:[{name:"union",raw:`| {
-    type: 'TEKST';
-    tekst: string;
-  }
-| { type: 'LINJESKIFT' }`,elements:[{name:"signature",type:"object",raw:`{
-  type: 'TEKST';
-  tekst: string;
-}`,signature:{properties:[{key:"type",value:{name:"literal",value:"'TEKST'",required:!0}},{key:"tekst",value:{name:"string",required:!0}}]}},{name:"signature",type:"object",raw:"{ type: 'LINJESKIFT' }",signature:{properties:[{key:"type",value:{name:"literal",value:"'LINJESKIFT'",required:!0}}]}}]}],raw:"Linje[]",required:!0}}]}}],raw:`Readonly<{
-  aktør: HistorikkUtfører;
-  opprettetTidspunkt: string;
-  behandlingUuid: string | null;
-  skjermlenke: string | null;
-  dokumenter: HistorikkInnslagDokumentLink[] | null;
-  tittel: string | null;
-  linjer: Linje[];
-}>`}],raw:"Historikkinnslag[]",required:!0}},{key:"kontrollResultat",value:{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  kontrollresultat: string;
-  faresignalVurdering?: string;
-  iayFaresignaler?: {
-    faresignaler: string[];
-  };
-  medlFaresignaler?: {
-    faresignaler: string[];
-  };
-}`,signature:{properties:[{key:"kontrollresultat",value:{name:"string",required:!0}},{key:"faresignalVurdering",value:{name:"string",required:!1}},{key:"iayFaresignaler",value:{name:"signature",type:"object",raw:`{
-  faresignaler: string[];
-}`,signature:{properties:[{key:"faresignaler",value:{name:"Array",elements:[{name:"string"}],raw:"string[]",required:!0}}]},required:!1}},{key:"medlFaresignaler",value:{name:"signature",type:"object",raw:`{
-  faresignaler: string[];
-}`,signature:{properties:[{key:"faresignaler",value:{name:"Array",elements:[{name:"string"}],raw:"string[]",required:!0}}]},required:!1}}]}}],raw:`Readonly<{
-  kontrollresultat: string;
-  faresignalVurdering?: string;
-  iayFaresignaler?: {
-    faresignaler: string[];
-  };
-  medlFaresignaler?: {
-    faresignaler: string[];
-  };
-}>`,required:!0}},{key:"notater",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
-  opprettetTidspunkt: string;
-  opprettetAv: string;
-  notat: string;
-}`,signature:{properties:[{key:"opprettetTidspunkt",value:{name:"string",required:!0}},{key:"opprettetAv",value:{name:"string",required:!0}},{key:"notat",value:{name:"string",required:!0}}]}}],raw:"Saksnotat[]",required:!0}}]}}],raw:`Readonly<{
-  saksnummer: string;
-  fagsakYtelseType: string;
-  relasjonsRolleType: string;
+}>`}],raw:"Aksjonspunkt[]",required:!0}},{key:"harSøknad",value:{name:"boolean",required:!0}},{key:"harSattEndringsdato",value:{name:"boolean",required:!0}},{key:"sjekkSimuleringResultat",value:{name:"boolean",required:!0}},{key:"taskStatus",value:{name:"signature",type:"object",raw:`{
+  message: string;
+  pending: boolean;
   status: string;
+  readOnly: boolean;
+}`,signature:{properties:[{key:"message",value:{name:"string",required:!0}},{key:"pending",value:{name:"boolean",required:!0}},{key:"status",value:{name:"string",required:!0}},{key:"readOnly",value:{name:"boolean",required:!0}}]},required:!1}},{key:"vilkår",value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  vilkarType: string;
+  vilkarStatus: string;
+  avslagKode?: string;
+  lovReferanse?: string;
+  overstyrbar: boolean;
+}`,signature:{properties:[{key:"vilkarType",value:{name:"string",required:!0}},{key:"vilkarStatus",value:{name:"string",required:!0}},{key:"avslagKode",value:{name:"string",required:!1}},{key:"lovReferanse",value:{name:"string",required:!1}},{key:"overstyrbar",value:{name:"boolean",required:!0}}]}}],raw:`Readonly<{
+  vilkarType: string;
+  vilkarStatus: string;
+  avslagKode?: string;
+  lovReferanse?: string;
+  overstyrbar: boolean;
+}>`}],raw:"Vilkar[]",required:!0}},{key:"alleUttaksperioderAvslått",value:{name:"boolean",required:!0}}]}}],raw:`Readonly<{
+  aksjonspunkt: Aksjonspunkt[];
+  harSøknad: boolean;
+  harSattEndringsdato: boolean;
+  sjekkSimuleringResultat: boolean;
+  taskStatus?: {
+    message: string;
+    pending: boolean;
+    status: string;
+    readOnly: boolean;
+  };
+  vilkår: Vilkar[];
+  alleUttaksperioderAvslått: boolean;
+}>`}]},description:""},valgtProsessSteg:{required:!1,tsType:{name:"string"},description:""},registrerProsessPanel:{required:!0,tsType:{name:"signature",type:"function",raw:"(data: ProsessPanelMenyData) => void",signature:{arguments:[{type:{name:"signature",type:"object",raw:`{
+  id: string;
+  tekst?: string;
+  erAktiv?: boolean;
+  harApentAksjonspunkt?: boolean;
+  status?: string;
+}`,signature:{properties:[{key:"id",value:{name:"string",required:!0}},{key:"tekst",value:{name:"string",required:!1}},{key:"erAktiv",value:{name:"boolean",required:!1}},{key:"harApentAksjonspunkt",value:{name:"boolean",required:!1}},{key:"status",value:{name:"string",required:!1}}]}},name:"data"}],return:{name:"void"}}},description:""}}};const hn={[i.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN]:"SRBVilkarForm.VurderSammeBarn",[i.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN]:"SRBVilkarForm.VurderAnnenForelderSammeBarn"},jn=(n,r=[])=>r.length>0?n.formatMessage({id:hn[r[0].definisjon]}):"",An=[i.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,i.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN],$=[P.ADOPSJONSVILKARET],de=({behandlingVersjon:n,rettigheter:r,...t})=>{const a=S();return e.jsx(K,{...t,behandlingVersjon:n,aksjonspunktKoder:An,vilkarKoder:$,inngangsvilkarPanelKode:"ADOPSJON",hentInngangsvilkarPanelTekst:s=>jn(a,s.aksjonspunkter),renderPanel:(s,o,l)=>e.jsxs(e.Fragment,{children:[s.aksjonspunkter.length===0&&e.jsx(N,{aksjonspunkter:s.aksjonspunkter,aksjonspunktKode:i.OVERSTYR_ADOPSJONSVILKAR,vilkar:s.vilkar,vilkarKoder:$,panelTekstKode:"Inngangsvilkar.Adopsjonsvilkaret",toggleOverstyring:l,erOverstyrt:o,overrideReadOnly:s.isReadOnly||t.harInngangsvilkarApentAksjonspunkt&&!(s.isAksjonspunktOpen||o),kanOverstyreAccess:r.kanOverstyreAccess}),s.aksjonspunkter.length>0&&e.jsx(je,{...s})]})})};de.__docgenInfo={description:"",methods:[],displayName:"AdopsjonInngangsvilkarInitPanel",props:{behandlingVersjon:{required:!0,tsType:{name:"number"},description:""},rettigheter:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  writeAccess: Aksess;
+  kanOverstyreAccess: Aksess;
+}`,signature:{properties:[{key:"writeAccess",value:{name:"signature",type:"object",raw:`{
+  employeeHasAccess: boolean;
+  isEnabled: boolean;
+}`,signature:{properties:[{key:"employeeHasAccess",value:{name:"boolean",required:!0}},{key:"isEnabled",value:{name:"boolean",required:!0}}]},required:!0}},{key:"kanOverstyreAccess",value:{name:"signature",type:"object",raw:`{
+  employeeHasAccess: boolean;
+  isEnabled: boolean;
+}`,signature:{properties:[{key:"employeeHasAccess",value:{name:"boolean",required:!0}},{key:"isEnabled",value:{name:"boolean",required:!0}}]},required:!0}}]}},description:""},registrerInngangsvilkarPanel:{required:!0,tsType:{name:"signature",type:"function",raw:"(data: InngangsvilkarPanelData) => void",signature:{arguments:[{type:{name:"signature",type:"object",raw:`{
+  id: string;
+  aksjonspunktTekst?: string;
+  harApentAksjonspunkt: boolean;
+  status: string;
+}`,signature:{properties:[{key:"id",value:{name:"string",required:!0}},{key:"aksjonspunktTekst",value:{name:"string",required:!1}},{key:"harApentAksjonspunkt",value:{name:"boolean",required:!0}},{key:"status",value:{name:"string",required:!0}}]}},name:"data"}],return:{name:"void"}}},description:""},erPanelValgt:{required:!0,tsType:{name:"boolean"},description:""},harInngangsvilkarApentAksjonspunkt:{required:!0,tsType:{name:"boolean"},description:""}}};const Tn={[i.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN]:"SRBVilkarForm.VurderSammeBarn",[i.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN]:"SRBVilkarForm.VurderAnnenForelderSammeBarn"},cn=(n,r=[])=>r.length>0?n.formatMessage({id:Tn[r[0].definisjon]}):"",Rn=[i.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,i.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN],W=[P.FODSELSVILKARET_MOR],ge=({behandlingVersjon:n,rettigheter:r,...t})=>{const a=S();return e.jsx(K,{...t,behandlingVersjon:n,aksjonspunktKoder:Rn,vilkarKoder:W,inngangsvilkarPanelKode:"FODSEL",hentInngangsvilkarPanelTekst:s=>cn(a,s.aksjonspunkter),renderPanel:(s,o,l)=>e.jsxs(e.Fragment,{children:[s.aksjonspunkter.length===0&&e.jsx(N,{aksjonspunkter:s.aksjonspunkter,aksjonspunktKode:i.OVERSTYR_FODSELSVILKAR,vilkar:s.vilkar,vilkarKoder:W,panelTekstKode:"Inngangsvilkar.Fodselsvilkaret",toggleOverstyring:l,erOverstyrt:o,overrideReadOnly:s.isReadOnly||t.harInngangsvilkarApentAksjonspunkt&&!(s.isAksjonspunktOpen||o),kanOverstyreAccess:r.kanOverstyreAccess}),s.aksjonspunkter.length>0&&e.jsx(Ae,{ytelseTypeKode:ie.ENGANGSSTONAD,...s})]})})};ge.__docgenInfo={description:"",methods:[],displayName:"FodselInngangsvilkarInitPanel",props:{behandlingVersjon:{required:!0,tsType:{name:"number"},description:""},rettigheter:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  writeAccess: Aksess;
+  kanOverstyreAccess: Aksess;
+}`,signature:{properties:[{key:"writeAccess",value:{name:"signature",type:"object",raw:`{
+  employeeHasAccess: boolean;
+  isEnabled: boolean;
+}`,signature:{properties:[{key:"employeeHasAccess",value:{name:"boolean",required:!0}},{key:"isEnabled",value:{name:"boolean",required:!0}}]},required:!0}},{key:"kanOverstyreAccess",value:{name:"signature",type:"object",raw:`{
+  employeeHasAccess: boolean;
+  isEnabled: boolean;
+}`,signature:{properties:[{key:"employeeHasAccess",value:{name:"boolean",required:!0}},{key:"isEnabled",value:{name:"boolean",required:!0}}]},required:!0}}]}},description:""},registrerInngangsvilkarPanel:{required:!0,tsType:{name:"signature",type:"function",raw:"(data: InngangsvilkarPanelData) => void",signature:{arguments:[{type:{name:"signature",type:"object",raw:`{
+  id: string;
+  aksjonspunktTekst?: string;
+  harApentAksjonspunkt: boolean;
+  status: string;
+}`,signature:{properties:[{key:"id",value:{name:"string",required:!0}},{key:"aksjonspunktTekst",value:{name:"string",required:!1}},{key:"harApentAksjonspunkt",value:{name:"boolean",required:!0}},{key:"status",value:{name:"string",required:!0}}]}},name:"data"}],return:{name:"void"}}},description:""},erPanelValgt:{required:!0,tsType:{name:"boolean"},description:""},harInngangsvilkarApentAksjonspunkt:{required:!0,tsType:{name:"boolean"},description:""}}};const wn=[i.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,i.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE],z=[P.MEDLEMSKAPSVILKARET_FORUTGAENDE],Bn=[A.MEDLEMSKAP],ke=({behandlingVersjon:n,rettigheter:r,...t})=>e.jsx(K,{...t,behandlingVersjon:n,panelEndepunkter:Bn,aksjonspunktKoder:wn,vilkarKoder:z,inngangsvilkarPanelKode:"MEDLEMSKAP",hentInngangsvilkarPanelTekst:()=>"",renderPanel:(a,s,o)=>{const l=a.aksjonspunkter.some(g=>g.definisjon===i.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR&&g.status!==F.AVBRUTT),u=a.aksjonspunkter.some(g=>g.definisjon===i.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR&&g.status==F.OPPRETTET);return e.jsx(e.Fragment,{children:!u&&e.jsx(N,{aksjonspunkter:a.aksjonspunkter,aksjonspunktKode:i.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE,vilkar:a.vilkar,vilkarKoder:z,panelTekstKode:"Inngangsvilkar.Medlemskapsvilkaret",medlemskap:a.medlemskap,toggleOverstyring:o,erOverstyrt:s,overrideReadOnly:a.isReadOnly||l||t.harInngangsvilkarApentAksjonspunkt&&!(a.isAksjonspunktOpen||s),kanOverstyreAccess:r.kanOverstyreAccess})})}});ke.__docgenInfo={description:"",methods:[],displayName:"MedlemskapForutgaendeInngangsvilkarInitPanel",props:{behandlingVersjon:{required:!0,tsType:{name:"number"},description:""},rettigheter:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  writeAccess: Aksess;
+  kanOverstyreAccess: Aksess;
+}`,signature:{properties:[{key:"writeAccess",value:{name:"signature",type:"object",raw:`{
+  employeeHasAccess: boolean;
+  isEnabled: boolean;
+}`,signature:{properties:[{key:"employeeHasAccess",value:{name:"boolean",required:!0}},{key:"isEnabled",value:{name:"boolean",required:!0}}]},required:!0}},{key:"kanOverstyreAccess",value:{name:"signature",type:"object",raw:`{
+  employeeHasAccess: boolean;
+  isEnabled: boolean;
+}`,signature:{properties:[{key:"employeeHasAccess",value:{name:"boolean",required:!0}},{key:"isEnabled",value:{name:"boolean",required:!0}}]},required:!0}}]}},description:""},registrerInngangsvilkarPanel:{required:!0,tsType:{name:"signature",type:"function",raw:"(data: InngangsvilkarPanelData) => void",signature:{arguments:[{type:{name:"signature",type:"object",raw:`{
+  id: string;
+  aksjonspunktTekst?: string;
+  harApentAksjonspunkt: boolean;
+  status: string;
+}`,signature:{properties:[{key:"id",value:{name:"string",required:!0}},{key:"aksjonspunktTekst",value:{name:"string",required:!1}},{key:"harApentAksjonspunkt",value:{name:"boolean",required:!0}},{key:"status",value:{name:"string",required:!0}}]}},name:"data"}],return:{name:"void"}}},description:""},erPanelValgt:{required:!0,tsType:{name:"boolean"},description:""},harInngangsvilkarApentAksjonspunkt:{required:!0,tsType:{name:"boolean"},description:""}}};const Sn={[i.MANUELL_VURDERING_AV_OMSORGSVILKARET]:"ErOmsorgVilkaarOppfyltForm.Paragraf",[i.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN]:"SRBVilkarForm.VurderSammeBarn",[i.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN]:"SRBVilkarForm.VurderAnnenForelderSammeBarn"},En=(n,r=[])=>r.length>0?n.formatMessage({id:Sn[r[0].definisjon]}):"",Pn=[i.MANUELL_VURDERING_AV_OMSORGSVILKARET,i.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,i.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN],Vn=[P.OMSORGSVILKARET],me=({behandlingVersjon:n,...r})=>{const t=S();return e.jsx(K,{...r,behandlingVersjon:n,aksjonspunktKoder:Pn,vilkarKoder:Vn,inngangsvilkarPanelKode:"OMSORG",hentInngangsvilkarPanelTekst:a=>En(t,a.aksjonspunkter),renderPanel:a=>e.jsx(Te,{...a})})};me.__docgenInfo={description:"",methods:[],displayName:"OmsorgInngangsvilkarInitPanel",props:{behandlingVersjon:{required:!0,tsType:{name:"number"},description:""},registrerInngangsvilkarPanel:{required:!0,tsType:{name:"signature",type:"function",raw:"(data: InngangsvilkarPanelData) => void",signature:{arguments:[{type:{name:"signature",type:"object",raw:`{
+  id: string;
+  aksjonspunktTekst?: string;
+  harApentAksjonspunkt: boolean;
+  status: string;
+}`,signature:{properties:[{key:"id",value:{name:"string",required:!0}},{key:"aksjonspunktTekst",value:{name:"string",required:!1}},{key:"harApentAksjonspunkt",value:{name:"boolean",required:!0}},{key:"status",value:{name:"string",required:!0}}]}},name:"data"}],return:{name:"void"}}},description:""},erPanelValgt:{required:!0,tsType:{name:"boolean"},description:""},harInngangsvilkarApentAksjonspunkt:{required:!0,tsType:{name:"boolean"},description:""}}};const ye=({behandling:n,valgtProsessSteg:r,registrerProsessPanel:t,apentFaktaPanelInfo:a,oppdaterProsessStegOgFaktaPanelIUrl:s,rettigheter:o})=>{const l=m.useCallback(u=>e.jsxs(e.Fragment,{children:[e.jsx(ge,{behandlingVersjon:n.versjon,rettigheter:o,...u}),e.jsx(de,{behandlingVersjon:n.versjon,rettigheter:o,...u}),e.jsx(me,{behandlingVersjon:n.versjon,...u}),e.jsx(Ee,{behandlingVersjon:n.versjon,rettigheter:o,...u}),e.jsx(ke,{behandlingVersjon:n.versjon,rettigheter:o,...u}),e.jsx(ce,{behandlingVersjon:n.versjon,...u})]}),[n.versjon,o]);return e.jsx(Pe,{behandling:n,valgtProsessSteg:r,registrerProsessPanel:t,apentFaktaPanelInfo:a,oppdaterProsessStegOgFaktaPanelIUrl:s,leftPanels:l})};ye.__docgenInfo={description:"",methods:[],displayName:"InngangsvilkarEsProsessStegInitPanel",props:{apentFaktaPanelInfo:{required:!1,tsType:{name:"signature",type:"object",raw:"{ urlCode: string; text: string }",signature:{properties:[{key:"urlCode",value:{name:"string",required:!0}},{key:"text",value:{name:"string",required:!0}}]}},description:""},oppdaterProsessStegOgFaktaPanelIUrl:{required:!0,tsType:{name:"signature",type:"function",raw:"(punktnavn?: string, faktanavn?: string) => void",signature:{arguments:[{type:{name:"string"},name:"punktnavn"},{type:{name:"string"},name:"faktanavn"}],return:{name:"void"}}},description:""},rettigheter:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  writeAccess: Aksess;
+  kanOverstyreAccess: Aksess;
+}`,signature:{properties:[{key:"writeAccess",value:{name:"signature",type:"object",raw:`{
+  employeeHasAccess: boolean;
+  isEnabled: boolean;
+}`,signature:{properties:[{key:"employeeHasAccess",value:{name:"boolean",required:!0}},{key:"isEnabled",value:{name:"boolean",required:!0}}]},required:!0}},{key:"kanOverstyreAccess",value:{name:"signature",type:"object",raw:`{
+  employeeHasAccess: boolean;
+  isEnabled: boolean;
+}`,signature:{properties:[{key:"employeeHasAccess",value:{name:"boolean",required:!0}},{key:"isEnabled",value:{name:"boolean",required:!0}}]},required:!0}}]}},description:""},behandling:{required:!0,tsType:{name:"intersection",raw:`BehandlingFellesData &
+Readonly<{
+  aksjonspunkt: Aksjonspunkt[];
+  harSøknad: boolean;
+  harSattEndringsdato: boolean;
+  sjekkSimuleringResultat: boolean;
+  taskStatus?: {
+    message: string;
+    pending: boolean;
+    status: string;
+    readOnly: boolean;
+  };
+  vilkår: Vilkar[];
+  alleUttaksperioderAvslått: boolean;
+}>`,elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  versjon: number;
+  uuid: string;
+  status: string;
+  type: string;
+  fristBehandlingPåVent?: string;
+  venteArsakKode?: string;
+  behandlingPaaVent: boolean;
+  behandlingHenlagt: boolean;
+  behandlingsresultat?: Behandlingsresultat;
+  links: {
+    href: string;
+    rel: string;
+    requestPayload?: any;
+    type: string;
+  }[];
+  opprettet: string;
+  avsluttet?: string;
+  erAktivPapirsoknad: boolean;
+  gjeldendeVedtak: boolean;
+  sprakkode: string;
+  behandlendeEnhetId: string;
+  behandlendeEnhetNavn: string;
+  behandlingKoet: boolean;
+  toTrinnsBehandling: boolean;
+  behandlingÅrsaker: BehandlingÅrsak[];
+  ansvarligSaksbehandler?: string;
+  kanHenleggeBehandling?: boolean;
+  harVerge?: boolean;
+  førsteÅrsak?: BehandlingÅrsak;
+  fristBehandlingPaaVent?: string;
+}`,signature:{properties:[{key:"versjon",value:{name:"number",required:!0}},{key:"uuid",value:{name:"string",required:!0}},{key:"status",value:{name:"string",required:!0}},{key:"type",value:{name:"string",required:!0}},{key:"fristBehandlingPåVent",value:{name:"string",required:!1}},{key:"venteArsakKode",value:{name:"string",required:!1}},{key:"behandlingPaaVent",value:{name:"boolean",required:!0}},{key:"behandlingHenlagt",value:{name:"boolean",required:!0}},{key:"behandlingsresultat",value:{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  id: number;
+  type: string;
+  avslagsarsak?: string;
+  avslagsarsakFritekst?: string;
+  rettenTil?: string;
+  konsekvenserForYtelsen?: string[];
+  vedtaksbrev?: string;
+  overskrift?: string;
+  fritekstbrev?: string;
+  erRevurderingMedUendretUtfall?: boolean;
+  skjæringstidspunkt?: {
+    dato: string;
+  };
+  opphørsdato?: string;
+}`,signature:{properties:[{key:"id",value:{name:"number",required:!0}},{key:"type",value:{name:"string",required:!0}},{key:"avslagsarsak",value:{name:"string",required:!1}},{key:"avslagsarsakFritekst",value:{name:"string",required:!1}},{key:"rettenTil",value:{name:"string",required:!1}},{key:"konsekvenserForYtelsen",value:{name:"Array",elements:[{name:"string"}],raw:"string[]",required:!1}},{key:"vedtaksbrev",value:{name:"string",required:!1}},{key:"overskrift",value:{name:"string",required:!1}},{key:"fritekstbrev",value:{name:"string",required:!1}},{key:"erRevurderingMedUendretUtfall",value:{name:"boolean",required:!1}},{key:"skjæringstidspunkt",value:{name:"signature",type:"object",raw:`{
+  dato: string;
+}`,signature:{properties:[{key:"dato",value:{name:"string",required:!0}}]},required:!1}},{key:"opphørsdato",value:{name:"string",required:!1}}]}}],raw:`Readonly<{
+  id: number;
+  type: string;
+  avslagsarsak?: string;
+  avslagsarsakFritekst?: string;
+  rettenTil?: string;
+  konsekvenserForYtelsen?: string[];
+  vedtaksbrev?: string;
+  overskrift?: string;
+  fritekstbrev?: string;
+  erRevurderingMedUendretUtfall?: boolean;
+  skjæringstidspunkt?: {
+    dato: string;
+  };
+  opphørsdato?: string;
+}>`,required:!1}},{key:"links",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  href: string;
+  rel: string;
+  requestPayload?: any;
+  type: string;
+}`,signature:{properties:[{key:"href",value:{name:"string",required:!0}},{key:"rel",value:{name:"string",required:!0}},{key:"requestPayload",value:{name:"any",required:!1}},{key:"type",value:{name:"string",required:!0}}]}}],raw:`{
+  href: string;
+  rel: string;
+  requestPayload?: any;
+  type: string;
+}[]`,required:!0}},{key:"opprettet",value:{name:"string",required:!0}},{key:"avsluttet",value:{name:"string",required:!1}},{key:"erAktivPapirsoknad",value:{name:"boolean",required:!0}},{key:"gjeldendeVedtak",value:{name:"boolean",required:!0}},{key:"sprakkode",value:{name:"string",required:!0}},{key:"behandlendeEnhetId",value:{name:"string",required:!0}},{key:"behandlendeEnhetNavn",value:{name:"string",required:!0}},{key:"behandlingKoet",value:{name:"boolean",required:!0}},{key:"toTrinnsBehandling",value:{name:"boolean",required:!0}},{key:"behandlingÅrsaker",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  behandlingArsakType: string;
+  manueltOpprettet: boolean;
+  erAutomatiskRevurdering: boolean;
+}`,signature:{properties:[{key:"behandlingArsakType",value:{name:"string",required:!0}},{key:"manueltOpprettet",value:{name:"boolean",required:!0}},{key:"erAutomatiskRevurdering",value:{name:"boolean",required:!0}}]},required:!1}],raw:"BehandlingÅrsak[]",required:!0}},{key:"ansvarligSaksbehandler",value:{name:"string",required:!1}},{key:"kanHenleggeBehandling",value:{name:"boolean",required:!1}},{key:"harVerge",value:{name:"boolean",required:!1}},{key:"førsteÅrsak",value:{name:"signature",type:"object",raw:`{
+  behandlingArsakType: string;
+  manueltOpprettet: boolean;
+  erAutomatiskRevurdering: boolean;
+}`,signature:{properties:[{key:"behandlingArsakType",value:{name:"string",required:!0}},{key:"manueltOpprettet",value:{name:"boolean",required:!0}},{key:"erAutomatiskRevurdering",value:{name:"boolean",required:!0}}]},required:!1}},{key:"fristBehandlingPaaVent",value:{name:"string",required:!1}}]}}],raw:`Readonly<{
+  versjon: number;
+  uuid: string;
+  status: string;
+  type: string;
+  fristBehandlingPåVent?: string;
+  venteArsakKode?: string;
+  behandlingPaaVent: boolean;
+  behandlingHenlagt: boolean;
+  behandlingsresultat?: Behandlingsresultat;
+  links: {
+    href: string;
+    rel: string;
+    requestPayload?: any;
+    type: string;
+  }[];
+  opprettet: string;
+  avsluttet?: string;
+  erAktivPapirsoknad: boolean;
+  gjeldendeVedtak: boolean;
+  sprakkode: string;
+  behandlendeEnhetId: string;
+  behandlendeEnhetNavn: string;
+  behandlingKoet: boolean;
+  toTrinnsBehandling: boolean;
+  behandlingÅrsaker: BehandlingÅrsak[];
+  ansvarligSaksbehandler?: string;
+  kanHenleggeBehandling?: boolean;
+  harVerge?: boolean;
+  førsteÅrsak?: BehandlingÅrsak;
+  fristBehandlingPaaVent?: string;
+}>`},{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  aksjonspunkt: Aksjonspunkt[];
+  harSøknad: boolean;
+  harSattEndringsdato: boolean;
+  sjekkSimuleringResultat: boolean;
+  taskStatus?: {
+    message: string;
+    pending: boolean;
+    status: string;
+    readOnly: boolean;
+  };
+  vilkår: Vilkar[];
+  alleUttaksperioderAvslått: boolean;
+}`,signature:{properties:[{key:"aksjonspunkt",value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  definisjon: string;
+  status: string;
+  begrunnelse?: string;
+  vilkarType?: string;
+  toTrinnsBehandling?: boolean;
+  toTrinnsBehandlingGodkjent?: boolean;
+  vurderPaNyttArsaker?: string[];
+  besluttersBegrunnelse?: string;
+  aksjonspunktType?: string;
+  kanLoses: boolean;
+  endretAv?: string;
+  endretTidspunkt?: string;
+}`,signature:{properties:[{key:"definisjon",value:{name:"string",required:!0}},{key:"status",value:{name:"string",required:!0}},{key:"begrunnelse",value:{name:"string",required:!1}},{key:"vilkarType",value:{name:"string",required:!1}},{key:"toTrinnsBehandling",value:{name:"boolean",required:!1}},{key:"toTrinnsBehandlingGodkjent",value:{name:"boolean",required:!1}},{key:"vurderPaNyttArsaker",value:{name:"Array",elements:[{name:"string"}],raw:"string[]",required:!1}},{key:"besluttersBegrunnelse",value:{name:"string",required:!1}},{key:"aksjonspunktType",value:{name:"string",required:!1}},{key:"kanLoses",value:{name:"boolean",required:!0}},{key:"endretAv",value:{name:"string",required:!1}},{key:"endretTidspunkt",value:{name:"string",required:!1}}]}}],raw:`Readonly<{
+  definisjon: string;
+  status: string;
+  begrunnelse?: string;
+  vilkarType?: string;
+  toTrinnsBehandling?: boolean;
+  toTrinnsBehandlingGodkjent?: boolean;
+  vurderPaNyttArsaker?: string[];
+  besluttersBegrunnelse?: string;
+  aksjonspunktType?: string;
+  kanLoses: boolean;
+  endretAv?: string;
+  endretTidspunkt?: string;
+}>`}],raw:"Aksjonspunkt[]",required:!0}},{key:"harSøknad",value:{name:"boolean",required:!0}},{key:"harSattEndringsdato",value:{name:"boolean",required:!0}},{key:"sjekkSimuleringResultat",value:{name:"boolean",required:!0}},{key:"taskStatus",value:{name:"signature",type:"object",raw:`{
+  message: string;
+  pending: boolean;
+  status: string;
+  readOnly: boolean;
+}`,signature:{properties:[{key:"message",value:{name:"string",required:!0}},{key:"pending",value:{name:"boolean",required:!0}},{key:"status",value:{name:"string",required:!0}},{key:"readOnly",value:{name:"boolean",required:!0}}]},required:!1}},{key:"vilkår",value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  vilkarType: string;
+  vilkarStatus: string;
+  avslagKode?: string;
+  lovReferanse?: string;
+  overstyrbar: boolean;
+}`,signature:{properties:[{key:"vilkarType",value:{name:"string",required:!0}},{key:"vilkarStatus",value:{name:"string",required:!0}},{key:"avslagKode",value:{name:"string",required:!1}},{key:"lovReferanse",value:{name:"string",required:!1}},{key:"overstyrbar",value:{name:"boolean",required:!0}}]}}],raw:`Readonly<{
+  vilkarType: string;
+  vilkarStatus: string;
+  avslagKode?: string;
+  lovReferanse?: string;
+  overstyrbar: boolean;
+}>`}],raw:"Vilkar[]",required:!0}},{key:"alleUttaksperioderAvslått",value:{name:"boolean",required:!0}}]}}],raw:`Readonly<{
+  aksjonspunkt: Aksjonspunkt[];
+  harSøknad: boolean;
+  harSattEndringsdato: boolean;
+  sjekkSimuleringResultat: boolean;
+  taskStatus?: {
+    message: string;
+    pending: boolean;
+    status: string;
+    readOnly: boolean;
+  };
+  vilkår: Vilkar[];
+  alleUttaksperioderAvslått: boolean;
+}>`}]},description:""},valgtProsessSteg:{required:!1,tsType:{name:"string"},description:""},registrerProsessPanel:{required:!0,tsType:{name:"signature",type:"function",raw:"(data: ProsessPanelMenyData) => void",signature:{arguments:[{type:{name:"signature",type:"object",raw:`{
+  id: string;
+  tekst?: string;
+  erAktiv?: boolean;
+  harApentAksjonspunkt?: boolean;
+  status?: string;
+}`,signature:{properties:[{key:"id",value:{name:"string",required:!0}},{key:"tekst",value:{name:"string",required:!1}},{key:"erAktiv",value:{name:"boolean",required:!1}},{key:"harApentAksjonspunkt",value:{name:"boolean",required:!1}},{key:"status",value:{name:"string",required:!1}}]}},name:"data"}],return:{name:"void"}}},description:""}}};const On="_days_hiq77_1",Fn="_hyphen_hiq77_5",Kn="_panel_hiq77_15",Nn="_radioGroup_hiq77_21",In="_panelDates_hiq77_25",Dn="_col_hiq77_29",T={days:On,hyphen:Fn,panel:Kn,radioGroup:Nn,panelDates:In,col:Dn},Q=n=>n?"ErSoknadsfristVilkaretOppfyltForm.VilkarOppfylt":"ErSoknadsfristVilkaretOppfyltForm.VilkarIkkeOppfylt",_n=(n,r)=>en(n).subtract(r,"days").format(Ue),Ln=(n,r)=>{if(n.soknadType===ee.FODSEL){const t=n.fodselsdatoer?Object.values(n.fodselsdatoer)[0]:void 0;return(r!=null&&r.avklartBarn&&r.avklartBarn.length>0?r.avklartBarn[0].fodselsdato:t)?"ErSoknadsfristVilkaretOppfyltForm.Fodselsdato":"ErSoknadsfristVilkaretOppfyltForm.Termindato"}return"ErSoknadsfristVilkaretOppfyltForm.Omsorgsovertakelsesdato"},Mn=(n,r)=>{if(n.soknadType===ee.FODSEL){const t=n.fodselsdatoer?Object.values(n.fodselsdatoer)[0]:void 0,a=r!=null&&r.avklartBarn&&r.avklartBarn.length>0?r.avklartBarn[0].fodselsdato:t,s=r!=null&&r.termindato?r.termindato:n.termindato;return a||s}return r!=null&&r.omsorgsovertakelseDato?r.omsorgsovertakelseDato:n.omsorgsovertakelseDato},xn=(n,r)=>({erVilkarOk:n[0].status===F.OPPRETTET?void 0:h.OPPFYLT===r,...U.buildInitialValues(n)}),Un=n=>({erVilkarOk:n.erVilkarOk||!1,kode:i.SOKNADSFRISTVILKARET,...U.transformValues(n)}),pe=({readOnly:n,readOnlySubmitButton:r,soknad:t,gjeldendeFamiliehendelse:a,behandlingsresultat:s,alleKodeverk:o,aksjonspunkter:l,status:u,submitCallback:g,formData:y,setFormData:k})=>{var Y;const f=S(),w=m.useMemo(()=>xn(l,u),[l,u]),d=ae({defaultValues:y||w}),j=rn(o),p=m.useMemo(()=>Mn(t,a),[t,a]),v=m.useMemo(()=>Ln(t,a),[t,a]),G=m.useCallback((...D)=>e.jsx("b",{children:D}),[]),fe=d.watch("erVilkarOk"),I=(Y=t==null?void 0:t.søknadsfrist)==null?void 0:Y.dagerOversittetFrist;return e.jsxs(te,{formMethods:d,onSubmit:D=>g(Un(D)),setDataOnUnmount:k,children:[e.jsx(M,{size:"small",children:f.formatMessage({id:"ErSoknadsfristVilkaretOppfyltForm.Soknadsfrist"})}),e.jsxs("span",{className:"typo-normal",children:[e.jsx(q,{id:"ErSoknadsfristVilkaretOppfyltForm.ApplicationReceivedPart1"}),e.jsx("span",{className:T.days,children:e.jsx(q,{id:"ErSoknadsfristVilkaretOppfyltForm.ApplicationReceivedPart2",values:{numberOfDays:I}})}),e.jsx(q,{id:"ErSoknadsfristVilkaretOppfyltForm.ApplicationReceivedPart3"}),t.mottattDato&&I&&e.jsx(_,{dateString:_n(t.mottattDato,I)})]}),e.jsxs(O,{children:[e.jsxs(c,{children:[e.jsx(b,{className:T.col,children:e.jsxs(J,{className:T.panel,children:[e.jsx(M,{size:"small",children:f.formatMessage({id:"ErSoknadsfristVilkaretOppfyltForm.Consider"})}),e.jsxs("ul",{className:T.hyphen,children:[e.jsx("li",{children:e.jsx(q,{id:"ErSoknadsfristVilkaretOppfyltForm.Question1"})}),e.jsx("li",{children:e.jsx(q,{id:"ErSoknadsfristVilkaretOppfyltForm.Question2"})}),e.jsx("li",{children:e.jsx(q,{id:"ErSoknadsfristVilkaretOppfyltForm.Question3"})})]})]})}),e.jsx(b,{className:T.col,children:e.jsx(J,{className:T.panelDates,children:e.jsxs(O,{children:[e.jsxs(c,{children:[e.jsxs(b,{className:T.col,children:[e.jsx(E,{children:f.formatMessage({id:"ErSoknadsfristVilkaretOppfyltForm.MottattDato"})}),e.jsx("span",{className:"typo-normal",children:t.mottattDato&&e.jsx(_,{dateString:t.mottattDato})})]}),e.jsxs(b,{className:T.col,children:[v&&e.jsx(E,{children:f.formatMessage({id:v})}),e.jsx("span",{className:"typo-normal",children:p&&e.jsx(_,{dateString:p})})]})]}),e.jsx(B,{twentyPx:!0}),e.jsx(E,{children:f.formatMessage({id:"ErSoknadsfristVilkaretOppfyltForm.ExplanationFromApplication"})}),e.jsx("span",{className:"typo-normal",children:t.begrunnelseForSenInnsending||"-"})]})})})]}),e.jsx(B,{sixteenPx:!0}),e.jsx(c,{children:e.jsx(b,{className:T.col,children:e.jsx($e,{name:"erVilkarOk",validate:[se],isReadOnly:n,isHorizontal:!0,isTrueOrFalseSelection:!0,radios:[{value:"true",label:e.jsx(q,{id:Q(!0),values:{b:G}})},{value:"false",label:e.jsx(q,{id:Q(!1),values:{b:G}})}]})})})]}),n&&fe===!1&&!!(s!=null&&s.avslagsarsak)&&e.jsx(Le,{size:"small",children:j(s.avslagsarsak,nn.AVSLAGSARSAK,P.SOKNADFRISTVILKARET)}),e.jsx(B,{sixteenPx:!0}),e.jsx(U,{readOnly:n}),e.jsx(B,{sixteenPx:!0}),e.jsx(ze,{isReadOnly:n,isSubmittable:!r,isSubmitting:d.formState.isSubmitting,isDirty:d.formState.isDirty})]})};pe.__docgenInfo={description:`ErSoknadsfristVilkaretOppfyltForm
+
+Setter opp aksjonspunktet for vurdering av søknadsfristvilkåret.`,methods:[],displayName:"ErSoknadsfristVilkaretOppfyltForm",props:{behandlingsresultat:{required:!1,tsType:{name:"intersection['behandlingsresultat']",raw:"Behandling['behandlingsresultat']"},description:""},soknad:{required:!0,tsType:{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  soknadType: string;
+  mottattDato: string;
+  begrunnelseForSenInnsending: string | undefined;
+  antallBarn: number;
+  oppgittTilknytning: {
+    oppholdNorgeNa: boolean;
+    oppholdSistePeriode: boolean;
+    oppholdNestePeriode: boolean;
+    utlandsoppholdFor: UtlandsoppholdPeriode[];
+    utlandsoppholdEtter: UtlandsoppholdPeriode[];
+  };
+  manglendeVedlegg: ManglendeVedleggSoknad[];
+  oppgittFordeling: {
+    startDatoForPermisjon?: string;
+    dekningsgrader: {
+      avklartDekningsgrad?: number;
+      søker: {
+        søknadsdato: string;
+        dekningsgrad: number;
+      };
+      annenPart: {
+        søknadsdato: string;
+        dekningsgrad: number;
+      };
+    };
+  };
+  søknadsfrist: Søknadsfrist;
+  utstedtdato?: string;
+  termindato?: string;
+  fodselsdatoer?: Record<number, string>;
+  omsorgsovertakelseDato?: string;
+  barnetsAnkomstTilNorgeDato?: string;
+  adopsjonFodelsedatoer?: Record<number, string>;
+  farSokerType?: string;
+}`,signature:{properties:[{key:"soknadType",value:{name:"string",required:!0}},{key:"mottattDato",value:{name:"string",required:!0}},{key:"begrunnelseForSenInnsending",value:{name:"union",raw:"string | undefined",elements:[{name:"string"},{name:"undefined"}],required:!0}},{key:"antallBarn",value:{name:"number",required:!0}},{key:"oppgittTilknytning",value:{name:"signature",type:"object",raw:`{
+  oppholdNorgeNa: boolean;
+  oppholdSistePeriode: boolean;
+  oppholdNestePeriode: boolean;
+  utlandsoppholdFor: UtlandsoppholdPeriode[];
+  utlandsoppholdEtter: UtlandsoppholdPeriode[];
+}`,signature:{properties:[{key:"oppholdNorgeNa",value:{name:"boolean",required:!0}},{key:"oppholdSistePeriode",value:{name:"boolean",required:!0}},{key:"oppholdNestePeriode",value:{name:"boolean",required:!0}},{key:"utlandsoppholdFor",value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  landNavn: string;
+  fom: string;
+  tom: string;
+}`,signature:{properties:[{key:"landNavn",value:{name:"string",required:!0}},{key:"fom",value:{name:"string",required:!0}},{key:"tom",value:{name:"string",required:!0}}]}}],raw:`Readonly<{
+  landNavn: string;
+  fom: string;
+  tom: string;
+}>`}],raw:"UtlandsoppholdPeriode[]",required:!0}},{key:"utlandsoppholdEtter",value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  landNavn: string;
+  fom: string;
+  tom: string;
+}`,signature:{properties:[{key:"landNavn",value:{name:"string",required:!0}},{key:"fom",value:{name:"string",required:!0}},{key:"tom",value:{name:"string",required:!0}}]}}],raw:`Readonly<{
+  landNavn: string;
+  fom: string;
+  tom: string;
+}>`}],raw:"UtlandsoppholdPeriode[]",required:!0}}]},required:!0}},{key:"manglendeVedlegg",value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  dokumentType: string; // Brukes kun som sorteringsnøkkel, ikke kodeverk
+  dokumentTittel: string;
+  arbeidsgiverReferanse: string;
+  brukerHarSagtAtIkkeKommer: boolean;
+}`,signature:{properties:[{key:"dokumentType",value:{name:"string",required:!0}},{key:"dokumentTittel",value:{name:"string",required:!0}},{key:"arbeidsgiverReferanse",value:{name:"string",required:!0}},{key:"brukerHarSagtAtIkkeKommer",value:{name:"boolean",required:!0}}]}}],raw:`Readonly<{
+  dokumentType: string; // Brukes kun som sorteringsnøkkel, ikke kodeverk
+  dokumentTittel: string;
+  arbeidsgiverReferanse: string;
+  brukerHarSagtAtIkkeKommer: boolean;
+}>`}],raw:"ManglendeVedleggSoknad[]",required:!0}},{key:"oppgittFordeling",value:{name:"signature",type:"object",raw:`{
+  startDatoForPermisjon?: string;
+  dekningsgrader: {
+    avklartDekningsgrad?: number;
+    søker: {
+      søknadsdato: string;
+      dekningsgrad: number;
+    };
+    annenPart: {
+      søknadsdato: string;
+      dekningsgrad: number;
+    };
+  };
+}`,signature:{properties:[{key:"startDatoForPermisjon",value:{name:"string",required:!1}},{key:"dekningsgrader",value:{name:"signature",type:"object",raw:`{
+  avklartDekningsgrad?: number;
+  søker: {
+    søknadsdato: string;
+    dekningsgrad: number;
+  };
+  annenPart: {
+    søknadsdato: string;
+    dekningsgrad: number;
+  };
+}`,signature:{properties:[{key:"avklartDekningsgrad",value:{name:"number",required:!1}},{key:"søker",value:{name:"signature",type:"object",raw:`{
+  søknadsdato: string;
   dekningsgrad: number;
-  aktørId: string;
-  harIkkeRegistrertAdresse: boolean;
-  sakSkalTilInfotrygd: boolean;
-  behandlingTypeKanOpprettes: BehandlingOppretting[];
-  bruker: FagsakPerson;
-  fagsakMarkeringer?: Saksmarkering[];
-  annenPart?: FagsakPerson;
-  familiehendelse?: FagsakHendelse;
-  annenpartBehandling: AnnenPartBehandling;
-  behandlinger: BehandlingAppKontekst[];
-  brukerManglerAdresse: boolean;
-  historikkinnslag: Historikkinnslag[];
-  kontrollResultat: Risikoklassifisering;
-  notater: Saksnotat[];
+}`,signature:{properties:[{key:"søknadsdato",value:{name:"string",required:!0}},{key:"dekningsgrad",value:{name:"number",required:!0}}]},required:!0}},{key:"annenPart",value:{name:"signature",type:"object",raw:`{
+  søknadsdato: string;
+  dekningsgrad: number;
+}`,signature:{properties:[{key:"søknadsdato",value:{name:"string",required:!0}},{key:"dekningsgrad",value:{name:"number",required:!0}}]},required:!0}}]},required:!0}}]},required:!0}},{key:"søknadsfrist",value:{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  mottattDato?: string;
+  utledetSøknadsfrist?: string;
+  søknadsperiodeStart?: string;
+  søknadsperiodeSlutt?: string;
+  dagerOversittetFrist?: number;
+}`,signature:{properties:[{key:"mottattDato",value:{name:"string",required:!1}},{key:"utledetSøknadsfrist",value:{name:"string",required:!1}},{key:"søknadsperiodeStart",value:{name:"string",required:!1}},{key:"søknadsperiodeSlutt",value:{name:"string",required:!1}},{key:"dagerOversittetFrist",value:{name:"number",required:!1}}]}}],raw:`Readonly<{
+  mottattDato?: string;
+  utledetSøknadsfrist?: string;
+  søknadsperiodeStart?: string;
+  søknadsperiodeSlutt?: string;
+  dagerOversittetFrist?: number;
+}>`,required:!0}},{key:"utstedtdato",value:{name:"string",required:!1}},{key:"termindato",value:{name:"string",required:!1}},{key:"fodselsdatoer",value:{name:"Record",elements:[{name:"number"},{name:"string"}],raw:"Record<number, string>",required:!1}},{key:"omsorgsovertakelseDato",value:{name:"string",required:!1}},{key:"barnetsAnkomstTilNorgeDato",value:{name:"string",required:!1}},{key:"adopsjonFodelsedatoer",value:{name:"Record",elements:[{name:"number"},{name:"string"}],raw:"Record<number, string>",required:!1}},{key:"farSokerType",value:{name:"string",required:!1}}]}}],raw:`Readonly<{
+  soknadType: string;
+  mottattDato: string;
+  begrunnelseForSenInnsending: string | undefined;
+  antallBarn: number;
+  oppgittTilknytning: {
+    oppholdNorgeNa: boolean;
+    oppholdSistePeriode: boolean;
+    oppholdNestePeriode: boolean;
+    utlandsoppholdFor: UtlandsoppholdPeriode[];
+    utlandsoppholdEtter: UtlandsoppholdPeriode[];
+  };
+  manglendeVedlegg: ManglendeVedleggSoknad[];
+  oppgittFordeling: {
+    startDatoForPermisjon?: string;
+    dekningsgrader: {
+      avklartDekningsgrad?: number;
+      søker: {
+        søknadsdato: string;
+        dekningsgrad: number;
+      };
+      annenPart: {
+        søknadsdato: string;
+        dekningsgrad: number;
+      };
+    };
+  };
+  søknadsfrist: Søknadsfrist;
+  utstedtdato?: string;
+  termindato?: string;
+  fodselsdatoer?: Record<number, string>;
+  omsorgsovertakelseDato?: string;
+  barnetsAnkomstTilNorgeDato?: string;
+  adopsjonFodelsedatoer?: Record<number, string>;
+  farSokerType?: string;
+}>`},description:""},gjeldendeFamiliehendelse:{required:!0,tsType:{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  skjaringstidspunkt: string;
+  avklartBarn?: AvklartBarn[];
+  brukAntallBarnFraTps?: boolean;
+  dokumentasjonForeligger?: boolean;
+  termindato?: string;
+  antallBarnTermin?: number;
+  utstedtdato?: string;
+  morForSykVedFodsel?: boolean;
+  vedtaksDatoSomSvangerskapsuke?: number;
+  soknadType: string;
+  adopsjonFodelsedatoer?: Record<number, string>;
+  omsorgsovertakelseDato?: string;
+  antallBarnTilBeregning?: number;
+  ektefellesBarn?: boolean;
+  mannAdoptererAlene?: boolean;
+  vilkarType?: string;
+  ankomstNorge?: string;
+  erOverstyrt?: boolean;
+  foreldreansvarDato?: string;
+}`,signature:{properties:[{key:"skjaringstidspunkt",value:{name:"string",required:!0}},{key:"avklartBarn",value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  fodselsdato: string;
+  dodsdato?: string;
+}`,signature:{properties:[{key:"fodselsdato",value:{name:"string",required:!0}},{key:"dodsdato",value:{name:"string",required:!1}}]}}],raw:`Readonly<{
+  fodselsdato: string;
+  dodsdato?: string;
+}>`}],raw:"AvklartBarn[]",required:!1}},{key:"brukAntallBarnFraTps",value:{name:"boolean",required:!1}},{key:"dokumentasjonForeligger",value:{name:"boolean",required:!1}},{key:"termindato",value:{name:"string",required:!1}},{key:"antallBarnTermin",value:{name:"number",required:!1}},{key:"utstedtdato",value:{name:"string",required:!1}},{key:"morForSykVedFodsel",value:{name:"boolean",required:!1}},{key:"vedtaksDatoSomSvangerskapsuke",value:{name:"number",required:!1}},{key:"soknadType",value:{name:"string",required:!0}},{key:"adopsjonFodelsedatoer",value:{name:"Record",elements:[{name:"number"},{name:"string"}],raw:"Record<number, string>",required:!1}},{key:"omsorgsovertakelseDato",value:{name:"string",required:!1}},{key:"antallBarnTilBeregning",value:{name:"number",required:!1}},{key:"ektefellesBarn",value:{name:"boolean",required:!1}},{key:"mannAdoptererAlene",value:{name:"boolean",required:!1}},{key:"vilkarType",value:{name:"string",required:!1}},{key:"ankomstNorge",value:{name:"string",required:!1}},{key:"erOverstyrt",value:{name:"boolean",required:!1}},{key:"foreldreansvarDato",value:{name:"string",required:!1}}]}}],raw:`Readonly<{
+  skjaringstidspunkt: string;
+  avklartBarn?: AvklartBarn[];
+  brukAntallBarnFraTps?: boolean;
+  dokumentasjonForeligger?: boolean;
+  termindato?: string;
+  antallBarnTermin?: number;
+  utstedtdato?: string;
+  morForSykVedFodsel?: boolean;
+  vedtaksDatoSomSvangerskapsuke?: number;
+  soknadType: string;
+  adopsjonFodelsedatoer?: Record<number, string>;
+  omsorgsovertakelseDato?: string;
+  antallBarnTilBeregning?: number;
+  ektefellesBarn?: boolean;
+  mannAdoptererAlene?: boolean;
+  vilkarType?: string;
+  ankomstNorge?: string;
+  erOverstyrt?: boolean;
+  foreldreansvarDato?: string;
+}>`},description:""},aksjonspunkter:{required:!0,tsType:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  definisjon: string;
+  status: string;
+  begrunnelse?: string;
+  vilkarType?: string;
+  toTrinnsBehandling?: boolean;
+  toTrinnsBehandlingGodkjent?: boolean;
+  vurderPaNyttArsaker?: string[];
+  besluttersBegrunnelse?: string;
+  aksjonspunktType?: string;
+  kanLoses: boolean;
+  endretAv?: string;
+  endretTidspunkt?: string;
+}`,signature:{properties:[{key:"definisjon",value:{name:"string",required:!0}},{key:"status",value:{name:"string",required:!0}},{key:"begrunnelse",value:{name:"string",required:!1}},{key:"vilkarType",value:{name:"string",required:!1}},{key:"toTrinnsBehandling",value:{name:"boolean",required:!1}},{key:"toTrinnsBehandlingGodkjent",value:{name:"boolean",required:!1}},{key:"vurderPaNyttArsaker",value:{name:"Array",elements:[{name:"string"}],raw:"string[]",required:!1}},{key:"besluttersBegrunnelse",value:{name:"string",required:!1}},{key:"aksjonspunktType",value:{name:"string",required:!1}},{key:"kanLoses",value:{name:"boolean",required:!0}},{key:"endretAv",value:{name:"string",required:!1}},{key:"endretTidspunkt",value:{name:"string",required:!1}}]}}],raw:`Readonly<{
+  definisjon: string;
+  status: string;
+  begrunnelse?: string;
+  vilkarType?: string;
+  toTrinnsBehandling?: boolean;
+  toTrinnsBehandlingGodkjent?: boolean;
+  vurderPaNyttArsaker?: string[];
+  besluttersBegrunnelse?: string;
+  aksjonspunktType?: string;
+  kanLoses: boolean;
+  endretAv?: string;
+  endretTidspunkt?: string;
+}>`}],raw:"Aksjonspunkt[]"},description:""},status:{required:!0,tsType:{name:"string"},description:""},submitCallback:{required:!0,tsType:{name:"signature",type:"function",raw:"(aksjonspunktData: SoknadsfristAp) => Promise<void>",signature:{arguments:[{type:{name:"intersection",raw:`{
+  erVilkarOk: boolean;
+} & AksjonspunktTilBekreftelse<AksjonspunktKode.SOKNADSFRISTVILKARET>`,elements:[{name:"signature",type:"object",raw:`{
+  erVilkarOk: boolean;
+}`,signature:{properties:[{key:"erVilkarOk",value:{name:"boolean",required:!0}}]}},{name:"signature",type:"object",raw:`{
+  kode: T;
+  begrunnelse?: string;
+}`,signature:{properties:[{key:"kode",value:{name:"unknown",required:!0}},{key:"begrunnelse",value:{name:"string",required:!1}}]}}]},name:"aksjonspunktData"}],return:{name:"Promise",elements:[{name:"void"}],raw:"Promise<void>"}}},description:""},readOnly:{required:!0,tsType:{name:"boolean"},description:""},readOnlySubmitButton:{required:!0,tsType:{name:"boolean"},description:""},alleKodeverk:{required:!0,tsType:{name:"intersection",raw:"Omit<T, keyof R> & R",elements:[{name:"Omit",elements:[{name:"Record",elements:[{name:"KodeverkType"},{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  kode: string;
+  navn: string;
+  kodeverk: string;
+}`,signature:{properties:[{key:"kode",value:{name:"string",required:!0}},{key:"navn",value:{name:"string",required:!0}},{key:"kodeverk",value:{name:"string",required:!0}}]}}],raw:`Readonly<{
+  kode: string;
+  navn: string;
+  kodeverk: string;
+}>`}],raw:"KodeverkMedNavn[]"}],raw:"Record<KodeverkType, KodeverkMedNavn[]>"},{name:"signature",type:"object",raw:`{
+  Avslagsårsak: Avslagsårsak;
+}`,signature:{properties:[{key:"Avslagsårsak",value:{name:"Record",elements:[{name:"VilkarType"},{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  kode: string;
+  navn: string;
+  kodeverk: string;
+}`,signature:{properties:[{key:"kode",value:{name:"string",required:!0}},{key:"navn",value:{name:"string",required:!0}},{key:"kodeverk",value:{name:"string",required:!0}}]}}],raw:`Readonly<{
+  kode: string;
+  navn: string;
+  kodeverk: string;
+}>`}],raw:"KodeverkMedNavn[]"}],raw:"Record<VilkarType, KodeverkMedNavn[]>",required:!0}}]}}],raw:"Omit<T, keyof R>"},{name:"signature",type:"object",raw:`{
+  Avslagsårsak: Avslagsårsak;
+}`,signature:{properties:[{key:"Avslagsårsak",value:{name:"Record",elements:[{name:"VilkarType"},{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  kode: string;
+  navn: string;
+  kodeverk: string;
+}`,signature:{properties:[{key:"kode",value:{name:"string",required:!0}},{key:"navn",value:{name:"string",required:!0}},{key:"kodeverk",value:{name:"string",required:!0}}]}}],raw:`Readonly<{
+  kode: string;
+  navn: string;
+  kodeverk: string;
+}>`}],raw:"KodeverkMedNavn[]"}],raw:"Record<VilkarType, KodeverkMedNavn[]>",required:!0}}]}}]},description:""},formData:{required:!1,tsType:{name:"signature",type:"object",raw:`{
+  erVilkarOk?: boolean;
+  begrunnelse?: string;
+}`,signature:{properties:[{key:"erVilkarOk",value:{name:"boolean",required:!1}},{key:"begrunnelse",value:{name:"string",required:!1}}]}},description:""},setFormData:{required:!0,tsType:{name:"signature",type:"function",raw:"(data: FormValues) => void",signature:{arguments:[{type:{name:"signature",type:"object",raw:`{
+  erVilkarOk?: boolean;
+  begrunnelse?: string;
+}`,signature:{properties:[{key:"erVilkarOk",value:{name:"boolean",required:!1}},{key:"begrunnelse",value:{name:"string",required:!1}}]}},name:"data"}],return:{name:"void"}}},description:""}}};const Hn={"ErSoknadsfristVilkaretOppfyltForm.Soknadsfrist":"Søknadsfrist","ErSoknadsfristVilkaretOppfyltForm.Consider":"Vurder følgende","ErSoknadsfristVilkaretOppfyltForm.Question1":"Har det vært fristavbrytende kontakt?","ErSoknadsfristVilkaretOppfyltForm.Question2":"Har Nav gitt misvisende opplysninger?","ErSoknadsfristVilkaretOppfyltForm.Question3":"Har søker åpenbart ikke vært i stand til å sette frem krav?","ErSoknadsfristVilkaretOppfyltForm.MottattDato":"Dato for mottatt søknad","ErSoknadsfristVilkaretOppfyltForm.Omsorgsovertakelsesdato":"Dato for omsorgsovertakelse","ErSoknadsfristVilkaretOppfyltForm.Fodselsdato":"Fødselsdato","ErSoknadsfristVilkaretOppfyltForm.Termindato":"Termindato","ErSoknadsfristVilkaretOppfyltForm.ExplanationFromApplication":"Begrunnelse fra søknaden","ErSoknadsfristVilkaretOppfyltForm.ApplicationReceivedPart1":"Søknaden ble mottatt ","ErSoknadsfristVilkaretOppfyltForm.ApplicationReceivedPart2":"{numberOfDays} dager ","ErSoknadsfristVilkaretOppfyltForm.ApplicationReceivedPart3":"etter søknadsfristen ","ErSoknadsfristVilkaretOppfyltForm.SokersOpplysningsplikt":"Søkers opplysningsplikt","ErSoknadsfristVilkaretOppfyltForm.VilkarOppfylt":"Vilkåret er oppfylt","ErSoknadsfristVilkaretOppfyltForm.VilkarIkkeOppfylt":"Vilkåret er <b>ikke</b> oppfylt","ShowVilkarStatus.Check":"Informasjonen er utfylt"},Gn=re(Hn),ve=({behandling:n,soknad:r,familiehendelse:t,aksjonspunkter:a,status:s,submitCallback:o,isReadOnly:l,readOnlySubmitButton:u,alleKodeverk:g,formData:y,setFormData:k})=>e.jsx(ne,{value:Gn,children:e.jsx(pe,{behandlingsresultat:n.behandlingsresultat,soknad:r,gjeldendeFamiliehendelse:t.gjeldende,aksjonspunkter:a,status:s,submitCallback:o,readOnly:l,readOnlySubmitButton:u,alleKodeverk:g,formData:y,setFormData:k})});ve.__docgenInfo={description:"",methods:[],displayName:"SoknadsfristVilkarProsessIndex",props:{soknad:{required:!0,tsType:{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  soknadType: string;
+  mottattDato: string;
+  begrunnelseForSenInnsending: string | undefined;
+  antallBarn: number;
+  oppgittTilknytning: {
+    oppholdNorgeNa: boolean;
+    oppholdSistePeriode: boolean;
+    oppholdNestePeriode: boolean;
+    utlandsoppholdFor: UtlandsoppholdPeriode[];
+    utlandsoppholdEtter: UtlandsoppholdPeriode[];
+  };
+  manglendeVedlegg: ManglendeVedleggSoknad[];
+  oppgittFordeling: {
+    startDatoForPermisjon?: string;
+    dekningsgrader: {
+      avklartDekningsgrad?: number;
+      søker: {
+        søknadsdato: string;
+        dekningsgrad: number;
+      };
+      annenPart: {
+        søknadsdato: string;
+        dekningsgrad: number;
+      };
+    };
+  };
+  søknadsfrist: Søknadsfrist;
+  utstedtdato?: string;
+  termindato?: string;
+  fodselsdatoer?: Record<number, string>;
+  omsorgsovertakelseDato?: string;
+  barnetsAnkomstTilNorgeDato?: string;
+  adopsjonFodelsedatoer?: Record<number, string>;
+  farSokerType?: string;
+}`,signature:{properties:[{key:"soknadType",value:{name:"string",required:!0}},{key:"mottattDato",value:{name:"string",required:!0}},{key:"begrunnelseForSenInnsending",value:{name:"union",raw:"string | undefined",elements:[{name:"string"},{name:"undefined"}],required:!0}},{key:"antallBarn",value:{name:"number",required:!0}},{key:"oppgittTilknytning",value:{name:"signature",type:"object",raw:`{
+  oppholdNorgeNa: boolean;
+  oppholdSistePeriode: boolean;
+  oppholdNestePeriode: boolean;
+  utlandsoppholdFor: UtlandsoppholdPeriode[];
+  utlandsoppholdEtter: UtlandsoppholdPeriode[];
+}`,signature:{properties:[{key:"oppholdNorgeNa",value:{name:"boolean",required:!0}},{key:"oppholdSistePeriode",value:{name:"boolean",required:!0}},{key:"oppholdNestePeriode",value:{name:"boolean",required:!0}},{key:"utlandsoppholdFor",value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  landNavn: string;
+  fom: string;
+  tom: string;
+}`,signature:{properties:[{key:"landNavn",value:{name:"string",required:!0}},{key:"fom",value:{name:"string",required:!0}},{key:"tom",value:{name:"string",required:!0}}]}}],raw:`Readonly<{
+  landNavn: string;
+  fom: string;
+  tom: string;
+}>`}],raw:"UtlandsoppholdPeriode[]",required:!0}},{key:"utlandsoppholdEtter",value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  landNavn: string;
+  fom: string;
+  tom: string;
+}`,signature:{properties:[{key:"landNavn",value:{name:"string",required:!0}},{key:"fom",value:{name:"string",required:!0}},{key:"tom",value:{name:"string",required:!0}}]}}],raw:`Readonly<{
+  landNavn: string;
+  fom: string;
+  tom: string;
+}>`}],raw:"UtlandsoppholdPeriode[]",required:!0}}]},required:!0}},{key:"manglendeVedlegg",value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  dokumentType: string; // Brukes kun som sorteringsnøkkel, ikke kodeverk
+  dokumentTittel: string;
+  arbeidsgiverReferanse: string;
+  brukerHarSagtAtIkkeKommer: boolean;
+}`,signature:{properties:[{key:"dokumentType",value:{name:"string",required:!0}},{key:"dokumentTittel",value:{name:"string",required:!0}},{key:"arbeidsgiverReferanse",value:{name:"string",required:!0}},{key:"brukerHarSagtAtIkkeKommer",value:{name:"boolean",required:!0}}]}}],raw:`Readonly<{
+  dokumentType: string; // Brukes kun som sorteringsnøkkel, ikke kodeverk
+  dokumentTittel: string;
+  arbeidsgiverReferanse: string;
+  brukerHarSagtAtIkkeKommer: boolean;
+}>`}],raw:"ManglendeVedleggSoknad[]",required:!0}},{key:"oppgittFordeling",value:{name:"signature",type:"object",raw:`{
+  startDatoForPermisjon?: string;
+  dekningsgrader: {
+    avklartDekningsgrad?: number;
+    søker: {
+      søknadsdato: string;
+      dekningsgrad: number;
+    };
+    annenPart: {
+      søknadsdato: string;
+      dekningsgrad: number;
+    };
+  };
+}`,signature:{properties:[{key:"startDatoForPermisjon",value:{name:"string",required:!1}},{key:"dekningsgrader",value:{name:"signature",type:"object",raw:`{
+  avklartDekningsgrad?: number;
+  søker: {
+    søknadsdato: string;
+    dekningsgrad: number;
+  };
+  annenPart: {
+    søknadsdato: string;
+    dekningsgrad: number;
+  };
+}`,signature:{properties:[{key:"avklartDekningsgrad",value:{name:"number",required:!1}},{key:"søker",value:{name:"signature",type:"object",raw:`{
+  søknadsdato: string;
+  dekningsgrad: number;
+}`,signature:{properties:[{key:"søknadsdato",value:{name:"string",required:!0}},{key:"dekningsgrad",value:{name:"number",required:!0}}]},required:!0}},{key:"annenPart",value:{name:"signature",type:"object",raw:`{
+  søknadsdato: string;
+  dekningsgrad: number;
+}`,signature:{properties:[{key:"søknadsdato",value:{name:"string",required:!0}},{key:"dekningsgrad",value:{name:"number",required:!0}}]},required:!0}}]},required:!0}}]},required:!0}},{key:"søknadsfrist",value:{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  mottattDato?: string;
+  utledetSøknadsfrist?: string;
+  søknadsperiodeStart?: string;
+  søknadsperiodeSlutt?: string;
+  dagerOversittetFrist?: number;
+}`,signature:{properties:[{key:"mottattDato",value:{name:"string",required:!1}},{key:"utledetSøknadsfrist",value:{name:"string",required:!1}},{key:"søknadsperiodeStart",value:{name:"string",required:!1}},{key:"søknadsperiodeSlutt",value:{name:"string",required:!1}},{key:"dagerOversittetFrist",value:{name:"number",required:!1}}]}}],raw:`Readonly<{
+  mottattDato?: string;
+  utledetSøknadsfrist?: string;
+  søknadsperiodeStart?: string;
+  søknadsperiodeSlutt?: string;
+  dagerOversittetFrist?: number;
+}>`,required:!0}},{key:"utstedtdato",value:{name:"string",required:!1}},{key:"termindato",value:{name:"string",required:!1}},{key:"fodselsdatoer",value:{name:"Record",elements:[{name:"number"},{name:"string"}],raw:"Record<number, string>",required:!1}},{key:"omsorgsovertakelseDato",value:{name:"string",required:!1}},{key:"barnetsAnkomstTilNorgeDato",value:{name:"string",required:!1}},{key:"adopsjonFodelsedatoer",value:{name:"Record",elements:[{name:"number"},{name:"string"}],raw:"Record<number, string>",required:!1}},{key:"farSokerType",value:{name:"string",required:!1}}]}}],raw:`Readonly<{
+  soknadType: string;
+  mottattDato: string;
+  begrunnelseForSenInnsending: string | undefined;
+  antallBarn: number;
+  oppgittTilknytning: {
+    oppholdNorgeNa: boolean;
+    oppholdSistePeriode: boolean;
+    oppholdNestePeriode: boolean;
+    utlandsoppholdFor: UtlandsoppholdPeriode[];
+    utlandsoppholdEtter: UtlandsoppholdPeriode[];
+  };
+  manglendeVedlegg: ManglendeVedleggSoknad[];
+  oppgittFordeling: {
+    startDatoForPermisjon?: string;
+    dekningsgrader: {
+      avklartDekningsgrad?: number;
+      søker: {
+        søknadsdato: string;
+        dekningsgrad: number;
+      };
+      annenPart: {
+        søknadsdato: string;
+        dekningsgrad: number;
+      };
+    };
+  };
+  søknadsfrist: Søknadsfrist;
+  utstedtdato?: string;
+  termindato?: string;
+  fodselsdatoer?: Record<number, string>;
+  omsorgsovertakelseDato?: string;
+  barnetsAnkomstTilNorgeDato?: string;
+  adopsjonFodelsedatoer?: Record<number, string>;
+  farSokerType?: string;
+}>`},description:""},familiehendelse:{required:!0,tsType:{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  oppgitt: FamilieHendelse;
+  gjeldende: FamilieHendelse;
+  register: FamilieHendelse;
+}`,signature:{properties:[{key:"oppgitt",value:{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  skjaringstidspunkt: string;
+  avklartBarn?: AvklartBarn[];
+  brukAntallBarnFraTps?: boolean;
+  dokumentasjonForeligger?: boolean;
+  termindato?: string;
+  antallBarnTermin?: number;
+  utstedtdato?: string;
+  morForSykVedFodsel?: boolean;
+  vedtaksDatoSomSvangerskapsuke?: number;
+  soknadType: string;
+  adopsjonFodelsedatoer?: Record<number, string>;
+  omsorgsovertakelseDato?: string;
+  antallBarnTilBeregning?: number;
+  ektefellesBarn?: boolean;
+  mannAdoptererAlene?: boolean;
+  vilkarType?: string;
+  ankomstNorge?: string;
+  erOverstyrt?: boolean;
+  foreldreansvarDato?: string;
+}`,signature:{properties:[{key:"skjaringstidspunkt",value:{name:"string",required:!0}},{key:"avklartBarn",value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  fodselsdato: string;
+  dodsdato?: string;
+}`,signature:{properties:[{key:"fodselsdato",value:{name:"string",required:!0}},{key:"dodsdato",value:{name:"string",required:!1}}]}}],raw:`Readonly<{
+  fodselsdato: string;
+  dodsdato?: string;
+}>`}],raw:"AvklartBarn[]",required:!1}},{key:"brukAntallBarnFraTps",value:{name:"boolean",required:!1}},{key:"dokumentasjonForeligger",value:{name:"boolean",required:!1}},{key:"termindato",value:{name:"string",required:!1}},{key:"antallBarnTermin",value:{name:"number",required:!1}},{key:"utstedtdato",value:{name:"string",required:!1}},{key:"morForSykVedFodsel",value:{name:"boolean",required:!1}},{key:"vedtaksDatoSomSvangerskapsuke",value:{name:"number",required:!1}},{key:"soknadType",value:{name:"string",required:!0}},{key:"adopsjonFodelsedatoer",value:{name:"Record",elements:[{name:"number"},{name:"string"}],raw:"Record<number, string>",required:!1}},{key:"omsorgsovertakelseDato",value:{name:"string",required:!1}},{key:"antallBarnTilBeregning",value:{name:"number",required:!1}},{key:"ektefellesBarn",value:{name:"boolean",required:!1}},{key:"mannAdoptererAlene",value:{name:"boolean",required:!1}},{key:"vilkarType",value:{name:"string",required:!1}},{key:"ankomstNorge",value:{name:"string",required:!1}},{key:"erOverstyrt",value:{name:"boolean",required:!1}},{key:"foreldreansvarDato",value:{name:"string",required:!1}}]}}],raw:`Readonly<{
+  skjaringstidspunkt: string;
+  avklartBarn?: AvklartBarn[];
+  brukAntallBarnFraTps?: boolean;
+  dokumentasjonForeligger?: boolean;
+  termindato?: string;
+  antallBarnTermin?: number;
+  utstedtdato?: string;
+  morForSykVedFodsel?: boolean;
+  vedtaksDatoSomSvangerskapsuke?: number;
+  soknadType: string;
+  adopsjonFodelsedatoer?: Record<number, string>;
+  omsorgsovertakelseDato?: string;
+  antallBarnTilBeregning?: number;
+  ektefellesBarn?: boolean;
+  mannAdoptererAlene?: boolean;
+  vilkarType?: string;
+  ankomstNorge?: string;
+  erOverstyrt?: boolean;
+  foreldreansvarDato?: string;
+}>`,required:!0}},{key:"gjeldende",value:{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  skjaringstidspunkt: string;
+  avklartBarn?: AvklartBarn[];
+  brukAntallBarnFraTps?: boolean;
+  dokumentasjonForeligger?: boolean;
+  termindato?: string;
+  antallBarnTermin?: number;
+  utstedtdato?: string;
+  morForSykVedFodsel?: boolean;
+  vedtaksDatoSomSvangerskapsuke?: number;
+  soknadType: string;
+  adopsjonFodelsedatoer?: Record<number, string>;
+  omsorgsovertakelseDato?: string;
+  antallBarnTilBeregning?: number;
+  ektefellesBarn?: boolean;
+  mannAdoptererAlene?: boolean;
+  vilkarType?: string;
+  ankomstNorge?: string;
+  erOverstyrt?: boolean;
+  foreldreansvarDato?: string;
+}`,signature:{properties:[{key:"skjaringstidspunkt",value:{name:"string",required:!0}},{key:"avklartBarn",value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  fodselsdato: string;
+  dodsdato?: string;
+}`,signature:{properties:[{key:"fodselsdato",value:{name:"string",required:!0}},{key:"dodsdato",value:{name:"string",required:!1}}]}}],raw:`Readonly<{
+  fodselsdato: string;
+  dodsdato?: string;
+}>`}],raw:"AvklartBarn[]",required:!1}},{key:"brukAntallBarnFraTps",value:{name:"boolean",required:!1}},{key:"dokumentasjonForeligger",value:{name:"boolean",required:!1}},{key:"termindato",value:{name:"string",required:!1}},{key:"antallBarnTermin",value:{name:"number",required:!1}},{key:"utstedtdato",value:{name:"string",required:!1}},{key:"morForSykVedFodsel",value:{name:"boolean",required:!1}},{key:"vedtaksDatoSomSvangerskapsuke",value:{name:"number",required:!1}},{key:"soknadType",value:{name:"string",required:!0}},{key:"adopsjonFodelsedatoer",value:{name:"Record",elements:[{name:"number"},{name:"string"}],raw:"Record<number, string>",required:!1}},{key:"omsorgsovertakelseDato",value:{name:"string",required:!1}},{key:"antallBarnTilBeregning",value:{name:"number",required:!1}},{key:"ektefellesBarn",value:{name:"boolean",required:!1}},{key:"mannAdoptererAlene",value:{name:"boolean",required:!1}},{key:"vilkarType",value:{name:"string",required:!1}},{key:"ankomstNorge",value:{name:"string",required:!1}},{key:"erOverstyrt",value:{name:"boolean",required:!1}},{key:"foreldreansvarDato",value:{name:"string",required:!1}}]}}],raw:`Readonly<{
+  skjaringstidspunkt: string;
+  avklartBarn?: AvklartBarn[];
+  brukAntallBarnFraTps?: boolean;
+  dokumentasjonForeligger?: boolean;
+  termindato?: string;
+  antallBarnTermin?: number;
+  utstedtdato?: string;
+  morForSykVedFodsel?: boolean;
+  vedtaksDatoSomSvangerskapsuke?: number;
+  soknadType: string;
+  adopsjonFodelsedatoer?: Record<number, string>;
+  omsorgsovertakelseDato?: string;
+  antallBarnTilBeregning?: number;
+  ektefellesBarn?: boolean;
+  mannAdoptererAlene?: boolean;
+  vilkarType?: string;
+  ankomstNorge?: string;
+  erOverstyrt?: boolean;
+  foreldreansvarDato?: string;
+}>`,required:!0}},{key:"register",value:{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  skjaringstidspunkt: string;
+  avklartBarn?: AvklartBarn[];
+  brukAntallBarnFraTps?: boolean;
+  dokumentasjonForeligger?: boolean;
+  termindato?: string;
+  antallBarnTermin?: number;
+  utstedtdato?: string;
+  morForSykVedFodsel?: boolean;
+  vedtaksDatoSomSvangerskapsuke?: number;
+  soknadType: string;
+  adopsjonFodelsedatoer?: Record<number, string>;
+  omsorgsovertakelseDato?: string;
+  antallBarnTilBeregning?: number;
+  ektefellesBarn?: boolean;
+  mannAdoptererAlene?: boolean;
+  vilkarType?: string;
+  ankomstNorge?: string;
+  erOverstyrt?: boolean;
+  foreldreansvarDato?: string;
+}`,signature:{properties:[{key:"skjaringstidspunkt",value:{name:"string",required:!0}},{key:"avklartBarn",value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  fodselsdato: string;
+  dodsdato?: string;
+}`,signature:{properties:[{key:"fodselsdato",value:{name:"string",required:!0}},{key:"dodsdato",value:{name:"string",required:!1}}]}}],raw:`Readonly<{
+  fodselsdato: string;
+  dodsdato?: string;
+}>`}],raw:"AvklartBarn[]",required:!1}},{key:"brukAntallBarnFraTps",value:{name:"boolean",required:!1}},{key:"dokumentasjonForeligger",value:{name:"boolean",required:!1}},{key:"termindato",value:{name:"string",required:!1}},{key:"antallBarnTermin",value:{name:"number",required:!1}},{key:"utstedtdato",value:{name:"string",required:!1}},{key:"morForSykVedFodsel",value:{name:"boolean",required:!1}},{key:"vedtaksDatoSomSvangerskapsuke",value:{name:"number",required:!1}},{key:"soknadType",value:{name:"string",required:!0}},{key:"adopsjonFodelsedatoer",value:{name:"Record",elements:[{name:"number"},{name:"string"}],raw:"Record<number, string>",required:!1}},{key:"omsorgsovertakelseDato",value:{name:"string",required:!1}},{key:"antallBarnTilBeregning",value:{name:"number",required:!1}},{key:"ektefellesBarn",value:{name:"boolean",required:!1}},{key:"mannAdoptererAlene",value:{name:"boolean",required:!1}},{key:"vilkarType",value:{name:"string",required:!1}},{key:"ankomstNorge",value:{name:"string",required:!1}},{key:"erOverstyrt",value:{name:"boolean",required:!1}},{key:"foreldreansvarDato",value:{name:"string",required:!1}}]}}],raw:`Readonly<{
+  skjaringstidspunkt: string;
+  avklartBarn?: AvklartBarn[];
+  brukAntallBarnFraTps?: boolean;
+  dokumentasjonForeligger?: boolean;
+  termindato?: string;
+  antallBarnTermin?: number;
+  utstedtdato?: string;
+  morForSykVedFodsel?: boolean;
+  vedtaksDatoSomSvangerskapsuke?: number;
+  soknadType: string;
+  adopsjonFodelsedatoer?: Record<number, string>;
+  omsorgsovertakelseDato?: string;
+  antallBarnTilBeregning?: number;
+  ektefellesBarn?: boolean;
+  mannAdoptererAlene?: boolean;
+  vilkarType?: string;
+  ankomstNorge?: string;
+  erOverstyrt?: boolean;
+  foreldreansvarDato?: string;
+}>`,required:!0}}]}}],raw:`Readonly<{
+  oppgitt: FamilieHendelse;
+  gjeldende: FamilieHendelse;
+  register: FamilieHendelse;
 }>`},description:""},behandling:{required:!0,tsType:{name:"intersection",raw:`BehandlingFellesData &
 Readonly<{
   aksjonspunkt: Aksjonspunkt[];
@@ -1553,333 +1976,6 @@ Readonly<{
   };
   vilkår: Vilkar[];
   alleUttaksperioderAvslått: boolean;
-}>`}]},description:""},valgtProsessSteg:{required:!1,tsType:{name:"string"},description:""},registrerProsessPanel:{required:!0,tsType:{name:"signature",type:"function",raw:"(data: ProsessPanelMenyData) => void",signature:{arguments:[{type:{name:"signature",type:"object",raw:`{
-  id: string;
-  tekst?: string;
-  erAktiv?: boolean;
-  harApentAksjonspunkt?: boolean;
-  status?: string;
-}`,signature:{properties:[{key:"id",value:{name:"string",required:!0}},{key:"tekst",value:{name:"string",required:!1}},{key:"erAktiv",value:{name:"boolean",required:!1}},{key:"harApentAksjonspunkt",value:{name:"boolean",required:!1}},{key:"status",value:{name:"string",required:!1}}]}},name:"data"}],return:{name:"void"}}},description:""}}};const fn="_checkboxCol_vtbic_1",hn="_linkCol_vtbic_5",jn="_image_vtbic_9",Tn="_noDocuments_vtbic_15",An="_hidden_vtbic_19",cn="_table_vtbic_23",N={checkboxCol:fn,linkCol:hn,image:jn,noDocuments:Tn,hidden:An,table:cn},wn=["DocumentListVedtakInnsyn.Dokument"],ke=({documents:e,saksNr:t})=>e.length===0?n.jsx(w,{size:"small",className:N.noDocuments,children:n.jsx(g,{id:"DocumentListVedtakInnsyn.NoDocuments"})}):n.jsxs(n.Fragment,{children:[n.jsx(qe,{className:N.noDocuments,children:n.jsx(g,{id:"DocumentListVedtakInnsyn.InnsynsDok"})}),n.jsx(W,{noHover:!0,headerTextCodes:wn,children:e.map(r=>{const a=parseInt(r.dokumentId,10);return n.jsx(X,{id:a,children:n.jsx(c,{className:N.linkCol,children:n.jsx("a",{href:se(t,r.journalpostId,r.dokumentId),className:"lenke lenke--frittstaende",target:"_blank",rel:"noopener noreferrer",children:r.tittel})})},a)})})]});ke.__docgenInfo={description:`DocumentListVedtakInnsyn
-
-Presentasjonskomponent. Viser dokumenter  som er valgt til innsyn i en liste . Finnes ingen dokumenter blir det kun vist en label
-som viser at ingen dokumenter finnes på fagsak.`,methods:[],displayName:"DocumentListVedtakInnsyn",props:{saksNr:{required:!0,tsType:{name:"string"},description:""},documents:{required:!0,tsType:{name:"Array",elements:[{name:"unknown"}],raw:`({
-  fikkInnsyn: boolean;
-} & Dokument)[]`},description:""}}};const Rn="_wordwrap_1hm28_1",Bn={wordwrap:Rn},In=Oe(1500),Vn=Le(3),Pn=(e,t)=>r=>{r.preventDefault();const a={fritekst:t??" ",mottaker:"",dokumentMal:_e.INNSYN_SVAR,gjelderVedtak:!0};e(a)},Sn=e=>{const t=e.filter(r=>r.kommunikasjonsretning===S.INN);return e.forEach(r=>!t.some(a=>a.dokumentId===r.dokumentId)&&t.push(r)),t},Fn=(e,t)=>e.filter(r=>t.find(a=>a.dokumentId===r.dokumentId)).map(r=>{var a;return{...r,fikkInnsyn:((a=t.find(s=>s.dokumentId===r.dokumentId))==null?void 0:a.fikkInnsyn)||!1}}),En=e=>e===h.AVVIST?"InnsynVedtakForm.Avslatt":e===h.DELVISTINNVILGET?"InnsynVedtakForm.Delvis":"InnsynVedtakForm.Innvilget",Kn=(e,t)=>{var r;return{mottattDato:e,begrunnelse:(r=t.find(a=>a.definisjon===A.FORESLA_VEDTAK))==null?void 0:r.begrunnelse}},Dn=e=>({kode:A.FORESLA_VEDTAK,...e}),me=({readOnly:e,previewCallback:t,saksNr:r,innsynMottattDato:a,aksjonspunkter:s,submitCallback:i,innsynResultatType:u,innsynDokumenter:o,sprakkode:k,alleDokumenter:m,formData:j,setFormData:v})=>{var b;const F=B(),E=l.useMemo(()=>Kn(a,s),[a,s]),p=ne({defaultValues:j||E}),K=l.useMemo(()=>Fn(Sn(m),o),[m,o]),T=(b=s.find(y=>y.definisjon===A.VURDER_INNSYN))==null?void 0:b.begrunnelse,D=p.watch("begrunnelse"),I=Pn(t,D);return n.jsxs(re,{formMethods:p,onSubmit:y=>i(Dn(y)),setDataOnUnmount:v,children:[n.jsx(x,{size:"small",children:n.jsx(g,{id:e?"InnsynVedtakForm.Vedtak":"InnsynVedtakForm.ForslagVedtak"})}),n.jsx(d,{eightPx:!0}),n.jsx(H,{size:"small",children:n.jsx(g,{id:"InnsynVedtakForm.Resultat"})}),n.jsx(w,{size:"small",children:n.jsx(g,{id:En(u)})}),n.jsx(d,{eightPx:!0}),n.jsx(H,{size:"small",children:n.jsx(g,{id:"InnsynVedtakForm.Vurdering"})}),n.jsx(w,{size:"small",className:Bn.wordwrap,children:Pe(T)}),n.jsx(d,{twentyPx:!0}),u!==h.INNVILGET&&n.jsx(De,{name:"begrunnelse",label:F.formatMessage({id:"InnsynVedtakForm.Fritekst"}),validate:[Vn,In,Ne],maxLength:1500,readOnly:e,parse:Se,badges:[{type:"info",titleText:Fe(k)}]}),n.jsx(d,{twentyPx:!0}),u!==h.AVVIST&&n.jsx(ke,{saksNr:r,documents:K.filter(y=>y.fikkInnsyn===!0)}),n.jsx(d,{twentyPx:!0}),n.jsxs(fe,{gap:"2",children:[!e&&n.jsx(te,{isReadOnly:e,isSubmittable:!0,isSubmitting:p.formState.isSubmitting,isDirty:p.formState.isDirty,hasEmptyRequiredFields:!1}),n.jsx(O,{href:"#",onClick:I,onKeyDown:y=>y.key==="Enter"?I(y):null,target:"_blank",children:e?n.jsx(g,{id:"InnsynVedtakForm.VisVedtaksbrev"}):n.jsx(g,{id:"InnsynVedtakForm.ForhåndsvisBrev"})})]})]})};me.__docgenInfo={description:`InnsynVedtakForm
-
-Presentasjonskomponent. Viser panelet som håndterer vedtaksforslag av innsyn.`,methods:[],displayName:"InnsynVedtakForm",props:{sprakkode:{required:!0,tsType:{name:"string"},description:""},innsynDokumenter:{required:!0,tsType:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  journalpostId: string;
-  dokumentId: string;
-  fikkInnsyn: boolean;
-}`,signature:{properties:[{key:"journalpostId",value:{name:"string",required:!0}},{key:"dokumentId",value:{name:"string",required:!0}},{key:"fikkInnsyn",value:{name:"boolean",required:!0}}]}}],raw:`Readonly<{
-  journalpostId: string;
-  dokumentId: string;
-  fikkInnsyn: boolean;
-}>`}],raw:"InnsynDokument[]"},description:""},innsynMottattDato:{required:!0,tsType:{name:"string"},description:""},innsynResultatType:{required:!0,tsType:{name:"string"},description:""},alleDokumenter:{required:!0,tsType:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  journalpostId: string;
-  dokumentId: string;
-  behandlingUuidList?: string[];
-  tittel?: string;
-  tidspunkt?: string;
-  kommunikasjonsretning: string;
-  gjelderFor?: string;
-}`,signature:{properties:[{key:"journalpostId",value:{name:"string",required:!0}},{key:"dokumentId",value:{name:"string",required:!0}},{key:"behandlingUuidList",value:{name:"Array",elements:[{name:"string"}],raw:"string[]",required:!1}},{key:"tittel",value:{name:"string",required:!1}},{key:"tidspunkt",value:{name:"string",required:!1}},{key:"kommunikasjonsretning",value:{name:"string",required:!0}},{key:"gjelderFor",value:{name:"string",required:!1}}]}}],raw:`Readonly<{
-  journalpostId: string;
-  dokumentId: string;
-  behandlingUuidList?: string[];
-  tittel?: string;
-  tidspunkt?: string;
-  kommunikasjonsretning: string;
-  gjelderFor?: string;
-}>`}],raw:"Dokument[]"},description:""},saksNr:{required:!0,tsType:{name:"string"},description:""},aksjonspunkter:{required:!0,tsType:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  definisjon: string;
-  status: string;
-  begrunnelse?: string;
-  vilkarType?: string;
-  toTrinnsBehandling?: boolean;
-  toTrinnsBehandlingGodkjent?: boolean;
-  vurderPaNyttArsaker?: string[];
-  besluttersBegrunnelse?: string;
-  aksjonspunktType?: string;
-  kanLoses: boolean;
-  endretAv?: string;
-  endretTidspunkt?: string;
-}`,signature:{properties:[{key:"definisjon",value:{name:"string",required:!0}},{key:"status",value:{name:"string",required:!0}},{key:"begrunnelse",value:{name:"string",required:!1}},{key:"vilkarType",value:{name:"string",required:!1}},{key:"toTrinnsBehandling",value:{name:"boolean",required:!1}},{key:"toTrinnsBehandlingGodkjent",value:{name:"boolean",required:!1}},{key:"vurderPaNyttArsaker",value:{name:"Array",elements:[{name:"string"}],raw:"string[]",required:!1}},{key:"besluttersBegrunnelse",value:{name:"string",required:!1}},{key:"aksjonspunktType",value:{name:"string",required:!1}},{key:"kanLoses",value:{name:"boolean",required:!0}},{key:"endretAv",value:{name:"string",required:!1}},{key:"endretTidspunkt",value:{name:"string",required:!1}}]}}],raw:`Readonly<{
-  definisjon: string;
-  status: string;
-  begrunnelse?: string;
-  vilkarType?: string;
-  toTrinnsBehandling?: boolean;
-  toTrinnsBehandlingGodkjent?: boolean;
-  vurderPaNyttArsaker?: string[];
-  besluttersBegrunnelse?: string;
-  aksjonspunktType?: string;
-  kanLoses: boolean;
-  endretAv?: string;
-  endretTidspunkt?: string;
-}>`}],raw:"Aksjonspunkt[]"},description:""},submitCallback:{required:!0,tsType:{name:"signature",type:"function",raw:"(data: ForeslaVedtakAp) => Promise<void>",signature:{arguments:[{type:{name:"intersection",raw:`{
-  overskrift?: string;
-  fritekstBrev?: string;
-  skalBrukeOverstyrendeFritekstBrev?: boolean;
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.FORESLA_VEDTAK>`,elements:[{name:"signature",type:"object",raw:`{
-  overskrift?: string;
-  fritekstBrev?: string;
-  skalBrukeOverstyrendeFritekstBrev?: boolean;
-}`,signature:{properties:[{key:"overskrift",value:{name:"string",required:!1}},{key:"fritekstBrev",value:{name:"string",required:!1}},{key:"skalBrukeOverstyrendeFritekstBrev",value:{name:"boolean",required:!1}}]}},{name:"signature",type:"object",raw:`{
-  kode: T;
-  begrunnelse?: string;
-}`,signature:{properties:[{key:"kode",value:{name:"unknown",required:!0}},{key:"begrunnelse",value:{name:"string",required:!1}}]}}]},name:"data"}],return:{name:"Promise",elements:[{name:"void"}],raw:"Promise<void>"}}},description:""},previewCallback:{required:!0,tsType:{name:"signature",type:"function",raw:"(data: ForhandsvisData) => Promise<any>",signature:{arguments:[{type:{name:"signature",type:"object",raw:`{
-  fritekst: string;
-  mottaker: string;
-  dokumentMal: string;
-  gjelderVedtak: boolean;
-}`,signature:{properties:[{key:"fritekst",value:{name:"string",required:!0}},{key:"mottaker",value:{name:"string",required:!0}},{key:"dokumentMal",value:{name:"string",required:!0}},{key:"gjelderVedtak",value:{name:"boolean",required:!0}}]}},name:"data"}],return:{name:"Promise",elements:[{name:"any"}],raw:"Promise<any>"}}},description:""},readOnly:{required:!0,tsType:{name:"boolean"},description:""},formData:{required:!1,tsType:{name:"signature",type:"object",raw:`{
-  mottattDato?: string;
-  begrunnelse?: string;
-}`,signature:{properties:[{key:"mottattDato",value:{name:"string",required:!1}},{key:"begrunnelse",value:{name:"string",required:!1}}]}},description:""},setFormData:{required:!0,tsType:{name:"signature",type:"function",raw:"(data: FormValues) => void",signature:{arguments:[{type:{name:"signature",type:"object",raw:`{
-  mottattDato?: string;
-  begrunnelse?: string;
-}`,signature:{properties:[{key:"mottattDato",value:{name:"string",required:!1}},{key:"begrunnelse",value:{name:"string",required:!1}}]}},name:"data"}],return:{name:"void"}}},description:""}}};const Nn={"InnsynVedtakForm.ForslagVedtak":"Forslag til vedtak","InnsynVedtakForm.Vedtak":"Vedtak","InnsynVedtakForm.Innvilget":"Krav om innsyn innvilget","InnsynVedtakForm.Delvis":"Krav om innsyn delvis innvilget","InnsynVedtakForm.Avslatt":"Krav om innsyn avslått","InnsynVedtakForm.Resultat":"Resultat","InnsynVedtakForm.Vurdering":"Vurdering","InnsynVedtakForm.Fritekst":"Fritekst i brev","InnsynVedtakForm.ForhåndsvisBrev":"Forhåndsvis brev","InnsynVedtakForm.VisVedtaksbrev":"Vis vedtaksbrev","DocumentListVedtakInnsyn.Dokument":"Dokument","DocumentListVedtakInnsyn.InnsynsDok":"Innsynsdokumentasjon til søker","DocumentListVedtakInnsyn.NoDocuments":"Det finnes ingen dokumenter på saken","Malform.Beskrivelse":"Foretrukket språk"},On=ee(Nn),ye=({behandling:e,innsyn:t,saksnummer:r,aksjonspunkter:a,alleDokumenter:s=[],submitCallback:i,previewCallback:u,isReadOnly:o,formData:k,setFormData:m})=>n.jsx(Z,{value:On,children:n.jsx(me,{sprakkode:e.sprakkode,innsynDokumenter:t.dokumenter,innsynMottattDato:t.innsynMottattDato,innsynResultatType:t.innsynResultatType,alleDokumenter:s,saksNr:r,aksjonspunkter:a,submitCallback:i,previewCallback:u,readOnly:o,formData:k,setFormData:m})});ye.__docgenInfo={description:"",methods:[],displayName:"VedtakInnsynProsessIndex",props:{innsyn:{required:!0,tsType:{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  innsynMottattDato: string;
-  innsynResultatType: string;
-  vedtaksdokumentasjon: InnsynVedtaksdokument[];
-  dokumenter: InnsynDokument[];
-}`,signature:{properties:[{key:"innsynMottattDato",value:{name:"string",required:!0}},{key:"innsynResultatType",value:{name:"string",required:!0}},{key:"vedtaksdokumentasjon",value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  behandlingUuid: string;
-  tittel: string;
-  opprettetDato: string;
-}`,signature:{properties:[{key:"behandlingUuid",value:{name:"string",required:!0}},{key:"tittel",value:{name:"string",required:!0}},{key:"opprettetDato",value:{name:"string",required:!0}}]}}],raw:`Readonly<{
-  behandlingUuid: string;
-  tittel: string;
-  opprettetDato: string;
-}>`}],raw:"InnsynVedtaksdokument[]",required:!0}},{key:"dokumenter",value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  journalpostId: string;
-  dokumentId: string;
-  fikkInnsyn: boolean;
-}`,signature:{properties:[{key:"journalpostId",value:{name:"string",required:!0}},{key:"dokumentId",value:{name:"string",required:!0}},{key:"fikkInnsyn",value:{name:"boolean",required:!0}}]}}],raw:`Readonly<{
-  journalpostId: string;
-  dokumentId: string;
-  fikkInnsyn: boolean;
-}>`}],raw:"InnsynDokument[]",required:!0}}]}}],raw:`Readonly<{
-  innsynMottattDato: string;
-  innsynResultatType: string;
-  vedtaksdokumentasjon: InnsynVedtaksdokument[];
-  dokumenter: InnsynDokument[];
-}>`},description:""},saksnummer:{required:!0,tsType:{name:"string"},description:""},alleDokumenter:{required:!1,tsType:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  journalpostId: string;
-  dokumentId: string;
-  behandlingUuidList?: string[];
-  tittel?: string;
-  tidspunkt?: string;
-  kommunikasjonsretning: string;
-  gjelderFor?: string;
-}`,signature:{properties:[{key:"journalpostId",value:{name:"string",required:!0}},{key:"dokumentId",value:{name:"string",required:!0}},{key:"behandlingUuidList",value:{name:"Array",elements:[{name:"string"}],raw:"string[]",required:!1}},{key:"tittel",value:{name:"string",required:!1}},{key:"tidspunkt",value:{name:"string",required:!1}},{key:"kommunikasjonsretning",value:{name:"string",required:!0}},{key:"gjelderFor",value:{name:"string",required:!1}}]}}],raw:`Readonly<{
-  journalpostId: string;
-  dokumentId: string;
-  behandlingUuidList?: string[];
-  tittel?: string;
-  tidspunkt?: string;
-  kommunikasjonsretning: string;
-  gjelderFor?: string;
-}>`}],raw:"Dokument[]"},description:"",defaultValue:{value:"[]",computed:!1}},previewCallback:{required:!0,tsType:{name:"signature",type:"function",raw:"(data: ForhandsvisData) => Promise<any>",signature:{arguments:[{type:{name:"signature",type:"object",raw:`{
-  fritekst: string;
-  mottaker: string;
-  dokumentMal: string;
-  gjelderVedtak: boolean;
-}`,signature:{properties:[{key:"fritekst",value:{name:"string",required:!0}},{key:"mottaker",value:{name:"string",required:!0}},{key:"dokumentMal",value:{name:"string",required:!0}},{key:"gjelderVedtak",value:{name:"boolean",required:!0}}]}},name:"data"}],return:{name:"Promise",elements:[{name:"any"}],raw:"Promise<any>"}}},description:""},behandling:{required:!0,tsType:{name:"intersection",raw:`BehandlingFellesData &
-Readonly<{
-  aksjonspunkt: Aksjonspunkt[];
-  harSøknad: boolean;
-  harSattEndringsdato: boolean;
-  sjekkSimuleringResultat: boolean;
-  taskStatus?: {
-    message: string;
-    pending: boolean;
-    status: string;
-    readOnly: boolean;
-  };
-  vilkår: Vilkar[];
-  alleUttaksperioderAvslått: boolean;
-}>`,elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  versjon: number;
-  uuid: string;
-  status: string;
-  type: string;
-  fristBehandlingPåVent?: string;
-  venteArsakKode?: string;
-  behandlingPaaVent: boolean;
-  behandlingHenlagt: boolean;
-  behandlingsresultat?: Behandlingsresultat;
-  links: {
-    href: string;
-    rel: string;
-    requestPayload?: any;
-    type: string;
-  }[];
-  opprettet: string;
-  avsluttet?: string;
-  erAktivPapirsoknad: boolean;
-  gjeldendeVedtak: boolean;
-  sprakkode: string;
-  behandlendeEnhetId: string;
-  behandlendeEnhetNavn: string;
-  behandlingKoet: boolean;
-  toTrinnsBehandling: boolean;
-  behandlingÅrsaker: BehandlingÅrsak[];
-  ansvarligSaksbehandler?: string;
-  kanHenleggeBehandling?: boolean;
-  harVerge?: boolean;
-  førsteÅrsak?: BehandlingÅrsak;
-  fristBehandlingPaaVent?: string;
-}`,signature:{properties:[{key:"versjon",value:{name:"number",required:!0}},{key:"uuid",value:{name:"string",required:!0}},{key:"status",value:{name:"string",required:!0}},{key:"type",value:{name:"string",required:!0}},{key:"fristBehandlingPåVent",value:{name:"string",required:!1}},{key:"venteArsakKode",value:{name:"string",required:!1}},{key:"behandlingPaaVent",value:{name:"boolean",required:!0}},{key:"behandlingHenlagt",value:{name:"boolean",required:!0}},{key:"behandlingsresultat",value:{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  id: number;
-  type: string;
-  avslagsarsak?: string;
-  avslagsarsakFritekst?: string;
-  rettenTil?: string;
-  konsekvenserForYtelsen?: string[];
-  vedtaksbrev?: string;
-  overskrift?: string;
-  fritekstbrev?: string;
-  erRevurderingMedUendretUtfall?: boolean;
-  skjæringstidspunkt?: {
-    dato: string;
-  };
-  opphørsdato?: string;
-}`,signature:{properties:[{key:"id",value:{name:"number",required:!0}},{key:"type",value:{name:"string",required:!0}},{key:"avslagsarsak",value:{name:"string",required:!1}},{key:"avslagsarsakFritekst",value:{name:"string",required:!1}},{key:"rettenTil",value:{name:"string",required:!1}},{key:"konsekvenserForYtelsen",value:{name:"Array",elements:[{name:"string"}],raw:"string[]",required:!1}},{key:"vedtaksbrev",value:{name:"string",required:!1}},{key:"overskrift",value:{name:"string",required:!1}},{key:"fritekstbrev",value:{name:"string",required:!1}},{key:"erRevurderingMedUendretUtfall",value:{name:"boolean",required:!1}},{key:"skjæringstidspunkt",value:{name:"signature",type:"object",raw:`{
-  dato: string;
-}`,signature:{properties:[{key:"dato",value:{name:"string",required:!0}}]},required:!1}},{key:"opphørsdato",value:{name:"string",required:!1}}]}}],raw:`Readonly<{
-  id: number;
-  type: string;
-  avslagsarsak?: string;
-  avslagsarsakFritekst?: string;
-  rettenTil?: string;
-  konsekvenserForYtelsen?: string[];
-  vedtaksbrev?: string;
-  overskrift?: string;
-  fritekstbrev?: string;
-  erRevurderingMedUendretUtfall?: boolean;
-  skjæringstidspunkt?: {
-    dato: string;
-  };
-  opphørsdato?: string;
-}>`,required:!1}},{key:"links",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
-  href: string;
-  rel: string;
-  requestPayload?: any;
-  type: string;
-}`,signature:{properties:[{key:"href",value:{name:"string",required:!0}},{key:"rel",value:{name:"string",required:!0}},{key:"requestPayload",value:{name:"any",required:!1}},{key:"type",value:{name:"string",required:!0}}]}}],raw:`{
-  href: string;
-  rel: string;
-  requestPayload?: any;
-  type: string;
-}[]`,required:!0}},{key:"opprettet",value:{name:"string",required:!0}},{key:"avsluttet",value:{name:"string",required:!1}},{key:"erAktivPapirsoknad",value:{name:"boolean",required:!0}},{key:"gjeldendeVedtak",value:{name:"boolean",required:!0}},{key:"sprakkode",value:{name:"string",required:!0}},{key:"behandlendeEnhetId",value:{name:"string",required:!0}},{key:"behandlendeEnhetNavn",value:{name:"string",required:!0}},{key:"behandlingKoet",value:{name:"boolean",required:!0}},{key:"toTrinnsBehandling",value:{name:"boolean",required:!0}},{key:"behandlingÅrsaker",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
-  behandlingArsakType: string;
-  manueltOpprettet: boolean;
-  erAutomatiskRevurdering: boolean;
-}`,signature:{properties:[{key:"behandlingArsakType",value:{name:"string",required:!0}},{key:"manueltOpprettet",value:{name:"boolean",required:!0}},{key:"erAutomatiskRevurdering",value:{name:"boolean",required:!0}}]},required:!1}],raw:"BehandlingÅrsak[]",required:!0}},{key:"ansvarligSaksbehandler",value:{name:"string",required:!1}},{key:"kanHenleggeBehandling",value:{name:"boolean",required:!1}},{key:"harVerge",value:{name:"boolean",required:!1}},{key:"førsteÅrsak",value:{name:"signature",type:"object",raw:`{
-  behandlingArsakType: string;
-  manueltOpprettet: boolean;
-  erAutomatiskRevurdering: boolean;
-}`,signature:{properties:[{key:"behandlingArsakType",value:{name:"string",required:!0}},{key:"manueltOpprettet",value:{name:"boolean",required:!0}},{key:"erAutomatiskRevurdering",value:{name:"boolean",required:!0}}]},required:!1}},{key:"fristBehandlingPaaVent",value:{name:"string",required:!1}}]}}],raw:`Readonly<{
-  versjon: number;
-  uuid: string;
-  status: string;
-  type: string;
-  fristBehandlingPåVent?: string;
-  venteArsakKode?: string;
-  behandlingPaaVent: boolean;
-  behandlingHenlagt: boolean;
-  behandlingsresultat?: Behandlingsresultat;
-  links: {
-    href: string;
-    rel: string;
-    requestPayload?: any;
-    type: string;
-  }[];
-  opprettet: string;
-  avsluttet?: string;
-  erAktivPapirsoknad: boolean;
-  gjeldendeVedtak: boolean;
-  sprakkode: string;
-  behandlendeEnhetId: string;
-  behandlendeEnhetNavn: string;
-  behandlingKoet: boolean;
-  toTrinnsBehandling: boolean;
-  behandlingÅrsaker: BehandlingÅrsak[];
-  ansvarligSaksbehandler?: string;
-  kanHenleggeBehandling?: boolean;
-  harVerge?: boolean;
-  førsteÅrsak?: BehandlingÅrsak;
-  fristBehandlingPaaVent?: string;
-}>`},{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  aksjonspunkt: Aksjonspunkt[];
-  harSøknad: boolean;
-  harSattEndringsdato: boolean;
-  sjekkSimuleringResultat: boolean;
-  taskStatus?: {
-    message: string;
-    pending: boolean;
-    status: string;
-    readOnly: boolean;
-  };
-  vilkår: Vilkar[];
-  alleUttaksperioderAvslått: boolean;
-}`,signature:{properties:[{key:"aksjonspunkt",value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  definisjon: string;
-  status: string;
-  begrunnelse?: string;
-  vilkarType?: string;
-  toTrinnsBehandling?: boolean;
-  toTrinnsBehandlingGodkjent?: boolean;
-  vurderPaNyttArsaker?: string[];
-  besluttersBegrunnelse?: string;
-  aksjonspunktType?: string;
-  kanLoses: boolean;
-  endretAv?: string;
-  endretTidspunkt?: string;
-}`,signature:{properties:[{key:"definisjon",value:{name:"string",required:!0}},{key:"status",value:{name:"string",required:!0}},{key:"begrunnelse",value:{name:"string",required:!1}},{key:"vilkarType",value:{name:"string",required:!1}},{key:"toTrinnsBehandling",value:{name:"boolean",required:!1}},{key:"toTrinnsBehandlingGodkjent",value:{name:"boolean",required:!1}},{key:"vurderPaNyttArsaker",value:{name:"Array",elements:[{name:"string"}],raw:"string[]",required:!1}},{key:"besluttersBegrunnelse",value:{name:"string",required:!1}},{key:"aksjonspunktType",value:{name:"string",required:!1}},{key:"kanLoses",value:{name:"boolean",required:!0}},{key:"endretAv",value:{name:"string",required:!1}},{key:"endretTidspunkt",value:{name:"string",required:!1}}]}}],raw:`Readonly<{
-  definisjon: string;
-  status: string;
-  begrunnelse?: string;
-  vilkarType?: string;
-  toTrinnsBehandling?: boolean;
-  toTrinnsBehandlingGodkjent?: boolean;
-  vurderPaNyttArsaker?: string[];
-  besluttersBegrunnelse?: string;
-  aksjonspunktType?: string;
-  kanLoses: boolean;
-  endretAv?: string;
-  endretTidspunkt?: string;
-}>`}],raw:"Aksjonspunkt[]",required:!0}},{key:"harSøknad",value:{name:"boolean",required:!0}},{key:"harSattEndringsdato",value:{name:"boolean",required:!0}},{key:"sjekkSimuleringResultat",value:{name:"boolean",required:!0}},{key:"taskStatus",value:{name:"signature",type:"object",raw:`{
-  message: string;
-  pending: boolean;
-  status: string;
-  readOnly: boolean;
-}`,signature:{properties:[{key:"message",value:{name:"string",required:!0}},{key:"pending",value:{name:"boolean",required:!0}},{key:"status",value:{name:"string",required:!0}},{key:"readOnly",value:{name:"boolean",required:!0}}]},required:!1}},{key:"vilkår",value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
-  vilkarType: string;
-  vilkarStatus: string;
-  avslagKode?: string;
-  lovReferanse?: string;
-  overstyrbar: boolean;
-}`,signature:{properties:[{key:"vilkarType",value:{name:"string",required:!0}},{key:"vilkarStatus",value:{name:"string",required:!0}},{key:"avslagKode",value:{name:"string",required:!1}},{key:"lovReferanse",value:{name:"string",required:!1}},{key:"overstyrbar",value:{name:"boolean",required:!0}}]}}],raw:`Readonly<{
-  vilkarType: string;
-  vilkarStatus: string;
-  avslagKode?: string;
-  lovReferanse?: string;
-  overstyrbar: boolean;
-}>`}],raw:"Vilkar[]",required:!0}},{key:"alleUttaksperioderAvslått",value:{name:"boolean",required:!0}}]}}],raw:`Readonly<{
-  aksjonspunkt: Aksjonspunkt[];
-  harSøknad: boolean;
-  harSattEndringsdato: boolean;
-  sjekkSimuleringResultat: boolean;
-  taskStatus?: {
-    message: string;
-    pending: boolean;
-    status: string;
-    readOnly: boolean;
-  };
-  vilkår: Vilkar[];
-  alleUttaksperioderAvslått: boolean;
 }>`}]},description:""},fagsak:{required:!0,tsType:{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
   saksnummer: string;
   fagsakYtelseType: string;
@@ -2391,7 +2487,217 @@ Readonly<{
   avslagKode?: string;
   lovReferanse?: string;
   overstyrbar: boolean;
-}>`}],raw:"Vilkar[]"},description:""},isAksjonspunktOpen:{required:!0,tsType:{name:"boolean"},description:""},formData:{required:!1,tsType:{name:"any"},description:""},setFormData:{required:!0,tsType:{name:"signature",type:"function",raw:"(data: any) => void",signature:{arguments:[{type:{name:"any"},name:"data"}],return:{name:"void"}}},description:""}}};const J=e=>{const{aksjonspunkt:t,behandlingsresultat:r}=e,a=t.some(s=>s.status===M.OPPRETTET);return t.length===0||a?P.IKKE_VURDERT:(r==null?void 0:r.type)===$.INNSYN_INNVILGET||(r==null?void 0:r.type)===$.INNSYN_DELVIS_INNVILGET?P.OPPFYLT:P.IKKE_OPPFYLT},Ln=(e,t,r)=>a=>{const s={...a,behandlingUuid:r.uuid,fagsakYtelseType:t.fagsakYtelseType};return e(s).then(i=>Ee(i))},xn=(e,t)=>()=>(t(!1),()=>{e(!0)}),Mn=[A.FORESLA_VEDTAK],Un=e=>[{key:R.INNSYN},{key:R.INNSYN_DOKUMENTER,params:{saksnummer:e}}],pe=({fagsak:e,opneSokeside:t,setSkalOppdatereEtterBekreftelseAvAp:r,...a})=>{const s=B(),[i,u]=l.useState(!1),o=xn(u,r),k=He(),{startRequest:m}=Ue.useRestApiRunner(R.PREVIEW_MESSAGE),j=l.useCallback(Ln(m,e,k.behandling),[k.behandling.versjon]);return n.jsx(ie,{...a,panelEndepunkter:Un(e.saksnummer),aksjonspunktKoder:Mn,prosessPanelKode:Q.VEDTAK,prosessPanelMenyTekst:s.formatMessage({id:"Behandlingspunkt.Vedtak"}),skalPanelVisesIMeny:()=>!0,hentOverstyrtStatus:()=>J(a.behandling),lagringSideEffekter:o,hentSkalMarkeresSomAktiv:()=>J(a.behandling)!==P.IKKE_VURDERT,renderPanel:v=>n.jsxs(n.Fragment,{children:[n.jsx(Ge,{visModal:i,lukkModal:()=>{u(!1),t()},behandlingsresultat:k.behandling.behandlingsresultat}),n.jsx(ye,{saksnummer:e.saksnummer,previewCallback:j,alleDokumenter:v==null?void 0:v.innsynDokumenter,...v})]})})};pe.__docgenInfo={description:"",methods:[],displayName:"InnsynVedtakProsessStegInitPanel",props:{fagsak:{required:!0,tsType:{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+}>`}],raw:"Vilkar[]"},description:""},isAksjonspunktOpen:{required:!0,tsType:{name:"boolean"},description:""},formData:{required:!1,tsType:{name:"any"},description:""},setFormData:{required:!0,tsType:{name:"signature",type:"function",raw:"(data: any) => void",signature:{arguments:[{type:{name:"any"},name:"data"}],return:{name:"void"}}},description:""}}};const Yn=[i.SOKNADSFRISTVILKARET,i.OVERSTYR_SOKNADSFRISTVILKAR],L=[P.SOKNADFRISTVILKARET],Cn=[A.SOKNAD,A.FAMILIEHENDELSE],be=({rettigheter:n,...r})=>{const t=S(),[a,s]=m.useState(!1),o=m.useCallback(()=>s(!a),[a]);return e.jsx(H,{...r,panelEndepunkter:Cn,aksjonspunktKoder:Yn,vilkarKoder:L,prosessPanelKode:x.SOEKNADSFRIST,prosessPanelMenyTekst:t.formatMessage({id:"Behandlingspunkt.Soknadsfristvilkaret"}),skalPanelVisesIMeny:l=>Ve(l==null?void 0:l.aksjonspunkter,L,l==null?void 0:l.vilkar),erOverstyrt:a,renderPanel:l=>{const u=l.aksjonspunkter.some(g=>g.definisjon===i.SOKNADSFRISTVILKARET);return e.jsxs(e.Fragment,{children:[!u&&e.jsx(N,{aksjonspunkter:l==null?void 0:l.aksjonspunkter,aksjonspunktKode:i.OVERSTYR_SOKNADSFRISTVILKAR,vilkar:l.vilkar,vilkarKoder:L,panelTekstKode:"Behandlingspunkt.Soknadsfristvilkaret",toggleOverstyring:o,erOverstyrt:a,overrideReadOnly:l.isReadOnly,kanOverstyreAccess:n.kanOverstyreAccess}),u&&e.jsx(ve,{...l})]})}})};be.__docgenInfo={description:"",methods:[],displayName:"SoknadsfristEsProsessStegInitPanel",props:{rettigheter:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  writeAccess: Aksess;
+  kanOverstyreAccess: Aksess;
+}`,signature:{properties:[{key:"writeAccess",value:{name:"signature",type:"object",raw:`{
+  employeeHasAccess: boolean;
+  isEnabled: boolean;
+}`,signature:{properties:[{key:"employeeHasAccess",value:{name:"boolean",required:!0}},{key:"isEnabled",value:{name:"boolean",required:!0}}]},required:!0}},{key:"kanOverstyreAccess",value:{name:"signature",type:"object",raw:`{
+  employeeHasAccess: boolean;
+  isEnabled: boolean;
+}`,signature:{properties:[{key:"employeeHasAccess",value:{name:"boolean",required:!0}},{key:"isEnabled",value:{name:"boolean",required:!0}}]},required:!0}}]}},description:""},behandling:{required:!0,tsType:{name:"intersection",raw:`BehandlingFellesData &
+Readonly<{
+  aksjonspunkt: Aksjonspunkt[];
+  harSøknad: boolean;
+  harSattEndringsdato: boolean;
+  sjekkSimuleringResultat: boolean;
+  taskStatus?: {
+    message: string;
+    pending: boolean;
+    status: string;
+    readOnly: boolean;
+  };
+  vilkår: Vilkar[];
+  alleUttaksperioderAvslått: boolean;
+}>`,elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  versjon: number;
+  uuid: string;
+  status: string;
+  type: string;
+  fristBehandlingPåVent?: string;
+  venteArsakKode?: string;
+  behandlingPaaVent: boolean;
+  behandlingHenlagt: boolean;
+  behandlingsresultat?: Behandlingsresultat;
+  links: {
+    href: string;
+    rel: string;
+    requestPayload?: any;
+    type: string;
+  }[];
+  opprettet: string;
+  avsluttet?: string;
+  erAktivPapirsoknad: boolean;
+  gjeldendeVedtak: boolean;
+  sprakkode: string;
+  behandlendeEnhetId: string;
+  behandlendeEnhetNavn: string;
+  behandlingKoet: boolean;
+  toTrinnsBehandling: boolean;
+  behandlingÅrsaker: BehandlingÅrsak[];
+  ansvarligSaksbehandler?: string;
+  kanHenleggeBehandling?: boolean;
+  harVerge?: boolean;
+  førsteÅrsak?: BehandlingÅrsak;
+  fristBehandlingPaaVent?: string;
+}`,signature:{properties:[{key:"versjon",value:{name:"number",required:!0}},{key:"uuid",value:{name:"string",required:!0}},{key:"status",value:{name:"string",required:!0}},{key:"type",value:{name:"string",required:!0}},{key:"fristBehandlingPåVent",value:{name:"string",required:!1}},{key:"venteArsakKode",value:{name:"string",required:!1}},{key:"behandlingPaaVent",value:{name:"boolean",required:!0}},{key:"behandlingHenlagt",value:{name:"boolean",required:!0}},{key:"behandlingsresultat",value:{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  id: number;
+  type: string;
+  avslagsarsak?: string;
+  avslagsarsakFritekst?: string;
+  rettenTil?: string;
+  konsekvenserForYtelsen?: string[];
+  vedtaksbrev?: string;
+  overskrift?: string;
+  fritekstbrev?: string;
+  erRevurderingMedUendretUtfall?: boolean;
+  skjæringstidspunkt?: {
+    dato: string;
+  };
+  opphørsdato?: string;
+}`,signature:{properties:[{key:"id",value:{name:"number",required:!0}},{key:"type",value:{name:"string",required:!0}},{key:"avslagsarsak",value:{name:"string",required:!1}},{key:"avslagsarsakFritekst",value:{name:"string",required:!1}},{key:"rettenTil",value:{name:"string",required:!1}},{key:"konsekvenserForYtelsen",value:{name:"Array",elements:[{name:"string"}],raw:"string[]",required:!1}},{key:"vedtaksbrev",value:{name:"string",required:!1}},{key:"overskrift",value:{name:"string",required:!1}},{key:"fritekstbrev",value:{name:"string",required:!1}},{key:"erRevurderingMedUendretUtfall",value:{name:"boolean",required:!1}},{key:"skjæringstidspunkt",value:{name:"signature",type:"object",raw:`{
+  dato: string;
+}`,signature:{properties:[{key:"dato",value:{name:"string",required:!0}}]},required:!1}},{key:"opphørsdato",value:{name:"string",required:!1}}]}}],raw:`Readonly<{
+  id: number;
+  type: string;
+  avslagsarsak?: string;
+  avslagsarsakFritekst?: string;
+  rettenTil?: string;
+  konsekvenserForYtelsen?: string[];
+  vedtaksbrev?: string;
+  overskrift?: string;
+  fritekstbrev?: string;
+  erRevurderingMedUendretUtfall?: boolean;
+  skjæringstidspunkt?: {
+    dato: string;
+  };
+  opphørsdato?: string;
+}>`,required:!1}},{key:"links",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  href: string;
+  rel: string;
+  requestPayload?: any;
+  type: string;
+}`,signature:{properties:[{key:"href",value:{name:"string",required:!0}},{key:"rel",value:{name:"string",required:!0}},{key:"requestPayload",value:{name:"any",required:!1}},{key:"type",value:{name:"string",required:!0}}]}}],raw:`{
+  href: string;
+  rel: string;
+  requestPayload?: any;
+  type: string;
+}[]`,required:!0}},{key:"opprettet",value:{name:"string",required:!0}},{key:"avsluttet",value:{name:"string",required:!1}},{key:"erAktivPapirsoknad",value:{name:"boolean",required:!0}},{key:"gjeldendeVedtak",value:{name:"boolean",required:!0}},{key:"sprakkode",value:{name:"string",required:!0}},{key:"behandlendeEnhetId",value:{name:"string",required:!0}},{key:"behandlendeEnhetNavn",value:{name:"string",required:!0}},{key:"behandlingKoet",value:{name:"boolean",required:!0}},{key:"toTrinnsBehandling",value:{name:"boolean",required:!0}},{key:"behandlingÅrsaker",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  behandlingArsakType: string;
+  manueltOpprettet: boolean;
+  erAutomatiskRevurdering: boolean;
+}`,signature:{properties:[{key:"behandlingArsakType",value:{name:"string",required:!0}},{key:"manueltOpprettet",value:{name:"boolean",required:!0}},{key:"erAutomatiskRevurdering",value:{name:"boolean",required:!0}}]},required:!1}],raw:"BehandlingÅrsak[]",required:!0}},{key:"ansvarligSaksbehandler",value:{name:"string",required:!1}},{key:"kanHenleggeBehandling",value:{name:"boolean",required:!1}},{key:"harVerge",value:{name:"boolean",required:!1}},{key:"førsteÅrsak",value:{name:"signature",type:"object",raw:`{
+  behandlingArsakType: string;
+  manueltOpprettet: boolean;
+  erAutomatiskRevurdering: boolean;
+}`,signature:{properties:[{key:"behandlingArsakType",value:{name:"string",required:!0}},{key:"manueltOpprettet",value:{name:"boolean",required:!0}},{key:"erAutomatiskRevurdering",value:{name:"boolean",required:!0}}]},required:!1}},{key:"fristBehandlingPaaVent",value:{name:"string",required:!1}}]}}],raw:`Readonly<{
+  versjon: number;
+  uuid: string;
+  status: string;
+  type: string;
+  fristBehandlingPåVent?: string;
+  venteArsakKode?: string;
+  behandlingPaaVent: boolean;
+  behandlingHenlagt: boolean;
+  behandlingsresultat?: Behandlingsresultat;
+  links: {
+    href: string;
+    rel: string;
+    requestPayload?: any;
+    type: string;
+  }[];
+  opprettet: string;
+  avsluttet?: string;
+  erAktivPapirsoknad: boolean;
+  gjeldendeVedtak: boolean;
+  sprakkode: string;
+  behandlendeEnhetId: string;
+  behandlendeEnhetNavn: string;
+  behandlingKoet: boolean;
+  toTrinnsBehandling: boolean;
+  behandlingÅrsaker: BehandlingÅrsak[];
+  ansvarligSaksbehandler?: string;
+  kanHenleggeBehandling?: boolean;
+  harVerge?: boolean;
+  førsteÅrsak?: BehandlingÅrsak;
+  fristBehandlingPaaVent?: string;
+}>`},{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  aksjonspunkt: Aksjonspunkt[];
+  harSøknad: boolean;
+  harSattEndringsdato: boolean;
+  sjekkSimuleringResultat: boolean;
+  taskStatus?: {
+    message: string;
+    pending: boolean;
+    status: string;
+    readOnly: boolean;
+  };
+  vilkår: Vilkar[];
+  alleUttaksperioderAvslått: boolean;
+}`,signature:{properties:[{key:"aksjonspunkt",value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  definisjon: string;
+  status: string;
+  begrunnelse?: string;
+  vilkarType?: string;
+  toTrinnsBehandling?: boolean;
+  toTrinnsBehandlingGodkjent?: boolean;
+  vurderPaNyttArsaker?: string[];
+  besluttersBegrunnelse?: string;
+  aksjonspunktType?: string;
+  kanLoses: boolean;
+  endretAv?: string;
+  endretTidspunkt?: string;
+}`,signature:{properties:[{key:"definisjon",value:{name:"string",required:!0}},{key:"status",value:{name:"string",required:!0}},{key:"begrunnelse",value:{name:"string",required:!1}},{key:"vilkarType",value:{name:"string",required:!1}},{key:"toTrinnsBehandling",value:{name:"boolean",required:!1}},{key:"toTrinnsBehandlingGodkjent",value:{name:"boolean",required:!1}},{key:"vurderPaNyttArsaker",value:{name:"Array",elements:[{name:"string"}],raw:"string[]",required:!1}},{key:"besluttersBegrunnelse",value:{name:"string",required:!1}},{key:"aksjonspunktType",value:{name:"string",required:!1}},{key:"kanLoses",value:{name:"boolean",required:!0}},{key:"endretAv",value:{name:"string",required:!1}},{key:"endretTidspunkt",value:{name:"string",required:!1}}]}}],raw:`Readonly<{
+  definisjon: string;
+  status: string;
+  begrunnelse?: string;
+  vilkarType?: string;
+  toTrinnsBehandling?: boolean;
+  toTrinnsBehandlingGodkjent?: boolean;
+  vurderPaNyttArsaker?: string[];
+  besluttersBegrunnelse?: string;
+  aksjonspunktType?: string;
+  kanLoses: boolean;
+  endretAv?: string;
+  endretTidspunkt?: string;
+}>`}],raw:"Aksjonspunkt[]",required:!0}},{key:"harSøknad",value:{name:"boolean",required:!0}},{key:"harSattEndringsdato",value:{name:"boolean",required:!0}},{key:"sjekkSimuleringResultat",value:{name:"boolean",required:!0}},{key:"taskStatus",value:{name:"signature",type:"object",raw:`{
+  message: string;
+  pending: boolean;
+  status: string;
+  readOnly: boolean;
+}`,signature:{properties:[{key:"message",value:{name:"string",required:!0}},{key:"pending",value:{name:"boolean",required:!0}},{key:"status",value:{name:"string",required:!0}},{key:"readOnly",value:{name:"boolean",required:!0}}]},required:!1}},{key:"vilkår",value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  vilkarType: string;
+  vilkarStatus: string;
+  avslagKode?: string;
+  lovReferanse?: string;
+  overstyrbar: boolean;
+}`,signature:{properties:[{key:"vilkarType",value:{name:"string",required:!0}},{key:"vilkarStatus",value:{name:"string",required:!0}},{key:"avslagKode",value:{name:"string",required:!1}},{key:"lovReferanse",value:{name:"string",required:!1}},{key:"overstyrbar",value:{name:"boolean",required:!0}}]}}],raw:`Readonly<{
+  vilkarType: string;
+  vilkarStatus: string;
+  avslagKode?: string;
+  lovReferanse?: string;
+  overstyrbar: boolean;
+}>`}],raw:"Vilkar[]",required:!0}},{key:"alleUttaksperioderAvslått",value:{name:"boolean",required:!0}}]}}],raw:`Readonly<{
+  aksjonspunkt: Aksjonspunkt[];
+  harSøknad: boolean;
+  harSattEndringsdato: boolean;
+  sjekkSimuleringResultat: boolean;
+  taskStatus?: {
+    message: string;
+    pending: boolean;
+    status: string;
+    readOnly: boolean;
+  };
+  vilkår: Vilkar[];
+  alleUttaksperioderAvslått: boolean;
+}>`}]},description:""},valgtProsessSteg:{required:!1,tsType:{name:"string"},description:""},registrerProsessPanel:{required:!0,tsType:{name:"signature",type:"function",raw:"(data: ProsessPanelMenyData) => void",signature:{arguments:[{type:{name:"signature",type:"object",raw:`{
+  id: string;
+  tekst?: string;
+  erAktiv?: boolean;
+  harApentAksjonspunkt?: boolean;
+  status?: string;
+}`,signature:{properties:[{key:"id",value:{name:"string",required:!0}},{key:"tekst",value:{name:"string",required:!1}},{key:"erAktiv",value:{name:"boolean",required:!1}},{key:"harApentAksjonspunkt",value:{name:"boolean",required:!1}},{key:"status",value:{name:"string",required:!1}}]}},name:"data"}],return:{name:"void"}}},description:""}}};const Z=(n,r)=>n.filter(t=>!r.some(a=>a.definisjon===t.definisjon)).every(t=>t.status!==F.OPPRETTET),Jn=n=>n.definisjon===i.OVERSTYR_BEREGNING||n.definisjon===i.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG||n.definisjon===i.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG||n.definisjon===i.VURDER_SOKNADSFRIST_FORELDREPENGER,$n=n=>Jn(n)&&n.status===F.OPPRETTET,X=(n,r,t,a)=>n.length===0?h.IKKE_VURDERT:Z(r,t)&&n.some(s=>s.vilkarStatus===h.IKKE_OPPFYLT)?h.IKKE_OPPFYLT:n.some(s=>s.vilkarStatus===h.IKKE_VURDERT)||r.some($n)?h.IKKE_VURDERT:Z(r,t)?a&&an(a.type)?h.IKKE_OPPFYLT:h.OPPFYLT:h.IKKE_VURDERT,Wn=(n,r,t)=>a=>{const s={...a,behandlingUuid:t.uuid,fagsakYtelseType:r.fagsakYtelseType};return n(s).then(o=>He(o))},zn=[i.FATTER_VEDTAK,i.FORESLA_VEDTAK_MANUELT,i.VURDERE_ANNEN_YTELSE,i.VURDERE_DOKUMENT,i.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST,i.KONTROLL_AV_MAUNELT_OPPRETTET_REVURDERINGSBEHANDLING],Qn=(n,r,t)=>a=>(t(!1),()=>{a.some(o=>o.kode===i.FORESLA_VEDTAK||o.skalBrukeOverstyrendeFritekstBrev)?r(!0):n(!0)}),Zn=[...zn,i.FORESLA_VEDTAK],Xn=[A.TILBAKEKREVINGVALG,A.BEREGNINGSRESULTAT_DAGYTELSE_ORIGINAL_BEHANDLING,A.SIMULERING_RESULTAT,A.BEREGNINGRESULTAT_ENGANGSSTONAD],qe=({setSkalOppdatereEtterBekreftelseAvAp:n,fagsak:r,opneSokeside:t,...a})=>{const s=S(),[o,l]=m.useState(!1),[u,g]=m.useState(!1),y=Qn(l,g,n),k=Xe(),{startRequest:f}=Ze.useRestApiRunner(A.PREVIEW_MESSAGE),w=m.useCallback(Wn(f,r,k.behandling),[k.behandling.versjon]),d=m.useCallback(()=>{l(!1),t()},[]),j=m.useCallback(()=>{g(!1),t()},[]),{vilkår:p}=a.behandling;return e.jsx(H,{...a,panelEndepunkter:Xn,aksjonspunktKoder:Zn,prosessPanelKode:x.VEDTAK,prosessPanelMenyTekst:s.formatMessage({id:"Behandlingspunkt.Vedtak"}),skalPanelVisesIMeny:()=>!0,hentOverstyrtStatus:v=>X(p||[],a.behandling.aksjonspunkt||[],v.aksjonspunkter,v.behandling.behandlingsresultat),lagringSideEffekter:y,hentSkalMarkeresSomAktiv:v=>!v.behandling.behandlingHenlagt&&X(p||[],a.behandling.aksjonspunkt||[],v.aksjonspunkter,v.behandling.behandlingsresultat)!==h.IKKE_VURDERT,renderPanel:v=>e.jsxs(e.Fragment,{children:[e.jsx(sn,{visModal:o,lukkModal:d,behandlingsresultat:v.behandling.behandlingsresultat}),e.jsx(tn,{visModal:u,lukkModal:j,tekst:s.formatMessage({id:"FatterVedtakStatusModal.SendtBeslutter"})}),e.jsx(Oe,{ytelseTypeKode:ie.ENGANGSSTONAD,previewCallback:w,...v,aksjonspunkter:a.behandling.aksjonspunkt,vilkar:p})]})})};qe.__docgenInfo={description:"",methods:[],displayName:"VedtakEsProsessStegInitPanel",props:{setSkalOppdatereEtterBekreftelseAvAp:{required:!0,tsType:{name:"signature",type:"function",raw:"(skalHenteFagsak: boolean) => void",signature:{arguments:[{type:{name:"boolean"},name:"skalHenteFagsak"}],return:{name:"void"}}},description:""},fagsak:{required:!0,tsType:{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
   saksnummer: string;
   fagsakYtelseType: string;
   relasjonsRolleType: string;
@@ -2836,7 +3142,7 @@ Readonly<{
   historikkinnslag: Historikkinnslag[];
   kontrollResultat: Risikoklassifisering;
   notater: Saksnotat[];
-}>`},description:""},opneSokeside:{required:!0,tsType:{name:"signature",type:"function",raw:"() => void",signature:{arguments:[],return:{name:"void"}}},description:""},setSkalOppdatereEtterBekreftelseAvAp:{required:!0,tsType:{name:"signature",type:"function",raw:"(skalHenteFagsak: boolean) => void",signature:{arguments:[{type:{name:"boolean"},name:"skalHenteFagsak"}],return:{name:"void"}}},description:""},behandling:{required:!0,tsType:{name:"intersection",raw:`BehandlingFellesData &
+}>`},description:""},opneSokeside:{required:!0,tsType:{name:"signature",type:"function",raw:"() => void",signature:{arguments:[],return:{name:"void"}}},description:""},behandling:{required:!0,tsType:{name:"intersection",raw:`BehandlingFellesData &
 Readonly<{
   aksjonspunkt: Aksjonspunkt[];
   harSøknad: boolean;
@@ -3037,7 +3343,7 @@ Readonly<{
   erAktiv?: boolean;
   harApentAksjonspunkt?: boolean;
   status?: string;
-}`,signature:{properties:[{key:"id",value:{name:"string",required:!0}},{key:"tekst",value:{name:"string",required:!1}},{key:"erAktiv",value:{name:"boolean",required:!1}},{key:"harApentAksjonspunkt",value:{name:"boolean",required:!1}},{key:"status",value:{name:"string",required:!1}}]}},name:"data"}],return:{name:"void"}}},description:""}}};const Hn=({behandling:e,fagsak:t,valgtProsessSteg:r,oppdaterProsessStegOgFaktaPanelIUrl:a,opneSokeside:s,setSkalOppdatereEtterBekreftelseAvAp:i})=>{const u=l.useCallback(o=>n.jsxs(n.Fragment,{children:[n.jsx(de,{...o,fagsak:t}),n.jsx(pe,{...o,fagsak:t,opneSokeside:s,setSkalOppdatereEtterBekreftelseAvAp:i})]}),[t,s,i]);return n.jsx(be,{behandling:e,valgtProsessSteg:r,oppdaterProsessStegOgFaktaPanelIUrl:a,hentProsessPaneler:u})};Hn.__docgenInfo={description:"",methods:[],displayName:"InnsynPaneler",props:{behandling:{required:!0,tsType:{name:"intersection",raw:`BehandlingFellesData &
+}`,signature:{properties:[{key:"id",value:{name:"string",required:!0}},{key:"tekst",value:{name:"string",required:!1}},{key:"erAktiv",value:{name:"boolean",required:!1}},{key:"harApentAksjonspunkt",value:{name:"boolean",required:!1}},{key:"status",value:{name:"string",required:!1}}]}},name:"data"}],return:{name:"void"}}},description:""}}};const er=({behandling:n,fagsak:r,valgtProsessSteg:t,valgtFaktaSteg:a,oppdaterProsessStegOgFaktaPanelIUrl:s,opneSokeside:o,setSkalOppdatereEtterBekreftelseAvAp:l,arbeidsgivere:u,personoversikt:g,rettigheter:y})=>{const k=m.useCallback(d=>e.jsxs(e.Fragment,{children:[e.jsx(Fe,{...d,fagsak:r,rettigheter:y}),e.jsx(Ke,{...d}),e.jsx(_e,{...d}),e.jsx(Re,{...d,personoversikt:g}),e.jsx(we,{...d,fagsak:r}),e.jsx(Be,{...d}),e.jsx(Ne,{...d,fagsak:r})]}),[g,r]),f={},w=m.useCallback((d,j)=>e.jsxs(e.Fragment,{children:[e.jsx(Se,{...d,fagsak:r,opneSokeside:o,setSkalOppdatereEtterBekreftelseAvAp:l}),e.jsx(Ie,{...d,arbeidsgiverOpplysningerPerId:u}),e.jsx(ye,{...d,rettigheter:y,oppdaterProsessStegOgFaktaPanelIUrl:s,apentFaktaPanelInfo:j.apentFaktaPanelInfo}),e.jsx(be,{...d,rettigheter:y}),e.jsx(ue,{...d,rettigheter:y}),e.jsx(De,{...d,fagsak:r,menyData:j.allMenyData,arbeidsgiverOpplysningerPerId:f}),e.jsx(qe,{...d,fagsak:r,opneSokeside:o,setSkalOppdatereEtterBekreftelseAvAp:l})]}),[r,o,l,u,y,s]);return e.jsx(he,{behandling:n,valgtProsessSteg:t,valgtFaktaSteg:a,oppdaterProsessStegOgFaktaPanelIUrl:s,hentFaktaPaneler:k,hentProsessPaneler:w})};er.__docgenInfo={description:"",methods:[],displayName:"EngangsstonadPaneler",props:{behandling:{required:!0,tsType:{name:"intersection",raw:`BehandlingFellesData &
 Readonly<{
   aksjonspunkt: Aksjonspunkt[];
   harSøknad: boolean;
@@ -3677,4 +3983,141 @@ Readonly<{
   historikkinnslag: Historikkinnslag[];
   kontrollResultat: Risikoklassifisering;
   notater: Saksnotat[];
-}>`},description:""},valgtProsessSteg:{required:!1,tsType:{name:"string"},description:""},oppdaterProsessStegOgFaktaPanelIUrl:{required:!0,tsType:{name:"signature",type:"function",raw:"(punktnavn?: string, faktanavn?: string) => void",signature:{arguments:[{type:{name:"string"},name:"punktnavn"},{type:{name:"string"},name:"faktanavn"}],return:{name:"void"}}},description:""},opneSokeside:{required:!0,tsType:{name:"signature",type:"function",raw:"() => void",signature:{arguments:[],return:{name:"void"}}},description:""},setSkalOppdatereEtterBekreftelseAvAp:{required:!0,tsType:{name:"signature",type:"function",raw:"(skalHenteFagsak: boolean) => void",signature:{arguments:[{type:{name:"boolean"},name:"skalHenteFagsak"}],return:{name:"void"}}},description:""}}};export{Hn as default};
+}>`},description:""},valgtProsessSteg:{required:!1,tsType:{name:"string"},description:""},valgtFaktaSteg:{required:!1,tsType:{name:"string"},description:""},oppdaterProsessStegOgFaktaPanelIUrl:{required:!0,tsType:{name:"signature",type:"function",raw:"(punktnavn?: string, faktanavn?: string) => void",signature:{arguments:[{type:{name:"string"},name:"punktnavn"},{type:{name:"string"},name:"faktanavn"}],return:{name:"void"}}},description:""},opneSokeside:{required:!0,tsType:{name:"signature",type:"function",raw:"() => void",signature:{arguments:[],return:{name:"void"}}},description:""},setSkalOppdatereEtterBekreftelseAvAp:{required:!0,tsType:{name:"signature",type:"function",raw:"(skalHenteFagsak: boolean) => void",signature:{arguments:[{type:{name:"boolean"},name:"skalHenteFagsak"}],return:{name:"void"}}},description:""},arbeidsgivere:{required:!0,tsType:{name:"Record",elements:[{name:"string"},{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  erPrivatPerson: boolean;
+  referanse?: string;
+  identifikator: string;
+  navn: string;
+  fødselsdato?: string;
+}`,signature:{properties:[{key:"erPrivatPerson",value:{name:"boolean",required:!0}},{key:"referanse",value:{name:"string",required:!1}},{key:"identifikator",value:{name:"string",required:!0}},{key:"navn",value:{name:"string",required:!0}},{key:"fødselsdato",value:{name:"string",required:!1}}]}}],raw:`Readonly<{
+  erPrivatPerson: boolean;
+  referanse?: string;
+  identifikator: string;
+  navn: string;
+  fødselsdato?: string;
+}>`}],raw:"Record<string, ArbeidsgiverOpplysninger>"},description:""},personoversikt:{required:!0,tsType:{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  bruker: PersonopplysningerBasis;
+  annenPart?: PersonopplysningerBasis;
+  barn: PersonopplysningerBasis[];
+}`,signature:{properties:[{key:"bruker",value:{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  navn: string;
+  aktoerId: string;
+  kjønn: string;
+  sivilstand: string;
+  dødsdato?: string;
+  fødselsdato: string;
+  adresser: Personadresse[];
+}`,signature:{properties:[{key:"navn",value:{name:"string",required:!0}},{key:"aktoerId",value:{name:"string",required:!0}},{key:"kjønn",value:{name:"string",required:!0}},{key:"sivilstand",value:{name:"string",required:!0}},{key:"dødsdato",value:{name:"string",required:!1}},{key:"fødselsdato",value:{name:"string",required:!0}},{key:"adresser",value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  fom: string;
+  tom: string;
+  adresseType?: string;
+  adresselinje1?: string | null;
+  adresselinje2?: string | null;
+  adresselinje3?: string | null;
+  postNummer?: string | null;
+  poststed?: string | null;
+  land?: string;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"tom",value:{name:"string",required:!0}},{key:"adresseType",value:{name:"string",required:!1}},{key:"adresselinje1",value:{name:"union",raw:"string | null",elements:[{name:"string"},{name:"null"}],required:!1}},{key:"adresselinje2",value:{name:"union",raw:"string | null",elements:[{name:"string"},{name:"null"}],required:!1}},{key:"adresselinje3",value:{name:"union",raw:"string | null",elements:[{name:"string"},{name:"null"}],required:!1}},{key:"postNummer",value:{name:"union",raw:"string | null",elements:[{name:"string"},{name:"null"}],required:!1}},{key:"poststed",value:{name:"union",raw:"string | null",elements:[{name:"string"},{name:"null"}],required:!1}},{key:"land",value:{name:"string",required:!1}}]}}],raw:`Readonly<{
+  fom: string;
+  tom: string;
+  adresseType?: string;
+  adresselinje1?: string | null;
+  adresselinje2?: string | null;
+  adresselinje3?: string | null;
+  postNummer?: string | null;
+  poststed?: string | null;
+  land?: string;
+}>`}],raw:"Personadresse[]",required:!0}}]}}],raw:`Readonly<{
+  navn: string;
+  aktoerId: string;
+  kjønn: string;
+  sivilstand: string;
+  dødsdato?: string;
+  fødselsdato: string;
+  adresser: Personadresse[];
+}>`,required:!1}},{key:"annenPart",value:{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  navn: string;
+  aktoerId: string;
+  kjønn: string;
+  sivilstand: string;
+  dødsdato?: string;
+  fødselsdato: string;
+  adresser: Personadresse[];
+}`,signature:{properties:[{key:"navn",value:{name:"string",required:!0}},{key:"aktoerId",value:{name:"string",required:!0}},{key:"kjønn",value:{name:"string",required:!0}},{key:"sivilstand",value:{name:"string",required:!0}},{key:"dødsdato",value:{name:"string",required:!1}},{key:"fødselsdato",value:{name:"string",required:!0}},{key:"adresser",value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  fom: string;
+  tom: string;
+  adresseType?: string;
+  adresselinje1?: string | null;
+  adresselinje2?: string | null;
+  adresselinje3?: string | null;
+  postNummer?: string | null;
+  poststed?: string | null;
+  land?: string;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"tom",value:{name:"string",required:!0}},{key:"adresseType",value:{name:"string",required:!1}},{key:"adresselinje1",value:{name:"union",raw:"string | null",elements:[{name:"string"},{name:"null"}],required:!1}},{key:"adresselinje2",value:{name:"union",raw:"string | null",elements:[{name:"string"},{name:"null"}],required:!1}},{key:"adresselinje3",value:{name:"union",raw:"string | null",elements:[{name:"string"},{name:"null"}],required:!1}},{key:"postNummer",value:{name:"union",raw:"string | null",elements:[{name:"string"},{name:"null"}],required:!1}},{key:"poststed",value:{name:"union",raw:"string | null",elements:[{name:"string"},{name:"null"}],required:!1}},{key:"land",value:{name:"string",required:!1}}]}}],raw:`Readonly<{
+  fom: string;
+  tom: string;
+  adresseType?: string;
+  adresselinje1?: string | null;
+  adresselinje2?: string | null;
+  adresselinje3?: string | null;
+  postNummer?: string | null;
+  poststed?: string | null;
+  land?: string;
+}>`}],raw:"Personadresse[]",required:!0}}]}}],raw:`Readonly<{
+  navn: string;
+  aktoerId: string;
+  kjønn: string;
+  sivilstand: string;
+  dødsdato?: string;
+  fødselsdato: string;
+  adresser: Personadresse[];
+}>`,required:!1}},{key:"barn",value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  navn: string;
+  aktoerId: string;
+  kjønn: string;
+  sivilstand: string;
+  dødsdato?: string;
+  fødselsdato: string;
+  adresser: Personadresse[];
+}`,signature:{properties:[{key:"navn",value:{name:"string",required:!0}},{key:"aktoerId",value:{name:"string",required:!0}},{key:"kjønn",value:{name:"string",required:!0}},{key:"sivilstand",value:{name:"string",required:!0}},{key:"dødsdato",value:{name:"string",required:!1}},{key:"fødselsdato",value:{name:"string",required:!0}},{key:"adresser",value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  fom: string;
+  tom: string;
+  adresseType?: string;
+  adresselinje1?: string | null;
+  adresselinje2?: string | null;
+  adresselinje3?: string | null;
+  postNummer?: string | null;
+  poststed?: string | null;
+  land?: string;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"tom",value:{name:"string",required:!0}},{key:"adresseType",value:{name:"string",required:!1}},{key:"adresselinje1",value:{name:"union",raw:"string | null",elements:[{name:"string"},{name:"null"}],required:!1}},{key:"adresselinje2",value:{name:"union",raw:"string | null",elements:[{name:"string"},{name:"null"}],required:!1}},{key:"adresselinje3",value:{name:"union",raw:"string | null",elements:[{name:"string"},{name:"null"}],required:!1}},{key:"postNummer",value:{name:"union",raw:"string | null",elements:[{name:"string"},{name:"null"}],required:!1}},{key:"poststed",value:{name:"union",raw:"string | null",elements:[{name:"string"},{name:"null"}],required:!1}},{key:"land",value:{name:"string",required:!1}}]}}],raw:`Readonly<{
+  fom: string;
+  tom: string;
+  adresseType?: string;
+  adresselinje1?: string | null;
+  adresselinje2?: string | null;
+  adresselinje3?: string | null;
+  postNummer?: string | null;
+  poststed?: string | null;
+  land?: string;
+}>`}],raw:"Personadresse[]",required:!0}}]}}],raw:`Readonly<{
+  navn: string;
+  aktoerId: string;
+  kjønn: string;
+  sivilstand: string;
+  dødsdato?: string;
+  fødselsdato: string;
+  adresser: Personadresse[];
+}>`,required:!1}],raw:"PersonopplysningerBasis[]",required:!0}}]}}],raw:`Readonly<{
+  bruker: PersonopplysningerBasis;
+  annenPart?: PersonopplysningerBasis;
+  barn: PersonopplysningerBasis[];
+}>`},description:""},rettigheter:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  writeAccess: Aksess;
+  kanOverstyreAccess: Aksess;
+}`,signature:{properties:[{key:"writeAccess",value:{name:"signature",type:"object",raw:`{
+  employeeHasAccess: boolean;
+  isEnabled: boolean;
+}`,signature:{properties:[{key:"employeeHasAccess",value:{name:"boolean",required:!0}},{key:"isEnabled",value:{name:"boolean",required:!0}}]},required:!0}},{key:"kanOverstyreAccess",value:{name:"signature",type:"object",raw:`{
+  employeeHasAccess: boolean;
+  isEnabled: boolean;
+}`,signature:{properties:[{key:"employeeHasAccess",value:{name:"boolean",required:!0}},{key:"isEnabled",value:{name:"boolean",required:!0}}]},required:!0}}]}},description:""}}};export{er as default};
