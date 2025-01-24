@@ -3,7 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { Fagsak, FagsakPersoner } from '@navikt/fp-types';
+import { FagsakHendelse, FagsakPerson } from '@navikt/fp-types';
 
 import { VisittkortPanel } from './components/VisittkortPanel';
 
@@ -12,25 +12,31 @@ import messages from '../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 interface Props {
-  fagsak: Fagsak;
-  fagsakPersoner: FagsakPersoner;
+  erMor?: boolean;
+  bruker: FagsakPerson;
+  annenPart?: FagsakPerson;
+  familiehendelse?: FagsakHendelse;
   lenkeTilAnnenPart?: string;
   harVerge?: boolean;
   erTilbakekreving?: boolean;
 }
 
 export const VisittkortSakIndex = ({
-  fagsak,
-  fagsakPersoner,
+  bruker,
+  annenPart,
+  familiehendelse,
   lenkeTilAnnenPart,
+  erMor = true,
   harVerge = false,
   erTilbakekreving = false,
 }: Props) => (
   <RawIntlProvider value={intl}>
     <VisittkortPanel
+      erMor={erMor}
+      bruker={bruker}
+      annenPart={annenPart}
+      familiehendelse={familiehendelse}
       lenkeTilAnnenPart={lenkeTilAnnenPart}
-      fagsak={fagsak}
-      fagsakPersoner={fagsakPersoner}
       harVerge={harVerge}
       erTilbakekreving={erTilbakekreving}
     />

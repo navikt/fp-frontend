@@ -13,9 +13,13 @@ const {
   MedDiskresjonskodeOgDødAnnenpart,
   MedVergeOgBrukerUnder18,
   FamilieMedDødfødtBarn,
+  FamilieMedFødtBarn,
+  FamilieMedTermin,
+  FamilieMedOmsorgovertakelse,
+  FamilieMedAdopsjon,
 } = composeStories(stories);
 
-describe('<VisittkortSakIndex>', () => {
+describe('VisittkortSakIndex', () => {
   it('skal vise visittkort for far', async () => {
     render(<UtenAnnenPart />);
 
@@ -26,11 +30,11 @@ describe('<VisittkortSakIndex>', () => {
   it('skal vise visittkort for begge parter', async () => {
     render(<PersonopplysningerForBeggeParter />);
 
-    expect(await screen.findByText('Espen Utvikler')).toBeInTheDocument();
-    expect(screen.getByText('123456 78910')).toBeInTheDocument();
-
     expect(screen.getByText('Klara Ku')).toBeInTheDocument();
     expect(screen.getByText('656565 78787')).toBeInTheDocument();
+
+    expect(await screen.findByText('Espen Utvikler')).toBeInTheDocument();
+    expect(screen.getByText('123456 78910')).toBeInTheDocument();
   });
 
   it('skal vise visittkort med diskresjonskode og død annenpart', async () => {
@@ -48,8 +52,8 @@ describe('<VisittkortSakIndex>', () => {
   it('skal vise visittkort for ungdom under 18 med verge', async () => {
     render(<MedVergeOgBrukerUnder18 />);
 
-    expect(await screen.findByText('Espen Utvikler')).toBeInTheDocument();
-    expect(screen.getByText('123456 78910')).toBeInTheDocument();
+    expect(await screen.findByText('Klara Ku')).toBeInTheDocument();
+    expect(screen.getByText('656565 78787')).toBeInTheDocument();
     expect(await screen.findByText('Verge')).toBeInTheDocument();
     expect(screen.getByText('Under 18')).toBeInTheDocument();
   });
@@ -57,18 +61,19 @@ describe('<VisittkortSakIndex>', () => {
   it('skal vise visittkort for ukjent annen part', async () => {
     render(<ForAnnenPartDerAktørIdErUkjent />);
 
-    expect(await screen.findByText('Espen Utvikler')).toBeInTheDocument();
-    expect(screen.getByText('123456 78910')).toBeInTheDocument();
+    expect(await screen.findByText('Klara Ku')).toBeInTheDocument();
+    expect(screen.getByText('656565 78787')).toBeInTheDocument();
     expect(screen.getByText('Ukjent navn, mangler norsk id-nr')).toBeInTheDocument();
   });
 
-  it('skal vise visittkort for familie med dødfødt barn', async () => {
-    render(<FamilieMedDødfødtBarn />);
-
-    expect(await screen.findByText('Espen Utvikler')).toBeInTheDocument();
-    expect(screen.getByText('123456 78910')).toBeInTheDocument();
-
-    expect(screen.getByText('Født 21.01.2020')).toBeInTheDocument();
-    expect(screen.getByText('Død')).toBeInTheDocument();
+  it.each([
+    ['fødsel', ['Født 21.01.2020 (5 år)'], FamilieMedFødtBarn],
+    ['termin', ['Termin 21.01.2020'], FamilieMedTermin],
+    ['omsorgovertakelse', ['Foreldreansvar 21.01.2020'], FamilieMedOmsorgovertakelse],
+    ['adopsjon', ['Adopsjon 21.01.2020'], FamilieMedAdopsjon],
+    ['dødfødsel', ['Født 21.01.2020', 'Død'], FamilieMedDødfødtBarn],
+  ])('skal vise visittkort med familiehendelse: %s', async (_, expected, Component) => {
+    render(<Component />);
+    expected.forEach(text => expect(screen.getByText(text)).toBeInTheDocument());
   });
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedMessage,useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Tag, Tooltip } from '@navikt/ds-react';
 import { dateFormat } from '@navikt/ft-utils';
@@ -10,10 +10,10 @@ import { FagsakPerson } from '@navikt/fp-types';
 
 interface Props {
   fagsakPerson: FagsakPerson;
-  harVerge: boolean;
+  harVerge?: boolean;
 }
 
-export const VisittkortLabels = ({ fagsakPerson, harVerge }: Props) => {
+export const VisittkortLabels = ({ fagsakPerson, harVerge = false }: Props) => {
   const intl = useIntl();
   const erSokerUnder18 = dayjs().diff(fagsakPerson.fødselsdato, 'years') < 18;
   return (

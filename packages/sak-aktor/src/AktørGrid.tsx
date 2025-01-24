@@ -4,9 +4,8 @@ import { FormattedMessage } from 'react-intl';
 import { Heading, VStack } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { RelasjonsRolleType } from '@navikt/fp-kodeverk';
 import { VisittkortSakIndex } from '@navikt/fp-sak-visittkort';
-import { Aktor, Fagsak, KodeverkMedNavn } from '@navikt/fp-types';
+import { Aktor, KodeverkMedNavn } from '@navikt/fp-types';
 
 interface Props {
   aktorInfo: Aktor;
@@ -16,17 +15,9 @@ interface Props {
 }
 
 export const AktørGrid = ({ aktorInfo, fagsakStatuser, fagsakYtelseTyper, renderSomLenke }: Props) => {
-  const vFagsak =
-    aktorInfo.fagsaker.length > 0 ? aktorInfo.fagsaker[0] : { relasjonsRolleType: RelasjonsRolleType.MOR };
-
   return (
     <>
-      <VisittkortSakIndex
-        fagsak={vFagsak as Fagsak}
-        fagsakPersoner={{
-          bruker: aktorInfo.person,
-        }}
-      />
+      <VisittkortSakIndex bruker={aktorInfo.person} />
       <VStack gap="2" align="center" margin="5">
         {aktorInfo.fagsaker.length ? (
           aktorInfo.fagsaker.map(fagsak => {

@@ -2,31 +2,14 @@ import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { Meta, StoryObj } from '@storybook/react';
 import dayjs from 'dayjs';
 
-import {
-  DiskresjonskodeType,
-  FagsakStatus,
-  FagsakYtelseType,
-  FamilieHendelseType,
-  NavBrukerKjonn,
-  PersonstatusType,
-  RelasjonsRolleType,
-} from '@navikt/fp-kodeverk';
-import { Fagsak } from '@navikt/fp-types';
+import { DiskresjonskodeType, FamilieHendelseType, NavBrukerKjonn, PersonstatusType } from '@navikt/fp-kodeverk';
 
 import { VisittkortSakIndex } from './VisittkortSakIndex';
 
 import '@navikt/ds-css';
 import '@navikt/ft-plattform-komponenter/dist/style.css';
 
-const defaultFagsak = {
-  saksnummer: '123456',
-  fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
-  relasjonsRolleType: RelasjonsRolleType.MOR,
-  status: FagsakStatus.LOPENDE,
-  dekningsgrad: 100,
-} as Fagsak;
-
-const fagsakPerson = {
+const fagsakPersonFar = {
   navn: 'Espen Utvikler',
   fødselsdato: '1979-01-01',
   fødselsnummer: '12345678910',
@@ -35,31 +18,13 @@ const fagsakPerson = {
   personstatusType: PersonstatusType.BOSATT,
 };
 
-const fagsakPersonAnnenPartUkjent = {
+const fagsakPersonMor = {
   navn: 'Klara Ku',
   fødselsdato: '1980-01-01',
   fødselsnummer: '65656578787',
   kjønn: NavBrukerKjonn.KVINNE,
   personstatusType: PersonstatusType.BOSATT,
-};
-
-const fagsakPersonAnnenPart = {
-  ...fagsakPersonAnnenPartUkjent,
   aktørId: 'test',
-};
-
-const fagsakPersonerUtenAnnenPart = {
-  bruker: fagsakPerson,
-};
-
-const fagsakPersonerMedAnnenPart = {
-  bruker: fagsakPerson,
-  annenPart: fagsakPersonAnnenPart,
-};
-
-const fagsakPersonerMedAnnenPartUkjent = {
-  bruker: fagsakPerson,
-  annenPart: fagsakPersonAnnenPartUkjent,
 };
 
 const meta = {
@@ -72,28 +37,28 @@ type Story = StoryObj<typeof meta>;
 
 export const UtenAnnenPart: Story = {
   args: {
-    fagsak: defaultFagsak,
-    fagsakPersoner: fagsakPersonerUtenAnnenPart,
+    erMor: false,
+    bruker: fagsakPersonFar,
+    familiehendelse: undefined,
   },
 };
 
 export const PersonopplysningerForBeggeParter: Story = {
   args: {
-    fagsak: defaultFagsak,
-    fagsakPersoner: fagsakPersonerMedAnnenPart,
+    erMor: false,
+    bruker: fagsakPersonFar,
+    annenPart: fagsakPersonMor,
     lenkeTilAnnenPart: 'testlenke til annen part',
   },
 };
 
 export const PersonopplysningerForBeggeParterMedLangtNavn: Story = {
   args: {
-    fagsak: defaultFagsak,
-    fagsakPersoner: {
-      annenPart: { ...fagsakPersonAnnenPart, navn: 'Klara Kuuuuuuuuuuu' },
-      bruker: {
-        ...fagsakPerson,
-        navn: 'Espen Utvikler Utvikler Utvikler Utvikler Utvikler Utvikler Utvikler Utvikler Utvikler',
-      },
+    erMor: false,
+    annenPart: { ...fagsakPersonMor, navn: 'Klara Kuuuuuuuuuuu' },
+    bruker: {
+      ...fagsakPersonFar,
+      navn: 'Espen Utvikler Utvikler Utvikler Utvikler Utvikler Utvikler Utvikler Utvikler Utvikler',
     },
     lenkeTilAnnenPart: 'testlenke til annen part',
   },
@@ -101,89 +66,90 @@ export const PersonopplysningerForBeggeParterMedLangtNavn: Story = {
 
 export const MedDiskresjonskodeOgDødAnnenpart: Story = {
   args: {
-    fagsak: defaultFagsak,
-    fagsakPersoner: {
-      bruker: { ...fagsakPerson, diskresjonskode: DiskresjonskodeType.KODE6 },
-      annenPart: { ...fagsakPersonAnnenPart, dødsdato: '2024-02-01' },
-    },
+    erMor: false,
+    bruker: { ...fagsakPersonFar, diskresjonskode: DiskresjonskodeType.KODE6 },
+    annenPart: { ...fagsakPersonMor, dødsdato: '2024-02-01' },
     lenkeTilAnnenPart: 'testlenke til annen part',
   },
 };
 
 export const ForAnnenPartDerAktørIdErUkjent: Story = {
   args: {
-    fagsak: defaultFagsak,
-    fagsakPersoner: fagsakPersonerMedAnnenPartUkjent,
+    erMor: true,
+    bruker: fagsakPersonMor,
+    annenPart: { ...fagsakPersonFar, aktørId: undefined },
     lenkeTilAnnenPart: 'testlenke til annen part',
   },
 };
 
 export const MedVergeOgBrukerUnder18: Story = {
   args: {
-    fagsak: defaultFagsak,
     harVerge: true,
-    fagsakPersoner: {
-      bruker: { ...fagsakPerson, fødselsdato: dayjs().subtract(17, 'years').format(ISO_DATE_FORMAT) },
+    bruker: { ...fagsakPersonMor, fødselsdato: dayjs().subtract(17, 'years').format(ISO_DATE_FORMAT) },
+  },
+};
+
+export const FamilieMedFødtBarn: Story = {
+  args: {
+    erMor: true,
+    bruker: fagsakPersonMor,
+    familiehendelse: {
+      hendelseType: FamilieHendelseType.FODSEL,
+      hendelseDato: '2020-01-21',
+      dødfødsel: false,
+      antallBarn: 1,
     },
   },
 };
 
 export const FamilieMedDødfødtBarn: Story = {
   args: {
-    fagsak: defaultFagsak,
-    fagsakPersoner: {
-      bruker: fagsakPerson,
-      familiehendelse: {
-        hendelseType: FamilieHendelseType.FODSEL,
-        hendelseDato: '2020-01-21',
-        dødfødsel: true,
-        antallBarn: 1,
-      },
+    erMor: true,
+    bruker: fagsakPersonMor,
+    familiehendelse: {
+      hendelseType: FamilieHendelseType.FODSEL,
+      hendelseDato: '2020-01-21',
+      dødfødsel: true,
+      antallBarn: 1,
     },
   },
 };
 
 export const FamilieMedTermin: Story = {
   args: {
-    fagsak: defaultFagsak,
-    fagsakPersoner: {
-      bruker: fagsakPerson,
-      familiehendelse: {
-        hendelseType: FamilieHendelseType.TERMIN,
-        hendelseDato: '2020-01-21',
-        dødfødsel: false,
-        antallBarn: 1,
-      },
+    erMor: true,
+    bruker: fagsakPersonMor,
+    familiehendelse: {
+      hendelseType: FamilieHendelseType.TERMIN,
+      hendelseDato: '2020-01-21',
+      dødfødsel: false,
+      antallBarn: 1,
     },
   },
 };
 
 export const FamilieMedOmsorgovertakelse: Story = {
   args: {
-    fagsak: defaultFagsak,
-    fagsakPersoner: {
-      bruker: fagsakPerson,
-      familiehendelse: {
-        hendelseType: FamilieHendelseType.OMSORG,
-        hendelseDato: '2020-01-21',
-        dødfødsel: false,
-        antallBarn: 1,
-      },
+    erMor: true,
+    bruker: fagsakPersonMor,
+    familiehendelse: {
+      hendelseType: FamilieHendelseType.OMSORG,
+      hendelseDato: '2020-01-21',
+      dødfødsel: false,
+      antallBarn: 1,
     },
   },
 };
 
 export const FamilieMedAdopsjon: Story = {
   args: {
-    fagsak: defaultFagsak,
-    fagsakPersoner: {
-      bruker: fagsakPerson,
-      familiehendelse: {
-        hendelseType: FamilieHendelseType.ADOPSJON,
-        hendelseDato: '2020-01-21',
-        dødfødsel: false,
-        antallBarn: 1,
-      },
+    erMor: true,
+    bruker: fagsakPersonMor,
+    familiehendelse: {
+      hendelseType: FamilieHendelseType.ADOPSJON,
+      hendelseDato: '2020-01-21',
+      dødfødsel: false,
+      antallBarn: 1,
     },
   },
 };

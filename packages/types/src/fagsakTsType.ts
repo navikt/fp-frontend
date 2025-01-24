@@ -41,12 +41,6 @@ export type Saksmarkering = {
   kortNavn?: string;
 };
 
-export type FagsakPersoner = Readonly<{
-  bruker: FagsakPerson;
-  annenPart?: FagsakPerson;
-  familiehendelse?: FagsakHendelse;
-}>;
-
 export type Fagsak = Readonly<{
   saksnummer: string;
   fagsakYtelseType: string;

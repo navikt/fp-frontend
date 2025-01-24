@@ -86,7 +86,6 @@ export type { Ytelsefordeling } from './src/ytelsefordelingTsType';
 export type { FamilieHendelse, FamilieHendelseSamling, AvklartBarn } from './src/familieHendelseTsType';
 export type {
   Fagsak,
-  FagsakPersoner,
   FagsakHendelse,
   FagsakPerson,
   Saksnotat,
