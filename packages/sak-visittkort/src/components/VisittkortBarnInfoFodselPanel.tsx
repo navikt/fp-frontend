@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BodyShort,Tag } from '@navikt/ds-react';
+import { BodyShort, Tag } from '@navikt/ds-react';
 import { dateFormat } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
