@@ -2,10 +2,10 @@ import React, { useCallback, useState } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
 import { Heading, VStack } from '@navikt/ds-react';
-import { FagsakYtelseType } from '@navikt/ft-kodeverk';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 
+import { FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { SoknadData } from '@navikt/fp-papirsoknad-ui-komponenter';
 import { AlleKodeverk, Fagsak } from '@navikt/fp-types';
 
