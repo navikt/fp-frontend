@@ -10,10 +10,10 @@ import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-type OwnProps = {
+interface Props {
   verge?: Verge;
   alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving;
-};
+}
 
 export const VergeFaktaIndex = ({
   verge = {},
@@ -26,7 +26,7 @@ export const VergeFaktaIndex = ({
   submittable,
   formData,
   setFormData,
-}: OwnProps & StandardFaktaPanelProps) => (
+}: Props & StandardFaktaPanelProps) => (
   <RawIntlProvider value={intl}>
     <RegistrereVergeInfoPanel
       verge={verge}

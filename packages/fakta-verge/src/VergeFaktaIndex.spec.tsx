@@ -1,14 +1,14 @@
 import React from 'react';
 
 import { composeStories } from '@storybook/react';
-import { fireEvent,render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import * as stories from './VergeFaktaIndex.stories';
 
 const { Default } = composeStories(stories);
 
-describe('<VergeFaktaIndex>', () => {
+describe('VergeFaktaIndex', () => {
   it('skal velge vergetype og bekrefte aksjonspunkt', async () => {
     const lagre = vi.fn();
 

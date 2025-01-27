@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
@@ -26,7 +26,7 @@ const transformValues = (values: FormValues): AvklarVergeAp => ({
   ...FaktaBegrunnelseTextField.transformValues(values),
 });
 
-interface PureOwnProps {
+interface Props {
   submitCallback: (aksjonspunktData: AvklarVergeAp) => Promise<void>;
   aksjonspunkter: Aksjonspunkt[];
   alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving;
@@ -44,7 +44,7 @@ interface PureOwnProps {
  *
  * Presentasjonskomponent. Har ansvar for å sette opp formen for att registrere verge.
  */
-const RegistrereVergeInfoPanel: FunctionComponent<PureOwnProps> = ({
+const RegistrereVergeInfoPanel = ({
   hasOpenAksjonspunkter,
   submittable,
   readOnly,
@@ -55,7 +55,7 @@ const RegistrereVergeInfoPanel: FunctionComponent<PureOwnProps> = ({
   submitCallback,
   formData,
   setFormData,
-}) => {
+}: Props) => {
   const intl = useIntl();
 
   const formMethods = useForm<FormValues>({
