@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo } from 'react';
+import React, { FunctionComponent, useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
@@ -71,10 +71,6 @@ const RegistrereVergeInfoPanel: FunctionComponent<PureOwnProps> = ({
     [alleKodeverk[KodeverkType.VERGE_TYPE]],
   );
 
-  if (aksjonspunkter.length === 0) {
-    return null;
-  }
-
   return (
     <>
       {hasOpenAksjonspunkter && (
@@ -88,21 +84,29 @@ const RegistrereVergeInfoPanel: FunctionComponent<PureOwnProps> = ({
         setDataOnUnmount={setFormData}
       >
         <RegistrereVergeFaktaForm
-          readOnly={readOnly}
+          readOnly={readOnly || aksjonspunkter.length === 0}
           intl={intl}
           vergetyper={vergetyper}
           valgtVergeType={valgtVergeType}
           alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
         />
-        <VerticalSpacer twentyPx />
-        <FaktaBegrunnelseTextField isSubmittable={submittable} isReadOnly={readOnly} hasBegrunnelse={!!begrunnelse} />
-        <VerticalSpacer twentyPx />
-        <FaktaSubmitButton
-          isSubmittable={submittable && !!valgtVergeType}
-          isReadOnly={readOnly}
-          isSubmitting={formMethods.formState.isSubmitting}
-          isDirty={formMethods.formState.isDirty}
-        />
+        {aksjonspunkter.length !== 0 && (
+          <>
+            <VerticalSpacer twentyPx />
+            <FaktaBegrunnelseTextField
+              isSubmittable={submittable}
+              isReadOnly={readOnly}
+              hasBegrunnelse={!!begrunnelse}
+            />
+            <VerticalSpacer twentyPx />
+            <FaktaSubmitButton
+              isSubmittable={submittable && !!valgtVergeType}
+              isReadOnly={readOnly}
+              isSubmitting={formMethods.formState.isSubmitting}
+              isDirty={formMethods.formState.isDirty}
+            />
+          </>
+        )}
       </Form>
     </>
   );

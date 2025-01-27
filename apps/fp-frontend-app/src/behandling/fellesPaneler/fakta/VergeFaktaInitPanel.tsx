@@ -4,10 +4,10 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
 import { VergeFaktaIndex } from '@navikt/fp-fakta-verge';
-import { AksjonspunktKode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 
-import { useBehandlingApi } from '../../../data/behandlingApi';
+import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
@@ -21,7 +21,7 @@ export const VergeFaktaInitPanel = ({ valgtFaktaSteg, behandling, registrerFakta
 
   const api = useBehandlingApi(standardPanelProps.behandling);
 
-  const skalPanelVisesIMeny = AKSJONSPUNKT_KODER.some(kode => hasAksjonspunkt(kode, behandling.aksjonspunkt));
+  const skalPanelVisesIMeny = harLenke(behandling, 'VERGE');
 
   const { data: verge, isFetching } = useQuery(api.vergeOptions(standardPanelProps.behandling, skalPanelVisesIMeny));
 

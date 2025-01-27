@@ -17,7 +17,7 @@ interface Props {
   annenPart?: FagsakPerson;
   familiehendelse?: FagsakHendelse;
   lenkeTilAnnenPart?: string;
-  harVerge?: boolean;
+  harVergeIÅpenBehandling?: boolean;
   erTilbakekreving?: boolean;
 }
 
@@ -27,7 +27,7 @@ export const VisittkortSakIndex = ({
   familiehendelse,
   lenkeTilAnnenPart,
   erMor = true,
-  harVerge = false,
+  harVergeIÅpenBehandling = false,
   erTilbakekreving = false,
 }: Props) => (
   <RawIntlProvider value={intl}>
@@ -37,7 +37,7 @@ export const VisittkortSakIndex = ({
       annenPart={annenPart}
       familiehendelse={familiehendelse}
       lenkeTilAnnenPart={lenkeTilAnnenPart}
-      harVerge={harVerge}
+      harVergeIÅpenBehandling={harVergeIÅpenBehandling}
       erTilbakekreving={erTilbakekreving}
     />
   </RawIntlProvider>
