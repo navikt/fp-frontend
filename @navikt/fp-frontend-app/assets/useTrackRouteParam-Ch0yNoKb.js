@@ -1,1 +1,0 @@
-import{v as o}from"./index.es-CLCeEg4m.js";import{d as t,e as p}from"./withQueryClient-DTem1OUy.js";const u={paramName:"",parse:e=>e,isQueryParam:!1},c=(e,r,a)=>{const s=a.isQueryParam?o(r.search):e;return a.paramName&&a.parse?a.parse(s[a.paramName]):void 0};function d(e){const r={...u,...e},a=t(),s=p(),m=c(s,a,r);return{location:a,selected:m}}export{d as u};
