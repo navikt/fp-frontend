@@ -16,6 +16,9 @@ export default defineConfig({
   },
   server: {
     port: 9010,
+    cors: {
+        origin: ["https://fpsak.intern.dev.nav.no", "https://fpsak.intern.nav.no"]
+    },
     proxy: {
       '/fpsak/api': {
         target: 'http://127.0.0.1:9000',
