@@ -1897,13 +1897,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@formatjs/cli-lib@npm:6.6.6":
-  version: 6.6.6
-  resolution: "@formatjs/cli-lib@npm:6.6.6"
+"@formatjs/cli-lib@npm:7.2.1":
+  version: 7.2.1
+  resolution: "@formatjs/cli-lib@npm:7.2.1"
   dependencies:
-    "@formatjs/icu-messageformat-parser": 2.9.4
-    "@formatjs/icu-skeleton-parser": 1.8.8
-    "@formatjs/ts-transformer": 3.13.23
+    "@formatjs/icu-messageformat-parser": 2.11.0
+    "@formatjs/icu-skeleton-parser": 1.8.12
+    "@formatjs/ts-transformer": 3.13.31
     "@types/estree": ^1.0.0
     "@types/fs-extra": 9 || 10 || 11
     "@types/json-stable-stringify": 1
@@ -1918,11 +1918,11 @@ __metadata:
     typescript: 5
   peerDependencies:
     "@glimmer/env": ^0.1.7
-    "@glimmer/reference": ^0.91.1 || ^0.92.0
-    "@glimmer/syntax": ^0.92.0
-    "@glimmer/validator": ^0.92.0
+    "@glimmer/reference": ^0.91.1 || ^0.92.0 || ^0.93.0
+    "@glimmer/syntax": ^0.92.0 || ^0.93.0
+    "@glimmer/validator": ^0.92.0 || ^0.93.0
     "@vue/compiler-core": ^3.4.0
-    content-tag: ^2.0.1
+    content-tag: ^2.0.1 || ^3.0.0
     ember-template-recast: ^6.1.4
     vue: ^3.4.0
   peerDependenciesMeta:
@@ -1942,18 +1942,7 @@ __metadata:
       optional: true
     vue:
       optional: true
-  checksum: 792ebc7b74eab8d9245fec86aa1a4321b112d9dacaf41700d6a95618bf61724f6380e6aff1292bb5db57ff325937603a3412b8667d709c38a5901502dad2540c
-  languageName: node
-  linkType: hard
-
-"@formatjs/ecma402-abstract@npm:2.2.4":
-  version: 2.2.4
-  resolution: "@formatjs/ecma402-abstract@npm:2.2.4"
-  dependencies:
-    "@formatjs/fast-memoize": 2.2.3
-    "@formatjs/intl-localematcher": 0.5.8
-    tslib: 2
-  checksum: 48e9ea01b0e1bdf9af9ccd68019b7026bc5e1c43f2cebfad2011504f8de533545bf862c42272f6fbcede13731d78a9cb98aec546fd9bdc52877e9cff5d7ff34d
+  checksum: 78a6ad37251788e8ffa5d6a1028e8f8b050b67c65292c7854fa6793736d73678117b07555a802e0a97e1d236f72f834cea687f836386a2442e1a68fa64a02b93
   languageName: node
   linkType: hard
 
@@ -1966,15 +1955,6 @@ __metadata:
     decimal.js: 10
     tslib: 2
   checksum: 7f95750f0c9949c3b09d5260189886654057172ad7199f06b3cfddfb90ba2b03454fa6e284a6e325632e702b0592fd1d0dac1e0124ed08647dad6d03b693c809
-  languageName: node
-  linkType: hard
-
-"@formatjs/fast-memoize@npm:2.2.3":
-  version: 2.2.3
-  resolution: "@formatjs/fast-memoize@npm:2.2.3"
-  dependencies:
-    tslib: 2
-  checksum: a9634acb5e03d051e09881eea5484ab02271f7d6b5f96ae9485674ab3c359aa881bc45fc07a1181ae4b2d6e288dadc169f578d142d698913ebbefa373014cac2
   languageName: node
   linkType: hard
 
@@ -1998,17 +1978,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@formatjs/icu-messageformat-parser@npm:2.9.4":
-  version: 2.9.4
-  resolution: "@formatjs/icu-messageformat-parser@npm:2.9.4"
-  dependencies:
-    "@formatjs/ecma402-abstract": 2.2.4
-    "@formatjs/icu-skeleton-parser": 1.8.8
-    tslib: 2
-  checksum: 8bce7bf5153dd701f6f8159f9ba02bda9a5da9bf1751065dd5a12b03b65f13ea85fdde980bcd89148bfc1b63d5a74bf3eeac98d03af85b5a6911509a8c69702e
-  languageName: node
-  linkType: hard
-
 "@formatjs/icu-skeleton-parser@npm:1.8.12":
   version: 1.8.12
   resolution: "@formatjs/icu-skeleton-parser@npm:1.8.12"
@@ -2016,16 +1985,6 @@ __metadata:
     "@formatjs/ecma402-abstract": 2.3.2
     tslib: 2
   checksum: e2561050ec2fca40285f3ca93a6c6c497be9fc4b3559e3a2f44fd7709790437eb0dabbec99294aee918032a33b36191e64bb81c947fea879c396e696c872d099
-  languageName: node
-  linkType: hard
-
-"@formatjs/icu-skeleton-parser@npm:1.8.8":
-  version: 1.8.8
-  resolution: "@formatjs/icu-skeleton-parser@npm:1.8.8"
-  dependencies:
-    "@formatjs/ecma402-abstract": 2.2.4
-    tslib: 2
-  checksum: 3f966274995fe5f38eca082e08f21373213e68adb9df33d8537ec9c81d1e5893693c17fc3b2a285e038f09e3401b8991fc13d142029bf61eb546e6c6f3b14b43
   languageName: node
   linkType: hard
 
@@ -2047,15 +2006,6 @@ __metadata:
   dependencies:
     tslib: 2
   checksum: b36b66e2c81ef9e8b99be784a317c74364c8b6b396e0e1be259fbafda41403c40aec14241efcc4e556580e20f5b71e20351d110cd63e447330d3936d156ebb29
-  languageName: node
-  linkType: hard
-
-"@formatjs/intl-localematcher@npm:0.5.8":
-  version: 0.5.8
-  resolution: "@formatjs/intl-localematcher@npm:0.5.8"
-  dependencies:
-    tslib: 2
-  checksum: db1a06d6ee929497e73536f9f53e4a8698e0a648fad2fbeec1a32b8786c78627ad996b6da6b8fecb2686bbc6011e09c2a5206742a22f42ef4c5c67b190de760a
   languageName: node
   linkType: hard
 
@@ -2089,11 +2039,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@formatjs/ts-transformer@npm:3.13.23":
-  version: 3.13.23
-  resolution: "@formatjs/ts-transformer@npm:3.13.23"
+"@formatjs/ts-transformer@npm:3.13.31":
+  version: 3.13.31
+  resolution: "@formatjs/ts-transformer@npm:3.13.31"
   dependencies:
-    "@formatjs/icu-messageformat-parser": 2.9.4
+    "@formatjs/icu-messageformat-parser": 2.11.0
     "@types/json-stable-stringify": 1
     "@types/node": 14 || 16 || 17 || 18 || 20 || 22
     chalk: 4
@@ -2101,11 +2051,11 @@ __metadata:
     tslib: 2
     typescript: 5
   peerDependencies:
-    ts-jest: ">=27"
+    ts-jest: 27 || 28 || 29
   peerDependenciesMeta:
     ts-jest:
       optional: true
-  checksum: 5d788e1e78cea12c8aa6021c17b4e60628f584d72413bdaf25cf89fd7dc6a51279b2c2edd4cb39cd4741d7bd439fb1f7469a06fdc01baea1ec482f768ff5d74c
+  checksum: 79ac7d6c11ae4e1be7e902c48dca73351395eb6a219c94030e9a400936c7edc1f7939f07f146afe38c51aa27b653fe0cf2904273da58e1e7af6a4bd7a6760ec9
   languageName: node
   linkType: hard
 
@@ -2581,7 +2531,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-adopsjon@workspace:packages/fakta-adopsjon"
   dependencies:
-    "@formatjs/cli-lib": 6.6.6
+    "@formatjs/cli-lib": 7.2.1
     "@navikt/aksel-icons": 7.10.0
     "@navikt/ds-css": 7.10.0
     "@navikt/ds-react": 7.10.0
@@ -3077,7 +3027,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-tilrettelegging@workspace:packages/fakta-tilrettelegging"
   dependencies:
-    "@formatjs/cli-lib": 6.6.6
+    "@formatjs/cli-lib": 7.2.1
     "@navikt/aksel-icons": 7.10.0
     "@navikt/ds-css": 7.10.0
     "@navikt/ds-react": 7.10.0
@@ -5249,7 +5199,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-utbetalingsdata-is15@workspace:packages/utbetalingsdata-is15"
   dependencies:
-    "@formatjs/cli-lib": 6.6.6
+    "@formatjs/cli-lib": 7.2.1
     "@navikt/ds-css": 7.10.0
     "@navikt/ds-react": 7.10.0
     "@navikt/fp-types": "workspace:*"

@@ -36,7 +36,7 @@
     "react-intl": "7.1.5"
   },
   "devDependencies": {
-    "@formatjs/cli-lib": "6.6.6",
+    "@formatjs/cli-lib": "7.2.1",
     "@navikt/fp-storybook-utils": "workspace:*",
     "@storybook/addon-actions": "8.5.2",
     "@storybook/react": "8.5.2",
