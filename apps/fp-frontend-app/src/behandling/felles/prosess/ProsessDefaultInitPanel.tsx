@@ -3,6 +3,7 @@ import { ReactElement } from 'react';
 import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { StandardProsessPanelProps } from '@navikt/fp-types';
+import { FormDataProvider } from '@navikt/fp-utils';
 
 import { ProsessPanelInitProps } from '../typer/prosessPanelInitProps';
 import { ProsessPanelWrapper } from './ProsessPanelWrapper';
@@ -49,7 +50,7 @@ export const ProsessDefaultInitPanel = ({
     valgtProsessSteg,
   );
 
-  const skalHenteData = erPanelValgt && (harApentAksjonspunkt || status !== VilkarUtfallType.IKKE_VURDERT);
+  const skalVisePanel = erPanelValgt && (harApentAksjonspunkt || status !== VilkarUtfallType.IKKE_VURDERT);
 
   return (
     <ProsessPanelWrapper
@@ -57,7 +58,7 @@ export const ProsessDefaultInitPanel = ({
       erAksjonspunktOpent={standardPanelProps.isAksjonspunktOpen}
       status={status}
     >
-      {skalHenteData ? children : null}
+      <FormDataProvider>{skalVisePanel ? children : null}</FormDataProvider>
     </ProsessPanelWrapper>
   );
 };
