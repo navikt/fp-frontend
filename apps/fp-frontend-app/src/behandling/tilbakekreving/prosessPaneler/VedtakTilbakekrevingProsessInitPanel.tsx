@@ -6,7 +6,7 @@ import {
   VedtakAksjonspunktCode,
   VedtakTilbakekrevingProsessIndex,
 } from '@navikt/ft-prosess-tilbakekreving-vedtak';
-import { LoadingPanel, WarningModal } from '@navikt/ft-ui-komponenter';
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
@@ -19,6 +19,7 @@ import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedta
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
+import { ÅpenRevurderingModal } from '../modaler/ÅpenRevurderingModal';
 
 import '@navikt/ft-prosess-tilbakekreving-vedtak/dist/style.css';
 
@@ -40,7 +41,6 @@ export const VedtakTilbakekrevingProsessInitPanel = ({
 }: Props & ProsessPanelInitProps) => {
   const intl = useIntl();
 
-  const [visApenRevurderingModal, setVisApenRevurderingModal] = useState(harApenRevurdering);
   const [visFatterVedtakModal, setVisFatterVedtakModal] = useState(false);
 
   const lagringSideEffekter = getLagringSideeffekter(setVisFatterVedtakModal);
@@ -73,14 +73,9 @@ export const VedtakTilbakekrevingProsessInitPanel = ({
         }}
         tekst={intl.formatMessage({ id: 'FatterTilbakekrevingVedtakStatusModal.Sendt' })}
       />
-      {visApenRevurderingModal && (
-        <WarningModal
-          headerText={intl.formatMessage({ id: 'BehandlingTilbakekrevingIndex.ApenRevurderingHeader' })}
-          bodyText={intl.formatMessage({ id: 'BehandlingTilbakekrevingIndex.ApenRevurdering' })}
-          showModal
-          submit={() => setVisApenRevurderingModal(false)}
-        />
-      )}
+
+      <ÅpenRevurderingModal harÅpenRevurdering={harApenRevurdering} />
+
       <ProsessDefaultInitPanel
         {...props}
         standardPanelProps={standardPanelProps}

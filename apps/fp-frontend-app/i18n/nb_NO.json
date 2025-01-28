@@ -125,8 +125,8 @@
   "ProsessPanelWrapper.Henlagt": "Behandlingen er henlagt",
 
   "FatterTilbakekrevingVedtakStatusModal.Sendt": "Forslag til vedtak er sendt til beslutter",
-  "BehandlingTilbakekrevingIndex.ApenRevurdering": "Det finnes en åpen revurdering som kan påvirke denne tilbakekrevingsbehandlingen. Vurder konsekvens ved behandling.",
-  "BehandlingTilbakekrevingIndex.ApenRevurderingHeader": "Åpen revurdering",
+  "ÅpenRevurderingModal.ApenRevurdering": "Det finnes en åpen revurdering som kan påvirke denne tilbakekrevingsbehandlingen. Vurder konsekvens ved behandling.",
+  "ÅpenRevurderingModal.ApenRevurderingHeader": "Åpen revurdering",
 
   "BehandlingMenuIndex.Behandlingsmeny": "Behandlingsmeny",
 
