@@ -94,8 +94,6 @@ export const VedtakTilbakekrevingProsessInitPanel = ({
             beregningsresultat={beregningsresultat}
             vedtaksbrev={vedtaksbrev}
             kodeverkSamlingFpTilbake={tilbakekrevingKodeverk}
-            //TODO (TOR) Her må ein fiksa retur-typen
-            //@ts-expect-error
             fetchPreviewVedtaksbrev={forhandsvisVedtaksbrev}
             erRevurderingTilbakekrevingKlage={erRevurderingTilbakekrevingKlage || false}
             erRevurderingTilbakekrevingFeilBeløpBortfalt={erRevurderingTilbakekrevingFeilBeløpBortfalt || false}

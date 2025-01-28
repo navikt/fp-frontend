@@ -1,4 +1,4 @@
-import { FeilutbetalingAarsak, FeilutbetalingFakta } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
+import { FeilutbetalingÅrsak, FeilutbetalingFakta } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
 import { DetaljerteFeilutbetalingsperioder, FeilutbetalingPerioderWrapper } from '@navikt/ft-prosess-tilbakekreving';
 import { ForhandsvisData, Vedtaksbrev } from '@navikt/ft-prosess-tilbakekreving-vedtak';
 import { queryOptions } from '@tanstack/react-query';
@@ -312,7 +312,7 @@ const getFeilutbetalingFaktaOptions = (links: ApiLink[]) => (behandling: Behandl
 const getFeilutbetalingÅrsakOptions = (links: ApiLink[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.FEILUTBETALING_AARSAK, behandling.uuid, behandling.versjon],
-    queryFn: () => kyExtended.get(getUrlFromRel('FEILUTBETALING_AARSAK', links)).json<FeilutbetalingAarsak[]>(),
+    queryFn: () => kyExtended.get(getUrlFromRel('FEILUTBETALING_AARSAK', links)).json<FeilutbetalingÅrsak[]>(),
     enabled: harLenke(behandling, 'FEILUTBETALING_AARSAK'),
     staleTime: Infinity,
   });
