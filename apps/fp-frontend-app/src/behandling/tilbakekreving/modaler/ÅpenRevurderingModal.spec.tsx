@@ -13,7 +13,7 @@ describe('ÅpenRevurderingModal', () => {
     HTMLDialogElement.prototype.close = vi.fn();
   });
 
-  it('skal vise og lukke modal', async () => {
+  it('skal vise og lukke modal for åpen revurdering', async () => {
     await Default.run({ args: { harÅpenRevurdering: true } });
     expect(HTMLDialogElement.prototype.showModal).toHaveBeenCalledTimes(1);
 
@@ -23,7 +23,7 @@ describe('ÅpenRevurderingModal', () => {
     expect(HTMLDialogElement.prototype.close).toHaveBeenCalledTimes(1);
   });
 
-  it('skal ikke vise modal modal', async () => {
+  it('skal ikke vise modal når ingen åpen revurdering', async () => {
     await Default.run({ args: { harÅpenRevurdering: false } });
     expect(HTMLDialogElement.prototype.showModal).toHaveBeenCalledTimes(0);
   });
