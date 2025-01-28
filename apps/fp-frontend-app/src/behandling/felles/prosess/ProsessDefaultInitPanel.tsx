@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement, use } from 'react';
 
 import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
@@ -6,6 +6,7 @@ import { StandardProsessPanelProps } from '@navikt/fp-types';
 import { FormDataProvider } from '@navikt/fp-utils';
 
 import { ProsessPanelInitProps } from '../typer/prosessPanelInitProps';
+import { BehandlingDataContext } from '../utils/behandlingDataContext';
 import { ProsessPanelWrapper } from './ProsessPanelWrapper';
 import { useProsessMenyRegistrerer } from './useProsessMenyRegistrerer';
 
@@ -22,7 +23,6 @@ export type Props = {
 
 export const ProsessDefaultInitPanel = ({
   valgtProsessSteg,
-  behandling,
   registrerProsessPanel,
   skalPanelVisesIMeny,
   prosessPanelKode,
@@ -34,6 +34,8 @@ export const ProsessDefaultInitPanel = ({
   children,
 }: Props & ProsessPanelInitProps) => {
   const status = hentOverstyrtStatus ?? standardPanelProps.status;
+
+  const { behandling } = use(BehandlingDataContext);
 
   const skalMarkeresSomAktiv = hentSkalMarkeresSomAktiv && !behandling.behandlingHenlagt;
 

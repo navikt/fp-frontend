@@ -1,3 +1,4 @@
+import { use } from 'react';
 import { useIntl } from 'react-intl';
 
 import { useQuery } from '@tanstack/react-query';
@@ -5,12 +6,12 @@ import { useQuery } from '@tanstack/react-query';
 import { SakenFaktaIndex } from '@navikt/fp-fakta-saken';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import { AksessRettigheter, Fagsak } from '@navikt/fp-types';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
+import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
@@ -21,25 +22,22 @@ const AKSJONSPUNKT_KODER = [
 
 const OVERSTYRING_AP_CODES = [AksjonspunktKode.OVERSTYR_AVKLAR_STARTDATO, AksjonspunktKode.OVERSTYR_DEKNINGSGRAD];
 
-interface Props {
-  fagsak: Fagsak;
-  rettigheter: AksessRettigheter;
-}
-
 /**
  * SakenFaktaInitPanel
  *
  * Dette faktapanelet skal alltid vises
  */
-export const SakenFaktaInitPanel = ({ fagsak, rettigheter, ...props }: Props & FaktaPanelInitProps) => {
+export const SakenFaktaInitPanel = (props: FaktaPanelInitProps) => {
   const intl = useIntl();
+
+  const { behandling, fagsak, rettigheter } = use(BehandlingDataContext);
 
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER, OVERSTYRING_AP_CODES);
 
-  const api = useBehandlingApi(props.behandling);
+  const api = useBehandlingApi(behandling);
 
-  const { data: søknad } = useQuery(api.søknadOptions(props.behandling));
-  const { data: utlandDokStatus } = useQuery(api.utlandDokStatusOptions(props.behandling));
+  const { data: søknad } = useQuery(api.søknadOptions(behandling));
+  const { data: utlandDokStatus } = useQuery(api.utlandDokStatusOptions(behandling));
 
   return (
     <FaktaDefaultInitPanel

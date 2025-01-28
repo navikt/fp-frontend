@@ -1,5 +1,3 @@
-import { AksessRettigheter } from '@navikt/fp-types';
-
 import { InngangsvilkarDefaultInitWrapper } from '../../felles/prosess/InngangsvilkarDefaultInitWrapper';
 import { InngangsvilkarPanelInitProps } from '../../felles/typer/inngangsvilkarPanelInitProps';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
@@ -12,39 +10,28 @@ import { OmsorgInngangsvilkarInitPanel } from './inngangsvilkarPaneler/OmsorgInn
 
 interface Props {
   apentFaktaPanelInfo?: { urlCode: string; text: string };
-  oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
-  rettigheter: AksessRettigheter;
 }
 
 export const InngangsvilkarEsProsessStegInitPanel = ({
-  behandling,
   valgtProsessSteg,
   registrerProsessPanel,
   apentFaktaPanelInfo,
-  oppdaterProsessStegOgFaktaPanelIUrl,
-  rettigheter,
 }: Props & ProsessPanelInitProps) => {
   const leftPanels = (props: InngangsvilkarPanelInitProps) => (
     <>
-      <FodselInngangsvilkarInitPanel behandlingVersjon={behandling.versjon} rettigheter={rettigheter} {...props} />
-      <AdopsjonInngangsvilkarInitPanel behandlingVersjon={behandling.versjon} rettigheter={rettigheter} {...props} />
-      <OmsorgInngangsvilkarInitPanel behandlingVersjon={behandling.versjon} {...props} />
-      <MedlemskapInngangsvilkarInitPanel behandlingVersjon={behandling.versjon} rettigheter={rettigheter} {...props} />
-      <MedlemskapForutgaendeInngangsvilkarInitPanel
-        behandlingVersjon={behandling.versjon}
-        rettigheter={rettigheter}
-        {...props}
-      />
-      <ForeldreansvarInngangsvilkarInitPanel behandlingVersjon={behandling.versjon} {...props} />
+      <FodselInngangsvilkarInitPanel {...props} />
+      <AdopsjonInngangsvilkarInitPanel {...props} />
+      <OmsorgInngangsvilkarInitPanel {...props} />
+      <MedlemskapInngangsvilkarInitPanel {...props} />
+      <MedlemskapForutgaendeInngangsvilkarInitPanel {...props} />
+      <ForeldreansvarInngangsvilkarInitPanel {...props} />
     </>
   );
   return (
     <InngangsvilkarDefaultInitWrapper
-      behandling={behandling}
       valgtProsessSteg={valgtProsessSteg}
       registrerProsessPanel={registrerProsessPanel}
       apentFaktaPanelInfo={apentFaktaPanelInfo}
-      oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
       leftPanels={leftPanels}
     />
   );

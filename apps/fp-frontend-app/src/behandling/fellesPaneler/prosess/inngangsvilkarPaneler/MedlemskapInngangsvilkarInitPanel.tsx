@@ -1,29 +1,24 @@
+import { use } from 'react';
+
 import { useQuery } from '@tanstack/react-query';
 
 import { AksjonspunktKode, AksjonspunktStatus, VilkarType } from '@navikt/fp-kodeverk';
-import { AksessRettigheter } from '@navikt/fp-types';
 
 import { useBehandlingApi } from '../../../../data/behandlingApi';
 import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 import { OverstyringPanelDef } from '../../../felles/prosess/OverstyringPanelDef';
 import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandardProsessPanelProps';
 import { InngangsvilkarPanelInitProps } from '../../../felles/typer/inngangsvilkarPanelInitProps';
+import { BehandlingDataContext } from '../../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET, AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR];
 
 const VILKAR_KODER = [VilkarType.MEDLEMSKAPSVILKARET];
 
-interface Props {
-  behandlingVersjon: number;
-  rettigheter: AksessRettigheter;
-}
-
-export const MedlemskapInngangsvilkarInitPanel = ({
-  behandlingVersjon,
-  rettigheter,
-  ...props
-}: Props & InngangsvilkarPanelInitProps) => {
+export const MedlemskapInngangsvilkarInitPanel = (props: InngangsvilkarPanelInitProps) => {
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, VILKAR_KODER);
+
+  const { behandling, rettigheter } = use(BehandlingDataContext);
 
   const api = useBehandlingApi(standardPanelProps.behandling);
 
@@ -39,7 +34,7 @@ export const MedlemskapInngangsvilkarInitPanel = ({
   return (
     <InngangsvilkarDefaultInitPanel
       {...props}
-      behandlingVersjon={behandlingVersjon}
+      behandlingVersjon={behandling.versjon}
       standardPanelProps={standardPanelProps}
       vilkarKoder={VILKAR_KODER}
       inngangsvilkarPanelKode="MEDLEMSKAP"

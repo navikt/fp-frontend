@@ -1,3 +1,4 @@
+import { use } from 'react';
 import { useIntl } from 'react-intl';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -11,25 +12,27 @@ import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
+import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.AVKLAR_VERGE];
 
-export const VergeFaktaInitPanel = ({ valgtFaktaSteg, behandling, registrerFaktaPanel }: FaktaPanelInitProps) => {
+export const VergeFaktaInitPanel = ({ valgtFaktaSteg, registrerFaktaPanel }: FaktaPanelInitProps) => {
   const intl = useIntl();
 
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
-  const api = useBehandlingApi(standardPanelProps.behandling);
+  const { behandling } = use(BehandlingDataContext);
+
+  const api = useBehandlingApi(behandling);
 
   const skalPanelVisesIMeny = harLenke(behandling, 'VERGE');
 
-  const { data: verge, isFetching } = useQuery(api.vergeOptions(standardPanelProps.behandling, skalPanelVisesIMeny));
+  const { data: verge, isFetching } = useQuery(api.vergeOptions(behandling, skalPanelVisesIMeny));
 
   return (
     <FaktaDefaultInitPanel
       standardPanelProps={standardPanelProps}
       valgtFaktaSteg={valgtFaktaSteg}
-      behandling={behandling}
       registrerFaktaPanel={registrerFaktaPanel}
       faktaPanelKode={FaktaPanelCode.VERGE}
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Verge' })}

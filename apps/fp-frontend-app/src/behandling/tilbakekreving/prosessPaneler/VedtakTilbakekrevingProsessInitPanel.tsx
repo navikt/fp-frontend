@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { use, useState } from 'react';
 import { useIntl } from 'react-intl';
+import { useNavigate } from 'react-router';
 
 import {
   ForhandsvisData,
@@ -10,7 +11,13 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { BehandlingArsakType, VedtakResultatType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import {
+  BehandlingArsakType,
+  BehandlingStatus,
+  BehandlingType,
+  VedtakResultatType,
+  VilkarUtfallType,
+} from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { AlleKodeverkTilbakekreving, Behandlingsresultat } from '@navikt/fp-types';
 
@@ -19,6 +26,7 @@ import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedta
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
+import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 import { ÅpenRevurderingModal } from '../modaler/ÅpenRevurderingModal';
 
 import '@navikt/ft-prosess-tilbakekreving-vedtak/dist/style.css';
@@ -29,24 +37,27 @@ const tilbakekrevingÅrsakTyperKlage = [BehandlingArsakType.RE_KLAGE_KA, Behandl
 
 interface Props {
   tilbakekrevingKodeverk: AlleKodeverkTilbakekreving;
-  opneSokeside: () => void;
-  harApenRevurdering: boolean;
 }
 
 export const VedtakTilbakekrevingProsessInitPanel = ({
   tilbakekrevingKodeverk,
-  opneSokeside,
-  harApenRevurdering,
   ...props
 }: Props & ProsessPanelInitProps) => {
   const intl = useIntl();
+
+  const { behandling, alleBehandlinger } = use(BehandlingDataContext);
+
+  const fagsakBehandlingerInfo = alleBehandlinger.filter(b => !b.behandlingHenlagt);
+
+  const harApenRevurdering = fagsakBehandlingerInfo.some(
+    b => b.type === BehandlingType.REVURDERING && b.status !== BehandlingStatus.AVSLUTTET,
+  );
 
   const [visFatterVedtakModal, setVisFatterVedtakModal] = useState(false);
 
   const lagringSideEffekter = getLagringSideeffekter(setVisFatterVedtakModal);
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, [], lagringSideEffekter);
 
-  const { behandling } = props;
   const erRevurderingTilbakekrevingKlage =
     behandling.førsteÅrsak && erTilbakekrevingÅrsakKlage(behandling.førsteÅrsak.behandlingArsakType);
   const erRevurderingTilbakekrevingFeilBeløpBortfalt =
@@ -63,13 +74,15 @@ export const VedtakTilbakekrevingProsessInitPanel = ({
     onSuccess: forhandsvisDokument,
   });
 
+  const navigate = useNavigate();
+
   return (
     <>
       <FatterVedtakStatusModal
         visModal={visFatterVedtakModal}
         lukkModal={() => {
           setVisFatterVedtakModal(false);
-          opneSokeside();
+          navigate('/');
         }}
         tekst={intl.formatMessage({ id: 'FatterTilbakekrevingVedtakStatusModal.Sendt' })}
       />
@@ -82,7 +95,7 @@ export const VedtakTilbakekrevingProsessInitPanel = ({
         prosessPanelKode={ProsessStegCode.VEDTAK}
         prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Vedtak' })}
         skalPanelVisesIMeny
-        hentOverstyrtStatus={getVedtakStatus(props.behandling.behandlingsresultat)}
+        hentOverstyrtStatus={getVedtakStatus(behandling.behandlingsresultat)}
       >
         {beregningsresultat && vedtaksbrev ? (
           <VedtakTilbakekrevingProsessIndex

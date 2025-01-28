@@ -1,13 +1,15 @@
+import { use } from 'react';
+
 import { useQuery } from '@tanstack/react-query';
 
 import { AksjonspunktKode, AksjonspunktStatus, VilkarType } from '@navikt/fp-kodeverk';
-import { AksessRettigheter } from '@navikt/fp-types';
 
 import { useBehandlingApi } from '../../../../data/behandlingApi';
 import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 import { OverstyringPanelDef } from '../../../felles/prosess/OverstyringPanelDef';
 import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandardProsessPanelProps';
 import { InngangsvilkarPanelInitProps } from '../../../felles/typer/inngangsvilkarPanelInitProps';
+import { BehandlingDataContext } from '../../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
@@ -16,21 +18,14 @@ const AKSJONSPUNKT_KODER = [
 
 const VILKAR_KODER = [VilkarType.MEDLEMSKAPSVILKARET_FORUTGAENDE];
 
-interface Props {
-  behandlingVersjon: number;
-  rettigheter: AksessRettigheter;
-}
-
-export const MedlemskapForutgaendeInngangsvilkarInitPanel = ({
-  behandlingVersjon,
-  rettigheter,
-  ...props
-}: Props & InngangsvilkarPanelInitProps) => {
+export const MedlemskapForutgaendeInngangsvilkarInitPanel = (props: InngangsvilkarPanelInitProps) => {
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, VILKAR_KODER);
 
-  const api = useBehandlingApi(standardPanelProps.behandling);
+  const { behandling, rettigheter } = use(BehandlingDataContext);
 
-  const { data: medlemskap, isFetching } = useQuery(api.medlemskapOptions(standardPanelProps.behandling));
+  const api = useBehandlingApi(behandling);
+
+  const { data: medlemskap, isFetching } = useQuery(api.medlemskapOptions(behandling));
 
   const harMedlemskapsAksjonspunkt = standardPanelProps.aksjonspunkter.some(
     ap =>
@@ -47,7 +42,7 @@ export const MedlemskapForutgaendeInngangsvilkarInitPanel = ({
     <InngangsvilkarDefaultInitPanel
       {...props}
       standardPanelProps={standardPanelProps}
-      behandlingVersjon={behandlingVersjon}
+      behandlingVersjon={behandling.versjon}
       vilkarKoder={VILKAR_KODER}
       inngangsvilkarPanelKode="MEDLEMSKAP"
       hentInngangsvilkarPanelTekst=""

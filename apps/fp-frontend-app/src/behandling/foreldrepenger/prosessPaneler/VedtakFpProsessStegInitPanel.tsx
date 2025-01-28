@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { use, useState } from 'react';
 import { useIntl } from 'react-intl';
+import { useNavigate } from 'react-router';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
@@ -14,7 +15,7 @@ import {
 } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { VedtakProsessIndex } from '@navikt/fp-prosess-vedtak';
-import { Aksjonspunkt, Behandlingsresultat, Fagsak, ForhåndsvisMeldingParams, Vilkar } from '@navikt/fp-types';
+import { Aksjonspunkt, Behandlingsresultat, ForhåndsvisMeldingParams, Vilkar } from '@navikt/fp-types';
 
 import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingApi';
 import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
@@ -22,6 +23,7 @@ import { IverksetterVedtakStatusModal } from '../../felles/modaler/vedtak/Iverks
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
+import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER = [
   AksjonspunktKode.FATTER_VEDTAK,
@@ -35,19 +37,11 @@ const IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER = [
 
 const AKSJONSPUNKT_KODER = [...IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER, AksjonspunktKode.FORESLA_VEDTAK];
 
-interface Props {
-  setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void;
-  fagsak: Fagsak;
-  opneSokeside: () => void;
-}
-
-export const VedtakFpProsessStegInitPanel = ({
-  setSkalOppdatereEtterBekreftelseAvAp,
-  fagsak,
-  opneSokeside,
-  ...props
-}: Props & ProsessPanelInitProps) => {
+export const VedtakFpProsessStegInitPanel = (props: ProsessPanelInitProps) => {
   const intl = useIntl();
+
+  const { behandling, fagsak, setSkalOppdatereEtterBekreftelseAvAp } = use(BehandlingDataContext);
+
   const [visIverksetterVedtakModal, toggleIverksetterVedtakModal] = useState(false);
   const [visFatterVedtakModal, toggleFatterVedtakModal] = useState(false);
   const lagringSideEffekter = getLagringSideeffekter(
@@ -56,35 +50,31 @@ export const VedtakFpProsessStegInitPanel = ({
     setSkalOppdatereEtterBekreftelseAvAp,
   );
 
+  const navigate = useNavigate();
+
   const lukkIverksetterModal = () => {
     toggleIverksetterVedtakModal(false);
-    opneSokeside();
+    navigate('/');
   };
   const lukkFatterModal = () => {
     toggleFatterVedtakModal(false);
-    opneSokeside();
+    navigate('/');
   };
 
-  const { vilkår } = props.behandling;
+  const { vilkår } = behandling;
 
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, [], lagringSideEffekter);
 
-  const api = useBehandlingApi(props.behandling);
+  const api = useBehandlingApi(behandling);
 
   const { data: beregningsresultatDagytelse, isFetching: isBdFetching } = useQuery(
-    api.beregningsresultatDagytelseOptions(props.behandling),
+    api.beregningsresultatDagytelseOptions(behandling),
   );
-  const { data: tilbakekrevingValg, isFetching: isTvFetching } = useQuery(
-    api.tilbakekrevingValgOptions(props.behandling),
-  );
-  const { data: beregningsgrunnlag, isFetching: isBgFetching } = useQuery(
-    api.beregningsgrunnlagOptions(props.behandling),
-  );
-  const { data: simuleringResultat, isFetching: isSrFetching } = useQuery(
-    api.simuleringResultatOptions(props.behandling),
-  );
+  const { data: tilbakekrevingValg, isFetching: isTvFetching } = useQuery(api.tilbakekrevingValgOptions(behandling));
+  const { data: beregningsgrunnlag, isFetching: isBgFetching } = useQuery(api.beregningsgrunnlagOptions(behandling));
+  const { data: simuleringResultat, isFetching: isSrFetching } = useQuery(api.simuleringResultatOptions(behandling));
   const { data: beregningDagytelseOriginalBehandling, isFetching: isBdobFetching } = useQuery(
-    api.beregningDagytelseOriginalBehandlingOptions(props.behandling),
+    api.beregningDagytelseOriginalBehandlingOptions(behandling),
   );
 
   const isNotFetching = !isBdFetching && !isTvFetching && !isBgFetching && !isSrFetching && !isBdobFetching;
@@ -93,7 +83,7 @@ export const VedtakFpProsessStegInitPanel = ({
     mutationFn: (values: ForhåndsvisMeldingParams) =>
       forhåndsvisMelding({
         ...values,
-        behandlingUuid: props.behandling.uuid,
+        behandlingUuid: behandling.uuid,
         fagsakYtelseType: fagsak.fagsakYtelseType,
       }),
     onSuccess: forhandsvisDokument,
@@ -108,7 +98,7 @@ export const VedtakFpProsessStegInitPanel = ({
       skalPanelVisesIMeny
       hentOverstyrtStatus={findStatusForVedtak(
         vilkår || [],
-        props.behandling.aksjonspunkt || [],
+        behandling.aksjonspunkt || [],
         standardPanelProps.aksjonspunkter,
         standardPanelProps.behandling.behandlingsresultat,
       )}
@@ -143,7 +133,7 @@ export const VedtakFpProsessStegInitPanel = ({
             ytelseTypeKode={FagsakYtelseType.FORELDREPENGER}
             previewCallback={forhandsvis}
             {...standardPanelProps}
-            aksjonspunkter={props.behandling.aksjonspunkt}
+            aksjonspunkter={behandling.aksjonspunkt}
             vilkar={vilkår}
           />
         ) : (

@@ -1,5 +1,3 @@
-import { Behandling, BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
-
 import { BehandlingContainer } from '../felles/BehandlingContainer';
 import { FaktaPanelInitProps } from '../felles/typer/faktaPanelInitProps';
 import { ProsessPanelInitProps } from '../felles/typer/prosessPanelInitProps';
@@ -11,71 +9,26 @@ import { VurderingFamOgPensjonProsessStegInitPanel } from './prosessPaneler/Vurd
 import { VurderingKlageInstansProsessStegInitPanel } from './prosessPaneler/VurderingKlageInstansProsessStegInitPanel';
 
 interface Props {
-  behandling: Behandling;
-  fagsak: Fagsak;
   valgtProsessSteg?: string;
   valgtFaktaSteg?: string;
-  oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
-  opneSokeside: () => void;
-  setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void;
-  alleBehandlinger: BehandlingAppKontekst[];
-  hentOgSettBehandling: () => void;
 }
 
-const KlagePaneler = ({
-  behandling,
-  fagsak,
-  valgtProsessSteg,
-  valgtFaktaSteg,
-  oppdaterProsessStegOgFaktaPanelIUrl,
-  opneSokeside,
-  setSkalOppdatereEtterBekreftelseAvAp,
-  alleBehandlinger,
-  hentOgSettBehandling,
-}: Props) => {
-  const alleIkkeHenlagteBehandlinger = alleBehandlinger.filter(b => !b.behandlingHenlagt);
-
+const KlagePaneler = ({ valgtProsessSteg, valgtFaktaSteg }: Props) => {
   const hentFaktaPaneler = (props: FaktaPanelInitProps) => <VergeFaktaInitPanel {...props} />;
   const hentProsessPaneler = (props: ProsessPanelInitProps) => (
     <>
-      <FormKravFamOgPensjonProsessStegInitPanel
-        {...props}
-        alleBehandlinger={alleIkkeHenlagteBehandlinger}
-        hentOgSettBehandling={hentOgSettBehandling}
-      />
-      <VurderingFamOgPensjonProsessStegInitPanel
-        {...props}
-        fagsak={fagsak}
-        opneSokeside={opneSokeside}
-        setSkalOppdatereEtterBekreftelseAvAp={setSkalOppdatereEtterBekreftelseAvAp}
-        oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-        hentOgSettBehandling={hentOgSettBehandling}
-      />
-      <FormKravKlageInstansProsessStegInitPanel
-        {...props}
-        alleBehandlinger={alleIkkeHenlagteBehandlinger}
-        hentOgSettBehandling={hentOgSettBehandling}
-      />
-      <VurderingKlageInstansProsessStegInitPanel
-        {...props}
-        fagsak={fagsak}
-        hentOgSettBehandling={hentOgSettBehandling}
-      />
-      <KlageresultatProsessStegInitPanel
-        {...props}
-        fagsak={fagsak}
-        opneSokeside={opneSokeside}
-        setSkalOppdatereEtterBekreftelseAvAp={setSkalOppdatereEtterBekreftelseAvAp}
-      />
+      <FormKravFamOgPensjonProsessStegInitPanel {...props} />
+      <VurderingFamOgPensjonProsessStegInitPanel {...props} />
+      <FormKravKlageInstansProsessStegInitPanel {...props} />
+      <VurderingKlageInstansProsessStegInitPanel {...props} />
+      <KlageresultatProsessStegInitPanel {...props} />
     </>
   );
 
   return (
     <BehandlingContainer
-      behandling={behandling}
       valgtProsessSteg={valgtProsessSteg}
       valgtFaktaSteg={valgtFaktaSteg}
-      oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
       hentFaktaPaneler={hentFaktaPaneler}
       hentProsessPaneler={hentProsessPaneler}
     />

@@ -1,5 +1,6 @@
-import { useCallback, useState } from 'react';
+import { use, useCallback, useState } from 'react';
 import { useIntl } from 'react-intl';
+import { useNavigate } from 'react-router';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
@@ -14,7 +15,7 @@ import {
 } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { VedtakProsessIndex } from '@navikt/fp-prosess-vedtak';
-import { Aksjonspunkt, Behandlingsresultat, Fagsak, ForhåndsvisMeldingParams, Vilkar } from '@navikt/fp-types';
+import { Aksjonspunkt, Behandlingsresultat, ForhåndsvisMeldingParams, Vilkar } from '@navikt/fp-types';
 
 import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingApi';
 import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
@@ -22,6 +23,7 @@ import { IverksetterVedtakStatusModal } from '../../felles/modaler/vedtak/Iverks
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
+import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER = [
   AksjonspunktKode.FATTER_VEDTAK,
@@ -34,19 +36,10 @@ const IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER = [
 
 const AKSJONSPUNKT_KODER = [...IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER, AksjonspunktKode.FORESLA_VEDTAK];
 
-interface Props {
-  setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void;
-  fagsak: Fagsak;
-  opneSokeside: () => void;
-}
-
-export const VedtakEsProsessStegInitPanel = ({
-  setSkalOppdatereEtterBekreftelseAvAp,
-  fagsak,
-  opneSokeside,
-  ...props
-}: Props & ProsessPanelInitProps) => {
+export const VedtakEsProsessStegInitPanel = (props: ProsessPanelInitProps) => {
   const intl = useIntl();
+
+  const { behandling, setSkalOppdatereEtterBekreftelseAvAp, fagsak } = use(BehandlingDataContext);
 
   const [visIverksetterVedtakModal, toggleIverksetterVedtakModal] = useState(false);
   const [visFatterVedtakModal, toggleFatterVedtakModal] = useState(false);
@@ -56,33 +49,31 @@ export const VedtakEsProsessStegInitPanel = ({
     setSkalOppdatereEtterBekreftelseAvAp,
   );
 
+  const navigate = useNavigate();
+
   const lukkIverksetterModal = useCallback(() => {
     toggleIverksetterVedtakModal(false);
-    opneSokeside();
+    navigate('/');
   }, []);
   const lukkFatterModal = useCallback(() => {
     toggleFatterVedtakModal(false);
-    opneSokeside();
+    navigate('/');
   }, []);
 
-  const { vilkår } = props.behandling;
+  const { vilkår } = behandling;
 
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, [], lagringSideEffekter);
 
-  const api = useBehandlingApi(props.behandling);
+  const api = useBehandlingApi(behandling);
 
   const { data: beregningDagytelseOriginalBehandling, isFetching: isBogFetching } = useQuery(
-    api.beregningDagytelseOriginalBehandlingOptions(props.behandling),
+    api.beregningDagytelseOriginalBehandlingOptions(behandling),
   );
   const { data: beregningsresultatEngangsstønad, isFetching: isBeFetching } = useQuery(
-    api.es.beregningsresultatEngangsstønadOptions(props.behandling),
+    api.es.beregningsresultatEngangsstønadOptions(behandling),
   );
-  const { data: simuleringResultat, isFetching: isSrFetching } = useQuery(
-    api.simuleringResultatOptions(props.behandling),
-  );
-  const { data: tilbakekrevingValg, isFetching: isTvFetching } = useQuery(
-    api.tilbakekrevingValgOptions(props.behandling),
-  );
+  const { data: simuleringResultat, isFetching: isSrFetching } = useQuery(api.simuleringResultatOptions(behandling));
+  const { data: tilbakekrevingValg, isFetching: isTvFetching } = useQuery(api.tilbakekrevingValgOptions(behandling));
 
   const isNotFetching = !isBogFetching && !isBeFetching && !isSrFetching && !isTvFetching;
 
@@ -90,13 +81,13 @@ export const VedtakEsProsessStegInitPanel = ({
     mutationFn: (values: ForhåndsvisMeldingParams) =>
       forhåndsvisMelding({
         ...values,
-        behandlingUuid: props.behandling.uuid,
+        behandlingUuid: behandling.uuid,
         fagsakYtelseType: fagsak.fagsakYtelseType,
       }),
     onSuccess: forhandsvisDokument,
   });
 
-  const { behandling, aksjonspunkter } = standardPanelProps;
+  const { aksjonspunkter } = standardPanelProps;
 
   return (
     <ProsessDefaultInitPanel
@@ -141,7 +132,7 @@ export const VedtakEsProsessStegInitPanel = ({
             simuleringResultat={simuleringResultat}
             tilbakekrevingvalg={tilbakekrevingValg}
             {...standardPanelProps}
-            aksjonspunkter={props.behandling.aksjonspunkt}
+            aksjonspunkter={behandling.aksjonspunkt}
             vilkar={vilkår}
           />
         ) : (

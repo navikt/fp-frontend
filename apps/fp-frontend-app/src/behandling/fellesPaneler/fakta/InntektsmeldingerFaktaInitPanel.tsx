@@ -1,3 +1,4 @@
+import { use } from 'react';
 import { useIntl } from 'react-intl';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -5,33 +6,31 @@ import { useQuery } from '@tanstack/react-query';
 
 import { InntektsmeldingFaktaIndex } from '@navikt/fp-fakta-inntektsmelding';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import { ArbeidsgiverOpplysningerPerId, Behandling, BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
+import { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
+import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 type Props = {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  behandling: Behandling;
-  alleBehandlinger: BehandlingAppKontekst[];
-  fagsak: Fagsak;
 };
 
 export const InntektsmeldingerFaktaInitPanel = ({
   arbeidsgiverOpplysningerPerId,
-  fagsak,
-  alleBehandlinger,
   ...props
 }: FaktaPanelInitProps & Props) => {
   const intl = useIntl();
 
+  const { behandling, alleBehandlinger, fagsak } = use(BehandlingDataContext);
+
   const standardPanelProps = useStandardFaktaPanelProps();
 
-  const api = useBehandlingApi(props.behandling);
+  const api = useBehandlingApi(behandling);
 
-  const { data: inntektsmeldinger } = useQuery(api.inntektsmeldingerOptions(props.behandling));
+  const { data: inntektsmeldinger } = useQuery(api.inntektsmeldingerOptions(behandling));
 
   return (
     <FaktaDefaultInitPanel
@@ -47,7 +46,7 @@ export const InntektsmeldingerFaktaInitPanel = ({
           inntektsmeldinger={inntektsmeldinger}
           fagsak={fagsak}
           alleBehandlinger={alleBehandlinger}
-          behandling={props.behandling}
+          behandling={behandling}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         />
       ) : (

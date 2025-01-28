@@ -1,3 +1,4 @@
+import { use } from 'react';
 import { useIntl } from 'react-intl';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -6,29 +7,24 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { AksjonspunktKode, BehandlingStatus, BehandlingType, isKlageAvvist } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { FormkravMellomlagretDataType, FormkravProsessIndex } from '@navikt/fp-prosess-formkrav';
-import { BehandlingAppKontekst } from '@navikt/fp-types';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
+import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_FORMKRAV_NK];
 
-interface Props {
-  alleBehandlinger: BehandlingAppKontekst[];
-  hentOgSettBehandling: (keepData?: boolean) => void;
-}
-
-export const FormKravKlageInstansProsessStegInitPanel = ({
-  alleBehandlinger,
-  hentOgSettBehandling,
-  ...props
-}: Props & ProsessPanelInitProps) => {
+export const FormKravKlageInstansProsessStegInitPanel = (props: ProsessPanelInitProps) => {
   const intl = useIntl();
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
 
-  const avsluttedeBehandlinger = alleBehandlinger
+  const { behandling, alleBehandlinger, hentOgSettBehandling } = use(BehandlingDataContext);
+
+  const alleIkkeHenlagteBehandlinger = alleBehandlinger.filter(b => !b.behandlingHenlagt);
+
+  const avsluttedeBehandlinger = alleIkkeHenlagteBehandlinger
     .filter(b => b.status === BehandlingStatus.AVSLUTTET)
     .filter(
       b =>
@@ -36,9 +32,9 @@ export const FormKravKlageInstansProsessStegInitPanel = ({
         b.type !== BehandlingType.ANKE,
     );
 
-  const api = useBehandlingApi(props.behandling);
+  const api = useBehandlingApi(behandling);
 
-  const { data: klageVurdering, isFetching } = useQuery(api.klage.klageVurderingOptions(props.behandling));
+  const { data: klageVurdering, isFetching } = useQuery(api.klage.klageVurderingOptions(behandling));
 
   const { mutate: lagreFormkravVurdering } = useMutation({
     mutationFn: (values: FormkravMellomlagretDataType) => api.klage.mellomlagreFormkravVurdering(values),

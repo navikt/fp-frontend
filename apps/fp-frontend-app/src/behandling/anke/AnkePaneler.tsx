@@ -1,5 +1,3 @@
-import { Behandling, BehandlingAppKontekst } from '@navikt/fp-types';
-
 import { BehandlingContainer } from '../felles/BehandlingContainer';
 import { FaktaPanelInitProps } from '../felles/typer/faktaPanelInitProps';
 import { ProsessPanelInitProps } from '../felles/typer/prosessPanelInitProps';
@@ -9,37 +7,23 @@ import { AnkeResultatProsessStegInitPanel } from './prosessPaneler/AnkeResultatP
 import { AnkeTrygderettsbehandlingProsessStegInitPanel } from './prosessPaneler/AnkeTrygderettsbehandlingProsessStegInitPanel';
 
 interface Props {
-  behandling: Behandling;
   valgtProsessSteg?: string;
   valgtFaktaSteg?: string;
-  oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
-  alleBehandlinger: BehandlingAppKontekst[];
 }
 
-const AnkePaneler = ({
-  behandling,
-  valgtProsessSteg,
-  valgtFaktaSteg,
-  oppdaterProsessStegOgFaktaPanelIUrl,
-  alleBehandlinger,
-}: Props) => {
+const AnkePaneler = ({ valgtProsessSteg, valgtFaktaSteg }: Props) => {
   const hentFaktaPaneler = (props: FaktaPanelInitProps) => <VergeFaktaInitPanel {...props} />;
   const hentProsessPaneler = (props: ProsessPanelInitProps) => (
     <>
-      <AnkeBehandlingProsessStegInitPanel
-        {...props}
-        alleBehandlinger={alleBehandlinger.filter(b => !b.behandlingHenlagt)}
-      />
+      <AnkeBehandlingProsessStegInitPanel {...props} />
       <AnkeResultatProsessStegInitPanel {...props} />
       <AnkeTrygderettsbehandlingProsessStegInitPanel {...props} />
     </>
   );
   return (
     <BehandlingContainer
-      behandling={behandling}
       valgtProsessSteg={valgtProsessSteg}
       valgtFaktaSteg={valgtFaktaSteg}
-      oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
       hentFaktaPaneler={hentFaktaPaneler}
       hentProsessPaneler={hentProsessPaneler}
     />

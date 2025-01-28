@@ -1,11 +1,10 @@
-import React, { ReactElement, useCallback, useMemo,useState } from 'react';
+import { ReactElement, use, useCallback, useMemo, useState } from 'react';
 
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
-import { Behandling } from '@navikt/fp-types';
-
 import { FaktaPanelInitProps } from '../typer/faktaPanelInitProps';
 import { FaktaPanelMenyData } from '../typer/faktaPanelMenyData';
+import { BehandlingDataContext } from '../utils/behandlingDataContext';
 import { FaktaMeny } from './FaktaMeny';
 
 import styles from './faktaContainer.module.css';
@@ -13,24 +12,22 @@ import styles from './faktaContainer.module.css';
 export const DEFAULT_FAKTA_KODE = 'default';
 
 interface Props {
-  behandling: Behandling;
   hentPaneler?: (props: FaktaPanelInitProps) => ReactElement;
   valgtProsessSteg?: string;
   valgtFaktaSteg?: string;
-  oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   setApentFaktaPanel: (panelData?: { urlCode: string; text: string }) => void;
   apentFaktaPanelInfo?: { urlCode: string; text: string };
 }
 
 export const FaktaContainer = ({
-  behandling,
   hentPaneler,
   valgtFaktaSteg,
   valgtProsessSteg,
-  oppdaterProsessStegOgFaktaPanelIUrl,
   setApentFaktaPanel,
   apentFaktaPanelInfo,
 }: Props) => {
+  const { oppdaterProsessStegOgFaktaPanelIUrl } = use(BehandlingDataContext);
+
   const [menyData, setMenyData] = useState<FaktaPanelMenyData[]>([]);
   const registrerFaktaPanel = useCallback(
     (nyData: FaktaPanelMenyData) => {
@@ -82,7 +79,6 @@ export const FaktaContainer = ({
           </FlexColumn>
           <FlexColumn className={styles.content}>
             {hentPaneler({
-              behandling,
               valgtFaktaSteg,
               registrerFaktaPanel,
             })}

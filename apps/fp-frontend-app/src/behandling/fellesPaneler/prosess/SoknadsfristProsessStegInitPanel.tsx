@@ -1,3 +1,4 @@
+import { use } from 'react';
 import { useIntl } from 'react-intl';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -12,15 +13,17 @@ import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInit
 import { skalViseProsessPanel } from '../../felles/prosess/skalViseProsessPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
+import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_SOKNADSFRIST_FORELDREPENGER];
 
 export const SoknadsfristProsessStegInitPanel = (props: ProsessPanelInitProps) => {
   const intl = useIntl();
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
+  const { behandling } = use(BehandlingDataContext);
 
-  const api = useBehandlingApi(props.behandling);
-  const { data: søknad } = useQuery(api.søknadOptions(props.behandling));
+  const api = useBehandlingApi(behandling);
+  const { data: søknad } = useQuery(api.søknadOptions(behandling));
 
   return (
     <ProsessDefaultInitPanel

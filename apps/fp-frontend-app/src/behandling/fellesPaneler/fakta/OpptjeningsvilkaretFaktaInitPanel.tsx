@@ -1,3 +1,4 @@
+import { use } from 'react';
 import { useIntl } from 'react-intl';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -12,6 +13,7 @@ import { useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
+import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING];
 
@@ -25,11 +27,13 @@ export const OpptjeningsvilkaretFaktaInitPanel = ({
 }: Props & FaktaPanelInitProps) => {
   const intl = useIntl();
 
+  const { behandling } = use(BehandlingDataContext);
+
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
-  const api = useBehandlingApi(props.behandling);
+  const api = useBehandlingApi(behandling);
 
-  const { data: opptjening, isFetching } = useQuery(api.opptjeningOptions(props.behandling));
+  const { data: opptjening, isFetching } = useQuery(api.opptjeningOptions(behandling));
 
   return (
     <FaktaDefaultInitPanel
@@ -38,8 +42,8 @@ export const OpptjeningsvilkaretFaktaInitPanel = ({
       faktaPanelKode={FaktaPanelCode.OPPTJENINGSVILKARET}
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Opptjening' })}
       skalPanelVisesIMeny={
-        props.behandling.vilkår.some(v => v.vilkarType === VilkarType.OPPTJENINGSVILKARET) &&
-        props.behandling.vilkår.some(
+        behandling.vilkår.some(v => v.vilkarType === VilkarType.OPPTJENINGSVILKARET) &&
+        behandling.vilkår.some(
           v => v.vilkarType === VilkarType.MEDLEMSKAPSVILKARET && v.vilkarStatus === VilkarUtfallType.OPPFYLT,
         )
       }

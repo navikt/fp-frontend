@@ -1,3 +1,4 @@
+import { use } from 'react';
 import { useIntl } from 'react-intl';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -7,7 +8,6 @@ import { ArbeidOgInntektFaktaIndex } from '@navikt/fp-fakta-arbeid-og-inntekt';
 import { AksjonspunktKode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import {
-  AksessRettigheter,
   ArbeidsgiverOpplysningerPerId,
   ManglendeInntektsmeldingVurdering,
   ManueltArbeidsforhold,
@@ -17,40 +17,35 @@ import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
+import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING];
 
 interface Props {
-  saksnummer: string;
-  behandlingUuid: string;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  rettigheter: AksessRettigheter;
-  hentOgSettBehandling: () => void;
 }
 
 export const ArbeidOgInntektFaktaInitPanel = ({
-  saksnummer,
-  behandlingUuid,
   arbeidsgiverOpplysningerPerId,
-  rettigheter,
-  hentOgSettBehandling,
   ...props
 }: Props & FaktaPanelInitProps) => {
   const intl = useIntl();
 
+  const { behandling, fagsak, hentOgSettBehandling, rettigheter } = use(BehandlingDataContext);
+
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
-  const api = useBehandlingApi(props.behandling);
+  const api = useBehandlingApi(behandling);
 
-  const { data: arbeidOgInntekt } = useQuery(api.arbeidOgInntektOptions(props.behandling));
+  const { data: arbeidOgInntekt } = useQuery(api.arbeidOgInntektOptions(behandling));
 
   const { mutate: settBehandlingPåVent } = useMutation({
     mutationFn: (values: { frist?: string; ventearsak: string }) =>
       api.settBehandlingPåVent({
         frist: values.frist ?? '',
         ventearsak: values.ventearsak,
-        behandlingUuid,
-        behandlingVersjon: props.behandling.versjon,
+        behandlingUuid: behandling.uuid,
+        behandlingVersjon: behandling.versjon,
       }),
     onSuccess: () => hentOgSettBehandling(),
   });
@@ -66,8 +61,8 @@ export const ArbeidOgInntektFaktaInitPanel = ({
   const { mutate: åpneForNyVurdering } = useMutation({
     mutationFn: () =>
       api.åpneForNyVurderingAOI({
-        behandlingUuid,
-        behandlingVersjon: props.behandling.versjon,
+        behandlingUuid: behandling.uuid,
+        behandlingVersjon: behandling.versjon,
       }),
     onSuccess: () => hentOgSettBehandling(),
   });
@@ -79,14 +74,14 @@ export const ArbeidOgInntektFaktaInitPanel = ({
       faktaPanelKode={FaktaPanelCode.ARBEID_OG_INNTEKT}
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.ArbeidOgInntekt' })}
       skalPanelVisesIMeny={
-        harLenke(props.behandling, 'ARBEID_OG_INNTEKT') &&
-        !hasAksjonspunkt(AksjonspunktKode.AVKLAR_ARBEIDSFORHOLD, props.behandling.aksjonspunkt)
+        harLenke(behandling, 'ARBEID_OG_INNTEKT') &&
+        !hasAksjonspunkt(AksjonspunktKode.AVKLAR_ARBEIDSFORHOLD, behandling.aksjonspunkt)
       }
     >
       {arbeidOgInntekt ? (
         <ArbeidOgInntektFaktaIndex
           arbeidOgInntekt={arbeidOgInntekt}
-          saksnummer={saksnummer}
+          saksnummer={fagsak.saksnummer}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           erOverstyrer={rettigheter.kanOverstyreAccess.isEnabled}
           registrerArbeidsforhold={registrerArbeidsforhold}

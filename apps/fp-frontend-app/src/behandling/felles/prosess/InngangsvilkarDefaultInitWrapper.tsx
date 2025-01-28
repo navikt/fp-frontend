@@ -1,4 +1,4 @@
-import React, { MouseEvent, ReactElement, useCallback, useState } from 'react';
+import React, { MouseEvent, ReactElement, use, useCallback, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { HGrid, HStack, Link, VStack } from '@navikt/ds-react';
@@ -11,6 +11,7 @@ import { Behandling } from '@navikt/fp-types';
 import { InngangsvilkarPanelData } from '../typer/inngangsvilkarPanelData';
 import { InngangsvilkarPanelInitProps } from '../typer/inngangsvilkarPanelInitProps';
 import { ProsessPanelInitProps } from '../typer/prosessPanelInitProps';
+import { BehandlingDataContext } from '../utils/behandlingDataContext';
 import { ProsessPanelWrapper } from './ProsessPanelWrapper';
 import { useProsessMenyRegistrerer } from './useProsessMenyRegistrerer';
 
@@ -44,21 +45,20 @@ const getErAksjonspunktOpen = (paneler: InngangsvilkarPanelData[], behandling: B
 
 interface Props {
   apentFaktaPanelInfo?: { urlCode: string; text: string };
-  oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   leftPanels: (props: InngangsvilkarPanelInitProps) => ReactElement;
   rightPanels?: (props: InngangsvilkarPanelInitProps) => ReactElement;
 }
 
 export const InngangsvilkarDefaultInitWrapper = ({
-  behandling,
   valgtProsessSteg,
   registrerProsessPanel,
   apentFaktaPanelInfo,
-  oppdaterProsessStegOgFaktaPanelIUrl,
   leftPanels,
   rightPanels,
 }: Props & ProsessPanelInitProps) => {
   const intl = useIntl();
+
+  const { behandling, oppdaterProsessStegOgFaktaPanelIUrl } = use(BehandlingDataContext);
 
   const [panelInfo, setPanelInfo] = useState<InngangsvilkarPanelData[]>([]);
   const registrerInngangsvilkarPanel = useCallback((nyData: InngangsvilkarPanelData) => {

@@ -1,3 +1,4 @@
+import { use } from 'react';
 import { useIntl } from 'react-intl';
 
 import {
@@ -12,18 +13,13 @@ import { useQuery } from '@tanstack/react-query';
 
 import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import {
-  AksessRettigheter,
-  ArbeidsgiverOpplysningerPerId,
-  Beregningsgrunnlag,
-  Vilkar,
-  Vilkarperiode,
-} from '@navikt/fp-types';
+import { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkar, Vilkarperiode } from '@navikt/fp-types';
 
 import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
+import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 import '@navikt/ft-fakta-beregning/dist/style.css';
 
@@ -41,21 +37,18 @@ const OVERSTYRING_AP_CODES = [
 
 interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  rettigheter: AksessRettigheter;
 }
 
-export const BeregningFaktaInitPanel = ({
-  arbeidsgiverOpplysningerPerId,
-  rettigheter,
-  ...props
-}: Props & FaktaPanelInitProps) => {
+export const BeregningFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId, ...props }: Props & FaktaPanelInitProps) => {
   const intl = useIntl();
+
+  const { behandling, rettigheter } = use(BehandlingDataContext);
 
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER, OVERSTYRING_AP_CODES);
 
-  const api = useBehandlingApi(props.behandling);
+  const api = useBehandlingApi(behandling);
 
-  const { data: beregningsgrunnlag, isFetching } = useQuery(api.beregningsgrunnlagOptions(props.behandling));
+  const { data: beregningsgrunnlag, isFetching } = useQuery(api.beregningsgrunnlagOptions(behandling));
 
   return (
     <FaktaDefaultInitPanel
@@ -63,13 +56,13 @@ export const BeregningFaktaInitPanel = ({
       standardPanelProps={standardPanelProps}
       faktaPanelKode={FaktaPanelCode.BEREGNING}
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Beregning' })}
-      skalPanelVisesIMeny={harLenke(props.behandling, 'BEREGNINGSGRUNNLAG')}
+      skalPanelVisesIMeny={harLenke(behandling, 'BEREGNINGSGRUNNLAG')}
     >
       {!isFetching ? (
         <BeregningFaktaIndex
           {...standardPanelProps}
           kodeverkSamling={standardPanelProps.alleKodeverk}
-          vilkar={lagBGVilkar(props.behandling?.vilkår, beregningsgrunnlag)}
+          vilkar={lagBGVilkar(behandling?.vilkår, beregningsgrunnlag)}
           beregningsgrunnlag={lagFormatertBG(beregningsgrunnlag)}
           submitCallback={lagModifisertCallback(standardPanelProps.submitCallback)}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}

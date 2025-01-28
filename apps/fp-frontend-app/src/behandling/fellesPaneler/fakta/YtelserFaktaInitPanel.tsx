@@ -1,3 +1,4 @@
+import { use } from 'react';
 import { useIntl } from 'react-intl';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -10,15 +11,17 @@ import { useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
+import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 export const YtelserFaktaInitPanel = (props: FaktaPanelInitProps) => {
   const intl = useIntl();
 
+  const { behandling } = use(BehandlingDataContext);
   const standardPanelProps = useStandardFaktaPanelProps();
 
-  const api = useBehandlingApi(props.behandling);
+  const api = useBehandlingApi(behandling);
 
-  const { data: inntektArbeidYtelse } = useQuery(api.inntektArbeidYtelseOptions(props.behandling));
+  const { data: inntektArbeidYtelse } = useQuery(api.inntektArbeidYtelseOptions(behandling));
 
   return (
     <FaktaDefaultInitPanel

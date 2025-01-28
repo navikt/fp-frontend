@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 
 import {
   AksjonspunktStatus,
@@ -11,9 +11,9 @@ import { Aksjonspunkt, Behandling, Fagsak, StandardProsessPanelProps, Vilkar } f
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { AksjonspunktArgs, OverstyrteAksjonspunktArgs } from '../../../data/behandlingApi';
+import { BehandlingDataContext } from '../utils/behandlingDataContext';
 import { getAlleMerknaderFraBeslutter } from '../utils/getAlleMerknaderFraBeslutter';
 import { erReadOnly } from '../utils/readOnlyPanelUtils';
-import { StandardPropsStateContext } from '../utils/standardPropsStateContext';
 
 export const DEFAULT_FAKTA_KODE = 'default';
 export const DEFAULT_PROSESS_STEG_KODE = 'default';
@@ -97,15 +97,23 @@ export const useStandardProsessPanelProps = (
   lagringSideEffekter?: (aksjonspunktModeller: any) => () => void,
 ): StandardProsessPanelProps => {
   const [formData, setFormData] = useState();
-  const value = useContext(StandardPropsStateContext);
+  const {
+    behandling,
+    rettigheter,
+    fagsak,
+    lagreAksjonspunkter,
+    lagreOverstyrteAksjonspunkter,
+    alleKodeverk,
+    oppdaterProsessStegOgFaktaPanelIUrl,
+  } = use(BehandlingDataContext);
 
-  const { aksjonspunkt: aksjonspunkter, vilkår } = value.behandling;
+  const { aksjonspunkt: aksjonspunkter, vilkår } = behandling;
 
   useEffect(() => {
     if (formData) {
       setFormData(undefined);
     }
-  }, [value.behandling.versjon]);
+  }, [behandling.versjon]);
 
   const aksjonspunkterForSteg =
     aksjonspunkter && aksjonspunktKoder
@@ -114,9 +122,9 @@ export const useStandardProsessPanelProps = (
 
   const vilkarForSteg = vilkår && vilkarKoder ? vilkår.filter(v => vilkarKoder.some(vk => vk === v.vilkarType)) : [];
 
-  const isReadOnly = erReadOnly(value.behandling, vilkarForSteg, value.rettigheter, value.hasFetchError);
+  const isReadOnly = erReadOnly(behandling, vilkarForSteg, rettigheter, false);
 
-  const alleMerknaderFraBeslutter = getAlleMerknaderFraBeslutter(value.behandling, aksjonspunkterForSteg);
+  const alleMerknaderFraBeslutter = getAlleMerknaderFraBeslutter(behandling, aksjonspunkterForSteg);
 
   const harApneAksjonspunkter = aksjonspunkterForSteg.some(
     ap => ap.status === AksjonspunktStatus.OPPRETTET && ap.kanLoses,
@@ -127,25 +135,25 @@ export const useStandardProsessPanelProps = (
   const readOnlySubmitButton = !aksjonspunkterForSteg.some(ap => ap.kanLoses) || VilkarUtfallType.OPPFYLT === status;
 
   const standardlagringSideEffekter = () => () => {
-    value.oppdaterProsessStegOgFaktaPanelIUrl(DEFAULT_PROSESS_STEG_KODE, DEFAULT_FAKTA_KODE);
+    oppdaterProsessStegOgFaktaPanelIUrl(DEFAULT_PROSESS_STEG_KODE, DEFAULT_FAKTA_KODE);
   };
 
   const submitCallback = getBekreftAksjonspunktProsessCallback(
     lagringSideEffekter || standardlagringSideEffekter,
-    value.fagsak,
-    value.behandling,
+    fagsak,
+    behandling,
     aksjonspunkterForSteg,
-    value.lagreAksjonspunkter,
-    value.lagreOverstyrteAksjonspunkter,
+    lagreAksjonspunkter,
+    lagreOverstyrteAksjonspunkter,
   );
 
   return {
-    fagsak: value.fagsak,
-    behandling: value.behandling,
+    fagsak: fagsak,
+    behandling: behandling,
     isAksjonspunktOpen: harApneAksjonspunkter,
     aksjonspunkter: aksjonspunkterForSteg,
     vilkar: vilkarForSteg,
-    alleKodeverk: value.alleKodeverk,
+    alleKodeverk: alleKodeverk,
     alleMerknaderFraBeslutter,
     isReadOnly,
     readOnlySubmitButton,

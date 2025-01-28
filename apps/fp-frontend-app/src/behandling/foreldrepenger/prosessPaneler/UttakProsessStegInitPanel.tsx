@@ -1,3 +1,4 @@
+import { use } from 'react';
 import { useIntl } from 'react-intl';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -6,12 +7,13 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { AksjonspunktKode, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { UttakProsessIndex } from '@navikt/fp-prosess-uttak';
-import { AksessRettigheter, ArbeidsgiverOpplysningerPerId, Behandling, Personoversikt } from '@navikt/fp-types';
+import { ArbeidsgiverOpplysningerPerId, Behandling, Personoversikt } from '@navikt/fp-types';
 
 import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
+import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const getStatusFromUttakresultat = (behandling: Behandling): string => {
   if (!harLenke(behandling, 'UTTAKSRESULTAT_PERIODER')) {
@@ -35,13 +37,11 @@ const AKSJONSPUNKT_KODER = [
 ];
 
 interface Props {
-  rettigheter: AksessRettigheter;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   personoversikt: Personoversikt;
 }
 
 export const UttakProsessStegInitPanel = ({
-  rettigheter,
   arbeidsgiverOpplysningerPerId,
   personoversikt,
   ...props
@@ -50,13 +50,15 @@ export const UttakProsessStegInitPanel = ({
 
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
 
-  const api = useBehandlingApi(props.behandling);
+  const { rettigheter, behandling } = use(BehandlingDataContext);
 
-  const { data: uttaksresultatPerioder } = useQuery(api.uttaksresultatPerioderOptions(props.behandling));
-  const { data: familiehendelse } = useQuery(api.familiehendelseOptions(props.behandling));
-  const { data: søknad } = useQuery(api.søknadOptions(props.behandling));
-  const { data: uttakStønadskontoer } = useQuery(api.uttakStønadskontoerOptions(props.behandling));
-  const { data: ytelsefordeling } = useQuery(api.ytelsefordelingOptions(props.behandling));
+  const api = useBehandlingApi(behandling);
+
+  const { data: uttaksresultatPerioder } = useQuery(api.uttaksresultatPerioderOptions(behandling));
+  const { data: familiehendelse } = useQuery(api.familiehendelseOptions(behandling));
+  const { data: søknad } = useQuery(api.søknadOptions(behandling));
+  const { data: uttakStønadskontoer } = useQuery(api.uttakStønadskontoerOptions(behandling));
+  const { data: ytelsefordeling } = useQuery(api.ytelsefordelingOptions(behandling));
 
   const { mutateAsync: oppdaterStønadskontoer } = useMutation({
     mutationFn: api.oppdaterStønadskontoer,
@@ -69,7 +71,7 @@ export const UttakProsessStegInitPanel = ({
       prosessPanelKode={ProsessStegCode.UTTAK}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Uttak' })}
       skalPanelVisesIMeny
-      hentOverstyrtStatus={getStatusFromUttakresultat(props.behandling)}
+      hentOverstyrtStatus={getStatusFromUttakresultat(behandling)}
     >
       {uttaksresultatPerioder && familiehendelse && søknad && uttakStønadskontoer && ytelsefordeling ? (
         <UttakProsessIndex

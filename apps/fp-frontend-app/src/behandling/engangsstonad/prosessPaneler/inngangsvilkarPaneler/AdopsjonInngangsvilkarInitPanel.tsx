@@ -1,13 +1,15 @@
+import { use } from 'react';
 import { IntlShape, useIntl } from 'react-intl';
 
 import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import { AdopsjonVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-adopsjon';
-import { AksessRettigheter, Aksjonspunkt } from '@navikt/fp-types';
+import { Aksjonspunkt } from '@navikt/fp-types';
 
 import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 import { OverstyringPanelDef } from '../../../felles/prosess/OverstyringPanelDef';
 import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandardProsessPanelProps';
 import { InngangsvilkarPanelInitProps } from '../../../felles/typer/inngangsvilkarPanelInitProps';
+import { BehandlingDataContext } from '../../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_TEKST_PER_KODE = {
   [AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN]: 'SRBVilkarForm.VurderSammeBarn',
@@ -27,17 +29,10 @@ const AKSJONSPUNKT_KODER = [
 
 const VILKAR_KODER = [VilkarType.ADOPSJONSVILKARET];
 
-interface Props {
-  behandlingVersjon: number;
-  rettigheter: AksessRettigheter;
-}
-
-export const AdopsjonInngangsvilkarInitPanel = ({
-  behandlingVersjon,
-  rettigheter,
-  ...props
-}: Props & InngangsvilkarPanelInitProps) => {
+export const AdopsjonInngangsvilkarInitPanel = (props: InngangsvilkarPanelInitProps) => {
   const intl = useIntl();
+
+  const { behandling, rettigheter } = use(BehandlingDataContext);
 
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, VILKAR_KODER);
 
@@ -45,7 +40,7 @@ export const AdopsjonInngangsvilkarInitPanel = ({
     <InngangsvilkarDefaultInitPanel
       {...props}
       standardPanelProps={standardPanelProps}
-      behandlingVersjon={behandlingVersjon}
+      behandlingVersjon={behandling.versjon}
       vilkarKoder={VILKAR_KODER}
       inngangsvilkarPanelKode="ADOPSJON"
       hentInngangsvilkarPanelTekst={hentAksjonspunktTekst(intl, standardPanelProps.aksjonspunkter)}
