@@ -1,0 +1,7 @@
+import{a as n}from"./chunk-D5ZWXAHU-DlerbUHg.js";import"./aktivitetStatus-02fOJoqz.js";import{B as p}from"./behandlingResultatType-DHbqkXMl.js";import"./withQueryClient-BhxeJHbr.js";import{g as d}from"./withIntl-CBlK8vyP.js";import{I as l}from"./IverksetterVedtakStatusModal-YdO2RvBC.js";import{m as c}from"./nb_NO-FM-zO8Y1.js";import"./v4-CtRu48qb.js";import"./index-B5OHeJSP.js";import"./_commonjsHelpers-Cpj98o6Y.js";import"./index-sT6466e8.js";import"./index-DYwZEShM.js";import"./jsx-runtime-CLpGMVip.js";import"./index.es-DSZ6vyNz.js";import"./dayjs.min-CJilavqB.js";import"./ExclamationmarkTriangleFill-CsTh_wEM.js";import"./CheckmarkCircleFill-Bl4cKVqn.js";const k=d(c),_={title:"behandling/vedtak/IverksetterVedtakStatusModal",component:l,decorators:[k],args:{visModal:!0,lukkModal:n("button-click")}},t={},e={args:{behandlingsresultat:{type:p.AVSLATT}}};var r,a,s;t.parameters={...t.parameters,docs:{...(r=t.parameters)==null?void 0:r.docs,source:{originalSource:"{}",...(s=(a=t.parameters)==null?void 0:a.docs)==null?void 0:s.source}}};var o,i,m;e.parameters={...e.parameters,docs:{...(o=e.parameters)==null?void 0:o.docs,source:{originalSource:`{
+  args: {
+    behandlingsresultat: {
+      type: BehandlingResultatType.AVSLATT
+    }
+  }
+}`,...(m=(i=e.parameters)==null?void 0:i.docs)==null?void 0:m.source}}};const w=["VisIverksetterVedtakInnvilget","VisIverksetterVedtakAvslatt"];export{e as VisIverksetterVedtakAvslatt,t as VisIverksetterVedtakInnvilget,w as __namedExportsOrder,_ as default};
