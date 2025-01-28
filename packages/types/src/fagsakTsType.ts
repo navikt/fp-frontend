@@ -49,6 +49,7 @@ export type Fagsak = Readonly<{
   dekningsgrad: number;
   aktørId: string;
   harIkkeRegistrertAdresse: boolean;
+  harVergeIÅpenBehandling: boolean;
   sakSkalTilInfotrygd: boolean;
   behandlingTypeKanOpprettes: BehandlingOppretting[];
   bruker: FagsakPerson;

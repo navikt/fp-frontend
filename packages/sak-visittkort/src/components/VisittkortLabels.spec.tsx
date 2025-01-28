@@ -12,7 +12,7 @@ import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-describe('<VisittkortSakIndex>', () => {
+describe('VisittkortSakIndex', () => {
   const fagsakPerson = {
     navn: 'Olga Utvikler',
     kjønn: NavBrukerKjonn.KVINNE,
@@ -28,7 +28,7 @@ describe('<VisittkortSakIndex>', () => {
             ...fagsakPerson,
             dødsdato: '2019-01-01',
           }}
-          harVerge={false}
+          harVergeIÅpenBehandling={false}
         />
       </RawIntlProvider>,
     );
@@ -45,7 +45,7 @@ describe('<VisittkortSakIndex>', () => {
             ...fagsakPerson,
             diskresjonskode: DiskresjonskodeType.KODE6,
           }}
-          harVerge={false}
+          harVergeIÅpenBehandling={false}
         />
       </RawIntlProvider>,
     );
@@ -62,7 +62,7 @@ describe('<VisittkortSakIndex>', () => {
             ...fagsakPerson,
             diskresjonskode: DiskresjonskodeType.KODE7,
           }}
-          harVerge={false}
+          harVergeIÅpenBehandling={false}
         />
       </RawIntlProvider>,
     );
@@ -74,11 +74,11 @@ describe('<VisittkortSakIndex>', () => {
   it('skal vise etikett for verge', async () => {
     render(
       <RawIntlProvider value={intl}>
-        <VisittkortLabels fagsakPerson={fagsakPerson} harVerge />
+        <VisittkortLabels fagsakPerson={fagsakPerson} harVergeIÅpenBehandling />
       </RawIntlProvider>,
     );
 
-    expect(await screen.findByLabelText('Personen har verge')).toBeInTheDocument();
+    expect(await screen.findByLabelText('Personen har verge i en åpen behandling')).toBeInTheDocument();
     expect(screen.getByText('Verge')).toBeInTheDocument();
   });
 
@@ -90,7 +90,7 @@ describe('<VisittkortSakIndex>', () => {
             ...fagsakPerson,
             fødselsdato: '2019-01-01',
           }}
-          harVerge={false}
+          harVergeIÅpenBehandling={false}
         />
       </RawIntlProvider>,
     );

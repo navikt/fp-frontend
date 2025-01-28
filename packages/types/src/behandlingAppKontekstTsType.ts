@@ -31,7 +31,6 @@ export type BehandlingFellesData = Readonly<{
   behandlingÅrsaker: BehandlingÅrsak[];
   ansvarligSaksbehandler?: string;
   kanHenleggeBehandling?: boolean;
-  harVerge?: boolean;
   førsteÅrsak?: BehandlingÅrsak;
   fristBehandlingPaaVent?: string;
 }>;

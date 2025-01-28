@@ -10,10 +10,10 @@ import { FagsakPerson } from '@navikt/fp-types';
 
 interface Props {
   fagsakPerson: FagsakPerson;
-  harVerge?: boolean;
+  harVergeIÅpenBehandling?: boolean;
 }
 
-export const VisittkortLabels = ({ fagsakPerson, harVerge = false }: Props) => {
+export const VisittkortLabels = ({ fagsakPerson, harVergeIÅpenBehandling = false }: Props) => {
   const intl = useIntl();
   const erSokerUnder18 = dayjs().diff(fagsakPerson.fødselsdato, 'years') < 18;
   return (
@@ -39,7 +39,7 @@ export const VisittkortLabels = ({ fagsakPerson, harVerge = false }: Props) => {
           </Tag>
         </Tooltip>
       )}
-      {harVerge && !fagsakPerson.dødsdato && (
+      {harVergeIÅpenBehandling && !fagsakPerson.dødsdato && (
         <Tooltip content={intl.formatMessage({ id: 'VisittkortLabels.VergeTittel' })} placement="bottom">
           <Tag variant="info" size="small">
             <FormattedMessage id="VisittkortLabels.Verge" />

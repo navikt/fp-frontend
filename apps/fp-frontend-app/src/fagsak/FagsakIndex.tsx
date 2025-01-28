@@ -133,7 +133,7 @@ export const FagsakIndex = () => {
                 bruker={fagsak.bruker}
                 annenPart={fagsak.annenPart}
                 familiehendelse={fagsak.familiehendelse}
-                harVerge={behandling?.harVerge}
+                harVergeIÅpenBehandling={fagsak?.harVergeIÅpenBehandling}
                 erTilbakekreving={erTilbakekreving}
                 lenkeTilAnnenPart={
                   fagsak.annenpartBehandling ? finnLenkeTilAnnenPart(fagsak.annenpartBehandling) : undefined

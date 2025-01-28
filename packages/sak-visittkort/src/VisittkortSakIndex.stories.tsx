@@ -84,7 +84,7 @@ export const ForAnnenPartDerAktørIdErUkjent: Story = {
 
 export const MedVergeOgBrukerUnder18: Story = {
   args: {
-    harVerge: true,
+    harVergeIÅpenBehandling: true,
     bruker: { ...fagsakPersonMor, fødselsdato: dayjs().subtract(17, 'years').format(ISO_DATE_FORMAT) },
   },
 };

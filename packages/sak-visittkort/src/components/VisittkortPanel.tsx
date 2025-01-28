@@ -25,7 +25,7 @@ interface Props {
   annenPart?: FagsakPerson;
   familiehendelse?: FagsakHendelse;
   lenkeTilAnnenPart?: string;
-  harVerge: boolean;
+  harVergeIÅpenBehandling: boolean;
   erTilbakekreving: boolean;
 }
 
@@ -35,19 +35,21 @@ export const VisittkortPanel = ({
   annenPart,
   familiehendelse,
   lenkeTilAnnenPart,
-  harVerge,
+  harVergeIÅpenBehandling,
   erTilbakekreving,
 }: Props) => {
   const intl = useIntl();
 
-  if (erTilbakekreving && harVerge) {
+  if (erTilbakekreving && harVergeIÅpenBehandling) {
     return (
       <div className={styles.container}>
         <PersonCard
           name={bruker.navn}
           fodselsnummer={bruker.fødselsnummer}
           gender={utledKjonn(bruker.kjønn)}
-          renderLabelContent={() => <VisittkortLabels fagsakPerson={bruker} harVerge={harVerge} />}
+          renderLabelContent={() => (
+            <VisittkortLabels fagsakPerson={bruker} harVergeIÅpenBehandling={harVergeIÅpenBehandling} />
+          )}
         />
       </div>
     );
@@ -65,7 +67,9 @@ export const VisittkortPanel = ({
             fodselsnummer={primærBruker.fødselsnummer}
             gender={utledKjonn(primærBruker.kjønn)}
             url={lenkeTilAnnenPart}
-            renderLabelContent={() => <VisittkortLabels fagsakPerson={primærBruker} harVerge={harVerge} />}
+            renderLabelContent={() => (
+              <VisittkortLabels fagsakPerson={primærBruker} harVergeIÅpenBehandling={harVergeIÅpenBehandling} />
+            )}
             isActive={erMor}
           />
         ) : (
