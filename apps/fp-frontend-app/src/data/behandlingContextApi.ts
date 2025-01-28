@@ -1,10 +1,10 @@
-import { FeilutbetalingAarsak, FeilutbetalingFakta } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
+import { FeilutbetalingÅrsak, FeilutbetalingFakta } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
 import { DetaljerteFeilutbetalingsperioder } from '@navikt/ft-prosess-tilbakekreving';
 import { FeilutbetalingPerioderWrapper } from '@navikt/ft-prosess-tilbakekreving-foreldelse';
 import { Vedtaksbrev } from '@navikt/ft-prosess-tilbakekreving-vedtak';
 
 import { FormkravMellomlagretDataType } from '@navikt/fp-prosess-formkrav';
-import { createRequestApi,RestApiConfigBuilder, RestKey } from '@navikt/fp-rest-api';
+import { createRequestApi, RestApiConfigBuilder, RestKey } from '@navikt/fp-rest-api';
 import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
 import {
   AnkeVurdering,
@@ -150,7 +150,7 @@ export const BehandlingApiKeys = {
   VEDTAKSBREV: new RestKey<Vedtaksbrev, void>('VEDTAKSBREV'),
   BEREGNINGSRESULTAT: new RestKey<BeregningsresultatTilbakekreving, void>('BEREGNINGSRESULTAT'),
   FEILUTBETALING_FAKTA: new RestKey<FeilutbetalingFakta, void>('FEILUTBETALING_FAKTA'),
-  FEILUTBETALING_AARSAK: new RestKey<FeilutbetalingAarsak[], void>('FEILUTBETALING_AARSAK'),
+  FEILUTBETALING_AARSAK: new RestKey<FeilutbetalingÅrsak[], void>('FEILUTBETALING_AARSAK'),
   PERIODER_FORELDELSE: new RestKey<FeilutbetalingPerioderWrapper, void>('PERIODER_FORELDELSE'),
   VILKARVURDERINGSPERIODER: new RestKey<DetaljerteFeilutbetalingsperioder, void>('VILKARVURDERINGSPERIODER'),
   VILKARVURDERING: new RestKey<VilkarsVurdertePerioderWrapper, void>('VILKARVURDERING'),
