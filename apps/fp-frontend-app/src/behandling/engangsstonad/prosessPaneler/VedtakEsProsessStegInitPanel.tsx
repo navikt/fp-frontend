@@ -1,7 +1,9 @@
-import React, { useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useIntl } from 'react-intl';
 
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 import {
   AksjonspunktKode,
@@ -11,25 +13,144 @@ import {
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import { ForhandsvisData,VedtakProsessIndex } from '@navikt/fp-prosess-vedtak';
-import {
-  Aksjonspunkt,
-  Behandling,
-  Behandlingsresultat,
-  BeregningsresultatEs,
-  Fagsak,
-  ForhåndsvisMeldingParams,
-  SimuleringResultat,
-  TilbakekrevingValg,
-  Vilkar,
-} from '@navikt/fp-types';
+import { VedtakProsessIndex } from '@navikt/fp-prosess-vedtak';
+import { Aksjonspunkt, Behandlingsresultat, Fagsak, ForhåndsvisMeldingParams, Vilkar } from '@navikt/fp-types';
 
-import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
+import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingApi';
 import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
 import { IverksetterVedtakStatusModal } from '../../felles/modaler/vedtak/IverksetterVedtakStatusModal';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
+
+const IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER = [
+  AksjonspunktKode.FATTER_VEDTAK,
+  AksjonspunktKode.FORESLA_VEDTAK_MANUELT,
+  AksjonspunktKode.VURDERE_ANNEN_YTELSE,
+  AksjonspunktKode.VURDERE_DOKUMENT,
+  AksjonspunktKode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST,
+  AksjonspunktKode.KONTROLL_AV_MAUNELT_OPPRETTET_REVURDERINGSBEHANDLING,
+];
+
+const AKSJONSPUNKT_KODER = [...IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER, AksjonspunktKode.FORESLA_VEDTAK];
+
+interface Props {
+  setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void;
+  fagsak: Fagsak;
+  opneSokeside: () => void;
+}
+
+export const VedtakEsProsessStegInitPanel = ({
+  setSkalOppdatereEtterBekreftelseAvAp,
+  fagsak,
+  opneSokeside,
+  ...props
+}: Props & ProsessPanelInitProps) => {
+  const intl = useIntl();
+
+  const [visIverksetterVedtakModal, toggleIverksetterVedtakModal] = useState(false);
+  const [visFatterVedtakModal, toggleFatterVedtakModal] = useState(false);
+  const lagringSideEffekter = getLagringSideeffekter(
+    toggleIverksetterVedtakModal,
+    toggleFatterVedtakModal,
+    setSkalOppdatereEtterBekreftelseAvAp,
+  );
+
+  const lukkIverksetterModal = useCallback(() => {
+    toggleIverksetterVedtakModal(false);
+    opneSokeside();
+  }, []);
+  const lukkFatterModal = useCallback(() => {
+    toggleFatterVedtakModal(false);
+    opneSokeside();
+  }, []);
+
+  const { vilkår } = props.behandling;
+
+  const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, [], lagringSideEffekter);
+
+  const api = useBehandlingApi(props.behandling);
+
+  const { data: beregningDagytelseOriginalBehandling, isFetching: isBogFetching } = useQuery(
+    api.beregningDagytelseOriginalBehandlingOptions(props.behandling),
+  );
+  const { data: beregningsresultatEngangsstønad, isFetching: isBeFetching } = useQuery(
+    api.es.beregningsresultatEngangsstønadOptions(props.behandling),
+  );
+  const { data: simuleringResultat, isFetching: isSrFetching } = useQuery(
+    api.simuleringResultatOptions(props.behandling),
+  );
+  const { data: tilbakekrevingValg, isFetching: isTvFetching } = useQuery(
+    api.tilbakekrevingValgOptions(props.behandling),
+  );
+
+  const isNotFetching = !isBogFetching && !isBeFetching && !isSrFetching && !isTvFetching;
+
+  const { mutate: forhåndsvis } = useMutation({
+    mutationFn: (values: ForhåndsvisMeldingParams) =>
+      forhåndsvisMelding({
+        ...values,
+        behandlingUuid: props.behandling.uuid,
+        fagsakYtelseType: fagsak.fagsakYtelseType,
+      }),
+    onSuccess: forhandsvisDokument,
+  });
+
+  const { behandling, aksjonspunkter } = standardPanelProps;
+
+  return (
+    <ProsessDefaultInitPanel
+      {...props}
+      standardPanelProps={standardPanelProps}
+      prosessPanelKode={ProsessStegCode.VEDTAK}
+      prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Vedtak' })}
+      skalPanelVisesIMeny
+      hentOverstyrtStatus={findStatusForVedtak(
+        vilkår || [],
+        behandling.aksjonspunkt || [],
+        aksjonspunkter,
+        behandling.behandlingsresultat,
+      )}
+      hentSkalMarkeresSomAktiv={
+        !behandling.behandlingHenlagt &&
+        findStatusForVedtak(
+          vilkår || [],
+          behandling.aksjonspunkt || [],
+          aksjonspunkter,
+          behandling.behandlingsresultat,
+        ) !== VilkarUtfallType.IKKE_VURDERT
+      }
+    >
+      <>
+        <IverksetterVedtakStatusModal
+          visModal={visIverksetterVedtakModal}
+          lukkModal={lukkIverksetterModal}
+          behandlingsresultat={standardPanelProps.behandling.behandlingsresultat}
+        />
+        <FatterVedtakStatusModal
+          visModal={visFatterVedtakModal}
+          lukkModal={lukkFatterModal}
+          tekst={intl.formatMessage({ id: 'FatterVedtakStatusModal.SendtBeslutter' })}
+        />
+        {isNotFetching ? (
+          <VedtakProsessIndex
+            ytelseTypeKode={FagsakYtelseType.ENGANGSSTONAD}
+            previewCallback={forhåndsvis}
+            beregningsresultatOriginalBehandling={beregningDagytelseOriginalBehandling}
+            beregningresultatEngangsstonad={beregningsresultatEngangsstønad}
+            simuleringResultat={simuleringResultat}
+            tilbakekrevingvalg={tilbakekrevingValg}
+            {...standardPanelProps}
+            aksjonspunkter={props.behandling.aksjonspunkt}
+            vilkar={vilkår}
+          />
+        ) : (
+          <LoadingPanel />
+        )}
+      </>
+    </ProsessDefaultInitPanel>
+  );
+};
 
 const hasOnlyClosedAps = (aksjonspunkter: Aksjonspunkt[], vedtakAksjonspunkter: Aksjonspunkt[]): boolean =>
   aksjonspunkter
@@ -79,31 +200,6 @@ const findStatusForVedtak = (
   return VilkarUtfallType.OPPFYLT;
 };
 
-const getForhandsvisCallback =
-  (
-    forhandsvisMelding: (params: ForhåndsvisMeldingParams, keepData?: boolean) => Promise<unknown>,
-    fagsak: Fagsak,
-    behandling: Behandling,
-  ) =>
-  (data: ForhandsvisData) => {
-    const brevData = {
-      ...data,
-      behandlingUuid: behandling.uuid,
-      fagsakYtelseType: fagsak.fagsakYtelseType,
-    };
-
-    return forhandsvisMelding(brevData).then(response => forhandsvisDokument(response));
-  };
-
-const IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER = [
-  AksjonspunktKode.FATTER_VEDTAK,
-  AksjonspunktKode.FORESLA_VEDTAK_MANUELT,
-  AksjonspunktKode.VURDERE_ANNEN_YTELSE,
-  AksjonspunktKode.VURDERE_DOKUMENT,
-  AksjonspunktKode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST,
-  AksjonspunktKode.KONTROLL_AV_MAUNELT_OPPRETTET_REVURDERINGSBEHANDLING,
-];
-
 const getLagringSideeffekter =
   (
     toggleIverksetterVedtakModal: (visIverksetterModal: boolean) => void,
@@ -125,114 +221,3 @@ const getLagringSideeffekter =
       }
     };
   };
-
-const AKSJONSPUNKT_KODER = [...IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER, AksjonspunktKode.FORESLA_VEDTAK];
-
-const ENDEPUNKTER_PANEL_DATA = [
-  BehandlingApiKeys.TILBAKEKREVINGVALG,
-  BehandlingApiKeys.BEREGNINGSRESULTAT_DAGYTELSE_ORIGINAL_BEHANDLING,
-  BehandlingApiKeys.SIMULERING_RESULTAT,
-  BehandlingApiKeys.BEREGNINGRESULTAT_ENGANGSSTONAD,
-];
-type EndepunktPanelData = {
-  tilbakekrevingvalg?: TilbakekrevingValg;
-  beregningsresultatOriginalBehandling?: {
-    'beregningsresultat-engangsstonad'?: BeregningsresultatEs;
-  };
-  simuleringResultat: SimuleringResultat;
-  beregningresultatEngangsstonad?: BeregningsresultatEs;
-};
-
-interface Props {
-  setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void;
-  fagsak: Fagsak;
-  opneSokeside: () => void;
-}
-
-export const VedtakEsProsessStegInitPanel = ({
-  setSkalOppdatereEtterBekreftelseAvAp,
-  fagsak,
-  opneSokeside,
-  ...props
-}: Props & ProsessPanelInitProps) => {
-  const intl = useIntl();
-
-  const [visIverksetterVedtakModal, toggleIverksetterVedtakModal] = useState(false);
-  const [visFatterVedtakModal, toggleFatterVedtakModal] = useState(false);
-  const lagringSideEffekter = getLagringSideeffekter(
-    toggleIverksetterVedtakModal,
-    toggleFatterVedtakModal,
-    setSkalOppdatereEtterBekreftelseAvAp,
-  );
-
-  const standardPanelProps = useStandardProsessPanelProps();
-
-  const { startRequest: forhandsvisMelding } = restBehandlingApiHooks.useRestApiRunner(
-    BehandlingApiKeys.PREVIEW_MESSAGE,
-  );
-  const previewCallback = useCallback(
-    getForhandsvisCallback(forhandsvisMelding, fagsak, standardPanelProps.behandling),
-    [standardPanelProps.behandling.versjon],
-  );
-
-  const lukkIverksetterModal = useCallback(() => {
-    toggleIverksetterVedtakModal(false);
-    opneSokeside();
-  }, []);
-  const lukkFatterModal = useCallback(() => {
-    toggleFatterVedtakModal(false);
-    opneSokeside();
-  }, []);
-
-  const { vilkår } = props.behandling;
-
-  return (
-    <ProsessDefaultInitPanel<EndepunktPanelData>
-      {...props}
-      panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
-      aksjonspunktKoder={AKSJONSPUNKT_KODER}
-      prosessPanelKode={ProsessStegCode.VEDTAK}
-      prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Vedtak' })}
-      skalPanelVisesIMeny={() => true}
-      hentOverstyrtStatus={standardData =>
-        findStatusForVedtak(
-          vilkår || [],
-          props.behandling.aksjonspunkt || [],
-          standardData.aksjonspunkter,
-          standardData.behandling.behandlingsresultat,
-        )
-      }
-      lagringSideEffekter={lagringSideEffekter}
-      hentSkalMarkeresSomAktiv={standardData =>
-        !standardData.behandling.behandlingHenlagt &&
-        findStatusForVedtak(
-          vilkår || [],
-          props.behandling.aksjonspunkt || [],
-          standardData.aksjonspunkter,
-          standardData.behandling.behandlingsresultat,
-        ) !== VilkarUtfallType.IKKE_VURDERT
-      }
-      renderPanel={data => (
-        <>
-          <IverksetterVedtakStatusModal
-            visModal={visIverksetterVedtakModal}
-            lukkModal={lukkIverksetterModal}
-            behandlingsresultat={data.behandling.behandlingsresultat}
-          />
-          <FatterVedtakStatusModal
-            visModal={visFatterVedtakModal}
-            lukkModal={lukkFatterModal}
-            tekst={intl.formatMessage({ id: 'FatterVedtakStatusModal.SendtBeslutter' })}
-          />
-          <VedtakProsessIndex
-            ytelseTypeKode={FagsakYtelseType.ENGANGSSTONAD}
-            previewCallback={previewCallback}
-            {...data}
-            aksjonspunkter={props.behandling.aksjonspunkt}
-            vilkar={vilkår}
-          />
-        </>
-      )}
-    />
-  );
-};

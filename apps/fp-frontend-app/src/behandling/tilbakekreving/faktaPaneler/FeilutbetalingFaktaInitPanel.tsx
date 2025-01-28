@@ -1,29 +1,23 @@
-import React from 'react';
 import { useIntl } from 'react-intl';
 
 import {
   FeilutbetalingAksjonspunktCode,
-  FeilutbetalingÅrsak,
-  FeilutbetalingFakta,
   FeilutbetalingFaktaIndex,
 } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
+import { useQuery } from '@tanstack/react-query';
 
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { AlleKodeverkTilbakekreving } from '@navikt/fp-types';
 
-import { BehandlingApiKeys, requestBehandlingApi } from '../../../data/behandlingContextApi';
+import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
+import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
 
 import '@navikt/ft-fakta-tilbakekreving-feilutbetaling/dist/style.css';
 
 const AKSJONSPUNKT_KODER = [FeilutbetalingAksjonspunktCode.AVKLAR_FAKTA_FOR_FEILUTBETALING];
-
-const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.FEILUTBETALING_FAKTA, BehandlingApiKeys.FEILUTBETALING_AARSAK];
-type EndepunktPanelData = {
-  feilutbetalingFakta: FeilutbetalingFakta;
-  feilutbetalingAarsak: FeilutbetalingÅrsak[];
-};
 
 interface Props {
   tilbakekrevingKodeverk: AlleKodeverkTilbakekreving;
@@ -36,25 +30,39 @@ export const FeilutbetalingFaktaInitPanel = ({
   registrerFaktaPanel,
   tilbakekrevingKodeverk,
   fagsakYtelseTypeKode,
-}: FaktaPanelInitProps & Props) => (
-  <FaktaDefaultInitPanel<EndepunktPanelData>
-    behandling={behandling}
-    valgtFaktaSteg={valgtFaktaSteg}
-    registrerFaktaPanel={registrerFaktaPanel}
-    panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
-    aksjonspunktKoder={AKSJONSPUNKT_KODER}
-    faktaPanelKode={FaktaPanelCode.FEILUTBETALING}
-    faktaPanelMenyTekst={useIntl().formatMessage({ id: 'TilbakekrevingFakta.FaktaFeilutbetaling' })}
-    skalPanelVisesIMeny={() => requestBehandlingApi.hasPath(BehandlingApiKeys.FEILUTBETALING_FAKTA.name)}
-    renderPanel={data => (
-      <FeilutbetalingFaktaIndex
-        fagsakYtelseTypeKode={fagsakYtelseTypeKode}
-        kodeverkSamlingFpTilbake={tilbakekrevingKodeverk}
-        kodeverkSamlingFpsak={data.alleKodeverk}
-        isAksjonspunktOpen={data.harApneAksjonspunkter}
-        isReadOnly={data.readOnly}
-        {...data}
-      />
-    )}
-  />
-);
+}: FaktaPanelInitProps & Props) => {
+  const intl = useIntl();
+  const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
+
+  const api = useBehandlingApi(behandling);
+
+  const { data: feilutbetalingFakta } = useQuery(api.tilbakekreving.feilutbetalingFaktaOptions(behandling));
+  const { data: feilutbetalingÅrsak } = useQuery(api.tilbakekreving.feilutbetalingÅrsakOptions(behandling));
+
+  return (
+    <FaktaDefaultInitPanel
+      standardPanelProps={standardPanelProps}
+      behandling={behandling}
+      valgtFaktaSteg={valgtFaktaSteg}
+      registrerFaktaPanel={registrerFaktaPanel}
+      faktaPanelKode={FaktaPanelCode.FEILUTBETALING}
+      faktaPanelMenyTekst={intl.formatMessage({ id: 'TilbakekrevingFakta.FaktaFeilutbetaling' })}
+      skalPanelVisesIMeny={harLenke(behandling, 'FEILUTBETALING_FAKTA')}
+    >
+      {feilutbetalingFakta && feilutbetalingÅrsak ? (
+        <FeilutbetalingFaktaIndex
+          feilutbetalingFakta={feilutbetalingFakta}
+          feilutbetalingAarsak={feilutbetalingÅrsak}
+          fagsakYtelseTypeKode={fagsakYtelseTypeKode}
+          kodeverkSamlingFpTilbake={tilbakekrevingKodeverk}
+          kodeverkSamlingFpsak={standardPanelProps.alleKodeverk}
+          isAksjonspunktOpen={standardPanelProps.harApneAksjonspunkter}
+          isReadOnly={standardPanelProps.readOnly}
+          {...standardPanelProps}
+        />
+      ) : (
+        <LoadingPanel />
+      )}
+    </FaktaDefaultInitPanel>
+  );
+};

@@ -2,13 +2,13 @@ import { ComponentProps } from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
 import { Meta, StoryObj } from '@storybook/react';
-import MockAdapter from 'axios-mock-adapter';
 import { http, HttpResponse } from 'msw';
 
-import { RestApiErrorProvider, RestApiProvider } from '@navikt/fp-rest-api-hooks';
+import { ApiPollingStatus } from '@navikt/fp-konstanter';
 import { alleKodeverk, alleKodeverkTilbakekreving } from '@navikt/fp-storybook-utils';
 
-import { requestBehandlingApi } from '../data/behandlingContextApi';
+import { BehandlingRel, BehandlingUrl } from '../data/behandlingApi';
+import { RestApiErrorProvider } from '../data/error/RestApiErrorContext';
 import { FagsakRel, FagsakUrl, wrapUrl } from '../data/fagsakApi';
 import { notEmpty } from '../data/notEmpty';
 import { AppIndexWrapper } from './AppIndex';
@@ -30,7 +30,7 @@ import medlemskapData from '../../.storybook/testdata/medlemskap.json';
 import personoversiktData from '../../.storybook/testdata/personoversikt.json';
 import soknadData from '../../.storybook/testdata/soknad.json';
 
-const getHref = (rel: string) =>
+const getHrefSak = (rel: string) =>
   wrapUrl(
     notEmpty(
       initFetchData.links.find(link => link.rel === rel) ??
@@ -40,67 +40,57 @@ const getHref = (rel: string) =>
     ).href,
   );
 
+const getHrefBehandling = (rel: string) =>
+  wrapUrl(notEmpty(behandlingV1Data.links.find(link => link.rel === rel)).href).split('?')[0];
+
 const HANDLERS = [
   http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchData)),
   http.get(FagsakUrl.INIT_FETCH_FPTILBAKE, () => HttpResponse.json(initFetchTilbakeData)),
-  http.get(getHref(FagsakRel.KODEVERK), () => HttpResponse.json(alleKodeverk)),
-  http.get(getHref(FagsakRel.KODEVERK_FPTILBAKE), () => HttpResponse.json(alleKodeverkTilbakekreving)),
-  http.get(getHref(FagsakRel.FETCH_FAGSAKDATA_FPTILBAKE), () => HttpResponse.json(fagsakFullTilbakeData)),
-  http.get(getHref(FagsakRel.ALL_DOCUMENTS), () => HttpResponse.json(dokumenterData)),
+  http.get(getHrefSak(FagsakRel.KODEVERK), () => HttpResponse.json(alleKodeverk)),
+  http.get(getHrefSak(FagsakRel.KODEVERK_FPTILBAKE), () => HttpResponse.json(alleKodeverkTilbakekreving)),
+  http.get(getHrefSak(FagsakRel.FETCH_FAGSAKDATA_FPTILBAKE), () => HttpResponse.json(fagsakFullTilbakeData)),
+  http.get(getHrefSak(FagsakRel.ALL_DOCUMENTS), () => HttpResponse.json(dokumenterData)),
+
+  http.post(
+    BehandlingUrl.BEHANDLING,
+    () => new HttpResponse(null, { status: 202, headers: { location: 'http://www.test.com/api/result' } }),
+    { once: true },
+  ),
+  http.get(
+    'http://www.test.com/api/status',
+    () =>
+      HttpResponse.json({
+        status: ApiPollingStatus.PENDING,
+        pollIntervalMillis: 100000000,
+      }),
+    { once: true },
+  ),
+  http.get('http://www.test.com/api/result', () => HttpResponse.json(behandlingV1Data), { once: true }),
+  http.get(getHrefBehandling(BehandlingRel.ARBEIDSGIVERE_OVERSIKT), () =>
+    HttpResponse.json(arbeidsgiverOpplysningerData),
+  ),
+  http.get(getHrefBehandling(BehandlingRel.BEHANDLING_PERSONOVERSIKT), () => HttpResponse.json(personoversiktData)),
+  http.get(getHrefBehandling(BehandlingRel.FAMILIEHENDELSE), () => HttpResponse.json(familiehendelseData)),
+  http.get(getHrefBehandling(BehandlingRel.SOKNAD), () => HttpResponse.json(soknadData)),
+  http.get(getHrefBehandling(BehandlingRel.ARBEID_OG_INNTEKT), () => HttpResponse.json(arbeidOgInntektData)),
+  http.get(getHrefBehandling(BehandlingRel.INNTEKT_ARBEID_YTELSE), () => HttpResponse.json(inntektArbeidYtelseData)),
+  http.get(getHrefBehandling(BehandlingRel.INNTEKTSMELDINGER), () => HttpResponse.json(alleInntektsmeldinger)),
+  http.get(getHrefBehandling(BehandlingRel.OPPTJENING), () => HttpResponse.json({})),
+  http.get(getHrefBehandling(BehandlingRel.YTELSEFORDELING), () => HttpResponse.json({})),
+  http.get(getHrefBehandling(BehandlingRel.FERIEPENGEGRUNNLAG), () => HttpResponse.json({})),
+  http.get(getHrefBehandling(BehandlingRel.UTTAK_KONTROLLER_FAKTA_PERIODER_V2), () => HttpResponse.json({})),
 ];
 
 const meta = {
   title: 'app/AppIndex',
   component: AppIndexWrapper,
-  render: ({ bekreftAdopsjon = false }) => {
+  render: () => {
     const fagsakId = '3';
-    const behandlingUuid = '7d198233-b499-4aaf-a01b-be97958e20ce';
-
-    const apiMockBehandling = new MockAdapter(requestBehandlingApi.getAxios());
-
-    apiMockBehandling.onPost('/fpsak/api/behandlinger').reply(200, behandlingV1Data);
-
-    apiMockBehandling
-      .onGet(`/fpsak/api/behandling/arbeidsgivere-opplysninger?uuid=${behandlingUuid}`)
-      .reply(200, arbeidsgiverOpplysningerData);
-    apiMockBehandling
-      .onGet(`/fpsak/api/behandling/person/personoversikt?uuid=${behandlingUuid}`)
-      .reply(200, personoversiktData);
-    apiMockBehandling
-      .onGet(`/fpsak/api/behandling/familiehendelse/v2?uuid=${behandlingUuid}`)
-      .reply(200, familiehendelseData);
-    apiMockBehandling.onGet(`/fpsak/api/behandling/soknad?uuid=${behandlingUuid}`).reply(200, soknadData);
-    apiMockBehandling
-      .onGet(`/fpsak/api/behandling/arbeid-inntektsmelding?uuid=${behandlingUuid}`)
-      .reply(200, arbeidOgInntektData);
-    apiMockBehandling
-      .onGet(`/fpsak/api/behandling/inntekt-arbeid-ytelse?uuid=${behandlingUuid}`)
-      .reply(200, inntektArbeidYtelseData);
-
-    if (bekreftAdopsjon) {
-      // Bekreft Fakta-Adopsjon
-      apiMockBehandling.onPost('/fpsak/api/behandling/aksjonspunkt').replyOnce(200, behandlingV2Data);
-      apiMockBehandling.onPost('/fpsak/api/behandlinger').replyOnce(200, behandlingV2Data);
-      apiMockBehandling
-        .onGet(`/fpsak/api/behandling/person/medlemskap-v2?uuid=${behandlingUuid}`)
-        .replyOnce(200, medlemskapData);
-    }
-
-    apiMockBehandling
-      .onGet(`/fpsak/api/behandling/person/medlemskap-v3?uuid=${behandlingUuid}`)
-      .replyOnce(200, medlemskapData);
-
-    apiMockBehandling
-      .onGet(`/fpsak/api/behandling/inntektsmeldinger-alle?uuid=${behandlingUuid}`)
-      .reply(200, alleInntektsmeldinger);
-
     return (
       <MemoryRouter initialEntries={[`/fagsak/${fagsakId}/`]}>
-        <RestApiProvider>
-          <RestApiErrorProvider>
-            <AppIndexWrapper />
-          </RestApiErrorProvider>
-        </RestApiProvider>
+        <RestApiErrorProvider>
+          <AppIndexWrapper />
+        </RestApiErrorProvider>
       </MemoryRouter>
     );
   },
@@ -112,7 +102,25 @@ type Story = StoryObj<typeof meta>;
 export const BekreftAdopsjon: Story = {
   parameters: {
     msw: {
-      handlers: HANDLERS.concat([http.get(getHref(FagsakRel.FETCH_FAGSAK), () => HttpResponse.json(fagsakFullData))]),
+      handlers: HANDLERS.concat([
+        http.get(getHrefSak(FagsakRel.FETCH_FAGSAK), () => HttpResponse.json(fagsakFullData)),
+        http.post(
+          getHrefBehandling(BehandlingRel.SAVE_AKSJONSPUNKT),
+          () => new HttpResponse(null, { status: 202, headers: { location: 'http://www.test.com/api/result' } }),
+          { once: true },
+        ),
+        http.get(
+          'http://www.test.com/api/status',
+          () =>
+            HttpResponse.json({
+              status: ApiPollingStatus.PENDING,
+              pollIntervalMillis: 100000000,
+            }),
+          { once: true },
+        ),
+        http.get('http://www.test.com/api/result', () => HttpResponse.json(behandlingV2Data), { once: true }),
+        http.get(getHrefBehandling(BehandlingRel.MEDLEMSKAP), () => HttpResponse.json(medlemskapData)),
+      ]),
     },
   },
   args: {
@@ -124,7 +132,9 @@ export const RisikoAksjonspunkt: Story = {
   parameters: {
     msw: {
       handlers: HANDLERS.concat([
-        http.get(getHref(FagsakRel.FETCH_FAGSAK), () => HttpResponse.json(fagsakFullRisikoApData)),
+        http.get(getHrefSak(FagsakRel.FETCH_FAGSAK), () => HttpResponse.json(fagsakFullRisikoApData)),
+        http.get(getHrefBehandling(BehandlingRel.MEDLEMSKAP), () => HttpResponse.json(medlemskapData)),
+        http.get(getHrefBehandling(BehandlingRel.INNTEKTSMELDINGER), () => HttpResponse.json(alleInntektsmeldinger)),
       ]),
     },
   },

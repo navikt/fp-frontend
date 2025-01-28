@@ -1,44 +1,21 @@
-import React from 'react';
 import { useIntl } from 'react-intl';
 
-import {
-  DetaljerteFeilutbetalingsperioder,
-  FeilutbetalingPerioderWrapper,
-  TilbakekrevingAksjonspunktCodes,
-  TilbakekrevingProsessIndex,
-} from '@navikt/ft-prosess-tilbakekreving';
+import { TilbakekrevingAksjonspunktCodes, TilbakekrevingProsessIndex } from '@navikt/ft-prosess-tilbakekreving';
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { isAksjonspunktOpen, KodeverkType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import { Aksjonspunkt, AlleKodeverkTilbakekreving, VilkarsVurdertePerioderWrapper } from '@navikt/fp-types';
+import { Aksjonspunkt, AlleKodeverkTilbakekreving } from '@navikt/fp-types';
 
-import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
+import { BeregnBeløpParams, useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 
 import '@navikt/ft-prosess-tilbakekreving/dist/style.css';
 
 const AKSJONSPUNKT_KODER = [TilbakekrevingAksjonspunktCodes.VURDER_TILBAKEKREVING];
-
-const ENDEPUNKTER_PANEL_DATA = [
-  BehandlingApiKeys.VILKARVURDERINGSPERIODER,
-  BehandlingApiKeys.VILKARVURDERING,
-  BehandlingApiKeys.PERIODER_FORELDELSE,
-];
-type EndepunktPanelData = {
-  vilkarvurderingsperioder: DetaljerteFeilutbetalingsperioder;
-  vilkarvurdering: VilkarsVurdertePerioderWrapper;
-  perioderForeldelse: FeilutbetalingPerioderWrapper;
-};
-
-const finnTilbakekrevingStatus = (aksjonspunkter: Aksjonspunkt[]): string => {
-  if (aksjonspunkter.length > 0) {
-    return aksjonspunkter.some(ap => isAksjonspunktOpen(ap.status))
-      ? VilkarUtfallType.IKKE_VURDERT
-      : VilkarUtfallType.OPPFYLT;
-  }
-  return VilkarUtfallType.IKKE_VURDERT;
-};
 
 interface Props {
   relasjonsRolleType: string;
@@ -48,26 +25,52 @@ interface Props {
 export const TilbakekrevingProsessInitPanel = ({ ...props }: Props & ProsessPanelInitProps) => {
   const intl = useIntl();
 
-  const { startRequest: beregnBelop } = restBehandlingApiHooks.useRestApiRunner(BehandlingApiKeys.BEREGNE_BELØP);
+  const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
+
+  const api = useBehandlingApi(props.behandling);
+
+  const { data: perioderForeldelse } = useQuery(api.tilbakekreving.perioderForeldelseOptions(props.behandling));
+  const { data: vilkårvurderingsperioder } = useQuery(
+    api.tilbakekreving.vilkårsvurderingsperioderOptions(props.behandling),
+  );
+  const { data: vilkårvurdering } = useQuery(api.tilbakekreving.vilkårsvurderingOptions(props.behandling));
+
+  const { mutateAsync: beregnBeløp } = useMutation({
+    mutationFn: (values: BeregnBeløpParams) => api.tilbakekreving.beregneBeløp(values),
+  });
 
   return (
-    <ProsessDefaultInitPanel<EndepunktPanelData>
+    <ProsessDefaultInitPanel
       {...props}
-      panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
-      aksjonspunktKoder={AKSJONSPUNKT_KODER}
+      standardPanelProps={standardPanelProps}
       prosessPanelKode={ProsessStegCode.TILBAKEKREVING}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Tilbakekreving' })}
-      skalPanelVisesIMeny={() => true}
-      hentOverstyrtStatus={data => finnTilbakekrevingStatus(data.aksjonspunkter)}
-      renderPanel={data => (
+      skalPanelVisesIMeny
+      hentOverstyrtStatus={finnTilbakekrevingStatus(standardPanelProps.aksjonspunkter)}
+    >
+      {perioderForeldelse && vilkårvurderingsperioder && vilkårvurdering ? (
         <TilbakekrevingProsessIndex
+          perioderForeldelse={perioderForeldelse}
+          vilkarvurderingsperioder={vilkårvurderingsperioder}
+          vilkarvurdering={vilkårvurdering}
           kodeverkSamlingFpTilbake={props.tilbakekrevingKodeverk}
-          beregnBelop={beregnBelop}
+          beregnBelop={(data: BeregnBeløpParams) => beregnBeløp(data)}
           relasjonsRolleType={props.relasjonsRolleType}
-          relasjonsRolleTypeKodeverk={data.alleKodeverk[KodeverkType.RELASJONSROLLE_TYPE]}
-          {...data}
+          relasjonsRolleTypeKodeverk={standardPanelProps.alleKodeverk[KodeverkType.RELASJONSROLLE_TYPE]}
+          {...standardPanelProps}
         />
+      ) : (
+        <LoadingPanel />
       )}
-    />
+    </ProsessDefaultInitPanel>
   );
+};
+
+const finnTilbakekrevingStatus = (aksjonspunkter: Aksjonspunkt[]): string => {
+  if (aksjonspunkter.length > 0) {
+    return aksjonspunkter.some(ap => isAksjonspunktOpen(ap.status))
+      ? VilkarUtfallType.IKKE_VURDERT
+      : VilkarUtfallType.OPPFYLT;
+  }
+  return VilkarUtfallType.IKKE_VURDERT;
 };

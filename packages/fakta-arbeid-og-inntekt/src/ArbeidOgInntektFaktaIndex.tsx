@@ -23,7 +23,7 @@ interface Props {
   registrerArbeidsforhold: (params: ManueltArbeidsforhold) => Promise<void>;
   lagreVurdering: (params: ManglendeInntektsmeldingVurdering) => Promise<void>;
   erOverstyrer: boolean;
-  settBehandlingPåVentCallback: (params: { frist?: string; ventearsak: string }) => Promise<any>;
+  settBehandlingPåVentCallback: (params: { frist?: string; ventearsak: string }) => void;
   åpneForNyVurdering: () => void;
 }
 

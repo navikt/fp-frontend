@@ -2,18 +2,17 @@ import React from 'react';
 import { IntlShape, useIntl } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 
-import { decodeHtmlEntity } from '@navikt/ft-utils';
+import { dateFormat, decodeHtmlEntity, timeFormat } from '@navikt/ft-utils';
 import { useQuery } from '@tanstack/react-query';
 
-import { RETTSKILDE_URL, SYSTEMRUTINE_URL } from '@navikt/fp-konstanter';
-import { useRestApiError, useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
+import { ApiPollingStatus, RETTSKILDE_URL, SYSTEMRUTINE_URL } from '@navikt/fp-konstanter';
 import { DekoratorMedFeilviserSakIndex, Feilmelding } from '@navikt/fp-sak-dekorator';
 
+import { ErrorType, FpError } from '../../data/error/errorType';
+import { useRestApiError, useRestApiErrorDispatcher } from '../../data/error/RestApiErrorContext';
 import { initFetchOptions } from '../../data/fagsakApi';
 import { notEmpty } from '../../data/notEmpty';
 import { AVDELINGSLEDER_PATH, JOURNALFØRING_PATH, UTBETALINGSDATA_PATH } from '../paths';
-import { ErrorFormatter } from './feilhandtering/ErrorFormatter';
-import { ErrorMessage } from './feilhandtering/ErrorMessage';
 
 type QueryStrings = {
   errorcode?: string;
@@ -31,6 +30,9 @@ interface Props {
 
 export const Dekorator = ({ queryStrings, setSiteHeight, crashMessage, hideErrorMessages = false }: Props) => {
   const intl = useIntl();
+
+  const errorMessages = useRestApiError();
+  const { removeErrorMessages } = useRestApiErrorDispatcher();
 
   const initFetchQuery = useQuery(initFetchOptions());
   const { innloggetBruker: navAnsatt } = notEmpty(initFetchQuery.data);
@@ -60,14 +62,7 @@ export const Dekorator = ({ queryStrings, setSiteHeight, crashMessage, hideError
     e.preventDefault();
   };
 
-  const errorMessages = useRestApiError();
-  const { removeErrorMessages } = useRestApiErrorDispatcher();
-
-  const formaterteFeilmeldinger = new ErrorFormatter().format(errorMessages, crashMessage);
-  const resolvedErrorMessages = lagFeilmeldinger(formaterteFeilmeldinger, queryStrings, intl);
-
-  const kanOppgavestyre = navAnsatt.kanOppgavestyre;
-  const kanJournalføre = navAnsatt.kanSaksbehandle;
+  const { kanOppgavestyre, kanSaksbehandle } = navAnsatt;
 
   const interneLenker = [];
   if (kanOppgavestyre) {
@@ -76,7 +71,7 @@ export const Dekorator = ({ queryStrings, setSiteHeight, crashMessage, hideError
       callback: (e: React.SyntheticEvent) => visAvdelingslederside(e),
     });
   }
-  if (kanJournalføre) {
+  if (kanSaksbehandle) {
     interneLenker.push({
       tekst: intl.formatMessage({ id: 'Dekorator.Journalforing' }),
       callback: (e: React.SyntheticEvent) => visJournalføringside(e),
@@ -103,13 +98,85 @@ export const Dekorator = ({ queryStrings, setSiteHeight, crashMessage, hideError
       tittel={intl.formatMessage({ id: 'Dekorator.Foreldrepenger' })}
       tittelCallback={visLos}
       navAnsattNavn={navAnsatt.navn}
-      feilmeldinger={hideErrorMessages ? EMPTY_ARRAY : resolvedErrorMessages}
+      feilmeldinger={
+        hideErrorMessages ? EMPTY_ARRAY : formaterFeilmeldinger(intl, errorMessages, queryStrings, crashMessage)
+      }
       fjernFeilmeldinger={removeErrorMessages}
       setSiteHeight={setSiteHeight}
       interneLenker={interneLenker}
       eksterneLenker={eksterneLenker}
     />
   );
+};
+
+const formaterFeilmeldinger = (
+  intl: IntlShape,
+  alleFeilmeldinger: FpError[],
+  queryStringFeilmeldinger: QueryStrings,
+  crashMessage?: string,
+): Feilmelding[] => {
+  const feilmeldinger: Feilmelding[] = [];
+
+  if (queryStringFeilmeldinger.errorcode) {
+    feilmeldinger.push({ melding: intl.formatMessage({ id: queryStringFeilmeldinger.errorcode }) });
+  }
+  if (queryStringFeilmeldinger.errormessage) {
+    feilmeldinger.push({ melding: queryStringFeilmeldinger.errormessage });
+  }
+  if (crashMessage) {
+    feilmeldinger.push({ melding: crashMessage });
+  }
+
+  alleFeilmeldinger.forEach(feilmelding => {
+    switch (feilmelding.type) {
+      case ErrorType.POLLING_HALTED_OR_DELAYED:
+        if (feilmelding.status === ApiPollingStatus.HALTED) {
+          const decoded = decodeHtmlEntity(feilmelding.message);
+          feilmeldinger.push({
+            melding: intl.formatMessage({ id: 'Rest.ErrorMessage.General' }),
+            tilleggsInfo: decoded ? parseErrorDetails(decoded) : undefined,
+          });
+        }
+        if (feilmelding.status === ApiPollingStatus.DELAYED) {
+          feilmeldinger.push({
+            melding: intl.formatMessage(
+              { id: 'Rest.ErrorMessage.DownTime' },
+              {
+                date: dateFormat(feilmelding.eta),
+                time: timeFormat(feilmelding.eta),
+                message: feilmelding.message,
+              },
+            ),
+          });
+        }
+        break;
+      case ErrorType.POLLING_TIMEOUT:
+        feilmeldinger.push({
+          melding: intl.formatMessage({ id: 'Rest.ErrorMessage.PollingTimeout' }, { location: feilmelding.location }),
+        });
+        break;
+      case ErrorType.REQUEST_GATEWAY_TIMEOUT_OR_NOT_FOUND:
+        feilmeldinger.push({
+          melding: intl.formatMessage(
+            { id: 'Rest.ErrorMessage.GatewayTimeoutOrNotFound' },
+            {
+              contextPath: feilmelding.location ? feilmelding.location.split('/')[1].toUpperCase() : '',
+              location: feilmelding.location,
+            },
+          ),
+        });
+        break;
+      case ErrorType.REQUEST_FORBIDDEN:
+      case ErrorType.REQUEST_UNAUTHORIZED:
+      case ErrorType.GENERAL_ERROR:
+      default:
+        feilmeldinger.push({
+          melding: feilmelding.message,
+        });
+    }
+  });
+
+  return feilmeldinger;
 };
 
 const parseErrorDetails = (details: string) => {
@@ -119,33 +186,4 @@ const parseErrorDetails = (details: string) => {
   } catch (error) {
     return 'Kunne ikke tolke feildetaljer';
   }
-};
-
-const lagFeilmeldinger = (
-  errorMessages: ErrorMessage[],
-  queryStrings: QueryStrings,
-  intl: IntlShape,
-): Feilmelding[] => {
-  const resolvedErrorMessages: Feilmelding[] = [];
-  if (queryStrings.errorcode) {
-    resolvedErrorMessages.push({ melding: intl.formatMessage({ id: queryStrings.errorcode }) });
-  }
-  if (queryStrings.errormessage) {
-    resolvedErrorMessages.push({ melding: queryStrings.errormessage });
-  }
-  errorMessages.forEach(message => {
-    let msg = {
-      melding: message.code ? intl.formatMessage({ id: message.code }, message.params) : (message.text ?? ''),
-      tilleggsInfo: undefined,
-    } as Feilmelding;
-    if (message.params && message.params.errorDetails) {
-      const decodedDetails = decodeHtmlEntity(message.params.errorDetails);
-      msg = {
-        ...msg,
-        tilleggsInfo: decodedDetails ? parseErrorDetails(decodedDetails) : undefined,
-      };
-    }
-    resolvedErrorMessages.push(msg);
-  });
-  return resolvedErrorMessages;
 };

@@ -5,7 +5,7 @@ import { Panel } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktStatus } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt, KodeverkMedNavn,Risikoklassifisering } from '@navikt/fp-types';
+import { Aksjonspunkt, KodeverkMedNavn, Risikoklassifisering } from '@navikt/fp-types';
 
 import { AvklartRisikoklassifiseringAp } from '../types/AvklartRisikoklassifiseringAp';
 import { AvklarFaresignalerForm } from './AvklarFaresignalerForm';
@@ -15,7 +15,7 @@ interface Props {
   risikoklassifisering: Risikoklassifisering;
   aksjonspunkt?: Aksjonspunkt;
   readOnly: boolean;
-  submitCallback: (data: AvklartRisikoklassifiseringAp) => Promise<void>;
+  submitCallback?: (data: AvklartRisikoklassifiseringAp) => void;
   faresignalVurderinger: KodeverkMedNavn[];
 }
 

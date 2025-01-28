@@ -40,11 +40,18 @@ enum ModalType {
 interface Props {
   fagsakData: FagsakData;
   behandlingUuid?: string;
+  behandling?: Behandling;
   setBehandling: (behandling: Behandling | undefined) => void;
   hentOgSettBehandling: () => void;
 }
 
-export const BehandlingMenuIndex = ({ fagsakData, behandlingUuid, setBehandling, hentOgSettBehandling }: Props) => {
+export const BehandlingMenuIndex = ({
+  fagsakData,
+  behandlingUuid,
+  behandling,
+  setBehandling,
+  hentOgSettBehandling,
+}: Props) => {
   const initFetchQuery = useQuery(initFetchOptions());
   const { innloggetBruker: navAnsatt } = notEmpty(initFetchQuery.data);
 
@@ -52,9 +59,9 @@ export const BehandlingMenuIndex = ({ fagsakData, behandlingUuid, setBehandling,
   const lukkModal = () => setValgtModal(undefined);
 
   const fagsak = fagsakData.getFagsak();
-  const behandling = fagsakData.getBehandling(behandlingUuid);
+  const behandlingAppContext = fagsakData.getBehandling(behandlingUuid);
 
-  const menyData = hentMenyData(behandling, fagsak);
+  const menyData = hentMenyData(behandlingAppContext, fagsak);
 
   if (navAnsatt.kanVeilede) {
     return null;
@@ -100,8 +107,14 @@ export const BehandlingMenuIndex = ({ fagsakData, behandlingUuid, setBehandling,
           lukkModal={lukkModal}
         />
       )}
-      {valgtModal === ModalType.VERGE && behandling && (
-        <VergeMenyModal fagsak={fagsak} behandling={behandling} setBehandling={setBehandling} lukkModal={lukkModal} />
+      {valgtModal === ModalType.VERGE && behandlingAppContext && behandling && (
+        <VergeMenyModal
+          fagsak={fagsak}
+          behandlingAppKontekst={behandlingAppContext}
+          behandling={behandling}
+          setBehandling={setBehandling}
+          lukkModal={lukkModal}
+        />
       )}
       {valgtModal === ModalType.ÅPNE_FOR_ENDRINGER && behandling && (
         <ApneForEndringerMenyModal behandling={behandling} setBehandling={setBehandling} lukkModal={lukkModal} />
@@ -113,8 +126,13 @@ export const BehandlingMenuIndex = ({ fagsakData, behandlingUuid, setBehandling,
           lukkModal={lukkModal}
         />
       )}
-      {valgtModal === ModalType.HENLEGG && behandling && (
-        <HenleggMenyModal behandling={behandling} fagsakYtelseType={fagsak.fagsakYtelseType} lukkModal={lukkModal} />
+      {valgtModal === ModalType.HENLEGG && behandlingAppContext && behandling && (
+        <HenleggMenyModal
+          behandlingAppKontekst={behandlingAppContext}
+          behandling={behandling}
+          fagsakYtelseType={fagsak.fagsakYtelseType}
+          lukkModal={lukkModal}
+        />
       )}
       {valgtModal === ModalType.SETT_PÅ_VENT && behandling && (
         <SettPaVentMenyModal

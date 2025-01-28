@@ -1,43 +1,38 @@
-import React from 'react';
+import { composeStories } from '@storybook/react';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { applyRequestHandlers } from 'msw-storybook-addon';
 
-import { render, screen } from '@testing-library/react';
+import * as stories from './BehandlingPaVent.stories';
 
-import { BehandlingStatus, BehandlingType } from '@navikt/fp-kodeverk';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import { Aksjonspunkt, AlleKodeverk, Behandling } from '@navikt/fp-types';
+const { BehandlingSattPåVent, BehandlingSattManueltPåVent } = composeStories(stories);
 
-import { BehandlingPaVent } from './BehandlingPaVent';
+describe('BehandlingPaVent', () => {
+  it('skal vise at behandling er satt på vent', async () => {
+    await applyRequestHandlers(BehandlingSattPåVent.parameters.msw);
+    render(<BehandlingSattPåVent />);
 
-describe('<BehandlingPaVent>', () => {
-  const behandling = {
-    uuid: '1',
-    versjon: 1,
-    status: BehandlingStatus.BEHANDLING_UTREDES,
-    type: BehandlingType.FORSTEGANGSSOKNAD,
-    behandlingPaaVent: false,
-    behandlingHenlagt: false,
-    fristBehandlingPåVent: '2030-10-10',
-    venteArsakKode: '',
-  } as Behandling;
-  const aksjonspunkter = [] as Aksjonspunkt[];
-  // @ts-expect-error
-  const kodeverk = alleKodeverk as AlleKodeverk;
-
-  it('skal ikke vise modal når behandling ikke er på vent', async () => {
-    render(
-      <BehandlingPaVent
-        behandling={
-          {
-            ...behandling,
-            aksjonspunkt: aksjonspunkter,
-          } as Behandling
-        }
-        kodeverk={kodeverk}
-        opneSokeside={vi.fn()}
-      />,
-    );
-
-    expect(await screen.findByText('Behandlingen settes på vent')).toBeInTheDocument();
+    expect(await screen.findByText('Behandlingen er satt på vent')).toBeInTheDocument();
     expect(screen.getByText('Frist')).toBeInTheDocument();
+    expect(screen.getByText('Årsak')).toBeInTheDocument();
+    expect(screen.queryByRole('Select')).not.toBeInTheDocument();
+  });
+
+  it('skal vise at behandling er satt på vent manuelt og så endre årsak og lagre', async () => {
+    const åpneSøkeside = vi.fn();
+
+    await applyRequestHandlers(BehandlingSattManueltPåVent.parameters.msw);
+    render(<BehandlingSattManueltPåVent opneSokeside={åpneSøkeside} />);
+
+    expect(await screen.findByText('Behandlingen er satt på vent')).toBeInTheDocument();
+    expect(screen.getByText('Frist')).toBeInTheDocument();
+    expect(screen.getByText('Årsak')).toBeInTheDocument();
+    expect(screen.getByText('Du kan endre frist eller årsak før du fortsetter')).toBeInTheDocument();
+
+    await userEvent.selectOptions(screen.getByLabelText('Årsak'), 'AVV_DOK');
+
+    await userEvent.click(screen.getByText('OK'));
+
+    await waitFor(() => expect(åpneSøkeside).toHaveBeenCalledTimes(1));
   });
 });

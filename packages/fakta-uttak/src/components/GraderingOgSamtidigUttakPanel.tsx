@@ -3,13 +3,13 @@ import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { Alert } from '@navikt/ds-react';
-import { CheckboxField,NumberField, SelectField } from '@navikt/ft-form-hooks';
+import { CheckboxField, NumberField, SelectField } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { FlexColumn, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT, guid } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { KodeverkType,UttakArbeidType } from '@navikt/fp-kodeverk';
+import { KodeverkType, UttakArbeidType } from '@navikt/fp-kodeverk';
 import {
   AlleKodeverk,
   ArbeidsgiverOpplysninger,
@@ -81,7 +81,7 @@ const mapArbeidsforhold = (
 interface OwnProps {
   valgtPeriode?: KontrollerFaktaPeriodeMedApMarkering;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  faktaArbeidsforhold: FaktaArbeidsforhold[];
+  faktaArbeidsforhold?: FaktaArbeidsforhold[];
   readOnly: boolean;
   alleKodeverk: AlleKodeverk;
 }
@@ -148,7 +148,7 @@ const GraderingOgSamtidigUttakPanel: FunctionComponent<OwnProps> = ({
         <>
           <VerticalSpacer sixteenPx />
           <FlexRow>
-            {visGradering && (
+            {visGradering && faktaArbeidsforhold && (
               <>
                 <FlexColumn>
                   <NumberField

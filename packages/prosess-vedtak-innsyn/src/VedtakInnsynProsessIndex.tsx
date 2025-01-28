@@ -14,7 +14,7 @@ interface Props {
   innsyn: Innsyn;
   saksnummer: string;
   alleDokumenter?: Dokument[];
-  previewCallback: (data: ForhandsvisData) => Promise<any>;
+  previewCallback: (data: ForhandsvisData) => void;
 }
 
 export const VedtakInnsynProsessIndex = ({

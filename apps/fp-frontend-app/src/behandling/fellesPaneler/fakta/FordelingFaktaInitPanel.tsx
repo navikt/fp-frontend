@@ -1,4 +1,3 @@
-import React from 'react';
 import { useIntl } from 'react-intl';
 
 import {
@@ -7,17 +6,57 @@ import {
   FtBeregningsgrunnlag,
   FtVilkar,
 } from '@navikt/ft-fakta-fordel-beregningsgrunnlag';
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
+import { useQuery } from '@tanstack/react-query';
 
 import { AksjonspunktKode, hasAksjonspunkt, VilkarType } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkar, Vilkarperiode } from '@navikt/fp-types';
 
-import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
+import { useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
+import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
 
 import '@navikt/ft-fakta-fordel-beregningsgrunnlag/dist/style.css';
+
+const AKSJONSPUNKT_KODER = [AksjonspunktKode.FORDEL_BEREGNINGSGRUNNLAG, AksjonspunktKode.VURDER_REFUSJON_BERGRUNN];
+
+interface Props {
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+}
+
+export const FordelingFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId, ...props }: Props & FaktaPanelInitProps) => {
+  const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
+
+  const api = useBehandlingApi(props.behandling);
+
+  const { data: beregningsgrunnlag, isFetching } = useQuery(api.beregningsgrunnlagOptions(props.behandling));
+
+  return (
+    <FaktaDefaultInitPanel
+      {...props}
+      standardPanelProps={standardPanelProps}
+      faktaPanelKode={FaktaPanelCode.FORDELING}
+      faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.Fordeling' })}
+      skalPanelVisesIMeny={AKSJONSPUNKT_KODER.some(kode => hasAksjonspunkt(kode, props.behandling.aksjonspunkt))}
+    >
+      {!isFetching ? (
+        <FordelBeregningsgrunnlagFaktaIndex
+          {...standardPanelProps}
+          kodeverkSamling={standardPanelProps.alleKodeverk}
+          beregningsgrunnlagVilkår={lagBGVilkar(standardPanelProps.behandling.vilkår, beregningsgrunnlag)}
+          beregningsgrunnlagListe={lagFormatertBG(beregningsgrunnlag)}
+          submitCallback={lagModifisertCallback(standardPanelProps.submitCallback)}
+          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        />
+      ) : (
+        <LoadingPanel />
+      )}
+    </FaktaDefaultInitPanel>
+  );
+};
 
 const mapBGKodeTilFpsakKode = (bgKode: string): string => {
   switch (bgKode) {
@@ -70,7 +109,7 @@ const lagBGVilkar = (vilkar: Vilkar[], beregningsgrunnlag?: Beregningsgrunnlag):
   return nyVK;
 };
 
-const lagFormatertBG = (beregningsgrunnlag: Beregningsgrunnlag): FtBeregningsgrunnlag[] => {
+const lagFormatertBG = (beregningsgrunnlag?: Beregningsgrunnlag): FtBeregningsgrunnlag[] => {
   if (!beregningsgrunnlag) {
     return [];
   }
@@ -81,36 +120,3 @@ const lagFormatertBG = (beregningsgrunnlag: Beregningsgrunnlag): FtBeregningsgru
   };
   return [nyttBG];
 };
-
-const AKSJONSPUNKT_KODER = [AksjonspunktKode.FORDEL_BEREGNINGSGRUNNLAG, AksjonspunktKode.VURDER_REFUSJON_BERGRUNN];
-
-const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.BEREGNINGSGRUNNLAG];
-
-type EndepunktPanelData = {
-  beregningsgrunnlag: Beregningsgrunnlag;
-};
-
-interface Props {
-  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-}
-
-export const FordelingFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId, ...props }: Props & FaktaPanelInitProps) => (
-  <FaktaDefaultInitPanel<EndepunktPanelData>
-    {...props}
-    panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
-    aksjonspunktKoder={AKSJONSPUNKT_KODER}
-    faktaPanelKode={FaktaPanelCode.FORDELING}
-    faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.Fordeling' })}
-    skalPanelVisesIMeny={() => AKSJONSPUNKT_KODER.some(kode => hasAksjonspunkt(kode, props.behandling.aksjonspunkt))}
-    renderPanel={data => (
-      <FordelBeregningsgrunnlagFaktaIndex
-        {...data}
-        kodeverkSamling={data.alleKodeverk}
-        beregningsgrunnlagVilkår={lagBGVilkar(data.behandling.vilkår, data.beregningsgrunnlag)}
-        beregningsgrunnlagListe={lagFormatertBG(data.beregningsgrunnlag)}
-        submitCallback={lagModifisertCallback(data.submitCallback)}
-        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-      />
-    )}
-  />
-);

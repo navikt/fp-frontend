@@ -1,14 +1,17 @@
-import React from 'react';
 import { useIntl } from 'react-intl';
 
-import { AksjonspunktKode,BehandlingType, VilkarType } from '@navikt/fp-kodeverk';
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
+import { useQuery } from '@tanstack/react-query';
+
+import { AksjonspunktKode, BehandlingType, VilkarType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { SokersOpplysningspliktVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-sokers-opplysningsplikt';
-import { ArbeidsgiverOpplysningerPerId, Soknad } from '@navikt/fp-types';
+import { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
-import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
+import { useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { skalViseProsessPanel } from '../../felles/prosess/skalViseProsessPanel';
+import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 
 const AKSJONSPUNKT_KODER = [
@@ -18,11 +21,6 @@ const AKSJONSPUNKT_KODER = [
 
 const VILKAR_KODER = [VilkarType.SOKERSOPPLYSNINGSPLIKT];
 
-const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.SOKNAD];
-type EndepunktPanelData = {
-  soknad: Soknad;
-};
-
 interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
@@ -30,24 +28,35 @@ interface Props {
 export const OpplysningspliktProsessStegInitPanel = ({
   arbeidsgiverOpplysningerPerId,
   ...props
-}: Props & ProsessPanelInitProps) => (
-  <ProsessDefaultInitPanel<EndepunktPanelData>
-    {...props}
-    panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
-    aksjonspunktKoder={AKSJONSPUNKT_KODER}
-    vilkarKoder={VILKAR_KODER}
-    prosessPanelKode={ProsessStegCode.OPPLYSNINGSPLIKT}
-    prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.Opplysningsplikt' })}
-    skalPanelVisesIMeny={data =>
-      data.behandling.type !== BehandlingType.REVURDERING
-        ? skalViseProsessPanel(data.aksjonspunkter, VILKAR_KODER, data.vilkar)
-        : false
-    }
-    renderPanel={data => (
-      <SokersOpplysningspliktVilkarProsessIndex
-        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-        {...data}
-      />
-    )}
-  />
-);
+}: Props & ProsessPanelInitProps) => {
+  const intl = useIntl();
+  const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, VILKAR_KODER);
+
+  const api = useBehandlingApi(props.behandling);
+
+  const { data: søknad } = useQuery(api.søknadOptions(props.behandling));
+
+  return (
+    <ProsessDefaultInitPanel
+      {...props}
+      standardPanelProps={standardPanelProps}
+      prosessPanelKode={ProsessStegCode.OPPLYSNINGSPLIKT}
+      prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Opplysningsplikt' })}
+      skalPanelVisesIMeny={
+        standardPanelProps.behandling.type !== BehandlingType.REVURDERING
+          ? skalViseProsessPanel(standardPanelProps.aksjonspunkter, VILKAR_KODER, standardPanelProps.vilkar)
+          : false
+      }
+    >
+      {søknad ? (
+        <SokersOpplysningspliktVilkarProsessIndex
+          soknad={søknad}
+          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+          {...standardPanelProps}
+        />
+      ) : (
+        <LoadingPanel />
+      )}
+    </ProsessDefaultInitPanel>
+  );
+};

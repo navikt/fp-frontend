@@ -17,7 +17,7 @@ const intl = createIntl(messages);
 interface Props {
   klageVurdering?: KlageVurdering;
   avsluttedeBehandlinger: AvsluttetBehandling[];
-  lagreFormkravVurdering: (data: FormkravMellomlagretDataType) => Promise<void>;
+  lagreFormkravVurdering: (data: FormkravMellomlagretDataType) => void;
 }
 
 export const FormkravProsessIndex = ({

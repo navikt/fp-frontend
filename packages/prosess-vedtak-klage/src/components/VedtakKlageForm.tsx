@@ -14,7 +14,7 @@ import {
   KodeverkType,
 } from '@navikt/fp-kodeverk';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
-import { Aksjonspunkt, AlleKodeverk, Behandlingsresultat,KlageVurdering } from '@navikt/fp-types';
+import { Aksjonspunkt, AlleKodeverk, Behandlingsresultat, KlageVurdering } from '@navikt/fp-types';
 import { ForeslaVedtakAp, ForeslaVedtakManueltAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { VedtakKlageSubmitPanel } from './VedtakKlageSubmitPanel';
@@ -30,11 +30,6 @@ const OMGJOER_TEKST_MAP = {
 export type ForhandsvisData = {
   gjelderVedtak: boolean;
 };
-
-const getPreviewVedtakCallback = (previewVedtakCallback: (data: ForhandsvisData) => Promise<any>) => () =>
-  previewVedtakCallback({
-    gjelderVedtak: true,
-  });
 
 type AksjonspunktData = Array<ForeslaVedtakAp | ForeslaVedtakManueltAp>;
 
@@ -95,7 +90,7 @@ interface Props {
   klageVurdering: KlageVurdering;
   aksjonspunkter: Aksjonspunkt[];
   submitCallback: (data: AksjonspunktData) => Promise<void>;
-  previewVedtakCallback: (data: ForhandsvisData) => Promise<any>;
+  previewVedtakCallback: (data: ForhandsvisData) => void;
   readOnly: boolean;
   alleKodeverk: AlleKodeverk;
 }
@@ -181,7 +176,7 @@ export const VedtakKlageForm = ({
       )}
       {klageVurderingResultat?.klageVurdertAv === 'NFP' && (
         <VedtakKlageSubmitPanel
-          previewVedtakCallback={getPreviewVedtakCallback(previewVedtakCallback)}
+          previewVedtakCallback={previewVedtakCallback}
           readOnly={readOnly}
           behandlingPaaVent={behandlingPaaVent}
           lagreVedtak={lagreVedtak}

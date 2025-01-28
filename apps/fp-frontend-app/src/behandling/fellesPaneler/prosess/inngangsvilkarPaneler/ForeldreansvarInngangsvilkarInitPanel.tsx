@@ -1,11 +1,10 @@
-import React from 'react';
-import { IntlShape, useIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 
-import { AksjonspunktKode,VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import { ForeldreansvarVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-foreldreansvar';
-import { Aksjonspunkt } from '@navikt/fp-types';
 
 import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
+import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandardProsessPanelProps';
 import { InngangsvilkarPanelInitProps } from '../../../felles/typer/inngangsvilkarPanelInitProps';
 
 const AKSJONSPUNKT_KODER = [
@@ -25,11 +24,6 @@ const AKSJONSPUNKT_TEKST_PER_KODE = {
     'SRBVilkarForm.VurderAnnenForelderSammeBarn',
 } as Record<string, string>;
 
-const hentAksjonspunktTekst = (intl: IntlShape, aksjonspunkter: Aksjonspunkt[] = []): string =>
-  aksjonspunkter.length > 0
-    ? intl.formatMessage({ id: AKSJONSPUNKT_TEKST_PER_KODE[aksjonspunkter[0].definisjon] })
-    : '';
-
 const VILKAR_KODER = [VilkarType.FORELDREANSVARSVILKARET_2_LEDD, VilkarType.FORELDREANSVARSVILKARET_4_LEDD];
 
 interface Props {
@@ -41,19 +35,28 @@ export const ForeldreansvarInngangsvilkarInitPanel = ({
   ...props
 }: Props & InngangsvilkarPanelInitProps) => {
   const intl = useIntl();
+
+  const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, VILKAR_KODER);
+
   return (
     <InngangsvilkarDefaultInitPanel
       {...props}
+      standardPanelProps={standardPanelProps}
       behandlingVersjon={behandlingVersjon}
-      aksjonspunktKoder={AKSJONSPUNKT_KODER}
       vilkarKoder={VILKAR_KODER}
       inngangsvilkarPanelKode="FORELDREANSVARSVILKARET"
-      hentInngangsvilkarPanelTekst={data => hentAksjonspunktTekst(intl, data?.aksjonspunkter)}
-      renderPanel={data => (
+      hentInngangsvilkarPanelTekst={
+        standardPanelProps.aksjonspunkter.length > 0
+          ? intl.formatMessage({ id: AKSJONSPUNKT_TEKST_PER_KODE[standardPanelProps.aksjonspunkter[0].definisjon] })
+          : ''
+      }
+      renderPanel={() => (
         <ForeldreansvarVilkarProsessIndex
           isEngangsstonad
-          isForeldreansvar2Ledd={data.vilkar.some(v => v.vilkarType === VilkarType.FORELDREANSVARSVILKARET_2_LEDD)}
-          {...data}
+          isForeldreansvar2Ledd={standardPanelProps.vilkar.some(
+            v => v.vilkarType === VilkarType.FORELDREANSVARSVILKARET_2_LEDD,
+          )}
+          {...standardPanelProps}
         />
       )}
     />

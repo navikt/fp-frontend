@@ -1,32 +1,23 @@
-import React, { useMemo } from 'react';
 import { useIntl } from 'react-intl';
+
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { AksjonspunktKode, BehandlingStatus, BehandlingType, isKlageAvvist } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { FormkravMellomlagretDataType, FormkravProsessIndex } from '@navikt/fp-prosess-formkrav';
-import { KlageVurdering } from '@navikt/fp-types';
+import { BehandlingAppKontekst } from '@navikt/fp-types';
 
-import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
+import { useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP];
 
-const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.KLAGE_VURDERING];
-type EndepunktPanelData = {
-  klageVurdering?: KlageVurdering;
-};
-
 interface Props {
-  alleBehandlinger: {
-    uuid: string;
-    type: string;
-    status: string;
-    opprettet: string;
-    avsluttet?: string;
-    resultatType?: string;
-  }[];
-  hentOgSettBehandling: (keepData?: boolean) => void;
+  alleBehandlinger: BehandlingAppKontekst[];
+  hentOgSettBehandling: () => void;
 }
 
 export const FormKravFamOgPensjonProsessStegInitPanel = ({
@@ -35,39 +26,43 @@ export const FormKravFamOgPensjonProsessStegInitPanel = ({
   ...props
 }: Props & ProsessPanelInitProps) => {
   const intl = useIntl();
+  const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
 
-  const avsluttedeBehandlinger = useMemo(
-    () =>
-      alleBehandlinger
-        .filter(b => b.status === BehandlingStatus.AVSLUTTET)
-        .filter(
-          b => (b.type !== BehandlingType.KLAGE || isKlageAvvist(b.resultatType)) && b.type !== BehandlingType.ANKE,
-        ),
-    [alleBehandlinger],
-  );
+  const avsluttedeBehandlinger = alleBehandlinger
+    .filter(b => b.status === BehandlingStatus.AVSLUTTET)
+    .filter(
+      b =>
+        (b.type !== BehandlingType.KLAGE || isKlageAvvist(b.behandlingsresultat?.type)) &&
+        b.type !== BehandlingType.ANKE,
+    );
 
-  const { startRequest: lagreFormkravVurdering } = restBehandlingApiHooks.useRestApiRunner(
-    BehandlingApiKeys.SAVE_FORMKRAV_VURDERING,
-  );
+  const api = useBehandlingApi(props.behandling);
 
-  const lagreFormkravOgHentBehandlingPåNytt = (data: FormkravMellomlagretDataType) =>
-    lagreFormkravVurdering(data).then(() => hentOgSettBehandling(true));
+  const { data: klageVurdering, isFetching } = useQuery(api.klage.klageVurderingOptions(props.behandling));
+
+  const { mutate: lagreFormkravVurdering } = useMutation({
+    mutationFn: (values: FormkravMellomlagretDataType) => api.klage.mellomlagreFormkravVurdering(values),
+    onSuccess: () => hentOgSettBehandling(),
+  });
 
   return (
-    <ProsessDefaultInitPanel<EndepunktPanelData>
+    <ProsessDefaultInitPanel
       {...props}
-      panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
-      aksjonspunktKoder={AKSJONSPUNKT_KODER}
+      standardPanelProps={standardPanelProps}
       prosessPanelKode={ProsessStegCode.FORMKRAV_KLAGE_NAV_FAMILIE_OG_PENSJON}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.FormkravKlageNFP' })}
-      skalPanelVisesIMeny={() => true}
-      renderPanel={data => (
+      skalPanelVisesIMeny
+    >
+      {!isFetching ? (
         <FormkravProsessIndex
+          klageVurdering={klageVurdering}
           avsluttedeBehandlinger={avsluttedeBehandlinger}
-          lagreFormkravVurdering={lagreFormkravOgHentBehandlingPåNytt}
-          {...data}
+          lagreFormkravVurdering={lagreFormkravVurdering}
+          {...standardPanelProps}
         />
+      ) : (
+        <LoadingPanel />
       )}
-    />
+    </ProsessDefaultInitPanel>
   );
 };

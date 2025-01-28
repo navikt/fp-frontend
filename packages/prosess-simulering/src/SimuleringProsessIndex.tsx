@@ -21,7 +21,7 @@ interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   simuleringResultat?: SimuleringResultat;
   tilbakekrevingvalg?: TilbakekrevingValg;
-  previewFptilbakeCallback: (mottaker: string, fritekst: string) => Promise<any>;
+  previewFptilbakeCallback: (params: { mottaker: string; fritekst: string }) => void;
 }
 
 export const SimuleringProsessIndex = ({

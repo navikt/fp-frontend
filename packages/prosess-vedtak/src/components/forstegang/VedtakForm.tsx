@@ -88,7 +88,7 @@ export type ForhandsvisData = {
 const hentForhåndsvisManueltBrevCallback =
   (
     skalOverstyre: boolean,
-    forhåndsvisCallback: (data: ForhandsvisData) => Promise<any>,
+    forhåndsvisCallback: (data: ForhandsvisData) => void,
     trigger: () => void,
     begrunnelse?: string,
     brodtekst?: string,
@@ -190,7 +190,7 @@ interface OwnProps {
   behandling: Behandling;
   readOnly: boolean;
   aksjonspunkter: Aksjonspunkt[];
-  previewCallback: (data: ForhandsvisData) => Promise<any>;
+  previewCallback: (data: ForhandsvisData) => void;
   ytelseTypeKode: string;
   beregningsresultat?: BeregningsresultatDagytelse | BeregningsresultatEs;
   alleKodeverk: AlleKodeverk;

@@ -33,7 +33,7 @@ const getBrevData = (klageVurdering?: string, fritekstTilBrev?: string): BrevDat
 });
 
 interface Props {
-  previewCallback: (data: BrevData) => Promise<void>;
+  previewCallback: (data: BrevData) => void;
   fritekstTilBrev?: string;
   klageVurdering?: string;
 }

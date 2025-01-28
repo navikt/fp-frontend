@@ -1,4 +1,4 @@
-import React, { MouseEvent,ReactElement, useCallback, useState } from 'react';
+import React, { MouseEvent, ReactElement, useCallback, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { HGrid, HStack, Link, VStack } from '@navikt/ds-react';
@@ -6,7 +6,6 @@ import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { Behandling } from '@navikt/fp-types';
 
 import { InngangsvilkarPanelData } from '../typer/inngangsvilkarPanelData';
@@ -108,7 +107,6 @@ export const InngangsvilkarDefaultInitWrapper = ({
       erPanelValgt={erPanelValgt}
       erAksjonspunktOpent={harApentAksjonspunkt}
       status={status}
-      dataState={RestApiState.SUCCESS}
       skalSkjulePanel={!erPanelValgt}
     >
       <VStack gap="8">

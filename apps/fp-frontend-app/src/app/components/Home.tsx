@@ -8,13 +8,15 @@ import { useMutation } from '@tanstack/react-query';
 import { OppgaveJournalføringIndex } from '@navikt/fp-journalforing';
 import { AvdelingslederIndex } from '@navikt/fp-los-avdelingsleder';
 import { SaksbehandlerIndex } from '@navikt/fp-los-saksbehandler';
-import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 import { NotFoundPage } from '@navikt/fp-sak-infosider';
 import { NavAnsatt } from '@navikt/fp-types';
 import { UtbetalingsdataIs15Index } from '@navikt/fp-utbetalingsdata-is15';
 
 import { AktørIndex } from '../../aktoer/AktørIndex';
+import { ErrorType } from '../../data/error/errorType';
+import { useRestApiErrorDispatcher } from '../../data/error/RestApiErrorContext';
 import { useFagsakApi } from '../../data/fagsakApi';
+import { RequestPendingProvider } from '../../data/polling/RequestPendingContext';
 import { FagsakIndex } from '../../fagsak/FagsakIndex';
 import { FagsakSearchIndex } from '../../fagsakSearch/FagsakSearchIndex';
 import {
@@ -50,7 +52,7 @@ export const Home = ({ headerHeight, navAnsatt }: Props) => {
 
   useEffect(() => {
     if (!erLosTilgjengelig) {
-      addErrorMessage(intl.formatMessage({ id: 'Los.IkkeTilgjengelig' }));
+      addErrorMessage({ type: ErrorType.GENERAL_ERROR, message: intl.formatMessage({ id: 'Los.IkkeTilgjengelig' }) });
     }
   }, [erLosTilgjengelig]);
 
@@ -117,7 +119,14 @@ export const Home = ({ headerHeight, navAnsatt }: Props) => {
             />
           }
         />
-        <Route path={fagsakRoutePath} element={<FagsakIndex />} />
+        <Route
+          path={fagsakRoutePath}
+          element={
+            <RequestPendingProvider>
+              <FagsakIndex />
+            </RequestPendingProvider>
+          }
+        />
         <Route path={aktoerRoutePath} element={<AktørIndex />} />
         <Route path="*" element={<NotFoundPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />} />
       </Routes>

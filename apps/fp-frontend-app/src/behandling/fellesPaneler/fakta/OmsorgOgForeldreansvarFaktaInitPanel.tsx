@@ -1,41 +1,53 @@
-import React from 'react';
 import { useIntl } from 'react-intl';
+
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
+import { useQuery } from '@tanstack/react-query';
 
 import { OmsorgOgForeldreansvarFaktaIndex } from '@navikt/fp-fakta-omsorg-og-foreldreansvar';
 import { AksjonspunktKode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import { FamilieHendelseSamling, InntektArbeidYtelse, Personoversikt, Soknad } from '@navikt/fp-types';
+import { Personoversikt } from '@navikt/fp-types';
 
-import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
+import { useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
+import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.OMSORGSOVERTAKELSE, AksjonspunktKode.AVKLAR_VILKAR_FOR_FORELDREANSVAR];
-
-const ENDEPUNKTER_PANEL_DATA = [
-  BehandlingApiKeys.SOKNAD,
-  BehandlingApiKeys.FAMILIEHENDELSE,
-  BehandlingApiKeys.INNTEKT_ARBEID_YTELSE,
-];
-
-type EndepunktPanelData = {
-  soknad: Soknad;
-  familiehendelse: FamilieHendelseSamling;
-  inntektArbeidYtelse: InntektArbeidYtelse;
-};
 
 interface Props {
   personoversikt: Personoversikt;
 }
 
-export const OmsorgOgForeldreansvarFaktaInitPanel = ({ personoversikt, ...props }: Props & FaktaPanelInitProps) => (
-  <FaktaDefaultInitPanel<EndepunktPanelData>
-    {...props}
-    panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
-    aksjonspunktKoder={AKSJONSPUNKT_KODER}
-    faktaPanelKode={FaktaPanelCode.OMSORGSVILKARET}
-    faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.OmsorgOgForeldreansvar' })}
-    skalPanelVisesIMeny={() => AKSJONSPUNKT_KODER.some(kode => hasAksjonspunkt(kode, props.behandling.aksjonspunkt))}
-    renderPanel={data => <OmsorgOgForeldreansvarFaktaIndex personoversikt={personoversikt} {...data} />}
-  />
-);
+export const OmsorgOgForeldreansvarFaktaInitPanel = ({ personoversikt, ...props }: Props & FaktaPanelInitProps) => {
+  const intl = useIntl();
+  const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
+
+  const api = useBehandlingApi(props.behandling);
+
+  const { data: søknad } = useQuery(api.søknadOptions(props.behandling));
+  const { data: familiehendelse } = useQuery(api.familiehendelseOptions(props.behandling));
+  const { data: inntektArbeidYtelse } = useQuery(api.inntektArbeidYtelseOptions(props.behandling));
+
+  return (
+    <FaktaDefaultInitPanel
+      {...props}
+      standardPanelProps={standardPanelProps}
+      faktaPanelKode={FaktaPanelCode.OMSORGSVILKARET}
+      faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.OmsorgOgForeldreansvar' })}
+      skalPanelVisesIMeny={AKSJONSPUNKT_KODER.some(kode => hasAksjonspunkt(kode, props.behandling.aksjonspunkt))}
+    >
+      {søknad && familiehendelse && inntektArbeidYtelse ? (
+        <OmsorgOgForeldreansvarFaktaIndex
+          soknad={søknad}
+          familiehendelse={familiehendelse}
+          inntektArbeidYtelse={inntektArbeidYtelse}
+          personoversikt={personoversikt}
+          {...standardPanelProps}
+        />
+      ) : (
+        <LoadingPanel />
+      )}
+    </FaktaDefaultInitPanel>
+  );
+};

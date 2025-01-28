@@ -1,8 +1,8 @@
-import React, { FunctionComponent, ReactElement,useState } from 'react';
+import React, { FunctionComponent, ReactElement, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
-import { Button,Heading, Label } from '@navikt/ds-react';
+import { Button, Heading, Label } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
@@ -122,7 +122,7 @@ interface OwnProps {
   submitCallback: (data: SimuleringAksjonspunkt[]) => Promise<void>;
   readOnly: boolean;
   isApOpen: boolean;
-  previewCallback: (mottaker: string, fritekst: string) => Promise<any>;
+  previewCallback: (params: { mottaker: string; fritekst: string }) => void;
   formData?: FormValues;
   setFormData: (data: FormValues) => void;
 }

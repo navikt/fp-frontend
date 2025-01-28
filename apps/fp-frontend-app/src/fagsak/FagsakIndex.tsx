@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 
@@ -6,7 +6,6 @@ import { DataFetchPendingModal, LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { Location } from 'history';
 
 import { BehandlingType, RelasjonsRolleType } from '@navikt/fp-kodeverk';
-import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 import { VisittkortSakIndex } from '@navikt/fp-sak-visittkort';
 import { AnnenPartBehandling, Behandling } from '@navikt/fp-types';
 
@@ -21,7 +20,9 @@ import {
 import { useTrackRouteParam } from '../app/useTrackRouteParam';
 import { BehandlingerIndex } from '../behandling/BehandlingerIndex';
 import { BehandlingSupportIndex } from '../behandlingsupport/BehandlingSupportIndex';
-import { BehandlingApiKeys, requestBehandlingApi, restBehandlingApiHooks } from '../data/behandlingContextApi';
+import { useRestApiErrorDispatcher } from '../data/error/RestApiErrorContext';
+import { useRequestPendingContext } from '../data/polling/RequestPendingContext';
+import { useHentBehandling } from '../data/polling/useHentBehandling';
 import { FagsakProfileIndex } from '../fagsakprofile/FagsakProfileIndex';
 import { FagsakGrid } from './components/FagsakGrid';
 import { useHentFagsak } from './useHentFagsak';
@@ -40,7 +41,7 @@ const finnSkalIkkeHenteData = (location: Location, selectedSaksnummer?: string, 
 export const FagsakIndex = () => {
   const intl = useIntl();
 
-  const [requestPendingMessage, setRequestPendingMessage] = useState<string>();
+  const { isRequestPending } = useRequestPendingContext();
 
   const { addErrorMessage } = useRestApiErrorDispatcher();
 
@@ -48,56 +49,25 @@ export const FagsakIndex = () => {
     paramName: 'saksnummer',
   });
 
-  const [behandlingUuid, setBehandlingUuid] = useState<string | undefined>();
+  const [behandlingUuidFraUrl, setBehandlingUuidFraUrl] = useState<string | undefined>();
   const [behandling, setBehandling] = useState<Behandling>();
-  const resetApiOgSettBehandling = (hentetBehandling: Behandling | undefined) => {
-    if (hentetBehandling) {
-      requestBehandlingApi.resetCache();
-      requestBehandlingApi.resetLinks();
-      requestBehandlingApi.setLinks(hentetBehandling.links);
 
-      setBehandling(hentetBehandling);
-    }
-  };
-
-  const [harHentetFagsak, fagsakData] = useHentFagsak(selectedSaksnummer, behandlingUuid, behandling?.versjon);
-
-  const fagsakBehandling = fagsakData?.getBehandling(behandlingUuid);
+  const [harHentetFagsak, fagsakData] = useHentFagsak(selectedSaksnummer, behandlingUuidFraUrl, behandling?.versjon);
+  const fagsakBehandling = fagsakData?.getBehandling(behandlingUuidFraUrl);
   const erTilbakekreving =
     fagsakBehandling?.type === BehandlingType.TILBAKEKREVING ||
     fagsakBehandling?.type === BehandlingType.TILBAKEKREVING_REVURDERING;
 
-  const { startRequest: hentBehandling } = restBehandlingApiHooks.useRestApiRunner(BehandlingApiKeys.BEHANDLING);
-  const { startRequest: hentTilbakekrevingBehandling } = restBehandlingApiHooks.useRestApiRunner(
-    BehandlingApiKeys.BEHANDLING_TILBAKE,
-  );
-
-  const hentOgSettBehandling = (keepData = false) => {
-    if (behandlingUuid && fagsakBehandling) {
-      if (erTilbakekreving) {
-        hentTilbakekrevingBehandling({ behandlingUuid }, keepData).then(resetApiOgSettBehandling);
-      } else {
-        hentBehandling({ behandlingUuid }, keepData).then(resetApiOgSettBehandling);
-      }
-    }
-  };
+  const { hentOgSettBehandling } = useHentBehandling(erTilbakekreving, setBehandling, behandlingUuidFraUrl);
 
   useEffect(() => {
-    if (behandlingUuid) {
+    if (behandlingUuidFraUrl && fagsakBehandling) {
       hentOgSettBehandling();
     }
-  }, [behandlingUuid, fagsakBehandling?.uuid]);
-
-  useEffect(
-    () => () => {
-      requestBehandlingApi.resetCache();
-      requestBehandlingApi.resetLinks();
-    },
-    [],
-  );
+  }, [behandlingUuidFraUrl, fagsakBehandling?.uuid]);
 
   const location = useLocation();
-  const skalIkkeHenteData = finnSkalIkkeHenteData(location, selectedSaksnummer, behandlingUuid);
+  const skalIkkeHenteData = finnSkalIkkeHenteData(location, selectedSaksnummer, behandlingUuidFraUrl);
 
   if (!fagsakData) {
     if (!harHentetFagsak) {
@@ -123,10 +93,9 @@ export const FagsakIndex = () => {
                 <BehandlingerIndex
                   fagsakData={fagsakData}
                   behandling={behandling}
-                  setBehandling={resetApiOgSettBehandling}
+                  setBehandling={setBehandling}
                   hentOgSettBehandling={hentOgSettBehandling}
-                  setRequestPendingMessage={setRequestPendingMessage}
-                  setBehandlingUuid={setBehandlingUuid}
+                  setBehandlingUuidFraUrl={setBehandlingUuidFraUrl}
                 />
               }
             />
@@ -135,16 +104,16 @@ export const FagsakIndex = () => {
         profileAndNavigationContent={
           <FagsakProfileIndex
             fagsakData={fagsakData}
-            behandlingUuid={behandlingUuid}
-            setBehandling={resetApiOgSettBehandling}
+            behandlingUuid={behandlingUuidFraUrl}
+            setBehandling={setBehandling}
             hentOgSettBehandling={hentOgSettBehandling}
-            behandlingVersjon={behandling?.versjon}
+            behandling={behandling}
           />
         }
         supportContent={
           <BehandlingSupportIndex
             fagsakData={fagsakData}
-            behandlingUuid={behandlingUuid}
+            behandlingUuid={behandlingUuidFraUrl}
             behandlingVersjon={behandling?.versjon}
             hentOgSettBehandling={hentOgSettBehandling}
           />
@@ -174,7 +143,7 @@ export const FagsakIndex = () => {
           );
         }}
       />
-      {requestPendingMessage && <DataFetchPendingModal pendingMessage={requestPendingMessage} />}
+      {isRequestPending && <DataFetchPendingModal pendingMessage="" />}
     </>
   );
 };

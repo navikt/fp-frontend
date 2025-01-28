@@ -85,7 +85,7 @@ interface OwnProps {
   behandlingUuid: string;
   aksjonspunktCode: string;
   avsluttedeBehandlinger: AvsluttetBehandling[];
-  saveKlage: (data: FormkravMellomlagretDataType) => Promise<any>;
+  saveKlage: (data: FormkravMellomlagretDataType) => void;
   spinner?: boolean;
   readOnly?: boolean;
   handleSubmit: UseFormHandleSubmit<FormValues>;

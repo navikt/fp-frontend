@@ -4,7 +4,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { BodyShort } from '@navikt/ds-react';
 
 import { VilkarUtfallType } from '@navikt/fp-kodeverk';
-import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
 import { ProsessPanelMenyData } from '../typer/prosessPanelMenyData';
 import { ProsessPanelWrapper } from './ProsessPanelWrapper';
@@ -34,12 +33,7 @@ export const BehandlingHenlagtPanel = ({ valgtProsessSteg, registrerProsessPanel
   }, [valgtProsessSteg]);
 
   return (
-    <ProsessPanelWrapper
-      erPanelValgt={erPanelValgt}
-      erAksjonspunktOpent={false}
-      status={VilkarUtfallType.OPPFYLT}
-      dataState={RestApiState.SUCCESS}
-    >
+    <ProsessPanelWrapper erPanelValgt={erPanelValgt} erAksjonspunktOpent={false} status={VilkarUtfallType.OPPFYLT}>
       <BodyShort size="small">
         <FormattedMessage id="BehandlingHenlagtPanel.Henlagt" />
       </BodyShort>

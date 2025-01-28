@@ -1,4 +1,3 @@
-import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Heading, Label } from '@navikt/ds-react';
@@ -7,14 +6,7 @@ import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import moment from 'moment';
 
 import { AnkeVurdering as AnkeVurderingKodeverk, AnkeVurderingOmgjoer, KodeverkType } from '@navikt/fp-kodeverk';
-import { AlleKodeverk, AnkeVurdering } from '@navikt/fp-types';
-
-export type BehandlingInfo = {
-  uuid: string;
-  opprettet: string;
-  type: string;
-  status: string;
-};
+import { AlleKodeverk, AnkeVurdering, BehandlingAppKontekst } from '@navikt/fp-types';
 
 const formatDate = (date: string): string => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
 
@@ -27,7 +19,11 @@ const formatId = (id?: string): string => {
   return id;
 };
 
-const formatBehandlingId = (behandlinger: BehandlingInfo[], alleKodeverk: AlleKodeverk, vedtak?: string): string => {
+const formatBehandlingId = (
+  behandlinger: BehandlingAppKontekst[],
+  alleKodeverk: AlleKodeverk,
+  vedtak?: string,
+): string => {
   const info = behandlinger.find(b => b.uuid === vedtak);
   const behandlingTyper = alleKodeverk[KodeverkType.BEHANDLING_TYPE];
   const behandlingStatuser = alleKodeverk[KodeverkType.BEHANDLING_STATUS];
@@ -38,16 +34,16 @@ const formatBehandlingId = (behandlinger: BehandlingInfo[], alleKodeverk: AlleKo
     : '';
 };
 
-interface OwnProps {
+interface Props {
   ankeVurdering: AnkeVurdering;
-  behandlinger: BehandlingInfo[];
+  behandlinger: BehandlingAppKontekst[];
   alleKodeverk: AlleKodeverk;
 }
 
 /**
  * Setter opp aksjonspunktet for behandling.
  */
-const BehandleAnkeForm: FunctionComponent<OwnProps> = ({ ankeVurdering, behandlinger, alleKodeverk }) => {
+export const BehandleAnkeForm = ({ ankeVurdering, behandlinger, alleKodeverk }: Props) => {
   const avr = ankeVurdering.ankeVurderingResultat;
   const vedtak = avr ? formatId(avr.påAnketKlageBehandlingUuid) : undefined;
 
@@ -201,5 +197,3 @@ const BehandleAnkeForm: FunctionComponent<OwnProps> = ({ ankeVurdering, behandli
     </>
   );
 };
-
-export default BehandleAnkeForm;

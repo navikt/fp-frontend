@@ -8,7 +8,6 @@ import { useQuery } from '@tanstack/react-query';
 import { Location } from 'history';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
-import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 import { BehandlingVelgerSakIndex } from '@navikt/fp-sak-behandling-velger';
 import { FagsakProfilSakIndex } from '@navikt/fp-sak-fagsak-profil';
 import { UkjentAdresseMeldingIndex } from '@navikt/fp-sak-ukjent-adresse';
@@ -17,6 +16,7 @@ import { Behandling, BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
 import { ErrorBoundary } from '../app/ErrorBoundary';
 import { getLocationWithDefaultProsessStegAndFakta, pathToBehandling, pathToBehandlinger } from '../app/paths';
 import { BehandlingMenuIndex } from '../behandlingmenu/BehandlingMenuIndex';
+import { useRestApiErrorDispatcher } from '../data/error/RestApiErrorContext';
 import { initFetchOptions } from '../data/fagsakApi';
 import { notEmpty } from '../data/notEmpty';
 import { useFpSakKodeverkMedNavn, useGetKodeverkFn } from '../data/useKodeverk';
@@ -46,7 +46,7 @@ const finnFagsakMarkeringTekst = (fagsak: Fagsak): string[] => {
 interface Props {
   fagsakData: FagsakData;
   behandlingUuid?: string;
-  behandlingVersjon?: number;
+  behandling?: Behandling;
   setBehandling: (behandling: Behandling | undefined) => void;
   hentOgSettBehandling: () => void;
 }
@@ -54,7 +54,7 @@ interface Props {
 export const FagsakProfileIndex = ({
   fagsakData,
   behandlingUuid,
-  behandlingVersjon,
+  behandling,
   setBehandling,
   hentOgSettBehandling,
 }: Props) => {
@@ -119,6 +119,7 @@ export const FagsakProfileIndex = ({
                   behandlingUuid={behandlingUuid}
                   setBehandling={setBehandling}
                   hentOgSettBehandling={hentOgSettBehandling}
+                  behandling={behandling}
                 />
               </ErrorBoundary>
             </HStack>
@@ -145,12 +146,7 @@ export const FagsakProfileIndex = ({
           errorMessageCallback={addErrorMessage}
           errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Risikoklassifisering' })}
         >
-          <RisikoklassifiseringIndex
-            fagsakData={fagsakData}
-            behandlingUuid={behandlingUuid}
-            behandlingVersjon={behandlingVersjon}
-            setBehandling={setBehandling}
-          />
+          <RisikoklassifiseringIndex fagsakData={fagsakData} behandling={behandling} setBehandling={setBehandling} />
         </ErrorBoundary>
         <EksterneRessurser fagsak={fagsak} ainntektHref={ainntektHref} arbeidstakerHref={arbeidstakerHref} />
       </VStack>

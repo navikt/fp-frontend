@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { KodeverkType, OverstyringAksjonspunkter,VilkarType } from '@navikt/fp-kodeverk';
+import { KodeverkType, OverstyringAksjonspunkter, VilkarType } from '@navikt/fp-kodeverk';
 import { VilkarresultatMedOverstyringProsessIndex } from '@navikt/fp-prosess-vilkar-overstyring';
 import { Aksjonspunkt, KodeverkMedNavn, Medlemskap, Vilkar } from '@navikt/fp-types';
 
@@ -21,7 +21,7 @@ interface Props {
   aksjonspunkter: Aksjonspunkt[];
   aksjonspunktKode: OverstyringAksjonspunkter;
   vilkar: Vilkar[];
-  vilkarKoder: string[];
+  vilkarKoder: VilkarType[];
   medlemskap?: Medlemskap;
   panelTekstKode: string;
   erOverstyrt: boolean;

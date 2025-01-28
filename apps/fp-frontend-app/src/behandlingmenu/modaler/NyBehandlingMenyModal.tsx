@@ -11,7 +11,7 @@ import { getLocationWithDefaultProsessStegAndFakta, pathToBehandling } from '../
 import { useGetEnabledApplikasjonContext } from '../../app/useGetEnabledApplikasjonContext';
 import { initFetchOptions, useFagsakApi } from '../../data/fagsakApi';
 import { notEmpty } from '../../data/notEmpty';
-import { useLagNyBehandling } from '../../data/useLagNyBehandling';
+import { useLagNyBehandling } from '../../data/polling/useLagNyBehandling';
 import { FagsakData } from '../../fagsak/FagsakData';
 import { MenyKodeverk } from '../MenyKodeverk';
 

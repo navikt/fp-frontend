@@ -1,4 +1,3 @@
-import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
@@ -11,7 +10,7 @@ import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-interface OwnProps {
+interface Props {
   cancelEvent: () => void;
   submitCallback: (formData: FormValues) => void;
   showModal: boolean;
@@ -24,32 +23,8 @@ interface OwnProps {
   defaultVenteårsak?: string;
 }
 
-const SettPaVentModalIndex: FunctionComponent<OwnProps> = ({
-  cancelEvent,
-  submitCallback,
-  showModal,
-  ventearsaker,
-  frist,
-  ventearsak,
-  visBrevErBestilt,
-  hasManualPaVent,
-  erTilbakekreving,
-  defaultVenteårsak,
-}) => (
+export const SettPaVentModalIndex = (props: Props) => (
   <RawIntlProvider value={intl}>
-    <SettPaVentModal
-      cancelEvent={cancelEvent}
-      submitCallback={submitCallback}
-      showModal={showModal}
-      ventearsaker={ventearsaker}
-      frist={frist}
-      ventearsak={ventearsak}
-      visBrevErBestilt={visBrevErBestilt}
-      hasManualPaVent={hasManualPaVent}
-      erTilbakekreving={erTilbakekreving}
-      defaultVenteårsak={defaultVenteårsak}
-    />
+    <SettPaVentModal {...props} />
   </RawIntlProvider>
 );
-
-export default SettPaVentModalIndex;

@@ -1,32 +1,41 @@
-import React from 'react';
 import { useIntl } from 'react-intl';
+
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
+import { useQuery } from '@tanstack/react-query';
 
 import { VergeFaktaIndex } from '@navikt/fp-fakta-verge';
 import { AksjonspunktKode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import { Verge } from '@navikt/fp-types';
 
-import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
+import { useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
+import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.AVKLAR_VERGE];
 
-const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.VERGE];
-type EndepunktPanelData = {
-  verge: Verge;
-};
+export const VergeFaktaInitPanel = ({ valgtFaktaSteg, behandling, registrerFaktaPanel }: FaktaPanelInitProps) => {
+  const intl = useIntl();
 
-export const VergeFaktaInitPanel = ({ valgtFaktaSteg, behandling, registrerFaktaPanel }: FaktaPanelInitProps) => (
-  <FaktaDefaultInitPanel<EndepunktPanelData>
-    valgtFaktaSteg={valgtFaktaSteg}
-    behandling={behandling}
-    registrerFaktaPanel={registrerFaktaPanel}
-    panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
-    aksjonspunktKoder={AKSJONSPUNKT_KODER}
-    faktaPanelKode={FaktaPanelCode.VERGE}
-    faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.Verge' })}
-    skalPanelVisesIMeny={() => AKSJONSPUNKT_KODER.some(kode => hasAksjonspunkt(kode, behandling.aksjonspunkt))}
-    renderPanel={data => <VergeFaktaIndex {...data} />}
-  />
-);
+  const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
+
+  const api = useBehandlingApi(standardPanelProps.behandling);
+
+  const skalPanelVisesIMeny = AKSJONSPUNKT_KODER.some(kode => hasAksjonspunkt(kode, behandling.aksjonspunkt));
+
+  const { data: verge, isFetching } = useQuery(api.vergeOptions(standardPanelProps.behandling, skalPanelVisesIMeny));
+
+  return (
+    <FaktaDefaultInitPanel
+      standardPanelProps={standardPanelProps}
+      valgtFaktaSteg={valgtFaktaSteg}
+      behandling={behandling}
+      registrerFaktaPanel={registrerFaktaPanel}
+      faktaPanelKode={FaktaPanelCode.VERGE}
+      faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Verge' })}
+      skalPanelVisesIMeny={skalPanelVisesIMeny}
+    >
+      {!isFetching ? <VergeFaktaIndex verge={verge} {...standardPanelProps} /> : <LoadingPanel />}
+    </FaktaDefaultInitPanel>
+  );
+};

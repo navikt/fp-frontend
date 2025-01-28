@@ -1,51 +1,109 @@
-import React, { useCallback, useState } from 'react';
+import { useState } from 'react';
 
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode,KlageVurdering as KlageVurderingKodeverk } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, KlageVurdering as KlageVurderingKodeverk } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import {
-  AksjonspunktVerdier,
-  KlageVurderingBrevData,
-  KlagevurderingProsessIndex,
-} from '@navikt/fp-prosess-klagevurdering';
-import { Behandling, Fagsak, ForhåndsvisMeldingParams, KlageVurdering } from '@navikt/fp-types';
+import { AksjonspunktVerdier, KlagevurderingProsessIndex } from '@navikt/fp-prosess-klagevurdering';
+import { Fagsak, ForhåndsvisMeldingParams } from '@navikt/fp-types';
 
-import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
+import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { KlageBehandlingModal } from '../modaler/KlageBehandlingModal';
 
-const lagForhandsvisCallback =
-  (
-    forhandsvisMelding: (params?: ForhåndsvisMeldingParams, keepData?: boolean) => Promise<any>,
-    fagsak: Fagsak,
-    behandling: Behandling,
-  ) =>
-  (data: KlageVurderingBrevData) => {
-    const brevData = {
-      ...data,
-      behandlingUuid: behandling.uuid,
-      fagsakYtelseType: fagsak.fagsakYtelseType,
-    };
-    return forhandsvisMelding(brevData).then(response => forhandsvisDokument(response));
-  };
+interface Props {
+  fagsak: Fagsak;
+  setSkalOppdatereEtterBekreftelseAvAp?: (skalHenteFagsak: boolean) => void;
+  opneSokeside?: () => void;
+  oppdaterProsessStegOgFaktaPanelIUrl?: (punktnavn?: string, faktanavn?: string) => void;
+  aksjonspunktKoder?: string[];
+  prosessPanelKode: ProsessStegCode;
+  prosessPanelMenyTekst: string;
+  hentOgSettBehandling: (keepData?: boolean) => void;
+}
 
-const lagKlageCallback =
-  (
-    lagreKlageVurdering: (params?: any, keepData?: boolean) => Promise<any>,
-    behandling: Behandling,
-    hentOgSettBehandling: (keepData?: boolean) => void,
-  ) =>
-  (aksjonspunktModel: AksjonspunktVerdier) => {
-    const data = {
-      behandlingUuid: behandling.uuid,
-      ...aksjonspunktModel,
-    };
+export const VurderingFellesProsessStegInitPanel = ({
+  fagsak,
+  setSkalOppdatereEtterBekreftelseAvAp,
+  opneSokeside,
+  oppdaterProsessStegOgFaktaPanelIUrl,
+  aksjonspunktKoder,
+  prosessPanelKode,
+  prosessPanelMenyTekst,
+  hentOgSettBehandling,
+  ...props
+}: Props & ProsessPanelInitProps) => {
+  const [visModalKlageBehandling, toggleKlageModal] = useState(false);
 
-    return lagreKlageVurdering(data).then(() => hentOgSettBehandling(true));
-  };
+  const lagringSideEffekter = setSkalOppdatereEtterBekreftelseAvAp
+    ? getLagringSideeffekter(
+        toggleKlageModal,
+        setSkalOppdatereEtterBekreftelseAvAp,
+        oppdaterProsessStegOgFaktaPanelIUrl,
+      )
+    : undefined;
+
+  const standardPanelProps = useStandardProsessPanelProps(aksjonspunktKoder, [], lagringSideEffekter);
+
+  const api = useBehandlingApi(props.behandling);
+
+  const { data: klageVurdering } = useQuery(api.klage.klageVurderingOptions(props.behandling));
+
+  const { mutate: forhåndsvis } = useMutation({
+    mutationFn: (values: ForhåndsvisMeldingParams) =>
+      forhåndsvisMelding({
+        ...values,
+        behandlingUuid: props.behandling.uuid,
+        fagsakYtelseType: fagsak.fagsakYtelseType,
+      }),
+    onSuccess: forhandsvisDokument,
+  });
+
+  const { mutate: lagreKlageVurdering } = useMutation({
+    mutationFn: (aksjonspunktModel: AksjonspunktVerdier) =>
+      api.klage.mellomlagreKlageVurdering({
+        behandlingUuid: props.behandling.uuid,
+        ...aksjonspunktModel,
+      }),
+    onSuccess: () => hentOgSettBehandling(),
+  });
+
+  return (
+    <ProsessDefaultInitPanel
+      {...props}
+      standardPanelProps={standardPanelProps}
+      prosessPanelKode={prosessPanelKode}
+      prosessPanelMenyTekst={prosessPanelMenyTekst}
+      skalPanelVisesIMeny
+    >
+      <>
+        <KlageBehandlingModal
+          visModal={visModalKlageBehandling}
+          lukkModal={() => {
+            toggleKlageModal(false);
+            if (opneSokeside) {
+              opneSokeside();
+            }
+          }}
+        />
+        {klageVurdering ? (
+          <KlagevurderingProsessIndex
+            klageVurdering={klageVurdering}
+            previewCallback={forhåndsvis}
+            saveKlage={lagreKlageVurdering}
+            {...standardPanelProps}
+          />
+        ) : (
+          <LoadingPanel />
+        )}
+      </>
+    </ProsessDefaultInitPanel>
+  );
+};
 
 const getLagringSideeffekter =
   (
@@ -73,85 +131,3 @@ const getLagringSideeffekter =
       }
     };
   };
-
-const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.KLAGE_VURDERING];
-type EndepunktPanelData = {
-  klageVurdering: KlageVurdering;
-};
-
-interface Props {
-  fagsak: Fagsak;
-  setSkalOppdatereEtterBekreftelseAvAp?: (skalHenteFagsak: boolean) => void;
-  opneSokeside?: () => void;
-  oppdaterProsessStegOgFaktaPanelIUrl?: (punktnavn?: string, faktanavn?: string) => void;
-  aksjonspunktKoder?: string[];
-  prosessPanelKode: ProsessStegCode;
-  prosessPanelMenyTekst: string;
-  hentOgSettBehandling: (keepData?: boolean) => void;
-}
-
-export const VurderingFellesProsessStegInitPanel = ({
-  fagsak,
-  setSkalOppdatereEtterBekreftelseAvAp,
-  opneSokeside,
-  oppdaterProsessStegOgFaktaPanelIUrl,
-  aksjonspunktKoder,
-  prosessPanelKode,
-  prosessPanelMenyTekst,
-  hentOgSettBehandling,
-  ...props
-}: Props & ProsessPanelInitProps) => {
-  const [visModalKlageBehandling, toggleKlageModal] = useState(false);
-
-  const standardPanelProps = useStandardProsessPanelProps();
-
-  const lagringSideEffekter = setSkalOppdatereEtterBekreftelseAvAp
-    ? getLagringSideeffekter(
-        toggleKlageModal,
-        setSkalOppdatereEtterBekreftelseAvAp,
-        oppdaterProsessStegOgFaktaPanelIUrl,
-      )
-    : undefined;
-
-  const { startRequest: forhandsvisMelding } = restBehandlingApiHooks.useRestApiRunner(
-    BehandlingApiKeys.PREVIEW_MESSAGE,
-  );
-  const previewCallback = useCallback(
-    lagForhandsvisCallback(forhandsvisMelding, fagsak, standardPanelProps.behandling),
-    [standardPanelProps.behandling.versjon],
-  );
-
-  const { startRequest: lagreKlageVurdering } = restBehandlingApiHooks.useRestApiRunner(
-    BehandlingApiKeys.SAVE_KLAGE_VURDERING,
-  );
-  const lagreKlage = useCallback(
-    lagKlageCallback(lagreKlageVurdering, standardPanelProps.behandling, hentOgSettBehandling),
-    [standardPanelProps.behandling.versjon],
-  );
-
-  return (
-    <ProsessDefaultInitPanel<EndepunktPanelData>
-      {...props}
-      panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
-      aksjonspunktKoder={aksjonspunktKoder}
-      prosessPanelKode={prosessPanelKode}
-      prosessPanelMenyTekst={prosessPanelMenyTekst}
-      skalPanelVisesIMeny={() => true}
-      lagringSideEffekter={lagringSideEffekter}
-      renderPanel={data => (
-        <>
-          <KlageBehandlingModal
-            visModal={visModalKlageBehandling}
-            lukkModal={() => {
-              toggleKlageModal(false);
-              if (opneSokeside) {
-                opneSokeside();
-              }
-            }}
-          />
-          <KlagevurderingProsessIndex previewCallback={previewCallback} saveKlage={lagreKlage} {...data} />
-        </>
-      )}
-    />
-  );
-};

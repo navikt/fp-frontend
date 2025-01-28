@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement, useCallback, useEffect, useMemo, useState } from 'react';
+import { FunctionComponent, ReactElement, useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Button, Label } from '@navikt/ds-react';
@@ -104,15 +104,13 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
 }) => {
   const opptjeningAktivitetTypes = alleKodeverk[KodeverkType.OPPTJENING_AKTIVITET_TYPE];
 
-  const filtrerteOgSorterteOpptjeningsaktiviteter = useMemo(() => {
-    if (!!opptjeningAktiviteter && !!fastsattOpptjening) {
-      return sorterEtterOpptjeningFom(
-        filtrerOpptjeningAktiviteter(opptjeningAktiviteter, fastsattOpptjening),
-        opptjeningAktivitetTypes,
-      );
-    }
-    return [];
-  }, [opptjeningAktiviteter, fastsattOpptjening]);
+  const filtrerteOgSorterteOpptjeningsaktiviteter =
+    !!opptjeningAktiviteter && !!fastsattOpptjening
+      ? sorterEtterOpptjeningFom(
+          filtrerOpptjeningAktiviteter(opptjeningAktiviteter, fastsattOpptjening),
+          opptjeningAktivitetTypes,
+        )
+      : [];
 
   const formValuesAktiviteter = filtrerteOgSorterteOpptjeningsaktiviteter.map(a => ({
     erGodkjent: a.erGodkjent,
@@ -145,7 +143,7 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
     setValgtAktivitetIndex(index !== -1 ? index : undefined);
   }, [formVerdierForAlleAktiviteter]);
 
-  const bekreft = useCallback(() => {
+  const bekreft = () => {
     setIsSubmitting(true);
 
     const opptjeningsaktiviteterSomSkallagres = filtrerteOgSorterteOpptjeningsaktiviteter
@@ -164,37 +162,34 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
       opptjeningsaktiviteter: opptjeningsaktiviteterSomSkallagres,
       kode: AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
     }).then(() => setIsSubmitting(false));
-  }, [filtrerteOgSorterteOpptjeningsaktiviteter, formVerdierForAlleAktiviteter]);
+  };
 
-  const velgNesteAktivitet = useCallback(() => {
+  const velgNesteAktivitet = () => {
     if (
       valgtAktivitetIndex !== undefined &&
       valgtAktivitetIndex < filtrerteOgSorterteOpptjeningsaktiviteter.length - 1
     ) {
       setValgtAktivitetIndex(valgtAktivitetIndex + 1);
     }
-  }, [valgtAktivitetIndex]);
-  const velgForrigeAktivitet = useCallback(() => {
+  };
+  const velgForrigeAktivitet = () => {
     if (valgtAktivitetIndex !== undefined && valgtAktivitetIndex > 0) {
       setValgtAktivitetIndex(valgtAktivitetIndex - 1);
     }
-  }, [valgtAktivitetIndex]);
+  };
 
-  const oppdaterAktivitet = useCallback(
-    (formValues: FormValues) => {
-      if (valgtAktivitetIndex !== undefined) {
-        setFormVerdierForAlleAktiviteter((oldValues: FormValues[]) =>
-          Object.assign([], oldValues, { [valgtAktivitetIndex]: formValues }),
-        );
-      }
-    },
-    [setFormVerdierForAlleAktiviteter, valgtAktivitetIndex],
-  );
+  const oppdaterAktivitet = (formValues: FormValues) => {
+    if (valgtAktivitetIndex !== undefined) {
+      setFormVerdierForAlleAktiviteter((oldValues: FormValues[]) =>
+        Object.assign([], oldValues, { [valgtAktivitetIndex]: formValues }),
+      );
+    }
+  };
 
-  const avbrytAktivitet = useCallback(() => setValgtAktivitetIndex(undefined), []);
-  const lukkPeriode = useCallback(() => {
+  const avbrytAktivitet = () => setValgtAktivitetIndex(undefined);
+  const lukkPeriode = () => {
     setValgtAktivitetIndex(undefined);
-  }, []);
+  };
 
   const harIkkeBehandletAlle = formVerdierForAlleAktiviteter.some(
     a => a.erGodkjent === null || a.erGodkjent === undefined,

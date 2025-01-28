@@ -2,8 +2,8 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Button,Heading, Modal } from '@navikt/ds-react';
-import { Form,SelectField, TextAreaField } from '@navikt/ft-form-hooks';
+import { Button, Heading, Modal } from '@navikt/ds-react';
+import { Form, SelectField, TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, required } from '@navikt/ft-form-validators';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
@@ -22,8 +22,8 @@ interface Props {
     enhetId: string;
     enhetNavn: string;
   }[];
-  gjeldendeBehandlendeEnhetId?: string;
-  gjeldendeBehandlendeEnhetNavn?: string;
+  gjeldendeBehandlendeEnhetId: string;
+  gjeldendeBehandlendeEnhetNavn: string;
   handleSubmit: (formValues: FormValues) => void;
 }
 

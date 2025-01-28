@@ -3,7 +3,7 @@ import { MemoryRouter } from 'react-router-dom';
 
 import { render, screen } from '@testing-library/react';
 
-import { BehandlingAppKontekst,Fagsak } from '@navikt/fp-types';
+import { BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
 
 import { FagsakData } from '../fagsak/FagsakData';
 import { BehandlingerIndex } from './BehandlingerIndex';
@@ -24,9 +24,8 @@ describe('BehandlingerIndex', () => {
         <BehandlingerIndex
           fagsakData={new FagsakData(fagsak)}
           setBehandling={vi.fn()}
-          setBehandlingUuid={vi.fn()}
+          setBehandlingUuidFraUrl={vi.fn()}
           hentOgSettBehandling={vi.fn()}
-          setRequestPendingMessage={vi.fn()}
         />
       </MemoryRouter>,
     );

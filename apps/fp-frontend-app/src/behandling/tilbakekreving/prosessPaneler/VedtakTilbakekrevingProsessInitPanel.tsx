@@ -1,35 +1,111 @@
-import React, { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { useIntl } from 'react-intl';
 
 import {
   ForhandsvisData,
   VedtakAksjonspunktCode,
-  Vedtaksbrev,
   VedtakTilbakekrevingProsessIndex,
 } from '@navikt/ft-prosess-tilbakekreving-vedtak';
-import { WarningModal } from '@navikt/ft-ui-komponenter';
+import { LoadingPanel, WarningModal } from '@navikt/ft-ui-komponenter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { BehandlingArsakType, VedtakResultatType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import { AlleKodeverkTilbakekreving, Behandlingsresultat, BeregningsresultatTilbakekreving } from '@navikt/fp-types';
+import { AlleKodeverkTilbakekreving, Behandlingsresultat } from '@navikt/fp-types';
 
-import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
+import { forhåndsvisVedtaksbrev, useBehandlingApi } from '../../../data/behandlingApi';
 import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 
 import '@navikt/ft-prosess-tilbakekreving-vedtak/dist/style.css';
 
 const AKSJONSPUNKT_KODER = [VedtakAksjonspunktCode.FORESLA_VEDTAK];
 
-const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.VEDTAKSBREV, BehandlingApiKeys.BEREGNINGSRESULTAT];
-type EndepunktPanelData = {
-  vedtaksbrev: Vedtaksbrev;
-  beregningsresultat: BeregningsresultatTilbakekreving;
-};
-
 const tilbakekrevingÅrsakTyperKlage = [BehandlingArsakType.RE_KLAGE_KA, BehandlingArsakType.RE_KLAGE_NFP];
+
+interface Props {
+  tilbakekrevingKodeverk: AlleKodeverkTilbakekreving;
+  opneSokeside: () => void;
+  harApenRevurdering: boolean;
+}
+
+export const VedtakTilbakekrevingProsessInitPanel = ({
+  tilbakekrevingKodeverk,
+  opneSokeside,
+  harApenRevurdering,
+  ...props
+}: Props & ProsessPanelInitProps) => {
+  const intl = useIntl();
+
+  const [visApenRevurderingModal, setVisApenRevurderingModal] = useState(harApenRevurdering);
+  const [visFatterVedtakModal, setVisFatterVedtakModal] = useState(false);
+
+  const lagringSideEffekter = getLagringSideeffekter(setVisFatterVedtakModal);
+  const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, [], lagringSideEffekter);
+
+  const { behandling } = props;
+  const erRevurderingTilbakekrevingKlage =
+    behandling.førsteÅrsak && erTilbakekrevingÅrsakKlage(behandling.førsteÅrsak.behandlingArsakType);
+  const erRevurderingTilbakekrevingFeilBeløpBortfalt =
+    behandling.førsteÅrsak &&
+    BehandlingArsakType.RE_FEILUTBETALT_BELØP_REDUSERT === behandling.førsteÅrsak.behandlingArsakType;
+
+  const api = useBehandlingApi(behandling);
+
+  const { data: beregningsresultat } = useQuery(api.tilbakekreving.beregningsresultatOptions(behandling));
+  const { data: vedtaksbrev } = useQuery(api.tilbakekreving.vedtaksbrevOptions(behandling));
+
+  const { mutateAsync: forhandsvisVedtaksbrev } = useMutation({
+    mutationFn: (values: ForhandsvisData) => forhåndsvisVedtaksbrev(values),
+    onSuccess: forhandsvisDokument,
+  });
+
+  return (
+    <>
+      <FatterVedtakStatusModal
+        visModal={visFatterVedtakModal}
+        lukkModal={() => {
+          setVisFatterVedtakModal(false);
+          opneSokeside();
+        }}
+        tekst={intl.formatMessage({ id: 'FatterTilbakekrevingVedtakStatusModal.Sendt' })}
+      />
+      {visApenRevurderingModal && (
+        <WarningModal
+          headerText={intl.formatMessage({ id: 'BehandlingTilbakekrevingIndex.ApenRevurderingHeader' })}
+          bodyText={intl.formatMessage({ id: 'BehandlingTilbakekrevingIndex.ApenRevurdering' })}
+          showModal
+          submit={() => setVisApenRevurderingModal(false)}
+        />
+      )}
+      <ProsessDefaultInitPanel
+        {...props}
+        standardPanelProps={standardPanelProps}
+        prosessPanelKode={ProsessStegCode.VEDTAK}
+        prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Vedtak' })}
+        skalPanelVisesIMeny
+        hentOverstyrtStatus={getVedtakStatus(props.behandling.behandlingsresultat)}
+      >
+        {beregningsresultat && vedtaksbrev ? (
+          <VedtakTilbakekrevingProsessIndex
+            beregningsresultat={beregningsresultat}
+            vedtaksbrev={vedtaksbrev}
+            kodeverkSamlingFpTilbake={tilbakekrevingKodeverk}
+            fetchPreviewVedtaksbrev={forhandsvisVedtaksbrev}
+            erRevurderingTilbakekrevingKlage={erRevurderingTilbakekrevingKlage || false}
+            erRevurderingTilbakekrevingFeilBeløpBortfalt={erRevurderingTilbakekrevingFeilBeløpBortfalt || false}
+            {...standardPanelProps}
+          />
+        ) : (
+          <LoadingPanel />
+        )}
+      </ProsessDefaultInitPanel>
+    </>
+  );
+};
 
 const erTilbakekrevingÅrsakKlage = (årsak: string): boolean =>
   !!årsak && tilbakekrevingÅrsakTyperKlage.some(å => å === årsak);
@@ -56,78 +132,3 @@ const getLagringSideeffekter =
   () => {
     toggleFatterVedtakModal(true);
   };
-interface Props {
-  tilbakekrevingKodeverk: AlleKodeverkTilbakekreving;
-  opneSokeside: () => void;
-  harApenRevurdering: boolean;
-}
-
-export const VedtakTilbakekrevingProsessInitPanel = ({
-  tilbakekrevingKodeverk,
-  opneSokeside,
-  harApenRevurdering,
-  ...props
-}: Props & ProsessPanelInitProps) => {
-  const intl = useIntl();
-
-  const [visApenRevurderingModal, setVisApenRevurderingModal] = useState(harApenRevurdering);
-  const lukkApenRevurderingModal = useCallback(() => setVisApenRevurderingModal(false), []);
-  const [visFatterVedtakModal, setVisFatterVedtakModal] = useState(false);
-
-  const lagringSideEffekter = getLagringSideeffekter(setVisFatterVedtakModal);
-
-  const { startRequest: forhandsvisVedtaksbrev } = restBehandlingApiHooks.useRestApiRunner(
-    BehandlingApiKeys.PREVIEW_VEDTAKSBREV,
-  );
-  const fetchPreviewVedtaksbrev = useCallback(
-    (param: ForhandsvisData) => forhandsvisVedtaksbrev(param).then(forhandsvisDokument),
-    [],
-  );
-
-  const { behandling } = props;
-  const erRevurderingTilbakekrevingKlage =
-    behandling.førsteÅrsak && erTilbakekrevingÅrsakKlage(behandling.førsteÅrsak.behandlingArsakType);
-  const erRevurderingTilbakekrevingFeilBeløpBortfalt =
-    behandling.førsteÅrsak &&
-    BehandlingArsakType.RE_FEILUTBETALT_BELØP_REDUSERT === behandling.førsteÅrsak.behandlingArsakType;
-
-  return (
-    <>
-      <FatterVedtakStatusModal
-        visModal={visFatterVedtakModal}
-        lukkModal={() => {
-          setVisFatterVedtakModal(false);
-          opneSokeside();
-        }}
-        tekst={intl.formatMessage({ id: 'FatterTilbakekrevingVedtakStatusModal.Sendt' })}
-      />
-      {visApenRevurderingModal && (
-        <WarningModal
-          headerText={intl.formatMessage({ id: 'BehandlingTilbakekrevingIndex.ApenRevurderingHeader' })}
-          bodyText={intl.formatMessage({ id: 'BehandlingTilbakekrevingIndex.ApenRevurdering' })}
-          showModal
-          submit={lukkApenRevurderingModal}
-        />
-      )}
-      <ProsessDefaultInitPanel<EndepunktPanelData>
-        {...props}
-        panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
-        aksjonspunktKoder={AKSJONSPUNKT_KODER}
-        prosessPanelKode={ProsessStegCode.VEDTAK}
-        prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Vedtak' })}
-        skalPanelVisesIMeny={() => true}
-        lagringSideEffekter={lagringSideEffekter}
-        hentOverstyrtStatus={data => getVedtakStatus(data.behandling.behandlingsresultat)}
-        renderPanel={data => (
-          <VedtakTilbakekrevingProsessIndex
-            kodeverkSamlingFpTilbake={tilbakekrevingKodeverk}
-            fetchPreviewVedtaksbrev={fetchPreviewVedtaksbrev}
-            erRevurderingTilbakekrevingKlage={erRevurderingTilbakekrevingKlage || false}
-            erRevurderingTilbakekrevingFeilBeløpBortfalt={erRevurderingTilbakekrevingFeilBeløpBortfalt || false}
-            {...data}
-          />
-        )}
-      />
-    </>
-  );
-};

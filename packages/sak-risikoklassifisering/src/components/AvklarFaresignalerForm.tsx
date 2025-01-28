@@ -3,12 +3,12 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { Button } from '@navikt/ds-react';
-import { Form,RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
+import { Form, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
 import { ariaCheck, hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt, KodeverkMedNavn,Risikoklassifisering } from '@navikt/fp-types';
+import { Aksjonspunkt, KodeverkMedNavn, Risikoklassifisering } from '@navikt/fp-types';
 
 import { FaresignalVurdering } from '../kodeverk/faresignalVurdering';
 import { AvklartRisikoklassifiseringAp } from '../types/AvklartRisikoklassifiseringAp';
@@ -65,7 +65,7 @@ interface Props {
   aksjonspunkt: Aksjonspunkt;
   readOnly: boolean;
   risikoklassifisering?: Risikoklassifisering;
-  submitCallback: (data: AvklartRisikoklassifiseringAp) => Promise<void>;
+  submitCallback?: (data: AvklartRisikoklassifiseringAp) => void;
   faresignalVurderinger: KodeverkMedNavn[];
 }
 
@@ -103,7 +103,10 @@ export const AvklarFaresignalerForm = ({
   const harValgtReelle = formMethods.watch(VURDERING_HOVEDKATEGORI) === FaresignalVurdering.INNVIRKNING;
 
   return (
-    <Form formMethods={formMethods} onSubmit={(values: Values) => submitCallback(transformValues(values))}>
+    <Form
+      formMethods={formMethods}
+      onSubmit={(values: Values) => submitCallback && submitCallback(transformValues(values))}
+    >
       <TextAreaField
         name={begrunnelseFieldName}
         label={<FormattedMessage id="Risikopanel.Forms.Vurdering" />}

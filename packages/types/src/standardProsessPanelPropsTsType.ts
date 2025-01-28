@@ -1,8 +1,8 @@
 import { Aksjonspunkt } from './aksjonspunktTsType';
 import { Behandling } from './behandlingTsType';
-import { Vilkar } from './vilkarTsType';
-import { AlleKodeverk } from './kodeverkAlleTsType';
 import { Fagsak } from './fagsakTsType';
+import { AlleKodeverk } from './kodeverkAlleTsType';
+import { Vilkar } from './vilkarTsType';
 
 export interface StandardProsessPanelProps {
   behandling: Behandling;
