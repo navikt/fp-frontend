@@ -4,13 +4,13 @@ import { useIntl } from 'react-intl';
 import {
   DetaljerteFeilutbetalingsperioder,
   FeilutbetalingPerioderWrapper,
-  ForeldelseAksjonspunktCodes,
+  TilbakekrevingAksjonspunktCodes,
   TilbakekrevingProsessIndex,
 } from '@navikt/ft-prosess-tilbakekreving';
 
-import { isAksjonspunktOpen, KodeverkType,VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { isAksjonspunktOpen, KodeverkType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import { Aksjonspunkt, AlleKodeverkTilbakekreving,VilkarsVurdertePerioderWrapper } from '@navikt/fp-types';
+import { Aksjonspunkt, AlleKodeverkTilbakekreving, VilkarsVurdertePerioderWrapper } from '@navikt/fp-types';
 
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
@@ -18,7 +18,7 @@ import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps'
 
 import '@navikt/ft-prosess-tilbakekreving/dist/style.css';
 
-const AKSJONSPUNKT_KODER = [ForeldelseAksjonspunktCodes.VURDER_TILBAKEKREVING];
+const AKSJONSPUNKT_KODER = [TilbakekrevingAksjonspunktCodes.VURDER_TILBAKEKREVING];
 
 const ENDEPUNKTER_PANEL_DATA = [
   BehandlingApiKeys.VILKARVURDERINGSPERIODER,

@@ -10,9 +10,9 @@ import {
 import { WarningModal } from '@navikt/ft-ui-komponenter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
-import { BehandlingArsakType, VedtakResultatType,VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { BehandlingArsakType, VedtakResultatType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import { AlleKodeverkTilbakekreving, Behandlingsresultat,BeregningsresultatTilbakekreving } from '@navikt/fp-types';
+import { AlleKodeverkTilbakekreving, Behandlingsresultat, BeregningsresultatTilbakekreving } from '@navikt/fp-types';
 
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
 import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedtakStatusModal';

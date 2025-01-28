@@ -79,7 +79,6 @@ const lagFormatertBG = (beregningsgrunnlag: Beregningsgrunnlag): FtBeregningsgru
     beregningsgrunnlagId: '1',
     vilkårsperiodeFom: beregningsgrunnlag.skjaeringstidspunktBeregning,
   };
-  // @ts-expect-error TODO Fiks denne
   return [nyttBG];
 };
 

@@ -2,8 +2,8 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 
 import {
-  FeilutbetalingAarsak,
   FeilutbetalingAksjonspunktCode,
+  FeilutbetalingÅrsak,
   FeilutbetalingFakta,
   FeilutbetalingFaktaIndex,
 } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
@@ -22,7 +22,7 @@ const AKSJONSPUNKT_KODER = [FeilutbetalingAksjonspunktCode.AVKLAR_FAKTA_FOR_FEIL
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.FEILUTBETALING_FAKTA, BehandlingApiKeys.FEILUTBETALING_AARSAK];
 type EndepunktPanelData = {
   feilutbetalingFakta: FeilutbetalingFakta;
-  feilutbetalingAarsak: FeilutbetalingAarsak[];
+  feilutbetalingAarsak: FeilutbetalingÅrsak[];
 };
 
 interface Props {
