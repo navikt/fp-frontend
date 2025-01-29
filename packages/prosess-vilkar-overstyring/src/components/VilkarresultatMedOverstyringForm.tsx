@@ -24,9 +24,9 @@ import {
   OverstyringMedlemskapsvilkaretLopendeAp,
   OverstyringMedlemskapvilkaretForutgaendeAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { useFormData } from '@navikt/fp-utils';
 
 import styles from './vilkarresultatMedOverstyringForm.module.css';
-import { useFormData } from '@navikt/fp-utils';
 
 const isOverridden = (aksjonspunkter: Aksjonspunkt[], aksjonspunktCode: string): boolean =>
   aksjonspunkter.some(ap => ap.definisjon === aksjonspunktCode);
