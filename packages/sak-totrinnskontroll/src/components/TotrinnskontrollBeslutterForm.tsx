@@ -5,11 +5,11 @@ import { FormattedMessage } from 'react-intl';
 import { Button } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 import { ariaCheck } from '@navikt/ft-form-validators';
-import { AksjonspunktHelpTextHTML,VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 import { Location } from 'history';
 
-import { BehandlingType,KonsekvensForYtelsen, VurderPaNyttArsakType } from '@navikt/fp-kodeverk';
+import { BehandlingType, KonsekvensForYtelsen, VurderPaNyttArsakType } from '@navikt/fp-kodeverk';
 import {
   BehandlingAppKontekst,
   KodeverkMedNavn,
@@ -17,7 +17,7 @@ import {
   TotrinnskontrollSkjermlenkeContext,
 } from '@navikt/fp-types';
 
-import { AksjonspunktGodkjenningData,AksjonspunktGodkjenningFieldArray } from './AksjonspunktGodkjenningFieldArray';
+import { AksjonspunktGodkjenningData, AksjonspunktGodkjenningFieldArray } from './AksjonspunktGodkjenningFieldArray';
 
 import styles from './totrinnskontrollBeslutterForm.module.css';
 
@@ -58,8 +58,11 @@ const finnArsaker = (vurderPaNyttArsaker: string[]) =>
     if (arsak === VurderPaNyttArsakType.UTREDNING) {
       return { ...acc, feilUtredning: true };
     }
-    if (arsak === VurderPaNyttArsakType.ANNET) {
-      return { ...acc, annet: true };
+    if (arsak === VurderPaNyttArsakType.SAKSFLYT || arsak === VurderPaNyttArsakType.ANNET) {
+      return { ...acc, feilSaksflyt: true };
+    }
+    if (arsak === VurderPaNyttArsakType.BEGRUNNELSE) {
+      return { ...acc, feilBegrunnelse: true };
     }
     return {};
   }, {});

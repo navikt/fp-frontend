@@ -6,7 +6,7 @@ import { BodyShort } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Location } from 'history';
 
-import { BehandlingAppKontekst,KodeverkMedNavn, TotrinnskontrollSkjermlenkeContext } from '@navikt/fp-types';
+import { BehandlingAppKontekst, KodeverkMedNavn, TotrinnskontrollSkjermlenkeContext } from '@navikt/fp-types';
 
 import { getAksjonspunkttekst } from './aksjonspunktTekster/aksjonspunktTekstUtleder';
 import { GodkjenningPanel } from './GodkjenningPanel';
@@ -23,7 +23,8 @@ export type AksjonspunktGodkjenningData = {
   feilLov?: boolean;
   feilSkjønn?: boolean;
   feilUtredning?: boolean;
-  annet?: boolean;
+  feilSaksflyt?: boolean;
+  feilBegrunnelse?: boolean;
 };
 
 type Props = {

@@ -47,8 +47,11 @@ const getArsaker = (apData: AksjonspunktGodkjenningData): string[] => {
   if (apData.feilUtredning) {
     arsaker.push(VurderPaNyttArsakType.UTREDNING);
   }
-  if (apData.annet) {
-    arsaker.push(VurderPaNyttArsakType.ANNET);
+  if (apData.feilSaksflyt) {
+    arsaker.push(VurderPaNyttArsakType.SAKSFLYT);
+  }
+  if (apData.feilBegrunnelse) {
+    arsaker.push(VurderPaNyttArsakType.BEGRUNNELSE);
   }
   return arsaker;
 };

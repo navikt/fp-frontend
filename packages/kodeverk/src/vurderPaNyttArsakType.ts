@@ -4,5 +4,7 @@ export enum VurderPaNyttArsakType {
   FEIL_REGEL = 'FEIL_REGEL',
   SKJØNN = 'SKJØNN',
   UTREDNING = 'UTREDNING',
+  SAKSFLYT = 'SAKSFLYT',
+  BEGRUNNELSE = 'BEGRUNNELSE',
   ANNET = 'ANNET',
 }
