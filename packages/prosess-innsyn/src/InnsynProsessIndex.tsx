@@ -27,8 +27,6 @@ const InnsynProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps
   isReadOnly,
   readOnlySubmitButton,
   alleKodeverk,
-  formData,
-  setFormData,
 }) => (
   <RawIntlProvider value={intl}>
     <InnsynForm
@@ -44,8 +42,6 @@ const InnsynProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps
       submitCallback={submitCallback}
       readOnly={isReadOnly}
       readOnlySubmitButton={readOnlySubmitButton}
-      formData={formData}
-      setFormData={setFormData}
     />
   </RawIntlProvider>
 );

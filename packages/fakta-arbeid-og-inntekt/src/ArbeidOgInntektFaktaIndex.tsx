@@ -35,8 +35,6 @@ export const ArbeidOgInntektFaktaIndex = ({
   submitCallback,
   aksjonspunkter,
   readOnly,
-  formData,
-  setFormData,
   arbeidOgInntekt,
   arbeidsgiverOpplysningerPerId,
   registrerArbeidsforhold,
@@ -53,9 +51,7 @@ export const ArbeidOgInntektFaktaIndex = ({
         behandling={behandling}
         aksjonspunkt={aksjonspunkter.length > 0 ? aksjonspunkter[0] : undefined}
         readOnly={readOnly}
-        formData={formData}
         lagreCallback={submitCallback}
-        setFormData={setFormData}
         arbeidOgInntekt={arbeidOgInntekt}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         registrerArbeidsforhold={registrerArbeidsforhold}

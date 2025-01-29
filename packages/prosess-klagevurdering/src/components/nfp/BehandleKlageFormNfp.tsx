@@ -10,6 +10,7 @@ import { AksjonspunktKode, KlageVurdering as klageVurderingType, KodeverkType } 
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import { AlleKodeverk, KlageVurdering, KlageVurderingResultat, KodeverkMedNavn } from '@navikt/fp-types';
 import { KlageVurderingResultatAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { useFormData } from '@navikt/fp-utils';
 
 import KlageFormType from '../../types/klageFormType';
 import BekreftOgSubmitKlageModal from './BekreftOgSubmitKlageModal';
@@ -62,8 +63,6 @@ interface OwnProps {
   klageVurdering: KlageVurdering;
   alleAktuelleHjemler: string[];
   submitCallback: (data: KlageVurderingResultatAp) => Promise<void>;
-  formData?: KlageFormType;
-  setFormData: (data: KlageFormType) => void;
 }
 
 /**
@@ -81,8 +80,6 @@ export const BehandleKlageFormNfp: FunctionComponent<OwnProps> = ({
   alleAktuelleHjemler,
   alleKodeverk,
   submitCallback,
-  formData,
-  setFormData,
 }) => {
   const hjemmlerMedNavn = lagHjemlerMedNavn(
     alleKodeverk[KodeverkType.KLAGE_HJEMMEL],
@@ -91,6 +88,9 @@ export const BehandleKlageFormNfp: FunctionComponent<OwnProps> = ({
   const intl = useIntl();
   const [visSubmitModal, setVisSubmitModal] = useState<boolean>(false);
   const initialValues = useMemo(() => buildInitialValues(klageVurdering.klageVurderingResultatNFP), [klageVurdering]);
+
+  const { formData, setFormData } = useFormData<KlageFormType>();
+
   const formMethods = useForm<KlageFormType>({
     defaultValues: formData || initialValues,
   });

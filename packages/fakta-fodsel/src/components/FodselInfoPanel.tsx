@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement, use } from 'react';
+import { FunctionComponent, ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
@@ -10,7 +10,7 @@ import { AksjonspunktKode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
 import { FodselSammenligningIndex } from '@navikt/fp-prosess-fakta-fodsel-sammenligning';
 import { Aksjonspunkt, AvklartBarn, FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
 import { BekreftTerminbekreftelseAp, SjekkManglendeFodselAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { FormDataContext } from '@navikt/fp-utils';
+import { useFormData } from '@navikt/fp-utils';
 
 import SjekkFodselDokForm, { FormValues as SjekkFodselDokFormValues } from './SjekkFodselDokForm';
 import TermindatoFaktaForm, { FormValues as TermindatoFormValues } from './TermindatoFaktaForm';
@@ -110,7 +110,7 @@ const FodselInfoPanel: FunctionComponent<OwnProps> = ({
   const terminbekreftelseAp = aksjonspunkter.find(ap => ap.definisjon === TERMINBEKREFTELSE);
   const manglendeFødselAp = aksjonspunkter.find(ap => ap.definisjon === SJEKK_MANGLENDE_FODSEL);
 
-  const { formData, setFormData } = use(FormDataContext);
+  const { formData, setFormData } = useFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
     defaultValues: formData || buildInitialValues(soknad, familiehendelse, terminbekreftelseAp, manglendeFødselAp),

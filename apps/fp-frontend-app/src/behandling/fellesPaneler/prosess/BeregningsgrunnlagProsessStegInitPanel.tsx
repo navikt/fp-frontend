@@ -1,4 +1,4 @@
-import { use } from 'react';
+import { ComponentProps, use } from 'react';
 import { useIntl } from 'react-intl';
 
 import {
@@ -15,6 +15,7 @@ import { useQuery } from '@tanstack/react-query';
 import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkar as FpVilkar, Vilkarperiode } from '@navikt/fp-types';
+import { useFormData } from '@navikt/fp-utils';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
@@ -124,7 +125,7 @@ export const BeregningsgrunnlagProsessStegInitPanel = ({
       skalPanelVisesIMeny
     >
       {!isFetching ? (
-        <BeregningsgrunnlagProsessIndex
+        <Wrapper
           {...standardPanelProps}
           kodeverkSamling={standardPanelProps.alleKodeverk}
           beregningsgrunnlagsvilkar={lagBGVilkar(standardPanelProps.vilkar, beregningsgrunnlag)}
@@ -137,4 +138,9 @@ export const BeregningsgrunnlagProsessStegInitPanel = ({
       )}
     </ProsessDefaultInitPanel>
   );
+};
+
+const Wrapper = (props: ComponentProps<typeof BeregningsgrunnlagProsessIndex>) => {
+  const { formData, setFormData } = useFormData();
+  return <BeregningsgrunnlagProsessIndex {...props} formData={formData} setFormData={setFormData} />;
 };

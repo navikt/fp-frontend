@@ -6,7 +6,7 @@ import { Label } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktKode, AksjonspunktStatus,VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import {
   ProsessPanelTemplate,
   ProsessStegBegrunnelseTextFieldNew,
@@ -14,6 +14,7 @@ import {
 } from '@navikt/fp-prosess-felles';
 import { Aksjonspunkt, Behandling, Behandlingsresultat, FastsattOpptjening } from '@navikt/fp-types';
 import { AvklarOpptjeningsvilkaretAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { useFormData } from '@navikt/fp-utils';
 
 import OpptjeningVilkarView from './OpptjeningVilkarView';
 
@@ -49,8 +50,6 @@ interface OwnProps {
   submitCallback: (aksjonspunktData: AvklarOpptjeningsvilkaretAp) => Promise<void>;
   lovReferanse?: string;
   erIkkeGodkjentAvBeslutter: boolean;
-  formData?: FormValues;
-  setFormData: (data: FormValues) => void;
   erSvpFagsak: boolean;
 }
 
@@ -70,8 +69,6 @@ const OpptjeningVilkarAksjonspunktPanel: FunctionComponent<OwnProps> = ({
   fastsattOpptjening,
   submitCallback,
   erIkkeGodkjentAvBeslutter,
-  formData,
-  setFormData,
   erSvpFagsak,
 }) => {
   const intl = useIntl();
@@ -80,6 +77,7 @@ const OpptjeningVilkarAksjonspunktPanel: FunctionComponent<OwnProps> = ({
     () => buildInitialValues(aksjonspunkter, status, behandlingsresultat),
     [behandlingsresultat, aksjonspunkter, status],
   );
+  const { formData, setFormData } = useFormData<FormValues>();
   const formMethods = useForm<FormValues>({
     defaultValues: formData || initialValues,
   });

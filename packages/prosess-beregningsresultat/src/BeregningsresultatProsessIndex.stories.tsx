@@ -2,7 +2,7 @@ import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, Behandling, Fagsak } from '@navikt/fp-types';
 
 import { BeregningsresultatProsessIndex } from './BeregningsresultatProsessIndex';
@@ -28,6 +28,7 @@ const defaultAksjonspunkter = [
 const meta = {
   title: 'prosess/prosess-beregningsresultat',
   component: BeregningsresultatProsessIndex,
+  decorators: [withFormData],
   args: {
     behandling,
     alleKodeverk: alleKodeverk as any,
@@ -38,7 +39,6 @@ const meta = {
     status: '',
     vilkar: [],
     alleMerknaderFraBeslutter: {},
-    setFormData: () => undefined,
     beregningresultatEngangsstonad: beregningsresultat,
     overrideReadOnly: false,
     toggleOverstyring: action('button-click'),

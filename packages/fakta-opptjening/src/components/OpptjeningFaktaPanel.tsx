@@ -16,6 +16,7 @@ import {
   OpptjeningAktivitet,
 } from '@navikt/fp-types';
 import { AvklarAktivitetsPerioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { useFormData } from '@navikt/fp-utils';
 
 import ValgtAktivitetForm, { FormValues } from './aktivitet/ValgtAktivitetForm';
 import OpptjeningTidslinje from './tidslinje/OpptjeningTidslinje';
@@ -78,8 +79,6 @@ interface OwnProps {
   ferdiglignetNæring: FerdiglignetNæring[];
   fastsattOpptjening?: Opptjening['fastsattOpptjening'];
   submitCallback: (data: AvklarAktivitetsPerioderAp) => Promise<void>;
-  formData: any;
-  setFormData: (data: any) => void;
 }
 
 /**
@@ -99,8 +98,6 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
   fastsattOpptjening,
   ferdiglignetNæring,
   submitCallback,
-  formData,
-  setFormData,
 }) => {
   const opptjeningAktivitetTypes = alleKodeverk[KodeverkType.OPPTJENING_AKTIVITET_TYPE];
 
@@ -117,7 +114,10 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
     begrunnelse: a.begrunnelse,
   }));
 
+  const { formData, setFormData } = useFormData<FormValues[]>();
+
   const [formVerdierForAlleAktiviteter, setFormVerdierForAlleAktiviteter] = useState<FormValues[]>(
+    //@ts-expect-error
     formData || formValuesAktiviteter,
   );
 

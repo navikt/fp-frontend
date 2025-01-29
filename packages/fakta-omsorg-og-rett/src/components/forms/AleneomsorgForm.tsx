@@ -10,6 +10,7 @@ import { FaktaBegrunnelseTextField, FaktaSubmitButton, TrueFalseInput } from '@n
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
 import { BekreftAleneomsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { useFormData } from '@navikt/fp-utils';
 
 import { HarAnnenForelderRettFelter } from './HarAnnenForelderRettFelter';
 
@@ -27,8 +28,6 @@ interface Props {
   readOnly: boolean;
   submittable: boolean;
   submitCallback: (aksjonspunktData: BekreftAleneomsorgVurderingAp) => Promise<void>;
-  formData?: FormValues;
-  setFormData: (data: FormValues) => void;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
 }
 
@@ -38,12 +37,12 @@ export const AleneomsorgForm = ({
   readOnly,
   submitCallback,
   submittable,
-  formData,
-  setFormData,
   alleMerknaderFraBeslutter,
 }: Props) => {
   const { bekreftetAnnenforelderRett, bekreftetAnnenforelderUføretrygd, bekreftetAnnenForelderRettEØS } =
     ytelsefordeling.rettigheterAnnenforelder ?? {};
+
+  const { formData, setFormData } = useFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
     defaultValues: formData || {

@@ -2,7 +2,7 @@ import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, OpptjeningAktivitetType } from '@navikt/fp-kodeverk';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
 import { Behandling, Opptjening } from '@navikt/fp-types';
 
 import { OpptjeningFaktaIndex } from './OpptjeningFaktaIndex';
@@ -27,6 +27,7 @@ const arbeidsgiverOpplysningerPerId = {
 const meta = {
   title: 'fakta/fakta-opptjening',
   component: OpptjeningFaktaIndex,
+  decorators: [withFormData],
   args: {
     behandling: behandling as Behandling,
     arbeidsgiverOpplysningerPerId,
@@ -38,7 +39,6 @@ const meta = {
     readOnly: false,
     harApneAksjonspunkter: true,
     submittable: true,
-    setFormData: () => undefined,
   },
 } satisfies Meta<typeof OpptjeningFaktaIndex>;
 export default meta;

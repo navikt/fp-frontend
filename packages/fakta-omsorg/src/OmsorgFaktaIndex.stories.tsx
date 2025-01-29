@@ -3,7 +3,7 @@ import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AdresseType, AksjonspunktKode, AksjonspunktStatus, SivilstandType } from '@navikt/fp-kodeverk';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
 import { Behandling, KjønnkodeEnum, PersonopplysningerBasis, Ytelsefordeling } from '@navikt/fp-types';
 
 import { OmsorgFaktaIndex } from './OmsorgFaktaIndex';
@@ -71,12 +71,12 @@ const merknaderFraBeslutter = {
 const meta = {
   title: 'fakta/fakta-omsorg',
   component: OmsorgFaktaIndex,
+  decorators: [withFormData],
   args: {
     submitCallback: action('button-click') as (data: any) => Promise<void>,
     readOnly: false,
     harApneAksjonspunkter: true,
     submittable: true,
-    setFormData: () => undefined,
     behandling,
     ytelsefordeling,
     alleKodeverk: alleKodeverk as any,

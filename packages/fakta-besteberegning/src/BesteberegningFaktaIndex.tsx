@@ -12,7 +12,6 @@ import {
 } from '@navikt/fp-types';
 
 import BesteberegningPanel from './components/BesteberegningPanel';
-import { FormValues } from './components/KontrollerBesteberegningPanel';
 
 import messages from '../i18n/nb_NO.json';
 
@@ -22,8 +21,6 @@ interface Props {
   beregningsgrunnlag: Beregningsgrunnlag;
   arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId;
   alleKodeverk: AlleKodeverk;
-  formData?: FormValues;
-  setFormData: (data: any) => void;
   aksjonspunkter: Aksjonspunkt[];
 }
 
@@ -34,8 +31,6 @@ export const BesteberegningFaktaIndex = ({
   aksjonspunkter,
   readOnly,
   submitCallback,
-  formData,
-  setFormData,
   submittable,
 }: Props & StandardFaktaPanelProps) => (
   <RawIntlProvider value={intl}>
@@ -47,8 +42,6 @@ export const BesteberegningFaktaIndex = ({
       readOnly={readOnly}
       submitCallback={submitCallback}
       submittable={submittable}
-      formData={formData}
-      setFormData={setFormData}
     />
   </RawIntlProvider>
 );

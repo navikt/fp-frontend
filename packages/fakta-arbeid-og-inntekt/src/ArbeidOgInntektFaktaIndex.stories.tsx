@@ -2,7 +2,7 @@ import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, AksjonspunktÅrsak, AlleKodeverk, ArbeidOgInntektsmelding, Behandling } from '@navikt/fp-types';
 
 import { ArbeidOgInntektFaktaIndex } from './ArbeidOgInntektFaktaIndex';
@@ -27,6 +27,7 @@ const fellesInntektsmeldingFelter = {
 const meta = {
   title: 'fakta/fakta-arbeid-og-inntekter',
   component: ArbeidOgInntektFaktaIndex,
+  decorators: [withFormData],
   args: {
     saksnummer: '1234567',
     behandling: {
@@ -40,7 +41,6 @@ const meta = {
     åpneForNyVurdering: action('onÅpneForNyVurdering'),
     submitCallback: action('onSubmit') as (data: any) => Promise<void>,
     settBehandlingPåVentCallback: action('onSettBehandlingPåVentCallback') as () => Promise<void>,
-    setFormData: () => undefined,
     alleMerknaderFraBeslutter: {},
     harApneAksjonspunkter: true,
     submittable: true,

@@ -13,6 +13,7 @@ import { AksjonspunktKode, getKodeverknavnFn, KodeverkType } from '@navikt/fp-ko
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import { AlleKodeverk, KlageVurdering } from '@navikt/fp-types';
 import { KlageFormkravAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { useFormData } from '@navikt/fp-utils';
 
 import AvsluttetBehandling from '../types/avsluttetBehandlingTsType';
 import FormkravMellomlagretDataType from '../types/FormkravMellomlagretDataType';
@@ -100,8 +101,6 @@ interface OwnProps {
   avsluttedeBehandlinger: AvsluttetBehandling[];
   readOnly: boolean;
   lagreFormkravVurdering: (data: FormkravMellomlagretDataType) => void;
-  formData?: FormValues;
-  setFormData: (data: FormValues) => void;
 }
 
 /**
@@ -118,13 +117,13 @@ const FormkravKlageFormNfp: FunctionComponent<OwnProps> = ({
   avsluttedeBehandlinger,
   submitCallback,
   lagreFormkravVurdering,
-  formData,
-  setFormData,
 }) => {
   const intl = useIntl();
 
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
   const klageBareVedtakOptions = getKlagBareVedtak(avsluttedeBehandlinger, intl, getKodeverknavn);
+
+  const { formData, setFormData } = useFormData<FormValues>();
 
   const initialValues = useMemo(() => buildInitialValues(klageVurdering), [klageVurdering]);
   const formMethods = useForm<FormValues>({

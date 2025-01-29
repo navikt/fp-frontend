@@ -2,7 +2,7 @@ import React, { FunctionComponent, useCallback, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BodyShort,Detail, Heading, Panel } from '@navikt/ds-react';
+import { BodyShort, Detail, Heading, Panel } from '@navikt/ds-react';
 import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { DateLabel, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -21,6 +21,7 @@ import {
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import { Aksjonspunkt, AlleKodeverk, Behandling, FamilieHendelse, Soknad } from '@navikt/fp-types';
 import { SoknadsfristAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { useFormData } from '@navikt/fp-utils';
 
 import styles from './erSoknadsfristVilkaretOppfyltForm.module.css';
 
@@ -88,8 +89,6 @@ interface OwnProps {
   readOnly: boolean;
   readOnlySubmitButton: boolean;
   alleKodeverk: AlleKodeverk;
-  formData?: FormValues;
-  setFormData: (data: FormValues) => void;
 }
 
 /**
@@ -107,12 +106,12 @@ const ErSoknadsfristVilkaretOppfyltForm: FunctionComponent<OwnProps> = ({
   aksjonspunkter,
   status,
   submitCallback,
-  formData,
-  setFormData,
 }) => {
   const intl = useIntl();
 
   const initialValues = useMemo(() => buildInitialValues(aksjonspunkter, status), [aksjonspunkter, status]);
+
+  const { formData, setFormData } = useFormData<FormValues>();
   const formMethods = useForm<FormValues>({
     defaultValues: formData || initialValues,
   });

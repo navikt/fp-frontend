@@ -8,7 +8,7 @@ import { Form } from '@navikt/ft-form-hooks';
 import { OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 
-import { createMedlemskapInitialValues,MedlemskapVurdering, MedlemskapVurderinger } from '@navikt/fp-fakta-medlemskap';
+import { createMedlemskapInitialValues, MedlemskapVurdering, MedlemskapVurderinger } from '@navikt/fp-fakta-medlemskap';
 import {
   AksjonspunktKode,
   AksjonspunktStatus,
@@ -26,6 +26,7 @@ import {
 } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import styles from './vilkarresultatMedOverstyringForm.module.css';
+import { useFormData } from '@navikt/fp-utils';
 
 const isOverridden = (aksjonspunkter: Aksjonspunkt[], aksjonspunktCode: string): boolean =>
   aksjonspunkter.some(ap => ap.definisjon === aksjonspunktCode);
@@ -131,8 +132,6 @@ interface OwnProps {
   overstyringApKode: OverstyringAksjonspunkter;
   lovReferanse?: string;
   erIkkeGodkjentAvBeslutter: boolean;
-  formData?: FormValues;
-  setFormData: (data: FormValues) => void;
 }
 
 /**
@@ -158,8 +157,6 @@ const VilkarresultatMedOverstyringForm: FunctionComponent<OwnProps> = ({
   submitCallback,
   erIkkeGodkjentAvBeslutter,
   status,
-  formData,
-  setFormData,
 }) => {
   const initialValues = useMemo(
     () =>
@@ -172,6 +169,8 @@ const VilkarresultatMedOverstyringForm: FunctionComponent<OwnProps> = ({
       ),
     [aksjonspunkter, status, overstyringApKode, behandlingsresultat],
   );
+
+  const { formData, setFormData } = useFormData<FormValues>();
   const formMethods = useForm<FormValues>({
     defaultValues: formData || initialValues,
   });

@@ -19,6 +19,7 @@ import {
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import { Aksjonspunkt, AlleKodeverk, Dokument, InnsynDokument, InnsynVedtaksdokument } from '@navikt/fp-types';
 import { VurderInnsynAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { useFormData } from '@navikt/fp-utils';
 
 import DocumentListInnsyn from './DocumentListInnsyn';
 import VedtakDocuments from './VedtakDocuments';
@@ -106,8 +107,6 @@ interface OwnProps {
   submitCallback: (data: VurderInnsynAp) => Promise<void>;
   readOnly: boolean;
   readOnlySubmitButton: boolean;
-  formData?: FormValues;
-  setFormData: (data: FormValues) => void;
 }
 
 /**
@@ -128,8 +127,6 @@ const InnsynForm: FunctionComponent<OwnProps> = ({
   aksjonspunkter,
   submitCallback,
   saksNr,
-  formData,
-  setFormData,
 }) => {
   const intl = useIntl();
 
@@ -144,6 +141,8 @@ const InnsynForm: FunctionComponent<OwnProps> = ({
       ),
     [innsynMottattDato, innsynResultatType, fristBehandlingPåVent, innsynDokumenter, aksjonspunkter],
   );
+
+  const { formData, setFormData } = useFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
     defaultValues: formData || initialValues,

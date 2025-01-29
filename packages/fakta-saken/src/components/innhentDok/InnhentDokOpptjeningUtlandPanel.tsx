@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback } from 'react';
+import { FunctionComponent, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -11,6 +11,7 @@ import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-f
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt } from '@navikt/fp-types';
 import { MerkOpptjeningUtlandAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { useFormData } from '@navikt/fp-utils';
 
 import styles from './innhentDokOpptjeningUtlandPanel.module.css';
 
@@ -37,8 +38,6 @@ interface OwnProps {
   submitCallback: (data: MerkOpptjeningUtlandAp) => Promise<void>;
   aksjonspunkt: Aksjonspunkt;
   dokStatus?: string;
-  formData: FormValues;
-  setFormData: (data: FormValues) => void;
 }
 
 const InnhentDokOpptjeningUtlandPanel: FunctionComponent<OwnProps> = ({
@@ -49,10 +48,10 @@ const InnhentDokOpptjeningUtlandPanel: FunctionComponent<OwnProps> = ({
   submittable,
   submitCallback,
   dokStatus,
-  formData,
-  setFormData,
 }) => {
   const intl = useIntl();
+
+  const { formData, setFormData } = useFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
     defaultValues: formData || {

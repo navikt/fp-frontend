@@ -1,4 +1,4 @@
-import { use } from 'react';
+import { ComponentProps, use } from 'react';
 import { useIntl } from 'react-intl';
 
 import { TilbakekrevingAksjonspunktCodes, TilbakekrevingProsessIndex } from '@navikt/ft-prosess-tilbakekreving';
@@ -8,6 +8,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { isAksjonspunktOpen, KodeverkType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { Aksjonspunkt, AlleKodeverkTilbakekreving } from '@navikt/fp-types';
+import { useFormData } from '@navikt/fp-utils';
 
 import { BeregnBeløpParams, useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
@@ -50,7 +51,7 @@ export const TilbakekrevingProsessInitPanel = ({ ...props }: Props & ProsessPane
       hentOverstyrtStatus={finnTilbakekrevingStatus(standardPanelProps.aksjonspunkter)}
     >
       {perioderForeldelse && vilkårvurderingsperioder && vilkårvurdering ? (
-        <TilbakekrevingProsessIndex
+        <Wrapper
           perioderForeldelse={perioderForeldelse}
           vilkarvurderingsperioder={vilkårvurderingsperioder}
           vilkarvurdering={vilkårvurdering}
@@ -65,6 +66,11 @@ export const TilbakekrevingProsessInitPanel = ({ ...props }: Props & ProsessPane
       )}
     </ProsessDefaultInitPanel>
   );
+};
+
+const Wrapper = (props: ComponentProps<typeof TilbakekrevingProsessIndex>) => {
+  const { formData, setFormData } = useFormData();
+  return <TilbakekrevingProsessIndex {...props} formData={formData} setFormData={setFormData} />;
 };
 
 const finnTilbakekrevingStatus = (aksjonspunkter: Aksjonspunkt[]): string => {

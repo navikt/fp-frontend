@@ -23,45 +23,10 @@ type Props = {
 
 export const BehandlingDataContext = createContext<ContextData>({} as ContextData);
 
-export const BehandlingDataProvider = ({
-  children,
-  behandling,
-  alleBehandlinger,
-  fagsak,
-  rettigheter,
-  lagreAksjonspunkter,
-  lagreOverstyrteAksjonspunkter,
-  setSkalOppdatereEtterBekreftelseAvAp,
-  alleKodeverk,
-  hentOgSettBehandling,
-  oppdaterProsessStegOgFaktaPanelIUrl,
-}: Props): JSX.Element => {
-  const values = useMemo(
-    () => ({
-      behandling,
-      alleBehandlinger,
-      fagsak,
-      rettigheter,
-      lagreAksjonspunkter,
-      lagreOverstyrteAksjonspunkter,
-      setSkalOppdatereEtterBekreftelseAvAp,
-      alleKodeverk,
-      hentOgSettBehandling,
-      oppdaterProsessStegOgFaktaPanelIUrl,
-    }),
-    [
-      behandling,
-      alleBehandlinger,
-      fagsak,
-      rettigheter,
-      lagreAksjonspunkter,
-      lagreOverstyrteAksjonspunkter,
-      setSkalOppdatereEtterBekreftelseAvAp,
-      alleKodeverk,
-      hentOgSettBehandling,
-      oppdaterProsessStegOgFaktaPanelIUrl,
-    ],
-  );
+export const BehandlingDataProvider = (props: Props): JSX.Element => {
+  const { children, ...otherProps } = props;
+
+  const values = useMemo(() => otherProps, [otherProps]);
 
   return <BehandlingDataContext.Provider value={values}>{children}</BehandlingDataContext.Provider>;
 };

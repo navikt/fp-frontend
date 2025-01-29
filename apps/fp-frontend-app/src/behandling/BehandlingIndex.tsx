@@ -43,8 +43,6 @@ export const BehandlingIndex = ({
   fagsakData,
   setBehandlingUuidFraUrl,
 }: Props) => {
-  const { addErrorMessage } = useRestApiErrorDispatcher();
-
   const { selected: behandlingUuid } = useTrackRouteParam<string>({
     paramName: 'behandlingUuid',
     parse: behandlingUuidFromUrl => behandlingUuidFromUrl,
@@ -54,18 +52,43 @@ export const BehandlingIndex = ({
     setBehandlingUuidFraUrl(behandlingUuid);
   }, [behandlingUuid]);
 
-  const initFetchQuery = useQuery(initFetchOptions());
-
   if (!behandling) {
     return <LoadingPanel />;
   }
+
+  return (
+    <BehandlingIndexWrapper
+      behandling={behandling}
+      setBehandling={setBehandling}
+      hentOgSettBehandling={hentOgSettBehandling}
+      fagsakData={fagsakData}
+    />
+  );
+};
+
+interface BehandlingIndexWrapperProps {
+  behandling: Behandling;
+  setBehandling: (behandling: Behandling) => void;
+  hentOgSettBehandling: () => void;
+  fagsakData: FagsakData;
+}
+
+export const BehandlingIndexWrapper = ({
+  behandling,
+  setBehandling,
+  hentOgSettBehandling,
+  fagsakData,
+}: BehandlingIndexWrapperProps) => {
+  const { addErrorMessage } = useRestApiErrorDispatcher();
+
+  const initFetchQuery = useQuery(initFetchOptions());
 
   const fagsak = fagsakData.getFagsak();
   const rettigheter = getAccessRights(
     notEmpty(initFetchQuery.data).innloggetBruker,
     fagsak.status,
-    behandling?.status,
-    behandling?.type,
+    behandling.status,
+    behandling.type,
   );
 
   const [skalOppdatereEtterBekreftelseAvAp, setSkalOppdatereEtterBekreftelseAvAp] = useState(true);

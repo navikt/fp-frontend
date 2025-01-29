@@ -1,4 +1,4 @@
-import { use } from 'react';
+import { ComponentProps, use } from 'react';
 import { useIntl } from 'react-intl';
 
 import {
@@ -10,6 +10,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { AlleKodeverkTilbakekreving } from '@navikt/fp-types';
+import { useFormData } from '@navikt/fp-utils';
 
 import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
@@ -50,7 +51,7 @@ export const FeilutbetalingFaktaInitPanel = ({
       skalPanelVisesIMeny={harLenke(behandling, 'FEILUTBETALING_FAKTA')}
     >
       {feilutbetalingFakta && feilutbetalingÅrsak ? (
-        <FeilutbetalingFaktaIndex
+        <Wrapper
           feilutbetalingFakta={feilutbetalingFakta}
           feilutbetalingAarsak={feilutbetalingÅrsak}
           fagsakYtelseTypeKode={fagsak.fagsakYtelseType}
@@ -65,4 +66,9 @@ export const FeilutbetalingFaktaInitPanel = ({
       )}
     </FaktaDefaultInitPanel>
   );
+};
+
+const Wrapper = (props: ComponentProps<typeof FeilutbetalingFaktaIndex>) => {
+  const { formData, setFormData } = useFormData();
+  return <FeilutbetalingFaktaIndex {...props} formData={formData} setFormData={setFormData} />;
 };

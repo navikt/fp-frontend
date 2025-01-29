@@ -29,6 +29,7 @@ import {
   FodselOgTilrettelegging,
 } from '@navikt/fp-types';
 import { BekreftSvangerskapspengervilkarAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { useFormData } from '@navikt/fp-utils';
 
 const finnesUttakPåArbfor = (arbfor: ArbeidsforholdFodselOgTilrettelegging): boolean => {
   const finnesAnnenTilretteleggingEnnHel = arbfor.tilretteleggingDatoer.some(
@@ -79,8 +80,6 @@ interface OwnProps {
   alleKodeverk: AlleKodeverk;
   erIkkeGodkjentAvBeslutter: boolean;
   svangerskapspengerTilrettelegging: FodselOgTilrettelegging;
-  formData?: FormValues;
-  setFormData: (data: FormValues) => void;
 }
 
 /**
@@ -97,8 +96,6 @@ const SvangerskapVilkarForm: FunctionComponent<OwnProps> = ({
   alleKodeverk,
   submitCallback,
   status,
-  formData,
-  setFormData,
 }) => {
   const finnesUttak = useMemo(
     () => finnesInnvilgetUttak(svangerskapspengerTilrettelegging),
@@ -111,6 +108,7 @@ const SvangerskapVilkarForm: FunctionComponent<OwnProps> = ({
     () => buildInitialValues(aksjonspunkter, status, behandlingsresultat),
     [behandlingsresultat, aksjonspunkter, status],
   );
+  const { formData, setFormData } = useFormData<FormValues>();
   const formMethods = useForm<FormValues>({
     defaultValues: formData || initialValues,
   });

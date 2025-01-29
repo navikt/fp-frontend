@@ -9,6 +9,7 @@ import { FaktaBegrunnelseTextField } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, DokumentasjonVurderingBehov } from '@navikt/fp-types';
 import { VurderDokumentasjonAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { useFormData } from '@navikt/fp-utils';
 
 import UttakDokumentasjonFaktaTable from './UttakDokumentasjonFaktaTable/UttakDokumentasjonFaktaTable';
 
@@ -18,8 +19,6 @@ interface OwnProps {
   submitCallback: (aksjonspunkter: VurderDokumentasjonAp) => Promise<void>;
   readOnly: boolean;
   submittable: boolean;
-  formData: { dokBehov: DokumentasjonVurderingBehov[]; begrunnelse: string };
-  setFormData: (data: { dokBehov: DokumentasjonVurderingBehov[]; begrunnelse: string }) => void;
 }
 
 const UttakDokumentasjonFaktaForm: FunctionComponent<OwnProps> = ({
@@ -28,10 +27,10 @@ const UttakDokumentasjonFaktaForm: FunctionComponent<OwnProps> = ({
   readOnly,
   submittable,
   submitCallback,
-  formData,
-  setFormData,
 }) => {
   const intl = useIntl();
+
+  const { formData, setFormData } = useFormData<{ dokBehov: DokumentasjonVurderingBehov[]; begrunnelse: string }>();
 
   const [erBekreftKnappTrykket, setErBekreftKnappTrykket] = useState(false);
   const [dokBehov, setDokBehov] = useState<DokumentasjonVurderingBehov[]>(

@@ -6,7 +6,7 @@ import {
   KlageVurdering as klageVurderingCodes,
   KlageVurderingOmgjoer as klageVurderingOmgjoerType,
 } from '@navikt/fp-kodeverk';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, Behandling, Fagsak, KlageVurdering } from '@navikt/fp-types';
 
 import { KlagevurderingProsessIndex } from './KlagevurderingProsessIndex';
@@ -20,6 +20,7 @@ const behandling = {
 const meta = {
   title: 'prosess/klage/prosess-klagevurdering',
   component: KlagevurderingProsessIndex,
+  decorators: [withFormData],
   args: {
     behandling,
     alleKodeverk: alleKodeverk as any,
@@ -32,7 +33,6 @@ const meta = {
     status: '',
     vilkar: [],
     alleMerknaderFraBeslutter: {},
-    setFormData: () => undefined,
     fagsak: {} as Fagsak,
   },
 } satisfies Meta<typeof KlagevurderingProsessIndex>;

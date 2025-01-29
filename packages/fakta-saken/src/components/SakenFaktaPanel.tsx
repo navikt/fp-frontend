@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { HStack, VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktKode,FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Fagsak, Soknad } from '@navikt/fp-types';
 import {
   AvklarDekningsgradAp,
@@ -34,8 +34,6 @@ interface OwnProps {
   readOnly: boolean;
   submittable: boolean;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
-  formData?: any;
-  setFormData: (data: any) => void;
   kanOverstyreAccess: boolean;
 }
 
@@ -52,8 +50,6 @@ const SakenFaktaPanel: FunctionComponent<OwnProps> = ({
   submitCallback,
   readOnly,
   submittable,
-  formData,
-  setFormData,
   kanOverstyreAccess,
 }) => {
   const automatiskMarkeringAvUtenlandssakAp = aksjonspunkter.find(
@@ -101,8 +97,6 @@ const SakenFaktaPanel: FunctionComponent<OwnProps> = ({
               submittable={submittable}
               submitCallback={submitCallback}
               alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-              formData={formData}
-              setFormData={setFormData}
             />
           )}
           {fagsak.fagsakYtelseType !== FagsakYtelseType.SVANGERSKAPSPENGER && !!soknad && (
@@ -112,8 +106,6 @@ const SakenFaktaPanel: FunctionComponent<OwnProps> = ({
               readOnly={readOnly}
               alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
               soknad={soknad}
-              formData={formData}
-              setFormData={setFormData}
             />
           )}
         </HStack>

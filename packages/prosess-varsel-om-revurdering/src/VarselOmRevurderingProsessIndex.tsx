@@ -29,8 +29,6 @@ export const VarselOmRevurderingProsessIndex = ({
   previewCallback,
   isReadOnly,
   alleKodeverk,
-  formData,
-  setFormData,
 }: Props & StandardProsessPanelProps) => (
   <RawIntlProvider value={intl}>
     <VarselOmRevurderingForm
@@ -46,8 +44,6 @@ export const VarselOmRevurderingProsessIndex = ({
       previewCallback={previewCallback}
       readOnly={isReadOnly}
       alleKodeverk={alleKodeverk}
-      formData={formData}
-      setFormData={setFormData}
     />
   </RawIntlProvider>
 );

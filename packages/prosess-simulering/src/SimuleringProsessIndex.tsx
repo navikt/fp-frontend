@@ -35,8 +35,6 @@ export const SimuleringProsessIndex = ({
   isReadOnly,
   isAksjonspunktOpen,
   previewFptilbakeCallback,
-  formData,
-  setFormData,
 }: Props & StandardProsessPanelProps) => (
   <RawIntlProvider value={intl}>
     <SimuleringPanel
@@ -50,8 +48,6 @@ export const SimuleringProsessIndex = ({
       readOnly={isReadOnly}
       isApOpen={isAksjonspunktOpen}
       previewCallback={previewFptilbakeCallback}
-      formData={formData}
-      setFormData={setFormData}
     />
   </RawIntlProvider>
 );

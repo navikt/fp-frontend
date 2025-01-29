@@ -2,7 +2,7 @@ import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
 import { Behandling } from '@navikt/fp-types';
 
 import { VergeFaktaIndex } from './VergeFaktaIndex';
@@ -29,12 +29,12 @@ const merknaderFraBeslutter = {
 const meta = {
   title: 'fakta/fakta-verge',
   component: VergeFaktaIndex,
+  decorators: [withFormData],
   args: {
     submitCallback: action('button-click') as (data: any) => Promise<void>,
     readOnly: false,
     harApneAksjonspunkter: true,
     submittable: true,
-    setFormData: () => undefined,
     verge,
     aksjonspunkter,
     alleKodeverk: alleKodeverk as any,

@@ -11,6 +11,4 @@ export type StandardFaktaPanelProps = Readonly<{
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   submitCallback: (aksjonspunktData: any) => Promise<void>;
   alleKodeverk: AlleKodeverk;
-  formData?: any;
-  setFormData: (data: any) => void;
 }>;

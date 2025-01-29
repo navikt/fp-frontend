@@ -60,7 +60,7 @@ export const ProsessDefaultInitPanel = ({
       erAksjonspunktOpent={standardPanelProps.isAksjonspunktOpen}
       status={status}
     >
-      <FormDataProvider>{skalVisePanel ? children : null}</FormDataProvider>
+      <FormDataProvider behandling={behandling}>{skalVisePanel ? children : null}</FormDataProvider>
     </ProsessPanelWrapper>
   );
 };

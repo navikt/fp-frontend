@@ -1,4 +1,4 @@
-import { use, useEffect, useState } from 'react';
+import { use } from 'react';
 
 import {
   AksjonspunktStatus,
@@ -96,7 +96,6 @@ export const useStandardProsessPanelProps = (
   vilkarKoder?: VilkarType[],
   lagringSideEffekter?: (aksjonspunktModeller: any) => () => void,
 ): StandardProsessPanelProps => {
-  const [formData, setFormData] = useState();
   const {
     behandling,
     rettigheter,
@@ -108,12 +107,6 @@ export const useStandardProsessPanelProps = (
   } = use(BehandlingDataContext);
 
   const { aksjonspunkt: aksjonspunkter, vilkår } = behandling;
-
-  useEffect(() => {
-    if (formData) {
-      setFormData(undefined);
-    }
-  }, [behandling.versjon]);
 
   const aksjonspunkterForSteg =
     aksjonspunkter && aksjonspunktKoder
@@ -159,7 +152,5 @@ export const useStandardProsessPanelProps = (
     readOnlySubmitButton,
     submitCallback,
     status,
-    formData,
-    setFormData,
   };
 };

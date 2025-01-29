@@ -1,4 +1,4 @@
-import { use } from 'react';
+import { ComponentProps, use } from 'react';
 import { useIntl } from 'react-intl';
 
 import {
@@ -14,6 +14,7 @@ import { useQuery } from '@tanstack/react-query';
 import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkar, Vilkarperiode } from '@navikt/fp-types';
+import { useFormData } from '@navikt/fp-utils';
 
 import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
@@ -59,7 +60,7 @@ export const BeregningFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId, ...prop
       skalPanelVisesIMeny={harLenke(behandling, 'BEREGNINGSGRUNNLAG')}
     >
       {!isFetching ? (
-        <BeregningFaktaIndex
+        <Wrapper
           {...standardPanelProps}
           kodeverkSamling={standardPanelProps.alleKodeverk}
           vilkar={lagBGVilkar(behandling?.vilkår, beregningsgrunnlag)}
@@ -74,6 +75,11 @@ export const BeregningFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId, ...prop
       )}
     </FaktaDefaultInitPanel>
   );
+};
+
+const Wrapper = (props: ComponentProps<typeof BeregningFaktaIndex>) => {
+  const { formData, setFormData } = useFormData();
+  return <BeregningFaktaIndex {...props} formData={formData} setFormData={setFormData} />;
 };
 
 const mapBGKodeTilFpsakKode = (bgKode: string): string => {

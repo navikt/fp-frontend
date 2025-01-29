@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback, useEffect, useMemo, useState } from 'react';
+import { FunctionComponent, useCallback, useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 
@@ -34,6 +34,7 @@ import {
   Ytelsefordeling,
 } from '@navikt/fp-types';
 import { BekreftUttaksperioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { useFormData } from '@navikt/fp-utils';
 
 import KontrollerFaktaPeriodeMedApMarkering, { PeriodeApType } from '../typer/kontrollerFaktaPeriodeMedApMarkering';
 import UttakFaktaTable from './UttakFaktaTable';
@@ -165,8 +166,6 @@ interface OwnProps {
   alleKodeverk: AlleKodeverk;
   aksjonspunkter: Aksjonspunkt[];
   readOnly: boolean;
-  formData: { uttakPerioder: KontrollerFaktaPeriodeMedApMarkering[]; begrunnelse: string };
-  setFormData: (data: { uttakPerioder: KontrollerFaktaPeriodeMedApMarkering[]; begrunnelse: string }) => void;
   submitCallback: (aksjonspunkter: BekreftUttaksperioderAp[]) => Promise<void>;
   submittable: boolean;
   kanOverstyre: boolean;
@@ -181,8 +180,6 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
   alleKodeverk,
   aksjonspunkter,
   readOnly,
-  formData,
-  setFormData,
   submitCallback,
   submittable,
   kanOverstyre,
@@ -195,6 +192,11 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
     );
     return leggTilAksjonspunktMarkering(sortertListe, aksjonspunkter, arbeidsgiverOpplysningerPerId);
   }, [uttakKontrollerFaktaPerioder, aksjonspunkter, arbeidsgiverOpplysningerPerId]);
+
+  const { formData, setFormData } = useFormData<{
+    uttakPerioder: KontrollerFaktaPeriodeMedApMarkering[];
+    begrunnelse: string;
+  }>();
 
   const [uttakPerioder, setUttakPerioder] = useState<KontrollerFaktaPeriodeMedApMarkering[]>(
     formData?.uttakPerioder || sortertePerioder,

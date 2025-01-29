@@ -1,4 +1,4 @@
-import { use, useEffect, useState } from 'react';
+import { use } from 'react';
 
 import { isAksjonspunktOpen } from '@navikt/fp-kodeverk';
 import { Behandling, Fagsak, StandardFaktaPanelProps } from '@navikt/fp-types';
@@ -56,7 +56,6 @@ export const useStandardFaktaPanelProps = (
   aksjonspunktKoder?: string[],
   overstyringApCodes: string[] = [],
 ): StandardFaktaPanelProps => {
-  const [formData, setFormData] = useState();
   const {
     behandling,
     rettigheter,
@@ -66,12 +65,6 @@ export const useStandardFaktaPanelProps = (
     oppdaterProsessStegOgFaktaPanelIUrl,
     alleKodeverk,
   } = use(BehandlingDataContext);
-
-  useEffect(() => {
-    if (formData) {
-      setFormData(undefined);
-    }
-  }, [behandling.versjon]);
 
   const { aksjonspunkt } = behandling;
 
@@ -100,7 +93,5 @@ export const useStandardFaktaPanelProps = (
     readOnly,
     alleMerknaderFraBeslutter,
     submitCallback,
-    formData,
-    setFormData,
   };
 };

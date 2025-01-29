@@ -9,6 +9,7 @@ import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-f
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt } from '@navikt/fp-types';
 import { ManuellKontrollBesteberegningAP } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { useFormData } from '@navikt/fp-utils';
 
 export const buildInitialValues = (aksjonspunkt: Aksjonspunkt): FormValues => {
   const apErLøst = aksjonspunkt.status === AksjonspunktStatus.UTFORT;
@@ -34,8 +35,6 @@ interface OwnProps {
   submitCallback: (data: ManuellKontrollBesteberegningAP) => Promise<void>;
   readOnly: boolean;
   submittable: boolean;
-  formData?: FormValues;
-  setFormData: (data: FormValues) => void;
 }
 
 /**
@@ -48,10 +47,11 @@ const KontrollerBesteberegningPanel: FunctionComponent<OwnProps> = ({
   readOnly,
   submittable,
   submitCallback,
-  formData,
-  setFormData,
 }) => {
   const [erKnappEnabled, toggleKnapp] = useState(false);
+
+  const { formData, setFormData } = useFormData<FormValues>();
+
   const formMethods = useForm<FormValues>({
     defaultValues: formData || buildInitialValues(aksjonspunkt),
   });

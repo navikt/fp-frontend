@@ -31,8 +31,6 @@ interface Props {
   submittable: boolean;
   submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
   alleKodeverk: AlleKodeverk;
-  formData?: any;
-  setFormData: (data: any) => void;
 }
 
 export const UttakFaktaIndex = ({
@@ -47,8 +45,6 @@ export const UttakFaktaIndex = ({
   readOnly,
   kanOverstyre,
   submittable,
-  formData,
-  setFormData,
 }: Props) => (
   <RawIntlProvider value={intl}>
     <UttakFaktaForm
@@ -60,8 +56,6 @@ export const UttakFaktaIndex = ({
       alleKodeverk={alleKodeverk}
       aksjonspunkter={aksjonspunkter}
       submittable={submittable}
-      formData={formData}
-      setFormData={setFormData}
       readOnly={readOnly}
       submitCallback={submitCallback}
       kanOverstyre={kanOverstyre}

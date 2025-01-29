@@ -1,4 +1,4 @@
-import { use, useState } from 'react';
+import { ComponentProps, use, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useNavigate } from 'react-router';
 
@@ -20,6 +20,7 @@ import {
 } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { AlleKodeverkTilbakekreving, Behandlingsresultat } from '@navikt/fp-types';
+import { useFormData } from '@navikt/fp-utils';
 
 import { forhåndsvisVedtaksbrev, useBehandlingApi } from '../../../data/behandlingApi';
 import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
@@ -98,7 +99,7 @@ export const VedtakTilbakekrevingProsessInitPanel = ({
         hentOverstyrtStatus={getVedtakStatus(behandling.behandlingsresultat)}
       >
         {beregningsresultat && vedtaksbrev ? (
-          <VedtakTilbakekrevingProsessIndex
+          <Wrapper
             beregningsresultat={beregningsresultat}
             vedtaksbrev={vedtaksbrev}
             kodeverkSamlingFpTilbake={tilbakekrevingKodeverk}
@@ -113,6 +114,11 @@ export const VedtakTilbakekrevingProsessInitPanel = ({
       </ProsessDefaultInitPanel>
     </>
   );
+};
+
+const Wrapper = (props: ComponentProps<typeof VedtakTilbakekrevingProsessIndex>) => {
+  const { formData, setFormData } = useFormData();
+  return <VedtakTilbakekrevingProsessIndex {...props} formData={formData} setFormData={setFormData} />;
 };
 
 const erTilbakekrevingÅrsakKlage = (årsak: string): boolean =>

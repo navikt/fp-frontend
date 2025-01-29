@@ -1,13 +1,18 @@
-import { use } from 'react';
+import { ComponentProps, use } from 'react';
 import { useIntl } from 'react-intl';
 
-import { ForeldelseAksjonspunktCodes, ForeldelseProsessIndex } from '@navikt/ft-prosess-tilbakekreving-foreldelse';
+import {
+  ForeldelseAksjonspunktCodes,
+  ForeldelseProsessIndex,
+  ForeldelsesresultatActivity,
+} from '@navikt/ft-prosess-tilbakekreving-foreldelse';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { KodeverkType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { AlleKodeverkTilbakekreving } from '@navikt/fp-types';
+import { useFormData } from '@navikt/fp-utils';
 
 import { BeregnBeløpParams, harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
@@ -50,7 +55,7 @@ export const ForeldelseProsessInitPanel = ({ ...props }: Props & ProsessPanelIni
       }
     >
       {perioderForeldelse ? (
-        <ForeldelseProsessIndex
+        <Wrapper
           perioderForeldelse={perioderForeldelse}
           kodeverkSamlingFpTilbake={props.tilbakekrevingKodeverk}
           beregnBelop={(data: BeregnBeløpParams) => beregnBeløp(data)}
@@ -63,4 +68,9 @@ export const ForeldelseProsessInitPanel = ({ ...props }: Props & ProsessPanelIni
       )}
     </ProsessDefaultInitPanel>
   );
+};
+
+const Wrapper = (props: ComponentProps<typeof ForeldelseProsessIndex>) => {
+  const { formData, setFormData } = useFormData<ForeldelsesresultatActivity[]>();
+  return <ForeldelseProsessIndex {...props} formData={formData} setFormData={setFormData} />;
 };

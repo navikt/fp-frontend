@@ -8,7 +8,7 @@ import {
   FagsakYtelseType,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, Behandling, Fagsak, Vilkar } from '@navikt/fp-types';
 
 import { FodselVilkarProsessIndex } from './FodselVilkarProsessIndex';
@@ -22,12 +22,12 @@ const defaultBehandling = {
 const meta = {
   title: 'prosess/prosess-vilkar-fodsel',
   component: FodselVilkarProsessIndex,
+  decorators: [withFormData],
   args: {
     submitCallback: action('button-click') as (data: any) => Promise<any>,
     alleKodeverk: alleKodeverk as any,
     isAksjonspunktOpen: true,
     alleMerknaderFraBeslutter: {},
-    setFormData: () => undefined,
     vilkar: [
       {
         lovReferanse: '§§Dette er en lovreferanse',

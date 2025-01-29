@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback, useState } from 'react';
+import { FunctionComponent, useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
@@ -12,6 +12,7 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { OverstyringPanel } from '@navikt/fp-prosess-felles';
 import { Aksjonspunkt, BeregningsresultatEs } from '@navikt/fp-types';
 import { OverstyringBeregningAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { useFormData } from '@navikt/fp-utils';
 
 import styles from './beregningsresultatEngangsstonadForm.module.css';
 
@@ -48,8 +49,6 @@ interface OwnProps {
   aksjonspunkter: Aksjonspunkt[];
   submitCallback: (data: OverstyringBeregningAp) => Promise<void>;
   erIkkeGodkjentAvBeslutter: boolean;
-  formData?: FormValues;
-  setFormData: (data: FormValues) => void;
 }
 
 /**
@@ -68,10 +67,10 @@ const BeregningsresultatEngangsstonadForm: FunctionComponent<OwnProps> = ({
   },
   aksjonspunkter,
   erIkkeGodkjentAvBeslutter,
-  formData,
-  setFormData,
   submitCallback,
 }) => {
+  const { formData, setFormData } = useFormData<FormValues>();
+
   const formMethods = useForm<FormValues>({
     defaultValues: formData || buildInitialValues(aksjonspunkter, behandlingResultatstruktur),
   });

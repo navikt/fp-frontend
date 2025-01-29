@@ -20,6 +20,7 @@ import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import { Aksjonspunkt, Søknadsfrist } from '@navikt/fp-types';
 import { VurderSoknadsfristAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { useFormData } from '@navikt/fp-utils';
 
 import styles from './vurderSoknadsfristForeldrepengerForm.module.css';
 
@@ -61,8 +62,6 @@ interface OwnProps {
   readOnly: boolean;
   readOnlySubmitButton: boolean;
   isApOpen: boolean;
-  formData?: FormValues;
-  setFormData: (data: FormValues) => void;
 }
 
 /**
@@ -78,13 +77,14 @@ const VurderSoknadsfristForeldrepengerForm: FunctionComponent<OwnProps> = ({
   søknadsfrist,
   isApOpen,
   submitCallback,
-  formData,
-  setFormData,
 }) => {
   const initialValues = useMemo(
     () => buildInitialValues(aksjonspunkter, mottattDato, søknadsfrist),
     [aksjonspunkter, mottattDato, søknadsfrist],
   );
+
+  const { formData, setFormData } = useFormData<FormValues>();
+
   const formMethods = useForm<FormValues>({
     defaultValues: formData || initialValues,
   });

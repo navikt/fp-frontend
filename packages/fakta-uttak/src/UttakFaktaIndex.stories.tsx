@@ -2,7 +2,7 @@ import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, RelasjonsRolleType, UttakPeriodeType } from '@navikt/fp-kodeverk';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
 import { Fagsak } from '@navikt/fp-types';
 
 import OverføringÅrsak from './kodeverk/overføringÅrsak';
@@ -24,6 +24,7 @@ const arbeidsgiverOpplysningerPerId = {
 const meta = {
   title: 'fakta/fakta-uttak',
   component: UttakFaktaIndex,
+  decorators: [withFormData],
   args: {
     fagsak: { relasjonsRolleType: RelasjonsRolleType.MOR } as Fagsak,
     arbeidsgiverOpplysningerPerId,
@@ -31,7 +32,6 @@ const meta = {
     readOnly: false,
     kanOverstyre: false,
     submitCallback: action('button-click') as (data: any) => Promise<void>,
-    setFormData: () => undefined,
     submittable: true,
     faktaArbeidsforhold: [
       {

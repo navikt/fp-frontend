@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactElement, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
-import { FormattedMessage, IntlShape,useIntl } from 'react-intl';
+import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 
 import { BodyShort } from '@navikt/ds-react';
 import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
@@ -17,7 +17,7 @@ import {
   VilkarType,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
-import { ProsessPanelTemplate,ProsessStegBegrunnelseTextFieldNew } from '@navikt/fp-prosess-felles';
+import { ProsessPanelTemplate, ProsessStegBegrunnelseTextFieldNew } from '@navikt/fp-prosess-felles';
 import {
   Aksjonspunkt,
   AlleKodeverk,
@@ -31,6 +31,7 @@ import {
   BekreftSokersOpplysningspliktManuAp,
   OverstyringSokersOpplysingspliktAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { useFormData } from '@navikt/fp-utils';
 
 const orgPrefix = 'org_';
 const aktørPrefix = 'aktør_';
@@ -182,8 +183,6 @@ interface OwnProps {
   alleKodeverk: AlleKodeverk;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   erIkkeGodkjentAvBeslutter: boolean;
-  formData?: FormValues;
-  setFormData: (data: FormValues) => void;
 }
 
 /**
@@ -202,8 +201,6 @@ const SokersOpplysningspliktForm: FunctionComponent<OwnProps> = ({
   alleKodeverk,
   erIkkeGodkjentAvBeslutter,
   submitCallback,
-  formData,
-  setFormData,
 }) => {
   const intl = useIntl();
 
@@ -216,6 +213,8 @@ const SokersOpplysningspliktForm: FunctionComponent<OwnProps> = ({
       buildInitialValues(sorterteManglendeVedlegg, hasSoknad, status, aksjonspunkter, arbeidsgiverOpplysningerPerId),
     [sorterteManglendeVedlegg, hasSoknad, aksjonspunkter, status, arbeidsgiverOpplysningerPerId],
   );
+
+  const { formData, setFormData } = useFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
     defaultValues: formData || initialValues,

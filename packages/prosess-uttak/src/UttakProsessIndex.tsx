@@ -49,8 +49,6 @@ export const UttakProsessIndex = ({
   isReadOnly,
   oppdaterStønadskontoer,
   arbeidsgiverOpplysningerPerId,
-  formData,
-  setFormData,
   fagsak,
 }: Props & StandardProsessPanelProps) => (
   <RawIntlProvider value={intl}>
@@ -69,8 +67,6 @@ export const UttakProsessIndex = ({
       oppdaterStønadskontoer={oppdaterStønadskontoer}
       isReadOnly={isReadOnly}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-      formData={formData}
-      setFormData={setFormData}
       fagsak={fagsak}
     />
   </RawIntlProvider>

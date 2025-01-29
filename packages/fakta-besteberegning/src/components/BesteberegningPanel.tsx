@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
 
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
@@ -8,7 +8,7 @@ import { BesteberegningAP } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import BesteberegningResultatGrunnlagPanel from './BesteberegningResultatGrunnlagPanel';
 import BesteMånederVisningPanel from './BesteManederVisningPanel';
-import KontrollerBesteberegningPanel, { FormValues } from './KontrollerBesteberegningPanel';
+import KontrollerBesteberegningPanel from './KontrollerBesteberegningPanel';
 
 interface OwnProps {
   beregningsgrunnlag: Beregningsgrunnlag;
@@ -18,8 +18,6 @@ interface OwnProps {
   readOnly: boolean;
   submitCallback: (aksjonspunktData: BesteberegningAP) => Promise<void>;
   submittable: boolean;
-  formData?: FormValues;
-  setFormData: (data: any) => void;
 }
 
 /**
@@ -35,8 +33,6 @@ const BesteberegningPanel: FunctionComponent<OwnProps> = ({
   readOnly,
   submitCallback,
   submittable,
-  formData,
-  setFormData,
 }) => {
   const { ytelsesspesifiktGrunnlag, beregningsgrunnlagPeriode } = beregningsgrunnlag;
   const besteberegninggrunnlag = ytelsesspesifiktGrunnlag?.besteberegninggrunnlag;
@@ -57,8 +53,6 @@ const BesteberegningPanel: FunctionComponent<OwnProps> = ({
           submitCallback={submitCallback}
           submittable={submittable}
           readOnly={readOnly}
-          formData={formData}
-          setFormData={setFormData}
         />
       )}
       <BorderBox>

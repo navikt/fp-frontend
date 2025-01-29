@@ -22,8 +22,6 @@ export const UttakDokumentasjonFaktaIndex = ({
   readOnly,
   submittable,
   aksjonspunkter,
-  formData,
-  setFormData,
 }: Props & StandardFaktaPanelProps) => {
   const sorterteBehov = useMemo(
     () => [...dokumentasjonVurderingBehov].sort((krav1, krav2) => dayjs(krav1.fom).diff(dayjs(krav2.fom))),
@@ -37,8 +35,6 @@ export const UttakDokumentasjonFaktaIndex = ({
         submitCallback={submitCallback}
         readOnly={readOnly || aksjonspunkter.length === 0}
         submittable={submittable}
-        formData={formData}
-        setFormData={setFormData}
       />
     </RawIntlProvider>
   );

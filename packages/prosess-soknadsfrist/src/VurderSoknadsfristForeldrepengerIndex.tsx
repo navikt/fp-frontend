@@ -21,8 +21,6 @@ export const VurderSoknadsfristForeldrepengerIndex = ({
   isReadOnly,
   readOnlySubmitButton,
   isAksjonspunktOpen,
-  formData,
-  setFormData,
 }: Props & StandardProsessPanelProps) => (
   <RawIntlProvider value={intl}>
     <VurderSoknadsfristForeldrepengerForm
@@ -33,8 +31,6 @@ export const VurderSoknadsfristForeldrepengerIndex = ({
       readOnly={isReadOnly}
       readOnlySubmitButton={readOnlySubmitButton}
       isApOpen={isAksjonspunktOpen}
-      formData={formData}
-      setFormData={setFormData}
     />
   </RawIntlProvider>
 );

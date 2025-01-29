@@ -9,7 +9,7 @@ import {
   FagsakYtelseType,
   NavBrukerKjonn,
 } from '@navikt/fp-kodeverk';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
 import { Behandling, Fagsak, Soknad } from '@navikt/fp-types';
 
 import { SakenFaktaIndex } from './SakenFaktaIndex';
@@ -53,6 +53,7 @@ const defaultFagsak = {
 const meta = {
   title: 'fakta/fakta-saken',
   component: SakenFaktaIndex,
+  decorators: [withFormData],
   args: {
     fagsak: defaultFagsak,
     submitCallback: promiseAction(),
@@ -60,7 +61,6 @@ const meta = {
     submittable: true,
     alleMerknaderFraBeslutter: {},
     alleKodeverk: alleKodeverk as any,
-    setFormData: () => undefined,
     behandling: behandling as Behandling,
     soknad: defaultSøknad,
     kanOverstyreAccess: true,

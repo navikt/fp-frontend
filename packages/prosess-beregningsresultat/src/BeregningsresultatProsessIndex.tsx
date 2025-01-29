@@ -27,8 +27,6 @@ export const BeregningsresultatProsessIndex = ({
   kanOverstyreAccess,
   toggleOverstyring,
   alleMerknaderFraBeslutter,
-  formData,
-  setFormData,
 }: Props & StandardProsessPanelProps) => (
   <RawIntlProvider value={intl}>
     <BeregningsresultatEngangsstonadForm
@@ -39,8 +37,6 @@ export const BeregningsresultatProsessIndex = ({
       kanOverstyre={kanOverstyreAccess.isEnabled}
       toggleOverstyring={toggleOverstyring}
       erIkkeGodkjentAvBeslutter={aksjonspunkter.some(a => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted)}
-      formData={formData}
-      setFormData={setFormData}
     />
   </RawIntlProvider>
 );

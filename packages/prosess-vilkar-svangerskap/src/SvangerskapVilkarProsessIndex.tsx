@@ -25,8 +25,6 @@ export const SvangerskapVilkarProsessIndex = ({
   alleKodeverk,
   alleMerknaderFraBeslutter,
   svangerskapspengerTilrettelegging,
-  formData,
-  setFormData,
 }: StandardProsessPanelProps & Props) => (
   <RawIntlProvider value={intl}>
     <SvangerskapVilkarForm
@@ -40,8 +38,6 @@ export const SvangerskapVilkarProsessIndex = ({
       alleKodeverk={alleKodeverk}
       svangerskapspengerTilrettelegging={svangerskapspengerTilrettelegging}
       erIkkeGodkjentAvBeslutter={aksjonspunkter.some(a => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted)}
-      formData={formData}
-      setFormData={setFormData}
     />
   </RawIntlProvider>
 );

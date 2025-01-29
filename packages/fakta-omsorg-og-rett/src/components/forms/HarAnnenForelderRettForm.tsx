@@ -9,6 +9,7 @@ import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-f
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
 import { AvklarAnnenforelderHarRettAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { useFormData } from '@navikt/fp-utils';
 
 import { HarAnnenForelderRettFelter } from './HarAnnenForelderRettFelter';
 
@@ -23,9 +24,7 @@ interface Props {
   ytelsefordeling: Ytelsefordeling;
   aksjonspunkt: Aksjonspunkt;
   readOnly: boolean;
-  formData?: FormValues;
   submittable: boolean;
-  setFormData: (data: FormValues) => void;
   submitCallback: (aksjonspunktData: AvklarAnnenforelderHarRettAp) => Promise<void>;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
 }
@@ -34,8 +33,6 @@ export const HarAnnenForelderRettForm = ({
   ytelsefordeling,
   readOnly,
   aksjonspunkt,
-  formData,
-  setFormData,
   submittable,
   submitCallback,
   alleMerknaderFraBeslutter,
@@ -47,6 +44,8 @@ export const HarAnnenForelderRettForm = ({
     skalAvklareAnnenForelderRettEØS,
     skalAvklareAnnenforelderUføretrygd,
   } = ytelsefordeling.rettigheterAnnenforelder ?? {};
+
+  const { formData, setFormData } = useFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
     defaultValues: formData || {

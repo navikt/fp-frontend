@@ -1,4 +1,3 @@
-import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { VStack } from '@navikt/ds-react';
@@ -9,8 +8,8 @@ import { AksjonspunktKode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
 import { StandardFaktaPanelProps } from '@navikt/fp-types';
 
 import { OmsorgOgRettProps } from '../OmsorgOgRettFaktaIndex';
-import { AleneomsorgForm, FormValues as AleneomsorgFormValues } from './forms/AleneomsorgForm';
-import { FormValues as RettFormValues, HarAnnenForelderRettForm } from './forms/HarAnnenForelderRettForm';
+import { AleneomsorgForm } from './forms/AleneomsorgForm';
+import { HarAnnenForelderRettForm } from './forms/HarAnnenForelderRettForm';
 
 export const OmsorgOgRettInfoPanel = ({
   readOnly,
@@ -20,8 +19,6 @@ export const OmsorgOgRettInfoPanel = ({
   aksjonspunkter,
   submittable,
   submitCallback,
-  formData,
-  setFormData,
   alleMerknaderFraBeslutter,
   harApneAksjonspunkter,
 }: OmsorgOgRettProps & StandardFaktaPanelProps) => {
@@ -46,8 +43,6 @@ export const OmsorgOgRettInfoPanel = ({
         <AleneomsorgForm
           ytelsefordeling={ytelsefordeling}
           readOnly={readOnly}
-          formData={formData as AleneomsorgFormValues}
-          setFormData={setFormData}
           submittable={submittable}
           submitCallback={submitCallback}
           alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
@@ -59,8 +54,6 @@ export const OmsorgOgRettInfoPanel = ({
         <HarAnnenForelderRettForm
           ytelsefordeling={ytelsefordeling}
           readOnly={readOnly}
-          formData={formData as RettFormValues}
-          setFormData={setFormData}
           submittable={submittable}
           submitCallback={submitCallback}
           alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}

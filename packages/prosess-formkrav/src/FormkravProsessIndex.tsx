@@ -29,8 +29,6 @@ export const FormkravProsessIndex = ({
   isReadOnly,
   readOnlySubmitButton,
   alleKodeverk,
-  formData,
-  setFormData,
   lagreFormkravVurdering,
 }: Props & StandardProsessPanelProps) => (
   <RawIntlProvider value={intl}>
@@ -44,8 +42,6 @@ export const FormkravProsessIndex = ({
         alleKodeverk={alleKodeverk}
         avsluttedeBehandlinger={avsluttedeBehandlinger}
         lagreFormkravVurdering={lagreFormkravVurdering}
-        formData={formData}
-        setFormData={setFormData}
       />
     )}
     {klageVurdering.klageFormkravResultatKA && (

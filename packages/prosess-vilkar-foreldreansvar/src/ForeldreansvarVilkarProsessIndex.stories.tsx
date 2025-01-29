@@ -2,7 +2,7 @@ import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, Avslagsarsak, VilkarUtfallType } from '@navikt/fp-kodeverk';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, Behandling, Fagsak } from '@navikt/fp-types';
 
 import { ForeldreansvarVilkarProsessIndex } from './ForeldreansvarVilkarProsessIndex';
@@ -16,13 +16,13 @@ const defaultBehandling = {
 const meta = {
   title: 'prosess/prosess-vilkar-foreldreansvar',
   component: ForeldreansvarVilkarProsessIndex,
+  decorators: [withFormData],
   args: {
     submitCallback: action('button-click') as (data: any) => Promise<void>,
     alleKodeverk: alleKodeverk as any,
     isAksjonspunktOpen: true,
     vilkar: [],
     alleMerknaderFraBeslutter: {},
-    setFormData: () => undefined,
     isEngangsstonad: false,
     fagsak: {} as Fagsak,
   },

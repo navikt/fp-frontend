@@ -20,6 +20,7 @@ import {
   BekreftEktefelleAksjonspunktAp,
   BekreftMannAdoptererAksjonspunktAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { useFormData } from '@navikt/fp-utils';
 
 import DokumentasjonFaktaForm, { FormValues as DokFormValues } from './DokumentasjonFaktaForm';
 import EktefelleFaktaForm, { FormValues as EktefelleFormValues } from './EktefelleFaktaForm';
@@ -113,8 +114,6 @@ interface OwnProps {
   soknad: Soknad;
   gjeldendeFamiliehendelse: FamilieHendelse;
   submitCallback: (aksjonspunktData: AksjonspunktData) => Promise<void>;
-  formData?: FormValues;
-  setFormData: (data: FormValues) => void;
 }
 
 /**
@@ -133,9 +132,9 @@ const AdopsjonInfoPanel: FunctionComponent<OwnProps> = ({
   submitCallback,
   soknad,
   gjeldendeFamiliehendelse,
-  formData,
-  setFormData,
 }) => {
+  const { formData, setFormData } = useFormData<FormValues>();
+
   const formMethods = useForm<FormValues>({
     defaultValues: formData || buildInitialValues(soknad, gjeldendeFamiliehendelse, aksjonspunkter),
   });
