@@ -71,8 +71,8 @@ describe('<TotrinnskontrollSakIndex>', () => {
     await userEvent.click(screen.getByText('Fakta'));
     await userEvent.click(screen.getByText('Regel-/lovanvendelse'));
 
-    const begrunnelseInput = utils.getByLabelText('Begrunnelse');
-    await userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
+    const begrunnelseInput = utils.getAllByLabelText('Begrunnelse');
+    await userEvent.type(begrunnelseInput[1], 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Send til saksbehandler'));
 
