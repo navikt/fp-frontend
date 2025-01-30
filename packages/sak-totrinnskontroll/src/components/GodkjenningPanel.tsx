@@ -19,7 +19,8 @@ const harIkkeValgtMinstEnFakta = (getValues: UseFormGetValues<any>, fieldIndex: 
   !getValues(`${fieldIndex}.feilLov`) &&
   !getValues(`${fieldIndex}.feilSkjønn`) &&
   !getValues(`${fieldIndex}.feilUtredning`) &&
-  !getValues(`${fieldIndex}.annet`);
+  !getValues(`${fieldIndex}.feilSaksflyt`) &&
+  !getValues(`${fieldIndex}.feilBegrunnelse`);
 
 type Props = {
   index: number;
