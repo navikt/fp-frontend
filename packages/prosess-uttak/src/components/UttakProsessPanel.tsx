@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement, useCallback, useEffect, useMemo, useState } from 'react';
+import { ReactElement, useCallback, useEffect, useMemo, useState } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 
 import { Alert, Button, Heading, HStack } from '@navikt/ds-react';
@@ -8,10 +8,7 @@ import { AksjonspunktKode, AksjonspunktStatus, PeriodeResultatType, Stonadskonto
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import {
   Aksjonspunkt,
-  AlleKodeverk,
   ArbeidsgiverOpplysningerPerId,
-  Behandling,
-  Fagsak,
   FamilieHendelseSamling,
   PeriodeSoker,
   Personoversikt,
@@ -21,7 +18,7 @@ import {
   Ytelsefordeling,
 } from '@navikt/fp-types';
 import { UttakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData } from '@navikt/fp-utils';
+import { useFormData, usePanelContext } from '@navikt/fp-utils';
 
 import UttakPeriodePanel from './periodeDetaljer/UttakPeriodePanel';
 import DisponibleStonadskontoerPanel from './stonadsdagerOversikt/DisponibleStonadskontoerPanel';
@@ -155,22 +152,16 @@ const transformValues = (perioder: PeriodeSoker[], aksjonspunkter: Aksjonspunkt[
   }));
 };
 
-interface OwnProps {
-  behandling: Behandling;
+interface Props {
   uttaksresultatPeriode: UttaksresultatPeriode;
   uttakStonadskontoer: UttakStonadskontoer;
-  aksjonspunkter: Aksjonspunkt[];
   familiehendelse: FamilieHendelseSamling;
   soknad: Soknad;
   personoversikt: Personoversikt;
   ytelsefordeling: Ytelsefordeling;
-  alleKodeverk: AlleKodeverk;
   kanOverstyre: boolean;
-  submitCallback: (data: UttakAp[]) => Promise<void>;
   oppdaterStønadskontoer: (params: { behandlingUuid: string; perioder: PeriodeSoker[] }) => Promise<any>;
-  isReadOnly: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  fagsak: Fagsak;
 }
 
 const sortByDate = (a: PeriodeSoker, b: PeriodeSoker): number => {
@@ -183,24 +174,21 @@ const sortByDate = (a: PeriodeSoker, b: PeriodeSoker): number => {
   return 0;
 };
 
-const UttakProsessPanel: FunctionComponent<OwnProps> = ({
-  behandling,
+export const UttakProsessPanel = ({
   uttaksresultatPeriode,
   uttakStonadskontoer,
-  aksjonspunkter,
   familiehendelse,
   soknad,
   personoversikt,
   ytelsefordeling,
-  alleKodeverk,
   kanOverstyre,
-  submitCallback,
   oppdaterStønadskontoer,
-  isReadOnly,
   arbeidsgiverOpplysningerPerId,
-  fagsak,
-}) => {
+}: Props) => {
   const intl = useIntl();
+
+  const { fagsak, behandling, submitCallback, alleKodeverk, isReadOnly, aksjonspunkterForPanel } =
+    usePanelContext<UttakAp[]>();
 
   const [erOverstyrt, setErOverstyrt] = useState(false);
   const [isDirty, setIsDirty] = useState(false);
@@ -220,56 +208,52 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
 
   const allePerioder = uttaksresultatPeriode.perioderAnnenpart.concat(perioder);
 
-  const visPeriode = useCallback(
-    (per: PeriodeSoker[]) => {
-      const index = per.findIndex(period => period.periodeResultatType === PeriodeResultatType.MANUELL_BEHANDLING);
-      if (index !== -1) {
-        setValgtPeriodeIndex(index);
-      } else if (valgtPeriodeIndex !== undefined) {
-        setValgtPeriodeIndex(undefined);
-      }
-    },
-    [valgtPeriodeIndex],
-  );
+  const visPeriode = (per: PeriodeSoker[]) => {
+    const index = per.findIndex(period => period.periodeResultatType === PeriodeResultatType.MANUELL_BEHANDLING);
+    if (index !== -1) {
+      setValgtPeriodeIndex(index);
+    } else if (valgtPeriodeIndex !== undefined) {
+      setValgtPeriodeIndex(undefined);
+    }
+  };
 
   useEffect(() => {
     visPeriode(allePerioder);
   }, []);
 
-  const bekreftAksjonspunkter = useCallback(() => {
+  const bekreftAksjonspunkter = () => {
     setIsSubmitting(true);
-    submitCallback(transformValues(perioder, aksjonspunkter));
-  }, [perioder, aksjonspunkter]);
+    submitCallback(transformValues(perioder, aksjonspunkterForPanel));
+  };
 
-  const oppdaterPeriode = useCallback(
-    (oppdatertePerioder: PeriodeSoker[]) => {
-      const andrePerioder = perioder.filter(p => p.fom !== oppdatertePerioder[0].fom);
-      const nyePerioder = [...andrePerioder.concat(oppdatertePerioder)].sort(sortByDate);
-      setPerioder(nyePerioder);
-      setIsDirty(true);
+  const oppdaterPeriode = (oppdatertePerioder: PeriodeSoker[]) => {
+    const andrePerioder = perioder.filter(p => p.fom !== oppdatertePerioder[0].fom);
+    const nyePerioder = [...andrePerioder.concat(oppdatertePerioder)].sort(sortByDate);
+    setPerioder(nyePerioder);
+    setIsDirty(true);
 
-      oppdaterStønadskontoer({ behandlingUuid: behandling.uuid, perioder: nyePerioder }).then(
-        (oppdatertStønadskonto: UttakStonadskontoer) => {
-          setStønadskonto(oppdatertStønadskonto);
-          if (oppdatertePerioder.length === 2) {
-            const index = nyePerioder.findIndex(p => p.fom === oppdatertePerioder[0].fom);
-            setValgtPeriodeIndex(uttaksresultatPeriode.perioderAnnenpart.length + index);
-          } else {
-            visPeriode(uttaksresultatPeriode.perioderAnnenpart.concat(nyePerioder));
-          }
-        },
-      );
-    },
-    [perioder, valgtPeriodeIndex],
-  );
+    oppdaterStønadskontoer({ behandlingUuid: behandling.uuid, perioder: nyePerioder }).then(
+      (oppdatertStønadskonto: UttakStonadskontoer) => {
+        setStønadskonto(oppdatertStønadskonto);
+        if (oppdatertePerioder.length === 2) {
+          const index = nyePerioder.findIndex(p => p.fom === oppdatertePerioder[0].fom);
+          setValgtPeriodeIndex(uttaksresultatPeriode.perioderAnnenpart.length + index);
+        } else {
+          visPeriode(uttaksresultatPeriode.perioderAnnenpart.concat(nyePerioder));
+        }
+      },
+    );
+  };
 
-  const harÅpneAksjonspunkter = aksjonspunkter.some(ap => ap.status === AksjonspunktStatus.OPPRETTET);
-  const erTilknyttetStortinget = aksjonspunkter.some(
+  const harÅpneAksjonspunkter = aksjonspunkterForPanel.some(ap => ap.status === AksjonspunktStatus.OPPRETTET);
+  const erTilknyttetStortinget = aksjonspunkterForPanel.some(
     ap => ap.definisjon === AksjonspunktKode.TILKNYTTET_STORTINGET && harÅpneAksjonspunkter,
   );
 
   const erBekreftKnappDisablet = useMemo(() => {
-    if (aksjonspunkter.some(ap => ap.definisjon === AksjonspunktKode.KONTROLLER_REALITETSBEHANDLING_ELLER_KLAGE)) {
+    if (
+      aksjonspunkterForPanel.some(ap => ap.definisjon === AksjonspunktKode.KONTROLLER_REALITETSBEHANDLING_ELLER_KLAGE)
+    ) {
       return false;
     }
 
@@ -287,10 +271,14 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
   }, [perioder, stønadskonto, valgtPeriodeIndex, isDirty]);
 
   const harIngenEllerLukkedeAksjonspunkt =
-    aksjonspunkter.filter(ap => ap.definisjon !== AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER).length === 0 ||
-    aksjonspunkter.some(ap => ap.toTrinnsBehandlingGodkjent === true && ap.status === AksjonspunktStatus.UTFORT);
+    aksjonspunkterForPanel.filter(ap => ap.definisjon !== AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER).length === 0 ||
+    aksjonspunkterForPanel.some(
+      ap => ap.toTrinnsBehandlingGodkjent === true && ap.status === AksjonspunktStatus.UTFORT,
+    );
 
-  const harOverstyrAp = aksjonspunkter.some(ap => ap.definisjon === AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER);
+  const harOverstyrAp = aksjonspunkterForPanel.some(
+    ap => ap.definisjon === AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER,
+  );
 
   return (
     <>
@@ -303,9 +291,11 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
         )}
       </HStack>
       <VerticalSpacer twentyPx />
-      {aksjonspunkter.length > 0 && harÅpneAksjonspunkter && (
+      {aksjonspunkterForPanel.length > 0 && harÅpneAksjonspunkter && (
         <>
-          <AksjonspunktHelpTextHTML>{hentApTekster(uttaksresultatPeriode, aksjonspunkter)}</AksjonspunktHelpTextHTML>
+          <AksjonspunktHelpTextHTML>
+            {hentApTekster(uttaksresultatPeriode, aksjonspunkterForPanel)}
+          </AksjonspunktHelpTextHTML>
           <VerticalSpacer twentyPx />
         </>
       )}
@@ -376,5 +366,3 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-
-export default UttakProsessPanel;

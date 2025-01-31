@@ -1,8 +1,4 @@
-import { Aksjonspunkt } from './aksjonspunktTsType';
-import { Behandling } from './behandlingTsType';
-import { Fagsak } from './fagsakTsType';
-import { AlleKodeverk } from './kodeverkAlleTsType';
-import { Vilkar } from './vilkarTsType';
+import { Aksjonspunkt, AlleKodeverk, Behandling, Fagsak, Vilkar } from '@navikt/fp-types';
 
 export interface StandardProsessPanelProps {
   behandling: Behandling;

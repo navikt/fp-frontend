@@ -30,7 +30,7 @@ const OVERSTYRING_AP_CODES = [AksjonspunktKode.OVERSTYR_AVKLAR_STARTDATO, Aksjon
 export const SakenFaktaInitPanel = (props: FaktaPanelInitProps) => {
   const intl = useIntl();
 
-  const { behandling, fagsak, rettigheter } = use(BehandlingDataContext);
+  const { behandling, rettigheter } = use(BehandlingDataContext);
 
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER, OVERSTYRING_AP_CODES);
 
@@ -50,8 +50,7 @@ export const SakenFaktaInitPanel = (props: FaktaPanelInitProps) => {
       <SakenFaktaIndex
         soknad={søknad}
         utlandDokStatus={utlandDokStatus}
-        {...standardPanelProps}
-        fagsak={fagsak}
+        submittable={standardPanelProps.submittable}
         kanOverstyreAccess={rettigheter.kanOverstyreAccess.isEnabled}
       />
     </FaktaDefaultInitPanel>

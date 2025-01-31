@@ -1,22 +1,17 @@
-import { FunctionComponent } from 'react';
-
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktKode, KodeverkType } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag } from '@navikt/fp-types';
+import { AksjonspunktKode, getKodeverknavnFn } from '@navikt/fp-kodeverk';
+import { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag } from '@navikt/fp-types';
 import { BesteberegningAP } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { usePanelContext } from '@navikt/fp-utils';
 
 import BesteberegningResultatGrunnlagPanel from './BesteberegningResultatGrunnlagPanel';
 import BesteMånederVisningPanel from './BesteManederVisningPanel';
 import KontrollerBesteberegningPanel from './KontrollerBesteberegningPanel';
 
-interface OwnProps {
+interface Props {
   beregningsgrunnlag: Beregningsgrunnlag;
   arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId;
-  getKodeverkNavn: (kodeverk: string, kodeverkType: KodeverkType) => string;
-  aksjonspunkter: Aksjonspunkt[];
-  readOnly: boolean;
-  submitCallback: (aksjonspunktData: BesteberegningAP) => Promise<void>;
   submittable: boolean;
 }
 
@@ -25,22 +20,18 @@ interface OwnProps {
  *
  * Container komponent. Holder paneler for resultat av besteberegning og inntektsgrunnlag
  */
-const BesteberegningPanel: FunctionComponent<OwnProps> = ({
-  beregningsgrunnlag,
-  arbeidsgiverOpplysninger,
-  getKodeverkNavn,
-  aksjonspunkter,
-  readOnly,
-  submitCallback,
-  submittable,
-}) => {
+export const BesteberegningPanel = ({ beregningsgrunnlag, arbeidsgiverOpplysninger, submittable }: Props) => {
+  const { alleKodeverk, aksjonspunkterForPanel, submitCallback, isReadOnly } = usePanelContext<BesteberegningAP>();
+
+  const getKodeverkNavn = getKodeverknavnFn(alleKodeverk);
+
   const { ytelsesspesifiktGrunnlag, beregningsgrunnlagPeriode } = beregningsgrunnlag;
   const besteberegninggrunnlag = ytelsesspesifiktGrunnlag?.besteberegninggrunnlag;
   if (!besteberegninggrunnlag) {
     return null;
   }
   const førstePeriode = beregningsgrunnlagPeriode[0];
-  const besteberegningAP = aksjonspunkter.find(
+  const besteberegningAP = aksjonspunkterForPanel.find(
     ap =>
       ap.definisjon === AksjonspunktKode.KONTROLLER_AUTOMATISK_BESTEBEREGNING ||
       ap.definisjon === AksjonspunktKode.MANUELL_KONTROLL_AV_BESTEBEREGNING,
@@ -52,7 +43,7 @@ const BesteberegningPanel: FunctionComponent<OwnProps> = ({
           aksjonspunkt={besteberegningAP}
           submitCallback={submitCallback}
           submittable={submittable}
-          readOnly={readOnly}
+          readOnly={isReadOnly}
         />
       )}
       <BorderBox>
@@ -72,5 +63,3 @@ const BesteberegningPanel: FunctionComponent<OwnProps> = ({
     </div>
   );
 };
-
-export default BesteberegningPanel;

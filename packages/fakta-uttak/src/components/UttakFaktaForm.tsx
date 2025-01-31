@@ -1,4 +1,4 @@
-import { FunctionComponent, useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 
@@ -26,7 +26,6 @@ import {
 } from '@navikt/fp-kodeverk';
 import {
   Aksjonspunkt,
-  AlleKodeverk,
   ArbeidsgiverOpplysningerPerId,
   Fagsak,
   FaktaArbeidsforhold,
@@ -34,7 +33,7 @@ import {
   Ytelsefordeling,
 } from '@navikt/fp-types';
 import { BekreftUttaksperioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData } from '@navikt/fp-utils';
+import { useFormData, usePanelContext } from '@navikt/fp-utils';
 
 import KontrollerFaktaPeriodeMedApMarkering, { PeriodeApType } from '../typer/kontrollerFaktaPeriodeMedApMarkering';
 import UttakFaktaTable from './UttakFaktaTable';
@@ -157,41 +156,34 @@ const validerPerioder = (
     : '';
 };
 
-interface OwnProps {
-  fagsak: Fagsak;
+interface Props {
   ytelsefordeling: Ytelsefordeling;
   uttakKontrollerFaktaPerioder: KontrollerFaktaPeriode[];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   faktaArbeidsforhold?: FaktaArbeidsforhold[];
-  alleKodeverk: AlleKodeverk;
-  aksjonspunkter: Aksjonspunkt[];
-  readOnly: boolean;
-  submitCallback: (aksjonspunkter: BekreftUttaksperioderAp[]) => Promise<void>;
   submittable: boolean;
   kanOverstyre: boolean;
 }
 
-const UttakFaktaForm: FunctionComponent<OwnProps> = ({
-  fagsak,
+export const UttakFaktaForm = ({
   uttakKontrollerFaktaPerioder,
   arbeidsgiverOpplysningerPerId,
   faktaArbeidsforhold,
   ytelsefordeling,
-  alleKodeverk,
-  aksjonspunkter,
-  readOnly,
-  submitCallback,
   submittable,
   kanOverstyre,
-}) => {
+}: Props) => {
   const intl = useIntl();
+
+  const { alleKodeverk, submitCallback, fagsak, aksjonspunkterForPanel, isReadOnly } =
+    usePanelContext<BekreftUttaksperioderAp[]>();
 
   const sortertePerioder = useMemo(() => {
     const sortertListe = [...uttakKontrollerFaktaPerioder].sort((krav1, krav2) =>
       dayjs(krav1.fom).diff(dayjs(krav2.fom)),
     );
-    return leggTilAksjonspunktMarkering(sortertListe, aksjonspunkter, arbeidsgiverOpplysningerPerId);
-  }, [uttakKontrollerFaktaPerioder, aksjonspunkter, arbeidsgiverOpplysningerPerId]);
+    return leggTilAksjonspunktMarkering(sortertListe, aksjonspunkterForPanel, arbeidsgiverOpplysningerPerId);
+  }, [uttakKontrollerFaktaPerioder, aksjonspunkterForPanel, arbeidsgiverOpplysningerPerId]);
 
   const { formData, setFormData } = useFormData<{
     uttakPerioder: KontrollerFaktaPeriodeMedApMarkering[];
@@ -206,7 +198,9 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
 
   const formMethods = useForm<{ begrunnelse: string }>({
     defaultValues: {
-      begrunnelse: formData?.begrunnelse || (aksjonspunkter.length > 0 ? aksjonspunkter[0].begrunnelse : undefined),
+      begrunnelse:
+        formData?.begrunnelse ||
+        (aksjonspunkterForPanel.length > 0 ? aksjonspunkterForPanel[0].begrunnelse : undefined),
     },
   });
 
@@ -217,7 +211,9 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
     [uttakPerioder],
   );
 
-  const automatiskeAksjonspunkter = aksjonspunkter.filter(a => a.definisjon !== AksjonspunktKode.OVERSTYR_FAKTA_UTTAK);
+  const automatiskeAksjonspunkter = aksjonspunkterForPanel.filter(
+    a => a.definisjon !== AksjonspunktKode.OVERSTYR_FAKTA_UTTAK,
+  );
   const bekreft = useCallback(
     (begrunnelse: string) => {
       const overstyrAp = [
@@ -253,7 +249,14 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
   const feilmelding = useMemo(() => {
     if (isDirty || formMethods.formState.isDirty) {
       const erMor = fagsak.relasjonsRolleType === RelasjonsRolleType.MOR;
-      return validerPerioder(fagsak, uttakPerioder, erMor, aksjonspunkter, ytelsefordeling.førsteUttaksdato, intl);
+      return validerPerioder(
+        fagsak,
+        uttakPerioder,
+        erMor,
+        aksjonspunkterForPanel,
+        ytelsefordeling.førsteUttaksdato,
+        intl,
+      );
     }
     return null;
   }, [uttakPerioder, isDirty, formMethods.formState.isDirty]);
@@ -265,13 +268,13 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
 
   const [erOverstyrt, setErOverstyrt] = useState(false);
 
-  const harApneAksjonspunkter = aksjonspunkter.some(ap => isAksjonspunktOpen(ap.status));
+  const harApneAksjonspunkter = aksjonspunkterForPanel.some(ap => isAksjonspunktOpen(ap.status));
   const aksjonspunktTekster = useMemo(
-    () => finnAksjonspunktTekster(aksjonspunkter, ytelsefordeling),
-    [aksjonspunkter, ytelsefordeling],
+    () => finnAksjonspunktTekster(aksjonspunkterForPanel, ytelsefordeling),
+    [aksjonspunkterForPanel, ytelsefordeling],
   );
 
-  const erRedigerbart = !readOnly && (automatiskeAksjonspunkter.length > 0 || erOverstyrt);
+  const erRedigerbart = !isReadOnly && (automatiskeAksjonspunkter.length > 0 || erOverstyrt);
 
   return (
     <>
@@ -285,7 +288,7 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
                     <FormattedMessage id="UttakFaktaForm.FaktaUttak" />
                   </Heading>
                 </FlexColumn>
-                {kanOverstyre && !readOnly && automatiskeAksjonspunkter.length === 0 && (
+                {kanOverstyre && !isReadOnly && automatiskeAksjonspunkter.length === 0 && (
                   <FlexColumn>
                     <OverstyringKnapp onClick={() => setErOverstyrt(true)} erOverstyrt={erOverstyrt} />
                   </FlexColumn>
@@ -317,7 +320,7 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
         uttakKontrollerFaktaPerioder={uttakPerioder}
         oppdaterUttakPerioder={setUttakPerioder}
         alleKodeverk={alleKodeverk}
-        readOnly={readOnly}
+        readOnly={isReadOnly}
         setDirty={setIsDirty}
         erRedigerbart={erRedigerbart}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -334,7 +337,7 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
             <VerticalSpacer twentyPx />
             <FaktaSubmitButton
               isSubmittable={isSubmittable}
-              isReadOnly={readOnly}
+              isReadOnly={isReadOnly}
               isSubmitting={formMethods.formState.isSubmitting}
               isDirty={isDirty || formMethods.formState.isDirty}
             />
@@ -344,5 +347,3 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-
-export default UttakFaktaForm;

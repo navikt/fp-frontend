@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement, useCallback, useMemo } from 'react';
+import { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
@@ -14,13 +14,13 @@ import {
   isFieldEdited,
 } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt, AlleKodeverk, FamilieHendelse, Soknad } from '@navikt/fp-types';
+import { Aksjonspunkt, FamilieHendelse, Soknad } from '@navikt/fp-types';
 import {
   BekreftDokumentertDatoAksjonspunktAp,
   BekreftEktefelleAksjonspunktAp,
   BekreftMannAdoptererAksjonspunktAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData } from '@navikt/fp-utils';
+import { useFormData, usePanelContext } from '@navikt/fp-utils';
 
 import DokumentasjonFaktaForm, { FormValues as DokFormValues } from './DokumentasjonFaktaForm';
 import EktefelleFaktaForm, { FormValues as EktefelleFormValues } from './EktefelleFaktaForm';
@@ -103,17 +103,11 @@ type AksjonspunktData = Array<
   BekreftEktefelleAksjonspunktAp | BekreftDokumentertDatoAksjonspunktAp | BekreftMannAdoptererAksjonspunktAp
 >;
 
-interface OwnProps {
-  aksjonspunkter: Aksjonspunkt[];
+interface Props {
   submittable: boolean;
-  readOnly: boolean;
-  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
-  alleKodeverk: AlleKodeverk;
-  hasOpenAksjonspunkter: boolean;
   isForeldrepengerFagsak: boolean;
   soknad: Soknad;
   gjeldendeFamiliehendelse: FamilieHendelse;
-  submitCallback: (aksjonspunktData: AksjonspunktData) => Promise<void>;
 }
 
 /**
@@ -121,80 +115,78 @@ interface OwnProps {
  *
  * Har ansvar for å sette opp formen for faktapenelet til Adopsjonsvilkåret.
  */
-const AdopsjonInfoPanel: FunctionComponent<OwnProps> = ({
-  aksjonspunkter,
-  hasOpenAksjonspunkter,
-  submittable,
-  readOnly,
-  alleMerknaderFraBeslutter,
-  alleKodeverk,
-  isForeldrepengerFagsak,
-  submitCallback,
-  soknad,
-  gjeldendeFamiliehendelse,
-}) => {
+export const AdopsjonInfoPanel = ({ submittable, isForeldrepengerFagsak, soknad, gjeldendeFamiliehendelse }: Props) => {
+  const {
+    alleKodeverk,
+    submitCallback,
+    aksjonspunkterForPanel,
+    harÅpneAksjonspunkter,
+    alleMerknaderFraBeslutter,
+    isReadOnly,
+  } = usePanelContext<AksjonspunktData>();
+
   const { formData, setFormData } = useFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || buildInitialValues(soknad, gjeldendeFamiliehendelse, aksjonspunkter),
+    defaultValues: formData || buildInitialValues(soknad, gjeldendeFamiliehendelse, aksjonspunkterForPanel),
   });
 
   const begrunnelse = formMethods.watch('begrunnelse');
 
-  const editedStatus = useMemo(
-    () => getEditedStatus(soknad, gjeldendeFamiliehendelse),
-    [soknad, gjeldendeFamiliehendelse],
-  );
+  const editedStatus = getEditedStatus(soknad, gjeldendeFamiliehendelse);
 
-  const onSubmit = useCallback(
-    (values: FormValues): Promise<any> => submitCallback(transformValues(values, aksjonspunkter)),
-    [submitCallback, aksjonspunkter],
-  );
+  const onSubmit = (values: FormValues): Promise<any> =>
+    submitCallback(transformValues(values, aksjonspunkterForPanel));
 
   return (
     <>
-      {hasOpenAksjonspunkter && <AksjonspunktHelpTextHTML>{getHelpTexts(aksjonspunkter)}</AksjonspunktHelpTextHTML>}
+      {harÅpneAksjonspunkter && (
+        <AksjonspunktHelpTextHTML>{getHelpTexts(aksjonspunkterForPanel)}</AksjonspunktHelpTextHTML>
+      )}
       <Form formMethods={formMethods} onSubmit={onSubmit} setDataOnUnmount={setFormData}>
         <VerticalSpacer eightPx />
         <HStack gap="4" wrap>
           <div className={styles.leftCol}>
             <DokumentasjonFaktaForm
-              readOnly={readOnly}
+              readOnly={isReadOnly}
               editedStatus={editedStatus}
               erForeldrepengerFagsak={isForeldrepengerFagsak}
               alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-              hasEktefellesBarnAksjonspunkt={hasAksjonspunkt(OM_ADOPSJON_GJELDER_EKTEFELLES_BARN, aksjonspunkter)}
+              hasEktefellesBarnAksjonspunkt={hasAksjonspunkt(
+                OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
+                aksjonspunkterForPanel,
+              )}
             />
           </div>
-          {hasAksjonspunkt(OM_ADOPSJON_GJELDER_EKTEFELLES_BARN, aksjonspunkter) && (
+          {hasAksjonspunkt(OM_ADOPSJON_GJELDER_EKTEFELLES_BARN, aksjonspunkterForPanel) && (
             <EktefelleFaktaForm
-              readOnly={readOnly}
+              readOnly={isReadOnly}
               alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
               ektefellesBarnIsEdited={editedStatus.ektefellesBarn}
             />
           )}
-          {hasAksjonspunkt(OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE, aksjonspunkter) && (
+          {hasAksjonspunkt(OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE, aksjonspunkterForPanel) && (
             <MannAdoptererAleneFaktaForm
               farSokerType={soknad.farSokerType}
-              readOnly={readOnly}
+              readOnly={isReadOnly}
               mannAdoptererAlene={editedStatus.mannAdoptererAlene}
               alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
               alleKodeverk={alleKodeverk}
             />
           )}
         </HStack>
-        {aksjonspunkter && aksjonspunkter.length > 0 && (
+        {aksjonspunkterForPanel && aksjonspunkterForPanel.length > 0 && (
           <>
             <VerticalSpacer twentyPx />
             <FaktaBegrunnelseTextField
               isSubmittable={submittable}
-              isReadOnly={readOnly}
+              isReadOnly={isReadOnly}
               hasBegrunnelse={!!begrunnelse}
             />
             <VerticalSpacer twentyPx />
             <FaktaSubmitButton
               isSubmittable={submittable}
-              isReadOnly={readOnly}
+              isReadOnly={isReadOnly}
               isSubmitting={formMethods.formState.isSubmitting}
               isDirty={formMethods.formState.isDirty}
             />
@@ -204,5 +196,3 @@ const AdopsjonInfoPanel: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-
-export default AdopsjonInfoPanel;

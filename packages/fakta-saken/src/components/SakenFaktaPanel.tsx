@@ -1,66 +1,54 @@
-import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { HStack, VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode, FagsakYtelseType } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt, Fagsak, Soknad } from '@navikt/fp-types';
+import { Aksjonspunkt, Soknad } from '@navikt/fp-types';
 import {
   AvklarDekningsgradAp,
   MerkOpptjeningUtlandAp,
   OverstyringAvklarStartdatoForPeriodenAp,
   OverstyringDekningsgradAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { usePanelContext } from '@navikt/fp-utils';
 
 import DekningradApForm from './dekningsgrad/DekningradApForm';
 import DekningradForm from './dekningsgrad/DekningradForm';
 import InnhentDokOpptjeningUtlandPanel from './innhentDok/InnhentDokOpptjeningUtlandPanel';
 import StartdatoForForeldrepengerperiodenForm from './startdatoForForeldrepenger/StartdatoForForeldrepengerperiodenForm';
 
-interface OwnProps {
-  fagsak: Fagsak;
+interface Props {
   soknad?: Soknad;
-  aksjonspunkter: Aksjonspunkt[];
   dokStatus?: string;
-  harApneAksjonspunkter: boolean;
-  submitCallback: (
-    data:
-      | MerkOpptjeningUtlandAp
-      | OverstyringAvklarStartdatoForPeriodenAp
-      | OverstyringDekningsgradAp
-      | AvklarDekningsgradAp,
-  ) => Promise<void>;
-  readOnly: boolean;
   submittable: boolean;
-  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   kanOverstyreAccess: boolean;
 }
 
 const erMarkertUtenlandssak = (aksjonspunkter: Aksjonspunkt[]): boolean =>
   aksjonspunkter.some(ap => ap.definisjon === AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK);
 
-const SakenFaktaPanel: FunctionComponent<OwnProps> = ({
-  fagsak,
-  soknad,
-  aksjonspunkter,
-  dokStatus,
-  harApneAksjonspunkter,
-  alleMerknaderFraBeslutter,
-  submitCallback,
-  readOnly,
-  submittable,
-  kanOverstyreAccess,
-}) => {
-  const automatiskMarkeringAvUtenlandssakAp = aksjonspunkter.find(
+export const SakenFaktaPanel = ({ soknad, dokStatus, submittable, kanOverstyreAccess }: Props) => {
+  const {
+    aksjonspunkterForPanel,
+    submitCallback,
+    alleMerknaderFraBeslutter,
+    harÅpneAksjonspunkter,
+    fagsak,
+    isReadOnly,
+  } = usePanelContext<
+    MerkOpptjeningUtlandAp | OverstyringAvklarStartdatoForPeriodenAp | OverstyringDekningsgradAp | AvklarDekningsgradAp
+  >();
+
+  const automatiskMarkeringAvUtenlandssakAp = aksjonspunkterForPanel.find(
     ap => ap.definisjon === AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
   );
-  const automatiskAp = aksjonspunkter.find(ap => ap.definisjon === AksjonspunktKode.AVKLAR_DEKNINGSGRAD);
-  const overstyringsAp = aksjonspunkter.find(ap => ap.definisjon === AksjonspunktKode.OVERSTYR_DEKNINGSGRAD);
+  const automatiskAp = aksjonspunkterForPanel.find(ap => ap.definisjon === AksjonspunktKode.AVKLAR_DEKNINGSGRAD);
+  const overstyringsAp = aksjonspunkterForPanel.find(ap => ap.definisjon === AksjonspunktKode.OVERSTYR_DEKNINGSGRAD);
 
   return (
     <>
-      {harApneAksjonspunkter && erMarkertUtenlandssak(aksjonspunkter) && (
+      {harÅpneAksjonspunkter && erMarkertUtenlandssak(aksjonspunkterForPanel) && (
         <>
           <AksjonspunktHelpTextHTML>
             {[<FormattedMessage key="OpptjeningUtland" id="SakenFaktaPanel.OpptjeningUtland" />]}
@@ -68,14 +56,15 @@ const SakenFaktaPanel: FunctionComponent<OwnProps> = ({
           <VerticalSpacer thirtyTwoPx />
         </>
       )}
-      {harApneAksjonspunkter && aksjonspunkter.some(ap => ap.definisjon === AksjonspunktKode.AVKLAR_DEKNINGSGRAD) && (
-        <>
-          <AksjonspunktHelpTextHTML>
-            {[<FormattedMessage key="AvklarDekningsgrad" id="SakenFaktaPanel.AvklarDekningsgrad" />]}
-          </AksjonspunktHelpTextHTML>
-          <VerticalSpacer thirtyTwoPx />
-        </>
-      )}
+      {harÅpneAksjonspunkter &&
+        aksjonspunkterForPanel.some(ap => ap.definisjon === AksjonspunktKode.AVKLAR_DEKNINGSGRAD) && (
+          <>
+            <AksjonspunktHelpTextHTML>
+              {[<FormattedMessage key="AvklarDekningsgrad" id="SakenFaktaPanel.AvklarDekningsgrad" />]}
+            </AksjonspunktHelpTextHTML>
+            <VerticalSpacer thirtyTwoPx />
+          </>
+        )}
       <VStack gap="10">
         {soknad && automatiskAp && (
           <DekningradApForm
@@ -83,7 +72,7 @@ const SakenFaktaPanel: FunctionComponent<OwnProps> = ({
             fagsak={fagsak}
             aksjonspunkt={automatiskAp}
             submitCallback={submitCallback}
-            readOnly={readOnly}
+            readOnly={isReadOnly}
             alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
           />
         )}
@@ -91,8 +80,8 @@ const SakenFaktaPanel: FunctionComponent<OwnProps> = ({
           {automatiskMarkeringAvUtenlandssakAp && (
             <InnhentDokOpptjeningUtlandPanel
               dokStatus={dokStatus}
-              readOnly={readOnly}
-              harApneAksjonspunkter={harApneAksjonspunkter}
+              readOnly={isReadOnly}
+              harApneAksjonspunkter={harÅpneAksjonspunkter}
               aksjonspunkt={automatiskMarkeringAvUtenlandssakAp}
               submittable={submittable}
               submitCallback={submitCallback}
@@ -101,9 +90,11 @@ const SakenFaktaPanel: FunctionComponent<OwnProps> = ({
           )}
           {fagsak.fagsakYtelseType !== FagsakYtelseType.SVANGERSKAPSPENGER && !!soknad && (
             <StartdatoForForeldrepengerperiodenForm
-              aksjonspunkt={aksjonspunkter.find(ap => ap.definisjon === AksjonspunktKode.OVERSTYR_AVKLAR_STARTDATO)}
+              aksjonspunkt={aksjonspunkterForPanel.find(
+                ap => ap.definisjon === AksjonspunktKode.OVERSTYR_AVKLAR_STARTDATO,
+              )}
               submitCallback={submitCallback}
-              readOnly={readOnly}
+              readOnly={isReadOnly}
               alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
               soknad={soknad}
             />
@@ -115,7 +106,7 @@ const SakenFaktaPanel: FunctionComponent<OwnProps> = ({
             fagsak={fagsak}
             aksjonspunkt={overstyringsAp}
             submitCallback={submitCallback}
-            readOnly={readOnly}
+            readOnly={isReadOnly}
             kanOverstyreAccess={kanOverstyreAccess}
           />
         )}
@@ -123,5 +114,3 @@ const SakenFaktaPanel: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-
-export default SakenFaktaPanel;

@@ -1,10 +1,10 @@
 import { ReactElement, use } from 'react';
 
 import { VilkarType } from '@navikt/fp-kodeverk';
-import { StandardProsessPanelProps } from '@navikt/fp-types';
 import { FormDataProvider } from '@navikt/fp-utils';
 
 import { InngangsvilkarPanelInitProps } from '../typer/inngangsvilkarPanelInitProps';
+import { StandardProsessPanelProps } from '../typer/standardProsessPanelPropsTsType';
 import { BehandlingDataContext } from '../utils/behandlingDataContext';
 import { skalViseProsessPanel } from './skalViseProsessPanel';
 import { useInngangsvilkarRegistrerer } from './useInngangsvilkarRegistrerer';
@@ -42,17 +42,9 @@ export const InngangsvilkarDefaultInitPanel = ({
     standardPanelProps.status,
   );
 
-<<<<<<< Updated upstream
   return (
-    <FormDataProvider behandling={standardPanelProps.behandling}>
+    <FormDataProvider behandling={behandling}>
       {!erPanelValgt || !skalVises ? null : renderPanel({ erOverstyrt, toggleOverstyring })}
     </FormDataProvider>
   );
-=======
-  if (!erPanelValgt || !skalVises) {
-    return null;
-  }
-
-  return <FormDataProvider behandling={behandling}>{renderPanel({ erOverstyrt, toggleOverstyring })}</FormDataProvider>;
->>>>>>> Stashed changes
 };

@@ -51,7 +51,13 @@ export const AdopsjonInngangsvilkarFpInitPanel = (props: InngangsvilkarPanelInit
               />
             </PanelOverstyringProvider>
           )}
-          {standardPanelProps.aksjonspunkter.length > 0 && <AdopsjonVilkarProsessIndex {...standardPanelProps} />}
+          {standardPanelProps.aksjonspunkter.length > 0 && (
+            <AdopsjonVilkarProsessIndex
+              status={standardPanelProps.status}
+              readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
+              vilkar={standardPanelProps.vilkar}
+            />
+          )}
         </>
       )}
     />

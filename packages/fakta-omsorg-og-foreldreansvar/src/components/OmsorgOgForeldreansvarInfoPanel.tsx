@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -15,12 +15,12 @@ import {
   Personoversikt,
   RelatertTilgrensedYtelse,
   Soknad,
-  StandardFaktaPanelProps,
 } from '@navikt/fp-types';
 import {
   AvklarFaktaForForeldreansvarAksjonspunktAp,
   AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { usePanelContext } from '@navikt/fp-utils';
 
 import OmsorgOgForeldreansvarFaktaForm, { FormValues as OmsorgFormValues } from './OmsorgOgForeldreansvarFaktaForm';
 
@@ -74,9 +74,7 @@ interface Props {
   personoversikt: Personoversikt;
   gjeldendeFamiliehendelse: FamilieHendelse;
   innvilgetRelatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYtelse[];
-  submitCallback: (
-    data: AvklarFaktaForForeldreansvarAksjonspunktAp | AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp,
-  ) => Promise<void>;
+  submittable: boolean;
 }
 
 /**
@@ -85,26 +83,31 @@ interface Props {
  * Har ansvar for å sette opp form for faktapenelet til Omsorgsvilkåret.
  */
 export const OmsorgOgForeldreansvarInfoPanel = ({
-  harApneAksjonspunkter,
   submittable,
-  readOnly,
   innvilgetRelatertTilgrensendeYtelserForAnnenForelder,
-  alleMerknaderFraBeslutter,
   soknad,
   gjeldendeFamiliehendelse,
   personoversikt,
-  submitCallback,
-  aksjonspunkter,
-  alleKodeverk,
-}: Props & StandardFaktaPanelProps) => {
+}: Props) => {
   const intl = useIntl();
+
+  const {
+    aksjonspunkterForPanel,
+    alleMerknaderFraBeslutter,
+    harÅpneAksjonspunkter,
+    submitCallback,
+    isReadOnly,
+    alleKodeverk,
+  } = usePanelContext<
+    AvklarFaktaForForeldreansvarAksjonspunktAp | AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp
+  >();
 
   const formMethods = useForm<FormValues>({
     defaultValues: buildInitialValues(
       soknad,
       gjeldendeFamiliehendelse,
       innvilgetRelatertTilgrensendeYtelserForAnnenForelder,
-      aksjonspunkter,
+      aksjonspunkterForPanel,
       alleKodeverk,
     ),
   });
@@ -113,21 +116,21 @@ export const OmsorgOgForeldreansvarInfoPanel = ({
 
   const erAksjonspunktForeldreansvar = hasAksjonspunkt(
     AksjonspunktKode.AVKLAR_VILKAR_FOR_FORELDREANSVAR,
-    aksjonspunkter,
+    aksjonspunkterForPanel,
   );
 
   return (
     <Form
       formMethods={formMethods}
-      onSubmit={(values: FormValues) => submitCallback(transformValues(values, aksjonspunkter[0]))}
+      onSubmit={(values: FormValues) => submitCallback(transformValues(values, aksjonspunkterForPanel[0]))}
     >
       <VStack gap="5">
-        {!readOnly && harApneAksjonspunkter && (
+        {!isReadOnly && harÅpneAksjonspunkter && (
           <AksjonspunktHelpTextHTML>{findAksjonspunktHelpTexts(erAksjonspunktForeldreansvar)}</AksjonspunktHelpTextHTML>
         )}
         <OmsorgOgForeldreansvarFaktaForm
           erAksjonspunktForeldreansvar={erAksjonspunktForeldreansvar}
-          readOnly={readOnly}
+          readOnly={isReadOnly}
           vilkarTypes={alleKodeverk[KodeverkType.OMSORGSOVERTAKELSE_VILKAR_TYPE]}
           alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
           soknad={soknad}
@@ -136,7 +139,7 @@ export const OmsorgOgForeldreansvarInfoPanel = ({
         />
         <FaktaBegrunnelseTextField
           isSubmittable={submittable}
-          isReadOnly={readOnly}
+          isReadOnly={isReadOnly}
           hasBegrunnelse={!!begrunnelse}
           label={intl.formatMessage({
             id: erAksjonspunktForeldreansvar
@@ -148,7 +151,7 @@ export const OmsorgOgForeldreansvarInfoPanel = ({
           isSubmittable={submittable}
           isSubmitting={formMethods.formState.isSubmitting}
           isDirty={formMethods.formState.isDirty}
-          isReadOnly={readOnly}
+          isReadOnly={isReadOnly}
         />
       </VStack>
     </Form>

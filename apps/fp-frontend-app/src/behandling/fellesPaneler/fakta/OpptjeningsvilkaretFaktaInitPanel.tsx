@@ -49,11 +49,7 @@ export const OpptjeningsvilkaretFaktaInitPanel = ({
       }
     >
       {!isFetching ? (
-        <OpptjeningFaktaIndex
-          opptjening={opptjening}
-          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          {...standardPanelProps}
-        />
+        <OpptjeningFaktaIndex opptjening={opptjening} arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId} />
       ) : (
         <LoadingPanel />
       )}

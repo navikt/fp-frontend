@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
@@ -15,15 +15,9 @@ import {
 import { dateFormat } from '@navikt/ft-utils';
 
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
-import {
-  Aksjonspunkt,
-  AlleKodeverk,
-  AoIArbeidsforhold,
-  ArbeidOgInntektsmelding,
-  ArbeidsgiverOpplysningerPerId,
-} from '@navikt/fp-types';
+import { AoIArbeidsforhold, ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 import { VurderArbeidsforholdPermisjonAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData } from '@navikt/fp-utils';
+import { useFormData, usePanelContext } from '@navikt/fp-utils';
 
 import ArbeidsforholdFieldArray from './ArbeidsforholdFieldArray';
 
@@ -44,25 +38,15 @@ const getSorterArbeidsforhold =
       arbeidsgiverOpplysningerPerId[a2.arbeidsgiverIdent].navn,
     );
 
-interface OwnProps {
-  saksnummer: string;
-  aksjonspunkter: Aksjonspunkt[];
-  readOnly: boolean;
+interface Props {
   arbeidOgInntekt: ArbeidOgInntektsmelding;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  lagreCallback: (aksjonspunktData: VurderArbeidsforholdPermisjonAp) => Promise<void>;
-  alleKodeverk: AlleKodeverk;
 }
 
-const PermisjonFaktaPanel: FunctionComponent<OwnProps> = ({
-  saksnummer,
-  aksjonspunkter,
-  readOnly,
-  arbeidOgInntekt,
-  arbeidsgiverOpplysningerPerId,
-  lagreCallback,
-  alleKodeverk,
-}) => {
+export const PermisjonFaktaPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysningerPerId }: Props) => {
+  const { aksjonspunkterForPanel, fagsak, submitCallback, isReadOnly, alleKodeverk } =
+    usePanelContext<VurderArbeidsforholdPermisjonAp>();
+
   const arbeidOgInntektMedPermisjon = useMemo(
     () => ({
       inntektsmeldinger: arbeidOgInntekt.inntektsmeldinger,
@@ -85,7 +69,7 @@ const PermisjonFaktaPanel: FunctionComponent<OwnProps> = ({
       arbeidsforhold: sorterteArbeidsforhold.map(a => ({
         permisjonStatus: a.permisjonOgMangel?.permisjonStatus,
       })),
-      begrunnelse: aksjonspunkter[0].begrunnelse,
+      begrunnelse: aksjonspunkterForPanel[0].begrunnelse,
     }),
     [sorterteArbeidsforhold],
   );
@@ -103,7 +87,7 @@ const PermisjonFaktaPanel: FunctionComponent<OwnProps> = ({
     [],
   );
 
-  const harÅpentAksjonspunkt = aksjonspunkter.some(a => a.status === AksjonspunktStatus.OPPRETTET);
+  const harÅpentAksjonspunkt = aksjonspunkterForPanel.some(a => a.status === AksjonspunktStatus.OPPRETTET);
 
   return (
     <>
@@ -134,7 +118,7 @@ const PermisjonFaktaPanel: FunctionComponent<OwnProps> = ({
       <Form
         formMethods={formMethods}
         onSubmit={values =>
-          lagreCallback({
+          submitCallback({
             kode: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_PERMISJON,
             arbeidsforhold: values.arbeidsforhold.map((a, index) => ({
               internArbeidsforholdId: sorterteArbeidsforhold[index].internArbeidsforholdId,
@@ -146,11 +130,11 @@ const PermisjonFaktaPanel: FunctionComponent<OwnProps> = ({
         }
       >
         <ArbeidsforholdFieldArray
-          saksnummer={saksnummer}
+          saksnummer={fagsak.saksnummer}
           sorterteArbeidsforhold={sorterteArbeidsforhold}
           arbeidOgInntekt={arbeidOgInntektMedPermisjon}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          isReadOnly={readOnly}
+          isReadOnly={isReadOnly}
           harÅpentAksjonspunkt={harÅpentAksjonspunkt}
           skjæringstidspunkt={arbeidOgInntektMedPermisjon.skjæringstidspunkt}
           alleKodeverk={alleKodeverk}
@@ -165,10 +149,10 @@ const PermisjonFaktaPanel: FunctionComponent<OwnProps> = ({
           name="begrunnelse"
           validate={[required, minLength3, maxLength1500, hasValidText]}
           maxLength={1500}
-          readOnly={readOnly}
+          readOnly={isReadOnly}
         />
         <VerticalSpacer sixteenPx />
-        {!readOnly && (
+        {!isReadOnly && (
           <Button
             size="small"
             variant="primary"
@@ -182,5 +166,3 @@ const PermisjonFaktaPanel: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-
-export default PermisjonFaktaPanel;

@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren, useCallback, useState } from 'react';
+import { PropsWithChildren, useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
@@ -7,8 +7,9 @@ import { Form } from '@navikt/ft-form-hooks';
 
 import { FaktaBegrunnelseTextField } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, BehandlingType, KodeverkType, VilkarType } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt, AlleKodeverk, Behandling, ManuellBehandlingResultat } from '@navikt/fp-types';
+import { Aksjonspunkt, ManuellBehandlingResultat } from '@navikt/fp-types';
 import { VurderForutgaendeMedlemskapAp, VurderMedlemskapAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { usePanelContext } from '@navikt/fp-utils';
 
 import {
   MedlemskapVurdering,
@@ -20,13 +21,8 @@ import { MedlemskapVurderinger } from './MedlemskapVurderinger';
 
 interface Props {
   submittable: boolean;
-  readOnly: boolean;
-  alleKodeverk: AlleKodeverk;
-  submitCallback: (aksjonspunktData: VurderMedlemskapAp | VurderForutgaendeMedlemskapAp) => Promise<void>;
   aksjonspunkt: Aksjonspunkt;
-  behandling: Behandling;
   manuellBehandlingResultat: ManuellBehandlingResultat | null;
-  ytelse: string;
 }
 
 export const createMedlemskapInitialValues = (
@@ -56,16 +52,10 @@ const ConditionalWrapper = ({ isReadOnly, children }: PropsWithChildren<{ isRead
  *
  * Har ansvar for å vise faktapanelene for medlemskap.
  */
-const VurderMedlemskapAksjonspunktForm: FC<Props> = ({
-  submittable,
-  readOnly,
-  alleKodeverk,
-  submitCallback,
-  aksjonspunkt,
-  behandling,
-  manuellBehandlingResultat,
-  ytelse,
-}) => {
+export const VurderMedlemskapAksjonspunktForm = ({ submittable, aksjonspunkt, manuellBehandlingResultat }: Props) => {
+  const { fagsak, behandling, submitCallback, isReadOnly, alleKodeverk } = usePanelContext<
+    VurderMedlemskapAp | VurderForutgaendeMedlemskapAp
+  >();
   const [submitting, setSubmitting] = useState(false);
 
   const formMethods = useForm<VurderMedlemskapFormValues>({
@@ -95,23 +85,23 @@ const VurderMedlemskapAksjonspunktForm: FC<Props> = ({
   ].sort((k1, k2) => k1.navn.localeCompare(k2.navn));
 
   return (
-    <ConditionalWrapper isReadOnly={readOnly}>
+    <ConditionalWrapper isReadOnly={isReadOnly}>
       <Form formMethods={formMethods} onSubmit={bekreft}>
-        <VStack gap={readOnly ? '2' : '6'}>
+        <VStack gap={isReadOnly ? '2' : '6'}>
           <MedlemskapVurderinger
             erForutgående={erForutgåendeAksjonspunkt}
             erRevurdering={behandling.type === BehandlingType.REVURDERING}
             avslagsarsaker={avslagsarsaker}
-            readOnly={readOnly}
-            ytelse={ytelse}
+            readOnly={isReadOnly}
+            ytelse={fagsak.fagsakYtelseType}
           />
           <FaktaBegrunnelseTextField
             hasReadOnlyLabel
-            isReadOnly={readOnly}
+            isReadOnly={isReadOnly}
             isSubmittable={submittable}
             hasBegrunnelse={!!begrunnelseVerdi}
           />
-          {!readOnly && (
+          {!isReadOnly && (
             <div>
               <Button
                 size="small"
@@ -129,5 +119,3 @@ const VurderMedlemskapAksjonspunktForm: FC<Props> = ({
     </ConditionalWrapper>
   );
 };
-
-export default VurderMedlemskapAksjonspunktForm;

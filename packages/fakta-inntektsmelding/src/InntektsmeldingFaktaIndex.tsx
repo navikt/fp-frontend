@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
 import { CircleFillIcon, CoffeeIcon } from '@navikt/aksel-icons';
@@ -6,14 +6,8 @@ import { BodyShort, HStack, SortState, Table } from '@navikt/ds-react';
 import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
 import { createIntl, formatCurrencyNoKr } from '@navikt/ft-utils';
 
-import {
-  AlleKodeverk,
-  ArbeidsgiverOpplysningerPerId,
-  Behandling,
-  BehandlingAppKontekst,
-  Fagsak,
-  Inntektsmelding,
-} from '@navikt/fp-types';
+import { ArbeidsgiverOpplysningerPerId, Behandling, BehandlingAppKontekst, Inntektsmelding } from '@navikt/fp-types';
+import { usePanelContext } from '@navikt/fp-utils';
 
 import { InntektsmeldingInnhold } from './components/InntektsmeldingInnhold';
 
@@ -25,10 +19,7 @@ const intl = createIntl(messages);
 
 export type InntektsmeldingFaktaProps = {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  behandling: Behandling;
   alleBehandlinger: BehandlingAppKontekst[];
-  fagsak: Fagsak;
-  alleKodeverk: AlleKodeverk;
 };
 
 type TableHeaders = keyof Pick<
@@ -38,12 +29,11 @@ type TableHeaders = keyof Pick<
 
 export const InntektsmeldingFaktaIndex = ({
   arbeidsgiverOpplysningerPerId,
-  fagsak,
   alleBehandlinger,
-  behandling,
-  alleKodeverk,
   inntektsmeldinger,
 }: { inntektsmeldinger: Inntektsmelding[] } & InntektsmeldingFaktaProps) => {
+  const { behandling } = usePanelContext();
+
   // Logikk for å sortere tabell tilpasset fra Aksel-eksempel: https://aksel.nav.no/komponenter/core/table#tabledemo-sortable
   const [sort, setSort] = useState<SortState | undefined>({ orderBy: 'innsendingstidspunkt', direction: 'descending' });
   const handleSort = (sortKey: TableHeaders) => {
@@ -112,9 +102,6 @@ export const InntektsmeldingFaktaIndex = ({
                 key={`${inntektsmelding.journalpostId}-${inntektsmelding.internArbeidsforholdId}`}
                 content={
                   <InntektsmeldingInnhold
-                    alleKodeverk={alleKodeverk}
-                    fagsak={fagsak}
-                    behandling={behandling}
                     alleBehandlinger={alleBehandlinger}
                     arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
                     inntektsmelding={inntektsmelding}

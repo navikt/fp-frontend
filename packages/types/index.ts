@@ -139,10 +139,6 @@ export type { Personoversikt, PersonopplysningerBasis } from './src/personoversi
 export type { Personadresse } from './src/personadresseTsType';
 export type { KontrollerFaktaPeriode } from './src/kontrollerFaktaPeriode';
 export type { AksessRettigheter, Aksess } from './src/aksessRettigheterTsType';
-export type { StandardFaktaPanelProps } from './src/standardFaktaPanelPropsTsType';
-export type { StandardFaktaPanelPropsTilbakekreving } from './src/standardFaktaPanelPropsTilbakekrevingTsType';
-export type { StandardProsessPanelProps } from './src/standardProsessPanelPropsTsType';
-export type { StandardProsessPanelPropsTilbakekreving } from './src/standardProsessPanelPropsTilbakekrevingTsType';
 export type { Verge } from './src/vergeTsType';
 export type { ForhåndsvisMeldingParams } from './src/forhåndsvisMeldingParamsTsType';
 export type { ManueltArbeidsforhold } from './src/manueltArbeidsforholdTsType';

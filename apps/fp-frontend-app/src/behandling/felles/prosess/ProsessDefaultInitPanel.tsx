@@ -2,10 +2,10 @@ import { ReactElement, use } from 'react';
 
 import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import { StandardProsessPanelProps } from '@navikt/fp-types';
 import { FormDataProvider, PanelProvider, usePanelOverstyring } from '@navikt/fp-utils';
 
 import { ProsessPanelInitProps } from '../typer/prosessPanelInitProps';
+import { StandardProsessPanelProps } from '../typer/standardProsessPanelPropsTsType';
 import { BehandlingDataContext } from '../utils/behandlingDataContext';
 import { ProsessPanelWrapper } from './ProsessPanelWrapper';
 import { useProsessMenyRegistrerer } from './useProsessMenyRegistrerer';
@@ -72,23 +72,12 @@ const ProsessPanel = ({
   const skalVisePanel = erPanelValgt && (harApentAksjonspunkt || status !== VilkarUtfallType.IKKE_VURDERT);
 
   return (
-<<<<<<< Updated upstream
     <FormDataProvider behandling={behandling}>
       <ProsessPanelWrapper
         erPanelValgt={erPanelValgt}
         erAksjonspunktOpent={standardPanelProps.isAksjonspunktOpen}
         status={status}
       >
-        {skalVisePanel ? children : null}
-      </ProsessPanelWrapper>
-    </FormDataProvider>
-=======
-    <ProsessPanelWrapper
-      erPanelValgt={erPanelValgt}
-      erAksjonspunktOpent={standardPanelProps.isAksjonspunktOpen}
-      status={status}
-    >
-      <FormDataProvider behandling={behandling}>
         {skalVisePanel ? (
           <PanelProvider
             behandling={behandling}
@@ -103,8 +92,7 @@ const ProsessPanel = ({
             {children}
           </PanelProvider>
         ) : null}
-      </FormDataProvider>
-    </ProsessPanelWrapper>
->>>>>>> Stashed changes
+      </ProsessPanelWrapper>
+    </FormDataProvider>
   );
 };

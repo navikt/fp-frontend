@@ -1,10 +1,10 @@
 import { ReactElement, use } from 'react';
 
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import { StandardFaktaPanelProps } from '@navikt/fp-types';
 import { FormDataProvider, PanelProvider } from '@navikt/fp-utils';
 
 import { FaktaPanelInitProps } from '../typer/faktaPanelInitProps';
+import { StandardFaktaPanelProps } from '../typer/standardFaktaPanelPropsTsType';
 import { BehandlingDataContext } from '../utils/behandlingDataContext';
 import { useFaktaMenyRegistrerer } from './useFaktaMenyRegistrerer';
 

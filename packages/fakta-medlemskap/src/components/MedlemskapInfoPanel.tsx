@@ -1,12 +1,12 @@
-import React, { FC } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { VStack } from '@navikt/ds-react';
 
 import { AksjonspunktStatus } from '@navikt/fp-kodeverk';
+import { Medlemskap, Soknad } from '@navikt/fp-types';
+import { usePanelContext } from '@navikt/fp-utils';
 
-import { MedlemskapFaktaProps } from '../MedlemskapFaktaIndex';
-import VurderMedlemskapAksjonspunktForm from './aksjonspunkt/VurderMedlemskapAksjonspunktForm';
+import { VurderMedlemskapAksjonspunktForm } from './aksjonspunkt/VurderMedlemskapAksjonspunktForm';
 import VurderMedlemskapLegacyAksjonspunktVisning from './aksjonspunkt/VurderMedlemskapLegacyAksjonspunktVisning';
 import AksjonspunktHelpText from './AksjonspunktHelpText';
 import OpplysningerFraMedlemskapsregister from './opplysningsKort/OpplysningerFraMedlemskapsregister';
@@ -16,22 +16,21 @@ import OpplysningerOmPersonstatus from './opplysningsKort/OpplysningerOmPersonst
 import OpplysningerOmUtenlandsopphold from './opplysningsKort/OpplysningerOmUtenlandsopphold';
 import SituasjonsOversikt from './situasjon/SituasjonOversikt';
 
+interface Props {
+  medlemskap: Medlemskap;
+  soknad: Soknad;
+  submittable: boolean;
+}
+
 /**
  * MedlemskapInfoPanel
  *
  * Har ansvar for å vise faktapanelene for medlemskap.
  */
-const MedlemskapInfoPanel: FC<MedlemskapFaktaProps> = ({
-  aksjonspunkter,
-  medlemskap,
-  soknad,
-  fagsak,
-  alleKodeverk,
-  behandling,
-  readOnly,
-  ...rest
-}) => {
-  const aksjonspunkt = aksjonspunkter.find(
+export const MedlemskapInfoPanel = ({ medlemskap, soknad, submittable }: Props) => {
+  const { aksjonspunkterForPanel, alleKodeverk, fagsak, isReadOnly } = usePanelContext();
+
+  const aksjonspunkt = aksjonspunkterForPanel.find(
     ap => ap.status === AksjonspunktStatus.OPPRETTET || ap.status === AksjonspunktStatus.UTFORT,
   );
   const harAksjonspunkt = !!aksjonspunkt;
@@ -39,16 +38,12 @@ const MedlemskapInfoPanel: FC<MedlemskapFaktaProps> = ({
   if (medlemskap) {
     return (
       <VStack gap="6">
-        <AksjonspunktHelpText aksjonspunkter={aksjonspunkter} medlemskap={medlemskap} />
-        {medlemskap.manuellBehandlingResultat && readOnly && aksjonspunkt && (
+        <AksjonspunktHelpText aksjonspunkter={aksjonspunkterForPanel} medlemskap={medlemskap} />
+        {medlemskap.manuellBehandlingResultat && isReadOnly && aksjonspunkt && (
           <VurderMedlemskapAksjonspunktForm
+            submittable={submittable}
             manuellBehandlingResultat={medlemskap.manuellBehandlingResultat}
             aksjonspunkt={aksjonspunkt}
-            behandling={behandling}
-            alleKodeverk={alleKodeverk}
-            readOnly={readOnly}
-            ytelse={fagsak.fagsakYtelseType}
-            {...rest}
           />
         )}
 
@@ -91,15 +86,11 @@ const MedlemskapInfoPanel: FC<MedlemskapFaktaProps> = ({
             skalViseAvvik={harAksjonspunkt}
           />
         </VStack>
-        {!readOnly && aksjonspunkt && (
+        {!isReadOnly && aksjonspunkt && (
           <VurderMedlemskapAksjonspunktForm
             manuellBehandlingResultat={medlemskap.manuellBehandlingResultat}
             aksjonspunkt={aksjonspunkt}
-            behandling={behandling}
-            alleKodeverk={alleKodeverk}
-            readOnly={readOnly}
-            ytelse={fagsak.fagsakYtelseType}
-            {...rest}
+            submittable={submittable}
           />
         )}
       </VStack>
@@ -108,5 +99,3 @@ const MedlemskapInfoPanel: FC<MedlemskapFaktaProps> = ({
     return <FormattedMessage id="MedlemskapInfoPanel.ManglerPersonopplysninger" />;
   }
 };
-
-export default MedlemskapInfoPanel;

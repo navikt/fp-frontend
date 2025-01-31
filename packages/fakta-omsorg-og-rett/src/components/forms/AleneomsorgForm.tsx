@@ -10,7 +10,7 @@ import { FaktaBegrunnelseTextField, FaktaSubmitButton, TrueFalseInput } from '@n
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
 import { BekreftAleneomsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData } from '@navikt/fp-utils';
+import { useFormData, usePanelContext } from '@navikt/fp-utils';
 
 import { HarAnnenForelderRettFelter } from './HarAnnenForelderRettFelter';
 
@@ -25,20 +25,11 @@ export type FormValues = {
 interface Props {
   ytelsefordeling: Ytelsefordeling;
   aksjonspunkt: Aksjonspunkt;
-  readOnly: boolean;
   submittable: boolean;
-  submitCallback: (aksjonspunktData: BekreftAleneomsorgVurderingAp) => Promise<void>;
-  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
 }
 
-export const AleneomsorgForm = ({
-  ytelsefordeling,
-  aksjonspunkt,
-  readOnly,
-  submitCallback,
-  submittable,
-  alleMerknaderFraBeslutter,
-}: Props) => {
+export const AleneomsorgForm = ({ ytelsefordeling, aksjonspunkt, submittable }: Props) => {
+  const { submitCallback, isReadOnly, alleMerknaderFraBeslutter } = usePanelContext<BekreftAleneomsorgVurderingAp>();
   const { bekreftetAnnenforelderRett, bekreftetAnnenforelderUføretrygd, bekreftetAnnenForelderRettEØS } =
     ytelsefordeling.rettigheterAnnenforelder ?? {};
 
@@ -81,24 +72,24 @@ export const AleneomsorgForm = ({
           <TrueFalseInput
             name="harAleneomsorg"
             label={<FormattedMessage id="AleneomsorgForm.Aleneomsorg" />}
-            readOnly={readOnly}
+            readOnly={isReadOnly}
             trueLabel={<FormattedMessage id="AleneomsorgForm.HarAleneomsorg" />}
             falseLabel={<FormattedMessage id="AleneomsorgForm.HarIkkeAleneomsorg" values={{ b: bTag }} />}
             falseContent={
-              <HarAnnenForelderRettFelter readOnly={readOnly} avklareUforetrygd={true} avklareRettEØS={true} />
+              <HarAnnenForelderRettFelter readOnly={isReadOnly} avklareUforetrygd={true} avklareRettEØS={true} />
             }
           />
 
           <FaktaBegrunnelseTextField
             isSubmittable={submittable}
-            isReadOnly={readOnly}
+            isReadOnly={isReadOnly}
             hasBegrunnelse={true}
             hasVurderingText
           />
           <div>
             <FaktaSubmitButton
               isSubmittable={submittable}
-              isReadOnly={readOnly}
+              isReadOnly={isReadOnly}
               isSubmitting={formMethods.formState.isSubmitting}
               isDirty={formMethods.formState.isDirty}
             />

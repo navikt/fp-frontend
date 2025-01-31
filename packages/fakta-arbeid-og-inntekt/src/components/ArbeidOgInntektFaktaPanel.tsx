@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Alert, Button } from '@navikt/ds-react';
@@ -13,18 +13,15 @@ import {
 } from '@navikt/fp-kodeverk';
 import { SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
 import {
-  Aksjonspunkt,
-  AlleKodeverk,
   AoIArbeidsforhold,
   ArbeidOgInntektsmelding,
   ArbeidsgiverOpplysningerPerId,
-  Behandling,
   Inntektsmelding,
   ManglendeInntektsmeldingVurdering,
   ManueltArbeidsforhold,
 } from '@navikt/fp-types';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData } from '@navikt/fp-utils';
+import { useFormData, usePanelContext } from '@navikt/fp-utils';
 
 import { useIsFormDirty } from '../DirtyFormProvider';
 import { ArbeidsforholdOgInntektRadData, Avklaring } from '../types/arbeidsforholdOgInntekt';
@@ -136,39 +133,32 @@ const finnUløstArbeidsforholdIndex = (tabellData: ArbeidsforholdOgInntektRadDat
 };
 
 interface Props {
-  saksnummer: string;
-  behandling: Behandling;
-  aksjonspunkt?: Aksjonspunkt;
-  readOnly: boolean;
   arbeidOgInntekt: ArbeidOgInntektsmelding;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   registrerArbeidsforhold: (params: ManueltArbeidsforhold) => Promise<void>;
   lagreVurdering: (params: ManglendeInntektsmeldingVurdering) => Promise<void>;
-  lagreCallback: (aksjonspunktData: FaktaAksjonspunkt) => Promise<void>;
   settBehandlingPåVentCallback: (params: { frist?: string; ventearsak: string }) => void;
   erOverstyrer: boolean;
-  alleKodeverk: AlleKodeverk;
   åpneForNyVurdering: () => void;
 }
 
 export const ArbeidOgInntektFaktaPanel = ({
-  saksnummer,
-  behandling,
-  aksjonspunkt,
-  readOnly,
   arbeidOgInntekt,
   arbeidsgiverOpplysningerPerId,
   registrerArbeidsforhold,
   lagreVurdering,
   erOverstyrer,
-  lagreCallback,
   settBehandlingPåVentCallback,
-  alleKodeverk,
   åpneForNyVurdering,
 }: Props) => {
   const [erKnappTrykket, setErKnappTrykket] = useState(false);
   const [visSettPåVentModal, setVisSettPåVentModal] = useState(false);
   const [erOverstyrt, setErOverstyrt] = useState(false);
+
+  const { alleKodeverk, submitCallback, aksjonspunkterForPanel, behandling, fagsak, isReadOnly } =
+    usePanelContext<FaktaAksjonspunkt>();
+
+  const aksjonspunkt = aksjonspunkterForPanel.length > 0 ? aksjonspunkterForPanel[0] : undefined;
 
   const { formData, setFormData } = useFormData<ArbeidsforholdOgInntektRadData[]>();
 
@@ -186,51 +176,42 @@ export const ArbeidOgInntektFaktaPanel = ({
     [tabellRader],
   );
 
-  const toggleÅpenRad = useCallback(
-    (index: number) => {
-      if (åpneRadIndexer.some(radIndex => radIndex === index)) {
-        setÅpneRadIndexer(åpneRadIndexer.filter(i => i !== index));
-      } else {
-        setÅpneRadIndexer(åpneRadIndexer.concat(index));
-      }
-    },
-    [åpneRadIndexer, setÅpneRadIndexer],
-  );
+  const toggleÅpenRad = (index: number) => {
+    if (åpneRadIndexer.some(radIndex => radIndex === index)) {
+      setÅpneRadIndexer(åpneRadIndexer.filter(i => i !== index));
+    } else {
+      setÅpneRadIndexer(åpneRadIndexer.concat(index));
+    }
+  };
 
   const tableRef = useRef<HTMLTableElement>(null);
-  const oppdaterTabellData = useCallback(
-    (data: (rader: ArbeidsforholdOgInntektRadData[]) => ArbeidsforholdOgInntektRadData[]) => {
-      setTabellRader(data);
-      setÅpneRadIndexer(finnUløstArbeidsforholdIndex(data(tabellRader)));
-      tableRef?.current?.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
-    },
-    [tabellRader],
-  );
+  const oppdaterTabellData = (data: (rader: ArbeidsforholdOgInntektRadData[]) => ArbeidsforholdOgInntektRadData[]) => {
+    setTabellRader(data);
+    setÅpneRadIndexer(finnUløstArbeidsforholdIndex(data(tabellRader)));
+    tableRef?.current?.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
+  };
 
-  const lagreOgFortsett = useCallback(() => {
+  const lagreOgFortsett = () => {
     setErKnappTrykket(true);
-    lagreCallback({
+    submitCallback({
       kode: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
     });
-  }, [behandling.versjon]);
+  };
 
-  const gjenåpneAksjonspunkt = useCallback(() => {
+  const gjenåpneAksjonspunkt = () => {
     setErKnappTrykket(true);
     åpneForNyVurdering();
-  }, [behandling.versjon]);
+  };
 
-  const settPaVent = useCallback(
-    (params: { frist?: string; ventearsak?: string }) => {
-      setErKnappTrykket(true);
-      setVisSettPåVentModal(false);
+  const settPaVent = (params: { frist?: string; ventearsak?: string }) => {
+    setErKnappTrykket(true);
+    setVisSettPåVentModal(false);
 
-      const { frist, ventearsak } = params;
-      if (ventearsak) {
-        settBehandlingPåVentCallback({ frist, ventearsak });
-      }
-    },
-    [behandling.versjon],
-  );
+    const { frist, ventearsak } = params;
+    if (ventearsak) {
+      settBehandlingPåVentCallback({ frist, ventearsak });
+    }
+  };
 
   const kanSettePåVent = tabellRader.some(
     d =>
@@ -247,18 +228,19 @@ export const ArbeidOgInntektFaktaPanel = ({
   const erAksjonspunktApent = aksjonspunkt?.status === AksjonspunktStatus.OPPRETTET;
   const erOverstyrerOgHarIngenAksjonspunkt = erOverstyrer && harIngenAksjonspunkt;
 
-  const skalViseÅpneForNyVurderingKnapp = !readOnly && (erAksjonspunktAvsluttet || erOverstyrerOgHarIngenAksjonspunkt);
+  const skalViseÅpneForNyVurderingKnapp =
+    !isReadOnly && (erAksjonspunktAvsluttet || erOverstyrerOgHarIngenAksjonspunkt);
   const skalViseSettPåVentKnapp =
-    !readOnly && erAksjonspunktApent && harBehandletAllePerioder && !isDirty && kanSettePåVent;
+    !isReadOnly && erAksjonspunktApent && harBehandletAllePerioder && !isDirty && kanSettePåVent;
   const skalViseBekrefteKnapp =
-    !readOnly && erAksjonspunktApent && harBehandletAllePerioder && !isDirty && !kanSettePåVent;
+    !isReadOnly && erAksjonspunktApent && harBehandletAllePerioder && !isDirty && !kanSettePåVent;
 
   return (
     <>
       <ArbeidsOgInntektOverstyrPanel
         behandling={behandling}
         aksjonspunkt={aksjonspunkt}
-        readOnly={readOnly}
+        readOnly={isReadOnly}
         arbeidOgInntekt={arbeidOgInntekt}
         registrerArbeidsforhold={registrerArbeidsforhold}
         erOverstyrer={erOverstyrer}
@@ -272,11 +254,11 @@ export const ArbeidOgInntektFaktaPanel = ({
           <ArbeidsforholdRad
             key={`${radData.arbeidsgiverNavn}${radData.arbeidsgiverIdent}${index}`} // nosonar
             arbeidOgInntekt={arbeidOgInntekt}
-            saksnummer={saksnummer}
+            saksnummer={fagsak.saksnummer}
             behandlingUuid={behandling.uuid}
             behandlingVersjon={behandling.versjon}
             radData={radData}
-            isReadOnly={readOnly || erAksjonspunktAvsluttet || harIngenAksjonspunkt}
+            isReadOnly={isReadOnly || erAksjonspunktAvsluttet || harIngenAksjonspunkt}
             registrerArbeidsforhold={registrerArbeidsforhold}
             lagreVurdering={lagreVurdering}
             toggleÅpenRad={() => toggleÅpenRad(index)}

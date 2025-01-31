@@ -1,15 +1,8 @@
-import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import {
-  FamilieHendelseSamling,
-  InntektArbeidYtelse,
-  Personoversikt,
-  Soknad,
-  StandardFaktaPanelProps,
-} from '@navikt/fp-types';
+import { FamilieHendelseSamling, InntektArbeidYtelse, Personoversikt, Soknad } from '@navikt/fp-types';
 
 import { OmsorgOgForeldreansvarInfoPanel } from './components/OmsorgOgForeldreansvarInfoPanel';
 
@@ -22,6 +15,7 @@ interface Props {
   soknad: Soknad;
   personoversikt: Personoversikt;
   inntektArbeidYtelse: InntektArbeidYtelse;
+  submittable: boolean;
 }
 
 export const OmsorgOgForeldreansvarFaktaIndex = ({
@@ -29,8 +23,8 @@ export const OmsorgOgForeldreansvarFaktaIndex = ({
   soknad,
   personoversikt,
   inntektArbeidYtelse,
-  ...rest
-}: Props & StandardFaktaPanelProps) => (
+  submittable,
+}: Props) => (
   <RawIntlProvider value={intl}>
     <OmsorgOgForeldreansvarInfoPanel
       gjeldendeFamiliehendelse={familiehendelse.gjeldende}
@@ -39,7 +33,7 @@ export const OmsorgOgForeldreansvarFaktaIndex = ({
       innvilgetRelatertTilgrensendeYtelserForAnnenForelder={
         inntektArbeidYtelse.innvilgetRelatertTilgrensendeYtelserForAnnenForelder
       }
-      {...rest}
+      submittable={submittable}
     />
   </RawIntlProvider>
 );
