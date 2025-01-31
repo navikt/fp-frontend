@@ -1,1 +1,0 @@
-import{v as o}from"./index.es-DSZ6vyNz.js";import{c as t,d as c}from"./withQueryClient-BhxeJHbr.js";const p={paramName:"",parse:r=>r,isQueryParam:!1},u=(r,e,a)=>{const s=a.isQueryParam?o(e.search):r;return a.paramName&&a.parse?a.parse(s[a.paramName]):void 0};function d(r){const e={...p,...r},a=t(),s=c(),m=u(s,a,e);return{location:a,selected:m}}export{d as u};
