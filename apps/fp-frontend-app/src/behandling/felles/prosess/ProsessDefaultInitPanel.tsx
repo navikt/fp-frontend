@@ -55,12 +55,14 @@ export const ProsessDefaultInitPanel = ({
   const skalVisePanel = erPanelValgt && (harApentAksjonspunkt || status !== VilkarUtfallType.IKKE_VURDERT);
 
   return (
-    <ProsessPanelWrapper
-      erPanelValgt={erPanelValgt}
-      erAksjonspunktOpent={standardPanelProps.isAksjonspunktOpen}
-      status={status}
-    >
-      <FormDataProvider behandling={behandling}>{skalVisePanel ? children : null}</FormDataProvider>
-    </ProsessPanelWrapper>
+    <FormDataProvider behandling={behandling}>
+      <ProsessPanelWrapper
+        erPanelValgt={erPanelValgt}
+        erAksjonspunktOpent={standardPanelProps.isAksjonspunktOpen}
+        status={status}
+      >
+        {skalVisePanel ? children : null}
+      </ProsessPanelWrapper>
+    </FormDataProvider>
   );
 };
