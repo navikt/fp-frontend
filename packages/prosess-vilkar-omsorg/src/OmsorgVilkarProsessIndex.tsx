@@ -19,8 +19,6 @@ export const OmsorgVilkarProsessIndex = ({
   readOnlySubmitButton,
   alleKodeverk,
   alleMerknaderFraBeslutter,
-  formData,
-  setFormData,
 }: StandardProsessPanelProps) => (
   <RawIntlProvider value={intl}>
     <ErOmsorgVilkaarOppfyltForm
@@ -32,8 +30,6 @@ export const OmsorgVilkarProsessIndex = ({
       readOnlySubmitButton={readOnlySubmitButton}
       alleKodeverk={alleKodeverk}
       erIkkeGodkjentAvBeslutter={aksjonspunkter.some(a => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted)}
-      formData={formData}
-      setFormData={setFormData}
     />
   </RawIntlProvider>
 );

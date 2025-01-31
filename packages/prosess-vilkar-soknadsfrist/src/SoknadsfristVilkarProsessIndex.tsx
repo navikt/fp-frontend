@@ -25,8 +25,6 @@ export const SoknadsfristVilkarProsessIndex = ({
   isReadOnly,
   readOnlySubmitButton,
   alleKodeverk,
-  formData,
-  setFormData,
 }: Props & StandardProsessPanelProps) => (
   <RawIntlProvider value={intl}>
     <ErSoknadsfristVilkaretOppfyltForm
@@ -39,8 +37,6 @@ export const SoknadsfristVilkarProsessIndex = ({
       readOnly={isReadOnly}
       readOnlySubmitButton={readOnlySubmitButton}
       alleKodeverk={alleKodeverk}
-      formData={formData}
-      setFormData={setFormData}
     />
   </RawIntlProvider>
 );

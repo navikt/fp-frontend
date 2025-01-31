@@ -3,7 +3,7 @@ import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AdresseType, AksjonspunktKode, SivilstandType } from '@navikt/fp-kodeverk';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, Behandling, KjønnkodeEnum, PersonopplysningerBasis, Ytelsefordeling } from '@navikt/fp-types';
 
 import { OmsorgOgRettFaktaIndex } from './OmsorgOgRettFaktaIndex';
@@ -62,6 +62,7 @@ const defaultBarn: PersonopplysningerBasis = {
 const meta = {
   title: 'fakta/fakta-omsorg-og-rett',
   component: OmsorgOgRettFaktaIndex,
+  decorators: [withFormData],
   args: {
     behandling: { uuid: 'test' } as Behandling,
     personoversikt: { barn: [defaultBarn], annenPart: defaultAnnenPart, bruker: defaultBruker },
@@ -72,7 +73,6 @@ const meta = {
     readOnly: false,
     alleKodeverk: alleKodeverk as any,
     submitCallback: action('button-click') as (data: any) => Promise<void>,
-    setFormData: () => undefined,
   },
 } satisfies Meta<typeof OmsorgOgRettFaktaIndex>;
 export default meta;

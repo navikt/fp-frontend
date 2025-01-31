@@ -1,3 +1,4 @@
+import { use } from 'react';
 import { useIntl } from 'react-intl';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -11,14 +12,17 @@ import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
+import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON];
 
 export const UttakDokumentasjonFaktaInitPanel = (props: FaktaPanelInitProps) => {
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
-  const api = useBehandlingApi(props.behandling);
-  const { data: dokumentasjonVurderingBehov } = useQuery(api.dokumentasjonVurderingBehovOptions(props.behandling));
+  const { behandling } = use(BehandlingDataContext);
+
+  const api = useBehandlingApi(behandling);
+  const { data: dokumentasjonVurderingBehov } = useQuery(api.dokumentasjonVurderingBehovOptions(behandling));
 
   return (
     <FaktaDefaultInitPanel
@@ -26,7 +30,7 @@ export const UttakDokumentasjonFaktaInitPanel = (props: FaktaPanelInitProps) => 
       standardPanelProps={standardPanelProps}
       faktaPanelKode={FaktaPanelCode.UTTAK_DOKUMENTASJON}
       faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.UttakDokumentasjon' })}
-      skalPanelVisesIMeny={harLenke(props.behandling, 'DOKUMENTASJON_VURDERING_BEHOV')}
+      skalPanelVisesIMeny={harLenke(behandling, 'DOKUMENTASJON_VURDERING_BEHOV')}
     >
       {dokumentasjonVurderingBehov ? (
         <UttakDokumentasjonFaktaIndex

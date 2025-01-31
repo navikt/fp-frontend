@@ -26,8 +26,6 @@ export const VedtakInnsynProsessIndex = ({
   submitCallback,
   previewCallback,
   isReadOnly,
-  formData,
-  setFormData,
 }: Props & StandardProsessPanelProps) => (
   <RawIntlProvider value={intl}>
     <InnsynVedtakForm
@@ -41,8 +39,6 @@ export const VedtakInnsynProsessIndex = ({
       submitCallback={submitCallback}
       previewCallback={previewCallback}
       readOnly={isReadOnly}
-      formData={formData}
-      setFormData={setFormData}
     />
   </RawIntlProvider>
 );

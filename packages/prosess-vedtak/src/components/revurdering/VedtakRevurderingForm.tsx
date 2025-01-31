@@ -37,6 +37,7 @@ import {
   VurdereDokumentForVedtakAp,
   VurdereInntektsmeldingKlageForVedtakAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { useFormData } from '@navikt/fp-utils';
 
 import VedtakResultType from '../../kodeverk/vedtakResultType';
 import VedtakFellesPanel from '../felles/VedtakFellesPanel';
@@ -245,8 +246,6 @@ interface OwnProps {
   beregningErManueltFastsatt: boolean;
   beregningsresultatOriginalBehandling?: BeregningsresultatDagytelse | BeregningsresultatEs;
   submitCallback: (data: RevurderingVedtakAksjonspunkter[]) => Promise<void>;
-  formData?: FormValues;
-  setFormData: (data: FormValues) => void;
 }
 
 const VedtakRevurderingForm: FunctionComponent<OwnProps> = ({
@@ -263,10 +262,10 @@ const VedtakRevurderingForm: FunctionComponent<OwnProps> = ({
   beregningErManueltFastsatt,
   beregningsresultatOriginalBehandling,
   submitCallback,
-  formData,
-  setFormData,
 }) => {
   const intl = useIntl();
+
+  const { formData, setFormData } = useFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
     defaultValues: formData || buildInitialValues(aksjonspunkter, behandling),

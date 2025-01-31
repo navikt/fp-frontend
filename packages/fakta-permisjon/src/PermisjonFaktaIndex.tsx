@@ -21,8 +21,6 @@ export const PermisjonFaktaIndex = ({
   submitCallback,
   aksjonspunkter,
   readOnly,
-  formData,
-  setFormData,
   arbeidOgInntekt,
   arbeidsgiverOpplysningerPerId,
   alleKodeverk,
@@ -32,9 +30,7 @@ export const PermisjonFaktaIndex = ({
       saksnummer={saksnummer}
       aksjonspunkter={aksjonspunkter}
       readOnly={readOnly}
-      formData={formData}
       lagreCallback={submitCallback}
-      setFormData={setFormData}
       arbeidOgInntekt={arbeidOgInntekt}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       alleKodeverk={alleKodeverk}

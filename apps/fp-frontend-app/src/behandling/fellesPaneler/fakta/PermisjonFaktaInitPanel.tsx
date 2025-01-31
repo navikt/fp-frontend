@@ -1,3 +1,4 @@
+import { use } from 'react';
 import { useIntl } from 'react-intl';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -12,26 +13,24 @@ import { useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
+import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_ARBEIDSFORHOLD_PERMISJON];
 
 interface Props {
-  saksnummer: string;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
-export const PermisjonFaktaInitPanel = ({
-  saksnummer,
-  arbeidsgiverOpplysningerPerId,
-  ...props
-}: Props & FaktaPanelInitProps) => {
+export const PermisjonFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId, ...props }: Props & FaktaPanelInitProps) => {
   const intl = useIntl();
+
+  const { behandling, fagsak } = use(BehandlingDataContext);
 
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
-  const api = useBehandlingApi(props.behandling);
+  const api = useBehandlingApi(behandling);
 
-  const { data: arbeidOgInntekt } = useQuery(api.arbeidOgInntektOptions(props.behandling));
+  const { data: arbeidOgInntekt } = useQuery(api.arbeidOgInntektOptions(behandling));
 
   return (
     <FaktaDefaultInitPanel
@@ -39,12 +38,12 @@ export const PermisjonFaktaInitPanel = ({
       standardPanelProps={standardPanelProps}
       faktaPanelKode={FaktaPanelCode.PERMISJON}
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Permisjon' })}
-      skalPanelVisesIMeny={AKSJONSPUNKT_KODER.some(kode => hasAksjonspunkt(kode, props.behandling.aksjonspunkt))}
+      skalPanelVisesIMeny={AKSJONSPUNKT_KODER.some(kode => hasAksjonspunkt(kode, behandling.aksjonspunkt))}
     >
       {arbeidOgInntekt ? (
         <PermisjonFaktaIndex
           arbeidOgInntekt={arbeidOgInntekt}
-          saksnummer={saksnummer}
+          saksnummer={fagsak.saksnummer}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           {...standardPanelProps}
         />

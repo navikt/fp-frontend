@@ -1,5 +1,3 @@
-import { AksessRettigheter } from '@navikt/fp-types';
-
 import { InngangsvilkarDefaultInitWrapper } from '../../felles/prosess/InngangsvilkarDefaultInitWrapper';
 import { InngangsvilkarPanelInitProps } from '../../felles/typer/inngangsvilkarPanelInitProps';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
@@ -12,37 +10,28 @@ import { OpptjeningInngangsvilkarFpInitPanel } from './inngangsvilkarPaneler/Opp
 
 interface Props {
   apentFaktaPanelInfo?: { urlCode: string; text: string };
-  oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
-  rettigheter: AksessRettigheter;
 }
 
 export const InngangsvilkarFpProsessStegInitPanel = ({
-  behandling,
   valgtProsessSteg,
   registrerProsessPanel,
   apentFaktaPanelInfo,
-  oppdaterProsessStegOgFaktaPanelIUrl,
-  rettigheter,
 }: Props & ProsessPanelInitProps) => {
   const leftPanels = (props: InngangsvilkarPanelInitProps) => (
     <>
-      <FodselInngangsvilkarFpInitPanel behandlingVersjon={behandling.versjon} rettigheter={rettigheter} {...props} />
-      <AdopsjonInngangsvilkarFpInitPanel behandlingVersjon={behandling.versjon} rettigheter={rettigheter} {...props} />
-      <OmsorgInngangsvilkarFpInitPanel behandlingVersjon={behandling.versjon} {...props} />
-      <MedlemskapInngangsvilkarInitPanel behandlingVersjon={behandling.versjon} rettigheter={rettigheter} {...props} />
-      <ForeldreansvarInngangsvilkarInitPanel behandlingVersjon={behandling.versjon} {...props} />
+      <FodselInngangsvilkarFpInitPanel {...props} />
+      <AdopsjonInngangsvilkarFpInitPanel {...props} />
+      <OmsorgInngangsvilkarFpInitPanel {...props} />
+      <MedlemskapInngangsvilkarInitPanel {...props} />
+      <ForeldreansvarInngangsvilkarInitPanel {...props} />
     </>
   );
-  const rightPanels = (props: InngangsvilkarPanelInitProps) => (
-    <OpptjeningInngangsvilkarFpInitPanel behandlingVersjon={behandling?.versjon} rettigheter={rettigheter} {...props} />
-  );
+  const rightPanels = (props: InngangsvilkarPanelInitProps) => <OpptjeningInngangsvilkarFpInitPanel {...props} />;
   return (
     <InngangsvilkarDefaultInitWrapper
-      behandling={behandling}
       valgtProsessSteg={valgtProsessSteg}
       registrerProsessPanel={registrerProsessPanel}
       apentFaktaPanelInfo={apentFaktaPanelInfo}
-      oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
       leftPanels={leftPanels}
       rightPanels={rightPanels}
     />

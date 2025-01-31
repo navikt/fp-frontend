@@ -1,3 +1,4 @@
+import { use } from 'react';
 import { useIntl } from 'react-intl';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -11,6 +12,7 @@ import { useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
+import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.FORESLA_VEDTAK,
@@ -21,8 +23,10 @@ const AKSJONSPUNKT_KODER = [
 export const AnkeResultatProsessStegInitPanel = ({ ...props }: ProsessPanelInitProps) => {
   const intl = useIntl();
 
-  const api = useBehandlingApi(props.behandling);
-  const { data: ankeVurdering } = useQuery(api.anke.ankeVurderingOptions(props.behandling));
+  const { behandling, alleKodeverk } = use(BehandlingDataContext);
+
+  const api = useBehandlingApi(behandling);
+  const { data: ankeVurdering } = useQuery(api.anke.ankeVurderingOptions(behandling));
 
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
 
@@ -35,7 +39,7 @@ export const AnkeResultatProsessStegInitPanel = ({ ...props }: ProsessPanelInitP
       skalPanelVisesIMeny
     >
       {ankeVurdering ? (
-        <AnkeResultatProsessIndex ankeVurdering={ankeVurdering} alleKodeverk={standardPanelProps.alleKodeverk} />
+        <AnkeResultatProsessIndex ankeVurdering={ankeVurdering} alleKodeverk={alleKodeverk} />
       ) : (
         <LoadingPanel />
       )}

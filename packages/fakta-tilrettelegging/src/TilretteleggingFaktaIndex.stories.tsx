@@ -2,7 +2,7 @@ import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, TilretteleggingType, UttakArbeidType } from '@navikt/fp-kodeverk';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
 import {
   ArbeidOgInntektsmelding,
   ArbeidsforholdFodselOgTilrettelegging,
@@ -249,11 +249,11 @@ const ARBEIDSGIVEROPPLYSNINGER_PER_ID = {
 const meta = {
   title: 'fakta/fakta-tilrettelegging',
   component: TilretteleggingFaktaIndex,
+  decorators: [withFormData],
   args: {
     behandling: BEHANDLING,
     arbeidsgiverOpplysningerPerId: ARBEIDSGIVEROPPLYSNINGER_PER_ID,
     alleMerknaderFraBeslutter: {},
-    setFormData: () => undefined,
     submitCallback: action('button-click') as (data: any) => Promise<any>,
     readOnly: false,
     harApneAksjonspunkter: true,

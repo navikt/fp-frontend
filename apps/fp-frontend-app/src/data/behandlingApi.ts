@@ -458,6 +458,7 @@ const getUttakKontrollerFaktaPerioderOptions = (links: ApiLink[]) => (behandling
     queryKey: [BehandlingRel.UTTAK_KONTROLLER_FAKTA_PERIODER_V2, behandling.uuid, behandling.versjon],
     queryFn: () =>
       kyExtended.get(getUrlFromRel('UTTAK_KONTROLLER_FAKTA_PERIODER_V2', links)).json<KontrollerFaktaPeriode[]>(),
+    enabled: harLenke(behandling, 'UTTAK_KONTROLLER_FAKTA_PERIODER_V2'),
     staleTime: Infinity,
   });
 

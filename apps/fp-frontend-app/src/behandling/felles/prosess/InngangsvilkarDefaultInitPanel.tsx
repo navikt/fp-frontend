@@ -2,6 +2,7 @@ import { ReactElement } from 'react';
 
 import { VilkarType } from '@navikt/fp-kodeverk';
 import { StandardProsessPanelProps } from '@navikt/fp-types';
+import { FormDataProvider } from '@navikt/fp-utils';
 
 import { InngangsvilkarPanelInitProps } from '../typer/inngangsvilkarPanelInitProps';
 import { skalViseProsessPanel } from './skalViseProsessPanel';
@@ -38,9 +39,9 @@ export const InngangsvilkarDefaultInitPanel = ({
     standardPanelProps.status,
   );
 
-  if (!erPanelValgt || !skalVises) {
-    return null;
-  }
-
-  return renderPanel({ erOverstyrt, toggleOverstyring });
+  return (
+    <FormDataProvider behandling={standardPanelProps.behandling}>
+      {!erPanelValgt || !skalVises ? null : renderPanel({ erOverstyrt, toggleOverstyring })}
+    </FormDataProvider>
+  );
 };

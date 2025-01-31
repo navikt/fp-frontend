@@ -1,14 +1,15 @@
-import React from 'react';
+import { use } from 'react';
 import { IntlShape, useIntl } from 'react-intl';
 
 import { AksjonspunktKode, FagsakYtelseType, VilkarType } from '@navikt/fp-kodeverk';
 import { FodselVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-fodsel';
-import { AksessRettigheter, Aksjonspunkt } from '@navikt/fp-types';
+import { Aksjonspunkt } from '@navikt/fp-types';
 
 import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 import { OverstyringPanelDef } from '../../../felles/prosess/OverstyringPanelDef';
 import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandardProsessPanelProps';
 import { InngangsvilkarPanelInitProps } from '../../../felles/typer/inngangsvilkarPanelInitProps';
+import { BehandlingDataContext } from '../../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_TEKST_PER_KODE = {
   [AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN]: 'SRBVilkarForm.VurderSammeBarn',
@@ -28,17 +29,10 @@ const AKSJONSPUNKT_KODER = [
 
 const VILKAR_KODER = [VilkarType.FODSELSVILKARET_MOR];
 
-interface Props {
-  behandlingVersjon: number;
-  rettigheter: AksessRettigheter;
-}
-
-export const FodselInngangsvilkarInitPanel = ({
-  behandlingVersjon,
-  rettigheter,
-  ...props
-}: Props & InngangsvilkarPanelInitProps) => {
+export const FodselInngangsvilkarInitPanel = (props: InngangsvilkarPanelInitProps) => {
   const intl = useIntl();
+
+  const { behandling, rettigheter } = use(BehandlingDataContext);
 
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, VILKAR_KODER);
 
@@ -46,7 +40,7 @@ export const FodselInngangsvilkarInitPanel = ({
     <InngangsvilkarDefaultInitPanel
       {...props}
       standardPanelProps={standardPanelProps}
-      behandlingVersjon={behandlingVersjon}
+      behandlingVersjon={behandling.versjon}
       vilkarKoder={VILKAR_KODER}
       inngangsvilkarPanelKode="FODSEL"
       hentInngangsvilkarPanelTekst={hentAksjonspunktTekst(intl, standardPanelProps.aksjonspunkter)}

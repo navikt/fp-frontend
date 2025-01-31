@@ -9,7 +9,7 @@ import {
   RelasjonsRolleType,
   UtsettelseArsakCode,
 } from '@navikt/fp-kodeverk';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
 import {
   Behandling,
   Fagsak,
@@ -183,6 +183,7 @@ const arbeidsgiverOpplysningerPerId = {
 const meta = {
   title: 'prosess/prosess-uttak',
   component: UttakProsessIndex,
+  decorators: [withFormData],
   args: {
     behandling,
     submitCallback: action('button-click') as (data: any) => Promise<void>,
@@ -209,7 +210,6 @@ const meta = {
     vilkar: [],
     arbeidsgiverOpplysningerPerId,
     alleMerknaderFraBeslutter: {},
-    setFormData: () => undefined,
     fagsak,
   },
 } satisfies Meta<typeof UttakProsessIndex>;

@@ -1,9 +1,9 @@
-import React, { FunctionComponent, useCallback, useState } from 'react';
-import { useForm,UseFormGetValues } from 'react-hook-form';
+import { FunctionComponent, useCallback, useState } from 'react';
+import { useForm, UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 
 import { PencilFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, Heading,HStack } from '@navikt/ds-react';
+import { BodyShort, Button, Heading, HStack } from '@navikt/ds-react';
 import { Datepicker, Form, TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { AksjonspunktBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -12,6 +12,7 @@ import dayjs from 'dayjs';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Soknad } from '@navikt/fp-types';
 import { OverstyringAvklarStartdatoForPeriodenAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { useFormData } from '@navikt/fp-utils';
 
 import styles from './startdatoForForeldrepengerperiodenForm.module.css';
 
@@ -53,8 +54,6 @@ interface OwnProps {
   submitCallback: (data: OverstyringAvklarStartdatoForPeriodenAp) => Promise<void>;
   readOnly: boolean;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
-  formData?: FormValues;
-  setFormData: (data: FormValues) => void;
 }
 
 /**
@@ -68,10 +67,11 @@ const StartdatoForForeldrepengerperiodenForm: FunctionComponent<OwnProps> = ({
   soknad,
   alleMerknaderFraBeslutter,
   readOnly,
-  formData,
-  setFormData,
 }) => {
   const intl = useIntl();
+
+  const { formData, setFormData } = useFormData<FormValues>();
+
   const formMethods = useForm<FormValues>({
     defaultValues: formData || buildInitialValues(soknad, aksjonspunkt),
   });

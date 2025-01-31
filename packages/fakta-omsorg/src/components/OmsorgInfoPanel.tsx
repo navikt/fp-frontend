@@ -9,6 +9,7 @@ import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { FaktaBegrunnelseTextField, FaktaSubmitButton, PersonopplysningerForFamilie } from '@navikt/fp-fakta-felles';
 import { Aksjonspunkt, Personoversikt, StandardFaktaPanelProps, Ytelsefordeling } from '@navikt/fp-types';
 import { BekreftOmsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { useFormData } from '@navikt/fp-utils';
 
 import { FormValues as OmsorgFormValues, OmsorgFaktaFields } from './OmsorgFaktaFields';
 
@@ -44,9 +45,9 @@ export const OmsorgInfoPanel = ({
   ytelsefordeling,
   submitCallback,
   alleMerknaderFraBeslutter,
-  formData,
-  setFormData,
 }: Props & StandardFaktaPanelProps) => {
+  const { formData, setFormData } = useFormData<FormValues>();
+
   const formMethods = useForm<FormValues>({
     defaultValues: formData || createInitialValues(ytelsefordeling, aksjonspunkter),
   });

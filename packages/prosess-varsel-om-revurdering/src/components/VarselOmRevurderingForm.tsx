@@ -31,6 +31,7 @@ import {
   Soknad,
 } from '@navikt/fp-types';
 import { VarselRevurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { useFormData } from '@navikt/fp-utils';
 
 import styles from './varselOmRevurderingForm.module.css';
 
@@ -77,8 +78,6 @@ interface OwnProps {
   previewCallback: (data: ForhandsvisData) => void;
   readOnly: boolean;
   alleKodeverk: AlleKodeverk;
-  formData?: FormValues;
-  setFormData: (data: FormValues) => void;
 }
 
 /**
@@ -99,12 +98,13 @@ const VarselOmRevurderingForm: FunctionComponent<OwnProps> = ({
   sprakkode,
   submitCallback,
   previewCallback,
-  setFormData,
-  formData,
 }) => {
   const intl = useIntl();
 
   const initialValues = useMemo(() => buildInitialValues(aksjonspunkter), [aksjonspunkter]);
+
+  const { formData, setFormData } = useFormData<FormValues>();
+
   const formMethods = useForm<FormValues>({
     defaultValues: formData || initialValues,
   });

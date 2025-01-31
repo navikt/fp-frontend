@@ -1,11 +1,4 @@
-import {
-  AksessRettigheter,
-  ArbeidsgiverOpplysningerPerId,
-  Behandling,
-  BehandlingAppKontekst,
-  Fagsak,
-  Personoversikt,
-} from '@navikt/fp-types';
+import { ArbeidsgiverOpplysningerPerId, Personoversikt } from '@navikt/fp-types';
 
 import { BehandlingContainer } from '../felles/BehandlingContainer';
 import { FaktaPanelInitProps } from '../felles/typer/faktaPanelInitProps';
@@ -32,42 +25,24 @@ import { TilkjentYtelseProsessStegInitPanel } from './prosessPaneler/TilkjentYte
 import { VedtakSvpProsessStegInitPanel } from './prosessPaneler/VedtakSvpProsessStegInitPanel';
 
 interface Props {
-  alleBehandlinger: BehandlingAppKontekst[];
-  behandling: Behandling;
-  fagsak: Fagsak;
   valgtProsessSteg?: string;
   valgtFaktaSteg?: string;
-  oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
-  opneSokeside: () => void;
   toggleOppdateringAvFagsakOgBehandling: (skalHenteFagsak: boolean) => void;
   arbeidsgivere: ArbeidsgiverOpplysningerPerId;
   personoversikt: Personoversikt;
-  rettigheter: AksessRettigheter;
-  hentOgSettBehandling: (keepData?: boolean) => void;
 }
 
 const SvangerskapspengerPaneler = ({
-  alleBehandlinger,
-  behandling,
-  fagsak,
   valgtProsessSteg,
   valgtFaktaSteg,
-  oppdaterProsessStegOgFaktaPanelIUrl,
-  opneSokeside,
   toggleOppdateringAvFagsakOgBehandling,
   arbeidsgivere,
   personoversikt,
-  rettigheter,
-  hentOgSettBehandling,
 }: Props) => {
   const hentProsessPaneler = (props: ProsessPanelInitProps, ekstraProps: ProsessPanelExtraInitProps) => (
     <>
       <OpplysningspliktProsessStegInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-      <InngangsvilkarSvpProsessStegInitPanel
-        {...props}
-        rettigheter={rettigheter}
-        oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-      />
+      <InngangsvilkarSvpProsessStegInitPanel {...props} />
       <BeregningsgrunnlagProsessStegInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
       <SoknadsfristProsessStegInitPanel {...props} />
       <FortsattMedlemskapProsessStegInitPanel {...props} />
@@ -78,58 +53,34 @@ const SvangerskapspengerPaneler = ({
       />
       <SimuleringProsessStegInitPanel
         {...props}
-        fagsak={fagsak}
         menyData={ekstraProps.allMenyData}
         arbeidsgiverOpplysningerPerId={arbeidsgivere}
       />
-      <VedtakSvpProsessStegInitPanel
-        {...props}
-        fagsak={fagsak}
-        opneSokeside={opneSokeside}
-        toggleOppdatereFagsakContext={toggleOppdateringAvFagsakOgBehandling}
-      />
+      <VedtakSvpProsessStegInitPanel {...props} toggleOppdatereFagsakContext={toggleOppdateringAvFagsakOgBehandling} />
     </>
   );
 
   const hentFaktaPaneler = (props: FaktaPanelInitProps) => (
     <>
-      <SakenFaktaInitPanel {...props} fagsak={fagsak} rettigheter={rettigheter} />
-      <ArbeidOgInntektFaktaInitPanel
-        {...props}
-        saksnummer={fagsak.saksnummer}
-        behandlingUuid={behandling.uuid}
-        rettigheter={rettigheter}
-        arbeidsgiverOpplysningerPerId={arbeidsgivere}
-        hentOgSettBehandling={hentOgSettBehandling}
-      />
-      <InntektsmeldingerFaktaInitPanel
-        fagsak={fagsak}
-        alleBehandlinger={alleBehandlinger}
-        arbeidsgiverOpplysningerPerId={arbeidsgivere}
-        {...props}
-      />
+      <SakenFaktaInitPanel {...props} />
+      <ArbeidOgInntektFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+      <InntektsmeldingerFaktaInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} {...props} />
       <ArbeidsforholdFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
       <YtelserFaktaInitPanel {...props} />
       <VergeFaktaInitPanel {...props} />
       <FodselOgTilretteleggingFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-      <MedlemskapsvilkaretFaktaInitPanel {...props} fagsak={fagsak} />
+      <MedlemskapsvilkaretFaktaInitPanel {...props} />
       <OpptjeningsvilkaretFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-      <PermisjonFaktaInitPanel
-        {...props}
-        saksnummer={fagsak.saksnummer}
-        arbeidsgiverOpplysningerPerId={arbeidsgivere}
-      />
-      <BeregningFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} rettigheter={rettigheter} />
+      <PermisjonFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+      <BeregningFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
       <FordelingFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
     </>
   );
 
   return (
     <BehandlingContainer
-      behandling={behandling}
       valgtProsessSteg={valgtProsessSteg}
       valgtFaktaSteg={valgtFaktaSteg}
-      oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
       hentFaktaPaneler={hentFaktaPaneler}
       hentProsessPaneler={hentProsessPaneler}
     />

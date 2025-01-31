@@ -18,6 +18,7 @@ import {
   KodeverkMedNavn,
 } from '@navikt/fp-types';
 import { BekreftSvangerskapspengerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { useFormData } from '@navikt/fp-utils';
 
 import { TilretteleggingFormValues } from '../types/TilretteleggingFormValues';
 import { ArbeidsforholdFieldArray } from './arbeidsforhold/ArbeidsforholdFieldArray';
@@ -62,8 +63,6 @@ interface Props {
   aoiArbeidsforhold: AoIArbeidsforhold[];
   aksjonspunkter: Aksjonspunkt[];
   submitCallback: (data: BekreftSvangerskapspengerAp) => Promise<void>;
-  formData?: TilretteleggingFormValues;
-  setFormData: (data: TilretteleggingFormValues) => void;
   submittable: boolean;
   uttakArbeidTyper: KodeverkMedNavn[];
 }
@@ -82,8 +81,6 @@ export const TilretteleggingFaktaForm = ({
   svangerskapspengerTilrettelegging,
   aoiArbeidsforhold,
   submitCallback,
-  formData,
-  setFormData,
   submittable,
   uttakArbeidTyper,
 }: Props) => {
@@ -93,6 +90,8 @@ export const TilretteleggingFaktaForm = ({
     () => sorterArbeidsforhold(svangerskapspengerTilrettelegging.arbeidsforholdListe, arbeidsgiverOpplysningerPerId),
     [behandlingVersjon],
   );
+
+  const { formData, setFormData } = useFormData<TilretteleggingFormValues>();
 
   const formMethods = useForm<TilretteleggingFormValues>({
     defaultValues: formData || {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { use } from 'react';
 import { IntlShape, useIntl } from 'react-intl';
 
 import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
@@ -8,6 +8,7 @@ import { Aksjonspunkt } from '@navikt/fp-types';
 import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandardProsessPanelProps';
 import { InngangsvilkarPanelInitProps } from '../../../felles/typer/inngangsvilkarPanelInitProps';
+import { BehandlingDataContext } from '../../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_TEKST_PER_KODE = {
   [AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKARET]: 'ErOmsorgVilkaarOppfyltForm.Paragraf',
@@ -29,21 +30,16 @@ const AKSJONSPUNKT_KODER = [
 
 const VILKAR_KODER = [VilkarType.OMSORGSVILKARET];
 
-interface Props {
-  behandlingVersjon: number;
-}
-
-export const OmsorgInngangsvilkarInitPanel = ({
-  behandlingVersjon,
-  ...props
-}: Props & InngangsvilkarPanelInitProps) => {
+export const OmsorgInngangsvilkarInitPanel = (props: InngangsvilkarPanelInitProps) => {
   const intl = useIntl();
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, VILKAR_KODER);
+
+  const { behandling } = use(BehandlingDataContext);
 
   return (
     <InngangsvilkarDefaultInitPanel
       {...props}
-      behandlingVersjon={behandlingVersjon}
+      behandlingVersjon={behandling.versjon}
       standardPanelProps={standardPanelProps}
       vilkarKoder={VILKAR_KODER}
       inngangsvilkarPanelKode="OMSORG"

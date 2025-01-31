@@ -1,3 +1,4 @@
+import { ComponentProps, use } from 'react';
 import { useIntl } from 'react-intl';
 
 import {
@@ -13,11 +14,13 @@ import { useQuery } from '@tanstack/react-query';
 import { AksjonspunktKode, hasAksjonspunkt, VilkarType } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkar, Vilkarperiode } from '@navikt/fp-types';
+import { useFormData } from '@navikt/fp-utils';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
+import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 import '@navikt/ft-fakta-fordel-beregningsgrunnlag/dist/style.css';
 
@@ -30,9 +33,11 @@ interface Props {
 export const FordelingFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId, ...props }: Props & FaktaPanelInitProps) => {
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
-  const api = useBehandlingApi(props.behandling);
+  const { behandling } = use(BehandlingDataContext);
 
-  const { data: beregningsgrunnlag, isFetching } = useQuery(api.beregningsgrunnlagOptions(props.behandling));
+  const api = useBehandlingApi(behandling);
+
+  const { data: beregningsgrunnlag, isFetching } = useQuery(api.beregningsgrunnlagOptions(behandling));
 
   return (
     <FaktaDefaultInitPanel
@@ -40,10 +45,10 @@ export const FordelingFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId, ...prop
       standardPanelProps={standardPanelProps}
       faktaPanelKode={FaktaPanelCode.FORDELING}
       faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.Fordeling' })}
-      skalPanelVisesIMeny={AKSJONSPUNKT_KODER.some(kode => hasAksjonspunkt(kode, props.behandling.aksjonspunkt))}
+      skalPanelVisesIMeny={AKSJONSPUNKT_KODER.some(kode => hasAksjonspunkt(kode, behandling.aksjonspunkt))}
     >
       {!isFetching ? (
-        <FordelBeregningsgrunnlagFaktaIndex
+        <Wrapper
           {...standardPanelProps}
           kodeverkSamling={standardPanelProps.alleKodeverk}
           beregningsgrunnlagVilkår={lagBGVilkar(standardPanelProps.behandling.vilkår, beregningsgrunnlag)}
@@ -56,6 +61,11 @@ export const FordelingFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId, ...prop
       )}
     </FaktaDefaultInitPanel>
   );
+};
+
+const Wrapper = (props: ComponentProps<typeof FordelBeregningsgrunnlagFaktaIndex>) => {
+  const { formData, setFormData } = useFormData();
+  return <FordelBeregningsgrunnlagFaktaIndex {...props} formData={formData} setFormData={setFormData} />;
 };
 
 const mapBGKodeTilFpsakKode = (bgKode: string): string => {

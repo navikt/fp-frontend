@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { use, useState } from 'react';
 import { useIntl } from 'react-intl';
+import { useNavigate } from 'react-router';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
@@ -8,27 +9,20 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { AksjonspunktKode, AksjonspunktStatus, BehandlingResultatType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { VedtakInnsynProsessIndex } from '@navikt/fp-prosess-vedtak-innsyn';
-import { Behandling, Fagsak, ForhåndsvisMeldingParams } from '@navikt/fp-types';
+import { Behandling, ForhåndsvisMeldingParams } from '@navikt/fp-types';
 
 import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingApi';
 import { IverksetterVedtakStatusModal } from '../../felles/modaler/vedtak/IverksetterVedtakStatusModal';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
+import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
-interface Props {
-  fagsak: Fagsak;
-  opneSokeside: () => void;
-  setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void;
-}
-
-export const InnsynVedtakProsessStegInitPanel = ({
-  fagsak,
-  opneSokeside,
-  setSkalOppdatereEtterBekreftelseAvAp,
-  ...props
-}: Props & ProsessPanelInitProps) => {
+export const InnsynVedtakProsessStegInitPanel = (props: ProsessPanelInitProps) => {
   const intl = useIntl();
+
+  const { behandling, fagsak, setSkalOppdatereEtterBekreftelseAvAp } = use(BehandlingDataContext);
+
   const [visIverksetterVedtakModal, toggleIverksetterVedtakModal] = useState(false);
   const lagringSideeffekterCallback = getLagringSideeffekter(
     toggleIverksetterVedtakModal,
@@ -36,20 +30,22 @@ export const InnsynVedtakProsessStegInitPanel = ({
   );
 
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, [], lagringSideeffekterCallback);
-  const api = useBehandlingApi(props.behandling);
+  const api = useBehandlingApi(behandling);
 
-  const { data: innsynDokumenter } = useQuery(api.innsyn.innsynDokumenterOptions(fagsak, props.behandling));
-  const { data: innsyn } = useQuery(api.innsyn.innsynOptions(props.behandling));
+  const { data: innsynDokumenter } = useQuery(api.innsyn.innsynDokumenterOptions(fagsak, behandling));
+  const { data: innsyn } = useQuery(api.innsyn.innsynOptions(behandling));
 
   const { mutate: forhåndsvis } = useMutation({
     mutationFn: (values: ForhåndsvisMeldingParams) =>
       forhåndsvisMelding({
         ...values,
-        behandlingUuid: props.behandling.uuid,
+        behandlingUuid: behandling.uuid,
         fagsakYtelseType: fagsak.fagsakYtelseType,
       }),
     onSuccess: forhandsvisDokument,
   });
+
+  const navigate = useNavigate();
 
   return (
     <ProsessDefaultInitPanel
@@ -58,15 +54,15 @@ export const InnsynVedtakProsessStegInitPanel = ({
       prosessPanelKode={ProsessStegCode.VEDTAK}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Vedtak' })}
       skalPanelVisesIMeny
-      hentOverstyrtStatus={getVedtakStatus(props.behandling)}
-      hentSkalMarkeresSomAktiv={getVedtakStatus(props.behandling) !== VilkarUtfallType.IKKE_VURDERT}
+      hentOverstyrtStatus={getVedtakStatus(behandling)}
+      hentSkalMarkeresSomAktiv={getVedtakStatus(behandling) !== VilkarUtfallType.IKKE_VURDERT}
     >
       <>
         <IverksetterVedtakStatusModal
           visModal={visIverksetterVedtakModal}
           lukkModal={() => {
             toggleIverksetterVedtakModal(false);
-            opneSokeside();
+            navigate('/');
           }}
           behandlingsresultat={standardPanelProps.behandling.behandlingsresultat}
         />

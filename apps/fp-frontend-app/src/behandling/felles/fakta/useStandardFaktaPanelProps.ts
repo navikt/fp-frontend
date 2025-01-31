@@ -1,13 +1,13 @@
-import { useContext, useEffect, useState } from 'react';
+import { use } from 'react';
 
 import { isAksjonspunktOpen } from '@navikt/fp-kodeverk';
 import { Behandling, Fagsak, StandardFaktaPanelProps } from '@navikt/fp-types';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { AksjonspunktArgs, OverstyrteAksjonspunktArgs } from '../../../data/behandlingApi';
+import { BehandlingDataContext } from '../utils/behandlingDataContext';
 import { getAlleMerknaderFraBeslutter } from '../utils/getAlleMerknaderFraBeslutter';
 import { erReadOnly } from '../utils/readOnlyPanelUtils';
-import { StandardPropsStateContext } from '../utils/standardPropsStateContext';
 
 export const DEFAULT_FAKTA_KODE = 'default';
 export const DEFAULT_PROSESS_STEG_KODE = 'default';
@@ -56,43 +56,42 @@ export const useStandardFaktaPanelProps = (
   aksjonspunktKoder?: string[],
   overstyringApCodes: string[] = [],
 ): StandardFaktaPanelProps => {
-  const [formData, setFormData] = useState();
-  const value = useContext(StandardPropsStateContext);
+  const {
+    behandling,
+    rettigheter,
+    fagsak,
+    lagreAksjonspunkter,
+    lagreOverstyrteAksjonspunkter,
+    oppdaterProsessStegOgFaktaPanelIUrl,
+    alleKodeverk,
+  } = use(BehandlingDataContext);
 
-  useEffect(() => {
-    if (formData) {
-      setFormData(undefined);
-    }
-  }, [value.behandling.versjon]);
-
-  const { aksjonspunkt } = value.behandling;
+  const { aksjonspunkt } = behandling;
 
   const aksjonspunkterForSteg =
     aksjonspunkt && aksjonspunktKoder ? aksjonspunkt.filter(ap => aksjonspunktKoder.includes(ap.definisjon)) : [];
 
-  const readOnly = erReadOnly(value.behandling, [], value.rettigheter, value.hasFetchError);
-  const alleMerknaderFraBeslutter = getAlleMerknaderFraBeslutter(value.behandling, aksjonspunkterForSteg);
+  const readOnly = erReadOnly(behandling, [], rettigheter, false);
+  const alleMerknaderFraBeslutter = getAlleMerknaderFraBeslutter(behandling, aksjonspunkterForSteg);
 
   const submitCallback = getBekreftAksjonspunktFaktaCallback(
-    value.fagsak,
-    value.behandling,
-    value.oppdaterProsessStegOgFaktaPanelIUrl,
-    value.lagreAksjonspunkter,
-    value.lagreOverstyrteAksjonspunkter,
+    fagsak,
+    behandling,
+    oppdaterProsessStegOgFaktaPanelIUrl,
+    lagreAksjonspunkter,
+    lagreOverstyrteAksjonspunkter,
     overstyringApCodes,
   );
 
   return {
-    behandling: value.behandling,
+    behandling,
     submittable:
       !aksjonspunkterForSteg.some(ap => isAksjonspunktOpen(ap.status)) || aksjonspunkterForSteg.some(ap => ap.kanLoses),
     harApneAksjonspunkter: aksjonspunkterForSteg.some(ap => isAksjonspunktOpen(ap.status) && ap.kanLoses),
-    alleKodeverk: value.alleKodeverk,
+    alleKodeverk,
     aksjonspunkter: aksjonspunkterForSteg,
     readOnly,
     alleMerknaderFraBeslutter,
     submitCallback,
-    formData,
-    setFormData,
   };
 };

@@ -33,6 +33,7 @@ import {
   VurdereAnnenYtelseForVedtakAp,
   VurdereDokumentForVedtakAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { useFormData } from '@navikt/fp-utils';
 
 import VedtakFellesPanel from '../felles/VedtakFellesPanel';
 import { getTilbakekrevingText } from '../felles/VedtakHelper';
@@ -199,8 +200,6 @@ interface OwnProps {
   vilkar?: Vilkar[];
   beregningErManueltFastsatt: boolean;
   submitCallback: (data: VedtakAksjonspunkter[]) => Promise<void>;
-  formData?: FormValues;
-  setFormData: (data: FormValues) => void;
 }
 
 const VedtakForm: FunctionComponent<OwnProps> = ({
@@ -216,10 +215,10 @@ const VedtakForm: FunctionComponent<OwnProps> = ({
   vilkar,
   beregningErManueltFastsatt,
   submitCallback,
-  formData,
-  setFormData,
 }) => {
   const intl = useIntl();
+
+  const { formData, setFormData } = useFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
     defaultValues: formData || buildInitialValues(aksjonspunkter, behandling, beregningErManueltFastsatt),

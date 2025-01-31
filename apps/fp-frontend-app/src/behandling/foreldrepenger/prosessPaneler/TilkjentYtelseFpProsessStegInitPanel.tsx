@@ -1,3 +1,4 @@
+import { use } from 'react';
 import { useIntl } from 'react-intl';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -12,6 +13,7 @@ import { BehandlingRel, useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
+import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_TILBAKETREKK];
 
@@ -27,13 +29,14 @@ export const TilkjentYtelseFpProsessStegInitPanel = ({
 }: Props & ProsessPanelInitProps) => {
   const intl = useIntl();
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
+  const { behandling } = use(BehandlingDataContext);
 
-  const api = useBehandlingApi(props.behandling);
+  const api = useBehandlingApi(behandling);
 
-  const { data: beregningsresultatDagytelse } = useQuery(api.beregningsresultatDagytelseOptions(props.behandling));
-  const { data: familiehendelse } = useQuery(api.familiehendelseOptions(props.behandling));
-  const { data: søknad } = useQuery(api.søknadOptions(props.behandling));
-  const { data: feriepengegrunnlag } = useQuery(api.feriepengegrunnlagOptions(props.behandling));
+  const { data: beregningsresultatDagytelse } = useQuery(api.beregningsresultatDagytelseOptions(behandling));
+  const { data: familiehendelse } = useQuery(api.familiehendelseOptions(behandling));
+  const { data: søknad } = useQuery(api.søknadOptions(behandling));
+  const { data: feriepengegrunnlag } = useQuery(api.feriepengegrunnlagOptions(behandling));
 
   return (
     <ProsessDefaultInitPanel
@@ -43,7 +46,7 @@ export const TilkjentYtelseFpProsessStegInitPanel = ({
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.TilkjentYtelse' })}
       skalPanelVisesIMeny
       hentOverstyrtStatus={
-        props.behandling.links.find(link => link.rel === BehandlingRel.BEREGNINGRESULTAT_DAGYTELSE)
+        behandling.links.find(link => link.rel === BehandlingRel.BEREGNINGRESULTAT_DAGYTELSE)
           ? VilkarUtfallType.OPPFYLT
           : VilkarUtfallType.IKKE_VURDERT
       }

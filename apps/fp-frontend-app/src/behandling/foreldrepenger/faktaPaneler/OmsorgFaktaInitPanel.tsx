@@ -1,3 +1,4 @@
+import { use } from 'react';
 import { useIntl } from 'react-intl';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -12,6 +13,7 @@ import { useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
+import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG];
 
@@ -22,9 +24,11 @@ interface Props {
 export const OmsorgFaktaInitPanel = ({ personoversikt, ...props }: Props & FaktaPanelInitProps) => {
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
-  const api = useBehandlingApi(props.behandling);
+  const { behandling } = use(BehandlingDataContext);
 
-  const { data: ytelsefordeling } = useQuery(api.ytelsefordelingOptions(props.behandling));
+  const api = useBehandlingApi(behandling);
+
+  const { data: ytelsefordeling } = useQuery(api.ytelsefordelingOptions(behandling));
 
   return (
     <FaktaDefaultInitPanel
@@ -32,7 +36,7 @@ export const OmsorgFaktaInitPanel = ({ personoversikt, ...props }: Props & Fakta
       standardPanelProps={standardPanelProps}
       faktaPanelKode={FaktaPanelCode.OMSORG}
       faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.Omsorg' })}
-      skalPanelVisesIMeny={AKSJONSPUNKT_KODER.some(kode => hasAksjonspunkt(kode, props.behandling.aksjonspunkt))}
+      skalPanelVisesIMeny={AKSJONSPUNKT_KODER.some(kode => hasAksjonspunkt(kode, behandling.aksjonspunkt))}
     >
       {ytelsefordeling ? (
         <OmsorgFaktaIndex ytelsefordeling={ytelsefordeling} personoversikt={personoversikt} {...standardPanelProps} />

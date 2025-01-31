@@ -26,8 +26,6 @@ export const SokersOpplysningspliktVilkarProsessIndex = ({
   alleKodeverk,
   arbeidsgiverOpplysningerPerId,
   alleMerknaderFraBeslutter,
-  formData,
-  setFormData,
 }: Props & StandardProsessPanelProps) => (
   <RawIntlProvider value={intl}>
     <SokersOpplysningspliktForm
@@ -41,8 +39,6 @@ export const SokersOpplysningspliktVilkarProsessIndex = ({
       alleKodeverk={alleKodeverk}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       erIkkeGodkjentAvBeslutter={aksjonspunkter.some(a => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted)}
-      formData={formData}
-      setFormData={setFormData}
     />
   </RawIntlProvider>
 );

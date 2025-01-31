@@ -2,7 +2,7 @@ import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, Behandling, Fagsak, Soknad } from '@navikt/fp-types';
 
 import { VurderSoknadsfristForeldrepengerIndex } from './VurderSoknadsfristForeldrepengerIndex';
@@ -26,6 +26,7 @@ const soknad = {
 const meta = {
   title: 'prosess/prosess-soknadsfrist',
   component: VurderSoknadsfristForeldrepengerIndex,
+  decorators: [withFormData],
   args: {
     behandling,
     alleKodeverk: alleKodeverk as any,
@@ -35,7 +36,6 @@ const meta = {
     status: '',
     vilkar: [],
     alleMerknaderFraBeslutter: {},
-    setFormData: () => undefined,
     soknad,
     aksjonspunkter: [
       {

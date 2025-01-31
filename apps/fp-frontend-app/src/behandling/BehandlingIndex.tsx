@@ -1,18 +1,24 @@
-import { Suspense, useEffect } from 'react';
+import { Suspense, useCallback, useEffect, useState } from 'react';
+import { NavigateFunction, useLocation, useNavigate } from 'react-router';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
+import { replaceNorwegianCharacters } from '@navikt/ft-utils';
 import { useQuery } from '@tanstack/react-query';
+import { Location } from 'history';
 
 import { Behandling } from '@navikt/fp-types';
 
 import { ErrorBoundary } from '../app/ErrorBoundary';
+import { getFaktaLocation, getLocationWithDefaultProsessStegAndFakta, getProsessStegLocation } from '../app/paths';
 import { useTrackRouteParam } from '../app/useTrackRouteParam';
 import { getAccessRights } from '../app/util/access';
 import { useRestApiErrorDispatcher } from '../data/error/RestApiErrorContext';
-import { initFetchOptions } from '../data/fagsakApi';
+import { initFetchOptions, useFagsakApi } from '../data/fagsakApi';
 import { notEmpty } from '../data/notEmpty';
+import { useBehandlingPollingOperasjoner } from '../data/polling/useBehandlingPollingOperasjoner';
 import { FagsakData } from '../fagsak/FagsakData';
 import { BehandlingPanelerIndex } from './BehandlingPanelerIndex';
+import { BehandlingDataProvider } from './felles/utils/behandlingDataContext';
 import { lazyWithRetry } from './lazyUtils';
 
 const BehandlingPapirsoknadIndex = lazyWithRetry(() => import('./papirsoknad/BehandlingPapirsoknadIndex'));
@@ -37,8 +43,6 @@ export const BehandlingIndex = ({
   fagsakData,
   setBehandlingUuidFraUrl,
 }: Props) => {
-  const { addErrorMessage } = useRestApiErrorDispatcher();
-
   const { selected: behandlingUuid } = useTrackRouteParam<string>({
     paramName: 'behandlingUuid',
     parse: behandlingUuidFromUrl => behandlingUuidFromUrl,
@@ -48,47 +52,122 @@ export const BehandlingIndex = ({
     setBehandlingUuidFraUrl(behandlingUuid);
   }, [behandlingUuid]);
 
-  const initFetchQuery = useQuery(initFetchOptions());
-
   if (!behandling) {
     return <LoadingPanel />;
   }
+
+  return (
+    <BehandlingIndexWrapper
+      behandling={behandling}
+      setBehandling={setBehandling}
+      hentOgSettBehandling={hentOgSettBehandling}
+      fagsakData={fagsakData}
+    />
+  );
+};
+
+interface BehandlingIndexWrapperProps {
+  behandling: Behandling;
+  setBehandling: (behandling: Behandling) => void;
+  hentOgSettBehandling: () => void;
+  fagsakData: FagsakData;
+}
+
+export const BehandlingIndexWrapper = ({
+  behandling,
+  setBehandling,
+  hentOgSettBehandling,
+  fagsakData,
+}: BehandlingIndexWrapperProps) => {
+  const { addErrorMessage } = useRestApiErrorDispatcher();
+
+  const initFetchQuery = useQuery(initFetchOptions());
 
   const fagsak = fagsakData.getFagsak();
   const rettigheter = getAccessRights(
     notEmpty(initFetchQuery.data).innloggetBruker,
     fagsak.status,
-    behandling?.status,
-    behandling?.type,
+    behandling.status,
+    behandling.type,
   );
 
-  if (behandling.erAktivPapirsoknad) {
-    return (
-      <Suspense fallback={<LoadingPanel />}>
-        <ErrorBoundary errorMessageCallback={addErrorMessage}>
-          <BehandlingPapirsoknadIndex
-            key={behandling.uuid}
-            behandling={behandling}
-            setBehandling={setBehandling}
-            fagsak={fagsak}
-            rettigheter={rettigheter}
-          />
-        </ErrorBoundary>
-      </Suspense>
-    );
+  const [skalOppdatereEtterBekreftelseAvAp, setSkalOppdatereEtterBekreftelseAvAp] = useState(true);
+
+  const { lagreAksjonspunkter, lagreOverstyrteAksjonspunkter } = useBehandlingPollingOperasjoner(
+    behandling,
+    oppdatertBehandling => {
+      if (oppdatertBehandling && skalOppdatereEtterBekreftelseAvAp) {
+        setBehandling(oppdatertBehandling);
+      }
+    },
+  );
+
+  const fagsakApi = useFagsakApi();
+  const { data: kodeverk } = useQuery(fagsakApi.kodeverkOptions());
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const oppdaterProsessStegOgFaktaPanelIUrl = useCallback(getOppdaterProsessStegOgFaktaPanelIUrl(location, navigate), [
+    location,
+    navigate,
+  ]);
+
+  if (kodeverk === undefined) {
+    return <LoadingPanel />;
   }
 
   return (
-    <ErrorBoundary errorMessageCallback={addErrorMessage}>
-      <BehandlingPanelerIndex
-        key={behandling.uuid}
-        behandling={behandling}
-        fagsak={fagsak}
-        rettigheter={rettigheter}
-        setBehandling={setBehandling}
-        hentOgSettBehandling={hentOgSettBehandling}
-        alleBehandlinger={fagsakData.getAlleBehandlinger()}
-      />
-    </ErrorBoundary>
+    <BehandlingDataProvider
+      behandling={behandling}
+      alleBehandlinger={fagsakData.getAlleBehandlinger()}
+      fagsak={fagsak}
+      rettigheter={rettigheter}
+      alleKodeverk={kodeverk}
+      lagreAksjonspunkter={lagreAksjonspunkter}
+      lagreOverstyrteAksjonspunkter={lagreOverstyrteAksjonspunkter}
+      setSkalOppdatereEtterBekreftelseAvAp={setSkalOppdatereEtterBekreftelseAvAp}
+      hentOgSettBehandling={hentOgSettBehandling}
+      oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+    >
+      <>
+        {behandling.erAktivPapirsoknad && (
+          <Suspense fallback={<LoadingPanel />}>
+            <ErrorBoundary errorMessageCallback={addErrorMessage}>
+              <BehandlingPapirsoknadIndex key={behandling.uuid} />
+            </ErrorBoundary>
+          </Suspense>
+        )}
+        {!behandling.erAktivPapirsoknad && (
+          <ErrorBoundary errorMessageCallback={addErrorMessage}>
+            <BehandlingPanelerIndex key={behandling.uuid} />
+          </ErrorBoundary>
+        )}
+      </>
+    </BehandlingDataProvider>
   );
 };
+
+const getOppdaterProsessStegOgFaktaPanelIUrl =
+  (location: Location, navigate: NavigateFunction) =>
+  (prosessStegId?: string, faktaPanelId?: string): void => {
+    let newLocation;
+    if (prosessStegId === 'default') {
+      newLocation = getLocationWithDefaultProsessStegAndFakta(location);
+    } else if (prosessStegId) {
+      newLocation = getProsessStegLocation(location)(formatName(prosessStegId));
+    } else {
+      newLocation = getProsessStegLocation(location)();
+    }
+
+    if (faktaPanelId === 'default') {
+      newLocation = getFaktaLocation(newLocation)('default');
+    } else if (faktaPanelId) {
+      newLocation = getFaktaLocation(newLocation)(formatName(faktaPanelId));
+    } else {
+      newLocation = getFaktaLocation(newLocation)();
+    }
+
+    navigate(newLocation);
+  };
+
+const formatName = (bpName = ''): string => replaceNorwegianCharacters(bpName.toLowerCase());

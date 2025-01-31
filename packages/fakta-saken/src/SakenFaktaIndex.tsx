@@ -29,8 +29,6 @@ export const SakenFaktaIndex = ({
   harApneAksjonspunkter,
   readOnly,
   alleMerknaderFraBeslutter,
-  formData,
-  setFormData,
   kanOverstyreAccess,
 }: Props & StandardFaktaPanelProps) => (
   <RawIntlProvider value={intl}>
@@ -44,8 +42,6 @@ export const SakenFaktaIndex = ({
       readOnly={readOnly}
       submittable={submittable}
       alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-      formData={formData}
-      setFormData={setFormData}
       kanOverstyreAccess={kanOverstyreAccess}
     />
   </RawIntlProvider>

@@ -1,3 +1,4 @@
+import { use } from 'react';
 import { useIntl } from 'react-intl';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -12,6 +13,7 @@ import { useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
+import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.KONTROLLER_AUTOMATISK_BESTEBEREGNING,
@@ -27,9 +29,10 @@ export const BesteberegningFaktaInitPanel = ({
   ...props
 }: Props & FaktaPanelInitProps) => {
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
+  const { behandling } = use(BehandlingDataContext);
 
-  const api = useBehandlingApi(props.behandling);
-  const { data: beregningsgrunnlag } = useQuery(api.beregningsgrunnlagOptions(props.behandling));
+  const api = useBehandlingApi(behandling);
+  const { data: beregningsgrunnlag } = useQuery(api.beregningsgrunnlagOptions(behandling));
 
   return (
     <FaktaDefaultInitPanel

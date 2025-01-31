@@ -9,6 +9,7 @@ import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-f
 import { KodeverkType } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, AlleKodeverk, AlleKodeverkTilbakekreving, Verge } from '@navikt/fp-types';
 import { AvklarVergeAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { useFormData } from '@navikt/fp-utils';
 
 import RegistrereVergeFaktaForm, { FormValues as RegistrereFormValues } from './RegistrereVergeFaktaForm';
 
@@ -35,8 +36,6 @@ interface Props {
   submittable: boolean;
   readOnly: boolean;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
-  formData?: any;
-  setFormData: (data: any) => void;
 }
 
 /**
@@ -53,10 +52,10 @@ const RegistrereVergeInfoPanel = ({
   verge,
   alleKodeverk,
   submitCallback,
-  formData,
-  setFormData,
 }: Props) => {
   const intl = useIntl();
+
+  const { formData, setFormData } = useFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
     defaultValues: formData || buildInitialValues(verge, aksjonspunkter),

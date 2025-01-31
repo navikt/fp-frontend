@@ -1,3 +1,4 @@
+import { use } from 'react';
 import { useIntl } from 'react-intl';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -7,13 +8,14 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { AksjonspunktKode, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { SimuleringProsessIndex } from '@navikt/fp-prosess-simulering';
-import { ArbeidsgiverOpplysningerPerId, Fagsak } from '@navikt/fp-types';
+import { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
 import { forhåndsvisTilbakekrevingMelding, harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { ProsessPanelMenyData } from '../../felles/typer/prosessPanelMenyData';
+import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.VURDER_FEILUTBETALING,
@@ -22,22 +24,21 @@ const AKSJONSPUNKT_KODER = [
 
 interface Props {
   menyData: ProsessPanelMenyData[];
-  fagsak: Fagsak;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 export const SimuleringProsessStegInitPanel = ({
   menyData,
-  fagsak,
   arbeidsgiverOpplysningerPerId,
   ...props
 }: Props & ProsessPanelInitProps) => {
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
+  const { behandling, fagsak } = use(BehandlingDataContext);
 
-  const api = useBehandlingApi(props.behandling);
+  const api = useBehandlingApi(behandling);
 
-  const { data: tilbakekrevingValg, isFetching } = useQuery(api.tilbakekrevingValgOptions(props.behandling));
-  const { data: simuleringResultat } = useQuery(api.simuleringResultatOptions(props.behandling));
+  const { data: tilbakekrevingValg, isFetching } = useQuery(api.tilbakekrevingValgOptions(behandling));
+  const { data: simuleringResultat } = useQuery(api.simuleringResultatOptions(behandling));
 
   const { mutate: forhåndsvis } = useMutation({
     mutationFn: (values: { mottaker: string; fritekst: string }) =>
@@ -59,9 +60,9 @@ export const SimuleringProsessStegInitPanel = ({
       standardPanelProps={standardPanelProps}
       prosessPanelKode={ProsessStegCode.SIMULERING}
       prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.Avregning' })}
-      skalPanelVisesIMeny={harLenke(props.behandling, 'SIMULERING_RESULTAT') || !harVedtakspanel}
+      skalPanelVisesIMeny={harLenke(behandling, 'SIMULERING_RESULTAT') || !harVedtakspanel}
       hentOverstyrtStatus={
-        harLenke(props.behandling, 'SIMULERING_RESULTAT') ? VilkarUtfallType.OPPFYLT : VilkarUtfallType.IKKE_VURDERT
+        harLenke(behandling, 'SIMULERING_RESULTAT') ? VilkarUtfallType.OPPFYLT : VilkarUtfallType.IKKE_VURDERT
       }
     >
       {!isFetching ? (

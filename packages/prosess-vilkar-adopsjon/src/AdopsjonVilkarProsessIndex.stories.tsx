@@ -2,7 +2,7 @@ import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, Avslagsarsak, VilkarUtfallType } from '@navikt/fp-kodeverk';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, Behandling, Fagsak, Vilkar } from '@navikt/fp-types';
 
 import AdopsjonVilkarProsessIndex from './AdopsjonVilkarProsessIndex';
@@ -16,12 +16,12 @@ const defaultBehandling = {
 const meta = {
   title: 'prosess/prosess-vilkar-adopsjon',
   component: AdopsjonVilkarProsessIndex,
+  decorators: [withFormData],
   args: {
     submitCallback: action('button-click') as (data: any) => Promise<any>,
     alleKodeverk: alleKodeverk as any,
     isAksjonspunktOpen: true,
     alleMerknaderFraBeslutter: {},
-    setFormData: () => undefined,
     vilkar: [
       {
         lovReferanse: '§§Dette er en lovreferanse',

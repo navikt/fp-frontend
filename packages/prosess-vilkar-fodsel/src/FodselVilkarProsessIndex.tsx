@@ -26,8 +26,6 @@ export const FodselVilkarProsessIndex = ({
   isAksjonspunktOpen,
   alleKodeverk,
   alleMerknaderFraBeslutter,
-  formData,
-  setFormData,
 }: Props & StandardProsessPanelProps) => (
   <RawIntlProvider value={intl}>
     <FodselVilkarForm
@@ -42,8 +40,6 @@ export const FodselVilkarProsessIndex = ({
       isApOpen={isAksjonspunktOpen}
       alleKodeverk={alleKodeverk}
       erIkkeGodkjentAvBeslutter={aksjonspunkter.some(a => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted)}
-      formData={formData}
-      setFormData={setFormData}
     />
   </RawIntlProvider>
 );

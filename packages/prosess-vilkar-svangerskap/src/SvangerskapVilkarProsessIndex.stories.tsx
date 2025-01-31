@@ -8,7 +8,7 @@ import {
   TilretteleggingType,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
 import {
   Aksjonspunkt,
   ArbeidsforholdFodselOgTilrettelegging,
@@ -29,12 +29,12 @@ const defaultBehandling = {
 const meta = {
   title: 'prosess/prosess-vilkar-svangerskap',
   component: SvangerskapVilkarProsessIndex,
+  decorators: [withFormData],
   args: {
     submitCallback: action('button-click') as (data: any) => Promise<void>,
     alleKodeverk: alleKodeverk as any,
     isAksjonspunktOpen: true,
     alleMerknaderFraBeslutter: {},
-    setFormData: () => undefined,
     svangerskapspengerTilrettelegging: {} as FodselOgTilrettelegging,
     vilkar: [
       {

@@ -1,5 +1,3 @@
-import { Behandling } from '@navikt/fp-types';
-
 import { ProsessPanelMenyData } from './prosessPanelMenyData';
 
 export type ProsessPanelExtraInitProps = {
@@ -8,7 +6,6 @@ export type ProsessPanelExtraInitProps = {
 };
 
 export type ProsessPanelInitProps = {
-  behandling: Behandling;
   valgtProsessSteg?: string;
   registrerProsessPanel: (data: ProsessPanelMenyData) => void;
 };

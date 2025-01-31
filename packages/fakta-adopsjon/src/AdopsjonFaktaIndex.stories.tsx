@@ -2,7 +2,7 @@ import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, SoknadType } from '@navikt/fp-kodeverk';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
 import { Behandling, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
 
 import { AdopsjonFaktaIndex } from './AdopsjonFaktaIndex';
@@ -43,13 +43,13 @@ const merknaderFraBeslutter = {
 const meta = {
   title: 'fakta/fakta-adopsjon',
   component: AdopsjonFaktaIndex,
+  decorators: [withFormData],
   args: {
     soknad,
     familiehendelse: familieHendelse,
     readOnly: false,
     harApneAksjonspunkter: true,
     submittable: true,
-    setFormData: () => undefined,
     behandling: behandling,
     submitCallback: action('button-click') as (data: any) => Promise<void>,
     isForeldrepengerFagsak: true,

@@ -2,7 +2,7 @@ import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
 import { Behandling } from '@navikt/fp-types';
 
 import { BesteberegningFaktaIndex } from './BesteberegningFaktaIndex';
@@ -36,13 +36,13 @@ const lagAksjonspunkt = (apKode: string, status: string, begrunnelse?: string) =
 const meta = {
   title: 'fakta/fakta-besteberegning',
   component: BesteberegningFaktaIndex,
+  decorators: [withFormData],
   args: {
     submitCallback: action('button-click') as (data: any) => Promise<void>,
     readOnly: false,
     submittable: true,
     alleMerknaderFraBeslutter: {},
     alleKodeverk: alleKodeverk as any,
-    setFormData: () => undefined,
     arbeidsgiverOpplysninger,
     behandling: {
       uuid: '1',

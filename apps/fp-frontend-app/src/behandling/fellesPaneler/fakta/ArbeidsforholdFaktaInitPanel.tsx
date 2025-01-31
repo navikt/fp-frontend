@@ -1,3 +1,4 @@
+import { use } from 'react';
 import { useIntl } from 'react-intl';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -12,6 +13,7 @@ import { useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
+import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.AVKLAR_ARBEIDSFORHOLD];
 
@@ -32,9 +34,11 @@ export const ArbeidsforholdFaktaInitPanel = ({
 
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
-  const api = useBehandlingApi(props.behandling);
+  const { behandling } = use(BehandlingDataContext);
 
-  const { data: arbeidOgInntekt } = useQuery(api.arbeidOgInntektOptions(props.behandling));
+  const api = useBehandlingApi(behandling);
+
+  const { data: arbeidOgInntekt } = useQuery(api.arbeidOgInntektOptions(behandling));
 
   return (
     <FaktaDefaultInitPanel
@@ -42,7 +46,7 @@ export const ArbeidsforholdFaktaInitPanel = ({
       standardPanelProps={standardPanelProps}
       faktaPanelKode={FaktaPanelCode.ARBEIDSFORHOLD}
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Arbeidsforhold' })}
-      skalPanelVisesIMeny={AKSJONSPUNKT_KODER.some(kode => hasAksjonspunkt(kode, props.behandling.aksjonspunkt))}
+      skalPanelVisesIMeny={AKSJONSPUNKT_KODER.some(kode => hasAksjonspunkt(kode, behandling.aksjonspunkt))}
     >
       {arbeidOgInntekt ? (
         <ArbeidsforholdFaktaIndex

@@ -1,3 +1,4 @@
+import { ComponentProps, use } from 'react';
 import { useIntl } from 'react-intl';
 
 import {
@@ -14,11 +15,13 @@ import { useQuery } from '@tanstack/react-query';
 import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkar as FpVilkar, Vilkarperiode } from '@navikt/fp-types';
+import { useFormData } from '@navikt/fp-utils';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
+import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 import '@navikt/ft-prosess-beregningsgrunnlag/dist/style.css';
 
@@ -107,9 +110,11 @@ export const BeregningsgrunnlagProsessStegInitPanel = ({
 
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, VILKAR_KODER);
 
-  const api = useBehandlingApi(props.behandling);
+  const { behandling } = use(BehandlingDataContext);
 
-  const { data: beregningsgrunnlag, isFetching } = useQuery(api.beregningsgrunnlagOptions(props.behandling));
+  const api = useBehandlingApi(behandling);
+
+  const { data: beregningsgrunnlag, isFetching } = useQuery(api.beregningsgrunnlagOptions(behandling));
 
   return (
     <ProsessDefaultInitPanel
@@ -120,7 +125,7 @@ export const BeregningsgrunnlagProsessStegInitPanel = ({
       skalPanelVisesIMeny
     >
       {!isFetching ? (
-        <BeregningsgrunnlagProsessIndex
+        <Wrapper
           {...standardPanelProps}
           kodeverkSamling={standardPanelProps.alleKodeverk}
           beregningsgrunnlagsvilkar={lagBGVilkar(standardPanelProps.vilkar, beregningsgrunnlag)}
@@ -133,4 +138,9 @@ export const BeregningsgrunnlagProsessStegInitPanel = ({
       )}
     </ProsessDefaultInitPanel>
   );
+};
+
+const Wrapper = (props: ComponentProps<typeof BeregningsgrunnlagProsessIndex>) => {
+  const { formData, setFormData } = useFormData();
+  return <BeregningsgrunnlagProsessIndex {...props} formData={formData} setFormData={setFormData} />;
 };

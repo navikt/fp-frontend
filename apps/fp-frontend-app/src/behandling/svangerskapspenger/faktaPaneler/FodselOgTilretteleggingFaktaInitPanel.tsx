@@ -1,3 +1,4 @@
+import { use } from 'react';
 import { useIntl } from 'react-intl';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -12,6 +13,7 @@ import { useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
+import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.FODSELTILRETTELEGGING];
 
@@ -27,11 +29,13 @@ export const FodselOgTilretteleggingFaktaInitPanel = ({
 }: Props & FaktaPanelInitProps) => {
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER, OVERSTYRING_AP_CODES);
 
-  const api = useBehandlingApi(props.behandling);
+  const { behandling } = use(BehandlingDataContext);
 
-  const { data: arbeidOgInntekt } = useQuery(api.arbeidOgInntektOptions(props.behandling));
+  const api = useBehandlingApi(behandling);
+
+  const { data: arbeidOgInntekt } = useQuery(api.arbeidOgInntektOptions(behandling));
   const { data: svangerskapspengerTilrettelegging } = useQuery(
-    api.svp.svangerskapspengerTilretteleggingOptions(props.behandling),
+    api.svp.svangerskapspengerTilretteleggingOptions(behandling),
   );
 
   return (
@@ -52,7 +56,7 @@ export const FodselOgTilretteleggingFaktaInitPanel = ({
           {...standardPanelProps}
           readOnly={
             standardPanelProps.readOnly ||
-            !AKSJONSPUNKT_KODER.some(kode => hasAksjonspunkt(kode, props.behandling.aksjonspunkt))
+            !AKSJONSPUNKT_KODER.some(kode => hasAksjonspunkt(kode, behandling.aksjonspunkt))
           }
         />
       ) : (

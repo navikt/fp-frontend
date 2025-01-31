@@ -16,6 +16,4 @@ export interface StandardProsessPanelProps {
   aksjonspunkter: Aksjonspunkt[];
   vilkar: Vilkar[];
   isAksjonspunktOpen: boolean;
-  formData?: any;
-  setFormData: (data: any) => void;
 }

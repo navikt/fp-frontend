@@ -5,7 +5,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Label } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 
-import { AksjonspunktKode, AksjonspunktStatus,KodeverkType, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus, KodeverkType, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import {
   ProsessPanelTemplate,
   ProsessStegBegrunnelseTextFieldNew,
@@ -18,6 +18,7 @@ import {
   VurdereYtelseSammeBarnAnnenForelderAp,
   VurdereYtelseSammeBarnSokerAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { useFormData } from '@navikt/fp-utils';
 
 type FormValues = {
   erVilkarOk?: boolean;
@@ -57,8 +58,6 @@ interface OwnProps {
   readOnlySubmitButton: boolean;
   alleKodeverk: AlleKodeverk;
   erIkkeGodkjentAvBeslutter: boolean;
-  formData?: FormValues;
-  setFormData: (data: FormValues) => void;
 }
 
 /**
@@ -75,8 +74,6 @@ const ErOmsorgVilkaarOppfyltForm: FunctionComponent<OwnProps> = ({
   behandlingsresultat,
   erIkkeGodkjentAvBeslutter,
   alleKodeverk,
-  formData,
-  setFormData,
 }) => {
   const intl = useIntl();
 
@@ -84,6 +81,7 @@ const ErOmsorgVilkaarOppfyltForm: FunctionComponent<OwnProps> = ({
     () => buildInitialValues(aksjonspunkter, status, behandlingsresultat),
     [behandlingsresultat, aksjonspunkter, status],
   );
+  const { formData, setFormData } = useFormData<FormValues>();
   const formMethods = useForm<FormValues>({
     defaultValues: formData || initialValues,
   });

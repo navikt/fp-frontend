@@ -2,7 +2,7 @@ import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, BehandlingType } from '@navikt/fp-kodeverk';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, Behandling, Fagsak, FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
 
 import { VarselOmRevurderingProsessIndex } from './VarselOmRevurderingProsessIndex';
@@ -66,6 +66,7 @@ const aksjonspunkter = [
 const meta = {
   title: 'prosess/prosess-varsel-om-revurdering',
   component: VarselOmRevurderingProsessIndex,
+  decorators: [withFormData],
   args: {
     alleKodeverk: alleKodeverk as any,
     aksjonspunkter,
@@ -75,7 +76,6 @@ const meta = {
     status: '',
     vilkar: [],
     alleMerknaderFraBeslutter: {},
-    setFormData: () => undefined,
     familiehendelse: familieHendelse,
     soknad,
     soknadOriginalBehandling,

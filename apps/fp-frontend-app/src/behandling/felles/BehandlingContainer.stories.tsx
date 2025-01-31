@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
-import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
-import { Behandling } from '@navikt/fp-types';
 
 import { BehandlingContainer } from './BehandlingContainer';
 import { FaktaPanelInitProps } from './typer/faktaPanelInitProps';
@@ -89,20 +87,8 @@ const meta = {
   component: BehandlingContainer,
   decorators: [withIntl],
   args: {
-    behandling: {} as Behandling,
-    oppdaterProsessStegOgFaktaPanelIUrl: action('button-click'),
     valgtFaktaSteg: 'default',
     valgtProsessSteg: 'default',
-  },
-  render: storyArgs => {
-    const [args, setArgs] = useState(storyArgs);
-
-    const oppdaterProsessStegOgFaktaPanelIUrl = (punktnavn?: string, faktanavn?: string) => {
-      args.oppdaterProsessStegOgFaktaPanelIUrl?.(punktnavn, faktanavn);
-      setArgs(oldArgs => ({ ...oldArgs, valgtProsessSteg: punktnavn, valgtFaktaSteg: faktanavn }));
-    };
-
-    return <BehandlingContainer {...args} oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl} />;
   },
 } satisfies Meta<typeof BehandlingContainer>;
 export default meta;

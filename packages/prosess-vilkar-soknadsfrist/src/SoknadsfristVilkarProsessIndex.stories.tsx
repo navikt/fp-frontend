@@ -9,7 +9,7 @@ import {
   VilkarType,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, Behandling, Fagsak, FamilieHendelseSamling, Soknad, Vilkar } from '@navikt/fp-types';
 
 import { SoknadsfristVilkarProsessIndex } from './SoknadsfristVilkarProsessIndex';
@@ -51,13 +51,13 @@ const familiehendelse = {
 const meta = {
   title: 'prosess/prosess-vilkar-soknadsfrist',
   component: SoknadsfristVilkarProsessIndex,
+  decorators: [withFormData],
   args: {
     submitCallback: action('button-click') as (data: any) => Promise<void>,
     alleKodeverk: alleKodeverk as any,
     isAksjonspunktOpen: true,
     vilkar,
     alleMerknaderFraBeslutter: {},
-    setFormData: () => undefined,
     soknad,
     familiehendelse,
     fagsak: {} as Fagsak,

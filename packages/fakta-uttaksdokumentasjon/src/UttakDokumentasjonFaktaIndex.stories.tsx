@@ -2,7 +2,7 @@ import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
 import { Behandling, DokumentasjonVurderingBehov, UttakÅrsak, UttakType, UttakVurdering } from '@navikt/fp-types';
 
 import { UttakDokumentasjonFaktaIndex } from './UttakDokumentasjonFaktaIndex';
@@ -46,11 +46,11 @@ const opprettetDokumentasjonVurderingBehovListe = [
 const meta = {
   title: 'fakta/fakta-uttaksdokumentasjon',
   component: UttakDokumentasjonFaktaIndex,
+  decorators: [withFormData],
   args: {
     behandling,
     alleKodeverk: alleKodeverk as any,
     alleMerknaderFraBeslutter: {},
-    setFormData: () => undefined,
     submitCallback: action('button-click') as (data: any) => Promise<void>,
   },
 } satisfies Meta<typeof UttakDokumentasjonFaktaIndex>;

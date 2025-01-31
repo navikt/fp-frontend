@@ -24,8 +24,6 @@ export const VergeFaktaIndex = ({
   readOnly,
   harApneAksjonspunkter,
   submittable,
-  formData,
-  setFormData,
 }: Props & StandardFaktaPanelProps) => (
   <RawIntlProvider value={intl}>
     <RegistrereVergeInfoPanel
@@ -37,8 +35,6 @@ export const VergeFaktaIndex = ({
       submitCallback={submitCallback}
       readOnly={readOnly}
       submittable={submittable}
-      formData={formData}
-      setFormData={setFormData}
     />
   </RawIntlProvider>
 );

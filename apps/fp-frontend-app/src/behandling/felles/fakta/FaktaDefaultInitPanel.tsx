@@ -1,9 +1,11 @@
-import { ReactElement } from 'react';
+import { ReactElement, use } from 'react';
 
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { StandardFaktaPanelProps } from '@navikt/fp-types';
+import { FormDataProvider } from '@navikt/fp-utils';
 
 import { FaktaPanelInitProps } from '../typer/faktaPanelInitProps';
+import { BehandlingDataContext } from '../utils/behandlingDataContext';
 import { useFaktaMenyRegistrerer } from './useFaktaMenyRegistrerer';
 
 export type Props = {
@@ -23,7 +25,9 @@ export const FaktaDefaultInitPanel = ({
   faktaPanelMenyTekst,
   children,
 }: Props & FaktaPanelInitProps) => {
-  const erPanelValgt = useFaktaMenyRegistrerer(
+  const { behandling } = use(BehandlingDataContext);
+
+  const skalVisePanel = useFaktaMenyRegistrerer(
     registrerFaktaPanel,
     faktaPanelKode,
     faktaPanelMenyTekst,
@@ -32,5 +36,5 @@ export const FaktaDefaultInitPanel = ({
     valgtFaktaSteg,
   );
 
-  return erPanelValgt ? children : null;
+  return <FormDataProvider behandling={behandling}>{skalVisePanel ? children : null}</FormDataProvider>;
 };

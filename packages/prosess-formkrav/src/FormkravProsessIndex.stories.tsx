@@ -2,7 +2,7 @@ import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, BehandlingType, KlageVurdering as klageVurderingCodes } from '@navikt/fp-kodeverk';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, Behandling, Fagsak, KlageVurdering } from '@navikt/fp-types';
 
 import { FormkravProsessIndex } from './FormkravProsessIndex';
@@ -24,6 +24,7 @@ const avsluttedeBehandlinger = [
 const meta = {
   title: 'prosess/klage/prosess-formkrav',
   component: FormkravProsessIndex,
+  decorators: [withFormData],
   args: {
     behandling,
     submitCallback: action('button-click') as (data: any) => Promise<void>,
@@ -36,7 +37,6 @@ const meta = {
     status: '',
     vilkar: [],
     isAksjonspunktOpen: false,
-    setFormData: () => undefined,
     fagsak: {} as Fagsak,
   },
 } satisfies Meta<typeof FormkravProsessIndex>;

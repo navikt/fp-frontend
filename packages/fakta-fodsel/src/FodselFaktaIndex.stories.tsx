@@ -2,7 +2,7 @@ import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, BehandlingType, SoknadType } from '@navikt/fp-kodeverk';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
 import { Behandling, FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
 
 import { FodselFaktaIndex } from './FodselFaktaIndex';
@@ -80,13 +80,13 @@ const merknaderFraBeslutter = {
 const meta = {
   title: 'fakta/fakta-fodsel',
   component: FodselFaktaIndex,
+  decorators: [withFormData],
   args: {
     submitCallback: action('button-click') as (data: any) => Promise<void>,
     readOnly: false,
     harApneAksjonspunkter: true,
     submittable: true,
     alleKodeverk: alleKodeverk as any,
-    setFormData: () => undefined,
     behandling,
     soknad,
     familiehendelse: familieHendelse,

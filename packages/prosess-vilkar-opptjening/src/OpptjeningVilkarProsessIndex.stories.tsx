@@ -2,7 +2,7 @@ import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, VilkarUtfallType } from '@navikt/fp-kodeverk';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, Behandling, Fagsak, Opptjening } from '@navikt/fp-types';
 
 import opptjeningAktivitetKlassifisering from './kodeverk/opptjeningAktivitetKlassifisering';
@@ -40,6 +40,7 @@ const defaultOpptjening = {
 const meta = {
   title: 'prosess/prosess-vilkar-opptjening',
   component: OpptjeningVilkarProsessIndex,
+  decorators: [withFormData],
   args: {
     submitCallback: action('button-click') as (data: any) => Promise<any>,
     behandling,
@@ -50,7 +51,6 @@ const meta = {
     status: VilkarUtfallType.IKKE_VURDERT,
     vilkar: [],
     alleMerknaderFraBeslutter: {},
-    setFormData: () => undefined,
     lovReferanse: '§§Dette er en lovreferanse',
     erSvpFagsak: false,
     fagsak: {} as Fagsak,

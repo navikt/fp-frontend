@@ -26,8 +26,6 @@ export const ForeldreansvarVilkarProsessIndex = ({
   readOnlySubmitButton,
   alleKodeverk,
   alleMerknaderFraBeslutter,
-  formData,
-  setFormData,
 }: Props & StandardProsessPanelProps) => (
   <RawIntlProvider value={intl}>
     <ErForeldreansvarVilkaarOppfyltForm
@@ -41,8 +39,6 @@ export const ForeldreansvarVilkarProsessIndex = ({
       readOnlySubmitButton={readOnlySubmitButton}
       alleKodeverk={alleKodeverk}
       erIkkeGodkjentAvBeslutter={aksjonspunkter.some(a => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted)}
-      formData={formData}
-      setFormData={setFormData}
     />
   </RawIntlProvider>
 );

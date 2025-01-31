@@ -8,7 +8,7 @@ import {
   InnsynResultatType,
   Kommunikasjonsretning,
 } from '@navikt/fp-kodeverk';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, Behandling, Fagsak } from '@navikt/fp-types';
 
 import { VedtakInnsynProsessIndex } from './VedtakInnsynProsessIndex';
@@ -35,6 +35,7 @@ const defaultAksjonspunkter = [
 const meta = {
   title: 'prosess/innsyn/prosess-vedtak-innsyn',
   component: VedtakInnsynProsessIndex,
+  decorators: [withFormData],
   args: {
     submitCallback: action('button-click') as (data: any) => Promise<void>,
     previewCallback: action('button-click') as any,
@@ -47,7 +48,6 @@ const meta = {
     status: '',
     vilkar: [],
     alleMerknaderFraBeslutter: {},
-    setFormData: () => undefined,
     saksnummer: '123434',
     alleDokumenter: [
       {

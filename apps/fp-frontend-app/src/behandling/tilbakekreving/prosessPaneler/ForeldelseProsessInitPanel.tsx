@@ -1,24 +1,30 @@
+import { ComponentProps, use } from 'react';
 import { useIntl } from 'react-intl';
 
-import { ForeldelseAksjonspunktCodes, ForeldelseProsessIndex } from '@navikt/ft-prosess-tilbakekreving-foreldelse';
+import {
+  ForeldelseAksjonspunktCodes,
+  ForeldelseProsessIndex,
+  ForeldelsesresultatActivity,
+} from '@navikt/ft-prosess-tilbakekreving-foreldelse';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { KodeverkType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { AlleKodeverkTilbakekreving } from '@navikt/fp-types';
+import { useFormData } from '@navikt/fp-utils';
 
 import { BeregnBeløpParams, harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
+import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 import '@navikt/ft-prosess-tilbakekreving-foreldelse/dist/style.css';
 
 const AKSJONSPUNKT_KODER = [ForeldelseAksjonspunktCodes.VURDER_FORELDELSE];
 
 interface Props {
-  relasjonsRolleType: string;
   tilbakekrevingKodeverk: AlleKodeverkTilbakekreving;
 }
 
@@ -27,9 +33,11 @@ export const ForeldelseProsessInitPanel = ({ ...props }: Props & ProsessPanelIni
 
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
 
-  const api = useBehandlingApi(props.behandling);
+  const { behandling, fagsak } = use(BehandlingDataContext);
 
-  const { data: perioderForeldelse } = useQuery(api.tilbakekreving.perioderForeldelseOptions(props.behandling));
+  const api = useBehandlingApi(behandling);
+
+  const { data: perioderForeldelse } = useQuery(api.tilbakekreving.perioderForeldelseOptions(behandling));
 
   const { mutateAsync: beregnBeløp } = useMutation({
     mutationFn: (values: BeregnBeløpParams) => api.tilbakekreving.beregneBeløp(values),
@@ -43,15 +51,15 @@ export const ForeldelseProsessInitPanel = ({ ...props }: Props & ProsessPanelIni
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Foreldelse' })}
       skalPanelVisesIMeny
       hentOverstyrtStatus={
-        harLenke(props.behandling, 'PERIODER_FORELDELSE') ? VilkarUtfallType.OPPFYLT : VilkarUtfallType.IKKE_VURDERT
+        harLenke(behandling, 'PERIODER_FORELDELSE') ? VilkarUtfallType.OPPFYLT : VilkarUtfallType.IKKE_VURDERT
       }
     >
       {perioderForeldelse ? (
-        <ForeldelseProsessIndex
+        <Wrapper
           perioderForeldelse={perioderForeldelse}
           kodeverkSamlingFpTilbake={props.tilbakekrevingKodeverk}
           beregnBelop={(data: BeregnBeløpParams) => beregnBeløp(data)}
-          relasjonsRolleType={props.relasjonsRolleType}
+          relasjonsRolleType={fagsak.relasjonsRolleType}
           relasjonsRolleTypeKodeverk={standardPanelProps.alleKodeverk[KodeverkType.RELASJONSROLLE_TYPE]}
           {...standardPanelProps}
         />
@@ -60,4 +68,9 @@ export const ForeldelseProsessInitPanel = ({ ...props }: Props & ProsessPanelIni
       )}
     </ProsessDefaultInitPanel>
   );
+};
+
+const Wrapper = (props: ComponentProps<typeof ForeldelseProsessIndex>) => {
+  const { formData, setFormData } = useFormData<ForeldelsesresultatActivity[]>();
+  return <ForeldelseProsessIndex {...props} formData={formData} setFormData={setFormData} />;
 };

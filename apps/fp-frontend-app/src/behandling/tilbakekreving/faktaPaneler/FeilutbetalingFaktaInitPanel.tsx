@@ -1,3 +1,4 @@
+import { ComponentProps, use } from 'react';
 import { useIntl } from 'react-intl';
 
 import {
@@ -9,11 +10,13 @@ import { useQuery } from '@tanstack/react-query';
 
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { AlleKodeverkTilbakekreving } from '@navikt/fp-types';
+import { useFormData } from '@navikt/fp-utils';
 
 import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
+import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 import '@navikt/ft-fakta-tilbakekreving-feilutbetaling/dist/style.css';
 
@@ -21,18 +24,17 @@ const AKSJONSPUNKT_KODER = [FeilutbetalingAksjonspunktCode.AVKLAR_FAKTA_FOR_FEIL
 
 interface Props {
   tilbakekrevingKodeverk: AlleKodeverkTilbakekreving;
-  fagsakYtelseTypeKode: string;
 }
 
 export const FeilutbetalingFaktaInitPanel = ({
-  behandling,
   valgtFaktaSteg,
   registrerFaktaPanel,
   tilbakekrevingKodeverk,
-  fagsakYtelseTypeKode,
 }: FaktaPanelInitProps & Props) => {
   const intl = useIntl();
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
+
+  const { behandling, fagsak } = use(BehandlingDataContext);
 
   const api = useBehandlingApi(behandling);
 
@@ -42,7 +44,6 @@ export const FeilutbetalingFaktaInitPanel = ({
   return (
     <FaktaDefaultInitPanel
       standardPanelProps={standardPanelProps}
-      behandling={behandling}
       valgtFaktaSteg={valgtFaktaSteg}
       registrerFaktaPanel={registrerFaktaPanel}
       faktaPanelKode={FaktaPanelCode.FEILUTBETALING}
@@ -50,10 +51,10 @@ export const FeilutbetalingFaktaInitPanel = ({
       skalPanelVisesIMeny={harLenke(behandling, 'FEILUTBETALING_FAKTA')}
     >
       {feilutbetalingFakta && feilutbetalingÅrsak ? (
-        <FeilutbetalingFaktaIndex
+        <Wrapper
           feilutbetalingFakta={feilutbetalingFakta}
           feilutbetalingAarsak={feilutbetalingÅrsak}
-          fagsakYtelseTypeKode={fagsakYtelseTypeKode}
+          fagsakYtelseTypeKode={fagsak.fagsakYtelseType}
           kodeverkSamlingFpTilbake={tilbakekrevingKodeverk}
           kodeverkSamlingFpsak={standardPanelProps.alleKodeverk}
           isAksjonspunktOpen={standardPanelProps.harApneAksjonspunkter}
@@ -65,4 +66,9 @@ export const FeilutbetalingFaktaInitPanel = ({
       )}
     </FaktaDefaultInitPanel>
   );
+};
+
+const Wrapper = (props: ComponentProps<typeof FeilutbetalingFaktaIndex>) => {
+  const { formData, setFormData } = useFormData();
+  return <FeilutbetalingFaktaIndex {...props} formData={formData} setFormData={setFormData} />;
 };

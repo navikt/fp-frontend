@@ -1,34 +1,26 @@
-import React, { ReactElement, useCallback, useMemo, useState } from 'react';
+import { ReactElement, use, useCallback, useMemo, useState } from 'react';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 
-import { Behandling } from '@navikt/fp-types';
-
 import { ProsessPanelExtraInitProps, ProsessPanelInitProps } from '../typer/prosessPanelInitProps';
 import { ProsessPanelMenyData } from '../typer/prosessPanelMenyData';
+import { BehandlingDataContext } from '../utils/behandlingDataContext';
 import { BehandlingHenlagtPanel } from './BehandlingHenlagtPanel';
 import { ProsessMeny } from './ProsessMeny';
 
 import styles from './prosessContainer.module.css';
 
 interface Props {
-  behandling: Behandling;
   hentPaneler?: (props: ProsessPanelInitProps, ekstraProps: ProsessPanelExtraInitProps) => ReactElement;
   valgtProsessSteg?: string;
   valgtFaktaSteg?: string;
-  oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   apentFaktaPanelInfo?: { urlCode: string; text: string };
 }
 
-export const ProsessContainer = ({
-  behandling,
-  hentPaneler,
-  valgtProsessSteg,
-  valgtFaktaSteg,
-  oppdaterProsessStegOgFaktaPanelIUrl,
-  apentFaktaPanelInfo,
-}: Props) => {
+export const ProsessContainer = ({ hentPaneler, valgtProsessSteg, valgtFaktaSteg, apentFaktaPanelInfo }: Props) => {
   const [menyData, setMenyData] = useState<ProsessPanelMenyData[]>([]);
+
+  const { behandling, oppdaterProsessStegOgFaktaPanelIUrl } = use(BehandlingDataContext);
 
   const registrerProsessPanel = useCallback((nyData: ProsessPanelMenyData) => {
     setMenyData(oldData => {
@@ -70,7 +62,6 @@ export const ProsessContainer = ({
       {(!menyDataSomVises || menyDataSomVises.length === 0) && <LoadingPanel />}
       {hentPaneler(
         {
-          behandling,
           valgtProsessSteg,
           registrerProsessPanel,
         },

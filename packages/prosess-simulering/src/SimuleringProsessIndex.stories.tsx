@@ -2,7 +2,7 @@ import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, FagsakYtelseType, MottakerType, TilbakekrevingVidereBehandling } from '@navikt/fp-kodeverk';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, Behandling, Fagsak, SimuleringResultat, TilbakekrevingValg } from '@navikt/fp-types';
 
 import { SimuleringProsessIndex } from './SimuleringProsessIndex';
@@ -123,6 +123,7 @@ const simuleringResultat = {
 const meta = {
   title: 'prosess/prosess-simulering',
   component: SimuleringProsessIndex,
+  decorators: [withFormData],
   args: {
     behandling,
     submitCallback: action('button-click') as (data: any) => Promise<any>,
@@ -132,7 +133,6 @@ const meta = {
     status: '',
     vilkar: [],
     alleMerknaderFraBeslutter: {},
-    setFormData: () => undefined,
     fagsak,
     arbeidsgiverOpplysningerPerId,
     simuleringResultat,

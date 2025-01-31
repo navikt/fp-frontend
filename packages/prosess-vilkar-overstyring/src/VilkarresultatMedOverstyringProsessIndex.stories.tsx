@@ -12,7 +12,7 @@ import {
   VilkarType,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, Behandling, Fagsak, Medlemskap } from '@navikt/fp-types';
 
 import { VilkarresultatMedOverstyringProsessIndex } from './VilkarresultatMedOverstyringProsessIndex';
@@ -39,6 +39,7 @@ const defaultAvslagsarsaker = [
 const meta = {
   title: 'prosess/prosess-vilkar-overstyring',
   component: VilkarresultatMedOverstyringProsessIndex,
+  decorators: [withFormData],
   args: {
     aksjonspunkter: [],
     alleKodeverk: alleKodeverk as any,
@@ -48,7 +49,6 @@ const meta = {
     readOnlySubmitButton: false,
     vilkar: [],
     alleMerknaderFraBeslutter: {},
-    setFormData: () => undefined,
     behandling: defaultBehandling,
     overrideReadOnly: false,
     erOverstyrt: false,

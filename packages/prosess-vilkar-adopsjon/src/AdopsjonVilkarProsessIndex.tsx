@@ -22,8 +22,6 @@ const AdopsjonVilkarProsessIndex: FunctionComponent<StandardProsessPanelProps> =
   isAksjonspunktOpen,
   alleKodeverk,
   alleMerknaderFraBeslutter,
-  formData,
-  setFormData,
 }) => (
   <RawIntlProvider value={intl}>
     <AdopsjonVilkarForm
@@ -37,8 +35,6 @@ const AdopsjonVilkarProsessIndex: FunctionComponent<StandardProsessPanelProps> =
       isApOpen={isAksjonspunktOpen}
       alleKodeverk={alleKodeverk}
       erIkkeGodkjentAvBeslutter={aksjonspunkter.some(a => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted)}
-      formData={formData}
-      setFormData={setFormData}
     />
   </RawIntlProvider>
 );

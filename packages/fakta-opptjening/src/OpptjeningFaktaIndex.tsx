@@ -24,8 +24,6 @@ export const OpptjeningFaktaIndex = ({
   submitCallback,
   readOnly,
   arbeidsgiverOpplysningerPerId,
-  formData,
-  setFormData,
 }: Props & StandardFaktaPanelProps) => {
   const fastsattOpptjening = opptjening ? opptjening.fastsattOpptjening : undefined;
   const opptjeningAktiviteter = opptjening ? opptjening.opptjeningAktivitetList : undefined;
@@ -43,8 +41,6 @@ export const OpptjeningFaktaIndex = ({
         fastsattOpptjening={fastsattOpptjening}
         ferdiglignetNæring={ferdiglignetNæring}
         submitCallback={submitCallback}
-        formData={formData}
-        setFormData={setFormData}
       />
     </RawIntlProvider>
   );

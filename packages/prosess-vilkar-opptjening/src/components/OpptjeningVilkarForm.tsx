@@ -1,9 +1,9 @@
-import React, { FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
 
 import { Aksjonspunkt, Behandling, FastsattOpptjening } from '@navikt/fp-types';
 import { AvklarOpptjeningsvilkaretAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import OpptjeningVilkarAksjonspunktPanel, { FormValues } from './OpptjeningVilkarAksjonspunktPanel';
+import OpptjeningVilkarAksjonspunktPanel from './OpptjeningVilkarAksjonspunktPanel';
 import OpptjeningVilkarView from './OpptjeningVilkarView';
 
 interface OwnProps {
@@ -17,8 +17,6 @@ interface OwnProps {
   readOnlySubmitButton: boolean;
   submitCallback: (aksjonspunktData: AvklarOpptjeningsvilkaretAp) => Promise<void>;
   erIkkeGodkjentAvBeslutter: boolean;
-  formData?: FormValues;
-  setFormData: (data: FormValues) => void;
   erSvpFagsak: boolean;
 }
 
@@ -38,8 +36,6 @@ const OpptjeningVilkarForm: FunctionComponent<OwnProps> = ({
   readOnly,
   submitCallback,
   erIkkeGodkjentAvBeslutter,
-  formData,
-  setFormData,
   erSvpFagsak,
 }) => {
   if (aksjonspunkter.length > 0) {
@@ -55,8 +51,6 @@ const OpptjeningVilkarForm: FunctionComponent<OwnProps> = ({
         lovReferanse={lovReferanse}
         fastsattOpptjening={fastsattOpptjening}
         erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
-        formData={formData}
-        setFormData={setFormData}
         erSvpFagsak={erSvpFagsak}
       />
     );

@@ -29,8 +29,6 @@ export const FodselFaktaIndex = ({
   alleMerknaderFraBeslutter,
   submitCallback,
   readOnly,
-  formData,
-  setFormData,
 }: Props & StandardFaktaPanelProps) => (
   <RawIntlProvider value={intl}>
     <FodselInfoPanel
@@ -45,8 +43,6 @@ export const FodselFaktaIndex = ({
       submittable={submittable}
       submitCallback={submitCallback}
       readOnly={readOnly}
-      formData={formData}
-      setFormData={setFormData}
     />
   </RawIntlProvider>
 );

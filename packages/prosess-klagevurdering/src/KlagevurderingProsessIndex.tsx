@@ -30,8 +30,6 @@ export const KlagevurderingProsessIndex = ({
   previewCallback,
   readOnlySubmitButton,
   aksjonspunkter,
-  formData,
-  setFormData,
 }: Props & StandardProsessPanelProps) => (
   <RawIntlProvider value={intl}>
     {klageVurdering.klageVurderingResultatNK && (
@@ -48,8 +46,6 @@ export const KlagevurderingProsessIndex = ({
         readOnlySubmitButton={readOnlySubmitButton}
         alleKodeverk={alleKodeverk}
         alleAktuelleHjemler={klageVurdering.aktuelleHjemler ? klageVurdering.aktuelleHjemler : []}
-        formData={formData}
-        setFormData={setFormData}
       />
     )}
   </RawIntlProvider>

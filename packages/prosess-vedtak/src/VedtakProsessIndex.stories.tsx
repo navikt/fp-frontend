@@ -13,7 +13,7 @@ import {
   VilkarType,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
 import {
   Aksjonspunkt,
   Behandling,
@@ -68,6 +68,7 @@ const defaultberegningresultatDagytelse = {
 const meta = {
   title: 'prosess/prosess-vedtak',
   component: VedtakProsessIndex,
+  decorators: [withFormData],
   args: {
     submitCallback: action('button-click') as (data: any) => Promise<void>,
     aksjonspunkter: defaultAksjonspunkter,
@@ -76,7 +77,6 @@ const meta = {
     status: '',
     vilkar: defaultVilkar,
     alleMerknaderFraBeslutter: {},
-    setFormData: () => undefined,
     previewCallback: action('button-click') as any,
     alleKodeverk: alleKodeverk as any,
     fagsak: {} as Fagsak,

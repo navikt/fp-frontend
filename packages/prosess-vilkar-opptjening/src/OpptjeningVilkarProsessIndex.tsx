@@ -27,8 +27,6 @@ export const OpptjeningVilkarProsessIndex = ({
   isAksjonspunktOpen,
   readOnlySubmitButton,
   alleMerknaderFraBeslutter,
-  formData,
-  setFormData,
   erSvpFagsak = false,
 }: Props & StandardProsessPanelProps) => (
   <RawIntlProvider value={intl}>
@@ -43,8 +41,6 @@ export const OpptjeningVilkarProsessIndex = ({
       isAksjonspunktOpen={isAksjonspunktOpen}
       readOnlySubmitButton={readOnlySubmitButton}
       erIkkeGodkjentAvBeslutter={aksjonspunkter.some(a => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted)}
-      formData={formData}
-      setFormData={setFormData}
       erSvpFagsak={erSvpFagsak}
     />
   </RawIntlProvider>

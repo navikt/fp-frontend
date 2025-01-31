@@ -24,6 +24,7 @@ import {
   VurdereYtelseSammeBarnAnnenForelderAp,
   VurdereYtelseSammeBarnSokerAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { useFormData } from '@navikt/fp-utils';
 
 const avslagsarsakerES = ['1002', '1003', '1032'];
 
@@ -47,8 +48,6 @@ interface OwnProps {
   isApOpen: boolean;
   alleKodeverk: AlleKodeverk;
   erIkkeGodkjentAvBeslutter: boolean;
-  formData?: FormValues;
-  setFormData: (data: FormValues) => void;
 }
 
 const buildInitialValues = (
@@ -98,8 +97,6 @@ const FodselVilkarForm: FunctionComponent<OwnProps> = ({
   alleKodeverk,
   submitCallback,
   vilkar,
-  setFormData,
-  formData,
 }) => {
   const intl = useIntl();
 
@@ -107,6 +104,8 @@ const FodselVilkarForm: FunctionComponent<OwnProps> = ({
     () => buildInitialValues(aksjonspunkter, status, behandlingsresultat),
     [behandlingsresultat, aksjonspunkter, status],
   );
+
+  const { formData, setFormData } = useFormData<FormValues>();
   const formMethods = useForm<FormValues>({
     defaultValues: formData || initialValues,
   });

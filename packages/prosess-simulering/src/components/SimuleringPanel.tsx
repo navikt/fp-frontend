@@ -15,6 +15,7 @@ import {
   TilbakekrevingValg,
 } from '@navikt/fp-types';
 import { KontrollerEtterbetalingTilSøkerAP, VurderFeilutbetalingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { useFormData } from '@navikt/fp-utils';
 
 import EtterbetalingSøkerForm, {
   buildInitialValues as buildInitialValuesEtterbetaling,
@@ -123,8 +124,6 @@ interface OwnProps {
   readOnly: boolean;
   isApOpen: boolean;
   previewCallback: (params: { mottaker: string; fritekst: string }) => void;
-  formData?: FormValues;
-  setFormData: (data: FormValues) => void;
 }
 
 const SimuleringPanel: FunctionComponent<OwnProps> = ({
@@ -132,8 +131,6 @@ const SimuleringPanel: FunctionComponent<OwnProps> = ({
   readOnly,
   sprakkode,
   previewCallback,
-  formData,
-  setFormData,
   submitCallback,
   isApOpen,
   tilbakekrevingvalg,
@@ -141,6 +138,8 @@ const SimuleringPanel: FunctionComponent<OwnProps> = ({
   fagsak,
   arbeidsgiverOpplysningerPerId,
 }) => {
+  const { formData, setFormData } = useFormData<FormValues>();
+
   const formMethods = useForm<FormValues>({
     defaultValues: formData || buildInitialValues(aksjonspunkter, tilbakekrevingvalg),
   });

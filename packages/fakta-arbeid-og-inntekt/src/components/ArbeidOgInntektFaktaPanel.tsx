@@ -24,6 +24,7 @@ import {
   ManueltArbeidsforhold,
 } from '@navikt/fp-types';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { useFormData } from '@navikt/fp-utils';
 
 import { useIsFormDirty } from '../DirtyFormProvider';
 import { ArbeidsforholdOgInntektRadData, Avklaring } from '../types/arbeidsforholdOgInntekt';
@@ -139,8 +140,6 @@ interface Props {
   behandling: Behandling;
   aksjonspunkt?: Aksjonspunkt;
   readOnly: boolean;
-  formData?: ArbeidsforholdOgInntektRadData[];
-  setFormData: (data: ArbeidsforholdOgInntektRadData[]) => void;
   arbeidOgInntekt: ArbeidOgInntektsmelding;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   registrerArbeidsforhold: (params: ManueltArbeidsforhold) => Promise<void>;
@@ -161,8 +160,6 @@ export const ArbeidOgInntektFaktaPanel = ({
   arbeidsgiverOpplysningerPerId,
   registrerArbeidsforhold,
   lagreVurdering,
-  formData,
-  setFormData,
   erOverstyrer,
   lagreCallback,
   settBehandlingPåVentCallback,
@@ -172,6 +169,8 @@ export const ArbeidOgInntektFaktaPanel = ({
   const [erKnappTrykket, setErKnappTrykket] = useState(false);
   const [visSettPåVentModal, setVisSettPåVentModal] = useState(false);
   const [erOverstyrt, setErOverstyrt] = useState(false);
+
+  const { formData, setFormData } = useFormData<ArbeidsforholdOgInntektRadData[]>();
 
   const [tabellRader, setTabellRader] = useState<ArbeidsforholdOgInntektRadData[]>(
     formData || byggTabellStruktur(arbeidOgInntekt, arbeidsgiverOpplysningerPerId),

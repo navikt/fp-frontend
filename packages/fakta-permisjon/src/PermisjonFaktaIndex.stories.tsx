@@ -2,7 +2,7 @@ import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, AksjonspunktÅrsak, Behandling } from '@navikt/fp-types';
 
 import { PermisjonFaktaIndex } from './PermisjonFaktaIndex';
@@ -25,6 +25,7 @@ const fellesInntektsmeldingFelter = {
 const meta = {
   title: 'fakta/fakta-permisjon',
   component: PermisjonFaktaIndex,
+  decorators: [withFormData],
   args: {
     saksnummer: '1234567',
     behandling: {
@@ -36,7 +37,6 @@ const meta = {
     alleMerknaderFraBeslutter: {},
     readOnly: false,
     alleKodeverk: alleKodeverk as any,
-    setFormData: () => undefined,
     submitCallback: action('button-click') as (data: any) => Promise<void>,
   },
 } satisfies Meta<typeof PermisjonFaktaIndex>;

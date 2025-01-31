@@ -1,3 +1,4 @@
+import { use } from 'react';
 import { useIntl } from 'react-intl';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -6,20 +7,17 @@ import { useQuery } from '@tanstack/react-query';
 import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { AnkeProsessIndex } from '@navikt/fp-prosess-anke';
-import { BehandlingAppKontekst } from '@navikt/fp-types';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
+import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
-interface Props {
-  alleBehandlinger: BehandlingAppKontekst[];
-}
-
-export const AnkeBehandlingProsessStegInitPanel = ({ alleBehandlinger, ...props }: Props & ProsessPanelInitProps) => {
+export const AnkeBehandlingProsessStegInitPanel = (props: ProsessPanelInitProps) => {
   const intl = useIntl();
-  const { behandling } = props;
+
+  const { behandling, alleBehandlinger } = use(BehandlingDataContext);
 
   const api = useBehandlingApi(behandling);
   const { data: ankeVurdering } = useQuery(api.anke.ankeVurderingOptions(behandling));
@@ -38,7 +36,11 @@ export const AnkeBehandlingProsessStegInitPanel = ({ alleBehandlinger, ...props 
       }
     >
       {ankeVurdering ? (
-        <AnkeProsessIndex behandlinger={alleBehandlinger} ankeVurdering={ankeVurdering} {...standardPanelProps} />
+        <AnkeProsessIndex
+          behandlinger={alleBehandlinger.filter(b => !b.behandlingHenlagt)}
+          ankeVurdering={ankeVurdering}
+          {...standardPanelProps}
+        />
       ) : (
         <LoadingPanel />
       )}

@@ -21,6 +21,7 @@ import {
   Ytelsefordeling,
 } from '@navikt/fp-types';
 import { UttakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { useFormData } from '@navikt/fp-utils';
 
 import UttakPeriodePanel from './periodeDetaljer/UttakPeriodePanel';
 import DisponibleStonadskontoerPanel from './stonadsdagerOversikt/DisponibleStonadskontoerPanel';
@@ -169,8 +170,6 @@ interface OwnProps {
   oppdaterStønadskontoer: (params: { behandlingUuid: string; perioder: PeriodeSoker[] }) => Promise<any>;
   isReadOnly: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  formData?: PeriodeSoker[];
-  setFormData: (data: PeriodeSoker[]) => void;
   fagsak: Fagsak;
 }
 
@@ -199,8 +198,6 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
   oppdaterStønadskontoer,
   isReadOnly,
   arbeidsgiverOpplysningerPerId,
-  formData,
-  setFormData,
   fagsak,
 }) => {
   const intl = useIntl();
@@ -211,6 +208,8 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
   const toggleOverstyring = useCallback(() => {
     setErOverstyrt(forrigeVerdi => !forrigeVerdi);
   }, []);
+
+  const { formData, setFormData } = useFormData<PeriodeSoker[]>();
 
   const [perioder, setPerioder] = useState<PeriodeSoker[]>(formData || uttaksresultatPeriode.perioderSøker);
   const [valgtPeriodeIndex, setValgtPeriodeIndex] = useState<number | undefined>();

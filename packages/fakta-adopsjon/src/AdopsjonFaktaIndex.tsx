@@ -27,8 +27,6 @@ export const AdopsjonFaktaIndex = ({
   isForeldrepengerFagsak,
   harApneAksjonspunkter,
   submittable,
-  formData,
-  setFormData,
 }: Props & StandardFaktaPanelProps) => (
   <RawIntlProvider value={intl}>
     <AdopsjonInfoPanel
@@ -42,8 +40,6 @@ export const AdopsjonFaktaIndex = ({
       isForeldrepengerFagsak={isForeldrepengerFagsak}
       hasOpenAksjonspunkter={harApneAksjonspunkter}
       submittable={submittable}
-      formData={formData}
-      setFormData={setFormData}
     />
   </RawIntlProvider>
 );

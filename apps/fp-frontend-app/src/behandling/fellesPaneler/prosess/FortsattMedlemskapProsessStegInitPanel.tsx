@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 
 import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
@@ -9,6 +9,7 @@ import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInit
 import { skalViseProsessPanel } from '../../felles/prosess/skalViseProsessPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
+import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODE = AksjonspunktKode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR;
 
@@ -17,7 +18,7 @@ const VILKAR_KODER = [VilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE];
 export const FortsattMedlemskapProsessStegInitPanel = ({ ...props }: ProsessPanelInitProps) => {
   const intl = useIntl();
 
-  const { behandling } = props;
+  const { behandling } = use(BehandlingDataContext);
 
   const [erOverstyrt, setOverstyrt] = useState(false);
   const toggleOverstyring = () => setOverstyrt(!erOverstyrt);

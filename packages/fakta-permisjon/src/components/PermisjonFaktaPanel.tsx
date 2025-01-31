@@ -23,6 +23,7 @@ import {
   ArbeidsgiverOpplysningerPerId,
 } from '@navikt/fp-types';
 import { VurderArbeidsforholdPermisjonAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { useFormData } from '@navikt/fp-utils';
 
 import ArbeidsforholdFieldArray from './ArbeidsforholdFieldArray';
 
@@ -47,8 +48,6 @@ interface OwnProps {
   saksnummer: string;
   aksjonspunkter: Aksjonspunkt[];
   readOnly: boolean;
-  formData?: FormValues;
-  setFormData: (data: FormValues) => void;
   arbeidOgInntekt: ArbeidOgInntektsmelding;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   lagreCallback: (aksjonspunktData: VurderArbeidsforholdPermisjonAp) => Promise<void>;
@@ -61,8 +60,6 @@ const PermisjonFaktaPanel: FunctionComponent<OwnProps> = ({
   readOnly,
   arbeidOgInntekt,
   arbeidsgiverOpplysningerPerId,
-  formData,
-  setFormData,
   lagreCallback,
   alleKodeverk,
 }) => {
@@ -92,6 +89,8 @@ const PermisjonFaktaPanel: FunctionComponent<OwnProps> = ({
     }),
     [sorterteArbeidsforhold],
   );
+
+  const { formData, setFormData } = useFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
     defaultValues: formData || defaultValues,

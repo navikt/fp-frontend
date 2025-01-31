@@ -12,6 +12,7 @@ import { AksjonspunktKode, DokumentMalType, InnsynResultatType, Kommunikasjonsre
 import { ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import { Aksjonspunkt, Dokument, InnsynDokument } from '@navikt/fp-types';
 import { ForeslaVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { useFormData } from '@navikt/fp-utils';
 
 import DocumentListVedtakInnsyn from './DocumentListVedtakInnsyn';
 
@@ -101,8 +102,6 @@ interface OwnProps {
   submitCallback: (data: ForeslaVedtakAp) => Promise<void>;
   previewCallback: (data: ForhandsvisData) => void;
   readOnly: boolean;
-  formData?: FormValues;
-  setFormData: (data: FormValues) => void;
 }
 
 /**
@@ -121,8 +120,6 @@ const InnsynVedtakForm: FunctionComponent<OwnProps> = ({
   innsynDokumenter,
   sprakkode,
   alleDokumenter,
-  formData,
-  setFormData,
 }) => {
   const intl = useIntl();
 
@@ -130,6 +127,9 @@ const InnsynVedtakForm: FunctionComponent<OwnProps> = ({
     () => buildInitialValues(innsynMottattDato, aksjonspunkter),
     [innsynMottattDato, aksjonspunkter],
   );
+
+  const { formData, setFormData } = useFormData<FormValues>();
+
   const formMethods = useForm<FormValues>({
     defaultValues: formData || initialValues,
   });

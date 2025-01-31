@@ -76,8 +76,6 @@ export const VedtakProsessIndex = ({
   submitCallback,
   ytelseTypeKode,
   alleKodeverk,
-  formData,
-  setFormData,
 }: Props & StandardProsessPanelProps) => {
   const beregningErManueltFastsatt = skalSkriveFritekstGrunnetFastsettingAvBeregning(
     aksjonspunkter,
@@ -110,8 +108,6 @@ export const VedtakProsessIndex = ({
           alleKodeverk={alleKodeverk}
           vilkar={vilkar}
           beregningErManueltFastsatt={beregningErManueltFastsatt}
-          formData={formData}
-          setFormData={setFormData}
         />
       )}
       {behandling.type === BehandlingType.REVURDERING && (
@@ -129,8 +125,6 @@ export const VedtakProsessIndex = ({
           vilkar={vilkar}
           beregningErManueltFastsatt={beregningErManueltFastsatt}
           beregningsresultatOriginalBehandling={originaltBeregningsresultat}
-          formData={formData}
-          setFormData={setFormData}
         />
       )}
     </RawIntlProvider>
