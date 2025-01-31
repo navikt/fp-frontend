@@ -1,4 +1,4 @@
-import { use, useState } from 'react';
+import { use } from 'react';
 import { useIntl } from 'react-intl';
 
 import { useQuery } from '@tanstack/react-query';
@@ -6,10 +6,11 @@ import { useQuery } from '@tanstack/react-query';
 import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { SoknadsfristVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-soknadsfrist';
+import { PanelOverstyringProvider } from '@navikt/fp-utils';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { OverstyringPanelDef } from '../../felles/prosess/OverstyringPanelDef';
-import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { ProsessDefaultInitOverstyringPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { skalViseProsessPanel } from '../../felles/prosess/skalViseProsessPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
@@ -21,7 +22,6 @@ const VILKAR_KODER = [VilkarType.SOKNADFRISTVILKARET];
 
 export const SoknadsfristEsProsessStegInitPanel = (props: ProsessPanelInitProps) => {
   const intl = useIntl();
-  const [erOverstyrt, setOverstyrt] = useState(false);
 
   const { behandling, rettigheter } = use(BehandlingDataContext);
 
@@ -37,36 +37,40 @@ export const SoknadsfristEsProsessStegInitPanel = (props: ProsessPanelInitProps)
   );
 
   return (
-    <ProsessDefaultInitPanel
-      {...props}
-      standardPanelProps={standardPanelProps}
-      prosessPanelKode={ProsessStegCode.SOEKNADSFRIST}
-      prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Soknadsfristvilkaret' })}
-      skalPanelVisesIMeny={skalViseProsessPanel(
-        standardPanelProps.aksjonspunkter,
-        VILKAR_KODER,
-        standardPanelProps.vilkar,
-      )}
-      erOverstyrt={erOverstyrt}
+    <PanelOverstyringProvider
+      overstyringApKode={AksjonspunktKode.OVERSTYR_SOKNADSFRISTVILKAR}
+      kanOverstyreAccess={rettigheter.kanOverstyreAccess}
+      overrideReadOnly={standardPanelProps.isReadOnly}
     >
-      <>
-        {!harSoknadsfristAp && (
-          <OverstyringPanelDef
-            aksjonspunkter={standardPanelProps.aksjonspunkter}
-            aksjonspunktKode={AksjonspunktKode.OVERSTYR_SOKNADSFRISTVILKAR}
-            vilkar={standardPanelProps.vilkar}
-            vilkarKoder={VILKAR_KODER}
-            panelTekstKode="Behandlingspunkt.Soknadsfristvilkaret"
-            toggleOverstyring={() => setOverstyrt(!erOverstyrt)}
-            erOverstyrt={erOverstyrt}
-            overrideReadOnly={standardPanelProps.isReadOnly}
-            kanOverstyreAccess={rettigheter.kanOverstyreAccess}
-          />
+      <ProsessDefaultInitOverstyringPanel
+        {...props}
+        standardPanelProps={standardPanelProps}
+        prosessPanelKode={ProsessStegCode.SOEKNADSFRIST}
+        prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Soknadsfristvilkaret' })}
+        skalPanelVisesIMeny={skalViseProsessPanel(
+          standardPanelProps.aksjonspunkter,
+          VILKAR_KODER,
+          standardPanelProps.vilkar,
         )}
-        {harSoknadsfristAp && søknad && familiehendelse && (
-          <SoknadsfristVilkarProsessIndex {...standardPanelProps} soknad={søknad} familiehendelse={familiehendelse} />
-        )}
-      </>
-    </ProsessDefaultInitPanel>
+      >
+        <>
+          {!harSoknadsfristAp && (
+            <OverstyringPanelDef
+              vilkar={standardPanelProps.vilkar}
+              vilkarKoder={VILKAR_KODER}
+              panelTekstKode="Behandlingspunkt.Soknadsfristvilkaret"
+            />
+          )}
+          {harSoknadsfristAp && søknad && familiehendelse && (
+            <SoknadsfristVilkarProsessIndex
+              soknad={søknad}
+              familiehendelse={familiehendelse}
+              status={standardPanelProps.status}
+              readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
+            />
+          )}
+        </>
+      </ProsessDefaultInitOverstyringPanel>
+    </PanelOverstyringProvider>
   );
 };

@@ -23,7 +23,7 @@ const AKSJONSPUNKT_KODER = [
 export const AnkeResultatProsessStegInitPanel = ({ ...props }: ProsessPanelInitProps) => {
   const intl = useIntl();
 
-  const { behandling, alleKodeverk } = use(BehandlingDataContext);
+  const { behandling } = use(BehandlingDataContext);
 
   const api = useBehandlingApi(behandling);
   const { data: ankeVurdering } = useQuery(api.anke.ankeVurderingOptions(behandling));
@@ -38,11 +38,7 @@ export const AnkeResultatProsessStegInitPanel = ({ ...props }: ProsessPanelInitP
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.AnkeResultat' })}
       skalPanelVisesIMeny
     >
-      {ankeVurdering ? (
-        <AnkeResultatProsessIndex ankeVurdering={ankeVurdering} alleKodeverk={alleKodeverk} />
-      ) : (
-        <LoadingPanel />
-      )}
+      {ankeVurdering ? <AnkeResultatProsessIndex ankeVurdering={ankeVurdering} /> : <LoadingPanel />}
     </ProsessDefaultInitPanel>
   );
 };

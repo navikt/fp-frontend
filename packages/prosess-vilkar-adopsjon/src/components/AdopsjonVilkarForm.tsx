@@ -1,4 +1,3 @@
-import React, { FunctionComponent, useCallback, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -12,12 +11,12 @@ import {
   validerApKodeOgHentApEnum,
   VilkarResultPicker,
 } from '@navikt/fp-prosess-felles';
-import { Aksjonspunkt, AlleKodeverk, Behandling, Vilkar } from '@navikt/fp-types';
+import { Aksjonspunkt, Behandling, Vilkar } from '@navikt/fp-types';
 import {
   VurdereYtelseSammeBarnAnnenForelderAp,
   VurdereYtelseSammeBarnSokerAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData } from '@navikt/fp-utils';
+import { useFormData, usePanelContext } from '@navikt/fp-utils';
 
 type FormValues = {
   erVilkarOk?: boolean;
@@ -25,19 +24,10 @@ type FormValues = {
   begrunnelse?: string;
 };
 
-interface OwnProps {
-  behandlingsresultat?: Behandling['behandlingsresultat'];
-  aksjonspunkter: Aksjonspunkt[];
+interface Props {
   status: string;
   vilkar: Vilkar[];
-  submitCallback: (
-    aksjonspunktData: VurdereYtelseSammeBarnSokerAp | VurdereYtelseSammeBarnAnnenForelderAp,
-  ) => Promise<void>;
-  readOnly: boolean;
   readOnlySubmitButton: boolean;
-  isApOpen: boolean;
-  alleKodeverk: AlleKodeverk;
-  erIkkeGodkjentAvBeslutter: boolean;
 }
 
 const buildInitialValues = (
@@ -67,24 +57,24 @@ const transformValues = (
  *
  * Setter opp aksjonspunktet for avklaring av Adopsjonsvilkåret.
  */
-const AdopsjonVilkarForm: FunctionComponent<OwnProps> = ({
-  vilkar,
-  readOnly,
-  readOnlySubmitButton,
-  status,
-  submitCallback,
-  behandlingsresultat,
-  alleKodeverk,
-  isApOpen,
-  aksjonspunkter,
-  erIkkeGodkjentAvBeslutter,
-}) => {
+export const AdopsjonVilkarForm = ({ vilkar, readOnlySubmitButton, status }: Props) => {
   const intl = useIntl();
 
-  const initialValues = useMemo(
-    () => buildInitialValues(aksjonspunkter, status, behandlingsresultat),
-    [behandlingsresultat, aksjonspunkter, status],
+  const {
+    behandling,
+    alleKodeverk,
+    aksjonspunkterForPanel,
+    submitCallback,
+    harÅpneAksjonspunkter,
+    isReadOnly,
+    alleMerknaderFraBeslutter,
+  } = usePanelContext<VurdereYtelseSammeBarnSokerAp | VurdereYtelseSammeBarnAnnenForelderAp>();
+
+  const erIkkeGodkjentAvBeslutter = aksjonspunkterForPanel.some(
+    a => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted,
   );
+
+  const initialValues = buildInitialValues(aksjonspunkterForPanel, status, behandling.behandlingsresultat);
   const { formData, setFormData } = useFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
@@ -93,23 +83,23 @@ const AdopsjonVilkarForm: FunctionComponent<OwnProps> = ({
 
   const avslagsarsaker = alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.ADOPSJONSVILKARET];
 
-  const isOpenAksjonspunkt = aksjonspunkter.some(ap => ap.status === AksjonspunktStatus.OPPRETTET);
+  const isOpenAksjonspunkt = aksjonspunkterForPanel.some(ap => ap.status === AksjonspunktStatus.OPPRETTET);
   const originalErVilkarOk = isOpenAksjonspunkt ? undefined : VilkarUtfallType.OPPFYLT === status;
   const { lovReferanse } = vilkar[0];
 
-  const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
+  const bTag = (...chunks: any) => <b>{chunks}</b>;
 
   return (
     <Form
       formMethods={formMethods}
-      onSubmit={(values: FormValues) => submitCallback(transformValues(values, aksjonspunkter))}
+      onSubmit={(values: FormValues) => submitCallback(transformValues(values, aksjonspunkterForPanel))}
       setDataOnUnmount={setFormData}
     >
       <ProsessPanelTemplate
         title={intl.formatMessage({ id: 'AdopsjonVilkarForm.Adopsjon' })}
-        isAksjonspunktOpen={isApOpen}
+        isAksjonspunktOpen={harÅpneAksjonspunkter}
         readOnlySubmitButton={readOnlySubmitButton}
-        readOnly={readOnly}
+        readOnly={isReadOnly}
         lovReferanse={lovReferanse}
         originalErVilkarOk={originalErVilkarOk}
         erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
@@ -121,14 +111,12 @@ const AdopsjonVilkarForm: FunctionComponent<OwnProps> = ({
         </Label>
         <VilkarResultPicker
           avslagsarsaker={avslagsarsaker}
-          readOnly={readOnly}
+          readOnly={isReadOnly}
           customVilkarOppfyltText={<FormattedMessage id="AdopsjonVilkarForm.Oppfylt" />}
           customVilkarIkkeOppfyltText={<FormattedMessage id="AdopsjonVilkarForm.IkkeOppfylt" values={{ b: bTag }} />}
         />
-        <ProsessStegBegrunnelseTextFieldNew readOnly={readOnly} />
+        <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
       </ProsessPanelTemplate>
     </Form>
   );
 };
-
-export default AdopsjonVilkarForm;

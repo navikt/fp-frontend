@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback, useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -19,9 +19,9 @@ import {
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
-import { Aksjonspunkt, AlleKodeverk, Behandling, FamilieHendelse, Soknad } from '@navikt/fp-types';
+import { Aksjonspunkt, FamilieHendelse, Soknad } from '@navikt/fp-types';
 import { SoknadsfristAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData } from '@navikt/fp-utils';
+import { useFormData, usePanelContext } from '@navikt/fp-utils';
 
 import styles from './erSoknadsfristVilkaretOppfyltForm.module.css';
 
@@ -79,16 +79,11 @@ const transformValues = (values: FormValues): SoknadsfristAp => ({
   ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
 });
 
-interface OwnProps {
-  behandlingsresultat?: Behandling['behandlingsresultat'];
+interface Props {
   soknad: Soknad;
   gjeldendeFamiliehendelse: FamilieHendelse;
-  aksjonspunkter: Aksjonspunkt[];
   status: string;
-  submitCallback: (aksjonspunktData: SoknadsfristAp) => Promise<void>;
-  readOnly: boolean;
   readOnlySubmitButton: boolean;
-  alleKodeverk: AlleKodeverk;
 }
 
 /**
@@ -96,20 +91,21 @@ interface OwnProps {
  *
  * Setter opp aksjonspunktet for vurdering av søknadsfristvilkåret.
  */
-const ErSoknadsfristVilkaretOppfyltForm: FunctionComponent<OwnProps> = ({
-  readOnly,
+export const ErSoknadsfristVilkaretOppfyltForm = ({
   readOnlySubmitButton,
   soknad,
   gjeldendeFamiliehendelse,
-  behandlingsresultat,
-  alleKodeverk,
-  aksjonspunkter,
   status,
-  submitCallback,
-}) => {
+}: Props) => {
   const intl = useIntl();
 
-  const initialValues = useMemo(() => buildInitialValues(aksjonspunkter, status), [aksjonspunkter, status]);
+  const { aksjonspunkterForPanel, behandling, isReadOnly, submitCallback, alleKodeverk } =
+    usePanelContext<SoknadsfristAp>();
+
+  const initialValues = useMemo(
+    () => buildInitialValues(aksjonspunkterForPanel, status),
+    [aksjonspunkterForPanel, status],
+  );
 
   const { formData, setFormData } = useFormData<FormValues>();
   const formMethods = useForm<FormValues>({
@@ -194,7 +190,7 @@ const ErSoknadsfristVilkaretOppfyltForm: FunctionComponent<OwnProps> = ({
             <RadioGroupPanel
               name="erVilkarOk"
               validate={[required]}
-              isReadOnly={readOnly}
+              isReadOnly={isReadOnly}
               isHorizontal
               isTrueOrFalseSelection
               radios={[
@@ -211,16 +207,20 @@ const ErSoknadsfristVilkaretOppfyltForm: FunctionComponent<OwnProps> = ({
           </FlexColumn>
         </FlexRow>
       </FlexContainer>
-      {readOnly && erVilkarOk === false && !!behandlingsresultat?.avslagsarsak && (
+      {isReadOnly && erVilkarOk === false && !!behandling.behandlingsresultat?.avslagsarsak && (
         <BodyShort size="small">
-          {getKodeverknavn(behandlingsresultat.avslagsarsak, KodeverkType.AVSLAGSARSAK, VilkarType.SOKNADFRISTVILKARET)}
+          {getKodeverknavn(
+            behandling.behandlingsresultat.avslagsarsak,
+            KodeverkType.AVSLAGSARSAK,
+            VilkarType.SOKNADFRISTVILKARET,
+          )}
         </BodyShort>
       )}
       <VerticalSpacer sixteenPx />
-      <ProsessStegBegrunnelseTextFieldNew readOnly={readOnly} />
+      <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
       <VerticalSpacer sixteenPx />
       <ProsessStegSubmitButtonNew
-        isReadOnly={readOnly}
+        isReadOnly={isReadOnly}
         isSubmittable={!readOnlySubmitButton}
         isSubmitting={formMethods.formState.isSubmitting}
         isDirty={formMethods.formState.isDirty}
@@ -228,5 +228,3 @@ const ErSoknadsfristVilkaretOppfyltForm: FunctionComponent<OwnProps> = ({
     </Form>
   );
 };
-
-export default ErSoknadsfristVilkaretOppfyltForm;

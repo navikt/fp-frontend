@@ -3,12 +3,13 @@ import { RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { KlageVurdering, StandardProsessPanelProps } from '@navikt/fp-types';
+import { KlageVurdering } from '@navikt/fp-types';
+import { usePanelContext } from '@navikt/fp-utils';
 
-import FormkravKlageFormNfp from './components/FormkravKlageFormNfp';
-import FormkravKlageKa from './components/FormkravKlageKa';
-import AvsluttetBehandling from './types/avsluttetBehandlingTsType';
-import FormkravMellomlagretDataType from './types/FormkravMellomlagretDataType';
+import { FormkravKlageFormNfp } from './components/FormkravKlageFormNfp';
+import { FormkravKlageKa } from './components/FormkravKlageKa';
+import { AvsluttetBehandling } from './types/avsluttetBehandlingTsType';
+import { FormkravMellomlagretDataType } from './types/FormkravMellomlagretDataType';
 
 import messages from '../i18n/nb_NO.json';
 
@@ -18,38 +19,30 @@ interface Props {
   klageVurdering?: KlageVurdering;
   avsluttedeBehandlinger: AvsluttetBehandling[];
   lagreFormkravVurdering: (data: FormkravMellomlagretDataType) => void;
+  readOnlySubmitButton: boolean;
 }
 
 export const FormkravProsessIndex = ({
-  behandling,
   klageVurdering = {},
   avsluttedeBehandlinger,
-  aksjonspunkter,
-  submitCallback,
-  isReadOnly,
   readOnlySubmitButton,
-  alleKodeverk,
   lagreFormkravVurdering,
-}: Props & StandardProsessPanelProps) => (
-  <RawIntlProvider value={intl}>
-    {aksjonspunkter.some(a => a.definisjon === AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP) && (
-      <FormkravKlageFormNfp
-        behandlingUuid={behandling.uuid}
-        klageVurdering={klageVurdering}
-        submitCallback={submitCallback}
-        readOnly={isReadOnly}
-        readOnlySubmitButton={readOnlySubmitButton}
-        alleKodeverk={alleKodeverk}
-        avsluttedeBehandlinger={avsluttedeBehandlinger}
-        lagreFormkravVurdering={lagreFormkravVurdering}
-      />
-    )}
-    {klageVurdering.klageFormkravResultatKA && (
-      <FormkravKlageKa
-        klageVurdering={klageVurdering}
-        alleKodeverk={alleKodeverk}
-        avsluttedeBehandlinger={avsluttedeBehandlinger}
-      />
-    )}
-  </RawIntlProvider>
-);
+}: Props) => {
+  const { aksjonspunkterForPanel } = usePanelContext();
+
+  return (
+    <RawIntlProvider value={intl}>
+      {aksjonspunkterForPanel.some(a => a.definisjon === AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP) && (
+        <FormkravKlageFormNfp
+          klageVurdering={klageVurdering}
+          readOnlySubmitButton={readOnlySubmitButton}
+          avsluttedeBehandlinger={avsluttedeBehandlinger}
+          lagreFormkravVurdering={lagreFormkravVurdering}
+        />
+      )}
+      {klageVurdering.klageFormkravResultatKA && (
+        <FormkravKlageKa klageVurdering={klageVurdering} avsluttedeBehandlinger={avsluttedeBehandlinger} />
+      )}
+    </RawIntlProvider>
+  );
+};

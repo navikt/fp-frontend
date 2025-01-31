@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { IntlShape, useIntl } from 'react-intl';
 
@@ -20,7 +20,6 @@ import {
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import {
   Aksjonspunkt,
-  AlleKodeverk,
   Behandling,
   BeregningsresultatDagytelse,
   BeregningsresultatEs,
@@ -37,14 +36,14 @@ import {
   VurdereDokumentForVedtakAp,
   VurdereInntektsmeldingKlageForVedtakAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData } from '@navikt/fp-utils';
+import { useFormData, usePanelContext } from '@navikt/fp-utils';
 
-import VedtakResultType from '../../kodeverk/vedtakResultType';
-import VedtakFellesPanel from '../felles/VedtakFellesPanel';
+import { VedtakResultType } from '../../kodeverk/vedtakResultType';
+import { VedtakFellesPanel } from '../felles/VedtakFellesPanel';
 import { getTilbakekrevingText } from '../felles/VedtakHelper';
-import VedtakAvslagArsakOgBegrunnelsePanel from './VedtakAvslagArsakOgBegrunnelsePanel';
-import VedtakInnvilgetRevurderingPanel from './VedtakInnvilgetRevurderingPanel';
-import VedtakOpphorRevurderingPanel from './VedtakOpphorRevurderingPanel';
+import { VedtakAvslagArsakOgBegrunnelsePanel } from './VedtakAvslagArsakOgBegrunnelsePanel';
+import { VedtakInnvilgetRevurderingPanel } from './VedtakInnvilgetRevurderingPanel';
+import { VedtakOpphorRevurderingPanel } from './VedtakOpphorRevurderingPanel';
 
 type RevurderingVedtakAksjonspunkter =
   | ForeslaVedtakAp
@@ -232,43 +231,37 @@ interface FormValues {
   overskrift?: string;
 }
 
-interface OwnProps {
-  behandling: Behandling;
-  readOnly: boolean;
-  aksjonspunkter: Aksjonspunkt[];
+interface Props {
   previewCallback: (data: ForhandsvisData) => void;
   ytelseTypeKode: string;
   beregningsresultat?: BeregningsresultatDagytelse | BeregningsresultatEs;
-  alleKodeverk: AlleKodeverk;
   tilbakekrevingvalg?: TilbakekrevingValg;
   simuleringResultat?: SimuleringResultat;
   vilkar: Vilkar[];
   beregningErManueltFastsatt: boolean;
   beregningsresultatOriginalBehandling?: BeregningsresultatDagytelse | BeregningsresultatEs;
-  submitCallback: (data: RevurderingVedtakAksjonspunkter[]) => Promise<void>;
 }
 
-const VedtakRevurderingForm: FunctionComponent<OwnProps> = ({
-  behandling,
-  readOnly,
-  aksjonspunkter,
+export const VedtakRevurderingForm = ({
   previewCallback,
   ytelseTypeKode,
   beregningsresultat,
-  alleKodeverk,
   tilbakekrevingvalg,
   simuleringResultat,
   vilkar,
   beregningErManueltFastsatt,
   beregningsresultatOriginalBehandling,
-  submitCallback,
-}) => {
+}: Props) => {
   const intl = useIntl();
+
+  const { behandling, alleKodeverk, submitCallback, isReadOnly } = usePanelContext<RevurderingVedtakAksjonspunkter[]>();
+
+  const { aksjonspunkt } = behandling;
 
   const { formData, setFormData } = useFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || buildInitialValues(aksjonspunkter, behandling),
+    defaultValues: formData || buildInitialValues(aksjonspunkt, behandling),
   });
 
   const begrunnelse = formMethods.watch('begrunnelse');
@@ -345,10 +338,7 @@ const VedtakRevurderingForm: FunctionComponent<OwnProps> = ({
       setDataOnUnmount={setFormData}
     >
       <VedtakFellesPanel
-        behandling={behandling}
         vedtakstatusTekst={vedtakstatusTekst}
-        aksjonspunkter={aksjonspunkter}
-        readOnly={readOnly}
         previewAutomatiskBrev={forhåndsvisDefaultBrev}
         previewOverstyrtBrev={forhåndsvisOverstyrtBrev}
         tilbakekrevingtekst={tilbakekrevingtekst}
@@ -359,7 +349,7 @@ const VedtakRevurderingForm: FunctionComponent<OwnProps> = ({
               <VedtakInnvilgetRevurderingPanel
                 ytelseTypeKode={ytelseTypeKode}
                 revurderingsÅrsakString={revurderingsÅrsakString}
-                isReadOnly={readOnly}
+                isReadOnly={isReadOnly}
                 beregningsresultat={beregningsresultat}
                 språkKode={sprakkode}
                 behandlingsresultat={behandlingsresultat}
@@ -375,7 +365,7 @@ const VedtakRevurderingForm: FunctionComponent<OwnProps> = ({
                 vilkar={vilkar}
                 behandlingsresultat={behandlingsresultat}
                 språkKode={sprakkode}
-                erReadOnly={readOnly}
+                erReadOnly={isReadOnly}
                 alleKodeverk={alleKodeverk}
                 skalBrukeOverstyrendeFritekstBrev={skalBrukeOverstyrendeFritekstBrev}
               />
@@ -385,7 +375,7 @@ const VedtakRevurderingForm: FunctionComponent<OwnProps> = ({
           return erOpphor ? (
             <VedtakOpphorRevurderingPanel
               revurderingsÅrsakString={revurderingsÅrsakString}
-              isReadOnly={readOnly}
+              isReadOnly={isReadOnly}
               behandlingsresultat={behandlingsresultat}
               språkKode={sprakkode}
               beregningErManueltFastsatt={beregningErManueltFastsatt}
@@ -397,5 +387,3 @@ const VedtakRevurderingForm: FunctionComponent<OwnProps> = ({
     </Form>
   );
 };
-
-export default VedtakRevurderingForm;

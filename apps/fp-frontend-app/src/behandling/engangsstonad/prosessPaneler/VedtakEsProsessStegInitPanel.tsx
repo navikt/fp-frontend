@@ -131,8 +131,6 @@ export const VedtakEsProsessStegInitPanel = (props: ProsessPanelInitProps) => {
             beregningresultatEngangsstonad={beregningsresultatEngangsstønad}
             simuleringResultat={simuleringResultat}
             tilbakekrevingvalg={tilbakekrevingValg}
-            {...standardPanelProps}
-            aksjonspunkter={behandling.aksjonspunkt}
             vilkar={vilkår}
           />
         ) : (

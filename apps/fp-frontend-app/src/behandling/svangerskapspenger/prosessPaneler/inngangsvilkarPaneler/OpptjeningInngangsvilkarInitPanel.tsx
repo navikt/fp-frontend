@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import { OpptjeningVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-opptjening';
+import { PanelOverstyringProvider } from '@navikt/fp-utils';
 
 import { useBehandlingApi } from '../../../../data/behandlingApi';
 import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
@@ -39,27 +40,29 @@ export const OpptjeningInngangsvilkarInitPanel = (props: InngangsvilkarPanelInit
       renderPanel={({ erOverstyrt, toggleOverstyring }) => (
         <>
           {standardPanelProps.aksjonspunkter.length === 0 && (
-            <OverstyringPanelDef
-              aksjonspunkter={standardPanelProps.aksjonspunkter}
-              aksjonspunktKode={AksjonspunktKode.OVERSTYRING_AV_OPPTJENINGSVILKARET}
-              vilkar={standardPanelProps.vilkar}
-              vilkarKoder={VILKAR_KODER}
-              panelTekstKode="Inngangsvilkar.Opptjeningsvilkaret"
-              toggleOverstyring={toggleOverstyring}
-              erOverstyrt={erOverstyrt}
+            <PanelOverstyringProvider
+              overstyringApKode={AksjonspunktKode.OVERSTYRING_AV_OPPTJENINGSVILKARET}
+              kanOverstyreAccess={rettigheter.kanOverstyreAccess}
               overrideReadOnly={
                 standardPanelProps.isReadOnly ||
                 (props.harInngangsvilkarApentAksjonspunkt && !(standardPanelProps.isAksjonspunktOpen || erOverstyrt))
               }
-              kanOverstyreAccess={rettigheter.kanOverstyreAccess}
-            />
+              toggleOverstyring={toggleOverstyring}
+            >
+              <OverstyringPanelDef
+                vilkar={standardPanelProps.vilkar}
+                vilkarKoder={VILKAR_KODER}
+                panelTekstKode="Inngangsvilkar.Opptjeningsvilkaret"
+              />
+            </PanelOverstyringProvider>
           )}
           {standardPanelProps.aksjonspunkter.length > 0 && opptjening && (
             <OpptjeningVilkarProsessIndex
               erSvpFagsak
               lovReferanse={standardPanelProps.vilkar[0].lovReferanse}
               opptjening={opptjening}
-              {...standardPanelProps}
+              readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
+              status={standardPanelProps.status}
             />
           )}
         </>

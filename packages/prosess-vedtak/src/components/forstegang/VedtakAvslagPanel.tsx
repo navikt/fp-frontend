@@ -1,13 +1,13 @@
-import React, { FunctionComponent, ReactElement } from 'react';
+import { ReactElement } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BodyShort,Label } from '@navikt/ds-react';
+import { BodyShort, Label } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { getKodeverknavnFn, KodeverkType,VilkarUtfallType } from '@navikt/fp-kodeverk';
-import { AlleKodeverk, Behandlingsresultat,Vilkar } from '@navikt/fp-types';
+import { getKodeverknavnFn, KodeverkType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AlleKodeverk, Behandlingsresultat, Vilkar } from '@navikt/fp-types';
 
-import VedtakFritekstPanel from '../felles/VedtakFritekstPanel';
+import { VedtakFritekstPanel } from '../felles/VedtakFritekstPanel';
 
 export const getAvslagArsak = (
   vilkar: Vilkar[],
@@ -31,7 +31,7 @@ export const getAvslagArsak = (
   )}`;
 };
 
-interface OwnProps {
+interface Props {
   vilkar?: Vilkar[];
   behandlingsresultat?: Behandlingsresultat;
   språkKode: string;
@@ -43,7 +43,7 @@ interface OwnProps {
 
 const EMPTY_ARRAY = [] as Vilkar[];
 
-const VedtakAvslagPanel: FunctionComponent<OwnProps> = ({
+export const VedtakAvslagPanel = ({
   vilkar = EMPTY_ARRAY,
   behandlingsresultat,
   språkKode,
@@ -51,7 +51,7 @@ const VedtakAvslagPanel: FunctionComponent<OwnProps> = ({
   alleKodeverk,
   beregningErManueltFastsatt,
   skalBrukeOverstyrendeFritekstBrev,
-}) => {
+}: Props) => {
   const intl = useIntl();
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
   const textCode = beregningErManueltFastsatt ? 'VedtakForm.Fritekst.Beregningsgrunnlag' : 'VedtakForm.Fritekst';
@@ -75,5 +75,3 @@ const VedtakAvslagPanel: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-
-export default VedtakAvslagPanel;

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement } from 'react';
+import { ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Detail, Heading, Label } from '@navikt/ds-react';
@@ -10,13 +10,14 @@ import {
   getKodeverknavnFn,
   KodeverkType,
 } from '@navikt/fp-kodeverk';
-import { AlleKodeverk,AnkeVurdering } from '@navikt/fp-types';
+import { AlleKodeverk, AnkeVurdering } from '@navikt/fp-types';
+import { usePanelContext } from '@navikt/fp-utils';
 
-interface OwnPropsResultat {
+interface Props {
   ankeVurderingResultat?: AnkeVurdering['ankeVurderingResultat'];
 }
 
-const ResultatEnkel: FunctionComponent<OwnPropsResultat> = ({ ankeVurderingResultat }): ReactElement => (
+const ResultatEnkel = ({ ankeVurderingResultat }: Props): ReactElement => (
   <>
     <Detail>
       <FormattedMessage id="Ankebehandling.Resultat.Innstilling.Stadfest" />
@@ -29,7 +30,7 @@ const ResultatEnkel: FunctionComponent<OwnPropsResultat> = ({ ankeVurderingResul
   </>
 );
 
-const ResultatOpphev: FunctionComponent<OwnPropsResultat> = ({ ankeVurderingResultat }): ReactElement => (
+const ResultatOpphev = ({ ankeVurderingResultat }: Props): ReactElement => (
   <>
     <Detail>
       <FormattedMessage id="Ankebehandling.Resultat.Innstilling.Oppheves" />
@@ -42,7 +43,7 @@ const ResultatOpphev: FunctionComponent<OwnPropsResultat> = ({ ankeVurderingResu
   </>
 );
 
-const ResultatHjemsend: FunctionComponent<OwnPropsResultat> = ({ ankeVurderingResultat }): ReactElement => (
+const ResultatHjemsend = ({ ankeVurderingResultat }: Props): ReactElement => (
   <>
     <Detail>
       <FormattedMessage id="Ankebehandling.Resultat.Innstilling.Hjemsendes" />
@@ -55,7 +56,7 @@ const ResultatHjemsend: FunctionComponent<OwnPropsResultat> = ({ ankeVurderingRe
   </>
 );
 
-const ResultatAvvise: FunctionComponent<OwnPropsResultat> = ({ ankeVurderingResultat }): ReactElement => (
+const ResultatAvvise = ({ ankeVurderingResultat }: Props): ReactElement => (
   <>
     <Detail>
       {ankeVurderingResultat?.påAnketKlageBehandlingUuid && (
@@ -132,10 +133,10 @@ const hentSprakKode = (ankeOmgjoerArsak?: string): string => {
   }
 };
 
-const ResultatOmgjores: FunctionComponent<OwnPropsResultat & { alleKodeverk: AlleKodeverk }> = ({
+const ResultatOmgjores = ({
   ankeVurderingResultat,
   alleKodeverk,
-}): ReactElement => (
+}: Props & { alleKodeverk: AlleKodeverk }): ReactElement => (
   <>
     <Detail>
       <FormattedMessage id={hentSprakKode(ankeVurderingResultat?.ankeVurderingOmgjoer)} />
@@ -159,13 +160,13 @@ const ResultatOmgjores: FunctionComponent<OwnPropsResultat & { alleKodeverk: All
   </>
 );
 
-const AnkeResultat: FunctionComponent<OwnPropsResultat & { alleKodeverk: AlleKodeverk }> = ({
-  ankeVurderingResultat,
-  alleKodeverk,
-}): ReactElement | null => {
+const AnkeResultat = ({ ankeVurderingResultat }: Props): ReactElement | null => {
+  const { alleKodeverk } = usePanelContext();
+
   if (!ankeVurderingResultat) {
     return null;
   }
+
   switch (ankeVurderingResultat.ankeVurdering) {
     case AnkeVurderingKodeverk.ANKE_STADFESTE_YTELSESVEDTAK:
       return <ResultatEnkel ankeVurderingResultat={ankeVurderingResultat} />;
@@ -182,12 +183,11 @@ const AnkeResultat: FunctionComponent<OwnPropsResultat & { alleKodeverk: AlleKod
   }
 };
 
-interface OwnProps {
+interface Props {
   ankeVurderingResultat?: AnkeVurdering['ankeVurderingResultat'];
-  alleKodeverk: AlleKodeverk;
 }
 
-const BehandleResultatForm: FunctionComponent<OwnProps> = ({ ankeVurderingResultat, alleKodeverk }) => (
+export const BehandleResultatForm = ({ ankeVurderingResultat }: Props) => (
   <>
     <Heading size="small">
       <FormattedMessage id="Ankebehandling.Resultat.Title" />
@@ -196,8 +196,6 @@ const BehandleResultatForm: FunctionComponent<OwnProps> = ({ ankeVurderingResult
     <Label size="small">
       <FormattedMessage id="Ankebehandling.Resultat.Innstilling" />
     </Label>
-    <AnkeResultat ankeVurderingResultat={ankeVurderingResultat} alleKodeverk={alleKodeverk} />
+    <AnkeResultat ankeVurderingResultat={ankeVurderingResultat} />
   </>
 );
-
-export default BehandleResultatForm;

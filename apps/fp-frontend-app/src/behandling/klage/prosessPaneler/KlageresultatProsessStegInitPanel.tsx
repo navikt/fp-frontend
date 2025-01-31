@@ -74,11 +74,7 @@ export const KlageresultatProsessStegInitPanel = (props: ProsessPanelInitProps) 
         hentSkalMarkeresSomAktiv={vedtakStatus !== VilkarUtfallType.IKKE_VURDERT}
       >
         {klageVurdering ? (
-          <VedtakKlageProsessIndex
-            klageVurdering={klageVurdering}
-            previewVedtakCallback={forhåndsvis}
-            {...standardPanelProps}
-          />
+          <VedtakKlageProsessIndex klageVurdering={klageVurdering} previewVedtakCallback={forhåndsvis} />
         ) : (
           <LoadingPanel />
         )}

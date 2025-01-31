@@ -1,1 +1,1 @@
-export { default as InnsynProsessIndex } from './src/InnsynProsessIndex';
+export { InnsynProsessIndex } from './src/InnsynProsessIndex';

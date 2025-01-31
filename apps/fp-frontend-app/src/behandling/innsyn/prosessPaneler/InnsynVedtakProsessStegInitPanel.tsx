@@ -72,7 +72,6 @@ export const InnsynVedtakProsessStegInitPanel = (props: ProsessPanelInitProps) =
             innsyn={innsyn}
             alleDokumenter={innsynDokumenter}
             previewCallback={forhåndsvis}
-            {...standardPanelProps}
           />
         ) : (
           <LoadingPanel />

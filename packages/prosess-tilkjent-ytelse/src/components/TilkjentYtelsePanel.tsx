@@ -1,4 +1,3 @@
-import React, { FunctionComponent, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Heading, Label } from '@navikt/ds-react';
@@ -7,16 +6,15 @@ import { EditedIcon, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   Aksjonspunkt,
-  AlleKodeverk,
   ArbeidsgiverOpplysningerPerId,
   BeregningsresultatDagytelse,
-  Fagsak,
   FamilieHendelseSamling,
   Feriepengegrunnlag,
   Kjønnkode,
   Personoversikt,
   Soknad,
 } from '@navikt/fp-types';
+import { usePanelContext } from '@navikt/fp-utils';
 
 import FeriepengerIndex from './feriepenger/FeriepengerIndex';
 import TilkjentYtelse from './TilkjentYtelse';
@@ -28,34 +26,27 @@ const finnTilbaketrekkAksjonspunktBegrunnelse = (alleAksjonspunkter: Aksjonspunk
     ? alleAksjonspunkter.find(ap => ap.definisjon === AksjonspunktKode.VURDER_TILBAKETREKK)?.begrunnelse
     : undefined;
 
-interface PureOwnProps {
+interface Props {
   beregningresultat: BeregningsresultatDagytelse;
-  familieHendelseSamling: FamilieHendelseSamling;
+  familiehendelse: FamilieHendelseSamling;
   personoversikt: Personoversikt;
   soknad: Soknad;
-  aksjonspunkter: Aksjonspunkt[];
-  alleKodeverk: AlleKodeverk;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   feriepengegrunnlag?: Feriepengegrunnlag;
-  fagsak: Fagsak;
 }
 
-const TilkjentYtelsePanel: FunctionComponent<PureOwnProps> = ({
+export const TilkjentYtelsePanel = ({
   beregningresultat,
-  alleKodeverk,
   arbeidsgiverOpplysningerPerId,
   feriepengegrunnlag,
-  familieHendelseSamling,
+  familiehendelse,
   personoversikt,
   soknad,
-  aksjonspunkter,
-  fagsak,
-}) => {
+}: Props) => {
+  const { alleKodeverk, fagsak, aksjonspunkterForPanel } = usePanelContext();
+
   // Utgått aksjonspunkt, viser kun begrunnelse hvis det er løst tidligere
-  const vurderTilbaketrekkAPBegrunnelse = useMemo(
-    () => finnTilbaketrekkAksjonspunktBegrunnelse(aksjonspunkter),
-    [aksjonspunkter],
-  );
+  const vurderTilbaketrekkAPBegrunnelse = finnTilbaketrekkAksjonspunktBegrunnelse(aksjonspunkterForPanel);
 
   const soknadMottattDato = soknad.søknadsfrist?.mottattDato ? soknad.søknadsfrist?.mottattDato : soknad.mottattDato;
   return (
@@ -68,7 +59,7 @@ const TilkjentYtelsePanel: FunctionComponent<PureOwnProps> = ({
         <TilkjentYtelse
           beregningsresultatPeriode={beregningresultat.perioder}
           soknadDate={soknadMottattDato}
-          familieHendelseSamling={familieHendelseSamling}
+          familieHendelseSamling={familiehendelse}
           hovedsokerKjonnKode={personoversikt?.bruker ? (personoversikt.bruker.kjønn as Kjønnkode) : undefined}
           alleKodeverk={alleKodeverk}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -100,5 +91,3 @@ const TilkjentYtelsePanel: FunctionComponent<PureOwnProps> = ({
     </>
   );
 };
-
-export default TilkjentYtelsePanel;

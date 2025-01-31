@@ -39,7 +39,7 @@ export const BehandleInnsynProsessStegInitPanel = (props: ProsessPanelInitProps)
           innsyn={innsyn}
           saksnummer={fagsak.saksnummer}
           alleDokumenter={innsynDokumenter}
-          {...standardPanelProps}
+          readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
         />
       ) : (
         <LoadingPanel />

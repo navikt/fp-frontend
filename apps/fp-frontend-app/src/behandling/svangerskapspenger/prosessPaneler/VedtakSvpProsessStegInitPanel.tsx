@@ -139,8 +139,6 @@ export const VedtakSvpProsessStegInitPanel = ({
             beregningsgrunnlag={beregningsgrunnlag}
             simuleringResultat={simuleringResultat}
             beregningsresultatOriginalBehandling={beregingDagytelseOriginalBehandling}
-            {...standardPanelProps}
-            aksjonspunkter={aksjonspunkter}
             vilkar={vilkår}
           />
         ) : (

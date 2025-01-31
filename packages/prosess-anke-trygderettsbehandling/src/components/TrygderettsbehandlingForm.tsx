@@ -1,22 +1,23 @@
-import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Heading, Label } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { AnkeVurdering as ankeVurderingType, AnkeVurderingOmgjoer, KodeverkType } from '@navikt/fp-kodeverk';
-import { AlleKodeverk, AnkeVurdering } from '@navikt/fp-types';
+import { AnkeVurdering } from '@navikt/fp-types';
+import { usePanelContext } from '@navikt/fp-utils';
 
-interface OwnProps {
+interface Props {
   ankeVurdering?: AnkeVurdering;
-  alleKodeverk: AlleKodeverk;
 }
 
-const TrygderettsbehandlingForm: FunctionComponent<OwnProps> = ({ ankeVurdering, alleKodeverk }) => {
+export const TrygderettsbehandlingForm = ({ ankeVurdering }: Props) => {
   const avr = ankeVurdering?.ankeVurderingResultat;
   const behandlesKabal = ankeVurdering?.underBehandlingKabal || false;
   const behandlesKabalTrygderett = ankeVurdering?.underBehandlingKabalTrygderett || false;
   const behandletKabal = ankeVurdering?.behandletAvKabal || false;
+
+  const { alleKodeverk } = usePanelContext();
 
   const ankeOmgorArsaker = alleKodeverk[KodeverkType.ANKE_OMGJOER_AARSAK];
 
@@ -121,5 +122,3 @@ const TrygderettsbehandlingForm: FunctionComponent<OwnProps> = ({ ankeVurdering,
     </>
   );
 };
-
-export default TrygderettsbehandlingForm;

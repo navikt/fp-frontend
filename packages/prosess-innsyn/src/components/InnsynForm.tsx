@@ -1,4 +1,3 @@
-import React, { FunctionComponent, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -17,9 +16,9 @@ import {
   Kommunikasjonsretning,
 } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
-import { Aksjonspunkt, AlleKodeverk, Dokument, InnsynDokument, InnsynVedtaksdokument } from '@navikt/fp-types';
+import { Aksjonspunkt, Dokument, InnsynDokument, InnsynVedtaksdokument } from '@navikt/fp-types';
 import { VurderInnsynAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData } from '@navikt/fp-utils';
+import { useFormData, usePanelContext } from '@navikt/fp-utils';
 
 import DocumentListInnsyn from './DocumentListInnsyn';
 import VedtakDocuments from './VedtakDocuments';
@@ -94,18 +93,13 @@ const getFilteredReceivedDocuments = (allDocuments: Dokument[]): Dokument[] => {
   return filteredDocuments;
 };
 
-interface OwnProps {
+interface Props {
   saksNr: string;
-  fristBehandlingPåVent?: string;
   innsynMottattDato: string;
   innsynDokumenter: InnsynDokument[];
   innsynResultatType: string;
   vedtaksdokumentasjon: InnsynVedtaksdokument[];
   alleDokumenter?: Dokument[];
-  aksjonspunkter: Aksjonspunkt[];
-  alleKodeverk: AlleKodeverk;
-  submitCallback: (data: VurderInnsynAp) => Promise<void>;
-  readOnly: boolean;
   readOnlySubmitButton: boolean;
 }
 
@@ -114,32 +108,26 @@ interface OwnProps {
  *
  * Viser panelet som håndterer avklaring av innsyn.
  */
-const InnsynForm: FunctionComponent<OwnProps> = ({
-  readOnly,
+export const InnsynForm = ({
   readOnlySubmitButton,
   innsynMottattDato,
-  alleKodeverk,
   vedtaksdokumentasjon,
   innsynResultatType,
-  fristBehandlingPåVent,
   innsynDokumenter,
   alleDokumenter = [],
-  aksjonspunkter,
-  submitCallback,
   saksNr,
-}) => {
+}: Props) => {
   const intl = useIntl();
 
-  const initialValues = useMemo(
-    () =>
-      buildInitialValues(
-        innsynMottattDato,
-        innsynResultatType,
-        innsynDokumenter,
-        aksjonspunkter,
-        fristBehandlingPåVent,
-      ),
-    [innsynMottattDato, innsynResultatType, fristBehandlingPåVent, innsynDokumenter, aksjonspunkter],
+  const { alleKodeverk, aksjonspunkterForPanel, submitCallback, isReadOnly, behandling } =
+    usePanelContext<VurderInnsynAp>();
+
+  const initialValues = buildInitialValues(
+    innsynMottattDato,
+    innsynResultatType,
+    innsynDokumenter,
+    aksjonspunkterForPanel,
+    behandling.fristBehandlingPåVent,
   );
 
   const { formData, setFormData } = useFormData<FormValues>();
@@ -148,18 +136,14 @@ const InnsynForm: FunctionComponent<OwnProps> = ({
     defaultValues: formData || initialValues,
   });
 
-  const documents = useMemo(() => getFilteredReceivedDocuments(alleDokumenter), [alleDokumenter]);
+  const documents = getFilteredReceivedDocuments(alleDokumenter);
 
-  const innsynResultatTyper = useMemo(
-    () =>
-      alleKodeverk[KodeverkType.INNSYN_RESULTAT_TYPE]
-        .filter(irt => irt.kode !== '-')
-        .sort((t1, t2) => t1.navn.localeCompare(t2.navn))
-        .reverse(),
-    [alleKodeverk],
-  );
+  const innsynResultatTyper = alleKodeverk[KodeverkType.INNSYN_RESULTAT_TYPE]
+    .filter(irt => irt.kode !== '-')
+    .sort((t1, t2) => t1.navn.localeCompare(t2.navn))
+    .reverse();
 
-  const isApOpen = aksjonspunkter[0].status === AksjonspunktStatus.OPPRETTET;
+  const isApOpen = aksjonspunkterForPanel[0].status === AksjonspunktStatus.OPPRETTET;
 
   const innsynResultatTypeKode = formMethods.watch('innsynResultatType');
   const sattPaVent = formMethods.watch('sattPaVent');
@@ -183,7 +167,7 @@ const InnsynForm: FunctionComponent<OwnProps> = ({
       <Datepicker
         name="mottattDato"
         label={intl.formatMessage({ id: 'InnsynForm.DatoMottattKrav' })}
-        isReadOnly={readOnly}
+        isReadOnly={isReadOnly}
         isEdited={!isApOpen}
         validate={[required, hasValidDate]}
       />
@@ -193,14 +177,14 @@ const InnsynForm: FunctionComponent<OwnProps> = ({
         behandlingTypes={alleKodeverk[KodeverkType.BEHANDLING_TYPE]}
       />
       <VerticalSpacer twentyPx />
-      <DocumentListInnsyn saksNr={saksNr} documents={documents} readOnly={readOnly} />
-      <ProsessStegBegrunnelseTextFieldNew readOnly={readOnly} />
+      <DocumentListInnsyn saksNr={saksNr} documents={documents} readOnly={isReadOnly} />
+      <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
       <VerticalSpacer sixteenPx />
       <RadioGroupPanel
         name="innsynResultatType"
         label={<FormattedMessage id="InnsynForm.Resultat" />}
         validate={[required]}
-        isReadOnly={readOnly}
+        isReadOnly={isReadOnly}
         isHorizontal
         isEdited={!isApOpen}
         radios={innsynResultatTyper.map(irt => ({
@@ -217,7 +201,7 @@ const InnsynForm: FunctionComponent<OwnProps> = ({
               name="sattPaVent"
               label={<FormattedMessage id="InnsynForm.VelgVidereAksjon" />}
               validate={[required]}
-              isReadOnly={readOnly}
+              isReadOnly={isReadOnly}
               isEdited={!isApOpen}
               isHorizontal
               isTrueOrFalseSelection
@@ -238,7 +222,7 @@ const InnsynForm: FunctionComponent<OwnProps> = ({
                 <Datepicker
                   name="fristDato"
                   label={intl.formatMessage({ id: 'InnsynForm.FristDato' })}
-                  isReadOnly={readOnly}
+                  isReadOnly={isReadOnly}
                   isEdited={!isApOpen}
                   validate={[required, hasValidDate]}
                 />
@@ -249,7 +233,7 @@ const InnsynForm: FunctionComponent<OwnProps> = ({
       )}
       <VerticalSpacer sixteenPx />
       <ProsessStegSubmitButtonNew
-        isReadOnly={readOnly}
+        isReadOnly={isReadOnly}
         isSubmittable={!readOnlySubmitButton}
         isSubmitting={formMethods.formState.isSubmitting}
         isDirty={formMethods.formState.isDirty}
@@ -258,5 +242,3 @@ const InnsynForm: FunctionComponent<OwnProps> = ({
     </Form>
   );
 };
-
-export default InnsynForm;

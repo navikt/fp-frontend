@@ -2,9 +2,9 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { FamilieHendelse, FamilieHendelseSamling, Soknad, StandardProsessPanelProps } from '@navikt/fp-types';
+import { FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
 
-import VarselOmRevurderingForm, { ForhandsvisData } from './components/VarselOmRevurderingForm';
+import { ForhandsvisData, VarselOmRevurderingForm } from './components/VarselOmRevurderingForm';
 
 import messages from '../i18n/nb_NO.json';
 
@@ -18,32 +18,8 @@ interface Props {
   previewCallback: (data: ForhandsvisData) => void;
 }
 
-export const VarselOmRevurderingProsessIndex = ({
-  behandling,
-  familiehendelse,
-  soknad,
-  soknadOriginalBehandling,
-  familiehendelseOriginalBehandling,
-  aksjonspunkter,
-  submitCallback,
-  previewCallback,
-  isReadOnly,
-  alleKodeverk,
-}: Props & StandardProsessPanelProps) => (
+export const VarselOmRevurderingProsessIndex = (props: Props) => (
   <RawIntlProvider value={intl}>
-    <VarselOmRevurderingForm
-      behandlingArsaker={behandling.behandlingÅrsaker}
-      sprakkode={behandling.sprakkode}
-      behandlingType={behandling.type}
-      familiehendelse={familiehendelse}
-      soknad={soknad}
-      soknadOriginalBehandling={soknadOriginalBehandling}
-      familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
-      aksjonspunkter={aksjonspunkter}
-      submitCallback={submitCallback}
-      previewCallback={previewCallback}
-      readOnly={isReadOnly}
-      alleKodeverk={alleKodeverk}
-    />
+    <VarselOmRevurderingForm {...props} />
   </RawIntlProvider>
 );

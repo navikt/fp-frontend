@@ -4,6 +4,7 @@ import { IntlShape, useIntl } from 'react-intl';
 import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import { AdopsjonVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-adopsjon';
 import { Aksjonspunkt } from '@navikt/fp-types';
+import { PanelOverstyringProvider } from '@navikt/fp-utils';
 
 import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 import { OverstyringPanelDef } from '../../../felles/prosess/OverstyringPanelDef';
@@ -47,22 +48,29 @@ export const AdopsjonInngangsvilkarInitPanel = (props: InngangsvilkarPanelInitPr
       renderPanel={({ erOverstyrt, toggleOverstyring }) => (
         <>
           {standardPanelProps.aksjonspunkter.length === 0 && (
-            <OverstyringPanelDef
-              aksjonspunkter={standardPanelProps.aksjonspunkter}
-              aksjonspunktKode={AksjonspunktKode.OVERSTYR_ADOPSJONSVILKAR}
-              vilkar={standardPanelProps.vilkar}
-              vilkarKoder={VILKAR_KODER}
-              panelTekstKode="Inngangsvilkar.Adopsjonsvilkaret"
-              toggleOverstyring={toggleOverstyring}
-              erOverstyrt={erOverstyrt}
+            <PanelOverstyringProvider
+              overstyringApKode={AksjonspunktKode.OVERSTYR_ADOPSJONSVILKAR}
+              kanOverstyreAccess={rettigheter.kanOverstyreAccess}
               overrideReadOnly={
                 standardPanelProps.isReadOnly ||
                 (props.harInngangsvilkarApentAksjonspunkt && !(standardPanelProps.isAksjonspunktOpen || erOverstyrt))
               }
-              kanOverstyreAccess={rettigheter.kanOverstyreAccess}
+              toggleOverstyring={toggleOverstyring}
+            >
+              <OverstyringPanelDef
+                vilkar={standardPanelProps.vilkar}
+                vilkarKoder={VILKAR_KODER}
+                panelTekstKode="Inngangsvilkar.Adopsjonsvilkaret"
+              />
+            </PanelOverstyringProvider>
+          )}
+          {standardPanelProps.aksjonspunkter.length > 0 && (
+            <AdopsjonVilkarProsessIndex
+              readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
+              status={standardPanelProps.status}
+              vilkar={standardPanelProps.vilkar}
             />
           )}
-          {standardPanelProps.aksjonspunkter.length > 0 && <AdopsjonVilkarProsessIndex {...standardPanelProps} />}
         </>
       )}
     />

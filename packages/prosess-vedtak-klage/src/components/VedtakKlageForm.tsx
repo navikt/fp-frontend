@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Heading, Label } from '@navikt/ds-react';
@@ -14,8 +14,9 @@ import {
   KodeverkType,
 } from '@navikt/fp-kodeverk';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
-import { Aksjonspunkt, AlleKodeverk, Behandlingsresultat, KlageVurdering } from '@navikt/fp-types';
+import { AlleKodeverk, Behandlingsresultat, KlageVurdering } from '@navikt/fp-types';
 import { ForeslaVedtakAp, ForeslaVedtakManueltAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { usePanelContext } from '@navikt/fp-utils';
 
 import { VedtakKlageSubmitPanel } from './VedtakKlageSubmitPanel';
 
@@ -85,39 +86,29 @@ const getResultatText = (behandlingKlageVurdering: KlageVurdering): string | nul
 };
 
 interface Props {
-  behandlingsresultat: Behandlingsresultat;
-  behandlingPaaVent: boolean;
   klageVurdering: KlageVurdering;
-  aksjonspunkter: Aksjonspunkt[];
-  submitCallback: (data: AksjonspunktData) => Promise<void>;
   previewVedtakCallback: (data: ForhandsvisData) => void;
-  readOnly: boolean;
-  alleKodeverk: AlleKodeverk;
+  behandlingsresultat: Behandlingsresultat;
 }
 
-export const VedtakKlageForm = ({
-  submitCallback,
-  klageVurdering,
-  behandlingsresultat,
-  readOnly,
-  aksjonspunkter,
-  previewVedtakCallback,
-  behandlingPaaVent,
-  alleKodeverk,
-}: Props) => {
-  const avvistArsaker = useMemo(() => getAvvisningsAarsaker(klageVurdering), [klageVurdering]);
-  const omgjortAarsak = useMemo(() => getOmgjortAarsak(klageVurdering, alleKodeverk), [klageVurdering]);
-  const behandlingsResultatTekst = useMemo(() => getResultatText(klageVurdering), [klageVurdering]);
+export const VedtakKlageForm = ({ klageVurdering, previewVedtakCallback, behandlingsresultat }: Props) => {
+  const { behandling, isReadOnly, alleKodeverk, aksjonspunkterForPanel, submitCallback } =
+    usePanelContext<AksjonspunktData>();
+
+  const avvistArsaker = getAvvisningsAarsaker(klageVurdering);
+  const omgjortAarsak = getOmgjortAarsak(klageVurdering, alleKodeverk);
+  const behandlingsResultatTekst = getResultatText(klageVurdering);
+
   const klageVurderingResultat = klageVurdering.klageVurderingResultatNK
     ? klageVurdering.klageVurderingResultatNK
     : klageVurdering.klageVurderingResultatNFP;
   const erOmgjort = isKlageOmgjort(behandlingsresultat.type);
 
   const [isSubmitting, setSubmitting] = useState(false);
-  const lagreVedtak = useCallback(() => {
+  const lagreVedtak = () => {
     setSubmitting(true);
 
-    const behandlingAksjonspunktKodes = aksjonspunkter
+    const behandlingAksjonspunktKodes = aksjonspunkterForPanel
       .filter(ap => ap.status === AksjonspunktStatus.OPPRETTET)
       .map(ap => ap.definisjon);
     const input = behandlingAksjonspunktKodes.map(apCode => ({
@@ -125,7 +116,7 @@ export const VedtakKlageForm = ({
     }));
 
     submitCallback(input).then(() => setSubmitting(false));
-  }, [aksjonspunkter]);
+  };
 
   const kodeverknavn = getKodeverknavnFn(alleKodeverk);
   return (
@@ -177,8 +168,8 @@ export const VedtakKlageForm = ({
       {klageVurderingResultat?.klageVurdertAv === 'NFP' && (
         <VedtakKlageSubmitPanel
           previewVedtakCallback={previewVedtakCallback}
-          readOnly={readOnly}
-          behandlingPaaVent={behandlingPaaVent}
+          readOnly={isReadOnly}
+          behandlingPaaVent={behandling.behandlingPaaVent}
           lagreVedtak={lagreVedtak}
           isSubmitting={isSubmitting}
         />

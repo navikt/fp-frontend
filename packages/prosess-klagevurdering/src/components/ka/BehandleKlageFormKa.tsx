@@ -1,4 +1,3 @@
-import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Heading, Label } from '@navikt/ds-react';
@@ -9,10 +8,10 @@ import {
   KlageVurderingOmgjoer as klageVurderingOmgjoerType,
   KodeverkType,
 } from '@navikt/fp-kodeverk';
-import { AlleKodeverk,KlageVurdering } from '@navikt/fp-types';
+import { KlageVurdering } from '@navikt/fp-types';
+import { usePanelContext } from '@navikt/fp-utils';
 
-interface OwnProps {
-  alleKodeverk: AlleKodeverk;
+interface Props {
   klageVurdering: KlageVurdering;
 }
 
@@ -21,8 +20,10 @@ interface OwnProps {
  *
  * Setter opp readonly-panel for behandling av klage (KA).
  */
-const BehandleKlageFormKa: FunctionComponent<OwnProps> = ({ klageVurdering, alleKodeverk }) => {
+export const BehandleKlageFormKa = ({ klageVurdering }: Props) => {
   const intl = useIntl();
+
+  const { alleKodeverk } = usePanelContext();
 
   const {
     begrunnelse,
@@ -98,5 +99,3 @@ const BehandleKlageFormKa: FunctionComponent<OwnProps> = ({ klageVurdering, alle
     </>
   );
 };
-
-export default BehandleKlageFormKa;

@@ -3,6 +3,7 @@ import { use } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
 import { AksjonspunktKode, AksjonspunktStatus, VilkarType } from '@navikt/fp-kodeverk';
+import { PanelOverstyringProvider } from '@navikt/fp-utils';
 
 import { useBehandlingApi } from '../../../../data/behandlingApi';
 import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
@@ -42,22 +43,23 @@ export const MedlemskapInngangsvilkarInitPanel = (props: InngangsvilkarPanelInit
       renderPanel={({ erOverstyrt, toggleOverstyring }) => (
         <>
           {!harÅpentMedlemskapAksjonspunkt && !isFetching && (
-            <OverstyringPanelDef
-              aksjonspunkter={standardPanelProps.aksjonspunkter}
-              aksjonspunktKode={AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR}
-              vilkar={standardPanelProps.vilkar}
-              vilkarKoder={VILKAR_KODER}
-              panelTekstKode="Inngangsvilkar.Medlemskapsvilkaret"
-              medlemskap={medlemskap}
-              toggleOverstyring={toggleOverstyring}
-              erOverstyrt={erOverstyrt}
+            <PanelOverstyringProvider
+              overstyringApKode={AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR}
+              kanOverstyreAccess={rettigheter.kanOverstyreAccess}
               overrideReadOnly={
                 standardPanelProps.isReadOnly ||
                 harMedlemskapsAksjonspunkt ||
                 (props.harInngangsvilkarApentAksjonspunkt && !(standardPanelProps.isAksjonspunktOpen || erOverstyrt))
               }
-              kanOverstyreAccess={rettigheter.kanOverstyreAccess}
-            />
+              toggleOverstyring={toggleOverstyring}
+            >
+              <OverstyringPanelDef
+                vilkar={standardPanelProps.vilkar}
+                vilkarKoder={VILKAR_KODER}
+                panelTekstKode="Inngangsvilkar.Medlemskapsvilkaret"
+                medlemskap={medlemskap}
+              />
+            </PanelOverstyringProvider>
           )}
         </>
       )}

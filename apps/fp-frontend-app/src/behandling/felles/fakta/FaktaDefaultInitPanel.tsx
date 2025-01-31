@@ -2,7 +2,7 @@ import { ReactElement, use } from 'react';
 
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { StandardFaktaPanelProps } from '@navikt/fp-types';
-import { FormDataProvider } from '@navikt/fp-utils';
+import { FormDataProvider, PanelProvider } from '@navikt/fp-utils';
 
 import { FaktaPanelInitProps } from '../typer/faktaPanelInitProps';
 import { BehandlingDataContext } from '../utils/behandlingDataContext';
@@ -25,7 +25,7 @@ export const FaktaDefaultInitPanel = ({
   faktaPanelMenyTekst,
   children,
 }: Props & FaktaPanelInitProps) => {
-  const { behandling } = use(BehandlingDataContext);
+  const { behandling, fagsak, alleKodeverk } = use(BehandlingDataContext);
 
   const skalVisePanel = useFaktaMenyRegistrerer(
     registrerFaktaPanel,
@@ -36,5 +36,22 @@ export const FaktaDefaultInitPanel = ({
     valgtFaktaSteg,
   );
 
-  return <FormDataProvider behandling={behandling}>{skalVisePanel ? children : null}</FormDataProvider>;
+  return (
+    <FormDataProvider behandling={behandling}>
+      {skalVisePanel ? (
+        <PanelProvider
+          behandling={behandling}
+          fagsak={fagsak}
+          alleKodeverk={alleKodeverk}
+          aksjonspunkterForPanel={standardPanelProps.aksjonspunkter}
+          harÅpneAksjonspunkter={standardPanelProps.harApneAksjonspunkter}
+          submitCallback={standardPanelProps.submitCallback}
+          isReadOnly={standardPanelProps.readOnly}
+          alleMerknaderFraBeslutter={standardPanelProps.alleMerknaderFraBeslutter}
+        >
+          {children}
+        </PanelProvider>
+      ) : null}
+    </FormDataProvider>
+  );
 };

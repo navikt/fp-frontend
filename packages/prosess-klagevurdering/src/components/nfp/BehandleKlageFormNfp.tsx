@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -8,9 +8,9 @@ import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponen
 
 import { AksjonspunktKode, KlageVurdering as klageVurderingType, KodeverkType } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
-import { AlleKodeverk, KlageVurdering, KlageVurderingResultat, KodeverkMedNavn } from '@navikt/fp-types';
+import { KlageVurdering, KlageVurderingResultat, KodeverkMedNavn } from '@navikt/fp-types';
 import { KlageVurderingResultatAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData } from '@navikt/fp-utils';
+import { useFormData, usePanelContext } from '@navikt/fp-utils';
 
 import KlageFormType from '../../types/klageFormType';
 import BekreftOgSubmitKlageModal from './BekreftOgSubmitKlageModal';
@@ -53,16 +53,12 @@ const buildInitialValues = (klageVurderingResultat?: KlageVurderingResultat): Kl
   fritekstTilBrev: klageVurderingResultat ? klageVurderingResultat.fritekstTilBrev : undefined,
 });
 
-interface OwnProps {
+interface Props {
   previewCallback: (data: BrevData) => void;
   saveKlage: (data: TransformedValues) => void;
-  readOnly: boolean;
   readOnlySubmitButton?: boolean;
-  sprakkode: string;
-  alleKodeverk: AlleKodeverk;
   klageVurdering: KlageVurdering;
   alleAktuelleHjemler: string[];
-  submitCallback: (data: KlageVurderingResultatAp) => Promise<void>;
 }
 
 /**
@@ -70,17 +66,15 @@ interface OwnProps {
  *
  * Presentasjonskomponent. Setter opp aksjonspunktet for behandling av klage (NFP).
  */
-export const BehandleKlageFormNfp: FunctionComponent<OwnProps> = ({
-  readOnly,
+export const BehandleKlageFormNfp = ({
   klageVurdering,
   previewCallback,
   saveKlage,
   readOnlySubmitButton,
-  sprakkode,
   alleAktuelleHjemler,
-  alleKodeverk,
-  submitCallback,
-}) => {
+}: Props) => {
+  const { behandling, alleKodeverk, submitCallback, isReadOnly } = usePanelContext<KlageVurderingResultatAp>();
+
   const hjemmlerMedNavn = lagHjemlerMedNavn(
     alleKodeverk[KodeverkType.KLAGE_HJEMMEL],
     lagHjemmelsKoder(alleAktuelleHjemler),
@@ -118,31 +112,31 @@ export const BehandleKlageFormNfp: FunctionComponent<OwnProps> = ({
         </AksjonspunktHelpTextHTML>
       )}
       <KlageVurderingRadioOptionsNfp
-        readOnly={readOnly}
+        readOnly={isReadOnly}
         klageVurdering={formValues.klageVurdering}
         medholdReasons={alleKodeverk[KodeverkType.KLAGE_MEDHOLD_ARSAK]}
         alleHjemmlerMedNavn={hjemmlerMedNavn}
       />
       <div className={styles.confirmVilkarForm}>
         <ProsessStegBegrunnelseTextFieldNew
-          readOnly={readOnly}
+          readOnly={isReadOnly}
           text={intl.formatMessage({ id: 'BehandleKlageFormNfp.BegrunnelseForKlage' })}
         />
         <VerticalSpacer sixteenPx />
-        <FritekstBrevTextField sprakkode={sprakkode} readOnly={readOnly} />
+        <FritekstBrevTextField sprakkode={behandling.sprakkode} readOnly={isReadOnly} />
         <VerticalSpacer sixteenPx />
         <HStack justify="space-between">
           <HStack gap="4">
             {formValues.klageVurdering === klageVurderingType.STADFESTE_YTELSESVEDTAK && (
               <>
-                <Button variant="primary" type="button" size="small" onClick={() => åpneModal()} disabled={readOnly}>
+                <Button variant="primary" type="button" size="small" onClick={() => åpneModal()} disabled={isReadOnly}>
                   <FormattedMessage id="Klage.Behandle.Bekreft" />
                 </Button>
                 <BekreftOgSubmitKlageModal
                   erModalÅpen={visSubmitModal}
                   lukkModal={lukkModal}
                   valgtHjemmel={hjemmlerMedNavn.find(hj => hj.kode === formValues.klageHjemmel)?.navn}
-                  readOnly={readOnly}
+                  readOnly={isReadOnly}
                   isSubmittable={!readOnlySubmitButton}
                   isSubmitting={formMethods.formState.isSubmitting}
                   isDirty={formMethods.formState.isValid}
@@ -151,13 +145,13 @@ export const BehandleKlageFormNfp: FunctionComponent<OwnProps> = ({
             )}
             {formValues.klageVurdering !== klageVurderingType.STADFESTE_YTELSESVEDTAK && (
               <ProsessStegSubmitButtonNew
-                isReadOnly={readOnly}
+                isReadOnly={isReadOnly}
                 isSubmittable={!readOnlySubmitButton}
                 isSubmitting={formMethods.formState.isSubmitting}
                 isDirty={formMethods.formState.isDirty}
               />
             )}
-            {!readOnly &&
+            {!isReadOnly &&
               formValues.klageVurdering &&
               formValues.fritekstTilBrev &&
               formValues.fritekstTilBrev.length > 2 && (
@@ -171,7 +165,7 @@ export const BehandleKlageFormNfp: FunctionComponent<OwnProps> = ({
           <TempsaveKlageButton
             saveKlage={saveKlage}
             handleSubmit={formMethods.handleSubmit}
-            readOnly={readOnly}
+            readOnly={isReadOnly}
             aksjonspunktCode={AksjonspunktKode.BEHANDLE_KLAGE_NFP}
           />
         </HStack>
@@ -179,5 +173,3 @@ export const BehandleKlageFormNfp: FunctionComponent<OwnProps> = ({
     </Form>
   );
 };
-
-export default BehandleKlageFormNfp;

@@ -1,4 +1,4 @@
-import { FunctionComponent, useCallback, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
@@ -12,7 +12,7 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { OverstyringPanel } from '@navikt/fp-prosess-felles';
 import { Aksjonspunkt, BeregningsresultatEs } from '@navikt/fp-types';
 import { OverstyringBeregningAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData } from '@navikt/fp-utils';
+import { useFormData, usePanelContext, usePanelOverstyring } from '@navikt/fp-utils';
 
 import styles from './beregningsresultatEngangsstonadForm.module.css';
 
@@ -41,14 +41,8 @@ const transformValues = (values: FormValues): OverstyringBeregningAp => ({
   begrunnelse: values.begrunnelse,
 });
 
-interface OwnProps {
-  overrideReadOnly: boolean;
-  kanOverstyre: boolean;
-  toggleOverstyring: (fn: (oldArray: []) => void) => void;
+interface Props {
   behandlingResultatstruktur?: BeregningsresultatEs;
-  aksjonspunkter: Aksjonspunkt[];
-  submitCallback: (data: OverstyringBeregningAp) => Promise<void>;
-  erIkkeGodkjentAvBeslutter: boolean;
 }
 
 /**
@@ -56,38 +50,40 @@ interface OwnProps {
  *
  * Viser beregnet engangsstønad. Resultatet kan overstyres av Nav-ansatt med overstyr-rettighet.
  */
-const BeregningsresultatEngangsstonadForm: FunctionComponent<OwnProps> = ({
-  overrideReadOnly,
-  kanOverstyre,
-  toggleOverstyring,
+export const BeregningsresultatEngangsstonadForm = ({
   behandlingResultatstruktur = {
     beregnetTilkjentYtelse: 0,
     antallBarn: 0,
     satsVerdi: 0,
   },
-  aksjonspunkter,
-  erIkkeGodkjentAvBeslutter,
-  submitCallback,
-}) => {
+}: Props) => {
+  const { aksjonspunkterForPanel, submitCallback, alleMerknaderFraBeslutter } = usePanelContext();
+
+  const erIkkeGodkjentAvBeslutter = aksjonspunkterForPanel.some(
+    a => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted,
+  );
+
   const { formData, setFormData } = useFormData<FormValues>();
 
+  const { toggleOverstyring, kanOverstyreAccess, overrideReadOnly } = usePanelOverstyring();
+
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || buildInitialValues(aksjonspunkter, behandlingResultatstruktur),
+    defaultValues: formData || buildInitialValues(aksjonspunkterForPanel, behandlingResultatstruktur),
   });
 
   const [erIOverstyringsmodus, toggleOverstyringsmodus] = useState(false);
-  const toggleAv = useCallback(() => {
+  const toggleAv = () => {
     toggleOverstyringsmodus(false);
     formMethods.reset();
-    toggleOverstyring(oldArray => oldArray.filter(code => code !== AksjonspunktKode.OVERSTYR_BEREGNING));
-  }, []);
-  const togglePa = useCallback(() => {
+    toggleOverstyring();
+  };
+  const togglePa = () => {
     toggleOverstyringsmodus(true);
-    toggleOverstyring(oldArray => [...oldArray, AksjonspunktKode.OVERSTYR_BEREGNING]);
-  }, []);
+    toggleOverstyring();
+  };
 
   const harOverstyringAksjonspunkt =
-    aksjonspunkter.some(ap => ap.definisjon === AksjonspunktKode.OVERSTYR_BEREGNING) || false;
+    aksjonspunkterForPanel.some(ap => ap.definisjon === AksjonspunktKode.OVERSTYR_BEREGNING) || false;
 
   return (
     <Form
@@ -102,9 +98,12 @@ const BeregningsresultatEngangsstonadForm: FunctionComponent<OwnProps> = ({
               <FormattedMessage id="BeregningEngangsstonadForm.Beregning" />
             </Heading>
           </FlexColumn>
-          {(kanOverstyre || overrideReadOnly) && (
+          {(kanOverstyreAccess.isEnabled || overrideReadOnly) && (
             <FlexColumn>
-              <OverstyringKnapp onClick={togglePa} erOverstyrt={erIOverstyringsmodus || !kanOverstyre} />
+              <OverstyringKnapp
+                onClick={togglePa}
+                erOverstyrt={erIOverstyringsmodus || !kanOverstyreAccess.isEnabled}
+              />
             </FlexColumn>
           )}
         </FlexRow>
@@ -207,5 +206,3 @@ const BeregningsresultatEngangsstonadForm: FunctionComponent<OwnProps> = ({
     </Form>
   );
 };
-
-export default BeregningsresultatEngangsstonadForm;

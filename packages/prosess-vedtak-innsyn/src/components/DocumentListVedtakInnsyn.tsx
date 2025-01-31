@@ -1,4 +1,3 @@
-import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Detail } from '@navikt/ds-react';
@@ -11,7 +10,7 @@ import styles from './documentListVedtakInnsyn.module.css';
 
 const headerTextCodes = ['DocumentListVedtakInnsyn.Dokument'];
 
-interface OwnProps {
+interface Props {
   saksNr: string;
   documents: ({
     fikkInnsyn: boolean;
@@ -24,7 +23,7 @@ interface OwnProps {
  * Presentasjonskomponent. Viser dokumenter  som er valgt til innsyn i en liste . Finnes ingen dokumenter blir det kun vist en label
  * som viser at ingen dokumenter finnes på fagsak.
  */
-const DocumentListVedtakInnsyn: FunctionComponent<OwnProps> = ({ documents, saksNr }) => {
+export const DocumentListVedtakInnsyn = ({ documents, saksNr }: Props) => {
   if (documents.length === 0) {
     return (
       <BodyShort size="small" className={styles.noDocuments}>
@@ -60,5 +59,3 @@ const DocumentListVedtakInnsyn: FunctionComponent<OwnProps> = ({ documents, saks
     </>
   );
 };
-
-export default DocumentListVedtakInnsyn;

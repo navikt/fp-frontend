@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement, useMemo } from 'react';
+import { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 
@@ -20,10 +20,8 @@ import {
 import { ProsessPanelTemplate, ProsessStegBegrunnelseTextFieldNew } from '@navikt/fp-prosess-felles';
 import {
   Aksjonspunkt,
-  AlleKodeverk,
   ArbeidsgiverOpplysninger,
   ArbeidsgiverOpplysningerPerId,
-  Behandling,
   ManglendeVedleggSoknad,
   Soknad,
 } from '@navikt/fp-types';
@@ -31,7 +29,7 @@ import {
   BekreftSokersOpplysningspliktManuAp,
   OverstyringSokersOpplysingspliktAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData } from '@navikt/fp-utils';
+import { useFormData, usePanelContext } from '@navikt/fp-utils';
 
 const orgPrefix = 'org_';
 const aktørPrefix = 'aktør_';
@@ -170,19 +168,11 @@ type FormValues = {
   hasAksjonspunkt?: boolean;
 };
 
-interface OwnProps {
-  behandlingsresultat?: Behandling['behandlingsresultat'];
+interface Props {
   soknad: Soknad;
-  aksjonspunkter: Aksjonspunkt[];
   status: string;
-  submitCallback: (
-    aksjonspunktData: BekreftSokersOpplysningspliktManuAp | OverstyringSokersOpplysingspliktAp,
-  ) => Promise<void>;
-  readOnly: boolean;
   readOnlySubmitButton: boolean;
-  alleKodeverk: AlleKodeverk;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  erIkkeGodkjentAvBeslutter: boolean;
 }
 
 /**
@@ -190,28 +180,38 @@ interface OwnProps {
  *
  * Informasjon om søkers informasjonsplikt er godkjent eller avvist.
  */
-const SokersOpplysningspliktForm: FunctionComponent<OwnProps> = ({
-  readOnly,
+export const SokersOpplysningspliktForm = ({
   soknad,
   readOnlySubmitButton,
   status,
-  aksjonspunkter,
-  behandlingsresultat,
   arbeidsgiverOpplysningerPerId,
-  alleKodeverk,
-  erIkkeGodkjentAvBeslutter,
-  submitCallback,
-}) => {
+}: Props) => {
   const intl = useIntl();
 
-  const sorterteManglendeVedlegg = useMemo(() => getSortedManglendeVedlegg(soknad), [soknad]);
+  const {
+    aksjonspunkterForPanel,
+    alleKodeverk,
+    submitCallback,
+    alleMerknaderFraBeslutter,
+    harÅpneAksjonspunkter,
+    isReadOnly,
+    behandling,
+  } = usePanelContext<BekreftSokersOpplysningspliktManuAp | OverstyringSokersOpplysingspliktAp>();
+
+  const erIkkeGodkjentAvBeslutter = aksjonspunkterForPanel.some(
+    a => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted,
+  );
+
+  const sorterteManglendeVedlegg = getSortedManglendeVedlegg(soknad);
   const hasSoknad = harSoknad(soknad);
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
 
-  const initialValues = useMemo(
-    () =>
-      buildInitialValues(sorterteManglendeVedlegg, hasSoknad, status, aksjonspunkter, arbeidsgiverOpplysningerPerId),
-    [sorterteManglendeVedlegg, hasSoknad, aksjonspunkter, status, arbeidsgiverOpplysningerPerId],
+  const initialValues = buildInitialValues(
+    sorterteManglendeVedlegg,
+    hasSoknad,
+    status,
+    aksjonspunkterForPanel,
+    arbeidsgiverOpplysningerPerId,
   );
 
   const { formData, setFormData } = useFormData<FormValues>();
@@ -223,14 +223,15 @@ const SokersOpplysningspliktForm: FunctionComponent<OwnProps> = ({
   const hasAksjonspunkt = formMethods.watch('hasAksjonspunkt');
   const erVilkarOk = formMethods.watch('erVilkarOk');
 
-  const isOpenAksjonspunkt = aksjonspunkter.some(ap => ap.status === AksjonspunktStatus.OPPRETTET);
-  const originalErVilkarOk = isOpenAksjonspunkt ? undefined : VilkarUtfallType.OPPFYLT === status;
+  const originalErVilkarOk = harÅpneAksjonspunkter ? undefined : VilkarUtfallType.OPPFYLT === status;
 
   return (
     <Form
       formMethods={formMethods}
       onSubmit={(values: FormValues) =>
-        submitCallback(transformValues(values, sorterteManglendeVedlegg, arbeidsgiverOpplysningerPerId, aksjonspunkter))
+        submitCallback(
+          transformValues(values, sorterteManglendeVedlegg, arbeidsgiverOpplysningerPerId, aksjonspunkterForPanel),
+        )
       }
       setDataOnUnmount={setFormData}
     >
@@ -239,7 +240,7 @@ const SokersOpplysningspliktForm: FunctionComponent<OwnProps> = ({
         isAksjonspunktOpen={!readOnlySubmitButton}
         isDirty={hasAksjonspunkt ? formMethods.formState.isDirty : erVilkarOk !== initialValues.erVilkarOk}
         readOnlySubmitButton={hasSoknad ? readOnlySubmitButton : !formMethods.formState.isDirty || readOnlySubmitButton}
-        readOnly={readOnly}
+        readOnly={isReadOnly}
         originalErVilkarOk={originalErVilkarOk}
         erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
         isSubmitting={formMethods.formState.isSubmitting}
@@ -266,8 +267,8 @@ const SokersOpplysningspliktForm: FunctionComponent<OwnProps> = ({
             </Table>
           </>
         )}
-        <ProsessStegBegrunnelseTextFieldNew readOnly={readOnly} />
-        {!readOnly && (
+        <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
+        {!isReadOnly && (
           <>
             <VerticalSpacer sixteenPx />
             <RadioGroupPanel
@@ -289,14 +290,14 @@ const SokersOpplysningspliktForm: FunctionComponent<OwnProps> = ({
             />
           </>
         )}
-        {readOnly && (
+        {isReadOnly && (
           <div>
-            {originalErVilkarOk === false && behandlingsresultat?.avslagsarsak && (
+            {originalErVilkarOk === false && behandling.behandlingsresultat?.avslagsarsak && (
               <>
                 <VerticalSpacer sixteenPx />
                 <BodyShort size="small">
                   {getKodeverknavn(
-                    behandlingsresultat.avslagsarsak,
+                    behandling.behandlingsresultat.avslagsarsak,
                     KodeverkType.AVSLAGSARSAK,
                     VilkarType.SOKERSOPPLYSNINGSPLIKT,
                   )}
@@ -309,5 +310,3 @@ const SokersOpplysningspliktForm: FunctionComponent<OwnProps> = ({
     </Form>
   );
 };
-
-export default SokersOpplysningspliktForm;

@@ -1,16 +1,15 @@
-import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
-import { Detail,Label } from '@navikt/ds-react';
+import { Detail, Label } from '@navikt/ds-react';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { formatCurrencyWithKr } from '@navikt/ft-utils';
 
 import { FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { Behandlingsresultat, BeregningsresultatDagytelse, BeregningsresultatEs } from '@navikt/fp-types';
 
-import VedtakFritekstPanel from '../felles/VedtakFritekstPanel';
+import { VedtakFritekstPanel } from '../felles/VedtakFritekstPanel';
 
-interface OwnProps {
+interface Props {
   beregningsresultat?: BeregningsresultatDagytelse | BeregningsresultatEs;
   behandlingsresultat?: Behandlingsresultat;
   ytelseTypeKode: string;
@@ -20,7 +19,7 @@ interface OwnProps {
   beregningErManueltFastsatt: boolean;
 }
 
-const VedtakInnvilgetPanel: FunctionComponent<OwnProps> = ({
+export const VedtakInnvilgetPanel = ({
   behandlingsresultat,
   ytelseTypeKode,
   språkKode,
@@ -28,7 +27,7 @@ const VedtakInnvilgetPanel: FunctionComponent<OwnProps> = ({
   skalBrukeOverstyrendeFritekstBrev,
   beregningErManueltFastsatt,
   beregningsresultat = {},
-}) => {
+}: Props) => {
   const intl = useIntl();
   return (
     <>
@@ -62,5 +61,3 @@ const VedtakInnvilgetPanel: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-
-export default VedtakInnvilgetPanel;

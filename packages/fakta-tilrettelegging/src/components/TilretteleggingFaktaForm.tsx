@@ -1,4 +1,4 @@
-import React, { ReactNode, useCallback, useMemo, useState } from 'react';
+import { ReactNode, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -8,17 +8,16 @@ import { dateRangesNotOverlapping, hasValidDate, hasValidText, maxLength, requir
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { FaktaSubmitButton } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, KodeverkType } from '@navikt/fp-kodeverk';
 import {
   Aksjonspunkt,
   AoIArbeidsforhold,
   ArbeidsforholdFodselOgTilrettelegging,
   ArbeidsgiverOpplysningerPerId,
   FodselOgTilrettelegging,
-  KodeverkMedNavn,
 } from '@navikt/fp-types';
 import { BekreftSvangerskapspengerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData } from '@navikt/fp-utils';
+import { useFormData, usePanelContext } from '@navikt/fp-utils';
 
 import { TilretteleggingFormValues } from '../types/TilretteleggingFormValues';
 import { ArbeidsforholdFieldArray } from './arbeidsforhold/ArbeidsforholdFieldArray';
@@ -55,16 +54,11 @@ const utledOmEnSkalVurdereVelferdspermisjoner = (alleArbeidsforhold: Arbeidsforh
 const FeilmeldingAlert = ({ children }: { children: ReactNode }) => <Alert variant="error">{children}</Alert>;
 
 interface Props {
-  behandlingVersjon: number;
-  readOnly: boolean;
-  harApneAksjonspunkter: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   svangerskapspengerTilrettelegging: FodselOgTilrettelegging;
   aoiArbeidsforhold: AoIArbeidsforhold[];
-  aksjonspunkter: Aksjonspunkt[];
-  submitCallback: (data: BekreftSvangerskapspengerAp) => Promise<void>;
   submittable: boolean;
-  uttakArbeidTyper: KodeverkMedNavn[];
+  readonly: boolean;
 }
 
 /**
@@ -73,22 +67,21 @@ interface Props {
  * Viser tillrettlegging før svangerskapspenger
  */
 export const TilretteleggingFaktaForm = ({
-  behandlingVersjon,
-  readOnly,
-  harApneAksjonspunkter,
   arbeidsgiverOpplysningerPerId,
-  aksjonspunkter,
   svangerskapspengerTilrettelegging,
   aoiArbeidsforhold,
-  submitCallback,
   submittable,
-  uttakArbeidTyper,
+  readonly,
 }: Props) => {
   const intl = useIntl();
 
-  const sorterteArbeidsforhold = useMemo(
-    () => sorterArbeidsforhold(svangerskapspengerTilrettelegging.arbeidsforholdListe, arbeidsgiverOpplysningerPerId),
-    [behandlingVersjon],
+  const { aksjonspunkterForPanel, alleKodeverk, submitCallback, harÅpneAksjonspunkter } =
+    usePanelContext<BekreftSvangerskapspengerAp>();
+  const uttakArbeidTyper = alleKodeverk[KodeverkType.UTTAK_ARBEID_TYPE];
+
+  const sorterteArbeidsforhold = sorterArbeidsforhold(
+    svangerskapspengerTilrettelegging.arbeidsforholdListe,
+    arbeidsgiverOpplysningerPerId,
   );
 
   const { formData, setFormData } = useFormData<TilretteleggingFormValues>();
@@ -98,7 +91,7 @@ export const TilretteleggingFaktaForm = ({
       arbeidsforhold: sorterteArbeidsforhold,
       termindato: svangerskapspengerTilrettelegging ? svangerskapspengerTilrettelegging.termindato : '',
       fødselsdato: svangerskapspengerTilrettelegging ? svangerskapspengerTilrettelegging.fødselsdato : '',
-      begrunnelse: getAksjonspunktBegrunnelse(aksjonspunkter),
+      begrunnelse: getAksjonspunktBegrunnelse(aksjonspunkterForPanel),
     },
   });
 
@@ -137,27 +130,24 @@ export const TilretteleggingFaktaForm = ({
     harGyldig100PermisjonDerEnHarValgtSvp ||
     harOverlappendePerioder;
 
-  const onSubmit = useCallback(
-    (values: TilretteleggingFormValues) => {
-      if (harFeil) {
-        setVisFeil(true);
-        return Promise.resolve();
-      }
-      return submitCallback({
-        kode: AksjonspunktKode.FODSELTILRETTELEGGING,
-        termindato: values.termindato,
-        fødselsdato: values.fødselsdato,
-        begrunnelse: values.begrunnelse,
-        bekreftetSvpArbeidsforholdList: values.arbeidsforhold,
-      });
-    },
-    [harFeil, submitCallback],
-  );
+  const onSubmit = (values: TilretteleggingFormValues) => {
+    if (harFeil) {
+      setVisFeil(true);
+      return Promise.resolve();
+    }
+    return submitCallback({
+      kode: AksjonspunktKode.FODSELTILRETTELEGGING,
+      termindato: values.termindato,
+      fødselsdato: values.fødselsdato,
+      begrunnelse: values.begrunnelse,
+      bekreftetSvpArbeidsforholdList: values.arbeidsforhold,
+    });
+  };
 
   return (
     <Form formMethods={formMethods} setDataOnUnmount={setFormData} onSubmit={onSubmit}>
       <VStack gap="8">
-        {harApneAksjonspunkter && (
+        {harÅpneAksjonspunkter && (
           <AksjonspunktHelpTextHTML>
             {skalVurdereVelferdspermisjoner
               ? [
@@ -174,14 +164,14 @@ export const TilretteleggingFaktaForm = ({
             name="termindato"
             label={intl.formatMessage({ id: 'TilretteleggingFaktaForm.Termindato' })}
             validate={[required, hasValidDate]}
-            isReadOnly={readOnly}
+            isReadOnly={readonly}
           />
           {fødselsdato && (
             <Datepicker
               name="fødselsdato"
               label={intl.formatMessage({ id: 'TilretteleggingFaktaForm.Fodselsdato' })}
               validate={[required, hasValidDate]}
-              isReadOnly={readOnly}
+              isReadOnly={readonly}
             />
           )}
         </HStack>
@@ -189,7 +179,7 @@ export const TilretteleggingFaktaForm = ({
           sorterteArbeidsforhold={arbeidsforhold}
           aoiArbeidsforhold={aoiArbeidsforhold}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          readOnly={readOnly}
+          readOnly={readonly}
           uttakArbeidTyper={uttakArbeidTyper}
         />
         {visFeil && harIkkeVurdertAlleVelferdspermisjoner && (
@@ -227,12 +217,12 @@ export const TilretteleggingFaktaForm = ({
           label={intl.formatMessage({ id: 'TilretteleggingFaktaForm.BegrunnEndringene' })}
           validate={[isRequiredFn, maxLength1500, hasValidText]}
           maxLength={1500}
-          readOnly={readOnly}
+          readOnly={readonly}
         />
         <HStack>
           <FaktaSubmitButton
             isSubmittable={submittable}
-            isReadOnly={readOnly}
+            isReadOnly={readonly}
             isSubmitting={formMethods.formState.isSubmitting}
             isDirty={formMethods.formState.isDirty}
           />

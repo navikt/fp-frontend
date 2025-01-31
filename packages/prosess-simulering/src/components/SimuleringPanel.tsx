@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement, useState } from 'react';
+import { ReactElement, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
@@ -7,15 +7,9 @@ import { Form } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode, TilbakekrevingVidereBehandling } from '@navikt/fp-kodeverk';
-import {
-  Aksjonspunkt,
-  ArbeidsgiverOpplysningerPerId,
-  Fagsak,
-  SimuleringResultat,
-  TilbakekrevingValg,
-} from '@navikt/fp-types';
+import { Aksjonspunkt, ArbeidsgiverOpplysningerPerId, SimuleringResultat, TilbakekrevingValg } from '@navikt/fp-types';
 import { KontrollerEtterbetalingTilSøkerAP, VurderFeilutbetalingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData } from '@navikt/fp-utils';
+import { useFormData, usePanelContext } from '@navikt/fp-utils';
 
 import EtterbetalingSøkerForm, {
   buildInitialValues as buildInitialValuesEtterbetaling,
@@ -113,35 +107,26 @@ const lagAksjonspunktTitler = (aksjonspunkter: Aksjonspunkt[]): ReactElement[] =
   return elementer;
 };
 
-interface OwnProps {
-  fagsak: Fagsak;
+interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  sprakkode: string;
-  aksjonspunkter: Aksjonspunkt[];
   simuleringResultat?: SimuleringResultat;
   tilbakekrevingvalg?: TilbakekrevingValg;
-  submitCallback: (data: SimuleringAksjonspunkt[]) => Promise<void>;
-  readOnly: boolean;
-  isApOpen: boolean;
   previewCallback: (params: { mottaker: string; fritekst: string }) => void;
 }
 
-const SimuleringPanel: FunctionComponent<OwnProps> = ({
+export const SimuleringPanel = ({
   simuleringResultat,
-  readOnly,
-  sprakkode,
   previewCallback,
-  submitCallback,
-  isApOpen,
   tilbakekrevingvalg,
-  aksjonspunkter,
-  fagsak,
   arbeidsgiverOpplysningerPerId,
-}) => {
+}: Props) => {
+  const { aksjonspunkterForPanel, submitCallback, isReadOnly, harÅpneAksjonspunkter, fagsak, behandling } =
+    usePanelContext<SimuleringAksjonspunkt[]>();
+
   const { formData, setFormData } = useFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || buildInitialValues(aksjonspunkter, tilbakekrevingvalg),
+    defaultValues: formData || buildInitialValues(aksjonspunkterForPanel, tilbakekrevingvalg),
   });
 
   const { formState } = formMethods;
@@ -156,9 +141,9 @@ const SimuleringPanel: FunctionComponent<OwnProps> = ({
 
   const simuleringResultatOption = simuleringResultat?.simuleringResultat;
   const skalHaForm =
-    harAksjonspunkt(aksjonspunkter, AksjonspunktKode.VURDER_FEILUTBETALING) ||
-    harAksjonspunkt(aksjonspunkter, AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER);
-  const aksjonspunktTittler = isApOpen ? lagAksjonspunktTitler(aksjonspunkter) : [];
+    harAksjonspunkt(aksjonspunkterForPanel, AksjonspunktKode.VURDER_FEILUTBETALING) ||
+    harAksjonspunkt(aksjonspunkterForPanel, AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER);
+  const aksjonspunktTittler = harÅpneAksjonspunkter ? lagAksjonspunktTitler(aksjonspunkterForPanel) : [];
   return (
     <>
       <Heading size="small">
@@ -201,26 +186,29 @@ const SimuleringPanel: FunctionComponent<OwnProps> = ({
       {skalHaForm && (
         <Form
           formMethods={formMethods}
-          onSubmit={(values: FormValues) => submitCallback(transformValues(values, aksjonspunkter))}
+          onSubmit={(values: FormValues) => submitCallback(transformValues(values, aksjonspunkterForPanel))}
           setDataOnUnmount={setFormData}
         >
           <TilbakekrevSøkerForm
-            aksjonspunkt={finnAksjonspunkt(aksjonspunkter, AksjonspunktKode.VURDER_FEILUTBETALING)}
+            aksjonspunkt={finnAksjonspunkt(aksjonspunkterForPanel, AksjonspunktKode.VURDER_FEILUTBETALING)}
             fagsak={fagsak}
             previewCallback={previewCallback}
-            readOnly={readOnly}
-            sprakkode={sprakkode}
+            readOnly={isReadOnly}
+            sprakkode={behandling.sprakkode}
           />
           <VerticalSpacer sixteenPx />
           <EtterbetalingSøkerForm
-            readOnly={readOnly}
-            aksjonspunkt={finnAksjonspunkt(aksjonspunkter, AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER)}
+            readOnly={isReadOnly}
+            aksjonspunkt={finnAksjonspunkt(
+              aksjonspunkterForPanel,
+              AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER,
+            )}
           />
           <VerticalSpacer sixteenPx />
           <Button
             size="small"
             variant="primary"
-            disabled={!formState.isDirty || formState.isSubmitting || readOnly}
+            disabled={!formState.isDirty || formState.isSubmitting || isReadOnly}
             loading={formState.isSubmitting}
           >
             <FormattedMessage id="SubmitButton.ConfirmInformation" />
@@ -230,5 +218,3 @@ const SimuleringPanel: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-
-export default SimuleringPanel;

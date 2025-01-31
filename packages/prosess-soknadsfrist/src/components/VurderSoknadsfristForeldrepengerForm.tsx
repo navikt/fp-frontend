@@ -1,4 +1,3 @@
-import React, { FunctionComponent, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
@@ -20,7 +19,7 @@ import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import { Aksjonspunkt, Søknadsfrist } from '@navikt/fp-types';
 import { VurderSoknadsfristAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData } from '@navikt/fp-utils';
+import { useFormData, usePanelContext } from '@navikt/fp-utils';
 
 import styles from './vurderSoknadsfristForeldrepengerForm.module.css';
 
@@ -54,14 +53,10 @@ const transformValues = (values: FormValues): VurderSoknadsfristAp => ({
   ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
 });
 
-interface OwnProps {
+interface Props {
   mottattDato: string;
   søknadsfrist?: Søknadsfrist;
-  aksjonspunkter: Aksjonspunkt[];
-  submitCallback: (data: VurderSoknadsfristAp) => Promise<void>;
-  readOnly: boolean;
   readOnlySubmitButton: boolean;
-  isApOpen: boolean;
 }
 
 /**
@@ -69,19 +64,11 @@ interface OwnProps {
  *
  * Setter opp aksjonspunktet for vurdering av søknadsfristvilkåret.
  */
-const VurderSoknadsfristForeldrepengerForm: FunctionComponent<OwnProps> = ({
-  aksjonspunkter,
-  readOnly,
-  readOnlySubmitButton,
-  mottattDato,
-  søknadsfrist,
-  isApOpen,
-  submitCallback,
-}) => {
-  const initialValues = useMemo(
-    () => buildInitialValues(aksjonspunkter, mottattDato, søknadsfrist),
-    [aksjonspunkter, mottattDato, søknadsfrist],
-  );
+export const VurderSoknadsfristForeldrepengerForm = ({ readOnlySubmitButton, mottattDato, søknadsfrist }: Props) => {
+  const { aksjonspunkterForPanel, isReadOnly, submitCallback, harÅpneAksjonspunkter } =
+    usePanelContext<VurderSoknadsfristAp>();
+
+  const initialValues = buildInitialValues(aksjonspunkterForPanel, mottattDato, søknadsfrist);
 
   const { formData, setFormData } = useFormData<FormValues>();
 
@@ -105,7 +92,7 @@ const VurderSoknadsfristForeldrepengerForm: FunctionComponent<OwnProps> = ({
         <FormattedMessage id="VurderSoknadsfristForeldrepengerForm.Soknadsfrist" />
       </Heading>
       <VerticalSpacer twentyPx />
-      {isApOpen && (
+      {harÅpneAksjonspunkter && (
         <AksjonspunktHelpTextHTML>
           <FormattedMessage
             id="VurderSoknadsfristForeldrepengerForm.AksjonspunktHelpText"
@@ -166,14 +153,14 @@ const VurderSoknadsfristForeldrepengerForm: FunctionComponent<OwnProps> = ({
         </FlexRow>
       </FlexContainer>
       <div className={styles.marginTop}>
-        <ProsessStegBegrunnelseTextFieldNew readOnly={readOnly} />
+        <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
         <VerticalSpacer sixteenPx />
         <RadioGroupPanel
           name="gyldigSenFremsetting"
           validate={[required]}
-          isReadOnly={readOnly}
+          isReadOnly={isReadOnly}
           isHorizontal
-          isEdited={isEdited(aksjonspunkter.length > 0, gyldigSenFremsetting)}
+          isEdited={isEdited(aksjonspunkterForPanel.length > 0, gyldigSenFremsetting)}
           isTrueOrFalseSelection
           radios={[
             {
@@ -192,7 +179,7 @@ const VurderSoknadsfristForeldrepengerForm: FunctionComponent<OwnProps> = ({
             <ArrowBox>
               <Datepicker
                 name="ansesMottatt"
-                isReadOnly={readOnly}
+                isReadOnly={isReadOnly}
                 label={<FormattedMessage id="VurderSoknadsfristForeldrepengerForm.NyMottattDato" />}
                 validate={[required, hasValidDate, dateBeforeOrEqualToToday]}
               />
@@ -201,7 +188,7 @@ const VurderSoknadsfristForeldrepengerForm: FunctionComponent<OwnProps> = ({
         )}
         <VerticalSpacer twentyPx />
         <ProsessStegSubmitButtonNew
-          isReadOnly={readOnly}
+          isReadOnly={isReadOnly}
           isSubmittable={!readOnlySubmitButton}
           isSubmitting={formMethods.formState.isSubmitting}
           isDirty={formMethods.formState.isDirty}
@@ -210,5 +197,3 @@ const VurderSoknadsfristForeldrepengerForm: FunctionComponent<OwnProps> = ({
     </Form>
   );
 };
-
-export default VurderSoknadsfristForeldrepengerForm;

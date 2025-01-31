@@ -79,7 +79,6 @@ export const VarselProsessStegInitPanel = (props: ProsessPanelInitProps) => {
           familiehendelseOriginalBehandling={familiehendelseOrigninalBehandling}
           soknadOriginalBehandling={søknadOriginalBehandling}
           previewCallback={forhåndsvis}
-          {...standardPanelProps}
         />
       ) : (
         <LoadingPanel />

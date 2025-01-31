@@ -3,7 +3,7 @@ import { ReactElement, use } from 'react';
 import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { StandardProsessPanelProps } from '@navikt/fp-types';
-import { FormDataProvider } from '@navikt/fp-utils';
+import { FormDataProvider, PanelProvider, usePanelOverstyring } from '@navikt/fp-utils';
 
 import { ProsessPanelInitProps } from '../typer/prosessPanelInitProps';
 import { BehandlingDataContext } from '../utils/behandlingDataContext';
@@ -15,31 +15,48 @@ export type Props = {
   hentOverstyrtStatus?: string;
   prosessPanelKode: ProsessStegCode;
   prosessPanelMenyTekst: string;
-  erOverstyrt?: boolean;
   hentSkalMarkeresSomAktiv?: boolean;
   standardPanelProps: StandardProsessPanelProps;
   children: ReactElement;
 };
 
-export const ProsessDefaultInitPanel = ({
+export const ProsessDefaultInitPanel = (props: Props & ProsessPanelInitProps) => {
+  const { standardPanelProps } = props;
+  const harApentAksjonspunkt = standardPanelProps.isAksjonspunktOpen;
+
+  return <ProsessPanel {...props} harApentAksjonspunkt={harApentAksjonspunkt} />;
+};
+
+export const ProsessDefaultInitOverstyringPanel = (props: Props & ProsessPanelInitProps) => {
+  const { erOverstyrt } = usePanelOverstyring();
+
+  const { standardPanelProps } = props;
+  const harApentAksjonspunkt = erOverstyrt || standardPanelProps.isAksjonspunktOpen;
+
+  return <ProsessPanel {...props} harApentAksjonspunkt={harApentAksjonspunkt} />;
+};
+
+export type ProsessPanel = {
+  harApentAksjonspunkt: boolean;
+};
+
+const ProsessPanel = ({
   valgtProsessSteg,
+  hentOverstyrtStatus,
   registrerProsessPanel,
+  hentSkalMarkeresSomAktiv,
   skalPanelVisesIMeny,
   prosessPanelKode,
   prosessPanelMenyTekst,
-  hentOverstyrtStatus,
-  erOverstyrt = false,
-  hentSkalMarkeresSomAktiv,
   standardPanelProps,
+  harApentAksjonspunkt,
   children,
-}: Props & ProsessPanelInitProps) => {
-  const status = hentOverstyrtStatus ?? standardPanelProps.status;
-
+}: Props & ProsessPanel & ProsessPanelInitProps) => {
   const { behandling } = use(BehandlingDataContext);
 
-  const skalMarkeresSomAktiv = hentSkalMarkeresSomAktiv && !behandling.behandlingHenlagt;
+  const status = hentOverstyrtStatus ?? standardPanelProps.status;
 
-  const harApentAksjonspunkt = erOverstyrt || standardPanelProps.isAksjonspunktOpen;
+  const skalMarkeresSomAktiv = !!hentSkalMarkeresSomAktiv && !behandling.behandlingHenlagt;
 
   const erPanelValgt = useProsessMenyRegistrerer(
     registrerProsessPanel,
@@ -55,6 +72,7 @@ export const ProsessDefaultInitPanel = ({
   const skalVisePanel = erPanelValgt && (harApentAksjonspunkt || status !== VilkarUtfallType.IKKE_VURDERT);
 
   return (
+<<<<<<< Updated upstream
     <FormDataProvider behandling={behandling}>
       <ProsessPanelWrapper
         erPanelValgt={erPanelValgt}
@@ -64,5 +82,29 @@ export const ProsessDefaultInitPanel = ({
         {skalVisePanel ? children : null}
       </ProsessPanelWrapper>
     </FormDataProvider>
+=======
+    <ProsessPanelWrapper
+      erPanelValgt={erPanelValgt}
+      erAksjonspunktOpent={standardPanelProps.isAksjonspunktOpen}
+      status={status}
+    >
+      <FormDataProvider behandling={behandling}>
+        {skalVisePanel ? (
+          <PanelProvider
+            behandling={behandling}
+            fagsak={standardPanelProps.fagsak}
+            aksjonspunkterForPanel={standardPanelProps.aksjonspunkter}
+            harÅpneAksjonspunkter={standardPanelProps.isAksjonspunktOpen}
+            alleKodeverk={standardPanelProps.alleKodeverk}
+            submitCallback={standardPanelProps.submitCallback}
+            isReadOnly={standardPanelProps.isReadOnly}
+            alleMerknaderFraBeslutter={standardPanelProps.alleMerknaderFraBeslutter}
+          >
+            {children}
+          </PanelProvider>
+        ) : null}
+      </FormDataProvider>
+    </ProsessPanelWrapper>
+>>>>>>> Stashed changes
   );
 };

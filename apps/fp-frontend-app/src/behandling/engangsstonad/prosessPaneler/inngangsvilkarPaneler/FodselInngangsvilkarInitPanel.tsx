@@ -4,6 +4,7 @@ import { IntlShape, useIntl } from 'react-intl';
 import { AksjonspunktKode, FagsakYtelseType, VilkarType } from '@navikt/fp-kodeverk';
 import { FodselVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-fodsel';
 import { Aksjonspunkt } from '@navikt/fp-types';
+import { PanelOverstyringProvider } from '@navikt/fp-utils';
 
 import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 import { OverstyringPanelDef } from '../../../felles/prosess/OverstyringPanelDef';
@@ -47,23 +48,29 @@ export const FodselInngangsvilkarInitPanel = (props: InngangsvilkarPanelInitProp
       renderPanel={({ erOverstyrt, toggleOverstyring }) => (
         <>
           {standardPanelProps.aksjonspunkter.length === 0 && (
-            <OverstyringPanelDef
-              aksjonspunkter={standardPanelProps.aksjonspunkter}
-              aksjonspunktKode={AksjonspunktKode.OVERSTYR_FODSELSVILKAR}
-              vilkar={standardPanelProps.vilkar}
-              vilkarKoder={VILKAR_KODER}
-              panelTekstKode="Inngangsvilkar.Fodselsvilkaret"
-              toggleOverstyring={toggleOverstyring}
-              erOverstyrt={erOverstyrt}
+            <PanelOverstyringProvider
+              overstyringApKode={AksjonspunktKode.OVERSTYR_FODSELSVILKAR}
+              kanOverstyreAccess={rettigheter.kanOverstyreAccess}
               overrideReadOnly={
                 standardPanelProps.isReadOnly ||
                 (props.harInngangsvilkarApentAksjonspunkt && !(standardPanelProps.isAksjonspunktOpen || erOverstyrt))
               }
-              kanOverstyreAccess={rettigheter.kanOverstyreAccess}
-            />
+              toggleOverstyring={toggleOverstyring}
+            >
+              <OverstyringPanelDef
+                vilkar={standardPanelProps.vilkar}
+                vilkarKoder={VILKAR_KODER}
+                panelTekstKode="Inngangsvilkar.Fodselsvilkaret"
+              />
+            </PanelOverstyringProvider>
           )}
           {standardPanelProps.aksjonspunkter.length > 0 && (
-            <FodselVilkarProsessIndex ytelseTypeKode={FagsakYtelseType.ENGANGSSTONAD} {...standardPanelProps} />
+            <FodselVilkarProsessIndex
+              ytelseTypeKode={FagsakYtelseType.ENGANGSSTONAD}
+              readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
+              status={standardPanelProps.status}
+              vilkar={standardPanelProps.vilkar}
+            />
           )}
         </>
       )}

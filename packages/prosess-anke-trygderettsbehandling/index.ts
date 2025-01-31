@@ -1,1 +1,1 @@
-export { default as AnkeTrygderettsbehandlingProsessIndex } from './src/AnkeTrygderettsbehandlingProsessIndex';
+export { AnkeTrygderettsbehandlingProsessIndex } from './src/AnkeTrygderettsbehandlingProsessIndex';

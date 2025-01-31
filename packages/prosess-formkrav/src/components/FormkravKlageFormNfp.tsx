@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement, useMemo } from 'react';
+import { ReactElement, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 
@@ -11,17 +11,18 @@ import moment from 'moment';
 
 import { AksjonspunktKode, getKodeverknavnFn, KodeverkType } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
-import { AlleKodeverk, KlageVurdering } from '@navikt/fp-types';
+import { KlageVurdering } from '@navikt/fp-types';
 import { KlageFormkravAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData } from '@navikt/fp-utils';
+import { useFormData, usePanelContext } from '@navikt/fp-utils';
 
-import AvsluttetBehandling from '../types/avsluttetBehandlingTsType';
-import FormkravMellomlagretDataType from '../types/FormkravMellomlagretDataType';
-import TempsaveKlageButton, {
+import { AvsluttetBehandling } from '../types/avsluttetBehandlingTsType';
+import { FormkravMellomlagretDataType } from '../types/FormkravMellomlagretDataType';
+import {
   erTilbakekreving,
   IKKE_PA_KLAGD_VEDTAK,
   påklagdTilbakekrevingInfo,
   skalLagreFritekstfelt,
+  TempsaveKlageButton,
 } from './TempsaveKlageButton';
 
 import styles from './formkravKlageFormNfp.module.css';
@@ -92,14 +93,10 @@ const transformValues = (values: FormValues, avsluttedeBehandlinger: AvsluttetBe
   fritekstTilBrev: skalLagreFritekstfelt(values) ? values.fritekstTilBrev : undefined,
 });
 
-interface OwnProps {
-  behandlingUuid: string;
+interface Props {
   klageVurdering: KlageVurdering;
-  submitCallback: (data: KlageFormkravAp) => Promise<void>;
   readOnlySubmitButton?: boolean;
-  alleKodeverk: AlleKodeverk;
   avsluttedeBehandlinger: AvsluttetBehandling[];
-  readOnly: boolean;
   lagreFormkravVurdering: (data: FormkravMellomlagretDataType) => void;
 }
 
@@ -108,17 +105,15 @@ interface OwnProps {
  *
  * Setter opp aksjonspunktet for formkrav klage (NFP).
  */
-const FormkravKlageFormNfp: FunctionComponent<OwnProps> = ({
-  behandlingUuid,
-  readOnly,
+export const FormkravKlageFormNfp = ({
   klageVurdering,
   readOnlySubmitButton,
-  alleKodeverk,
   avsluttedeBehandlinger,
-  submitCallback,
   lagreFormkravVurdering,
-}) => {
+}: Props) => {
   const intl = useIntl();
+
+  const { behandling, alleKodeverk, submitCallback, isReadOnly } = usePanelContext<KlageFormkravAp>();
 
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
   const klageBareVedtakOptions = getKlagBareVedtak(avsluttedeBehandlinger, intl, getKodeverknavn);
@@ -152,7 +147,7 @@ const FormkravKlageFormNfp: FunctionComponent<OwnProps> = ({
           <HStack gap="10">
             <div>
               <SelectField
-                readOnly={readOnly}
+                readOnly={isReadOnly}
                 validate={[required]}
                 name="vedtak"
                 label={intl.formatMessage({ id: 'Klage.Formkrav.VelgVedtak' })}
@@ -166,7 +161,7 @@ const FormkravKlageFormNfp: FunctionComponent<OwnProps> = ({
                   name="erKlagerPart"
                   label={intl.formatMessage({ id: 'Klage.Formkrav.ErKlagerPart' })}
                   validate={[required]}
-                  isReadOnly={readOnly}
+                  isReadOnly={isReadOnly}
                   isHorizontal
                   isTrueOrFalseSelection
                   radios={[
@@ -184,7 +179,7 @@ const FormkravKlageFormNfp: FunctionComponent<OwnProps> = ({
                   name="erKonkret"
                   label={intl.formatMessage({ id: 'Klage.Formkrav.ErKonkret' })}
                   validate={[required]}
-                  isReadOnly={readOnly}
+                  isReadOnly={isReadOnly}
                   isHorizontal
                   isTrueOrFalseSelection
                   radios={[
@@ -204,7 +199,7 @@ const FormkravKlageFormNfp: FunctionComponent<OwnProps> = ({
                   name="erFristOverholdt"
                   label={intl.formatMessage({ id: 'Klage.Formkrav.ErFristOverholdt' })}
                   validate={[required]}
-                  isReadOnly={readOnly}
+                  isReadOnly={isReadOnly}
                   isHorizontal
                   isTrueOrFalseSelection
                   radios={[
@@ -222,7 +217,7 @@ const FormkravKlageFormNfp: FunctionComponent<OwnProps> = ({
                   name="erSignert"
                   label={intl.formatMessage({ id: 'Klage.Formkrav.ErSignert' })}
                   validate={[required]}
-                  isReadOnly={readOnly}
+                  isReadOnly={isReadOnly}
                   isHorizontal
                   isTrueOrFalseSelection
                   radios={[
@@ -240,30 +235,30 @@ const FormkravKlageFormNfp: FunctionComponent<OwnProps> = ({
             </VStack>
           </HStack>
         </VStack>
-        <ProsessStegBegrunnelseTextFieldNew readOnly={readOnly} />
+        <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
         {skalLagreFritekstfelt(formVerdier) && (
           <TextAreaField
             name="fritekstTilBrev"
             label={intl.formatMessage({ id: 'FormkravKlageFormNfp.Fritekst' })}
             maxLength={100000}
             validate={[required, hasValidText]}
-            readOnly={readOnly}
+            readOnly={isReadOnly}
             parse={formaterFritekst}
           />
         )}
         <HStack justify="space-between">
           <ProsessStegSubmitButtonNew
-            isReadOnly={readOnly}
+            isReadOnly={isReadOnly}
             isSubmittable={!readOnlySubmitButton}
             isSubmitting={formMethods.formState.isSubmitting}
             isDirty={formMethods.formState.isDirty}
           />
           <TempsaveKlageButton
-            behandlingUuid={behandlingUuid}
+            behandlingUuid={behandling.uuid}
             saveKlage={lagreFormkravVurdering}
             avsluttedeBehandlinger={avsluttedeBehandlinger}
             handleSubmit={formMethods.handleSubmit}
-            readOnly={readOnly}
+            readOnly={isReadOnly}
             aksjonspunktCode={AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP}
           />
         </HStack>
@@ -271,5 +266,3 @@ const FormkravKlageFormNfp: FunctionComponent<OwnProps> = ({
     </Form>
   );
 };
-
-export default FormkravKlageFormNfp;

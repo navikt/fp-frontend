@@ -1,15 +1,8 @@
-import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { KodeverkType } from '@navikt/fp-kodeverk';
-import {
-  ArbeidOgInntektsmelding,
-  ArbeidsgiverOpplysningerPerId,
-  FodselOgTilrettelegging,
-  StandardFaktaPanelProps,
-} from '@navikt/fp-types';
+import { ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId, FodselOgTilrettelegging } from '@navikt/fp-types';
 
 import { TilretteleggingFaktaForm } from './components/TilretteleggingFaktaForm';
 
@@ -21,20 +14,12 @@ interface Props {
   svangerskapspengerTilrettelegging: FodselOgTilrettelegging;
   arbeidOgInntekt: ArbeidOgInntektsmelding;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  submittable: boolean;
+  readonly: boolean;
 }
 
-export const TilretteleggingFaktaIndex = ({
-  behandling,
-  arbeidOgInntekt,
-  alleKodeverk,
-  ...rest
-}: Props & StandardFaktaPanelProps) => (
+export const TilretteleggingFaktaIndex = ({ arbeidOgInntekt, ...rest }: Props) => (
   <RawIntlProvider value={intl}>
-    <TilretteleggingFaktaForm
-      behandlingVersjon={behandling.versjon}
-      aoiArbeidsforhold={arbeidOgInntekt.arbeidsforhold}
-      uttakArbeidTyper={alleKodeverk[KodeverkType.UTTAK_ARBEID_TYPE]}
-      {...rest}
-    />
+    <TilretteleggingFaktaForm aoiArbeidsforhold={arbeidOgInntekt.arbeidsforhold} {...rest} />
   </RawIntlProvider>
 );

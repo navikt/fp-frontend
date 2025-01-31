@@ -38,7 +38,8 @@ export const SvangerskapInngangsvilkarInitPanel = (props: InngangsvilkarPanelIni
           {svangerskapspengerTilrettelegging ? (
             <SvangerskapVilkarProsessIndex
               svangerskapspengerTilrettelegging={svangerskapspengerTilrettelegging}
-              {...standardPanelProps}
+              status={standardPanelProps.status}
+              readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
             />
           ) : (
             <LoadingPanel />
