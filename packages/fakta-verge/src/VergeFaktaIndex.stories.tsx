@@ -1,9 +1,9 @@
-import { action } from '@storybook/addon-actions';
+import { ComponentProps } from 'react';
+
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
-import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
-import { Behandling } from '@navikt/fp-types';
+import { alleKodeverk, PanelContextArgs, withFormData, withPanelContext } from '@navikt/fp-storybook-utils';
 
 import { VergeFaktaIndex } from './VergeFaktaIndex';
 
@@ -11,7 +11,7 @@ import '@navikt/ds-css';
 import '@navikt/ft-form-hooks/dist/style.css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
 
-const aksjonspunkter = [
+const aksjonspunkterForPanel = [
   {
     definisjon: AksjonspunktKode.AVKLAR_VERGE,
     status: AksjonspunktStatus.OPPRETTET,
@@ -29,29 +29,20 @@ const merknaderFraBeslutter = {
 const meta = {
   title: 'fakta/fakta-verge',
   component: VergeFaktaIndex,
-  decorators: [withFormData],
+  decorators: [withFormData, withPanelContext],
   args: {
-    submitCallback: action('button-click') as (data: any) => Promise<void>,
-    readOnly: false,
-    harApneAksjonspunkter: true,
     submittable: true,
     verge,
-    aksjonspunkter,
+    aksjonspunkterForPanel,
     alleKodeverk: alleKodeverk as any,
     alleMerknaderFraBeslutter: {
       [AksjonspunktKode.AVKLAR_VERGE]: merknaderFraBeslutter,
     },
   },
-} satisfies Meta<typeof VergeFaktaIndex>;
+  render: args => <VergeFaktaIndex {...args} />,
+} satisfies Meta<PanelContextArgs & ComponentProps<typeof VergeFaktaIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  args: {
-    behandling: {
-      uuid: '1',
-      versjon: 1,
-    } as Behandling,
-  },
-};
+export const Default: Story = {};

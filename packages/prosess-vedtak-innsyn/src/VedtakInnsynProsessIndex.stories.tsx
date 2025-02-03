@@ -1,3 +1,5 @@
+import { ComponentProps } from 'react';
+
 import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
@@ -8,16 +10,10 @@ import {
   InnsynResultatType,
   Kommunikasjonsretning,
 } from '@navikt/fp-kodeverk';
-import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
-import { Aksjonspunkt, Behandling, Fagsak } from '@navikt/fp-types';
+import { PanelContextArgs, withFormData, withPanelContext } from '@navikt/fp-storybook-utils';
+import { Aksjonspunkt } from '@navikt/fp-types';
 
 import { VedtakInnsynProsessIndex } from './VedtakInnsynProsessIndex';
-
-const behandling = {
-  uuid: '1',
-  versjon: 1,
-  sprakkode: 'NO',
-} as Behandling;
 
 const defaultAksjonspunkter = [
   {
@@ -35,20 +31,10 @@ const defaultAksjonspunkter = [
 const meta = {
   title: 'prosess/innsyn/prosess-vedtak-innsyn',
   component: VedtakInnsynProsessIndex,
-  decorators: [withFormData],
+  decorators: [withFormData, withPanelContext],
   args: {
-    submitCallback: action('button-click') as (data: any) => Promise<void>,
     previewCallback: action('button-click') as any,
-    aksjonspunkter: defaultAksjonspunkter,
-    behandling,
-    alleKodeverk: alleKodeverk as any,
-    isReadOnly: false,
-    isAksjonspunktOpen: true,
-    readOnlySubmitButton: false,
-    status: '',
-    vilkar: [],
-    alleMerknaderFraBeslutter: {},
-    saksnummer: '123434',
+    aksjonspunkterForPanel: defaultAksjonspunkter,
     alleDokumenter: [
       {
         journalpostId: '2',
@@ -58,9 +44,9 @@ const meta = {
         kommunikasjonsretning: Kommunikasjonsretning.INN,
       },
     ],
-    fagsak: {} as Fagsak,
   },
-} satisfies Meta<typeof VedtakInnsynProsessIndex>;
+  render: args => <VedtakInnsynProsessIndex {...args} />,
+} satisfies Meta<PanelContextArgs & ComponentProps<typeof VedtakInnsynProsessIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
@@ -114,7 +100,7 @@ export const PanelForAvvistVedtak: Story = {
 export const PanelForAvvistVedtakReadonly: Story = {
   args: {
     isReadOnly: true,
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       defaultAksjonspunkter[0],
       {
         ...defaultAksjonspunkter[1],

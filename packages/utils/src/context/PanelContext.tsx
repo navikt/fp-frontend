@@ -13,7 +13,7 @@ type Props<AP_TYPE> = {
   submitCallback: (aksjonspunktData: AP_TYPE) => Promise<void>;
 };
 
-export const PanelContext = createContext<Props<any> | null>(null);
+const PanelContext = createContext<Props<any> | null>(null);
 
 export const PanelProvider = (
   props: {

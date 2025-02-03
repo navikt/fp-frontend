@@ -94,7 +94,6 @@ const getFilteredReceivedDocuments = (allDocuments: Dokument[]): Dokument[] => {
 };
 
 interface Props {
-  saksNr: string;
   innsynMottattDato: string;
   innsynDokumenter: InnsynDokument[];
   innsynResultatType: string;
@@ -115,11 +114,10 @@ export const InnsynForm = ({
   innsynResultatType,
   innsynDokumenter,
   alleDokumenter = [],
-  saksNr,
 }: Props) => {
   const intl = useIntl();
 
-  const { alleKodeverk, aksjonspunkterForPanel, submitCallback, isReadOnly, behandling } =
+  const { fagsak, alleKodeverk, aksjonspunkterForPanel, submitCallback, isReadOnly, behandling } =
     usePanelContext<VurderInnsynAp>();
 
   const initialValues = buildInitialValues(
@@ -177,7 +175,7 @@ export const InnsynForm = ({
         behandlingTypes={alleKodeverk[KodeverkType.BEHANDLING_TYPE]}
       />
       <VerticalSpacer twentyPx />
-      <DocumentListInnsyn saksNr={saksNr} documents={documents} readOnly={isReadOnly} />
+      <DocumentListInnsyn saksNr={fagsak.saksnummer} documents={documents} readOnly={isReadOnly} />
       <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
       <VerticalSpacer sixteenPx />
       <RadioGroupPanel

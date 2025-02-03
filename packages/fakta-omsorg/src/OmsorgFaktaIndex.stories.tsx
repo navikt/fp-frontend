@@ -1,21 +1,17 @@
+import { ComponentProps } from 'react';
+
 import { TIDENES_ENDE } from '@navikt/ft-utils';
-import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AdresseType, AksjonspunktKode, AksjonspunktStatus, SivilstandType } from '@navikt/fp-kodeverk';
-import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
-import { Behandling, KjønnkodeEnum, PersonopplysningerBasis, Ytelsefordeling } from '@navikt/fp-types';
+import { PanelContextArgs, withFormData, withPanelContext } from '@navikt/fp-storybook-utils';
+import { KjønnkodeEnum, PersonopplysningerBasis, Ytelsefordeling } from '@navikt/fp-types';
 
 import { OmsorgFaktaIndex } from './OmsorgFaktaIndex';
 
 import '@navikt/ds-css';
 import '@navikt/ft-form-hooks/dist/style.css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
-
-const behandling = {
-  uuid: '1',
-  versjon: 1,
-} as Behandling;
 
 const adresse1 = {
   fom: '2023-01-01',
@@ -71,17 +67,13 @@ const merknaderFraBeslutter = {
 const meta = {
   title: 'fakta/fakta-omsorg',
   component: OmsorgFaktaIndex,
-  decorators: [withFormData],
+  decorators: [withFormData, withPanelContext],
   args: {
-    submitCallback: action('button-click') as (data: any) => Promise<void>,
-    readOnly: false,
-    harApneAksjonspunkter: true,
     submittable: true,
-    behandling,
     ytelsefordeling,
-    alleKodeverk: alleKodeverk as any,
   },
-} satisfies Meta<typeof OmsorgFaktaIndex>;
+  render: args => <OmsorgFaktaIndex {...args} />,
+} satisfies Meta<PanelContextArgs & ComponentProps<typeof OmsorgFaktaIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
@@ -89,7 +81,7 @@ type Story = StoryObj<typeof meta>;
 export const ÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg: Story = {
   args: {
     personoversikt: { barn: [defaultBarn], annenPart: defaultAnnenPart, bruker: defaultBruker },
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG,
         status: AksjonspunktStatus.OPPRETTET,

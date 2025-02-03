@@ -1,22 +1,18 @@
+import React, { ComponentProps } from 'react';
+
 import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, FagsakYtelseType, MottakerType, TilbakekrevingVidereBehandling } from '@navikt/fp-kodeverk';
-import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
-import { Aksjonspunkt, Behandling, Fagsak, SimuleringResultat, TilbakekrevingValg } from '@navikt/fp-types';
+import {
+  AksjonspunktKode,
+  AksjonspunktStatus,
+  MottakerType,
+  TilbakekrevingVidereBehandling,
+} from '@navikt/fp-kodeverk';
+import { PanelContextArgs, withFormData, withPanelContext } from '@navikt/fp-storybook-utils';
+import { Aksjonspunkt, SimuleringResultat, TilbakekrevingValg } from '@navikt/fp-types';
 
 import { SimuleringProsessIndex } from './SimuleringProsessIndex';
-
-const fagsak = {
-  saksnummer: '123',
-  fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
-} as Fagsak;
-
-const behandling = {
-  uuid: '1',
-  versjon: 1,
-  sprakkode: 'NO',
-} as Behandling;
 
 const arbeidsgiverOpplysningerPerId = {
   123: {
@@ -123,70 +119,61 @@ const simuleringResultat = {
 const meta = {
   title: 'prosess/prosess-simulering',
   component: SimuleringProsessIndex,
-  decorators: [withFormData],
+  decorators: [withFormData, withPanelContext],
   args: {
-    behandling,
-    submitCallback: action('button-click') as (data: any) => Promise<any>,
-    alleKodeverk: alleKodeverk as any,
-    isReadOnly: false,
-    readOnlySubmitButton: false,
-    status: '',
-    vilkar: [],
-    alleMerknaderFraBeslutter: {},
-    fagsak,
     arbeidsgiverOpplysningerPerId,
     simuleringResultat,
-    previewFptilbakeCallback: action('button-click') as (data: any) => Promise<any>,
+    previewFptilbakeCallback: action('button-click') as (data: any) => Promise<void>,
   },
-} satisfies Meta<typeof SimuleringProsessIndex>;
+  render: args => <SimuleringProsessIndex {...args} />,
+} satisfies Meta<PanelContextArgs & ComponentProps<typeof SimuleringProsessIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
 export const AksjonspunktVurderFeilutbetaling: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_FEILUTBETALING,
         begrunnelse: undefined,
+        status: AksjonspunktStatus.OPPRETTET,
       },
     ] as Aksjonspunkt[],
-    isAksjonspunktOpen: true,
   },
 };
 
 export const AksjonspunktKontrollerEtterbetaling: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER,
         begrunnelse: undefined,
+        status: AksjonspunktStatus.OPPRETTET,
       },
     ] as Aksjonspunkt[],
-    isAksjonspunktOpen: true,
   },
 };
 
 export const AksjonspunktVurderFeilutbetalingOgEtterbetaling: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_FEILUTBETALING,
         begrunnelse: undefined,
+        status: AksjonspunktStatus.OPPRETTET,
       },
       {
         definisjon: AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER,
         begrunnelse: undefined,
       },
     ] as Aksjonspunkt[],
-    isAksjonspunktOpen: true,
   },
 };
 
 export const SimuleringspanelUtenAksjonspunkt: Story = {
   args: {
-    aksjonspunkter: [],
-    isAksjonspunktOpen: false,
+    aksjonspunkterForPanel: [],
     tilbakekrevingvalg: {
       videreBehandling: TilbakekrevingVidereBehandling.TILBAKEKR_OPPDATER,
       varseltekst: 'varsel-eksempel',

@@ -1,6 +1,5 @@
-import { useState } from 'react';
+import { ComponentProps } from 'react';
 
-import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
 import {
@@ -12,7 +11,14 @@ import {
   VilkarType,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
-import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
+import {
+  alleKodeverk,
+  PanelContextArgs,
+  PanelOverstyringContextArgs,
+  withFormData,
+  withPanelContext,
+  withPanelOverstyring,
+} from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, Behandling, Fagsak, Medlemskap } from '@navikt/fp-types';
 
 import { VilkarresultatMedOverstyringProsessIndex } from './VilkarresultatMedOverstyringProsessIndex';
@@ -39,40 +45,19 @@ const defaultAvslagsarsaker = [
 const meta = {
   title: 'prosess/prosess-vilkar-overstyring',
   component: VilkarresultatMedOverstyringProsessIndex,
-  decorators: [withFormData],
+  decorators: [withFormData, withPanelContext, withPanelOverstyring],
   args: {
-    aksjonspunkter: [],
-    alleKodeverk: alleKodeverk as any,
-    submitCallback: action('button-click') as (data: any) => Promise<void>,
-    isReadOnly: false,
-    isAksjonspunktOpen: true,
-    readOnlySubmitButton: false,
-    vilkar: [],
-    alleMerknaderFraBeslutter: {},
-    behandling: defaultBehandling,
-    overrideReadOnly: false,
-    erOverstyrt: false,
-    kanOverstyreAccess: { isEnabled: true },
-    fagsak: {
-      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
-    } as Fagsak,
-    toggleOverstyring: () => undefined,
+    kanOverstyreAccess: { isEnabled: true, employeeHasAccess: true },
     avslagsarsaker: defaultAvslagsarsaker,
     status: VilkarUtfallType.OPPFYLT,
     lovReferanse: '§ 1-2 3. ledd',
   },
   render: props => {
-    const [erOverstyrt, setErOverstyrt] = useState(props.erOverstyrt);
-
-    return (
-      <VilkarresultatMedOverstyringProsessIndex
-        {...props}
-        erOverstyrt={erOverstyrt}
-        toggleOverstyring={() => setErOverstyrt(!erOverstyrt)}
-      />
-    );
+    return <VilkarresultatMedOverstyringProsessIndex {...props} />;
   },
-} satisfies Meta<typeof VilkarresultatMedOverstyringProsessIndex>;
+} satisfies Meta<
+  PanelContextArgs & PanelOverstyringContextArgs & ComponentProps<typeof VilkarresultatMedOverstyringProsessIndex>
+>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
@@ -101,7 +86,7 @@ export const OverstyringErUtførtForMedlemskap: Story = {
     panelTittelKode: 'Inngangsvilkar.Medlemskapsvilkaret',
     overstyringApKode: AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR,
     avslagsarsaker: alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.MEDLEMSKAPSVILKARET],
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR,
         status: AksjonspunktStatus.UTFORT,
@@ -138,7 +123,7 @@ export const OverstyringErUtførtForForutgåendeMedlemskap: Story = {
     panelTittelKode: 'Inngangsvilkar.Medlemskapsvilkaret',
     overstyringApKode: AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE,
     avslagsarsaker: alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.MEDLEMSKAPSVILKARET_FORUTGAENDE],
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE,
         status: AksjonspunktStatus.UTFORT,
@@ -172,7 +157,7 @@ export const OverstyrtAksjonspunktSomErBekreftet: Story = {
         avslagsarsak: 'AVSLAG_TEST_1',
       },
     } as Behandling,
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.OVERSTYR_FODSELSVILKAR,
         status: AksjonspunktStatus.UTFORT,
@@ -206,7 +191,7 @@ export const LøpendeMedlemskapSomErOverstyrtVisesBareIReadOnlyMode: Story = {
     panelTittelKode: 'Behandlingspunkt.FortsattMedlemskap',
     overstyringApKode: AksjonspunktKode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
     avslagsarsaker: alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE],
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
         status: AksjonspunktStatus.UTFORT,
@@ -215,7 +200,7 @@ export const LøpendeMedlemskapSomErOverstyrtVisesBareIReadOnlyMode: Story = {
       },
     ],
     status: VilkarUtfallType.OPPFYLT,
-    kanOverstyreAccess: { isEnabled: false },
+    kanOverstyreAccess: { isEnabled: false, employeeHasAccess: false },
     isReadOnly: true,
   },
 };
@@ -226,7 +211,7 @@ export const LøpendeMedlemskapVisningSomIkkeErOverstyrt: Story = {
     overstyringApKode: AksjonspunktKode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
     avslagsarsaker: alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE],
     status: VilkarUtfallType.IKKE_OPPFYLT,
-    kanOverstyreAccess: { isEnabled: false },
+    kanOverstyreAccess: { isEnabled: false, employeeHasAccess: false },
     isReadOnly: true,
   },
 };

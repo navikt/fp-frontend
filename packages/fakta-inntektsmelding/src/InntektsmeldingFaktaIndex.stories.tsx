@@ -1,8 +1,10 @@
+import { ComponentProps } from 'react';
+
 import { Meta, StoryObj } from '@storybook/react';
 
 import { InntektsmeldingFaktaIndex } from '@navikt/fp-fakta-inntektsmelding';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import { ArbeidsgiverOpplysninger, Behandling, BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
+import { PanelContextArgs, withPanelContext } from '@navikt/fp-storybook-utils';
+import { ArbeidsgiverOpplysninger, BehandlingAppKontekst } from '@navikt/fp-types';
 
 import '@navikt/ds-css';
 import '@navikt/ft-form-hooks/dist/style.css';
@@ -29,18 +31,15 @@ const inntektsmeldingmal = {
 const meta = {
   title: 'fakta/fakta-inntektsmelding',
   component: InntektsmeldingFaktaIndex,
-} satisfies Meta<typeof InntektsmeldingFaktaIndex>;
+  decorators: [withPanelContext],
+  render: args => <InntektsmeldingFaktaIndex {...args} />,
+} satisfies Meta<PanelContextArgs & ComponentProps<typeof InntektsmeldingFaktaIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
 export const InntektsmeldingDefault: Story = {
   args: {
-    alleKodeverk: alleKodeverk as any,
-    fagsak: {
-      saksnummer: '123',
-      fagsakYtelseType: 'FP',
-    } as Fagsak,
     alleBehandlinger: [
       {
         uuid: 'UUID1',
@@ -66,9 +65,6 @@ export const InntektsmeldingDefault: Story = {
       ['2']: { navn: 'Kiwi' } as ArbeidsgiverOpplysninger,
       ['3']: { navn: 'Meny' } as ArbeidsgiverOpplysninger,
     },
-    behandling: {
-      uuid: 'UUID2',
-    } as Behandling,
     inntektsmeldinger: [
       {
         ...inntektsmeldingmal,

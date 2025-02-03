@@ -1,4 +1,5 @@
-import { action } from '@storybook/addon-actions';
+import { ComponentProps } from 'react';
+
 import { Meta, StoryObj } from '@storybook/react';
 
 import {
@@ -8,50 +9,32 @@ import {
   TilretteleggingType,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
-import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
+import { PanelContextArgs, withFormData, withPanelContext } from '@navikt/fp-storybook-utils';
 import {
   Aksjonspunkt,
   ArbeidsforholdFodselOgTilrettelegging,
   Behandling,
-  Fagsak,
   FodselOgTilrettelegging,
-  Vilkar,
 } from '@navikt/fp-types';
 
 import { SvangerskapVilkarProsessIndex } from './SvangerskapVilkarProsessIndex';
 
-const defaultBehandling = {
-  uuid: '1',
-  versjon: 1,
-  behandlingsresultat: {},
-} as Behandling;
-
 const meta = {
   title: 'prosess/prosess-vilkar-svangerskap',
   component: SvangerskapVilkarProsessIndex,
-  decorators: [withFormData],
+  decorators: [withFormData, withPanelContext],
   args: {
-    submitCallback: action('button-click') as (data: any) => Promise<void>,
-    alleKodeverk: alleKodeverk as any,
-    isAksjonspunktOpen: true,
-    alleMerknaderFraBeslutter: {},
     svangerskapspengerTilrettelegging: {} as FodselOgTilrettelegging,
-    vilkar: [
-      {
-        lovReferanse: '§§Dette er en lovreferanse',
-      },
-    ] as Vilkar[],
-    fagsak: {} as Fagsak,
   },
-} satisfies Meta<typeof SvangerskapVilkarProsessIndex>;
+  render: args => <SvangerskapVilkarProsessIndex {...args} />,
+} satisfies Meta<PanelContextArgs & ComponentProps<typeof SvangerskapVilkarProsessIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
 export const ÅpentAksjonspunktSkalIkkeKunneInnvilge: Story = {
   args: {
-    behandling: defaultBehandling,
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
         status: AksjonspunktStatus.OPPRETTET,
@@ -66,15 +49,13 @@ export const ÅpentAksjonspunktSkalIkkeKunneInnvilge: Story = {
 
 export const ÅpentAksjonspunktSkalKunneInnvilge: Story = {
   args: {
-    behandling: defaultBehandling,
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
         status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: undefined,
       },
     ] as Aksjonspunkt[],
-    isReadOnly: false,
     readOnlySubmitButton: false,
     status: VilkarUtfallType.IKKE_VURDERT,
     svangerskapspengerTilrettelegging: {
@@ -93,8 +74,7 @@ export const ÅpentAksjonspunktSkalKunneInnvilge: Story = {
 
 export const OppfyltVilkår: Story = {
   args: {
-    behandling: defaultBehandling,
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
         status: AksjonspunktStatus.UTFORT,
@@ -116,7 +96,7 @@ export const AvslåttVilkår: Story = {
         avslagsarsak: Avslagsarsak.INGEN_BEREGNINGSREGLER,
       },
     } as Behandling,
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
         status: AksjonspunktStatus.UTFORT,

@@ -14,7 +14,7 @@ type InputProps = {
 
 type InternalProps = { erOverstyrt: boolean; toggleOverstyring: () => void };
 
-export const PanelOverstyringContext = createContext<(Props & InternalProps) | null>(null);
+const PanelOverstyringContext = createContext<(Props & InternalProps) | null>(null);
 
 export const PanelOverstyringProvider = (props: Props & InputProps & { children: ReactElement | null }) => {
   const [erOverstyrt, setOverstyrt] = useState(false);

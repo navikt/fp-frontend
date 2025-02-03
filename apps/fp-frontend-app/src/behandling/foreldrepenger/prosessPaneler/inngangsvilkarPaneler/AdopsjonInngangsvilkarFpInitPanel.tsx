@@ -29,6 +29,7 @@ export const AdopsjonInngangsvilkarFpInitPanel = (props: InngangsvilkarPanelInit
     <InngangsvilkarDefaultInitPanel
       {...props}
       behandlingVersjon={behandling.versjon}
+      vilkarKoder={VILKAR_KODER}
       standardPanelProps={standardPanelProps}
       inngangsvilkarPanelKode="ADOPSJON"
       hentInngangsvilkarPanelTekst={intl.formatMessage({ id: 'SRBVilkarForm.VurderSammeBarn' })}

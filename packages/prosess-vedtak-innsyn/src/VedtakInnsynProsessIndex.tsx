@@ -12,19 +12,17 @@ const intl = createIntl(messages);
 
 interface Props {
   innsyn: Innsyn;
-  saksnummer: string;
   alleDokumenter?: Dokument[];
   previewCallback: (data: ForhandsvisData) => void;
 }
 
-export const VedtakInnsynProsessIndex = ({ innsyn, saksnummer, alleDokumenter = [], previewCallback }: Props) => (
+export const VedtakInnsynProsessIndex = ({ innsyn, alleDokumenter = [], previewCallback }: Props) => (
   <RawIntlProvider value={intl}>
     <InnsynVedtakForm
       innsynDokumenter={innsyn.dokumenter}
       innsynMottattDato={innsyn.innsynMottattDato}
       innsynResultatType={innsyn.innsynResultatType}
       alleDokumenter={alleDokumenter}
-      saksNr={saksnummer}
       previewCallback={previewCallback}
     />
   </RawIntlProvider>

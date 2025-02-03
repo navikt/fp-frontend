@@ -1,9 +1,11 @@
+import { ComponentProps } from 'react';
+
 import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, BehandlingType } from '@navikt/fp-kodeverk';
-import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
-import { Aksjonspunkt, Behandling, Fagsak, FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
+import { PanelContextArgs, withFormData, withPanelContext } from '@navikt/fp-storybook-utils';
+import { Aksjonspunkt, Behandling, FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
 
 import { VarselOmRevurderingProsessIndex } from './VarselOmRevurderingProsessIndex';
 
@@ -55,7 +57,7 @@ const familiehendelseOriginalBehandling = {
   antallBarnTermin: 1,
 } as FamilieHendelse;
 
-const aksjonspunkter = [
+const aksjonspunkterForPanel = [
   {
     definisjon: AksjonspunktKode.VARSEL_REVURDERING_MANUELL,
     status: AksjonspunktStatus.OPPRETTET,
@@ -66,25 +68,17 @@ const aksjonspunkter = [
 const meta = {
   title: 'prosess/prosess-varsel-om-revurdering',
   component: VarselOmRevurderingProsessIndex,
-  decorators: [withFormData],
+  decorators: [withFormData, withPanelContext],
   args: {
-    alleKodeverk: alleKodeverk as any,
-    aksjonspunkter,
-    isReadOnly: false,
-    isAksjonspunktOpen: true,
-    readOnlySubmitButton: true,
-    status: '',
-    vilkar: [],
-    alleMerknaderFraBeslutter: {},
+    aksjonspunkterForPanel,
     familiehendelse: familieHendelse,
     soknad,
     soknadOriginalBehandling,
     familiehendelseOriginalBehandling,
-    fagsak: {} as Fagsak,
-    submitCallback: action('button-click') as (data: void) => Promise<any>,
     previewCallback: action('button-click') as any,
   },
-} satisfies Meta<typeof VarselOmRevurderingProsessIndex>;
+  render: args => <VarselOmRevurderingProsessIndex {...args} />,
+} satisfies Meta<PanelContextArgs & ComponentProps<typeof VarselOmRevurderingProsessIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;

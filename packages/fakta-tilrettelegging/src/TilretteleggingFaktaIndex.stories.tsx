@@ -1,12 +1,12 @@
-import { action } from '@storybook/addon-actions';
+import { ComponentProps } from 'react';
+
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, TilretteleggingType, UttakArbeidType } from '@navikt/fp-kodeverk';
-import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
+import { PanelContextArgs, withFormData, withPanelContext } from '@navikt/fp-storybook-utils';
 import {
   ArbeidOgInntektsmelding,
   ArbeidsforholdFodselOgTilrettelegging,
-  Behandling,
   SvpTilretteleggingFomKilde,
 } from '@navikt/fp-types';
 
@@ -15,11 +15,6 @@ import { TilretteleggingFaktaIndex } from './TilretteleggingFaktaIndex';
 import '@navikt/ds-css';
 import '@navikt/ft-form-hooks/dist/style.css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
-
-const BEHANDLING = {
-  uuid: '1',
-  versjon: 1,
-} as Behandling;
 
 const TILRETTELEGGING_PERMISJON = {
   termindato: '2020-11-06',
@@ -249,25 +244,21 @@ const ARBEIDSGIVEROPPLYSNINGER_PER_ID = {
 const meta = {
   title: 'fakta/fakta-tilrettelegging',
   component: TilretteleggingFaktaIndex,
-  decorators: [withFormData],
+  decorators: [withFormData, withPanelContext],
   args: {
-    behandling: BEHANDLING,
     arbeidsgiverOpplysningerPerId: ARBEIDSGIVEROPPLYSNINGER_PER_ID,
-    alleMerknaderFraBeslutter: {},
-    submitCallback: action('button-click') as (data: any) => Promise<any>,
-    readOnly: false,
-    harApneAksjonspunkter: true,
     submittable: true,
-    alleKodeverk: alleKodeverk as any,
+    readonly: false,
   },
-} satisfies Meta<typeof TilretteleggingFaktaIndex>;
+  render: args => <TilretteleggingFaktaIndex {...args} />,
+} satisfies Meta<PanelContextArgs & ComponentProps<typeof TilretteleggingFaktaIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
 export const TilretteleggingMedVelferdspermisjon: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
         status: AksjonspunktStatus.OPPRETTET,
@@ -282,7 +273,7 @@ export const TilretteleggingMedVelferdspermisjon: Story = {
 
 export const TilretteleggingMed100ProsentVelferdspermisjon: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
         status: AksjonspunktStatus.OPPRETTET,
@@ -297,7 +288,7 @@ export const TilretteleggingMed100ProsentVelferdspermisjon: Story = {
 
 export const SokerVarIkkeAnsattDaBehovetForTilretteleggingOppstod: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
         status: AksjonspunktStatus.OPPRETTET,
@@ -312,7 +303,7 @@ export const SokerVarIkkeAnsattDaBehovetForTilretteleggingOppstod: Story = {
 
 export const HarOpphold: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
         status: AksjonspunktStatus.OPPRETTET,
@@ -369,7 +360,7 @@ export const HarOpphold: Story = {
 
 export const ErReadonly: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
         status: AksjonspunktStatus.OPPRETTET,
@@ -421,13 +412,13 @@ export const ErReadonly: Story = {
       ],
     },
     arbeidOgInntekt: SPESIELL_ARBEID_OG_INNTEKT,
-    readOnly: true,
+    readonly: true,
   },
 };
 
 export const ErRevurdering: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
         status: AksjonspunktStatus.OPPRETTET,

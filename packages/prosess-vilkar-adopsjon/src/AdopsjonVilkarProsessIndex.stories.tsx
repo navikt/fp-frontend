@@ -1,50 +1,39 @@
-import { action } from '@storybook/addon-actions';
+import { ComponentProps } from 'react';
+
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, Avslagsarsak, VilkarUtfallType } from '@navikt/fp-kodeverk';
-import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
-import { Aksjonspunkt, Behandling, Fagsak, Vilkar } from '@navikt/fp-types';
+import { PanelContextArgs, withFormData, withPanelContext } from '@navikt/fp-storybook-utils';
+import { Aksjonspunkt, Behandling, Vilkar } from '@navikt/fp-types';
 
-import AdopsjonVilkarProsessIndex from './AdopsjonVilkarProsessIndex';
-
-const defaultBehandling = {
-  uuid: '1',
-  versjon: 1,
-  behandlingsresultat: {},
-} as Behandling;
+import { AdopsjonVilkarProsessIndex } from './AdopsjonVilkarProsessIndex';
 
 const meta = {
   title: 'prosess/prosess-vilkar-adopsjon',
   component: AdopsjonVilkarProsessIndex,
-  decorators: [withFormData],
+  decorators: [withFormData, withPanelContext],
   args: {
-    submitCallback: action('button-click') as (data: any) => Promise<any>,
-    alleKodeverk: alleKodeverk as any,
-    isAksjonspunktOpen: true,
-    alleMerknaderFraBeslutter: {},
     vilkar: [
       {
         lovReferanse: '§§Dette er en lovreferanse',
       },
     ] as Vilkar[],
-    fagsak: {} as Fagsak,
   },
-} satisfies Meta<typeof AdopsjonVilkarProsessIndex>;
+  render: args => <AdopsjonVilkarProsessIndex {...args} />,
+} satisfies Meta<PanelContextArgs & ComponentProps<typeof AdopsjonVilkarProsessIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
 export const ÅpentAksjonspunkt: Story = {
   args: {
-    behandling: defaultBehandling,
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
         status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: undefined,
       },
     ] as Aksjonspunkt[],
-    isReadOnly: false,
     readOnlySubmitButton: false,
     status: VilkarUtfallType.IKKE_VURDERT,
   },
@@ -52,9 +41,7 @@ export const ÅpentAksjonspunkt: Story = {
 
 export const OppfyltVilkår: Story = {
   args: {
-    submitCallback: action('button-click') as (data: any) => Promise<any>,
-    behandling: defaultBehandling,
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
         status: AksjonspunktStatus.UTFORT,
@@ -76,7 +63,7 @@ export const AvslåttVilkår: Story = {
         avslagsarsak: Avslagsarsak.INGEN_BEREGNINGSREGLER,
       },
     } as Behandling,
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
         status: AksjonspunktStatus.UTFORT,

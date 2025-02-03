@@ -96,7 +96,6 @@ interface Props {
   innsynMottattDato: string;
   innsynResultatType: string;
   alleDokumenter: Dokument[];
-  saksNr: string;
   previewCallback: (data: ForhandsvisData) => void;
 }
 
@@ -107,7 +106,6 @@ interface Props {
  */
 export const InnsynVedtakForm = ({
   previewCallback,
-  saksNr,
   innsynMottattDato,
   innsynResultatType,
   innsynDokumenter,
@@ -115,7 +113,7 @@ export const InnsynVedtakForm = ({
 }: Props) => {
   const intl = useIntl();
 
-  const { aksjonspunkterForPanel, submitCallback, isReadOnly, behandling } = usePanelContext<ForeslaVedtakAp>();
+  const { fagsak, aksjonspunkterForPanel, submitCallback, isReadOnly, behandling } = usePanelContext<ForeslaVedtakAp>();
 
   const initialValues = buildInitialValues(innsynMottattDato, aksjonspunkterForPanel);
 
@@ -181,7 +179,7 @@ export const InnsynVedtakForm = ({
       <VerticalSpacer twentyPx />
       {innsynResultatType !== InnsynResultatType.AVVIST && (
         <DocumentListVedtakInnsyn
-          saksNr={saksNr}
+          saksNr={fagsak.saksnummer}
           documents={documents.filter(document => document.fikkInnsyn === true)}
         />
       )}

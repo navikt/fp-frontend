@@ -1,8 +1,10 @@
+import { ComponentProps } from 'react';
+
 import { Meta, StoryObj } from '@storybook/react';
 
 import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import { AksjonspunktÅrsak, Behandling } from '@navikt/fp-types';
+import { PanelContextArgs, withFormData, withPanelContext } from '@navikt/fp-storybook-utils';
+import { AksjonspunktÅrsak } from '@navikt/fp-types';
 
 import { ArbeidsforholdFaktaIndex } from './ArbeidsforholdFaktaIndex';
 import BekreftetPermisjonStatus from './kodeverk/bekreftetPermisjonStatus';
@@ -21,11 +23,6 @@ const fellesInntektsmeldingFelter = {
   tilknyttedeBehandlingIder: [],
   aktiveNaturalytelser: [],
 };
-
-const behandling = {
-  uuid: '1',
-  versjon: 1,
-} as Behandling;
 
 const arbeidsgiverOpplysningerPerId = {
   11212: {
@@ -48,19 +45,12 @@ const arbeidsgiverOpplysningerPerId = {
 const meta = {
   title: 'fakta/fakta-arbeidsforhold',
   component: ArbeidsforholdFaktaIndex,
+  decorators: [withFormData, withPanelContext],
   args: {
-    submitCallback: () => Promise.resolve(),
-    readOnly: true,
-    harApneAksjonspunkter: false,
-    submittable: false,
-    setFormData: () => undefined,
-    behandling,
-    aksjonspunkter: [],
-    alleKodeverk: alleKodeverk as any,
-    alleMerknaderFraBeslutter: {},
     arbeidsgiverOpplysningerPerId,
+    isReadOnly: true,
   },
-} satisfies Meta<typeof ArbeidsforholdFaktaIndex>;
+} satisfies Meta<PanelContextArgs & ComponentProps<typeof ArbeidsforholdFaktaIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;

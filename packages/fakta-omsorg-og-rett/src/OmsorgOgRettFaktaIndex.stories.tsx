@@ -1,10 +1,11 @@
+import { ComponentProps } from 'react';
+
 import { TIDENES_ENDE } from '@navikt/ft-utils';
-import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
-import { AdresseType, AksjonspunktKode, SivilstandType } from '@navikt/fp-kodeverk';
-import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
-import { Aksjonspunkt, Behandling, KjønnkodeEnum, PersonopplysningerBasis, Ytelsefordeling } from '@navikt/fp-types';
+import { AdresseType, AksjonspunktKode, AksjonspunktStatus, SivilstandType } from '@navikt/fp-kodeverk';
+import { PanelContextArgs, withFormData, withPanelContext } from '@navikt/fp-storybook-utils';
+import { Aksjonspunkt, KjønnkodeEnum, PersonopplysningerBasis, Ytelsefordeling } from '@navikt/fp-types';
 
 import { OmsorgOgRettFaktaIndex } from './OmsorgOgRettFaktaIndex';
 
@@ -62,28 +63,24 @@ const defaultBarn: PersonopplysningerBasis = {
 const meta = {
   title: 'fakta/fakta-omsorg-og-rett',
   component: OmsorgOgRettFaktaIndex,
-  decorators: [withFormData],
+  decorators: [withFormData, withPanelContext],
   args: {
-    behandling: { uuid: 'test' } as Behandling,
     personoversikt: { barn: [defaultBarn], annenPart: defaultAnnenPart, bruker: defaultBruker },
     ytelsefordeling: {} as Ytelsefordeling,
     submittable: true,
-    harApneAksjonspunkter: true,
-    alleMerknaderFraBeslutter: {},
-    readOnly: false,
-    alleKodeverk: alleKodeverk as any,
-    submitCallback: action('button-click') as (data: any) => Promise<void>,
   },
-} satisfies Meta<typeof OmsorgOgRettFaktaIndex>;
+  render: args => <OmsorgOgRettFaktaIndex {...args} />,
+} satisfies Meta<PanelContextArgs & ComponentProps<typeof OmsorgOgRettFaktaIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
 export const HarAksjonspunktForAvklarAleneomsorg: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
+        status: AksjonspunktStatus.OPPRETTET,
         kanLoses: true,
       },
     ] as Aksjonspunkt[],
@@ -92,9 +89,10 @@ export const HarAksjonspunktForAvklarAleneomsorg: Story = {
 
 export const HarAksjonspunktForAvklarAleneomsorgMedFlereBarn: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
+        status: AksjonspunktStatus.OPPRETTET,
         kanLoses: true,
       },
     ] as Aksjonspunkt[],
@@ -117,9 +115,10 @@ export const HarAksjonspunktForAvklarAleneomsorgMedFlereBarn: Story = {
 
 export const HarAksjonspunktForAvklarAnnenForelderRett: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.AVKLAR_ANNEN_FORELDER_RETT,
+        status: AksjonspunktStatus.OPPRETTET,
         kanLoses: true,
       },
     ] as Aksjonspunkt[],

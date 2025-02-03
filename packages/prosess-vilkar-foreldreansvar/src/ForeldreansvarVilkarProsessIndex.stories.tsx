@@ -1,47 +1,35 @@
-import { action } from '@storybook/addon-actions';
+import { ComponentProps } from 'react';
+
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, Avslagsarsak, VilkarUtfallType } from '@navikt/fp-kodeverk';
-import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
-import { Aksjonspunkt, Behandling, Fagsak } from '@navikt/fp-types';
+import { PanelContextArgs, withFormData, withPanelContext } from '@navikt/fp-storybook-utils';
+import { Aksjonspunkt, Behandling } from '@navikt/fp-types';
 
 import { ForeldreansvarVilkarProsessIndex } from './ForeldreansvarVilkarProsessIndex';
-
-const defaultBehandling = {
-  uuid: '1',
-  versjon: 1,
-  behandlingsresultat: {},
-} as Behandling;
 
 const meta = {
   title: 'prosess/prosess-vilkar-foreldreansvar',
   component: ForeldreansvarVilkarProsessIndex,
-  decorators: [withFormData],
+  decorators: [withFormData, withPanelContext],
   args: {
-    submitCallback: action('button-click') as (data: any) => Promise<void>,
-    alleKodeverk: alleKodeverk as any,
-    isAksjonspunktOpen: true,
-    vilkar: [],
-    alleMerknaderFraBeslutter: {},
     isEngangsstonad: false,
-    fagsak: {} as Fagsak,
   },
-} satisfies Meta<typeof ForeldreansvarVilkarProsessIndex>;
+  render: args => <ForeldreansvarVilkarProsessIndex {...args} />,
+} satisfies Meta<PanelContextArgs & ComponentProps<typeof ForeldreansvarVilkarProsessIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
 export const ÅpentAksjonspunkt2Ledd: Story = {
   args: {
-    behandling: defaultBehandling,
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
         status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: undefined,
       },
     ] as Aksjonspunkt[],
-    isReadOnly: false,
     readOnlySubmitButton: false,
     status: VilkarUtfallType.IKKE_VURDERT,
     isForeldreansvar2Ledd: true,
@@ -50,8 +38,7 @@ export const ÅpentAksjonspunkt2Ledd: Story = {
 
 export const OppfyltVilkår2Ledd: Story = {
   args: {
-    behandling: defaultBehandling,
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
         status: AksjonspunktStatus.UTFORT,
@@ -74,7 +61,7 @@ export const AvslåttVilkår2Ledd: Story = {
         avslagsarsak: Avslagsarsak.INGEN_BEREGNINGSREGLER,
       },
     } as Behandling,
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
         status: AksjonspunktStatus.UTFORT,
@@ -90,8 +77,7 @@ export const AvslåttVilkår2Ledd: Story = {
 
 export const ÅpentAksjonspunkt4Ledd: Story = {
   args: {
-    behandling: defaultBehandling,
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
         status: AksjonspunktStatus.OPPRETTET,
@@ -107,8 +93,7 @@ export const ÅpentAksjonspunkt4Ledd: Story = {
 
 export const OppfyltVilkår4Ledd: Story = {
   args: {
-    behandling: defaultBehandling,
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
         status: AksjonspunktStatus.UTFORT,
@@ -131,7 +116,7 @@ export const AvslåttVilkår4Ledd: Story = {
         avslagsarsak: Avslagsarsak.INGEN_BEREGNINGSREGLER,
       },
     } as Behandling,
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
         status: AksjonspunktStatus.UTFORT,

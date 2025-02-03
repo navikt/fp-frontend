@@ -1,3 +1,5 @@
+import { ComponentProps } from 'react';
+
 import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
@@ -13,14 +15,13 @@ import {
   VilkarType,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
-import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
+import { PanelContextArgs, withFormData, withPanelContext } from '@navikt/fp-storybook-utils';
 import {
   Aksjonspunkt,
   Behandling,
   Beregningsgrunnlag,
   BeregningsresultatDagytelse,
   BeregningsresultatEs,
-  Fagsak,
   Vilkar,
 } from '@navikt/fp-types';
 
@@ -56,6 +57,7 @@ const defaultVilkar = [
 const defaultAksjonspunkter = [
   {
     definisjon: AksjonspunktKode.FORESLA_VEDTAK,
+    status: AksjonspunktStatus.OPPRETTET,
     kanLoses: true,
   },
 ] as Aksjonspunkt[];
@@ -68,20 +70,14 @@ const defaultberegningresultatDagytelse = {
 const meta = {
   title: 'prosess/prosess-vedtak',
   component: VedtakProsessIndex,
-  decorators: [withFormData],
+  decorators: [withFormData, withPanelContext],
   args: {
-    submitCallback: action('button-click') as (data: any) => Promise<void>,
-    aksjonspunkter: defaultAksjonspunkter,
-    isAksjonspunktOpen: true,
-    readOnlySubmitButton: false,
-    status: '',
+    aksjonspunkterForPanel: defaultAksjonspunkter,
     vilkar: defaultVilkar,
-    alleMerknaderFraBeslutter: {},
     previewCallback: action('button-click') as any,
-    alleKodeverk: alleKodeverk as any,
-    fagsak: {} as Fagsak,
   },
-} satisfies Meta<typeof VedtakProsessIndex>;
+  render: args => <VedtakProsessIndex {...args} />,
+} satisfies Meta<PanelContextArgs & ComponentProps<typeof VedtakProsessIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
@@ -95,7 +91,6 @@ export const InnvilgetForeldrepengerTilGodkjenningForSaksbehandler: Story = {
     behandling: defaultBehandling,
     beregningresultatDagytelse: defaultberegningresultatDagytelse,
     ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
-    isReadOnly: false,
   },
 };
 
@@ -221,7 +216,7 @@ export const TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = {
         },
       ],
     } as Beregningsgrunnlag,
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       ...defaultAksjonspunkter,
       {
         definisjon: AksjonspunktKode.VURDERE_ANNEN_YTELSE,

@@ -13,14 +13,12 @@ const intl = createIntl(messages);
 interface Props {
   innsyn: Innsyn;
   alleDokumenter?: Dokument[];
-  saksnummer: string;
   readOnlySubmitButton: boolean;
 }
 
-export const InnsynProsessIndex = ({ innsyn, alleDokumenter, saksnummer, readOnlySubmitButton }: Props) => (
+export const InnsynProsessIndex = ({ innsyn, alleDokumenter, readOnlySubmitButton }: Props) => (
   <RawIntlProvider value={intl}>
     <InnsynForm
-      saksNr={saksnummer}
       innsynMottattDato={innsyn.innsynMottattDato}
       innsynDokumenter={innsyn.dokumenter}
       innsynResultatType={innsyn.innsynResultatType}

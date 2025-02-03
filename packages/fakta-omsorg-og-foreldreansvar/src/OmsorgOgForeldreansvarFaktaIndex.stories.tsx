@@ -1,5 +1,6 @@
+import { ComponentProps } from 'react';
+
 import { TIDENES_ENDE } from '@navikt/ft-utils';
-import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
 import {
@@ -10,19 +11,14 @@ import {
   SivilstandType,
   SoknadType,
 } from '@navikt/fp-kodeverk';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import { Behandling, FamilieHendelseSamling, InntektArbeidYtelse, Personoversikt, Soknad } from '@navikt/fp-types';
+import { PanelContextArgs, withPanelContext } from '@navikt/fp-storybook-utils';
+import { FamilieHendelseSamling, InntektArbeidYtelse, Personoversikt, Soknad } from '@navikt/fp-types';
 
 import { OmsorgOgForeldreansvarFaktaIndex } from './OmsorgOgForeldreansvarFaktaIndex';
 
 import '@navikt/ds-css';
 import '@navikt/ft-form-hooks/dist/style.css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
-
-const behandling = {
-  uuid: '1',
-  versjon: 1,
-} as Behandling;
 
 const defaultFamilieHendelse = {
   gjeldende: {
@@ -94,26 +90,23 @@ const merknaderFraBeslutter = {
 const meta = {
   title: 'fakta/fakta-omsorg-og-foreldreansvar',
   component: OmsorgOgForeldreansvarFaktaIndex,
+  decorators: [withPanelContext],
   args: {
-    submitCallback: action('button-click') as (data: any) => Promise<void>,
-    readOnly: false,
     submittable: true,
-    setFormData: () => undefined,
-    behandling,
     soknad,
     familiehendelse: defaultFamilieHendelse,
     personoversikt,
     inntektArbeidYtelse,
-    alleKodeverk: alleKodeverk as any,
   },
-} satisfies Meta<typeof OmsorgOgForeldreansvarFaktaIndex>;
+  render: args => <OmsorgOgForeldreansvarFaktaIndex {...args} />,
+} satisfies Meta<PanelContextArgs & ComponentProps<typeof OmsorgOgForeldreansvarFaktaIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
 export const ÅpentAksjonspunktForOmsorgovertakelse: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
         status: AksjonspunktStatus.OPPRETTET,
@@ -121,11 +114,10 @@ export const ÅpentAksjonspunktForOmsorgovertakelse: Story = {
         kanLoses: true,
       },
     ],
-    harApneAksjonspunkter: true,
     alleMerknaderFraBeslutter: {
       [AksjonspunktKode.OMSORGSOVERTAKELSE]: merknaderFraBeslutter,
     },
-    readOnly: false,
+    isReadOnly: false,
   },
 };
 
@@ -140,7 +132,7 @@ export const UtførtAksjonspunktForOmsorgovertakelse: Story = {
         vilkarType: 'FP_VK_8',
       },
     },
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
         status: AksjonspunktStatus.UTFORT,
@@ -148,17 +140,16 @@ export const UtførtAksjonspunktForOmsorgovertakelse: Story = {
         kanLoses: false,
       },
     ],
-    harApneAksjonspunkter: false,
     alleMerknaderFraBeslutter: {
       [AksjonspunktKode.OMSORGSOVERTAKELSE]: merknaderFraBeslutter,
     },
-    readOnly: true,
+    isReadOnly: true,
   },
 };
 
 export const ÅpentAksjonspunktForAvklareVilkårForForeldreansvar: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.AVKLAR_VILKAR_FOR_FORELDREANSVAR,
         status: AksjonspunktStatus.OPPRETTET,
@@ -166,17 +157,16 @@ export const ÅpentAksjonspunktForAvklareVilkårForForeldreansvar: Story = {
         kanLoses: true,
       },
     ],
-    harApneAksjonspunkter: true,
     alleMerknaderFraBeslutter: {
       [AksjonspunktKode.AVKLAR_VILKAR_FOR_FORELDREANSVAR]: merknaderFraBeslutter,
     },
-    readOnly: false,
+    isReadOnly: false,
   },
 };
 
 export const UtførtAksjonspunktForAvklareVilkårForForeldreansvar: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.AVKLAR_VILKAR_FOR_FORELDREANSVAR,
         status: AksjonspunktStatus.UTFORT,
@@ -184,7 +174,6 @@ export const UtførtAksjonspunktForAvklareVilkårForForeldreansvar: Story = {
         kanLoses: false,
       },
     ],
-    harApneAksjonspunkter: false,
     familiehendelse: {
       ...defaultFamilieHendelse,
       gjeldende: {
@@ -196,6 +185,6 @@ export const UtførtAksjonspunktForAvklareVilkårForForeldreansvar: Story = {
     alleMerknaderFraBeslutter: {
       [AksjonspunktKode.AVKLAR_VILKAR_FOR_FORELDREANSVAR]: merknaderFraBeslutter,
     },
-    readOnly: true,
+    isReadOnly: true,
   },
 };

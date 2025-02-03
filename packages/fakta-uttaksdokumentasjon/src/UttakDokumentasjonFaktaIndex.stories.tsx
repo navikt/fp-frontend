@@ -1,20 +1,16 @@
-import { action } from '@storybook/addon-actions';
+import { ComponentProps } from 'react';
+
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
-import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
-import { Behandling, DokumentasjonVurderingBehov, UttakÅrsak, UttakType, UttakVurdering } from '@navikt/fp-types';
+import { PanelContextArgs, withFormData, withPanelContext } from '@navikt/fp-storybook-utils';
+import { DokumentasjonVurderingBehov, UttakÅrsak, UttakType, UttakVurdering } from '@navikt/fp-types';
 
 import { UttakDokumentasjonFaktaIndex } from './UttakDokumentasjonFaktaIndex';
 
 import '@navikt/ds-css';
 import '@navikt/ft-form-hooks/dist/style.css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
-
-const behandling = {
-  uuid: '1',
-  versjon: 1,
-} as Behandling;
 
 const opprettetDokumentasjonVurderingBehovListe = [
   {
@@ -46,21 +42,16 @@ const opprettetDokumentasjonVurderingBehovListe = [
 const meta = {
   title: 'fakta/fakta-uttaksdokumentasjon',
   component: UttakDokumentasjonFaktaIndex,
-  decorators: [withFormData],
-  args: {
-    behandling,
-    alleKodeverk: alleKodeverk as any,
-    alleMerknaderFraBeslutter: {},
-    submitCallback: action('button-click') as (data: any) => Promise<void>,
-  },
-} satisfies Meta<typeof UttakDokumentasjonFaktaIndex>;
+  decorators: [withFormData, withPanelContext],
+  render: args => <UttakDokumentasjonFaktaIndex {...args} />,
+} satisfies Meta<PanelContextArgs & ComponentProps<typeof UttakDokumentasjonFaktaIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
 export const AksjonspunktMedUavklartePerioder: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
         status: AksjonspunktStatus.OPPRETTET,
@@ -68,9 +59,7 @@ export const AksjonspunktMedUavklartePerioder: Story = {
         kanLoses: true,
       },
     ],
-    harApneAksjonspunkter: true,
     dokumentasjonVurderingBehov: opprettetDokumentasjonVurderingBehovListe,
-    readOnly: false,
     submittable: true,
   },
 };
@@ -109,7 +98,7 @@ const utfortDokumentasjonVurderingBehovListe = [
 
 export const AksjonspunktSomErBekreftetOgBehandlingAvsluttet: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
         status: AksjonspunktStatus.UTFORT,
@@ -117,16 +106,15 @@ export const AksjonspunktSomErBekreftetOgBehandlingAvsluttet: Story = {
         kanLoses: false,
       },
     ],
-    harApneAksjonspunkter: false,
     dokumentasjonVurderingBehov: utfortDokumentasjonVurderingBehovListe,
-    readOnly: true,
+    isReadOnly: true,
     submittable: false,
   },
 };
 
 export const AksjonspunktErBekreftetMenBehandlingErÅpen: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
         status: AksjonspunktStatus.UTFORT,
@@ -134,7 +122,6 @@ export const AksjonspunktErBekreftetMenBehandlingErÅpen: Story = {
         kanLoses: true,
       },
     ],
-    harApneAksjonspunkter: false,
     dokumentasjonVurderingBehov: [
       {
         fom: '2022-12-08',
@@ -144,18 +131,14 @@ export const AksjonspunktErBekreftetMenBehandlingErÅpen: Story = {
         vurdering: UttakVurdering.GODKJENT,
       },
     ],
-    readOnly: false,
     submittable: true,
-    alleMerknaderFraBeslutter: {},
   },
 };
 
 export const UavklartePerioderMenIkkeAksjonspunktEnnå: Story = {
   args: {
-    aksjonspunkter: [],
-    harApneAksjonspunkter: false,
+    aksjonspunkterForPanel: [],
     dokumentasjonVurderingBehov: opprettetDokumentasjonVurderingBehovListe,
-    readOnly: false,
     submittable: true,
   },
 };
