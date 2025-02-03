@@ -4,7 +4,7 @@ import { Meta, StoryObj } from '@storybook/react';
 
 import { InntektsmeldingFaktaIndex } from '@navikt/fp-fakta-inntektsmelding';
 import { PanelContextArgs, withPanelContext } from '@navikt/fp-storybook-utils';
-import { ArbeidsgiverOpplysninger, BehandlingAppKontekst } from '@navikt/fp-types';
+import { ArbeidsgiverOpplysninger, Behandling, BehandlingAppKontekst } from '@navikt/fp-types';
 
 import '@navikt/ds-css';
 import '@navikt/ft-form-hooks/dist/style.css';
@@ -65,6 +65,9 @@ export const InntektsmeldingDefault: Story = {
       ['2']: { navn: 'Kiwi' } as ArbeidsgiverOpplysninger,
       ['3']: { navn: 'Meny' } as ArbeidsgiverOpplysninger,
     },
+    behandling: {
+      uuid: 'UUID2',
+    } as Behandling,
     inntektsmeldinger: [
       {
         ...inntektsmeldingmal,

@@ -76,7 +76,7 @@ describe('<FormkravProsessIndex>', () => {
     await waitFor(() => expect(mellomlagre).toHaveBeenCalledTimes(1));
     expect(mellomlagre).toHaveBeenNthCalledWith(1, {
       begrunnelse: 'Dette er en vurdering',
-      behandlingUuid: '1',
+      behandlingUuid: '1223-2323-2323-22332',
       erFristOverholdt: true,
       erKlagerPart: false,
       erKonkret: true,

@@ -27,6 +27,14 @@ import {
 
 import { VedtakProsessIndex } from './VedtakProsessIndex';
 
+const defaultAksjonspunkter = [
+  {
+    definisjon: AksjonspunktKode.FORESLA_VEDTAK,
+    status: AksjonspunktStatus.OPPRETTET,
+    kanLoses: true,
+  },
+] as Aksjonspunkt[];
+
 const defaultBehandling = {
   uuid: '1',
   versjon: 1,
@@ -38,6 +46,7 @@ const defaultBehandling = {
   },
   behandlingPaaVent: false,
   behandlingHenlagt: false,
+  aksjonspunkt: defaultAksjonspunkter,
   behandlingÅrsaker: [
     {
       behandlingArsakType: BehandlingArsakType.ANNET,
@@ -54,14 +63,6 @@ const defaultVilkar = [
   },
 ] as Vilkar[];
 
-const defaultAksjonspunkter = [
-  {
-    definisjon: AksjonspunktKode.FORESLA_VEDTAK,
-    status: AksjonspunktStatus.OPPRETTET,
-    kanLoses: true,
-  },
-] as Aksjonspunkt[];
-
 const defaultberegningresultatDagytelse = {
   antallBarn: 1,
   beregnetTilkjentYtelse: 10000,
@@ -72,7 +73,6 @@ const meta = {
   component: VedtakProsessIndex,
   decorators: [withFormData, withPanelContext],
   args: {
-    aksjonspunkterForPanel: defaultAksjonspunkter,
     vilkar: defaultVilkar,
     previewCallback: action('button-click') as any,
   },
@@ -202,7 +202,38 @@ export const AvslåttForeldrepengerDerBeregningErManueltFastsatt: Story = {
 
 export const TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = {
   args: {
-    behandling: defaultBehandling,
+    behandling: {
+      ...defaultBehandling,
+      aksjonspunkt: [
+        ...defaultAksjonspunkter,
+        {
+          definisjon: AksjonspunktKode.VURDERE_ANNEN_YTELSE,
+          status: AksjonspunktStatus.OPPRETTET,
+          begrunnelse: undefined,
+          kanLoses: false,
+          toTrinnsBehandling: true,
+        },
+        {
+          definisjon: AksjonspunktKode.VURDERE_DOKUMENT,
+          status: AksjonspunktStatus.OPPRETTET,
+          begrunnelse: undefined,
+          kanLoses: false,
+        },
+        {
+          definisjon: AksjonspunktKode.VURDERE_INNTEKTSMELDING_KLAGE,
+          status: AksjonspunktStatus.OPPRETTET,
+          begrunnelse: undefined,
+          kanLoses: false,
+        },
+        {
+          definisjon: AksjonspunktKode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST,
+          status: AksjonspunktStatus.OPPRETTET,
+          begrunnelse: undefined,
+          kanLoses: false,
+          toTrinnsBehandling: true,
+        },
+      ],
+    },
     beregningresultatDagytelse: defaultberegningresultatDagytelse,
     ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
     beregningsgrunnlag: {
@@ -216,35 +247,6 @@ export const TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = {
         },
       ],
     } as Beregningsgrunnlag,
-    aksjonspunkterForPanel: [
-      ...defaultAksjonspunkter,
-      {
-        definisjon: AksjonspunktKode.VURDERE_ANNEN_YTELSE,
-        status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
-        kanLoses: false,
-        toTrinnsBehandling: true,
-      },
-      {
-        definisjon: AksjonspunktKode.VURDERE_DOKUMENT,
-        status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
-        kanLoses: false,
-      },
-      {
-        definisjon: AksjonspunktKode.VURDERE_INNTEKTSMELDING_KLAGE,
-        status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
-        kanLoses: false,
-      },
-      {
-        definisjon: AksjonspunktKode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST,
-        status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
-        kanLoses: false,
-        toTrinnsBehandling: true,
-      },
-    ],
     isReadOnly: false,
   },
 };
