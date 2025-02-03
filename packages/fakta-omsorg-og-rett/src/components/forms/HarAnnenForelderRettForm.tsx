@@ -9,7 +9,7 @@ import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-f
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
 import { AvklarAnnenforelderHarRettAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelContext } from '@navikt/fp-utils';
+import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { HarAnnenForelderRettFelter } from './HarAnnenForelderRettFelter';
 
@@ -27,7 +27,7 @@ interface Props {
 }
 
 export const HarAnnenForelderRettForm = ({ ytelsefordeling, aksjonspunkt, submittable }: Props) => {
-  const { submitCallback, isReadOnly, alleMerknaderFraBeslutter } = usePanelContext<AvklarAnnenforelderHarRettAp>();
+  const { submitCallback, isReadOnly, alleMerknaderFraBeslutter } = usePanelDataContext<AvklarAnnenforelderHarRettAp>();
 
   const {
     bekreftetAnnenforelderRett,

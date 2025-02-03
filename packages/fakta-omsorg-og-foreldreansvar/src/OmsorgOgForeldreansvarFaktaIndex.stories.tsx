@@ -11,7 +11,7 @@ import {
   SivilstandType,
   SoknadType,
 } from '@navikt/fp-kodeverk';
-import { PanelContextArgs, withPanelContext } from '@navikt/fp-storybook-utils';
+import { PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
 import { FamilieHendelseSamling, InntektArbeidYtelse, Personoversikt, Soknad } from '@navikt/fp-types';
 
 import { OmsorgOgForeldreansvarFaktaIndex } from './OmsorgOgForeldreansvarFaktaIndex';
@@ -90,7 +90,7 @@ const merknaderFraBeslutter = {
 const meta = {
   title: 'fakta/fakta-omsorg-og-foreldreansvar',
   component: OmsorgOgForeldreansvarFaktaIndex,
-  decorators: [withPanelContext],
+  decorators: [withPanelData],
   args: {
     submittable: true,
     soknad,
@@ -99,7 +99,7 @@ const meta = {
     inntektArbeidYtelse,
   },
   render: args => <OmsorgOgForeldreansvarFaktaIndex {...args} />,
-} satisfies Meta<PanelContextArgs & ComponentProps<typeof OmsorgOgForeldreansvarFaktaIndex>>;
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof OmsorgOgForeldreansvarFaktaIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;

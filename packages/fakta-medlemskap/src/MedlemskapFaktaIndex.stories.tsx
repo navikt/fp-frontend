@@ -4,7 +4,7 @@ import { TIDENES_ENDE } from '@navikt/ft-utils';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AdresseType, AksjonspunktKode, AksjonspunktStatus, PersonstatusType, Region } from '@navikt/fp-kodeverk';
-import { PanelContextArgs, withPanelContext } from '@navikt/fp-storybook-utils';
+import { PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
 import { Medlemskap, MedlemskapAvvik, Soknad } from '@navikt/fp-types';
 
 import { MedlemskapFaktaIndex } from './MedlemskapFaktaIndex';
@@ -38,13 +38,13 @@ const defaultSoknad = {
 const meta = {
   title: 'fakta/fakta-medlemskap-v3',
   component: MedlemskapFaktaIndex,
-  decorators: [withPanelContext],
+  decorators: [withPanelData],
   args: {
     soknad: defaultSoknad,
     submittable: true,
   },
   render: args => <MedlemskapFaktaIndex {...args} />,
-} satisfies Meta<PanelContextArgs & ComponentProps<typeof MedlemskapFaktaIndex>>;
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof MedlemskapFaktaIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;

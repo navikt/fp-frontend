@@ -3,7 +3,7 @@ import { ComponentProps } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, Avslagsarsak, VilkarUtfallType } from '@navikt/fp-kodeverk';
-import { PanelContextArgs, withFormData, withPanelContext } from '@navikt/fp-storybook-utils';
+import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, Behandling } from '@navikt/fp-types';
 
 import { OmsorgVilkarProsessIndex } from './OmsorgVilkarProsessIndex';
@@ -11,9 +11,9 @@ import { OmsorgVilkarProsessIndex } from './OmsorgVilkarProsessIndex';
 const meta = {
   title: 'prosess/prosess-vilkar-omsorg',
   component: OmsorgVilkarProsessIndex,
-  decorators: [withFormData, withPanelContext],
+  decorators: [withFormData, withPanelData],
   render: args => <OmsorgVilkarProsessIndex {...args} />,
-} satisfies Meta<PanelContextArgs & ComponentProps<typeof OmsorgVilkarProsessIndex>>;
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof OmsorgVilkarProsessIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;

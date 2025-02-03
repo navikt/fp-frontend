@@ -9,7 +9,7 @@ import { FaktaBegrunnelseTextField } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { DokumentasjonVurderingBehov } from '@navikt/fp-types';
 import { VurderDokumentasjonAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelContext } from '@navikt/fp-utils';
+import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import UttakDokumentasjonFaktaTable from './UttakDokumentasjonFaktaTable/UttakDokumentasjonFaktaTable';
 
@@ -21,7 +21,7 @@ interface Props {
 export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov, submittable }: Props) => {
   const intl = useIntl();
 
-  const { submitCallback, aksjonspunkterForPanel, isReadOnly } = usePanelContext<VurderDokumentasjonAp>();
+  const { submitCallback, aksjonspunkterForPanel, isReadOnly } = usePanelDataContext<VurderDokumentasjonAp>();
 
   const readOnly = isReadOnly || aksjonspunkterForPanel.length === 0;
 

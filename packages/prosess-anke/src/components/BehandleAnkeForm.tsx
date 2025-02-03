@@ -7,7 +7,7 @@ import moment from 'moment';
 
 import { AnkeVurdering as AnkeVurderingKodeverk, AnkeVurderingOmgjoer, KodeverkType } from '@navikt/fp-kodeverk';
 import { AlleKodeverk, AnkeVurdering, BehandlingAppKontekst } from '@navikt/fp-types';
-import { usePanelContext } from '@navikt/fp-utils';
+import { usePanelDataContext } from '@navikt/fp-utils';
 
 const formatDate = (date: string): string => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
 
@@ -47,7 +47,7 @@ export const BehandleAnkeForm = ({ ankeVurdering, behandlinger }: Props) => {
   const avr = ankeVurdering.ankeVurderingResultat;
   const vedtak = avr ? formatId(avr.påAnketKlageBehandlingUuid) : undefined;
 
-  const { alleKodeverk } = usePanelContext();
+  const { alleKodeverk } = usePanelDataContext();
 
   const ankeOmgorArsaker = alleKodeverk[KodeverkType.ANKE_OMGJOER_AARSAK];
 

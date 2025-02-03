@@ -3,7 +3,7 @@ import { ComponentProps } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, TilretteleggingType, UttakArbeidType } from '@navikt/fp-kodeverk';
-import { PanelContextArgs, withFormData, withPanelContext } from '@navikt/fp-storybook-utils';
+import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import {
   ArbeidOgInntektsmelding,
   ArbeidsforholdFodselOgTilrettelegging,
@@ -244,14 +244,14 @@ const ARBEIDSGIVEROPPLYSNINGER_PER_ID = {
 const meta = {
   title: 'fakta/fakta-tilrettelegging',
   component: TilretteleggingFaktaIndex,
-  decorators: [withFormData, withPanelContext],
+  decorators: [withFormData, withPanelData],
   args: {
     arbeidsgiverOpplysningerPerId: ARBEIDSGIVEROPPLYSNINGER_PER_ID,
     submittable: true,
     readonly: false,
   },
   render: args => <TilretteleggingFaktaIndex {...args} />,
-} satisfies Meta<PanelContextArgs & ComponentProps<typeof TilretteleggingFaktaIndex>>;
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof TilretteleggingFaktaIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;

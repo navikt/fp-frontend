@@ -14,7 +14,7 @@ import {
 } from '@navikt/fp-prosess-felles';
 import { Aksjonspunkt, Behandlingsresultat, FastsattOpptjening } from '@navikt/fp-types';
 import { AvklarOpptjeningsvilkaretAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelContext } from '@navikt/fp-utils';
+import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import OpptjeningVilkarView from './OpptjeningVilkarView';
 
@@ -68,7 +68,7 @@ export const OpptjeningVilkarAksjonspunktPanel = ({
     harÅpneAksjonspunkter,
     isReadOnly,
     alleMerknaderFraBeslutter,
-  } = usePanelContext<AvklarOpptjeningsvilkaretAp>();
+  } = usePanelDataContext<AvklarOpptjeningsvilkaretAp>();
 
   const erIkkeGodkjentAvBeslutter = aksjonspunkterForPanel.some(
     a => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted,

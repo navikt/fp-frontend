@@ -15,7 +15,7 @@ import {
   VilkarType,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
-import { PanelContextArgs, withFormData, withPanelContext } from '@navikt/fp-storybook-utils';
+import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import {
   Aksjonspunkt,
   Behandling,
@@ -71,13 +71,13 @@ const defaultberegningresultatDagytelse = {
 const meta = {
   title: 'prosess/prosess-vedtak',
   component: VedtakProsessIndex,
-  decorators: [withFormData, withPanelContext],
+  decorators: [withFormData, withPanelData],
   args: {
     vilkar: defaultVilkar,
     previewCallback: action('button-click') as any,
   },
   render: args => <VedtakProsessIndex {...args} />,
-} satisfies Meta<PanelContextArgs & ComponentProps<typeof VedtakProsessIndex>>;
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof VedtakProsessIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;

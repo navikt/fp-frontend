@@ -9,7 +9,7 @@ import {
   TilretteleggingType,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
-import { PanelContextArgs, withFormData, withPanelContext } from '@navikt/fp-storybook-utils';
+import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import {
   Aksjonspunkt,
   ArbeidsforholdFodselOgTilrettelegging,
@@ -22,12 +22,12 @@ import { SvangerskapVilkarProsessIndex } from './SvangerskapVilkarProsessIndex';
 const meta = {
   title: 'prosess/prosess-vilkar-svangerskap',
   component: SvangerskapVilkarProsessIndex,
-  decorators: [withFormData, withPanelContext],
+  decorators: [withFormData, withPanelData],
   args: {
     svangerskapspengerTilrettelegging: {} as FodselOgTilrettelegging,
   },
   render: args => <SvangerskapVilkarProsessIndex {...args} />,
-} satisfies Meta<PanelContextArgs & ComponentProps<typeof SvangerskapVilkarProsessIndex>>;
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof SvangerskapVilkarProsessIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;

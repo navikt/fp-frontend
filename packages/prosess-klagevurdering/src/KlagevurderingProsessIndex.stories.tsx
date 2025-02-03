@@ -8,7 +8,7 @@ import {
   KlageVurdering as klageVurderingCodes,
   KlageVurderingOmgjoer as klageVurderingOmgjoerType,
 } from '@navikt/fp-kodeverk';
-import { PanelContextArgs, withFormData, withPanelContext } from '@navikt/fp-storybook-utils';
+import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, KlageVurdering } from '@navikt/fp-types';
 
 import { KlagevurderingProsessIndex } from './KlagevurderingProsessIndex';
@@ -16,7 +16,7 @@ import { KlagevurderingProsessIndex } from './KlagevurderingProsessIndex';
 const meta = {
   title: 'prosess/klage/prosess-klagevurdering',
   component: KlagevurderingProsessIndex,
-  decorators: [withFormData, withPanelContext],
+  decorators: [withFormData, withPanelData],
   args: {
     saveKlage: action('button-click') as (data: any) => Promise<void>,
     previewCallback: action('button-click') as (data: any) => Promise<void>,
@@ -25,7 +25,7 @@ const meta = {
   render: props => {
     return <KlagevurderingProsessIndex {...props} />;
   },
-} satisfies Meta<PanelContextArgs & ComponentProps<typeof KlagevurderingProsessIndex>>;
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof KlagevurderingProsessIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;

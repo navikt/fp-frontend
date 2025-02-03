@@ -12,7 +12,7 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { OverstyringPanel } from '@navikt/fp-prosess-felles';
 import { Aksjonspunkt, BeregningsresultatEs } from '@navikt/fp-types';
 import { OverstyringBeregningAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelContext, usePanelOverstyring } from '@navikt/fp-utils';
+import { useFormData, usePanelDataContext, usePanelOverstyring } from '@navikt/fp-utils';
 
 import styles from './beregningsresultatEngangsstonadForm.module.css';
 
@@ -57,7 +57,7 @@ export const BeregningsresultatEngangsstonadForm = ({
     satsVerdi: 0,
   },
 }: Props) => {
-  const { aksjonspunkterForPanel, submitCallback, alleMerknaderFraBeslutter } = usePanelContext();
+  const { aksjonspunkterForPanel, submitCallback, alleMerknaderFraBeslutter } = usePanelDataContext();
 
   const erIkkeGodkjentAvBeslutter = aksjonspunkterForPanel.some(
     a => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted,

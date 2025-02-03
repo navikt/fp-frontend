@@ -9,7 +9,7 @@ import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponen
 import { AksjonspunktKode, TilbakekrevingVidereBehandling } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, ArbeidsgiverOpplysningerPerId, SimuleringResultat, TilbakekrevingValg } from '@navikt/fp-types';
 import { KontrollerEtterbetalingTilSøkerAP, VurderFeilutbetalingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelContext } from '@navikt/fp-utils';
+import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import EtterbetalingSøkerForm, {
   buildInitialValues as buildInitialValuesEtterbetaling,
@@ -121,7 +121,7 @@ export const SimuleringPanel = ({
   arbeidsgiverOpplysningerPerId,
 }: Props) => {
   const { aksjonspunkterForPanel, submitCallback, isReadOnly, harÅpneAksjonspunkter, fagsak, behandling } =
-    usePanelContext<SimuleringAksjonspunkt[]>();
+    usePanelDataContext<SimuleringAksjonspunkt[]>();
 
   const { formData, setFormData } = useFormData<FormValues>();
 

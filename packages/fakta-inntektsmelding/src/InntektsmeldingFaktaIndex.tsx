@@ -7,7 +7,7 @@ import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
 import { createIntl, formatCurrencyNoKr } from '@navikt/ft-utils';
 
 import { ArbeidsgiverOpplysningerPerId, Behandling, BehandlingAppKontekst, Inntektsmelding } from '@navikt/fp-types';
-import { usePanelContext } from '@navikt/fp-utils';
+import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { InntektsmeldingInnhold } from './components/InntektsmeldingInnhold';
 
@@ -32,7 +32,7 @@ export const InntektsmeldingFaktaIndex = ({
   alleBehandlinger,
   inntektsmeldinger,
 }: { inntektsmeldinger: Inntektsmelding[] } & InntektsmeldingFaktaProps) => {
-  const { behandling } = usePanelContext();
+  const { behandling } = usePanelDataContext();
 
   // Logikk for å sortere tabell tilpasset fra Aksel-eksempel: https://aksel.nav.no/komponenter/core/table#tabledemo-sortable
   const [sort, setSort] = useState<SortState | undefined>({ orderBy: 'innsendingstidspunkt', direction: 'descending' });

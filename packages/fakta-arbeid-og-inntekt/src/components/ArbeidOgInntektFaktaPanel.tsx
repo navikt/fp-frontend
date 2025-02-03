@@ -21,7 +21,7 @@ import {
   ManueltArbeidsforhold,
 } from '@navikt/fp-types';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelContext } from '@navikt/fp-utils';
+import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { useIsFormDirty } from '../DirtyFormProvider';
 import { ArbeidsforholdOgInntektRadData, Avklaring } from '../types/arbeidsforholdOgInntekt';
@@ -156,7 +156,7 @@ export const ArbeidOgInntektFaktaPanel = ({
   const [erOverstyrt, setErOverstyrt] = useState(false);
 
   const { alleKodeverk, submitCallback, aksjonspunkterForPanel, behandling, fagsak, isReadOnly } =
-    usePanelContext<FaktaAksjonspunkt>();
+    usePanelDataContext<FaktaAksjonspunkt>();
 
   const aksjonspunkt = aksjonspunkterForPanel.length > 0 ? aksjonspunkterForPanel[0] : undefined;
 

@@ -11,7 +11,7 @@ import {
   SoknadType,
   StonadskontoType,
 } from '@navikt/fp-kodeverk';
-import { PanelContextArgs, withPanelContext } from '@navikt/fp-storybook-utils';
+import { PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
 import {
   Aksjonspunkt,
   BeregningsresultatDagytelse,
@@ -98,7 +98,7 @@ const arbeidsgiverOpplysningerPerId = {
 const meta = {
   title: 'prosess/prosess-tilkjent-ytelse',
   component: TilkjentYtelseProsessIndex,
-  decorators: [withPanelContext],
+  decorators: [withPanelData],
   args: {
     beregningresultat,
     familiehendelse: defaultFamiliehendelse,
@@ -107,7 +107,7 @@ const meta = {
     arbeidsgiverOpplysningerPerId,
   },
   render: args => <TilkjentYtelseProsessIndex {...args} />,
-} satisfies Meta<PanelContextArgs & ComponentProps<typeof TilkjentYtelseProsessIndex>>;
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof TilkjentYtelseProsessIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;

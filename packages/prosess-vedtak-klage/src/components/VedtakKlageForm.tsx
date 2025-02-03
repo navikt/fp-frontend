@@ -16,7 +16,7 @@ import {
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import { AlleKodeverk, Behandlingsresultat, KlageVurdering } from '@navikt/fp-types';
 import { ForeslaVedtakAp, ForeslaVedtakManueltAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { usePanelContext } from '@navikt/fp-utils';
+import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { VedtakKlageSubmitPanel } from './VedtakKlageSubmitPanel';
 
@@ -93,7 +93,7 @@ interface Props {
 
 export const VedtakKlageForm = ({ klageVurdering, previewVedtakCallback, behandlingsresultat }: Props) => {
   const { behandling, isReadOnly, alleKodeverk, aksjonspunkterForPanel, submitCallback } =
-    usePanelContext<AksjonspunktData>();
+    usePanelDataContext<AksjonspunktData>();
 
   const avvistArsaker = getAvvisningsAarsaker(klageVurdering);
   const omgjortAarsak = getOmgjortAarsak(klageVurdering, alleKodeverk);

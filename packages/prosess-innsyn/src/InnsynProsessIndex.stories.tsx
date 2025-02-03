@@ -9,7 +9,7 @@ import {
   InnsynResultatType,
   Kommunikasjonsretning,
 } from '@navikt/fp-kodeverk';
-import { PanelContextArgs, withFormData, withPanelContext } from '@navikt/fp-storybook-utils';
+import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, Behandling, Innsyn, InnsynDokument } from '@navikt/fp-types';
 
 import { InnsynProsessIndex } from './InnsynProsessIndex';
@@ -31,7 +31,7 @@ const defaultAksjonspunkter = [
 const meta = {
   title: 'prosess/innsyn/prosess-innsyn',
   component: InnsynProsessIndex,
-  decorators: [withFormData, withPanelContext],
+  decorators: [withFormData, withPanelData],
   args: {
     readOnlySubmitButton: false,
     alleDokumenter: [
@@ -45,7 +45,7 @@ const meta = {
     ],
   },
   render: args => <InnsynProsessIndex {...args} />,
-} satisfies Meta<PanelContextArgs & ComponentProps<typeof InnsynProsessIndex>>;
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof InnsynProsessIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;

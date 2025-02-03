@@ -36,7 +36,7 @@ import {
   VurdereDokumentForVedtakAp,
   VurdereInntektsmeldingKlageForVedtakAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelContext } from '@navikt/fp-utils';
+import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { VedtakResultType } from '../../kodeverk/vedtakResultType';
 import { VedtakFellesPanel } from '../felles/VedtakFellesPanel';
@@ -254,7 +254,8 @@ export const VedtakRevurderingForm = ({
 }: Props) => {
   const intl = useIntl();
 
-  const { behandling, alleKodeverk, submitCallback, isReadOnly } = usePanelContext<RevurderingVedtakAksjonspunkter[]>();
+  const { behandling, alleKodeverk, submitCallback, isReadOnly } =
+    usePanelDataContext<RevurderingVedtakAksjonspunkter[]>();
 
   const { aksjonspunkt } = behandling;
 

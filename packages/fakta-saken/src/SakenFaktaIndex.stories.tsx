@@ -3,7 +3,7 @@ import { ComponentProps } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, FagsakYtelseType, NavBrukerKjonn } from '@navikt/fp-kodeverk';
-import { PanelContextArgs, withFormData, withPanelContext } from '@navikt/fp-storybook-utils';
+import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import { Fagsak, Soknad } from '@navikt/fp-types';
 
 import { SakenFaktaIndex } from './SakenFaktaIndex';
@@ -27,14 +27,14 @@ const defaultSøknad = {
 const meta = {
   title: 'fakta/fakta-saken',
   component: SakenFaktaIndex,
-  decorators: [withFormData, withPanelContext],
+  decorators: [withFormData, withPanelData],
   args: {
     submittable: true,
     soknad: defaultSøknad,
     kanOverstyreAccess: true,
   },
   render: args => <SakenFaktaIndex {...args} />,
-} satisfies Meta<PanelContextArgs & ComponentProps<typeof SakenFaktaIndex>>;
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof SakenFaktaIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;

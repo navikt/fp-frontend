@@ -32,7 +32,7 @@ import {
   VurdereAnnenYtelseForVedtakAp,
   VurdereDokumentForVedtakAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelContext } from '@navikt/fp-utils';
+import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { VedtakFellesPanel } from '../felles/VedtakFellesPanel';
 import { getTilbakekrevingText } from '../felles/VedtakHelper';
@@ -205,7 +205,7 @@ export const VedtakForm = ({
   vilkar,
   beregningErManueltFastsatt,
 }: Props) => {
-  const { behandling, alleKodeverk, submitCallback, isReadOnly } = usePanelContext<VedtakAksjonspunkter[]>();
+  const { behandling, alleKodeverk, submitCallback, isReadOnly } = usePanelDataContext<VedtakAksjonspunkter[]>();
 
   const { aksjonspunkt } = behandling;
 

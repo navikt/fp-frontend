@@ -13,9 +13,9 @@ type Props<AP_TYPE> = {
   submitCallback: (aksjonspunktData: AP_TYPE) => Promise<void>;
 };
 
-const PanelContext = createContext<Props<any> | null>(null);
+const PanelDataContext = createContext<Props<any> | null>(null);
 
-export const PanelProvider = (
+export const PanelDataProvider = (
   props: {
     children: ReactElement | null;
   } & Props<unknown>,
@@ -24,11 +24,11 @@ export const PanelProvider = (
 
   const value = useMemo(() => otherProps, [otherProps]);
 
-  return <PanelContext value={value}>{children}</PanelContext>;
+  return <PanelDataContext value={value}>{children}</PanelDataContext>;
 };
 
-export const usePanelContext = <AP_TYPE,>() => {
-  const context = useContext<Props<AP_TYPE> | null>(PanelContext);
+export const usePanelDataContext = <AP_TYPE,>() => {
+  const context = useContext<Props<AP_TYPE> | null>(PanelDataContext);
   if (!context) {
     throw new Error('PanelContext.Provider er ikke satt opp');
   }

@@ -3,7 +3,7 @@ import { ComponentProps } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
-import { PanelContextArgs, withFormData, withPanelContext } from '@navikt/fp-storybook-utils';
+import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
 
 import { BesteberegningFaktaIndex } from './BesteberegningFaktaIndex';
 import { beregningsgrunnlag as scenarioBG } from './scenario/BesteberegningScenario';
@@ -36,13 +36,13 @@ const lagAksjonspunkt = (apKode: string, status: string, begrunnelse?: string) =
 const meta = {
   title: 'fakta/fakta-besteberegning',
   component: BesteberegningFaktaIndex,
-  decorators: [withFormData, withPanelContext],
+  decorators: [withFormData, withPanelData],
   args: {
     submittable: true,
     arbeidsgiverOpplysninger,
   },
   render: args => <BesteberegningFaktaIndex {...args} />,
-} satisfies Meta<PanelContextArgs & ComponentProps<typeof BesteberegningFaktaIndex>>;
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof BesteberegningFaktaIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;

@@ -14,7 +14,7 @@ import {
   Personoversikt,
   Soknad,
 } from '@navikt/fp-types';
-import { usePanelContext } from '@navikt/fp-utils';
+import { usePanelDataContext } from '@navikt/fp-utils';
 
 import FeriepengerIndex from './feriepenger/FeriepengerIndex';
 import TilkjentYtelse from './TilkjentYtelse';
@@ -43,7 +43,7 @@ export const TilkjentYtelsePanel = ({
   personoversikt,
   soknad,
 }: Props) => {
-  const { alleKodeverk, fagsak, aksjonspunkterForPanel } = usePanelContext();
+  const { alleKodeverk, fagsak, aksjonspunkterForPanel } = usePanelDataContext();
 
   // Utgått aksjonspunkt, viser kun begrunnelse hvis det er løst tidligere
   const vurderTilbaketrekkAPBegrunnelse = finnTilbaketrekkAksjonspunktBegrunnelse(aksjonspunkterForPanel);

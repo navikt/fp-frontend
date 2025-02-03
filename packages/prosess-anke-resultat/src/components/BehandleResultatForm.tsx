@@ -11,7 +11,7 @@ import {
   KodeverkType,
 } from '@navikt/fp-kodeverk';
 import { AlleKodeverk, AnkeVurdering } from '@navikt/fp-types';
-import { usePanelContext } from '@navikt/fp-utils';
+import { usePanelDataContext } from '@navikt/fp-utils';
 
 interface Props {
   ankeVurderingResultat?: AnkeVurdering['ankeVurderingResultat'];
@@ -161,7 +161,7 @@ const ResultatOmgjores = ({
 );
 
 const AnkeResultat = ({ ankeVurderingResultat }: Props): ReactElement | null => {
-  const { alleKodeverk } = usePanelContext();
+  const { alleKodeverk } = usePanelDataContext();
 
   if (!ankeVurderingResultat) {
     return null;

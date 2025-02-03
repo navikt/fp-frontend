@@ -13,7 +13,7 @@ import { AksjonspunktKode, getKodeverknavnFn, KodeverkType } from '@navikt/fp-ko
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import { KlageVurdering } from '@navikt/fp-types';
 import { KlageFormkravAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelContext } from '@navikt/fp-utils';
+import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { AvsluttetBehandling } from '../types/avsluttetBehandlingTsType';
 import { FormkravMellomlagretDataType } from '../types/FormkravMellomlagretDataType';
@@ -113,7 +113,7 @@ export const FormkravKlageFormNfp = ({
 }: Props) => {
   const intl = useIntl();
 
-  const { behandling, alleKodeverk, submitCallback, isReadOnly } = usePanelContext<KlageFormkravAp>();
+  const { behandling, alleKodeverk, submitCallback, isReadOnly } = usePanelDataContext<KlageFormkravAp>();
 
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
   const klageBareVedtakOptions = getKlagBareVedtak(avsluttedeBehandlinger, intl, getKodeverknavn);

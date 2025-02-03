@@ -18,7 +18,7 @@ import {
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import { Aksjonspunkt, Dokument, InnsynDokument, InnsynVedtaksdokument } from '@navikt/fp-types';
 import { VurderInnsynAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelContext } from '@navikt/fp-utils';
+import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import DocumentListInnsyn from './DocumentListInnsyn';
 import VedtakDocuments from './VedtakDocuments';
@@ -118,7 +118,7 @@ export const InnsynForm = ({
   const intl = useIntl();
 
   const { fagsak, alleKodeverk, aksjonspunkterForPanel, submitCallback, isReadOnly, behandling } =
-    usePanelContext<VurderInnsynAp>();
+    usePanelDataContext<VurderInnsynAp>();
 
   const initialValues = buildInitialValues(
     innsynMottattDato,

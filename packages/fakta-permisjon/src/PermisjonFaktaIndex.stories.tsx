@@ -3,7 +3,7 @@ import { ComponentProps } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
-import { PanelContextArgs, withFormData, withPanelContext } from '@navikt/fp-storybook-utils';
+import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, AksjonspunktÅrsak } from '@navikt/fp-types';
 
 import { PermisjonFaktaIndex } from './PermisjonFaktaIndex';
@@ -26,9 +26,9 @@ const fellesInntektsmeldingFelter = {
 const meta = {
   title: 'fakta/fakta-permisjon',
   component: PermisjonFaktaIndex,
-  decorators: [withFormData, withPanelContext],
+  decorators: [withFormData, withPanelData],
   render: args => <PermisjonFaktaIndex {...args} />,
-} satisfies Meta<PanelContextArgs & ComponentProps<typeof PermisjonFaktaIndex>>;
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof PermisjonFaktaIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;

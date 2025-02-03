@@ -3,7 +3,7 @@ import { ComponentProps } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
-import { PanelContextArgs, withFormData, withPanelContext } from '@navikt/fp-storybook-utils';
+import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, Soknad } from '@navikt/fp-types';
 
 import { VurderSoknadsfristForeldrepengerIndex } from './VurderSoknadsfristForeldrepengerIndex';
@@ -22,7 +22,7 @@ const soknad = {
 const meta = {
   title: 'prosess/prosess-soknadsfrist',
   component: VurderSoknadsfristForeldrepengerIndex,
-  decorators: [withFormData, withPanelContext],
+  decorators: [withFormData, withPanelData],
   args: {
     readOnlySubmitButton: false,
     soknad,
@@ -35,7 +35,7 @@ const meta = {
     ] as Aksjonspunkt[],
   },
   render: args => <VurderSoknadsfristForeldrepengerIndex {...args} />,
-} satisfies Meta<PanelContextArgs & ComponentProps<typeof VurderSoknadsfristForeldrepengerIndex>>;
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof VurderSoknadsfristForeldrepengerIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;

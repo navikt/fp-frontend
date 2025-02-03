@@ -10,7 +10,7 @@ import {
   VilkarType,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
-import { PanelContextArgs, withFormData, withPanelContext } from '@navikt/fp-storybook-utils';
+import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, Behandling, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
 
 import { SoknadsfristVilkarProsessIndex } from './SoknadsfristVilkarProsessIndex';
@@ -40,13 +40,13 @@ const familiehendelse = {
 const meta = {
   title: 'prosess/prosess-vilkar-soknadsfrist',
   component: SoknadsfristVilkarProsessIndex,
-  decorators: [withFormData, withPanelContext],
+  decorators: [withFormData, withPanelData],
   args: {
     soknad,
     familiehendelse,
   },
   render: args => <SoknadsfristVilkarProsessIndex {...args} />,
-} satisfies Meta<PanelContextArgs & ComponentProps<typeof SoknadsfristVilkarProsessIndex>>;
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof SoknadsfristVilkarProsessIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;

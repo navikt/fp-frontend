@@ -23,7 +23,7 @@ import {
   OverstyringMedlemskapsvilkaretLopendeAp,
   OverstyringMedlemskapvilkaretForutgaendeAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelContext, usePanelOverstyring } from '@navikt/fp-utils';
+import { useFormData, usePanelDataContext, usePanelOverstyring } from '@navikt/fp-utils';
 
 import styles from './vilkarresultatMedOverstyringForm.module.css';
 
@@ -139,7 +139,7 @@ export const VilkarresultatMedOverstyringForm = ({
   status,
 }: Props) => {
   const { aksjonspunkterForPanel, behandling, fagsak, submitCallback, alleMerknaderFraBeslutter } =
-    usePanelContext<OverstyringVilkår>();
+    usePanelDataContext<OverstyringVilkår>();
 
   const { erOverstyrt, toggleOverstyring, overstyringApKode, overrideReadOnly, kanOverstyreAccess } =
     usePanelOverstyring();

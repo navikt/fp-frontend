@@ -4,7 +4,7 @@ import { VStack } from '@navikt/ds-react';
 
 import { AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { Medlemskap, Soknad } from '@navikt/fp-types';
-import { usePanelContext } from '@navikt/fp-utils';
+import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { VurderMedlemskapAksjonspunktForm } from './aksjonspunkt/VurderMedlemskapAksjonspunktForm';
 import VurderMedlemskapLegacyAksjonspunktVisning from './aksjonspunkt/VurderMedlemskapLegacyAksjonspunktVisning';
@@ -28,7 +28,7 @@ interface Props {
  * Har ansvar for å vise faktapanelene for medlemskap.
  */
 export const MedlemskapInfoPanel = ({ medlemskap, soknad, submittable }: Props) => {
-  const { aksjonspunkterForPanel, alleKodeverk, fagsak, isReadOnly } = usePanelContext();
+  const { aksjonspunkterForPanel, alleKodeverk, fagsak, isReadOnly } = usePanelDataContext();
 
   const aksjonspunkt = aksjonspunkterForPanel.find(
     ap => ap.status === AksjonspunktStatus.OPPRETTET || ap.status === AksjonspunktStatus.UTFORT,

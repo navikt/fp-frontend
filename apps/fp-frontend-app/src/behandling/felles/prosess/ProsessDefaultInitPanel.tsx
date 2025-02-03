@@ -2,7 +2,7 @@ import { ReactElement, use } from 'react';
 
 import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import { FormDataProvider, PanelProvider, usePanelOverstyring } from '@navikt/fp-utils';
+import { FormDataProvider, PanelDataProvider, usePanelOverstyring } from '@navikt/fp-utils';
 
 import { ProsessPanelInitProps } from '../typer/prosessPanelInitProps';
 import { StandardProsessPanelProps } from '../typer/standardProsessPanelPropsTsType';
@@ -79,7 +79,7 @@ const ProsessPanel = ({
         status={status}
       >
         {skalVisePanel ? (
-          <PanelProvider
+          <PanelDataProvider
             behandling={behandling}
             fagsak={standardPanelProps.fagsak}
             aksjonspunkterForPanel={standardPanelProps.aksjonspunkter}
@@ -90,7 +90,7 @@ const ProsessPanel = ({
             alleMerknaderFraBeslutter={standardPanelProps.alleMerknaderFraBeslutter}
           >
             {children}
-          </PanelProvider>
+          </PanelDataProvider>
         ) : null}
       </ProsessPanelWrapper>
     </FormDataProvider>

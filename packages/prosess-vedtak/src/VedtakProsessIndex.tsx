@@ -12,7 +12,7 @@ import {
   TilbakekrevingValg,
   Vilkar,
 } from '@navikt/fp-types';
-import { usePanelContext } from '@navikt/fp-utils';
+import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { ForhandsvisData, VedtakForm } from './components/forstegang/VedtakForm';
 import { VedtakRevurderingForm } from './components/revurdering/VedtakRevurderingForm';
@@ -72,7 +72,7 @@ export const VedtakProsessIndex = ({
   previewCallback,
   ytelseTypeKode,
 }: Props) => {
-  const { behandling } = usePanelContext();
+  const { behandling } = usePanelDataContext();
 
   const { aksjonspunkt } = behandling;
 

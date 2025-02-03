@@ -4,7 +4,7 @@ import { TIDENES_ENDE } from '@navikt/ft-utils';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AdresseType, AksjonspunktKode, AksjonspunktStatus, SivilstandType } from '@navikt/fp-kodeverk';
-import { PanelContextArgs, withFormData, withPanelContext } from '@navikt/fp-storybook-utils';
+import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, KjønnkodeEnum, PersonopplysningerBasis, Ytelsefordeling } from '@navikt/fp-types';
 
 import { OmsorgOgRettFaktaIndex } from './OmsorgOgRettFaktaIndex';
@@ -63,14 +63,14 @@ const defaultBarn: PersonopplysningerBasis = {
 const meta = {
   title: 'fakta/fakta-omsorg-og-rett',
   component: OmsorgOgRettFaktaIndex,
-  decorators: [withFormData, withPanelContext],
+  decorators: [withFormData, withPanelData],
   args: {
     personoversikt: { barn: [defaultBarn], annenPart: defaultAnnenPart, bruker: defaultBruker },
     ytelsefordeling: {} as Ytelsefordeling,
     submittable: true,
   },
   render: args => <OmsorgOgRettFaktaIndex {...args} />,
-} satisfies Meta<PanelContextArgs & ComponentProps<typeof OmsorgOgRettFaktaIndex>>;
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof OmsorgOgRettFaktaIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;

@@ -15,7 +15,7 @@ import {
   OpptjeningAktivitet,
 } from '@navikt/fp-types';
 import { AvklarAktivitetsPerioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelContext } from '@navikt/fp-utils';
+import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import ValgtAktivitetForm, { FormValues } from './aktivitet/ValgtAktivitetForm';
 import OpptjeningTidslinje from './tidslinje/OpptjeningTidslinje';
@@ -93,7 +93,7 @@ export const OpptjeningFaktaPanel = ({
     submitCallback,
     isReadOnly,
     alleKodeverk,
-  } = usePanelContext<AvklarAktivitetsPerioderAp>();
+  } = usePanelDataContext<AvklarAktivitetsPerioderAp>();
 
   const harAksjonspunkt = aksjonspunkterForPanel.length > 0;
 

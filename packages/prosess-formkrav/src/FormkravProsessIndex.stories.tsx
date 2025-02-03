@@ -9,7 +9,7 @@ import {
   BehandlingType,
   KlageVurdering as klageVurderingCodes,
 } from '@navikt/fp-kodeverk';
-import { PanelContextArgs, withFormData, withPanelContext } from '@navikt/fp-storybook-utils';
+import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, KlageVurdering } from '@navikt/fp-types';
 
 import { FormkravProsessIndex } from './FormkravProsessIndex';
@@ -25,14 +25,14 @@ const avsluttedeBehandlinger = [
 const meta = {
   title: 'prosess/klage/prosess-formkrav',
   component: FormkravProsessIndex,
-  decorators: [withFormData, withPanelContext],
+  decorators: [withFormData, withPanelData],
   args: {
     lagreFormkravVurdering: action('button-click') as (data: any) => Promise<void>,
     readOnlySubmitButton: false,
     avsluttedeBehandlinger,
   },
   render: args => <FormkravProsessIndex {...args} />,
-} satisfies Meta<PanelContextArgs & ComponentProps<typeof FormkravProsessIndex>>;
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof FormkravProsessIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;

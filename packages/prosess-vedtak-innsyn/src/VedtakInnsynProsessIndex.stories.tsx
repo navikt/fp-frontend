@@ -10,7 +10,7 @@ import {
   InnsynResultatType,
   Kommunikasjonsretning,
 } from '@navikt/fp-kodeverk';
-import { PanelContextArgs, withFormData, withPanelContext } from '@navikt/fp-storybook-utils';
+import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt } from '@navikt/fp-types';
 
 import { VedtakInnsynProsessIndex } from './VedtakInnsynProsessIndex';
@@ -31,7 +31,7 @@ const defaultAksjonspunkter = [
 const meta = {
   title: 'prosess/innsyn/prosess-vedtak-innsyn',
   component: VedtakInnsynProsessIndex,
-  decorators: [withFormData, withPanelContext],
+  decorators: [withFormData, withPanelData],
   args: {
     previewCallback: action('button-click') as any,
     aksjonspunkterForPanel: defaultAksjonspunkter,
@@ -46,7 +46,7 @@ const meta = {
     ],
   },
   render: args => <VedtakInnsynProsessIndex {...args} />,
-} satisfies Meta<PanelContextArgs & ComponentProps<typeof VedtakInnsynProsessIndex>>;
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof VedtakInnsynProsessIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;

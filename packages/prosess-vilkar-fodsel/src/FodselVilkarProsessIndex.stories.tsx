@@ -9,7 +9,7 @@ import {
   FagsakYtelseType,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
-import { PanelContextArgs, withFormData, withPanelContext } from '@navikt/fp-storybook-utils';
+import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, Behandling, Vilkar } from '@navikt/fp-types';
 
 import { FodselVilkarProsessIndex } from './FodselVilkarProsessIndex';
@@ -17,7 +17,7 @@ import { FodselVilkarProsessIndex } from './FodselVilkarProsessIndex';
 const meta = {
   title: 'prosess/prosess-vilkar-fodsel',
   component: FodselVilkarProsessIndex,
-  decorators: [withFormData, withPanelContext],
+  decorators: [withFormData, withPanelData],
   args: {
     vilkar: [
       {
@@ -27,7 +27,7 @@ const meta = {
     ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
   },
   render: args => <FodselVilkarProsessIndex {...args} />,
-} satisfies Meta<PanelContextArgs & ComponentProps<typeof FodselVilkarProsessIndex>>;
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof FodselVilkarProsessIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;

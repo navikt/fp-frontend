@@ -3,7 +3,7 @@ import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { AksjonspunktKode, getKodeverknavnFn } from '@navikt/fp-kodeverk';
 import { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag } from '@navikt/fp-types';
 import { BesteberegningAP } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { usePanelContext } from '@navikt/fp-utils';
+import { usePanelDataContext } from '@navikt/fp-utils';
 
 import BesteberegningResultatGrunnlagPanel from './BesteberegningResultatGrunnlagPanel';
 import BesteMånederVisningPanel from './BesteManederVisningPanel';
@@ -21,7 +21,7 @@ interface Props {
  * Container komponent. Holder paneler for resultat av besteberegning og inntektsgrunnlag
  */
 export const BesteberegningPanel = ({ beregningsgrunnlag, arbeidsgiverOpplysninger, submittable }: Props) => {
-  const { alleKodeverk, aksjonspunkterForPanel, submitCallback, isReadOnly } = usePanelContext<BesteberegningAP>();
+  const { alleKodeverk, aksjonspunkterForPanel, submitCallback, isReadOnly } = usePanelDataContext<BesteberegningAP>();
 
   const getKodeverkNavn = getKodeverknavnFn(alleKodeverk);
 

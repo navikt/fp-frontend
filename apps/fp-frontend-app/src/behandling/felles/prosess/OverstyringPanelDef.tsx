@@ -1,7 +1,7 @@
 import { KodeverkType, VilkarType } from '@navikt/fp-kodeverk';
 import { VilkarresultatMedOverstyringProsessIndex } from '@navikt/fp-prosess-vilkar-overstyring';
 import { KodeverkMedNavn, Medlemskap, Vilkar } from '@navikt/fp-types';
-import { usePanelContext, usePanelOverstyring } from '@navikt/fp-utils';
+import { usePanelDataContext, usePanelOverstyring } from '@navikt/fp-utils';
 
 import { skalViseProsessPanel } from './skalViseProsessPanel';
 import { useStandardProsessPanelProps } from './useStandardProsessPanelProps';
@@ -24,7 +24,7 @@ interface Props {
 }
 
 export const OverstyringPanelDef = ({ vilkar, vilkarKoder, panelTekstKode, medlemskap }: Props) => {
-  const { aksjonspunkterForPanel } = usePanelContext();
+  const { aksjonspunkterForPanel } = usePanelDataContext();
   const { overstyringApKode } = usePanelOverstyring();
 
   const overstyrteAksjonspunkter = aksjonspunkterForPanel.filter(ap => overstyringApKode === ap.definisjon);

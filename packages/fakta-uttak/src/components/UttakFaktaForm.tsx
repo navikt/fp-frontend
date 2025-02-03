@@ -33,7 +33,7 @@ import {
   Ytelsefordeling,
 } from '@navikt/fp-types';
 import { BekreftUttaksperioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelContext } from '@navikt/fp-utils';
+import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import KontrollerFaktaPeriodeMedApMarkering, { PeriodeApType } from '../typer/kontrollerFaktaPeriodeMedApMarkering';
 import UttakFaktaTable from './UttakFaktaTable';
@@ -176,7 +176,7 @@ export const UttakFaktaForm = ({
   const intl = useIntl();
 
   const { alleKodeverk, submitCallback, fagsak, aksjonspunkterForPanel, isReadOnly } =
-    usePanelContext<BekreftUttaksperioderAp[]>();
+    usePanelDataContext<BekreftUttaksperioderAp[]>();
 
   const sortertePerioder = useMemo(() => {
     const sortertListe = [...uttakKontrollerFaktaPerioder].sort((krav1, krav2) =>

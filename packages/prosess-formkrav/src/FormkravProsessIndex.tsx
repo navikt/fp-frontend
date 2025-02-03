@@ -4,7 +4,7 @@ import { createIntl } from '@navikt/ft-utils';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { KlageVurdering } from '@navikt/fp-types';
-import { usePanelContext } from '@navikt/fp-utils';
+import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { FormkravKlageFormNfp } from './components/FormkravKlageFormNfp';
 import { FormkravKlageKa } from './components/FormkravKlageKa';
@@ -28,7 +28,7 @@ export const FormkravProsessIndex = ({
   readOnlySubmitButton,
   lagreFormkravVurdering,
 }: Props) => {
-  const { aksjonspunkterForPanel } = usePanelContext();
+  const { aksjonspunkterForPanel } = usePanelDataContext();
 
   return (
     <RawIntlProvider value={intl}>

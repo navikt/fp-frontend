@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, BehandlingType } from '@navikt/fp-kodeverk';
-import { PanelContextArgs, withFormData, withPanelContext } from '@navikt/fp-storybook-utils';
+import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, Behandling, FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
 
 import { VarselOmRevurderingProsessIndex } from './VarselOmRevurderingProsessIndex';
@@ -68,7 +68,7 @@ const aksjonspunkterForPanel = [
 const meta = {
   title: 'prosess/prosess-varsel-om-revurdering',
   component: VarselOmRevurderingProsessIndex,
-  decorators: [withFormData, withPanelContext],
+  decorators: [withFormData, withPanelData],
   args: {
     aksjonspunkterForPanel,
     familiehendelse: familieHendelse,
@@ -78,7 +78,7 @@ const meta = {
     previewCallback: action('button-click') as any,
   },
   render: args => <VarselOmRevurderingProsessIndex {...args} />,
-} satisfies Meta<PanelContextArgs & ComponentProps<typeof VarselOmRevurderingProsessIndex>>;
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof VarselOmRevurderingProsessIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;

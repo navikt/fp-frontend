@@ -3,7 +3,7 @@ import { ComponentProps } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, SoknadType } from '@navikt/fp-kodeverk';
-import { PanelContextArgs, withFormData, withPanelContext } from '@navikt/fp-storybook-utils';
+import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import { FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
 
 import { AdopsjonFaktaIndex } from './AdopsjonFaktaIndex';
@@ -39,7 +39,7 @@ const merknaderFraBeslutter = {
 const meta = {
   title: 'fakta/fakta-adopsjon',
   component: AdopsjonFaktaIndex,
-  decorators: [withFormData, withPanelContext],
+  decorators: [withFormData, withPanelData],
   args: {
     soknad,
     familiehendelse: familieHendelse,
@@ -47,7 +47,7 @@ const meta = {
     isForeldrepengerFagsak: true,
   },
   render: args => <AdopsjonFaktaIndex {...args} />,
-} satisfies Meta<PanelContextArgs & ComponentProps<typeof AdopsjonFaktaIndex>>;
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof AdopsjonFaktaIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;

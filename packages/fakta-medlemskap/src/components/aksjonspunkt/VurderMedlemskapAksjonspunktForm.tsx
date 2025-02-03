@@ -9,7 +9,7 @@ import { FaktaBegrunnelseTextField } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, BehandlingType, KodeverkType, VilkarType } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, ManuellBehandlingResultat } from '@navikt/fp-types';
 import { VurderForutgaendeMedlemskapAp, VurderMedlemskapAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { usePanelContext } from '@navikt/fp-utils';
+import { usePanelDataContext } from '@navikt/fp-utils';
 
 import {
   MedlemskapVurdering,
@@ -53,7 +53,7 @@ const ConditionalWrapper = ({ isReadOnly, children }: PropsWithChildren<{ isRead
  * Har ansvar for å vise faktapanelene for medlemskap.
  */
 export const VurderMedlemskapAksjonspunktForm = ({ submittable, aksjonspunkt, manuellBehandlingResultat }: Props) => {
-  const { fagsak, behandling, submitCallback, isReadOnly, alleKodeverk } = usePanelContext<
+  const { fagsak, behandling, submitCallback, isReadOnly, alleKodeverk } = usePanelDataContext<
     VurderMedlemskapAp | VurderForutgaendeMedlemskapAp
   >();
   const [submitting, setSubmitting] = useState(false);

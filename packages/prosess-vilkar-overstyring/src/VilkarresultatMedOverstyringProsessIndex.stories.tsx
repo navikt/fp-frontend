@@ -13,10 +13,10 @@ import {
 } from '@navikt/fp-kodeverk';
 import {
   alleKodeverk,
-  PanelContextArgs,
+  PanelDataArgs,
   PanelOverstyringContextArgs,
   withFormData,
-  withPanelContext,
+  withPanelData,
   withPanelOverstyring,
 } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, Behandling, Fagsak, Medlemskap } from '@navikt/fp-types';
@@ -45,7 +45,7 @@ const defaultAvslagsarsaker = [
 const meta = {
   title: 'prosess/prosess-vilkar-overstyring',
   component: VilkarresultatMedOverstyringProsessIndex,
-  decorators: [withFormData, withPanelContext, withPanelOverstyring],
+  decorators: [withFormData, withPanelData, withPanelOverstyring],
   args: {
     kanOverstyreAccess: { isEnabled: true, employeeHasAccess: true },
     avslagsarsaker: defaultAvslagsarsaker,
@@ -56,7 +56,7 @@ const meta = {
     return <VilkarresultatMedOverstyringProsessIndex {...props} />;
   },
 } satisfies Meta<
-  PanelContextArgs & PanelOverstyringContextArgs & ComponentProps<typeof VilkarresultatMedOverstyringProsessIndex>
+  PanelDataArgs & PanelOverstyringContextArgs & ComponentProps<typeof VilkarresultatMedOverstyringProsessIndex>
 >;
 export default meta;
 

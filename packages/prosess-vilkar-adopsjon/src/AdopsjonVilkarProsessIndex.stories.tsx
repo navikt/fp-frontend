@@ -3,7 +3,7 @@ import { ComponentProps } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, Avslagsarsak, VilkarUtfallType } from '@navikt/fp-kodeverk';
-import { PanelContextArgs, withFormData, withPanelContext } from '@navikt/fp-storybook-utils';
+import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, Behandling, Vilkar } from '@navikt/fp-types';
 
 import { AdopsjonVilkarProsessIndex } from './AdopsjonVilkarProsessIndex';
@@ -11,7 +11,7 @@ import { AdopsjonVilkarProsessIndex } from './AdopsjonVilkarProsessIndex';
 const meta = {
   title: 'prosess/prosess-vilkar-adopsjon',
   component: AdopsjonVilkarProsessIndex,
-  decorators: [withFormData, withPanelContext],
+  decorators: [withFormData, withPanelData],
   args: {
     vilkar: [
       {
@@ -20,7 +20,7 @@ const meta = {
     ] as Vilkar[],
   },
   render: args => <AdopsjonVilkarProsessIndex {...args} />,
-} satisfies Meta<PanelContextArgs & ComponentProps<typeof AdopsjonVilkarProsessIndex>>;
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof AdopsjonVilkarProsessIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;

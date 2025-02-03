@@ -9,7 +9,7 @@ import {
   KodeverkType,
 } from '@navikt/fp-kodeverk';
 import { KlageVurdering } from '@navikt/fp-types';
-import { usePanelContext } from '@navikt/fp-utils';
+import { usePanelDataContext } from '@navikt/fp-utils';
 
 interface Props {
   klageVurdering: KlageVurdering;
@@ -23,7 +23,7 @@ interface Props {
 export const BehandleKlageFormKa = ({ klageVurdering }: Props) => {
   const intl = useIntl();
 
-  const { alleKodeverk } = usePanelContext();
+  const { alleKodeverk } = usePanelDataContext();
 
   const {
     begrunnelse,

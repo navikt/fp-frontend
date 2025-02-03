@@ -23,7 +23,7 @@ import { FodselSammenligningIndex } from '@navikt/fp-prosess-fakta-fodsel-sammen
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import { Aksjonspunkt, FamilieHendelse, FamilieHendelseSamling, KodeverkMedNavn, Soknad } from '@navikt/fp-types';
 import { VarselRevurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelContext } from '@navikt/fp-utils';
+import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import styles from './varselOmRevurderingForm.module.css';
 
@@ -80,7 +80,7 @@ export const VarselOmRevurderingForm = ({
   const intl = useIntl();
 
   const { isReadOnly, alleKodeverk, behandling, submitCallback, aksjonspunkterForPanel } =
-    usePanelContext<VarselRevurderingAp>();
+    usePanelDataContext<VarselRevurderingAp>();
 
   const initialValues = buildInitialValues(aksjonspunkterForPanel);
 

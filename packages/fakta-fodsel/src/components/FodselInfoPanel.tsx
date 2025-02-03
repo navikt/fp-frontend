@@ -10,7 +10,7 @@ import { AksjonspunktKode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
 import { FodselSammenligningIndex } from '@navikt/fp-prosess-fakta-fodsel-sammenligning';
 import { Aksjonspunkt, AvklartBarn, FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
 import { BekreftTerminbekreftelseAp, SjekkManglendeFodselAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelContext } from '@navikt/fp-utils';
+import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import SjekkFodselDokForm, { FormValues as SjekkFodselDokFormValues } from './SjekkFodselDokForm';
 import TermindatoFaktaForm, { FormValues as TermindatoFormValues } from './TermindatoFaktaForm';
@@ -98,7 +98,7 @@ export const FodselInfoPanel = ({
     harÅpneAksjonspunkter,
     alleMerknaderFraBeslutter,
     isReadOnly,
-  } = usePanelContext<AksjonspunktData>();
+  } = usePanelDataContext<AksjonspunktData>();
 
   const avklartBarn = familiehendelse?.register?.avklartBarn || EMPTY_ARRAY;
   const termindato = familiehendelse?.gjeldende?.termindato;

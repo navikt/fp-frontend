@@ -9,7 +9,7 @@ import {
   MottakerType,
   TilbakekrevingVidereBehandling,
 } from '@navikt/fp-kodeverk';
-import { PanelContextArgs, withFormData, withPanelContext } from '@navikt/fp-storybook-utils';
+import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, SimuleringResultat, TilbakekrevingValg } from '@navikt/fp-types';
 
 import { SimuleringProsessIndex } from './SimuleringProsessIndex';
@@ -119,14 +119,14 @@ const simuleringResultat = {
 const meta = {
   title: 'prosess/prosess-simulering',
   component: SimuleringProsessIndex,
-  decorators: [withFormData, withPanelContext],
+  decorators: [withFormData, withPanelData],
   args: {
     arbeidsgiverOpplysningerPerId,
     simuleringResultat,
     previewFptilbakeCallback: action('button-click') as (data: any) => Promise<void>,
   },
   render: args => <SimuleringProsessIndex {...args} />,
-} satisfies Meta<PanelContextArgs & ComponentProps<typeof SimuleringProsessIndex>>;
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof SimuleringProsessIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;

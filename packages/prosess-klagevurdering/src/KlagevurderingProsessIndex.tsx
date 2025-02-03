@@ -4,7 +4,7 @@ import { createIntl } from '@navikt/ft-utils';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { KlageVurdering } from '@navikt/fp-types';
-import { usePanelContext } from '@navikt/fp-utils';
+import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { BehandleKlageFormKa } from './components/ka/BehandleKlageFormKa';
 import { BehandleKlageFormNfp } from './components/nfp/BehandleKlageFormNfp';
@@ -28,7 +28,7 @@ export const KlagevurderingProsessIndex = ({
   previewCallback,
   readOnlySubmitButton,
 }: Props) => {
-  const { aksjonspunkterForPanel } = usePanelContext();
+  const { aksjonspunkterForPanel } = usePanelDataContext();
   return (
     <RawIntlProvider value={intl}>
       {klageVurdering.klageVurderingResultatNK && <BehandleKlageFormKa klageVurdering={klageVurdering} />}

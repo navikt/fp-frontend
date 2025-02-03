@@ -17,7 +17,7 @@ import {
 } from '@navikt/fp-kodeverk';
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
 import { Aksjonspunkt, Behandling, Behandlingsresultat } from '@navikt/fp-types';
-import { usePanelContext } from '@navikt/fp-utils';
+import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { ManueltVedtaksbrevPanel } from './ManueltVedtaksbrevPanel';
 import { VedtakHelpTextPanel } from './VedtakHelpTextPanel';
@@ -78,7 +78,7 @@ export const VedtakFellesPanel = ({
 }: Props) => {
   const intl = useIntl();
 
-  const { behandling, isReadOnly } = usePanelContext();
+  const { behandling, isReadOnly } = usePanelDataContext();
 
   const { aksjonspunkt } = behandling;
 

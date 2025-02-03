@@ -18,7 +18,7 @@ import {
   Ytelsefordeling,
 } from '@navikt/fp-types';
 import { UttakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelContext } from '@navikt/fp-utils';
+import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import UttakPeriodePanel from './periodeDetaljer/UttakPeriodePanel';
 import DisponibleStonadskontoerPanel from './stonadsdagerOversikt/DisponibleStonadskontoerPanel';
@@ -188,7 +188,7 @@ export const UttakProsessPanel = ({
   const intl = useIntl();
 
   const { fagsak, behandling, submitCallback, alleKodeverk, isReadOnly, aksjonspunkterForPanel } =
-    usePanelContext<UttakAp[]>();
+    usePanelDataContext<UttakAp[]>();
 
   const [erOverstyrt, setErOverstyrt] = useState(false);
   const [isDirty, setIsDirty] = useState(false);

@@ -12,7 +12,7 @@ import { AksjonspunktKode, DokumentMalType, InnsynResultatType, Kommunikasjonsre
 import { ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import { Aksjonspunkt, Dokument, InnsynDokument } from '@navikt/fp-types';
 import { ForeslaVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelContext } from '@navikt/fp-utils';
+import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { DocumentListVedtakInnsyn } from './DocumentListVedtakInnsyn';
 
@@ -113,7 +113,8 @@ export const InnsynVedtakForm = ({
 }: Props) => {
   const intl = useIntl();
 
-  const { fagsak, aksjonspunkterForPanel, submitCallback, isReadOnly, behandling } = usePanelContext<ForeslaVedtakAp>();
+  const { fagsak, aksjonspunkterForPanel, submitCallback, isReadOnly, behandling } =
+    usePanelDataContext<ForeslaVedtakAp>();
 
   const initialValues = buildInitialValues(innsynMottattDato, aksjonspunkterForPanel);
 

@@ -20,7 +20,7 @@ import {
   AvklarFaktaForForeldreansvarAksjonspunktAp,
   AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { usePanelContext } from '@navikt/fp-utils';
+import { usePanelDataContext } from '@navikt/fp-utils';
 
 import OmsorgOgForeldreansvarFaktaForm, { FormValues as OmsorgFormValues } from './OmsorgOgForeldreansvarFaktaForm';
 
@@ -98,7 +98,7 @@ export const OmsorgOgForeldreansvarInfoPanel = ({
     submitCallback,
     isReadOnly,
     alleKodeverk,
-  } = usePanelContext<
+  } = usePanelDataContext<
     AvklarFaktaForForeldreansvarAksjonspunktAp | AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp
   >();
 

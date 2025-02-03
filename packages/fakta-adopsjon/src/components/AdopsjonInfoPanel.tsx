@@ -20,7 +20,7 @@ import {
   BekreftEktefelleAksjonspunktAp,
   BekreftMannAdoptererAksjonspunktAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelContext } from '@navikt/fp-utils';
+import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import DokumentasjonFaktaForm, { FormValues as DokFormValues } from './DokumentasjonFaktaForm';
 import EktefelleFaktaForm, { FormValues as EktefelleFormValues } from './EktefelleFaktaForm';
@@ -123,7 +123,7 @@ export const AdopsjonInfoPanel = ({ submittable, isForeldrepengerFagsak, soknad,
     harÅpneAksjonspunkter,
     alleMerknaderFraBeslutter,
     isReadOnly,
-  } = usePanelContext<AksjonspunktData>();
+  } = usePanelDataContext<AksjonspunktData>();
 
   const { formData, setFormData } = useFormData<FormValues>();
 

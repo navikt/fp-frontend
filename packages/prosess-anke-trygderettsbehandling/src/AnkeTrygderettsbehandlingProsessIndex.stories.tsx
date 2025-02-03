@@ -3,7 +3,7 @@ import { ComponentProps } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AnkeOmgjorArsak, AnkeVurdering as ankeVurderingKodeverk, AnkeVurderingOmgjoer } from '@navikt/fp-kodeverk';
-import { PanelContextArgs, withPanelContext } from '@navikt/fp-storybook-utils';
+import { PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
 import { AnkeVurdering } from '@navikt/fp-types';
 
 import { AnkeTrygderettsbehandlingProsessIndex } from './AnkeTrygderettsbehandlingProsessIndex';
@@ -11,9 +11,9 @@ import { AnkeTrygderettsbehandlingProsessIndex } from './AnkeTrygderettsbehandli
 const meta = {
   title: 'prosess/anke/prosess-anke-trygderettsbehandling',
   component: AnkeTrygderettsbehandlingProsessIndex,
-  decorators: [withPanelContext],
+  decorators: [withPanelData],
   render: args => <AnkeTrygderettsbehandlingProsessIndex {...args} />,
-} satisfies Meta<PanelContextArgs & ComponentProps<typeof AnkeTrygderettsbehandlingProsessIndex>>;
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof AnkeTrygderettsbehandlingProsessIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;

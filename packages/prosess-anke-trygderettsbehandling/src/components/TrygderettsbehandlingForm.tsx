@@ -5,7 +5,7 @@ import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { AnkeVurdering as ankeVurderingType, AnkeVurderingOmgjoer, KodeverkType } from '@navikt/fp-kodeverk';
 import { AnkeVurdering } from '@navikt/fp-types';
-import { usePanelContext } from '@navikt/fp-utils';
+import { usePanelDataContext } from '@navikt/fp-utils';
 
 interface Props {
   ankeVurdering?: AnkeVurdering;
@@ -17,7 +17,7 @@ export const TrygderettsbehandlingForm = ({ ankeVurdering }: Props) => {
   const behandlesKabalTrygderett = ankeVurdering?.underBehandlingKabalTrygderett || false;
   const behandletKabal = ankeVurdering?.behandletAvKabal || false;
 
-  const { alleKodeverk } = usePanelContext();
+  const { alleKodeverk } = usePanelDataContext();
 
   const ankeOmgorArsaker = alleKodeverk[KodeverkType.ANKE_OMGJOER_AARSAK];
 

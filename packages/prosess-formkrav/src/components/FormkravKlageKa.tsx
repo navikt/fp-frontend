@@ -7,7 +7,7 @@ import moment from 'moment';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
 import { KlageVurdering } from '@navikt/fp-types';
-import { usePanelContext } from '@navikt/fp-utils';
+import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { AvsluttetBehandling } from '../types/avsluttetBehandlingTsType';
 
@@ -24,7 +24,7 @@ interface Props {
 export const FormkravKlageKa = ({ klageVurdering, avsluttedeBehandlinger }: Props) => {
   const intl = useIntl();
 
-  const { alleKodeverk } = usePanelContext();
+  const { alleKodeverk } = usePanelDataContext();
 
   const { klageFormkravResultatKA, underBehandlingKabal, behandletAvKabal } = klageVurdering;
 

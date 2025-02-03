@@ -3,7 +3,7 @@ import { ComponentProps } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, OpptjeningAktivitetType } from '@navikt/fp-kodeverk';
-import { PanelContextArgs, withFormData, withPanelContext } from '@navikt/fp-storybook-utils';
+import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import { Opptjening } from '@navikt/fp-types';
 
 import { OpptjeningFaktaIndex } from './OpptjeningFaktaIndex';
@@ -23,7 +23,7 @@ const arbeidsgiverOpplysningerPerId = {
 const meta = {
   title: 'fakta/fakta-opptjening',
   component: OpptjeningFaktaIndex,
-  decorators: [withFormData, withPanelContext],
+  decorators: [withFormData, withPanelData],
   args: {
     arbeidsgiverOpplysningerPerId,
     alleMerknaderFraBeslutter: {
@@ -31,7 +31,7 @@ const meta = {
     },
   },
   render: args => <OpptjeningFaktaIndex {...args} />,
-} satisfies Meta<PanelContextArgs & ComponentProps<typeof OpptjeningFaktaIndex>>;
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof OpptjeningFaktaIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;

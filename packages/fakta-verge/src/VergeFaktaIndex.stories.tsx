@@ -3,7 +3,7 @@ import { ComponentProps } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
-import { alleKodeverk, PanelContextArgs, withFormData, withPanelContext } from '@navikt/fp-storybook-utils';
+import { alleKodeverk, PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
 
 import { VergeFaktaIndex } from './VergeFaktaIndex';
 
@@ -29,7 +29,7 @@ const merknaderFraBeslutter = {
 const meta = {
   title: 'fakta/fakta-verge',
   component: VergeFaktaIndex,
-  decorators: [withFormData, withPanelContext],
+  decorators: [withFormData, withPanelData],
   args: {
     submittable: true,
     verge,
@@ -40,7 +40,7 @@ const meta = {
     },
   },
   render: args => <VergeFaktaIndex {...args} />,
-} satisfies Meta<PanelContextArgs & ComponentProps<typeof VergeFaktaIndex>>;
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof VergeFaktaIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;

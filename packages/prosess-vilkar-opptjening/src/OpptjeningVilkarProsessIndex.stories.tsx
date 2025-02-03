@@ -3,7 +3,7 @@ import { ComponentProps } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, VilkarUtfallType } from '@navikt/fp-kodeverk';
-import { PanelContextArgs, withFormData, withPanelContext } from '@navikt/fp-storybook-utils';
+import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, Opptjening } from '@navikt/fp-types';
 
 import opptjeningAktivitetKlassifisering from './kodeverk/opptjeningAktivitetKlassifisering';
@@ -35,7 +35,7 @@ const defaultOpptjening = {
 const meta = {
   title: 'prosess/prosess-vilkar-opptjening',
   component: OpptjeningVilkarProsessIndex,
-  decorators: [withFormData, withPanelContext],
+  decorators: [withFormData, withPanelData],
   args: {
     readOnlySubmitButton: false,
     status: VilkarUtfallType.IKKE_VURDERT,
@@ -43,7 +43,7 @@ const meta = {
     erSvpFagsak: false,
   },
   render: args => <OpptjeningVilkarProsessIndex {...args} />,
-} satisfies Meta<PanelContextArgs & ComponentProps<typeof OpptjeningVilkarProsessIndex>>;
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof OpptjeningVilkarProsessIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;

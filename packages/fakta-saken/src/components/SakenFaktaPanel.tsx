@@ -11,7 +11,7 @@ import {
   OverstyringAvklarStartdatoForPeriodenAp,
   OverstyringDekningsgradAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { usePanelContext } from '@navikt/fp-utils';
+import { usePanelDataContext } from '@navikt/fp-utils';
 
 import DekningradApForm from './dekningsgrad/DekningradApForm';
 import DekningradForm from './dekningsgrad/DekningradForm';
@@ -36,7 +36,7 @@ export const SakenFaktaPanel = ({ soknad, dokStatus, submittable, kanOverstyreAc
     harÅpneAksjonspunkter,
     fagsak,
     isReadOnly,
-  } = usePanelContext<
+  } = usePanelDataContext<
     MerkOpptjeningUtlandAp | OverstyringAvklarStartdatoForPeriodenAp | OverstyringDekningsgradAp | AvklarDekningsgradAp
   >();
 

@@ -10,7 +10,7 @@ import {
   NavBrukerKjonn,
   UtsettelseArsakCode,
 } from '@navikt/fp-kodeverk';
-import { PanelContextArgs, withFormData, withPanelContext } from '@navikt/fp-storybook-utils';
+import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import { Behandling, FamilieHendelseSamling, Personoversikt, Soknad, UttakStonadskontoer } from '@navikt/fp-types';
 
 import { UttakProsessIndex } from './UttakProsessIndex';
@@ -170,7 +170,7 @@ const arbeidsgiverOpplysningerPerId = {
 const meta = {
   title: 'prosess/prosess-uttak',
   component: UttakProsessIndex,
-  decorators: [withFormData, withPanelContext],
+  decorators: [withFormData, withPanelData],
   args: {
     behandling,
     uttakStonadskontoer,
@@ -190,7 +190,7 @@ const meta = {
     arbeidsgiverOpplysningerPerId,
   },
   render: args => <UttakProsessIndex {...args} />,
-} satisfies Meta<PanelContextArgs & ComponentProps<typeof UttakProsessIndex>>;
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof UttakProsessIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;

@@ -3,7 +3,7 @@ import { ComponentProps } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, SoknadType } from '@navikt/fp-kodeverk';
-import { PanelContextArgs, withFormData, withPanelContext } from '@navikt/fp-storybook-utils';
+import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import { FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
 
 import { FodselFaktaIndex } from './FodselFaktaIndex';
@@ -75,7 +75,7 @@ const merknaderFraBeslutter = {
 const meta = {
   title: 'fakta/fakta-fodsel',
   component: FodselFaktaIndex,
-  decorators: [withFormData, withPanelContext],
+  decorators: [withFormData, withPanelData],
   args: {
     submittable: true,
     soknad,
@@ -84,7 +84,7 @@ const meta = {
     familiehendelseOriginalBehandling,
   },
   render: args => <FodselFaktaIndex {...args} />,
-} satisfies Meta<PanelContextArgs & ComponentProps<typeof FodselFaktaIndex>>;
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof FodselFaktaIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;

@@ -9,7 +9,7 @@ import {
   BehandlingResultatType,
   KlageVurdering as klageVurderingCodes,
 } from '@navikt/fp-kodeverk';
-import { PanelContextArgs, withPanelContext } from '@navikt/fp-storybook-utils';
+import { PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, Behandling, KlageVurdering, KlageVurderingResultat } from '@navikt/fp-types';
 
 import { VedtakKlageProsessIndex } from './VedtakKlageProsessIndex';
@@ -34,14 +34,14 @@ const aksjonspunkterForPanel = [
 const meta = {
   title: 'prosess/klage/prosess-vedtak-klage',
   component: VedtakKlageProsessIndex,
-  decorators: [withPanelContext],
+  decorators: [withPanelData],
   args: {
     previewVedtakCallback: action('button-click') as () => Promise<any>,
     behandling,
     aksjonspunkterForPanel,
   },
   render: args => <VedtakKlageProsessIndex {...args} />,
-} satisfies Meta<PanelContextArgs & ComponentProps<typeof VedtakKlageProsessIndex>>;
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof VedtakKlageProsessIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;

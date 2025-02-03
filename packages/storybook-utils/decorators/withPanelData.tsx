@@ -10,11 +10,11 @@ import {
   RelasjonsRolleType,
 } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Behandling, Fagsak } from '@navikt/fp-types';
-import { PanelProvider } from '@navikt/fp-utils';
+import { PanelDataProvider } from '@navikt/fp-utils';
 
 import alleKodeverk from '../mocks/alleKodeverk.json';
 
-export type PanelContextArgs = {
+export type PanelDataArgs = {
   fagsak?: Fagsak;
   behandling?: Behandling;
   aksjonspunkterForPanel?: Aksjonspunkt[];
@@ -53,14 +53,14 @@ const DEFAULT_FAGSAK = {
 
 const DEFAULT_AKSJONSPUNKTER = [] as Aksjonspunkt[];
 
-export const withPanelContext: DecoratorFunction<ReactRenderer> = (Story, context) => {
+export const withPanelData: DecoratorFunction<ReactRenderer> = (Story, context) => {
   const { fagsak, behandling, aksjonspunkterForPanel, isReadOnly, submitCallback, alleMerknaderFraBeslutter } =
-    context.args as PanelContextArgs;
+    context.args as PanelDataArgs;
 
   const aksjonspunkter = aksjonspunkterForPanel ?? DEFAULT_AKSJONSPUNKTER;
 
   return (
-    <PanelProvider
+    <PanelDataProvider
       fagsak={fagsak ?? DEFAULT_FAGSAK}
       behandling={behandling ?? DEFAULT_BEHANDLING}
       aksjonspunkterForPanel={aksjonspunkter}
@@ -71,6 +71,6 @@ export const withPanelContext: DecoratorFunction<ReactRenderer> = (Story, contex
       submitCallback={submitCallback ?? promiseAction()}
     >
       <Story />
-    </PanelProvider>
+    </PanelDataProvider>
   );
 };

@@ -4,10 +4,10 @@ import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import {
-  PanelContextArgs,
+  PanelDataArgs,
   PanelOverstyringContextArgs,
   withFormData,
-  withPanelContext,
+  withPanelData,
   withPanelOverstyring,
 } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt } from '@navikt/fp-types';
@@ -31,15 +31,13 @@ const defaultAksjonspunkter = [
 const meta = {
   title: 'prosess/prosess-beregningsresultat',
   component: BeregningsresultatProsessIndex,
-  decorators: [withFormData, withPanelContext, withPanelOverstyring],
+  decorators: [withFormData, withPanelData, withPanelOverstyring],
   args: {
     beregningresultatEngangsstonad: beregningsresultat,
     overstyringApKode: AksjonspunktKode.OVERSTYR_BEREGNING,
   },
   render: args => <BeregningsresultatProsessIndex {...args} />,
-} satisfies Meta<
-  PanelContextArgs & PanelOverstyringContextArgs & ComponentProps<typeof BeregningsresultatProsessIndex>
->;
+} satisfies Meta<PanelDataArgs & PanelOverstyringContextArgs & ComponentProps<typeof BeregningsresultatProsessIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;

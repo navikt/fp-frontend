@@ -3,7 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
 
 import { KlageVurdering } from '@navikt/fp-types';
-import { usePanelContext } from '@navikt/fp-utils';
+import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { ForhandsvisData, VedtakKlageForm } from './components/VedtakKlageForm';
 
@@ -17,7 +17,7 @@ interface Props {
 }
 
 export const VedtakKlageProsessIndex = ({ klageVurdering, previewVedtakCallback }: Props) => {
-  const { behandling } = usePanelContext();
+  const { behandling } = usePanelDataContext();
 
   if (!behandling.behandlingsresultat) {
     throw new Error(`behandlingsresultat finnes ikke for behandling ${behandling.uuid}`);

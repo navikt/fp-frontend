@@ -1,5 +1,5 @@
 import { FastsattOpptjening } from '@navikt/fp-types';
-import { usePanelContext } from '@navikt/fp-utils';
+import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { OpptjeningVilkarAksjonspunktPanel } from './OpptjeningVilkarAksjonspunktPanel';
 import OpptjeningVilkarView from './OpptjeningVilkarView';
@@ -24,7 +24,7 @@ export const OpptjeningVilkarForm = ({
   readOnlySubmitButton,
   erSvpFagsak,
 }: Props) => {
-  const { aksjonspunkterForPanel } = usePanelContext();
+  const { aksjonspunkterForPanel } = usePanelDataContext();
 
   if (aksjonspunkterForPanel.length > 0) {
     return (

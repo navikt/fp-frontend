@@ -10,7 +10,7 @@ import { AksjonspunktKode, KlageVurdering as klageVurderingType, KodeverkType } 
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import { KlageVurdering, KlageVurderingResultat, KodeverkMedNavn } from '@navikt/fp-types';
 import { KlageVurderingResultatAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelContext } from '@navikt/fp-utils';
+import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import KlageFormType from '../../types/klageFormType';
 import BekreftOgSubmitKlageModal from './BekreftOgSubmitKlageModal';
@@ -73,7 +73,7 @@ export const BehandleKlageFormNfp = ({
   readOnlySubmitButton,
   alleAktuelleHjemler,
 }: Props) => {
-  const { behandling, alleKodeverk, submitCallback, isReadOnly } = usePanelContext<KlageVurderingResultatAp>();
+  const { behandling, alleKodeverk, submitCallback, isReadOnly } = usePanelDataContext<KlageVurderingResultatAp>();
 
   const hjemmlerMedNavn = lagHjemlerMedNavn(
     alleKodeverk[KodeverkType.KLAGE_HJEMMEL],

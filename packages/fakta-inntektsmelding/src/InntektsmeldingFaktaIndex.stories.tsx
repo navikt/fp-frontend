@@ -3,7 +3,7 @@ import { ComponentProps } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { InntektsmeldingFaktaIndex } from '@navikt/fp-fakta-inntektsmelding';
-import { PanelContextArgs, withPanelContext } from '@navikt/fp-storybook-utils';
+import { PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
 import { ArbeidsgiverOpplysninger, Behandling, BehandlingAppKontekst } from '@navikt/fp-types';
 
 import '@navikt/ds-css';
@@ -31,9 +31,9 @@ const inntektsmeldingmal = {
 const meta = {
   title: 'fakta/fakta-inntektsmelding',
   component: InntektsmeldingFaktaIndex,
-  decorators: [withPanelContext],
+  decorators: [withPanelData],
   render: args => <InntektsmeldingFaktaIndex {...args} />,
-} satisfies Meta<PanelContextArgs & ComponentProps<typeof InntektsmeldingFaktaIndex>>;
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof InntektsmeldingFaktaIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
