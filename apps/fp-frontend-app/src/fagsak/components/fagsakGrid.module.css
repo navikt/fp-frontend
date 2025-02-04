@@ -8,6 +8,19 @@
   overflow: hidden;
 }
 
+.leftColumnContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.leftColumnVisittContent {
+  flex: 98%;
+}
+
+.leftColumnSideMenyKnapp {
+  flex: 2%;
+}
+
 .rightColumn {
   width: 45rem;
 }

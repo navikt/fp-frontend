@@ -17,6 +17,7 @@ interface Props {
   fagsakStatus: KodeverkMedNavn;
   dekningsgrad?: number;
   fagsakMarkeringTekster?: string[];
+  toggleSideMeny: () => void;
 }
 
 export const FagsakProfilSakIndex = (props: Props) => (

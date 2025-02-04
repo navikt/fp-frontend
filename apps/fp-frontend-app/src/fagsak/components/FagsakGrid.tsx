@@ -1,6 +1,8 @@
 import React, { ReactNode } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
+import { SidePanelKnapp } from './SidePanelKnapp';
+
 import styles from './fagsakGrid.module.css';
 
 interface Props {
@@ -8,6 +10,8 @@ interface Props {
   profileAndNavigationContent: ReactNode;
   supportContent: ReactNode;
   visittkortContent: () => ReactNode;
+  visSideMeny: boolean;
+  toggleSideMeny: () => void;
 }
 
 /**
@@ -20,21 +24,43 @@ export const FagsakGrid = ({
   profileAndNavigationContent,
   supportContent,
   visittkortContent,
+  visSideMeny,
+  toggleSideMeny,
 }: Props) => {
   const isSmallScreen = useMediaQuery({ maxWidth: 1701 });
   const isBigScreen = useMediaQuery({ minWidth: 1702 });
   return (
     <>
-      {isSmallScreen && visittkortContent()}
+      {isSmallScreen && (
+        <div className={styles.leftColumnContainer}>
+          <div className={styles.leftColumnVisittContent}>{visittkortContent()}</div>
+          {!visSideMeny && (
+            <div className={styles.leftColumnSideMenyKnapp}>
+              <SidePanelKnapp toggleSideMeny={toggleSideMeny} style={{ marginTop: '18px' }} />
+            </div>
+          )}
+        </div>
+      )}
       <div className={styles.gridContainer}>
         <div className={styles.leftColumn}>
-          {isBigScreen && visittkortContent()}
+          {isBigScreen && (
+            <div className={styles.leftColumnContainer}>
+              <div className={styles.leftColumnVisittContent}>{visittkortContent()}</div>
+              {!visSideMeny && (
+                <div className={styles.leftColumnSideMenyKnapp}>
+                  <SidePanelKnapp toggleSideMeny={toggleSideMeny} style={{ marginTop: '18px' }} />
+                </div>
+              )}
+            </div>
+          )}
           {behandlingContent}
         </div>
-        <div className={styles.rightColumn}>
-          <div>{profileAndNavigationContent}</div>
-          <div>{supportContent}</div>
-        </div>
+        {visSideMeny && (
+          <div className={styles.rightColumn}>
+            <div>{profileAndNavigationContent}</div>
+            <div>{supportContent}</div>
+          </div>
+        )}
       </div>
     </>
   );

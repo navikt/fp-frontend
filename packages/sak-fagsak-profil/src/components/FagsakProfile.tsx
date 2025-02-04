@@ -3,6 +3,7 @@ import { useIntl } from 'react-intl';
 
 import { BodyShort, Heading, HStack, Tag, Tooltip, VStack } from '@navikt/ds-react';
 
+import { SidePanelKnapp } from '@navikt/fp-frontend-app/src/fagsak/components/SidePanelKnapp';
 import { FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { KodeverkMedNavn } from '@navikt/fp-types';
 
@@ -19,6 +20,7 @@ interface Props {
   fagsakStatus: KodeverkMedNavn;
   dekningsgrad?: number;
   fagsakMarkeringTekster?: string[];
+  toggleSideMeny: () => void;
 }
 
 /**
@@ -32,11 +34,14 @@ export const FagsakProfile = ({
   fagsakStatus,
   dekningsgrad,
   fagsakMarkeringTekster,
+  toggleSideMeny,
 }: Props) => {
   const intl = useIntl();
+
   return (
     <VStack gap="4">
       <HStack gap="4">
+        <SidePanelKnapp toggleSideMeny={toggleSideMeny} />
         <Heading size="medium">{fagsakYtelseType.navn}</Heading>
         {visSakDekningsgrad(fagsakYtelseType.kode, dekningsgrad) && (
           <Tooltip

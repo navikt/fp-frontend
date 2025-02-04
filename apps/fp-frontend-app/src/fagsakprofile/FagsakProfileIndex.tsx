@@ -49,6 +49,7 @@ interface Props {
   behandling?: Behandling;
   setBehandling: (behandling: Behandling | undefined) => void;
   hentOgSettBehandling: () => void;
+  toggleSideMeny: () => void;
 }
 
 export const FagsakProfileIndex = ({
@@ -57,6 +58,7 @@ export const FagsakProfileIndex = ({
   behandling,
   setBehandling,
   hentOgSettBehandling,
+  toggleSideMeny
 }: Props) => {
   const intl = useIntl();
   const [showAll, setShowAll] = useState(!behandlingUuid);
@@ -108,6 +110,7 @@ export const FagsakProfileIndex = ({
                   fagsakStatus={fagsakStatusMedNavn}
                   dekningsgrad={fagsak.dekningsgrad}
                   fagsakMarkeringTekster={finnFagsakMarkeringTekst(fagsak)}
+                  toggleSideMeny={toggleSideMeny}
                 />
               </div>
               <ErrorBoundary
