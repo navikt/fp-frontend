@@ -1,3 +1,5 @@
+import { Context as ResponsiveContext } from 'react-responsive';
+
 import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
 import { applyRequestHandlers } from 'msw-storybook-addon';
@@ -26,5 +28,18 @@ describe('FagsakIndex', () => {
     expect(screen.getAllByText('Historikk')).toHaveLength(2);
 
     expect(screen.getByText('Venter…')).toBeInTheDocument();
+  });
+
+  it('skal vise fagsak-dele', async () => {
+    await applyRequestHandlers(Default.parameters.msw);
+    render(
+      <ResponsiveContext.Provider value={{ width: 300 }}>
+        <Default />
+      </ResponsiveContext.Provider>,
+    );
+    expect(await screen.findByText('Foreldrepenger')).toBeInTheDocument();
+    expect(await screen.findByText('352018689 - Under behandling')).toBeInTheDocument();
+
+    expect(screen.queryByLabelText('Skjul sidepanel')).not.toBeInTheDocument();
   });
 });

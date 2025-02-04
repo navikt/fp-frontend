@@ -16,7 +16,7 @@ export const SidePanelKnapp = ({ toggleSideMeny, visSideMeny, style }: Props) =>
     <div className={styles.sidePanelKnapp}>
       <Button
         icon={<SidebarRightIcon fontSize="1.7rem" aria-hidden />}
-        title={visSideMeny ? 'Skjul sidepanel' : 'Vis sidepanel'}
+        aria-label={visSideMeny ? 'Skjul sidepanel' : 'Vis sidepanel'}
         variant="tertiary-neutral"
         size="small"
         onClick={toggleSideMeny}
