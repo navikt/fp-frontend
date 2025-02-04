@@ -55,12 +55,10 @@ export const FagsakGrid = ({
           )}
           {behandlingContent}
         </div>
-        {visSideMeny && (
-          <div className={styles.rightColumn}>
+          <div className={`${styles.rightColumn} ${visSideMeny ? styles.show : styles.hide}`}>
             <div>{profileAndNavigationContent}</div>
             <div>{supportContent}</div>
           </div>
-        )}
       </div>
     </>
   );

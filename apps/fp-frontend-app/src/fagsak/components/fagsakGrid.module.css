@@ -1,6 +1,7 @@
 .gridContainer {
   display: flex;
   flex-flow: row nowrap;
+  overflow: hidden;
 }
 
 .leftColumn {
@@ -23,7 +24,20 @@
 
 .rightColumn {
   width: 45rem;
+  opacity: 1;
+  transition: opacity 0.3s cubic-bezier(0.55, 0.06, 0.68, 0.19), width 0.3s ease;
 }
+
+.rightColumn.hide {
+  width: 0;
+  visibility: hidden;
+  opacity: 0;
+}
+.rightColumn.show {
+  width: 45rem;
+  opacity: 1;
+}
+
 
 @media all and (max-width: 1569px) {
   .rightColumn {
