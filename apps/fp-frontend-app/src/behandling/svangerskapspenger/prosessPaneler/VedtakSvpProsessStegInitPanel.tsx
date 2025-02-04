@@ -37,24 +37,17 @@ const IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER = [
 
 const AKSJONSPUNKT_KODER = [...IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER, AksjonspunktKode.FORESLA_VEDTAK];
 
-interface Props {
-  toggleOppdatereFagsakContext: (skalHenteFagsak: boolean) => void;
-}
-
-export const VedtakSvpProsessStegInitPanel = ({
-  toggleOppdatereFagsakContext,
-  ...props
-}: Props & ProsessPanelInitProps) => {
+export const VedtakSvpProsessStegInitPanel = (props: ProsessPanelInitProps) => {
   const intl = useIntl();
 
-  const { behandling, fagsak } = use(BehandlingDataContext);
+  const { behandling, fagsak, setSkalOppdatereEtterBekreftelseAvAp } = use(BehandlingDataContext);
 
   const [visIverksetterVedtakModal, toggleIverksetterVedtakModal] = useState(false);
   const [visFatterVedtakModal, toggleFatterVedtakModal] = useState(false);
   const lagringSideEffekter = getLagringSideeffekter(
     toggleIverksetterVedtakModal,
     toggleFatterVedtakModal,
-    toggleOppdatereFagsakContext,
+    setSkalOppdatereEtterBekreftelseAvAp,
   );
 
   const navigate = useNavigate();

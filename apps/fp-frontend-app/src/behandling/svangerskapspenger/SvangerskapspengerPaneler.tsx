@@ -27,18 +27,11 @@ import { VedtakSvpProsessStegInitPanel } from './prosessPaneler/VedtakSvpProsess
 interface Props {
   valgtProsessSteg?: string;
   valgtFaktaSteg?: string;
-  toggleOppdateringAvFagsakOgBehandling: (skalHenteFagsak: boolean) => void;
   arbeidsgivere: ArbeidsgiverOpplysningerPerId;
   personoversikt: Personoversikt;
 }
 
-const SvangerskapspengerPaneler = ({
-  valgtProsessSteg,
-  valgtFaktaSteg,
-  toggleOppdateringAvFagsakOgBehandling,
-  arbeidsgivere,
-  personoversikt,
-}: Props) => {
+const SvangerskapspengerPaneler = ({ valgtProsessSteg, valgtFaktaSteg, arbeidsgivere, personoversikt }: Props) => {
   const hentProsessPaneler = (props: ProsessPanelInitProps, ekstraProps: ProsessPanelExtraInitProps) => (
     <>
       <OpplysningspliktProsessStegInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
@@ -56,7 +49,7 @@ const SvangerskapspengerPaneler = ({
         menyData={ekstraProps.allMenyData}
         arbeidsgiverOpplysningerPerId={arbeidsgivere}
       />
-      <VedtakSvpProsessStegInitPanel {...props} toggleOppdatereFagsakContext={toggleOppdateringAvFagsakOgBehandling} />
+      <VedtakSvpProsessStegInitPanel {...props} />
     </>
   );
 
