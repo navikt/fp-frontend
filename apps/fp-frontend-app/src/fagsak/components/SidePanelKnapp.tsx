@@ -7,20 +7,21 @@ import styles from './fagsakGrid.module.css';
 
 interface Props {
   toggleSideMeny: () => void;
+  visSideMeny: boolean;
   style?: React.CSSProperties;
 }
 
-export const SidePanelKnapp = ({ toggleSideMeny, style }: Props) => {
+export const SidePanelKnapp = ({ toggleSideMeny, visSideMeny, style }: Props) => {
   return (
     <div className={styles.sidePanelKnapp}>
-       <Button
-         icon={<SidebarRightIcon title="Toogle visning av sidepanel" fontSize="1.7rem" aria-hidden />}
-         title="vis/skjul sidepanel"
-         variant="tertiary-neutral"
-         size="small"
-         onClick={toggleSideMeny}
-         style={style}
-       />
+      <Button
+        icon={<SidebarRightIcon fontSize="1.7rem" aria-hidden />}
+        title={visSideMeny ? 'Skjul sidepanel' : 'Vis sidepanel'}
+        variant="tertiary-neutral"
+        size="small"
+        onClick={toggleSideMeny}
+        style={style}
+      />
     </div>
   );
 };

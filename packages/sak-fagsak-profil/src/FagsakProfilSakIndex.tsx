@@ -18,6 +18,7 @@ interface Props {
   dekningsgrad?: number;
   fagsakMarkeringTekster?: string[];
   toggleSideMeny: () => void;
+  visSideMeny: boolean;
 }
 
 export const FagsakProfilSakIndex = (props: Props) => (

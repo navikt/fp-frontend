@@ -115,6 +115,7 @@ export const FagsakIndex = () => {
             setBehandling={setBehandling}
             hentOgSettBehandling={hentOgSettBehandling}
             behandling={behandling}
+            visSideMeny={visSideMeny}
             toggleSideMeny={toggleSideMeny}
           />
         }

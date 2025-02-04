@@ -21,6 +21,7 @@ interface Props {
   dekningsgrad?: number;
   fagsakMarkeringTekster?: string[];
   toggleSideMeny: () => void;
+  visSideMeny: boolean;
 }
 
 /**
@@ -35,13 +36,14 @@ export const FagsakProfile = ({
   dekningsgrad,
   fagsakMarkeringTekster,
   toggleSideMeny,
+  visSideMeny
 }: Props) => {
   const intl = useIntl();
 
   return (
     <VStack gap="4">
       <HStack gap="4">
-        <SidePanelKnapp toggleSideMeny={toggleSideMeny} />
+        <SidePanelKnapp toggleSideMeny={toggleSideMeny} visSideMeny={visSideMeny}/>
         <Heading size="medium">{fagsakYtelseType.navn}</Heading>
         {visSakDekningsgrad(fagsakYtelseType.kode, dekningsgrad) && (
           <Tooltip

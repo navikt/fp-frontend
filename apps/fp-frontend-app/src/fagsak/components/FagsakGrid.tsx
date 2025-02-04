@@ -28,7 +28,6 @@ export const FagsakGrid = ({
   toggleSideMeny,
 }: Props) => {
   const isSmallScreen = useMediaQuery({ maxWidth: 1701 });
-  const isBigScreen = useMediaQuery({ minWidth: 1702 });
   return (
     <>
       {isSmallScreen && (
@@ -36,19 +35,19 @@ export const FagsakGrid = ({
           <div className={styles.leftColumnVisittContent}>{visittkortContent()}</div>
           {!visSideMeny && (
             <div className={styles.leftColumnSideMenyKnapp}>
-              <SidePanelKnapp toggleSideMeny={toggleSideMeny} style={{ marginTop: '18px' }} />
+              <SidePanelKnapp toggleSideMeny={toggleSideMeny} visSideMeny={visSideMeny} style={{ marginTop: '18px' }} />
             </div>
           )}
         </div>
       )}
       <div className={styles.gridContainer}>
         <div className={styles.leftColumn}>
-          {isBigScreen && (
+          {!isSmallScreen && (
             <div className={styles.leftColumnContainer}>
               <div className={styles.leftColumnVisittContent}>{visittkortContent()}</div>
               {!visSideMeny && (
                 <div className={styles.leftColumnSideMenyKnapp}>
-                  <SidePanelKnapp toggleSideMeny={toggleSideMeny} style={{ marginTop: '18px' }} />
+                  <SidePanelKnapp toggleSideMeny={toggleSideMeny} visSideMeny={visSideMeny} style={{ marginTop: '18px' }} />
                 </div>
               )}
             </div>
