@@ -38,6 +38,11 @@
   opacity: 1;
 }
 
+@media all and (max-width: 1409px) {
+  .sidePanelKnapp {
+    display: none;
+  }
+}
 
 @media all and (max-width: 1569px) {
   .rightColumn {
