@@ -186,12 +186,11 @@ export const Messages = ({
         )}
         {brukerManglerAdresse && <UkjentAdresseMeldingIndex />}
         <HStack justify="space-between">
-          {!erVarselOmRevurdering ||
-            (erVarselOmRevurdering && arsakskode !== undefined && (
-              <Link href="#" onClick={previewMessage} onKeyDown={e => (e.key === 'Enter' ? previewMessage(e) : null)}>
-                <FormattedMessage id="Messages.Preview" />
-              </Link>
-            ))}
+          {(!erVarselOmRevurdering || (erVarselOmRevurdering && arsakskode !== undefined)) && (
+            <Link href="#" onClick={previewMessage} onKeyDown={e => (e.key === 'Enter' ? previewMessage(e) : null)}>
+              <FormattedMessage id="Messages.Preview" />
+            </Link>
+          )}
           <Button
             size="small"
             variant="primary"
