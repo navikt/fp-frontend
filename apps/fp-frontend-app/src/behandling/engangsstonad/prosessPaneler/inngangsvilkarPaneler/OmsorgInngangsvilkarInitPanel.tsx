@@ -1,13 +1,13 @@
-import React, { use } from 'react';
-import { IntlShape, useIntl } from 'react-intl';
+import { use } from 'react';
+import { type IntlShape, useIntl } from 'react-intl';
 
 import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import { OmsorgVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-omsorg';
-import { Aksjonspunkt } from '@navikt/fp-types';
+import type { Aksjonspunkt } from '@navikt/fp-types';
 
 import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandardProsessPanelProps';
-import { InngangsvilkarPanelInitProps } from '../../../felles/typer/inngangsvilkarPanelInitProps';
+import type { InngangsvilkarPanelInitProps } from '../../../felles/typer/inngangsvilkarPanelInitProps';
 import { BehandlingDataContext } from '../../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_TEKST_PER_KODE = {

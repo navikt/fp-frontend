@@ -1,6 +1,6 @@
-import { createContext, ReactElement, useContext, useMemo, useState } from 'react';
+import { createContext, type ReactElement, useContext, useMemo, useState } from 'react';
 
-import { OverstyringAksjonspunkter } from '@navikt/fp-kodeverk';
+import { type OverstyringAksjonspunkter } from '@navikt/fp-kodeverk';
 
 type Props = {
   overrideReadOnly: boolean;

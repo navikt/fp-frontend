@@ -1,14 +1,13 @@
-import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Label, VStack } from '@navikt/ds-react';
 import { CheckboxPanel, Datepicker, InputField, TextAreaField } from '@navikt/ft-form-hooks';
-import { hasValidDate, hasValidInteger, hasValidText,required } from '@navikt/ft-form-validators';
+import { hasValidDate, hasValidInteger, hasValidText, required } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
 import { TrueFalseInput } from '../../felles/TrueFalseInput';
 import { VIRKSOMHET_FORM_NAME_PREFIX } from '../constants';
-import { StartedEndretFormValues } from '../types';
+import type { StartedEndretFormValues } from '../types';
 
 import styles from './virksomhetStartetEndretPanel.module.css';
 

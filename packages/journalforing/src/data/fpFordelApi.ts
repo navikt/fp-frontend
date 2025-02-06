@@ -1,13 +1,13 @@
 import { queryOptions } from '@tanstack/react-query';
 import ky from 'ky';
 
-import { JournalførSubmitValue } from '../typer/ferdigstillJournalføringSubmit';
-import { ForhåndsvisBrukerRespons } from '../typer/forhåndsvisBrukerResponsTsType';
-import { Journalpost } from '../typer/journalpostTsType';
-import { OppdaterMedBruker } from '../typer/oppdaterBrukerTsType';
-import { Oppgave } from '../typer/oppgaveTsType';
-import { ReserverOppgaveType } from '../typer/reserverOppgaveType';
-import { SaksnummerType } from '../typer/saksnummerTsType';
+import type { JournalførSubmitValue } from '../typer/ferdigstillJournalføringSubmit';
+import type { ForhåndsvisBrukerRespons } from '../typer/forhåndsvisBrukerResponsTsType';
+import type { Journalpost } from '../typer/journalpostTsType';
+import type { OppdaterMedBruker } from '../typer/oppdaterBrukerTsType';
+import type { Oppgave } from '../typer/oppgaveTsType';
+import type { ReserverOppgaveType } from '../typer/reserverOppgaveType';
+import type { SaksnummerType } from '../typer/saksnummerTsType';
 
 const kyExtended = ky.extend({
   hooks: {

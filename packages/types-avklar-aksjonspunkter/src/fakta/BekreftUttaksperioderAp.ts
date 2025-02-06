@@ -1,9 +1,9 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { KontrollerFaktaPeriode } from '@navikt/fp-types';
+import type { KontrollerFaktaPeriode } from '@navikt/fp-types';
 
-import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
+import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 
-type BekreftUttaksperioderAp = {
+export type BekreftUttaksperioderAp = {
   perioder: KontrollerFaktaPeriode[];
 } & AksjonspunktTilBekreftelse<
   | AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE
@@ -12,5 +12,3 @@ type BekreftUttaksperioderAp = {
   | AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE
   | AksjonspunktKode.OVERSTYR_FAKTA_UTTAK
 >;
-
-export default BekreftUttaksperioderAp;

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { ChevronDownIcon, ChevronUpIcon } from '@navikt/aksel-icons';
@@ -7,7 +7,7 @@ import { FlexColumn, FlexContainer, FlexRow, FloatRight } from '@navikt/ft-ui-ko
 import { formatCurrencyNoKr, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { Inntektspost } from '@navikt/fp-types';
+import type { Inntektspost } from '@navikt/fp-types';
 
 import styles from './inntektsposterPanel.module.css';
 
@@ -37,12 +37,12 @@ const behandleInntektsposter = (
   return poster;
 };
 
-interface OwnProps {
+interface Props {
   inntektsposter: Inntektspost[];
   skjæringstidspunkt: string;
 }
 
-const InntektsposterPanel: FunctionComponent<OwnProps> = ({ inntektsposter, skjæringstidspunkt }) => {
+export const InntektsposterPanel = ({ inntektsposter, skjæringstidspunkt }: Props) => {
   const [visAlleMåneder, toggleMånedvisning] = useState(false);
 
   const sorterteInntektsposter = useMemo(
@@ -104,5 +104,3 @@ const InntektsposterPanel: FunctionComponent<OwnProps> = ({ inntektsposter, skj�
     </>
   );
 };
-
-export default InntektsposterPanel;

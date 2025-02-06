@@ -8,7 +8,7 @@ const { Default, TomOppgaveTabell } = composeStories(stories);
 
 describe('<OppgaverTabell>', () => {
   it('skal vise tabell med behandlinger', async () => {
-    await applyRequestHandlers(Default.parameters.msw);
+    await applyRequestHandlers(Default.parameters['msw']);
     await Default.run();
 
     expect(await screen.findByText('Neste i køen')).toBeInTheDocument();
@@ -20,7 +20,7 @@ describe('<OppgaverTabell>', () => {
   });
 
   it('skal vise tom tabell når det ikke er behandlinger for køen', async () => {
-    await applyRequestHandlers(TomOppgaveTabell.parameters.msw);
+    await applyRequestHandlers(TomOppgaveTabell.parameters['msw']);
     await TomOppgaveTabell.run();
     expect(await screen.findByText('Neste i køen')).toBeInTheDocument();
     expect(await screen.findByText('0 reservert på deg, 0 i køen totalt')).toBeInTheDocument();

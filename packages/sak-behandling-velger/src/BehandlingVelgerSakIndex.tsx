@@ -1,10 +1,10 @@
-import React, { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
-import { BehandlingAppKontekst, KodeverkMedNavn } from '@navikt/fp-types';
+import type { BehandlingAppKontekst, KodeverkMedNavn } from '@navikt/fp-types';
 
 import { BehandlingerListe } from './components/BehandlingerListe';
 

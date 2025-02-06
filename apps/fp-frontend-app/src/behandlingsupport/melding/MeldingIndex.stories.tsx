@@ -1,6 +1,6 @@
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { action } from '@storybook/addon-actions';
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 
@@ -12,10 +12,11 @@ import {
   withQueryClient,
   withRouter,
 } from '@navikt/fp-storybook-utils';
-import { BehandlingAppKontekst, BehandlingOppretting, Fagsak, VergeBehandlingmenyValg } from '@navikt/fp-types';
+import type { BehandlingAppKontekst, BehandlingOppretting, Fagsak } from '@navikt/fp-types';
+import { VergeBehandlingmenyValg } from '@navikt/fp-types';
+import { notEmpty } from '@navikt/fp-utils';
 
 import { FagsakRel, FagsakUrl, initFetchOptions, useFagsakApi, wrapUrl } from '../../data/fagsakApi';
-import { notEmpty } from '../../data/notEmpty';
 import { FagsakData } from '../../fagsak/FagsakData';
 import { MeldingIndex } from './MeldingIndex';
 
@@ -97,7 +98,7 @@ const meta = {
         http.get(FagsakUrl.INIT_FETCH_FPTILBAKE, () => HttpResponse.json(initFetchTilbakeData)),
         http.get(getHref(FagsakRel.KODEVERK), () => HttpResponse.json(alleKodeverk)),
         http.get(getHref(FagsakRel.KODEVERK_FPTILBAKE), () => HttpResponse.json(alleKodeverkTilbakekreving)),
-        http.post(wrapUrl(ALLE_BEHANDLINGER[0].links[0].href), () => HttpResponse.json()),
+        http.post(wrapUrl(notEmpty(ALLE_BEHANDLINGER[0]?.links[0]).href), () => HttpResponse.json()),
       ],
     },
   },

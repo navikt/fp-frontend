@@ -1,18 +1,18 @@
-import React, { FunctionComponent, useMemo } from 'react';
+import { useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, Heading,Label } from '@navikt/ds-react';
+import { BodyShort, Heading, Label } from '@navikt/ds-react';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import moment from 'moment';
 
-import { Soknad } from '@navikt/fp-types';
+import type { Soknad } from '@navikt/fp-types';
 
 import styles from './fodselSammenligningOtherPanel.module.css';
 
 const formatDate = (date: string): string => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
 
-interface OwnProps {
+interface Props {
   soknad: Soknad;
   termindato?: string;
 }
@@ -40,7 +40,7 @@ export const getTerminEllerFodselsdato = (
  *
  * Viser sammenligning av fødsel ved ytelsesvedtak/søknad og oppdatert informasjon fra TPS.
  */
-const FodselSammenligningOtherPanel: FunctionComponent<OwnProps> = ({ soknad, termindato }) => {
+export const FodselSammenligningOtherPanel = ({ soknad, termindato }: Props) => {
   const soknadFodselsdatoer = soknad.fodselsdatoer ? soknad.fodselsdatoer : {};
 
   const terminOrFodselLabel =
@@ -90,5 +90,3 @@ const FodselSammenligningOtherPanel: FunctionComponent<OwnProps> = ({ soknad, te
     </>
   );
 };
-
-export default FodselSammenligningOtherPanel;

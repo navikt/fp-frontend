@@ -7,11 +7,11 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { BehandlingStatus } from '@navikt/fp-kodeverk';
 import { TotrinnskontrollSakIndex } from '@navikt/fp-sak-totrinnskontroll';
-import { FatterVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { FatterVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { notEmpty } from '@navikt/fp-utils';
 
 import { createLocationForSkjermlenke } from '../../app/paths';
-import { BekreftedeTotrinnsaksjonspunkter, initFetchOptions, useFagsakBehandlingApi } from '../../data/fagsakApi';
-import { notEmpty } from '../../data/notEmpty';
+import { type BekreftedeTotrinnsaksjonspunkter, initFetchOptions, useFagsakBehandlingApi } from '../../data/fagsakApi';
 import { useKodeverk } from '../../data/useKodeverk';
 import { useVisForhandsvisningAvMelding } from '../../data/useVisForhandsvisningAvMelding';
 import { FagsakData } from '../../fagsak/FagsakData';

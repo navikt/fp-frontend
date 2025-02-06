@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback,useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { CheckmarkCircleIcon, DoorOpenIcon, XMarkOctagonIcon } from '@navikt/aksel-icons';
@@ -6,10 +6,10 @@ import { BodyShort, Label, Timeline } from '@navikt/ds-react';
 import { DateLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
 
-import { FastsattOpptjeningAktivitet } from '@navikt/fp-types';
+import type { FastsattOpptjeningAktivitet } from '@navikt/fp-types';
 
-import opptjeningAktivitetKlassifisering from '../kodeverk/opptjeningAktivitetKlassifisering';
-import TimeLineData from './TimeLineData';
+import { opptjeningAktivitetKlassifisering } from '../kodeverk/opptjeningAktivitetKlassifisering';
+import { TimeLineData } from './TimeLineData';
 
 type Periode = {
   start: Date;
@@ -57,17 +57,13 @@ const finnTitle = (status: 'success' | 'danger' | 'info'): string => {
   return status === 'success' ? 'OpptjeningTimeLineLight.Godkjent' : 'OpptjeningTimeLineLight.Avslatt';
 };
 
-interface OwnProps {
+interface Props {
   opptjeningPeriods: FastsattOpptjeningAktivitet[];
   opptjeningFomDate: string;
   opptjeningTomDate: string;
 }
 
-const OpptjeningTimeLineLight: FunctionComponent<OwnProps> = ({
-  opptjeningPeriods,
-  opptjeningFomDate,
-  opptjeningTomDate,
-}) => {
+export const OpptjeningTimeLineLight = ({ opptjeningPeriods, opptjeningFomDate, opptjeningTomDate }: Props) => {
   const intl = useIntl();
 
   const sorterteOpptjeningsperioder = useMemo(
@@ -157,5 +153,3 @@ const OpptjeningTimeLineLight: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-
-export default OpptjeningTimeLineLight;

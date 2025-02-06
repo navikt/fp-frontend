@@ -1,12 +1,12 @@
-import { ComponentProps } from 'react';
+import { type ComponentProps } from 'react';
 
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, VilkarUtfallType } from '@navikt/fp-kodeverk';
-import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import { Aksjonspunkt, Opptjening } from '@navikt/fp-types';
+import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import type { Aksjonspunkt, Opptjening } from '@navikt/fp-types';
 
-import opptjeningAktivitetKlassifisering from './kodeverk/opptjeningAktivitetKlassifisering';
+import { opptjeningAktivitetKlassifisering } from './kodeverk/opptjeningAktivitetKlassifisering';
 import { OpptjeningVilkarProsessIndex } from './OpptjeningVilkarProsessIndex';
 
 const defaultOpptjening = {

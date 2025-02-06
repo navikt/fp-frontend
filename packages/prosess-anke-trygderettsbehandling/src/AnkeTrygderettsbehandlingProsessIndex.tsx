@@ -2,7 +2,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { AnkeVurdering } from '@navikt/fp-types';
+import type { AnkeVurdering } from '@navikt/fp-types';
 
 import { TrygderettsbehandlingForm } from './components/TrygderettsbehandlingForm';
 

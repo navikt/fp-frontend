@@ -1,10 +1,8 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
-import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
-import MedlemskapBekreftetPeriode from './MedlemskapBekreftetPeriode';
+import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
+import type { MedlemskapBekreftetPeriode } from './MedlemskapBekreftetPeriode';
 
-type BekreftOppholdsrettVurderingAp = {
+export type BekreftOppholdsrettVurderingAp = {
   bekreftedePerioder: MedlemskapBekreftetPeriode[];
 } & AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_OPPHOLDSRETT>;
-
-export default BekreftOppholdsrettVurderingAp;

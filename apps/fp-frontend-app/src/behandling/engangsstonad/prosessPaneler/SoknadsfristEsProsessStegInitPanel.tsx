@@ -13,7 +13,7 @@ import { OverstyringPanelDef } from '../../felles/prosess/OverstyringPanelDef';
 import { ProsessDefaultInitOverstyringPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { skalViseProsessPanel } from '../../felles/prosess/skalViseProsessPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
-import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
+import type { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.SOKNADSFRISTVILKARET, AksjonspunktKode.OVERSTYR_SOKNADSFRISTVILKAR];

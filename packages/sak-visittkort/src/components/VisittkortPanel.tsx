@@ -1,11 +1,10 @@
-import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { HStack, Spacer } from '@navikt/ds-react';
 import { EmptyPersonCard, Gender, PersonCard } from '@navikt/ft-plattform-komponenter';
 
 import { NavBrukerKjonn } from '@navikt/fp-kodeverk';
-import { FagsakHendelse, FagsakPerson } from '@navikt/fp-types';
+import type { FagsakHendelse, FagsakPerson } from '@navikt/fp-types';
 
 import { VisittkortBarnInfoPanel } from './VisittkortBarnInfoPanel';
 import { VisittkortLabels } from './VisittkortLabels';

@@ -7,7 +7,7 @@ import { addDaysToDate, formatCurrencyNoKr, TIDENES_ENDE } from '@navikt/ft-util
 
 import { sorterPerioder } from '@navikt/fp-fakta-felles';
 import { KodeverkType } from '@navikt/fp-kodeverk';
-import { AktivNaturalYtelse, AlleKodeverk, Inntektsmelding } from '@navikt/fp-types';
+import type { AktivNaturalYtelse, AlleKodeverk, Inntektsmelding } from '@navikt/fp-types';
 
 import { InntektsmeldingInfoBlokk } from './InntektsmeldingInfoBlokk';
 

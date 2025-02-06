@@ -4,11 +4,11 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
 import { MenyHenleggIndex } from '@navikt/fp-sak-meny-henlegg';
-import { Behandling, BehandlingAppKontekst } from '@navikt/fp-types';
+import type { Behandling, BehandlingAppKontekst } from '@navikt/fp-types';
+import { notEmpty } from '@navikt/fp-utils';
 
 import { useBehandlingApi } from '../../data/behandlingApi';
 import { useFagsakApi } from '../../data/fagsakApi';
-import { notEmpty } from '../../data/notEmpty';
 import { useVisForhandsvisningAvMelding } from '../../data/useVisForhandsvisningAvMelding';
 import { MenyKodeverk } from '../MenyKodeverk';
 

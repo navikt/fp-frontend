@@ -1,5 +1,5 @@
 import { BehandlingContainer } from '../felles/BehandlingContainer';
-import { ProsessPanelInitProps } from '../felles/typer/prosessPanelInitProps';
+import type { ProsessPanelInitProps } from '../felles/typer/prosessPanelInitProps';
 import { BehandleInnsynProsessStegInitPanel } from './prosessPaneler/BehandleInnsynProsessStegInitPanel';
 import { InnsynVedtakProsessStegInitPanel } from './prosessPaneler/InnsynVedtakProsessStegInitPanel';
 

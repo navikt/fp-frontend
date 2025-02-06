@@ -2,7 +2,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { AvklartBarn, FamilieHendelse, Soknad } from '@navikt/fp-types';
+import type { AvklartBarn, FamilieHendelse, Soknad } from '@navikt/fp-types';
 
 import FodselSammenligningPanel from './components/FodselSammenligningPanel';
 

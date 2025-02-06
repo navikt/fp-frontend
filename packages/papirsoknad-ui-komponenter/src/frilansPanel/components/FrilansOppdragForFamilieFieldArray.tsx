@@ -1,6 +1,6 @@
-import React, { useMemo } from 'react';
-import { useFieldArray, useFormContext, UseFormGetValues } from 'react-hook-form';
-import { IntlShape, useIntl } from 'react-intl';
+import { useMemo } from 'react';
+import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook-form';
+import { type IntlShape, useIntl } from 'react-intl';
 
 import { HStack } from '@navikt/ds-react';
 import { Datepicker, InputField, PeriodFieldArray } from '@navikt/ft-form-hooks';
@@ -9,7 +9,7 @@ import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import { FRILANS_NAME_PREFIX } from '../constants';
-import { FrilansFormValues } from '../types';
+import type { FrilansFormValues } from '../types';
 
 const getValue = (
   getValues: UseFormGetValues<FrilansFormValues>,

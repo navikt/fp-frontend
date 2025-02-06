@@ -1,9 +1,9 @@
-import React, { useCallback, useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { EndreBehandlendeEnhetModal, FormValues } from './modal/EndreBehandlendeEnhetModal';
+import { EndreBehandlendeEnhetModal, type FormValues } from './modal/EndreBehandlendeEnhetModal';
 
 import messages from '../../i18n/nb_NO.json';
 

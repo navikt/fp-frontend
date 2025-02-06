@@ -1,5 +1,5 @@
-import { Preview, ReactRenderer } from '@storybook/react';
-import { DecoratorFunction } from '@storybook/types';
+import type { Preview, ReactRenderer } from '@storybook/react';
+import type { DecoratorFunction } from '@storybook/types';
 import dayjs from 'dayjs';
 import { initialize, mswLoader } from 'msw-storybook-addon';
 

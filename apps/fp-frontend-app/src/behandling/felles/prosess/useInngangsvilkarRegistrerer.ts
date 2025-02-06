@@ -1,6 +1,6 @@
-import { useCallback, useEffect,useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
-import { InngangsvilkarPanelData } from '../typer/inngangsvilkarPanelData';
+import type { InngangsvilkarPanelData } from '../typer/inngangsvilkarPanelData';
 
 export const useInngangsvilkarRegistrerer = (
   registrerInngangsvilkarPanel: (data: InngangsvilkarPanelData) => void,

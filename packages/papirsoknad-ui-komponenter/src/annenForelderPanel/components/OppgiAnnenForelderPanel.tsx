@@ -1,4 +1,4 @@
-import React, { ReactElement, useMemo } from 'react';
+import { type ReactElement, useMemo } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
@@ -13,10 +13,10 @@ import {
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
 import { KanIkkeOppgiAnnenForelderArsak, KodeverkType, Landkode } from '@navikt/fp-kodeverk';
-import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
+import type { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
 import { ANNEN_FORELDER_NAME_PREFIX, KAN_IKKE_OPPGI_NAME_PREFIX } from '../constant';
-import { AnnenForelderFormValues,AnnenForelderSubFormValues } from '../types';
+import type { AnnenForelderFormValues, AnnenForelderSubFormValues } from '../types';
 
 import styles from './annenForelderPanel.module.css';
 

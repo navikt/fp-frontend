@@ -1,7 +1,5 @@
-import React from 'react';
-
-import { ReactRenderer } from '@storybook/react';
-import { DecoratorFunction } from '@storybook/types';
+import { type ReactRenderer } from '@storybook/react';
+import type { DecoratorFunction } from '@storybook/types';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 

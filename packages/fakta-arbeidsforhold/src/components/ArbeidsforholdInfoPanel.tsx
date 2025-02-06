@@ -1,19 +1,19 @@
-import React, { FunctionComponent, useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Heading } from '@navikt/ds-react';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import moment from 'moment';
 
-import {
+import type {
   AoIArbeidsforhold,
   ArbeidOgInntektsmelding,
   ArbeidsgiverOpplysningerPerId,
   Inntektsmelding,
 } from '@navikt/fp-types';
 
-import ArbeidsforholdDetail from './arbeidsforholdDetaljer/ArbeidsforholdDetail';
-import PersonArbeidsforholdTable, { erMatch } from './arbeidsforholdTabell/PersonArbeidsforholdTable';
+import { ArbeidsforholdDetail } from './arbeidsforholdDetaljer/ArbeidsforholdDetail';
+import { erMatch, PersonArbeidsforholdTable } from './arbeidsforholdTabell/PersonArbeidsforholdTable';
 
 const harInntektmelding = (arbeidsforhold: AoIArbeidsforhold, inntektsmeldinger: Inntektsmelding[]): boolean =>
   inntektsmeldinger.some(im => erMatch(arbeidsforhold, im));
@@ -47,15 +47,12 @@ const getSortArbeidsforholdFn =
     return a1.arbeidsgiverIdent.localeCompare(a2.arbeidsgiverIdent);
   };
 
-interface PureOwnProps {
+interface Props {
   arbeidOgInntekt: ArbeidOgInntektsmelding;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
-const ArbeidsforholdInfoPanel: FunctionComponent<PureOwnProps> = ({
-  arbeidOgInntekt,
-  arbeidsgiverOpplysningerPerId,
-}) => {
+export const ArbeidsforholdInfoPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysningerPerId }: Props) => {
   const [valgtArbeidsforhold, setValgtArbeidsforhold] = useState<AoIArbeidsforhold>();
 
   const setArbeidsforhold = useCallback(
@@ -89,5 +86,3 @@ const ArbeidsforholdInfoPanel: FunctionComponent<PureOwnProps> = ({
     </>
   );
 };
-
-export default ArbeidsforholdInfoPanel;

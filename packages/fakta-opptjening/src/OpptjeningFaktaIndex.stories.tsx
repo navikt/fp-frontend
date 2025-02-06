@@ -1,10 +1,10 @@
-import { ComponentProps } from 'react';
+import type { ComponentProps } from 'react';
 
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, OpptjeningAktivitetType } from '@navikt/fp-kodeverk';
-import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import { Opptjening } from '@navikt/fp-types';
+import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import type { Opptjening } from '@navikt/fp-types';
 
 import { OpptjeningFaktaIndex } from './OpptjeningFaktaIndex';
 

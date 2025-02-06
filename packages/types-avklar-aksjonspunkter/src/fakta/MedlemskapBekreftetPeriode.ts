@@ -1,4 +1,4 @@
-type MedlemskapBekreftetPeriode = {
+export type MedlemskapBekreftetPeriode = {
   vurderingsdato: string;
   aksjonspunkter: string[];
   bosattVurdering: boolean;
@@ -10,5 +10,3 @@ type MedlemskapBekreftetPeriode = {
   omsorgsovertakelseDato?: string;
   begrunnelse: string;
 };
-
-export default MedlemskapBekreftetPeriode;

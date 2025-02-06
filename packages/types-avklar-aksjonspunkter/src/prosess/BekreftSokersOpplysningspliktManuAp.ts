@@ -1,8 +1,8 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
-import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
+import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 
-type BekreftSokersOpplysningspliktManuAp = {
+export type BekreftSokersOpplysningspliktManuAp = {
   erVilkarOk: boolean;
   inntektsmeldingerSomIkkeKommer: {
     organisasjonsnummer?: string;
@@ -10,5 +10,3 @@ type BekreftSokersOpplysningspliktManuAp = {
     brukerHarSagtAtIkkeKommer: boolean;
   }[];
 } & AksjonspunktTilBekreftelse<AksjonspunktKode.SOKERS_OPPLYSNINGSPLIKT_MANU>;
-
-export default BekreftSokersOpplysningspliktManuAp;

@@ -1,4 +1,4 @@
-import { Aksjonspunkt, AlleKodeverk, Behandling, Fagsak, Vilkar } from '@navikt/fp-types';
+import type { Aksjonspunkt, AlleKodeverk, Behandling, Fagsak, Vilkar } from '@navikt/fp-types';
 
 export interface StandardProsessPanelProps {
   behandling: Behandling;

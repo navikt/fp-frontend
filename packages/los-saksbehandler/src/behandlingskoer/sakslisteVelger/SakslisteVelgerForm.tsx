@@ -1,6 +1,6 @@
-import React, { JSX, ReactNode, useEffect, useState } from 'react';
+import { type JSX, type ReactNode, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import {
   ArrowsUpDownIcon,
@@ -19,11 +19,11 @@ import { useMutation } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
-import { KodeverkMedNavn } from '@navikt/fp-types';
+import type { KodeverkMedNavn } from '@navikt/fp-types';
 
 import { getSakslisteSaksbehandlere } from '../../data/fplosSaksbehandlerApi';
 import { useLosKodeverk } from '../../data/useLosKodeverk';
-import { Saksliste } from '../../typer/sakslisteTsType';
+import type { Saksliste } from '../../typer/sakslisteTsType';
 
 import styles from './sakslisteVelgerForm.module.css';
 

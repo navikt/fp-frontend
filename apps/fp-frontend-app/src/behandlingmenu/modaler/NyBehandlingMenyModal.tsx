@@ -4,13 +4,13 @@ import { useQuery } from '@tanstack/react-query';
 
 import { BehandlingStatus, BehandlingType, KodeverkType } from '@navikt/fp-kodeverk';
 import { MenyNyBehandlingIndex } from '@navikt/fp-sak-meny-ny-behandling';
-import { Behandling, BehandlingAppKontekst } from '@navikt/fp-types';
+import type { Behandling, BehandlingAppKontekst } from '@navikt/fp-types';
+import { notEmpty } from '@navikt/fp-utils';
 
 import { ApplicationContextPath } from '../../app/ApplicationContextPath';
 import { getLocationWithDefaultProsessStegAndFakta, pathToBehandling } from '../../app/paths';
 import { useGetEnabledApplikasjonContext } from '../../app/useGetEnabledApplikasjonContext';
 import { initFetchOptions, useFagsakApi } from '../../data/fagsakApi';
-import { notEmpty } from '../../data/notEmpty';
 import { useLagNyBehandling } from '../../data/polling/useLagNyBehandling';
 import { FagsakData } from '../../fagsak/FagsakData';
 import { MenyKodeverk } from '../MenyKodeverk';

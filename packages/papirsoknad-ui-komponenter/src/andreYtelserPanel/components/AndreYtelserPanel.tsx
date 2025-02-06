@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Heading, VStack } from '@navikt/ds-react';
@@ -6,10 +6,10 @@ import { CheckboxPanel } from '@navikt/ft-form-hooks';
 import { ArrowBox, BorderBox } from '@navikt/ft-ui-komponenter';
 
 import { ArbeidType, KodeverkType } from '@navikt/fp-kodeverk';
-import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
+import type { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
 import { ANDRE_YTELSER_NAME_PREFIX, ANDRE_YTELSER_PERIODER_NAME, ANDRE_YTELSER_TYPER_NAME } from '../constants';
-import { AndreYtelserFormValue, TransformValues } from '../types';
+import type { AndreYtelserFormValue, TransformValues } from '../types';
 import { RenderAndreYtelserPerioderFieldArray } from './RenderAndreYtelserPerioderFieldArray';
 
 const removeArbeidstyper = (

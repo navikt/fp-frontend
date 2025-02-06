@@ -1,6 +1,6 @@
-import { ComponentProps } from 'react';
+import { type ComponentProps } from 'react';
 
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import {
   AksjonspunktKode,
@@ -9,8 +9,8 @@ import {
   FagsakYtelseType,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
-import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import { Aksjonspunkt, Behandling, Vilkar } from '@navikt/fp-types';
+import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import type { Aksjonspunkt, Behandling, Vilkar } from '@navikt/fp-types';
 
 import { FodselVilkarProsessIndex } from './FodselVilkarProsessIndex';
 

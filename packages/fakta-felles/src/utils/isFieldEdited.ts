@@ -1,6 +1,6 @@
 import { diff } from '@navikt/ft-utils';
 
-import { FamilieHendelse, Soknad } from '@navikt/fp-types';
+import type { FamilieHendelse, Soknad } from '@navikt/fp-types';
 
 const hasValue = (value: string | number | boolean | undefined): boolean => value !== null && value !== undefined;
 

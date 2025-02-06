@@ -1,11 +1,11 @@
-import { ComponentProps, use } from 'react';
+import { type ComponentProps, use } from 'react';
 import { useIntl } from 'react-intl';
 
 import {
   FaktaFordelBeregningAvklaringsbehovCode,
   FordelBeregningsgrunnlagFaktaIndex,
   FtBeregningsgrunnlag,
-  FtVilkar,
+  type FtVilkar,
 } from '@navikt/ft-fakta-fordel-beregningsgrunnlag';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
@@ -13,13 +13,13 @@ import { useQuery } from '@tanstack/react-query';
 
 import { AksjonspunktKode, hasAksjonspunkt, VilkarType } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkar, Vilkarperiode } from '@navikt/fp-types';
+import type { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkar, Vilkarperiode } from '@navikt/fp-types';
 import { useFormData } from '@navikt/fp-utils';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
-import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
+import type { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 import '@navikt/ft-fakta-fordel-beregningsgrunnlag/dist/style.css';

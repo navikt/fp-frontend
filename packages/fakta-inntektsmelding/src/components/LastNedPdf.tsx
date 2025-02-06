@@ -1,11 +1,11 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ArrowForwardIcon } from '@navikt/aksel-icons';
 import { BodyLong, Button, Modal } from '@navikt/ds-react';
 
 import { hentDokumentLenke } from '@navikt/fp-konstanter';
-import { Fagsak, Inntektsmelding } from '@navikt/fp-types';
+import type { Fagsak, Inntektsmelding } from '@navikt/fp-types';
 
 export const LastNedPdfKnapp = ({ inntektsmelding, fagsak }: { fagsak: Fagsak; inntektsmelding: Inntektsmelding }) => {
   return (
@@ -26,8 +26,14 @@ export const LastNedPdfKnapp = ({ inntektsmelding, fagsak }: { fagsak: Fagsak; i
   );
 };
 // TODO: denne skal taes i bruk når all info fra PDF er tilgjengelig i GUI.
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const LastNedPdfModalKnapp = ({ inntektsmelding, fagsak }: { fagsak: Fagsak; inntektsmelding: Inntektsmelding }) => {
+ 
+export const LastNedPdfModalKnapp = ({
+  inntektsmelding,
+  fagsak,
+}: {
+  fagsak: Fagsak;
+  inntektsmelding: Inntektsmelding;
+}) => {
   const ref = useRef<HTMLDialogElement>(null);
   const intl = useIntl();
 

@@ -1,4 +1,4 @@
-import React, { ComponentType, PropsWithChildren, SVGProps } from 'react';
+import type { ComponentType, PropsWithChildren, SVGProps } from 'react';
 
 import { Box, HStack } from '@navikt/ds-react';
 

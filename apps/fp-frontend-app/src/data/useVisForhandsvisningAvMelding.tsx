@@ -2,7 +2,7 @@ import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation } from '@tanstack/react-query';
 
 import { BehandlingType } from '@navikt/fp-kodeverk';
-import { BehandlingAppKontekst } from '@navikt/fp-types';
+import type { BehandlingAppKontekst } from '@navikt/fp-types';
 
 import { forhåndsvisTilbakekreving, forhåndsvisTilbakekrevingHenleggelse, useFagsakBehandlingApi } from './fagsakApi';
 

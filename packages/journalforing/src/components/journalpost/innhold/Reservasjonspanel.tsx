@@ -1,12 +1,11 @@
-import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyLong, Button, HStack, Tag } from '@navikt/ds-react';
 
-import { NavAnsatt } from '@navikt/fp-types';
+import type { NavAnsatt } from '@navikt/fp-types';
 
-import { Oppgave } from '../../../typer/oppgaveTsType';
-import { ReserverOppgaveType } from '../../../typer/reserverOppgaveType';
+import type { Oppgave } from '../../../typer/oppgaveTsType';
+import type { ReserverOppgaveType } from '../../../typer/reserverOppgaveType';
 
 type Props = Readonly<{
   oppgave: Oppgave;

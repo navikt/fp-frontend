@@ -1,6 +1,14 @@
-import { createContext, FunctionComponent, JSX, ReactNode, useCallback, useContext, useReducer } from 'react';
+import {
+  createContext,
+  type FunctionComponent,
+  type JSX,
+  type ReactNode,
+  useCallback,
+  useContext,
+  useReducer,
+} from 'react';
 
-import { FpError } from './errorType';
+import type { FpError } from './errorType';
 
 const defaultInitialState = {
   errors: [],

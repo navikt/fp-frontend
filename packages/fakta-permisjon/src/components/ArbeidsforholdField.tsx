@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback, useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { CheckmarkIcon, ExclamationmarkTriangleFillIcon, QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
@@ -9,7 +9,7 @@ import { DateLabel, FlexColumn, FlexContainer, FlexRow, PeriodLabel, VerticalSpa
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 import { getKodeverknavnFraKode, KodeverkType } from '@navikt/fp-kodeverk';
-import {
+import type {
   AlleKodeverk,
   AoIArbeidsforhold,
   ArbeidOgInntektsmelding,
@@ -17,10 +17,10 @@ import {
   Inntektsmelding,
 } from '@navikt/fp-types';
 
-import BekreftetPermisjonStatus from '../kodeverk/BekreftetPermisjonStatus';
-import ArbeidsforholdBoks from './ArbeidsforholdBoks';
-import InntektsmeldingOpplysningerPanel from './InntektsmeldingOpplysningerPanel';
-import InntektsposterPanel from './InntektsposterPanel';
+import { BekreftetPermisjonStatus } from '../kodeverk/BekreftetPermisjonStatus';
+import { ArbeidsforholdBoks } from './ArbeidsforholdBoks';
+import { InntektsmeldingOpplysningerPanel } from './InntektsmeldingOpplysningerPanel';
+import { InntektsposterPanel } from './InntektsposterPanel';
 
 import styles from './arbeidsforholdField.module.css';
 
@@ -37,7 +37,7 @@ const delOppAId = (eksternArbeidsforholdId: string) => {
   return oppdeltId.join('-');
 };
 
-interface OwnProps {
+interface Props {
   index: number;
   fieldId: string;
   saksnummer: string;
@@ -50,7 +50,7 @@ interface OwnProps {
   alleKodeverk: AlleKodeverk;
 }
 
-const ArbeidsforholdField: FunctionComponent<OwnProps> = ({
+export const ArbeidsforholdField = ({
   index,
   fieldId,
   saksnummer,
@@ -61,7 +61,7 @@ const ArbeidsforholdField: FunctionComponent<OwnProps> = ({
   harÅpentAksjonspunkt,
   skjæringstidspunkt,
   alleKodeverk,
-}) => {
+}: Props) => {
   const intl = useIntl();
 
   const { inntektsmeldinger, inntekter } = arbeidOgInntekt;
@@ -299,5 +299,3 @@ const ArbeidsforholdField: FunctionComponent<OwnProps> = ({
     </ArbeidsforholdBoks>
   );
 };
-
-export default ArbeidsforholdField;

@@ -1,11 +1,11 @@
-import React, { FC, useCallback } from 'react';
+import { useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Box, Heading, HStack, Label, VStack } from '@navikt/ds-react';
 import { AvsnittSkiller, DateLabel } from '@navikt/ft-ui-komponenter';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
-import { AlleKodeverk, LegacyManuellMedlemskapsBehandling, LegacyMedlemPeriode } from '@navikt/fp-types';
+import type { AlleKodeverk, LegacyManuellMedlemskapsBehandling, LegacyMedlemPeriode } from '@navikt/fp-types';
 
 interface Props {
   alleKodeverk: AlleKodeverk;
@@ -18,7 +18,7 @@ interface VurderingVisningProps {
   skalViseDato: boolean;
 }
 
-const MedlemskapPeriodeVisning: FC<VurderingVisningProps> = ({ medlemsperiode, alleKodeverk, skalViseDato }) => {
+const MedlemskapPeriodeVisning = ({ medlemsperiode, alleKodeverk, skalViseDato }: VurderingVisningProps) => {
   const vurderingstyper = alleKodeverk[KodeverkType.MEDLEMSKAP_MANUELL_VURDERING_TYPE];
   const bTag = useCallback((chunks: any) => <b>{chunks}</b>, []);
 
@@ -117,7 +117,7 @@ const MedlemskapPeriodeVisning: FC<VurderingVisningProps> = ({ medlemsperiode, a
   );
 };
 
-const VurderMedlemsskapLegacyAksjonspunktVisning: FC<Props> = ({ legacyManuellBehandling, alleKodeverk }) => {
+export const VurderMedlemsskapLegacyAksjonspunktVisning = ({ legacyManuellBehandling, alleKodeverk }: Props) => {
   const skalViseDato = legacyManuellBehandling.perioder.length !== 1;
 
   return (
@@ -143,5 +143,3 @@ const VurderMedlemsskapLegacyAksjonspunktVisning: FC<Props> = ({ legacyManuellBe
     </Box>
   );
 };
-
-export default VurderMedlemsskapLegacyAksjonspunktVisning;

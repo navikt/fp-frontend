@@ -4,8 +4,9 @@
   "license": "MIT",
   "private": true,
   "type": "module",
-  "main": "index.ts",
-  "types": "index.ts",
+  "exports": {
+    ".": "./index.ts"
+  },
   "scripts": {
     "test": "vitest",
     "test:watch": "vitest --watch=true",

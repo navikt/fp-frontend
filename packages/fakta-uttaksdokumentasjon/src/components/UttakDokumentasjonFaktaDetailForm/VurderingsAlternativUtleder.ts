@@ -1,8 +1,8 @@
-import { IntlShape } from 'react-intl';
+import { type IntlShape } from 'react-intl';
 
-import { UttakÅrsak,UttakType } from '@navikt/fp-types';
+import { UttakÅrsak, UttakType } from '@navikt/fp-types';
 
-import { VurderingsAlternativ } from '../../../types/FormValues';
+import { VurderingsAlternativ } from '../../types/FormValues';
 import { erUttaksperiodeMedAktivitetskravArbeid } from './DokumentasjonVurderingBehovFormMapper';
 
 type RadioProps = {
@@ -10,7 +10,7 @@ type RadioProps = {
   label: string;
 };
 
-const lagVurderingsAlternativer = (intl: IntlShape, type: UttakType, årsak: UttakÅrsak): RadioProps[] => {
+export const lagVurderingsAlternativer = (intl: IntlShape, type: UttakType, årsak: UttakÅrsak): RadioProps[] => {
   const vurderingsalternativer: RadioProps[] = [];
   if (erUttaksperiodeMedAktivitetskravArbeid(type, årsak)) {
     vurderingsalternativer.push({
@@ -41,5 +41,3 @@ const lagVurderingsAlternativer = (intl: IntlShape, type: UttakType, årsak: Utt
 
   return vurderingsalternativer.sort((k1, k2) => k1.label.localeCompare(k2.label));
 };
-
-export default lagVurderingsAlternativer;

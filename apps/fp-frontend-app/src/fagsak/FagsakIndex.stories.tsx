@@ -1,10 +1,10 @@
 import { MemoryRouter, Route, Routes } from 'react-router';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-import { Meta, ReactRenderer, StoryObj } from '@storybook/react';
+import type { Meta, ReactRenderer, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
-import { DecoratorFunction } from 'storybook/internal/types';
+import type { DecoratorFunction } from 'storybook/internal/types';
 
 import { BehandlingStatus, BehandlingType, FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import {
@@ -13,11 +13,12 @@ import {
   getIntlDecorator,
   withQueryClient,
 } from '@navikt/fp-storybook-utils';
-import { BehandlingAppKontekst, BehandlingOppretting, Fagsak, VergeBehandlingmenyValg } from '@navikt/fp-types';
+import type { BehandlingAppKontekst, BehandlingOppretting, Fagsak } from '@navikt/fp-types';
+import { VergeBehandlingmenyValg } from '@navikt/fp-types';
+import { notEmpty } from '@navikt/fp-utils';
 
 import { BehandlingUrl } from '../data/behandlingApi';
 import { FagsakRel, FagsakUrl, initFetchOptions, useFagsakApi, wrapUrl } from '../data/fagsakApi';
-import { notEmpty } from '../data/notEmpty';
 import { RequestPendingProvider } from '../data/polling/RequestPendingContext';
 import { FagsakIndex } from './FagsakIndex';
 

@@ -11,7 +11,7 @@ import { AnkeProsessIndex } from '@navikt/fp-prosess-anke';
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
-import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
+import type { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 export const AnkeBehandlingProsessStegInitPanel = (props: ProsessPanelInitProps) => {

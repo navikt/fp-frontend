@@ -1,5 +1,4 @@
-import React from 'react';
-import { FormattedMessage,useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 import { Button, HStack, Label, Modal as NavModal } from '@navikt/ds-react';

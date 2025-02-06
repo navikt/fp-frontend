@@ -1,11 +1,11 @@
-import React, { FunctionComponent,ReactNode } from 'react';
+import { type ReactNode } from 'react';
 
 import { CheckmarkCircleFillIcon, XMarkOctagonFillIcon } from '@navikt/aksel-icons';
-import { BodyShort,Detail, Heading, Label } from '@navikt/ds-react';
-import { AksjonspunktBox,FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { BodyShort, Detail, Heading, Label } from '@navikt/ds-react';
+import { AksjonspunktBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 
-import ProsessStegSubmitButton from '../ProsessStegSubmitButtonNew';
+import { ProsessStegSubmitButton } from '../ProsessStegSubmitButtonNew';
 
 import styles from './prosessPanelTemplate.module.css';
 
@@ -13,26 +13,21 @@ import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-interface OwnProps {
+interface Props {
   title: string;
   lovReferanse?: string;
   isAksjonspunktOpen: boolean;
   readOnlySubmitButton: boolean;
   originalErVilkarOk?: boolean;
   erIkkeGodkjentAvBeslutter: boolean;
-  rendreFakta?: () => void;
+  rendreFakta?: () => ReactNode;
   readOnly: boolean;
   isDirty?: boolean;
   isSubmitting: boolean;
   children: ReactNode | ReactNode[];
 }
 
-/*
- * ProsessPanelTemplate
- *
- * Presentasjonskomponent.
- */
-const ProsessPanelTemplate: FunctionComponent<OwnProps> = ({
+export const ProsessPanelTemplate = ({
   lovReferanse,
   title,
   originalErVilkarOk,
@@ -44,7 +39,7 @@ const ProsessPanelTemplate: FunctionComponent<OwnProps> = ({
   erIkkeGodkjentAvBeslutter,
   isSubmitting,
   children,
-}) => (
+}: Props) => (
   <>
     <FlexContainer>
       <FlexRow>
@@ -110,5 +105,3 @@ const ProsessPanelTemplate: FunctionComponent<OwnProps> = ({
     )}
   </>
 );
-
-export default ProsessPanelTemplate;

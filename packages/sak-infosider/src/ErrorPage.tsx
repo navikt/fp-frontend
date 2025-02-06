@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { ErrorPageWrapper } from './components/ErrorPageWrapper';
 
 export const ErrorPage = () => (

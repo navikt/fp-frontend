@@ -7,12 +7,12 @@ import { useQuery } from '@tanstack/react-query';
 import { AksjonspunktKode, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { TilkjentYtelseProsessIndex } from '@navikt/fp-prosess-tilkjent-ytelse';
-import { ArbeidsgiverOpplysningerPerId, Personoversikt } from '@navikt/fp-types';
+import type { ArbeidsgiverOpplysningerPerId, Personoversikt } from '@navikt/fp-types';
 
 import { BehandlingRel, useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
-import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
+import type { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_TILBAKETREKK];

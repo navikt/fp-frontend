@@ -1,4 +1,4 @@
-import React, { useCallback,useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { XMarkIcon } from '@navikt/aksel-icons';
@@ -6,7 +6,7 @@ import { Button, Detail, Link } from '@navikt/ds-react';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 import classnames from 'classnames/bind';
 
-import { Feilmelding } from '../typer/feilmeldingTsType';
+import type { Feilmelding } from '../typer/feilmeldingTsType';
 import { FeilmeldingsdetaljerModal } from './FeilmeldingsdetaljerModal';
 
 import styles from './feilmeldingPanel.module.css';

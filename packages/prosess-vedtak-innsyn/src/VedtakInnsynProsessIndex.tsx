@@ -2,9 +2,9 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { Dokument, Innsyn } from '@navikt/fp-types';
+import type { Dokument, Innsyn } from '@navikt/fp-types';
 
-import { ForhandsvisData, InnsynVedtakForm } from './components/InnsynVedtakForm';
+import { type ForhandsvisData, InnsynVedtakForm } from './components/InnsynVedtakForm';
 
 import messages from '../i18n/nb_NO.json';
 

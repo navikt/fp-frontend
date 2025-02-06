@@ -1,13 +1,16 @@
-import { FeilutbetalingÅrsak, FeilutbetalingFakta } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
-import { DetaljerteFeilutbetalingsperioder, FeilutbetalingPerioderWrapper } from '@navikt/ft-prosess-tilbakekreving';
-import { ForhandsvisData, Vedtaksbrev } from '@navikt/ft-prosess-tilbakekreving-vedtak';
+import type { FeilutbetalingÅrsak, FeilutbetalingFakta } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
+import type {
+  DetaljerteFeilutbetalingsperioder,
+  FeilutbetalingPerioderWrapper,
+} from '@navikt/ft-prosess-tilbakekreving';
+import type { ForhandsvisData, Vedtaksbrev } from '@navikt/ft-prosess-tilbakekreving-vedtak';
 import { queryOptions } from '@tanstack/react-query';
 import ky from 'ky';
 
-import { FormkravMellomlagretDataType } from '@navikt/fp-prosess-formkrav';
-import { AksjonspunktVerdier } from '@navikt/fp-prosess-klagevurdering';
-import { AvklartRisikoklassifiseringAp } from '@navikt/fp-sak-risikoklassifisering';
-import {
+import type { FormkravMellomlagretDataType } from '@navikt/fp-prosess-formkrav';
+import type { AksjonspunktVerdier } from '@navikt/fp-prosess-klagevurdering';
+import type { AvklartRisikoklassifiseringAp } from '@navikt/fp-sak-risikoklassifisering';
+import type {
   AnkeVurdering,
   ApiLink,
   ArbeidOgInntektsmelding,
@@ -46,7 +49,7 @@ import {
   VilkarsVurdertePerioderWrapper,
   Ytelsefordeling,
 } from '@navikt/fp-types';
-import { FaktaAksjonspunkt, ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { FaktaAksjonspunkt, ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 type SettPaVentParams = {
   ventearsak?: string;

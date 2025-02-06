@@ -14,8 +14,8 @@ import {
   KodeverkType,
 } from '@navikt/fp-kodeverk';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
-import { AlleKodeverk, Behandlingsresultat, KlageVurdering } from '@navikt/fp-types';
-import { ForeslaVedtakAp, ForeslaVedtakManueltAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { AlleKodeverk, Behandlingsresultat, KlageVurdering } from '@navikt/fp-types';
+import type { ForeslaVedtakAp, ForeslaVedtakManueltAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { VedtakKlageSubmitPanel } from './VedtakKlageSubmitPanel';

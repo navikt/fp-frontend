@@ -15,11 +15,11 @@ import {
 import { dateFormat } from '@navikt/ft-utils';
 
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
-import { AoIArbeidsforhold, ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
-import { VurderArbeidsforholdPermisjonAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { AoIArbeidsforhold, ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
+import type { VurderArbeidsforholdPermisjonAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
-import ArbeidsforholdFieldArray from './ArbeidsforholdFieldArray';
+import { ArbeidsforholdFieldArray } from './ArbeidsforholdFieldArray';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);

@@ -3,11 +3,11 @@ import { useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
 import { HistorikkSakIndex } from '@navikt/fp-sak-historikk';
-import { Historikkinnslag } from '@navikt/fp-types';
+import type { Historikkinnslag } from '@navikt/fp-types';
+import { notEmpty } from '@navikt/fp-utils';
 
 import { createLocationForSkjermlenke, pathToBehandling } from '../../app/paths';
 import { useFagsakApi } from '../../data/fagsakApi';
-import { notEmpty } from '../../data/notEmpty';
 
 interface Props {
   saksnummer: string;

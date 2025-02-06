@@ -9,7 +9,7 @@ const { BehandlingSattPåVent, BehandlingSattManueltPåVent } = composeStories(s
 
 describe('BehandlingPaVent', () => {
   it('skal vise at behandling er satt på vent', async () => {
-    await applyRequestHandlers(BehandlingSattPåVent.parameters.msw);
+    await applyRequestHandlers(BehandlingSattPåVent.parameters['msw']);
     render(<BehandlingSattPåVent />);
 
     expect(await screen.findByText('Behandlingen er satt på vent')).toBeInTheDocument();
@@ -21,7 +21,7 @@ describe('BehandlingPaVent', () => {
   it('skal vise at behandling er satt på vent manuelt og så endre årsak og lagre', async () => {
     const åpneSøkeside = vi.fn();
 
-    await applyRequestHandlers(BehandlingSattManueltPåVent.parameters.msw);
+    await applyRequestHandlers(BehandlingSattManueltPåVent.parameters['msw']);
     render(<BehandlingSattManueltPåVent opneSokeside={åpneSøkeside} />);
 
     expect(await screen.findByText('Behandlingen er satt på vent')).toBeInTheDocument();

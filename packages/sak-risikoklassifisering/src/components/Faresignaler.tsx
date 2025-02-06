@@ -1,17 +1,19 @@
-import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Label } from '@navikt/ds-react';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 
-import { Risikoklassifisering } from '@navikt/fp-types';
+import type { Risikoklassifisering } from '@navikt/fp-types';
 
-export const FarePanel: FunctionComponent<{
+export const FarePanel = ({
+  risikoFaresignaler,
+  labelId,
+}: {
   risikoFaresignaler: {
     faresignaler: string[];
   };
   labelId: string;
-}> = ({ risikoFaresignaler, labelId }) => (
+}) => (
   <>
     <Label size="small">
       <FormattedMessage id={labelId} />

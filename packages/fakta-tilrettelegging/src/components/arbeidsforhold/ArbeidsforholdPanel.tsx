@@ -1,6 +1,6 @@
-import React, { useMemo } from 'react';
-import { useFormContext,UseFormGetValues } from 'react-hook-form';
-import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+import { useMemo } from 'react';
+import { useFormContext, type UseFormGetValues } from 'react-hook-form';
+import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { Label, VStack } from '@navikt/ds-react';
 import { CheckboxField, Datepicker } from '@navikt/ft-form-hooks';
@@ -10,7 +10,7 @@ import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 import minMax from 'dayjs/plugin/minMax';
 
-import { ArbeidsforholdFodselOgTilrettelegging, Permisjon } from '@navikt/fp-types';
+import type { ArbeidsforholdFodselOgTilrettelegging, Permisjon } from '@navikt/fp-types';
 
 import { finnProsentSvangerskapspenger } from './tilretteleggingOgOpphold/tilrettelegging/TilretteleggingForm';
 import { TilretteleggingOgOppholdPerioderPanel } from './tilretteleggingOgOpphold/TilretteleggingOgOppholdPerioderPanel';

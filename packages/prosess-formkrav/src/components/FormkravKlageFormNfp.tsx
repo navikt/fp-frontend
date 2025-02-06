@@ -1,6 +1,6 @@
-import { ReactElement, useMemo } from 'react';
+import { type ReactElement, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
-import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { Detail, Heading, HStack, VStack } from '@navikt/ds-react';
 import { Form, RadioGroupPanel, SelectField, TextAreaField } from '@navikt/ft-form-hooks';
@@ -11,12 +11,12 @@ import moment from 'moment';
 
 import { AksjonspunktKode, getKodeverknavnFn, KodeverkType } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
-import { KlageVurdering } from '@navikt/fp-types';
-import { KlageFormkravAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { KlageVurdering } from '@navikt/fp-types';
+import type { KlageFormkravAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
-import { AvsluttetBehandling } from '../types/avsluttetBehandlingTsType';
-import { FormkravMellomlagretDataType } from '../types/FormkravMellomlagretDataType';
+import type { AvsluttetBehandling } from '../types/avsluttetBehandlingTsType';
+import type { FormkravMellomlagretDataType } from '../types/FormkravMellomlagretDataType';
 import {
   erTilbakekreving,
   IKKE_PA_KLAGD_VEDTAK,

@@ -1,10 +1,10 @@
-import { ComponentProps } from 'react';
+import type { ComponentProps } from 'react';
 
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { AnkeVurdering as AnkeVurderingKodeverk, AnkeVurderingOmgjoer } from '@navikt/fp-kodeverk';
-import { PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
-import { AnkeVurdering } from '@navikt/fp-types';
+import { type PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
+import { type AnkeVurdering } from '@navikt/fp-types';
 
 import { AnkeResultatProsessIndex } from './AnkeResultatProsessIndex';
 

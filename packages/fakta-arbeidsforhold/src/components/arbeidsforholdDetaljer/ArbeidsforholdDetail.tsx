@@ -1,14 +1,13 @@
-import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, Heading,Label } from '@navikt/ds-react';
+import { BodyShort, Heading, Label } from '@navikt/ds-react';
 import { DateLabel, FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
-import { AoIArbeidsforhold } from '@navikt/fp-types';
+import type { AoIArbeidsforhold } from '@navikt/fp-types';
 
-import BekreftetPermisjonStatus from '../../kodeverk/bekreftetPermisjonStatus';
-import PermisjonPeriode from './PermisjonPeriode';
+import { BekreftetPermisjonStatus } from '../../kodeverk/bekreftetPermisjonStatus';
+import { PermisjonPeriode } from './PermisjonPeriode';
 
 const finnOverstyrtTom = (arbeidsforhold: AoIArbeidsforhold): string | undefined => {
   if (arbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.BRUK_MED_OVERSTYRT_PERIODE) {
@@ -31,11 +30,11 @@ const utledAktivtArbeidsforholdLabel = (arbeidsforhold: AoIArbeidsforhold): stri
   return 'ArbeidsforholdDetail.ArbeidsforholdErAktivt';
 };
 
-interface PureOwnProps {
+interface Props {
   valgtArbeidsforhold: AoIArbeidsforhold;
 }
 
-const ArbeidsforholdDetail: FunctionComponent<PureOwnProps> = ({ valgtArbeidsforhold }) => {
+export const ArbeidsforholdDetail = ({ valgtArbeidsforhold }: Props) => {
   const skalBrukeArbeidsforholdet =
     valgtArbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.BRUK;
   const skalFortsetteUtenInntektsmelding =
@@ -131,5 +130,3 @@ const ArbeidsforholdDetail: FunctionComponent<PureOwnProps> = ({ valgtArbeidsfor
     </>
   );
 };
-
-export default ArbeidsforholdDetail;

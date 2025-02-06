@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { composeStories } from '@storybook/react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';

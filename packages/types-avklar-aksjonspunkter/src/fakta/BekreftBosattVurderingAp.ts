@@ -1,10 +1,8 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
-import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
-import MedlemskapBekreftetPeriode from './MedlemskapBekreftetPeriode';
+import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
+import type { MedlemskapBekreftetPeriode } from './MedlemskapBekreftetPeriode';
 
-type BekreftBosattVurderingAp = {
+export type BekreftBosattVurderingAp = {
   bekreftedePerioder: MedlemskapBekreftetPeriode[];
 } & AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_OM_BRUKER_ER_BOSATT>;
-
-export default BekreftBosattVurderingAp;

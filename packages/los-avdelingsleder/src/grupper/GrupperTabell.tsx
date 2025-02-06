@@ -1,14 +1,13 @@
-import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { XMarkIcon } from '@navikt/aksel-icons';
 import { BodyShort, Label, Table } from '@navikt/ds-react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
+import type { SaksbehandlerProfil } from '@navikt/fp-los-felles';
 
 import { LosUrl, slettGruppe } from '../data/fplosAvdelingslederApi';
-import { SaksbehandlereOgSaksbehandlerGrupper } from '../typer/saksbehandlereOgSaksbehandlerGrupper';
+import type { SaksbehandlereOgSaksbehandlerGrupper } from '../typer/saksbehandlereOgSaksbehandlerGrupper';
 import { GruppeSaksbehandlere } from './GruppeSaksbehandlere';
 
 import styles from './grupperTabell.module.css';

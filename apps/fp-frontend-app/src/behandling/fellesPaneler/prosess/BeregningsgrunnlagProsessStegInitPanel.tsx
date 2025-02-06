@@ -1,11 +1,11 @@
-import { ComponentProps, use } from 'react';
+import { type ComponentProps, use } from 'react';
 import { useIntl } from 'react-intl';
 
 import {
-  BeregningAksjonspunktSubmitType,
+  type BeregningAksjonspunktSubmitType,
   BeregningsgrunnlagProsessIndex,
   FtBeregningsgrunnlag,
-  FtVilkar,
+  type FtVilkar,
   ProsessBeregningsgrunnlagAvklaringsbehovCode,
 } from '@navikt/ft-prosess-beregningsgrunnlag';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -14,13 +14,18 @@ import { useQuery } from '@tanstack/react-query';
 
 import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkar as FpVilkar, Vilkarperiode } from '@navikt/fp-types';
+import type {
+  ArbeidsgiverOpplysningerPerId,
+  Beregningsgrunnlag,
+  Vilkar as FpVilkar,
+  Vilkarperiode,
+} from '@navikt/fp-types';
 import { useFormData } from '@navikt/fp-utils';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
-import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
+import type { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 import '@navikt/ft-prosess-beregningsgrunnlag/dist/style.css';

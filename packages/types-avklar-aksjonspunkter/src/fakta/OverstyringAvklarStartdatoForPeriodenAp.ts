@@ -1,10 +1,8 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
-import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
+import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 
-type OverstyringAvklarStartdatoForPeriodenAp = {
+export type OverstyringAvklarStartdatoForPeriodenAp = {
   startdatoFraSoknad: string;
   opprinneligDato?: string;
 } & AksjonspunktTilBekreftelse<AksjonspunktKode.OVERSTYR_AVKLAR_STARTDATO>;
-
-export default OverstyringAvklarStartdatoForPeriodenAp;

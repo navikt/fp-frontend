@@ -2,9 +2,9 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { BehandlingAppKontekst, KodeverkMedNavn } from '@navikt/fp-types';
+import type { BehandlingAppKontekst, KodeverkMedNavn } from '@navikt/fp-types';
 
-import { FormValues, Messages } from './components/Messages';
+import { type FormValues, Messages } from './components/Messages';
 
 import messages from '../i18n/nb_NO.json';
 

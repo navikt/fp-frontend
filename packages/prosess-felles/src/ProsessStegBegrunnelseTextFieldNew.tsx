@@ -1,11 +1,10 @@
-import React, { FunctionComponent } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 import { TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
 import { createIntl, decodeHtmlEntity, formaterFritekst } from '@navikt/ft-utils';
 
-import { Aksjonspunkt } from '@navikt/fp-types';
+import type { Aksjonspunkt } from '@navikt/fp-types';
 
 import styles from './prosessStegBegrunnelseTextField.module.css';
 
@@ -28,18 +27,11 @@ type FormValues = {
 const getIsBegrunnelseRequired = (isDirty: boolean) => (value?: string | number | boolean) =>
   value !== undefined || isDirty;
 
-interface OwnProps {
+interface Props {
   readOnly: boolean;
   text?: string;
   useAllWidth?: boolean;
   notRequired?: boolean;
-}
-
-interface StaticFunctions {
-  buildInitialValues: (aksjonspunkter: Aksjonspunkt[]) => FormValues;
-  transformValues: (values: FormValues) => {
-    begrunnelse?: string;
-  };
 }
 
 /**
@@ -47,12 +39,12 @@ interface StaticFunctions {
  *
  * Presentasjonskomponent. Lar den Nav-ansatte skrive inn en begrunnelse før lagring av behandlingspunkter.
  */
-const ProsessStegBegrunnelseTextField: FunctionComponent<OwnProps> & StaticFunctions = ({
+export const ProsessStegBegrunnelseTextField = ({
   readOnly,
   text,
   useAllWidth = false,
   notRequired = false,
-}) => {
+}: Props) => {
   const {
     formState: { isDirty },
   } = useFormContext();
@@ -81,5 +73,3 @@ ProsessStegBegrunnelseTextField.buildInitialValues = (aksjonspunkter: Aksjonspun
 ProsessStegBegrunnelseTextField.transformValues = (values: FormValues): any => ({
   begrunnelse: values.begrunnelse,
 });
-
-export default ProsessStegBegrunnelseTextField;

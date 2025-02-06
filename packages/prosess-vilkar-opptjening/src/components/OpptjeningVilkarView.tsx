@@ -1,14 +1,13 @@
-import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort } from '@navikt/ds-react';
 import { PeriodLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { FastsattOpptjeningAktivitet } from '@navikt/fp-types';
+import type { FastsattOpptjeningAktivitet } from '@navikt/fp-types';
 
-import OpptjeningTimeLineLight from './OpptjeningTimeLineLight';
+import { OpptjeningTimeLineLight } from './OpptjeningTimeLineLight';
 
-interface OwnProps {
+interface Props {
   months: number;
   days: number;
   fastsattOpptjeningActivities?: FastsattOpptjeningAktivitet[];
@@ -21,13 +20,13 @@ interface OwnProps {
  *
  * Viser resultatet av opptjeningsvilkåret.
  */
-const OpptjeningVilkarViewImpl: FunctionComponent<OwnProps> = ({
+export const OpptjeningVilkarView = ({
   months,
   days,
   fastsattOpptjeningActivities = [],
   opptjeningFomDate,
   opptjeningTomDate,
-}) => (
+}: Props) => (
   <>
     <BodyShort size="small">
       <FormattedMessage id="OpptjeningVilkarView.MonthsAndDays" values={{ months, days }} />
@@ -46,5 +45,3 @@ const OpptjeningVilkarViewImpl: FunctionComponent<OwnProps> = ({
     )}
   </>
 );
-
-export default OpptjeningVilkarViewImpl;

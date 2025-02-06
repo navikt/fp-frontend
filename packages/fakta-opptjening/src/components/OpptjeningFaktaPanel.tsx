@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState } from 'react';
+import { type ReactElement, useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Button, Label } from '@navikt/ds-react';
@@ -7,18 +7,18 @@ import { addDaysToDate, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import { AksjonspunktKode, KodeverkType } from '@navikt/fp-kodeverk';
-import {
+import type {
   ArbeidsgiverOpplysningerPerId,
   FerdiglignetNæring,
   KodeverkMedNavn,
   Opptjening,
   OpptjeningAktivitet,
 } from '@navikt/fp-types';
-import { AvklarAktivitetsPerioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { AvklarAktivitetsPerioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
-import ValgtAktivitetForm, { FormValues } from './aktivitet/ValgtAktivitetForm';
-import OpptjeningTidslinje from './tidslinje/OpptjeningTidslinje';
+import { type FormValues, ValgtAktivitetForm } from './aktivitet/ValgtAktivitetForm';
+import { OpptjeningTidslinje } from './tidslinje/OpptjeningTidslinje';
 
 import styles from './opptjeningFaktaPanel.module.css';
 

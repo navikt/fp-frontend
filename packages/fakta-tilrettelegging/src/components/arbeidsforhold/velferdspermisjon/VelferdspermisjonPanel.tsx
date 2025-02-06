@@ -1,10 +1,9 @@
-import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 import { HStack, Label, Table, VStack } from '@navikt/ds-react';
 
-import { Permisjon } from '@navikt/fp-types';
+import type { Permisjon } from '@navikt/fp-types';
 
 import { VelferdspermisjonTabellRad } from './VelferdspermisjonTabellRad';
 

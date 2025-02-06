@@ -1,4 +1,3 @@
-import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
 import { TextAreaField } from '@navikt/ft-form-hooks';
@@ -7,12 +6,12 @@ import { formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
 import styles from './fritekstKlageBrevTextField.module.css';
 
-interface OwnProps {
+interface Props {
   sprakkode: string;
   readOnly?: boolean;
 }
 
-const FritekstKlageBrevTextField: FunctionComponent<OwnProps> = ({ sprakkode, readOnly = true }) => (
+export const FritekstBrevTextField = ({ sprakkode, readOnly = true }: Props) => (
   <div className={styles.fritekstTilBrevTextArea}>
     <TextAreaField
       name="fritekstTilBrev"
@@ -30,5 +29,3 @@ const FritekstKlageBrevTextField: FunctionComponent<OwnProps> = ({ sprakkode, re
     />
   </div>
 );
-
-export default FritekstKlageBrevTextField;

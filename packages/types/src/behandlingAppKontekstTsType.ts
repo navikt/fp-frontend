@@ -1,7 +1,7 @@
-import { Aksjonspunkt } from './aksjonspunktTsType';
-import { Behandlingsresultat } from './behandlingsresultatTsType';
-import { Risikoklassifisering } from './risikoklassifiseringTsType';
-import { TotrinnskontrollAksjonspunkt } from './totrinnskontrollAksjonspunktTsType';
+import type { Aksjonspunkt } from './aksjonspunktTsType';
+import type { Behandlingsresultat } from './behandlingsresultatTsType';
+import type { Risikoklassifisering } from './risikoklassifiseringTsType';
+import type { TotrinnskontrollAksjonspunkt } from './totrinnskontrollAksjonspunktTsType';
 
 export type BehandlingFellesData = Readonly<{
   versjon: number;

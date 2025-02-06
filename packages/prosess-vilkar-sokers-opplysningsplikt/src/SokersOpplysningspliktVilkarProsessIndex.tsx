@@ -2,7 +2,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { ArbeidsgiverOpplysningerPerId, Soknad } from '@navikt/fp-types';
+import type { ArbeidsgiverOpplysningerPerId, Soknad } from '@navikt/fp-types';
 
 import { SokersOpplysningspliktForm } from './components/SokersOpplysningspliktForm';
 

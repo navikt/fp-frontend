@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort } from '@navikt/ds-react';
 
 import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 
-import { ProsessPanelMenyData } from '../typer/prosessPanelMenyData';
+import type { ProsessPanelMenyData } from '../typer/prosessPanelMenyData';
 import { ProsessPanelWrapper } from './ProsessPanelWrapper';
 
 const ID = 'henlagt';

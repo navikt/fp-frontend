@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement, useCallback } from 'react';
+import { type ReactElement, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -11,7 +11,7 @@ import { DDMMYYYY_DATE_FORMAT, findDifferenceInMonthsAndDays } from '@navikt/ft-
 import dayjs from 'dayjs';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import {
+import type {
   AlleKodeverk,
   ArbeidsgiverOpplysningerPerId,
   FerdiglignetNæring,
@@ -62,7 +62,7 @@ export type FormValues = {
   begrunnelse: string;
 };
 
-interface OwnProps {
+interface Props {
   alleKodeverk: AlleKodeverk;
   valgtOpptjeningAktivitet: OpptjeningAktivitet;
   valgteFormValues: FormValues;
@@ -85,7 +85,7 @@ interface OwnProps {
  *
  * Viser informasjon om valgt aktivitet
  */
-const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
+export const ValgtAktivitetForm = ({
   readOnly,
   opptjeningAktivitetTyper,
   avbrytAktivitet,
@@ -100,7 +100,7 @@ const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
   valgteFormValues,
   fastsattOpptjening,
   lukkPeriode,
-}) => {
+}: Props) => {
   const intl = useIntl();
 
   const formMethods = useForm<FormValues>({
@@ -252,5 +252,3 @@ const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
     </Form>
   );
 };
-
-export default ValgtAktivitetForm;

@@ -1,9 +1,8 @@
-import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Table, VStack } from '@navikt/ds-react';
 
-import { VedtakArbeidsforhold } from '@navikt/fp-types';
+import type { VedtakArbeidsforhold } from '@navikt/fp-types';
 
 interface Props {
   alleArbeidsforhold?: VedtakArbeidsforhold[];

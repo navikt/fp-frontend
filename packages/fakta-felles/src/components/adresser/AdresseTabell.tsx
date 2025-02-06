@@ -1,11 +1,10 @@
-import React, { FC } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyLong, Box, Table } from '@navikt/ds-react';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 
-import { KodeverkMedNavn, Personadresse } from '@navikt/fp-types';
+import type { KodeverkMedNavn, Personadresse } from '@navikt/fp-types';
 
 import { formaterAdresse } from '../../utils/adresseUtils';
 import { sorterPerioder } from '../../utils/periodeUtils';
@@ -17,12 +16,12 @@ interface AdresseTabellProps {
   adresseKodeverk: KodeverkMedNavn[];
 }
 
-export const AdresseTabell: FC<AdresseTabellProps> = ({
+export const AdresseTabell = ({
   adresser,
   erAnnenpart = false,
   harSammeAdresser = false,
   adresseKodeverk,
-}) => {
+}: AdresseTabellProps) => {
   if (harSammeAdresser) {
     return (
       <Box padding="4">

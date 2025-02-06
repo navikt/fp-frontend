@@ -12,12 +12,12 @@ import {
   AksjonspunktKode,
   AksjonspunktStatus,
   BehandlingType,
-  OverstyringAksjonspunkter,
+  type OverstyringAksjonspunkter,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
 import { OverstyringPanel, VilkarResultPicker } from '@navikt/fp-prosess-felles';
-import { Aksjonspunkt, Behandling, KodeverkMedNavn, ManuellBehandlingResultat } from '@navikt/fp-types';
-import {
+import type { Aksjonspunkt, Behandling, KodeverkMedNavn, ManuellBehandlingResultat } from '@navikt/fp-types';
+import type {
   OverstyringAp,
   OverstyringMedlemskapsvilkaretAp,
   OverstyringMedlemskapsvilkaretLopendeAp,

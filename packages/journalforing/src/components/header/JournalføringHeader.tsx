@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { ChevronLeftIcon, MagnifyingGlassIcon } from '@navikt/aksel-icons';
 import { Button, Heading, HStack, Link } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { Journalpost } from '../../typer/journalpostTsType';
+import type { Journalpost } from '../../typer/journalpostTsType';
 import { JournalpostSøkModal } from './JournalpostSøkModal';
 
 import styles from './header.module.css';

@@ -1,11 +1,10 @@
-import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { CheckmarkCircleIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, HStack, Link, Modal, VStack } from '@navikt/ds-react';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 
-import { SaksnummerType } from '../../../typer/saksnummerTsType';
+import type { SaksnummerType } from '../../../typer/saksnummerTsType';
 
 import styles from './journalførtSubmitModal.module.css';
 

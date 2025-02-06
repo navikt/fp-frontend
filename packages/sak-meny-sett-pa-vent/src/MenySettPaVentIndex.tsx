@@ -2,8 +2,8 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { FormValues, SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
-import { KodeverkMedNavn } from '@navikt/fp-types';
+import { type FormValues, SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
+import type { KodeverkMedNavn } from '@navikt/fp-types';
 
 import messages from '../i18n/nb_NO.json';
 

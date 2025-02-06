@@ -1,8 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { Behandling } from '@navikt/fp-types';
+import type { Behandling } from '@navikt/fp-types';
 
-import { AksjonspunktArgs, OverstyrteAksjonspunktArgs, useBehandlingApi } from '../behandlingApi';
+import { type AksjonspunktArgs, type OverstyrteAksjonspunktArgs, useBehandlingApi } from '../behandlingApi';
 import { useRequestPendingContext } from '../polling/RequestPendingContext';
 import { doPolling, useTaskStatusChecker } from './pollingUtils';
 

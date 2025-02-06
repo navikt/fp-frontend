@@ -1,16 +1,15 @@
-import React, { FC } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Detail, Label, VStack } from '@navikt/ds-react';
 import { AvsnittSkiller } from '@navikt/ft-ui-komponenter';
 
 import { FaktaKilde } from '@navikt/fp-fakta-felles';
-import { AlleKodeverk, Medlemskap,MedlemskapAvvik } from '@navikt/fp-types';
+import { type AlleKodeverk, type Medlemskap, MedlemskapAvvik } from '@navikt/fp-types';
 
-import EkspansjonsKort from '../../ekspansjonsKort/EkspansjonsKort';
+import { EkspansjonsKort } from '../../ekspansjonsKort/EkspansjonsKort';
 import { relevantForPersonstatus } from '../../ekspansjonsKort/medlemsAvvik';
-import PersonstatusVisning from './PersonstatusVisning';
-import RegionVisning from './RegionVisning';
+import { PersonstatusVisning } from './PersonstatusVisning';
+import { RegionVisning } from './RegionVisning';
 
 interface Props {
   medlemskap: Medlemskap;
@@ -21,14 +20,14 @@ interface Props {
   skalViseAvvik: boolean;
 }
 
-const OpplysningerOmPersonstatus: FC<Props> = ({
+export const OpplysningerOmPersonstatus = ({
   avvik,
   medlemskap: { regioner, personstatuser, annenpart },
   brukerNavn,
   annenpartNavn,
   alleKodeverk,
   skalViseAvvik,
-}) => {
+}: Props) => {
   const intl = useIntl();
 
   return (
@@ -64,5 +63,3 @@ const OpplysningerOmPersonstatus: FC<Props> = ({
     </EkspansjonsKort>
   );
 };
-
-export default OpplysningerOmPersonstatus;

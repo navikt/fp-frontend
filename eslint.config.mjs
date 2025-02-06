@@ -4,6 +4,7 @@ import jsxA11y from 'eslint-plugin-jsx-a11y';
 import pluginReact from 'eslint-plugin-react';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import vitest from 'eslint-plugin-vitest';
+import importPlugin from 'eslint-plugin-import';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
@@ -29,6 +30,7 @@ export default [
   ...tseslint.configs.recommended,
   pluginReact.configs.flat.recommended,
   jsxA11y.flatConfigs.recommended,
+  importPlugin.flatConfigs.recommended,
   eslintConfigPrettier,
   {
     rules: {
@@ -46,7 +48,7 @@ export default [
       'react/jsx-curly-brace-presence': ['error', { props: 'never' }],
       'react/prop-types': OFF,
       'jsx-a11y/no-autofocus': OFF,
-      'no-duplicate-imports': ERROR,
+      'import/no-duplicates': ERROR,
       'react/react-in-jsx-scope': OFF,
 
       // Note: you must disable the base rule as it can report incorrect errors
@@ -60,6 +62,7 @@ export default [
       // TODO (TOR) Ignorert inntil videre grunnet kost/nytte
       '@typescript-eslint/no-explicit-any': OFF,
       '@typescript-eslint/ban-ts-comment': OFF,
+      'import/no-unresolved': OFF,
 
       'simple-import-sort/imports': [
         'error',

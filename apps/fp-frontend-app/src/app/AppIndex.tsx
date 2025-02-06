@@ -10,7 +10,7 @@ import moment from 'moment';
 
 import { ForbiddenPage, UnauthorizedPage } from '@navikt/fp-sak-infosider';
 
-import { ErrorType, FpError } from '../data/error/errorType';
+import { ErrorType, type FpError } from '../data/error/errorType';
 import { useRestApiError, useRestApiErrorDispatcher } from '../data/error/RestApiErrorContext';
 import { initFetchOptions } from '../data/fagsakApi';
 import { PollingTimeoutError } from '../data/polling/pollingUtils';
@@ -115,7 +115,7 @@ const createQueryClient = (errorHandler: (error: Error) => void) =>
   new QueryClient({
     defaultOptions: {
       queries: {
-        retry: process.env.NODE_ENV === 'test' ? false : 3,
+        retry: process.env['NODE_ENV'] === 'test' ? false : 3,
       },
     },
     queryCache: new QueryCache({

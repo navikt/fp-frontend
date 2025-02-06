@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -6,7 +6,7 @@ import { PlusCircleIcon } from '@navikt/aksel-icons';
 import { Button, ErrorMessage, Table, VStack } from '@navikt/ds-react';
 
 import { TILRETTELEGGING_FOR_ARBEIDSGIVER_FIELD_ARRAY_NAME, TILRETTELEGGING_NAME_PREFIX } from '../constants';
-import { FormValues } from '../types';
+import type { FormValues } from '../types';
 import { RegistrerArbeidsgiverRad } from './RegistrerArbeidgiverRad';
 
 const defaultArbeidsgiver = {

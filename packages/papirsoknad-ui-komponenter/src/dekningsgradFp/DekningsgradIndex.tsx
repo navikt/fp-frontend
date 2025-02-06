@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Heading } from '@navikt/ds-react';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';

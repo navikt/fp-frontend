@@ -1,9 +1,9 @@
 import { useCallback, useEffect } from 'react';
-import { useFormContext, UseFormTrigger } from 'react-hook-form';
+import { useFormContext, type UseFormTrigger } from 'react-hook-form';
 
 import debounce from 'lodash.debounce';
 
-export const getTimeoutValue = () => (process.env.NODE_ENV === 'test' ? 0 : 1000);
+export const getTimeoutValue = () => (process.env['NODE_ENV'] === 'test' ? 0 : 1000);
 
 export const useDebounce = <Value>(
   feltNavn: string,

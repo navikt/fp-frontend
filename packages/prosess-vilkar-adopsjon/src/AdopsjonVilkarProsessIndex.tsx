@@ -2,7 +2,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { Vilkar } from '@navikt/fp-types';
+import type { Vilkar } from '@navikt/fp-types';
 
 import { AdopsjonVilkarForm } from './components/AdopsjonVilkarForm';
 

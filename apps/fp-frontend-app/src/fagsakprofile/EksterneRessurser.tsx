@@ -1,10 +1,9 @@
-import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Box, Button, Detail, HStack } from '@navikt/ds-react';
 
 import { AAREG_URL, AINNTEKT_URL, getGosysUrl, getModiaUrl } from '@navikt/fp-konstanter';
-import { Fagsak } from '@navikt/fp-types';
+import type { Fagsak } from '@navikt/fp-types';
 
 export const EksterneRessurser = ({
   fagsak,

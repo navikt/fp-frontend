@@ -1,12 +1,11 @@
-import React, { FunctionComponent } from 'react';
-import { WrappedComponentProps } from 'react-intl';
+import { useIntl } from 'react-intl';
 
 import { Datepicker, InputField, SelectField } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidFodselsnummer, hasValidName, required } from '@navikt/ft-form-validators';
 import { FaktaGruppe, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode, VergeType } from '@navikt/fp-kodeverk';
-import { KodeverkMedNavn, Verge } from '@navikt/fp-types';
+import type { KodeverkMedNavn, Verge } from '@navikt/fp-types';
 
 import styles from './registrereVergeFaktaForm.module.css';
 
@@ -29,16 +28,11 @@ export type TransformedValues = {
   kode: AksjonspunktKode.AVKLAR_VERGE;
 };
 
-interface OwnProps {
+interface Props {
   readOnly: boolean;
   vergetyper?: KodeverkMedNavn[];
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   valgtVergeType?: string;
-}
-
-interface StaticFunctions {
-  buildInitialValues: (verge: Verge) => FormValues;
-  transformValues: (values: FormValues) => TransformedValues;
 }
 
 /**
@@ -46,82 +40,84 @@ interface StaticFunctions {
  *
  * Formkomponent. Registrering og oppdatering av verge.
  */
-const RegistrereVergeFaktaForm: FunctionComponent<OwnProps & WrappedComponentProps> & StaticFunctions = ({
-  intl,
+export const RegistrereVergeFaktaForm = ({
   readOnly,
   vergetyper = [],
   alleMerknaderFraBeslutter,
   valgtVergeType,
-}) => (
-  <FaktaGruppe merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.AVKLAR_VERGE]}>
-    <SelectField
-      name="vergeType"
-      className={styles.selectWidth}
-      label={intl.formatMessage({ id: 'Verge.TypeVerge' })}
-      validate={[required]}
-      selectValues={vergetyper.map(vt => (
-        <option key={vt.kode} value={vt.kode}>
-          {vt.navn}
-        </option>
-      ))}
-      readOnly={readOnly}
-    />
-    <FlexContainer>
-      {valgtVergeType && (
-        <>
-          <VerticalSpacer sixteenPx />
-          <FlexRow>
-            <FlexColumn className={styles.leftCol}>
-              <InputField
-                name="navn"
-                label={intl.formatMessage({ id: 'Verge.Navn' })}
-                validate={[required, hasValidName]}
-                readOnly={readOnly}
-              />
-            </FlexColumn>
-            <FlexColumn>
-              {valgtVergeType !== VergeType.ADVOKAT && (
+}: Props) => {
+  const intl = useIntl();
+  return (
+    <FaktaGruppe merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.AVKLAR_VERGE]}>
+      <SelectField
+        name="vergeType"
+        className={styles.selectWidth}
+        label={intl.formatMessage({ id: 'Verge.TypeVerge' })}
+        validate={[required]}
+        selectValues={vergetyper.map(vt => (
+          <option key={vt.kode} value={vt.kode}>
+            {vt.navn}
+          </option>
+        ))}
+        readOnly={readOnly}
+      />
+      <FlexContainer>
+        {valgtVergeType && (
+          <>
+            <VerticalSpacer sixteenPx />
+            <FlexRow>
+              <FlexColumn className={styles.leftCol}>
                 <InputField
-                  name="fnr"
-                  label={intl.formatMessage({ id: 'Verge.FodselsNummer' })}
-                  validate={[required, hasValidFodselsnummer]}
+                  name="navn"
+                  label={intl.formatMessage({ id: 'Verge.Navn' })}
+                  validate={[required, hasValidName]}
                   readOnly={readOnly}
                 />
-              )}
-              {valgtVergeType === VergeType.ADVOKAT && (
-                <InputField
-                  name="organisasjonsnummer"
-                  label={intl.formatMessage({ id: 'Verge.Organisasjonsnummer' })}
-                  validate={[required]}
-                  readOnly={readOnly}
+              </FlexColumn>
+              <FlexColumn>
+                {valgtVergeType !== VergeType.ADVOKAT && (
+                  <InputField
+                    name="fnr"
+                    label={intl.formatMessage({ id: 'Verge.FodselsNummer' })}
+                    validate={[required, hasValidFodselsnummer]}
+                    readOnly={readOnly}
+                  />
+                )}
+                {valgtVergeType === VergeType.ADVOKAT && (
+                  <InputField
+                    name="organisasjonsnummer"
+                    label={intl.formatMessage({ id: 'Verge.Organisasjonsnummer' })}
+                    validate={[required]}
+                    readOnly={readOnly}
+                  />
+                )}
+              </FlexColumn>
+            </FlexRow>
+            <VerticalSpacer sixteenPx />
+            <FlexRow>
+              <FlexColumn>
+                <Datepicker
+                  name="gyldigFom"
+                  label={intl.formatMessage({ id: 'Verge.PeriodeFOM' })}
+                  validate={[required, hasValidDate]}
+                  isReadOnly={readOnly}
                 />
-              )}
-            </FlexColumn>
-          </FlexRow>
-          <VerticalSpacer sixteenPx />
-          <FlexRow>
-            <FlexColumn>
-              <Datepicker
-                name="gyldigFom"
-                label={intl.formatMessage({ id: 'Verge.PeriodeFOM' })}
-                validate={[required, hasValidDate]}
-                isReadOnly={readOnly}
-              />
-            </FlexColumn>
-            <FlexColumn>
-              <Datepicker
-                name="gyldigTom"
-                label={intl.formatMessage({ id: 'Verge.PeriodeTOM' })}
-                validate={[hasValidDate]}
-                isReadOnly={readOnly}
-              />
-            </FlexColumn>
-          </FlexRow>
-        </>
-      )}
-    </FlexContainer>
-  </FaktaGruppe>
-);
+              </FlexColumn>
+              <FlexColumn>
+                <Datepicker
+                  name="gyldigTom"
+                  label={intl.formatMessage({ id: 'Verge.PeriodeTOM' })}
+                  validate={[hasValidDate]}
+                  isReadOnly={readOnly}
+                />
+              </FlexColumn>
+            </FlexRow>
+          </>
+        )}
+      </FlexContainer>
+    </FaktaGruppe>
+  );
+};
 
 RegistrereVergeFaktaForm.buildInitialValues = (verge: Verge): FormValues => ({
   navn: verge.navn,
@@ -141,5 +137,3 @@ RegistrereVergeFaktaForm.transformValues = (values: FormValues): TransformedValu
   gyldigTom: values.gyldigTom,
   kode: AksjonspunktKode.AVKLAR_VERGE,
 });
-
-export default RegistrereVergeFaktaForm;

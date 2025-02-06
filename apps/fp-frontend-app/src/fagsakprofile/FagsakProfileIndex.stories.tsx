@@ -1,6 +1,6 @@
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { action } from '@storybook/addon-actions';
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 
@@ -20,16 +20,11 @@ import {
   withQueryClient,
   withRouter,
 } from '@navikt/fp-storybook-utils';
-import {
-  Behandling,
-  BehandlingAppKontekst,
-  BehandlingOppretting,
-  Fagsak,
-  VergeBehandlingmenyValg,
-} from '@navikt/fp-types';
+import type { Behandling, BehandlingAppKontekst, BehandlingOppretting, Fagsak } from '@navikt/fp-types';
+import { VergeBehandlingmenyValg } from '@navikt/fp-types';
+import { notEmpty } from '@navikt/fp-utils';
 
 import { FagsakRel, FagsakUrl, initFetchOptions, useFagsakApi, wrapUrl } from '../data/fagsakApi';
-import { notEmpty } from '../data/notEmpty';
 import { FagsakData } from '../fagsak/FagsakData';
 import { FagsakProfileIndex } from './FagsakProfileIndex';
 

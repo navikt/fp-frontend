@@ -1,18 +1,17 @@
-import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Heading } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { InntektArbeidYtelse } from '@navikt/fp-types';
+import type { InntektArbeidYtelse } from '@navikt/fp-types';
 
-import PersonYtelserTable from './PersonYtelserTable';
+import { PersonYtelserTable } from './PersonYtelserTable';
 
-interface OwnProps {
+interface Props {
   inntektArbeidYtelse: InntektArbeidYtelse;
 }
 
-const YtelserFaktaPanel: FunctionComponent<OwnProps> = ({ inntektArbeidYtelse }) => (
+export const YtelserFaktaPanel = ({ inntektArbeidYtelse }: Props) => (
   <>
     <Heading size="small">
       <FormattedMessage id="YtelserFaktaPanel.SokersYtelser" />
@@ -32,5 +31,3 @@ const YtelserFaktaPanel: FunctionComponent<OwnProps> = ({ inntektArbeidYtelse })
       )}
   </>
 );
-
-export default YtelserFaktaPanel;

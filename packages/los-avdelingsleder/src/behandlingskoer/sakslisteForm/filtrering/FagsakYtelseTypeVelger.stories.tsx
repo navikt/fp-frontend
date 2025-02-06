@@ -1,9 +1,8 @@
-import React from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Form } from '@navikt/ft-form-hooks';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 

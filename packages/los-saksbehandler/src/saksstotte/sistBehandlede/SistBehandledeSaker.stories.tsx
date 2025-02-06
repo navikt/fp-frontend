@@ -1,9 +1,9 @@
 import { action } from '@storybook/addon-actions';
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { http, HttpResponse } from 'msw';
 
 import { BehandlingStatus } from '@navikt/fp-kodeverk';
-import { Oppgave } from '@navikt/fp-los-felles';
+import { type Oppgave } from '@navikt/fp-los-felles';
 import { getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { LosUrl } from '../../data/fplosSaksbehandlerApi';

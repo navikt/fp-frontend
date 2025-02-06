@@ -1,14 +1,13 @@
-import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { CheckboxPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
 import { KodeverkType, NaringsvirksomhetType } from '@navikt/fp-kodeverk';
-import { AlleKodeverk } from '@navikt/fp-types';
+import type { AlleKodeverk } from '@navikt/fp-types';
 
 import { VIRKSOMHET_FORM_NAME_PREFIX } from '../constants';
-import { RegistrerVirksomhetFormValues } from '../types';
+import type { RegistrerVirksomhetFormValues } from '../types';
 
 const naringsvirksomhetTypeOrder = {
   [NaringsvirksomhetType.DAGMAMMA]: 1,

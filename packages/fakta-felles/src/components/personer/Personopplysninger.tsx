@@ -1,4 +1,3 @@
-import React from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
 import { BodyShort, Box, Detail, HStack, Label, VStack } from '@navikt/ds-react';
@@ -6,7 +5,7 @@ import { Gender, GenderIcon } from '@navikt/ft-plattform-komponenter';
 import { createIntl, dateFormat } from '@navikt/ft-utils';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
-import { AlleKodeverk, KjønnkodeEnum, Personadresse } from '@navikt/fp-types';
+import { type AlleKodeverk, KjønnkodeEnum, type Personadresse } from '@navikt/fp-types';
 
 import { AdresseTabell } from '../adresser/AdresseTabell';
 

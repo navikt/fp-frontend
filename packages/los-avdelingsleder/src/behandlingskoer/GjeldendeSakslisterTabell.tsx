@@ -1,4 +1,4 @@
-import React, { KeyboardEvent, ReactElement, useEffect, useRef, useState } from 'react';
+import { type KeyboardEvent, type ReactElement, useEffect, useRef, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { PlusCircleIcon, XMarkIcon } from '@navikt/aksel-icons';
@@ -7,11 +7,11 @@ import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
-import { KodeverkMedNavn } from '@navikt/fp-types';
+import type { KodeverkMedNavn } from '@navikt/fp-types';
 
 import { LosUrl, slettSaksliste } from '../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../data/useLosKodeverk';
-import { SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType';
+import type { SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType';
 import { SletteSakslisteModal } from './SletteSakslisteModal';
 
 import styles from './gjeldendeSakslisterTabell.module.css';

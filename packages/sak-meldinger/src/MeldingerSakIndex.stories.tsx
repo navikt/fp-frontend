@@ -1,9 +1,9 @@
 import { action } from '@storybook/addon-actions';
-import { Meta, ReactRenderer, StoryObj } from '@storybook/react';
-import { DecoratorFunction } from '@storybook/types';
+import type { Meta, ReactRenderer, StoryObj } from '@storybook/react';
+import type { DecoratorFunction } from '@storybook/types';
 
 import { DokumentMalType, FagsakYtelseType, UgunstAarsakType } from '@navikt/fp-kodeverk';
-import { BehandlingAppKontekst } from '@navikt/fp-types';
+import type { BehandlingAppKontekst } from '@navikt/fp-types';
 
 import { MeldingerSakIndex } from './MeldingerSakIndex';
 

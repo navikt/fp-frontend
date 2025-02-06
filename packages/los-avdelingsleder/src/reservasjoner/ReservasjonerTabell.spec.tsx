@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
 import { applyRequestHandlers } from 'msw-storybook-addon';
@@ -10,7 +8,7 @@ const { ViseAtIngenReservasjonerBleFunnet, VisTabellMedReservasjoner } = compose
 
 describe('<ReservasjonerTabell>', () => {
   it('skal vise tekst som viser at ingen reservasjoner er lagt til', async () => {
-    await applyRequestHandlers(ViseAtIngenReservasjonerBleFunnet.parameters.msw);
+    await applyRequestHandlers(ViseAtIngenReservasjonerBleFunnet.parameters['msw']);
     render(<ViseAtIngenReservasjonerBleFunnet />);
 
     expect(await screen.findByText('Reservasjoner for avdelingen')).toBeInTheDocument();
@@ -18,7 +16,7 @@ describe('<ReservasjonerTabell>', () => {
   });
 
   it('skal vise to reservasjoner i tabell', async () => {
-    await applyRequestHandlers(VisTabellMedReservasjoner.parameters.msw);
+    await applyRequestHandlers(VisTabellMedReservasjoner.parameters['msw']);
     render(<VisTabellMedReservasjoner />);
 
     expect(await screen.findByText('Reservasjoner for avdelingen')).toBeInTheDocument();

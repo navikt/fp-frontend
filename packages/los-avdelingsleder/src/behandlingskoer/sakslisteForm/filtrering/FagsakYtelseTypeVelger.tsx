@@ -1,4 +1,3 @@
-import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Label, VStack } from '@navikt/ds-react';

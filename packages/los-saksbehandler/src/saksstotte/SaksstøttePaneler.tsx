@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { VStack } from '@navikt/ds-react';
 
 import { SaksbehandlerNokkeltallPanel } from './nokkeltall/SaksbehandlerNokkeltallPanel';

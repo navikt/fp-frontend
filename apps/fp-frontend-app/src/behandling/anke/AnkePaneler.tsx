@@ -1,6 +1,6 @@
 import { BehandlingContainer } from '../felles/BehandlingContainer';
-import { FaktaPanelInitProps } from '../felles/typer/faktaPanelInitProps';
-import { ProsessPanelInitProps } from '../felles/typer/prosessPanelInitProps';
+import type { FaktaPanelInitProps } from '../felles/typer/faktaPanelInitProps';
+import type { ProsessPanelInitProps } from '../felles/typer/prosessPanelInitProps';
 import { VergeFaktaInitPanel } from '../fellesPaneler/fakta/VergeFaktaInitPanel';
 import { AnkeBehandlingProsessStegInitPanel } from './prosessPaneler/AnkeBehandlingProsessStegInitPanel';
 import { AnkeResultatProsessStegInitPanel } from './prosessPaneler/AnkeResultatProsessStegInitPanel';

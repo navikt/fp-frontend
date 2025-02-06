@@ -1,4 +1,3 @@
-import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Button, Heading, HStack, Label, Modal, VStack } from '@navikt/ds-react';
@@ -6,7 +5,7 @@ import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { KodeverkMedNavn } from '@navikt/fp-types';
+import type { KodeverkMedNavn } from '@navikt/fp-types';
 
 import styles from './settPaVentReadOnlyModal.module.css';
 

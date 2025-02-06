@@ -1,12 +1,12 @@
-import { UseFormHandleSubmit } from 'react-hook-form';
+import { type UseFormHandleSubmit } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { Button } from '@navikt/ds-react';
 
 import { BehandlingType } from '@navikt/fp-kodeverk';
 
-import { AvsluttetBehandling } from '../types/avsluttetBehandlingTsType';
-import { FormkravMellomlagretDataType } from '../types/FormkravMellomlagretDataType';
+import type { AvsluttetBehandling } from '../types/avsluttetBehandlingTsType';
+import type { FormkravMellomlagretDataType } from '../types/FormkravMellomlagretDataType';
 
 export const IKKE_PA_KLAGD_VEDTAK = 'ikkePaklagdVedtak';
 

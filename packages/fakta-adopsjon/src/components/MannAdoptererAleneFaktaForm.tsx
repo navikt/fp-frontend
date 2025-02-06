@@ -1,4 +1,3 @@
-import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Detail } from '@navikt/ds-react';
@@ -7,12 +6,12 @@ import { required } from '@navikt/ft-form-validators';
 import { FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode, getKodeverknavnFn, KodeverkType } from '@navikt/fp-kodeverk';
-import { AlleKodeverk, FamilieHendelse } from '@navikt/fp-types';
-import { BekreftMannAdoptererAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { AlleKodeverk, FamilieHendelse } from '@navikt/fp-types';
+import type { BekreftMannAdoptererAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import styles from './mannAdoptererAleneFaktaForm.module.css';
 
-interface OwnProps {
+interface Props {
   readOnly: boolean;
   farSokerType?: string;
   alleKodeverk: AlleKodeverk;
@@ -24,23 +23,18 @@ export type FormValues = {
   mannAdoptererAlene?: boolean;
 };
 
-interface StaticFunctions {
-  buildInitialValues: (familiehendelse: FamilieHendelse) => FormValues;
-  transformValues: (mannAdoptererAlene: boolean) => BekreftMannAdoptererAksjonspunktAp;
-}
-
 /**
  * MannAdoptererAleneFaktaForm
  *
  * Presentasjonskomponent. Setter opp aksjonspunktet for vurdering av om mann adopterer alene.
  */
-const MannAdoptererAleneFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
+export const MannAdoptererAleneFaktaForm = ({
   farSokerType,
   readOnly,
   alleKodeverk,
   alleMerknaderFraBeslutter,
   mannAdoptererAlene,
-}) => {
+}: Props) => {
   const intl = useIntl();
   return (
     <FaktaGruppe
@@ -91,5 +85,3 @@ MannAdoptererAleneFaktaForm.transformValues = (mannAdoptererAlene: boolean): Bek
   kode: AksjonspunktKode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
   mannAdoptererAlene,
 });
-
-export default MannAdoptererAleneFaktaForm;

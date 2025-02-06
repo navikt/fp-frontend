@@ -1,4 +1,3 @@
-import React from 'react';
 import { useForm } from 'react-hook-form';
 
 import { HGrid } from '@navikt/ds-react';
@@ -10,7 +9,7 @@ import {
   MottattDatoPapirsoknadIndex,
   SoknadData,
 } from '@navikt/fp-papirsoknad-ui-komponenter';
-import { AlleKodeverk } from '@navikt/fp-types';
+import type { AlleKodeverk } from '@navikt/fp-types';
 
 import RegistreringAdopsjonOgOmsorgGrid from './RegistreringAdopsjonOgOmsorgGrid';
 import RegistreringFodselGrid from './RegistreringFodselGrid';

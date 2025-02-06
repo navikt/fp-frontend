@@ -1,4 +1,4 @@
-import React, { MouseEvent, ReactNode, useCallback, useMemo, useState } from 'react';
+import React, { type MouseEvent, type ReactNode, useCallback, useMemo, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -16,7 +16,7 @@ import {
   KonsekvensForYtelsen,
 } from '@navikt/fp-kodeverk';
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
-import { Aksjonspunkt, Behandling, Behandlingsresultat } from '@navikt/fp-types';
+import type { Aksjonspunkt, Behandling, Behandlingsresultat } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { ManueltVedtaksbrevPanel } from './ManueltVedtaksbrevPanel';

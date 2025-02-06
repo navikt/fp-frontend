@@ -1,13 +1,11 @@
-import React from 'react';
-
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { HistorikkAktor } from '@navikt/fp-kodeverk';
 import { skjermlenkeCodes } from '@navikt/fp-konstanter';
 import { alleKodeverk, alleKodeverkTilbakekreving, withRouter } from '@navikt/fp-storybook-utils';
-import { Historikkinnslag } from '@navikt/fp-types';
+import type { Historikkinnslag } from '@navikt/fp-types';
 
-import HistorikkSakIndex from './HistorikkSakIndex';
+import { HistorikkSakIndex } from './HistorikkSakIndex';
 
 const locationMock = { key: 'test', pathname: 'test', search: 'test', state: {}, hash: 'test' };
 
@@ -18,7 +16,7 @@ const historikkInnslag: Historikkinnslag[] = [
       type: HistorikkAktor.SAKSBEHANDLER,
       ident: 'Z994283',
     },
-    skjermlenke: skjermlenkeCodes.FAKTA_UTTAK.kode,
+    skjermlenke: skjermlenkeCodes['FAKTA_UTTAK'].kode,
     opprettetTidspunkt: '2024-12-06T11:59:56.891',
     dokumenter: [],
     tittel: null,
@@ -101,7 +99,7 @@ const historikkInnslag: Historikkinnslag[] = [
       type: HistorikkAktor.BESLUTTER,
       ident: 'Z993179',
     },
-    skjermlenke: skjermlenkeCodes.VEDTAK.kode,
+    skjermlenke: skjermlenkeCodes['VEDTAK'].kode,
     opprettetTidspunkt: '2024-09-27T16:02:59.251',
     dokumenter: null,
     tittel: null,
@@ -140,7 +138,7 @@ const historikkInnslag: Historikkinnslag[] = [
       type: HistorikkAktor.SAKSBEHANDLER,
       ident: 'Z991753',
     },
-    skjermlenke: skjermlenkeCodes.FAKTA_OM_MEDLEMSKAP.kode,
+    skjermlenke: skjermlenkeCodes['FAKTA_OM_MEDLEMSKAP'].kode,
     opprettetTidspunkt: '2024-09-19T16:33:54.789',
     dokumenter: [],
     tittel: null,

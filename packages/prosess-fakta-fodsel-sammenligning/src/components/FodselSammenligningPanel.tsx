@@ -1,22 +1,21 @@
-import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, Heading,Tag } from '@navikt/ds-react';
+import { BodyShort, Heading, Tag } from '@navikt/ds-react';
 import { FlexColumn, FlexContainer, FlexRow, Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import moment from 'moment';
 
 import { BehandlingType } from '@navikt/fp-kodeverk';
-import { AvklartBarn, FamilieHendelse, Soknad } from '@navikt/fp-types';
+import type { AvklartBarn, FamilieHendelse, Soknad } from '@navikt/fp-types';
 
-import FodselSammenligningOtherPanel from './FodselSammenligningOtherPanel';
-import FodselSammenligningRevurderingPanel from './FodselSammenligningRevurderingPanel';
+import { FodselSammenligningOtherPanel } from './FodselSammenligningOtherPanel';
+import { FodselSammenligningRevurderingPanel } from './FodselSammenligningRevurderingPanel';
 
 import styles from './fodselSammenligningPanel.module.css';
 
 const formatDate = (date: string): string => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
 
-interface OwnProps {
+interface Props {
   behandlingsTypeKode: string;
   avklartBarn: AvklartBarn[];
   nrOfDodfodteBarn: number;
@@ -32,7 +31,7 @@ interface OwnProps {
  *
  * Presentasjonskomponent. Viser sammenligning av fødsel ved ytelsesvedtak/søknad og oppdatert informasjon fra TPS.
  */
-const FodselSammenligningPanel: FunctionComponent<OwnProps> = ({
+const FodselSammenligningPanel = ({
   behandlingsTypeKode,
   avklartBarn,
   nrOfDodfodteBarn,
@@ -41,7 +40,7 @@ const FodselSammenligningPanel: FunctionComponent<OwnProps> = ({
   termindato,
   soknadOriginalBehandling,
   familiehendelseOriginalBehandling,
-}) => (
+}: Props) => (
   <FlexContainer>
     <FlexRow>
       <FlexColumn className={styles.colWidthLeft}>

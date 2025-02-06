@@ -1,4 +1,3 @@
-import React from 'react';
 import { useForm } from 'react-hook-form';
 
 import { HGrid } from '@navikt/ds-react';
@@ -18,7 +17,7 @@ import {
   TerminOgFodselPanelSvp,
   VirksomhetPapirsoknadIndex,
 } from '@navikt/fp-papirsoknad-ui-komponenter';
-import { AlleKodeverk } from '@navikt/fp-types';
+import type { AlleKodeverk } from '@navikt/fp-types';
 
 const buildInitialValues = () => ({
   ...MottattDatoPapirsoknadIndex.initialValues(),

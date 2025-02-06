@@ -1,6 +1,6 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
-import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
+import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 
 type KlageFormkravBasic = {
   erKlagerPart: boolean;
@@ -17,7 +17,5 @@ type KlageFormkravBasic = {
   fritekstTilBrev?: string;
 };
 
-type KlageFormkravAp = KlageFormkravBasic &
+export type KlageFormkravAp = KlageFormkravBasic &
   AksjonspunktTilBekreftelse<AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP>;
-
-export default KlageFormkravAp;

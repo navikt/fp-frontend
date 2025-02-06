@@ -12,8 +12,8 @@ import {
   validerApKodeOgHentApEnum,
   VilkarResultPicker,
 } from '@navikt/fp-prosess-felles';
-import { Aksjonspunkt, Behandling } from '@navikt/fp-types';
-import {
+import type { Aksjonspunkt, Behandling } from '@navikt/fp-types';
+import type {
   OmsorgsvilkarAp,
   VurdereYtelseSammeBarnAnnenForelderAp,
   VurdereYtelseSammeBarnSokerAp,

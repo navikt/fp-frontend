@@ -1,11 +1,10 @@
-import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { BehandlingType } from '@navikt/fp-kodeverk';
 import { ReactECharts } from '@navikt/fp-los-felles';
-import { KodeverkMedNavn } from '@navikt/fp-types';
+import type { KodeverkMedNavn } from '@navikt/fp-types';
 
-import { OppgaverForAvdeling } from '../../typer/oppgaverForAvdelingTsType';
+import type { OppgaverForAvdeling } from '../../typer/oppgaverForAvdelingTsType';
 
 const behandlingstypeOrder = [
   BehandlingType.TILBAKEKREVING_REVURDERING,
@@ -113,5 +112,5 @@ const slåSammen = (oppgaverForAvdeling: OppgaverForAvdeling[]): number[] => {
     {} as Record<string, number>,
   );
 
-  return behandlingstypeOrder.map((b, index) => test[index + 1]);
+  return behandlingstypeOrder.map((_b, index) => test[index + 1]);
 };

@@ -1,4 +1,4 @@
-import { KontrollerFaktaPeriode } from '@navikt/fp-types';
+import type { KontrollerFaktaPeriode } from '@navikt/fp-types';
 
 export enum PeriodeApType {
   START_FOM = 'START_FOM',
@@ -6,10 +6,8 @@ export enum PeriodeApType {
   MANGLENDE_ARBEIDSFORHOLD = 'MANGLENDE_ARBEIDSFORHOLD',
 }
 
-type KontrollerFaktaPeriodeMedApMarkering = KontrollerFaktaPeriode &
+export type KontrollerFaktaPeriodeMedApMarkering = KontrollerFaktaPeriode &
   Readonly<{
     originalFom: string;
     aksjonspunktType?: PeriodeApType;
   }>;
-
-export default KontrollerFaktaPeriodeMedApMarkering;

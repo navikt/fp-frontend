@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { Alert, BodyShort, Button, Chat, HStack } from '@navikt/ds-react';
 import { Form, TextAreaField } from '@navikt/ft-form-hooks';
@@ -8,7 +8,7 @@ import { hasValidText, maxLength, required } from '@navikt/ft-form-validators';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
 
-import { Saksnotat } from '@navikt/fp-types';
+import type { Saksnotat } from '@navikt/fp-types';
 
 import styles from './notatPanel.module.css';
 

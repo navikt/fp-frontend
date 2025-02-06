@@ -1,15 +1,15 @@
-import React, { FunctionComponent, ReactElement, useCallback, useEffect,useMemo } from 'react';
+import { type ReactElement, useCallback, useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
-import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { Alert, Button, HStack } from '@navikt/ds-react';
-import { Form, RadioGroupPanel, SelectField,TextAreaField } from '@navikt/ft-form-hooks';
+import { Form, RadioGroupPanel, SelectField, TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, notDash, required } from '@navikt/ft-form-validators';
 import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
 
-import { KodeverkType, OppholdArsakType, PeriodeResultatType,UtsettelseArsakCode } from '@navikt/fp-kodeverk';
-import {
+import { KodeverkType, OppholdArsakType, PeriodeResultatType, UtsettelseArsakCode } from '@navikt/fp-kodeverk';
+import type {
   AarsakFilter,
   AlleKodeverk,
   ArbeidsgiverOpplysningerPerId,
@@ -18,8 +18,8 @@ import {
   PeriodeSokerAktivitet,
 } from '@navikt/fp-types';
 
-import UttakAktiviteterTabell, { finnArbeidsforholdNavnOgProsentArbeid } from './UttakAktiviteterTabell';
-import { UttakAktivitet, UttakAktivitetType } from './UttakAktivitetType';
+import { finnArbeidsforholdNavnOgProsentArbeid,UttakAktiviteterTabell } from './UttakAktiviteterTabell';
+import type { UttakAktivitet, UttakAktivitetType } from './UttakAktivitetType';
 import UttakPeriodeInfo from './UttakPeriodeInfo';
 
 import styles from './uttakPeriodeForm.module.css';
@@ -269,7 +269,7 @@ const transformValues = (
   }),
 });
 
-interface OwnProps {
+interface Props {
   valgtPeriode: PeriodeSoker;
   isReadOnly: boolean;
   erHovedsøkersPeriode: boolean;
@@ -282,7 +282,7 @@ interface OwnProps {
   erTilknyttetStortinget: boolean;
 }
 
-const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
+export const UttakPeriodeForm = ({
   valgtPeriode,
   oppdaterPeriode,
   lukkPeriodeVisning,
@@ -293,7 +293,7 @@ const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
   arbeidsgiverOpplysningerPerId,
   harSoktOmFlerbarnsdager,
   erTilknyttetStortinget,
-}) => {
+}: Props) => {
   const intl = useIntl();
 
   const periodeResultatårsakKoder = alleKodeverk[KodeverkType.PERIODE_RESULTAT_AARSAK] as ArsakKodeverk[];
@@ -465,5 +465,3 @@ const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
     </Form>
   );
 };
-
-export default UttakPeriodeForm;

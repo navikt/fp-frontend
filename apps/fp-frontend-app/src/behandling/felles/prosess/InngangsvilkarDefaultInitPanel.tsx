@@ -1,10 +1,10 @@
-import { ReactElement, use } from 'react';
+import { type ReactElement, use } from 'react';
 
 import { VilkarType } from '@navikt/fp-kodeverk';
 import { FormDataProvider } from '@navikt/fp-utils';
 
-import { InngangsvilkarPanelInitProps } from '../typer/inngangsvilkarPanelInitProps';
-import { StandardProsessPanelProps } from '../typer/standardProsessPanelPropsTsType';
+import type { InngangsvilkarPanelInitProps } from '../typer/inngangsvilkarPanelInitProps';
+import type { StandardProsessPanelProps } from '../typer/standardProsessPanelPropsTsType';
 import { BehandlingDataContext } from '../utils/behandlingDataContext';
 import { skalViseProsessPanel } from './skalViseProsessPanel';
 import { useInngangsvilkarRegistrerer } from './useInngangsvilkarRegistrerer';

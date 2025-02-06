@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
@@ -8,7 +8,7 @@ import { Datepicker, PeriodFieldArray } from '@navikt/ft-form-hooks';
 import { dateAfterOrEqual, dateBeforeOrEqual, hasValidDate, required } from '@navikt/ft-form-validators';
 
 import { ANDRE_YTELSER_NAME_PREFIX, ANDRE_YTELSER_PERIODER_NAME } from '../constants';
-import { AndreYtelserFormValue } from '../types';
+import type { AndreYtelserFormValue } from '../types';
 
 interface Props {
   readOnly: boolean;

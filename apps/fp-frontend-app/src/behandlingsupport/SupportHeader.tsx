@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { useIntl } from 'react-intl';
 
 import { Heading } from '@navikt/ds-react';

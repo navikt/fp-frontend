@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
@@ -9,7 +9,7 @@ import { maxValue, required } from '@navikt/ft-form-validators';
 import { TilretteleggingType } from '@navikt/fp-kodeverk';
 
 import { FieldArrayRow } from '../../felles/FieldArrayRow';
-import { Tilrettelegging } from '../types';
+import { type Tilrettelegging } from '../types';
 
 const maxValue3 = maxValue(100);
 

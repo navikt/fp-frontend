@@ -1,10 +1,10 @@
-import { ComponentProps } from 'react';
+import type { ComponentProps } from 'react';
 
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, FagsakYtelseType, NavBrukerKjonn } from '@navikt/fp-kodeverk';
-import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import { Fagsak, Soknad } from '@navikt/fp-types';
+import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import type { Fagsak, Soknad } from '@navikt/fp-types';
 
 import { SakenFaktaIndex } from './SakenFaktaIndex';
 

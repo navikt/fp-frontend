@@ -1,7 +1,7 @@
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 
-import { Event, EventHint, init, Integrations } from '@sentry/browser';
+import { type Event, type EventHint, init, Integrations } from '@sentry/browser';
 import dayjs from 'dayjs';
 
 import { AppIndexWrapper } from './app/AppIndex';
@@ -21,7 +21,7 @@ const isDevelopment = import.meta.env.MODE === 'development';
 
 init({
   dsn: isDevelopment ? 'http://dev@localhost:9010/1' : 'https://d1b7de8cc42949569da03849b47d3ea1@sentry.gc.nav.no/17',
-  release: import.meta.env.SENTRY_RELEASE || 'unknown',
+  release: import.meta.env['SENTRY_RELEASE'] || 'unknown',
   environment,
   integrations: [new Integrations.Breadcrumbs({ console: false })],
   beforeSend: (event: Event, hint: EventHint) => {

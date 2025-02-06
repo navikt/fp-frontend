@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { BehandlingType, KodeverkType } from '@navikt/fp-kodeverk';
-import { AlleKodeverk, AlleKodeverkTilbakekreving, KodeverkMedNavn } from '@navikt/fp-types';
+import type { AlleKodeverk, AlleKodeverkTilbakekreving, KodeverkMedNavn } from '@navikt/fp-types';
+import { notEmpty } from '@navikt/fp-utils';
 
 import { useFagsakApi } from './fagsakApi';
-import { notEmpty } from './notEmpty';
 
 /**
  * Hook som henter kodeverk knyttet til behandlingstype

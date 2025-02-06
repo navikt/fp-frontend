@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { CheckmarkIcon, ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
@@ -9,8 +9,7 @@ import classnames from 'classnames/bind';
 import dayjs from 'dayjs';
 
 import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
-import {
-  AksjonspunktÅrsak,
+import type {
   AlleKodeverk,
   AoIArbeidsforhold,
   ArbeidOgInntektsmelding,
@@ -18,8 +17,9 @@ import {
   ManglendeInntektsmeldingVurdering,
   ManueltArbeidsforhold,
 } from '@navikt/fp-types';
+import { AksjonspunktÅrsak } from '@navikt/fp-types';
 
-import { ArbeidsforholdOgInntektRadData, Avklaring } from '../types/arbeidsforholdOgInntekt';
+import type { ArbeidsforholdOgInntektRadData, Avklaring } from '../types/arbeidsforholdOgInntekt';
 import { ArbeidsforholdInformasjonPanel } from './felles/ArbeidsforholdInformasjonPanel';
 import { InntektsmeldingerPanel } from './felles/InntektsmeldingerPanel';
 import { InntektsmeldingOpplysningerPanel } from './felles/InntektsmeldingOpplysningerPanel';
@@ -180,7 +180,7 @@ export const ArbeidsforholdRad = ({
               arbeidsforhold={arbeidsforholdForRad.length > 0 ? arbeidsforholdForRad[0] : undefined}
               inntektsmelding={finnInntektsmelding(
                 inntektsmeldingerForRad,
-                arbeidsforholdForRad.length > 0 ? arbeidsforholdForRad[0].internArbeidsforholdId : undefined,
+                arbeidsforholdForRad.length > 0 ? arbeidsforholdForRad[0]?.internArbeidsforholdId : undefined,
               )}
               skalViseArbeidsforholdId={false}
               alleKodeverk={alleKodeverk}

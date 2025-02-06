@@ -1,5 +1,5 @@
-import React, { ReactElement, useEffect } from 'react';
-import { useFieldArray, useFormContext, UseFormGetValues } from 'react-hook-form';
+import { type ReactElement, useEffect } from 'react';
+import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Datepicker, PeriodFieldArray, SelectField } from '@navikt/ft-form-hooks';
@@ -13,7 +13,7 @@ import {
 
 import { FieldArrayRow } from '../../../felles/FieldArrayRow';
 import { OVERFORING_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
-import { OverforingPeriode, PermisjonFormValues } from '../../types';
+import type { OverforingPeriode, PermisjonFormValues } from '../../types';
 
 const FA_PREFIX = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OVERFORING_PERIODE_FIELD_ARRAY_NAME}`;
 const getPrefix = (index: number) => `${FA_PREFIX}.${index}` as const;

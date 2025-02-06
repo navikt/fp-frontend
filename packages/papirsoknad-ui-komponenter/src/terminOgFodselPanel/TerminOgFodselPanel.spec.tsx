@@ -94,7 +94,7 @@ describe('<TerminOgFodselPanel>', () => {
   it.each([
     ['en foreldrepenge sak', ForeldrepengeSak],
     ['annet en foreldrepengersak', ErIkkeForeldrepengeSak],
-  ])('skal velge at barnet ikke er født for %s', async (navn, scenario) => {
+  ])('skal velge at barnet ikke er født for %s', async (_navn, scenario) => {
     const lagre = vi.fn();
 
     await scenario.run({

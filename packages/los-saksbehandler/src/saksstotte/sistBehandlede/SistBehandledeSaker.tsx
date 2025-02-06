@@ -1,11 +1,10 @@
-import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { ChevronRightCircleFillIcon, ClockDashedIcon } from '@navikt/aksel-icons';
 import { BodyShort, Heading, HStack, Table, VStack } from '@navikt/ds-react';
 import { useQuery } from '@tanstack/react-query';
 
-import { Oppgave } from '@navikt/fp-los-felles';
+import { type Oppgave } from '@navikt/fp-los-felles';
 
 import { behandlendeOppgaverOptions } from '../../data/fplosSaksbehandlerApi';
 

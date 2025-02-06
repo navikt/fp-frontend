@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -10,10 +10,10 @@ import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
 import { AksjonspunktKode, FagsakYtelseType, TilbakekrevingVidereBehandling } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt, Fagsak, TilbakekrevingValg } from '@navikt/fp-types';
-import { VurderFeilutbetalingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { Aksjonspunkt, Fagsak, TilbakekrevingValg } from '@navikt/fp-types';
+import type { VurderFeilutbetalingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import FormValues, { FeilutbetalingFormValues } from '../../types/FormValues';
+import type { FeilutbetalingFormValues,FormValues } from '../types/FormValues';
 
 import styles from './tilbakekrevSøkerForm.module.css';
 
@@ -60,7 +60,7 @@ export const buildInitialValues = (
   };
 };
 
-interface OwnProps {
+interface Props {
   fagsak: Fagsak;
   sprakkode: string;
   aksjonspunkt?: Aksjonspunkt;
@@ -68,13 +68,7 @@ interface OwnProps {
   previewCallback: (params: { mottaker: string; fritekst: string }) => void;
 }
 
-const TilbakekrevSøkerForm: FunctionComponent<OwnProps> = ({
-  readOnly,
-  sprakkode,
-  previewCallback,
-  aksjonspunkt,
-  fagsak,
-}) => {
+export const TilbakekrevSøkerForm = ({ readOnly, sprakkode, previewCallback, aksjonspunkt, fagsak }: Props) => {
   const intl = useIntl();
 
   const { watch } = useFormContext<FormValues>();
@@ -169,5 +163,3 @@ const TilbakekrevSøkerForm: FunctionComponent<OwnProps> = ({
     </VStack>
   );
 };
-
-export default TilbakekrevSøkerForm;

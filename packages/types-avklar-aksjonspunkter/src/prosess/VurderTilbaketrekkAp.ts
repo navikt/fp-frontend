@@ -1,9 +1,7 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
-import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
+import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 
-type VurderTilbaketrekkAp = {
+export type VurderTilbaketrekkAp = {
   hindreTilbaketrekk?: boolean;
 } & AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_TILBAKETREKK>;
-
-export default VurderTilbaketrekkAp;

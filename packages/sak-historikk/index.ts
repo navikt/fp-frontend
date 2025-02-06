@@ -1,1 +1,1 @@
-export { default as HistorikkSakIndex } from './src/HistorikkSakIndex';
+export { HistorikkSakIndex } from './src/HistorikkSakIndex';

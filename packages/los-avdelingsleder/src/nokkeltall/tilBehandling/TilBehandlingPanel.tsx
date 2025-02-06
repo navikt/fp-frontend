@@ -1,4 +1,3 @@
-import React from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -10,13 +9,13 @@ import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 
 import { FagsakYtelseType, KodeverkType } from '@navikt/fp-kodeverk';
-import { KodeverkMedNavn } from '@navikt/fp-types';
+import type { KodeverkMedNavn } from '@navikt/fp-types';
 
 import { oppgaverPerDatoOptions } from '../../data/fplosAvdelingslederApi';
 import { StoreValuesInLocalStorage } from '../../data/StoreValuesInLocalStorage';
 import { useLosKodeverk } from '../../data/useLosKodeverk';
-import { OppgaveForDato } from '../../typer/oppgaverForDatoTsType';
-import { OppgaveForDatoGraf, TilBehandlingGraf } from './TilBehandlingGraf';
+import type { OppgaveForDato } from '../../typer/oppgaverForDatoTsType';
+import { type OppgaveForDatoGraf, TilBehandlingGraf } from './TilBehandlingGraf';
 
 dayjs.extend(isSameOrAfter);
 dayjs.extend(isSameOrBefore);

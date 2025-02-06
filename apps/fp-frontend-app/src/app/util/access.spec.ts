@@ -1,5 +1,5 @@
-import { BehandlingStatus, BehandlingType,FagsakStatus } from '@navikt/fp-kodeverk';
-import { NavAnsatt } from '@navikt/fp-types';
+import { BehandlingStatus, BehandlingType, FagsakStatus } from '@navikt/fp-kodeverk';
+import type { NavAnsatt } from '@navikt/fp-types';
 
 import { kanOverstyreAccess, writeAccess } from './access';
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
@@ -7,7 +6,7 @@ import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { useQuery } from '@tanstack/react-query';
 
 import { FagsakYtelseType, KodeverkType } from '@navikt/fp-kodeverk';
-import { KodeverkMedNavn } from '@navikt/fp-types';
+import type { KodeverkMedNavn } from '@navikt/fp-types';
 
 import { oppgaverForAvdelingOptions } from '../../data/fplosAvdelingslederApi';
 import { StoreValuesInLocalStorage } from '../../data/StoreValuesInLocalStorage';

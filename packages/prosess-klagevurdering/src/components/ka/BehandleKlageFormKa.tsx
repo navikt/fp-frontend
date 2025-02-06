@@ -8,7 +8,7 @@ import {
   KlageVurderingOmgjoer as klageVurderingOmgjoerType,
   KodeverkType,
 } from '@navikt/fp-kodeverk';
-import { KlageVurdering } from '@navikt/fp-types';
+import type { KlageVurdering } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 interface Props {

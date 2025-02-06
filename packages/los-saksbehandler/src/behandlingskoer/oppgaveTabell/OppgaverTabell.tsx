@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, HStack, Label, Pagination, SortState, Table, VStack } from '@navikt/ds-react';
+import { BodyShort, HStack, Label, Pagination, type SortState, Table, VStack } from '@navikt/ds-react';
 
-import { Oppgave } from '@navikt/fp-los-felles';
+import { type Oppgave } from '@navikt/fp-los-felles';
 
 import { BehandlingPollingTimoutModal } from '../timeoutModal/BehandlingPollingTimoutModal';
-import { OppgaveMedReservertIndikator, OppgaveRad } from './OppgaveRad';
+import { type OppgaveMedReservertIndikator, OppgaveRad } from './OppgaveRad';
 import { useOppgavePolling } from './useOppgavePolling';
 
 import styles from './oppgaverTabell.module.css';

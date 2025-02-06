@@ -1,8 +1,6 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
-import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
+import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 
-type KontrollerRevurderingsBehandlingAp =
+export type KontrollerRevurderingsBehandlingAp =
   AksjonspunktTilBekreftelse<AksjonspunktKode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST>;
-
-export default KontrollerRevurderingsBehandlingAp;

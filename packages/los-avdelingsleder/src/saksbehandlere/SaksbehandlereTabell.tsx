@@ -1,11 +1,11 @@
-import React, { useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { XMarkIcon } from '@navikt/aksel-icons';
 import { BodyShort, Table, VStack } from '@navikt/ds-react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
+import type { SaksbehandlerProfil } from '@navikt/fp-los-felles';
 
 import { LosUrl, slettSaksbehandler } from '../data/fplosAvdelingslederApi';
 import { SletteSaksbehandlerModal } from './SletteSaksbehandlerModal';

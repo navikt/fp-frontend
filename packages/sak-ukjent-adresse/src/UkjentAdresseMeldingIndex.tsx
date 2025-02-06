@@ -1,4 +1,3 @@
-import React, { FunctionComponent } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
@@ -16,7 +15,7 @@ const intl = createIntl(messages);
  * Viser en info tekst som informerer saksbehandlere at brukeren i behandlingen
  * har ikke en registrert adresse.
  */
-export const UkjentAdresseMeldingIndex: FunctionComponent = () => (
+export const UkjentAdresseMeldingIndex = () => (
   <RawIntlProvider value={intl}>
     <div className={styles.ukjentAdresseMargins}>
       <AksjonspunktHelpTextHTML>

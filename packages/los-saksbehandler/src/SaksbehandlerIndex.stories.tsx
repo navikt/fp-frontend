@@ -1,21 +1,21 @@
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { action } from '@storybook/addon-actions';
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import dayjs from 'dayjs';
 import { http, HttpResponse } from 'msw';
 
 import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
-import { Oppgave } from '@navikt/fp-los-felles';
+import { type Oppgave } from '@navikt/fp-los-felles';
 import { alleKodeverkLos, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { LosUrl } from './data/fplosSaksbehandlerApi';
 import { AndreKriterierType } from './kodeverk/andreKriterierType';
 import { KoSortering } from './kodeverk/KoSortering';
 import { SaksbehandlerIndex } from './SaksbehandlerIndex';
-import { NyeOgFerdigstilteOppgaver } from './typer/nyeOgFerdigstilteOppgaverTsType';
-import { Saksbehandler } from './typer/saksbehandlerTsType';
-import { Saksliste } from './typer/sakslisteTsType';
+import type { NyeOgFerdigstilteOppgaver } from './typer/nyeOgFerdigstilteOppgaverTsType';
+import type { Saksbehandler } from './typer/saksbehandlerTsType';
+import type { Saksliste } from './typer/sakslisteTsType';
 
 const SAKSLISTER = [
   {

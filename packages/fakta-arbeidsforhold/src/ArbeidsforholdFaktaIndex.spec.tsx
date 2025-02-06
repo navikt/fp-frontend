@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { composeStories } from '@storybook/react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -20,7 +18,7 @@ const {
 
 describe('<ArbeidsforholdFaktaIndex>', () => {
   it('skal vise at arbeidsforholdet er oppdatert og behandlingen har fortsatt uten IM', async () => {
-    render(<ArbeidsforholdetSkalBenyttesUtenInntektsmelding />, );
+    render(<ArbeidsforholdetSkalBenyttesUtenInntektsmelding />);
 
     expect(await screen.findByText('Arbeidsforhold som er aktive ved permisjonsstart')).toBeInTheDocument();
     expect(screen.getByText('KIWI(999999999)')).toBeInTheDocument();

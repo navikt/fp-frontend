@@ -1,11 +1,11 @@
-import { ReactElement, use } from 'react';
+import { type ReactElement, use } from 'react';
 
 import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { FormDataProvider, PanelDataProvider, usePanelOverstyring } from '@navikt/fp-utils';
 
-import { ProsessPanelInitProps } from '../typer/prosessPanelInitProps';
-import { StandardProsessPanelProps } from '../typer/standardProsessPanelPropsTsType';
+import type { ProsessPanelInitProps } from '../typer/prosessPanelInitProps';
+import type { StandardProsessPanelProps } from '../typer/standardProsessPanelPropsTsType';
 import { BehandlingDataContext } from '../utils/behandlingDataContext';
 import { ProsessPanelWrapper } from './ProsessPanelWrapper';
 import { useProsessMenyRegistrerer } from './useProsessMenyRegistrerer';

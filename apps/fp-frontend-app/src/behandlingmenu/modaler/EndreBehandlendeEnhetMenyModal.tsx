@@ -1,11 +1,11 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { MenyEndreBehandlendeEnhetIndex } from '@navikt/fp-sak-meny';
-import { Behandling } from '@navikt/fp-types';
+import type { Behandling } from '@navikt/fp-types';
+import { notEmpty } from '@navikt/fp-utils';
 
 import { useBehandlingApi } from '../../data/behandlingApi';
 import { initFetchOptions } from '../../data/fagsakApi';
-import { notEmpty } from '../../data/notEmpty';
 
 interface Props {
   behandling: Behandling;

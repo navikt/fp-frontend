@@ -1,15 +1,14 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { HTTPError } from 'ky';
 
 import { FagsakSokSakIndex } from '@navikt/fp-sak-sok';
-import { FagsakEnkel } from '@navikt/fp-types';
+import type { FagsakEnkel } from '@navikt/fp-types';
+import { notEmpty } from '@navikt/fp-utils';
 
 import { pathToFagsak } from '../app/paths';
 import { useFagsakApi } from '../data/fagsakApi';
-import { notEmpty } from '../data/notEmpty';
 
 const EMPTY_ARRAY = [] as FagsakEnkel[];
 
@@ -39,7 +38,7 @@ export const FagsakSearchIndex = () => {
     mutationFn: (valuesToStore: { searchString: string }) => søkFagsak(valuesToStore.searchString),
     onSuccess: resultatFagsaker => {
       if (resultatFagsaker.length === 1) {
-        goToFagsak(resultatFagsaker[0].saksnummer);
+        goToFagsak(resultatFagsaker[0]?.saksnummer);
       }
     },
   });

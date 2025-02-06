@@ -1,5 +1,5 @@
 import { FatterVedtakTotrinnskontrollModalSakIndex } from '@navikt/fp-sak-totrinnskontroll';
-import { BehandlingAppKontekst } from '@navikt/fp-types';
+import type { BehandlingAppKontekst } from '@navikt/fp-types';
 
 interface Props {
   behandling: BehandlingAppKontekst;

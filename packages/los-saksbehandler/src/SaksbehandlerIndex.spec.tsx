@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
 import { applyRequestHandlers } from 'msw-storybook-addon';
@@ -10,7 +8,7 @@ const { Default } = composeStories(stories);
 
 describe('<SaksbehandlerIndex>', () => {
   it('skal saksbehandler-los', async () => {
-    await applyRequestHandlers(Default.parameters.msw);
+    await applyRequestHandlers(Default.parameters['msw']);
     await render(<Default />);
     expect(await screen.findByText('Behandlingskø')).toBeInTheDocument();
     expect(await screen.findByText('Neste i køen')).toBeInTheDocument();

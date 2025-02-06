@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { http, HttpResponse } from 'msw';
 
 import { BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
@@ -7,7 +7,7 @@ import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-s
 import { LosUrl } from '../data/fplosAvdelingslederApi';
 import { AndreKriterierType } from '../kodeverk/andreKriterierType';
 import { KøSortering } from '../kodeverk/KoSortering';
-import { SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType';
+import type { SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType';
 import { EndreSakslisterPanel } from './EndreSakslisterPanel';
 
 import messages from '../../i18n/nb_NO.json';

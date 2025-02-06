@@ -1,4 +1,4 @@
-import { ReactElement, useState } from 'react';
+import { type ReactElement, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Buildings3Icon, SilhouetteIcon } from '@navikt/aksel-icons';
@@ -6,9 +6,9 @@ import { Alert, BodyShort, Button, CopyButton, Heading, HStack, Search, VStack }
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { isValidFodselsnummer } from '@navikt/ft-utils';
 
-import { ForhåndsvisBrukerRespons } from '../../../typer/forhåndsvisBrukerResponsTsType';
-import { Journalpost } from '../../../typer/journalpostTsType';
-import { OppdaterMedBruker } from '../../../typer/oppdaterBrukerTsType';
+import type { ForhåndsvisBrukerRespons } from '../../../typer/forhåndsvisBrukerResponsTsType';
+import type { Journalpost } from '../../../typer/journalpostTsType';
+import type { OppdaterMedBruker } from '../../../typer/oppdaterBrukerTsType';
 
 import styles from './brukerAvsenderPanel.module.css';
 

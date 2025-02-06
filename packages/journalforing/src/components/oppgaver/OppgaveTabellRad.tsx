@@ -5,10 +5,10 @@ import { ChevronRightIcon } from '@navikt/aksel-icons';
 import { Button, Table, Tag } from '@navikt/ds-react';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 
-import { NavAnsatt } from '@navikt/fp-types';
+import type { NavAnsatt } from '@navikt/fp-types';
 
-import { Oppgave } from '../../typer/oppgaveTsType';
-import { ReserverOppgaveType } from '../../typer/reserverOppgaveType';
+import type { Oppgave } from '../../typer/oppgaveTsType';
+import type { ReserverOppgaveType } from '../../typer/reserverOppgaveType';
 import { finnYtelseTekst } from '../journalpost/innhold/VelgSakForm';
 
 import styles from './oppgaveTabellRad.module.css';

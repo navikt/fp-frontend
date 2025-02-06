@@ -8,13 +8,13 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { AksjonspunktKode, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { SimuleringProsessIndex } from '@navikt/fp-prosess-simulering';
-import { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
+import type { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
 import { forhåndsvisTilbakekrevingMelding, harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
-import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
-import { ProsessPanelMenyData } from '../../felles/typer/prosessPanelMenyData';
+import type { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
+import type { ProsessPanelMenyData } from '../../felles/typer/prosessPanelMenyData';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [

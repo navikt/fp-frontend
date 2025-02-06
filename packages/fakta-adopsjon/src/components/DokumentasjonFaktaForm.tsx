@@ -1,18 +1,18 @@
-import React, { FunctionComponent } from 'react';
+import { type FunctionComponent } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, HStack,Label, VStack } from '@navikt/ds-react';
+import { BodyShort, HStack, Label, VStack } from '@navikt/ds-react';
 import { Datepicker } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
-import { FaktaGruppe,VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import moment from 'moment';
 
-import { FieldEditedInfo } from '@navikt/fp-fakta-felles';
+import { type FieldEditedInfo } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { FamilieHendelse, Soknad } from '@navikt/fp-types';
-import { BekreftDokumentertDatoAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { FamilieHendelse, Soknad } from '@navikt/fp-types';
+import type { BekreftDokumentertDatoAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import styles from './dokumentasjonFaktaForm.module.css';
 

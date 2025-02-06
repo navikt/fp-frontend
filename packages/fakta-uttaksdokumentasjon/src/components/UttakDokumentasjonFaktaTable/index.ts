@@ -1,1 +1,1 @@
-export { default } from './UttakDokumentasjonFaktaTable';
+export { UttakDokumentasjonFaktaTable } from './UttakDokumentasjonFaktaTable';

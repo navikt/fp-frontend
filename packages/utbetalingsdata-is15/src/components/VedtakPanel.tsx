@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Table, VStack } from '@navikt/ds-react';
 import { DateLabel, PeriodLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { Vedtak } from '@navikt/fp-types';
+import type { Vedtak } from '@navikt/fp-types';
 
 import { VedtakDetaljerPanel } from './detaljer/VedtakDetaljerPanel';
 

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { FamilieHendelseType } from '@navikt/fp-kodeverk';
 import {
   OmsorgOgAdopsjonPapirsoknadIndex,
@@ -8,7 +6,7 @@ import {
   SoknadData,
   SprakPapirsoknadIndex,
 } from '@navikt/fp-papirsoknad-ui-komponenter';
-import { AlleKodeverk } from '@navikt/fp-types';
+import type { AlleKodeverk } from '@navikt/fp-types';
 
 interface Props {
   readOnly: boolean;

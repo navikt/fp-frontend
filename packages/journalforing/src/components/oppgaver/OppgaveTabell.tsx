@@ -1,15 +1,14 @@
-import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Table } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
-import { NavAnsatt } from '@navikt/fp-types';
+import type { NavAnsatt } from '@navikt/fp-types';
 
 import { hentAlleJournalOppgaver } from '../../data/fpFordelApi';
-import { Oppgave } from '../../typer/oppgaveTsType';
-import { ReserverOppgaveType } from '../../typer/reserverOppgaveType';
+import type { Oppgave } from '../../typer/oppgaveTsType';
+import type { ReserverOppgaveType } from '../../typer/reserverOppgaveType';
 import { OppgaveTabellRad } from './OppgaveTabellRad';
 
 import styles from './oppgaveTabell.module.css';

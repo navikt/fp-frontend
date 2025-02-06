@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
 import { RegistrerPapirsoknadPanel, SoknadRegistrertModal } from '@navikt/fp-papirsoknad';
-import { Aksjonspunkt, Behandling, Fagsak } from '@navikt/fp-types';
+import type { Aksjonspunkt, Behandling, Fagsak } from '@navikt/fp-types';
 
 import { BehandlingPaVent } from '../felles/modaler/paVent/BehandlingPaVent';
 import { BehandlingDataContext } from '../felles/utils/behandlingDataContext';
