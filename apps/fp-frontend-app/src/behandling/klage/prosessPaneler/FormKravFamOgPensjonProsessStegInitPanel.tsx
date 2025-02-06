@@ -52,7 +52,7 @@ export const FormKravFamOgPensjonProsessStegInitPanel = (props: ProsessPanelInit
           klageVurdering={klageVurdering}
           avsluttedeBehandlinger={avsluttedeBehandlinger}
           lagreFormkravVurdering={lagreFormkravVurdering}
-          {...standardPanelProps}
+          readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
         />
       ) : (
         <LoadingPanel />

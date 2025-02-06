@@ -84,7 +84,6 @@ export const UttakProsessStegInitPanel = ({
           soknad={søknad}
           uttakStonadskontoer={uttakStønadskontoer}
           ytelsefordeling={ytelsefordeling}
-          {...standardPanelProps}
         />
       ) : (
         <LoadingPanel />

@@ -1,1 +1,1 @@
-export { default as AdopsjonVilkarProsessIndex } from './src/AdopsjonVilkarProsessIndex';
+export { AdopsjonVilkarProsessIndex } from './src/AdopsjonVilkarProsessIndex';

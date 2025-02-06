@@ -1,38 +1,16 @@
-import { action } from '@storybook/addon-actions';
+import { ComponentProps } from 'react';
+
 import { Meta, StoryObj } from '@storybook/react';
 
-import {
-  AksjonspunktKode,
-  AksjonspunktStatus,
-  BehandlingStatus,
-  BehandlingType,
-  FagsakYtelseType,
-  NavBrukerKjonn,
-} from '@navikt/fp-kodeverk';
-import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
-import { Behandling, Fagsak, Soknad } from '@navikt/fp-types';
+import { AksjonspunktKode, AksjonspunktStatus, FagsakYtelseType, NavBrukerKjonn } from '@navikt/fp-kodeverk';
+import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { Fagsak, Soknad } from '@navikt/fp-types';
 
 import { SakenFaktaIndex } from './SakenFaktaIndex';
 
 import '@navikt/ds-css';
 import '@navikt/ft-form-hooks/dist/style.css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
-
-const promiseAction =
-  () =>
-  (...args: any): Promise<any> => {
-    action('button-click')(...args);
-    return Promise.resolve();
-  };
-
-const behandling = {
-  uuid: '1',
-  versjon: 2,
-  status: BehandlingStatus.BEHANDLING_UTREDES,
-  type: BehandlingType.FORSTEGANGSSOKNAD,
-  behandlingPaaVent: false,
-  behandlingHenlagt: false,
-};
 
 const defaultSøknad = {
   oppgittFordeling: {
@@ -46,41 +24,30 @@ const defaultSøknad = {
   },
 } as Soknad;
 
-const defaultFagsak = {
-  fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
-} as Fagsak;
-
 const meta = {
   title: 'fakta/fakta-saken',
   component: SakenFaktaIndex,
-  decorators: [withFormData],
+  decorators: [withFormData, withPanelData],
   args: {
-    fagsak: defaultFagsak,
-    submitCallback: promiseAction(),
-    readOnly: false,
     submittable: true,
-    alleMerknaderFraBeslutter: {},
-    alleKodeverk: alleKodeverk as any,
-    behandling: behandling as Behandling,
     soknad: defaultSøknad,
     kanOverstyreAccess: true,
   },
-} satisfies Meta<typeof SakenFaktaIndex>;
+  render: args => <SakenFaktaIndex {...args} />,
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof SakenFaktaIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
 export const StartdatoForForeldrepengerOgDekningsgrad: Story = {
   args: {
-    aksjonspunkter: [],
-    harApneAksjonspunkter: false,
+    aksjonspunkterForPanel: [],
   },
 };
 
 export const StartdatoForForeldrepengerOgDekningsgradMedAnnenPart: Story = {
   args: {
-    aksjonspunkter: [],
-    harApneAksjonspunkter: false,
+    aksjonspunkterForPanel: [],
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
       bruker: {
@@ -95,8 +62,7 @@ export const StartdatoForForeldrepengerOgDekningsgradMedAnnenPart: Story = {
 
 export const KanIkkeOverstyreDekningsgrad: Story = {
   args: {
-    aksjonspunkter: [],
-    harApneAksjonspunkter: false,
+    aksjonspunkterForPanel: [],
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
       bruker: {
@@ -112,27 +78,25 @@ export const KanIkkeOverstyreDekningsgrad: Story = {
 
 export const ApentAksjonspunktForInnhentingAvDokumentasjon: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
         status: AksjonspunktStatus.OPPRETTET,
         kanLoses: true,
       },
     ],
-    harApneAksjonspunkter: true,
   },
 };
 
 export const ApentAksjonspunktForInnhentingAvDokumentasjonVedSvp: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
         status: AksjonspunktStatus.OPPRETTET,
         kanLoses: true,
       },
     ],
-    harApneAksjonspunkter: true,
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.SVANGERSKAPSPENGER,
     } as Fagsak,
@@ -141,14 +105,13 @@ export const ApentAksjonspunktForInnhentingAvDokumentasjonVedSvp: Story = {
 
 export const AksjonspunktErIkkeGodkjentAvBeslutter: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
         status: AksjonspunktStatus.OPPRETTET,
         kanLoses: true,
       },
     ],
-    harApneAksjonspunkter: true,
     alleMerknaderFraBeslutter: {
       [AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK]: {
         notAccepted: true,
@@ -159,7 +122,7 @@ export const AksjonspunktErIkkeGodkjentAvBeslutter: Story = {
 
 export const DekningsgradErEndret: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.OVERSTYR_DEKNINGSGRAD,
         status: AksjonspunktStatus.UTFORT,
@@ -167,7 +130,6 @@ export const DekningsgradErEndret: Story = {
         begrunnelse: 'Er endret til 80 fordi...',
       },
     ],
-    harApneAksjonspunkter: false,
     soknad: {
       oppgittFordeling: {
         startDatoForPermisjon: '2019-01-01',
@@ -185,14 +147,13 @@ export const DekningsgradErEndret: Story = {
 
 export const HarFåttDekningsgradAksjonspunkt: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.AVKLAR_DEKNINGSGRAD,
         status: AksjonspunktStatus.OPPRETTET,
         kanLoses: true,
       },
     ],
-    harApneAksjonspunkter: true,
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
       bruker: {
@@ -224,14 +185,13 @@ export const HarFåttDekningsgradAksjonspunkt: Story = {
 
 export const HarFåttDekningsgradAksjonspunktMedUkjentAndrePart: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.AVKLAR_DEKNINGSGRAD,
         status: AksjonspunktStatus.OPPRETTET,
         kanLoses: true,
       },
     ],
-    harApneAksjonspunkter: true,
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
       bruker: {
@@ -263,7 +223,7 @@ export const HarFåttDekningsgradAksjonspunktMedUkjentAndrePart: Story = {
 
 export const DekningsgradAksjonspunktErSendtTIlbakeFraBeslutter: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.AVKLAR_DEKNINGSGRAD,
         status: AksjonspunktStatus.OPPRETTET,
@@ -271,7 +231,6 @@ export const DekningsgradAksjonspunktErSendtTIlbakeFraBeslutter: Story = {
         begrunnelse: 'Dette er en begrunnelse',
       },
     ],
-    harApneAksjonspunkter: true,
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
       bruker: {

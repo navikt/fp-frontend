@@ -1,4 +1,5 @@
-import { action } from '@storybook/addon-actions';
+import { ComponentProps } from 'react';
+
 import { Meta, StoryObj } from '@storybook/react';
 
 import {
@@ -6,18 +7,14 @@ import {
   AksjonspunktStatus,
   AktivitetStatus,
   ArbeidsforholdHandlingType,
-  FagsakYtelseType,
   NavBrukerKjonn,
-  RelasjonsRolleType,
   SoknadType,
   StonadskontoType,
 } from '@navikt/fp-kodeverk';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
 import {
   Aksjonspunkt,
-  Behandling,
   BeregningsresultatDagytelse,
-  Fagsak,
   FamilieHendelse,
   FamilieHendelseSamling,
   Personoversikt,
@@ -25,16 +22,6 @@ import {
 } from '@navikt/fp-types';
 
 import { TilkjentYtelseProsessIndex } from './TilkjentYtelseProsessIndex';
-
-const fagsak = {
-  fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
-  relasjonsRolleType: RelasjonsRolleType.MOR,
-} as Fagsak;
-
-const behandling = {
-  uuid: '1',
-  versjon: 1,
-} as Behandling;
 
 const defaultFamiliehendelse = {
   gjeldende: {
@@ -111,38 +98,29 @@ const arbeidsgiverOpplysningerPerId = {
 const meta = {
   title: 'prosess/prosess-tilkjent-ytelse',
   component: TilkjentYtelseProsessIndex,
+  decorators: [withPanelData],
   args: {
-    submitCallback: action('button-click') as (data: any) => Promise<any>,
-    readOnlySubmitButton: true,
-    behandling,
-    alleKodeverk: alleKodeverk as any,
-    isReadOnly: false,
-    isAksjonspunktOpen: true,
-    status: '',
-    vilkar: [],
-    alleMerknaderFraBeslutter: {},
-    setFormData: () => undefined,
     beregningresultat,
     familiehendelse: defaultFamiliehendelse,
     personoversikt,
     soknad: søknad,
-    fagsak,
     arbeidsgiverOpplysningerPerId,
   },
-} satisfies Meta<typeof TilkjentYtelseProsessIndex>;
+  render: args => <TilkjentYtelseProsessIndex {...args} />,
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof TilkjentYtelseProsessIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
 export const UtenAksjonspunkt: Story = {
   args: {
-    aksjonspunkter: [],
+    aksjonspunkterForPanel: [],
   },
 };
 
 export const UtførtAksjonspunkt: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         begrunnelse: 'Dette er en begrunnelse saksbehandler tidligere har gjort.',
         definisjon: AksjonspunktKode.VURDER_TILBAKETREKK,
@@ -154,7 +132,7 @@ export const UtførtAksjonspunkt: Story = {
 
 export const MedFeriepengegrunnlag: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_TILBAKETREKK,
         status: AksjonspunktStatus.OPPRETTET,
@@ -175,7 +153,7 @@ export const MedFeriepengegrunnlag: Story = {
 
 export const MedBarnFodtLengeForForstePeriode: Story = {
   args: {
-    aksjonspunkter: [],
+    aksjonspunkterForPanel: [],
     familiehendelse: {
       ...defaultFamiliehendelse,
       gjeldende: {

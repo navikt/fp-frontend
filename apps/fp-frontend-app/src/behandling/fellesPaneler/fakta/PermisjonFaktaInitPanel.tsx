@@ -24,7 +24,7 @@ interface Props {
 export const PermisjonFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId, ...props }: Props & FaktaPanelInitProps) => {
   const intl = useIntl();
 
-  const { behandling, fagsak } = use(BehandlingDataContext);
+  const { behandling } = use(BehandlingDataContext);
 
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
@@ -43,9 +43,7 @@ export const PermisjonFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId, ...prop
       {arbeidOgInntekt ? (
         <PermisjonFaktaIndex
           arbeidOgInntekt={arbeidOgInntekt}
-          saksnummer={fagsak.saksnummer}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          {...standardPanelProps}
         />
       ) : (
         <LoadingPanel />

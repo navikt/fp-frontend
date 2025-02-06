@@ -1,17 +1,18 @@
+import { ComponentProps } from 'react';
+
 import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, BehandlingType, KlageVurdering as klageVurderingCodes } from '@navikt/fp-kodeverk';
-import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
-import { Aksjonspunkt, Behandling, Fagsak, KlageVurdering } from '@navikt/fp-types';
+import {
+  AksjonspunktKode,
+  AksjonspunktStatus,
+  BehandlingType,
+  KlageVurdering as klageVurderingCodes,
+} from '@navikt/fp-kodeverk';
+import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { Aksjonspunkt, KlageVurdering } from '@navikt/fp-types';
 
 import { FormkravProsessIndex } from './FormkravProsessIndex';
-
-const behandling = {
-  uuid: '1',
-  versjon: 1,
-  sprakkode: 'NO',
-} as Behandling;
 
 const avsluttedeBehandlinger = [
   {
@@ -24,22 +25,14 @@ const avsluttedeBehandlinger = [
 const meta = {
   title: 'prosess/klage/prosess-formkrav',
   component: FormkravProsessIndex,
-  decorators: [withFormData],
+  decorators: [withFormData, withPanelData],
   args: {
-    behandling,
-    submitCallback: action('button-click') as (data: any) => Promise<void>,
     lagreFormkravVurdering: action('button-click') as (data: any) => Promise<void>,
-    isReadOnly: false,
     readOnlySubmitButton: false,
-    alleKodeverk: alleKodeverk as any,
     avsluttedeBehandlinger,
-    alleMerknaderFraBeslutter: {},
-    status: '',
-    vilkar: [],
-    isAksjonspunktOpen: false,
-    fagsak: {} as Fagsak,
   },
-} satisfies Meta<typeof FormkravProsessIndex>;
+  render: args => <FormkravProsessIndex {...args} />,
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof FormkravProsessIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
@@ -53,9 +46,10 @@ export const FormkravPanelForAksjonspunktNfp: Story = {
         fritekstTilBrev: 'test',
       },
     } as KlageVurdering,
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP,
+        status: AksjonspunktStatus.UTFORT,
       },
     ] as Aksjonspunkt[],
   },
@@ -70,7 +64,7 @@ export const FormkravPanelForAksjonspunktKaIkkePåklagd: Story = {
         erKlageKonkret: true,
       },
     } as KlageVurdering,
-    aksjonspunkter: [],
+    aksjonspunkterForPanel: [],
   },
 };
 
@@ -84,6 +78,6 @@ export const FormkravPanelForAksjonspunktKaValgtBehandling: Story = {
         erSignert: true,
       },
     } as KlageVurdering,
-    aksjonspunkter: [],
+    aksjonspunkterForPanel: [],
   },
 };

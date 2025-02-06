@@ -1,4 +1,5 @@
-import { action } from '@storybook/addon-actions';
+import { ComponentProps } from 'react';
+
 import { Meta, StoryObj } from '@storybook/react';
 
 import {
@@ -9,22 +10,10 @@ import {
   VilkarType,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
-import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
-import { Aksjonspunkt, Behandling, Fagsak, FamilieHendelseSamling, Soknad, Vilkar } from '@navikt/fp-types';
+import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { Aksjonspunkt, Behandling, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
 
 import { SoknadsfristVilkarProsessIndex } from './SoknadsfristVilkarProsessIndex';
-
-const defaultBehandling = {
-  uuid: '1',
-  versjon: 1,
-  behandlingsresultat: {},
-} as Behandling;
-
-const vilkar = [
-  {
-    vilkarType: VilkarType.SOKNADFRISTVILKARET,
-  },
-] as Vilkar[];
 
 const soknad = {
   soknadType: SoknadType.FODSEL,
@@ -51,26 +40,20 @@ const familiehendelse = {
 const meta = {
   title: 'prosess/prosess-vilkar-soknadsfrist',
   component: SoknadsfristVilkarProsessIndex,
-  decorators: [withFormData],
+  decorators: [withFormData, withPanelData],
   args: {
-    submitCallback: action('button-click') as (data: any) => Promise<void>,
-    alleKodeverk: alleKodeverk as any,
-    isAksjonspunktOpen: true,
-    vilkar,
-    alleMerknaderFraBeslutter: {},
     soknad,
     familiehendelse,
-    fagsak: {} as Fagsak,
   },
-} satisfies Meta<typeof SoknadsfristVilkarProsessIndex>;
+  render: args => <SoknadsfristVilkarProsessIndex {...args} />,
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof SoknadsfristVilkarProsessIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
 export const ÅpentAksjonspunkt: Story = {
   args: {
-    behandling: defaultBehandling,
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.SOKNADSFRISTVILKARET,
         status: AksjonspunktStatus.OPPRETTET,
@@ -86,8 +69,7 @@ export const ÅpentAksjonspunkt: Story = {
 
 export const OppfyltVilkår: Story = {
   args: {
-    behandling: defaultBehandling,
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.SOKNADSFRISTVILKARET,
         status: AksjonspunktStatus.UTFORT,
@@ -110,7 +92,7 @@ export const AvslåttVilkår: Story = {
         avslagsarsak: Avslagsarsak.INGEN_BEREGNINGSREGLER,
       },
     } as Behandling,
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.SOKNADSFRISTVILKARET,
         status: AksjonspunktStatus.UTFORT,

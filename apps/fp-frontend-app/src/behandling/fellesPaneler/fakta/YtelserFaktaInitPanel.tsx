@@ -31,11 +31,7 @@ export const YtelserFaktaInitPanel = (props: FaktaPanelInitProps) => {
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Ytelser' })}
       skalPanelVisesIMeny
     >
-      {inntektArbeidYtelse ? (
-        <YtelserFaktaIndex inntektArbeidYtelse={inntektArbeidYtelse} {...standardPanelProps} />
-      ) : (
-        <LoadingPanel />
-      )}
+      {inntektArbeidYtelse ? <YtelserFaktaIndex inntektArbeidYtelse={inntektArbeidYtelse} /> : <LoadingPanel />}
     </FaktaDefaultInitPanel>
   );
 };

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -7,28 +7,23 @@ import { Form } from '@navikt/ft-form-hooks';
 
 import { FaktaBegrunnelseTextField } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt, DokumentasjonVurderingBehov } from '@navikt/fp-types';
+import { DokumentasjonVurderingBehov } from '@navikt/fp-types';
 import { VurderDokumentasjonAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData } from '@navikt/fp-utils';
+import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import UttakDokumentasjonFaktaTable from './UttakDokumentasjonFaktaTable/UttakDokumentasjonFaktaTable';
 
-interface OwnProps {
-  aksjonspunkter: Aksjonspunkt[];
+interface Props {
   dokumentasjonVurderingBehov: DokumentasjonVurderingBehov[];
-  submitCallback: (aksjonspunkter: VurderDokumentasjonAp) => Promise<void>;
-  readOnly: boolean;
   submittable: boolean;
 }
 
-const UttakDokumentasjonFaktaForm: FunctionComponent<OwnProps> = ({
-  aksjonspunkter,
-  dokumentasjonVurderingBehov,
-  readOnly,
-  submittable,
-  submitCallback,
-}) => {
+export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov, submittable }: Props) => {
   const intl = useIntl();
+
+  const { submitCallback, aksjonspunkterForPanel, isReadOnly } = usePanelDataContext<VurderDokumentasjonAp>();
+
+  const readOnly = isReadOnly || aksjonspunkterForPanel.length === 0;
 
   const { formData, setFormData } = useFormData<{ dokBehov: DokumentasjonVurderingBehov[]; begrunnelse: string }>();
 
@@ -49,7 +44,7 @@ const UttakDokumentasjonFaktaForm: FunctionComponent<OwnProps> = ({
     [dokBehov],
   );
 
-  const lagretBegrunnelse = aksjonspunkter.length > 0 ? aksjonspunkter[0].begrunnelse : undefined;
+  const lagretBegrunnelse = aksjonspunkterForPanel.length > 0 ? aksjonspunkterForPanel[0].begrunnelse : undefined;
   const formMethods = useForm<{ begrunnelse: string }>({
     defaultValues: {
       begrunnelse: formData?.begrunnelse || lagretBegrunnelse,
@@ -74,13 +69,13 @@ const UttakDokumentasjonFaktaForm: FunctionComponent<OwnProps> = ({
 
   return (
     <VStack gap="6">
-      {aksjonspunkter.some(a => a.status === AksjonspunktStatus.OPPRETTET) && (
+      {aksjonspunkterForPanel.some(a => a.status === AksjonspunktStatus.OPPRETTET) && (
         <Alert variant="warning">
           <FormattedMessage id="UttakDokumentasjonFaktaForm.AksjonspunktHjelpetekst" />
         </Alert>
       )}
       <UttakDokumentasjonFaktaTable
-        harAksjonspunkt={aksjonspunkter.length > 0}
+        harAksjonspunkt={aksjonspunkterForPanel.length > 0}
         dokumentasjonVurderingBehov={dokBehov}
         oppdaterDokBehov={setDokBehov}
         setDirty={setIsDirty}
@@ -111,5 +106,3 @@ const UttakDokumentasjonFaktaForm: FunctionComponent<OwnProps> = ({
     </VStack>
   );
 };
-
-export default UttakDokumentasjonFaktaForm;

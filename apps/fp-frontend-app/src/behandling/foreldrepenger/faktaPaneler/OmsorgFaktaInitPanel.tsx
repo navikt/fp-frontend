@@ -39,7 +39,11 @@ export const OmsorgFaktaInitPanel = ({ personoversikt, ...props }: Props & Fakta
       skalPanelVisesIMeny={AKSJONSPUNKT_KODER.some(kode => hasAksjonspunkt(kode, behandling.aksjonspunkt))}
     >
       {ytelsefordeling ? (
-        <OmsorgFaktaIndex ytelsefordeling={ytelsefordeling} personoversikt={personoversikt} {...standardPanelProps} />
+        <OmsorgFaktaIndex
+          ytelsefordeling={ytelsefordeling}
+          personoversikt={personoversikt}
+          submittable={standardPanelProps.submittable}
+        />
       ) : (
         <LoadingPanel />
       )}

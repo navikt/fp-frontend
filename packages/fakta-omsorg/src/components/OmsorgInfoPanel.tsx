@@ -1,4 +1,3 @@
-import React from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
@@ -7,9 +6,9 @@ import { Form } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton, PersonopplysningerForFamilie } from '@navikt/fp-fakta-felles';
-import { Aksjonspunkt, Personoversikt, StandardFaktaPanelProps, Ytelsefordeling } from '@navikt/fp-types';
+import { Aksjonspunkt, Personoversikt, Ytelsefordeling } from '@navikt/fp-types';
 import { BekreftOmsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData } from '@navikt/fp-utils';
+import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { FormValues as OmsorgFormValues, OmsorgFaktaFields } from './OmsorgFaktaFields';
 
@@ -32,31 +31,30 @@ type FormValues = OmsorgFormValues & {
 interface Props {
   personoversikt: Personoversikt;
   ytelsefordeling: Ytelsefordeling;
-  submitCallback: (data: BekreftOmsorgVurderingAp) => Promise<void>;
+  submittable: boolean;
 }
 
-export const OmsorgInfoPanel = ({
-  personoversikt,
-  readOnly,
-  harApneAksjonspunkter,
-  submittable,
-  aksjonspunkter,
-  alleKodeverk,
-  ytelsefordeling,
-  submitCallback,
-  alleMerknaderFraBeslutter,
-}: Props & StandardFaktaPanelProps) => {
+export const OmsorgInfoPanel = ({ personoversikt, ytelsefordeling, submittable }: Props) => {
+  const {
+    alleKodeverk,
+    aksjonspunkterForPanel,
+    submitCallback,
+    harÅpneAksjonspunkter,
+    isReadOnly,
+    alleMerknaderFraBeslutter,
+  } = usePanelDataContext<BekreftOmsorgVurderingAp>();
+
   const { formData, setFormData } = useFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || createInitialValues(ytelsefordeling, aksjonspunkter),
+    defaultValues: formData || createInitialValues(ytelsefordeling, aksjonspunkterForPanel),
   });
 
-  const harAksjonspunkt = aksjonspunkter.length > 0;
+  const harAksjonspunkt = aksjonspunkterForPanel.length > 0;
 
   return (
     <VStack gap="8">
-      {!readOnly && harApneAksjonspunkter && (
+      {!isReadOnly && harÅpneAksjonspunkter && (
         <AksjonspunktHelpTextHTML>
           <FormattedMessage id="OmsorgInfoPanel.VurderOmsorg" />
         </AksjonspunktHelpTextHTML>
@@ -70,19 +68,19 @@ export const OmsorgInfoPanel = ({
         >
           <VStack gap="6">
             {harAksjonspunkt && (
-              <OmsorgFaktaFields readOnly={readOnly} alleMerknaderFraBeslutter={alleMerknaderFraBeslutter} />
+              <OmsorgFaktaFields readOnly={isReadOnly} alleMerknaderFraBeslutter={alleMerknaderFraBeslutter} />
             )}
 
             <FaktaBegrunnelseTextField
               isSubmittable={submittable}
-              isReadOnly={readOnly}
+              isReadOnly={isReadOnly}
               hasBegrunnelse={true}
               hasVurderingText
             />
             <div>
               <FaktaSubmitButton
                 isSubmittable={submittable}
-                isReadOnly={readOnly}
+                isReadOnly={isReadOnly}
                 isSubmitting={formMethods.formState.isSubmitting}
                 isDirty={formMethods.formState.isDirty}
               />

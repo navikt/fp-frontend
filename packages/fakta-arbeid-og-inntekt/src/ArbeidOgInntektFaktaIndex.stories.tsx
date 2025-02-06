@@ -1,15 +1,17 @@
+import { ComponentProps } from 'react';
+
 import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
-import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
-import { Aksjonspunkt, AksjonspunktÅrsak, AlleKodeverk, ArbeidOgInntektsmelding, Behandling } from '@navikt/fp-types';
+import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { Aksjonspunkt, AksjonspunktÅrsak, ArbeidOgInntektsmelding } from '@navikt/fp-types';
 
 import { ArbeidOgInntektFaktaIndex } from './ArbeidOgInntektFaktaIndex';
 
 import '@navikt/ds-css';
-import '@navikt/ft-ui-komponenter/dist/style.css';
 import '@navikt/ft-form-hooks/dist/style.css';
+import '@navikt/ft-ui-komponenter/dist/style.css';
 
 const MANUELT_ORG_NR = '342352362';
 
@@ -27,27 +29,19 @@ const fellesInntektsmeldingFelter = {
 const meta = {
   title: 'fakta/fakta-arbeid-og-inntekter',
   component: ArbeidOgInntektFaktaIndex,
-  decorators: [withFormData],
+  decorators: [withFormData, withPanelData],
   args: {
-    saksnummer: '1234567',
-    behandling: {
-      uuid: '1223-2323-2323-22332',
-    } as Behandling,
-    aksjonspunkter: [],
     arbeidsgiverOpplysningerPerId: {},
-    alleKodeverk: alleKodeverk as unknown as AlleKodeverk,
     lagreVurdering: action('onLagreVurdering') as () => Promise<void>,
     registrerArbeidsforhold: action('onRegistrerArbeidsforhold') as () => Promise<void>,
     åpneForNyVurdering: action('onÅpneForNyVurdering'),
     submitCallback: action('onSubmit') as (data: any) => Promise<void>,
     settBehandlingPåVentCallback: action('onSettBehandlingPåVentCallback') as () => Promise<void>,
     alleMerknaderFraBeslutter: {},
-    harApneAksjonspunkter: true,
-    submittable: true,
     erOverstyrer: false,
-    readOnly: false,
   },
-} satisfies Meta<typeof ArbeidOgInntektFaktaIndex>;
+  render: args => <ArbeidOgInntektFaktaIndex {...args} />,
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof ArbeidOgInntektFaktaIndex>>;
 
 export default meta;
 
@@ -55,7 +49,7 @@ type Story = StoryObj<typeof meta>;
 
 export const InnhentInntektsmelding: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
         status: AksjonspunktStatus.OPPRETTET,
@@ -132,7 +126,7 @@ export const InnhentInntektsmelding: Story = {
 
 export const InnhentInntektsmeldingDerEnIkkeHarInntekterFraAAregisteret: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
         status: AksjonspunktStatus.OPPRETTET,
@@ -168,7 +162,7 @@ export const InnhentInntektsmeldingDerEnIkkeHarInntekterFraAAregisteret: Story =
 
 export const InnhentInntektsmeldingDerBehandlingErAvsluttet: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
         status: AksjonspunktStatus.UTFORT,
@@ -202,13 +196,13 @@ export const InnhentInntektsmeldingDerBehandlingErAvsluttet: Story = {
       inntekter: [],
       skjæringstidspunkt: '2021-11-10',
     } as ArbeidOgInntektsmelding,
-    readOnly: true,
+    isReadOnly: true,
   },
 };
 
 export const AvklarManglendeArbeidsforhold: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
         status: AksjonspunktStatus.OPPRETTET,
@@ -249,7 +243,7 @@ export const AvklarManglendeArbeidsforhold: Story = {
 
 export const AvklarManglendeArbeidsforholdDerBehandlingErAvsluttet: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
         status: AksjonspunktStatus.UTFORT,
@@ -296,13 +290,13 @@ export const AvklarManglendeArbeidsforholdDerBehandlingErAvsluttet: Story = {
       inntekter: [],
       skjæringstidspunkt: '2021-11-10',
     },
-    readOnly: true,
+    isReadOnly: true,
   },
 };
 
 export const AvklarManglendeOpplysningerDerAksjonspunktErBekreftetOgTilbakehoppMulig: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
         status: AksjonspunktStatus.UTFORT,
@@ -349,14 +343,14 @@ export const AvklarManglendeOpplysningerDerAksjonspunktErBekreftetOgTilbakehoppM
       inntekter: [],
       skjæringstidspunkt: '2021-11-10',
     },
-    readOnly: false,
+    isReadOnly: false,
     erOverstyrer: true,
   },
 };
 
 export const IngenAksjonspunktMenTilbakehoppMuligForOverstyrer: Story = {
   args: {
-    aksjonspunkter: [],
+    aksjonspunkterForPanel: [],
     arbeidsgiverOpplysningerPerId: {
       910909088: {
         erPrivatPerson: false,
@@ -395,7 +389,7 @@ export const IngenAksjonspunktMenTilbakehoppMuligForOverstyrer: Story = {
       inntekter: [],
       skjæringstidspunkt: '2021-11-10',
     },
-    readOnly: false,
+    isReadOnly: false,
     erOverstyrer: true,
   },
 };
@@ -403,7 +397,7 @@ export const IngenAksjonspunktMenTilbakehoppMuligForOverstyrer: Story = {
 export const SkalKunneLeggeTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldingerFinnesOgEnHarReåpnetOgEnErOverstyrer: Story =
   {
     args: {
-      aksjonspunkter: [
+      aksjonspunkterForPanel: [
         {
           definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
           status: AksjonspunktStatus.OPPRETTET,
@@ -434,7 +428,7 @@ export const SkalIkkeKunneLeggeTilNyttArbeidsforholdNårIngenArbeidsforholdEller
 
 export const ArbeidsforholdErManueltLagtTilOgLagretOgReåpnet: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
         status: AksjonspunktStatus.OPPRETTET,
@@ -495,7 +489,7 @@ export const ArbeidsforholdErManueltLagtTilOgBehandlingErAvsluttet: Story = {
       skjæringstidspunkt: '2021-11-10',
     },
     erOverstyrer: true,
-    readOnly: true,
+    isReadOnly: true,
   },
 };
 
@@ -685,7 +679,7 @@ export const ArbeidsforholdErOKDerDetErToArbeidsforholdFraSammeVirksomhet: Story
 export const FlereArbeidsforholdOgInntekstemeldinger: Story = {
   args: {
     erOverstyrer: true,
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
         status: AksjonspunktStatus.OPPRETTET,
@@ -843,7 +837,7 @@ export const FlereArbeidsforholdOgInntekstemeldinger: Story = {
 export const ArbeidsforholdMedSammeOrgNr: Story = {
   args: {
     erOverstyrer: true,
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
         status: AksjonspunktStatus.OPPRETTET,
@@ -962,7 +956,7 @@ export const ArbeidsforholdMedSammeOrgNr: Story = {
 export const ArbeidsforholdMedSammeOrgNrDerEnManglerInntektsmeldingMenIkkeDetAndre: Story = {
   args: {
     erOverstyrer: true,
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
         status: AksjonspunktStatus.OPPRETTET,
@@ -1076,8 +1070,8 @@ export const ArbeidsforholdMedSammeOrgNrDerEnManglerInntektsmeldingMenIkkeDetAnd
 export const FoerRegisterinnhenting: Story = {
   args: {
     erOverstyrer: true,
-    readOnly: true,
-    aksjonspunkter: [] as Aksjonspunkt[],
+    isReadOnly: true,
+    aksjonspunkterForPanel: [] as Aksjonspunkt[],
     arbeidsgiverOpplysningerPerId: {
       947064649: {
         erPrivatPerson: false,
@@ -1116,7 +1110,7 @@ export const FoerRegisterinnhenting: Story = {
 export const AutomatiskIgnorertInntektsmelding: Story = {
   args: {
     erOverstyrer: false,
-    aksjonspunkter: [] as Aksjonspunkt[],
+    aksjonspunkterForPanel: [] as Aksjonspunkt[],
     arbeidsgiverOpplysningerPerId: {
       947064649: {
         erPrivatPerson: false,
@@ -1150,7 +1144,7 @@ export const AutomatiskIgnorertInntektsmelding: Story = {
 export const EtterAtEtterspurtInntektsmeldingErKommet: Story = {
   args: {
     erOverstyrer: false,
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
         status: AksjonspunktStatus.OPPRETTET,

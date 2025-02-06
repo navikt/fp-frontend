@@ -24,7 +24,7 @@ export const InntektsmeldingerFaktaInitPanel = ({
 }: FaktaPanelInitProps & Props) => {
   const intl = useIntl();
 
-  const { behandling, alleBehandlinger, fagsak } = use(BehandlingDataContext);
+  const { behandling, alleBehandlinger } = use(BehandlingDataContext);
 
   const standardPanelProps = useStandardFaktaPanelProps();
 
@@ -42,11 +42,8 @@ export const InntektsmeldingerFaktaInitPanel = ({
     >
       {inntektsmeldinger ? (
         <InntektsmeldingFaktaIndex
-          {...standardPanelProps}
           inntektsmeldinger={inntektsmeldinger}
-          fagsak={fagsak}
           alleBehandlinger={alleBehandlinger}
-          behandling={behandling}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         />
       ) : (

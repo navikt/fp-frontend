@@ -1,10 +1,11 @@
 import { use } from 'react';
 
 import { isAksjonspunktOpen } from '@navikt/fp-kodeverk';
-import { Behandling, Fagsak, StandardFaktaPanelProps } from '@navikt/fp-types';
+import { Behandling, Fagsak } from '@navikt/fp-types';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { AksjonspunktArgs, OverstyrteAksjonspunktArgs } from '../../../data/behandlingApi';
+import { StandardFaktaPanelProps } from '../typer/standardFaktaPanelPropsTsType';
 import { BehandlingDataContext } from '../utils/behandlingDataContext';
 import { getAlleMerknaderFraBeslutter } from '../utils/getAlleMerknaderFraBeslutter';
 import { erReadOnly } from '../utils/readOnlyPanelUtils';

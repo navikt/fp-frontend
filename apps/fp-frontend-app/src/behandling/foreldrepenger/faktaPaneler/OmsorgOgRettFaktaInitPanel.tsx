@@ -45,7 +45,7 @@ export const OmsorgOgRettFaktaInitPanel = ({ personoversikt, ...props }: Props &
         <OmsorgOgRettFaktaIndex
           ytelsefordeling={ytelsefordeling}
           personoversikt={personoversikt}
-          {...standardPanelProps}
+          submittable={standardPanelProps.submittable}
         />
       ) : (
         <LoadingPanel />

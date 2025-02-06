@@ -1,4 +1,3 @@
-import React, { FunctionComponent } from 'react';
 import { UseFormHandleSubmit } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
@@ -6,8 +5,8 @@ import { Button } from '@navikt/ds-react';
 
 import { BehandlingType } from '@navikt/fp-kodeverk';
 
-import AvsluttetBehandling from '../types/avsluttetBehandlingTsType';
-import FormkravMellomlagretDataType from '../types/FormkravMellomlagretDataType';
+import { AvsluttetBehandling } from '../types/avsluttetBehandlingTsType';
+import { FormkravMellomlagretDataType } from '../types/FormkravMellomlagretDataType';
 
 export const IKKE_PA_KLAGD_VEDTAK = 'ikkePaklagdVedtak';
 
@@ -81,7 +80,7 @@ const transformValues = (
   fritekstTilBrev: skalLagreFritekstfelt(values) ? values.fritekstTilBrev : undefined,
 });
 
-interface OwnProps {
+interface Props {
   behandlingUuid: string;
   aksjonspunktCode: string;
   avsluttedeBehandlinger: AvsluttetBehandling[];
@@ -91,7 +90,7 @@ interface OwnProps {
   handleSubmit: UseFormHandleSubmit<FormValues>;
 }
 
-const TempsaveKlageButton: FunctionComponent<OwnProps> = ({
+export const TempsaveKlageButton = ({
   behandlingUuid,
   saveKlage,
   avsluttedeBehandlinger,
@@ -99,7 +98,7 @@ const TempsaveKlageButton: FunctionComponent<OwnProps> = ({
   aksjonspunktCode,
   readOnly = false,
   handleSubmit,
-}) => {
+}: Props) => {
   if (!readOnly) {
     return (
       <Button
@@ -117,5 +116,3 @@ const TempsaveKlageButton: FunctionComponent<OwnProps> = ({
   }
   return null;
 };
-
-export default TempsaveKlageButton;

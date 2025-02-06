@@ -1,39 +1,17 @@
+import { ComponentProps } from 'react';
+
 import { TIDENES_ENDE } from '@navikt/ft-utils';
-import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
-import {
-  AdresseType,
-  AksjonspunktKode,
-  AksjonspunktStatus,
-  BehandlingStatus,
-  BehandlingType,
-  FagsakYtelseType,
-  PersonstatusType,
-  Region,
-} from '@navikt/fp-kodeverk';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import { Behandling, Fagsak, Medlemskap, MedlemskapAvvik, Soknad } from '@navikt/fp-types';
+import { AdresseType, AksjonspunktKode, AksjonspunktStatus, PersonstatusType, Region } from '@navikt/fp-kodeverk';
+import { PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
+import { Medlemskap, MedlemskapAvvik, Soknad } from '@navikt/fp-types';
 
 import { MedlemskapFaktaIndex } from './MedlemskapFaktaIndex';
 
 import '@navikt/ds-css';
 import '@navikt/ft-form-hooks/dist/style.css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
-
-const behandling = {
-  uuid: '1',
-  versjon: 1,
-  type: BehandlingType.FORSTEGANGSSOKNAD,
-  behandlingPaaVent: false,
-  status: BehandlingStatus.BEHANDLING_UTREDES,
-} as Behandling;
-
-const defaultFagsak = {
-  bruker: { navn: 'Ola Nordmann' },
-  annenPart: { navn: 'Kari Nordmann' },
-  fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
-} as Fagsak;
 
 const defaultSoknad = {
   oppgittTilknytning: {
@@ -60,19 +38,13 @@ const defaultSoknad = {
 const meta = {
   title: 'fakta/fakta-medlemskap-v3',
   component: MedlemskapFaktaIndex,
+  decorators: [withPanelData],
   args: {
-    behandling,
     soknad: defaultSoknad,
-    alleKodeverk: alleKodeverk as any,
-    submitCallback: action('button-click') as (aksjonspunktData: any) => Promise<void>,
-    readOnly: false,
-    harApneAksjonspunkter: true,
     submittable: true,
-    setFormData: () => undefined,
-    fagsak: defaultFagsak,
-    alleMerknaderFraBeslutter: {},
   },
-} satisfies Meta<typeof MedlemskapFaktaIndex>;
+  render: args => <MedlemskapFaktaIndex {...args} />,
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof MedlemskapFaktaIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
@@ -230,7 +202,7 @@ const lagMedlemskap = (override: Partial<Medlemskap>): Medlemskap => ({
 export const Default: Story = {
   args: {
     medlemskap: lagMedlemskap({}),
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
         status: AksjonspunktStatus.OPPRETTET,
@@ -248,7 +220,7 @@ export const ForutgåendeMedlemskap: Story = {
       manuellBehandlingResultat: null,
       avvik: [MedlemskapAvvik.BOSATT_UTENLANDSADRESSE],
     }),
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
         status: AksjonspunktStatus.OPPRETTET,
@@ -313,7 +285,7 @@ export const VurderingAvMedlemskapMedlemskapMedEtAvvik: Story = {
         utlandsoppholdEtter: [],
       } as Soknad['oppgittTilknytning'],
     } as Soknad,
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
         status: AksjonspunktStatus.OPPRETTET,
@@ -327,7 +299,7 @@ export const VurderingAvMedlemskapMedlemskapMedEtAvvik: Story = {
 export const TidligereVurderingAvMedlemskapMedEtAvvik: Story = {
   args: {
     ...VurderingAvMedlemskapMedlemskapMedEtAvvik.args.medlemskap,
-    readOnly: true,
+    isReadOnly: true,
     medlemskap: lagMedlemskap({
       ...VurderingAvMedlemskapMedlemskapMedEtAvvik.args.medlemskap,
       manuellBehandlingResultat: {
@@ -336,7 +308,7 @@ export const TidligereVurderingAvMedlemskapMedEtAvvik: Story = {
         opphørFom: null,
       },
     }),
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
         status: AksjonspunktStatus.UTFORT,
@@ -349,7 +321,7 @@ export const TidligereVurderingAvMedlemskapMedEtAvvik: Story = {
 
 export const LegacyVurderingAvLøpendeMedlemskap: Story = {
   args: {
-    readOnly: true,
+    isReadOnly: true,
     medlemskap: lagMedlemskap({
       manuellBehandlingResultat: null,
       avvik: [],
@@ -386,7 +358,7 @@ export const LegacyVurderingAvLøpendeMedlemskap: Story = {
         ],
       },
     }),
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.AVKLAR_FORTSATT_MEDLEMSKAP,
         status: AksjonspunktStatus.UTFORT,
@@ -399,7 +371,7 @@ export const LegacyVurderingAvLøpendeMedlemskap: Story = {
 
 export const LegacyVurdertInngangsvilkårMedlemskap: Story = {
   args: {
-    readOnly: true,
+    isReadOnly: true,
     medlemskap: lagMedlemskap({
       manuellBehandlingResultat: null,
       avvik: [],
@@ -414,7 +386,7 @@ export const LegacyVurdertInngangsvilkårMedlemskap: Story = {
         ],
       },
     }),
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.AVKLAR_OPPHOLDSRETT,
         status: AksjonspunktStatus.UTFORT,

@@ -9,13 +9,13 @@ import {
   BeregningsresultatDagytelse,
   BeregningsresultatEs,
   SimuleringResultat,
-  StandardProsessPanelProps,
   TilbakekrevingValg,
   Vilkar,
 } from '@navikt/fp-types';
+import { usePanelDataContext } from '@navikt/fp-utils';
 
-import VedtakForm, { ForhandsvisData } from './components/forstegang/VedtakForm';
-import VedtakRevurderingForm from './components/revurdering/VedtakRevurderingForm';
+import { ForhandsvisData, VedtakForm } from './components/forstegang/VedtakForm';
+import { VedtakRevurderingForm } from './components/revurdering/VedtakRevurderingForm';
 
 import messages from '../i18n/nb_NO.json';
 
@@ -62,7 +62,6 @@ interface Props {
 }
 
 export const VedtakProsessIndex = ({
-  behandling,
   beregningresultatDagytelse,
   beregningresultatEngangsstonad,
   tilbakekrevingvalg,
@@ -70,17 +69,14 @@ export const VedtakProsessIndex = ({
   beregningsgrunnlag,
   vilkar,
   beregningsresultatOriginalBehandling,
-  aksjonspunkter,
-  isReadOnly,
   previewCallback,
-  submitCallback,
   ytelseTypeKode,
-  alleKodeverk,
-}: Props & StandardProsessPanelProps) => {
-  const beregningErManueltFastsatt = skalSkriveFritekstGrunnetFastsettingAvBeregning(
-    aksjonspunkter,
-    beregningsgrunnlag,
-  );
+}: Props) => {
+  const { behandling } = usePanelDataContext();
+
+  const { aksjonspunkt } = behandling;
+
+  const beregningErManueltFastsatt = skalSkriveFritekstGrunnetFastsettingAvBeregning(aksjonspunkt, beregningsgrunnlag);
   const beregningsresultat =
     ytelseTypeKode === FagsakYtelseType.ENGANGSSTONAD ? beregningresultatEngangsstonad : beregningresultatDagytelse;
 
@@ -96,32 +92,22 @@ export const VedtakProsessIndex = ({
     <RawIntlProvider value={intl}>
       {behandling.type !== BehandlingType.REVURDERING && (
         <VedtakForm
-          behandling={behandling}
-          submitCallback={submitCallback}
-          readOnly={isReadOnly}
           previewCallback={previewCallback}
           tilbakekrevingvalg={tilbakekrevingvalg}
           simuleringResultat={simuleringResultat}
           beregningsresultat={beregningsresultat}
-          aksjonspunkter={aksjonspunkter}
           ytelseTypeKode={ytelseTypeKode}
-          alleKodeverk={alleKodeverk}
           vilkar={vilkar}
           beregningErManueltFastsatt={beregningErManueltFastsatt}
         />
       )}
       {behandling.type === BehandlingType.REVURDERING && (
         <VedtakRevurderingForm
-          behandling={behandling}
-          submitCallback={submitCallback}
-          readOnly={isReadOnly}
           previewCallback={previewCallback}
           tilbakekrevingvalg={tilbakekrevingvalg}
           simuleringResultat={simuleringResultat}
           beregningsresultat={beregningsresultat}
-          aksjonspunkter={aksjonspunkter}
           ytelseTypeKode={ytelseTypeKode}
-          alleKodeverk={alleKodeverk}
           vilkar={vilkar}
           beregningErManueltFastsatt={beregningErManueltFastsatt}
           beregningsresultatOriginalBehandling={originaltBeregningsresultat}

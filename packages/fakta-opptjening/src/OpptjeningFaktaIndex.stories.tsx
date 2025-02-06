@@ -1,16 +1,12 @@
-import { action } from '@storybook/addon-actions';
+import { ComponentProps } from 'react';
+
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, OpptjeningAktivitetType } from '@navikt/fp-kodeverk';
-import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
-import { Behandling, Opptjening } from '@navikt/fp-types';
+import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { Opptjening } from '@navikt/fp-types';
 
 import { OpptjeningFaktaIndex } from './OpptjeningFaktaIndex';
-
-const behandling = {
-  uuid: '1',
-  versjon: 1,
-};
 
 const merknaderFraBeslutter = {
   notAccepted: false,
@@ -27,28 +23,22 @@ const arbeidsgiverOpplysningerPerId = {
 const meta = {
   title: 'fakta/fakta-opptjening',
   component: OpptjeningFaktaIndex,
-  decorators: [withFormData],
+  decorators: [withFormData, withPanelData],
   args: {
-    behandling: behandling as Behandling,
     arbeidsgiverOpplysningerPerId,
-    alleKodeverk: alleKodeverk as any,
     alleMerknaderFraBeslutter: {
       [AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING]: merknaderFraBeslutter,
     },
-    submitCallback: action('button-click') as (data: any) => Promise<void>,
-    readOnly: false,
-    harApneAksjonspunkter: true,
-    submittable: true,
   },
-} satisfies Meta<typeof OpptjeningFaktaIndex>;
+  render: args => <OpptjeningFaktaIndex {...args} />,
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof OpptjeningFaktaIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
 export const MedAksjonspunkt: Story = {
   args: {
-    submitCallback: action('button-click') as (data: any) => Promise<any>,
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
         status: AksjonspunktStatus.OPPRETTET,
@@ -149,8 +139,7 @@ export const MedAksjonspunkt: Story = {
 
 export const UtenAksjonspunkt: Story = {
   args: {
-    submitCallback: action('button-click') as (data: any) => Promise<any>,
-    aksjonspunkter: [],
+    aksjonspunkterForPanel: [],
     opptjening: {
       fastsattOpptjening: {
         opptjeningFom: '2018-11-30',
@@ -190,8 +179,7 @@ export const UtenAksjonspunkt: Story = {
 
 export const MedToLikePerioderForSammeAktivitetstype: Story = {
   args: {
-    submitCallback: action('button-click') as (data: any) => Promise<any>,
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
         status: AksjonspunktStatus.OPPRETTET,
@@ -252,8 +240,7 @@ export const MedToLikePerioderForSammeAktivitetstype: Story = {
 
 export const MedAlleOpptjeningsaktiviteterFiltrertBort: Story = {
   args: {
-    submitCallback: action('button-click') as (data: any) => Promise<any>,
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
         status: AksjonspunktStatus.OPPRETTET,

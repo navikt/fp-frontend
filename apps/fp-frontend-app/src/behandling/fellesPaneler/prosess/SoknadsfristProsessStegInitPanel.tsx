@@ -33,7 +33,14 @@ export const SoknadsfristProsessStegInitPanel = (props: ProsessPanelInitProps) =
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Soknadsfristvilkaret' })}
       skalPanelVisesIMeny={skalViseProsessPanel(standardPanelProps.aksjonspunkter)}
     >
-      {søknad ? <VurderSoknadsfristForeldrepengerIndex soknad={søknad} {...standardPanelProps} /> : <LoadingPanel />}
+      {søknad ? (
+        <VurderSoknadsfristForeldrepengerIndex
+          soknad={søknad}
+          readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
+        />
+      ) : (
+        <LoadingPanel />
+      )}
     </ProsessDefaultInitPanel>
   );
 };

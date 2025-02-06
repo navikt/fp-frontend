@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback, useEffect, useMemo } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -7,14 +7,7 @@ import { Form } from '@navikt/ft-form-hooks';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import moment from 'moment';
 
-import {
-  AksjonspunktKode,
-  AksjonspunktStatus,
-  KodeverkType,
-  TilretteleggingType,
-  VilkarType,
-  VilkarUtfallType,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, KodeverkType, TilretteleggingType, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import {
   ProsessPanelTemplate,
   ProsessStegBegrunnelseTextFieldNew,
@@ -22,14 +15,13 @@ import {
 } from '@navikt/fp-prosess-felles';
 import {
   Aksjonspunkt,
-  AlleKodeverk,
   ArbeidsforholdFodselOgTilrettelegging,
   ArbeidsforholdTilretteleggingDato,
   Behandling,
   FodselOgTilrettelegging,
 } from '@navikt/fp-types';
 import { BekreftSvangerskapspengervilkarAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData } from '@navikt/fp-utils';
+import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 const finnesUttakPåArbfor = (arbfor: ArbeidsforholdFodselOgTilrettelegging): boolean => {
   const finnesAnnenTilretteleggingEnnHel = arbfor.tilretteleggingDatoer.some(
@@ -69,45 +61,33 @@ const transformValues = (values: FormValues): BekreftSvangerskapspengervilkarAp 
   kode: AksjonspunktKode.SVANGERSKAPSVILKARET,
 });
 
-interface OwnProps {
-  behandlingsresultat?: Behandling['behandlingsresultat'];
-  aksjonspunkter: Aksjonspunkt[];
+interface Props {
   status: string;
-  submitCallback: (aksjonspunktData: BekreftSvangerskapspengervilkarAp) => Promise<void>;
-  readOnly: boolean;
   readOnlySubmitButton: boolean;
-  isApOpen: boolean;
-  alleKodeverk: AlleKodeverk;
-  erIkkeGodkjentAvBeslutter: boolean;
   svangerskapspengerTilrettelegging: FodselOgTilrettelegging;
 }
 
-/**
- * SvangerskapsvilkårForm
- */
-const SvangerskapVilkarForm: FunctionComponent<OwnProps> = ({
-  readOnly,
-  readOnlySubmitButton,
-  isApOpen,
-  erIkkeGodkjentAvBeslutter,
-  svangerskapspengerTilrettelegging,
-  aksjonspunkter,
-  behandlingsresultat,
-  alleKodeverk,
-  submitCallback,
-  status,
-}) => {
-  const finnesUttak = useMemo(
-    () => finnesInnvilgetUttak(svangerskapspengerTilrettelegging),
-    [svangerskapspengerTilrettelegging],
+export const SvangerskapVilkarForm = ({ readOnlySubmitButton, svangerskapspengerTilrettelegging, status }: Props) => {
+  const {
+    aksjonspunkterForPanel,
+    alleMerknaderFraBeslutter,
+    behandling,
+    harÅpneAksjonspunkter,
+    submitCallback,
+    alleKodeverk,
+    isReadOnly,
+  } = usePanelDataContext<BekreftSvangerskapspengervilkarAp>();
+
+  const erIkkeGodkjentAvBeslutter = aksjonspunkterForPanel.some(
+    a => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted,
   );
+
+  const finnesUttak = finnesInnvilgetUttak(svangerskapspengerTilrettelegging);
 
   const intl = useIntl();
 
-  const initialValues = useMemo(
-    () => buildInitialValues(aksjonspunkter, status, behandlingsresultat),
-    [behandlingsresultat, aksjonspunkter, status],
-  );
+  const initialValues = buildInitialValues(aksjonspunkterForPanel, status, behandling.behandlingsresultat);
+
   const { formData, setFormData } = useFormData<FormValues>();
   const formMethods = useForm<FormValues>({
     defaultValues: formData || initialValues,
@@ -123,8 +103,7 @@ const SvangerskapVilkarForm: FunctionComponent<OwnProps> = ({
 
   const avslagsarsaker = alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.SVANGERSKAPVILKARET];
 
-  const isOpenAksjonspunkt = aksjonspunkter.some(ap => ap.status === AksjonspunktStatus.OPPRETTET);
-  const originalErVilkarOk = isOpenAksjonspunkt ? undefined : VilkarUtfallType.OPPFYLT === status;
+  const originalErVilkarOk = harÅpneAksjonspunkter ? undefined : VilkarUtfallType.OPPFYLT === status;
 
   const bTag = useCallback((chunks: any) => <b>{chunks}</b>, []);
 
@@ -136,9 +115,9 @@ const SvangerskapVilkarForm: FunctionComponent<OwnProps> = ({
     >
       <ProsessPanelTemplate
         title={intl.formatMessage({ id: 'SvangerskapVilkarForm.Svangerskap' })}
-        isAksjonspunktOpen={isApOpen}
+        isAksjonspunktOpen={harÅpneAksjonspunkter}
         readOnlySubmitButton={readOnlySubmitButton}
-        readOnly={readOnly}
+        readOnly={isReadOnly}
         originalErVilkarOk={originalErVilkarOk}
         erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
         isDirty={formMethods.formState.isDirty}
@@ -157,15 +136,13 @@ const SvangerskapVilkarForm: FunctionComponent<OwnProps> = ({
         )}
         <VilkarResultPicker
           avslagsarsaker={avslagsarsaker}
-          readOnly={readOnly}
+          readOnly={isReadOnly}
           skalKunneInnvilge={finnesUttak}
           customVilkarOppfyltText={<FormattedMessage id="SvangerskapVilkarForm.Oppfylt" />}
           customVilkarIkkeOppfyltText={<FormattedMessage id="SvangerskapVilkarForm.IkkeOppfylt" values={{ b: bTag }} />}
         />
-        <ProsessStegBegrunnelseTextFieldNew readOnly={readOnly} notRequired={erVilkarOk} />
+        <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} notRequired={erVilkarOk} />
       </ProsessPanelTemplate>
     </Form>
   );
 };
-
-export default SvangerskapVilkarForm;

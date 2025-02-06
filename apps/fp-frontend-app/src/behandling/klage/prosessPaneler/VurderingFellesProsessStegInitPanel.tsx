@@ -95,7 +95,7 @@ export const VurderingFellesProsessStegInitPanel = ({
             klageVurdering={klageVurdering}
             previewCallback={forhåndsvis}
             saveKlage={lagreKlageVurdering}
-            {...standardPanelProps}
+            readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
           />
         ) : (
           <LoadingPanel />

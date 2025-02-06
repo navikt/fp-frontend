@@ -31,7 +31,7 @@ export const ArbeidOgInntektFaktaInitPanel = ({
 }: Props & FaktaPanelInitProps) => {
   const intl = useIntl();
 
-  const { behandling, fagsak, hentOgSettBehandling, rettigheter } = use(BehandlingDataContext);
+  const { behandling, hentOgSettBehandling, rettigheter } = use(BehandlingDataContext);
 
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
@@ -81,14 +81,12 @@ export const ArbeidOgInntektFaktaInitPanel = ({
       {arbeidOgInntekt ? (
         <ArbeidOgInntektFaktaIndex
           arbeidOgInntekt={arbeidOgInntekt}
-          saksnummer={fagsak.saksnummer}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           erOverstyrer={rettigheter.kanOverstyreAccess.isEnabled}
           registrerArbeidsforhold={registrerArbeidsforhold}
           lagreVurdering={lagreVurdering}
           settBehandlingPåVentCallback={settBehandlingPåVent}
           åpneForNyVurdering={åpneForNyVurdering}
-          {...standardPanelProps}
         />
       ) : (
         <LoadingPanel />

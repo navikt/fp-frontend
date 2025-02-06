@@ -1,13 +1,12 @@
-import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort,Label } from '@navikt/ds-react';
+import { BodyShort, Label } from '@navikt/ds-react';
 
 import { Behandlingsresultat } from '@navikt/fp-types';
 
-import VedtakFritekstPanel from '../felles/VedtakFritekstPanel';
+import { VedtakFritekstPanel } from '../felles/VedtakFritekstPanel';
 
-interface OwnProps {
+interface Props {
   revurderingsÅrsakString?: string;
   språkKode: string;
   isReadOnly: boolean;
@@ -16,14 +15,14 @@ interface OwnProps {
   skalBrukeOverstyrendeFritekstBrev: boolean;
 }
 
-const VedtakOpphorRevurderingPanel: FunctionComponent<OwnProps> = ({
+export const VedtakOpphorRevurderingPanel = ({
   revurderingsÅrsakString,
   språkKode,
   isReadOnly,
   behandlingsresultat,
   beregningErManueltFastsatt,
   skalBrukeOverstyrendeFritekstBrev,
-}) => (
+}: Props) => (
   <>
     <Label size="small">
       <FormattedMessage id="VedtakForm.Revurdering.Aarsak" />
@@ -39,5 +38,3 @@ const VedtakOpphorRevurderingPanel: FunctionComponent<OwnProps> = ({
     )}
   </>
 );
-
-export default VedtakOpphorRevurderingPanel;

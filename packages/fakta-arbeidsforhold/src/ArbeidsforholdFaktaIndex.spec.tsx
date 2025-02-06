@@ -20,7 +20,7 @@ const {
 
 describe('<ArbeidsforholdFaktaIndex>', () => {
   it('skal vise at arbeidsforholdet er oppdatert og behandlingen har fortsatt uten IM', async () => {
-    render(<ArbeidsforholdetSkalBenyttesUtenInntektsmelding />);
+    render(<ArbeidsforholdetSkalBenyttesUtenInntektsmelding />, );
 
     expect(await screen.findByText('Arbeidsforhold som er aktive ved permisjonsstart')).toBeInTheDocument();
     expect(screen.getByText('KIWI(999999999)')).toBeInTheDocument();

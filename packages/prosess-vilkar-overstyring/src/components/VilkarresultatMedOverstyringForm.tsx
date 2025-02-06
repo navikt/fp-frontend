@@ -1,4 +1,3 @@
-import React, { FunctionComponent, useCallback, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
@@ -24,7 +23,7 @@ import {
   OverstyringMedlemskapsvilkaretLopendeAp,
   OverstyringMedlemskapvilkaretForutgaendeAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData } from '@navikt/fp-utils';
+import { useFormData, usePanelDataContext, usePanelOverstyring } from '@navikt/fp-utils';
 
 import styles from './vilkarresultatMedOverstyringForm.module.css';
 
@@ -88,6 +87,11 @@ type OverstyringVilkår =
 
 const transformValues = (values: FormValues, overstyringApKode: OverstyringAksjonspunkter): OverstyringVilkår => {
   const { vurdering, avslagskode, begrunnelse, medlemFom, opphørFom } = values;
+
+  if (overstyringApKode === AksjonspunktKode.OVERSTYR_BEREGNING) {
+    throw new Error('Overstyring av beregning håndteres ikke her');
+  }
+
   const felles = {
     kode: overstyringApKode,
     begrunnelse: begrunnelse,
@@ -113,25 +117,12 @@ const transformValues = (values: FormValues, overstyringApKode: OverstyringAksjo
   }
 };
 
-interface OwnProps {
-  ytelseType: string;
-  behandlingsresultat?: Behandling['behandlingsresultat'];
+interface Props {
   medlemskapManuellBehandlingResultat?: ManuellBehandlingResultat;
-  aksjonspunkter: Aksjonspunkt[];
-  behandling: Behandling;
-  submitCallback: (data: OverstyringVilkår) => Promise<void>;
-  overrideReadOnly: boolean;
-  kanOverstyreAccess: {
-    isEnabled: boolean;
-  };
-  toggleOverstyring: (fn: (oldArray: []) => void) => void;
   avslagsarsaker: KodeverkMedNavn[];
   status: string;
-  erOverstyrt: boolean;
   panelTittelKode: string;
-  overstyringApKode: OverstyringAksjonspunkter;
   lovReferanse?: string;
-  erIkkeGodkjentAvBeslutter: boolean;
 }
 
 /**
@@ -140,34 +131,25 @@ interface OwnProps {
  * Viser resultat av vilkårskjøring når det ikke finnes tilknyttede aksjonspunkter.
  * Resultatet kan overstyres av Nav-ansatt med overstyr-rettighet.
  */
-const VilkarresultatMedOverstyringForm: FunctionComponent<OwnProps> = ({
-  ytelseType,
+export const VilkarresultatMedOverstyringForm = ({
   panelTittelKode,
-  erOverstyrt,
-  overstyringApKode,
   lovReferanse,
   avslagsarsaker,
-  aksjonspunkter,
-  behandling,
-  overrideReadOnly,
-  kanOverstyreAccess,
-  behandlingsresultat,
   medlemskapManuellBehandlingResultat,
-  toggleOverstyring,
-  submitCallback,
-  erIkkeGodkjentAvBeslutter,
   status,
-}) => {
-  const initialValues = useMemo(
-    () =>
-      createInitialValues(
-        aksjonspunkter,
-        status,
-        overstyringApKode,
-        behandlingsresultat,
-        medlemskapManuellBehandlingResultat,
-      ),
-    [aksjonspunkter, status, overstyringApKode, behandlingsresultat],
+}: Props) => {
+  const { aksjonspunkterForPanel, behandling, fagsak, submitCallback, alleMerknaderFraBeslutter } =
+    usePanelDataContext<OverstyringVilkår>();
+
+  const { erOverstyrt, toggleOverstyring, overstyringApKode, overrideReadOnly, kanOverstyreAccess } =
+    usePanelOverstyring();
+
+  const initialValues = createInitialValues(
+    aksjonspunkterForPanel,
+    status,
+    overstyringApKode,
+    behandling.behandlingsresultat,
+    medlemskapManuellBehandlingResultat,
   );
 
   const { formData, setFormData } = useFormData<FormValues>();
@@ -175,19 +157,16 @@ const VilkarresultatMedOverstyringForm: FunctionComponent<OwnProps> = ({
     defaultValues: formData || initialValues,
   });
 
-  const togglePa = useCallback(
-    () => toggleOverstyring(oldArray => [...oldArray, overstyringApKode]),
-    [overstyringApKode],
-  );
+  const togglePa = () => toggleOverstyring();
 
-  const toggleAv = useCallback(() => {
+  const toggleAv = () => {
     formMethods.reset();
-    toggleOverstyring(oldArray => oldArray.filter(code => code !== overstyringApKode));
-  }, [toggleOverstyring, overstyringApKode]);
+    toggleOverstyring();
+  };
 
   const erVilkarOk = formMethods.watch('erVilkarOk');
 
-  const aksjonspunkt = aksjonspunkter.find(ap => ap.definisjon === overstyringApKode);
+  const aksjonspunkt = aksjonspunkterForPanel.find(ap => ap.definisjon === overstyringApKode);
   const hasAksjonspunkt = aksjonspunkt !== undefined;
   const isSolvable =
     aksjonspunkt !== undefined
@@ -197,7 +176,7 @@ const VilkarresultatMedOverstyringForm: FunctionComponent<OwnProps> = ({
   const erOppfylt = VilkarUtfallType.OPPFYLT === status;
   const originalErVilkarOk = VilkarUtfallType.IKKE_VURDERT !== status ? erOppfylt : undefined;
 
-  const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
+  const bTag = (...chunks: any) => <b>{chunks}</b>;
 
   return (
     <Form
@@ -236,7 +215,7 @@ const VilkarresultatMedOverstyringForm: FunctionComponent<OwnProps> = ({
               </BodyShort>
             )}
             {originalErVilkarOk !== undefined &&
-              !isHidden(kanOverstyreAccess.isEnabled, aksjonspunkter, overstyringApKode) && (
+              !isHidden(kanOverstyreAccess.isEnabled, aksjonspunkterForPanel, overstyringApKode) && (
                 <OverstyringKnapp onClick={togglePa} erOverstyrt={erOverstyrt || overrideReadOnly} />
               )}
           </HStack>
@@ -251,13 +230,15 @@ const VilkarresultatMedOverstyringForm: FunctionComponent<OwnProps> = ({
             isSubmitting={formMethods.formState.isSubmitting}
             isPristine={!formMethods.formState.isDirty}
             toggleAv={toggleAv}
-            erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
+            erIkkeGodkjentAvBeslutter={aksjonspunkterForPanel.some(
+              a => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted,
+            )}
           >
             {erOverstyringAvMedlemskap(overstyringApKode) ? (
               <MedlemskapVurderinger
                 avslagsarsaker={avslagsarsaker}
                 readOnly={overrideReadOnly || !erOverstyrt}
-                ytelse={ytelseType}
+                ytelse={fagsak.fagsakYtelseType}
                 erRevurdering={behandling.type === BehandlingType.REVURDERING}
                 erForutgående={overstyringApKode === AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE}
               />
@@ -277,5 +258,3 @@ const VilkarresultatMedOverstyringForm: FunctionComponent<OwnProps> = ({
     </Form>
   );
 };
-
-export default VilkarresultatMedOverstyringForm;

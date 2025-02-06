@@ -9,7 +9,7 @@ import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-f
 import { KodeverkType } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, AlleKodeverk, AlleKodeverkTilbakekreving, Verge } from '@navikt/fp-types';
 import { AvklarVergeAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData } from '@navikt/fp-utils';
+import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import RegistrereVergeFaktaForm, { FormValues as RegistrereFormValues } from './RegistrereVergeFaktaForm';
 
@@ -28,14 +28,9 @@ const transformValues = (values: FormValues): AvklarVergeAp => ({
 });
 
 interface Props {
-  submitCallback: (aksjonspunktData: AvklarVergeAp) => Promise<void>;
-  aksjonspunkter: Aksjonspunkt[];
   alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving;
   verge: Verge;
-  hasOpenAksjonspunkter: boolean;
   submittable: boolean;
-  readOnly: boolean;
-  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
 }
 
 /**
@@ -43,22 +38,16 @@ interface Props {
  *
  * Presentasjonskomponent. Har ansvar for å sette opp formen for att registrere verge.
  */
-const RegistrereVergeInfoPanel = ({
-  hasOpenAksjonspunkter,
-  submittable,
-  readOnly,
-  alleMerknaderFraBeslutter,
-  aksjonspunkter,
-  verge,
-  alleKodeverk,
-  submitCallback,
-}: Props) => {
+export const RegistrereVergeInfoPanel = ({ submittable, verge, alleKodeverk }: Props) => {
   const intl = useIntl();
+
+  const { aksjonspunkterForPanel, submitCallback, alleMerknaderFraBeslutter, harÅpneAksjonspunkter, isReadOnly } =
+    usePanelDataContext<AvklarVergeAp>();
 
   const { formData, setFormData } = useFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || buildInitialValues(verge, aksjonspunkter),
+    defaultValues: formData || buildInitialValues(verge, aksjonspunkterForPanel),
     shouldUnregister: true,
   });
 
@@ -72,7 +61,7 @@ const RegistrereVergeInfoPanel = ({
 
   return (
     <>
-      {hasOpenAksjonspunkter && (
+      {harÅpneAksjonspunkter && (
         <AksjonspunktHelpTextHTML>
           {intl.formatMessage({ id: 'RegistrereVergeInfoPanel.CheckInformation' })}
         </AksjonspunktHelpTextHTML>
@@ -83,24 +72,24 @@ const RegistrereVergeInfoPanel = ({
         setDataOnUnmount={setFormData}
       >
         <RegistrereVergeFaktaForm
-          readOnly={readOnly || aksjonspunkter.length === 0}
+          readOnly={isReadOnly || aksjonspunkterForPanel.length === 0}
           intl={intl}
           vergetyper={vergetyper}
           valgtVergeType={valgtVergeType}
           alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
         />
-        {aksjonspunkter.length !== 0 && (
+        {aksjonspunkterForPanel.length !== 0 && (
           <>
             <VerticalSpacer twentyPx />
             <FaktaBegrunnelseTextField
               isSubmittable={submittable}
-              isReadOnly={readOnly}
+              isReadOnly={isReadOnly}
               hasBegrunnelse={!!begrunnelse}
             />
             <VerticalSpacer twentyPx />
             <FaktaSubmitButton
               isSubmittable={submittable && !!valgtVergeType}
-              isReadOnly={readOnly}
+              isReadOnly={isReadOnly}
               isSubmitting={formMethods.formState.isSubmitting}
               isDirty={formMethods.formState.isDirty}
             />
@@ -110,5 +99,3 @@ const RegistrereVergeInfoPanel = ({
     </>
   );
 };
-
-export default RegistrereVergeInfoPanel;

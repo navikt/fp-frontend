@@ -53,7 +53,8 @@ export const ForeldreansvarInngangsvilkarInitPanel = (props: InngangsvilkarPanel
           isForeldreansvar2Ledd={standardPanelProps.vilkar.some(
             v => v.vilkarType === VilkarType.FORELDREANSVARSVILKARET_2_LEDD,
           )}
-          {...standardPanelProps}
+          status={standardPanelProps.status}
+          readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
         />
       )}
     />

@@ -1,9 +1,9 @@
-import { action } from '@storybook/addon-actions';
+import { ComponentProps } from 'react';
+
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
-import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
-import { Behandling } from '@navikt/fp-types';
+import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
 
 import { BesteberegningFaktaIndex } from './BesteberegningFaktaIndex';
 import { beregningsgrunnlag as scenarioBG } from './scenario/BesteberegningScenario';
@@ -36,28 +36,20 @@ const lagAksjonspunkt = (apKode: string, status: string, begrunnelse?: string) =
 const meta = {
   title: 'fakta/fakta-besteberegning',
   component: BesteberegningFaktaIndex,
-  decorators: [withFormData],
+  decorators: [withFormData, withPanelData],
   args: {
-    submitCallback: action('button-click') as (data: any) => Promise<void>,
-    readOnly: false,
     submittable: true,
-    alleMerknaderFraBeslutter: {},
-    alleKodeverk: alleKodeverk as any,
     arbeidsgiverOpplysninger,
-    behandling: {
-      uuid: '1',
-      versjon: 1,
-    } as Behandling,
   },
-} satisfies Meta<typeof BesteberegningFaktaIndex>;
+  render: args => <BesteberegningFaktaIndex {...args} />,
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof BesteberegningFaktaIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
 export const BesteberegningMedDagpengerOgArbeid: Story = {
   args: {
-    aksjonspunkter: [],
-    harApneAksjonspunkter: false,
+    aksjonspunkterForPanel: [],
     beregningsgrunnlag: scenarioBG,
   },
 };
@@ -65,33 +57,30 @@ export const BesteberegningMedDagpengerOgArbeid: Story = {
 export const BesteberegningMedDagpengerOgArbeidÅpentAksjonspunkt: Story = {
   args: {
     beregningsgrunnlag: scenarioBG,
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       lagAksjonspunkt(AksjonspunktKode.KONTROLLER_AUTOMATISK_BESTEBEREGNING, AksjonspunktStatus.OPPRETTET),
     ],
-    harApneAksjonspunkter: true,
   },
 };
 
 export const BesteberegningMedDagpengerOgArbeidLukketAksjonspunktPåVent: Story = {
   args: {
     beregningsgrunnlag: scenarioBG,
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       lagAksjonspunkt(
         AksjonspunktKode.KONTROLLER_AUTOMATISK_BESTEBEREGNING,
         AksjonspunktStatus.UTFORT,
         'Min begrunnelse for at besteberegningen er feil',
       ),
     ],
-    harApneAksjonspunkter: false,
   },
 };
 
 export const BesteberegningMedAvvik: Story = {
   args: {
     beregningsgrunnlag: scenarioBG,
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       lagAksjonspunkt(AksjonspunktKode.MANUELL_KONTROLL_AV_BESTEBEREGNING, AksjonspunktStatus.OPPRETTET),
     ],
-    harApneAksjonspunkter: true,
   },
 };

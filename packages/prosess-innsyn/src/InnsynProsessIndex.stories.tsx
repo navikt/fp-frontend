@@ -1,4 +1,5 @@
-import { action } from '@storybook/addon-actions';
+import { ComponentProps } from 'react';
+
 import { Meta, StoryObj } from '@storybook/react';
 
 import {
@@ -8,10 +9,10 @@ import {
   InnsynResultatType,
   Kommunikasjonsretning,
 } from '@navikt/fp-kodeverk';
-import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
-import { Aksjonspunkt, Behandling, Fagsak, Innsyn, InnsynDokument } from '@navikt/fp-types';
+import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { Aksjonspunkt, Behandling, Innsyn, InnsynDokument } from '@navikt/fp-types';
 
-import InnsynProsessIndex from './InnsynProsessIndex';
+import { InnsynProsessIndex } from './InnsynProsessIndex';
 
 const defaultBehandling = {
   uuid: '1',
@@ -30,17 +31,9 @@ const defaultAksjonspunkter = [
 const meta = {
   title: 'prosess/innsyn/prosess-innsyn',
   component: InnsynProsessIndex,
-  decorators: [withFormData],
+  decorators: [withFormData, withPanelData],
   args: {
-    alleKodeverk: alleKodeverk as any,
-    submitCallback: action('button-click') as (data: any) => Promise<void>,
-    isReadOnly: false,
-    isAksjonspunktOpen: true,
     readOnlySubmitButton: false,
-    status: '',
-    vilkar: [],
-    alleMerknaderFraBeslutter: {},
-    saksnummer: '123434',
     alleDokumenter: [
       {
         journalpostId: '2',
@@ -50,9 +43,9 @@ const meta = {
         kommunikasjonsretning: Kommunikasjonsretning.INN,
       },
     ],
-    fagsak: {} as Fagsak,
   },
-} satisfies Meta<typeof InnsynProsessIndex>;
+  render: args => <InnsynProsessIndex {...args} />,
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof InnsynProsessIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
@@ -60,8 +53,7 @@ type Story = StoryObj<typeof meta>;
 export const PanelForVurderingAvInnsyn: Story = {
   args: {
     behandling: defaultBehandling,
-    aksjonspunkter: defaultAksjonspunkter,
-    submitCallback: action('button-click') as (data: any) => Promise<any>,
+    aksjonspunkterForPanel: defaultAksjonspunkter,
     innsyn: {
       dokumenter: [] as InnsynDokument[],
       vedtaksdokumentasjon: [
@@ -81,7 +73,7 @@ export const InnsynSattPaVent: Story = {
       ...defaultBehandling,
       fristBehandlingPåVent: '2021-12-25',
     },
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         ...defaultAksjonspunkter[0],
         status: AksjonspunktStatus.UTFORT,
@@ -89,7 +81,6 @@ export const InnsynSattPaVent: Story = {
       },
     ],
     isReadOnly: true,
-    submitCallback: action('button-click') as (data: any) => Promise<any>,
     innsyn: {
       dokumenter: [] as InnsynDokument[],
       innsynResultatType: InnsynResultatType.INNVILGET,

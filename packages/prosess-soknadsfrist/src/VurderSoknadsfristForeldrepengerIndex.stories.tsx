@@ -1,16 +1,12 @@
-import { action } from '@storybook/addon-actions';
+import { ComponentProps } from 'react';
+
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
-import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
-import { Aksjonspunkt, Behandling, Fagsak, Soknad } from '@navikt/fp-types';
+import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { Aksjonspunkt, Soknad } from '@navikt/fp-types';
 
 import { VurderSoknadsfristForeldrepengerIndex } from './VurderSoknadsfristForeldrepengerIndex';
-
-const behandling = {
-  uuid: '1',
-  versjon: 1,
-} as Behandling;
 
 const soknad = {
   mottattDato: '2019-01-01',
@@ -26,28 +22,20 @@ const soknad = {
 const meta = {
   title: 'prosess/prosess-soknadsfrist',
   component: VurderSoknadsfristForeldrepengerIndex,
-  decorators: [withFormData],
+  decorators: [withFormData, withPanelData],
   args: {
-    behandling,
-    alleKodeverk: alleKodeverk as any,
-    isReadOnly: false,
-    isAksjonspunktOpen: true,
     readOnlySubmitButton: false,
-    status: '',
-    vilkar: [],
-    alleMerknaderFraBeslutter: {},
     soknad,
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_SOKNADSFRIST_FORELDREPENGER,
         status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: undefined,
       },
     ] as Aksjonspunkt[],
-    fagsak: {} as Fagsak,
-    submitCallback: action('button-click') as (data: any) => Promise<void>,
   },
-} satisfies Meta<typeof VurderSoknadsfristForeldrepengerIndex>;
+  render: args => <VurderSoknadsfristForeldrepengerIndex {...args} />,
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof VurderSoknadsfristForeldrepengerIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;

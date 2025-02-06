@@ -7,7 +7,7 @@ export type FormDataType<T> = {
   setFormData: (data: T) => void;
 };
 
-export const FormDataContext = createContext<any>(null);
+const FormDataContext = createContext<any>(null);
 
 export const FormDataProvider = <T,>({
   children,

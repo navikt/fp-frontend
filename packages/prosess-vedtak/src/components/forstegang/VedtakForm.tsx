@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { IntlShape, useIntl } from 'react-intl';
 
@@ -18,7 +18,6 @@ import {
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import {
   Aksjonspunkt,
-  AlleKodeverk,
   Behandling,
   Behandlingsresultat,
   BeregningsresultatDagytelse,
@@ -33,12 +32,12 @@ import {
   VurdereAnnenYtelseForVedtakAp,
   VurdereDokumentForVedtakAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData } from '@navikt/fp-utils';
+import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
-import VedtakFellesPanel from '../felles/VedtakFellesPanel';
+import { VedtakFellesPanel } from '../felles/VedtakFellesPanel';
 import { getTilbakekrevingText } from '../felles/VedtakHelper';
-import VedtakAvslagPanel from './VedtakAvslagPanel';
-import VedtakInnvilgetPanel from './VedtakInnvilgetPanel';
+import { VedtakAvslagPanel } from './VedtakAvslagPanel';
+import { VedtakInnvilgetPanel } from './VedtakInnvilgetPanel';
 
 export const finnAvslagResultatText = (behandlingResultatTypeKode: string, ytelseType: string): string => {
   if (behandlingResultatTypeKode === BehandlingResultatType.KLAGE_YTELSESVEDTAK_OPPHEVET) {
@@ -187,41 +186,35 @@ type FormValues = {
   begrunnelse?: string;
 };
 
-interface OwnProps {
-  behandling: Behandling;
-  readOnly: boolean;
-  aksjonspunkter: Aksjonspunkt[];
+interface Props {
   previewCallback: (data: ForhandsvisData) => void;
   ytelseTypeKode: string;
   beregningsresultat?: BeregningsresultatDagytelse | BeregningsresultatEs;
-  alleKodeverk: AlleKodeverk;
   tilbakekrevingvalg?: TilbakekrevingValg;
   simuleringResultat?: SimuleringResultat;
   vilkar?: Vilkar[];
   beregningErManueltFastsatt: boolean;
-  submitCallback: (data: VedtakAksjonspunkter[]) => Promise<void>;
 }
 
-const VedtakForm: FunctionComponent<OwnProps> = ({
-  behandling,
-  readOnly,
-  aksjonspunkter,
+export const VedtakForm = ({
   previewCallback,
   ytelseTypeKode,
   beregningsresultat,
-  alleKodeverk,
   tilbakekrevingvalg,
   simuleringResultat,
   vilkar,
   beregningErManueltFastsatt,
-  submitCallback,
-}) => {
+}: Props) => {
+  const { behandling, alleKodeverk, submitCallback, isReadOnly } = usePanelDataContext<VedtakAksjonspunkter[]>();
+
+  const { aksjonspunkt } = behandling;
+
   const intl = useIntl();
 
   const { formData, setFormData } = useFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || buildInitialValues(aksjonspunkter, behandling, beregningErManueltFastsatt),
+    defaultValues: formData || buildInitialValues(aksjonspunkt, behandling, beregningErManueltFastsatt),
   });
 
   const begrunnelse = formMethods.watch('begrunnelse');
@@ -269,10 +262,7 @@ const VedtakForm: FunctionComponent<OwnProps> = ({
       setDataOnUnmount={setFormData}
     >
       <VedtakFellesPanel
-        behandling={behandling}
         vedtakstatusTekst={vedtakstatusTekst}
-        aksjonspunkter={aksjonspunkter}
-        readOnly={readOnly}
         previewAutomatiskBrev={forhåndsvisDefaultBrev}
         previewOverstyrtBrev={forhåndsvisOverstyrtBrev}
         tilbakekrevingtekst={tilbakekrevingtekst}
@@ -282,7 +272,7 @@ const VedtakForm: FunctionComponent<OwnProps> = ({
             return (
               <VedtakInnvilgetPanel
                 behandlingsresultat={behandlingsresultat}
-                isReadOnly={readOnly}
+                isReadOnly={isReadOnly}
                 skalBrukeOverstyrendeFritekstBrev={skalBrukeOverstyrendeFritekstBrev}
                 ytelseTypeKode={ytelseTypeKode}
                 språkKode={sprakkode}
@@ -295,7 +285,7 @@ const VedtakForm: FunctionComponent<OwnProps> = ({
           return erAvslatt ? (
             <VedtakAvslagPanel
               behandlingsresultat={behandlingsresultat}
-              isReadOnly={readOnly}
+              isReadOnly={isReadOnly}
               språkKode={sprakkode}
               alleKodeverk={alleKodeverk}
               vilkar={vilkar}
@@ -308,5 +298,3 @@ const VedtakForm: FunctionComponent<OwnProps> = ({
     </Form>
   );
 };
-
-export default VedtakForm;

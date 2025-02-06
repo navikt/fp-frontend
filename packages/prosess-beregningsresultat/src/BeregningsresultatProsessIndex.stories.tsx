@@ -1,16 +1,18 @@
-import { action } from '@storybook/addon-actions';
+import { ComponentProps } from 'react';
+
 import { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
-import { Aksjonspunkt, Behandling, Fagsak } from '@navikt/fp-types';
+import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
+import {
+  PanelDataArgs,
+  PanelOverstyringContextArgs,
+  withFormData,
+  withPanelData,
+  withPanelOverstyring,
+} from '@navikt/fp-storybook-utils';
+import { Aksjonspunkt } from '@navikt/fp-types';
 
 import { BeregningsresultatProsessIndex } from './BeregningsresultatProsessIndex';
-
-const behandling = {
-  uuid: '1',
-  versjon: 1,
-} as Behandling;
 
 const beregningsresultat = {
   beregnetTilkjentYtelse: 92000,
@@ -21,6 +23,7 @@ const beregningsresultat = {
 const defaultAksjonspunkter = [
   {
     definisjon: AksjonspunktKode.VURDER_FEILUTBETALING,
+    status: AksjonspunktStatus.OPPRETTET,
     begrunnelse: 'test',
   },
 ] as Aksjonspunkt[];
@@ -28,50 +31,40 @@ const defaultAksjonspunkter = [
 const meta = {
   title: 'prosess/prosess-beregningsresultat',
   component: BeregningsresultatProsessIndex,
-  decorators: [withFormData],
+  decorators: [withFormData, withPanelData, withPanelOverstyring],
   args: {
-    behandling,
-    alleKodeverk: alleKodeverk as any,
-    submitCallback: action('button-click') as (data: any) => Promise<void>,
-    isReadOnly: false,
-    isAksjonspunktOpen: true,
-    readOnlySubmitButton: false,
-    status: '',
-    vilkar: [],
-    alleMerknaderFraBeslutter: {},
     beregningresultatEngangsstonad: beregningsresultat,
-    overrideReadOnly: false,
-    toggleOverstyring: action('button-click'),
-    fagsak: {} as Fagsak,
+    overstyringApKode: AksjonspunktKode.OVERSTYR_BEREGNING,
   },
-} satisfies Meta<typeof BeregningsresultatProsessIndex>;
+  render: args => <BeregningsresultatProsessIndex {...args} />,
+} satisfies Meta<PanelDataArgs & PanelOverstyringContextArgs & ComponentProps<typeof BeregningsresultatProsessIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
 export const SaksbehandlerKanIkkeOverstyre: Story = {
   args: {
-    aksjonspunkter: defaultAksjonspunkter,
-    kanOverstyreAccess: { isEnabled: false },
+    aksjonspunkterForPanel: defaultAksjonspunkter,
   },
 };
 
 export const SaksbehandlerKanOverstyre: Story = {
   args: {
-    aksjonspunkter: defaultAksjonspunkter,
-    kanOverstyreAccess: { isEnabled: true },
+    aksjonspunkterForPanel: defaultAksjonspunkter,
+    kanOverstyreAccess: { isEnabled: true, employeeHasAccess: true },
   },
 };
 
 export const OverstyrtReadonlyPanel: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.OVERSTYR_BEREGNING,
+        status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: 'Dette er en begrunnelse',
       },
     ] as Aksjonspunkt[],
-    kanOverstyreAccess: { isEnabled: true },
+    kanOverstyreAccess: { isEnabled: true, employeeHasAccess: true },
     isReadOnly: true,
   },
 };

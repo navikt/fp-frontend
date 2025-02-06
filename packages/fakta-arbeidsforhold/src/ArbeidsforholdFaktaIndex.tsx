@@ -2,7 +2,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId, StandardFaktaPanelProps } from '@navikt/fp-types';
+import { ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
 import ArbeidsforholdInfoPanel from './components/ArbeidsforholdInfoPanel';
 
@@ -15,10 +15,7 @@ interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
-export const ArbeidsforholdFaktaIndex = ({
-  arbeidOgInntekt,
-  arbeidsgiverOpplysningerPerId,
-}: Props & StandardFaktaPanelProps) => (
+export const ArbeidsforholdFaktaIndex = ({ arbeidOgInntekt, arbeidsgiverOpplysningerPerId }: Props) => (
   <RawIntlProvider value={intl}>
     <ArbeidsforholdInfoPanel
       arbeidOgInntekt={arbeidOgInntekt}

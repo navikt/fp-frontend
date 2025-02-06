@@ -1,8 +1,7 @@
-import React, { useMemo } from 'react';
-
-import { KodeverkType, OverstyringAksjonspunkter, VilkarType } from '@navikt/fp-kodeverk';
+import { KodeverkType, VilkarType } from '@navikt/fp-kodeverk';
 import { VilkarresultatMedOverstyringProsessIndex } from '@navikt/fp-prosess-vilkar-overstyring';
-import { Aksjonspunkt, KodeverkMedNavn, Medlemskap, Vilkar } from '@navikt/fp-types';
+import { KodeverkMedNavn, Medlemskap, Vilkar } from '@navikt/fp-types';
+import { usePanelDataContext, usePanelOverstyring } from '@navikt/fp-utils';
 
 import { skalViseProsessPanel } from './skalViseProsessPanel';
 import { useStandardProsessPanelProps } from './useStandardProsessPanelProps';
@@ -18,36 +17,19 @@ const filtrerAvslagsarsaker = (
     : avslagsarsaker[vilkarTypeKode];
 
 interface Props {
-  aksjonspunkter: Aksjonspunkt[];
-  aksjonspunktKode: OverstyringAksjonspunkter;
   vilkar: Vilkar[];
   vilkarKoder: VilkarType[];
   medlemskap?: Medlemskap;
   panelTekstKode: string;
-  erOverstyrt: boolean;
-  toggleOverstyring: () => void;
-  kanOverstyreAccess: { isEnabled: boolean; employeeHasAccess: boolean };
-  overrideReadOnly: boolean;
 }
 
-export const OverstyringPanelDef = ({
-  aksjonspunkter,
-  aksjonspunktKode,
-  vilkar,
-  vilkarKoder,
-  panelTekstKode,
-  medlemskap,
-  erOverstyrt,
-  toggleOverstyring,
-  kanOverstyreAccess,
-  overrideReadOnly,
-}: Props) => {
-  const overstyrteAksjonspunkter = useMemo(
-    () => aksjonspunkter.filter(ap => aksjonspunktKode === ap.definisjon),
-    [aksjonspunkter],
-  );
+export const OverstyringPanelDef = ({ vilkar, vilkarKoder, panelTekstKode, medlemskap }: Props) => {
+  const { aksjonspunkterForPanel } = usePanelDataContext();
+  const { overstyringApKode } = usePanelOverstyring();
 
-  const standardProps = useStandardProsessPanelProps([aksjonspunktKode], vilkarKoder);
+  const overstyrteAksjonspunkter = aksjonspunkterForPanel.filter(ap => overstyringApKode === ap.definisjon);
+
+  const standardProps = useStandardProsessPanelProps([overstyringApKode], vilkarKoder);
 
   const skalVises = skalViseProsessPanel(overstyrteAksjonspunkter, vilkarKoder, vilkar);
 
@@ -63,15 +45,10 @@ export const OverstyringPanelDef = ({
   return (
     <VilkarresultatMedOverstyringProsessIndex
       medlemskap={medlemskap}
-      overrideReadOnly={overrideReadOnly}
-      kanOverstyreAccess={kanOverstyreAccess}
-      toggleOverstyring={toggleOverstyring}
       avslagsarsaker={avslagsarsaker}
-      erOverstyrt={erOverstyrt}
       panelTittelKode={panelTekstKode}
-      overstyringApKode={aksjonspunktKode}
       lovReferanse={vilkar.length > 0 ? vilkar[0].lovReferanse : undefined}
-      {...standardProps}
+      status={standardProps.status}
     />
   );
 };

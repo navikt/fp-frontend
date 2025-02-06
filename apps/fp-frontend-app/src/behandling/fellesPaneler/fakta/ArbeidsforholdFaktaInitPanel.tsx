@@ -52,7 +52,6 @@ export const ArbeidsforholdFaktaInitPanel = ({
         <ArbeidsforholdFaktaIndex
           arbeidOgInntekt={arbeidOgInntekt}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          {...standardPanelProps}
         />
       ) : (
         <LoadingPanel />

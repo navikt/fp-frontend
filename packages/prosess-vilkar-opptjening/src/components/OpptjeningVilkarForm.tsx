@@ -1,22 +1,14 @@
-import { FunctionComponent } from 'react';
+import { FastsattOpptjening } from '@navikt/fp-types';
+import { usePanelDataContext } from '@navikt/fp-utils';
 
-import { Aksjonspunkt, Behandling, FastsattOpptjening } from '@navikt/fp-types';
-import { AvklarOpptjeningsvilkaretAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-
-import OpptjeningVilkarAksjonspunktPanel from './OpptjeningVilkarAksjonspunktPanel';
+import { OpptjeningVilkarAksjonspunktPanel } from './OpptjeningVilkarAksjonspunktPanel';
 import OpptjeningVilkarView from './OpptjeningVilkarView';
 
-interface OwnProps {
-  behandlingsresultat?: Behandling['behandlingsresultat'];
+interface Props {
   fastsattOpptjening: FastsattOpptjening;
-  aksjonspunkter: Aksjonspunkt[];
   status: string;
   lovReferanse?: string;
-  isAksjonspunktOpen: boolean;
-  readOnly: boolean;
   readOnlySubmitButton: boolean;
-  submitCallback: (aksjonspunktData: AvklarOpptjeningsvilkaretAp) => Promise<void>;
-  erIkkeGodkjentAvBeslutter: boolean;
   erSvpFagsak: boolean;
 }
 
@@ -25,32 +17,22 @@ interface OwnProps {
  *
  * Presentasjonskomponent. Viser resultatet av opptjeningsvilkåret.
  */
-const OpptjeningVilkarForm: FunctionComponent<OwnProps> = ({
-  behandlingsresultat,
+export const OpptjeningVilkarForm = ({
   fastsattOpptjening,
-  isAksjonspunktOpen,
-  aksjonspunkter,
   status,
   lovReferanse,
   readOnlySubmitButton,
-  readOnly,
-  submitCallback,
-  erIkkeGodkjentAvBeslutter,
   erSvpFagsak,
-}) => {
-  if (aksjonspunkter.length > 0) {
+}: Props) => {
+  const { aksjonspunkterForPanel } = usePanelDataContext();
+
+  if (aksjonspunkterForPanel.length > 0) {
     return (
       <OpptjeningVilkarAksjonspunktPanel
-        submitCallback={submitCallback}
-        isApOpen={isAksjonspunktOpen}
-        readOnly={readOnly}
         readOnlySubmitButton={readOnlySubmitButton}
-        behandlingsresultat={behandlingsresultat}
-        aksjonspunkter={aksjonspunkter}
         status={status}
         lovReferanse={lovReferanse}
         fastsattOpptjening={fastsattOpptjening}
-        erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
         erSvpFagsak={erSvpFagsak}
       />
     );
@@ -65,5 +47,3 @@ const OpptjeningVilkarForm: FunctionComponent<OwnProps> = ({
     />
   );
 };
-
-export default OpptjeningVilkarForm;

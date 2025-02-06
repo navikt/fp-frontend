@@ -1,10 +1,11 @@
-import { ReactElement } from 'react';
+import { ReactElement, use } from 'react';
 
 import { VilkarType } from '@navikt/fp-kodeverk';
-import { StandardProsessPanelProps } from '@navikt/fp-types';
 import { FormDataProvider } from '@navikt/fp-utils';
 
 import { InngangsvilkarPanelInitProps } from '../typer/inngangsvilkarPanelInitProps';
+import { StandardProsessPanelProps } from '../typer/standardProsessPanelPropsTsType';
+import { BehandlingDataContext } from '../utils/behandlingDataContext';
 import { skalViseProsessPanel } from './skalViseProsessPanel';
 import { useInngangsvilkarRegistrerer } from './useInngangsvilkarRegistrerer';
 
@@ -27,6 +28,8 @@ export const InngangsvilkarDefaultInitPanel = ({
   inngangsvilkarPanelKode,
   hentInngangsvilkarPanelTekst,
 }: Props & InngangsvilkarPanelInitProps) => {
+  const { behandling } = use(BehandlingDataContext);
+
   const skalVises = skalViseProsessPanel(standardPanelProps.aksjonspunkter, vilkarKoder, standardPanelProps.vilkar);
 
   const { erOverstyrt, toggleOverstyring } = useInngangsvilkarRegistrerer(
@@ -40,7 +43,7 @@ export const InngangsvilkarDefaultInitPanel = ({
   );
 
   return (
-    <FormDataProvider behandling={standardPanelProps.behandling}>
+    <FormDataProvider behandling={behandling}>
       {!erPanelValgt || !skalVises ? null : renderPanel({ erOverstyrt, toggleOverstyring })}
     </FormDataProvider>
   );
