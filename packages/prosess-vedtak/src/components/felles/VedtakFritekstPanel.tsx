@@ -6,7 +6,7 @@ import { hasValidText, maxLength, minLength } from '@navikt/ft-form-validators';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { decodeHtmlEntity, formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
-import { Behandlingsresultat } from '@navikt/fp-types';
+import type { Behandlingsresultat } from '@navikt/fp-types';
 
 import styles from './vedtakFritekstPanel.module.css';
 

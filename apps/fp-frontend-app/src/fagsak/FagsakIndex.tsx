@@ -3,11 +3,11 @@ import { useIntl } from 'react-intl';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 
 import { DataFetchPendingModal, LoadingPanel } from '@navikt/ft-ui-komponenter';
-import { Location } from 'history';
+import type { Location } from 'history';
 
 import { BehandlingType, RelasjonsRolleType } from '@navikt/fp-kodeverk';
 import { VisittkortSakIndex } from '@navikt/fp-sak-visittkort';
-import { AnnenPartBehandling, Behandling } from '@navikt/fp-types';
+import type { AnnenPartBehandling, Behandling } from '@navikt/fp-types';
 
 import { ErrorBoundary } from '../app/ErrorBoundary';
 import {

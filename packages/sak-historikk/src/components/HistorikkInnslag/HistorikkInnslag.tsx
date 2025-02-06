@@ -1,10 +1,8 @@
-import React from 'react';
-
-import { BodyLong, BodyShort, Box, BoxProps, Detail, HStack, VStack } from '@navikt/ds-react';
-import { Location } from 'history';
+import { BodyLong, BodyShort, Box, type BoxProps, Detail, HStack, VStack } from '@navikt/ds-react';
+import { type Location } from 'history';
 
 import { HistorikkAktor, KodeverkType } from '@navikt/fp-kodeverk';
-import { Historikkinnslag } from '@navikt/fp-types';
+import type { Historikkinnslag } from '@navikt/fp-types';
 
 import { Avatar } from './Avatar';
 import { HistorikkDokumentLenke } from './HistorikkDokumentLenke';

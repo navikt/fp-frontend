@@ -1,15 +1,14 @@
-import React, { FunctionComponent } from 'react';
-import { FormattedMessage,useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ReadMore, VStack } from '@navikt/ds-react';
 import { TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt } from '@navikt/fp-types';
-import { KontrollerEtterbetalingTilSøkerAP } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { Aksjonspunkt } from '@navikt/fp-types';
+import type { KontrollerEtterbetalingTilSøkerAP } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import FormValues, { EtterbetalingSøkerFormValues } from '../../types/FormValues';
+import type { EtterbetalingSøkerFormValues,FormValues } from '../types/FormValues';
 
 import styles from './etterbetalingSøkerForm.module.css';
 
@@ -30,12 +29,12 @@ export const buildInitialValues = (aksjonspunkt?: Aksjonspunkt): EtterbetalingS�
   };
 };
 
-interface OwnProps {
+interface Props {
   aksjonspunkt?: Aksjonspunkt;
   readOnly: boolean;
 }
 
-const TilbakekrevSøkerForm: FunctionComponent<OwnProps> = ({ readOnly, aksjonspunkt }) => {
+export const EtterbetalingSøkerForm = ({ readOnly, aksjonspunkt }: Props) => {
   const intl = useIntl();
 
   if (!aksjonspunkt || aksjonspunkt.definisjon !== AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER) {
@@ -58,5 +57,3 @@ const TilbakekrevSøkerForm: FunctionComponent<OwnProps> = ({ readOnly, aksjonsp
     </VStack>
   );
 };
-
-export default TilbakekrevSøkerForm;

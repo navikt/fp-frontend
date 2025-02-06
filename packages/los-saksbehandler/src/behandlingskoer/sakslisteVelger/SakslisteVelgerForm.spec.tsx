@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -11,7 +9,7 @@ const { Default, MedToSakslister, MedFlereEnnTreSaksbehandlere } = composeStorie
 
 describe('SakslisteVelgerForm', () => {
   it('skal vise dropdown med en saksliste', async () => {
-    await applyRequestHandlers(Default.parameters.msw);
+    await applyRequestHandlers(Default.parameters['msw']);
     const { getByText } = render(<Default />);
 
     expect(await screen.findByText('Saksliste 1')).toBeInTheDocument();
@@ -37,7 +35,7 @@ describe('SakslisteVelgerForm', () => {
   });
 
   it('skal vise dropdown med to saksliste og så bytte valgt liste', async () => {
-    await applyRequestHandlers(MedToSakslister.parameters.msw);
+    await applyRequestHandlers(MedToSakslister.parameters['msw']);
     const { getByLabelText, getByText } = render(<MedToSakslister />);
 
     expect(await screen.findByText('Saksliste 1')).toBeInTheDocument();
@@ -69,7 +67,7 @@ describe('SakslisteVelgerForm', () => {
   });
 
   it('skal i utgangspunktet kun vise tre saksbehandlere og så klikke for å vise alle', async () => {
-    await applyRequestHandlers(MedFlereEnnTreSaksbehandlere.parameters.msw);
+    await applyRequestHandlers(MedFlereEnnTreSaksbehandlere.parameters['msw']);
     render(<MedFlereEnnTreSaksbehandlere />);
 
     expect(await screen.findByText('Behandlingskø')).toBeInTheDocument();

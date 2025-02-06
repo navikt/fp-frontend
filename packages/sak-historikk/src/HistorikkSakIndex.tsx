@@ -1,10 +1,9 @@
-import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
-import { Location } from 'history';
+import type { Location } from 'history';
 
-import { AlleKodeverk, AlleKodeverkTilbakekreving, Historikkinnslag } from '@navikt/fp-types';
+import type { AlleKodeverk, AlleKodeverkTilbakekreving, Historikkinnslag } from '@navikt/fp-types';
 
 import { Historikk } from './components/Historikk';
 
@@ -23,7 +22,7 @@ interface Props {
   valgtBehandlingUuid?: string;
 }
 
-const HistorikkSakIndex = ({
+export const HistorikkSakIndex = ({
   historikkFpSak = [],
   historikkFpTilbake = [],
   alleKodeverkFpTilbake,
@@ -46,5 +45,3 @@ const HistorikkSakIndex = ({
     />
   </RawIntlProvider>
 );
-
-export default HistorikkSakIndex;

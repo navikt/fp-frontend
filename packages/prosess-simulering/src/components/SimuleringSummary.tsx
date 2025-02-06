@@ -1,14 +1,13 @@
-import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort,Label } from '@navikt/ds-react';
+import { BodyShort, Label } from '@navikt/ds-react';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT, formatCurrencyNoKr } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import styles from './simuleringSummary.module.css';
 
-interface OwnProps {
+interface Props {
   fom: string;
   tom: string;
   feilutbetaling: number;
@@ -20,14 +19,14 @@ interface OwnProps {
 /**
  * Simulering oppsummering
  */
-const SimuleringSummary: FunctionComponent<OwnProps> = ({
+export const SimuleringSummary = ({
   fom,
   tom,
   feilutbetaling,
   etterbetaling,
   inntrekk,
   ingenPerioderMedAvvik,
-}) => (
+}: Props) => (
   <>
     <BodyShort size="small" className={styles.summaryTitle}>
       <FormattedMessage id="Simulering.bruker" />
@@ -86,5 +85,3 @@ const SimuleringSummary: FunctionComponent<OwnProps> = ({
     </div>
   </>
 );
-
-export default SimuleringSummary;

@@ -1,4 +1,3 @@
-import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
@@ -6,7 +5,7 @@ import { VStack } from '@navikt/ds-react';
 
 import { TrueFalseInput } from '../../felles/TrueFalseInput';
 import { ANNEN_FORELDER_NAME_PREFIX } from '../constant';
-import { AnnenForelderFormValues, PermisjonRettigheterFormValues } from '../types';
+import type { AnnenForelderFormValues, PermisjonRettigheterFormValues } from '../types';
 
 interface Props {
   readOnly: boolean;

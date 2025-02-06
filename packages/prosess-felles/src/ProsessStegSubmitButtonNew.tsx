@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 
 import { Button } from '@navikt/ds-react';
 import { ariaCheck } from '@navikt/ft-form-validators';
@@ -23,7 +23,7 @@ const isDisabled = (
   return (!isDirty && hasEmptyRequiredFields) || hasEmptyRequiredFields;
 };
 
-interface OwnProps {
+interface Props {
   isReadOnly: boolean;
   isSubmittable: boolean;
   isSubmitting: boolean;
@@ -33,10 +33,7 @@ interface OwnProps {
   hasEmptyRequiredFields?: boolean;
 }
 
-/**
- * ProsessStegSubmitButton
- */
-const ProsessStegSubmitButton: FunctionComponent<OwnProps> = ({
+export const ProsessStegSubmitButton = ({
   isReadOnly,
   isSubmittable,
   isSubmitting,
@@ -44,7 +41,7 @@ const ProsessStegSubmitButton: FunctionComponent<OwnProps> = ({
   text,
   onClick,
   hasEmptyRequiredFields,
-}) => {
+}: Props) => {
   if (!isReadOnly) {
     return (
       <Button
@@ -61,5 +58,3 @@ const ProsessStegSubmitButton: FunctionComponent<OwnProps> = ({
   }
   return null;
 };
-
-export default ProsessStegSubmitButton;

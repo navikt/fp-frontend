@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { useMutation } from '@tanstack/react-query';
 import { HTTPError } from 'ky';
 
-import { Oppgave, OppgaveStatus } from '@navikt/fp-los-felles';
-import { FagsakEnkel } from '@navikt/fp-types';
+import type { Oppgave, OppgaveStatus } from '@navikt/fp-los-felles';
+import type { FagsakEnkel } from '@navikt/fp-types';
 
 import {
   getOppgaverForFagsaker,
@@ -14,7 +14,7 @@ import {
 } from '../data/fplosSaksbehandlerApi';
 import { OppgaveErReservertAvAnnenModal } from '../reservertAvAnnen/OppgaveErReservertAvAnnenModal';
 import { FagsakSøk } from './FagsakSøk';
-import { SøkFormValues } from './form/SøkForm';
+import type { SøkFormValues } from './form/SøkForm';
 
 const EMPTY_ARRAY_FAGSAK: FagsakEnkel[] = [];
 const EMPTY_ARRAY_OPPGAVER: Oppgave[] = [];

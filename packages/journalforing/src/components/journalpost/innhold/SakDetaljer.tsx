@@ -1,15 +1,15 @@
-import React, { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { TabsAddIcon } from '@navikt/aksel-icons';
-import { Button, CopyButton, Detail, HStack, Label, Tag, TagProps, VStack } from '@navikt/ds-react';
+import { Button, CopyButton, Detail, HStack, Label, Tag, type TagProps, VStack } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import { FagsakStatus, FamilieHendelseType } from '@navikt/fp-kodeverk';
 
-import { FamilieHendelse, JournalFagsak } from '../../../typer/journalFagsakTsType';
+import type { FamilieHendelse, JournalFagsak } from '../../../typer/journalFagsakTsType';
 import { finnYtelseTekst } from './VelgSakForm';
 
 import styles from './sakDetaljer.module.css';

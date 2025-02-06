@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { composeStories } from '@storybook/react';
 import { render, screen, waitFor } from '@testing-library/react';

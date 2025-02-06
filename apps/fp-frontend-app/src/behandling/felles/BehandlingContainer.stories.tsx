@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
 import { BehandlingContainer } from './BehandlingContainer';
-import { FaktaPanelInitProps } from './typer/faktaPanelInitProps';
-import { ProsessPanelInitProps } from './typer/prosessPanelInitProps';
+import type { FaktaPanelInitProps } from './typer/faktaPanelInitProps';
+import type { ProsessPanelInitProps } from './typer/prosessPanelInitProps';
 
 import messages from '../../../i18n/nb_NO.json';
 

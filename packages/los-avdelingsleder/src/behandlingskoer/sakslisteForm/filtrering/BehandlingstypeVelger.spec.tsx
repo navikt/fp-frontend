@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { composeStories } from '@storybook/react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -11,7 +9,7 @@ const { Default } = composeStories(stories);
 
 describe('<BehandlingstypeVelger>', () => {
   it('skal vise checkboxer for behandlingstyper', async () => {
-    await applyRequestHandlers(Default.parameters.msw);
+    await applyRequestHandlers(Default.parameters['msw']);
     const { getByLabelText } = render(<Default />);
     expect(await screen.findByText('Behandlingstype')).toBeInTheDocument();
     expect(getByLabelText('Førstegangsbehandling')).toBeChecked();
@@ -19,7 +17,7 @@ describe('<BehandlingstypeVelger>', () => {
   });
 
   it('skal velge klage', async () => {
-    await applyRequestHandlers(Default.parameters.msw);
+    await applyRequestHandlers(Default.parameters['msw']);
     const { getByLabelText } = render(<Default />);
     expect(await screen.findByText('Behandlingstype')).toBeInTheDocument();
     expect(getByLabelText('Klage')).not.toBeChecked();

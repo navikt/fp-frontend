@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback,useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { ChevronDownIcon, ChevronUpIcon } from '@navikt/aksel-icons';
@@ -6,14 +6,14 @@ import { Link } from '@navikt/ds-react';
 import { DateLabel, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { hentVedtakDokumentLenke } from '@navikt/fp-konstanter';
-import { InnsynVedtaksdokument, KodeverkMedNavn } from '@navikt/fp-types';
+import type { InnsynVedtaksdokument, KodeverkMedNavn } from '@navikt/fp-types';
 
-interface OwnProps {
+interface Props {
   behandlingTypes: KodeverkMedNavn[];
   vedtaksdokumenter: InnsynVedtaksdokument[];
 }
 
-const VedtakDocuments: FunctionComponent<OwnProps> = ({ vedtaksdokumenter, behandlingTypes }) => {
+export const VedtakDocuments = ({ vedtaksdokumenter, behandlingTypes }: Props) => {
   const [showDocuments, setShowDocuments] = useState(false);
   const toggleDocuments = useCallback(
     (evt: React.MouseEvent) => {
@@ -58,5 +58,3 @@ const VedtakDocuments: FunctionComponent<OwnProps> = ({ vedtaksdokumenter, behan
     </>
   );
 };
-
-export default VedtakDocuments;

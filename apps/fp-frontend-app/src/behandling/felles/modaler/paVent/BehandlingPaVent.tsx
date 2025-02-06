@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 
 import { AksjonspunktKode, isAksjonspunktOpen, KodeverkType } from '@navikt/fp-kodeverk';
-import { FormValues, SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
-import { AlleKodeverk, AlleKodeverkTilbakekreving, Behandling } from '@navikt/fp-types';
+import { type FormValues, SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
+import type { AlleKodeverk, AlleKodeverkTilbakekreving, Behandling } from '@navikt/fp-types';
 
 import { useBehandlingApi } from '../../../../data/behandlingApi';
 

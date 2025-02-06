@@ -1,8 +1,7 @@
-import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, HStack,Modal } from '@navikt/ds-react';
+import { BodyShort, Button, HStack, Modal } from '@navikt/ds-react';
 
 import styles from './klageBehandlingModal.module.css';
 

@@ -1,9 +1,7 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
-import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
+import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 
-type OverstyringBeregningAp = {
+export type OverstyringBeregningAp = {
   beregnetTilkjentYtelse: number;
 } & AksjonspunktTilBekreftelse<AksjonspunktKode.OVERSTYR_BEREGNING>;
-
-export default OverstyringBeregningAp;

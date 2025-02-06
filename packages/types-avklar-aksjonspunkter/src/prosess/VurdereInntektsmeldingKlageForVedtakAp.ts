@@ -1,8 +1,6 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
-import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
+import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 
-type VurdereInntektsmeldingKlageForVedtakAp =
+export type VurdereInntektsmeldingKlageForVedtakAp =
   AksjonspunktTilBekreftelse<AksjonspunktKode.VURDERE_INNTEKTSMELDING_KLAGE>;
-
-export default VurdereInntektsmeldingKlageForVedtakAp;

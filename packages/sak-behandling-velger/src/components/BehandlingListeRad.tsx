@@ -1,7 +1,7 @@
-import React, { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
-import { BehandlingAppKontekst, KodeverkMedNavn } from '@navikt/fp-types';
+import type { BehandlingAppKontekst, KodeverkMedNavn } from '@navikt/fp-types';
 
 import { BehandlingInformasjon } from './BehandlingInformasjon';
 

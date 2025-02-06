@@ -1,9 +1,8 @@
-import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { FagsakHendelse, FagsakPerson } from '@navikt/fp-types';
+import type { FagsakHendelse, FagsakPerson } from '@navikt/fp-types';
 
 import { VisittkortPanel } from './components/VisittkortPanel';
 

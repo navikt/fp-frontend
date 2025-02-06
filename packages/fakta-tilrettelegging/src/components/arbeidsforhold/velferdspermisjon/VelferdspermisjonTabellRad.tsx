@@ -1,10 +1,10 @@
-import React, { useCallback,useState } from 'react';
+import { useCallback, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Table, Tag } from '@navikt/ds-react';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 
-import { Permisjon } from '@navikt/fp-types';
+import type { Permisjon } from '@navikt/fp-types';
 
 import { VelferdspermisjonForm } from './VelferdspermisjonForm';
 

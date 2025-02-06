@@ -1,4 +1,3 @@
-import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
@@ -6,10 +5,10 @@ import { Label, VStack } from '@navikt/ds-react';
 import { CheckboxField } from '@navikt/ft-form-hooks';
 
 import { ForeldreType } from '@navikt/fp-kodeverk';
-import { AlleKodeverk } from '@navikt/fp-types';
+import type { AlleKodeverk } from '@navikt/fp-types';
 
-import { PERMISJON_PERIODE_FIELD_ARRAY_NAME,TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
-import { FromValuesFulltUttak, PermisjonFormValues } from '../../types';
+import { PERMISJON_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
+import type { FromValuesFulltUttak, PermisjonFormValues } from '../../types';
 import { RenderPermisjonPeriodeFieldArray } from './RenderPermisjonPeriodeFieldArray';
 
 interface Props {

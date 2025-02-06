@@ -1,12 +1,11 @@
-import React, { FunctionComponent } from 'react';
-import { UseFormHandleSubmit } from 'react-hook-form';
+import { type UseFormHandleSubmit } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { Button } from '@navikt/ds-react';
 
 import { KlageVurdering as klageVurderingType } from '@navikt/fp-kodeverk';
 
-import KlageFormType from '../../types/klageFormType';
+import type { KlageFormType } from '../../types/klageFormType';
 
 type FormValues = {
   klageVurdering?: string;
@@ -42,7 +41,7 @@ const transformValues = (values: FormValues, aksjonspunktCode: string): Transfor
   klageVurdering: values.klageVurdering!,
 });
 
-interface OwnProps {
+interface Props {
   aksjonspunktCode: string;
   saveKlage: (data: TransformedValues) => void;
   spinner?: boolean;
@@ -50,13 +49,13 @@ interface OwnProps {
   handleSubmit: UseFormHandleSubmit<KlageFormType>;
 }
 
-const TempsaveKlageButton: FunctionComponent<OwnProps> = ({
+export const TempsaveKlageButton = ({
   saveKlage,
   spinner = false,
   aksjonspunktCode,
   readOnly = false,
   handleSubmit,
-}) => {
+}: Props) => {
   if (!readOnly) {
     return (
       <Button
@@ -72,5 +71,3 @@ const TempsaveKlageButton: FunctionComponent<OwnProps> = ({
   }
   return null;
 };
-
-export default TempsaveKlageButton;

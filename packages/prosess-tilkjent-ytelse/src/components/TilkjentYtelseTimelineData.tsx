@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement, useCallback } from 'react';
+import { type ReactElement, useCallback } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ArrowLeftIcon, ArrowRightIcon, XMarkIcon } from '@navikt/aksel-icons';
@@ -15,8 +15,8 @@ import {
 import { calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { AktivitetStatus, getKodeverknavnFn,KodeverkType } from '@navikt/fp-kodeverk';
-import {
+import { AktivitetStatus, getKodeverknavnFn, KodeverkType } from '@navikt/fp-kodeverk';
+import type {
   AlleKodeverk,
   ArbeidsgiverOpplysningerPerId,
   BeregningsresultatPeriode,
@@ -112,7 +112,7 @@ const getGradering = (andel?: BeregningsresultatPeriodeAndel): ReactElement | nu
   return <FormattedMessage id={stringId} />;
 };
 
-interface OwnProps {
+interface Props {
   selectedItemData: BeregningsresultatPeriode;
   callbackForward: (...args: any[]) => any;
   callbackBackward: (...args: any[]) => any;
@@ -127,7 +127,7 @@ interface OwnProps {
  *
  * Viser opp data fra valgt periode i tilkjent ytelse-tidslinjen
  */
-const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
+export const TilkjentYtelseTimeLineData = ({
   selectedItemData,
   callbackForward,
   callbackBackward,
@@ -135,7 +135,7 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
   isSoknadSvangerskapspenger,
   arbeidsgiverOpplysningerPerId,
   lukkPeriode,
-}) => {
+}: Props) => {
   const numberOfDaysAndWeeks = calcDaysAndWeeks(selectedItemData.fom, selectedItemData.tom);
   const intl = useIntl();
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk);

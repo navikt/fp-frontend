@@ -1,4 +1,3 @@
-import React, { FunctionComponent } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -10,10 +9,10 @@ import { ArrowBox, FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter
 import { FaktaBegrunnelseTextField, isFieldEdited } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FodselSammenligningIndex } from '@navikt/fp-prosess-fakta-fodsel-sammenligning';
-import { Aksjonspunkt, AvklartBarn, FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
-import { SjekkManglendeFodselAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { Aksjonspunkt, AvklartBarn, FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
+import type { SjekkManglendeFodselAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import AvklartBarnFieldArray from './AvklartBarnFieldArray';
+import { AvklartBarnFieldArray } from './AvklartBarnFieldArray';
 
 import styles from './SjekkFodselDokForm.module.css';
 
@@ -26,7 +25,7 @@ export type FormValues = {
   antallBarnFodt?: number;
 };
 
-interface OwnProps {
+interface Props {
   familiehendelse: FamilieHendelseSamling;
   soknad: Soknad;
   avklartBarn: AvklartBarn[];
@@ -38,17 +37,12 @@ interface OwnProps {
   familiehendelseOriginalBehandling?: FamilieHendelse;
 }
 
-interface StaticFunctions {
-  buildInitialValues: (soknad: Soknad, familiehendelse: FamilieHendelse, aksjonspunkt: Aksjonspunkt) => FormValues;
-  transformValues: (values: FormValues, avklartBarn: AvklartBarn[]) => SjekkManglendeFodselAp;
-}
-
 /**
  * FodselInfoPanel
  *
  * Setter opp aksjonspunktet for avklaring av manglende fødsel (Fødselsvilkåret).
  */
-export const SjekkFodselDokForm: FunctionComponent<OwnProps> & StaticFunctions = ({
+export const SjekkFodselDokForm = ({
   readOnly,
   submittable,
   behandlingType,
@@ -57,7 +51,7 @@ export const SjekkFodselDokForm: FunctionComponent<OwnProps> & StaticFunctions =
   familiehendelseOriginalBehandling,
   alleMerknaderFraBeslutter,
   familiehendelse,
-}) => {
+}: Props) => {
   const intl = useIntl();
   const { watch } = useFormContext<FormValues>();
   const { gjeldende, register } = familiehendelse;
@@ -141,7 +135,11 @@ const ryddOppIAvklarteBarn = (avklartBarn: AvklartBarn[]): AvklartBarn[] =>
     dodsdato: ab.dodsdato === '' ? undefined : ab.dodsdato,
   }));
 
-SjekkFodselDokForm.buildInitialValues = (soknad, familiehendelse, aksjonspunkt): FormValues => ({
+SjekkFodselDokForm.buildInitialValues = (
+  soknad: Soknad,
+  familiehendelse: FamilieHendelse,
+  aksjonspunkt: Aksjonspunkt,
+): FormValues => ({
   dokumentasjonForeligger:
     familiehendelse.dokumentasjonForeligger !== null ? familiehendelse.dokumentasjonForeligger : undefined,
   brukAntallBarnITps: familiehendelse.brukAntallBarnFraTps !== null ? familiehendelse.brukAntallBarnFraTps : undefined,
@@ -159,5 +157,3 @@ SjekkFodselDokForm.transformValues = (values: FormValues, avklartBarn: AvklartBa
   brukAntallBarnITps: avklartBarn && !!avklartBarn.length ? values.brukAntallBarnITps! : false,
   ...FaktaBegrunnelseTextField.transformValues(values),
 });
-
-export default SjekkFodselDokForm;

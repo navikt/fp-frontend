@@ -1,14 +1,14 @@
 import { action } from '@storybook/addon-actions';
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
-import { NavAnsatt } from '@navikt/fp-types';
+import type { NavAnsatt } from '@navikt/fp-types';
 
 import { DokumentTittel } from '../../kodeverk/dokumentTittel';
 import { JournalKanal } from '../../kodeverk/journalKanal';
 import { OppgaveKilde } from '../../kodeverk/oppgaveKilde';
-import { Journalpost } from '../../typer/journalpostTsType';
+import type { Journalpost } from '../../typer/journalpostTsType';
 import { JournalpostDetaljer } from './JournalpostDetaljer';
 
 import messages from '../../../i18n/nb_NO.json';

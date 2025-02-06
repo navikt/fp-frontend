@@ -6,10 +6,10 @@ import { DATE_TIME_FORMAT } from '@navikt/ft-utils';
 import moment from 'moment';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
-import { KlageVurdering } from '@navikt/fp-types';
+import type { KlageVurdering } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
-import { AvsluttetBehandling } from '../types/avsluttetBehandlingTsType';
+import type { AvsluttetBehandling } from '../types/avsluttetBehandlingTsType';
 
 interface Props {
   klageVurdering: KlageVurdering;

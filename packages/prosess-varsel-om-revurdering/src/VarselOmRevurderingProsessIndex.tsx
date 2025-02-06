@@ -2,9 +2,9 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
+import type { FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
 
-import { ForhandsvisData, VarselOmRevurderingForm } from './components/VarselOmRevurderingForm';
+import { type ForhandsvisData, VarselOmRevurderingForm } from './components/VarselOmRevurderingForm';
 
 import messages from '../i18n/nb_NO.json';
 

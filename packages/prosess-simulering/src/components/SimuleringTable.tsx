@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort } from '@navikt/ds-react';
@@ -8,7 +8,7 @@ import classnames from 'classnames/bind';
 import dayjs from 'dayjs';
 
 import { MottakerType } from '@navikt/fp-kodeverk';
-import {
+import type {
   ArbeidsgiverOpplysningerPerId,
   DetaljertSimuleringResultat,
   Mottaker,
@@ -16,7 +16,7 @@ import {
   SimuleringResultatRad,
 } from '@navikt/fp-types';
 
-import CollapseButton from './CollapseButton';
+import { CollapseButton } from './CollapseButton';
 
 import styles from './simuleringTable.module.css';
 
@@ -153,7 +153,7 @@ type Details = {
   show: boolean;
 };
 
-interface OwnProps {
+interface Props {
   toggleDetails: (id: number) => void;
   showDetails: Details[];
   simuleringResultat: DetaljertSimuleringResultat;
@@ -161,13 +161,13 @@ interface OwnProps {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
-const SimuleringTable: FunctionComponent<OwnProps> = ({
+export const SimuleringTable = ({
   simuleringResultat,
   toggleDetails,
   showDetails,
   ingenPerioderMedAvvik,
   arbeidsgiverOpplysningerPerId,
-}) => (
+}: Props) => (
   <>
     {simuleringResultat.perioderPerMottaker.map((mottaker, mottakerIndex) => {
       const rangeOfMonths = getPeriod(ingenPerioderMedAvvik, simuleringResultat.periode.fom, mottaker);
@@ -239,5 +239,3 @@ const SimuleringTable: FunctionComponent<OwnProps> = ({
     })}
   </>
 );
-
-export default SimuleringTable;

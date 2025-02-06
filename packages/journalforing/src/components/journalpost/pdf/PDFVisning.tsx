@@ -1,6 +1,4 @@
-import React from 'react';
-
-import { JournalDokument } from '../../../typer/journalDokumentTsType';
+import type { JournalDokument } from '../../../typer/journalDokumentTsType';
 
 import styles from './dokumentIndex.module.css';
 

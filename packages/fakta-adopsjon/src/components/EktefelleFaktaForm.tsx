@@ -1,4 +1,3 @@
-import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort } from '@navikt/ds-react';
@@ -7,12 +6,12 @@ import { required } from '@navikt/ft-form-validators';
 import { FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { FamilieHendelse } from '@navikt/fp-types';
-import { BekreftEktefelleAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { FamilieHendelse } from '@navikt/fp-types';
+import type { BekreftEktefelleAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import styles from './ektefelleFaktaForm.module.css';
 
-interface OwnProps {
+interface Props {
   readOnly: boolean;
   ektefellesBarnIsEdited?: boolean;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
@@ -22,21 +21,12 @@ export type FormValues = {
   ektefellesBarn?: boolean;
 };
 
-interface StaticFunctions {
-  buildInitialValues: (familiehendelse: FamilieHendelse) => FormValues;
-  transformValues: (ektefellesBarn: boolean) => BekreftEktefelleAksjonspunktAp;
-}
-
 /**
  * EktefelleFaktaForm
  *
  * Setter opp aksjonspunktet for vurdering av om det er ektefelles barn som adopteres.
  */
-const EktefelleFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
-  readOnly,
-  ektefellesBarnIsEdited = false,
-  alleMerknaderFraBeslutter,
-}) => {
+export const EktefelleFaktaForm = ({ readOnly, ektefellesBarnIsEdited = false, alleMerknaderFraBeslutter }: Props) => {
   const intl = useIntl();
   return (
     <FaktaGruppe
@@ -82,5 +72,3 @@ EktefelleFaktaForm.transformValues = (ektefellesBarn: boolean): BekreftEktefelle
   kode: AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
   ektefellesBarn,
 });
-
-export default EktefelleFaktaForm;

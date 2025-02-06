@@ -1,15 +1,15 @@
-import React, { FunctionComponent } from 'react';
-import { FormattedMessage, WrappedComponentProps } from 'react-intl';
+import React from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BodyShort,Label } from '@navikt/ds-react';
-import { FaktaGruppe,VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { BodyShort, Label } from '@navikt/ds-react';
+import { FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import moment from 'moment';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { Soknad } from '@navikt/fp-types';
+import type { Soknad } from '@navikt/fp-types';
 
-interface OwnProps {
+interface Props {
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   soknad: Soknad;
 }
@@ -20,11 +20,8 @@ interface OwnProps {
  * Presentasjonskomponent. Brukes i tilknytning til faktapanel for omsorg.
  * Viser barn fra søknad
  */
-const BarnPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  intl,
-  alleMerknaderFraBeslutter,
-  soknad,
-}) => {
+export const BarnPanel = ({ alleMerknaderFraBeslutter, soknad }: Props) => {
+  const intl = useIntl();
   const { adopsjonFodelsedatoer } = soknad;
   return (
     <FaktaGruppe
@@ -46,5 +43,3 @@ const BarnPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
     </FaktaGruppe>
   );
 };
-
-export default BarnPanel;

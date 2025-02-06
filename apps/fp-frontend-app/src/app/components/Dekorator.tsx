@@ -1,17 +1,17 @@
 import React from 'react';
-import { IntlShape, useIntl } from 'react-intl';
+import { type IntlShape, useIntl } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 
 import { dateFormat, decodeHtmlEntity, timeFormat } from '@navikt/ft-utils';
 import { useQuery } from '@tanstack/react-query';
 
 import { ApiPollingStatus, RETTSKILDE_URL, SYSTEMRUTINE_URL } from '@navikt/fp-konstanter';
-import { DekoratorMedFeilviserSakIndex, Feilmelding } from '@navikt/fp-sak-dekorator';
+import { DekoratorMedFeilviserSakIndex, type Feilmelding } from '@navikt/fp-sak-dekorator';
+import { notEmpty } from '@navikt/fp-utils';
 
-import { ErrorType, FpError } from '../../data/error/errorType';
+import { ErrorType, type FpError } from '../../data/error/errorType';
 import { useRestApiError, useRestApiErrorDispatcher } from '../../data/error/RestApiErrorContext';
 import { initFetchOptions } from '../../data/fagsakApi';
-import { notEmpty } from '../../data/notEmpty';
 import { AVDELINGSLEDER_PATH, JOURNALFØRING_PATH, UTBETALINGSDATA_PATH } from '../paths';
 
 type QueryStrings = {
@@ -160,7 +160,7 @@ const formaterFeilmeldinger = (
           melding: intl.formatMessage(
             { id: 'Rest.ErrorMessage.GatewayTimeoutOrNotFound' },
             {
-              contextPath: feilmelding.location ? feilmelding.location.split('/')[1].toUpperCase() : '',
+              contextPath: feilmelding.location ? feilmelding.location.split('/')[1]?.toUpperCase() : '',
               location: feilmelding.location,
             },
           ),

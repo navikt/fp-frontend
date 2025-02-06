@@ -1,4 +1,4 @@
-type KlageFormType = {
+export type KlageFormType = {
   begrunnelse?: string;
   fritekstTilBrev?: string;
   klageVurdering?: string;
@@ -6,5 +6,3 @@ type KlageFormType = {
   klageMedholdArsak?: string;
   klageHjemmel?: string;
 };
-
-export default KlageFormType;

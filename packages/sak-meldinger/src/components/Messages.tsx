@@ -9,7 +9,7 @@ import { formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
 import { DokumentMalType, FagsakYtelseType, UgunstAarsakType } from '@navikt/fp-kodeverk';
 import { UkjentAdresseMeldingIndex } from '@navikt/fp-sak-ukjent-adresse';
-import { BehandlingAppKontekst, KodeverkMedNavn } from '@navikt/fp-types';
+import type { BehandlingAppKontekst, KodeverkMedNavn } from '@navikt/fp-types';
 
 import styles from './messages.module.css';
 

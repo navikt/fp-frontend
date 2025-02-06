@@ -1,5 +1,5 @@
-import { Meta, ReactRenderer, StoryObj } from '@storybook/react';
-import { DecoratorFunction } from 'storybook/internal/types';
+import type { Meta, ReactRenderer, StoryObj } from '@storybook/react';
+import type { DecoratorFunction } from 'storybook/internal/types';
 
 import { UkjentAdresseMeldingIndex } from './UkjentAdresseMeldingIndex';
 

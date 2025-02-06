@@ -2,7 +2,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { AnkeVurdering, BehandlingAppKontekst } from '@navikt/fp-types';
+import type { AnkeVurdering, BehandlingAppKontekst } from '@navikt/fp-types';
 
 import { BehandleAnkeForm } from './components/BehandleAnkeForm';
 

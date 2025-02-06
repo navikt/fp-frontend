@@ -1,17 +1,17 @@
-import React, { FunctionComponent, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { Accordion,Heading } from '@navikt/ds-react';
+import { Accordion, Heading } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import {
+import type {
   AlleKodeverk,
   ArbeidsgiverOpplysningerPerId,
   Feriepengegrunnlag,
   FeriepengegrunnlagAndel,
 } from '@navikt/fp-types';
 
-import FeriepengerPrAar from './FeriepengerPrAar';
+import { FeriepengerPrAar } from './FeriepengerPrAar';
 
 const finnListeMedOpptjeningsår = (andeler: FeriepengegrunnlagAndel[]): number[] => {
   const årsliste = andeler.map(andel => andel.opptjeningsår).sort((a, b) => a - b);
@@ -24,7 +24,7 @@ const hentTittel = (): React.ReactNode => (
   </Heading>
 );
 
-interface OwnProps {
+interface Props {
   feriepengegrunnlag: Feriepengegrunnlag;
   alleKodeverk: AlleKodeverk;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -32,13 +32,13 @@ interface OwnProps {
   togglePanel: () => void;
 }
 
-const FeriepengerPanel: FunctionComponent<OwnProps> = ({
+export const FeriepengerPanel = ({
   feriepengegrunnlag,
   alleKodeverk,
   arbeidsgiverOpplysningerPerId,
   erPanelÅpent,
   togglePanel,
-}) => {
+}: Props) => {
   const { andeler } = feriepengegrunnlag;
   const harIngenAndeler = !andeler || andeler.length < 1;
   const opptjeningsår = useMemo(() => (harIngenAndeler ? [] : finnListeMedOpptjeningsår(andeler)), [andeler]);
@@ -69,5 +69,3 @@ const FeriepengerPanel: FunctionComponent<OwnProps> = ({
     </Accordion>
   );
 };
-
-export default FeriepengerPanel;

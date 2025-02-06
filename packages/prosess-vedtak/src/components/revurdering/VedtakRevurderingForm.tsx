@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
-import { IntlShape, useIntl } from 'react-intl';
+import { type IntlShape, useIntl } from 'react-intl';
 
 import { Form } from '@navikt/ft-form-hooks';
 import { DDMMYYYY_DATE_FORMAT, decodeHtmlEntity } from '@navikt/ft-utils';
@@ -18,7 +18,7 @@ import {
   KodeverkType,
 } from '@navikt/fp-kodeverk';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
-import {
+import type {
   Aksjonspunkt,
   Behandling,
   BeregningsresultatDagytelse,
@@ -27,7 +27,7 @@ import {
   TilbakekrevingValg,
   Vilkar,
 } from '@navikt/fp-types';
-import {
+import type {
   ForeslaVedtakAp,
   ForeslaVedtakManueltAp,
   KontrollAvManueltOpprettetRevurderingsbehandlingAp,

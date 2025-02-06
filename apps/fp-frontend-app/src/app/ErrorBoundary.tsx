@@ -1,4 +1,4 @@
-import React, { Component, ErrorInfo, ReactNode } from 'react';
+import { Component, type ErrorInfo, type ReactNode } from 'react';
 
 import { ErrorMessage } from '@navikt/ds-react';
 import { captureException, withScope } from '@sentry/browser';
@@ -31,7 +31,7 @@ export class ErrorBoundary extends Component<OwnProps, State> {
     return { hasError: true };
   }
 
-  componentDidCatch(error: Error, info: ErrorInfo): void {
+  override componentDidCatch(error: Error, info: ErrorInfo): void {
     const { errorMessageCallback } = this.props;
 
     withScope(scope => {
@@ -58,7 +58,7 @@ export class ErrorBoundary extends Component<OwnProps, State> {
     console.error(error);
   }
 
-  render(): ReactNode {
+  override render(): ReactNode {
     const { children, showChild, errorMessage } = this.props;
     const { hasError } = this.state;
 

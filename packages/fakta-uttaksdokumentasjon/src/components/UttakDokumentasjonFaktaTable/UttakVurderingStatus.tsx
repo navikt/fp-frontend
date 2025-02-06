@@ -1,20 +1,19 @@
-import React, { FC } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { CheckmarkCircleFillIcon, CircleFillIcon, FileXMarkFillIcon, XMarkOctagonFillIcon } from '@navikt/aksel-icons';
 import { HStack } from '@navikt/ds-react';
+import { assertUnreachable } from '@navikt/ft-utils';
 
 import { UttakVurdering } from '@navikt/fp-types';
 
-import assertUnreachable from '../../utils/switchCaseUtils';
-import IconLabel from '../IconLabel';
+import { IconLabel } from '../IconLabel';
 
 interface Props {
   vurdering?: UttakVurdering | null;
   morsStillingsprosent?: number;
 }
 
-const UttakVurderingStatus: FC<Props> = ({ vurdering, morsStillingsprosent }) => {
+export const UttakVurderingStatus = ({ vurdering, morsStillingsprosent }: Props) => {
   if (!vurdering) {
     return (
       <IconLabel
@@ -53,4 +52,3 @@ const UttakVurderingStatus: FC<Props> = ({ vurdering, morsStillingsprosent }) =>
       return assertUnreachable(vurdering);
   }
 };
-export default UttakVurderingStatus;

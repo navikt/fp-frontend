@@ -1,5 +1,3 @@
-enum UtsettelseÅrsak {
+export enum UtsettelseÅrsak {
   ARBEID = 'ARBEID',
 }
-
-export default UtsettelseÅrsak;

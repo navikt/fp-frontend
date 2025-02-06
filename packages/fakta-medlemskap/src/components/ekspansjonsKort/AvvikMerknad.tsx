@@ -1,12 +1,11 @@
-import React, { FC } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyLong, Box, HStack } from '@navikt/ds-react';
+import { assertUnreachable } from '@navikt/ft-utils';
 
-import assertUnreachable from '@navikt/fp-fakta-uttaksdokumentasjon/src/utils/switchCaseUtils';
 import { MedlemskapAvvik } from '@navikt/fp-types';
 
-import AvvikStatus from './AvvikStatus';
+import { AvvikStatus } from './AvvikStatus';
 
 const getFormateringsIdForAvvik = (avvik: MedlemskapAvvik) => {
   switch (avvik) {
@@ -33,7 +32,7 @@ interface Props {
   avvik: MedlemskapAvvik;
 }
 
-const AvvikMerknad: FC<Props> = ({ avvik }) => {
+export const AvvikMerknad = ({ avvik }: Props) => {
   return (
     <Box borderRadius="full" paddingInline="2" paddingBlock="1" background="surface-neutral-subtle">
       <HStack gap="2">
@@ -45,5 +44,3 @@ const AvvikMerknad: FC<Props> = ({ avvik }) => {
     </Box>
   );
 };
-
-export default AvvikMerknad;

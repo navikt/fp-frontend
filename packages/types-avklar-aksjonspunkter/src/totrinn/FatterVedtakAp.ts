@@ -1,8 +1,8 @@
 import { AksjonspunktKode, AksjonspunktKodeTilbakekreving } from '@navikt/fp-kodeverk';
 
-import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
+import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 
-type FatterVedtakAp = {
+export type FatterVedtakAp = {
   aksjonspunktGodkjenningDtos: {
     godkjent: boolean;
     begrunnelse?: string;
@@ -10,5 +10,3 @@ type FatterVedtakAp = {
     arsaker: string[];
   }[];
 } & AksjonspunktTilBekreftelse<AksjonspunktKode.FATTER_VEDTAK | AksjonspunktKodeTilbakekreving.FATTER_VEDTAK>;
-
-export default FatterVedtakAp;

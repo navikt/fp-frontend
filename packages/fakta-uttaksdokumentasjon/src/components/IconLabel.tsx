@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, HStack } from '@navikt/ds-react';
@@ -8,7 +8,7 @@ interface IconLabelProps {
   formattedMessageId: string;
 }
 
-const IconLabel: FC<IconLabelProps> = ({ icon, formattedMessageId }) => (
+export const IconLabel = ({ icon, formattedMessageId }: IconLabelProps) => (
   <HStack gap="1">
     <div style={{ marginTop: 2 }}>{icon}</div>
     <BodyShort
@@ -22,5 +22,3 @@ const IconLabel: FC<IconLabelProps> = ({ icon, formattedMessageId }) => (
     </BodyShort>
   </HStack>
 );
-
-export default IconLabel;

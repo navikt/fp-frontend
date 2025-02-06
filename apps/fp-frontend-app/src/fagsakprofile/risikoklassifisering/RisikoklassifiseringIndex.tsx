@@ -4,14 +4,14 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
 import { AksjonspunktStatus, KodeverkType } from '@navikt/fp-kodeverk';
-import { AvklartRisikoklassifiseringAp, RisikoklassifiseringSakIndex } from '@navikt/fp-sak-risikoklassifisering';
-import { AksessRettigheter, Behandling, BehandlingAppKontekst, Fagsak, NavAnsatt } from '@navikt/fp-types';
+import { type AvklartRisikoklassifiseringAp, RisikoklassifiseringSakIndex } from '@navikt/fp-sak-risikoklassifisering';
+import type { AksessRettigheter, Behandling, BehandlingAppKontekst, Fagsak, NavAnsatt } from '@navikt/fp-types';
+import { notEmpty } from '@navikt/fp-utils';
 
 import { getRiskPanelLocationCreator } from '../../app/paths';
 import { useTrackRouteParam } from '../../app/useTrackRouteParam';
 import { getAccessRights } from '../../app/util/access';
 import { initFetchOptions, useFagsakApi } from '../../data/fagsakApi';
-import { notEmpty } from '../../data/notEmpty';
 import { useBehandlingPollingOperasjoner } from '../../data/polling/useBehandlingPollingOperasjoner';
 import { FagsakData } from '../../fagsak/FagsakData';
 

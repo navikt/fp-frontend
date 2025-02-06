@@ -4,7 +4,7 @@ import { RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { DokumentasjonVurderingBehov } from '@navikt/fp-types';
+import type { DokumentasjonVurderingBehov } from '@navikt/fp-types';
 
 import { UttakDokumentasjonFaktaForm } from './components/UttakDokumentasjonFaktaForm';
 

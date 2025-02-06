@@ -1,15 +1,14 @@
-import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { Aksjonspunkt, KodeverkMedNavn, Risikoklassifisering } from '@navikt/fp-types';
+import type { Aksjonspunkt, KodeverkMedNavn, Risikoklassifisering } from '@navikt/fp-types';
 
 import { HoyRisikoTittel } from './components/HoyRisikoTittel';
 import { IngenRisikoPanel } from './components/IngenRisikoPanel';
 import { ManglendeKlassifiseringPanel } from './components/ManglendeKlassifiseringPanel';
 import { KontrollresultatKode } from './kodeverk/kontrollresultatKode';
-import { AvklartRisikoklassifiseringAp } from './types/AvklartRisikoklassifiseringAp';
+import type { AvklartRisikoklassifiseringAp } from './types/AvklartRisikoklassifiseringAp';
 
 import messages from '../i18n/nb_NO.json';
 

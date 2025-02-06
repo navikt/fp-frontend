@@ -1,12 +1,10 @@
-import React from 'react';
-
 import {
   AksjonspunktKode,
   BehandlingResultatType,
   BehandlingStatus,
   FaktaOmBeregningTilfelle,
 } from '@navikt/fp-kodeverk';
-import { Behandlingsresultat, KodeverkMedNavn, TotrinnskontrollAksjonspunkt } from '@navikt/fp-types';
+import type { Behandlingsresultat, KodeverkMedNavn, TotrinnskontrollAksjonspunkt } from '@navikt/fp-types';
 
 import { getAksjonspunkttekst } from './aksjonspunktTekstUtleder';
 

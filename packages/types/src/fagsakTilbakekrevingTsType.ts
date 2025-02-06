@@ -1,6 +1,6 @@
-import { BehandlingAppKontekst } from './behandlingAppKontekstTsType';
-import { BehandlingOppretting } from './fagsakTsType';
-import { Historikkinnslag } from './historikkinnslagTsType';
+import type { BehandlingAppKontekst } from './behandlingAppKontekstTsType';
+import type { BehandlingOppretting } from './fagsakTsType';
+import type { Historikkinnslag } from './historikkinnslagTsType';
 
 export type FagsakDataFpTilbake = Readonly<{
   behandlingTypeKanOpprettes: BehandlingOppretting[];

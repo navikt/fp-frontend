@@ -1,5 +1,5 @@
-import React, { ReactElement, useCallback, useEffect } from 'react';
-import { useFieldArray, useFormContext, UseFormGetValues } from 'react-hook-form';
+import { type ReactElement, useCallback, useEffect } from 'react';
+import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
 import { Datepicker, PeriodFieldArray, SelectField } from '@navikt/ft-form-hooks';
@@ -11,11 +11,11 @@ import {
   required,
 } from '@navikt/ft-form-validators';
 
-import { KodeverkMedNavn } from '@navikt/fp-types';
+import type { KodeverkMedNavn } from '@navikt/fp-types';
 
 import { FieldArrayRow } from '../../../felles/FieldArrayRow';
 import { TIDSROM_PERMISJON_FORM_NAME_PREFIX, UTSETTELSE_PERIODE_FIELD_ARRAY_NAME } from '../../constants';
-import { PermisjonFormValues, UtsettelsPeriode } from '../../types';
+import type { PermisjonFormValues, UtsettelsPeriode } from '../../types';
 import { gyldigeUttakperioder } from '../fulltUttak/RenderPermisjonPeriodeFieldArray';
 
 const defaultUtsettelsePeriode: UtsettelsPeriode = {

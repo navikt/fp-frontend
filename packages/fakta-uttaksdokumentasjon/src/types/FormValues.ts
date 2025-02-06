@@ -1,6 +1,6 @@
-import { DokumentasjonVurderingBehov } from '@navikt/fp-types';
+import type { DokumentasjonVurderingBehov } from '@navikt/fp-types';
 
-type FormValues = {
+export type FormValues = {
   perioder: VurderingsBehovPeriode[];
 };
 
@@ -15,5 +15,3 @@ export enum VurderingsAlternativ {
 export type VurderingsBehovPeriode = Omit<DokumentasjonVurderingBehov, 'vurdering'> & {
   vurdering?: VurderingsAlternativ;
 };
-
-export default FormValues;

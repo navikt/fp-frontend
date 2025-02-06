@@ -1,6 +1,4 @@
-import React from 'react';
-
-const WomanIcon = () => (
+export const WomanIcon = () => (
   <svg width="32px" height="32px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
     <title>Kvinne</title>
     <defs />
@@ -24,5 +22,3 @@ const WomanIcon = () => (
     </g>
   </svg>
 );
-
-export default WomanIcon;

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
@@ -7,7 +5,7 @@ import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 
 import { ReactECharts } from '@navikt/fp-los-felles';
 
-import { OppgaverForForsteStonadsdag } from '../../typer/oppgaverForForsteStonadsdagTsType';
+import type { OppgaverForForsteStonadsdag } from '../../typer/oppgaverForForsteStonadsdagTsType';
 
 dayjs.extend(isSameOrBefore);
 dayjs.extend(isSameOrAfter);

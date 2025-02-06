@@ -76,8 +76,8 @@ export const BehandlingPanelerIndex = () => {
         <Suspense fallback={<LoadingPanel />}>
           <ErrorBoundary errorMessageCallback={addErrorMessage}>
             <ForeldrepengerPaneler
-              valgtProsessSteg={query.punkt}
-              valgtFaktaSteg={query.fakta}
+              valgtProsessSteg={query['punkt']}
+              valgtFaktaSteg={query['fakta']}
               arbeidsgivere={arbeidsgivere}
               personoversikt={personoversikt}
             />
@@ -88,8 +88,8 @@ export const BehandlingPanelerIndex = () => {
         <Suspense fallback={<LoadingPanel />}>
           <ErrorBoundary errorMessageCallback={addErrorMessage}>
             <SvangerskapspengerPaneler
-              valgtProsessSteg={query.punkt}
-              valgtFaktaSteg={query.fakta}
+              valgtProsessSteg={query['punkt']}
+              valgtFaktaSteg={query['fakta']}
               arbeidsgivere={arbeidsgivere}
               personoversikt={personoversikt}
             />
@@ -100,8 +100,8 @@ export const BehandlingPanelerIndex = () => {
         <Suspense fallback={<LoadingPanel />}>
           <ErrorBoundary errorMessageCallback={addErrorMessage}>
             <EngangsstonadPaneler
-              valgtProsessSteg={query.punkt}
-              valgtFaktaSteg={query.fakta}
+              valgtProsessSteg={query['punkt']}
+              valgtFaktaSteg={query['fakta']}
               arbeidsgivere={arbeidsgivere}
               personoversikt={personoversikt}
             />
@@ -111,28 +111,28 @@ export const BehandlingPanelerIndex = () => {
       {behandling.type === BehandlingType.DOKUMENTINNSYN && (
         <Suspense fallback={<LoadingPanel />}>
           <ErrorBoundary errorMessageCallback={addErrorMessage}>
-            <InnsynPaneler valgtProsessSteg={query.punkt} />
+            <InnsynPaneler valgtProsessSteg={query['punkt']} />
           </ErrorBoundary>
         </Suspense>
       )}
       {behandling.type === BehandlingType.ANKE && (
         <Suspense fallback={<LoadingPanel />}>
           <ErrorBoundary errorMessageCallback={addErrorMessage}>
-            <AnkePaneler valgtProsessSteg={query.punkt} valgtFaktaSteg={query.fakta} />
+            <AnkePaneler valgtProsessSteg={query['punkt']} valgtFaktaSteg={query['fakta']} />
           </ErrorBoundary>
         </Suspense>
       )}
       {behandling.type === BehandlingType.KLAGE && (
         <Suspense fallback={<LoadingPanel />}>
           <ErrorBoundary errorMessageCallback={addErrorMessage}>
-            <KlagePaneler valgtProsessSteg={query.punkt} valgtFaktaSteg={query.fakta} />
+            <KlagePaneler valgtProsessSteg={query['punkt']} valgtFaktaSteg={query['fakta']} />
           </ErrorBoundary>
         </Suspense>
       )}
       {erTilbakekrevingsbehandling && (
         <Suspense fallback={<LoadingPanel />}>
           <ErrorBoundary errorMessageCallback={addErrorMessage}>
-            <TilbakekrevingPaneler valgtProsessSteg={query.punkt} valgtFaktaSteg={query.fakta} />
+            <TilbakekrevingPaneler valgtProsessSteg={query['punkt']} valgtFaktaSteg={query['fakta']} />
           </ErrorBoundary>
         </Suspense>
       )}

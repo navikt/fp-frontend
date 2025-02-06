@@ -1,9 +1,10 @@
-import { ReactElement, useState } from 'react';
+import type { ReactElement } from 'react';
+import { useState } from 'react';
 
 import { FaktaContainer } from './fakta/FaktaContainer';
 import { ProsessContainer } from './prosess/ProsessContainer';
-import { FaktaPanelInitProps } from './typer/faktaPanelInitProps';
-import { ProsessPanelExtraInitProps, ProsessPanelInitProps } from './typer/prosessPanelInitProps';
+import type { FaktaPanelInitProps } from './typer/faktaPanelInitProps';
+import type { ProsessPanelExtraInitProps, ProsessPanelInitProps } from './typer/prosessPanelInitProps';
 
 interface FaktaPanelInfo {
   urlCode: string;

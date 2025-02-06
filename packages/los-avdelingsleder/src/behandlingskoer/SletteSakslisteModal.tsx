@@ -1,9 +1,8 @@
-import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Button, Heading, Modal } from '@navikt/ds-react';
 
-import { SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType';
+import type { SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType';
 
 import styles from './sletteSakslisteModal.module.css';
 

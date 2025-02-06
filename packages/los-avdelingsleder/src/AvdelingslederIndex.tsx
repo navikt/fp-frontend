@@ -6,9 +6,9 @@ import { Box, Heading, HStack, Select, Tabs } from '@navikt/ds-react';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { createIntl, formatQueryString, parseQueryString } from '@navikt/ft-utils';
 import { useQuery } from '@tanstack/react-query';
-import { Location } from 'history';
+import { type Location } from 'history';
 
-import { NavAnsatt } from '@navikt/fp-types';
+import type { NavAnsatt } from '@navikt/fp-types';
 
 import { AvdelingslederPanels } from './avdelingslederPanels';
 import { EndreSakslisterPanel } from './behandlingskoer/EndreSakslisterPanel';
@@ -23,7 +23,7 @@ import { GrupperPanel } from './grupper/GrupperPanel';
 import { NokkeltallPanel } from './nokkeltall/NokkeltallPanel';
 import { ReservasjonerTabell } from './reservasjoner/ReservasjonerTabell';
 import { SaksbehandlerePanel } from './saksbehandlere/SaksbehandlerePanel';
-import { Avdeling } from './typer/avdelingTsType';
+import type { Avdeling } from './typer/avdelingTsType';
 import { useTrackRouteParam } from './useTrackRouteParam';
 
 import styles from './avdelingslederIndex.module.css';
@@ -223,5 +223,5 @@ const updateQueryParams = (queryString: string, nextParams: Record<string, strin
 
 const getPanelFromUrlOrDefault = (location: Location) => {
   const panelFromUrl = parseQueryString(location.search);
-  return panelFromUrl.avdelingsleder ? panelFromUrl.avdelingsleder : AvdelingslederPanels.BEHANDLINGSKOER;
+  return panelFromUrl['avdelingsleder'] ? panelFromUrl['avdelingsleder'] : AvdelingslederPanels.BEHANDLINGSKOER;
 };

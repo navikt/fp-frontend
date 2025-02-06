@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react';
+import { type ReactNode, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -9,17 +9,17 @@ import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, KodeverkType } from '@navikt/fp-kodeverk';
-import {
+import type {
   Aksjonspunkt,
   AoIArbeidsforhold,
   ArbeidsforholdFodselOgTilrettelegging,
   ArbeidsgiverOpplysningerPerId,
   FodselOgTilrettelegging,
 } from '@navikt/fp-types';
-import { BekreftSvangerskapspengerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { BekreftSvangerskapspengerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
-import { TilretteleggingFormValues } from '../types/TilretteleggingFormValues';
+import type { TilretteleggingFormValues } from '../types/TilretteleggingFormValues';
 import { ArbeidsforholdFieldArray } from './arbeidsforhold/ArbeidsforholdFieldArray';
 import { filtrerVelferdspermisjoner } from './arbeidsforhold/ArbeidsforholdPanel';
 

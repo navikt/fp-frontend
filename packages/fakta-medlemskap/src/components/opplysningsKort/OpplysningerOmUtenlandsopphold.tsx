@@ -1,4 +1,4 @@
-import React, { FC, ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Label } from '@navikt/ds-react';
@@ -6,15 +6,18 @@ import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 import { FaktaKilde } from '@navikt/fp-fakta-felles';
-import { MedlemskapAvvik, Soknad, UtlandsoppholdPeriode } from '@navikt/fp-types';
+import { MedlemskapAvvik, type Soknad, type UtlandsoppholdPeriode } from '@navikt/fp-types';
 
 import { toTitleCapitalization } from '../../utils/stringUtils';
-import EkspansjonsKort from '../ekspansjonsKort/EkspansjonsKort';
+import { EkspansjonsKort } from '../ekspansjonsKort/EkspansjonsKort';
 import { relevantForUtenlandsopphold } from '../ekspansjonsKort/medlemsAvvik';
 
-const UtenlandsoppholdListe: FC<{ utlandsopphold: UtlandsoppholdPeriode[]; label: ReactElement }> = ({
+const UtenlandsoppholdListe = ({
   utlandsopphold,
   label,
+}: {
+  utlandsopphold: UtlandsoppholdPeriode[];
+  label: ReactElement;
 }) => {
   return (
     <div>
@@ -46,7 +49,11 @@ interface Props {
   skalViseAvvik: boolean;
 }
 
-const OpplysningerOmUtenlandsopphold: FC<Props> = ({ avvik = [], soknad: { oppgittTilknytning }, skalViseAvvik }) => {
+export const OpplysningerOmUtenlandsopphold = ({
+  avvik = [],
+  soknad: { oppgittTilknytning },
+  skalViseAvvik,
+}: Props) => {
   const intl = useIntl();
 
   const { oppholdSistePeriode, oppholdNestePeriode, utlandsoppholdFor, utlandsoppholdEtter } = oppgittTilknytning;
@@ -98,5 +105,3 @@ const OpplysningerOmUtenlandsopphold: FC<Props> = ({ avvik = [], soknad: { oppgi
     </EkspansjonsKort>
   );
 };
-
-export default OpplysningerOmUtenlandsopphold;

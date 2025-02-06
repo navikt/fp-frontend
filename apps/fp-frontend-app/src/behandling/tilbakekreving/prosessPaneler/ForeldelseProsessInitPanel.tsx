@@ -1,23 +1,23 @@
-import { ComponentProps, use } from 'react';
+import { type ComponentProps, use } from 'react';
 import { useIntl } from 'react-intl';
 
 import {
   ForeldelseAksjonspunktCodes,
   ForeldelseProsessIndex,
-  ForeldelsesresultatActivity,
+  type ForeldelsesresultatActivity,
 } from '@navikt/ft-prosess-tilbakekreving-foreldelse';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { KodeverkType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import { AlleKodeverkTilbakekreving } from '@navikt/fp-types';
+import type { AlleKodeverkTilbakekreving } from '@navikt/fp-types';
 import { useFormData } from '@navikt/fp-utils';
 
-import { BeregnBeløpParams, harLenke, useBehandlingApi } from '../../../data/behandlingApi';
+import { type BeregnBeløpParams, harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
-import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
+import type { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 import '@navikt/ft-prosess-tilbakekreving-foreldelse/dist/style.css';

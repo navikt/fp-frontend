@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
@@ -7,17 +7,20 @@ import { Form } from '@navikt/ft-form-hooks';
 import { ariaCheck } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
-import { Location } from 'history';
+import { type Location } from 'history';
 
 import { BehandlingType, KonsekvensForYtelsen, VurderPaNyttArsakType } from '@navikt/fp-kodeverk';
-import {
+import type {
   BehandlingAppKontekst,
   KodeverkMedNavn,
   TotrinnskontrollAksjonspunkt,
   TotrinnskontrollSkjermlenkeContext,
 } from '@navikt/fp-types';
 
-import { AksjonspunktGodkjenningData, AksjonspunktGodkjenningFieldArray } from './AksjonspunktGodkjenningFieldArray';
+import {
+  type AksjonspunktGodkjenningData,
+  AksjonspunktGodkjenningFieldArray,
+} from './AksjonspunktGodkjenningFieldArray';
 
 import styles from './totrinnskontrollBeslutterForm.module.css';
 

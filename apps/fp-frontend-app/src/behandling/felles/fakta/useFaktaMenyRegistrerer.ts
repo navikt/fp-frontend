@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { usePrevious } from '@navikt/ft-ui-komponenter';
 
-import { FaktaPanelMenyData } from '../typer/faktaPanelMenyData';
+import type { FaktaPanelMenyData } from '../typer/faktaPanelMenyData';
 
 const DEFAULT_PANEL_VALGT = 'default';
 

@@ -4,7 +4,7 @@ import { BodyShort, Heading, Label } from '@navikt/ds-react';
 import { EditedIcon, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import {
+import type {
   Aksjonspunkt,
   ArbeidsgiverOpplysningerPerId,
   BeregningsresultatDagytelse,
@@ -16,8 +16,8 @@ import {
 } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
-import FeriepengerIndex from './feriepenger/FeriepengerIndex';
-import TilkjentYtelse from './TilkjentYtelse';
+import { FeriepengerIndex } from './feriepenger/FeriepengerIndex';
+import { TilkjentYtelse } from './TilkjentYtelse';
 
 import styles from './tilkjentYtelse.module.css';
 

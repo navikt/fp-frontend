@@ -1,4 +1,3 @@
-import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Button, HStack, Label, Modal, VStack } from '@navikt/ds-react';
@@ -6,7 +5,7 @@ import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 
-interface OwnProps {
+interface Props {
   erModalÅpen: boolean;
   lukkModal: () => void;
   isSubmittable: boolean;
@@ -16,7 +15,7 @@ interface OwnProps {
   valgtHjemmel?: string;
 }
 
-const BekreftOgSubmitKlageModal: FunctionComponent<OwnProps> = ({
+export const BekreftOgSubmitKlageModal = ({
   erModalÅpen,
   lukkModal,
   isSubmittable,
@@ -24,7 +23,7 @@ const BekreftOgSubmitKlageModal: FunctionComponent<OwnProps> = ({
   isDirty,
   readOnly,
   valgtHjemmel,
-}) => {
+}: Props) => {
   const intl = useIntl();
   return (
     <Modal
@@ -77,5 +76,3 @@ const BekreftOgSubmitKlageModal: FunctionComponent<OwnProps> = ({
     </Modal>
   );
 };
-
-export default BekreftOgSubmitKlageModal;

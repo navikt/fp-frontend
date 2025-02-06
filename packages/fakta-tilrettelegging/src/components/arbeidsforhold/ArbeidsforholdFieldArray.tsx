@@ -6,7 +6,7 @@ import { Buildings3Icon, ExclamationmarkTriangleFillIcon } from '@navikt/aksel-i
 import { BodyShort, ExpansionCard, Heading, HStack, Tag } from '@navikt/ds-react';
 import dayjs from 'dayjs';
 
-import {
+import type {
   AoIArbeidsforhold,
   ArbeidsforholdFodselOgTilrettelegging,
   ArbeidsgiverOpplysningerPerId,

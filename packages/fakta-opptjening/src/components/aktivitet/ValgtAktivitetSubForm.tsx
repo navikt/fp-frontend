@@ -1,13 +1,12 @@
-import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, HStack, Label, VStack } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { DDMMYYYY_DATE_FORMAT, formatCurrencyNoKr,ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { DDMMYYYY_DATE_FORMAT, formatCurrencyNoKr, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import { OpptjeningAktivitetType } from '@navikt/fp-kodeverk';
-import { ArbeidsgiverOpplysningerPerId, FerdiglignetNæring } from '@navikt/fp-types';
+import type { ArbeidsgiverOpplysningerPerId, FerdiglignetNæring } from '@navikt/fp-types';
 
 const YTELSE_TYPER = [
   OpptjeningAktivitetType.SYKEPENGER,
@@ -50,7 +49,7 @@ const finnArbeidsgivertekst = (
 const finnNæringLabel = (ferdiglignetNæring: FerdiglignetNæring[]): string =>
   ferdiglignetNæring.length > 0 ? 'ActivityPanel.FerdiglignetNæring' : 'ActivityPanel.IngenFerdiglignetNæring';
 
-interface OwnProps {
+interface Props {
   valgtAktivitetstype?: string;
   arbeidsgiverReferanse: string;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -64,14 +63,14 @@ interface OwnProps {
  *
  * Viser informasjon om valgt aktivitet
  */
-const ValgtAktivitetSubForm: FunctionComponent<OwnProps> = ({
+export const ValgtAktivitetSubForm = ({
   valgtAktivitetstype,
   arbeidsgiverReferanse,
   arbeidsgiverOpplysningerPerId,
   stillingsandel,
   naringRegistreringsdato,
   ferdiglignetNæring,
-}) => (
+}: Props) => (
   <VStack gap="4">
     {erAvType(
       valgtAktivitetstype,
@@ -133,5 +132,3 @@ const ValgtAktivitetSubForm: FunctionComponent<OwnProps> = ({
     )}
   </VStack>
 );
-
-export default ValgtAktivitetSubForm;

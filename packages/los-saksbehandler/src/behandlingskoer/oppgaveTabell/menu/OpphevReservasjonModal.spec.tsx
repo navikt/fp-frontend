@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { composeStories } from '@storybook/react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -13,7 +11,7 @@ describe('<OpphevReservasjonModal>', () => {
   it('skal vise modal for oppheving av reservasjon', async () => {
     const closeModal = vi.fn();
 
-    await applyRequestHandlers(Default.parameters.msw);
+    await applyRequestHandlers(Default.parameters['msw']);
     const utils = render(<Default closeModal={closeModal} />);
 
     expect(await screen.findByText('Når en reservert sak frigjøres er begrunnelse obligatorisk')).toBeInTheDocument();

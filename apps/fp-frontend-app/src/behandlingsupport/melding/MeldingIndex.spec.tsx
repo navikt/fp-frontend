@@ -11,7 +11,7 @@ const { Default } = composeStories(stories);
 
 describe('<MeldingIndex>', () => {
   it('skal vise meldinger når mottakere og brevmaler har blitt hentet fra server', async () => {
-    await applyRequestHandlers(Default.parameters.msw);
+    await applyRequestHandlers(Default.parameters['msw']);
     render(<Default />);
     expect(await screen.findByText('Mal 1')).toBeInTheDocument();
     expect(screen.getByText('Mal 2')).toBeInTheDocument();
@@ -19,7 +19,7 @@ describe('<MeldingIndex>', () => {
   });
 
   it('skal sende melding og så lukke modal', async () => {
-    await applyRequestHandlers(Default.parameters.msw);
+    await applyRequestHandlers(Default.parameters['msw']);
     render(<Default />);
 
     expect(await screen.findByText('Meldinger')).toBeInTheDocument();
@@ -34,7 +34,7 @@ describe('<MeldingIndex>', () => {
   });
 
   it('skal sende melding og sette saken på vent hvis INNHENT_DOK', async () => {
-    await applyRequestHandlers(Default.parameters.msw);
+    await applyRequestHandlers(Default.parameters['msw']);
     render(<Default />);
 
     expect(await screen.findByText('Meldinger')).toBeInTheDocument();

@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import { ReactRenderer } from '@storybook/react';
+import { type ReactRenderer } from '@storybook/react';
 import type { DecoratorFunction } from '@storybook/types';
 
 import {
@@ -9,7 +9,7 @@ import {
   FagsakYtelseType,
   RelasjonsRolleType,
 } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt, Behandling, Fagsak } from '@navikt/fp-types';
+import type { Aksjonspunkt, Behandling, Fagsak } from '@navikt/fp-types';
 import { PanelDataProvider } from '@navikt/fp-utils';
 
 import alleKodeverk from '../mocks/alleKodeverk.json';

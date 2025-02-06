@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ExpansionCard, Heading, HStack, Search, VStack } from '@navikt/ds-react';
 import { DateLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { isValidFodselsnummer } from '@navikt/ft-utils';
 
-import { InfotrygdVedtak } from '@navikt/fp-types';
+import type { InfotrygdVedtak } from '@navikt/fp-types';
 
 import { SakerPanel } from './SakerPanel';
 import { VedtakPanel } from './VedtakPanel';

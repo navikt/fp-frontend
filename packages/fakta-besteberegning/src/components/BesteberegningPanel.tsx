@@ -1,13 +1,13 @@
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode, getKodeverknavnFn } from '@navikt/fp-kodeverk';
-import { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag } from '@navikt/fp-types';
-import { BesteberegningAP } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag } from '@navikt/fp-types';
+import type { BesteberegningAP } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
-import BesteberegningResultatGrunnlagPanel from './BesteberegningResultatGrunnlagPanel';
-import BesteMånederVisningPanel from './BesteManederVisningPanel';
-import KontrollerBesteberegningPanel from './KontrollerBesteberegningPanel';
+import { BesteberegningResultatGrunnlagPanel } from './BesteberegningResultatGrunnlagPanel';
+import { BesteMånederVisningPanel } from './BesteManederVisningPanel';
+import { KontrollerBesteberegningPanel } from './KontrollerBesteberegningPanel';
 
 interface Props {
   beregningsgrunnlag: Beregningsgrunnlag;

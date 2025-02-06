@@ -69,5 +69,3 @@ export const harFastsettATFLInntektTilfelleUtenomBesteberegning = (tilfeller: st
     tilfelle =>
       vurderOgFastsettATFLTilfeller.some(t => t === tilfelle) && !besteberegningTilfeller.some(t => t === tilfelle),
   );
-
-export default FaktaOmBeregningTilfelle;

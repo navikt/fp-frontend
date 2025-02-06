@@ -1,4 +1,4 @@
-import { ProsessPanelMenyData } from './prosessPanelMenyData';
+import type { ProsessPanelMenyData } from './prosessPanelMenyData';
 
 export type ProsessPanelExtraInitProps = {
   apentFaktaPanelInfo?: { urlCode: string; text: string };

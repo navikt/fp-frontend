@@ -10,8 +10,8 @@ import { decodeHtmlEntity, formatCurrencyWithKr } from '@navikt/ft-utils';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { OverstyringPanel } from '@navikt/fp-prosess-felles';
-import { Aksjonspunkt, BeregningsresultatEs } from '@navikt/fp-types';
-import { OverstyringBeregningAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { Aksjonspunkt, BeregningsresultatEs } from '@navikt/fp-types';
+import type { OverstyringBeregningAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useFormData, usePanelDataContext, usePanelOverstyring } from '@navikt/fp-utils';
 
 import styles from './beregningsresultatEngangsstonadForm.module.css';

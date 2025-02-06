@@ -1,5 +1,5 @@
-import React, { FunctionComponent } from 'react';
-import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+import React from 'react';
+import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { StarFillIcon } from '@navikt/aksel-icons';
 import { BodyShort } from '@navikt/ds-react';
@@ -7,9 +7,9 @@ import { DateLabel, PeriodLabel, Table, TableColumn, TableRow } from '@navikt/ft
 import { decodeHtmlEntity, TIDENES_ENDE } from '@navikt/ft-utils';
 
 import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
-import { AoIArbeidsforhold, ArbeidsgiverOpplysningerPerId, Inntektsmelding } from '@navikt/fp-types';
+import type { AoIArbeidsforhold, ArbeidsgiverOpplysningerPerId, Inntektsmelding } from '@navikt/fp-types';
 
-import IngenArbeidsforholdRegistrert from './IngenArbeidsforholdRegistrert';
+import { IngenArbeidsforholdRegistrert } from './IngenArbeidsforholdRegistrert';
 
 import styles from './personArbeidsforholdTable.module.css';
 
@@ -72,7 +72,7 @@ export const utledNøkkel = (
   return `${arbeidsforhold.eksternArbeidsforholdId}${arbeidsforhold.arbeidsgiverIdent}${arbeidsgiverOpplysninger.identifikator}`;
 };
 
-interface OwnProps {
+interface Props {
   alleArbeidsforhold: AoIArbeidsforhold[];
   selectedId?: string;
   selectArbeidsforholdCallback: (
@@ -84,13 +84,13 @@ interface OwnProps {
   inntektsmeldinger: Inntektsmelding[];
 }
 
-const PersonArbeidsforholdTable: FunctionComponent<OwnProps> = ({
+export const PersonArbeidsforholdTable = ({
   alleArbeidsforhold,
   selectedId,
   selectArbeidsforholdCallback,
   arbeidsgiverOpplysningerPerId,
   inntektsmeldinger,
-}) => {
+}: Props) => {
   const intl = useIntl();
 
   if (alleArbeidsforhold.length === 0) {
@@ -148,5 +148,3 @@ const PersonArbeidsforholdTable: FunctionComponent<OwnProps> = ({
     </Table>
   );
 };
-
-export default PersonArbeidsforholdTable;

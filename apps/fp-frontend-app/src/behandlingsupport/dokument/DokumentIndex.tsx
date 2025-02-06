@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { hentDokumentLenke } from '@navikt/fp-konstanter';
 import { DokumenterSakIndex } from '@navikt/fp-sak-dokumenter';
-import { Dokument } from '@navikt/fp-types';
+import type { Dokument } from '@navikt/fp-types';
 
 import { useFagsakApi } from '../../data/fagsakApi';
 import { SupportHeaderAndContent } from '../SupportHeader';

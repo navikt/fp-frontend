@@ -1,4 +1,3 @@
-import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Detail, Heading, VStack } from '@navikt/ds-react';
@@ -6,7 +5,7 @@ import { ArrowBox, BorderBox } from '@navikt/ft-ui-komponenter';
 
 import { TrueFalseInput } from '../../felles/TrueFalseInput';
 import { FRILANS_NAME_PREFIX } from '../constants';
-import { FrilansFormValues } from '../types';
+import type { FrilansFormValues } from '../types';
 import { FrilansOppdragForFamiliePanel } from './FrilansOppdragForFamiliePanel';
 import { FrilansPerioderFieldArray } from './FrilansPerioderFieldArray';
 

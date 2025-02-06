@@ -8,16 +8,16 @@ import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponen
 
 import { AksjonspunktKode, KlageVurdering as klageVurderingType, KodeverkType } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
-import { KlageVurdering, KlageVurderingResultat, KodeverkMedNavn } from '@navikt/fp-types';
-import { KlageVurderingResultatAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { KlageVurdering, KlageVurderingResultat, KodeverkMedNavn } from '@navikt/fp-types';
+import type { KlageVurderingResultatAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
-import KlageFormType from '../../types/klageFormType';
-import BekreftOgSubmitKlageModal from './BekreftOgSubmitKlageModal';
-import FritekstBrevTextField from './FritekstKlageBrevTextField';
-import KlageVurderingRadioOptionsNfp from './KlageVurderingRadioOptionsNfp';
-import { BrevData, PreviewKlageLink } from './PreviewKlageLink';
-import TempsaveKlageButton, { TransformedValues } from './TempsaveKlageButton';
+import type { KlageFormType } from '../../types/klageFormType';
+import { BekreftOgSubmitKlageModal } from './BekreftOgSubmitKlageModal';
+import { FritekstBrevTextField } from './FritekstKlageBrevTextField';
+import { KlageVurderingRadioOptionsNfp } from './KlageVurderingRadioOptionsNfp';
+import { type BrevData, PreviewKlageLink } from './PreviewKlageLink';
+import { TempsaveKlageButton, type TransformedValues } from './TempsaveKlageButton';
 
 import styles from './behandleKlageFormNfp.module.css';
 

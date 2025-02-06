@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement, useCallback, useState } from 'react';
+import React, { type ReactElement, useCallback, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ArrowLeftIcon, ArrowRightIcon, ScissorsIcon, XMarkIcon } from '@navikt/aksel-icons';
@@ -8,7 +8,7 @@ import { calcDays } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import { BehandlingType, KodeverkType, StonadskontoType } from '@navikt/fp-kodeverk';
-import {
+import type {
   AlleKodeverk,
   ArbeidsgiverOpplysningerPerId,
   Behandling,
@@ -19,8 +19,8 @@ import {
   Ytelsefordeling,
 } from '@navikt/fp-types';
 
-import SplittPeriodeModal from './splitt/SplittPeriodeModal';
-import UttakPeriodeForm from './UttakPeriodeForm';
+import { SplittPeriodeModal } from './splitt/SplittPeriodeModal';
+import { UttakPeriodeForm } from './UttakPeriodeForm';
 
 import styles from './uttakPeriodePanel.module.css';
 
@@ -147,7 +147,7 @@ const lagPeriode = (valgtPeriode: PeriodeSoker, fom: string, tom: string): Perio
   };
 };
 
-interface OwnProps {
+interface Props {
   perioderSøker: PeriodeSoker[];
   behandling: Behandling;
   ytelsefordeling: Ytelsefordeling;
@@ -163,7 +163,7 @@ interface OwnProps {
   harÅpneAksjonspunkter: boolean;
 }
 
-const UttakPeriodePanel: FunctionComponent<OwnProps> = ({
+export const UttakPeriodePanel = ({
   perioderSøker,
   behandling,
   ytelsefordeling,
@@ -177,7 +177,7 @@ const UttakPeriodePanel: FunctionComponent<OwnProps> = ({
   setValgtPeriodeIndex,
   erTilknyttetStortinget,
   harÅpneAksjonspunkter,
-}) => {
+}: Props) => {
   const intl = useIntl();
 
   const [visModal, setVisModal] = useState(false);
@@ -312,5 +312,3 @@ const UttakPeriodePanel: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-
-export default UttakPeriodePanel;

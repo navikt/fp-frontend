@@ -2,10 +2,10 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { KlageVurdering } from '@navikt/fp-types';
+import type { KlageVurdering } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
-import { ForhandsvisData, VedtakKlageForm } from './components/VedtakKlageForm';
+import { type ForhandsvisData, VedtakKlageForm } from './components/VedtakKlageForm';
 
 import messages from '../i18n/nb_NO.json';
 

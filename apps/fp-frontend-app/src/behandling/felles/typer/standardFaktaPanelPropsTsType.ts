@@ -1,4 +1,4 @@
-import { Aksjonspunkt, AlleKodeverk, Behandling } from '@navikt/fp-types';
+import type { Aksjonspunkt, AlleKodeverk, Behandling } from '@navikt/fp-types';
 
 export type StandardFaktaPanelProps = Readonly<{
   behandling: Behandling;

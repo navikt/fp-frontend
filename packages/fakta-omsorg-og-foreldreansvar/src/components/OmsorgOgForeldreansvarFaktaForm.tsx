@@ -1,32 +1,31 @@
-import React, { FunctionComponent, ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BodyShort, HGrid,Label, VStack } from '@navikt/ds-react';
+import { BodyShort, HGrid, Label, VStack } from '@navikt/ds-react';
 import { SelectField } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import { EditedIcon,FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { EditedIcon, FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { FieldEditedInfo,isFieldEdited } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode, KodeverkType,VilkarType } from '@navikt/fp-kodeverk';
-import {
+import { type FieldEditedInfo, isFieldEdited } from '@navikt/fp-fakta-felles';
+import { AksjonspunktKode, KodeverkType, VilkarType } from '@navikt/fp-kodeverk';
+import type {
   Aksjonspunkt,
   FamilieHendelse,
   InntektArbeidYtelse,
   KodeverkMedNavn,
   Personoversikt,
-  RelatertTilgrensedYtelse,
   Soknad,
 } from '@navikt/fp-types';
-import {
+import type {
   AvklarFaktaForForeldreansvarAksjonspunktAp,
   AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import BarnPanel from './BarnPanel';
-import ForeldrePanel from './ForeldrePanel';
-import OmsorgsovertakelseFaktaPanel, { FormValues as OmsorgFormValues } from './OmsorgsovertakelseFaktaPanel';
-import RettighetFaktaPanel, { FormValues as RettighetFormValues } from './RettighetFaktaPanel';
+import { BarnPanel } from './BarnPanel';
+import { ForeldrePanel } from './ForeldrePanel';
+import { type FormValues as OmsorgFormValues, OmsorgsovertakelseFaktaPanel } from './OmsorgsovertakelseFaktaPanel';
+import { type FormValues as RettighetFormValues, RettighetFaktaPanel } from './RettighetFaktaPanel';
 
 import styles from './omsorgOgForeldreansvarFaktaForm.module.css';
 
@@ -61,25 +60,12 @@ interface Props {
   personoversikt: Personoversikt;
 }
 
-interface StaticFunctions {
-  buildInitialValues: (
-    soknad: Soknad,
-    familiehendelse: FamilieHendelse,
-    innvilgetRelatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYtelse[],
-    getKodeverknavn: (kode: string, kodeverkType: KodeverkType) => string,
-  ) => FormValues;
-  transformValues: (
-    values: FormValues,
-    aksjonspunkt: Aksjonspunkt,
-  ) => AvklarFaktaForForeldreansvarAksjonspunktAp | AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp;
-}
-
 /**
  * OmsorgOgForeldreansvarFaktaForm
  *
  * Setter opp aksjonspunktet for avklaring av fakta for omsorgs og foreldreansvarsvilkåret.
  */
-const OmsorgOgForeldreansvarFaktaForm: FunctionComponent<Props> & StaticFunctions = ({
+export const OmsorgOgForeldreansvarFaktaForm = ({
   readOnly,
   vilkarTypes,
   soknad,
@@ -87,7 +73,7 @@ const OmsorgOgForeldreansvarFaktaForm: FunctionComponent<Props> & StaticFunction
   alleMerknaderFraBeslutter,
   personoversikt,
   gjeldendeFamiliehendelse,
-}) => {
+}: Props) => {
   const intl = useIntl();
 
   const { watch } = useFormContext<FormValues>();
@@ -109,12 +95,8 @@ const OmsorgOgForeldreansvarFaktaForm: FunctionComponent<Props> & StaticFunction
         {!erAksjonspunktForeldreansvar && <RettighetFaktaPanel alleMerknaderFraBeslutter={alleMerknaderFraBeslutter} />}
       </HGrid>
       <HGrid gap="5" columns="repeat(auto-fit, minmax(16rem, 1fr))">
-        <BarnPanel soknad={soknad} alleMerknaderFraBeslutter={alleMerknaderFraBeslutter} intl={intl} />
-        <ForeldrePanel
-          personoversikt={personoversikt}
-          alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-          intl={intl}
-        />
+        <BarnPanel soknad={soknad} alleMerknaderFraBeslutter={alleMerknaderFraBeslutter} />
+        <ForeldrePanel personoversikt={personoversikt} alleMerknaderFraBeslutter={alleMerknaderFraBeslutter} />
       </HGrid>
       {!erAksjonspunktForeldreansvar && (
         <FaktaGruppe
@@ -183,5 +165,3 @@ OmsorgOgForeldreansvarFaktaForm.transformValues = (
         vilkarType: values.vilkarType,
         kode: AksjonspunktKode.OMSORGSOVERTAKELSE,
       } as AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp);
-
-export default OmsorgOgForeldreansvarFaktaForm;

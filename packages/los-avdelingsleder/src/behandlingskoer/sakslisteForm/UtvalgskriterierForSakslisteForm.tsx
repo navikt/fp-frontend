@@ -1,6 +1,5 @@
-import React from 'react';
 import { useForm } from 'react-hook-form';
-import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { BodyShort, Box, Heading, HStack, VStack } from '@navikt/ds-react';
 import { Form, InputField } from '@navikt/ft-form-hooks';
@@ -8,7 +7,7 @@ import { hasValidName, maxLength, minLength, required } from '@navikt/ft-form-va
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { lagreSakslisteNavn, LosUrl, oppgaveAntallOptions } from '../../data/fplosAvdelingslederApi';
-import { SakslisteAvdeling } from '../../typer/sakslisteAvdelingTsType';
+import type { SakslisteAvdeling } from '../../typer/sakslisteAvdelingTsType';
 import { AndreKriterierVelger } from './filtrering/AndreKriterierVelger';
 import { BehandlingstypeVelger } from './filtrering/BehandlingstypeVelger';
 import { FagsakYtelseTypeVelger } from './filtrering/FagsakYtelseTypeVelger';

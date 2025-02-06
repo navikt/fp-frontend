@@ -1,9 +1,9 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { PeriodeSoker } from '@navikt/fp-types';
+import type { PeriodeSoker } from '@navikt/fp-types';
 
-import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
+import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 
-type UttakAp = {
+export type UttakAp = {
   perioder: PeriodeSoker[];
 } & AksjonspunktTilBekreftelse<
   | AksjonspunktKode.FASTSETT_UTTAKPERIODER
@@ -18,5 +18,3 @@ type UttakAp = {
   | AksjonspunktKode.KONTROLLER_TILSTØTENDE_YTELSER_INNVILGET
   | AksjonspunktKode.KONTROLLER_TILSTØTENDE_YTELSER_OPPHØRT
 >;
-
-export default UttakAp;

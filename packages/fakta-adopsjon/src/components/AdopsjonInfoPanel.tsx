@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
@@ -7,24 +7,24 @@ import { Form } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import {
-  FaktaBegrunnelseFormValues,
+  type FaktaBegrunnelseFormValues,
   FaktaBegrunnelseTextField,
   FaktaSubmitButton,
-  FieldEditedInfo,
+  type FieldEditedInfo,
   isFieldEdited,
 } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt, FamilieHendelse, Soknad } from '@navikt/fp-types';
-import {
+import type { Aksjonspunkt, FamilieHendelse, Soknad } from '@navikt/fp-types';
+import type {
   BekreftDokumentertDatoAksjonspunktAp,
   BekreftEktefelleAksjonspunktAp,
   BekreftMannAdoptererAksjonspunktAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
-import DokumentasjonFaktaForm, { FormValues as DokFormValues } from './DokumentasjonFaktaForm';
-import EktefelleFaktaForm, { FormValues as EktefelleFormValues } from './EktefelleFaktaForm';
-import MannAdoptererAleneFaktaForm, { FormValues as MannAdoptererFormValues } from './MannAdoptererAleneFaktaForm';
+import { DokumentasjonFaktaForm, type FormValues as DokFormValues } from './DokumentasjonFaktaForm';
+import { EktefelleFaktaForm, type FormValues as EktefelleFormValues } from './EktefelleFaktaForm';
+import { type FormValues as MannAdoptererFormValues, MannAdoptererAleneFaktaForm } from './MannAdoptererAleneFaktaForm';
 
 import styles from './adopsjonInfoPanel.module.css';
 
@@ -90,7 +90,7 @@ const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): Ak
 
   return aksjonspunkterArray.map(ap => ({
     ...ap,
-    begrunnelse: values.begrunnelse,
+    begrunnelse: values['begrunnelse'],
   }));
 };
 

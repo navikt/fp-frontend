@@ -1,7 +1,7 @@
-import { ComponentProps } from 'react';
+import type { ComponentProps } from 'react';
 
 import { TIDENES_ENDE } from '@navikt/ft-utils';
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import {
   AdresseType,
@@ -11,8 +11,8 @@ import {
   SivilstandType,
   SoknadType,
 } from '@navikt/fp-kodeverk';
-import { PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
-import { FamilieHendelseSamling, InntektArbeidYtelse, Personoversikt, Soknad } from '@navikt/fp-types';
+import { type PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
+import type { FamilieHendelseSamling, InntektArbeidYtelse, Personoversikt, Soknad } from '@navikt/fp-types';
 
 import { OmsorgOgForeldreansvarFaktaIndex } from './OmsorgOgForeldreansvarFaktaIndex';
 

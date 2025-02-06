@@ -1,5 +1,5 @@
 import { buildPath, formatQueryString, parseQueryString } from '@navikt/ft-utils';
-import { Location, Search } from 'history';
+import type { Location, Search } from 'history';
 
 import { skjermlenkeCodes } from '@navikt/fp-konstanter';
 

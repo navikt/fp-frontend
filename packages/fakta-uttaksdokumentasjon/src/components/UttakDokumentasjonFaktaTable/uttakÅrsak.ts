@@ -1,8 +1,8 @@
+import { assertUnreachable } from '@navikt/ft-utils';
+
 import { UttakÅrsak } from '@navikt/fp-types';
 
-import assertUnreachable from '../../utils/switchCaseUtils';
-
-const getUttakÅrsakTekst = (årsak: UttakÅrsak) => {
+export const getUttakÅrsakTekst = (årsak: UttakÅrsak) => {
   switch (årsak) {
     case UttakÅrsak.INNLEGGELSE_SØKER:
       return 'UttakDokumentasjonFaktaTable.InnleggelseSoker';
@@ -44,5 +44,3 @@ const getUttakÅrsakTekst = (årsak: UttakÅrsak) => {
       return assertUnreachable(årsak);
   }
 };
-
-export default getUttakÅrsakTekst;

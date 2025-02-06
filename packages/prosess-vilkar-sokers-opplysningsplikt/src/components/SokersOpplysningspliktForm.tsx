@@ -1,6 +1,6 @@
-import { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
-import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { BodyShort } from '@navikt/ds-react';
 import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
@@ -18,14 +18,14 @@ import {
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
 import { ProsessPanelTemplate, ProsessStegBegrunnelseTextFieldNew } from '@navikt/fp-prosess-felles';
-import {
+import type {
   Aksjonspunkt,
   ArbeidsgiverOpplysninger,
   ArbeidsgiverOpplysningerPerId,
   ManglendeVedleggSoknad,
   Soknad,
 } from '@navikt/fp-types';
-import {
+import type {
   BekreftSokersOpplysningspliktManuAp,
   OverstyringSokersOpplysingspliktAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';

@@ -1,9 +1,7 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
-import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
+import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 
-type BekreftEktefelleAksjonspunktAp = {
+export type BekreftEktefelleAksjonspunktAp = {
   ektefellesBarn: boolean;
 } & AksjonspunktTilBekreftelse<AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN>;
-
-export default BekreftEktefelleAksjonspunktAp;

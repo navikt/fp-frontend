@@ -7,13 +7,13 @@ import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { BehandlingType, DokumentMalType, KodeverkType, VenteArsakType } from '@navikt/fp-kodeverk';
-import { FormValues, MeldingerSakIndex, MessagesModalSakIndex } from '@navikt/fp-sak-meldinger';
-import { BehandlingAppKontekst, KodeverkMedNavn } from '@navikt/fp-types';
+import { type FormValues, MeldingerSakIndex, MessagesModalSakIndex } from '@navikt/fp-sak-meldinger';
+import type { BehandlingAppKontekst, KodeverkMedNavn } from '@navikt/fp-types';
+import { notEmpty } from '@navikt/fp-utils';
 
-import { initFetchOptions, SubmitMessageParams, useFagsakBehandlingApi } from '../../data/fagsakApi';
-import { notEmpty } from '../../data/notEmpty';
+import { initFetchOptions, type SubmitMessageParams, useFagsakBehandlingApi } from '../../data/fagsakApi';
 import { useFpSakKodeverk } from '../../data/useKodeverk';
-import { ForhandsvisFunksjon, useVisForhandsvisningAvMelding } from '../../data/useVisForhandsvisningAvMelding';
+import { type ForhandsvisFunksjon, useVisForhandsvisningAvMelding } from '../../data/useVisForhandsvisningAvMelding';
 import { FagsakData } from '../../fagsak/FagsakData';
 import { SupportHeaderAndContent } from '../SupportHeader';
 import { SettPaVentReadOnlyModal } from './SettPaVentReadOnlyModal';

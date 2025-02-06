@@ -1,11 +1,11 @@
-import React, { FunctionComponent, useCallback, useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Detail, VStack } from '@navikt/ds-react';
 import classnames from 'classnames/bind';
 
 import { StonadskontoType } from '@navikt/fp-kodeverk';
-import { Stonadskonto } from '@navikt/fp-types';
+import type { Stonadskonto } from '@navikt/fp-types';
 
 import styles from './stonadsdagerTab.module.css';
 
@@ -45,13 +45,13 @@ export const finnAntallUkerOgDager = (saldo: number): { uker: number; dager: num
   };
 };
 
-interface OwnProps {
+interface Props {
   stønadskonto: Stonadskonto;
   visDagerForKonto: (stønadskontotype: string) => void;
   aktiv?: boolean;
 }
 
-const StonadsdagerTab: FunctionComponent<OwnProps> = ({ stønadskonto, visDagerForKonto, aktiv = false }) => {
+export const StonadsdagerTab = ({ stønadskonto, visDagerForKonto, aktiv = false }: Props) => {
   const fordelteDager = useMemo(() => finnAntallUkerOgDager(stønadskonto.saldo), [stønadskonto]);
   const kontonavnTekst = useMemo(() => finnKorrektLabelForKvote(stønadskonto.stonadskontotype), [stønadskonto]);
 
@@ -100,5 +100,3 @@ const StonadsdagerTab: FunctionComponent<OwnProps> = ({ stønadskonto, visDagerF
     </div>
   );
 };
-
-export default StonadsdagerTab;

@@ -1,8 +1,6 @@
-import React from 'react';
-
 import { VStack } from '@navikt/ds-react';
 
-import { AlleKodeverk, Personoversikt } from '@navikt/fp-types';
+import type { AlleKodeverk, Personoversikt } from '@navikt/fp-types';
 
 import { Personopplysninger } from './Personopplysninger';
 

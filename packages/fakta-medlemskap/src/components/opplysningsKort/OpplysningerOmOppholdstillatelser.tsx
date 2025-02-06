@@ -1,4 +1,3 @@
-import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyLong, BodyShort, Box, ReadMore, Table } from '@navikt/ds-react';
@@ -7,9 +6,9 @@ import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 import { FaktaKilde, sorterPerioder } from '@navikt/fp-fakta-felles';
 import { KodeverkType } from '@navikt/fp-kodeverk';
-import { AlleKodeverk, MedlemskapAvvik, OppholdstillatelsePeriode } from '@navikt/fp-types';
+import { type AlleKodeverk, MedlemskapAvvik, type OppholdstillatelsePeriode } from '@navikt/fp-types';
 
-import EkspansjonsKort from '../ekspansjonsKort/EkspansjonsKort';
+import { EkspansjonsKort } from '../ekspansjonsKort/EkspansjonsKort';
 import { relevantForOppholdstillatelser } from '../ekspansjonsKort/medlemsAvvik';
 
 interface Props {
@@ -19,7 +18,12 @@ interface Props {
   skalViseAvvik: boolean;
 }
 
-const OpplysningerOmOppholdstillatelser = ({ oppholdstillatelser, avvik = [], alleKodeverk, skalViseAvvik }: Props) => {
+export const OpplysningerOmOppholdstillatelser = ({
+  oppholdstillatelser,
+  avvik = [],
+  alleKodeverk,
+  skalViseAvvik,
+}: Props) => {
   const intl = useIntl();
 
   const oppholdstillatelseTypeKodeverk = alleKodeverk[KodeverkType.OPPHOLDSTILLATELSE_TYPE];
@@ -82,5 +86,3 @@ const OpplysningerOmOppholdstillatelser = ({ oppholdstillatelser, avvik = [], al
     </EkspansjonsKort>
   );
 };
-
-export default OpplysningerOmOppholdstillatelser;

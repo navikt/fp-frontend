@@ -1,6 +1,4 @@
-import React from 'react';
-
-const UnknownIcon = () => (
+export const UnknownIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="32px" height="32px" viewBox="0 0 165.4 162.59">
     <defs />
     <title>Ukjent kjønn</title>
@@ -11,5 +9,3 @@ const UnknownIcon = () => (
     />
   </svg>
 );
-
-export default UnknownIcon;

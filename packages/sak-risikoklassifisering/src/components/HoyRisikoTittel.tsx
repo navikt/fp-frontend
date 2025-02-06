@@ -1,12 +1,11 @@
-import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { XMarkOctagonFillIcon } from '@navikt/aksel-icons';
 import { ExpansionCard, HStack, Label } from '@navikt/ds-react';
 
-import { Aksjonspunkt, KodeverkMedNavn, Risikoklassifisering } from '@navikt/fp-types';
+import type { Aksjonspunkt, KodeverkMedNavn, Risikoklassifisering } from '@navikt/fp-types';
 
-import { AvklartRisikoklassifiseringAp } from '../types/AvklartRisikoklassifiseringAp';
+import type { AvklartRisikoklassifiseringAp } from '../types/AvklartRisikoklassifiseringAp';
 import { HoyRisikoPanel } from './HoyRisikoPanel';
 
 import styles from './hoyRisikoTittel.module.css';

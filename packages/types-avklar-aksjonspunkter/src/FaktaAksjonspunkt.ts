@@ -1,41 +1,41 @@
-import {
+import type {
   AvklarBeregningsaktiviteterAP,
   BeregningFaktaAP,
   BeregningOverstyringAP,
   OverstyrBeregningsaktiviteterAP,
 } from '@navikt/ft-fakta-beregning';
-import {
+import type {
   FordelBeregningsgrunnlagAP,
   VurderRefusjonBeregningsgrunnlagAP,
 } from '@navikt/ft-fakta-fordel-beregningsgrunnlag';
 
-import AvklarAktivitetsPerioderAp from './fakta/AvklarAktivitetsPerioderAp';
-import AvklarAnnenforelderHarRettAp from './fakta/AvklarAnnenforelderHarRettAp';
-import AvklarDekningsgradAp from './fakta/AvklarDekningsgradAp';
-import AvklarFaktaForForeldreansvarAksjonspunktAp from './fakta/AvklarFaktaForForeldreansvarAksjonspunktAp';
-import AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp from './fakta/AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp';
-import AvklarFortsattMedlemskapAp from './fakta/AvklarFortsattMedlemskapAp';
-import AvklarVergeAp from './fakta/AvklarVergeAp';
-import BekreftAleneomsorgVurderingAp from './fakta/BekreftAleneomsorgVurderingAp';
-import BekreftBosattVurderingAp from './fakta/BekreftBosattVurderingAp';
-import BekreftDokumentertDatoAksjonspunktAp from './fakta/BekreftDokumentertDatoAksjonspunktAp';
-import BekreftEktefelleAksjonspunktAp from './fakta/BekreftEktefelleAksjonspunktAp';
-import BekreftErMedlemVurderingAp from './fakta/BekreftErMedlemVurderingAp';
-import BekreftLovligOppholdVurderingAp from './fakta/BekreftLovligOppholdVurderingAp';
-import BekreftMannAdoptererAksjonspunktAp from './fakta/BekreftMannAdoptererAksjonspunktAp';
-import BekreftOmsorgVurderingAp from './fakta/BekreftOmsorgVurderingAp';
-import BekreftOppholdsrettVurderingAp from './fakta/BekreftOppholdsrettVurderingAp';
-import BekreftSvangerskapspengerAp from './fakta/BekreftSvangerskapspengerAp';
-import BekreftTerminbekreftelseAp from './fakta/BekreftTerminbekreftelseAp';
-import BekreftUttaksperioderAp from './fakta/BekreftUttaksperioderAp';
-import KontrollerBesteberegningAP from './fakta/KontrollerBesteberegningAP';
-import MerkOpptjeningUtlandAp from './fakta/MerkOpptjeningUtlandAp';
-import OverstyringAvklarStartdatoForPeriodenAp from './fakta/OverstyringAvklarStartdatoForPeriodenAp';
-import OverstyringDekningsgradAp from './fakta/OverstyringDekningsgradAp';
-import SjekkManglendeFodselAp from './fakta/SjekkManglendeFodselAp';
-import VurderArbeidsforholdInntektsmeldingAp from './fakta/VurderArbeidsforholdInntektsmeldingAp';
-import VurderArbeidsforholdPermisjonAp from './fakta/VurderArbeidsforholdPermisjonAp';
-import VurderDokumentasjonAp from './fakta/VurderDokumentasjonAp';
+import type { AvklarAktivitetsPerioderAp } from './fakta/AvklarAktivitetsPerioderAp';
+import type { AvklarAnnenforelderHarRettAp } from './fakta/AvklarAnnenforelderHarRettAp';
+import type { AvklarDekningsgradAp } from './fakta/AvklarDekningsgradAp';
+import type { AvklarFaktaForForeldreansvarAksjonspunktAp } from './fakta/AvklarFaktaForForeldreansvarAksjonspunktAp';
+import type { AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp } from './fakta/AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp';
+import type { AvklarFortsattMedlemskapAp } from './fakta/AvklarFortsattMedlemskapAp';
+import type { AvklarVergeAp } from './fakta/AvklarVergeAp';
+import type { BekreftAleneomsorgVurderingAp } from './fakta/BekreftAleneomsorgVurderingAp';
+import type { BekreftBosattVurderingAp } from './fakta/BekreftBosattVurderingAp';
+import type { BekreftDokumentertDatoAksjonspunktAp } from './fakta/BekreftDokumentertDatoAksjonspunktAp';
+import type { BekreftEktefelleAksjonspunktAp } from './fakta/BekreftEktefelleAksjonspunktAp';
+import type { BekreftErMedlemVurderingAp } from './fakta/BekreftErMedlemVurderingAp';
+import type { BekreftLovligOppholdVurderingAp } from './fakta/BekreftLovligOppholdVurderingAp';
+import type { BekreftMannAdoptererAksjonspunktAp } from './fakta/BekreftMannAdoptererAksjonspunktAp';
+import type { BekreftOmsorgVurderingAp } from './fakta/BekreftOmsorgVurderingAp';
+import type { BekreftOppholdsrettVurderingAp } from './fakta/BekreftOppholdsrettVurderingAp';
+import type { BekreftSvangerskapspengerAp } from './fakta/BekreftSvangerskapspengerAp';
+import type { BekreftTerminbekreftelseAp } from './fakta/BekreftTerminbekreftelseAp';
+import type { BekreftUttaksperioderAp } from './fakta/BekreftUttaksperioderAp';
+import type { KontrollerBesteberegningAP } from './fakta/KontrollerBesteberegningAP';
+import type { MerkOpptjeningUtlandAp } from './fakta/MerkOpptjeningUtlandAp';
+import type { OverstyringAvklarStartdatoForPeriodenAp } from './fakta/OverstyringAvklarStartdatoForPeriodenAp';
+import type { OverstyringDekningsgradAp } from './fakta/OverstyringDekningsgradAp';
+import type { SjekkManglendeFodselAp } from './fakta/SjekkManglendeFodselAp';
+import type { VurderArbeidsforholdInntektsmeldingAp } from './fakta/VurderArbeidsforholdInntektsmeldingAp';
+import type { VurderArbeidsforholdPermisjonAp } from './fakta/VurderArbeidsforholdPermisjonAp';
+import type { VurderDokumentasjonAp } from './fakta/VurderDokumentasjonAp';
 
 export type FaktaAksjonspunkt =
   | AvklarVergeAp
@@ -71,5 +71,3 @@ export type FaktaAksjonspunkt =
   | VurderArbeidsforholdPermisjonAp
   | OverstyringDekningsgradAp
   | AvklarDekningsgradAp;
-
-export default FaktaAksjonspunkt;

@@ -1,10 +1,8 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
-import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
+import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 
-type VurderFeilutbetalingAp = {
+export type VurderFeilutbetalingAp = {
   videreBehandling: string;
   varseltekst?: string;
 } & AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_FEILUTBETALING>;
-
-export default VurderFeilutbetalingAp;

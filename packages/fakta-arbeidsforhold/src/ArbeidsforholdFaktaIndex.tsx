@@ -2,9 +2,9 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
+import type { ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
-import ArbeidsforholdInfoPanel from './components/ArbeidsforholdInfoPanel';
+import { ArbeidsforholdInfoPanel } from './components/ArbeidsforholdInfoPanel';
 
 import messages from '../i18n/nb_NO.json';
 

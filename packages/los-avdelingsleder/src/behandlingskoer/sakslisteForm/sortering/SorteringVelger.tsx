@@ -1,4 +1,3 @@
-import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
@@ -9,7 +8,7 @@ import { BehandlingType } from '@navikt/fp-kodeverk';
 
 import { lagreSakslisteSortering, LosUrl } from '../../../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
-import { KøSorteringType } from '../../../typer/koSorteringTsType';
+import type { KøSorteringType } from '../../../typer/koSorteringTsType';
 import { BelopSorteringValg } from './BelopSorteringValg';
 import { DatoSorteringValg } from './DatoSorteringValg';
 

@@ -2,7 +2,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { FodselOgTilrettelegging } from '@navikt/fp-types';
+import type { FodselOgTilrettelegging } from '@navikt/fp-types';
 
 import { SvangerskapVilkarForm } from './components/SvangerskapVilkarForm';
 
