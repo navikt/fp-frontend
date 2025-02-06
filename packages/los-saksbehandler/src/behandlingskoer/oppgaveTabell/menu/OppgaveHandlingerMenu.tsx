@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import {
@@ -11,7 +11,7 @@ import {
 import { ActionMenu, Button } from '@navikt/ds-react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { FlyttReservasjonModal, Oppgave, OppgaveReservasjonEndringDatoModal } from '@navikt/fp-los-felles';
+import { FlyttReservasjonModal, type Oppgave, OppgaveReservasjonEndringDatoModal } from '@navikt/fp-los-felles';
 
 import {
   endreReservasjonPost,

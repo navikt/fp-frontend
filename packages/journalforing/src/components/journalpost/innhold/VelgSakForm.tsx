@@ -1,6 +1,6 @@
-import React, { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { Alert, BodyShort, Button, HStack } from '@navikt/ds-react';
 import { RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
@@ -11,10 +11,10 @@ import { FagsakYtelseType } from '@navikt/fp-kodeverk';
 
 import { erEndeligJournalført } from '../../../kodeverk/journalpostTilstand';
 import { Sakstype } from '../../../kodeverk/sakstype';
-import { JournalførSakSubmitValue } from '../../../typer/ferdigstillJournalføringSubmit';
-import { JournalFagsak } from '../../../typer/journalFagsakTsType';
-import { JournalføringFormValues } from '../../../typer/journalføringFormValues';
-import { Journalpost } from '../../../typer/journalpostTsType';
+import type { JournalførSakSubmitValue } from '../../../typer/ferdigstillJournalføringSubmit';
+import type { JournalFagsak } from '../../../typer/journalFagsakTsType';
+import type { JournalføringFormValues } from '../../../typer/journalføringFormValues';
+import type { Journalpost } from '../../../typer/journalpostTsType';
 
 import styles from './velgSakForm.module.css';
 

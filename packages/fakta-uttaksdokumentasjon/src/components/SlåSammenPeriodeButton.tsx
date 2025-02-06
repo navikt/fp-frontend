@@ -1,4 +1,3 @@
-import React, { FC } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { ArrowUpIcon } from '@navikt/aksel-icons';
@@ -10,7 +9,7 @@ interface Props {
   disabled: boolean;
 }
 
-const SlåSammenPeriodeButton: FC<Props> = ({ onClick, display, disabled }) =>
+export const SlåSammenPeriodeButton = ({ onClick, display, disabled }: Props) =>
   display ? (
     <Button
       size="xsmall"
@@ -23,5 +22,3 @@ const SlåSammenPeriodeButton: FC<Props> = ({ onClick, display, disabled }) =>
       <FormattedMessage id="UttakDokumentasjonFaktaDetailForm.SlåSammenPeriode" />
     </Button>
   ) : null;
-
-export default SlåSammenPeriodeButton;

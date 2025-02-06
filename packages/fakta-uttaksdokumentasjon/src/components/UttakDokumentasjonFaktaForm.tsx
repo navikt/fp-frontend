@@ -7,11 +7,11 @@ import { Form } from '@navikt/ft-form-hooks';
 
 import { FaktaBegrunnelseTextField } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
-import { DokumentasjonVurderingBehov } from '@navikt/fp-types';
-import { VurderDokumentasjonAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { DokumentasjonVurderingBehov } from '@navikt/fp-types';
+import type { VurderDokumentasjonAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
-import UttakDokumentasjonFaktaTable from './UttakDokumentasjonFaktaTable/UttakDokumentasjonFaktaTable';
+import { UttakDokumentasjonFaktaTable } from './UttakDokumentasjonFaktaTable/UttakDokumentasjonFaktaTable';
 
 interface Props {
   dokumentasjonVurderingBehov: DokumentasjonVurderingBehov[];

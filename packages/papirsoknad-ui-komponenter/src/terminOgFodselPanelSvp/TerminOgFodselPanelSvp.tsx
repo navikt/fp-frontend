@@ -1,5 +1,4 @@
-import React from 'react';
-import { useFormContext, UseFormGetValues } from 'react-hook-form';
+import { useFormContext, type UseFormGetValues } from 'react-hook-form';
 
 import { Heading, VStack } from '@navikt/ds-react';
 import { Datepicker } from '@navikt/ft-form-hooks';

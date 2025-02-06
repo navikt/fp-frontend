@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -6,11 +6,11 @@ import { BodyShort, Box, ExpansionCard, Label, Table, VStack } from '@navikt/ds-
 import { Form } from '@navikt/ft-form-hooks';
 import { useQuery } from '@tanstack/react-query';
 
-import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
+import { type SaksbehandlerProfil } from '@navikt/fp-los-felles';
 
 import { grupperOptions } from '../../data/fplosAvdelingslederApi';
-import { SaksbehandlerGruppe } from '../../typer/saksbehandlereOgSaksbehandlerGrupper';
-import { SakslisteAvdeling } from '../../typer/sakslisteAvdelingTsType';
+import type { SaksbehandlerGruppe } from '../../typer/saksbehandlereOgSaksbehandlerGrupper';
+import type { SakslisteAvdeling } from '../../typer/sakslisteAvdelingTsType';
 import { ValgAvSaksbehandlere } from './ValgAvSaksbehandlere';
 
 type FormValues = {

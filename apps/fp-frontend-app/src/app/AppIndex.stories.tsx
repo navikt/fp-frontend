@@ -1,16 +1,16 @@
-import { ComponentProps } from 'react';
+import type { ComponentProps } from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { http, HttpResponse } from 'msw';
 
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
 import { alleKodeverk, alleKodeverkTilbakekreving } from '@navikt/fp-storybook-utils';
+import { notEmpty } from '@navikt/fp-utils';
 
 import { BehandlingRel, BehandlingUrl } from '../data/behandlingApi';
 import { RestApiErrorProvider } from '../data/error/RestApiErrorContext';
 import { FagsakRel, FagsakUrl, wrapUrl } from '../data/fagsakApi';
-import { notEmpty } from '../data/notEmpty';
 import { AppIndexWrapper } from './AppIndex';
 
 import alleInntektsmeldinger from '../../.storybook/testdata/alleInntektsmeldinger.json';
@@ -40,7 +40,7 @@ const getHrefSak = (rel: string) =>
     ).href,
   );
 
-const getHrefBehandling = (rel: string) =>
+const getHrefBehandling = (rel: string): string =>
   wrapUrl(notEmpty(behandlingV1Data.links.find(link => link.rel === rel)).href).split('?')[0];
 
 const HANDLERS = [

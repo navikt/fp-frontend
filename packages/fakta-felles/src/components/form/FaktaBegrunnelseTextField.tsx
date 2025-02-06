@@ -1,11 +1,10 @@
-import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { createIntl, decodeHtmlEntity } from '@navikt/ft-utils';
 
-import { Aksjonspunkt } from '@navikt/fp-types';
+import type { Aksjonspunkt } from '@navikt/fp-types';
 
 import messages from '../../../i18n/nb_NO.json';
 

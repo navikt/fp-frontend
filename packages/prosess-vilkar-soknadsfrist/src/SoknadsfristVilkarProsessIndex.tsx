@@ -2,7 +2,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
+import type { FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
 
 import { ErSoknadsfristVilkaretOppfyltForm } from './components/ErSoknadsfristVilkaretOppfyltForm';
 

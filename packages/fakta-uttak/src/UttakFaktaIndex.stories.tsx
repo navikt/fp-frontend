@@ -1,13 +1,13 @@
-import { ComponentProps } from 'react';
+import type { ComponentProps } from 'react';
 
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, UttakPeriodeType } from '@navikt/fp-kodeverk';
-import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import { Fagsak } from '@navikt/fp-types';
+import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import type { Fagsak } from '@navikt/fp-types';
 
-import OverføringÅrsak from './kodeverk/overføringÅrsak';
-import UtsettelseÅrsak from './kodeverk/utsettelseÅrsak';
+import { OverføringÅrsak } from './kodeverk/overføringÅrsak';
+import { UtsettelseÅrsak } from './kodeverk/utsettelseÅrsak';
 import { UttakFaktaIndex } from './UttakFaktaIndex';
 
 import '@navikt/ds-css';

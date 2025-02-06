@@ -2,7 +2,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { Opptjening } from '@navikt/fp-types';
+import type { Opptjening } from '@navikt/fp-types';
 
 import { OpptjeningVilkarForm } from './components/OpptjeningVilkarForm';
 

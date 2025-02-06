@@ -1,11 +1,11 @@
-import { ComponentProps } from 'react';
+import type { ComponentProps } from 'react';
 
 import { TIDENES_ENDE } from '@navikt/ft-utils';
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { AdresseType, AksjonspunktKode, AksjonspunktStatus, SivilstandType } from '@navikt/fp-kodeverk';
-import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import { Aksjonspunkt, KjønnkodeEnum, PersonopplysningerBasis, Ytelsefordeling } from '@navikt/fp-types';
+import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { type Aksjonspunkt, KjønnkodeEnum, type PersonopplysningerBasis, type Ytelsefordeling } from '@navikt/fp-types';
 
 import { OmsorgOgRettFaktaIndex } from './OmsorgOgRettFaktaIndex';
 

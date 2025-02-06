@@ -5,7 +5,7 @@ import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, HStack, Label, Modal as NavModal, VStack } from '@navikt/ds-react';
 import { getDateAndTime } from '@navikt/ft-utils';
 
-import { Oppgave } from '@navikt/fp-los-felles';
+import { type Oppgave } from '@navikt/fp-los-felles';
 
 import styles from './oppgaveReservasjonForlengetModal.module.css';
 

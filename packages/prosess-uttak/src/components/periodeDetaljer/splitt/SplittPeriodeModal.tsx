@@ -1,6 +1,5 @@
-import React, { FunctionComponent } from 'react';
 import { useForm } from 'react-hook-form';
-import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { BodyShort, Button, Detail, Heading, HStack, Modal, VStack } from '@navikt/ds-react';
 import { Datepicker, Form } from '@navikt/ft-form-hooks';
@@ -32,14 +31,14 @@ const validerInnenforIntervall = (fom: string, tom: string, intl: IntlShape) => 
   return intl.formatMessage({ id: 'DelOppPeriodeModal.UgyldigDato' });
 };
 
-interface OwnProps {
+interface Props {
   fomDato: string;
   tomDato: string;
   cancel: () => void;
   submit: (dato: string) => void;
 }
 
-const SplittPeriodeModal: FunctionComponent<OwnProps> = ({ fomDato, tomDato, submit, cancel }) => {
+export const SplittPeriodeModal = ({ fomDato, tomDato, submit, cancel }: Props) => {
   const intl = useIntl();
 
   const formMethods = useForm<{ dato: string }>();
@@ -98,5 +97,3 @@ const SplittPeriodeModal: FunctionComponent<OwnProps> = ({ fomDato, tomDato, sub
     </Form>
   );
 };
-
-export default SplittPeriodeModal;

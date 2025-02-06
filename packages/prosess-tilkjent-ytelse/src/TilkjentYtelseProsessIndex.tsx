@@ -2,7 +2,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import {
+import type {
   ArbeidsgiverOpplysningerPerId,
   BeregningsresultatDagytelse,
   FamilieHendelseSamling,

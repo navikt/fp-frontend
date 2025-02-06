@@ -7,12 +7,12 @@ import { useQuery } from '@tanstack/react-query';
 import { OpptjeningFaktaIndex } from '@navikt/fp-fakta-opptjening';
 import { AksjonspunktKode, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
+import type { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
-import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
+import type { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING];

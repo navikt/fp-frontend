@@ -1,16 +1,17 @@
 import { MemoryRouter, Route, Routes } from 'react-router';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 
 import { FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { alleKodeverk, withQueryClient } from '@navikt/fp-storybook-utils';
-import { Aktor, FagsakPerson, KjønnkodeEnum, Person } from '@navikt/fp-types';
+import type { Aktor, FagsakPerson, Person } from '@navikt/fp-types';
+import { KjønnkodeEnum } from '@navikt/fp-types';
+import { notEmpty } from '@navikt/fp-utils';
 
 import { FagsakRel, FagsakUrl, initFetchOptions, useFagsakApi, wrapUrl } from '../data/fagsakApi';
-import { notEmpty } from '../data/notEmpty';
 import { AktørIndex } from './AktørIndex';
 
 import initFetchData from '../../.storybook/testdata/initFetch.json';

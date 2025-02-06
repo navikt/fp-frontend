@@ -1,13 +1,13 @@
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 
 import { Kommunikasjonsretning } from '@navikt/fp-kodeverk';
 import { getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
+import { notEmpty } from '@navikt/fp-utils';
 
 import { FagsakRel, FagsakUrl, initFetchOptions, wrapUrl } from '../../data/fagsakApi';
-import { notEmpty } from '../../data/notEmpty';
 import { DokumentIndex } from './DokumentIndex';
 
 import initFetchData from '../../../.storybook/testdata/initFetch.json';

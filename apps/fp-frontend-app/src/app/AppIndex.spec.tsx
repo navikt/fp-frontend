@@ -11,7 +11,7 @@ const { BekreftAdopsjon, RisikoAksjonspunkt } = composeStories(stories);
 
 describe('AppIndex', () => {
   it('skal rendre app med korrekt informasjon', async () => {
-    await applyRequestHandlers(BekreftAdopsjon.parameters.msw);
+    await applyRequestHandlers(BekreftAdopsjon.parameters['msw']);
     render(
       <ResponsiveContext.Provider value={{ width: 1000 }}>
         <BekreftAdopsjon />
@@ -67,7 +67,7 @@ describe('AppIndex', () => {
 
   // TODO Fiks dette. Er det lazy-loadinga som er problemet?
   it.skip('skal bekrefte aksjonspunkt', async () => {
-    await applyRequestHandlers(BekreftAdopsjon.parameters.msw);
+    await applyRequestHandlers(BekreftAdopsjon.parameters['msw']);
     const utils = await render(
       <ResponsiveContext.Provider value={{ width: 1000 }}>
         <BekreftAdopsjon />
@@ -88,7 +88,7 @@ describe('AppIndex', () => {
 
   // TODO Fiks dette. Er det lazy-loadinga som er problemet?
   it.skip('skal vise risikoaksjonspunkt', async () => {
-    await applyRequestHandlers(RisikoAksjonspunkt.parameters.msw);
+    await applyRequestHandlers(RisikoAksjonspunkt.parameters['msw']);
     const utils = await render(
       <ResponsiveContext.Provider value={{ width: 1000 }}>
         <RisikoAksjonspunkt />

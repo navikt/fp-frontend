@@ -3,7 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
 
 import { AksjonspunktKode, AksjonspunktStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
-import {
+import type {
   Aksjonspunkt,
   Beregningsgrunnlag,
   BeregningsresultatDagytelse,
@@ -14,7 +14,7 @@ import {
 } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
-import { ForhandsvisData, VedtakForm } from './components/forstegang/VedtakForm';
+import { type ForhandsvisData, VedtakForm } from './components/forstegang/VedtakForm';
 import { VedtakRevurderingForm } from './components/revurdering/VedtakRevurderingForm';
 
 import messages from '../i18n/nb_NO.json';

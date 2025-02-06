@@ -1,7 +1,8 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { MenyVergeIndex } from '@navikt/fp-sak-meny';
-import { Behandling, BehandlingAppKontekst, Fagsak, VergeBehandlingmenyValg } from '@navikt/fp-types';
+import type { Behandling, BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
+import { VergeBehandlingmenyValg } from '@navikt/fp-types';
 
 import { getLocationWithDefaultProsessStegAndFakta, pathToBehandling } from '../../app/paths';
 import { useBehandlingPollingOperasjoner } from '../../data/polling/useBehandlingPollingOperasjoner';

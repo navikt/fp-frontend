@@ -1,4 +1,3 @@
-import React from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
 import { Alert, BodyShort } from '@navikt/ds-react';

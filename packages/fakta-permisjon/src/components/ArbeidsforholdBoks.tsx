@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement } from 'react';
+import { type ReactElement } from 'react';
 
 import classnames from 'classnames/bind';
 
@@ -6,13 +6,13 @@ import styles from './arbeidsforholdBoks.module.css';
 
 const classNames = classnames.bind(styles);
 
-interface OwnProps {
+interface Props {
   harÅpentAksjonspunkt: boolean;
   harBorderTop: boolean;
   children: ReactElement | ReactElement[];
 }
 
-const ArbeidsforholdBoks: FunctionComponent<OwnProps> = ({ harÅpentAksjonspunkt, harBorderTop, children }) => (
+export const ArbeidsforholdBoks = ({ harÅpentAksjonspunkt, harBorderTop, children }: Props) => (
   <div
     className={classNames(styles.boks, {
       aksjonspunkt: harÅpentAksjonspunkt,
@@ -22,5 +22,3 @@ const ArbeidsforholdBoks: FunctionComponent<OwnProps> = ({ harÅpentAksjonspunkt
     {children}
   </div>
 );
-
-export default ArbeidsforholdBoks;

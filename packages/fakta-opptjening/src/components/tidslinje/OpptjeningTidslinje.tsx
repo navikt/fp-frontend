@@ -1,5 +1,5 @@
-import React, { FunctionComponent, ReactNode,useCallback, useMemo } from 'react';
-import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+import { type ReactNode, useCallback, useMemo } from 'react';
+import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import {
   CheckmarkCircleIcon,
@@ -17,10 +17,10 @@ import { DateLabel } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
 
 import { OpptjeningAktivitetType } from '@navikt/fp-kodeverk';
-import { KodeverkMedNavn, Opptjening, OpptjeningAktivitet } from '@navikt/fp-types';
+import type { KodeverkMedNavn, Opptjening, OpptjeningAktivitet } from '@navikt/fp-types';
 
 import { finnOpptjeningFom, finnOpptjeningTom } from '../../utils/opptjeningDatoUtil';
-import { FormValues } from '../aktivitet/ValgtAktivitetForm';
+import { type FormValues } from '../aktivitet/ValgtAktivitetForm';
 
 const finnStatus = (erGodkjent: boolean): 'success' | 'warning' | 'danger' => {
   if (erGodkjent === false) {
@@ -112,7 +112,7 @@ const lagRader = (
   });
 };
 
-interface OwnProps {
+interface Props {
   opptjeningPerioder: OpptjeningAktivitet[];
   formVerdierForAlleAktiviteter: FormValues[];
   valgtAktivitetIndex?: number;
@@ -121,14 +121,14 @@ interface OwnProps {
   fastsattOpptjening?: Opptjening['fastsattOpptjening'];
 }
 
-const OpptjeningTimeLine: FunctionComponent<OwnProps> = ({
+export const OpptjeningTidslinje = ({
   opptjeningPerioder,
   formVerdierForAlleAktiviteter,
   fastsattOpptjening,
   valgtAktivitetIndex,
   opptjeningAktivitetTypes,
   setValgtAktivitetIndex,
-}) => {
+}: Props) => {
   const intl = useIntl();
 
   const opptjeningFomDato = fastsattOpptjening?.opptjeningFom;
@@ -196,5 +196,3 @@ const OpptjeningTimeLine: FunctionComponent<OwnProps> = ({
     </Timeline>
   );
 };
-
-export default OpptjeningTimeLine;

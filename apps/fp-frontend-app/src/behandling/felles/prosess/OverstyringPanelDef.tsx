@@ -1,6 +1,6 @@
 import { KodeverkType, VilkarType } from '@navikt/fp-kodeverk';
 import { VilkarresultatMedOverstyringProsessIndex } from '@navikt/fp-prosess-vilkar-overstyring';
-import { KodeverkMedNavn, Medlemskap, Vilkar } from '@navikt/fp-types';
+import type { KodeverkMedNavn, Medlemskap, Vilkar } from '@navikt/fp-types';
 import { usePanelDataContext, usePanelOverstyring } from '@navikt/fp-utils';
 
 import { skalViseProsessPanel } from './skalViseProsessPanel';

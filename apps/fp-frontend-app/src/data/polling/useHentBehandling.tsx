@@ -1,9 +1,9 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { Behandling } from '@navikt/fp-types';
+import type { Behandling } from '@navikt/fp-types';
+import { notEmpty } from '@navikt/fp-utils';
 
 import { hentBehandling, hentBehandlingTilbakekreving } from '../behandlingApi';
-import { notEmpty } from '../notEmpty';
 import { useRequestPendingContext } from '../polling/RequestPendingContext';
 import { doPolling, useTaskStatusChecker } from './pollingUtils';
 

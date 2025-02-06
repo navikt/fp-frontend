@@ -3,7 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { Dokument } from '@navikt/fp-types';
+import type { Dokument } from '@navikt/fp-types';
 
 import { DocumentList } from './components/DocumentList';
 

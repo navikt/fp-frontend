@@ -1,8 +1,8 @@
-import { FastsattOpptjening } from '@navikt/fp-types';
+import type { FastsattOpptjening } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { OpptjeningVilkarAksjonspunktPanel } from './OpptjeningVilkarAksjonspunktPanel';
-import OpptjeningVilkarView from './OpptjeningVilkarView';
+import { OpptjeningVilkarView } from './OpptjeningVilkarView';
 
 interface Props {
   fastsattOpptjening: FastsattOpptjening;

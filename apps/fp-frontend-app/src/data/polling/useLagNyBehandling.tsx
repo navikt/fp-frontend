@@ -1,8 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { Behandling } from '@navikt/fp-types';
+import type { Behandling } from '@navikt/fp-types';
 
-import { lagNyBehandling, lagNyTilbakekrevingBehandling, NyBehandlingParams } from '../fagsakApi';
+import { lagNyBehandling, lagNyTilbakekrevingBehandling, type NyBehandlingParams } from '../fagsakApi';
 import { doPolling, useTaskStatusChecker } from './pollingUtils';
 import { useRequestPendingContext } from './RequestPendingContext';
 

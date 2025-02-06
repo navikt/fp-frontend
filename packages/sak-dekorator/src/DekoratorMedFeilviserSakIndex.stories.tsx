@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { action } from '@storybook/addon-actions';
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { DekoratorMedFeilviserSakIndex } from './DekoratorMedFeilviserSakIndex';
 
-import '@navikt/ft-ui-komponenter/dist/style.css';
 import '@navikt/ft-plattform-komponenter/dist/style.css';
+import '@navikt/ft-ui-komponenter/dist/style.css';
 
 const meta = {
   title: 'sak/sak-dekoratør',

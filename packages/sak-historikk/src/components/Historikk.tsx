@@ -1,12 +1,12 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useIntl } from 'react-intl';
 
 import { Box, Checkbox, Heading, HStack, VStack } from '@navikt/ds-react';
 import { useStorageToggle } from '@navikt/ft-hooks';
-import { Location } from 'history';
+import { type Location } from 'history';
 
 import { getKodeverknavnFn } from '@navikt/fp-kodeverk';
-import { AlleKodeverk, AlleKodeverkTilbakekreving, Historikkinnslag } from '@navikt/fp-types';
+import type { AlleKodeverk, AlleKodeverkTilbakekreving, Historikkinnslag } from '@navikt/fp-types';
 
 import { sortAndTagTilbakekreving } from '../utils/historikkUtils';
 import { EnvironmentWrapper } from './EnvironmentWrapper';

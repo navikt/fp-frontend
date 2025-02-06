@@ -1,10 +1,10 @@
-import React, { ReactElement, ReactNode } from 'react';
+import { type ReactElement, type ReactNode } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
 import { BodyShort } from '@navikt/ds-react';
 import { createIntl } from '@navikt/ft-utils';
 
-import { Aktor, KodeverkMedNavn } from '@navikt/fp-types';
+import type { Aktor, KodeverkMedNavn } from '@navikt/fp-types';
 
 import { AktørGrid } from './AktørGrid';
 

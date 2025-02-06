@@ -7,7 +7,7 @@ import { PersonopplysningerForFamilie } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
-import { OmsorgOgRettProps } from '../OmsorgOgRettFaktaIndex';
+import { type OmsorgOgRettProps } from '../OmsorgOgRettFaktaIndex';
 import { AleneomsorgForm } from './forms/AleneomsorgForm';
 import { HarAnnenForelderRettForm } from './forms/HarAnnenForelderRettForm';
 

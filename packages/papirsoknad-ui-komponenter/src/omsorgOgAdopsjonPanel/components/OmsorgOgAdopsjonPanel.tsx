@@ -18,7 +18,7 @@ import { BorderBox } from '@navikt/ft-ui-komponenter';
 import { FamilieHendelseType } from '@navikt/fp-kodeverk';
 
 import { OMSORG_NAME_PREFIX } from '../constant';
-import { OmsorgOgAdopsjonFormValues, TransformedFormValue } from './types';
+import type { OmsorgOgAdopsjonFormValues, TransformedFormValue } from './types';
 
 import styles from './omsorgOgAdopsjonPanel.module.css';
 

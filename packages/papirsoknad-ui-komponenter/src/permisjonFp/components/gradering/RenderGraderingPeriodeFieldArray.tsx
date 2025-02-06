@@ -1,5 +1,5 @@
-import React, { ReactElement, useEffect } from 'react';
-import { useFieldArray, useFormContext, UseFormGetValues } from 'react-hook-form';
+import { type ReactElement, useEffect } from 'react';
+import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Alert } from '@navikt/ds-react';
@@ -20,11 +20,11 @@ import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import { Arbeidskategori } from '@navikt/fp-kodeverk';
-import { KodeverkMedNavn } from '@navikt/fp-types';
+import type { KodeverkMedNavn } from '@navikt/fp-types';
 
 import { FieldArrayRow } from '../../../felles/FieldArrayRow';
 import { GRADERING_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
-import { GraderingPeriode, PermisjonFormValues } from '../../types';
+import type { GraderingPeriode, PermisjonFormValues } from '../../types';
 import { gyldigeUttakperioder } from '../fulltUttak/RenderPermisjonPeriodeFieldArray';
 
 const maxLength9OrFodselsnr = maxLengthOrFodselsnr(9);

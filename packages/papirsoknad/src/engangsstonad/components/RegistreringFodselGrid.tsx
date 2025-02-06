@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { FamilieHendelseType, ForeldreType } from '@navikt/fp-kodeverk';
 import {
   OmsorgOgAdopsjonPapirsoknadIndex,
@@ -9,7 +7,7 @@ import {
   SprakPapirsoknadIndex,
   TerminOgFodselPanel,
 } from '@navikt/fp-papirsoknad-ui-komponenter';
-import { AlleKodeverk } from '@navikt/fp-types';
+import type { AlleKodeverk } from '@navikt/fp-types';
 
 interface Props {
   readOnly: boolean;
@@ -19,7 +17,7 @@ interface Props {
   mottattDato?: string;
 }
 
-const RegistreringFodselGrid = ({ readOnly, soknadData, alleKodeverk, fodselsdato, mottattDato }: Props) => (
+export const RegistreringFodselGrid = ({ readOnly, soknadData, alleKodeverk, fodselsdato, mottattDato }: Props) => (
   <>
     {soknadData.getForeldreType() !== ForeldreType.MOR && (
       <RettigheterPapirsoknadIndex readOnly={readOnly} soknadData={soknadData} />
@@ -57,4 +55,3 @@ RegistreringFodselGrid.transformValues = (values: ReturnType<typeof Registrering
   ...TerminOgFodselPanel.transformValues(values),
   ...SprakPapirsoknadIndex.transformValues(values),
 });
-export default RegistreringFodselGrid;

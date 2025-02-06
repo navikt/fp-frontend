@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback,useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import {
@@ -16,15 +16,15 @@ import { DateLabel, FloatRight, VerticalSpacer } from '@navikt/ft-ui-komponenter
 import dayjs from 'dayjs';
 
 import { FagsakYtelseType, KodeverkType, SoknadType } from '@navikt/fp-kodeverk';
-import {
+import type {
   AlleKodeverk,
   ArbeidsgiverOpplysningerPerId,
   BeregningsresultatPeriode,
   Fagsak,
   FamilieHendelseSamling,
   Kjønnkode,
-  KjønnkodeEnum,
 } from '@navikt/fp-types';
+import { KjønnkodeEnum } from '@navikt/fp-types';
 
 import TilkjentYtelseTimelineData from './TilkjentYtelseTimelineData';
 
@@ -82,7 +82,7 @@ const finnSisteDato = (familiehendelseDato: string, førstePeriodeFom: dayjs.Day
   return dato.isBefore(førstePeriodeFom) ? førstePeriodeFom.subtract(5, 'days') : dato;
 };
 
-interface OwnProps {
+interface Props {
   beregningsresultatPeriode?: BeregningsresultatPeriode[];
   soknadDate: string;
   familieHendelseSamling: FamilieHendelseSamling;
@@ -97,7 +97,7 @@ interface OwnProps {
  *
  * Masserer data og populerer felten samt formatterar tidslinjen for tilkjent ytelse
  */
-const TilkjentYtelse: FunctionComponent<OwnProps> = ({
+export const TilkjentYtelse = ({
   beregningsresultatPeriode,
   soknadDate,
   familieHendelseSamling,
@@ -105,7 +105,7 @@ const TilkjentYtelse: FunctionComponent<OwnProps> = ({
   alleKodeverk,
   arbeidsgiverOpplysningerPerId,
   fagsak,
-}) => {
+}: Props) => {
   const intl = useIntl();
   const [valgtPeriode, setValgtPeriode] = useState<Periode | null>();
 
@@ -273,5 +273,3 @@ const TilkjentYtelse: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-
-export default TilkjentYtelse;

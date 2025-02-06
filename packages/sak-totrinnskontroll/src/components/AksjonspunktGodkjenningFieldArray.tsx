@@ -1,12 +1,11 @@
-import React from 'react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { NavLink } from 'react-router-dom';
 
 import { BodyShort } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { Location } from 'history';
+import { type Location } from 'history';
 
-import { BehandlingAppKontekst, KodeverkMedNavn, TotrinnskontrollSkjermlenkeContext } from '@navikt/fp-types';
+import type { BehandlingAppKontekst, KodeverkMedNavn, TotrinnskontrollSkjermlenkeContext } from '@navikt/fp-types';
 
 import { getAksjonspunkttekst } from './aksjonspunktTekster/aksjonspunktTekstUtleder';
 import { GodkjenningPanel } from './GodkjenningPanel';

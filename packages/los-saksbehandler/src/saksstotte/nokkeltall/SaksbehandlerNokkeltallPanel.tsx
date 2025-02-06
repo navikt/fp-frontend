@@ -1,4 +1,3 @@
-import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { SectorChartIcon } from '@navikt/aksel-icons';

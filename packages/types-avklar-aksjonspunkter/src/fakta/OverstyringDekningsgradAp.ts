@@ -1,9 +1,7 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
-import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
+import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 
-type OverstyringDekningsgradAp = {
+export type OverstyringDekningsgradAp = {
   dekningsgrad: number;
 } & AksjonspunktTilBekreftelse<AksjonspunktKode.OVERSTYR_DEKNINGSGRAD>;
-
-export default OverstyringDekningsgradAp;

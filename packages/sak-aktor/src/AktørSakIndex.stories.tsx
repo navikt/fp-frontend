@@ -1,15 +1,13 @@
-import React from 'react';
-
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { FagsakStatus, FagsakYtelseType, KodeverkType, NavBrukerKjonn } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import { FagsakEnkel } from '@navikt/fp-types';
+import type { FagsakEnkel } from '@navikt/fp-types';
 
 import { AktørSakIndex } from './AktørSakIndex';
 
-import '@navikt/ft-ui-komponenter/dist/style.css';
 import '@navikt/ft-plattform-komponenter/dist/style.css';
+import '@navikt/ft-ui-komponenter/dist/style.css';
 
 const FAGSAK = {
   saksnummer: '35425245',

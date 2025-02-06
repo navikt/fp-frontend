@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { ChevronDownIcon } from '@navikt/aksel-icons';
@@ -12,10 +12,11 @@ import { getMenytekst as getEndreUtlandMenytekst } from '@navikt/fp-sak-meny-end
 import { getMenytekst as getHenleggMenytekst } from '@navikt/fp-sak-meny-henlegg';
 import { getMenytekst as getNyBehandlingMenytekst } from '@navikt/fp-sak-meny-ny-behandling';
 import { getMenytekst as getSettPaVentMenytekst } from '@navikt/fp-sak-meny-sett-pa-vent';
-import { Behandling, BehandlingAppKontekst, Fagsak, VergeBehandlingmenyValg } from '@navikt/fp-types';
+import type { Behandling, BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
+import { VergeBehandlingmenyValg } from '@navikt/fp-types';
+import { notEmpty } from '@navikt/fp-utils';
 
 import { initFetchOptions } from '../data/fagsakApi';
-import { notEmpty } from '../data/notEmpty';
 import { FagsakData } from '../fagsak/FagsakData';
 import { ApneForEndringerMenyModal } from './modaler/ApneForEndringerMenyModal';
 import { EndreBehandlendeEnhetMenyModal } from './modaler/EndreBehandlendeEnhetMenyModal';

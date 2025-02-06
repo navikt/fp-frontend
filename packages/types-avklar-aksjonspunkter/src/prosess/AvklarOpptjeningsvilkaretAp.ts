@@ -1,10 +1,8 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
-import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
+import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 
-type AvklarOpptjeningsvilkaretAp = {
+export type AvklarOpptjeningsvilkaretAp = {
   erVilkarOk: boolean;
   avslagskode?: string;
 } & AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_OPPTJENINGSVILKARET>;
-
-export default AvklarOpptjeningsvilkaretAp;

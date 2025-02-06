@@ -1,6 +1,6 @@
-import { createContext, ReactElement, useContext, useMemo } from 'react';
+import { createContext, type ReactElement, useContext, useMemo } from 'react';
 
-import { Aksjonspunkt, AlleKodeverk, Behandling, Fagsak } from '@navikt/fp-types';
+import type { Aksjonspunkt, AlleKodeverk, Behandling, Fagsak } from '@navikt/fp-types';
 
 type Props<AP_TYPE> = {
   behandling: Behandling;

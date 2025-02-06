@@ -1,5 +1,5 @@
-import React, { FunctionComponent, ReactElement } from 'react';
-import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+import { type ReactElement } from 'react';
+import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { ChevronDownDoubleIcon, ChevronLeftDoubleIcon, ChevronRightDoubleIcon } from '@navikt/aksel-icons';
 import { BodyShort, Heading } from '@navikt/ds-react';
@@ -8,7 +8,7 @@ import { DateTimeLabel, Table, TableColumn, TableRow } from '@navikt/ft-ui-kompo
 
 import { Kommunikasjonsretning } from '@navikt/fp-kodeverk';
 import { hentDokumentLenke } from '@navikt/fp-konstanter';
-import { Dokument } from '@navikt/fp-types';
+import type { Dokument } from '@navikt/fp-types';
 
 import styles from './documentListInnsyn.module.css';
 
@@ -39,7 +39,7 @@ const getDirectionImage = (document: Dokument, intl: IntlShape): ReactElement =>
 
 const noLabelHack = (): ReactElement => <span className={styles.hidden}>-</span>;
 
-interface OwnProps {
+interface Props {
   saksNr: string;
   documents: Dokument[];
   readOnly?: boolean;
@@ -52,7 +52,7 @@ interface OwnProps {
  * trigget når saksbehandler velger et dokument. Finnes ingen dokumenter blir det kun vist en label
  * som viser at ingen dokumenter finnes på fagsak.
  */
-const DocumentListInnsyn: FunctionComponent<OwnProps> = ({ documents, saksNr, readOnly = false }) => {
+export const DocumentListInnsyn = ({ documents, saksNr, readOnly = false }: Props) => {
   const intl = useIntl();
   if (documents.length === 0) {
     return (
@@ -111,5 +111,3 @@ const DocumentListInnsyn: FunctionComponent<OwnProps> = ({ documents, saksNr, re
     </>
   );
 };
-
-export default DocumentListInnsyn;

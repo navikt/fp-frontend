@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { ErrorSummary, Heading } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
@@ -24,7 +24,7 @@ import {
   isAksjonspunktOpen,
   RelasjonsRolleType,
 } from '@navikt/fp-kodeverk';
-import {
+import type {
   Aksjonspunkt,
   ArbeidsgiverOpplysningerPerId,
   Fagsak,
@@ -32,11 +32,14 @@ import {
   KontrollerFaktaPeriode,
   Ytelsefordeling,
 } from '@navikt/fp-types';
-import { BekreftUttaksperioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { BekreftUttaksperioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
-import KontrollerFaktaPeriodeMedApMarkering, { PeriodeApType } from '../typer/kontrollerFaktaPeriodeMedApMarkering';
-import UttakFaktaTable from './UttakFaktaTable';
+import {
+  type KontrollerFaktaPeriodeMedApMarkering,
+  PeriodeApType,
+} from '../typer/kontrollerFaktaPeriodeMedApMarkering';
+import { UttakFaktaTable } from './UttakFaktaTable';
 
 const finnAksjonspunktTekster = (aksjonspunkter: Aksjonspunkt[], ytelsefordeling: Ytelsefordeling) =>
   aksjonspunkter

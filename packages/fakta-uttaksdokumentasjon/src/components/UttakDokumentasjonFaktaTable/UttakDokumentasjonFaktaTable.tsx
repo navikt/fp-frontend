@@ -1,15 +1,15 @@
-import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Table } from '@navikt/ds-react';
 import { calcDaysAndWeeks } from '@navikt/ft-utils';
 
-import { DokumentasjonVurderingBehov, UttakType } from '@navikt/fp-types';
+import { type DokumentasjonVurderingBehov, UttakType } from '@navikt/fp-types';
 
 import { getFormatertPeriode } from '../../utils/periodeUtils';
-import UttakDokumentasjonFaktaDetailForm from '../UttakDokumentasjonFaktaDetailForm';
-import getUttakÅrsakTekst from './uttakÅrsak';
-import UttakVurderingStatus from './UttakVurderingStatus';
+import { UttakDokumentasjonFaktaDetailForm } from '../UttakDokumentasjonFaktaDetailForm';
+import { getUttakÅrsakTekst } from './uttakÅrsak';
+import { UttakVurderingStatus } from './UttakVurderingStatus';
 
 import styles from './uttakDokumentasjonFaktaTable.module.css';
 
@@ -31,7 +31,7 @@ const HEADER_TEXT_CODES = [
   'UttakDokumentasjonFaktaTable.Vurdering',
 ];
 
-interface OwnProps {
+interface Props {
   dokumentasjonVurderingBehov: DokumentasjonVurderingBehov[];
   oppdaterDokBehov: (dokBehov: DokumentasjonVurderingBehov[]) => void;
   readOnly: boolean;
@@ -39,13 +39,13 @@ interface OwnProps {
   harAksjonspunkt: boolean;
 }
 
-const UttakDokumentasjonFaktaTable: FunctionComponent<OwnProps> = ({
+export const UttakDokumentasjonFaktaTable = ({
   dokumentasjonVurderingBehov,
   oppdaterDokBehov,
   readOnly,
   setDirty,
   harAksjonspunkt,
-}) => {
+}: Props) => {
   const [valgtDokBehovFomDatoer, setValgtDokBehovFomDatoer] = useState<string[]>([]);
 
   const velgDokBehovFomDato = useCallback(
@@ -151,5 +151,3 @@ const UttakDokumentasjonFaktaTable: FunctionComponent<OwnProps> = ({
     </Table>
   );
 };
-
-export default UttakDokumentasjonFaktaTable;

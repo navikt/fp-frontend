@@ -1,4 +1,3 @@
-import React from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';

@@ -10,7 +10,7 @@ const { Default } = composeStories(stories);
 
 describe('FagsakIndex', () => {
   it('skal vise fagsak-delen av app og vente på at behandling skal vises', async () => {
-    await applyRequestHandlers(Default.parameters.msw);
+    await applyRequestHandlers(Default.parameters['msw']);
     render(<Default />);
 
     expect(await screen.findByText('Foreldrepenger')).toBeInTheDocument();

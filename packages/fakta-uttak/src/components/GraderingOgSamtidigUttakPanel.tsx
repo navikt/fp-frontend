@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement, useCallback, useEffect, useState } from 'react';
+import { type ReactElement, useCallback, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
@@ -10,14 +10,14 @@ import { DDMMYYYY_DATE_FORMAT, guid } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import { KodeverkType, UttakArbeidType } from '@navikt/fp-kodeverk';
-import {
+import type {
   AlleKodeverk,
   ArbeidsgiverOpplysninger,
   ArbeidsgiverOpplysningerPerId,
   FaktaArbeidsforhold,
 } from '@navikt/fp-types';
 
-import KontrollerFaktaPeriodeMedApMarkering from '../typer/kontrollerFaktaPeriodeMedApMarkering';
+import type { KontrollerFaktaPeriodeMedApMarkering } from '../typer/kontrollerFaktaPeriodeMedApMarkering';
 
 import styles from './graderingOgSamtidigUttakPanel.module.css';
 
@@ -78,7 +78,7 @@ const mapArbeidsforhold = (
     );
   });
 
-interface OwnProps {
+interface Props {
   valgtPeriode?: KontrollerFaktaPeriodeMedApMarkering;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   faktaArbeidsforhold?: FaktaArbeidsforhold[];
@@ -86,13 +86,13 @@ interface OwnProps {
   alleKodeverk: AlleKodeverk;
 }
 
-const GraderingOgSamtidigUttakPanel: FunctionComponent<OwnProps> = ({
+export const GraderingOgSamtidigUttakPanel = ({
   valgtPeriode,
   arbeidsgiverOpplysningerPerId,
   faktaArbeidsforhold,
   readOnly,
   alleKodeverk,
-}) => {
+}: Props) => {
   const aRef = valgtPeriode?.arbeidsforhold?.arbeidsgiverReferanse;
   const arbeidsgiverFinnesIkke = aRef && aRef !== 'null' && !arbeidsgiverOpplysningerPerId[aRef];
 
@@ -188,5 +188,3 @@ const GraderingOgSamtidigUttakPanel: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-
-export default GraderingOgSamtidigUttakPanel;

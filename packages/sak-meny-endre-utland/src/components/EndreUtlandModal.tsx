@@ -1,11 +1,10 @@
-import React from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Button, Heading, Modal } from '@navikt/ds-react';
 import { CheckboxPanel, Form } from '@navikt/ft-form-hooks';
 
-import { KodeverkMedNavn, Saksmarkering } from '@navikt/fp-types';
+import type { KodeverkMedNavn, Saksmarkering } from '@navikt/fp-types';
 
 import styles from './endreUtlandModal.module.css';
 

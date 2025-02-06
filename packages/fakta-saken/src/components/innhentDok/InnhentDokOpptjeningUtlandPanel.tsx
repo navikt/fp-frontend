@@ -1,4 +1,4 @@
-import { FunctionComponent, useCallback } from 'react';
+import { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -9,8 +9,8 @@ import { AksjonspunktBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt } from '@navikt/fp-types';
-import { MerkOpptjeningUtlandAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { Aksjonspunkt } from '@navikt/fp-types';
+import type { MerkOpptjeningUtlandAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useFormData } from '@navikt/fp-utils';
 
 import styles from './innhentDokOpptjeningUtlandPanel.module.css';
@@ -30,7 +30,7 @@ export type FormValues = {
   dokStatus?: string;
 };
 
-interface OwnProps {
+interface Props {
   readOnly: boolean;
   harApneAksjonspunkter: boolean;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
@@ -40,7 +40,7 @@ interface OwnProps {
   dokStatus?: string;
 }
 
-const InnhentDokOpptjeningUtlandPanel: FunctionComponent<OwnProps> = ({
+export const InnhentDokOpptjeningUtlandPanel = ({
   readOnly,
   harApneAksjonspunkter,
   aksjonspunkt,
@@ -48,7 +48,7 @@ const InnhentDokOpptjeningUtlandPanel: FunctionComponent<OwnProps> = ({
   submittable,
   submitCallback,
   dokStatus,
-}) => {
+}: Props) => {
   const intl = useIntl();
 
   const { formData, setFormData } = useFormData<FormValues>();
@@ -113,5 +113,3 @@ const InnhentDokOpptjeningUtlandPanel: FunctionComponent<OwnProps> = ({
     </Form>
   );
 };
-
-export default InnhentDokOpptjeningUtlandPanel;

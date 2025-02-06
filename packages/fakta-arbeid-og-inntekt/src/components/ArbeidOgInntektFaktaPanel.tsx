@@ -12,7 +12,7 @@ import {
   VenteArsakType,
 } from '@navikt/fp-kodeverk';
 import { SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
-import {
+import type {
   AoIArbeidsforhold,
   ArbeidOgInntektsmelding,
   ArbeidsgiverOpplysningerPerId,
@@ -20,11 +20,11 @@ import {
   ManglendeInntektsmeldingVurdering,
   ManueltArbeidsforhold,
 } from '@navikt/fp-types';
-import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { useIsFormDirty } from '../DirtyFormProvider';
-import { ArbeidsforholdOgInntektRadData, Avklaring } from '../types/arbeidsforholdOgInntekt';
+import type { ArbeidsforholdOgInntektRadData, Avklaring } from '../types/arbeidsforholdOgInntekt';
 import { ArbeidsforholdRad } from './ArbeidsforholdRad';
 import { ArbeidsOgInntektOverstyrPanel } from './ArbeidsOgInntektOverstyrPanel';
 
@@ -112,8 +112,8 @@ const byggTabellStruktur = (
       arbeidsgiverIdent: im.arbeidsgiverIdent,
       internArbeidsforholdId: im.internArbeidsforholdId,
       arbeidsgiverNavn: arbeidsgiverOpplysningerPerId[im.arbeidsgiverIdent].navn,
-      arbeidsgiverFødselsdato: arbeidsgiverOpplysningerPerId[im.arbeidsgiverIdent].erPrivatPerson
-        ? arbeidsgiverOpplysningerPerId[im.arbeidsgiverIdent].fødselsdato
+      arbeidsgiverFødselsdato: arbeidsgiverOpplysningerPerId[im.arbeidsgiverIdent]?.erPrivatPerson
+        ? arbeidsgiverOpplysningerPerId[im.arbeidsgiverIdent]?.fødselsdato
         : undefined,
       årsak: im.årsak,
       avklaring: im.saksbehandlersVurdering

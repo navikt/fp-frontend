@@ -1,6 +1,4 @@
-import React from 'react';
-
-const ManIcon = () => (
+export const ManIcon = () => (
   <svg
     width="32"
     height="32"
@@ -21,5 +19,3 @@ const ManIcon = () => (
     </g>
   </svg>
 );
-
-export default ManIcon;

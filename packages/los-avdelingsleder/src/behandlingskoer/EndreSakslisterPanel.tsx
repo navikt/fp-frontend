@@ -5,7 +5,7 @@ import { ArrowDownIcon } from '@navikt/aksel-icons';
 import { HStack } from '@navikt/ds-react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
+import type { SaksbehandlerProfil } from '@navikt/fp-los-felles';
 
 import {
   oppgaverForAvdelingAntallOptions,

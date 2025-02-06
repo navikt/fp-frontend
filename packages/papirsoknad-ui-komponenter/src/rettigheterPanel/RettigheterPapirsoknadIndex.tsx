@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Heading, VStack } from '@navikt/ds-react';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { BorderBox } from '@navikt/ft-ui-komponenter';

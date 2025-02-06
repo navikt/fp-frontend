@@ -1,12 +1,12 @@
-import React, { useMemo } from 'react';
-import { FormattedMessage, WrappedComponentProps } from 'react-intl';
+import { useMemo } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Heading, Label, VStack } from '@navikt/ds-react';
 import { DateLabel, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
 import { formaterAdresse, getNyesteAdresse } from '@navikt/fp-fakta-felles';
-import { AdresseType,AksjonspunktKode, NavBrukerKjonn } from '@navikt/fp-kodeverk';
-import { PersonopplysningerBasis, Personoversikt } from '@navikt/fp-types';
+import { AdresseType, AksjonspunktKode, NavBrukerKjonn } from '@navikt/fp-kodeverk';
+import type { PersonopplysningerBasis, Personoversikt } from '@navikt/fp-types';
 
 const lagSøkerdata = ({ aktoerId, navn, kjønn, adresser, dødsdato }: PersonopplysningerBasis) => {
   const postadr = getNyesteAdresse(adresser, AdresseType.POSTADRESSE);
@@ -31,7 +31,8 @@ interface Props {
  *
  * Presentasjonskomponent. Brukes i tilknytning til faktapanel for omsorg.
  */
-const ForeldrePanel = ({ intl, personoversikt, alleMerknaderFraBeslutter }: Props & WrappedComponentProps) => {
+export const ForeldrePanel = ({ personoversikt, alleMerknaderFraBeslutter }: Props) => {
+  const intl = useIntl();
   const beggeForeldre = useMemo(() => {
     const f = [lagSøkerdata(personoversikt.bruker)];
     if (personoversikt.annenPart) {
@@ -73,5 +74,3 @@ const ForeldrePanel = ({ intl, personoversikt, alleMerknaderFraBeslutter }: Prop
     </FaktaGruppe>
   );
 };
-
-export default ForeldrePanel;

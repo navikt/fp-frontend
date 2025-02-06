@@ -4,7 +4,7 @@ import { BodyShort, Heading, Label } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { AnkeVurdering as ankeVurderingType, AnkeVurderingOmgjoer, KodeverkType } from '@navikt/fp-kodeverk';
-import { AnkeVurdering } from '@navikt/fp-types';
+import type { AnkeVurdering } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 interface Props {

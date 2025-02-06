@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ErrorMessage, Heading, VStack } from '@navikt/ds-react';
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 
-import { AlleKodeverk } from '@navikt/fp-types';
+import type { AlleKodeverk } from '@navikt/fp-types';
 
 import {
   GRADERING_PERIODE_FIELD_ARRAY_NAME,
@@ -15,7 +15,7 @@ import {
   TIDSROM_PERMISJON_FORM_NAME_PREFIX,
   UTSETTELSE_PERIODE_FIELD_ARRAY_NAME,
 } from '../constants';
-import { PermisjonFormValues } from '../types';
+import type { PermisjonFormValues } from '../types';
 import { PermisjonFulltUttak } from './fulltUttak/PermisjonFulltUttak';
 import { RenderPermisjonPeriodeFieldArray } from './fulltUttak/RenderPermisjonPeriodeFieldArray';
 import { PermisjonGraderingPanel } from './gradering/PermisjonGraderingPanel';

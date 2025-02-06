@@ -1,9 +1,9 @@
 import { action } from '@storybook/addon-actions';
-import { Meta, ReactRenderer, StoryObj } from '@storybook/react';
-import { DecoratorFunction } from '@storybook/types';
+import type { Meta, ReactRenderer, StoryObj } from '@storybook/react';
+import type { DecoratorFunction } from '@storybook/types';
 
 import { Kommunikasjonsretning } from '@navikt/fp-kodeverk';
-import { Dokument } from '@navikt/fp-types';
+import type { Dokument } from '@navikt/fp-types';
 
 import { DokumenterSakIndex } from './DokumenterSakIndex';
 

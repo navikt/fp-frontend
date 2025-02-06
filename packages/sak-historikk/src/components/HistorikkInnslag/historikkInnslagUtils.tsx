@@ -1,5 +1,3 @@
-import React from 'react';
-
 import dayjs from 'dayjs';
 
 export const formatDateTime = (date: string) => dayjs(date).format('D. MMMM YYYY [kl.] HH:mm');

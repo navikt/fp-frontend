@@ -1,4 +1,3 @@
-import React from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
 import { Heading } from '@navikt/ds-react';

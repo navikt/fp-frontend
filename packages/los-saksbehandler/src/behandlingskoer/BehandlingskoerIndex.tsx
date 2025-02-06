@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { Oppgave, OppgaveStatus } from '@navikt/fp-los-felles';
+import type { Oppgave, OppgaveStatus } from '@navikt/fp-los-felles';
 
 import { reserverOppgavePost, sakslisteOptions } from '../data/fplosSaksbehandlerApi';
 import { OppgaveErReservertAvAnnenModal } from '../reservertAvAnnen/OppgaveErReservertAvAnnenModal';
-import { Saksliste } from '../typer/sakslisteTsType';
+import type { Saksliste } from '../typer/sakslisteTsType';
 import { SakslistePanel } from './SakslistePanel';
 
 const EMPTY_ARRAY: Saksliste[] = [];

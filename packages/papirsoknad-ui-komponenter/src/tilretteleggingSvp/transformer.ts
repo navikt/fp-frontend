@@ -1,4 +1,4 @@
-import { FormValues, TilretteleggingArbeidsforhold } from './types';
+import type { FormValues, TilretteleggingArbeidsforhold } from './types';
 
 export const transformTilretteleggingsArbeidsforhold = (
   tilretteleggingArbeidsforhold: FormValues['tilretteleggingArbeidsforhold'],

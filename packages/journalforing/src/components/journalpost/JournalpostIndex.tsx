@@ -1,15 +1,13 @@
-import React from 'react';
-
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { useMutation } from '@tanstack/react-query';
 
-import { NavAnsatt } from '@navikt/fp-types';
+import type { NavAnsatt } from '@navikt/fp-types';
 
 import { hentBruker, oppdaterMedBruker } from '../../data/fpFordelApi';
-import { JournalførSubmitValue } from '../../typer/ferdigstillJournalføringSubmit';
-import { Journalpost } from '../../typer/journalpostTsType';
-import { Oppgave } from '../../typer/oppgaveTsType';
-import { ReserverOppgaveType } from '../../typer/reserverOppgaveType';
+import type { JournalførSubmitValue } from '../../typer/ferdigstillJournalføringSubmit';
+import type { Journalpost } from '../../typer/journalpostTsType';
+import type { Oppgave } from '../../typer/oppgaveTsType';
+import type { ReserverOppgaveType } from '../../typer/reserverOppgaveType';
 import { JournalpostDetaljer } from './JournalpostDetaljer';
 import { DokumentIndex } from './pdf/DokumentIndex';
 

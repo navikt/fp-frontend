@@ -1,12 +1,11 @@
-import React, { FC } from 'react';
 import { useIntl } from 'react-intl';
 
 import { AvsnittSkiller } from '@navikt/ft-ui-komponenter';
 
 import { erPersonAdresserLike, FaktaKilde, Personopplysninger } from '@navikt/fp-fakta-felles';
-import { AlleKodeverk, Medlemskap,MedlemskapAvvik } from '@navikt/fp-types';
+import { type AlleKodeverk, type Medlemskap, MedlemskapAvvik } from '@navikt/fp-types';
 
-import EkspansjonsKort from '../ekspansjonsKort/EkspansjonsKort';
+import { EkspansjonsKort } from '../ekspansjonsKort/EkspansjonsKort';
 import { relevantForAdresser } from '../ekspansjonsKort/medlemsAvvik';
 
 interface Props {
@@ -18,14 +17,14 @@ interface Props {
   skalViseAvvik: boolean;
 }
 
-const OpplysningerOmAdresser: FC<Props> = ({
+export const OpplysningerOmAdresser = ({
   avvik = [],
   medlemskap: { adresser, annenpart },
   brukerNavn,
   annenpartNavn,
   alleKodeverk,
   skalViseAvvik,
-}) => {
+}: Props) => {
   const intl = useIntl();
   const brukerAdresser = adresser.map(ap => ap.adresse);
   const annenpartAdresser = annenpart?.adresser.map(ap => ap.adresse) ?? [];
@@ -65,5 +64,3 @@ const OpplysningerOmAdresser: FC<Props> = ({
     </EkspansjonsKort>
   );
 };
-
-export default OpplysningerOmAdresser;

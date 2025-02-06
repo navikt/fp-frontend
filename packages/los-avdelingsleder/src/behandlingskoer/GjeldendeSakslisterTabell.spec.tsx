@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { composeStories } from '@storybook/react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -11,7 +9,7 @@ const { TabellNårDetIkkeFinnesBehandlingskøer, TabellNårDetFinnesEnBehandling
 
 describe('<GjeldendeSakslisterTabell>', () => {
   it('skal vise at ingen behandlingskøer er laget og så legge til en ny kø', async () => {
-    await applyRequestHandlers(TabellNårDetIkkeFinnesBehandlingskøer.parameters.msw);
+    await applyRequestHandlers(TabellNårDetIkkeFinnesBehandlingskøer.parameters['msw']);
     render(<TabellNårDetIkkeFinnesBehandlingskøer />);
     expect(await screen.findByText('Ingen behandlingskøer er laget')).toBeInTheDocument();
     expect(screen.queryByText('Navn')).not.toBeInTheDocument();
@@ -23,7 +21,7 @@ describe('<GjeldendeSakslisterTabell>', () => {
   });
 
   it('skal vise slette kø ved å trykke på ikon for sletting', async () => {
-    await applyRequestHandlers(TabellNårDetFinnesEnBehandlingskø.parameters.msw);
+    await applyRequestHandlers(TabellNårDetFinnesEnBehandlingskø.parameters['msw']);
     render(<TabellNårDetFinnesEnBehandlingskø />);
     expect(await screen.findByText('Navn')).toBeInTheDocument();
 
@@ -37,7 +35,7 @@ describe('<GjeldendeSakslisterTabell>', () => {
   });
 
   it('skal legge til en ny kø ved bruk av tastaturet (enter)', async () => {
-    await applyRequestHandlers(TabellNårDetIkkeFinnesBehandlingskøer.parameters.msw);
+    await applyRequestHandlers(TabellNårDetIkkeFinnesBehandlingskøer.parameters['msw']);
     render(<TabellNårDetIkkeFinnesBehandlingskøer />);
     expect(await screen.findByText('Ingen behandlingskøer er laget')).toBeInTheDocument();
     expect(screen.queryByText('Navn')).not.toBeInTheDocument();

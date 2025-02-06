@@ -8,14 +8,14 @@ const { Default, VisFeilmeldingSomLiggIUrl, VisTekniskFeilmelding, SkjulFeilmeld
 
 describe('Dekorator', () => {
   it('skal vise dekorator', async () => {
-    await applyRequestHandlers(Default.parameters.msw);
+    await applyRequestHandlers(Default.parameters['msw']);
     render(<Default />);
     expect(await screen.findByText('Svangerskap, fødsel og adopsjon')).toBeInTheDocument();
     expect(await screen.findByText('Sara Saksbehandler')).toBeInTheDocument();
   });
 
   it('skal vise feilmeldinger som ligger i URL', async () => {
-    await applyRequestHandlers(VisFeilmeldingSomLiggIUrl.parameters.msw);
+    await applyRequestHandlers(VisFeilmeldingSomLiggIUrl.parameters['msw']);
     render(<VisFeilmeldingSomLiggIUrl />);
 
     expect(await screen.findByText('Svangerskap, fødsel og adopsjon')).toBeInTheDocument();
@@ -23,7 +23,7 @@ describe('Dekorator', () => {
   });
 
   it('skal vise feilmeldinger som oppstår ved kodefeil', async () => {
-    await applyRequestHandlers(VisTekniskFeilmelding.parameters.msw);
+    await applyRequestHandlers(VisTekniskFeilmelding.parameters['msw']);
     render(<VisTekniskFeilmelding />);
 
     expect(await screen.findByText('Svangerskap, fødsel og adopsjon')).toBeInTheDocument();
@@ -31,7 +31,7 @@ describe('Dekorator', () => {
   });
 
   it('skal ikke vise feilmelding når den er skjult manuelt', async () => {
-    await applyRequestHandlers(SkjulFeilmelding.parameters.msw);
+    await applyRequestHandlers(SkjulFeilmelding.parameters['msw']);
     render(<SkjulFeilmelding />);
 
     expect(await screen.findByText('Svangerskap, fødsel og adopsjon')).toBeInTheDocument();

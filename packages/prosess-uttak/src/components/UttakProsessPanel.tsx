@@ -1,12 +1,12 @@
-import { ReactElement, useCallback, useEffect, useMemo, useState } from 'react';
-import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+import { type ReactElement, useCallback, useEffect, useMemo, useState } from 'react';
+import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { Alert, Button, Heading, HStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML, OverstyringKnapp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode, AksjonspunktStatus, PeriodeResultatType, StonadskontoType } from '@navikt/fp-kodeverk';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
-import {
+import type {
   Aksjonspunkt,
   ArbeidsgiverOpplysningerPerId,
   FamilieHendelseSamling,
@@ -17,12 +17,12 @@ import {
   UttakStonadskontoer,
   Ytelsefordeling,
 } from '@navikt/fp-types';
-import { UttakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { UttakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
-import UttakPeriodePanel from './periodeDetaljer/UttakPeriodePanel';
-import DisponibleStonadskontoerPanel from './stonadsdagerOversikt/DisponibleStonadskontoerPanel';
-import UttakTidslinjeIndex from './tidslinje/UttakTidslinjeIndex';
+import { UttakPeriodePanel } from './periodeDetaljer/UttakPeriodePanel';
+import { DisponibleStonadskontoerPanel } from './stonadsdagerOversikt/DisponibleStonadskontoerPanel';
+import { UttakTidslinjeIndex } from './tidslinje/UttakTidslinjeIndex';
 
 const UTTAK_PANEL_AKSJONSPUNKT_KODER = {
   5067: 'UttakPanel.Aksjonspunkt.5067',

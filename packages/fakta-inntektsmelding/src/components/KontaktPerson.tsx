@@ -1,7 +1,6 @@
-import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Inntektsmelding } from '@navikt/fp-types';
+import type { Inntektsmelding } from '@navikt/fp-types';
 
 import { InntektsmeldingInfoBlokk } from './InntektsmeldingInfoBlokk';
 

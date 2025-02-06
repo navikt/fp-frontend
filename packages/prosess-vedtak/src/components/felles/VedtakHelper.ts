@@ -5,7 +5,7 @@ import {
   VilkarType,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
-import { AlleKodeverk, SimuleringResultat, TilbakekrevingValg, Vilkar } from '@navikt/fp-types';
+import type { AlleKodeverk, SimuleringResultat, TilbakekrevingValg, Vilkar } from '@navikt/fp-types';
 
 const tilbakekrevingMedInntrekk = (tilbakekrevingKode: string, simuleringResultat: SimuleringResultat): boolean =>
   tilbakekrevingKode === TilbakekrevingVidereBehandling.TILBAKEKR_OPPRETT &&

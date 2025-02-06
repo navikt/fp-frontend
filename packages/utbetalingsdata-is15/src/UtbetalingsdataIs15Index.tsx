@@ -1,9 +1,8 @@
-import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { InfotrygdVedtak } from '@navikt/fp-types';
+import type { InfotrygdVedtak } from '@navikt/fp-types';
 
 import { UtbetalingsdataPanel } from './components/UtbetalingsdataPanel';
 

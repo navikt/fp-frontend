@@ -13,14 +13,14 @@ import {
   ProsessStegBegrunnelseTextFieldNew,
   VilkarResultPicker,
 } from '@navikt/fp-prosess-felles';
-import {
+import type {
   Aksjonspunkt,
   ArbeidsforholdFodselOgTilrettelegging,
   ArbeidsforholdTilretteleggingDato,
   Behandling,
   FodselOgTilrettelegging,
 } from '@navikt/fp-types';
-import { BekreftSvangerskapspengervilkarAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { BekreftSvangerskapspengervilkarAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 const finnesUttakPåArbfor = (arbfor: ArbeidsforholdFodselOgTilrettelegging): boolean => {

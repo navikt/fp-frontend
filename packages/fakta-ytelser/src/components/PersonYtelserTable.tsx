@@ -1,4 +1,3 @@
-import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
 import { BodyShort, Link } from '@navikt/ds-react';
@@ -6,11 +5,11 @@ import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import moment from 'moment';
 
-import { RelatertTilgrensedYtelse } from '@navikt/fp-types';
+import type { RelatertTilgrensedYtelse } from '@navikt/fp-types';
 
 import styles from './personYtelserTable.module.css';
 
-interface OwnProps {
+interface Props {
   ytelser?: RelatertTilgrensedYtelse[];
 }
 
@@ -31,7 +30,7 @@ const formatDateToDDMMYYYY = (date: string): string => {
  *
  * Viser tilgrensede ytelser.
  */
-const PersonYtelserTable: FunctionComponent<OwnProps> = ({ ytelser }) => {
+export const PersonYtelserTable = ({ ytelser }: Props) => {
   const intl = useIntl();
 
   const ytelseRows = ytelser
@@ -98,5 +97,3 @@ const PersonYtelserTable: FunctionComponent<OwnProps> = ({ ytelser }) => {
     </Table>
   );
 };
-
-export default PersonYtelserTable;

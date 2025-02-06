@@ -3,10 +3,10 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { Behandling, KodeverkMedNavn } from '@navikt/fp-types';
+import type { Behandling, KodeverkMedNavn } from '@navikt/fp-types';
 
 import { HenlagtBehandlingModal } from './components/HenlagtBehandlingModal';
-import { FormValues, HenleggBehandlingModal } from './components/HenleggBehandlingModal';
+import { type FormValues, HenleggBehandlingModal } from './components/HenleggBehandlingModal';
 
 import messages from '../i18n/nb_NO.json';
 

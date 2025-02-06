@@ -1,4 +1,3 @@
-import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { FileFillIcon, PhoneFillIcon } from '@navikt/aksel-icons';
@@ -7,16 +6,16 @@ import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-u
 import { formatCurrencyNoKr } from '@navikt/ft-utils';
 
 import { hentDokumentLenke } from '@navikt/fp-konstanter';
-import { Inntektsmelding } from '@navikt/fp-types';
+import type { Inntektsmelding } from '@navikt/fp-types';
 
 import styles from './inntektsmeldingOpplysningerPanel.module.css';
 
-interface OwnProps {
+interface Props {
   saksnummer: string;
   inntektsmelding: Inntektsmelding;
 }
 
-const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({ saksnummer, inntektsmelding }) => (
+export const InntektsmeldingOpplysningerPanel = ({ saksnummer, inntektsmelding }: Props) => (
   <>
     <VerticalSpacer eightPx />
     <FlexContainer>
@@ -110,5 +109,3 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({ saksnum
     <VerticalSpacer thirtyTwoPx />
   </>
 );
-
-export default InntektsmeldingOpplysningerPanel;

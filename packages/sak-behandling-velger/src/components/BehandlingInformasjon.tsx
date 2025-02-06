@@ -1,4 +1,3 @@
-import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ChevronDownIcon, ChevronUpIcon, StarFillIcon } from '@navikt/aksel-icons';
@@ -6,7 +5,7 @@ import { BodyShort, Box, HStack, Label, Spacer, Tooltip, VStack } from '@navikt/
 import { DateTimeLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { BehandlingArsakType, BehandlingType, KodeverkType } from '@navikt/fp-kodeverk';
-import { BehandlingAppKontekst, KodeverkMedNavn } from '@navikt/fp-types';
+import type { BehandlingAppKontekst, KodeverkMedNavn } from '@navikt/fp-types';
 
 import styles from './behandlingInformasjon.module.css';
 

@@ -1,6 +1,6 @@
-import { FamilieHendelse, Soknad } from '@navikt/fp-types';
+import type { FamilieHendelse, Soknad } from '@navikt/fp-types';
 
-import isFieldEdited from './isFieldEdited';
+import { isFieldEdited } from './isFieldEdited';
 
 const soknad = {
   soknadType: 'ST-001',

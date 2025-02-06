@@ -2,11 +2,11 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { BehandlingType, KodeverkType } from '@navikt/fp-kodeverk';
 import { MenySettPaVentIndex } from '@navikt/fp-sak-meny-sett-pa-vent';
-import { Behandling } from '@navikt/fp-types';
+import type { Behandling } from '@navikt/fp-types';
+import { notEmpty } from '@navikt/fp-utils';
 
 import { useBehandlingApi } from '../../data/behandlingApi';
 import { useFagsakApi } from '../../data/fagsakApi';
-import { notEmpty } from '../../data/notEmpty';
 import { MenyKodeverk } from '../MenyKodeverk';
 
 interface Props {

@@ -1,20 +1,16 @@
-import React, { FunctionComponent, useState } from 'react';
+import { useState } from 'react';
 
-import { AlleKodeverk,ArbeidsgiverOpplysningerPerId, Feriepengegrunnlag } from '@navikt/fp-types';
+import type { AlleKodeverk, ArbeidsgiverOpplysningerPerId, Feriepengegrunnlag } from '@navikt/fp-types';
 
-import FeriepengerPanel from './FeriepengerPanel';
+import { FeriepengerPanel } from './FeriepengerPanel';
 
-interface OwnProps {
+interface Props {
   feriepengegrunnlag: Feriepengegrunnlag;
   alleKodeverk: AlleKodeverk;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
-const FeriepengerIndex: FunctionComponent<OwnProps> = ({
-  feriepengegrunnlag,
-  alleKodeverk,
-  arbeidsgiverOpplysningerPerId,
-}) => {
+export const FeriepengerIndex = ({ feriepengegrunnlag, alleKodeverk, arbeidsgiverOpplysningerPerId }: Props) => {
   const [erPanelApent, togglePanel] = useState(false);
   return (
     <FeriepengerPanel
@@ -26,5 +22,3 @@ const FeriepengerIndex: FunctionComponent<OwnProps> = ({
     />
   );
 };
-
-export default FeriepengerIndex;

@@ -1,16 +1,15 @@
-import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort,Label } from '@navikt/ds-react';
-import { PeriodLabel,VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { BodyShort, Label } from '@navikt/ds-react';
+import { PeriodLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { AoIArbeidsforhold } from '@navikt/fp-types';
+import type { AoIArbeidsforhold } from '@navikt/fp-types';
 
-interface OwnProps {
+interface Props {
   arbeidsforhold: AoIArbeidsforhold;
 }
 
-const PermisjonPeriode: FunctionComponent<OwnProps> = ({ arbeidsforhold }) => {
+export const PermisjonPeriode = ({ arbeidsforhold }: Props) => {
   if (arbeidsforhold.permisjonOgMangel) {
     return (
       <>
@@ -32,5 +31,3 @@ const PermisjonPeriode: FunctionComponent<OwnProps> = ({ arbeidsforhold }) => {
   }
   return null;
 };
-
-export default PermisjonPeriode;

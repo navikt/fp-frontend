@@ -6,11 +6,11 @@ import { Form } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton, PersonopplysningerForFamilie } from '@navikt/fp-fakta-felles';
-import { Aksjonspunkt, Personoversikt, Ytelsefordeling } from '@navikt/fp-types';
-import { BekreftOmsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { Aksjonspunkt, Personoversikt, Ytelsefordeling } from '@navikt/fp-types';
+import type { BekreftOmsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
-import { FormValues as OmsorgFormValues, OmsorgFaktaFields } from './OmsorgFaktaFields';
+import { type FormValues as OmsorgFormValues, OmsorgFaktaFields } from './OmsorgFaktaFields';
 
 const createInitialValues = (ytelsefordeling: Ytelsefordeling, aksjonspunkter: Aksjonspunkt[]): FormValues => {
   return {

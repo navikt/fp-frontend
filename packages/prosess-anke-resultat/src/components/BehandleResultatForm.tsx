@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Detail, Heading, Label } from '@navikt/ds-react';
@@ -10,7 +10,7 @@ import {
   getKodeverknavnFn,
   KodeverkType,
 } from '@navikt/fp-kodeverk';
-import { AlleKodeverk, AnkeVurdering } from '@navikt/fp-types';
+import type { AlleKodeverk, AnkeVurdering } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 interface Props {

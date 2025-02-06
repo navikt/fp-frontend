@@ -3,7 +3,7 @@ import { expect } from 'vitest';
 
 import { AdresseType } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import { AlleKodeverk, Medlemskap } from '@navikt/fp-types';
+import type { AlleKodeverk, Medlemskap } from '@navikt/fp-types';
 
 import { formaterUtenlandsopphold, getSisteBostedsLand, getSistePersonstatus, getSisteRegion } from './situasjonUtils';
 

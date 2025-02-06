@@ -1,8 +1,6 @@
-import React from 'react';
-
 import { ToggleGroup } from '@navikt/ds-react';
 
-import { JournalDokument } from '../../../typer/journalDokumentTsType';
+import type { JournalDokument } from '../../../typer/journalDokumentTsType';
 
 import styles from './dokumentVelger.module.css';
 

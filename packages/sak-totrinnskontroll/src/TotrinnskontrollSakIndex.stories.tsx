@@ -1,12 +1,12 @@
 import { action } from '@storybook/addon-actions';
-import { Meta, ReactRenderer, StoryObj } from '@storybook/react';
-import { DecoratorFunction } from '@storybook/types';
+import type { Meta, ReactRenderer, StoryObj } from '@storybook/react';
+import type { DecoratorFunction } from '@storybook/types';
 
 import { BehandlingResultatType, BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { alleKodeverk, withRouter } from '@navikt/fp-storybook-utils';
-import { BehandlingAppKontekst, BehandlingÅrsak, TotrinnskontrollSkjermlenkeContext } from '@navikt/fp-types';
+import type { BehandlingAppKontekst, BehandlingÅrsak, TotrinnskontrollSkjermlenkeContext } from '@navikt/fp-types';
 
-import { ApData, TotrinnskontrollSakIndex } from './TotrinnskontrollSakIndex';
+import { type ApData, TotrinnskontrollSakIndex } from './TotrinnskontrollSakIndex';
 
 const LOCATION = {
   key: '1',

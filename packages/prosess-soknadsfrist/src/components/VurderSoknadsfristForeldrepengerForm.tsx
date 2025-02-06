@@ -17,8 +17,8 @@ import moment from 'moment';
 
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
-import { Aksjonspunkt, Søknadsfrist } from '@navikt/fp-types';
-import { VurderSoknadsfristAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { Aksjonspunkt, Søknadsfrist } from '@navikt/fp-types';
+import type { VurderSoknadsfristAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import styles from './vurderSoknadsfristForeldrepengerForm.module.css';

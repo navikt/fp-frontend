@@ -1,6 +1,6 @@
-import React, { FunctionComponent, ReactElement, useMemo } from 'react';
-import { useFieldArray, useFormContext, UseFormGetValues } from 'react-hook-form';
-import { IntlShape, useIntl } from 'react-intl';
+import { type ReactElement, useMemo } from 'react';
+import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook-form';
+import { type IntlShape, useIntl } from 'react-intl';
 
 import { BodyShort, HStack } from '@navikt/ds-react';
 import { NumberField, SelectField } from '@navikt/ft-form-hooks';
@@ -16,11 +16,16 @@ import {
 import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 
 import { UttakArbeidType, UttakPeriodeType } from '@navikt/fp-kodeverk';
-import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, PeriodeSoker, PeriodeSokerAktivitet } from '@navikt/fp-types';
+import type {
+  ArbeidsgiverOpplysningerPerId,
+  KodeverkMedNavn,
+  PeriodeSoker,
+  PeriodeSokerAktivitet,
+} from '@navikt/fp-types';
 
-import lagVisningsNavn from '../../utils/lagVisningsNavn';
-import uttakArbeidTypeTekstCodes from '../../utils/uttakArbeidTypeCodes';
-import { UttakAktivitetType } from './UttakAktivitetType';
+import { lagVisningsNavn } from '../../utils/lagVisningsNavn';
+import { uttakArbeidTypeTekstCodes } from '../../utils/uttakArbeidTypeCodes';
+import type { UttakAktivitetType } from './UttakAktivitetType';
 
 import styles from './uttakAktiviteterTabell.module.css';
 
@@ -156,7 +161,7 @@ const validerAtUkerEllerDagerErStørreEnn0NårUtsettelseOgOppfylt =
       : null;
   };
 
-interface OwnProps {
+interface Props {
   periodeTyper: KodeverkMedNavn[];
   isReadOnly: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -165,14 +170,14 @@ interface OwnProps {
   valgtPeriode: PeriodeSoker;
 }
 
-const UttakAktiviteterTabell: FunctionComponent<OwnProps> = ({
+export const UttakAktiviteterTabell = ({
   periodeTyper,
   isReadOnly,
   arbeidsgiverOpplysningerPerId,
   aktiviteter,
   erOppfylt,
   valgtPeriode,
-}) => {
+}: Props) => {
   const intl = useIntl();
 
   const { control, getValues, watch } = useFormContext<UttakAktivitetType>();
@@ -297,5 +302,3 @@ const UttakAktiviteterTabell: FunctionComponent<OwnProps> = ({
     </div>
   );
 };
-
-export default UttakAktiviteterTabell;

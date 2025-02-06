@@ -1,4 +1,3 @@
-import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
 import { RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
@@ -9,23 +8,23 @@ import {
   KlageVurdering as klageVurderingType,
   KlageVurderingOmgjoer as klageVurderingOmgjoerType,
 } from '@navikt/fp-kodeverk';
-import { KodeverkMedNavn } from '@navikt/fp-types';
+import type { KodeverkMedNavn } from '@navikt/fp-types';
 
 import styles from './klageVurderingRadioOptionsNfp.module.css';
 
-interface OwnProps {
+interface Props {
   readOnly: boolean;
   medholdReasons: KodeverkMedNavn[];
   alleHjemmlerMedNavn: KodeverkMedNavn[];
   klageVurdering?: string;
 }
 
-const KlageVurderingRadioOptionsNfp: FunctionComponent<OwnProps> = ({
+export const KlageVurderingRadioOptionsNfp = ({
   readOnly,
   medholdReasons,
   alleHjemmlerMedNavn,
   klageVurdering,
-}) => {
+}: Props) => {
   const intl = useIntl();
   const medholdOptions = medholdReasons.map((mo: KodeverkMedNavn) => (
     <option key={mo.kode} value={mo.kode}>
@@ -103,5 +102,3 @@ const KlageVurderingRadioOptionsNfp: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-
-export default KlageVurderingRadioOptionsNfp;

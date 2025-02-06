@@ -1,5 +1,5 @@
-import React, { useMemo, useState } from 'react';
-import { useForm, UseFormGetValues } from 'react-hook-form';
+import { useMemo, useState } from 'react';
+import { useForm, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { TrashFillIcon } from '@navikt/aksel-icons';
@@ -19,10 +19,10 @@ import {
 import { OkAvbrytModal, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
-import { ManueltArbeidsforhold } from '@navikt/fp-types';
+import type { ManueltArbeidsforhold } from '@navikt/fp-types';
 
 import { useSetDirtyForm } from '../../DirtyFormProvider';
-import { ArbeidsforholdOgInntektRadData } from '../../types/arbeidsforholdOgInntekt';
+import type { ArbeidsforholdOgInntektRadData } from '../../types/arbeidsforholdOgInntekt';
 
 export const MANUELT_ORG_NR = '342352362';
 

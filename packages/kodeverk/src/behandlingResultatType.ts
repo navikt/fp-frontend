@@ -69,5 +69,3 @@ export const isKlageOmgjort = (behandlingResultatTypeKode: string): boolean =>
 
 export const isKlageAvvist = (behandlingResultatTypeKode?: string): boolean =>
   behandlingResultatTypeKode === BehandlingResultatType.KLAGE_AVVIST;
-
-export default BehandlingResultatType;

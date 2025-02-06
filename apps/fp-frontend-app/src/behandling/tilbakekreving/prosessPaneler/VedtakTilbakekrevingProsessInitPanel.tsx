@@ -1,9 +1,9 @@
-import { ComponentProps, use, useState } from 'react';
+import { type ComponentProps, use, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useNavigate } from 'react-router';
 
 import {
-  ForhandsvisData,
+  type ForhandsvisData,
   VedtakAksjonspunktCode,
   VedtakTilbakekrevingProsessIndex,
 } from '@navikt/ft-prosess-tilbakekreving-vedtak';
@@ -19,14 +19,14 @@ import {
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import { AlleKodeverkTilbakekreving, Behandlingsresultat } from '@navikt/fp-types';
+import type { AlleKodeverkTilbakekreving, Behandlingsresultat } from '@navikt/fp-types';
 import { useFormData } from '@navikt/fp-utils';
 
 import { forhåndsvisVedtaksbrev, useBehandlingApi } from '../../../data/behandlingApi';
 import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
-import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
+import type { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 import { ÅpenRevurderingModal } from '../modaler/ÅpenRevurderingModal';
 

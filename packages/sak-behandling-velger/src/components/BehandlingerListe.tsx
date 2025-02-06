@@ -1,11 +1,11 @@
-import React, { ReactElement, useMemo } from 'react';
+import { type ReactElement, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Box, Label } from '@navikt/ds-react';
 import moment from 'moment';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
-import { BehandlingAppKontekst, KodeverkMedNavn } from '@navikt/fp-types';
+import type { BehandlingAppKontekst, KodeverkMedNavn } from '@navikt/fp-types';
 
 import { BehandlingListeRad } from './BehandlingListeRad';
 

@@ -1,13 +1,13 @@
-import React, { FunctionComponent, useMemo } from 'react';
+import { useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort,Label } from '@navikt/ds-react';
+import { BodyShort, Label } from '@navikt/ds-react';
 import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { getKodeverknavnFn,KodeverkType } from '@navikt/fp-kodeverk';
-import { AlleKodeverk,ArbeidsgiverOpplysningerPerId, FeriepengegrunnlagAndel } from '@navikt/fp-types';
+import { getKodeverknavnFn, KodeverkType } from '@navikt/fp-kodeverk';
+import type { AlleKodeverk, ArbeidsgiverOpplysningerPerId, FeriepengegrunnlagAndel } from '@navikt/fp-types';
 
 const finnAlleAndelerForOpptjeningsår = (
   andeler: FeriepengegrunnlagAndel[],
@@ -80,19 +80,19 @@ const HEADER_TEXT_CODES = [
   'TilkjentYtelse.Feriepenger.GrunnlagSøker',
 ];
 
-interface OwnProps {
+interface Props {
   alleAndeler: FeriepengegrunnlagAndel[];
   opptjeningsår: number;
   alleKodeverk: AlleKodeverk;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
-const FeriepengerPrAar: FunctionComponent<OwnProps> = ({
+export const FeriepengerPrAar = ({
   alleAndeler,
   opptjeningsår,
   alleKodeverk,
   arbeidsgiverOpplysningerPerId,
-}) => {
+}: Props) => {
   const harIngenAndeler = !alleAndeler || alleAndeler.length < 1;
 
   const alleAndelerForÅret = useMemo(
@@ -132,5 +132,3 @@ const FeriepengerPrAar: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-
-export default FeriepengerPrAar;

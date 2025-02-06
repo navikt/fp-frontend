@@ -1,4 +1,3 @@
-import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
@@ -6,7 +5,7 @@ import dayjs from 'dayjs';
 
 import { ReactECharts } from '@navikt/fp-los-felles';
 
-import { NyeOgFerdigstilteOppgaver } from '../../../typer/nyeOgFerdigstilteOppgaverTsType';
+import type { NyeOgFerdigstilteOppgaver } from '../../../typer/nyeOgFerdigstilteOppgaverTsType';
 
 export const slaSammenBehandlingstyperOgFyllInnTomme = (
   nyeOgFerdigstilteOppgaver: NyeOgFerdigstilteOppgaver[],

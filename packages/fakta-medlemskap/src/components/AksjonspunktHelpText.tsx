@@ -1,4 +1,3 @@
-import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { ExclamationmarkIcon, XMarkOctagonIcon } from '@navikt/aksel-icons';
@@ -6,10 +5,11 @@ import { Alert, VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktStatus } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt, ManuellBehandlingResultat, Medlemskap,MedlemskapAvvik } from '@navikt/fp-types';
+import type { Aksjonspunkt, ManuellBehandlingResultat, Medlemskap } from '@navikt/fp-types';
+import { MedlemskapAvvik } from '@navikt/fp-types';
 
 import { MedlemskapVurdering } from '../types/vurderingMedlemskapForm';
-import InfoBox from './InfoBox';
+import { InfoBox } from './InfoBox';
 
 interface Props {
   aksjonspunkter: Aksjonspunkt[];
@@ -43,9 +43,10 @@ const getVurdering = (resultat: ManuellBehandlingResultat): MedlemskapVurdering 
       return MedlemskapVurdering.OPPFYLT;
     }
   }
+  return undefined;
 };
 
-const AksjonspunktHelpText = ({ aksjonspunkter, medlemskap }: Props) => {
+export const AksjonspunktHelpText = ({ aksjonspunkter, medlemskap }: Props) => {
   const intl = useIntl();
 
   if (medlemskap.avvik) {
@@ -86,5 +87,3 @@ const AksjonspunktHelpText = ({ aksjonspunkter, medlemskap }: Props) => {
   }
   return <></>;
 };
-
-export default AksjonspunktHelpText;

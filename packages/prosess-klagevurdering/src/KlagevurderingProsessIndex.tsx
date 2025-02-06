@@ -3,13 +3,13 @@ import { RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { KlageVurdering } from '@navikt/fp-types';
+import type { KlageVurdering } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { BehandleKlageFormKa } from './components/ka/BehandleKlageFormKa';
 import { BehandleKlageFormNfp } from './components/nfp/BehandleKlageFormNfp';
-import { BrevData } from './components/nfp/PreviewKlageLink';
-import { TransformedValues } from './components/nfp/TempsaveKlageButton';
+import { type BrevData } from './components/nfp/PreviewKlageLink';
+import { type TransformedValues } from './components/nfp/TempsaveKlageButton';
 
 import messages from '../i18n/nb_NO.json';
 

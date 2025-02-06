@@ -1,7 +1,8 @@
-import { DokumentasjonVurderingBehov, UttakÅrsak,UttakType, UttakVurdering } from '@navikt/fp-types';
+import { assertUnreachable } from '@navikt/ft-utils';
 
-import FormValues, { VurderingsAlternativ } from '../../../types/FormValues';
-import assertUnreachable from '../../utils/switchCaseUtils';
+import { type DokumentasjonVurderingBehov, UttakÅrsak, UttakType, UttakVurdering } from '@navikt/fp-types';
+
+import { type FormValues, VurderingsAlternativ } from '../../types/FormValues';
 
 export function erUttaksperiodeMedAktivitetskravArbeid(type: UttakType, årsak: UttakÅrsak) {
   return årsak === UttakÅrsak.AKTIVITETSKRAV_ARBEID && type === UttakType.UTTAK;

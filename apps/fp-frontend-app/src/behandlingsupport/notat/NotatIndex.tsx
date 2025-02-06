@@ -3,10 +3,10 @@ import { useIntl } from 'react-intl';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { NotatSakIndex } from '@navikt/fp-sak-notat';
-import { Fagsak } from '@navikt/fp-types';
+import type { Fagsak } from '@navikt/fp-types';
+import { notEmpty } from '@navikt/fp-utils';
 
 import { FagsakRel, initFetchOptions, useFagsakApi } from '../../data/fagsakApi';
-import { notEmpty } from '../../data/notEmpty';
 import { SupportHeaderAndContent } from '../SupportHeader';
 
 interface Props {

@@ -1,9 +1,8 @@
-import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { render, screen } from '@testing-library/react';
 
-import { OpptjeningAktiviteter } from '@navikt/fp-types';
+import type { OpptjeningAktiviteter } from '@navikt/fp-types';
 import { getIntlMock } from '@navikt/fp-utils-test';
 
 import { OpptjeningTotrinnText } from './OpptjeningTotrinnText';

@@ -1,6 +1,6 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
-import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
+import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 
 // Oppstod for alle besteberegninger i en periode
 export type KontrollerBesteberegningAP = {
@@ -12,6 +12,4 @@ export type ManuellKontrollBesteberegningAP = {
   besteberegningErKorrekt: boolean;
 } & AksjonspunktTilBekreftelse<AksjonspunktKode.MANUELL_KONTROLL_AV_BESTEBEREGNING>;
 
-type BesteberegningAP = ManuellKontrollBesteberegningAP | KontrollerBesteberegningAP;
-
-export default BesteberegningAP;
+export type BesteberegningAP = ManuellKontrollBesteberegningAP | KontrollerBesteberegningAP;

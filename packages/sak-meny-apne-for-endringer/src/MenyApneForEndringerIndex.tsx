@@ -1,4 +1,3 @@
-import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { OkAvbrytModal } from '@navikt/ft-ui-komponenter';

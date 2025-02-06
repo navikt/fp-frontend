@@ -1,16 +1,16 @@
-import { ComponentProps } from 'react';
+import { type ComponentProps } from 'react';
 
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import {
-  PanelDataArgs,
-  PanelOverstyringContextArgs,
+  type PanelDataArgs,
+  type PanelOverstyringContextArgs,
   withFormData,
   withPanelData,
   withPanelOverstyring,
 } from '@navikt/fp-storybook-utils';
-import { Aksjonspunkt } from '@navikt/fp-types';
+import type { Aksjonspunkt } from '@navikt/fp-types';
 
 import { BeregningsresultatProsessIndex } from './BeregningsresultatProsessIndex';
 

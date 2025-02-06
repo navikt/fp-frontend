@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -8,8 +8,8 @@ import { Form, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt, Fagsak, Soknad } from '@navikt/fp-types';
-import { OverstyringDekningsgradAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { Aksjonspunkt, Fagsak, Soknad } from '@navikt/fp-types';
+import type { OverstyringDekningsgradAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import styles from './dekningradForm.module.css';
 
@@ -21,7 +21,7 @@ type FormValues = {
   begrunnelse: string;
 };
 
-interface OwnProps {
+interface Props {
   aksjonspunkt?: Aksjonspunkt;
   fagsak: Fagsak;
   søknad: Soknad;
@@ -30,14 +30,14 @@ interface OwnProps {
   kanOverstyreAccess: boolean;
 }
 
-const DekningradForm: FunctionComponent<OwnProps> = ({
+export const DekningradForm = ({
   aksjonspunkt,
   fagsak,
   søknad,
   submitCallback,
   readOnly,
   kanOverstyreAccess,
-}) => {
+}: Props) => {
   const intl = useIntl();
 
   const dekningsgrad =
@@ -190,5 +190,3 @@ const DekningradForm: FunctionComponent<OwnProps> = ({
     </Form>
   );
 };
-
-export default DekningradForm;

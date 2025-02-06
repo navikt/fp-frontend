@@ -1,18 +1,18 @@
 import { queryOptions } from '@tanstack/react-query';
 import ky from 'ky';
 
-import { Oppgave, SaksbehandlerProfil } from '@navikt/fp-los-felles';
-import { AlleKodeverk } from '@navikt/fp-types';
+import type { Oppgave, SaksbehandlerProfil } from '@navikt/fp-los-felles';
+import type { AlleKodeverk } from '@navikt/fp-types';
 
-import { Avdeling } from '../typer/avdelingTsType';
-import { BehandlingVentefrist } from '../typer/behandlingVentefristTsType';
-import { OppgaverForAvdeling } from '../typer/oppgaverForAvdelingTsType';
-import { OppgaveForDato } from '../typer/oppgaverForDatoTsType';
-import { OppgaverForForsteStonadsdag } from '../typer/oppgaverForForsteStonadsdagTsType';
-import { OppgaverSomErApneEllerPaVent } from '../typer/oppgaverSomErApneEllerPaVentTsType';
-import { Reservasjon } from '../typer/reservasjonTsType';
-import { SaksbehandlereOgSaksbehandlerGrupper } from '../typer/saksbehandlereOgSaksbehandlerGrupper';
-import { SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType';
+import type { Avdeling } from '../typer/avdelingTsType';
+import type { BehandlingVentefrist } from '../typer/behandlingVentefristTsType';
+import type { OppgaverForAvdeling } from '../typer/oppgaverForAvdelingTsType';
+import type { OppgaveForDato } from '../typer/oppgaverForDatoTsType';
+import type { OppgaverForForsteStonadsdag } from '../typer/oppgaverForForsteStonadsdagTsType';
+import type { OppgaverSomErApneEllerPaVent } from '../typer/oppgaverSomErApneEllerPaVentTsType';
+import type { Reservasjon } from '../typer/reservasjonTsType';
+import type { SaksbehandlereOgSaksbehandlerGrupper } from '../typer/saksbehandlereOgSaksbehandlerGrupper';
+import type { SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType';
 
 const kyExtended = ky.extend({
   hooks: {

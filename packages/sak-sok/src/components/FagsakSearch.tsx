@@ -1,10 +1,9 @@
-import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { AlleKodeverk, FagsakEnkel } from '@navikt/fp-types';
+import type { AlleKodeverk, FagsakEnkel } from '@navikt/fp-types';
 
 import { FagsakList } from './FagsakList';
 import { SearchForm } from './SearchForm';

@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
-import { FormValues as EndreUtlandFormValues, MenyEndreUtlandIndex } from '@navikt/fp-sak-meny-endre-utland';
-import { Saksmarkering } from '@navikt/fp-types';
+import { type FormValues as EndreUtlandFormValues, MenyEndreUtlandIndex } from '@navikt/fp-sak-meny-endre-utland';
+import type { Saksmarkering } from '@navikt/fp-types';
 
 import { FagsakRel, useFagsakApi } from '../../data/fagsakApi';
 import { useFpSakKodeverk } from '../../data/useKodeverk';

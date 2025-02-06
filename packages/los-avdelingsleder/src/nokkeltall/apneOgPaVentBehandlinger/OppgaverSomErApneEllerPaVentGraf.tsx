@@ -1,12 +1,11 @@
-import React from 'react';
-import { IntlShape, useIntl } from 'react-intl';
+import { type IntlShape, useIntl } from 'react-intl';
 
 import dayjs from 'dayjs';
 
 import { ReactECharts } from '@navikt/fp-los-felles';
 
 import { BehandlingVenteStatus } from '../../kodeverk/behandlingVenteStatus';
-import { OppgaverSomErApneEllerPaVent } from '../../typer/oppgaverSomErApneEllerPaVentTsType';
+import type { OppgaverSomErApneEllerPaVent } from '../../typer/oppgaverSomErApneEllerPaVentTsType';
 
 const UKJENT_DATO = 'UKJENT_DATO';
 

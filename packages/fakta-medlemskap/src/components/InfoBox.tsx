@@ -1,10 +1,10 @@
-import React, { ComponentType, PropsWithChildren, SVGProps } from 'react';
+import type { ComponentType, PropsWithChildren, SVGProps } from 'react';
 
 import { Box, HStack } from '@navikt/ds-react';
 
 type InfoBoxSizeProp = 'small' | 'medium';
 
-const InfoBox = ({
+export const InfoBox = ({
   Icon,
   size = 'small',
   children,
@@ -28,5 +28,3 @@ const InfoBox = ({
     </Box>
   );
 };
-
-export default InfoBox;

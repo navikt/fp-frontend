@@ -1,4 +1,4 @@
-import { BeregningsgrunnlagArbeidsforhold } from './beregningsgrunnlagArbeidsforholdTsType';
+import type { BeregningsgrunnlagArbeidsforhold } from './beregningsgrunnlagArbeidsforholdTsType';
 
 export type TidligereUtbetalinger = Readonly<{
   fom: string;

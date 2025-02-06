@@ -1,13 +1,13 @@
-import { ComponentProps } from 'react';
+import type { ComponentProps } from 'react';
 
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
-import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import { AksjonspunktÅrsak } from '@navikt/fp-types';
 
 import { ArbeidsforholdFaktaIndex } from './ArbeidsforholdFaktaIndex';
-import BekreftetPermisjonStatus from './kodeverk/bekreftetPermisjonStatus';
+import { BekreftetPermisjonStatus } from './kodeverk/bekreftetPermisjonStatus';
 
 import '@navikt/ds-css';
 import '@navikt/ft-form-hooks/dist/style.css';

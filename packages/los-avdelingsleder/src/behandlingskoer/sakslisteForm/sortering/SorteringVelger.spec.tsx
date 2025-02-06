@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -15,7 +13,7 @@ const {
 
 describe('<SorteringVelger>', () => {
   it('skal vise tre sorteringsvalg når mange behandlingstyper er valgt', async () => {
-    await applyRequestHandlers(SorteringsvelgerNårMangeBehandlingstyperErValgt.parameters.msw);
+    await applyRequestHandlers(SorteringsvelgerNårMangeBehandlingstyperErValgt.parameters['msw']);
     render(<SorteringsvelgerNårMangeBehandlingstyperErValgt />);
     expect(await screen.findByText('Dato for behandlingsfrist')).toBeInTheDocument();
     expect(await screen.findByLabelText('Dato for behandlingsfrist')).toBeChecked();
@@ -26,7 +24,7 @@ describe('<SorteringVelger>', () => {
   });
 
   it('skal vise datovelger der dynamisk periode ikke er valgt', async () => {
-    await applyRequestHandlers(SorteringsvelgerNårMangeBehandlingstyperErValgt.parameters.msw);
+    await applyRequestHandlers(SorteringsvelgerNårMangeBehandlingstyperErValgt.parameters['msw']);
     render(<SorteringsvelgerNårMangeBehandlingstyperErValgt />);
     expect(await screen.findByText('Dato for behandlingsfrist')).toBeInTheDocument();
     expect(await screen.findByText('Ta kun med behandlinger med dato')).toBeInTheDocument();
@@ -37,7 +35,7 @@ describe('<SorteringVelger>', () => {
   });
 
   it('skal vise datovelger der dynamisk periode er valgt', async () => {
-    await applyRequestHandlers(SorteringsvelgerNårDynamiskPeriodeErValgt.parameters.msw);
+    await applyRequestHandlers(SorteringsvelgerNårDynamiskPeriodeErValgt.parameters['msw']);
     render(<SorteringsvelgerNårDynamiskPeriodeErValgt />);
     expect(await screen.findByText('Dato for behandlingsfrist')).toBeInTheDocument();
     expect(await screen.findByText('Ta kun med behandlinger med dato')).toBeInTheDocument();
@@ -48,7 +46,7 @@ describe('<SorteringVelger>', () => {
   });
 
   it('skal vise vis beløpvelger når Feilutbetalt beløp er valgt', async () => {
-    await applyRequestHandlers(SorteringsvelgerNårKunTilbakekrevingErValgt.parameters.msw);
+    await applyRequestHandlers(SorteringsvelgerNårKunTilbakekrevingErValgt.parameters['msw']);
     render(<SorteringsvelgerNårKunTilbakekrevingErValgt />);
     expect(await screen.findByText('Dato for behandlingsfrist')).toBeInTheDocument();
 
@@ -60,7 +58,7 @@ describe('<SorteringVelger>', () => {
   });
 
   it('skal vise feilmelding når en skriver inn bokstaver i fra-beløpfelt', async () => {
-    await applyRequestHandlers(SorteringsvelgerNårKunTilbakekrevingErValgt.parameters.msw);
+    await applyRequestHandlers(SorteringsvelgerNårKunTilbakekrevingErValgt.parameters['msw']);
     render(<SorteringsvelgerNårKunTilbakekrevingErValgt />);
     expect(await screen.findByText('Dato for behandlingsfrist')).toBeInTheDocument();
 
@@ -75,7 +73,7 @@ describe('<SorteringVelger>', () => {
   });
 
   it('skal vise feilmelding når en skriver inn bokstaver i til-beløpfelt', async () => {
-    await applyRequestHandlers(SorteringsvelgerNårKunTilbakekrevingErValgt.parameters.msw);
+    await applyRequestHandlers(SorteringsvelgerNårKunTilbakekrevingErValgt.parameters['msw']);
     render(<SorteringsvelgerNårKunTilbakekrevingErValgt />);
     expect(await screen.findByText('Dato for behandlingsfrist')).toBeInTheDocument();
 
@@ -90,7 +88,7 @@ describe('<SorteringVelger>', () => {
   });
 
   it('skal vise fem sorteringsvalg når kun tilbakekreving er valgt', async () => {
-    await applyRequestHandlers(SorteringsvelgerNårKunTilbakekrevingErValgt.parameters.msw);
+    await applyRequestHandlers(SorteringsvelgerNårKunTilbakekrevingErValgt.parameters['msw']);
     render(<SorteringsvelgerNårKunTilbakekrevingErValgt />);
     expect(await screen.findByText('Dato for behandlingsfrist')).toBeInTheDocument();
     expect(await screen.findByLabelText('Dato for behandlingsfrist')).toBeChecked();

@@ -5,20 +5,20 @@ import { Navigate, NavLink, useLocation, useMatch } from 'react-router-dom';
 import { HStack, VStack } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
-import { Location } from 'history';
+import type { Location } from 'history';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
 import { BehandlingVelgerSakIndex } from '@navikt/fp-sak-behandling-velger';
 import { FagsakProfilSakIndex } from '@navikt/fp-sak-fagsak-profil';
 import { UkjentAdresseMeldingIndex } from '@navikt/fp-sak-ukjent-adresse';
-import { Behandling, BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
+import type { Behandling, BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
+import { notEmpty } from '@navikt/fp-utils';
 
 import { ErrorBoundary } from '../app/ErrorBoundary';
 import { getLocationWithDefaultProsessStegAndFakta, pathToBehandling, pathToBehandlinger } from '../app/paths';
 import { BehandlingMenuIndex } from '../behandlingmenu/BehandlingMenuIndex';
 import { useRestApiErrorDispatcher } from '../data/error/RestApiErrorContext';
 import { initFetchOptions } from '../data/fagsakApi';
-import { notEmpty } from '../data/notEmpty';
 import { useFpSakKodeverkMedNavn, useGetKodeverkFn } from '../data/useKodeverk';
 import { FagsakData } from '../fagsak/FagsakData';
 import { EksterneRessurser } from './EksterneRessurser';
@@ -30,7 +30,7 @@ const findPathToBehandling = (saksnummer: string, location: Location, alleBehand
   if (alleBehandlinger.length === 1) {
     return getLocationWithDefaultProsessStegAndFakta({
       ...location,
-      pathname: pathToBehandling(saksnummer, alleBehandlinger[0].uuid),
+      pathname: pathToBehandling(saksnummer, alleBehandlinger[0]?.uuid),
     });
   }
   return pathToBehandlinger(saksnummer);

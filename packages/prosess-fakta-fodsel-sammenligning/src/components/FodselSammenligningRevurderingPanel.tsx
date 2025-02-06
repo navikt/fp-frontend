@@ -1,12 +1,11 @@
-import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, Heading,Label } from '@navikt/ds-react';
+import { BodyShort, Heading, Label } from '@navikt/ds-react';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import moment from 'moment';
 
-import { FamilieHendelse, Soknad } from '@navikt/fp-types';
+import type { FamilieHendelse, Soknad } from '@navikt/fp-types';
 
 import styles from './fodselSammenligningOtherPanel.module.css';
 
@@ -55,7 +54,7 @@ const getAntallBarn = (
     : originalSoknad?.antallBarn;
 };
 
-interface OwnProps {
+interface Props {
   soknadOriginalBehandling?: Soknad;
   familiehendelseOriginalBehandling?: FamilieHendelse;
   vedtaksDatoSomSvangerskapsuke?: number;
@@ -66,11 +65,11 @@ interface OwnProps {
  *
  * Presentasjonskomponent. Viser sammenligning av fødsel ved ytelsesvedtak/søknad og oppdatert informasjon fra TPS.
  */
-const FodselSammenligningRevurderingPanel: FunctionComponent<OwnProps> = ({
+export const FodselSammenligningRevurderingPanel = ({
   vedtaksDatoSomSvangerskapsuke,
   soknadOriginalBehandling,
   familiehendelseOriginalBehandling,
-}) => {
+}: Props) => {
   const erTermin =
     (familiehendelseOriginalBehandling && !!familiehendelseOriginalBehandling.termindato) ||
     !soknadOriginalBehandling?.fodselsdatoer ||
@@ -121,5 +120,3 @@ const FodselSammenligningRevurderingPanel: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-
-export default FodselSammenligningRevurderingPanel;

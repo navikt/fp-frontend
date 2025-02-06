@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
 import { applyRequestHandlers } from 'msw-storybook-addon';
@@ -10,7 +8,7 @@ const { ViseOppgaverIListe, IngenOppgaver } = composeStories(stories);
 
 describe('<JournalforingIndex>', () => {
   it('skal vise en liste med oppgaver', async () => {
-    await applyRequestHandlers(ViseOppgaverIListe.parameters.msw);
+    await applyRequestHandlers(ViseOppgaverIListe.parameters['msw']);
     render(<ViseOppgaverIListe />);
     expect(await screen.findByText('Journalføring')).toBeInTheDocument();
 
@@ -32,7 +30,7 @@ describe('<JournalforingIndex>', () => {
   });
 
   it('skal vise ingen oppgaver', async () => {
-    await applyRequestHandlers(IngenOppgaver.parameters.msw);
+    await applyRequestHandlers(IngenOppgaver.parameters['msw']);
     render(<IngenOppgaver />);
     expect(await screen.findByText('Fant ingen journalføringsoppgaver')).toBeInTheDocument();
   });

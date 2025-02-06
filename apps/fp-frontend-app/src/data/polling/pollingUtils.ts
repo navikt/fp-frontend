@@ -1,7 +1,7 @@
-import { HTTPError, KyResponse } from 'ky';
+import { HTTPError, type KyResponse } from 'ky';
 
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
-import { Behandling } from '@navikt/fp-types';
+import type { Behandling } from '@navikt/fp-types';
 
 import { ErrorType } from '../error/errorType';
 import { useRestApiErrorDispatcher } from '../error/RestApiErrorContext';

@@ -7,15 +7,10 @@ import { AksjonspunktHelpTextHTML, OverstyringKnapp, VerticalSpacer } from '@nav
 import { dateFormat } from '@navikt/ft-utils';
 
 import { AksjonspunktStatus, ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
-import {
-  Aksjonspunkt,
-  AksjonspunktÅrsak,
-  ArbeidOgInntektsmelding,
-  Behandling,
-  ManueltArbeidsforhold,
-} from '@navikt/fp-types';
+import type { Aksjonspunkt, ArbeidOgInntektsmelding, Behandling, ManueltArbeidsforhold } from '@navikt/fp-types';
+import { AksjonspunktÅrsak } from '@navikt/fp-types';
 
-import { ArbeidsforholdOgInntektRadData } from '../types/arbeidsforholdOgInntekt';
+import type { ArbeidsforholdOgInntektRadData } from '../types/arbeidsforholdOgInntekt';
 import { MANUELT_ORG_NR, ManueltLagtTilArbeidsforholdForm } from './manuelt/ManueltLagtTilArbeidsforholdForm';
 
 import styles from './arbeidsOgInntektOverstyrPanel.module.css';

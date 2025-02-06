@@ -1,6 +1,6 @@
-import React, { FunctionComponent, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
-import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { ScissorsIcon } from '@navikt/aksel-icons';
 import { BodyShort, Box, Button, Heading, HStack, Label, Modal, VStack } from '@navikt/ds-react';
@@ -10,7 +10,7 @@ import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { VurderingsBehovPeriode } from '../../../types/FormValues';
+import type { VurderingsBehovPeriode } from '../../types/FormValues';
 import { getFormatertPeriode, splitPeriodePåDato } from '../../utils/periodeUtils';
 
 import styles from './delOppPeriodeModal.module.css';
@@ -22,13 +22,13 @@ const validerInnenforIntervall = (fom: string, tom: string, intl: IntlShape) => 
   return intl.formatMessage({ id: 'DelOppPeriodeModal.UgyldigDato' });
 };
 
-interface OwnProps {
+interface Props {
   periode: VurderingsBehovPeriode;
   cancel: () => void;
   submit: (dato: string) => void;
 }
 
-const DelOppPeriodeModal: FunctionComponent<OwnProps> = ({ periode, cancel, submit }) => {
+export const DelOppPeriodeModal = ({ periode, cancel, submit }: Props) => {
   const intl = useIntl();
 
   const formMethods = useForm<{ dato: string }>();
@@ -103,5 +103,3 @@ const DelOppPeriodeModal: FunctionComponent<OwnProps> = ({ periode, cancel, subm
     </Form>
   );
 };
-
-export default DelOppPeriodeModal;

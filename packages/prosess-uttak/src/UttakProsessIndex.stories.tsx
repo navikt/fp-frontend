@@ -1,7 +1,7 @@
-import { ComponentProps } from 'react';
+import { type ComponentProps } from 'react';
 
 import { action } from '@storybook/addon-actions';
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import {
   AksjonspunktKode,
@@ -10,8 +10,8 @@ import {
   NavBrukerKjonn,
   UtsettelseArsakCode,
 } from '@navikt/fp-kodeverk';
-import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import { Behandling, FamilieHendelseSamling, Personoversikt, Soknad, UttakStonadskontoer } from '@navikt/fp-types';
+import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import type { Behandling, FamilieHendelseSamling, Personoversikt, Soknad, UttakStonadskontoer } from '@navikt/fp-types';
 
 import { UttakProsessIndex } from './UttakProsessIndex';
 

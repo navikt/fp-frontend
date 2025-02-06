@@ -2,9 +2,9 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { InntektArbeidYtelse } from '@navikt/fp-types';
+import type { InntektArbeidYtelse } from '@navikt/fp-types';
 
-import YtelserFaktaPanel from './components/YtelserFaktaPanel';
+import { YtelserFaktaPanel } from './components/YtelserFaktaPanel';
 
 import messages from '../i18n/nb_NO.json';
 

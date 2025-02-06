@@ -1,6 +1,6 @@
-import React, { useEffect, useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { Button, HStack, Spacer, VStack } from '@navikt/ds-react';
 import { Datepicker, NumberField, RadioGroupPanel } from '@navikt/ft-form-hooks';
@@ -8,12 +8,12 @@ import { hasValidDate, hasValidDecimal, maxValue, minValue, required } from '@na
 import dayjs from 'dayjs';
 
 import { TilretteleggingType } from '@navikt/fp-kodeverk';
-import {
+import type {
   ArbeidsforholdFodselOgTilrettelegging,
   ArbeidsforholdTilretteleggingDato,
   SvpAvklartOppholdPeriode,
-  SvpTilretteleggingFomKilde,
 } from '@navikt/fp-types';
+import { SvpTilretteleggingFomKilde } from '@navikt/fp-types';
 
 import { TilretteleggingInfoPanel } from './TilretteleggingInfoPanel';
 

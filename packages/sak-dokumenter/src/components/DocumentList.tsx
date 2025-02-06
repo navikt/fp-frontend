@@ -7,11 +7,11 @@ import {
   NotePencilFillIcon,
   StarFillIcon,
 } from '@navikt/aksel-icons';
-import { BodyShort, Button, Checkbox, Link, SortState, Table } from '@navikt/ds-react';
+import { BodyShort, Button, Checkbox, Link, type SortState, Table } from '@navikt/ds-react';
 import { DateTimeLabel } from '@navikt/ft-ui-komponenter';
 
 import { Kommunikasjonsretning } from '@navikt/fp-kodeverk';
-import { Dokument } from '@navikt/fp-types';
+import type { Dokument } from '@navikt/fp-types';
 
 import styles from './documentList.module.css';
 

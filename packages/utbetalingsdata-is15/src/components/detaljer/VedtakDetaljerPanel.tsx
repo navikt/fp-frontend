@@ -1,9 +1,8 @@
-import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Tabs } from '@navikt/ds-react';
 
-import { Vedtak } from '@navikt/fp-types';
+import type { Vedtak } from '@navikt/fp-types';
 
 import { ArbeidsforholdPanel } from './ArbeidsforholdPanel';
 import { UtbetalingerPanel } from './UtbetalingerPanel';

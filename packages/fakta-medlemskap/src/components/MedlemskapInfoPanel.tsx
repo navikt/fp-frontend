@@ -3,18 +3,18 @@ import { FormattedMessage } from 'react-intl';
 import { VStack } from '@navikt/ds-react';
 
 import { AksjonspunktStatus } from '@navikt/fp-kodeverk';
-import { Medlemskap, Soknad } from '@navikt/fp-types';
+import type { Medlemskap, Soknad } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { VurderMedlemskapAksjonspunktForm } from './aksjonspunkt/VurderMedlemskapAksjonspunktForm';
-import VurderMedlemskapLegacyAksjonspunktVisning from './aksjonspunkt/VurderMedlemskapLegacyAksjonspunktVisning';
-import AksjonspunktHelpText from './AksjonspunktHelpText';
-import OpplysningerFraMedlemskapsregister from './opplysningsKort/OpplysningerFraMedlemskapsregister';
-import OpplysningerOmAdresser from './opplysningsKort/OpplysningerOmAdresser';
-import OpplysningerOmOppholdstillatelser from './opplysningsKort/OpplysningerOmOppholdstillatelser';
-import OpplysningerOmPersonstatus from './opplysningsKort/OpplysningerOmPersonstatus/OpplysningerOmPersonstatus';
-import OpplysningerOmUtenlandsopphold from './opplysningsKort/OpplysningerOmUtenlandsopphold';
-import SituasjonsOversikt from './situasjon/SituasjonOversikt';
+import { VurderMedlemsskapLegacyAksjonspunktVisning } from './aksjonspunkt/VurderMedlemskapLegacyAksjonspunktVisning';
+import { AksjonspunktHelpText } from './AksjonspunktHelpText';
+import { OpplysningerFraMedlemskapsregister } from './opplysningsKort/OpplysningerFraMedlemskapsregister';
+import { OpplysningerOmAdresser } from './opplysningsKort/OpplysningerOmAdresser';
+import { OpplysningerOmOppholdstillatelser } from './opplysningsKort/OpplysningerOmOppholdstillatelser';
+import { OpplysningerOmPersonstatus } from './opplysningsKort/OpplysningerOmPersonstatus/OpplysningerOmPersonstatus';
+import { OpplysningerOmUtenlandsopphold } from './opplysningsKort/OpplysningerOmUtenlandsopphold';
+import { SituasjonOversikt } from './situasjon/SituasjonOversikt';
 
 interface Props {
   medlemskap: Medlemskap;
@@ -48,12 +48,12 @@ export const MedlemskapInfoPanel = ({ medlemskap, soknad, submittable }: Props) 
         )}
 
         {medlemskap.legacyManuellBehandling && !medlemskap.manuellBehandlingResultat && (
-          <VurderMedlemskapLegacyAksjonspunktVisning
+          <VurderMedlemsskapLegacyAksjonspunktVisning
             legacyManuellBehandling={medlemskap.legacyManuellBehandling}
             alleKodeverk={alleKodeverk}
           />
         )}
-        <SituasjonsOversikt medlemskap={medlemskap} soknad={soknad} alleKodeverk={alleKodeverk} />
+        <SituasjonOversikt medlemskap={medlemskap} soknad={soknad} alleKodeverk={alleKodeverk} />
 
         <VStack gap="2">
           <OpplysningerOmUtenlandsopphold soknad={soknad} avvik={medlemskap.avvik} skalViseAvvik={harAksjonspunkt} />

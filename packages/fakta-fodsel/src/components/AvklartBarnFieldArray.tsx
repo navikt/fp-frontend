@@ -1,13 +1,13 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
 import { HStack } from '@navikt/ds-react';
 import { Datepicker, PeriodFieldArray } from '@navikt/ft-form-hooks';
-import { dateBeforeOrEqualToToday,hasValidDate, required } from '@navikt/ft-form-validators';
+import { dateBeforeOrEqualToToday, hasValidDate, required } from '@navikt/ft-form-validators';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { AvklartBarn } from '@navikt/fp-types';
+import type { AvklartBarn } from '@navikt/fp-types';
 
 const FIELD_ARRAY_NAME = 'avklartBarn';
 
@@ -16,11 +16,11 @@ export const defaultAntallBarn = {
   dodsdato: undefined,
 };
 
-interface OwnProps {
+interface Props {
   readOnly: boolean;
 }
 
-export const AvklartBarnFieldArray: FunctionComponent<OwnProps> = ({ readOnly }) => {
+export const AvklartBarnFieldArray = ({ readOnly }: Props) => {
   const intl = useIntl();
 
   const { control, watch } = useFormContext<{ avklartBarn: AvklartBarn[] }>();
@@ -64,5 +64,3 @@ export const AvklartBarnFieldArray: FunctionComponent<OwnProps> = ({ readOnly })
     </PeriodFieldArray>
   );
 };
-
-export default AvklartBarnFieldArray;

@@ -1,9 +1,9 @@
 import { queryOptions, useQuery } from '@tanstack/react-query';
 import ky from 'ky';
 
-import { FormValues as EndreUtlandFormValues } from '@navikt/fp-sak-meny-endre-utland';
-import { FormValues } from '@navikt/fp-sak-meny-ny-behandling';
-import {
+import type { FormValues as EndreUtlandFormValues } from '@navikt/fp-sak-meny-endre-utland';
+import type { FormValues } from '@navikt/fp-sak-meny-ny-behandling';
+import type {
   Aktor,
   AlleKodeverk,
   AlleKodeverkTilbakekreving,
@@ -18,7 +18,7 @@ import {
   InfotrygdVedtak,
   NavAnsatt,
 } from '@navikt/fp-types';
-import { FatterVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { FatterVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 type BehandlendeEnheter = {
   enhetId: string;
@@ -70,7 +70,7 @@ const kyExtended = ky.extend({
 
 //MÅ være en gyldig URL for at KY skal fungere i test
 const isTest = import.meta.env.MODE === 'test';
-export const wrapUrl = (url: string) => (isTest ? `http://www.test.com${url}` : url);
+export const wrapUrl = (url: string): string => (isTest ? `http://www.test.com${url}` : url);
 
 const getUrlFromRel = (rel: keyof typeof FagsakRel, links: ApiLink[] = []): string => {
   const link = links.find(l => l.rel === FagsakRel[rel]);

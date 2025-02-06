@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
@@ -7,8 +7,8 @@ import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponen
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt } from '@navikt/fp-types';
-import { ManuellKontrollBesteberegningAP } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { Aksjonspunkt } from '@navikt/fp-types';
+import type { ManuellKontrollBesteberegningAP } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useFormData } from '@navikt/fp-utils';
 
 export const buildInitialValues = (aksjonspunkt: Aksjonspunkt): FormValues => {
@@ -30,7 +30,7 @@ export type FormValues = {
   besteberegningErKorrektValg?: boolean;
 };
 
-interface OwnProps {
+interface Props {
   aksjonspunkt: Aksjonspunkt;
   submitCallback: (data: ManuellKontrollBesteberegningAP) => Promise<void>;
   readOnly: boolean;
@@ -42,12 +42,7 @@ interface OwnProps {
  *
  * Formkomponent. Lar saksbehandler vurdere om den automatiske besteberegningen er korrekt utført.
  */
-const KontrollerBesteberegningPanel: FunctionComponent<OwnProps> = ({
-  aksjonspunkt,
-  readOnly,
-  submittable,
-  submitCallback,
-}) => {
+export const KontrollerBesteberegningPanel = ({ aksjonspunkt, readOnly, submittable, submitCallback }: Props) => {
   const [erKnappEnabled, toggleKnapp] = useState(false);
 
   const { formData, setFormData } = useFormData<FormValues>();
@@ -98,5 +93,3 @@ const KontrollerBesteberegningPanel: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-
-export default KontrollerBesteberegningPanel;

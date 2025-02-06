@@ -1,10 +1,10 @@
-import React, { FunctionComponent,useMemo } from 'react';
+import React, { useMemo } from 'react';
 
 import { calcDays, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { BehandlingType,OppholdArsakType, SoknadType } from '@navikt/fp-kodeverk';
-import {
+import { BehandlingType, OppholdArsakType, SoknadType } from '@navikt/fp-kodeverk';
+import type {
   AlleKodeverk,
   Behandling,
   Fagsak,
@@ -16,7 +16,7 @@ import {
   Ytelsefordeling,
 } from '@navikt/fp-types';
 
-import UttakTidslinje, { PeriodeSøkerMedTidslinjedata, TidslinjeTimes } from './UttakTidslinje';
+import { type PeriodeSøkerMedTidslinjedata, type TidslinjeTimes,UttakTidslinje } from './UttakTidslinje';
 
 //TODO (TOR) Dette er vel mapping mellom kodeverk? Bør i sofall bruka kodeverk-enums
 const OppholdArsakMapper = {
@@ -127,7 +127,7 @@ const lagUttakMedOpphold = (perioderSøker: PeriodeSoker[]): PeriodeSoker[] =>
     return uttakPerioder;
   });
 
-interface OwnProps {
+interface Props {
   behandling: Behandling;
   søknad: Soknad;
   personoversikt: Personoversikt;
@@ -142,7 +142,7 @@ interface OwnProps {
   alleKodeverk: AlleKodeverk;
 }
 
-const UttakTidslinjeIndex: FunctionComponent<OwnProps> = ({
+export const UttakTidslinjeIndex = ({
   behandling,
   søknad,
   personoversikt,
@@ -155,7 +155,7 @@ const UttakTidslinjeIndex: FunctionComponent<OwnProps> = ({
   setValgtPeriodeIndex,
   fagsak,
   alleKodeverk,
-}) => {
+}: Props) => {
   const uttakMedOpphold = lagUttakMedOpphold(perioderSøker);
 
   const hovedsøkerPerioder = leggTidslinjedataTilPeriode(true, uttakMedOpphold, perioderAnnenpart);
@@ -190,5 +190,3 @@ const UttakTidslinjeIndex: FunctionComponent<OwnProps> = ({
     />
   );
 };
-
-export default UttakTidslinjeIndex;

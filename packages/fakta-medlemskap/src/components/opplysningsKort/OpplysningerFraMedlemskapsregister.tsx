@@ -1,4 +1,3 @@
-import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyLong, BodyShort, Box, Table } from '@navikt/ds-react';
@@ -7,9 +6,9 @@ import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 import { FaktaKilde, sorterPerioder } from '@navikt/fp-fakta-felles';
 import { KodeverkType } from '@navikt/fp-kodeverk';
-import { AlleKodeverk, MedlemskapAvvik, MedlemskapPeriode } from '@navikt/fp-types';
+import { type AlleKodeverk, MedlemskapAvvik, type MedlemskapPeriode } from '@navikt/fp-types';
 
-import EkspansjonsKort from '../ekspansjonsKort/EkspansjonsKort';
+import { EkspansjonsKort } from '../ekspansjonsKort/EkspansjonsKort';
 import { relevantForMedl } from '../ekspansjonsKort/medlemsAvvik';
 
 interface Props {
@@ -19,7 +18,7 @@ interface Props {
   skalViseAvvik: boolean;
 }
 
-const OpplysningerFraMedlemskapsregister = ({
+export const OpplysningerFraMedlemskapsregister = ({
   medlemskapsperioder,
   avvik = [],
   alleKodeverk,
@@ -126,5 +125,3 @@ const OpplysningerFraMedlemskapsregister = ({
     </EkspansjonsKort>
   );
 };
-
-export default OpplysningerFraMedlemskapsregister;

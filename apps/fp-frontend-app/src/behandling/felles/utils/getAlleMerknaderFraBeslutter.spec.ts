@@ -1,5 +1,5 @@
-import { AksjonspunktKode,AksjonspunktStatus, BehandlingStatus, BehandlingType } from '@navikt/fp-kodeverk';
-import { Behandling } from '@navikt/fp-types';
+import { AksjonspunktKode, AksjonspunktStatus, BehandlingStatus, BehandlingType } from '@navikt/fp-kodeverk';
+import type { Behandling } from '@navikt/fp-types';
 
 import { getAlleMerknaderFraBeslutter } from './getAlleMerknaderFraBeslutter';
 

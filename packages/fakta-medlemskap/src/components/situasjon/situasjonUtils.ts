@@ -1,8 +1,8 @@
-import { IntlShape } from 'react-intl';
+import { type IntlShape } from 'react-intl';
 
 import { sorterPerioder } from '@navikt/fp-fakta-felles';
-import { AdresseType,getKodeverknavnFn, KodeverkType, Landkode } from '@navikt/fp-kodeverk';
-import { AlleKodeverk, Medlemskap, UtlandsoppholdPeriode } from '@navikt/fp-types';
+import { AdresseType, getKodeverknavnFn, KodeverkType, Landkode } from '@navikt/fp-kodeverk';
+import type { AlleKodeverk, Medlemskap, UtlandsoppholdPeriode } from '@navikt/fp-types';
 
 import { toTitleCapitalization } from '../../utils/stringUtils';
 

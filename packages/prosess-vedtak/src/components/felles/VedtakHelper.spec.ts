@@ -1,5 +1,5 @@
 import { VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
-import { Vilkar } from '@navikt/fp-types';
+import type { Vilkar } from '@navikt/fp-types';
 
 import { hasIkkeOppfyltSoknadsfristvilkar } from './VedtakHelper';
 

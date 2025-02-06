@@ -2,7 +2,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { ArbeidsgiverOpplysningerPerId, Opptjening } from '@navikt/fp-types';
+import type { ArbeidsgiverOpplysningerPerId, Opptjening } from '@navikt/fp-types';
 
 import { OpptjeningFaktaPanel } from './components/OpptjeningFaktaPanel';
 

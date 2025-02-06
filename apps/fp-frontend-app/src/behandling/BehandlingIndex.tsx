@@ -1,12 +1,13 @@
 import { Suspense, useCallback, useEffect, useState } from 'react';
-import { NavigateFunction, useLocation, useNavigate } from 'react-router';
+import { type NavigateFunction, useLocation, useNavigate } from 'react-router';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { replaceNorwegianCharacters } from '@navikt/ft-utils';
 import { useQuery } from '@tanstack/react-query';
-import { Location } from 'history';
+import type { Location } from 'history';
 
-import { Behandling } from '@navikt/fp-types';
+import type { Behandling } from '@navikt/fp-types';
+import { notEmpty } from '@navikt/fp-utils';
 
 import { ErrorBoundary } from '../app/ErrorBoundary';
 import { getFaktaLocation, getLocationWithDefaultProsessStegAndFakta, getProsessStegLocation } from '../app/paths';
@@ -14,7 +15,6 @@ import { useTrackRouteParam } from '../app/useTrackRouteParam';
 import { getAccessRights } from '../app/util/access';
 import { useRestApiErrorDispatcher } from '../data/error/RestApiErrorContext';
 import { initFetchOptions, useFagsakApi } from '../data/fagsakApi';
-import { notEmpty } from '../data/notEmpty';
 import { useBehandlingPollingOperasjoner } from '../data/polling/useBehandlingPollingOperasjoner';
 import { FagsakData } from '../fagsak/FagsakData';
 import { BehandlingPanelerIndex } from './BehandlingPanelerIndex';

@@ -1,4 +1,4 @@
-import { ComponentProps, use } from 'react';
+import { type ComponentProps, use } from 'react';
 import { useIntl } from 'react-intl';
 
 import {
@@ -9,13 +9,13 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import { AlleKodeverkTilbakekreving } from '@navikt/fp-types';
+import type { AlleKodeverkTilbakekreving } from '@navikt/fp-types';
 import { useFormData } from '@navikt/fp-utils';
 
 import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
-import { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
+import type { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 import '@navikt/ft-fakta-tilbakekreving-feilutbetaling/dist/style.css';

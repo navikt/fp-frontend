@@ -1,5 +1,5 @@
-import React, { FunctionComponent, ReactElement, ReactNode, useMemo, useState } from 'react';
-import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+import React, { type ReactElement, type ReactNode, useMemo, useState } from 'react';
+import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import {
   ArrowLeftIcon,
@@ -18,7 +18,7 @@ import {
 } from '@navikt/aksel-icons';
 import { BodyShort, Button, Label, Timeline } from '@navikt/ds-react';
 import { DateLabel, FloatRight, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { calcDaysAndWeeks,DDMMYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { calcDaysAndWeeks, DDMMYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import {
@@ -29,7 +29,7 @@ import {
   RelasjonsRolleType,
   UttakPeriodeType,
 } from '@navikt/fp-kodeverk';
-import { AlleKodeverk, Fagsak, PeriodeSoker } from '@navikt/fp-types';
+import type { AlleKodeverk, Fagsak, PeriodeSoker } from '@navikt/fp-types';
 
 import styles from './uttakTidslinje.module.css';
 
@@ -306,7 +306,7 @@ interface TidslinjeProps {
  *
  * Formaterer tidslinjen for uttak
  */
-const UttakTidslinje: FunctionComponent<TidslinjeProps> = ({
+export const UttakTidslinje = ({
   tidslinjeTider,
   selectedPeriod,
   uttakPerioder,
@@ -315,7 +315,7 @@ const UttakTidslinje: FunctionComponent<TidslinjeProps> = ({
   behandlingStatusKode,
   fagsak,
   alleKodeverk,
-}) => {
+}: TidslinjeProps) => {
   const intl = useIntl();
 
   const radIder = useMemo(() => lagGruppeIder(uttakPerioder), [uttakPerioder]);
@@ -461,5 +461,3 @@ const UttakTidslinje: FunctionComponent<TidslinjeProps> = ({
     </>
   );
 };
-
-export default UttakTidslinje;

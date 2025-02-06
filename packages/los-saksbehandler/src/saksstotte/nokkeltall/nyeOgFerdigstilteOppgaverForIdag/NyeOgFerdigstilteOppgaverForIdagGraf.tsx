@@ -1,11 +1,10 @@
-import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { BehandlingType } from '@navikt/fp-kodeverk';
 import { ReactECharts } from '@navikt/fp-los-felles';
-import { KodeverkMedNavn } from '@navikt/fp-types';
+import type { KodeverkMedNavn } from '@navikt/fp-types';
 
-import { NyeOgFerdigstilteOppgaver } from '../../../typer/nyeOgFerdigstilteOppgaverTsType';
+import type { NyeOgFerdigstilteOppgaver } from '../../../typer/nyeOgFerdigstilteOppgaverTsType';
 
 const behandlingstypeOrder = [
   BehandlingType.TILBAKEKREVING_REVURDERING,

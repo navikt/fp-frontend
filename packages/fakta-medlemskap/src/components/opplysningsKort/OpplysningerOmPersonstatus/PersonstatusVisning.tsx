@@ -1,13 +1,12 @@
-import React, { FC } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { BodyLong, Label,Table } from '@navikt/ds-react';
+import { BodyLong, Label, Table } from '@navikt/ds-react';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 import { sorterPerioder } from '@navikt/fp-fakta-felles';
 import { KodeverkType } from '@navikt/fp-kodeverk';
-import { AlleKodeverk, PersonstatusPeriode } from '@navikt/fp-types';
+import type { AlleKodeverk, PersonstatusPeriode } from '@navikt/fp-types';
 
 interface Props {
   personstatuser: PersonstatusPeriode[];
@@ -15,7 +14,7 @@ interface Props {
   alleKodeverk: AlleKodeverk;
 }
 
-const PersonstatusVisning: FC<Props> = ({ personstatuser, erAnnenpart = false, alleKodeverk }) => {
+export const PersonstatusVisning = ({ personstatuser, erAnnenpart = false, alleKodeverk }: Props) => {
   const kodeverkNavn = alleKodeverk[KodeverkType.PERSONSTATUS_TYPE];
 
   const getPersonstatus = (verdi: PersonstatusPeriode): string => {
@@ -69,5 +68,3 @@ const PersonstatusVisning: FC<Props> = ({ personstatuser, erAnnenpart = false, a
     </Table>
   );
 };
-
-export default PersonstatusVisning;

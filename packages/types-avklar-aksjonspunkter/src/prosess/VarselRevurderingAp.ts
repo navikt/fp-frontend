@@ -1,8 +1,8 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
-import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
+import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 
-type VarselRevurderingAp = {
+export type VarselRevurderingAp = {
   sendVarsel?: boolean;
   fritekst?: string;
   frist?: string;
@@ -10,5 +10,3 @@ type VarselRevurderingAp = {
 } & AksjonspunktTilBekreftelse<
   AksjonspunktKode.VARSEL_REVURDERING_ETTERKONTROLL | AksjonspunktKode.VARSEL_REVURDERING_MANUELL
 >;
-
-export default VarselRevurderingAp;

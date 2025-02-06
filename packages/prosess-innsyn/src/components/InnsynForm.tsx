@@ -16,12 +16,12 @@ import {
   Kommunikasjonsretning,
 } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
-import { Aksjonspunkt, Dokument, InnsynDokument, InnsynVedtaksdokument } from '@navikt/fp-types';
-import { VurderInnsynAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { Aksjonspunkt, Dokument, InnsynDokument, InnsynVedtaksdokument } from '@navikt/fp-types';
+import type { VurderInnsynAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
-import DocumentListInnsyn from './DocumentListInnsyn';
-import VedtakDocuments from './VedtakDocuments';
+import { DocumentListInnsyn } from './DocumentListInnsyn';
+import { VedtakDocuments } from './VedtakDocuments';
 
 const EMPTY_ARRAY = [] as InnsynVedtaksdokument[];
 

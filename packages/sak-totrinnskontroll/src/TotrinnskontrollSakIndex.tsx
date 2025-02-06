@@ -1,8 +1,7 @@
-import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
-import { Location } from 'history';
+import { type Location } from 'history';
 
 import {
   AksjonspunktKode,
@@ -15,11 +14,16 @@ import {
   VurderPaNyttArsakType,
 } from '@navikt/fp-kodeverk';
 import { skjermlenkeCodesFpTilbake as skjermlenkeCodes } from '@navikt/fp-konstanter';
-import { AlleKodeverk, AlleKodeverkTilbakekreving, BehandlingAppKontekst, KodeverkMedNavn } from '@navikt/fp-types';
-import { FatterVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type {
+  AlleKodeverk,
+  AlleKodeverkTilbakekreving,
+  BehandlingAppKontekst,
+  KodeverkMedNavn,
+} from '@navikt/fp-types';
+import type { FatterVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import { AksjonspunktGodkjenningData } from './components/AksjonspunktGodkjenningFieldArray';
-import { FormValues, TotrinnskontrollBeslutterForm } from './components/TotrinnskontrollBeslutterForm';
+import { type AksjonspunktGodkjenningData } from './components/AksjonspunktGodkjenningFieldArray';
+import { type FormValues, TotrinnskontrollBeslutterForm } from './components/TotrinnskontrollBeslutterForm';
 import { TotrinnskontrollSaksbehandlerPanel } from './components/TotrinnskontrollSaksbehandlerPanel';
 
 import messages from '../i18n/nb_NO.json';
@@ -27,10 +31,10 @@ import messages from '../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 const sorterteSkjermlenkeCodesForTilbakekreving = [
-  skjermlenkeCodes.FAKTA_OM_FEILUTBETALING,
-  skjermlenkeCodes.FORELDELSE,
-  skjermlenkeCodes.TILBAKEKREVING,
-  skjermlenkeCodes.VEDTAK,
+  skjermlenkeCodes['FAKTA_OM_FEILUTBETALING'],
+  skjermlenkeCodes['FORELDELSE'],
+  skjermlenkeCodes['TILBAKEKREVING'],
+  skjermlenkeCodes['VEDTAK'],
 ];
 
 const getArsaker = (apData: AksjonspunktGodkjenningData): string[] => {
