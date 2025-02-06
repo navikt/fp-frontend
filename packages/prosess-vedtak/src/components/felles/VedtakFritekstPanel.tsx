@@ -1,4 +1,3 @@
-import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
 import { Detail } from '@navikt/ds-react';
@@ -14,19 +13,14 @@ import styles from './vedtakFritekstPanel.module.css';
 const maxLength1500 = maxLength(1500);
 const minLength3 = minLength(3);
 
-interface OwnProps {
+interface Props {
   behandlingsresultat?: Behandlingsresultat;
   språkKode: string;
   isReadOnly: boolean;
   labelTextCode: string;
 }
 
-const VedtakFritekstPanel: FunctionComponent<OwnProps> = ({
-  behandlingsresultat,
-  språkKode,
-  isReadOnly,
-  labelTextCode,
-}) => {
+export const VedtakFritekstPanel = ({ behandlingsresultat, språkKode, isReadOnly, labelTextCode }: Props) => {
   const intl = useIntl();
 
   return (
@@ -61,5 +55,3 @@ const VedtakFritekstPanel: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-
-export default VedtakFritekstPanel;

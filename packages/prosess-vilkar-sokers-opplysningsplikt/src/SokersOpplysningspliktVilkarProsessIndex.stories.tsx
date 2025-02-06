@@ -1,17 +1,12 @@
-import { action } from '@storybook/addon-actions';
+import { ComponentProps } from 'react';
+
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, Avslagsarsak, VilkarUtfallType } from '@navikt/fp-kodeverk';
-import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
-import { Aksjonspunkt, Behandling, Fagsak, Soknad } from '@navikt/fp-types';
+import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { Aksjonspunkt, Behandling, Soknad } from '@navikt/fp-types';
 
 import { SokersOpplysningspliktVilkarProsessIndex } from './SokersOpplysningspliktVilkarProsessIndex';
-
-const defaultBehandling = {
-  uuid: '1',
-  versjon: 1,
-  behandlingsresultat: {},
-} as Behandling;
 
 const arbeidsgiverOpplysningerPerId = {
   1234: {
@@ -35,33 +30,26 @@ const soknad = {
 const meta = {
   title: 'prosess/prosess-vilkar-sokers-opplysningsplikt',
   component: SokersOpplysningspliktVilkarProsessIndex,
-  decorators: [withFormData],
+  decorators: [withFormData, withPanelData],
   args: {
-    submitCallback: action('button-click') as (data: any) => Promise<any>,
-    alleKodeverk: alleKodeverk as any,
-    isAksjonspunktOpen: true,
-    vilkar: [],
-    alleMerknaderFraBeslutter: {},
     soknad,
     arbeidsgiverOpplysningerPerId,
-    fagsak: {} as Fagsak,
   },
-} satisfies Meta<typeof SokersOpplysningspliktVilkarProsessIndex>;
+  render: args => <SokersOpplysningspliktVilkarProsessIndex {...args} />,
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof SokersOpplysningspliktVilkarProsessIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
 export const ÅpentAksjonspunkt: Story = {
   args: {
-    behandling: defaultBehandling,
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.SOKERS_OPPLYSNINGSPLIKT_MANU,
         status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: undefined,
       },
     ] as Aksjonspunkt[],
-    isReadOnly: false,
     readOnlySubmitButton: false,
     status: VilkarUtfallType.IKKE_VURDERT,
   },
@@ -69,8 +57,7 @@ export const ÅpentAksjonspunkt: Story = {
 
 export const OppfyltVilkår: Story = {
   args: {
-    behandling: defaultBehandling,
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.SOKERS_OPPLYSNINGSPLIKT_MANU,
         status: AksjonspunktStatus.UTFORT,
@@ -92,7 +79,7 @@ export const AvslåttVilkår: Story = {
         avslagsarsak: Avslagsarsak.INGEN_BEREGNINGSREGLER,
       },
     } as Behandling,
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.SOKERS_OPPLYSNINGSPLIKT_MANU,
         status: AksjonspunktStatus.UTFORT,

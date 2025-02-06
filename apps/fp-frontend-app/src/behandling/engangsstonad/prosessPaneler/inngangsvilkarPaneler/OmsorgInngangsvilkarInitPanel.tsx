@@ -44,7 +44,12 @@ export const OmsorgInngangsvilkarInitPanel = (props: InngangsvilkarPanelInitProp
       vilkarKoder={VILKAR_KODER}
       inngangsvilkarPanelKode="OMSORG"
       hentInngangsvilkarPanelTekst={hentAksjonspunktTekst(intl, standardPanelProps.aksjonspunkter)}
-      renderPanel={() => <OmsorgVilkarProsessIndex {...standardPanelProps} />}
+      renderPanel={() => (
+        <OmsorgVilkarProsessIndex
+          readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
+          status={standardPanelProps.status}
+        />
+      )}
     />
   );
 };

@@ -1,15 +1,15 @@
-import React, { FunctionComponent, ReactElement } from 'react';
+import { ReactElement } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, Detail,Label } from '@navikt/ds-react';
+import { BodyShort, Detail, Label } from '@navikt/ds-react';
 import { TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { decodeHtmlEntity, formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
-import { getKodeverknavnFn, KodeverkType,VilkarUtfallType } from '@navikt/fp-kodeverk';
-import { AlleKodeverk, Behandlingsresultat,Vilkar } from '@navikt/fp-types';
+import { getKodeverknavnFn, KodeverkType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AlleKodeverk, Behandlingsresultat, Vilkar } from '@navikt/fp-types';
 
 import styles from './vedtakAvslagArsakOgBegrunnelsePanel.module.css';
 
@@ -38,7 +38,7 @@ const getAvslagArsak = (
   )}`;
 };
 
-interface OwnProps {
+interface Props {
   vilkar: Vilkar[];
   behandlingsresultat?: Behandlingsresultat;
   språkKode: string;
@@ -47,14 +47,14 @@ interface OwnProps {
   skalBrukeOverstyrendeFritekstBrev: boolean;
 }
 
-const VedtakAvslagArsakOgBegrunnelsePanel: FunctionComponent<OwnProps> = ({
+export const VedtakAvslagArsakOgBegrunnelsePanel = ({
   vilkar,
   behandlingsresultat,
   språkKode,
   erReadOnly,
   alleKodeverk,
   skalBrukeOverstyrendeFritekstBrev,
-}) => {
+}: Props) => {
   const {
     formState: { isDirty },
   } = useFormContext();
@@ -106,5 +106,3 @@ const VedtakAvslagArsakOgBegrunnelsePanel: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-
-export default VedtakAvslagArsakOgBegrunnelsePanel;

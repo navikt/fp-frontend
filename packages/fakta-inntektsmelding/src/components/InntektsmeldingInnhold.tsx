@@ -7,6 +7,7 @@ import { formatCurrencyNoKr } from '@navikt/ft-utils';
 
 import { getKodeverknavnFraKode, KodeverkType } from '@navikt/fp-kodeverk';
 import { Inntektsmelding } from '@navikt/fp-types';
+import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { InntektsmeldingFaktaProps } from '../InntektsmeldingFaktaIndex';
 import { Arbeidsgiver } from './Arbeidsgiver';
@@ -24,11 +25,9 @@ import styles from '../inntektsmeldingFakta.module.css';
 export const InntektsmeldingInnhold = ({
   inntektsmelding,
   arbeidsgiverOpplysningerPerId,
-  fagsak,
   alleBehandlinger,
-  behandling,
-  alleKodeverk,
 }: { inntektsmelding: Inntektsmelding } & InntektsmeldingFaktaProps) => {
+  const { alleKodeverk, fagsak, behandling } = usePanelDataContext();
   const intl = useIntl();
 
   return (

@@ -71,7 +71,6 @@ export const SimuleringProsessStegInitPanel = ({
           simuleringResultat={simuleringResultat}
           previewFptilbakeCallback={forhåndsvis}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          {...standardPanelProps}
         />
       ) : (
         <LoadingPanel />

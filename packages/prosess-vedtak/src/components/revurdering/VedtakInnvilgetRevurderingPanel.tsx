@@ -1,16 +1,15 @@
-import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, Detail,Label } from '@navikt/ds-react';
+import { BodyShort, Detail, Label } from '@navikt/ds-react';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { formatCurrencyWithKr } from '@navikt/ft-utils';
 
 import { FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { Behandlingsresultat, BeregningsresultatDagytelse, BeregningsresultatEs } from '@navikt/fp-types';
 
-import VedtakFritekstPanel from '../felles/VedtakFritekstPanel';
+import { VedtakFritekstPanel } from '../felles/VedtakFritekstPanel';
 
-interface OwnProps {
+interface Props {
   ytelseTypeKode: string;
   revurderingsÅrsakString?: string;
   isReadOnly: boolean;
@@ -21,7 +20,7 @@ interface OwnProps {
   skalBrukeOverstyrendeFritekstBrev: boolean;
 }
 
-const VedtakInnvilgetRevurderingPanel: FunctionComponent<OwnProps> = ({
+export const VedtakInnvilgetRevurderingPanel = ({
   ytelseTypeKode,
   revurderingsÅrsakString,
   isReadOnly,
@@ -30,7 +29,7 @@ const VedtakInnvilgetRevurderingPanel: FunctionComponent<OwnProps> = ({
   behandlingsresultat,
   beregningErManueltFastsatt,
   skalBrukeOverstyrendeFritekstBrev,
-}) => (
+}: Props) => (
   <>
     {ytelseTypeKode === FagsakYtelseType.ENGANGSSTONAD && beregningsresultat && 'antallBarn' in beregningsresultat && (
       <FlexContainer>
@@ -75,5 +74,3 @@ const VedtakInnvilgetRevurderingPanel: FunctionComponent<OwnProps> = ({
     )}
   </>
 );
-
-export default VedtakInnvilgetRevurderingPanel;

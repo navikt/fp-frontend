@@ -1,18 +1,13 @@
-import { action } from '@storybook/addon-actions';
+import { ComponentProps } from 'react';
+
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, VilkarUtfallType } from '@navikt/fp-kodeverk';
-import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
-import { Aksjonspunkt, Behandling, Fagsak, Opptjening } from '@navikt/fp-types';
+import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { Aksjonspunkt, Opptjening } from '@navikt/fp-types';
 
 import opptjeningAktivitetKlassifisering from './kodeverk/opptjeningAktivitetKlassifisering';
 import { OpptjeningVilkarProsessIndex } from './OpptjeningVilkarProsessIndex';
-
-const behandling = {
-  uuid: '1',
-  versjon: 1,
-  behandlingsresultat: {},
-} as Behandling;
 
 const defaultOpptjening = {
   fastsattOpptjening: {
@@ -40,22 +35,15 @@ const defaultOpptjening = {
 const meta = {
   title: 'prosess/prosess-vilkar-opptjening',
   component: OpptjeningVilkarProsessIndex,
-  decorators: [withFormData],
+  decorators: [withFormData, withPanelData],
   args: {
-    submitCallback: action('button-click') as (data: any) => Promise<any>,
-    behandling,
-    alleKodeverk: alleKodeverk as any,
-    isReadOnly: false,
-    isAksjonspunktOpen: true,
     readOnlySubmitButton: false,
     status: VilkarUtfallType.IKKE_VURDERT,
-    vilkar: [],
-    alleMerknaderFraBeslutter: {},
     lovReferanse: '§§Dette er en lovreferanse',
     erSvpFagsak: false,
-    fagsak: {} as Fagsak,
   },
-} satisfies Meta<typeof OpptjeningVilkarProsessIndex>;
+  render: args => <OpptjeningVilkarProsessIndex {...args} />,
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof OpptjeningVilkarProsessIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
@@ -63,7 +51,7 @@ type Story = StoryObj<typeof meta>;
 export const ÅpentAksjonspunkt: Story = {
   args: {
     opptjening: defaultOpptjening,
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
         status: AksjonspunktStatus.OPPRETTET,
@@ -77,7 +65,7 @@ export const ÅpentAksjonspunktSvangerskapspenger: Story = {
   args: {
     erSvpFagsak: true,
     opptjening: defaultOpptjening,
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
         status: AksjonspunktStatus.OPPRETTET,
@@ -115,7 +103,7 @@ export const ÅpentAksjonspunktMedOppholdsperiode: Story = {
         opptjeningTom: '2018-06-04',
       },
     } as Opptjening,
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
         status: AksjonspunktStatus.OPPRETTET,
@@ -134,7 +122,7 @@ export const ÅpentAksjonspunktMenUtenAktiviteter: Story = {
         fastsattOpptjeningAktivitetList: [],
       },
     },
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
         status: AksjonspunktStatus.OPPRETTET,
@@ -147,6 +135,6 @@ export const ÅpentAksjonspunktMenUtenAktiviteter: Story = {
 export const HarIkkeAksjonspunkt: Story = {
   args: {
     opptjening: defaultOpptjening,
-    aksjonspunkter: [] as Aksjonspunkt[],
+    aksjonspunkterForPanel: [] as Aksjonspunkt[],
   },
 };

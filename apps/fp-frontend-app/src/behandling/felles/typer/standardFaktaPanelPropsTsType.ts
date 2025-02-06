@@ -1,6 +1,4 @@
-import { Aksjonspunkt } from './aksjonspunktTsType';
-import { Behandling } from './behandlingTsType';
-import { AlleKodeverk } from './kodeverkAlleTsType';
+import { Aksjonspunkt, AlleKodeverk, Behandling } from '@navikt/fp-types';
 
 export type StandardFaktaPanelProps = Readonly<{
   behandling: Behandling;

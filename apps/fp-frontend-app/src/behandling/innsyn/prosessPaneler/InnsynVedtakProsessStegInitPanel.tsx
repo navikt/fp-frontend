@@ -67,13 +67,7 @@ export const InnsynVedtakProsessStegInitPanel = (props: ProsessPanelInitProps) =
           behandlingsresultat={standardPanelProps.behandling.behandlingsresultat}
         />
         {innsyn ? (
-          <VedtakInnsynProsessIndex
-            saksnummer={fagsak.saksnummer}
-            innsyn={innsyn}
-            alleDokumenter={innsynDokumenter}
-            previewCallback={forhåndsvis}
-            {...standardPanelProps}
-          />
+          <VedtakInnsynProsessIndex innsyn={innsyn} alleDokumenter={innsynDokumenter} previewCallback={forhåndsvis} />
         ) : (
           <LoadingPanel />
         )}

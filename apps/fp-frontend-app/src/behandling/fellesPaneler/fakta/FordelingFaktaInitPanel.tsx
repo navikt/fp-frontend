@@ -49,12 +49,13 @@ export const FordelingFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId, ...prop
     >
       {!isFetching ? (
         <Wrapper
-          {...standardPanelProps}
           kodeverkSamling={standardPanelProps.alleKodeverk}
           beregningsgrunnlagVilkår={lagBGVilkar(standardPanelProps.behandling.vilkår, beregningsgrunnlag)}
           beregningsgrunnlagListe={lagFormatertBG(beregningsgrunnlag)}
           submitCallback={lagModifisertCallback(standardPanelProps.submitCallback)}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+          readOnly={standardPanelProps.readOnly}
+          submittable={standardPanelProps.submittable}
         />
       ) : (
         <LoadingPanel />

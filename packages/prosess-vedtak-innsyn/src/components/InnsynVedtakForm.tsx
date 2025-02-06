@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -12,9 +12,9 @@ import { AksjonspunktKode, DokumentMalType, InnsynResultatType, Kommunikasjonsre
 import { ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import { Aksjonspunkt, Dokument, InnsynDokument } from '@navikt/fp-types';
 import { ForeslaVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData } from '@navikt/fp-utils';
+import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
-import DocumentListVedtakInnsyn from './DocumentListVedtakInnsyn';
+import { DocumentListVedtakInnsyn } from './DocumentListVedtakInnsyn';
 
 import styles from './innsynVedtakForm.module.css';
 
@@ -91,17 +91,12 @@ const transformValues = (values: FormValues): ForeslaVedtakAp => ({
   ...values,
 });
 
-interface OwnProps {
-  sprakkode: string;
+interface Props {
   innsynDokumenter: InnsynDokument[];
   innsynMottattDato: string;
   innsynResultatType: string;
   alleDokumenter: Dokument[];
-  saksNr: string;
-  aksjonspunkter: Aksjonspunkt[];
-  submitCallback: (data: ForeslaVedtakAp) => Promise<void>;
   previewCallback: (data: ForhandsvisData) => void;
-  readOnly: boolean;
 }
 
 /**
@@ -109,24 +104,19 @@ interface OwnProps {
  *
  * Presentasjonskomponent. Viser panelet som håndterer vedtaksforslag av innsyn.
  */
-const InnsynVedtakForm: FunctionComponent<OwnProps> = ({
-  readOnly,
+export const InnsynVedtakForm = ({
   previewCallback,
-  saksNr,
   innsynMottattDato,
-  aksjonspunkter,
-  submitCallback,
   innsynResultatType,
   innsynDokumenter,
-  sprakkode,
   alleDokumenter,
-}) => {
+}: Props) => {
   const intl = useIntl();
 
-  const initialValues = useMemo(
-    () => buildInitialValues(innsynMottattDato, aksjonspunkter),
-    [innsynMottattDato, aksjonspunkter],
-  );
+  const { fagsak, aksjonspunkterForPanel, submitCallback, isReadOnly, behandling } =
+    usePanelDataContext<ForeslaVedtakAp>();
+
+  const initialValues = buildInitialValues(innsynMottattDato, aksjonspunkterForPanel);
 
   const { formData, setFormData } = useFormData<FormValues>();
 
@@ -139,7 +129,9 @@ const InnsynVedtakForm: FunctionComponent<OwnProps> = ({
     [alleDokumenter, innsynDokumenter],
   );
 
-  const apBegrunnelse = aksjonspunkter.find(ap => ap.definisjon === AksjonspunktKode.VURDER_INNSYN)?.begrunnelse;
+  const apBegrunnelse = aksjonspunkterForPanel.find(
+    ap => ap.definisjon === AksjonspunktKode.VURDER_INNSYN,
+  )?.begrunnelse;
 
   const begrunnelse = formMethods.watch('begrunnelse');
 
@@ -152,7 +144,7 @@ const InnsynVedtakForm: FunctionComponent<OwnProps> = ({
       setDataOnUnmount={setFormData}
     >
       <Heading size="small">
-        <FormattedMessage id={readOnly ? 'InnsynVedtakForm.Vedtak' : 'InnsynVedtakForm.ForslagVedtak'} />
+        <FormattedMessage id={isReadOnly ? 'InnsynVedtakForm.Vedtak' : 'InnsynVedtakForm.ForslagVedtak'} />
       </Heading>
       <VerticalSpacer eightPx />
       <Label size="small">
@@ -175,12 +167,12 @@ const InnsynVedtakForm: FunctionComponent<OwnProps> = ({
           label={intl.formatMessage({ id: 'InnsynVedtakForm.Fritekst' })}
           validate={[minLength3, maxLength1500, hasValidText]}
           maxLength={1500}
-          readOnly={readOnly}
+          readOnly={isReadOnly}
           parse={formaterFritekst}
           badges={[
             {
               type: 'info',
-              titleText: getLanguageFromSprakkode(sprakkode),
+              titleText: getLanguageFromSprakkode(behandling.sprakkode),
             },
           ]}
         />
@@ -188,15 +180,15 @@ const InnsynVedtakForm: FunctionComponent<OwnProps> = ({
       <VerticalSpacer twentyPx />
       {innsynResultatType !== InnsynResultatType.AVVIST && (
         <DocumentListVedtakInnsyn
-          saksNr={saksNr}
+          saksNr={fagsak.saksnummer}
           documents={documents.filter(document => document.fikkInnsyn === true)}
         />
       )}
       <VerticalSpacer twentyPx />
       <HStack gap="2">
-        {!readOnly && (
+        {!isReadOnly && (
           <ProsessStegSubmitButtonNew
-            isReadOnly={readOnly}
+            isReadOnly={isReadOnly}
             isSubmittable
             isSubmitting={formMethods.formState.isSubmitting}
             isDirty={formMethods.formState.isDirty}
@@ -209,7 +201,7 @@ const InnsynVedtakForm: FunctionComponent<OwnProps> = ({
           onKeyDown={e => (e.key === 'Enter' ? previewBrev(e) : null)}
           target="_blank"
         >
-          {readOnly ? (
+          {isReadOnly ? (
             <FormattedMessage id="InnsynVedtakForm.VisVedtaksbrev" />
           ) : (
             <FormattedMessage id="InnsynVedtakForm.ForhåndsvisBrev" />
@@ -219,5 +211,3 @@ const InnsynVedtakForm: FunctionComponent<OwnProps> = ({
     </Form>
   );
 };
-
-export default InnsynVedtakForm;

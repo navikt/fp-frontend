@@ -5,32 +5,24 @@ import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { PersonopplysningerForFamilie } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
-import { StandardFaktaPanelProps } from '@navikt/fp-types';
+import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { OmsorgOgRettProps } from '../OmsorgOgRettFaktaIndex';
 import { AleneomsorgForm } from './forms/AleneomsorgForm';
 import { HarAnnenForelderRettForm } from './forms/HarAnnenForelderRettForm';
 
-export const OmsorgOgRettInfoPanel = ({
-  readOnly,
-  personoversikt,
-  ytelsefordeling,
-  alleKodeverk,
-  aksjonspunkter,
-  submittable,
-  submitCallback,
-  alleMerknaderFraBeslutter,
-  harApneAksjonspunkter,
-}: OmsorgOgRettProps & StandardFaktaPanelProps) => {
+export const OmsorgOgRettInfoPanel = ({ personoversikt, ytelsefordeling, submittable }: OmsorgOgRettProps) => {
+  const { alleKodeverk, aksjonspunkterForPanel, isReadOnly, harÅpneAksjonspunkter } = usePanelDataContext();
+
   const harAPAleneomsorg = hasAksjonspunkt(
     AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
-    aksjonspunkter,
+    aksjonspunkterForPanel,
   );
-  const harAPAnnenForelderRett = hasAksjonspunkt(AksjonspunktKode.AVKLAR_ANNEN_FORELDER_RETT, aksjonspunkter);
+  const harAPAnnenForelderRett = hasAksjonspunkt(AksjonspunktKode.AVKLAR_ANNEN_FORELDER_RETT, aksjonspunkterForPanel);
 
   return (
     <VStack gap="8">
-      {!readOnly && harApneAksjonspunkter && (
+      {!isReadOnly && harÅpneAksjonspunkter && (
         <AksjonspunktHelpTextHTML>
           {harAPAleneomsorg && <FormattedMessage id="OmsorgOgRettInfoPanel.VurderOmAleneomsorg" />}
           {harAPAnnenForelderRett && <FormattedMessage id="OmsorgOgRettInfoPanel.VurderAndreForelderRett" />}
@@ -42,22 +34,16 @@ export const OmsorgOgRettInfoPanel = ({
       {harAPAleneomsorg && (
         <AleneomsorgForm
           ytelsefordeling={ytelsefordeling}
-          readOnly={readOnly}
           submittable={submittable}
-          submitCallback={submitCallback}
-          alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-          aksjonspunkt={aksjonspunkter[0]}
+          aksjonspunkt={aksjonspunkterForPanel[0]}
         />
       )}
 
       {harAPAnnenForelderRett && (
         <HarAnnenForelderRettForm
           ytelsefordeling={ytelsefordeling}
-          readOnly={readOnly}
           submittable={submittable}
-          submitCallback={submitCallback}
-          alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-          aksjonspunkt={aksjonspunkter[0]}
+          aksjonspunkt={aksjonspunkterForPanel[0]}
         />
       )}
     </VStack>

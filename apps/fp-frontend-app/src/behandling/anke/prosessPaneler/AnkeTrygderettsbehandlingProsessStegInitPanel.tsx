@@ -20,7 +20,7 @@ export const AnkeTrygderettsbehandlingProsessStegInitPanel = ({ ...props }: Pros
   const intl = useIntl();
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
 
-  const { behandling, alleKodeverk } = use(BehandlingDataContext);
+  const { behandling } = use(BehandlingDataContext);
 
   const api = useBehandlingApi(behandling);
   const { data: ankeVurdering } = useQuery(api.anke.ankeVurderingOptions(behandling));
@@ -33,11 +33,7 @@ export const AnkeTrygderettsbehandlingProsessStegInitPanel = ({ ...props }: Pros
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.AnkeMerknader' })}
       skalPanelVisesIMeny
     >
-      {ankeVurdering ? (
-        <AnkeTrygderettsbehandlingProsessIndex ankeVurdering={ankeVurdering} alleKodeverk={alleKodeverk} />
-      ) : (
-        <LoadingPanel />
-      )}
+      {ankeVurdering ? <AnkeTrygderettsbehandlingProsessIndex ankeVurdering={ankeVurdering} /> : <LoadingPanel />}
     </ProsessDefaultInitPanel>
   );
 };

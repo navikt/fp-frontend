@@ -1,8 +1,8 @@
-import React, { FunctionComponent, MouseEvent } from 'react';
+import { MouseEvent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ArrowForwardIcon } from '@navikt/aksel-icons';
-import { Alert, BodyShort, Detail,Label, Link } from '@navikt/ds-react';
+import { Alert, BodyShort, Detail, Label, Link } from '@navikt/ds-react';
 import { TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import {
@@ -21,19 +21,14 @@ const maxLength200 = maxLength(200);
 const maxLength10000 = maxLength(10000);
 const minLength3 = minLength(3);
 
-interface OwnProps {
+interface Props {
   forhåndsvisOverstyrtBrev: (e: MouseEvent) => void;
   isReadOnly: boolean;
   språkKode: string;
   skalViseLink: boolean;
 }
 
-const ManueltVedtaksbrevPanel: FunctionComponent<OwnProps> = ({
-  forhåndsvisOverstyrtBrev,
-  isReadOnly,
-  språkKode,
-  skalViseLink,
-}) => {
+export const ManueltVedtaksbrevPanel = ({ forhåndsvisOverstyrtBrev, isReadOnly, språkKode, skalViseLink }: Props) => {
   const intl = useIntl();
   return (
     <>
@@ -110,5 +105,3 @@ const ManueltVedtaksbrevPanel: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-
-export default ManueltVedtaksbrevPanel;

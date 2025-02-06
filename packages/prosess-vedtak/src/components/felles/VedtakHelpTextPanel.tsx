@@ -1,4 +1,3 @@
-import React, { FunctionComponent } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 
 import { Alert, BodyShort } from '@navikt/ds-react';
@@ -27,12 +26,12 @@ const findHelpTexts = (intl: IntlShape, aksjonspunkter: Aksjonspunkt[]): string[
   return helpTexts;
 };
 
-interface OwnProps {
+interface Props {
   isReadOnly: boolean;
   aksjonspunkter: Aksjonspunkt[];
 }
 
-const VedtakHelpTextPanel: FunctionComponent<OwnProps> = ({ isReadOnly, aksjonspunkter }) => {
+export const VedtakHelpTextPanel = ({ isReadOnly, aksjonspunkter }: Props) => {
   const intl = useIntl();
   const helpTexts = findHelpTexts(intl, aksjonspunkter);
   if (!isReadOnly && helpTexts.length > 0) {
@@ -56,5 +55,3 @@ const VedtakHelpTextPanel: FunctionComponent<OwnProps> = ({ isReadOnly, aksjonsp
   }
   return null;
 };
-
-export default VedtakHelpTextPanel;

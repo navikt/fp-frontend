@@ -61,7 +61,6 @@ export const BeregningFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId, ...prop
     >
       {!isFetching ? (
         <Wrapper
-          {...standardPanelProps}
           kodeverkSamling={standardPanelProps.alleKodeverk}
           vilkar={lagBGVilkar(behandling?.vilkår, beregningsgrunnlag)}
           beregningsgrunnlag={lagFormatertBG(beregningsgrunnlag)}
@@ -69,6 +68,8 @@ export const BeregningFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId, ...prop
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           erOverstyrer={rettigheter.kanOverstyreAccess.isEnabled}
           skalKunneOverstyreAktiviteter
+          readOnly={standardPanelProps.readOnly}
+          submittable={standardPanelProps.submittable}
         />
       ) : (
         <LoadingPanel />

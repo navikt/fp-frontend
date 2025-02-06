@@ -46,7 +46,7 @@ export const FodselvilkaretFaktaInitPanel = (props: FaktaPanelInitProps) => {
           familiehendelse={familiehendelse}
           familiehendelseOriginalBehandling={familiehendelseOrigninalBehandling}
           soknadOriginalBehandling={søknadOriginalBehandling}
-          {...standardPanelProps}
+          submittable={standardPanelProps.submittable}
         />
       ) : (
         <LoadingPanel />

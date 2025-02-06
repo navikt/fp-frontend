@@ -59,7 +59,6 @@ export const TilkjentYtelseProsessStegInitPanel = ({
           familiehendelse={familiehendelse}
           soknad={søknad}
           feriepengegrunnlag={feriepengegrunnlag}
-          {...standardPanelProps}
         />
       ) : (
         <LoadingPanel />

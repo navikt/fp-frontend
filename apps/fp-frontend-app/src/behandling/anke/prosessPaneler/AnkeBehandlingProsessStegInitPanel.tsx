@@ -39,7 +39,6 @@ export const AnkeBehandlingProsessStegInitPanel = (props: ProsessPanelInitProps)
         <AnkeProsessIndex
           behandlinger={alleBehandlinger.filter(b => !b.behandlingHenlagt)}
           ankeVurdering={ankeVurdering}
-          {...standardPanelProps}
         />
       ) : (
         <LoadingPanel />

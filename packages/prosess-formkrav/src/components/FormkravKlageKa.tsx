@@ -1,4 +1,3 @@
-import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Heading, Label } from '@navikt/ds-react';
@@ -7,13 +6,13 @@ import { DATE_TIME_FORMAT } from '@navikt/ft-utils';
 import moment from 'moment';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
-import { AlleKodeverk, KlageVurdering } from '@navikt/fp-types';
+import { KlageVurdering } from '@navikt/fp-types';
+import { usePanelDataContext } from '@navikt/fp-utils';
 
-import AvsluttetBehandling from '../types/avsluttetBehandlingTsType';
+import { AvsluttetBehandling } from '../types/avsluttetBehandlingTsType';
 
-interface OwnProps {
+interface Props {
   klageVurdering: KlageVurdering;
-  alleKodeverk: AlleKodeverk;
   avsluttedeBehandlinger: AvsluttetBehandling[];
 }
 
@@ -22,8 +21,10 @@ interface OwnProps {
  *
  * Readonly panel for formkrav klage (KA).
  */
-const FormkravKlageKa: FunctionComponent<OwnProps> = ({ klageVurdering, alleKodeverk, avsluttedeBehandlinger }) => {
+export const FormkravKlageKa = ({ klageVurdering, avsluttedeBehandlinger }: Props) => {
   const intl = useIntl();
+
+  const { alleKodeverk } = usePanelDataContext();
 
   const { klageFormkravResultatKA, underBehandlingKabal, behandletAvKabal } = klageVurdering;
 
@@ -116,5 +117,3 @@ const FormkravKlageKa: FunctionComponent<OwnProps> = ({ klageVurdering, alleKode
     </>
   );
 };
-
-export default FormkravKlageKa;

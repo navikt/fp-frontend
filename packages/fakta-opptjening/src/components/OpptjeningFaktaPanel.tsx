@@ -1,4 +1,4 @@
-import { FunctionComponent, ReactElement, useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Button, Label } from '@navikt/ds-react';
@@ -8,7 +8,6 @@ import dayjs from 'dayjs';
 
 import { AksjonspunktKode, KodeverkType } from '@navikt/fp-kodeverk';
 import {
-  AlleKodeverk,
   ArbeidsgiverOpplysningerPerId,
   FerdiglignetNæring,
   KodeverkMedNavn,
@@ -16,7 +15,7 @@ import {
   OpptjeningAktivitet,
 } from '@navikt/fp-types';
 import { AvklarAktivitetsPerioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData } from '@navikt/fp-utils';
+import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import ValgtAktivitetForm, { FormValues } from './aktivitet/ValgtAktivitetForm';
 import OpptjeningTidslinje from './tidslinje/OpptjeningTidslinje';
@@ -68,17 +67,11 @@ const filtrerOpptjeningAktiviteter = (
     .filter(oa => dayjs(oa.opptjeningFom).isBefore(addDay(fastsattOpptjening.opptjeningTom)));
 };
 
-interface OwnProps {
-  hasAksjonspunkt: boolean;
-  hasOpenAksjonspunkter: boolean;
-  readOnly: boolean;
-  alleKodeverk: AlleKodeverk;
-  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
+interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   opptjeningAktiviteter?: OpptjeningAktivitet[];
   ferdiglignetNæring: FerdiglignetNæring[];
   fastsattOpptjening?: Opptjening['fastsattOpptjening'];
-  submitCallback: (data: AvklarAktivitetsPerioderAp) => Promise<void>;
 }
 
 /**
@@ -87,18 +80,23 @@ interface OwnProps {
  * Vises faktapanelet for opptjeningsvilkåret. For Foreldrepenger vises dette alltid. Finnes
  * det aksjonspunkt kan nav-ansatt endre opplysninger før en går videre i prosessen.
  */
-const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
-  hasAksjonspunkt,
-  hasOpenAksjonspunkter,
+export const OpptjeningFaktaPanel = ({
   opptjeningAktiviteter,
-  readOnly,
-  alleMerknaderFraBeslutter,
-  alleKodeverk,
   arbeidsgiverOpplysningerPerId,
   fastsattOpptjening,
   ferdiglignetNæring,
-  submitCallback,
-}) => {
+}: Props) => {
+  const {
+    aksjonspunkterForPanel,
+    alleMerknaderFraBeslutter,
+    harÅpneAksjonspunkter,
+    submitCallback,
+    isReadOnly,
+    alleKodeverk,
+  } = usePanelDataContext<AvklarAktivitetsPerioderAp>();
+
+  const harAksjonspunkt = aksjonspunkterForPanel.length > 0;
+
   const opptjeningAktivitetTypes = alleKodeverk[KodeverkType.OPPTJENING_AKTIVITET_TYPE];
 
   const filtrerteOgSorterteOpptjeningsaktiviteter =
@@ -197,9 +195,9 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
 
   return (
     <div className={styles.container}>
-      {hasAksjonspunkt && (
+      {harAksjonspunkt && (
         <>
-          {hasOpenAksjonspunkter && (
+          {harÅpneAksjonspunkter && (
             <AksjonspunktHelpTextHTML>
               {getAksjonspunktHelpTexts(filtrerteOgSorterteOpptjeningsaktiviteter)}
             </AksjonspunktHelpTextHTML>
@@ -229,14 +227,14 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
             key={valgtAktivitetIndex}
             valgtOpptjeningAktivitet={filtrerteOgSorterteOpptjeningsaktiviteter[valgtAktivitetIndex]}
             valgteFormValues={formVerdierForAlleAktiviteter[valgtAktivitetIndex]}
-            readOnly={readOnly}
+            readOnly={isReadOnly}
             opptjeningAktivitetTyper={opptjeningAktivitetTypes}
             avbrytAktivitet={avbrytAktivitet}
             oppdaterAktivitet={oppdaterAktivitet}
             fastsattOpptjening={fastsattOpptjening}
             velgNesteAktivitet={velgNesteAktivitet}
             velgForrigeAktivitet={velgForrigeAktivitet}
-            harAksjonspunkt={hasAksjonspunkt}
+            harAksjonspunkt={harAksjonspunkt}
             alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
             alleKodeverk={alleKodeverk}
             arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -246,12 +244,12 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
           <VerticalSpacer twentyPx />
         </>
       )}
-      {hasAksjonspunkt && filtrerteOgSorterteOpptjeningsaktiviteter.length > 0 && (
+      {harAksjonspunkt && filtrerteOgSorterteOpptjeningsaktiviteter.length > 0 && (
         <Button
           size="small"
           variant="primary"
           onClick={bekreft}
-          disabled={valgtAktivitetIndex !== undefined || isSubmitting || readOnly || harIkkeBehandletAlle}
+          disabled={valgtAktivitetIndex !== undefined || isSubmitting || isReadOnly || harIkkeBehandletAlle}
           loading={isSubmitting}
           type="button"
         >
@@ -261,5 +259,3 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
     </div>
   );
 };
-
-export default OpptjeningFaktaPanel;

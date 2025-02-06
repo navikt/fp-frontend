@@ -1,9 +1,9 @@
-import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { KlageVurdering, StandardProsessPanelProps } from '@navikt/fp-types';
+import { KlageVurdering } from '@navikt/fp-types';
+import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { ForhandsvisData, VedtakKlageForm } from './components/VedtakKlageForm';
 
@@ -11,20 +11,14 @@ import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-interface OwnProps {
+interface Props {
   klageVurdering: KlageVurdering;
   previewVedtakCallback: (data: ForhandsvisData) => void;
 }
 
-const VedtakKlageProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
-  behandling,
-  klageVurdering,
-  aksjonspunkter,
-  submitCallback,
-  previewVedtakCallback,
-  isReadOnly,
-  alleKodeverk,
-}) => {
+export const VedtakKlageProsessIndex = ({ klageVurdering, previewVedtakCallback }: Props) => {
+  const { behandling } = usePanelDataContext();
+
   if (!behandling.behandlingsresultat) {
     throw new Error(`behandlingsresultat finnes ikke for behandling ${behandling.uuid}`);
   }
@@ -32,17 +26,10 @@ const VedtakKlageProsessIndex: FunctionComponent<OwnProps & StandardProsessPanel
   return (
     <RawIntlProvider value={intl}>
       <VedtakKlageForm
-        behandlingsresultat={behandling.behandlingsresultat}
-        behandlingPaaVent={behandling.behandlingPaaVent}
         klageVurdering={klageVurdering}
-        aksjonspunkter={aksjonspunkter}
-        submitCallback={submitCallback}
         previewVedtakCallback={previewVedtakCallback}
-        readOnly={isReadOnly}
-        alleKodeverk={alleKodeverk}
+        behandlingsresultat={behandling.behandlingsresultat}
       />
     </RawIntlProvider>
   );
 };
-
-export default VedtakKlageProsessIndex;

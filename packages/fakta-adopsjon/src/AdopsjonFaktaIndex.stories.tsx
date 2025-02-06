@@ -1,20 +1,16 @@
-import { action } from '@storybook/addon-actions';
+import { ComponentProps } from 'react';
+
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, SoknadType } from '@navikt/fp-kodeverk';
-import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
-import { Behandling, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
+import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
 
 import { AdopsjonFaktaIndex } from './AdopsjonFaktaIndex';
 
 import '@navikt/ds-css';
 import '@navikt/ft-form-hooks/dist/style.css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
-
-const behandling = {
-  uuid: '1',
-  versjon: 1,
-} as Behandling;
 
 const familieHendelse = {
   gjeldende: {
@@ -43,26 +39,22 @@ const merknaderFraBeslutter = {
 const meta = {
   title: 'fakta/fakta-adopsjon',
   component: AdopsjonFaktaIndex,
-  decorators: [withFormData],
+  decorators: [withFormData, withPanelData],
   args: {
     soknad,
     familiehendelse: familieHendelse,
-    readOnly: false,
-    harApneAksjonspunkter: true,
     submittable: true,
-    behandling: behandling,
-    submitCallback: action('button-click') as (data: any) => Promise<void>,
     isForeldrepengerFagsak: true,
-    alleKodeverk: alleKodeverk as any,
   },
-} satisfies Meta<typeof AdopsjonFaktaIndex>;
+  render: args => <AdopsjonFaktaIndex {...args} />,
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof AdopsjonFaktaIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
 export const AksjonspunktForAdopsjonsvilkåret: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.ADOPSJONSDOKUMENTAJON,
         status: AksjonspunktStatus.OPPRETTET,
@@ -78,7 +70,7 @@ export const AksjonspunktForAdopsjonsvilkåret: Story = {
 
 export const AksjonspunktForOmSøkerErMannSomAdoptererAlene: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
         status: AksjonspunktStatus.OPPRETTET,
@@ -94,7 +86,7 @@ export const AksjonspunktForOmSøkerErMannSomAdoptererAlene: Story = {
 
 export const AksjonspunktForOmAdopsjonGjelderEktefellesBarn: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
         status: AksjonspunktStatus.OPPRETTET,
@@ -110,7 +102,7 @@ export const AksjonspunktForOmAdopsjonGjelderEktefellesBarn: Story = {
 
 export const IkkeVisBarnetsAnkomstDatoForEngangsstønad: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
         status: AksjonspunktStatus.OPPRETTET,

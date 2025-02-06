@@ -69,7 +69,7 @@ describe('<MedlemskapFaktaIndex>', () => {
       adresser.getByText('Dette ble markert fordi det finnes perioder uten norsk bostedsadresse i folkeregisteret'),
     ).toBeInTheDocument();
 
-    expect(adresser.getByText('Søker, Ola Nordmann')).toBeInTheDocument();
+    expect(adresser.getByText('Søker, Kari Nordmann')).toBeInTheDocument();
     expect(
       adresser.getByText('Adresser for søker registrert i folkeregisteret gyldige for de siste 12 månedene'),
     ).toBeInTheDocument();
@@ -79,7 +79,7 @@ describe('<MedlemskapFaktaIndex>', () => {
     expect(adresser.getByText('01.01.2020 - 01.01.2021')).toBeInTheDocument();
     expect(adresser.getByText('Mäkelänkatu 1B, FI-00123 Helsinki, Finland')).toBeInTheDocument();
     expect(adresser.getByText('Kontaktadresse utland')).toBeInTheDocument();
-    expect(adresser.getByText('Den andre forelderen, Kari Nordmann')).toBeInTheDocument();
+    expect(adresser.getByText('Den andre forelderen, Ola Nordmann')).toBeInTheDocument();
     expect(
       adresser.getByText(
         'Adresser for den andre forelderen registrert i folkeregisteret gyldige på skjæringstidspunktet',
@@ -93,8 +93,8 @@ describe('<MedlemskapFaktaIndex>', () => {
     const personstatus = within(screen.getByLabelText('Personstatus og statsborgerskap for søker og annen part'));
     await userEvent.click(personstatus.getByText('Vis mer'));
 
-    const bruker = within(screen.getByLabelText('Personstatus og statsborgerskap for Ola Nordmann'));
-    expect(bruker.getByText('Søker, Ola Nordmann')).toBeInTheDocument();
+    const bruker = within(screen.getByLabelText('Personstatus og statsborgerskap for Kari Nordmann'));
+    expect(bruker.getByText('Søker, Kari Nordmann')).toBeInTheDocument();
 
     const regionTabellBruker = within(bruker.getByLabelText('Region for bruker'));
     expect(regionTabellBruker.getByText('Region for statsborgerskap')).toBeInTheDocument();
@@ -116,8 +116,8 @@ describe('<MedlemskapFaktaIndex>', () => {
     expect(personstatusTabellBruker.getByText('01.01.2019')).toBeInTheDocument();
     expect(personstatusTabellBruker.getByText('01.01.2022')).toBeInTheDocument();
 
-    const annenpart = within(screen.getByLabelText('Personstatus og statsborgerskap for Kari Nordmann'));
-    expect(annenpart.getByText('Annen part, Kari Nordmann')).toBeInTheDocument();
+    const annenpart = within(screen.getByLabelText('Personstatus og statsborgerskap for Ola Nordmann'));
+    expect(annenpart.getByText('Annen part, Ola Nordmann')).toBeInTheDocument();
 
     const regionTabellAnnenpart = within(annenpart.getByLabelText('Region for annenpart'));
 

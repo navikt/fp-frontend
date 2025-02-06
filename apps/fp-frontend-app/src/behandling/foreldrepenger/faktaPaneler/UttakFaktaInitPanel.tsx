@@ -32,7 +32,7 @@ interface Props {
 export const UttakFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId, ...props }: Props & FaktaPanelInitProps) => {
   const intl = useIntl();
 
-  const { behandling, fagsak, rettigheter } = use(BehandlingDataContext);
+  const { behandling, rettigheter } = use(BehandlingDataContext);
 
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER, OVERSTYRING_AP_CODES);
 
@@ -52,13 +52,12 @@ export const UttakFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId, ...props }:
     >
       {ytelsefordeling && uttakKontrollerFaktaPerioder ? (
         <UttakFaktaIndex
-          fagsak={fagsak}
           kanOverstyre={rettigheter.kanOverstyreAccess.isEnabled && behandling.harSattEndringsdato}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           uttakKontrollerFaktaPerioder={uttakKontrollerFaktaPerioder}
           ytelsefordeling={ytelsefordeling}
           faktaArbeidsforhold={faktaArbeidsforhold}
-          {...standardPanelProps}
+          submittable={standardPanelProps.submittable}
         />
       ) : (
         <LoadingPanel />

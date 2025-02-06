@@ -1,4 +1,4 @@
-import React, { FunctionComponent, MouseEvent, ReactNode, useCallback, useMemo, useState } from 'react';
+import React, { MouseEvent, ReactNode, useCallback, useMemo, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -17,9 +17,10 @@ import {
 } from '@navikt/fp-kodeverk';
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
 import { Aksjonspunkt, Behandling, Behandlingsresultat } from '@navikt/fp-types';
+import { usePanelDataContext } from '@navikt/fp-utils';
 
-import ManueltVedtaksbrevPanel from './ManueltVedtaksbrevPanel';
-import VedtakHelpTextPanel from './VedtakHelpTextPanel';
+import { ManueltVedtaksbrevPanel } from './ManueltVedtaksbrevPanel';
+import { VedtakHelpTextPanel } from './VedtakHelpTextPanel';
 
 import styles from './vedtakFellesPanel.module.css';
 
@@ -53,11 +54,8 @@ const harIkkeKonsekvenserForYtelsen = (
   return !konsekvenserForYtelsenKoder.some(kode => kode === konsekvenserForYtelsen[0]);
 };
 
-interface OwnProps {
-  behandling: Behandling;
-  readOnly: boolean;
+interface Props {
   erBehandlingEtterKlage: boolean;
-  aksjonspunkter: Aksjonspunkt[];
   renderPanel: (
     skalBrukeManueltBrev: boolean,
     erInnvilget: boolean,
@@ -70,18 +68,19 @@ interface OwnProps {
   vedtakstatusTekst?: string;
 }
 
-const VedtakFellesPanel: FunctionComponent<OwnProps> = ({
-  behandling,
-  aksjonspunkter,
-  readOnly,
+export const VedtakFellesPanel = ({
   renderPanel,
   previewAutomatiskBrev,
   previewOverstyrtBrev,
   tilbakekrevingtekst,
   erBehandlingEtterKlage,
   vedtakstatusTekst,
-}) => {
+}: Props) => {
   const intl = useIntl();
+
+  const { behandling, isReadOnly } = usePanelDataContext();
+
+  const { aksjonspunkt } = behandling;
 
   const {
     setValue,
@@ -189,7 +188,7 @@ const VedtakFellesPanel: FunctionComponent<OwnProps> = ({
             )}
           </FlexColumn>
           <FlexColumn>
-            {!readOnly && !skalBrukeManueltBrev && (
+            {!isReadOnly && !skalBrukeManueltBrev && (
               <Link href="#" onClick={onToggleOverstyring}>
                 <PencilIcon className={styles.blyant} />
                 <span>
@@ -197,7 +196,7 @@ const VedtakFellesPanel: FunctionComponent<OwnProps> = ({
                 </span>
               </Link>
             )}
-            {(readOnly || skalBrukeManueltBrev) && (
+            {(isReadOnly || skalBrukeManueltBrev) && (
               <>
                 <PencilIcon className={styles.blyantDisablet} />
                 <BodyShort size="small" className={styles.disabletLink}>
@@ -208,12 +207,12 @@ const VedtakFellesPanel: FunctionComponent<OwnProps> = ({
           </FlexColumn>
         </FlexRow>
       </FlexContainer>
-      <VedtakHelpTextPanel aksjonspunkter={aksjonspunkter} isReadOnly={readOnly} />
+      <VedtakHelpTextPanel aksjonspunkter={aksjonspunkt} isReadOnly={isReadOnly} />
       <VerticalSpacer twentyPx />
       {renderPanel(skalBrukeManueltBrev, erInnvilget, erAvslatt, erOpphor)}
       {skalBrukeManueltBrev && (
         <ManueltVedtaksbrevPanel
-          isReadOnly={readOnly}
+          isReadOnly={isReadOnly}
           språkKode={sprakkode}
           forhåndsvisOverstyrtBrev={previewOverstyrtBrev}
           skalViseLink={skalViseLink}
@@ -225,14 +224,14 @@ const VedtakFellesPanel: FunctionComponent<OwnProps> = ({
           <FlexContainer>
             <FlexRow>
               <FlexColumn>
-                {!readOnly && (
+                {!isReadOnly && (
                   <Button
                     variant="primary"
                     size="small"
                     disabled={behandlingPaaVent || isSubmitting}
                     loading={isSubmitting}
                   >
-                    <FormattedMessage id={finnKnappetekstkode(aksjonspunkter, skalBrukeManueltBrev)} />
+                    <FormattedMessage id={finnKnappetekstkode(aksjonspunkt, skalBrukeManueltBrev)} />
                   </Button>
                 )}
               </FlexColumn>
@@ -250,5 +249,3 @@ const VedtakFellesPanel: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-
-export default VedtakFellesPanel;

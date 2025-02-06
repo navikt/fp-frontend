@@ -104,6 +104,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
       arbeidsgiverIdent: '910909088',
       begrunnelse: 'Dette er en begrunnelse',
       behandlingUuid: '1223-2323-2323-22332',
+      behandlingVersjon: 1,
       internArbeidsforholdRef: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
       vurdering: 'FORTSETT_UTEN_INNTEKTSMELDING',
     });
@@ -178,6 +179,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
       arbeidsgiverIdent: '910909088',
       begrunnelse: 'Dette er en begrunnelse',
       behandlingUuid: '1223-2323-2323-22332',
+      behandlingVersjon: 1,
       internArbeidsforholdRef: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
       vurdering: 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD',
     });
@@ -218,6 +220,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
       arbeidsgiverIdent: '910909088',
       begrunnelse: 'Dette er en begrunnelse',
       behandlingUuid: '1223-2323-2323-22332',
+      behandlingVersjon: 1,
       internArbeidsforholdRef: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
       vurdering: 'MELDING_TIL_ARBEIDSGIVER_NAV_NO',
     });
@@ -244,6 +247,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
       arbeidsgiverIdent: '910909088',
       begrunnelse: 'Dette er en begrunnelse',
       behandlingUuid: '1223-2323-2323-22332',
+      behandlingVersjon: 1,
       internArbeidsforholdRef: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
       vurdering: 'IKKE_OPPRETT_BASERT_PÅ_INNTEKTSMELDING',
     });
@@ -290,6 +294,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
       arbeidsgiverNavn: 'BEDRIFT AS',
       begrunnelse: 'Dette er en begrunnelse',
       behandlingUuid: '1223-2323-2323-22332',
+      behandlingVersjon: 1,
       internArbeidsforholdRef: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
       fom: '2020-02-01',
       stillingsprosent: 100,
@@ -413,6 +418,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
       arbeidsgiverNavn: 'Telenor',
       begrunnelse: 'Dette er en begrunnelse',
       behandlingUuid: '1223-2323-2323-22332',
+      behandlingVersjon: 1,
       fom: '2020-02-01',
       stillingsprosent: 100,
       tom: '2022-02-01',
@@ -481,6 +487,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
       arbeidsgiverNavn: 'Telenor',
       begrunnelse: 'Dette er en begrunnelse',
       behandlingUuid: '1223-2323-2323-22332',
+      behandlingVersjon: 1,
       fom: '2019-12-06',
       stillingsprosent: 100,
       tom: '2022-12-31',

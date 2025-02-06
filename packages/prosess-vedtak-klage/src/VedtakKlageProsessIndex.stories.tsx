@@ -1,3 +1,5 @@
+import { ComponentProps } from 'react';
+
 import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
@@ -7,17 +9,10 @@ import {
   BehandlingResultatType,
   KlageVurdering as klageVurderingCodes,
 } from '@navikt/fp-kodeverk';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import { Aksjonspunkt, Behandling, Fagsak, KlageVurdering, KlageVurderingResultat } from '@navikt/fp-types';
+import { PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
+import { Aksjonspunkt, Behandling, KlageVurdering, KlageVurderingResultat } from '@navikt/fp-types';
 
-import VedtakKlageProsessIndex from './VedtakKlageProsessIndex';
-
-const promiseAction =
-  () =>
-  (...args: any[]) => {
-    action('button-click')(...args);
-    return Promise.resolve();
-  };
+import { VedtakKlageProsessIndex } from './VedtakKlageProsessIndex';
 
 const behandling = {
   uuid: '1',
@@ -28,7 +23,7 @@ const behandling = {
   behandlingPaaVent: false,
 } as Behandling;
 
-const aksjonspunkter = [
+const aksjonspunkterForPanel = [
   {
     definisjon: AksjonspunktKode.FORESLA_VEDTAK,
     status: AksjonspunktStatus.OPPRETTET,
@@ -39,22 +34,14 @@ const aksjonspunkter = [
 const meta = {
   title: 'prosess/klage/prosess-vedtak-klage',
   component: VedtakKlageProsessIndex,
+  decorators: [withPanelData],
   args: {
-    submitCallback: promiseAction(),
     previewVedtakCallback: action('button-click') as () => Promise<any>,
     behandling,
-    alleKodeverk: alleKodeverk as any,
-    aksjonspunkter,
-    isReadOnly: false,
-    isAksjonspunktOpen: true,
-    readOnlySubmitButton: false,
-    status: '',
-    vilkar: [],
-    alleMerknaderFraBeslutter: {},
-    setFormData: () => undefined,
-    fagsak: {} as Fagsak,
+    aksjonspunkterForPanel,
   },
-} satisfies Meta<typeof VedtakKlageProsessIndex>;
+  render: args => <VedtakKlageProsessIndex {...args} />,
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof VedtakKlageProsessIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;

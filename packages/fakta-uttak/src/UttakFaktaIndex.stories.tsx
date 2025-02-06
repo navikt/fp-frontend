@@ -1,8 +1,9 @@
-import { action } from '@storybook/addon-actions';
+import { ComponentProps } from 'react';
+
 import { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, AksjonspunktStatus, RelasjonsRolleType, UttakPeriodeType } from '@navikt/fp-kodeverk';
-import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
+import { AksjonspunktKode, AksjonspunktStatus, UttakPeriodeType } from '@navikt/fp-kodeverk';
+import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import { Fagsak } from '@navikt/fp-types';
 
 import OverføringÅrsak from './kodeverk/overføringÅrsak';
@@ -24,14 +25,10 @@ const arbeidsgiverOpplysningerPerId = {
 const meta = {
   title: 'fakta/fakta-uttak',
   component: UttakFaktaIndex,
-  decorators: [withFormData],
+  decorators: [withFormData, withPanelData],
   args: {
-    fagsak: { relasjonsRolleType: RelasjonsRolleType.MOR } as Fagsak,
     arbeidsgiverOpplysningerPerId,
-    alleKodeverk: alleKodeverk as any,
-    readOnly: false,
     kanOverstyre: false,
-    submitCallback: action('button-click') as (data: any) => Promise<void>,
     submittable: true,
     faktaArbeidsforhold: [
       {
@@ -44,14 +41,15 @@ const meta = {
       },
     ],
   },
-} satisfies Meta<typeof UttakFaktaIndex>;
+  render: args => <UttakFaktaIndex {...args} />,
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof UttakFaktaIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
 export const VisUttaksperiodeUtenAksjonspunkt: Story = {
   args: {
-    aksjonspunkter: [],
+    aksjonspunkterForPanel: [],
     ytelsefordeling: {
       overstyrtOmsorg: undefined,
       rettigheterAnnenforelder: {
@@ -78,7 +76,7 @@ export const VisUttaksperiodeUtenAksjonspunkt: Story = {
 
 export const VisUttaksperiodeUtenAksjonspunktKanOverstyre: Story = {
   args: {
-    aksjonspunkter: [],
+    aksjonspunkterForPanel: [],
     ytelsefordeling: {
       overstyrtOmsorg: undefined,
       rettigheterAnnenforelder: {
@@ -105,7 +103,7 @@ export const VisUttaksperiodeUtenAksjonspunktKanOverstyre: Story = {
 
 export const VisUttaksperiodeMedAksjonspunkt: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
         status: AksjonspunktStatus.OPPRETTET,
@@ -168,7 +166,7 @@ export const VisUttaksperiodeMedAksjonspunkt: Story = {
 
 export const VisUtsettelseperiodeMedAksjonspunkt: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
         status: AksjonspunktStatus.OPPRETTET,
@@ -200,7 +198,7 @@ export const VisUtsettelseperiodeMedAksjonspunkt: Story = {
 
 export const VisOverføringsperiodeMedAksjonspunkt: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
         status: AksjonspunktStatus.OPPRETTET,
@@ -233,7 +231,7 @@ export const VisOverføringsperiodeMedAksjonspunkt: Story = {
 
 export const VisAksjonspunktDerIngenPerioderFinnes: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER_KODE,
         status: AksjonspunktStatus.OPPRETTET,
@@ -258,7 +256,7 @@ export const VisAksjonspunktDerIngenPerioderFinnes: Story = {
 
 export const VisAksjonspunktDerArbeidsfoholdErUkjentVedGradering: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET_KODE,
         status: AksjonspunktStatus.OPPRETTET,
@@ -296,7 +294,7 @@ export const VisAksjonspunktDerArbeidsfoholdErUkjentVedGradering: Story = {
 
 export const VisAksjonspunktDerEnIkkeHarBeregningsgrunnlagVedGradering: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE,
         status: AksjonspunktStatus.OPPRETTET,
@@ -334,7 +332,7 @@ export const VisAksjonspunktDerEnIkkeHarBeregningsgrunnlagVedGradering: Story = 
 
 export const VisPanelDerAksjonspunktErLøstOgBehandlingAvsluttet: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE,
         status: AksjonspunktStatus.UTFORT,
@@ -369,13 +367,13 @@ export const VisPanelDerAksjonspunktErLøstOgBehandlingAvsluttet: Story = {
       },
     ],
     kanOverstyre: false,
-    readOnly: true,
+    isReadOnly: true,
   },
 };
 
 export const VisBegrunnelseFraTidligereUtgaveAvPanel: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE,
         status: AksjonspunktStatus.UTFORT,
@@ -411,13 +409,13 @@ export const VisBegrunnelseFraTidligereUtgaveAvPanel: Story = {
       },
     ],
     kanOverstyre: false,
-    readOnly: true,
+    isReadOnly: true,
   },
 };
 
 export const VisUttaksperiodeMedAksjonspunktForFar: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
         status: AksjonspunktStatus.OPPRETTET,

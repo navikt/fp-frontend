@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback, useMemo } from 'react';
+import { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -12,9 +12,9 @@ import {
   ProsessStegBegrunnelseTextFieldNew,
   VilkarResultPicker,
 } from '@navikt/fp-prosess-felles';
-import { Aksjonspunkt, Behandling, Behandlingsresultat, FastsattOpptjening } from '@navikt/fp-types';
+import { Aksjonspunkt, Behandlingsresultat, FastsattOpptjening } from '@navikt/fp-types';
 import { AvklarOpptjeningsvilkaretAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData } from '@navikt/fp-utils';
+import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import OpptjeningVilkarView from './OpptjeningVilkarView';
 
@@ -39,17 +39,11 @@ const transformValues = (values: FormValues): AvklarOpptjeningsvilkaretAp => ({
   kode: AksjonspunktKode.VURDER_OPPTJENINGSVILKARET,
 });
 
-interface OwnProps {
+interface Props {
   fastsattOpptjening: FastsattOpptjening;
-  behandlingsresultat?: Behandling['behandlingsresultat'];
-  aksjonspunkter: Aksjonspunkt[];
   status: string;
-  isApOpen: boolean;
-  readOnly: boolean;
   readOnlySubmitButton: boolean;
-  submitCallback: (aksjonspunktData: AvklarOpptjeningsvilkaretAp) => Promise<void>;
   lovReferanse?: string;
-  erIkkeGodkjentAvBeslutter: boolean;
   erSvpFagsak: boolean;
 }
 
@@ -58,31 +52,36 @@ interface OwnProps {
  *
  * Viser panel for å løse aksjonspunkt for avslått opptjeningsvilkår
  */
-const OpptjeningVilkarAksjonspunktPanel: FunctionComponent<OwnProps> = ({
-  isApOpen,
+export const OpptjeningVilkarAksjonspunktPanel = ({
   readOnlySubmitButton,
-  readOnly,
   lovReferanse,
-  aksjonspunkter,
-  behandlingsresultat,
   status,
   fastsattOpptjening,
-  submitCallback,
-  erIkkeGodkjentAvBeslutter,
   erSvpFagsak,
-}) => {
+}: Props) => {
   const intl = useIntl();
 
-  const initialValues = useMemo(
-    () => buildInitialValues(aksjonspunkter, status, behandlingsresultat),
-    [behandlingsresultat, aksjonspunkter, status],
+  const {
+    behandling,
+    aksjonspunkterForPanel,
+    submitCallback,
+    harÅpneAksjonspunkter,
+    isReadOnly,
+    alleMerknaderFraBeslutter,
+  } = usePanelDataContext<AvklarOpptjeningsvilkaretAp>();
+
+  const erIkkeGodkjentAvBeslutter = aksjonspunkterForPanel.some(
+    a => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted,
   );
+
+  const initialValues = buildInitialValues(aksjonspunkterForPanel, status, behandling.behandlingsresultat);
+
   const { formData, setFormData } = useFormData<FormValues>();
   const formMethods = useForm<FormValues>({
     defaultValues: formData || initialValues,
   });
 
-  const isOpenAksjonspunkt = aksjonspunkter.some(ap => ap.status === AksjonspunktStatus.OPPRETTET);
+  const isOpenAksjonspunkt = aksjonspunkterForPanel.some(ap => ap.status === AksjonspunktStatus.OPPRETTET);
   const originalErVilkarOk = isOpenAksjonspunkt ? undefined : VilkarUtfallType.OPPFYLT === status;
 
   const onSubmit = useCallback((values: FormValues) => submitCallback(transformValues(values)), [submitCallback]);
@@ -116,9 +115,9 @@ const OpptjeningVilkarAksjonspunktPanel: FunctionComponent<OwnProps> = ({
     <Form formMethods={formMethods} onSubmit={onSubmit} setDataOnUnmount={setFormData}>
       <ProsessPanelTemplate
         title={intl.formatMessage({ id: 'OpptjeningVilkarAksjonspunktPanel.Opptjeningsvilkaret' })}
-        isAksjonspunktOpen={isApOpen}
+        isAksjonspunktOpen={harÅpneAksjonspunkter}
         readOnlySubmitButton={readOnlySubmitButton}
-        readOnly={readOnly}
+        readOnly={isReadOnly}
         lovReferanse={lovReferanse}
         originalErVilkarOk={originalErVilkarOk}
         erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
@@ -136,7 +135,7 @@ const OpptjeningVilkarAksjonspunktPanel: FunctionComponent<OwnProps> = ({
           />
         </Label>
         <VilkarResultPicker
-          readOnly={readOnly}
+          readOnly={isReadOnly}
           customVilkarOppfyltText={
             <FormattedMessage
               id={
@@ -159,10 +158,8 @@ const OpptjeningVilkarAksjonspunktPanel: FunctionComponent<OwnProps> = ({
           validatorsForRadioOptions={[validerAtEnKunKanVelgeOppfyltNårEnHarPerioder]}
         />
         <VerticalSpacer sixteenPx />
-        <ProsessStegBegrunnelseTextFieldNew readOnly={readOnly} />
+        <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
       </ProsessPanelTemplate>
     </Form>
   );
 };
-
-export default OpptjeningVilkarAksjonspunktPanel;

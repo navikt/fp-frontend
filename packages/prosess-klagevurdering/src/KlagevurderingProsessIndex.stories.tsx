@@ -1,3 +1,5 @@
+import { ComponentProps } from 'react';
+
 import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
@@ -6,43 +8,31 @@ import {
   KlageVurdering as klageVurderingCodes,
   KlageVurderingOmgjoer as klageVurderingOmgjoerType,
 } from '@navikt/fp-kodeverk';
-import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
-import { Aksjonspunkt, Behandling, Fagsak, KlageVurdering } from '@navikt/fp-types';
+import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { Aksjonspunkt, KlageVurdering } from '@navikt/fp-types';
 
 import { KlagevurderingProsessIndex } from './KlagevurderingProsessIndex';
-
-const behandling = {
-  uuid: '1',
-  versjon: 1,
-  sprakkode: 'NO',
-} as Behandling;
 
 const meta = {
   title: 'prosess/klage/prosess-klagevurdering',
   component: KlagevurderingProsessIndex,
-  decorators: [withFormData],
+  decorators: [withFormData, withPanelData],
   args: {
-    behandling,
-    alleKodeverk: alleKodeverk as any,
-    submitCallback: action('button-click') as (data: any) => Promise<void>,
     saveKlage: action('button-click') as (data: any) => Promise<void>,
     previewCallback: action('button-click') as (data: any) => Promise<void>,
-    isReadOnly: false,
-    isAksjonspunktOpen: true,
     readOnlySubmitButton: false,
-    status: '',
-    vilkar: [],
-    alleMerknaderFraBeslutter: {},
-    fagsak: {} as Fagsak,
   },
-} satisfies Meta<typeof KlagevurderingProsessIndex>;
+  render: props => {
+    return <KlagevurderingProsessIndex {...props} />;
+  },
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof KlagevurderingProsessIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
 export const MedholdIKlageNk: Story = {
   args: {
-    aksjonspunkter: [],
+    aksjonspunkterForPanel: [],
     klageVurdering: {
       klageVurderingResultatNK: {
         klageVurdertAv: 'NK',
@@ -62,7 +52,7 @@ export const MedholdIKlageNk: Story = {
 
 export const StadfestKlageNk: Story = {
   args: {
-    aksjonspunkter: [],
+    aksjonspunkterForPanel: [],
     klageVurdering: {
       klageVurderingResultatNK: {
         klageVurdertAv: 'NK',
@@ -80,7 +70,7 @@ export const StadfestKlageNk: Story = {
 
 export const HjemsendtIKlageNk: Story = {
   args: {
-    aksjonspunkter: [],
+    aksjonspunkterForPanel: [],
     klageVurdering: {
       klageVurderingResultatNK: {
         klageVurdertAv: 'NK',
@@ -99,7 +89,7 @@ export const HjemsendtIKlageNk: Story = {
 
 export const OpphevIKlageNk: Story = {
   args: {
-    aksjonspunkter: [],
+    aksjonspunkterForPanel: [],
     klageVurdering: {
       klageVurderingResultatNK: {
         klageVurdertAv: 'NK',
@@ -118,7 +108,7 @@ export const OpphevIKlageNk: Story = {
 
 export const KlagevurderingMedAksjonspunktNfp: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.BEHANDLE_KLAGE_NFP,
       },

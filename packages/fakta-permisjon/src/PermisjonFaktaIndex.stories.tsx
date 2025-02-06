@@ -1,9 +1,10 @@
-import { action } from '@storybook/addon-actions';
+import { ComponentProps } from 'react';
+
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
-import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
-import { Aksjonspunkt, AksjonspunktÅrsak, Behandling } from '@navikt/fp-types';
+import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { Aksjonspunkt, AksjonspunktÅrsak } from '@navikt/fp-types';
 
 import { PermisjonFaktaIndex } from './PermisjonFaktaIndex';
 
@@ -25,28 +26,16 @@ const fellesInntektsmeldingFelter = {
 const meta = {
   title: 'fakta/fakta-permisjon',
   component: PermisjonFaktaIndex,
-  decorators: [withFormData],
-  args: {
-    saksnummer: '1234567',
-    behandling: {
-      uuid: '1223-2323-2323-22332',
-    } as Behandling,
-    aksjonspunkter: [],
-    submittable: true,
-    harApneAksjonspunkter: true,
-    alleMerknaderFraBeslutter: {},
-    readOnly: false,
-    alleKodeverk: alleKodeverk as any,
-    submitCallback: action('button-click') as (data: any) => Promise<void>,
-  },
-} satisfies Meta<typeof PermisjonFaktaIndex>;
+  decorators: [withFormData, withPanelData],
+  render: args => <PermisjonFaktaIndex {...args} />,
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof PermisjonFaktaIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
 export const EttArbeidsforholdUtenSluttdatoForPermisjon: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_PERMISJON,
         status: AksjonspunktStatus.OPPRETTET,
@@ -135,7 +124,7 @@ export const EttArbeidsforholdUtenSluttdatoForPermisjon: Story = {
 
 export const FlereArbeidsforhold: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
         status: AksjonspunktStatus.OPPRETTET,
@@ -288,7 +277,7 @@ export const FlereArbeidsforhold: Story = {
 
 export const FlereArbeidsforholdFraSammeArbeidsgiver: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
         status: AksjonspunktStatus.OPPRETTET,
@@ -390,7 +379,7 @@ export const FlereArbeidsforholdFraSammeArbeidsgiver: Story = {
 
 export const VisFødselsdatoNårPrivatperson: Story = {
   args: {
-    aksjonspunkter: [
+    aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_PERMISJON,
         status: AksjonspunktStatus.OPPRETTET,

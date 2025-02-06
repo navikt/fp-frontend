@@ -1,4 +1,4 @@
-type FormkravMellomlagretDataType = {
+export type FormkravMellomlagretDataType = {
   kode: string;
   begrunnelse: string;
   behandlingUuid: string;
@@ -15,5 +15,3 @@ type FormkravMellomlagretDataType = {
   paKlagdBehandlingUuid?: string;
   fritekstTilBrev?: string;
 };
-
-export default FormkravMellomlagretDataType;

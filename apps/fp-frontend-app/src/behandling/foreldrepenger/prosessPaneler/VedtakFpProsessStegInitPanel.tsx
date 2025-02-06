@@ -132,8 +132,6 @@ export const VedtakFpProsessStegInitPanel = (props: ProsessPanelInitProps) => {
             beregningsgrunnlag={beregningsgrunnlag}
             ytelseTypeKode={FagsakYtelseType.FORELDREPENGER}
             previewCallback={forhandsvis}
-            {...standardPanelProps}
-            aksjonspunkter={behandling.aksjonspunkt}
             vilkar={vilkår}
           />
         ) : (

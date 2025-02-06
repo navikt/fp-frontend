@@ -1,9 +1,8 @@
-import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { Personoversikt, StandardFaktaPanelProps, Ytelsefordeling } from '@navikt/fp-types';
+import { Personoversikt, Ytelsefordeling } from '@navikt/fp-types';
 
 import { OmsorgOgRettInfoPanel } from './components/OmsorgOgRettInfoPanel';
 
@@ -14,9 +13,10 @@ const intl = createIntl(messages);
 export interface OmsorgOgRettProps {
   personoversikt: Personoversikt;
   ytelsefordeling: Ytelsefordeling;
+  submittable: boolean;
 }
 
-export const OmsorgOgRettFaktaIndex = (props: OmsorgOgRettProps & StandardFaktaPanelProps) => (
+export const OmsorgOgRettFaktaIndex = (props: OmsorgOgRettProps) => (
   <RawIntlProvider value={intl}>
     <OmsorgOgRettInfoPanel {...props} />
   </RawIntlProvider>

@@ -1,4 +1,4 @@
-import { FunctionComponent, ReactElement } from 'react';
+import { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
@@ -10,7 +10,7 @@ import { AksjonspunktKode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
 import { FodselSammenligningIndex } from '@navikt/fp-prosess-fakta-fodsel-sammenligning';
 import { Aksjonspunkt, AvklartBarn, FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
 import { BekreftTerminbekreftelseAp, SjekkManglendeFodselAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData } from '@navikt/fp-utils';
+import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import SjekkFodselDokForm, { FormValues as SjekkFodselDokFormValues } from './SjekkFodselDokForm';
 import TermindatoFaktaForm, { FormValues as TermindatoFormValues } from './TermindatoFaktaForm';
@@ -71,18 +71,12 @@ const transformValues = (
 
 const EMPTY_ARRAY = [] as AvklartBarn[];
 
-interface OwnProps {
+interface Props {
   familiehendelse: FamilieHendelseSamling;
-  aksjonspunkter: Aksjonspunkt[];
-  hasOpenAksjonspunkter: boolean;
   submittable: boolean;
-  readOnly: boolean;
   soknad: Soknad;
-  submitCallback: (data: AksjonspunktData) => Promise<void>;
   soknadOriginalBehandling?: Soknad;
   familiehendelseOriginalBehandling?: FamilieHendelse;
-  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
-  behandlingType: string;
 }
 
 /**
@@ -90,25 +84,28 @@ interface OwnProps {
  *
  * Har ansvar for å sette opp formen for faktapenelet til Fødselsvilkåret.
  */
-const FodselInfoPanel: FunctionComponent<OwnProps> = ({
-  aksjonspunkter,
-  hasOpenAksjonspunkter,
+export const FodselInfoPanel = ({
   submittable,
-  readOnly,
   soknad,
-  submitCallback,
   soknadOriginalBehandling,
   familiehendelseOriginalBehandling,
   familiehendelse,
-  alleMerknaderFraBeslutter,
-  behandlingType,
-}) => {
+}: Props) => {
+  const {
+    submitCallback,
+    behandling,
+    aksjonspunkterForPanel,
+    harÅpneAksjonspunkter,
+    alleMerknaderFraBeslutter,
+    isReadOnly,
+  } = usePanelDataContext<AksjonspunktData>();
+
   const avklartBarn = familiehendelse?.register?.avklartBarn || EMPTY_ARRAY;
   const termindato = familiehendelse?.gjeldende?.termindato;
   const vedtaksDatoSomSvangerskapsuke = familiehendelse?.gjeldende?.vedtaksDatoSomSvangerskapsuke;
 
-  const terminbekreftelseAp = aksjonspunkter.find(ap => ap.definisjon === TERMINBEKREFTELSE);
-  const manglendeFødselAp = aksjonspunkter.find(ap => ap.definisjon === SJEKK_MANGLENDE_FODSEL);
+  const terminbekreftelseAp = aksjonspunkterForPanel.find(ap => ap.definisjon === TERMINBEKREFTELSE);
+  const manglendeFødselAp = aksjonspunkterForPanel.find(ap => ap.definisjon === SJEKK_MANGLENDE_FODSEL);
 
   const { formData, setFormData } = useFormData<FormValues>();
 
@@ -118,7 +115,9 @@ const FodselInfoPanel: FunctionComponent<OwnProps> = ({
 
   return (
     <>
-      {hasOpenAksjonspunkter && <AksjonspunktHelpTextHTML>{getHelpTexts(aksjonspunkter)}</AksjonspunktHelpTextHTML>}
+      {harÅpneAksjonspunkter && (
+        <AksjonspunktHelpTextHTML>{getHelpTexts(aksjonspunkterForPanel)}</AksjonspunktHelpTextHTML>
+      )}
       <VerticalSpacer sixteenPx />
       <Form
         formMethods={formMethods}
@@ -127,19 +126,19 @@ const FodselInfoPanel: FunctionComponent<OwnProps> = ({
         }
         setDataOnUnmount={setFormData}
       >
-        {hasAksjonspunkt(TERMINBEKREFTELSE, aksjonspunkter) && (
+        {hasAksjonspunkt(TERMINBEKREFTELSE, aksjonspunkterForPanel) && (
           <TermindatoFaktaForm
-            readOnly={readOnly}
+            readOnly={isReadOnly}
             submittable={submittable}
             alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
             soknad={soknad}
             gjeldendeFamiliehendelse={familiehendelse.gjeldende}
           />
         )}
-        {hasAksjonspunkt(SJEKK_MANGLENDE_FODSEL, aksjonspunkter) && (
+        {hasAksjonspunkt(SJEKK_MANGLENDE_FODSEL, aksjonspunkterForPanel) && (
           <SjekkFodselDokForm
-            behandlingType={behandlingType}
-            readOnly={readOnly}
+            behandlingType={behandling.type}
+            readOnly={isReadOnly}
             submittable={submittable}
             soknadOriginalBehandling={soknadOriginalBehandling}
             familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
@@ -149,20 +148,20 @@ const FodselInfoPanel: FunctionComponent<OwnProps> = ({
             familiehendelse={familiehendelse}
           />
         )}
-        {aksjonspunkter.length !== 0 && !readOnly && (
+        {aksjonspunkterForPanel.length !== 0 && !isReadOnly && (
           <>
             <VerticalSpacer twentyPx />
             <FaktaSubmitButton
               isSubmittable={submittable}
-              isReadOnly={readOnly}
+              isReadOnly={isReadOnly}
               isSubmitting={formMethods.formState.isSubmitting}
               isDirty={formMethods.formState.isDirty}
             />
           </>
         )}
-        {aksjonspunkter.length === 0 && (
+        {aksjonspunkterForPanel.length === 0 && (
           <FodselSammenligningIndex
-            behandlingsTypeKode={behandlingType}
+            behandlingsTypeKode={behandling.type}
             avklartBarn={avklartBarn}
             termindato={termindato}
             vedtaksDatoSomSvangerskapsuke={vedtaksDatoSomSvangerskapsuke}
@@ -175,5 +174,3 @@ const FodselInfoPanel: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-
-export default FodselInfoPanel;

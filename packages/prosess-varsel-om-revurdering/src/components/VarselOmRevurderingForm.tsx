@@ -1,4 +1,4 @@
-import React, { FunctionComponent, MouseEvent, useCallback, useMemo, useState } from 'react';
+import { MouseEvent, useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -21,17 +21,9 @@ import {
 import { FormValues as ModalFormValues, SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
 import { FodselSammenligningIndex } from '@navikt/fp-prosess-fakta-fodsel-sammenligning';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
-import {
-  Aksjonspunkt,
-  AlleKodeverk,
-  Behandling,
-  FamilieHendelse,
-  FamilieHendelseSamling,
-  KodeverkMedNavn,
-  Soknad,
-} from '@navikt/fp-types';
+import { Aksjonspunkt, FamilieHendelse, FamilieHendelseSamling, KodeverkMedNavn, Soknad } from '@navikt/fp-types';
 import { VarselRevurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData } from '@navikt/fp-utils';
+import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import styles from './varselOmRevurderingForm.module.css';
 
@@ -65,19 +57,12 @@ const nullSafe = (value: FamilieHendelse): FamilieHendelse => value || ({} as Fa
 
 const EMPTY_ARRAY = [] as KodeverkMedNavn[];
 
-interface OwnProps {
-  behandlingArsaker: Behandling['behandlingÅrsaker'];
-  sprakkode: string;
-  behandlingType: string;
+interface Props {
   familiehendelse: FamilieHendelseSamling;
   soknad: Soknad;
   soknadOriginalBehandling: Soknad;
   familiehendelseOriginalBehandling: FamilieHendelse;
-  aksjonspunkter: Aksjonspunkt[];
-  submitCallback: (data: VarselRevurderingAp) => Promise<void>;
   previewCallback: (data: ForhandsvisData) => void;
-  readOnly: boolean;
-  alleKodeverk: AlleKodeverk;
 }
 
 /**
@@ -85,23 +70,19 @@ interface OwnProps {
  *
  * Setter opp aksjonspunktet for avklaring av varsel om revurdering i søknad.
  */
-const VarselOmRevurderingForm: FunctionComponent<OwnProps> = ({
-  aksjonspunkter,
+export const VarselOmRevurderingForm = ({
   familiehendelse,
-  behandlingArsaker,
-  readOnly,
-  behandlingType,
   soknad,
   soknadOriginalBehandling,
   familiehendelseOriginalBehandling,
-  alleKodeverk,
-  sprakkode,
-  submitCallback,
   previewCallback,
-}) => {
+}: Props) => {
   const intl = useIntl();
 
-  const initialValues = useMemo(() => buildInitialValues(aksjonspunkter), [aksjonspunkter]);
+  const { isReadOnly, alleKodeverk, behandling, submitCallback, aksjonspunkterForPanel } =
+    usePanelDataContext<VarselRevurderingAp>();
+
+  const initialValues = buildInitialValues(aksjonspunkterForPanel);
 
   const { formData, setFormData } = useFormData<FormValues>();
 
@@ -143,12 +124,12 @@ const VarselOmRevurderingForm: FunctionComponent<OwnProps> = ({
   const { termindato } = nullSafe(familiehendelse.gjeldende);
   const { vedtaksDatoSomSvangerskapsuke } = nullSafe(familiehendelse.gjeldende);
 
-  const erAutomatiskRevurdering = behandlingArsaker.reduce(
+  const erAutomatiskRevurdering = behandling.behandlingÅrsaker.reduce(
     (result, current) => result || current.erAutomatiskRevurdering,
     false,
   );
   const ventearsaker = alleKodeverk[KodeverkType.VENT_AARSAK] || EMPTY_ARRAY;
-  const language = getLanguageFromSprakkode(sprakkode);
+  const language = getLanguageFromSprakkode(behandling.sprakkode);
 
   return (
     <>
@@ -157,7 +138,7 @@ const VarselOmRevurderingForm: FunctionComponent<OwnProps> = ({
           <FormattedMessage id="VarselOmRevurderingForm.VarselOmRevurdering" />
         </Heading>
         <VerticalSpacer eightPx />
-        {!readOnly && aksjonspunkter[0].status === AksjonspunktStatus.OPPRETTET && (
+        {!isReadOnly && aksjonspunkterForPanel[0].status === AksjonspunktStatus.OPPRETTET && (
           <>
             <AksjonspunktHelpTextHTML>
               <FormattedMessage id="VarselOmRevurderingForm.VarselOmRevurderingVurder" />
@@ -166,7 +147,7 @@ const VarselOmRevurderingForm: FunctionComponent<OwnProps> = ({
             {erAutomatiskRevurdering && (
               <>
                 <FodselSammenligningIndex
-                  behandlingsTypeKode={behandlingType}
+                  behandlingsTypeKode={behandling.type}
                   avklartBarn={avklartBarn}
                   termindato={termindato}
                   vedtaksDatoSomSvangerskapsuke={vedtaksDatoSomSvangerskapsuke}
@@ -237,7 +218,7 @@ const VarselOmRevurderingForm: FunctionComponent<OwnProps> = ({
             </Button>
           </>
         )}
-        {(readOnly || aksjonspunkter[0].status !== AksjonspunktStatus.OPPRETTET) && (
+        {(isReadOnly || aksjonspunkterForPanel[0].status !== AksjonspunktStatus.OPPRETTET) && (
           <>
             <Detail>
               <FormattedMessage id="VarselOmRevurderingForm.Begrunnelse" />
@@ -255,12 +236,10 @@ const VarselOmRevurderingForm: FunctionComponent<OwnProps> = ({
         visBrevErBestilt
         hasManualPaVent
         erTilbakekreving={
-          behandlingType === BehandlingType.TILBAKEKREVING ||
-          behandlingType === BehandlingType.TILBAKEKREVING_REVURDERING
+          behandling.type === BehandlingType.TILBAKEKREVING ||
+          behandling.type === BehandlingType.TILBAKEKREVING_REVURDERING
         }
       />
     </>
   );
 };
-
-export default VarselOmRevurderingForm;

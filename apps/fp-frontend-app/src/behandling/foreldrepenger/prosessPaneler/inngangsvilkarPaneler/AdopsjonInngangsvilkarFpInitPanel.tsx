@@ -3,6 +3,7 @@ import { useIntl } from 'react-intl';
 
 import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import { AdopsjonVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-adopsjon';
+import { PanelOverstyringProvider } from '@navikt/fp-utils';
 
 import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 import { OverstyringPanelDef } from '../../../felles/prosess/OverstyringPanelDef';
@@ -28,6 +29,7 @@ export const AdopsjonInngangsvilkarFpInitPanel = (props: InngangsvilkarPanelInit
     <InngangsvilkarDefaultInitPanel
       {...props}
       behandlingVersjon={behandling.versjon}
+      vilkarKoder={VILKAR_KODER}
       standardPanelProps={standardPanelProps}
       vilkarKoder={VILKAR_KODER}
       inngangsvilkarPanelKode="ADOPSJON"
@@ -35,22 +37,29 @@ export const AdopsjonInngangsvilkarFpInitPanel = (props: InngangsvilkarPanelInit
       renderPanel={({ erOverstyrt, toggleOverstyring }) => (
         <>
           {standardPanelProps.aksjonspunkter.length === 0 && (
-            <OverstyringPanelDef
-              aksjonspunkter={standardPanelProps.aksjonspunkter}
-              aksjonspunktKode={AksjonspunktKode.OVERSTYRING_AV_ADOPSJONSVILKÅRET_FP}
-              vilkar={standardPanelProps.vilkar}
-              vilkarKoder={VILKAR_KODER}
-              panelTekstKode="Inngangsvilkar.Adopsjonsvilkaret"
-              toggleOverstyring={toggleOverstyring}
-              erOverstyrt={erOverstyrt}
+            <PanelOverstyringProvider
+              overstyringApKode={AksjonspunktKode.OVERSTYRING_AV_ADOPSJONSVILKÅRET_FP}
+              kanOverstyreAccess={rettigheter.kanOverstyreAccess}
               overrideReadOnly={
                 standardPanelProps.isReadOnly ||
                 (props.harInngangsvilkarApentAksjonspunkt && !(standardPanelProps.isAksjonspunktOpen || erOverstyrt))
               }
-              kanOverstyreAccess={rettigheter.kanOverstyreAccess}
+              toggleOverstyring={toggleOverstyring}
+            >
+              <OverstyringPanelDef
+                vilkar={standardPanelProps.vilkar}
+                vilkarKoder={VILKAR_KODER}
+                panelTekstKode="Inngangsvilkar.Adopsjonsvilkaret"
+              />
+            </PanelOverstyringProvider>
+          )}
+          {standardPanelProps.aksjonspunkter.length > 0 && (
+            <AdopsjonVilkarProsessIndex
+              status={standardPanelProps.status}
+              readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
+              vilkar={standardPanelProps.vilkar}
             />
           )}
-          {standardPanelProps.aksjonspunkter.length > 0 && <AdopsjonVilkarProsessIndex {...standardPanelProps} />}
         </>
       )}
     />

@@ -1,3 +1,5 @@
+import { ComponentProps } from 'react';
+
 import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
@@ -13,18 +15,25 @@ import {
   VilkarType,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
-import { alleKodeverk, withFormData } from '@navikt/fp-storybook-utils';
+import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import {
   Aksjonspunkt,
   Behandling,
   Beregningsgrunnlag,
   BeregningsresultatDagytelse,
   BeregningsresultatEs,
-  Fagsak,
   Vilkar,
 } from '@navikt/fp-types';
 
 import { VedtakProsessIndex } from './VedtakProsessIndex';
+
+const defaultAksjonspunkter = [
+  {
+    definisjon: AksjonspunktKode.FORESLA_VEDTAK,
+    status: AksjonspunktStatus.OPPRETTET,
+    kanLoses: true,
+  },
+] as Aksjonspunkt[];
 
 const defaultBehandling = {
   uuid: '1',
@@ -37,6 +46,7 @@ const defaultBehandling = {
   },
   behandlingPaaVent: false,
   behandlingHenlagt: false,
+  aksjonspunkt: defaultAksjonspunkter,
   behandlingÅrsaker: [
     {
       behandlingArsakType: BehandlingArsakType.ANNET,
@@ -53,13 +63,6 @@ const defaultVilkar = [
   },
 ] as Vilkar[];
 
-const defaultAksjonspunkter = [
-  {
-    definisjon: AksjonspunktKode.FORESLA_VEDTAK,
-    kanLoses: true,
-  },
-] as Aksjonspunkt[];
-
 const defaultberegningresultatDagytelse = {
   antallBarn: 1,
   beregnetTilkjentYtelse: 10000,
@@ -68,20 +71,13 @@ const defaultberegningresultatDagytelse = {
 const meta = {
   title: 'prosess/prosess-vedtak',
   component: VedtakProsessIndex,
-  decorators: [withFormData],
+  decorators: [withFormData, withPanelData],
   args: {
-    submitCallback: action('button-click') as (data: any) => Promise<void>,
-    aksjonspunkter: defaultAksjonspunkter,
-    isAksjonspunktOpen: true,
-    readOnlySubmitButton: false,
-    status: '',
     vilkar: defaultVilkar,
-    alleMerknaderFraBeslutter: {},
     previewCallback: action('button-click') as any,
-    alleKodeverk: alleKodeverk as any,
-    fagsak: {} as Fagsak,
   },
-} satisfies Meta<typeof VedtakProsessIndex>;
+  render: args => <VedtakProsessIndex {...args} />,
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof VedtakProsessIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
@@ -95,7 +91,6 @@ export const InnvilgetForeldrepengerTilGodkjenningForSaksbehandler: Story = {
     behandling: defaultBehandling,
     beregningresultatDagytelse: defaultberegningresultatDagytelse,
     ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
-    isReadOnly: false,
   },
 };
 
@@ -207,7 +202,38 @@ export const AvslåttForeldrepengerDerBeregningErManueltFastsatt: Story = {
 
 export const TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = {
   args: {
-    behandling: defaultBehandling,
+    behandling: {
+      ...defaultBehandling,
+      aksjonspunkt: [
+        ...defaultAksjonspunkter,
+        {
+          definisjon: AksjonspunktKode.VURDERE_ANNEN_YTELSE,
+          status: AksjonspunktStatus.OPPRETTET,
+          begrunnelse: undefined,
+          kanLoses: false,
+          toTrinnsBehandling: true,
+        },
+        {
+          definisjon: AksjonspunktKode.VURDERE_DOKUMENT,
+          status: AksjonspunktStatus.OPPRETTET,
+          begrunnelse: undefined,
+          kanLoses: false,
+        },
+        {
+          definisjon: AksjonspunktKode.VURDERE_INNTEKTSMELDING_KLAGE,
+          status: AksjonspunktStatus.OPPRETTET,
+          begrunnelse: undefined,
+          kanLoses: false,
+        },
+        {
+          definisjon: AksjonspunktKode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST,
+          status: AksjonspunktStatus.OPPRETTET,
+          begrunnelse: undefined,
+          kanLoses: false,
+          toTrinnsBehandling: true,
+        },
+      ],
+    },
     beregningresultatDagytelse: defaultberegningresultatDagytelse,
     ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
     beregningsgrunnlag: {
@@ -221,35 +247,6 @@ export const TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = {
         },
       ],
     } as Beregningsgrunnlag,
-    aksjonspunkter: [
-      ...defaultAksjonspunkter,
-      {
-        definisjon: AksjonspunktKode.VURDERE_ANNEN_YTELSE,
-        status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
-        kanLoses: false,
-        toTrinnsBehandling: true,
-      },
-      {
-        definisjon: AksjonspunktKode.VURDERE_DOKUMENT,
-        status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
-        kanLoses: false,
-      },
-      {
-        definisjon: AksjonspunktKode.VURDERE_INNTEKTSMELDING_KLAGE,
-        status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
-        kanLoses: false,
-      },
-      {
-        definisjon: AksjonspunktKode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST,
-        status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
-        kanLoses: false,
-        toTrinnsBehandling: true,
-      },
-    ],
     isReadOnly: false,
   },
 };

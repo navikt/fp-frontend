@@ -126,12 +126,13 @@ export const BeregningsgrunnlagProsessStegInitPanel = ({
     >
       {!isFetching ? (
         <Wrapper
-          {...standardPanelProps}
           kodeverkSamling={standardPanelProps.alleKodeverk}
           beregningsgrunnlagsvilkar={lagBGVilkar(standardPanelProps.vilkar, beregningsgrunnlag)}
           beregningsgrunnlagListe={lagFormatertBG(beregningsgrunnlag)}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           submitCallback={lagModifisertCallback(standardPanelProps.submitCallback)}
+          isReadOnly={standardPanelProps.isReadOnly}
+          readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
         />
       ) : (
         <LoadingPanel />

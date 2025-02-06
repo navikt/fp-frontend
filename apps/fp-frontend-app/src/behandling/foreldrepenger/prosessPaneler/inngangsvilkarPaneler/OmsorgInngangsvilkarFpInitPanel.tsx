@@ -31,7 +31,12 @@ export const OmsorgInngangsvilkarFpInitPanel = (props: InngangsvilkarPanelInitPr
       vilkarKoder={VILKAR_KODER}
       inngangsvilkarPanelKode="OMSORG"
       hentInngangsvilkarPanelTekst={intl.formatMessage({ id: 'SRBVilkarForm.VurderSammeBarn' })}
-      renderPanel={() => <OmsorgVilkarProsessIndex {...standardPanelProps} />}
+      renderPanel={() => (
+        <OmsorgVilkarProsessIndex
+          status={standardPanelProps.status}
+          readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
+        />
+      )}
     />
   );
 };

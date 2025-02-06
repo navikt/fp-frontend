@@ -9,7 +9,7 @@ import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-f
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
 import { AvklarAnnenforelderHarRettAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData } from '@navikt/fp-utils';
+import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { HarAnnenForelderRettFelter } from './HarAnnenForelderRettFelter';
 
@@ -23,20 +23,12 @@ export type FormValues = {
 interface Props {
   ytelsefordeling: Ytelsefordeling;
   aksjonspunkt: Aksjonspunkt;
-  readOnly: boolean;
   submittable: boolean;
-  submitCallback: (aksjonspunktData: AvklarAnnenforelderHarRettAp) => Promise<void>;
-  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
 }
 
-export const HarAnnenForelderRettForm = ({
-  ytelsefordeling,
-  readOnly,
-  aksjonspunkt,
-  submittable,
-  submitCallback,
-  alleMerknaderFraBeslutter,
-}: Props) => {
+export const HarAnnenForelderRettForm = ({ ytelsefordeling, aksjonspunkt, submittable }: Props) => {
+  const { submitCallback, isReadOnly, alleMerknaderFraBeslutter } = usePanelDataContext<AvklarAnnenforelderHarRettAp>();
+
   const {
     bekreftetAnnenforelderRett,
     bekreftetAnnenforelderUføretrygd,
@@ -79,14 +71,14 @@ export const HarAnnenForelderRettForm = ({
       >
         <VStack gap="6">
           <HarAnnenForelderRettFelter
-            readOnly={readOnly}
+            readOnly={isReadOnly}
             avklareUforetrygd={skalAvklareUforetrygd}
             avklareRettEØS={skalAvklareRettEØS}
           />
 
           <FaktaBegrunnelseTextField
             isSubmittable={submittable}
-            isReadOnly={readOnly}
+            isReadOnly={isReadOnly}
             hasBegrunnelse={true}
             hasVurderingText
           />
@@ -94,7 +86,7 @@ export const HarAnnenForelderRettForm = ({
           <div>
             <FaktaSubmitButton
               isSubmittable={submittable}
-              isReadOnly={readOnly}
+              isReadOnly={isReadOnly}
               isSubmitting={formMethods.formState.isSubmitting}
               isDirty={formMethods.formState.isDirty}
             />

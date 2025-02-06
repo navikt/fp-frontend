@@ -22,7 +22,7 @@ const AKSJONSPUNKT_KODER: AksjonspunktKode[] = [
 export const MedlemskapsvilkaretFaktaInitPanel = (props: FaktaPanelInitProps) => {
   const intl = useIntl();
 
-  const { behandling, fagsak } = use(BehandlingDataContext);
+  const { behandling } = use(BehandlingDataContext);
 
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
@@ -40,7 +40,7 @@ export const MedlemskapsvilkaretFaktaInitPanel = (props: FaktaPanelInitProps) =>
       skalPanelVisesIMeny={behandling.harSøknad}
     >
       {medlemskap && søknad ? (
-        <MedlemskapFaktaIndex medlemskap={medlemskap} soknad={søknad} fagsak={fagsak} {...standardPanelProps} />
+        <MedlemskapFaktaIndex medlemskap={medlemskap} soknad={søknad} submittable={standardPanelProps.submittable} />
       ) : (
         <LoadingPanel />
       )}
