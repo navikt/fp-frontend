@@ -16,7 +16,7 @@ import {
   SØKER_INNFLYTTET_FOR_SENT_KODE,
   type VurderMedlemskapFormValues,
 } from '../../types/vurderingMedlemskapForm';
-import InfoBox from '../InfoBox';
+import { InfoBox } from '../InfoBox';
 import { MedlemskapVurderinger } from './MedlemskapVurderinger';
 
 interface Props {

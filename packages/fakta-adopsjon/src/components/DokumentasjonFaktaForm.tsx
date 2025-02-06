@@ -1,4 +1,3 @@
-import { type FunctionComponent } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
@@ -35,7 +34,7 @@ const isAgeAbove15 = (fodselsdatoer: Record<number, string>, id: number, omsorgs
   !!omsorgsovertakelseDato &&
   moment(fodselsdatoer[id]).isSameOrBefore(moment(omsorgsovertakelseDato).subtract(15, 'years'));
 
-interface OwnProps {
+interface Props {
   readOnly: boolean;
   erForeldrepengerFagsak: boolean;
   hasEktefellesBarnAksjonspunkt: boolean;
@@ -49,23 +48,18 @@ export type FormValues = {
   fodselsdatoer?: Record<number, string>;
 };
 
-interface StaticFunctions {
-  buildInitialValues: (soknad: Soknad, familiehendelse: FamilieHendelse) => FormValues;
-  transformValues: (values: FormValues) => BekreftDokumentertDatoAksjonspunktAp;
-}
-
 /**
  * DokumentasjonFaktaForm
  *
  * Presentasjonskomponent. Setter opp aksjonspunktet for avklaring av adopsjonsopplysninger i søknaden.
  */
-const DokumentasjonFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
+export const DokumentasjonFaktaForm = ({
   readOnly,
   editedStatus,
   erForeldrepengerFagsak,
   hasEktefellesBarnAksjonspunkt,
   alleMerknaderFraBeslutter,
-}) => {
+}: Props) => {
   const intl = useIntl();
 
   const { watch } = useFormContext<FormValues>();
@@ -155,5 +149,3 @@ DokumentasjonFaktaForm.transformValues = (values: FormValues): BekreftDokumenter
   omsorgsovertakelseDato: values.omsorgsovertakelseDato ?? '',
   fodselsdatoer: values.fodselsdatoer ?? '',
 });
-
-export default DokumentasjonFaktaForm;

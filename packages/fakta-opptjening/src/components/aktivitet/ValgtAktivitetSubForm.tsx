@@ -63,7 +63,7 @@ interface Props {
  *
  * Viser informasjon om valgt aktivitet
  */
-const ValgtAktivitetSubForm = ({
+export const ValgtAktivitetSubForm = ({
   valgtAktivitetstype,
   arbeidsgiverReferanse,
   arbeidsgiverOpplysningerPerId,
@@ -132,5 +132,3 @@ const ValgtAktivitetSubForm = ({
     )}
   </VStack>
 );
-
-export default ValgtAktivitetSubForm;

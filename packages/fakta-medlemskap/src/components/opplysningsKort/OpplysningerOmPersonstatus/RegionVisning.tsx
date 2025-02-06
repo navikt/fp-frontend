@@ -70,5 +70,3 @@ export const RegionVisning = ({ regioner, erAnnenpart = false, alleKodeverk }: P
     </Table>
   );
 };
-
-export default RegionVisning;

@@ -132,5 +132,3 @@ export const FeriepengerPrAar = ({
     </>
   );
 };
-
-export default FeriepengerPrAar;

@@ -21,7 +21,13 @@ interface Props {
  *
  * Form som brukes ved adopsjon for tilleggsopplysninger.
  */
-const RegistreringAdopsjonOgOmsorgGrid = ({ readOnly, soknadData, alleKodeverk, fodselsdato, mottattDato }: Props) => (
+export const RegistreringAdopsjonOgOmsorgGrid = ({
+  readOnly,
+  soknadData,
+  alleKodeverk,
+  fodselsdato,
+  mottattDato,
+}: Props) => (
   <>
     <RettigheterPapirsoknadIndex readOnly={readOnly} soknadData={soknadData} />
     <OmsorgOgAdopsjonPapirsoknadIndex
@@ -54,5 +60,3 @@ RegistreringAdopsjonOgOmsorgGrid.transformValues = (
   ...OppholdINorgePapirsoknadIndex.transformValues(values),
   ...SprakPapirsoknadIndex.transformValues(values),
 });
-
-export default RegistreringAdopsjonOgOmsorgGrid;

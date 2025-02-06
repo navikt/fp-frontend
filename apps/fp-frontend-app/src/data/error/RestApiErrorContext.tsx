@@ -1,12 +1,4 @@
-import {
-  createContext,
-  type FunctionComponent,
-  type JSX,
-  type ReactNode,
-  useCallback,
-  useContext,
-  useReducer,
-} from 'react';
+import { createContext, type JSX, type ReactNode, useCallback, useContext, useReducer } from 'react';
 
 import type { FpError } from './errorType';
 
@@ -21,7 +13,7 @@ type State = { errors: FpError[] };
 const RestApiErrorStateContext = createContext<State>(defaultInitialState);
 const RestApiErrorDispatchContext = createContext<Dispatch | undefined>(undefined);
 
-interface OwnProps {
+interface Props {
   children: ReactNode;
   initialState?: State;
 }
@@ -29,7 +21,7 @@ interface OwnProps {
 /**
  * Tilbyr kontekst for lagring av feilmeldinger.
  */
-export const RestApiErrorProvider: FunctionComponent<OwnProps> = ({ children, initialState }): JSX.Element => {
+export const RestApiErrorProvider = ({ children, initialState }: Props): JSX.Element => {
   const [state, dispatch] = useReducer((oldState: State, action: Action) => {
     switch (action.type) {
       case 'add':

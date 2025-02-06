@@ -11,7 +11,7 @@ import type {
   FeriepengegrunnlagAndel,
 } from '@navikt/fp-types';
 
-import FeriepengerPrAar from './FeriepengerPrAar';
+import { FeriepengerPrAar } from './FeriepengerPrAar';
 
 const finnListeMedOpptjeningsår = (andeler: FeriepengegrunnlagAndel[]): number[] => {
   const årsliste = andeler.map(andel => andel.opptjeningsår).sort((a, b) => a - b);

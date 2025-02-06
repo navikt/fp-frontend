@@ -4,7 +4,7 @@ import { createIntl } from '@navikt/ft-utils';
 
 import type { AvklartBarn, FamilieHendelse, Soknad } from '@navikt/fp-types';
 
-import FodselSammenligningPanel from './components/FodselSammenligningPanel';
+import { FodselSammenligningPanel } from './components/FodselSammenligningPanel';
 
 import messages from '../i18n/nb_NO.json';
 

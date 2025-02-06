@@ -31,7 +31,7 @@ interface Props {
  *
  * Presentasjonskomponent. Viser sammenligning av fødsel ved ytelsesvedtak/søknad og oppdatert informasjon fra TPS.
  */
-const FodselSammenligningPanel = ({
+export const FodselSammenligningPanel = ({
   behandlingsTypeKode,
   avklartBarn,
   nrOfDodfodteBarn,
@@ -108,5 +108,3 @@ const FodselSammenligningPanel = ({
     </FlexRow>
   </FlexContainer>
 );
-
-export default FodselSammenligningPanel;

@@ -56,7 +56,7 @@ export type FieldEditedInfo = {
   dokumentasjonForeligger?: boolean;
 };
 
-const isFieldEdited = (
+export const isFieldEdited = (
   soknad: Soknad = {} as Soknad,
   gjeldendeFamiliehendelse: FamilieHendelse = {} as FamilieHendelse,
 ): FieldEditedInfo => ({
@@ -72,5 +72,3 @@ const isFieldEdited = (
   mannAdoptererAlene: getIsMannAdoptererAleneEdited(gjeldendeFamiliehendelse),
   dokumentasjonForeligger: getIsDokumentasjonForeliggerEdited(gjeldendeFamiliehendelse),
 });
-
-export default isFieldEdited;

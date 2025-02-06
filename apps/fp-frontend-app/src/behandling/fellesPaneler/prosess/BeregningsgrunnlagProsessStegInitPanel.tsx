@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl';
 import {
   type BeregningAksjonspunktSubmitType,
   BeregningsgrunnlagProsessIndex,
-  FtBeregningsgrunnlag,
+  type FtBeregningsgrunnlag,
   type FtVilkar,
   ProsessBeregningsgrunnlagAvklaringsbehovCode,
 } from '@navikt/ft-prosess-beregningsgrunnlag';

@@ -9,7 +9,7 @@ import type { Aksjonspunkt, ManuellBehandlingResultat, Medlemskap } from '@navik
 import { MedlemskapAvvik } from '@navikt/fp-types';
 
 import { MedlemskapVurdering } from '../types/vurderingMedlemskapForm';
-import InfoBox from './InfoBox';
+import { InfoBox } from './InfoBox';
 
 interface Props {
   aksjonspunkter: Aksjonspunkt[];

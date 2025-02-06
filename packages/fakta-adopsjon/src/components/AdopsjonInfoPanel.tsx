@@ -22,7 +22,7 @@ import type {
 } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
-import DokumentasjonFaktaForm, { type FormValues as DokFormValues } from './DokumentasjonFaktaForm';
+import { DokumentasjonFaktaForm, type FormValues as DokFormValues } from './DokumentasjonFaktaForm';
 import { EktefelleFaktaForm, type FormValues as EktefelleFormValues } from './EktefelleFaktaForm';
 import { type FormValues as MannAdoptererFormValues, MannAdoptererAleneFaktaForm } from './MannAdoptererAleneFaktaForm';
 

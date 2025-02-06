@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl';
 import {
   FaktaFordelBeregningAvklaringsbehovCode,
   FordelBeregningsgrunnlagFaktaIndex,
-  FtBeregningsgrunnlag,
+  type FtBeregningsgrunnlag,
   type FtVilkar,
 } from '@navikt/ft-fakta-fordel-beregningsgrunnlag';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';

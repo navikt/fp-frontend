@@ -11,8 +11,8 @@ import {
 } from '@navikt/fp-papirsoknad-ui-komponenter';
 import type { AlleKodeverk } from '@navikt/fp-types';
 
-import RegistreringAdopsjonOgOmsorgGrid from './RegistreringAdopsjonOgOmsorgGrid';
-import RegistreringFodselGrid from './RegistreringFodselGrid';
+import { RegistreringAdopsjonOgOmsorgGrid } from './RegistreringAdopsjonOgOmsorgGrid';
+import { RegistreringFodselGrid } from './RegistreringFodselGrid';
 
 const getComponentForFamiliehendelse = (familieHendelse: string) => {
   if (familieHendelse === FamilieHendelseType.FODSEL) {

@@ -21,7 +21,7 @@ import type {
 } from '@navikt/fp-types';
 
 import { finnOpptjeningFom, finnOpptjeningTom } from '../../utils/opptjeningDatoUtil';
-import ValgtAktivitetSubForm from './ValgtAktivitetSubForm';
+import { ValgtAktivitetSubForm } from './ValgtAktivitetSubForm';
 
 import styles from './valgtAktivitetForm.module.css';
 

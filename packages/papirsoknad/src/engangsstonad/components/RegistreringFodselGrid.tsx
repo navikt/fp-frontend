@@ -17,7 +17,7 @@ interface Props {
   mottattDato?: string;
 }
 
-const RegistreringFodselGrid = ({ readOnly, soknadData, alleKodeverk, fodselsdato, mottattDato }: Props) => (
+export const RegistreringFodselGrid = ({ readOnly, soknadData, alleKodeverk, fodselsdato, mottattDato }: Props) => (
   <>
     {soknadData.getForeldreType() !== ForeldreType.MOR && (
       <RettigheterPapirsoknadIndex readOnly={readOnly} soknadData={soknadData} />
@@ -55,4 +55,3 @@ RegistreringFodselGrid.transformValues = (values: ReturnType<typeof Registrering
   ...TerminOgFodselPanel.transformValues(values),
   ...SprakPapirsoknadIndex.transformValues(values),
 });
-export default RegistreringFodselGrid;
