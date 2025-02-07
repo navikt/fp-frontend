@@ -24,7 +24,7 @@ export const BehandleInnsynProsessStegInitPanel = (props: ProsessPanelInitProps)
   const api = useBehandlingApi(behandling);
 
   const { data: innsynDokumenter } = useQuery(api.innsyn.innsynDokumenterOptions(fagsak, behandling));
-  const { data: innsyn } = useQuery(api.innsyn.innsynOptions(behandling));
+  const { data: innsyn, isFetching } = useQuery(api.innsyn.innsynOptions(behandling));
 
   return (
     <ProsessDefaultInitPanel
@@ -34,14 +34,14 @@ export const BehandleInnsynProsessStegInitPanel = (props: ProsessPanelInitProps)
       prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.Innsyn' })}
       skalPanelVisesIMeny
     >
-      {innsyn ? (
+      {isFetching ? (
+        <LoadingPanel />
+      ) : (
         <InnsynProsessIndex
           innsyn={innsyn}
           alleDokumenter={innsynDokumenter}
           readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
         />
-      ) : (
-        <LoadingPanel />
       )}
     </ProsessDefaultInitPanel>
   );
