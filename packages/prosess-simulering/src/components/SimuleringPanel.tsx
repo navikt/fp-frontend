@@ -1,4 +1,4 @@
-import { ReactElement, useState } from 'react';
+import { type ReactElement, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
@@ -7,18 +7,25 @@ import { Form } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode, TilbakekrevingVidereBehandling } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt, ArbeidsgiverOpplysningerPerId, SimuleringResultat, TilbakekrevingValg } from '@navikt/fp-types';
-import { KontrollerEtterbetalingTilSøkerAP, VurderFeilutbetalingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type {
+  Aksjonspunkt,
+  ArbeidsgiverOpplysningerPerId,
+  SimuleringResultat,
+  TilbakekrevingValg,
+} from '@navikt/fp-types';
+import type { KontrollerEtterbetalingTilSøkerAP, VurderFeilutbetalingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
-import EtterbetalingSøkerForm, {
+import {
   buildInitialValues as buildInitialValuesEtterbetaling,
+  EtterbetalingSøkerForm,
   transformValues as transformValuesEtterbetaling,
 } from './EtterbetalingSøkerForm';
-import SimuleringSummary from './SimuleringSummary';
-import SimuleringTable from './SimuleringTable';
-import TilbakekrevSøkerForm, {
+import { SimuleringSummary } from './SimuleringSummary';
+import { SimuleringTable } from './SimuleringTable';
+import {
   buildInitialValues as buildInitialValuesTilbakekrev,
+  TilbakekrevSøkerForm,
   transformValues as transformValuesTilbakekrev,
 } from './TilbakekrevSøkerForm';
 

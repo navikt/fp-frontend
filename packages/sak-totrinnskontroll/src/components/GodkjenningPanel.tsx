@@ -1,5 +1,4 @@
-import React from 'react';
-import { useFormContext, UseFormGetValues } from 'react-hook-form';
+import { useFormContext, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, ErrorMessage, HStack, Label, VStack } from '@navikt/ds-react';
@@ -7,7 +6,7 @@ import { CheckboxField, RadioGroupPanel, TextAreaField, useCustomValidation } fr
 import { hasValidText, isRequiredMessage, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { TotrinnskontrollSkjermlenkeContext } from '@navikt/fp-types';
+import type { TotrinnskontrollSkjermlenkeContext } from '@navikt/fp-types';
 
 const minLength3 = minLength(3);
 const maxLength2000 = maxLength(2000);

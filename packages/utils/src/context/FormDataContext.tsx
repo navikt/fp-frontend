@@ -1,6 +1,6 @@
-import { createContext, ReactElement, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, type ReactElement, useContext, useEffect, useMemo, useState } from 'react';
 
-import { Behandling } from '@navikt/fp-types';
+import type { Behandling } from '@navikt/fp-types';
 
 export type FormDataType<T> = {
   formData: T;

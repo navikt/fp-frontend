@@ -1,4 +1,3 @@
-import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import { RawIntlProvider } from 'react-intl';
 
@@ -7,12 +6,12 @@ import { Datepicker, RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks'
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
 
-import { KodeverkMedNavn } from '@navikt/fp-types';
+import type { KodeverkMedNavn } from '@navikt/fp-types';
 
 import {
   MedlemskapVurdering,
   SØKER_INNFLYTTET_FOR_SENT_KODE,
-  VurderMedlemskapFormValues,
+  type VurderMedlemskapFormValues,
 } from '../../types/vurderingMedlemskapForm';
 import { lagVurderingsAlternativer } from './lagVurderingsAlternativer';
 

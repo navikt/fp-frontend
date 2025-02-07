@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
@@ -11,7 +11,7 @@ import {
   isFaktaUttakAksjonspunkt,
   isUttakAksjonspunkt,
 } from '@navikt/fp-kodeverk';
-import { Behandlingsresultat, KodeverkMedNavn, TotrinnskontrollAksjonspunkt } from '@navikt/fp-types';
+import type { Behandlingsresultat, KodeverkMedNavn, TotrinnskontrollAksjonspunkt } from '@navikt/fp-types';
 
 import {
   totrinnskontrollaksjonspunktTextCodes,

@@ -1,4 +1,4 @@
-import { MouseEvent, useCallback, useState } from 'react';
+import { type MouseEvent, useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -18,11 +18,11 @@ import {
   KodeverkType,
   UgunstAarsakType,
 } from '@navikt/fp-kodeverk';
-import { FormValues as ModalFormValues, SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
+import { type FormValues as ModalFormValues, SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
 import { FodselSammenligningIndex } from '@navikt/fp-prosess-fakta-fodsel-sammenligning';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
-import { Aksjonspunkt, FamilieHendelse, FamilieHendelseSamling, KodeverkMedNavn, Soknad } from '@navikt/fp-types';
-import { VarselRevurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { Aksjonspunkt, FamilieHendelse, FamilieHendelseSamling, KodeverkMedNavn, Soknad } from '@navikt/fp-types';
+import type { VarselRevurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import styles from './varselOmRevurderingForm.module.css';

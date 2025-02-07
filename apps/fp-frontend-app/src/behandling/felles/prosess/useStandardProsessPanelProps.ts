@@ -7,11 +7,11 @@ import {
   VilkarType,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt, Behandling, Fagsak, Vilkar } from '@navikt/fp-types';
-import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { Aksjonspunkt, Behandling, Fagsak, Vilkar } from '@navikt/fp-types';
+import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import { AksjonspunktArgs, OverstyrteAksjonspunktArgs } from '../../../data/behandlingApi';
-import { StandardProsessPanelProps } from '../typer/standardProsessPanelPropsTsType';
+import type { AksjonspunktArgs, OverstyrteAksjonspunktArgs } from '../../../data/behandlingApi';
+import type { StandardProsessPanelProps } from '../typer/standardProsessPanelPropsTsType';
 import { BehandlingDataContext } from '../utils/behandlingDataContext';
 import { getAlleMerknaderFraBeslutter } from '../utils/getAlleMerknaderFraBeslutter';
 import { erReadOnly } from '../utils/readOnlyPanelUtils';

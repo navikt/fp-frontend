@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
@@ -7,11 +7,11 @@ import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponen
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { KodeverkType } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt, AlleKodeverk, AlleKodeverkTilbakekreving, Verge } from '@navikt/fp-types';
-import { AvklarVergeAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { Aksjonspunkt, AlleKodeverk, AlleKodeverkTilbakekreving, Verge } from '@navikt/fp-types';
+import type { AvklarVergeAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
-import RegistrereVergeFaktaForm, { FormValues as RegistrereFormValues } from './RegistrereVergeFaktaForm';
+import { type FormValues as RegistrereFormValues, RegistrereVergeFaktaForm } from './RegistrereVergeFaktaForm';
 
 type FormValues = RegistrereFormValues & {
   begrunnelse?: string;
@@ -73,7 +73,6 @@ export const RegistrereVergeInfoPanel = ({ submittable, verge, alleKodeverk }: P
       >
         <RegistrereVergeFaktaForm
           readOnly={isReadOnly || aksjonspunkterForPanel.length === 0}
-          intl={intl}
           vergetyper={vergetyper}
           valgtVergeType={valgtVergeType}
           alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}

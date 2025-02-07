@@ -2,7 +2,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { Soknad } from '@navikt/fp-types';
+import type { Soknad } from '@navikt/fp-types';
 
 import { SakenFaktaPanel } from './components/SakenFaktaPanel';
 

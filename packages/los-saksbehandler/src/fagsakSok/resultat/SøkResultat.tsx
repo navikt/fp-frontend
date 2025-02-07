@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { ChevronRightIcon } from '@navikt/aksel-icons';
@@ -8,8 +8,8 @@ import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import { FagsakStatus, KodeverkType } from '@navikt/fp-kodeverk';
-import { Oppgave } from '@navikt/fp-los-felles';
-import { FagsakEnkel } from '@navikt/fp-types';
+import type { Oppgave } from '@navikt/fp-los-felles';
+import type { FagsakEnkel } from '@navikt/fp-types';
 
 import { useLosKodeverk } from '../../data/useLosKodeverk';
 

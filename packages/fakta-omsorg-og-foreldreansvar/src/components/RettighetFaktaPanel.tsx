@@ -1,12 +1,11 @@
-import React, { FunctionComponent } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort } from '@navikt/ds-react';
-import { DateLabel, FaktaGruppe,VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { DateLabel, FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode, KodeverkType } from '@navikt/fp-kodeverk';
-import { RelatertTilgrensedYtelse, Soknad } from '@navikt/fp-types';
+import type { RelatertTilgrensedYtelse, Soknad } from '@navikt/fp-types';
 
 import styles from './rettighetFaktaPanel.module.css';
 
@@ -20,22 +19,14 @@ export type FormValues = {
   farSokerType?: string;
 };
 
-interface PureOwnProps {
+interface Props {
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
-}
-
-interface StaticFunctions {
-  buildInitialValues: (
-    soknad: Soknad,
-    innvilgetRelatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYtelse[],
-    getKodeverknavn: (kode: string, kodeverkType: KodeverkType) => string,
-  ) => FormValues;
 }
 
 /**
  * RettighetFaktaPanel
  */
-const RettighetFaktaPanel: FunctionComponent<PureOwnProps> & StaticFunctions = ({ alleMerknaderFraBeslutter }) => {
+export const RettighetFaktaPanel = ({ alleMerknaderFraBeslutter }: Props) => {
   const intl = useIntl();
   const { watch } = useFormContext<FormValues>();
 
@@ -80,5 +71,3 @@ RettighetFaktaPanel.buildInitialValues = (
   ytelser: innvilgetRelatertTilgrensendeYtelserForAnnenForelder,
   farSokerType: soknad.farSokerType ? getKodeverknavn(soknad.farSokerType, KodeverkType.FAR_SOEKER_TYPE) : undefined,
 });
-
-export default RettighetFaktaPanel;

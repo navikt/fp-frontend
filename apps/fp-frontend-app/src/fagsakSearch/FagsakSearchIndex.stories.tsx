@@ -1,13 +1,14 @@
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 
 import { alleKodeverk, withQueryClient, withRouter } from '@navikt/fp-storybook-utils';
-import { FagsakEnkel, KjønnkodeEnum } from '@navikt/fp-types';
+import type { FagsakEnkel } from '@navikt/fp-types';
+import { KjønnkodeEnum } from '@navikt/fp-types';
+import { notEmpty } from '@navikt/fp-utils';
 
 import { FagsakRel, FagsakUrl, initFetchOptions, useFagsakApi, wrapUrl } from '../data/fagsakApi';
-import { notEmpty } from '../data/notEmpty';
 import { FagsakSearchIndex } from './FagsakSearchIndex';
 
 import initFetchData from '../../.storybook/testdata/initFetch.json';

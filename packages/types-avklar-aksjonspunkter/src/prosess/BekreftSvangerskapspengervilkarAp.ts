@@ -1,9 +1,7 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
-import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
+import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 
-type BekreftSvangerskapspengervilkarAp = {
+export type BekreftSvangerskapspengervilkarAp = {
   avslagskode?: string;
 } & AksjonspunktTilBekreftelse<AksjonspunktKode.SVANGERSKAPSVILKARET>;
-
-export default BekreftSvangerskapspengervilkarAp;

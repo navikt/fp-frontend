@@ -1,6 +1,6 @@
-import { Aksjonspunkt } from './aksjonspunktTsType';
-import { BehandlingFellesData } from './behandlingAppKontekstTsType';
-import { Vilkar } from './vilkarTsType';
+import type { Aksjonspunkt } from './aksjonspunktTsType';
+import type { BehandlingFellesData } from './behandlingAppKontekstTsType';
+import type { Vilkar } from './vilkarTsType';
 
 export type Behandling = BehandlingFellesData &
   Readonly<{

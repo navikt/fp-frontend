@@ -4,8 +4,9 @@
   "private": true,
   "type": "module",
   "description": "Komponent som lar saksbehandler journalføre (knytte til sak) journalposter som ikke har latt seg journalføres automatisk",
-  "main": "index.ts",
-  "types": "index.ts",
+  "exports": {
+    ".": "./index.ts"
+  },
   "scripts": {
     "test": "vitest",
     "test:watch": "vitest --watch=true",

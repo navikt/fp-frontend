@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
@@ -8,10 +8,10 @@ import { ariaCheck, hasValidText, maxLength, minLength, required } from '@navikt
 import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt, KodeverkMedNavn, Risikoklassifisering } from '@navikt/fp-types';
+import type { Aksjonspunkt, KodeverkMedNavn, Risikoklassifisering } from '@navikt/fp-types';
 
 import { FaresignalVurdering } from '../kodeverk/faresignalVurdering';
-import { AvklartRisikoklassifiseringAp } from '../types/AvklartRisikoklassifiseringAp';
+import type { AvklartRisikoklassifiseringAp } from '../types/AvklartRisikoklassifiseringAp';
 
 const maxLength1500 = maxLength(1500);
 const minLength3 = minLength(3);

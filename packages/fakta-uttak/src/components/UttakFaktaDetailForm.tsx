@@ -1,6 +1,6 @@
-import React, { FunctionComponent, useCallback, useEffect, useMemo, useState } from 'react';
-import { useForm, UseFormGetValues } from 'react-hook-form';
-import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useForm, type UseFormGetValues } from 'react-hook-form';
+import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { TrashIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, Label } from '@navikt/ds-react';
@@ -11,12 +11,13 @@ import { omitMany } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import { KodeverkType, RelasjonsRolleType, StonadskontoType } from '@navikt/fp-kodeverk';
-import { AlleKodeverk, ArbeidsgiverOpplysningerPerId, Fagsak, FaktaArbeidsforhold } from '@navikt/fp-types';
+import type { AlleKodeverk, ArbeidsgiverOpplysningerPerId, Fagsak, FaktaArbeidsforhold } from '@navikt/fp-types';
 
-import FordelingPeriodeKilde from '../kodeverk/fordelingPeriodeKilde';
-import KontrollerFaktaPeriodeMedApMarkering from '../typer/kontrollerFaktaPeriodeMedApMarkering';
-import GraderingOgSamtidigUttakPanel, {
-  FormValues as FormValuesGraderingOgSamtidigUttak,
+import { FordelingPeriodeKilde } from '../kodeverk/fordelingPeriodeKilde';
+import { type KontrollerFaktaPeriodeMedApMarkering } from '../typer/kontrollerFaktaPeriodeMedApMarkering';
+import {
+  type FormValues as FormValuesGraderingOgSamtidigUttak,
+  GraderingOgSamtidigUttakPanel,
 } from './GraderingOgSamtidigUttakPanel';
 
 import styles from './uttakFaktaDetailForm.module.css';
@@ -97,7 +98,7 @@ const transformValues = (values: FormValues): KontrollerFaktaPeriodeMedApMarkeri
 const validerTomEtterFom = (intl: IntlShape, getValues: UseFormGetValues<FormValues>) => (tom?: string) =>
   dayjs(tom).isBefore(getValues('fom')) ? intl.formatMessage({ id: 'UttakFaktaDetailForm.TomForFom' }) : null;
 
-interface OwnProps {
+interface Props {
   fagsak: Fagsak;
   valgtPeriode?: KontrollerFaktaPeriodeMedApMarkering;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -110,7 +111,7 @@ interface OwnProps {
   defaultMonth?: Date;
 }
 
-const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
+export const UttakFaktaDetailForm = ({
   fagsak,
   valgtPeriode,
   arbeidsgiverOpplysningerPerId,
@@ -121,7 +122,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
   readOnly,
   alleKodeverk,
   defaultMonth,
-}) => {
+}: Props) => {
   const intl = useIntl();
 
   const defaultValues = useMemo(
@@ -428,5 +429,3 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-
-export default UttakFaktaDetailForm;

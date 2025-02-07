@@ -1,11 +1,11 @@
-import React, { ReactElement, ReactNode } from 'react';
+import React, { type ReactElement, type ReactNode } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Heading, VStack } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { VisittkortSakIndex } from '@navikt/fp-sak-visittkort';
-import { Aktor, KodeverkMedNavn } from '@navikt/fp-types';
+import type { Aktor, KodeverkMedNavn } from '@navikt/fp-types';
 
 interface Props {
   aktorInfo: Aktor;

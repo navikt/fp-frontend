@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
@@ -17,7 +17,7 @@ import {
   TILRETTELEGGING_NAME_PREFIX,
 } from './constants';
 import { transformTilretteleggingsArbeidsforhold } from './transformer';
-import { FormValues } from './types';
+import type { FormValues } from './types';
 
 import messages from '../../i18n/nb_NO.json';
 

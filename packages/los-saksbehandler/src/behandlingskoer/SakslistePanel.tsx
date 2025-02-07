@@ -1,9 +1,7 @@
-import React from 'react';
-
 import { VStack } from '@navikt/ds-react';
 import { useMutation } from '@tanstack/react-query';
 
-import { Oppgave } from '@navikt/fp-los-felles';
+import type { Oppgave } from '@navikt/fp-los-felles';
 
 import { getBehandlingskøOppgaveAntall } from '../data/fplosSaksbehandlerApi';
 import {
@@ -11,7 +9,7 @@ import {
   removeValueFromLocalStorage,
   setValueInLocalStorage,
 } from '../data/localStorageHelper';
-import { Saksliste } from '../typer/sakslisteTsType';
+import type { Saksliste } from '../typer/sakslisteTsType';
 import { OppgaverTabell } from './oppgaveTabell/OppgaverTabell';
 import { SakslisteVelgerForm } from './sakslisteVelger/SakslisteVelgerForm';
 

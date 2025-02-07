@@ -1,11 +1,10 @@
-import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { StrollerIcon } from '@navikt/aksel-icons';
 import { VisittKort } from '@navikt/ft-plattform-komponenter';
 
 import { FamilieHendelseType } from '@navikt/fp-kodeverk';
-import { FagsakHendelse } from '@navikt/fp-types';
+import type { FagsakHendelse } from '@navikt/fp-types';
 
 import { VisittkortBarnInfoFodselPanel } from './VisittkortBarnInfoFodselPanel';
 import { VisittkortBarnInfoOmsorgPanel } from './VisittkortBarnInfoOmsorgPanel';

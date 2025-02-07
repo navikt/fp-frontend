@@ -1,7 +1,5 @@
-import React from 'react';
-
 import { SoknadData } from '@navikt/fp-papirsoknad-ui-komponenter';
-import { AlleKodeverk } from '@navikt/fp-types';
+import type { AlleKodeverk } from '@navikt/fp-types';
 
 import { SvangerskapspengerForm } from './components/SvangerskapspengerForm';
 

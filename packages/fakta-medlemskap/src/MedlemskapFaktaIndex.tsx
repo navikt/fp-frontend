@@ -2,7 +2,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { Medlemskap, Soknad } from '@navikt/fp-types';
+import type { Medlemskap, Soknad } from '@navikt/fp-types';
 
 import { MedlemskapInfoPanel } from './components/MedlemskapInfoPanel';
 

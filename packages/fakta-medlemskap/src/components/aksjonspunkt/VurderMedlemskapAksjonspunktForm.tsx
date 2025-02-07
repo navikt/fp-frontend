@@ -1,4 +1,4 @@
-import { PropsWithChildren, useCallback, useState } from 'react';
+import { type PropsWithChildren, useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
@@ -7,16 +7,16 @@ import { Form } from '@navikt/ft-form-hooks';
 
 import { FaktaBegrunnelseTextField } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, BehandlingType, KodeverkType, VilkarType } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt, ManuellBehandlingResultat } from '@navikt/fp-types';
-import { VurderForutgaendeMedlemskapAp, VurderMedlemskapAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { Aksjonspunkt, ManuellBehandlingResultat } from '@navikt/fp-types';
+import type { VurderForutgaendeMedlemskapAp, VurderMedlemskapAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import {
   MedlemskapVurdering,
   SØKER_INNFLYTTET_FOR_SENT_KODE,
-  VurderMedlemskapFormValues,
+  type VurderMedlemskapFormValues,
 } from '../../types/vurderingMedlemskapForm';
-import InfoBox from '../InfoBox';
+import { InfoBox } from '../InfoBox';
 import { MedlemskapVurderinger } from './MedlemskapVurderinger';
 
 interface Props {

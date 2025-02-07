@@ -1,10 +1,9 @@
-import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 import { SideMenu } from '@navikt/ft-plattform-komponenter';
 
-import { FaktaPanelMenyData } from '../typer/faktaPanelMenyData';
+import type { FaktaPanelMenyData } from '../typer/faktaPanelMenyData';
 
 interface Props {
   menyData: FaktaPanelMenyData[];

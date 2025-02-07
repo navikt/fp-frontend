@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Heading } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { JournalDokument } from '../../../typer/journalDokumentTsType';
+import type { JournalDokument } from '../../../typer/journalDokumentTsType';
 import { DokumentVelger } from './DokumentVelger';
 import { PDFVisning } from './PDFVisning';
 

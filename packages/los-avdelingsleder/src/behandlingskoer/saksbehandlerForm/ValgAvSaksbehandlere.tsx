@@ -1,11 +1,9 @@
-import React from 'react';
-
 import { HStack, VStack } from '@navikt/ds-react';
 import { CheckboxField } from '@navikt/ft-form-hooks';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { lagreSakslisteSaksbehandler, LosUrl } from '../../data/fplosAvdelingslederApi';
-import { SakslisteAvdeling } from '../../typer/sakslisteAvdelingTsType';
+import type { SakslisteAvdeling } from '../../typer/sakslisteAvdelingTsType';
 
 interface Props {
   valgtSaksliste: SakslisteAvdeling;

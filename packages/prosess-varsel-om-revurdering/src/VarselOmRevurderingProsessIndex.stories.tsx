@@ -1,11 +1,11 @@
-import { ComponentProps } from 'react';
+import { type ComponentProps } from 'react';
 
 import { action } from '@storybook/addon-actions';
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, BehandlingType } from '@navikt/fp-kodeverk';
-import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import { Aksjonspunkt, Behandling, FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
+import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import type { Aksjonspunkt, Behandling, FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
 
 import { VarselOmRevurderingProsessIndex } from './VarselOmRevurderingProsessIndex';
 

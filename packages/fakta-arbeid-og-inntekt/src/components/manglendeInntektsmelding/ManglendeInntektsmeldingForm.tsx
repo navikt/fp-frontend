@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -9,7 +9,7 @@ import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-va
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
-import {
+import type {
   AlleKodeverk,
   AoIArbeidsforhold,
   Inntektsmelding,
@@ -18,7 +18,7 @@ import {
 } from '@navikt/fp-types';
 
 import { useSetDirtyForm } from '../../DirtyFormProvider';
-import { ArbeidsforholdOgInntektRadData } from '../../types/arbeidsforholdOgInntekt';
+import type { ArbeidsforholdOgInntektRadData } from '../../types/arbeidsforholdOgInntekt';
 import { ArbeidsforholdInformasjonPanel } from '../felles/ArbeidsforholdInformasjonPanel';
 
 import styles from './manglendeInntektsmeldingForm.module.css';

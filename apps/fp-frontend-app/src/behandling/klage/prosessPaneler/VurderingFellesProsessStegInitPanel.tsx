@@ -7,13 +7,13 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { AksjonspunktKode, KlageVurdering as KlageVurderingKodeverk } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import { AksjonspunktVerdier, KlagevurderingProsessIndex } from '@navikt/fp-prosess-klagevurdering';
-import { ForhåndsvisMeldingParams } from '@navikt/fp-types';
+import { type AksjonspunktVerdier, KlagevurderingProsessIndex } from '@navikt/fp-prosess-klagevurdering';
+import type { ForhåndsvisMeldingParams } from '@navikt/fp-types';
 
 import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
-import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
+import type { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 import { KlageBehandlingModal } from '../modaler/KlageBehandlingModal';
 

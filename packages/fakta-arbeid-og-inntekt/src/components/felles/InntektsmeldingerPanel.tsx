@@ -7,7 +7,7 @@ import { AvsnittSkiller, DateLabel, PeriodLabel, VerticalSpacer } from '@navikt/
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 import { getKodeverknavnFraKode, KodeverkType } from '@navikt/fp-kodeverk';
-import { AlleKodeverk, AoIArbeidsforhold, Inntektsmelding } from '@navikt/fp-types';
+import type { AlleKodeverk, AoIArbeidsforhold, Inntektsmelding } from '@navikt/fp-types';
 
 import { InntektsmeldingOpplysningerPanel } from './InntektsmeldingOpplysningerPanel';
 

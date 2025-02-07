@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { Table, Tag } from '@navikt/ds-react';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 
 import { TilretteleggingType } from '@navikt/fp-kodeverk';
 import {
-  ArbeidsforholdFodselOgTilrettelegging,
-  ArbeidsforholdTilretteleggingDato,
+  type ArbeidsforholdFodselOgTilrettelegging,
+  type ArbeidsforholdTilretteleggingDato,
   SvpTilretteleggingFomKilde,
 } from '@navikt/fp-types';
 

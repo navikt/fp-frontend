@@ -1,6 +1,6 @@
-import { BehandlingAppKontekst } from './behandlingAppKontekstTsType';
-import { Historikkinnslag } from './historikkinnslagTsType';
-import { Risikoklassifisering } from './risikoklassifiseringTsType';
+import type { BehandlingAppKontekst } from './behandlingAppKontekstTsType';
+import type { Historikkinnslag } from './historikkinnslagTsType';
+import type { Risikoklassifisering } from './risikoklassifiseringTsType';
 
 export type BehandlingOppretting = Readonly<{
   behandlingType: string;

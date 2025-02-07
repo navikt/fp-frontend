@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { FamilieHendelseType } from '@navikt/fp-kodeverk';
 import {
   OmsorgOgAdopsjonPapirsoknadIndex,
@@ -8,7 +6,7 @@ import {
   SoknadData,
   SprakPapirsoknadIndex,
 } from '@navikt/fp-papirsoknad-ui-komponenter';
-import { AlleKodeverk } from '@navikt/fp-types';
+import type { AlleKodeverk } from '@navikt/fp-types';
 
 interface Props {
   readOnly: boolean;
@@ -23,7 +21,13 @@ interface Props {
  *
  * Form som brukes ved adopsjon for tilleggsopplysninger.
  */
-const RegistreringAdopsjonOgOmsorgGrid = ({ readOnly, soknadData, alleKodeverk, fodselsdato, mottattDato }: Props) => (
+export const RegistreringAdopsjonOgOmsorgGrid = ({
+  readOnly,
+  soknadData,
+  alleKodeverk,
+  fodselsdato,
+  mottattDato,
+}: Props) => (
   <>
     <RettigheterPapirsoknadIndex readOnly={readOnly} soknadData={soknadData} />
     <OmsorgOgAdopsjonPapirsoknadIndex
@@ -56,5 +60,3 @@ RegistreringAdopsjonOgOmsorgGrid.transformValues = (
   ...OppholdINorgePapirsoknadIndex.transformValues(values),
   ...SprakPapirsoknadIndex.transformValues(values),
 });
-
-export default RegistreringAdopsjonOgOmsorgGrid;

@@ -1,13 +1,12 @@
-import React from 'react';
-import { FormProvider, useForm, UseFormGetValues } from 'react-hook-form';
-import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+import { FormProvider, useForm, type UseFormGetValues } from 'react-hook-form';
+import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { Button, HStack, Spacer, VStack } from '@navikt/ds-react';
 import { Datepicker, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { dateRangesNotOverlapping, hasValidDate, required } from '@navikt/ft-form-validators';
 import dayjs from 'dayjs';
 
-import { ArbeidsforholdTilretteleggingDato, SvpAvklartOppholdPeriode } from '@navikt/fp-types';
+import type { ArbeidsforholdTilretteleggingDato, SvpAvklartOppholdPeriode } from '@navikt/fp-types';
 
 type FormValues = Record<
   number,

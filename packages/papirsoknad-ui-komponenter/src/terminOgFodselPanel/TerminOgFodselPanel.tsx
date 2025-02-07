@@ -1,5 +1,4 @@
-import React from 'react';
-import { useFormContext, UseFormGetValues } from 'react-hook-form';
+import { useFormContext, type UseFormGetValues } from 'react-hook-form';
 import { RawIntlProvider } from 'react-intl';
 
 import { Alert, Heading, HStack, Label, VStack } from '@navikt/ds-react';

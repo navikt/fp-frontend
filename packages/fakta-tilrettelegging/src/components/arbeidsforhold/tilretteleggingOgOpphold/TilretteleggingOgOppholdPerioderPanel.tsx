@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useFieldArray } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
@@ -7,12 +7,12 @@ import { Button, HStack, Table, VStack } from '@navikt/ds-react';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import {
+import type {
   ArbeidsforholdFodselOgTilrettelegging,
   ArbeidsforholdTilretteleggingDato,
   SvpAvklartOppholdPeriode,
-  SvpTilretteleggingFomKilde,
 } from '@navikt/fp-types';
+import { SvpTilretteleggingFomKilde } from '@navikt/fp-types';
 
 import { OppholdPeriodeTabellRad } from './opphold/OppholdPeriodeTabellRad';
 import { TilretteleggingPeriodeTabellRad } from './tilrettelegging/TilretteleggingPeriodeTabellRad';

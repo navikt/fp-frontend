@@ -8,7 +8,7 @@ import { hasValidText, maxLength, required } from '@navikt/ft-form-validators';
 import { formaterFritekst } from '@navikt/ft-utils';
 
 import { BehandlingResultatType, BehandlingType, DokumentMalType, FagsakYtelseType } from '@navikt/fp-kodeverk';
-import { KodeverkMedNavn } from '@navikt/fp-types';
+import type { KodeverkMedNavn } from '@navikt/fp-types';
 
 import styles from './henleggBehandlingModal.module.css';
 

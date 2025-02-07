@@ -1,7 +1,7 @@
 import { isEqual } from 'lodash';
 
 import { AdresseType } from '@navikt/fp-kodeverk';
-import { Personadresse } from '@navikt/fp-types';
+import type { Personadresse } from '@navikt/fp-types';
 
 import { sorterPerioder } from './periodeUtils';
 

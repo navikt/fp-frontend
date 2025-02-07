@@ -1,5 +1,4 @@
-import React from 'react';
-import { FormattedMessage,useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Tag } from '@navikt/ds-react';
 

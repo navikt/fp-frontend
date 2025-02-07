@@ -1,9 +1,8 @@
-import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Button, Heading, Modal as NavModal } from '@navikt/ds-react';
 
-import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
+import type { SaksbehandlerProfil } from '@navikt/fp-los-felles';
 
 import styles from './sletteSaksbehandlerModal.module.css';
 

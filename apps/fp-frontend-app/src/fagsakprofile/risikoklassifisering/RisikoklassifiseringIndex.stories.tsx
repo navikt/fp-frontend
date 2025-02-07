@@ -1,7 +1,7 @@
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { action } from '@storybook/addon-actions';
-import { Meta, ReactRenderer, StoryObj } from '@storybook/react';
-import { DecoratorFunction } from '@storybook/types';
+import type { Meta, ReactRenderer, StoryObj } from '@storybook/react';
+import type { DecoratorFunction } from '@storybook/types';
 import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 
@@ -21,16 +21,11 @@ import {
   withQueryClient,
   withRouter,
 } from '@navikt/fp-storybook-utils';
-import {
-  Behandling,
-  BehandlingAppKontekst,
-  BehandlingOppretting,
-  Fagsak,
-  VergeBehandlingmenyValg,
-} from '@navikt/fp-types';
+import type { Behandling, BehandlingAppKontekst, BehandlingOppretting, Fagsak } from '@navikt/fp-types';
+import { VergeBehandlingmenyValg } from '@navikt/fp-types';
+import { notEmpty } from '@navikt/fp-utils';
 
 import { FagsakRel, FagsakUrl, initFetchOptions, useFagsakApi, wrapUrl } from '../../data/fagsakApi';
-import { notEmpty } from '../../data/notEmpty';
 import { RequestPendingProvider } from '../../data/polling/RequestPendingContext';
 import { FagsakData } from '../../fagsak/FagsakData';
 import { RisikoklassifiseringIndex } from './RisikoklassifiseringIndex';

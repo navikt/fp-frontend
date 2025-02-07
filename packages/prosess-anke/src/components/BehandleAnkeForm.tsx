@@ -6,7 +6,7 @@ import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import moment from 'moment';
 
 import { AnkeVurdering as AnkeVurderingKodeverk, AnkeVurderingOmgjoer, KodeverkType } from '@navikt/fp-kodeverk';
-import { AlleKodeverk, AnkeVurdering, BehandlingAppKontekst } from '@navikt/fp-types';
+import type { AlleKodeverk, AnkeVurdering, BehandlingAppKontekst } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 const formatDate = (date: string): string => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');

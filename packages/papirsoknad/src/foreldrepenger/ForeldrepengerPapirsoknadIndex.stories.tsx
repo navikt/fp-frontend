@@ -1,7 +1,7 @@
 import { action } from '@storybook/addon-actions';
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
-import { FagsakYtelseType, FamilieHendelseType,ForeldreType } from '@navikt/fp-kodeverk';
+import { FagsakYtelseType, FamilieHendelseType, ForeldreType } from '@navikt/fp-kodeverk';
 import { SoknadData } from '@navikt/fp-papirsoknad-ui-komponenter';
 import { alleKodeverk, getIntlDecorator, withRouter } from '@navikt/fp-storybook-utils';
 

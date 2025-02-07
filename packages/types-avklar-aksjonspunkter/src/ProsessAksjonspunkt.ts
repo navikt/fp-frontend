@@ -1,33 +1,33 @@
-import { BeregningAksjonspunktSubmitType } from '@navikt/ft-prosess-beregningsgrunnlag';
+import type { BeregningAksjonspunktSubmitType } from '@navikt/ft-prosess-beregningsgrunnlag';
 
-import AvklarOpptjeningsvilkaretAp from './prosess/AvklarOpptjeningsvilkaretAp';
-import BekreftSokersOpplysningspliktManuAp from './prosess/BekreftSokersOpplysningspliktManuAp';
-import BekreftSvangerskapspengervilkarAp from './prosess/BekreftSvangerskapspengervilkarAp';
-import Foreldreansvarsvilkar1Ap from './prosess/Foreldreansvarsvilkar1Ap';
-import Foreldreansvarsvilkar2Ap from './prosess/Foreldreansvarsvilkar2Ap';
-import ForeslaVedtakAp from './prosess/ForeslaVedtakAp';
-import ForeslaVedtakManueltAp from './prosess/ForeslaVedtakManueltAp';
-import KlageFormkravAp from './prosess/KlageFormkravAp';
-import KlageVurderingResultatAp from './prosess/KlageVurderingResultatAp';
-import KontrollAvManueltOpprettetRevurderingsbehandlingAp from './prosess/KontrollAvManueltOpprettetRevurderingsbehandlingAp';
-import KontrollerRevurderingsBehandlingAp from './prosess/KontrollerRevurderingsBehandlingAp';
-import OmsorgsvilkarAp from './prosess/OmsorgsvilkarAp';
-import OverstyringAp from './prosess/OverstyringAp';
-import OverstyringBeregningAp from './prosess/OverstyringBeregningAp';
-import OverstyringMedlemskapsvilkaretLopendeAp from './prosess/OverstyringMedlemskapsvilkaretLopendeAp';
-import OverstyringSokersOpplysingspliktAp from './prosess/OverstyringSokersOpplysingspliktAp';
-import SoknadsfristAp from './prosess/SoknadsfristAp';
-import UttakAp from './prosess/UttakAp';
-import VarselRevurderingAp from './prosess/VarselRevurderingAp';
-import VurdereAnnenYtelseForVedtakAp from './prosess/VurdereAnnenYtelseForVedtakAp';
-import VurdereDokumentForVedtakAp from './prosess/VurdereDokumentForVedtakAp';
-import VurdereInntektsmeldingKlageForVedtakAp from './prosess/VurdereInntektsmeldingKlageForVedtakAp';
-import VurdereYtelseSammeBarnAnnenForelderAp from './prosess/VurdereYtelseSammeBarnAnnenForelderAp';
-import VurdereYtelseSammeBarnSokerAp from './prosess/VurdereYtelseSammeBarnSokerAp';
-import VurderFeilutbetalingAp from './prosess/VurderFeilutbetalingAp';
-import VurderInnsynAp from './prosess/VurderInnsynAp';
-import VurderSoknadsfristAp from './prosess/VurderSoknadsfristAp';
-import VurderTilbaketrekkAp from './prosess/VurderTilbaketrekkAp';
+import type { AvklarOpptjeningsvilkaretAp } from './prosess/AvklarOpptjeningsvilkaretAp';
+import type { BekreftSokersOpplysningspliktManuAp } from './prosess/BekreftSokersOpplysningspliktManuAp';
+import type { BekreftSvangerskapspengervilkarAp } from './prosess/BekreftSvangerskapspengervilkarAp';
+import type { Foreldreansvarsvilkar1Ap } from './prosess/Foreldreansvarsvilkar1Ap';
+import type { Foreldreansvarsvilkar2Ap } from './prosess/Foreldreansvarsvilkar2Ap';
+import type { ForeslaVedtakAp } from './prosess/ForeslaVedtakAp';
+import type { ForeslaVedtakManueltAp } from './prosess/ForeslaVedtakManueltAp';
+import type { KlageFormkravAp } from './prosess/KlageFormkravAp';
+import type { KlageVurderingResultatAp } from './prosess/KlageVurderingResultatAp';
+import type { KontrollAvManueltOpprettetRevurderingsbehandlingAp } from './prosess/KontrollAvManueltOpprettetRevurderingsbehandlingAp';
+import type { KontrollerRevurderingsBehandlingAp } from './prosess/KontrollerRevurderingsBehandlingAp';
+import type { OmsorgsvilkarAp } from './prosess/OmsorgsvilkarAp';
+import type { OverstyringAp } from './prosess/OverstyringAp';
+import type { OverstyringBeregningAp } from './prosess/OverstyringBeregningAp';
+import type { OverstyringMedlemskapsvilkaretLopendeAp } from './prosess/OverstyringMedlemskapsvilkaretLopendeAp';
+import type { OverstyringSokersOpplysingspliktAp } from './prosess/OverstyringSokersOpplysingspliktAp';
+import type { SoknadsfristAp } from './prosess/SoknadsfristAp';
+import type { UttakAp } from './prosess/UttakAp';
+import type { VarselRevurderingAp } from './prosess/VarselRevurderingAp';
+import type { VurdereAnnenYtelseForVedtakAp } from './prosess/VurdereAnnenYtelseForVedtakAp';
+import type { VurdereDokumentForVedtakAp } from './prosess/VurdereDokumentForVedtakAp';
+import type { VurdereInntektsmeldingKlageForVedtakAp } from './prosess/VurdereInntektsmeldingKlageForVedtakAp';
+import type { VurdereYtelseSammeBarnAnnenForelderAp } from './prosess/VurdereYtelseSammeBarnAnnenForelderAp';
+import type { VurdereYtelseSammeBarnSokerAp } from './prosess/VurdereYtelseSammeBarnSokerAp';
+import type { VurderFeilutbetalingAp } from './prosess/VurderFeilutbetalingAp';
+import type { VurderInnsynAp } from './prosess/VurderInnsynAp';
+import type { VurderSoknadsfristAp } from './prosess/VurderSoknadsfristAp';
+import type { VurderTilbaketrekkAp } from './prosess/VurderTilbaketrekkAp';
 
 export type ProsessAksjonspunkt =
   | BekreftSvangerskapspengervilkarAp
@@ -59,5 +59,3 @@ export type ProsessAksjonspunkt =
   | BeregningAksjonspunktSubmitType
   | VurdereDokumentForVedtakAp
   | VurdereInntektsmeldingKlageForVedtakAp;
-
-export default ProsessAksjonspunkt;

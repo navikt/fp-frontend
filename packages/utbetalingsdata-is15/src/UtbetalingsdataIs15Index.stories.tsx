@@ -2,9 +2,9 @@ import { useState } from 'react';
 
 import { VStack } from '@navikt/ds-react';
 import { action } from '@storybook/addon-actions';
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
-import { InfotrygdVedtak } from '@navikt/fp-types';
+import type { InfotrygdVedtak } from '@navikt/fp-types';
 
 import { UtbetalingsdataIs15Index } from './UtbetalingsdataIs15Index';
 

@@ -1,6 +1,6 @@
 import { expect } from 'vitest';
 
-import { Historikkinnslag } from '@navikt/fp-types';
+import type { Historikkinnslag } from '@navikt/fp-types';
 
 import { sortAndTagTilbakekreving } from './historikkUtils';
 

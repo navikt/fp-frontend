@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -8,7 +8,7 @@ import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, getKodeverknavnFn, hasAksjonspunkt, KodeverkType } from '@navikt/fp-kodeverk';
-import {
+import type {
   Aksjonspunkt,
   AlleKodeverk,
   FamilieHendelse,
@@ -16,13 +16,16 @@ import {
   RelatertTilgrensedYtelse,
   Soknad,
 } from '@navikt/fp-types';
-import {
+import type {
   AvklarFaktaForForeldreansvarAksjonspunktAp,
   AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
-import OmsorgOgForeldreansvarFaktaForm, { FormValues as OmsorgFormValues } from './OmsorgOgForeldreansvarFaktaForm';
+import {
+  type FormValues as OmsorgFormValues,
+  OmsorgOgForeldreansvarFaktaForm,
+} from './OmsorgOgForeldreansvarFaktaForm';
 
 type FormValues = OmsorgFormValues & {
   begrunnelse?: string;

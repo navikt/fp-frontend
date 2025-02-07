@@ -1,15 +1,20 @@
-import React, { FunctionComponent, useCallback,useMemo, useState } from 'react';
-import { FormattedMessage, IntlShape,useIntl } from 'react-intl';
+import { useCallback, useMemo, useState } from 'react';
+import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
-import { BodyShort, HStack,Label } from '@navikt/ds-react';
+import { BodyShort, HStack, Label } from '@navikt/ds-react';
 import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 
 import { StonadskontoType, UttakArbeidType as uttakArbeidTypeKodeverk } from '@navikt/fp-kodeverk';
-import { AktivitetIdentifikator, AktivitetSaldo, ArbeidsgiverOpplysningerPerId, Stonadskonto } from '@navikt/fp-types';
+import type {
+  AktivitetIdentifikator,
+  AktivitetSaldo,
+  ArbeidsgiverOpplysningerPerId,
+  Stonadskonto,
+} from '@navikt/fp-types';
 
-import lagVisningsNavn from '../../utils/lagVisningsNavn';
-import uttakArbeidTypeTekstCodes from '../../utils/uttakArbeidTypeCodes';
-import StonadsdagerTab, { finnAntallUkerOgDager } from './StonadsdagerTab';
+import { lagVisningsNavn } from '../../utils/lagVisningsNavn';
+import { uttakArbeidTypeTekstCodes } from '../../utils/uttakArbeidTypeCodes';
+import { finnAntallUkerOgDager,StonadsdagerTab } from './StonadsdagerTab';
 
 import styles from './disponibleStonadskontoerPanel.module.css';
 
@@ -90,15 +95,12 @@ const utledNavn = (
   return intl.formatMessage({ id: 'RenderUttakTable.ArbeidType.ANNET' });
 };
 
-interface OwnProps {
+interface Props {
   stønadskontoer?: Stonadskonto[];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
-const DisponibleStonadskontoerPanel: FunctionComponent<OwnProps> = ({
-  stønadskontoer,
-  arbeidsgiverOpplysningerPerId,
-}) => {
+export const DisponibleStonadskontoerPanel = ({ stønadskontoer, arbeidsgiverOpplysningerPerId }: Props) => {
   const intl = useIntl();
   const [valgtKontoType, setValgtKontoType] = useState<string>();
 
@@ -187,5 +189,3 @@ const DisponibleStonadskontoerPanel: FunctionComponent<OwnProps> = ({
     </div>
   );
 };
-
-export default DisponibleStonadskontoerPanel;

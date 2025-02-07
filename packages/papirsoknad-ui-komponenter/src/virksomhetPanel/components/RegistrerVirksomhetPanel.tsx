@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { PlusCircleIcon } from '@navikt/aksel-icons';
 import { Button, ErrorMessage, Table } from '@navikt/ds-react';
 
-import { AlleKodeverk } from '@navikt/fp-types';
+import type { AlleKodeverk } from '@navikt/fp-types';
 
 import { EGEN_VIRKSOMHET_NAME_PREFIX } from '../constants';
-import { VirksomhetFormValues } from '../types';
+import type { VirksomhetFormValues } from '../types';
 import { VirksomhetRad } from './VirksomhetRad';
 
 interface Props {

@@ -1,7 +1,7 @@
-import { ReactRenderer } from '@storybook/react';
+import { type ReactRenderer } from '@storybook/react';
 import type { DecoratorFunction } from '@storybook/types';
 
-import { Behandling } from '@navikt/fp-types';
+import type { Behandling } from '@navikt/fp-types';
 import { FormDataProvider } from '@navikt/fp-utils';
 
 export const withFormData: DecoratorFunction<ReactRenderer> = Story => (

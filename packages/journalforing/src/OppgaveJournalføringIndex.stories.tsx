@@ -1,16 +1,16 @@
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { http, HttpResponse } from 'msw';
 
 import { FagsakStatus, FagsakYtelseType, FamilieHendelseType } from '@navikt/fp-kodeverk';
 import { withQueryClient, withRouter } from '@navikt/fp-storybook-utils';
-import { NavAnsatt } from '@navikt/fp-types';
+import type { NavAnsatt } from '@navikt/fp-types';
 
 import { FpFordelUrl } from './data/fpFordelApi';
 import { JournalKanal } from './kodeverk/journalKanal';
 import { erEndeligJournalført, JournalpostTilstand } from './kodeverk/journalpostTilstand';
 import { OppgaveKilde } from './kodeverk/oppgaveKilde';
 import { OppgaveJournalføringIndex } from './OppgaveJournalføringIndex';
-import { Journalpost } from './typer/journalpostTsType';
+import type { Journalpost } from './typer/journalpostTsType';
 
 import '@navikt/ds-css';
 import '@navikt/ft-form-hooks/dist/style.css';

@@ -1,12 +1,12 @@
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
 import { TrueFalseInput } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
-import { BekreftOmsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
+import type { BekreftOmsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 const { MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG } = AksjonspunktKode;
 

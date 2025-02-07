@@ -2,7 +2,7 @@ import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Label } from '@navikt/ds-react';
 
-import { Behandlingsresultat } from '@navikt/fp-types';
+import type { Behandlingsresultat } from '@navikt/fp-types';
 
 import { VedtakFritekstPanel } from '../felles/VedtakFritekstPanel';
 

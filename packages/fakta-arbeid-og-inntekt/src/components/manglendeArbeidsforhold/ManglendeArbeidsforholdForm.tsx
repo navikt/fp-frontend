@@ -1,5 +1,5 @@
-import React, { useCallback, useMemo, useRef, useState } from 'react';
-import { useForm, UseFormGetValues } from 'react-hook-form';
+import { useCallback, useMemo, useRef, useState } from 'react';
+import { useForm, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
@@ -19,10 +19,10 @@ import {
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
-import { Inntektsmelding, ManglendeInntektsmeldingVurdering, ManueltArbeidsforhold } from '@navikt/fp-types';
+import type { Inntektsmelding, ManglendeInntektsmeldingVurdering, ManueltArbeidsforhold } from '@navikt/fp-types';
 
 import { useSetDirtyForm } from '../../DirtyFormProvider';
-import { ArbeidsforholdOgInntektRadData } from '../../types/arbeidsforholdOgInntekt';
+import type { ArbeidsforholdOgInntektRadData } from '../../types/arbeidsforholdOgInntekt';
 import { InntektsmeldingOpplysningerPanel } from '../felles/InntektsmeldingOpplysningerPanel';
 
 import styles from './manglendeArbeidsforholdForm.module.css';

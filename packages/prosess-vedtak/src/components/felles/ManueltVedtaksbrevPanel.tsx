@@ -1,4 +1,4 @@
-import { MouseEvent } from 'react';
+import { type MouseEvent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ArrowForwardIcon } from '@navikt/aksel-icons';

@@ -1,9 +1,8 @@
-import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { AlleKodeverk, FagsakEnkel } from '@navikt/fp-types';
+import type { AlleKodeverk, FagsakEnkel } from '@navikt/fp-types';
 
 import { FagsakSearch } from './components/FagsakSearch';
 

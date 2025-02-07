@@ -9,7 +9,7 @@ const { Default } = composeStories(stories);
 
 describe('FagsakSearchIndex', () => {
   it('skal søke med saksnummer og få opp treff i liste', async () => {
-    await applyRequestHandlers(Default.parameters.msw);
+    await applyRequestHandlers(Default.parameters['msw']);
     const utils = render(<Default />);
 
     expect(await screen.findByText('Søk på sak eller person')).toBeInTheDocument();

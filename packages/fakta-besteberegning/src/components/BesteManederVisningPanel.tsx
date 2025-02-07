@@ -1,7 +1,7 @@
-import React, { FunctionComponent, ReactElement, useMemo } from 'react';
+import { type ReactElement, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort,Label } from '@navikt/ds-react';
+import { BodyShort, Label } from '@navikt/ds-react';
 import {
   FlexColumn,
   FlexContainer,
@@ -11,12 +11,12 @@ import {
   TableRow,
   VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
-import { DDMMYYYY_DATE_FORMAT, formatCurrencyNoKr,ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { DDMMYYYY_DATE_FORMAT, formatCurrencyNoKr, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 import norskFormat from 'dayjs/locale/nb';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
-import { ArbeidsgiverOpplysningerPerId,BesteberegningInntekt, Månedsgrunnlag } from '@navikt/fp-types';
+import type { ArbeidsgiverOpplysningerPerId, BesteberegningInntekt, Månedsgrunnlag } from '@navikt/fp-types';
 
 import styles from './besteManederVisningPanel.module.css';
 
@@ -29,7 +29,7 @@ const lagMånedVisning = (dato: dayjs.Dayjs): string => {
 
 const formatDate = (date: string): string => (date ? lagMånedVisning(dayjs(date, ISO_DATE_FORMAT)) : '-');
 
-interface BesteMånederProps {
+interface Props {
   besteMåneder: Månedsgrunnlag[];
   arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId;
   getKodeverkNavn: (kodeverk: string, kodeverkType: KodeverkType) => string;
@@ -106,11 +106,7 @@ const lagSummeringsRad = (inntekter: BesteberegningInntekt[], labelId: string): 
     </TableRow>
   );
 
-const Inntekttabell: FunctionComponent<InntekttabellProps> = ({
-  inntekter,
-  arbeidsgiverOpplysninger,
-  getKodeverkNavn,
-}) => {
+const Inntekttabell = ({ inntekter, arbeidsgiverOpplysninger, getKodeverkNavn }: InntekttabellProps) => {
   const rows: ReactElement[] = [];
   lagInntektRader(inntekter, arbeidsgiverOpplysninger, getKodeverkNavn).forEach(rad => rows.push(rad));
   rows.push(lagSummeringsRad(inntekter, 'Inntekttabell.Sum'));
@@ -164,11 +160,7 @@ const sorterEtterMåned = (besteMåneder: Månedsgrunnlag[]) =>
  *
  * Presentasjonskomponent. Viser månedene som brukes i beregning etter §14-7, tredje ledd
  */
-const BesteManederVisningPanel: FunctionComponent<BesteMånederProps> = ({
-  besteMåneder,
-  arbeidsgiverOpplysninger,
-  getKodeverkNavn,
-}) => {
+export const BesteMånederVisningPanel = ({ besteMåneder, arbeidsgiverOpplysninger, getKodeverkNavn }: Props) => {
   const sorterteMåneder = useMemo(() => sorterEtterMåned(besteMåneder), [besteMåneder]);
   return (
     <>
@@ -192,5 +184,3 @@ const BesteManederVisningPanel: FunctionComponent<BesteMånederProps> = ({
     </>
   );
 };
-
-export default BesteManederVisningPanel;

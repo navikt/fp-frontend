@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 
-import { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
+import type { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { VurderingFellesProsessStegInitPanel } from './VurderingFellesProsessStegInitPanel';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.BEHANDLE_KLAGE_NK];

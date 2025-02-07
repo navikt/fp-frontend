@@ -5,7 +5,7 @@ import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-u
 import { formatCurrencyWithKr } from '@navikt/ft-utils';
 
 import { FagsakYtelseType } from '@navikt/fp-kodeverk';
-import { Behandlingsresultat, BeregningsresultatDagytelse, BeregningsresultatEs } from '@navikt/fp-types';
+import type { Behandlingsresultat, BeregningsresultatDagytelse, BeregningsresultatEs } from '@navikt/fp-types';
 
 import { VedtakFritekstPanel } from '../felles/VedtakFritekstPanel';
 

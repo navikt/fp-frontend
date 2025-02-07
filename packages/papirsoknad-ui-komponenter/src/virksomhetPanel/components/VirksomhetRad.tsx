@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
@@ -7,10 +7,10 @@ import { BodyShort, Box, Button, Table, VStack } from '@navikt/ds-react';
 import { InputField } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
-import { AlleKodeverk } from '@navikt/fp-types';
+import type { AlleKodeverk } from '@navikt/fp-types';
 
 import { VIRKSOMHET_FORM_NAME_PREFIX } from '../constants';
-import { RegistrerVirksomhetFormValues, VirksomhetFormValues } from '../types';
+import type { RegistrerVirksomhetFormValues, VirksomhetFormValues } from '../types';
 import { VirksomhetIdentifikasjonPanel } from './VirksomhetIdentifikasjonPanel';
 import { VirksomhetRegnskapPanel } from './VirksomhetRegnskapPanel';
 import { VirksomhetRelasjonPanel } from './VirksomhetRelasjonPanel';

@@ -1,11 +1,10 @@
-import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { VStack } from '@navikt/ds-react';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { formatCurrencyNoKr } from '@navikt/ft-utils';
 
-import { Inntektsmelding } from '@navikt/fp-types';
+import type { Inntektsmelding } from '@navikt/fp-types';
 
 import { InntektsmeldingInfoBlokk } from './InntektsmeldingInfoBlokk';
 

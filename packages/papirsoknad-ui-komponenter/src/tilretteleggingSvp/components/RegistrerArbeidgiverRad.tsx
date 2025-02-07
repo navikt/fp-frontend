@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
@@ -12,7 +12,7 @@ import {
   TILRETTELEGGING_FOR_ARBEIDSGIVER_FIELD_ARRAY_NAME,
   TILRETTELEGGING_NAME_PREFIX,
 } from '../constants';
-import { FormValues } from '../types';
+import type { FormValues } from '../types';
 import { BehovForTilretteleggingFieldArray } from './BehovForTilretteleggingFieldArray';
 
 const FA_PREFIX = `${TILRETTELEGGING_NAME_PREFIX}.${TILRETTELEGGING_FOR_ARBEIDSGIVER_FIELD_ARRAY_NAME}`;

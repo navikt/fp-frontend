@@ -1,4 +1,4 @@
-import { FaktaArbeidsforhold } from './faktaArbeidsforholdTsType';
+import type { FaktaArbeidsforhold } from './faktaArbeidsforholdTsType';
 
 export type KontrollerFaktaPeriode = Readonly<{
   fom: string;

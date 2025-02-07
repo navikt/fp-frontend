@@ -1,14 +1,14 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort } from '@navikt/ds-react';
-import { Table, TableColumn,TableRow } from '@navikt/ft-ui-komponenter';
+import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 
-interface OwnProps {
+interface Props {
   headerColumnContent: React.ReactElement[];
 }
 
-const IngenArbeidsforholdRegistrert: FunctionComponent<OwnProps> = ({ headerColumnContent }) => (
+export const IngenArbeidsforholdRegistrert = ({ headerColumnContent }: Props) => (
   <Table headerColumnContent={headerColumnContent} noHover>
     <TableRow>
       <TableColumn>
@@ -24,5 +24,3 @@ const IngenArbeidsforholdRegistrert: FunctionComponent<OwnProps> = ({ headerColu
     </TableRow>
   </Table>
 );
-
-export default IngenArbeidsforholdRegistrert;

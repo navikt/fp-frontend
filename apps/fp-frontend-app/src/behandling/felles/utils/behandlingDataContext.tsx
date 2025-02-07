@@ -1,8 +1,8 @@
-import { createContext, JSX, ReactElement, useMemo } from 'react';
+import { createContext, type JSX, type ReactElement, useMemo } from 'react';
 
-import { AksessRettigheter, AlleKodeverk, Behandling, BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
+import type { AksessRettigheter, AlleKodeverk, Behandling, BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
 
-import { AksjonspunktArgs, OverstyrteAksjonspunktArgs } from '../../../data/behandlingApi';
+import type { AksjonspunktArgs, OverstyrteAksjonspunktArgs } from '../../../data/behandlingApi';
 
 type ContextData = {
   behandling: Behandling;

@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
 import { Heading, VStack } from '@navikt/ds-react';
@@ -7,7 +7,7 @@ import { createIntl } from '@navikt/ft-utils';
 
 import { FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { SoknadData } from '@navikt/fp-papirsoknad-ui-komponenter';
-import { AlleKodeverk, Fagsak } from '@navikt/fp-types';
+import type { AlleKodeverk, Fagsak } from '@navikt/fp-types';
 
 import { EngangsstonadPapirsoknadIndex } from './engangsstonad/EngangsstonadPapirsoknadIndex';
 import { ForeldrepengerPapirsoknadIndex } from './foreldrepenger/ForeldrepengerPapirsoknadIndex';

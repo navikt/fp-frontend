@@ -1,7 +1,7 @@
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { BehandlingType } from '@navikt/fp-kodeverk';
-import { AvklartBarn, FamilieHendelse, Soknad } from '@navikt/fp-types';
+import type { AvklartBarn, FamilieHendelse, Soknad } from '@navikt/fp-types';
 
 import { FodselSammenligningIndex } from './FodselSammenligningIndex';
 

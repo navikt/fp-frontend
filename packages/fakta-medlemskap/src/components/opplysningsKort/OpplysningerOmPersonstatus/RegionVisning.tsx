@@ -1,13 +1,12 @@
-import React, { FC } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { BodyLong, Label,Table } from '@navikt/ds-react';
+import { BodyLong, Label, Table } from '@navikt/ds-react';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 import { sorterPerioder } from '@navikt/fp-fakta-felles';
 import { KodeverkType } from '@navikt/fp-kodeverk';
-import { AlleKodeverk, RegionPeriode } from '@navikt/fp-types';
+import type { AlleKodeverk, RegionPeriode } from '@navikt/fp-types';
 
 interface Props {
   regioner: RegionPeriode[];
@@ -15,7 +14,7 @@ interface Props {
   erAnnenpart?: boolean;
 }
 
-const RegionVisning: FC<Props> = ({ regioner, erAnnenpart = false, alleKodeverk }) => {
+export const RegionVisning = ({ regioner, erAnnenpart = false, alleKodeverk }: Props) => {
   const kodeverkNavn = alleKodeverk[KodeverkType.REGION];
 
   const getRegion = (verdi: RegionPeriode): string => {
@@ -71,5 +70,3 @@ const RegionVisning: FC<Props> = ({ regioner, erAnnenpart = false, alleKodeverk 
     </Table>
   );
 };
-
-export default RegionVisning;

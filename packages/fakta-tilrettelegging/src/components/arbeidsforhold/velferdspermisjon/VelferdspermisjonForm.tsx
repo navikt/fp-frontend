@@ -1,4 +1,3 @@
-import React from 'react';
 import { FormProvider, useForm, useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -6,9 +5,9 @@ import { Alert, Button, HStack, VStack } from '@navikt/ds-react';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
-import { Permisjon } from '@navikt/fp-types';
+import type { Permisjon } from '@navikt/fp-types';
 
-import { TilretteleggingFormValues } from '../../../types/TilretteleggingFormValues';
+import type { TilretteleggingFormValues } from '../../../types/TilretteleggingFormValues';
 
 type FormValues = Record<number, Permisjon>;
 

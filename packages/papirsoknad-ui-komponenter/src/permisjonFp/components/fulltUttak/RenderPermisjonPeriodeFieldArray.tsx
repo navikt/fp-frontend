@@ -1,5 +1,5 @@
-import React, { ReactElement, useEffect } from 'react';
-import { useFieldArray, useFormContext, UseFormGetValues } from 'react-hook-form';
+import { type ReactElement, useEffect } from 'react';
+import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Alert } from '@navikt/ds-react';
@@ -17,11 +17,11 @@ import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import { KodeverkType, UttakPeriodeType } from '@navikt/fp-kodeverk';
-import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
+import type { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
 import { FieldArrayRow } from '../../../felles/FieldArrayRow';
 import { PERMISJON_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
-import { PermisjonFormValues, PermisjonPeriode } from '../../types';
+import type { PermisjonFormValues, PermisjonPeriode } from '../../types';
 
 const FA_PREFIX = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}`;
 const getPrefix = (index: number) => `${FA_PREFIX}.${index}` as const;

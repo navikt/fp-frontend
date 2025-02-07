@@ -9,7 +9,7 @@ import { OppgaveJournalføringIndex } from '@navikt/fp-journalforing';
 import { AvdelingslederIndex } from '@navikt/fp-los-avdelingsleder';
 import { SaksbehandlerIndex } from '@navikt/fp-los-saksbehandler';
 import { NotFoundPage } from '@navikt/fp-sak-infosider';
-import { NavAnsatt } from '@navikt/fp-types';
+import type { NavAnsatt } from '@navikt/fp-types';
 import { UtbetalingsdataIs15Index } from '@navikt/fp-utbetalingsdata-is15';
 
 import { AktørIndex } from '../../aktoer/AktørIndex';

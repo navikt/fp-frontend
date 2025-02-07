@@ -1,13 +1,13 @@
 import { queryOptions } from '@tanstack/react-query';
 import ky from 'ky';
 
-import { Oppgave, OppgaveStatus, SaksbehandlerProfil } from '@navikt/fp-los-felles';
-import { AlleKodeverk, FagsakEnkel } from '@navikt/fp-types';
+import type { Oppgave, OppgaveStatus, SaksbehandlerProfil } from '@navikt/fp-los-felles';
+import type { AlleKodeverk, FagsakEnkel } from '@navikt/fp-types';
 
-import { Driftsmelding } from '../typer/driftsmeldingTsType';
-import { NyeOgFerdigstilteOppgaver } from '../typer/nyeOgFerdigstilteOppgaverTsType';
-import { Saksbehandler } from '../typer/saksbehandlerTsType';
-import { Saksliste } from '../typer/sakslisteTsType';
+import type { Driftsmelding } from '../typer/driftsmeldingTsType';
+import type { NyeOgFerdigstilteOppgaver } from '../typer/nyeOgFerdigstilteOppgaverTsType';
+import type { Saksbehandler } from '../typer/saksbehandlerTsType';
+import type { Saksliste } from '../typer/sakslisteTsType';
 
 const kyExtended = ky.extend({
   hooks: {

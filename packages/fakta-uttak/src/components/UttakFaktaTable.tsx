@@ -1,5 +1,5 @@
-import React, { FunctionComponent, useCallback } from 'react';
-import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+import React, { useCallback } from 'react';
+import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { PlusCircleIcon } from '@navikt/aksel-icons';
 import { Button, Heading } from '@navikt/ds-react';
@@ -8,10 +8,10 @@ import { calcDaysAndWeeks, dateFormat } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
-import { AlleKodeverk, ArbeidsgiverOpplysningerPerId, Fagsak, FaktaArbeidsforhold } from '@navikt/fp-types';
+import type { AlleKodeverk, ArbeidsgiverOpplysningerPerId, Fagsak, FaktaArbeidsforhold } from '@navikt/fp-types';
 
-import KontrollerFaktaPeriodeMedApMarkering from '../typer/kontrollerFaktaPeriodeMedApMarkering';
-import UttakFaktaDetailForm, { Årsakstype, utledÅrsakstype } from './UttakFaktaDetailForm';
+import type { KontrollerFaktaPeriodeMedApMarkering } from '../typer/kontrollerFaktaPeriodeMedApMarkering';
+import { Årsakstype, utledÅrsakstype, UttakFaktaDetailForm } from './UttakFaktaDetailForm';
 
 import styles from './uttakFaktaTable.module.css';
 
@@ -46,7 +46,7 @@ const getTypeTekst = (
   return '';
 };
 
-interface OwnProps {
+interface Props {
   fagsak: Fagsak;
   valgteFomDatoer: string[];
   setValgteFomDatoer: React.Dispatch<React.SetStateAction<string[]>>;
@@ -62,7 +62,7 @@ interface OwnProps {
   settVisNyPeriode: (vis: boolean) => void;
 }
 
-const UttakFaktaTable: FunctionComponent<OwnProps> = ({
+export const UttakFaktaTable = ({
   fagsak,
   valgteFomDatoer,
   setValgteFomDatoer,
@@ -76,7 +76,7 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
   erRedigerbart,
   visNyPeriode,
   settVisNyPeriode,
-}) => {
+}: Props) => {
   const intl = useIntl();
 
   const velgPeriodeFomDato = useCallback(
@@ -204,5 +204,3 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-
-export default UttakFaktaTable;

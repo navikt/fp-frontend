@@ -1,4 +1,4 @@
-import React, { ReactNode, useRef, useState } from 'react';
+import React, { type ReactNode, useRef, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ChatElipsisIcon, CheckmarkIcon, FilesIcon } from '@navikt/aksel-icons';
@@ -7,7 +7,7 @@ import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
 import { getDateAndTime } from '@navikt/ft-utils';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
-import { Oppgave, OppgaveStatus } from '@navikt/fp-los-felles';
+import type { Oppgave, OppgaveStatus } from '@navikt/fp-los-felles';
 
 import { useLosKodeverk } from '../../data/useLosKodeverk';
 import { OppgaveHandlingerMenu } from './menu/OppgaveHandlingerMenu';

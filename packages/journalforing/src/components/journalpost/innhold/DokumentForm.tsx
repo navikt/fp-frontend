@@ -1,10 +1,9 @@
-import React from 'react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 
-import { DokumentTittelSubmitValue } from '../../../typer/ferdigstillJournalføringSubmit';
-import { JournalDokument } from '../../../typer/journalDokumentTsType';
-import { DokumentTittelFormValues, JournalføringFormValues } from '../../../typer/journalføringFormValues';
-import { Journalpost } from '../../../typer/journalpostTsType';
+import type { DokumentTittelSubmitValue } from '../../../typer/ferdigstillJournalføringSubmit';
+import type { JournalDokument } from '../../../typer/journalDokumentTsType';
+import type { DokumentTittelFormValues, JournalføringFormValues } from '../../../typer/journalføringFormValues';
+import type { Journalpost } from '../../../typer/journalpostTsType';
 import { DokumentDetaljer } from './DokumentDetaljer';
 
 const TOM_DOK_LISTE: JournalDokument[] = [];

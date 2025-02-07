@@ -1,7 +1,7 @@
-import { ComponentProps } from 'react';
+import { type ComponentProps } from 'react';
 
 import { action } from '@storybook/addon-actions';
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import {
   AksjonspunktKode,
@@ -9,8 +9,8 @@ import {
   BehandlingType,
   KlageVurdering as klageVurderingCodes,
 } from '@navikt/fp-kodeverk';
-import { PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import { Aksjonspunkt, KlageVurdering } from '@navikt/fp-types';
+import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import type { Aksjonspunkt, KlageVurdering } from '@navikt/fp-types';
 
 import { FormkravProsessIndex } from './FormkravProsessIndex';
 

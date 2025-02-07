@@ -1,7 +1,7 @@
-import { RefusjonTilVurdering, FaktaOmFordeling } from './beregningsgrunnlagFordelingTsType';
-import { Besteberegninggrunnlag } from './besteberegningTsTypes';
-import { BeregningsgrunnlagArbeidsforhold } from './beregningsgrunnlagArbeidsforholdTsType';
-import { FaktaOmBeregning } from './beregningsgrunnlagFaktaTsType';
+import type { BeregningsgrunnlagArbeidsforhold } from './beregningsgrunnlagArbeidsforholdTsType';
+import type { FaktaOmBeregning } from './beregningsgrunnlagFaktaTsType';
+import type { FaktaOmFordeling, RefusjonTilVurdering } from './beregningsgrunnlagFordelingTsType';
+import type { Besteberegninggrunnlag } from './besteberegningTsTypes';
 
 export type InntektsgrunnlagInntekt = Readonly<{
   inntektAktivitetType: string;

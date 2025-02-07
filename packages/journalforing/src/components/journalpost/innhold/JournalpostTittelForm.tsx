@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { PencilIcon } from '@navikt/aksel-icons';
@@ -8,7 +8,7 @@ import { hasValidText, required } from '@navikt/ft-form-validators';
 
 import { listeMedTittler } from '../../../kodeverk/dokumentTittel';
 import { erKanalSomErÅpenForEndring } from '../../../kodeverk/journalKanal';
-import { Journalpost } from '../../../typer/journalpostTsType';
+import type { Journalpost } from '../../../typer/journalpostTsType';
 
 import styles from './journalpostTittelForm.module.css';
 

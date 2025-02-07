@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Heading, VStack } from '@navikt/ds-react';
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Detail, HStack, Label } from '@navikt/ds-react';
@@ -14,9 +14,9 @@ import {
   PeriodeResultatType,
   UttakArbeidType as uttakArbeidTypeKodeverk,
 } from '@navikt/fp-kodeverk';
-import { AlleKodeverk, ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, PeriodeSoker } from '@navikt/fp-types';
+import type { AlleKodeverk, ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, PeriodeSoker } from '@navikt/fp-types';
 
-import uttakArbeidTypeTekstCodes from '../../utils/uttakArbeidTypeCodes';
+import { uttakArbeidTypeTekstCodes } from '../../utils/uttakArbeidTypeCodes';
 
 import styles from './uttakPeriodeInfo.module.css';
 
@@ -153,7 +153,7 @@ const visGraderingIkkeInnvilget = (
   graderingInnvilget === false &&
   readOnly;
 
-interface OwnProps {
+interface Props {
   valgtPeriode: PeriodeSoker;
   isReadOnly: boolean;
   harSoktOmFlerbarnsdager: boolean;
@@ -166,7 +166,7 @@ interface OwnProps {
   valgtInnvilgelsesÅrsak?: string;
 }
 
-const UttakPeriodeInfo: FunctionComponent<OwnProps> = ({
+export const UttakPeriodeInfo = ({
   valgtPeriode,
   isReadOnly,
   graderingInnvilget,
@@ -177,7 +177,7 @@ const UttakPeriodeInfo: FunctionComponent<OwnProps> = ({
   erTilknyttetStortinget,
   erOppfylt,
   valgtInnvilgelsesÅrsak,
-}) => {
+}: Props) => {
   const intl = useIntl();
 
   const oppholdArsakTyper = alleKodeverk[KodeverkType.OPPHOLD_ARSAK];

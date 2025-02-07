@@ -1,6 +1,6 @@
 import { diff } from '@navikt/ft-utils';
 
-import { FamilieHendelse, Soknad } from '@navikt/fp-types';
+import type { FamilieHendelse, Soknad } from '@navikt/fp-types';
 
 const hasValue = (value: string | number | boolean | undefined): boolean => value !== null && value !== undefined;
 
@@ -56,7 +56,7 @@ export type FieldEditedInfo = {
   dokumentasjonForeligger?: boolean;
 };
 
-const isFieldEdited = (
+export const isFieldEdited = (
   soknad: Soknad = {} as Soknad,
   gjeldendeFamiliehendelse: FamilieHendelse = {} as FamilieHendelse,
 ): FieldEditedInfo => ({
@@ -72,5 +72,3 @@ const isFieldEdited = (
   mannAdoptererAlene: getIsMannAdoptererAleneEdited(gjeldendeFamiliehendelse),
   dokumentasjonForeligger: getIsDokumentasjonForeliggerEdited(gjeldendeFamiliehendelse),
 });
-
-export default isFieldEdited;

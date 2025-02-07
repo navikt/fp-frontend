@@ -1,4 +1,4 @@
-import { FagsakEnkel } from './fagsakEnkelTsType';
+import type { FagsakEnkel } from './fagsakEnkelTsType';
 
 type FagsakPerson = Readonly<{
   navn: string;

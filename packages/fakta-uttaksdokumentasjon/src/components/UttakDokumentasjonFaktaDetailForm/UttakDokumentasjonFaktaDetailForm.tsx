@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactNode, useCallback, useState } from 'react';
+import { type ReactNode, useCallback, useState } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -10,19 +10,19 @@ import dayjs from 'dayjs';
 
 import { Boks } from '@navikt/fp-fakta-felles';
 import { FOLKETRYGDLOVEN_KAP14_13_URL } from '@navikt/fp-konstanter';
-import { DokumentasjonVurderingBehov } from '@navikt/fp-types';
+import type { DokumentasjonVurderingBehov } from '@navikt/fp-types';
 
-import FormValues, { VurderingsAlternativ } from '../../../types/FormValues';
+import { type FormValues, VurderingsAlternativ } from '../../types/FormValues';
 import { getFormatertPeriode, periodeErMerEnnEnDag } from '../../utils/periodeUtils';
-import Card from '../Card';
+import { Card } from '../Card';
 import { DelOppPeriodeButton, DelOppPeriodeModal } from '../DelOppPeriode';
-import SlåSammenPeriodeButton from '../SlåSammenPeriodeButton';
+import { SlåSammenPeriodeButton } from '../SlåSammenPeriodeButton';
 import {
   erUttaksperiodeMedAktivitetskravArbeid,
   fraFormValues,
   tilFormValues,
 } from './DokumentasjonVurderingBehovFormMapper';
-import lagVurderingsAlternativer from './VurderingsAlternativUtleder';
+import { lagVurderingsAlternativer } from './VurderingsAlternativUtleder';
 
 const ReadMoreLink = (msg: ReactNode[]) => (
   <Link inlineText href={FOLKETRYGDLOVEN_KAP14_13_URL} className="lenke" rel="noreferrer" target="_blank">
@@ -30,14 +30,14 @@ const ReadMoreLink = (msg: ReactNode[]) => (
   </Link>
 );
 
-interface OwnProps {
+interface Props {
   behov: DokumentasjonVurderingBehov;
   readOnly: boolean;
   submit: (dokBehov: { perioder: DokumentasjonVurderingBehov[] }) => void;
   cancel: () => void;
 }
 
-const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({ behov, readOnly, cancel, submit }) => {
+export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, submit }: Props) => {
   const intl = useIntl();
 
   const [valgtPeriodeIndex, setValgtPeriodeIndex] = useState<number | undefined>();
@@ -200,5 +200,3 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({ behov,
     </Boks>
   );
 };
-
-export default UttakDokumentasjonFaktaDetailForm;

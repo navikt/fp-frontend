@@ -1,14 +1,13 @@
-import React, { FunctionComponent } from 'react';
-import { FormattedMessage,useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, HStack, Label } from '@navikt/ds-react';
 import { Datepicker } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
-import { FieldEditedInfo } from '@navikt/fp-fakta-felles';
+import type { FieldEditedInfo } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { FamilieHendelse, Soknad } from '@navikt/fp-types';
+import type { FamilieHendelse, Soknad } from '@navikt/fp-types';
 
 const getAntallBarn = (soknad: Soknad, familiehendelse: FamilieHendelse): number => {
   const antallBarn = soknad.antallBarn ? soknad.antallBarn : NaN;
@@ -20,7 +19,7 @@ export type FormValues = {
   foreldreansvarDato?: string;
 };
 
-interface OwnProps {
+interface Props {
   readOnly: boolean;
   erAksjonspunktForeldreansvar: boolean;
   editedStatus: FieldEditedInfo;
@@ -29,21 +28,17 @@ interface OwnProps {
   familiehendelse: FamilieHendelse;
 }
 
-interface StaticFunctions {
-  buildInitialValues: (soknad: Soknad, familiehendelse: FamilieHendelse) => FormValues;
-}
-
 /**
  * OmsorgsovertakelseFaktaPanel
  */
-const OmsorgsovertakelseFaktaPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
+export const OmsorgsovertakelseFaktaPanel = ({
   readOnly,
   erAksjonspunktForeldreansvar,
   editedStatus,
   alleMerknaderFraBeslutter,
   soknad,
   familiehendelse,
-}) => {
+}: Props) => {
   const intl = useIntl();
   const antallBarn = getAntallBarn(soknad, familiehendelse);
 
@@ -89,5 +84,3 @@ OmsorgsovertakelseFaktaPanel.buildInitialValues = (soknad: Soknad, familiehendel
     : soknad.omsorgsovertakelseDato,
   foreldreansvarDato: familiehendelse.foreldreansvarDato,
 });
-
-export default OmsorgsovertakelseFaktaPanel;

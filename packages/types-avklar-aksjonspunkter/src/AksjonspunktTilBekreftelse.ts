@@ -4,5 +4,3 @@ export type AksjonspunktTilBekreftelse<T extends AksjonspunktKode | Aksjonspunkt
   kode: T;
   begrunnelse?: string;
 };
-
-export default AksjonspunktTilBekreftelse;

@@ -2,7 +2,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { BeregningsresultatEs } from '@navikt/fp-types';
+import type { BeregningsresultatEs } from '@navikt/fp-types';
 
 import { BeregningsresultatEngangsstonadForm } from './components/BeregningsresultatEngangsstonadForm';
 

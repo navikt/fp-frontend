@@ -1,14 +1,13 @@
-import React, { FunctionComponent } from 'react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 
-import {
+import type {
   AlleKodeverk,
   AoIArbeidsforhold,
   ArbeidOgInntektsmelding,
   ArbeidsgiverOpplysningerPerId,
 } from '@navikt/fp-types';
 
-import ArbeidsforholdField from './ArbeidsforholdField';
+import { ArbeidsforholdField } from './ArbeidsforholdField';
 
 const FIELD_ARRAY_NAME = 'arbeidsforhold';
 
@@ -18,7 +17,7 @@ type FormValues = {
   }[];
 };
 
-interface OwnProps {
+interface Props {
   saksnummer: string;
   sorterteArbeidsforhold: AoIArbeidsforhold[];
   arbeidOgInntekt: ArbeidOgInntektsmelding;
@@ -29,7 +28,7 @@ interface OwnProps {
   alleKodeverk: AlleKodeverk;
 }
 
-const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
+export const ArbeidsforholdFieldArray = ({
   saksnummer,
   sorterteArbeidsforhold,
   arbeidOgInntekt,
@@ -38,7 +37,7 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
   harÅpentAksjonspunkt,
   skjæringstidspunkt,
   alleKodeverk,
-}) => {
+}: Props) => {
   const { control } = useFormContext<FormValues>();
   const { fields } = useFieldArray({
     control,
@@ -65,5 +64,3 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-
-export default ArbeidsforholdFieldArray;

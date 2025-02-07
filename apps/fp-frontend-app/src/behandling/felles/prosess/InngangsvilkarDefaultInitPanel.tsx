@@ -1,10 +1,10 @@
-import { ReactElement, use } from 'react';
+import { type ReactElement, use } from 'react';
 
 import { VilkarType } from '@navikt/fp-kodeverk';
-import { FormDataProvider } from '@navikt/fp-utils';
+import { FormDataProvider, PanelDataProvider } from '@navikt/fp-utils';
 
-import { InngangsvilkarPanelInitProps } from '../typer/inngangsvilkarPanelInitProps';
-import { StandardProsessPanelProps } from '../typer/standardProsessPanelPropsTsType';
+import type { InngangsvilkarPanelInitProps } from '../typer/inngangsvilkarPanelInitProps';
+import type { StandardProsessPanelProps } from '../typer/standardProsessPanelPropsTsType';
 import { BehandlingDataContext } from '../utils/behandlingDataContext';
 import { skalViseProsessPanel } from './skalViseProsessPanel';
 import { useInngangsvilkarRegistrerer } from './useInngangsvilkarRegistrerer';
@@ -28,7 +28,7 @@ export const InngangsvilkarDefaultInitPanel = ({
   inngangsvilkarPanelKode,
   hentInngangsvilkarPanelTekst,
 }: Props & InngangsvilkarPanelInitProps) => {
-  const { behandling } = use(BehandlingDataContext);
+  const { behandling, fagsak, alleKodeverk } = use(BehandlingDataContext);
 
   const skalVises = skalViseProsessPanel(standardPanelProps.aksjonspunkter, vilkarKoder, standardPanelProps.vilkar);
 
@@ -44,7 +44,20 @@ export const InngangsvilkarDefaultInitPanel = ({
 
   return (
     <FormDataProvider behandling={behandling}>
-      {!erPanelValgt || !skalVises ? null : renderPanel({ erOverstyrt, toggleOverstyring })}
+      {!erPanelValgt || !skalVises ? null : (
+        <PanelDataProvider
+          behandling={behandling}
+          fagsak={fagsak}
+          aksjonspunkterForPanel={standardPanelProps.aksjonspunkter}
+          harÅpneAksjonspunkter={standardPanelProps.isAksjonspunktOpen}
+          alleKodeverk={alleKodeverk}
+          submitCallback={standardPanelProps.submitCallback}
+          isReadOnly={standardPanelProps.isReadOnly}
+          alleMerknaderFraBeslutter={standardPanelProps.alleMerknaderFraBeslutter}
+        >
+          {renderPanel({ erOverstyrt, toggleOverstyring })}
+        </PanelDataProvider>
+      )}
     </FormDataProvider>
   );
 };

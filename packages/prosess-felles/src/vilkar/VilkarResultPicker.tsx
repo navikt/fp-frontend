@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement, useMemo } from 'react';
+import { type ReactElement, useMemo } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 import { CheckmarkIcon, XMarkOctagonIcon } from '@navikt/aksel-icons';
@@ -8,7 +8,7 @@ import { required, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-val
 import { createIntl } from '@navikt/ft-utils';
 
 import { AksjonspunktStatus, VilkarUtfallType } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt, Behandlingsresultat, KodeverkMedNavn } from '@navikt/fp-types';
+import type { Aksjonspunkt, Behandlingsresultat, KodeverkMedNavn } from '@navikt/fp-types';
 
 import styles from './vilkarResultPicker.module.css';
 
@@ -25,29 +25,13 @@ type FormValues = {
   avslagskode?: string;
 };
 
-interface OwnProps {
+interface Props {
   avslagsarsaker?: KodeverkMedNavn[];
   customVilkarIkkeOppfyltText: string | ReactElement;
   customVilkarOppfyltText: string | ReactElement;
   readOnly: boolean;
   skalKunneInnvilge?: boolean;
   validatorsForRadioOptions?: ((value: boolean) => any)[];
-}
-
-interface StaticFunctions {
-  buildInitialValues: (
-    aksjonspunkter: Aksjonspunkt[],
-    status: string,
-    behandlingsresultat?: Behandlingsresultat,
-  ) => FormValues;
-  transformValues: (values: FormValues) =>
-    | {
-        erVilkarOk: boolean;
-      }
-    | {
-        erVilkarOk: boolean;
-        avslagskode: string;
-      };
 }
 
 const sorterAvslagsArsaker = (avslagsarsakerUsortert: KodeverkMedNavn[]): KodeverkMedNavn[] =>
@@ -58,14 +42,14 @@ const sorterAvslagsArsaker = (avslagsarsakerUsortert: KodeverkMedNavn[]): Kodeve
  *
  * Presentasjonskomponent. Lar Nav-ansatt velge om vilkåret skal oppfylles eller avvises.
  */
-const VilkarResultPicker: FunctionComponent<OwnProps> & StaticFunctions = ({
+export const VilkarResultPicker = ({
   avslagsarsaker,
   customVilkarIkkeOppfyltText,
   customVilkarOppfyltText,
   readOnly,
   skalKunneInnvilge = true,
   validatorsForRadioOptions,
-}) => {
+}: Props) => {
   const { getValues, watch } = useFormContext();
   const erVilkarOk = watch('erVilkarOk');
 
@@ -137,12 +121,10 @@ VilkarResultPicker.buildInitialValues = (
   };
 };
 
-VilkarResultPicker.transformValues = values =>
+VilkarResultPicker.transformValues = (values: FormValues) =>
   values.erVilkarOk
     ? { erVilkarOk: values.erVilkarOk! }
     : {
         erVilkarOk: values.erVilkarOk!,
         avslagskode: values.avslagskode,
       };
-
-export default VilkarResultPicker;

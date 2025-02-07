@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { ChevronDownIcon, ChevronUpIcon } from '@navikt/aksel-icons';
@@ -7,7 +7,7 @@ import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { formatCurrencyNoKr, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { AlleKodeverk, AoIArbeidsforhold, Inntektsmelding, Inntektspost } from '@navikt/fp-types';
+import type { AlleKodeverk, AoIArbeidsforhold, Inntektsmelding, Inntektspost } from '@navikt/fp-types';
 
 import { InntektsmeldingerPanel } from './InntektsmeldingerPanel';
 

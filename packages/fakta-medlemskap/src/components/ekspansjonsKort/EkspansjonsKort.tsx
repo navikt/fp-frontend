@@ -1,12 +1,12 @@
-import React, { FC, PropsWithChildren } from 'react';
+import { type PropsWithChildren } from 'react';
 
 import { Box, ExpansionCard, HStack, VStack } from '@navikt/ds-react';
 
 import { FaktaKilde, getLabelForFaktaKilde } from '@navikt/fp-fakta-felles';
 import { MedlemskapAvvik } from '@navikt/fp-types';
 
-import AvvikMerknad from './AvvikMerknad';
-import AvvikStatus from './AvvikStatus';
+import { AvvikMerknad } from './AvvikMerknad';
+import { AvvikStatus } from './AvvikStatus';
 
 interface Props {
   kilde: FaktaKilde;
@@ -15,7 +15,13 @@ interface Props {
   skalViseAvvik: boolean;
 }
 
-const EkspansjonsKort: FC<PropsWithChildren<Props>> = ({ tittel, kilde, relevanteAvvik, skalViseAvvik, children }) => {
+export const EkspansjonsKort = ({
+  tittel,
+  kilde,
+  relevanteAvvik,
+  skalViseAvvik,
+  children,
+}: PropsWithChildren<Props>) => {
   return (
     <ExpansionCard aria-label={tittel} size="small">
       <ExpansionCard.Header>
@@ -42,5 +48,3 @@ const EkspansjonsKort: FC<PropsWithChildren<Props>> = ({ tittel, kilde, relevant
     </ExpansionCard>
   );
 };
-
-export default EkspansjonsKort;

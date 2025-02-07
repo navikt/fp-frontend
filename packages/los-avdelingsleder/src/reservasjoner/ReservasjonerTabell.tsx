@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { CalendarIcon, PersonGroupIcon, XMarkIcon } from '@navikt/aksel-icons';
@@ -17,7 +17,7 @@ import {
   reservasjonerForAvdelingOptions,
 } from '../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../data/useLosKodeverk';
-import { Reservasjon } from '../typer/reservasjonTsType';
+import type { Reservasjon } from '../typer/reservasjonTsType';
 
 import styles from './reservasjonerTabell.module.css';
 

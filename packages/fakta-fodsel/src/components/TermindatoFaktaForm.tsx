@@ -1,4 +1,3 @@
-import React, { FunctionComponent } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -10,8 +9,8 @@ import moment from 'moment';
 
 import { FaktaBegrunnelseTextField, isFieldEdited } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt, FamilieHendelse, Soknad } from '@navikt/fp-types';
-import { BekreftTerminbekreftelseAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { Aksjonspunkt, FamilieHendelse, Soknad } from '@navikt/fp-types';
+import type { BekreftTerminbekreftelseAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import styles from './termindatoFaktaForm.module.css';
 
@@ -30,7 +29,7 @@ export type FormValues = {
   begrunnelse?: string;
 };
 
-interface OwnProps {
+interface Props {
   soknad: Soknad;
   gjeldendeFamiliehendelse: FamilieHendelse;
   readOnly: boolean;
@@ -38,23 +37,18 @@ interface OwnProps {
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
 }
 
-interface StaticFunctions {
-  buildInitialValues: (soknad: Soknad, familiehendelse: FamilieHendelse, aksjonspunkt: Aksjonspunkt) => FormValues;
-  transformValues: (values: FormValues) => BekreftTerminbekreftelseAp;
-}
-
 /**
  * TermindatoFaktaForm
  *
  * Setter opp aksjonspunktet for avklaring av termindato (Fødselsvilkåret).
  */
-export const TermindatoFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
+export const TermindatoFaktaForm = ({
   readOnly,
   soknad,
   gjeldendeFamiliehendelse,
   submittable,
   alleMerknaderFraBeslutter,
-}) => {
+}: Props) => {
   const intl = useIntl();
   const editedStatus = isFieldEdited(soknad, gjeldendeFamiliehendelse);
 
@@ -141,7 +135,11 @@ export const TermindatoFaktaForm: FunctionComponent<OwnProps> & StaticFunctions 
   );
 };
 
-TermindatoFaktaForm.buildInitialValues = (soknad, familiehendelse, aksjonspunkt): FormValues => {
+TermindatoFaktaForm.buildInitialValues = (
+  soknad: Soknad,
+  familiehendelse: FamilieHendelse,
+  aksjonspunkt: Aksjonspunkt,
+): FormValues => {
   const antallBarn = soknad.antallBarn ? soknad.antallBarn : NaN;
   return {
     utstedtdato: familiehendelse.utstedtdato ? familiehendelse.utstedtdato : soknad.utstedtdato,
@@ -158,5 +156,3 @@ TermindatoFaktaForm.transformValues = (values: FormValues): BekreftTerminbekreft
   antallBarn: values.antallBarn!,
   ...FaktaBegrunnelseTextField.transformValues(values),
 });
-
-export default TermindatoFaktaForm;

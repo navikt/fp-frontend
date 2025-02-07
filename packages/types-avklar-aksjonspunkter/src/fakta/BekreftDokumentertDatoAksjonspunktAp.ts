@@ -1,10 +1,8 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
-import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
+import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 
-type BekreftDokumentertDatoAksjonspunktAp = {
+export type BekreftDokumentertDatoAksjonspunktAp = {
   omsorgsovertakelseDato: string;
   fodselsdatoer: Record<number, string>;
 } & AksjonspunktTilBekreftelse<AksjonspunktKode.ADOPSJONSDOKUMENTAJON>;
-
-export default BekreftDokumentertDatoAksjonspunktAp;

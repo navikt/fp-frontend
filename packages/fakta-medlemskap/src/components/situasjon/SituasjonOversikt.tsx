@@ -1,8 +1,7 @@
-import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { FaktaBox, FaktaGruppe, FaktaKilde } from '@navikt/fp-fakta-felles';
-import { AlleKodeverk, Medlemskap, Soknad } from '@navikt/fp-types';
+import type { AlleKodeverk, Medlemskap, Soknad } from '@navikt/fp-types';
 
 import { formaterUtenlandsopphold, getSisteBostedsLand, getSistePersonstatus, getSisteRegion } from './situasjonUtils';
 
@@ -12,7 +11,7 @@ interface Props {
   alleKodeverk: AlleKodeverk;
 }
 
-const SituasjonOversikt = ({ soknad, medlemskap, alleKodeverk }: Props) => {
+export const SituasjonOversikt = ({ soknad, medlemskap, alleKodeverk }: Props) => {
   const intl = useIntl();
 
   return (
@@ -45,5 +44,3 @@ const SituasjonOversikt = ({ soknad, medlemskap, alleKodeverk }: Props) => {
     </FaktaGruppe>
   );
 };
-
-export default SituasjonOversikt;

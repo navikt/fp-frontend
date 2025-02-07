@@ -1,5 +1,5 @@
 import { MenyTaAvVentIndex } from '@navikt/fp-sak-meny';
-import { Behandling } from '@navikt/fp-types';
+import type { Behandling } from '@navikt/fp-types';
 
 import { useBehandlingPollingOperasjoner } from '../../data/polling/useBehandlingPollingOperasjoner';
 

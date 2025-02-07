@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
-import { Oppgave } from '@navikt/fp-los-felles';
+import type { Oppgave } from '@navikt/fp-los-felles';
 
 import { doGetRequest, getOppgaverTilBehandling, reserverteOppgaverOptions } from '../../data/fplosSaksbehandlerApi';
 

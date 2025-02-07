@@ -1,9 +1,9 @@
 import { action } from '@storybook/addon-actions';
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { http, HttpResponse } from 'msw';
 
 import { alleKodeverkLos, withQueryClient, withRouter } from '@navikt/fp-storybook-utils';
-import { NavAnsatt } from '@navikt/fp-types';
+import type { NavAnsatt } from '@navikt/fp-types';
 
 import { AvdelingslederIndexIntlWrapper } from './AvdelingslederIndex';
 import { LosUrl } from './data/fplosAvdelingslederApi';

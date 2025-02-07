@@ -1,14 +1,13 @@
-import React from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Button, VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 import { action } from '@storybook/addon-actions';
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
-import { OppholdINorgeFormValues } from './components/OppholdINorgePanel';
+import { type OppholdINorgeFormValues } from './components/OppholdINorgePanel';
 import { OppholdINorgePapirsoknadIndex } from './OppholdINorgePapirsoknadIndex';
 
 const meta = {

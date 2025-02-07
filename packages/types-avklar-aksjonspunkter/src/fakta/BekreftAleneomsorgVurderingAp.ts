@@ -1,12 +1,10 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
-import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
+import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 
-type BekreftAleneomsorgVurderingAp = {
+export type BekreftAleneomsorgVurderingAp = {
   aleneomsorg: boolean;
   annenforelderHarRett?: boolean;
   annenforelderMottarUføretrygd?: boolean;
   annenForelderHarRettEØS?: boolean;
 } & AksjonspunktTilBekreftelse<AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG>;
-
-export default BekreftAleneomsorgVurderingAp;

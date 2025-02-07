@@ -1,16 +1,16 @@
-import React, { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
-import { Datepicker, InputField, PeriodFieldArray,SelectField } from '@navikt/ft-form-hooks';
-import { hasValidDate,maxLength } from '@navikt/ft-form-validators';
+import { Datepicker, InputField, PeriodFieldArray, SelectField } from '@navikt/ft-form-hooks';
+import { hasValidDate, maxLength } from '@navikt/ft-form-validators';
 
 import { KodeverkType, Landkode } from '@navikt/fp-kodeverk';
-import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
+import type { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
 import { FieldArrayRow } from '../../felles/FieldArrayRow';
 import { INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME } from '../constants';
-import { InntektsgivendeArbeidFormValues } from '../types';
+import type { InntektsgivendeArbeidFormValues } from '../types';
 
 const maxLength50 = maxLength(50);
 

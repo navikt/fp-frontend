@@ -2,11 +2,16 @@ import { useState } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
 import { CircleFillIcon, CoffeeIcon } from '@navikt/aksel-icons';
-import { BodyShort, HStack, SortState, Table } from '@navikt/ds-react';
+import { BodyShort, HStack, type SortState, Table } from '@navikt/ds-react';
 import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
 import { createIntl, formatCurrencyNoKr } from '@navikt/ft-utils';
 
-import { ArbeidsgiverOpplysningerPerId, Behandling, BehandlingAppKontekst, Inntektsmelding } from '@navikt/fp-types';
+import type {
+  ArbeidsgiverOpplysningerPerId,
+  Behandling,
+  BehandlingAppKontekst,
+  Inntektsmelding,
+} from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { InntektsmeldingInnhold } from './components/InntektsmeldingInnhold';

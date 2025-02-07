@@ -1,4 +1,4 @@
-import { Personadresse } from './personadresseTsType';
+import type { Personadresse } from './personadresseTsType';
 
 export type RegionPeriode = Readonly<{
   fom: string;

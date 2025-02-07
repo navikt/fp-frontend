@@ -1,4 +1,3 @@
-import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Heading, HGrid, HStack, VStack } from '@navikt/ds-react';
@@ -6,10 +5,10 @@ import { DateTimeLabel } from '@navikt/ft-ui-komponenter';
 import { formatCurrencyNoKr } from '@navikt/ft-utils';
 
 import { getKodeverknavnFraKode, KodeverkType } from '@navikt/fp-kodeverk';
-import { Inntektsmelding } from '@navikt/fp-types';
+import type { Inntektsmelding } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
-import { InntektsmeldingFaktaProps } from '../InntektsmeldingFaktaIndex';
+import type { InntektsmeldingFaktaProps } from '../InntektsmeldingFaktaIndex';
 import { Arbeidsgiver } from './Arbeidsgiver';
 import { BehandlingsOversikt } from './BehandlingsOversikt';
 import { BortfalteNaturalYtelser } from './BortfalteNaturalYtelser';

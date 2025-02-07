@@ -1,9 +1,8 @@
-import React from 'react';
 import { useIntl } from 'react-intl';
 import { Link } from 'react-router-dom';
 
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, Heading,HStack, Modal } from '@navikt/ds-react';
+import { BodyShort, Button, Heading, HStack, Modal } from '@navikt/ds-react';
 
 interface Props {
   showModal: boolean;

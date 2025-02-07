@@ -1,16 +1,15 @@
-import React from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
 import { Heading, VStack } from '@navikt/ds-react';
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 
-import { AlleKodeverk } from '@navikt/fp-types';
+import type { AlleKodeverk } from '@navikt/fp-types';
 
 import { OppgiAnnenForelderPanel } from './components/OppgiAnnenForelderPanel';
 import { PermisjonRettigheterPanel } from './components/PermisjonRettigheterPanel';
 import { ANNEN_FORELDER_NAME_PREFIX } from './constant';
-import { AnnenForelderFormValues } from './types';
+import type { AnnenForelderFormValues } from './types';
 
 import messages from '../../i18n/nb_NO.json';
 

@@ -1,13 +1,12 @@
-import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ArrowLeftIcon, ArrowRightIcon, CheckmarkIcon, XMarkIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, HStack, Label, Panel } from '@navikt/ds-react';
 import { FlexColumn, FlexContainer, FlexRow, PeriodLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { FastsattOpptjeningAktivitet } from '@navikt/fp-types';
+import type { FastsattOpptjeningAktivitet } from '@navikt/fp-types';
 
-import opptjeningAktivitetKlassifisering from '../kodeverk/opptjeningAktivitetKlassifisering';
+import { opptjeningAktivitetKlassifisering } from '../kodeverk/opptjeningAktivitetKlassifisering';
 
 import styles from './timeLineData.module.css';
 
@@ -26,19 +25,19 @@ const isPeriodGodkjent = (period: string): boolean =>
     period === MELLOMLIGGENDE_PERIODE
   );
 
-interface OwnProps {
+interface Props {
   fastsattOpptjeningAktivitet: FastsattOpptjeningAktivitet;
   lukkPeriode: () => void;
   velgNestePeriode: () => void;
   velgForrigePeriode: () => void;
 }
 
-const TimeLineData: FunctionComponent<OwnProps> = ({
+export const TimeLineData = ({
   fastsattOpptjeningAktivitet,
   lukkPeriode,
   velgNestePeriode,
   velgForrigePeriode,
-}) => {
+}: Props) => {
   const intl = useIntl();
   return (
     <Panel border>
@@ -97,5 +96,3 @@ const TimeLineData: FunctionComponent<OwnProps> = ({
     </Panel>
   );
 };
-
-export default TimeLineData;

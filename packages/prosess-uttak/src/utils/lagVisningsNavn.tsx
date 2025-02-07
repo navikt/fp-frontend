@@ -1,14 +1,17 @@
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import moment from 'moment';
 
-import { ArbeidsgiverOpplysninger } from '@navikt/fp-types';
+import type { ArbeidsgiverOpplysninger } from '@navikt/fp-types';
 
 // vanlig arbeidsgivernavn (orgnr)...arbeidsforholdid
 // privatperson - KLANG...(18.08.1980)
 const formatDate = (dato: string) => moment(dato).format(DDMMYYYY_DATE_FORMAT);
 const getEndCharFromId = (id: any) => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
 
-const lagVisningsNavn = (arbeidsgiverOpplysninger: ArbeidsgiverOpplysninger, eksternArbeidsforholdId?: any): string => {
+export const lagVisningsNavn = (
+  arbeidsgiverOpplysninger: ArbeidsgiverOpplysninger,
+  eksternArbeidsforholdId?: any,
+): string => {
   const { navn, fødselsdato, erPrivatPerson, identifikator } = arbeidsgiverOpplysninger;
 
   let visningsNavn = `${navn}`;
@@ -20,5 +23,3 @@ const lagVisningsNavn = (arbeidsgiverOpplysninger: ArbeidsgiverOpplysninger, eks
   }
   return visningsNavn;
 };
-
-export default lagVisningsNavn;

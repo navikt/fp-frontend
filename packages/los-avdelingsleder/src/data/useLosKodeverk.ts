@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { KodeverkMedNavn } from '@navikt/fp-types';
+import type { KodeverkMedNavn } from '@navikt/fp-types';
 
 import { losKodeverkOptions } from './fplosAvdelingslederApi';
 

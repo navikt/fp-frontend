@@ -1,26 +1,25 @@
-import React from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { Alert, BodyLong, Heading, VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 
-import { NavAnsatt } from '@navikt/fp-types';
+import type { NavAnsatt } from '@navikt/fp-types';
 
 import { erEndeligJournalført } from '../../kodeverk/journalpostTilstand';
 import { OppgaveKilde } from '../../kodeverk/oppgaveKilde';
-import {
+import type {
   DokumentTittelSubmitValue,
   JournalførSubmitValue,
   OppdaterJournalførTittlerSubmitValue,
 } from '../../typer/ferdigstillJournalføringSubmit';
-import { ForhåndsvisBrukerRespons } from '../../typer/forhåndsvisBrukerResponsTsType';
-import { JournalFagsak } from '../../typer/journalFagsakTsType';
-import { JournalføringFormValues } from '../../typer/journalføringFormValues';
-import { Journalpost } from '../../typer/journalpostTsType';
-import { OppdaterMedBruker } from '../../typer/oppdaterBrukerTsType';
-import { Oppgave } from '../../typer/oppgaveTsType';
-import { ReserverOppgaveType } from '../../typer/reserverOppgaveType';
+import type { ForhåndsvisBrukerRespons } from '../../typer/forhåndsvisBrukerResponsTsType';
+import type { JournalFagsak } from '../../typer/journalFagsakTsType';
+import type { JournalføringFormValues } from '../../typer/journalføringFormValues';
+import type { Journalpost } from '../../typer/journalpostTsType';
+import type { OppdaterMedBruker } from '../../typer/oppdaterBrukerTsType';
+import type { Oppgave } from '../../typer/oppgaveTsType';
+import type { ReserverOppgaveType } from '../../typer/reserverOppgaveType';
 import { BrukerAvsenderPanel } from './innhold/BrukerAvsenderPanel';
 import {
   buildInitialValues as buildInitialValuesFlereDokumenter,

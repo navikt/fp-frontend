@@ -4,7 +4,7 @@ import { BodyShort, Detail } from '@navikt/ds-react';
 import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 
 import { hentDokumentLenke } from '@navikt/fp-konstanter';
-import { Dokument } from '@navikt/fp-types';
+import type { Dokument } from '@navikt/fp-types';
 
 import styles from './documentListVedtakInnsyn.module.css';
 

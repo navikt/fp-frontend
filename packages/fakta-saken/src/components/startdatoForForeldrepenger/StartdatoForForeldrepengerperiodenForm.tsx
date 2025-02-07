@@ -1,6 +1,6 @@
-import { FunctionComponent, useCallback, useState } from 'react';
-import { useForm, UseFormGetValues } from 'react-hook-form';
-import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+import { useCallback, useState } from 'react';
+import { useForm, type UseFormGetValues } from 'react-hook-form';
+import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { PencilFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, Heading, HStack } from '@navikt/ds-react';
@@ -10,8 +10,8 @@ import { AksjonspunktBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } f
 import dayjs from 'dayjs';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt, Soknad } from '@navikt/fp-types';
-import { OverstyringAvklarStartdatoForPeriodenAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { Aksjonspunkt, Soknad } from '@navikt/fp-types';
+import type { OverstyringAvklarStartdatoForPeriodenAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useFormData } from '@navikt/fp-utils';
 
 import styles from './startdatoForForeldrepengerperiodenForm.module.css';
@@ -48,7 +48,7 @@ const getValidateIsBefore2019 = (getValues: UseFormGetValues<FormValues>, intl: 
     : undefined;
 };
 
-interface OwnProps {
+interface Props {
   aksjonspunkt?: Aksjonspunkt;
   soknad: Soknad;
   submitCallback: (data: OverstyringAvklarStartdatoForPeriodenAp) => Promise<void>;
@@ -61,13 +61,13 @@ interface OwnProps {
  *
  * Overstyring av startdato for foreldrepengerperioden.
  */
-const StartdatoForForeldrepengerperiodenForm: FunctionComponent<OwnProps> = ({
+export const StartdatoForForeldrepengerperiodenForm = ({
   submitCallback,
   aksjonspunkt,
   soknad,
   alleMerknaderFraBeslutter,
   readOnly,
-}) => {
+}: Props) => {
   const intl = useIntl();
 
   const { formData, setFormData } = useFormData<FormValues>();
@@ -161,5 +161,3 @@ const StartdatoForForeldrepengerperiodenForm: FunctionComponent<OwnProps> = ({
     </Form>
   );
 };
-
-export default StartdatoForForeldrepengerperiodenForm;

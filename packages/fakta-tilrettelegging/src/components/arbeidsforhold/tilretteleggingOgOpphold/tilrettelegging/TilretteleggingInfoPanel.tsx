@@ -1,13 +1,12 @@
-import React from 'react';
-import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { BranchingIcon, CalendarIcon, PersonPregnantIcon } from '@navikt/aksel-icons';
 import { BodyShort, Detail, HStack } from '@navikt/ds-react';
-import { calcDaysAndWeeks,DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
+import { calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import { TilretteleggingType } from '@navikt/fp-kodeverk';
-import { ArbeidsforholdTilretteleggingDato, SvpTilretteleggingFomKilde } from '@navikt/fp-types';
+import { type ArbeidsforholdTilretteleggingDato, SvpTilretteleggingFomKilde } from '@navikt/fp-types';
 
 const finnTekst = (intl: IntlShape, termindato: string, fom?: string): string => {
   const dager = dayjs(termindato).diff(fom, 'days');

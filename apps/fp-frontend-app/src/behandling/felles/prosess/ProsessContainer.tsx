@@ -1,9 +1,9 @@
-import { ReactElement, use, useCallback, useMemo, useState } from 'react';
+import { type ReactElement, use, useCallback, useMemo, useState } from 'react';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 
-import { ProsessPanelExtraInitProps, ProsessPanelInitProps } from '../typer/prosessPanelInitProps';
-import { ProsessPanelMenyData } from '../typer/prosessPanelMenyData';
+import type { ProsessPanelExtraInitProps, ProsessPanelInitProps } from '../typer/prosessPanelInitProps';
+import type { ProsessPanelMenyData } from '../typer/prosessPanelMenyData';
 import { BehandlingDataContext } from '../utils/behandlingDataContext';
 import { BehandlingHenlagtPanel } from './BehandlingHenlagtPanel';
 import { ProsessMeny } from './ProsessMeny';

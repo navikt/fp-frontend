@@ -1,4 +1,3 @@
-import React, { FunctionComponent } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -8,13 +7,13 @@ import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-va
 import { AksjonspunktBox } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
 
-import { AksjonspunktKode,AksjonspunktStatus, NavBrukerKjonn } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt, Fagsak, Soknad } from '@navikt/fp-types';
-import { AvklarDekningsgradAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { AksjonspunktKode, AksjonspunktStatus, NavBrukerKjonn } from '@navikt/fp-kodeverk';
+import type { Aksjonspunkt, Fagsak, Soknad } from '@navikt/fp-types';
+import type { AvklarDekningsgradAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import ManIcon from '../../icons/Man';
-import UnknownIcon from '../../icons/Unknown';
-import WomanIcon from '../../icons/Woman';
+import { ManIcon } from '../../icons/Man';
+import { UnknownIcon } from '../../icons/Unknown';
+import { WomanIcon } from '../../icons/Woman';
 
 import styles from './dekningradApForm.module.css';
 
@@ -33,7 +32,7 @@ type FormValues = {
   begrunnelse: string;
 };
 
-interface OwnProps {
+interface Props {
   søknad: Soknad;
   fagsak: Fagsak;
   aksjonspunkt: Aksjonspunkt;
@@ -42,14 +41,14 @@ interface OwnProps {
   readOnly: boolean;
 }
 
-const DekningradApForm: FunctionComponent<OwnProps> = ({
+export const DekningradApForm = ({
   søknad,
   fagsak,
   aksjonspunkt,
   submitCallback,
   readOnly,
   alleMerknaderFraBeslutter,
-}) => {
+}: Props) => {
   const intl = useIntl();
   const formMethods = useForm<FormValues>({
     defaultValues: {
@@ -170,5 +169,3 @@ const DekningradApForm: FunctionComponent<OwnProps> = ({
     </VStack>
   );
 };
-
-export default DekningradApForm;

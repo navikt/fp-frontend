@@ -19,8 +19,8 @@ import {
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
-import { Aksjonspunkt, FamilieHendelse, Soknad } from '@navikt/fp-types';
-import { SoknadsfristAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { Aksjonspunkt, FamilieHendelse, Soknad } from '@navikt/fp-types';
+import type { SoknadsfristAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import styles from './erSoknadsfristVilkaretOppfyltForm.module.css';

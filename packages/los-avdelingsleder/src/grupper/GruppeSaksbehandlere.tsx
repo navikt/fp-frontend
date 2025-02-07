@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -8,7 +8,7 @@ import { Form, InputField } from '@navikt/ft-form-hooks';
 import { hasValidName, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { SaksbehandlerProfil } from '@navikt/fp-los-felles';
+import type { SaksbehandlerProfil } from '@navikt/fp-los-felles';
 
 import { useDebounce } from '../behandlingskoer/sakslisteForm/useDebounce';
 import {
@@ -17,7 +17,7 @@ import {
   leggSaksbehandlerTilGruppe,
   LosUrl,
 } from '../data/fplosAvdelingslederApi';
-import { SaksbehandlerGruppe } from '../typer/saksbehandlereOgSaksbehandlerGrupper';
+import type { SaksbehandlerGruppe } from '../typer/saksbehandlereOgSaksbehandlerGrupper';
 
 import styles from './gruppeSaksbehandlere.module.css';
 

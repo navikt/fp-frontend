@@ -1,9 +1,9 @@
-import React, { KeyboardEvent, MouseEvent, useCallback } from 'react';
+import { type KeyboardEvent, type MouseEvent, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Button, HStack, Link } from '@navikt/ds-react';
 
-import { ForhandsvisData } from './VedtakKlageForm';
+import { type ForhandsvisData } from './VedtakKlageForm';
 
 interface Props {
   previewVedtakCallback: (data: ForhandsvisData) => void;

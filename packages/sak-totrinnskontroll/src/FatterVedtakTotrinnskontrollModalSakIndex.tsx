@@ -1,9 +1,8 @@
-import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { BehandlingAppKontekst } from '@navikt/fp-types';
+import type { BehandlingAppKontekst } from '@navikt/fp-types';
 
 import { FatterVedtakApprovalModal } from './components/modal/FatterVedtakApprovalModal';
 

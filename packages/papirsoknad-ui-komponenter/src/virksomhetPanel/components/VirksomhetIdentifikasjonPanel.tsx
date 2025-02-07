@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -15,11 +15,11 @@ import {
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
-import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
+import type { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
 import { TrueFalseInput } from '../../felles/TrueFalseInput';
 import { VIRKSOMHET_FORM_NAME_PREFIX } from '../constants';
-import { RegistrerVirksomhetFormValues, VirksomhetFormValues } from '../types';
+import type { RegistrerVirksomhetFormValues, VirksomhetFormValues } from '../types';
 
 import styles from './virksomhetIdentifikasjonPanel.module.css';
 

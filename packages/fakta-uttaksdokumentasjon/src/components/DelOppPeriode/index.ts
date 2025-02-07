@@ -1,2 +1,2 @@
-export { default as DelOppPeriodeButton } from './DelOppPeriodeButton';
-export { default as DelOppPeriodeModal } from './DelOppPeriodeModal';
+export { DelOppPeriodeButton } from './DelOppPeriodeButton';
+export { DelOppPeriodeModal } from './DelOppPeriodeModal';

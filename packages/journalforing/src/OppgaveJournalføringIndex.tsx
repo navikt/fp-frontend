@@ -6,7 +6,7 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { NavAnsatt } from '@navikt/fp-types';
+import type { NavAnsatt } from '@navikt/fp-types';
 
 import { JournalføringHeader } from './components/header/JournalføringHeader';
 import { JournalføringIndex } from './components/JournalføringIndex';
@@ -19,9 +19,9 @@ import {
   knyttJournalpostTilAnnenSak,
   reserverBruker,
 } from './data/fpFordelApi';
-import { JournalførSubmitValue } from './typer/ferdigstillJournalføringSubmit';
-import { Oppgave } from './typer/oppgaveTsType';
-import { ReserverOppgaveType } from './typer/reserverOppgaveType';
+import type { JournalførSubmitValue } from './typer/ferdigstillJournalføringSubmit';
+import type { Oppgave } from './typer/oppgaveTsType';
+import type { ReserverOppgaveType } from './typer/reserverOppgaveType';
 
 import messages from '../i18n/nb_NO.json';
 

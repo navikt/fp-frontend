@@ -1,4 +1,3 @@
-import React from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -7,7 +6,7 @@ import { Form, TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { Oppgave } from '@navikt/fp-los-felles';
+import type { Oppgave } from '@navikt/fp-los-felles';
 
 import { LosUrl, postOpphevReservasjon } from '../../../data/fplosSaksbehandlerApi';
 

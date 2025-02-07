@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from 'react';
+import { useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 
@@ -37,12 +37,12 @@ interface Props {
  * Har ansvar for å lage navigasjonsrad med korrekte navigasjonsvalg, og route til rett
  * støttepanelkomponent ihht. gitt parameter i URL-en.
  */
-export const BehandlingSupportIndex: FunctionComponent<Props> = ({
+export const BehandlingSupportIndex = ({
   fagsakData,
   behandlingUuid,
   behandlingVersjon,
   hentOgSettBehandling,
-}) => {
+}: Props) => {
   const intl = useIntl();
 
   const { selected: valgtSupportPanel, location } = useTrackRouteParam<string>({

@@ -10,8 +10,8 @@ import { decodeHtmlEntity, formaterFritekst, getLanguageFromSprakkode } from '@n
 
 import { AksjonspunktKode, DokumentMalType, InnsynResultatType, Kommunikasjonsretning } from '@navikt/fp-kodeverk';
 import { ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
-import { Aksjonspunkt, Dokument, InnsynDokument } from '@navikt/fp-types';
-import { ForeslaVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { Aksjonspunkt, Dokument, InnsynDokument } from '@navikt/fp-types';
+import type { ForeslaVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { DocumentListVedtakInnsyn } from './DocumentListVedtakInnsyn';

@@ -1,8 +1,8 @@
-import React, { FunctionComponent,ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button,Label } from '@navikt/ds-react';
+import { BodyShort, Button, Label } from '@navikt/ds-react';
 import { TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength } from '@navikt/ft-form-validators';
 import {
@@ -26,7 +26,7 @@ const maxLength1500 = maxLength(1500);
 
 const getIsBegrunnelseRequired = (isDirty: boolean) => (value?: string) => value !== undefined || isDirty;
 
-interface OwnProps {
+interface Props {
   erOverstyrt: boolean;
   isSolvable: boolean;
   erVilkarOk?: boolean;
@@ -39,7 +39,7 @@ interface OwnProps {
   children: ReactNode;
 }
 
-const OverstyringPanel: FunctionComponent<OwnProps> = ({
+export const OverstyringPanel = ({
   erOverstyrt,
   isSolvable,
   erVilkarOk,
@@ -50,7 +50,7 @@ const OverstyringPanel: FunctionComponent<OwnProps> = ({
   toggleAv,
   erIkkeGodkjentAvBeslutter,
   children,
-}) => {
+}: Props) => {
   const {
     formState: { isDirty },
   } = useFormContext();
@@ -132,5 +132,3 @@ const OverstyringPanel: FunctionComponent<OwnProps> = ({
     </AksjonspunktBox>
   );
 };
-
-export default OverstyringPanel;

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { composeStories } from '@storybook/react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -11,7 +9,7 @@ const { Default } = composeStories(stories);
 
 describe('<OppgaveHandlingerMenu>', () => {
   it('skal vise fire meny-knapper for reserverte oppgaver', async () => {
-    await applyRequestHandlers(Default.parameters.msw);
+    await applyRequestHandlers(Default.parameters['msw']);
     render(<Default />);
 
     expect(await screen.findByText('Handlinger på oppgave')).toBeInTheDocument();
@@ -25,7 +23,7 @@ describe('<OppgaveHandlingerMenu>', () => {
   });
 
   it('skal åpne og lukke modal for oppheving av reservasjon', async () => {
-    await applyRequestHandlers(Default.parameters.msw);
+    await applyRequestHandlers(Default.parameters['msw']);
     render(<Default />);
 
     expect(await screen.findByText('Handlinger på oppgave')).toBeInTheDocument();
@@ -46,7 +44,7 @@ describe('<OppgaveHandlingerMenu>', () => {
   });
 
   it('skal åpne modal for å forlenge reservasjon', async () => {
-    await applyRequestHandlers(Default.parameters.msw);
+    await applyRequestHandlers(Default.parameters['msw']);
     render(<Default />);
 
     expect(await screen.findByText('Handlinger på oppgave')).toBeInTheDocument();
@@ -61,7 +59,7 @@ describe('<OppgaveHandlingerMenu>', () => {
   });
 
   it('skal åpne modal for å reservere med dato', async () => {
-    await applyRequestHandlers(Default.parameters.msw);
+    await applyRequestHandlers(Default.parameters['msw']);
     render(<Default />);
 
     expect(await screen.findByText('Handlinger på oppgave')).toBeInTheDocument();
@@ -76,7 +74,7 @@ describe('<OppgaveHandlingerMenu>', () => {
   });
 
   it('skal åpne og lukke modal for å flytte reservasjon', async () => {
-    await applyRequestHandlers(Default.parameters.msw);
+    await applyRequestHandlers(Default.parameters['msw']);
     render(<Default />);
 
     expect(await screen.findByText('Handlinger på oppgave')).toBeInTheDocument();

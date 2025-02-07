@@ -1,4 +1,3 @@
-import React, { FunctionComponent } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -16,7 +15,7 @@ import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import { VenteArsakType } from '@navikt/fp-kodeverk';
-import { KodeverkMedNavn } from '@navikt/fp-types';
+import type { KodeverkMedNavn } from '@navikt/fp-types';
 
 import styles from './settPaVentModal.module.css';
 
@@ -78,7 +77,7 @@ export type FormValues = {
   ventearsak?: string;
 };
 
-interface PureOwnProps {
+interface Props {
   submitCallback: (formData: FormValues) => void;
   cancelEvent: () => void;
   showModal: boolean;
@@ -91,7 +90,7 @@ interface PureOwnProps {
   defaultVenteårsak?: string;
 }
 
-const SettPaVentModal: FunctionComponent<PureOwnProps> = ({
+export const SettPaVentModal = ({
   submitCallback,
   cancelEvent,
   showModal,
@@ -102,7 +101,7 @@ const SettPaVentModal: FunctionComponent<PureOwnProps> = ({
   visBrevErBestilt = false,
   hasManualPaVent,
   defaultVenteårsak,
-}) => {
+}: Props) => {
   const intl = useIntl();
 
   const formMethods = useForm<FormValues>({
@@ -213,5 +212,3 @@ const SettPaVentModal: FunctionComponent<PureOwnProps> = ({
     </Form>
   );
 };
-
-export default SettPaVentModal;

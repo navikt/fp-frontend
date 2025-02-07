@@ -5,7 +5,7 @@ import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, Detail, Heading, HStack, Modal, VStack } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { Feilmelding } from '../typer/feilmeldingTsType';
+import type { Feilmelding } from '../typer/feilmeldingTsType';
 
 import styles from './feilmeldingsdetaljerModal.module.css';
 

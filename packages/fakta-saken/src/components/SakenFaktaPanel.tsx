@@ -4,8 +4,8 @@ import { HStack, VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode, FagsakYtelseType } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt, Soknad } from '@navikt/fp-types';
-import {
+import type { Aksjonspunkt, Soknad } from '@navikt/fp-types';
+import type {
   AvklarDekningsgradAp,
   MerkOpptjeningUtlandAp,
   OverstyringAvklarStartdatoForPeriodenAp,
@@ -13,10 +13,10 @@ import {
 } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
-import DekningradApForm from './dekningsgrad/DekningradApForm';
-import DekningradForm from './dekningsgrad/DekningradForm';
-import InnhentDokOpptjeningUtlandPanel from './innhentDok/InnhentDokOpptjeningUtlandPanel';
-import StartdatoForForeldrepengerperiodenForm from './startdatoForForeldrepenger/StartdatoForForeldrepengerperiodenForm';
+import { DekningradApForm } from './dekningsgrad/DekningradApForm';
+import { DekningradForm } from './dekningsgrad/DekningradForm';
+import { InnhentDokOpptjeningUtlandPanel } from './innhentDok/InnhentDokOpptjeningUtlandPanel';
+import { StartdatoForForeldrepengerperiodenForm } from './startdatoForForeldrepenger/StartdatoForForeldrepengerperiodenForm';
 
 interface Props {
   soknad?: Soknad;

@@ -1,6 +1,6 @@
-import { ComponentProps } from 'react';
+import { type ComponentProps } from 'react';
 
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import {
   AksjonspunktKode,
@@ -11,8 +11,8 @@ import {
   SoknadType,
   StonadskontoType,
 } from '@navikt/fp-kodeverk';
-import { PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
-import {
+import { type PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
+import type {
   Aksjonspunkt,
   BeregningsresultatDagytelse,
   FamilieHendelse,
