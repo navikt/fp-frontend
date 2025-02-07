@@ -112,7 +112,7 @@ export const ValgtAktivitetSubForm = ({
             <FormattedMessage id={finnNæringLabel(ferdiglignetNæring)} />
           </Label>
           {ferdiglignetNæring
-            .sort((a, b) => {
+            .toSorted((a, b) => {
               if (a.år < b.år) {
                 return 1;
               }

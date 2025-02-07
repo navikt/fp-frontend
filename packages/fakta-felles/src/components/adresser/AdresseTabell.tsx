@@ -59,7 +59,7 @@ export const AdresseTabell = ({
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            {adresser.sort(sorterPerioder).map((adresse, i) => {
+            {adresser.toSorted(sorterPerioder).map((adresse, i) => {
               return (
                 <Table.Row key={adresse.adresseType + adresse.fom + adresse.tom}>
                   <Table.DataCell style={rowStyle(i)}>

@@ -11,20 +11,13 @@ import messages from '../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 interface Props {
-  innsyn: Innsyn;
+  innsyn?: Innsyn;
   alleDokumenter?: Dokument[];
   readOnlySubmitButton: boolean;
 }
 
-export const InnsynProsessIndex = ({ innsyn, alleDokumenter, readOnlySubmitButton }: Props) => (
+export const InnsynProsessIndex = (props: Props) => (
   <RawIntlProvider value={intl}>
-    <InnsynForm
-      innsynMottattDato={innsyn.innsynMottattDato}
-      innsynDokumenter={innsyn.dokumenter}
-      innsynResultatType={innsyn.innsynResultatType}
-      vedtaksdokumentasjon={innsyn.vedtaksdokumentasjon}
-      alleDokumenter={alleDokumenter}
-      readOnlySubmitButton={readOnlySubmitButton}
-    />
+    <InnsynForm {...props} />
   </RawIntlProvider>
 );

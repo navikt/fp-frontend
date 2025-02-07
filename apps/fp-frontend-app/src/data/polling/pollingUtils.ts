@@ -87,9 +87,8 @@ const isPollingResponse = (response: PollingResponse | Behandling): response is 
   return pollingResponse.pending !== undefined && pollingResponse.location !== undefined;
 };
 
-const isPollingDelayedOrHalted = (response: PollingResponse): boolean => {
-  const pollingResponse = response as PollingResponse;
-  return pollingResponse.status === ApiPollingStatus.DELAYED || response.status === ApiPollingStatus.HALTED;
+const isPollingDelayedOrHalted = (pollingResponse: PollingResponse): boolean => {
+  return pollingResponse.status === ApiPollingStatus.DELAYED || pollingResponse.status === ApiPollingStatus.HALTED;
 };
 
 const wait = (ms: number) =>
