@@ -9,11 +9,13 @@
 }
 
 .rightColumn {
+  min-width: 45rem;
   width: 45rem;
 }
 
 @media all and (max-width: 1569px) {
   .rightColumn {
+    min-width: 35rem;
     width: 35rem;
   }
 }
