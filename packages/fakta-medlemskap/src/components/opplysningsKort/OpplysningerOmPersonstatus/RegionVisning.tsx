@@ -21,7 +21,7 @@ export const RegionVisning = ({ regioner, erAnnenpart = false, alleKodeverk }: P
     return kodeverkNavn.find(it => it.kode === verdi.type)?.navn ?? `Ukjent region: ${verdi?.type.toLowerCase()}`;
   };
 
-  const sortertRegion = regioner.sort(sorterPerioder);
+  const sortertRegion = regioner.toSorted(sorterPerioder);
 
   const rowStyle = (index: number) => (index + 1 === sortertRegion.length ? { border: '0px' } : {});
 

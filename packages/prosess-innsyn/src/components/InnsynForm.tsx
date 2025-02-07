@@ -16,7 +16,7 @@ import {
   Kommunikasjonsretning,
 } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
-import type { Aksjonspunkt, Dokument, InnsynDokument, InnsynVedtaksdokument } from '@navikt/fp-types';
+import type { Aksjonspunkt, Dokument, Innsyn, InnsynDokument, InnsynVedtaksdokument } from '@navikt/fp-types';
 import type { VurderInnsynAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
@@ -26,7 +26,7 @@ import { VedtakDocuments } from './VedtakDocuments';
 const EMPTY_ARRAY = [] as InnsynVedtaksdokument[];
 
 type FormValues = {
-  mottattDato: string;
+  mottattDato?: string;
   innsynResultatType?: string;
   fristDato?: string;
   sattPaVent?: boolean;
@@ -42,19 +42,17 @@ const hentDokumenterMedNavnOgFikkInnsyn = (dokumenter: InnsynDokument[]): Record
     };
   }, {});
 
-const buildInitialValues = (
-  innsynMottattDato: string,
-  innsynResultatType: string,
-  dokumenter: InnsynDokument[],
+const getDefaultValues = (
   aksjonspunkter: Aksjonspunkt[],
   fristBehandlingPåVent?: string,
+  innsyn?: Innsyn,
 ): FormValues => ({
-  mottattDato: innsynMottattDato,
-  innsynResultatType: innsynResultatType || undefined,
+  mottattDato: innsyn?.innsynMottattDato,
+  innsynResultatType: innsyn?.innsynResultatType,
   fristDato: fristBehandlingPåVent || moment().add(3, 'days').format(ISO_DATE_FORMAT),
   sattPaVent: aksjonspunkter[0].status === AksjonspunktStatus.OPPRETTET ? undefined : !!fristBehandlingPåVent,
   ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
-  ...hentDokumenterMedNavnOgFikkInnsyn(dokumenter || []),
+  ...hentDokumenterMedNavnOgFikkInnsyn(innsyn?.dokumenter || []),
 });
 
 const getDocumentsStatus = (values: FormValues, documents: Dokument[]) =>
@@ -94,10 +92,7 @@ const getFilteredReceivedDocuments = (allDocuments: Dokument[]): Dokument[] => {
 };
 
 interface Props {
-  innsynMottattDato: string;
-  innsynDokumenter: InnsynDokument[];
-  innsynResultatType: string;
-  vedtaksdokumentasjon: InnsynVedtaksdokument[];
+  innsyn?: Innsyn;
   alleDokumenter?: Dokument[];
   readOnlySubmitButton: boolean;
 }
@@ -107,31 +102,18 @@ interface Props {
  *
  * Viser panelet som håndterer avklaring av innsyn.
  */
-export const InnsynForm = ({
-  readOnlySubmitButton,
-  innsynMottattDato,
-  vedtaksdokumentasjon,
-  innsynResultatType,
-  innsynDokumenter,
-  alleDokumenter = [],
-}: Props) => {
+export const InnsynForm = ({ innsyn, readOnlySubmitButton, alleDokumenter = [] }: Props) => {
   const intl = useIntl();
 
   const { fagsak, alleKodeverk, aksjonspunkterForPanel, submitCallback, isReadOnly, behandling } =
     usePanelDataContext<VurderInnsynAp>();
 
-  const initialValues = buildInitialValues(
-    innsynMottattDato,
-    innsynResultatType,
-    innsynDokumenter,
-    aksjonspunkterForPanel,
-    behandling.fristBehandlingPåVent,
-  );
+  const defaultValues = getDefaultValues(aksjonspunkterForPanel, behandling.fristBehandlingPåVent, innsyn);
 
   const { formData, setFormData } = useFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || initialValues,
+    defaultValues: formData || defaultValues,
   });
 
   const documents = getFilteredReceivedDocuments(alleDokumenter);
@@ -171,7 +153,7 @@ export const InnsynForm = ({
       />
       <VerticalSpacer sixteenPx />
       <VedtakDocuments
-        vedtaksdokumenter={vedtaksdokumentasjon || EMPTY_ARRAY}
+        vedtaksdokumenter={innsyn?.vedtaksdokumentasjon || EMPTY_ARRAY}
         behandlingTypes={alleKodeverk[KodeverkType.BEHANDLING_TYPE]}
       />
       <VerticalSpacer twentyPx />
