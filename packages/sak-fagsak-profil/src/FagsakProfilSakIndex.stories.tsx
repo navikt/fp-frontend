@@ -6,6 +6,7 @@ import { FagsakStatus, FagsakYtelseType, KodeverkType } from '@navikt/fp-kodever
 import { FagsakProfilSakIndex } from './FagsakProfilSakIndex';
 
 import '@navikt/ft-ui-komponenter/dist/style.css';
+import { action } from '@storybook/addon-actions';
 
 const withStylerovider: DecoratorFunction<ReactRenderer> = Story => (
   <div style={{ width: '600px', backgroundColor: 'white', padding: '30px' }}>
@@ -33,5 +34,7 @@ export const Default: Story = {
     fagsakMarkeringTekster: ['Næring', 'Utland'],
     fagsakStatus: { kode: FagsakStatus.OPPRETTET, kodeverk: KodeverkType.FAGSAK_STATUS, navn: 'Opprettet' },
     dekningsgrad: 100,
+    toggleSideMeny: action('button-click'),
+    visSideMeny: true,
   },
 };
