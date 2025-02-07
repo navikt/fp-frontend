@@ -30,7 +30,7 @@ describe('FagsakIndex', () => {
     expect(screen.getByText('Venter…')).toBeInTheDocument();
   });
 
-  it('skal vise fagsak-dele', async () => {
+  it('skal vise fagsak-del', async () => {
     await applyRequestHandlers(Default.parameters.msw);
     render(
       <ResponsiveContext.Provider value={{ width: 300 }}>
