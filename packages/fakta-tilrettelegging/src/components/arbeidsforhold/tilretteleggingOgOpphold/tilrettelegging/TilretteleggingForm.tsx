@@ -189,10 +189,6 @@ export const TilretteleggingForm = ({
       <div
         style={{
           backgroundColor: 'white',
-          marginLeft: '-56px',
-          marginTop: '-9px',
-          marginBottom: '-8px',
-          marginRight: '-56px',
           padding: '24px',
         }}
       >

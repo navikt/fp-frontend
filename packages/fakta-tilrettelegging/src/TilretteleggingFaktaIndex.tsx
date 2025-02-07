@@ -12,14 +12,15 @@ const intl = createIntl(messages);
 
 interface Props {
   svangerskapspengerTilrettelegging: FodselOgTilrettelegging;
-  arbeidOgInntekt: ArbeidOgInntektsmelding;
+  arbeidOgInntekt?: ArbeidOgInntektsmelding;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   submittable: boolean;
   readonly: boolean;
 }
 
 export const TilretteleggingFaktaIndex = ({ arbeidOgInntekt, ...rest }: Props) => (
-  <RawIntlProvider value={intl}>
-    <TilretteleggingFaktaForm aoiArbeidsforhold={arbeidOgInntekt.arbeidsforhold} {...rest} />
-  </RawIntlProvider>
-);
+    <RawIntlProvider value={intl}>
+      <TilretteleggingFaktaForm aoiArbeidsforhold={arbeidOgInntekt?.arbeidsforhold ?? []} {...rest} />
+    </RawIntlProvider>
+  );
+

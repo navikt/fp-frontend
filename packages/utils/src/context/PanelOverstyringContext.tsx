@@ -17,12 +17,12 @@ type InternalProps = { erOverstyrt: boolean; toggleOverstyring: () => void };
 const PanelOverstyringContext = createContext<(Props & InternalProps) | null>(null);
 
 export const PanelOverstyringProvider = (props: Props & InputProps & { children: ReactElement | null }) => {
-  const [erOverstyrt, setOverstyrt] = useState(false);
+  const [erOverstyrt, setErOverstyrt] = useState(false);
 
   const { children, toggleOverstyring: toggle, ...otherProps } = props;
 
   const toggleOverstyring = () => {
-    setOverstyrt(!erOverstyrt);
+    setErOverstyrt(!erOverstyrt);
     toggle?.(!erOverstyrt);
   };
 

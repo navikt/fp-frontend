@@ -48,7 +48,7 @@ export const FodselOgTilretteleggingFaktaInitPanel = ({
       })}
       skalPanelVisesIMeny
     >
-      {arbeidOgInntekt && svangerskapspengerTilrettelegging ? (
+      {svangerskapspengerTilrettelegging ? (
         <TilretteleggingFaktaIndex
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           arbeidOgInntekt={arbeidOgInntekt}
