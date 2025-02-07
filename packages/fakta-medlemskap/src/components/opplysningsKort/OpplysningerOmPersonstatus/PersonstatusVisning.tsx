@@ -22,7 +22,7 @@ export const PersonstatusVisning = ({ personstatuser, erAnnenpart = false, alleK
     return kodeverk?.navn ?? `Ukjent personstatus: ${verdi?.type.toLowerCase()}`;
   };
 
-  const sortertPersonstatus = personstatuser.sort(sorterPerioder);
+  const sortertPersonstatus = personstatuser.toSorted(sorterPerioder);
 
   const rowStyle = (index: number) => (index + 1 === sortertPersonstatus.length ? { border: '0px' } : {});
 
