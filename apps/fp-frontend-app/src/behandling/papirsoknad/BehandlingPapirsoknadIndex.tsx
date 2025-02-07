@@ -17,7 +17,7 @@ import { BehandlingDataContext } from '../felles/utils/behandlingDataContext';
  * og valgt foreldretype (mor, far/medmor eller tredjepart).
  */
 const BehandlingPapirsoknadIndex = () => {
-  const [erAksjonspunktLagret, setAksjonspunktLagret] = useState(false);
+  const [erAksjonspunktLagret, setErAksjonspunktLagret] = useState(false);
 
   const { alleKodeverk, behandling, rettigheter, fagsak, lagreAksjonspunkter } = use(BehandlingDataContext);
 
@@ -28,7 +28,7 @@ const BehandlingPapirsoknadIndex = () => {
 
   const readOnly = !rettigheter.writeAccess.isEnabled || behandling.behandlingPaaVent;
 
-  const lagre = lagLagreFunksjon(behandling, fagsak, lagreAksjonspunkter, setAksjonspunktLagret);
+  const lagre = lagLagreFunksjon(behandling, fagsak, lagreAksjonspunkter, setErAksjonspunktLagret);
 
   const lagreUfullstendig = (fagsakYtelseType: string, familieHendelseType: string, foreldreType: string) =>
     lagre({ ufullstendigSoeknad: true }, fagsakYtelseType, familieHendelseType, foreldreType);
