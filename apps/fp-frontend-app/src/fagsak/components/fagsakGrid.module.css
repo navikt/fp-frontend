@@ -25,6 +25,7 @@
 .rightColumn {
   opacity: 1;
   transition: opacity 0.3s cubic-bezier(0.55, 0.06, 0.68, 0.19), width 0.3s ease;
+  min-width: 45rem;
   width: 45rem;
 }
 
@@ -47,6 +48,7 @@
 
 @media all and (max-width: 1569px) {
   .rightColumn {
+    min-width: 35rem;
     width: 35rem;
   }
 }

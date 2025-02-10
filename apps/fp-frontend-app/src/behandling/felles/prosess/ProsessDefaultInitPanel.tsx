@@ -52,7 +52,7 @@ const ProsessPanel = ({
   harApentAksjonspunkt,
   children,
 }: Props & ProsessPanel & ProsessPanelInitProps) => {
-  const { behandling } = use(BehandlingDataContext);
+  const { behandling, fagsak, alleKodeverk } = use(BehandlingDataContext);
 
   const status = hentOverstyrtStatus ?? standardPanelProps.status;
 
@@ -81,10 +81,10 @@ const ProsessPanel = ({
         {skalVisePanel ? (
           <PanelDataProvider
             behandling={behandling}
-            fagsak={standardPanelProps.fagsak}
+            fagsak={fagsak}
             aksjonspunkterForPanel={standardPanelProps.aksjonspunkter}
             harÅpneAksjonspunkter={standardPanelProps.isAksjonspunktOpen}
-            alleKodeverk={standardPanelProps.alleKodeverk}
+            alleKodeverk={alleKodeverk}
             submitCallback={standardPanelProps.submitCallback}
             isReadOnly={standardPanelProps.isReadOnly}
             alleMerknaderFraBeslutter={standardPanelProps.alleMerknaderFraBeslutter}
