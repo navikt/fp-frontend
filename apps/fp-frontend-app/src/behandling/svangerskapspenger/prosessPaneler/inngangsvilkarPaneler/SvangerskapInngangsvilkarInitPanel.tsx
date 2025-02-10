@@ -33,17 +33,16 @@ export const SvangerskapInngangsvilkarInitPanel = (props: InngangsvilkarPanelIni
       standardPanelProps={standardPanelProps}
       inngangsvilkarPanelKode="SVANGERSKAP"
       hentInngangsvilkarPanelTekst={intl.formatMessage({ id: 'SvangerskapVilkarForm.FyllerVilkår' })}
-      renderPanel={() => (
+      renderPanel={({ skalVises }) => (
         <>
-          {svangerskapspengerTilrettelegging ? (
+          {skalVises && svangerskapspengerTilrettelegging && (
             <SvangerskapVilkarProsessIndex
               svangerskapspengerTilrettelegging={svangerskapspengerTilrettelegging}
               status={standardPanelProps.status}
               readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
             />
-          ) : (
-            <LoadingPanel />
           )}
+          {skalVises && !svangerskapspengerTilrettelegging && <LoadingPanel />}
         </>
       )}
     />

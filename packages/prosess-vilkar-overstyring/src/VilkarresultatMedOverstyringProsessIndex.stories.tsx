@@ -27,6 +27,7 @@ const defaultBehandling = {
   uuid: '1',
   versjon: 1,
   type: BehandlingType.FORSTEGANGSSOKNAD,
+  aksjonspunkt: [] as Aksjonspunkt[],
 } as Behandling;
 
 const defaultAvslagsarsaker = [
@@ -47,6 +48,7 @@ const meta = {
   component: VilkarresultatMedOverstyringProsessIndex,
   decorators: [withFormData, withPanelData, withPanelOverstyring],
   args: {
+    behandling: defaultBehandling,
     kanOverstyreAccess: { isEnabled: true, employeeHasAccess: true },
     avslagsarsaker: defaultAvslagsarsaker,
     status: VilkarUtfallType.OPPFYLT,
@@ -86,14 +88,17 @@ export const OverstyringErUtførtForMedlemskap: Story = {
     panelTittelKode: 'Inngangsvilkar.Medlemskapsvilkaret',
     overstyringApKode: AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR,
     avslagsarsaker: alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.MEDLEMSKAPSVILKARET],
-    aksjonspunkterForPanel: [
-      {
-        definisjon: AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR,
-        status: AksjonspunktStatus.UTFORT,
-        kanLoses: false,
-        begrunnelse: 'Dette er en begrunnelse',
-      },
-    ],
+    behandling: {
+      ...defaultBehandling,
+      aksjonspunkt: [
+        {
+          definisjon: AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR,
+          status: AksjonspunktStatus.UTFORT,
+          kanLoses: false,
+          begrunnelse: 'Dette er en begrunnelse',
+        },
+      ],
+    } as Behandling,
     status: VilkarUtfallType.IKKE_OPPFYLT,
     medlemskap: {
       manuellBehandlingResultat: {
@@ -123,14 +128,17 @@ export const OverstyringErUtførtForForutgåendeMedlemskap: Story = {
     panelTittelKode: 'Inngangsvilkar.Medlemskapsvilkaret',
     overstyringApKode: AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE,
     avslagsarsaker: alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.MEDLEMSKAPSVILKARET_FORUTGAENDE],
-    aksjonspunkterForPanel: [
-      {
-        definisjon: AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE,
-        status: AksjonspunktStatus.UTFORT,
-        kanLoses: false,
-        begrunnelse: 'Dette er en begrunnelse',
-      },
-    ],
+    behandling: {
+      ...defaultBehandling,
+      aksjonspunkt: [
+        {
+          definisjon: AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE,
+          status: AksjonspunktStatus.UTFORT,
+          kanLoses: false,
+          begrunnelse: 'Dette er en begrunnelse',
+        },
+      ],
+    } as Behandling,
     status: VilkarUtfallType.IKKE_OPPFYLT,
     medlemskap: {
       manuellBehandlingResultat: {
@@ -156,15 +164,15 @@ export const OverstyrtAksjonspunktSomErBekreftet: Story = {
       behandlingsresultat: {
         avslagsarsak: 'AVSLAG_TEST_1',
       },
+      aksjonspunkt: [
+        {
+          definisjon: AksjonspunktKode.OVERSTYR_FODSELSVILKAR,
+          status: AksjonspunktStatus.UTFORT,
+          kanLoses: false,
+          begrunnelse: 'Dette er en begrunnelse',
+        } as Aksjonspunkt,
+      ],
     } as Behandling,
-    aksjonspunkterForPanel: [
-      {
-        definisjon: AksjonspunktKode.OVERSTYR_FODSELSVILKAR,
-        status: AksjonspunktStatus.UTFORT,
-        kanLoses: false,
-        begrunnelse: 'Dette er en begrunnelse',
-      } as Aksjonspunkt,
-    ],
     status: VilkarUtfallType.IKKE_OPPFYLT,
     panelTittelKode: 'Inngangsvilkar.Fodselsvilkaret',
     overstyringApKode: AksjonspunktKode.OVERSTYR_FODSELSVILKAR,
@@ -191,14 +199,17 @@ export const LøpendeMedlemskapSomErOverstyrtVisesBareIReadOnlyMode: Story = {
     panelTittelKode: 'Behandlingspunkt.FortsattMedlemskap',
     overstyringApKode: AksjonspunktKode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
     avslagsarsaker: alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE],
-    aksjonspunkterForPanel: [
-      {
-        definisjon: AksjonspunktKode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
-        status: AksjonspunktStatus.UTFORT,
-        kanLoses: false,
-        begrunnelse: 'Dette er en begrunnelse',
-      },
-    ],
+    behandling: {
+      ...defaultBehandling,
+      aksjonspunkt: [
+        {
+          definisjon: AksjonspunktKode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
+          status: AksjonspunktStatus.UTFORT,
+          kanLoses: false,
+          begrunnelse: 'Dette er en begrunnelse',
+        },
+      ],
+    } as Behandling,
     status: VilkarUtfallType.OPPFYLT,
     kanOverstyreAccess: { isEnabled: false, employeeHasAccess: false },
     isReadOnly: true,

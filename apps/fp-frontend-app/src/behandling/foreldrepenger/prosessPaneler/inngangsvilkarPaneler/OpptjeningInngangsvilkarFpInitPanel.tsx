@@ -37,7 +37,7 @@ export const OpptjeningInngangsvilkarFpInitPanel = (props: InngangsvilkarPanelIn
       vilkarKoder={VILKAR_KODER}
       inngangsvilkarPanelKode="OPPTJENINGSVILKARET"
       hentInngangsvilkarPanelTekst={intl.formatMessage({ id: 'OpptjeningVilkarView.VurderOmSøkerHarRett' })}
-      renderPanel={({ erOverstyrt, toggleOverstyring }) => (
+      renderPanel={({ skalVises, erOverstyrt, toggleOverstyring }) => (
         <>
           {standardPanelProps.aksjonspunkter.length === 0 && (
             <PanelOverstyringProvider
@@ -49,14 +49,16 @@ export const OpptjeningInngangsvilkarFpInitPanel = (props: InngangsvilkarPanelIn
               }
               toggleOverstyring={toggleOverstyring}
             >
-              <OverstyringPanelDef
-                vilkar={standardPanelProps.vilkar}
-                vilkarKoder={VILKAR_KODER}
-                panelTekstKode="Inngangsvilkar.Opptjeningsvilkaret"
-              />
+              {skalVises ? (
+                <OverstyringPanelDef
+                  vilkar={standardPanelProps.vilkar}
+                  vilkarKoder={VILKAR_KODER}
+                  panelTekstKode="Inngangsvilkar.Opptjeningsvilkaret"
+                />
+              ) : null}
             </PanelOverstyringProvider>
           )}
-          {standardPanelProps.aksjonspunkter.length > 0 && opptjening && (
+          {skalVises && standardPanelProps.aksjonspunkter.length > 0 && opptjening && (
             <OpptjeningVilkarProsessIndex
               lovReferanse={standardPanelProps.vilkar[0].lovReferanse}
               readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}

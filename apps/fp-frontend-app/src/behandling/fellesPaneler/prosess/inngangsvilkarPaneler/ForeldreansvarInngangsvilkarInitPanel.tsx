@@ -47,15 +47,19 @@ export const ForeldreansvarInngangsvilkarInitPanel = (props: InngangsvilkarPanel
           ? intl.formatMessage({ id: AKSJONSPUNKT_TEKST_PER_KODE[standardPanelProps.aksjonspunkter[0].definisjon] })
           : ''
       }
-      renderPanel={() => (
-        <ForeldreansvarVilkarProsessIndex
-          isEngangsstonad
-          isForeldreansvar2Ledd={standardPanelProps.vilkar.some(
-            v => v.vilkarType === VilkarType.FORELDREANSVARSVILKARET_2_LEDD,
+      renderPanel={({ skalVises }) => (
+        <>
+          {skalVises && (
+            <ForeldreansvarVilkarProsessIndex
+              isEngangsstonad
+              isForeldreansvar2Ledd={standardPanelProps.vilkar.some(
+                v => v.vilkarType === VilkarType.FORELDREANSVARSVILKARET_2_LEDD,
+              )}
+              status={standardPanelProps.status}
+              readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
+            />
           )}
-          status={standardPanelProps.status}
-          readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
-        />
+        </>
       )}
     />
   );
