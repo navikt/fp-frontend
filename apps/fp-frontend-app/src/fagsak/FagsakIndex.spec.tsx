@@ -31,7 +31,7 @@ describe('FagsakIndex', () => {
   });
 
   it('skal vise fagsak-del', async () => {
-    await applyRequestHandlers(Default.parameters.msw);
+    await applyRequestHandlers(Default.parameters['msw']);
     render(
       <ResponsiveContext.Provider value={{ width: 300 }}>
         <Default />
