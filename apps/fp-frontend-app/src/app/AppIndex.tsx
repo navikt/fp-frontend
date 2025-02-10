@@ -115,7 +115,7 @@ const createQueryClient = (errorHandler: (error: Error) => void) =>
   new QueryClient({
     defaultOptions: {
       queries: {
-        retry: process.env['NODE_ENV'] === 'test' ? false : 3,
+        retry: import.meta.env.MODE === 'test' ? false : 3,
       },
     },
     queryCache: new QueryCache({
