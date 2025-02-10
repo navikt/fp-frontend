@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
@@ -65,20 +64,19 @@ export const BeregningsresultatEngangsstonadForm = ({
 
   const { formData, setFormData } = useFormData<FormValues>();
 
-  const { toggleOverstyring, kanOverstyreAccess, overrideReadOnly } = usePanelOverstyring();
+  const { toggleOverstyring, kanOverstyreAccess, overrideReadOnly, erOverstyrt } = usePanelOverstyring();
 
   const formMethods = useForm<FormValues>({
     defaultValues: formData || buildInitialValues(aksjonspunkterForPanel, behandlingResultatstruktur),
   });
 
-  const [erIOverstyringsmodus, toggleOverstyringsmodus] = useState(false);
   const toggleAv = () => {
-    toggleOverstyringsmodus(false);
+    toggleOverstyring();
     formMethods.reset();
     toggleOverstyring();
   };
   const togglePa = () => {
-    toggleOverstyringsmodus(true);
+    toggleOverstyring();
     toggleOverstyring();
   };
 
@@ -100,10 +98,7 @@ export const BeregningsresultatEngangsstonadForm = ({
           </FlexColumn>
           {(kanOverstyreAccess.isEnabled || overrideReadOnly) && (
             <FlexColumn>
-              <OverstyringKnapp
-                onClick={togglePa}
-                erOverstyrt={erIOverstyringsmodus || !kanOverstyreAccess.isEnabled}
-              />
+              <OverstyringKnapp onClick={togglePa} erOverstyrt={erOverstyrt || !kanOverstyreAccess.isEnabled} />
             </FlexColumn>
           )}
         </FlexRow>
@@ -134,7 +129,7 @@ export const BeregningsresultatEngangsstonadForm = ({
             </Label>
           </FlexColumn>
         </FlexRow>
-        {!erIOverstyringsmodus && !harOverstyringAksjonspunkt && (
+        {!erOverstyrt && !harOverstyringAksjonspunkt && (
           <>
             <FlexRow>
               <FlexColumn className={styles.dividerWidth}>
@@ -158,11 +153,11 @@ export const BeregningsresultatEngangsstonadForm = ({
           </>
         )}
       </FlexContainer>
-      {(erIOverstyringsmodus || harOverstyringAksjonspunkt) && (
+      {(erOverstyrt || harOverstyringAksjonspunkt) && (
         <>
           <VerticalSpacer sixteenPx />
           <OverstyringPanel
-            erOverstyrt={erIOverstyringsmodus}
+            erOverstyrt={erOverstyrt}
             isSolvable
             erVilkarOk
             hasAksjonspunkt={harOverstyringAksjonspunkt}
@@ -175,7 +170,7 @@ export const BeregningsresultatEngangsstonadForm = ({
             <FlexContainer>
               <FlexRow>
                 <FlexColumn>
-                  <Label size="small" className={!erIOverstyringsmodus || overrideReadOnly ? '' : styles.text}>
+                  <Label size="small" className={!erOverstyrt || overrideReadOnly ? '' : styles.text}>
                     <FormattedMessage id="BeregningEngangsstonadForm.BeregnetEngangsstonad" />
                   </Label>
                 </FlexColumn>
@@ -189,11 +184,11 @@ export const BeregningsresultatEngangsstonadForm = ({
                     }}
                     className={styles.bredde}
                     validate={[required, hasValidInteger, minValue1, maxValue500000]}
-                    readOnly={!erIOverstyringsmodus || overrideReadOnly}
+                    readOnly={!erOverstyrt || overrideReadOnly}
                   />
                 </FlexColumn>
                 <FlexColumn>
-                  <Label size="small" className={!erIOverstyringsmodus || overrideReadOnly ? '' : styles.text}>
+                  <Label size="small" className={!erOverstyrt || overrideReadOnly ? '' : styles.text}>
                     <FormattedMessage id="BeregningEngangsstonadForm.Kroner" />
                   </Label>
                 </FlexColumn>

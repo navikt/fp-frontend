@@ -24,7 +24,9 @@ export const BeregningEsProsessStegInitPanel = (props: ProsessPanelInitProps) =>
 
   const api = useBehandlingApi(behandling);
 
-  const { data: beregningsresultatEngangsstønad } = useQuery(api.es.beregningsresultatEngangsstønadOptions(behandling));
+  const { data: beregningsresultatEngangsstønad, isFetching } = useQuery(
+    api.es.beregningsresultatEngangsstønadOptions(behandling),
+  );
 
   return (
     <PanelOverstyringProvider
@@ -44,10 +46,10 @@ export const BeregningEsProsessStegInitPanel = (props: ProsessPanelInitProps) =>
             : VilkarUtfallType.IKKE_VURDERT
         }
       >
-        {beregningsresultatEngangsstønad ? (
-          <BeregningsresultatProsessIndex beregningresultatEngangsstonad={beregningsresultatEngangsstønad} />
-        ) : (
+        {isFetching ? (
           <LoadingPanel />
+        ) : (
+          <BeregningsresultatProsessIndex beregningresultatEngangsstonad={beregningsresultatEngangsstønad} />
         )}
       </ProsessDefaultInitOverstyringPanel>
     </PanelOverstyringProvider>
