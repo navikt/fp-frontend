@@ -10,6 +10,8 @@ describe('<FagsakGrid>', () => {
         profileAndNavigationContent={<div>profileContent</div>}
         supportContent={<div>supportContent</div>}
         visittkortContent={() => <div>visittkort</div>}
+        visSideMeny={true}
+        toggleSideMeny={() => {}}
       />,
     );
 
