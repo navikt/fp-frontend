@@ -13,7 +13,7 @@ export type Props = {
   behandlingVersjon: number;
   standardPanelProps: StandardProsessPanelProps;
   vilkarKoder?: VilkarType[];
-  renderPanel: (args: { erOverstyrt: boolean; toggleOverstyring: () => void }) => ReactElement;
+  renderPanel: (args: { skalVises: boolean; erOverstyrt: boolean; toggleOverstyring: () => void }) => ReactElement;
   inngangsvilkarPanelKode: string;
   hentInngangsvilkarPanelTekst: string;
 };
@@ -44,20 +44,18 @@ export const InngangsvilkarDefaultInitPanel = ({
 
   return (
     <FormDataProvider behandling={behandling}>
-      {!erPanelValgt || !skalVises ? null : (
-        <PanelDataProvider
-          behandling={behandling}
-          fagsak={fagsak}
-          aksjonspunkterForPanel={standardPanelProps.aksjonspunkter}
-          harÅpneAksjonspunkter={standardPanelProps.isAksjonspunktOpen}
-          alleKodeverk={alleKodeverk}
-          submitCallback={standardPanelProps.submitCallback}
-          isReadOnly={standardPanelProps.isReadOnly}
-          alleMerknaderFraBeslutter={standardPanelProps.alleMerknaderFraBeslutter}
-        >
-          {renderPanel({ erOverstyrt, toggleOverstyring })}
-        </PanelDataProvider>
-      )}
+      <PanelDataProvider
+        behandling={behandling}
+        fagsak={fagsak}
+        aksjonspunkterForPanel={standardPanelProps.aksjonspunkter}
+        harÅpneAksjonspunkter={standardPanelProps.isAksjonspunktOpen}
+        alleKodeverk={alleKodeverk}
+        submitCallback={standardPanelProps.submitCallback}
+        isReadOnly={standardPanelProps.isReadOnly}
+        alleMerknaderFraBeslutter={standardPanelProps.alleMerknaderFraBeslutter}
+      >
+        {renderPanel({ skalVises: erPanelValgt && skalVises, erOverstyrt, toggleOverstyring })}
+      </PanelDataProvider>
     </FormDataProvider>
   );
 };

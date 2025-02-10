@@ -40,7 +40,7 @@ export const MedlemskapInngangsvilkarInitPanel = (props: InngangsvilkarPanelInit
       vilkarKoder={VILKAR_KODER}
       inngangsvilkarPanelKode="MEDLEMSKAP"
       hentInngangsvilkarPanelTekst=""
-      renderPanel={({ erOverstyrt, toggleOverstyring }) => (
+      renderPanel={({ skalVises, erOverstyrt, toggleOverstyring }) => (
         <>
           {!harÅpentMedlemskapAksjonspunkt && !isFetching && (
             <PanelOverstyringProvider
@@ -53,12 +53,14 @@ export const MedlemskapInngangsvilkarInitPanel = (props: InngangsvilkarPanelInit
               }
               toggleOverstyring={toggleOverstyring}
             >
-              <OverstyringPanelDef
-                vilkar={standardPanelProps.vilkar}
-                vilkarKoder={VILKAR_KODER}
-                panelTekstKode="Inngangsvilkar.Medlemskapsvilkaret"
-                medlemskap={medlemskap}
-              />
+              {skalVises ? (
+                <OverstyringPanelDef
+                  vilkar={standardPanelProps.vilkar}
+                  vilkarKoder={VILKAR_KODER}
+                  panelTekstKode="Inngangsvilkar.Medlemskapsvilkaret"
+                  medlemskap={medlemskap}
+                />
+              ) : null}
             </PanelOverstyringProvider>
           )}
         </>

@@ -55,9 +55,6 @@ export const BehandlingPanelerIndex = () => {
     return <ErrorPage />;
   }
 
-  const arbeidsgivere = notEmpty(arbeidsgivereOversiktQuery.data).arbeidsgivere;
-  const personoversikt = notEmpty(behandlingPersonoversiktQuery.data);
-
   const erTilbakekrevingsbehandling = erTilbakekreving(behandling.type);
 
   const query = parseQueryString(location.search);
@@ -79,8 +76,8 @@ export const BehandlingPanelerIndex = () => {
             <ForeldrepengerPaneler
               valgtProsessSteg={query['punkt']}
               valgtFaktaSteg={query['fakta']}
-              arbeidsgivere={arbeidsgivere}
-              personoversikt={personoversikt}
+              arbeidsgivere={notEmpty(arbeidsgivereOversiktQuery.data).arbeidsgivere}
+              personoversikt={notEmpty(behandlingPersonoversiktQuery.data)}
             />
           </ErrorBoundary>
         </Suspense>
@@ -91,8 +88,8 @@ export const BehandlingPanelerIndex = () => {
             <SvangerskapspengerPaneler
               valgtProsessSteg={query['punkt']}
               valgtFaktaSteg={query['fakta']}
-              arbeidsgivere={arbeidsgivere}
-              personoversikt={personoversikt}
+              arbeidsgivere={notEmpty(arbeidsgivereOversiktQuery.data).arbeidsgivere}
+              personoversikt={notEmpty(behandlingPersonoversiktQuery.data)}
             />
           </ErrorBoundary>
         </Suspense>
@@ -103,8 +100,8 @@ export const BehandlingPanelerIndex = () => {
             <EngangsstonadPaneler
               valgtProsessSteg={query['punkt']}
               valgtFaktaSteg={query['fakta']}
-              arbeidsgivere={arbeidsgivere}
-              personoversikt={personoversikt}
+              arbeidsgivere={notEmpty(arbeidsgivereOversiktQuery.data).arbeidsgivere}
+              personoversikt={notEmpty(behandlingPersonoversiktQuery.data)}
             />
           </ErrorBoundary>
         </Suspense>

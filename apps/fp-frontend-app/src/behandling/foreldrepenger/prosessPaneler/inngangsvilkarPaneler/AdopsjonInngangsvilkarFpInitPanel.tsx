@@ -33,7 +33,7 @@ export const AdopsjonInngangsvilkarFpInitPanel = (props: InngangsvilkarPanelInit
       standardPanelProps={standardPanelProps}
       inngangsvilkarPanelKode="ADOPSJON"
       hentInngangsvilkarPanelTekst={intl.formatMessage({ id: 'SRBVilkarForm.VurderSammeBarn' })}
-      renderPanel={({ erOverstyrt, toggleOverstyring }) => (
+      renderPanel={({ skalVises, erOverstyrt, toggleOverstyring }) => (
         <>
           {standardPanelProps.aksjonspunkter.length === 0 && (
             <PanelOverstyringProvider
@@ -45,14 +45,16 @@ export const AdopsjonInngangsvilkarFpInitPanel = (props: InngangsvilkarPanelInit
               }
               toggleOverstyring={toggleOverstyring}
             >
-              <OverstyringPanelDef
-                vilkar={standardPanelProps.vilkar}
-                vilkarKoder={VILKAR_KODER}
-                panelTekstKode="Inngangsvilkar.Adopsjonsvilkaret"
-              />
+              {skalVises ? (
+                <OverstyringPanelDef
+                  vilkar={standardPanelProps.vilkar}
+                  vilkarKoder={VILKAR_KODER}
+                  panelTekstKode="Inngangsvilkar.Adopsjonsvilkaret"
+                />
+              ) : null}
             </PanelOverstyringProvider>
           )}
-          {standardPanelProps.aksjonspunkter.length > 0 && (
+          {skalVises && standardPanelProps.aksjonspunkter.length > 0 && (
             <AdopsjonVilkarProsessIndex
               status={standardPanelProps.status}
               readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
