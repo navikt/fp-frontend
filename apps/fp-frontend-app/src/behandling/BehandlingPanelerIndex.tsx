@@ -7,6 +7,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { ErrorPage } from '@navikt/fp-sak-infosider';
+import { notEmpty } from '@navikt/fp-utils';
 
 import { ErrorBoundary } from '../app/ErrorBoundary';
 import { useBehandlingApi } from '../data/behandlingApi';
@@ -54,8 +55,8 @@ export const BehandlingPanelerIndex = () => {
     return <ErrorPage />;
   }
 
-  const arbeidsgivere = arbeidsgivereOversiktQuery.data?.arbeidsgivere;
-  const personoversikt = behandlingPersonoversiktQuery.data;
+  const arbeidsgivere = notEmpty(arbeidsgivereOversiktQuery.data).arbeidsgivere;
+  const personoversikt = notEmpty(behandlingPersonoversiktQuery.data);
 
   const erTilbakekrevingsbehandling = erTilbakekreving(behandling.type);
 
