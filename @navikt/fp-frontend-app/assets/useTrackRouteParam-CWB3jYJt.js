@@ -1,1 +1,0 @@
-import{v as o}from"./index.es-z2KRwyMl.js";import{e as t,f as p}from"./withPanelData-DwrBBCSV.js";const u={paramName:"",parse:e=>e,isQueryParam:!1},c=(e,r,a)=>{const s=a.isQueryParam?o(r.search):e;return a.paramName&&a.parse?a.parse(s[a.paramName]):void 0};function f(e){const r={...u,...e},a=t(),s=p(),m=c(s,a,r);return{location:a,selected:m}}export{f as u};
