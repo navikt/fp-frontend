@@ -127,7 +127,7 @@ interface Props {
  *
  * Viser opp data fra valgt periode i tilkjent ytelse-tidslinjen
  */
-export const TilkjentYtelseTimeLineData = ({
+export const TilkjentYtelseTimelineData = ({
   selectedItemData,
   callbackForward,
   callbackBackward,
@@ -253,5 +253,3 @@ export const TilkjentYtelseTimeLineData = ({
     </Panel>
   );
 };
-
-export default TilkjentYtelseTimeLineData;

@@ -1,10 +1,10 @@
 import pluginJs from '@eslint/js';
 import eslintConfigPrettier from 'eslint-config-prettier';
+import importPlugin from 'eslint-plugin-import';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import pluginReact from 'eslint-plugin-react';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import vitest from 'eslint-plugin-vitest';
-import importPlugin from 'eslint-plugin-import';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
@@ -50,6 +50,25 @@ export default [
       'jsx-a11y/no-autofocus': OFF,
       'import/no-duplicates': ERROR,
       'react/react-in-jsx-scope': OFF,
+      '@typescript-eslint/no-restricted-types': [
+        'error',
+        {
+          types: {
+            'React.FC': {
+              message: 'Useless and has some drawbacks, see https://github.com/facebook/create-react-app/pull/8177',
+            },
+            FC: {
+              message: 'Useless and has some drawbacks, see https://github.com/facebook/create-react-app/pull/8177',
+            },
+            'React.FunctionComponent': {
+              message: 'Useless and has some drawbacks, see https://github.com/facebook/create-react-app/pull/8177',
+            },
+            FunctionComponent: {
+              message: 'Useless and has some drawbacks, see https://github.com/facebook/create-react-app/pull/8177',
+            },
+          },
+        },
+      ],
 
       // Note: you must disable the base rule as it can report incorrect errors
       'no-use-before-define': OFF,
@@ -70,6 +89,12 @@ export default [
           groups: [['^react'], ['^@?\\w'], ['^@navikt/fp-*'], ['@/(.*)'], ['^[./]'], ['./*.module.css'], ['./*.json']],
         },
       ],
+    },
+  },
+  {
+    ignores: ['**/*.stories.tsx', 'eslint.config.mjs'],
+    rules: {
+      'import/no-default-export': ERROR,
     },
   },
 ];
