@@ -5,6 +5,9 @@
   "license": "MIT",
   "private": true,
   "type": "module",
+  "exports": {
+    ".": "./index.html"
+  },
   "scripts": {
     "test": "vitest",
     "test:watch": "vitest --watch=true",
