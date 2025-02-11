@@ -45,7 +45,7 @@ export const AdopsjonInngangsvilkarInitPanel = (props: InngangsvilkarPanelInitPr
       vilkarKoder={VILKAR_KODER}
       inngangsvilkarPanelKode="ADOPSJON"
       hentInngangsvilkarPanelTekst={hentAksjonspunktTekst(intl, standardPanelProps.aksjonspunkter)}
-      renderPanel={({ erOverstyrt, toggleOverstyring }) => (
+      renderPanel={({ skalVises, erOverstyrt, toggleOverstyring }) => (
         <>
           {standardPanelProps.aksjonspunkter.length === 0 && (
             <PanelOverstyringProvider
@@ -57,14 +57,16 @@ export const AdopsjonInngangsvilkarInitPanel = (props: InngangsvilkarPanelInitPr
               }
               toggleOverstyring={toggleOverstyring}
             >
-              <OverstyringPanelDef
-                vilkar={standardPanelProps.vilkar}
-                vilkarKoder={VILKAR_KODER}
-                panelTekstKode="Inngangsvilkar.Adopsjonsvilkaret"
-              />
+              {skalVises ? (
+                <OverstyringPanelDef
+                  vilkar={standardPanelProps.vilkar}
+                  vilkarKoder={VILKAR_KODER}
+                  panelTekstKode="Inngangsvilkar.Adopsjonsvilkaret"
+                />
+              ) : null}
             </PanelOverstyringProvider>
           )}
-          {standardPanelProps.aksjonspunkter.length > 0 && (
+          {skalVises && standardPanelProps.aksjonspunkter.length > 0 && (
             <AdopsjonVilkarProsessIndex
               readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
               status={standardPanelProps.status}

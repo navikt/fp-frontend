@@ -75,7 +75,7 @@ const createInitialValues = (
   }
   return {
     ...felles,
-    ...VilkarResultPicker.buildInitialValues(aksjonspunkter, status, behandlingsresultat),
+    ...VilkarResultPicker.buildInitialValues(aksjonspunkt ? [aksjonspunkt] : [], status, behandlingsresultat),
   };
 };
 
@@ -138,14 +138,13 @@ export const VilkarresultatMedOverstyringForm = ({
   medlemskapManuellBehandlingResultat,
   status,
 }: Props) => {
-  const { aksjonspunkterForPanel, behandling, fagsak, submitCallback, alleMerknaderFraBeslutter } =
-    usePanelDataContext<OverstyringVilkår>();
+  const { behandling, fagsak, submitCallback, alleMerknaderFraBeslutter } = usePanelDataContext<OverstyringVilkår>();
 
   const { erOverstyrt, toggleOverstyring, overstyringApKode, overrideReadOnly, kanOverstyreAccess } =
     usePanelOverstyring();
 
   const initialValues = createInitialValues(
-    aksjonspunkterForPanel,
+    behandling.aksjonspunkt,
     status,
     overstyringApKode,
     behandling.behandlingsresultat,
@@ -166,7 +165,7 @@ export const VilkarresultatMedOverstyringForm = ({
 
   const erVilkarOk = formMethods.watch('erVilkarOk');
 
-  const aksjonspunkt = aksjonspunkterForPanel.find(ap => ap.definisjon === overstyringApKode);
+  const aksjonspunkt = behandling.aksjonspunkt.find(ap => ap.definisjon === overstyringApKode);
   const hasAksjonspunkt = aksjonspunkt !== undefined;
   const isSolvable =
     aksjonspunkt !== undefined
@@ -215,7 +214,7 @@ export const VilkarresultatMedOverstyringForm = ({
               </BodyShort>
             )}
             {originalErVilkarOk !== undefined &&
-              !isHidden(kanOverstyreAccess.isEnabled, aksjonspunkterForPanel, overstyringApKode) && (
+              !isHidden(kanOverstyreAccess.isEnabled, aksjonspunkt ? [aksjonspunkt] : [], overstyringApKode) && (
                 <OverstyringKnapp onClick={togglePa} erOverstyrt={erOverstyrt || overrideReadOnly} />
               )}
           </HStack>
@@ -230,9 +229,9 @@ export const VilkarresultatMedOverstyringForm = ({
             isSubmitting={formMethods.formState.isSubmitting}
             isPristine={!formMethods.formState.isDirty}
             toggleAv={toggleAv}
-            erIkkeGodkjentAvBeslutter={aksjonspunkterForPanel.some(
-              a => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted,
-            )}
+            erIkkeGodkjentAvBeslutter={
+              aksjonspunkt ? !!alleMerknaderFraBeslutter[aksjonspunkt.definisjon]?.notAccepted : false
+            }
           >
             {erOverstyringAvMedlemskap(overstyringApKode) ? (
               <MedlemskapVurderinger

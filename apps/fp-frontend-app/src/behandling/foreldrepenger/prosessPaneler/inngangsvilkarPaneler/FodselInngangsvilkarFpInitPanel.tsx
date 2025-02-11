@@ -33,7 +33,7 @@ export const FodselInngangsvilkarFpInitPanel = (props: InngangsvilkarPanelInitPr
       vilkarKoder={VILKAR_KODER}
       inngangsvilkarPanelKode="FODSEL"
       hentInngangsvilkarPanelTekst={intl.formatMessage({ id: 'SRBVilkarForm.VurderSammeBarn' })}
-      renderPanel={({ erOverstyrt, toggleOverstyring }) => (
+      renderPanel={({ skalVises, erOverstyrt, toggleOverstyring }) => (
         <>
           {standardPanelProps.aksjonspunkter.length === 0 && (
             <PanelOverstyringProvider
@@ -49,14 +49,16 @@ export const FodselInngangsvilkarFpInitPanel = (props: InngangsvilkarPanelInitPr
               }
               toggleOverstyring={toggleOverstyring}
             >
-              <OverstyringPanelDef
-                vilkar={standardPanelProps.vilkar}
-                vilkarKoder={VILKAR_KODER}
-                panelTekstKode="Inngangsvilkar.Fodselsvilkaret"
-              />
+              {skalVises ? (
+                <OverstyringPanelDef
+                  vilkar={standardPanelProps.vilkar}
+                  vilkarKoder={VILKAR_KODER}
+                  panelTekstKode="Inngangsvilkar.Fodselsvilkaret"
+                />
+              ) : null}
             </PanelOverstyringProvider>
           )}
-          {standardPanelProps.aksjonspunkter.length > 0 && (
+          {skalVises && standardPanelProps.aksjonspunkter.length > 0 && (
             <FodselVilkarProsessIndex
               ytelseTypeKode={FagsakYtelseType.FORELDREPENGER}
               status={standardPanelProps.status}

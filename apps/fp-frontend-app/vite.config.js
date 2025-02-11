@@ -14,13 +14,10 @@ export default defineConfig({
       localsConvention: 'camelCase',
     },
   },
-  define: {
-    'process.env': process.env,
-  },
   server: {
     port: 9010,
     cors: {
-        origin: ["https://fpsak.intern.dev.nav.no", "https://fpsak.intern.nav.no", "http://localhost:9000"],
+      origin: ['https://fpsak.intern.dev.nav.no', 'https://fpsak.intern.nav.no', 'http://localhost:9000'],
     },
     proxy: {
       '/fpsak/api': {
