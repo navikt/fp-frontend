@@ -40,6 +40,6 @@ describe('FagsakIndex', () => {
     expect(await screen.findByText('Foreldrepenger')).toBeInTheDocument();
     expect(await screen.findByText('352018689 - Under behandling')).toBeInTheDocument();
 
-    expect(screen.queryByLabelText('Skjul sidepanel')).not.toBeInTheDocument();
+    expect(screen.queryByLabelText('Vis sidepanel')).not.toBeInTheDocument();
   });
 });

@@ -23,19 +23,20 @@
 }
 
 .rightColumn {
-  min-width: 45rem;
+  height: 100vh;
   opacity: 1;
-  transition: opacity 0.3s cubic-bezier(0.55, 0.06, 0.68, 0.19), width 0.3s ease;
-  width: 45rem;
+  transition: opacity 0.3s cubic-bezier(0.55, 0.06, 0.68, 0.19), width 0.3s ease, min-width 0.3s ease;
 }
 
 .rightColumn.hide {
+  min-width: 0;
   opacity: 0;
   visibility: hidden;
   width: 0;
 }
 
 .rightColumn.show {
+  min-width: 45rem;
   opacity: 1;
   width: 45rem;
 }
@@ -47,7 +48,7 @@
 }
 
 @media all and (max-width: 1569px) {
-  .rightColumn {
+  .rightColumn.show {
     min-width: 35rem;
     width: 35rem;
   }
@@ -59,7 +60,7 @@
     flex-flow: row wrap;
   }
 
-  .rightColumn {
+  .rightColumn.show {
     margin-left: 0;
     width: 100%;
   }
