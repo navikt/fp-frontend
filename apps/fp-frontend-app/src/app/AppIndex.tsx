@@ -117,6 +117,9 @@ const createQueryClient = (errorHandler: (error: Error) => void) =>
       queries: {
         retry: import.meta.env.MODE === 'test' ? false : 3,
       },
+      mutations: {
+        retry: import.meta.env.MODE === 'test' ? false : 3,
+      },
     },
     queryCache: new QueryCache({
       onError: errorHandler,

@@ -15,6 +15,7 @@ import type { SaksbehandlereOgSaksbehandlerGrupper } from '../typer/saksbehandle
 import type { SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType';
 
 const kyExtended = ky.extend({
+  retry: 0,
   hooks: {
     beforeRequest: [
       request => {
