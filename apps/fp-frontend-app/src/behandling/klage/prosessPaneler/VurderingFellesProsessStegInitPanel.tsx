@@ -9,6 +9,7 @@ import { AksjonspunktKode, KlageVurdering as KlageVurderingKodeverk } from '@nav
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { type AksjonspunktVerdier, KlagevurderingProsessIndex } from '@navikt/fp-prosess-klagevurdering';
 import type { ForhåndsvisMeldingParams } from '@navikt/fp-types';
+import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
@@ -111,10 +112,11 @@ const getLagringSideeffekter =
     setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void,
     oppdaterProsessStegOgFaktaPanelIUrl?: (punktnavn?: string, faktanavn?: string) => void,
   ) =>
-  (aksjonspunktModels: { kode: string; klageVurdering?: string }[]) => {
-    const skalByttTilKlageinstans = aksjonspunktModels.some(
+  (aksjonspunkter: ProsessAksjonspunkt[]) => {
+    const skalByttTilKlageinstans = aksjonspunkter.some(
       apValue =>
         apValue.kode === AksjonspunktKode.BEHANDLE_KLAGE_NFP &&
+        'klageVurdering' in apValue &&
         apValue.klageVurdering === KlageVurderingKodeverk.STADFESTE_YTELSESVEDTAK,
     );
 

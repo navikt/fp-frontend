@@ -21,7 +21,7 @@ export const DEFAULT_PROSESS_STEG_KODE = 'default';
 
 const getBekreftAksjonspunktProsessCallback =
   (
-    lagringSideEffectsCallback: (aksjonspunktModeller: any) => () => void,
+    lagringSideEffectsCallback: (aksjonspunkter: ProsessAksjonspunkt[]) => () => void,
     fagsak: Fagsak,
     behandling: Behandling,
     aksjonspunkter: Aksjonspunkt[],
@@ -95,7 +95,7 @@ const finnStatus = (vilkar: Vilkar[], aksjonspunkter: Aksjonspunkt[]) => {
 export const useStandardProsessPanelProps = (
   aksjonspunktKoder?: string[],
   vilkarKoder?: VilkarType[],
-  lagringSideEffekter?: (aksjonspunktModeller: any) => () => void,
+  lagringSideEffekter?: (aksjonspunkter: ProsessAksjonspunkt[]) => () => void,
 ): StandardProsessPanelProps => {
   const {
     behandling,

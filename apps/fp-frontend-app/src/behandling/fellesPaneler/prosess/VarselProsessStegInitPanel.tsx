@@ -10,6 +10,7 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { VarselOmRevurderingProsessIndex } from '@navikt/fp-prosess-varsel-om-revurdering';
 import type { ForhåndsvisMeldingParams } from '@navikt/fp-types';
+import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
@@ -19,12 +20,18 @@ import type { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitP
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const getLagringSideeffekter =
-  (setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void, opneSokeside: () => void) => () => {
-    setSkalOppdatereEtterBekreftelseAvAp(false);
+  (setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void, opneSokeside: () => void) =>
+  (aksjonspunkter: ProsessAksjonspunkt[]) => {
+    const skalÅpneSøkeside =
+      aksjonspunkter.length > 0 && 'sendVarsel' in aksjonspunkter[0] && aksjonspunkter[0].sendVarsel;
+
+    setSkalOppdatereEtterBekreftelseAvAp(!skalÅpneSøkeside);
 
     // Returner funksjon som blir kjørt etter lagring av aksjonspunkt
     return () => {
-      opneSokeside();
+      if (skalÅpneSøkeside) {
+        opneSokeside();
+      }
     };
   };
 
