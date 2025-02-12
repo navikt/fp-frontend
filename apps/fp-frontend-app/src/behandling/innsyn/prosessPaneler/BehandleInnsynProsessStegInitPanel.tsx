@@ -19,11 +19,11 @@ const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_INNSYN];
 export const BehandleInnsynProsessStegInitPanel = (props: ProsessPanelInitProps) => {
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
 
-  const { behandling, fagsak } = use(BehandlingDataContext);
+  const { behandling } = use(BehandlingDataContext);
 
   const api = useBehandlingApi(behandling);
 
-  const { data: innsynDokumenter } = useQuery(api.innsyn.innsynDokumenterOptions(fagsak, behandling));
+  const { data: innsynDokumenter } = useQuery(api.innsyn.innsynDokumenterOptions(behandling));
   const { data: innsyn, isFetching } = useQuery(api.innsyn.innsynOptions(behandling));
 
   return (
