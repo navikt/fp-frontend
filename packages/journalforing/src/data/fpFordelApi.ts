@@ -10,6 +10,7 @@ import type { ReserverOppgaveType } from '../typer/reserverOppgaveType';
 import type { SaksnummerType } from '../typer/saksnummerTsType';
 
 const kyExtended = ky.extend({
+  retry: 0,
   hooks: {
     beforeRequest: [
       request => {
