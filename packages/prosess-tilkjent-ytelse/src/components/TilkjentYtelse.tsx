@@ -26,7 +26,7 @@ import type {
 } from '@navikt/fp-types';
 import { KjønnkodeEnum } from '@navikt/fp-types';
 
-import TilkjentYtelseTimelineData from './TilkjentYtelseTimelineData';
+import { TilkjentYtelseTimelineData } from './TilkjentYtelseTimelineData';
 
 import styles from './tilkjentYtelse.module.css';
 

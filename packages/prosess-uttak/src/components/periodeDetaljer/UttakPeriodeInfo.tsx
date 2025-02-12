@@ -297,5 +297,3 @@ export const UttakPeriodeInfo = ({
     </div>
   );
 };
-
-export default UttakPeriodeInfo;

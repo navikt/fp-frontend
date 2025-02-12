@@ -102,4 +102,6 @@ const ForeldrepengerPaneler = ({ valgtProsessSteg, valgtFaktaSteg, arbeidsgivere
   );
 };
 
+// Default export grunna React.lazy
+// eslint-disable-next-line import/no-default-export
 export default ForeldrepengerPaneler;
