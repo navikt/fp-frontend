@@ -4,5 +4,5 @@
 }
 
 .expansionContentInner {
-  margin: calc(0rem - var(--a-spacing-4)) calc(0rem - var(--a-spacing-2) - 3rem);
+  margin: calc(0rem - var(--a-spacing-4)) calc(0rem - var(--a-spacing-2));
 }
