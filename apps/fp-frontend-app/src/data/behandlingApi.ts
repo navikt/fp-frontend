@@ -22,7 +22,6 @@ import type {
   BeregningsresultatTilbakekreving,
   Dokument,
   DokumentasjonVurderingBehov,
-  Fagsak,
   FaktaArbeidsforhold,
   FamilieHendelse,
   FamilieHendelseSamling,
@@ -225,18 +224,10 @@ const getKlageVurderingOptions = (links: ApiLink[]) => (behandling: Behandling) 
     staleTime: Infinity,
   });
 
-//TODO (TOR) Denne lenka får med uuid fra backend, men treng saksnummer. Sett heller saksnummer backend så slepp ein det her
-const getInnsynDokumenterOptions = (links: ApiLink[]) => (fagsak: Fagsak, behandling: Behandling) =>
+const getInnsynDokumenterOptions = (links: ApiLink[]) => (behandling: Behandling) =>
   queryOptions({
-    queryKey: [BehandlingRel.INNSYN_DOKUMENTER, fagsak.saksnummer, behandling.uuid, behandling.versjon],
-    queryFn: () =>
-      kyExtended
-        .get(getUrlFromRel('INNSYN_DOKUMENTER', links), {
-          searchParams: {
-            saksnummer: fagsak.saksnummer,
-          },
-        })
-        .json<Dokument[]>(),
+    queryKey: [BehandlingRel.INNSYN_DOKUMENTER, behandling.uuid, behandling.versjon],
+    queryFn: () => kyExtended.get(getUrlFromRel('INNSYN_DOKUMENTER', links)).json<Dokument[]>(),
     staleTime: Infinity,
   });
 
