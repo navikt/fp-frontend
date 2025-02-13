@@ -30,7 +30,7 @@ interface Props {
   hentOgSettBehandling: () => void;
 }
 
-const finnFrist = (behandling : BehandlingAppKontekst) =>
+const finnFristFraBehandling = (behandling : BehandlingAppKontekst) =>
   behandling.behandlingPaaVent ? behandling.fristBehandlingPåVent || behandling.fristBehandlingPaaVent : undefined;
 
 /**
@@ -135,7 +135,7 @@ export const MeldingIndex = ({
           lukkCallback={handleSubmitFromModal}
           ventearsak={VenteArsakType.AVV_DOK}
           ventearsaker={ventearsaker}
-          frist={finnFrist(valgtBehandling)}
+          frist={finnFristFraBehandling(valgtBehandling)}
         />
       )}
     </>

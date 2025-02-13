@@ -9,7 +9,7 @@ import type { KodeverkMedNavn } from '@navikt/fp-types';
 
 import styles from './settPaVentReadOnlyModal.module.css';
 
-const finnFrist = (): string => {
+const lagFramtidigFrist = (): string => {
   const date = dayjs().toDate();
   date.setDate(date.getDate() + 28);
   return dayjs(date).format(ISO_DATE_FORMAT);
@@ -52,7 +52,7 @@ export const SettPaVentReadOnlyModal = ({ lukkCallback, ventearsaker, ventearsak
               <FormattedMessage id="SettPaVentReadOnlyModal.Frist" />
             </Label>
             <BodyShort>
-              <DateLabel dateString={frist || finnFrist()} />
+              <DateLabel dateString={frist || lagFramtidigFrist()} />
             </BodyShort>
           </VStack>
         </HStack>
