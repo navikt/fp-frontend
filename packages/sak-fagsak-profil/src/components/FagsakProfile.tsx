@@ -1,4 +1,5 @@
 import { useIntl } from 'react-intl';
+import { useMediaQuery } from 'react-responsive';
 
 import { BodyShort, Heading, HStack, Tag, Tooltip, VStack } from '@navikt/ds-react';
 
@@ -39,11 +40,12 @@ export const FagsakProfile = ({
   visSideMeny,
 }: Props) => {
   const intl = useIntl();
+  const isWrappedUnder = useMediaQuery({ maxWidth: 1408 });
 
   return (
     <VStack gap="4">
       <HStack gap="4">
-        <SidePanelProfileKnapp toggleSideMeny={toggleSideMeny} visSideMeny={visSideMeny} />
+        {!isWrappedUnder && <SidePanelProfileKnapp toggleSideMeny={toggleSideMeny} visSideMeny={visSideMeny} />}
         <Heading size="medium">{fagsakYtelseType.navn}</Heading>
         {visSakDekningsgrad(fagsakYtelseType.kode, dekningsgrad) && (
           <Tooltip
