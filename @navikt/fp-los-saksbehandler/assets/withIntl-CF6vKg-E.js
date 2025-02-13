@@ -1,1 +1,0 @@
-import{j as o}from"./jsx-runtime-CLpGMVip.js";import{e as n,P as a,f as s}from"./nb_NO-BtNau3tW.js";const m=t=>{const r=n({locale:"nb-NO",messages:t},s());return e=>o.jsx(a,{value:r,children:e()})};export{m as g};
