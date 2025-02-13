@@ -78,11 +78,7 @@ const VisittkortMedKnapp = ({
   return (
     <>
       <FloatRight>
-        <SidePanelKnapp
-          toggleSideMeny={toggleSideMeny}
-          visSideMeny={visSideMeny}
-          style={{ marginTop: '18px', backgroundColor: 'white' }}
-        />
+        <SidePanelKnapp toggleSideMeny={toggleSideMeny} visSideMeny={visSideMeny} />
       </FloatRight>
       {visittkortContent()}
     </>
