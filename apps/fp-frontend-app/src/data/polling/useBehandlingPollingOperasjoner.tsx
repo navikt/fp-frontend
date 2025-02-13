@@ -2,9 +2,14 @@ import { useMutation } from '@tanstack/react-query';
 
 import type { Behandling } from '@navikt/fp-types';
 
-import { type AksjonspunktArgs, type OverstyrteAksjonspunktArgs, useBehandlingApi } from '../behandlingApi';
-import { useRequestPendingContext } from '../polling/RequestPendingContext';
+import {
+  type AksjonspunktArgs,
+  type OpprettVergeArgs,
+  type OverstyrteAksjonspunktArgs,
+  useBehandlingApi,
+} from '../behandlingApi';
 import { doPolling, useTaskStatusChecker } from './pollingUtils';
+import { useRequestPendingContext } from './RequestPendingContext.tsx';
 
 export const useBehandlingPollingOperasjoner = (
   behandling: Behandling,
@@ -15,11 +20,8 @@ export const useBehandlingPollingOperasjoner = (
   const { setIsRequestPending } = useRequestPendingContext();
 
   const { mutate: opprettVerge } = useMutation({
-    mutationFn: async () => {
-      const response = await pollingApi.opprettVerge({
-        behandlingUuid: behandling.uuid,
-        behandlingVersjon: behandling.versjon,
-      });
+    mutationFn: async (values: OpprettVergeArgs) => {
+      const response = await pollingApi.opprettVerge(values);
       return doPolling(response, setIsRequestPending);
     },
     onSuccess: onBehandlingSuccess,
@@ -27,10 +29,7 @@ export const useBehandlingPollingOperasjoner = (
 
   const { mutate: fjernVerge } = useMutation({
     mutationFn: async () => {
-      const response = await pollingApi.fjernVerge({
-        behandlingUuid: behandling.uuid,
-        behandlingVersjon: behandling.versjon,
-      });
+      const response = await pollingApi.fjernVerge();
       return doPolling(response, setIsRequestPending);
     },
     onSuccess: onBehandlingSuccess,

@@ -98,6 +98,15 @@ export type BeregnBeløpParams = {
   perioder: PeriodeMedBelop[];
 };
 
+export type OpprettVergeArgs = {
+  navn: string;
+  fnr?: string;
+  gyldigFom: string;
+  gyldigTom: string;
+  vergeType: string;
+  organisasjonsnummer?: string;
+};
+
 const kyExtended = ky.extend({
   retry: 0,
   hooks: {
@@ -139,8 +148,9 @@ export const BehandlingRel = {
   HENLEGG_BEHANDLING: 'henlegg-behandling',
   BEHANDLING_ON_HOLD: 'sett-behandling-pa-vent',
   RESUME_BEHANDLING: 'gjenoppta-behandling',
-  VERGE_OPPRETT: 'opprett-verge',
-  VERGE_FJERN: 'fjern-verge',
+  VERGE_OPPRETT: 'verge-opprett',
+  VERGE_FJERN: 'verge-fjern',
+  VERGE_HENT: 'verge-hent',
   SAVE_AKSJONSPUNKT: 'lagre-aksjonspunkter',
   SAVE_OVERSTYRT_AKSJONSPUNKT: 'lagre-overstyr-aksjonspunkter',
   ARBEID_OG_INNTEKT_REGISTRER_ARBEIDSFORHOLD: 'arbeidsforhold-inntektsmelding-registrer',
@@ -593,14 +603,18 @@ const getFortsettBehandling = (links: ApiLink[]) => (params: { behandlingUuid: s
     json: params,
   });
 
-const getOpprettVerge = (links: ApiLink[]) => (params: { behandlingUuid: string; behandlingVersjon: number }) =>
+const getOpprettVerge = (links: ApiLink[]) => (params: OpprettVergeArgs) =>
   kyExtended.post<Behandling>(getUrlFromRel('VERGE_OPPRETT', links), {
     json: params,
   });
 
-const getFjernVerge = (links: ApiLink[]) => (params: { behandlingUuid: string; behandlingVersjon: number }) =>
-  kyExtended.post<Behandling>(getUrlFromRel('VERGE_FJERN', links), {
-    json: params,
+const getFjernVerge = (links: ApiLink[]) => () => kyExtended.delete<Behandling>(getUrlFromRel('VERGE_FJERN', links));
+
+const getVerge = (links: ApiLink[]) => (behandling: Behandling) =>
+  queryOptions({
+    queryKey: [BehandlingRel.VERGE_HENT, behandling.uuid, behandling.versjon],
+    queryFn: () => kyExtended.get(getUrlFromRel('VERGE_HENT', links)).json<Verge>(),
+    staleTime: Infinity,
   });
 
 const getLagreAksjonspunkt = (links: ApiLink[]) => (params: AksjonspunktArgs) =>
@@ -706,6 +720,7 @@ export const useBehandlingApi = (behandling: Behandling) => {
     inntektArbeidYtelseOptions: getInntektArbeidYtelseOptions(links),
     utlandDokStatusOptions: getUtlandDokStatusOptions(links),
     vergeOptions: getVergeOptions(links),
+    verge: getVerge(links),
     anke: {
       ankeVurderingOptions: getAnkeVurderingOptions(links),
     },
