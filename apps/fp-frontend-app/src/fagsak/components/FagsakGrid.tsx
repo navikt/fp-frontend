@@ -1,6 +1,10 @@
 import type { ReactNode } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
+import { FloatRight } from '@navikt/ft-ui-komponenter';
+
+import { SidePanelKnapp } from './SidePanelKnapp';
+
 import styles from './fagsakGrid.module.css';
 
 interface Props {
@@ -8,6 +12,8 @@ interface Props {
   profileAndNavigationContent: ReactNode;
   supportContent: ReactNode;
   visittkortContent: () => ReactNode;
+  visSideMeny: boolean;
+  toggleSideMeny: () => void;
 }
 
 /**
@@ -20,22 +26,60 @@ export const FagsakGrid = ({
   profileAndNavigationContent,
   supportContent,
   visittkortContent,
+  visSideMeny,
+  toggleSideMeny,
 }: Props) => {
   const isSmallScreen = useMediaQuery({ maxWidth: 1701 });
   const isBigScreen = useMediaQuery({ minWidth: 1702 });
+  const isWrappedUnder = useMediaQuery({ maxWidth: 1408 });
   return (
     <>
-      {isSmallScreen && visittkortContent()}
+      {isSmallScreen && (
+        <VisittkortMedKnapp
+          visittkortContent={visittkortContent}
+          visSideMeny={visSideMeny}
+          toggleSideMeny={toggleSideMeny}
+        />
+      )}
       <div className={styles.gridContainer}>
         <div className={styles.leftColumn}>
-          {isBigScreen && visittkortContent()}
+          {isBigScreen && (
+            <VisittkortMedKnapp
+              visittkortContent={visittkortContent}
+              visSideMeny={visSideMeny}
+              toggleSideMeny={toggleSideMeny}
+            />
+          )}
           {behandlingContent}
         </div>
-        <div className={styles.rightColumn}>
+        <div className={visSideMeny || isWrappedUnder ? styles.rightColumn : styles.rightColumnHidden}>
           <div>{profileAndNavigationContent}</div>
           <div>{supportContent}</div>
         </div>
       </div>
+    </>
+  );
+};
+
+const VisittkortMedKnapp = ({
+  visittkortContent,
+  visSideMeny,
+  toggleSideMeny,
+}: {
+  visittkortContent: () => ReactNode;
+  visSideMeny: boolean;
+  toggleSideMeny: () => void;
+}) => {
+  const isWrappedUnder = useMediaQuery({ maxWidth: 1408 });
+  if (visSideMeny || isWrappedUnder) {
+    return visittkortContent();
+  }
+  return (
+    <>
+      <FloatRight>
+        <SidePanelKnapp toggleSideMeny={toggleSideMeny} visSideMeny={visSideMeny} />
+      </FloatRight>
+      {visittkortContent()}
     </>
   );
 };

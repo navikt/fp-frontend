@@ -59,6 +59,11 @@ export const FagsakIndex = () => {
     fagsakBehandling?.type === BehandlingType.TILBAKEKREVING_REVURDERING;
 
   const { hentOgSettBehandling } = useHentBehandling(erTilbakekreving, setBehandling, behandlingUuidFraUrl);
+  const [visSideMeny, setVisSideMeny] = useState(true);
+
+  const toggleSideMeny = () => {
+    setVisSideMeny(!visSideMeny);
+  };
 
   useEffect(() => {
     if (behandlingUuidFraUrl && fagsakBehandling) {
@@ -101,6 +106,8 @@ export const FagsakIndex = () => {
             />
           </Routes>
         }
+        visSideMeny={visSideMeny}
+        toggleSideMeny={toggleSideMeny}
         profileAndNavigationContent={
           <FagsakProfileIndex
             fagsakData={fagsakData}
@@ -108,6 +115,8 @@ export const FagsakIndex = () => {
             setBehandling={setBehandling}
             hentOgSettBehandling={hentOgSettBehandling}
             behandling={behandling}
+            visSideMeny={visSideMeny}
+            toggleSideMeny={toggleSideMeny}
           />
         }
         supportContent={

@@ -1,3 +1,4 @@
+import { action } from '@storybook/addon-actions';
 import type { Meta, ReactRenderer, StoryObj } from '@storybook/react';
 import type { DecoratorFunction } from 'storybook/internal/types';
 
@@ -33,5 +34,7 @@ export const Default: Story = {
     fagsakMarkeringTekster: ['Næring', 'Utland'],
     fagsakStatus: { kode: FagsakStatus.OPPRETTET, kodeverk: KodeverkType.FAGSAK_STATUS, navn: 'Opprettet' },
     dekningsgrad: 100,
+    toggleSideMeny: action('button-click'),
+    visSideMeny: true,
   },
 };

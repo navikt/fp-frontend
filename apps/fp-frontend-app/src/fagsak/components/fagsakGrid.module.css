@@ -1,6 +1,7 @@
 .gridContainer {
   display: flex;
   flex-flow: row nowrap;
+  overflow: hidden;
 }
 
 .leftColumn {
@@ -11,6 +12,15 @@
 .rightColumn {
   min-width: 45rem;
   width: 45rem;
+}
+
+.rightColumnHidden {
+  min-width: 0;
+  overflow: hidden;
+  transition: opacity 0.3s cubic-bezier(0.55, 0.06, 0.68, 0.19),
+  width 0.3s ease,
+  min-width 0.3s ease;
+  width: 0;
 }
 
 @media all and (max-width: 1569px) {
@@ -25,6 +35,7 @@
     display: flex;
     flex-flow: row wrap;
   }
+
   .rightColumn {
     margin-left: 0;
     width: 100%;
