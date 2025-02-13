@@ -2,9 +2,10 @@ import { useIntl } from 'react-intl';
 
 import { BodyShort, Heading, HStack, Tag, Tooltip, VStack } from '@navikt/ds-react';
 
-import { SidePanelKnapp } from '@navikt/fp-frontend-app/src/fagsak/components/SidePanelKnapp';
 import { FagsakYtelseType } from '@navikt/fp-kodeverk';
 import type { KodeverkMedNavn } from '@navikt/fp-types';
+
+import { SidePanelProfileKnapp } from './SidePanelProfileKnapp.tsx';
 
 const visSakDekningsgrad = (saksKode: string, dekningsgrad?: number): boolean => {
   const erForeldrepenger = saksKode === FagsakYtelseType.FORELDREPENGER;
@@ -35,14 +36,14 @@ export const FagsakProfile = ({
   dekningsgrad,
   fagsakMarkeringTekster,
   toggleSideMeny,
-  visSideMeny
+  visSideMeny,
 }: Props) => {
   const intl = useIntl();
 
   return (
     <VStack gap="4">
       <HStack gap="4">
-        <SidePanelKnapp toggleSideMeny={toggleSideMeny} visSideMeny={visSideMeny}/>
+        <SidePanelProfileKnapp toggleSideMeny={toggleSideMeny} visSideMeny={visSideMeny} />
         <Heading size="medium">{fagsakYtelseType.navn}</Heading>
         {visSakDekningsgrad(fagsakYtelseType.kode, dekningsgrad) && (
           <Tooltip

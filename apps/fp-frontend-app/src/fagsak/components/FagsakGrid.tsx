@@ -1,6 +1,8 @@
 import type { ReactNode } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
+import { FloatRight } from '@navikt/ft-ui-komponenter';
+
 import { SidePanelKnapp } from './SidePanelKnapp';
 
 import styles from './fagsakGrid.module.css';
@@ -28,37 +30,61 @@ export const FagsakGrid = ({
   toggleSideMeny,
 }: Props) => {
   const isSmallScreen = useMediaQuery({ maxWidth: 1701 });
+  const isBigScreen = useMediaQuery({ minWidth: 1702 });
+  const isWrappedUnder = useMediaQuery({ maxWidth: 1408 });
   return (
     <>
       {isSmallScreen && (
-        <div className={styles.leftColumnContainer}>
-          <div className={styles.leftColumnVisittContent}>{visittkortContent()}</div>
-          {!visSideMeny && (
-            <div className={styles.leftColumnSideMenyKnapp}>
-              <SidePanelKnapp toggleSideMeny={toggleSideMeny} visSideMeny={visSideMeny} style={{ marginTop: '18px' }} />
-            </div>
-          )}
-        </div>
+        <VisittkortMedKnapp
+          visittkortContent={visittkortContent}
+          visSideMeny={visSideMeny}
+          toggleSideMeny={toggleSideMeny}
+        />
       )}
       <div className={styles.gridContainer}>
         <div className={styles.leftColumn}>
-          {!isSmallScreen && (
-            <div className={styles.leftColumnContainer}>
-              <div className={styles.leftColumnVisittContent}>{visittkortContent()}</div>
-              {!visSideMeny && (
-                <div className={styles.leftColumnSideMenyKnapp}>
-                  <SidePanelKnapp toggleSideMeny={toggleSideMeny} visSideMeny={visSideMeny} style={{ marginTop: '18px' }} />
-                </div>
-              )}
-            </div>
+          {isBigScreen && (
+            <VisittkortMedKnapp
+              visittkortContent={visittkortContent}
+              visSideMeny={visSideMeny}
+              toggleSideMeny={toggleSideMeny}
+            />
           )}
           {behandlingContent}
         </div>
-          <div className={`${styles.rightColumn} ${visSideMeny ? styles.show : styles.hide}`}>
-            <div>{profileAndNavigationContent}</div>
-            <div>{supportContent}</div>
-          </div>
+        <div className={visSideMeny || isWrappedUnder ? styles.rightColumn : styles.rightColumnHidden}>
+          <div>{profileAndNavigationContent}</div>
+          <div>{supportContent}</div>
+        </div>
       </div>
+      ;
+    </>
+  );
+};
+
+const VisittkortMedKnapp = ({
+  visittkortContent,
+  visSideMeny,
+  toggleSideMeny,
+}: {
+  visittkortContent: () => ReactNode;
+  visSideMeny: boolean;
+  toggleSideMeny: () => void;
+}) => {
+  const isWrappedUnder = useMediaQuery({ maxWidth: 1408 });
+  if (visSideMeny || isWrappedUnder) {
+    return visittkortContent();
+  }
+  return (
+    <>
+      <FloatRight>
+        <SidePanelKnapp
+          toggleSideMeny={toggleSideMeny}
+          visSideMeny={visSideMeny}
+          style={{ marginTop: '18px', backgroundColor: 'white' }}
+        />
+      </FloatRight>
+      {visittkortContent()}
     </>
   );
 };
