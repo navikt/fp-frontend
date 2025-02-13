@@ -10,6 +10,7 @@ import type { Saksbehandler } from '../typer/saksbehandlerTsType';
 import type { Saksliste } from '../typer/sakslisteTsType';
 
 const kyExtended = ky.extend({
+  retry: 0,
   hooks: {
     beforeRequest: [
       request => {

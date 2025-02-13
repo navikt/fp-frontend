@@ -109,6 +109,16 @@ export const Dekorator = ({ queryStrings, setSiteHeight, crashMessage, hideError
   );
 };
 
+const addIfNotExists = (feilmeldinger: Feilmelding[], nyFeilmelding: Feilmelding) => {
+  if (
+    !feilmeldinger.some(
+      feil => feil.melding === nyFeilmelding.melding && feil.tilleggsInfo === nyFeilmelding.tilleggsInfo,
+    )
+  ) {
+    feilmeldinger.push(nyFeilmelding);
+  }
+};
+
 const formaterFeilmeldinger = (
   intl: IntlShape,
   alleFeilmeldinger: FpError[],
@@ -118,13 +128,13 @@ const formaterFeilmeldinger = (
   const feilmeldinger: Feilmelding[] = [];
 
   if (queryStringFeilmeldinger.errorcode) {
-    feilmeldinger.push({ melding: intl.formatMessage({ id: queryStringFeilmeldinger.errorcode }) });
+    addIfNotExists(feilmeldinger, { melding: intl.formatMessage({ id: queryStringFeilmeldinger.errorcode }) });
   }
   if (queryStringFeilmeldinger.errormessage) {
-    feilmeldinger.push({ melding: queryStringFeilmeldinger.errormessage });
+    addIfNotExists(feilmeldinger, { melding: queryStringFeilmeldinger.errormessage });
   }
   if (crashMessage) {
-    feilmeldinger.push({ melding: crashMessage });
+    addIfNotExists(feilmeldinger, { melding: crashMessage });
   }
 
   alleFeilmeldinger.forEach(feilmelding => {
@@ -132,13 +142,13 @@ const formaterFeilmeldinger = (
       case ErrorType.POLLING_HALTED_OR_DELAYED:
         if (feilmelding.status === ApiPollingStatus.HALTED) {
           const decoded = decodeHtmlEntity(feilmelding.message);
-          feilmeldinger.push({
+          addIfNotExists(feilmeldinger, {
             melding: intl.formatMessage({ id: 'Rest.ErrorMessage.General' }),
             tilleggsInfo: decoded ? parseErrorDetails(decoded) : undefined,
           });
         }
         if (feilmelding.status === ApiPollingStatus.DELAYED) {
-          feilmeldinger.push({
+          addIfNotExists(feilmeldinger, {
             melding: intl.formatMessage(
               { id: 'Rest.ErrorMessage.DownTime' },
               {
@@ -151,12 +161,12 @@ const formaterFeilmeldinger = (
         }
         break;
       case ErrorType.POLLING_TIMEOUT:
-        feilmeldinger.push({
+        addIfNotExists(feilmeldinger, {
           melding: intl.formatMessage({ id: 'Rest.ErrorMessage.PollingTimeout' }, { location: feilmelding.location }),
         });
         break;
       case ErrorType.REQUEST_GATEWAY_TIMEOUT_OR_NOT_FOUND:
-        feilmeldinger.push({
+        addIfNotExists(feilmeldinger, {
           melding: intl.formatMessage(
             { id: 'Rest.ErrorMessage.GatewayTimeoutOrNotFound' },
             {
@@ -170,7 +180,7 @@ const formaterFeilmeldinger = (
       case ErrorType.REQUEST_UNAUTHORIZED:
       case ErrorType.GENERAL_ERROR:
       default:
-        feilmeldinger.push({
+        addIfNotExists(feilmeldinger, {
           melding: feilmelding.message,
         });
     }

@@ -18,9 +18,9 @@ import type {
   PeriodeSokerAktivitet,
 } from '@navikt/fp-types';
 
-import { finnArbeidsforholdNavnOgProsentArbeid,UttakAktiviteterTabell } from './UttakAktiviteterTabell';
+import { finnArbeidsforholdNavnOgProsentArbeid, UttakAktiviteterTabell } from './UttakAktiviteterTabell';
 import type { UttakAktivitet, UttakAktivitetType } from './UttakAktivitetType';
-import UttakPeriodeInfo from './UttakPeriodeInfo';
+import { UttakPeriodeInfo } from './UttakPeriodeInfo';
 
 import styles from './uttakPeriodeForm.module.css';
 

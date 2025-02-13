@@ -79,4 +79,7 @@ const SvangerskapspengerPaneler = ({ valgtProsessSteg, valgtFaktaSteg, arbeidsgi
     />
   );
 };
+
+// Default export grunna React.lazy
+// eslint-disable-next-line import/no-default-export
 export default SvangerskapspengerPaneler;

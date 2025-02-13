@@ -100,6 +100,7 @@ export type BeregnBeløpParams = {
 };
 
 const kyExtended = ky.extend({
+  retry: 0,
   hooks: {
     beforeRequest: [
       request => {

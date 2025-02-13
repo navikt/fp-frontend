@@ -58,6 +58,7 @@ export type NyBehandlingParams = {
 } & FormValues;
 
 const kyExtended = ky.extend({
+  retry: 0,
   hooks: {
     beforeRequest: [
       request => {

@@ -16,6 +16,7 @@ import {
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { VedtakProsessIndex } from '@navikt/fp-prosess-vedtak';
 import type { Aksjonspunkt, Behandlingsresultat, ForhåndsvisMeldingParams, Vilkar } from '@navikt/fp-types';
+import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingApi';
 import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
@@ -196,13 +197,15 @@ const getLagringSideeffekter =
     toggleFatterVedtakModal: (skalFatterModal: boolean) => void,
     setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void,
   ) =>
-  (aksjonspunktModels: { kode: string; skalBrukeOverstyrendeFritekstBrev: boolean }[]) => {
+  (aksjonspunkter: ProsessAksjonspunkt[]) => {
     setSkalOppdatereEtterBekreftelseAvAp(false);
 
     // Returner funksjon som blir kjørt etter lagring av aksjonspunkt(er)
     return () => {
-      const skalTilTotrinnskontroll = aksjonspunktModels.some(
-        ap => ap.kode === AksjonspunktKode.FORESLA_VEDTAK || ap.skalBrukeOverstyrendeFritekstBrev,
+      const skalTilTotrinnskontroll = aksjonspunkter.some(
+        ap =>
+          ap.kode === AksjonspunktKode.FORESLA_VEDTAK ||
+          ('skalBrukeOverstyrendeFritekstBrev' in ap && ap.skalBrukeOverstyrendeFritekstBrev),
       );
       if (skalTilTotrinnskontroll) {
         toggleFatterVedtakModal(true);

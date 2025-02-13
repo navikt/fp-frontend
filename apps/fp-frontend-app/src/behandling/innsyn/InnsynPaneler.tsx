@@ -18,4 +18,6 @@ const InnsynPaneler = ({ valgtProsessSteg }: Props) => {
   return <BehandlingContainer valgtProsessSteg={valgtProsessSteg} hentProsessPaneler={hentProsessPaneler} />;
 };
 
+// Default export grunna React.lazy
+// eslint-disable-next-line import/no-default-export
 export default InnsynPaneler;
