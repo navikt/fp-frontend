@@ -32,7 +32,7 @@ export const InnsynVedtakProsessStegInitPanel = (props: ProsessPanelInitProps) =
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, [], lagringSideeffekterCallback);
   const api = useBehandlingApi(behandling);
 
-  const { data: innsynDokumenter } = useQuery(api.innsyn.innsynDokumenterOptions(fagsak, behandling));
+  const { data: innsynDokumenter } = useQuery(api.innsyn.innsynDokumenterOptions(behandling));
   const { data: innsyn } = useQuery(api.innsyn.innsynOptions(behandling));
 
   const { mutate: forhåndsvis } = useMutation({
