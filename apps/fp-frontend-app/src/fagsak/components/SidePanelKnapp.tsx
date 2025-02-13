@@ -1,12 +1,9 @@
-import React from 'react';
-
 import { SidebarRightIcon } from '@navikt/aksel-icons';
 import { Button } from '@navikt/ds-react';
 
 interface Props {
   toggleSideMeny: () => void;
   visSideMeny: boolean;
-  style?: React.CSSProperties;
 }
 
 export const SidePanelKnapp = ({ toggleSideMeny, visSideMeny }: Props) => {
