@@ -87,13 +87,9 @@ export const RegistrereVergeForm = ({ readOnly, vergetyper = [], valgtVergeType 
   </VStack>
 );
 
-RegistrereVergeForm.buildInitialValues = (verge?: Verge): VergeFormValues => ({
-  navn: verge?.navn ?? undefined,
-  gyldigFom: verge?.gyldigFom ?? undefined,
+RegistrereVergeForm.buildInitialValues = (verge: Verge | undefined): VergeFormValues => ({
+  ...verge,
   gyldigTom: verge?.gyldigTom ?? undefined,
-  fnr: verge?.fnr ?? undefined,
-  organisasjonsnummer: verge?.organisasjonsnummer ?? undefined,
-  vergeType: verge?.vergeType || undefined,
 });
 
 RegistrereVergeForm.transformValues = (values: VergeFormValues): OpprettVergeParams => ({
@@ -101,7 +97,7 @@ RegistrereVergeForm.transformValues = (values: VergeFormValues): OpprettVergePar
   navn: values.navn!,
   gyldigFom: values.gyldigFom!,
   gyldigTom: values.gyldigTom,
-  ...(values.vergeType == VergeType.ADVOKAT
+  ...(values.vergeType === VergeType.ADVOKAT
     ? { organisasjonsnummer: values.organisasjonsnummer! }
     : { fnr: values.fnr! }),
 });
