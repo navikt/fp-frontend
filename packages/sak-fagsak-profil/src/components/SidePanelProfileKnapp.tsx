@@ -1,5 +1,7 @@
+import { useIntl } from 'react-intl';
+
 import { SidebarRightIcon } from '@navikt/aksel-icons';
-import { Button } from '@navikt/ds-react';
+import { Button, Tooltip } from '@navikt/ds-react';
 
 interface Props {
   toggleSideMeny: () => void;
@@ -7,13 +9,16 @@ interface Props {
 }
 
 export const SidePanelProfileKnapp = ({ toggleSideMeny, visSideMeny }: Props) => {
+  const intl = useIntl();
   return (
-    <Button
-      icon={<SidebarRightIcon fontSize="1.7rem" aria-hidden />}
-      aria-label={visSideMeny ? 'Skjul profil sidepanel' : 'Vis profil sidepanel'}
-      variant="tertiary-neutral"
-      size="small"
-      onClick={toggleSideMeny}
-    />
+    <Tooltip content={intl.formatMessage({ id: 'FagsakProfile.SkjulSidemeny' })} placement="bottom">
+      <Button
+        icon={<SidebarRightIcon fontSize="1.7rem" aria-hidden />}
+        aria-label={visSideMeny ? 'Skjul profil sidepanel' : 'Vis profil sidepanel'}
+        variant="tertiary-neutral"
+        size="small"
+        onClick={toggleSideMeny}
+      />
+    </Tooltip>
   );
 };

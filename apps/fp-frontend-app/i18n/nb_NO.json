@@ -29,6 +29,8 @@
 
   "FatterVedtakStatusModal.SendtBeslutter": "Forslag til vedtak er sendt til beslutter",
 
+  "FagsakGrid.ApneSidemeny": "Åpne sidemeny",
+
   "ErForeldreansvarVilkaarOppfyltForm.2LeddParagrafForeldrepenger": "Vurder om vilkår om foreldreansvaret etter § 14-5 andre ledd er oppfylt",
   "OpptjeningVilkarView.VurderOmSøkerHarRett": "Vurder om søker har opptjent rett til foreldrepenger",
 
@@ -89,7 +91,6 @@
   "FaktaInitPanel.Title.Ytelser": "Ytelser",
   "FaktaInitPanel.Title.Verge": "Verge/fullmektig",
 
-
   "Behandlingspunkt.ResultatKlage": "Resultat",
   "Behandlingspunkt.Ankebehandling": "Ankebehandling",
   "Behandlingspunkt.AnkeMerknader": "Trygderetten",
@@ -117,7 +118,6 @@
   "ErForeldreansvarVilkaarOppfyltForm.2LeddParagrafEngangsStonad": "Vurder om vilkår om foreldreansvaret etter § 14-17 andre ledd er oppfylt",
   "ErForeldreansvarVilkaarOppfyltForm.4LeddParagraf": "Vurder om vilkårene i § 14-17 fjerde ledd for far er oppfylt (når far overtar foreldreansvaret alene)",
   "ErOmsorgVilkaarOppfyltForm.Paragraf": "Vurder om vilkårene i § 14-17 tredje ledd for far er oppfylt (når mor dør ifm fødsel/omsorgsovertakelse)",
-
 
   "SvangerskapVilkarForm.FyllerVilkår": "Kontroller at søker fyller vilkårene i § 14-4 første eller andre ledd og tredje ledd, første punktum",
 
