@@ -13,13 +13,6 @@ const meta = {
     lukkModal: action('onLukkModal'),
     opprettVerge: action('onOpprettVerge') as () => Promise<void>,
     fjernVerge: action('onFjernVerge') as () => Promise<void>,
-    verge: {
-      vergeType: 'ADVOKAT',
-      navn: 'Ola Nordmann',
-      fnr: '12345678910',
-      gyldigFom: '2021-01-01',
-      gyldigTom: '2021-12-31',
-    },
   },
 } satisfies Meta<typeof MenyVergeIndex>;
 export default meta;
@@ -29,11 +22,19 @@ type Story = StoryObj<typeof meta>;
 export const LeggeTilVerge: Story = {
   args: {
     type: 'OPPRETT',
+    verge: undefined,
   },
 };
 
 export const FjerneVerge: Story = {
   args: {
     type: 'FJERN',
+    verge: {
+      vergeType: 'ADVOKAT',
+      navn: 'Ola Nordmann',
+      organisasjonsnummer: '123456789',
+      gyldigFom: '2025-01-01',
+      gyldigTom: '2025-12-31',
+    },
   },
 };

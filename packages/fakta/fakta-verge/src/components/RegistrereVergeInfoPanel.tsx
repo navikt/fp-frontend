@@ -17,9 +17,9 @@ type FormValues = VergeFormValues & {
   begrunnelse?: string;
 };
 
-const buildInitialValues = (verge: Verge, aksjonspunkter: Aksjonspunkt[]): FormValues => ({
+const buildInitialValues = (verge: Verge | undefined, aksjonspunkter: Aksjonspunkt[]): FormValues => ({
   ...FaktaBegrunnelseTextField.initialValues(aksjonspunkter),
-  ...RegistrereVergeForm.buildInitialValues(verge || {}),
+  ...RegistrereVergeForm.buildInitialValues(verge),
 });
 
 const transformValues = (values: FormValues): AvklarVergeAp => ({
@@ -30,7 +30,7 @@ const transformValues = (values: FormValues): AvklarVergeAp => ({
 
 interface Props {
   alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving;
-  verge: Verge;
+  verge: Verge | undefined;
   submittable: boolean;
 }
 
