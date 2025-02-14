@@ -13,6 +13,13 @@ const meta = {
     lukkModal: action('onLukkModal'),
     opprettVerge: action('onOpprettVerge') as () => Promise<void>,
     fjernVerge: action('onFjernVerge') as () => Promise<void>,
+    verge: {
+      vergeType: 'ADVOKAT',
+      navn: 'Ola Nordmann',
+      fnr: '12345678910',
+      gyldigFom: '2021-01-01',
+      gyldigTom: '2021-12-31',
+    },
   },
 } satisfies Meta<typeof MenyVergeIndex>;
 export default meta;
