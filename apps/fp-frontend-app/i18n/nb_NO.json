@@ -5,7 +5,6 @@
   "Dekorator.Journalforing": "Journalføring",
   "Dekorator.Utbetalingsdata": "Søk i infotrygd",
   "Dekorator.Avdelingsleder": "Avdelingsleder",
-
   "DokumentIndex.Dokumenter": "Dokumenter",
   "MeldingIndex.Meldinger": "Meldinger",
   "MeldingIndex.IkkeTilgjengeligPaVent": "Det er ikke mulig å skrive melding til bruker når behandlingen er på vent",
@@ -14,60 +13,46 @@
   "NotatIndex.Notatblokk": "Notatblokk",
   "TotrinnskontrollIndex.Godkjenning": "Godkjenning",
   "TotrinnskontrollIndex.FraBeslutter": "Fra beslutter",
-
   "AnkeVurderingModal.VedtakOversendt": "Behandlingen er sendt.",
   "AnkeVurderingModal.Ferdigbehandlet": "Anken er ferdigbehandlet.",
   "AnkeVurderingModal.SettVent": "Behandlingen er satt på vent.",
   "AnkeVurderingModal.ModalDescription": "Vedtaket er stadfestet. Du kommer nå til forsiden",
   "AnkeVurderingModal.GoToSearchPage": "Du kommer nå til forsiden.",
   "AnkeVurderingModal.Ok": "OK",
-
   "FatterVedtakStatusModal.GoToSearchPage": "Du kommer nå til forsiden.",
   "FatterVedtakStatusModal.Ok": "OK",
-
   "ErrorBoundary.Error": "Det har oppstått en teknisk feil i visning av {name}. Meld feilen i Porten. Ta med feilmeldingsteksten.",
-
   "FatterVedtakStatusModal.SendtBeslutter": "Forslag til vedtak er sendt til beslutter",
-
+  "FagsakGrid.ApneSidemeny": "Åpne sidemeny",
   "ErForeldreansvarVilkaarOppfyltForm.2LeddParagrafForeldrepenger": "Vurder om vilkår om foreldreansvaret etter § 14-5 andre ledd er oppfylt",
   "OpptjeningVilkarView.VurderOmSøkerHarRett": "Vurder om søker har opptjent rett til foreldrepenger",
-
   "IverksetterVedtakStatusModal.VedtakAvslatt": "Vedtak er avslått.",
   "IverksetterVedtakStatusModal.VedtakInnvilet": "Vedtaket ble fattet og blir nå iverksatt",
   "IverksetterVedtakStatusModal.Ok": "OK",
   "IverksetterVedtakStatusModal.Avslatt": "Avslått",
   "IverksetterVedtakStatusModal.Innvilget": "Innvilget",
   "IverksetterVedtakStatusModal.GoToSearchPage": "Du kommer nå til forsiden",
-
   "BehandlingSupportIndex.Godkjenning": "Godkjenning",
   "BehandlingSupportIndex.FraBeslutter": "Fra beslutter",
   "BehandlingSupportIndex.Historikk": "Historikk",
   "BehandlingSupportIndex.Melding": "Send melding",
   "BehandlingSupportIndex.Dokumenter": "Dokumenter",
   "BehandlingSupportIndex.Notatblokk": "Notatblokk",
-
   "Los.IkkeTilgjengelig": "FPLOS er ikke tilgjengelig",
-
   "InngangsvilkarProsessStegPanelDef.AvventerAvklaringAv": "Avventer avklaring av fakta om ",
   "ProsessPanelWrapper.IkkeBehandlet": "Dette steget er ikke behandlet",
   "BehandlingHenlagtPanel.Header": "Henlagt",
   "BehandlingHenlagtPanel.Henlagt": "Behandlingen er henlagt",
-
   "FaktaMeny.FaktaOm": "Fakta om",
-
   "SettPaVentReadOnlyModal.ModalDescriptionErPaVent": "Behandlingen er satt på vent",
   "SettPaVentReadOnlyModal.Forsiden": "Gå til forsiden",
   "SettPaVentReadOnlyModal.Arsak": "Årsak",
   "SettPaVentReadOnlyModal.Frist": "Frist",
-
   "KlageVurderingModal.VedtakOversendt": "Innstilling er sendt til Nav klageinstans.",
   "KlageVurderingModal.ModalDescription": "Vedtaket er stadfestet. Du kommer nå til forsiden",
-
   "KlageVurderingModal.GoToSearchPage": "Du kommer nå til forsiden",
   "KlageVurderingModal.Ok": "OK",
-
   "FatterVedtakStatusModal.KlagenErFerdigbehandlet": "Klagen er ferdigbehandlet",
-
   "FaktaInitPanel.Title.Adopsjon": "Adopsjon",
   "FaktaInitPanel.Title.ArbeidOgInntekt": "Arbeid og inntekt",
   "FaktaInitPanel.Title.Arbeidsforhold": "Arbeidsforhold",
@@ -88,8 +73,6 @@
   "FaktaInitPanel.Title.UttakDokumentasjon": "Uttaksdokumentasjon",
   "FaktaInitPanel.Title.Ytelser": "Ytelser",
   "FaktaInitPanel.Title.Verge": "Verge/fullmektig",
-
-
   "Behandlingspunkt.ResultatKlage": "Resultat",
   "Behandlingspunkt.Ankebehandling": "Ankebehandling",
   "Behandlingspunkt.AnkeMerknader": "Trygderetten",
@@ -111,32 +94,24 @@
   "Behandlingspunkt.TilkjentYtelse": "Tilkjent ytelse",
   "Behandlingspunkt.Uttak": "Uttak",
   "Behandlingspunkt.Vedtak": "Vedtak",
-
   "SRBVilkarForm.VurderSammeBarn": "Vurder om tidligere utbetalte foreldrepenger eller engangsstønad gjelder for samme barn. Dersom det gjelder for samme barn er dette vilkåret ikke oppfylt.",
   "SRBVilkarForm.VurderAnnenForelderSammeBarn": "Vurder om annen forelders foreldrepenger eller engangsstønad gjelder samme barn og påvirker utfall.",
   "ErForeldreansvarVilkaarOppfyltForm.2LeddParagrafEngangsStonad": "Vurder om vilkår om foreldreansvaret etter § 14-17 andre ledd er oppfylt",
   "ErForeldreansvarVilkaarOppfyltForm.4LeddParagraf": "Vurder om vilkårene i § 14-17 fjerde ledd for far er oppfylt (når far overtar foreldreansvaret alene)",
   "ErOmsorgVilkaarOppfyltForm.Paragraf": "Vurder om vilkårene i § 14-17 tredje ledd for far er oppfylt (når mor dør ifm fødsel/omsorgsovertakelse)",
-
-
   "SvangerskapVilkarForm.FyllerVilkår": "Kontroller at søker fyller vilkårene i § 14-4 første eller andre ledd og tredje ledd, første punktum",
-
   "TilbakekrevingFakta.FaktaFeilutbetaling": "Feilutbetaling",
   "ProsessPanelWrapper.Henlagt": "Behandlingen er henlagt",
-
   "FatterTilbakekrevingVedtakStatusModal.Sendt": "Forslag til vedtak er sendt til beslutter",
   "ÅpenRevurderingModal.ApenRevurdering": "Det finnes en åpen revurdering som kan påvirke denne tilbakekrevingsbehandlingen. Vurder konsekvens ved behandling.",
   "ÅpenRevurderingModal.ApenRevurderingHeader": "Åpen revurdering",
   "ÅpenRevurderingModal.Ok": "OK",
-
   "BehandlingMenuIndex.Behandlingsmeny": "Behandlingsmeny",
-
   "EksterneRessurser.Lenke": "Finn søker andre steder",
   "EksterneRessurser.Modia": "Modia",
   "EksterneRessurser.Gosys": "Gosys",
   "EksterneRessurser.AInntekt": "A-inntekt",
   "EksterneRessurser.AAreg": "AA-reg",
-
   "Rest.ErrorMessage.General": "Noe feilet. Feilen kan være forbigående. Prøv og behandle saken litt senere. Om feilen oppstår igjen meld den inn via porten.",
   "Rest.ErrorMessage.DownTime": "Saksbehandlingsløsningen venter på et annet system som har nedetid nå. Du trenger ikke melde inn en feil, men prøv igjen {date} kl. {time}.\n{message}",
   "Rest.ErrorMessage.PollingTimeout": "Serverkall har gått ut på tid: {location}",
