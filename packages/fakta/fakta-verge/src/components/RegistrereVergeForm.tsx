@@ -4,11 +4,12 @@ import { hasValidDate, hasValidFodselsnummer, hasValidName, required } from '@na
 import { createIntl } from '@navikt/ft-utils';
 
 import { VergeType } from '@navikt/fp-kodeverk';
-import type { KodeverkMedNavn, Verge } from '@navikt/fp-types';
+import type { KodeverkMedNavn, OpprettVergeParams, Verge } from '@navikt/fp-types';
 
 import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
+
 export type VergeFormValues = {
   navn?: string;
   gyldigFom?: string;
@@ -18,17 +19,10 @@ export type VergeFormValues = {
   vergeType?: string;
 };
 
-export type TransformedVergeFormValues = {
-  vergeType: string;
-  navn: string;
-  gyldigFom: string;
-  gyldigTom: string;
-} & ({ fnr: string } | { organisasjonsnummer: string });
-
 interface Props {
   readOnly: boolean;
-  vergetyper?: KodeverkMedNavn[];
-  valgtVergeType?: string;
+  vergetyper: KodeverkMedNavn[];
+  valgtVergeType: string | undefined;
 }
 
 /**
@@ -94,19 +88,19 @@ export const RegistrereVergeForm = ({ readOnly, vergetyper = [], valgtVergeType 
 );
 
 RegistrereVergeForm.buildInitialValues = (verge?: Verge): VergeFormValues => ({
-  navn: verge?.navn ?? '',
-  gyldigFom: verge?.gyldigFom ?? '',
-  gyldigTom: verge?.gyldigTom ?? '',
-  fnr: verge?.fnr ?? '',
-  organisasjonsnummer: verge?.organisasjonsnummer ?? '',
+  navn: verge?.navn ?? undefined,
+  gyldigFom: verge?.gyldigFom ?? undefined,
+  gyldigTom: verge?.gyldigTom ?? undefined,
+  fnr: verge?.fnr ?? undefined,
+  organisasjonsnummer: verge?.organisasjonsnummer ?? undefined,
   vergeType: verge?.vergeType || undefined,
 });
 
-RegistrereVergeForm.transformValues = (values: VergeFormValues): TransformedVergeFormValues => ({
+RegistrereVergeForm.transformValues = (values: VergeFormValues): OpprettVergeParams => ({
   vergeType: values.vergeType!,
   navn: values.navn!,
   gyldigFom: values.gyldigFom!,
-  gyldigTom: values.gyldigTom!,
+  gyldigTom: values.gyldigTom,
   ...(values.vergeType == VergeType.ADVOKAT
     ? { organisasjonsnummer: values.organisasjonsnummer! }
     : { fnr: values.fnr! }),
