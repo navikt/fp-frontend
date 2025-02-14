@@ -1,6 +1,12 @@
 import { HStack, VStack } from '@navikt/ds-react';
 import { Datepicker, InputField, SelectField } from '@navikt/ft-form-hooks';
-import { hasValidDate, hasValidFodselsnummer, hasValidName, required } from '@navikt/ft-form-validators';
+import {
+  hasValidDate,
+  hasValidFodselsnummer,
+  hasValidName,
+  hasValidOrgNumber,
+  required,
+} from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
 
 import { VergeType } from '@navikt/fp-kodeverk';
@@ -56,7 +62,7 @@ export const RegistrereVergeForm = ({ readOnly, vergetyper = [], valgtVergeType 
             <InputField
               name="organisasjonsnummer"
               label={intl.formatMessage({ id: 'Verge.Organisasjonsnummer' })}
-              validate={[required]}
+              validate={[required, hasValidOrgNumber]}
               readOnly={readOnly}
             />
           ) : (
