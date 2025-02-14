@@ -1,0 +1,1 @@
+import{j as o}from"./jsx-runtime-CLpGMVip.js";import{i as n,P as a,j as i}from"./withPanelData-DMLchvk7.js";const m=t=>{const r=n({locale:"nb-NO",messages:t},i());return e=>o.jsx(a,{value:r,children:e()})};export{m as g};
