@@ -1,13 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
 
-import type { Behandling } from '@navikt/fp-types';
+import type { Behandling, OpprettVergeParams } from '@navikt/fp-types';
 
-import {
-  type AksjonspunktArgs,
-  type OpprettVergeArgs,
-  type OverstyrteAksjonspunktArgs,
-  useBehandlingApi,
-} from '../behandlingApi';
+import { type AksjonspunktArgs, type OverstyrteAksjonspunktArgs, useBehandlingApi } from '../behandlingApi';
 import { doPolling, useTaskStatusChecker } from './pollingUtils';
 import { useRequestPendingContext } from './RequestPendingContext.tsx';
 
@@ -20,7 +15,7 @@ export const useBehandlingPollingOperasjoner = (
   const { setIsRequestPending } = useRequestPendingContext();
 
   const { mutate: opprettVerge } = useMutation({
-    mutationFn: async (values: OpprettVergeArgs) => {
+    mutationFn: async (values: OpprettVergeParams) => {
       const response = await pollingApi.opprettVerge(values);
       return doPolling(response, setIsRequestPending);
     },

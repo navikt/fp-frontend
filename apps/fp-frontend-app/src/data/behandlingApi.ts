@@ -36,6 +36,7 @@ import type {
   ManglendeInntektsmeldingVurdering,
   ManueltArbeidsforhold,
   Medlemskap,
+  OpprettVergeParams,
   Opptjening,
   PeriodeSoker,
   Personoversikt,
@@ -96,15 +97,6 @@ type PeriodeMedBelop = {
 export type BeregnBeløpParams = {
   behandlingUuid: string;
   perioder: PeriodeMedBelop[];
-};
-
-export type OpprettVergeArgs = {
-  navn: string;
-  fnr?: string;
-  gyldigFom: string;
-  gyldigTom: string;
-  vergeType: string;
-  organisasjonsnummer?: string;
 };
 
 const kyExtended = ky.extend({
@@ -559,8 +551,6 @@ export const forhåndsvisTilbakekrevingMelding = (params: {
     })
     .blob();
 
-export const doGetRequest = <T>(url: string) => kyExtended.get(url).json<T>();
-
 const getÅpneBehandlingForEndring = (links: ApiLink[]) => (behandlingUuid: string, behandlingVersjon: number) =>
   kyExtended.post(getUrlFromRel('OPEN_BEHANDLING_FOR_CHANGES', links), {
     json: { behandlingUuid, behandlingVersjon },
@@ -603,7 +593,7 @@ const getFortsettBehandling = (links: ApiLink[]) => (params: { behandlingUuid: s
     json: params,
   });
 
-const getOpprettVerge = (links: ApiLink[]) => (params: OpprettVergeArgs) =>
+const getOpprettVerge = (links: ApiLink[]) => (params: OpprettVergeParams) =>
   kyExtended.post<Behandling>(getUrlFromRel('VERGE_OPPRETT', links), {
     json: params,
   });

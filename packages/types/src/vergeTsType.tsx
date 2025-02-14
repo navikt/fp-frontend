@@ -1,8 +1,21 @@
 export type Verge = {
-  navn?: string;
+  navn: string;
   fnr?: string;
-  gyldigFom?: string;
-  gyldigTom?: string;
-  vergeType?: string;
   organisasjonsnummer?: string;
+  gyldigFom: string;
+  gyldigTom: string;
+  vergeType: string;
 };
+
+export type OpprettVergeParams =
+  | ({
+      navn: string;
+      gyldigFom: string;
+      gyldigTom: string;
+      vergeType: string;
+    } & {
+      fnr: string;
+    })
+  | {
+      organisasjonsnummer: string;
+    };
