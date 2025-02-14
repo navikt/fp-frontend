@@ -52,7 +52,7 @@ export const SettPaVentReadOnlyModal = ({ lukkCallback, ventearsaker, ventearsak
               <FormattedMessage id="SettPaVentReadOnlyModal.Frist" />
             </Label>
             <BodyShort>
-              <DateLabel dateString={frist || lagFramtidigFrist()} />
+              <DateLabel dateString={frist ?? lagFramtidigFrist()} />
             </BodyShort>
           </VStack>
         </HStack>
