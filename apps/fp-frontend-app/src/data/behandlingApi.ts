@@ -598,7 +598,7 @@ const getOpprettVerge = (links: ApiLink[]) => (params: OpprettVergeParams) =>
     json: params,
   });
 
-const getFjernVerge = (links: ApiLink[]) => () => kyExtended.delete<Behandling>(getUrlFromRel('VERGE_FJERN', links));
+const getFjernVerge = (links: ApiLink[]) => () => kyExtended.post<Behandling>(getUrlFromRel('VERGE_FJERN', links));
 
 const getVerge = (links: ApiLink[]) => (behandling: Behandling) =>
   queryOptions({
