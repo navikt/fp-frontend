@@ -6,9 +6,9 @@ import { Button, Heading, Modal } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 import { createIntl } from '@navikt/ft-utils';
 
-import { RegistrereVergeForm, type TransformedVergeFormValues, type VergeFormValues } from '@navikt/fp-fakta-verge';
+import { RegistrereVergeForm, type VergeFormValues } from '@navikt/fp-fakta-verge';
 import { KodeverkType } from '@navikt/fp-kodeverk';
-import type { AlleKodeverk, AlleKodeverkTilbakekreving, Verge } from '@navikt/fp-types';
+import type { AlleKodeverk, AlleKodeverkTilbakekreving, OpprettVergeParams, Verge } from '@navikt/fp-types';
 
 import messages from '../../../i18n/nb_NO.json';
 
@@ -25,7 +25,7 @@ interface Props {
   lukkModal: () => void;
   type: 'OPPRETT' | 'FJERN';
   fjernVerge: () => void;
-  opprettVerge: (values: TransformedVergeFormValues) => void;
+  opprettVerge: (values: OpprettVergeParams) => void;
 }
 
 export const MenyVergeIndex = ({ verge, type, fjernVerge, opprettVerge, lukkModal, alleKodeverk }: Props) => {
