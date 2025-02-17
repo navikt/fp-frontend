@@ -45,21 +45,21 @@
     "@navikt/ds-css": "7.10.0",
     "@navikt/fp-storybook-utils": "workspace:*",
     "@navikt/fp-utils-test": "workspace:*",
-    "@storybook/addon-actions": "8.5.2",
-    "@storybook/react": "8.5.2",
-    "@storybook/react-vite": "8.5.2",
+    "@storybook/addon-actions": "8.5.6",
+    "@storybook/react": "8.5.6",
+    "@storybook/react-vite": "8.5.6",
     "@testing-library/dom": "10.4.0",
     "@testing-library/react": "16.2.0",
     "@testing-library/user-event": "14.6.1",
     "@types/lodash.debounce": "4.0.9",
     "cross-env": "7.0.3",
-    "eslint": "9.19.0",
+    "eslint": "9.20.1",
     "msw": "2.7.0",
     "msw-storybook-addon": "^2.0.4",
-    "storybook": "8.5.2",
+    "storybook": "8.5.6",
     "stylelint": "16.14.1",
     "typescript": "5.7.3",
-    "vite": "6.0.11",
-    "vitest": "3.0.4"
+    "vite": "6.1.0",
+    "vitest": "3.0.5"
   }
 }
