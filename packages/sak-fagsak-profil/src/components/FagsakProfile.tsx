@@ -41,7 +41,7 @@ export const FagsakProfile = ({
 }: Props) => {
   const intl = useIntl();
   const isWrappedUnder = useMediaQuery({ maxWidth: 1408 });
-
+  const sorterteFagsakMarkeringer = fagsakMarkeringTekster?.sort() ?? [];
   return (
     <VStack gap="4">
       <HStack gap="4">
@@ -57,9 +57,9 @@ export const FagsakProfile = ({
         )}
       </HStack>
       <BodyShort size="small">{`${saksnummer} - ${fagsakStatus.navn}`}</BodyShort>
-      {fagsakMarkeringTekster && fagsakMarkeringTekster.length > 0 && (
+      {sorterteFagsakMarkeringer.length > 0 && (
         <HStack gap="4">
-          {fagsakMarkeringTekster.map(tekst => (
+          {sorterteFagsakMarkeringer.map(tekst => (
             <Tooltip
               key={tekst}
               content={intl.formatMessage({ id: 'FagsakProfile.FagsakMarkering' }, { tekst })}
