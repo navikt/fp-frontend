@@ -2,9 +2,9 @@ import { type ReactElement, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
-import { Button, Heading, Label } from '@navikt/ds-react';
+import { Button, Heading, HStack, Label, VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
-import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode, TilbakekrevingVidereBehandling } from '@navikt/fp-kodeverk';
 import type {
@@ -118,12 +118,12 @@ interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   simuleringResultat?: SimuleringResultat;
   tilbakekrevingvalg?: TilbakekrevingValg;
-  previewCallback: (params: { mottaker: string; fritekst: string }) => void;
+  previewFptilbakeCallback: (params: { mottaker: string; fritekst: string }) => void;
 }
 
 export const SimuleringPanel = ({
   simuleringResultat,
-  previewCallback,
+  previewFptilbakeCallback,
   tilbakekrevingvalg,
   arbeidsgiverOpplysningerPerId,
 }: Props) => {
@@ -152,18 +152,16 @@ export const SimuleringPanel = ({
     harAksjonspunkt(aksjonspunkterForPanel, AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER);
   const aksjonspunktTittler = harÅpneAksjonspunkter ? lagAksjonspunktTitler(aksjonspunkterForPanel) : [];
   return (
-    <>
+    <VStack gap="8">
       <Heading size="small">
         <FormattedMessage id="Simulering.Title" />
       </Heading>
-      <VerticalSpacer twentyPx />
       {simuleringResultatOption && (
         <>
           {aksjonspunktTittler.length > 0 &&
             aksjonspunktTittler.map(tittel => (
               <div key={tittel.key}>
                 <AksjonspunktHelpTextHTML>{[tittel]}</AksjonspunktHelpTextHTML>
-                <VerticalSpacer sixteenPx />
               </div>
             ))}
           <SimuleringSummary
@@ -181,7 +179,6 @@ export const SimuleringPanel = ({
             simuleringResultat={simuleringResultatOption}
             ingenPerioderMedAvvik={simuleringResultatOption.ingenPerioderMedAvvik}
           />
-          <VerticalSpacer twentyPx />
           {hasOpenTilbakekrevingsbehandling && (
             <Label size="small">
               <FormattedMessage id="Simulering.ApenTilbakekrevingsbehandling" />
@@ -196,32 +193,34 @@ export const SimuleringPanel = ({
           onSubmit={(values: FormValues) => submitCallback(transformValues(values, aksjonspunkterForPanel))}
           setDataOnUnmount={setFormData}
         >
-          <TilbakekrevSøkerForm
-            aksjonspunkt={finnAksjonspunkt(aksjonspunkterForPanel, AksjonspunktKode.VURDER_FEILUTBETALING)}
-            fagsak={fagsak}
-            previewCallback={previewCallback}
-            readOnly={isReadOnly}
-            sprakkode={behandling.sprakkode}
-          />
-          <VerticalSpacer sixteenPx />
-          <EtterbetalingSøkerForm
-            readOnly={isReadOnly}
-            aksjonspunkt={finnAksjonspunkt(
-              aksjonspunkterForPanel,
-              AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER,
-            )}
-          />
-          <VerticalSpacer sixteenPx />
-          <Button
-            size="small"
-            variant="primary"
-            disabled={!formState.isDirty || formState.isSubmitting || isReadOnly}
-            loading={formState.isSubmitting}
-          >
-            <FormattedMessage id="SubmitButton.ConfirmInformation" />
-          </Button>
+          <VStack gap="4">
+            <TilbakekrevSøkerForm
+              aksjonspunkt={finnAksjonspunkt(aksjonspunkterForPanel, AksjonspunktKode.VURDER_FEILUTBETALING)}
+              fagsak={fagsak}
+              previewCallback={previewFptilbakeCallback}
+              readOnly={isReadOnly}
+              sprakkode={behandling.sprakkode}
+            />
+            <EtterbetalingSøkerForm
+              readOnly={isReadOnly}
+              aksjonspunkt={finnAksjonspunkt(
+                aksjonspunkterForPanel,
+                AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER,
+              )}
+            />
+            <HStack>
+              <Button
+                size="small"
+                variant="primary"
+                disabled={!formState.isDirty || formState.isSubmitting || isReadOnly}
+                loading={formState.isSubmitting}
+              >
+                <FormattedMessage id="SubmitButton.ConfirmInformation" />
+              </Button>
+            </HStack>
+          </VStack>
         </Form>
       )}
-    </>
+    </VStack>
   );
 };

@@ -1,7 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, Heading, Label } from '@navikt/ds-react';
-import { DateLabel, FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { BodyShort, Heading, Label, VStack } from '@navikt/ds-react';
+import { DateLabel, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
 import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 import type { AoIArbeidsforhold } from '@navikt/fp-types';
@@ -59,9 +59,8 @@ export const ArbeidsforholdDetail = ({ valgtArbeidsforhold }: Props) => {
   const overstyrtTom = finnOverstyrtTom(valgtArbeidsforhold);
 
   return (
-    <>
-      <VerticalSpacer thirtyTwoPx />
-      <FaktaGruppe>
+    <FaktaGruppe>
+      <VStack gap="4">
         <Heading size="small">
           <FormattedMessage id="ArbeidsforholdDetail.Header" />
         </Heading>
@@ -71,13 +70,15 @@ export const ArbeidsforholdDetail = ({ valgtArbeidsforhold }: Props) => {
             <BodyShort size="small">
               <FormattedMessage id="ArbeidsforholdDetail.ArbeidsforholdetErIkkeAktivt" />
             </BodyShort>
-            <BodyShort size="small">
-              <FormattedMessage id="ArbeidsforholdDetail.ArbeidsforholdetAktivTomDato" />
-            </BodyShort>
-            <BodyShort size="small">
-              {overstyrtTom && <DateLabel dateString={overstyrtTom} />}
-              {!overstyrtTom && '-'}
-            </BodyShort>
+            <div>
+              <Label size="small">
+                <FormattedMessage id="ArbeidsforholdDetail.ArbeidsforholdetAktivTomDato" />
+              </Label>
+              <BodyShort size="small">
+                {overstyrtTom && <DateLabel dateString={overstyrtTom} />}
+                {!overstyrtTom && '-'}
+              </BodyShort>
+            </div>
           </>
         )}
         {skalBrukeArbeidsforholdet && skalBrukePermisjon && (
@@ -90,6 +91,7 @@ export const ArbeidsforholdDetail = ({ valgtArbeidsforhold }: Props) => {
             <FormattedMessage id="ArbeidsforholdDetail.OppdatertGittIm" />
           </BodyShort>
         )}
+
         {(erManueltOpprettetAvSaksbehandler ||
           ((skalBrukeArbeidsforholdet || skalFortsetteUtenInntektsmelding) &&
             (!valgtArbeidsforhold.permisjonOgMangel || skalIkkeBrukePermisjon))) && (
@@ -97,7 +99,6 @@ export const ArbeidsforholdDetail = ({ valgtArbeidsforhold }: Props) => {
             <BodyShort size="small">
               <FormattedMessage id={utledAktivtArbeidsforholdLabel(valgtArbeidsforhold)} />
             </BodyShort>
-            <VerticalSpacer sixteenPx />
             {skalFortsetteUtenInntektsmelding && (
               <BodyShort size="small">
                 <FormattedMessage id="ArbeidsforholdDetail.BenyttAInntektIBeregningsgrunnlag" />
@@ -121,12 +122,13 @@ export const ArbeidsforholdDetail = ({ valgtArbeidsforhold }: Props) => {
             />
           </BodyShort>
         )}
-        <VerticalSpacer sixteenPx />
-        <Label size="small">
-          <FormattedMessage id="ArbeidsforholdDetail.Begrunnelse" />
-        </Label>
-        <BodyShort size="small">{valgtArbeidsforhold.begrunnelse}</BodyShort>
-      </FaktaGruppe>
-    </>
+        <div>
+          <Label size="small">
+            <FormattedMessage id="ArbeidsforholdDetail.Begrunnelse" />
+          </Label>
+          <BodyShort size="small">{valgtArbeidsforhold.begrunnelse}</BodyShort>
+        </div>
+      </VStack>
+    </FaktaGruppe>
   );
 };

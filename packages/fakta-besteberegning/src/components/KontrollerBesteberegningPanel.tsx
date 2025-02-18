@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
+import { HStack, VStack } from '@navikt/ds-react';
 import { CheckboxField, Form } from '@navikt/ft-form-hooks';
-import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
@@ -52,7 +53,7 @@ export const KontrollerBesteberegningPanel = ({ aksjonspunkt, readOnly, submitta
   });
   const begrunnelse = formMethods.watch('begrunnelse');
   return (
-    <>
+    <VStack gap="4">
       {aksjonspunkt.status === AksjonspunktStatus.OPPRETTET && (
         <AksjonspunktHelpTextHTML>
           {[
@@ -63,33 +64,34 @@ export const KontrollerBesteberegningPanel = ({ aksjonspunkt, readOnly, submitta
           ]}
         </AksjonspunktHelpTextHTML>
       )}
-      <VerticalSpacer twentyPx />
       <Form
         formMethods={formMethods}
         onSubmit={values => submitCallback(transformValues(values))}
         setDataOnUnmount={setFormData}
       >
-        <CheckboxField
-          name="besteberegningErKorrektValg"
-          label={<FormattedMessage id="BesteberegningProsessPanel.Aksjonspunkt.Radiotekst" />}
-          readOnly={readOnly}
-          onChange={() => toggleKnapp(!erKnappEnabled)}
-        />
-        <VerticalSpacer twentyPx />
-        <FaktaBegrunnelseTextField
-          isSubmittable={submittable}
-          isReadOnly={readOnly}
-          hasBegrunnelse={!!begrunnelse}
-          hasVurderingText
-        />
-        <VerticalSpacer twentyPx />
-        <FaktaSubmitButton
-          isSubmittable={submittable && erKnappEnabled}
-          isSubmitting={formMethods.formState.isSubmitting}
-          isDirty={formMethods.formState.isDirty}
-          isReadOnly={readOnly}
-        />
+        <VStack gap="4">
+          <CheckboxField
+            name="besteberegningErKorrektValg"
+            label={<FormattedMessage id="BesteberegningProsessPanel.Aksjonspunkt.Radiotekst" />}
+            readOnly={readOnly}
+            onChange={() => toggleKnapp(!erKnappEnabled)}
+          />
+          <FaktaBegrunnelseTextField
+            isSubmittable={submittable}
+            isReadOnly={readOnly}
+            hasBegrunnelse={!!begrunnelse}
+            hasVurderingText
+          />
+          <HStack>
+            <FaktaSubmitButton
+              isSubmittable={submittable && erKnappEnabled}
+              isSubmitting={formMethods.formState.isSubmitting}
+              isDirty={formMethods.formState.isDirty}
+              isReadOnly={readOnly}
+            />
+          </HStack>
+        </VStack>
       </Form>
-    </>
+    </VStack>
   );
 };

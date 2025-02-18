@@ -2,9 +2,9 @@ import { type ReactElement } from 'react';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { ChevronDownDoubleIcon, ChevronLeftDoubleIcon, ChevronRightDoubleIcon } from '@navikt/aksel-icons';
-import { BodyShort, Heading } from '@navikt/ds-react';
+import { BodyShort, Heading, Table } from '@navikt/ds-react';
 import { CheckboxField } from '@navikt/ft-form-hooks';
-import { DateTimeLabel, Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
+import { DateTimeLabel } from '@navikt/ft-ui-komponenter';
 
 import { Kommunikasjonsretning } from '@navikt/fp-kodeverk';
 import { hentDokumentLenke } from '@navikt/fp-konstanter';
@@ -61,53 +61,70 @@ export const DocumentListInnsyn = ({ documents, saksNr, readOnly = false }: Prop
       </BodyShort>
     );
   }
-  const headerTextCodes = readOnly
-    ? ['DocumentListInnsyn.DocumentType']
-    : [
-        'DocumentListInnsyn.CheckBox',
-        'DocumentListInnsyn.Direction',
-        'DocumentListInnsyn.DocumentType',
-        'DocumentListInnsyn.DateTime',
-      ];
 
   return (
-    <>
+    <div>
       <Heading size="small" className={styles.noDocuments}>
         <FormattedMessage id="DocumentListInnsyn.VelgInnsynsDok" />
       </Heading>
-      <Table headerTextCodes={headerTextCodes}>
-        {documents.map(document => {
-          const img = getDirectionImage(document, intl);
-          const dokId = parseInt(document.dokumentId, 10);
-          return (
-            <TableRow key={dokId} id={dokId}>
-              <TableColumn className={styles.checkboxCol}>
-                <CheckboxField label={noLabelHack()} name={`dokument_${dokId}`} disabled={readOnly} />
-              </TableColumn>
-              <TableColumn hidden={readOnly}>{img}</TableColumn>
-              <TableColumn className={styles.linkCol}>
-                <a
-                  href={hentDokumentLenke(saksNr, document.journalpostId, document.dokumentId)}
-                  className="lenke lenke--frittstaende"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {document.tittel}
-                </a>
-              </TableColumn>
-              <TableColumn hidden={readOnly}>
-                {document.tidspunkt ? (
-                  <DateTimeLabel dateTimeString={document.tidspunkt} />
-                ) : (
-                  <BodyShort size="small">
-                    <FormattedMessage id="DocumentListInnsyn.IProduksjon" />
-                  </BodyShort>
-                )}
-              </TableColumn>
-            </TableRow>
-          );
-        })}
+      <Table>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell scope="col" />
+            {readOnly && (
+              <Table.HeaderCell scope="col">
+                <FormattedMessage id="DocumentListInnsyn.DocumentType" />
+              </Table.HeaderCell>
+            )}
+            {!readOnly && (
+              <>
+                <Table.HeaderCell scope="col">
+                  <FormattedMessage id="DocumentListInnsyn.Direction" />
+                </Table.HeaderCell>
+                <Table.HeaderCell scope="col">
+                  <FormattedMessage id="DocumentListInnsyn.DocumentType" />
+                </Table.HeaderCell>
+                <Table.HeaderCell scope="col">
+                  <FormattedMessage id="DocumentListInnsyn.DateTime" />
+                </Table.HeaderCell>
+              </>
+            )}
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          {documents.map(document => {
+            const img = getDirectionImage(document, intl);
+            const dokId = parseInt(document.dokumentId, 10);
+            return (
+              <Table.Row key={dokId}>
+                <Table.DataCell className={styles.checkboxCol}>
+                  <CheckboxField label={noLabelHack()} name={`dokument_${dokId}`} disabled={readOnly} />
+                </Table.DataCell>
+                <Table.DataCell hidden={readOnly}>{img}</Table.DataCell>
+                <Table.DataCell className={styles.linkCol}>
+                  <a
+                    href={hentDokumentLenke(saksNr, document.journalpostId, document.dokumentId)}
+                    className="lenke lenke--frittstaende"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {document.tittel}
+                  </a>
+                </Table.DataCell>
+                <Table.DataCell hidden={readOnly}>
+                  {document.tidspunkt ? (
+                    <DateTimeLabel dateTimeString={document.tidspunkt} />
+                  ) : (
+                    <BodyShort size="small">
+                      <FormattedMessage id="DocumentListInnsyn.IProduksjon" />
+                    </BodyShort>
+                  )}
+                </Table.DataCell>
+              </Table.Row>
+            );
+          })}
+        </Table.Body>
       </Table>
-    </>
+    </div>
   );
 };

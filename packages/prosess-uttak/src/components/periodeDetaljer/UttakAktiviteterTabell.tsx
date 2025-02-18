@@ -1,8 +1,8 @@
 import { type ReactElement, useMemo } from 'react';
 import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook-form';
-import { type IntlShape, useIntl } from 'react-intl';
+import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
-import { BodyShort, HStack } from '@navikt/ds-react';
+import { BodyShort, HStack, Table } from '@navikt/ds-react';
 import { NumberField, SelectField } from '@navikt/ft-form-hooks';
 import {
   hasValidDecimal,
@@ -13,7 +13,6 @@ import {
   notDash,
   required,
 } from '@navikt/ft-form-validators';
-import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 
 import { UttakArbeidType, UttakPeriodeType } from '@navikt/fp-kodeverk';
 import type {
@@ -32,14 +31,6 @@ import styles from './uttakAktiviteterTabell.module.css';
 const maxLength3 = maxLength(3);
 const minValue0 = minValue(0);
 const maxProsentValue100 = maxValue(100);
-
-const HEADER_TEXT_CODES = [
-  'RenderUttakTable.PeriodeData.Aktivitet',
-  'RenderUttakTable.PeriodeData.Stonadskonto',
-  'RenderUttakTable.PeriodeData.Trekk',
-  'RenderUttakTable.PeriodeData.Andel',
-  'RenderUttakTable.PeriodeData.Utbetalingsgrad',
-];
 
 export const finnArbeidsforholdNavnOgProsentArbeid = (
   aktivitet: PeriodeSokerAktivitet,
@@ -195,108 +186,129 @@ export const UttakAktiviteterTabell = ({
   return (
     <div className={styles.tableOverflow}>
       {fields.length > 0 && (
-        <Table headerTextCodes={HEADER_TEXT_CODES} noHover>
-          {fields.map((field, index: number) => {
-            const arbeidsforholdData = finnArbeidsforholdNavnOgProsentArbeid(
-              aktiviteter[index],
-              arbeidsgiverOpplysningerPerId,
-              intl,
-            );
+        <Table>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell scope="col">
+                <FormattedMessage id="RenderUttakTable.PeriodeData.Aktivitet" />
+              </Table.HeaderCell>
+              <Table.HeaderCell scope="col">
+                <FormattedMessage id="RenderUttakTable.PeriodeData.Stonadskonto" />
+              </Table.HeaderCell>
+              <Table.HeaderCell scope="col">
+                <FormattedMessage id="RenderUttakTable.PeriodeData.Trekk" />
+              </Table.HeaderCell>
+              <Table.HeaderCell scope="col">
+                <FormattedMessage id="RenderUttakTable.PeriodeData.Andel" />
+              </Table.HeaderCell>
+              <Table.HeaderCell scope="col">
+                <FormattedMessage id="RenderUttakTable.PeriodeData.Utbetalingsgrad" />
+              </Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
+            {fields.map((field, index: number) => {
+              const arbeidsforholdData = finnArbeidsforholdNavnOgProsentArbeid(
+                aktiviteter[index],
+                arbeidsgiverOpplysningerPerId,
+                intl,
+              );
 
-            const samletUtbetalingsgradForAndreAktiviteter = aktiviteterFraFormState.reduce(
-              (sum, aktivitet, i) => (i !== index ? sum + parseInt(aktivitet.utbetalingsgrad, 10) : sum),
-              0,
-            );
+              const samletUtbetalingsgradForAndreAktiviteter = aktiviteterFraFormState.reduce(
+                (sum, aktivitet, i) => (i !== index ? sum + parseInt(aktivitet.utbetalingsgrad, 10) : sum),
+                0,
+              );
 
-            return (
-              <TableRow key={field.id}>
-                <TableColumn>
-                  <BodyShort size="small" className={styles.forsteKolWidth}>
-                    {arbeidsforholdData.arbeidsforhold}
-                  </BodyShort>
-                </TableColumn>
-                <TableColumn>
-                  <div className={styles.selectStonad}>
-                    <SelectField
-                      name={`aktiviteter.${index}.stønadskontoType`}
-                      selectValues={periodeTypeOptions}
-                      hideLabel
-                      label=""
-                      readOnly={isReadOnly}
-                      validate={[validerUkerOgDager(getValues, index)]}
-                    />
-                  </div>
-                </TableColumn>
-                <TableColumn>
-                  <HStack gap="2" align="center">
-                    <span className={styles.weekPosition}>
+              return (
+                <Table.Row key={field.id}>
+                  <Table.DataCell>
+                    <BodyShort size="small" className={styles.forsteKolWidth}>
+                      {arbeidsforholdData.arbeidsforhold}
+                    </BodyShort>
+                  </Table.DataCell>
+                  <Table.DataCell>
+                    <div className={styles.selectStonad}>
+                      <SelectField
+                        name={`aktiviteter.${index}.stønadskontoType`}
+                        selectValues={periodeTypeOptions}
+                        hideLabel
+                        label=""
+                        readOnly={isReadOnly}
+                        validate={[validerUkerOgDager(getValues, index)]}
+                      />
+                    </div>
+                  </Table.DataCell>
+                  <Table.DataCell>
+                    <HStack gap="2" align="center">
+                      <span className={styles.weekPosition}>
+                        <NumberField
+                          name={`aktiviteter.${index}.weeks`}
+                          className={styles.numberWidth}
+                          readOnly={isReadOnly}
+                          validate={[
+                            required,
+                            hasValidInteger,
+                            maxLength3,
+                            validerAtUkerEllerDagerErStørreEnn0NårUtsettelseOgOppfylt(getValues, utsettelseType, intl),
+                          ]}
+                        />
+                      </span>
+                      {isReadOnly ? <div>/</div> : <div className={styles.verticalCharPlacementInTable}>/</div>}
                       <NumberField
-                        name={`aktiviteter.${index}.weeks`}
+                        name={`aktiviteter.${index}.days`}
                         className={styles.numberWidth}
                         readOnly={isReadOnly}
                         validate={[
                           required,
-                          hasValidInteger,
+                          hasValidDecimal,
                           maxLength3,
                           validerAtUkerEllerDagerErStørreEnn0NårUtsettelseOgOppfylt(getValues, utsettelseType, intl),
                         ]}
                       />
-                    </span>
-                    {isReadOnly ? <div>/</div> : <div className={styles.verticalCharPlacementInTable}>/</div>}
-                    <NumberField
-                      name={`aktiviteter.${index}.days`}
-                      className={styles.numberWidth}
-                      readOnly={isReadOnly}
-                      validate={[
-                        required,
-                        hasValidDecimal,
-                        maxLength3,
-                        validerAtUkerEllerDagerErStørreEnn0NårUtsettelseOgOppfylt(getValues, utsettelseType, intl),
-                      ]}
-                    />
-                  </HStack>
-                </TableColumn>
-                <TableColumn>
-                  <BodyShort size="small">{arbeidsforholdData.prosentArbeidText}</BodyShort>
-                </TableColumn>
-                <TableColumn>
-                  <div className={styles.utbetalingsgrad}>
-                    <NumberField
-                      name={`aktiviteter.${index}.utbetalingsgrad`}
-                      validate={[
-                        required,
-                        minValue0,
-                        maxProsentValue100,
-                        hasValidDecimal,
-                        // @ts-expect-error Fiks typen til utbetalingsgrad. Bør vera number
-                        sjekkOmUtbetalingsgradMårVæreHøyereEnn0(
-                          intl,
-                          valgtPeriode,
-                          samletUtbetalingsgradForAndreAktiviteter,
-                          erOppfylt,
-                        ),
-                        // @ts-expect-error Fiks typen til utbetalingsgrad. Bør vera number
-                        sjekkOmUtbetalingsgradEr0OmAvslått(intl, erOppfylt, utsettelseType),
-                        // @ts-expect-error Fiks typen til utbetalingsgrad. Bør vera number
-                        sjekkOmDetErTrektMinstEnDagNårUtbetalingsgradErMerEnn0(intl, getValues, index),
-                        // @ts-expect-error Fiks typen til utbetalingsgrad. Bør vera number
-                        sjekkOmUtbetalingsgradErHøyereEnnSamtidigUttaksprosent(intl, getValues),
-                        // @ts-expect-error Fiks typen til utbetalingsgrad. Bør vera number
-                        (utbetalingsgrad: string) => {
-                          const harUtsettelsestype = utsettelseType && utsettelseType !== '-';
-                          return harUtsettelsestype && getValues('erOppfylt') && parseFloat(utbetalingsgrad) > 0
-                            ? intl.formatMessage({ id: 'ValidationMessage.utbetalingMerEnnNullUtsettelse' })
-                            : null;
-                        },
-                      ]}
-                      readOnly={isReadOnly}
-                      forceTwoDecimalDigits
-                    />
-                  </div>
-                </TableColumn>
-              </TableRow>
-            );
-          })}
+                    </HStack>
+                  </Table.DataCell>
+                  <Table.DataCell>
+                    <BodyShort size="small">{arbeidsforholdData.prosentArbeidText}</BodyShort>
+                  </Table.DataCell>
+                  <Table.DataCell>
+                    <div className={styles.utbetalingsgrad}>
+                      <NumberField
+                        name={`aktiviteter.${index}.utbetalingsgrad`}
+                        validate={[
+                          required,
+                          minValue0,
+                          maxProsentValue100,
+                          hasValidDecimal,
+                          // @ts-expect-error Fiks typen til utbetalingsgrad. Bør vera number
+                          sjekkOmUtbetalingsgradMårVæreHøyereEnn0(
+                            intl,
+                            valgtPeriode,
+                            samletUtbetalingsgradForAndreAktiviteter,
+                            erOppfylt,
+                          ),
+                          // @ts-expect-error Fiks typen til utbetalingsgrad. Bør vera number
+                          sjekkOmUtbetalingsgradEr0OmAvslått(intl, erOppfylt, utsettelseType),
+                          // @ts-expect-error Fiks typen til utbetalingsgrad. Bør vera number
+                          sjekkOmDetErTrektMinstEnDagNårUtbetalingsgradErMerEnn0(intl, getValues, index),
+                          // @ts-expect-error Fiks typen til utbetalingsgrad. Bør vera number
+                          sjekkOmUtbetalingsgradErHøyereEnnSamtidigUttaksprosent(intl, getValues),
+                          // @ts-expect-error Fiks typen til utbetalingsgrad. Bør vera number
+                          (utbetalingsgrad: string) => {
+                            const harUtsettelsestype = utsettelseType && utsettelseType !== '-';
+                            return harUtsettelsestype && getValues('erOppfylt') && parseFloat(utbetalingsgrad) > 0
+                              ? intl.formatMessage({ id: 'ValidationMessage.utbetalingMerEnnNullUtsettelse' })
+                              : null;
+                          },
+                        ]}
+                        readOnly={isReadOnly}
+                        forceTwoDecimalDigits
+                      />
+                    </div>
+                  </Table.DataCell>
+                </Table.Row>
+              );
+            })}
+          </Table.Body>
         </Table>
       )}
     </div>

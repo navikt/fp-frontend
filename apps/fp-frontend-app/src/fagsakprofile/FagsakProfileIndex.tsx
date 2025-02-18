@@ -60,7 +60,7 @@ export const FagsakProfileIndex = ({
   setBehandling,
   hentOgSettBehandling,
   visSideMeny,
-  toggleSideMeny
+  toggleSideMeny,
 }: Props) => {
   const intl = useIntl();
   const [showAll, setShowAll] = useState(!behandlingUuid);

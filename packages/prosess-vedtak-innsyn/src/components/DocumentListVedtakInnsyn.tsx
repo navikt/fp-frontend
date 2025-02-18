@@ -1,14 +1,11 @@
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, Detail } from '@navikt/ds-react';
-import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
+import { BodyShort, Detail, Table } from '@navikt/ds-react';
 
 import { hentDokumentLenke } from '@navikt/fp-konstanter';
 import type { Dokument } from '@navikt/fp-types';
 
 import styles from './documentListVedtakInnsyn.module.css';
-
-const headerTextCodes = ['DocumentListVedtakInnsyn.Dokument'];
 
 interface Props {
   saksNr: string;
@@ -37,24 +34,33 @@ export const DocumentListVedtakInnsyn = ({ documents, saksNr }: Props) => {
       <Detail className={styles.noDocuments}>
         <FormattedMessage id="DocumentListVedtakInnsyn.InnsynsDok" />
       </Detail>
-      <Table noHover headerTextCodes={headerTextCodes}>
-        {documents.map(document => {
-          const dokId = parseInt(document.dokumentId, 10);
-          return (
-            <TableRow key={dokId} id={dokId}>
-              <TableColumn className={styles.linkCol}>
-                <a
-                  href={hentDokumentLenke(saksNr, document.journalpostId, document.dokumentId)}
-                  className="lenke lenke--frittstaende"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {document.tittel}
-                </a>
-              </TableColumn>
-            </TableRow>
-          );
-        })}
+      <Table>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell scope="col">
+              <FormattedMessage id="DocumentListVedtakInnsyn.Dokument" />
+            </Table.HeaderCell>
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          {documents.map(document => {
+            const dokId = parseInt(document.dokumentId, 10);
+            return (
+              <Table.Row key={dokId}>
+                <Table.DataCell className={styles.linkCol}>
+                  <a
+                    href={hentDokumentLenke(saksNr, document.journalpostId, document.dokumentId)}
+                    className="lenke lenke--frittstaende"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {document.tittel}
+                  </a>
+                </Table.DataCell>
+              </Table.Row>
+            );
+          })}
+        </Table.Body>
       </Table>
     </>
   );

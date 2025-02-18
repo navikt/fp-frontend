@@ -15,11 +15,8 @@ interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
-export const ArbeidsforholdFaktaIndex = ({ arbeidOgInntekt, arbeidsgiverOpplysningerPerId }: Props) => (
+export const ArbeidsforholdFaktaIndex = (props: Props) => (
   <RawIntlProvider value={intl}>
-    <ArbeidsforholdInfoPanel
-      arbeidOgInntekt={arbeidOgInntekt}
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />
+    <ArbeidsforholdInfoPanel {...props} />
   </RawIntlProvider>
 );

@@ -1,8 +1,7 @@
 import { useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, Label } from '@navikt/ds-react';
-import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
+import { BodyShort, Label, Table } from '@navikt/ds-react';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
@@ -74,12 +73,6 @@ const lagAndelerPrIdMap = (
   return listeMedAndelerPrId;
 };
 
-const HEADER_TEXT_CODES = [
-  'TilkjentYtelse.Feriepenger.AndelNavn',
-  'TilkjentYtelse.Feriepenger.GrunnlagRefusjon',
-  'TilkjentYtelse.Feriepenger.GrunnlagSøker',
-];
-
 interface Props {
   alleAndeler: FeriepengegrunnlagAndel[];
   opptjeningsår: number;
@@ -114,20 +107,35 @@ export const FeriepengerPrAar = ({
       <Label size="small">
         <FormattedMessage id="TilkjentYtelse.Feriepenger.Opptjeningsår" values={{ år: opptjeningsår }} />
       </Label>
-      <Table headerTextCodes={HEADER_TEXT_CODES}>
-        {andelerPrId.map(andel => (
-          <TableRow key={andel.identifikator}>
-            <TableColumn>
-              <BodyShort size="small">{andel.visningsnavn}</BodyShort>
-            </TableColumn>
-            <TableColumn>
-              <BodyShort size="small">{andel.utbetaltIRefusjon}</BodyShort>
-            </TableColumn>
-            <TableColumn>
-              <BodyShort size="small">{andel.utbetaltTilSøker}</BodyShort>
-            </TableColumn>
-          </TableRow>
-        ))}
+      <Table>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell scope="col">
+              <FormattedMessage id="TilkjentYtelse.Feriepenger.AndelNavn" />
+            </Table.HeaderCell>
+            <Table.HeaderCell scope="col">
+              <FormattedMessage id="TilkjentYtelse.Feriepenger.GrunnlagRefusjon" />
+            </Table.HeaderCell>
+            <Table.HeaderCell scope="col">
+              <FormattedMessage id="TilkjentYtelse.Feriepenger.GrunnlagSøker" />
+            </Table.HeaderCell>
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          {andelerPrId.map(andel => (
+            <Table.Row key={andel.identifikator}>
+              <Table.DataCell>
+                <BodyShort size="small">{andel.visningsnavn}</BodyShort>
+              </Table.DataCell>
+              <Table.DataCell>
+                <BodyShort size="small">{andel.utbetaltIRefusjon}</BodyShort>
+              </Table.DataCell>
+              <Table.DataCell>
+                <BodyShort size="small">{andel.utbetaltTilSøker}</BodyShort>
+              </Table.DataCell>
+            </Table.Row>
+          ))}
+        </Table.Body>
       </Table>
     </>
   );

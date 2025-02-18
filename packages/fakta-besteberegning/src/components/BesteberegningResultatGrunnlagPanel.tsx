@@ -1,7 +1,6 @@
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, Label } from '@navikt/ds-react';
-import { Table, TableColumn, TableRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { BodyShort, Table, VStack } from '@navikt/ds-react';
 import { formatCurrencyNoKr } from '@navikt/ft-utils';
 
 import type { BeregningsgrunnlagAndel, BeregningsgrunnlagPeriodeProp, Månedsgrunnlag } from '@navikt/fp-types';
@@ -31,42 +30,41 @@ const finnBesteberegnet = (besteMåneder: Månedsgrunnlag[]): number =>
 const girKap8Besteberegning = (kap8Beregning: number, kap1473Beregning: number): boolean =>
   kap8Beregning > kap1473Beregning;
 
-const headerColumnContent = [
-  // For å lage tom kolonne først
-  <div key="TomKolNøkkel" />,
-  <Label size="small" key="Kap8Nøkkel">
-    {' '}
-    <FormattedMessage id="ResultatGrunnlag.BeregningEtterKap8" />{' '}
-  </Label>,
-  <Label size="small" key="BBNøkkel">
-    {' '}
-    <FormattedMessage id="ResultatGrunnlag.BeregningEtterBesteberegning" />{' '}
-  </Label>,
-];
-
 /**
  * BesteberegningResultatGrunnlagPanel
  *
  * Presentasjonskomponent. Viser sammenligning av kap 8 beregning og §14-7, ledd 3 beregning.
  */
 export const BesteberegningResultatGrunnlagPanel = ({ periode, besteMåneder }: Props) => (
-  <>
-    <Table headerColumnContent={headerColumnContent} noHover>
-      <TableRow>
-        <TableColumn>
-          <BodyShort size="small">
-            <FormattedMessage id="ResultatGrunnlag.BruttoBeregningsgrunnlag" />
-          </BodyShort>
-        </TableColumn>
-        <TableColumn>
-          <BodyShort size="small">{formatCurrencyNoKr(finnKap8Beregning(periode))}</BodyShort>
-        </TableColumn>
-        <TableColumn>
-          <BodyShort size="small">{formatCurrencyNoKr(finnBesteberegnet(besteMåneder))}</BodyShort>
-        </TableColumn>
-      </TableRow>
+  <VStack gap="4">
+    <Table>
+      <Table.Header>
+        <Table.Row>
+          <Table.HeaderCell scope="col" />
+          <Table.HeaderCell scope="col">
+            <FormattedMessage id="ResultatGrunnlag.BeregningEtterKap8" />
+          </Table.HeaderCell>
+          <Table.HeaderCell scope="col">
+            <FormattedMessage id="ResultatGrunnlag.BeregningEtterBesteberegning" />
+          </Table.HeaderCell>
+        </Table.Row>
+      </Table.Header>
+      <Table.Body>
+        <Table.Row>
+          <Table.DataCell>
+            <BodyShort size="small">
+              <FormattedMessage id="ResultatGrunnlag.BruttoBeregningsgrunnlag" />
+            </BodyShort>
+          </Table.DataCell>
+          <Table.DataCell>
+            <BodyShort size="small">{formatCurrencyNoKr(finnKap8Beregning(periode))}</BodyShort>
+          </Table.DataCell>
+          <Table.DataCell>
+            <BodyShort size="small">{formatCurrencyNoKr(finnBesteberegnet(besteMåneder))}</BodyShort>
+          </Table.DataCell>
+        </Table.Row>
+      </Table.Body>
     </Table>
-    <VerticalSpacer twentyPx />
     <BodyShort size="small">
       {girKap8Besteberegning(finnKap8Beregning(periode), finnBesteberegnet(besteMåneder)) && (
         <FormattedMessage id="ResultatGrunnlag.Kap8GirBesteBeregning" />
@@ -75,6 +73,5 @@ export const BesteberegningResultatGrunnlagPanel = ({ periode, besteMåneder }: 
         <FormattedMessage id="ResultatGrunnlag.Kap1473GirBesteBeregning" />
       )}
     </BodyShort>
-    <VerticalSpacer twentyPx />
-  </>
+  </VStack>
 );

@@ -1,7 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Label } from '@navikt/ds-react';
-import { PeriodLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 
 import type { AoIArbeidsforhold } from '@navikt/fp-types';
 
@@ -12,8 +12,7 @@ interface Props {
 export const PermisjonPeriode = ({ arbeidsforhold }: Props) => {
   if (arbeidsforhold.permisjonOgMangel) {
     return (
-      <>
-        <VerticalSpacer sixteenPx />
+      <div>
         <Label size="small">
           <FormattedMessage id="PermisjonPeriode.Permisjon" />
         </Label>
@@ -25,8 +24,7 @@ export const PermisjonPeriode = ({ arbeidsforhold }: Props) => {
             }
           />
         </BodyShort>
-        <VerticalSpacer sixteenPx />
-      </>
+      </div>
     );
   }
   return null;

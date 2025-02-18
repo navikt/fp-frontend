@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import type { StoryFn } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 import { UttakÅrsak, UttakType } from '@navikt/fp-types';
@@ -10,23 +10,23 @@ import messages from '../../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
 
-export default {
+const meta = {
   title: 'fakta/fakta-uttaksdokumentasjon-del-opp-periode-modal',
   component: DelOppPeriodeModal,
   decorators: [withIntl],
-};
-
-const Template: StoryFn = () => (
-  <DelOppPeriodeModal
-    submit={action('button-click')}
-    cancel={action('button-click')}
-    periode={{
+  args: {
+    submit: action('button-click'),
+    cancel: action('button-click'),
+    periode: {
       fom: '2022-11-01',
       tom: '2022-11-23',
       type: UttakType.UTSETTELSE,
       årsak: UttakÅrsak.INNLEGGELSE_SØKER,
-    }}
-  />
-);
+    },
+  },
+} satisfies Meta<typeof DelOppPeriodeModal>;
+export default meta;
 
-export const VisModalForÅDeleOppPeriode = Template.bind({});
+type Story = StoryObj<typeof meta>;
+
+export const VisModalForÅDeleOppPeriode: Story = {};
