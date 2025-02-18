@@ -6,7 +6,7 @@ import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { MenyVergeIndex } from './MenyVergeIndex';
 
 const meta = {
-  title: 'sak/sak-meny-verge',
+  title: 'sak-meny/verge-v2',
   component: MenyVergeIndex,
   args: {
     alleKodeverk: alleKodeverk as any,

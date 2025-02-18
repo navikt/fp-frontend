@@ -140,8 +140,10 @@ export const BehandlingRel = {
   HENLEGG_BEHANDLING: 'henlegg-behandling',
   BEHANDLING_ON_HOLD: 'sett-behandling-pa-vent',
   RESUME_BEHANDLING: 'gjenoppta-behandling',
-  VERGE_OPPRETT: 'verge-opprett',
-  VERGE_FJERN: 'verge-fjern',
+  VERGE_OPPRETT_V1: 'opprett-verge',
+  VERGE_FJERN_V1: 'fjern-verge',
+  VERGE_OPPRETT_V2: 'verge-opprett',
+  VERGE_FJERN_V2: 'verge-fjern',
   VERGE_HENT: 'verge-hent',
   SAVE_AKSJONSPUNKT: 'lagre-aksjonspunkter',
   SAVE_OVERSTYRT_AKSJONSPUNKT: 'lagre-overstyr-aksjonspunkter',
@@ -511,7 +513,8 @@ const getUtlandDokStatusOptions = (links: ApiLink[]) => (behandling: Behandling)
 const getVergeOptions = (links: ApiLink[]) => (behandling: Behandling, isEnabled: boolean) =>
   queryOptions({
     queryKey: [BehandlingRel.VERGE, behandling.uuid, behandling.versjon],
-    queryFn: () => kyExtended.get(getUrlFromRel('VERGE', links)).json<Verge>(),
+    queryFn: () =>
+      kyExtended.get(getUrlFromRel('VERGE', links), { searchParams: { uuid: behandling.uuid } }).json<Verge>(),
     enabled: isEnabled,
     staleTime: Infinity,
   });
@@ -593,12 +596,22 @@ const getFortsettBehandling = (links: ApiLink[]) => (params: { behandlingUuid: s
     json: params,
   });
 
-const getOpprettVerge = (links: ApiLink[]) => (params: OpprettVergeParams) =>
-  kyExtended.post<Behandling>(getUrlFromRel('VERGE_OPPRETT', links), {
+const getOpprettVergeV1 = (links: ApiLink[]) => (params: { behandlingUuid: string; behandlingVersjon: number }) =>
+  kyExtended.post<Behandling>(getUrlFromRel('VERGE_OPPRETT_V1', links), {
     json: params,
   });
 
-const getFjernVerge = (links: ApiLink[]) => () => kyExtended.post<Behandling>(getUrlFromRel('VERGE_FJERN', links));
+const getOpprettVergeV2 = (links: ApiLink[]) => (params: OpprettVergeParams) =>
+  kyExtended.post<Behandling>(getUrlFromRel('VERGE_OPPRETT_V2', links), {
+    json: params,
+  });
+
+const getFjernVergeV1 = (links: ApiLink[]) => (params: { behandlingUuid: string; behandlingVersjon: number }) =>
+  kyExtended.post<Behandling>(getUrlFromRel('VERGE_FJERN_V1', links), {
+    json: params,
+  });
+
+const getFjernVergeV2 = (links: ApiLink[]) => () => kyExtended.post<Behandling>(getUrlFromRel('VERGE_FJERN_V2', links));
 
 const getVerge = (links: ApiLink[]) => (behandling: Behandling) =>
   queryOptions({
@@ -744,8 +757,10 @@ export const useBehandlingApi = (behandling: Behandling) => {
       åpneBehandlingForEndring: getÅpneBehandlingForEndring(links),
       lagreAksjonspunkt: getLagreAksjonspunkt(links),
       lagreOverstyrtAksjonspunkt: getLagreOverstyrtAksjonspunkt(links),
-      opprettVerge: getOpprettVerge(links),
-      fjernVerge: getFjernVerge(links),
+      opprettVergeV1: getOpprettVergeV1(links),
+      fjernVergeV1: getFjernVergeV1(links),
+      opprettVergeV2: getOpprettVergeV2(links),
+      fjernVergeV2: getFjernVergeV2(links),
     },
   };
 };

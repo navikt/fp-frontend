@@ -14,17 +14,39 @@ export const useBehandlingPollingOperasjoner = (
   const { onBehandlingSuccess } = useTaskStatusChecker(onSuccess);
   const { setIsRequestPending } = useRequestPendingContext();
 
-  const { mutate: opprettVerge } = useMutation({
-    mutationFn: async (values: OpprettVergeParams) => {
-      const response = await pollingApi.opprettVerge(values);
+  const { mutate: opprettVergeV1 } = useMutation({
+    mutationFn: async () => {
+      const response = await pollingApi.opprettVergeV1({
+        behandlingUuid: behandling.uuid,
+        behandlingVersjon: behandling.versjon,
+      });
       return doPolling(response, setIsRequestPending);
     },
     onSuccess: onBehandlingSuccess,
   });
 
-  const { mutate: fjernVerge } = useMutation({
+  const { mutate: opprettVergeV2 } = useMutation({
+    mutationFn: async (values: OpprettVergeParams) => {
+      const response = await pollingApi.opprettVergeV2(values);
+      return doPolling(response, setIsRequestPending);
+    },
+    onSuccess: onBehandlingSuccess,
+  });
+
+  const { mutate: fjernVergeV1 } = useMutation({
     mutationFn: async () => {
-      const response = await pollingApi.fjernVerge();
+      const response = await pollingApi.fjernVergeV1({
+        behandlingUuid: behandling.uuid,
+        behandlingVersjon: behandling.versjon,
+      });
+      return doPolling(response, setIsRequestPending);
+    },
+    onSuccess: onBehandlingSuccess,
+  });
+
+  const { mutate: fjernVergeV2 } = useMutation({
+    mutationFn: async () => {
+      const response = await pollingApi.fjernVergeV2();
       return doPolling(response, setIsRequestPending);
     },
     onSuccess: onBehandlingSuccess,
@@ -68,8 +90,10 @@ export const useBehandlingPollingOperasjoner = (
   return {
     lagreAksjonspunkter,
     lagreOverstyrteAksjonspunkter,
-    opprettVerge,
-    fjernVerge,
+    opprettVergeV1,
+    fjernVergeV1,
+    opprettVergeV2,
+    fjernVergeV2,
     åpneForEndringer,
     gjenopptaBehandling,
   };
