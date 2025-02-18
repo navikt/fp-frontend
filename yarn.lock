@@ -2489,6 +2489,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@navikt/aksel-icons@npm:7.13.0":
+  version: 7.13.0
+  resolution: "@navikt/aksel-icons@npm:7.13.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-icons%2F7.13.0%2F23160e57540df4f599acc7b744a08e8a34b05b70"
+  checksum: 81925afd3b6e83fd2323e1fea8f72c6a963ee8b9390433e66a6135f25330946097a8f6bc67a92da5f0b1c0e3aeff10b424fb98d7037263f51ddbee7d0e3c5385
+  languageName: node
+  linkType: hard
+
 "@navikt/aksel-icons@npm:^3.4.2":
   version: 3.4.2
   resolution: "@navikt/aksel-icons@npm:3.4.2::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-icons%2F3.4.2%2Ffa858e1a5fb0557d61b62ad7cdf0d75e26fc89d7"
@@ -2582,7 +2589,7 @@ __metadata:
   resolution: "@navikt/fp-fakta-adopsjon@workspace:packages/fakta-adopsjon"
   dependencies:
     "@formatjs/cli-lib": 6.6.6
-    "@navikt/aksel-icons": 7.10.0
+    "@navikt/aksel-icons": 7.13.0
     "@navikt/ds-css": 7.10.0
     "@navikt/ds-react": 7.10.0
     "@navikt/fp-fakta-felles": "workspace:*"
@@ -2620,7 +2627,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-arbeid-og-inntekt@workspace:packages/fakta-arbeid-og-inntekt"
   dependencies:
-    "@navikt/aksel-icons": 7.10.0
+    "@navikt/aksel-icons": 7.13.0
     "@navikt/ds-css": 7.10.0
     "@navikt/ds-react": 7.10.0
     "@navikt/fp-kodeverk": "workspace:*"
@@ -2659,7 +2666,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-arbeidsforhold@workspace:packages/fakta-arbeidsforhold"
   dependencies:
-    "@navikt/aksel-icons": 7.10.0
+    "@navikt/aksel-icons": 7.13.0
     "@navikt/ds-css": 7.10.0
     "@navikt/ds-react": 7.10.0
     "@navikt/fp-kodeverk": "workspace:*"
@@ -2795,7 +2802,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-inntektsmelding@workspace:packages/fakta-inntektsmelding"
   dependencies:
-    "@navikt/aksel-icons": 7.10.0
+    "@navikt/aksel-icons": 7.13.0
     "@navikt/ds-css": 7.10.0
     "@navikt/ds-react": 7.10.0
     "@navikt/fp-fakta-felles": "workspace:*"
@@ -2827,7 +2834,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-medlemskap@workspace:packages/fakta-medlemskap"
   dependencies:
-    "@navikt/aksel-icons": 7.10.0
+    "@navikt/aksel-icons": 7.13.0
     "@navikt/ds-css": 7.10.0
     "@navikt/ds-react": 7.10.0
     "@navikt/fp-fakta-felles": "workspace:*"
@@ -2898,7 +2905,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-omsorg-og-rett@workspace:packages/fakta-omsorg-og-rett"
   dependencies:
-    "@navikt/aksel-icons": 7.10.0
+    "@navikt/aksel-icons": 7.13.0
     "@navikt/ds-css": 7.10.0
     "@navikt/ds-react": 7.10.0
     "@navikt/fp-fakta-felles": "workspace:*"
@@ -2936,7 +2943,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-omsorg@workspace:packages/fakta-omsorg"
   dependencies:
-    "@navikt/aksel-icons": 7.10.0
+    "@navikt/aksel-icons": 7.13.0
     "@navikt/ds-css": 7.10.0
     "@navikt/ds-react": 7.10.0
     "@navikt/fp-fakta-felles": "workspace:*"
@@ -2974,7 +2981,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-opptjening@workspace:packages/fakta-opptjening"
   dependencies:
-    "@navikt/aksel-icons": 7.10.0
+    "@navikt/aksel-icons": 7.13.0
     "@navikt/ds-css": 7.10.0
     "@navikt/ds-react": 7.10.0
     "@navikt/fp-kodeverk": "workspace:*"
@@ -3011,7 +3018,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-permisjon@workspace:packages/fakta-permisjon"
   dependencies:
-    "@navikt/aksel-icons": 7.10.0
+    "@navikt/aksel-icons": 7.13.0
     "@navikt/ds-css": 7.10.0
     "@navikt/ds-react": 7.10.0
     "@navikt/fp-kodeverk": "workspace:*"
@@ -3049,7 +3056,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-saken@workspace:packages/fakta-saken"
   dependencies:
-    "@navikt/aksel-icons": 7.10.0
+    "@navikt/aksel-icons": 7.13.0
     "@navikt/ds-css": 7.10.0
     "@navikt/ds-react": 7.10.0
     "@navikt/fp-fakta-felles": "workspace:*"
@@ -3087,7 +3094,7 @@ __metadata:
   resolution: "@navikt/fp-fakta-tilrettelegging@workspace:packages/fakta-tilrettelegging"
   dependencies:
     "@formatjs/cli-lib": 6.6.6
-    "@navikt/aksel-icons": 7.10.0
+    "@navikt/aksel-icons": 7.13.0
     "@navikt/ds-css": 7.10.0
     "@navikt/ds-react": 7.10.0
     "@navikt/fp-fakta-felles": "workspace:*"
@@ -3126,7 +3133,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-uttak@workspace:packages/fakta-uttak"
   dependencies:
-    "@navikt/aksel-icons": 7.10.0
+    "@navikt/aksel-icons": 7.13.0
     "@navikt/ds-css": 7.10.0
     "@navikt/ds-react": 7.10.0
     "@navikt/fp-fakta-felles": "workspace:*"
@@ -3164,7 +3171,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-uttaksdokumentasjon@workspace:packages/fakta-uttaksdokumentasjon"
   dependencies:
-    "@navikt/aksel-icons": 7.10.0
+    "@navikt/aksel-icons": 7.13.0
     "@navikt/ds-css": 7.10.0
     "@navikt/ds-react": 7.10.0
     "@navikt/fp-fakta-felles": "workspace:*"
@@ -3268,7 +3275,7 @@ __metadata:
   dependencies:
     "@formatjs/intl-datetimeformat": 6.17.2
     "@formatjs/intl-numberformat": 8.15.2
-    "@navikt/aksel-icons": 7.10.0
+    "@navikt/aksel-icons": 7.13.0
     "@navikt/ds-css": 7.10.0
     "@navikt/ds-css-internal": ^3.4.3
     "@navikt/ds-react": 7.10.0
@@ -3406,7 +3413,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-journalforing@workspace:packages/journalforing"
   dependencies:
-    "@navikt/aksel-icons": 7.10.0
+    "@navikt/aksel-icons": 7.13.0
     "@navikt/ds-css": 7.10.0
     "@navikt/ds-react": 7.10.0
     "@navikt/ds-react-internal": 3.4.3
@@ -3467,7 +3474,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-los-avdelingsleder@workspace:packages/los-avdelingsleder"
   dependencies:
-    "@navikt/aksel-icons": 7.10.0
+    "@navikt/aksel-icons": 7.13.0
     "@navikt/ds-css": 7.10.0
     "@navikt/ds-react": 7.10.0
     "@navikt/fp-kodeverk": "workspace:*"
@@ -3550,7 +3557,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-los-saksbehandler@workspace:packages/los-saksbehandler"
   dependencies:
-    "@navikt/aksel-icons": 7.10.0
+    "@navikt/aksel-icons": 7.13.0
     "@navikt/ds-css": 7.10.0
     "@navikt/ds-react": 7.10.0
     "@navikt/fp-kodeverk": "workspace:*"
@@ -3631,7 +3638,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-papirsoknad-ui-komponenter@workspace:packages/papirsoknad-ui-komponenter"
   dependencies:
-    "@navikt/aksel-icons": 7.10.0
+    "@navikt/aksel-icons": 7.13.0
     "@navikt/ds-css": 7.10.0
     "@navikt/ds-react": 7.10.0
     "@navikt/fp-kodeverk": "workspace:*"
@@ -3860,7 +3867,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-felles@workspace:packages/prosess-felles"
   dependencies:
-    "@navikt/aksel-icons": 7.10.0
+    "@navikt/aksel-icons": 7.13.0
     "@navikt/ds-css": 7.10.0
     "@navikt/ds-react": 7.10.0
     "@navikt/fp-kodeverk": "workspace:*"
@@ -3925,7 +3932,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-innsyn@workspace:packages/prosess-innsyn"
   dependencies:
-    "@navikt/aksel-icons": 7.10.0
+    "@navikt/aksel-icons": 7.13.0
     "@navikt/ds-css": 7.10.0
     "@navikt/ds-react": 7.10.0
     "@navikt/fp-kodeverk": "workspace:*"
@@ -4000,7 +4007,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-simulering@workspace:packages/prosess-simulering"
   dependencies:
-    "@navikt/aksel-icons": 7.10.0
+    "@navikt/aksel-icons": 7.13.0
     "@navikt/ds-css": 7.10.0
     "@navikt/ds-react": 7.10.0
     "@navikt/fp-kodeverk": "workspace:*"
@@ -4073,7 +4080,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-tilkjent-ytelse@workspace:packages/prosess-tilkjent-ytelse"
   dependencies:
-    "@navikt/aksel-icons": 7.10.0
+    "@navikt/aksel-icons": 7.13.0
     "@navikt/ds-css": 7.10.0
     "@navikt/ds-react": 7.10.0
     "@navikt/fp-kodeverk": "workspace:*"
@@ -4112,7 +4119,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-uttak@workspace:packages/prosess-uttak"
   dependencies:
-    "@navikt/aksel-icons": 7.10.0
+    "@navikt/aksel-icons": 7.13.0
     "@navikt/ds-css": 7.10.0
     "@navikt/ds-react": 7.10.0
     "@navikt/fp-kodeverk": "workspace:*"
@@ -4257,7 +4264,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-vedtak@workspace:packages/prosess-vedtak"
   dependencies:
-    "@navikt/aksel-icons": 7.10.0
+    "@navikt/aksel-icons": 7.13.0
     "@navikt/ds-css": 7.10.0
     "@navikt/ds-react": 7.10.0
     "@navikt/fp-kodeverk": "workspace:*"
@@ -4432,7 +4439,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-vilkar-opptjening@workspace:packages/prosess-vilkar-opptjening"
   dependencies:
-    "@navikt/aksel-icons": 7.10.0
+    "@navikt/aksel-icons": 7.13.0
     "@navikt/ds-css": 7.10.0
     "@navikt/ds-react": 7.10.0
     "@navikt/fp-kodeverk": "workspace:*"
@@ -4469,7 +4476,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-vilkar-overstyring@workspace:packages/prosess-vilkar-overstyring"
   dependencies:
-    "@navikt/aksel-icons": 7.10.0
+    "@navikt/aksel-icons": 7.13.0
     "@navikt/ds-css": 7.10.0
     "@navikt/ds-react": 7.10.0
     "@navikt/fp-kodeverk": "workspace:*"
@@ -4641,7 +4648,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-behandling-velger@workspace:packages/sak-behandling-velger"
   dependencies:
-    "@navikt/aksel-icons": 7.10.0
+    "@navikt/aksel-icons": 7.13.0
     "@navikt/ds-css": 7.10.0
     "@navikt/ds-react": 7.10.0
     "@navikt/fp-kodeverk": "workspace:*"
@@ -4674,7 +4681,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-dekorator@workspace:packages/sak-dekorator"
   dependencies:
-    "@navikt/aksel-icons": 7.10.0
+    "@navikt/aksel-icons": 7.13.0
     "@navikt/ds-css": 7.10.0
     "@navikt/ds-react": 7.10.0
     "@navikt/fp-kodeverk": "workspace:*"
@@ -4705,7 +4712,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-dokumenter@workspace:packages/sak-dokumenter"
   dependencies:
-    "@navikt/aksel-icons": 7.10.0
+    "@navikt/aksel-icons": 7.13.0
     "@navikt/ds-css": 7.10.0
     "@navikt/ds-react": 7.10.0
     "@navikt/fp-kodeverk": "workspace:*"
@@ -4761,7 +4768,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-historikk@workspace:packages/sak-historikk"
   dependencies:
-    "@navikt/aksel-icons": 7.10.0
+    "@navikt/aksel-icons": 7.13.0
     "@navikt/ds-css": 7.10.0
     "@navikt/ds-react": 7.10.0
     "@navikt/fp-kodeverk": "workspace:*"
@@ -4820,7 +4827,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-meldinger@workspace:packages/sak-meldinger"
   dependencies:
-    "@navikt/aksel-icons": 7.10.0
+    "@navikt/aksel-icons": 7.13.0
     "@navikt/ds-css": 7.10.0
     "@navikt/ds-react": 7.10.0
     "@navikt/fp-kodeverk": "workspace:*"
@@ -4917,7 +4924,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-meny-henlegg@workspace:packages/sak-meny-henlegg"
   dependencies:
-    "@navikt/aksel-icons": 7.10.0
+    "@navikt/aksel-icons": 7.13.0
     "@navikt/ds-css": 7.10.0
     "@navikt/ds-react": 7.10.0
     "@navikt/fp-kodeverk": "workspace:*"
@@ -5075,7 +5082,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-risikoklassifisering@workspace:packages/sak-risikoklassifisering"
   dependencies:
-    "@navikt/aksel-icons": 7.10.0
+    "@navikt/aksel-icons": 7.13.0
     "@navikt/ds-css": 7.10.0
     "@navikt/ds-react": 7.10.0
     "@navikt/fp-kodeverk": "workspace:^"
@@ -5109,7 +5116,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-sok@workspace:packages/sak-sok"
   dependencies:
-    "@navikt/aksel-icons": 7.10.0
+    "@navikt/aksel-icons": 7.13.0
     "@navikt/ds-css": 7.10.0
     "@navikt/ds-react": 7.10.0
     "@navikt/fp-kodeverk": "workspace:*"
@@ -5142,7 +5149,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-totrinnskontroll@workspace:packages/sak-totrinnskontroll"
   dependencies:
-    "@navikt/aksel-icons": 7.10.0
+    "@navikt/aksel-icons": 7.13.0
     "@navikt/ds-css": 7.10.0
     "@navikt/ds-react": 7.10.0
     "@navikt/fp-kodeverk": "workspace:*"
@@ -5211,7 +5218,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-visittkort@workspace:packages/sak-visittkort"
   dependencies:
-    "@navikt/aksel-icons": 7.10.0
+    "@navikt/aksel-icons": 7.13.0
     "@navikt/ds-css": 7.10.0
     "@navikt/ds-react": 7.10.0
     "@navikt/fp-kodeverk": "workspace:^"

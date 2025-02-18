@@ -27,7 +27,7 @@
   "dependencies": {
     "@formatjs/intl-datetimeformat": "6.17.2",
     "@formatjs/intl-numberformat": "8.15.2",
-    "@navikt/aksel-icons": "7.10.0",
+    "@navikt/aksel-icons": "7.13.0",
     "@navikt/ds-css": "7.10.0",
     "@navikt/ds-css-internal": "^3.4.3",
     "@navikt/ds-react": "7.10.0",

@@ -11,6 +11,7 @@ import type { AlleKodeverk, AlleKodeverkTilbakekreving, Historikkinnslag } from 
 import { sortAndTagTilbakekreving } from '../utils/historikkUtils';
 import { EnvironmentWrapper } from './EnvironmentWrapper';
 import { HistorikkInnslag } from './HistorikkInnslag/HistorikkInnslag';
+import { UtvidHistorikkKnapp } from './HistorikkInnslag/UtvidHistorikkKnapp.tsx';
 
 import styles from './historikk.module.css';
 
@@ -67,6 +68,12 @@ export const Historikk = ({
 
   const scrollReset = useCallback(() => setTop(0), []);
 
+  const [utvidHistorikkPanel, setUtvidHistorikkPanel] = useState(true);
+
+  const toggleHistorikkPanel = () => {
+    setUtvidHistorikkPanel(!utvidHistorikkPanel);
+  };
+
   useEffect(() => {
     window.addEventListener('scroll', scrollReset);
     return () => {
@@ -78,7 +85,13 @@ export const Historikk = ({
     <>
       <Box background="bg-subtle" borderColor="border-divider" borderWidth="0 0 2 0" padding="5">
         <HStack justify="space-between">
-          <Heading size="small">{intl.formatMessage({ id: 'History.Historikk' })}</Heading>
+          <Heading size="small">
+            {intl.formatMessage({ id: 'History.Historikk' })}
+            <UtvidHistorikkKnapp
+              toggleHistorikkPanel={toggleHistorikkPanel}
+              utvidHistorikkPanel={utvidHistorikkPanel}
+            />
+          </Heading>
           <HStack gap="8">
             {valgtBehandlingUuid && (
               <Checkbox size="small" onChange={() => setSkalSortertePaValgtBehandling(!skalSortertePaValgtBehandling)}>
