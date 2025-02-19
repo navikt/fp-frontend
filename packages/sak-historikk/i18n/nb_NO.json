@@ -1,7 +1,12 @@
 {
   "History.FiltrerPaBehandling": "Filtrer på behandling",
   "History.Historikk": "Historikk",
-  "History.UtvidHistorikk": "Utvid eller minsk historikk",
+
+  "BubbleText.LukkeTekstfelt": "Lukke tekstfelt",
+  "BubbleText.ApneTekstfelt": "Åpne tekstfelt",
+
+  "BehandlingSupportIndex.Utvid": "Utvid",
+  "BehandlingSupportIndex.Minsk": "Minsk",
 
   "Historikkinnslag.Soker": "Søker",
   "Historikkinnslag.Saksbehandler": "Saksbehandler",

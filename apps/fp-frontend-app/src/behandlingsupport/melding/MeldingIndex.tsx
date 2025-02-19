@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { type ReactElement, useCallback, useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 
@@ -28,9 +28,10 @@ interface Props {
   meldingFormData?: any;
   setMeldingFormData: (data?: any) => void;
   hentOgSettBehandling: () => void;
+  toggleVisUtvidetBehandlingSupportIndexKnapp: ReactElement;
 }
 
-const finnFristFraBehandling = (behandling : BehandlingAppKontekst) =>
+const finnFristFraBehandling = (behandling: BehandlingAppKontekst) =>
   behandling.behandlingPaaVent ? behandling.fristBehandlingPåVent || behandling.fristBehandlingPaaVent : undefined;
 
 /**
@@ -44,12 +45,23 @@ export const MeldingIndex = ({
   meldingFormData,
   setMeldingFormData,
   hentOgSettBehandling,
+  toggleVisUtvidetBehandlingSupportIndexKnapp,
 }: Props) => {
   const intl = useIntl();
   const [showSettPaVentModal, setShowSettPaVentModal] = useState(false);
   const [showMessagesModal, setShowMessageModal] = useState(false);
 
   const navigate = useNavigate();
+  const [top, setTop] = useState<number>();
+
+  const scrollReset = useCallback(() => setTop(0), []);
+
+  useEffect(() => {
+    window.addEventListener('scroll', scrollReset);
+    return () => {
+      window.removeEventListener('scroll', scrollReset);
+    };
+  }, []);
 
   const fagsak = fagsakData.getFagsak();
   const valgtBehandling = notEmpty(fagsakData.getBehandling(valgtBehandlingUuid));
@@ -99,12 +111,23 @@ export const MeldingIndex = ({
     behandlingTillatteOperasjoner?.behandlingKanSendeMelding;
 
   return (
-    <>
+    <div
+      className={styles.container}
+      style={{ height: `calc(100vh - ${top}px)` }}
+      ref={el => {
+        if (el) {
+          setTop(el.getBoundingClientRect().top);
+        }
+      }}
+    >
       {showMessagesModal && (
         <MessagesModalSakIndex showModal={submitFinished && showMessagesModal} closeEvent={afterSubmit} />
       )}
 
-      <SupportHeaderAndContent tekst={intl.formatMessage({ id: 'MeldingIndex.Meldinger' })}>
+      <SupportHeaderAndContent
+        tekst={intl.formatMessage({ id: 'MeldingIndex.Meldinger' })}
+        toggleVisUtvidetBehandlingSupportIndexKnapp={toggleVisUtvidetBehandlingSupportIndexKnapp}
+      >
         <VerticalSpacer sixteenPx />
         {!kanSendeMelding && (
           <div className={styles.textAlign}>
@@ -138,7 +161,7 @@ export const MeldingIndex = ({
           frist={finnFristFraBehandling(valgtBehandling)}
         />
       )}
-    </>
+    </div>
   );
 };
 

@@ -51,6 +51,7 @@ interface Props {
   hentOgSettBehandling: () => void;
   visSideMeny: boolean;
   toggleSideMeny: () => void;
+  visUtvidetHistorikk: boolean;
 }
 
 export const FagsakProfileIndex = ({
@@ -60,7 +61,8 @@ export const FagsakProfileIndex = ({
   setBehandling,
   hentOgSettBehandling,
   visSideMeny,
-  toggleSideMeny
+  toggleSideMeny,
+  visUtvidetHistorikk,
 }: Props) => {
   const intl = useIntl();
   const [showAll, setShowAll] = useState(!behandlingUuid);
@@ -129,6 +131,10 @@ export const FagsakProfileIndex = ({
                 />
               </ErrorBoundary>
             </HStack>
+          </>
+        )}
+        {!shouldRedirectToBehandlinger && !visUtvidetHistorikk && (
+          <div>
             <ErrorBoundary
               errorMessageCallback={addErrorMessage}
               errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Behandlingsvelger' })}
@@ -146,15 +152,23 @@ export const FagsakProfileIndex = ({
                 getKodeverkMedNavn={getKodeverkFn}
               />
             </ErrorBoundary>
+          </div>
+        )}
+        {!visUtvidetHistorikk && (
+          <>
+            <ErrorBoundary
+              errorMessageCallback={addErrorMessage}
+              errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Risikoklassifisering' })}
+            >
+              <RisikoklassifiseringIndex
+                fagsakData={fagsakData}
+                behandling={behandling}
+                setBehandling={setBehandling}
+              />
+            </ErrorBoundary>
+            <EksterneRessurser fagsak={fagsak} ainntektHref={ainntektHref} arbeidstakerHref={arbeidstakerHref} />
           </>
         )}
-        <ErrorBoundary
-          errorMessageCallback={addErrorMessage}
-          errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Risikoklassifisering' })}
-        >
-          <RisikoklassifiseringIndex fagsakData={fagsakData} behandling={behandling} setBehandling={setBehandling} />
-        </ErrorBoundary>
-        <EksterneRessurser fagsak={fagsak} ainntektHref={ainntektHref} arbeidstakerHref={arbeidstakerHref} />
       </VStack>
       <VerticalSpacer sixteenPx />
     </div>

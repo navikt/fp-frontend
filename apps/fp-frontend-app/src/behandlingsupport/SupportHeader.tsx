@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import type { ReactElement, ReactNode } from 'react';
 import { useIntl } from 'react-intl';
 
 import { Heading } from '@navikt/ds-react';
@@ -14,9 +14,16 @@ type Props = {
   antall?: number;
   children: ReactNode;
   brukPadding?: boolean;
+  toggleVisUtvidetBehandlingSupportIndexKnapp: ReactElement;
 };
 
-export const SupportHeaderAndContent = ({ tekst, antall, children, brukPadding = true }: Props) => {
+export const SupportHeaderAndContent = ({
+  tekst,
+  antall,
+  children,
+  brukPadding = true,
+  toggleVisUtvidetBehandlingSupportIndexKnapp,
+}: Props) => {
   const intl = useIntl();
   const { addErrorMessage } = useRestApiErrorDispatcher();
 
@@ -26,7 +33,9 @@ export const SupportHeaderAndContent = ({ tekst, antall, children, brukPadding =
         <FlexContainer>
           <FlexRow spaceBetween>
             <FlexColumn>
-              <Heading size="small">{tekst}</Heading>
+              <Heading size="small">
+                {tekst} {toggleVisUtvidetBehandlingSupportIndexKnapp}
+              </Heading>
             </FlexColumn>
             {!!antall && antall > 0 && (
               <FlexColumn>

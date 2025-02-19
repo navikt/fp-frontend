@@ -2446,13 +2446,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aksel-icons@npm:7.13.0":
-  version: 7.13.0
-  resolution: "@navikt/aksel-icons@npm:7.13.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-icons%2F7.13.0%2F23160e57540df4f599acc7b744a08e8a34b05b70"
-  checksum: 81925afd3b6e83fd2323e1fea8f72c6a963ee8b9390433e66a6135f25330946097a8f6bc67a92da5f0b1c0e3aeff10b424fb98d7037263f51ddbee7d0e3c5385
-  languageName: node
-  linkType: hard
-
 "@navikt/aksel-icons@npm:^3.4.2":
   version: 3.4.2
   resolution: "@navikt/aksel-icons@npm:3.4.2::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-icons%2F3.4.2%2Ffa858e1a5fb0557d61b62ad7cdf0d75e26fc89d7"
