@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import { type ReactRenderer } from '@storybook/react';
 import type { DecoratorFunction } from '@storybook/types';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -11,6 +13,13 @@ export const withQueryClient: DecoratorFunction<ReactRenderer> = Story => {
       },
     },
   });
+
+  useEffect(() => {
+    return () => {
+      queryClient.clear();
+      queryClient.removeQueries();
+    };
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
