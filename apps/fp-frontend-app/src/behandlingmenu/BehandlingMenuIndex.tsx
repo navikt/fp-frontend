@@ -115,6 +115,7 @@ export const BehandlingMenuIndex = ({
           behandling={behandling}
           setBehandling={setBehandling}
           lukkModal={lukkModal}
+          hentOgSettBehandling={hentOgSettBehandling}
         />
       )}
       {valgtModal === ModalType.ÅPNE_FOR_ENDRINGER && behandling && (

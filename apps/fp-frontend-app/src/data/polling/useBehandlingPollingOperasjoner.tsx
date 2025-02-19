@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 
-import type { Behandling, OpprettVergeParams } from '@navikt/fp-types';
+import type { Behandling } from '@navikt/fp-types';
 
 import { type AksjonspunktArgs, type OverstyrteAksjonspunktArgs, useBehandlingApi } from '../behandlingApi';
 import { doPolling, useTaskStatusChecker } from './pollingUtils';
@@ -25,28 +25,12 @@ export const useBehandlingPollingOperasjoner = (
     onSuccess: onBehandlingSuccess,
   });
 
-  const { mutate: opprettVergeV2 } = useMutation({
-    mutationFn: async (values: OpprettVergeParams) => {
-      const response = await pollingApi.opprettVergeV2(values);
-      return doPolling(response, setIsRequestPending);
-    },
-    onSuccess: onBehandlingSuccess,
-  });
-
   const { mutate: fjernVergeV1 } = useMutation({
     mutationFn: async () => {
       const response = await pollingApi.fjernVergeV1({
         behandlingUuid: behandling.uuid,
         behandlingVersjon: behandling.versjon,
       });
-      return doPolling(response, setIsRequestPending);
-    },
-    onSuccess: onBehandlingSuccess,
-  });
-
-  const { mutate: fjernVergeV2 } = useMutation({
-    mutationFn: async () => {
-      const response = await pollingApi.fjernVergeV2();
       return doPolling(response, setIsRequestPending);
     },
     onSuccess: onBehandlingSuccess,
@@ -92,8 +76,6 @@ export const useBehandlingPollingOperasjoner = (
     lagreOverstyrteAksjonspunkter,
     opprettVergeV1,
     fjernVergeV1,
-    opprettVergeV2,
-    fjernVergeV2,
     åpneForEndringer,
     gjenopptaBehandling,
   };

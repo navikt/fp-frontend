@@ -602,7 +602,7 @@ const getOpprettVergeV1 = (links: ApiLink[]) => (params: { behandlingUuid: strin
   });
 
 const getOpprettVergeV2 = (links: ApiLink[]) => (params: OpprettVergeParams) =>
-  kyExtended.post<Behandling>(getUrlFromRel('VERGE_OPPRETT_V2', links), {
+  kyExtended.post(getUrlFromRel('VERGE_OPPRETT_V2', links), {
     json: params,
   });
 
@@ -611,12 +611,13 @@ const getFjernVergeV1 = (links: ApiLink[]) => (params: { behandlingUuid: string;
     json: params,
   });
 
-const getFjernVergeV2 = (links: ApiLink[]) => () => kyExtended.post<Behandling>(getUrlFromRel('VERGE_FJERN_V2', links));
+const getFjernVergeV2 = (links: ApiLink[]) => () => kyExtended.post(getUrlFromRel('VERGE_FJERN_V2', links));
 
 const getVerge = (links: ApiLink[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.VERGE_HENT, behandling.uuid, behandling.versjon],
     queryFn: () => kyExtended.get(getUrlFromRel('VERGE_HENT', links)).json<Verge>(),
+    enabled: harLenke(behandling, 'VERGE_HENT'),
     staleTime: Infinity,
   });
 
@@ -723,7 +724,11 @@ export const useBehandlingApi = (behandling: Behandling) => {
     inntektArbeidYtelseOptions: getInntektArbeidYtelseOptions(links),
     utlandDokStatusOptions: getUtlandDokStatusOptions(links),
     vergeOptions: getVergeOptions(links),
-    verge: getVerge(links),
+    verge: {
+      hent: getVerge(links),
+      opprettVergeV2: getOpprettVergeV2(links),
+      fjernVergeV2: getFjernVergeV2(links),
+    },
     anke: {
       ankeVurderingOptions: getAnkeVurderingOptions(links),
     },
@@ -759,8 +764,6 @@ export const useBehandlingApi = (behandling: Behandling) => {
       lagreOverstyrtAksjonspunkt: getLagreOverstyrtAksjonspunkt(links),
       opprettVergeV1: getOpprettVergeV1(links),
       fjernVergeV1: getFjernVergeV1(links),
-      opprettVergeV2: getOpprettVergeV2(links),
-      fjernVergeV2: getFjernVergeV2(links),
     },
   };
 };
