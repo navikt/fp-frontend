@@ -1,0 +1,6 @@
+import{j as s}from"./jsx-runtime-D_zvdyIk.js";import{c as l,P as m,a as d,D as i,U as k,b as E,d as o,m as u}from"./nb_NO--pKnNUHQ.js";import"./v4-CtRu48qb.js";import"./react-DpE2znjE.js";import"./iframe-CPGtHCjF.js";import"./chunk-XP5HYGXS-D5tuasO7.js";import"./index-Dxs5m6lS.js";import"./_commonjsHelpers-Cpj98o6Y.js";import"./dayjs.min-Cke173X9.js";import"./index-DMeSseuw.js";import"./index-DrFkskS4.js";const b=n=>{const p=l({locale:"nb-NO",messages:n},d());return c=>s.jsx(m,{value:p,children:c()})},P=b(u),N={title:"fakta/fakta-uttaksdokumentasjon-del-opp-periode-modal",component:i,decorators:[P]},S=()=>s.jsx(i,{submit:o("button-click"),cancel:o("button-click"),periode:{fom:"2022-11-01",tom:"2022-11-23",type:E.UTSETTELSE,årsak:k.INNLEGGELSE_SØKER}}),t=S.bind({});var e,r,a;t.parameters={...t.parameters,docs:{...(e=t.parameters)==null?void 0:e.docs,source:{originalSource:`() => <DelOppPeriodeModal submit={action('button-click')} cancel={action('button-click')} periode={{
+  fom: '2022-11-01',
+  tom: '2022-11-23',
+  type: UttakType.UTSETTELSE,
+  årsak: UttakÅrsak.INNLEGGELSE_SØKER
+}} />`,...(a=(r=t.parameters)==null?void 0:r.docs)==null?void 0:a.source}}};const v=["VisModalForÅDeleOppPeriode"];export{t as VisModalForÅDeleOppPeriode,v as __namedExportsOrder,N as default};
