@@ -1,7 +1,8 @@
-import type { ComponentProps } from 'react';
+import { type ComponentProps, useEffect } from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, ReactRenderer, StoryObj } from '@storybook/react';
+import type { DecoratorFunction } from '@storybook/types';
 import { http, HttpResponse } from 'msw';
 
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
@@ -81,9 +82,15 @@ const HANDLERS = [
   http.get(getHrefBehandling(BehandlingRel.UTTAK_KONTROLLER_FAKTA_PERIODER_V2), () => HttpResponse.json({})),
 ];
 
+const withStoryReload: DecoratorFunction<ReactRenderer> = Story => {
+  useEffect(() => () => window.location.reload(), []);
+  return <Story />;
+};
+
 const meta = {
   title: 'app/AppIndex',
   component: AppIndexWrapper,
+  decorators: [withStoryReload],
   render: () => {
     const fagsakId = '3';
     return (

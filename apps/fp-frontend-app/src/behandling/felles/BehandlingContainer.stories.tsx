@@ -4,10 +4,12 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
+import type { AksessRettigheter, AlleKodeverk, Behandling, Fagsak } from '@navikt/fp-types';
 
 import { BehandlingContainer } from './BehandlingContainer';
 import type { FaktaPanelInitProps } from './typer/faktaPanelInitProps';
 import type { ProsessPanelInitProps } from './typer/prosessPanelInitProps';
+import { BehandlingDataProvider } from './utils/behandlingDataContext';
 
 import messages from '../../../i18n/nb_NO.json';
 
@@ -90,6 +92,22 @@ const meta = {
     valgtFaktaSteg: 'default',
     valgtProsessSteg: 'default',
   },
+  render: args => (
+    <BehandlingDataProvider
+      behandling={{} as Behandling}
+      alleBehandlinger={[]}
+      fagsak={{} as Fagsak}
+      rettigheter={{} as AksessRettigheter}
+      alleKodeverk={{} as AlleKodeverk}
+      lagreAksjonspunkter={() => Promise.resolve({} as Behandling)}
+      lagreOverstyrteAksjonspunkter={() => Promise.resolve({} as Behandling)}
+      setSkalOppdatereEtterBekreftelseAvAp={() => undefined}
+      hentOgSettBehandling={() => undefined}
+      oppdaterProsessStegOgFaktaPanelIUrl={() => undefined}
+    >
+      <BehandlingContainer {...args} />
+    </BehandlingDataProvider>
+  ),
 } satisfies Meta<typeof BehandlingContainer>;
 export default meta;
 
