@@ -3182,7 +3182,6 @@ __metadata:
     react-hook-form: 7.54.2
     react-intl: 7.1.6
     storybook: 8.5.6
-    stylelint: 16.14.1
     typescript: 5.7.3
     vite: 6.1.0
     vitest: 3.0.5

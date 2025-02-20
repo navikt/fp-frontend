@@ -3,33 +3,34 @@ import { useForm } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
 import { Form } from '@navikt/ft-form-hooks';
-import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { AksjonspunktHelpTextHTML, FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
-import { KodeverkType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, KodeverkType } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, AlleKodeverk, AlleKodeverkTilbakekreving, Verge } from '@navikt/fp-types';
 import type { AvklarVergeAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
-import { type FormValues as RegistrereFormValues, RegistrereVergeFaktaForm } from './RegistrereVergeFaktaForm';
+import { RegistrereVergeForm, type VergeFormValues } from './RegistrereVergeForm';
 
-type FormValues = RegistrereFormValues & {
+type FormValues = VergeFormValues & {
   begrunnelse?: string;
 };
 
-const buildInitialValues = (verge: Verge, aksjonspunkter: Aksjonspunkt[]): FormValues => ({
+const buildInitialValues = (verge: Verge | undefined, aksjonspunkter: Aksjonspunkt[]): FormValues => ({
   ...FaktaBegrunnelseTextField.initialValues(aksjonspunkter),
-  ...RegistrereVergeFaktaForm.buildInitialValues(verge || {}),
+  ...RegistrereVergeForm.buildInitialValues(verge),
 });
 
 const transformValues = (values: FormValues): AvklarVergeAp => ({
-  ...RegistrereVergeFaktaForm.transformValues(values),
+  kode: AksjonspunktKode.AVKLAR_VERGE,
+  ...RegistrereVergeForm.transformValues(values),
   ...FaktaBegrunnelseTextField.transformValues(values),
 });
 
 interface Props {
   alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving;
-  verge: Verge;
+  verge: Verge | undefined;
   submittable: boolean;
 }
 
@@ -71,12 +72,13 @@ export const RegistrereVergeInfoPanel = ({ submittable, verge, alleKodeverk }: P
         onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
         setDataOnUnmount={setFormData}
       >
-        <RegistrereVergeFaktaForm
-          readOnly={isReadOnly || aksjonspunkterForPanel.length === 0}
-          vergetyper={vergetyper}
-          valgtVergeType={valgtVergeType}
-          alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-        />
+        <FaktaGruppe merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.AVKLAR_VERGE]}>
+          <RegistrereVergeForm
+            readOnly={isReadOnly || aksjonspunkterForPanel.length === 0}
+            vergetyper={vergetyper}
+            valgtVergeType={valgtVergeType}
+          />
+        </FaktaGruppe>
         {aksjonspunkterForPanel.length !== 0 && (
           <>
             <VerticalSpacer twentyPx />

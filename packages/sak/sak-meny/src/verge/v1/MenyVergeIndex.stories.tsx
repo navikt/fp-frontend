@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { MenyVergeIndex } from './MenyVergeIndex';
 
 const meta = {
-  title: 'sak/sak-meny-verge',
+  title: 'sak-meny/verge-v1',
   component: MenyVergeIndex,
   args: {
     lukkModal: action('button-click'),

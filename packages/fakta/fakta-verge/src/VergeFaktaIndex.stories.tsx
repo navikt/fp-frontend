@@ -11,7 +11,7 @@ import '@navikt/ds-css';
 import '@navikt/ft-form-hooks/dist/style.css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
 
-const aksjonspunkterForPanel = [
+const aksjonspunkterForPanel: PanelDataArgs['aksjonspunkterForPanel'] = [
   {
     definisjon: AksjonspunktKode.AVKLAR_VERGE,
     status: AksjonspunktStatus.OPPRETTET,
@@ -19,8 +19,6 @@ const aksjonspunkterForPanel = [
     kanLoses: true,
   },
 ];
-
-const verge = {};
 
 const merknaderFraBeslutter = {
   notAccepted: false,
@@ -32,7 +30,6 @@ const meta = {
   decorators: [withFormData, withPanelData],
   args: {
     submittable: true,
-    verge,
     aksjonspunkterForPanel,
     alleKodeverk: alleKodeverk as any,
     alleMerknaderFraBeslutter: {
@@ -45,4 +42,22 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  args: {
+    verge: undefined,
+    isReadOnly: false,
+  },
+};
+
+export const ReadOnly: Story = {
+  args: {
+    verge: {
+      vergeType: 'ADVOKAT',
+      navn: 'Ola Nordmann',
+      organisasjonsnummer: '123456789',
+      gyldigFom: '2025-01-01',
+      gyldigTom: '2025-12-31',
+    },
+    isReadOnly: true,
+  },
+};

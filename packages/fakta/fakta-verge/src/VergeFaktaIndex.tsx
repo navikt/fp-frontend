@@ -11,12 +11,12 @@ import messages from '../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 interface Props {
-  verge?: Verge;
+  verge: Verge | undefined;
   alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving;
   submittable: boolean;
 }
 
-export const VergeFaktaIndex = ({ verge = {}, alleKodeverk, submittable }: Props) => (
+export const VergeFaktaIndex = ({ verge, alleKodeverk, submittable }: Props) => (
   <RawIntlProvider value={intl}>
     <RegistrereVergeInfoPanel verge={verge} alleKodeverk={alleKodeverk} submittable={submittable} />
   </RawIntlProvider>
