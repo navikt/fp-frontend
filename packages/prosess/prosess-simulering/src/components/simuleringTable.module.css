@@ -1,3 +1,7 @@
+.tableWrapper {
+  overflow-x: auto;
+}
+
 .simuleringTable .rodTekst {
   color: var(--a-nav-red);
 }
