@@ -25,7 +25,7 @@ interface Props {
 export const SistBehandledeSaker = ({ åpneFagsak }: Props) => {
   const { data: sistBehandledeSaker = EMPTY_ARRAY } = useQuery(behandlendeOppgaverOptions());
 
-  const italicWrapper = { i: (chunks: ReactNode[]) => <i>{chunks}</i> };
+  const italicWrapper = (chunks: ReactNode[]) => <i>{chunks}</i>;
 
   return (
     <VStack gap="2">
@@ -40,7 +40,7 @@ export const SistBehandledeSaker = ({ åpneFagsak }: Props) => {
       {sistBehandledeSaker.length === 0 && (
         <div className={styles.ingenBehandlinger}>
           <BodyShort size="medium">
-            <FormattedMessage id="SistBehandledeSaker.IngenBehandlinger" values={italicWrapper} />
+            <FormattedMessage id="SistBehandledeSaker.IngenBehandlinger" values={{ i: italicWrapper }} />
           </BodyShort>
         </div>
       )}

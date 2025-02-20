@@ -219,7 +219,7 @@ export const SakslisteVelgerForm = ({
 
   const valgtSaksliste = sorterteSakslister.find(s => sakslisteId === `${s.sakslisteId}`);
 
-  const italicWrapper = { i: (chunks: ReactNode[]) => <i>{chunks}</i> };
+  const italicWrapper = (chunks: ReactNode[]) => <i>{chunks}</i>;
 
   if (sakslister.length === 0) {
     return (
@@ -228,7 +228,7 @@ export const SakslisteVelgerForm = ({
           <FormattedMessage id="SakslisteVelgerForm.Saksliste" />
         </Heading>
         <BodyShort>
-          <FormattedMessage id="SakslisteVelgerForm.IkkeOppfort" values={italicWrapper} />
+          <FormattedMessage id="SakslisteVelgerForm.IkkeOppfort" values={{ i: italicWrapper }} />
         </BodyShort>
       </VStack>
     );

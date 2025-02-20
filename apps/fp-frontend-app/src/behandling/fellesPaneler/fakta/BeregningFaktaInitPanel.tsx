@@ -99,7 +99,7 @@ const mapBGKodeTilFpsakKode = (bgKode: string): string => {
 };
 
 const lagModifisertCallback =
-  (submitCallback: (params: any, keepData?: boolean) => Promise<any>) => (aksjonspunkterSomSkalLagres: any | any[]) => {
+  (submitCallback: (params: any) => Promise<void>) => (aksjonspunkterSomSkalLagres: any) => {
     const apListe = Array.isArray(aksjonspunkterSomSkalLagres)
       ? aksjonspunkterSomSkalLagres
       : [aksjonspunkterSomSkalLagres];
