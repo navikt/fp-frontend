@@ -1,7 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, Heading, Tag } from '@navikt/ds-react';
-import { FlexColumn, FlexContainer, FlexRow, Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
+import { BodyShort, Heading, Table, Tag } from '@navikt/ds-react';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import moment from 'moment';
 
@@ -73,30 +73,39 @@ export const FodselSammenligningPanel = ({
           </FlexRow>
         </FlexContainer>
         {avklartBarn.length > 0 && (
-          <Table
-            noHover
-            headerTextCodes={['FodselsammenligningPanel.Fodselsdato', 'FodselsammenligningPanel.Dodsdato']}
-          >
-            {avklartBarn.map((barn: AvklartBarn) => {
-              const key = barn.fodselsdato + barn.dodsdato;
-              return (
-                <TableRow key={key} id={key}>
-                  <TableColumn>
-                    <BodyShort size="small">{formatDate(barn.fodselsdato)}</BodyShort>
-                  </TableColumn>
-                  <TableColumn>
-                    <BodyShort size="small">{barn.dodsdato ? formatDate(barn.dodsdato) : '-'}</BodyShort>
-                  </TableColumn>
-                  <TableColumn>
-                    {barn.dodsdato && (
-                      <Tag variant="info">
-                        <FormattedMessage id="FodselsammenligningPanel.Dod" />
-                      </Tag>
-                    )}
-                  </TableColumn>
-                </TableRow>
-              );
-            })}
+          <Table>
+            <Table.Header>
+              <Table.Row>
+                <Table.HeaderCell scope="col">
+                  <FormattedMessage id="FodselsammenligningPanel.Fodselsdato" />
+                </Table.HeaderCell>
+                <Table.HeaderCell scope="col">
+                  <FormattedMessage id="FodselsammenligningPanel.Dodsdato" />
+                </Table.HeaderCell>
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>
+              {avklartBarn.map((barn: AvklartBarn) => {
+                const key = barn.fodselsdato + barn.dodsdato;
+                return (
+                  <Table.Row key={key} id={key}>
+                    <Table.DataCell>
+                      <BodyShort size="small">{formatDate(barn.fodselsdato)}</BodyShort>
+                    </Table.DataCell>
+                    <Table.DataCell>
+                      <BodyShort size="small">{barn.dodsdato ? formatDate(barn.dodsdato) : '-'}</BodyShort>
+                    </Table.DataCell>
+                    <Table.DataCell>
+                      {barn.dodsdato && (
+                        <Tag variant="info">
+                          <FormattedMessage id="FodselsammenligningPanel.Dod" />
+                        </Tag>
+                      )}
+                    </Table.DataCell>
+                  </Table.Row>
+                );
+              })}
+            </Table.Body>
           </Table>
         )}
         {avklartBarn.length === 0 && (

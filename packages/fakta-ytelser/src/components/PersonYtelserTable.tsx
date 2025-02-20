@@ -1,24 +1,14 @@
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BodyShort, Link } from '@navikt/ds-react';
-import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
+import { BodyShort, Link, Table } from '@navikt/ds-react';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import moment from 'moment';
 
 import type { RelatertTilgrensedYtelse } from '@navikt/fp-types';
 
-import styles from './personYtelserTable.module.css';
-
 interface Props {
   ytelser?: RelatertTilgrensedYtelse[];
 }
-
-const HEADER_TEXT_CODES = [
-  'PersonYtelserTable.Ytelse',
-  'PersonYtelserTable.Periode',
-  'PersonYtelserTable.Status',
-  'PersonYtelserTable.Saksnummer',
-];
 
 const formatDateToDDMMYYYY = (date: string): string => {
   const parsedDate = moment(date, ISO_DATE_FORMAT, true);
@@ -74,26 +64,48 @@ export const PersonYtelserTable = ({ ytelser }: Props) => {
   }
 
   return (
-    <Table headerTextCodes={HEADER_TEXT_CODES} classNameTable={styles.tableStyle} noHover>
-      {ytelseRows.map((ytelse, index) => (
-        <TableRow key={`index${index + 1}`}>
-          <TableColumn>{ytelse.navn ? <BodyShort size="small">{ytelse.navn}</BodyShort> : ''}</TableColumn>
-          <TableColumn>
-            <BodyShort size="small">{ytelse.periode}</BodyShort>
-          </TableColumn>
-          <TableColumn>{ytelse.status ? <BodyShort size="small">{ytelse.status}</BodyShort> : ''}</TableColumn>
-          <TableColumn>
-            {ytelse.saksnummer && ytelse.skalViseLenke && (
-              <BodyShort size="small">
-                <Link href={`/fagsak/${ytelse.saksnummer}`} target="_blank">
-                  {ytelse.saksnummer}
-                </Link>
-              </BodyShort>
-            )}
-            {ytelse.saksnummer && !ytelse.skalViseLenke ? <BodyShort size="small">{ytelse.saksnummer}</BodyShort> : ''}
-          </TableColumn>
-        </TableRow>
-      ))}
+    <Table>
+      <Table.Header>
+        <Table.Row>
+          <Table.HeaderCell scope="col">
+            <FormattedMessage id="PersonYtelserTable.Ytelse" />
+          </Table.HeaderCell>
+          <Table.HeaderCell scope="col">
+            <FormattedMessage id="PersonYtelserTable.Periode" />
+          </Table.HeaderCell>
+          <Table.HeaderCell scope="col">
+            <FormattedMessage id="PersonYtelserTable.Status" />
+          </Table.HeaderCell>
+          <Table.HeaderCell scope="col">
+            <FormattedMessage id="PersonYtelserTable.Saksnummer" />
+          </Table.HeaderCell>
+        </Table.Row>
+      </Table.Header>
+      <Table.Body>
+        {ytelseRows.map((ytelse, index) => (
+          <Table.Row key={`index${index + 1}`}>
+            <Table.DataCell>{ytelse.navn ? <BodyShort size="small">{ytelse.navn}</BodyShort> : ''}</Table.DataCell>
+            <Table.DataCell>
+              <BodyShort size="small">{ytelse.periode}</BodyShort>
+            </Table.DataCell>
+            <Table.DataCell>{ytelse.status ? <BodyShort size="small">{ytelse.status}</BodyShort> : ''}</Table.DataCell>
+            <Table.DataCell>
+              {ytelse.saksnummer && ytelse.skalViseLenke && (
+                <BodyShort size="small">
+                  <Link href={`/fagsak/${ytelse.saksnummer}`} target="_blank">
+                    {ytelse.saksnummer}
+                  </Link>
+                </BodyShort>
+              )}
+              {ytelse.saksnummer && !ytelse.skalViseLenke ? (
+                <BodyShort size="small">{ytelse.saksnummer}</BodyShort>
+              ) : (
+                ''
+              )}
+            </Table.DataCell>
+          </Table.Row>
+        ))}
+      </Table.Body>
     </Table>
   );
 };

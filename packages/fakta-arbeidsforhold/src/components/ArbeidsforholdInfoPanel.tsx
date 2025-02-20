@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Heading } from '@navikt/ds-react';
@@ -55,19 +55,15 @@ interface Props {
 export const ArbeidsforholdInfoPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysningerPerId }: Props) => {
   const [valgtArbeidsforhold, setValgtArbeidsforhold] = useState<AoIArbeidsforhold>();
 
-  const setArbeidsforhold = useCallback(
-    (_event: React.MouseEvent | React.KeyboardEvent, _id: void, af?: AoIArbeidsforhold) => {
-      const skalSetteArbeidsforhold = !!af?.saksbehandlersVurdering;
-      setValgtArbeidsforhold(skalSetteArbeidsforhold ? af : undefined);
-    },
-    [setValgtArbeidsforhold],
-  );
+  const setArbeidsforhold = (af: AoIArbeidsforhold) => {
+    const skalSetteArbeidsforhold = !!af.saksbehandlersVurdering;
+    setValgtArbeidsforhold(skalSetteArbeidsforhold ? af : undefined);
+  };
 
   const { arbeidsforhold, inntektsmeldinger } = arbeidOgInntekt;
 
-  const sorterteArbeidsforhold = useMemo(
-    () => arbeidsforhold.slice().sort(getSortArbeidsforholdFn(arbeidsgiverOpplysningerPerId, inntektsmeldinger)),
-    [arbeidsgiverOpplysningerPerId],
+  const sorterteArbeidsforhold = arbeidsforhold.toSorted(
+    getSortArbeidsforholdFn(arbeidsgiverOpplysningerPerId, inntektsmeldinger),
   );
 
   return (

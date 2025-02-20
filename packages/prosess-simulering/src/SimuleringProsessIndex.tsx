@@ -17,18 +17,8 @@ interface Props {
   previewFptilbakeCallback: (params: { mottaker: string; fritekst: string }) => void;
 }
 
-export const SimuleringProsessIndex = ({
-  simuleringResultat,
-  tilbakekrevingvalg,
-  arbeidsgiverOpplysningerPerId,
-  previewFptilbakeCallback,
-}: Props) => (
+export const SimuleringProsessIndex = (props: Props) => (
   <RawIntlProvider value={intl}>
-    <SimuleringPanel
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-      simuleringResultat={simuleringResultat}
-      tilbakekrevingvalg={tilbakekrevingvalg}
-      previewCallback={previewFptilbakeCallback}
-    />
+    <SimuleringPanel {...props} />
   </RawIntlProvider>
 );

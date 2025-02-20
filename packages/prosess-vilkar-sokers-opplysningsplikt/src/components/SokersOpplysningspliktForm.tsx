@@ -2,10 +2,9 @@ import { type ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
-import { BodyShort } from '@navikt/ds-react';
+import { BodyShort, Table, VStack } from '@navikt/ds-react';
 import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import { Table, TableColumn, TableRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT, isObject } from '@navikt/ft-utils';
 import moment from 'moment';
 
@@ -246,63 +245,64 @@ export const SokersOpplysningspliktForm = ({
         isSubmitting={formMethods.formState.isSubmitting}
       >
         {sorterteManglendeVedlegg.length > 0 && (
-          <>
-            <VerticalSpacer twentyPx />
+          <VStack gap="4">
             <BodyShort size="small">
               <FormattedMessage id="SokersOpplysningspliktForm.ManglendeDokumentasjon" />
             </BodyShort>
-            <VerticalSpacer eightPx />
-            <Table noHover>
-              {sorterteManglendeVedlegg.map(vedlegg => (
-                <TableRow
-                  key={vedlegg.dokumentType + (vedlegg.arbeidsgiverReferanse ? vedlegg.arbeidsgiverReferanse : '')}
-                >
-                  <TableColumn>{vedlegg.dokumentTittel}</TableColumn>
-                  <TableColumn>
-                    {!!vedlegg.arbeidsgiverReferanse &&
-                      formatArbeidsgiver(arbeidsgiverOpplysningerPerId, vedlegg.arbeidsgiverReferanse)}
-                  </TableColumn>
-                </TableRow>
-              ))}
+            <Table>
+              <Table.Header>
+                <Table.Row>
+                  <Table.HeaderCell scope="col">Navn</Table.HeaderCell>
+                  <Table.HeaderCell scope="col">Fødselsnr.</Table.HeaderCell>
+                  <Table.HeaderCell scope="col">Start</Table.HeaderCell>
+                </Table.Row>
+              </Table.Header>
+              <Table.Body>
+                {sorterteManglendeVedlegg.map(vedlegg => (
+                  <Table.Row
+                    key={vedlegg.dokumentType + (vedlegg.arbeidsgiverReferanse ? vedlegg.arbeidsgiverReferanse : '')}
+                  >
+                    <Table.DataCell>{vedlegg.dokumentTittel}</Table.DataCell>
+                    <Table.DataCell>
+                      {!!vedlegg.arbeidsgiverReferanse &&
+                        formatArbeidsgiver(arbeidsgiverOpplysningerPerId, vedlegg.arbeidsgiverReferanse)}
+                    </Table.DataCell>
+                  </Table.Row>
+                ))}
+              </Table.Body>
             </Table>
-          </>
+          </VStack>
         )}
         <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
         {!isReadOnly && (
-          <>
-            <VerticalSpacer sixteenPx />
-            <RadioGroupPanel
-              name="erVilkarOk"
-              validate={[required]}
-              isHorizontal
-              isTrueOrFalseSelection
-              radios={[
-                {
-                  value: 'true',
-                  label: <FormattedMessage id={findRadioButtonTextCode(true)} />,
-                  disabled: !hasSoknad,
-                },
-                {
-                  value: 'false',
-                  label: getLabel(intl),
-                },
-              ]}
-            />
-          </>
+          <RadioGroupPanel
+            name="erVilkarOk"
+            validate={[required]}
+            isHorizontal
+            isTrueOrFalseSelection
+            radios={[
+              {
+                value: 'true',
+                label: <FormattedMessage id={findRadioButtonTextCode(true)} />,
+                disabled: !hasSoknad,
+              },
+              {
+                value: 'false',
+                label: getLabel(intl),
+              },
+            ]}
+          />
         )}
         {isReadOnly && (
           <div>
             {originalErVilkarOk === false && behandling.behandlingsresultat?.avslagsarsak && (
-              <>
-                <VerticalSpacer sixteenPx />
-                <BodyShort size="small">
-                  {getKodeverknavn(
-                    behandling.behandlingsresultat.avslagsarsak,
-                    KodeverkType.AVSLAGSARSAK,
-                    VilkarType.SOKERSOPPLYSNINGSPLIKT,
-                  )}
-                </BodyShort>
-              </>
+              <BodyShort size="small">
+                {getKodeverknavn(
+                  behandling.behandlingsresultat.avslagsarsak,
+                  KodeverkType.AVSLAGSARSAK,
+                  VilkarType.SOKERSOPPLYSNINGSPLIKT,
+                )}
+              </BodyShort>
             )}
           </div>
         )}

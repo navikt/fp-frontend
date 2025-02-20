@@ -1,8 +1,7 @@
 import { useCallback, useMemo, useState } from 'react';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
-import { BodyShort, HStack, Label } from '@navikt/ds-react';
-import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
+import { BodyShort, HStack, Label, Table } from '@navikt/ds-react';
 
 import { StonadskontoType, UttakArbeidType as uttakArbeidTypeKodeverk } from '@navikt/fp-kodeverk';
 import type {
@@ -14,11 +13,9 @@ import type {
 
 import { lagVisningsNavn } from '../../utils/lagVisningsNavn';
 import { uttakArbeidTypeTekstCodes } from '../../utils/uttakArbeidTypeCodes';
-import { finnAntallUkerOgDager,StonadsdagerTab } from './StonadsdagerTab';
+import { finnAntallUkerOgDager, StonadsdagerTab } from './StonadsdagerTab';
 
 import styles from './disponibleStonadskontoerPanel.module.css';
-
-const HEADER_TEXT_CODES = ['TimeLineInfo.Aktivitet', 'TimeLineInfo.Disponibelt'];
 
 const STØNADSKONTOER_SORTERINGSREKKEFØLGE = {
   [StonadskontoType.FORELDREPENGER_FØR_FØDSEL]: 0,
@@ -158,31 +155,43 @@ export const DisponibleStonadskontoerPanel = ({ stønadskontoer, arbeidsgiverOpp
       </div>
       {valgtKontoType && sorterteAktiviteter && sorterteAktiviteter.length > 0 && (
         <div className={styles.visKonto}>
-          <Table headerTextCodes={HEADER_TEXT_CODES}>
-            {sorterteAktiviteter.map(arbforhold => {
-              const ukerOgDager = finnAntallUkerOgDager(arbforhold.saldo);
-              return (
-                <TableRow key={lagTabellRadKey(arbforhold, arbeidsgiverOpplysningerPerId)}>
-                  <TableColumn>
-                    <BodyShort size="small">{arbforhold.navn}</BodyShort>
-                  </TableColumn>
-                  <TableColumn>
-                    <BodyShort size="small">
-                      {arbforhold.saldo && (
-                        <FormattedMessage
-                          id="TimeLineInfo.Stonadinfo.UkerDager"
-                          values={{
-                            ukerVerdi: ukerOgDager.uker,
-                            dagerVerdi: ukerOgDager.dager,
-                            b: bTag,
-                          }}
-                        />
-                      )}
-                    </BodyShort>
-                  </TableColumn>
-                </TableRow>
-              );
-            })}
+          <Table>
+            <Table.Header>
+              <Table.Row>
+                <Table.HeaderCell scope="col">
+                  <FormattedMessage id="TimeLineInfo.Aktivitet" />
+                </Table.HeaderCell>
+                <Table.HeaderCell scope="col">
+                  <FormattedMessage id="TimeLineInfo.Disponibelt" />
+                </Table.HeaderCell>
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>
+              {sorterteAktiviteter.map(arbforhold => {
+                const ukerOgDager = finnAntallUkerOgDager(arbforhold.saldo);
+                return (
+                  <Table.Row key={lagTabellRadKey(arbforhold, arbeidsgiverOpplysningerPerId)}>
+                    <Table.DataCell>
+                      <BodyShort size="small">{arbforhold.navn}</BodyShort>
+                    </Table.DataCell>
+                    <Table.DataCell>
+                      <BodyShort size="small">
+                        {arbforhold.saldo && (
+                          <FormattedMessage
+                            id="TimeLineInfo.Stonadinfo.UkerDager"
+                            values={{
+                              ukerVerdi: ukerOgDager.uker,
+                              dagerVerdi: ukerOgDager.dager,
+                              b: bTag,
+                            }}
+                          />
+                        )}
+                      </BodyShort>
+                    </Table.DataCell>
+                  </Table.Row>
+                );
+              })}
+            </Table.Body>
           </Table>
         </div>
       )}

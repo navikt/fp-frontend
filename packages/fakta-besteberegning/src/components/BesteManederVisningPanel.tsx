@@ -1,16 +1,7 @@
 import { type ReactElement, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, Label } from '@navikt/ds-react';
-import {
-  FlexColumn,
-  FlexContainer,
-  FlexRow,
-  Table,
-  TableColumn,
-  TableRow,
-  VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
+import { BodyShort, HStack, Label, Table, VStack } from '@navikt/ds-react';
 import { DDMMYYYY_DATE_FORMAT, formatCurrencyNoKr, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 import norskFormat from 'dayjs/locale/nb';
@@ -34,17 +25,6 @@ interface Props {
   arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId;
   getKodeverkNavn: (kodeverk: string, kodeverkType: KodeverkType) => string;
 }
-
-const headerColumnContent = [
-  <Label size="small" key="AktivitetNøkkel">
-    {' '}
-    <FormattedMessage id="BesteberegningProsessPanel.Måned.Inntekt.Aktivitet" />{' '}
-  </Label>,
-  <Label size="small" key="InntektNøkkel">
-    {' '}
-    <FormattedMessage id="BesteberegningProsessPanel.Måned.Inntekt.Inntekt" />{' '}
-  </Label>,
-];
 
 interface InntekttabellProps {
   inntekter: BesteberegningInntekt[];
@@ -75,35 +55,35 @@ const lagInntektRader = (
   getKodeverkNavn: (kodeverk: string, kodeverkType: KodeverkType) => string,
 ): ReactElement[] =>
   inntekter.map((inntekt: BesteberegningInntekt) => (
-    <TableRow
+    <Table.Row
       key={`${inntekt.arbeidsforholdId}-${inntekt.arbeidsgiverId}-${inntekt.inntekt}`}
       className={styles.månedRad}
     >
-      <TableColumn className={styles.månedAktivitet}>
+      <Table.DataCell className={styles.månedAktivitet}>
         <BodyShort size="small">{lagVisningsNavn(inntekt, arbeidsgiverOpplysninger, getKodeverkNavn)}</BodyShort>
-      </TableColumn>
-      <TableColumn className={styles.månedInntekt}>
+      </Table.DataCell>
+      <Table.DataCell className={styles.månedInntekt}>
         <BodyShort size="small">{formatCurrencyNoKr(inntekt.inntekt)}</BodyShort>
-      </TableColumn>
-    </TableRow>
+      </Table.DataCell>
+    </Table.Row>
   ));
 
 const lagSummeringsRad = (inntekter: BesteberegningInntekt[], labelId: string): ReactElement =>
   inntekter.length === 0 ? (
     <div />
   ) : (
-    <TableRow key="sum">
-      <TableColumn>
+    <Table.Row key="sum">
+      <Table.DataCell>
         <Label size="small">
           <FormattedMessage id={labelId} />
         </Label>
-      </TableColumn>
-      <TableColumn>
+      </Table.DataCell>
+      <Table.DataCell>
         <Label size="small">
           {formatCurrencyNoKr(inntekter.map(({ inntekt }) => inntekt).reduce((i1, i2) => i1 + i2, 0))}
         </Label>
-      </TableColumn>
-    </TableRow>
+      </Table.DataCell>
+    </Table.Row>
   );
 
 const Inntekttabell = ({ inntekter, arbeidsgiverOpplysninger, getKodeverkNavn }: InntekttabellProps) => {
@@ -111,11 +91,19 @@ const Inntekttabell = ({ inntekter, arbeidsgiverOpplysninger, getKodeverkNavn }:
   lagInntektRader(inntekter, arbeidsgiverOpplysninger, getKodeverkNavn).forEach(rad => rows.push(rad));
   rows.push(lagSummeringsRad(inntekter, 'Inntekttabell.Sum'));
   return (
-    <div>
-      <Table headerColumnContent={headerColumnContent} noHover>
-        {rows}
-      </Table>
-    </div>
+    <Table>
+      <Table.Header>
+        <Table.Row>
+          <Table.HeaderCell scope="col">
+            <FormattedMessage id="BesteberegningProsessPanel.Måned.Inntekt.Aktivitet" />
+          </Table.HeaderCell>
+          <Table.HeaderCell scope="col">
+            <FormattedMessage id="BesteberegningProsessPanel.Måned.Inntekt.Inntekt" />
+          </Table.HeaderCell>
+        </Table.Row>
+      </Table.Header>
+      <Table.Body>{rows}</Table.Body>
+    </Table>
   );
 };
 
@@ -124,23 +112,21 @@ const lagRadMedMåneder = (
   arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId,
   getKodeverkNavn: (kodeverk: string, kodeverkType: KodeverkType) => string,
 ): ReactElement => (
-  <FlexContainer>
-    <FlexRow>
-      {måneder.map((månedsgrunnlag: Månedsgrunnlag) => {
-        const key = månedsgrunnlag.fom;
-        return (
-          <FlexColumn className={styles.colWidth} key={key}>
-            <BodyShort size="small">{formatDate(månedsgrunnlag.fom)}</BodyShort>
-            <Inntekttabell
-              inntekter={månedsgrunnlag.inntekter}
-              arbeidsgiverOpplysninger={arbeidsgiverOpplysninger}
-              getKodeverkNavn={getKodeverkNavn}
-            />
-          </FlexColumn>
-        );
-      })}
-    </FlexRow>
-  </FlexContainer>
+  <HStack gap="2">
+    {måneder.map((månedsgrunnlag: Månedsgrunnlag) => {
+      const key = månedsgrunnlag.fom;
+      return (
+        <div className={styles.colWidth} key={key}>
+          <BodyShort size="small">{formatDate(månedsgrunnlag.fom)}</BodyShort>
+          <Inntekttabell
+            inntekter={månedsgrunnlag.inntekter}
+            arbeidsgiverOpplysninger={arbeidsgiverOpplysninger}
+            getKodeverkNavn={getKodeverkNavn}
+          />
+        </div>
+      );
+    })}
+  </HStack>
 );
 
 const finnÅrsinntekt = (besteMåneder: Månedsgrunnlag[]): number => {
@@ -163,24 +149,19 @@ const sorterEtterMåned = (besteMåneder: Månedsgrunnlag[]) =>
 export const BesteMånederVisningPanel = ({ besteMåneder, arbeidsgiverOpplysninger, getKodeverkNavn }: Props) => {
   const sorterteMåneder = useMemo(() => sorterEtterMåned(besteMåneder), [besteMåneder]);
   return (
-    <>
+    <VStack gap="4">
       <Label size="small">
-        {' '}
         <FormattedMessage id="Inntekttabell.Tittel" />{' '}
       </Label>
-      <VerticalSpacer twentyPx />
       {lagRadMedMåneder(sorterteMåneder.slice(0, 2), arbeidsgiverOpplysninger, getKodeverkNavn)}
-      <VerticalSpacer twentyPx />
       {lagRadMedMåneder(sorterteMåneder.slice(2, 4), arbeidsgiverOpplysninger, getKodeverkNavn)}
-      <VerticalSpacer twentyPx />
       {lagRadMedMåneder(sorterteMåneder.slice(4, 6), arbeidsgiverOpplysninger, getKodeverkNavn)}
-      <VerticalSpacer twentyPx />
       <Label size="small">
         <FormattedMessage
           id="Inntekttabell.BeregnetÅrsinntekt"
           values={{ inntekt: formatCurrencyNoKr(finnÅrsinntekt(besteMåneder)) }}
         />
       </Label>
-    </>
+    </VStack>
   );
 };

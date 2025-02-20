@@ -6,14 +6,14 @@ import { QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
 import { BodyShort, HStack, Link, Tooltip, VStack } from '@navikt/ds-react';
 import { RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
-import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { ArrowBox } from '@navikt/ft-ui-komponenter';
 import { formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
 import { AksjonspunktKode, FagsakYtelseType, TilbakekrevingVidereBehandling } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Fagsak, TilbakekrevingValg } from '@navikt/fp-types';
 import type { VurderFeilutbetalingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import type { FeilutbetalingFormValues,FormValues } from '../types/FormValues';
+import type { FeilutbetalingFormValues, FormValues } from '../types/FormValues';
 
 import styles from './tilbakekrevSøkerForm.module.css';
 
@@ -109,7 +109,6 @@ export const TilbakekrevSøkerForm = ({ readOnly, sprakkode, previewCallback, ak
             label: <FormattedMessage id="Simulering.gjennomfør" />,
             element: (
               <div className={styles.varsel}>
-                <VerticalSpacer eightPx />
                 <ArrowBox alignOffset={20}>
                   <VStack gap="4">
                     <HStack gap="2">

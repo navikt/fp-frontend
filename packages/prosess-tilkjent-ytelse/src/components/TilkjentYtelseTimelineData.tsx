@@ -2,16 +2,7 @@ import { type ReactElement, useCallback } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ArrowLeftIcon, ArrowRightIcon, XMarkIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, Label, Panel } from '@navikt/ds-react';
-import {
-  FlexColumn,
-  FlexContainer,
-  FlexRow,
-  Table,
-  TableColumn,
-  TableRow,
-  VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
+import { BodyShort, Box, Button, HStack, Label, Table, VStack } from '@navikt/ds-react';
 import { calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
@@ -54,27 +45,6 @@ const createVisningNavnForUttakArbeidstaker = (
     : `${arbeidsgiverOpplysninger.navn} (${arbeidsgiverOpplysninger.identifikator})${getEndCharFromId(
         andel.eksternArbeidsforholdId,
       )}`;
-};
-
-const tableHeaderTextCodes = (isFagsakSVP = false): string[] => {
-  if (isFagsakSVP) {
-    return [
-      'TilkjentYtelse.PeriodeData.Andel',
-      'TilkjentYtelse.PeriodeData.Utbetalingsgrad',
-      'TilkjentYtelse.PeriodeData.Refusjon',
-      'TilkjentYtelse.PeriodeData.TilSoker',
-      'TilkjentYtelse.PeriodeData.SisteUtbDato',
-    ];
-  }
-  return [
-    'TilkjentYtelse.PeriodeData.Andel',
-    'TilkjentYtelse.PeriodeData.KontoType',
-    'TilkjentYtelse.PeriodeData.Gradering',
-    'TilkjentYtelse.PeriodeData.Utbetalingsgrad',
-    'TilkjentYtelse.PeriodeData.Refusjon',
-    'TilkjentYtelse.PeriodeData.TilSoker',
-    'TilkjentYtelse.PeriodeData.SisteUtbDato',
-  ];
 };
 
 const findAndelsnavn = (
@@ -143,15 +113,13 @@ export const TilkjentYtelseTimelineData = ({
   const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
 
   return (
-    <Panel border>
-      <FlexContainer>
-        <FlexRow spaceBetween>
-          <FlexColumn>
-            <Label size="small">
-              <FormattedMessage id="TilkjentYtelse.PeriodeData.Detaljer" />
-            </Label>
-          </FlexColumn>
-          <FlexColumn className={styles.fix}>
+    <Box borderWidth="1" padding="4">
+      <VStack gap="4">
+        <HStack justify="space-between">
+          <Label size="small">
+            <FormattedMessage id="TilkjentYtelse.PeriodeData.Detaljer" />
+          </Label>
+          <HStack gap="2" align="center">
             <Button
               className={styles.margin}
               size="xsmall"
@@ -183,12 +151,11 @@ export const TilkjentYtelseTimelineData = ({
               type="button"
               title={intl.formatMessage({ id: 'Timeline.lukkPeriode' })}
             />
-          </FlexColumn>
-        </FlexRow>
-        <VerticalSpacer sixteenPx />
+          </HStack>
+        </HStack>
         <div className={styles.detailsPeriode}>
-          <FlexRow spaceBetween>
-            <FlexColumn>
+          <VStack gap="2">
+            <HStack justify="space-between">
               <Label size="small">
                 <FormattedMessage
                   id="TilkjentYtelse.PeriodeData.Periode"
@@ -198,58 +165,85 @@ export const TilkjentYtelseTimelineData = ({
                   }}
                 />
               </Label>
-            </FlexColumn>
-            <FlexColumn>
               <BodyShort size="small">{numberOfDaysAndWeeks.formattedString}</BodyShort>
-            </FlexColumn>
-          </FlexRow>
-          <VerticalSpacer eightPx />
-          <FlexRow>
-            <FlexColumn>
+            </HStack>
+            <HStack gap="2">
               <FormattedMessage
                 id="TilkjentYtelse.PeriodeData.Dagsats"
                 values={{ dagsatsVerdi: selectedItemData.dagsats, b: bTag }}
               />
-            </FlexColumn>
-          </FlexRow>
+            </HStack>
+          </VStack>
         </div>
-      </FlexContainer>
-      <VerticalSpacer sixteenPx />
-      {selectedItemData.andeler && selectedItemData.andeler.length !== 0 && (
-        <Table headerTextCodes={tableHeaderTextCodes(isSoknadSvangerskapspenger)}>
-          {selectedItemData.andeler.map((andel, index: number) => (
-            <TableRow key={`index${index + 1}`}>
-              <TableColumn>{findAndelsnavn(andel, getKodeverknavn, arbeidsgiverOpplysningerPerId)}</TableColumn>
-              {!isSoknadSvangerskapspenger && (
-                <TableColumn>
-                  <BodyShort size="small">{UttakPeriodeNavn[andel.uttak.stonadskontoType]}</BodyShort>
-                </TableColumn>
-              )}
-              {!isSoknadSvangerskapspenger && (
-                <TableColumn>
-                  <BodyShort size="small">{getGradering(andel)}</BodyShort>
-                </TableColumn>
-              )}
-              <TableColumn>
-                <BodyShort size="small">{andel.utbetalingsgrad ? andel.utbetalingsgrad : ''}</BodyShort>
-              </TableColumn>
-              <TableColumn>
-                <BodyShort size="small">
-                  {andel.aktivitetStatus === AktivitetStatus.ARBEIDSTAKER && andel.refusjon ? andel.refusjon : ''}
-                </BodyShort>
-              </TableColumn>
-              <TableColumn>
-                <BodyShort size="small">{andel.tilSoker ? andel.tilSoker : ''}</BodyShort>
-              </TableColumn>
-              <TableColumn>
-                <BodyShort size="small">
-                  {andel.sisteUtbetalingsdato ? dayjs(andel.sisteUtbetalingsdato).format(DDMMYYYY_DATE_FORMAT) : ''}
-                </BodyShort>
-              </TableColumn>
-            </TableRow>
-          ))}
-        </Table>
-      )}
-    </Panel>
+        {selectedItemData.andeler && selectedItemData.andeler.length !== 0 && (
+          <Table>
+            <Table.Header>
+              <Table.Row>
+                <Table.HeaderCell scope="col">
+                  <FormattedMessage id="TilkjentYtelse.PeriodeData.Andel" />
+                </Table.HeaderCell>
+                {!isSoknadSvangerskapspenger && (
+                  <>
+                    <Table.HeaderCell scope="col">
+                      <FormattedMessage id="TilkjentYtelse.PeriodeData.KontoType" />
+                    </Table.HeaderCell>
+                    <Table.HeaderCell scope="col">
+                      <FormattedMessage id="TilkjentYtelse.PeriodeData.Gradering" />
+                    </Table.HeaderCell>
+                  </>
+                )}
+                <Table.HeaderCell scope="col">
+                  <FormattedMessage id="TilkjentYtelse.PeriodeData.Utbetalingsgrad" />
+                </Table.HeaderCell>
+                <Table.HeaderCell scope="col">
+                  <FormattedMessage id="TilkjentYtelse.PeriodeData.Refusjon" />
+                </Table.HeaderCell>
+                <Table.HeaderCell scope="col">
+                  <FormattedMessage id="TilkjentYtelse.PeriodeData.TilSoker" />
+                </Table.HeaderCell>
+                <Table.HeaderCell scope="col">
+                  <FormattedMessage id="TilkjentYtelse.PeriodeData.SisteUtbDato" />
+                </Table.HeaderCell>
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>
+              {selectedItemData.andeler.map((andel, index: number) => (
+                <Table.Row key={`index${index + 1}`}>
+                  <Table.DataCell>
+                    {findAndelsnavn(andel, getKodeverknavn, arbeidsgiverOpplysningerPerId)}
+                  </Table.DataCell>
+                  {!isSoknadSvangerskapspenger && (
+                    <Table.DataCell>
+                      <BodyShort size="small">{UttakPeriodeNavn[andel.uttak.stonadskontoType]}</BodyShort>
+                    </Table.DataCell>
+                  )}
+                  {!isSoknadSvangerskapspenger && (
+                    <Table.DataCell>
+                      <BodyShort size="small">{getGradering(andel)}</BodyShort>
+                    </Table.DataCell>
+                  )}
+                  <Table.DataCell>
+                    <BodyShort size="small">{andel.utbetalingsgrad ? andel.utbetalingsgrad : ''}</BodyShort>
+                  </Table.DataCell>
+                  <Table.DataCell>
+                    <BodyShort size="small">
+                      {andel.aktivitetStatus === AktivitetStatus.ARBEIDSTAKER && andel.refusjon ? andel.refusjon : ''}
+                    </BodyShort>
+                  </Table.DataCell>
+                  <Table.DataCell>
+                    <BodyShort size="small">{andel.tilSoker ? andel.tilSoker : ''}</BodyShort>
+                  </Table.DataCell>
+                  <Table.DataCell>
+                    <BodyShort size="small">
+                      {andel.sisteUtbetalingsdato ? dayjs(andel.sisteUtbetalingsdato).format(DDMMYYYY_DATE_FORMAT) : ''}
+                    </BodyShort>
+                  </Table.DataCell>
+                </Table.Row>
+              ))}
+            </Table.Body>
+          </Table>
+        )}
+      </VStack>
+    </Box>
   );
 };

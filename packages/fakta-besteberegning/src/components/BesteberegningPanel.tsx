@@ -1,4 +1,5 @@
-import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { VStack } from '@navikt/ds-react';
+import { BorderBox } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode, getKodeverknavnFn } from '@navikt/fp-kodeverk';
 import type { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag } from '@navikt/fp-types';
@@ -37,7 +38,7 @@ export const BesteberegningPanel = ({ beregningsgrunnlag, arbeidsgiverOpplysning
       ap.definisjon === AksjonspunktKode.MANUELL_KONTROLL_AV_BESTEBEREGNING,
   );
   return (
-    <div>
+    <VStack gap="4">
       {!!besteberegningAP && (
         <KontrollerBesteberegningPanel
           aksjonspunkt={besteberegningAP}
@@ -52,7 +53,6 @@ export const BesteberegningPanel = ({ beregningsgrunnlag, arbeidsgiverOpplysning
           besteMåneder={besteberegninggrunnlag.besteMåneder}
         />
       </BorderBox>
-      <VerticalSpacer twentyPx />
       <BorderBox>
         <BesteMånederVisningPanel
           besteMåneder={besteberegninggrunnlag.besteMåneder}
@@ -60,6 +60,6 @@ export const BesteberegningPanel = ({ beregningsgrunnlag, arbeidsgiverOpplysning
           getKodeverkNavn={getKodeverkNavn}
         />
       </BorderBox>
-    </div>
+    </VStack>
   );
 };

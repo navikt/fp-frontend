@@ -1,7 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, Heading, Label } from '@navikt/ds-react';
-import { EditedIcon, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { BodyShort, Heading, Label, VStack } from '@navikt/ds-react';
+import { EditedIcon } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type {
@@ -50,11 +50,10 @@ export const TilkjentYtelsePanel = ({
 
   const soknadMottattDato = soknad.søknadsfrist?.mottattDato ? soknad.søknadsfrist?.mottattDato : soknad.mottattDato;
   return (
-    <>
+    <VStack gap="4">
       <Heading size="small">
         <FormattedMessage id="TilkjentYtelse.Title" />
       </Heading>
-      <VerticalSpacer thirtyTwoPx />
       {beregningresultat && (
         <TilkjentYtelse
           beregningsresultatPeriode={beregningresultat.perioder}
@@ -67,27 +66,22 @@ export const TilkjentYtelsePanel = ({
         />
       )}
       {feriepengegrunnlag && (
-        <>
-          <VerticalSpacer thirtyTwoPx />
-          <FeriepengerIndex
-            feriepengegrunnlag={feriepengegrunnlag}
-            arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-            alleKodeverk={alleKodeverk}
-          />
-          <VerticalSpacer thirtyTwoPx />
-        </>
+        <FeriepengerIndex
+          feriepengegrunnlag={feriepengegrunnlag}
+          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+          alleKodeverk={alleKodeverk}
+        />
       )}
       {vurderTilbaketrekkAPBegrunnelse && (
-        <>
+        <VStack gap="2">
           <Label>
             <FormattedMessage id="TilkjentYtelse.VurderTilbaketrekk.Beskrivelse" />
           </Label>
-          <VerticalSpacer sixteenPx />
           <BodyShort className={styles.readOnlyBlokk}>
             {vurderTilbaketrekkAPBegrunnelse} <EditedIcon />
           </BodyShort>
-        </>
+        </VStack>
       )}
-    </>
+    </VStack>
   );
 };

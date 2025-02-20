@@ -172,7 +172,7 @@ export const TilkjentYtelse = ({
   const familiehendelseData = useMemo(() => getFamilieHendelseData(familieHendelseSamling), [familieHendelseSamling]);
 
   return (
-    <>
+    <div>
       <Timeline startDate={startDato.toDate()} endDate={endDato.add(1, 'days').toDate()}>
         <Timeline.Pin date={dayjs(soknadDate).toDate()}>
           <BodyShort>
@@ -270,6 +270,6 @@ export const TilkjentYtelse = ({
           />
         </>
       )}
-    </>
+    </div>
   );
 };

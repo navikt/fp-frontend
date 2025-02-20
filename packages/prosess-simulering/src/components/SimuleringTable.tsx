@@ -1,8 +1,7 @@
 import { type ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort } from '@navikt/ds-react';
-import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
+import { Heading, Table } from '@navikt/ds-react';
 import { formatCurrencyNoKr, getRangeOfMonths } from '@navikt/ft-utils';
 import classnames from 'classnames/bind';
 import dayjs from 'dayjs';
@@ -34,33 +33,6 @@ export const simuleringCodes = {
 const isNextPeriod = (monthAndYear: { month: string; year: string }, nextPeriod: string): boolean =>
   `${monthAndYear.month}${monthAndYear.year}` === (nextPeriod ? dayjs(nextPeriod).format('MMMMYY') : false);
 
-const getHeaderCodes = (
-  showCollapseButton: boolean,
-  collapseProps: { toggleDetails: (id: number) => void; showDetails: boolean; mottakerIndex: number },
-  rangeOfMonths: { month: string; year: string }[],
-  nextPeriod: string,
-): ReactElement[] => {
-  const firstElement = showCollapseButton ? (
-    <CollapseButton {...collapseProps} key={`collapseButton-${rangeOfMonths.length}`} />
-  ) : (
-    <div />
-  );
-  return [
-    firstElement,
-    ...rangeOfMonths.map(monthAndYear => (
-      <span
-        className={classNames({
-          nextPeriod: isNextPeriod(monthAndYear, nextPeriod),
-          normalPeriod: !isNextPeriod(monthAndYear, nextPeriod),
-        })}
-        key={`${monthAndYear.month}-${monthAndYear.year}`}
-      >
-        <FormattedMessage id={`Simulering.headerText.${monthAndYear.month}`} />
-      </span>
-    )),
-  ];
-};
-
 const skalViseCollapseButton = (mottakerResultatPerFag: SimuleringResultatPerFagområde[]): boolean =>
   mottakerResultatPerFag.some(fag => fag.rader.length > 1);
 
@@ -75,6 +47,7 @@ const createColumns = (
   perioder: SimuleringResultatRad['resultaterPerMåned'],
   rangeOfMonths: { month: string; year: string }[],
   nextPeriod: string,
+  borderBottom?: string,
 ): ReactElement[] => {
   const nextPeriodFormatted = `${dayjs(nextPeriod).format('MMMMYY')}`;
 
@@ -87,8 +60,9 @@ const createColumns = (
   });
 
   return perioderData.map((måned, månedIndex) => (
-    <TableColumn
+    <Table.DataCell
       key={`columnIndex${månedIndex + 1}`}
+      style={{ borderBottom }}
       className={classNames({
         rodTekst: !måned.beløp || måned.beløp < 0,
         lastColumn:
@@ -98,7 +72,7 @@ const createColumns = (
       })}
     >
       {måned.beløp ? formatCurrencyNoKr(måned.beløp) : '-'}
-    </TableColumn>
+    </Table.DataCell>
   ));
 };
 
@@ -114,9 +88,7 @@ const tableTitle = (
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 ): ReactElement | null =>
   mottaker.mottakerType === MottakerType.ARBG || mottaker.mottakerType === MottakerType.ARBGP ? (
-    <BodyShort size="small" className={styles.tableTitle}>
-      {lagVisningsNavn(mottaker, arbeidsgiverOpplysningerPerId)}
-    </BodyShort>
+    <Heading size="xsmall">{lagVisningsNavn(mottaker, arbeidsgiverOpplysningerPerId)}</Heading>
   ) : null;
 
 const getResultatRadene = (
@@ -174,65 +146,89 @@ export const SimuleringTable = ({
       const nesteMåned = mottaker.nesteUtbPeriode.tom;
       const visDetaljer = showDetails.find(d => d.id === mottakerIndex);
       const array = [] as ReactElement[];
+
       return (
         <div className={styles.tableWrapper} key={`tableIndex${mottakerIndex + 1}`}>
           {tableTitle(mottaker, arbeidsgiverOpplysningerPerId)}
-          <Table
-            headerColumnContent={getHeaderCodes(
-              skalViseCollapseButton(mottaker.resultatPerFagområde),
-              { toggleDetails, showDetails: visDetaljer ? visDetaljer.show : false, mottakerIndex },
-              rangeOfMonths,
-              nesteMåned,
-            )}
-            key={`tableIndex${mottakerIndex + 1}`}
-            classNameTable={styles.simuleringTable}
-          >
-            {array
-              .concat(
-                ...mottaker.resultatPerFagområde.map((fagOmråde, fagIndex) =>
-                  fagOmråde.rader
-                    .filter(rad => {
-                      const isFeilUtbetalt = rad.feltnavn === simuleringCodes.DIFFERANSE;
-                      const isRowToggable = rowToggable(fagOmråde, isFeilUtbetalt);
-                      return !rowIsHidden(isRowToggable, visDetaljer ? visDetaljer.show : false);
-                    })
-                    .map((rad, rowIndex) => {
-                      const isFeilUtbetalt = rad.feltnavn === simuleringCodes.DIFFERANSE;
-                      const isRowToggable = rowToggable(fagOmråde, isFeilUtbetalt);
-                      return (
-                        <TableRow
-                          isBold={isFeilUtbetalt || ingenPerioderMedAvvik}
-                          isDashedBottomBorder={isRowToggable}
-                          isSolidBottomBorder={!isRowToggable}
-                          key={`rowIndex${fagIndex + 1}${rowIndex + 1}`}
-                        >
-                          <TableColumn>
-                            <FormattedMessage id={`Simulering.${fagOmråde.fagOmrådeKode}.${rad.feltnavn}`} />
-                          </TableColumn>
-                          {createColumns(rad.resultaterPerMåned, rangeOfMonths, nesteMåned)}
-                        </TableRow>
-                      );
-                    }),
-                ),
-              )
-              .concat(
-                getResultatRadene(
-                  ingenPerioderMedAvvik,
-                  mottaker.resultatPerFagområde,
-                  mottaker.resultatOgMotregningRader,
-                ).map((resultat, resultatIndex) => (
-                  <TableRow
-                    isBold={resultat.feltnavn !== simuleringCodes.INNTREKKNESTEMÅNED}
-                    isSolidBottomBorder
-                    key={`rowIndex${resultatIndex + 1}`}
+          <Table key={`tableIndex${mottakerIndex + 1}`} className={styles.simuleringTable}>
+            <Table.Header>
+              <Table.Row>
+                {skalViseCollapseButton(mottaker.resultatPerFagområde) ? (
+                  <Table.HeaderCell scope="col">
+                    <CollapseButton
+                      toggleDetails={toggleDetails}
+                      mottakerIndex={mottakerIndex}
+                      showDetails={visDetaljer ? visDetaljer.show : false}
+                      key={`collapseButton-${rangeOfMonths.length}`}
+                    />
+                  </Table.HeaderCell>
+                ) : (
+                  <Table.HeaderCell />
+                )}
+                {rangeOfMonths.map(monthAndYear => (
+                  <Table.HeaderCell
+                    scope="col"
+                    className={classNames({
+                      nextPeriod: isNextPeriod(monthAndYear, nesteMåned),
+                      normalPeriod: !isNextPeriod(monthAndYear, nesteMåned),
+                    })}
+                    key={`${monthAndYear.month}-${monthAndYear.year}`}
                   >
-                    <TableColumn>
-                      <FormattedMessage id={`Simulering.${resultat.feltnavn}`} />
-                    </TableColumn>
-                    {createColumns(resultat.resultaterPerMåned, rangeOfMonths, nesteMåned)}
-                  </TableRow>
-                )),
-              )}
+                    <FormattedMessage id={`Simulering.headerText.${monthAndYear.month}`} />
+                  </Table.HeaderCell>
+                ))}
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>
+              {array
+                .concat(
+                  ...mottaker.resultatPerFagområde.map((fagOmråde, fagIndex) =>
+                    fagOmråde.rader
+                      .filter(rad => {
+                        const isFeilUtbetalt = rad.feltnavn === simuleringCodes.DIFFERANSE;
+                        const isRowToggable = rowToggable(fagOmråde, isFeilUtbetalt);
+                        return !rowIsHidden(isRowToggable, visDetaljer ? visDetaljer.show : false);
+                      })
+                      .map((rad, rowIndex) => {
+                        const isFeilUtbetalt = rad.feltnavn === simuleringCodes.DIFFERANSE;
+                        const isRowToggable = rowToggable(fagOmråde, isFeilUtbetalt);
+                        const borderBottom = isRowToggable
+                          ? 'dashed 1px var(--a-gray-200)'
+                          : 'solid 1px var(--a-gray-200)';
+                        return (
+                          <Table.Row key={`rowIndex${fagIndex + 1}${rowIndex + 1}`}>
+                            <Table.DataCell
+                              style={
+                                isFeilUtbetalt || ingenPerioderMedAvvik
+                                  ? { fontWeight: 'bold', borderBottom }
+                                  : { borderBottom }
+                              }
+                            >
+                              <FormattedMessage id={`Simulering.${fagOmråde.fagOmrådeKode}.${rad.feltnavn}`} />
+                            </Table.DataCell>
+                            {createColumns(rad.resultaterPerMåned, rangeOfMonths, nesteMåned, borderBottom)}
+                          </Table.Row>
+                        );
+                      }),
+                  ),
+                )
+                .concat(
+                  getResultatRadene(
+                    ingenPerioderMedAvvik,
+                    mottaker.resultatPerFagområde,
+                    mottaker.resultatOgMotregningRader,
+                  ).map((resultat, resultatIndex) => (
+                    <Table.Row key={`rowIndex${resultatIndex + 1}`}>
+                      <Table.DataCell
+                        style={resultat.feltnavn !== simuleringCodes.INNTREKKNESTEMÅNED ? { fontWeight: 'bold' } : {}}
+                      >
+                        <FormattedMessage id={`Simulering.${resultat.feltnavn}`} />
+                      </Table.DataCell>
+                      {createColumns(resultat.resultaterPerMåned, rangeOfMonths, nesteMåned)}
+                    </Table.Row>
+                  )),
+                )}
+            </Table.Body>
           </Table>
         </div>
       );
