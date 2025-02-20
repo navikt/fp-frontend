@@ -11,7 +11,7 @@ import { type OmsorgOgRettProps } from '../OmsorgOgRettFaktaIndex';
 import { AleneomsorgForm } from './forms/AleneomsorgForm';
 import { HarAnnenForelderRettForm } from './forms/HarAnnenForelderRettForm';
 
-export const OmsorgOgRettInfoPanel = ({ personoversikt, ytelsefordeling, submittable }: OmsorgOgRettProps) => {
+export const OmsorgOgRettInfoPanel = ({ personoversikt, omsorgOgRett, submittable }: OmsorgOgRettProps) => {
   const { alleKodeverk, aksjonspunkterForPanel, isReadOnly, harÅpneAksjonspunkter } = usePanelDataContext();
 
   const harAPAleneomsorg = hasAksjonspunkt(
@@ -33,7 +33,7 @@ export const OmsorgOgRettInfoPanel = ({ personoversikt, ytelsefordeling, submitt
 
       {harAPAleneomsorg && (
         <AleneomsorgForm
-          ytelsefordeling={ytelsefordeling}
+          omsorgOgRett={omsorgOgRett}
           submittable={submittable}
           aksjonspunkt={aksjonspunkterForPanel[0]}
         />
@@ -41,7 +41,7 @@ export const OmsorgOgRettInfoPanel = ({ personoversikt, ytelsefordeling, submitt
 
       {harAPAnnenForelderRett && (
         <HarAnnenForelderRettForm
-          ytelsefordeling={ytelsefordeling}
+          omsorgOgRett={omsorgOgRett}
           submittable={submittable}
           aksjonspunkt={aksjonspunkterForPanel[0]}
         />

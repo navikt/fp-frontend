@@ -7,7 +7,7 @@ import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
+import type { Aksjonspunkt, OmsorgOgRett } from '@navikt/fp-types';
 import type { AvklarAnnenforelderHarRettAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
@@ -21,35 +21,30 @@ export type FormValues = {
 };
 
 interface Props {
-  ytelsefordeling: Ytelsefordeling;
+  omsorgOgRett: OmsorgOgRett;
   aksjonspunkt: Aksjonspunkt;
   submittable: boolean;
 }
 
-export const HarAnnenForelderRettForm = ({ ytelsefordeling, aksjonspunkt, submittable }: Props) => {
+export const HarAnnenForelderRettForm = ({ omsorgOgRett, aksjonspunkt, submittable }: Props) => {
   const { submitCallback, isReadOnly, alleMerknaderFraBeslutter } = usePanelDataContext<AvklarAnnenforelderHarRettAp>();
 
-  const {
-    bekreftetAnnenforelderRett,
-    bekreftetAnnenforelderUføretrygd,
-    bekreftetAnnenForelderRettEØS,
-    skalAvklareAnnenForelderRettEØS,
-    skalAvklareAnnenforelderUføretrygd,
-  } = ytelsefordeling.rettigheterAnnenforelder ?? {};
+  const { harAnnenpartRettNorge, harAnnenpartUføretrygd, harAnnenpartRettEØS } =
+    omsorgOgRett.manuellBehandlingResultat ?? {};
 
   const { formData, setFormData } = useFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
     defaultValues: formData || {
-      harAnnenForelderRett: bekreftetAnnenforelderRett,
-      mottarAnnenForelderUforetrygd: bekreftetAnnenforelderUføretrygd,
-      harAnnenForelderRettEØS: bekreftetAnnenForelderRettEØS,
+      harAnnenForelderRett: harAnnenpartRettNorge,
+      mottarAnnenForelderUforetrygd: harAnnenpartUføretrygd,
+      harAnnenForelderRettEØS: harAnnenpartRettEØS,
       ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
     },
   });
 
-  const skalAvklareUforetrygd = skalAvklareAnnenforelderUføretrygd || bekreftetAnnenforelderUføretrygd !== null;
-  const skalAvklareRettEØS = skalAvklareAnnenForelderRettEØS || bekreftetAnnenForelderRettEØS !== null;
+  const skalAvklareUforetrygd = omsorgOgRett.søknad.annenpartRettighet.harUføretrygd != null;
+  const skalAvklareRettEØS = omsorgOgRett.søknad.annenpartRettighet.harRettEØS != null;
 
   const transformerFeltverdier = useCallback(
     (feltVerdier: FormValues) =>

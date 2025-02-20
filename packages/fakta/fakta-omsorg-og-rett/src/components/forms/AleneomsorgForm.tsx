@@ -8,7 +8,7 @@ import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton, TrueFalseInput } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
+import type { Aksjonspunkt, OmsorgOgRett } from '@navikt/fp-types';
 import type { BekreftAleneomsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
@@ -23,25 +23,24 @@ export type FormValues = {
 };
 
 interface Props {
-  ytelsefordeling: Ytelsefordeling;
+  omsorgOgRett: OmsorgOgRett;
   aksjonspunkt: Aksjonspunkt;
   submittable: boolean;
 }
 
-export const AleneomsorgForm = ({ ytelsefordeling, aksjonspunkt, submittable }: Props) => {
+export const AleneomsorgForm = ({ omsorgOgRett, aksjonspunkt, submittable }: Props) => {
   const { submitCallback, isReadOnly, alleMerknaderFraBeslutter } =
     usePanelDataContext<BekreftAleneomsorgVurderingAp>();
-  const { bekreftetAnnenforelderRett, bekreftetAnnenforelderUføretrygd, bekreftetAnnenForelderRettEØS } =
-    ytelsefordeling.rettigheterAnnenforelder ?? {};
+  const { manuellBehandlingResultat } = omsorgOgRett ?? {};
 
   const { formData, setFormData } = useFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
     defaultValues: formData || {
-      harAleneomsorg: ytelsefordeling.bekreftetAleneomsorg,
-      harAnnenForelderRett: bekreftetAnnenforelderRett,
-      mottarAnnenForelderUforetrygd: bekreftetAnnenforelderUføretrygd,
-      harAnnenForelderRettEØS: bekreftetAnnenForelderRettEØS,
+      harAleneomsorg: manuellBehandlingResultat.harAleneomsorg,
+      harAnnenForelderRett: manuellBehandlingResultat.harAnnenpartRettNorge,
+      mottarAnnenForelderUforetrygd: manuellBehandlingResultat.harAnnenpartUføretrygd,
+      harAnnenForelderRettEØS: manuellBehandlingResultat.harAnnenpartRettEØS,
       ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
     },
   });

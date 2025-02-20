@@ -31,7 +31,7 @@ export const OmsorgOgRettFaktaInitPanel = ({ personoversikt, ...props }: Props &
 
   const api = useBehandlingApi(behandling);
 
-  const { data: ytelsefordeling } = useQuery(api.ytelsefordelingOptions(behandling));
+  const { data: omsorgOgRett } = useQuery(api.omsorgOgRettOptions(behandling));
 
   return (
     <FaktaDefaultInitPanel
@@ -41,9 +41,9 @@ export const OmsorgOgRettFaktaInitPanel = ({ personoversikt, ...props }: Props &
       faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.OmsorgOgRett' })}
       skalPanelVisesIMeny={AKSJONSPUNKT_KODER.some(kode => hasAksjonspunkt(kode, behandling.aksjonspunkt))}
     >
-      {ytelsefordeling ? (
+      {omsorgOgRett ? (
         <OmsorgOgRettFaktaIndex
-          ytelsefordeling={ytelsefordeling}
+          omsorgOgRett={omsorgOgRett}
           personoversikt={personoversikt}
           submittable={standardPanelProps.submittable}
         />
