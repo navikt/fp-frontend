@@ -49,7 +49,7 @@ const getDefaultValues = (
 ): FormValues => ({
   mottattDato: innsyn?.innsynMottattDato,
   innsynResultatType: innsyn?.innsynResultatType,
-  fristDato: fristBehandlingPåVent || moment().add(3, 'days').format(ISO_DATE_FORMAT),
+  fristDato: fristBehandlingPåVent ?? moment().add(3, 'days').format(ISO_DATE_FORMAT),
   sattPaVent: aksjonspunkter[0].status === AksjonspunktStatus.OPPRETTET ? undefined : !!fristBehandlingPåVent,
   ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
   ...hentDokumenterMedNavnOgFikkInnsyn(innsyn?.dokumenter || []),
@@ -170,41 +170,39 @@ export const InnsynForm = ({ innsyn, readOnlySubmitButton, alleDokumenter = [] }
         />
         {(innsynResultatTypeKode === innsynResultatTyperKV.INNVILGET ||
           innsynResultatTypeKode === innsynResultatTyperKV.DELVISTINNVILGET) && (
-          <>
-            <ArrowBox alignOffset={innsynResultatTypeKode === innsynResultatTyperKV.INNVILGET ? 28 : 176}>
-              <RadioGroupPanel
-                name="sattPaVent"
-                label={<FormattedMessage id="InnsynForm.VelgVidereAksjon" />}
-                validate={[required]}
-                isReadOnly={isReadOnly}
-                isEdited={!isApOpen}
-                isHorizontal
-                isTrueOrFalseSelection
-                radios={[
-                  {
-                    value: 'true',
-                    label: intl.formatMessage({ id: 'InnsynForm.SettBehandlingPåVent' }),
-                  },
-                  {
-                    value: 'false',
-                    label: intl.formatMessage({ id: 'InnsynForm.ForeslåOgFatteVedtak' }),
-                  },
-                ]}
-              />
-              {sattPaVent && (
-                <>
-                  <VerticalSpacer eightPx />
-                  <Datepicker
-                    name="fristDato"
-                    label={intl.formatMessage({ id: 'InnsynForm.FristDato' })}
-                    isReadOnly={isReadOnly}
-                    isEdited={!isApOpen}
-                    validate={[required, hasValidDate]}
-                  />
-                </>
-              )}
-            </ArrowBox>
-          </>
+          <ArrowBox alignOffset={innsynResultatTypeKode === innsynResultatTyperKV.INNVILGET ? 28 : 176}>
+            <RadioGroupPanel
+              name="sattPaVent"
+              label={<FormattedMessage id="InnsynForm.VelgVidereAksjon" />}
+              validate={[required]}
+              isReadOnly={isReadOnly}
+              isEdited={!isApOpen}
+              isHorizontal
+              isTrueOrFalseSelection
+              radios={[
+                {
+                  value: 'true',
+                  label: intl.formatMessage({ id: 'InnsynForm.SettBehandlingPåVent' }),
+                },
+                {
+                  value: 'false',
+                  label: intl.formatMessage({ id: 'InnsynForm.ForeslåOgFatteVedtak' }),
+                },
+              ]}
+            />
+            {sattPaVent && (
+              <>
+                <VerticalSpacer eightPx />
+                <Datepicker
+                  name="fristDato"
+                  label={intl.formatMessage({ id: 'InnsynForm.FristDato' })}
+                  isReadOnly={isReadOnly}
+                  isEdited={!isApOpen}
+                  validate={[required, hasValidDate]}
+                />
+              </>
+            )}
+          </ArrowBox>
         )}
         <HStack>
           <ProsessStegSubmitButtonNew

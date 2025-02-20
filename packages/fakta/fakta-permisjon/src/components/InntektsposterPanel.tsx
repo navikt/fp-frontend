@@ -43,7 +43,7 @@ interface Props {
 }
 
 export const InntektsposterPanel = ({ inntektsposter, skjæringstidspunkt }: Props) => {
-  const [visAlleMåneder, toggleMånedvisning] = useState(false);
+  const [visAlleMåneder, setVisAlleMåneder] = useState(false);
 
   const sorterteInntektsposter = useMemo(
     () => behandleInntektsposter(skjæringstidspunkt, inntektsposter),
@@ -81,7 +81,7 @@ export const InntektsposterPanel = ({ inntektsposter, skjæringstidspunkt }: Pro
           <Link
             onClick={e => {
               e.preventDefault();
-              toggleMånedvisning(!visAlleMåneder);
+              setVisAlleMåneder(!visAlleMåneder);
             }}
             href=""
           >

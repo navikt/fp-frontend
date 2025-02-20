@@ -29,7 +29,7 @@ const buildInitialValues = (
 ): FormValues => {
   const aksjonspunkt = aksjonspunkter.find(ap => ap.definisjon === AksjonspunktKode.OVERSTYR_BEREGNING);
   return {
-    begrunnelse: decodeHtmlEntity(aksjonspunkt && aksjonspunkt.begrunnelse ? aksjonspunkt.begrunnelse : ''),
+    begrunnelse: decodeHtmlEntity(aksjonspunkt?.begrunnelse ?? ''),
     beregnetTilkjentYtelse: behandlingResultatstruktur?.beregnetTilkjentYtelse,
   };
 };
