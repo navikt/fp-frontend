@@ -135,7 +135,7 @@ export const GjeldendeSakslisterTabell = ({
           <BodyShort size="small">
             <FormattedMessage id="GjeldendeSakslisterTabell.OppgaverForAvdeling" />
           </BodyShort>
-          <Heading size="small">{oppgaverForAvdelingAntall || '0'}</Heading>
+          <Heading size="small">{oppgaverForAvdelingAntall ?? '0'}</Heading>
         </div>
       </HStack>
       {sakslister.length === 0 && (

@@ -401,46 +401,44 @@ export const UttakPeriodeForm = ({
               ]}
             />
             {erOppfylt !== undefined && (
-              <>
-                <ArrowBox alignOffset={erOppfylt ? 0 : 92}>
-                  <SelectField
-                    name="periodeAarsak"
-                    label={intl.formatMessage({
-                      id: erOppfylt ? 'UttakActivity.InnvilgelseAarsaker' : 'UttakActivity.AvslagAarsak',
-                    })}
-                    selectValues={periodeÅrsakOptions}
-                    validate={[required, notDash]}
-                  />
-                  {valgtPeriode.gradertAktivitet && erOppfylt && (
-                    <>
-                      <VerticalSpacer sixteenPx />
-                      <RadioGroupPanel
-                        name="graderingInnvilget"
-                        label={intl.formatMessage({ id: 'UttakActivity.Gradering' })}
-                        validate={[required]}
-                        isHorizontal
-                        isTrueOrFalseSelection
-                        radios={[
-                          { label: intl.formatMessage({ id: 'UttakActivity.Oppfylt' }), value: 'true' },
-                          { label: intl.formatMessage({ id: 'UttakActivity.IkkeOppfylt' }), value: 'false' },
-                        ]}
-                      />
-                      {graderingInnvilget === false && (
-                        <>
-                          <VerticalSpacer sixteenPx />
-                          <SelectField
-                            name="graderingAvslagAarsak"
-                            label={intl.formatMessage({ id: 'UttakActivity.GraderingAvslagAarsaker' })}
-                            validate={[required, notDash]}
-                            selectValues={graderingAvslagsårsakOptions}
-                          />
-                        </>
-                      )}
-                      <VerticalSpacer eightPx />
-                    </>
-                  )}
-                </ArrowBox>
-              </>
+              <ArrowBox alignOffset={erOppfylt ? 0 : 92}>
+                <SelectField
+                  name="periodeAarsak"
+                  label={intl.formatMessage({
+                    id: erOppfylt ? 'UttakActivity.InnvilgelseAarsaker' : 'UttakActivity.AvslagAarsak',
+                  })}
+                  selectValues={periodeÅrsakOptions}
+                  validate={[required, notDash]}
+                />
+                {valgtPeriode.gradertAktivitet && erOppfylt && (
+                  <>
+                    <VerticalSpacer sixteenPx />
+                    <RadioGroupPanel
+                      name="graderingInnvilget"
+                      label={intl.formatMessage({ id: 'UttakActivity.Gradering' })}
+                      validate={[required]}
+                      isHorizontal
+                      isTrueOrFalseSelection
+                      radios={[
+                        { label: intl.formatMessage({ id: 'UttakActivity.Oppfylt' }), value: 'true' },
+                        { label: intl.formatMessage({ id: 'UttakActivity.IkkeOppfylt' }), value: 'false' },
+                      ]}
+                    />
+                    {graderingInnvilget === false && (
+                      <>
+                        <VerticalSpacer sixteenPx />
+                        <SelectField
+                          name="graderingAvslagAarsak"
+                          label={intl.formatMessage({ id: 'UttakActivity.GraderingAvslagAarsaker' })}
+                          validate={[required, notDash]}
+                          selectValues={graderingAvslagsårsakOptions}
+                        />
+                      </>
+                    )}
+                    <VerticalSpacer eightPx />
+                  </>
+                )}
+              </ArrowBox>
             )}
             {warning && (
               <Alert size="small" variant="info" className={styles.alert}>

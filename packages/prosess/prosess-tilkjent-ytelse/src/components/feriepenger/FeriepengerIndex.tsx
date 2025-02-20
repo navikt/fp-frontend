@@ -11,14 +11,14 @@ interface Props {
 }
 
 export const FeriepengerIndex = ({ feriepengegrunnlag, alleKodeverk, arbeidsgiverOpplysningerPerId }: Props) => {
-  const [erPanelApent, togglePanel] = useState(false);
+  const [erPanelÅpent, setErPanelÅpent] = useState(false);
   return (
     <FeriepengerPanel
       feriepengegrunnlag={feriepengegrunnlag}
       alleKodeverk={alleKodeverk}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-      erPanelÅpent={erPanelApent}
-      togglePanel={() => togglePanel(!erPanelApent)}
+      erPanelÅpent={erPanelÅpent}
+      togglePanel={() => setErPanelÅpent(!erPanelÅpent)}
     />
   );
 };

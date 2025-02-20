@@ -31,7 +31,7 @@ const capitalizeFirstLetter = (landNavn: string): string => {
 
 const buildInitialValues = (soknad: Soknad, aksjonspunkt?: Aksjonspunkt): FormValues => ({
   startdatoFraSoknad: soknad.oppgittFordeling?.startDatoForPermisjon,
-  begrunnelse: (aksjonspunkt && aksjonspunkt.begrunnelse) || '',
+  begrunnelse: aksjonspunkt?.begrunnelse ?? '',
 });
 
 const transformValues = (soknad: Soknad, values: FormValues): OverstyringAvklarStartdatoForPeriodenAp => ({
@@ -76,11 +76,11 @@ export const StartdatoForForeldrepengerperiodenForm = ({
     defaultValues: formData || buildInitialValues(soknad, aksjonspunkt),
   });
 
-  const [visEditeringsmodus, toggleEdit] = useState(false);
-  const slåPåEditering = useCallback(() => toggleEdit(true), []);
+  const [visEditeringsmodus, setVisEditeringsmodus] = useState(false);
+  const slåPåEditering = useCallback(() => setVisEditeringsmodus(true), []);
   const slaAvEditeringAvStartdato = useCallback(() => {
     formMethods.reset();
-    toggleEdit(false);
+    setVisEditeringsmodus(false);
   }, []);
 
   return (

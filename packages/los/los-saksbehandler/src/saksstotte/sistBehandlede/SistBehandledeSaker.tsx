@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { ChevronRightCircleFillIcon, ClockDashedIcon } from '@navikt/aksel-icons';
@@ -24,6 +25,8 @@ interface Props {
 export const SistBehandledeSaker = ({ åpneFagsak }: Props) => {
   const { data: sistBehandledeSaker = EMPTY_ARRAY } = useQuery(behandlendeOppgaverOptions());
 
+  const italicWrapper = { i: (chunks: ReactNode[]) => <i>{chunks}</i> };
+
   return (
     <VStack gap="2">
       <HStack gap="2" align="center">
@@ -37,7 +40,7 @@ export const SistBehandledeSaker = ({ åpneFagsak }: Props) => {
       {sistBehandledeSaker.length === 0 && (
         <div className={styles.ingenBehandlinger}>
           <BodyShort size="medium">
-            <FormattedMessage id="SistBehandledeSaker.IngenBehandlinger" values={{ i: chunks => <i>{chunks}</i> }} />
+            <FormattedMessage id="SistBehandledeSaker.IngenBehandlinger" values={italicWrapper} />
           </BodyShort>
         </div>
       )}

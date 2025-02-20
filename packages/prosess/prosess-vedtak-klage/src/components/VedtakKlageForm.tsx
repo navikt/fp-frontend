@@ -104,9 +104,9 @@ export const VedtakKlageForm = ({ klageVurdering, previewVedtakCallback, behandl
     : klageVurdering.klageVurderingResultatNFP;
   const erOmgjort = isKlageOmgjort(behandlingsresultat.type);
 
-  const [isSubmitting, setSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const lagreVedtak = () => {
-    setSubmitting(true);
+    setIsSubmitting(true);
 
     const behandlingAksjonspunktKodes = aksjonspunkterForPanel
       .filter(ap => ap.status === AksjonspunktStatus.OPPRETTET)
@@ -115,7 +115,7 @@ export const VedtakKlageForm = ({ klageVurdering, previewVedtakCallback, behandl
       kode: validerApKodeOgHentApEnum(apCode, AksjonspunktKode.FORESLA_VEDTAK, AksjonspunktKode.FORESLA_VEDTAK_MANUELT),
     }));
 
-    submitCallback(input).then(() => setSubmitting(false));
+    submitCallback(input).then(() => setIsSubmitting(false));
   };
 
   const kodeverknavn = getKodeverknavnFn(alleKodeverk);

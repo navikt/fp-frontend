@@ -53,7 +53,7 @@ export const ProsessStegBegrunnelseTextField = ({
     <div className={!useAllWidth ? styles.begrunnelseTextField : ''}>
       <TextAreaField
         name="begrunnelse"
-        label={text || intl.formatMessage({ id: getBegrunnelseTextCode(readOnly) })}
+        label={text ?? intl.formatMessage({ id: getBegrunnelseTextCode(readOnly) })}
         validate={[requiredIfCustomFunctionIsTrueNew(isRequiredFn), minLength3, maxLength1500, hasValidText]}
         maxLength={2000}
         readOnly={readOnly}
