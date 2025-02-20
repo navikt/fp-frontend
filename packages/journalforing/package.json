@@ -30,7 +30,7 @@
     "@navikt/ft-form-validators": "3.1.4",
     "@navikt/ft-ui-komponenter": "3.1.5",
     "@navikt/ft-utils": "3.1.4",
-    "@tanstack/react-query": "5.66.6",
+    "@tanstack/react-query": "5.66.7",
     "@tanstack/react-query-devtools": "^5.66.6",
     "dayjs": "1.11.13",
     "ky": "^1.7.5",
