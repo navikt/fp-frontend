@@ -1,6 +1,8 @@
 import type { StorybookConfig } from '@storybook/react-vite';
 
-const config: StorybookConfig = {
+//TODO (TOR) Litt hacky løysing med forskjellige relative paths for staticDirs her
+
+export const config: StorybookConfig = {
   stories: ['../src/**/*.stories.@(ts|tsx)'],
   addons: ['@storybook/addon-links', '@storybook/addon-essentials', '@storybook/addon-a11y'],
   framework: {
@@ -10,4 +12,7 @@ const config: StorybookConfig = {
   staticDirs: ['../../../.storybook/mock'],
 };
 
-export default config;
+export const configWithDifferentStaticDirs: StorybookConfig = {
+  ...config,
+  staticDirs: ['../../../../.storybook/mock'],
+};
