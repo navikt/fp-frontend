@@ -236,7 +236,6 @@ export const OpptjeningFaktaPanel = ({
             velgForrigeAktivitet={velgForrigeAktivitet}
             harAksjonspunkt={harAksjonspunkt}
             alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-            alleKodeverk={alleKodeverk}
             arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
             ferdiglignetNæring={ferdiglignetNæring}
             lukkPeriode={lukkPeriode}

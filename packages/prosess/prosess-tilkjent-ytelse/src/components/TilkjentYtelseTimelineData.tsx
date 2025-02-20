@@ -35,7 +35,7 @@ const createVisningNavnForUttakArbeidstaker = (
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 ): ReactElement | string => {
   const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[andel.arbeidsgiverReferanse];
-  if (!arbeidsgiverOpplysninger || !arbeidsgiverOpplysninger.navn) {
+  if (!arbeidsgiverOpplysninger?.navn) {
     return andel.arbeidsforholdType
       ? getKodeverknavn(andel.arbeidsforholdType, KodeverkType.OPPTJENING_AKTIVITET_TYPE)
       : '';

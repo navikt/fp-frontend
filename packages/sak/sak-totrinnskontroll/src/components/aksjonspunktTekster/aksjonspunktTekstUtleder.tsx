@@ -90,7 +90,7 @@ const getFaktaOmBeregningText = (
   faktaOmBeregningTilfeller: KodeverkMedNavn[],
   beregningDto?: TotrinnskontrollAksjonspunkt['beregningDto'],
 ): ReactElement[] => {
-  if (!beregningDto || !beregningDto.faktaOmBeregningTilfeller) {
+  if (!beregningDto?.faktaOmBeregningTilfeller) {
     return [];
   }
 

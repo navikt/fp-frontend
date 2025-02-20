@@ -34,9 +34,9 @@ export const BehandlingskoerIndex = ({ valgtSakslisteId, setValgtSakslisteId, å
       åpneFagsak(oppgave.saksnummer.toString(), oppgave.behandlingId);
     } else {
       reserverOppgave(oppgave.id).then(nyOppgaveStatus => {
-        if (nyOppgaveStatus && nyOppgaveStatus.erReservert && nyOppgaveStatus.erReservertAvInnloggetBruker) {
+        if (nyOppgaveStatus?.erReservert && nyOppgaveStatus.erReservertAvInnloggetBruker) {
           åpneFagsak(oppgave.saksnummer.toString(), oppgave.behandlingId);
-        } else if (nyOppgaveStatus && nyOppgaveStatus.erReservert && !nyOppgaveStatus.erReservertAvInnloggetBruker) {
+        } else if (nyOppgaveStatus?.erReservert && !nyOppgaveStatus.erReservertAvInnloggetBruker) {
           setReservertAvAnnenSaksbehandler(true);
           setReservertOppgave(oppgave);
           setReservertOppgaveStatus(nyOppgaveStatus);

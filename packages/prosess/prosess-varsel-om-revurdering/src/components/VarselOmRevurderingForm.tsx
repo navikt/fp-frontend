@@ -1,4 +1,4 @@
-import { type MouseEvent, useCallback, useState } from 'react';
+import { type MouseEvent, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -92,9 +92,9 @@ export const VarselOmRevurderingForm = ({
 
   const formVerdier = formMethods.watch();
 
-  const [skalVisePaVentModal, settSkalVisePaVentModal] = useState(false);
-  const lukkModal = useCallback(() => settSkalVisePaVentModal(false), [settSkalVisePaVentModal]);
-  const åpneModal = useCallback(() => settSkalVisePaVentModal(true), [settSkalVisePaVentModal]);
+  const [skalVisePåVentModal, settVisePåVentModal] = useState(false);
+  const lukkModal = () => settVisePåVentModal(false);
+  const åpneModal = () => settVisePåVentModal(true);
 
   const håndterSubmitFraModal = (modalValues: ModalFormValues) => {
     formMethods.trigger().then(isValid => {
@@ -104,21 +104,18 @@ export const VarselOmRevurderingForm = ({
           ...modalValues,
         });
       }
-      settSkalVisePaVentModal(false);
+      settVisePåVentModal(false);
     });
   };
 
-  const forhåndsvisMelding = useCallback(
-    (e: MouseEvent) => {
-      e.preventDefault();
-      previewCallback({
-        dokumentMal: DokumentMalType.VARSEL_OM_REVURDERING,
-        arsakskode: UgunstAarsakType.ANNET,
-        fritekst: formVerdier.fritekst || ' ',
-      });
-    },
-    [formVerdier.fritekst],
-  );
+  const forhåndsvisMelding = (e: MouseEvent) => {
+    e.preventDefault();
+    previewCallback({
+      dokumentMal: DokumentMalType.VARSEL_OM_REVURDERING,
+      arsakskode: UgunstAarsakType.ANNET,
+      fritekst: formVerdier.fritekst || ' ',
+    });
+  };
 
   const { avklartBarn } = nullSafe(familiehendelse.register);
   const { termindato } = nullSafe(familiehendelse.gjeldende);
@@ -228,7 +225,7 @@ export const VarselOmRevurderingForm = ({
         )}
       </Form>
       <SettPaVentModalIndex
-        showModal={skalVisePaVentModal}
+        showModal={skalVisePåVentModal}
         frist={moment().add(28, 'days').format(ISO_DATE_FORMAT)}
         cancelEvent={lukkModal}
         submitCallback={håndterSubmitFraModal}

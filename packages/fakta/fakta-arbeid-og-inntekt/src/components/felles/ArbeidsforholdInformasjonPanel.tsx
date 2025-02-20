@@ -64,7 +64,7 @@ export const ArbeidsforholdInformasjonPanel = ({
   alleKodeverk,
   arbeidsgiverFødselsdato,
 }: Props) => {
-  const [visAlleMåneder, toggleMånedvisning] = useState(false);
+  const [visAlleMåneder, setVisAlleMånader] = useState(false);
 
   const sorterteInntektsposter = useMemo(
     () => behandleInntektsposter(skjæringspunktDato, inntektsposter),
@@ -115,7 +115,7 @@ export const ArbeidsforholdInformasjonPanel = ({
           <Link
             onClick={e => {
               e.preventDefault();
-              toggleMånedvisning(!visAlleMåneder);
+              setVisAlleMånader(!visAlleMåneder);
             }}
             href=""
           >
