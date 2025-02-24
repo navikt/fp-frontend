@@ -56,5 +56,14 @@
 
   "VedtakHelpTextPanel.Vurder": "Vurder følgende før du sender til godkjenning:",
 
-  "Malform.Beskrivelse": "Foretrukket språk"
+  "Malform.Beskrivelse": "Foretrukket språk",
+
+  "BrevInnhold.Lagre": "Lagre og lukk",
+  "BrevInnhold.Tilbakestill": "Tilbakestill",
+  "FritekstRedigeringModal.Rediger": "Rediger brev",
+  "FritekstRedigeringModal.Infotekst": "Gjør nødvendige endringer i brevet nedenfor. Redigering er begrenset til området markert i oransje. Vil du se saken samtidig som du redigerer kan du åpne en kopi av saken i ny fane:",
+  "FritekstRedigeringModal.BekreftTilbakestillTittel": "Tilbakestill brev",
+  "FritekstRedigeringModal.BekreftTilbakestill": "Alle endringer gjort i brevet vil nå bli slettet. Er du sikker på at du vil tilbakestille brevet?",
+  "FritekstRedigeringModal.Tilbakestill": "Tilbakestill",
+  "FritekstRedigeringModal.IkkeTilbakestill": "Avbryt"
 }

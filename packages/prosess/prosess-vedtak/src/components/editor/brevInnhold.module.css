@@ -1,0 +1,25 @@
+.nullstillCss {
+  all: unset;
+}
+
+.papir {
+  background: white;
+  box-shadow: 0 0 0.5cm rgb(0 0 0 / 50%);
+  display: block;
+  margin: 0.5cm auto 0.5cm;
+  padding-bottom: 10mm;
+  width: 21cm;
+}
+
+.ikkeRedigerbartInnhold {
+  margin: 0 auto;
+  max-width: 650px;
+}
+
+.redigerbartInnhold {
+  border-left: 15px solid var(--a-orange-300);
+  border-right: 15px solid var(--a-orange-300);
+  box-sizing: content-box;
+  margin: 0px -10mm;
+  min-width: 202.1mm;
+}
