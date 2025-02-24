@@ -10,7 +10,7 @@ import {
   utledSeksjonerSomKanRedigeres,
   utledStiler,
   utledSuffiksInnhold,
-} from './redigeringUtils';
+} from './redigeringsUtils';
 
 import styles from './brevInnhold.module.css';
 

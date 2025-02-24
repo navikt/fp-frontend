@@ -24,8 +24,8 @@ export const FritekstRedigeringModal = ({ htmlMal }: Props) => {
     setVisRedigering(false);
   };
 
-  const forhåndsvis = () => {
-    const erValidertOk = validerEndringer();
+  const forhåndsvis = async () => {
+    const erValidertOk = await validerEndringer();
     if (!erValidertOk) {
       setVisForhåndsvisValideringsFeil(true);
     } else {

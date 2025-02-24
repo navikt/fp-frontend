@@ -7,7 +7,7 @@ import Paragraph from '@editorjs/paragraph';
 import edjsHTML from 'editorjs-html';
 import debounce from 'lodash.debounce';
 
-import { erRedigertHtmlGyldig, utledRedigerbartInnhold } from './redigeringUtils';
+import { erRedigertHtmlGyldig, utledRedigerbartInnhold } from './redigeringsUtils';
 
 export const useEditorJs = (editorHolderId: string, htmlMal: string) => {
   const ref = useRef<EditorJS>(null);

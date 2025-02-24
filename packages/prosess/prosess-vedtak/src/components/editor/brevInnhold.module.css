@@ -4,11 +4,10 @@
 
 .papir {
   background: white;
-  box-shadow: 0 0 0.5cm rgb(0 0 0 / 50%);
+  box-shadow: 0 0 20px rgb(0 0 0 / 50%);
   display: block;
-  margin: 0.5cm auto 0.5cm;
-  padding-bottom: 10mm;
-  width: 21cm;
+  margin: 20px auto 20px;
+  padding-bottom: 50px;
 }
 
 .ikkeRedigerbartInnhold {
@@ -20,6 +19,6 @@
   border-left: 15px solid var(--a-orange-300);
   border-right: 15px solid var(--a-orange-300);
   box-sizing: content-box;
-  margin: 0px -10mm;
-  min-width: 202.1mm;
+  margin: 0 -38px;
+  min-width: 766px;
 }
