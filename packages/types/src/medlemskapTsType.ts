@@ -24,13 +24,6 @@ type UtenlandsoppholdPeriode = Readonly<{
   landkode: string;
 }>;
 
-// TODO(Siri): slett når AdressePeriode er byttet ut med Personadresse i backend
-export type AdressePeriode = Readonly<{
-  fom: string;
-  tom: string | null;
-  adresse: Personadresse;
-}>;
-
 export type MedlemskapPeriode = Readonly<{
   fom: string;
   tom: string | null;
@@ -73,7 +66,7 @@ export type ManuellBehandlingResultat = Readonly<{
 }>;
 
 type Annenpart = {
-  adresser: AdressePeriode[] | Personadresse[];
+  adresser: Personadresse[];
   regioner: RegionPeriode[];
   personstatuser: PersonstatusPeriode[];
 };
@@ -84,7 +77,7 @@ export type Medlemskap = Readonly<{
   regioner: RegionPeriode[];
   personstatuser: PersonstatusPeriode[];
   utenlandsopphold: UtenlandsoppholdPeriode[];
-  adresser: AdressePeriode[] | Personadresse[];
+  adresser: Personadresse[];
   oppholdstillatelser: OppholdstillatelsePeriode[];
   medlemskapsperioder: MedlemskapPeriode[];
   avvik: MedlemskapAvvik[];
