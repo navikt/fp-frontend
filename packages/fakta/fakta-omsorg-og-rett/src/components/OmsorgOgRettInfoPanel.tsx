@@ -3,11 +3,13 @@ import { FormattedMessage } from 'react-intl';
 import { VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
-import { PersonopplysningerForFamilie } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { type OmsorgOgRettProps } from '../OmsorgOgRettFaktaIndex';
+import { InformasjonOmAnnenPart } from '../opplysningskort/InformasjonOmAnnenPart.tsx';
+import { OpplysningerFraSoknad } from '../opplysningskort/OpplysningerFraSoknad.tsx';
+import { OpplysningerOmAdresser } from '../opplysningskort/OpplysningerOmAdresser.tsx';
 import { AleneomsorgForm } from './forms/AleneomsorgForm';
 import { HarAnnenForelderRettForm } from './forms/HarAnnenForelderRettForm';
 
@@ -22,14 +24,16 @@ export const OmsorgOgRettInfoPanel = ({ personoversikt, omsorgOgRett, submittabl
 
   return (
     <VStack gap="8">
+      <OpplysningerFraSoknad omsorgOgRett={omsorgOgRett} />
+      <InformasjonOmAnnenPart omsorgOgRett={omsorgOgRett} />
+      <OpplysningerOmAdresser alleKodeverk={alleKodeverk} personoversikt={personoversikt} />
+
       {!isReadOnly && harÅpneAksjonspunkter && (
         <AksjonspunktHelpTextHTML>
           {harAPAleneomsorg && <FormattedMessage id="OmsorgOgRettInfoPanel.VurderOmAleneomsorg" />}
           {harAPAnnenForelderRett && <FormattedMessage id="OmsorgOgRettInfoPanel.VurderAndreForelderRett" />}
         </AksjonspunktHelpTextHTML>
       )}
-
-      <PersonopplysningerForFamilie alleKodeverk={alleKodeverk} personoversikt={personoversikt} />
 
       {harAPAleneomsorg && (
         <AleneomsorgForm

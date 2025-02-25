@@ -1,7 +1,3 @@
-import { SivilstandType } from '@navikt/fp-kodeverk';
-
-import type { Personadresse } from './personadresseTsType.ts';
-
 export type OmsorgOgRett = {
   søknad: Søknad;
   registerdata: RegisterData;
@@ -24,18 +20,12 @@ export type Rettighet = {
 };
 
 export type RegisterData = {
-  adresser: Personadresse;
-  annenpartAdresser: Personadresse;
-  sivilstand: SivilstandType;
   harAnnenpartUføretrygd?: boolean;
   harAnnenpartForeldrepenger?: boolean;
   harAnnenpartEngangsstønad?: boolean;
 };
 
 export type ManuellBehandlingResultat = {
-  harAleneomsorg?: boolean;
-  harAnnenpartRettNorge?: boolean;
-  harAnnenpartOppholdEØS?: boolean;
-  harAnnenpartRettEØS?: boolean;
-  harAnnenpartUføretrygd?: boolean;
+  søkerHarAleneomsorg?: boolean;
+  annenpartRettighet: Rettighet;
 };

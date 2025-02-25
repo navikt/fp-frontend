@@ -5,7 +5,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { AdresseType, AksjonspunktKode, AksjonspunktStatus, SivilstandType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import { type Aksjonspunkt, KjønnkodeEnum, type PersonopplysningerBasis, type Ytelsefordeling } from '@navikt/fp-types';
+import { type Aksjonspunkt, KjønnkodeEnum, type OmsorgOgRett, type PersonopplysningerBasis } from '@navikt/fp-types';
 
 import { OmsorgOgRettFaktaIndex } from './OmsorgOgRettFaktaIndex';
 
@@ -66,7 +66,7 @@ const meta = {
   decorators: [withFormData, withPanelData],
   args: {
     personoversikt: { barn: [defaultBarn], annenPart: defaultAnnenPart, bruker: defaultBruker },
-    ytelsefordeling: {} as Ytelsefordeling,
+    omsorgOgRett: {} as OmsorgOgRett,
     submittable: true,
   },
   render: args => <OmsorgOgRettFaktaIndex {...args} />,

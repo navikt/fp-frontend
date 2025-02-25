@@ -32,15 +32,16 @@ export const AleneomsorgForm = ({ omsorgOgRett, aksjonspunkt, submittable }: Pro
   const { submitCallback, isReadOnly, alleMerknaderFraBeslutter } =
     usePanelDataContext<BekreftAleneomsorgVurderingAp>();
   const { manuellBehandlingResultat } = omsorgOgRett ?? {};
+  const { harRettNorge, harRettEØS, harUføretrygd } = manuellBehandlingResultat.annenpartRettighet ?? {};
 
   const { formData, setFormData } = useFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
     defaultValues: formData || {
-      harAleneomsorg: manuellBehandlingResultat.harAleneomsorg,
-      harAnnenForelderRett: manuellBehandlingResultat.harAnnenpartRettNorge,
-      mottarAnnenForelderUforetrygd: manuellBehandlingResultat.harAnnenpartUføretrygd,
-      harAnnenForelderRettEØS: manuellBehandlingResultat.harAnnenpartRettEØS,
+      harAleneomsorg: manuellBehandlingResultat.søkerHarAleneomsorg,
+      harAnnenForelderRett: harRettNorge,
+      mottarAnnenForelderUforetrygd: harUføretrygd,
+      harAnnenForelderRettEØS: harRettEØS,
       ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
     },
   });

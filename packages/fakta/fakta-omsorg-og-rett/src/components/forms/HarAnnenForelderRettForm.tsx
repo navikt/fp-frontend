@@ -29,16 +29,15 @@ interface Props {
 export const HarAnnenForelderRettForm = ({ omsorgOgRett, aksjonspunkt, submittable }: Props) => {
   const { submitCallback, isReadOnly, alleMerknaderFraBeslutter } = usePanelDataContext<AvklarAnnenforelderHarRettAp>();
 
-  const { harAnnenpartRettNorge, harAnnenpartUføretrygd, harAnnenpartRettEØS } =
-    omsorgOgRett.manuellBehandlingResultat ?? {};
+  const { harRettNorge, harRettEØS, harUføretrygd } = omsorgOgRett.manuellBehandlingResultat.annenpartRettighet ?? {};
 
   const { formData, setFormData } = useFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
     defaultValues: formData || {
-      harAnnenForelderRett: harAnnenpartRettNorge,
-      mottarAnnenForelderUforetrygd: harAnnenpartUføretrygd,
-      harAnnenForelderRettEØS: harAnnenpartRettEØS,
+      harAnnenForelderRett: harRettNorge,
+      mottarAnnenForelderUforetrygd: harUføretrygd,
+      harAnnenForelderRettEØS: harRettEØS,
       ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
     },
   });
