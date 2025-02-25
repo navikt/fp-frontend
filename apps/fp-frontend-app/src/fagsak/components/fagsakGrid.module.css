@@ -17,13 +17,14 @@
 .rightColumnHidden {
   min-width: 0;
   overflow: hidden;
-  transition: opacity 0.3s cubic-bezier(0.55, 0.06, 0.68, 0.19),
-  width 0.3s ease,
-  min-width 0.3s ease;
+  transition:
+    opacity 0.3s cubic-bezier(0.55, 0.06, 0.68, 0.19),
+    width 0.3s ease,
+    min-width 0.3s ease;
   width: 0;
 }
 
-@media all and (max-width: 1569px) {
+@media all and (max-width: 1701px) {
   .rightColumn {
     min-width: 35rem;
     width: 35rem;
