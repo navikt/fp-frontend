@@ -65,7 +65,7 @@ export const BrevInnhold = ({
             variant="tertiary"
             size="small"
             onClick={() => forhåndsvis()}
-            onKeyDown={e => (e.keyCode === 13 ? forhåndsvis() : null)}
+            onKeyDown={e => (e.key === 'Enter' ? forhåndsvis() : null)}
             type="button"
           >
             <FormattedMessage id="VedtakForm.ForhandvisBrev" />
