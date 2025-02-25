@@ -16,7 +16,7 @@ import type { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitP
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const getStatusFromUttakresultat = (behandling: Behandling): string => {
-  if (!harLenke(behandling, 'UTTAKSRESULTAT_PERIODER')) {
+  if (!harLenke(behandling, 'UTTAKSRESULTAT')) {
     return VilkarUtfallType.IKKE_VURDERT;
   }
   return behandling.alleUttaksperioderAvslått ? VilkarUtfallType.IKKE_OPPFYLT : VilkarUtfallType.OPPFYLT;
@@ -54,11 +54,10 @@ export const UttakProsessStegInitPanel = ({
 
   const api = useBehandlingApi(behandling);
 
-  const { data: uttaksresultatPerioder } = useQuery(api.uttaksresultatPerioderOptions(behandling));
+  const { data: uttaksresultat } = useQuery(api.uttaksresultatPerioderOptions(behandling));
   const { data: familiehendelse } = useQuery(api.familiehendelseOptions(behandling));
   const { data: søknad } = useQuery(api.søknadOptions(behandling));
   const { data: uttakStønadskontoer } = useQuery(api.uttakStønadskontoerOptions(behandling));
-  const { data: ytelsefordeling } = useQuery(api.ytelsefordelingOptions(behandling));
 
   const { mutateAsync: oppdaterStønadskontoer } = useMutation({
     mutationFn: api.oppdaterStønadskontoer,
@@ -73,17 +72,16 @@ export const UttakProsessStegInitPanel = ({
       skalPanelVisesIMeny
       hentOverstyrtStatus={getStatusFromUttakresultat(behandling)}
     >
-      {uttaksresultatPerioder && familiehendelse && søknad && uttakStønadskontoer && ytelsefordeling ? (
+      {uttaksresultat && familiehendelse && søknad && uttakStønadskontoer ? (
         <UttakProsessIndex
           kanOverstyre={rettigheter.kanOverstyreAccess.isEnabled}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           personoversikt={personoversikt}
           oppdaterStønadskontoer={oppdaterStønadskontoer}
-          uttaksresultatPerioder={uttaksresultatPerioder}
+          uttaksresultat={uttaksresultat}
           familiehendelse={familiehendelse}
           soknad={søknad}
           uttakStonadskontoer={uttakStønadskontoer}
-          ytelsefordeling={ytelsefordeling}
         />
       ) : (
         <LoadingPanel />

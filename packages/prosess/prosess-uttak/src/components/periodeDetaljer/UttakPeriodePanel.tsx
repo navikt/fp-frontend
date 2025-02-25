@@ -14,9 +14,8 @@ import type {
   Behandling,
   PeriodeSoker,
   PeriodeSokerAktivitet,
-  UttaksresultatPeriode,
+  Uttaksresultat,
   UttakStonadskontoer,
-  Ytelsefordeling,
 } from '@navikt/fp-types';
 
 import { SplittPeriodeModal } from './splitt/SplittPeriodeModal';
@@ -150,8 +149,7 @@ const lagPeriode = (valgtPeriode: PeriodeSoker, fom: string, tom: string): Perio
 interface Props {
   perioderSøker: PeriodeSoker[];
   behandling: Behandling;
-  ytelsefordeling: Ytelsefordeling;
-  uttaksresultatPeriode: UttaksresultatPeriode;
+  uttaksresultat: Uttaksresultat;
   valgtPeriodeIndex: number;
   oppdaterPeriode: (perioder: PeriodeSoker[]) => void;
   isReadOnly: boolean;
@@ -161,13 +159,13 @@ interface Props {
   setValgtPeriodeIndex: React.Dispatch<React.SetStateAction<number | undefined>>;
   erTilknyttetStortinget: boolean;
   harÅpneAksjonspunkter: boolean;
+  endringsdato: string;
 }
 
 export const UttakPeriodePanel = ({
   perioderSøker,
   behandling,
-  ytelsefordeling,
-  uttaksresultatPeriode,
+  uttaksresultat,
   valgtPeriodeIndex,
   oppdaterPeriode,
   isReadOnly,
@@ -177,13 +175,14 @@ export const UttakPeriodePanel = ({
   setValgtPeriodeIndex,
   erTilknyttetStortinget,
   harÅpneAksjonspunkter,
+  endringsdato,
 }: Props) => {
   const intl = useIntl();
 
   const [visModal, setVisModal] = useState(false);
   const toggleVisningAvModal = useCallback(() => setVisModal(verdi => !verdi), []);
 
-  const { perioderAnnenpart } = uttaksresultatPeriode;
+  const { perioderAnnenpart } = uttaksresultat;
 
   const allePerioder = perioderAnnenpart.concat(perioderSøker);
   const valgtPeriode = allePerioder[valgtPeriodeIndex];
@@ -203,13 +202,12 @@ export const UttakPeriodePanel = ({
   const lukkPeriode = useCallback(() => setValgtPeriodeIndex(undefined), []);
 
   const harSoktOmFlerbarnsdager = erHovedsøkersPeriode
-    ? perioderSøker.some(p => p.flerbarnsdager === true)
-    : perioderAnnenpart.some(p => p.flerbarnsdager === true);
+    ? perioderSøker.some(p => p.flerbarnsdager)
+    : perioderAnnenpart.some(p => p.flerbarnsdager);
 
   const erRevurderingFørEndringsdato =
-    !!ytelsefordeling.endringsdato &&
     behandling.type === BehandlingType.REVURDERING &&
-    valgtPeriode.tom < ytelsefordeling.endringsdato;
+    valgtPeriode.tom < endringsdato;
 
   const visForrigePeriode = useCallback(() => {
     setValgtPeriodeIndex(index => (index === 0 || index === undefined ? index : index - 1));
@@ -303,7 +301,7 @@ export const UttakPeriodePanel = ({
           erHovedsøkersPeriode={erHovedsøkersPeriode}
           lukkPeriodeVisning={lukkPeriode}
           alleKodeverk={alleKodeverk}
-          årsakFilter={uttaksresultatPeriode.årsakFilter}
+          årsakFilter={uttaksresultat.årsakFilter}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           harSoktOmFlerbarnsdager={harSoktOmFlerbarnsdager}
           erTilknyttetStortinget={erTilknyttetStortinget}
