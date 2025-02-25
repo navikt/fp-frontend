@@ -46,7 +46,7 @@ export const utledSeksjonerSomKanRedigeres = (html: string) => {
 export const utledPrefiksInnhold = (seksjoner: Element[]) => htmlForRedigerbartFelt(seksjoner).join('');
 
 export const utledSuffiksInnhold = (seksjoner: Element[]) =>
-  htmlForRedigerbartFelt(seksjoner.reverse()).reverse().join('');
+  htmlForRedigerbartFelt(seksjoner.toReversed()).toReversed().join('');
 
 export const utledRedigerbartInnhold = (html: string) => {
   // Bruker application/xhtml+xml som datatype, da backend bruker en xhtml parser som
@@ -71,7 +71,7 @@ const htmlForRedigerbartFelt = (elementer: Element[]) => {
 export const erRedigertHtmlGyldig = (html: string) => {
   const innholdet = document.createElement('div');
   innholdet.innerHTML = html;
-  const tekst = innholdet.textContent || innholdet.innerText || '';
+  const tekst = innholdet.textContent ?? innholdet.innerText ?? '';
   //FIXME Feiltekster
   const malInnholdStrenger = ['Fyll inn overskrift', 'Fyll inn brevtekst'];
   const regex = new RegExp(malInnholdStrenger.join('|'), 'gi');

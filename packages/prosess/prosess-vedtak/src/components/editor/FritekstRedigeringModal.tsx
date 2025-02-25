@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { Alert, Button, Heading, Modal } from '@navikt/ds-react';
+import { Alert, Button, Heading, Modal, VStack } from '@navikt/ds-react';
 
 import type { Vedtaksbrev } from '../../types/Vedtaksbrev';
 import { BrevInnhold, EDITOR_HOLDER_ID } from './BrevInnhold';
@@ -46,12 +46,14 @@ export const FritekstRedigeringModal = ({ htmlMal }: Props) => {
       </Button>
       <Modal open={visRedigering} onClose={() => setVisRedigering(false)} width="53.75rem" aria-label="Rediger brev">
         <Modal.Header>
-          <Heading level="3" size="small">
-            <FormattedMessage id="FritekstRedigeringModal.Rediger" />
-          </Heading>
-          <Alert variant="info" size="small">
-            <FormattedMessage id="FritekstRedigeringModal.Infotekst" />
-          </Alert>
+          <VStack gap="4">
+            <Heading level="3" size="small">
+              <FormattedMessage id="FritekstRedigeringModal.Rediger" />
+            </Heading>
+            <Alert variant="info" size="small">
+              <FormattedMessage id="FritekstRedigeringModal.Infotekst" />
+            </Alert>
+          </VStack>
         </Modal.Header>
         <Modal.Body>
           <BrevInnhold
