@@ -1302,6 +1302,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@codexteam/icons@npm:^0.0.4":
+  version: 0.0.4
+  resolution: "@codexteam/icons@npm:0.0.4"
+  checksum: ead8fc8ad333e450f174fe5c7a74cbde7e34beff4ae6512962d96a115860c5a254ad5577f4e9a5c9134ef01775a6771da8fc547807b6e08dc000bd1c67642304
+  languageName: node
+  linkType: hard
+
+"@codexteam/icons@npm:^0.0.5":
+  version: 0.0.5
+  resolution: "@codexteam/icons@npm:0.0.5"
+  checksum: 7a27857f769bab2ec6fa52662b9fad0b8084c3b1b86ad12addad774d03430a6666b88ba6f49bae945aab7e53dd5d3c9797d92948d5db177042e881caab394e86
+  languageName: node
+  linkType: hard
+
+"@codexteam/icons@npm:^0.3.2":
+  version: 0.3.3
+  resolution: "@codexteam/icons@npm:0.3.3"
+  checksum: aa3c2ea96122e981ab6a6544cfe88f2381da4ab56a09230b9123229d85e7f2134409a694e38efe31657d13265198e2391d23347d4be2b64a2bab85b223ef5d83
+  languageName: node
+  linkType: hard
+
 "@csstools/color-helpers@npm:^5.0.1":
   version: 5.0.1
   resolution: "@csstools/color-helpers@npm:5.0.1"
@@ -1371,6 +1392,41 @@ __metadata:
   version: 4.1.0
   resolution: "@dual-bundle/import-meta-resolve@npm:4.1.0"
   checksum: 8a79576624d66f3ee578cb4cd7f7dac9282dc4c6f757c7c1f4c364fdbabc99584e1407e49e1ef00c0b42dab01d1f8490ec1d08a02c1238bad657a7335303d462
+  languageName: node
+  linkType: hard
+
+"@editorjs/editorjs@npm:2.30.8, @editorjs/editorjs@npm:^2.29.1":
+  version: 2.30.8
+  resolution: "@editorjs/editorjs@npm:2.30.8"
+  checksum: 34c6b12792a1bd1e26bf339cdb0e00ac55e11f69e9d10e7f63572e65617f28f8eed8bfa7c4dddf5fd9e9df269a5d947b8f34f431ac8839bed659f41a833c6c0f
+  languageName: node
+  linkType: hard
+
+"@editorjs/header@npm:2.8.8":
+  version: 2.8.8
+  resolution: "@editorjs/header@npm:2.8.8"
+  dependencies:
+    "@codexteam/icons": ^0.0.5
+    "@editorjs/editorjs": ^2.29.1
+  checksum: 24b90c40f35f7d5c34e6d240f5e30ffa141b160d6635886de9801344633f593b1eee9a40ac831ab0d829d5c0470dd3d2a53e7088cb102828c7fcca74d7289975
+  languageName: node
+  linkType: hard
+
+"@editorjs/list@npm:2.0.4":
+  version: 2.0.4
+  resolution: "@editorjs/list@npm:2.0.4"
+  dependencies:
+    "@codexteam/icons": ^0.3.2
+  checksum: 93d2c9a7e2e4def9101ff30501f8ec20773a175f9fa61fb96b49302e82da188b700426eeb12e98e5f87b14daba5b918477a4b85b6e7acff941cf8fc6214a8cf6
+  languageName: node
+  linkType: hard
+
+"@editorjs/paragraph@npm:2.11.7":
+  version: 2.11.7
+  resolution: "@editorjs/paragraph@npm:2.11.7"
+  dependencies:
+    "@codexteam/icons": ^0.0.4
+  checksum: dc92d01c8089faf56fd2f25fee4e1841b565a62d357e6dbcef4e16f1a22703dcde4bc9fdbb066d5d71d24dab61752a5cf8dffc60a8900e86e1e805836b6f809d
   languageName: node
   linkType: hard
 
@@ -4213,6 +4269,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-vedtak@workspace:packages/prosess/prosess-vedtak"
   dependencies:
+    "@editorjs/editorjs": 2.30.8
+    "@editorjs/header": 2.8.8
+    "@editorjs/list": 2.0.4
+    "@editorjs/paragraph": 2.11.7
     "@navikt/aksel-icons": 7.13.0
     "@navikt/ds-css": 7.13.0
     "@navikt/ds-react": 7.13.0
@@ -4234,8 +4294,13 @@ __metadata:
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
+    "@types/css-tree": 2.3.10
+    "@types/lodash.debounce": 4.0.9
     cross-env: 7.0.3
+    css-tree: 3.1.0
+    editorjs-html: 4.0.5
     eslint: 9.20.1
+    lodash.debounce: 4.0.8
     moment: 2.30.1
     react: 19.0.0
     react-hook-form: 7.54.2
@@ -7652,6 +7717,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/css-tree@npm:2.3.10":
+  version: 2.3.10
+  resolution: "@types/css-tree@npm:2.3.10"
+  checksum: ed676a2735db9597cdd0e1b7bdeaf0227b5f1a1855df99d2a4d22ad241baab693b18048c0097a1efff46b8e6ca20a289272e711a60689424858de42b14abe8e0
+  languageName: node
+  linkType: hard
+
 "@types/doctrine@npm:^0.0.9":
   version: 0.0.9
   resolution: "@types/doctrine@npm:0.0.9"
@@ -9765,7 +9837,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"css-tree@npm:^3.1.0":
+"css-tree@npm:3.1.0, css-tree@npm:^3.1.0":
   version: 3.1.0
   resolution: "css-tree@npm:3.1.0"
   dependencies:
@@ -10286,6 +10358,13 @@ __metadata:
     tslib: 2.3.0
     zrender: 5.6.1
   checksum: 4b545444155f9457daa89a4ea45f9e08177a9a59d9df7e5ea5206f66e290964fb0a1a273b0dfdeb24a4aa264f6afc925918aa2b76190917abf390bef092ba95c
+  languageName: node
+  linkType: hard
+
+"editorjs-html@npm:4.0.5":
+  version: 4.0.5
+  resolution: "editorjs-html@npm:4.0.5"
+  checksum: 3179489a0c5263b63ba2e59d9963e516a6e93200f9520f25b0890eb26b928f75182f9702c5567f61be008f0eabd4e835da462a3c0883bb08316f6767a7532756
   languageName: node
   linkType: hard
 

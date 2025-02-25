@@ -1,0 +1,303 @@
+<!DOCTYPE html PUBLIC "-//OPENHTMLTOPDF//DOC XHTML Character Entities Only 1.0//EN" "">
+
+<html lang="no">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="subject" content="Vedtak- eller informasjonsbrev fra Nav for pleiepenger"/>
+    <meta name="description" content="Vedtak- eller informasjonsbrev fra Nav for pleiepenger"/>
+    <meta name="keywords" content="Vedtaksbrev informasjonsbrev nav pleiepenger" />
+    <meta name="author" content="NAV IT"/>
+    <title>Brev for pleiepenger</title>
+    <style>
+        /* WARNING: Uses CSS 2.1 */
+        @page {
+            size: A4 portrait;
+            @bottom-left {
+                content: element(footer);
+            }
+        }
+
+        * {
+            font-family: "Source Sans Pro", sans-serif !important;
+            color: #3E3832;
+            border-spacing: 0;
+        }
+
+        body {
+            padding: 10mm 10mm 0 10mm;
+            margin: 0;
+            position: relative;
+            font-size: 14px;
+        }
+
+        header {
+            padding-bottom: 5mm;
+        }
+
+        #nav_logo_container {
+            margin-bottom: 10mm;
+        }
+
+        #footer {
+            margin-top: 8mm;
+            width: 100%;
+        }
+
+        .uten-mellomrom p {
+            margin: 0;
+        }
+
+        #nav_logo {
+            width: 15mm;
+            height: 9.1mm;
+            margin: auto;
+            padding: 0 0 10mm 0;
+            position: absolute;
+            right: 10mm;
+        }
+
+        h1 {
+            font-size: 25px;
+            font-weight: 500;
+        }
+
+        h2 {
+            font-size: 20px;
+            margin: 10mm 0 1.5mm 0;
+            font-weight: 500;
+        }
+
+        h3 {
+            font-size: 18px;
+            margin: 10mm 0 1.5mm 0;
+            font-weight: 500;
+        }
+
+        p {
+            margin: 3mm 0 2mm 0;
+        }
+
+        table {
+            width: 100%;
+            page-break-after: auto;
+        }
+
+        #kalender {
+            margin-top: 0.7cm;
+            margin-left: -1.06cm;
+        }
+
+        #kalender td {
+            vertical-align: top;
+            height: 2.6cm;
+            text-align: left;
+            border: 0.06cm solid #FFFFFF;
+        }
+
+        .dag {
+            page-break-inside: avoid;
+            padding: 0.05cm;
+            height: 100%;
+            min-width: 3.175cm;
+        }
+
+        .vurdert {
+            margin-top: 0.07cm;
+            margin-bottom: 0.07cm;
+            background-color: #E6E6E6;
+        }
+
+        .ikkevurdert {
+            text-align: right;
+            border: 0.07cm dotted #E6E6E6;
+            color: grey;
+            text-decoration: line-through;
+        }
+
+        .ikkerelevant {
+            text-align: right;
+            color: #6A6A6A;
+            background-color: #F8F8F8;
+            border: 0.07cm solid #F8F8F8;
+        }
+
+        #aarsaker {
+            margin-top: 0.2cm;
+            vertical-align: bottom;
+            white-space: nowrap;
+        }
+
+        #aarsaker > div {
+            border-radius: 5px;
+            white-space: nowrap;
+            font-size: 11px;
+        }
+
+        #aarsaker img {
+            width: 10px;
+            margin-left: 0.1cm;
+            margin-right: 0.05cm;
+            vertical-align: middle;
+        }
+
+        #aarsaker span {
+            vertical-align: middle;
+            margin: 0;
+        }
+
+        .kalenderforklaring {
+            margin: 0 0.1cm 0 0.4cm;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .bold {
+            font-weight: 700;
+        }
+
+        .new_page {
+            page-break-before: always;
+        }
+
+        .same_page {
+            page-break-inside: avoid;
+        }
+
+        .sidetall {
+            float: right;
+        }
+
+        #pagenumber:before {
+            content: counter(page);
+        }
+
+        #pagecount:before {
+            content: counter(pages);
+        }
+
+        .tilbakemelding {
+            margin-top: 8mm;
+            font-size: 0.8rem;
+            font-style: italic;
+        }
+
+        .diskre {
+            margin-top: 8mm;
+            font-size: 0.8rem;
+            font-style: italic;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div id="nav_logo_container">
+            <img id="nav_logo" src="data:image/png;base64,..." alt="nav logo"/>
+        </div>
+
+        <p style="text-align: right">
+            19. februar 2025
+        </p>
+
+        <div style="margin-top: -20mm; min-height: 20mm;">
+            <div class="uten-mellomrom">
+                <p>Til: Leah Lama</p>
+                <p>Fødselsnummer: 27458118677</p>
+            </div>
+
+            <div class="uten-mellomrom" style="font-style: italic; margin-top: 2mm; font-size: small;">
+                <p>Gjelder: Duck Dole</p>
+                <p>Fødselsnummer: 01502375268</p>
+            </div>
+        </div>
+    </header>
+
+    <section style="height: 20cm" data-hidden="data-hidden">
+        <!--
+        innhold i denne div'en definerer hva som kan redigeres via frontend.
+        NB: Tagg attributter vil ikke bli med tilbake fra frontend.
+        -->
+        <div data-editable="data-editable">
+            <h1>NAV har innvilget søknaden din om pleiepenger</h1>
+            <p>
+                Du har rett til:
+                <ul>
+                    <li>
+                        <p>
+                            100 prosent pleiepenger 
+                            fra 16. desember 2024 til 19. desember 2024.
+                            Du får utbetalt 462 kroner dagen, før skatt.
+                        </p>
+                    </li>
+                </ul>
+            </p>
+            NAV utbetaler pleiepenger innen den 25. i hver måned.
+            Informasjon om utbetaling finner du under utbetalingsoversikten på "Min side".
+            <h2>Hvorfor får du pleiepenger?</h2>
+            <p>
+                NAV kan gi pleiepenger når du har omsorg for et barn som er sykt eller under utredning for sykdom,
+                og som derfor trenger omsorg og pleie.
+            </p>
+            <p>Vi har vurdert opplysningene i saken din, og har kommet frem til at du har rett til pleiepenger.</p>
+            <p>
+                Dersom barnet har et fast og regelmessig omsorgstilbud, du skal jobbe eller det er andre personer som har tilsyn med barnet, skal pleiepengene graderes tilsvarende.
+                Du finner mer informasjon om når pleiepenger skal reduseres på nav.no.
+            </p>
+            <p>
+                Fra 16. desember 2024 til 19. desember 2024 har du rett til 100 prosent pleiepenger.
+                Du får fulle pleiepenger fordi du ikke jobber hos Bedrift AS mens du pleier barnet.
+                <p>Dette følger av folketrygdloven § 9-10 første og andre ledd.</p>
+            </p>
+            <h2>Hvordan har vi beregnet pleiepengene dine?</h2>
+            <p>
+                Når vi beregner arbeidsinntekten din, bruker vi et gjennomsnitt av de tre siste månedslønnene, som vi omregner til en årsinntekt.
+                Hvis du nettopp har begynt å arbeide, byttet arbeidsforhold eller lønnen din har endret seg, bruker vi månedsinntektene etter at endringen skjedde.
+            </p>
+            <p>
+                Arbeidsgiver Bedrift AS har opplyst at månedsinntekten din er 10 000 kroner.
+            </p>
+            <p>
+                Vi har fastsatt pleiepengene dine ut fra en årsinntekt på 120 000 kroner.
+            </p>
+            <p>Beregningen er gjort etter folketrygdloven §§ 9-15 jf. 8-30.</p>
+        </div>
+        <div class="same_page">
+            <h2>Du må si fra om endringer</h2>
+            <p>
+                Hvis det skjer endringer som kan ha betydning for pleiepengene dine, må du straks ta kontakt med oss.
+                Her finner du en oversikt over endringer du må melde fra om, og hvordan du gjør dette
+                <a title="rett og plikt" href="https://www.nav.no/pleiepenger-barn#melde">nav.no/pleiepenger-barn#melde</a>.
+                Har du behov for mer veiledning, kan du ringe 55 55 33 33.
+            </p>
+        </div>
+        <div class="same_page">
+            <h2>Du har rett til å klage</h2>
+            <p>Du kan klage innen 6 uker fra den datoen du mottok vedtaket.</p>
+            <p>Du finner skjema og informasjon på <a title="klage" href="https://nav.no/klage">nav.no/klage</a>.</p>
+        </div>
+        <div class="same_page">
+            <h2>Du har rett til innsyn</h2>
+            <p>Du har rett til å se dokumentene i saken din.</p>
+        </div>
+        <div class="same_page">
+            <h2>Trenger du mer informasjon? </h2>
+            <p>
+                Du finner mer informasjon på <a title="pleiepenger" href="https://nav.no/pleiepenger-barn">nav.no/pleiepenger-barn</a>. 
+                Hvis du ikke finner svar på spørsmålet ditt, kan du kontakte oss på telefon 55 55 33 33 eller på
+                <a href="https://nav.no/skriv-til-oss">nav.no/skriv-til-oss</a>.
+            </p>
+        </div>
+        <div id="footer">
+            <div style="margin-top: 10mm;" class="uten-mellomrom">
+                <p>Med vennlig hilsen</p>
+                <p>Nav Arbeid og ytelser</p>
+            </div>
+        </div>
+    </section>
+    <footer style="position: running(footer)">
+        <span class="vedtakid"></span>
+        <span class="sidetall">side <span id="pagenumber"></span> av <span id="pagecount"></span></span>
+    </footer>
+</body>
+</html>
