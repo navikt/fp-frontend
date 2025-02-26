@@ -43,7 +43,7 @@ import type {
   SimuleringResultat,
   Soknad,
   TilbakekrevingValg,
-  UttaksresultatPeriode,
+  Uttaksresultat,
   UttakStonadskontoer,
   Verge,
   VilkarsVurdertePerioderWrapper,
@@ -179,7 +179,7 @@ export const BehandlingRel = {
   OPPTJENING: 'opptjening',
   BEREGNINGRESULTAT_ENGANGSSTONAD: 'beregningsresultat-engangsstonad',
   MEDLEMSKAP: 'soeker-medlemskap-v3',
-  UTTAKSRESULTAT_PERIODER: 'uttaksresultat-perioder',
+  UTTAKSRESULTAT: 'uttaksresultat-perioder',
   UTTAK_STONADSKONTOER: 'uttak-stonadskontoer',
   YTELSEFORDELING: 'ytelsefordeling',
   STONADSKONTOER_GITT_UTTAKSPERIODER: 'lagre-stonadskontoer-gitt-uttaksperioder',
@@ -403,11 +403,11 @@ const getMedlemskapOptions = (links: ApiLink[]) => (behandling: Behandling) =>
     staleTime: Infinity,
   });
 
-const getUttaksresultatPerioderOptions = (links: ApiLink[]) => (behandling: Behandling) =>
+const getUttaksresultatOptions = (links: ApiLink[]) => (behandling: Behandling) =>
   queryOptions({
-    queryKey: [BehandlingRel.UTTAKSRESULTAT_PERIODER, behandling.uuid, behandling.versjon],
-    queryFn: () => kyExtended.get(getUrlFromRel('UTTAKSRESULTAT_PERIODER', links)).json<UttaksresultatPeriode>(),
-    enabled: harLenke(behandling, 'UTTAKSRESULTAT_PERIODER'),
+    queryKey: [BehandlingRel.UTTAKSRESULTAT, behandling.uuid, behandling.versjon],
+    queryFn: () => kyExtended.get(getUrlFromRel('UTTAKSRESULTAT', links)).json<Uttaksresultat>(),
+    enabled: harLenke(behandling, 'UTTAKSRESULTAT'),
     staleTime: Infinity,
   });
 
@@ -690,7 +690,7 @@ export const useBehandlingApi = (behandling: Behandling) => {
     tilbakekrevingValgOptions: getTilbakekrevingValgOptions(links),
     medlemskapOptions: getMedlemskapOptions(links),
     feriepengegrunnlagOptions: getFeriepengegrunnlagOptions(links),
-    uttaksresultatPerioderOptions: getUttaksresultatPerioderOptions(links),
+    uttaksresultatPerioderOptions: getUttaksresultatOptions(links),
     uttakStønadskontoerOptions: getUttakStønadskontoerOptions(links),
     ytelsefordelingOptions: getYtelsefordelingOptions(links),
     oppdaterStønadskontoer: getOppdaterStønadskontoer(links),
