@@ -111,7 +111,7 @@ export const OppgaveRad = ({ oppgave, reserverOppgave }: Props) => {
     >
       <Table.DataCell>{oppgave.navn ? `${oppgave.navn} ${oppgave.personnummer}` : '<navn>'}</Table.DataCell>
       <Table.DataCell>
-        <HStack gap="1" align="center" ref={refCopyButton}>
+        <HStack align="center" ref={refCopyButton} wrap={false}>
           <BodyShort>{oppgave.saksnummer}</BodyShort>
           <Tooltip content={intl.formatMessage({ id: 'OppgaverTabell.Saksnr' })}>
             <CopyButton

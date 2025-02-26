@@ -2,7 +2,7 @@ import { type IntlShape } from 'react-intl';
 
 import { sorterPerioder } from '@navikt/fp-fakta-felles';
 import { AdresseType, getKodeverknavnFn, KodeverkType, Landkode } from '@navikt/fp-kodeverk';
-import type { AlleKodeverk, Medlemskap, UtlandsoppholdPeriode } from '@navikt/fp-types';
+import type { AdressePeriode, AlleKodeverk, Medlemskap, Personadresse, UtlandsoppholdPeriode } from '@navikt/fp-types';
 
 import { toTitleCapitalization } from '../../utils/stringUtils';
 
@@ -20,10 +20,13 @@ export const getSistePersonstatus = (medlemskap: Medlemskap, alleKodeverk: AlleK
   return intl.formatMessage({ id: 'Situasjon.Ukjent' });
 };
 
+const isPersonadresse = (adresse: Personadresse | AdressePeriode): adresse is Personadresse => 'adresseType' in adresse;
+
 export const getSisteBostedsLand = (medlemskap: Medlemskap, intl: IntlShape): string => {
   const nyeste = medlemskap.adresser
-    .filter(adresse => adresse.adresse.adresseType === AdresseType.BOSTEDSADRESSE)
-    .sort(sorterPerioder)[0]?.adresse.land;
+    .map(ad => (isPersonadresse(ad) ? ad : ad.adresse))
+    .filter(adresse => adresse.adresseType === AdresseType.BOSTEDSADRESSE)
+    .sort(sorterPerioder)[0]?.land;
   if (!nyeste) return intl.formatMessage({ id: 'Situasjon.Ukjent' });
   if ([Landkode.NORGE, 'Norge'].includes(nyeste)) {
     return intl.formatMessage({ id: 'Situasjon.INorge' });
