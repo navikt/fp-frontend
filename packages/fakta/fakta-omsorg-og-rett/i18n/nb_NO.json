@@ -28,7 +28,7 @@
   "InformasjonOmAnnenPart.HarAnnenPartUføretrygd.svar": "{uføretrygd, select, true {Ja} other {Nei}}",
   "InformasjonOmAnnenPart.Foreldrepenger": "Har annen part foreldrepenger? (fpsak)",
   "InformasjonOmAnnenPart.Foreldrepenger.svar": "{foreldrepenger, select, true {Ja} other {Nei}}",
-  "InformasjonOmAnnenPart.Engangstønad": "Har annen part engangstønad? (fpsak)",
-  "InformasjonOmAnnenPart.Engangstønad.svar": "{engangstønad, select, true {Ja} other {Nei}}"
+  "InformasjonOmAnnenPart.Engangsstønad": "Har annen part engangsstønad? (fpsak)",
+  "InformasjonOmAnnenPart.Engangsstønad.svar": "{engangsstønad, select, true {Ja} other {Nei}}"
 
 }

@@ -48,12 +48,12 @@ export const InformasjonOmAnnenPart = ({ omsorgOgRett }: Props) => {
       {harAnnenpartEngangsstønad != null && (
         <div>
           <Label size="small">
-            <FormattedMessage id="InformasjonOmAnnenPart.Engangstønad" />
+            <FormattedMessage id="InformasjonOmAnnenPart.Engangsstønad" />
           </Label>
           <BodyShort size="small">
             <FormattedMessage
-              id="InformasjonOmAnnenPart.Engangstønad.svar"
-              values={{ engangstønad: harAnnenpartEngangsstønad }}
+              id="InformasjonOmAnnenPart.Engangsstønad.svar"
+              values={{ engangsstønad: harAnnenpartEngangsstønad }}
             />
           </BodyShort>
         </div>
