@@ -2,12 +2,11 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
-import { BehandlingType } from '@navikt/fp-kodeverk';
 import { MenyVergeIndexV1, MenyVergeIndexV2 } from '@navikt/fp-sak-meny';
 import { type Behandling, type BehandlingAppKontekst, type Fagsak, VergeBehandlingmenyValg } from '@navikt/fp-types';
 
 import { getLocationWithDefaultProsessStegAndFakta, pathToBehandling } from '../../app/paths';
-import { BehandlingRel, useBehandlingApi } from '../../data/behandlingApi.ts';
+import { BehandlingRel, harLenke, useBehandlingApi } from '../../data/behandlingApi.ts';
 import { FagsakRel } from '../../data/fagsakApi.ts';
 import { useBehandlingPollingOperasjoner } from '../../data/polling/useBehandlingPollingOperasjoner';
 import { useKodeverk } from '../../data/useKodeverk.tsx';
@@ -22,16 +21,14 @@ interface Props {
 }
 
 export const VergeMenyModal = (props: Props) => {
-  const behandlingTypeKode = props.behandling.type;
-  if (
-    behandlingTypeKode === BehandlingType.TILBAKEKREVING ||
-    behandlingTypeKode === BehandlingType.TILBAKEKREVING_REVURDERING
-  )
-    return <VergeModalTilbakekreving {...props} />;
-  return <VergeModal {...props} />;
+  return harLenke(props.behandling, 'VERGE_FJERN_V2') || harLenke(props.behandling, 'VERGE_OPPRETT_V2') ? (
+    <VergeModal {...props} />
+  ) : (
+    <VergeModalDeprecated {...props} />
+  );
 };
 
-const VergeModalTilbakekreving = ({ fagsak, behandlingAppKontekst, behandling, setBehandling, lukkModal }: Props) => {
+const VergeModalDeprecated = ({ fagsak, behandlingAppKontekst, behandling, setBehandling, lukkModal }: Props) => {
   const vergeMenyvalg = behandlingAppKontekst.behandlingTillatteOperasjoner?.vergeBehandlingsmeny;
 
   const navigate = useNavigate();
