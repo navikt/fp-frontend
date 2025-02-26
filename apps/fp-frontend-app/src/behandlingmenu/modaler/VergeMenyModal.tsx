@@ -21,9 +21,11 @@ interface Props {
 }
 
 export const VergeMenyModal = (props: Props) => {
-  if (harLenke(props.behandling, 'VERGE_FJERN_V2') || harLenke(props.behandling, 'VERGE_OPPRETT_V2'))
-    return <VergeModal {...props} />;
-  return <VergeModalDeprecated {...props} />;
+  return harLenke(props.behandling, 'VERGE_FJERN_V2') || harLenke(props.behandling, 'VERGE_OPPRETT_V2') ? (
+    <VergeModal {...props} />
+  ) : (
+    <VergeModalDeprecated {...props} />
+  );
 };
 
 const VergeModalDeprecated = ({ fagsak, behandlingAppKontekst, behandling, setBehandling, lukkModal }: Props) => {
