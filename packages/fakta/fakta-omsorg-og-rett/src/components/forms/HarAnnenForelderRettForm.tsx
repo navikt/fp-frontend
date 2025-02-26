@@ -29,7 +29,7 @@ interface Props {
 export const HarAnnenForelderRettForm = ({ omsorgOgRett, aksjonspunkt, submittable }: Props) => {
   const { submitCallback, isReadOnly, alleMerknaderFraBeslutter } = usePanelDataContext<AvklarAnnenforelderHarRettAp>();
 
-  const { harRettNorge, harRettEØS, harUføretrygd } = omsorgOgRett.manuellBehandlingResultat.annenpartRettighet ?? {};
+  const { harRettNorge, harRettEØS, harUføretrygd } = omsorgOgRett.manuellBehandlingResultat?.annenpartRettighet ?? {};
 
   const { formData, setFormData } = useFormData<FormValues>();
 
