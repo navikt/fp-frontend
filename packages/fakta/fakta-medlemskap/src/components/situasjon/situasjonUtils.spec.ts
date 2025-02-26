@@ -57,21 +57,9 @@ describe('situasjonUtils', () => {
       const medlemskap: Medlemskap = {
         ...defaultMedlemskapProps,
         adresser: [
-          {
-            fom: '2022-06-02',
-            tom: '2025-02-01',
-            adresse: { fom: '2022-06-02', tom: '2025-02-01', adresseType: AdresseType.BOSTEDSADRESSE, land: 'Norge' },
-          },
-          {
-            fom: '2022-07-01',
-            tom: '2025-02-01',
-            adresse: { fom: '2022-07-01', tom: '2025-02-01', adresseType: AdresseType.BOSTEDSADRESSE, land: 'Finland' },
-          },
-          {
-            fom: '2022-07-01',
-            tom: '2025-02-01',
-            adresse: { fom: '2022-07-01', tom: '2025-02-01', adresseType: AdresseType.POSTADRESSE, land: 'USA' },
-          },
+          { fom: '2022-06-02', tom: '2025-02-01', adresseType: AdresseType.BOSTEDSADRESSE, land: 'Norge' },
+          { fom: '2022-07-01', tom: '2025-02-01', adresseType: AdresseType.BOSTEDSADRESSE, land: 'Finland' },
+          { fom: '2022-07-01', tom: '2025-02-01', adresseType: AdresseType.POSTADRESSE, land: 'USA' },
         ],
       };
       expect(getSisteBostedsLand(medlemskap, intl)).toBe('I utlandet');

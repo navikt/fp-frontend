@@ -100,7 +100,6 @@ export type {
   ManuellBehandlingResultat,
   LegacyManuellMedlemskapsBehandling,
   LegacyMedlemPeriode,
-  AdressePeriode,
   RegionPeriode,
   PersonstatusPeriode,
   MedlemskapPeriode,
