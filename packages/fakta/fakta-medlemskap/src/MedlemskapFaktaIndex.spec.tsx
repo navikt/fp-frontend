@@ -7,7 +7,7 @@ import * as stories from './MedlemskapFaktaIndex.stories';
 
 const { Default } = composeStories(stories);
 
-describe('<MedlemskapFaktaIndex>', () => {
+describe('MedlemskapFaktaIndex', () => {
   it('skal vise medlemspanel med aksjonspunkt', async () => {
     render(<Default submitCallback={vi.fn()} />);
     expect(

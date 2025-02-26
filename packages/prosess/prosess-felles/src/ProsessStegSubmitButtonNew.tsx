@@ -52,7 +52,7 @@ export const ProsessStegSubmitButton = ({
         onClick={onClick || ariaCheck}
         type={onClick ? 'button' : 'submit'}
       >
-        {text || intl.formatMessage({ id: 'SubmitButton.ConfirmInformation' })}
+        {text ?? intl.formatMessage({ id: 'SubmitButton.ConfirmInformation' })}
       </Button>
     );
   }

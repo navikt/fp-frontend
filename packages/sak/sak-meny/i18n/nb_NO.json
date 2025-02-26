@@ -5,6 +5,9 @@
   "MenyVergeIndex.FjernVerge": "Fjern verge/fullmektig",
   "MenyVergeIndex.OpprettVergeSporsmal": "Opprett verge/fullmektig?",
   "MenyVergeIndex.FjernVergeSporsmal": "Fjern verge/fullmektig?",
+  "MenyVergeIndex.Opprett": "Opprett",
+  "MenyVergeIndex.Fjern": "Fjern",
+  "MenyVergeIndex.Avbryt": "Avbryt",
 
   "MenyTaAvVentIndex.ResumeBehandling": "Fortsett behandlingen",
   "MenyTaAvVentIndex.TaAvVent": "Ta behandlingen av vent?",

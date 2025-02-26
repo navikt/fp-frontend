@@ -63,12 +63,12 @@ export const ArbeidsOgInntektOverstyrPanel = ({
   const intl = useIntl();
   const { arbeidsforhold, inntektsmeldinger } = arbeidOgInntekt;
 
-  const [erOverstyrt, setLokalErOverstyrt] = useState(false);
-  const [skalVisePanelForÅLeggeTilArbeidsforhold, toggleVisningAvLeggTilArbeidsforhold] = useState(false);
+  const [erLokaltOverstyrt, setErLokaltOverstyrt] = useState(false);
+  const [skalToggleVisningAvLeggTilArbeidsforhold, toggleVisningAvLeggTilArbeidsforhold] = useState(false);
 
   const toggleOverstyring = useCallback(() => {
     setErOverstyrt(true);
-    setLokalErOverstyrt(true);
+    setErLokaltOverstyrt(true);
 
     const indexForManueltLagtTil = tabellData.findIndex(
       t =>
@@ -117,7 +117,7 @@ export const ArbeidsOgInntektOverstyrPanel = ({
         </div>
       )}
       <VerticalSpacer sixteenPx />
-      {erOverstyrt && harIngenArbeidsforholdSomErManueltLagtTil && !skalVisePanelForÅLeggeTilArbeidsforhold && (
+      {erLokaltOverstyrt && harIngenArbeidsforholdSomErManueltLagtTil && !skalToggleVisningAvLeggTilArbeidsforhold && (
         <>
           <VerticalSpacer twentyPx />
           <Button
@@ -132,7 +132,7 @@ export const ArbeidsOgInntektOverstyrPanel = ({
         </>
       )}
       <VerticalSpacer thirtyTwoPx />
-      {skalVisePanelForÅLeggeTilArbeidsforhold && (
+      {skalToggleVisningAvLeggTilArbeidsforhold && (
         <>
           <ManueltLagtTilArbeidsforholdForm
             behandlingUuid={behandling.uuid}

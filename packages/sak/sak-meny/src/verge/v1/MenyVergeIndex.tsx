@@ -3,14 +3,9 @@ import { RawIntlProvider } from 'react-intl';
 import { OkAvbrytModal } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 
-import messages from '../../i18n/nb_NO.json';
+import messages from '../../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
-
-export const getMenytekst = (erOpprettVerge: boolean): string =>
-  intl.formatMessage({
-    id: erOpprettVerge ? 'MenyVergeIndex.OpprettVerge' : 'MenyVergeIndex.FjernVerge',
-  });
 
 interface Props {
   fjernVerge?: () => void;

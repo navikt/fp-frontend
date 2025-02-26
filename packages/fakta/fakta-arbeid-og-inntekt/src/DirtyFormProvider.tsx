@@ -10,8 +10,8 @@ export const DirtyFormContext = createContext<{
  * mange steder i applikasjonen.
  */
 export const DirtyFormProvider = ({ children }: PropsWithChildren) => {
-  const [isDirty, setDirty] = useState(false);
-  const value = useMemo(() => ({ isDirty, setDirty }), [isDirty, setDirty]);
+  const [isDirty, setIsDirty] = useState(false);
+  const value = useMemo(() => ({ isDirty, setDirty: setIsDirty }), [isDirty, setIsDirty]);
 
   return <DirtyFormContext.Provider value={value}>{children}</DirtyFormContext.Provider>;
 };

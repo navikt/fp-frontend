@@ -12,7 +12,6 @@ import dayjs from 'dayjs';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type {
-  AlleKodeverk,
   ArbeidsgiverOpplysningerPerId,
   FerdiglignetNæring,
   KodeverkMedNavn,
@@ -63,7 +62,6 @@ export type FormValues = {
 };
 
 interface Props {
-  alleKodeverk: AlleKodeverk;
   valgtOpptjeningAktivitet: OpptjeningAktivitet;
   valgteFormValues: FormValues;
   readOnly: boolean;
