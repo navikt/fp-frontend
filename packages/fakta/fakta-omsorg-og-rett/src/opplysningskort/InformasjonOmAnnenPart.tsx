@@ -2,7 +2,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Label } from '@navikt/ds-react';
 
-import { FaktaKilde } from '@navikt/fp-fakta-felles';
 import { type OmsorgOgRett } from '@navikt/fp-types';
 
 import { EkspansjonsKort } from '../components/ekspansjonsKort/EkspansjonsKort.tsx';
@@ -17,7 +16,7 @@ export const InformasjonOmAnnenPart = ({ omsorgOgRett }: Props) => {
   const { harAnnenpartUføretrygd, harAnnenpartForeldrepenger, harAnnenpartEngangsstønad } = omsorgOgRett.registerdata;
 
   return (
-    <EkspansjonsKort tittel={intl.formatMessage({ id: 'OpplysningsKort.AnnenPartTittel' })} kilde={FaktaKilde.FREG}>
+    <EkspansjonsKort tittel={intl.formatMessage({ id: 'OpplysningsKort.AnnenPartTittel' })}>
       {harAnnenpartUføretrygd != null && (
         <div>
           <Label size="small">

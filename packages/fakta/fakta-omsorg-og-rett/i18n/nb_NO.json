@@ -24,11 +24,11 @@
   "OpplysningerFraSøknad.HarUføretrygd": "Har den andre forelderen uføretrygd?",
   "OpplysningerFraSøknad.HarUføretrygd.svar": "{uføretrygd, select, true {Ja} other {Nei}}",
 
-  "InformasjonOmAnnenPart.HarAnnenPartUføretrygd": "Har annen part uføretrygd?",
+  "InformasjonOmAnnenPart.HarAnnenPartUføretrygd": "Har annen part uføretrygd? (pesys)",
   "InformasjonOmAnnenPart.HarAnnenPartUføretrygd.svar": "{uføretrygd, select, true {Ja} other {Nei}}",
-  "InformasjonOmAnnenPart.Foreldrepenger": "Har annen part foreldrepenger?",
+  "InformasjonOmAnnenPart.Foreldrepenger": "Har annen part foreldrepenger? (fpsak)",
   "InformasjonOmAnnenPart.Foreldrepenger.svar": "{foreldrepenger, select, true {Ja} other {Nei}}",
-  "InformasjonOmAnnenPart.Engangstønad": "Har annen part engangstønad?",
+  "InformasjonOmAnnenPart.Engangstønad": "Har annen part engangstønad? (fpsak)",
   "InformasjonOmAnnenPart.Engangstønad.svar": "{engangstønad, select, true {Ja} other {Nei}}"
 
 }
