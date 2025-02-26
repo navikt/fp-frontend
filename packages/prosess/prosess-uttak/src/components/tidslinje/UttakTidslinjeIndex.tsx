@@ -13,7 +13,6 @@ import type {
   PeriodeSoker,
   Personoversikt,
   Soknad,
-  Ytelsefordeling,
 } from '@navikt/fp-types';
 
 import { type PeriodeSøkerMedTidslinjedata, type TidslinjeTimes,UttakTidslinje } from './UttakTidslinje';
@@ -57,12 +56,11 @@ const finnTidslinjeTider = (
   behandling: Behandling,
   søknad: Soknad,
   familiehendelse: FamilieHendelseSamling,
-  ytelsefordeling: Ytelsefordeling,
   personoversikt: Personoversikt,
+  endringsdato: string,
 ): TidslinjeTimes => {
   const gjeldendeFamiliehendelse = familiehendelse?.gjeldende;
   const familiehendelseDate = getFodselTerminDato(søknad, gjeldendeFamiliehendelse);
-  const endringsdato = ytelsefordeling.endringsdato ? ytelsefordeling.endringsdato : undefined;
   const endredFodselsDato =
     gjeldendeFamiliehendelse?.avklartBarn && gjeldendeFamiliehendelse.avklartBarn.length > 0
       ? gjeldendeFamiliehendelse.avklartBarn[0].fodselsdato
@@ -135,7 +133,7 @@ interface Props {
   perioderAnnenpart: PeriodeSoker[];
   valgtPeriodeIndex: number | undefined;
   familiehendelse: FamilieHendelseSamling;
-  ytelsefordeling: Ytelsefordeling;
+  endringsdato: string;
   tilknyttetStortinget: boolean;
   setValgtPeriodeIndex: React.Dispatch<React.SetStateAction<number | undefined>>;
   fagsak: Fagsak;
@@ -150,7 +148,7 @@ export const UttakTidslinjeIndex = ({
   perioderAnnenpart,
   valgtPeriodeIndex,
   familiehendelse,
-  ytelsefordeling,
+  endringsdato,
   tilknyttetStortinget,
   setValgtPeriodeIndex,
   fagsak,
@@ -173,8 +171,8 @@ export const UttakTidslinjeIndex = ({
   );
 
   const tidslinjeTider = useMemo(
-    () => finnTidslinjeTider(behandling, søknad, familiehendelse, ytelsefordeling, personoversikt),
-    [behandling, søknad, familiehendelse, ytelsefordeling, personoversikt],
+    () => finnTidslinjeTider(behandling, søknad, familiehendelse, personoversikt, endringsdato),
+    [behandling, søknad, familiehendelse, personoversikt, endringsdato],
   );
 
   return (
