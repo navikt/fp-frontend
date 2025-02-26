@@ -14,7 +14,7 @@ interface Props {
 export const OpplysningerFraSoknad = ({ omsorgOgRett }: Props) => {
   const intl = useIntl();
 
-  const { harRettNorge, harOppholdEØS, harRettEØS, harUføretrygd } = omsorgOgRett.søknad.annenpartRettighet;
+  const { harRettNorge, harOppholdEØS, harRettEØS, harUføretrygd } = omsorgOgRett.søknad.annenpartRettighet ?? {};
   const harSøkerAleneOmsorg = omsorgOgRett.søknad.søkerHarAleneomsorg;
 
   return (
@@ -35,14 +35,16 @@ export const OpplysningerFraSoknad = ({ omsorgOgRett }: Props) => {
         </BodyShort>
       </div>
 
-      <div>
-        <Label size="small">
-          <FormattedMessage id="HarAnnenForelderRettFelter.HarAnnenForelderRett" />
-        </Label>
-        <BodyShort size="small">
-          <FormattedMessage id="OpplysningerFraSøknad.HarAnnenForelderRett.svar" values={{ iNorge: harRettNorge }} />
-        </BodyShort>
-      </div>
+      {harRettNorge != null && (
+        <div>
+          <Label size="small">
+            <FormattedMessage id="HarAnnenForelderRettFelter.HarAnnenForelderRett" />
+          </Label>
+          <BodyShort size="small">
+            <FormattedMessage id="OpplysningerFraSøknad.HarAnnenForelderRett.svar" values={{ iNorge: harRettNorge }} />
+          </BodyShort>
+        </div>
+      )}
 
       {harOppholdEØS != null && (
         <div>
