@@ -7,7 +7,7 @@ import { Form } from '@navikt/ft-form-hooks';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton, TrueFalseInput } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, RelasjonsRolleType } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, OmsorgOgRett } from '@navikt/fp-types';
 import type { BekreftAleneomsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
@@ -32,13 +32,13 @@ export const AleneomsorgForm = ({ omsorgOgRett, aksjonspunkt, submittable }: Pro
   const { submitCallback, isReadOnly, alleMerknaderFraBeslutter } =
     usePanelDataContext<BekreftAleneomsorgVurderingAp>();
   const { manuellBehandlingResultat } = omsorgOgRett ?? {};
-  const { harRettNorge, harRettEØS, harUføretrygd } = manuellBehandlingResultat.annenpartRettighet ?? {};
+  const { harRettNorge, harRettEØS, harUføretrygd } = manuellBehandlingResultat?.annenpartRettighet ?? {};
 
   const { formData, setFormData } = useFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
     defaultValues: formData || {
-      harAleneomsorg: manuellBehandlingResultat.søkerHarAleneomsorg,
+      harAleneomsorg: manuellBehandlingResultat?.søkerHarAleneomsorg,
       harAnnenForelderRett: harRettNorge,
       mottarAnnenForelderUforetrygd: harUføretrygd,
       harAnnenForelderRettEØS: harRettEØS,
@@ -61,6 +61,8 @@ export const AleneomsorgForm = ({ omsorgOgRett, aksjonspunkt, submittable }: Pro
 
   const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
 
+  const skalAvklareUforetrygd = !!(omsorgOgRett.relasjonsRolleType !== RelasjonsRolleType.MOR || harUføretrygd);
+
   return (
     <Form formMethods={formMethods} onSubmit={transformerFeltverdier} setDataOnUnmount={setFormData}>
       <FaktaGruppe
@@ -77,7 +79,7 @@ export const AleneomsorgForm = ({ omsorgOgRett, aksjonspunkt, submittable }: Pro
             trueLabel={<FormattedMessage id="AleneomsorgForm.HarAleneomsorg" />}
             falseLabel={<FormattedMessage id="AleneomsorgForm.HarIkkeAleneomsorg" values={{ b: bTag }} />}
             falseContent={
-              <HarAnnenForelderRettFelter readOnly={isReadOnly} avklareUforetrygd={true} avklareRettEØS={true} />
+              <HarAnnenForelderRettFelter readOnly={isReadOnly} avklareUforetrygd={skalAvklareUforetrygd} />
             }
           />
 

@@ -12,10 +12,9 @@ type FormValues = {
 interface Props {
   readOnly: boolean;
   avklareUforetrygd: boolean;
-  avklareRettEØS: boolean;
 }
 
-export const HarAnnenForelderRettFelter = ({ readOnly, avklareUforetrygd, avklareRettEØS }: Props) => {
+export const HarAnnenForelderRettFelter = ({ readOnly, avklareUforetrygd }: Props) => {
   const { watch } = useFormContext<FormValues>();
   const harAnnenForelderRettEØS = watch('harAnnenForelderRettEØS');
 
@@ -26,15 +25,13 @@ export const HarAnnenForelderRettFelter = ({ readOnly, avklareUforetrygd, avklar
       readOnly={readOnly}
       falseContent={
         <>
-          {avklareRettEØS && (
-            <TrueFalseInput
-              name="harAnnenForelderRettEØS"
-              label={<FormattedMessage id="HarAnnenForelderRettFelter.AnnenForelderRettEØS" />}
-              readOnly={readOnly}
-            />
-          )}
+          <TrueFalseInput
+            name="harAnnenForelderRettEØS"
+            label={<FormattedMessage id="HarAnnenForelderRettFelter.AnnenForelderRettEØS" />}
+            readOnly={readOnly}
+          />
 
-          {(!avklareRettEØS || harAnnenForelderRettEØS === false) && avklareUforetrygd && (
+          {(harAnnenForelderRettEØS === false) && avklareUforetrygd && (
             <TrueFalseInput
               name="mottarAnnenForelderUforetrygd"
               label={<FormattedMessage id="HarAnnenForelderRettFelter.MottarUforetrygd" />}

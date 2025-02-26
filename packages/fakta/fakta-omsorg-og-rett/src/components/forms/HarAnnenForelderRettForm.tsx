@@ -6,7 +6,7 @@ import { Form } from '@navikt/ft-form-hooks';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, RelasjonsRolleType } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, OmsorgOgRett } from '@navikt/fp-types';
 import type { AvklarAnnenforelderHarRettAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
@@ -42,8 +42,7 @@ export const HarAnnenForelderRettForm = ({ omsorgOgRett, aksjonspunkt, submittab
     },
   });
 
-  const skalAvklareUforetrygd = omsorgOgRett.søknad.annenpartRettighet.harUføretrygd != null;
-  const skalAvklareRettEØS = omsorgOgRett.søknad.annenpartRettighet.harRettEØS != null;
+  const skalAvklareUforetrygd = !!(omsorgOgRett.relasjonsRolleType !== RelasjonsRolleType.MOR || harUføretrygd);
 
   const transformerFeltverdier = useCallback(
     (feltVerdier: FormValues) =>
@@ -67,7 +66,6 @@ export const HarAnnenForelderRettForm = ({ omsorgOgRett, aksjonspunkt, submittab
           <HarAnnenForelderRettFelter
             readOnly={isReadOnly}
             avklareUforetrygd={skalAvklareUforetrygd}
-            avklareRettEØS={skalAvklareRettEØS}
           />
 
           <FaktaBegrunnelseTextField
