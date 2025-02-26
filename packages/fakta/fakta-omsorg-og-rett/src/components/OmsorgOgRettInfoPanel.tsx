@@ -25,7 +25,9 @@ export const OmsorgOgRettInfoPanel = ({ personoversikt, omsorgOgRett, submittabl
   return (
     <VStack gap="8">
       <OpplysningerFraSoknad omsorgOgRett={omsorgOgRett} />
-      <InformasjonOmAnnenPart omsorgOgRett={omsorgOgRett} />
+      {omsorgOgRett.registerdata && (
+        <InformasjonOmAnnenPart omsorgOgRett={omsorgOgRett} />
+      )}
       <OpplysningerOmAdresser alleKodeverk={alleKodeverk} personoversikt={personoversikt} />
 
       {!isReadOnly && harÅpneAksjonspunkter && (
