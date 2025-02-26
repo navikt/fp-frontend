@@ -36,10 +36,9 @@ export type AarsakFilter = Readonly<{
   søkerErMor: boolean;
 }>;
 
-export type UttaksresultatPeriode = Readonly<{
+export type Uttaksresultat = Readonly<{
   perioderSøker: PeriodeSoker[];
   perioderAnnenpart: PeriodeSoker[];
-  annenForelderHarRett: boolean;
-  aleneomsorg: boolean;
   årsakFilter: AarsakFilter;
+  endringsdato: string
 }>;

@@ -70,7 +70,7 @@ export type {
 } from './src/simuleringResultatTsType';
 export type { Soknad, ManglendeVedleggSoknad, UtlandsoppholdPeriode, Søknadsfrist } from './src/soknadTsType';
 export type {
-  UttaksresultatPeriode,
+  Uttaksresultat,
   PeriodeSoker,
   PeriodeSokerAktivitet,
   AarsakFilter,

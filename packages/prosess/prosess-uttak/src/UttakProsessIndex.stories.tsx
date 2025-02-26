@@ -130,19 +130,6 @@ const soknad = {
   },
 } as Soknad;
 
-const ytelsefordeling = {
-  annenforelderHarRettDto: {
-    avklarAnnenforelderMottarUføretrygd: false,
-  },
-  rettigheterAnnenforelder: {
-    skalAvklareAnnenforelderUføretrygd: false,
-    skalAvklareAnnenForelderRettEØS: false,
-  },
-  endringsdato: '2019-10-14',
-  gjeldendeDekningsgrad: 100,
-  førsteUttaksdato: '2019-10-14',
-};
-
 const arbeidsgiverOpplysningerPerId = {
   342352362: {
     referanse: '342352362',
@@ -180,7 +167,6 @@ const meta = {
         kjønn: NavBrukerKjonn.KVINNE,
       },
     } as Personoversikt,
-    ytelsefordeling,
     kanOverstyre: false,
     familiehendelse,
     oppdaterStønadskontoer: v => {
@@ -198,7 +184,7 @@ type Story = StoryObj<typeof meta>;
 export const AksjonspunktDerValgtStønadskontoIkkeFinnes: Story = {
   args: {
     aksjonspunkterForPanel: åpentAksjonspunkt,
-    uttaksresultatPerioder: {
+    uttaksresultat: {
       perioderSøker: [
         {
           fom: '2022-10-20',
@@ -275,9 +261,8 @@ export const AksjonspunktDerValgtStønadskontoIkkeFinnes: Story = {
         },
       ],
       perioderAnnenpart: [],
-      annenForelderHarRett: true,
-      aleneomsorg: false,
       årsakFilter: { kreverSammenhengendeUttakTom: '2021-09-30', utenMinsterett: false, søkerErMor: true },
+      endringsdato: '2022-10-20',
     },
   },
 };
@@ -285,7 +270,7 @@ export const AksjonspunktDerValgtStønadskontoIkkeFinnes: Story = {
 export const PeriodeMedGraderingUtenAksjonspunkt: Story = {
   args: {
     kanOverstyre: true,
-    uttaksresultatPerioder: {
+    uttaksresultat: {
       perioderSøker: [
         {
           fom: '2019-10-11',
@@ -454,9 +439,8 @@ export const PeriodeMedGraderingUtenAksjonspunkt: Story = {
         },
       ],
       perioderAnnenpart: [],
-      annenForelderHarRett: true,
-      aleneomsorg: false,
       årsakFilter: { kreverSammenhengendeUttakTom: '2021-09-30', utenMinsterett: true, søkerErMor: true },
+      endringsdato: '2019-10-11',
     },
   },
 };
@@ -464,7 +448,7 @@ export const PeriodeMedGraderingUtenAksjonspunkt: Story = {
 export const AksjonspunktIRevurdering: Story = {
   args: {
     aksjonspunkterForPanel: åpentAksjonspunkt,
-    uttaksresultatPerioder: {
+    uttaksresultat: {
       perioderSøker: [
         {
           fom: '2019-10-11',
@@ -603,16 +587,15 @@ export const AksjonspunktIRevurdering: Story = {
         },
       ],
       perioderAnnenpart: [],
-      annenForelderHarRett: true,
-      aleneomsorg: false,
       årsakFilter: { kreverSammenhengendeUttakTom: '2021-09-30', utenMinsterett: true, søkerErMor: true },
+      endringsdato: '2019-10-11',
     },
   },
 };
 
 export const ProsessUttakToParter: Story = {
   args: {
-    uttaksresultatPerioder: {
+    uttaksresultat: {
       perioderSøker: [
         {
           fom: '2022-10-20',
@@ -834,9 +817,8 @@ export const ProsessUttakToParter: Story = {
           gradertAktivitet: undefined,
         },
       ],
-      annenForelderHarRett: true,
-      aleneomsorg: false,
       årsakFilter: { kreverSammenhengendeUttakTom: '2021-09-30', utenMinsterett: false, søkerErMor: true },
+      endringsdato: '2022-10-20',
     },
   },
 };
@@ -849,7 +831,7 @@ export const AksjonspunktForFar: Story = {
         kjønn: NavBrukerKjonn.MANN,
       },
     } as Personoversikt,
-    uttaksresultatPerioder: {
+    uttaksresultat: {
       perioderSøker: [
         {
           fom: '2022-11-10',
@@ -1019,9 +1001,8 @@ export const AksjonspunktForFar: Story = {
           gradertAktivitet: undefined,
         },
       ],
-      annenForelderHarRett: true,
-      aleneomsorg: false,
       årsakFilter: { kreverSammenhengendeUttakTom: '2021-09-30', utenMinsterett: false, søkerErMor: false },
+      endringsdato: '2022-11-10',
     },
   },
 };
@@ -1045,7 +1026,7 @@ export const StønadskontoMedUgyldigForbruk: Story = {
       action('button-click')(v);
       return Promise.resolve(uttakStønadskontoerForUgyldigForbrukt);
     },
-    uttaksresultatPerioder: {
+    uttaksresultat: {
       perioderSøker: [
         {
           fom: '2022-10-20',
@@ -1080,9 +1061,8 @@ export const StønadskontoMedUgyldigForbruk: Story = {
         },
       ],
       perioderAnnenpart: [],
-      annenForelderHarRett: true,
-      aleneomsorg: false,
       årsakFilter: { kreverSammenhengendeUttakTom: '2021-09-30', utenMinsterett: false, søkerErMor: true },
+      endringsdato: '2022-10-20',
     },
   },
 };
@@ -1090,7 +1070,7 @@ export const StønadskontoMedUgyldigForbruk: Story = {
 export const VisAdvarselNårProsentIArbeidTotaltErMindreEnn100Prosent: Story = {
   args: {
     aksjonspunkterForPanel: åpentAksjonspunkt,
-    uttaksresultatPerioder: {
+    uttaksresultat: {
       perioderSøker: [
         {
           fom: '2022-10-20',
@@ -1125,9 +1105,8 @@ export const VisAdvarselNårProsentIArbeidTotaltErMindreEnn100Prosent: Story = {
         },
       ],
       perioderAnnenpart: [],
-      annenForelderHarRett: true,
-      aleneomsorg: false,
       årsakFilter: { kreverSammenhengendeUttakTom: '2021-09-30', utenMinsterett: false, søkerErMor: true },
+      endringsdato: '2022-10-20',
     },
   },
 };
@@ -1135,7 +1114,7 @@ export const VisAdvarselNårProsentIArbeidTotaltErMindreEnn100Prosent: Story = {
 export const VisAdvarselNårUtbetalingsgradOgProsentArbeidOverstiger100Prosent: Story = {
   args: {
     aksjonspunkterForPanel: åpentAksjonspunkt,
-    uttaksresultatPerioder: {
+    uttaksresultat: {
       perioderSøker: [
         {
           fom: '2022-10-20',
@@ -1170,9 +1149,8 @@ export const VisAdvarselNårUtbetalingsgradOgProsentArbeidOverstiger100Prosent: 
         },
       ],
       perioderAnnenpart: [],
-      annenForelderHarRett: true,
-      aleneomsorg: false,
       årsakFilter: { kreverSammenhengendeUttakTom: '2021-09-30', utenMinsterett: false, søkerErMor: true },
+      endringsdato: '2022-10-20',
     },
   },
 };
@@ -1180,7 +1158,7 @@ export const VisAdvarselNårUtbetalingsgradOgProsentArbeidOverstiger100Prosent: 
 export const VisOppholdsperiode: Story = {
   args: {
     aksjonspunkterForPanel: åpentAksjonspunkt,
-    uttaksresultatPerioder: {
+    uttaksresultat: {
       perioderSøker: [
         {
           fom: '2023-02-15',
@@ -1310,9 +1288,8 @@ export const VisOppholdsperiode: Story = {
           gradertAktivitet: undefined,
         },
       ],
-      annenForelderHarRett: true,
-      aleneomsorg: false,
       årsakFilter: { kreverSammenhengendeUttakTom: '2021-09-30', utenMinsterett: true, søkerErMor: true },
+      endringsdato: '2023-02-03',
     },
   },
 };

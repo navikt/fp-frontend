@@ -43,7 +43,7 @@ import type {
   SimuleringResultat,
   Soknad,
   TilbakekrevingValg,
-  UttaksresultatPeriode,
+  Uttaksresultat,
   UttakStonadskontoer,
   Verge,
   VilkarsVurdertePerioderWrapper,
@@ -179,7 +179,7 @@ export const BehandlingRel = {
   OPPTJENING: 'opptjening',
   BEREGNINGRESULTAT_ENGANGSSTONAD: 'beregningsresultat-engangsstonad',
   MEDLEMSKAP: 'soeker-medlemskap-v3',
-  UTTAKSRESULTAT_PERIODER: 'uttaksresultat-perioder',
+  UTTAKSRESULTAT: 'uttaksresultat-perioder',
   UTTAK_STONADSKONTOER: 'uttak-stonadskontoer',
   YTELSEFORDELING: 'ytelsefordeling',
   STONADSKONTOER_GITT_UTTAKSPERIODER: 'lagre-stonadskontoer-gitt-uttaksperioder',
@@ -245,10 +245,7 @@ const getInnsynOptions = (links: ApiLink[]) => (behandling: Behandling) =>
 const getPerioderForeldelseOptions = (links: ApiLink[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.PERIODER_FORELDELSE, behandling.uuid, behandling.versjon],
-    queryFn: () =>
-      kyExtended
-        .get(getUrlFromRel('PERIODER_FORELDELSE', links), { searchParams: { uuid: behandling.uuid } })
-        .json<FeilutbetalingPerioderWrapper>(),
+    queryFn: () => kyExtended.get(getUrlFromRel('PERIODER_FORELDELSE', links)).json<FeilutbetalingPerioderWrapper>(),
     enabled: harLenke(behandling, 'PERIODER_FORELDELSE'),
     staleTime: Infinity,
   });
@@ -257,9 +254,7 @@ const getVilkårsvurderingsperioderOptions = (links: ApiLink[]) => (behandling: 
   queryOptions({
     queryKey: [BehandlingRel.VILKARVURDERINGSPERIODER, behandling.uuid, behandling.versjon],
     queryFn: () =>
-      kyExtended
-        .get(getUrlFromRel('VILKARVURDERINGSPERIODER', links), { searchParams: { uuid: behandling.uuid } })
-        .json<DetaljerteFeilutbetalingsperioder>(),
+      kyExtended.get(getUrlFromRel('VILKARVURDERINGSPERIODER', links)).json<DetaljerteFeilutbetalingsperioder>(),
     enabled: harLenke(behandling, 'VILKARVURDERINGSPERIODER'),
     staleTime: Infinity,
   });
@@ -267,10 +262,7 @@ const getVilkårsvurderingsperioderOptions = (links: ApiLink[]) => (behandling: 
 const getVilkårsvurderingOptions = (links: ApiLink[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.VILKARVURDERING, behandling.uuid, behandling.versjon],
-    queryFn: () =>
-      kyExtended
-        .get(getUrlFromRel('VILKARVURDERING', links), { searchParams: { uuid: behandling.uuid } })
-        .json<VilkarsVurdertePerioderWrapper>(),
+    queryFn: () => kyExtended.get(getUrlFromRel('VILKARVURDERING', links)).json<VilkarsVurdertePerioderWrapper>(),
     enabled: harLenke(behandling, 'VILKARVURDERING'),
     staleTime: Infinity,
   });
@@ -278,10 +270,7 @@ const getVilkårsvurderingOptions = (links: ApiLink[]) => (behandling: Behandlin
 const getBeregningsresultatOptions = (links: ApiLink[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.BEREGNINGSRESULTAT, behandling.uuid, behandling.versjon],
-    queryFn: () =>
-      kyExtended
-        .get(getUrlFromRel('BEREGNINGSRESULTAT', links), { searchParams: { uuid: behandling.uuid } })
-        .json<BeregningsresultatTilbakekreving>(),
+    queryFn: () => kyExtended.get(getUrlFromRel('BEREGNINGSRESULTAT', links)).json<BeregningsresultatTilbakekreving>(),
     enabled: harLenke(behandling, 'BEREGNINGSRESULTAT'),
     staleTime: Infinity,
   });
@@ -289,10 +278,7 @@ const getBeregningsresultatOptions = (links: ApiLink[]) => (behandling: Behandli
 const getVedtaksbrevOptions = (links: ApiLink[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.VEDTAKSBREV, behandling.uuid, behandling.versjon],
-    queryFn: () =>
-      kyExtended
-        .get(getUrlFromRel('VEDTAKSBREV', links), { searchParams: { uuid: behandling.uuid } })
-        .json<Vedtaksbrev>(),
+    queryFn: () => kyExtended.get(getUrlFromRel('VEDTAKSBREV', links)).json<Vedtaksbrev>(),
     enabled: harLenke(behandling, 'VEDTAKSBREV'),
     staleTime: Infinity,
   });
@@ -300,10 +286,7 @@ const getVedtaksbrevOptions = (links: ApiLink[]) => (behandling: Behandling) =>
 const getFeilutbetalingFaktaOptions = (links: ApiLink[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.FEILUTBETALING_FAKTA, behandling.uuid, behandling.versjon],
-    queryFn: () =>
-      kyExtended
-        .get(getUrlFromRel('FEILUTBETALING_FAKTA', links), { searchParams: { uuid: behandling.uuid } })
-        .json<FeilutbetalingFakta>(),
+    queryFn: () => kyExtended.get(getUrlFromRel('FEILUTBETALING_FAKTA', links)).json<FeilutbetalingFakta>(),
     enabled: harLenke(behandling, 'FEILUTBETALING_FAKTA'),
     staleTime: Infinity,
   });
@@ -420,11 +403,11 @@ const getMedlemskapOptions = (links: ApiLink[]) => (behandling: Behandling) =>
     staleTime: Infinity,
   });
 
-const getUttaksresultatPerioderOptions = (links: ApiLink[]) => (behandling: Behandling) =>
+const getUttaksresultatOptions = (links: ApiLink[]) => (behandling: Behandling) =>
   queryOptions({
-    queryKey: [BehandlingRel.UTTAKSRESULTAT_PERIODER, behandling.uuid, behandling.versjon],
-    queryFn: () => kyExtended.get(getUrlFromRel('UTTAKSRESULTAT_PERIODER', links)).json<UttaksresultatPeriode>(),
-    enabled: harLenke(behandling, 'UTTAKSRESULTAT_PERIODER'),
+    queryKey: [BehandlingRel.UTTAKSRESULTAT, behandling.uuid, behandling.versjon],
+    queryFn: () => kyExtended.get(getUrlFromRel('UTTAKSRESULTAT', links)).json<Uttaksresultat>(),
+    enabled: harLenke(behandling, 'UTTAKSRESULTAT'),
     staleTime: Infinity,
   });
 
@@ -513,8 +496,7 @@ const getUtlandDokStatusOptions = (links: ApiLink[]) => (behandling: Behandling)
 const getVergeOptions = (links: ApiLink[]) => (behandling: Behandling, isEnabled: boolean) =>
   queryOptions({
     queryKey: [BehandlingRel.VERGE, behandling.uuid, behandling.versjon],
-    queryFn: () =>
-      kyExtended.get(getUrlFromRel('VERGE', links), { searchParams: { uuid: behandling.uuid } }).json<Verge>(),
+    queryFn: () => kyExtended.get(getUrlFromRel('VERGE', links)).json<Verge>(),
     enabled: isEnabled,
     staleTime: Infinity,
   });
@@ -708,7 +690,7 @@ export const useBehandlingApi = (behandling: Behandling) => {
     tilbakekrevingValgOptions: getTilbakekrevingValgOptions(links),
     medlemskapOptions: getMedlemskapOptions(links),
     feriepengegrunnlagOptions: getFeriepengegrunnlagOptions(links),
-    uttaksresultatPerioderOptions: getUttaksresultatPerioderOptions(links),
+    uttaksresultatPerioderOptions: getUttaksresultatOptions(links),
     uttakStønadskontoerOptions: getUttakStønadskontoerOptions(links),
     ytelsefordelingOptions: getYtelsefordelingOptions(links),
     oppdaterStønadskontoer: getOppdaterStønadskontoer(links),

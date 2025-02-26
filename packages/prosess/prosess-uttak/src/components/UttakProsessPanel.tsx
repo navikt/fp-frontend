@@ -13,9 +13,8 @@ import type {
   PeriodeSoker,
   Personoversikt,
   Soknad,
-  UttaksresultatPeriode,
+  Uttaksresultat,
   UttakStonadskontoer,
-  Ytelsefordeling,
 } from '@navikt/fp-types';
 import type { UttakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
@@ -49,7 +48,7 @@ const UttakPeriodeNavn = {
   UDEFINERT: '-',
 } as Record<string, string>;
 
-const hentApTekster = (uttaksresultat: UttaksresultatPeriode, aksjonspunkter: Aksjonspunkt[]): ReactElement[] => {
+const hentApTekster = (uttaksresultat: Uttaksresultat, aksjonspunkter: Aksjonspunkt[]): ReactElement[] => {
   const filtrerteAksjonspunkter = aksjonspunkter.filter(
     ap =>
       ap.definisjon !== AksjonspunktKode.FASTSETT_UTTAKPERIODER &&
@@ -153,12 +152,11 @@ const transformValues = (perioder: PeriodeSoker[], aksjonspunkter: Aksjonspunkt[
 };
 
 interface Props {
-  uttaksresultatPeriode: UttaksresultatPeriode;
+  uttaksresultat: Uttaksresultat;
   uttakStonadskontoer: UttakStonadskontoer;
   familiehendelse: FamilieHendelseSamling;
   soknad: Soknad;
   personoversikt: Personoversikt;
-  ytelsefordeling: Ytelsefordeling;
   kanOverstyre: boolean;
   oppdaterStønadskontoer: (params: { behandlingUuid: string; perioder: PeriodeSoker[] }) => Promise<any>;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -175,12 +173,11 @@ const sortByDate = (a: PeriodeSoker, b: PeriodeSoker): number => {
 };
 
 export const UttakProsessPanel = ({
-  uttaksresultatPeriode,
+  uttaksresultat,
   uttakStonadskontoer,
   familiehendelse,
   soknad,
   personoversikt,
-  ytelsefordeling,
   kanOverstyre,
   oppdaterStønadskontoer,
   arbeidsgiverOpplysningerPerId,
@@ -199,14 +196,14 @@ export const UttakProsessPanel = ({
 
   const { formData, setFormData } = useFormData<PeriodeSoker[]>();
 
-  const [perioder, setPerioder] = useState<PeriodeSoker[]>(formData || uttaksresultatPeriode.perioderSøker);
+  const [perioder, setPerioder] = useState<PeriodeSoker[]>(formData || uttaksresultat.perioderSøker);
   const [valgtPeriodeIndex, setValgtPeriodeIndex] = useState<number | undefined>();
 
   const [stønadskonto, setStønadskonto] = useState(uttakStonadskontoer);
 
   useEffect(() => () => setFormData(perioder), [perioder]);
 
-  const allePerioder = uttaksresultatPeriode.perioderAnnenpart.concat(perioder);
+  const allePerioder = uttaksresultat.perioderAnnenpart.concat(perioder);
 
   const visPeriode = (per: PeriodeSoker[]) => {
     const index = per.findIndex(period => period.periodeResultatType === PeriodeResultatType.MANUELL_BEHANDLING);
@@ -237,9 +234,9 @@ export const UttakProsessPanel = ({
         setStønadskonto(oppdatertStønadskonto);
         if (oppdatertePerioder.length === 2) {
           const index = nyePerioder.findIndex(p => p.fom === oppdatertePerioder[0].fom);
-          setValgtPeriodeIndex(uttaksresultatPeriode.perioderAnnenpart.length + index);
+          setValgtPeriodeIndex(uttaksresultat.perioderAnnenpart.length + index);
         } else {
-          visPeriode(uttaksresultatPeriode.perioderAnnenpart.concat(nyePerioder));
+          visPeriode(uttaksresultat.perioderAnnenpart.concat(nyePerioder));
         }
       },
     );
@@ -294,7 +291,7 @@ export const UttakProsessPanel = ({
       {aksjonspunkterForPanel.length > 0 && harÅpneAksjonspunkter && (
         <>
           <AksjonspunktHelpTextHTML>
-            {hentApTekster(uttaksresultatPeriode, aksjonspunkterForPanel)}
+            {hentApTekster(uttaksresultat, aksjonspunkterForPanel)}
           </AksjonspunktHelpTextHTML>
           <VerticalSpacer twentyPx />
         </>
@@ -305,14 +302,14 @@ export const UttakProsessPanel = ({
       />
       <UttakTidslinjeIndex
         perioderSøker={perioder}
-        perioderAnnenpart={uttaksresultatPeriode.perioderAnnenpart}
+        perioderAnnenpart={uttaksresultat.perioderAnnenpart}
         valgtPeriodeIndex={valgtPeriodeIndex}
         setValgtPeriodeIndex={setValgtPeriodeIndex}
         behandling={behandling}
         søknad={soknad}
         personoversikt={personoversikt}
         familiehendelse={familiehendelse}
-        ytelsefordeling={ytelsefordeling}
+        endringsdato={uttaksresultat.endringsdato}
         tilknyttetStortinget={erTilknyttetStortinget}
         fagsak={fagsak}
         alleKodeverk={alleKodeverk}
@@ -324,8 +321,7 @@ export const UttakProsessPanel = ({
             key={valgtPeriodeIndex}
             perioderSøker={perioder}
             behandling={behandling}
-            ytelsefordeling={ytelsefordeling}
-            uttaksresultatPeriode={uttaksresultatPeriode}
+            uttaksresultat={uttaksresultat}
             valgtPeriodeIndex={valgtPeriodeIndex}
             oppdaterPeriode={oppdaterPeriode}
             isReadOnly={(harIngenEllerLukkedeAksjonspunkt || isReadOnly) && !erOverstyrt}
@@ -335,6 +331,7 @@ export const UttakProsessPanel = ({
             setValgtPeriodeIndex={setValgtPeriodeIndex}
             erTilknyttetStortinget={erTilknyttetStortinget}
             harÅpneAksjonspunkter={harÅpneAksjonspunkter}
+            endringsdato={uttaksresultat.endringsdato}
           />
         </>
       )}
