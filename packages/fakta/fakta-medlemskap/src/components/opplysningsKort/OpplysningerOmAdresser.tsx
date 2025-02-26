@@ -3,7 +3,13 @@ import { useIntl } from 'react-intl';
 import { AvsnittSkiller } from '@navikt/ft-ui-komponenter';
 
 import { erPersonAdresserLike, FaktaKilde, Personopplysninger } from '@navikt/fp-fakta-felles';
-import { type AlleKodeverk, type Medlemskap, MedlemskapAvvik } from '@navikt/fp-types';
+import {
+  type AdressePeriode,
+  type AlleKodeverk,
+  type Medlemskap,
+  MedlemskapAvvik,
+  type Personadresse,
+} from '@navikt/fp-types';
 
 import { EkspansjonsKort } from '../ekspansjonsKort/EkspansjonsKort';
 import { relevantForAdresser } from '../ekspansjonsKort/medlemsAvvik';
@@ -17,6 +23,9 @@ interface Props {
   skalViseAvvik: boolean;
 }
 
+const isPersonadresse = (adresse: Personadresse[] | AdressePeriode[]): adresse is Personadresse[] =>
+  adresse.length > 0 && 'adresseType' in adresse[0];
+
 export const OpplysningerOmAdresser = ({
   avvik = [],
   medlemskap: { adresser, annenpart },
@@ -26,8 +35,12 @@ export const OpplysningerOmAdresser = ({
   skalViseAvvik,
 }: Props) => {
   const intl = useIntl();
-  const brukerAdresser = adresser.map(ap => ap.adresse);
-  const annenpartAdresser = annenpart?.adresser.map(ap => ap.adresse) ?? [];
+  const brukerAdresser = isPersonadresse(adresser) ? adresser : adresser.map(ap => ap.adresse);
+  const annenpartAdresser = annenpart
+    ? isPersonadresse(annenpart.adresser)
+      ? annenpart.adresser
+      : annenpart.adresser.map(ap => ap.adresse)
+    : [];
 
   return (
     <EkspansjonsKort
