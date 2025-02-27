@@ -19,8 +19,15 @@ interface Props {
 }
 
 export const ProsessMeny = ({ valgtProsessSteg, valgtFaktaSteg, children }: Props) => {
-  const { prosessPanelMenyData, oppdaterProsessPanelIUrl, registrerProsessPanel } = useProsessMenyData(valgtFaktaSteg);
+  const { oppdaterProsessStegOgFaktaPanelIUrl } = use(BehandlingDataContext);
+  const { prosessPanelMenyData, settProsessPanelMenyData } = useProsessMenyData();
   const { behandling } = use(BehandlingDataContext);
+
+  const oppdaterProsessPanelIUrl = (index: number) => {
+    const panel = prosessPanelMenyData[index];
+    const nyvalgtProsessSteg = panel.erAktiv ? undefined : panel.id;
+    oppdaterProsessStegOgFaktaPanelIUrl(nyvalgtProsessSteg, valgtFaktaSteg);
+  };
 
   const steg = prosessPanelMenyData.map(data => {
     const type = finnProsessmenyType(data.status, data.harApentAksjonspunkt);
@@ -42,13 +49,16 @@ export const ProsessMeny = ({ valgtProsessSteg, valgtFaktaSteg, children }: Prop
       </div>
       <ProsessMenyProvider
         valgtProsessSteg={valgtProsessSteg}
-        registrerProsessPanel={registrerProsessPanel}
+        settProsessPanelMenyData={settProsessPanelMenyData}
         prosessPanelMenyData={prosessPanelMenyData}
       >
         {children}
       </ProsessMenyProvider>
       {behandling.behandlingHenlagt && (
-        <BehandlingHenlagtPanel valgtProsessSteg={valgtProsessSteg} registrerProsessPanel={registrerProsessPanel} />
+        <BehandlingHenlagtPanel
+          valgtProsessSteg={valgtProsessSteg}
+          settProsessPanelMenyData={settProsessPanelMenyData}
+        />
       )}
     </div>
   );
@@ -56,7 +66,7 @@ export const ProsessMeny = ({ valgtProsessSteg, valgtFaktaSteg, children }: Prop
 
 type Context = {
   valgtProsessSteg: string | undefined;
-  registrerProsessPanel: (data: ProsessPanelMenyData) => void;
+  settProsessPanelMenyData: (data: ProsessPanelMenyData) => void;
   prosessPanelMenyData: ProsessPanelMenyData[];
 };
 

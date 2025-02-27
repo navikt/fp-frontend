@@ -5,7 +5,7 @@ import type { ProsessPanelMenyData } from '../typer/prosessPanelMenyData';
 const DEFAULT_PANEL_VALGT = 'default';
 
 export const useProsessMenyRegistrerer = (
-  registrerProsessPanel: (data: ProsessPanelMenyData) => void,
+  settProsessPanelMenyData: (data: ProsessPanelMenyData) => void,
   id: string,
   tekst: string,
   skalVisesImeny: boolean,
@@ -21,7 +21,7 @@ export const useProsessMenyRegistrerer = (
 
   useEffect(() => {
     if (skalVisesImeny) {
-      registrerProsessPanel({
+      settProsessPanelMenyData({
         id,
         tekst,
         erAktiv,

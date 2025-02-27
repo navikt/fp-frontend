@@ -1,15 +1,12 @@
-import { use, useState } from 'react';
+import { useState } from 'react';
 
 import type { ProsessPanelMenyData } from '../typer/prosessPanelMenyData';
-import { BehandlingDataContext } from '../utils/behandlingDataContext';
 
-export const useProsessMenyData = (valgtFaktaSteg: string | undefined) => {
-  const { oppdaterProsessStegOgFaktaPanelIUrl } = use(BehandlingDataContext);
-
-  const [panelMenyData, setPanelMenyData] = useState<ProsessPanelMenyData[]>([]);
+export const useProsessMenyData = () => {
+  const [prosessPanelMenyData, setProsessPanelMenyData] = useState<ProsessPanelMenyData[]>([]);
 
   const settProsessPanelMenyData = (data: ProsessPanelMenyData) => {
-    setPanelMenyData(oldData => {
+    setProsessPanelMenyData(oldData => {
       const newData = [...oldData];
       const index = newData.findIndex(d => d.id === data.id);
       if (index >= 0) {
@@ -21,15 +18,8 @@ export const useProsessMenyData = (valgtFaktaSteg: string | undefined) => {
     });
   };
 
-  const oppdaterProsessPanelUrl = (index: number) => {
-    const panel = panelMenyData[index];
-    const nyvalgtProsessSteg = panel.erAktiv ? undefined : panel.id;
-    oppdaterProsessStegOgFaktaPanelIUrl(nyvalgtProsessSteg, valgtFaktaSteg);
-  };
-
   return {
-    prosessPanelMenyData: panelMenyData,
-    oppdaterProsessPanelIUrl: oppdaterProsessPanelUrl,
-    registrerProsessPanel: settProsessPanelMenyData,
+    prosessPanelMenyData,
+    settProsessPanelMenyData,
   };
 };

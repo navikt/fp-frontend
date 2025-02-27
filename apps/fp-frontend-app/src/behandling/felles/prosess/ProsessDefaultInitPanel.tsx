@@ -51,14 +51,14 @@ const ProsessPanel = ({
   children,
 }: Props & ProsessPanel) => {
   const { behandling, fagsak, alleKodeverk } = use(BehandlingDataContext);
-  const { valgtProsessSteg, registrerProsessPanel } = use(ProsessMenyContext);
+  const { valgtProsessSteg, settProsessPanelMenyData } = use(ProsessMenyContext);
 
   const status = hentOverstyrtStatus ?? standardPanelProps.status;
 
   const skalMarkeresSomAktiv = !!hentSkalMarkeresSomAktiv && !behandling.behandlingHenlagt;
 
   const erPanelValgt = useProsessMenyRegistrerer(
-    registrerProsessPanel,
+    settProsessPanelMenyData,
     prosessPanelKode,
     prosessPanelMenyTekst,
     skalPanelVisesIMeny,

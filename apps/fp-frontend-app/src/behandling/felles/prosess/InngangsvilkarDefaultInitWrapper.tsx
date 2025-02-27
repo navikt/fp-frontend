@@ -52,7 +52,7 @@ interface Props {
 export const InngangsvilkarDefaultInitWrapper = ({ apentFaktaPanelInfo, leftPanels, rightPanels }: Props) => {
   const intl = useIntl();
 
-  const { registrerProsessPanel, valgtProsessSteg } = use(ProsessMenyContext);
+  const { settProsessPanelMenyData, valgtProsessSteg } = use(ProsessMenyContext);
 
   const { behandling, oppdaterProsessStegOgFaktaPanelIUrl } = use(BehandlingDataContext);
 
@@ -86,7 +86,7 @@ export const InngangsvilkarDefaultInitWrapper = ({ apentFaktaPanelInfo, leftPane
   const skalVises = panelInfo.length > 0;
 
   const erPanelValgt = useProsessMenyRegistrerer(
-    registrerProsessPanel,
+    settProsessPanelMenyData,
     ProsessStegCode.INNGANGSVILKAR,
     intl.formatMessage({ id: 'Behandlingspunkt.Inngangsvilkar' }),
     skalVises,

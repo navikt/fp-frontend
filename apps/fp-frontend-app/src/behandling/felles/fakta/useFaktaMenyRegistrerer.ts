@@ -10,7 +10,7 @@ export const useFaktaMenyRegistrerer = (
   skalVisesImeny: boolean,
   harApneAksjonspunkter: boolean,
 ) => {
-  const { valgtFaktaSteg, registrerFaktaPanel } = use(FaktaMenyContext);
+  const { valgtFaktaSteg, settFaktaPanelMenyData } = use(FaktaMenyContext);
 
   const [erPanelValgt, setPanelValgt] = useState(false);
 
@@ -19,7 +19,7 @@ export const useFaktaMenyRegistrerer = (
 
   useEffect(() => {
     if (skalVisesImeny) {
-      registrerFaktaPanel({
+      settFaktaPanelMenyData({
         id,
         tekst,
         erAktiv,

@@ -10,7 +10,7 @@ export type FaktaPanelInfo = {
 export const useFaktaMenyData = (setÅpentFaktaPanelInfo?: (panelData: FaktaPanelInfo | undefined) => void) => {
   const [faktaPanelMenyData, setFaktaPanelMenyData] = useState<FaktaPanelMenyData[]>([]);
 
-  const settProsessPanelMenyData = (data: FaktaPanelMenyData) => {
+  const settFaktaPanelMenyData = (data: FaktaPanelMenyData) => {
     setFaktaPanelMenyData(oldData => {
       const newData = [...oldData];
       const index = newData.findIndex(d => d.id === data.id);
@@ -27,6 +27,6 @@ export const useFaktaMenyData = (setÅpentFaktaPanelInfo?: (panelData: FaktaPane
 
   return {
     faktaPanelMenyData,
-    settProsessPanelMenyData,
+    settFaktaPanelMenyData,
   };
 };

@@ -23,7 +23,7 @@ export const FaktaMeny = ({ valgtFaktaSteg, valgtProsessSteg, setÅpentFaktaPane
 
   const { oppdaterProsessStegOgFaktaPanelIUrl } = use(BehandlingDataContext);
 
-  const { faktaPanelMenyData, settProsessPanelMenyData } = useFaktaMenyData(setÅpentFaktaPanelInfo);
+  const { faktaPanelMenyData, settFaktaPanelMenyData } = useFaktaMenyData(setÅpentFaktaPanelInfo);
 
   //Denne er alltid false ved første render siden ingen paneler er registrert på dette tidspunktet
   const harFaktapaneler = faktaPanelMenyData.length > 0;
@@ -50,7 +50,7 @@ export const FaktaMeny = ({ valgtFaktaSteg, valgtProsessSteg, setÅpentFaktaPane
       <div className={styles.content}>
         <FaktaMenyProvider
           valgtFaktaSteg={valgtFaktaSteg}
-          registrerFaktaPanel={settProsessPanelMenyData}
+          settFaktaPanelMenyData={settFaktaPanelMenyData}
           faktaPanelMenyData={faktaPanelMenyData}
         >
           {children}
@@ -62,7 +62,7 @@ export const FaktaMeny = ({ valgtFaktaSteg, valgtProsessSteg, setÅpentFaktaPane
 
 type Context = {
   valgtFaktaSteg: string | undefined;
-  registrerFaktaPanel: (data: FaktaPanelMenyData) => void;
+  settFaktaPanelMenyData: (data: FaktaPanelMenyData) => void;
   faktaPanelMenyData: FaktaPanelMenyData[];
 };
 
