@@ -115,10 +115,10 @@ const createQueryClient = (errorHandler: (error: Error) => void) =>
   new QueryClient({
     defaultOptions: {
       queries: {
-        retry: import.meta.env.MODE === 'test' ? false : 3,
+        retry: retryHandler(),
       },
       mutations: {
-        retry: import.meta.env.MODE === 'test' ? false : 3,
+        retry: retryHandler(),
       },
     },
     queryCache: new QueryCache({
@@ -128,6 +128,26 @@ const createQueryClient = (errorHandler: (error: Error) => void) =>
       onError: errorHandler,
     }),
   });
+
+const ZERO_RETRIES = false;
+
+const retryHandler = () => {
+  if (import.meta.env.MODE === 'test') {
+    return ZERO_RETRIES;
+  }
+
+  return (failureCount: number, error: Error) => {
+    if (error instanceof HTTPError) {
+      if (error.response.status === 401 || error.response.status === 403) {
+        return ZERO_RETRIES;
+      }
+      if (error.response.status === 500) {
+        return failureCount < 1;
+      }
+    }
+    return failureCount < 3;
+  };
+};
 
 const getErrorHandler = (addErrorMessage: (data: FpError) => void) => async (error: Error) => {
   // eslint-disable-next-line no-console
