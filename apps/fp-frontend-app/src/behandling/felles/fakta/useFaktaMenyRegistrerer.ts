@@ -16,14 +16,13 @@ export const useFaktaMenyRegistrerer = (
     skalVisesImeny && (valgtFaktaSteg === id || (harApneAksjonspunkter && valgtFaktaSteg === DEFAULT_PANEL_VALGT));
 
   useEffect(() => {
-    if (skalVisesImeny) {
-      settFaktaPanelMenyData({
-        id,
-        tekst,
-        erAktiv,
-        harApneAksjonspunkter,
-      });
-    }
+    settFaktaPanelMenyData({
+      id,
+      tekst,
+      erAktiv,
+      harApneAksjonspunkter,
+      skalVisesImeny,
+    });
   }, [skalVisesImeny, erAktiv, harApneAksjonspunkter]);
 
   return skalVisesImeny && erAktiv;

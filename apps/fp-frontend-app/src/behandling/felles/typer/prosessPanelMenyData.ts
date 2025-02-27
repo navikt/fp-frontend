@@ -4,4 +4,5 @@ export type ProsessPanelMenyData = {
   erAktiv: boolean;
   harApentAksjonspunkt: boolean;
   status: string;
+  skalVisesImeny: boolean;
 };

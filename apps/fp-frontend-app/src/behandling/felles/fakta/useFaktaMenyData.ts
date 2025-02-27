@@ -26,7 +26,7 @@ export const useFaktaMenyData = (setÅpentFaktaPanelInfo?: (panelData: FaktaPane
   };
 
   return {
-    faktaPanelMenyData,
+    faktaPanelMenyData: faktaPanelMenyData.filter(d => d.skalVisesImeny),
     settFaktaPanelMenyData,
   };
 };

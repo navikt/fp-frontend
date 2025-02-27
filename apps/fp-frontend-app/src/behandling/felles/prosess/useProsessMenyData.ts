@@ -19,7 +19,7 @@ export const useProsessMenyData = () => {
   };
 
   return {
-    prosessPanelMenyData,
+    prosessPanelMenyData: prosessPanelMenyData.filter(d => d.skalVisesImeny),
     settProsessPanelMenyData,
   };
 };

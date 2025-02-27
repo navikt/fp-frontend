@@ -28,6 +28,7 @@ export const BehandlingHenlagtPanel = ({ valgtProsessSteg, settProsessPanelMenyD
       erAktiv: erValgt,
       harApentAksjonspunkt: false,
       status: VilkarUtfallType.IKKE_VURDERT,
+      skalVisesImeny: true,
     });
     setPanelValgt(erValgt);
   }, [valgtProsessSteg]);

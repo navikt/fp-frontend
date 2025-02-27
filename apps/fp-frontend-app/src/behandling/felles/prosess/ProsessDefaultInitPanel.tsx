@@ -7,7 +7,6 @@ import { FormDataProvider, PanelDataProvider, usePanelOverstyring } from '@navik
 import { ProsessPanelWrapper } from '../prosess/ProsessPanelWrapper';
 import type { StandardProsessPanelProps } from '../typer/standardProsessPanelPropsTsType';
 import { BehandlingDataContext } from '../utils/behandlingDataContext';
-import { ProsessMenyContext } from './ProsessMeny';
 import { useProsessMenyRegistrerer } from './useProsessMenyRegistrerer';
 
 export type Props = {
@@ -51,21 +50,18 @@ const ProsessPanel = ({
   children,
 }: Props & ProsessPanel) => {
   const { behandling, fagsak, alleKodeverk } = use(BehandlingDataContext);
-  const { valgtProsessSteg, settProsessPanelMenyData } = use(ProsessMenyContext);
 
   const status = hentOverstyrtStatus ?? standardPanelProps.status;
 
   const skalMarkeresSomAktiv = !!hentSkalMarkeresSomAktiv && !behandling.behandlingHenlagt;
 
   const erPanelValgt = useProsessMenyRegistrerer(
-    settProsessPanelMenyData,
     prosessPanelKode,
     prosessPanelMenyTekst,
     skalPanelVisesIMeny,
     harApentAksjonspunkt,
     status,
     skalMarkeresSomAktiv || harApentAksjonspunkt,
-    valgtProsessSteg,
   );
 
   const skalVisePanel = erPanelValgt && (harApentAksjonspunkt || status !== VilkarUtfallType.IKKE_VURDERT);
