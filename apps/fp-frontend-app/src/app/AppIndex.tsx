@@ -129,7 +129,7 @@ const createQueryClient = (errorHandler: (error: Error) => void) =>
     }),
   });
 
-const getErrorHandler = (addErrorMessage: (data: FpError) => void) => (error: Error) => {
+const getErrorHandler = (addErrorMessage: (data: FpError) => void) => async (error: Error) => {
   // eslint-disable-next-line no-console
   console.log(error);
 
@@ -147,7 +147,12 @@ const getErrorHandler = (addErrorMessage: (data: FpError) => void) => (error: Er
         location: error.response?.config?.url,
       });
     } else {
-      addErrorMessage({ type: ErrorType.GENERAL_ERROR, message: error.message });
+      try {
+        const feildataJson = await error.response.json();
+        addErrorMessage({ type: ErrorType.GENERAL_ERROR, message: feildataJson.feilmelding ?? error.message });
+      } catch {
+        addErrorMessage({ type: ErrorType.GENERAL_ERROR, message: error.message });
+      }
     }
   } else {
     addErrorMessage({ type: ErrorType.GENERAL_ERROR, message: error.message });
