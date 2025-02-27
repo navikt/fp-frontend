@@ -1,6 +1,7 @@
 export type FaktaPanelMenyData = {
   id: string;
-  tekst?: string;
-  erAktiv?: boolean;
-  harApneAksjonspunkter?: boolean;
+  tekst: string;
+  erAktiv: boolean;
+  harApneAksjonspunkter: boolean;
+  skalVisesImeny: boolean;
 };

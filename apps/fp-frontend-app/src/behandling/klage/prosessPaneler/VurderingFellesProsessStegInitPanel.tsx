@@ -14,7 +14,6 @@ import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter
 import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
-import type { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 import { KlageBehandlingModal } from '../modaler/KlageBehandlingModal';
 
@@ -28,8 +27,7 @@ export const VurderingFellesProsessStegInitPanel = ({
   aksjonspunktKoder,
   prosessPanelKode,
   prosessPanelMenyTekst,
-  ...props
-}: Props & ProsessPanelInitProps) => {
+}: Props) => {
   const [visModalKlageBehandling, toggleKlageModal] = useState(false);
 
   const {
@@ -77,7 +75,6 @@ export const VurderingFellesProsessStegInitPanel = ({
 
   return (
     <ProsessDefaultInitPanel
-      {...props}
       standardPanelProps={standardPanelProps}
       prosessPanelKode={prosessPanelKode}
       prosessPanelMenyTekst={prosessPanelMenyTekst}

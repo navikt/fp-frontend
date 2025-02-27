@@ -12,7 +12,6 @@ import type { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
-import type { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.AVKLAR_ARBEIDSFORHOLD];
@@ -26,10 +25,7 @@ interface Props {
  *
  * Dette faktapanelet skal alltid vises
  */
-export const ArbeidsforholdFaktaInitPanel = ({
-  arbeidsgiverOpplysningerPerId,
-  ...props
-}: Props & FaktaPanelInitProps) => {
+export const ArbeidsforholdFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props) => {
   const intl = useIntl();
 
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
@@ -42,7 +38,6 @@ export const ArbeidsforholdFaktaInitPanel = ({
 
   return (
     <FaktaDefaultInitPanel
-      {...props}
       standardPanelProps={standardPanelProps}
       faktaPanelKode={FaktaPanelCode.ARBEIDSFORHOLD}
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Arbeidsforhold' })}

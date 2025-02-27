@@ -12,7 +12,6 @@ import type { ArbeidsgiverOpplysningerPerId, Personoversikt } from '@navikt/fp-t
 import { BehandlingRel, useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
-import type { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_TILBAKETREKK];
@@ -22,11 +21,7 @@ interface Props {
   personoversikt: Personoversikt;
 }
 
-export const TilkjentYtelseProsessStegInitPanel = ({
-  arbeidsgiverOpplysningerPerId,
-  personoversikt,
-  ...props
-}: Props & ProsessPanelInitProps) => {
+export const TilkjentYtelseProsessStegInitPanel = ({ arbeidsgiverOpplysningerPerId, personoversikt }: Props) => {
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
 
   const { behandling } = use(BehandlingDataContext);
@@ -40,7 +35,6 @@ export const TilkjentYtelseProsessStegInitPanel = ({
 
   return (
     <ProsessDefaultInitPanel
-      {...props}
       standardPanelProps={standardPanelProps}
       prosessPanelKode={ProsessStegCode.TILKJENT_YTELSE}
       prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.TilkjentYtelse' })}

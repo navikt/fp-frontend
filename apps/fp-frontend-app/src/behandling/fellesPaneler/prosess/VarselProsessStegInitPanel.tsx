@@ -16,7 +16,6 @@ import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingA
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { skalViseProsessPanel } from '../../felles/prosess/skalViseProsessPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
-import type { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const getLagringSideeffekter =
@@ -40,7 +39,7 @@ const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.VARSEL_REVURDERING_ETTERKONTROLL,
 ];
 
-export const VarselProsessStegInitPanel = (props: ProsessPanelInitProps) => {
+export const VarselProsessStegInitPanel = () => {
   const intl = useIntl();
 
   const { setSkalOppdatereEtterBekreftelseAvAp, fagsak, behandling } = use(BehandlingDataContext);
@@ -73,7 +72,6 @@ export const VarselProsessStegInitPanel = (props: ProsessPanelInitProps) => {
 
   return (
     <ProsessDefaultInitPanel
-      {...props}
       standardPanelProps={standardPanelProps}
       prosessPanelKode={ProsessStegCode.VARSEL}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.CheckVarselRevurdering' })}

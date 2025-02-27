@@ -1,22 +1,17 @@
-import { BehandlingContainer } from '../felles/BehandlingContainer';
-import type { ProsessPanelInitProps } from '../felles/typer/prosessPanelInitProps';
+import { ProsessMeny } from '../felles/prosess/ProsessMeny';
 import { BehandleInnsynProsessStegInitPanel } from './prosessPaneler/BehandleInnsynProsessStegInitPanel';
 import { InnsynVedtakProsessStegInitPanel } from './prosessPaneler/InnsynVedtakProsessStegInitPanel';
 
 interface Props {
-  valgtProsessSteg?: string;
+  valgtProsessSteg: string | undefined;
 }
 
-const InnsynPaneler = ({ valgtProsessSteg }: Props) => {
-  const hentProsessPaneler = (props: ProsessPanelInitProps) => (
-    <>
-      <BehandleInnsynProsessStegInitPanel {...props} />
-      <InnsynVedtakProsessStegInitPanel {...props} />
-    </>
-  );
-
-  return <BehandlingContainer valgtProsessSteg={valgtProsessSteg} hentProsessPaneler={hentProsessPaneler} />;
-};
+const InnsynPaneler = ({ valgtProsessSteg }: Props) => (
+  <ProsessMeny valgtProsessSteg={valgtProsessSteg} valgtFaktaSteg={undefined}>
+    <BehandleInnsynProsessStegInitPanel />
+    <InnsynVedtakProsessStegInitPanel />
+  </ProsessMeny>
+);
 
 // Default export grunna React.lazy
 // eslint-disable-next-line import/no-default-export

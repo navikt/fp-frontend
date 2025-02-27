@@ -1,6 +1,5 @@
-import { BehandlingContainer } from '../felles/BehandlingContainer';
-import type { FaktaPanelInitProps } from '../felles/typer/faktaPanelInitProps';
-import type { ProsessPanelInitProps } from '../felles/typer/prosessPanelInitProps';
+import { FaktaMeny } from '../felles/fakta/FaktaMeny';
+import { ProsessMeny } from '../felles/prosess/ProsessMeny';
 import { VergeFaktaInitPanel } from '../fellesPaneler/fakta/VergeFaktaInitPanel';
 import { FormKravFamOgPensjonProsessStegInitPanel } from './prosessPaneler/FormKravFamOgPensjonProsessStegInitPanel';
 import { FormKravKlageInstansProsessStegInitPanel } from './prosessPaneler/FormKravKlageInstansProsessStegInitPanel';
@@ -13,27 +12,20 @@ interface Props {
   valgtFaktaSteg?: string;
 }
 
-const KlagePaneler = ({ valgtProsessSteg, valgtFaktaSteg }: Props) => {
-  const hentFaktaPaneler = (props: FaktaPanelInitProps) => <VergeFaktaInitPanel {...props} />;
-  const hentProsessPaneler = (props: ProsessPanelInitProps) => (
-    <>
-      <FormKravFamOgPensjonProsessStegInitPanel {...props} />
-      <VurderingFamOgPensjonProsessStegInitPanel {...props} />
-      <FormKravKlageInstansProsessStegInitPanel {...props} />
-      <VurderingKlageInstansProsessStegInitPanel {...props} />
-      <KlageresultatProsessStegInitPanel {...props} />
-    </>
-  );
-
-  return (
-    <BehandlingContainer
-      valgtProsessSteg={valgtProsessSteg}
-      valgtFaktaSteg={valgtFaktaSteg}
-      hentFaktaPaneler={hentFaktaPaneler}
-      hentProsessPaneler={hentProsessPaneler}
-    />
-  );
-};
+const KlagePaneler = ({ valgtProsessSteg, valgtFaktaSteg }: Props) => (
+  <>
+    <ProsessMeny valgtProsessSteg={valgtProsessSteg} valgtFaktaSteg={valgtFaktaSteg}>
+      <FormKravFamOgPensjonProsessStegInitPanel />
+      <VurderingFamOgPensjonProsessStegInitPanel />
+      <FormKravKlageInstansProsessStegInitPanel />
+      <VurderingKlageInstansProsessStegInitPanel />
+      <KlageresultatProsessStegInitPanel />
+    </ProsessMeny>
+    <FaktaMeny valgtFaktaSteg={valgtFaktaSteg} valgtProsessSteg={valgtProsessSteg}>
+      <VergeFaktaInitPanel />
+    </FaktaMeny>
+  </>
+);
 
 // Default export grunna React.lazy
 // eslint-disable-next-line import/no-default-export

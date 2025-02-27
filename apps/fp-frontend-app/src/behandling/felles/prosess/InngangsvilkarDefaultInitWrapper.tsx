@@ -10,7 +10,6 @@ import type { Behandling } from '@navikt/fp-types';
 
 import type { InngangsvilkarPanelData } from '../typer/inngangsvilkarPanelData';
 import type { InngangsvilkarPanelInitProps } from '../typer/inngangsvilkarPanelInitProps';
-import type { ProsessPanelInitProps } from '../typer/prosessPanelInitProps';
 import { BehandlingDataContext } from '../utils/behandlingDataContext';
 import { ProsessPanelWrapper } from './ProsessPanelWrapper';
 import { useProsessMenyRegistrerer } from './useProsessMenyRegistrerer';
@@ -49,13 +48,7 @@ interface Props {
   rightPanels?: (props: InngangsvilkarPanelInitProps) => ReactElement;
 }
 
-export const InngangsvilkarDefaultInitWrapper = ({
-  valgtProsessSteg,
-  registrerProsessPanel,
-  apentFaktaPanelInfo,
-  leftPanels,
-  rightPanels,
-}: Props & ProsessPanelInitProps) => {
+export const InngangsvilkarDefaultInitWrapper = ({ apentFaktaPanelInfo, leftPanels, rightPanels }: Props) => {
   const intl = useIntl();
 
   const { behandling, oppdaterProsessStegOgFaktaPanelIUrl } = use(BehandlingDataContext);
@@ -90,14 +83,12 @@ export const InngangsvilkarDefaultInitWrapper = ({
   const skalVises = panelInfo.length > 0;
 
   const erPanelValgt = useProsessMenyRegistrerer(
-    registrerProsessPanel,
     ProsessStegCode.INNGANGSVILKAR,
     intl.formatMessage({ id: 'Behandlingspunkt.Inngangsvilkar' }),
     skalVises,
     harApentAksjonspunkt,
     status,
     !apentFaktaPanelInfo && harApentAksjonspunkt,
-    valgtProsessSteg,
   );
 
   const aksjonspunktTekster = panelInfo.map(p => p.aksjonspunktTekst).filter(tekst => !!tekst);

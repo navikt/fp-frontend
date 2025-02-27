@@ -11,7 +11,6 @@ import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
-import type { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [
@@ -20,7 +19,7 @@ const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
 ];
 
-export const AdopsjonsvilkaretFaktaInitPanel = (props: FaktaPanelInitProps) => {
+export const AdopsjonsvilkaretFaktaInitPanel = () => {
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
   const { behandling, fagsak } = use(BehandlingDataContext);
@@ -32,7 +31,6 @@ export const AdopsjonsvilkaretFaktaInitPanel = (props: FaktaPanelInitProps) => {
 
   return (
     <FaktaDefaultInitPanel
-      {...props}
       standardPanelProps={standardPanelProps}
       faktaPanelKode={FaktaPanelCode.ADOPSJONSVILKARET}
       faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.Adopsjon' })}

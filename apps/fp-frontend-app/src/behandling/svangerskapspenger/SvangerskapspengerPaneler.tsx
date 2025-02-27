@@ -1,8 +1,7 @@
 import type { ArbeidsgiverOpplysningerPerId, Personoversikt } from '@navikt/fp-types';
 
-import { BehandlingContainer } from '../felles/BehandlingContainer';
-import type { FaktaPanelInitProps } from '../felles/typer/faktaPanelInitProps';
-import type { ProsessPanelExtraInitProps, ProsessPanelInitProps } from '../felles/typer/prosessPanelInitProps';
+import { FaktaMeny } from '../felles/fakta/FaktaMeny';
+import { ProsessMeny } from '../felles/prosess/ProsessMeny';
 import { ArbeidOgInntektFaktaInitPanel } from '../fellesPaneler/fakta/ArbeidOgInntektFaktaInitPanel';
 import { ArbeidsforholdFaktaInitPanel } from '../fellesPaneler/fakta/ArbeidsforholdFaktaInitPanel';
 import { BeregningFaktaInitPanel } from '../fellesPaneler/fakta/BeregningFaktaInitPanel';
@@ -25,60 +24,43 @@ import { TilkjentYtelseProsessStegInitPanel } from './prosessPaneler/TilkjentYte
 import { VedtakSvpProsessStegInitPanel } from './prosessPaneler/VedtakSvpProsessStegInitPanel';
 
 interface Props {
-  valgtProsessSteg?: string;
-  valgtFaktaSteg?: string;
+  valgtProsessSteg: string | undefined;
+  valgtFaktaSteg: string | undefined;
   arbeidsgivere: ArbeidsgiverOpplysningerPerId;
   personoversikt: Personoversikt;
 }
 
-const SvangerskapspengerPaneler = ({ valgtProsessSteg, valgtFaktaSteg, arbeidsgivere, personoversikt }: Props) => {
-  const hentProsessPaneler = (props: ProsessPanelInitProps, ekstraProps: ProsessPanelExtraInitProps) => (
-    <>
-      <OpplysningspliktProsessStegInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-      <InngangsvilkarSvpProsessStegInitPanel {...props} />
-      <BeregningsgrunnlagProsessStegInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-      <SoknadsfristProsessStegInitPanel {...props} />
-      <FortsattMedlemskapProsessStegInitPanel {...props} />
+const SvangerskapspengerPaneler = ({ valgtProsessSteg, valgtFaktaSteg, arbeidsgivere, personoversikt }: Props) => (
+  <>
+    <ProsessMeny valgtProsessSteg={valgtProsessSteg} valgtFaktaSteg={valgtFaktaSteg}>
+      <OpplysningspliktProsessStegInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+      <InngangsvilkarSvpProsessStegInitPanel />
+      <BeregningsgrunnlagProsessStegInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+      <SoknadsfristProsessStegInitPanel />
+      <FortsattMedlemskapProsessStegInitPanel />
       <TilkjentYtelseProsessStegInitPanel
-        {...props}
         arbeidsgiverOpplysningerPerId={arbeidsgivere}
         personoversikt={personoversikt}
       />
-      <SimuleringProsessStegInitPanel
-        {...props}
-        menyData={ekstraProps.allMenyData}
-        arbeidsgiverOpplysningerPerId={arbeidsgivere}
-      />
-      <VedtakSvpProsessStegInitPanel {...props} />
-    </>
-  );
-
-  const hentFaktaPaneler = (props: FaktaPanelInitProps) => (
-    <>
-      <SakenFaktaInitPanel {...props} />
-      <ArbeidOgInntektFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-      <InntektsmeldingerFaktaInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} {...props} />
-      <ArbeidsforholdFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-      <YtelserFaktaInitPanel {...props} />
-      <VergeFaktaInitPanel {...props} />
-      <FodselOgTilretteleggingFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-      <MedlemskapsvilkaretFaktaInitPanel {...props} />
-      <OpptjeningsvilkaretFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-      <PermisjonFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-      <BeregningFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-      <FordelingFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-    </>
-  );
-
-  return (
-    <BehandlingContainer
-      valgtProsessSteg={valgtProsessSteg}
-      valgtFaktaSteg={valgtFaktaSteg}
-      hentFaktaPaneler={hentFaktaPaneler}
-      hentProsessPaneler={hentProsessPaneler}
-    />
-  );
-};
+      <SimuleringProsessStegInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+      <VedtakSvpProsessStegInitPanel />
+    </ProsessMeny>
+    <FaktaMeny valgtFaktaSteg={valgtFaktaSteg} valgtProsessSteg={valgtProsessSteg}>
+      <SakenFaktaInitPanel />
+      <ArbeidOgInntektFaktaInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+      <InntektsmeldingerFaktaInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+      <ArbeidsforholdFaktaInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+      <YtelserFaktaInitPanel />
+      <VergeFaktaInitPanel />
+      <FodselOgTilretteleggingFaktaInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+      <MedlemskapsvilkaretFaktaInitPanel />
+      <OpptjeningsvilkaretFaktaInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+      <PermisjonFaktaInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+      <BeregningFaktaInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+      <FordelingFaktaInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+    </FaktaMeny>
+  </>
+);
 
 // Default export grunna React.lazy
 // eslint-disable-next-line import/no-default-export

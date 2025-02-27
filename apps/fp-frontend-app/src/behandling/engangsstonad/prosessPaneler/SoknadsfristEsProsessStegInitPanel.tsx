@@ -13,14 +13,13 @@ import { OverstyringPanelDef } from '../../felles/prosess/OverstyringPanelDef';
 import { ProsessDefaultInitOverstyringPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { skalViseProsessPanel } from '../../felles/prosess/skalViseProsessPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
-import type { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.SOKNADSFRISTVILKARET, AksjonspunktKode.OVERSTYR_SOKNADSFRISTVILKAR];
 
 const VILKAR_KODER = [VilkarType.SOKNADFRISTVILKARET];
 
-export const SoknadsfristEsProsessStegInitPanel = (props: ProsessPanelInitProps) => {
+export const SoknadsfristEsProsessStegInitPanel = () => {
   const intl = useIntl();
 
   const { behandling, rettigheter } = use(BehandlingDataContext);
@@ -43,7 +42,6 @@ export const SoknadsfristEsProsessStegInitPanel = (props: ProsessPanelInitProps)
       overrideReadOnly={standardPanelProps.isReadOnly}
     >
       <ProsessDefaultInitOverstyringPanel
-        {...props}
         standardPanelProps={standardPanelProps}
         prosessPanelKode={ProsessStegCode.SOEKNADSFRIST}
         prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Soknadsfristvilkaret' })}

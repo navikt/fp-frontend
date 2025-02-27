@@ -1,8 +1,10 @@
+import { useState } from 'react';
+
 import type { ArbeidsgiverOpplysningerPerId, Personoversikt } from '@navikt/fp-types';
 
-import { BehandlingContainer } from '../felles/BehandlingContainer';
-import type { FaktaPanelInitProps } from '../felles/typer/faktaPanelInitProps';
-import type { ProsessPanelExtraInitProps, ProsessPanelInitProps } from '../felles/typer/prosessPanelInitProps';
+import { FaktaMeny } from '../felles/fakta/FaktaMeny';
+import type { FaktaPanelInfo } from '../felles/fakta/useFaktaMenyData';
+import { ProsessMeny } from '../felles/prosess/ProsessMeny';
 import { AdopsjonsvilkaretFaktaInitPanel } from '../fellesPaneler/fakta/AdopsjonsvilkaretFaktaInitPanel';
 import { ArbeidOgInntektFaktaInitPanel } from '../fellesPaneler/fakta/ArbeidOgInntektFaktaInitPanel';
 import { ArbeidsforholdFaktaInitPanel } from '../fellesPaneler/fakta/ArbeidsforholdFaktaInitPanel';
@@ -34,71 +36,58 @@ import { UttakProsessStegInitPanel } from './prosessPaneler/UttakProsessStegInit
 import { VedtakFpProsessStegInitPanel } from './prosessPaneler/VedtakFpProsessStegInitPanel';
 
 interface Props {
-  valgtProsessSteg?: string;
-  valgtFaktaSteg?: string;
+  valgtProsessSteg: string | undefined;
+  valgtFaktaSteg: string | undefined;
   arbeidsgivere: ArbeidsgiverOpplysningerPerId;
   personoversikt: Personoversikt;
 }
 
 const ForeldrepengerPaneler = ({ valgtProsessSteg, valgtFaktaSteg, arbeidsgivere, personoversikt }: Props) => {
-  const hentProsessPaneler = (props: ProsessPanelInitProps, ekstraProps: ProsessPanelExtraInitProps) => (
-    <>
-      <VarselProsessStegInitPanel {...props} />
-      <OpplysningspliktProsessStegInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-      <InngangsvilkarFpProsessStegInitPanel {...props} apentFaktaPanelInfo={ekstraProps.apentFaktaPanelInfo} />
-      <BeregningsgrunnlagProsessStegInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-      <SoknadsfristProsessStegInitPanel {...props} />
-      <FortsattMedlemskapProsessStegInitPanel {...props} />
-      <UttakProsessStegInitPanel
-        {...props}
-        arbeidsgiverOpplysningerPerId={arbeidsgivere}
-        personoversikt={personoversikt}
-      />
-      <TilkjentYtelseFpProsessStegInitPanel
-        {...props}
-        arbeidsgiverOpplysningerPerId={arbeidsgivere}
-        personoversikt={personoversikt}
-      />
-      <SimuleringProsessStegInitPanel
-        {...props}
-        menyData={ekstraProps.allMenyData}
-        arbeidsgiverOpplysningerPerId={arbeidsgivere}
-      />
-      <VedtakFpProsessStegInitPanel {...props} />
-    </>
-  );
-
-  const hentFaktaPaneler = (props: FaktaPanelInitProps) => (
-    <>
-      <SakenFaktaInitPanel {...props} />
-      <ArbeidOgInntektFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-      <InntektsmeldingerFaktaInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} {...props} />
-      <ArbeidsforholdFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-      <YtelserFaktaInitPanel {...props} />
-      <VergeFaktaInitPanel {...props} />
-      <OmsorgOgForeldreansvarFaktaInitPanel {...props} personoversikt={personoversikt} />
-      <AdopsjonsvilkaretFaktaInitPanel {...props} />
-      <FodselvilkaretFaktaInitPanel {...props} />
-      <MedlemskapsvilkaretFaktaInitPanel {...props} />
-      <OpptjeningsvilkaretFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-      <PermisjonFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-      <BeregningFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-      <BesteberegningFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-      <FordelingFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-      <OmsorgOgRettFaktaInitPanel {...props} personoversikt={personoversikt} />
-      <OmsorgFaktaInitPanel {...props} personoversikt={personoversikt} />
-      <UttakFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-      <UttakDokumentasjonFaktaInitPanel {...props} />
-    </>
-  );
+  const [åpentFaktaPanelInfo, setÅpentFaktaPanelInfo] = useState<FaktaPanelInfo>();
 
   return (
-    <BehandlingContainer
-      valgtProsessSteg={valgtProsessSteg}
-      valgtFaktaSteg={valgtFaktaSteg}
-      hentFaktaPaneler={hentFaktaPaneler}
-      hentProsessPaneler={hentProsessPaneler}
-    />
+    <>
+      <ProsessMeny valgtProsessSteg={valgtProsessSteg} valgtFaktaSteg={valgtFaktaSteg}>
+        <VarselProsessStegInitPanel />
+        <OpplysningspliktProsessStegInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+        <InngangsvilkarFpProsessStegInitPanel åpentFaktaPanelInfo={åpentFaktaPanelInfo} />
+        <BeregningsgrunnlagProsessStegInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+        <SoknadsfristProsessStegInitPanel />
+        <FortsattMedlemskapProsessStegInitPanel />
+        <UttakProsessStegInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} personoversikt={personoversikt} />
+        <TilkjentYtelseFpProsessStegInitPanel
+          arbeidsgiverOpplysningerPerId={arbeidsgivere}
+          personoversikt={personoversikt}
+        />
+        <SimuleringProsessStegInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+        <VedtakFpProsessStegInitPanel />
+      </ProsessMeny>
+      <FaktaMeny
+        valgtFaktaSteg={valgtFaktaSteg}
+        valgtProsessSteg={valgtProsessSteg}
+        setÅpentFaktaPanelInfo={setÅpentFaktaPanelInfo}
+      >
+        <SakenFaktaInitPanel />
+        <ArbeidOgInntektFaktaInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+        <InntektsmeldingerFaktaInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+        <ArbeidsforholdFaktaInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+        <YtelserFaktaInitPanel />
+        <VergeFaktaInitPanel />
+        <OmsorgOgForeldreansvarFaktaInitPanel personoversikt={personoversikt} />
+        <AdopsjonsvilkaretFaktaInitPanel />
+        <FodselvilkaretFaktaInitPanel />
+        <MedlemskapsvilkaretFaktaInitPanel />
+        <OpptjeningsvilkaretFaktaInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+        <PermisjonFaktaInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+        <BeregningFaktaInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+        <BesteberegningFaktaInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+        <FordelingFaktaInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+        <OmsorgOgRettFaktaInitPanel personoversikt={personoversikt} />
+        <OmsorgFaktaInitPanel personoversikt={personoversikt} />
+        <UttakFaktaInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+        <UttakDokumentasjonFaktaInitPanel />
+      </FaktaMeny>
+    </>
   );
 };
 

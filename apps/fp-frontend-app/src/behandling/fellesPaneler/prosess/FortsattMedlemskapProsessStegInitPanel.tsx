@@ -8,13 +8,12 @@ import { OverstyringPanelDef } from '../../felles/prosess/OverstyringPanelDef';
 import { ProsessDefaultInitOverstyringPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { skalViseProsessPanel } from '../../felles/prosess/skalViseProsessPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
-import type { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 
 const AKSJONSPUNKT_KODE = AksjonspunktKode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR;
 
 const VILKAR_KODER = [VilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE];
 
-export const FortsattMedlemskapProsessStegInitPanel = ({ ...props }: ProsessPanelInitProps) => {
+export const FortsattMedlemskapProsessStegInitPanel = () => {
   const intl = useIntl();
 
   const standardPanelProps = useStandardProsessPanelProps([AKSJONSPUNKT_KODE], VILKAR_KODER);
@@ -26,7 +25,6 @@ export const FortsattMedlemskapProsessStegInitPanel = ({ ...props }: ProsessPane
       overrideReadOnly={true}
     >
       <ProsessDefaultInitOverstyringPanel
-        {...props}
         standardPanelProps={standardPanelProps}
         prosessPanelKode={ProsessStegCode.FORTSATTMEDLEMSKAP}
         prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.FortsattMedlemskap' })}

@@ -11,12 +11,11 @@ import { InnsynProsessIndex } from '@navikt/fp-prosess-innsyn';
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
-import type { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_INNSYN];
 
-export const BehandleInnsynProsessStegInitPanel = (props: ProsessPanelInitProps) => {
+export const BehandleInnsynProsessStegInitPanel = () => {
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
 
   const { behandling } = use(BehandlingDataContext);
@@ -28,7 +27,6 @@ export const BehandleInnsynProsessStegInitPanel = (props: ProsessPanelInitProps)
 
   return (
     <ProsessDefaultInitPanel
-      {...props}
       standardPanelProps={standardPanelProps}
       prosessPanelKode={ProsessStegCode.BEHANDLE_INNSYN}
       prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.Innsyn' })}

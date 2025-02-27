@@ -12,22 +12,23 @@ const ID = 'henlagt';
 
 type Props = {
   valgtProsessSteg: string | undefined;
-  registrerProsessPanel: (data: ProsessPanelMenyData) => void;
+  settProsessPanelMenyData: (data: ProsessPanelMenyData) => void;
 };
 
-export const BehandlingHenlagtPanel = ({ valgtProsessSteg, registrerProsessPanel }: Props) => {
+export const BehandlingHenlagtPanel = ({ valgtProsessSteg, settProsessPanelMenyData }: Props) => {
   const intl = useIntl();
 
   const [erPanelValgt, setPanelValgt] = useState(false);
 
   useEffect(() => {
     const erValgt = valgtProsessSteg === ID || valgtProsessSteg === 'default';
-    registrerProsessPanel({
+    settProsessPanelMenyData({
       id: ID,
       tekst: intl.formatMessage({ id: 'BehandlingHenlagtPanel.Header' }),
       erAktiv: erValgt,
       harApentAksjonspunkt: false,
       status: VilkarUtfallType.IKKE_VURDERT,
+      skalVisesImeny: true,
     });
     setPanelValgt(erValgt);
   }, [valgtProsessSteg]);

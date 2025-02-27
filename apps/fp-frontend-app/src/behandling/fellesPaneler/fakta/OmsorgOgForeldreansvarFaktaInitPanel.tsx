@@ -12,7 +12,6 @@ import type { Personoversikt } from '@navikt/fp-types';
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
-import type { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.OMSORGSOVERTAKELSE, AksjonspunktKode.AVKLAR_VILKAR_FOR_FORELDREANSVAR];
@@ -21,7 +20,7 @@ interface Props {
   personoversikt: Personoversikt;
 }
 
-export const OmsorgOgForeldreansvarFaktaInitPanel = ({ personoversikt, ...props }: Props & FaktaPanelInitProps) => {
+export const OmsorgOgForeldreansvarFaktaInitPanel = ({ personoversikt }: Props) => {
   const intl = useIntl();
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
@@ -35,7 +34,6 @@ export const OmsorgOgForeldreansvarFaktaInitPanel = ({ personoversikt, ...props 
 
   return (
     <FaktaDefaultInitPanel
-      {...props}
       standardPanelProps={standardPanelProps}
       faktaPanelKode={FaktaPanelCode.OMSORGSVILKARET}
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.OmsorgOgForeldreansvar' })}

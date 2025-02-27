@@ -10,7 +10,6 @@ import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
-import type { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [
@@ -27,7 +26,7 @@ const OVERSTYRING_AP_CODES = [AksjonspunktKode.OVERSTYR_AVKLAR_STARTDATO, Aksjon
  *
  * Dette faktapanelet skal alltid vises
  */
-export const SakenFaktaInitPanel = (props: FaktaPanelInitProps) => {
+export const SakenFaktaInitPanel = () => {
   const intl = useIntl();
 
   const { behandling, rettigheter } = use(BehandlingDataContext);
@@ -41,7 +40,6 @@ export const SakenFaktaInitPanel = (props: FaktaPanelInitProps) => {
 
   return (
     <FaktaDefaultInitPanel
-      {...props}
       standardPanelProps={standardPanelProps}
       faktaPanelKode={FaktaPanelCode.SAKEN}
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Saken' })}

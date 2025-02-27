@@ -12,9 +12,8 @@ import type { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
 import { forhåndsvisTilbakekrevingMelding, harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { ProsessMenyContext } from '../../felles/prosess/ProsessMeny';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
-import type { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
-import type { ProsessPanelMenyData } from '../../felles/typer/prosessPanelMenyData';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [
@@ -23,17 +22,13 @@ const AKSJONSPUNKT_KODER = [
 ];
 
 interface Props {
-  menyData: ProsessPanelMenyData[];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
-export const SimuleringProsessStegInitPanel = ({
-  menyData,
-  arbeidsgiverOpplysningerPerId,
-  ...props
-}: Props & ProsessPanelInitProps) => {
+export const SimuleringProsessStegInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props) => {
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
   const { behandling, fagsak } = use(BehandlingDataContext);
+  const { prosessPanelMenyData } = use(ProsessMenyContext);
 
   const api = useBehandlingApi(behandling);
 
@@ -50,13 +45,12 @@ export const SimuleringProsessStegInitPanel = ({
     onSuccess: forhandsvisDokument,
   });
 
-  const harVedtakspanel = menyData.some(
+  const harVedtakspanel = prosessPanelMenyData.some(
     d => d.id === ProsessStegCode.VEDTAK && (d.status !== VilkarUtfallType.IKKE_VURDERT || d.harApentAksjonspunkt),
   );
 
   return (
     <ProsessDefaultInitPanel
-      {...props}
       standardPanelProps={standardPanelProps}
       prosessPanelKode={ProsessStegCode.SIMULERING}
       prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.Avregning' })}

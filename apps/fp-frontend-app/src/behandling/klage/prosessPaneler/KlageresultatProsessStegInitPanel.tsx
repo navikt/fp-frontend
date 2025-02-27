@@ -15,7 +15,6 @@ import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingA
 import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
-import type { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [
@@ -24,7 +23,7 @@ const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.FORESLA_VEDTAK_MANUELT,
 ];
 
-export const KlageresultatProsessStegInitPanel = (props: ProsessPanelInitProps) => {
+export const KlageresultatProsessStegInitPanel = () => {
   const intl = useIntl();
 
   const { behandling, fagsak, setSkalOppdatereEtterBekreftelseAvAp } = use(BehandlingDataContext);
@@ -65,7 +64,6 @@ export const KlageresultatProsessStegInitPanel = (props: ProsessPanelInitProps) 
         tekst={intl.formatMessage({ id: 'FatterVedtakStatusModal.KlagenErFerdigbehandlet' })}
       />
       <ProsessDefaultInitPanel
-        {...props}
         skalPanelVisesIMeny
         prosessPanelKode={ProsessStegCode.KLAGE_RESULTAT}
         prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.ResultatKlage' })}
