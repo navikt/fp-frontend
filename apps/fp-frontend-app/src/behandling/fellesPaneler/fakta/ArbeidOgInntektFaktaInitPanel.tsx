@@ -16,7 +16,6 @@ import type {
 import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
-import type { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING];
@@ -25,10 +24,7 @@ interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
-export const ArbeidOgInntektFaktaInitPanel = ({
-  arbeidsgiverOpplysningerPerId,
-  ...props
-}: Props & FaktaPanelInitProps) => {
+export const ArbeidOgInntektFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props) => {
   const intl = useIntl();
 
   const { behandling, hentOgSettBehandling, rettigheter } = use(BehandlingDataContext);
@@ -69,7 +65,6 @@ export const ArbeidOgInntektFaktaInitPanel = ({
 
   return (
     <FaktaDefaultInitPanel
-      {...props}
       standardPanelProps={standardPanelProps}
       faktaPanelKode={FaktaPanelCode.ARBEID_OG_INNTEKT}
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.ArbeidOgInntekt' })}

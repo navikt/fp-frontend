@@ -1,8 +1,10 @@
+import { useState } from 'react';
+
 import type { ArbeidsgiverOpplysningerPerId, Personoversikt } from '@navikt/fp-types';
 
-import { BehandlingContainer } from '../felles/BehandlingContainer';
-import type { FaktaPanelInitProps } from '../felles/typer/faktaPanelInitProps';
-import type { ProsessPanelExtraInitProps, ProsessPanelInitProps } from '../felles/typer/prosessPanelInitProps';
+import { FaktaMeny } from '../felles/fakta/FaktaMeny';
+import type { FaktaPanelInfo } from '../felles/fakta/useFaktaMenyData';
+import { ProsessMeny } from '../felles/prosess/ProsessMeny';
 import { AdopsjonsvilkaretFaktaInitPanel } from '../fellesPaneler/fakta/AdopsjonsvilkaretFaktaInitPanel';
 import { FodselvilkaretFaktaInitPanel } from '../fellesPaneler/fakta/FodselvilkaretFaktaInitPanel';
 import { MedlemskapsvilkaretFaktaInitPanel } from '../fellesPaneler/fakta/MedlemskapsvilkaretFaktaInitPanel';
@@ -19,50 +21,41 @@ import { SoknadsfristEsProsessStegInitPanel } from './prosessPaneler/Soknadsfris
 import { VedtakEsProsessStegInitPanel } from './prosessPaneler/VedtakEsProsessStegInitPanel';
 
 interface Props {
-  valgtProsessSteg?: string;
-  valgtFaktaSteg?: string;
+  valgtProsessSteg: string | undefined;
+  valgtFaktaSteg: string | undefined;
   arbeidsgivere: ArbeidsgiverOpplysningerPerId;
   personoversikt: Personoversikt;
 }
 
 const EngangsstonadPaneler = ({ valgtProsessSteg, valgtFaktaSteg, arbeidsgivere, personoversikt }: Props) => {
+  const [åpentFaktaPanelInfo, setÅpentFaktaPanelInfo] = useState<FaktaPanelInfo>();
   const emptyArbeidsgiverOpplysningerPerId = {};
 
-  const hentProsessPaneler = (props: ProsessPanelInitProps, ekstraProps: ProsessPanelExtraInitProps) => (
-    <>
-      <VarselProsessStegInitPanel {...props} />
-      <OpplysningspliktProsessStegInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-      <InngangsvilkarEsProsessStegInitPanel {...props} apentFaktaPanelInfo={ekstraProps.apentFaktaPanelInfo} />
-      <SoknadsfristEsProsessStegInitPanel {...props} />
-      <BeregningEsProsessStegInitPanel {...props} />
-      <SimuleringProsessStegInitPanel
-        {...props}
-        menyData={ekstraProps.allMenyData}
-        arbeidsgiverOpplysningerPerId={emptyArbeidsgiverOpplysningerPerId}
-      />
-      <VedtakEsProsessStegInitPanel {...props} />
-    </>
-  );
-
-  const hentFaktaPaneler = (props: FaktaPanelInitProps) => (
-    <>
-      <SakenFaktaInitPanel {...props} />
-      <YtelserFaktaInitPanel {...props} />
-      <VergeFaktaInitPanel {...props} />
-      <OmsorgOgForeldreansvarFaktaInitPanel {...props} personoversikt={personoversikt} />
-      <AdopsjonsvilkaretFaktaInitPanel {...props} />
-      <FodselvilkaretFaktaInitPanel {...props} />
-      <MedlemskapsvilkaretFaktaInitPanel {...props} />
-    </>
-  );
-
   return (
-    <BehandlingContainer
-      valgtProsessSteg={valgtProsessSteg}
-      valgtFaktaSteg={valgtFaktaSteg}
-      hentFaktaPaneler={hentFaktaPaneler}
-      hentProsessPaneler={hentProsessPaneler}
-    />
+    <>
+      <ProsessMeny valgtProsessSteg={valgtProsessSteg} valgtFaktaSteg={valgtFaktaSteg}>
+        <VarselProsessStegInitPanel />
+        <OpplysningspliktProsessStegInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+        <InngangsvilkarEsProsessStegInitPanel åpentFaktaPanelInfo={åpentFaktaPanelInfo} />
+        <SoknadsfristEsProsessStegInitPanel />
+        <BeregningEsProsessStegInitPanel />
+        <SimuleringProsessStegInitPanel arbeidsgiverOpplysningerPerId={emptyArbeidsgiverOpplysningerPerId} />
+        <VedtakEsProsessStegInitPanel />
+      </ProsessMeny>
+      <FaktaMeny
+        valgtFaktaSteg={valgtFaktaSteg}
+        valgtProsessSteg={valgtProsessSteg}
+        setÅpentFaktaPanelInfo={setÅpentFaktaPanelInfo}
+      >
+        <SakenFaktaInitPanel />
+        <YtelserFaktaInitPanel />
+        <VergeFaktaInitPanel />
+        <OmsorgOgForeldreansvarFaktaInitPanel personoversikt={personoversikt} />
+        <AdopsjonsvilkaretFaktaInitPanel />
+        <FodselvilkaretFaktaInitPanel />
+        <MedlemskapsvilkaretFaktaInitPanel />
+      </FaktaMeny>
+    </>
   );
 };
 

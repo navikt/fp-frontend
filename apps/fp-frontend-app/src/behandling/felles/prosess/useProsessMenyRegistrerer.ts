@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import { usePrevious } from '@navikt/ft-ui-komponenter';
-
 import type { ProsessPanelMenyData } from '../typer/prosessPanelMenyData';
 
 const DEFAULT_PANEL_VALGT = 'default';
@@ -17,16 +15,9 @@ export const useProsessMenyRegistrerer = (
   valgtProsessSteg?: string,
 ) => {
   const [erPanelValgt, setPanelValgt] = useState(false);
-  useEffect(() => {
-    registrerProsessPanel({
-      id,
-    });
-  }, []);
 
   const erAktiv =
     skalVisesImeny && (valgtProsessSteg === id || (skalMarkeresSomAktiv && valgtProsessSteg === DEFAULT_PANEL_VALGT));
-
-  const forrigeSkalVisesIMeny = usePrevious(skalVisesImeny);
 
   useEffect(() => {
     if (skalVisesImeny) {
@@ -37,13 +28,9 @@ export const useProsessMenyRegistrerer = (
         harApentAksjonspunkt,
         status,
       });
-    } else if (!skalVisesImeny && forrigeSkalVisesIMeny) {
-      registrerProsessPanel({
-        id,
-      });
     }
     setPanelValgt(erAktiv);
-  }, [skalVisesImeny, forrigeSkalVisesIMeny, erAktiv, harApentAksjonspunkt, status]);
+  }, [skalVisesImeny, erAktiv, harApentAksjonspunkt, status]);
 
   return skalVisesImeny && erPanelValgt;
 };

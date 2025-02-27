@@ -11,17 +11,13 @@ import type { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
-import type { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 type Props = {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 
-export const InntektsmeldingerFaktaInitPanel = ({
-  arbeidsgiverOpplysningerPerId,
-  ...props
-}: FaktaPanelInitProps & Props) => {
+export const InntektsmeldingerFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props) => {
   const intl = useIntl();
 
   const { behandling, alleBehandlinger } = use(BehandlingDataContext);
@@ -34,7 +30,6 @@ export const InntektsmeldingerFaktaInitPanel = ({
 
   return (
     <FaktaDefaultInitPanel
-      {...props}
       standardPanelProps={standardPanelProps}
       faktaPanelKode={FaktaPanelCode.INNTEKTSMELDINGER}
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Inntektsmelding' })}

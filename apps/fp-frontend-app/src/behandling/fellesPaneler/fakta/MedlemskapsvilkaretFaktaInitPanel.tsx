@@ -11,7 +11,6 @@ import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
-import type { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER: AksjonspunktKode[] = [
@@ -19,7 +18,7 @@ const AKSJONSPUNKT_KODER: AksjonspunktKode[] = [
   AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
 ];
 
-export const MedlemskapsvilkaretFaktaInitPanel = (props: FaktaPanelInitProps) => {
+export const MedlemskapsvilkaretFaktaInitPanel = () => {
   const intl = useIntl();
 
   const { behandling } = use(BehandlingDataContext);
@@ -33,7 +32,6 @@ export const MedlemskapsvilkaretFaktaInitPanel = (props: FaktaPanelInitProps) =>
 
   return (
     <FaktaDefaultInitPanel
-      {...props}
       standardPanelProps={standardPanelProps}
       faktaPanelKode={FaktaPanelCode.MEDLEMSKAPSVILKARET}
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Medlemskap' })}

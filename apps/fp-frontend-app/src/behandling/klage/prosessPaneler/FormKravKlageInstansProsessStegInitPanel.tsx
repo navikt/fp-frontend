@@ -11,12 +11,11 @@ import { type FormkravMellomlagretDataType, FormkravProsessIndex } from '@navikt
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
-import type { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_FORMKRAV_NK];
 
-export const FormKravKlageInstansProsessStegInitPanel = (props: ProsessPanelInitProps) => {
+export const FormKravKlageInstansProsessStegInitPanel = () => {
   const intl = useIntl();
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
 
@@ -43,7 +42,6 @@ export const FormKravKlageInstansProsessStegInitPanel = (props: ProsessPanelInit
 
   return (
     <ProsessDefaultInitPanel
-      {...props}
       standardPanelProps={standardPanelProps}
       prosessPanelKode={ProsessStegCode.FORMKRAV_KLAGE_NAV_KLAGEINSTANS}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.FormkravKlageKA' })}

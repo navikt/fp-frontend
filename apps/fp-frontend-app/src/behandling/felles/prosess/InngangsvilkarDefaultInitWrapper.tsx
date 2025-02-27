@@ -10,8 +10,8 @@ import type { Behandling } from '@navikt/fp-types';
 
 import type { InngangsvilkarPanelData } from '../typer/inngangsvilkarPanelData';
 import type { InngangsvilkarPanelInitProps } from '../typer/inngangsvilkarPanelInitProps';
-import type { ProsessPanelInitProps } from '../typer/prosessPanelInitProps';
 import { BehandlingDataContext } from '../utils/behandlingDataContext';
+import { ProsessMenyContext } from './ProsessMeny';
 import { ProsessPanelWrapper } from './ProsessPanelWrapper';
 import { useProsessMenyRegistrerer } from './useProsessMenyRegistrerer';
 
@@ -49,14 +49,10 @@ interface Props {
   rightPanels?: (props: InngangsvilkarPanelInitProps) => ReactElement;
 }
 
-export const InngangsvilkarDefaultInitWrapper = ({
-  valgtProsessSteg,
-  registrerProsessPanel,
-  apentFaktaPanelInfo,
-  leftPanels,
-  rightPanels,
-}: Props & ProsessPanelInitProps) => {
+export const InngangsvilkarDefaultInitWrapper = ({ apentFaktaPanelInfo, leftPanels, rightPanels }: Props) => {
   const intl = useIntl();
+
+  const { registrerProsessPanel, valgtProsessSteg } = use(ProsessMenyContext);
 
   const { behandling, oppdaterProsessStegOgFaktaPanelIUrl } = use(BehandlingDataContext);
 
