@@ -20,8 +20,9 @@ interface Props {
 
 export const ProsessMeny = ({ valgtProsessSteg, valgtFaktaSteg, children }: Props) => {
   const { oppdaterProsessStegOgFaktaPanelIUrl } = use(BehandlingDataContext);
-  const { prosessPanelMenyData, settProsessPanelMenyData } = useProsessMenyData();
   const { behandling } = use(BehandlingDataContext);
+
+  const { prosessPanelMenyData, settProsessPanelMenyData } = useProsessMenyData();
 
   const oppdaterProsessPanelIUrl = (index: number) => {
     const panel = prosessPanelMenyData[index];

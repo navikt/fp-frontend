@@ -1,4 +1,4 @@
-import { use, useEffect, useState } from 'react';
+import { use, useEffect } from 'react';
 
 import { FaktaMenyContext } from './FaktaMeny';
 
@@ -12,8 +12,6 @@ export const useFaktaMenyRegistrerer = (
 ) => {
   const { valgtFaktaSteg, settFaktaPanelMenyData } = use(FaktaMenyContext);
 
-  const [erPanelValgt, setPanelValgt] = useState(false);
-
   const erAktiv =
     skalVisesImeny && (valgtFaktaSteg === id || (harApneAksjonspunkter && valgtFaktaSteg === DEFAULT_PANEL_VALGT));
 
@@ -26,8 +24,7 @@ export const useFaktaMenyRegistrerer = (
         harApneAksjonspunkter,
       });
     }
-    setPanelValgt(erAktiv);
   }, [skalVisesImeny, erAktiv, harApneAksjonspunkter]);
 
-  return skalVisesImeny && erPanelValgt;
+  return skalVisesImeny && erAktiv;
 };

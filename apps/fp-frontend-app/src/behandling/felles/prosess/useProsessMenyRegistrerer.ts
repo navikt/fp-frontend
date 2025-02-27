@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import type { ProsessPanelMenyData } from '../typer/prosessPanelMenyData';
 
@@ -14,8 +14,6 @@ export const useProsessMenyRegistrerer = (
   skalMarkeresSomAktiv: boolean,
   valgtProsessSteg?: string,
 ) => {
-  const [erPanelValgt, setPanelValgt] = useState(false);
-
   const erAktiv =
     skalVisesImeny && (valgtProsessSteg === id || (skalMarkeresSomAktiv && valgtProsessSteg === DEFAULT_PANEL_VALGT));
 
@@ -29,8 +27,7 @@ export const useProsessMenyRegistrerer = (
         status,
       });
     }
-    setPanelValgt(erAktiv);
   }, [skalVisesImeny, erAktiv, harApentAksjonspunkt, status]);
 
-  return skalVisesImeny && erPanelValgt;
+  return skalVisesImeny && erAktiv;
 };
