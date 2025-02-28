@@ -5,7 +5,7 @@ import { Box, ExpansionCard, HStack, VStack } from '@navikt/ds-react';
 import { FaktaKilde, getLabelForFaktaKilde } from '@navikt/fp-fakta-felles';
 
 interface Props {
-  kilde?: FaktaKilde;
+  kilde: FaktaKilde;
   tittel: string;
   defaultOpen?: boolean;
 }
@@ -17,7 +17,7 @@ export const EkspansjonsKort = ({ tittel, kilde, defaultOpen, children }: PropsW
         <HStack gap="4" wrap={false}>
           <div>
             <ExpansionCard.Title size="small">{tittel}</ExpansionCard.Title>
-            {kilde != null && <ExpansionCard.Description>{getLabelForFaktaKilde(kilde)}</ExpansionCard.Description>}
+            {kilde !== null && <ExpansionCard.Description>{getLabelForFaktaKilde(kilde)}</ExpansionCard.Description>}
           </div>
         </HStack>
       </ExpansionCard.Header>

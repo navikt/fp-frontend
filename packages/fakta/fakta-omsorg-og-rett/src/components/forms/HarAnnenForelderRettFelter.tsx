@@ -31,7 +31,7 @@ export const HarAnnenForelderRettFelter = ({ readOnly, avklareUforetrygd }: Prop
             readOnly={readOnly}
           />
 
-          {(harAnnenForelderRettEØS === false) && avklareUforetrygd && (
+          {harAnnenForelderRettEØS === false && avklareUforetrygd && (
             <TrueFalseInput
               name="mottarAnnenForelderUforetrygd"
               label={<FormattedMessage id="HarAnnenForelderRettFelter.MottarUforetrygd" />}

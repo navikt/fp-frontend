@@ -4,12 +4,11 @@ export type OmsorgOgRett = {
   søknad: Søknad;
   registerdata: RegisterData;
   manuellBehandlingResultat: ManuellBehandlingResultat;
-  relasjonsRolleType: RelasjonsRolleType
+  relasjonsRolleType: RelasjonsRolleType;
 };
 
 export type Søknad = {
   søkerHarAleneomsorg: boolean;
-  annenpartNavn: string;
   annenpartIdent: string;
   annenpartBostedsland: string;
   annenpartRettighet: Rettighet;
