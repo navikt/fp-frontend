@@ -2,14 +2,12 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useIntl } from 'react-intl';
 
 import { Box, Checkbox, Heading, HStack, VStack } from '@navikt/ds-react';
-import { useStorageToggle } from '@navikt/ft-hooks';
 import { type Location } from 'history';
 
 import { getKodeverknavnFn } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, AlleKodeverkTilbakekreving, Historikkinnslag } from '@navikt/fp-types';
 
 import { sortAndTagTilbakekreving } from '../utils/historikkUtils';
-import { EnvironmentWrapper } from './EnvironmentWrapper';
 import { HistorikkInnslag } from './HistorikkInnslag/HistorikkInnslag';
 
 import styles from './historikk.module.css';
@@ -41,7 +39,6 @@ export const Historikk = ({
   createLocationForSkjermlenke,
 }: Props) => {
   const intl = useIntl();
-  const isDevMode = useStorageToggle({ key: 'devmode' });
 
   const [skalSortertePaValgtBehandling, setSkalSortertePaValgtBehandling] = useState(false);
 
@@ -103,21 +100,16 @@ export const Historikk = ({
               return null;
             }
             return (
-              <EnvironmentWrapper
-                shouldRender={isDevMode}
+              <HistorikkInnslag
                 key={historikkinnslag.opprettetTidspunkt}
-                historikkinnslag={historikkinnslag}
-              >
-                <HistorikkInnslag
-                  saksnummer={saksnummer}
-                  historikkInnslag={historikkinnslag}
-                  createLocationForSkjermlenke={createLocationForSkjermlenke}
-                  getKodeverknavn={getKodeverknavn}
-                  behandlingLocation={
-                    historikkinnslag.behandlingUuid ? getBehandlingLocation(historikkinnslag.behandlingUuid) : undefined
-                  }
-                />
-              </EnvironmentWrapper>
+                saksnummer={saksnummer}
+                historikkInnslag={historikkinnslag}
+                createLocationForSkjermlenke={createLocationForSkjermlenke}
+                getKodeverknavn={getKodeverknavn}
+                behandlingLocation={
+                  historikkinnslag.behandlingUuid ? getBehandlingLocation(historikkinnslag.behandlingUuid) : undefined
+                }
+              />
             );
           })}
         </VStack>
