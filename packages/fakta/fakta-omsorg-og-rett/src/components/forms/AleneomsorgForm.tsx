@@ -79,9 +79,7 @@ export const AleneomsorgForm = ({ omsorgOgRett, aksjonspunkt, submittable }: Pro
             readOnly={readOnly}
             trueLabel={<FormattedMessage id="AleneomsorgForm.HarAleneomsorg" />}
             falseLabel={<FormattedMessage id="AleneomsorgForm.HarIkkeAleneomsorg" values={{ b: bTag }} />}
-            falseContent={
-              <HarAnnenForelderRettFelter readOnly={readOnly} avklareUforetrygd={skalAvklareUforetrygd} />
-            }
+            falseContent={<HarAnnenForelderRettFelter readOnly={readOnly} avklareUforetrygd={skalAvklareUforetrygd} />}
           />
 
           <FaktaBegrunnelseTextField

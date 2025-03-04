@@ -33,8 +33,9 @@ export const OmsorgOgRettInfoPanel = ({ personoversikt, omsorgOgRett, submittabl
       )}
 
       <OpplysningerFraSoknad omsorgOgRett={omsorgOgRett} alleKodeverk={alleKodeverk} />
-      {personoversikt.bruker?.adresser &&
-        <OpplysningerOmAdresser alleKodeverk={alleKodeverk} personoversikt={personoversikt} />}
+      {personoversikt.bruker?.adresser && (
+        <OpplysningerOmAdresser alleKodeverk={alleKodeverk} personoversikt={personoversikt} />
+      )}
       {omsorgOgRett.registerdata && <AnnenPartsYtelser omsorgOgRett={omsorgOgRett} />}
 
       {harAPAleneomsorg && (
@@ -51,19 +52,15 @@ export const OmsorgOgRettInfoPanel = ({ personoversikt, omsorgOgRett, submittabl
           aksjonspunkt={aksjonspunkterForPanel[0]}
         />
       )}
-      {!harAPAleneomsorg && !harAPAnnenForelderRett && omsorgOgRett.manuellBehandlingResultat
-        && søkerHarAleneomsorgResultat !== null && (
-        <AleneomsorgForm
-          omsorgOgRett={omsorgOgRett}
-          submittable={false}
-        />
-      )}
-      {!harAPAleneomsorg && !harAPAnnenForelderRett && omsorgOgRett.manuellBehandlingResultat
-        && søkerHarAleneomsorgResultat === null && (
-          <HarAnnenForelderRettForm
-            omsorgOgRett={omsorgOgRett}
-            submittable={false}
-          />
+      {!harAPAleneomsorg &&
+        !harAPAnnenForelderRett &&
+        omsorgOgRett.manuellBehandlingResultat &&
+        søkerHarAleneomsorgResultat !== null && <AleneomsorgForm omsorgOgRett={omsorgOgRett} submittable={false} />}
+      {!harAPAleneomsorg &&
+        !harAPAnnenForelderRett &&
+        omsorgOgRett.manuellBehandlingResultat &&
+        søkerHarAleneomsorgResultat === null && (
+          <HarAnnenForelderRettForm omsorgOgRett={omsorgOgRett} submittable={false} />
         )}
     </VStack>
   );

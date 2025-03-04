@@ -2,21 +2,17 @@ import { useIntl } from 'react-intl';
 
 import { AvsnittSkiller } from '@navikt/ft-ui-komponenter';
 
-import { erPersonAdresserLike, FaktaKilde, Personopplysninger } from '@navikt/fp-fakta-felles';
+import { FaktaKilde, Personopplysninger } from '@navikt/fp-fakta-felles';
 import { type AlleKodeverk, type Personoversikt } from '@navikt/fp-types';
 
 import { EkspansjonsKort } from '../components/ekspansjonsKort/EkspansjonsKort.tsx';
-
 
 interface Props {
   personoversikt: Personoversikt;
   alleKodeverk: AlleKodeverk;
 }
 
-export const OpplysningerOmAdresser = ({
-                                         personoversikt: { bruker, annenPart, barn },
-                                         alleKodeverk,
-                                       }: Props) => {
+export const OpplysningerOmAdresser = ({ personoversikt: { bruker, annenPart, barn }, alleKodeverk }: Props) => {
   const intl = useIntl();
 
   const annenpartAdresser = annenPart?.adresser ?? [];
@@ -49,11 +45,20 @@ export const OpplysningerOmAdresser = ({
           alleKodeverk={alleKodeverk}
           adresser={annenPart.adresser}
           rolle="ANNEN_PART"
-          harSammeAdresser={erPersonAdresserLike(bruker.adresser, annenPart.adresser)}
         />
       )}
       {barn && <AvsnittSkiller dividerParagraf />}
-      {barn && barn.map(b => <Personopplysninger key={b.aktoerId} {...b} alleKodeverk={alleKodeverk} rolle="BARN" />)}
+      {barn &&
+        barn.map(b => (
+          <Personopplysninger
+            key={b.aktoerId}
+            showIcon={false}
+            navn={b.navn}
+            alleKodeverk={alleKodeverk}
+            adresser={b.adresser}
+            rolle="BARN"
+          />
+        ))}
     </EkspansjonsKort>
   );
 };

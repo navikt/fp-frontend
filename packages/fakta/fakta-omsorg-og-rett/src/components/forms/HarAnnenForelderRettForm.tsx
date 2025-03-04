@@ -64,10 +64,7 @@ export const HarAnnenForelderRettForm = ({ omsorgOgRett, aksjonspunkt, submittab
         merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.AVKLAR_ANNEN_FORELDER_RETT]}
       >
         <VStack gap="6">
-          <HarAnnenForelderRettFelter
-            readOnly={readOnly}
-            avklareUforetrygd={skalAvklareUforetrygd}
-          />
+          <HarAnnenForelderRettFelter readOnly={readOnly} avklareUforetrygd={skalAvklareUforetrygd} />
 
           <FaktaBegrunnelseTextField
             isSubmittable={submittable}
