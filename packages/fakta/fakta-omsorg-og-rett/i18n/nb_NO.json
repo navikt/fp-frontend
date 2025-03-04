@@ -30,11 +30,11 @@
   "OpplysningerFraSøknad.HarUføretrygd": "Har den andre forelderen uføretrygd?",
   "OpplysningerFraSøknad.HarUføretrygd.Svar": "{uføretrygd, select, true {Ja} other {Nei}}",
 
-  "InformasjonOmAnnenPart.HarAnnenPartUføretrygd": "Har annen part uføretrygd? (hentet fra pesys)",
-  "InformasjonOmAnnenPart.HarAnnenPartUføretrygd.Svar": "{uføretrygd, select, true {Ja} other {Nei}}",
-  "InformasjonOmAnnenPart.Foreldrepenger": "Har annen part foreldrepenger?",
-  "InformasjonOmAnnenPart.Foreldrepenger.Svar": "{foreldrepenger, select, true {Ja} other {Nei}}",
-  "InformasjonOmAnnenPart.Engangsstønad": "Har annen part engangsstønad?",
-  "InformasjonOmAnnenPart.Engangsstønad.Svar": "{engangsstønad, select, true {Ja} other {Nei}}"
+  "AnnenPartsYtelser.HarAnnenPartUføretrygd": "Har annen part uføretrygd? (hentet fra pesys)",
+  "AnnenPartsYtelser.HarAnnenPartUføretrygd.Svar": "{uføretrygd, select, true {Ja} other {Nei}}",
+  "AnnenPartsYtelser.Foreldrepenger": "Er annen part innvilget foreldrepenger?",
+  "AnnenPartsYtelser.Foreldrepenger.Svar": "{foreldrepenger, select, true {Ja} other {Nei}}",
+  "AnnenPartsYtelser.Engangsstønad": "Er annen part innvilget engangsstønad?",
+  "AnnenPartsYtelser.Engangsstønad.Svar": "{engangsstønad, select, true {Ja} other {Nei}}"
 
 }

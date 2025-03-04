@@ -7,7 +7,7 @@ import { AksjonspunktKode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { type OmsorgOgRettProps } from '../OmsorgOgRettFaktaIndex';
-import { InformasjonOmAnnenPart } from '../opplysningskort/InformasjonOmAnnenPart.tsx';
+import { AnnenPartsYtelser } from '../opplysningskort/AnnenPartsYtelser.tsx';
 import { OpplysningerFraSoknad } from '../opplysningskort/OpplysningerFraSoknad.tsx';
 import { OpplysningerOmAdresser } from '../opplysningskort/OpplysningerOmAdresser.tsx';
 import { AleneomsorgForm } from './forms/AleneomsorgForm';
@@ -32,8 +32,8 @@ export const OmsorgOgRettInfoPanel = ({ personoversikt, omsorgOgRett, submittabl
       )}
 
       <OpplysningerFraSoknad omsorgOgRett={omsorgOgRett} alleKodeverk={alleKodeverk} />
-      {omsorgOgRett.registerdata && <InformasjonOmAnnenPart omsorgOgRett={omsorgOgRett} />}
       {personoversikt.bruker?.adresser && <OpplysningerOmAdresser alleKodeverk={alleKodeverk} personoversikt={personoversikt} />}
+      {omsorgOgRett.registerdata && <AnnenPartsYtelser omsorgOgRett={omsorgOgRett} />}
 
       {!harAPAleneomsorg && !harAPAnnenForelderRett && !harÅpneAksjonspunkter && omsorgOgRett.manuellBehandlingResultat && (
         <AleneomsorgForm

@@ -8,7 +8,7 @@ interface Props {
   omsorgOgRett: OmsorgOgRett;
 }
 
-export const InformasjonOmAnnenPart = ({ omsorgOgRett }: Props) => {
+export const AnnenPartsYtelser = ({ omsorgOgRett }: Props) => {
   const { harAnnenpartUføretrygd, harAnnenpartForeldrepenger, harAnnenpartEngangsstønad } = omsorgOgRett.registerdata;
 
   return (
@@ -28,13 +28,13 @@ export const InformasjonOmAnnenPart = ({ omsorgOgRett }: Props) => {
               <>
                 <Table.DataCell>
                   <Label size="small">
-                    <FormattedMessage id="InformasjonOmAnnenPart.HarAnnenPartUføretrygd" />
+                    <FormattedMessage id="AnnenPartsYtelser.HarAnnenPartUføretrygd" />
                   </Label>
                 </Table.DataCell>
                 <Table.DataCell>
                   <BodyShort size="small">
                     <FormattedMessage
-                      id="InformasjonOmAnnenPart.HarAnnenPartUføretrygd.Svar"
+                      id="AnnenPartsYtelser.HarAnnenPartUføretrygd.Svar"
                       values={{ uføretrygd: harAnnenpartUføretrygd }}
                     />
                   </BodyShort>
@@ -47,13 +47,13 @@ export const InformasjonOmAnnenPart = ({ omsorgOgRett }: Props) => {
               <>
                 <Table.DataCell>
                   <Label size="small">
-                    <FormattedMessage id="InformasjonOmAnnenPart.Foreldrepenger" />
+                    <FormattedMessage id="AnnenPartsYtelser.Foreldrepenger" />
                   </Label>
                 </Table.DataCell>
                 <Table.DataCell>
                   <BodyShort size="small">
                     <FormattedMessage
-                      id="InformasjonOmAnnenPart.Foreldrepenger.Svar"
+                      id="AnnenPartsYtelser.Foreldrepenger.Svar"
                       values={{ foreldrepenger: harAnnenpartForeldrepenger }}
                     />
                   </BodyShort>
@@ -66,13 +66,13 @@ export const InformasjonOmAnnenPart = ({ omsorgOgRett }: Props) => {
               <>
                 <Table.DataCell>
                   <Label size="small">
-                    <FormattedMessage id="InformasjonOmAnnenPart.Engangsstønad" />
+                    <FormattedMessage id="AnnenPartsYtelser.Engangsstønad" />
                   </Label>
                 </Table.DataCell>
                 <Table.DataCell>
                   <BodyShort size="small">
                     <FormattedMessage
-                      id="InformasjonOmAnnenPart.Engangsstønad.Svar"
+                      id="AnnenPartsYtelser.Engangsstønad.Svar"
                       values={{ engangsstønad: harAnnenpartEngangsstønad }}
                     />
                   </BodyShort>
