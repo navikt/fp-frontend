@@ -39,7 +39,7 @@ export const AleneomsorgForm = ({ omsorgOgRett, aksjonspunkt, submittable }: Pro
 
   const formMethods = useForm<FormValues>({
     defaultValues: formData || {
-      harAleneomsorg: manuellBehandlingResultat?.søkerHarAleneomsorg ?? false,
+      harAleneomsorg: manuellBehandlingResultat?.søkerHarAleneomsorg,
       harAnnenForelderRett: harRettNorge,
       mottarAnnenForelderUforetrygd: harUføretrygd,
       harAnnenForelderRettEØS: harRettEØS,

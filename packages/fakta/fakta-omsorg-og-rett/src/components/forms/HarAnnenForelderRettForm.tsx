@@ -22,7 +22,7 @@ export type FormValues = {
 
 interface Props {
   omsorgOgRett: OmsorgOgRett;
-  aksjonspunkt: Aksjonspunkt;
+  aksjonspunkt?: Aksjonspunkt;
   submittable: boolean;
 }
 
@@ -32,6 +32,7 @@ export const HarAnnenForelderRettForm = ({ omsorgOgRett, aksjonspunkt, submittab
   const { harRettNorge, harRettEØS, harUføretrygd } = omsorgOgRett.manuellBehandlingResultat?.annenpartRettighet ?? {};
 
   const { formData, setFormData } = useFormData<FormValues>();
+  const readOnly = isReadOnly || aksjonspunkt === undefined;
 
   const formMethods = useForm<FormValues>({
     defaultValues: formData || {
@@ -64,13 +65,13 @@ export const HarAnnenForelderRettForm = ({ omsorgOgRett, aksjonspunkt, submittab
       >
         <VStack gap="6">
           <HarAnnenForelderRettFelter
-            readOnly={isReadOnly}
+            readOnly={readOnly}
             avklareUforetrygd={skalAvklareUforetrygd}
           />
 
           <FaktaBegrunnelseTextField
             isSubmittable={submittable}
-            isReadOnly={isReadOnly}
+            isReadOnly={readOnly}
             hasBegrunnelse={true}
             hasVurderingText
           />
@@ -78,7 +79,7 @@ export const HarAnnenForelderRettForm = ({ omsorgOgRett, aksjonspunkt, submittab
           <div>
             <FaktaSubmitButton
               isSubmittable={submittable}
-              isReadOnly={isReadOnly}
+              isReadOnly={readOnly}
               isSubmitting={formMethods.formState.isSubmitting}
               isDirty={formMethods.formState.isDirty}
             />

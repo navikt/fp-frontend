@@ -22,6 +22,7 @@ export const OmsorgOgRettInfoPanel = ({ personoversikt, omsorgOgRett, submittabl
   );
   const harAPAnnenForelderRett = hasAksjonspunkt(AksjonspunktKode.AVKLAR_ANNEN_FORELDER_RETT, aksjonspunkterForPanel);
 
+  const søkerHarAleneomsorgResultat = omsorgOgRett.manuellBehandlingResultat?.søkerHarAleneomsorg;
   return (
     <VStack gap="8">
       {!isReadOnly && harÅpneAksjonspunkter && (
@@ -32,15 +33,10 @@ export const OmsorgOgRettInfoPanel = ({ personoversikt, omsorgOgRett, submittabl
       )}
 
       <OpplysningerFraSoknad omsorgOgRett={omsorgOgRett} alleKodeverk={alleKodeverk} />
-      {personoversikt.bruker?.adresser && <OpplysningerOmAdresser alleKodeverk={alleKodeverk} personoversikt={personoversikt} />}
+      {personoversikt.bruker?.adresser &&
+        <OpplysningerOmAdresser alleKodeverk={alleKodeverk} personoversikt={personoversikt} />}
       {omsorgOgRett.registerdata && <AnnenPartsYtelser omsorgOgRett={omsorgOgRett} />}
 
-      {!harAPAleneomsorg && !harAPAnnenForelderRett && !harÅpneAksjonspunkter && omsorgOgRett.manuellBehandlingResultat && (
-        <AleneomsorgForm
-          omsorgOgRett={omsorgOgRett}
-          submittable={false}
-        />
-      )}
       {harAPAleneomsorg && (
         <AleneomsorgForm
           omsorgOgRett={omsorgOgRett}
@@ -48,7 +44,6 @@ export const OmsorgOgRettInfoPanel = ({ personoversikt, omsorgOgRett, submittabl
           aksjonspunkt={aksjonspunkterForPanel[0]}
         />
       )}
-
       {harAPAnnenForelderRett && (
         <HarAnnenForelderRettForm
           omsorgOgRett={omsorgOgRett}
@@ -56,6 +51,20 @@ export const OmsorgOgRettInfoPanel = ({ personoversikt, omsorgOgRett, submittabl
           aksjonspunkt={aksjonspunkterForPanel[0]}
         />
       )}
+      {!harAPAleneomsorg && !harAPAnnenForelderRett && omsorgOgRett.manuellBehandlingResultat
+        && søkerHarAleneomsorgResultat !== null && (
+        <AleneomsorgForm
+          omsorgOgRett={omsorgOgRett}
+          submittable={false}
+        />
+      )}
+      {!harAPAleneomsorg && !harAPAnnenForelderRett && omsorgOgRett.manuellBehandlingResultat
+        && søkerHarAleneomsorgResultat === null && (
+          <HarAnnenForelderRettForm
+            omsorgOgRett={omsorgOgRett}
+            submittable={false}
+          />
+        )}
     </VStack>
   );
 };

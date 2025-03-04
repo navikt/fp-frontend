@@ -102,7 +102,7 @@ export const OpplysningerFraSoknad = ({ omsorgOgRett }: Props) => {
             )}
           </Table.Row>
           <Table.Row>
-            {harRettNorge && (
+            {harRettNorge !== undefined && (
               <>
                 <Table.DataCell>
                   <Label size="small">
@@ -122,7 +122,7 @@ export const OpplysningerFraSoknad = ({ omsorgOgRett }: Props) => {
             )}
           </Table.Row>
           <Table.Row>
-            {harOppholdEØS && (
+            {harOppholdEØS !== undefined && (
               <>
                 <Table.DataCell textSize="small">
                   <Label size="small">
@@ -142,7 +142,7 @@ export const OpplysningerFraSoknad = ({ omsorgOgRett }: Props) => {
             )}
           </Table.Row>
           <Table.Row>
-            {harRettEØS && (
+            {harRettEØS !== undefined && (
               <>
                 <Table.DataCell>
                   <Label size="small">
@@ -159,7 +159,7 @@ export const OpplysningerFraSoknad = ({ omsorgOgRett }: Props) => {
             )}
           </Table.Row>
           <Table.Row>
-            {harUføretrygd && (
+            {harUføretrygd !== undefined && (
               <>
                 <Table.DataCell>
                   <Label size="small">
