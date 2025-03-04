@@ -35,6 +35,12 @@ export const OmsorgOgRettInfoPanel = ({ personoversikt, omsorgOgRett, submittabl
       {omsorgOgRett.registerdata && <InformasjonOmAnnenPart omsorgOgRett={omsorgOgRett} />}
       {personoversikt.bruker?.adresser && <OpplysningerOmAdresser alleKodeverk={alleKodeverk} personoversikt={personoversikt} />}
 
+      {!harAPAleneomsorg && !harAPAnnenForelderRett && !harÅpneAksjonspunkter && omsorgOgRett.manuellBehandlingResultat && (
+        <AleneomsorgForm
+          omsorgOgRett={omsorgOgRett}
+          submittable={false}
+        />
+      )}
       {harAPAleneomsorg && (
         <AleneomsorgForm
           omsorgOgRett={omsorgOgRett}

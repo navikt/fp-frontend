@@ -24,7 +24,7 @@ export type FormValues = {
 
 interface Props {
   omsorgOgRett: OmsorgOgRett;
-  aksjonspunkt: Aksjonspunkt;
+  aksjonspunkt?: Aksjonspunkt;
   submittable: boolean;
 }
 
@@ -35,10 +35,11 @@ export const AleneomsorgForm = ({ omsorgOgRett, aksjonspunkt, submittable }: Pro
   const { harRettNorge, harRettEØS, harUføretrygd } = manuellBehandlingResultat?.annenpartRettighet ?? {};
 
   const { formData, setFormData } = useFormData<FormValues>();
+  const readOnly = isReadOnly || aksjonspunkt === undefined;
 
   const formMethods = useForm<FormValues>({
     defaultValues: formData || {
-      harAleneomsorg: manuellBehandlingResultat?.søkerHarAleneomsorg,
+      harAleneomsorg: manuellBehandlingResultat?.søkerHarAleneomsorg ?? false,
       harAnnenForelderRett: harRettNorge,
       mottarAnnenForelderUforetrygd: harUføretrygd,
       harAnnenForelderRettEØS: harRettEØS,
@@ -75,24 +76,24 @@ export const AleneomsorgForm = ({ omsorgOgRett, aksjonspunkt, submittable }: Pro
           <TrueFalseInput
             name="harAleneomsorg"
             label={<FormattedMessage id="AleneomsorgForm.Aleneomsorg" />}
-            readOnly={isReadOnly}
+            readOnly={readOnly}
             trueLabel={<FormattedMessage id="AleneomsorgForm.HarAleneomsorg" />}
             falseLabel={<FormattedMessage id="AleneomsorgForm.HarIkkeAleneomsorg" values={{ b: bTag }} />}
             falseContent={
-              <HarAnnenForelderRettFelter readOnly={isReadOnly} avklareUforetrygd={skalAvklareUforetrygd} />
+              <HarAnnenForelderRettFelter readOnly={readOnly} avklareUforetrygd={skalAvklareUforetrygd} />
             }
           />
 
           <FaktaBegrunnelseTextField
             isSubmittable={submittable}
-            isReadOnly={isReadOnly}
+            isReadOnly={readOnly}
             hasBegrunnelse={true}
             hasVurderingText
           />
           <div>
             <FaktaSubmitButton
               isSubmittable={submittable}
-              isReadOnly={isReadOnly}
+              isReadOnly={readOnly}
               isSubmitting={formMethods.formState.isSubmitting}
               isDirty={formMethods.formState.isDirty}
             />
