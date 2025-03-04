@@ -12,7 +12,6 @@ import type { ArbeidsgiverOpplysningerPerId, Behandling, Personoversikt } from '
 import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
-import type { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const getStatusFromUttakresultat = (behandling: Behandling): string => {
@@ -41,11 +40,7 @@ interface Props {
   personoversikt: Personoversikt;
 }
 
-export const UttakProsessStegInitPanel = ({
-  arbeidsgiverOpplysningerPerId,
-  personoversikt,
-  ...props
-}: Props & ProsessPanelInitProps) => {
+export const UttakProsessStegInitPanel = ({ arbeidsgiverOpplysningerPerId, personoversikt }: Props) => {
   const intl = useIntl();
 
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
@@ -65,7 +60,6 @@ export const UttakProsessStegInitPanel = ({
 
   return (
     <ProsessDefaultInitPanel
-      {...props}
       standardPanelProps={standardPanelProps}
       prosessPanelKode={ProsessStegCode.UTTAK}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Uttak' })}

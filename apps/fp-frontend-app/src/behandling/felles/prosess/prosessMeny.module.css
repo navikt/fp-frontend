@@ -1,3 +1,14 @@
+.container {
+  border-bottom: 1px solid var(--a-gray-300);
+}
+
+.meny {
+  margin-bottom: 23px;
+  margin-left: 25px;
+  margin-right: 25px;
+  margin-top: 15px;
+}
+
 .stepArrowContainer {
   bottom: -24px !important;
   filter: drop-shadow(0 -3px 2px rgba(0, 0, 0, 0.1));

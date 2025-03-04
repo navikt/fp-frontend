@@ -5,10 +5,9 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
 import { useFagsakApi } from '../../data/fagsakApi';
-import { BehandlingContainer } from '../felles/BehandlingContainer';
+import { FaktaMeny } from '../felles/fakta/FaktaMeny';
 import { BehandlingPaVent } from '../felles/modaler/paVent/BehandlingPaVent';
-import type { FaktaPanelInitProps } from '../felles/typer/faktaPanelInitProps';
-import type { ProsessPanelInitProps } from '../felles/typer/prosessPanelInitProps';
+import { ProsessMeny } from '../felles/prosess/ProsessMeny';
 import { BehandlingDataContext } from '../felles/utils/behandlingDataContext';
 import { VergeFaktaInitPanel } from '../fellesPaneler/fakta/VergeFaktaInitPanel';
 import { FeilutbetalingFaktaInitPanel } from './faktaPaneler/FeilutbetalingFaktaInitPanel';
@@ -33,25 +32,6 @@ const TilbakekrevingPaneler = ({ valgtProsessSteg, valgtFaktaSteg }: Props) => {
     return <LoadingPanel />;
   }
 
-  const hentFaktaPaneler = (props: FaktaPanelInitProps) => {
-    return (
-      <>
-        <FeilutbetalingFaktaInitPanel tilbakekrevingKodeverk={tilbakekrevingKodeverk} {...props} />
-        <VergeFaktaInitPanel {...props} />
-      </>
-    );
-  };
-
-  const hentProsessPaneler = (props: ProsessPanelInitProps) => {
-    return (
-      <>
-        <ForeldelseProsessInitPanel {...props} tilbakekrevingKodeverk={tilbakekrevingKodeverk} />
-        <TilbakekrevingProsessInitPanel {...props} tilbakekrevingKodeverk={tilbakekrevingKodeverk} />
-        <VedtakTilbakekrevingProsessInitPanel {...props} tilbakekrevingKodeverk={tilbakekrevingKodeverk} />
-      </>
-    );
-  };
-
   return (
     <>
       <BehandlingPaVent
@@ -61,12 +41,15 @@ const TilbakekrevingPaneler = ({ valgtProsessSteg, valgtFaktaSteg }: Props) => {
         kodeverk={tilbakekrevingKodeverk}
         erTilbakekreving
       />
-      <BehandlingContainer
-        valgtProsessSteg={valgtProsessSteg}
-        valgtFaktaSteg={valgtFaktaSteg}
-        hentFaktaPaneler={hentFaktaPaneler}
-        hentProsessPaneler={hentProsessPaneler}
-      />
+      <ProsessMeny valgtProsessSteg={valgtProsessSteg} valgtFaktaSteg={valgtFaktaSteg}>
+        <ForeldelseProsessInitPanel tilbakekrevingKodeverk={tilbakekrevingKodeverk} />
+        <TilbakekrevingProsessInitPanel tilbakekrevingKodeverk={tilbakekrevingKodeverk} />
+        <VedtakTilbakekrevingProsessInitPanel tilbakekrevingKodeverk={tilbakekrevingKodeverk} />
+      </ProsessMeny>
+      <FaktaMeny valgtFaktaSteg={valgtFaktaSteg} valgtProsessSteg={valgtProsessSteg}>
+        <FeilutbetalingFaktaInitPanel tilbakekrevingKodeverk={tilbakekrevingKodeverk} />
+        <VergeFaktaInitPanel />
+      </FaktaMeny>
     </>
   );
 };

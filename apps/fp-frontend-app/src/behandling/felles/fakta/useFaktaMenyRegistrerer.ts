@@ -1,46 +1,29 @@
-import { useEffect, useState } from 'react';
+import { use, useEffect } from 'react';
 
-import { usePrevious } from '@navikt/ft-ui-komponenter';
-
-import type { FaktaPanelMenyData } from '../typer/faktaPanelMenyData';
+import { FaktaMenyContext } from './FaktaMeny';
 
 const DEFAULT_PANEL_VALGT = 'default';
 
 export const useFaktaMenyRegistrerer = (
-  registrerFaktaPanel: (data: FaktaPanelMenyData) => void,
   id: string,
   tekst: string,
   skalVisesImeny: boolean,
   harApneAksjonspunkter: boolean,
-  valgtFaktaSteg?: string,
 ) => {
-  const [erPanelValgt, setPanelValgt] = useState(false);
-  useEffect(() => {
-    registrerFaktaPanel({
-      id,
-    });
-  }, []);
+  const { valgtFaktaSteg, settFaktaPanelMenyData } = use(FaktaMenyContext);
 
   const erAktiv =
     skalVisesImeny && (valgtFaktaSteg === id || (harApneAksjonspunkter && valgtFaktaSteg === DEFAULT_PANEL_VALGT));
 
-  const forrigeSkalVisesIMeny = usePrevious(skalVisesImeny);
-
   useEffect(() => {
-    if (skalVisesImeny) {
-      registrerFaktaPanel({
-        id,
-        tekst,
-        erAktiv,
-        harApneAksjonspunkter,
-      });
-    } else if (!skalVisesImeny && forrigeSkalVisesIMeny) {
-      registrerFaktaPanel({
-        id,
-      });
-    }
-    setPanelValgt(erAktiv);
-  }, [forrigeSkalVisesIMeny, skalVisesImeny, erAktiv, harApneAksjonspunkter]);
+    settFaktaPanelMenyData({
+      id,
+      tekst,
+      erAktiv,
+      harApneAksjonspunkter,
+      skalVisesImeny,
+    });
+  }, [skalVisesImeny, erAktiv, harApneAksjonspunkter]);
 
-  return skalVisesImeny && erPanelValgt;
+  return skalVisesImeny && erAktiv;
 };

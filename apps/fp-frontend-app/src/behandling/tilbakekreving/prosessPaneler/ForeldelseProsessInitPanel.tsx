@@ -17,7 +17,6 @@ import { useFormData } from '@navikt/fp-utils';
 import { type BeregnBeløpParams, harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
-import type { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 import '@navikt/ft-prosess-tilbakekreving-foreldelse/dist/style.css';
@@ -28,7 +27,7 @@ interface Props {
   tilbakekrevingKodeverk: AlleKodeverkTilbakekreving;
 }
 
-export const ForeldelseProsessInitPanel = ({ ...props }: Props & ProsessPanelInitProps) => {
+export const ForeldelseProsessInitPanel = ({ tilbakekrevingKodeverk }: Props) => {
   const intl = useIntl();
 
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
@@ -45,7 +44,6 @@ export const ForeldelseProsessInitPanel = ({ ...props }: Props & ProsessPanelIni
 
   return (
     <ProsessDefaultInitPanel
-      {...props}
       standardPanelProps={standardPanelProps}
       prosessPanelKode={ProsessStegCode.FORELDELSE}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Foreldelse' })}
@@ -57,7 +55,7 @@ export const ForeldelseProsessInitPanel = ({ ...props }: Props & ProsessPanelIni
       {perioderForeldelse ? (
         <Wrapper
           perioderForeldelse={perioderForeldelse}
-          kodeverkSamlingFpTilbake={props.tilbakekrevingKodeverk}
+          kodeverkSamlingFpTilbake={tilbakekrevingKodeverk}
           beregnBelop={(data: BeregnBeløpParams) => beregnBeløp(data)}
           relasjonsRolleType={fagsak.relasjonsRolleType}
           relasjonsRolleTypeKodeverk={standardPanelProps.alleKodeverk[KodeverkType.RELASJONSROLLE_TYPE]}

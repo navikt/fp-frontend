@@ -21,6 +21,6 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     valgtProsessSteg: 'henlagt',
-    registrerProsessPanel: () => undefined,
+    settProsessPanelMenyData: () => undefined,
   },
 };

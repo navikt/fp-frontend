@@ -1,6 +1,5 @@
 import { InngangsvilkarDefaultInitWrapper } from '../../felles/prosess/InngangsvilkarDefaultInitWrapper';
 import type { InngangsvilkarPanelInitProps } from '../../felles/typer/inngangsvilkarPanelInitProps';
-import type { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { ForeldreansvarInngangsvilkarInitPanel } from '../../fellesPaneler/prosess/inngangsvilkarPaneler/ForeldreansvarInngangsvilkarInitPanel';
 import { MedlemskapInngangsvilkarInitPanel } from '../../fellesPaneler/prosess/inngangsvilkarPaneler/MedlemskapInngangsvilkarInitPanel';
 import { AdopsjonInngangsvilkarInitPanel } from './inngangsvilkarPaneler/AdopsjonInngangsvilkarInitPanel';
@@ -9,14 +8,10 @@ import { MedlemskapForutgaendeInngangsvilkarInitPanel } from './inngangsvilkarPa
 import { OmsorgInngangsvilkarInitPanel } from './inngangsvilkarPaneler/OmsorgInngangsvilkarInitPanel';
 
 interface Props {
-  apentFaktaPanelInfo?: { urlCode: string; text: string };
+  faktaPanelMedÅpentApInfo?: { urlCode: string; text: string };
 }
 
-export const InngangsvilkarEsProsessStegInitPanel = ({
-  valgtProsessSteg,
-  registrerProsessPanel,
-  apentFaktaPanelInfo,
-}: Props & ProsessPanelInitProps) => {
+export const InngangsvilkarEsProsessStegInitPanel = ({ faktaPanelMedÅpentApInfo }: Props) => {
   const leftPanels = (props: InngangsvilkarPanelInitProps) => (
     <>
       <FodselInngangsvilkarInitPanel {...props} />
@@ -28,11 +23,6 @@ export const InngangsvilkarEsProsessStegInitPanel = ({
     </>
   );
   return (
-    <InngangsvilkarDefaultInitWrapper
-      valgtProsessSteg={valgtProsessSteg}
-      registrerProsessPanel={registrerProsessPanel}
-      apentFaktaPanelInfo={apentFaktaPanelInfo}
-      leftPanels={leftPanels}
-    />
+    <InngangsvilkarDefaultInitWrapper faktaPanelMedÅpentApInfo={faktaPanelMedÅpentApInfo} leftPanels={leftPanels} />
   );
 };

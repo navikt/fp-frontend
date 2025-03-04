@@ -11,12 +11,11 @@ import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
-import type { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON];
 
-export const UttakDokumentasjonFaktaInitPanel = (props: FaktaPanelInitProps) => {
+export const UttakDokumentasjonFaktaInitPanel = () => {
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
   const { behandling } = use(BehandlingDataContext);
@@ -26,7 +25,6 @@ export const UttakDokumentasjonFaktaInitPanel = (props: FaktaPanelInitProps) => 
 
   return (
     <FaktaDefaultInitPanel
-      {...props}
       standardPanelProps={standardPanelProps}
       faktaPanelKode={FaktaPanelCode.UTTAK_DOKUMENTASJON}
       faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.UttakDokumentasjon' })}

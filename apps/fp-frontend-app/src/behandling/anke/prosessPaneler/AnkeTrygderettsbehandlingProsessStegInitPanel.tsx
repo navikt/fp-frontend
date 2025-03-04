@@ -11,12 +11,11 @@ import { AnkeTrygderettsbehandlingProsessIndex } from '@navikt/fp-prosess-anke-t
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
-import type { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.AUTO_VENT_ANKE_OVERSENDT_TIL_TRYGDERETTEN];
 
-export const AnkeTrygderettsbehandlingProsessStegInitPanel = ({ ...props }: ProsessPanelInitProps) => {
+export const AnkeTrygderettsbehandlingProsessStegInitPanel = () => {
   const intl = useIntl();
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
 
@@ -27,7 +26,6 @@ export const AnkeTrygderettsbehandlingProsessStegInitPanel = ({ ...props }: Pros
 
   return (
     <ProsessDefaultInitPanel
-      {...props}
       standardPanelProps={standardPanelProps}
       prosessPanelKode={ProsessStegCode.ANKE_MERKNADER}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.AnkeMerknader' })}
