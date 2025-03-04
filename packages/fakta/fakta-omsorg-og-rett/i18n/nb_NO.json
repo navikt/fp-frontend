@@ -11,8 +11,8 @@
   "HarAnnenForelderRettFelter.AnnenForelderRettEØS": "Har annen forelder tilstrekkelig opptjening fra land i EØS?",
 
   "OpplysningsKort.OpplysningerFraSøknadTittel": "Opplysninger fra søknad",
-  "OpplysningsKort.AdresseTittel": "Adresser til søker({adresseCountSoker}){adresseCountAnnenpart, select, none {} other {, annen part({adresseCountAnnenpart})}} og barn({adresseCountBarn})",
-  "OpplysningsKort.AnnenPartTittel": "Informasjon om annen part fra andre systemer",
+  "OpplysningsKort.AdresseTittel": "Adresser til søker({adresseCountSoker}){adresseCountAnnenpart, select, none {} other {, annen part({adresseCountAnnenpart})}}{adresseCountBarn, select, none {} other {, barn({adresseCountBarn})}}",
+  "OpplysningsKort.AnnenPartTittel": "Annen parts ytelser",
 
   "OpplysningerFraSøknad.Spørsmål": "Spørsmål",
   "OpplysningerFraSøknad.Svar": "Svar",

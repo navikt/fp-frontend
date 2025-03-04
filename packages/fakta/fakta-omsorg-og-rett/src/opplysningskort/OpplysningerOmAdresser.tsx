@@ -7,41 +7,51 @@ import { type AlleKodeverk, type Personoversikt } from '@navikt/fp-types';
 
 import { EkspansjonsKort } from '../components/ekspansjonsKort/EkspansjonsKort.tsx';
 
+
 interface Props {
-  alleKodeverk: AlleKodeverk;
   personoversikt: Personoversikt;
+  alleKodeverk: AlleKodeverk;
 }
 
-export const OpplysningerOmAdresser = ({ alleKodeverk, personoversikt: { bruker, annenPart, barn } }: Props) => {
+export const OpplysningerOmAdresser = ({
+                                         personoversikt: { bruker, annenPart, barn },
+                                         alleKodeverk,
+                                       }: Props) => {
   const intl = useIntl();
-  const brukerAdresser = bruker.adresser;
-  const annenpartAdresser = annenPart?.adresser ?? [];
-  const barnAdresser = barn.flatMap(b => b.adresser);
 
+  const annenpartAdresser = annenPart?.adresser ?? [];
+  const barnAdresser = barn?.flatMap(b => b.adresser) ?? [];
   return (
     <EkspansjonsKort
       tittel={intl.formatMessage(
         { id: 'OpplysningsKort.AdresseTittel' },
         {
-          adresseCountSoker: brukerAdresser.length,
-          adresseCountAnnenpart: annenPart?.adresser.length ?? 'none',
-          adresseCountBarn: barnAdresser.length,
+          adresseCountSoker: bruker.adresser.length,
+          adresseCountAnnenpart: annenpartAdresser.length > 0 ? annenpartAdresser.length : 'none',
+          adresseCountBarn: barnAdresser.length > 0 ? barnAdresser.length : 'none',
         },
       )}
       kilde={FaktaKilde.FREG}
     >
-      <Personopplysninger rolle="BRUKER" alleKodeverk={alleKodeverk} {...bruker} />
+      <Personopplysninger
+        showIcon={false}
+        alleKodeverk={alleKodeverk}
+        rolle="BRUKER"
+        navn={bruker.navn}
+        adresser={bruker.adresser}
+      />
 
-      {annenPart && <AvsnittSkiller dividerParagraf />}
-      {annenPart && (
+      {annenPart && annenPart.adresser.length > 0 && <AvsnittSkiller dividerParagraf />}
+      {annenPart && annenPart.adresser.length > 0 && (
         <Personopplysninger
-          {...annenPart}
-          rolle="ANNEN_PART"
+          showIcon={false}
+          navn={annenPart.navn}
           alleKodeverk={alleKodeverk}
-          harSammeAdresser={annenPart.adresser.length > 0 && erPersonAdresserLike(brukerAdresser, annenpartAdresser)}
+          adresser={annenPart.adresser}
+          rolle="ANNEN_PART"
+          harSammeAdresser={erPersonAdresserLike(bruker.adresser, annenPart.adresser)}
         />
       )}
-
       {barn && <AvsnittSkiller dividerParagraf />}
       {barn && barn.map(b => <Personopplysninger key={b.aktoerId} {...b} alleKodeverk={alleKodeverk} rolle="BARN" />)}
     </EkspansjonsKort>

@@ -24,16 +24,16 @@ export const OmsorgOgRettInfoPanel = ({ personoversikt, omsorgOgRett, submittabl
 
   return (
     <VStack gap="8">
-      <OpplysningerFraSoknad omsorgOgRett={omsorgOgRett} alleKodeverk={alleKodeverk} />
-      {omsorgOgRett.registerdata && <InformasjonOmAnnenPart omsorgOgRett={omsorgOgRett} />}
-      <OpplysningerOmAdresser alleKodeverk={alleKodeverk} personoversikt={personoversikt} />
-
       {!isReadOnly && harÅpneAksjonspunkter && (
         <AksjonspunktHelpTextHTML>
           {harAPAleneomsorg && <FormattedMessage id="OmsorgOgRettInfoPanel.VurderOmAleneomsorg" />}
           {harAPAnnenForelderRett && <FormattedMessage id="OmsorgOgRettInfoPanel.VurderAndreForelderRett" />}
         </AksjonspunktHelpTextHTML>
       )}
+
+      <OpplysningerFraSoknad omsorgOgRett={omsorgOgRett} alleKodeverk={alleKodeverk} />
+      {omsorgOgRett.registerdata && <InformasjonOmAnnenPart omsorgOgRett={omsorgOgRett} />}
+      {personoversikt.bruker?.adresser && <OpplysningerOmAdresser alleKodeverk={alleKodeverk} personoversikt={personoversikt} />}
 
       {harAPAleneomsorg && (
         <AleneomsorgForm
