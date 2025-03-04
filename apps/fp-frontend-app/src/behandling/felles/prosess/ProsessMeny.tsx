@@ -4,13 +4,12 @@ import { ProcessMenu, ProcessMenuStepType } from '@navikt/ft-plattform-komponent
 
 import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 
-import { BehandlingHenlagtPanel } from '../prosess/BehandlingHenlagtPanel';
 import type { ProsessPanelMenyData } from '../typer/prosessPanelMenyData';
 import { BehandlingDataContext } from '../utils/behandlingDataContext';
-import { useProsessMenyData } from './useProsessMenyData';
+import { BehandlingHenlagtPanel } from './BehandlingHenlagtPanel';
+import { useProsessPanelMenyData } from './useProsessPanelMenyData';
 
-import styles from '../prosess/arrowForProcessMenu.module.css';
-import prosessStyles from './prosessMeny.module.css';
+import styles from './prosessMeny.module.css';
 
 interface Props {
   valgtProsessSteg: string | undefined;
@@ -22,7 +21,7 @@ export const ProsessMeny = ({ valgtProsessSteg, valgtFaktaSteg, children }: Prop
   const { oppdaterProsessStegOgFaktaPanelIUrl } = use(BehandlingDataContext);
   const { behandling } = use(BehandlingDataContext);
 
-  const { prosessPanelMenyData, settProsessPanelMenyData } = useProsessMenyData();
+  const { prosessPanelMenyData, settProsessPanelMenyData } = useProsessPanelMenyData();
 
   const oppdaterProsessPanelIUrl = (index: number) => {
     const panel = prosessPanelMenyData[index];
@@ -40,8 +39,8 @@ export const ProsessMeny = ({ valgtProsessSteg, valgtFaktaSteg, children }: Prop
   });
 
   return (
-    <div className={prosessStyles.container}>
-      <div className={prosessStyles.meny}>
+    <div className={styles.container}>
+      <div className={styles.meny}>
         <ProcessMenu
           steps={steg}
           onClick={oppdaterProsessPanelIUrl}

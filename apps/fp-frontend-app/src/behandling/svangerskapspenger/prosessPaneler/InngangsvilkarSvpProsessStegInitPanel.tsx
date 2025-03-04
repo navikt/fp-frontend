@@ -5,10 +5,10 @@ import { OpptjeningInngangsvilkarInitPanel } from './inngangsvilkarPaneler/Opptj
 import { SvangerskapInngangsvilkarInitPanel } from './inngangsvilkarPaneler/SvangerskapInngangsvilkarInitPanel';
 
 interface Props {
-  apentFaktaPanelInfo?: { urlCode: string; text: string };
+  faktaPanelMedÅpentApInfo?: { urlCode: string; text: string };
 }
 
-export const InngangsvilkarSvpProsessStegInitPanel = ({ apentFaktaPanelInfo }: Props) => {
+export const InngangsvilkarSvpProsessStegInitPanel = ({ faktaPanelMedÅpentApInfo }: Props) => {
   const leftPanels = (props: InngangsvilkarPanelInitProps) => (
     <>
       <SvangerskapInngangsvilkarInitPanel {...props} />
@@ -19,7 +19,7 @@ export const InngangsvilkarSvpProsessStegInitPanel = ({ apentFaktaPanelInfo }: P
 
   return (
     <InngangsvilkarDefaultInitWrapper
-      apentFaktaPanelInfo={apentFaktaPanelInfo}
+      faktaPanelMedÅpentApInfo={faktaPanelMedÅpentApInfo}
       leftPanels={leftPanels}
       rightPanels={rightPanels}
     />

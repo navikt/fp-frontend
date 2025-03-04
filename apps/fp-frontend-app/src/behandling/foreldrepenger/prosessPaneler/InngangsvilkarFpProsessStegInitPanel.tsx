@@ -8,10 +8,10 @@ import { OmsorgInngangsvilkarFpInitPanel } from './inngangsvilkarPaneler/OmsorgI
 import { OpptjeningInngangsvilkarFpInitPanel } from './inngangsvilkarPaneler/OpptjeningInngangsvilkarFpInitPanel';
 
 interface Props {
-  åpentFaktaPanelInfo?: { urlCode: string; text: string };
+  faktaPanelMedÅpentApInfo?: { urlCode: string; text: string };
 }
 
-export const InngangsvilkarFpProsessStegInitPanel = ({ åpentFaktaPanelInfo }: Props) => {
+export const InngangsvilkarFpProsessStegInitPanel = ({ faktaPanelMedÅpentApInfo }: Props) => {
   const leftPanels = (props: InngangsvilkarPanelInitProps) => (
     <>
       <FodselInngangsvilkarFpInitPanel {...props} />
@@ -24,7 +24,7 @@ export const InngangsvilkarFpProsessStegInitPanel = ({ åpentFaktaPanelInfo }: P
   const rightPanels = (props: InngangsvilkarPanelInitProps) => <OpptjeningInngangsvilkarFpInitPanel {...props} />;
   return (
     <InngangsvilkarDefaultInitWrapper
-      apentFaktaPanelInfo={åpentFaktaPanelInfo}
+      faktaPanelMedÅpentApInfo={faktaPanelMedÅpentApInfo}
       leftPanels={leftPanels}
       rightPanels={rightPanels}
     />

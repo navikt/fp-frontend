@@ -3,7 +3,7 @@ import { useState } from 'react';
 import type { ArbeidsgiverOpplysningerPerId, Personoversikt } from '@navikt/fp-types';
 
 import { FaktaMeny } from '../felles/fakta/FaktaMeny';
-import type { FaktaPanelInfo } from '../felles/fakta/useFaktaMenyData';
+import type { FaktaPanelMedÅpentApInfo } from '../felles/fakta/useFaktaPanelMenyData';
 import { ProsessMeny } from '../felles/prosess/ProsessMeny';
 import { AdopsjonsvilkaretFaktaInitPanel } from '../fellesPaneler/fakta/AdopsjonsvilkaretFaktaInitPanel';
 import { FodselvilkaretFaktaInitPanel } from '../fellesPaneler/fakta/FodselvilkaretFaktaInitPanel';
@@ -28,7 +28,7 @@ interface Props {
 }
 
 const EngangsstonadPaneler = ({ valgtProsessSteg, valgtFaktaSteg, arbeidsgivere, personoversikt }: Props) => {
-  const [åpentFaktaPanelInfo, setÅpentFaktaPanelInfo] = useState<FaktaPanelInfo>();
+  const [faktaPanelMedÅpentApInfo, setFaktaPanelMedÅpentApInfo] = useState<FaktaPanelMedÅpentApInfo>();
   const emptyArbeidsgiverOpplysningerPerId = {};
 
   return (
@@ -36,7 +36,7 @@ const EngangsstonadPaneler = ({ valgtProsessSteg, valgtFaktaSteg, arbeidsgivere,
       <ProsessMeny valgtProsessSteg={valgtProsessSteg} valgtFaktaSteg={valgtFaktaSteg}>
         <VarselProsessStegInitPanel />
         <OpplysningspliktProsessStegInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-        <InngangsvilkarEsProsessStegInitPanel åpentFaktaPanelInfo={åpentFaktaPanelInfo} />
+        <InngangsvilkarEsProsessStegInitPanel faktaPanelMedÅpentApInfo={faktaPanelMedÅpentApInfo} />
         <SoknadsfristEsProsessStegInitPanel />
         <BeregningEsProsessStegInitPanel />
         <SimuleringProsessStegInitPanel arbeidsgiverOpplysningerPerId={emptyArbeidsgiverOpplysningerPerId} />
@@ -45,7 +45,7 @@ const EngangsstonadPaneler = ({ valgtProsessSteg, valgtFaktaSteg, arbeidsgivere,
       <FaktaMeny
         valgtFaktaSteg={valgtFaktaSteg}
         valgtProsessSteg={valgtProsessSteg}
-        setÅpentFaktaPanelInfo={setÅpentFaktaPanelInfo}
+        setFaktaPanelMedÅpentApInfo={setFaktaPanelMedÅpentApInfo}
       >
         <SakenFaktaInitPanel />
         <YtelserFaktaInitPanel />

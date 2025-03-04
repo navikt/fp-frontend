@@ -4,9 +4,9 @@ import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { FormDataProvider, PanelDataProvider, usePanelOverstyring } from '@navikt/fp-utils';
 
-import { ProsessPanelWrapper } from '../prosess/ProsessPanelWrapper';
 import type { StandardProsessPanelProps } from '../typer/standardProsessPanelPropsTsType';
 import { BehandlingDataContext } from '../utils/behandlingDataContext';
+import { ProsessPanelWrapper } from './ProsessPanelWrapper';
 import { useProsessMenyRegistrerer } from './useProsessMenyRegistrerer';
 
 export type Props = {

@@ -8,10 +8,10 @@ import { MedlemskapForutgaendeInngangsvilkarInitPanel } from './inngangsvilkarPa
 import { OmsorgInngangsvilkarInitPanel } from './inngangsvilkarPaneler/OmsorgInngangsvilkarInitPanel';
 
 interface Props {
-  åpentFaktaPanelInfo?: { urlCode: string; text: string };
+  faktaPanelMedÅpentApInfo?: { urlCode: string; text: string };
 }
 
-export const InngangsvilkarEsProsessStegInitPanel = ({ åpentFaktaPanelInfo }: Props) => {
+export const InngangsvilkarEsProsessStegInitPanel = ({ faktaPanelMedÅpentApInfo }: Props) => {
   const leftPanels = (props: InngangsvilkarPanelInitProps) => (
     <>
       <FodselInngangsvilkarInitPanel {...props} />
@@ -22,5 +22,7 @@ export const InngangsvilkarEsProsessStegInitPanel = ({ åpentFaktaPanelInfo }: P
       <ForeldreansvarInngangsvilkarInitPanel {...props} />
     </>
   );
-  return <InngangsvilkarDefaultInitWrapper apentFaktaPanelInfo={åpentFaktaPanelInfo} leftPanels={leftPanels} />;
+  return (
+    <InngangsvilkarDefaultInitWrapper faktaPanelMedÅpentApInfo={faktaPanelMedÅpentApInfo} leftPanels={leftPanels} />
+  );
 };

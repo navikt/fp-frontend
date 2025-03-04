@@ -2,12 +2,14 @@ import { useState } from 'react';
 
 import type { FaktaPanelMenyData } from '../typer/faktaPanelMenyData';
 
-export type FaktaPanelInfo = {
+export type FaktaPanelMedÅpentApInfo = {
   urlCode: string;
   text: string;
 };
 
-export const useFaktaMenyData = (setÅpentFaktaPanelInfo?: (panelData: FaktaPanelInfo | undefined) => void) => {
+export const useFaktaPanelMenyData = (
+  setFaktaPanelMedÅpentApInfo?: (faktaPanelMedÅpentApInfo: FaktaPanelMedÅpentApInfo | undefined) => void,
+) => {
   const [faktaPanelMenyData, setFaktaPanelMenyData] = useState<FaktaPanelMenyData[]>([]);
 
   const settFaktaPanelMenyData = (data: FaktaPanelMenyData) => {
@@ -22,7 +24,7 @@ export const useFaktaMenyData = (setÅpentFaktaPanelInfo?: (panelData: FaktaPane
       return newData;
     });
 
-    setÅpentFaktaPanelInfo?.(data.harApneAksjonspunkter ? { urlCode: data.id, text: data.tekst } : undefined);
+    setFaktaPanelMedÅpentApInfo?.(data.harApneAksjonspunkter ? { urlCode: data.id, text: data.tekst } : undefined);
   };
 
   return {

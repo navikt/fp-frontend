@@ -7,23 +7,23 @@ import { SideMenu } from '@navikt/ft-plattform-komponenter';
 
 import type { FaktaPanelMenyData } from '../typer/faktaPanelMenyData';
 import { BehandlingDataContext } from '../utils/behandlingDataContext';
-import { type FaktaPanelInfo, useFaktaMenyData } from './useFaktaMenyData';
+import { type FaktaPanelMedÅpentApInfo, useFaktaPanelMenyData } from './useFaktaPanelMenyData';
 
 import styles from './faktaMeny.module.css';
 
 interface Props {
   valgtProsessSteg: string | undefined;
   valgtFaktaSteg: string | undefined;
-  setÅpentFaktaPanelInfo?: (panelData?: FaktaPanelInfo) => void;
+  setFaktaPanelMedÅpentApInfo?: (faktaPanelMedÅpentApInfo?: FaktaPanelMedÅpentApInfo) => void;
   children: ReactNode | ReactNode[];
 }
 
-export const FaktaMeny = ({ valgtFaktaSteg, valgtProsessSteg, setÅpentFaktaPanelInfo, children }: Props) => {
+export const FaktaMeny = ({ valgtFaktaSteg, valgtProsessSteg, setFaktaPanelMedÅpentApInfo, children }: Props) => {
   const intl = useIntl();
 
   const { oppdaterProsessStegOgFaktaPanelIUrl } = use(BehandlingDataContext);
 
-  const { faktaPanelMenyData, settFaktaPanelMenyData } = useFaktaMenyData(setÅpentFaktaPanelInfo);
+  const { faktaPanelMenyData, settFaktaPanelMenyData } = useFaktaPanelMenyData(setFaktaPanelMedÅpentApInfo);
 
   //Denne er alltid false ved første render siden ingen paneler er registrert på dette tidspunktet
   const harFaktapaneler = faktaPanelMenyData.length > 0;

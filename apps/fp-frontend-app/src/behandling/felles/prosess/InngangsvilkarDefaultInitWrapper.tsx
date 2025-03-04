@@ -43,12 +43,12 @@ const getErAksjonspunktOpen = (paneler: InngangsvilkarPanelData[], behandling: B
 };
 
 interface Props {
-  apentFaktaPanelInfo?: { urlCode: string; text: string };
+  faktaPanelMedÅpentApInfo?: { urlCode: string; text: string };
   leftPanels: (props: InngangsvilkarPanelInitProps) => ReactElement;
   rightPanels?: (props: InngangsvilkarPanelInitProps) => ReactElement;
 }
 
-export const InngangsvilkarDefaultInitWrapper = ({ apentFaktaPanelInfo, leftPanels, rightPanels }: Props) => {
+export const InngangsvilkarDefaultInitWrapper = ({ faktaPanelMedÅpentApInfo, leftPanels, rightPanels }: Props) => {
   const intl = useIntl();
 
   const { behandling, oppdaterProsessStegOgFaktaPanelIUrl } = use(BehandlingDataContext);
@@ -71,10 +71,10 @@ export const InngangsvilkarDefaultInitWrapper = ({ apentFaktaPanelInfo, leftPane
 
   const oppdaterUrl = useCallback(
     (evt: MouseEvent) => {
-      oppdaterProsessStegOgFaktaPanelIUrl(undefined, apentFaktaPanelInfo?.urlCode);
+      oppdaterProsessStegOgFaktaPanelIUrl(undefined, faktaPanelMedÅpentApInfo?.urlCode);
       evt.preventDefault();
     },
-    [apentFaktaPanelInfo],
+    [faktaPanelMedÅpentApInfo],
   );
 
   const harApentAksjonspunkt = getErAksjonspunktOpen(panelInfo, behandling);
@@ -88,7 +88,7 @@ export const InngangsvilkarDefaultInitWrapper = ({ apentFaktaPanelInfo, leftPane
     skalVises,
     harApentAksjonspunkt,
     status,
-    !apentFaktaPanelInfo && harApentAksjonspunkt,
+    !faktaPanelMedÅpentApInfo && harApentAksjonspunkt,
   );
 
   const aksjonspunktTekster = panelInfo.map(p => p.aksjonspunktTekst).filter(tekst => !!tekst);
@@ -101,13 +101,13 @@ export const InngangsvilkarDefaultInitWrapper = ({ apentFaktaPanelInfo, leftPane
       skalSkjulePanel={!erPanelValgt}
     >
       <VStack gap="8">
-        {erPanelValgt && ((apentFaktaPanelInfo && erIkkeFerdigbehandlet) || aksjonspunktTekster.length > 0) && (
+        {erPanelValgt && ((faktaPanelMedÅpentApInfo && erIkkeFerdigbehandlet) || aksjonspunktTekster.length > 0) && (
           <AksjonspunktHelpTextHTML>
-            {apentFaktaPanelInfo && erIkkeFerdigbehandlet
+            {faktaPanelMedÅpentApInfo && erIkkeFerdigbehandlet
               ? [
                   <HStack gap="1" key="1">
                     <FormattedMessage id="InngangsvilkarProsessStegPanelDef.AvventerAvklaringAv" />
-                    <Link onClick={oppdaterUrl}>{apentFaktaPanelInfo.text}</Link>
+                    <Link onClick={oppdaterUrl}>{faktaPanelMedÅpentApInfo.text}</Link>
                   </HStack>,
                 ]
               : aksjonspunktTekster.map(tekst => tekst)}

@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import type { ProsessPanelMenyData } from '../typer/prosessPanelMenyData';
 
-export const useProsessMenyData = () => {
+export const useProsessPanelMenyData = () => {
   const [prosessPanelMenyData, setProsessPanelMenyData] = useState<ProsessPanelMenyData[]>([]);
 
   const settProsessPanelMenyData = (data: ProsessPanelMenyData) => {
