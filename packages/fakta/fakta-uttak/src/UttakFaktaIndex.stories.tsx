@@ -56,8 +56,6 @@ export const VisUttaksperiodeUtenAksjonspunkt: Story = {
         skalAvklareAnnenforelderUføretrygd: false,
         skalAvklareAnnenForelderRettEØS: false,
       },
-      endringsdato: '2022-01-31',
-      gjeldendeDekningsgrad: 100,
       førsteUttaksdato: '2022-01-31',
     },
     uttakKontrollerFaktaPerioder: [
@@ -83,8 +81,6 @@ export const VisUttaksperiodeUtenAksjonspunktKanOverstyre: Story = {
         skalAvklareAnnenforelderUføretrygd: false,
         skalAvklareAnnenForelderRettEØS: false,
       },
-      endringsdato: '2022-01-31',
-      gjeldendeDekningsgrad: 100,
       førsteUttaksdato: '2022-01-31',
     },
     uttakKontrollerFaktaPerioder: [
@@ -117,8 +113,6 @@ export const VisUttaksperiodeMedAksjonspunkt: Story = {
         skalAvklareAnnenforelderUføretrygd: false,
         skalAvklareAnnenForelderRettEØS: false,
       },
-      endringsdato: '2022-01-31',
-      gjeldendeDekningsgrad: 100,
       førsteUttaksdato: '2022-01-31',
     },
     uttakKontrollerFaktaPerioder: [
@@ -180,8 +174,6 @@ export const VisUtsettelseperiodeMedAksjonspunkt: Story = {
         skalAvklareAnnenforelderUføretrygd: false,
         skalAvklareAnnenForelderRettEØS: false,
       },
-      endringsdato: '2022-01-31',
-      gjeldendeDekningsgrad: 100,
       førsteUttaksdato: '2022-01-31',
     },
     uttakKontrollerFaktaPerioder: [
@@ -212,8 +204,6 @@ export const VisOverføringsperiodeMedAksjonspunkt: Story = {
         skalAvklareAnnenforelderUføretrygd: false,
         skalAvklareAnnenForelderRettEØS: false,
       },
-      endringsdato: '2022-01-31',
-      gjeldendeDekningsgrad: 100,
       førsteUttaksdato: '2022-01-31',
     },
     uttakKontrollerFaktaPerioder: [
@@ -245,8 +235,6 @@ export const VisAksjonspunktDerIngenPerioderFinnes: Story = {
         skalAvklareAnnenforelderUføretrygd: false,
         skalAvklareAnnenForelderRettEØS: false,
       },
-      endringsdato: '2022-01-31',
-      gjeldendeDekningsgrad: 100,
       førsteUttaksdato: '2022-01-31',
     },
     uttakKontrollerFaktaPerioder: [],
@@ -270,8 +258,6 @@ export const VisAksjonspunktDerArbeidsfoholdErUkjentVedGradering: Story = {
         skalAvklareAnnenforelderUføretrygd: false,
         skalAvklareAnnenForelderRettEØS: false,
       },
-      endringsdato: '2022-01-31',
-      gjeldendeDekningsgrad: 100,
       førsteUttaksdato: '2022-01-31',
     },
     uttakKontrollerFaktaPerioder: [
@@ -308,8 +294,6 @@ export const VisAksjonspunktDerEnIkkeHarBeregningsgrunnlagVedGradering: Story = 
         skalAvklareAnnenforelderUføretrygd: false,
         skalAvklareAnnenForelderRettEØS: false,
       },
-      endringsdato: '2022-01-31',
-      gjeldendeDekningsgrad: 100,
       førsteUttaksdato: '2022-01-31',
     },
     uttakKontrollerFaktaPerioder: [
@@ -346,8 +330,6 @@ export const VisPanelDerAksjonspunktErLøstOgBehandlingAvsluttet: Story = {
         skalAvklareAnnenforelderUføretrygd: false,
         skalAvklareAnnenForelderRettEØS: false,
       },
-      endringsdato: '2022-01-31',
-      gjeldendeDekningsgrad: 100,
       førsteUttaksdato: '2022-01-31',
     },
     uttakKontrollerFaktaPerioder: [
@@ -387,8 +369,6 @@ export const VisBegrunnelseFraTidligereUtgaveAvPanel: Story = {
         skalAvklareAnnenforelderUføretrygd: false,
         skalAvklareAnnenForelderRettEØS: false,
       },
-      endringsdato: '2022-01-31',
-      gjeldendeDekningsgrad: 100,
       førsteUttaksdato: '2022-01-31',
     },
     uttakKontrollerFaktaPerioder: [
@@ -429,8 +409,6 @@ export const VisUttaksperiodeMedAksjonspunktForFar: Story = {
         skalAvklareAnnenforelderUføretrygd: false,
         skalAvklareAnnenForelderRettEØS: false,
       },
-      endringsdato: '2022-01-31',
-      gjeldendeDekningsgrad: 100,
       førsteUttaksdato: '2022-01-31',
     },
     uttakKontrollerFaktaPerioder: [

@@ -8,7 +8,5 @@ export type Ytelsefordeling = Readonly<{
     bekreftetAnnenForelderRettEØS?: boolean;
     skalAvklareAnnenForelderRettEØS: boolean;
   };
-  endringsdato?: string;
-  gjeldendeDekningsgrad: number;
   førsteUttaksdato: string;
 }>;

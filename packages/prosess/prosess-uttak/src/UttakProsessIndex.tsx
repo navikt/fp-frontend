@@ -8,9 +8,8 @@ import type {
   PeriodeSoker,
   Personoversikt,
   Soknad,
-  UttaksresultatPeriode,
+  Uttaksresultat,
   UttakStonadskontoer,
-  Ytelsefordeling,
 } from '@navikt/fp-types';
 
 import { UttakProsessPanel } from './components/UttakProsessPanel';
@@ -22,34 +21,31 @@ const intl = createIntl(messages);
 interface Props {
   uttakStonadskontoer: UttakStonadskontoer;
   soknad: Soknad;
-  uttaksresultatPerioder: UttaksresultatPeriode;
+  uttaksresultat: Uttaksresultat;
   familiehendelse: FamilieHendelseSamling;
   personoversikt: Personoversikt;
-  ytelsefordeling: Ytelsefordeling;
   kanOverstyre: boolean;
   oppdaterStønadskontoer: (params: { behandlingUuid: string; perioder: PeriodeSoker[] }) => Promise<any>;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 export const UttakProsessIndex = ({
-  uttaksresultatPerioder,
+  uttaksresultat,
   uttakStonadskontoer,
   familiehendelse,
   soknad,
   personoversikt,
-  ytelsefordeling,
   kanOverstyre,
   oppdaterStønadskontoer,
   arbeidsgiverOpplysningerPerId,
 }: Props) => (
   <RawIntlProvider value={intl}>
     <UttakProsessPanel
-      uttaksresultatPeriode={uttaksresultatPerioder}
+      uttaksresultat={uttaksresultat}
       uttakStonadskontoer={uttakStonadskontoer}
       familiehendelse={familiehendelse}
       soknad={soknad}
       personoversikt={personoversikt}
-      ytelsefordeling={ytelsefordeling}
       kanOverstyre={kanOverstyre}
       oppdaterStønadskontoer={oppdaterStønadskontoer}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
