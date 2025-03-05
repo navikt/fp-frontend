@@ -88,10 +88,6 @@ type OverstyringVilkår =
 const transformValues = (values: FormValues, overstyringApKode: OverstyringAksjonspunkter): OverstyringVilkår => {
   const { vurdering, avslagskode, begrunnelse, medlemFom, opphørFom } = values;
 
-  if (overstyringApKode === AksjonspunktKode.OVERSTYR_BEREGNING) {
-    throw new Error('Overstyring av beregning håndteres ikke her');
-  }
-
   const felles = {
     kode: overstyringApKode,
     begrunnelse: begrunnelse,

@@ -261,22 +261,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     //@ts-expect-error
     expect(message[0].props.id).toEqual('ToTrinnsForm.Beregning.InntektFastsatt');
   });
-  it('skal vise korrekt tekst for aksjonspunkt 6007', () => {
-    const aksjonspunkt = {
-      aksjonspunktKode: AksjonspunktKode.OVERSTYR_BEREGNING,
-      besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: false,
-    } as TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(
-      true,
-      behandlingStatus,
-      faktaOmBeregningTilfeller,
-      erTilbakekreving,
-      aksjonspunkt,
-    );
-    //@ts-expect-error
-    expect(message[0].props.id).toEqual('ToTrinnsForm.Beregning.VilkarOverstyrt');
-  });
   it('skal vise korrekt tekst for aksjonspunkt 5047', () => {
     const aksjonspunkt = {
       aksjonspunktKode: AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD,

@@ -147,7 +147,6 @@ const hasOnlyClosedAps = (aksjonspunkter: Aksjonspunkt[], vedtakAksjonspunkter: 
     .every(ap => ap.status !== AksjonspunktStatus.OPPRETTET);
 
 const hasAksjonspunkt = (ap: Aksjonspunkt): boolean =>
-  ap.definisjon === AksjonspunktKode.OVERSTYR_BEREGNING ||
   ap.definisjon === AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG ||
   ap.definisjon === AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG ||
   ap.definisjon === AksjonspunktKode.VURDER_SOKNADSFRIST_FORELDREPENGER;

@@ -13,7 +13,6 @@ import type { KontrollAvManueltOpprettetRevurderingsbehandlingAp } from './prose
 import type { KontrollerRevurderingsBehandlingAp } from './prosess/KontrollerRevurderingsBehandlingAp';
 import type { OmsorgsvilkarAp } from './prosess/OmsorgsvilkarAp';
 import type { OverstyringAp } from './prosess/OverstyringAp';
-import type { OverstyringBeregningAp } from './prosess/OverstyringBeregningAp';
 import type { OverstyringMedlemskapsvilkaretLopendeAp } from './prosess/OverstyringMedlemskapsvilkaretLopendeAp';
 import type { OverstyringSokersOpplysingspliktAp } from './prosess/OverstyringSokersOpplysingspliktAp';
 import type { SoknadsfristAp } from './prosess/SoknadsfristAp';
@@ -43,7 +42,6 @@ export type ProsessAksjonspunkt =
   | ForeslaVedtakAp
   | ForeslaVedtakManueltAp
   | VurderInnsynAp
-  | OverstyringBeregningAp
   | VurderFeilutbetalingAp
   | KlageFormkravAp
   | KlageVurderingResultatAp
