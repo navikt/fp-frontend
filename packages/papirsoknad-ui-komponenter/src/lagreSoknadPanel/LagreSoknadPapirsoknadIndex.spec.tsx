@@ -63,11 +63,6 @@ describe('<LagreSoknadPapirsoknadIndex>', () => {
 
     await userEvent.click(screen.getByText('Bekreft og avslutt behandling'));
 
-    expect(await screen.findByText(/Avslutter registrering av søknaden/)).toBeInTheDocument();
-    expect(screen.getByText(/Bekreft at søknaden skal avslås/)).toBeInTheDocument();
-
-    await userEvent.click(screen.getByText('OK'));
-
     expect(lagreUfullstendigsoknad).toHaveBeenCalledOnce();
     expect(lagre).not.toHaveBeenCalled();
   });
