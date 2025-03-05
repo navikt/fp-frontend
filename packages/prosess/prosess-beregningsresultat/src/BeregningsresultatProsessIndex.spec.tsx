@@ -1,14 +1,13 @@
 import { composeStories } from '@storybook/react';
-import { render, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { render, screen } from '@testing-library/react';
 
 import * as stories from './BeregningsresultatProsessIndex.stories';
 
-const { SaksbehandlerKanIkkeOverstyre, SaksbehandlerKanOverstyre, OverstyrtReadonlyPanel } = composeStories(stories);
+const { Default } = composeStories(stories);
 
 describe('<BeregningsresultatProsessIndex>', () => {
-  it('skal vise panel som ikke kan overstyres', async () => {
-    render(<SaksbehandlerKanIkkeOverstyre />);
+  it('skal vise panel med beregningsinformasjon', async () => {
+    render(<Default />);
 
     expect(await screen.findByText('Beregning')).toBeInTheDocument();
     expect(screen.getByText('Sats')).toBeInTheDocument();
@@ -16,53 +15,5 @@ describe('<BeregningsresultatProsessIndex>', () => {
     expect(screen.getByText('Antall barn')).toBeInTheDocument();
     expect(screen.getByText('1')).toBeInTheDocument();
     expect(screen.getByText('Beregnet engangsstønad')).toBeInTheDocument();
-    expect(screen.queryByAltText('Overstyr')).not.toBeInTheDocument();
-  });
-
-  it('skal velge å overstyre, så avbryte redigering og så overstyre og bekrefte', async () => {
-    const lagre = vi.fn();
-
-    const utils = render(<SaksbehandlerKanOverstyre submitCallback={lagre} />);
-
-    expect(await screen.findByText('Beregning')).toBeInTheDocument();
-    expect(screen.getByTitle('Overstyr')).toBeInTheDocument();
-    expect(screen.queryByTitle('Har overstyrt')).not.toBeInTheDocument();
-
-    await userEvent.click(screen.getByTestId('overstyringsknapp'));
-
-    expect(await screen.findByTitle('Har overstyrt')).toBeInTheDocument();
-    expect(screen.queryByAltText('Overstyr')).not.toBeInTheDocument();
-
-    expect(screen.getByText('Bekreft overstyring').closest('button')).toBeDisabled();
-
-    await userEvent.type(utils.getByLabelText('Begrunnelse'), 'Dette er en begrunnelse');
-
-    expect(await screen.findByText('Bekreft overstyring')).toBeEnabled();
-
-    await userEvent.click(screen.getByText('Avbryt'));
-
-    expect(await screen.findByTitle('Overstyr')).toBeInTheDocument();
-
-    await userEvent.click(screen.getByTitle('Overstyr'));
-
-    await userEvent.type(utils.getByLabelText('Begrunnelse'), 'Dette er en begrunnelse');
-
-    await userEvent.click(screen.getByText('Bekreft overstyring'));
-
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, {
-      begrunnelse: 'Dette er en begrunnelse',
-      beregnetTilkjentYtelse: 92000,
-      kode: '6007',
-    });
-  });
-
-  it('skal vise readonly panel der saksbehandler har overstyrt', async () => {
-    render(<OverstyrtReadonlyPanel />);
-
-    expect(await screen.findByText('Beregning')).toBeInTheDocument();
-    expect(screen.getByText('Manuell overstyring av automatisk vurdering')).toBeInTheDocument();
-    expect(screen.getByText('Dette er en begrunnelse')).toBeInTheDocument();
-    expect(screen.getByText('Endret av saksbehandler')).toBeInTheDocument();
   });
 });

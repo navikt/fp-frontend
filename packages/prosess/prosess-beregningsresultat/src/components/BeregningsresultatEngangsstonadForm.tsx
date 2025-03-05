@@ -1,44 +1,12 @@
-import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
-import { Detail, Heading, Label } from '@navikt/ds-react';
-import { Form, InputField } from '@navikt/ft-form-hooks';
-import { hasValidInteger, maxValue, minValue, required } from '@navikt/ft-form-validators';
-import { FlexColumn, FlexContainer, FlexRow, OverstyringKnapp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { decodeHtmlEntity, formatCurrencyWithKr } from '@navikt/ft-utils';
+import { Detail, Heading, HStack, Label, VStack } from '@navikt/ds-react';
+import { AvsnittSkiller } from '@navikt/ft-ui-komponenter';
+import { formatCurrencyWithKr } from '@navikt/ft-utils';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { OverstyringPanel } from '@navikt/fp-prosess-felles';
-import type { Aksjonspunkt, BeregningsresultatEs } from '@navikt/fp-types';
-import type { OverstyringBeregningAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelDataContext, usePanelOverstyring } from '@navikt/fp-utils';
+import type { BeregningsresultatEs } from '@navikt/fp-types';
 
 import styles from './beregningsresultatEngangsstonadForm.module.css';
-
-const minValue1 = minValue(1);
-const maxValue500000 = maxValue(500000);
-
-type FormValues = {
-  beregnetTilkjentYtelse?: number;
-  begrunnelse?: string;
-};
-
-const buildInitialValues = (
-  aksjonspunkter: Aksjonspunkt[],
-  behandlingResultatstruktur?: BeregningsresultatEs,
-): FormValues => {
-  const aksjonspunkt = aksjonspunkter.find(ap => ap.definisjon === AksjonspunktKode.OVERSTYR_BEREGNING);
-  return {
-    begrunnelse: decodeHtmlEntity(aksjonspunkt?.begrunnelse ?? ''),
-    beregnetTilkjentYtelse: behandlingResultatstruktur?.beregnetTilkjentYtelse,
-  };
-};
-
-const transformValues = (values: FormValues): OverstyringBeregningAp => ({
-  kode: AksjonspunktKode.OVERSTYR_BEREGNING,
-  beregnetTilkjentYtelse: values.beregnetTilkjentYtelse!,
-  begrunnelse: values.begrunnelse,
-});
 
 interface Props {
   behandlingResultatstruktur?: BeregningsresultatEs;
@@ -47,7 +15,7 @@ interface Props {
 /**
  * BeregningsresultatEngangsstonadForm
  *
- * Viser beregnet engangsstønad. Resultatet kan overstyres av Nav-ansatt med overstyr-rettighet.
+ * Viser beregnet engangsstønad.
  */
 export const BeregningsresultatEngangsstonadForm = ({
   behandlingResultatstruktur = {
@@ -56,148 +24,38 @@ export const BeregningsresultatEngangsstonadForm = ({
     satsVerdi: 0,
   },
 }: Props) => {
-  const { aksjonspunkterForPanel, submitCallback, alleMerknaderFraBeslutter } = usePanelDataContext();
-
-  const erIkkeGodkjentAvBeslutter = aksjonspunkterForPanel.some(
-    a => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted,
-  );
-
-  const { formData, setFormData } = useFormData<FormValues>();
-
-  const { toggleOverstyring, kanOverstyreAccess, overrideReadOnly, erOverstyrt } = usePanelOverstyring();
-
-  const formMethods = useForm<FormValues>({
-    defaultValues: formData || buildInitialValues(aksjonspunkterForPanel, behandlingResultatstruktur),
-  });
-
-  const toggleAv = () => {
-    toggleOverstyring();
-    formMethods.reset();
-    toggleOverstyring();
-  };
-  const togglePa = () => {
-    toggleOverstyring();
-    toggleOverstyring();
-  };
-
-  const harOverstyringAksjonspunkt =
-    aksjonspunkterForPanel.some(ap => ap.definisjon === AksjonspunktKode.OVERSTYR_BEREGNING) || false;
-
   return (
-    <Form
-      formMethods={formMethods}
-      onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
-      setDataOnUnmount={setFormData}
-    >
-      <FlexContainer>
-        <FlexRow>
-          <FlexColumn>
-            <Heading size="small">
-              <FormattedMessage id="BeregningEngangsstonadForm.Beregning" />
-            </Heading>
-          </FlexColumn>
-          {(kanOverstyreAccess.isEnabled || overrideReadOnly) && (
-            <FlexColumn>
-              <OverstyringKnapp onClick={togglePa} erOverstyrt={erOverstyrt || !kanOverstyreAccess.isEnabled} />
-            </FlexColumn>
-          )}
-        </FlexRow>
-      </FlexContainer>
-      <VerticalSpacer eightPx />
-      <FlexContainer>
-        <FlexRow>
-          <FlexColumn className={styles.firstColWidth}>
-            <Detail>
-              <FormattedMessage id="BeregningEngangsstonadForm.Sats" />
-            </Detail>
-          </FlexColumn>
-          <FlexColumn>
-            <Label size="small">
-              {behandlingResultatstruktur?.satsVerdi ? formatCurrencyWithKr(behandlingResultatstruktur.satsVerdi) : '-'}
-            </Label>
-          </FlexColumn>
-        </FlexRow>
-        <FlexRow>
-          <FlexColumn className={styles.firstColWidth}>
-            <Detail>
-              <FormattedMessage id="BeregningEngangsstonadForm.AntallBarn" />
-            </Detail>
-          </FlexColumn>
-          <FlexColumn>
-            <Label size="small">
-              {behandlingResultatstruktur?.antallBarn ? behandlingResultatstruktur.antallBarn : '-'}
-            </Label>
-          </FlexColumn>
-        </FlexRow>
-        {!erOverstyrt && !harOverstyringAksjonspunkt && (
-          <>
-            <FlexRow>
-              <FlexColumn className={styles.dividerWidth}>
-                <hr className={styles.divider} />
-              </FlexColumn>
-            </FlexRow>
-            <FlexRow>
-              <FlexColumn className={styles.firstColWidth}>
-                <Detail>
-                  <FormattedMessage id="BeregningEngangsstonadForm.BeregnetEngangsstonad" />
-                </Detail>
-              </FlexColumn>
-              <FlexColumn>
-                <Label size="small">
-                  {behandlingResultatstruktur?.beregnetTilkjentYtelse
-                    ? formatCurrencyWithKr(behandlingResultatstruktur.beregnetTilkjentYtelse)
-                    : '-'}
-                </Label>
-              </FlexColumn>
-            </FlexRow>
-          </>
-        )}
-      </FlexContainer>
-      {(erOverstyrt || harOverstyringAksjonspunkt) && (
-        <>
-          <VerticalSpacer sixteenPx />
-          <OverstyringPanel
-            erOverstyrt={erOverstyrt}
-            isSolvable
-            erVilkarOk
-            hasAksjonspunkt={harOverstyringAksjonspunkt}
-            overrideReadOnly={overrideReadOnly}
-            isSubmitting={formMethods.formState.isSubmitting}
-            isPristine={!formMethods.formState.isDirty}
-            toggleAv={toggleAv}
-            erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
-          >
-            <FlexContainer>
-              <FlexRow>
-                <FlexColumn>
-                  <Label size="small" className={!erOverstyrt || overrideReadOnly ? '' : styles.text}>
-                    <FormattedMessage id="BeregningEngangsstonadForm.BeregnetEngangsstonad" />
-                  </Label>
-                </FlexColumn>
-                <FlexColumn>
-                  <InputField
-                    name="beregnetTilkjentYtelse"
-                    parse={value => {
-                      // @ts-expect-error Fiks
-                      const parsedValue = parseInt(value, 10);
-                      return Number.isNaN(parsedValue) ? value : parsedValue;
-                    }}
-                    className={styles.bredde}
-                    validate={[required, hasValidInteger, minValue1, maxValue500000]}
-                    readOnly={!erOverstyrt || overrideReadOnly}
-                  />
-                </FlexColumn>
-                <FlexColumn>
-                  <Label size="small" className={!erOverstyrt || overrideReadOnly ? '' : styles.text}>
-                    <FormattedMessage id="BeregningEngangsstonadForm.Kroner" />
-                  </Label>
-                </FlexColumn>
-              </FlexRow>
-            </FlexContainer>
-            <VerticalSpacer sixteenPx />
-          </OverstyringPanel>
-        </>
-      )}
-    </Form>
+    <VStack gap="4" className={styles.container}>
+      <Heading size="small">
+        <FormattedMessage id="BeregningEngangsstonadForm.Beregning" />
+      </Heading>
+      <VStack gap="2">
+        <HStack justify="space-between">
+          <Detail>
+            <FormattedMessage id="BeregningEngangsstonadForm.Sats" />
+          </Detail>
+          <Label size="small">
+            {behandlingResultatstruktur?.satsVerdi ? formatCurrencyWithKr(behandlingResultatstruktur.satsVerdi) : '-'}
+          </Label>
+        </HStack>
+        <HStack justify="space-between">
+          <Detail>
+            <FormattedMessage id="BeregningEngangsstonadForm.AntallBarn" />
+          </Detail>
+          <Label size="small">{behandlingResultatstruktur?.antallBarn ?? '-'}</Label>
+        </HStack>
+        <AvsnittSkiller dividerParagraf={true} />
+        <HStack justify="space-between">
+          <Detail>
+            <FormattedMessage id="BeregningEngangsstonadForm.BeregnetEngangsstonad" />
+          </Detail>
+          <Label size="small">
+            {behandlingResultatstruktur?.beregnetTilkjentYtelse
+              ? formatCurrencyWithKr(behandlingResultatstruktur.beregnetTilkjentYtelse)
+              : '-'}
+          </Label>
+        </HStack>
+      </VStack>
+    </VStack>
   );
 };
