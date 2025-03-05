@@ -3,7 +3,7 @@ import { RelasjonsRolleType } from '@navikt/fp-kodeverk';
 export type OmsorgOgRett = {
   søknad: Søknad;
   registerdata: RegisterData;
-  manuellBehandlingResultat: ManuellBehandlingResultat;
+  manuellBehandlingResultat?: ManuellBehandlingResultat;
   relasjonsRolleType: RelasjonsRolleType;
 };
 

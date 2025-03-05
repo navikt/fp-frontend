@@ -83,15 +83,7 @@ const defaultOmsorgOgRett: OmsorgOgRett = {
     harAnnenpartForeldrepenger: false,
     harAnnenpartEngangsstønad: false,
   },
-  manuellBehandlingResultat: {
-    søkerHarAleneomsorg: undefined,
-    annenpartRettighet: {
-      harRettNorge: false,
-      harOppholdEØS: undefined,
-      harRettEØS: false,
-      harUføretrygd: true,
-    },
-  },
+  manuellBehandlingResultat: undefined,
   relasjonsRolleType: RelasjonsRolleType.FAR,
 };
 
