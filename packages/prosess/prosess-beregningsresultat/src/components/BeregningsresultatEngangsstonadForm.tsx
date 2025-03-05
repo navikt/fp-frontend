@@ -42,9 +42,7 @@ export const BeregningsresultatEngangsstonadForm = ({
           <Detail>
             <FormattedMessage id="BeregningEngangsstonadForm.AntallBarn" />
           </Detail>
-          <Label size="small">
-            {behandlingResultatstruktur?.antallBarn ? behandlingResultatstruktur.antallBarn : '-'}
-          </Label>
+          <Label size="small">{behandlingResultatstruktur?.antallBarn ?? '-'}</Label>
         </HStack>
         <AvsnittSkiller dividerParagraf={true} />
         <HStack justify="space-between">
