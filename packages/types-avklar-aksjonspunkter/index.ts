@@ -41,7 +41,6 @@ export type { Foreldreansvarsvilkar1Ap } from './src/prosess/Foreldreansvarsvilk
 export type { Foreldreansvarsvilkar2Ap } from './src/prosess/Foreldreansvarsvilkar2Ap';
 export type { ForeslaVedtakAp } from './src/prosess/ForeslaVedtakAp';
 export type { ForeslaVedtakManueltAp } from './src/prosess/ForeslaVedtakManueltAp';
-export type { OverstyringBeregningAp } from './src/prosess/OverstyringBeregningAp';
 export type { VurderFeilutbetalingAp } from './src/prosess/VurderFeilutbetalingAp';
 export type { KontrollerEtterbetalingTilSøkerAP } from './src/prosess/KontrollerEtterbetalingTilSøkerAP';
 export type { KlageFormkravAp } from './src/prosess/KlageFormkravAp';

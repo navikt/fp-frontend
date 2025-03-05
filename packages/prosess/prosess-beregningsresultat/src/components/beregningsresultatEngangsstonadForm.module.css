@@ -1,20 +1,9 @@
+.container {
+  width: 300px;
+}
+
 .divider {
   border-bottom: 0;
-  border-top: 1px solid var(--a-gray-900);
-}
-
-.text {
-  margin-top: 16px;
-}
-
-.bredde {
-  width: 100px;
-}
-
-.firstColWidth {
-  width: 200px;
-}
-
-.dividerWidth {
+  border-top: px solid var(--a-gray-900);
   width: 300px;
 }
