@@ -190,6 +190,8 @@ export const TilretteleggingForm = ({
         style={{
           backgroundColor: 'white',
           padding: '24px',
+          marginTop: '-10px',
+          marginBottom: '-8px',
         }}
       >
         <VStack gap="8">

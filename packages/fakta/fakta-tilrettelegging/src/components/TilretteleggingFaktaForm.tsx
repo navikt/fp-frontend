@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Alert, HStack, VStack } from '@navikt/ds-react';
 import { Datepicker, Form, TextAreaField } from '@navikt/ft-form-hooks';
-import { dateRangesNotOverlapping, hasValidDate, hasValidText, maxLength, required } from '@navikt/ft-form-validators';
+import { hasValidDate, hasValidText, maxLength, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { FaktaSubmitButton } from '@navikt/fp-fakta-felles';
@@ -114,11 +114,6 @@ export const TilretteleggingFaktaForm = ({
   const harGyldig100PermisjonDerEnHarValgtSvp = arbeidsforhold.some(
     a => a.skalBrukes && a.velferdspermisjoner.some(vp => vp.erGyldig && vp.permisjonsprosent === 100),
   );
-  const harOverlappendePerioder = arbeidsforhold.some(a =>
-    a.avklarteOppholdPerioder.filter(p => p.fom && p.tom).length > 0
-      ? dateRangesNotOverlapping(a.avklarteOppholdPerioder.filter(p => p.fom && p.tom).map(p => [p.fom, p.tom]))
-      : false,
-  );
 
   const [visFeil, setVisFeil] = useState(false);
 
@@ -127,8 +122,7 @@ export const TilretteleggingFaktaForm = ({
     harIkkeValgtNoenArbeidsforhold ||
     harPeriodeSomIkkeErFerdig ||
     harArbeidsforholdUtenTilrettelegging ||
-    harGyldig100PermisjonDerEnHarValgtSvp ||
-    harOverlappendePerioder;
+    harGyldig100PermisjonDerEnHarValgtSvp;
 
   const onSubmit = (values: TilretteleggingFormValues) => {
     if (harFeil) {
@@ -205,11 +199,6 @@ export const TilretteleggingFaktaForm = ({
         {visFeil && harGyldig100PermisjonDerEnHarValgtSvp && (
           <FeilmeldingAlert>
             <FormattedMessage id="TilretteleggingFaktaForm.ValgtSvpVedGyldig100Permisjon" />
-          </FeilmeldingAlert>
-        )}
-        {visFeil && harOverlappendePerioder && (
-          <FeilmeldingAlert>
-            <FormattedMessage id="TilretteleggingFaktaForm.HarOverlappendePeriode" />
           </FeilmeldingAlert>
         )}
         <TextAreaField
