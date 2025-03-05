@@ -92,6 +92,7 @@ export const Personopplysninger = ({
             harSammeAdresser={harSammeAdresser}
             adresser={adresser}
             adresseKodeverk={alleKodeverk[KodeverkType.ADRESSE_TYPE]}
+            erAnnenpart={rolle === 'ANNEN_PART'}
           />
         </VStack>
       </Box>

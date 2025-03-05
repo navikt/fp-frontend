@@ -1,4 +1,4 @@
-import type { FeilutbetalingÅrsak, FeilutbetalingFakta } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
+import type { FeilutbetalingÅrsak,FeilutbetalingFakta } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
 import type {
   DetaljerteFeilutbetalingsperioder,
   FeilutbetalingPerioderWrapper,
@@ -36,6 +36,7 @@ import type {
   ManglendeInntektsmeldingVurdering,
   ManueltArbeidsforhold,
   Medlemskap,
+  OmsorgOgRett,
   OpprettVergeParams,
   Opptjening,
   PeriodeSoker,
@@ -182,6 +183,7 @@ export const BehandlingRel = {
   UTTAKSRESULTAT: 'uttaksresultat-perioder',
   UTTAK_STONADSKONTOER: 'uttak-stonadskontoer',
   YTELSEFORDELING: 'ytelsefordeling',
+  OMSORG_OG_RETT: 'omsorg-og-rett',
   STONADSKONTOER_GITT_UTTAKSPERIODER: 'lagre-stonadskontoer-gitt-uttaksperioder',
   DOKUMENTASJON_VURDERING_BEHOV: 'uttak-vurder-dokumentasjon',
   UTTAK_KONTROLLER_FAKTA_PERIODER_V2: 'uttak-kontroller-fakta-perioder-v2',
@@ -423,6 +425,13 @@ const getYtelsefordelingOptions = (links: ApiLink[]) => (behandling: Behandling)
   queryOptions({
     queryKey: [BehandlingRel.YTELSEFORDELING, behandling.uuid, behandling.versjon],
     queryFn: () => kyExtended.get(getUrlFromRel('YTELSEFORDELING', links)).json<Ytelsefordeling>(),
+    staleTime: Infinity,
+  });
+
+const getFaktaOmsorgOgRettOptions = (links: ApiLink[]) => (behandling: Behandling) =>
+  queryOptions({
+    queryKey: [BehandlingRel.OMSORG_OG_RETT, behandling.uuid, behandling.versjon],
+    queryFn: () => kyExtended.get(getUrlFromRel('OMSORG_OG_RETT', links)).json<OmsorgOgRett>(),
     staleTime: Infinity,
   });
 
@@ -693,6 +702,7 @@ export const useBehandlingApi = (behandling: Behandling) => {
     uttaksresultatPerioderOptions: getUttaksresultatOptions(links),
     uttakStønadskontoerOptions: getUttakStønadskontoerOptions(links),
     ytelsefordelingOptions: getYtelsefordelingOptions(links),
+    omsorgOgRettOptions: getFaktaOmsorgOgRettOptions(links),
     oppdaterStønadskontoer: getOppdaterStønadskontoer(links),
     beregningsgrunnlagOptions: getBeregningsgrunnlagOptions(links),
     opptjeningOptions: getOpptjeningOptions(links),
