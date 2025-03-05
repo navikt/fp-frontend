@@ -13,7 +13,7 @@ import {
   VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
@@ -98,7 +98,7 @@ export const VurderSoknadsfristForeldrepengerForm = ({ readOnlySubmitButton, mot
             id="VurderSoknadsfristForeldrepengerForm.AksjonspunktHelpText"
             values={{
               numberOfDays: søknadsfrist?.dagerOversittetFrist,
-              soknadsfristdato: soknadsfristdato ? moment(soknadsfristdato).format(DDMMYYYY_DATE_FORMAT) : '',
+              soknadsfristdato: soknadsfristdato ? dayjs(soknadsfristdato).format(DDMMYYYY_DATE_FORMAT) : '',
             }}
           />
         </AksjonspunktHelpTextHTML>
@@ -131,9 +131,7 @@ export const VurderSoknadsfristForeldrepengerForm = ({ readOnlySubmitButton, mot
                   <Detail>
                     <FormattedMessage id="VurderSoknadsfristForeldrepengerForm.SoknadMottatt" />
                   </Detail>
-                  {mottattDato && (
-                    <BodyShort size="small">{moment(mottattDato).format(DDMMYYYY_DATE_FORMAT)}</BodyShort>
-                  )}
+                  {mottattDato && <BodyShort size="small">{dayjs(mottattDato).format(DDMMYYYY_DATE_FORMAT)}</BodyShort>}
                 </FlexColumn>
                 {soknadsperiodeStart && soknadsperiodeSlutt && (
                   <FlexColumn className={styles.colWidth}>
@@ -141,7 +139,7 @@ export const VurderSoknadsfristForeldrepengerForm = ({ readOnlySubmitButton, mot
                       <FormattedMessage id="VurderSoknadsfristForeldrepengerForm.SoknadPeriode" />
                     </Detail>
                     <BodyShort size="small">
-                      {`${moment(soknadsperiodeStart).format(DDMMYYYY_DATE_FORMAT)} - ${moment(
+                      {`${dayjs(soknadsperiodeStart).format(DDMMYYYY_DATE_FORMAT)} - ${dayjs(
                         soknadsperiodeSlutt,
                       ).format(DDMMYYYY_DATE_FORMAT)}`}
                     </BodyShort>

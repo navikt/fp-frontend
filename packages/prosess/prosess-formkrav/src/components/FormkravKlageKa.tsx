@@ -3,7 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { BodyShort, Heading, Label } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { DATE_TIME_FORMAT } from '@navikt/ft-utils';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
 import type { KlageVurdering } from '@navikt/fp-types';
@@ -33,7 +33,7 @@ export const FormkravKlageKa = ({ klageVurdering, avsluttedeBehandlinger }: Prop
     const behandling = avsluttedeBehandlinger.find(b => b.uuid === klageFormkravResultatKA.paKlagdBehandlingUuid);
     if (behandling) {
       const navn = alleKodeverk[KodeverkType.BEHANDLING_TYPE].find(k => k.kode === behandling.type)?.navn;
-      vedtak = `${navn} ${moment(behandling.avsluttet).format(DATE_TIME_FORMAT)}`;
+      vedtak = `${navn} ${dayjs(behandling.avsluttet).format(DATE_TIME_FORMAT)}`;
     }
   }
 

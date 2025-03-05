@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { BodyShort, Label } from '@navikt/ds-react';
 import { FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Soknad } from '@navikt/fp-types';
@@ -35,7 +35,7 @@ export const BarnPanel = ({ alleMerknaderFraBeslutter, soknad }: Props) => {
               <FormattedMessage id="BarnPanel.ChildNumberBornData" values={{ childNumber: key }} />
             </Label>
             <BodyShort size="small">
-              {moment(adopsjonFodelsedatoer[parseInt(key, 10)]).format(DDMMYYYY_DATE_FORMAT)}
+              {dayjs(adopsjonFodelsedatoer[parseInt(key, 10)]).format(DDMMYYYY_DATE_FORMAT)}
             </BodyShort>
             <VerticalSpacer eightPx />
           </React.Fragment>
