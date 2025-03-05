@@ -22,7 +22,7 @@
   "dependencies": {
     "@editorjs/editorjs": "2.30.8",
     "@editorjs/header": "2.8.8",
-    "@editorjs/list": "2.0.4",
+    "@editorjs/list": "2.0.6",
     "@editorjs/paragraph": "2.11.7",
     "@navikt/aksel-icons": "7.13.0",
     "@navikt/ds-react": "7.13.0",
