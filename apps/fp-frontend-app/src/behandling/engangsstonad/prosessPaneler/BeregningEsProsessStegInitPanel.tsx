@@ -12,12 +12,11 @@ import { PanelOverstyringProvider } from '@navikt/fp-utils';
 import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitOverstyringPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
-import type { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODE = AksjonspunktKode.OVERSTYR_BEREGNING;
 
-export const BeregningEsProsessStegInitPanel = (props: ProsessPanelInitProps) => {
+export const BeregningEsProsessStegInitPanel = () => {
   const standardPanelProps = useStandardProsessPanelProps([AKSJONSPUNKT_KODE]);
 
   const { behandling, rettigheter } = use(BehandlingDataContext);
@@ -35,7 +34,6 @@ export const BeregningEsProsessStegInitPanel = (props: ProsessPanelInitProps) =>
       overrideReadOnly={standardPanelProps.isReadOnly}
     >
       <ProsessDefaultInitOverstyringPanel
-        {...props}
         standardPanelProps={standardPanelProps}
         prosessPanelKode={ProsessStegCode.BEREGNING}
         prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.Beregning' })}

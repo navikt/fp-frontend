@@ -26,7 +26,6 @@ import { forhåndsvisVedtaksbrev, useBehandlingApi } from '../../../data/behandl
 import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
-import type { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 import { ÅpenRevurderingModal } from '../modaler/ÅpenRevurderingModal';
 
@@ -40,10 +39,7 @@ interface Props {
   tilbakekrevingKodeverk: AlleKodeverkTilbakekreving;
 }
 
-export const VedtakTilbakekrevingProsessInitPanel = ({
-  tilbakekrevingKodeverk,
-  ...props
-}: Props & ProsessPanelInitProps) => {
+export const VedtakTilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }: Props) => {
   const intl = useIntl();
 
   const { behandling, alleBehandlinger } = use(BehandlingDataContext);
@@ -91,7 +87,6 @@ export const VedtakTilbakekrevingProsessInitPanel = ({
       <ÅpenRevurderingModal harÅpenRevurdering={harApenRevurdering} />
 
       <ProsessDefaultInitPanel
-        {...props}
         standardPanelProps={standardPanelProps}
         prosessPanelKode={ProsessStegCode.VEDTAK}
         prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Vedtak' })}

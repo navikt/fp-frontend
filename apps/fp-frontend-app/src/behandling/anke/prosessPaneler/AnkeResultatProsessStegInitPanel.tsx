@@ -11,7 +11,6 @@ import { AnkeResultatProsessIndex } from '@navikt/fp-prosess-anke-resultat';
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
-import type { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [
@@ -20,7 +19,7 @@ const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.FORESLA_VEDTAK_MANUELT,
 ];
 
-export const AnkeResultatProsessStegInitPanel = ({ ...props }: ProsessPanelInitProps) => {
+export const AnkeResultatProsessStegInitPanel = () => {
   const intl = useIntl();
 
   const { behandling } = use(BehandlingDataContext);
@@ -32,7 +31,6 @@ export const AnkeResultatProsessStegInitPanel = ({ ...props }: ProsessPanelInitP
 
   return (
     <ProsessDefaultInitPanel
-      {...props}
       standardPanelProps={standardPanelProps}
       prosessPanelKode={ProsessStegCode.ANKE_RESULTAT}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.AnkeResultat' })}

@@ -23,7 +23,6 @@ import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedta
 import { IverksetterVedtakStatusModal } from '../../felles/modaler/vedtak/IverksetterVedtakStatusModal';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
-import type { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER = [
@@ -38,7 +37,7 @@ const IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER = [
 
 const AKSJONSPUNKT_KODER = [...IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER, AksjonspunktKode.FORESLA_VEDTAK];
 
-export const VedtakSvpProsessStegInitPanel = (props: ProsessPanelInitProps) => {
+export const VedtakSvpProsessStegInitPanel = () => {
   const intl = useIntl();
 
   const { behandling, fagsak, setSkalOppdatereEtterBekreftelseAvAp } = use(BehandlingDataContext);
@@ -92,7 +91,6 @@ export const VedtakSvpProsessStegInitPanel = (props: ProsessPanelInitProps) => {
 
   return (
     <ProsessDefaultInitPanel
-      {...props}
       standardPanelProps={standardPanelProps}
       prosessPanelKode={ProsessStegCode.VEDTAK}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Vedtak' })}

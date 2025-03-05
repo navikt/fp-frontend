@@ -10,7 +10,6 @@ import type { Behandling } from '@navikt/fp-types';
 
 import type { InngangsvilkarPanelData } from '../typer/inngangsvilkarPanelData';
 import type { InngangsvilkarPanelInitProps } from '../typer/inngangsvilkarPanelInitProps';
-import type { ProsessPanelInitProps } from '../typer/prosessPanelInitProps';
 import { BehandlingDataContext } from '../utils/behandlingDataContext';
 import { ProsessPanelWrapper } from './ProsessPanelWrapper';
 import { useProsessMenyRegistrerer } from './useProsessMenyRegistrerer';
@@ -44,18 +43,12 @@ const getErAksjonspunktOpen = (paneler: InngangsvilkarPanelData[], behandling: B
 };
 
 interface Props {
-  apentFaktaPanelInfo?: { urlCode: string; text: string };
+  faktaPanelMedÅpentApInfo?: { urlCode: string; text: string };
   leftPanels: (props: InngangsvilkarPanelInitProps) => ReactElement;
   rightPanels?: (props: InngangsvilkarPanelInitProps) => ReactElement;
 }
 
-export const InngangsvilkarDefaultInitWrapper = ({
-  valgtProsessSteg,
-  registrerProsessPanel,
-  apentFaktaPanelInfo,
-  leftPanels,
-  rightPanels,
-}: Props & ProsessPanelInitProps) => {
+export const InngangsvilkarDefaultInitWrapper = ({ faktaPanelMedÅpentApInfo, leftPanels, rightPanels }: Props) => {
   const intl = useIntl();
 
   const { behandling, oppdaterProsessStegOgFaktaPanelIUrl } = use(BehandlingDataContext);
@@ -78,10 +71,10 @@ export const InngangsvilkarDefaultInitWrapper = ({
 
   const oppdaterUrl = useCallback(
     (evt: MouseEvent) => {
-      oppdaterProsessStegOgFaktaPanelIUrl(undefined, apentFaktaPanelInfo?.urlCode);
+      oppdaterProsessStegOgFaktaPanelIUrl(undefined, faktaPanelMedÅpentApInfo?.urlCode);
       evt.preventDefault();
     },
-    [apentFaktaPanelInfo],
+    [faktaPanelMedÅpentApInfo],
   );
 
   const harApentAksjonspunkt = getErAksjonspunktOpen(panelInfo, behandling);
@@ -90,14 +83,12 @@ export const InngangsvilkarDefaultInitWrapper = ({
   const skalVises = panelInfo.length > 0;
 
   const erPanelValgt = useProsessMenyRegistrerer(
-    registrerProsessPanel,
     ProsessStegCode.INNGANGSVILKAR,
     intl.formatMessage({ id: 'Behandlingspunkt.Inngangsvilkar' }),
     skalVises,
     harApentAksjonspunkt,
     status,
-    !apentFaktaPanelInfo && harApentAksjonspunkt,
-    valgtProsessSteg,
+    !faktaPanelMedÅpentApInfo && harApentAksjonspunkt,
   );
 
   const aksjonspunktTekster = panelInfo.map(p => p.aksjonspunktTekst).filter(tekst => !!tekst);
@@ -110,13 +101,13 @@ export const InngangsvilkarDefaultInitWrapper = ({
       skalSkjulePanel={!erPanelValgt}
     >
       <VStack gap="8">
-        {erPanelValgt && ((apentFaktaPanelInfo && erIkkeFerdigbehandlet) || aksjonspunktTekster.length > 0) && (
+        {erPanelValgt && ((faktaPanelMedÅpentApInfo && erIkkeFerdigbehandlet) || aksjonspunktTekster.length > 0) && (
           <AksjonspunktHelpTextHTML>
-            {apentFaktaPanelInfo && erIkkeFerdigbehandlet
+            {faktaPanelMedÅpentApInfo && erIkkeFerdigbehandlet
               ? [
                   <HStack gap="1" key="1">
                     <FormattedMessage id="InngangsvilkarProsessStegPanelDef.AvventerAvklaringAv" />
-                    <Link onClick={oppdaterUrl}>{apentFaktaPanelInfo.text}</Link>
+                    <Link onClick={oppdaterUrl}>{faktaPanelMedÅpentApInfo.text}</Link>
                   </HStack>,
                 ]
               : aksjonspunktTekster.map(tekst => tekst)}

@@ -25,7 +25,6 @@ import { useFormData } from '@navikt/fp-utils';
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
-import type { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 import '@navikt/ft-prosess-beregningsgrunnlag/dist/style.css';
@@ -107,10 +106,7 @@ interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
-export const BeregningsgrunnlagProsessStegInitPanel = ({
-  arbeidsgiverOpplysningerPerId,
-  ...props
-}: Props & ProsessPanelInitProps) => {
+export const BeregningsgrunnlagProsessStegInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props) => {
   const intl = useIntl();
 
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, VILKAR_KODER);
@@ -123,7 +119,6 @@ export const BeregningsgrunnlagProsessStegInitPanel = ({
 
   return (
     <ProsessDefaultInitPanel
-      {...props}
       standardPanelProps={standardPanelProps}
       prosessPanelKode={ProsessStegCode.BEREGNINGSGRUNNLAG}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Beregning' })}

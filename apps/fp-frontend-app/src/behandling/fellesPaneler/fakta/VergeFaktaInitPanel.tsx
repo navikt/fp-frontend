@@ -11,12 +11,11 @@ import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
-import type { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.AVKLAR_VERGE];
 
-export const VergeFaktaInitPanel = ({ valgtFaktaSteg, registrerFaktaPanel }: FaktaPanelInitProps) => {
+export const VergeFaktaInitPanel = () => {
   const intl = useIntl();
 
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
@@ -32,8 +31,6 @@ export const VergeFaktaInitPanel = ({ valgtFaktaSteg, registrerFaktaPanel }: Fak
   return (
     <FaktaDefaultInitPanel
       standardPanelProps={standardPanelProps}
-      valgtFaktaSteg={valgtFaktaSteg}
-      registrerFaktaPanel={registrerFaktaPanel}
       faktaPanelKode={FaktaPanelCode.VERGE}
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Verge' })}
       skalPanelVisesIMeny={skalPanelVisesIMeny}

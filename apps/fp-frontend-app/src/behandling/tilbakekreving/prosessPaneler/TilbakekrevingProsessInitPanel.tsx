@@ -13,7 +13,6 @@ import { useFormData } from '@navikt/fp-utils';
 import { type BeregnBeløpParams, useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
-import type { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 import '@navikt/ft-prosess-tilbakekreving/dist/style.css';
@@ -24,7 +23,7 @@ interface Props {
   tilbakekrevingKodeverk: AlleKodeverkTilbakekreving;
 }
 
-export const TilbakekrevingProsessInitPanel = ({ ...props }: Props & ProsessPanelInitProps) => {
+export const TilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }: Props) => {
   const intl = useIntl();
 
   const { behandling, fagsak } = use(BehandlingDataContext);
@@ -43,7 +42,6 @@ export const TilbakekrevingProsessInitPanel = ({ ...props }: Props & ProsessPane
 
   return (
     <ProsessDefaultInitPanel
-      {...props}
       standardPanelProps={standardPanelProps}
       prosessPanelKode={ProsessStegCode.TILBAKEKREVING}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Tilbakekreving' })}
@@ -55,7 +53,7 @@ export const TilbakekrevingProsessInitPanel = ({ ...props }: Props & ProsessPane
           perioderForeldelse={perioderForeldelse}
           vilkarvurderingsperioder={vilkårvurderingsperioder}
           vilkarvurdering={vilkårvurdering}
-          kodeverkSamlingFpTilbake={props.tilbakekrevingKodeverk}
+          kodeverkSamlingFpTilbake={tilbakekrevingKodeverk}
           beregnBelop={(data: BeregnBeløpParams) => beregnBeløp(data)}
           relasjonsRolleType={fagsak.relasjonsRolleType}
           relasjonsRolleTypeKodeverk={standardPanelProps.alleKodeverk[KodeverkType.RELASJONSROLLE_TYPE]}
