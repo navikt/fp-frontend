@@ -2,7 +2,7 @@ import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Heading, HStack, Table, Tag } from '@navikt/ds-react';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import { BehandlingType } from '@navikt/fp-kodeverk';
 import type { AvklartBarn, FamilieHendelse, Soknad } from '@navikt/fp-types';
@@ -12,7 +12,7 @@ import { FodselSammenligningRevurderingPanel } from './FodselSammenligningRevurd
 
 import styles from './fodselSammenligningPanel.module.css';
 
-const formatDate = (date: string): string => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
+const formatDate = (date: string): string => (date ? dayjs(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
 
 interface Props {
   behandlingsTypeKode: string;

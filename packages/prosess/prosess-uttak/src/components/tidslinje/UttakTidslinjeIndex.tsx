@@ -15,7 +15,7 @@ import type {
   Soknad,
 } from '@navikt/fp-types';
 
-import { type PeriodeSøkerMedTidslinjedata, type TidslinjeTimes,UttakTidslinje } from './UttakTidslinje';
+import { type PeriodeSøkerMedTidslinjedata, type TidslinjeTimes, UttakTidslinje } from './UttakTidslinje';
 
 //TODO (TOR) Dette er vel mapping mellom kodeverk? Bør i sofall bruka kodeverk-enums
 const OppholdArsakMapper = {

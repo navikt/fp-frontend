@@ -6,7 +6,7 @@ import { BodyShort, HStack, Label, VStack } from '@navikt/ds-react';
 import { Datepicker } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import { type FieldEditedInfo } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
@@ -113,16 +113,16 @@ const findAntallBarnUnder15 = (
   if (nrOfNotNullFodselsdatoer === 0 || !omsorgsovertakelseDato) {
     return '-';
   }
-  const omsorgsdato = moment(omsorgsovertakelseDato).subtract(15, 'years');
+  const omsorgsdato = dayjs(omsorgsovertakelseDato).subtract(15, 'years');
   return Object.values(fodselsdatoer)
-    .map(fodselsdato => (moment(fodselsdato).isAfter(omsorgsdato) ? 1 : 0))
+    .map(fodselsdato => (dayjs(fodselsdato).isAfter(omsorgsdato) ? 1 : 0))
     .reduce<number>((a, b) => a + b, 0);
 };
 
 const isAgeAbove15 = (fodselsdatoer: Record<number, string>, id: number, omsorgsovertakelseDato?: string): boolean =>
   !!fodselsdatoer[id] &&
   !!omsorgsovertakelseDato &&
-  moment(fodselsdatoer[id]).isSameOrBefore(moment(omsorgsovertakelseDato).subtract(15, 'years'));
+  dayjs(fodselsdatoer[id]).isSameOrBefore(dayjs(omsorgsovertakelseDato).subtract(15, 'years'));
 
 DokumentasjonFaktaForm.buildInitialValues = (soknad: Soknad, familiehendelse: FamilieHendelse): FormValues => ({
   omsorgsovertakelseDato: familiehendelse?.omsorgsovertakelseDato

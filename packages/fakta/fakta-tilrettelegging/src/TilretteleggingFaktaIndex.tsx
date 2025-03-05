@@ -19,8 +19,7 @@ interface Props {
 }
 
 export const TilretteleggingFaktaIndex = ({ arbeidOgInntekt, ...rest }: Props) => (
-    <RawIntlProvider value={intl}>
-      <TilretteleggingFaktaForm aoiArbeidsforhold={arbeidOgInntekt?.arbeidsforhold ?? []} {...rest} />
-    </RawIntlProvider>
-  );
-
+  <RawIntlProvider value={intl}>
+    <TilretteleggingFaktaForm aoiArbeidsforhold={arbeidOgInntekt?.arbeidsforhold ?? []} {...rest} />
+  </RawIntlProvider>
+);

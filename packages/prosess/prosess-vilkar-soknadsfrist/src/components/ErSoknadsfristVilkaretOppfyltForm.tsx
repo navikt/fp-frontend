@@ -7,7 +7,7 @@ import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import {
   AksjonspunktKode,
@@ -31,7 +31,7 @@ const findRadioButtonTextCode = (erVilkarOk?: boolean): string =>
     : 'ErSoknadsfristVilkaretOppfyltForm.VilkarIkkeOppfylt';
 
 const findSoknadsfristDate = (mottattDato: string, antallDagerSoknadLevertForSent?: number): string =>
-  moment(mottattDato).subtract(antallDagerSoknadLevertForSent, 'days').format(ISO_DATE_FORMAT);
+  dayjs(mottattDato).subtract(antallDagerSoknadLevertForSent, 'days').format(ISO_DATE_FORMAT);
 
 type FormValues = {
   erVilkarOk?: boolean;

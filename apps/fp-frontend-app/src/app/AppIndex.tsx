@@ -5,8 +5,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { createIntl, parseQueryString } from '@navikt/ft-utils';
 import { MutationCache, QueryCache, QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import dayjs from 'dayjs';
 import { HTTPError } from 'ky';
-import moment from 'moment';
 
 import { ForbiddenPage, UnauthorizedPage } from '@navikt/fp-sak-infosider';
 
@@ -65,11 +65,11 @@ export const AppIndex = () => {
   useEffect(() => {
     if (navAnsatt?.funksjonellTid) {
       // TODO (TOR) Dette endrar jo berre moment. Kva med kode som brukar Date direkte?
-      const diffInMinutes = moment().diff(navAnsatt.funksjonellTid, 'minutes');
+      const diffInMinutes = dayjs().diff(navAnsatt.funksjonellTid, 'minutes');
       // Hvis diffInMinutes har avvik på over 5min: override moment.now (ref. http://momentjs.com/docs/#/customization/now/)
       if (diffInMinutes >= 5 || diffInMinutes <= -5) {
-        const diff = moment().diff(navAnsatt.funksjonellTid);
-        moment.now = () => Date.now() - diff;
+        const diff = dayjs().diff(navAnsatt.funksjonellTid);
+        dayjs.now = () => Date.now() - diff;
       }
     }
   }, [navAnsatt?.funksjonellTid]);
