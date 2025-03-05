@@ -6,7 +6,7 @@ import { BodyShort, Table, VStack } from '@navikt/ds-react';
 import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { DDMMYYYY_DATE_FORMAT, isObject } from '@navikt/ft-utils';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import {
   AksjonspunktKode,
@@ -57,7 +57,7 @@ const capitalizeFirstLetters = (navn: string): string =>
     .join(' ');
 
 const lagArbeidsgiverNavnOgFødselsdatoTekst = (navn: string, fodselsdato?: string): string =>
-  `${capitalizeFirstLetters(navn)} (${moment(fodselsdato).format(DDMMYYYY_DATE_FORMAT)})`;
+  `${capitalizeFirstLetters(navn)} (${dayjs(fodselsdato).format(DDMMYYYY_DATE_FORMAT)})`;
 
 const lagArbeidsgiverNavnOgOrgnrTekst = (navn: string, organisasjonsnummer: string): string =>
   `${capitalizeFirstLetters(navn)} (${organisasjonsnummer})`;

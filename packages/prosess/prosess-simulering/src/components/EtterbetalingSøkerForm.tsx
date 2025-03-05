@@ -8,7 +8,7 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt } from '@navikt/fp-types';
 import type { KontrollerEtterbetalingTilSøkerAP } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import type { EtterbetalingSøkerFormValues,FormValues } from '../types/FormValues';
+import type { EtterbetalingSøkerFormValues, FormValues } from '../types/FormValues';
 
 import styles from './etterbetalingSøkerForm.module.css';
 

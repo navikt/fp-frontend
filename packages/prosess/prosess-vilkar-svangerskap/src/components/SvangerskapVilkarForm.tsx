@@ -5,7 +5,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Label } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import { AksjonspunktKode, KodeverkType, TilretteleggingType, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import {
@@ -30,7 +30,7 @@ const finnesUttakPåArbfor = (arbfor: ArbeidsforholdFodselOgTilrettelegging): bo
   const finnesHelTilretteleggingEtterBehovOppstår = arbfor.tilretteleggingDatoer.some(
     (dato: ArbeidsforholdTilretteleggingDato) =>
       dato.type === TilretteleggingType.HEL_TILRETTELEGGING &&
-      moment(dato.fom).isAfter(moment(arbfor.tilretteleggingBehovFom)),
+      dayjs(dato.fom).isAfter(dayjs(arbfor.tilretteleggingBehovFom)),
   );
   return finnesAnnenTilretteleggingEnnHel || finnesHelTilretteleggingEtterBehovOppstår;
 };

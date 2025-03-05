@@ -290,9 +290,7 @@ export const UttakProsessPanel = ({
       <VerticalSpacer twentyPx />
       {aksjonspunkterForPanel.length > 0 && harÅpneAksjonspunkter && (
         <>
-          <AksjonspunktHelpTextHTML>
-            {hentApTekster(uttaksresultat, aksjonspunkterForPanel)}
-          </AksjonspunktHelpTextHTML>
+          <AksjonspunktHelpTextHTML>{hentApTekster(uttaksresultat, aksjonspunkterForPanel)}</AksjonspunktHelpTextHTML>
           <VerticalSpacer twentyPx />
         </>
       )}
