@@ -36,6 +36,7 @@ import type {
   ManglendeInntektsmeldingVurdering,
   ManueltArbeidsforhold,
   Medlemskap,
+  Oppgave,
   OpprettVergeParams,
   Opptjening,
   PeriodeSoker,
@@ -193,6 +194,7 @@ export const BehandlingRel = {
   UTLAND_DOK_STATUS: 'utland-dok-status',
   VERGE: 'soeker-verge',
   UPDATE_ON_HOLD: 'endre-pa-vent',
+  HENT_OPPGAVER: 'hent-oppgaver',
 };
 
 const getArbeidsgiverOversiktOptions =
@@ -501,6 +503,14 @@ const getVergeOptions = (links: ApiLink[]) => (behandling: Behandling, isEnabled
     staleTime: Infinity,
   });
 
+const getOppgaverOptions = (links: ApiLink[]) => (behandling: Behandling) =>
+  queryOptions({
+    queryKey: [BehandlingRel.HENT_OPPGAVER, behandling.uuid, behandling.versjon],
+    queryFn: () => kyExtended.get(getUrlFromRel('HENT_OPPGAVER', links)).json<Oppgave[]>(),
+    enabled: harLenke(behandling, 'HENT_OPPGAVER'),
+    staleTime: Infinity,
+  });
+
 export const hentBehandling = (behandlingUuid: string) =>
   kyExtended.post<Behandling>(BehandlingUrl.BEHANDLING, {
     json: { behandlingUuid },
@@ -711,6 +721,7 @@ export const useBehandlingApi = (behandling: Behandling) => {
       opprettVergeV2: getOpprettVergeV2(links),
       fjernVergeV2: getFjernVergeV2(links),
     },
+    oppgaverOptions: getOppgaverOptions(links),
     anke: {
       ankeVurderingOptions: getAnkeVurderingOptions(links),
     },

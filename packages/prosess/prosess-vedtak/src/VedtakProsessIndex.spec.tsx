@@ -5,11 +5,13 @@ import userEvent from '@testing-library/user-event';
 import { DokumentMalType } from '@navikt/fp-kodeverk';
 
 import * as stories from './VedtakProsessIndex.stories';
+import { expect } from 'vitest';
 
 const {
   InnvilgetForeldrepengerTilGodkjenningForSaksbehandler,
   AvslåttForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyring,
   TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil,
+  OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil,
   InnvilgetEngangsstønadTilGodkjenningForSaksbehandlerUtenOverstyring,
   InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerUtenOverstyring,
   GodkjentForeldrepengerMedManueltBrevForSaksbehandlerMedOverstyring,
@@ -246,6 +248,51 @@ describe('<VedtakProsessIndex>', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, [
       {
         begrunnelse: 'Dette er en tekst',
+        fritekstBrev: undefined,
+        kode: '5015',
+        overskrift: undefined,
+        skalBrukeOverstyrendeFritekstBrev: false,
+      },
+    ]);
+  });
+
+  it('skal vise oppgaver for aksjonspunkter saksbehandler må ta stilling til før godkjenning', async () => {
+    const lagre = vi.fn();
+    render(<OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil submitCallback={lagre} />);
+
+    expect(await screen.findByText('Vedtak')).toBeInTheDocument();
+    expect(screen.getByText('Foreldrepenger er innvilget')).toBeInTheDocument();
+    expect(screen.getByText('Automatisk vedtaksbrev')).toBeInTheDocument();
+    expect(screen.getByText('Rediger vedtaksbrev')).toBeInTheDocument();
+
+    expect(screen.getByText('Vurder følgende før du sender til godkjenning:')).toBeInTheDocument();
+    expect(
+      screen.getByText('Påvirker den åpne Gosys-oppgaven «Vurder konsekvens for ytelse» behandlingen?'),
+    ).toBeInTheDocument();
+    expect(screen.getByText('Påvirker den åpne Gosys-oppgaven «Vurder dokument» behandlingen?')).toBeInTheDocument();
+
+    expect(screen.getByText('Åpne oppgaver fra Gosys')).toBeInTheDocument();
+    expect(screen.getByText('Type')).toBeInTheDocument();
+    expect(screen.getByText('Beskrivelse')).toBeInTheDocument();
+    expect(screen.getAllByText('Vurder konsekvens for ytelse')).toHaveLength(2);
+    expect(screen.getAllByText('Vurder dokument')).toHaveLength(2);
+    expect(screen.getByText('Se sto mottatt 24.02.25')).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        'Fullmektig tar kontakt. Ber om fristutsettelse 4 uker, ettersom bruker først mottok brevet i dag. ' +
+          'Jeg har utsatt 14 dage...',
+      ),
+    ).toBeInTheDocument();
+    expect(screen.getByText('Les mer')).toBeInTheDocument();
+    expect(screen.getByText('Søknad om foreldrepenger ved fødsel')).toBeInTheDocument();
+    expect(screen.getByText('Bekreftelse fra arbeidsgiver')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Til godkjenning'));
+
+    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
+    expect(lagre).toHaveBeenNthCalledWith(1, [
+      {
+        begrunnelse: undefined,
         fritekstBrev: undefined,
         kode: '5015',
         overskrift: undefined,

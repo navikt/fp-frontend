@@ -251,6 +251,53 @@ export const TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = {
   },
 };
 
+export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = {
+  args: {
+    behandling: {
+      ...defaultBehandling,
+      aksjonspunkt: [
+        ...defaultAksjonspunkter,
+        {
+          definisjon: AksjonspunktKode.VURDERE_ANNEN_YTELSE,
+          status: AksjonspunktStatus.OPPRETTET,
+          begrunnelse: undefined,
+          kanLoses: false,
+          toTrinnsBehandling: true,
+        },
+        {
+          definisjon: AksjonspunktKode.VURDERE_DOKUMENT,
+          status: AksjonspunktStatus.OPPRETTET,
+          begrunnelse: undefined,
+          kanLoses: false,
+        },
+      ],
+    },
+    oppgaver: [
+      {
+        oppgavetype: 'VUR_KONS_YTE',
+        beskrivelse: 'Se sto mottatt 24.02.25',
+      },
+      {
+        oppgavetype: 'VUR_KONS_YTE',
+        beskrivelse:
+          'Fullmektig tar kontakt. Ber om fristutsettelse 4 uker, ettersom bruker først mottok brevet i dag. ' +
+          'Jeg har utsatt 14 dager, men han ønsker ytterligere 2 uker utover det, altså 28.09.24. ' +
+          'Kan dere gi tilbakemelding på dette?',
+      },
+      {
+        oppgavetype: 'VUR',
+        beskrivelse: 'Bekreftelse fra arbeidsgiver',
+      },
+      {
+        oppgavetype: 'VUR',
+        beskrivelse: 'Søknad om foreldrepenger ved fødsel',
+      },
+    ],
+    ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
+    isReadOnly: false,
+  },
+};
+
 /*
  * Førstegangssøknad - Engangsstøand
  */

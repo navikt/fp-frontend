@@ -1,0 +1,10 @@
+.lesMer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.button {
+  min-width: 96px;
+  max-width: 96px;
+}

@@ -1,0 +1,11 @@
+.headerType {
+  width: 25%;
+}
+
+.headerBeskrivelse {
+  width: 75%;
+}
+
+.row {
+  vertical-align: top;
+}
