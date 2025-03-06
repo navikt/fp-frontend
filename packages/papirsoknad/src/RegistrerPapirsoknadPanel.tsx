@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
 import { Heading, VStack } from '@navikt/ds-react';
@@ -7,7 +7,7 @@ import { createIntl } from '@navikt/ft-utils';
 
 import { FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { SoknadData } from '@navikt/fp-papirsoknad-ui-komponenter';
-import type { AlleKodeverk, Fagsak } from '@navikt/fp-types';
+import type { AlleKodeverk, Behandling, Fagsak } from '@navikt/fp-types';
 
 import { EngangsstonadPapirsoknadIndex } from './engangsstonad/EngangsstonadPapirsoknadIndex';
 import { ForeldrepengerPapirsoknadIndex } from './foreldrepenger/ForeldrepengerPapirsoknadIndex';
@@ -22,13 +22,17 @@ interface Props {
   fagsak: Fagsak;
   kodeverk: AlleKodeverk;
   readOnly: boolean;
-  lagreUfullstendig: (fagsakYtelseType: string, familieHendelseType: string, foreldreType: string) => Promise<any>;
+  lagreUfullstendig: (
+    fagsakYtelseType: string,
+    familieHendelseType: string,
+    foreldreType: string,
+  ) => Promise<Behandling>;
   lagreFullstendig: (
     formValues: any,
     fagsakYtelseType: string,
     familieHendelseType: string,
     foreldreType: string,
-  ) => Promise<any>;
+  ) => Promise<Behandling>;
   erEndringssøknad: boolean;
 }
 
@@ -42,26 +46,24 @@ export const RegistrerPapirsoknadPanel = ({
 }: Props) => {
   const [soknadData, setSoknadData] = useState<SoknadData>();
 
-  const lagre = useCallback(
-    (formValues: any) => {
-      if (soknadData) {
-        lagreFullstendig(
-          formValues,
-          soknadData.fagsakYtelseType,
-          soknadData.familieHendelseType,
-          soknadData.foreldreType,
-        );
-      }
-      return Promise.resolve();
-    },
-    [soknadData],
-  );
-  const lagreOgAvslutt = useCallback(() => {
+  const lagre = (formValues: any) => {
+    if (soknadData) {
+      lagreFullstendig(
+        formValues,
+        soknadData.fagsakYtelseType,
+        soknadData.familieHendelseType,
+        soknadData.foreldreType,
+      );
+    }
+    return Promise.resolve();
+  };
+
+  const lagreOgAvslutt = () => {
     if (soknadData) {
       lagreUfullstendig(soknadData.fagsakYtelseType, soknadData.familieHendelseType, soknadData.foreldreType);
     }
     return Promise.resolve();
-  }, [soknadData]);
+  };
 
   return (
     <RawIntlProvider value={intl}>

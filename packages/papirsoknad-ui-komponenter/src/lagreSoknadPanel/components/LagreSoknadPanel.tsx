@@ -1,4 +1,3 @@
-import { useCallback, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -6,8 +5,6 @@ import { Button, Heading, VStack } from '@navikt/ds-react';
 import { CheckboxField, TextAreaField } from '@navikt/ft-form-hooks';
 import { ariaCheck, hasValidText, maxLength } from '@navikt/ft-form-validators';
 import { BorderBox } from '@navikt/ft-ui-komponenter';
-
-import { LukkPapirsoknadModal } from './LukkPapirsoknadModal';
 
 const maxLength1500 = maxLength(1500);
 
@@ -26,14 +23,8 @@ interface Props {
 export const LagreSoknadPanel = ({ submitting, onSubmitUfullstendigsoknad, readOnly = true }: Props) => {
   const intl = useIntl();
 
-  const [showLukkSoknadModal, setShowLukkSoknadModal] = useState(false);
-
   const { watch } = useFormContext<LagreSoknadFormValues>();
   const ufullstendigSoeknad = watch('ufullstendigSoeknad') || false;
-
-  const toggleLukkPapirsoknadModal = useCallback(() => {
-    setShowLukkSoknadModal(!showLukkSoknadModal);
-  }, [setShowLukkSoknadModal, showLukkSoknadModal]);
 
   return (
     <BorderBox>
@@ -75,7 +66,7 @@ export const LagreSoknadPanel = ({ submitting, onSubmitUfullstendigsoknad, readO
           {ufullstendigSoeknad && (
             <Button
               id="endButton"
-              onClick={toggleLukkPapirsoknadModal}
+              onClick={onSubmitUfullstendigsoknad}
               size="small"
               variant="primary"
               loading={submitting}
@@ -86,11 +77,6 @@ export const LagreSoknadPanel = ({ submitting, onSubmitUfullstendigsoknad, readO
             </Button>
           )}
         </div>
-        <LukkPapirsoknadModal
-          handleSubmit={onSubmitUfullstendigsoknad}
-          showModal={showLukkSoknadModal}
-          cancelEvent={toggleLukkPapirsoknadModal}
-        />
       </VStack>
     </BorderBox>
   );

@@ -19,9 +19,9 @@ const meta = {
       action('lagreFullstendig')(values);
       return Promise.resolve(values);
     },
-    lagreUfullstendig: (...args) => {
-      action('lagreUfullstendig')(args);
-      return Promise.resolve();
+    lagreUfullstendig: (values: any) => {
+      action('lagreUfullstendig')(values);
+      return Promise.resolve(values);
     },
   },
 } satisfies Meta<typeof RegistrerPapirsoknadPanel>;
