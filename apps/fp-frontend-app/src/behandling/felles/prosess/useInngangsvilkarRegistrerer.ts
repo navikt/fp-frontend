@@ -1,26 +1,20 @@
-import { useCallback, useEffect, useState } from 'react';
+import { use, useEffect } from 'react';
 
-import type { InngangsvilkarPanelData } from '../typer/inngangsvilkarPanelData';
+import { InngangsvilkårPanelDataContext } from './InngangsvilkarDefaultInitWrapper';
 
 export const useInngangsvilkarRegistrerer = (
-  registrerInngangsvilkarPanel: (data: InngangsvilkarPanelData) => void,
-  behandlingVersjon: number,
   id: string,
   aksjonspunktTekst: string,
   skalVises: boolean,
   erAksjonspunktApent: boolean,
   status: string,
+  erOverstyrt: boolean,
 ) => {
-  const [erOverstyrt, setOverstyrt] = useState(false);
-  const toggleOverstyring = useCallback(() => setOverstyrt(!erOverstyrt), [erOverstyrt]);
-
-  useEffect(() => {
-    setOverstyrt(false);
-  }, [behandlingVersjon]);
+  const { settIngangsvilkårPanelData } = use(InngangsvilkårPanelDataContext);
 
   useEffect(() => {
     if (skalVises) {
-      registrerInngangsvilkarPanel({
+      settIngangsvilkårPanelData({
         id,
         status,
         harApentAksjonspunkt: erOverstyrt || erAksjonspunktApent,
@@ -28,6 +22,4 @@ export const useInngangsvilkarRegistrerer = (
       });
     }
   }, [erAksjonspunktApent, skalVises, erOverstyrt]);
-
-  return { erOverstyrt, toggleOverstyring };
 };
