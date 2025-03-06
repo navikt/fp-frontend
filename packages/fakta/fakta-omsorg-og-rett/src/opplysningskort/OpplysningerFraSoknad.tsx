@@ -4,7 +4,7 @@ import { BodyShort, Label, Table } from '@navikt/ds-react';
 
 import { FaktaKilde } from '@navikt/fp-fakta-felles';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import { type AlleKodeverk, type OmsorgOgRett } from '@navikt/fp-types';
+import { type AlleKodeverk, type OmsorgOgRett, Verdi } from '@navikt/fp-types';
 
 import { EkspansjonsKort } from '../components/ekspansjonsKort/EkspansjonsKort.tsx';
 
@@ -16,7 +16,11 @@ interface Props {
 export const OpplysningerFraSoknad = ({ omsorgOgRett }: Props) => {
   const intl = useIntl();
 
-  const { harRettNorge, harOppholdEØS, harRettEØS, harUføretrygd } = omsorgOgRett.søknad.annenpartRettighet ?? {};
+  const annenpartRettighet = omsorgOgRett.søknad.annenpartRettighet;
+  const harRettNorge = annenpartRettighet?.harRettNorge ?? Verdi.IKKE_RELEVANT;
+  const harUføretrygd = annenpartRettighet?.harUføretrygd ?? Verdi.IKKE_RELEVANT;
+  const harOppholdEØS = annenpartRettighet?.harOppholdEØS ?? Verdi.IKKE_RELEVANT;
+  const harRettEØS = annenpartRettighet?.harRettEØS ?? Verdi.IKKE_RELEVANT;
   const harSøkerAleneOmsorg = omsorgOgRett.søknad.søkerHarAleneomsorg;
   const { annenpartIdent, annenpartBostedsland } = omsorgOgRett.søknad;
   const bostedsland = alleKodeverk.Landkoder.find(land => land.kode === annenpartBostedsland)?.navn;
@@ -28,7 +32,7 @@ export const OpplysningerFraSoknad = ({ omsorgOgRett }: Props) => {
     <EkspansjonsKort
       tittel={intl.formatMessage({ id: 'OpplysningsKort.OpplysningerFraSøknadTittel' })}
       kilde={FaktaKilde.SOKNAD}
-      defaultOpen={true}
+      defaultOpen
     >
       <Table>
         <Table.Header>
@@ -81,7 +85,7 @@ export const OpplysningerFraSoknad = ({ omsorgOgRett }: Props) => {
               </>
             </Table.Row>
           )}
-          {harSøkerAleneOmsorg !== null && (
+          {harSøkerAleneOmsorg !== Verdi.IKKE_RELEVANT && (
             <Table.Row>
               <>
                 <Table.DataCell>
@@ -101,7 +105,7 @@ export const OpplysningerFraSoknad = ({ omsorgOgRett }: Props) => {
               </>
             </Table.Row>
           )}
-          {harRettNorge !== undefined && (
+          {harRettNorge !== Verdi.IKKE_RELEVANT && (
             <Table.Row>
               <>
                 <Table.DataCell>
@@ -121,7 +125,7 @@ export const OpplysningerFraSoknad = ({ omsorgOgRett }: Props) => {
               </>
             </Table.Row>
           )}
-          {harOppholdEØS !== undefined && harOppholdEØS !== null && (
+          {harOppholdEØS !== Verdi.IKKE_RELEVANT && (
             <Table.Row>
               <>
                 <Table.DataCell textSize="small">
@@ -141,7 +145,7 @@ export const OpplysningerFraSoknad = ({ omsorgOgRett }: Props) => {
               </>
             </Table.Row>
           )}
-          {harRettEØS !== undefined && harRettEØS !== null && (
+          {harRettEØS !== Verdi.IKKE_RELEVANT && (
             <Table.Row>
               <>
                 <Table.DataCell>
@@ -158,7 +162,7 @@ export const OpplysningerFraSoknad = ({ omsorgOgRett }: Props) => {
               </>
             </Table.Row>
           )}
-          {harUføretrygd !== undefined && harUføretrygd !== null && (
+          {harUføretrygd !== Verdi.IKKE_RELEVANT && (
             <Table.Row>
               <>
                 <Table.DataCell>

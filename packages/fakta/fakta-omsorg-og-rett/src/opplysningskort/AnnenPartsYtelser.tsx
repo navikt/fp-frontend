@@ -2,14 +2,16 @@ import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Label, Table } from '@navikt/ds-react';
 
-import { type OmsorgOgRett } from '@navikt/fp-types';
+import { type OmsorgOgRett, Verdi } from '@navikt/fp-types';
 
 interface Props {
   omsorgOgRett: OmsorgOgRett;
 }
 
 export const AnnenPartsYtelser = ({ omsorgOgRett }: Props) => {
-  const { harAnnenpartUføretrygd, harAnnenpartForeldrepenger, harAnnenpartEngangsstønad } = omsorgOgRett.registerdata;
+  const harAnnenpartUføretrygd = omsorgOgRett.registerdata.harAnnenpartUføretrygd ?? Verdi.IKKE_RELEVANT;
+  const harAnnenpartForeldrepenger = omsorgOgRett.registerdata.harAnnenpartForeldrepenger ?? Verdi.IKKE_RELEVANT;
+  const harAnnenpartEngangsstønad = omsorgOgRett.registerdata.harAnnenpartEngangsstønad ?? Verdi.IKKE_RELEVANT;
 
   return (
     <>
@@ -23,7 +25,7 @@ export const AnnenPartsYtelser = ({ omsorgOgRett }: Props) => {
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {harAnnenpartUføretrygd !== null && (
+          {harAnnenpartUføretrygd !== Verdi.IKKE_RELEVANT && (
             <Table.Row>
               <>
                 <Table.DataCell>
@@ -43,7 +45,7 @@ export const AnnenPartsYtelser = ({ omsorgOgRett }: Props) => {
             </Table.Row>
           )}
 
-          {harAnnenpartForeldrepenger !== null && (
+          {harAnnenpartForeldrepenger !== Verdi.IKKE_RELEVANT && (
             <Table.Row>
               <>
                 <Table.DataCell>
@@ -62,7 +64,7 @@ export const AnnenPartsYtelser = ({ omsorgOgRett }: Props) => {
               </>
             </Table.Row>
           )}
-          {harAnnenpartEngangsstønad !== null && (
+          {harAnnenpartEngangsstønad !== Verdi.IKKE_RELEVANT && (
             <Table.Row>
               <>
                 <Table.DataCell>

@@ -8,26 +8,32 @@ export type OmsorgOgRett = {
 };
 
 export type Søknad = {
-  søkerHarAleneomsorg: boolean;
+  søkerHarAleneomsorg: Verdi;
   annenpartIdent: string;
   annenpartBostedsland: string;
   annenpartRettighet: Rettighet;
 };
 
 export type Rettighet = {
-  harRettNorge: boolean;
-  harOppholdEØS?: boolean;
-  harRettEØS?: boolean;
-  harUføretrygd?: boolean;
+  harRettNorge: Verdi;
+  harOppholdEØS: Verdi;
+  harRettEØS: Verdi;
+  harUføretrygd: Verdi;
 };
 
 export type RegisterData = {
-  harAnnenpartUføretrygd?: boolean;
-  harAnnenpartForeldrepenger?: boolean;
-  harAnnenpartEngangsstønad?: boolean;
+  harAnnenpartUføretrygd: Verdi;
+  harAnnenpartForeldrepenger: Verdi;
+  harAnnenpartEngangsstønad: Verdi;
 };
 
 export type ManuellBehandlingResultat = {
-  søkerHarAleneomsorg?: boolean;
+  søkerHarAleneomsorg: Verdi;
   annenpartRettighet: Rettighet;
 };
+
+export enum Verdi {
+  JA = 'JA',
+  NEI = 'NEI',
+  IKKE_RELEVANT = 'IKKE_RELEVANT',
+}

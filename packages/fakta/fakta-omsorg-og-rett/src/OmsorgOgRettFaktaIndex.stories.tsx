@@ -11,7 +11,13 @@ import {
   SivilstandType,
 } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import { type Aksjonspunkt, KjønnkodeEnum, type OmsorgOgRett, type PersonopplysningerBasis } from '@navikt/fp-types';
+import {
+  type Aksjonspunkt,
+  KjønnkodeEnum,
+  type OmsorgOgRett,
+  type PersonopplysningerBasis,
+  Verdi,
+} from '@navikt/fp-types';
 
 import { OmsorgOgRettFaktaIndex } from './OmsorgOgRettFaktaIndex';
 
@@ -68,20 +74,20 @@ const defaultBarn: PersonopplysningerBasis = {
 
 const defaultOmsorgOgRett: OmsorgOgRett = {
   søknad: {
-    søkerHarAleneomsorg: false,
+    søkerHarAleneomsorg: Verdi.NEI,
     annenpartIdent: 'ArubaFnr123',
     annenpartBostedsland: 'ABW',
     annenpartRettighet: {
-      harRettNorge: false,
-      harOppholdEØS: true,
-      harRettEØS: false,
-      harUføretrygd: true,
+      harRettNorge: Verdi.JA,
+      harOppholdEØS: Verdi.JA,
+      harRettEØS: Verdi.NEI,
+      harUføretrygd: Verdi.JA,
     },
   },
   registerdata: {
-    harAnnenpartUføretrygd: undefined,
-    harAnnenpartForeldrepenger: false,
-    harAnnenpartEngangsstønad: false,
+    harAnnenpartUføretrygd: Verdi.IKKE_RELEVANT,
+    harAnnenpartForeldrepenger: Verdi.NEI,
+    harAnnenpartEngangsstønad: Verdi.NEI,
   },
   manuellBehandlingResultat: undefined,
   relasjonsRolleType: RelasjonsRolleType.FAR,

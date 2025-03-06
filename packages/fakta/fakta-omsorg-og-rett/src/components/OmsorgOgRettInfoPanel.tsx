@@ -4,6 +4,7 @@ import { VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
+import { Verdi } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { type OmsorgOgRettProps } from '../OmsorgOgRettFaktaIndex';
@@ -22,7 +23,8 @@ export const OmsorgOgRettInfoPanel = ({ personoversikt, omsorgOgRett, submittabl
   );
   const harAPAnnenForelderRett = hasAksjonspunkt(AksjonspunktKode.AVKLAR_ANNEN_FORELDER_RETT, aksjonspunkterForPanel);
 
-  const søkerHarAleneomsorgResultat = omsorgOgRett.manuellBehandlingResultat?.søkerHarAleneomsorg;
+  const søkerHarAleneomsorgResultat =
+    omsorgOgRett.manuellBehandlingResultat?.søkerHarAleneomsorg ?? Verdi.IKKE_RELEVANT;
   const manuellResultatUtenAksjonspunkt =
     !harAPAleneomsorg && !harAPAnnenForelderRett && omsorgOgRett.manuellBehandlingResultat;
   return (
@@ -54,10 +56,10 @@ export const OmsorgOgRettInfoPanel = ({ personoversikt, omsorgOgRett, submittabl
           aksjonspunkt={aksjonspunkterForPanel[0]}
         />
       )}
-      {manuellResultatUtenAksjonspunkt && søkerHarAleneomsorgResultat !== null && (
+      {manuellResultatUtenAksjonspunkt && søkerHarAleneomsorgResultat !== Verdi.IKKE_RELEVANT && (
         <AleneomsorgForm omsorgOgRett={omsorgOgRett} submittable={false} />
       )}
-      {manuellResultatUtenAksjonspunkt && søkerHarAleneomsorgResultat === null && (
+      {manuellResultatUtenAksjonspunkt && søkerHarAleneomsorgResultat === Verdi.IKKE_RELEVANT && (
         <HarAnnenForelderRettForm omsorgOgRett={omsorgOgRett} submittable={false} />
       )}
     </VStack>

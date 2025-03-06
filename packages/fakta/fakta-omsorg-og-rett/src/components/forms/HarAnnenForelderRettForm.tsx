@@ -7,7 +7,7 @@ import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, RelasjonsRolleType } from '@navikt/fp-kodeverk';
-import type { Aksjonspunkt, OmsorgOgRett } from '@navikt/fp-types';
+import { type Aksjonspunkt, type OmsorgOgRett, Verdi } from '@navikt/fp-types';
 import type { AvklarAnnenforelderHarRettAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
@@ -29,21 +29,24 @@ interface Props {
 export const HarAnnenForelderRettForm = ({ omsorgOgRett, aksjonspunkt, submittable }: Props) => {
   const { submitCallback, isReadOnly, alleMerknaderFraBeslutter } = usePanelDataContext<AvklarAnnenforelderHarRettAp>();
 
-  const { harRettNorge, harRettEØS, harUføretrygd } = omsorgOgRett.manuellBehandlingResultat?.annenpartRettighet ?? {};
+  const harRettNorge = omsorgOgRett.manuellBehandlingResultat?.annenpartRettighet?.harRettNorge ?? undefined;
+  const harRettEØS = omsorgOgRett.manuellBehandlingResultat?.annenpartRettighet?.harRettEØS ?? undefined;
+  const harUføretrygd = omsorgOgRett.manuellBehandlingResultat?.annenpartRettighet?.harUføretrygd ?? undefined;
 
   const { formData, setFormData } = useFormData<FormValues>();
-  const isReadOnlyOrApIsNull = isReadOnly || aksjonspunkt === undefined;
+  const readOnly = isReadOnly || aksjonspunkt === undefined;
 
   const formMethods = useForm<FormValues>({
     defaultValues: formData || {
-      harAnnenForelderRett: harRettNorge,
-      mottarAnnenForelderUforetrygd: harUføretrygd,
-      harAnnenForelderRettEØS: harRettEØS,
+      harAnnenForelderRett: harRettNorge === undefined ? undefined : harRettNorge === Verdi.JA,
+      mottarAnnenForelderUforetrygd: harUføretrygd === undefined ? undefined : harUføretrygd === Verdi.JA,
+      harAnnenForelderRettEØS: harRettEØS === undefined ? undefined : harRettEØS === Verdi.JA,
       ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
     },
   });
 
-  const skalAvklareUforetrygd = !!(omsorgOgRett.relasjonsRolleType !== RelasjonsRolleType.MOR || harUføretrygd);
+  const skalAvklareUforetrygd =
+    omsorgOgRett.relasjonsRolleType !== RelasjonsRolleType.MOR || harUføretrygd === Verdi.JA;
 
   const transformerFeltverdier = useCallback(
     (feltVerdier: FormValues) =>
@@ -64,11 +67,11 @@ export const HarAnnenForelderRettForm = ({ omsorgOgRett, aksjonspunkt, submittab
         merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.AVKLAR_ANNEN_FORELDER_RETT]}
       >
         <VStack gap="6">
-          <HarAnnenForelderRettFelter readOnly={isReadOnlyOrApIsNull} avklareUforetrygd={skalAvklareUforetrygd} />
+          <HarAnnenForelderRettFelter readOnly={readOnly} avklareUforetrygd={skalAvklareUforetrygd} />
 
           <FaktaBegrunnelseTextField
             isSubmittable={submittable}
-            isReadOnly={isReadOnlyOrApIsNull}
+            isReadOnly={readOnly}
             hasBegrunnelse={true}
             hasVurderingText
           />
@@ -76,7 +79,7 @@ export const HarAnnenForelderRettForm = ({ omsorgOgRett, aksjonspunkt, submittab
           <div>
             <FaktaSubmitButton
               isSubmittable={submittable}
-              isReadOnly={isReadOnlyOrApIsNull}
+              isReadOnly={readOnly}
               isSubmitting={formMethods.formState.isSubmitting}
               isDirty={formMethods.formState.isDirty}
             />
