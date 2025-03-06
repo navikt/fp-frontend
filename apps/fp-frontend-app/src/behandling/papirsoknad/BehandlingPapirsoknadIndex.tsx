@@ -52,7 +52,7 @@ const BehandlingPapirsoknadIndex = () => {
 const useLagrePapirsøknad = () => {
   const { behandling, fagsak, lagreAksjonspunkter } = use(BehandlingDataContext);
 
-  return (formValues: any, fagsakYtelseType: string, familieHendelseType: string, foreldreType: string) => {
+  return async (formValues: any, fagsakYtelseType: string, familieHendelseType: string, foreldreType: string) => {
     const bekreftedeAksjonspunktDtoer = [
       {
         '@type': getAktivPapirsoknadApKode(behandling.aksjonspunkt),
@@ -63,12 +63,16 @@ const useLagrePapirsøknad = () => {
       },
     ];
 
-    return lagreAksjonspunkter({
+    const oppdatertBehandling = await lagreAksjonspunkter({
       saksnummer: fagsak.saksnummer,
       behandlingUuid: behandling.uuid,
       behandlingVersjon: behandling.versjon,
       bekreftedeAksjonspunktDtoer,
     });
+
+    window.scrollTo(0, 0);
+
+    return oppdatertBehandling;
   };
 };
 
