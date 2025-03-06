@@ -26,11 +26,11 @@ export const InngangsvilkarOverstyringDefaultInitPanel = (
   const { behandling, rettigheter } = use(BehandlingDataContext);
   const { harÅpentInngangsvilkårAksjonspunkt } = use(InngangsvilkårPanelDataContext);
 
-  const [erOverstyrt, setOverstyrt] = useState(false);
-  const toggleOverstyring = () => setOverstyrt(!erOverstyrt);
+  const [erOverstyrt, setErOverstyrt] = useState(false);
+  const toggleOverstyring = () => setErOverstyrt(!erOverstyrt);
 
   useEffect(() => {
-    setOverstyrt(false);
+    setErOverstyrt(false);
   }, [behandling.versjon]);
 
   return (
