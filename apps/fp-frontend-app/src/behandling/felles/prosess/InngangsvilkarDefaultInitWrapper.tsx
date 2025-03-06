@@ -44,6 +44,8 @@ export const InngangsvilkarDefaultInitWrapper = ({ faktaPanelMedÅpentApInfo, ch
 
   const aksjonspunktTekster = inngangsvilkårPanelData.map(p => p.aksjonspunktTekst).filter(tekst => !!tekst);
 
+  const harFaktaApOgIkkeFerdigBehandlet = faktaPanelMedÅpentApInfo && erIkkeFerdigbehandlet;
+
   return (
     <ProsessPanelWrapper
       erPanelValgt={erPanelValgt}
@@ -52,23 +54,23 @@ export const InngangsvilkarDefaultInitWrapper = ({ faktaPanelMedÅpentApInfo, ch
       skalSkjulePanel={!erPanelValgt}
     >
       <VStack gap="8">
-        {erPanelValgt && ((faktaPanelMedÅpentApInfo && erIkkeFerdigbehandlet) || aksjonspunktTekster.length > 0) && (
+        {erPanelValgt && (harFaktaApOgIkkeFerdigBehandlet || aksjonspunktTekster.length > 0) && (
           <AksjonspunktHelpTextHTML>
-            {faktaPanelMedÅpentApInfo && erIkkeFerdigbehandlet
-              ? [
-                  <HStack gap="1" key="1">
-                    <FormattedMessage id="InngangsvilkarProsessStegPanelDef.AvventerAvklaringAv" />
-                    <Link
-                      onClick={(evt: MouseEvent) => {
-                        oppdaterProsessStegOgFaktaPanelIUrl(undefined, faktaPanelMedÅpentApInfo?.urlCode);
-                        evt.preventDefault();
-                      }}
-                    >
-                      {faktaPanelMedÅpentApInfo.text}
-                    </Link>
-                  </HStack>,
-                ]
-              : aksjonspunktTekster.map(tekst => tekst)}
+            {harFaktaApOgIkkeFerdigBehandlet ? (
+              <HStack gap="1">
+                <FormattedMessage id="InngangsvilkarProsessStegPanelDef.AvventerAvklaringAv" />
+                <Link
+                  onClick={(evt: MouseEvent) => {
+                    oppdaterProsessStegOgFaktaPanelIUrl(undefined, faktaPanelMedÅpentApInfo?.urlCode);
+                    evt.preventDefault();
+                  }}
+                >
+                  {faktaPanelMedÅpentApInfo.text}
+                </Link>
+              </HStack>
+            ) : (
+              aksjonspunktTekster.map(tekst => tekst)
+            )}
           </AksjonspunktHelpTextHTML>
         )}
 
