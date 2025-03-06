@@ -1,5 +1,6 @@
+import { HGrid, VStack } from '@navikt/ds-react';
+
 import { InngangsvilkarDefaultInitWrapper } from '../../felles/prosess/InngangsvilkarDefaultInitWrapper';
-import type { InngangsvilkarPanelInitProps } from '../../felles/typer/inngangsvilkarPanelInitProps';
 import { MedlemskapInngangsvilkarInitPanel } from '../../fellesPaneler/prosess/inngangsvilkarPaneler/MedlemskapInngangsvilkarInitPanel';
 import { OpptjeningInngangsvilkarInitPanel } from './inngangsvilkarPaneler/OpptjeningInngangsvilkarInitPanel';
 import { SvangerskapInngangsvilkarInitPanel } from './inngangsvilkarPaneler/SvangerskapInngangsvilkarInitPanel';
@@ -8,20 +9,14 @@ interface Props {
   faktaPanelMedÅpentApInfo?: { urlCode: string; text: string };
 }
 
-export const InngangsvilkarSvpProsessStegInitPanel = ({ faktaPanelMedÅpentApInfo }: Props) => {
-  const leftPanels = (props: InngangsvilkarPanelInitProps) => (
-    <>
-      <SvangerskapInngangsvilkarInitPanel {...props} />
-      <MedlemskapInngangsvilkarInitPanel {...props} />
-    </>
-  );
-  const rightPanels = (props: InngangsvilkarPanelInitProps) => <OpptjeningInngangsvilkarInitPanel {...props} />;
-
-  return (
-    <InngangsvilkarDefaultInitWrapper
-      faktaPanelMedÅpentApInfo={faktaPanelMedÅpentApInfo}
-      leftPanels={leftPanels}
-      rightPanels={rightPanels}
-    />
-  );
-};
+export const InngangsvilkarSvpProsessStegInitPanel = ({ faktaPanelMedÅpentApInfo }: Props) => (
+  <InngangsvilkarDefaultInitWrapper faktaPanelMedÅpentApInfo={faktaPanelMedÅpentApInfo}>
+    <HGrid columns={2} gap="8">
+      <VStack gap="8">
+        <SvangerskapInngangsvilkarInitPanel />
+        <MedlemskapInngangsvilkarInitPanel />
+      </VStack>
+      <OpptjeningInngangsvilkarInitPanel />
+    </HGrid>
+  </InngangsvilkarDefaultInitWrapper>
+);

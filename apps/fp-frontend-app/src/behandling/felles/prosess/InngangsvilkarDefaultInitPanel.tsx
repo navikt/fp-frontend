@@ -1,46 +1,78 @@
-import { type ReactElement, use } from 'react';
+import { type ReactElement, use, useEffect, useState } from 'react';
 
-import { VilkarType } from '@navikt/fp-kodeverk';
-import { FormDataProvider, PanelDataProvider } from '@navikt/fp-utils';
+import { type OverstyringAksjonspunkter, VilkarType } from '@navikt/fp-kodeverk';
+import { FormDataProvider, PanelDataProvider, PanelOverstyringProvider } from '@navikt/fp-utils';
 
-import type { InngangsvilkarPanelInitProps } from '../typer/inngangsvilkarPanelInitProps';
 import type { StandardProsessPanelProps } from '../typer/standardProsessPanelPropsTsType';
 import { BehandlingDataContext } from '../utils/behandlingDataContext';
+import { InngangsvilkårPanelDataContext } from './InngangsvilkarDefaultInitWrapper';
 import { skalViseProsessPanel } from './skalViseProsessPanel';
 import { useInngangsvilkarRegistrerer } from './useInngangsvilkarRegistrerer';
 
 export type Props = {
-  behandlingVersjon: number;
   standardPanelProps: StandardProsessPanelProps;
   vilkarKoder?: VilkarType[];
-  renderPanel: (args: { skalVises: boolean; erOverstyrt: boolean; toggleOverstyring: () => void }) => ReactElement;
   inngangsvilkarPanelKode: string;
   hentInngangsvilkarPanelTekst: string;
+  children: ReactElement;
+};
+
+export const InngangsvilkarOverstyringDefaultInitPanel = (
+  props: Props & {
+    overstyringApKode: OverstyringAksjonspunkter;
+    overrideReadOnly?: boolean;
+  },
+) => {
+  const { behandling, rettigheter } = use(BehandlingDataContext);
+  const { harÅpentInngangsvilkårAksjonspunkt } = use(InngangsvilkårPanelDataContext);
+
+  const [erOverstyrt, setOverstyrt] = useState(false);
+  const toggleOverstyring = () => setOverstyrt(!erOverstyrt);
+
+  useEffect(() => {
+    setOverstyrt(false);
+  }, [behandling.versjon]);
+
+  return (
+    <PanelOverstyringProvider
+      overstyringApKode={props.overstyringApKode}
+      kanOverstyreAccess={rettigheter.kanOverstyreAccess}
+      overrideReadOnly={
+        props.standardPanelProps.isReadOnly ||
+        props.overrideReadOnly ||
+        (harÅpentInngangsvilkårAksjonspunkt && !(props.standardPanelProps.isAksjonspunktOpen || erOverstyrt))
+      }
+      toggleOverstyring={toggleOverstyring}
+    >
+      <InngangsvilkarDefaultInitPanel {...props} erOverstyrt={erOverstyrt} />
+    </PanelOverstyringProvider>
+  );
 };
 
 export const InngangsvilkarDefaultInitPanel = ({
-  erPanelValgt,
-  behandlingVersjon,
-  registrerInngangsvilkarPanel,
   standardPanelProps,
   vilkarKoder,
-  renderPanel,
   inngangsvilkarPanelKode,
   hentInngangsvilkarPanelTekst,
-}: Props & InngangsvilkarPanelInitProps) => {
+  erOverstyrt = false,
+  children,
+}: Props & { erOverstyrt?: boolean }) => {
   const { behandling, fagsak, alleKodeverk } = use(BehandlingDataContext);
+
+  const { erPanelValgt } = use(InngangsvilkårPanelDataContext);
 
   const skalVises = skalViseProsessPanel(standardPanelProps.aksjonspunkter, vilkarKoder, standardPanelProps.vilkar);
 
-  const { erOverstyrt, toggleOverstyring } = useInngangsvilkarRegistrerer(
-    registrerInngangsvilkarPanel,
-    behandlingVersjon,
+  useInngangsvilkarRegistrerer(
     inngangsvilkarPanelKode,
     hentInngangsvilkarPanelTekst,
     skalVises,
     standardPanelProps.isAksjonspunktOpen,
     standardPanelProps.status,
+    erOverstyrt,
   );
+
+  const skalViseVilkårIPanel = erPanelValgt && skalVises;
 
   return (
     <FormDataProvider behandling={behandling}>
@@ -54,7 +86,7 @@ export const InngangsvilkarDefaultInitPanel = ({
         isReadOnly={standardPanelProps.isReadOnly}
         alleMerknaderFraBeslutter={standardPanelProps.alleMerknaderFraBeslutter}
       >
-        {renderPanel({ skalVises: erPanelValgt && skalVises, erOverstyrt, toggleOverstyring })}
+        {skalViseVilkårIPanel ? children : null}
       </PanelDataProvider>
     </FormDataProvider>
   );
