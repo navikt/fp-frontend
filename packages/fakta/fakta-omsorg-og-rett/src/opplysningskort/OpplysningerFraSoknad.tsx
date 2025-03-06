@@ -44,8 +44,8 @@ export const OpplysningerFraSoknad = ({ omsorgOgRett }: Props) => {
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          <Table.Row>
-            {annenpartIdent !== null && (
+          {annenpartIdent !== null && (
+            <Table.Row>
               <>
                 <Table.DataCell>
                   <Label size="small">
@@ -59,10 +59,10 @@ export const OpplysningerFraSoknad = ({ omsorgOgRett }: Props) => {
                   </BodyShort>
                 </Table.DataCell>
               </>
-            )}
-          </Table.Row>
-          <Table.Row>
-            {annenpartBostedsland !== null && (
+            </Table.Row>
+          )}
+          {annenpartBostedsland !== null && (
+            <Table.Row>
               <>
                 <Table.DataCell>
                   <Label size="small">
@@ -79,10 +79,10 @@ export const OpplysningerFraSoknad = ({ omsorgOgRett }: Props) => {
                   </BodyShort>
                 </Table.DataCell>
               </>
-            )}
-          </Table.Row>
-          <Table.Row>
-            {harSøkerAleneOmsorg !== null && (
+            </Table.Row>
+          )}
+          {harSøkerAleneOmsorg !== null && (
+            <Table.Row>
               <>
                 <Table.DataCell>
                   <Label size="small">
@@ -99,10 +99,10 @@ export const OpplysningerFraSoknad = ({ omsorgOgRett }: Props) => {
                   </BodyShort>
                 </Table.DataCell>
               </>
-            )}
-          </Table.Row>
-          <Table.Row>
-            {harRettNorge !== undefined && (
+            </Table.Row>
+          )}
+          {harRettNorge !== undefined && (
+            <Table.Row>
               <>
                 <Table.DataCell>
                   <Label size="small">
@@ -119,10 +119,10 @@ export const OpplysningerFraSoknad = ({ omsorgOgRett }: Props) => {
                   </BodyShort>
                 </Table.DataCell>
               </>
-            )}
-          </Table.Row>
-          <Table.Row>
-            {harOppholdEØS !== undefined && harOppholdEØS !== null && (
+            </Table.Row>
+          )}
+          {harOppholdEØS !== undefined && harOppholdEØS !== null && (
+            <Table.Row>
               <>
                 <Table.DataCell textSize="small">
                   <Label size="small">
@@ -139,10 +139,10 @@ export const OpplysningerFraSoknad = ({ omsorgOgRett }: Props) => {
                   </BodyShort>
                 </Table.DataCell>
               </>
-            )}
-          </Table.Row>
-          <Table.Row>
-            {harRettEØS !== undefined && harRettEØS !== null && (
+            </Table.Row>
+          )}
+          {harRettEØS !== undefined && harRettEØS !== null && (
+            <Table.Row>
               <>
                 <Table.DataCell>
                   <Label size="small">
@@ -156,10 +156,10 @@ export const OpplysningerFraSoknad = ({ omsorgOgRett }: Props) => {
                   </BodyShort>
                 </Table.DataCell>
               </>
-            )}
-          </Table.Row>
-          <Table.Row>
-            {harUføretrygd !== undefined && harUføretrygd !== null && (
+            </Table.Row>
+          )}
+          {harUføretrygd !== undefined && harUføretrygd !== null && (
+            <Table.Row>
               <>
                 <Table.DataCell>
                   <Label size="small">
@@ -176,8 +176,8 @@ export const OpplysningerFraSoknad = ({ omsorgOgRett }: Props) => {
                   </BodyShort>
                 </Table.DataCell>
               </>
-            )}
-          </Table.Row>
+            </Table.Row>
+          )}
         </Table.Body>
       </Table>
     </EkspansjonsKort>

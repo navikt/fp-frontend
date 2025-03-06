@@ -94,11 +94,9 @@ const meta = {
   args: {
     personoversikt: { barn: [defaultBarn], annenPart: defaultAnnenPart, bruker: defaultBruker },
     omsorgOgRett: {
-      søknad: defaultOmsorgOgRett.søknad,
-      manuellBehandlingResultat: defaultOmsorgOgRett.manuellBehandlingResultat,
-      registerdata: defaultOmsorgOgRett.registerdata,
+      ...defaultOmsorgOgRett,
       relasjonsRolleType: RelasjonsRolleType.FAR,
-    } as OmsorgOgRett,
+    },
     submittable: true,
   },
   render: args => <OmsorgOgRettFaktaIndex {...args} />,

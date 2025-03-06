@@ -32,7 +32,7 @@ export const HarAnnenForelderRettForm = ({ omsorgOgRett, aksjonspunkt, submittab
   const { harRettNorge, harRettEØS, harUføretrygd } = omsorgOgRett.manuellBehandlingResultat?.annenpartRettighet ?? {};
 
   const { formData, setFormData } = useFormData<FormValues>();
-  const readOnly = isReadOnly || aksjonspunkt === undefined;
+  const isReadOnlyOrApIsNull = isReadOnly || aksjonspunkt === undefined;
 
   const formMethods = useForm<FormValues>({
     defaultValues: formData || {
@@ -64,11 +64,11 @@ export const HarAnnenForelderRettForm = ({ omsorgOgRett, aksjonspunkt, submittab
         merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.AVKLAR_ANNEN_FORELDER_RETT]}
       >
         <VStack gap="6">
-          <HarAnnenForelderRettFelter readOnly={readOnly} avklareUforetrygd={skalAvklareUforetrygd} />
+          <HarAnnenForelderRettFelter readOnly={isReadOnlyOrApIsNull} avklareUforetrygd={skalAvklareUforetrygd} />
 
           <FaktaBegrunnelseTextField
             isSubmittable={submittable}
-            isReadOnly={readOnly}
+            isReadOnly={isReadOnlyOrApIsNull}
             hasBegrunnelse={true}
             hasVurderingText
           />
@@ -76,7 +76,7 @@ export const HarAnnenForelderRettForm = ({ omsorgOgRett, aksjonspunkt, submittab
           <div>
             <FaktaSubmitButton
               isSubmittable={submittable}
-              isReadOnly={readOnly}
+              isReadOnly={isReadOnlyOrApIsNull}
               isSubmitting={formMethods.formState.isSubmitting}
               isDirty={formMethods.formState.isDirty}
             />

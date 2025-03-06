@@ -23,6 +23,8 @@ export const OmsorgOgRettInfoPanel = ({ personoversikt, omsorgOgRett, submittabl
   const harAPAnnenForelderRett = hasAksjonspunkt(AksjonspunktKode.AVKLAR_ANNEN_FORELDER_RETT, aksjonspunkterForPanel);
 
   const søkerHarAleneomsorgResultat = omsorgOgRett.manuellBehandlingResultat?.søkerHarAleneomsorg;
+  const manuellResultatUtenAksjonspunkt =
+    !harAPAleneomsorg && !harAPAnnenForelderRett && omsorgOgRett.manuellBehandlingResultat;
   return (
     <VStack gap="8">
       {!isReadOnly && harÅpneAksjonspunkter && (
@@ -52,16 +54,12 @@ export const OmsorgOgRettInfoPanel = ({ personoversikt, omsorgOgRett, submittabl
           aksjonspunkt={aksjonspunkterForPanel[0]}
         />
       )}
-      {!harAPAleneomsorg &&
-        !harAPAnnenForelderRett &&
-        omsorgOgRett.manuellBehandlingResultat &&
-        søkerHarAleneomsorgResultat !== null && <AleneomsorgForm omsorgOgRett={omsorgOgRett} submittable={false} />}
-      {!harAPAleneomsorg &&
-        !harAPAnnenForelderRett &&
-        omsorgOgRett.manuellBehandlingResultat &&
-        søkerHarAleneomsorgResultat === null && (
-          <HarAnnenForelderRettForm omsorgOgRett={omsorgOgRett} submittable={false} />
-        )}
+      {manuellResultatUtenAksjonspunkt && søkerHarAleneomsorgResultat !== null && (
+        <AleneomsorgForm omsorgOgRett={omsorgOgRett} submittable={false} />
+      )}
+      {manuellResultatUtenAksjonspunkt && søkerHarAleneomsorgResultat === null && (
+        <HarAnnenForelderRettForm omsorgOgRett={omsorgOgRett} submittable={false} />
+      )}
     </VStack>
   );
 };

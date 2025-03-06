@@ -19,12 +19,12 @@ export const AnnenPartsYtelser = ({ omsorgOgRett }: Props) => {
             <Table.HeaderCell>
               <FormattedMessage id="OpplysningsKort.AnnenPartTittel" />
             </Table.HeaderCell>
-            <Table.HeaderCell></Table.HeaderCell>
+            <Table.HeaderCell />
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          <Table.Row>
-            {harAnnenpartUføretrygd !== null && (
+          {harAnnenpartUføretrygd !== null && (
+            <Table.Row>
               <>
                 <Table.DataCell>
                   <Label size="small">
@@ -40,10 +40,11 @@ export const AnnenPartsYtelser = ({ omsorgOgRett }: Props) => {
                   </BodyShort>
                 </Table.DataCell>
               </>
-            )}
-          </Table.Row>
-          <Table.Row>
-            {harAnnenpartForeldrepenger !== null && (
+            </Table.Row>
+          )}
+
+          {harAnnenpartForeldrepenger !== null && (
+            <Table.Row>
               <>
                 <Table.DataCell>
                   <Label size="small">
@@ -59,10 +60,10 @@ export const AnnenPartsYtelser = ({ omsorgOgRett }: Props) => {
                   </BodyShort>
                 </Table.DataCell>
               </>
-            )}
-          </Table.Row>
-          <Table.Row>
-            {harAnnenpartEngangsstønad !== null && (
+            </Table.Row>
+          )}
+          {harAnnenpartEngangsstønad !== null && (
+            <Table.Row>
               <>
                 <Table.DataCell>
                   <Label size="small">
@@ -78,8 +79,8 @@ export const AnnenPartsYtelser = ({ omsorgOgRett }: Props) => {
                   </BodyShort>
                 </Table.DataCell>
               </>
-            )}
-          </Table.Row>
+            </Table.Row>
+          )}
         </Table.Body>
       </Table>
     </>

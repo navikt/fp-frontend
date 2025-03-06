@@ -35,7 +35,7 @@ export const AleneomsorgForm = ({ omsorgOgRett, aksjonspunkt, submittable }: Pro
   const { harRettNorge, harRettEØS, harUføretrygd } = manuellBehandlingResultat?.annenpartRettighet ?? {};
 
   const { formData, setFormData } = useFormData<FormValues>();
-  const readOnly = isReadOnly || aksjonspunkt === undefined;
+  const isReadOnlyOrApIsNull = isReadOnly || aksjonspunkt === undefined;
 
   const formMethods = useForm<FormValues>({
     defaultValues: formData || {
@@ -76,22 +76,24 @@ export const AleneomsorgForm = ({ omsorgOgRett, aksjonspunkt, submittable }: Pro
           <TrueFalseInput
             name="harAleneomsorg"
             label={<FormattedMessage id="AleneomsorgForm.Aleneomsorg" />}
-            readOnly={readOnly}
+            readOnly={isReadOnlyOrApIsNull}
             trueLabel={<FormattedMessage id="AleneomsorgForm.HarAleneomsorg" />}
             falseLabel={<FormattedMessage id="AleneomsorgForm.HarIkkeAleneomsorg" values={{ b: bTag }} />}
-            falseContent={<HarAnnenForelderRettFelter readOnly={readOnly} avklareUforetrygd={skalAvklareUforetrygd} />}
+            falseContent={
+              <HarAnnenForelderRettFelter readOnly={isReadOnlyOrApIsNull} avklareUforetrygd={skalAvklareUforetrygd} />
+            }
           />
 
           <FaktaBegrunnelseTextField
             isSubmittable={submittable}
-            isReadOnly={readOnly}
+            isReadOnly={isReadOnlyOrApIsNull}
             hasBegrunnelse={true}
             hasVurderingText
           />
           <div>
             <FaktaSubmitButton
               isSubmittable={submittable}
-              isReadOnly={readOnly}
+              isReadOnly={isReadOnlyOrApIsNull}
               isSubmitting={formMethods.formState.isSubmitting}
               isDirty={formMethods.formState.isDirty}
             />

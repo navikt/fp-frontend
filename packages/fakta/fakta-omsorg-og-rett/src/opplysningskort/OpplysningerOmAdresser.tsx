@@ -37,15 +37,17 @@ export const OpplysningerOmAdresser = ({ personoversikt: { bruker, annenPart, ba
         adresser={bruker.adresser}
       />
 
-      {annenPart && annenPart.adresser.length > 0 && <AvsnittSkiller dividerParagraf />}
       {annenPart && annenPart.adresser.length > 0 && (
-        <Personopplysninger
-          showIcon={false}
-          navn={annenPart.navn}
-          alleKodeverk={alleKodeverk}
-          adresser={annenPart.adresser}
-          rolle="ANNEN_PART"
-        />
+        <>
+          <AvsnittSkiller dividerParagraf />
+          <Personopplysninger
+            showIcon={false}
+            navn={annenPart.navn}
+            alleKodeverk={alleKodeverk}
+            adresser={annenPart.adresser}
+            rolle="ANNEN_PART"
+          />
+        </>
       )}
       {barn && <AvsnittSkiller dividerParagraf />}
       {barn &&
