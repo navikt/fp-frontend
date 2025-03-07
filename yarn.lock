@@ -2615,9 +2615,9 @@ __metadata:
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
+    dayjs: ^1.11.13
     eslint: 9.20.1
     fast-glob: ^3.3.3
-    moment: 2.30.1
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
@@ -2690,8 +2690,8 @@ __metadata:
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
+    dayjs: 1.11.13
     eslint: 9.20.1
-    moment: 2.30.1
     react: 19.0.0
     react-intl: 7.1.6
     storybook: 8.5.6
@@ -2791,8 +2791,8 @@ __metadata:
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
+    dayjs: 1.11.13
     eslint: 9.20.1
-    moment: 2.30.1
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
@@ -2859,9 +2859,9 @@ __metadata:
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
+    dayjs: 1.11.13
     eslint: 9.20.1
     lodash: ^4.17.21
-    moment: 2.30.1
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
@@ -2894,8 +2894,8 @@ __metadata:
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
+    dayjs: 1.11.13
     eslint: 9.20.1
-    moment: 2.30.1
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
@@ -2933,8 +2933,8 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     cross-env: 7.0.3
+    dayjs: 1.11.13
     eslint: 9.20.1
-    moment: 2.30.1
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
@@ -2971,8 +2971,8 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     cross-env: 7.0.3
+    dayjs: 1.11.13
     eslint: 9.20.1
-    moment: 2.30.1
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
@@ -3262,8 +3262,8 @@ __metadata:
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
+    dayjs: 1.11.13
     eslint: 9.20.1
-    moment: 2.30.1
     react: 19.0.0
     react-intl: 7.1.6
     storybook: 8.5.6
@@ -3790,8 +3790,8 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     cross-env: 7.0.3
+    dayjs: 1.11.13
     eslint: 9.20.1
-    moment: 2.30.1
     react: 19.0.0
     react-intl: 7.1.6
     storybook: 8.5.6
@@ -3848,8 +3848,8 @@ __metadata:
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
+    dayjs: 1.11.13
     eslint: 9.20.1
-    moment: 2.30.1
     react: 19.0.0
     react-intl: 7.1.6
     storybook: 8.5.6
@@ -3912,8 +3912,8 @@ __metadata:
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
+    dayjs: 1.11.13
     eslint: 9.20.1
-    moment: 2.30.1
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
@@ -3951,8 +3951,8 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     cross-env: 7.0.3
+    dayjs: 1.11.13
     eslint: 9.20.1
-    moment: 2.30.1
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
@@ -4060,8 +4060,8 @@ __metadata:
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
+    dayjs: 1.11.13
     eslint: 9.20.1
-    moment: 2.30.1
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
@@ -4139,7 +4139,6 @@ __metadata:
     cross-env: 7.0.3
     dayjs: 1.11.13
     eslint: 9.20.1
-    moment: 2.30.1
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
@@ -4177,8 +4176,8 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     cross-env: 7.0.3
+    dayjs: 1.11.13
     eslint: 9.20.1
-    moment: 2.30.1
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
@@ -4290,10 +4289,10 @@ __metadata:
     "@types/lodash.debounce": 4.0.9
     cross-env: 7.0.3
     css-tree: 3.1.0
+    dayjs: 1.11.13
     editorjs-html: 4.0.5
     eslint: 9.20.1
     lodash.debounce: 4.0.8
-    moment: 2.30.1
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
@@ -4501,8 +4500,8 @@ __metadata:
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
+    dayjs: 1.11.13
     eslint: 9.20.1
-    moment: 2.30.1
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
@@ -4537,8 +4536,8 @@ __metadata:
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
+    dayjs: 1.11.13
     eslint: 9.20.1
-    moment: 2.30.1
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
@@ -4573,8 +4572,8 @@ __metadata:
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
+    dayjs: 1.11.13
     eslint: 9.20.1
-    moment: 2.30.1
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
@@ -4608,8 +4607,8 @@ __metadata:
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
+    dayjs: 1.11.13
     eslint: 9.20.1
-    moment: 2.30.1
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
@@ -4670,9 +4669,9 @@ __metadata:
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
+    dayjs: 1.11.13
     eslint: 9.20.1
     history: 5.3.0
-    moment: 2.30.1
     react: 19.0.0
     react-intl: 7.1.6
     storybook: 8.5.6
@@ -5178,9 +5177,9 @@ __metadata:
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
+    dayjs: 1.11.13
     eslint: 9.20.1
     history: 5.3.0
-    moment: 2.30.1
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
@@ -10013,7 +10012,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dayjs@npm:1.11.13":
+"dayjs@npm:1.11.13, dayjs@npm:^1.11.13":
   version: 1.11.13
   resolution: "dayjs@npm:1.11.13"
   checksum: f388db88a6aa93956c1f6121644e783391c7b738b73dbc54485578736565c8931bdfba4bb94e9b1535c6e509c97d5deb918bbe1ae6b34358d994de735055cca9

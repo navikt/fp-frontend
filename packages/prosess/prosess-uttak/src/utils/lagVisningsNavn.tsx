@@ -1,11 +1,11 @@
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import type { ArbeidsgiverOpplysninger } from '@navikt/fp-types';
 
 // vanlig arbeidsgivernavn (orgnr)...arbeidsforholdid
 // privatperson - KLANG...(18.08.1980)
-const formatDate = (dato: string) => moment(dato).format(DDMMYYYY_DATE_FORMAT);
+const formatDate = (dato: string) => dayjs(dato).format(DDMMYYYY_DATE_FORMAT);
 const getEndCharFromId = (id: any) => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
 
 export const lagVisningsNavn = (

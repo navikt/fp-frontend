@@ -2,7 +2,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Link, Table } from '@navikt/ds-react';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import type { RelatertTilgrensedYtelse } from '@navikt/fp-types';
 
@@ -11,7 +11,7 @@ interface Props {
 }
 
 const formatDateToDDMMYYYY = (date: string): string => {
-  const parsedDate = moment(date, ISO_DATE_FORMAT, true);
+  const parsedDate = dayjs(date, ISO_DATE_FORMAT, true);
   return parsedDate.isValid() ? parsedDate.format(DDMMYYYY_DATE_FORMAT) : date;
 };
 

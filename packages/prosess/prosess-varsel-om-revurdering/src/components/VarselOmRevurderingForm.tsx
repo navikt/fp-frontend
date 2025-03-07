@@ -8,7 +8,7 @@ import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-va
 import { AksjonspunktHelpTextHTML, ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { formaterFritekst, getLanguageFromSprakkode, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import classNames from 'classnames';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import {
   AksjonspunktKode,
@@ -226,7 +226,7 @@ export const VarselOmRevurderingForm = ({
       </Form>
       <SettPaVentModalIndex
         showModal={skalVisePåVentModal}
-        frist={moment().add(28, 'days').format(ISO_DATE_FORMAT)}
+        frist={dayjs().add(28, 'days').format(ISO_DATE_FORMAT)}
         cancelEvent={lukkModal}
         submitCallback={håndterSubmitFraModal}
         ventearsaker={ventearsaker}
