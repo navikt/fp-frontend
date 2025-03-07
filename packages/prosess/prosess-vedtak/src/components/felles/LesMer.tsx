@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useIntl } from 'react-intl';
 
 import { ChevronDownIcon, ChevronUpIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button } from '@navikt/ds-react';
+import { BodyShort, Button, HStack } from '@navikt/ds-react';
 
 import styles from './lesMer.module.css';
 
@@ -16,7 +16,7 @@ export const LesMer = ({ tekst, maksLengde }: Props) => {
   const [erKnappEnabled, setErKnappEnabled] = useState(false);
 
   return (
-    <div className={styles.lesMer}>
+    <HStack justify="space-between" align="start" wrap={false}>
       <BodyShort size="small">{erKnappEnabled ? tekst : `${tekst.substring(0, maksLengde)}...`}</BodyShort>
       <Button
         className={styles.button}
@@ -28,6 +28,6 @@ export const LesMer = ({ tekst, maksLengde }: Props) => {
       >
         {erKnappEnabled ? intl.formatMessage({ id: 'LesMer.Skjul' }) : intl.formatMessage({ id: 'LesMer.LesMer' })}
       </Button>
-    </div>
+    </HStack>
   );
 };

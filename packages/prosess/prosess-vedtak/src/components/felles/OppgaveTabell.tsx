@@ -36,8 +36,8 @@ export const OppgaveTabell = ({ oppgaver }: Props) => {
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {oppgaver.map((oppgave, index) => (
-            <Table.Row key={`index${index + 1}`} className={styles.row}>
+          {oppgaver.map(oppgave => (
+            <Table.Row key={oppgave.oppgavetype + '-' + oppgave.beskrivelse} className={styles.row}>
               <Table.DataCell>
                 <BodyShort size="small">
                   {alleKodeverk[KodeverkType.OPPGAVE_TYPE].find(o => o.kode === oppgave.oppgavetype)?.navn}
