@@ -12,6 +12,7 @@ import {
   BehandlingType,
   FagsakYtelseType,
   KonsekvensForYtelsen,
+  OppgaveType,
   VilkarType,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
@@ -274,22 +275,22 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
     },
     oppgaver: [
       {
-        oppgavetype: 'VUR_KONS_YTE',
+        oppgavetype: OppgaveType.VUR_KONS_YTE,
         beskrivelse: 'Se sto mottatt 24.02.25',
       },
       {
-        oppgavetype: 'VUR_KONS_YTE',
+        oppgavetype: OppgaveType.VUR_KONS_YTE,
         beskrivelse:
           'Fullmektig tar kontakt. Ber om fristutsettelse 4 uker, ettersom bruker først mottok brevet i dag. ' +
           'Jeg har utsatt 14 dager, men han ønsker ytterligere 2 uker utover det, altså 28.09.24. ' +
           'Kan dere gi tilbakemelding på dette?',
       },
       {
-        oppgavetype: 'VUR',
+        oppgavetype: OppgaveType.VUR,
         beskrivelse: 'Bekreftelse fra arbeidsgiver',
       },
       {
-        oppgavetype: 'VUR',
+        oppgavetype: OppgaveType.VUR,
         beskrivelse: 'Søknad om foreldrepenger ved fødsel',
       },
     ],

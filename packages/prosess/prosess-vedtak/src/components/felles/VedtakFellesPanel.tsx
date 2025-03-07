@@ -212,7 +212,7 @@ export const VedtakFellesPanel = ({
       </FlexContainer>
       <VedtakHelpTextPanel aksjonspunkter={aksjonspunkt} isReadOnly={isReadOnly} />
       <VerticalSpacer twentyPx />
-      {oppgaver && oppgaver?.length > 0 && <OppgaveTabell oppgaver={oppgaver} />}
+      {oppgaver && oppgaver.length > 0 && <OppgaveTabell oppgaver={oppgaver} />}
       <VerticalSpacer twentyPx />
       {renderPanel(skalBrukeManueltBrev, erInnvilget, erAvslatt, erOpphor)}
       {skalBrukeManueltBrev && (
