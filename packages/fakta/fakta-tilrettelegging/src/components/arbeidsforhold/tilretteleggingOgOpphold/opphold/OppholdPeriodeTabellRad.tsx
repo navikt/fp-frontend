@@ -84,6 +84,7 @@ export const OppholdPeriodeTabellRad = ({
       expandOnRowClick
       onOpenChange={() => setOpen(!open)}
       onClick={() => setOpen(!open)}
+      contentGutter="none"
       content={
         <OppholdForm
           opphold={opphold}

@@ -2,3 +2,40 @@
   background-color: var(--a-gray-100);
   padding: 10px;
 }
+
+.panelOpen {
+  background-color: var(--a-gray-50);
+  margin-bottom: -16px;
+  margin-left: -7px;
+  margin-right: -7px;
+  margin-top: -16px;
+  padding: 16px;
+}
+
+.panelOpenAp {
+  background-color: var(--a-gray-50);
+  border-left: 4px solid var(--a-orange-400);
+  margin-bottom: -16px;
+  margin-left: -10px;
+  margin-right: -7px;
+  margin-top: -16px;
+  padding: 16px;
+}
+
+.headerRow {
+  background-color: var(--a-gray-100);
+}
+
+.row {
+  --ac-table-row-hover: var(--a-gray-200);
+
+  cursor: pointer;
+}
+
+.isOpen {
+  background-color: var(--a-gray-50);
+}
+
+.isApOpen {
+  border-left: 4px solid var(--a-orange-400);
+}

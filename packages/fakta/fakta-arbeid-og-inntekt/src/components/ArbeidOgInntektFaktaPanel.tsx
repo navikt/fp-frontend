@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { Alert, Button } from '@navikt/ds-react';
-import { Table, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { Alert, Button, Table } from '@navikt/ds-react';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import {
   AksjonspunktKode,
@@ -29,15 +29,6 @@ import { ArbeidsforholdRad } from './ArbeidsforholdRad';
 import { ArbeidsOgInntektOverstyrPanel } from './ArbeidsOgInntektOverstyrPanel';
 
 import styles from './arbeidOgInntektFaktaPanel.module.css';
-
-const HEADER_TEXT_IDS = [
-  'EMPTY1',
-  'ArbeidOgInntektFaktaPanel.Arbeidsforhold',
-  'ArbeidOgInntektFaktaPanel.Periode',
-  'ArbeidOgInntektFaktaPanel.Kilde',
-  'ArbeidOgInntektFaktaPanel.InntektsmeldingMottatt',
-  'EMPTY2',
-];
 
 const sorterTabell = (radX: ArbeidsforholdOgInntektRadData, radY: ArbeidsforholdOgInntektRadData): number => {
   const radXHarAp = radX.årsak;
@@ -249,25 +240,45 @@ export const ArbeidOgInntektFaktaPanel = ({
         setErOverstyrt={setErOverstyrt}
         oppdaterTabell={oppdaterTabellData}
       />
-      <Table ref={tableRef} headerTextCodes={HEADER_TEXT_IDS} noHover hasGrayHeader>
-        {tabellRader.map((radData, index) => (
-          <ArbeidsforholdRad
-            key={`${radData.arbeidsgiverNavn}${radData.arbeidsgiverIdent}${index}`} // nosonar
-            arbeidOgInntekt={arbeidOgInntekt}
-            saksnummer={fagsak.saksnummer}
-            behandlingUuid={behandling.uuid}
-            behandlingVersjon={behandling.versjon}
-            radData={radData}
-            isReadOnly={isReadOnly || erAksjonspunktAvsluttet || harIngenAksjonspunkt}
-            registrerArbeidsforhold={registrerArbeidsforhold}
-            lagreVurdering={lagreVurdering}
-            toggleÅpenRad={() => toggleÅpenRad(index)}
-            erOverstyrt={erOverstyrt}
-            oppdaterTabell={oppdaterTabellData}
-            erRadÅpen={åpneRadIndexer.includes(index)}
-            alleKodeverk={alleKodeverk}
-          />
-        ))}
+      <Table ref={tableRef}>
+        <Table.Header>
+          <Table.Row className={styles.headerRow}>
+            <Table.HeaderCell scope="col" />
+            <Table.HeaderCell scope="col">
+              <FormattedMessage id="ArbeidOgInntektFaktaPanel.Arbeidsforhold" />
+            </Table.HeaderCell>
+            <Table.HeaderCell scope="col">
+              <FormattedMessage id="ArbeidOgInntektFaktaPanel.Periode" />
+            </Table.HeaderCell>
+            <Table.HeaderCell scope="col">
+              <FormattedMessage id="ArbeidOgInntektFaktaPanel.Kilde" />
+            </Table.HeaderCell>
+            <Table.HeaderCell scope="col">
+              <FormattedMessage id="ArbeidOgInntektFaktaPanel.InntektsmeldingMottatt" />
+            </Table.HeaderCell>
+            <Table.HeaderCell scope="col" />
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          {tabellRader.map((radData, index) => (
+            <ArbeidsforholdRad
+              key={`${radData.arbeidsgiverNavn}${radData.arbeidsgiverIdent}${index}`} // nosonar
+              arbeidOgInntekt={arbeidOgInntekt}
+              saksnummer={fagsak.saksnummer}
+              behandlingUuid={behandling.uuid}
+              behandlingVersjon={behandling.versjon}
+              radData={radData}
+              isReadOnly={isReadOnly || erAksjonspunktAvsluttet || harIngenAksjonspunkt}
+              registrerArbeidsforhold={registrerArbeidsforhold}
+              lagreVurdering={lagreVurdering}
+              toggleÅpenRad={() => toggleÅpenRad(index)}
+              erOverstyrt={erOverstyrt}
+              oppdaterTabell={oppdaterTabellData}
+              erRadÅpen={åpneRadIndexer.includes(index)}
+              alleKodeverk={alleKodeverk}
+            />
+          ))}
+        </Table.Body>
       </Table>
       <VerticalSpacer sixteenPx />
       {skalViseSettPåVentKnapp && (

@@ -41,6 +41,7 @@ export const VelferdspermisjonTabellRad = ({
       expandOnRowClick
       onOpenChange={() => setOpen(!open)}
       onClick={() => setOpen(!open)}
+      contentGutter="none"
       content={
         <VelferdspermisjonForm
           velferdspermisjon={velferdspermisjon}

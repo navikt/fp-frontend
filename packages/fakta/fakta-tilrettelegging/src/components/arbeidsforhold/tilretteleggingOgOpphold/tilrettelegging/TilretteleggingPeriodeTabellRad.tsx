@@ -106,6 +106,7 @@ export const TilretteleggingPeriodeTabellRad = ({
       expandOnRowClick
       onOpenChange={() => setOpen(!open)}
       onClick={() => setOpen(!open)}
+      contentGutter="none"
       content={
         <TilretteleggingForm
           tilrettelegging={tilrettelegging}
