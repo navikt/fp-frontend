@@ -2217,15 +2217,17 @@
       "kode": "GOD_VED_VL",
       "kodeverk": "OPPGAVE_AARSAK",
       "navn": "Godkjenne vedtak i VL"
-    },
+    }
+  ],
+  "OppgaveType": [
     {
       "kode": "VUR_KONS_YTE",
-      "kodeverk": "OPPGAVE_AARSAK",
+      "kodeverk": "OPPGAVE_TYPE",
       "navn": "Vurder konsekvens for ytelse"
     },
     {
       "kode": "VUR",
-      "kodeverk": "OPPGAVE_AARSAK",
+      "kodeverk": "OPPGAVE_TYPE",
       "navn": "Vurder dokument"
     }
   ],

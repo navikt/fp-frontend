@@ -40,7 +40,7 @@ export const OppgaveTabell = ({ oppgaver }: Props) => {
             <Table.Row key={`index${index + 1}`} className={styles.row}>
               <Table.DataCell>
                 <BodyShort size="small">
-                  {alleKodeverk[KodeverkType.OPPGAVE_AARSAK].find(o => o.kode === oppgave.oppgavetype)?.navn}
+                  {alleKodeverk[KodeverkType.OPPGAVE_TYPE].find(o => o.kode === oppgave.oppgavetype)?.navn}
                 </BodyShort>
               </Table.DataCell>
               <Table.DataCell>
