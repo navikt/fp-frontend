@@ -2,7 +2,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import type { Personoversikt, Ytelsefordeling } from '@navikt/fp-types';
+import type { OmsorgOgRett, Personoversikt } from '@navikt/fp-types';
 
 import { OmsorgOgRettInfoPanel } from './components/OmsorgOgRettInfoPanel';
 
@@ -12,7 +12,7 @@ const intl = createIntl(messages);
 
 export interface OmsorgOgRettProps {
   personoversikt: Personoversikt;
-  ytelsefordeling: Ytelsefordeling;
+  omsorgOgRett: OmsorgOgRett;
   submittable: boolean;
 }
 
