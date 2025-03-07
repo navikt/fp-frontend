@@ -22,6 +22,7 @@ import type {
   Behandlingsresultat,
   BeregningsresultatDagytelse,
   BeregningsresultatEs,
+  Oppgave,
   SimuleringResultat,
   TilbakekrevingValg,
   Vilkar,
@@ -194,6 +195,7 @@ interface Props {
   simuleringResultat?: SimuleringResultat;
   vilkar?: Vilkar[];
   beregningErManueltFastsatt: boolean;
+  oppgaver?: Oppgave[];
 }
 
 export const VedtakForm = ({
@@ -204,6 +206,7 @@ export const VedtakForm = ({
   simuleringResultat,
   vilkar,
   beregningErManueltFastsatt,
+  oppgaver,
 }: Props) => {
   const { behandling, alleKodeverk, submitCallback, isReadOnly } = usePanelDataContext<VedtakAksjonspunkter[]>();
 
@@ -267,6 +270,7 @@ export const VedtakForm = ({
         previewOverstyrtBrev={forhåndsvisOverstyrtBrev}
         tilbakekrevingtekst={tilbakekrevingtekst}
         erBehandlingEtterKlage={erBehandlingEtterKlage}
+        oppgaver={oppgaver}
         renderPanel={(skalBrukeOverstyrendeFritekstBrev, erInnvilget, erAvslatt) => {
           if (erInnvilget) {
             return (

@@ -56,4 +56,5 @@ export enum KodeverkType {
   FAGSAK_MARKERING = 'FagsakMarkering',
   ADRESSE_TYPE = 'AdresseType',
   NATURAL_YTELSE_TYPE = 'NaturalYtelseType',
+  OPPGAVE_TYPE = 'OppgaveType',
 }
