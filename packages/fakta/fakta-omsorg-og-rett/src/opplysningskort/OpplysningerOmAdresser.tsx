@@ -35,6 +35,7 @@ export const OpplysningerOmAdresser = ({ personoversikt: { bruker, annenPart, ba
         rolle="BRUKER"
         navn={bruker.navn}
         adresser={bruker.adresser}
+        sivilstand={bruker.sivilstand}
       />
 
       {annenPart && annenPart.adresser.length > 0 && (
@@ -45,6 +46,7 @@ export const OpplysningerOmAdresser = ({ personoversikt: { bruker, annenPart, ba
             navn={annenPart.navn}
             alleKodeverk={alleKodeverk}
             adresser={annenPart.adresser}
+            sivilstand={annenPart.sivilstand}
             rolle="ANNEN_PART"
           />
         </>
