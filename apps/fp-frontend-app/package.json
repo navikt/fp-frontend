@@ -123,7 +123,7 @@
     "@navikt/ft-ui-komponenter": "3.1.8",
     "@navikt/ft-utils": "3.1.7",
     "@popperjs/core": "2.11.8",
-    "@sentry/browser": "7.120.3",
+    "@sentry/browser": "9.5.0",
     "@tanstack/react-query": "5.67.1",
     "@tanstack/react-query-devtools": "^5.67.1",
     "classnames": "2.5.1",
