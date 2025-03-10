@@ -1,0 +1,32 @@
+import{u as B,_ as N,s as x,M as p,H as A,Q as E,B as M,P as C,n as $,m as z,a as f}from"./nb_NO-ByhPgpY4.js";import{j as e}from"./jsx-runtime-D_zvdyIk.js";import{r as o}from"./index-Dxs5m6lS.js";import{u as O,e as P,Z as D,a as j,K as S,o as W,N as H}from"./index.es-vswGjD1h.js";/* empty css              */import"./v4-CtRu48qb.js";import"./dayjs.min-Cke173X9.js";import"./_commonjsHelpers-Cpj98o6Y.js";import"./index-DMeSseuw.js";import"./index-DrFkskS4.js";function K(n,t){var l=n.values,r=N(n,["values"]),d=t.values,i=N(t,["values"]);return x(d,l)&&x(r,i)}function _(n){var t=B(),l=t.formatMessage,r=t.textComponent,d=r===void 0?o.Fragment:r,i=n.id,h=n.description,s=n.defaultMessage,a=n.values,u=n.children,m=n.tagName,g=m===void 0?d:m,y=n.ignoreTag,V={id:i,description:h,defaultMessage:s},c=l(V,a,{ignoreTag:y});return typeof u=="function"?u(Array.isArray(c)?c:[c]):g?o.createElement(g,null,o.Children.toArray(c)):o.createElement(o.Fragment,null,c)}_.displayName="FormattedMessage";var T=o.memo(_,K);T.displayName="MemoizedFormattedMessage";const L="_modal_tyvxs_1",Z="_selectWidth_tyvxs_6",b={modal:L,selectWidth:Z},Q=W(400),w=({handleSubmit:n,lukkModal:t,behandlendeEnheter:l,gjeldendeBehandlendeEnhetId:r,gjeldendeBehandlendeEnhetNavn:d})=>{const i=l.map((g,y)=>e.jsx("option",{value:`${y}`,children:`${g.enhetId} ${g.enhetNavn}`},g.enhetId)),h=[e.jsx("option",{disabled:!0,children:`${r} ${d}`},r)].concat(i),s=B(),a=O(),u=a.watch("nyEnhet"),m=a.watch("begrunnelse");return e.jsx(P,{formMethods:a,onSubmit:n,children:e.jsxs(p,{className:b.modal,open:!0,"aria-label":s.formatMessage({id:"EndreBehandlendeEnhetModal.ModalDescription"}),onClose:t,children:[e.jsx(p.Header,{children:e.jsx(A,{size:"small",children:e.jsx(T,{id:"EndreBehandlendeEnhetModal.EndreEnhet"})})}),e.jsxs(p.Body,{children:[e.jsx(E,{sixteenPx:!0}),e.jsx(D,{name:"nyEnhet",label:s.formatMessage({id:"EndreBehandlendeEnhetModal.NyEnhetField"}),validate:[j],selectValues:h,className:b.selectWidth}),e.jsx(E,{sixteenPx:!0}),e.jsx(S,{name:"begrunnelse",label:s.formatMessage({id:"EndreBehandlendeEnhetModal.BegrunnelseField"}),validate:[j,Q,H],maxLength:400}),e.jsx(E,{sixteenPx:!0})]}),e.jsxs(p.Footer,{children:[e.jsx(M,{size:"small",variant:"primary",className:b.button,disabled:!(u&&m),children:s.formatMessage({id:"EndreBehandlendeEnhetModal.Ok"})}),e.jsx(M,{size:"small",variant:"secondary",onClick:t,type:"button",children:s.formatMessage({id:"EndreBehandlendeEnhetModal.Avbryt"})})]})]})})};w.__docgenInfo={description:`EndreBehandlendeEnhetModal
+
+Denne modalen vises når saksbehandler valger 'Bytt behandlende enhet'.
+Ved å angi ny enhet og begrunnelse og trykke på 'OK' blir behandlende enhet endret.`,methods:[],displayName:"EndreBehandlendeEnhetModal",props:{lukkModal:{required:!0,tsType:{name:"signature",type:"function",raw:"() => void",signature:{arguments:[],return:{name:"void"}}},description:""},behandlendeEnheter:{required:!0,tsType:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  enhetId: string;
+  enhetNavn: string;
+}`,signature:{properties:[{key:"enhetId",value:{name:"string",required:!0}},{key:"enhetNavn",value:{name:"string",required:!0}}]}}],raw:`{
+  enhetId: string;
+  enhetNavn: string;
+}[]`},description:""},gjeldendeBehandlendeEnhetId:{required:!0,tsType:{name:"string"},description:""},gjeldendeBehandlendeEnhetNavn:{required:!0,tsType:{name:"string"},description:""},handleSubmit:{required:!0,tsType:{name:"signature",type:"function",raw:"(formValues: FormValues) => void",signature:{arguments:[{type:{name:"signature",type:"object",raw:`{
+  nyEnhet: string;
+  begrunnelse: string;
+}`,signature:{properties:[{key:"nyEnhet",value:{name:"string",required:!0}},{key:"begrunnelse",value:{name:"string",required:!0}}]}},name:"formValues"}],return:{name:"void"}}},description:""}}};const R=$(z),F=({behandlingVersjon:n,behandlendeEnhetId:t,behandlendeEnhetNavn:l,nyBehandlendeEnhet:r,behandlendeEnheter:d,lukkModal:i})=>{const h=o.useMemo(()=>d.filter(a=>a.enhetId!==t),[d]),s=o.useCallback(a=>{const u=h[parseInt(a.nyEnhet,10)],m={enhetNavn:u.enhetNavn,enhetId:u.enhetId,begrunnelse:a.begrunnelse};r(m),i()},[n,r]);return e.jsx(C,{value:R,children:e.jsx(w,{lukkModal:i,behandlendeEnheter:h,gjeldendeBehandlendeEnhetId:t,gjeldendeBehandlendeEnhetNavn:l,handleSubmit:s})})};F.__docgenInfo={description:"",methods:[],displayName:"MenyEndreBehandlendeEnhetIndex",props:{behandlingVersjon:{required:!0,tsType:{name:"number"},description:""},behandlendeEnhetId:{required:!0,tsType:{name:"string"},description:""},behandlendeEnhetNavn:{required:!0,tsType:{name:"string"},description:""},nyBehandlendeEnhet:{required:!0,tsType:{name:"signature",type:"function",raw:"(params: { enhetNavn: string; enhetId: string; begrunnelse: string }) => void",signature:{arguments:[{type:{name:"signature",type:"object",raw:"{ enhetNavn: string; enhetId: string; begrunnelse: string }",signature:{properties:[{key:"enhetNavn",value:{name:"string",required:!0}},{key:"enhetId",value:{name:"string",required:!0}},{key:"begrunnelse",value:{name:"string",required:!0}}]}},name:"params"}],return:{name:"void"}}},description:""},behandlendeEnheter:{required:!0,tsType:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  enhetId: string;
+  enhetNavn: string;
+}`,signature:{properties:[{key:"enhetId",value:{name:"string",required:!0}},{key:"enhetNavn",value:{name:"string",required:!0}}]}}],raw:`{
+  enhetId: string;
+  enhetNavn: string;
+}[]`},description:""},lukkModal:{required:!0,tsType:{name:"signature",type:"function",raw:"() => void",signature:{arguments:[],return:{name:"void"}}},description:""}}};const se={title:"sak/sak-meny-endre-enhet",component:F,args:{nyBehandlendeEnhet:f("button-click"),lukkModal:f("button-click")}},v={args:{behandlingVersjon:2,behandlendeEnhetId:"4292",behandlendeEnhetNavn:"Nav klageinstans Midt-Norge",behandlendeEnheter:[{enhetId:"4292",enhetNavn:"Nav klageinstans Midt-Norge"},{enhetId:"1000",enhetNavn:"Nav Vikafossen"}]}};var k,I,q;v.parameters={...v.parameters,docs:{...(k=v.parameters)==null?void 0:k.docs,source:{originalSource:`{
+  args: {
+    behandlingVersjon: 2,
+    behandlendeEnhetId: '4292',
+    behandlendeEnhetNavn: 'Nav klageinstans Midt-Norge',
+    behandlendeEnheter: [{
+      enhetId: '4292',
+      enhetNavn: 'Nav klageinstans Midt-Norge'
+    }, {
+      enhetId: '1000',
+      enhetNavn: 'Nav Vikafossen'
+    }]
+  }
+}`,...(q=(I=v.parameters)==null?void 0:I.docs)==null?void 0:q.source}}};const de=["Default"];export{v as Default,de as __namedExportsOrder,se as default};

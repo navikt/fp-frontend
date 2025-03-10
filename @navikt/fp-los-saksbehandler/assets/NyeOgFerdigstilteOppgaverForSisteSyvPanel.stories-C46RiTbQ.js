@@ -1,0 +1,26 @@
+import{A as t}from"./index.es-ClwW4EUb.js";import{d as a}from"./dayjs.min-DkLNzaWO.js";import{b as e,m as l}from"./nb_NO-DXuZpwvA.js";import"./jsx-runtime-D_zvdyIk.js";import{g as s}from"./withIntl-PdHeGbO3.js";import{N as p}from"./NyeOgFerdigstilteOppgaverForSisteSyvPanel-D8D1MHh-.js";import"./_commonjsHelpers-CqkleIqs.js";import"./index-_2TAQcTa.js";import"./v4-CtRu48qb.js";import"./entry-preview-BwwzheJK.js";import"./iframe-DiMt0KFx.js";import"./chunk-XP5HYGXS-BpfKkqn7.js";import"./entry-preview-docs-BwSyabb1.js";import"./index-CXQShRbs.js";import"./FlyttReservasjonModal-DAjdBA81.js";import"./index.es-CXK2YioG.js";import"./index.es-BaV1zFyq.js";import"./Loader-BiNbCtWk.js";import"./Modal-BPoqHm29.js";import"./index-BsrZSYsV.js";import"./index-CQwh6Daz.js";import"./composeEventHandlers-DeH74NdU.js";import"./ChevronDown-CvRLEy6H.js";import"./Tag-BPto_FBI.js";import"./index.es-CvZShvJo.js";import"./message-BP4r06K8.js";import"./VStack-a-3uwZHN.js";const d=s(l),P={title:"saksstotte/NyeOgFerdigstilteOppgaverForSisteSyvPanel",component:p,decorators:[d]},r={args:{height:200,nyeOgFerdigstilteOppgaver:[{behandlingType:e.FORSTEGANGSSOKNAD,antallNye:10,antallFerdigstilte:20,dato:a().subtract(1,"d").format(t)},{behandlingType:e.FORSTEGANGSSOKNAD,antallNye:30,antallFerdigstilte:15,dato:a().subtract(3,"d").format(t)},{behandlingType:e.KLAGE,antallNye:23,antallFerdigstilte:2,dato:a().subtract(4,"d").format(t)},{behandlingType:e.KLAGE,antallNye:23,antallFerdigstilte:2,dato:a().subtract(5,"d").format(t)}]}};var n,i,o;r.parameters={...r.parameters,docs:{...(n=r.parameters)==null?void 0:n.docs,source:{originalSource:`{
+  args: {
+    height: 200,
+    nyeOgFerdigstilteOppgaver: [{
+      behandlingType: BehandlingType.FORSTEGANGSSOKNAD,
+      antallNye: 10,
+      antallFerdigstilte: 20,
+      dato: dayjs().subtract(1, 'd').format(ISO_DATE_FORMAT)
+    }, {
+      behandlingType: BehandlingType.FORSTEGANGSSOKNAD,
+      antallNye: 30,
+      antallFerdigstilte: 15,
+      dato: dayjs().subtract(3, 'd').format(ISO_DATE_FORMAT)
+    }, {
+      behandlingType: BehandlingType.KLAGE,
+      antallNye: 23,
+      antallFerdigstilte: 2,
+      dato: dayjs().subtract(4, 'd').format(ISO_DATE_FORMAT)
+    }, {
+      behandlingType: BehandlingType.KLAGE,
+      antallNye: 23,
+      antallFerdigstilte: 2,
+      dato: dayjs().subtract(5, 'd').format(ISO_DATE_FORMAT)
+    }]
+  }
+}`,...(o=(i=r.parameters)==null?void 0:i.docs)==null?void 0:o.source}}};const k=["Default"];export{r as Default,k as __namedExportsOrder,P as default};
