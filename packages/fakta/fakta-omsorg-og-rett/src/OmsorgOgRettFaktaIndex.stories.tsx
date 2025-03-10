@@ -3,9 +3,21 @@ import type { ComponentProps } from 'react';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AdresseType, AksjonspunktKode, AksjonspunktStatus, SivilstandType } from '@navikt/fp-kodeverk';
+import {
+  AdresseType,
+  AksjonspunktKode,
+  AksjonspunktStatus,
+  RelasjonsRolleType,
+  SivilstandType,
+} from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import { type Aksjonspunkt, KjønnkodeEnum, type PersonopplysningerBasis, type Ytelsefordeling } from '@navikt/fp-types';
+import {
+  type Aksjonspunkt,
+  KjønnkodeEnum,
+  type OmsorgOgRett,
+  type PersonopplysningerBasis,
+  Verdi,
+} from '@navikt/fp-types';
 
 import { OmsorgOgRettFaktaIndex } from './OmsorgOgRettFaktaIndex';
 
@@ -60,13 +72,37 @@ const defaultBarn: PersonopplysningerBasis = {
   sivilstand: SivilstandType.UGIFT,
 };
 
+const defaultOmsorgOgRett: OmsorgOgRett = {
+  søknad: {
+    søkerHarAleneomsorg: Verdi.NEI,
+    annenpartIdent: 'ArubaFnr123',
+    annenpartBostedsland: 'ABW',
+    annenpartRettighet: {
+      harRettNorge: Verdi.JA,
+      harOppholdEØS: Verdi.JA,
+      harRettEØS: Verdi.NEI,
+      harUføretrygd: Verdi.JA,
+    },
+  },
+  registerdata: {
+    harAnnenpartUføretrygd: Verdi.IKKE_RELEVANT,
+    harAnnenpartForeldrepenger: Verdi.NEI,
+    harAnnenpartEngangsstønad: Verdi.NEI,
+  },
+  manuellBehandlingResultat: undefined,
+  relasjonsRolleType: RelasjonsRolleType.FAR,
+};
+
 const meta = {
   title: 'fakta/fakta-omsorg-og-rett',
   component: OmsorgOgRettFaktaIndex,
   decorators: [withFormData, withPanelData],
   args: {
     personoversikt: { barn: [defaultBarn], annenPart: defaultAnnenPart, bruker: defaultBruker },
-    ytelsefordeling: {} as Ytelsefordeling,
+    omsorgOgRett: {
+      ...defaultOmsorgOgRett,
+      relasjonsRolleType: RelasjonsRolleType.FAR,
+    },
     submittable: true,
   },
   render: args => <OmsorgOgRettFaktaIndex {...args} />,

@@ -57,8 +57,9 @@ describe('OmsorgOgRettFaktaIndex', () => {
     expect(screen.getByText('Søker har oppgitt å ha aleneomsorg for barnet')).toBeInTheDocument();
     await userEvent.click(screen.getByLabelText('Søker har ikke aleneomsorg for barnet'));
 
-    expect(screen.getByText('Har annen forelder rett til foreldrepenger i Norge?')).toBeInTheDocument();
-    await userEvent.click(screen.getByText('Ja'));
+    expect(screen.getAllByText('Har annen forelder rett til foreldrepenger i Norge?')).toHaveLength(2);
+    const jaElements = screen.getAllByText('Ja');
+    await userEvent.click(jaElements[jaElements.length - 1]);
 
     await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
 
@@ -90,8 +91,9 @@ describe('OmsorgOgRettFaktaIndex', () => {
 
     expect(await screen.findByText('Vurder om den andre forelderen har rett til foreldrepenger.')).toBeInTheDocument();
 
-    expect(screen.getByText('Har annen forelder rett til foreldrepenger i Norge?')).toBeInTheDocument();
-    await userEvent.click(screen.getByText('Ja'));
+    expect(screen.getAllByText('Har annen forelder rett til foreldrepenger i Norge?')).toHaveLength(2);
+    const jaElements = screen.getAllByText('Ja');
+    await userEvent.click(jaElements[jaElements.length - 1]);
 
     await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
 
@@ -113,14 +115,14 @@ describe('OmsorgOgRettFaktaIndex', () => {
 
     expect(await screen.findByText('Vurder om den andre forelderen har rett til foreldrepenger.')).toBeInTheDocument();
 
-    expect(screen.getByText('Har annen forelder rett til foreldrepenger i Norge?')).toBeInTheDocument();
-    await userEvent.click(screen.getByText('Nei'));
+    expect(screen.getAllByText('Har annen forelder rett til foreldrepenger i Norge?')).toHaveLength(2);
+    await userEvent.click(screen.getAllByText('Nei')[screen.getAllByText('Nei').length - 1]);
 
     expect(screen.getByText('Har annen forelder tilstrekkelig opptjening fra land i EØS?')).toBeInTheDocument();
-    await userEvent.click(screen.getAllByText('Nei')[1]);
+    await userEvent.click(screen.getAllByText('Nei')[screen.getAllByText('Nei').length - 1]);
 
     expect(await screen.findByText('Mottar annen forelder uføretrygd, jfr 14-14 tredje ledd?')).toBeInTheDocument();
-    await userEvent.click(screen.getAllByText('Ja')[2]);
+    await userEvent.click(screen.getAllByText('Ja')[screen.getAllByText('Ja').length - 1]);
 
     await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
 
