@@ -99,8 +99,5 @@
   "LeggTilArbeidsforholdForm.Avbryt": "Avbryt",
   "LeggTilArbeidsforholdForm.Slett": "Slett",
 
-  "NyttArbeidsforholdForm.VilDuSlette": "Vil du slette arbeidsforholdet?",
-
-  "ExpandableTableRow.Apne": "Åpne rad",
-  "ExpandableTableRow.Lukke": "Lukk rad"
+  "NyttArbeidsforholdForm.VilDuSlette": "Vil du slette arbeidsforholdet?"
 }
