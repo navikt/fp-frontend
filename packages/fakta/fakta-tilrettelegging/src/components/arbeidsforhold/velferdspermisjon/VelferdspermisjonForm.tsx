@@ -79,8 +79,10 @@ export const VelferdspermisjonForm = ({
         style={{
           backgroundColor: 'white',
           padding: '24px',
-          marginTop: '-10px',
+          marginTop: '-8px',
           marginBottom: '-8px',
+          marginLeft: '-8px',
+          marginRight: '-8px',
         }}
       >
         <VStack gap="5">

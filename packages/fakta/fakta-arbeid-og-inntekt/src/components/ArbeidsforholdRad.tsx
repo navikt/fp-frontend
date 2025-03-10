@@ -2,8 +2,8 @@ import { useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { CheckmarkIcon, ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Label } from '@navikt/ds-react';
-import { DateLabel, ExpandableTableRow, PeriodLabel, TableColumn } from '@navikt/ft-ui-komponenter';
+import { BodyShort, Label, Table } from '@navikt/ds-react';
+import { DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 import classnames from 'classnames/bind';
 import dayjs from 'dayjs';
@@ -149,10 +149,18 @@ export const ArbeidsforholdRad = ({
   )?.inntekter;
 
   return (
-    <ExpandableTableRow
-      alignWithColumn={1}
+    <Table.ExpandableRow
+      open={erRadÅpen}
+      onOpenChange={toggleÅpenRad}
+      expandOnRowClick
+      togglePlacement="right"
+      contentGutter="none"
+      className={classNames('row', {
+        isOpen: erRadÅpen,
+        isApOpen: harÅpentAksjonspunkt,
+      })}
       content={
-        <>
+        <div className={harÅpentAksjonspunkt ? styles.panelOpenAp : styles.panelOpen}>
           {erManueltOpprettet && (
             <ManueltLagtTilArbeidsforholdForm
               behandlingUuid={behandlingUuid}
@@ -231,13 +239,10 @@ export const ArbeidsforholdRad = ({
               arbeidsgiverFødselsdato={arbeidsgiverFødselsdato}
             />
           )}
-        </>
+        </div>
       }
-      showContent={erRadÅpen}
-      toggleContent={toggleÅpenRad}
-      isApLeftBorder={harÅpentAksjonspunkt}
     >
-      <TableColumn className={classNames('ikon', erRadÅpen ? 'imageColTopPadding' : undefined)}>
+      <Table.DataCell>
         {!harÅpentAksjonspunkt && (
           <CheckmarkIcon title={intl.formatMessage({ id: 'ArbeidsforholdRad.Ok' })} className={styles.checkmarkIcon} />
         )}
@@ -247,12 +252,12 @@ export const ArbeidsforholdRad = ({
             className={styles.exclamationmarkIcon}
           />
         )}
-      </TableColumn>
-      <TableColumn className={erRadÅpen ? styles.colTopPadding : undefined}>
+      </Table.DataCell>
+      <Table.DataCell className={erRadÅpen ? styles.colTopPadding : undefined}>
         {erRadÅpen && <Label size="small">{arbeidsgiverNavn}</Label>}
         {!erRadÅpen && <BodyShort size="small">{arbeidsgiverNavn}</BodyShort>}
-      </TableColumn>
-      <TableColumn className={erRadÅpen ? styles.colTopPadding : undefined}>
+      </Table.DataCell>
+      <Table.DataCell className={erRadÅpen ? styles.colTopPadding : undefined}>
         <BodyShort>
           {periode?.fom && (
             <PeriodLabel
@@ -262,13 +267,13 @@ export const ArbeidsforholdRad = ({
           )}
           {!periode && '-'}
         </BodyShort>
-      </TableColumn>
-      <TableColumn className={erRadÅpen ? styles.colTopPadding : undefined}>
+      </Table.DataCell>
+      <Table.DataCell className={erRadÅpen ? styles.colTopPadding : undefined}>
         <BodyShort>
           <FormattedMessage id={finnKildekode(erManueltOpprettet, arbeidsforholdForRad.length > 0)} />
         </BodyShort>
-      </TableColumn>
-      <TableColumn className={erRadÅpen ? styles.colTopPadding : undefined}>
+      </Table.DataCell>
+      <Table.DataCell className={erRadÅpen ? styles.colTopPadding : undefined}>
         <BodyShort>
           {arbeidsforholdForRad.length < 2 && inntektsmeldingerForRad.length === 1 && (
             <DateLabel dateString={inntektsmeldingerForRad[0].motattDato} />
@@ -283,7 +288,7 @@ export const ArbeidsforholdRad = ({
             <FormattedMessage id="ArbeidsforholdRad.IkkeMottatt" />
           )}
         </BodyShort>
-      </TableColumn>
-    </ExpandableTableRow>
+      </Table.DataCell>
+    </Table.ExpandableRow>
   );
 };
