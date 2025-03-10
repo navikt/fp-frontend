@@ -15,7 +15,6 @@
   "TilretteleggingFaktaForm.PeriodeIkkeLagtTil": "Det er minst en periode som er lagt til men ikke ferdigstilt",
   "TilretteleggingFaktaForm.ArbeidsforholdUtenTilrettelegging": "Alle arbeidsforhold med svangerskapspenger må ha minst en tilretteleggingsperiode",
   "TilretteleggingFaktaForm.ValgtSvpVedGyldig100Permisjon": "Arbeidsforhold med gyldig permisjon på 100% kan ikke ha svangerskapspenger",
-  "TilretteleggingFaktaForm.HarOverlappendePeriode": "Det finnes opphold med overlappende perioder",
 
   "TilretteleggingForArbeidsgiverPanel.TilretteleggingTidligereEnn": "Tilrettelegging fra og med må være tidligere enn {dato}",
   "TilretteleggingForArbeidsgiverPanel.DatoForTilrettelegging": "Dato for tilrettelegging fra lege eller jordmor",

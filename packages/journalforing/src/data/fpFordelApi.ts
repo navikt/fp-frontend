@@ -11,6 +11,7 @@ import type { SaksnummerType } from '../typer/saksnummerTsType';
 
 const kyExtended = ky.extend({
   retry: 0,
+  timeout: 15000,
   hooks: {
     beforeRequest: [
       request => {

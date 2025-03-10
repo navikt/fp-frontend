@@ -4,22 +4,21 @@ import { useIntl } from 'react-intl';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { BeregningsresultatProsessIndex } from '@navikt/fp-prosess-beregningsresultat';
-import { PanelOverstyringProvider } from '@navikt/fp-utils';
 
 import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
-import { ProsessDefaultInitOverstyringPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
-const AKSJONSPUNKT_KODE = AksjonspunktKode.OVERSTYR_BEREGNING;
-
 export const BeregningEsProsessStegInitPanel = () => {
-  const standardPanelProps = useStandardProsessPanelProps([AKSJONSPUNKT_KODE]);
+  const intl = useIntl();
 
-  const { behandling, rettigheter } = use(BehandlingDataContext);
+  const standardPanelProps = useStandardProsessPanelProps();
+
+  const { behandling } = use(BehandlingDataContext);
 
   const api = useBehandlingApi(behandling);
 
@@ -28,28 +27,22 @@ export const BeregningEsProsessStegInitPanel = () => {
   );
 
   return (
-    <PanelOverstyringProvider
-      overstyringApKode={AKSJONSPUNKT_KODE}
-      kanOverstyreAccess={rettigheter.kanOverstyreAccess}
-      overrideReadOnly={standardPanelProps.isReadOnly}
+    <ProsessDefaultInitPanel
+      standardPanelProps={standardPanelProps}
+      prosessPanelKode={ProsessStegCode.BEREGNING}
+      prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Beregning' })}
+      skalPanelVisesIMeny
+      hentOverstyrtStatus={
+        harLenke(behandling, 'BEREGNINGRESULTAT_ENGANGSSTONAD')
+          ? VilkarUtfallType.OPPFYLT
+          : VilkarUtfallType.IKKE_VURDERT
+      }
     >
-      <ProsessDefaultInitOverstyringPanel
-        standardPanelProps={standardPanelProps}
-        prosessPanelKode={ProsessStegCode.BEREGNING}
-        prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.Beregning' })}
-        skalPanelVisesIMeny
-        hentOverstyrtStatus={
-          harLenke(behandling, 'BEREGNINGRESULTAT_ENGANGSSTONAD')
-            ? VilkarUtfallType.OPPFYLT
-            : VilkarUtfallType.IKKE_VURDERT
-        }
-      >
-        {isFetching ? (
-          <LoadingPanel />
-        ) : (
-          <BeregningsresultatProsessIndex beregningresultatEngangsstonad={beregningsresultatEngangsstønad} />
-        )}
-      </ProsessDefaultInitOverstyringPanel>
-    </PanelOverstyringProvider>
+      {isFetching ? (
+        <LoadingPanel />
+      ) : (
+        <BeregningsresultatProsessIndex beregningresultatEngangsstonad={beregningsresultatEngangsstønad} />
+      )}
+    </ProsessDefaultInitPanel>
   );
 };

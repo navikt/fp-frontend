@@ -1,3 +1,4 @@
+import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 
@@ -49,9 +50,11 @@ init({
 const root = createRoot(app);
 
 root.render(
-  <BrowserRouter basename="/">
-    <RestApiErrorProvider>
-      <AppIndexWrapper />
-    </RestApiErrorProvider>
-  </BrowserRouter>,
+  <StrictMode>
+    <BrowserRouter basename="/">
+      <RestApiErrorProvider>
+        <AppIndexWrapper />
+      </RestApiErrorProvider>
+    </BrowserRouter>
+  </StrictMode>,
 );

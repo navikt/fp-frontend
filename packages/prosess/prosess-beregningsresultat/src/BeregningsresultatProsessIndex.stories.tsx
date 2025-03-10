@@ -1,70 +1,21 @@
-import { type ComponentProps } from 'react';
-
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
-import {
-  type PanelDataArgs,
-  type PanelOverstyringContextArgs,
-  withFormData,
-  withPanelData,
-  withPanelOverstyring,
-} from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt } from '@navikt/fp-types';
-
 import { BeregningsresultatProsessIndex } from './BeregningsresultatProsessIndex';
-
-const beregningsresultat = {
-  beregnetTilkjentYtelse: 92000,
-  antallBarn: 1,
-  satsVerdi: 92000,
-};
-
-const defaultAksjonspunkter = [
-  {
-    definisjon: AksjonspunktKode.VURDER_FEILUTBETALING,
-    status: AksjonspunktStatus.OPPRETTET,
-    begrunnelse: 'test',
-  },
-] as Aksjonspunkt[];
 
 const meta = {
   title: 'prosess/prosess-beregningsresultat',
   component: BeregningsresultatProsessIndex,
-  decorators: [withFormData, withPanelData, withPanelOverstyring],
   args: {
-    beregningresultatEngangsstonad: beregningsresultat,
-    overstyringApKode: AksjonspunktKode.OVERSTYR_BEREGNING,
+    beregningresultatEngangsstonad: {
+      beregnetTilkjentYtelse: 92000,
+      antallBarn: 1,
+      satsVerdi: 92000,
+    },
   },
   render: args => <BeregningsresultatProsessIndex {...args} />,
-} satisfies Meta<PanelDataArgs & PanelOverstyringContextArgs & ComponentProps<typeof BeregningsresultatProsessIndex>>;
+} satisfies Meta<typeof BeregningsresultatProsessIndex>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const SaksbehandlerKanIkkeOverstyre: Story = {
-  args: {
-    aksjonspunkterForPanel: defaultAksjonspunkter,
-  },
-};
-
-export const SaksbehandlerKanOverstyre: Story = {
-  args: {
-    aksjonspunkterForPanel: defaultAksjonspunkter,
-    kanOverstyreAccess: { isEnabled: true, employeeHasAccess: true },
-  },
-};
-
-export const OverstyrtReadonlyPanel: Story = {
-  args: {
-    aksjonspunkterForPanel: [
-      {
-        definisjon: AksjonspunktKode.OVERSTYR_BEREGNING,
-        status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: 'Dette er en begrunnelse',
-      },
-    ] as Aksjonspunkt[],
-    kanOverstyreAccess: { isEnabled: true, employeeHasAccess: true },
-    isReadOnly: true,
-  },
-};
+export const Default: Story = {};

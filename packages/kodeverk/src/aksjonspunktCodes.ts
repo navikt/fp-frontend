@@ -1,7 +1,6 @@
 // TODO Fjern denne fila og heller legg aksjonspunkta på pakkene dei blir brukt i
 
 export type OverstyringAksjonspunkter =
-  | AksjonspunktKode.OVERSTYR_BEREGNING
   | AksjonspunktKode.OVERSTYR_SOKNADSFRISTVILKAR
   | AksjonspunktKode.OVERSTYR_ADOPSJONSVILKAR
   | AksjonspunktKode.OVERSTYR_FODSELSVILKAR
@@ -88,7 +87,6 @@ export enum AksjonspunktKode {
   OVERSTYR_MEDLEMSKAPSVILKAR = '6005',
   OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE = '6017',
   OVERSTYR_SOKNADSFRISTVILKAR = '6006',
-  OVERSTYR_BEREGNING = '6007',
   OVERSTYRING_AV_UTTAKPERIODER = '6008',
   OVERSTYR_FODSELSVILKAR_FAR_MEDMOR = '6009',
   OVERSTYRING_AV_ADOPSJONSVILKÅRET_FP = '6010',
