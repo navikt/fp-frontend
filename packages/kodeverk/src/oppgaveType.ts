@@ -1,4 +1,4 @@
 export enum OppgaveType {
-  VUR_KONS_YTE = 'VUR_KONS_YTE',
-  VUR = 'VUR',
+  VUR_KONSEKVENS = 'VUR_KONSEKVENS',
+  VUR_DOKUMENT = 'VUR_DOKUMENT',
 }

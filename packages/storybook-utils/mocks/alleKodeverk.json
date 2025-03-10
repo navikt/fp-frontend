@@ -2221,12 +2221,12 @@
   ],
   "OppgaveType": [
     {
-      "kode": "VUR_KONS_YTE",
+      "kode": "VUR_KONSEKVENS",
       "kodeverk": "OPPGAVE_TYPE",
       "navn": "Vurder konsekvens for ytelse"
     },
     {
-      "kode": "VUR",
+      "kode": "VUR_DOKUMENT",
       "kodeverk": "OPPGAVE_TYPE",
       "navn": "Vurder dokument"
     }

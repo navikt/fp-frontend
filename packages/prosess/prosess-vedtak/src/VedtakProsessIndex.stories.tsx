@@ -275,22 +275,22 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
     },
     oppgaver: [
       {
-        oppgavetype: OppgaveType.VUR_KONS_YTE,
+        oppgavetype: OppgaveType.VUR_KONSEKVENS,
         beskrivelse: 'Se sto mottatt 24.02.25',
       },
       {
-        oppgavetype: OppgaveType.VUR_KONS_YTE,
+        oppgavetype: OppgaveType.VUR_KONSEKVENS,
         beskrivelse:
           'Fullmektig tar kontakt. Ber om fristutsettelse 4 uker, ettersom bruker først mottok brevet i dag. ' +
           'Jeg har utsatt 14 dager, men han ønsker ytterligere 2 uker utover det, altså 28.09.24. ' +
           'Kan dere gi tilbakemelding på dette?',
       },
       {
-        oppgavetype: OppgaveType.VUR,
+        oppgavetype: OppgaveType.VUR_DOKUMENT,
         beskrivelse: 'Bekreftelse fra arbeidsgiver',
       },
       {
-        oppgavetype: OppgaveType.VUR,
+        oppgavetype: OppgaveType.VUR_DOKUMENT,
         beskrivelse: 'Søknad om foreldrepenger ved fødsel',
       },
     ],
