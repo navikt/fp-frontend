@@ -128,8 +128,8 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
 
     expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
 
-    await userEvent.click(screen.getByTitle('Åpne rad'));
-    expect(await screen.findByTitle('Lukk rad')).toBeInTheDocument();
+    await userEvent.click(screen.getByTitle('Vis mer'));
+    expect(await screen.findByTitle('Vis mindre')).toBeInTheDocument();
 
     const radioknapper = screen.getAllByRole('radio', { hidden: true });
     expect(radioknapper).toHaveLength(3);
@@ -313,8 +313,8 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
 
     expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
 
-    await userEvent.click(screen.getByTitle('Åpne rad'));
-    expect(await screen.findByTitle('Lukk rad')).toBeInTheDocument();
+    await userEvent.click(screen.getByTitle('Vis mer'));
+    expect(await screen.findByTitle('Vis mindre')).toBeInTheDocument();
 
     const radioKnapper = screen.getAllByRole('radio', { hidden: true });
     expect(radioKnapper).toHaveLength(3);
@@ -360,8 +360,8 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
       ),
     ).toBeInTheDocument();
 
-    await userEvent.click(screen.getByTitle('Åpne rad'));
-    expect(await screen.findByTitle('Lukk rad')).toBeInTheDocument();
+    await userEvent.click(screen.getByTitle('Vis mer'));
+    expect(await screen.findByTitle('Vis mindre')).toBeInTheDocument();
 
     expect(screen.queryByRole('radio', { hidden: true })).not.toBeInTheDocument();
 
@@ -508,11 +508,11 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
     expect(screen.getByTitle('Arbeidsforhold er OK')).toBeInTheDocument();
     expect(screen.queryByAltText('Åpent aksjonspunkt')).not.toBeInTheDocument();
-    expect(screen.queryByAltText('Lukk rad')).not.toBeInTheDocument();
+    expect(screen.queryByAltText('Vis mindre')).not.toBeInTheDocument();
 
-    await userEvent.click(screen.getByTitle('Åpne rad'));
+    await userEvent.click(screen.getByTitle('Vis mer'));
 
-    expect(await screen.findByTitle('Lukk rad')).toBeInTheDocument();
+    expect(await screen.findByTitle('Vis mindre')).toBeInTheDocument();
 
     expect(screen.getByText('Stillingsprosent')).toBeInTheDocument();
     expect(screen.getByText('100%')).toBeInTheDocument();
@@ -535,11 +535,11 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
     expect(screen.getByTitle('Arbeidsforhold er OK')).toBeInTheDocument();
     expect(screen.queryByAltText('Åpent aksjonspunkt')).not.toBeInTheDocument();
-    expect(screen.queryByAltText('Lukk rad')).not.toBeInTheDocument();
+    expect(screen.queryByAltText('Vis mindre')).not.toBeInTheDocument();
 
-    await userEvent.click(screen.getByTitle('Åpne rad'));
+    await userEvent.click(screen.getByTitle('Vis mer'));
 
-    expect(await screen.findByTitle('Lukk rad')).toBeInTheDocument();
+    expect(await screen.findByTitle('Vis mindre')).toBeInTheDocument();
 
     expect(screen.getAllByText('ID')).toHaveLength(2);
     expect(screen.getByText('ARB001-001')).toBeInTheDocument();
@@ -691,7 +691,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     expect(screen.getByTitle('Arbeidsforhold er OK')).toBeInTheDocument();
     expect(screen.queryByAltText('Åpent aksjonspunkt')).not.toBeInTheDocument();
 
-    expect(screen.getByTitle('Åpne rad')).toBeInTheDocument();
+    expect(screen.getByTitle('Vis mer')).toBeInTheDocument();
   });
 
   it('skal automatisk ignorere at inntektsmelding mangler', async () => {
@@ -701,8 +701,8 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
 
     expect(screen.getByTitle('Arbeidsforhold er OK')).toBeInTheDocument();
 
-    await userEvent.click(screen.getByTitle('Åpne rad'));
-    expect(await screen.findByTitle('Lukk rad')).toBeInTheDocument();
+    await userEvent.click(screen.getByTitle('Vis mer'));
+    expect(await screen.findByTitle('Vis mindre')).toBeInTheDocument();
 
     expect(screen.getByText('Stillingsprosent')).toBeInTheDocument();
     expect(screen.getByText('20%')).toBeInTheDocument();

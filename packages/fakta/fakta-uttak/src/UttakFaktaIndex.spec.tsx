@@ -20,7 +20,7 @@ describe('<UttakFaktaIndex>', () => {
 
     expect(await screen.findByText('Fakta om uttak')).toBeInTheDocument();
 
-    expect(await screen.getByTitle('Åpne rad')).toBeInTheDocument();
+    expect(await screen.getByTitle('Vis mer')).toBeInTheDocument();
     expect(await screen.queryByTitle('Overstyr')).not.toBeInTheDocument();
   });
 
@@ -31,15 +31,15 @@ describe('<UttakFaktaIndex>', () => {
 
     expect(await screen.findByText('Fakta om uttak')).toBeInTheDocument();
 
-    expect(await screen.getByTitle('Åpne rad')).toBeInTheDocument();
+    expect(await screen.getByTitle('Vis mer')).toBeInTheDocument();
 
     await userEvent.click(screen.getByTitle('Overstyr'));
 
     expect(await screen.findByText('Legg til periode')).toBeInTheDocument();
 
-    expect(await screen.getByTitle('Åpne rad')).toBeInTheDocument();
+    expect(await screen.getByTitle('Vis mer')).toBeInTheDocument();
 
-    await userEvent.click(screen.getByTitle('Åpne rad'));
+    await userEvent.click(screen.getByTitle('Vis mer'));
 
     const periodeFra = utils.getByLabelText('Periode fra');
     await userEvent.clear(periodeFra);
@@ -91,7 +91,7 @@ describe('<UttakFaktaIndex>', () => {
       screen.getByText('Første periode starter ikke på avklart startdato 31.01.2022. Legg inn periode fra startdato'),
     ).toBeInTheDocument();
 
-    await userEvent.click(screen.getAllByTitle('Åpne rad')[0]);
+    await userEvent.click(screen.getAllByTitle('Vis mer')[0]);
 
     expect(await screen.findByText('Periode til')).toBeInTheDocument();
 
@@ -170,7 +170,7 @@ describe('<UttakFaktaIndex>', () => {
       screen.getByText('Ingen perioder å vurdere. Vurder om behandlingen er feilopprettet og kan henlegges'),
     ).toBeInTheDocument();
 
-    expect(screen.queryByAltText('Åpne rad')).not.toBeInTheDocument();
+    expect(screen.queryByAltText('Vis mer')).not.toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Legg til periode'));
 
@@ -221,7 +221,7 @@ describe('<UttakFaktaIndex>', () => {
 
     expect(screen.getByText('Gradering av ukjent arbeidsforhold. Vurder gradering')).toBeInTheDocument();
 
-    await userEvent.click(screen.getByTitle('Åpne rad'));
+    await userEvent.click(screen.getByTitle('Vis mer'));
 
     expect(
       await screen.findByText('Arbeidsgiver oppgitt for perioden er ukjent. Referanse: 91090823'),
@@ -272,7 +272,7 @@ describe('<UttakFaktaIndex>', () => {
 
     expect(await screen.findByText('Fakta om uttak')).toBeInTheDocument();
 
-    await userEvent.click(screen.getByTitle('Åpne rad'));
+    await userEvent.click(screen.getByTitle('Vis mer'));
 
     expect(await screen.findByText('Periodetype')).toBeInTheDocument();
 
@@ -330,7 +330,7 @@ describe('<UttakFaktaIndex>', () => {
 
     expect(screen.queryByText('Bekreft og fortsett')).not.toBeInTheDocument();
 
-    await userEvent.click(screen.getByTitle('Åpne rad'));
+    await userEvent.click(screen.getByTitle('Vis mer'));
 
     expect(await screen.findByText('Periodetype')).toBeInTheDocument();
     expect(screen.queryByRole('input')).not.toBeInTheDocument();
