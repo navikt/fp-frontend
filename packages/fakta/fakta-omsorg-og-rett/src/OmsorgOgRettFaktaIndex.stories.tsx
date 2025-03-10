@@ -89,8 +89,20 @@ const defaultOmsorgOgRett: OmsorgOgRett = {
     harAnnenpartForeldrepenger: Verdi.NEI,
     harAnnenpartEngangsstønad: Verdi.NEI,
   },
-  manuellBehandlingResultat: undefined,
+  manuellBehandlingResultat: null,
   relasjonsRolleType: RelasjonsRolleType.FAR,
+};
+
+const aleneOmsorgForOmsorgOgRett: OmsorgOgRett = {
+  søknad: {
+    søkerHarAleneomsorg: Verdi.JA,
+    annenpartIdent: null,
+    annenpartBostedsland: null,
+    annenpartRettighet: null,
+  },
+  registerdata: null,
+  manuellBehandlingResultat: null,
+  relasjonsRolleType: RelasjonsRolleType.MOR,
 };
 
 const meta = {
@@ -120,6 +132,9 @@ export const HarAksjonspunktForAvklarAleneomsorg: Story = {
         kanLoses: true,
       },
     ] as Aksjonspunkt[],
+    omsorgOgRett: {
+      ...aleneOmsorgForOmsorgOgRett,
+    },
   },
 };
 
@@ -158,5 +173,101 @@ export const HarAksjonspunktForAvklarAnnenForelderRett: Story = {
         kanLoses: true,
       },
     ] as Aksjonspunkt[],
+    omsorgOgRett: {
+      søknad: {
+        søkerHarAleneomsorg: Verdi.NEI,
+        annenpartIdent: null,
+        annenpartBostedsland: null,
+        annenpartRettighet: {
+          harRettNorge: Verdi.JA,
+          harOppholdEØS: Verdi.IKKE_RELEVANT,
+          harRettEØS: Verdi.IKKE_RELEVANT,
+          harUføretrygd: Verdi.IKKE_RELEVANT,
+        },
+      },
+      registerdata: {
+        harAnnenpartUføretrygd: Verdi.IKKE_RELEVANT,
+        harAnnenpartForeldrepenger: Verdi.NEI,
+        harAnnenpartEngangsstønad: Verdi.NEI,
+      },
+      manuellBehandlingResultat: null,
+      relasjonsRolleType: RelasjonsRolleType.FAR,
+    },
+  },
+};
+
+export const AvklarAnnenForelderRettBareFarRett: Story = {
+  args: {
+    aksjonspunkterForPanel: [
+      {
+        definisjon: AksjonspunktKode.AVKLAR_ANNEN_FORELDER_RETT,
+        status: AksjonspunktStatus.UTFORT,
+        begrunnelse: 'Mor har ikke rett og er uføretrygded i pesys.',
+        kanLoses: false,
+      },
+    ] as Aksjonspunkt[],
+    isReadOnly: true,
+    omsorgOgRett: {
+      søknad: {
+        søkerHarAleneomsorg: Verdi.NEI,
+        annenpartIdent: null,
+        annenpartBostedsland: null,
+        annenpartRettighet: {
+          harRettNorge: Verdi.NEI,
+          harOppholdEØS: Verdi.IKKE_RELEVANT,
+          harRettEØS: Verdi.IKKE_RELEVANT,
+          harUføretrygd: Verdi.JA,
+        },
+      },
+      registerdata: {
+        harAnnenpartUføretrygd: Verdi.JA,
+        harAnnenpartForeldrepenger: Verdi.NEI,
+        harAnnenpartEngangsstønad: Verdi.NEI,
+      },
+      manuellBehandlingResultat: {
+        søkerHarAleneomsorg: Verdi.IKKE_RELEVANT,
+        annenpartRettighet: {
+          harRettNorge: Verdi.NEI,
+          harOppholdEØS: Verdi.IKKE_RELEVANT,
+          harRettEØS: Verdi.IKKE_RELEVANT,
+          harUføretrygd: Verdi.IKKE_RELEVANT,
+        },
+      },
+      relasjonsRolleType: RelasjonsRolleType.FAR,
+    },
+  },
+};
+
+export const RevurderingManuell: Story = {
+  args: {
+    isReadOnly: false,
+    omsorgOgRett: {
+      søknad: {
+        søkerHarAleneomsorg: Verdi.NEI,
+        annenpartIdent: null,
+        annenpartBostedsland: null,
+        annenpartRettighet: {
+          harRettNorge: Verdi.NEI,
+          harOppholdEØS: Verdi.JA,
+          harRettEØS: Verdi.NEI,
+          harUføretrygd: Verdi.IKKE_RELEVANT,
+        },
+      },
+      registerdata: {
+        harAnnenpartUføretrygd: Verdi.NEI,
+        harAnnenpartForeldrepenger: Verdi.NEI,
+        harAnnenpartEngangsstønad: Verdi.NEI,
+      },
+      manuellBehandlingResultat: {
+        søkerHarAleneomsorg: Verdi.IKKE_RELEVANT,
+        annenpartRettighet: {
+          harRettNorge: Verdi.NEI,
+          harOppholdEØS: Verdi.IKKE_RELEVANT,
+          harRettEØS: Verdi.NEI,
+          harUføretrygd: Verdi.JA,
+        },
+      },
+      relasjonsRolleType: RelasjonsRolleType.MEDMOR,
+    },
   },
 };
