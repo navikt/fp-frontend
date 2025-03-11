@@ -1,25 +1,27 @@
-import React, { type MouseEvent, type ReactNode, useCallback, useMemo, useState } from 'react';
+import React, { type MouseEvent, type ReactNode, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ArrowForwardIcon, CheckmarkCircleFillIcon, PencilIcon, XMarkOctagonFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, Heading, Label, Link } from '@navikt/ds-react';
+import { Alert, BodyShort, Box, Button, Heading, HStack, Label, Link, VStack } from '@navikt/ds-react';
 import { FlexColumn, FlexContainer, FlexRow, OkAvbrytModal, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import {
   AksjonspunktKode,
   Avslagsarsak,
   BehandlingStatus as behandlingStatusCode,
+  DokumentMalType,
   isAvslag,
   isInnvilget,
   isOpphor,
   KonsekvensForYtelsen,
 } from '@navikt/fp-kodeverk';
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
-import type { Aksjonspunkt, Behandling, Behandlingsresultat, Oppgave } from '@navikt/fp-types';
+import type { Aksjonspunkt, Behandling, Behandlingsresultat, GenererHtmlDokument, Oppgave } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
-import { ManueltVedtaksbrevPanel } from './ManueltVedtaksbrevPanel';
+import { FritekstRedigeringModal } from '../editor/FritekstRedigeringModal';
+import type { ForhandsvisData } from '../forstegang/VedtakForm';
 import { OppgaveTabell } from './OppgaveTabell.tsx';
 import { VedtakHelpTextPanel } from './VedtakHelpTextPanel';
 
@@ -64,52 +66,87 @@ interface Props {
     erOpphor?: boolean,
   ) => ReactNode;
   previewAutomatiskBrev: (e: MouseEvent) => void;
-  previewOverstyrtBrev: (e: MouseEvent) => void;
+  previewCallback: (data: ForhandsvisData) => void;
   tilbakekrevingtekst?: string;
   vedtakstatusTekst?: string;
   oppgaver?: Oppgave[];
+  hentBrevHtml: (params: GenererHtmlDokument) => Promise<string>;
+  lagreManueltBrev: (html: string) => Promise<void>;
+  forkastManueltBrev: () => Promise<void>;
+  setHarOverstyrtVedtaksbrev: (harOverstyrtVedtaksbrev: boolean) => void;
 }
 
 export const VedtakFellesPanel = ({
   renderPanel,
   previewAutomatiskBrev,
-  previewOverstyrtBrev,
+  previewCallback,
   tilbakekrevingtekst,
   erBehandlingEtterKlage,
   vedtakstatusTekst,
   oppgaver,
+  hentBrevHtml,
+  lagreManueltBrev,
+  forkastManueltBrev,
+  setHarOverstyrtVedtaksbrev,
 }: Props) => {
   const intl = useIntl();
 
   const { behandling, isReadOnly } = usePanelDataContext();
 
-  const { aksjonspunkt } = behandling;
+  const { aksjonspunkt, behandlingsresultat, behandlingPåVent, status, behandlingHenlagt, uuid, taskStatus } =
+    behandling;
+
+  const [visRedigering, setVisRedigering] = useState(false);
+  const [brevHtml, setBrevHtml] = useState<string>();
+
+  useEffect(() => {
+    if (behandling.behandlingsresultat?.vedtaksbrev === DokumentMalType.FRITEKST_HTML) {
+      hentBrevHtml({
+        behandlingUuid: behandling.uuid,
+        dokumentMal: DokumentMalType.FRITEKST_HTML,
+        automatiskVedtaksbrev: false,
+        arsakskode: '',
+      }).then((html: string) => setBrevHtml(html));
+    }
+  }, []);
 
   const {
-    setValue,
     formState: { isSubmitting },
   } = useFormContext();
-
-  const { behandlingsresultat, behandlingPåVent, språkkode, status, behandlingHenlagt, uuid, taskStatus } = behandling;
 
   if (!behandlingsresultat) {
     throw new Error(`behandlingsresultat finnes ikke på behandling ${uuid}`);
   }
 
   const [skalBrukeManueltBrev, setSkalBrukeManueltBrev] = useState(
-    !!behandlingsresultat.vedtaksbrev && behandlingsresultat.vedtaksbrev === 'FRITEKST',
+    behandlingsresultat.vedtaksbrev === DokumentMalType.FRITEKST ||
+      behandlingsresultat.vedtaksbrev === DokumentMalType.FRITEKST_HTML,
   );
+
   const [skalViseModal, setSkalViseModal] = useState(false);
-  const onToggleOverstyring = useCallback((e: React.MouseEvent) => {
+
+  const onToggleOverstyring = async (e: React.MouseEvent) => {
     setSkalBrukeManueltBrev(true);
+    setHarOverstyrtVedtaksbrev(true);
+
+    const html = await hentBrevHtml({
+      behandlingUuid: behandling.uuid,
+      dokumentMal: DokumentMalType.FRITEKST_HTML,
+      automatiskVedtaksbrev: false,
+      arsakskode: '',
+    });
+    setBrevHtml(html);
+
     e.preventDefault();
-  }, []);
-  const avsluttRedigering = useCallback(() => {
+  };
+
+  const avsluttRedigering = () => {
     setSkalBrukeManueltBrev(false);
+    setHarOverstyrtVedtaksbrev(false);
     setSkalViseModal(false);
-    setValue('overskrift', undefined);
-    setValue('brødtekst', undefined);
-  }, []);
+
+    forkastManueltBrev();
+  };
 
   const erInnvilget = isInnvilget(behandlingsresultat.type);
   const erAvslatt = isAvslag(behandlingsresultat.type);
@@ -121,13 +158,9 @@ export const VedtakFellesPanel = ({
     taskStatus?.status !== ApiPollingStatus.HALTED &&
     taskStatus?.status !== ApiPollingStatus.DELAYED;
 
-  const harIkkeKonsekvensForYtelse = useMemo(
-    () =>
-      harIkkeKonsekvenserForYtelsen(
-        [KonsekvensForYtelsen.ENDRING_I_FORDELING_AV_YTELSEN, KonsekvensForYtelsen.INGEN_ENDRING],
-        behandlingsresultat,
-      ),
-    [behandlingsresultat],
+  const harIkkeKonsekvensForYtelse = harIkkeKonsekvenserForYtelsen(
+    [KonsekvensForYtelsen.ENDRING_I_FORDELING_AV_YTELSEN, KonsekvensForYtelsen.INGEN_ENDRING],
+    behandlingsresultat,
   );
 
   return (
@@ -216,12 +249,40 @@ export const VedtakFellesPanel = ({
       <VerticalSpacer twentyPx />
       {renderPanel(skalBrukeManueltBrev, erInnvilget, erAvslatt, erOpphor)}
       {skalBrukeManueltBrev && (
-        <ManueltVedtaksbrevPanel
-          isReadOnly={isReadOnly}
-          språkkode={språkkode}
-          forhåndsvisOverstyrtBrev={previewOverstyrtBrev}
-          skalViseLink={skalViseLink}
-        />
+        <div className={styles.brevRedigering}>
+          <VStack gap="4">
+            <Alert variant="info" size="small">
+              <FormattedMessage id="VedtakFellesPanel.KanRedigeres" />
+            </Alert>
+            <Box padding="4" borderRadius="medium" background="surface-subtle">
+              <VStack gap="2">
+                <Heading size="small">
+                  <FormattedMessage id="VedtakFellesPanel.RedigerBrevOverskrift" />
+                </Heading>
+                <HStack>
+                  <Button
+                    variant="secondary"
+                    type="button"
+                    onClick={() => setVisRedigering(true)}
+                    size="small"
+                    disabled={isReadOnly}
+                  >
+                    <FormattedMessage id="VedtakFellesPanel.RedigerVedtaksbrev" />
+                  </Button>
+                </HStack>
+              </VStack>
+            </Box>
+          </VStack>
+          {brevHtml && visRedigering && (
+            <FritekstRedigeringModal
+              setVisRedigering={setVisRedigering}
+              brevHtml={brevHtml}
+              forkastManueltBrev={forkastManueltBrev}
+              forhåndsvisBrev={previewCallback}
+              lagreManueltBrev={lagreManueltBrev}
+            />
+          )}
+        </div>
       )}
       {kanSendesTilGodkjenning(status) && (
         <>

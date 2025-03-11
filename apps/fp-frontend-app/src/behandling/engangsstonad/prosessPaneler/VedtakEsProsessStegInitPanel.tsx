@@ -15,7 +15,13 @@ import {
 } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { VedtakProsessIndex } from '@navikt/fp-prosess-vedtak';
-import type { Aksjonspunkt, Behandlingsresultat, ForhåndsvisMeldingParams, Vilkar } from '@navikt/fp-types';
+import type {
+  Aksjonspunkt,
+  Behandlingsresultat,
+  ForhåndsvisMeldingParams,
+  GenererHtmlDokument,
+  Vilkar,
+} from '@navikt/fp-types';
 import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingApi';
@@ -78,6 +84,18 @@ export const VedtakEsProsessStegInitPanel = () => {
 
   const isNotFetching = !isBogFetching && !isBeFetching && !isSrFetching && !isTvFetching && !isOFetching;
 
+  const { mutateAsync: hentBrevHtml } = useMutation({
+    mutationFn: (values: GenererHtmlDokument) => api.getBrevHtml(values),
+  });
+
+  const { mutateAsync: forkastManueltBrev } = useMutation({
+    mutationFn: () => api.forkastManueltBrev({ behandlingUuid: behandling.uuid }),
+  });
+
+  const { mutateAsync: lagreManueltBrev } = useMutation({
+    mutationFn: (html: string) => api.lagreBrevHtml({ behandlingUuid: behandling.uuid, html }),
+  });
+
   const { mutate: forhåndsvis } = useMutation({
     mutationFn: (values: ForhåndsvisMeldingParams) =>
       forhåndsvisMelding({
@@ -133,6 +151,9 @@ export const VedtakEsProsessStegInitPanel = () => {
             tilbakekrevingvalg={tilbakekrevingValg}
             vilkar={vilkår}
             oppgaver={oppgaver}
+            hentBrevHtml={hentBrevHtml}
+            lagreManueltBrev={lagreManueltBrev}
+            forkastManueltBrev={forkastManueltBrev}
           />
         ) : (
           <LoadingPanel />

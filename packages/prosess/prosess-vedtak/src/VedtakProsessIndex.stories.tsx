@@ -10,6 +10,7 @@ import {
   BehandlingResultatType,
   BehandlingStatus,
   BehandlingType,
+  DokumentMalType,
   FagsakYtelseType,
   KonsekvensForYtelsen,
   OppgaveType,
@@ -26,6 +27,7 @@ import type {
   Vilkar,
 } from '@navikt/fp-types';
 
+import mal from '../.storybook/brevmal/mal.html?raw';
 import { VedtakProsessIndex } from './VedtakProsessIndex';
 
 const defaultAksjonspunkter = [
@@ -75,7 +77,13 @@ const meta = {
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
     vilkar: defaultVilkar,
-    previewCallback: action('button-click') as any,
+    previewCallback: action('button-click'),
+    hentBrevHtml: args => {
+      action('button-click')(args);
+      return Promise.resolve(mal);
+    },
+    forkastManueltBrev: action('button-click') as () => Promise<void>,
+    lagreManueltBrev: action('button-click') as (html: string) => Promise<void>,
   },
   render: args => <VedtakProsessIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof VedtakProsessIndex>>;
@@ -113,9 +121,7 @@ export const GodkjentForeldrepengerMedManueltBrevForSaksbehandlerMedOverstyring:
       ...defaultBehandling,
       status: BehandlingStatus.AVSLUTTET,
       behandlingsresultat: {
-        vedtaksbrev: 'FRITEKST',
-        overskrift: 'Dette er en overskrift',
-        fritekstbrev: 'Dette er innholdet i brevet',
+        vedtaksbrev: DokumentMalType.FRITEKST_HTML,
         type: BehandlingResultatType.INNVILGET,
       },
     } as Behandling,
@@ -484,9 +490,7 @@ export const GodkjentRevurderingForeldrepengerMedManueltBrevForSaksbehandlerMedO
       type: BehandlingType.REVURDERING,
       status: BehandlingStatus.AVSLUTTET,
       behandlingsresultat: {
-        vedtaksbrev: 'FRITEKST',
-        overskrift: 'Dette er en overskrift',
-        fritekstbrev: 'Dette er innholdet i brevet',
+        vedtaksbrev: DokumentMalType.FRITEKST_HTML,
         type: BehandlingResultatType.INNVILGET,
         konsekvenserForYtelsen: [KonsekvensForYtelsen.FORELDREPENGER_OPPHORER],
       },
