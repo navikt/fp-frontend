@@ -1,4 +1,5 @@
 import type { Aksjonspunkt } from './aksjonspunktTsType';
+import type { ApiLink } from './apiLink.ts';
 import type { Behandlingsresultat } from './behandlingsresultatTsType';
 import type { Risikoklassifisering } from './risikoklassifiseringTsType';
 import type { TotrinnskontrollAksjonspunkt } from './totrinnskontrollAksjonspunktTsType';
@@ -13,12 +14,7 @@ export type BehandlingFellesData = Readonly<{
   behandlingPaaVent: boolean;
   behandlingHenlagt: boolean;
   behandlingsresultat?: Behandlingsresultat;
-  links: {
-    href: string;
-    rel: string;
-    requestPayload?: any;
-    type: string;
-  }[];
+  links: ApiLink[];
   opprettet: string;
   avsluttet?: string;
   erAktivPapirsoknad: boolean;
