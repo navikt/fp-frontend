@@ -1,5 +1,5 @@
 import type { Aksjonspunkt } from './aksjonspunktTsType';
-import type { ApiLink } from './apiLink';
+import type { ApiLink } from './apiLink.ts';
 import type { Behandlingsresultat } from './behandlingsresultatTsType';
 import type { Risikoklassifisering } from './risikoklassifiseringTsType';
 import type { TotrinnskontrollAksjonspunkt } from './totrinnskontrollAksjonspunktTsType';
@@ -9,26 +9,25 @@ export type BehandlingFellesData = Readonly<{
   uuid: string;
   status: string;
   type: string;
-  fristBehandlingPåVent?: string;
-  venteArsakKode?: string;
-  behandlingPaaVent: boolean;
+  fristBehandlingPåVent?: string | null;
+  venteÅrsakKode?: string | null;
+  behandlingPåVent: boolean;
   behandlingHenlagt: boolean;
   behandlingsresultat?: Behandlingsresultat;
   links: ApiLink[];
   opprettet: string;
-  avsluttet?: string;
+  avsluttet?: string | null;
   erAktivPapirsoknad: boolean;
   gjeldendeVedtak: boolean;
   språkkode: string;
   behandlendeEnhetId: string;
   behandlendeEnhetNavn: string;
-  behandlingKoet: boolean;
+  behandlingKøet: boolean;
   toTrinnsBehandling: boolean;
   behandlingÅrsaker: BehandlingÅrsak[];
-  ansvarligSaksbehandler?: string;
+  ansvarligSaksbehandler?: string | null;
   kanHenleggeBehandling?: boolean;
   førsteÅrsak?: BehandlingÅrsak;
-  fristBehandlingPaaVent?: string;
 }>;
 
 export type BehandlingÅrsak = {
@@ -72,7 +71,7 @@ export type BehandlingAppKontekst = BehandlingFellesData &
     brevmaler: Brevmal[];
     totrinnskontrollÅrsaker: TotrinnskontrollSkjermlenkeContext[];
     totrinnskontrollReadonly: boolean;
-    risikoAksjonspunkt: Aksjonspunkt;
+    risikoAksjonspunkt: Aksjonspunkt | null;
     kontrollResultat: Risikoklassifisering;
-    ugunstAksjonspunkt: boolean;
+    ugunstAksjonspunkt: boolean | null;
   }>;

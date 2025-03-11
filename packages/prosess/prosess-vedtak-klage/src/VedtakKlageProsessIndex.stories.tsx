@@ -20,7 +20,7 @@ const behandling = {
   behandlingsresultat: {
     type: BehandlingResultatType.KLAGE_AVVIST,
   },
-  behandlingPaaVent: false,
+  behandlingPåVent: false,
 } as Behandling;
 
 const aksjonspunkterForPanel: Aksjonspunkt[] = [

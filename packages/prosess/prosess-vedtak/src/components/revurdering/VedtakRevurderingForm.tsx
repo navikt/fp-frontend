@@ -221,8 +221,8 @@ const transformValues = (values: FormValues): RevurderingVedtakAksjonspunkter[] 
 
 const buildInitialValues = (aksjonspunkter: Aksjonspunkt[], behandling: Behandling): FormValues => ({
   aksjonspunktKoder: aksjonspunkter.filter(ap => ap.kanLoses).map(ap => ap.definisjon),
-  overskrift: decodeHtmlEntity(behandling.behandlingsresultat?.overskrift),
-  brødtekst: decodeHtmlEntity(behandling.behandlingsresultat?.fritekstbrev),
+  overskrift: decodeHtmlEntity(behandling.behandlingsresultat?.overskrift ?? undefined),
+  brødtekst: decodeHtmlEntity(behandling.behandlingsresultat?.fritekstbrev ?? undefined),
 });
 
 interface FormValues {
