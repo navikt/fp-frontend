@@ -3,7 +3,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { BodyShort, Label, Table } from '@navikt/ds-react';
 
 import { FaktaKilde } from '@navikt/fp-fakta-felles';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { type AlleKodeverk, type OmsorgOgRett, Verdi } from '@navikt/fp-types';
 
 import { EkspansjonsKort } from '../components/ekspansjonsKort/EkspansjonsKort.tsx';
@@ -13,7 +12,7 @@ interface Props {
   alleKodeverk: AlleKodeverk;
 }
 
-export const OpplysningerFraSoknad = ({ omsorgOgRett }: Props) => {
+export const OpplysningerFraSoknad = ({ omsorgOgRett, alleKodeverk }: Props) => {
   const intl = useIntl();
 
   const annenpartRettighet = omsorgOgRett.søknad.annenpartRettighet;
