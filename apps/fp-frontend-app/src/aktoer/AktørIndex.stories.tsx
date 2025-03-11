@@ -7,7 +7,7 @@ import { http, HttpResponse } from 'msw';
 
 import { FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { alleKodeverk, withQueryClient } from '@navikt/fp-storybook-utils';
-import type { Aktor, FagsakPerson, Person } from '@navikt/fp-types';
+import type { Aktor, Person } from '@navikt/fp-types';
 import { KjønnkodeEnum } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
@@ -19,12 +19,14 @@ import initFetchTilbakeData from '../../.storybook/testdata/initFetchTilbake.jso
 
 const getHref = (rel: string) => wrapUrl(notEmpty(initFetchData.links.find(link => link.rel === rel)).href);
 
-const PERSON = {
+const PERSON: Person = {
   navn: 'Espen Utvikler',
-  fødselsnummer: '121221',
+  fødselsnummer: '11111111111',
   kjønn: KjønnkodeEnum.MANN,
   fødselsdato: '2000-01-02',
-} satisfies Person;
+  dødsdato: null,
+  aktørId: '22222222',
+};
 
 const AKTØR_INFO = {
   fagsaker: [
@@ -47,10 +49,7 @@ const AKTØR_INFO = {
       person: PERSON,
     },
   ],
-  person: {
-    ...PERSON,
-    aktørId: '12121221',
-  } satisfies FagsakPerson,
+  person: PERSON,
 } satisfies Aktor;
 
 const meta = {
@@ -101,7 +100,7 @@ export const IngenFagsaker: Story = {
         http.get(FagsakUrl.AKTOER_INFO, () =>
           HttpResponse.json({
             fagsaker: [],
-            person: PERSON,
+            person: { ...PERSON, aktørId: null },
           } satisfies Aktor),
         ),
       ],

@@ -95,7 +95,8 @@ export type {
   BehandlingOppretting,
   Saksmarkering,
 } from './src/fagsakTsType';
-export type { FagsakEnkel, Person } from './src/fagsakEnkelTsType';
+export type { FagsakEnkel } from './src/fagsakEnkelTsType';
+export type { Person } from './src/personTsType';
 export type { FagsakDataFpTilbake } from './src/fagsakTilbakekrevingTsType';
 export type {
   Medlemskap,

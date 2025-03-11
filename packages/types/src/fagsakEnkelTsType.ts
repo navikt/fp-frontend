@@ -1,13 +1,4 @@
-import type { Kjønnkode } from './Kjonnkode';
-
-export type Person = Readonly<{
-  navn: string;
-  kjønn: Kjønnkode;
-  fødselsnummer: string;
-  fødselsdato: string;
-  dødsdato?: string;
-  diskresjonskode?: string;
-}>;
+import type { Person } from './personTsType';
 
 export type FagsakEnkel = Readonly<{
   saksnummer: string;

@@ -1,5 +1,5 @@
 import type { Aksjonspunkt } from './aksjonspunktTsType';
-import type { ApiLink } from './apiLink.ts';
+import type { ApiLink } from './apiLink';
 import type { Behandlingsresultat } from './behandlingsresultatTsType';
 import type { Risikoklassifisering } from './risikoklassifiseringTsType';
 import type { TotrinnskontrollAksjonspunkt } from './totrinnskontrollAksjonspunktTsType';
