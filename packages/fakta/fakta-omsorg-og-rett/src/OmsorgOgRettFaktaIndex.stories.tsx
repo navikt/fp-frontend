@@ -132,9 +132,7 @@ export const HarAksjonspunktForAvklarAleneomsorg: Story = {
         kanLoses: true,
       },
     ] as Aksjonspunkt[],
-    omsorgOgRett: {
-      ...aleneOmsorgForOmsorgOgRett,
-    },
+    omsorgOgRett: aleneOmsorgForOmsorgOgRett,
   },
 };
 

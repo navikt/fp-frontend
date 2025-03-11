@@ -141,13 +141,12 @@ describe('OmsorgOgRettFaktaIndex', () => {
   });
 
   it('skal vise at bare far har rett til foreldrepenger når mor er uføretrygd', async () => {
-    render(<AvklarAnnenForelderRettBareFarRett isReadOnly={true} />);
+    render(<AvklarAnnenForelderRettBareFarRett isReadOnly />);
 
     expect(screen.getAllByText('Har annen forelder rett til foreldrepenger i Norge?')).toHaveLength(2);
     expect(screen.getByText('Har annen forelder tilstrekkelig opptjening fra land i EØS?')).toBeInTheDocument();
     expect(screen.getByText('Mottar annen forelder uføretrygd, jfr 14-14 tredje ledd?')).toBeInTheDocument();
-    const begrunnelse = await screen.findByText('Mor har ikke rett og er uføretrygded i pesys.');
-    expect(begrunnelse).toBeInTheDocument();
+    expect(await screen.findByText('Mor har ikke rett og er uføretrygded i pesys.')).toBeInTheDocument();
     const bekreftOgFortsettKnapp = screen.queryByText('Bekreft og fortsett');
     expect(bekreftOgFortsettKnapp).not.toBeInTheDocument();
 
