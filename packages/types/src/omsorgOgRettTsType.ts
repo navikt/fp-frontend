@@ -2,16 +2,16 @@ import { RelasjonsRolleType } from '@navikt/fp-kodeverk';
 
 export type OmsorgOgRett = {
   søknad: Søknad;
-  registerdata: RegisterData;
-  manuellBehandlingResultat?: ManuellBehandlingResultat;
+  registerdata: RegisterData | null;
+  manuellBehandlingResultat: ManuellBehandlingResultat | null;
   relasjonsRolleType: RelasjonsRolleType;
 };
 
 export type Søknad = {
   søkerHarAleneomsorg: Verdi;
-  annenpartIdent: string;
-  annenpartBostedsland: string;
-  annenpartRettighet: Rettighet;
+  annenpartIdent: string | null;
+  annenpartBostedsland: string | null;
+  annenpartRettighet: Rettighet | null;
 };
 
 export type Rettighet = {
@@ -29,7 +29,7 @@ export type RegisterData = {
 
 export type ManuellBehandlingResultat = {
   søkerHarAleneomsorg: Verdi;
-  annenpartRettighet: Rettighet;
+  annenpartRettighet: Rettighet | null;
 };
 
 export enum Verdi {
