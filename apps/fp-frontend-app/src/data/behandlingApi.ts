@@ -28,6 +28,7 @@ import type {
   Feriepengegrunnlag,
   FodselOgTilrettelegging,
   ForhåndsvisMeldingParams,
+  GenererHtmlDokument,
   Innsyn,
   InntektArbeidYtelse,
   Inntektsmelding,
@@ -198,6 +199,9 @@ export const BehandlingRel = {
   VERGE: 'soeker-verge',
   UPDATE_ON_HOLD: 'endre-pa-vent',
   HENT_OPPGAVER: 'hent-oppgaver',
+  BREV_GENERER_HTML: 'brev-generer-html',
+  BREV_LAGRE_HTML: 'brev-lagre-html',
+  BREV_NULLSTILL_OVERSTYRING: 'brev-nullstill-overstyring',
 };
 
 const getArbeidsgiverOversiktOptions =
@@ -520,6 +524,12 @@ const getOppgaverOptions = (links: ApiLink[]) => (behandling: Behandling) =>
     enabled: harLenke(behandling, 'HENT_OPPGAVER'),
     staleTime: Infinity,
   });
+const getBrevHtml = (links: ApiLink[]) => (params: GenererHtmlDokument) =>
+  kyExtended
+    .get(getUrlFromRel('BREV_GENERER_HTML', links), {
+      json: params,
+    })
+    .json<string>();
 
 export const hentBehandling = (behandlingUuid: string) =>
   kyExtended.post<Behandling>(BehandlingUrl.BEHANDLING, {
@@ -612,6 +622,20 @@ const getFjernVergeV1 = (links: ApiLink[]) => (params: { behandlingUuid: string;
   kyExtended.post<Behandling>(getUrlFromRel('VERGE_FJERN_V1', links), {
     json: params,
   });
+
+const getLagreBrevHtml = (links: ApiLink[]) => (params: { behandlingUuid: string; html: string }) =>
+  kyExtended
+    .post<string>(getUrlFromRel('BREV_LAGRE_HTML', links), {
+      json: params,
+    })
+    .json<void>();
+
+const getForkastManueltBrev = (links: ApiLink[]) => (params: { behandlingUuid: string }) =>
+  kyExtended
+    .post(getUrlFromRel('BREV_NULLSTILL_OVERSTYRING', links), {
+      json: params,
+    })
+    .json<void>();
 
 const getFjernVergeV2 = (links: ApiLink[]) => () => kyExtended.post(getUrlFromRel('VERGE_FJERN_V2', links));
 
@@ -727,6 +751,9 @@ export const useBehandlingApi = (behandling: Behandling) => {
     inntektArbeidYtelseOptions: getInntektArbeidYtelseOptions(links),
     utlandDokStatusOptions: getUtlandDokStatusOptions(links),
     vergeOptions: getVergeOptions(links),
+    getBrevHtml: getBrevHtml(links),
+    lagreBrevHtml: getLagreBrevHtml(links),
+    forkastManueltBrev: getForkastManueltBrev(links),
     verge: {
       hent: getVerge(links),
       opprettVergeV2: getOpprettVergeV2(links),
