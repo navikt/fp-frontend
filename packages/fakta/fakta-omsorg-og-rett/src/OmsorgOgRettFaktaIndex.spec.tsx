@@ -9,6 +9,8 @@ const {
   HarAksjonspunktForAvklarAleneomsorg,
   HarAksjonspunktForAvklarAleneomsorgMedFlereBarn,
   HarAksjonspunktForAvklarAnnenForelderRett,
+  AvklarAnnenForelderRettBareFarRett,
+  RevurderingManuell,
 } = composeStories(stories);
 
 describe('OmsorgOgRettFaktaIndex', () => {
@@ -57,7 +59,7 @@ describe('OmsorgOgRettFaktaIndex', () => {
     expect(screen.getByText('Søker har oppgitt å ha aleneomsorg for barnet')).toBeInTheDocument();
     await userEvent.click(screen.getByLabelText('Søker har ikke aleneomsorg for barnet'));
 
-    expect(screen.getAllByText('Har annen forelder rett til foreldrepenger i Norge?')).toHaveLength(2);
+    expect(screen.getAllByText('Har annen forelder rett til foreldrepenger i Norge?')).toHaveLength(1);
     const jaElements = screen.getAllByText('Ja');
     await userEvent.click(jaElements[jaElements.length - 1]);
 
@@ -135,6 +137,49 @@ describe('OmsorgOgRettFaktaIndex', () => {
       annenforelderHarRett: false,
       annenForelderHarRettEØS: false,
       annenforelderMottarUføretrygd: true,
+    });
+  });
+
+  it('skal vise at bare far har rett til foreldrepenger når mor er uføretrygd', async () => {
+    render(<AvklarAnnenForelderRettBareFarRett isReadOnly />);
+
+    expect(screen.getAllByText('Har annen forelder rett til foreldrepenger i Norge?')).toHaveLength(2);
+    expect(screen.getByText('Har annen forelder tilstrekkelig opptjening fra land i EØS?')).toBeInTheDocument();
+    expect(screen.getByText('Mottar annen forelder uføretrygd, jfr 14-14 tredje ledd?')).toBeInTheDocument();
+    expect(await screen.findByText('Mor har ikke rett og er uføretrygded i pesys.')).toBeInTheDocument();
+    const bekreftOgFortsettKnapp = screen.queryByText('Bekreft og fortsett');
+    expect(bekreftOgFortsettKnapp).not.toBeInTheDocument();
+
+    const neiRadioButtons = screen.getAllByLabelText('Nei') as HTMLInputElement[];
+    const checkedNeiRadioButtons = neiRadioButtons.filter(radio => radio.checked);
+
+    expect(checkedNeiRadioButtons).toHaveLength(3);
+    checkedNeiRadioButtons.forEach(radio => {
+      expect(radio).toBeDisabled();
+    });
+  });
+
+  it('skal vise i readonly modus for historisk valgte options når revurdering åpnes', async () => {
+    render(<RevurderingManuell isReadOnly={true} />);
+
+    expect(screen.getAllByText('Har annen forelder rett til foreldrepenger i Norge?')).toHaveLength(2);
+    expect(screen.getByText('Har annen forelder tilstrekkelig opptjening fra land i EØS?')).toBeInTheDocument();
+    expect(screen.getByText('Mottar annen forelder uføretrygd, jfr 14-14 tredje ledd?')).toBeInTheDocument();
+    const bekreftOgFortsettKnapp = screen.queryByText('Bekreft og fortsett');
+    expect(bekreftOgFortsettKnapp).not.toBeInTheDocument();
+
+    const neiRadioButtons = screen.getAllByLabelText('Nei') as HTMLInputElement[];
+    const checkedNeiRadioButtons = neiRadioButtons.filter(radio => radio.checked);
+    expect(checkedNeiRadioButtons).toHaveLength(2);
+    checkedNeiRadioButtons.forEach(radio => {
+      expect(radio).toBeDisabled();
+    });
+
+    const jaRadioButtons = screen.getAllByLabelText('Ja') as HTMLInputElement[];
+    const checkedJaRadioButtons = jaRadioButtons.filter(radio => radio.checked);
+    expect(checkedJaRadioButtons).toHaveLength(1);
+    checkedJaRadioButtons.forEach(radio => {
+      expect(radio).toBeDisabled();
     });
   });
 });
