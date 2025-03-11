@@ -9,13 +9,12 @@ import { SvangerskapVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-svanger
 import { useBehandlingApi } from '../../../../data/behandlingApi';
 import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandardProsessPanelProps';
-import type { InngangsvilkarPanelInitProps } from '../../../felles/typer/inngangsvilkarPanelInitProps';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.SVANGERSKAPSVILKARET];
 
 const VILKAR_KODER = [VilkarType.SVANGERSKAPVILKARET];
 
-export const SvangerskapInngangsvilkarInitPanel = (props: InngangsvilkarPanelInitProps) => {
+export const SvangerskapInngangsvilkarInitPanel = () => {
   const intl = useIntl();
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, VILKAR_KODER);
 
@@ -27,24 +26,21 @@ export const SvangerskapInngangsvilkarInitPanel = (props: InngangsvilkarPanelIni
 
   return (
     <InngangsvilkarDefaultInitPanel
-      {...props}
-      behandlingVersjon={standardPanelProps.behandling.versjon}
       vilkarKoder={VILKAR_KODER}
       standardPanelProps={standardPanelProps}
       inngangsvilkarPanelKode="SVANGERSKAP"
       hentInngangsvilkarPanelTekst={intl.formatMessage({ id: 'SvangerskapVilkarForm.FyllerVilkår' })}
-      renderPanel={({ skalVises }) => (
-        <>
-          {skalVises && svangerskapspengerTilrettelegging && (
-            <SvangerskapVilkarProsessIndex
-              svangerskapspengerTilrettelegging={svangerskapspengerTilrettelegging}
-              status={standardPanelProps.status}
-              readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
-            />
-          )}
-          {skalVises && !svangerskapspengerTilrettelegging && <LoadingPanel />}
-        </>
-      )}
-    />
+    >
+      <>
+        {svangerskapspengerTilrettelegging && (
+          <SvangerskapVilkarProsessIndex
+            svangerskapspengerTilrettelegging={svangerskapspengerTilrettelegging}
+            status={standardPanelProps.status}
+            readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
+          />
+        )}
+        {!svangerskapspengerTilrettelegging && <LoadingPanel />}
+      </>
+    </InngangsvilkarDefaultInitPanel>
   );
 };
