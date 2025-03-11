@@ -22,7 +22,7 @@ export type Søknadsfrist = Readonly<{
 export type Soknad = Readonly<{
   soknadType: string;
   mottattDato: string;
-  begrunnelseForSenInnsending: string | undefined;
+  begrunnelseForSenInnsending: string | null;
   antallBarn: number;
   oppgittTilknytning: {
     oppholdNorgeNa: boolean;
@@ -43,15 +43,15 @@ export type Soknad = Readonly<{
       annenPart: {
         søknadsdato: string;
         dekningsgrad: number;
-      };
+      } | null;
     };
   };
   søknadsfrist: Søknadsfrist;
-  utstedtdato?: string;
+  utstedtdato: string | null;
   termindato?: string;
   fodselsdatoer?: Record<number, string>;
   omsorgsovertakelseDato?: string;
   barnetsAnkomstTilNorgeDato?: string;
   adopsjonFodelsedatoer?: Record<number, string>;
-  farSokerType?: string;
+  farSokerType?: string | null;
 }>;

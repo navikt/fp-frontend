@@ -11,16 +11,15 @@ import type { Aktor, Person } from '@navikt/fp-types';
 import { KjønnkodeEnum } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
+import { initFetchFpsak, initFetchFptilbake } from '../../../.storybook/testdata/initFetchFpsak';
 import { FagsakRel, FagsakUrl, initFetchOptions, useFagsakApi, wrapUrl } from '../../data/fagsakApi';
 import { Home } from './Home';
 
-import initFetchData from '../../../.storybook/testdata/initFetch.json';
-import initFetchTilbakeData from '../../../.storybook/testdata/initFetchTilbake.json';
 import messages from '../../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
 
-const getHref = (rel: string) => wrapUrl(notEmpty(initFetchData.links.find(link => link.rel === rel)).href);
+const getHref = (rel: string) => wrapUrl(notEmpty(initFetchFpsak.links.find(link => link.rel === rel)).href);
 
 const PERSON: Person = {
   navn: 'Espen Utvikler',
@@ -72,8 +71,8 @@ const meta = {
   parameters: {
     msw: {
       handlers: [
-        http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchData)),
-        http.get(FagsakUrl.INIT_FETCH_FPTILBAKE, () => HttpResponse.json(initFetchTilbakeData)),
+        http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak)),
+        http.get(FagsakUrl.INIT_FETCH_FPTILBAKE, () => HttpResponse.json(initFetchFptilbake)),
         http.get(getHref(FagsakRel.KODEVERK), () => HttpResponse.json(alleKodeverk)),
         http.get(getHref(FagsakRel.SEARCH_UTBETALINGSDATA_IS15), () => HttpResponse.json({})),
         http.get(FagsakUrl.AKTOER_INFO, () => HttpResponse.json(AKTØR_INFO)),

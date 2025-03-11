@@ -1,4 +1,4 @@
 export type FaktaArbeidsforhold = Readonly<{
-  arbeidsgiverReferanse?: string;
+  arbeidsgiverReferanse?: string | null;
   arbeidType: string;
 }>;

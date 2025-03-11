@@ -14,7 +14,7 @@ export type Behandling = BehandlingFellesData &
       status: string;
       readOnly: boolean;
       eta?: string;
-    };
+    } | null;
     vilkår: Vilkar[];
     alleUttaksperioderAvslått: boolean;
   }>;

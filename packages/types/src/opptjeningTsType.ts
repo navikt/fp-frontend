@@ -2,13 +2,13 @@ export type OpptjeningAktivitet = {
   aktivitetType: string;
   opptjeningFom: string;
   opptjeningTom: string;
-  arbeidsgiverReferanse: string;
-  arbeidsforholdRef: string;
+  arbeidsgiverReferanse: string | null;
+  arbeidsforholdRef: string | null;
   stillingsandel: number;
-  naringRegistreringsdato: string;
-  erGodkjent: boolean;
+  naringRegistreringsdato: string | null;
+  erGodkjent: boolean | null;
   erEndret: boolean;
-  begrunnelse?: string;
+  begrunnelse?: string | null;
 };
 
 export type FastsattOpptjeningAktivitet = {
@@ -35,5 +35,5 @@ export type FerdiglignetNæring = {
 export type Opptjening = {
   fastsattOpptjening: FastsattOpptjening;
   opptjeningAktivitetList?: OpptjeningAktivitet[];
-  ferdiglignetNæring?: FerdiglignetNæring[];
+  ferdiglignetNæring?: FerdiglignetNæring[] | null;
 };

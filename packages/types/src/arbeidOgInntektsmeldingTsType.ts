@@ -16,17 +16,17 @@ export type Inntektsmelding = Readonly<{
   inntektPrMnd: number;
   refusjonPrMnd?: number;
   arbeidsgiverIdent: string;
-  eksternArbeidsforholdId?: string;
+  eksternArbeidsforholdId?: string | null;
   internArbeidsforholdId?: string;
   kontaktpersonNavn: string;
   kontaktpersonNummer: string;
   journalpostId: string;
-  dokumentId: string;
+  dokumentId: string | null;
   motattDato: string;
   innsendingstidspunkt: string;
-  årsak?: AksjonspunktÅrsak;
-  saksbehandlersVurdering?: string;
-  begrunnelse?: string;
+  årsak?: AksjonspunktÅrsak | null;
+  saksbehandlersVurdering?: string | null;
+  begrunnelse?: string | null;
   kildeSystem: string;
   startDatoPermisjon?: string;
   aktiveNaturalytelser: AktivNaturalYtelse[];
@@ -65,10 +65,10 @@ export type Arbeidsforhold = Readonly<{
   fom: string;
   tom: string;
   stillingsprosent: number;
-  årsak?: AksjonspunktÅrsak;
-  permisjonOgMangel?: PermisjonOgMangel;
-  saksbehandlersVurdering?: string;
-  begrunnelse?: string;
+  årsak?: AksjonspunktÅrsak | null;
+  permisjonOgMangel?: PermisjonOgMangel | null;
+  saksbehandlersVurdering?: string | null;
+  begrunnelse?: string | null;
 }>;
 
 export type Inntektspost = Readonly<{

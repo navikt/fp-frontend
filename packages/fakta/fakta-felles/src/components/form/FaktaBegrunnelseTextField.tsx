@@ -64,7 +64,7 @@ export const FaktaBegrunnelseTextField = ({
   );
 };
 
-const getBegrunnelse = (aksjonspunkt?: Aksjonspunkt[] | Aksjonspunkt): string | undefined => {
+const getBegrunnelse = (aksjonspunkt?: Aksjonspunkt[] | Aksjonspunkt): string | undefined | null => {
   if (aksjonspunkt && Array.isArray(aksjonspunkt)) {
     return aksjonspunkt[0]?.begrunnelse ?? '';
   }
@@ -75,7 +75,7 @@ FaktaBegrunnelseTextField.initialValues = (
   aksjonspunkt?: Aksjonspunkt[] | Aksjonspunkt,
   begrunnelseFieldName = 'begrunnelse',
 ): FormValues => ({
-  [begrunnelseFieldName]: decodeHtmlEntity(getBegrunnelse(aksjonspunkt)),
+  [begrunnelseFieldName]: decodeHtmlEntity(getBegrunnelse(aksjonspunkt) ?? undefined),
 });
 
 FaktaBegrunnelseTextField.transformValues = (values: FormValues, name = 'begrunnelse'): TransformedValues => ({

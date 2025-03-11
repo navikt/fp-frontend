@@ -11,13 +11,12 @@ import type { Aktor, Person } from '@navikt/fp-types';
 import { KjønnkodeEnum } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
+import { initFetchFpsak } from '../../.storybook/testdata/initFetchFpsak';
+import { initFetchFptilbake } from '../../.storybook/testdata/initFetchFptilbake';
 import { FagsakRel, FagsakUrl, initFetchOptions, useFagsakApi, wrapUrl } from '../data/fagsakApi';
 import { AktørIndex } from './AktørIndex';
 
-import initFetchData from '../../.storybook/testdata/initFetch.json';
-import initFetchTilbakeData from '../../.storybook/testdata/initFetchTilbake.json';
-
-const getHref = (rel: string) => wrapUrl(notEmpty(initFetchData.links.find(link => link.rel === rel)).href);
+const getHref = (rel: string) => wrapUrl(notEmpty(initFetchFpsak.links.find(link => link.rel === rel)).href);
 
 const PERSON: Person = {
   navn: 'Espen Utvikler',
@@ -81,8 +80,8 @@ export const Default: Story = {
   parameters: {
     msw: {
       handlers: [
-        http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchData)),
-        http.get(FagsakUrl.INIT_FETCH_FPTILBAKE, () => HttpResponse.json(initFetchTilbakeData)),
+        http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak)),
+        http.get(FagsakUrl.INIT_FETCH_FPTILBAKE, () => HttpResponse.json(initFetchFptilbake)),
         http.get(getHref(FagsakRel.KODEVERK), () => HttpResponse.json(alleKodeverk)),
         http.get(FagsakUrl.AKTOER_INFO, () => HttpResponse.json(AKTØR_INFO)),
       ],
@@ -94,8 +93,8 @@ export const IngenFagsaker: Story = {
   parameters: {
     msw: {
       handlers: [
-        http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchData)),
-        http.get(FagsakUrl.INIT_FETCH_FPTILBAKE, () => HttpResponse.json(initFetchTilbakeData)),
+        http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak)),
+        http.get(FagsakUrl.INIT_FETCH_FPTILBAKE, () => HttpResponse.json(initFetchFptilbake)),
         http.get(getHref(FagsakRel.KODEVERK), () => HttpResponse.json(alleKodeverk)),
         http.get(FagsakUrl.AKTOER_INFO, () =>
           HttpResponse.json({
@@ -112,8 +111,8 @@ export const AktørInfoKallFeilet: Story = {
   parameters: {
     msw: {
       handlers: [
-        http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchData)),
-        http.get(FagsakUrl.INIT_FETCH_FPTILBAKE, () => HttpResponse.json(initFetchTilbakeData)),
+        http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak)),
+        http.get(FagsakUrl.INIT_FETCH_FPTILBAKE, () => HttpResponse.json(initFetchFptilbake)),
         http.get(getHref(FagsakRel.KODEVERK), () => HttpResponse.json(alleKodeverk)),
         http.get(FagsakUrl.AKTOER_INFO, () => new HttpResponse(null, { status: 500 })),
       ],
