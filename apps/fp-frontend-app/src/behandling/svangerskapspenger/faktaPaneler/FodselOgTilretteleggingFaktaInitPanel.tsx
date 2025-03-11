@@ -12,7 +12,6 @@ import type { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
-import type { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.FODSELTILRETTELEGGING];
@@ -23,10 +22,7 @@ interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
-export const FodselOgTilretteleggingFaktaInitPanel = ({
-  arbeidsgiverOpplysningerPerId,
-  ...props
-}: Props & FaktaPanelInitProps) => {
+export const FodselOgTilretteleggingFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props) => {
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER, OVERSTYRING_AP_CODES);
 
   const { behandling } = use(BehandlingDataContext);
@@ -40,7 +36,6 @@ export const FodselOgTilretteleggingFaktaInitPanel = ({
 
   return (
     <FaktaDefaultInitPanel
-      {...props}
       standardPanelProps={standardPanelProps}
       faktaPanelKode={FaktaPanelCode.FODSELTILRETTELEGGING}
       faktaPanelMenyTekst={useIntl().formatMessage({

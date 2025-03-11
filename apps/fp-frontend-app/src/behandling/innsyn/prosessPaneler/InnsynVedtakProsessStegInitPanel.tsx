@@ -15,10 +15,9 @@ import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingA
 import { IverksetterVedtakStatusModal } from '../../felles/modaler/vedtak/IverksetterVedtakStatusModal';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
-import type { ProsessPanelInitProps } from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
-export const InnsynVedtakProsessStegInitPanel = (props: ProsessPanelInitProps) => {
+export const InnsynVedtakProsessStegInitPanel = () => {
   const intl = useIntl();
 
   const { behandling, fagsak, setSkalOppdatereEtterBekreftelseAvAp } = use(BehandlingDataContext);
@@ -49,7 +48,6 @@ export const InnsynVedtakProsessStegInitPanel = (props: ProsessPanelInitProps) =
 
   return (
     <ProsessDefaultInitPanel
-      {...props}
       standardPanelProps={standardPanelProps}
       prosessPanelKode={ProsessStegCode.VEDTAK}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Vedtak' })}

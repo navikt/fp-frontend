@@ -1,0 +1,29 @@
+.tableWrapper {
+  overflow-x: auto;
+}
+
+.simuleringTable .rodTekst {
+  color: var(--a-nav-red);
+}
+
+.simuleringTable .lastColumn {
+  border-left: dashed 1px var(--a-gray-200);
+}
+
+.simuleringTable tr td:first-child {
+  width: 300px;
+}
+
+.simuleringTable thead td .nextPeriod {
+  border-left: dashed 1px var(--a-gray-200);
+  margin-right: -20px;
+  padding: 8px;
+}
+
+.simuleringTable thead td .normalPeriod {
+  padding: 8px;
+}
+
+.simuleringTable tr td {
+  width: 80px;
+}

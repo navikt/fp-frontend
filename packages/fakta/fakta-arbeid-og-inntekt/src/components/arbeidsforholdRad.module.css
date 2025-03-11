@@ -1,0 +1,50 @@
+.imageColTopPadding {
+  padding-top: 27px;
+}
+
+.exclamationmarkIcon {
+  color: var(--a-orange-600);
+  height: 30px;
+  margin-top: 5px;
+  width: 30px;
+}
+
+.checkmarkIcon {
+  color: var(--a-green-500);
+  height: 30px;
+  margin-top: 5px;
+  width: 30px;
+}
+
+.panelOpen {
+  background-color: var(--a-gray-50);
+  margin-bottom: -16px;
+  margin-left: -7px;
+  margin-right: -7px;
+  margin-top: -16px;
+  padding: 16px;
+}
+
+.panelOpenAp {
+  background-color: var(--a-gray-50);
+  border-left: 4px solid var(--a-orange-400);
+  margin-bottom: -16px;
+  margin-left: -10px;
+  margin-right: -7px;
+  margin-top: -16px;
+  padding: 16px;
+}
+
+.row {
+  --ac-table-row-hover: var(--a-gray-200);
+
+  cursor: pointer;
+}
+
+.isOpen {
+  background-color: var(--a-gray-50);
+}
+
+.isApOpen {
+  border-left: 4px solid var(--a-orange-400);
+}

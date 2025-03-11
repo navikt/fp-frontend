@@ -15,7 +15,6 @@ import { useFormData } from '@navikt/fp-utils';
 import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
-import type { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 import '@navikt/ft-fakta-tilbakekreving-feilutbetaling/dist/style.css';
@@ -26,11 +25,7 @@ interface Props {
   tilbakekrevingKodeverk: AlleKodeverkTilbakekreving;
 }
 
-export const FeilutbetalingFaktaInitPanel = ({
-  valgtFaktaSteg,
-  registrerFaktaPanel,
-  tilbakekrevingKodeverk,
-}: FaktaPanelInitProps & Props) => {
+export const FeilutbetalingFaktaInitPanel = ({ tilbakekrevingKodeverk }: Props) => {
   const intl = useIntl();
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
@@ -44,8 +39,6 @@ export const FeilutbetalingFaktaInitPanel = ({
   return (
     <FaktaDefaultInitPanel
       standardPanelProps={standardPanelProps}
-      valgtFaktaSteg={valgtFaktaSteg}
-      registrerFaktaPanel={registrerFaktaPanel}
       faktaPanelKode={FaktaPanelCode.FEILUTBETALING}
       faktaPanelMenyTekst={intl.formatMessage({ id: 'TilbakekrevingFakta.FaktaFeilutbetaling' })}
       skalPanelVisesIMeny={harLenke(behandling, 'FEILUTBETALING_FAKTA')}

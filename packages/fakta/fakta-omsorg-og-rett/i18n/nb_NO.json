@@ -1,0 +1,40 @@
+{
+  "OmsorgOgRettInfoPanel.VurderOmAleneomsorg": "Vurder om søker har aleneomsorg for barnet.",
+  "OmsorgOgRettInfoPanel.VurderAndreForelderRett": "Vurder om den andre forelderen har rett til foreldrepenger.",
+
+  "AleneomsorgForm.Aleneomsorg": "Søker har oppgitt å ha aleneomsorg for barnet",
+  "AleneomsorgForm.HarAleneomsorg": "Søker har aleneomsorg for barnet",
+  "AleneomsorgForm.HarIkkeAleneomsorg": "Søker har <b>ikke</b> aleneomsorg for barnet",
+
+  "HarAnnenForelderRettFelter.HarAnnenForelderRett": "Har annen forelder rett til foreldrepenger i Norge?",
+  "HarAnnenForelderRettFelter.MottarUforetrygd": "Mottar annen forelder uføretrygd, jfr 14-14 tredje ledd?",
+  "HarAnnenForelderRettFelter.AnnenForelderRettEØS": "Har annen forelder tilstrekkelig opptjening fra land i EØS?",
+
+  "OpplysningsKort.OpplysningerFraSøknadTittel": "Opplysninger fra søknad",
+  "OpplysningsKort.AdresseTittel": "Adresser til søker({adresseCountSoker}){adresseCountAnnenpart, select, none {} other {, annen part({adresseCountAnnenpart})}}{adresseCountBarn, select, none {} other {, barn({adresseCountBarn})}}",
+  "OpplysningsKort.AnnenPartTittel": "Annen parts ytelser",
+
+  "OpplysningerFraSøknad.Spørsmål": "Spørsmål",
+  "OpplysningerFraSøknad.Svar": "Svar",
+  "OpplysningerFraSøknad.Fødselsnummer": "Den andre forelderens fødselsnummer",
+  "OpplysningerFraSøknad.Fødselsnummer.Svar": "{fnr}",
+  "OpplysningerFraSøknad.Bostedsland": "Den andre forelderens bostedsland",
+  "OpplysningerFraSøknad.Bostedsland.Svar": "{bostedsland}",
+  "OpplysningerFraSøknad.HarSøkerAleneOmsorg": "Har søker aleneomsorg for barnet?",
+  "OpplysningerFraSøknad.HarSøkerAleneOmsorg.Svar": "{aleneOmsorg, select, JA {Ja} other {Nei}}",
+  "OpplysningerFraSøknad.HarAnnenForelderRett.Svar": "{iNorge, select, JA {Ja} other {Nei}}",
+  "OpplysningerFraSøknad.HarOppholdIEØS": "Har den andre forelderen oppholdt seg fast i et annet EØS-land enn Norge ett år før barnet ble født?",
+  "OpplysningerFraSøknad.HarOppholdIEØS.Svar": "{oppholdEØS, select, JA {Ja} other {Nei}}",
+  "OpplysningerFraSøknad.HarRettEØS": "Har den andre forelderen arbeidet eller mottatt pengestøtte i et EØS-land i 6 eller mer måneder før barnet blir født?",
+  "OpplysningerFraSøknad.HarRettEØS.Svar": "{rettEØS, select, JA {Ja} other {Nei}}",
+  "OpplysningerFraSøknad.HarUføretrygd": "Har den andre forelderen uføretrygd?",
+  "OpplysningerFraSøknad.HarUføretrygd.Svar": "{uføretrygd, select, JA {Ja} other {Nei}}",
+
+  "AnnenPartsYtelser.HarAnnenPartUføretrygd": "Har annen part uføretrygd? (hentet fra pesys)",
+  "AnnenPartsYtelser.HarAnnenPartUføretrygd.Svar": "{uføretrygd, select, JA {Ja} other {Nei}}",
+  "AnnenPartsYtelser.Foreldrepenger": "Er annen part innvilget foreldrepenger?",
+  "AnnenPartsYtelser.Foreldrepenger.Svar": "{foreldrepenger, select, JA {Ja} other {Nei}}",
+  "AnnenPartsYtelser.Engangsstønad": "Er annen part innvilget engangsstønad?",
+  "AnnenPartsYtelser.Engangsstønad.Svar": "{engangsstønad, select, JA {Ja} other {Nei}}"
+
+}

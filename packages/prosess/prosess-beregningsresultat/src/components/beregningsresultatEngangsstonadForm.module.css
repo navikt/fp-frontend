@@ -1,0 +1,9 @@
+.container {
+  width: 300px;
+}
+
+.divider {
+  border-bottom: 0;
+  border-top: px solid var(--a-gray-900);
+  width: 300px;
+}

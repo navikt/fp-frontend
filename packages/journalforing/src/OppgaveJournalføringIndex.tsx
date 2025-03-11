@@ -6,6 +6,7 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
+import { ErrorPage } from '@navikt/fp-sak-infosider';
 import type { NavAnsatt } from '@navikt/fp-types';
 
 import { JournalføringHeader } from './components/header/JournalføringHeader';
@@ -135,6 +136,10 @@ export const JournalforingIndex = ({ navAnsatt }: Props) => {
 
   if (status === 'pending') {
     return <LoadingPanel />;
+  }
+
+  if (status === 'error') {
+    return <ErrorPage />;
   }
 
   return (

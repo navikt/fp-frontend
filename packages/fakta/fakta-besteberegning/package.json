@@ -1,0 +1,55 @@
+{
+  "name": "@navikt/fp-fakta-besteberegning",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./index.ts"
+  },
+  "scripts": {
+    "test": "vitest",
+    "test:watch": "vitest --watch=true",
+    "test:coverage": "vitest --coverage",
+    "tsc": "tsc --pretty",
+    "eslint": "eslint \"src/**/*.ts*\" --color",
+    "eslint:fix": "eslint --fix \"src/**/*.ts*\" --color",
+    "stylelint": "stylelint \"src/**/*.module.css\"",
+    "prettier": "prettier --write src",
+    "clean": "rm -rf ./dist ./node_modules ./coverage ./.storybook-static-build",
+    "build-storybook": "storybook build -o .storybook-static-build",
+    "storybook": "storybook dev --quiet -p 7005"
+  },
+  "dependencies": {
+    "@navikt/ds-react": "7.17.0",
+    "@navikt/fp-fakta-felles": "workspace:*",
+    "@navikt/fp-kodeverk": "workspace:*",
+    "@navikt/fp-types": "workspace:*",
+    "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*",
+    "@navikt/fp-utils": "workspace:*",
+    "@navikt/ft-form-hooks": "6.2.4",
+    "@navikt/ft-form-validators": "3.1.7",
+    "@navikt/ft-ui-komponenter": "3.1.8",
+    "@navikt/ft-utils": "3.1.7",
+    "dayjs": "1.11.13",
+    "react": "19.0.0",
+    "react-hook-form": "7.54.2",
+    "react-intl": "7.1.6"
+  },
+  "devDependencies": {
+    "@navikt/ds-css": "7.17.0",
+    "@navikt/fp-storybook-utils": "workspace:*",
+    "@storybook/addon-actions": "8.6.4",
+    "@storybook/react": "8.6.4",
+    "@storybook/react-vite": "8.6.4",
+    "@testing-library/dom": "10.4.0",
+    "@testing-library/react": "16.2.0",
+    "@testing-library/user-event": "14.6.1",
+    "cross-env": "7.0.3",
+    "eslint": "9.21.0",
+    "storybook": "8.6.4",
+    "stylelint": "16.15.0",
+    "typescript": "5.8.2",
+    "vite": "6.2.1",
+    "vitest": "3.0.8"
+  }
+}

@@ -70,7 +70,7 @@ export type {
 } from './src/simuleringResultatTsType';
 export type { Soknad, ManglendeVedleggSoknad, UtlandsoppholdPeriode, Søknadsfrist } from './src/soknadTsType';
 export type {
-  UttaksresultatPeriode,
+  Uttaksresultat,
   PeriodeSoker,
   PeriodeSokerAktivitet,
   AarsakFilter,
@@ -83,6 +83,8 @@ export type {
 } from './src/uttakStonadskontoerTsType';
 export type { Vilkar } from './src/vilkarTsType';
 export type { Ytelsefordeling } from './src/ytelsefordelingTsType';
+export type { OmsorgOgRett } from './src/omsorgOgRettTsType';
+export { Verdi } from './src/omsorgOgRettTsType';
 export type { FamilieHendelse, FamilieHendelseSamling, AvklartBarn } from './src/familieHendelseTsType';
 export type {
   Fagsak,
@@ -100,7 +102,6 @@ export type {
   ManuellBehandlingResultat,
   LegacyManuellMedlemskapsBehandling,
   LegacyMedlemPeriode,
-  AdressePeriode,
   RegionPeriode,
   PersonstatusPeriode,
   MedlemskapPeriode,
@@ -139,7 +140,7 @@ export type { Personoversikt, PersonopplysningerBasis } from './src/personoversi
 export type { Personadresse } from './src/personadresseTsType';
 export type { KontrollerFaktaPeriode } from './src/kontrollerFaktaPeriode';
 export type { AksessRettigheter, Aksess } from './src/aksessRettigheterTsType';
-export type { Verge } from './src/vergeTsType';
+export type { Verge, OpprettVergeParams } from './src/vergeTsType';
 export type { ForhåndsvisMeldingParams } from './src/forhåndsvisMeldingParamsTsType';
 export type { ManueltArbeidsforhold } from './src/manueltArbeidsforholdTsType';
 export type { ManglendeInntektsmeldingVurdering } from './src/manglendeInntektsmeldingVurderingTsType';
@@ -170,3 +171,4 @@ export { SvpTilretteleggingFomKilde } from './src/fodselOgTilretteleggingTsType'
 export type { InfotrygdVedtak, Vedtak, VedtakArbeidsforhold, VedtakUtbetaling, Sak } from './src/infotrygdVedtakTsType';
 export type { Vilkarperiode } from './src/vilkarperiodeTsType';
 export type { ApiLink } from './src/apiLink';
+export type { OneOf } from './src/oneOf';

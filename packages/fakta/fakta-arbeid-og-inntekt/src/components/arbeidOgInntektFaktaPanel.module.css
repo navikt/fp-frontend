@@ -1,0 +1,7 @@
+.alertStripe {
+  max-width: 40rem;
+}
+
+.headerRow {
+  background-color: var(--a-gray-100);
+}

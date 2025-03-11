@@ -4,7 +4,6 @@ import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { FormDataProvider, PanelDataProvider, usePanelOverstyring } from '@navikt/fp-utils';
 
-import type { ProsessPanelInitProps } from '../typer/prosessPanelInitProps';
 import type { StandardProsessPanelProps } from '../typer/standardProsessPanelPropsTsType';
 import { BehandlingDataContext } from '../utils/behandlingDataContext';
 import { ProsessPanelWrapper } from './ProsessPanelWrapper';
@@ -20,14 +19,14 @@ export type Props = {
   children: ReactElement;
 };
 
-export const ProsessDefaultInitPanel = (props: Props & ProsessPanelInitProps) => {
+export const ProsessDefaultInitPanel = (props: Props) => {
   const { standardPanelProps } = props;
   const harApentAksjonspunkt = standardPanelProps.isAksjonspunktOpen;
 
   return <ProsessPanel {...props} harApentAksjonspunkt={harApentAksjonspunkt} />;
 };
 
-export const ProsessDefaultInitOverstyringPanel = (props: Props & ProsessPanelInitProps) => {
+export const ProsessDefaultInitOverstyringPanel = (props: Props) => {
   const { erOverstyrt } = usePanelOverstyring();
 
   const { standardPanelProps } = props;
@@ -41,9 +40,7 @@ export type ProsessPanel = {
 };
 
 const ProsessPanel = ({
-  valgtProsessSteg,
   hentOverstyrtStatus,
-  registrerProsessPanel,
   hentSkalMarkeresSomAktiv,
   skalPanelVisesIMeny,
   prosessPanelKode,
@@ -51,7 +48,7 @@ const ProsessPanel = ({
   standardPanelProps,
   harApentAksjonspunkt,
   children,
-}: Props & ProsessPanel & ProsessPanelInitProps) => {
+}: Props & ProsessPanel) => {
   const { behandling, fagsak, alleKodeverk } = use(BehandlingDataContext);
 
   const status = hentOverstyrtStatus ?? standardPanelProps.status;
@@ -59,14 +56,12 @@ const ProsessPanel = ({
   const skalMarkeresSomAktiv = !!hentSkalMarkeresSomAktiv && !behandling.behandlingHenlagt;
 
   const erPanelValgt = useProsessMenyRegistrerer(
-    registrerProsessPanel,
     prosessPanelKode,
     prosessPanelMenyTekst,
     skalPanelVisesIMeny,
     harApentAksjonspunkt,
     status,
     skalMarkeresSomAktiv || harApentAksjonspunkt,
-    valgtProsessSteg,
   );
 
   const skalVisePanel = erPanelValgt && (harApentAksjonspunkt || status !== VilkarUtfallType.IKKE_VURDERT);

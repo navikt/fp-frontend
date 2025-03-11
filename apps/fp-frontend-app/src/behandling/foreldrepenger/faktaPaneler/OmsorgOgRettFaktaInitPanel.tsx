@@ -5,14 +5,13 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
 import { OmsorgOgRettFaktaIndex } from '@navikt/fp-fakta-omsorg-og-rett';
-import { AksjonspunktKode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import type { Personoversikt } from '@navikt/fp-types';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
-import type { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [
@@ -24,26 +23,25 @@ interface Props {
   personoversikt: Personoversikt;
 }
 
-export const OmsorgOgRettFaktaInitPanel = ({ personoversikt, ...props }: Props & FaktaPanelInitProps) => {
+export const OmsorgOgRettFaktaInitPanel = ({ personoversikt }: Props) => {
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
   const { behandling } = use(BehandlingDataContext);
 
   const api = useBehandlingApi(behandling);
 
-  const { data: ytelsefordeling } = useQuery(api.ytelsefordelingOptions(behandling));
+  const { data: omsorgOgRett } = useQuery(api.omsorgOgRettOptions(behandling));
 
   return (
     <FaktaDefaultInitPanel
-      {...props}
       standardPanelProps={standardPanelProps}
       faktaPanelKode={FaktaPanelCode.OMSORG_OG_RETT}
       faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.OmsorgOgRett' })}
-      skalPanelVisesIMeny={AKSJONSPUNKT_KODER.some(kode => hasAksjonspunkt(kode, behandling.aksjonspunkt))}
+      skalPanelVisesIMeny
     >
-      {ytelsefordeling ? (
+      {omsorgOgRett ? (
         <OmsorgOgRettFaktaIndex
-          ytelsefordeling={ytelsefordeling}
+          omsorgOgRett={omsorgOgRett}
           personoversikt={personoversikt}
           submittable={standardPanelProps.submittable}
         />

@@ -1,4 +1,4 @@
-import type { FeilutbetalingÅrsak, FeilutbetalingFakta } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
+import type { FeilutbetalingÅrsak,FeilutbetalingFakta } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
 import type {
   DetaljerteFeilutbetalingsperioder,
   FeilutbetalingPerioderWrapper,
@@ -36,13 +36,15 @@ import type {
   ManglendeInntektsmeldingVurdering,
   ManueltArbeidsforhold,
   Medlemskap,
+  OmsorgOgRett,
+  OpprettVergeParams,
   Opptjening,
   PeriodeSoker,
   Personoversikt,
   SimuleringResultat,
   Soknad,
   TilbakekrevingValg,
-  UttaksresultatPeriode,
+  Uttaksresultat,
   UttakStonadskontoer,
   Verge,
   VilkarsVurdertePerioderWrapper,
@@ -100,6 +102,7 @@ export type BeregnBeløpParams = {
 
 const kyExtended = ky.extend({
   retry: 0,
+  timeout: 15000,
   hooks: {
     beforeRequest: [
       request => {
@@ -139,8 +142,11 @@ export const BehandlingRel = {
   HENLEGG_BEHANDLING: 'henlegg-behandling',
   BEHANDLING_ON_HOLD: 'sett-behandling-pa-vent',
   RESUME_BEHANDLING: 'gjenoppta-behandling',
-  VERGE_OPPRETT: 'opprett-verge',
-  VERGE_FJERN: 'fjern-verge',
+  VERGE_OPPRETT_V1: 'opprett-verge',
+  VERGE_FJERN_V1: 'fjern-verge',
+  VERGE_OPPRETT_V2: 'verge-opprett',
+  VERGE_FJERN_V2: 'verge-fjern',
+  VERGE_HENT: 'verge-hent',
   SAVE_AKSJONSPUNKT: 'lagre-aksjonspunkter',
   SAVE_OVERSTYRT_AKSJONSPUNKT: 'lagre-overstyr-aksjonspunkter',
   ARBEID_OG_INNTEKT_REGISTRER_ARBEIDSFORHOLD: 'arbeidsforhold-inntektsmelding-registrer',
@@ -175,9 +181,10 @@ export const BehandlingRel = {
   OPPTJENING: 'opptjening',
   BEREGNINGRESULTAT_ENGANGSSTONAD: 'beregningsresultat-engangsstonad',
   MEDLEMSKAP: 'soeker-medlemskap-v3',
-  UTTAKSRESULTAT_PERIODER: 'uttaksresultat-perioder',
+  UTTAKSRESULTAT: 'uttaksresultat-perioder',
   UTTAK_STONADSKONTOER: 'uttak-stonadskontoer',
   YTELSEFORDELING: 'ytelsefordeling',
+  OMSORG_OG_RETT: 'omsorg-og-rett',
   STONADSKONTOER_GITT_UTTAKSPERIODER: 'lagre-stonadskontoer-gitt-uttaksperioder',
   DOKUMENTASJON_VURDERING_BEHOV: 'uttak-vurder-dokumentasjon',
   UTTAK_KONTROLLER_FAKTA_PERIODER_V2: 'uttak-kontroller-fakta-perioder-v2',
@@ -241,10 +248,7 @@ const getInnsynOptions = (links: ApiLink[]) => (behandling: Behandling) =>
 const getPerioderForeldelseOptions = (links: ApiLink[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.PERIODER_FORELDELSE, behandling.uuid, behandling.versjon],
-    queryFn: () =>
-      kyExtended
-        .get(getUrlFromRel('PERIODER_FORELDELSE', links), { searchParams: { uuid: behandling.uuid } })
-        .json<FeilutbetalingPerioderWrapper>(),
+    queryFn: () => kyExtended.get(getUrlFromRel('PERIODER_FORELDELSE', links)).json<FeilutbetalingPerioderWrapper>(),
     enabled: harLenke(behandling, 'PERIODER_FORELDELSE'),
     staleTime: Infinity,
   });
@@ -253,9 +257,7 @@ const getVilkårsvurderingsperioderOptions = (links: ApiLink[]) => (behandling: 
   queryOptions({
     queryKey: [BehandlingRel.VILKARVURDERINGSPERIODER, behandling.uuid, behandling.versjon],
     queryFn: () =>
-      kyExtended
-        .get(getUrlFromRel('VILKARVURDERINGSPERIODER', links), { searchParams: { uuid: behandling.uuid } })
-        .json<DetaljerteFeilutbetalingsperioder>(),
+      kyExtended.get(getUrlFromRel('VILKARVURDERINGSPERIODER', links)).json<DetaljerteFeilutbetalingsperioder>(),
     enabled: harLenke(behandling, 'VILKARVURDERINGSPERIODER'),
     staleTime: Infinity,
   });
@@ -263,10 +265,7 @@ const getVilkårsvurderingsperioderOptions = (links: ApiLink[]) => (behandling: 
 const getVilkårsvurderingOptions = (links: ApiLink[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.VILKARVURDERING, behandling.uuid, behandling.versjon],
-    queryFn: () =>
-      kyExtended
-        .get(getUrlFromRel('VILKARVURDERING', links), { searchParams: { uuid: behandling.uuid } })
-        .json<VilkarsVurdertePerioderWrapper>(),
+    queryFn: () => kyExtended.get(getUrlFromRel('VILKARVURDERING', links)).json<VilkarsVurdertePerioderWrapper>(),
     enabled: harLenke(behandling, 'VILKARVURDERING'),
     staleTime: Infinity,
   });
@@ -274,10 +273,7 @@ const getVilkårsvurderingOptions = (links: ApiLink[]) => (behandling: Behandlin
 const getBeregningsresultatOptions = (links: ApiLink[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.BEREGNINGSRESULTAT, behandling.uuid, behandling.versjon],
-    queryFn: () =>
-      kyExtended
-        .get(getUrlFromRel('BEREGNINGSRESULTAT', links), { searchParams: { uuid: behandling.uuid } })
-        .json<BeregningsresultatTilbakekreving>(),
+    queryFn: () => kyExtended.get(getUrlFromRel('BEREGNINGSRESULTAT', links)).json<BeregningsresultatTilbakekreving>(),
     enabled: harLenke(behandling, 'BEREGNINGSRESULTAT'),
     staleTime: Infinity,
   });
@@ -285,10 +281,7 @@ const getBeregningsresultatOptions = (links: ApiLink[]) => (behandling: Behandli
 const getVedtaksbrevOptions = (links: ApiLink[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.VEDTAKSBREV, behandling.uuid, behandling.versjon],
-    queryFn: () =>
-      kyExtended
-        .get(getUrlFromRel('VEDTAKSBREV', links), { searchParams: { uuid: behandling.uuid } })
-        .json<Vedtaksbrev>(),
+    queryFn: () => kyExtended.get(getUrlFromRel('VEDTAKSBREV', links)).json<Vedtaksbrev>(),
     enabled: harLenke(behandling, 'VEDTAKSBREV'),
     staleTime: Infinity,
   });
@@ -296,10 +289,7 @@ const getVedtaksbrevOptions = (links: ApiLink[]) => (behandling: Behandling) =>
 const getFeilutbetalingFaktaOptions = (links: ApiLink[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.FEILUTBETALING_FAKTA, behandling.uuid, behandling.versjon],
-    queryFn: () =>
-      kyExtended
-        .get(getUrlFromRel('FEILUTBETALING_FAKTA', links), { searchParams: { uuid: behandling.uuid } })
-        .json<FeilutbetalingFakta>(),
+    queryFn: () => kyExtended.get(getUrlFromRel('FEILUTBETALING_FAKTA', links)).json<FeilutbetalingFakta>(),
     enabled: harLenke(behandling, 'FEILUTBETALING_FAKTA'),
     staleTime: Infinity,
   });
@@ -416,11 +406,11 @@ const getMedlemskapOptions = (links: ApiLink[]) => (behandling: Behandling) =>
     staleTime: Infinity,
   });
 
-const getUttaksresultatPerioderOptions = (links: ApiLink[]) => (behandling: Behandling) =>
+const getUttaksresultatOptions = (links: ApiLink[]) => (behandling: Behandling) =>
   queryOptions({
-    queryKey: [BehandlingRel.UTTAKSRESULTAT_PERIODER, behandling.uuid, behandling.versjon],
-    queryFn: () => kyExtended.get(getUrlFromRel('UTTAKSRESULTAT_PERIODER', links)).json<UttaksresultatPeriode>(),
-    enabled: harLenke(behandling, 'UTTAKSRESULTAT_PERIODER'),
+    queryKey: [BehandlingRel.UTTAKSRESULTAT, behandling.uuid, behandling.versjon],
+    queryFn: () => kyExtended.get(getUrlFromRel('UTTAKSRESULTAT', links)).json<Uttaksresultat>(),
+    enabled: harLenke(behandling, 'UTTAKSRESULTAT'),
     staleTime: Infinity,
   });
 
@@ -436,6 +426,13 @@ const getYtelsefordelingOptions = (links: ApiLink[]) => (behandling: Behandling)
   queryOptions({
     queryKey: [BehandlingRel.YTELSEFORDELING, behandling.uuid, behandling.versjon],
     queryFn: () => kyExtended.get(getUrlFromRel('YTELSEFORDELING', links)).json<Ytelsefordeling>(),
+    staleTime: Infinity,
+  });
+
+const getFaktaOmsorgOgRettOptions = (links: ApiLink[]) => (behandling: Behandling) =>
+  queryOptions({
+    queryKey: [BehandlingRel.OMSORG_OG_RETT, behandling.uuid, behandling.versjon],
+    queryFn: () => kyExtended.get(getUrlFromRel('OMSORG_OG_RETT', links)).json<OmsorgOgRett>(),
     staleTime: Infinity,
   });
 
@@ -549,8 +546,6 @@ export const forhåndsvisTilbakekrevingMelding = (params: {
     })
     .blob();
 
-export const doGetRequest = <T>(url: string) => kyExtended.get(url).json<T>();
-
 const getÅpneBehandlingForEndring = (links: ApiLink[]) => (behandlingUuid: string, behandlingVersjon: number) =>
   kyExtended.post(getUrlFromRel('OPEN_BEHANDLING_FOR_CHANGES', links), {
     json: { behandlingUuid, behandlingVersjon },
@@ -593,14 +588,29 @@ const getFortsettBehandling = (links: ApiLink[]) => (params: { behandlingUuid: s
     json: params,
   });
 
-const getOpprettVerge = (links: ApiLink[]) => (params: { behandlingUuid: string; behandlingVersjon: number }) =>
-  kyExtended.post<Behandling>(getUrlFromRel('VERGE_OPPRETT', links), {
+const getOpprettVergeV1 = (links: ApiLink[]) => (params: { behandlingUuid: string; behandlingVersjon: number }) =>
+  kyExtended.post<Behandling>(getUrlFromRel('VERGE_OPPRETT_V1', links), {
     json: params,
   });
 
-const getFjernVerge = (links: ApiLink[]) => (params: { behandlingUuid: string; behandlingVersjon: number }) =>
-  kyExtended.post<Behandling>(getUrlFromRel('VERGE_FJERN', links), {
+const getOpprettVergeV2 = (links: ApiLink[]) => (params: OpprettVergeParams) =>
+  kyExtended.post(getUrlFromRel('VERGE_OPPRETT_V2', links), {
     json: params,
+  });
+
+const getFjernVergeV1 = (links: ApiLink[]) => (params: { behandlingUuid: string; behandlingVersjon: number }) =>
+  kyExtended.post<Behandling>(getUrlFromRel('VERGE_FJERN_V1', links), {
+    json: params,
+  });
+
+const getFjernVergeV2 = (links: ApiLink[]) => () => kyExtended.post(getUrlFromRel('VERGE_FJERN_V2', links));
+
+const getVerge = (links: ApiLink[]) => (behandling: Behandling) =>
+  queryOptions({
+    queryKey: [BehandlingRel.VERGE_HENT, behandling.uuid, behandling.versjon],
+    queryFn: () => kyExtended.get(getUrlFromRel('VERGE_HENT', links)).json<Verge>(),
+    enabled: harLenke(behandling, 'VERGE_HENT'),
+    staleTime: Infinity,
   });
 
 const getLagreAksjonspunkt = (links: ApiLink[]) => (params: AksjonspunktArgs) =>
@@ -690,9 +700,10 @@ export const useBehandlingApi = (behandling: Behandling) => {
     tilbakekrevingValgOptions: getTilbakekrevingValgOptions(links),
     medlemskapOptions: getMedlemskapOptions(links),
     feriepengegrunnlagOptions: getFeriepengegrunnlagOptions(links),
-    uttaksresultatPerioderOptions: getUttaksresultatPerioderOptions(links),
+    uttaksresultatPerioderOptions: getUttaksresultatOptions(links),
     uttakStønadskontoerOptions: getUttakStønadskontoerOptions(links),
     ytelsefordelingOptions: getYtelsefordelingOptions(links),
+    omsorgOgRettOptions: getFaktaOmsorgOgRettOptions(links),
     oppdaterStønadskontoer: getOppdaterStønadskontoer(links),
     beregningsgrunnlagOptions: getBeregningsgrunnlagOptions(links),
     opptjeningOptions: getOpptjeningOptions(links),
@@ -706,6 +717,11 @@ export const useBehandlingApi = (behandling: Behandling) => {
     inntektArbeidYtelseOptions: getInntektArbeidYtelseOptions(links),
     utlandDokStatusOptions: getUtlandDokStatusOptions(links),
     vergeOptions: getVergeOptions(links),
+    verge: {
+      hent: getVerge(links),
+      opprettVergeV2: getOpprettVergeV2(links),
+      fjernVergeV2: getFjernVergeV2(links),
+    },
     anke: {
       ankeVurderingOptions: getAnkeVurderingOptions(links),
     },
@@ -739,8 +755,8 @@ export const useBehandlingApi = (behandling: Behandling) => {
       åpneBehandlingForEndring: getÅpneBehandlingForEndring(links),
       lagreAksjonspunkt: getLagreAksjonspunkt(links),
       lagreOverstyrtAksjonspunkt: getLagreOverstyrtAksjonspunkt(links),
-      opprettVerge: getOpprettVerge(links),
-      fjernVerge: getFjernVerge(links),
+      opprettVergeV1: getOpprettVergeV1(links),
+      fjernVergeV1: getFjernVergeV1(links),
     },
   };
 };

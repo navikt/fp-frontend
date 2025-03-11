@@ -12,7 +12,6 @@ import type { Personoversikt } from '@navikt/fp-types';
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
-import type { FaktaPanelInitProps } from '../../felles/typer/faktaPanelInitProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG];
@@ -21,7 +20,7 @@ interface Props {
   personoversikt: Personoversikt;
 }
 
-export const OmsorgFaktaInitPanel = ({ personoversikt, ...props }: Props & FaktaPanelInitProps) => {
+export const OmsorgFaktaInitPanel = ({ personoversikt }: Props) => {
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
   const { behandling } = use(BehandlingDataContext);
@@ -32,7 +31,6 @@ export const OmsorgFaktaInitPanel = ({ personoversikt, ...props }: Props & Fakta
 
   return (
     <FaktaDefaultInitPanel
-      {...props}
       standardPanelProps={standardPanelProps}
       faktaPanelKode={FaktaPanelCode.OMSORG}
       faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.Omsorg' })}
