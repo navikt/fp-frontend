@@ -9,6 +9,10 @@ interface Props {
 }
 
 export const AnnenPartsYtelser = ({ omsorgOgRett }: Props) => {
+  if (!omsorgOgRett.registerdata) {
+    return null;
+  }
+
   const harAnnenpartUføretrygd = omsorgOgRett.registerdata.harAnnenpartUføretrygd ?? Verdi.IKKE_RELEVANT;
   const harAnnenpartForeldrepenger = omsorgOgRett.registerdata.harAnnenpartForeldrepenger ?? Verdi.IKKE_RELEVANT;
   const harAnnenpartEngangsstønad = omsorgOgRett.registerdata.harAnnenpartEngangsstønad ?? Verdi.IKKE_RELEVANT;

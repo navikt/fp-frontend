@@ -1,15 +1,14 @@
-import { use } from 'react';
 import { useIntl } from 'react-intl';
 
 import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import { AdopsjonVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-adopsjon';
-import { PanelOverstyringProvider } from '@navikt/fp-utils';
 
-import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
+import {
+  InngangsvilkarDefaultInitPanel,
+  InngangsvilkarOverstyringDefaultInitPanel,
+} from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 import { OverstyringPanelDef } from '../../../felles/prosess/OverstyringPanelDef';
 import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandardProsessPanelProps';
-import type { InngangsvilkarPanelInitProps } from '../../../felles/typer/inngangsvilkarPanelInitProps';
-import { BehandlingDataContext } from '../../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
@@ -18,51 +17,37 @@ const AKSJONSPUNKT_KODER = [
 
 const VILKAR_KODER = [VilkarType.ADOPSJONSVILKARET_FORELDREPENGER];
 
-export const AdopsjonInngangsvilkarFpInitPanel = (props: InngangsvilkarPanelInitProps) => {
+export const AdopsjonInngangsvilkarFpInitPanel = () => {
   const intl = useIntl();
-
-  const { behandling, rettigheter } = use(BehandlingDataContext);
 
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, VILKAR_KODER);
 
-  return (
-    <InngangsvilkarDefaultInitPanel
-      {...props}
-      behandlingVersjon={behandling.versjon}
+  return standardPanelProps.aksjonspunkter.length === 0 ? (
+    <InngangsvilkarOverstyringDefaultInitPanel
       vilkarKoder={VILKAR_KODER}
       standardPanelProps={standardPanelProps}
       inngangsvilkarPanelKode="ADOPSJON"
       hentInngangsvilkarPanelTekst={intl.formatMessage({ id: 'SRBVilkarForm.VurderSammeBarn' })}
-      renderPanel={({ skalVises, erOverstyrt, toggleOverstyring }) => (
-        <>
-          {standardPanelProps.aksjonspunkter.length === 0 && (
-            <PanelOverstyringProvider
-              overstyringApKode={AksjonspunktKode.OVERSTYRING_AV_ADOPSJONSVILKÅRET_FP}
-              kanOverstyreAccess={rettigheter.kanOverstyreAccess}
-              overrideReadOnly={
-                standardPanelProps.isReadOnly ||
-                (props.harInngangsvilkarApentAksjonspunkt && !(standardPanelProps.isAksjonspunktOpen || erOverstyrt))
-              }
-              toggleOverstyring={toggleOverstyring}
-            >
-              {skalVises ? (
-                <OverstyringPanelDef
-                  vilkar={standardPanelProps.vilkar}
-                  vilkarKoder={VILKAR_KODER}
-                  panelTekstKode="Inngangsvilkar.Adopsjonsvilkaret"
-                />
-              ) : null}
-            </PanelOverstyringProvider>
-          )}
-          {skalVises && standardPanelProps.aksjonspunkter.length > 0 && (
-            <AdopsjonVilkarProsessIndex
-              status={standardPanelProps.status}
-              readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
-              vilkar={standardPanelProps.vilkar}
-            />
-          )}
-        </>
-      )}
-    />
+      overstyringApKode={AksjonspunktKode.OVERSTYRING_AV_ADOPSJONSVILKÅRET_FP}
+    >
+      <OverstyringPanelDef
+        vilkar={standardPanelProps.vilkar}
+        vilkarKoder={VILKAR_KODER}
+        panelTekstKode="Inngangsvilkar.Adopsjonsvilkaret"
+      />
+    </InngangsvilkarOverstyringDefaultInitPanel>
+  ) : (
+    <InngangsvilkarDefaultInitPanel
+      vilkarKoder={VILKAR_KODER}
+      standardPanelProps={standardPanelProps}
+      inngangsvilkarPanelKode="ADOPSJON"
+      hentInngangsvilkarPanelTekst={intl.formatMessage({ id: 'SRBVilkarForm.VurderSammeBarn' })}
+    >
+      <AdopsjonVilkarProsessIndex
+        status={standardPanelProps.status}
+        readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
+        vilkar={standardPanelProps.vilkar}
+      />
+    </InngangsvilkarDefaultInitPanel>
   );
 };
