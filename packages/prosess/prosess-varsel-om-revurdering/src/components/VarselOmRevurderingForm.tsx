@@ -126,7 +126,7 @@ export const VarselOmRevurderingForm = ({
     false,
   );
   const ventearsaker = alleKodeverk[KodeverkType.VENT_AARSAK] || EMPTY_ARRAY;
-  const language = getLanguageFromSprakkode(behandling.sprakkode);
+  const language = getLanguageFromSprakkode(behandling.språkkode);
 
   return (
     <>

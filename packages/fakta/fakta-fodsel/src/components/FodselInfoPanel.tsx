@@ -101,8 +101,8 @@ export const FodselInfoPanel = ({
   } = usePanelDataContext<AksjonspunktData>();
 
   const avklartBarn = familiehendelse?.register?.avklartBarn || EMPTY_ARRAY;
-  const termindato = familiehendelse?.gjeldende?.termindato;
-  const vedtaksDatoSomSvangerskapsuke = familiehendelse?.gjeldende?.vedtaksDatoSomSvangerskapsuke;
+  const termindato = familiehendelse?.gjeldende?.termindato ?? undefined;
+  const vedtaksDatoSomSvangerskapsuke = familiehendelse?.gjeldende?.vedtaksDatoSomSvangerskapsuke ?? undefined;
 
   const terminbekreftelseAp = aksjonspunkterForPanel.find(ap => ap.definisjon === TERMINBEKREFTELSE);
   const manglendeFødselAp = aksjonspunkterForPanel.find(ap => ap.definisjon === SJEKK_MANGLENDE_FODSEL);

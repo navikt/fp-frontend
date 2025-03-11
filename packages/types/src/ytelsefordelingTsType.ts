@@ -1,4 +1,4 @@
 export type Ytelsefordeling = Readonly<{
-  overstyrtOmsorg?: boolean;
+  overstyrtOmsorg: boolean | null;
   førsteUttaksdato: string;
 }>;

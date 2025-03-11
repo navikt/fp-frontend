@@ -220,8 +220,8 @@ const transformValues = (values: FormValues): RevurderingVedtakAksjonspunkter[] 
 
 const buildInitialValues = (aksjonspunkter: Aksjonspunkt[], behandling: Behandling): FormValues => ({
   aksjonspunktKoder: aksjonspunkter.filter(ap => ap.kanLoses).map(ap => ap.definisjon),
-  overskrift: decodeHtmlEntity(behandling.behandlingsresultat?.overskrift),
-  brødtekst: decodeHtmlEntity(behandling.behandlingsresultat?.fritekstbrev),
+  overskrift: decodeHtmlEntity(behandling.behandlingsresultat?.overskrift ?? undefined),
+  brødtekst: decodeHtmlEntity(behandling.behandlingsresultat?.fritekstbrev ?? undefined),
 });
 
 interface FormValues {
@@ -269,7 +269,7 @@ export const VedtakRevurderingForm = ({
   const overskrift = formMethods.watch('overskrift');
   const brødtekst = formMethods.watch('brødtekst');
 
-  const { behandlingsresultat, sprakkode, behandlingÅrsaker } = behandling;
+  const { behandlingsresultat, språkkode, behandlingÅrsaker } = behandling;
 
   const erBehandlingEtterKlage = useMemo(
     () => erÅrsakTypeBehandlingEtterKlage(behandling.behandlingÅrsaker),
@@ -352,7 +352,7 @@ export const VedtakRevurderingForm = ({
                 revurderingsÅrsakString={revurderingsÅrsakString}
                 isReadOnly={isReadOnly}
                 beregningsresultat={beregningsresultat}
-                språkKode={sprakkode}
+                språkKode={språkkode}
                 behandlingsresultat={behandlingsresultat}
                 beregningErManueltFastsatt={beregningErManueltFastsatt}
                 skalBrukeOverstyrendeFritekstBrev={skalBrukeOverstyrendeFritekstBrev}
@@ -365,7 +365,7 @@ export const VedtakRevurderingForm = ({
               <VedtakAvslagArsakOgBegrunnelsePanel
                 vilkar={vilkar}
                 behandlingsresultat={behandlingsresultat}
-                språkKode={sprakkode}
+                språkKode={språkkode}
                 erReadOnly={isReadOnly}
                 alleKodeverk={alleKodeverk}
                 skalBrukeOverstyrendeFritekstBrev={skalBrukeOverstyrendeFritekstBrev}
@@ -378,7 +378,7 @@ export const VedtakRevurderingForm = ({
               revurderingsÅrsakString={revurderingsÅrsakString}
               isReadOnly={isReadOnly}
               behandlingsresultat={behandlingsresultat}
-              språkKode={sprakkode}
+              språkKode={språkkode}
               beregningErManueltFastsatt={beregningErManueltFastsatt}
               skalBrukeOverstyrendeFritekstBrev={skalBrukeOverstyrendeFritekstBrev}
             />

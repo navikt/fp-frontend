@@ -201,7 +201,8 @@ export const UttakFaktaForm = ({
 
   const formMethods = useForm<{ begrunnelse: string }>({
     defaultValues: {
-      begrunnelse: formData?.begrunnelse ?? aksjonspunkterForPanel[0]?.begrunnelse ?? '',
+      begrunnelse:
+        formData?.begrunnelse ?? aksjonspunkterForPanel[0]?.begrunnelse ?? '',
     },
   });
 
