@@ -1,4 +1,4 @@
-import type { Kjønnkode } from './Kjonnkode.ts';
+import type { Kjønnkode } from './Kjonnkode';
 
 export type Person = Readonly<{
   navn: string;
