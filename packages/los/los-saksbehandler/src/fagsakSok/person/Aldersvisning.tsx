@@ -8,7 +8,7 @@ import styles from './aldersvisning.module.css';
 interface Props {
   erDød: boolean;
   alder: number;
-  dødsdato?: string;
+  dødsdato: string | null;
 }
 
 /**

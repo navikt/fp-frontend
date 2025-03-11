@@ -2,28 +2,29 @@ import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import type { Meta, StoryObj } from '@storybook/react';
 import dayjs from 'dayjs';
 
-import { DiskresjonskodeType, FamilieHendelseType, NavBrukerKjonn, PersonstatusType } from '@navikt/fp-kodeverk';
+import { DiskresjonskodeType, FamilieHendelseType, NavBrukerKjonn } from '@navikt/fp-kodeverk';
+import type { Person } from '@navikt/fp-types';
 
 import { VisittkortSakIndex } from './VisittkortSakIndex';
 
 import '@navikt/ds-css';
 import '@navikt/ft-plattform-komponenter/dist/style.css';
 
-const fagsakPersonFar = {
+const fagsakPersonFar: Person = {
   navn: 'Espen Utvikler',
   fødselsdato: '1979-01-01',
+  dødsdato: null,
   fødselsnummer: '12345678910',
   kjønn: NavBrukerKjonn.MANN,
   aktørId: '234',
-  personstatusType: PersonstatusType.BOSATT,
 };
 
-const fagsakPersonMor = {
+const fagsakPersonMor: Person = {
   navn: 'Klara Ku',
   fødselsdato: '1980-01-01',
+  dødsdato: null,
   fødselsnummer: '65656578787',
   kjønn: NavBrukerKjonn.KVINNE,
-  personstatusType: PersonstatusType.BOSATT,
   aktørId: 'test',
 };
 
@@ -77,7 +78,7 @@ export const ForAnnenPartDerAktørIdErUkjent: Story = {
   args: {
     erMor: true,
     bruker: fagsakPersonMor,
-    annenPart: { ...fagsakPersonFar, aktørId: undefined },
+    annenPart: { ...fagsakPersonFar, aktørId: null },
     lenkeTilAnnenPart: 'testlenke til annen part',
   },
 };

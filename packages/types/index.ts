@@ -89,7 +89,6 @@ export type { FamilieHendelse, FamilieHendelseSamling, AvklartBarn } from './src
 export type {
   Fagsak,
   FagsakHendelse,
-  FagsakPerson,
   Saksnotat,
   AnnenPartBehandling,
   BehandlingOppretting,
