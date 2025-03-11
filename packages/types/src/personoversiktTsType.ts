@@ -5,7 +5,7 @@ export type PersonopplysningerBasis = Readonly<{
   aktoerId: string;
   kjønn: string;
   sivilstand: string;
-  dødsdato?: string;
+  dødsdato: string | null;
   fødselsdato: string;
   adresser: Personadresse[];
 }>;
