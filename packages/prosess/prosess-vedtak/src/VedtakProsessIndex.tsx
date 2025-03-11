@@ -8,6 +8,7 @@ import type {
   Beregningsgrunnlag,
   BeregningsresultatDagytelse,
   BeregningsresultatEs,
+  GenererHtmlDokument,
   Oppgave,
   SimuleringResultat,
   TilbakekrevingValg,
@@ -61,6 +62,9 @@ interface Props {
   previewCallback: (data: ForhandsvisData) => void;
   ytelseTypeKode: string;
   oppgaver?: Oppgave[];
+  hentBrevHtml: (params: GenererHtmlDokument) => Promise<string>;
+  lagreManueltBrev: (html: string) => Promise<void>;
+  forkastManueltBrev: () => Promise<void>;
 }
 
 export const VedtakProsessIndex = ({
@@ -74,6 +78,9 @@ export const VedtakProsessIndex = ({
   previewCallback,
   ytelseTypeKode,
   oppgaver,
+  hentBrevHtml,
+  lagreManueltBrev,
+  forkastManueltBrev,
 }: Props) => {
   const { behandling } = usePanelDataContext();
 
@@ -103,6 +110,9 @@ export const VedtakProsessIndex = ({
           vilkar={vilkar}
           beregningErManueltFastsatt={beregningErManueltFastsatt}
           oppgaver={oppgaver}
+          hentBrevHtml={hentBrevHtml}
+          forkastManueltBrev={forkastManueltBrev}
+          lagreManueltBrev={lagreManueltBrev}
         />
       )}
       {behandling.type === BehandlingType.REVURDERING && (
@@ -116,6 +126,9 @@ export const VedtakProsessIndex = ({
           beregningErManueltFastsatt={beregningErManueltFastsatt}
           beregningsresultatOriginalBehandling={originaltBeregningsresultat}
           oppgaver={oppgaver}
+          hentBrevHtml={hentBrevHtml}
+          forkastManueltBrev={forkastManueltBrev}
+          lagreManueltBrev={lagreManueltBrev}
         />
       )}
     </RawIntlProvider>
