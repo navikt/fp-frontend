@@ -12,7 +12,7 @@ describe('AktørIndex', () => {
     render(<Default />);
 
     expect(await screen.findByText('Espen Utvikler')).toBeInTheDocument();
-    expect(screen.getByText('121221')).toBeInTheDocument();
+    expect(screen.getByText('111111 11111')).toBeInTheDocument();
     expect(screen.getByText('Foreldrepenger (123) Opprettet')).toBeInTheDocument();
     expect(screen.getByText('Engangsstønad (252523) Løpende')).toBeInTheDocument();
   });

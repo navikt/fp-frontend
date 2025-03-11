@@ -1,4 +1,4 @@
-import type { OneOf } from './oneOf.ts';
+import type { OneOf } from './oneOf';
 
 export type Verge = {
   navn: string;

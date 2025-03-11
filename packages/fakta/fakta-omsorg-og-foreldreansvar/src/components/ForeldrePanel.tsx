@@ -13,9 +13,9 @@ const lagSøkerdata = ({ aktoerId, navn, kjønn, adresser, dødsdato }: Personop
   const bostedsadr = getNyesteAdresse(adresser, AdresseType.BOSTEDSADRESSE);
 
   return {
-    aktorId: aktoerId,
-    navn: navn,
-    dodsdato: dødsdato,
+    aktoerId,
+    navn,
+    dødsdato,
     adresse: postadr || bostedsadr,
     erMor: kjønn === NavBrukerKjonn.KVINNE,
   };
@@ -49,21 +49,21 @@ export const ForeldrePanel = ({ personoversikt, alleMerknaderFraBeslutter }: Pro
       <VStack gap="8">
         {beggeForeldre.map(foreldre => {
           return (
-            <VStack gap="2" key={`${foreldre.aktorId}`}>
+            <VStack gap="2" key={`${foreldre.aktoerId}`}>
               <Heading size="small">{foreldre.navn}</Heading>
               <Label size="small">
                 <FormattedMessage id="ForeldrePanel.Address" />
               </Label>
               <BodyShort size="small">
-                {foreldre.adresse && !foreldre.dodsdato ? formaterAdresse(foreldre.adresse) : '-'}
+                {foreldre.adresse && !foreldre.dødsdato ? formaterAdresse(foreldre.adresse) : '-'}
               </BodyShort>
-              {foreldre.dodsdato && (
+              {foreldre.dødsdato && (
                 <>
                   <Label size="small">
                     <FormattedMessage id="ForeldrePanel.DeathDate" />
                   </Label>
                   <BodyShort size="small">
-                    <DateLabel dateString={foreldre.dodsdato} />
+                    <DateLabel dateString={foreldre.dødsdato} />
                   </BodyShort>
                 </>
               )}
