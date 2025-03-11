@@ -62,6 +62,10 @@ const useLagrePapirsøknad = (
       },
     ];
 
+    if (!formValues.ufullstendigSoeknad) {
+      setSkalOppdatereEtterBekreftelseAvAp(false);
+    }
+
     const oppdatertBehandling = await lagreAksjonspunkter({
       saksnummer: fagsak.saksnummer,
       behandlingUuid: behandling.uuid,
@@ -72,7 +76,6 @@ const useLagrePapirsøknad = (
     if (formValues.ufullstendigSoeknad) {
       window.scrollTo(0, 0);
     } else {
-      setSkalOppdatereEtterBekreftelseAvAp(false);
       setErAksjonspunktLagret(true);
     }
 

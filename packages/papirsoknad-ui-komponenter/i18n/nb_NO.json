@@ -54,14 +54,6 @@
   "Registrering.InntektsgivendeArbeid.periodeFom": "Fra og med",
   "Registrering.InntektsgivendeArbeid.periodeTom": "Til og med",
 
-  "ModalLukkPapirSoknad.ModalDescription": "Registrering av søknaden avsluttes",
-  "ModalLukkPapirSoknad.Avslutt": "Avslutt registrering av søknaden",
-  "ModalLukkPapirSoknad.Title": "Avslutter registrering av søknaden",
-  "ModalLukkPapirSoknad.Opplysninger": "Det er ikke mulig å innhente ytterligere opplysninger.",
-  "ModalLukkPapirSoknad.Bekreft": "Bekreft at søknaden skal avslås.",
-  "ModalLukkPapirSoknad.Ok": "OK",
-  "ModalLukkPapirSoknad.Avbryt": "Avbryt",
-
   "Registrering.SaveApplication.Title": "Ferdigstill registrering",
   "Registrering.SaveApplication.Label": "Begrunnelse",
   "Registrering.SaveApplication.Description": "Ved endring av opplysningene er begrunnelse obligatorisk",
@@ -140,7 +132,6 @@
   "Registrering.RegistrerVirksomhetPanel.Add": "Legg til næringsvirksomhet",
   "Registrering.RegistrerVirksomhetPanel.Name": "Søkers virksomheter",
   "Registrering.RegistrerVirksomhetPanel.ArrayMinLength": "Det må registreres minst 1 virksomhet",
-
 
   "BehovForTilretteleggingPanel.BehovForTilrettelegging": "Behov for tilrettelegging",
   "BehovForTilretteleggingPanel.TilretteleggingFra": "Jordmor/lege oppgir at tilrettelegging er nødvendig fra og med",
