@@ -52,17 +52,16 @@ export const OpplysningerOmAdresser = ({ personoversikt: { bruker, annenPart, ba
         </>
       )}
       {barn && <AvsnittSkiller dividerParagraf />}
-      {barn &&
-        barn.map(b => (
-          <Personopplysninger
-            key={b.aktoerId}
-            showIcon={false}
-            navn={b.navn}
-            alleKodeverk={alleKodeverk}
-            adresser={b.adresser}
-            rolle="BARN"
-          />
-        ))}
+      {barn?.map(b => (
+        <Personopplysninger
+          key={b.aktoerId}
+          showIcon={false}
+          navn={b.navn}
+          alleKodeverk={alleKodeverk}
+          adresser={b.adresser}
+          rolle="BARN"
+        />
+      ))}
     </EkspansjonsKort>
   );
 };
