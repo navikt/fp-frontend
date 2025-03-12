@@ -58,7 +58,7 @@ export const HøyRisikoklassifisering: Story = {
     aksjonspunkt: {
       definisjon: AksjonspunktKode.VURDER_FARESIGNALER,
       status: AksjonspunktStatus.OPPRETTET,
-      begrunnelse: undefined,
+      begrunnelse: null,
     } as Aksjonspunkt,
     risikoklassifisering: {
       kontrollresultat: KontrollresultatKode.HOY,

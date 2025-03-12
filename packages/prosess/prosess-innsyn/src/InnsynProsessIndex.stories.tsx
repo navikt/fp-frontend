@@ -20,13 +20,12 @@ const defaultBehandling = {
   behandlingPaaVent: false,
 } as Behandling;
 
-const defaultAksjonspunkter = [
-  {
-    definisjon: AksjonspunktKode.VURDER_INNSYN,
-    status: AksjonspunktStatus.OPPRETTET,
-    begrunnelse: undefined,
-  },
-] as Aksjonspunkt[];
+const defaultAksjonspunkt: Aksjonspunkt = {
+  definisjon: AksjonspunktKode.VURDER_INNSYN,
+  status: AksjonspunktStatus.OPPRETTET,
+  begrunnelse: null,
+  kanLoses: true,
+};
 
 const meta = {
   title: 'prosess/innsyn/prosess-innsyn',
@@ -53,7 +52,7 @@ type Story = StoryObj<typeof meta>;
 export const PanelForVurderingAvInnsyn: Story = {
   args: {
     behandling: defaultBehandling,
-    aksjonspunkterForPanel: defaultAksjonspunkter,
+    aksjonspunkterForPanel: [defaultAksjonspunkt],
     innsyn: {
       dokumenter: [] as InnsynDokument[],
       vedtaksdokumentasjon: [
@@ -75,7 +74,7 @@ export const InnsynSattPaVent: Story = {
     },
     aksjonspunkterForPanel: [
       {
-        ...defaultAksjonspunkter[0],
+        ...defaultAksjonspunkt,
         status: AksjonspunktStatus.UTFORT,
         begrunnelse: 'Dette er en begrunnelse',
       },
