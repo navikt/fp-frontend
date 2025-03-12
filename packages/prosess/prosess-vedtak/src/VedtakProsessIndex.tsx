@@ -7,7 +7,8 @@ import type {
   Aksjonspunkt,
   Beregningsgrunnlag,
   BeregningsresultatDagytelse,
-  BeregningsresultatEs, Oppgave,
+  BeregningsresultatEs,
+  Oppgave,
   SimuleringResultat,
   TilbakekrevingValg,
   Vilkar,
@@ -59,7 +60,7 @@ interface Props {
   vilkar: Vilkar[];
   previewCallback: (data: ForhandsvisData) => void;
   ytelseTypeKode: string;
-  oppgaver?: Oppgave[]
+  oppgaver?: Oppgave[];
 }
 
 export const VedtakProsessIndex = ({
