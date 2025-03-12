@@ -1,4 +1,5 @@
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
+import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
@@ -13,6 +14,7 @@ import {
 import { notEmpty } from '@navikt/fp-utils';
 
 import { FagsakRel, FagsakUrl, initFetchOptions, useFagsakApi, wrapUrl } from '../../data/fagsakApi';
+import { UtvidEllerMinskKnapp } from '../UtvidEllerMinskKnapp.tsx';
 import { HistorikkIndex } from './HistorikkIndex';
 
 import initFetchData from '../../../.storybook/testdata/initFetch.json';
@@ -61,5 +63,11 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     behandlingUuid: '11212',
+    toggleVisUtvidetBehandlingSupportIndexKnapp: (
+      <UtvidEllerMinskKnapp
+        toggleVisUtvidetBehandlingSupportIndexPanel={action('button-click')}
+        visUtvidetBehandlingSupportIndexPanel={false}
+      />
+    ),
   },
 };

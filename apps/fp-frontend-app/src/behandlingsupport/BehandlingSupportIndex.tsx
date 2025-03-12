@@ -132,6 +132,7 @@ export const BehandlingSupportIndex = ({
             valgtBehandlingUuid={behandling.uuid}
             beslutterFormData={beslutterFormData}
             setBeslutterFormData={setBeslutterFormData}
+            toggleVisUtvidetBehandlingSupportIndexKnapp={utvidEllerMinskBehandlingSupportIndexKnapp}
           />
         )}
       </Tabs.Panel>
@@ -142,6 +143,7 @@ export const BehandlingSupportIndex = ({
             valgtBehandlingUuid={behandling.uuid}
             beslutterFormData={beslutterFormData}
             setBeslutterFormData={setBeslutterFormData}
+            toggleVisUtvidetBehandlingSupportIndexKnapp={utvidEllerMinskBehandlingSupportIndexKnapp}
           />
         )}
       </Tabs.Panel>
@@ -151,7 +153,7 @@ export const BehandlingSupportIndex = ({
           behandlingUuid={behandlingUuid}
           historikkinnslagFpSak={fagsakData.getHistorikkFpSak()}
           historikkinnslagFpTilbake={fagsakData.getHistorikkFpTilbake()}
-          utvidEllerMinskBehandlingSupportIndexKnapp={utvidEllerMinskBehandlingSupportIndexKnapp}
+          toggleVisUtvidetBehandlingSupportIndexKnapp={utvidEllerMinskBehandlingSupportIndexKnapp}
         />
       </Tabs.Panel>
       <Tabs.Panel value={SupportTabs.MELDINGER}>

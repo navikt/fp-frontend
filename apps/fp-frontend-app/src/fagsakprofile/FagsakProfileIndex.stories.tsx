@@ -155,6 +155,7 @@ export const BehandlingErValgt: Story = {
       versjon: 1,
     } as Behandling,
     visSideMeny: true,
+    visUtvidetHistorikk: false,
   },
 };
 
@@ -162,5 +163,6 @@ export const BehandlingErIkkeValgt: Story = {
   args: {
     fagsakData: new FagsakData(FAGSAK),
     visSideMeny: true,
+    visUtvidetHistorikk: false,
   },
 };

@@ -117,6 +117,8 @@ export const NårBehandlingErValgt: Story = {
     fagsakData: new FagsakData(FAGSAK),
     behandlingUuid: '1',
     behandlingVersjon: 1,
+    toggleVisUtvidetBehandlingSupportIndexPanel: action('button-click'),
+    visUtvidetBehandlingSupportIndexPanel: false,
   },
 };
 
@@ -136,6 +138,8 @@ export const SkalViseFraBeslutter: Story = {
     }),
     behandlingUuid: '1',
     behandlingVersjon: 1,
+    toggleVisUtvidetBehandlingSupportIndexPanel: action('button-click'),
+    visUtvidetBehandlingSupportIndexPanel: false,
   },
 };
 
@@ -155,11 +159,15 @@ export const SkalViseFraGodkjenning: Story = {
     }),
     behandlingUuid: '1',
     behandlingVersjon: 1,
+    toggleVisUtvidetBehandlingSupportIndexPanel: action('button-click'),
+    visUtvidetBehandlingSupportIndexPanel: false,
   },
 };
 
 export const NårBehandlingIkkeErValgt: Story = {
   args: {
     fagsakData: new FagsakData(FAGSAK),
+    toggleVisUtvidetBehandlingSupportIndexPanel: action('button-click'),
+    visUtvidetBehandlingSupportIndexPanel: false,
   },
 };
