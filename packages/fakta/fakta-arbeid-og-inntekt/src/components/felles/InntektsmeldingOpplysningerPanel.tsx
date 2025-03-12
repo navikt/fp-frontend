@@ -69,23 +69,21 @@ export const InntektsmeldingOpplysningerPanel = ({
             </BodyShort>
           </HStack>
           {arbeidsforhold.permisjonOgMangel && (
-            <>
-              <HStack gap="4">
-                <Label size="small">
-                  {getKodeverknavnFraKode(
-                    alleKodeverk,
-                    KodeverkType.PERMISJONSBESKRIVELSE_TYPE,
-                    arbeidsforhold.permisjonOgMangel.type,
-                  )}
-                </Label>
-                <BodyShort size="small">
-                  <PeriodLabel
-                    dateStringFom={arbeidsforhold.permisjonOgMangel.permisjonFom}
-                    dateStringTom={arbeidsforhold.permisjonOgMangel.permisjonTom}
-                  />
-                </BodyShort>
-              </HStack>
-            </>
+            <HStack gap="4">
+              <Label size="small">
+                {getKodeverknavnFraKode(
+                  alleKodeverk,
+                  KodeverkType.PERMISJONSBESKRIVELSE_TYPE,
+                  arbeidsforhold.permisjonOgMangel.type,
+                )}
+              </Label>
+              <BodyShort size="small">
+                <PeriodLabel
+                  dateStringFom={arbeidsforhold.permisjonOgMangel.permisjonFom}
+                  dateStringTom={arbeidsforhold.permisjonOgMangel.permisjonTom}
+                />
+              </BodyShort>
+            </HStack>
           )}
         </>
       )}

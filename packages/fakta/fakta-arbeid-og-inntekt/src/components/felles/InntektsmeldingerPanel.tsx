@@ -237,23 +237,21 @@ export const InntektsmeldingerPanel = ({
             <BodyShort size="small">{`${arbeidsforholdForRad[0].stillingsprosent}%`}</BodyShort>
           </HStack>
           {arbeidsforholdForRad[0].permisjonOgMangel && (
-            <>
-              <HStack gap="4">
-                <Label size="small">
-                  {getKodeverknavnFraKode(
-                    alleKodeverk,
-                    KodeverkType.PERMISJONSBESKRIVELSE_TYPE,
-                    arbeidsforholdForRad[0].permisjonOgMangel.type,
-                  )}
-                </Label>
-                <BodyShort size="small">
-                  <PeriodLabel
-                    dateStringFom={arbeidsforholdForRad[0].permisjonOgMangel.permisjonFom}
-                    dateStringTom={arbeidsforholdForRad[0].permisjonOgMangel.permisjonTom}
-                  />
-                </BodyShort>
-              </HStack>
-            </>
+            <HStack gap="4">
+              <Label size="small">
+                {getKodeverknavnFraKode(
+                  alleKodeverk,
+                  KodeverkType.PERMISJONSBESKRIVELSE_TYPE,
+                  arbeidsforholdForRad[0].permisjonOgMangel.type,
+                )}
+              </Label>
+              <BodyShort size="small">
+                <PeriodLabel
+                  dateStringFom={arbeidsforholdForRad[0].permisjonOgMangel.permisjonFom}
+                  dateStringTom={arbeidsforholdForRad[0].permisjonOgMangel.permisjonTom}
+                />
+              </BodyShort>
+            </HStack>
           )}
         </>
       )}
