@@ -56,7 +56,7 @@ export const buildInitialValues = (
       ? tilbakekrevingvalg.videreBehandling + IKKE_SEND
       : tilbakekrevingvalg.videreBehandling,
     varseltekst: tilbakekrevingvalg.varseltekst,
-    begrunnelse: aksjonspunkt.begrunnelse,
+    begrunnelse: aksjonspunkt.begrunnelse ?? '',
   };
 };
 

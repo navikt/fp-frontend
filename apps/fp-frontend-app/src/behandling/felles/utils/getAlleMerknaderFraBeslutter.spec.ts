@@ -1,5 +1,5 @@
 import { AksjonspunktKode, AksjonspunktStatus, BehandlingStatus, BehandlingType } from '@navikt/fp-kodeverk';
-import type { Behandling } from '@navikt/fp-types';
+import type { Aksjonspunkt, Behandling } from '@navikt/fp-types';
 
 import { getAlleMerknaderFraBeslutter } from './getAlleMerknaderFraBeslutter';
 
@@ -13,10 +13,11 @@ describe('<getAlleMerknaderFraBeslutter>', () => {
     behandlingHenlagt: false,
   };
 
-  const aksjonspunkter = [
+  const aksjonspunkter: Aksjonspunkt[] = [
     {
       status: AksjonspunktStatus.OPPRETTET,
       definisjon: AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+      begrunnelse: null,
       kanLoses: true,
       toTrinnsBehandling: true,
       toTrinnsBehandlingGodkjent: false,

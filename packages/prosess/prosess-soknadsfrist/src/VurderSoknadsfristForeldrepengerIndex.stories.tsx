@@ -30,7 +30,7 @@ const meta = {
       {
         definisjon: AksjonspunktKode.VURDER_SOKNADSFRIST_FORELDREPENGER,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
+        begrunnelse: null,
       },
     ] as Aksjonspunkt[],
   },

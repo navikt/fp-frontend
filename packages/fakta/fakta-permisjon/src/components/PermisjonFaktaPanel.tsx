@@ -63,7 +63,7 @@ export const PermisjonFaktaPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysningerP
       arbeidsforhold: sorterteArbeidsforhold.map(a => ({
         permisjonStatus: a.permisjonOgMangel?.permisjonStatus,
       })),
-      begrunnelse: aksjonspunkterForPanel[0].begrunnelse,
+      begrunnelse: aksjonspunkterForPanel[0].begrunnelse ?? '',
     }),
     [sorterteArbeidsforhold],
   );

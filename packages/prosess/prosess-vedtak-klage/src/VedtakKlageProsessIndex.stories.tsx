@@ -10,7 +10,7 @@ import {
   KlageVurdering as klageVurderingCodes,
 } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt, Behandling, KlageVurdering, KlageVurderingResultat } from '@navikt/fp-types';
+import type { Aksjonspunkt, Behandling, KlageVurdering } from '@navikt/fp-types';
 
 import { VedtakKlageProsessIndex } from './VedtakKlageProsessIndex';
 
@@ -23,13 +23,14 @@ const behandling = {
   behandlingPaaVent: false,
 } as Behandling;
 
-const aksjonspunkterForPanel = [
+const aksjonspunkterForPanel: Aksjonspunkt[] = [
   {
     definisjon: AksjonspunktKode.FORESLA_VEDTAK,
     status: AksjonspunktStatus.OPPRETTET,
-    begrunnelse: undefined,
+    begrunnelse: null,
+    kanLoses: true,
   },
-] as Aksjonspunkt[];
+];
 
 const meta = {
   title: 'prosess/klage/prosess-vedtak-klage',
@@ -54,11 +55,11 @@ export const VedtakspanelDerKlageErVurdertAvNk: Story = {
         klageVurdering: klageVurderingCodes.AVVIS_KLAGE,
         klageMedholdArsak: 'PROSESSUELL_FEIL',
         fritekstTilBrev: 'test',
-      } as KlageVurderingResultat,
+      },
       klageFormkravResultatKA: {
         avvistArsaker: ['IKKE_KONKRET'],
-      },
-    } as KlageVurdering,
+      } as KlageVurdering['klageFormkravResultatKA'],
+    },
   },
 };
 
@@ -70,10 +71,10 @@ export const VedtakspanelDerKlageErVurdertAvNfp: Story = {
         klageVurdering: klageVurderingCodes.AVVIS_KLAGE,
         klageMedholdArsak: 'PROSESSUELL_FEIL',
         fritekstTilBrev: 'test',
-      } as KlageVurderingResultat,
+      },
       klageFormkravResultatKA: {
         avvistArsaker: ['IKKE_KONKRET'],
-      },
-    } as KlageVurdering,
+      } as KlageVurdering['klageFormkravResultatKA'],
+    },
   },
 };
