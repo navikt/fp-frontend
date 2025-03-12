@@ -51,6 +51,7 @@ const defaultBruker: PersonopplysningerBasis = {
   kjønn: KjønnkodeEnum.MANN,
   sivilstand: SivilstandType.SAMBOER,
   fødselsdato: '1989-01-01',
+  dødsdato: null,
   adresser: [adresse1, adresse2],
 };
 
@@ -60,12 +61,14 @@ const defaultAnnenPart: PersonopplysningerBasis = {
   kjønn: KjønnkodeEnum.KVINNE,
   sivilstand: SivilstandType.SAMBOER,
   fødselsdato: '1989-01-01',
+  dødsdato: null,
   adresser: [adresse1, adresse2],
 };
 
 const defaultBarn: PersonopplysningerBasis = {
   navn: 'Tutta Utvikler',
   fødselsdato: '2018-01-01',
+  dødsdato: null,
   adresser: [adresse2],
   aktoerId: '3',
   kjønn: KjønnkodeEnum.KVINNE,

@@ -5,10 +5,10 @@ import { dateFormat } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import { DiskresjonskodeType } from '@navikt/fp-kodeverk';
-import type { FagsakPerson } from '@navikt/fp-types';
+import type { Person } from '@navikt/fp-types';
 
 interface Props {
-  fagsakPerson: FagsakPerson;
+  fagsakPerson: Person;
   harVergeIÅpenBehandling?: boolean;
 }
 

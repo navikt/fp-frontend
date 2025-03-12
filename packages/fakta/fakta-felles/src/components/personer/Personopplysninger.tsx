@@ -19,7 +19,7 @@ interface Props {
   harSammeAdresser?: boolean;
   navn?: string;
   sivilstand?: string;
-  dødsdato?: string;
+  dødsdato?: string | null;
   fødselsdato?: string;
   adresser: Personadresse[];
   kjønn?: string;

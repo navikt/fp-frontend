@@ -6,8 +6,8 @@ import { MenyVergeIndexV1, MenyVergeIndexV2 } from '@navikt/fp-sak-meny';
 import { type Behandling, type BehandlingAppKontekst, type Fagsak, VergeBehandlingmenyValg } from '@navikt/fp-types';
 
 import { getLocationWithDefaultProsessStegAndFakta, pathToBehandling } from '../../app/paths';
-import { BehandlingRel, harLenke, useBehandlingApi } from '../../data/behandlingApi.ts';
-import { FagsakRel } from '../../data/fagsakApi.ts';
+import { BehandlingRel, harLenke, useBehandlingApi } from '../../data/behandlingApi';
+import { FagsakRel } from '../../data/fagsakApi';
 import { useBehandlingPollingOperasjoner } from '../../data/polling/useBehandlingPollingOperasjoner';
 import { useKodeverk } from '../../data/useKodeverk.tsx';
 

@@ -4,7 +4,7 @@ import { HStack, Spacer } from '@navikt/ds-react';
 import { EmptyPersonCard, Gender, PersonCard } from '@navikt/ft-plattform-komponenter';
 
 import { NavBrukerKjonn } from '@navikt/fp-kodeverk';
-import type { FagsakHendelse, FagsakPerson } from '@navikt/fp-types';
+import type { FagsakHendelse, Person } from '@navikt/fp-types';
 
 import { VisittkortBarnInfoPanel } from './VisittkortBarnInfoPanel';
 import { VisittkortLabels } from './VisittkortLabels';
@@ -20,8 +20,8 @@ const utledKjonn = (kjonn: string): Gender => {
 
 interface Props {
   erMor: boolean;
-  bruker: FagsakPerson;
-  annenPart?: FagsakPerson;
+  bruker: Person;
+  annenPart?: Person;
   familiehendelse?: FagsakHendelse;
   lenkeTilAnnenPart?: string;
   harVergeIÅpenBehandling: boolean;

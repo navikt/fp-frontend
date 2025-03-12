@@ -7,7 +7,7 @@ import { http, HttpResponse } from 'msw';
 
 import { FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { alleKodeverk, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
-import type { Aktor, FagsakPerson, Person } from '@navikt/fp-types';
+import type { Aktor, Person } from '@navikt/fp-types';
 import { KjønnkodeEnum } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
@@ -22,12 +22,14 @@ const withIntl = getIntlDecorator(messages);
 
 const getHref = (rel: string) => wrapUrl(notEmpty(initFetchData.links.find(link => link.rel === rel)).href);
 
-const PERSON = {
+const PERSON: Person = {
   navn: 'Espen Utvikler',
   fødselsnummer: '121221',
   kjønn: KjønnkodeEnum.MANN,
   fødselsdato: '2000-01-02',
-} satisfies Person;
+  aktørId: '12121221',
+  dødsdato: null,
+};
 
 const AKTØR_INFO = {
   fagsaker: [
@@ -50,10 +52,7 @@ const AKTØR_INFO = {
       person: PERSON,
     },
   ],
-  person: {
-    ...PERSON,
-    aktørId: '12121221',
-  } satisfies FagsakPerson,
+  person: PERSON,
 } satisfies Aktor;
 
 const NAV_ANSATT = {

@@ -20,8 +20,8 @@ const meta = {
   component: SøkResultat,
   decorators: [withIntl, withQueryClient],
   args: {
-    åpneFagsak: action('button-click'),
-    selectOppgaveCallback: action('button-click'),
+    åpneFagsak: action('onÅpneFagsak'),
+    selectOppgaveCallback: action('onSelectOppgave'),
   },
   parameters: {
     msw: {
@@ -49,6 +49,8 @@ export const Default: Story = {
         person: {
           navn: 'Espen Utvikler',
           fødselsdato: '1980-10-10',
+          aktørId: '1234',
+          dødsdato: null,
           fødselsnummer: '1010',
           kjønn: KjønnkodeEnum.MANN,
         },

@@ -44,6 +44,7 @@ const personoversikt: Personoversikt = {
     kjønn: NavBrukerKjonn.KVINNE,
     sivilstand: SivilstandType.GIFT,
     fødselsdato: '1979-01-01',
+    dødsdato: null,
     adresser: [
       {
         fom: '2019-01-01',
