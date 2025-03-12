@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, SoknadType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import type { FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
+import type { Aksjonspunkt, FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
 
 import { FodselFaktaIndex } from './FodselFaktaIndex';
 
@@ -59,11 +59,11 @@ const familiehendelseOriginalBehandling = {
   antallBarnTermin: 1,
 } as FamilieHendelse;
 
-const defaultAksjonspunkter = [
+const defaultAksjonspunkter: Aksjonspunkt[] = [
   {
     definisjon: AksjonspunktKode.TERMINBEKREFTELSE,
     status: AksjonspunktStatus.OPPRETTET,
-    begrunnelse: undefined,
+    begrunnelse: null,
     kanLoses: true,
   },
 ];

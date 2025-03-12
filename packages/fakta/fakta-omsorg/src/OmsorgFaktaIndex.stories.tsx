@@ -87,7 +87,7 @@ export const ÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg: Story = {
       {
         definisjon: AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
+        begrunnelse: null,
         kanLoses: true,
       },
     ],

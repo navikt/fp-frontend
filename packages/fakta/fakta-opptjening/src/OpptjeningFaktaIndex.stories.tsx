@@ -42,7 +42,7 @@ export const MedAksjonspunkt: Story = {
       {
         definisjon: AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
+        begrunnelse: null,
         kanLoses: true,
       },
     ],
@@ -183,7 +183,7 @@ export const MedToLikePerioderForSammeAktivitetstype: Story = {
       {
         definisjon: AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
+        begrunnelse: null,
         kanLoses: true,
       },
     ],
@@ -244,7 +244,7 @@ export const MedAlleOpptjeningsaktiviteterFiltrertBort: Story = {
       {
         definisjon: AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
+        begrunnelse: null,
         kanLoses: true,
       },
     ],
