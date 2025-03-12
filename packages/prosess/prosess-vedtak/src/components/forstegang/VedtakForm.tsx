@@ -32,7 +32,7 @@ import type {
   VurdereAnnenYtelseForVedtakAp,
   VurdereDokumentForVedtakAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { VedtakFellesPanel } from '../felles/VedtakFellesPanel';
 import { getTilbakekrevingText } from '../felles/VedtakHelper';
@@ -211,7 +211,7 @@ export const VedtakForm = ({
 
   const intl = useIntl();
 
-  const { formData, setFormData } = useFormData<FormValues>();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
     defaultValues: formData || buildInitialValues(aksjonspunkt, behandling, beregningErManueltFastsatt),

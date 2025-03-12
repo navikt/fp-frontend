@@ -10,7 +10,7 @@ import {
   NavBrukerKjonn,
   UtsettelseArsakCode,
 } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type {
   Aksjonspunkt,
   ArbeidsgiverOpplysningerPerId,
@@ -163,7 +163,7 @@ const arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId = {
 const meta = {
   title: 'prosess/prosess-uttak',
   component: UttakProsessIndex,
-  decorators: [withFormData, withPanelData],
+  decorators: [withMellomlagretFormData, withPanelData],
   args: {
     behandling,
     uttakStonadskontoer,

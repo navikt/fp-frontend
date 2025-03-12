@@ -11,7 +11,7 @@ import { AksjonspunktKode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
 import { FodselSammenligningIndex } from '@navikt/fp-prosess-fakta-fodsel-sammenligning';
 import type { Aksjonspunkt, AvklartBarn, FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
 import type { BekreftTerminbekreftelseAp, SjekkManglendeFodselAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { type FormValues as SjekkFodselDokFormValues, SjekkFodselDokForm } from './SjekkFodselDokForm';
 import { type FormValues as TermindatoFormValues, TermindatoFaktaForm } from './TermindatoFaktaForm';
@@ -108,7 +108,7 @@ export const FodselInfoPanel = ({
   const terminbekreftelseAp = aksjonspunkterForPanel.find(ap => ap.definisjon === TERMINBEKREFTELSE);
   const manglendeFødselAp = aksjonspunkterForPanel.find(ap => ap.definisjon === SJEKK_MANGLENDE_FODSEL);
 
-  const { formData, setFormData } = useFormData<FormValues>();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
     defaultValues: formData || buildInitialValues(soknad, familiehendelse, terminbekreftelseAp, manglendeFødselAp),

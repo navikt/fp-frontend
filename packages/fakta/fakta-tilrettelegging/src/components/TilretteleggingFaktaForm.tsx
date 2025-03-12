@@ -17,7 +17,7 @@ import type {
   FodselOgTilrettelegging,
 } from '@navikt/fp-types';
 import type { BekreftSvangerskapspengerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import type { TilretteleggingFormValues } from '../types/TilretteleggingFormValues';
 import { ArbeidsforholdFieldArray } from './arbeidsforhold/ArbeidsforholdFieldArray';
@@ -84,7 +84,7 @@ export const TilretteleggingFaktaForm = ({
     arbeidsgiverOpplysningerPerId,
   );
 
-  const { formData, setFormData } = useFormData<TilretteleggingFormValues>();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<TilretteleggingFormValues>();
 
   const formMethods = useForm<TilretteleggingFormValues>({
     defaultValues: formData || {

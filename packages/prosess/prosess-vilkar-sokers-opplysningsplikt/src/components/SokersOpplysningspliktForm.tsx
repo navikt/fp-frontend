@@ -28,7 +28,7 @@ import type {
   BekreftSokersOpplysningspliktManuAp,
   OverstyringSokersOpplysingspliktAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 const orgPrefix = 'org_';
 const aktørPrefix = 'aktør_';
@@ -213,7 +213,7 @@ export const SokersOpplysningspliktForm = ({
     arbeidsgiverOpplysningerPerId,
   );
 
-  const { formData, setFormData } = useFormData<FormValues>();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
     defaultValues: formData || initialValues,

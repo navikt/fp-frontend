@@ -11,7 +11,7 @@ import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-f
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt } from '@navikt/fp-types';
 import type { MerkOpptjeningUtlandAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData } from '@navikt/fp-utils';
+import { useMellomlagretFormData } from '@navikt/fp-utils';
 
 import styles from './innhentDokOpptjeningUtlandPanel.module.css';
 
@@ -51,7 +51,7 @@ export const InnhentDokOpptjeningUtlandPanel = ({
 }: Props) => {
   const intl = useIntl();
 
-  const { formData, setFormData } = useFormData<FormValues>();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
     defaultValues: formData || {

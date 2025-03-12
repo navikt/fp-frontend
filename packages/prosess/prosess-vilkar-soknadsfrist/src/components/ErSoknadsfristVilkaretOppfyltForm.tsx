@@ -21,7 +21,7 @@ import {
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, FamilieHendelse, Soknad } from '@navikt/fp-types';
 import type { SoknadsfristAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import styles from './erSoknadsfristVilkaretOppfyltForm.module.css';
 
@@ -107,7 +107,7 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({
     [aksjonspunkterForPanel, status],
   );
 
-  const { formData, setFormData } = useFormData<FormValues>();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
   const formMethods = useForm<FormValues>({
     defaultValues: formData || initialValues,
   });

@@ -20,7 +20,7 @@ import type {
   Vilkar as FpVilkar,
   Vilkarperiode,
 } from '@navikt/fp-types';
-import { useFormData } from '@navikt/fp-utils';
+import { useMellomlagretFormData } from '@navikt/fp-utils';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
@@ -142,6 +142,6 @@ export const BeregningsgrunnlagProsessStegInitPanel = ({ arbeidsgiverOpplysninge
 };
 
 const Wrapper = (props: ComponentProps<typeof BeregningsgrunnlagProsessIndex>) => {
-  const { formData, setFormData } = useFormData();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData();
   return <BeregningsgrunnlagProsessIndex {...props} formData={formData} setFormData={setFormData} />;
 };

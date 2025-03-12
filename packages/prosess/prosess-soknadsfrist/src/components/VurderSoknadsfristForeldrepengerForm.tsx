@@ -12,7 +12,7 @@ import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, Søknadsfrist } from '@navikt/fp-types';
 import type { VurderSoknadsfristAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import styles from './vurderSoknadsfristForeldrepengerForm.module.css';
 
@@ -63,7 +63,7 @@ export const VurderSoknadsfristForeldrepengerForm = ({ readOnlySubmitButton, mot
 
   const initialValues = buildInitialValues(aksjonspunkterForPanel, mottattDato, søknadsfrist);
 
-  const { formData, setFormData } = useFormData<FormValues>();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
     defaultValues: formData || initialValues,

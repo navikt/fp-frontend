@@ -12,7 +12,7 @@ import dayjs from 'dayjs';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Soknad } from '@navikt/fp-types';
 import type { OverstyringAvklarStartdatoForPeriodenAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData } from '@navikt/fp-utils';
+import { useMellomlagretFormData } from '@navikt/fp-utils';
 
 import styles from './startdatoForForeldrepengerperiodenForm.module.css';
 
@@ -70,7 +70,7 @@ export const StartdatoForForeldrepengerperiodenForm = ({
 }: Props) => {
   const intl = useIntl();
 
-  const { formData, setFormData } = useFormData<FormValues>();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
     defaultValues: formData || buildInitialValues(soknad, aksjonspunkt),

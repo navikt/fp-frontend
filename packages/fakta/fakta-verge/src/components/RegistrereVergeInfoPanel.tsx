@@ -10,7 +10,7 @@ import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-f
 import { AksjonspunktKode, KodeverkType } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, AlleKodeverk, AlleKodeverkTilbakekreving, Verge } from '@navikt/fp-types';
 import type { AvklarVergeAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { RegistrereVergeForm, type VergeFormValues } from './RegistrereVergeForm';
 
@@ -46,7 +46,7 @@ export const RegistrereVergeInfoPanel = ({ submittable, verge, alleKodeverk }: P
   const { aksjonspunkterForPanel, submitCallback, alleMerknaderFraBeslutter, harÅpneAksjonspunkter, isReadOnly } =
     usePanelDataContext<AvklarVergeAp>();
 
-  const { formData, setFormData } = useFormData<FormValues>();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
     defaultValues: formData || buildInitialValues(verge, aksjonspunkterForPanel),

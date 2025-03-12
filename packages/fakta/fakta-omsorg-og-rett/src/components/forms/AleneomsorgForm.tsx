@@ -10,7 +10,7 @@ import { FaktaBegrunnelseTextField, FaktaSubmitButton, TrueFalseInput } from '@n
 import { AksjonspunktKode, RelasjonsRolleType } from '@navikt/fp-kodeverk';
 import { type Aksjonspunkt, type OmsorgOgRett, Verdi } from '@navikt/fp-types';
 import type { BekreftAleneomsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { HarAnnenForelderRettFelter } from './HarAnnenForelderRettFelter';
 
@@ -36,7 +36,7 @@ export const AleneomsorgForm = ({ omsorgOgRett, aksjonspunkt, submittable }: Pro
   const harRettEØS = omsorgOgRett.manuellBehandlingResultat?.annenpartRettighet?.harRettEØS ?? undefined;
   const harUføretrygd = omsorgOgRett.manuellBehandlingResultat?.annenpartRettighet?.harUføretrygd ?? undefined;
 
-  const { formData, setFormData } = useFormData<FormValues>();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
   const isReadOnlyOrApIsNull = isReadOnly || aksjonspunkt === undefined;
 
   const formMethods = useForm<FormValues>({

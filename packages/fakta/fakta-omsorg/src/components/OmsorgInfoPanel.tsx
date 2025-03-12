@@ -8,7 +8,7 @@ import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { FaktaBegrunnelseTextField, FaktaSubmitButton, PersonopplysningerForFamilie } from '@navikt/fp-fakta-felles';
 import type { Aksjonspunkt, Personoversikt, Ytelsefordeling } from '@navikt/fp-types';
 import type { BekreftOmsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { type FormValues as OmsorgFormValues, OmsorgFaktaFields } from './OmsorgFaktaFields';
 
@@ -44,7 +44,7 @@ export const OmsorgInfoPanel = ({ personoversikt, ytelsefordeling, submittable }
     alleMerknaderFraBeslutter,
   } = usePanelDataContext<BekreftOmsorgVurderingAp>();
 
-  const { formData, setFormData } = useFormData<FormValues>();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
     defaultValues: formData || createInitialValues(ytelsefordeling, aksjonspunkterForPanel),

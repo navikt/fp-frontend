@@ -14,7 +14,7 @@ import { useQuery } from '@tanstack/react-query';
 import { AksjonspunktKode, hasAksjonspunkt, VilkarType } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import type { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkar, Vilkarperiode } from '@navikt/fp-types';
-import { useFormData } from '@navikt/fp-utils';
+import { useMellomlagretFormData } from '@navikt/fp-utils';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
@@ -63,7 +63,7 @@ export const FordelingFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props
 };
 
 const Wrapper = (props: ComponentProps<typeof FordelBeregningsgrunnlagFaktaIndex>) => {
-  const { formData, setFormData } = useFormData();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData();
   return <FordelBeregningsgrunnlagFaktaIndex {...props} formData={formData} setFormData={setFormData} />;
 };
 

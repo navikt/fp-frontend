@@ -23,7 +23,7 @@ import type {
   VurdereYtelseSammeBarnAnnenForelderAp,
   VurdereYtelseSammeBarnSokerAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 const avslagsarsakerES = ['1002', '1003', '1032'];
 
@@ -94,7 +94,7 @@ export const FodselVilkarForm = ({ readOnlySubmitButton, status, ytelseTypeKode,
 
   const initialValues = buildInitialValues(aksjonspunkterForPanel, status, behandling.behandlingsresultat);
 
-  const { formData, setFormData } = useFormData<FormValues>();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
   const formMethods = useForm<FormValues>({
     defaultValues: formData || initialValues,
   });

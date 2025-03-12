@@ -3,7 +3,7 @@ import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import { AksjonspunktÅrsak, type ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
 import { ArbeidsforholdFaktaIndex } from './ArbeidsforholdFaktaIndex';
@@ -48,7 +48,7 @@ const arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId = {
 const meta = {
   title: 'fakta/fakta-arbeidsforhold',
   component: ArbeidsforholdFaktaIndex,
-  decorators: [withFormData, withPanelData],
+  decorators: [withMellomlagretFormData, withPanelData],
   args: {
     arbeidsgiverOpplysningerPerId,
     isReadOnly: true,

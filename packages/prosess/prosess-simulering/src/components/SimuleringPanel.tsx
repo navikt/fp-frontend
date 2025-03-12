@@ -14,7 +14,7 @@ import type {
   TilbakekrevingValg,
 } from '@navikt/fp-types';
 import type { KontrollerEtterbetalingTilSøkerAP, VurderFeilutbetalingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import {
   buildInitialValues as buildInitialValuesEtterbetaling,
@@ -127,7 +127,7 @@ export const SimuleringPanel = ({
   const { aksjonspunkterForPanel, submitCallback, isReadOnly, harÅpneAksjonspunkter, fagsak, behandling } =
     usePanelDataContext<SimuleringAksjonspunkt[]>();
 
-  const { formData, setFormData } = useFormData<FormValues>();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
     defaultValues: formData || buildInitialValues(aksjonspunkterForPanel, tilbakekrevingvalg),

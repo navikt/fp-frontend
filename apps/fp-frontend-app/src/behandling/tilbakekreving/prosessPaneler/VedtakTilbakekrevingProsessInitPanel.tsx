@@ -20,7 +20,7 @@ import {
 } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import type { AlleKodeverkTilbakekreving, Behandlingsresultat } from '@navikt/fp-types';
-import { useFormData } from '@navikt/fp-utils';
+import { useMellomlagretFormData } from '@navikt/fp-utils';
 
 import { forhåndsvisVedtaksbrev, useBehandlingApi } from '../../../data/behandlingApi';
 import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
@@ -112,7 +112,7 @@ export const VedtakTilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }:
 };
 
 const Wrapper = (props: ComponentProps<typeof VedtakTilbakekrevingProsessIndex>) => {
-  const { formData, setFormData } = useFormData();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData();
   return <VedtakTilbakekrevingProsessIndex {...props} formData={formData} setFormData={setFormData} />;
 };
 

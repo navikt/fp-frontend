@@ -8,7 +8,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { isAksjonspunktOpen, KodeverkType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import type { Aksjonspunkt, AlleKodeverkTilbakekreving } from '@navikt/fp-types';
-import { useFormData } from '@navikt/fp-utils';
+import { useMellomlagretFormData } from '@navikt/fp-utils';
 
 import { type BeregnBeløpParams, useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
@@ -67,7 +67,7 @@ export const TilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }: Props
 };
 
 const Wrapper = (props: ComponentProps<typeof TilbakekrevingProsessIndex>) => {
-  const { formData, setFormData } = useFormData();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData();
   return <TilbakekrevingProsessIndex {...props} formData={formData} setFormData={setFormData} />;
 };
 

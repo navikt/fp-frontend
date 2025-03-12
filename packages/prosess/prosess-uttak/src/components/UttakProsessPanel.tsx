@@ -17,7 +17,7 @@ import type {
   UttakStonadskontoer,
 } from '@navikt/fp-types';
 import type { UttakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { UttakPeriodePanel } from './periodeDetaljer/UttakPeriodePanel';
 import { DisponibleStonadskontoerPanel } from './stonadsdagerOversikt/DisponibleStonadskontoerPanel';
@@ -194,14 +194,14 @@ export const UttakProsessPanel = ({
     setErOverstyrt(forrigeVerdi => !forrigeVerdi);
   }, []);
 
-  const { formData, setFormData } = useFormData<PeriodeSoker[]>();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<PeriodeSoker[]>();
 
-  const [perioder, setPerioder] = useState<PeriodeSoker[]>(formData || uttaksresultat.perioderSøker);
+  const [perioder, setPerioder] = useState<PeriodeSoker[]>(mellomlagretFormData || uttaksresultat.perioderSøker);
   const [valgtPeriodeIndex, setValgtPeriodeIndex] = useState<number | undefined>();
 
   const [stønadskonto, setStønadskonto] = useState(uttakStonadskontoer);
 
-  useEffect(() => () => setFormData(perioder), [perioder]);
+  useEffect(() => () => setMellomlagretFormData(perioder), [perioder]);
 
   const allePerioder = uttaksresultat.perioderAnnenpart.concat(perioder);
 

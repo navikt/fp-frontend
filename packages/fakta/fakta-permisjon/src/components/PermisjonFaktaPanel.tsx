@@ -11,7 +11,7 @@ import { dateFormat } from '@navikt/ft-utils';
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import type { AoIArbeidsforhold, ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 import type { VurderArbeidsforholdPermisjonAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { ArbeidsforholdFieldArray } from './ArbeidsforholdFieldArray';
 
@@ -68,7 +68,7 @@ export const PermisjonFaktaPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysningerP
     [sorterteArbeidsforhold],
   );
 
-  const { formData, setFormData } = useFormData<FormValues>();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
     defaultValues: formData || defaultValues,

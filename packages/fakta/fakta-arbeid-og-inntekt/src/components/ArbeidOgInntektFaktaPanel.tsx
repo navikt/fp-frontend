@@ -20,7 +20,7 @@ import type {
   ManueltArbeidsforhold,
 } from '@navikt/fp-types';
 import type { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { useIsFormDirty } from '../DirtyFormProvider';
 import type { ArbeidsforholdOgInntektRadData, Avklaring } from '../types/arbeidsforholdOgInntekt';
@@ -153,7 +153,7 @@ export const ArbeidOgInntektFaktaPanel = ({
 
   const aksjonspunkt = aksjonspunkterForPanel.length > 0 ? aksjonspunkterForPanel[0] : undefined;
 
-  const { formData, setFormData } = useFormData<ArbeidsforholdOgInntektRadData[]>();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<ArbeidsforholdOgInntektRadData[]>();
 
   const [tabellRader, setTabellRader] = useState<ArbeidsforholdOgInntektRadData[]>(
     formData || byggTabellStruktur(arbeidOgInntekt, arbeidsgiverOpplysningerPerId),
