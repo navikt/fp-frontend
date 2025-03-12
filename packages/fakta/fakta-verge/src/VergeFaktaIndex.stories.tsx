@@ -4,6 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { alleKodeverk, type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import type { Aksjonspunkt } from '@navikt/fp-types';
 
 import { VergeFaktaIndex } from './VergeFaktaIndex';
 
@@ -11,11 +12,11 @@ import '@navikt/ds-css';
 import '@navikt/ft-form-hooks/dist/style.css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
 
-const aksjonspunkterForPanel: PanelDataArgs['aksjonspunkterForPanel'] = [
+const aksjonspunkterForPanel: Aksjonspunkt[] = [
   {
     definisjon: AksjonspunktKode.AVKLAR_VERGE,
     status: AksjonspunktStatus.OPPRETTET,
-    begrunnelse: undefined,
+    begrunnelse: null,
     kanLoses: true,
   },
 ];

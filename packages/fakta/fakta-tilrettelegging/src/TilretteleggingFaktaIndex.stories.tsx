@@ -7,6 +7,7 @@ import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-stor
 import {
   type ArbeidOgInntektsmelding,
   type ArbeidsforholdFodselOgTilrettelegging,
+  type ArbeidsgiverOpplysningerPerId,
   SvpTilretteleggingFomKilde,
 } from '@navikt/fp-types';
 
@@ -202,7 +203,7 @@ const SPESIELL_ARBEID_OG_INNTEKT = {
   ],
 } as ArbeidOgInntektsmelding;
 
-const ARBEIDSGIVEROPPLYSNINGER_PER_ID = {
+const ARBEIDSGIVEROPPLYSNINGER_PER_ID: ArbeidsgiverOpplysningerPerId = {
   1: {
     erPrivatPerson: false,
     identifikator: '973861778',
@@ -262,7 +263,7 @@ export const TilretteleggingMedVelferdspermisjon: Story = {
       {
         definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
+        begrunnelse: null,
         kanLoses: true,
       },
     ],
@@ -277,7 +278,7 @@ export const TilretteleggingMed100ProsentVelferdspermisjon: Story = {
       {
         definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
+        begrunnelse: null,
         kanLoses: true,
       },
     ],
@@ -292,7 +293,7 @@ export const SokerVarIkkeAnsattDaBehovetForTilretteleggingOppstod: Story = {
       {
         definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
+        begrunnelse: null,
         kanLoses: true,
       },
     ],
@@ -307,7 +308,7 @@ export const HarOpphold: Story = {
       {
         definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
+        begrunnelse: null,
         kanLoses: true,
       },
     ],
@@ -364,7 +365,7 @@ export const ErReadonly: Story = {
       {
         definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
+        begrunnelse: null,
         kanLoses: true,
       },
     ],

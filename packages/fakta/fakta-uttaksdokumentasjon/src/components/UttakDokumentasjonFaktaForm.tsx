@@ -44,7 +44,7 @@ export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov, submi
     [dokBehov],
   );
 
-  const lagretBegrunnelse = aksjonspunkterForPanel.length > 0 ? aksjonspunkterForPanel[0].begrunnelse : undefined;
+  const lagretBegrunnelse = aksjonspunkterForPanel[0]?.begrunnelse ?? '';
   const formMethods = useForm<{ begrunnelse: string }>({
     defaultValues: {
       begrunnelse: formData?.begrunnelse || lagretBegrunnelse,

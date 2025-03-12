@@ -1,7 +1,7 @@
 export type Aksjonspunkt = Readonly<{
   definisjon: string;
   status: string;
-  begrunnelse?: string;
+  begrunnelse: string | null;
   vilkarType?: string;
   toTrinnsBehandling?: boolean;
   toTrinnsBehandlingGodkjent?: boolean;

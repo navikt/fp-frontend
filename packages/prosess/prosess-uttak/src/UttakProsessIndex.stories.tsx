@@ -11,14 +11,22 @@ import {
   UtsettelseArsakCode,
 } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import type { Behandling, FamilieHendelseSamling, Personoversikt, Soknad, UttakStonadskontoer } from '@navikt/fp-types';
+import type {
+  Aksjonspunkt,
+  Behandling,
+  FamilieHendelseSamling,
+  Personoversikt,
+  Soknad,
+  UttakStonadskontoer,
+} from '@navikt/fp-types';
 
 import { UttakProsessIndex } from './UttakProsessIndex';
 
-const åpentAksjonspunkt = [
+const åpentAksjonspunkt: Aksjonspunkt[] = [
   {
     definisjon: AksjonspunktKode.FASTSETT_UTTAKPERIODER,
     status: AksjonspunktStatus.OPPRETTET,
+    begrunnelse: null,
     toTrinnsBehandling: true,
     aksjonspunktType: AksjonspunktType.MANUELL,
     kanLoses: true,
