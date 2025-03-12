@@ -33,22 +33,15 @@ export type FormValues = KontrollerFaktaPeriodeMedApMarkering & {
   harSamtidigUttaksprosent?: boolean;
 };
 
-// vanlig arbeidsgivernavn (orgnr)...arbeidsforholdid
-// privatperson - KLANG...(18.08.1980)
-const formatDate = (dato: string): string => dayjs(dato).format(DDMMYYYY_DATE_FORMAT);
-const getEndCharFromId = (id: any): string => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
-
-const lagVisningsNavn = (arbeidsgiverOpplysning: ArbeidsgiverOpplysninger, eksternArbeidsforholdId?: any) => {
-  const { navn, fødselsdato, erPrivatPerson, identifikator } = arbeidsgiverOpplysning;
-
-  let visningsNavn = `${navn}`;
-  if (!erPrivatPerson) {
-    visningsNavn = identifikator ? `${visningsNavn} (${identifikator})` : visningsNavn;
-    visningsNavn = `${visningsNavn}${getEndCharFromId(eksternArbeidsforholdId)}`;
+// Todo: gjør dette til delt kode delt kode
+const formatDate = (dato: string) => dayjs(dato).format(DDMMYYYY_DATE_FORMAT);
+const getEndCharFromId = (id: string | undefined) => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
+const lagVisningsNavn = (ago: ArbeidsgiverOpplysninger, eksternArbeidsforholdId?: string): string => {
+  if (ago.erPrivatPerson) {
+    return `${ago.navn.substring(0, 5)}...(${ago.fødselsdato ? formatDate(ago.fødselsdato) : '-'})`;
   } else {
-    visningsNavn = `${navn.substring(0, 5)}...(${fødselsdato ? formatDate(fødselsdato) : '-'})`;
+    return `${ago.navn} (${ago.identifikator})${getEndCharFromId(eksternArbeidsforholdId)}`;
   }
-  return visningsNavn;
 };
 
 const mapArbeidsforhold = (

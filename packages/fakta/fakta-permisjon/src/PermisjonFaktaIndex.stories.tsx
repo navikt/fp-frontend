@@ -44,7 +44,6 @@ export const EttArbeidsforholdUtenSluttdatoForPermisjon: Story = {
     arbeidsgiverOpplysningerPerId: {
       910909088: {
         erPrivatPerson: false,
-        fødselsdato: undefined,
         identifikator: '910909088',
         navn: 'BEDRIFT AS',
         referanse: '910909088',
@@ -133,21 +132,18 @@ export const FlereArbeidsforhold: Story = {
     arbeidsgiverOpplysningerPerId: {
       910909088: {
         erPrivatPerson: false,
-        fødselsdato: undefined,
         identifikator: '910909088',
         navn: 'BEDRIFT AS',
         referanse: '910909088',
       },
       910909090: {
         erPrivatPerson: false,
-        fødselsdato: undefined,
         identifikator: '910909090',
         navn: 'Autoservice AS',
         referanse: '910909090',
       },
       910909092: {
         erPrivatPerson: false,
-        fødselsdato: undefined,
         identifikator: '910909092',
         navn: 'DNB',
         referanse: '910909092',
@@ -286,7 +282,6 @@ export const FlereArbeidsforholdFraSammeArbeidsgiver: Story = {
     arbeidsgiverOpplysningerPerId: {
       910909088: {
         erPrivatPerson: false,
-        fødselsdato: undefined,
         identifikator: '910909088',
         navn: 'BEDRIFT AS',
         referanse: '910909088',

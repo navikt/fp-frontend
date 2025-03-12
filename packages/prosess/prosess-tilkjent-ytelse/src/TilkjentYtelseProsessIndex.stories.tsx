@@ -14,6 +14,7 @@ import {
 import { type PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
 import type {
   Aksjonspunkt,
+  ArbeidsgiverOpplysningerPerId,
   BeregningsresultatDagytelse,
   FamilieHendelse,
   FamilieHendelseSamling,
@@ -87,10 +88,11 @@ const søknad = {
   termindato: '2019-02-01',
 } as Soknad;
 
-const arbeidsgiverOpplysningerPerId = {
+const arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId = {
   1: {
     erPrivatPerson: false,
     identifikator: '973861778',
+    referanse: '973861778',
     navn: 'EQUINOR ASA AVD STATOIL SOKKELVIRKSOMHET',
   },
 };

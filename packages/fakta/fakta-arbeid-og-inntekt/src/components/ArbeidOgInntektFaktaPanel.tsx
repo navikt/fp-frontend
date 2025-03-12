@@ -98,21 +98,24 @@ const byggTabellStruktur = (
 
   const alleInntektsmeldingerSomManglerArbeidsforhold = inntektsmeldinger
     .filter(im => !arbeidsforhold.some(af => erMatch(af, im)))
-    .map<ArbeidsforholdOgInntektRadData>(im => ({
-      arbeidsgiverIdent: im.arbeidsgiverIdent,
-      internArbeidsforholdId: im.internArbeidsforholdId,
-      arbeidsgiverNavn: arbeidsgiverOpplysningerPerId[im.arbeidsgiverIdent].navn,
-      arbeidsgiverFødselsdato: arbeidsgiverOpplysningerPerId[im.arbeidsgiverIdent]?.erPrivatPerson
-        ? arbeidsgiverOpplysningerPerId[im.arbeidsgiverIdent]?.fødselsdato
-        : undefined,
-      årsak: im.årsak,
-      avklaring: im.saksbehandlersVurdering
-        ? {
-            saksbehandlersVurdering: im.saksbehandlersVurdering,
-            begrunnelse: im.begrunnelse,
-          }
-        : undefined,
-    }));
+    .map<ArbeidsforholdOgInntektRadData>(im => {
+      const arbeidgiverOpplysninger = arbeidsgiverOpplysningerPerId[im.arbeidsgiverIdent];
+      return {
+        arbeidsgiverIdent: im.arbeidsgiverIdent,
+        internArbeidsforholdId: im.internArbeidsforholdId,
+        arbeidsgiverNavn: arbeidgiverOpplysninger.navn,
+        arbeidsgiverFødselsdato: arbeidgiverOpplysninger.erPrivatPerson
+          ? arbeidgiverOpplysninger.fødselsdato
+          : undefined,
+        årsak: im.årsak,
+        avklaring: im.saksbehandlersVurdering
+          ? {
+              saksbehandlersVurdering: im.saksbehandlersVurdering,
+              begrunnelse: im.begrunnelse,
+            }
+          : undefined,
+      };
+    });
 
   return alleArbeidsforhold.concat(alleInntektsmeldingerSomManglerArbeidsforhold).sort(sorterTabell);
 };

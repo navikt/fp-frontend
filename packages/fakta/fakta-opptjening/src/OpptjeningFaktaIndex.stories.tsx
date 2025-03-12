@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, OpptjeningAktivitetType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import type { Opptjening } from '@navikt/fp-types';
+import type { ArbeidsgiverOpplysningerPerId, Opptjening } from '@navikt/fp-types';
 
 import { OpptjeningFaktaIndex } from './OpptjeningFaktaIndex';
 
@@ -12,10 +12,11 @@ const merknaderFraBeslutter = {
   notAccepted: false,
 };
 
-const arbeidsgiverOpplysningerPerId = {
+const arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId = {
   1: {
     erPrivatPerson: false,
     identifikator: '973861778',
+    referanse: '973861778',
     navn: 'EQUINOR ASA AVD STATOIL SOKKELVIRKSOMHET',
   },
 };
