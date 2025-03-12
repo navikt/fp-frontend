@@ -1,9 +1,9 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BodyShort } from '@navikt/ds-react';
+import { BodyShort, VStack } from '@navikt/ds-react';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import { FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { FamilieHendelse } from '@navikt/fp-types';
@@ -33,12 +33,13 @@ export const EktefelleFaktaForm = ({ readOnly, ektefellesBarnIsEdited = false, a
       title={intl.formatMessage({ id: 'EktefelleFaktaForm.ApplicationInformation' })}
       merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN]}
     >
-      <div className={styles.container}>
+      <VStack gap="2" width="100%">
         <BodyShort size="small">
           <FormattedMessage id="EktefelleFaktaForm.EktefellesBarn" />
         </BodyShort>
-        <VerticalSpacer twentyPx />
-        <hr className={styles.hr} />
+        <div>
+          <hr className={styles.hr} />
+        </div>
         <RadioGroupPanel
           name="ektefellesBarn"
           hideLegend
@@ -58,7 +59,7 @@ export const EktefelleFaktaForm = ({ readOnly, ektefellesBarnIsEdited = false, a
             },
           ]}
         />
-      </div>
+      </VStack>
     </FaktaGruppe>
   );
 };

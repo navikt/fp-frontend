@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
-import { HStack, VStack } from '@navikt/ds-react';
+import { VStack } from '@navikt/ds-react';
 import { CheckboxField, Form } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
@@ -82,14 +82,12 @@ export const KontrollerBesteberegningPanel = ({ aksjonspunkt, readOnly, submitta
             hasBegrunnelse={!!begrunnelse}
             hasVurderingText
           />
-          <HStack>
-            <FaktaSubmitButton
-              isSubmittable={submittable && erKnappEnabled}
-              isSubmitting={formMethods.formState.isSubmitting}
-              isDirty={formMethods.formState.isDirty}
-              isReadOnly={readOnly}
-            />
-          </HStack>
+          <FaktaSubmitButton
+            isSubmittable={submittable && erKnappEnabled}
+            isSubmitting={formMethods.formState.isSubmitting}
+            isDirty={formMethods.formState.isDirty}
+            isReadOnly={readOnly}
+          />
         </VStack>
       </Form>
     </VStack>

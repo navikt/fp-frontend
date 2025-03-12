@@ -77,14 +77,12 @@ export const OmsorgInfoPanel = ({ personoversikt, ytelsefordeling, submittable }
               hasBegrunnelse={true}
               hasVurderingText
             />
-            <div>
-              <FaktaSubmitButton
-                isSubmittable={submittable}
-                isReadOnly={isReadOnly}
-                isSubmitting={formMethods.formState.isSubmitting}
-                isDirty={formMethods.formState.isDirty}
-              />
-            </div>
+            <FaktaSubmitButton
+              isSubmittable={submittable}
+              isReadOnly={isReadOnly}
+              isSubmitting={formMethods.formState.isSubmitting}
+              isDirty={formMethods.formState.isDirty}
+            />
           </VStack>
         </Form>
       )}

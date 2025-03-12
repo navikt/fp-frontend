@@ -2,8 +2,8 @@ import React, { useCallback, useMemo, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { PlusCircleIcon } from '@navikt/aksel-icons';
-import { Alert, BodyShort, Button, Heading, HStack, Spacer } from '@navikt/ds-react';
-import { AksjonspunktHelpTextHTML, OverstyringKnapp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { Alert, BodyShort, Button, Heading, HStack, Spacer, VStack } from '@navikt/ds-react';
+import { AksjonspunktHelpTextHTML, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 import { dateFormat } from '@navikt/ft-utils';
 
 import { AksjonspunktStatus, ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
@@ -89,7 +89,7 @@ export const ArbeidsOgInntektOverstyrPanel = ({
   const erAksjonspunktÅpent = aksjonspunkt?.status === AksjonspunktStatus.OPPRETTET;
 
   return (
-    <>
+    <VStack gap="8">
       <HStack gap="4">
         <Heading size="small">
           <FormattedMessage id="ArbeidOgInntektFaktaPanel.Overskrift" />
@@ -103,37 +103,34 @@ export const ArbeidsOgInntektOverstyrPanel = ({
           />
         </BodyShort>
       </HStack>
-      <VerticalSpacer thirtyTwoPx />
-      {aksjonspunktTekstKoder.length > 0 && (
-        <AksjonspunktHelpTextHTML>
-          {aksjonspunktTekstKoder.map(kode => intl.formatMessage({ id: kode })).join(' ')}
-        </AksjonspunktHelpTextHTML>
-      )}
-      {arbeidsforhold.length === 0 && inntektsmeldinger.length === 0 && erOverstyrer && (
-        <div className={styles.alertStripe}>
-          <Alert variant="info">
-            <FormattedMessage id="ArbeidOgInntektFaktaPanel.IngenArbeidsforhold" />
-          </Alert>
-        </div>
-      )}
-      <VerticalSpacer sixteenPx />
-      {erLokaltOverstyrt && harIngenArbeidsforholdSomErManueltLagtTil && !skalToggleVisningAvLeggTilArbeidsforhold && (
-        <>
-          <VerticalSpacer twentyPx />
-          <Button
-            size="small"
-            variant="tertiary"
-            icon={<PlusCircleIcon aria-hidden />}
-            onClick={() => toggleVisningAvLeggTilArbeidsforhold(true)}
-          >
-            <FormattedMessage id="ArbeidOgInntektFaktaPanel.LeggTilArbeidsforhold" />
-          </Button>
-          <VerticalSpacer thirtyTwoPx />
-        </>
-      )}
-      <VerticalSpacer thirtyTwoPx />
-      {skalToggleVisningAvLeggTilArbeidsforhold && (
-        <>
+      <VStack gap="4">
+        {aksjonspunktTekstKoder.length > 0 && (
+          <AksjonspunktHelpTextHTML>
+            {aksjonspunktTekstKoder.map(kode => intl.formatMessage({ id: kode })).join(' ')}
+          </AksjonspunktHelpTextHTML>
+        )}
+        {arbeidsforhold.length === 0 && inntektsmeldinger.length === 0 && erOverstyrer && (
+          <div className={styles.alertStripe}>
+            <Alert variant="info">
+              <FormattedMessage id="ArbeidOgInntektFaktaPanel.IngenArbeidsforhold" />
+            </Alert>
+          </div>
+        )}
+        {erLokaltOverstyrt &&
+          harIngenArbeidsforholdSomErManueltLagtTil &&
+          !skalToggleVisningAvLeggTilArbeidsforhold && (
+            <div>
+              <Button
+                size="small"
+                variant="tertiary"
+                icon={<PlusCircleIcon aria-hidden />}
+                onClick={() => toggleVisningAvLeggTilArbeidsforhold(true)}
+              >
+                <FormattedMessage id="ArbeidOgInntektFaktaPanel.LeggTilArbeidsforhold" />
+              </Button>
+            </div>
+          )}
+        {skalToggleVisningAvLeggTilArbeidsforhold && (
           <ManueltLagtTilArbeidsforholdForm
             behandlingUuid={behandling.uuid}
             behandlingVersjon={behandling.versjon}
@@ -144,9 +141,8 @@ export const ArbeidsOgInntektOverstyrPanel = ({
             erOverstyrt
             erNyttArbeidsforhold
           />
-          <VerticalSpacer fourtyPx />
-        </>
-      )}
-    </>
+        )}
+      </VStack>
+    </VStack>
   );
 };

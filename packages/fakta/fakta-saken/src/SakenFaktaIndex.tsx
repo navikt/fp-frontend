@@ -19,13 +19,8 @@ interface Props {
 
 const intl = createIntl(messages);
 
-export const SakenFaktaIndex = ({ soknad, utlandDokStatus, kanOverstyreAccess, submittable }: Props) => (
+export const SakenFaktaIndex = (props: Props) => (
   <RawIntlProvider value={intl}>
-    <SakenFaktaPanel
-      soknad={soknad}
-      dokStatus={utlandDokStatus?.dokStatus}
-      kanOverstyreAccess={kanOverstyreAccess}
-      submittable={submittable}
-    />
+    <SakenFaktaPanel {...props} />
   </RawIntlProvider>
 );

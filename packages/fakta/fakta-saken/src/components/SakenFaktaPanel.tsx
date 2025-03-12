@@ -1,7 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 
 import { HStack, VStack } from '@navikt/ds-react';
-import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Soknad } from '@navikt/fp-types';
@@ -20,7 +20,9 @@ import { StartdatoForForeldrepengerperiodenForm } from './startdatoForForeldrepe
 
 interface Props {
   soknad?: Soknad;
-  dokStatus?: string;
+  utlandDokStatus?: {
+    dokStatus?: string;
+  };
   submittable: boolean;
   kanOverstyreAccess: boolean;
 }
@@ -28,7 +30,7 @@ interface Props {
 const erMarkertUtenlandssak = (aksjonspunkter: Aksjonspunkt[]): boolean =>
   aksjonspunkter.some(ap => ap.definisjon === AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK);
 
-export const SakenFaktaPanel = ({ soknad, dokStatus, submittable, kanOverstyreAccess }: Props) => {
+export const SakenFaktaPanel = ({ soknad, utlandDokStatus, submittable, kanOverstyreAccess }: Props) => {
   const {
     aksjonspunkterForPanel,
     submitCallback,
@@ -47,23 +49,17 @@ export const SakenFaktaPanel = ({ soknad, dokStatus, submittable, kanOverstyreAc
   const overstyringsAp = aksjonspunkterForPanel.find(ap => ap.definisjon === AksjonspunktKode.OVERSTYR_DEKNINGSGRAD);
 
   return (
-    <>
+    <VStack gap="8">
       {harÅpneAksjonspunkter && erMarkertUtenlandssak(aksjonspunkterForPanel) && (
-        <>
-          <AksjonspunktHelpTextHTML>
-            {[<FormattedMessage key="OpptjeningUtland" id="SakenFaktaPanel.OpptjeningUtland" />]}
-          </AksjonspunktHelpTextHTML>
-          <VerticalSpacer thirtyTwoPx />
-        </>
+        <AksjonspunktHelpTextHTML>
+          {[<FormattedMessage key="OpptjeningUtland" id="SakenFaktaPanel.OpptjeningUtland" />]}
+        </AksjonspunktHelpTextHTML>
       )}
       {harÅpneAksjonspunkter &&
         aksjonspunkterForPanel.some(ap => ap.definisjon === AksjonspunktKode.AVKLAR_DEKNINGSGRAD) && (
-          <>
-            <AksjonspunktHelpTextHTML>
-              {[<FormattedMessage key="AvklarDekningsgrad" id="SakenFaktaPanel.AvklarDekningsgrad" />]}
-            </AksjonspunktHelpTextHTML>
-            <VerticalSpacer thirtyTwoPx />
-          </>
+          <AksjonspunktHelpTextHTML>
+            {[<FormattedMessage key="AvklarDekningsgrad" id="SakenFaktaPanel.AvklarDekningsgrad" />]}
+          </AksjonspunktHelpTextHTML>
         )}
       <VStack gap="10">
         {soknad && automatiskAp && (
@@ -79,7 +75,7 @@ export const SakenFaktaPanel = ({ soknad, dokStatus, submittable, kanOverstyreAc
         <HStack gap="10">
           {automatiskMarkeringAvUtenlandssakAp && (
             <InnhentDokOpptjeningUtlandPanel
-              dokStatus={dokStatus}
+              dokStatus={utlandDokStatus?.dokStatus}
               readOnly={isReadOnly}
               harApneAksjonspunkter={harÅpneAksjonspunkter}
               aksjonspunkt={automatiskMarkeringAvUtenlandssakAp}
@@ -111,6 +107,6 @@ export const SakenFaktaPanel = ({ soknad, dokStatus, submittable, kanOverstyreAc
           />
         )}
       </VStack>
-    </>
+    </VStack>
   );
 };

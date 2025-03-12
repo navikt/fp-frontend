@@ -3,10 +3,10 @@ import { useForm, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { PencilFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, Heading, HStack } from '@navikt/ds-react';
+import { BodyShort, Button, Heading, HStack, VStack } from '@navikt/ds-react';
 import { Datepicker, Form, TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
-import { AksjonspunktBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { AksjonspunktBox } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
@@ -89,58 +89,47 @@ export const StartdatoForForeldrepengerperiodenForm = ({
       onSubmit={(values: FormValues) => submitCallback(transformValues(soknad, values))}
       setDataOnUnmount={setFormData}
     >
-      <Heading size="small">
-        <FormattedMessage id="StartdatoForForeldrepengerperiodenForm.StartdatoForPerioden" />
-      </Heading>
-      <VerticalSpacer sixteenPx />
-      {!visEditeringsmodus && (
-        <HStack gap="2">
-          <BodyShort size="small">
-            {soknad.oppgittFordeling
-              ? capitalizeFirstLetter(dayjs(soknad.oppgittFordeling.startDatoForPermisjon).format('dddd D MMMM YYYY'))
-              : '-'}
-          </BodyShort>
-          <PencilFillIcon
-            title={intl.formatMessage({ id: 'StartdatoForForeldrepengerperiodenForm.EndreStartdato' })}
-            className={readOnly ? styles.editIconReadonly : styles.editIcon}
-            onClick={readOnly ? undefined : slåPåEditering}
-          />
-        </HStack>
-      )}
-      {visEditeringsmodus && (
-        <AksjonspunktBox
-          className={styles.aksjonspunktMargin}
-          erAksjonspunktApent={false}
-          erIkkeGodkjentAvBeslutter={
-            !!alleMerknaderFraBeslutter[AksjonspunktKode.OVERSTYR_AVKLAR_STARTDATO]?.notAccepted
-          }
-        >
-          <FlexContainer>
-            <FlexRow>
-              <FlexColumn>
-                <Datepicker
-                  name="startdatoFraSoknad"
-                  label={intl.formatMessage({ id: 'StartdatoForForeldrepengerperiodenForm.Startdato' })}
-                  validate={[required, hasValidDate, getValidateIsBefore2019(formMethods.getValues, intl)]}
-                  isReadOnly={readOnly}
-                />
-              </FlexColumn>
-            </FlexRow>
-            <VerticalSpacer sixteenPx />
-            <FlexRow>
-              <FlexColumn className={styles.begrunnelsefelt}>
-                <TextAreaField
-                  name="begrunnelse"
-                  label={<FormattedMessage id="StartdatoForForeldrepengerperiodenForm.Vurdering" />}
-                  validate={[required, minLength3, maxLength1500, hasValidText]}
-                  maxLength={1500}
-                  readOnly={readOnly}
-                />
-              </FlexColumn>
-            </FlexRow>
-            <VerticalSpacer sixteenPx />
-            <FlexRow>
-              <FlexColumn>
+      <VStack gap="4">
+        <Heading size="small">
+          <FormattedMessage id="StartdatoForForeldrepengerperiodenForm.StartdatoForPerioden" />
+        </Heading>
+        {!visEditeringsmodus && (
+          <HStack gap="2">
+            <BodyShort size="small">
+              {soknad.oppgittFordeling
+                ? capitalizeFirstLetter(dayjs(soknad.oppgittFordeling.startDatoForPermisjon).format('dddd D MMMM YYYY'))
+                : '-'}
+            </BodyShort>
+            <PencilFillIcon
+              title={intl.formatMessage({ id: 'StartdatoForForeldrepengerperiodenForm.EndreStartdato' })}
+              className={readOnly ? styles.editIconReadonly : styles.editIcon}
+              onClick={readOnly ? undefined : slåPåEditering}
+            />
+          </HStack>
+        )}
+        {visEditeringsmodus && (
+          <AksjonspunktBox
+            className={styles.aksjonspunktMargin}
+            erAksjonspunktApent={false}
+            erIkkeGodkjentAvBeslutter={
+              !!alleMerknaderFraBeslutter[AksjonspunktKode.OVERSTYR_AVKLAR_STARTDATO]?.notAccepted
+            }
+          >
+            <VStack gap="4">
+              <Datepicker
+                name="startdatoFraSoknad"
+                label={intl.formatMessage({ id: 'StartdatoForForeldrepengerperiodenForm.Startdato' })}
+                validate={[required, hasValidDate, getValidateIsBefore2019(formMethods.getValues, intl)]}
+                isReadOnly={readOnly}
+              />
+              <TextAreaField
+                name="begrunnelse"
+                label={<FormattedMessage id="StartdatoForForeldrepengerperiodenForm.Vurdering" />}
+                validate={[required, minLength3, maxLength1500, hasValidText]}
+                maxLength={1500}
+                readOnly={readOnly}
+              />
+              <HStack gap="2">
                 <Button
                   size="small"
                   variant="primary"
@@ -149,15 +138,14 @@ export const StartdatoForForeldrepengerperiodenForm = ({
                 >
                   <FormattedMessage id="UtlandPanel.lagre" />
                 </Button>
-              </FlexColumn>
-              <Button variant="secondary" size="small" onClick={slaAvEditeringAvStartdato} type="button">
-                <FormattedMessage id="UtlandPanel.avbryt" />
-              </Button>
-              <FlexColumn />
-            </FlexRow>
-          </FlexContainer>
-        </AksjonspunktBox>
-      )}
+                <Button variant="secondary" size="small" onClick={slaAvEditeringAvStartdato} type="button">
+                  <FormattedMessage id="UtlandPanel.avbryt" />
+                </Button>
+              </HStack>
+            </VStack>
+          </AksjonspunktBox>
+        )}
+      </VStack>
     </Form>
   );
 };

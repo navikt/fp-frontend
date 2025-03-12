@@ -2,8 +2,9 @@ import { type ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
+import { VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
-import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
@@ -114,11 +115,10 @@ export const FodselInfoPanel = ({
   });
 
   return (
-    <>
+    <VStack gap="2">
       {harÅpneAksjonspunkter && (
         <AksjonspunktHelpTextHTML>{getHelpTexts(aksjonspunkterForPanel)}</AksjonspunktHelpTextHTML>
       )}
-      <VerticalSpacer sixteenPx />
       <Form
         formMethods={formMethods}
         onSubmit={values =>
@@ -126,51 +126,50 @@ export const FodselInfoPanel = ({
         }
         setDataOnUnmount={setFormData}
       >
-        {hasAksjonspunkt(TERMINBEKREFTELSE, aksjonspunkterForPanel) && (
-          <TermindatoFaktaForm
-            readOnly={isReadOnly}
-            submittable={submittable}
-            alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-            soknad={soknad}
-            gjeldendeFamiliehendelse={familiehendelse.gjeldende}
-          />
-        )}
-        {hasAksjonspunkt(SJEKK_MANGLENDE_FODSEL, aksjonspunkterForPanel) && (
-          <SjekkFodselDokForm
-            behandlingType={behandling.type}
-            readOnly={isReadOnly}
-            submittable={submittable}
-            soknadOriginalBehandling={soknadOriginalBehandling}
-            familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
-            alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-            soknad={soknad}
-            avklartBarn={avklartBarn}
-            familiehendelse={familiehendelse}
-          />
-        )}
-        {aksjonspunkterForPanel.length !== 0 && !isReadOnly && (
-          <>
-            <VerticalSpacer twentyPx />
+        <VStack gap="2">
+          {hasAksjonspunkt(TERMINBEKREFTELSE, aksjonspunkterForPanel) && (
+            <TermindatoFaktaForm
+              readOnly={isReadOnly}
+              submittable={submittable}
+              alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+              soknad={soknad}
+              gjeldendeFamiliehendelse={familiehendelse.gjeldende}
+            />
+          )}
+          {hasAksjonspunkt(SJEKK_MANGLENDE_FODSEL, aksjonspunkterForPanel) && (
+            <SjekkFodselDokForm
+              behandlingType={behandling.type}
+              readOnly={isReadOnly}
+              submittable={submittable}
+              soknadOriginalBehandling={soknadOriginalBehandling}
+              familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
+              alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+              soknad={soknad}
+              avklartBarn={avklartBarn}
+              familiehendelse={familiehendelse}
+            />
+          )}
+          {aksjonspunkterForPanel.length !== 0 && !isReadOnly && (
             <FaktaSubmitButton
               isSubmittable={submittable}
               isReadOnly={isReadOnly}
               isSubmitting={formMethods.formState.isSubmitting}
               isDirty={formMethods.formState.isDirty}
             />
-          </>
-        )}
-        {aksjonspunkterForPanel.length === 0 && (
-          <FodselSammenligningIndex
-            behandlingsTypeKode={behandling.type}
-            avklartBarn={avklartBarn}
-            termindato={termindato}
-            vedtaksDatoSomSvangerskapsuke={vedtaksDatoSomSvangerskapsuke}
-            soknad={soknad}
-            soknadOriginalBehandling={soknadOriginalBehandling}
-            familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
-          />
-        )}
+          )}
+          {aksjonspunkterForPanel.length === 0 && (
+            <FodselSammenligningIndex
+              behandlingsTypeKode={behandling.type}
+              avklartBarn={avklartBarn}
+              termindato={termindato}
+              vedtaksDatoSomSvangerskapsuke={vedtaksDatoSomSvangerskapsuke}
+              soknad={soknad}
+              soknadOriginalBehandling={soknadOriginalBehandling}
+              familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
+            />
+          )}
+        </VStack>
       </Form>
-    </>
+    </VStack>
   );
 };

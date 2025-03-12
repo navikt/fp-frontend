@@ -208,14 +208,12 @@ export const TilretteleggingFaktaForm = ({
           maxLength={1500}
           readOnly={readonly}
         />
-        <HStack>
-          <FaktaSubmitButton
-            isSubmittable={submittable}
-            isReadOnly={readonly}
-            isSubmitting={formMethods.formState.isSubmitting}
-            isDirty={formMethods.formState.isDirty}
-          />
-        </HStack>
+        <FaktaSubmitButton
+          isSubmittable={submittable}
+          isReadOnly={readonly}
+          isSubmitting={formMethods.formState.isSubmitting}
+          isDirty={formMethods.formState.isDirty}
+        />
       </VStack>
     </Form>
   );

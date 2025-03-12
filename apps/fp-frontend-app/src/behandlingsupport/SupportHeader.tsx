@@ -1,8 +1,7 @@
 import type { ReactNode } from 'react';
 import { useIntl } from 'react-intl';
 
-import { Heading } from '@navikt/ds-react';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
+import { Heading, HStack } from '@navikt/ds-react';
 
 import { ErrorBoundary } from '../app/ErrorBoundary';
 import { useRestApiErrorDispatcher } from '../data/error/RestApiErrorContext';
@@ -23,18 +22,10 @@ export const SupportHeaderAndContent = ({ tekst, antall, children, brukPadding =
   return (
     <>
       <div className={styles.header}>
-        <FlexContainer>
-          <FlexRow spaceBetween>
-            <FlexColumn>
-              <Heading size="small">{tekst}</Heading>
-            </FlexColumn>
-            {!!antall && antall > 0 && (
-              <FlexColumn>
-                <div className={styles.circle}>{antall}</div>
-              </FlexColumn>
-            )}
-          </FlexRow>
-        </FlexContainer>
+        <HStack justify="space-between">
+          <Heading size="small">{tekst}</Heading>
+          {!!antall && antall > 0 && <div className={styles.circle}>{antall}</div>}
+        </HStack>
       </div>
       <div className={brukPadding ? styles.container : undefined}>
         <ErrorBoundary

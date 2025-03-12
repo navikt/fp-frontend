@@ -75,15 +75,12 @@ export const HarAnnenForelderRettForm = ({ omsorgOgRett, aksjonspunkt, submittab
             hasBegrunnelse={true}
             hasVurderingText
           />
-
-          <div>
-            <FaktaSubmitButton
-              isSubmittable={submittable}
-              isReadOnly={readOnly}
-              isSubmitting={formMethods.formState.isSubmitting}
-              isDirty={formMethods.formState.isDirty}
-            />
-          </div>
+          <FaktaSubmitButton
+            isSubmittable={submittable}
+            isReadOnly={readOnly}
+            isSubmitting={formMethods.formState.isSubmitting}
+            isDirty={formMethods.formState.isDirty}
+          />
         </VStack>
       </FaktaGruppe>
     </Form>

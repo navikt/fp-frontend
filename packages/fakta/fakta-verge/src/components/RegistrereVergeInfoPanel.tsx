@@ -2,8 +2,9 @@ import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
+import { VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
-import { AksjonspunktHelpTextHTML, FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { AksjonspunktHelpTextHTML, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, KodeverkType } from '@navikt/fp-kodeverk';
@@ -72,30 +73,30 @@ export const RegistrereVergeInfoPanel = ({ submittable, verge, alleKodeverk }: P
         onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
         setDataOnUnmount={setFormData}
       >
-        <FaktaGruppe merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.AVKLAR_VERGE]}>
-          <RegistrereVergeForm
-            readOnly={isReadOnly || aksjonspunkterForPanel.length === 0}
-            vergetyper={vergetyper}
-            valgtVergeType={valgtVergeType}
-          />
-        </FaktaGruppe>
-        {aksjonspunkterForPanel.length !== 0 && (
-          <>
-            <VerticalSpacer twentyPx />
-            <FaktaBegrunnelseTextField
-              isSubmittable={submittable}
-              isReadOnly={isReadOnly}
-              hasBegrunnelse={!!begrunnelse}
+        <VStack gap="6">
+          <FaktaGruppe merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.AVKLAR_VERGE]}>
+            <RegistrereVergeForm
+              readOnly={isReadOnly || aksjonspunkterForPanel.length === 0}
+              vergetyper={vergetyper}
+              valgtVergeType={valgtVergeType}
             />
-            <VerticalSpacer twentyPx />
-            <FaktaSubmitButton
-              isSubmittable={submittable && !!valgtVergeType}
-              isReadOnly={isReadOnly}
-              isSubmitting={formMethods.formState.isSubmitting}
-              isDirty={formMethods.formState.isDirty}
-            />
-          </>
-        )}
+          </FaktaGruppe>
+          {aksjonspunkterForPanel.length !== 0 && (
+            <>
+              <FaktaBegrunnelseTextField
+                isSubmittable={submittable}
+                isReadOnly={isReadOnly}
+                hasBegrunnelse={!!begrunnelse}
+              />
+              <FaktaSubmitButton
+                isSubmittable={submittable && !!valgtVergeType}
+                isReadOnly={isReadOnly}
+                isSubmitting={formMethods.formState.isSubmitting}
+                isDirty={formMethods.formState.isDirty}
+              />
+            </>
+          )}
+        </VStack>
       </Form>
     </>
   );
