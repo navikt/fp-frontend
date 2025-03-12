@@ -2,7 +2,7 @@ import { type ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { VStack } from '@navikt/ds-react';
+import { HStack, VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
@@ -150,12 +150,14 @@ export const OmsorgOgForeldreansvarInfoPanel = ({
               : 'OmsorgOgForeldreansvarInfoPanel.BegrunnelseTitleEs',
           })}
         />
-        <FaktaSubmitButton
-          isSubmittable={submittable}
-          isSubmitting={formMethods.formState.isSubmitting}
-          isDirty={formMethods.formState.isDirty}
-          isReadOnly={isReadOnly}
-        />
+        <HStack>
+          <FaktaSubmitButton
+            isSubmittable={submittable}
+            isSubmitting={formMethods.formState.isSubmitting}
+            isDirty={formMethods.formState.isDirty}
+            isReadOnly={isReadOnly}
+          />
+        </HStack>
       </VStack>
     </Form>
   );

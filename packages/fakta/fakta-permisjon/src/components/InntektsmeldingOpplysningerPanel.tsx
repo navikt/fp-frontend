@@ -1,8 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 
 import { FileFillIcon, PhoneFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Detail, Label, Link } from '@navikt/ds-react';
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { BodyShort, Detail, HStack, Label, Link, VStack } from '@navikt/ds-react';
 import { formatCurrencyNoKr } from '@navikt/ft-utils';
 
 import { hentDokumentLenke } from '@navikt/fp-konstanter';
@@ -16,96 +15,60 @@ interface Props {
 }
 
 export const InntektsmeldingOpplysningerPanel = ({ saksnummer, inntektsmelding }: Props) => (
-  <>
-    <VerticalSpacer eightPx />
-    <FlexContainer>
-      <FlexRow>
-        <FlexColumn>
-          <Label size="small">
-            <FormattedMessage id="InntektsmeldingOpplysningerPanel.Inntektsmelding" />
-          </Label>
-        </FlexColumn>
-        <FlexColumn className={styles.topPadding}>
-          <BodyShort size="small">{formatCurrencyNoKr(inntektsmelding.inntektPrMnd)}</BodyShort>
-        </FlexColumn>
-      </FlexRow>
-      <VerticalSpacer eightPx />
-      <FlexRow>
-        <FlexColumn>
-          <Label size="small">
-            <FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjon" />
-          </Label>
-        </FlexColumn>
-        <FlexColumn className={styles.topPadding}>
-          <BodyShort size="small">
-            <FormattedMessage
-              id={
-                inntektsmelding.refusjonPrMnd
-                  ? 'InntektsmeldingOpplysningerPanel.Ja'
-                  : 'InntektsmeldingOpplysningerPanel.Nei'
-              }
-            />
-          </BodyShort>
-        </FlexColumn>
-      </FlexRow>
-      <VerticalSpacer eightPx />
-      {inntektsmelding.refusjonPrMnd && (
-        <>
-          <FlexRow>
-            <FlexColumn>
-              <Label size="small">
-                <FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjonsbeløp" />
-              </Label>
-            </FlexColumn>
-            <FlexColumn className={styles.topPadding}>
-              <BodyShort size="small">{formatCurrencyNoKr(inntektsmelding.refusjonPrMnd)}</BodyShort>
-            </FlexColumn>
-          </FlexRow>
-          <VerticalSpacer eightPx />
-        </>
-      )}
-      <Link
-        href={hentDokumentLenke(saksnummer, inntektsmelding.journalpostId, inntektsmelding.dokumentId)}
-        target="_blank"
-      >
-        <span>
-          <BodyShort size="small" className={styles.inline}>
-            <FormattedMessage id="InntektsmeldingOpplysningerPanel.ÅpneInntektsmelding" />
-          </BodyShort>
-        </span>
-        <FileFillIcon className={styles.docIcon} />
-      </Link>
-      <VerticalSpacer sixteenPx />
-      <FlexRow>
-        <FlexColumn>
-          <PhoneFillIcon className={styles.phoneIcon} />
-        </FlexColumn>
-        <FlexColumn>
-          <FlexRow>
-            <FlexColumn>
-              <Label size="small">
-                <FormattedMessage id="InntektsmeldingOpplysningerPanel.Kontaktinfo" />
-              </Label>
-            </FlexColumn>
-          </FlexRow>
-          <FlexRow>
-            <FlexColumn>
-              <Detail>{inntektsmelding.kontaktpersonNavn}</Detail>
-            </FlexColumn>
-          </FlexRow>
-          <FlexRow>
-            <FlexColumn>
-              <Detail>
-                <FormattedMessage
-                  id="InntektsmeldingOpplysningerPanel.Tlf"
-                  values={{ nr: inntektsmelding.kontaktpersonNummer }}
-                />
-              </Detail>
-            </FlexColumn>
-          </FlexRow>
-        </FlexColumn>
-      </FlexRow>
-    </FlexContainer>
-    <VerticalSpacer thirtyTwoPx />
-  </>
+  <VStack gap="4">
+    <HStack gap="4">
+      <Label size="small">
+        <FormattedMessage id="InntektsmeldingOpplysningerPanel.Inntektsmelding" />
+      </Label>
+      <BodyShort size="small">{formatCurrencyNoKr(inntektsmelding.inntektPrMnd)}</BodyShort>
+    </HStack>
+    <HStack gap="4">
+      <Label size="small">
+        <FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjon" />
+      </Label>
+      <BodyShort size="small">
+        <FormattedMessage
+          id={
+            inntektsmelding.refusjonPrMnd
+              ? 'InntektsmeldingOpplysningerPanel.Ja'
+              : 'InntektsmeldingOpplysningerPanel.Nei'
+          }
+        />
+      </BodyShort>
+    </HStack>
+    {inntektsmelding.refusjonPrMnd && (
+      <HStack gap="4">
+        <Label size="small">
+          <FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjonsbeløp" />
+        </Label>
+        <BodyShort size="small">{formatCurrencyNoKr(inntektsmelding.refusjonPrMnd)}</BodyShort>
+      </HStack>
+    )}
+    <Link
+      href={hentDokumentLenke(saksnummer, inntektsmelding.journalpostId, inntektsmelding.dokumentId)}
+      target="_blank"
+    >
+      <span>
+        <BodyShort size="small" className={styles.inline}>
+          <FormattedMessage id="InntektsmeldingOpplysningerPanel.ÅpneInntektsmelding" />
+        </BodyShort>
+      </span>
+      <FileFillIcon className={styles.docIcon} />
+    </Link>
+    <HStack gap="4" align="center">
+      <PhoneFillIcon className={styles.phoneIcon} />
+      <VStack gap="1">
+        <Label size="small">
+          <FormattedMessage id="InntektsmeldingOpplysningerPanel.Kontaktinfo" />
+        </Label>
+        <Detail>{inntektsmelding.kontaktpersonNavn}</Detail>
+        <Detail>
+          <FormattedMessage
+            id="InntektsmeldingOpplysningerPanel.Tlf"
+            values={{ nr: inntektsmelding.kontaktpersonNummer }}
+          />
+        </Detail>
+      </VStack>
+    </HStack>
+  </VStack>
 );

@@ -1,10 +1,10 @@
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Alert, BodyShort, HStack, Label } from '@navikt/ds-react';
+import { Alert, BodyShort, HStack, Label, VStack } from '@navikt/ds-react';
 import { Datepicker, InputField } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidInteger, maxValue, minValue, required } from '@navikt/ft-form-validators';
-import { DateLabel, FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { DateLabel, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import moment from 'moment';
 
 import { FaktaBegrunnelseTextField, isFieldEdited } from '@navikt/fp-fakta-felles';
@@ -99,38 +99,34 @@ export const TermindatoFaktaForm = ({
           />
         </HStack>
       </FaktaGruppe>
-      {fodselsdatoTps && !isOverridden && (
-        <FaktaGruppe title={intl.formatMessage({ id: 'TermindatoFaktaForm.OpplysningerTPS' })}>
-          <HStack gap="10">
-            <div>
-              <Label size="small">
-                <FormattedMessage id="TermindatoFaktaForm.FodselsdatoTps" />
-              </Label>
-              <VerticalSpacer fourPx />
-              <BodyShort size="small">
-                <DateLabel dateString={fodselsdatoTps} />
-              </BodyShort>
-            </div>
-            <div>
-              <Label size="small">
-                <FormattedMessage id="TermindatoFaktaForm.AntallBarnTps" />
-              </Label>
-              <VerticalSpacer fourPx />
-              <BodyShort size="small">{antallBarnTps}</BodyShort>
-            </div>
-          </HStack>
-        </FaktaGruppe>
-      )}
-      <VerticalSpacer sixteenPx />
-      <FaktaBegrunnelseTextField isSubmittable={submittable} isReadOnly={readOnly} hasBegrunnelse={!!begrunnelse} />
-      {isForTidligTerminbekreftelse && (
-        <>
-          <VerticalSpacer sixteenPx />
+      <VStack gap="4">
+        {fodselsdatoTps && !isOverridden && (
+          <FaktaGruppe title={intl.formatMessage({ id: 'TermindatoFaktaForm.OpplysningerTPS' })}>
+            <HStack gap="10">
+              <VStack gap="2">
+                <Label size="small">
+                  <FormattedMessage id="TermindatoFaktaForm.FodselsdatoTps" />
+                </Label>
+                <BodyShort size="small">
+                  <DateLabel dateString={fodselsdatoTps} />
+                </BodyShort>
+              </VStack>
+              <VStack gap="2">
+                <Label size="small">
+                  <FormattedMessage id="TermindatoFaktaForm.AntallBarnTps" />
+                </Label>
+                <BodyShort size="small">{antallBarnTps}</BodyShort>
+              </VStack>
+            </HStack>
+          </FaktaGruppe>
+        )}
+        <FaktaBegrunnelseTextField isSubmittable={submittable} isReadOnly={readOnly} hasBegrunnelse={!!begrunnelse} />
+        {isForTidligTerminbekreftelse && (
           <Alert variant="warning" className={styles.marginBottom}>
             <FormattedMessage id="TermindatoFaktaForm.AdvarselForTidligUtstedtdato" />
           </Alert>
-        </>
-      )}
+        )}
+      </VStack>
     </>
   );
 };

@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { Alert, Button, Table } from '@navikt/ds-react';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { Alert, Button, HStack, Table, VStack } from '@navikt/ds-react';
 
 import {
   AksjonspunktKode,
@@ -227,7 +226,7 @@ export const ArbeidOgInntektFaktaPanel = ({
     !isReadOnly && erAksjonspunktApent && harBehandletAllePerioder && !isDirty && !kanSettePåVent;
 
   return (
-    <>
+    <VStack gap="4">
       <ArbeidsOgInntektOverstyrPanel
         behandling={behandling}
         aksjonspunkt={aksjonspunkt}
@@ -280,9 +279,8 @@ export const ArbeidOgInntektFaktaPanel = ({
           ))}
         </Table.Body>
       </Table>
-      <VerticalSpacer sixteenPx />
       {skalViseSettPåVentKnapp && (
-        <>
+        <div>
           <Button
             size="small"
             variant="primary"
@@ -301,40 +299,43 @@ export const ArbeidOgInntektFaktaPanel = ({
             erTilbakekreving={false}
             showModal={visSettPåVentModal}
           />
-        </>
+        </div>
       )}
       {skalViseBekrefteKnapp && (
-        <Button
-          size="small"
-          variant="primary"
-          disabled={erKnappTrykket}
-          loading={erKnappTrykket}
-          onClick={lagreOgFortsett}
-          type="button"
-        >
-          <FormattedMessage id="ArbeidOgInntektFaktaPanel.Bekreft" />
-        </Button>
+        <HStack>
+          <Button
+            size="small"
+            variant="primary"
+            disabled={erKnappTrykket}
+            loading={erKnappTrykket}
+            onClick={lagreOgFortsett}
+            type="button"
+          >
+            <FormattedMessage id="ArbeidOgInntektFaktaPanel.Bekreft" />
+          </Button>
+        </HStack>
       )}
       {skalViseÅpneForNyVurderingKnapp && (
-        <>
+        <VStack gap="4">
           <div className={styles.alertStripe}>
             <Alert variant="info">
               <FormattedMessage id="ArbeidOgInntektFaktaPanel.ApneForNyRevurderingForklaring" />
             </Alert>
           </div>
-          <VerticalSpacer sixteenPx />
-          <Button
-            size="small"
-            variant="secondary"
-            disabled={erKnappTrykket}
-            loading={erKnappTrykket}
-            onClick={gjenåpneAksjonspunkt}
-            type="button"
-          >
-            <FormattedMessage id="ArbeidOgInntektFaktaPanel.ApneForNyVurdering" />
-          </Button>
-        </>
+          <HStack>
+            <Button
+              size="small"
+              variant="secondary"
+              disabled={erKnappTrykket}
+              loading={erKnappTrykket}
+              onClick={gjenåpneAksjonspunkt}
+              type="button"
+            >
+              <FormattedMessage id="ArbeidOgInntektFaktaPanel.ApneForNyVurdering" />
+            </Button>
+          </HStack>
+        </VStack>
       )}
-    </>
+    </VStack>
   );
 };

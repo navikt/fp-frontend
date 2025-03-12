@@ -6,7 +6,7 @@ import { ArrowLeftIcon, ArrowRightIcon, XMarkIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, Heading, HStack, Label, VStack } from '@navikt/ds-react';
 import { Form, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
-import { FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT, findDifferenceInMonthsAndDays } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
@@ -127,83 +127,81 @@ export const ValgtAktivitetForm = ({
         className={styles.panel}
         merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING]}
       >
-        <VStack gap="2">
-          <HStack justify="space-between">
-            <Heading size="small">
-              <FormattedMessage id="ActivityPanel.Details" />
-            </Heading>
-            <HStack gap="2">
-              <Button
-                className={styles.margin}
-                size="xsmall"
-                icon={<ArrowLeftIcon aria-hidden />}
-                onClick={velgForrigeAktivitet}
-                variant="secondary-neutral"
-                type="button"
-                title={intl.formatMessage({ id: 'Timeline.prevPeriod' })}
-              >
-                <FormattedMessage id="Timeline.prevPeriodShort" />
-              </Button>
-              <Button
-                className={styles.margin}
-                size="xsmall"
-                icon={<ArrowRightIcon aria-hidden />}
-                onClick={velgNesteAktivitet}
-                variant="secondary-neutral"
-                type="button"
-                title={intl.formatMessage({ id: 'Timeline.nextPeriod' })}
-                iconPosition="right"
-              >
-                <FormattedMessage id="Timeline.nextPeriodShort" />
-              </Button>
-              <Button
-                size="xsmall"
-                icon={<XMarkIcon aria-hidden />}
-                onClick={lukkPeriode}
-                variant="tertiary-neutral"
-                type="button"
-                title={intl.formatMessage({ id: 'Timeline.lukkPeriode' })}
-              />
+        <VStack gap="6">
+          <VStack gap="2">
+            <HStack justify="space-between">
+              <Heading size="small">
+                <FormattedMessage id="ActivityPanel.Details" />
+              </Heading>
+              <HStack gap="2">
+                <Button
+                  className={styles.margin}
+                  size="xsmall"
+                  icon={<ArrowLeftIcon aria-hidden />}
+                  onClick={velgForrigeAktivitet}
+                  variant="secondary-neutral"
+                  type="button"
+                  title={intl.formatMessage({ id: 'Timeline.prevPeriod' })}
+                >
+                  <FormattedMessage id="Timeline.prevPeriodShort" />
+                </Button>
+                <Button
+                  className={styles.margin}
+                  size="xsmall"
+                  icon={<ArrowRightIcon aria-hidden />}
+                  onClick={velgNesteAktivitet}
+                  variant="secondary-neutral"
+                  type="button"
+                  title={intl.formatMessage({ id: 'Timeline.nextPeriod' })}
+                  iconPosition="right"
+                >
+                  <FormattedMessage id="Timeline.nextPeriodShort" />
+                </Button>
+                <Button
+                  size="xsmall"
+                  icon={<XMarkIcon aria-hidden />}
+                  onClick={lukkPeriode}
+                  variant="tertiary-neutral"
+                  type="button"
+                  title={intl.formatMessage({ id: 'Timeline.lukkPeriode' })}
+                />
+              </HStack>
             </HStack>
-          </HStack>
-          <HStack>
-            <div className={styles.colMargin}>
-              <Label size="small">
-                <FormattedMessage id="ActivityPanel.Period" />
-              </Label>
-              {opptjeningFom && opptjeningTom && (
-                <HStack gap="2">
-                  <BodyShort size="small">
-                    {`${dayjs(opptjeningFom).format(DDMMYYYY_DATE_FORMAT)} - ${dayjs(opptjeningTom).format(
-                      DDMMYYYY_DATE_FORMAT,
-                    )}`}
-                  </BodyShort>
-                  <BodyShort size="small">{finnMånederOgDager(opptjeningFom, opptjeningTom)}</BodyShort>
-                </HStack>
-              )}
-            </div>
-            <div>
-              <Label size="small">
-                <FormattedMessage id="ActivityPanel.Activity" />
-              </Label>
-              <BodyShort size="small">
-                {opptjeningAktivitetTyper.find(oat => oat.kode === aktivitetType)?.navn}
-              </BodyShort>
-            </div>
-          </HStack>
-        </VStack>
-        <VerticalSpacer eightPx />
-        <ValgtAktivitetSubForm
-          valgtAktivitetstype={aktivitetType}
-          arbeidsgiverReferanse={arbeidsgiverReferanse}
-          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          stillingsandel={stillingsandel}
-          naringRegistreringsdato={naringRegistreringsdato}
-          ferdiglignetNæring={ferdiglignetNæring}
-        />
-        {!skalIkkeKunneEditere(harAksjonspunkt, erGodkjent, erEndret) && (
-          <>
-            <VerticalSpacer twentyPx />
+            <HStack>
+              <div className={styles.colMargin}>
+                <Label size="small">
+                  <FormattedMessage id="ActivityPanel.Period" />
+                </Label>
+                {opptjeningFom && opptjeningTom && (
+                  <HStack gap="2">
+                    <BodyShort size="small">
+                      {`${dayjs(opptjeningFom).format(DDMMYYYY_DATE_FORMAT)} - ${dayjs(opptjeningTom).format(
+                        DDMMYYYY_DATE_FORMAT,
+                      )}`}
+                    </BodyShort>
+                    <BodyShort size="small">{finnMånederOgDager(opptjeningFom, opptjeningTom)}</BodyShort>
+                  </HStack>
+                )}
+              </div>
+              <div>
+                <Label size="small">
+                  <FormattedMessage id="ActivityPanel.Activity" />
+                </Label>
+                <BodyShort size="small">
+                  {opptjeningAktivitetTyper.find(oat => oat.kode === aktivitetType)?.navn}
+                </BodyShort>
+              </div>
+            </HStack>
+          </VStack>
+          <ValgtAktivitetSubForm
+            valgtAktivitetstype={aktivitetType}
+            arbeidsgiverReferanse={arbeidsgiverReferanse}
+            arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+            stillingsandel={stillingsandel}
+            naringRegistreringsdato={naringRegistreringsdato}
+            ferdiglignetNæring={ferdiglignetNæring}
+          />
+          {!skalIkkeKunneEditere(harAksjonspunkt, erGodkjent, erEndret) && (
             <RadioGroupPanel
               name="erGodkjent"
               hideLegend
@@ -223,19 +221,15 @@ export const ValgtAktivitetForm = ({
                 },
               ]}
             />
-          </>
-        )}
-        <VerticalSpacer sixteenPx />
-        <TextAreaField
-          name="begrunnelse"
-          label={<FormattedMessage id={finnBegrunnelseLabel(erGodkjent, erEndret, readOnly, harAksjonspunkt)} />}
-          validate={[required, minLength3, maxLength1500, hasValidText]}
-          maxLength={1500}
-          readOnly={readOnly || skalIkkeKunneEditere(harAksjonspunkt, erGodkjent, erEndret)}
-        />
-        {!skalIkkeKunneEditere(harAksjonspunkt, erGodkjent, erEndret) && (
-          <>
-            <VerticalSpacer sixteenPx />
+          )}
+          <TextAreaField
+            name="begrunnelse"
+            label={<FormattedMessage id={finnBegrunnelseLabel(erGodkjent, erEndret, readOnly, harAksjonspunkt)} />}
+            validate={[required, minLength3, maxLength1500, hasValidText]}
+            maxLength={1500}
+            readOnly={readOnly || skalIkkeKunneEditere(harAksjonspunkt, erGodkjent, erEndret)}
+          />
+          {!skalIkkeKunneEditere(harAksjonspunkt, erGodkjent, erEndret) && (
             <HStack gap="4">
               <Button size="small" variant="primary" disabled={!formMethods.formState.isDirty}>
                 <FormattedMessage id="ActivityPanel.Oppdater" />
@@ -244,8 +238,8 @@ export const ValgtAktivitetForm = ({
                 <FormattedMessage id="ActivityPanel.Avbryt" />
               </Button>
             </HStack>
-          </>
-        )}
+          )}
+        </VStack>
       </FaktaGruppe>
     </Form>
   );
