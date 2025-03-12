@@ -66,9 +66,9 @@ export const FaktaBegrunnelseTextField = ({
 
 const getBegrunnelse = (aksjonspunkt?: Aksjonspunkt[] | Aksjonspunkt): string | undefined => {
   if (aksjonspunkt && Array.isArray(aksjonspunkt)) {
-    return aksjonspunkt.length > 0 ? aksjonspunkt[0].begrunnelse : '';
+    return aksjonspunkt[0]?.begrunnelse ?? '';
   }
-  return !!aksjonspunkt && !Array.isArray(aksjonspunkt) ? aksjonspunkt.begrunnelse : '';
+  return !!aksjonspunkt && !Array.isArray(aksjonspunkt) && aksjonspunkt.begrunnelse ? aksjonspunkt.begrunnelse : '';
 };
 
 FaktaBegrunnelseTextField.initialValues = (

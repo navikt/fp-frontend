@@ -55,7 +55,7 @@ export const ÅpentAksjonspunkt: Story = {
       {
         definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
+        begrunnelse: null,
       },
     ] as Aksjonspunkt[],
   },
@@ -69,7 +69,7 @@ export const ÅpentAksjonspunktSvangerskapspenger: Story = {
       {
         definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
+        begrunnelse: null,
       },
     ] as Aksjonspunkt[],
   },
@@ -107,7 +107,7 @@ export const ÅpentAksjonspunktMedOppholdsperiode: Story = {
       {
         definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
+        begrunnelse: null,
       },
     ] as Aksjonspunkt[],
   },
@@ -126,7 +126,7 @@ export const ÅpentAksjonspunktMenUtenAktiviteter: Story = {
       {
         definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
+        begrunnelse: null,
       },
     ] as Aksjonspunkt[],
   },

@@ -95,7 +95,7 @@ export const VisUttaksperiodeMedAksjonspunkt: Story = {
       {
         definisjon: AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
+        begrunnelse: null,
         kanLoses: true,
       },
     ],
@@ -152,7 +152,7 @@ export const VisUtsettelseperiodeMedAksjonspunkt: Story = {
       {
         definisjon: AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
+        begrunnelse: null,
         kanLoses: true,
       },
     ],
@@ -178,7 +178,7 @@ export const VisOverføringsperiodeMedAksjonspunkt: Story = {
       {
         definisjon: AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
+        begrunnelse: null,
         kanLoses: true,
       },
     ],
@@ -205,7 +205,7 @@ export const VisAksjonspunktDerIngenPerioderFinnes: Story = {
       {
         definisjon: AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER_KODE,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
+        begrunnelse: null,
         kanLoses: true,
       },
     ],
@@ -224,7 +224,7 @@ export const VisAksjonspunktDerArbeidsfoholdErUkjentVedGradering: Story = {
       {
         definisjon: AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET_KODE,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
+        begrunnelse: null,
         kanLoses: true,
       },
     ],
@@ -256,7 +256,7 @@ export const VisAksjonspunktDerEnIkkeHarBeregningsgrunnlagVedGradering: Story = 
       {
         definisjon: AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
+        begrunnelse: null,
         kanLoses: true,
       },
     ],
@@ -359,7 +359,7 @@ export const VisUttaksperiodeMedAksjonspunktForFar: Story = {
       {
         definisjon: AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
+        begrunnelse: null,
         kanLoses: true,
       },
     ],

@@ -24,7 +24,7 @@ const defaultAksjonspunkter = [
   {
     definisjon: AksjonspunktKode.FORESLA_VEDTAK,
     status: AksjonspunktStatus.OPPRETTET,
-    begrunnelse: undefined,
+    begrunnelse: null,
   },
 ] as Aksjonspunkt[];
 

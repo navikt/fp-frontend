@@ -53,7 +53,7 @@ export const DekningradApForm = ({
   const formMethods = useForm<FormValues>({
     defaultValues: {
       dekningsgrad: søknad.oppgittFordeling.dekningsgrader.avklartDekningsgrad,
-      begrunnelse: aksjonspunkt.begrunnelse,
+      begrunnelse: aksjonspunkt.begrunnelse ?? '',
     },
   });
 
