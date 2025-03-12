@@ -35,6 +35,7 @@ const personoversikt: Personoversikt = {
     kjønn: KjønnkodeEnum.MANN,
     sivilstand: SivilstandType.SAMBOER,
     fødselsdato: '1989-01-01',
+    dødsdato: null,
     adresser: [adresse1, adresse2],
   },
   annenPart: {
@@ -43,12 +44,14 @@ const personoversikt: Personoversikt = {
     kjønn: KjønnkodeEnum.KVINNE,
     sivilstand: SivilstandType.SAMBOER,
     fødselsdato: '1989-01-01',
+    dødsdato: null,
     adresser: [adresse1, adresse2],
   },
   barn: [
     {
       navn: 'Tutta Utvikler',
       fødselsdato: '2023-01-01',
+      dødsdato: null,
       adresser: [adresse1],
       aktoerId: '3',
       kjønn: KjønnkodeEnum.KVINNE,

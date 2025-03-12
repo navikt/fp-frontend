@@ -4,6 +4,7 @@ import { createIntl } from '@navikt/ft-utils';
 import { render, screen } from '@testing-library/react';
 
 import { DiskresjonskodeType, NavBrukerKjonn } from '@navikt/fp-kodeverk';
+import type { Person } from '@navikt/fp-types';
 
 import { VisittkortLabels } from './VisittkortLabels';
 
@@ -12,11 +13,13 @@ import messages from '../../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 describe('VisittkortSakIndex', () => {
-  const fagsakPerson = {
+  const fagsakPerson: Person = {
     navn: 'Olga Utvikler',
     kjønn: NavBrukerKjonn.KVINNE,
     fødselsdato: '1979-01-01',
-    fødselsnummer: '1234567',
+    dødsdato: null,
+    fødselsnummer: '12345678910',
+    aktørId: '111111',
   };
 
   it('skal vise etikett for dødsdato', async () => {

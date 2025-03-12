@@ -2,7 +2,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import type { FagsakHendelse, FagsakPerson } from '@navikt/fp-types';
+import type { FagsakHendelse, Person } from '@navikt/fp-types';
 
 import { VisittkortPanel } from './components/VisittkortPanel';
 
@@ -12,8 +12,8 @@ const intl = createIntl(messages);
 
 interface Props {
   erMor?: boolean;
-  bruker: FagsakPerson;
-  annenPart?: FagsakPerson;
+  bruker: Person;
+  annenPart?: Person;
   familiehendelse?: FagsakHendelse;
   lenkeTilAnnenPart?: string;
   harVergeIÅpenBehandling?: boolean;

@@ -1,20 +1,11 @@
 import type { BehandlingAppKontekst } from './behandlingAppKontekstTsType';
 import type { Historikkinnslag } from './historikkinnslagTsType';
+import type { Person } from './personTsType';
 import type { Risikoklassifisering } from './risikoklassifiseringTsType';
 
 export type BehandlingOppretting = Readonly<{
   behandlingType: string;
   kanOppretteBehandling: boolean;
-}>;
-
-export type FagsakPerson = Readonly<{
-  navn: string;
-  fødselsnummer: string;
-  kjønn: string;
-  diskresjonskode?: string;
-  fødselsdato: string;
-  dødsdato?: string;
-  aktørId?: string;
 }>;
 
 export type FagsakHendelse = Readonly<{
@@ -52,9 +43,9 @@ export type Fagsak = Readonly<{
   harVergeIÅpenBehandling: boolean;
   sakSkalTilInfotrygd: boolean;
   behandlingTypeKanOpprettes: BehandlingOppretting[];
-  bruker: FagsakPerson;
+  bruker: Person;
   fagsakMarkeringer?: Saksmarkering[];
-  annenPart?: FagsakPerson;
+  annenPart?: Person;
   familiehendelse?: FagsakHendelse;
   annenpartBehandling: AnnenPartBehandling;
   behandlinger: BehandlingAppKontekst[];

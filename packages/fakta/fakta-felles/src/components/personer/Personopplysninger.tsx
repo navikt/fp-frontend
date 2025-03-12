@@ -19,7 +19,7 @@ interface Props {
   harSammeAdresser?: boolean;
   navn?: string;
   sivilstand?: string;
-  dødsdato?: string;
+  dødsdato?: string | null;
   fødselsdato?: string;
   adresser: Personadresse[];
   kjønn?: string;
@@ -92,6 +92,7 @@ export const Personopplysninger = ({
             harSammeAdresser={harSammeAdresser}
             adresser={adresser}
             adresseKodeverk={alleKodeverk[KodeverkType.ADRESSE_TYPE]}
+            erAnnenpart={rolle === 'ANNEN_PART'}
           />
         </VStack>
       </Box>

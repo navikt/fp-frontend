@@ -3,13 +3,11 @@ import { use } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
 import { AksjonspunktKode, AksjonspunktStatus, VilkarType } from '@navikt/fp-kodeverk';
-import { PanelOverstyringProvider } from '@navikt/fp-utils';
 
 import { useBehandlingApi } from '../../../../data/behandlingApi';
-import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
+import { InngangsvilkarOverstyringDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 import { OverstyringPanelDef } from '../../../felles/prosess/OverstyringPanelDef';
 import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandardProsessPanelProps';
-import type { InngangsvilkarPanelInitProps } from '../../../felles/typer/inngangsvilkarPanelInitProps';
 import { BehandlingDataContext } from '../../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [
@@ -19,10 +17,10 @@ const AKSJONSPUNKT_KODER = [
 
 const VILKAR_KODER = [VilkarType.MEDLEMSKAPSVILKARET_FORUTGAENDE];
 
-export const MedlemskapForutgaendeInngangsvilkarInitPanel = (props: InngangsvilkarPanelInitProps) => {
+export const MedlemskapForutgaendeInngangsvilkarInitPanel = () => {
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, VILKAR_KODER);
 
-  const { behandling, rettigheter } = use(BehandlingDataContext);
+  const { behandling } = use(BehandlingDataContext);
 
   const api = useBehandlingApi(behandling);
 
@@ -40,38 +38,24 @@ export const MedlemskapForutgaendeInngangsvilkarInitPanel = (props: Inngangsvilk
   );
 
   return (
-    <InngangsvilkarDefaultInitPanel
-      {...props}
+    <InngangsvilkarOverstyringDefaultInitPanel
       standardPanelProps={standardPanelProps}
-      behandlingVersjon={behandling.versjon}
       vilkarKoder={VILKAR_KODER}
       inngangsvilkarPanelKode="MEDLEMSKAP"
       hentInngangsvilkarPanelTekst=""
-      renderPanel={({ skalVises, erOverstyrt, toggleOverstyring }) => (
-        <>
-          {!harÅpentMedlemskapAksjonspunkt && !isFetching && (
-            <PanelOverstyringProvider
-              overstyringApKode={AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE}
-              kanOverstyreAccess={rettigheter.kanOverstyreAccess}
-              overrideReadOnly={
-                standardPanelProps.isReadOnly ||
-                harMedlemskapsAksjonspunkt ||
-                (props.harInngangsvilkarApentAksjonspunkt && !(standardPanelProps.isAksjonspunktOpen || erOverstyrt))
-              }
-              toggleOverstyring={toggleOverstyring}
-            >
-              {skalVises ? (
-                <OverstyringPanelDef
-                  vilkar={standardPanelProps.vilkar}
-                  vilkarKoder={VILKAR_KODER}
-                  panelTekstKode="Inngangsvilkar.Medlemskapsvilkaret"
-                  medlemskap={medlemskap}
-                />
-              ) : null}
-            </PanelOverstyringProvider>
-          )}
-        </>
-      )}
-    />
+      overstyringApKode={AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE}
+      overrideReadOnly={harMedlemskapsAksjonspunkt}
+    >
+      <>
+        {!harÅpentMedlemskapAksjonspunkt && !isFetching && (
+          <OverstyringPanelDef
+            vilkar={standardPanelProps.vilkar}
+            vilkarKoder={VILKAR_KODER}
+            panelTekstKode="Inngangsvilkar.Medlemskapsvilkaret"
+            medlemskap={medlemskap}
+          />
+        )}
+      </>
+    </InngangsvilkarOverstyringDefaultInitPanel>
   );
 };

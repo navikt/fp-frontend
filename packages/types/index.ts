@@ -83,17 +83,19 @@ export type {
 } from './src/uttakStonadskontoerTsType';
 export type { Vilkar } from './src/vilkarTsType';
 export type { Ytelsefordeling } from './src/ytelsefordelingTsType';
+export type { OmsorgOgRett } from './src/omsorgOgRettTsType';
+export { Verdi } from './src/omsorgOgRettTsType';
 export type { FamilieHendelse, FamilieHendelseSamling, AvklartBarn } from './src/familieHendelseTsType';
 export type {
   Fagsak,
   FagsakHendelse,
-  FagsakPerson,
   Saksnotat,
   AnnenPartBehandling,
   BehandlingOppretting,
   Saksmarkering,
 } from './src/fagsakTsType';
-export type { FagsakEnkel, Person } from './src/fagsakEnkelTsType';
+export type { FagsakEnkel } from './src/fagsakEnkelTsType';
+export type { Person } from './src/personTsType';
 export type { FagsakDataFpTilbake } from './src/fagsakTilbakekrevingTsType';
 export type {
   Medlemskap,
