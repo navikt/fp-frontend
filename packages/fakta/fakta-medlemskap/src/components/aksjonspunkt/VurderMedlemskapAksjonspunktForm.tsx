@@ -9,7 +9,7 @@ import { FaktaBegrunnelseTextField } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, BehandlingType, KodeverkType, VilkarType } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, ManuellBehandlingResultat } from '@navikt/fp-types';
 import type { VurderForutgaendeMedlemskapAp, VurderMedlemskapAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { usePanelDataContext } from '@navikt/fp-utils';
+import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import {
   MedlemskapVurdering,
@@ -56,10 +56,12 @@ export const VurderMedlemskapAksjonspunktForm = ({ submittable, aksjonspunkt, ma
   const { fagsak, behandling, submitCallback, isReadOnly, alleKodeverk } = usePanelDataContext<
     VurderMedlemskapAp | VurderForutgaendeMedlemskapAp
   >();
+
+  const { formData, setFormData } = useFormData<VurderMedlemskapFormValues>();
   const [submitting, setSubmitting] = useState(false);
 
   const formMethods = useForm<VurderMedlemskapFormValues>({
-    defaultValues: createMedlemskapInitialValues(aksjonspunkt, manuellBehandlingResultat),
+    defaultValues: formData ?? createMedlemskapInitialValues(aksjonspunkt, manuellBehandlingResultat),
   });
 
   const begrunnelseVerdi = formMethods.watch('begrunnelse');
@@ -86,7 +88,7 @@ export const VurderMedlemskapAksjonspunktForm = ({ submittable, aksjonspunkt, ma
 
   return (
     <ConditionalWrapper isReadOnly={isReadOnly}>
-      <Form formMethods={formMethods} onSubmit={bekreft}>
+      <Form formMethods={formMethods} onSubmit={bekreft} setDataOnUnmount={setFormData}>
         <VStack gap={isReadOnly ? '2' : '6'}>
           <MedlemskapVurderinger
             erForutgående={erForutgåendeAksjonspunkt}
