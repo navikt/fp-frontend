@@ -39,7 +39,7 @@ const sorterArbeidsforhold = (
 
 const getAksjonspunktBegrunnelse = (aksjonspunkter: Aksjonspunkt[]): string | undefined => {
   const aksjonpunkt = aksjonspunkter.find(ap => ap.definisjon === AksjonspunktKode.FODSELTILRETTELEGGING);
-  return aksjonpunkt ? aksjonpunkt.begrunnelse : undefined;
+  return aksjonpunkt?.begrunnelse ?? undefined;
 };
 
 const getIsBegrunnelseRequired = (isDirty: boolean) => (value?: string) => value !== undefined || isDirty;

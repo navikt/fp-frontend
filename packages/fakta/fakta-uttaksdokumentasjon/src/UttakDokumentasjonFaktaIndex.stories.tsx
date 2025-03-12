@@ -55,7 +55,7 @@ export const AksjonspunktMedUavklartePerioder: Story = {
       {
         definisjon: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
+        begrunnelse: null,
         kanLoses: true,
       },
     ],
@@ -118,7 +118,7 @@ export const AksjonspunktErBekreftetMenBehandlingErÅpen: Story = {
       {
         definisjon: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
         status: AksjonspunktStatus.UTFORT,
-        begrunnelse: undefined,
+        begrunnelse: null,
         kanLoses: true,
       },
     ],

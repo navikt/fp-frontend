@@ -49,7 +49,7 @@ const buildInitialValues = (aksjonspunkter: Aksjonspunkt[]): FormValues => ({
     AksjonspunktKode.VARSEL_REVURDERING_ETTERKONTROLL,
     AksjonspunktKode.VARSEL_REVURDERING_MANUELL,
   ),
-  begrunnelse: aksjonspunkter[0].begrunnelse,
+  begrunnelse: aksjonspunkter[0].begrunnelse ?? '',
   sendVarsel: undefined,
 });
 

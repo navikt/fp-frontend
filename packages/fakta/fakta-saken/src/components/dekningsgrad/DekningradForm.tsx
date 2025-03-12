@@ -46,7 +46,7 @@ export const DekningradForm = ({
 
   const defaultValues = {
     dekningsgrad,
-    begrunnelse: aksjonspunkt?.begrunnelse,
+    begrunnelse: aksjonspunkt?.begrunnelse ?? '',
   };
 
   const formMethods = useForm<FormValues>({
@@ -97,7 +97,7 @@ export const DekningradForm = ({
                 <Label size="small">
                   <FormattedMessage id="DekningsgradForm.BeskrivelseAvEndring" />
                 </Label>
-                <BodyShort size="small">{aksjonspunkt?.begrunnelse}</BodyShort>
+                <BodyShort size="small">{aksjonspunkt.begrunnelse}</BodyShort>
               </VStack>
             </Box>
           </HStack>

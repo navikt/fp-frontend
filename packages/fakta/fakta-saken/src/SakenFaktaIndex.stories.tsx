@@ -82,6 +82,7 @@ export const ApentAksjonspunktForInnhentingAvDokumentasjon: Story = {
       {
         definisjon: AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
         status: AksjonspunktStatus.OPPRETTET,
+        begrunnelse: null,
         kanLoses: true,
       },
     ],
@@ -94,6 +95,7 @@ export const ApentAksjonspunktForInnhentingAvDokumentasjonVedSvp: Story = {
       {
         definisjon: AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
         status: AksjonspunktStatus.OPPRETTET,
+        begrunnelse: null,
         kanLoses: true,
       },
     ],
@@ -109,6 +111,7 @@ export const AksjonspunktErIkkeGodkjentAvBeslutter: Story = {
       {
         definisjon: AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
         status: AksjonspunktStatus.OPPRETTET,
+        begrunnelse: null,
         kanLoses: true,
       },
     ],
@@ -151,6 +154,7 @@ export const HarFåttDekningsgradAksjonspunkt: Story = {
       {
         definisjon: AksjonspunktKode.AVKLAR_DEKNINGSGRAD,
         status: AksjonspunktStatus.OPPRETTET,
+        begrunnelse: null,
         kanLoses: true,
       },
     ],
@@ -189,6 +193,7 @@ export const HarFåttDekningsgradAksjonspunktMedUkjentAndrePart: Story = {
       {
         definisjon: AksjonspunktKode.AVKLAR_DEKNINGSGRAD,
         status: AksjonspunktStatus.OPPRETTET,
+        begrunnelse: null,
         kanLoses: true,
       },
     ],

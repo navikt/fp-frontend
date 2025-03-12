@@ -83,7 +83,7 @@ type FormValues = {
 
 const buildInitialValues = (innsynMottattDato: string, aksjonspunkter: Aksjonspunkt[]): FormValues => ({
   mottattDato: innsynMottattDato,
-  begrunnelse: aksjonspunkter.find(ap => ap.definisjon === AksjonspunktKode.FORESLA_VEDTAK)?.begrunnelse,
+  begrunnelse: aksjonspunkter.find(ap => ap.definisjon === AksjonspunktKode.FORESLA_VEDTAK)?.begrunnelse ?? undefined,
 });
 
 const transformValues = (values: FormValues): ForeslaVedtakAp => ({
@@ -129,9 +129,8 @@ export const InnsynVedtakForm = ({
     [alleDokumenter, innsynDokumenter],
   );
 
-  const apBegrunnelse = aksjonspunkterForPanel.find(
-    ap => ap.definisjon === AksjonspunktKode.VURDER_INNSYN,
-  )?.begrunnelse;
+  const apBegrunnelse =
+    aksjonspunkterForPanel.find(ap => ap.definisjon === AksjonspunktKode.VURDER_INNSYN)?.begrunnelse ?? undefined;
 
   const begrunnelse = formMethods.watch('begrunnelse');
 
