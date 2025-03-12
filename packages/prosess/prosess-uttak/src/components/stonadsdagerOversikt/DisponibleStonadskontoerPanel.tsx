@@ -11,7 +11,7 @@ import type {
   Stonadskonto,
 } from '@navikt/fp-types';
 
-import { lagVisningsNavn } from '../../utils/lagVisningsNavn';
+import { lagVisningsNavn } from '../../utils/lagVisningsNavn.ts';
 import { uttakArbeidTypeTekstCodes } from '../../utils/uttakArbeidTypeCodes';
 import { finnAntallUkerOgDager, StonadsdagerTab } from './StonadsdagerTab';
 
