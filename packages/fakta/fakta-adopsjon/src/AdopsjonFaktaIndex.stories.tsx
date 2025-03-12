@@ -58,7 +58,7 @@ export const AksjonspunktForAdopsjonsvilkåret: Story = {
       {
         definisjon: AksjonspunktKode.ADOPSJONSDOKUMENTAJON,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
+        begrunnelse: null,
         kanLoses: true,
       },
     ],
@@ -74,7 +74,7 @@ export const AksjonspunktForOmSøkerErMannSomAdoptererAlene: Story = {
       {
         definisjon: AksjonspunktKode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
+        begrunnelse: null,
         kanLoses: true,
       },
     ],
@@ -90,7 +90,7 @@ export const AksjonspunktForOmAdopsjonGjelderEktefellesBarn: Story = {
       {
         definisjon: AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
+        begrunnelse: null,
         kanLoses: true,
       },
     ],
@@ -106,7 +106,7 @@ export const IkkeVisBarnetsAnkomstDatoForEngangsstønad: Story = {
       {
         definisjon: AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
+        begrunnelse: null,
         kanLoses: true,
       },
     ],

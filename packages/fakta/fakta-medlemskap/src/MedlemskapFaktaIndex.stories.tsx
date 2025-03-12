@@ -190,7 +190,7 @@ export const Default: Story = {
       {
         definisjon: AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
+        begrunnelse: null,
         kanLoses: true,
       },
     ],
@@ -208,7 +208,7 @@ export const ForutgåendeMedlemskap: Story = {
       {
         definisjon: AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
+        begrunnelse: null,
         kanLoses: true,
       },
     ],
@@ -265,7 +265,7 @@ export const VurderingAvMedlemskapMedlemskapMedEtAvvik: Story = {
       {
         definisjon: AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
+        begrunnelse: null,
         kanLoses: true,
       },
     ],
@@ -338,7 +338,7 @@ export const LegacyVurderingAvLøpendeMedlemskap: Story = {
       {
         definisjon: AksjonspunktKode.AVKLAR_FORTSATT_MEDLEMSKAP,
         status: AksjonspunktStatus.UTFORT,
-        begrunnelse: undefined,
+        begrunnelse: null,
         kanLoses: false,
       },
     ],
@@ -366,7 +366,7 @@ export const LegacyVurdertInngangsvilkårMedlemskap: Story = {
       {
         definisjon: AksjonspunktKode.AVKLAR_OPPHOLDSRETT,
         status: AksjonspunktStatus.UTFORT,
-        begrunnelse: undefined,
+        begrunnelse: null,
         kanLoses: false,
       },
     ],

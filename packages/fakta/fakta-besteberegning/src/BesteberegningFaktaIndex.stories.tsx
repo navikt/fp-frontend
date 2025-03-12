@@ -4,6 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import type { Aksjonspunkt } from '@navikt/fp-types';
 
 import { BesteberegningFaktaIndex } from './BesteberegningFaktaIndex';
 import { beregningsgrunnlag as scenarioBG } from './scenario/BesteberegningScenario';
@@ -26,11 +27,11 @@ const arbeidsgiverOpplysninger = {
   },
 };
 
-const lagAksjonspunkt = (apKode: string, status: string, begrunnelse?: string) => ({
+const lagAksjonspunkt = (apKode: string, status: string, begrunnelse?: string): Aksjonspunkt => ({
   definisjon: apKode,
   status,
   kanLoses: true,
-  begrunnelse,
+  begrunnelse: begrunnelse ?? null,
 });
 
 const meta = {
