@@ -88,12 +88,12 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
         <VStack gap="6">
           {fields.length === 1 && (
             <VStack gap="6">
-              <HStack>
+              <div>
                 <DelOppPeriodeButton
                   display={!readOnly && periodeErMerEnnEnDag(fields[0])}
                   onClick={() => setValgtPeriodeIndex(0)}
                 />
-              </HStack>
+              </div>
               <RadioGroupPanel
                 name={`perioder.${0}.vurdering`}
                 label={<FormattedMessage id="UttakDokumentasjonFaktaDetailForm.Vurdering" />}

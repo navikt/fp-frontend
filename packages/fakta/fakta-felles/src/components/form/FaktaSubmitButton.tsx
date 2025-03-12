@@ -31,17 +31,19 @@ interface Props {
 export const FaktaSubmitButton = ({ isReadOnly, isSubmittable, buttonText, onClick, isSubmitting, isDirty }: Props) => (
   <RawIntlProvider value={intl}>
     {!isReadOnly && (
-      <Button
-        size="small"
-        variant="primary"
-        loading={isSubmitting}
-        disabled={isDisabled(isDirty, isSubmitting, isSubmittable)}
-        onClick={onClick || ariaCheck}
-        type={onClick ? 'button' : 'submit'}
-      >
-        {!!buttonText && buttonText}
-        {!buttonText && <FormattedMessage id="SubmitButton.ConfirmInformation" />}
-      </Button>
+      <div>
+        <Button
+          size="small"
+          variant="primary"
+          loading={isSubmitting}
+          disabled={isDisabled(isDirty, isSubmitting, isSubmittable)}
+          onClick={onClick || ariaCheck}
+          type={onClick ? 'button' : 'submit'}
+        >
+          {!!buttonText && buttonText}
+          {!buttonText && <FormattedMessage id="SubmitButton.ConfirmInformation" />}
+        </Button>
+      </div>
     )}
   </RawIntlProvider>
 );

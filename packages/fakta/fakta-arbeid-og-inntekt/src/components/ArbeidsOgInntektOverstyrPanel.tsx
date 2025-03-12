@@ -119,7 +119,7 @@ export const ArbeidsOgInntektOverstyrPanel = ({
         {erLokaltOverstyrt &&
           harIngenArbeidsforholdSomErManueltLagtTil &&
           !skalToggleVisningAvLeggTilArbeidsforhold && (
-            <HStack>
+            <div>
               <Button
                 size="small"
                 variant="tertiary"
@@ -128,7 +128,7 @@ export const ArbeidsOgInntektOverstyrPanel = ({
               >
                 <FormattedMessage id="ArbeidOgInntektFaktaPanel.LeggTilArbeidsforhold" />
               </Button>
-            </HStack>
+            </div>
           )}
         {skalToggleVisningAvLeggTilArbeidsforhold && (
           <ManueltLagtTilArbeidsforholdForm

@@ -2,7 +2,7 @@ import { type ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
-import { HStack, VStack } from '@navikt/ds-react';
+import { VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
@@ -150,14 +150,12 @@ export const FodselInfoPanel = ({
             />
           )}
           {aksjonspunkterForPanel.length !== 0 && !isReadOnly && (
-            <HStack>
-              <FaktaSubmitButton
-                isSubmittable={submittable}
-                isReadOnly={isReadOnly}
-                isSubmitting={formMethods.formState.isSubmitting}
-                isDirty={formMethods.formState.isDirty}
-              />
-            </HStack>
+            <FaktaSubmitButton
+              isSubmittable={submittable}
+              isReadOnly={isReadOnly}
+              isSubmitting={formMethods.formState.isSubmitting}
+              isDirty={formMethods.formState.isDirty}
+            />
           )}
           {aksjonspunkterForPanel.length === 0 && (
             <FodselSammenligningIndex

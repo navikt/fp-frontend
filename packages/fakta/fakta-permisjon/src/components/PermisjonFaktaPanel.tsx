@@ -138,7 +138,7 @@ export const PermisjonFaktaPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysningerP
             readOnly={isReadOnly}
           />
           {!isReadOnly && (
-            <HStack>
+            <div>
               <Button
                 size="small"
                 variant="primary"
@@ -147,7 +147,7 @@ export const PermisjonFaktaPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysningerP
               >
                 <FormattedMessage id="PermisjonFaktaPanel.Bekreft" />
               </Button>
-            </HStack>
+            </div>
           )}
         </VStack>
       </Form>

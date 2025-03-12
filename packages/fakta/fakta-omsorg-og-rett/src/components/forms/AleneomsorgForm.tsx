@@ -93,14 +93,12 @@ export const AleneomsorgForm = ({ omsorgOgRett, aksjonspunkt, submittable }: Pro
             hasBegrunnelse={true}
             hasVurderingText
           />
-          <div>
-            <FaktaSubmitButton
-              isSubmittable={submittable}
-              isReadOnly={isReadOnlyOrApIsNull}
-              isSubmitting={formMethods.formState.isSubmitting}
-              isDirty={formMethods.formState.isDirty}
-            />
-          </div>
+          <FaktaSubmitButton
+            isSubmittable={submittable}
+            isReadOnly={isReadOnlyOrApIsNull}
+            isSubmitting={formMethods.formState.isSubmitting}
+            isDirty={formMethods.formState.isDirty}
+          />
         </VStack>
       </FaktaGruppe>
     </Form>

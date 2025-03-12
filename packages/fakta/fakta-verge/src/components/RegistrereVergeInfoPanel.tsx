@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
-import { HStack, VStack } from '@navikt/ds-react';
+import { VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
@@ -88,14 +88,12 @@ export const RegistrereVergeInfoPanel = ({ submittable, verge, alleKodeverk }: P
                 isReadOnly={isReadOnly}
                 hasBegrunnelse={!!begrunnelse}
               />
-              <HStack>
-                <FaktaSubmitButton
-                  isSubmittable={submittable && !!valgtVergeType}
-                  isReadOnly={isReadOnly}
-                  isSubmitting={formMethods.formState.isSubmitting}
-                  isDirty={formMethods.formState.isDirty}
-                />
-              </HStack>
+              <FaktaSubmitButton
+                isSubmittable={submittable && !!valgtVergeType}
+                isReadOnly={isReadOnly}
+                isSubmitting={formMethods.formState.isSubmitting}
+                isDirty={formMethods.formState.isDirty}
+              />
             </>
           )}
         </VStack>

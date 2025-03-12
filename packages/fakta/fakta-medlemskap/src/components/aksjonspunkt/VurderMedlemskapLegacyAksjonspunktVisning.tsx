@@ -123,11 +123,9 @@ export const VurderMedlemsskapLegacyAksjonspunktVisning = ({ legacyManuellBehand
   return (
     <Box background="surface-subtle" borderWidth="2" borderRadius="large" borderColor="border-divider" padding="4">
       <VStack gap="4">
-        <HStack>
-          <Heading size="small">
-            <FormattedMessage id="MedlemskapLegacy.TidligereVurdering" />
-          </Heading>
-        </HStack>
+        <Heading size="small">
+          <FormattedMessage id="MedlemskapLegacy.TidligereVurdering" />
+        </Heading>
         {legacyManuellBehandling.perioder.map((p, index) => (
           <>
             <MedlemskapPeriodeVisning

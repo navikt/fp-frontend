@@ -305,14 +305,12 @@ export const UttakFaktaForm = ({
         <VStack gap="4">
           <FaktaBegrunnelseTextField isSubmittable isReadOnly={!erRedigerbart} hasBegrunnelse />
           {erRedigerbart && (
-            <HStack>
-              <FaktaSubmitButton
-                isSubmittable={isSubmittable}
-                isReadOnly={isReadOnly}
-                isSubmitting={formMethods.formState.isSubmitting}
-                isDirty={isDirty || formMethods.formState.isDirty}
-              />
-            </HStack>
+            <FaktaSubmitButton
+              isSubmittable={isSubmittable}
+              isReadOnly={isReadOnly}
+              isSubmitting={formMethods.formState.isSubmitting}
+              isDirty={isDirty || formMethods.formState.isDirty}
+            />
           )}
         </VStack>
       </Form>

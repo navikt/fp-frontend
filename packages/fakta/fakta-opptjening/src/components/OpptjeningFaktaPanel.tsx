@@ -1,7 +1,7 @@
 import { type ReactElement, useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, Button, HStack, Label, VStack } from '@navikt/ds-react';
+import { BodyShort, Button, Label, VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML, DateLabel } from '@navikt/ft-ui-komponenter';
 import { addDaysToDate, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
@@ -236,7 +236,7 @@ export const OpptjeningFaktaPanel = ({
         />
       )}
       {harAksjonspunkt && filtrerteOgSorterteOpptjeningsaktiviteter.length > 0 && (
-        <HStack>
+        <div>
           <Button
             size="small"
             variant="primary"
@@ -247,7 +247,7 @@ export const OpptjeningFaktaPanel = ({
           >
             <FormattedMessage id="OpptjeningFaktaForm.Confirm" />
           </Button>
-        </HStack>
+        </div>
       )}
     </VStack>
   );

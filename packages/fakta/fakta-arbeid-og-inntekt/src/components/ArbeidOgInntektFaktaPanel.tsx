@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { Alert, Button, HStack, Table, VStack } from '@navikt/ds-react';
+import { Alert, Button, Table, VStack } from '@navikt/ds-react';
 
 import {
   AksjonspunktKode,
@@ -302,7 +302,7 @@ export const ArbeidOgInntektFaktaPanel = ({
         </div>
       )}
       {skalViseBekrefteKnapp && (
-        <HStack>
+        <div>
           <Button
             size="small"
             variant="primary"
@@ -313,7 +313,7 @@ export const ArbeidOgInntektFaktaPanel = ({
           >
             <FormattedMessage id="ArbeidOgInntektFaktaPanel.Bekreft" />
           </Button>
-        </HStack>
+        </div>
       )}
       {skalViseÅpneForNyVurderingKnapp && (
         <VStack gap="4">
@@ -322,7 +322,7 @@ export const ArbeidOgInntektFaktaPanel = ({
               <FormattedMessage id="ArbeidOgInntektFaktaPanel.ApneForNyRevurderingForklaring" />
             </Alert>
           </div>
-          <HStack>
+          <div>
             <Button
               size="small"
               variant="secondary"
@@ -333,7 +333,7 @@ export const ArbeidOgInntektFaktaPanel = ({
             >
               <FormattedMessage id="ArbeidOgInntektFaktaPanel.ApneForNyVurdering" />
             </Button>
-          </HStack>
+          </div>
         </VStack>
       )}
     </VStack>

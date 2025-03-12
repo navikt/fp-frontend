@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { PlusCircleIcon } from '@navikt/aksel-icons';
-import { Button, Heading, HStack, Table, VStack } from '@navikt/ds-react';
+import { Button, Heading, Table, VStack } from '@navikt/ds-react';
 import { calcDaysAndWeeks, dateFormat } from '@navikt/ft-utils';
 import classnames from 'classnames/bind';
 import dayjs from 'dayjs';
@@ -182,7 +182,7 @@ export const UttakFaktaTable = ({
       {erRedigerbart && (
         <>
           {!visNyPeriode && (
-            <HStack>
+            <div>
               <Button
                 size="small"
                 variant="tertiary"
@@ -195,7 +195,7 @@ export const UttakFaktaTable = ({
               >
                 <FormattedMessage id="UttakFaktaForm.LeggTilPeriode" />
               </Button>
-            </HStack>
+            </div>
           )}
           {visNyPeriode && (
             <VStack gap="4" className={styles.panel}>

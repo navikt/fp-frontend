@@ -167,7 +167,7 @@ export const ValgtAktivitetForm = ({
                 />
               </HStack>
             </HStack>
-            <HStack>
+            <HStack gap="1">
               <div className={styles.colMargin}>
                 <Label size="small">
                   <FormattedMessage id="ActivityPanel.Period" />

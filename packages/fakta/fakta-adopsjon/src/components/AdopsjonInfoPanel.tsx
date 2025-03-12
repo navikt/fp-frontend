@@ -182,14 +182,12 @@ export const AdopsjonInfoPanel = ({ submittable, isForeldrepengerFagsak, soknad,
                 isReadOnly={isReadOnly}
                 hasBegrunnelse={!!begrunnelse}
               />
-              <HStack>
-                <FaktaSubmitButton
-                  isSubmittable={submittable}
-                  isReadOnly={isReadOnly}
-                  isSubmitting={formMethods.formState.isSubmitting}
-                  isDirty={formMethods.formState.isDirty}
-                />
-              </HStack>
+              <FaktaSubmitButton
+                isSubmittable={submittable}
+                isReadOnly={isReadOnly}
+                isSubmitting={formMethods.formState.isSubmitting}
+                isDirty={formMethods.formState.isDirty}
+              />
             </>
           )}
         </VStack>
