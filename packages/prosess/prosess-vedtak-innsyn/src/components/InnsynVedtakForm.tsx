@@ -89,6 +89,7 @@ const buildInitialValues = (innsynMottattDato: string, aksjonspunkter: Aksjonspu
 const transformValues = (values: FormValues): ForeslaVedtakAp => ({
   kode: AksjonspunktKode.FORESLA_VEDTAK,
   ...values,
+  begrunnelse: values.begrunnelse === '' ? undefined : values.begrunnelse,
 });
 
 interface Props {
@@ -129,7 +130,7 @@ export const InnsynVedtakForm = ({
     [alleDokumenter, innsynDokumenter],
   );
 
-  const apBegrunnelse =
+  const apVurderInnsynBegrunnelse =
     aksjonspunkterForPanel.find(ap => ap.definisjon === AksjonspunktKode.VURDER_INNSYN)?.begrunnelse ?? undefined;
 
   const begrunnelse = formMethods.watch('begrunnelse');
@@ -157,7 +158,7 @@ export const InnsynVedtakForm = ({
         <FormattedMessage id="InnsynVedtakForm.Vurdering" />
       </Label>
       <BodyShort size="small" className={styles.wordwrap}>
-        {decodeHtmlEntity(apBegrunnelse)}
+        {decodeHtmlEntity(apVurderInnsynBegrunnelse)}
       </BodyShort>
       <VerticalSpacer twentyPx />
       {innsynResultatType !== InnsynResultatType.INNVILGET && (
