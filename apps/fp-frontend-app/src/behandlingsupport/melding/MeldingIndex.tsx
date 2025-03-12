@@ -30,8 +30,8 @@ interface Props {
   hentOgSettBehandling: () => void;
 }
 
-const finnFristFraBehandling = (behandling : BehandlingAppKontekst) =>
-  behandling.behandlingPaaVent ? behandling.fristBehandlingPåVent || behandling.fristBehandlingPaaVent : undefined;
+const finnFristFraBehandling = (behandling: BehandlingAppKontekst) =>
+  behandling.behandlingPåVent ? behandling.fristBehandlingPåVent || behandling.fristBehandlingPaaVent : undefined;
 
 /**
  * MeldingIndex

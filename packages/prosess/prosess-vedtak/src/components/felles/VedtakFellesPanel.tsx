@@ -87,7 +87,7 @@ export const VedtakFellesPanel = ({
     formState: { isSubmitting },
   } = useFormContext();
 
-  const { behandlingsresultat, behandlingPaaVent, sprakkode, status, behandlingHenlagt, uuid, taskStatus } = behandling;
+  const { behandlingsresultat, behandlingPåVent, språkkode, status, behandlingHenlagt, uuid, taskStatus } = behandling;
 
   if (!behandlingsresultat) {
     throw new Error(`behandlingsresultat finnes ikke på behandling ${uuid}`);
@@ -213,7 +213,7 @@ export const VedtakFellesPanel = ({
       {skalBrukeManueltBrev && (
         <ManueltVedtaksbrevPanel
           isReadOnly={isReadOnly}
-          språkKode={sprakkode}
+          språkKode={språkkode}
           forhåndsvisOverstyrtBrev={previewOverstyrtBrev}
           skalViseLink={skalViseLink}
         />
@@ -228,7 +228,7 @@ export const VedtakFellesPanel = ({
                   <Button
                     variant="primary"
                     size="small"
-                    disabled={behandlingPaaVent || isSubmitting}
+                    disabled={behandlingPåVent || isSubmitting}
                     loading={isSubmitting}
                   >
                     <FormattedMessage id={finnKnappetekstkode(aksjonspunkt, skalBrukeManueltBrev)} />

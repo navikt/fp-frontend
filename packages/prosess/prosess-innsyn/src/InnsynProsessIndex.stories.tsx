@@ -17,7 +17,7 @@ import { InnsynProsessIndex } from './InnsynProsessIndex';
 const defaultBehandling = {
   uuid: '1',
   versjon: 1,
-  behandlingPaaVent: false,
+  behandlingPåVent: false,
 } as Behandling;
 
 const defaultAksjonspunkt: Aksjonspunkt = {

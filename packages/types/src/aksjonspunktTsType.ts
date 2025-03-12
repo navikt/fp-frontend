@@ -4,11 +4,11 @@ export type Aksjonspunkt = Readonly<{
   begrunnelse: string | null;
   vilkarType?: string;
   toTrinnsBehandling?: boolean;
-  toTrinnsBehandlingGodkjent?: boolean;
-  vurderPaNyttArsaker?: string[];
-  besluttersBegrunnelse?: string;
+  toTrinnsBehandlingGodkjent?: boolean | null;
+  vurderPaNyttArsaker?: string[] | null;
+  besluttersBegrunnelse?: string | null;
   aksjonspunktType?: string;
   kanLoses: boolean;
-  endretAv?: string;
-  endretTidspunkt?: string;
+  endretAv?: string | null;
+  endretTidspunkt?: string | null;
 }>;

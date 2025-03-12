@@ -196,7 +196,7 @@ export const SimuleringPanel = ({
               fagsak={fagsak}
               previewCallback={previewFptilbakeCallback}
               readOnly={isReadOnly}
-              sprakkode={behandling.sprakkode}
+              sprakkode={behandling.språkkode}
             />
             <EtterbetalingSøkerForm
               readOnly={isReadOnly}

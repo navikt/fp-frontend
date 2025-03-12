@@ -126,7 +126,7 @@ export const Messages = ({
     [],
   );
 
-  if (!behandling.sprakkode) {
+  if (!behandling.språkkode) {
     return null;
   }
 
@@ -139,7 +139,7 @@ export const Messages = ({
     e.preventDefault();
   };
 
-  const language = getLanguageFromSprakkode(behandling.sprakkode);
+  const language = getLanguageFromSprakkode(behandling.språkkode);
 
   const erVarselOmRevurdering = brevmalkode === DokumentMalType.VARSEL_OM_REVURDERING;
 

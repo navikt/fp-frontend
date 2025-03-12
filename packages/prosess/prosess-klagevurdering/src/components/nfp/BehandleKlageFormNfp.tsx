@@ -123,7 +123,7 @@ export const BehandleKlageFormNfp = ({
           text={intl.formatMessage({ id: 'BehandleKlageFormNfp.BegrunnelseForKlage' })}
         />
         <VerticalSpacer sixteenPx />
-        <FritekstBrevTextField sprakkode={behandling.sprakkode} readOnly={isReadOnly} />
+        <FritekstBrevTextField sprakkode={behandling.språkkode} readOnly={isReadOnly} />
         <VerticalSpacer sixteenPx />
         <HStack justify="space-between">
           <HStack gap="4">

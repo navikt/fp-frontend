@@ -40,11 +40,11 @@ const defaultBehandling = {
   versjon: 1,
   type: BehandlingType.FORSTEGANGSSOKNAD,
   status: BehandlingStatus.BEHANDLING_UTREDES,
-  sprakkode: 'NO',
+  språkkode: 'NO',
   behandlingsresultat: {
     type: BehandlingResultatType.INNVILGET,
   },
-  behandlingPaaVent: false,
+  behandlingPåVent: false,
   behandlingHenlagt: false,
   aksjonspunkt: defaultAksjonspunkter,
   behandlingÅrsaker: [

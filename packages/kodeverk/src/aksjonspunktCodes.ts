@@ -151,15 +151,15 @@ type Aksjonspunkt = Readonly<{
   definisjon: string;
   status: string;
   begrunnelse: string | null;
-  vilkarType?: string;
+  vilkarType?: string | null;
   toTrinnsBehandling?: boolean;
-  toTrinnsBehandlingGodkjent?: boolean;
-  vurderPaNyttArsaker?: string[];
-  besluttersBegrunnelse?: string;
+  toTrinnsBehandlingGodkjent?: boolean | null;
+  vurderPaNyttArsaker?: string[] | null;
+  besluttersBegrunnelse?: string | null;
   aksjonspunktType?: string;
   kanLoses: boolean;
-  endretAv?: string;
-  endretTidspunkt?: string;
+  endretAv?: string | null;
+  endretTidspunkt?: string | null;
 }>;
 
 export const hasAksjonspunkt = (aksjonspunktKode: string, aksjonspunkter: Aksjonspunkt[]): boolean =>

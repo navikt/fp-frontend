@@ -167,8 +167,8 @@ const buildInitialValues = (
 ): FormValues => ({
   beregningErManueltFastsatt,
   aksjonspunktKoder: aksjonspunkter.filter(ap => ap.kanLoses).map(ap => ap.definisjon),
-  overskrift: decodeHtmlEntity(behandling.behandlingsresultat?.overskrift),
-  brødtekst: decodeHtmlEntity(behandling.behandlingsresultat?.fritekstbrev),
+  overskrift: decodeHtmlEntity(behandling.behandlingsresultat?.overskrift ?? undefined),
+  brødtekst: decodeHtmlEntity(behandling.behandlingsresultat?.fritekstbrev ?? undefined),
   begrunnelse: finnBegrunnelse(behandling, beregningErManueltFastsatt),
 });
 
@@ -223,7 +223,7 @@ export const VedtakForm = ({
 
   const { trigger } = formMethods;
 
-  const { behandlingsresultat, sprakkode } = behandling;
+  const { behandlingsresultat, språkkode } = behandling;
 
   const erBehandlingEtterKlage = useMemo(
     () => erÅrsakTypeBehandlingEtterKlage(behandling.behandlingÅrsaker),
@@ -275,7 +275,7 @@ export const VedtakForm = ({
                 isReadOnly={isReadOnly}
                 skalBrukeOverstyrendeFritekstBrev={skalBrukeOverstyrendeFritekstBrev}
                 ytelseTypeKode={ytelseTypeKode}
-                språkKode={sprakkode}
+                språkKode={språkkode}
                 beregningsresultat={beregningsresultat}
                 beregningErManueltFastsatt={beregningErManueltFastsatt}
               />
@@ -286,7 +286,7 @@ export const VedtakForm = ({
             <VedtakAvslagPanel
               behandlingsresultat={behandlingsresultat}
               isReadOnly={isReadOnly}
-              språkKode={sprakkode}
+              språkKode={språkkode}
               alleKodeverk={alleKodeverk}
               vilkar={vilkar}
               beregningErManueltFastsatt={beregningErManueltFastsatt}
