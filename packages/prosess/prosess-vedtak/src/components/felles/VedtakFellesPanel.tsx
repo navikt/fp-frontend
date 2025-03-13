@@ -16,10 +16,11 @@ import {
   KonsekvensForYtelsen,
 } from '@navikt/fp-kodeverk';
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
-import type { Aksjonspunkt, Behandling, Behandlingsresultat } from '@navikt/fp-types';
+import type { Aksjonspunkt, Behandling, Behandlingsresultat, Oppgave } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { ManueltVedtaksbrevPanel } from './ManueltVedtaksbrevPanel';
+import { OppgaveTabell } from './OppgaveTabell.tsx';
 import { VedtakHelpTextPanel } from './VedtakHelpTextPanel';
 
 import styles from './vedtakFellesPanel.module.css';
@@ -66,6 +67,7 @@ interface Props {
   previewOverstyrtBrev: (e: MouseEvent) => void;
   tilbakekrevingtekst?: string;
   vedtakstatusTekst?: string;
+  oppgaver?: Oppgave[];
 }
 
 export const VedtakFellesPanel = ({
@@ -75,6 +77,7 @@ export const VedtakFellesPanel = ({
   tilbakekrevingtekst,
   erBehandlingEtterKlage,
   vedtakstatusTekst,
+  oppgaver,
 }: Props) => {
   const intl = useIntl();
 
@@ -208,6 +211,8 @@ export const VedtakFellesPanel = ({
         </FlexRow>
       </FlexContainer>
       <VedtakHelpTextPanel aksjonspunkter={aksjonspunkt} isReadOnly={isReadOnly} />
+      <VerticalSpacer twentyPx />
+      {oppgaver && oppgaver.length > 0 && <OppgaveTabell oppgaver={oppgaver} />}
       <VerticalSpacer twentyPx />
       {renderPanel(skalBrukeManueltBrev, erInnvilget, erAvslatt, erOpphor)}
       {skalBrukeManueltBrev && (

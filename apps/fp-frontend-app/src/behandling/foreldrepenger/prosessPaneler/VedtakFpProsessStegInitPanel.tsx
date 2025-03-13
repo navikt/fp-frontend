@@ -76,8 +76,10 @@ export const VedtakFpProsessStegInitPanel = () => {
   const { data: beregningDagytelseOriginalBehandling, isFetching: isBdobFetching } = useQuery(
     api.beregningDagytelseOriginalBehandlingOptions(behandling),
   );
+  const { data: oppgaver, isFetching: isOFetching } = useQuery(api.oppgaverOptions(behandling));
 
-  const isNotFetching = !isBdFetching && !isTvFetching && !isBgFetching && !isSrFetching && !isBdobFetching;
+  const isNotFetching =
+    !isBdFetching && !isTvFetching && !isBgFetching && !isSrFetching && !isBdobFetching && !isOFetching;
 
   const { mutate: forhandsvis } = useMutation({
     mutationFn: (values: ForhåndsvisMeldingParams) =>
@@ -132,6 +134,7 @@ export const VedtakFpProsessStegInitPanel = () => {
             ytelseTypeKode={FagsakYtelseType.FORELDREPENGER}
             previewCallback={forhandsvis}
             vilkar={vilkår}
+            oppgaver={oppgaver}
           />
         ) : (
           <LoadingPanel />

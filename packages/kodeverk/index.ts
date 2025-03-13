@@ -55,6 +55,7 @@ export { NaringsvirksomhetType } from './src/naringsvirksomhetType';
 export { NavBrukerKjonn } from './src/navBrukerKjonn';
 export { OppholdArsakType } from './src/oppholdArsakType';
 export { AdresseType } from './src/adresseType';
+export { OppgaveType } from './src/oppgaveType';
 export { OpplysningsKilde } from './src/opplysningsKilde';
 export { OpptjeningAktivitetType } from './src/opptjeningAktivitetType';
 export { Organisasjonstype } from './src/organisasjonstype';

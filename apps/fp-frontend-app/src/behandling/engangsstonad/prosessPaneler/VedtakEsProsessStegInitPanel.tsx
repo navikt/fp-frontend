@@ -74,8 +74,9 @@ export const VedtakEsProsessStegInitPanel = () => {
   );
   const { data: simuleringResultat, isFetching: isSrFetching } = useQuery(api.simuleringResultatOptions(behandling));
   const { data: tilbakekrevingValg, isFetching: isTvFetching } = useQuery(api.tilbakekrevingValgOptions(behandling));
+  const { data: oppgaver, isFetching: isOFetching } = useQuery(api.oppgaverOptions(behandling));
 
-  const isNotFetching = !isBogFetching && !isBeFetching && !isSrFetching && !isTvFetching;
+  const isNotFetching = !isBogFetching && !isBeFetching && !isSrFetching && !isTvFetching  && !isOFetching;
 
   const { mutate: forhåndsvis } = useMutation({
     mutationFn: (values: ForhåndsvisMeldingParams) =>
@@ -131,6 +132,7 @@ export const VedtakEsProsessStegInitPanel = () => {
             simuleringResultat={simuleringResultat}
             tilbakekrevingvalg={tilbakekrevingValg}
             vilkar={vilkår}
+            oppgaver={oppgaver}
           />
         ) : (
           <LoadingPanel />

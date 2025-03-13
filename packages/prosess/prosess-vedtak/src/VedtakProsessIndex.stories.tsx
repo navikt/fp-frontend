@@ -12,6 +12,7 @@ import {
   BehandlingType,
   FagsakYtelseType,
   KonsekvensForYtelsen,
+  OppgaveType,
   VilkarType,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
@@ -247,6 +248,53 @@ export const TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = {
         },
       ],
     } as Beregningsgrunnlag,
+    isReadOnly: false,
+  },
+};
+
+export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = {
+  args: {
+    behandling: {
+      ...defaultBehandling,
+      aksjonspunkt: [
+        ...defaultAksjonspunkter,
+        {
+          definisjon: AksjonspunktKode.VURDERE_ANNEN_YTELSE,
+          status: AksjonspunktStatus.OPPRETTET,
+          begrunnelse: 'Dette er en begrunnelse',
+          kanLoses: false,
+          toTrinnsBehandling: true,
+        },
+        {
+          definisjon: AksjonspunktKode.VURDERE_DOKUMENT,
+          status: AksjonspunktStatus.OPPRETTET,
+          begrunnelse: 'Dette er en begrunnelse',
+          kanLoses: false,
+        },
+      ],
+    },
+    oppgaver: [
+      {
+        oppgavetype: OppgaveType.VUR_KONSEKVENS,
+        beskrivelse: 'Se sto mottatt 24.02.25',
+      },
+      {
+        oppgavetype: OppgaveType.VUR_KONSEKVENS,
+        beskrivelse:
+          'Fullmektig tar kontakt. Ber om fristutsettelse 4 uker, ettersom bruker først mottok brevet i dag. ' +
+          'Jeg har utsatt 14 dager, men han ønsker ytterligere 2 uker utover det, altså 28.09.24. ' +
+          'Kan dere gi tilbakemelding på dette?',
+      },
+      {
+        oppgavetype: OppgaveType.VUR_DOKUMENT,
+        beskrivelse: 'Bekreftelse fra arbeidsgiver',
+      },
+      {
+        oppgavetype: OppgaveType.VUR_DOKUMENT,
+        beskrivelse: 'Søknad om foreldrepenger ved fødsel',
+      },
+    ],
+    ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
     isReadOnly: false,
   },
 };
