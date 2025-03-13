@@ -7,9 +7,17 @@ import Paragraph from '@editorjs/paragraph';
 import edjsHTML from 'editorjs-html';
 import debounce from 'lodash.debounce';
 
+import { DokumentMalType } from '@navikt/fp-kodeverk';
+
+import type { ForhandsvisData } from '../forstegang/VedtakForm';
 import { erRedigertHtmlGyldig, utledRedigerbartInnhold } from './redigeringsUtils';
 
-export const useEditorJs = (editorHolderId: string, htmlMal: string) => {
+export const useEditorJs = (
+  editorHolderId: string,
+  htmlMal: string,
+  forhåndsvisBrev: (data: ForhandsvisData) => void,
+  lagreManueltBrev: (html: string) => Promise<void>,
+) => {
   const ref = useRef<EditorJS>(null);
   const refInitialRender = useRef<boolean>(true);
 
@@ -32,9 +40,7 @@ export const useEditorJs = (editorHolderId: string, htmlMal: string) => {
           const lagreWrapper = async () => {
             const innhold = await editor.saver.save();
             const html = edjsHTML().parse(innhold);
-
-            console.log(html);
-            // submit(html);  // FIXME Lagre til server
+            lagreManueltBrev(html);
           };
 
           //Forhindrer at lagring blir gjort ved initialisering
@@ -71,8 +77,7 @@ export const useEditorJs = (editorHolderId: string, htmlMal: string) => {
       if (ref.current) {
         const innhold = await ref.current.save();
         const html = edjsHTML().parse(innhold);
-        console.log(html);
-        // submit(html);  // FIXME Lagre til server
+        lagreManueltBrev(html);
       } else {
         throw new Error('Editor er ikke initialisert');
       }
@@ -89,7 +94,22 @@ export const useEditorJs = (editorHolderId: string, htmlMal: string) => {
     }
   };
 
-  return { tilbakestillEndringer, lagreEndringer, validerEndringer };
+  const forhåndsvis = async () => {
+    if (ref.current) {
+      const innhold = await ref.current.save();
+      const html = edjsHTML().parse(innhold);
+      forhåndsvisBrev({
+        automatiskVedtaksbrev: true,
+        dokumentMal: DokumentMalType.FRITEKST_HTML,
+        gjelderVedtak: true,
+        fritekst: html,
+      });
+    } else {
+      throw new Error('Editor er ikke initialisert');
+    }
+  };
+
+  return { tilbakestillEndringer, lagreEndringer, validerEndringer, forhåndsvis };
 };
 
 const getTimeoutValue = () => (import.meta.env.MODE === 'test' ? 0 : 5000);

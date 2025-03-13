@@ -35,24 +35,19 @@
   "VedtakForm.Revurdering.Aarsak": "Årsak til revurdering",
   "VedtakForm.Revurdering.Opphoerer": "Ytelsen opphører f.o.m. {dato}",
   "VedtakForm.ManuellOverstyring": "Overstyr automatisk brev",
-  "VedtakForm.Overskrift": "Overskrift",
-  "VedtakForm.Innhold": "Innhold i brev til søker",
   "VedtakForm.SvpFritektsBrevModal.Ok": "Ok",
   "VedtakForm.SvpFritektsBrevModal.IngenAutomatiskVedtaksbrev": "I denne behandlingen er det ikke automatisk vedtaksbrev. Du må velge 'Overstyr automatisk brev' og skrive fritekstbrev.",
   "VedtakForm.SvpFritektsBrevModal.IngenAutomatiskVedtaksbrevImage": "Ingen automatisk vedtaksbrev.",
   "VedtakForm.SvpFritektsBrevModal.ModalDescription": "Informasjonsboks om ingen automatisk vedtaksbrev. Fritekstbrev er nødvendig.",
 
   "VedtakFellesPanel.RedigerVedtaksbrev": "Rediger vedtaksbrev",
+  "VedtakFellesPanel.KanRedigeres": "Innholdet fra det automatiske brevet kan nå redigeres",
+  "VedtakFellesPanel.RedigerBrevOverskrift": "Rediger brev til søker",
   "VedtakFellesPanel.AutomatiskVedtaksbrev": "Automatisk vedtaksbrev",
   "VedtakFellesPanel.UtkastVedtaksbrev": "Utkast vedtaksbrev",
   "VedtakFellesPanel.ForkastManueltBrev": "Forkast manuelt brev",
-  "VedtakFellesPanel.Forklaring": "Tekst fra det automatisk genererte brevet kan kopieres og limes inn i det manuelle brevet",
   "VedtakFellesPanel.Forkast": "Dersom du forkaster det manuelle brevet, vil det erstattes av det automatisk genererte brevet",
   "VedtakFellesPanel.Ok": "Forkast manuelt brev",
-
-  "FritekstBrevPanel.Endret": "Endret av saksbehandler",
-  "FritekstBrevPanel.ManueltVedtaksbrev": "Manuelt vedtaksbrev",
-  "FritekstBrevPanel.ForhandsvisManueltVedtaksbrev": "Forhåndsvis manuelt brev",
 
   "VedtakHelpTextPanel.Vurder": "Vurder følgende før du sender til godkjenning:",
 

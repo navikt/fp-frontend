@@ -2,7 +2,6 @@ import { type ReactElement } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Label } from '@navikt/ds-react';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { getKodeverknavnFn, KodeverkType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, Behandlingsresultat, Vilkar } from '@navikt/fp-types';
@@ -61,7 +60,6 @@ export const VedtakAvslagPanel = ({
         <div>
           <Label size="small">{intl.formatMessage({ id: 'VedtakForm.ArsakTilAvslag' })}</Label>
           <BodyShort size="small">{getAvslagArsak(vilkar, getKodeverknavn, behandlingsresultat)}</BodyShort>
-          <VerticalSpacer sixteenPx />
         </div>
       )}
       {!skalBrukeOverstyrendeFritekstBrev && (

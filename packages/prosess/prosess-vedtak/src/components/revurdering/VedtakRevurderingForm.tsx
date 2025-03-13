@@ -1,9 +1,9 @@
-import React, { useMemo } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { type IntlShape, useIntl } from 'react-intl';
 
 import { Form } from '@navikt/ft-form-hooks';
-import { DDMMYYYY_DATE_FORMAT, decodeHtmlEntity } from '@navikt/ft-utils';
+import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import moment from 'moment';
 
 import {
@@ -23,6 +23,7 @@ import type {
   Behandling,
   BeregningsresultatDagytelse,
   BeregningsresultatEs,
+  GenererHtmlDokument,
   Oppgave,
   SimuleringResultat,
   TilbakekrevingValg,
@@ -64,29 +65,19 @@ type ForhandsvisData = {
 };
 
 const hentForhåndsvisManueltBrevCallback =
-  (
-    skalOverstyre: boolean,
-    forhåndsvisCallback: (data: ForhandsvisData) => void,
-    overskrift?: string,
-    brodtekst?: string,
-    begrunnelse?: string,
-  ) =>
+  (forhåndsvisCallback: (data: ForhandsvisData) => void, begrunnelse?: string) =>
   (e: React.MouseEvent): void => {
     e.preventDefault();
 
-    const erFeltUtfylt = skalOverstyre ? !!brodtekst && !!overskrift : !!begrunnelse;
+    const data = {
+      fritekst: begrunnelse,
+      dokumentMal: undefined,
+      tittel: undefined,
+      gjelderVedtak: true,
+      automatiskVedtaksbrev: true,
+    };
 
-    if (!skalOverstyre || erFeltUtfylt) {
-      const data = {
-        fritekst: skalOverstyre ? brodtekst : begrunnelse,
-        dokumentMal: skalOverstyre ? DokumentMalType.FRITEKST : undefined,
-        tittel: skalOverstyre ? overskrift : undefined,
-        gjelderVedtak: true,
-        automatiskVedtaksbrev: !skalOverstyre ? true : undefined,
-      };
-
-      forhåndsvisCallback(data);
-    }
+    forhåndsvisCallback(data);
   };
 
 const erÅrsakTypeBehandlingEtterKlage = (behandlingArsakTyper: Behandling['behandlingÅrsaker'] = []): boolean =>
@@ -201,40 +192,34 @@ const finnInvilgetRevurderingTekst = (
   return `${konsekvens}${konsekvens !== '' ? tilbakekrevingText : '. '}`;
 };
 
-const transformValues = (values: FormValues): RevurderingVedtakAksjonspunkter[] =>
-  values.aksjonspunktKoder.map(apCode => ({
-    kode: validerApKodeOgHentApEnum(
-      apCode,
-      AksjonspunktKode.FORESLA_VEDTAK,
-      AksjonspunktKode.FORESLA_VEDTAK_MANUELT,
-      AksjonspunktKode.VURDERE_ANNEN_YTELSE,
-      AksjonspunktKode.VURDERE_DOKUMENT,
-      AksjonspunktKode.VURDERE_INNTEKTSMELDING_KLAGE,
-      AksjonspunktKode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST,
-      AksjonspunktKode.KONTROLL_AV_MAUNELT_OPPRETTET_REVURDERINGSBEHANDLING,
-    ),
-    begrunnelse: values.begrunnelse,
-    fritekstBrev: values.brødtekst,
-    skalBrukeOverstyrendeFritekstBrev: !!values.brødtekst,
-    overskrift: values.overskrift,
-  }));
-
-const buildInitialValues = (aksjonspunkter: Aksjonspunkt[], behandling: Behandling): FormValues => ({
-  aksjonspunktKoder: aksjonspunkter.filter(ap => ap.kanLoses).map(ap => ap.definisjon),
-  overskrift: decodeHtmlEntity(behandling.behandlingsresultat?.overskrift),
-  brødtekst: decodeHtmlEntity(behandling.behandlingsresultat?.fritekstbrev),
-});
+const transformValues = (
+  values: FormValues,
+  aksjonspunkter: Aksjonspunkt[],
+  harOverstyrtVedtaksbrev: boolean,
+): RevurderingVedtakAksjonspunkter[] =>
+  aksjonspunkter
+    .filter(ap => ap.kanLoses)
+    .map(ap => ({
+      kode: validerApKodeOgHentApEnum(
+        ap.definisjon,
+        AksjonspunktKode.FORESLA_VEDTAK,
+        AksjonspunktKode.FORESLA_VEDTAK_MANUELT,
+        AksjonspunktKode.VURDERE_ANNEN_YTELSE,
+        AksjonspunktKode.VURDERE_DOKUMENT,
+        AksjonspunktKode.VURDERE_INNTEKTSMELDING_KLAGE,
+        AksjonspunktKode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST,
+        AksjonspunktKode.KONTROLL_AV_MAUNELT_OPPRETTET_REVURDERINGSBEHANDLING,
+      ),
+      begrunnelse: values.begrunnelse,
+      skalBrukeOverstyrendeFritekstBrev: harOverstyrtVedtaksbrev,
+    }));
 
 interface FormValues {
-  aksjonspunktKoder: string[];
   begrunnelse?: string;
-  brødtekst?: string;
-  overskrift?: string;
 }
 
 interface Props {
   previewCallback: (data: ForhandsvisData) => void;
-  ytelseTypeKode: string;
   beregningsresultat?: BeregningsresultatDagytelse | BeregningsresultatEs;
   tilbakekrevingvalg?: TilbakekrevingValg;
   simuleringResultat?: SimuleringResultat;
@@ -242,11 +227,13 @@ interface Props {
   beregningErManueltFastsatt: boolean;
   beregningsresultatOriginalBehandling?: BeregningsresultatDagytelse | BeregningsresultatEs;
   oppgaver?: Oppgave[];
+  hentBrevHtml: (params: GenererHtmlDokument) => Promise<string>;
+  forkastManueltBrev: () => Promise<void>;
+  lagreManueltBrev: (html: string) => Promise<void>;
 }
 
 export const VedtakRevurderingForm = ({
   previewCallback,
-  ytelseTypeKode,
   beregningsresultat,
   tilbakekrevingvalg,
   simuleringResultat,
@@ -254,49 +241,44 @@ export const VedtakRevurderingForm = ({
   beregningErManueltFastsatt,
   beregningsresultatOriginalBehandling,
   oppgaver,
+  hentBrevHtml,
+  forkastManueltBrev,
+  lagreManueltBrev,
 }: Props) => {
   const intl = useIntl();
 
-  const { behandling, alleKodeverk, submitCallback, isReadOnly } =
+  const { behandling, fagsak, alleKodeverk, submitCallback, isReadOnly } =
     usePanelDataContext<RevurderingVedtakAksjonspunkter[]>();
+
+  const [harOverstyrtVedtaksbrev, setHarOverstyrtVedtaksbrev] = useState(
+    behandling.behandlingsresultat?.vedtaksbrev === DokumentMalType.FRITEKST_HTML ||
+      behandling.behandlingsresultat?.vedtaksbrev === DokumentMalType.FRITEKST,
+  );
 
   const { aksjonspunkt } = behandling;
 
-  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
+  //FIXME bruk mellomlagret data
+  const { setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
-  const formMethods = useForm<FormValues>({
-    defaultValues: mellomlagretFormData || buildInitialValues(aksjonspunkt, behandling),
-  });
+  const formMethods = useForm<FormValues>();
 
   const begrunnelse = formMethods.watch('begrunnelse');
-  const overskrift = formMethods.watch('overskrift');
-  const brødtekst = formMethods.watch('brødtekst');
 
   const { behandlingsresultat, sprakkode, behandlingÅrsaker } = behandling;
 
-  const erBehandlingEtterKlage = useMemo(
-    () => erÅrsakTypeBehandlingEtterKlage(behandling.behandlingÅrsaker),
-    [behandling.behandlingÅrsaker],
+  const erBehandlingEtterKlage = erÅrsakTypeBehandlingEtterKlage(behandling.behandlingÅrsaker);
+  const revurderingsÅrsakString = lagÅrsakString(
+    behandlingÅrsaker.map(arsak => arsak.behandlingArsakType),
+    getKodeverknavnFn(alleKodeverk),
   );
-  const revurderingsÅrsakString = useMemo(
-    () =>
-      lagÅrsakString(
-        behandlingÅrsaker.map(arsak => arsak.behandlingArsakType),
-        getKodeverknavnFn(alleKodeverk),
-      ),
-    [behandlingÅrsaker],
-  );
-  const tilbakekrevingtekst = useMemo(
-    () => getTilbakekrevingText(alleKodeverk, simuleringResultat, tilbakekrevingvalg),
-    [simuleringResultat, tilbakekrevingvalg],
-  );
+  const tilbakekrevingtekst = getTilbakekrevingText(alleKodeverk, simuleringResultat, tilbakekrevingvalg);
 
   let vedtakstatusTekst = '';
   if (behandlingsresultat && isInnvilget(behandlingsresultat.type)) {
     const konsekvenserForYtelsen = behandlingsresultat.konsekvenserForYtelsen;
     vedtakstatusTekst = finnInvilgetRevurderingTekst(
       intl,
-      ytelseTypeKode,
+      fagsak.fagsakYtelseType,
       getKodeverknavnFn(alleKodeverk),
       tilbakekrevingtekst,
       konsekvenserForYtelsen,
@@ -320,39 +302,30 @@ export const VedtakRevurderingForm = ({
     );
   }
 
-  const forhåndsvisOverstyrtBrev = hentForhåndsvisManueltBrevCallback(
-    true,
-    previewCallback,
-    overskrift,
-    brødtekst,
-    begrunnelse,
-  );
-  const forhåndsvisDefaultBrev = hentForhåndsvisManueltBrevCallback(
-    false,
-    previewCallback,
-    overskrift,
-    brødtekst,
-    begrunnelse,
-  );
+  const forhåndsvisDefaultBrev = hentForhåndsvisManueltBrevCallback(previewCallback, begrunnelse);
 
   return (
     <Form
       formMethods={formMethods}
-      onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
+      onSubmit={(values: FormValues) => submitCallback(transformValues(values, aksjonspunkt, harOverstyrtVedtaksbrev))}
       setDataOnUnmount={setMellomlagretFormData}
     >
       <VedtakFellesPanel
         vedtakstatusTekst={vedtakstatusTekst}
         previewAutomatiskBrev={forhåndsvisDefaultBrev}
-        previewOverstyrtBrev={forhåndsvisOverstyrtBrev}
+        previewCallback={previewCallback}
         tilbakekrevingtekst={tilbakekrevingtekst}
         erBehandlingEtterKlage={erBehandlingEtterKlage}
         oppgaver={oppgaver}
+        hentBrevHtml={hentBrevHtml}
+        forkastManueltBrev={forkastManueltBrev}
+        lagreManueltBrev={lagreManueltBrev}
+        setHarOverstyrtVedtaksbrev={setHarOverstyrtVedtaksbrev}
         renderPanel={(skalBrukeOverstyrendeFritekstBrev, erInnvilget, erAvslatt, erOpphor) => {
           if (erInnvilget) {
             return (
               <VedtakInnvilgetRevurderingPanel
-                ytelseTypeKode={ytelseTypeKode}
+                ytelseTypeKode={fagsak.fagsakYtelseType}
                 revurderingsÅrsakString={revurderingsÅrsakString}
                 isReadOnly={isReadOnly}
                 beregningsresultat={beregningsresultat}

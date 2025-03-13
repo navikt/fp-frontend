@@ -1,7 +1,6 @@
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, Detail, Label } from '@navikt/ds-react';
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { BodyShort, Detail, HStack, Label, VStack } from '@navikt/ds-react';
 import { formatCurrencyWithKr } from '@navikt/ft-utils';
 
 import { FagsakYtelseType } from '@navikt/fp-kodeverk';
@@ -30,37 +29,34 @@ export const VedtakInnvilgetRevurderingPanel = ({
   beregningErManueltFastsatt,
   skalBrukeOverstyrendeFritekstBrev,
 }: Props) => (
-  <>
+  <VStack gap="4">
     {ytelseTypeKode === FagsakYtelseType.ENGANGSSTONAD && beregningsresultat && 'antallBarn' in beregningsresultat && (
-      <FlexContainer>
-        <FlexRow>
-          <FlexColumn>
-            <Detail>
-              <FormattedMessage id="VedtakForm.beregnetTilkjentYtelse" />
-            </Detail>
-            <Label size="small">
-              {formatCurrencyWithKr((beregningsresultat as BeregningsresultatEs).beregnetTilkjentYtelse)}
-            </Label>
-          </FlexColumn>
-          <FlexColumn>
-            <Detail>
-              <FormattedMessage id="VedtakForm.AntallBarn" />
-            </Detail>
-            <Label size="small">{beregningsresultat.antallBarn}</Label>
-          </FlexColumn>
-        </FlexRow>
-      </FlexContainer>
+      <HStack gap="2">
+        <VStack gap="1">
+          <Detail>
+            <FormattedMessage id="VedtakForm.beregnetTilkjentYtelse" />
+          </Detail>
+          <Label size="small">
+            {formatCurrencyWithKr((beregningsresultat as BeregningsresultatEs).beregnetTilkjentYtelse)}
+          </Label>
+        </VStack>
+        <VStack gap="1">
+          <Detail>
+            <FormattedMessage id="VedtakForm.AntallBarn" />
+          </Detail>
+          <Label size="small">{beregningsresultat.antallBarn}</Label>
+        </VStack>
+      </HStack>
     )}
     {(ytelseTypeKode === FagsakYtelseType.FORELDREPENGER || ytelseTypeKode === FagsakYtelseType.SVANGERSKAPSPENGER) && (
       <>
         {revurderingsÅrsakString && (
-          <>
+          <VStack gap="1">
             <Label size="small">
               <FormattedMessage id="VedtakForm.Revurdering.Aarsak" />
             </Label>
             <BodyShort size="small">{revurderingsÅrsakString}</BodyShort>
-            <VerticalSpacer eightPx />
-          </>
+          </VStack>
         )}
         {!skalBrukeOverstyrendeFritekstBrev && beregningErManueltFastsatt && (
           <VedtakFritekstPanel
@@ -72,5 +68,5 @@ export const VedtakInnvilgetRevurderingPanel = ({
         )}
       </>
     )}
-  </>
+  </VStack>
 );
