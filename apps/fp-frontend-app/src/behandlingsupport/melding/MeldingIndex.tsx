@@ -17,6 +17,8 @@ import { FagsakData } from '../../fagsak/FagsakData';
 import { SupportHeaderAndContent } from '../SupportHeader';
 import { SettPaVentReadOnlyModal } from './SettPaVentReadOnlyModal';
 
+import styles from './MeldingIndex.module.css';
+
 const EMPTY_ARRAY = [] as KodeverkMedNavn[];
 
 interface Props {

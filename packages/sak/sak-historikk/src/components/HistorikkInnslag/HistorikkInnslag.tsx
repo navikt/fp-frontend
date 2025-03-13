@@ -1,4 +1,6 @@
-import { BodyLong, BodyShort, Box, type BoxProps, Detail, HStack, VStack } from '@navikt/ds-react';
+import { useState } from 'react';
+
+import { BodyLong, BodyShort, Box, type BoxProps, Button, Detail, HStack, VStack } from '@navikt/ds-react';
 import { type Location } from 'history';
 
 import { HistorikkAktor, KodeverkType } from '@navikt/fp-kodeverk';
@@ -36,6 +38,19 @@ export const HistorikkInnslag = ({
 
   const name = `${rolleNavn} ${aktør.ident || ''}`;
   const timestamp = formatDateTime(opprettetTidspunkt);
+  const MAX_LINES = 2;
+  const MIN_LINES = 3;
+
+  const [visMer, setVisMer] = useState(false);
+
+  const toggleVisMer = () => {
+    setVisMer(!visMer);
+  };
+
+  let linjerSomSkalVises = [];
+  if (linjer) {
+    linjerSomSkalVises = visMer ? linjer : linjer.slice(0, MAX_LINES);
+  }
 
   return (
     <HStack data-testid="historikkinnslag" wrap={false} gap="5" justify="end" align="center">
@@ -59,14 +74,19 @@ export const HistorikkInnslag = ({
 
           {linjer && linjer.length > 0 && (
             <div>
-              {linjer.map((linje, index) =>
+              {linjerSomSkalVises.map((linje, index) =>
                 linje.type === 'TEKST' ? (
-                  <BodyLong key={`tekstlinje-${index}`} size="medium">
+                  <BodyLong key={`${linje.tekst}-${index}`} size="medium">
                     {parseBoldText(linje.tekst)}
                   </BodyLong>
                 ) : (
-                  <br key={`linjeskift-${index}`} />
+                  <br key={`${linje.type}-${index}`} />
                 ),
+              )}
+              {linjer.length > MAX_LINES && linjer.length !== MIN_LINES && (
+                <Button variant="tertiary" size="small" onClick={toggleVisMer}>
+                  {visMer ? 'Vis mindre' : 'Vis mer...'}
+                </Button>
               )}
             </div>
           )}
