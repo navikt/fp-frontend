@@ -2,7 +2,6 @@ import React, { type ReactElement, type ReactNode } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Heading, VStack } from '@navikt/ds-react';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { VisittkortSakIndex } from '@navikt/fp-sak-visittkort';
 import type { Aktor, KodeverkMedNavn } from '@navikt/fp-types';
@@ -18,7 +17,7 @@ export const AktørGrid = ({ aktorInfo, fagsakStatuser, fagsakYtelseTyper, rende
   return (
     <>
       <VisittkortSakIndex bruker={aktorInfo.person} />
-      <VStack gap="2" align="center" margin="5">
+      <VStack gap="4" align="center" margin="5">
         {aktorInfo.fagsaker.length ? (
           aktorInfo.fagsaker.map(fagsak => {
             const fagsakYtelseNavn = fagsakYtelseTyper.find(s => s.kode === fagsak.fagsakYtelseType)?.navn;
@@ -30,7 +29,6 @@ export const AktørGrid = ({ aktorInfo, fagsakStatuser, fagsakYtelseTyper, rende
                   `${fagsakYtelseNavn} (${fagsak.saksnummer}) ${fagsakStatusNavn}`,
                   fagsak.saksnummer,
                 )}
-                <VerticalSpacer sixteenPx />
               </React.Fragment>
             );
           })

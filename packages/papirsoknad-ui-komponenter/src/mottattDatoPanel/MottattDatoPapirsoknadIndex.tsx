@@ -1,9 +1,9 @@
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
-import { Heading } from '@navikt/ds-react';
+import { Heading, VStack } from '@navikt/ds-react';
 import { Datepicker } from '@navikt/ft-form-hooks';
 import { dateAfterOrEqual, dateBeforeOrEqualToToday, hasValidDate, required } from '@navikt/ft-form-validators';
-import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { BorderBox } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
@@ -25,18 +25,19 @@ interface Props {
 export const MottattDatoPapirsoknadIndex = ({ readOnly }: Props) => (
   <RawIntlProvider value={intl}>
     <BorderBox>
-      <Heading size="small">
-        <FormattedMessage key="regDatoTittel" id="Registrering.Omsoknaden.MottattDato" />
-      </Heading>
-      <VerticalSpacer sixteenPx />
-      <Datepicker
-        name="mottattDato"
-        label={<FormattedMessage key="regDatoUnder" id="Registrering.Omsoknaden.MottattDato" />}
-        fromDate={minMottattdato().toDate()}
-        toDate={maxMottattdato().toDate()}
-        validate={[required, hasValidDate, dateBeforeOrEqualToToday, dateAfterOrEqual(minMottattdato())]}
-        isReadOnly={readOnly}
-      />
+      <VStack gap="4">
+        <Heading size="small">
+          <FormattedMessage key="regDatoTittel" id="Registrering.Omsoknaden.MottattDato" />
+        </Heading>
+        <Datepicker
+          name="mottattDato"
+          label={<FormattedMessage key="regDatoUnder" id="Registrering.Omsoknaden.MottattDato" />}
+          fromDate={minMottattdato().toDate()}
+          toDate={maxMottattdato().toDate()}
+          validate={[required, hasValidDate, dateBeforeOrEqualToToday, dateAfterOrEqual(minMottattdato())]}
+          isReadOnly={readOnly}
+        />
+      </VStack>
     </BorderBox>
   </RawIntlProvider>
 );

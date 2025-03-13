@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { ChevronLeftIcon, MagnifyingGlassIcon } from '@navikt/aksel-icons';
-import { Button, Heading, HStack, Link } from '@navikt/ds-react';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { Button, Heading, HStack, Link, VStack } from '@navikt/ds-react';
 
 import type { Journalpost } from '../../typer/journalpostTsType';
 import { JournalpostSøkModal } from './JournalpostSøkModal';
@@ -40,41 +39,42 @@ export const JournalføringHeader = ({
 
   return (
     <div className={styles.header}>
-      {valgtJournalpost && (
-        <Link onClick={avbrytVisningAvJournalpost} className={styles.link}>
-          <ChevronLeftIcon />
-          <FormattedMessage id="Journalforing.Oversikt" />
-        </Link>
-      )}
-      <VerticalSpacer eightPx />
-      <HStack gap="8">
-        <Heading size="medium">
-          <FormattedMessage id="Journalforing.Tittel" />
-        </Heading>
-        {!valgtJournalpost && (
-          <>
-            <Button
-              size="xsmall"
-              variant="secondary-neutral"
-              type="button"
-              onClick={() => {
-                setÅpenSøkemodal(true);
-              }}
-              icon={<MagnifyingGlassIcon height="32px" width="32px" />}
-            >
-              Søk
-            </Button>
-            <JournalpostSøkModal
-              hentJournalpost={hentJournalpost}
-              lukkModal={() => {
-                setÅpenSøkemodal(false);
-              }}
-              erÅpen={åpenSøkemodal}
-              harSøktOgFunnetIngenMatch={harHentetFerdigJournalpost && !valgtJournalpost}
-            />
-          </>
+      <VStack gap="4">
+        {valgtJournalpost && (
+          <Link onClick={avbrytVisningAvJournalpost} className={styles.link}>
+            <ChevronLeftIcon />
+            <FormattedMessage id="Journalforing.Oversikt" />
+          </Link>
         )}
-      </HStack>
+        <HStack gap="8">
+          <Heading size="medium">
+            <FormattedMessage id="Journalforing.Tittel" />
+          </Heading>
+          {!valgtJournalpost && (
+            <>
+              <Button
+                size="xsmall"
+                variant="secondary-neutral"
+                type="button"
+                onClick={() => {
+                  setÅpenSøkemodal(true);
+                }}
+                icon={<MagnifyingGlassIcon height="32px" width="32px" />}
+              >
+                Søk
+              </Button>
+              <JournalpostSøkModal
+                hentJournalpost={hentJournalpost}
+                lukkModal={() => {
+                  setÅpenSøkemodal(false);
+                }}
+                erÅpen={åpenSøkemodal}
+                harSøktOgFunnetIngenMatch={harHentetFerdigJournalpost && !valgtJournalpost}
+              />
+            </>
+          )}
+        </HStack>
+      </VStack>
       {!valgtJournalpost && harHentetOppgaver && (
         <FormattedMessage id="Journalforing.Antall.Oppgaver" values={{ antall: antallOppgaver }} />
       )}

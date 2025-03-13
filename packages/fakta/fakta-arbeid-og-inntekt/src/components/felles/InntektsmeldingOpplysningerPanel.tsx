@@ -129,20 +129,18 @@ export const InntektsmeldingOpplysningerPanel = ({
     </VStack>
     <HStack gap="4">
       <PhoneFillIcon className={styles.phoneIcon} />
-      <div>
-        <VStack>
-          <Label size="small">
-            <FormattedMessage id="InntektsmeldingOpplysningerPanel.Kontaktinfo" />
-          </Label>
-          <Detail>{inntektsmelding.kontaktpersonNavn}</Detail>
-          <Detail>
-            <FormattedMessage
-              id="InntektsmeldingOpplysningerPanel.Tlf"
-              values={{ nr: inntektsmelding.kontaktpersonNummer }}
-            />
-          </Detail>
-        </VStack>
-      </div>
+      <VStack gap="1">
+        <Label size="small">
+          <FormattedMessage id="InntektsmeldingOpplysningerPanel.Kontaktinfo" />
+        </Label>
+        <Detail>{inntektsmelding.kontaktpersonNavn}</Detail>
+        <Detail>
+          <FormattedMessage
+            id="InntektsmeldingOpplysningerPanel.Tlf"
+            values={{ nr: inntektsmelding.kontaktpersonNummer }}
+          />
+        </Detail>
+      </VStack>
     </HStack>
   </>
 );

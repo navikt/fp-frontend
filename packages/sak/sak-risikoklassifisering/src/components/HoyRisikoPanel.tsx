@@ -1,7 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 
-import { Panel } from '@navikt/ds-react';
-import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { VStack } from '@navikt/ds-react';
+import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, KodeverkMedNavn, Risikoklassifisering } from '@navikt/fp-types';
@@ -30,24 +30,23 @@ export const HoyRisikoPanel = ({
   submitCallback,
   faresignalVurderinger,
 }: Props) => (
-  <Panel>
+  <VStack gap="4">
     {aksjonspunkt && aksjonspunkt.status === AksjonspunktStatus.OPPRETTET && (
-      <>
-        <AksjonspunktHelpTextHTML>
-          <FormattedMessage id="Risikopanel.Panel.Tittel" />
-        </AksjonspunktHelpTextHTML>
-        <VerticalSpacer sixteenPx />
-      </>
+      <AksjonspunktHelpTextHTML>
+        <FormattedMessage id="Risikopanel.Panel.Tittel" />
+      </AksjonspunktHelpTextHTML>
     )}
-    <Faresignaler risikoklassifisering={risikoklassifisering} />
-    {!!aksjonspunkt && (
-      <AvklarFaresignalerForm
-        aksjonspunkt={aksjonspunkt}
-        readOnly={readOnly}
-        submitCallback={submitCallback}
-        risikoklassifisering={risikoklassifisering}
-        faresignalVurderinger={faresignalVurderinger}
-      />
-    )}
-  </Panel>
+    <div>
+      <Faresignaler risikoklassifisering={risikoklassifisering} />
+      {!!aksjonspunkt && (
+        <AvklarFaresignalerForm
+          aksjonspunkt={aksjonspunkt}
+          readOnly={readOnly}
+          submitCallback={submitCallback}
+          risikoklassifisering={risikoklassifisering}
+          faresignalVurderinger={faresignalVurderinger}
+        />
+      )}
+    </div>
+  </VStack>
 );

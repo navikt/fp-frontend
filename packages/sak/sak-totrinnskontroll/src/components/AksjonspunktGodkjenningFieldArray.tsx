@@ -1,8 +1,7 @@
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { NavLink } from 'react-router-dom';
 
-import { BodyShort } from '@navikt/ds-react';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { BodyShort, VStack } from '@navikt/ds-react';
 import { type Location } from 'history';
 
 import type { BehandlingAppKontekst, KodeverkMedNavn, TotrinnskontrollSkjermlenkeContext } from '@navikt/fp-types';
@@ -56,7 +55,7 @@ export const AksjonspunktGodkjenningFieldArray = ({
   const aksjonspunktGodkjenning = watch('aksjonspunktGodkjenning');
 
   return (
-    <>
+    <VStack gap="6">
       {fields.map((field, index) => {
         const { aksjonspunktKode } = aksjonspunktGodkjenning[index];
         const context = totrinnskontrollSkjermlenkeContext.find(c =>
@@ -102,10 +101,9 @@ export const AksjonspunktGodkjenningFieldArray = ({
               totrinnskontrollSkjermlenkeContext={totrinnskontrollSkjermlenkeContext}
               readOnly={readOnly}
             />
-            <VerticalSpacer twentyPx />
           </div>
         );
       })}
-    </>
+    </VStack>
   );
 };
