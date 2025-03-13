@@ -4,7 +4,6 @@ import { NavLink } from 'react-router-dom';
 
 import { CheckmarkIcon, XMarkOctagonIcon } from '@navikt/aksel-icons';
 import { BodyShort, HStack } from '@navikt/ds-react';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 import { type Location } from 'history';
 
@@ -100,7 +99,6 @@ export const TotrinnskontrollSaksbehandlerPanel = ({
                         <BodyShort size="small">{formattedMessage}</BodyShort>
                       </div>
                     ))}
-                    <VerticalSpacer eightPx />
                     <div className={styles.approvalItem}>
                       {aksjonspunkt.totrinnskontrollGodkjent ? (
                         <HStack gap="2">

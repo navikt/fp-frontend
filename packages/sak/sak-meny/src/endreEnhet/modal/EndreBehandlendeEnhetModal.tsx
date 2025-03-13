@@ -1,10 +1,9 @@
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Button, Heading, Modal } from '@navikt/ds-react';
+import { Button, Heading, Modal, VStack } from '@navikt/ds-react';
 import { Form, SelectField, TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, required } from '@navikt/ft-form-validators';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import styles from './endreBehandlendeEnhetModal.module.css';
 
@@ -72,22 +71,21 @@ export const EndreBehandlendeEnhetModal = ({
           </Heading>
         </Modal.Header>
         <Modal.Body>
-          <VerticalSpacer sixteenPx />
-          <SelectField
-            name="nyEnhet"
-            label={intl.formatMessage({ id: 'EndreBehandlendeEnhetModal.NyEnhetField' })}
-            validate={[required]}
-            selectValues={selectOptions}
-            className={styles.selectWidth}
-          />
-          <VerticalSpacer sixteenPx />
-          <TextAreaField
-            name="begrunnelse"
-            label={intl.formatMessage({ id: 'EndreBehandlendeEnhetModal.BegrunnelseField' })}
-            validate={[required, maxLength400, hasValidText]}
-            maxLength={400}
-          />
-          <VerticalSpacer sixteenPx />
+          <VStack gap="4">
+            <SelectField
+              name="nyEnhet"
+              label={intl.formatMessage({ id: 'EndreBehandlendeEnhetModal.NyEnhetField' })}
+              validate={[required]}
+              selectValues={selectOptions}
+              className={styles.selectWidth}
+            />
+            <TextAreaField
+              name="begrunnelse"
+              label={intl.formatMessage({ id: 'EndreBehandlendeEnhetModal.BegrunnelseField' })}
+              validate={[required, maxLength400, hasValidText]}
+              maxLength={400}
+            />
+          </VStack>
         </Modal.Body>
         <Modal.Footer>
           <Button size="small" variant="primary" className={styles.button} disabled={!(nyEnhet && begrunnelse)}>

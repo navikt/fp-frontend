@@ -3,7 +3,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Buildings3Icon, SilhouetteIcon } from '@navikt/aksel-icons';
 import { Alert, BodyShort, Button, CopyButton, Heading, HStack, Search, VStack } from '@navikt/ds-react';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { isValidFodselsnummer } from '@navikt/ft-utils';
 
 import type { ForhåndsvisBrukerRespons } from '../../../typer/forhåndsvisBrukerResponsTsType';
@@ -28,18 +27,17 @@ interface BrukerAvsenderRadProps {
 }
 
 const BrukerAvsenderRad = ({ navn, id, ikon, title }: BrukerAvsenderRadProps): ReactElement => (
-  <div className={styles.kolBredde}>
+  <VStack gap="2" className={styles.kolBredde}>
     {title && (
       <Heading size="small">
         <FormattedMessage id={title} />
       </Heading>
     )}
-    <VerticalSpacer sixteenPx />
     <HStack gap="2">
       <div className={styles.ikonKol}>{ikon}</div>
-      <VStack>
+      <VStack gap="1">
         <BodyShort>{navn}</BodyShort>
-        <HStack>
+        <HStack gap="1">
           <div className={styles.kopiTekst}>
             <BodyShort>{id}</BodyShort>
           </div>
@@ -49,7 +47,7 @@ const BrukerAvsenderRad = ({ navn, id, ikon, title }: BrukerAvsenderRadProps): R
         </HStack>
       </VStack>
     </HStack>
-  </div>
+  </VStack>
 );
 
 type Props = Readonly<{
@@ -108,18 +106,16 @@ export const BrukerAvsenderPanel = ({
     <div className={styles.brukerAvsenderRad}>
       <div>
         {skalKunneEndreSøker && (
-          <>
+          <VStack gap="4">
             <Heading size="small">
               <FormattedMessage id="ValgtOppgave.Bruker" />
             </Heading>
-            <VerticalSpacer sixteenPx />
             <Alert variant="warning">
               <BodyShort>
                 <FormattedMessage id="ValgtOppgave.Søk.Bruker" />
               </BodyShort>
             </Alert>
-            <VerticalSpacer sixteenPx />
-            <div>
+            <VStack gap="2">
               <Search
                 label={intl.formatMessage({ id: 'ValgtOppgave.Søk.FinnBruker' })}
                 onKeyDown={oppdaterMedBrukerKlikk}
@@ -128,23 +124,21 @@ export const BrukerAvsenderPanel = ({
               >
                 <Search.Button type="button" loading={lasterBruker} />
               </Search>
-              <VerticalSpacer eightPx />
               {søkerFeilmelding && <BodyShort className={styles.error}>{søkerFeilmelding}</BodyShort>}
               {brukerTilForhåndsvisning && (
-                <>
+                <VStack gap="4">
                   <BrukerAvsenderRad
                     navn={brukerTilForhåndsvisning.navn}
                     id={brukerTilForhåndsvisning.fødselsnummer}
                     ikon={<SilhouetteIcon className={styles.ikon} />}
                   />
-                  <VerticalSpacer sixteenPx />
                   <Button type="button" onClick={knyttSøkerTilJP}>
                     <FormattedMessage id="ValgtOppgave.Søk.KnyttTil" />
                   </Button>
-                </>
+                </VStack>
               )}
-            </div>
-          </>
+            </VStack>
+          </VStack>
         )}
       </div>
       {journalpost.bruker?.navn && (

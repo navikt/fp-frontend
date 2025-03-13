@@ -1,8 +1,7 @@
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, HStack, Label, Modal } from '@navikt/ds-react';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { BodyShort, Button, HStack, Label, Modal, VStack } from '@navikt/ds-react';
 
 import { BehandlingResultatType } from '@navikt/fp-kodeverk';
 
@@ -34,21 +33,20 @@ export const IverksetterVedtakStatusModal = ({ lukkModal, visModal, behandlingsr
       <Modal.Body>
         <HStack gap="6">
           <CheckmarkCircleFillIcon className={styles.image} />
-          <div>
+          <VStack gap="1">
             <Label size="small">
-              {intl.formatMessage({
-                id: erVedtakAvslatt
-                  ? 'IverksetterVedtakStatusModal.VedtakAvslatt'
-                  : 'IverksetterVedtakStatusModal.VedtakInnvilet',
-              })}
+              {erVedtakAvslatt ? (
+                <FormattedMessage id="IverksetterVedtakStatusModal.VedtakAvslatt" />
+              ) : (
+                <FormattedMessage id="IverksetterVedtakStatusModal.VedtakInnvilet" />
+              )}
             </Label>
-            <VerticalSpacer fourPx />
             <BodyShort size="small">
-              {intl.formatMessage({ id: 'IverksetterVedtakStatusModal.GoToSearchPage' })}
+              <FormattedMessage id="IverksetterVedtakStatusModal.GoToSearchPage" />
             </BodyShort>
-          </div>
+          </VStack>
           <Button size="small" variant="primary" onClick={lukkModal} autoFocus type="button">
-            {intl.formatMessage({ id: 'IverksetterVedtakStatusModal.Ok' })}
+            <FormattedMessage id="IverksetterVedtakStatusModal.Ok" />
           </Button>
         </HStack>
       </Modal.Body>

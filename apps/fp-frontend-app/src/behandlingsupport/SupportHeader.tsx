@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { useIntl } from 'react-intl';
 
-import { Heading, HStack } from '@navikt/ds-react';
+import { Heading, HStack, VStack } from '@navikt/ds-react';
 
 import { ErrorBoundary } from '../app/ErrorBoundary';
 import { useRestApiErrorDispatcher } from '../data/error/RestApiErrorContext';
@@ -20,7 +20,7 @@ export const SupportHeaderAndContent = ({ tekst, antall, children, brukPadding =
   const { addErrorMessage } = useRestApiErrorDispatcher();
 
   return (
-    <>
+    <VStack gap="4">
       <div className={styles.header}>
         <HStack justify="space-between">
           <Heading size="small">{tekst}</Heading>
@@ -35,6 +35,6 @@ export const SupportHeaderAndContent = ({ tekst, antall, children, brukPadding =
           {children}
         </ErrorBoundary>
       </div>
-    </>
+    </VStack>
   );
 };

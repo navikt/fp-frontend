@@ -4,10 +4,12 @@
 
 .oppgaveKolonne {
   padding-right: 16px;
+  padding-top: 16px;
   width: 35%;
 }
 
 .pdfKolonne {
   background-color: var(--a-gray-300);
+  padding-top: 16px;
   width: 65%;
 }

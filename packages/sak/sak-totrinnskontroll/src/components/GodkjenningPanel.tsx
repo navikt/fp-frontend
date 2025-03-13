@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { BodyShort, ErrorMessage, HStack, Label, VStack } from '@navikt/ds-react';
 import { CheckboxField, RadioGroupPanel, TextAreaField, useCustomValidation } from '@navikt/ft-form-hooks';
 import { hasValidText, isRequiredMessage, maxLength, minLength, required } from '@navikt/ft-form-validators';
-import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
 import type { TotrinnskontrollSkjermlenkeContext } from '@navikt/fp-types';
 
@@ -51,7 +51,7 @@ export const GodkjenningPanel = ({ index, totrinnskontrollSkjermlenkeContext, re
   }
 
   return (
-    <>
+    <VStack gap="3">
       <RadioGroupPanel
         name={`${fieldIndex}.totrinnskontrollGodkjent`}
         isReadOnly={readOnly}
@@ -71,7 +71,6 @@ export const GodkjenningPanel = ({ index, totrinnskontrollSkjermlenkeContext, re
       />
       {totrinnskontrollGodkjent === false && (
         <>
-          <VerticalSpacer sixteenPx />
           <ArrowBox alignOffset={totrinnskontrollGodkjent ? 1 : 110}>
             <VStack gap="2">
               <Label size="small">
@@ -80,56 +79,57 @@ export const GodkjenningPanel = ({ index, totrinnskontrollSkjermlenkeContext, re
               <BodyShort size="small">
                 <FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Forklaring" />
               </BodyShort>
-              <VStack gap="1">
-                <HStack justify="space-between" style={{ width: '300px' }}>
-                  <VStack>
-                    <CheckboxField
-                      name={`${fieldIndex}.feilFakta`}
-                      label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Fakta" />}
-                      readOnly={readOnly}
-                    />
-                    <CheckboxField
-                      name={`${fieldIndex}.feilSkjønn`}
-                      label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Skjønn" />}
-                      readOnly={readOnly}
-                    />
-                    <CheckboxField
-                      name={`${fieldIndex}.feilLov`}
-                      label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Lovanvendelse" />}
-                      readOnly={readOnly}
-                    />
-                  </VStack>
-                  <VStack>
-                    <CheckboxField
-                      name={`${fieldIndex}.feilUtredning`}
-                      label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Utredning" />}
-                      readOnly={readOnly}
-                    />
-                    <CheckboxField
-                      name={`${fieldIndex}.feilSaksflyt`}
-                      label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Saksflyt" />}
-                      readOnly={readOnly}
-                    />
-                    <CheckboxField
-                      name={`${fieldIndex}.feilBegrunnelse`}
-                      label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Begrunnelse" />}
-                      readOnly={readOnly}
-                    />
-                  </VStack>
-                </HStack>
+              <VStack gap="4">
+                <VStack gap="1">
+                  <HStack justify="space-between" style={{ width: '300px' }}>
+                    <VStack gap="1">
+                      <CheckboxField
+                        name={`${fieldIndex}.feilFakta`}
+                        label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Fakta" />}
+                        readOnly={readOnly}
+                      />
+                      <CheckboxField
+                        name={`${fieldIndex}.feilSkjønn`}
+                        label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Skjønn" />}
+                        readOnly={readOnly}
+                      />
+                      <CheckboxField
+                        name={`${fieldIndex}.feilLov`}
+                        label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Lovanvendelse" />}
+                        readOnly={readOnly}
+                      />
+                    </VStack>
+                    <VStack gap="1">
+                      <CheckboxField
+                        name={`${fieldIndex}.feilUtredning`}
+                        label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Utredning" />}
+                        readOnly={readOnly}
+                      />
+                      <CheckboxField
+                        name={`${fieldIndex}.feilSaksflyt`}
+                        label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Saksflyt" />}
+                        readOnly={readOnly}
+                      />
+                      <CheckboxField
+                        name={`${fieldIndex}.feilBegrunnelse`}
+                        label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Begrunnelse" />}
+                        readOnly={readOnly}
+                      />
+                    </VStack>
+                  </HStack>
+                </VStack>
+                {errorMessage && <ErrorMessage size="small">{errorMessage}</ErrorMessage>}
+                <TextAreaField
+                  name={`${fieldIndex}.besluttersBegrunnelse`}
+                  label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Begrunnelse" />}
+                  validate={[required, minLength3, maxLength2000, hasValidText]}
+                  readOnly={readOnly}
+                />
               </VStack>
-              {errorMessage && <ErrorMessage size="small">{errorMessage}</ErrorMessage>}
-              <VerticalSpacer sixteenPx />
-              <TextAreaField
-                name={`${fieldIndex}.besluttersBegrunnelse`}
-                label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Begrunnelse" />}
-                validate={[required, minLength3, maxLength2000, hasValidText]}
-                readOnly={readOnly}
-              />
             </VStack>
           </ArrowBox>
         </>
       )}
-    </>
+    </VStack>
   );
 };

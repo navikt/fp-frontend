@@ -1,7 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 
 import { Box, Table } from '@navikt/ds-react';
-import { DateLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { DateLabel } from '@navikt/ft-ui-komponenter';
 
 import type { Sak } from '@navikt/fp-types';
 
@@ -57,6 +57,5 @@ export const SakerPanel = ({ saker }: Props) => (
         </Table.Body>
       </Table>
     </Box>
-    <VerticalSpacer thirtyTwoPx />
   </>
 );

@@ -32,7 +32,7 @@ export const ValgAvSaksbehandlere = ({ valgtSaksliste, valgtAvdelingEnhet, saksb
   const avdelingensSaksbehandlereHoyreListe = saksbehandlere.slice(pos);
 
   return (
-    <HStack>
+    <HStack gap="1">
       <VStack gap="2" width="50%">
         {avdelingensSaksbehandlereVenstreListe.map(s => (
           <CheckboxField
