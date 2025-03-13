@@ -7,6 +7,7 @@ import { Datepicker } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
+import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 
 import { type FieldEditedInfo } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
@@ -14,6 +15,8 @@ import type { FamilieHendelse, Soknad } from '@navikt/fp-types';
 import type { BekreftDokumentertDatoAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import styles from './dokumentasjonFaktaForm.module.css';
+
+dayjs.extend(isSameOrBefore);
 
 export type FormValues = {
   omsorgsovertakelseDato?: string;

@@ -30,7 +30,7 @@ const findRadioButtonTextCode = (erVilkarOk?: boolean): string =>
     ? 'ErSoknadsfristVilkaretOppfyltForm.VilkarOppfylt'
     : 'ErSoknadsfristVilkaretOppfyltForm.VilkarIkkeOppfylt';
 
-const findSoknadsfristDate = (mottattDato: string, antallDagerSoknadLevertForSent?: number): string =>
+const findSoknadsfristDate = (mottattDato: string, antallDagerSoknadLevertForSent: number): string =>
   dayjs(mottattDato).subtract(antallDagerSoknadLevertForSent, 'days').format(ISO_DATE_FORMAT);
 
 type FormValues = {
