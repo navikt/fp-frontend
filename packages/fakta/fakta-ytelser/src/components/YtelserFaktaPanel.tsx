@@ -1,7 +1,6 @@
 import { FormattedMessage } from 'react-intl';
 
-import { Heading } from '@navikt/ds-react';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { Heading, VStack } from '@navikt/ds-react';
 
 import type { InntektArbeidYtelse } from '@navikt/fp-types';
 
@@ -12,22 +11,21 @@ interface Props {
 }
 
 export const YtelserFaktaPanel = ({ inntektArbeidYtelse }: Props) => (
-  <>
-    <Heading size="small">
-      <FormattedMessage id="YtelserFaktaPanel.SokersYtelser" />
-    </Heading>
-    <VerticalSpacer eightPx />
-    <PersonYtelserTable ytelser={inntektArbeidYtelse.relatertTilgrensendeYtelserForSoker} />
+  <VStack gap="8">
+    <VStack gap="4">
+      <Heading size="small">
+        <FormattedMessage id="YtelserFaktaPanel.SokersYtelser" />
+      </Heading>
+      <PersonYtelserTable ytelser={inntektArbeidYtelse.relatertTilgrensendeYtelserForSoker} />
+    </VStack>
     {inntektArbeidYtelse.relatertTilgrensendeYtelserForAnnenForelder &&
       inntektArbeidYtelse.relatertTilgrensendeYtelserForAnnenForelder.length > 0 && (
-        <>
-          <VerticalSpacer fourtyPx />
+        <VStack gap="4">
           <Heading size="small">
             <FormattedMessage id="YtelserFaktaPanel.AnnenPartsYtelser" />
           </Heading>
-          <VerticalSpacer eightPx />
           <PersonYtelserTable ytelser={inntektArbeidYtelse.relatertTilgrensendeYtelserForAnnenForelder} />
-        </>
+        </VStack>
       )}
-  </>
+  </VStack>
 );

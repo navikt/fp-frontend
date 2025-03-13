@@ -3,10 +3,11 @@ import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, TilretteleggingType, UttakArbeidType } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import {
   type ArbeidOgInntektsmelding,
   type ArbeidsforholdFodselOgTilrettelegging,
+  type ArbeidsgiverOpplysningerPerId,
   SvpTilretteleggingFomKilde,
 } from '@navikt/fp-types';
 
@@ -202,49 +203,56 @@ const SPESIELL_ARBEID_OG_INNTEKT = {
   ],
 } as ArbeidOgInntektsmelding;
 
-const ARBEIDSGIVEROPPLYSNINGER_PER_ID = {
+const ARBEIDSGIVEROPPLYSNINGER_PER_ID: ArbeidsgiverOpplysningerPerId = {
   1: {
     erPrivatPerson: false,
     identifikator: '973861778',
+    referanse: '973861778',
     navn: 'Frilanser, samlet aktivitet',
   },
   2: {
     erPrivatPerson: true,
-    identifikator: '973861779',
-    navn: 'Selvstendig næringsdrivende',
+    identifikator: '12345678910',
+    referanse: '123',
+    fødselsdato: '1990-01-01',
+    navn: 'Halvor Hansen',
   },
   3: {
     erPrivatPerson: false,
     identifikator: '973861779',
+    referanse: '973861779',
     navn: 'Test',
   },
   555864629: {
     erPrivatPerson: false,
     identifikator: '555864629',
+    referanse: '555864629',
     navn: 'WWW.EIENDOMSDRIFT.CC SA',
   },
   999999999: {
     erPrivatPerson: false,
     identifikator: '999999999',
+    referanse: '999999999',
     navn: 'Arbeidsgiveren AS',
   },
   1111111: {
     erPrivatPerson: false,
     identifikator: '1111111',
+    referanse: '1111111',
     navn: 'STATOIL',
   },
   342352362: {
-    referanse: '342352362',
-    identifikator: '342352362',
-    navn: 'Lagt til av saksbehandler',
     erPrivatPerson: false,
+    identifikator: '342352362',
+    referanse: '342352362',
+    navn: 'Lagt til av saksbehandler',
   },
 };
 
 const meta = {
   title: 'fakta/fakta-tilrettelegging',
   component: TilretteleggingFaktaIndex,
-  decorators: [withFormData, withPanelData],
+  decorators: [withMellomlagretFormData, withPanelData],
   args: {
     arbeidsgiverOpplysningerPerId: ARBEIDSGIVEROPPLYSNINGER_PER_ID,
     submittable: true,
@@ -262,7 +270,7 @@ export const TilretteleggingMedVelferdspermisjon: Story = {
       {
         definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
+        begrunnelse: null,
         kanLoses: true,
       },
     ],
@@ -277,7 +285,7 @@ export const TilretteleggingMed100ProsentVelferdspermisjon: Story = {
       {
         definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
+        begrunnelse: null,
         kanLoses: true,
       },
     ],
@@ -292,7 +300,7 @@ export const SokerVarIkkeAnsattDaBehovetForTilretteleggingOppstod: Story = {
       {
         definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
+        begrunnelse: null,
         kanLoses: true,
       },
     ],
@@ -307,7 +315,7 @@ export const HarOpphold: Story = {
       {
         definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
+        begrunnelse: null,
         kanLoses: true,
       },
     ],
@@ -364,7 +372,7 @@ export const ErReadonly: Story = {
       {
         definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
+        begrunnelse: null,
         kanLoses: true,
       },
     ],

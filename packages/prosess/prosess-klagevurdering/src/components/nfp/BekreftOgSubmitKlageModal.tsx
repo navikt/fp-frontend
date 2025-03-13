@@ -1,7 +1,6 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Button, HStack, Label, Modal, VStack } from '@navikt/ds-react';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 
@@ -34,30 +33,25 @@ export const BekreftOgSubmitKlageModal = ({
     >
       <Modal.Body>
         <VStack gap="3">
-          <div>
+          <VStack gap="4">
             <Label size="medium">
               <FormattedMessage id="Klage.Modal.Overskrift" />
             </Label>
-            <VerticalSpacer fourPx />
             <BodyShort>
               <FormattedMessage id="Klage.Modal.SendTilKlageinstans" />
             </BodyShort>
-            <VerticalSpacer sixteenPx />
             <BodyShort>
               <FormattedMessage id="Klage.Modal.Valg" />
             </BodyShort>
-            <VerticalSpacer eightPx />
             <BodyShort>
               <FormattedMessage id="Klage.Modal.Oppretthold" />
             </BodyShort>
-            <VerticalSpacer fourPx />
             {valgtHjemmel && (
               <BodyShort>
                 <FormattedMessage id="Klage.Modal.Hjemmel" values={{ hjemmel: valgtHjemmel }} />
               </BodyShort>
             )}
-            <VerticalSpacer fourPx />
-          </div>
+          </VStack>
           <div>
             <HStack gap="2">
               <ProsessStegSubmitButtonNew

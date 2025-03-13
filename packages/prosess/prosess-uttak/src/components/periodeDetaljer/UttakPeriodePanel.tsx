@@ -2,8 +2,8 @@ import React, { type ReactElement, useCallback, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ArrowLeftIcon, ArrowRightIcon, ScissorsIcon, XMarkIcon } from '@navikt/aksel-icons';
-import { Button, HStack, Label, Panel } from '@navikt/ds-react';
-import { AksjonspunktHelpTextHTML, EditedIcon, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { Box, Button, HStack, Label, VStack } from '@navikt/ds-react';
+import { AksjonspunktHelpTextHTML, EditedIcon } from '@navikt/ft-ui-komponenter';
 import { calcDays } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
@@ -20,8 +20,6 @@ import type {
 
 import { SplittPeriodeModal } from './splitt/SplittPeriodeModal';
 import { UttakPeriodeForm } from './UttakPeriodeForm';
-
-import styles from './uttakPeriodePanel.module.css';
 
 const getCorrectEmptyArbeidsForhold = (
   alleKodeverk: AlleKodeverk,
@@ -206,8 +204,7 @@ export const UttakPeriodePanel = ({
     : perioderAnnenpart.some(p => p.flerbarnsdager);
 
   const erRevurderingFørEndringsdato =
-    behandling.type === BehandlingType.REVURDERING &&
-    valgtPeriode.tom < endringsdato;
+    behandling.type === BehandlingType.REVURDERING && valgtPeriode.tom < endringsdato;
 
   const visForrigePeriode = useCallback(() => {
     setValgtPeriodeIndex(index => (index === 0 || index === undefined ? index : index - 1));
@@ -217,9 +214,8 @@ export const UttakPeriodePanel = ({
   }, [allePerioder.length]);
 
   return (
-    <>
-      <div className={styles.space} />
-      <Panel border>
+    <Box borderWidth="1" padding="4">
+      <VStack gap="4">
         <HStack align="center" justify="space-between">
           <Label size="small">
             <FormattedMessage id="UttakTimeLineData.PeriodeData.Detaljer" />
@@ -247,6 +243,7 @@ export const UttakPeriodePanel = ({
               )}
             </>
           )}
+
           <HStack gap="2">
             <Button
               size="xsmall"
@@ -279,20 +276,16 @@ export const UttakPeriodePanel = ({
             />
           </HStack>
         </HStack>
-        <VerticalSpacer sixteenPx />
         {valgtPeriode.manuellBehandlingÅrsak && valgtPeriode.manuellBehandlingÅrsak !== '-' && (
-          <>
-            <AksjonspunktHelpTextHTML>
-              {hentApTekst(
-                valgtPeriode.manuellBehandlingÅrsak,
-                alleKodeverk,
-                arbeidsgiverOpplysningerPerId,
-                uttakStonadskontoer,
-                valgtPeriode.periodeType,
-              )}
-            </AksjonspunktHelpTextHTML>
-            <VerticalSpacer twentyPx />
-          </>
+          <AksjonspunktHelpTextHTML>
+            {hentApTekst(
+              valgtPeriode.manuellBehandlingÅrsak,
+              alleKodeverk,
+              arbeidsgiverOpplysningerPerId,
+              uttakStonadskontoer,
+              valgtPeriode.periodeType,
+            )}
+          </AksjonspunktHelpTextHTML>
         )}
         <UttakPeriodeForm
           valgtPeriode={valgtPeriode}
@@ -306,7 +299,7 @@ export const UttakPeriodePanel = ({
           harSoktOmFlerbarnsdager={harSoktOmFlerbarnsdager}
           erTilknyttetStortinget={erTilknyttetStortinget}
         />
-      </Panel>
-    </>
+      </VStack>
+    </Box>
   );
 };

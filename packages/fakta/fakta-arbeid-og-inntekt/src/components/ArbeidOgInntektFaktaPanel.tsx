@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { Alert, Button, Table } from '@navikt/ds-react';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { Alert, Button, Table, VStack } from '@navikt/ds-react';
 
 import {
   AksjonspunktKode,
@@ -21,7 +20,7 @@ import type {
   ManueltArbeidsforhold,
 } from '@navikt/fp-types';
 import type { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { useIsFormDirty } from '../DirtyFormProvider';
 import type { ArbeidsforholdOgInntektRadData, Avklaring } from '../types/arbeidsforholdOgInntekt';
@@ -99,21 +98,24 @@ const byggTabellStruktur = (
 
   const alleInntektsmeldingerSomManglerArbeidsforhold = inntektsmeldinger
     .filter(im => !arbeidsforhold.some(af => erMatch(af, im)))
-    .map<ArbeidsforholdOgInntektRadData>(im => ({
-      arbeidsgiverIdent: im.arbeidsgiverIdent,
-      internArbeidsforholdId: im.internArbeidsforholdId,
-      arbeidsgiverNavn: arbeidsgiverOpplysningerPerId[im.arbeidsgiverIdent].navn,
-      arbeidsgiverFødselsdato: arbeidsgiverOpplysningerPerId[im.arbeidsgiverIdent]?.erPrivatPerson
-        ? arbeidsgiverOpplysningerPerId[im.arbeidsgiverIdent]?.fødselsdato
-        : undefined,
-      årsak: im.årsak,
-      avklaring: im.saksbehandlersVurdering
-        ? {
-            saksbehandlersVurdering: im.saksbehandlersVurdering,
-            begrunnelse: im.begrunnelse,
-          }
-        : undefined,
-    }));
+    .map<ArbeidsforholdOgInntektRadData>(im => {
+      const arbeidgiverOpplysninger = arbeidsgiverOpplysningerPerId[im.arbeidsgiverIdent];
+      return {
+        arbeidsgiverIdent: im.arbeidsgiverIdent,
+        internArbeidsforholdId: im.internArbeidsforholdId,
+        arbeidsgiverNavn: arbeidgiverOpplysninger.navn,
+        arbeidsgiverFødselsdato: arbeidgiverOpplysninger.erPrivatPerson
+          ? arbeidgiverOpplysninger.fødselsdato
+          : undefined,
+        årsak: im.årsak,
+        avklaring: im.saksbehandlersVurdering
+          ? {
+              saksbehandlersVurdering: im.saksbehandlersVurdering,
+              begrunnelse: im.begrunnelse,
+            }
+          : undefined,
+      };
+    });
 
   return alleArbeidsforhold.concat(alleInntektsmeldingerSomManglerArbeidsforhold).sort(sorterTabell);
 };
@@ -151,10 +153,10 @@ export const ArbeidOgInntektFaktaPanel = ({
 
   const aksjonspunkt = aksjonspunkterForPanel.length > 0 ? aksjonspunkterForPanel[0] : undefined;
 
-  const { formData, setFormData } = useFormData<ArbeidsforholdOgInntektRadData[]>();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<ArbeidsforholdOgInntektRadData[]>();
 
   const [tabellRader, setTabellRader] = useState<ArbeidsforholdOgInntektRadData[]>(
-    formData || byggTabellStruktur(arbeidOgInntekt, arbeidsgiverOpplysningerPerId),
+    mellomlagretFormData || byggTabellStruktur(arbeidOgInntekt, arbeidsgiverOpplysningerPerId),
   );
   const [åpneRadIndexer, setÅpneRadIndexer] = useState(finnUløstArbeidsforholdIndex(tabellRader));
 
@@ -162,7 +164,7 @@ export const ArbeidOgInntektFaktaPanel = ({
 
   useEffect(
     () => () => {
-      setFormData(tabellRader);
+      setMellomlagretFormData(tabellRader);
     },
     [tabellRader],
   );
@@ -227,7 +229,7 @@ export const ArbeidOgInntektFaktaPanel = ({
     !isReadOnly && erAksjonspunktApent && harBehandletAllePerioder && !isDirty && !kanSettePåVent;
 
   return (
-    <>
+    <VStack gap="4">
       <ArbeidsOgInntektOverstyrPanel
         behandling={behandling}
         aksjonspunkt={aksjonspunkt}
@@ -280,9 +282,8 @@ export const ArbeidOgInntektFaktaPanel = ({
           ))}
         </Table.Body>
       </Table>
-      <VerticalSpacer sixteenPx />
       {skalViseSettPåVentKnapp && (
-        <>
+        <div>
           <Button
             size="small"
             variant="primary"
@@ -301,40 +302,43 @@ export const ArbeidOgInntektFaktaPanel = ({
             erTilbakekreving={false}
             showModal={visSettPåVentModal}
           />
-        </>
+        </div>
       )}
       {skalViseBekrefteKnapp && (
-        <Button
-          size="small"
-          variant="primary"
-          disabled={erKnappTrykket}
-          loading={erKnappTrykket}
-          onClick={lagreOgFortsett}
-          type="button"
-        >
-          <FormattedMessage id="ArbeidOgInntektFaktaPanel.Bekreft" />
-        </Button>
+        <div>
+          <Button
+            size="small"
+            variant="primary"
+            disabled={erKnappTrykket}
+            loading={erKnappTrykket}
+            onClick={lagreOgFortsett}
+            type="button"
+          >
+            <FormattedMessage id="ArbeidOgInntektFaktaPanel.Bekreft" />
+          </Button>
+        </div>
       )}
       {skalViseÅpneForNyVurderingKnapp && (
-        <>
+        <VStack gap="4">
           <div className={styles.alertStripe}>
             <Alert variant="info">
               <FormattedMessage id="ArbeidOgInntektFaktaPanel.ApneForNyRevurderingForklaring" />
             </Alert>
           </div>
-          <VerticalSpacer sixteenPx />
-          <Button
-            size="small"
-            variant="secondary"
-            disabled={erKnappTrykket}
-            loading={erKnappTrykket}
-            onClick={gjenåpneAksjonspunkt}
-            type="button"
-          >
-            <FormattedMessage id="ArbeidOgInntektFaktaPanel.ApneForNyVurdering" />
-          </Button>
-        </>
+          <div>
+            <Button
+              size="small"
+              variant="secondary"
+              disabled={erKnappTrykket}
+              loading={erKnappTrykket}
+              onClick={gjenåpneAksjonspunkt}
+              type="button"
+            >
+              <FormattedMessage id="ArbeidOgInntektFaktaPanel.ApneForNyVurdering" />
+            </Button>
+          </div>
+        </VStack>
       )}
-    </>
+    </VStack>
   );
 };

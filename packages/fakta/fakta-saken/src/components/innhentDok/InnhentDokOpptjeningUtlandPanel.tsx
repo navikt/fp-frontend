@@ -2,16 +2,16 @@ import { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Heading } from '@navikt/ds-react';
+import { Heading, VStack } from '@navikt/ds-react';
 import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import { AksjonspunktBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { AksjonspunktBox } from '@navikt/ft-ui-komponenter';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt } from '@navikt/fp-types';
 import type { MerkOpptjeningUtlandAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData } from '@navikt/fp-utils';
+import { useMellomlagretFormData } from '@navikt/fp-utils';
 
 import styles from './innhentDokOpptjeningUtlandPanel.module.css';
 
@@ -51,10 +51,10 @@ export const InnhentDokOpptjeningUtlandPanel = ({
 }: Props) => {
   const intl = useIntl();
 
-  const { formData, setFormData } = useFormData<FormValues>();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || {
+    defaultValues: mellomlagretFormData || {
       dokStatus,
       ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
     },
@@ -68,48 +68,49 @@ export const InnhentDokOpptjeningUtlandPanel = ({
     <Form
       formMethods={formMethods}
       onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
-      setDataOnUnmount={setFormData}
+      setDataOnUnmount={setMellomlagretFormData}
     >
-      <Heading size="small">
-        <FormattedMessage id="InnhentDokOpptjeningUtlandPanel.OpptjeningUtland" />
-      </Heading>
-      {harApneAksjonspunkter && <VerticalSpacer sixteenPx />}
-      <AksjonspunktBox
-        className={styles.aksjonspunktMargin}
-        erAksjonspunktApent={harApneAksjonspunkter}
-        erIkkeGodkjentAvBeslutter={!!alleMerknaderFraBeslutter[aksjonspunkt.definisjon]?.notAccepted}
-      >
-        <RadioGroupPanel
-          name="dokStatus"
-          label={<FormattedMessage id="InnhentDokOpptjeningUtlandPanel.InnhentelseDok" />}
-          validate={[required]}
-          isReadOnly={readOnly}
-          radios={[
-            {
-              label: <FormattedMessage id="InnhentDokOpptjeningUtlandPanel.Innhentes" />,
-              value: OpptjeningIUtlandDokStatus.DOKUMENTASJON_VIL_BLI_INNHENTET,
-            },
-            {
-              label: <FormattedMessage id="InnhentDokOpptjeningUtlandPanel.InnhentesIkke" values={{ b: bTag }} />,
-              value: OpptjeningIUtlandDokStatus.DOKUMENTASJON_VIL_IKKE_BLI_INNHENTET,
-            },
-          ]}
-        />
-        <VerticalSpacer sixteenPx />
-        <FaktaBegrunnelseTextField
-          isSubmittable={submittable}
-          isReadOnly={readOnly}
-          hasBegrunnelse={!!begrunnelse}
-          label={intl.formatMessage({ id: 'InnhentDokOpptjeningUtlandPanel.Begrunnelse' })}
-        />
-        <VerticalSpacer sixteenPx />
-        <FaktaSubmitButton
-          isSubmittable={submittable}
-          isSubmitting={formMethods.formState.isSubmitting}
-          isDirty={formMethods.formState.isDirty}
-          isReadOnly={readOnly}
-        />
-      </AksjonspunktBox>
+      <VStack gap="6">
+        <Heading size="small">
+          <FormattedMessage id="InnhentDokOpptjeningUtlandPanel.OpptjeningUtland" />
+        </Heading>
+        <AksjonspunktBox
+          className={styles.aksjonspunktMargin}
+          erAksjonspunktApent={harApneAksjonspunkter}
+          erIkkeGodkjentAvBeslutter={!!alleMerknaderFraBeslutter[aksjonspunkt.definisjon]?.notAccepted}
+        >
+          <VStack gap="4">
+            <RadioGroupPanel
+              name="dokStatus"
+              label={<FormattedMessage id="InnhentDokOpptjeningUtlandPanel.InnhentelseDok" />}
+              validate={[required]}
+              isReadOnly={readOnly}
+              radios={[
+                {
+                  label: <FormattedMessage id="InnhentDokOpptjeningUtlandPanel.Innhentes" />,
+                  value: OpptjeningIUtlandDokStatus.DOKUMENTASJON_VIL_BLI_INNHENTET,
+                },
+                {
+                  label: <FormattedMessage id="InnhentDokOpptjeningUtlandPanel.InnhentesIkke" values={{ b: bTag }} />,
+                  value: OpptjeningIUtlandDokStatus.DOKUMENTASJON_VIL_IKKE_BLI_INNHENTET,
+                },
+              ]}
+            />
+            <FaktaBegrunnelseTextField
+              isSubmittable={submittable}
+              isReadOnly={readOnly}
+              hasBegrunnelse={!!begrunnelse}
+              label={intl.formatMessage({ id: 'InnhentDokOpptjeningUtlandPanel.Begrunnelse' })}
+            />
+            <FaktaSubmitButton
+              isSubmittable={submittable}
+              isSubmitting={formMethods.formState.isSubmitting}
+              isDirty={formMethods.formState.isDirty}
+              isReadOnly={readOnly}
+            />
+          </VStack>
+        </AksjonspunktBox>
+      </VStack>
     </Form>
   );
 };

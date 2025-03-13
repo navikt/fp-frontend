@@ -3,7 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ChevronDownIcon, ChevronUpIcon, ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Detail, HStack, Label, Link, Spacer, Tooltip, VStack } from '@navikt/ds-react';
-import { AvsnittSkiller, DateLabel, PeriodLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { AvsnittSkiller, DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 import { getKodeverknavnFraKode, KodeverkType } from '@navikt/fp-kodeverk';
@@ -59,7 +59,7 @@ export const InntektsmeldingerPanel = ({
     : undefined;
 
   return (
-    <>
+    <VStack gap="4">
       {arbeidsgiverFødselsdato && (
         <HStack gap="4">
           <Label size="small">
@@ -80,9 +80,7 @@ export const InntektsmeldingerPanel = ({
       )}
       {!harEttArbeidsforhold && (
         <>
-          <VerticalSpacer eightPx />
           <AvsnittSkiller dividerParagraf className={styles.skiller} />
-          <VerticalSpacer sixteenPx />
           {arbeidsforholdForRad.map(a => {
             const inntektsmelding = inntektsmeldingerForRad.find(i => erMatch(a, i));
             return (
@@ -178,7 +176,6 @@ export const InntektsmeldingerPanel = ({
                           skalViseArbeidsforholdId={false}
                         />
                       )}
-                      <VerticalSpacer fourPx />
                       <Link
                         onClick={e => {
                           e.preventDefault();
@@ -215,15 +212,12 @@ export const InntektsmeldingerPanel = ({
                     </>
                   )}
                 </VStack>
-                <VerticalSpacer sixteenPx />
                 <AvsnittSkiller dividerParagraf className={styles.skiller} />
-                <VerticalSpacer sixteenPx />
               </React.Fragment>
             );
           })}
         </>
       )}
-      <VerticalSpacer eightPx />
       {harEttArbeidsforhold && !!inntektsmeldingForArbeidsforhold && (
         <InntektsmeldingOpplysningerPanel
           saksnummer={saksnummer}
@@ -243,27 +237,24 @@ export const InntektsmeldingerPanel = ({
             <BodyShort size="small">{`${arbeidsforholdForRad[0].stillingsprosent}%`}</BodyShort>
           </HStack>
           {arbeidsforholdForRad[0].permisjonOgMangel && (
-            <>
-              <VerticalSpacer eightPx />
-              <HStack gap="4">
-                <Label size="small">
-                  {getKodeverknavnFraKode(
-                    alleKodeverk,
-                    KodeverkType.PERMISJONSBESKRIVELSE_TYPE,
-                    arbeidsforholdForRad[0].permisjonOgMangel.type,
-                  )}
-                </Label>
-                <BodyShort size="small">
-                  <PeriodLabel
-                    dateStringFom={arbeidsforholdForRad[0].permisjonOgMangel.permisjonFom}
-                    dateStringTom={arbeidsforholdForRad[0].permisjonOgMangel.permisjonTom}
-                  />
-                </BodyShort>
-              </HStack>
-            </>
+            <HStack gap="4">
+              <Label size="small">
+                {getKodeverknavnFraKode(
+                  alleKodeverk,
+                  KodeverkType.PERMISJONSBESKRIVELSE_TYPE,
+                  arbeidsforholdForRad[0].permisjonOgMangel.type,
+                )}
+              </Label>
+              <BodyShort size="small">
+                <PeriodLabel
+                  dateStringFom={arbeidsforholdForRad[0].permisjonOgMangel.permisjonFom}
+                  dateStringTom={arbeidsforholdForRad[0].permisjonOgMangel.permisjonTom}
+                />
+              </BodyShort>
+            </HStack>
           )}
         </>
       )}
-    </>
+    </VStack>
   );
 };

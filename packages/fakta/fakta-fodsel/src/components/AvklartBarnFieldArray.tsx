@@ -5,7 +5,6 @@ import { useIntl } from 'react-intl';
 import { HStack } from '@navikt/ds-react';
 import { Datepicker, PeriodFieldArray } from '@navikt/ft-form-hooks';
 import { dateBeforeOrEqualToToday, hasValidDate, required } from '@navikt/ft-form-validators';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import type { AvklartBarn } from '@navikt/fp-types';
 
@@ -43,7 +42,6 @@ export const AvklartBarnFieldArray = ({ readOnly }: Props) => {
     >
       {(field, index, getRemoveButton = () => '-') => (
         <React.Fragment key={field.id}>
-          <VerticalSpacer sixteenPx />
           <HStack gap="4" align="end">
             <Datepicker
               name={`${FIELD_ARRAY_NAME}.${index}.fodselsdato`}

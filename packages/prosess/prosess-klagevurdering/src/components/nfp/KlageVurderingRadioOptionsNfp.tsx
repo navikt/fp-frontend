@@ -1,8 +1,9 @@
 import { useIntl } from 'react-intl';
 
+import { VStack } from '@navikt/ds-react';
 import { RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
 import {
   KlageVurdering as klageVurderingType,
@@ -37,7 +38,7 @@ export const KlageVurderingRadioOptionsNfp = ({
     </option>
   ));
   return (
-    <>
+    <VStack gap="4">
       <RadioGroupPanel
         name="klageVurdering"
         validate={[required]}
@@ -55,9 +56,8 @@ export const KlageVurderingRadioOptionsNfp = ({
         ]}
       />
       {klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE && (
-        <>
-          <VerticalSpacer sixteenPx />
-          <ArrowBox>
+        <ArrowBox>
+          <VStack gap="4">
             <SelectField
               readOnly={readOnly}
               name="klageMedholdArsak"
@@ -66,7 +66,6 @@ export const KlageVurderingRadioOptionsNfp = ({
               label={intl.formatMessage({ id: 'Klage.ResolveKlage.Cause' })}
               validate={[required]}
             />
-            <VerticalSpacer sixteenPx />
             <RadioGroupPanel
               name="klageVurderingOmgjoer"
               validate={[required]}
@@ -86,10 +85,9 @@ export const KlageVurderingRadioOptionsNfp = ({
                 },
               ]}
             />
-          </ArrowBox>
-        </>
+          </VStack>
+        </ArrowBox>
       )}
-      <VerticalSpacer sixteenPx />
       <SelectField
         readOnly={readOnly}
         name="klageHjemmel"
@@ -98,7 +96,6 @@ export const KlageVurderingRadioOptionsNfp = ({
         label={intl.formatMessage({ id: 'Klage.ResolveKlage.Hjemmel' })}
         validate={[required]}
       />
-      <VerticalSpacer sixteenPx />
-    </>
+    </VStack>
   );
 };

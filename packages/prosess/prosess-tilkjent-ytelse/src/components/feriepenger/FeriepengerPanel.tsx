@@ -1,8 +1,7 @@
 import React, { useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { Accordion, Heading } from '@navikt/ds-react';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { Accordion, Heading, VStack } from '@navikt/ds-react';
 
 import type {
   AlleKodeverk,
@@ -52,9 +51,8 @@ export const FeriepengerPanel = ({
       <Accordion.Item open={erPanelÅpent}>
         <Accordion.Header onClick={togglePanel}>{hentTittel()}</Accordion.Header>
         <Accordion.Content>
-          {opptjeningsår.map(år => (
-            <div key={`div_${år}`}>
-              <VerticalSpacer sixteenPx key={`spacer_${år}`} />
+          <VStack gap="4">
+            {opptjeningsår.map(år => (
               <FeriepengerPrAar
                 key={`tabell_${år}`}
                 alleAndeler={andeler}
@@ -62,8 +60,8 @@ export const FeriepengerPanel = ({
                 alleKodeverk={alleKodeverk}
                 arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
               />
-            </div>
-          ))}
+            ))}
+          </VStack>
         </Accordion.Content>
       </Accordion.Item>
     </Accordion>

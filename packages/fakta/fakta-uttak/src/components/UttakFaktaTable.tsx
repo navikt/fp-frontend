@@ -2,8 +2,7 @@ import React, { useCallback } from 'react';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { PlusCircleIcon } from '@navikt/aksel-icons';
-import { Button, Heading, HStack, Table, VStack } from '@navikt/ds-react';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { Button, Heading, Table, VStack } from '@navikt/ds-react';
 import { calcDaysAndWeeks, dateFormat } from '@navikt/ft-utils';
 import classnames from 'classnames/bind';
 import dayjs from 'dayjs';
@@ -183,7 +182,7 @@ export const UttakFaktaTable = ({
       {erRedigerbart && (
         <>
           {!visNyPeriode && (
-            <HStack>
+            <div>
               <Button
                 size="small"
                 variant="tertiary"
@@ -196,14 +195,13 @@ export const UttakFaktaTable = ({
               >
                 <FormattedMessage id="UttakFaktaForm.LeggTilPeriode" />
               </Button>
-            </HStack>
+            </div>
           )}
           {visNyPeriode && (
-            <div className={styles.panel}>
+            <VStack gap="4" className={styles.panel}>
               <Heading size="small">
                 <FormattedMessage id="UttakFaktaForm.NyPeriode" />
               </Heading>
-              <VerticalSpacer sixteenPx />
               <UttakFaktaDetailForm
                 fagsak={fagsak}
                 avbrytEditering={() => settVisNyPeriode(false)}
@@ -221,7 +219,7 @@ export const UttakFaktaTable = ({
                 faktaArbeidsforhold={faktaArbeidsforhold}
                 defaultMonth={sisteMåned}
               />
-            </div>
+            </VStack>
           )}
         </>
       )}

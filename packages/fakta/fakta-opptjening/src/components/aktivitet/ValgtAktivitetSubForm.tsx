@@ -1,7 +1,6 @@
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, HStack, Label, VStack } from '@navikt/ds-react';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT, formatCurrencyNoKr, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
@@ -78,7 +77,6 @@ export const ValgtAktivitetSubForm = ({
     ) && (
       <HStack gap="4">
         <div>
-          <VerticalSpacer eightPx />
           <Label size="small">
             <FormattedMessage id={getOppdragsgiverIntlId(valgtAktivitetstype)} />
           </Label>
@@ -88,7 +86,6 @@ export const ValgtAktivitetSubForm = ({
         </div>
         {erAvType(valgtAktivitetstype, OpptjeningAktivitetType.ARBEID) && (
           <div>
-            <VerticalSpacer eightPx />
             <Label size="small">
               <FormattedMessage id="ActivityPanel.Stillingsandel" />
             </Label>

@@ -3,7 +3,7 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, Avslagsarsak, VilkarUtfallType } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, Behandling } from '@navikt/fp-types';
 
 import { OmsorgVilkarProsessIndex } from './OmsorgVilkarProsessIndex';
@@ -11,7 +11,7 @@ import { OmsorgVilkarProsessIndex } from './OmsorgVilkarProsessIndex';
 const meta = {
   title: 'prosess/prosess-vilkar-omsorg',
   component: OmsorgVilkarProsessIndex,
-  decorators: [withFormData, withPanelData],
+  decorators: [withMellomlagretFormData, withPanelData],
   render: args => <OmsorgVilkarProsessIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof OmsorgVilkarProsessIndex>>;
 export default meta;
@@ -24,9 +24,10 @@ export const ÅpentAksjonspunkt: Story = {
       {
         definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKARET,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
+        begrunnelse: null,
+        kanLoses: true,
       },
-    ] as Aksjonspunkt[],
+    ],
     readOnlySubmitButton: false,
     status: VilkarUtfallType.IKKE_VURDERT,
   },
@@ -39,6 +40,7 @@ export const OppfyltVilkår: Story = {
         definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKARET,
         status: AksjonspunktStatus.UTFORT,
         begrunnelse: 'Dette vilkåret er godkjent',
+        kanLoses: false,
       },
     ] as Aksjonspunkt[],
     isReadOnly: true,
@@ -61,8 +63,9 @@ export const AvslåttVilkår: Story = {
         definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKARET,
         status: AksjonspunktStatus.UTFORT,
         begrunnelse: 'Dette vilkåret er avslått',
+        kanLoses: false,
       },
-    ] as Aksjonspunkt[],
+    ],
     isReadOnly: true,
     readOnlySubmitButton: true,
     status: VilkarUtfallType.IKKE_OPPFYLT,

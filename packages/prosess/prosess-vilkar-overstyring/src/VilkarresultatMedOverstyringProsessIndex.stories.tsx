@@ -15,7 +15,7 @@ import {
   alleKodeverk,
   type PanelDataArgs,
   type PanelOverstyringContextArgs,
-  withFormData,
+  withMellomlagretFormData,
   withPanelData,
   withPanelOverstyring,
 } from '@navikt/fp-storybook-utils';
@@ -46,7 +46,7 @@ const defaultAvslagsarsaker = [
 const meta = {
   title: 'prosess/prosess-vilkar-overstyring',
   component: VilkarresultatMedOverstyringProsessIndex,
-  decorators: [withFormData, withPanelData, withPanelOverstyring],
+  decorators: [withMellomlagretFormData, withPanelData, withPanelOverstyring],
   args: {
     behandling: defaultBehandling,
     kanOverstyreAccess: { isEnabled: true, employeeHasAccess: true },

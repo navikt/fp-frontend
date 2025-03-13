@@ -2,9 +2,9 @@ import { type ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
-import { HStack } from '@navikt/ds-react';
+import { HStack, VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
-import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import {
   type FaktaBegrunnelseFormValues,
@@ -20,7 +20,7 @@ import type {
   BekreftEktefelleAksjonspunktAp,
   BekreftMannAdoptererAksjonspunktAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { DokumentasjonFaktaForm, type FormValues as DokFormValues } from './DokumentasjonFaktaForm';
 import { EktefelleFaktaForm, type FormValues as EktefelleFormValues } from './EktefelleFaktaForm';
@@ -125,10 +125,10 @@ export const AdopsjonInfoPanel = ({ submittable, isForeldrepengerFagsak, soknad,
     isReadOnly,
   } = usePanelDataContext<AksjonspunktData>();
 
-  const { formData, setFormData } = useFormData<FormValues>();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || buildInitialValues(soknad, gjeldendeFamiliehendelse, aksjonspunkterForPanel),
+    defaultValues: mellomlagretFormData || buildInitialValues(soknad, gjeldendeFamiliehendelse, aksjonspunkterForPanel),
   });
 
   const begrunnelse = formMethods.watch('begrunnelse');
@@ -139,60 +139,59 @@ export const AdopsjonInfoPanel = ({ submittable, isForeldrepengerFagsak, soknad,
     submitCallback(transformValues(values, aksjonspunkterForPanel));
 
   return (
-    <>
+    <VStack gap="4">
       {harÅpneAksjonspunkter && (
         <AksjonspunktHelpTextHTML>{getHelpTexts(aksjonspunkterForPanel)}</AksjonspunktHelpTextHTML>
       )}
-      <Form formMethods={formMethods} onSubmit={onSubmit} setDataOnUnmount={setFormData}>
-        <VerticalSpacer eightPx />
-        <HStack gap="4" wrap>
-          <div className={styles.leftCol}>
-            <DokumentasjonFaktaForm
-              readOnly={isReadOnly}
-              editedStatus={editedStatus}
-              erForeldrepengerFagsak={isForeldrepengerFagsak}
-              alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-              hasEktefellesBarnAksjonspunkt={hasAksjonspunkt(
-                OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
-                aksjonspunkterForPanel,
-              )}
-            />
-          </div>
-          {hasAksjonspunkt(OM_ADOPSJON_GJELDER_EKTEFELLES_BARN, aksjonspunkterForPanel) && (
-            <EktefelleFaktaForm
-              readOnly={isReadOnly}
-              alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-              ektefellesBarnIsEdited={editedStatus.ektefellesBarn}
-            />
+      <Form formMethods={formMethods} onSubmit={onSubmit} setDataOnUnmount={setMellomlagretFormData}>
+        <VStack gap="6">
+          <HStack gap="4" wrap>
+            <div className={styles.leftCol}>
+              <DokumentasjonFaktaForm
+                readOnly={isReadOnly}
+                editedStatus={editedStatus}
+                erForeldrepengerFagsak={isForeldrepengerFagsak}
+                alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+                hasEktefellesBarnAksjonspunkt={hasAksjonspunkt(
+                  OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
+                  aksjonspunkterForPanel,
+                )}
+              />
+            </div>
+            {hasAksjonspunkt(OM_ADOPSJON_GJELDER_EKTEFELLES_BARN, aksjonspunkterForPanel) && (
+              <EktefelleFaktaForm
+                readOnly={isReadOnly}
+                alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+                ektefellesBarnIsEdited={editedStatus.ektefellesBarn}
+              />
+            )}
+            {hasAksjonspunkt(OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE, aksjonspunkterForPanel) && (
+              <MannAdoptererAleneFaktaForm
+                farSokerType={soknad.farSokerType}
+                readOnly={isReadOnly}
+                mannAdoptererAlene={editedStatus.mannAdoptererAlene}
+                alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+                alleKodeverk={alleKodeverk}
+              />
+            )}
+          </HStack>
+          {aksjonspunkterForPanel && aksjonspunkterForPanel.length > 0 && (
+            <>
+              <FaktaBegrunnelseTextField
+                isSubmittable={submittable}
+                isReadOnly={isReadOnly}
+                hasBegrunnelse={!!begrunnelse}
+              />
+              <FaktaSubmitButton
+                isSubmittable={submittable}
+                isReadOnly={isReadOnly}
+                isSubmitting={formMethods.formState.isSubmitting}
+                isDirty={formMethods.formState.isDirty}
+              />
+            </>
           )}
-          {hasAksjonspunkt(OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE, aksjonspunkterForPanel) && (
-            <MannAdoptererAleneFaktaForm
-              farSokerType={soknad.farSokerType}
-              readOnly={isReadOnly}
-              mannAdoptererAlene={editedStatus.mannAdoptererAlene}
-              alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-              alleKodeverk={alleKodeverk}
-            />
-          )}
-        </HStack>
-        {aksjonspunkterForPanel && aksjonspunkterForPanel.length > 0 && (
-          <>
-            <VerticalSpacer twentyPx />
-            <FaktaBegrunnelseTextField
-              isSubmittable={submittable}
-              isReadOnly={isReadOnly}
-              hasBegrunnelse={!!begrunnelse}
-            />
-            <VerticalSpacer twentyPx />
-            <FaktaSubmitButton
-              isSubmittable={submittable}
-              isReadOnly={isReadOnly}
-              isSubmitting={formMethods.formState.isSubmitting}
-              isDirty={formMethods.formState.isDirty}
-            />
-          </>
-        )}
+        </VStack>
       </Form>
-    </>
+    </VStack>
   );
 };

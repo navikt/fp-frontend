@@ -46,7 +46,7 @@ export const DekningradForm = ({
 
   const defaultValues = {
     dekningsgrad,
-    begrunnelse: aksjonspunkt?.begrunnelse,
+    begrunnelse: aksjonspunkt?.begrunnelse ?? '',
   };
 
   const formMethods = useForm<FormValues>({
@@ -91,16 +91,14 @@ export const DekningradForm = ({
           )}
         </HStack>
         {aksjonspunkt?.begrunnelse && (
-          <HStack>
-            <Box background="bg-subtle" padding="5" borderColor="border-default" borderRadius="medium">
-              <VStack gap="2">
-                <Label size="small">
-                  <FormattedMessage id="DekningsgradForm.BeskrivelseAvEndring" />
-                </Label>
-                <BodyShort size="small">{aksjonspunkt?.begrunnelse}</BodyShort>
-              </VStack>
-            </Box>
-          </HStack>
+          <Box background="bg-subtle" padding="5" borderColor="border-default" borderRadius="medium">
+            <VStack gap="2">
+              <Label size="small">
+                <FormattedMessage id="DekningsgradForm.BeskrivelseAvEndring" />
+              </Label>
+              <BodyShort size="small">{aksjonspunkt.begrunnelse}</BodyShort>
+            </VStack>
+          </Box>
         )}
       </VStack>
     );
@@ -175,7 +173,7 @@ export const DekningradForm = ({
             maxLength={1500}
             readOnly={readOnly}
           />
-          <HStack>
+          <div>
             <Button
               variant="primary"
               size="small"
@@ -184,7 +182,7 @@ export const DekningradForm = ({
             >
               <FormattedMessage id="DekningsgradForm.Bekreft" />
             </Button>
-          </HStack>
+          </div>
         </VStack>
       </Box>
     </Form>

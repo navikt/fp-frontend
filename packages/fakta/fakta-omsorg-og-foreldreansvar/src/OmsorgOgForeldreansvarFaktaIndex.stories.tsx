@@ -111,7 +111,7 @@ export const ÅpentAksjonspunktForOmsorgovertakelse: Story = {
       {
         definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
+        begrunnelse: null,
         kanLoses: true,
       },
     ],
@@ -154,7 +154,7 @@ export const ÅpentAksjonspunktForAvklareVilkårForForeldreansvar: Story = {
       {
         definisjon: AksjonspunktKode.AVKLAR_VILKAR_FOR_FORELDREANSVAR,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
+        begrunnelse: null,
         kanLoses: true,
       },
     ],

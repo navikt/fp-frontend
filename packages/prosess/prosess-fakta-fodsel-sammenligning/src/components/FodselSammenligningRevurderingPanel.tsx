@@ -1,13 +1,10 @@
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, Heading, Label } from '@navikt/ds-react';
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { BodyShort, Heading, HStack, Label, VStack } from '@navikt/ds-react';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import moment from 'moment';
 
 import type { FamilieHendelse, Soknad } from '@navikt/fp-types';
-
-import styles from './fodselSammenligningOtherPanel.module.css';
 
 const formatDate = (date: string): string => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
 
@@ -88,35 +85,32 @@ export const FodselSammenligningRevurderingPanel = ({
       !!vedtaksDatoSomSvangerskapsuke;
 
   return (
-    <>
+    <VStack gap="4">
       <Heading size="small">
         <FormattedMessage id="FodselsammenligningPanel.Ytelsesvedtak" />
       </Heading>
-      <VerticalSpacer sixteenPx />
-      <FlexContainer>
-        <FlexRow>
-          {shouldShowVedtaksdatoAsSvangerskapsuke && (
-            <FlexColumn className={styles.colMargin}>
-              <Label size="small">
-                <FormattedMessage id="FodselsammenligningPanel.FodtISvangerskapsuke" />
-              </Label>
-              <BodyShort size="small">{vedtaksDatoSomSvangerskapsuke}</BodyShort>
-            </FlexColumn>
-          )}
-          <FlexColumn className={styles.colMargin}>
+      <HStack gap="4">
+        {shouldShowVedtaksdatoAsSvangerskapsuke && (
+          <div>
             <Label size="small">
-              <FormattedMessage id={terminOrFodselLabel} />
+              <FormattedMessage id="FodselsammenligningPanel.FodtISvangerskapsuke" />
             </Label>
-            <BodyShort size="small">{terminOrFodselDate ?? '-'}</BodyShort>
-          </FlexColumn>
-          <FlexColumn>
-            <Label size="small">
-              <FormattedMessage id="FodselsammenligningPanel.AntallBarn" />
-            </Label>
-            <BodyShort size="small">{antallBarn ?? '-'}</BodyShort>
-          </FlexColumn>
-        </FlexRow>
-      </FlexContainer>
-    </>
+            <BodyShort size="small">{vedtaksDatoSomSvangerskapsuke}</BodyShort>
+          </div>
+        )}
+        <div>
+          <Label size="small">
+            <FormattedMessage id={terminOrFodselLabel} />
+          </Label>
+          <BodyShort size="small">{terminOrFodselDate ?? '-'}</BodyShort>
+        </div>
+        <div>
+          <Label size="small">
+            <FormattedMessage id="FodselsammenligningPanel.AntallBarn" />
+          </Label>
+          <BodyShort size="small">{antallBarn ?? '-'}</BodyShort>
+        </div>
+      </HStack>
+    </VStack>
   );
 };

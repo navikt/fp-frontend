@@ -8,7 +8,7 @@ import {
   KlageVurdering as klageVurderingCodes,
   KlageVurderingOmgjoer as klageVurderingOmgjoerType,
 } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, KlageVurdering } from '@navikt/fp-types';
 
 import { KlagevurderingProsessIndex } from './KlagevurderingProsessIndex';
@@ -16,7 +16,7 @@ import { KlagevurderingProsessIndex } from './KlagevurderingProsessIndex';
 const meta = {
   title: 'prosess/klage/prosess-klagevurdering',
   component: KlagevurderingProsessIndex,
-  decorators: [withFormData, withPanelData],
+  decorators: [withMellomlagretFormData, withPanelData],
   args: {
     saveKlage: action('button-click') as (data: any) => Promise<void>,
     previewCallback: action('button-click') as (data: any) => Promise<void>,

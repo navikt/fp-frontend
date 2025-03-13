@@ -3,7 +3,6 @@ import { FormattedMessage } from 'react-intl';
 
 import { ChevronDownIcon, ChevronUpIcon } from '@navikt/aksel-icons';
 import { BodyShort, HStack, Label, Link, Spacer, VStack } from '@navikt/ds-react';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { formatCurrencyNoKr, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
@@ -76,7 +75,7 @@ export const ArbeidsforholdInformasjonPanel = ({
   const visInntektsposter = inntektsposter.length > 0 && inntektsposter.some(i => i.beløp > 0);
 
   return (
-    <>
+    <VStack gap="8">
       <InntektsmeldingerPanel
         saksnummer={saksnummer}
         arbeidsforholdForRad={arbeidsforholdForRad}
@@ -84,9 +83,8 @@ export const ArbeidsforholdInformasjonPanel = ({
         alleKodeverk={alleKodeverk}
         arbeidsgiverFødselsdato={arbeidsgiverFødselsdato}
       />
-      <VerticalSpacer thirtyTwoPx />
       {visInntektsposter && (
-        <>
+        <VStack gap="2">
           <Label size="small">
             <FormattedMessage
               id={
@@ -96,8 +94,7 @@ export const ArbeidsforholdInformasjonPanel = ({
               }
             />
           </Label>
-          <VerticalSpacer fourPx />
-          <VStack>
+          <VStack gap="1">
             {sorterteInntektsposter
               .filter((_inntekt, index) => (visAlleMåneder ? true : index < 3))
               .map(inntekt => (
@@ -111,7 +108,6 @@ export const ArbeidsforholdInformasjonPanel = ({
                 </HStack>
               ))}
           </VStack>
-          <VerticalSpacer fourPx />
           <Link
             onClick={e => {
               e.preventDefault();
@@ -132,14 +128,13 @@ export const ArbeidsforholdInformasjonPanel = ({
             </span>
             {visAlleMåneder ? <ChevronUpIcon className={styles.arrow} /> : <ChevronDownIcon className={styles.arrow} />}
           </Link>
-        </>
+        </VStack>
       )}
       {!visInntektsposter && (
         <Label size="small">
           <FormattedMessage id="ArbeidsforholdInformasjonPanel.IngenInntekt" />
         </Label>
       )}
-      <VerticalSpacer thirtyTwoPx />
-    </>
+    </VStack>
   );
 };

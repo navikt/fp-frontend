@@ -45,7 +45,7 @@ export const ArbeidsforholdFieldArray = ({
   });
 
   return (
-    <>
+    <div>
       {fields.map((field, index) => (
         <ArbeidsforholdField
           key={field.id}
@@ -61,6 +61,6 @@ export const ArbeidsforholdFieldArray = ({
           alleKodeverk={alleKodeverk}
         />
       ))}
-    </>
+    </div>
   );
 };

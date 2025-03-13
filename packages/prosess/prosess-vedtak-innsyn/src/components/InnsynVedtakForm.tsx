@@ -2,17 +2,16 @@ import React, { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BodyShort, Heading, HStack, Label, Link } from '@navikt/ds-react';
+import { BodyShort, Heading, HStack, Label, Link, VStack } from '@navikt/ds-react';
 import { Form, TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength } from '@navikt/ft-form-validators';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { decodeHtmlEntity, formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
 import { AksjonspunktKode, DokumentMalType, InnsynResultatType, Kommunikasjonsretning } from '@navikt/fp-kodeverk';
 import { ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, Dokument, InnsynDokument } from '@navikt/fp-types';
 import type { ForeslaVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { DocumentListVedtakInnsyn } from './DocumentListVedtakInnsyn';
 
@@ -83,12 +82,13 @@ type FormValues = {
 
 const buildInitialValues = (innsynMottattDato: string, aksjonspunkter: Aksjonspunkt[]): FormValues => ({
   mottattDato: innsynMottattDato,
-  begrunnelse: aksjonspunkter.find(ap => ap.definisjon === AksjonspunktKode.FORESLA_VEDTAK)?.begrunnelse,
+  begrunnelse: aksjonspunkter.find(ap => ap.definisjon === AksjonspunktKode.FORESLA_VEDTAK)?.begrunnelse ?? undefined,
 });
 
 const transformValues = (values: FormValues): ForeslaVedtakAp => ({
   kode: AksjonspunktKode.FORESLA_VEDTAK,
   ...values,
+  begrunnelse: values.begrunnelse === '' ? undefined : values.begrunnelse,
 });
 
 interface Props {
@@ -118,10 +118,10 @@ export const InnsynVedtakForm = ({
 
   const initialValues = buildInitialValues(innsynMottattDato, aksjonspunkterForPanel);
 
-  const { formData, setFormData } = useFormData<FormValues>();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || initialValues,
+    defaultValues: mellomlagretFormData || initialValues,
   });
 
   const documents = useMemo(
@@ -129,9 +129,8 @@ export const InnsynVedtakForm = ({
     [alleDokumenter, innsynDokumenter],
   );
 
-  const apBegrunnelse = aksjonspunkterForPanel.find(
-    ap => ap.definisjon === AksjonspunktKode.VURDER_INNSYN,
-  )?.begrunnelse;
+  const apVurderInnsynBegrunnelse =
+    aksjonspunkterForPanel.find(ap => ap.definisjon === AksjonspunktKode.VURDER_INNSYN)?.begrunnelse ?? undefined;
 
   const begrunnelse = formMethods.watch('begrunnelse');
 
@@ -141,73 +140,74 @@ export const InnsynVedtakForm = ({
     <Form
       formMethods={formMethods}
       onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
-      setDataOnUnmount={setFormData}
+      setDataOnUnmount={setMellomlagretFormData}
     >
-      <Heading size="small">
-        <FormattedMessage id={isReadOnly ? 'InnsynVedtakForm.Vedtak' : 'InnsynVedtakForm.ForslagVedtak'} />
-      </Heading>
-      <VerticalSpacer eightPx />
-      <Label size="small">
-        <FormattedMessage id="InnsynVedtakForm.Resultat" />
-      </Label>
-      <BodyShort size="small">
-        <FormattedMessage id={findResultTypeMessage(innsynResultatType)} />
-      </BodyShort>
-      <VerticalSpacer eightPx />
-      <Label size="small">
-        <FormattedMessage id="InnsynVedtakForm.Vurdering" />
-      </Label>
-      <BodyShort size="small" className={styles.wordwrap}>
-        {decodeHtmlEntity(apBegrunnelse)}
-      </BodyShort>
-      <VerticalSpacer twentyPx />
-      {innsynResultatType !== InnsynResultatType.INNVILGET && (
-        <TextAreaField
-          name="begrunnelse"
-          label={intl.formatMessage({ id: 'InnsynVedtakForm.Fritekst' })}
-          validate={[minLength3, maxLength1500, hasValidText]}
-          maxLength={1500}
-          readOnly={isReadOnly}
-          parse={formaterFritekst}
-          badges={[
-            {
-              type: 'info',
-              titleText: getLanguageFromSprakkode(behandling.sprakkode),
-            },
-          ]}
-        />
-      )}
-      <VerticalSpacer twentyPx />
-      {innsynResultatType !== InnsynResultatType.AVVIST && (
-        <DocumentListVedtakInnsyn
-          saksNr={fagsak.saksnummer}
-          documents={documents.filter(document => document.fikkInnsyn === true)}
-        />
-      )}
-      <VerticalSpacer twentyPx />
-      <HStack gap="2">
-        {!isReadOnly && (
-          <ProsessStegSubmitButtonNew
-            isReadOnly={isReadOnly}
-            isSubmittable
-            isSubmitting={formMethods.formState.isSubmitting}
-            isDirty={formMethods.formState.isDirty}
-            hasEmptyRequiredFields={false}
+      <VStack gap="4">
+        <Heading size="small">
+          <FormattedMessage id={isReadOnly ? 'InnsynVedtakForm.Vedtak' : 'InnsynVedtakForm.ForslagVedtak'} />
+        </Heading>
+        <VStack gap="1">
+          <Label size="small">
+            <FormattedMessage id="InnsynVedtakForm.Resultat" />
+          </Label>
+          <BodyShort size="small">
+            <FormattedMessage id={findResultTypeMessage(innsynResultatType)} />
+          </BodyShort>
+        </VStack>
+        <VStack gap="1">
+          <Label size="small">
+            <FormattedMessage id="InnsynVedtakForm.Vurdering" />
+          </Label>
+          <BodyShort size="small" className={styles.wordwrap}>
+            {decodeHtmlEntity(apVurderInnsynBegrunnelse)}
+          </BodyShort>
+        </VStack>
+        {innsynResultatType !== InnsynResultatType.INNVILGET && (
+          <TextAreaField
+            name="begrunnelse"
+            label={intl.formatMessage({ id: 'InnsynVedtakForm.Fritekst' })}
+            validate={[minLength3, maxLength1500, hasValidText]}
+            maxLength={1500}
+            readOnly={isReadOnly}
+            parse={formaterFritekst}
+            badges={[
+              {
+                type: 'info',
+                titleText: getLanguageFromSprakkode(behandling.sprakkode),
+              },
+            ]}
           />
         )}
-        <Link
-          href="#"
-          onClick={previewBrev}
-          onKeyDown={e => (e.key === 'Enter' ? previewBrev(e) : null)}
-          target="_blank"
-        >
-          {isReadOnly ? (
-            <FormattedMessage id="InnsynVedtakForm.VisVedtaksbrev" />
-          ) : (
-            <FormattedMessage id="InnsynVedtakForm.ForhåndsvisBrev" />
+        {innsynResultatType !== InnsynResultatType.AVVIST && (
+          <DocumentListVedtakInnsyn
+            saksNr={fagsak.saksnummer}
+            documents={documents.filter(document => document.fikkInnsyn === true)}
+          />
+        )}
+        <HStack gap="4">
+          {!isReadOnly && (
+            <ProsessStegSubmitButtonNew
+              isReadOnly={isReadOnly}
+              isSubmittable
+              isSubmitting={formMethods.formState.isSubmitting}
+              isDirty={formMethods.formState.isDirty}
+              hasEmptyRequiredFields={false}
+            />
           )}
-        </Link>
-      </HStack>
+          <Link
+            href="#"
+            onClick={previewBrev}
+            onKeyDown={e => (e.key === 'Enter' ? previewBrev(e) : null)}
+            target="_blank"
+          >
+            {isReadOnly ? (
+              <FormattedMessage id="InnsynVedtakForm.VisVedtaksbrev" />
+            ) : (
+              <FormattedMessage id="InnsynVedtakForm.ForhåndsvisBrev" />
+            )}
+          </Link>
+        </HStack>
+      </VStack>
     </Form>
   );
 };

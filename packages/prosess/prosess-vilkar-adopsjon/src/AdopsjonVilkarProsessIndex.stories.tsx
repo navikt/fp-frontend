@@ -3,15 +3,15 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, Avslagsarsak, VilkarUtfallType } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt, Behandling, Vilkar } from '@navikt/fp-types';
+import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import type { Behandling, Vilkar } from '@navikt/fp-types';
 
 import { AdopsjonVilkarProsessIndex } from './AdopsjonVilkarProsessIndex';
 
 const meta = {
   title: 'prosess/prosess-vilkar-adopsjon',
   component: AdopsjonVilkarProsessIndex,
-  decorators: [withFormData, withPanelData],
+  decorators: [withMellomlagretFormData, withPanelData],
   args: {
     vilkar: [
       {
@@ -31,9 +31,10 @@ export const ÅpentAksjonspunkt: Story = {
       {
         definisjon: AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
+        begrunnelse: null,
+        kanLoses: true,
       },
-    ] as Aksjonspunkt[],
+    ],
     readOnlySubmitButton: false,
     status: VilkarUtfallType.IKKE_VURDERT,
   },
@@ -46,8 +47,9 @@ export const OppfyltVilkår: Story = {
         definisjon: AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
         status: AksjonspunktStatus.UTFORT,
         begrunnelse: 'Dette vilkåret er godkjent',
+        kanLoses: false,
       },
-    ] as Aksjonspunkt[],
+    ],
     isReadOnly: true,
     readOnlySubmitButton: true,
     status: VilkarUtfallType.OPPFYLT,
@@ -68,8 +70,9 @@ export const AvslåttVilkår: Story = {
         definisjon: AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
         status: AksjonspunktStatus.UTFORT,
         begrunnelse: 'Dette vilkåret er avslått',
+        kanLoses: true,
       },
-    ] as Aksjonspunkt[],
+    ],
     isReadOnly: true,
     readOnlySubmitButton: true,
     status: VilkarUtfallType.IKKE_OPPFYLT,

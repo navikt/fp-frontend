@@ -9,7 +9,7 @@ import {
   BehandlingType,
   KlageVurdering as klageVurderingCodes,
 } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, KlageVurdering } from '@navikt/fp-types';
 
 import { FormkravProsessIndex } from './FormkravProsessIndex';
@@ -25,7 +25,7 @@ const avsluttedeBehandlinger = [
 const meta = {
   title: 'prosess/klage/prosess-formkrav',
   component: FormkravProsessIndex,
-  decorators: [withFormData, withPanelData],
+  decorators: [withMellomlagretFormData, withPanelData],
   args: {
     lagreFormkravVurdering: action('button-click') as (data: any) => Promise<void>,
     readOnlySubmitButton: false,

@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import { type Aksjonspunkt, AksjonspunktÅrsak, type ArbeidOgInntektsmelding } from '@navikt/fp-types';
 
 import { ArbeidOgInntektFaktaIndex } from './ArbeidOgInntektFaktaIndex';
@@ -29,7 +29,7 @@ const fellesInntektsmeldingFelter = {
 const meta = {
   title: 'fakta/fakta-arbeid-og-inntekter',
   component: ArbeidOgInntektFaktaIndex,
-  decorators: [withFormData, withPanelData],
+  decorators: [withMellomlagretFormData, withPanelData],
   args: {
     arbeidsgiverOpplysningerPerId: {},
     lagreVurdering: action('onLagreVurdering') as () => Promise<void>,
@@ -58,7 +58,6 @@ export const InnhentInntektsmelding: Story = {
     arbeidsgiverOpplysningerPerId: {
       910909088: {
         erPrivatPerson: false,
-        fødselsdato: undefined,
         identifikator: '910909088',
         navn: 'BEDRIFT AS',
         referanse: '910909088',
@@ -135,7 +134,6 @@ export const InnhentInntektsmeldingDerEnIkkeHarInntekterFraAAregisteret: Story =
     arbeidsgiverOpplysningerPerId: {
       910909088: {
         erPrivatPerson: false,
-        fødselsdato: undefined,
         identifikator: '910909088',
         navn: 'BEDRIFT AS',
         referanse: '910909088',
@@ -171,7 +169,6 @@ export const InnhentInntektsmeldingDerBehandlingErAvsluttet: Story = {
     arbeidsgiverOpplysningerPerId: {
       910909088: {
         erPrivatPerson: false,
-        fødselsdato: undefined,
         identifikator: '910909088',
         navn: 'BEDRIFT AS',
         referanse: '910909088',
@@ -211,7 +208,6 @@ export const AvklarManglendeArbeidsforhold: Story = {
     arbeidsgiverOpplysningerPerId: {
       910909088: {
         erPrivatPerson: false,
-        fødselsdato: undefined,
         identifikator: '910909088',
         navn: 'BEDRIFT AS',
         referanse: '910909088',
@@ -252,7 +248,6 @@ export const AvklarManglendeArbeidsforholdDerBehandlingErAvsluttet: Story = {
     arbeidsgiverOpplysningerPerId: {
       910909088: {
         erPrivatPerson: false,
-        fødselsdato: undefined,
         identifikator: '910909088',
         navn: 'BEDRIFT AS',
         referanse: '910909088',
@@ -305,7 +300,6 @@ export const AvklarManglendeOpplysningerDerAksjonspunktErBekreftetOgTilbakehoppM
     arbeidsgiverOpplysningerPerId: {
       910909088: {
         erPrivatPerson: false,
-        fødselsdato: undefined,
         identifikator: '910909088',
         navn: 'BEDRIFT AS',
         referanse: '910909088',
@@ -354,7 +348,6 @@ export const IngenAksjonspunktMenTilbakehoppMuligForOverstyrer: Story = {
     arbeidsgiverOpplysningerPerId: {
       910909088: {
         erPrivatPerson: false,
-        fødselsdato: undefined,
         identifikator: '910909088',
         navn: 'BEDRIFT AS',
         referanse: '910909088',
@@ -437,7 +430,6 @@ export const ArbeidsforholdErManueltLagtTilOgLagretOgReåpnet: Story = {
     arbeidsgiverOpplysningerPerId: {
       [MANUELT_ORG_NR]: {
         erPrivatPerson: false,
-        fødselsdato: undefined,
         identifikator: MANUELT_ORG_NR,
         navn: 'Telenor',
         referanse: MANUELT_ORG_NR,
@@ -467,7 +459,6 @@ export const ArbeidsforholdErManueltLagtTilOgBehandlingErAvsluttet: Story = {
     arbeidsgiverOpplysningerPerId: {
       [MANUELT_ORG_NR]: {
         erPrivatPerson: false,
-        fødselsdato: undefined,
         identifikator: MANUELT_ORG_NR,
         navn: 'Telenor',
         referanse: MANUELT_ORG_NR,
@@ -498,7 +489,6 @@ export const ArbeidsforholdErOK: Story = {
     arbeidsgiverOpplysningerPerId: {
       910909088: {
         erPrivatPerson: false,
-        fødselsdato: undefined,
         identifikator: '910909088',
         navn: 'BEDRIFT AS',
         referanse: '910909088',
@@ -582,7 +572,6 @@ export const ArbeidsforholdErOKDerDetErToArbeidsforholdFraSammeVirksomhet: Story
     arbeidsgiverOpplysningerPerId: {
       910909088: {
         erPrivatPerson: false,
-        fødselsdato: undefined,
         identifikator: '910909088',
         navn: 'BEDRIFT AS',
         referanse: '910909088',
@@ -688,21 +677,18 @@ export const FlereArbeidsforholdOgInntekstemeldinger: Story = {
     arbeidsgiverOpplysningerPerId: {
       910909088: {
         erPrivatPerson: false,
-        fødselsdato: undefined,
         identifikator: '910909088',
         navn: 'BEDRIFT AS',
         referanse: '910909088',
       },
       910909090: {
         erPrivatPerson: false,
-        fødselsdato: undefined,
         identifikator: '910909090',
         navn: 'Autoservice AS',
         referanse: '910909090',
       },
       910909092: {
         erPrivatPerson: false,
-        fødselsdato: undefined,
         identifikator: '910909092',
         navn: 'DNB',
         referanse: '910909092',
@@ -846,14 +832,12 @@ export const ArbeidsforholdMedSammeOrgNr: Story = {
     arbeidsgiverOpplysningerPerId: {
       910909088: {
         erPrivatPerson: false,
-        fødselsdato: undefined,
         identifikator: '910909088',
         navn: 'BEDRIFT AS',
         referanse: '910909088',
       },
       910909090: {
         erPrivatPerson: false,
-        fødselsdato: undefined,
         identifikator: '910909090',
         navn: 'Autoservice AS',
         referanse: '910909090',
@@ -965,14 +949,12 @@ export const ArbeidsforholdMedSammeOrgNrDerEnManglerInntektsmeldingMenIkkeDetAnd
     arbeidsgiverOpplysningerPerId: {
       910909088: {
         erPrivatPerson: false,
-        fødselsdato: undefined,
         identifikator: '910909088',
         navn: 'BEDRIFT AS',
         referanse: '910909088',
       },
       910909090: {
         erPrivatPerson: false,
-        fødselsdato: undefined,
         identifikator: '910909090',
         navn: 'Autoservice AS',
         referanse: '910909090',
@@ -1075,7 +1057,6 @@ export const FoerRegisterinnhenting: Story = {
     arbeidsgiverOpplysningerPerId: {
       947064649: {
         erPrivatPerson: false,
-        fødselsdato: undefined,
         identifikator: '947064649',
         navn: 'BEDRIFT AS',
         referanse: '947064649',
@@ -1114,7 +1095,6 @@ export const AutomatiskIgnorertInntektsmelding: Story = {
     arbeidsgiverOpplysningerPerId: {
       947064649: {
         erPrivatPerson: false,
-        fødselsdato: undefined,
         identifikator: '947064649',
         navn: 'BEDRIFT AS',
         referanse: '947064649',
@@ -1152,25 +1132,22 @@ export const EtterAtEtterspurtInntektsmeldingErKommet: Story = {
     ] as Aksjonspunkt[],
     arbeidsgiverOpplysningerPerId: {
       342352362: {
+        erPrivatPerson: false,
         referanse: '342352362',
         identifikator: '342352362',
         navn: 'Lagt til av saksbehandler',
-        fødselsdato: undefined,
-        erPrivatPerson: false,
       },
       947064649: {
+        erPrivatPerson: false,
         referanse: '947064649',
         identifikator: '947064649',
         navn: 'SJOKKERENDE ELEKTRIKER',
-        fødselsdato: undefined,
-        erPrivatPerson: false,
       },
       972674818: {
+        erPrivatPerson: false,
         referanse: '972674818',
         identifikator: '972674818',
         navn: 'PENGELØS SPAREBANK',
-        fødselsdato: undefined,
-        erPrivatPerson: false,
       },
     },
     arbeidOgInntekt: {

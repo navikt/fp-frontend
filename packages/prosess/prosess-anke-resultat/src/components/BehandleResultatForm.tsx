@@ -1,8 +1,7 @@
 import { type ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { Detail, Heading, Label } from '@navikt/ds-react';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { Detail, Heading, Label, VStack } from '@navikt/ds-react';
 
 import {
   AnkeVurdering as AnkeVurderingKodeverk,
@@ -18,46 +17,49 @@ interface Props {
 }
 
 const ResultatEnkel = ({ ankeVurderingResultat }: Props): ReactElement => (
-  <>
+  <VStack gap="4">
     <Detail>
       <FormattedMessage id="Ankebehandling.Resultat.Innstilling.Stadfest" />
     </Detail>
-    <VerticalSpacer sixteenPx />
-    <Label size="small">
-      <FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" />
-    </Label>
-    <Detail>{ankeVurderingResultat?.begrunnelse}</Detail>
-  </>
+    <VStack gap="1">
+      <Label size="small">
+        <FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" />
+      </Label>
+      <Detail>{ankeVurderingResultat?.begrunnelse}</Detail>
+    </VStack>
+  </VStack>
 );
 
 const ResultatOpphev = ({ ankeVurderingResultat }: Props): ReactElement => (
-  <>
+  <VStack gap="4">
     <Detail>
       <FormattedMessage id="Ankebehandling.Resultat.Innstilling.Oppheves" />
     </Detail>
-    <VerticalSpacer sixteenPx />
-    <Label size="small">
-      <FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" />
-    </Label>
-    <Detail>{ankeVurderingResultat?.begrunnelse}</Detail>
-  </>
+    <VStack gap="1">
+      <Label size="small">
+        <FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" />
+      </Label>
+      <Detail>{ankeVurderingResultat?.begrunnelse}</Detail>
+    </VStack>
+  </VStack>
 );
 
 const ResultatHjemsend = ({ ankeVurderingResultat }: Props): ReactElement => (
-  <>
+  <VStack gap="4">
     <Detail>
       <FormattedMessage id="Ankebehandling.Resultat.Innstilling.Hjemsendes" />
     </Detail>
-    <VerticalSpacer sixteenPx />
-    <Label size="small">
-      <FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" />
-    </Label>
-    <Detail>{ankeVurderingResultat?.begrunnelse}</Detail>
-  </>
+    <VStack gap="1">
+      <Label size="small">
+        <FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" />
+      </Label>
+      <Detail>{ankeVurderingResultat?.begrunnelse}</Detail>
+    </VStack>
+  </VStack>
 );
 
 const ResultatAvvise = ({ ankeVurderingResultat }: Props): ReactElement => (
-  <>
+  <VStack gap="4">
     <Detail>
       {ankeVurderingResultat?.påAnketKlageBehandlingUuid && (
         <FormattedMessage id="Ankebehandling.Resultat.Innstilling.Avvises" />
@@ -66,58 +68,62 @@ const ResultatAvvise = ({ ankeVurderingResultat }: Props): ReactElement => (
         <FormattedMessage id="Ankebehandling.Resultat.Innstilling.AvvisesUten" />
       )}
     </Detail>
-    <VerticalSpacer sixteenPx />
-    <Label size="small">
-      <FormattedMessage id="Ankebehandling.Resultat.Innstilling.Arsak" />
-    </Label>
-    <ul>
-      {ankeVurderingResultat?.erAnkerIkkePart && (
-        <li>
-          <Detail>
-            <FormattedMessage id="Ankebehandling.Avvisning.IkkePart" />
-          </Detail>
-        </li>
-      )}
-      {ankeVurderingResultat?.erIkkeKonkret && (
-        <li>
-          <Detail>
-            <FormattedMessage id="Ankebehandling.Avvisning.IkkeKonkret" />
-          </Detail>
-        </li>
-      )}
-      {ankeVurderingResultat?.erFristIkkeOverholdt && (
-        <li>
-          <Detail>
-            <FormattedMessage id="Ankebehandling.Avvisning.IkkeFrist" />
-          </Detail>
-        </li>
-      )}
-      {ankeVurderingResultat?.erIkkeSignert && (
-        <li>
-          <Detail>
-            <FormattedMessage id="Ankebehandling.Avvisning.IkkeSignert" />
-          </Detail>
-        </li>
-      )}
-    </ul>
-    <Label size="small">
-      <FormattedMessage id="Ankebehandling.Realitetsbehandles" />
-    </Label>
-    <Detail>
-      <FormattedMessage
-        id={
-          ankeVurderingResultat?.erSubsidiartRealitetsbehandles
-            ? 'Ankebehandling.Realitetsbehandles.Ja'
-            : 'Ankebehandling.Realitetsbehandles.Nei'
-        }
-      />
-    </Detail>
-    <VerticalSpacer sixteenPx />
-    <Label size="small">
-      <FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" />
-    </Label>
-    <Detail>{ankeVurderingResultat?.begrunnelse}</Detail>
-  </>
+    <VStack gap="1">
+      <Label size="small">
+        <FormattedMessage id="Ankebehandling.Resultat.Innstilling.Arsak" />
+      </Label>
+      <ul>
+        {ankeVurderingResultat?.erAnkerIkkePart && (
+          <li>
+            <Detail>
+              <FormattedMessage id="Ankebehandling.Avvisning.IkkePart" />
+            </Detail>
+          </li>
+        )}
+        {ankeVurderingResultat?.erIkkeKonkret && (
+          <li>
+            <Detail>
+              <FormattedMessage id="Ankebehandling.Avvisning.IkkeKonkret" />
+            </Detail>
+          </li>
+        )}
+        {ankeVurderingResultat?.erFristIkkeOverholdt && (
+          <li>
+            <Detail>
+              <FormattedMessage id="Ankebehandling.Avvisning.IkkeFrist" />
+            </Detail>
+          </li>
+        )}
+        {ankeVurderingResultat?.erIkkeSignert && (
+          <li>
+            <Detail>
+              <FormattedMessage id="Ankebehandling.Avvisning.IkkeSignert" />
+            </Detail>
+          </li>
+        )}
+      </ul>
+    </VStack>
+    <VStack gap="1">
+      <Label size="small">
+        <FormattedMessage id="Ankebehandling.Realitetsbehandles" />
+      </Label>
+      <Detail>
+        <FormattedMessage
+          id={
+            ankeVurderingResultat?.erSubsidiartRealitetsbehandles
+              ? 'Ankebehandling.Realitetsbehandles.Ja'
+              : 'Ankebehandling.Realitetsbehandles.Nei'
+          }
+        />
+      </Detail>
+    </VStack>
+    <VStack gap="1">
+      <Label size="small">
+        <FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" />
+      </Label>
+      <Detail>{ankeVurderingResultat?.begrunnelse}</Detail>
+    </VStack>
+  </VStack>
 );
 
 const hentSprakKode = (ankeOmgjoerArsak?: string): string => {
@@ -137,11 +143,10 @@ const ResultatOmgjores = ({
   ankeVurderingResultat,
   alleKodeverk,
 }: Props & { alleKodeverk: AlleKodeverk }): ReactElement => (
-  <>
+  <VStack gap="4">
     <Detail>
       <FormattedMessage id={hentSprakKode(ankeVurderingResultat?.ankeVurderingOmgjoer)} />
     </Detail>
-    <VerticalSpacer sixteenPx />
     {ankeVurderingResultat?.ankeOmgjoerArsak && (
       <>
         <Detail>
@@ -150,14 +155,15 @@ const ResultatOmgjores = ({
         <Detail>
           {getKodeverknavnFn(alleKodeverk)(ankeVurderingResultat.ankeOmgjoerArsak, KodeverkType.ANKE_OMGJOER_AARSAK)}
         </Detail>
-        <VerticalSpacer sixteenPx />
       </>
     )}
-    <Label size="small">
-      <FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" />
-    </Label>
-    <Detail>{ankeVurderingResultat?.begrunnelse}</Detail>
-  </>
+    <VStack gap="1">
+      <Label size="small">
+        <FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" />
+      </Label>
+      <Detail>{ankeVurderingResultat?.begrunnelse}</Detail>
+    </VStack>
+  </VStack>
 );
 
 const AnkeResultat = ({ ankeVurderingResultat }: Props): ReactElement | null => {
@@ -188,14 +194,15 @@ interface Props {
 }
 
 export const BehandleResultatForm = ({ ankeVurderingResultat }: Props) => (
-  <>
+  <VStack gap="4">
     <Heading size="small">
       <FormattedMessage id="Ankebehandling.Resultat.Title" />
     </Heading>
-    <VerticalSpacer fourPx />
-    <Label size="small">
-      <FormattedMessage id="Ankebehandling.Resultat.Innstilling" />
-    </Label>
-    <AnkeResultat ankeVurderingResultat={ankeVurderingResultat} />
-  </>
+    <VStack gap="1">
+      <Label size="small">
+        <FormattedMessage id="Ankebehandling.Resultat.Innstilling" />
+      </Label>
+      <AnkeResultat ankeVurderingResultat={ankeVurderingResultat} />
+    </VStack>
+  </VStack>
 );

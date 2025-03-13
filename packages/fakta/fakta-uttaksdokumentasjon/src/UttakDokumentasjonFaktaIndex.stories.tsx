@@ -3,7 +3,7 @@ import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import { type DokumentasjonVurderingBehov, UttakÅrsak, UttakType, UttakVurdering } from '@navikt/fp-types';
 
 import { UttakDokumentasjonFaktaIndex } from './UttakDokumentasjonFaktaIndex';
@@ -42,7 +42,7 @@ const opprettetDokumentasjonVurderingBehovListe = [
 const meta = {
   title: 'fakta/fakta-uttaksdokumentasjon',
   component: UttakDokumentasjonFaktaIndex,
-  decorators: [withFormData, withPanelData],
+  decorators: [withMellomlagretFormData, withPanelData],
   render: args => <UttakDokumentasjonFaktaIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof UttakDokumentasjonFaktaIndex>>;
 export default meta;
@@ -55,7 +55,7 @@ export const AksjonspunktMedUavklartePerioder: Story = {
       {
         definisjon: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
+        begrunnelse: null,
         kanLoses: true,
       },
     ],
@@ -118,7 +118,7 @@ export const AksjonspunktErBekreftetMenBehandlingErÅpen: Story = {
       {
         definisjon: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
         status: AksjonspunktStatus.UTFORT,
-        begrunnelse: undefined,
+        begrunnelse: null,
         kanLoses: true,
       },
     ],

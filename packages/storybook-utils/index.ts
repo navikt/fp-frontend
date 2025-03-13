@@ -1,7 +1,7 @@
 export { withRouter } from './decorators/withRouter';
 export { getIntlDecorator } from './decorators/withIntl';
 export { withQueryClient } from './decorators/withQueryClient';
-export { withFormData } from './decorators/withFormData';
+export { withMellomlagretFormData } from './decorators/withMellomlagretFormData';
 export { withPanelData } from './decorators/withPanelData';
 export type { PanelDataArgs } from './decorators/withPanelData';
 export { withPanelOverstyring } from './decorators/withPanelOverstyring';

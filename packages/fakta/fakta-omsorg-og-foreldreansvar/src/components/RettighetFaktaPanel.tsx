@@ -1,8 +1,8 @@
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BodyShort } from '@navikt/ds-react';
-import { DateLabel, FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { BodyShort, VStack } from '@navikt/ds-react';
+import { DateLabel, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode, KodeverkType } from '@navikt/fp-kodeverk';
 import type { RelatertTilgrensedYtelse, Soknad } from '@navikt/fp-types';
@@ -38,27 +38,30 @@ export const RettighetFaktaPanel = ({ alleMerknaderFraBeslutter }: Props) => {
       title={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.Rettighet' })}
       merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OMSORGSOVERTAKELSE]}
     >
-      <BodyShort size="small">{farSokerType || '-'}</BodyShort>
-      <VerticalSpacer sixteenPx />
-      <FaktaGruppe
-        withoutBorder
-        title={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.AndreYtelseTilMor' })}
-      >
-        {ytelser.map(ytelse =>
-          getLopendeOrAvsluttetYtelser(ytelse).map(y => (
-            <div className={styles.wrapper} key={`${ytelse.relatertYtelseNavn}-${y.periodeFraDato}`}>
-              <BodyShort size="small" className={styles.iverksatt}>
-                <FormattedMessage
-                  id="OmsorgOgForeldreansvarFaktaForm.YtelseIverksatt"
-                  values={{ ytelseType: ytelse.relatertYtelseNavn }}
-                />
-                <DateLabel dateString={y.periodeFraDato} />
-              </BodyShort>
-            </div>
-          )),
-        )}
-        {!ytelser.some(y => getLopendeOrAvsluttetYtelser(y).length > 0) && '-'}
-      </FaktaGruppe>
+      <VStack gap="4">
+        <BodyShort size="small">{farSokerType || '-'}</BodyShort>
+        <div>
+          <FaktaGruppe
+            withoutBorder
+            title={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.AndreYtelseTilMor' })}
+          >
+            {ytelser.map(ytelse =>
+              getLopendeOrAvsluttetYtelser(ytelse).map(y => (
+                <div className={styles.wrapper} key={`${ytelse.relatertYtelseNavn}-${y.periodeFraDato}`}>
+                  <BodyShort size="small" className={styles.iverksatt}>
+                    <FormattedMessage
+                      id="OmsorgOgForeldreansvarFaktaForm.YtelseIverksatt"
+                      values={{ ytelseType: ytelse.relatertYtelseNavn }}
+                    />
+                    <DateLabel dateString={y.periodeFraDato} />
+                  </BodyShort>
+                </div>
+              )),
+            )}
+            {!ytelser.some(y => getLopendeOrAvsluttetYtelser(y).length > 0) && '-'}
+          </FaktaGruppe>
+        </div>
+      </VStack>
     </FaktaGruppe>
   );
 };

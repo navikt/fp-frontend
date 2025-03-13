@@ -16,7 +16,7 @@ import {
   VilkarType,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type {
   Aksjonspunkt,
   Behandling,
@@ -72,7 +72,7 @@ const defaultberegningresultatDagytelse = {
 const meta = {
   title: 'prosess/prosess-vedtak',
   component: VedtakProsessIndex,
-  decorators: [withFormData, withPanelData],
+  decorators: [withMellomlagretFormData, withPanelData],
   args: {
     vilkar: defaultVilkar,
     previewCallback: action('button-click') as any,
@@ -210,26 +210,26 @@ export const TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = {
         {
           definisjon: AksjonspunktKode.VURDERE_ANNEN_YTELSE,
           status: AksjonspunktStatus.OPPRETTET,
-          begrunnelse: undefined,
+          begrunnelse: null,
           kanLoses: false,
           toTrinnsBehandling: true,
         },
         {
           definisjon: AksjonspunktKode.VURDERE_DOKUMENT,
           status: AksjonspunktStatus.OPPRETTET,
-          begrunnelse: undefined,
+          begrunnelse: null,
           kanLoses: false,
         },
         {
           definisjon: AksjonspunktKode.VURDERE_INNTEKTSMELDING_KLAGE,
           status: AksjonspunktStatus.OPPRETTET,
-          begrunnelse: undefined,
+          begrunnelse: null,
           kanLoses: false,
         },
         {
           definisjon: AksjonspunktKode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST,
           status: AksjonspunktStatus.OPPRETTET,
-          begrunnelse: undefined,
+          begrunnelse: null,
           kanLoses: false,
           toTrinnsBehandling: true,
         },

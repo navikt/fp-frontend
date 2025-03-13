@@ -1,7 +1,7 @@
 import { FormProvider, useForm, useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Alert, Button, HStack, VStack } from '@navikt/ds-react';
+import { Alert, Button, VStack } from '@navikt/ds-react';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
@@ -109,7 +109,7 @@ export const VelferdspermisjonForm = ({
               <FormattedMessage id="VelferdspermisjonPanel.Permisjon100ProsentOgGyldig" />
             </Alert>
           )}
-          <HStack>
+          <div>
             <Button
               size="small"
               variant="primary"
@@ -119,7 +119,7 @@ export const VelferdspermisjonForm = ({
             >
               <FormattedMessage id="VelferdspermisjonPanel.Oppdater" />
             </Button>
-          </HStack>
+          </div>
         </VStack>
       </div>
     </FormProvider>

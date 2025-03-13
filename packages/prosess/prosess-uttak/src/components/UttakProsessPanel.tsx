@@ -1,8 +1,8 @@
 import { type ReactElement, useCallback, useEffect, useMemo, useState } from 'react';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
-import { Alert, Button, Heading, HStack } from '@navikt/ds-react';
-import { AksjonspunktHelpTextHTML, OverstyringKnapp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { Alert, Button, Heading, HStack, VStack } from '@navikt/ds-react';
+import { AksjonspunktHelpTextHTML, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode, AksjonspunktStatus, PeriodeResultatType, StonadskontoType } from '@navikt/fp-kodeverk';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
@@ -17,7 +17,7 @@ import type {
   UttakStonadskontoer,
 } from '@navikt/fp-types';
 import type { UttakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { UttakPeriodePanel } from './periodeDetaljer/UttakPeriodePanel';
 import { DisponibleStonadskontoerPanel } from './stonadsdagerOversikt/DisponibleStonadskontoerPanel';
@@ -194,14 +194,14 @@ export const UttakProsessPanel = ({
     setErOverstyrt(forrigeVerdi => !forrigeVerdi);
   }, []);
 
-  const { formData, setFormData } = useFormData<PeriodeSoker[]>();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<PeriodeSoker[]>();
 
-  const [perioder, setPerioder] = useState<PeriodeSoker[]>(formData || uttaksresultat.perioderSøker);
+  const [perioder, setPerioder] = useState<PeriodeSoker[]>(mellomlagretFormData || uttaksresultat.perioderSøker);
   const [valgtPeriodeIndex, setValgtPeriodeIndex] = useState<number | undefined>();
 
   const [stønadskonto, setStønadskonto] = useState(uttakStonadskontoer);
 
-  useEffect(() => () => setFormData(perioder), [perioder]);
+  useEffect(() => () => setMellomlagretFormData(perioder), [perioder]);
 
   const allePerioder = uttaksresultat.perioderAnnenpart.concat(perioder);
 
@@ -278,7 +278,7 @@ export const UttakProsessPanel = ({
   );
 
   return (
-    <>
+    <VStack gap="6">
       <HStack gap="4">
         <Heading size="small">
           <FormattedMessage id="UttakPanel.Title" />
@@ -287,14 +287,8 @@ export const UttakProsessPanel = ({
           <OverstyringKnapp onClick={toggleOverstyring} erOverstyrt={erOverstyrt} />
         )}
       </HStack>
-      <VerticalSpacer twentyPx />
       {aksjonspunkterForPanel.length > 0 && harÅpneAksjonspunkter && (
-        <>
-          <AksjonspunktHelpTextHTML>
-            {hentApTekster(uttaksresultat, aksjonspunkterForPanel)}
-          </AksjonspunktHelpTextHTML>
-          <VerticalSpacer twentyPx />
-        </>
+        <AksjonspunktHelpTextHTML>{hentApTekster(uttaksresultat, aksjonspunkterForPanel)}</AksjonspunktHelpTextHTML>
       )}
       <DisponibleStonadskontoerPanel
         stønadskontoer={stønadskonto.stonadskontoer ? Object.values(stønadskonto.stonadskontoer) : undefined}
@@ -315,27 +309,23 @@ export const UttakProsessPanel = ({
         alleKodeverk={alleKodeverk}
       />
       {valgtPeriodeIndex !== undefined && (
-        <>
-          <VerticalSpacer sixteenPx />
-          <UttakPeriodePanel
-            key={valgtPeriodeIndex}
-            perioderSøker={perioder}
-            behandling={behandling}
-            uttaksresultat={uttaksresultat}
-            valgtPeriodeIndex={valgtPeriodeIndex}
-            oppdaterPeriode={oppdaterPeriode}
-            isReadOnly={(harIngenEllerLukkedeAksjonspunkt || isReadOnly) && !erOverstyrt}
-            alleKodeverk={alleKodeverk}
-            arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-            uttakStonadskontoer={stønadskonto}
-            setValgtPeriodeIndex={setValgtPeriodeIndex}
-            erTilknyttetStortinget={erTilknyttetStortinget}
-            harÅpneAksjonspunkter={harÅpneAksjonspunkter}
-            endringsdato={uttaksresultat.endringsdato}
-          />
-        </>
+        <UttakPeriodePanel
+          key={valgtPeriodeIndex}
+          perioderSøker={perioder}
+          behandling={behandling}
+          uttaksresultat={uttaksresultat}
+          valgtPeriodeIndex={valgtPeriodeIndex}
+          oppdaterPeriode={oppdaterPeriode}
+          isReadOnly={(harIngenEllerLukkedeAksjonspunkt || isReadOnly) && !erOverstyrt}
+          alleKodeverk={alleKodeverk}
+          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+          uttakStonadskontoer={stønadskonto}
+          setValgtPeriodeIndex={setValgtPeriodeIndex}
+          erTilknyttetStortinget={erTilknyttetStortinget}
+          harÅpneAksjonspunkter={harÅpneAksjonspunkter}
+          endringsdato={uttaksresultat.endringsdato}
+        />
       )}
-      <VerticalSpacer sixteenPx />
       {((!harIngenEllerLukkedeAksjonspunkt && !isReadOnly) || erOverstyrt) && (
         <>
           {feilmeldinger.length > 0 && (
@@ -345,21 +335,22 @@ export const UttakProsessPanel = ({
                   {fm}
                 </Alert>
               ))}
-              <VerticalSpacer sixteenPx />
             </>
           )}
-          <Button
-            size="small"
-            variant="primary"
-            disabled={feilmeldinger.length > 0 || isSubmitting || erBekreftKnappDisablet}
-            loading={isSubmitting}
-            onClick={bekreftAksjonspunkter}
-            type="button"
-          >
-            <FormattedMessage id="Uttak.Confirm" />
-          </Button>
+          <div>
+            <Button
+              size="small"
+              variant="primary"
+              disabled={feilmeldinger.length > 0 || isSubmitting || erBekreftKnappDisablet}
+              loading={isSubmitting}
+              onClick={bekreftAksjonspunkter}
+              type="button"
+            >
+              <FormattedMessage id="Uttak.Confirm" />
+            </Button>
+          </div>
         </>
       )}
-    </>
+    </VStack>
   );
 };
