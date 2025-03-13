@@ -1,0 +1,6 @@
+import"./withPanelData-BSiA-GBU.js";import{g as s}from"./withIntl-B2H2TeSW.js";import"./jsx-runtime-D_zvdyIk.js";import{B as a}from"./BehandlingHenlagtPanel-B71HUioV.js";import{m as n}from"./nb_NO-l8jqaU6D.js";import"./index-DjhIdADd.js";import"./_commonjsHelpers-Cpj98o6Y.js";import"./index-B-V1qRBx.js";import"./index-CvPn9kdb.js";import"./v4-CtRu48qb.js";import"./entry-preview-BO4RQg-z.js";import"./iframe-D2Qo49CY.js";import"./chunk-XP5HYGXS-BpfKkqn7.js";import"./entry-preview-docs-C7LF3qXI.js";import"./index-CXQShRbs.js";import"./index.es-XsLg3G4w.js";import"./dayjs.min-Cke173X9.js";import"./CheckmarkCircleFill-BCLuRWcX.js";import"./ExclamationmarkTriangleFill-C2MBoT2s.js";import"./bind-oYjWB_aQ.js";const m=s(n),b={title:"behandling/prosess/BehandlingHenlagtPanel",component:a,decorators:[m]},t={args:{valgtProsessSteg:"henlagt",settProsessPanelMenyData:()=>{}}};var r,e,o;t.parameters={...t.parameters,docs:{...(r=t.parameters)==null?void 0:r.docs,source:{originalSource:`{
+  args: {
+    valgtProsessSteg: 'henlagt',
+    settProsessPanelMenyData: () => undefined
+  }
+}`,...(o=(e=t.parameters)==null?void 0:e.docs)==null?void 0:o.source}}};const w=["Default"];export{t as Default,w as __namedExportsOrder,b as default};
