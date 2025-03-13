@@ -122,7 +122,7 @@ export const FormkravKlageFormNfp = ({
 
   const initialValues = useMemo(() => buildInitialValues(klageVurdering), [klageVurdering]);
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || initialValues,
+    defaultValues: mellomlagretFormData || initialValues,
   });
 
   const formVerdier = formMethods.watch();
@@ -131,7 +131,7 @@ export const FormkravKlageFormNfp = ({
     <Form
       formMethods={formMethods}
       onSubmit={(values: FormValues) => submitCallback(transformValues(values, avsluttedeBehandlinger))}
-      setDataOnUnmount={setFormData}
+      setDataOnUnmount={setMellomlagretFormData}
     >
       <VStack gap="4">
         <VStack gap="1">

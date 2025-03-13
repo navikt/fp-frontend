@@ -128,7 +128,7 @@ export const AdopsjonInfoPanel = ({ submittable, isForeldrepengerFagsak, soknad,
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || buildInitialValues(soknad, gjeldendeFamiliehendelse, aksjonspunkterForPanel),
+    defaultValues: mellomlagretFormData || buildInitialValues(soknad, gjeldendeFamiliehendelse, aksjonspunkterForPanel),
   });
 
   const begrunnelse = formMethods.watch('begrunnelse');
@@ -143,7 +143,7 @@ export const AdopsjonInfoPanel = ({ submittable, isForeldrepengerFagsak, soknad,
       {harÅpneAksjonspunkter && (
         <AksjonspunktHelpTextHTML>{getHelpTexts(aksjonspunkterForPanel)}</AksjonspunktHelpTextHTML>
       )}
-      <Form formMethods={formMethods} onSubmit={onSubmit} setDataOnUnmount={setFormData}>
+      <Form formMethods={formMethods} onSubmit={onSubmit} setDataOnUnmount={setMellomlagretFormData}>
         <VStack gap="6">
           <HStack gap="4" wrap>
             <div className={styles.leftCol}>

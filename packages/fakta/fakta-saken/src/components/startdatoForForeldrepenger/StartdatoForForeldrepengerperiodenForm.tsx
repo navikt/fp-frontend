@@ -73,7 +73,7 @@ export const StartdatoForForeldrepengerperiodenForm = ({
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || buildInitialValues(soknad, aksjonspunkt),
+    defaultValues: mellomlagretFormData || buildInitialValues(soknad, aksjonspunkt),
   });
 
   const [visEditeringsmodus, setVisEditeringsmodus] = useState(false);
@@ -87,7 +87,7 @@ export const StartdatoForForeldrepengerperiodenForm = ({
     <Form
       formMethods={formMethods}
       onSubmit={(values: FormValues) => submitCallback(transformValues(soknad, values))}
-      setDataOnUnmount={setFormData}
+      setDataOnUnmount={setMellomlagretFormData}
     >
       <VStack gap="4">
         <Heading size="small">

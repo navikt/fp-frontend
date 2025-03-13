@@ -187,20 +187,20 @@ export const UttakFaktaForm = ({
   }>();
 
   const [uttakPerioder, setUttakPerioder] = useState<KontrollerFaktaPeriodeMedApMarkering[]>(
-    formData?.uttakPerioder || sortertePerioder,
+    mellomlagretFormData?.uttakPerioder || sortertePerioder,
   );
 
   const [valgteFomDatoer, setValgteFomDatoer] = useState<string[]>([]);
 
   const formMethods = useForm<{ begrunnelse: string }>({
     defaultValues: {
-      begrunnelse: formData?.begrunnelse ?? aksjonspunkterForPanel[0]?.begrunnelse ?? '',
+      begrunnelse: mellomlagretFormData?.begrunnelse ?? aksjonspunkterForPanel[0]?.begrunnelse ?? '',
     },
   });
 
   useEffect(
     () => () => {
-      setFormData({ uttakPerioder, begrunnelse: formMethods.getValues('begrunnelse') });
+      setMellomlagretFormData({ uttakPerioder, begrunnelse: formMethods.getValues('begrunnelse') });
     },
     [uttakPerioder],
   );

@@ -66,7 +66,7 @@ export const VurderSoknadsfristForeldrepengerForm = ({ readOnlySubmitButton, mot
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || initialValues,
+    defaultValues: mellomlagretFormData || initialValues,
   });
 
   const gyldigSenFremsetting = formMethods.watch('gyldigSenFremsetting');
@@ -79,7 +79,7 @@ export const VurderSoknadsfristForeldrepengerForm = ({ readOnlySubmitButton, mot
     <Form
       formMethods={formMethods}
       onSubmit={(formValues: FormValues) => submitCallback(transformValues(formValues))}
-      setDataOnUnmount={setFormData}
+      setDataOnUnmount={setMellomlagretFormData}
     >
       <VStack gap="6">
         <Heading size="small">

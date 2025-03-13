@@ -109,7 +109,7 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || initialValues,
+    defaultValues: mellomlagretFormData || initialValues,
   });
 
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
@@ -126,7 +126,7 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({
     <Form
       formMethods={formMethods}
       onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
-      setDataOnUnmount={setFormData}
+      setDataOnUnmount={setMellomlagretFormData}
     >
       <VStack gap="4">
         <VStack gap="1">

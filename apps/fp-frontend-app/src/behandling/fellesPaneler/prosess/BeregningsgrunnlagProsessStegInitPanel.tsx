@@ -143,5 +143,7 @@ export const BeregningsgrunnlagProsessStegInitPanel = ({ arbeidsgiverOpplysninge
 
 const Wrapper = (props: ComponentProps<typeof BeregningsgrunnlagProsessIndex>) => {
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData();
-  return <BeregningsgrunnlagProsessIndex {...props} formData={formData} setFormData={setFormData} />;
+  return (
+    <BeregningsgrunnlagProsessIndex {...props} formData={mellomlagretFormData} setFormData={setMellomlagretFormData} />
+  );
 };

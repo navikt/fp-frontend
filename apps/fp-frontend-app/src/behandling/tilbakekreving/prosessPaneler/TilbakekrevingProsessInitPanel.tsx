@@ -68,7 +68,9 @@ export const TilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }: Props
 
 const Wrapper = (props: ComponentProps<typeof TilbakekrevingProsessIndex>) => {
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData();
-  return <TilbakekrevingProsessIndex {...props} formData={formData} setFormData={setFormData} />;
+  return (
+    <TilbakekrevingProsessIndex {...props} formData={mellomlagretFormData} setFormData={setMellomlagretFormData} />
+  );
 };
 
 const finnTilbakekrevingStatus = (aksjonspunkter: Aksjonspunkt[]): string => {

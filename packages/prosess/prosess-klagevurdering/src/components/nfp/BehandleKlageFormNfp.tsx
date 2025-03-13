@@ -84,7 +84,7 @@ export const BehandleKlageFormNfp = ({
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<KlageFormType>();
 
   const formMethods = useForm<KlageFormType>({
-    defaultValues: formData || initialValues,
+    defaultValues: mellomlagretFormData || initialValues,
   });
   const formValues = formMethods.watch();
 
@@ -100,7 +100,7 @@ export const BehandleKlageFormNfp = ({
     <Form
       formMethods={formMethods}
       onSubmit={(values: KlageFormType) => submitCallback(transformValues(values))}
-      setDataOnUnmount={setFormData}
+      setDataOnUnmount={setMellomlagretFormData}
     >
       <VStack gap="4">
         <Heading size="small">{intl.formatMessage({ id: 'Klage.ResolveKlage.Title' })}</Heading>

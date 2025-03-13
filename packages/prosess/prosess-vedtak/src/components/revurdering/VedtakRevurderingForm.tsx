@@ -262,7 +262,7 @@ export const VedtakRevurderingForm = ({
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || buildInitialValues(aksjonspunkt, behandling),
+    defaultValues: mellomlagretFormData || buildInitialValues(aksjonspunkt, behandling),
   });
 
   const begrunnelse = formMethods.watch('begrunnelse');
@@ -336,7 +336,7 @@ export const VedtakRevurderingForm = ({
     <Form
       formMethods={formMethods}
       onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
-      setDataOnUnmount={setFormData}
+      setDataOnUnmount={setMellomlagretFormData}
     >
       <VedtakFellesPanel
         vedtakstatusTekst={vedtakstatusTekst}

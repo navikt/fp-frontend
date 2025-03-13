@@ -111,7 +111,8 @@ export const FodselInfoPanel = ({
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || buildInitialValues(soknad, familiehendelse, terminbekreftelseAp, manglendeFødselAp),
+    defaultValues:
+      mellomlagretFormData || buildInitialValues(soknad, familiehendelse, terminbekreftelseAp, manglendeFødselAp),
   });
 
   return (
@@ -124,7 +125,7 @@ export const FodselInfoPanel = ({
         onSubmit={values =>
           submitCallback(transformValues(values, avklartBarn, terminbekreftelseAp, manglendeFødselAp))
         }
-        setDataOnUnmount={setFormData}
+        setDataOnUnmount={setMellomlagretFormData}
       >
         <VStack gap="2">
           {hasAksjonspunkt(TERMINBEKREFTELSE, aksjonspunkterForPanel) && (

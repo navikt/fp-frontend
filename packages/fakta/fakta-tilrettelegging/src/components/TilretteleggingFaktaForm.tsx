@@ -87,7 +87,7 @@ export const TilretteleggingFaktaForm = ({
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<TilretteleggingFormValues>();
 
   const formMethods = useForm<TilretteleggingFormValues>({
-    defaultValues: formData || {
+    defaultValues: mellomlagretFormData || {
       arbeidsforhold: sorterteArbeidsforhold,
       termindato: svangerskapspengerTilrettelegging ? svangerskapspengerTilrettelegging.termindato : '',
       fødselsdato: svangerskapspengerTilrettelegging ? svangerskapspengerTilrettelegging.fødselsdato : '',
@@ -139,7 +139,7 @@ export const TilretteleggingFaktaForm = ({
   };
 
   return (
-    <Form formMethods={formMethods} setDataOnUnmount={setFormData} onSubmit={onSubmit}>
+    <Form formMethods={formMethods} setDataOnUnmount={setMellomlagretFormData} onSubmit={onSubmit}>
       <VStack gap="8">
         {harÅpneAksjonspunkter && (
           <AksjonspunktHelpTextHTML>

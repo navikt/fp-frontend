@@ -47,7 +47,7 @@ export const OmsorgInfoPanel = ({ personoversikt, ytelsefordeling, submittable }
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || createInitialValues(ytelsefordeling, aksjonspunkterForPanel),
+    defaultValues: mellomlagretFormData || createInitialValues(ytelsefordeling, aksjonspunkterForPanel),
   });
 
   const harAksjonspunkt = aksjonspunkterForPanel.length > 0;
@@ -64,7 +64,7 @@ export const OmsorgInfoPanel = ({ personoversikt, ytelsefordeling, submittable }
         <Form
           formMethods={formMethods}
           onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
-          setDataOnUnmount={setFormData}
+          setDataOnUnmount={setMellomlagretFormData}
         >
           <VStack gap="6">
             {harAksjonspunkt && (

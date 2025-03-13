@@ -78,7 +78,7 @@ export const BeregningFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props
 
 const Wrapper = (props: ComponentProps<typeof BeregningFaktaIndex>) => {
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData();
-  return <BeregningFaktaIndex {...props} formData={formData} setFormData={setFormData} />;
+  return <BeregningFaktaIndex {...props} formData={mellomlagretFormData} setFormData={setMellomlagretFormData} />;
 };
 
 const mapBGKodeTilFpsakKode = (bgKode: string): string => {

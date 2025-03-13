@@ -109,14 +109,13 @@ export const OpptjeningFaktaPanel = ({
 
   const formValuesAktiviteter = filtrerteOgSorterteOpptjeningsaktiviteter.map(a => ({
     erGodkjent: a.erGodkjent,
-    begrunnelse: a.begrunnelse,
+    begrunnelse: a.begrunnelse ?? '',
   }));
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues[]>();
 
   const [formVerdierForAlleAktiviteter, setFormVerdierForAlleAktiviteter] = useState<FormValues[]>(
-    //@ts-expect-error
-    formData || formValuesAktiviteter,
+    mellomlagretFormData ?? formValuesAktiviteter,
   );
 
   const førsteAktivitetSomIkkeErGodkjent = filtrerteOgSorterteOpptjeningsaktiviteter.findIndex(
@@ -131,7 +130,7 @@ export const OpptjeningFaktaPanel = ({
 
   useEffect(
     () => () => {
-      setFormData(formVerdierForAlleAktiviteter);
+      setMellomlagretFormData(formVerdierForAlleAktiviteter);
     },
     [formVerdierForAlleAktiviteter],
   );

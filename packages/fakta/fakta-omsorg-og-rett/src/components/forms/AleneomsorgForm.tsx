@@ -40,7 +40,7 @@ export const AleneomsorgForm = ({ omsorgOgRett, aksjonspunkt, submittable }: Pro
   const isReadOnlyOrApIsNull = isReadOnly || aksjonspunkt === undefined;
 
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || {
+    defaultValues: mellomlagretFormData || {
       harAleneomsorg: harAleneomsorg === undefined ? undefined : harAleneomsorg === Verdi.JA,
       harAnnenForelderRett: harRettNorge === undefined ? undefined : harRettNorge === Verdi.JA,
       harAnnenForelderRettEØS: harRettEØS === undefined ? undefined : harRettEØS === Verdi.JA,
@@ -68,7 +68,7 @@ export const AleneomsorgForm = ({ omsorgOgRett, aksjonspunkt, submittable }: Pro
     omsorgOgRett.relasjonsRolleType !== RelasjonsRolleType.MOR || harUføretrygd === Verdi.JA;
 
   return (
-    <Form formMethods={formMethods} onSubmit={transformerFeltverdier} setDataOnUnmount={setFormData}>
+    <Form formMethods={formMethods} onSubmit={transformerFeltverdier} setDataOnUnmount={setMellomlagretFormData}>
       <FaktaGruppe
         withoutBorder
         merknaderFraBeslutter={

@@ -49,7 +49,7 @@ export const KontrollerBesteberegningPanel = ({ aksjonspunkt, readOnly, submitta
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || buildInitialValues(aksjonspunkt),
+    defaultValues: mellomlagretFormData || buildInitialValues(aksjonspunkt),
   });
   const begrunnelse = formMethods.watch('begrunnelse');
   return (
@@ -67,7 +67,7 @@ export const KontrollerBesteberegningPanel = ({ aksjonspunkt, readOnly, submitta
       <Form
         formMethods={formMethods}
         onSubmit={values => submitCallback(transformValues(values))}
-        setDataOnUnmount={setFormData}
+        setDataOnUnmount={setMellomlagretFormData}
       >
         <VStack gap="4">
           <CheckboxField

@@ -71,12 +71,12 @@ export const PermisjonFaktaPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysningerP
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || defaultValues,
+    defaultValues: mellomlagretFormData || defaultValues,
   });
 
   useEffect(
     () => () => {
-      setFormData(formMethods.getValues());
+      setMellomlagretFormData(formMethods.getValues());
     },
     [],
   );

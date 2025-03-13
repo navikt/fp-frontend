@@ -70,5 +70,5 @@ export const ForeldelseProsessInitPanel = ({ tilbakekrevingKodeverk }: Props) =>
 
 const Wrapper = (props: ComponentProps<typeof ForeldelseProsessIndex>) => {
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<ForeldelsesresultatActivity[]>();
-  return <ForeldelseProsessIndex {...props} formData={formData} setFormData={setFormData} />;
+  return <ForeldelseProsessIndex {...props} formData={mellomlagretFormData} setFormData={setMellomlagretFormData} />;
 };

@@ -130,7 +130,7 @@ export const SimuleringPanel = ({
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || buildInitialValues(aksjonspunkterForPanel, tilbakekrevingvalg),
+    defaultValues: mellomlagretFormData || buildInitialValues(aksjonspunkterForPanel, tilbakekrevingvalg),
   });
 
   const { formState } = formMethods;
@@ -188,7 +188,7 @@ export const SimuleringPanel = ({
         <Form
           formMethods={formMethods}
           onSubmit={(values: FormValues) => submitCallback(transformValues(values, aksjonspunkterForPanel))}
-          setDataOnUnmount={setFormData}
+          setDataOnUnmount={setMellomlagretFormData}
         >
           <VStack gap="4">
             <TilbakekrevSøkerForm

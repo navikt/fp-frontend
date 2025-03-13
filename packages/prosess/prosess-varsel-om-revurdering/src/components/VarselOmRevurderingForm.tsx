@@ -84,7 +84,7 @@ export const VarselOmRevurderingForm = ({
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || initialValues,
+    defaultValues: mellomlagretFormData || initialValues,
   });
 
   const formVerdier = formMethods.watch();
@@ -127,7 +127,7 @@ export const VarselOmRevurderingForm = ({
 
   return (
     <>
-      <Form formMethods={formMethods} onSubmit={submitCallback} setDataOnUnmount={setFormData}>
+      <Form formMethods={formMethods} onSubmit={submitCallback} setDataOnUnmount={setMellomlagretFormData}>
         <VStack gap="4">
           <Heading size="small">
             <FormattedMessage id="VarselOmRevurderingForm.VarselOmRevurdering" />

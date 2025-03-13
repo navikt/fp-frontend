@@ -63,5 +63,5 @@ export const FeilutbetalingFaktaInitPanel = ({ tilbakekrevingKodeverk }: Props) 
 
 const Wrapper = (props: ComponentProps<typeof FeilutbetalingFaktaIndex>) => {
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData();
-  return <FeilutbetalingFaktaIndex {...props} formData={formData} setFormData={setFormData} />;
+  return <FeilutbetalingFaktaIndex {...props} formData={mellomlagretFormData} setFormData={setMellomlagretFormData} />;
 };

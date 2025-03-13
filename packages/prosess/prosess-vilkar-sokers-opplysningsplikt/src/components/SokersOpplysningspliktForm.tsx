@@ -216,7 +216,7 @@ export const SokersOpplysningspliktForm = ({
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || initialValues,
+    defaultValues: mellomlagretFormData || initialValues,
   });
 
   const hasAksjonspunkt = formMethods.watch('hasAksjonspunkt');
@@ -232,7 +232,7 @@ export const SokersOpplysningspliktForm = ({
           transformValues(values, sorterteManglendeVedlegg, arbeidsgiverOpplysningerPerId, aksjonspunkterForPanel),
         )
       }
-      setDataOnUnmount={setFormData}
+      setDataOnUnmount={setMellomlagretFormData}
     >
       <ProsessPanelTemplate
         title={intl.formatMessage({ id: 'SokersOpplysningspliktForm.SokersOpplysningsplikt' })}

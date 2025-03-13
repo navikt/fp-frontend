@@ -113,7 +113,13 @@ export const VedtakTilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }:
 
 const Wrapper = (props: ComponentProps<typeof VedtakTilbakekrevingProsessIndex>) => {
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData();
-  return <VedtakTilbakekrevingProsessIndex {...props} formData={formData} setFormData={setFormData} />;
+  return (
+    <VedtakTilbakekrevingProsessIndex
+      {...props}
+      formData={mellomlagretFormData}
+      setFormData={setMellomlagretFormData}
+    />
+  );
 };
 
 const erTilbakekrevingÅrsakKlage = (årsak: string): boolean =>

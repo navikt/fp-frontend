@@ -89,7 +89,7 @@ export const SvangerskapVilkarForm = ({ readOnlySubmitButton, svangerskapspenger
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || initialValues,
+    defaultValues: mellomlagretFormData || initialValues,
   });
 
   const erVilkarOk = formMethods.watch('erVilkarOk');
@@ -110,7 +110,7 @@ export const SvangerskapVilkarForm = ({ readOnlySubmitButton, svangerskapspenger
     <Form
       formMethods={formMethods}
       onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
-      setDataOnUnmount={setFormData}
+      setDataOnUnmount={setMellomlagretFormData}
     >
       <ProsessPanelTemplate
         title={intl.formatMessage({ id: 'SvangerskapVilkarForm.Svangerskap' })}

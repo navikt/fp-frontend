@@ -49,7 +49,7 @@ export const RegistrereVergeInfoPanel = ({ submittable, verge, alleKodeverk }: P
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || buildInitialValues(verge, aksjonspunkterForPanel),
+    defaultValues: mellomlagretFormData || buildInitialValues(verge, aksjonspunkterForPanel),
     shouldUnregister: true,
   });
 
@@ -71,7 +71,7 @@ export const RegistrereVergeInfoPanel = ({ submittable, verge, alleKodeverk }: P
       <Form
         formMethods={formMethods}
         onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
-        setDataOnUnmount={setFormData}
+        setDataOnUnmount={setMellomlagretFormData}
       >
         <VStack gap="6">
           <FaktaGruppe merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.AVKLAR_VERGE]}>

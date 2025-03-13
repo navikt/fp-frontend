@@ -149,7 +149,7 @@ export const VilkarresultatMedOverstyringForm = ({
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || initialValues,
+    defaultValues: mellomlagretFormData || initialValues,
   });
 
   const togglePa = () => toggleOverstyring();
@@ -177,7 +177,7 @@ export const VilkarresultatMedOverstyringForm = ({
     <Form
       formMethods={formMethods}
       onSubmit={(values: FormValues) => submitCallback(transformValues(values, overstyringApKode))}
-      setDataOnUnmount={setFormData}
+      setDataOnUnmount={setMellomlagretFormData}
     >
       <VStack gap="2">
         <VStack gap="4">

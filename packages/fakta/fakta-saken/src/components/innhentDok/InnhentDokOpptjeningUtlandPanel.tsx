@@ -54,7 +54,7 @@ export const InnhentDokOpptjeningUtlandPanel = ({
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || {
+    defaultValues: mellomlagretFormData || {
       dokStatus,
       ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
     },
@@ -68,7 +68,7 @@ export const InnhentDokOpptjeningUtlandPanel = ({
     <Form
       formMethods={formMethods}
       onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
-      setDataOnUnmount={setFormData}
+      setDataOnUnmount={setMellomlagretFormData}
     >
       <VStack gap="6">
         <Heading size="small">

@@ -61,7 +61,7 @@ export const VurderMedlemskapAksjonspunktForm = ({ submittable, aksjonspunkt, ma
   const [submitting, setSubmitting] = useState(false);
 
   const formMethods = useForm<VurderMedlemskapFormValues>({
-    defaultValues: formData ?? createMedlemskapInitialValues(aksjonspunkt, manuellBehandlingResultat),
+    defaultValues: mellomlagretFormData ?? createMedlemskapInitialValues(aksjonspunkt, manuellBehandlingResultat),
   });
 
   const begrunnelseVerdi = formMethods.watch('begrunnelse');
@@ -88,7 +88,7 @@ export const VurderMedlemskapAksjonspunktForm = ({ submittable, aksjonspunkt, ma
 
   return (
     <ConditionalWrapper isReadOnly={isReadOnly}>
-      <Form formMethods={formMethods} onSubmit={bekreft} setDataOnUnmount={setFormData}>
+      <Form formMethods={formMethods} onSubmit={bekreft} setDataOnUnmount={setMellomlagretFormData}>
         <VStack gap={isReadOnly ? '2' : '6'}>
           <MedlemskapVurderinger
             erForutgående={erForutgåendeAksjonspunkt}
