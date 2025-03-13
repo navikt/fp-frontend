@@ -12,7 +12,7 @@ import {
 } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, Behandlingsresultat, FastsattOpptjening } from '@navikt/fp-types';
 import type { AvklarOpptjeningsvilkaretAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { OpptjeningVilkarView } from './OpptjeningVilkarView';
 
@@ -74,9 +74,9 @@ export const OpptjeningVilkarAksjonspunktPanel = ({
 
   const initialValues = buildInitialValues(aksjonspunkterForPanel, status, behandling.behandlingsresultat);
 
-  const { formData, setFormData } = useFormData<FormValues>();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || initialValues,
+    defaultValues: mellomlagretFormData || initialValues,
   });
 
   const isOpenAksjonspunkt = aksjonspunkterForPanel.some(ap => ap.status === AksjonspunktStatus.OPPRETTET);
@@ -104,7 +104,7 @@ export const OpptjeningVilkarAksjonspunktPanel = ({
   );
 
   return (
-    <Form formMethods={formMethods} onSubmit={onSubmit} setDataOnUnmount={setFormData}>
+    <Form formMethods={formMethods} onSubmit={onSubmit} setDataOnUnmount={setMellomlagretFormData}>
       <ProsessPanelTemplate
         title={intl.formatMessage({ id: 'OpptjeningVilkarAksjonspunktPanel.Opptjeningsvilkaret' })}
         isAksjonspunktOpen={harÅpneAksjonspunkter}

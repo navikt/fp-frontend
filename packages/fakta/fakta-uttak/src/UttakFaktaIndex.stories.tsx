@@ -3,7 +3,7 @@ import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, UttakPeriodeType } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { ArbeidsgiverOpplysningerPerId, Fagsak } from '@navikt/fp-types';
 
 import { OverføringÅrsak } from './kodeverk/overføringÅrsak';
@@ -26,7 +26,7 @@ const arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId = {
 const meta = {
   title: 'fakta/fakta-uttak',
   component: UttakFaktaIndex,
-  decorators: [withFormData, withPanelData],
+  decorators: [withMellomlagretFormData, withPanelData],
   args: {
     arbeidsgiverOpplysningerPerId,
     kanOverstyre: false,

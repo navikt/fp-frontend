@@ -3,7 +3,7 @@ import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, TilretteleggingType, UttakArbeidType } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import {
   type ArbeidOgInntektsmelding,
   type ArbeidsforholdFodselOgTilrettelegging,
@@ -252,7 +252,7 @@ const ARBEIDSGIVEROPPLYSNINGER_PER_ID: ArbeidsgiverOpplysningerPerId = {
 const meta = {
   title: 'fakta/fakta-tilrettelegging',
   component: TilretteleggingFaktaIndex,
-  decorators: [withFormData, withPanelData],
+  decorators: [withMellomlagretFormData, withPanelData],
   args: {
     arbeidsgiverOpplysningerPerId: ARBEIDSGIVEROPPLYSNINGER_PER_ID,
     submittable: true,

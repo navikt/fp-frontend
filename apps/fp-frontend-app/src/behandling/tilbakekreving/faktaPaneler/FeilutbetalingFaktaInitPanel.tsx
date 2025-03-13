@@ -10,7 +10,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import type { AlleKodeverkTilbakekreving } from '@navikt/fp-types';
-import { useFormData } from '@navikt/fp-utils';
+import { useMellomlagretFormData } from '@navikt/fp-utils';
 
 import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
@@ -62,6 +62,6 @@ export const FeilutbetalingFaktaInitPanel = ({ tilbakekrevingKodeverk }: Props) 
 };
 
 const Wrapper = (props: ComponentProps<typeof FeilutbetalingFaktaIndex>) => {
-  const { formData, setFormData } = useFormData();
-  return <FeilutbetalingFaktaIndex {...props} formData={formData} setFormData={setFormData} />;
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData();
+  return <FeilutbetalingFaktaIndex {...props} formData={mellomlagretFormData} setFormData={setMellomlagretFormData} />;
 };

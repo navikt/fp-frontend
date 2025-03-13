@@ -10,7 +10,7 @@ import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-f
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt } from '@navikt/fp-types';
 import type { ManuellKontrollBesteberegningAP } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData } from '@navikt/fp-utils';
+import { useMellomlagretFormData } from '@navikt/fp-utils';
 
 export const buildInitialValues = (aksjonspunkt: Aksjonspunkt): FormValues => {
   const apErLøst = aksjonspunkt.status === AksjonspunktStatus.UTFORT;
@@ -46,10 +46,10 @@ interface Props {
 export const KontrollerBesteberegningPanel = ({ aksjonspunkt, readOnly, submittable, submitCallback }: Props) => {
   const [erKnappEnabled, setKnappEnabled] = useState(false);
 
-  const { formData, setFormData } = useFormData<FormValues>();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || buildInitialValues(aksjonspunkt),
+    defaultValues: mellomlagretFormData || buildInitialValues(aksjonspunkt),
   });
   const begrunnelse = formMethods.watch('begrunnelse');
   return (
@@ -67,7 +67,7 @@ export const KontrollerBesteberegningPanel = ({ aksjonspunkt, readOnly, submitta
       <Form
         formMethods={formMethods}
         onSubmit={values => submitCallback(transformValues(values))}
-        setDataOnUnmount={setFormData}
+        setDataOnUnmount={setMellomlagretFormData}
       >
         <VStack gap="4">
           <CheckboxField

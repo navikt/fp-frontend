@@ -1,7 +1,7 @@
 import { type ReactElement, use, useEffect, useState } from 'react';
 
 import { type OverstyringAksjonspunkter, VilkarType } from '@navikt/fp-kodeverk';
-import { FormDataProvider, PanelDataProvider, PanelOverstyringProvider } from '@navikt/fp-utils';
+import { MellomlagretFormDataProvider, PanelDataProvider, PanelOverstyringProvider } from '@navikt/fp-utils';
 
 import type { StandardProsessPanelProps } from '../typer/standardProsessPanelPropsTsType';
 import { BehandlingDataContext } from '../utils/behandlingDataContext';
@@ -75,7 +75,7 @@ export const InngangsvilkarDefaultInitPanel = ({
   const skalViseVilkårIPanel = erPanelValgt && skalVises;
 
   return (
-    <FormDataProvider behandling={behandling}>
+    <MellomlagretFormDataProvider behandling={behandling}>
       <PanelDataProvider
         behandling={behandling}
         fagsak={fagsak}
@@ -88,6 +88,6 @@ export const InngangsvilkarDefaultInitPanel = ({
       >
         {skalViseVilkårIPanel ? children : null}
       </PanelDataProvider>
-    </FormDataProvider>
+    </MellomlagretFormDataProvider>
   );
 };

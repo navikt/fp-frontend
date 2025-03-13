@@ -2219,6 +2219,18 @@
       "navn": "Godkjenne vedtak i VL"
     }
   ],
+  "OppgaveType": [
+    {
+      "kode": "VUR_KONSEKVENS",
+      "kodeverk": "OPPGAVE_TYPE",
+      "navn": "Vurder konsekvens for ytelse"
+    },
+    {
+      "kode": "VUR_DOKUMENT",
+      "kodeverk": "OPPGAVE_TYPE",
+      "navn": "Vurder dokument"
+    }
+  ],
   "OmsorgsovertakelseVilkårType": [
     {
       "kode": "FP_VK_5",

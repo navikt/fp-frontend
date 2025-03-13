@@ -10,7 +10,7 @@ import { AksjonspunktKode, KlageVurdering as klageVurderingType, KodeverkType } 
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import type { KlageVurdering, KlageVurderingResultat, KodeverkMedNavn } from '@navikt/fp-types';
 import type { KlageVurderingResultatAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import type { KlageFormType } from '../../types/klageFormType';
 import { BekreftOgSubmitKlageModal } from './BekreftOgSubmitKlageModal';
@@ -81,10 +81,10 @@ export const BehandleKlageFormNfp = ({
   const [visSubmitModal, setVisSubmitModal] = useState<boolean>(false);
   const initialValues = useMemo(() => buildInitialValues(klageVurdering.klageVurderingResultatNFP), [klageVurdering]);
 
-  const { formData, setFormData } = useFormData<KlageFormType>();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<KlageFormType>();
 
   const formMethods = useForm<KlageFormType>({
-    defaultValues: formData || initialValues,
+    defaultValues: mellomlagretFormData || initialValues,
   });
   const formValues = formMethods.watch();
 
@@ -100,7 +100,7 @@ export const BehandleKlageFormNfp = ({
     <Form
       formMethods={formMethods}
       onSubmit={(values: KlageFormType) => submitCallback(transformValues(values))}
-      setDataOnUnmount={setFormData}
+      setDataOnUnmount={setMellomlagretFormData}
     >
       <VStack gap="4">
         <Heading size="small">{intl.formatMessage({ id: 'Klage.ResolveKlage.Title' })}</Heading>

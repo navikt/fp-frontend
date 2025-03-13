@@ -9,7 +9,7 @@ import {
   InnsynResultatType,
   Kommunikasjonsretning,
 } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, Behandling, Innsyn, InnsynDokument } from '@navikt/fp-types';
 
 import { InnsynProsessIndex } from './InnsynProsessIndex';
@@ -30,7 +30,7 @@ const defaultAksjonspunkt: Aksjonspunkt = {
 const meta = {
   title: 'prosess/innsyn/prosess-innsyn',
   component: InnsynProsessIndex,
-  decorators: [withFormData, withPanelData],
+  decorators: [withMellomlagretFormData, withPanelData],
   args: {
     readOnlySubmitButton: false,
     alleDokumenter: [
