@@ -1,7 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort } from '@navikt/ds-react';
-import { PeriodLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { BodyShort, VStack } from '@navikt/ds-react';
+import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 
 import type { FastsattOpptjeningAktivitet } from '@navikt/fp-types';
 
@@ -27,15 +27,13 @@ export const OpptjeningVilkarView = ({
   opptjeningFomDate,
   opptjeningTomDate,
 }: Props) => (
-  <>
+  <VStack gap="4">
     <BodyShort size="small">
       <FormattedMessage id="OpptjeningVilkarView.MonthsAndDays" values={{ months, days }} />
     </BodyShort>
-    <VerticalSpacer eightPx />
     <BodyShort size="small">
       <PeriodLabel dateStringFom={opptjeningFomDate} dateStringTom={opptjeningTomDate} />
     </BodyShort>
-    <VerticalSpacer sixteenPx />
     {fastsattOpptjeningActivities.length > 0 && (
       <OpptjeningTimeLineLight
         opptjeningPeriods={fastsattOpptjeningActivities}
@@ -43,5 +41,5 @@ export const OpptjeningVilkarView = ({
         opptjeningTomDate={opptjeningTomDate}
       />
     )}
-  </>
+  </VStack>
 );

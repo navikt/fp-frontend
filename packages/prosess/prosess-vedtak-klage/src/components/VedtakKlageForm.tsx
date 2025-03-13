@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, Heading, Label } from '@navikt/ds-react';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { BodyShort, Heading, Label, VStack } from '@navikt/ds-react';
 
 import {
   AksjonspunktKode,
@@ -120,22 +119,22 @@ export const VedtakKlageForm = ({ klageVurdering, previewVedtakCallback, behandl
 
   const kodeverknavn = getKodeverknavnFn(alleKodeverk);
   return (
-    <>
+    <VStack gap="4">
       <Heading size="small">
         <FormattedMessage id="VedtakKlageForm.Header" />
       </Heading>
-      <VerticalSpacer twentyPx />
-      <Label size="small">
-        <FormattedMessage id="VedtakKlageForm.Resultat" />
-      </Label>
-      {behandlingsResultatTekst && (
-        <BodyShort size="small">
-          <FormattedMessage id={behandlingsResultatTekst} />
-        </BodyShort>
-      )}
-      <VerticalSpacer sixteenPx />
+      <VStack gap="1">
+        <Label size="small">
+          <FormattedMessage id="VedtakKlageForm.Resultat" />
+        </Label>
+        {behandlingsResultatTekst && (
+          <BodyShort size="small">
+            <FormattedMessage id={behandlingsResultatTekst} />
+          </BodyShort>
+        )}
+      </VStack>
       {behandlingsresultat.type === BehandlingResultatType.KLAGE_AVVIST && (
-        <>
+        <VStack gap="1">
           <Label size="small">
             <FormattedMessage id="VedtakKlageForm.ArsakTilAvvisning" />
           </Label>
@@ -144,26 +143,23 @@ export const VedtakKlageForm = ({ klageVurdering, previewVedtakCallback, behandl
               {kodeverknavn(arsak, KodeverkType.KLAGE_AVVIST_AARSAK)}
             </BodyShort>
           ))}
-          <VerticalSpacer sixteenPx />
-        </>
+        </VStack>
       )}
       {erOmgjort && (
-        <>
+        <VStack gap="1">
           <Label size="small">
             <FormattedMessage id="VedtakKlageForm.ArsakTilOmgjoring" />
           </Label>
           {omgjortAarsak}
-          <VerticalSpacer sixteenPx />
-        </>
+        </VStack>
       )}
       {behandlingsresultat.type === BehandlingResultatType.KLAGE_YTELSESVEDTAK_OPPHEVET && (
-        <>
+        <VStack gap="1">
           <Label size="small">
             <FormattedMessage id="VedtakKlageForm.ArsakTilOppheving" />
           </Label>
           {omgjortAarsak}
-          <VerticalSpacer sixteenPx />
-        </>
+        </VStack>
       )}
       {klageVurderingResultat?.klageVurdertAv === 'NFP' && (
         <VedtakKlageSubmitPanel
@@ -174,6 +170,6 @@ export const VedtakKlageForm = ({ klageVurdering, previewVedtakCallback, behandl
           isSubmitting={isSubmitting}
         />
       )}
-    </>
+    </VStack>
   );
 };

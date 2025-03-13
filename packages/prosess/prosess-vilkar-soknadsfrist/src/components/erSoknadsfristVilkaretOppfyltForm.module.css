@@ -15,17 +15,5 @@
 .panel {
   border: 1px solid var(--a-gray-100);
   border-radius: 4px;
-  margin-top: 16px;
-}
-
-.radioGroup {
-  margin-top: 16px;
-}
-
-.panelDates {
-  margin-top: 16px;
-}
-
-.col {
-  width: 50%;
+  padding: 16px;
 }

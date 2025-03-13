@@ -1,8 +1,8 @@
 import { type ReactNode } from 'react';
 
 import { CheckmarkCircleFillIcon, XMarkOctagonFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Detail, Heading, Label } from '@navikt/ds-react';
-import { AksjonspunktBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { BodyShort, Detail, Heading, HStack, Label, VStack } from '@navikt/ds-react';
+import { AksjonspunktBox } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 
 import { ProsessStegSubmitButton } from '../ProsessStegSubmitButtonNew';
@@ -40,68 +40,41 @@ export const ProsessPanelTemplate = ({
   isSubmitting,
   children,
 }: Props) => (
-  <>
-    <FlexContainer>
-      <FlexRow>
-        {originalErVilkarOk !== undefined && (
-          <FlexColumn>
-            {originalErVilkarOk && <CheckmarkCircleFillIcon className={styles.godkjentImage} />}
-            {!originalErVilkarOk && <XMarkOctagonFillIcon className={styles.avslattImage} />}
-          </FlexColumn>
-        )}
-        <FlexColumn>
-          <Heading size="small">{title}</Heading>
-        </FlexColumn>
-        {lovReferanse && (
-          <FlexColumn>
-            <Detail className={styles.vilkar}>{lovReferanse}</Detail>
-          </FlexColumn>
-        )}
-      </FlexRow>
-
-      <FlexRow>
-        <FlexColumn>
-          {originalErVilkarOk && (
-            <>
-              <VerticalSpacer eightPx />
-              <Label size="small">{intl.formatMessage({ id: 'ProsessPanelTemplate.ErOppfylt' })}</Label>
-            </>
-          )}
-          {originalErVilkarOk === false && (
-            <>
-              <VerticalSpacer eightPx />
-              <Label size="small">{intl.formatMessage({ id: 'ProsessPanelTemplate.ErIkkeOppfylt' })}</Label>
-            </>
-          )}
-          {!isAksjonspunktOpen && originalErVilkarOk === undefined && (
-            <>
-              <VerticalSpacer eightPx />
-              <BodyShort size="small">{intl.formatMessage({ id: 'ProsessPanelTemplate.IkkeBehandlet' })}</BodyShort>
-            </>
-          )}
-        </FlexColumn>
-      </FlexRow>
-    </FlexContainer>
-    {isAksjonspunktOpen && <VerticalSpacer eightPx />}
+  <VStack gap="4">
+    <HStack gap="2">
+      {originalErVilkarOk !== undefined && (
+        <>
+          {originalErVilkarOk && <CheckmarkCircleFillIcon className={styles.godkjentImage} />}
+          {!originalErVilkarOk && <XMarkOctagonFillIcon className={styles.avslattImage} />}
+        </>
+      )}
+      <Heading size="small">{title}</Heading>
+      {lovReferanse && <Detail className={styles.vilkar}>{lovReferanse}</Detail>}
+    </HStack>
+    <HStack gap="2">
+      {originalErVilkarOk && <Label size="small">{intl.formatMessage({ id: 'ProsessPanelTemplate.ErOppfylt' })}</Label>}
+      {originalErVilkarOk === false && (
+        <Label size="small">{intl.formatMessage({ id: 'ProsessPanelTemplate.ErIkkeOppfylt' })}</Label>
+      )}
+      {!isAksjonspunktOpen && originalErVilkarOk === undefined && (
+        <BodyShort size="small">{intl.formatMessage({ id: 'ProsessPanelTemplate.IkkeBehandlet' })}</BodyShort>
+      )}
+    </HStack>
     <AksjonspunktBox
       className={styles.aksjonspunktMargin}
       erAksjonspunktApent={isAksjonspunktOpen}
       erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
     >
-      {children}
-      {!readOnly && <VerticalSpacer sixteenPx />}
-      <ProsessStegSubmitButton
-        isReadOnly={readOnly}
-        isSubmittable={!readOnlySubmitButton}
-        isDirty={isDirty}
-        isSubmitting={isSubmitting}
-      />
+      <VStack gap="4">
+        <div>{children}</div>
+        <ProsessStegSubmitButton
+          isReadOnly={readOnly}
+          isSubmittable={!readOnlySubmitButton}
+          isDirty={isDirty}
+          isSubmitting={isSubmitting}
+        />
+      </VStack>
     </AksjonspunktBox>
-    {rendreFakta && (
-      <>
-        <VerticalSpacer sixteenPx />
-        {rendreFakta()}
-      </>
-    )}
-  </>
+    {rendreFakta?.()}
+  </VStack>
 );

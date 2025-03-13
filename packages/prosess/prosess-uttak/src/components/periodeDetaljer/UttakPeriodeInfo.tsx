@@ -1,10 +1,9 @@
 import { type ReactElement } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BodyShort, Detail, HStack, Label } from '@navikt/ds-react';
+import { BodyShort, Detail, HStack, Label, VStack } from '@navikt/ds-react';
 import { CheckboxField, NumberField, SelectField } from '@navikt/ft-form-hooks';
 import { hasValidDecimal, maxValue, notDash, required } from '@navikt/ft-form-validators';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
@@ -185,7 +184,7 @@ export const UttakPeriodeInfo = ({
   const kontoIkkeSatt = !valgtPeriode.periodeType && valgtPeriode.aktiviteter[0].stønadskontoType === '-';
 
   return (
-    <div className={periodeStatusClassName(valgtPeriode, erTilknyttetStortinget)}>
+    <VStack gap="4" className={periodeStatusClassName(valgtPeriode, erTilknyttetStortinget)}>
       {valgtPeriode.oppholdÅrsak === '-' && (
         <HStack justify="space-between">
           <div>
@@ -230,7 +229,6 @@ export const UttakPeriodeInfo = ({
           </div>
         </HStack>
       )}
-      <VerticalSpacer eightPx />
       <HStack gap="10">
         <div>
           <Label size="small">
@@ -271,7 +269,6 @@ export const UttakPeriodeInfo = ({
       </HStack>
       {valgtPeriode.oppholdÅrsak !== '-' && (
         <div className={styles.select}>
-          <VerticalSpacer sixteenPx />
           <Detail>
             <FormattedMessage id="UttakInfo.Opphold.AnnenForelder" />
           </Detail>
@@ -285,7 +282,6 @@ export const UttakPeriodeInfo = ({
           />
         </div>
       )}
-      <VerticalSpacer eightPx />
       {valgtPeriode.mottattDato && (
         <BodyShort>
           <FormattedMessage
@@ -294,6 +290,6 @@ export const UttakPeriodeInfo = ({
           />
         </BodyShort>
       )}
-    </div>
+    </VStack>
   );
 };

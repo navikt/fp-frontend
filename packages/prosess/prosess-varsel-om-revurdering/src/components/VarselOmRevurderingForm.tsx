@@ -2,12 +2,11 @@ import { type MouseEvent, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BodyShort, Button, Detail, Heading } from '@navikt/ds-react';
+import { BodyShort, Button, Detail, Heading, Link, VStack } from '@navikt/ds-react';
 import { Form, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
-import { AksjonspunktHelpTextHTML, ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { AksjonspunktHelpTextHTML, ArrowBox } from '@navikt/ft-ui-komponenter';
 import { formaterFritekst, getLanguageFromSprakkode, ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import classNames from 'classnames';
 import moment from 'moment';
 
 import {
@@ -24,8 +23,6 @@ import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, FamilieHendelse, FamilieHendelseSamling, KodeverkMedNavn, Soknad } from '@navikt/fp-types';
 import type { VarselRevurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
-
-import styles from './varselOmRevurderingForm.module.css';
 
 const minLength3 = minLength(3);
 const maxLength10000 = maxLength(10000);
@@ -131,18 +128,16 @@ export const VarselOmRevurderingForm = ({
   return (
     <>
       <Form formMethods={formMethods} onSubmit={submitCallback} setDataOnUnmount={setFormData}>
-        <Heading size="small">
-          <FormattedMessage id="VarselOmRevurderingForm.VarselOmRevurdering" />
-        </Heading>
-        <VerticalSpacer eightPx />
-        {!isReadOnly && aksjonspunkterForPanel[0].status === AksjonspunktStatus.OPPRETTET && (
-          <>
-            <AksjonspunktHelpTextHTML>
-              <FormattedMessage id="VarselOmRevurderingForm.VarselOmRevurderingVurder" />
-            </AksjonspunktHelpTextHTML>
-            <VerticalSpacer twentyPx />
-            {erAutomatiskRevurdering && (
-              <>
+        <VStack gap="4">
+          <Heading size="small">
+            <FormattedMessage id="VarselOmRevurderingForm.VarselOmRevurdering" />
+          </Heading>
+          {!isReadOnly && aksjonspunkterForPanel[0].status === AksjonspunktStatus.OPPRETTET && (
+            <>
+              <AksjonspunktHelpTextHTML>
+                <FormattedMessage id="VarselOmRevurderingForm.VarselOmRevurderingVurder" />
+              </AksjonspunktHelpTextHTML>
+              {erAutomatiskRevurdering && (
                 <FodselSammenligningIndex
                   behandlingsTypeKode={behandling.type}
                   avklartBarn={avklartBarn}
@@ -152,77 +147,70 @@ export const VarselOmRevurderingForm = ({
                   soknadOriginalBehandling={soknadOriginalBehandling}
                   familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
                 />
-                <VerticalSpacer sixteenPx />
-              </>
-            )}
-            <RadioGroupPanel
-              name="sendVarsel"
-              validate={[required]}
-              isHorizontal
-              isTrueOrFalseSelection
-              radios={[
-                {
-                  value: 'true',
-                  label: intl.formatMessage({ id: 'VarselOmRevurderingForm.SendVarsel' }),
-                },
-                {
-                  value: 'false',
-                  label: intl.formatMessage({ id: 'VarselOmRevurderingForm.IkkeSendVarsel' }),
-                },
-              ]}
-            />
-            {formVerdier.sendVarsel && (
-              <>
-                <VerticalSpacer sixteenPx />
+              )}
+              <RadioGroupPanel
+                name="sendVarsel"
+                validate={[required]}
+                isHorizontal
+                isTrueOrFalseSelection
+                radios={[
+                  {
+                    value: 'true',
+                    label: intl.formatMessage({ id: 'VarselOmRevurderingForm.SendVarsel' }),
+                  },
+                  {
+                    value: 'false',
+                    label: intl.formatMessage({ id: 'VarselOmRevurderingForm.IkkeSendVarsel' }),
+                  },
+                ]}
+              />
+              {formVerdier.sendVarsel && (
                 <ArrowBox>
-                  <TextAreaField
-                    badges={[{ type: 'info', titleText: language }]}
-                    name="fritekst"
-                    label={intl.formatMessage({ id: 'VarselOmRevurderingForm.FritekstIBrev' })}
-                    validate={[required, minLength3, maxLength10000, hasValidText]}
-                    maxLength={10000}
-                    parse={formaterFritekst}
-                  />
-                  <VerticalSpacer fourPx />
-                  {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                  <a
-                    href=""
-                    onClick={forhåndsvisMelding}
-                    className={classNames(styles.previewLink, 'lenke lenke--frittstaende')}
-                  >
-                    <FormattedMessage id="VarselOmRevurderingForm.Preview" />
-                  </a>
+                  <VStack gap="2">
+                    <TextAreaField
+                      badges={[{ type: 'info', titleText: language }]}
+                      name="fritekst"
+                      label={intl.formatMessage({ id: 'VarselOmRevurderingForm.FritekstIBrev' })}
+                      validate={[required, minLength3, maxLength10000, hasValidText]}
+                      maxLength={10000}
+                      parse={formaterFritekst}
+                    />
+                    <div>
+                      <Link href="#" onClick={forhåndsvisMelding}>
+                        <FormattedMessage id="VarselOmRevurderingForm.Preview" />
+                      </Link>
+                    </div>
+                  </VStack>
                 </ArrowBox>
-              </>
-            )}
-            <div className={styles.flexContainer}>
+              )}
               <TextAreaField
                 name="begrunnelse"
                 label={intl.formatMessage({ id: 'VarselOmRevurderingForm.BegrunnelseForSvar' })}
                 validate={[required, minLength3, hasValidText]}
               />
-            </div>
-            <VerticalSpacer sixteenPx />
-            <Button
-              variant="primary"
-              size="small"
-              onClick={formVerdier.sendVarsel ? åpneModal : undefined}
-              loading={formMethods.formState.isSubmitting}
-              disabled={formMethods.formState.isSubmitting}
-              type={formVerdier.sendVarsel ? 'button' : 'submit'}
-            >
-              <FormattedMessage id="VarselOmRevurderingForm.Bekreft" />
-            </Button>
-          </>
-        )}
-        {(isReadOnly || aksjonspunkterForPanel[0].status !== AksjonspunktStatus.OPPRETTET) && (
-          <>
-            <Detail>
-              <FormattedMessage id="VarselOmRevurderingForm.Begrunnelse" />
-            </Detail>
-            <BodyShort size="small">{formVerdier.begrunnelse}</BodyShort>
-          </>
-        )}
+              <div>
+                <Button
+                  variant="primary"
+                  size="small"
+                  onClick={formVerdier.sendVarsel ? åpneModal : undefined}
+                  loading={formMethods.formState.isSubmitting}
+                  disabled={formMethods.formState.isSubmitting}
+                  type={formVerdier.sendVarsel ? 'button' : 'submit'}
+                >
+                  <FormattedMessage id="VarselOmRevurderingForm.Bekreft" />
+                </Button>
+              </div>
+            </>
+          )}
+          {(isReadOnly || aksjonspunkterForPanel[0].status !== AksjonspunktStatus.OPPRETTET) && (
+            <>
+              <Detail>
+                <FormattedMessage id="VarselOmRevurderingForm.Begrunnelse" />
+              </Detail>
+              <BodyShort size="small">{formVerdier.begrunnelse}</BodyShort>
+            </>
+          )}
+        </VStack>
       </Form>
       <SettPaVentModalIndex
         showModal={skalVisePåVentModal}
