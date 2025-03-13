@@ -219,7 +219,6 @@ interface FormValues {
 
 interface Props {
   previewCallback: (data: ForhandsvisData) => void;
-  ytelseTypeKode: string;
   beregningsresultat?: BeregningsresultatDagytelse | BeregningsresultatEs;
   tilbakekrevingvalg?: TilbakekrevingValg;
   simuleringResultat?: SimuleringResultat;
@@ -234,7 +233,6 @@ interface Props {
 
 export const VedtakRevurderingForm = ({
   previewCallback,
-  ytelseTypeKode,
   beregningsresultat,
   tilbakekrevingvalg,
   simuleringResultat,
@@ -248,7 +246,7 @@ export const VedtakRevurderingForm = ({
 }: Props) => {
   const intl = useIntl();
 
-  const { behandling, alleKodeverk, submitCallback, isReadOnly } =
+  const { behandling, fagsak, alleKodeverk, submitCallback, isReadOnly } =
     usePanelDataContext<RevurderingVedtakAksjonspunkter[]>();
 
   const [harOverstyrtVedtaksbrev, setHarOverstyrtVedtaksbrev] = useState(
@@ -279,7 +277,7 @@ export const VedtakRevurderingForm = ({
     const konsekvenserForYtelsen = behandlingsresultat.konsekvenserForYtelsen;
     vedtakstatusTekst = finnInvilgetRevurderingTekst(
       intl,
-      ytelseTypeKode,
+      fagsak.fagsakYtelseType,
       getKodeverknavnFn(alleKodeverk),
       tilbakekrevingtekst,
       konsekvenserForYtelsen,
@@ -326,7 +324,7 @@ export const VedtakRevurderingForm = ({
           if (erInnvilget) {
             return (
               <VedtakInnvilgetRevurderingPanel
-                ytelseTypeKode={ytelseTypeKode}
+                ytelseTypeKode={fagsak.fagsakYtelseType}
                 revurderingsÅrsakString={revurderingsÅrsakString}
                 isReadOnly={isReadOnly}
                 beregningsresultat={beregningsresultat}

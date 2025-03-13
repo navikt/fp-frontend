@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { type IntlShape, useIntl } from 'react-intl';
 
@@ -172,7 +172,6 @@ type FormValues = {
 
 interface Props {
   previewCallback: (data: ForhandsvisData) => void;
-  ytelseTypeKode: string;
   beregningsresultat?: BeregningsresultatDagytelse | BeregningsresultatEs;
   tilbakekrevingvalg?: TilbakekrevingValg;
   simuleringResultat?: SimuleringResultat;
@@ -186,7 +185,6 @@ interface Props {
 
 export const VedtakForm = ({
   previewCallback,
-  ytelseTypeKode,
   beregningsresultat,
   tilbakekrevingvalg,
   simuleringResultat,
@@ -197,7 +195,8 @@ export const VedtakForm = ({
   forkastManueltBrev,
   lagreManueltBrev,
 }: Props) => {
-  const { behandling, alleKodeverk, submitCallback, isReadOnly } = usePanelDataContext<VedtakAksjonspunkter[]>();
+  const { behandling, fagsak, alleKodeverk, submitCallback, isReadOnly } =
+    usePanelDataContext<VedtakAksjonspunkter[]>();
 
   const { aksjonspunkt, behandlingsresultat, sprakkode } = behandling;
 
@@ -218,18 +217,9 @@ export const VedtakForm = ({
       behandling.behandlingsresultat?.vedtaksbrev === DokumentMalType.FRITEKST,
   );
 
-  const erBehandlingEtterKlage = useMemo(
-    () => erÅrsakTypeBehandlingEtterKlage(behandling.behandlingÅrsaker),
-    [behandling.behandlingÅrsaker],
-  );
-  const tilbakekrevingtekst = useMemo(
-    () => getTilbakekrevingText(alleKodeverk, simuleringResultat, tilbakekrevingvalg),
-    [simuleringResultat, tilbakekrevingvalg],
-  );
-  const vedtakstatusTekst = useMemo(
-    () => finnVedtakstatusTekst(intl, ytelseTypeKode, behandlingsresultat),
-    [behandlingsresultat],
-  );
+  const erBehandlingEtterKlage = erÅrsakTypeBehandlingEtterKlage(behandling.behandlingÅrsaker);
+  const tilbakekrevingtekst = getTilbakekrevingText(alleKodeverk, simuleringResultat, tilbakekrevingvalg);
+  const vedtakstatusTekst = finnVedtakstatusTekst(intl, fagsak.fagsakYtelseType, behandlingsresultat);
 
   const forhåndsvisDefaultBrev = hentForhåndsvisManueltBrevCallback(previewCallback, trigger, begrunnelse);
 
@@ -257,8 +247,8 @@ export const VedtakForm = ({
                 behandlingsresultat={behandlingsresultat}
                 isReadOnly={isReadOnly}
                 skalBrukeOverstyrendeFritekstBrev={skalBrukeOverstyrendeFritekstBrev}
-                ytelseTypeKode={ytelseTypeKode}
-                språkkode={språkkode}
+                ytelseTypeKode={fagsak.fagsakYtelseType}
+                språkKode={sprakkode}
                 beregningsresultat={beregningsresultat}
                 beregningErManueltFastsatt={beregningErManueltFastsatt}
               />
