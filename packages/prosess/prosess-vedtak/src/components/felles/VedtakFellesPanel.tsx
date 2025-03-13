@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ArrowForwardIcon, CheckmarkCircleFillIcon, PencilIcon, XMarkOctagonFillIcon } from '@navikt/aksel-icons';
 import { Alert, BodyShort, Box, Button, Heading, HStack, Label, Link, VStack } from '@navikt/ds-react';
-import { FlexColumn, FlexContainer, FlexRow, OkAvbrytModal, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { OkAvbrytModal } from '@navikt/ft-ui-komponenter';
 
 import {
   AksjonspunktKode,
@@ -164,7 +164,7 @@ export const VedtakFellesPanel = ({
   );
 
   return (
-    <>
+    <VStack gap="4">
       <OkAvbrytModal
         text={intl.formatMessage({ id: 'VedtakFellesPanel.Forkast' })}
         okButtonText={intl.formatMessage({ id: 'VedtakFellesPanel.Ok' })}
@@ -172,47 +172,28 @@ export const VedtakFellesPanel = ({
         cancel={() => setSkalViseModal(false)}
         submit={avsluttRedigering}
       />
-      <FlexContainer>
-        <FlexRow>
-          {status === behandlingStatusCode.AVSLUTTET && (
-            <FlexColumn>
-              {erInnvilget && <CheckmarkCircleFillIcon className={styles.innvilgetImage} />}
-              {!erInnvilget && <XMarkOctagonFillIcon className={styles.avslattImage} />}
-            </FlexColumn>
-          )}
-          <FlexColumn>
-            <Heading size="small">
-              <FormattedMessage id={finnTekstkodeFraBehandlingstatus(status)} />
-            </Heading>
-          </FlexColumn>
-        </FlexRow>
-      </FlexContainer>
-      <VerticalSpacer eightPx />
-      <FlexContainer>
-        <FlexRow>
-          <FlexColumn className={styles.space}>
-            <Label size="small">
-              {vedtakstatusTekst}
-              {tilbakekrevingtekst && `. ${intl.formatMessage({ id: tilbakekrevingtekst })}`}
-            </Label>
-          </FlexColumn>
-          <FlexColumn className={styles.space}>
-            {skalViseLink && harIkkeKonsekvensForYtelse && kanBehandles && (
-              <Link href="#" onClick={previewAutomatiskBrev}>
-                <span>
-                  <FormattedMessage
-                    id={
-                      erBehandlingEtterKlage
-                        ? 'VedtakFellesPanel.UtkastVedtaksbrev'
-                        : 'VedtakFellesPanel.AutomatiskVedtaksbrev'
-                    }
-                  />
-                </span>
-                <ArrowForwardIcon className={styles.pil} />
-              </Link>
-            )}
-            {skalViseLink && harIkkeKonsekvensForYtelse && !kanBehandles && (
-              <BodyShort size="small" className={styles.disabletLink}>
+      <HStack gap="2">
+        {status === behandlingStatusCode.AVSLUTTET && (
+          <>
+            {erInnvilget && <CheckmarkCircleFillIcon className={styles.innvilgetImage} />}
+            {!erInnvilget && <XMarkOctagonFillIcon className={styles.avslattImage} />}
+          </>
+        )}
+        <Heading size="small">
+          <FormattedMessage id={finnTekstkodeFraBehandlingstatus(status)} />
+        </Heading>
+      </HStack>
+      <HStack gap="2">
+        <div className={styles.space}>
+          <Label size="small">
+            {vedtakstatusTekst}
+            {tilbakekrevingtekst && `. ${intl.formatMessage({ id: tilbakekrevingtekst })}`}
+          </Label>
+        </div>
+        <div className={styles.space}>
+          {skalViseLink && harIkkeKonsekvensForYtelse && kanBehandles && (
+            <Link href="#" onClick={previewAutomatiskBrev}>
+              <span>
                 <FormattedMessage
                   id={
                     erBehandlingEtterKlage
@@ -220,33 +201,43 @@ export const VedtakFellesPanel = ({
                       : 'VedtakFellesPanel.AutomatiskVedtaksbrev'
                   }
                 />
+              </span>
+              <ArrowForwardIcon className={styles.pil} />
+            </Link>
+          )}
+          {skalViseLink && harIkkeKonsekvensForYtelse && !kanBehandles && (
+            <BodyShort size="small" className={styles.disabletLink}>
+              <FormattedMessage
+                id={
+                  erBehandlingEtterKlage
+                    ? 'VedtakFellesPanel.UtkastVedtaksbrev'
+                    : 'VedtakFellesPanel.AutomatiskVedtaksbrev'
+                }
+              />
+            </BodyShort>
+          )}
+        </div>
+        <div>
+          {!isReadOnly && !skalBrukeManueltBrev && (
+            <Link href="#" onClick={onToggleOverstyring}>
+              <PencilIcon className={styles.blyant} />
+              <span>
+                <FormattedMessage id="VedtakFellesPanel.RedigerVedtaksbrev" />
+              </span>
+            </Link>
+          )}
+          {(isReadOnly || skalBrukeManueltBrev) && (
+            <>
+              <PencilIcon className={styles.blyantDisablet} />
+              <BodyShort size="small" className={styles.disabletLink}>
+                <FormattedMessage id="VedtakFellesPanel.RedigerVedtaksbrev" />
               </BodyShort>
-            )}
-          </FlexColumn>
-          <FlexColumn>
-            {!isReadOnly && !skalBrukeManueltBrev && (
-              <Link href="#" onClick={onToggleOverstyring}>
-                <PencilIcon className={styles.blyant} />
-                <span>
-                  <FormattedMessage id="VedtakFellesPanel.RedigerVedtaksbrev" />
-                </span>
-              </Link>
-            )}
-            {(isReadOnly || skalBrukeManueltBrev) && (
-              <>
-                <PencilIcon className={styles.blyantDisablet} />
-                <BodyShort size="small" className={styles.disabletLink}>
-                  <FormattedMessage id="VedtakFellesPanel.RedigerVedtaksbrev" />
-                </BodyShort>
-              </>
-            )}
-          </FlexColumn>
-        </FlexRow>
-      </FlexContainer>
+            </>
+          )}
+        </div>
+      </HStack>
       <VedtakHelpTextPanel aksjonspunkter={aksjonspunkt} isReadOnly={isReadOnly} />
-      <VerticalSpacer twentyPx />
       {oppgaver && oppgaver.length > 0 && <OppgaveTabell oppgaver={oppgaver} />}
-      <VerticalSpacer twentyPx />
       {renderPanel(skalBrukeManueltBrev, erInnvilget, erAvslatt, erOpphor)}
       {skalBrukeManueltBrev && (
         <div className={styles.brevRedigering}>
@@ -285,33 +276,23 @@ export const VedtakFellesPanel = ({
         </div>
       )}
       {kanSendesTilGodkjenning(status) && (
-        <>
-          <VerticalSpacer twentyPx />
-          <FlexContainer>
-            <FlexRow>
-              <FlexColumn>
-                {!isReadOnly && (
-                  <Button
-                    variant="primary"
-                    size="small"
-                    disabled={behandlingPåVent || isSubmitting}
-                    loading={isSubmitting}
-                  >
-                    <FormattedMessage id={finnKnappetekstkode(aksjonspunkt, skalBrukeManueltBrev)} />
-                  </Button>
-                )}
-              </FlexColumn>
-              {skalBrukeManueltBrev && (
-                <FlexColumn>
-                  <Button size="small" variant="secondary" onClick={() => setSkalViseModal(true)} type="button">
-                    <FormattedMessage id="VedtakFellesPanel.ForkastManueltBrev" />
-                  </Button>
-                </FlexColumn>
-              )}
-            </FlexRow>
-          </FlexContainer>
-        </>
+        <HStack gap="2">
+          {!isReadOnly && (
+            <div>
+              <Button variant="primary" size="small" disabled={behandlingPåVent || isSubmitting} loading={isSubmitting}>
+                <FormattedMessage id={finnKnappetekstkode(aksjonspunkt, skalBrukeManueltBrev)} />
+              </Button>
+            </div>
+          )}
+          {skalBrukeManueltBrev && (
+            <div>
+              <Button size="small" variant="secondary" onClick={() => setSkalViseModal(true)} type="button">
+                <FormattedMessage id="VedtakFellesPanel.ForkastManueltBrev" />
+              </Button>
+            </div>
+          )}
+        </HStack>
       )}
-    </>
+    </VStack>
   );
 };
