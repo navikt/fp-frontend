@@ -56,39 +56,37 @@ export const KlageVurderingRadioOptionsNfp = ({
         ]}
       />
       {klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE && (
-        <>
-          <ArrowBox>
-            <VStack gap="4">
-              <SelectField
-                readOnly={readOnly}
-                name="klageMedholdArsak"
-                selectValues={medholdOptions}
-                className={readOnly ? styles.selectReadOnly : styles.select}
-                label={intl.formatMessage({ id: 'Klage.ResolveKlage.Cause' })}
-                validate={[required]}
-              />
-              <RadioGroupPanel
-                name="klageVurderingOmgjoer"
-                validate={[required]}
-                isReadOnly={readOnly}
-                radios={[
-                  {
-                    value: klageVurderingOmgjoerType.GUNST_MEDHOLD_I_KLAGE,
-                    label: intl.formatMessage({ id: 'Klage.Behandle.Omgjort' }),
-                  },
-                  {
-                    value: klageVurderingOmgjoerType.UGUNST_MEDHOLD_I_KLAGE,
-                    label: intl.formatMessage({ id: 'Klage.Behandle.Ugunst' }),
-                  },
-                  {
-                    value: klageVurderingOmgjoerType.DELVIS_MEDHOLD_I_KLAGE,
-                    label: intl.formatMessage({ id: 'Klage.Behandle.DelvisOmgjort' }),
-                  },
-                ]}
-              />
-            </VStack>
-          </ArrowBox>
-        </>
+        <ArrowBox>
+          <VStack gap="4">
+            <SelectField
+              readOnly={readOnly}
+              name="klageMedholdArsak"
+              selectValues={medholdOptions}
+              className={readOnly ? styles.selectReadOnly : styles.select}
+              label={intl.formatMessage({ id: 'Klage.ResolveKlage.Cause' })}
+              validate={[required]}
+            />
+            <RadioGroupPanel
+              name="klageVurderingOmgjoer"
+              validate={[required]}
+              isReadOnly={readOnly}
+              radios={[
+                {
+                  value: klageVurderingOmgjoerType.GUNST_MEDHOLD_I_KLAGE,
+                  label: intl.formatMessage({ id: 'Klage.Behandle.Omgjort' }),
+                },
+                {
+                  value: klageVurderingOmgjoerType.UGUNST_MEDHOLD_I_KLAGE,
+                  label: intl.formatMessage({ id: 'Klage.Behandle.Ugunst' }),
+                },
+                {
+                  value: klageVurderingOmgjoerType.DELVIS_MEDHOLD_I_KLAGE,
+                  label: intl.formatMessage({ id: 'Klage.Behandle.DelvisOmgjort' }),
+                },
+              ]}
+            />
+          </VStack>
+        </ArrowBox>
       )}
       <SelectField
         readOnly={readOnly}

@@ -75,6 +75,6 @@ export const ProsessPanelTemplate = ({
         />
       </VStack>
     </AksjonspunktBox>
-    {rendreFakta && rendreFakta()}
+    {rendreFakta?.()}
   </VStack>
 );

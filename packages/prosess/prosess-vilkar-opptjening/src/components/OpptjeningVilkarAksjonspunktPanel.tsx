@@ -93,6 +93,16 @@ export const OpptjeningVilkarAksjonspunktPanel = ({
     return null;
   };
 
+  const rendreFakta = () => (
+    <OpptjeningVilkarView
+      months={fastsattOpptjening.opptjeningperiode.måneder}
+      days={fastsattOpptjening.opptjeningperiode.dager}
+      fastsattOpptjeningActivities={fastsattOpptjening.fastsattOpptjeningAktivitetList}
+      opptjeningFomDate={fastsattOpptjening.opptjeningFom}
+      opptjeningTomDate={fastsattOpptjening.opptjeningTom}
+    />
+  );
+
   return (
     <Form formMethods={formMethods} onSubmit={onSubmit} setDataOnUnmount={setFormData}>
       <ProsessPanelTemplate
@@ -105,15 +115,7 @@ export const OpptjeningVilkarAksjonspunktPanel = ({
         erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
         isDirty={formMethods.formState.isDirty}
         isSubmitting={formMethods.formState.isSubmitting}
-        rendreFakta={() => (
-          <OpptjeningVilkarView
-            months={fastsattOpptjening.opptjeningperiode.måneder}
-            days={fastsattOpptjening.opptjeningperiode.dager}
-            fastsattOpptjeningActivities={fastsattOpptjening.fastsattOpptjeningAktivitetList}
-            opptjeningFomDate={fastsattOpptjening.opptjeningFom}
-            opptjeningTomDate={fastsattOpptjening.opptjeningTom}
-          />
-        )}
+        rendreFakta={rendreFakta}
       >
         <Label size="small">
           <FormattedMessage

@@ -67,12 +67,10 @@ export const OverstyringPanel = ({
           />
         )}
         {!erOverstyrt && erVilkarOk !== undefined && (
-          <>
-            <HStack gap="2">
-              <EditedIcon />
-              <BodyShort size="small">{intl.formatMessage({ id: 'OverstyringPanel.Endret' })}</BodyShort>
-            </HStack>
-          </>
+          <HStack gap="2">
+            <EditedIcon />
+            <BodyShort size="small">{intl.formatMessage({ id: 'OverstyringPanel.Endret' })}</BodyShort>
+          </HStack>
         )}
         {erOverstyrt && (
           <>

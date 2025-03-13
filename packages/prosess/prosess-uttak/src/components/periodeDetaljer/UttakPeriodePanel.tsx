@@ -214,94 +214,92 @@ export const UttakPeriodePanel = ({
   }, [allePerioder.length]);
 
   return (
-    <>
-      <Box borderWidth="1" padding="4">
-        <VStack gap="4">
-          <HStack align="center" justify="space-between">
-            <Label size="small">
-              <FormattedMessage id="UttakTimeLineData.PeriodeData.Detaljer" />
-              {!!valgtPeriode.begrunnelse && !harÅpneAksjonspunkter && <EditedIcon />}
-            </Label>
-            {!isReadOnly && erHovedsøkersPeriode && !erRevurderingFørEndringsdato && (
-              <>
-                <Button
-                  size="xsmall"
-                  icon={<ScissorsIcon aria-hidden />}
-                  onClick={toggleVisningAvModal}
-                  variant="tertiary-neutral"
-                  type="button"
-                  title={intl.formatMessage({ id: 'UttakTimeLineData.PeriodeData.DelOppPerioden' })}
-                >
-                  <FormattedMessage id="UttakTimeLineData.PeriodeData.DelOppPerioden" />
-                </Button>
-                {visModal && (
-                  <SplittPeriodeModal
-                    cancel={toggleVisningAvModal}
-                    fomDato={valgtPeriode.fom}
-                    tomDato={valgtPeriode.tom}
-                    submit={splittPeriode}
-                  />
-                )}
-              </>
-            )}
-
-            <HStack gap="2">
+    <Box borderWidth="1" padding="4">
+      <VStack gap="4">
+        <HStack align="center" justify="space-between">
+          <Label size="small">
+            <FormattedMessage id="UttakTimeLineData.PeriodeData.Detaljer" />
+            {!!valgtPeriode.begrunnelse && !harÅpneAksjonspunkter && <EditedIcon />}
+          </Label>
+          {!isReadOnly && erHovedsøkersPeriode && !erRevurderingFørEndringsdato && (
+            <>
               <Button
                 size="xsmall"
-                icon={<ArrowLeftIcon aria-hidden />}
-                onClick={visForrigePeriode}
-                variant="secondary-neutral"
-                type="button"
-                title={intl.formatMessage({ id: 'UttakPeriodePanel.prevPeriod' })}
-              >
-                <FormattedMessage id="UttakPeriodePanel.prevPeriodShort" />
-              </Button>
-              <Button
-                size="xsmall"
-                icon={<ArrowRightIcon aria-hidden />}
-                onClick={visNestePeriode}
-                variant="secondary-neutral"
-                type="button"
-                title={intl.formatMessage({ id: 'UttakPeriodePanel.nextPeriod' })}
-                iconPosition="right"
-              >
-                <FormattedMessage id="UttakPeriodePanel.nextPeriodShort" />
-              </Button>
-              <Button
-                size="xsmall"
-                icon={<XMarkIcon aria-hidden />}
-                onClick={lukkPeriode}
+                icon={<ScissorsIcon aria-hidden />}
+                onClick={toggleVisningAvModal}
                 variant="tertiary-neutral"
                 type="button"
-                title={intl.formatMessage({ id: 'UttakPeriodePanel.LukkPeriode' })}
-              />
-            </HStack>
-          </HStack>
-          {valgtPeriode.manuellBehandlingÅrsak && valgtPeriode.manuellBehandlingÅrsak !== '-' && (
-            <AksjonspunktHelpTextHTML>
-              {hentApTekst(
-                valgtPeriode.manuellBehandlingÅrsak,
-                alleKodeverk,
-                arbeidsgiverOpplysningerPerId,
-                uttakStonadskontoer,
-                valgtPeriode.periodeType,
+                title={intl.formatMessage({ id: 'UttakTimeLineData.PeriodeData.DelOppPerioden' })}
+              >
+                <FormattedMessage id="UttakTimeLineData.PeriodeData.DelOppPerioden" />
+              </Button>
+              {visModal && (
+                <SplittPeriodeModal
+                  cancel={toggleVisningAvModal}
+                  fomDato={valgtPeriode.fom}
+                  tomDato={valgtPeriode.tom}
+                  submit={splittPeriode}
+                />
               )}
-            </AksjonspunktHelpTextHTML>
+            </>
           )}
-          <UttakPeriodeForm
-            valgtPeriode={valgtPeriode}
-            oppdaterPeriode={oppdaterPeriode}
-            isReadOnly={isReadOnly || !erHovedsøkersPeriode || erRevurderingFørEndringsdato}
-            erHovedsøkersPeriode={erHovedsøkersPeriode}
-            lukkPeriodeVisning={lukkPeriode}
-            alleKodeverk={alleKodeverk}
-            årsakFilter={uttaksresultat.årsakFilter}
-            arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-            harSoktOmFlerbarnsdager={harSoktOmFlerbarnsdager}
-            erTilknyttetStortinget={erTilknyttetStortinget}
-          />
-        </VStack>
-      </Box>
-    </>
+
+          <HStack gap="2">
+            <Button
+              size="xsmall"
+              icon={<ArrowLeftIcon aria-hidden />}
+              onClick={visForrigePeriode}
+              variant="secondary-neutral"
+              type="button"
+              title={intl.formatMessage({ id: 'UttakPeriodePanel.prevPeriod' })}
+            >
+              <FormattedMessage id="UttakPeriodePanel.prevPeriodShort" />
+            </Button>
+            <Button
+              size="xsmall"
+              icon={<ArrowRightIcon aria-hidden />}
+              onClick={visNestePeriode}
+              variant="secondary-neutral"
+              type="button"
+              title={intl.formatMessage({ id: 'UttakPeriodePanel.nextPeriod' })}
+              iconPosition="right"
+            >
+              <FormattedMessage id="UttakPeriodePanel.nextPeriodShort" />
+            </Button>
+            <Button
+              size="xsmall"
+              icon={<XMarkIcon aria-hidden />}
+              onClick={lukkPeriode}
+              variant="tertiary-neutral"
+              type="button"
+              title={intl.formatMessage({ id: 'UttakPeriodePanel.LukkPeriode' })}
+            />
+          </HStack>
+        </HStack>
+        {valgtPeriode.manuellBehandlingÅrsak && valgtPeriode.manuellBehandlingÅrsak !== '-' && (
+          <AksjonspunktHelpTextHTML>
+            {hentApTekst(
+              valgtPeriode.manuellBehandlingÅrsak,
+              alleKodeverk,
+              arbeidsgiverOpplysningerPerId,
+              uttakStonadskontoer,
+              valgtPeriode.periodeType,
+            )}
+          </AksjonspunktHelpTextHTML>
+        )}
+        <UttakPeriodeForm
+          valgtPeriode={valgtPeriode}
+          oppdaterPeriode={oppdaterPeriode}
+          isReadOnly={isReadOnly || !erHovedsøkersPeriode || erRevurderingFørEndringsdato}
+          erHovedsøkersPeriode={erHovedsøkersPeriode}
+          lukkPeriodeVisning={lukkPeriode}
+          alleKodeverk={alleKodeverk}
+          årsakFilter={uttaksresultat.årsakFilter}
+          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+          harSoktOmFlerbarnsdager={harSoktOmFlerbarnsdager}
+          erTilknyttetStortinget={erTilknyttetStortinget}
+        />
+      </VStack>
+    </Box>
   );
 };
