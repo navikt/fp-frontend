@@ -6,13 +6,7 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import {
-  AksjonspunktKode,
-  AksjonspunktStatus,
-  FagsakYtelseType,
-  isAvslag,
-  VilkarUtfallType,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus, isAvslag, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { VedtakProsessIndex } from '@navikt/fp-prosess-vedtak';
 import type { Aksjonspunkt, Behandlingsresultat, ForhåndsvisMeldingParams, Vilkar } from '@navikt/fp-types';
@@ -131,7 +125,6 @@ export const VedtakFpProsessStegInitPanel = () => {
             simuleringResultat={simuleringResultat}
             beregningresultatDagytelse={beregningsresultatDagytelse}
             beregningsgrunnlag={beregningsgrunnlag}
-            ytelseTypeKode={FagsakYtelseType.FORELDREPENGER}
             previewCallback={forhandsvis}
             vilkar={vilkår}
             oppgaver={oppgaver}
