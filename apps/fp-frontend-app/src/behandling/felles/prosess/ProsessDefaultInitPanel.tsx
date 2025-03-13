@@ -2,7 +2,7 @@ import { type ReactElement, use } from 'react';
 
 import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import { FormDataProvider, PanelDataProvider, usePanelOverstyring } from '@navikt/fp-utils';
+import { MellomlagretFormDataProvider, PanelDataProvider, usePanelOverstyring } from '@navikt/fp-utils';
 
 import type { StandardProsessPanelProps } from '../typer/standardProsessPanelPropsTsType';
 import { BehandlingDataContext } from '../utils/behandlingDataContext';
@@ -67,7 +67,7 @@ const ProsessPanel = ({
   const skalVisePanel = erPanelValgt && (harApentAksjonspunkt || status !== VilkarUtfallType.IKKE_VURDERT);
 
   return (
-    <FormDataProvider behandling={behandling}>
+    <MellomlagretFormDataProvider behandling={behandling}>
       <ProsessPanelWrapper
         erPanelValgt={erPanelValgt}
         erAksjonspunktOpent={standardPanelProps.isAksjonspunktOpen}
@@ -88,6 +88,6 @@ const ProsessPanel = ({
           </PanelDataProvider>
         ) : null}
       </ProsessPanelWrapper>
-    </FormDataProvider>
+    </MellomlagretFormDataProvider>
   );
 };

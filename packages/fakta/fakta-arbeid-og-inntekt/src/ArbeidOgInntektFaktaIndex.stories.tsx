@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import { type Aksjonspunkt, AksjonspunktÅrsak, type ArbeidOgInntektsmelding } from '@navikt/fp-types';
 
 import { ArbeidOgInntektFaktaIndex } from './ArbeidOgInntektFaktaIndex';
@@ -29,7 +29,7 @@ const fellesInntektsmeldingFelter = {
 const meta = {
   title: 'fakta/fakta-arbeid-og-inntekter',
   component: ArbeidOgInntektFaktaIndex,
-  decorators: [withFormData, withPanelData],
+  decorators: [withMellomlagretFormData, withPanelData],
   args: {
     arbeidsgiverOpplysningerPerId: {},
     lagreVurdering: action('onLagreVurdering') as () => Promise<void>,

@@ -26,7 +26,7 @@ import type {
   Ytelsefordeling,
 } from '@navikt/fp-types';
 import type { BekreftUttaksperioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import {
   type KontrollerFaktaPeriodeMedApMarkering,
@@ -181,26 +181,26 @@ export const UttakFaktaForm = ({
     return leggTilAksjonspunktMarkering(sortertListe, aksjonspunkterForPanel, arbeidsgiverOpplysningerPerId);
   }, [uttakKontrollerFaktaPerioder, aksjonspunkterForPanel, arbeidsgiverOpplysningerPerId]);
 
-  const { formData, setFormData } = useFormData<{
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<{
     uttakPerioder: KontrollerFaktaPeriodeMedApMarkering[];
     begrunnelse: string;
   }>();
 
   const [uttakPerioder, setUttakPerioder] = useState<KontrollerFaktaPeriodeMedApMarkering[]>(
-    formData?.uttakPerioder || sortertePerioder,
+    mellomlagretFormData?.uttakPerioder || sortertePerioder,
   );
 
   const [valgteFomDatoer, setValgteFomDatoer] = useState<string[]>([]);
 
   const formMethods = useForm<{ begrunnelse: string }>({
     defaultValues: {
-      begrunnelse: formData?.begrunnelse ?? aksjonspunkterForPanel[0]?.begrunnelse ?? '',
+      begrunnelse: mellomlagretFormData?.begrunnelse ?? aksjonspunkterForPanel[0]?.begrunnelse ?? '',
     },
   });
 
   useEffect(
     () => () => {
-      setFormData({ uttakPerioder, begrunnelse: formMethods.getValues('begrunnelse') });
+      setMellomlagretFormData({ uttakPerioder, begrunnelse: formMethods.getValues('begrunnelse') });
     },
     [uttakPerioder],
   );

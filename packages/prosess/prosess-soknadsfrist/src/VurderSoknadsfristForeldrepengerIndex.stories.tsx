@@ -3,7 +3,7 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, Soknad } from '@navikt/fp-types';
 
 import { VurderSoknadsfristForeldrepengerIndex } from './VurderSoknadsfristForeldrepengerIndex';
@@ -22,7 +22,7 @@ const soknad = {
 const meta = {
   title: 'prosess/prosess-soknadsfrist',
   component: VurderSoknadsfristForeldrepengerIndex,
-  decorators: [withFormData, withPanelData],
+  decorators: [withMellomlagretFormData, withPanelData],
   args: {
     readOnlySubmitButton: false,
     soknad,

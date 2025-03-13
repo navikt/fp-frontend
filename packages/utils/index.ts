@@ -1,4 +1,4 @@
-export { FormDataProvider, useFormData } from './src/context/FormDataContext';
+export { MellomlagretFormDataProvider, useMellomlagretFormData } from './src/context/MellomlagretFormDataContext.tsx';
 export { PanelDataProvider, usePanelDataContext } from './src/context/PanelDataContext';
 export { PanelOverstyringProvider, usePanelOverstyring } from './src/context/PanelOverstyringContext';
 export { notEmpty } from './src/notEmpty';

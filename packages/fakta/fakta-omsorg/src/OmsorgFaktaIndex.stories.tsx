@@ -4,7 +4,7 @@ import { TIDENES_ENDE } from '@navikt/ft-utils';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AdresseType, AksjonspunktKode, AksjonspunktStatus, SivilstandType } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import { KjønnkodeEnum, type PersonopplysningerBasis, type Ytelsefordeling } from '@navikt/fp-types';
 
 import { OmsorgFaktaIndex } from './OmsorgFaktaIndex';
@@ -69,7 +69,7 @@ const merknaderFraBeslutter = {
 const meta = {
   title: 'fakta/fakta-omsorg',
   component: OmsorgFaktaIndex,
-  decorators: [withFormData, withPanelData],
+  decorators: [withMellomlagretFormData, withPanelData],
   args: {
     submittable: true,
     ytelsefordeling,

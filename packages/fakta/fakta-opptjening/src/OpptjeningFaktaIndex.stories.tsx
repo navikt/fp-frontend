@@ -3,7 +3,7 @@ import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, OpptjeningAktivitetType } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { ArbeidsgiverOpplysningerPerId, Opptjening } from '@navikt/fp-types';
 
 import { OpptjeningFaktaIndex } from './OpptjeningFaktaIndex';
@@ -24,7 +24,7 @@ const arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId = {
 const meta = {
   title: 'fakta/fakta-opptjening',
   component: OpptjeningFaktaIndex,
-  decorators: [withFormData, withPanelData],
+  decorators: [withMellomlagretFormData, withPanelData],
   args: {
     arbeidsgiverOpplysningerPerId,
     alleMerknaderFraBeslutter: {

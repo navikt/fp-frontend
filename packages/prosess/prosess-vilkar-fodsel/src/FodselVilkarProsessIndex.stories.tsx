@@ -9,7 +9,7 @@ import {
   FagsakYtelseType,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, Behandling, Vilkar } from '@navikt/fp-types';
 
 import { FodselVilkarProsessIndex } from './FodselVilkarProsessIndex';
@@ -17,7 +17,7 @@ import { FodselVilkarProsessIndex } from './FodselVilkarProsessIndex';
 const meta = {
   title: 'prosess/prosess-vilkar-fodsel',
   component: FodselVilkarProsessIndex,
-  decorators: [withFormData, withPanelData],
+  decorators: [withMellomlagretFormData, withPanelData],
   args: {
     vilkar: [
       {

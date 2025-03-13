@@ -36,7 +36,7 @@ import type {
   VurdereDokumentForVedtakAp,
   VurdereInntektsmeldingKlageForVedtakAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { VedtakResultType } from '../../kodeverk/vedtakResultType';
 import { VedtakFellesPanel } from '../felles/VedtakFellesPanel';
@@ -259,10 +259,10 @@ export const VedtakRevurderingForm = ({
 
   const { aksjonspunkt } = behandling;
 
-  const { formData, setFormData } = useFormData<FormValues>();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || buildInitialValues(aksjonspunkt, behandling),
+    defaultValues: mellomlagretFormData || buildInitialValues(aksjonspunkt, behandling),
   });
 
   const begrunnelse = formMethods.watch('begrunnelse');
@@ -336,7 +336,7 @@ export const VedtakRevurderingForm = ({
     <Form
       formMethods={formMethods}
       onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
-      setDataOnUnmount={setFormData}
+      setDataOnUnmount={setMellomlagretFormData}
     >
       <VedtakFellesPanel
         vedtakstatusTekst={vedtakstatusTekst}

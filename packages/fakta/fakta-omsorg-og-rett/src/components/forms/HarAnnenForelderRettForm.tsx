@@ -9,7 +9,7 @@ import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-f
 import { AksjonspunktKode, RelasjonsRolleType } from '@navikt/fp-kodeverk';
 import { type Aksjonspunkt, type OmsorgOgRett, Verdi } from '@navikt/fp-types';
 import type { AvklarAnnenforelderHarRettAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { HarAnnenForelderRettFelter } from './HarAnnenForelderRettFelter';
 
@@ -33,11 +33,11 @@ export const HarAnnenForelderRettForm = ({ omsorgOgRett, aksjonspunkt, submittab
   const harRettEØS = omsorgOgRett.manuellBehandlingResultat?.annenpartRettighet?.harRettEØS ?? undefined;
   const harUføretrygd = omsorgOgRett.manuellBehandlingResultat?.annenpartRettighet?.harUføretrygd ?? undefined;
 
-  const { formData, setFormData } = useFormData<FormValues>();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
   const readOnly = isReadOnly || aksjonspunkt === undefined;
 
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || {
+    defaultValues: mellomlagretFormData || {
       harAnnenForelderRett: harRettNorge === undefined ? undefined : harRettNorge === Verdi.JA,
       mottarAnnenForelderUforetrygd: harUføretrygd === undefined ? undefined : harUføretrygd === Verdi.JA,
       harAnnenForelderRettEØS: harRettEØS === undefined ? undefined : harRettEØS === Verdi.JA,
@@ -61,7 +61,7 @@ export const HarAnnenForelderRettForm = ({ omsorgOgRett, aksjonspunkt, submittab
   );
 
   return (
-    <Form formMethods={formMethods} onSubmit={transformerFeltverdier} setDataOnUnmount={setFormData}>
+    <Form formMethods={formMethods} onSubmit={transformerFeltverdier} setDataOnUnmount={setMellomlagretFormData}>
       <FaktaGruppe
         withoutBorder
         merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.AVKLAR_ANNEN_FORELDER_RETT]}
