@@ -41,7 +41,7 @@ const getAvslagArsak = (
 interface Props {
   vilkar: Vilkar[];
   behandlingsresultat?: Behandlingsresultat;
-  språkKode: string;
+  språkkode: string;
   erReadOnly: boolean;
   alleKodeverk: AlleKodeverk;
   skalBrukeOverstyrendeFritekstBrev: boolean;
@@ -50,7 +50,7 @@ interface Props {
 export const VedtakAvslagArsakOgBegrunnelsePanel = ({
   vilkar,
   behandlingsresultat,
-  språkKode,
+  språkkode,
   erReadOnly,
   alleKodeverk,
   skalBrukeOverstyrendeFritekstBrev,
@@ -87,7 +87,7 @@ export const VedtakAvslagArsakOgBegrunnelsePanel = ({
             badges={[
               {
                 type: 'info',
-                titleText: getLanguageFromSprakkode(språkKode),
+                titleText: getLanguageFromSprakkode(språkkode),
               },
             ]}
           />

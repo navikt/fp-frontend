@@ -55,7 +55,7 @@ const meta = {
     revurderingVarslingArsak: REVURDERING_VARSLING_ARSAK,
     behandling: {
       brevmaler: TEMPLATES,
-      sprakkode: 'NO',
+      språkkode: 'NB',
     } as BehandlingAppKontekst,
     previewCallback: action('button-click'),
     submitCallback: action('button-click'),

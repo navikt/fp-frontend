@@ -33,7 +33,7 @@ const promiseAction =
 const DEFAULT_BEHANDLING = {
   uuid: '1223-2323-2323-22332',
   versjon: 1,
-  sprakkode: 'NO',
+  språkkode: 'NB',
   type: BehandlingType.FORSTEGANGSSOKNAD,
   status: BehandlingStatus.BEHANDLING_UTREDES,
   behandlingPaaVent: false,

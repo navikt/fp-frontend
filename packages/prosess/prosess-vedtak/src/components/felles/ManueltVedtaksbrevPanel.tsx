@@ -24,11 +24,11 @@ const minLength3 = minLength(3);
 interface Props {
   forhåndsvisOverstyrtBrev: (e: MouseEvent) => void;
   isReadOnly: boolean;
-  språkKode: string;
+  språkkode: string;
   skalViseLink: boolean;
 }
 
-export const ManueltVedtaksbrevPanel = ({ forhåndsvisOverstyrtBrev, isReadOnly, språkKode, skalViseLink }: Props) => {
+export const ManueltVedtaksbrevPanel = ({ forhåndsvisOverstyrtBrev, isReadOnly, språkkode, skalViseLink }: Props) => {
   const intl = useIntl();
   return (
     <>
@@ -43,7 +43,7 @@ export const ManueltVedtaksbrevPanel = ({ forhåndsvisOverstyrtBrev, isReadOnly,
             </Label>
           </FlexColumn>
           <FlexColumn className={styles.space}>
-            <Detail>{getLanguageFromSprakkode(språkKode)}</Detail>
+            <Detail>{getLanguageFromSprakkode(språkkode)}</Detail>
           </FlexColumn>
           <FlexColumn>
             {!isReadOnly && skalViseLink && (

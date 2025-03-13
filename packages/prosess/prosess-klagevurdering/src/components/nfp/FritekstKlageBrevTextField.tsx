@@ -7,11 +7,11 @@ import { formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 import styles from './fritekstKlageBrevTextField.module.css';
 
 interface Props {
-  sprakkode: string;
+  språkkode: string;
   readOnly?: boolean;
 }
 
-export const FritekstBrevTextField = ({ sprakkode, readOnly = true }: Props) => (
+export const FritekstBrevTextField = ({ språkkode, readOnly = true }: Props) => (
   <div className={styles.fritekstTilBrevTextArea}>
     <TextAreaField
       name="fritekstTilBrev"
@@ -22,7 +22,7 @@ export const FritekstBrevTextField = ({ sprakkode, readOnly = true }: Props) => 
       badges={[
         {
           type: 'info',
-          titleText: getLanguageFromSprakkode(sprakkode),
+          titleText: getLanguageFromSprakkode(språkkode),
         },
       ]}
       parse={formaterFritekst}

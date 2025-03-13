@@ -55,7 +55,7 @@ const behandling = {
     },
   },
   status: 'UTRED',
-  sprakkode: '-',
+  språkkode: '-',
 } as Behandling;
 
 const uttakStonadskontoer = {

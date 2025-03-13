@@ -17,7 +17,7 @@ const defaultBehandling = {
       erAutomatiskRevurdering: true,
     },
   ],
-  sprakkode: 'NN',
+  språkkode: 'NN',
   type: BehandlingType.FORSTEGANGSSOKNAD,
 } as Behandling;
 

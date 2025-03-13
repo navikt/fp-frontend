@@ -15,12 +15,12 @@ const minLength3 = minLength(3);
 
 interface Props {
   behandlingsresultat?: Behandlingsresultat;
-  språkKode: string;
+  språkkode: string;
   isReadOnly: boolean;
   labelTextCode: string;
 }
 
-export const VedtakFritekstPanel = ({ behandlingsresultat, språkKode, isReadOnly, labelTextCode }: Props) => {
+export const VedtakFritekstPanel = ({ behandlingsresultat, språkkode, isReadOnly, labelTextCode }: Props) => {
   const intl = useIntl();
 
   return (
@@ -38,7 +38,7 @@ export const VedtakFritekstPanel = ({ behandlingsresultat, språkKode, isReadOnl
             badges={[
               {
                 type: 'info',
-                titleText: getLanguageFromSprakkode(språkKode),
+                titleText: getLanguageFromSprakkode(språkkode),
               },
             ]}
           />
