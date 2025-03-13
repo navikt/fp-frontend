@@ -2,17 +2,10 @@ import { type ReactNode } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, Label } from '@navikt/ds-react';
+import { BodyShort, Button, HStack, Label, VStack } from '@navikt/ds-react';
 import { TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength } from '@navikt/ft-form-validators';
-import {
-  AksjonspunktBox,
-  EditedIcon,
-  FlexColumn,
-  FlexContainer,
-  FlexRow,
-  VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
+import { AksjonspunktBox, EditedIcon } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 
 import styles from './overstyringPanel.module.css';
@@ -61,12 +54,10 @@ export const OverstyringPanel = ({
       erAksjonspunktApent={erOverstyrt}
       erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
     >
-      <Label size="medium">{intl.formatMessage({ id: 'OverstyringPanel.AutomatiskVurdering' })}</Label>
-      <VerticalSpacer eightPx />
-      {children}
-      {(erOverstyrt || hasAksjonspunkt) && (
-        <>
-          <VerticalSpacer eightPx />
+      <VStack gap="4">
+        <Label size="medium">{intl.formatMessage({ id: 'OverstyringPanel.AutomatiskVurdering' })}</Label>
+        <div>{children}</div>
+        {(erOverstyrt || hasAksjonspunkt) && (
           <TextAreaField
             name="begrunnelse"
             label={intl.formatMessage({ id: 'OverstyringPanel.Vilkar' })}
@@ -74,35 +65,22 @@ export const OverstyringPanel = ({
             maxLength={1500}
             readOnly={overrideReadOnly || !erOverstyrt}
           />
-        </>
-      )}
-      <VerticalSpacer sixteenPx />
-      {!erOverstyrt && erVilkarOk !== undefined && (
-        <>
-          <VerticalSpacer fourPx />
-          <FlexRow>
-            <FlexColumn>
+        )}
+        {!erOverstyrt && erVilkarOk !== undefined && (
+          <>
+            <HStack gap="2">
               <EditedIcon />
-            </FlexColumn>
-            <FlexColumn>
               <BodyShort size="small">{intl.formatMessage({ id: 'OverstyringPanel.Endret' })}</BodyShort>
-            </FlexColumn>
-          </FlexRow>
-        </>
-      )}
-      {erOverstyrt && (
-        <FlexContainer>
-          <FlexRow>
-            <FlexColumn>
+            </HStack>
+          </>
+        )}
+        {erOverstyrt && (
+          <>
+            <HStack gap="2">
               <ExclamationmarkTriangleFillIcon className={styles.exclamationmarkIcon} />
-            </FlexColumn>
-            <FlexColumn>
               <BodyShort size="small">{intl.formatMessage({ id: 'OverstyringPanel.Unntakstilfeller' })}</BodyShort>
-            </FlexColumn>
-          </FlexRow>
-          <VerticalSpacer sixteenPx />
-          <FlexRow>
-            <FlexColumn>
+            </HStack>
+            <HStack gap="2">
               {!overrideReadOnly && (
                 <Button
                   size="small"
@@ -113,8 +91,6 @@ export const OverstyringPanel = ({
                   {intl.formatMessage({ id: 'OverstyringPanel.ConfirmInformation' })}
                 </Button>
               )}
-            </FlexColumn>
-            <FlexColumn>
               <Button
                 size="small"
                 variant="secondary"
@@ -125,10 +101,10 @@ export const OverstyringPanel = ({
               >
                 {intl.formatMessage({ id: 'OverstyringPanel.Avbryt' })}
               </Button>
-            </FlexColumn>
-          </FlexRow>
-        </FlexContainer>
-      )}
+            </HStack>
+          </>
+        )}
+      </VStack>
     </AksjonspunktBox>
   );
 };

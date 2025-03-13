@@ -1,7 +1,6 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BodyShort, Heading, Label } from '@navikt/ds-react';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { BodyShort, Heading, Label, VStack } from '@navikt/ds-react';
 import { DATE_TIME_FORMAT } from '@navikt/ft-utils';
 import moment from 'moment';
 
@@ -38,82 +37,79 @@ export const FormkravKlageKa = ({ klageVurdering, avsluttedeBehandlinger }: Prop
   }
 
   return (
-    <>
+    <VStack gap="4">
       <Heading size="small">
         <FormattedMessage id="Klage.Formkrav.Title" />
       </Heading>
-      <VerticalSpacer sixteenPx />
       {underBehandlingKabal && (
-        <>
-          <Heading size="small">
-            <FormattedMessage id="Klage.Formkrav.SeKabalText" />
-          </Heading>
-          <VerticalSpacer sixteenPx />
-        </>
+        <Heading size="small">
+          <FormattedMessage id="Klage.Formkrav.SeKabalText" />
+        </Heading>
       )}
       {!underBehandlingKabal && !behandletAvKabal && (
         <>
-          <Label size="small">
-            <FormattedMessage id="Klage.Formkrav.VelgVedtak" />
-          </Label>
-          <VerticalSpacer fourPx />
-          <BodyShort size="small">{vedtak}</BodyShort>
-          <VerticalSpacer sixteenPx />
-          <Label size="small">
-            <FormattedMessage id="Klage.Formkrav.ErKlagerPart" />
-          </Label>
-          <VerticalSpacer fourPx />
-          <BodyShort size="small">
-            {klageFormkravResultatKA?.erKlagerPart ? (
-              <FormattedMessage id="Klage.Formkrav.Ja" />
-            ) : (
-              <FormattedMessage id="Klage.Formkrav.Nei" />
-            )}
-          </BodyShort>
-          <VerticalSpacer sixteenPx />
-          <Label size="small">
-            <FormattedMessage id="Klage.Formkrav.ErKonkret" />
-          </Label>
-          <VerticalSpacer fourPx />
-          <BodyShort size="small">
-            {klageFormkravResultatKA?.erKlageKonkret ? (
-              <FormattedMessage id="Klage.Formkrav.Ja" />
-            ) : (
-              <FormattedMessage id="Klage.Formkrav.Nei" />
-            )}
-          </BodyShort>
-          <VerticalSpacer sixteenPx />
-          <Label size="small">
-            <FormattedMessage id="Klage.Formkrav.ErFristOverholdt" />
-          </Label>
-          <VerticalSpacer fourPx />
-          <BodyShort size="small">
-            {klageFormkravResultatKA?.erKlagefirstOverholdt ? (
-              <FormattedMessage id="Klage.Formkrav.Ja" />
-            ) : (
-              <FormattedMessage id="Klage.Formkrav.Nei" />
-            )}
-          </BodyShort>
-          <VerticalSpacer sixteenPx />
-          <Label size="small">
-            <FormattedMessage id="Klage.Formkrav.ErSignert" />
-          </Label>
-          <VerticalSpacer fourPx />
-          <BodyShort size="small">
-            {klageFormkravResultatKA?.erSignert ? (
-              <FormattedMessage id="Klage.Formkrav.Ja" />
-            ) : (
-              <FormattedMessage id="Klage.Formkrav.Nei" />
-            )}
-          </BodyShort>
-          <VerticalSpacer sixteenPx />
-          <Label size="small">
-            <FormattedMessage id="Klage.Formkrav.Vurdering" />
-          </Label>
-          <VerticalSpacer fourPx />
-          <BodyShort size="small">{klageFormkravResultatKA?.begrunnelse}</BodyShort>
+          <VStack gap="1">
+            <Label size="small">
+              <FormattedMessage id="Klage.Formkrav.VelgVedtak" />
+            </Label>
+            <BodyShort size="small">{vedtak}</BodyShort>
+          </VStack>
+          <VStack gap="1">
+            <Label size="small">
+              <FormattedMessage id="Klage.Formkrav.ErKlagerPart" />
+            </Label>
+            <BodyShort size="small">
+              {klageFormkravResultatKA?.erKlagerPart ? (
+                <FormattedMessage id="Klage.Formkrav.Ja" />
+              ) : (
+                <FormattedMessage id="Klage.Formkrav.Nei" />
+              )}
+            </BodyShort>
+          </VStack>
+          <VStack gap="1">
+            <Label size="small">
+              <FormattedMessage id="Klage.Formkrav.ErKonkret" />
+            </Label>
+            <BodyShort size="small">
+              {klageFormkravResultatKA?.erKlageKonkret ? (
+                <FormattedMessage id="Klage.Formkrav.Ja" />
+              ) : (
+                <FormattedMessage id="Klage.Formkrav.Nei" />
+              )}
+            </BodyShort>
+          </VStack>
+          <VStack gap="1">
+            <Label size="small">
+              <FormattedMessage id="Klage.Formkrav.ErFristOverholdt" />
+            </Label>
+            <BodyShort size="small">
+              {klageFormkravResultatKA?.erKlagefirstOverholdt ? (
+                <FormattedMessage id="Klage.Formkrav.Ja" />
+              ) : (
+                <FormattedMessage id="Klage.Formkrav.Nei" />
+              )}
+            </BodyShort>
+          </VStack>
+          <VStack gap="1">
+            <Label size="small">
+              <FormattedMessage id="Klage.Formkrav.ErSignert" />
+            </Label>
+            <BodyShort size="small">
+              {klageFormkravResultatKA?.erSignert ? (
+                <FormattedMessage id="Klage.Formkrav.Ja" />
+              ) : (
+                <FormattedMessage id="Klage.Formkrav.Nei" />
+              )}
+            </BodyShort>
+          </VStack>
+          <VStack gap="1">
+            <Label size="small">
+              <FormattedMessage id="Klage.Formkrav.Vurdering" />
+            </Label>
+            <BodyShort size="small">{klageFormkravResultatKA?.begrunnelse}</BodyShort>
+          </VStack>
         </>
       )}
-    </>
+    </VStack>
   );
 };

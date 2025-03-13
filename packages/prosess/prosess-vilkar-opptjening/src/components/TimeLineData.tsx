@@ -1,8 +1,8 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ArrowLeftIcon, ArrowRightIcon, CheckmarkIcon, XMarkIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, HStack, Label, Panel } from '@navikt/ds-react';
-import { FlexColumn, FlexContainer, FlexRow, PeriodLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { BodyShort, Box, Button, HStack, Label, VStack } from '@navikt/ds-react';
+import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 
 import type { FastsattOpptjeningAktivitet } from '@navikt/fp-types';
 
@@ -40,17 +40,14 @@ export const TimeLineData = ({
 }: Props) => {
   const intl = useIntl();
   return (
-    <Panel border>
-      <FlexContainer>
-        <FlexRow spaceBetween>
-          <FlexColumn>
-            <Label size="small">
-              <FormattedMessage id="OpptjeningVilkarView.DetailsForSelectedPeriod" />
-            </Label>
-          </FlexColumn>
-          <FlexColumn className={styles.fix}>
+    <Box borderWidth="1" padding="4">
+      <VStack gap="4">
+        <HStack justify="space-between">
+          <Label size="small">
+            <FormattedMessage id="OpptjeningVilkarView.DetailsForSelectedPeriod" />
+          </Label>
+          <HStack gap="2">
             <Button
-              className={styles.margin}
               size="xsmall"
               icon={<ArrowLeftIcon aria-hidden />}
               onClick={velgForrigePeriode}
@@ -61,7 +58,6 @@ export const TimeLineData = ({
               <FormattedMessage id="TimeLineData.prevPeriodShort" />
             </Button>
             <Button
-              className={styles.margin}
               size="xsmall"
               icon={<ArrowRightIcon aria-hidden />}
               onClick={velgNestePeriode}
@@ -80,19 +76,22 @@ export const TimeLineData = ({
               type="button"
               title={intl.formatMessage({ id: 'TimeLineData.lukkPeriode' })}
             />
-          </FlexColumn>
-        </FlexRow>
-      </FlexContainer>
-      <VerticalSpacer sixteenPx />
-      <BodyShort size="small">
-        <PeriodLabel dateStringFom={fastsattOpptjeningAktivitet.fom} dateStringTom={fastsattOpptjeningAktivitet.tom} />
-      </BodyShort>
-      <VerticalSpacer sixteenPx />
-      <HStack>
-        {isPeriodGodkjent(fastsattOpptjeningAktivitet.klasse) && <CheckmarkIcon className={styles.godkjentImage} />}
-        {!isPeriodGodkjent(fastsattOpptjeningAktivitet.klasse) && <XMarkIcon className={styles.avslattImage} />}
-        <FormattedMessage id={periodStatus(fastsattOpptjeningAktivitet.klasse)} />
-      </HStack>
-    </Panel>
+          </HStack>
+        </HStack>
+        <BodyShort size="small">
+          <PeriodLabel
+            dateStringFom={fastsattOpptjeningAktivitet.fom}
+            dateStringTom={fastsattOpptjeningAktivitet.tom}
+          />
+        </BodyShort>
+        <HStack gap="1">
+          {isPeriodGodkjent(fastsattOpptjeningAktivitet.klasse) && <CheckmarkIcon className={styles.godkjentImage} />}
+          {!isPeriodGodkjent(fastsattOpptjeningAktivitet.klasse) && <XMarkIcon className={styles.avslattImage} />}
+          <BodyShort size="small">
+            <FormattedMessage id={periodStatus(fastsattOpptjeningAktivitet.klasse)} />
+          </BodyShort>
+        </HStack>
+      </VStack>
+    </Box>
   );
 };

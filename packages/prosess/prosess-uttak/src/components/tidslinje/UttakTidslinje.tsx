@@ -16,8 +16,8 @@ import {
   SilhouetteFillIcon,
   StrollerIcon,
 } from '@navikt/aksel-icons';
-import { BodyShort, Button, Label, Timeline } from '@navikt/ds-react';
-import { DateLabel, FloatRight, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { BodyShort, Button, HStack, Label, Timeline, VStack } from '@navikt/ds-react';
+import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { calcDaysAndWeeks, DDMMYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
@@ -30,8 +30,6 @@ import {
   UttakPeriodeType,
 } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, Fagsak, PeriodeSoker } from '@navikt/fp-types';
-
-import styles from './uttakTidslinje.module.css';
 
 export type PeriodeSøkerMedTidslinjedata = {
   id: number;
@@ -261,11 +259,12 @@ const finnLabelForPeriode = (
       <BodyShort>
         <FormattedMessage id="UttakTidslinje.Periode" values={{ periodeString }} />
       </BodyShort>
-      <BodyShort>
-        <FormattedMessage id="UttakTidslinje.Dager" values={{ dager }} />
-      </BodyShort>
-      <VerticalSpacer eightPx />
-      {type}
+      <VStack gap="2">
+        <BodyShort>
+          <FormattedMessage id="UttakTidslinje.Dager" values={{ dager }} />
+        </BodyShort>
+        {type}
+      </VStack>
       {manueltEndret}
     </>
   );
@@ -374,19 +373,17 @@ export const UttakTidslinje = ({
   };
 
   return (
-    <>
-      <VerticalSpacer thirtyTwoPx />
+    <VStack gap="6">
       <Timeline startDate={dayjs(fomDato).toDate()} endDate={dayjs(tomDato).add(1, 'days').toDate()}>
         {pinData.map(data => (
           <Timeline.Pin key={data.dato} date={dayjs(data.datoITidslinjen).toDate()}>
-            {data.tekstIder.map(id => (
-              <React.Fragment key={id}>
-                <Label size="small">
+            <VStack gap="1">
+              {data.tekstIder.map(id => (
+                <Label size="small" key={id}>
                   <FormattedMessage id={id} />
                 </Label>
-                <VerticalSpacer fourPx />
-              </React.Fragment>
-            ))}
+              ))}
+            </VStack>
             <BodyShort size="small">
               <DateLabel dateString={data.dato} />
             </BodyShort>
@@ -419,10 +416,8 @@ export const UttakTidslinje = ({
           );
         })}
       </Timeline>
-      <VerticalSpacer twentyPx />
-      <FloatRight>
+      <HStack gap="2" justify="end">
         <Button
-          className={styles.margin}
           size="small"
           icon={<PlusIcon aria-hidden />}
           onClick={zoomIn}
@@ -431,7 +426,6 @@ export const UttakTidslinje = ({
           title={intl.formatMessage({ id: 'UttakTidslinje.ZoomInn' })}
         />
         <Button
-          className={styles.margin}
           size="small"
           icon={<MinusIcon aria-hidden />}
           onClick={zoomOut}
@@ -440,7 +434,6 @@ export const UttakTidslinje = ({
           title={intl.formatMessage({ id: 'UttakTidslinje.ZoomUt' })}
         />
         <Button
-          className={styles.margin}
           size="small"
           icon={<ArrowLeftIcon aria-hidden />}
           onClick={goBackward}
@@ -449,7 +442,6 @@ export const UttakTidslinje = ({
           title={intl.formatMessage({ id: 'UttakTidslinje.ScrollTilVenstre' })}
         />
         <Button
-          className={styles.margin}
           size="small"
           icon={<ArrowRightIcon aria-hidden />}
           onClick={goForward}
@@ -457,7 +449,7 @@ export const UttakTidslinje = ({
           type="button"
           title={intl.formatMessage({ id: 'UttakTidslinje.ScrollTilHogre' })}
         />
-      </FloatRight>
-    </>
+      </HStack>
+    </VStack>
   );
 };

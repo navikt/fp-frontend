@@ -5,7 +5,7 @@ import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 import { Alert, Button, HStack, VStack } from '@navikt/ds-react';
 import { Form, RadioGroupPanel, SelectField, TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, notDash, required } from '@navikt/ft-form-validators';
-import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { ArrowBox } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
 
 import { KodeverkType, OppholdArsakType, PeriodeResultatType, UtsettelseArsakCode } from '@navikt/fp-kodeverk';
@@ -402,42 +402,39 @@ export const UttakPeriodeForm = ({
             />
             {erOppfylt !== undefined && (
               <ArrowBox alignOffset={erOppfylt ? 0 : 92}>
-                <SelectField
-                  name="periodeAarsak"
-                  label={intl.formatMessage({
-                    id: erOppfylt ? 'UttakActivity.InnvilgelseAarsaker' : 'UttakActivity.AvslagAarsak',
-                  })}
-                  selectValues={periodeÅrsakOptions}
-                  validate={[required, notDash]}
-                />
-                {valgtPeriode.gradertAktivitet && erOppfylt && (
-                  <>
-                    <VerticalSpacer sixteenPx />
-                    <RadioGroupPanel
-                      name="graderingInnvilget"
-                      label={intl.formatMessage({ id: 'UttakActivity.Gradering' })}
-                      validate={[required]}
-                      isHorizontal
-                      isTrueOrFalseSelection
-                      radios={[
-                        { label: intl.formatMessage({ id: 'UttakActivity.Oppfylt' }), value: 'true' },
-                        { label: intl.formatMessage({ id: 'UttakActivity.IkkeOppfylt' }), value: 'false' },
-                      ]}
-                    />
-                    {graderingInnvilget === false && (
-                      <>
-                        <VerticalSpacer sixteenPx />
+                <VStack gap="4">
+                  <SelectField
+                    name="periodeAarsak"
+                    label={intl.formatMessage({
+                      id: erOppfylt ? 'UttakActivity.InnvilgelseAarsaker' : 'UttakActivity.AvslagAarsak',
+                    })}
+                    selectValues={periodeÅrsakOptions}
+                    validate={[required, notDash]}
+                  />
+                  {valgtPeriode.gradertAktivitet && erOppfylt && (
+                    <>
+                      <RadioGroupPanel
+                        name="graderingInnvilget"
+                        label={intl.formatMessage({ id: 'UttakActivity.Gradering' })}
+                        validate={[required]}
+                        isHorizontal
+                        isTrueOrFalseSelection
+                        radios={[
+                          { label: intl.formatMessage({ id: 'UttakActivity.Oppfylt' }), value: 'true' },
+                          { label: intl.formatMessage({ id: 'UttakActivity.IkkeOppfylt' }), value: 'false' },
+                        ]}
+                      />
+                      {graderingInnvilget === false && (
                         <SelectField
                           name="graderingAvslagAarsak"
                           label={intl.formatMessage({ id: 'UttakActivity.GraderingAvslagAarsaker' })}
                           validate={[required, notDash]}
                           selectValues={graderingAvslagsårsakOptions}
                         />
-                      </>
-                    )}
-                    <VerticalSpacer eightPx />
-                  </>
-                )}
+                      )}
+                    </>
+                  )}
+                </VStack>
               </ArrowBox>
             )}
             {warning && (

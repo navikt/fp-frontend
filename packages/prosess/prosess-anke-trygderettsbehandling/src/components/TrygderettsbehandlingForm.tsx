@@ -1,7 +1,6 @@
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, Heading, Label } from '@navikt/ds-react';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { BodyShort, Heading, Label, VStack } from '@navikt/ds-react';
 
 import { AnkeVurdering as ankeVurderingType, AnkeVurderingOmgjoer, KodeverkType } from '@navikt/fp-kodeverk';
 import type { AnkeVurdering } from '@navikt/fp-types';
@@ -22,103 +21,101 @@ export const TrygderettsbehandlingForm = ({ ankeVurdering }: Props) => {
   const ankeOmgorArsaker = alleKodeverk[KodeverkType.ANKE_OMGJOER_AARSAK];
 
   return (
-    <>
+    <VStack gap="4">
       <Heading size="small">
         <FormattedMessage id="Ankebehandling.Merknad.Title" />
       </Heading>
-      <VerticalSpacer sixteenPx />
       {behandlesKabal && (
-        <>
-          <Heading size="small">
-            <FormattedMessage id="Ankebehandling.Merknad.SeKabalText" />
-          </Heading>
-          <VerticalSpacer sixteenPx />
-        </>
+        <Heading size="small">
+          <FormattedMessage id="Ankebehandling.Merknad.SeKabalText" />
+        </Heading>
       )}
       {behandletKabal && (
-        <>
-          <Heading size="small">
-            <FormattedMessage id="Ankebehandling.Merknad.BehandletKabal" />
-          </Heading>
-          <VerticalSpacer sixteenPx />
-        </>
+        <Heading size="small">
+          <FormattedMessage id="Ankebehandling.Merknad.BehandletKabal" />
+        </Heading>
       )}
       {!behandlesKabal && !behandlesKabalTrygderett && (
         <>
-          <Label size="small">
-            <FormattedMessage id="Ankebehandling.Merknad.Merknader" />
-          </Label>
-          <BodyShort size="small">
-            {avr?.erMerknaderMottatt ? (
-              <FormattedMessage id="Ankebehandling.Merknad.Merknader.Ja" />
-            ) : (
-              <FormattedMessage id="Ankebehandling.Merknad.Merknader.Nei" />
-            )}
-          </BodyShort>
-          <VerticalSpacer sixteenPx />
-          <Label size="small">
-            <FormattedMessage id="Ankebehandling.Fritekst" />
-          </Label>
-          <BodyShort size="small">{avr?.merknadKommentar}</BodyShort>
-          <VerticalSpacer sixteenPx />
-          <Label size="small">
-            <FormattedMessage id="Ankebehandling.Resultat" />
-          </Label>
-          <BodyShort size="small">
-            {avr?.trygderettVurdering === ankeVurderingType.ANKE_OMGJOER && (
-              <FormattedMessage id="Ankebehandling.Resultat.Omgjør" />
-            )}
-            {avr?.trygderettVurdering === ankeVurderingType.ANKE_OPPHEVE_OG_HJEMSENDE && (
-              <FormattedMessage id="Ankebehandling.Resultat.Opphev" />
-            )}
-            {avr?.trygderettVurdering === ankeVurderingType.ANKE_HJEMSENDE_UTEN_OPPHEV && (
-              <FormattedMessage id="Ankebehandling.Resultat.Hjemsend" />
-            )}
-            {avr?.trygderettVurdering === ankeVurderingType.ANKE_AVVIS && (
-              <FormattedMessage id="Ankebehandling.Resultat.Avvis" />
-            )}
-            {avr?.trygderettVurdering === ankeVurderingType.ANKE_STADFESTE_YTELSESVEDTAK && (
-              <FormattedMessage id="Ankebehandling.Resultat.Stadfest" />
-            )}
-          </BodyShort>
+          <VStack gap="1">
+            <Label size="small">
+              <FormattedMessage id="Ankebehandling.Merknad.Merknader" />
+            </Label>
+            <BodyShort size="small">
+              {avr?.erMerknaderMottatt ? (
+                <FormattedMessage id="Ankebehandling.Merknad.Merknader.Ja" />
+              ) : (
+                <FormattedMessage id="Ankebehandling.Merknad.Merknader.Nei" />
+              )}
+            </BodyShort>
+          </VStack>
+          <VStack gap="1">
+            <Label size="small">
+              <FormattedMessage id="Ankebehandling.Fritekst" />
+            </Label>
+            <BodyShort size="small">{avr?.merknadKommentar}</BodyShort>
+          </VStack>
+          <VStack gap="1">
+            <Label size="small">
+              <FormattedMessage id="Ankebehandling.Resultat" />
+            </Label>
+            <BodyShort size="small">
+              {avr?.trygderettVurdering === ankeVurderingType.ANKE_OMGJOER && (
+                <FormattedMessage id="Ankebehandling.Resultat.Omgjør" />
+              )}
+              {avr?.trygderettVurdering === ankeVurderingType.ANKE_OPPHEVE_OG_HJEMSENDE && (
+                <FormattedMessage id="Ankebehandling.Resultat.Opphev" />
+              )}
+              {avr?.trygderettVurdering === ankeVurderingType.ANKE_HJEMSENDE_UTEN_OPPHEV && (
+                <FormattedMessage id="Ankebehandling.Resultat.Hjemsend" />
+              )}
+              {avr?.trygderettVurdering === ankeVurderingType.ANKE_AVVIS && (
+                <FormattedMessage id="Ankebehandling.Resultat.Avvis" />
+              )}
+              {avr?.trygderettVurdering === ankeVurderingType.ANKE_STADFESTE_YTELSESVEDTAK && (
+                <FormattedMessage id="Ankebehandling.Resultat.Stadfest" />
+              )}
+            </BodyShort>
+          </VStack>
         </>
       )}
       {ankeVurderingType.ANKE_OMGJOER === avr?.trygderettVurdering && (
         <>
-          <VerticalSpacer sixteenPx />
-          <Label size="small">
-            <FormattedMessage id="Ankebehandling.OmgjoeringArsak" />
-          </Label>
-          <BodyShort size="small">
-            {ankeOmgorArsaker.find(aoa => aoa.kode === avr?.trygderettOmgjoerArsak)?.navn}
-          </BodyShort>
-          <VerticalSpacer sixteenPx />
-          <BodyShort size="small">
-            {avr.trygderettVurderingOmgjoer === AnkeVurderingOmgjoer.ANKE_TIL_GUNST && (
-              <FormattedMessage id="Ankebehandling.VurderingOmgjoer.Gunst" />
-            )}
-            {avr.trygderettVurderingOmgjoer === AnkeVurderingOmgjoer.ANKE_TIL_UGUNST && (
-              <FormattedMessage id="Ankebehandling.VurderingOmgjoer.Ugunst" />
-            )}
-            {avr.trygderettVurderingOmgjoer === AnkeVurderingOmgjoer.ANKE_DELVIS_OMGJOERING_TIL_GUNST && (
-              <FormattedMessage id="Ankebehandling.VurderingOmgjoer.Delvis" />
-            )}
-          </BodyShort>
+          <VStack gap="1">
+            <Label size="small">
+              <FormattedMessage id="Ankebehandling.OmgjoeringArsak" />
+            </Label>
+            <BodyShort size="small">
+              {ankeOmgorArsaker.find(aoa => aoa.kode === avr?.trygderettOmgjoerArsak)?.navn}
+            </BodyShort>
+          </VStack>
+          <VStack gap="1">
+            <BodyShort size="small">
+              {avr.trygderettVurderingOmgjoer === AnkeVurderingOmgjoer.ANKE_TIL_GUNST && (
+                <FormattedMessage id="Ankebehandling.VurderingOmgjoer.Gunst" />
+              )}
+              {avr.trygderettVurderingOmgjoer === AnkeVurderingOmgjoer.ANKE_TIL_UGUNST && (
+                <FormattedMessage id="Ankebehandling.VurderingOmgjoer.Ugunst" />
+              )}
+              {avr.trygderettVurderingOmgjoer === AnkeVurderingOmgjoer.ANKE_DELVIS_OMGJOERING_TIL_GUNST && (
+                <FormattedMessage id="Ankebehandling.VurderingOmgjoer.Delvis" />
+              )}
+            </BodyShort>
+          </VStack>
         </>
       )}
       {(ankeVurderingType.ANKE_OPPHEVE_OG_HJEMSENDE === avr?.trygderettVurdering ||
         ankeVurderingType.ANKE_HJEMSENDE_UTEN_OPPHEV === avr?.trygderettVurdering) &&
         !behandletKabal && (
-          <>
-            <VerticalSpacer sixteenPx />
+          <VStack gap="1">
             <Label size="small">
               <FormattedMessage id="Ankebehandling.OmgjoeringArsak" />
             </Label>
             <BodyShort size="small">
               {ankeOmgorArsaker.find(aoa => aoa.kode === avr.trygderettOmgjoerArsak)?.navn}
             </BodyShort>
-          </>
+          </VStack>
         )}
-    </>
+    </VStack>
   );
 };

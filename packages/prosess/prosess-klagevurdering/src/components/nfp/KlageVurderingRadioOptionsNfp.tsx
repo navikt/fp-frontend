@@ -1,8 +1,9 @@
 import { useIntl } from 'react-intl';
 
+import { VStack } from '@navikt/ds-react';
 import { RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
 import {
   KlageVurdering as klageVurderingType,
@@ -37,7 +38,7 @@ export const KlageVurderingRadioOptionsNfp = ({
     </option>
   ));
   return (
-    <>
+    <VStack gap="4">
       <RadioGroupPanel
         name="klageVurdering"
         validate={[required]}
@@ -56,40 +57,39 @@ export const KlageVurderingRadioOptionsNfp = ({
       />
       {klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE && (
         <>
-          <VerticalSpacer sixteenPx />
           <ArrowBox>
-            <SelectField
-              readOnly={readOnly}
-              name="klageMedholdArsak"
-              selectValues={medholdOptions}
-              className={readOnly ? styles.selectReadOnly : styles.select}
-              label={intl.formatMessage({ id: 'Klage.ResolveKlage.Cause' })}
-              validate={[required]}
-            />
-            <VerticalSpacer sixteenPx />
-            <RadioGroupPanel
-              name="klageVurderingOmgjoer"
-              validate={[required]}
-              isReadOnly={readOnly}
-              radios={[
-                {
-                  value: klageVurderingOmgjoerType.GUNST_MEDHOLD_I_KLAGE,
-                  label: intl.formatMessage({ id: 'Klage.Behandle.Omgjort' }),
-                },
-                {
-                  value: klageVurderingOmgjoerType.UGUNST_MEDHOLD_I_KLAGE,
-                  label: intl.formatMessage({ id: 'Klage.Behandle.Ugunst' }),
-                },
-                {
-                  value: klageVurderingOmgjoerType.DELVIS_MEDHOLD_I_KLAGE,
-                  label: intl.formatMessage({ id: 'Klage.Behandle.DelvisOmgjort' }),
-                },
-              ]}
-            />
+            <VStack gap="4">
+              <SelectField
+                readOnly={readOnly}
+                name="klageMedholdArsak"
+                selectValues={medholdOptions}
+                className={readOnly ? styles.selectReadOnly : styles.select}
+                label={intl.formatMessage({ id: 'Klage.ResolveKlage.Cause' })}
+                validate={[required]}
+              />
+              <RadioGroupPanel
+                name="klageVurderingOmgjoer"
+                validate={[required]}
+                isReadOnly={readOnly}
+                radios={[
+                  {
+                    value: klageVurderingOmgjoerType.GUNST_MEDHOLD_I_KLAGE,
+                    label: intl.formatMessage({ id: 'Klage.Behandle.Omgjort' }),
+                  },
+                  {
+                    value: klageVurderingOmgjoerType.UGUNST_MEDHOLD_I_KLAGE,
+                    label: intl.formatMessage({ id: 'Klage.Behandle.Ugunst' }),
+                  },
+                  {
+                    value: klageVurderingOmgjoerType.DELVIS_MEDHOLD_I_KLAGE,
+                    label: intl.formatMessage({ id: 'Klage.Behandle.DelvisOmgjort' }),
+                  },
+                ]}
+              />
+            </VStack>
           </ArrowBox>
         </>
       )}
-      <VerticalSpacer sixteenPx />
       <SelectField
         readOnly={readOnly}
         name="klageHjemmel"
@@ -98,7 +98,6 @@ export const KlageVurderingRadioOptionsNfp = ({
         label={intl.formatMessage({ id: 'Klage.ResolveKlage.Hjemmel' })}
         validate={[required]}
       />
-      <VerticalSpacer sixteenPx />
-    </>
+    </VStack>
   );
 };

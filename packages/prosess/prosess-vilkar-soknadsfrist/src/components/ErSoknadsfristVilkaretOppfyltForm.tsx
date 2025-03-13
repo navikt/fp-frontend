@@ -2,10 +2,10 @@ import { useCallback, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BodyShort, Detail, Heading, Panel } from '@navikt/ds-react';
+import { BodyShort, Box, Detail, Heading, HStack, VStack } from '@navikt/ds-react';
 import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import { DateLabel, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import moment from 'moment';
 
@@ -128,103 +128,89 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({
       onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
       setDataOnUnmount={setFormData}
     >
-      <Heading size="small">{intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.Soknadsfrist' })}</Heading>
-      <span className="typo-normal">
-        <FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.ApplicationReceivedPart1" />
-        <span className={styles.days}>
-          <FormattedMessage
-            id="ErSoknadsfristVilkaretOppfyltForm.ApplicationReceivedPart2"
-            values={{ numberOfDays: antallDagerSoknadLevertForSent }}
-          />
-        </span>
-        <FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.ApplicationReceivedPart3" />
-        {soknad.mottattDato && antallDagerSoknadLevertForSent && (
-          <DateLabel dateString={findSoknadsfristDate(soknad.mottattDato, antallDagerSoknadLevertForSent)} />
+      <VStack gap="4">
+        <VStack gap="1">
+          <Heading size="small">{intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.Soknadsfrist' })}</Heading>
+          <span className="typo-normal">
+            <FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.ApplicationReceivedPart1" />
+            <span className={styles.days}>
+              <FormattedMessage
+                id="ErSoknadsfristVilkaretOppfyltForm.ApplicationReceivedPart2"
+                values={{ numberOfDays: antallDagerSoknadLevertForSent }}
+              />
+            </span>
+            <FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.ApplicationReceivedPart3" />
+            {soknad.mottattDato && antallDagerSoknadLevertForSent && (
+              <DateLabel dateString={findSoknadsfristDate(soknad.mottattDato, antallDagerSoknadLevertForSent)} />
+            )}
+          </span>
+        </VStack>
+        <HStack justify="space-between">
+          <Box className={styles.panel}>
+            <Heading size="small">{intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.Consider' })}</Heading>
+            <ul className={styles.hyphen}>
+              <li>
+                <FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.Question1" />
+              </li>
+              <li>
+                <FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.Question2" />
+              </li>
+              <li>
+                <FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.Question3" />
+              </li>
+            </ul>
+          </Box>
+          <VStack gap="6">
+            <VStack gap="1">
+              <Detail>{intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.MottattDato' })}</Detail>
+              <span className="typo-normal">{soknad.mottattDato && <DateLabel dateString={soknad.mottattDato} />}</span>
+            </VStack>
+            <VStack gap="1">
+              <Detail>
+                {intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.ExplanationFromApplication' })}
+              </Detail>
+              <span className="typo-normal">{soknad.begrunnelseForSenInnsending || '-'}</span>
+            </VStack>
+          </VStack>
+          <VStack gap="1">
+            {textCode && <Detail>{intl.formatMessage({ id: textCode })}</Detail>}
+            <span className="typo-normal">{dato && <DateLabel dateString={dato} />}</span>
+          </VStack>
+        </HStack>
+        <RadioGroupPanel
+          name="erVilkarOk"
+          validate={[required]}
+          isReadOnly={isReadOnly}
+          isHorizontal
+          isTrueOrFalseSelection
+          radios={[
+            {
+              value: 'true',
+              label: <FormattedMessage id={findRadioButtonTextCode(true)} values={{ b: bTag }} />,
+            },
+            {
+              value: 'false',
+              label: <FormattedMessage id={findRadioButtonTextCode(false)} values={{ b: bTag }} />,
+            },
+          ]}
+        />
+        {isReadOnly && erVilkarOk === false && !!behandling.behandlingsresultat?.avslagsarsak && (
+          <BodyShort size="small">
+            {getKodeverknavn(
+              behandling.behandlingsresultat.avslagsarsak,
+              KodeverkType.AVSLAGSARSAK,
+              VilkarType.SOKNADFRISTVILKARET,
+            )}
+          </BodyShort>
         )}
-      </span>
-      <FlexContainer>
-        <FlexRow>
-          <FlexColumn className={styles.col}>
-            <Panel className={styles.panel}>
-              <Heading size="small">{intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.Consider' })}</Heading>
-              <ul className={styles.hyphen}>
-                <li>
-                  <FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.Question1" />
-                </li>
-                <li>
-                  <FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.Question2" />
-                </li>
-                <li>
-                  <FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.Question3" />
-                </li>
-              </ul>
-            </Panel>
-          </FlexColumn>
-          <FlexColumn className={styles.col}>
-            <Panel className={styles.panelDates}>
-              <FlexContainer>
-                <FlexRow>
-                  <FlexColumn className={styles.col}>
-                    <Detail>{intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.MottattDato' })}</Detail>
-                    <span className="typo-normal">
-                      {soknad.mottattDato && <DateLabel dateString={soknad.mottattDato} />}
-                    </span>
-                  </FlexColumn>
-                  <FlexColumn className={styles.col}>
-                    {textCode && <Detail>{intl.formatMessage({ id: textCode })}</Detail>}
-                    <span className="typo-normal">{dato && <DateLabel dateString={dato} />}</span>
-                  </FlexColumn>
-                </FlexRow>
-                <VerticalSpacer twentyPx />
-                <Detail>
-                  {intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.ExplanationFromApplication' })}
-                </Detail>
-                <span className="typo-normal">{soknad.begrunnelseForSenInnsending || '-'}</span>
-              </FlexContainer>
-            </Panel>
-          </FlexColumn>
-        </FlexRow>
-        <VerticalSpacer sixteenPx />
-        <FlexRow>
-          <FlexColumn className={styles.col}>
-            <RadioGroupPanel
-              name="erVilkarOk"
-              validate={[required]}
-              isReadOnly={isReadOnly}
-              isHorizontal
-              isTrueOrFalseSelection
-              radios={[
-                {
-                  value: 'true',
-                  label: <FormattedMessage id={findRadioButtonTextCode(true)} values={{ b: bTag }} />,
-                },
-                {
-                  value: 'false',
-                  label: <FormattedMessage id={findRadioButtonTextCode(false)} values={{ b: bTag }} />,
-                },
-              ]}
-            />
-          </FlexColumn>
-        </FlexRow>
-      </FlexContainer>
-      {isReadOnly && erVilkarOk === false && !!behandling.behandlingsresultat?.avslagsarsak && (
-        <BodyShort size="small">
-          {getKodeverknavn(
-            behandling.behandlingsresultat.avslagsarsak,
-            KodeverkType.AVSLAGSARSAK,
-            VilkarType.SOKNADFRISTVILKARET,
-          )}
-        </BodyShort>
-      )}
-      <VerticalSpacer sixteenPx />
-      <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
-      <VerticalSpacer sixteenPx />
-      <ProsessStegSubmitButtonNew
-        isReadOnly={isReadOnly}
-        isSubmittable={!readOnlySubmitButton}
-        isSubmitting={formMethods.formState.isSubmitting}
-        isDirty={formMethods.formState.isDirty}
-      />
+        <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
+        <ProsessStegSubmitButtonNew
+          isReadOnly={isReadOnly}
+          isSubmittable={!readOnlySubmitButton}
+          isSubmitting={formMethods.formState.isSubmitting}
+          isDirty={formMethods.formState.isDirty}
+        />
+      </VStack>
     </Form>
   );
 };

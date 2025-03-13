@@ -2,9 +2,9 @@ import { useCallback, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Button, Heading, HStack } from '@navikt/ds-react';
+import { Button, Heading, HStack, VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
-import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode, KlageVurdering as klageVurderingType, KodeverkType } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
@@ -18,8 +18,6 @@ import { FritekstBrevTextField } from './FritekstKlageBrevTextField';
 import { KlageVurderingRadioOptionsNfp } from './KlageVurderingRadioOptionsNfp';
 import { type BrevData, PreviewKlageLink } from './PreviewKlageLink';
 import { TempsaveKlageButton, type TransformedValues } from './TempsaveKlageButton';
-
-import styles from './behandleKlageFormNfp.module.css';
 
 const transformValues = (values: KlageFormType): KlageVurderingResultatAp => ({
   klageMedholdArsak:
@@ -104,27 +102,24 @@ export const BehandleKlageFormNfp = ({
       onSubmit={(values: KlageFormType) => submitCallback(transformValues(values))}
       setDataOnUnmount={setFormData}
     >
-      <Heading size="small">{intl.formatMessage({ id: 'Klage.ResolveKlage.Title' })}</Heading>
-      <VerticalSpacer fourPx />
-      {!readOnlySubmitButton && (
-        <AksjonspunktHelpTextHTML>
-          {[<FormattedMessage id="Klage.ResolveKlage.HelpText" key={AksjonspunktKode.BEHANDLE_KLAGE_NFP} />]}
-        </AksjonspunktHelpTextHTML>
-      )}
-      <KlageVurderingRadioOptionsNfp
-        readOnly={isReadOnly}
-        klageVurdering={formValues.klageVurdering}
-        medholdReasons={alleKodeverk[KodeverkType.KLAGE_MEDHOLD_ARSAK]}
-        alleHjemmlerMedNavn={hjemmlerMedNavn}
-      />
-      <div className={styles.confirmVilkarForm}>
+      <VStack gap="4">
+        <Heading size="small">{intl.formatMessage({ id: 'Klage.ResolveKlage.Title' })}</Heading>
+        {!readOnlySubmitButton && (
+          <AksjonspunktHelpTextHTML>
+            {[<FormattedMessage id="Klage.ResolveKlage.HelpText" key={AksjonspunktKode.BEHANDLE_KLAGE_NFP} />]}
+          </AksjonspunktHelpTextHTML>
+        )}
+        <KlageVurderingRadioOptionsNfp
+          readOnly={isReadOnly}
+          klageVurdering={formValues.klageVurdering}
+          medholdReasons={alleKodeverk[KodeverkType.KLAGE_MEDHOLD_ARSAK]}
+          alleHjemmlerMedNavn={hjemmlerMedNavn}
+        />
         <ProsessStegBegrunnelseTextFieldNew
           readOnly={isReadOnly}
           text={intl.formatMessage({ id: 'BehandleKlageFormNfp.BegrunnelseForKlage' })}
         />
-        <VerticalSpacer sixteenPx />
         <FritekstBrevTextField sprakkode={behandling.sprakkode} readOnly={isReadOnly} />
-        <VerticalSpacer sixteenPx />
         <HStack justify="space-between">
           <HStack gap="4">
             {formValues.klageVurdering === klageVurderingType.STADFESTE_YTELSESVEDTAK && (
@@ -169,7 +164,7 @@ export const BehandleKlageFormNfp = ({
             aksjonspunktCode={AksjonspunktKode.BEHANDLE_KLAGE_NFP}
           />
         </HStack>
-      </div>
+      </VStack>
     </Form>
   );
 };

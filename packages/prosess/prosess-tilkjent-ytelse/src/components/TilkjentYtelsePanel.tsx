@@ -19,8 +19,6 @@ import { usePanelDataContext } from '@navikt/fp-utils';
 import { FeriepengerIndex } from './feriepenger/FeriepengerIndex';
 import { TilkjentYtelse } from './TilkjentYtelse';
 
-import styles from './tilkjentYtelse.module.css';
-
 const finnTilbaketrekkAksjonspunktBegrunnelse = (alleAksjonspunkter: Aksjonspunkt[]): string | undefined =>
   alleAksjonspunkter.find(ap => ap.definisjon === AksjonspunktKode.VURDER_TILBAKETREKK)?.begrunnelse ?? undefined;
 
@@ -75,7 +73,7 @@ export const TilkjentYtelsePanel = ({
           <Label>
             <FormattedMessage id="TilkjentYtelse.VurderTilbaketrekk.Beskrivelse" />
           </Label>
-          <BodyShort className={styles.readOnlyBlokk}>
+          <BodyShort>
             {vurderTilbaketrekkAPBegrunnelse} <EditedIcon />
           </BodyShort>
         </VStack>

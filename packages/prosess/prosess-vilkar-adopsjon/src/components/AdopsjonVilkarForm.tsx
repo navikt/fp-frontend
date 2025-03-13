@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Label } from '@navikt/ds-react';
+import { Label, VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 
 import { AksjonspunktKode, AksjonspunktStatus, KodeverkType, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
@@ -109,13 +109,15 @@ export const AdopsjonVilkarForm = ({ vilkar, readOnlySubmitButton, status }: Pro
         <Label size="small">
           <FormattedMessage id="AdopsjonVilkarForm.TidligereUtbetaltStonad" />
         </Label>
-        <VilkarResultPicker
-          avslagsarsaker={avslagsarsaker}
-          readOnly={isReadOnly}
-          customVilkarOppfyltText={<FormattedMessage id="AdopsjonVilkarForm.Oppfylt" />}
-          customVilkarIkkeOppfyltText={<FormattedMessage id="AdopsjonVilkarForm.IkkeOppfylt" values={{ b: bTag }} />}
-        />
-        <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
+        <VStack gap="4">
+          <VilkarResultPicker
+            avslagsarsaker={avslagsarsaker}
+            readOnly={isReadOnly}
+            customVilkarOppfyltText={<FormattedMessage id="AdopsjonVilkarForm.Oppfylt" />}
+            customVilkarIkkeOppfyltText={<FormattedMessage id="AdopsjonVilkarForm.IkkeOppfylt" values={{ b: bTag }} />}
+          />
+          <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
+        </VStack>
       </ProsessPanelTemplate>
     </Form>
   );

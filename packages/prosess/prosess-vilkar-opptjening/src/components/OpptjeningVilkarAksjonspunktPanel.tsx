@@ -1,10 +1,8 @@
-import { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Label } from '@navikt/ds-react';
+import { Label, VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode, AksjonspunktStatus, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import {
@@ -84,32 +82,16 @@ export const OpptjeningVilkarAksjonspunktPanel = ({
   const isOpenAksjonspunkt = aksjonspunkterForPanel.some(ap => ap.status === AksjonspunktStatus.OPPRETTET);
   const originalErVilkarOk = isOpenAksjonspunkt ? undefined : VilkarUtfallType.OPPFYLT === status;
 
-  const onSubmit = useCallback((values: FormValues) => submitCallback(transformValues(values)), [submitCallback]);
+  const onSubmit = (values: FormValues) => submitCallback(transformValues(values));
 
-  const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
+  const bTag = (...chunks: any) => <b>{chunks}</b>;
 
-  const validerAtEnKunKanVelgeOppfyltNårEnHarPerioder = useCallback((verdi: boolean) => {
+  const validerAtEnKunKanVelgeOppfyltNårEnHarPerioder = (verdi: boolean) => {
     if (fastsattOpptjening.fastsattOpptjeningAktivitetList?.length === 0 && verdi === true) {
       return intl.formatMessage({ id: 'OpptjeningVilkarAksjonspunktPanel.KanIkkeVelgeOppfylt' });
     }
     return null;
-  }, []);
-
-  const rendreFakta = useCallback(
-    () => (
-      <>
-        <VerticalSpacer sixteenPx />
-        <OpptjeningVilkarView
-          months={fastsattOpptjening.opptjeningperiode.måneder}
-          days={fastsattOpptjening.opptjeningperiode.dager}
-          fastsattOpptjeningActivities={fastsattOpptjening.fastsattOpptjeningAktivitetList}
-          opptjeningFomDate={fastsattOpptjening.opptjeningFom}
-          opptjeningTomDate={fastsattOpptjening.opptjeningTom}
-        />
-      </>
-    ),
-    [fastsattOpptjening],
-  );
+  };
 
   return (
     <Form formMethods={formMethods} onSubmit={onSubmit} setDataOnUnmount={setFormData}>
@@ -123,7 +105,15 @@ export const OpptjeningVilkarAksjonspunktPanel = ({
         erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
         isDirty={formMethods.formState.isDirty}
         isSubmitting={formMethods.formState.isSubmitting}
-        rendreFakta={rendreFakta}
+        rendreFakta={() => (
+          <OpptjeningVilkarView
+            months={fastsattOpptjening.opptjeningperiode.måneder}
+            days={fastsattOpptjening.opptjeningperiode.dager}
+            fastsattOpptjeningActivities={fastsattOpptjening.fastsattOpptjeningAktivitetList}
+            opptjeningFomDate={fastsattOpptjening.opptjeningFom}
+            opptjeningTomDate={fastsattOpptjening.opptjeningTom}
+          />
+        )}
       >
         <Label size="small">
           <FormattedMessage
@@ -134,31 +124,32 @@ export const OpptjeningVilkarAksjonspunktPanel = ({
             }
           />
         </Label>
-        <VilkarResultPicker
-          readOnly={isReadOnly}
-          customVilkarOppfyltText={
-            <FormattedMessage
-              id={
-                erSvpFagsak
-                  ? 'OpptjeningVilkarAksjonspunktPanel.ErOppfyltSvp'
-                  : 'OpptjeningVilkarAksjonspunktPanel.ErOppfylt'
-              }
-            />
-          }
-          customVilkarIkkeOppfyltText={
-            <FormattedMessage
-              id={
-                erSvpFagsak
-                  ? 'OpptjeningVilkarAksjonspunktPanel.ErIkkeOppfyltSvp'
-                  : 'OpptjeningVilkarAksjonspunktPanel.ErIkkeOppfylt'
-              }
-              values={{ b: bTag }}
-            />
-          }
-          validatorsForRadioOptions={[validerAtEnKunKanVelgeOppfyltNårEnHarPerioder]}
-        />
-        <VerticalSpacer sixteenPx />
-        <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
+        <VStack gap="4">
+          <VilkarResultPicker
+            readOnly={isReadOnly}
+            customVilkarOppfyltText={
+              <FormattedMessage
+                id={
+                  erSvpFagsak
+                    ? 'OpptjeningVilkarAksjonspunktPanel.ErOppfyltSvp'
+                    : 'OpptjeningVilkarAksjonspunktPanel.ErOppfylt'
+                }
+              />
+            }
+            customVilkarIkkeOppfyltText={
+              <FormattedMessage
+                id={
+                  erSvpFagsak
+                    ? 'OpptjeningVilkarAksjonspunktPanel.ErIkkeOppfyltSvp'
+                    : 'OpptjeningVilkarAksjonspunktPanel.ErIkkeOppfylt'
+                }
+                values={{ b: bTag }}
+              />
+            }
+            validatorsForRadioOptions={[validerAtEnKunKanVelgeOppfyltNårEnHarPerioder]}
+          />
+          <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
+        </VStack>
       </ProsessPanelTemplate>
     </Form>
   );

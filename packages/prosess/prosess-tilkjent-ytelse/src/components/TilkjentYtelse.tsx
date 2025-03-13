@@ -11,8 +11,8 @@ import {
   PlusIcon,
   SilhouetteFillIcon,
 } from '@navikt/aksel-icons';
-import { BodyShort, Button, Timeline } from '@navikt/ds-react';
-import { DateLabel, FloatRight, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { BodyShort, Button, HStack, Timeline, VStack } from '@navikt/ds-react';
+import { DateLabel } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
 
 import { FagsakYtelseType, KodeverkType, SoknadType } from '@navikt/fp-kodeverk';
@@ -27,8 +27,6 @@ import type {
 import { KjønnkodeEnum } from '@navikt/fp-types';
 
 import { TilkjentYtelseTimelineData } from './TilkjentYtelseTimelineData';
-
-import styles from './tilkjentYtelse.module.css';
 
 type Periode = {
   id: number;
@@ -172,7 +170,7 @@ export const TilkjentYtelse = ({
   const familiehendelseData = useMemo(() => getFamilieHendelseData(familieHendelseSamling), [familieHendelseSamling]);
 
   return (
-    <div>
+    <VStack gap="4">
       <Timeline startDate={startDato.toDate()} endDate={endDato.add(1, 'days').toDate()}>
         <Timeline.Pin date={dayjs(soknadDate).toDate()}>
           <BodyShort>
@@ -216,10 +214,8 @@ export const TilkjentYtelse = ({
           ))}
         </Timeline.Row>
       </Timeline>
-      <VerticalSpacer twentyPx />
-      <FloatRight>
+      <HStack gap="2" justify="end">
         <Button
-          className={styles.margin}
           size="small"
           icon={<PlusIcon aria-hidden />}
           onClick={zoomIn}
@@ -228,7 +224,6 @@ export const TilkjentYtelse = ({
           title={intl.formatMessage({ id: 'TilkjentYtelse.ZoomInn' })}
         />
         <Button
-          className={styles.margin}
           size="small"
           icon={<MinusIcon aria-hidden />}
           onClick={zoomOut}
@@ -237,7 +232,6 @@ export const TilkjentYtelse = ({
           title={intl.formatMessage({ id: 'TilkjentYtelse.ZoomUt' })}
         />
         <Button
-          className={styles.margin}
           size="small"
           icon={<ArrowLeftIcon aria-hidden />}
           onClick={goBackward}
@@ -246,7 +240,6 @@ export const TilkjentYtelse = ({
           title={intl.formatMessage({ id: 'TilkjentYtelse.ScrollTilVenstre' })}
         />
         <Button
-          className={styles.margin}
           size="small"
           icon={<ArrowRightIcon aria-hidden />}
           onClick={goForward}
@@ -254,22 +247,18 @@ export const TilkjentYtelse = ({
           type="button"
           title={intl.formatMessage({ id: 'TilkjentYtelse.ScrollTilHogre' })}
         />
-      </FloatRight>
-      <div className={styles.space} />
+      </HStack>
       {valgtPeriode && (
-        <>
-          <VerticalSpacer eightPx />
-          <TilkjentYtelseTimelineData
-            alleKodeverk={alleKodeverk}
-            selectedItemData={valgtPeriode.periode}
-            callbackForward={nextPeriod}
-            callbackBackward={prevPeriod}
-            isSoknadSvangerskapspenger={fagsak.fagsakYtelseType === FagsakYtelseType.SVANGERSKAPSPENGER}
-            arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-            lukkPeriode={lukkPeriode}
-          />
-        </>
+        <TilkjentYtelseTimelineData
+          alleKodeverk={alleKodeverk}
+          selectedItemData={valgtPeriode.periode}
+          callbackForward={nextPeriod}
+          callbackBackward={prevPeriod}
+          isSoknadSvangerskapspenger={fagsak.fagsakYtelseType === FagsakYtelseType.SVANGERSKAPSPENGER}
+          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+          lukkPeriode={lukkPeriode}
+        />
       )}
-    </div>
+    </VStack>
   );
 };

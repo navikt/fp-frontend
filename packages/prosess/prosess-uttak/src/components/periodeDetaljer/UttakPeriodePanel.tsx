@@ -2,8 +2,8 @@ import React, { type ReactElement, useCallback, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ArrowLeftIcon, ArrowRightIcon, ScissorsIcon, XMarkIcon } from '@navikt/aksel-icons';
-import { Button, HStack, Label, Panel } from '@navikt/ds-react';
-import { AksjonspunktHelpTextHTML, EditedIcon, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { Box, Button, HStack, Label, VStack } from '@navikt/ds-react';
+import { AksjonspunktHelpTextHTML, EditedIcon } from '@navikt/ft-ui-komponenter';
 import { calcDays } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
@@ -20,8 +20,6 @@ import type {
 
 import { SplittPeriodeModal } from './splitt/SplittPeriodeModal';
 import { UttakPeriodeForm } from './UttakPeriodeForm';
-
-import styles from './uttakPeriodePanel.module.css';
 
 const getCorrectEmptyArbeidsForhold = (
   alleKodeverk: AlleKodeverk,
@@ -206,8 +204,7 @@ export const UttakPeriodePanel = ({
     : perioderAnnenpart.some(p => p.flerbarnsdager);
 
   const erRevurderingFørEndringsdato =
-    behandling.type === BehandlingType.REVURDERING &&
-    valgtPeriode.tom < endringsdato;
+    behandling.type === BehandlingType.REVURDERING && valgtPeriode.tom < endringsdato;
 
   const visForrigePeriode = useCallback(() => {
     setValgtPeriodeIndex(index => (index === 0 || index === undefined ? index : index - 1));
@@ -218,70 +215,69 @@ export const UttakPeriodePanel = ({
 
   return (
     <>
-      <div className={styles.space} />
-      <Panel border>
-        <HStack align="center" justify="space-between">
-          <Label size="small">
-            <FormattedMessage id="UttakTimeLineData.PeriodeData.Detaljer" />
-            {!!valgtPeriode.begrunnelse && !harÅpneAksjonspunkter && <EditedIcon />}
-          </Label>
-          {!isReadOnly && erHovedsøkersPeriode && !erRevurderingFørEndringsdato && (
-            <>
+      <Box borderWidth="1" padding="4">
+        <VStack gap="4">
+          <HStack align="center" justify="space-between">
+            <Label size="small">
+              <FormattedMessage id="UttakTimeLineData.PeriodeData.Detaljer" />
+              {!!valgtPeriode.begrunnelse && !harÅpneAksjonspunkter && <EditedIcon />}
+            </Label>
+            {!isReadOnly && erHovedsøkersPeriode && !erRevurderingFørEndringsdato && (
+              <>
+                <Button
+                  size="xsmall"
+                  icon={<ScissorsIcon aria-hidden />}
+                  onClick={toggleVisningAvModal}
+                  variant="tertiary-neutral"
+                  type="button"
+                  title={intl.formatMessage({ id: 'UttakTimeLineData.PeriodeData.DelOppPerioden' })}
+                >
+                  <FormattedMessage id="UttakTimeLineData.PeriodeData.DelOppPerioden" />
+                </Button>
+                {visModal && (
+                  <SplittPeriodeModal
+                    cancel={toggleVisningAvModal}
+                    fomDato={valgtPeriode.fom}
+                    tomDato={valgtPeriode.tom}
+                    submit={splittPeriode}
+                  />
+                )}
+              </>
+            )}
+
+            <HStack gap="2">
               <Button
                 size="xsmall"
-                icon={<ScissorsIcon aria-hidden />}
-                onClick={toggleVisningAvModal}
+                icon={<ArrowLeftIcon aria-hidden />}
+                onClick={visForrigePeriode}
+                variant="secondary-neutral"
+                type="button"
+                title={intl.formatMessage({ id: 'UttakPeriodePanel.prevPeriod' })}
+              >
+                <FormattedMessage id="UttakPeriodePanel.prevPeriodShort" />
+              </Button>
+              <Button
+                size="xsmall"
+                icon={<ArrowRightIcon aria-hidden />}
+                onClick={visNestePeriode}
+                variant="secondary-neutral"
+                type="button"
+                title={intl.formatMessage({ id: 'UttakPeriodePanel.nextPeriod' })}
+                iconPosition="right"
+              >
+                <FormattedMessage id="UttakPeriodePanel.nextPeriodShort" />
+              </Button>
+              <Button
+                size="xsmall"
+                icon={<XMarkIcon aria-hidden />}
+                onClick={lukkPeriode}
                 variant="tertiary-neutral"
                 type="button"
-                title={intl.formatMessage({ id: 'UttakTimeLineData.PeriodeData.DelOppPerioden' })}
-              >
-                <FormattedMessage id="UttakTimeLineData.PeriodeData.DelOppPerioden" />
-              </Button>
-              {visModal && (
-                <SplittPeriodeModal
-                  cancel={toggleVisningAvModal}
-                  fomDato={valgtPeriode.fom}
-                  tomDato={valgtPeriode.tom}
-                  submit={splittPeriode}
-                />
-              )}
-            </>
-          )}
-          <HStack gap="2">
-            <Button
-              size="xsmall"
-              icon={<ArrowLeftIcon aria-hidden />}
-              onClick={visForrigePeriode}
-              variant="secondary-neutral"
-              type="button"
-              title={intl.formatMessage({ id: 'UttakPeriodePanel.prevPeriod' })}
-            >
-              <FormattedMessage id="UttakPeriodePanel.prevPeriodShort" />
-            </Button>
-            <Button
-              size="xsmall"
-              icon={<ArrowRightIcon aria-hidden />}
-              onClick={visNestePeriode}
-              variant="secondary-neutral"
-              type="button"
-              title={intl.formatMessage({ id: 'UttakPeriodePanel.nextPeriod' })}
-              iconPosition="right"
-            >
-              <FormattedMessage id="UttakPeriodePanel.nextPeriodShort" />
-            </Button>
-            <Button
-              size="xsmall"
-              icon={<XMarkIcon aria-hidden />}
-              onClick={lukkPeriode}
-              variant="tertiary-neutral"
-              type="button"
-              title={intl.formatMessage({ id: 'UttakPeriodePanel.LukkPeriode' })}
-            />
+                title={intl.formatMessage({ id: 'UttakPeriodePanel.LukkPeriode' })}
+              />
+            </HStack>
           </HStack>
-        </HStack>
-        <VerticalSpacer sixteenPx />
-        {valgtPeriode.manuellBehandlingÅrsak && valgtPeriode.manuellBehandlingÅrsak !== '-' && (
-          <>
+          {valgtPeriode.manuellBehandlingÅrsak && valgtPeriode.manuellBehandlingÅrsak !== '-' && (
             <AksjonspunktHelpTextHTML>
               {hentApTekst(
                 valgtPeriode.manuellBehandlingÅrsak,
@@ -291,22 +287,21 @@ export const UttakPeriodePanel = ({
                 valgtPeriode.periodeType,
               )}
             </AksjonspunktHelpTextHTML>
-            <VerticalSpacer twentyPx />
-          </>
-        )}
-        <UttakPeriodeForm
-          valgtPeriode={valgtPeriode}
-          oppdaterPeriode={oppdaterPeriode}
-          isReadOnly={isReadOnly || !erHovedsøkersPeriode || erRevurderingFørEndringsdato}
-          erHovedsøkersPeriode={erHovedsøkersPeriode}
-          lukkPeriodeVisning={lukkPeriode}
-          alleKodeverk={alleKodeverk}
-          årsakFilter={uttaksresultat.årsakFilter}
-          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          harSoktOmFlerbarnsdager={harSoktOmFlerbarnsdager}
-          erTilknyttetStortinget={erTilknyttetStortinget}
-        />
-      </Panel>
+          )}
+          <UttakPeriodeForm
+            valgtPeriode={valgtPeriode}
+            oppdaterPeriode={oppdaterPeriode}
+            isReadOnly={isReadOnly || !erHovedsøkersPeriode || erRevurderingFørEndringsdato}
+            erHovedsøkersPeriode={erHovedsøkersPeriode}
+            lukkPeriodeVisning={lukkPeriode}
+            alleKodeverk={alleKodeverk}
+            årsakFilter={uttaksresultat.årsakFilter}
+            arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+            harSoktOmFlerbarnsdager={harSoktOmFlerbarnsdager}
+            erTilknyttetStortinget={erTilknyttetStortinget}
+          />
+        </VStack>
+      </Box>
     </>
   );
 };
