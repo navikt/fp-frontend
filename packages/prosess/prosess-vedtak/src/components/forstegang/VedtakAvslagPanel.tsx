@@ -34,7 +34,7 @@ export const getAvslagArsak = (
 interface Props {
   vilkar?: Vilkar[];
   behandlingsresultat?: Behandlingsresultat;
-  språkKode: string;
+  språkkode: string;
   isReadOnly: boolean;
   alleKodeverk: AlleKodeverk;
   beregningErManueltFastsatt: boolean;
@@ -46,7 +46,7 @@ const EMPTY_ARRAY = [] as Vilkar[];
 export const VedtakAvslagPanel = ({
   vilkar = EMPTY_ARRAY,
   behandlingsresultat,
-  språkKode,
+  språkkode,
   isReadOnly,
   alleKodeverk,
   beregningErManueltFastsatt,
@@ -67,7 +67,7 @@ export const VedtakAvslagPanel = ({
       {!skalBrukeOverstyrendeFritekstBrev && (
         <VedtakFritekstPanel
           isReadOnly={isReadOnly}
-          språkKode={språkKode}
+          språkkode={språkkode}
           behandlingsresultat={behandlingsresultat}
           labelTextCode={textCode}
         />

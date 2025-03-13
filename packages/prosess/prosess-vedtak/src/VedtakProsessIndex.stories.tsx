@@ -41,7 +41,7 @@ const defaultBehandling = {
   versjon: 1,
   type: BehandlingType.FORSTEGANGSSOKNAD,
   status: BehandlingStatus.BEHANDLING_UTREDES,
-  sprakkode: 'NO',
+  språkkode: 'NB',
   behandlingsresultat: {
     type: BehandlingResultatType.INNVILGET,
   },
