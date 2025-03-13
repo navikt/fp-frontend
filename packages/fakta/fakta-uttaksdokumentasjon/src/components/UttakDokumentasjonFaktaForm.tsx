@@ -9,7 +9,7 @@ import { FaktaBegrunnelseTextField } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import type { DokumentasjonVurderingBehov } from '@navikt/fp-types';
 import type { VurderDokumentasjonAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { UttakDokumentasjonFaktaTable } from './UttakDokumentasjonFaktaTable/UttakDokumentasjonFaktaTable';
 
@@ -25,11 +25,14 @@ export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov, submi
 
   const readOnly = isReadOnly || aksjonspunkterForPanel.length === 0;
 
-  const { formData, setFormData } = useFormData<{ dokBehov: DokumentasjonVurderingBehov[]; begrunnelse: string }>();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<{
+    dokBehov: DokumentasjonVurderingBehov[];
+    begrunnelse: string;
+  }>();
 
   const [erBekreftKnappTrykket, setErBekreftKnappTrykket] = useState(false);
   const [dokBehov, setDokBehov] = useState<DokumentasjonVurderingBehov[]>(
-    formData?.dokBehov || dokumentasjonVurderingBehov,
+    mellomlagretFormData?.dokBehov || dokumentasjonVurderingBehov,
   );
 
   const bekreft = useCallback(
@@ -47,13 +50,13 @@ export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov, submi
   const lagretBegrunnelse = aksjonspunkterForPanel[0]?.begrunnelse ?? '';
   const formMethods = useForm<{ begrunnelse: string }>({
     defaultValues: {
-      begrunnelse: formData?.begrunnelse || lagretBegrunnelse,
+      begrunnelse: mellomlagretFormData?.begrunnelse || lagretBegrunnelse,
     },
   });
 
   useEffect(
     () => () => {
-      setFormData({ dokBehov, begrunnelse: formMethods.getValues('begrunnelse') });
+      setMellomlagretFormData({ dokBehov, begrunnelse: formMethods.getValues('begrunnelse') });
     },
     [],
   );

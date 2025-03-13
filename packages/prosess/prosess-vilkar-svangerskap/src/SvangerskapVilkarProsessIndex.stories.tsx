@@ -9,7 +9,7 @@ import {
   TilretteleggingType,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type {
   Aksjonspunkt,
   ArbeidsforholdFodselOgTilrettelegging,
@@ -22,7 +22,7 @@ import { SvangerskapVilkarProsessIndex } from './SvangerskapVilkarProsessIndex';
 const meta = {
   title: 'prosess/prosess-vilkar-svangerskap',
   component: SvangerskapVilkarProsessIndex,
-  decorators: [withFormData, withPanelData],
+  decorators: [withMellomlagretFormData, withPanelData],
   args: {
     svangerskapspengerTilrettelegging: {} as FodselOgTilrettelegging,
   },

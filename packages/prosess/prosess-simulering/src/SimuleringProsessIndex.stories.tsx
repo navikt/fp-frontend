@@ -9,7 +9,7 @@ import {
   MottakerType,
   TilbakekrevingVidereBehandling,
 } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type {
   Aksjonspunkt,
   ArbeidsgiverOpplysningerPerId,
@@ -125,7 +125,7 @@ const simuleringResultat = {
 const meta = {
   title: 'prosess/prosess-simulering',
   component: SimuleringProsessIndex,
-  decorators: [withFormData, withPanelData],
+  decorators: [withMellomlagretFormData, withPanelData],
   args: {
     arbeidsgiverOpplysningerPerId,
     simuleringResultat,

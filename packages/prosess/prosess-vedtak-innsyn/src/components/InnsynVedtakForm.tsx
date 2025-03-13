@@ -11,7 +11,7 @@ import { AksjonspunktKode, DokumentMalType, InnsynResultatType, Kommunikasjonsre
 import { ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, Dokument, InnsynDokument } from '@navikt/fp-types';
 import type { ForeslaVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { DocumentListVedtakInnsyn } from './DocumentListVedtakInnsyn';
 
@@ -118,10 +118,10 @@ export const InnsynVedtakForm = ({
 
   const initialValues = buildInitialValues(innsynMottattDato, aksjonspunkterForPanel);
 
-  const { formData, setFormData } = useFormData<FormValues>();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || initialValues,
+    defaultValues: mellomlagretFormData || initialValues,
   });
 
   const documents = useMemo(
@@ -140,7 +140,7 @@ export const InnsynVedtakForm = ({
     <Form
       formMethods={formMethods}
       onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
-      setDataOnUnmount={setFormData}
+      setDataOnUnmount={setMellomlagretFormData}
     >
       <VStack gap="4">
         <Heading size="small">

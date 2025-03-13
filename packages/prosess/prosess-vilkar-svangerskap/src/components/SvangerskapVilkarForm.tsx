@@ -20,7 +20,7 @@ import type {
   FodselOgTilrettelegging,
 } from '@navikt/fp-types';
 import type { BekreftSvangerskapspengervilkarAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 const finnesUttakPåArbfor = (arbfor: ArbeidsforholdFodselOgTilrettelegging): boolean => {
   const finnesAnnenTilretteleggingEnnHel = arbfor.tilretteleggingDatoer.some(
@@ -87,9 +87,9 @@ export const SvangerskapVilkarForm = ({ readOnlySubmitButton, svangerskapspenger
 
   const initialValues = buildInitialValues(aksjonspunkterForPanel, status, behandling.behandlingsresultat);
 
-  const { formData, setFormData } = useFormData<FormValues>();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || initialValues,
+    defaultValues: mellomlagretFormData || initialValues,
   });
 
   const erVilkarOk = formMethods.watch('erVilkarOk');
@@ -110,7 +110,7 @@ export const SvangerskapVilkarForm = ({ readOnlySubmitButton, svangerskapspenger
     <Form
       formMethods={formMethods}
       onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
-      setDataOnUnmount={setFormData}
+      setDataOnUnmount={setMellomlagretFormData}
     >
       <ProsessPanelTemplate
         title={intl.formatMessage({ id: 'SvangerskapVilkarForm.Svangerskap' })}

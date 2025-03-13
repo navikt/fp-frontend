@@ -3,7 +3,7 @@ import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
 import { BesteberegningFaktaIndex } from './BesteberegningFaktaIndex';
@@ -39,7 +39,7 @@ const lagAksjonspunkt = (apKode: string, status: string, begrunnelse?: string): 
 const meta = {
   title: 'fakta/fakta-besteberegning',
   component: BesteberegningFaktaIndex,
-  decorators: [withFormData, withPanelData],
+  decorators: [withMellomlagretFormData, withPanelData],
   args: {
     submittable: true,
     arbeidsgiverOpplysninger,

@@ -10,7 +10,7 @@ import {
   RelasjonsRolleType,
   SivilstandType,
 } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import {
   type Aksjonspunkt,
   KjønnkodeEnum,
@@ -111,7 +111,7 @@ const aleneOmsorgForOmsorgOgRett: OmsorgOgRett = {
 const meta = {
   title: 'fakta/fakta-omsorg-og-rett',
   component: OmsorgOgRettFaktaIndex,
-  decorators: [withFormData, withPanelData],
+  decorators: [withMellomlagretFormData, withPanelData],
   args: {
     personoversikt: { barn: [defaultBarn], annenPart: defaultAnnenPart, bruker: defaultBruker },
     omsorgOgRett: {
