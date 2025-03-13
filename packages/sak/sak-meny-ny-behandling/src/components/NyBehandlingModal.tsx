@@ -2,10 +2,9 @@ import { type ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Button, Heading, Modal } from '@navikt/ds-react';
+import { Button, Heading, Modal, VStack } from '@navikt/ds-react';
 import { CheckboxField, Form, SelectField } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { BehandlingArsakType, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import type { KodeverkMedNavn } from '@navikt/fp-types';
@@ -195,37 +194,35 @@ export const NyBehandlingModal = ({
           </Heading>
         </Modal.Header>
         <Modal.Body>
-          <SelectField
-            name="behandlingType"
-            label=""
-            validate={[required]}
-            selectValues={behandlingTyper.map(bt => createOptions(bt, enabledBehandlingstyper))}
-            className={styles.typeBredde}
-          />
-          <VerticalSpacer sixteenPx />
-          {valgtBehandlingTypeKode === BehandlingType.FORSTEGANGSSOKNAD && (
-            <>
+          <VStack gap="4">
+            <SelectField
+              name="behandlingType"
+              label=""
+              validate={[required]}
+              selectValues={behandlingTyper.map(bt => createOptions(bt, enabledBehandlingstyper))}
+              className={styles.typeBredde}
+            />
+            {valgtBehandlingTypeKode === BehandlingType.FORSTEGANGSSOKNAD && (
               <CheckboxField
                 name="nyBehandlingEtterKlage"
                 label={intl.formatMessage({ id: 'MenyNyBehandlingIndex.NyBehandlingEtterKlage' })}
               />
-              <VerticalSpacer sixteenPx />
-            </>
-          )}
-          {behandlingArsakTyper.length > 0 && (
-            <SelectField
-              name="behandlingArsakType"
-              label=""
-              hideLabel
-              validate={[required]}
-              className={styles.arsakBredde}
-              selectValues={behandlingArsakTyper.map(b => (
-                <option key={b.kode} value={b.kode}>
-                  {b.navn}
-                </option>
-              ))}
-            />
-          )}
+            )}
+            {behandlingArsakTyper.length > 0 && (
+              <SelectField
+                name="behandlingArsakType"
+                label=""
+                hideLabel
+                validate={[required]}
+                className={styles.arsakBredde}
+                selectValues={behandlingArsakTyper.map(b => (
+                  <option key={b.kode} value={b.kode}>
+                    {b.navn}
+                  </option>
+                ))}
+              />
+            )}
+          </VStack>
         </Modal.Body>
         <Modal.Footer>
           <Button size="small" variant="primary">

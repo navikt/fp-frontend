@@ -2,9 +2,8 @@ import { useCallback, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Label } from '@navikt/ds-react';
+import { Label, VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import moment from 'moment';
 
 import { AksjonspunktKode, KodeverkType, TilretteleggingType, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
@@ -21,7 +20,7 @@ import type {
   FodselOgTilrettelegging,
 } from '@navikt/fp-types';
 import type { BekreftSvangerskapspengervilkarAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 const finnesUttakPåArbfor = (arbfor: ArbeidsforholdFodselOgTilrettelegging): boolean => {
   const finnesAnnenTilretteleggingEnnHel = arbfor.tilretteleggingDatoer.some(
@@ -88,9 +87,9 @@ export const SvangerskapVilkarForm = ({ readOnlySubmitButton, svangerskapspenger
 
   const initialValues = buildInitialValues(aksjonspunkterForPanel, status, behandling.behandlingsresultat);
 
-  const { formData, setFormData } = useFormData<FormValues>();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || initialValues,
+    defaultValues: mellomlagretFormData || initialValues,
   });
 
   const erVilkarOk = formMethods.watch('erVilkarOk');
@@ -111,7 +110,7 @@ export const SvangerskapVilkarForm = ({ readOnlySubmitButton, svangerskapspenger
     <Form
       formMethods={formMethods}
       onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
-      setDataOnUnmount={setFormData}
+      setDataOnUnmount={setMellomlagretFormData}
     >
       <ProsessPanelTemplate
         title={intl.formatMessage({ id: 'SvangerskapVilkarForm.Svangerskap' })}
@@ -123,25 +122,26 @@ export const SvangerskapVilkarForm = ({ readOnlySubmitButton, svangerskapspenger
         isDirty={formMethods.formState.isDirty}
         isSubmitting={formMethods.formState.isSubmitting}
       >
-        <Label size="small">
-          <FormattedMessage id="SvangerskapVilkarForm.RettTilSvp" />
-        </Label>
-        {!finnesUttak && (
-          <>
-            <VerticalSpacer sixteenPx />
+        <VStack gap="4">
+          <Label size="small">
+            <FormattedMessage id="SvangerskapVilkarForm.RettTilSvp" />
+          </Label>
+          {!finnesUttak && (
             <Label size="small">
               <FormattedMessage id="SvangerskapVilkarForm.IkkeInnvilgetUttak" />
             </Label>
-          </>
-        )}
-        <VilkarResultPicker
-          avslagsarsaker={avslagsarsaker}
-          readOnly={isReadOnly}
-          skalKunneInnvilge={finnesUttak}
-          customVilkarOppfyltText={<FormattedMessage id="SvangerskapVilkarForm.Oppfylt" />}
-          customVilkarIkkeOppfyltText={<FormattedMessage id="SvangerskapVilkarForm.IkkeOppfylt" values={{ b: bTag }} />}
-        />
-        <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} notRequired={erVilkarOk} />
+          )}
+          <VilkarResultPicker
+            avslagsarsaker={avslagsarsaker}
+            readOnly={isReadOnly}
+            skalKunneInnvilge={finnesUttak}
+            customVilkarOppfyltText={<FormattedMessage id="SvangerskapVilkarForm.Oppfylt" />}
+            customVilkarIkkeOppfyltText={
+              <FormattedMessage id="SvangerskapVilkarForm.IkkeOppfylt" values={{ b: bTag }} />
+            }
+          />
+          <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} notRequired={erVilkarOk} />
+        </VStack>
       </ProsessPanelTemplate>
     </Form>
   );

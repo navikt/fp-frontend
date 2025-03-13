@@ -53,20 +53,18 @@ export const JournalpostTittelForm = ({ journalpost, readOnly }: Props) => {
               />
             )}
           </HStack>
-          <HStack>
-            <CheckboxGroup
-              legend="Brukt fritekst"
-              hideLegend
-              onChange={() => {
-                setHarToggletFritekst(!harToggletFritekst);
-              }}
-              value={[harToggletFritekst]}
-            >
-              <Checkbox value>
-                <FormattedMessage id="Journal.Tittel.Fritekst" />
-              </Checkbox>
-            </CheckboxGroup>
-          </HStack>
+          <CheckboxGroup
+            legend="Brukt fritekst"
+            hideLegend
+            onChange={() => {
+              setHarToggletFritekst(!harToggletFritekst);
+            }}
+            value={[harToggletFritekst]}
+          >
+            <Checkbox value>
+              <FormattedMessage id="Journal.Tittel.Fritekst" />
+            </Checkbox>
+          </CheckboxGroup>
         </>
       )}
       {!kanRedigereTittel && (

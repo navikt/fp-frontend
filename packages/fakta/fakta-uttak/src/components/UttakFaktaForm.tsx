@@ -2,17 +2,10 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
-import { ErrorSummary, Heading } from '@navikt/ds-react';
+import { ErrorSummary, Heading, HStack, VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 import { dateRangesNotOverlapping } from '@navikt/ft-form-validators';
-import {
-  AksjonspunktHelpTextHTML,
-  FlexColumn,
-  FlexContainer,
-  FlexRow,
-  OverstyringKnapp,
-  VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
+import { AksjonspunktHelpTextHTML, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
@@ -33,7 +26,7 @@ import type {
   Ytelsefordeling,
 } from '@navikt/fp-types';
 import type { BekreftUttaksperioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import {
   type KontrollerFaktaPeriodeMedApMarkering,
@@ -188,26 +181,26 @@ export const UttakFaktaForm = ({
     return leggTilAksjonspunktMarkering(sortertListe, aksjonspunkterForPanel, arbeidsgiverOpplysningerPerId);
   }, [uttakKontrollerFaktaPerioder, aksjonspunkterForPanel, arbeidsgiverOpplysningerPerId]);
 
-  const { formData, setFormData } = useFormData<{
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<{
     uttakPerioder: KontrollerFaktaPeriodeMedApMarkering[];
     begrunnelse: string;
   }>();
 
   const [uttakPerioder, setUttakPerioder] = useState<KontrollerFaktaPeriodeMedApMarkering[]>(
-    formData?.uttakPerioder || sortertePerioder,
+    mellomlagretFormData?.uttakPerioder || sortertePerioder,
   );
 
   const [valgteFomDatoer, setValgteFomDatoer] = useState<string[]>([]);
 
   const formMethods = useForm<{ begrunnelse: string }>({
     defaultValues: {
-      begrunnelse: formData?.begrunnelse ?? aksjonspunkterForPanel[0]?.begrunnelse ?? '',
+      begrunnelse: mellomlagretFormData?.begrunnelse ?? aksjonspunkterForPanel[0]?.begrunnelse ?? '',
     },
   });
 
   useEffect(
     () => () => {
-      setFormData({ uttakPerioder, begrunnelse: formMethods.getValues('begrunnelse') });
+      setMellomlagretFormData({ uttakPerioder, begrunnelse: formMethods.getValues('begrunnelse') });
     },
     [uttakPerioder],
   );
@@ -278,41 +271,20 @@ export const UttakFaktaForm = ({
   const erRedigerbart = !isReadOnly && (automatiskeAksjonspunkter.length > 0 || erOverstyrt);
 
   return (
-    <>
-      <FlexContainer>
-        <FlexRow spaceBetween>
-          <FlexColumn>
-            <FlexContainer>
-              <FlexRow>
-                <FlexColumn>
-                  <Heading size="small">
-                    <FormattedMessage id="UttakFaktaForm.FaktaUttak" />
-                  </Heading>
-                </FlexColumn>
-                {kanOverstyre && !isReadOnly && automatiskeAksjonspunkter.length === 0 && (
-                  <FlexColumn>
-                    <OverstyringKnapp onClick={() => setErOverstyrt(true)} erOverstyrt={erOverstyrt} />
-                  </FlexColumn>
-                )}
-              </FlexRow>
-            </FlexContainer>
-          </FlexColumn>
-        </FlexRow>
-      </FlexContainer>
-      <VerticalSpacer thirtyTwoPx />
-      {harApneAksjonspunkter && (
-        <>
-          <AksjonspunktHelpTextHTML>{aksjonspunktTekster}</AksjonspunktHelpTextHTML>
-          <VerticalSpacer sixteenPx />
-        </>
-      )}
+    <VStack gap="8">
+      <HStack gap="4">
+        <Heading size="small">
+          <FormattedMessage id="UttakFaktaForm.FaktaUttak" />
+        </Heading>
+        {kanOverstyre && !isReadOnly && automatiskeAksjonspunkter.length === 0 && (
+          <OverstyringKnapp onClick={() => setErOverstyrt(true)} erOverstyrt={erOverstyrt} />
+        )}
+      </HStack>
+      {harApneAksjonspunkter && <AksjonspunktHelpTextHTML>{aksjonspunktTekster}</AksjonspunktHelpTextHTML>}
       {feilmelding && (
-        <>
-          <ErrorSummary>
-            <ErrorSummary.Item>{feilmelding}</ErrorSummary.Item>
-          </ErrorSummary>
-          <VerticalSpacer sixteenPx />
-        </>
+        <ErrorSummary>
+          <ErrorSummary.Item>{feilmelding}</ErrorSummary.Item>
+        </ErrorSummary>
       )}
       <UttakFaktaTable
         fagsak={fagsak}
@@ -329,22 +301,19 @@ export const UttakFaktaForm = ({
         visNyPeriode={visNyPeriode}
         settVisNyPeriode={setVisNyPeriode}
       />
-      <VerticalSpacer sixteenPx />
-      <VerticalSpacer sixteenPx />
       <Form formMethods={formMethods} onSubmit={(values: { begrunnelse: string }) => bekreft(values.begrunnelse)}>
-        <FaktaBegrunnelseTextField isSubmittable isReadOnly={!erRedigerbart} hasBegrunnelse />
-        {erRedigerbart && (
-          <>
-            <VerticalSpacer twentyPx />
+        <VStack gap="4">
+          <FaktaBegrunnelseTextField isSubmittable isReadOnly={!erRedigerbart} hasBegrunnelse />
+          {erRedigerbart && (
             <FaktaSubmitButton
               isSubmittable={isSubmittable}
               isReadOnly={isReadOnly}
               isSubmitting={formMethods.formState.isSubmitting}
               isDirty={isDirty || formMethods.formState.isDirty}
             />
-          </>
-        )}
+          )}
+        </VStack>
       </Form>
-    </>
+    </VStack>
   );
 };

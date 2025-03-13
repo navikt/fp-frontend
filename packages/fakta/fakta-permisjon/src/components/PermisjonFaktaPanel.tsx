@@ -2,22 +2,16 @@ import { useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, Button, Heading, Label } from '@navikt/ds-react';
+import { BodyShort, Button, Heading, HStack, Label, VStack } from '@navikt/ds-react';
 import { Form, TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
-import {
-  AksjonspunktHelpTextHTML,
-  FlexColumn,
-  FlexContainer,
-  FlexRow,
-  VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
+import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { dateFormat } from '@navikt/ft-utils';
 
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import type { AoIArbeidsforhold, ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 import type { VurderArbeidsforholdPermisjonAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { ArbeidsforholdFieldArray } from './ArbeidsforholdFieldArray';
 
@@ -74,15 +68,15 @@ export const PermisjonFaktaPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysningerP
     [sorterteArbeidsforhold],
   );
 
-  const { formData, setFormData } = useFormData<FormValues>();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || defaultValues,
+    defaultValues: mellomlagretFormData || defaultValues,
   });
 
   useEffect(
     () => () => {
-      setFormData(formMethods.getValues());
+      setMellomlagretFormData(formMethods.getValues());
     },
     [],
   );
@@ -90,31 +84,23 @@ export const PermisjonFaktaPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysningerP
   const harÅpentAksjonspunkt = aksjonspunkterForPanel.some(a => a.status === AksjonspunktStatus.OPPRETTET);
 
   return (
-    <>
-      <FlexContainer>
-        <FlexRow spaceBetween>
-          <FlexColumn>
-            <Heading size="small">
-              <FormattedMessage id="PermisjonFaktaPanel.Overskrift" />
-            </Heading>
-          </FlexColumn>
-          <FlexColumn>
-            <BodyShort size="small">
-              <FormattedMessage
-                id="PermisjonFaktaPanel.Skjaringstidspunkt"
-                values={{ skjæringspunktDato: dateFormat(arbeidOgInntektMedPermisjon.skjæringstidspunkt) }}
-              />
-            </BodyShort>
-          </FlexColumn>
-        </FlexRow>
-      </FlexContainer>
-      <VerticalSpacer thirtyTwoPx />
+    <VStack gap="8">
+      <HStack justify="space-between">
+        <Heading size="small">
+          <FormattedMessage id="PermisjonFaktaPanel.Overskrift" />
+        </Heading>
+        <BodyShort size="small">
+          <FormattedMessage
+            id="PermisjonFaktaPanel.Skjaringstidspunkt"
+            values={{ skjæringspunktDato: dateFormat(arbeidOgInntektMedPermisjon.skjæringstidspunkt) }}
+          />
+        </BodyShort>
+      </HStack>
       {harÅpentAksjonspunkt && (
         <AksjonspunktHelpTextHTML>
           <FormattedMessage id="PermisjonFaktaPanel.PermisjonUtenSluttdato" />
         </AksjonspunktHelpTextHTML>
       )}
-      <VerticalSpacer thirtyTwoPx />
       <Form
         formMethods={formMethods}
         onSubmit={values =>
@@ -129,40 +115,42 @@ export const PermisjonFaktaPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysningerP
           })
         }
       >
-        <ArbeidsforholdFieldArray
-          saksnummer={fagsak.saksnummer}
-          sorterteArbeidsforhold={sorterteArbeidsforhold}
-          arbeidOgInntekt={arbeidOgInntektMedPermisjon}
-          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          isReadOnly={isReadOnly}
-          harÅpentAksjonspunkt={harÅpentAksjonspunkt}
-          skjæringstidspunkt={arbeidOgInntektMedPermisjon.skjæringstidspunkt}
-          alleKodeverk={alleKodeverk}
-        />
-        <VerticalSpacer thirtyTwoPx />
-        <TextAreaField
-          label={
-            <Label size="small">
-              <FormattedMessage id="PermisjonFaktaPanel.Begrunn" />
-            </Label>
-          }
-          name="begrunnelse"
-          validate={[required, minLength3, maxLength1500, hasValidText]}
-          maxLength={1500}
-          readOnly={isReadOnly}
-        />
-        <VerticalSpacer sixteenPx />
-        {!isReadOnly && (
-          <Button
-            size="small"
-            variant="primary"
-            disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
-            loading={formMethods.formState.isSubmitting}
-          >
-            <FormattedMessage id="PermisjonFaktaPanel.Bekreft" />
-          </Button>
-        )}
+        <VStack gap="6">
+          <ArbeidsforholdFieldArray
+            saksnummer={fagsak.saksnummer}
+            sorterteArbeidsforhold={sorterteArbeidsforhold}
+            arbeidOgInntekt={arbeidOgInntektMedPermisjon}
+            arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+            isReadOnly={isReadOnly}
+            harÅpentAksjonspunkt={harÅpentAksjonspunkt}
+            skjæringstidspunkt={arbeidOgInntektMedPermisjon.skjæringstidspunkt}
+            alleKodeverk={alleKodeverk}
+          />
+          <TextAreaField
+            label={
+              <Label size="small">
+                <FormattedMessage id="PermisjonFaktaPanel.Begrunn" />
+              </Label>
+            }
+            name="begrunnelse"
+            validate={[required, minLength3, maxLength1500, hasValidText]}
+            maxLength={1500}
+            readOnly={isReadOnly}
+          />
+          {!isReadOnly && (
+            <div>
+              <Button
+                size="small"
+                variant="primary"
+                disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
+                loading={formMethods.formState.isSubmitting}
+              >
+                <FormattedMessage id="PermisjonFaktaPanel.Bekreft" />
+              </Button>
+            </div>
+          )}
+        </VStack>
       </Form>
-    </>
+    </VStack>
   );
 };

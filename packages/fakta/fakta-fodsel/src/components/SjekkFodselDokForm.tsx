@@ -1,10 +1,10 @@
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Label } from '@navikt/ds-react';
+import { Label, VStack } from '@navikt/ds-react';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import { ArrowBox, FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { ArrowBox, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
 import { FaktaBegrunnelseTextField, isFieldEdited } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
@@ -63,7 +63,7 @@ export const SjekkFodselDokForm = ({
   const { termindato, vedtaksDatoSomSvangerskapsuke } = gjeldende;
 
   return (
-    <>
+    <VStack gap="4">
       <FodselSammenligningIndex
         behandlingsTypeKode={behandlingType}
         avklartBarn={register?.avklartBarn}
@@ -77,41 +77,42 @@ export const SjekkFodselDokForm = ({
         title={intl.formatMessage({ id: 'SjekkFodselDokForm.DokumentasjonAvFodsel' })}
         merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.SJEKK_MANGLENDE_FODSEL]}
       >
-        <RadioGroupPanel
-          name="dokumentasjonForeligger"
-          isEdited={dokumentasjonForeliggerIsEdited}
-          hideLegend
-          validate={[required]}
-          isReadOnly={readOnly}
-          isHorizontal
-          isTrueOrFalseSelection
-          radios={[
-            {
-              label: <FormattedMessage id="SjekkFodselDokForm.DokumentasjonForeligger" />,
-              value: 'true',
-            },
-            {
-              label: <FormattedMessage id="SjekkFodselDokForm.DokumentasjonForeliggerIkke" />,
-              value: 'false',
-            },
-          ]}
-        />
-        {dokumentasjonForeligger && (
-          <div className={styles.clearfix}>
-            <VerticalSpacer eightPx />
-            <ArrowBox>
-              <Label size="small">
-                <FormattedMessage id="SjekkFodselDokForm.FyllInnDokumenterteOpplysninger" />
-              </Label>
-              <VerticalSpacer eightPx />
-              <AvklartBarnFieldArray readOnly={readOnly} />
-            </ArrowBox>
-          </div>
-        )}
+        <VStack gap="2">
+          <RadioGroupPanel
+            name="dokumentasjonForeligger"
+            isEdited={dokumentasjonForeliggerIsEdited}
+            hideLegend
+            validate={[required]}
+            isReadOnly={readOnly}
+            isHorizontal
+            isTrueOrFalseSelection
+            radios={[
+              {
+                label: <FormattedMessage id="SjekkFodselDokForm.DokumentasjonForeligger" />,
+                value: 'true',
+              },
+              {
+                label: <FormattedMessage id="SjekkFodselDokForm.DokumentasjonForeliggerIkke" />,
+                value: 'false',
+              },
+            ]}
+          />
+          {dokumentasjonForeligger && (
+            <div className={styles.clearfix}>
+              <ArrowBox>
+                <VStack gap="2">
+                  <Label size="small">
+                    <FormattedMessage id="SjekkFodselDokForm.FyllInnDokumenterteOpplysninger" />
+                  </Label>
+                  <AvklartBarnFieldArray readOnly={readOnly} />
+                </VStack>
+              </ArrowBox>
+            </div>
+          )}
+        </VStack>
       </FaktaGruppe>
-      <VerticalSpacer sixteenPx />
       <FaktaBegrunnelseTextField isSubmittable={submittable} isReadOnly={readOnly} hasBegrunnelse={!!begrunnelse} />
-    </>
+    </VStack>
   );
 };
 

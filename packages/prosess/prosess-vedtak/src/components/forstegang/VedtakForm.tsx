@@ -22,6 +22,7 @@ import type {
   Behandlingsresultat,
   BeregningsresultatDagytelse,
   BeregningsresultatEs,
+  Oppgave,
   SimuleringResultat,
   TilbakekrevingValg,
   Vilkar,
@@ -32,7 +33,7 @@ import type {
   VurdereAnnenYtelseForVedtakAp,
   VurdereDokumentForVedtakAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { VedtakFellesPanel } from '../felles/VedtakFellesPanel';
 import { getTilbakekrevingText } from '../felles/VedtakHelper';
@@ -194,6 +195,7 @@ interface Props {
   simuleringResultat?: SimuleringResultat;
   vilkar?: Vilkar[];
   beregningErManueltFastsatt: boolean;
+  oppgaver?: Oppgave[];
 }
 
 export const VedtakForm = ({
@@ -204,6 +206,7 @@ export const VedtakForm = ({
   simuleringResultat,
   vilkar,
   beregningErManueltFastsatt,
+  oppgaver,
 }: Props) => {
   const { behandling, alleKodeverk, submitCallback, isReadOnly } = usePanelDataContext<VedtakAksjonspunkter[]>();
 
@@ -211,10 +214,10 @@ export const VedtakForm = ({
 
   const intl = useIntl();
 
-  const { formData, setFormData } = useFormData<FormValues>();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || buildInitialValues(aksjonspunkt, behandling, beregningErManueltFastsatt),
+    defaultValues: mellomlagretFormData || buildInitialValues(aksjonspunkt, behandling, beregningErManueltFastsatt),
   });
 
   const begrunnelse = formMethods.watch('begrunnelse');
@@ -259,7 +262,7 @@ export const VedtakForm = ({
     <Form
       formMethods={formMethods}
       onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
-      setDataOnUnmount={setFormData}
+      setDataOnUnmount={setMellomlagretFormData}
     >
       <VedtakFellesPanel
         vedtakstatusTekst={vedtakstatusTekst}
@@ -267,6 +270,7 @@ export const VedtakForm = ({
         previewOverstyrtBrev={forhåndsvisOverstyrtBrev}
         tilbakekrevingtekst={tilbakekrevingtekst}
         erBehandlingEtterKlage={erBehandlingEtterKlage}
+        oppgaver={oppgaver}
         renderPanel={(skalBrukeOverstyrendeFritekstBrev, erInnvilget, erAvslatt) => {
           if (erInnvilget) {
             return (

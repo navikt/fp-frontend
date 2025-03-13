@@ -3,7 +3,6 @@ import { useIntl } from 'react-intl';
 import { Navigate, NavLink, useLocation, useMatch } from 'react-router-dom';
 
 import { HStack, VStack } from '@navikt/ds-react';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 import type { Location } from 'history';
 
@@ -164,7 +163,6 @@ export const FagsakProfileIndex = ({
           <EksterneRessurser fagsak={fagsak} ainntektHref={ainntektHref} arbeidstakerHref={arbeidstakerHref} />
         </VStack>
       </VStack>
-      <VerticalSpacer sixteenPx />
     </div>
   );
 };

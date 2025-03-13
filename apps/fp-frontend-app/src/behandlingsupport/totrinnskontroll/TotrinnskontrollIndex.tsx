@@ -2,7 +2,6 @@ import { type ReactElement, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { BehandlingStatus } from '@navikt/fp-kodeverk';
@@ -101,7 +100,6 @@ export const TotrinnskontrollIndex = ({
         })}
         toggleVisUtvidetBehandlingSupportIndexKnapp={toggleVisUtvidetBehandlingSupportIndexKnapp}
       >
-        <VerticalSpacer sixteenPx />
         <TotrinnskontrollSakIndex
           behandling={valgtBehandling}
           location={location}

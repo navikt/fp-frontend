@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { BodyShort, ErrorMessage, HStack, Label, VStack } from '@navikt/ds-react';
 import { CheckboxField, RadioGroupPanel, TextAreaField, useCustomValidation } from '@navikt/ft-form-hooks';
 import { hasValidText, isRequiredMessage, maxLength, minLength, required } from '@navikt/ft-form-validators';
-import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
 import type { TotrinnskontrollSkjermlenkeContext } from '@navikt/fp-types';
 
@@ -51,7 +51,7 @@ export const GodkjenningPanel = ({ index, totrinnskontrollSkjermlenkeContext, re
   }
 
   return (
-    <>
+    <VStack gap="3">
       <RadioGroupPanel
         name={`${fieldIndex}.totrinnskontrollGodkjent`}
         isReadOnly={readOnly}
@@ -70,19 +70,18 @@ export const GodkjenningPanel = ({ index, totrinnskontrollSkjermlenkeContext, re
         ]}
       />
       {totrinnskontrollGodkjent === false && (
-        <>
-          <VerticalSpacer sixteenPx />
-          <ArrowBox alignOffset={totrinnskontrollGodkjent ? 1 : 110}>
-            <VStack gap="2">
-              <Label size="small">
-                <FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Arsak" />
-              </Label>
-              <BodyShort size="small">
-                <FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Forklaring" />
-              </BodyShort>
+        <ArrowBox alignOffset={totrinnskontrollGodkjent ? 1 : 110}>
+          <VStack gap="2">
+            <Label size="small">
+              <FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Arsak" />
+            </Label>
+            <BodyShort size="small">
+              <FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Forklaring" />
+            </BodyShort>
+            <VStack gap="4">
               <VStack gap="1">
                 <HStack justify="space-between" style={{ width: '300px' }}>
-                  <VStack>
+                  <VStack gap="1">
                     <CheckboxField
                       name={`${fieldIndex}.feilFakta`}
                       label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Fakta" />}
@@ -99,7 +98,7 @@ export const GodkjenningPanel = ({ index, totrinnskontrollSkjermlenkeContext, re
                       readOnly={readOnly}
                     />
                   </VStack>
-                  <VStack>
+                  <VStack gap="1">
                     <CheckboxField
                       name={`${fieldIndex}.feilUtredning`}
                       label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Utredning" />}
@@ -119,7 +118,6 @@ export const GodkjenningPanel = ({ index, totrinnskontrollSkjermlenkeContext, re
                 </HStack>
               </VStack>
               {errorMessage && <ErrorMessage size="small">{errorMessage}</ErrorMessage>}
-              <VerticalSpacer sixteenPx />
               <TextAreaField
                 name={`${fieldIndex}.besluttersBegrunnelse`}
                 label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Begrunnelse" />}
@@ -127,9 +125,9 @@ export const GodkjenningPanel = ({ index, totrinnskontrollSkjermlenkeContext, re
                 readOnly={readOnly}
               />
             </VStack>
-          </ArrowBox>
-        </>
+          </VStack>
+        </ArrowBox>
       )}
-    </>
+    </VStack>
   );
 };

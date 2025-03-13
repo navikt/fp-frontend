@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 
-import { LoadingPanel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
 import { hentDokumentLenke } from '@navikt/fp-konstanter';
@@ -96,7 +96,6 @@ export const DokumentIndex = ({
         antall={sorterteDokumenter.length}
         toggleVisUtvidetBehandlingSupportIndexKnapp={toggleVisUtvidetBehandlingSupportIndexKnapp}
       >
-        <VerticalSpacer sixteenPx />
         <DokumenterSakIndex
           documents={sorterteDokumenter}
           selectDocumentCallback={selectDocument(saksnummer)}

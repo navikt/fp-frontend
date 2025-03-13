@@ -1,9 +1,7 @@
-import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, Detail, Heading, HStack, Modal, VStack } from '@navikt/ds-react';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import type { Feilmelding } from '../typer/feilmeldingTsType';
 
@@ -42,17 +40,16 @@ export const FeilmeldingsdetaljerModal = ({ skalViseModal, lukkModal, feilmeldin
       <Modal.Body>
         <HStack gap="10">
           <div />
-          <VStack>
+          <VStack gap="4">
             {feilmeldingsdetaljer &&
               Object.keys(feilmeldingsdetaljer).map(edKey => (
-                <React.Fragment key={edKey}>
+                <div key={edKey}>
                   <Detail>{`${capitalizeFirstLetters(edKey)}:`}</Detail>
                   <div>
                     {/* @ts-expect-error Fiks */}
                     <BodyShort size="small">{feilmeldingsdetaljer[edKey]}</BodyShort>
                   </div>
-                  <VerticalSpacer eightPx />
-                </React.Fragment>
+                </div>
               ))}
           </VStack>
         </HStack>

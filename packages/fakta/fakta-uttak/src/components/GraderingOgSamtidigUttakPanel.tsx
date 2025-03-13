@@ -1,11 +1,10 @@
-import { type ReactElement, useCallback, useEffect, useState } from 'react';
+import { type ReactElement, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
-import { Alert } from '@navikt/ds-react';
+import { Alert, HStack } from '@navikt/ds-react';
 import { CheckboxField, NumberField, SelectField } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import { FlexColumn, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT, guid } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
@@ -34,22 +33,15 @@ export type FormValues = KontrollerFaktaPeriodeMedApMarkering & {
   harSamtidigUttaksprosent?: boolean;
 };
 
-// vanlig arbeidsgivernavn (orgnr)...arbeidsforholdid
-// privatperson - KLANG...(18.08.1980)
-const formatDate = (dato: string): string => dayjs(dato).format(DDMMYYYY_DATE_FORMAT);
-const getEndCharFromId = (id: any): string => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
-
-const lagVisningsNavn = (arbeidsgiverOpplysning: ArbeidsgiverOpplysninger, eksternArbeidsforholdId?: any) => {
-  const { navn, fødselsdato, erPrivatPerson, identifikator } = arbeidsgiverOpplysning;
-
-  let visningsNavn = `${navn}`;
-  if (!erPrivatPerson) {
-    visningsNavn = identifikator ? `${visningsNavn} (${identifikator})` : visningsNavn;
-    visningsNavn = `${visningsNavn}${getEndCharFromId(eksternArbeidsforholdId)}`;
+// Todo: gjør dette til delt kode delt kode
+const formatDate = (dato: string) => dayjs(dato).format(DDMMYYYY_DATE_FORMAT);
+const getEndCharFromId = (id: string | undefined) => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
+const lagVisningsNavn = (ago: ArbeidsgiverOpplysninger, eksternArbeidsforholdId?: string): string => {
+  if (ago.erPrivatPerson) {
+    return `${ago.navn.substring(0, 5)}...(${ago.fødselsdato ? formatDate(ago.fødselsdato) : '-'})`;
   } else {
-    visningsNavn = `${navn.substring(0, 5)}...(${fødselsdato ? formatDate(fødselsdato) : '-'})`;
+    return `${ago.navn} (${ago.identifikator})${getEndCharFromId(eksternArbeidsforholdId)}`;
   }
-  return visningsNavn;
 };
 
 const mapArbeidsforhold = (
@@ -98,8 +90,8 @@ export const GraderingOgSamtidigUttakPanel = ({
 
   const [visGradering, setVisGradering] = useState(!!valgtPeriode?.arbeidstidsprosent);
   const [visSamtidigUttaksgradering, setVisSamtidigUttaksgradering] = useState(!!valgtPeriode?.samtidigUttaksprosent);
-  const toggleGradering = useCallback(() => setVisGradering(old => !old), []);
-  const toggleSamtidigUttaksprosent = useCallback(() => setVisSamtidigUttaksgradering(old => !old), []);
+  const toggleGradering = () => setVisGradering(old => !old);
+  const toggleSamtidigUttaksprosent = () => setVisSamtidigUttaksgradering(old => !old);
 
   const { unregister } = useFormContext<FormValues>();
 
@@ -117,73 +109,58 @@ export const GraderingOgSamtidigUttakPanel = ({
 
   return (
     <>
-      <VerticalSpacer sixteenPx />
-      <FlexRow>
-        <FlexColumn>
-          <CheckboxField
-            name="harGradering"
-            label={<FormattedMessage id="UttakFaktaDetailForm.HarGradering" />}
-            readOnly={readOnly}
-            onChange={toggleGradering}
-          />
-        </FlexColumn>
-        <FlexColumn>
-          <CheckboxField
-            name="harSamtidigUttaksprosent"
-            label={<FormattedMessage id="UttakFaktaDetailForm.HarSamtidigUttaksprosent" />}
-            readOnly={readOnly}
-            onChange={toggleSamtidigUttaksprosent}
-          />
-        </FlexColumn>
-      </FlexRow>
+      <HStack gap="2">
+        <CheckboxField
+          name="harGradering"
+          label={<FormattedMessage id="UttakFaktaDetailForm.HarGradering" />}
+          readOnly={readOnly}
+          onChange={toggleGradering}
+        />
+        <CheckboxField
+          name="harSamtidigUttaksprosent"
+          label={<FormattedMessage id="UttakFaktaDetailForm.HarSamtidigUttaksprosent" />}
+          readOnly={readOnly}
+          onChange={toggleSamtidigUttaksprosent}
+        />
+      </HStack>
       {!readOnly && arbeidsgiverFinnesIkke && (
         <div className={styles.alert}>
-          <VerticalSpacer sixteenPx />
           <Alert variant="info">
             <FormattedMessage id="UttakFaktaDetailForm.UkjentArbeidsgiver" values={{ aRef }} />
           </Alert>
         </div>
       )}
       {(visGradering || visSamtidigUttaksgradering) && (
-        <>
-          <VerticalSpacer sixteenPx />
-          <FlexRow>
-            {visGradering && faktaArbeidsforhold && (
-              <>
-                <FlexColumn>
-                  <NumberField
-                    name="arbeidstidsprosent"
-                    label={<FormattedMessage id="UttakFaktaDetailForm.GraderingProsent" />}
-                    forceTwoDecimalDigits
-                    validate={[required]}
-                    className={styles.gradering}
-                    readOnly={readOnly}
-                  />
-                </FlexColumn>
-                <FlexColumn className={styles.marginGradering}>
-                  <SelectField
-                    name="arbeidsgiverId"
-                    label={<FormattedMessage id="UttakFaktaDetailForm.Arbeidsgiver" />}
-                    validate={[required]}
-                    selectValues={mapArbeidsforhold(faktaArbeidsforhold, alleKodeverk, arbeidsgiverOpplysningerPerId)}
-                    readOnly={readOnly}
-                  />
-                </FlexColumn>
-              </>
-            )}
-            {visSamtidigUttaksgradering && (
-              <FlexColumn>
-                <NumberField
-                  name="samtidigUttaksprosent"
-                  label={<FormattedMessage id="UttakFaktaDetailForm.SamtidigUttaksprosent" />}
-                  validate={[required]}
-                  forceTwoDecimalDigits
-                  readOnly={readOnly}
-                />
-              </FlexColumn>
-            )}
-          </FlexRow>
-        </>
+        <HStack gap="6">
+          {visGradering && faktaArbeidsforhold && (
+            <>
+              <NumberField
+                name="arbeidstidsprosent"
+                label={<FormattedMessage id="UttakFaktaDetailForm.GraderingProsent" />}
+                forceTwoDecimalDigits
+                validate={[required]}
+                className={styles.gradering}
+                readOnly={readOnly}
+              />
+              <SelectField
+                name="arbeidsgiverId"
+                label={<FormattedMessage id="UttakFaktaDetailForm.Arbeidsgiver" />}
+                validate={[required]}
+                selectValues={mapArbeidsforhold(faktaArbeidsforhold, alleKodeverk, arbeidsgiverOpplysningerPerId)}
+                readOnly={readOnly}
+              />
+            </>
+          )}
+          {visSamtidigUttaksgradering && (
+            <NumberField
+              name="samtidigUttaksprosent"
+              label={<FormattedMessage id="UttakFaktaDetailForm.SamtidigUttaksprosent" />}
+              validate={[required]}
+              forceTwoDecimalDigits
+              readOnly={readOnly}
+            />
+          )}
+        </HStack>
       )}
     </>
   );

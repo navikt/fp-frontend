@@ -2,8 +2,8 @@ import React, { useCallback, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { ChevronDownIcon, ChevronUpIcon } from '@navikt/aksel-icons';
-import { Link } from '@navikt/ds-react';
-import { DateLabel, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { HStack, Link } from '@navikt/ds-react';
+import { DateLabel } from '@navikt/ft-ui-komponenter';
 
 import { hentVedtakDokumentLenke } from '@navikt/fp-konstanter';
 import type { InnsynVedtaksdokument, KodeverkMedNavn } from '@navikt/fp-types';
@@ -36,25 +36,15 @@ export const VedtakDocuments = ({ vedtaksdokumenter, behandlingTypes }: Props) =
         />
         {showDocuments ? <ChevronDownIcon /> : <ChevronUpIcon />}
       </Link>
-      {showDocuments && (
-        <>
-          <VerticalSpacer fourPx />
-          <FlexContainer>
-            {vedtaksdokumenter.map(document => (
-              <FlexRow key={document.behandlingUuid}>
-                <FlexColumn>
-                  <DateLabel dateString={document.opprettetDato} />
-                </FlexColumn>
-                <FlexColumn>
-                  <Link href={hentVedtakDokumentLenke(document.behandlingUuid)} target="_blank">
-                    {behandlingTypes.find(bt => bt.kode === document.tittel)?.navn || '-'}
-                  </Link>
-                </FlexColumn>
-              </FlexRow>
-            ))}
-          </FlexContainer>
-        </>
-      )}
+      {showDocuments &&
+        vedtaksdokumenter.map(document => (
+          <HStack gap="2" key={document.behandlingUuid}>
+            <DateLabel dateString={document.opprettetDato} />
+            <Link href={hentVedtakDokumentLenke(document.behandlingUuid)} target="_blank">
+              {behandlingTypes.find(bt => bt.kode === document.tittel)?.navn || '-'}
+            </Link>
+          </HStack>
+        ))}
     </>
   );
 };

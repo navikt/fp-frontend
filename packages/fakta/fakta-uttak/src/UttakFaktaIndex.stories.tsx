@@ -3,8 +3,8 @@ import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, UttakPeriodeType } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import type { Fagsak } from '@navikt/fp-types';
+import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import type { ArbeidsgiverOpplysningerPerId, Fagsak } from '@navikt/fp-types';
 
 import { OverføringÅrsak } from './kodeverk/overføringÅrsak';
 import { UtsettelseÅrsak } from './kodeverk/utsettelseÅrsak';
@@ -14,10 +14,11 @@ import '@navikt/ds-css';
 import '@navikt/ft-form-hooks/dist/style.css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
 
-const arbeidsgiverOpplysningerPerId = {
+const arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId = {
   910909088: {
     erPrivatPerson: false,
     identifikator: '910909088',
+    referanse: '910909088',
     navn: 'BEDRIFT AS',
   },
 };
@@ -25,7 +26,7 @@ const arbeidsgiverOpplysningerPerId = {
 const meta = {
   title: 'fakta/fakta-uttak',
   component: UttakFaktaIndex,
-  decorators: [withFormData, withPanelData],
+  decorators: [withMellomlagretFormData, withPanelData],
   args: {
     arbeidsgiverOpplysningerPerId,
     kanOverstyre: false,

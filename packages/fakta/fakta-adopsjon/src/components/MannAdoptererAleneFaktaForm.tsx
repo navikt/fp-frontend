@@ -1,9 +1,9 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BodyShort, Detail } from '@navikt/ds-react';
+import { BodyShort, Detail, VStack } from '@navikt/ds-react';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import { FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode, getKodeverknavnFn, KodeverkType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, FamilieHendelse } from '@navikt/fp-types';
@@ -41,18 +41,18 @@ export const MannAdoptererAleneFaktaForm = ({
       title={intl.formatMessage({ id: 'MannAdoptererAleneFaktaForm.ApplicationInformation' })}
       merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE]}
     >
-      <div className={styles.container}>
+      <VStack gap="2" width="100%">
         <Detail>
           <FormattedMessage id="MannAdoptererAleneFaktaForm.Opplysninger" />
         </Detail>
-        <VerticalSpacer fourPx />
         {farSokerType && (
           <BodyShort size="small">
             {getKodeverknavnFn(alleKodeverk)(farSokerType, KodeverkType.FAR_SOEKER_TYPE)}
           </BodyShort>
         )}
-        <VerticalSpacer sixteenPx />
-        <hr className={styles.hr} />
+        <div>
+          <hr className={styles.hr} />
+        </div>
         <RadioGroupPanel
           name="mannAdoptererAlene"
           hideLegend
@@ -72,7 +72,7 @@ export const MannAdoptererAleneFaktaForm = ({
             },
           ]}
         />
-      </div>
+      </VStack>
     </FaktaGruppe>
   );
 };

@@ -1,7 +1,6 @@
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort } from '@navikt/ds-react';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import type { AlleKodeverk, FagsakEnkel } from '@navikt/fp-types';
 
@@ -43,15 +42,11 @@ export const FagsakSearch = ({
       searchStarted={searchStarted}
       searchResultAccessDenied={searchResultAccessDenied}
     />
-
     {searchResultReceived && fagsaker.length === 0 && (
       <BodyShort size="small" className={styles.label}>
         <FormattedMessage id="FagsakSearch.ZeroSearchResults" />
       </BodyShort>
     )}
-
-    <VerticalSpacer eightPx />
-
     {searchResultReceived && fagsaker.length > 1 && (
       <FagsakList fagsaker={fagsaker} selectFagsakCallback={selectFagsakCallback} alleKodeverk={alleKodeverk} />
     )}

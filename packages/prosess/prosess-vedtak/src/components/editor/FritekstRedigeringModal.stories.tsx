@@ -2,7 +2,12 @@ import { type ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { getIntlDecorator, type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import {
+  getIntlDecorator,
+  type PanelDataArgs,
+  withMellomlagretFormData,
+  withPanelData,
+} from '@navikt/fp-storybook-utils';
 
 import mal from '../../../.storybook/brevmal/mal.html?raw';
 import { FritekstRedigeringModal } from './FritekstRedigeringModal';
@@ -29,7 +34,7 @@ const vedtaksbrev = {
 const meta = {
   title: 'prosess/prosess-vedtak-editor',
   component: FritekstRedigeringModal,
-  decorators: [withIntl, withFormData, withPanelData],
+  decorators: [withIntl, withMellomlagretFormData, withPanelData],
   args: {
     vedtaksbrev,
     htmlMal: mal,

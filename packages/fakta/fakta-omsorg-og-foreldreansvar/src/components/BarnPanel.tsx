@@ -1,8 +1,7 @@
-import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BodyShort, Label } from '@navikt/ds-react';
-import { FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { BodyShort, Label, VStack } from '@navikt/ds-react';
+import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import moment from 'moment';
 
@@ -28,18 +27,19 @@ export const BarnPanel = ({ alleMerknaderFraBeslutter, soknad }: Props) => {
       title={intl.formatMessage({ id: 'BarnPanel.BarnDetSøkesOm' })}
       merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OMSORGSOVERTAKELSE]}
     >
-      {adopsjonFodelsedatoer &&
-        Object.keys(adopsjonFodelsedatoer).map(key => (
-          <React.Fragment key={`${key}`}>
-            <Label size="small">
-              <FormattedMessage id="BarnPanel.ChildNumberBornData" values={{ childNumber: key }} />
-            </Label>
-            <BodyShort size="small">
-              {moment(adopsjonFodelsedatoer[parseInt(key, 10)]).format(DDMMYYYY_DATE_FORMAT)}
-            </BodyShort>
-            <VerticalSpacer eightPx />
-          </React.Fragment>
-        ))}
+      <VStack gap="2">
+        {adopsjonFodelsedatoer &&
+          Object.keys(adopsjonFodelsedatoer).map(key => (
+            <div key={`${key}`}>
+              <Label size="small">
+                <FormattedMessage id="BarnPanel.ChildNumberBornData" values={{ childNumber: key }} />
+              </Label>
+              <BodyShort size="small">
+                {moment(adopsjonFodelsedatoer[parseInt(key, 10)]).format(DDMMYYYY_DATE_FORMAT)}
+              </BodyShort>
+            </div>
+          ))}
+      </VStack>
     </FaktaGruppe>
   );
 };

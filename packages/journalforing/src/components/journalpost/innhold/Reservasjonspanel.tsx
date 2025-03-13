@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl';
 
-import { BodyLong, Button, HStack, Tag } from '@navikt/ds-react';
+import { BodyLong, Button, Tag } from '@navikt/ds-react';
 
 import type { NavAnsatt } from '@navikt/fp-types';
 
@@ -31,36 +31,30 @@ export const Reservasjonspanel = ({ oppgave, reserverOppgave, navAnsatt }: Props
   return (
     <div>
       {oppgave.reservertAv && navAnsatt.brukernavn === oppgave?.reservertAv && (
-        <HStack>
-          <BodyLong>
-            <FormattedMessage id="Oppgavetabell.SakenErTattAv" />
-            <Tag size="small" variant="info-moderate" style={{ marginLeft: '0.5rem' }}>
-              <FormattedMessage id="Oppgavetabell.Meg" />
-            </Tag>
-            <Button variant="tertiary" size="small" onClick={reserverOppgaveAction} style={{ marginLeft: '0.5rem' }}>
-              <FormattedMessage id="Oppgavetabell.FjernMeg" />
-            </Button>
-          </BodyLong>
-        </HStack>
+        <BodyLong>
+          <FormattedMessage id="Oppgavetabell.SakenErTattAv" />
+          <Tag size="small" variant="info-moderate" style={{ marginLeft: '0.5rem' }}>
+            <FormattedMessage id="Oppgavetabell.Meg" />
+          </Tag>
+          <Button variant="tertiary" size="small" onClick={reserverOppgaveAction} style={{ marginLeft: '0.5rem' }}>
+            <FormattedMessage id="Oppgavetabell.FjernMeg" />
+          </Button>
+        </BodyLong>
       )}
       {oppgave.reservertAv && navAnsatt.brukernavn !== oppgave.reservertAv && (
-        <HStack>
-          <BodyLong>
-            <FormattedMessage id="Oppgavetabell.SakenErTattAv" />
-            <Tag size="small" variant="neutral-moderate" style={{ marginLeft: '0.5rem' }}>
-              {oppgave.reservertAv}
-            </Tag>
-          </BodyLong>
-        </HStack>
+        <BodyLong>
+          <FormattedMessage id="Oppgavetabell.SakenErTattAv" />
+          <Tag size="small" variant="neutral-moderate" style={{ marginLeft: '0.5rem' }}>
+            {oppgave.reservertAv}
+          </Tag>
+        </BodyLong>
       )}
       {!oppgave.reservertAv && (
-        <HStack>
-          <BodyLong>
-            <Button variant="tertiary" size="small" onClick={reserverOppgaveAction}>
-              <FormattedMessage id="Oppgavetabell.SettPåMeg" />
-            </Button>
-          </BodyLong>
-        </HStack>
+        <BodyLong>
+          <Button variant="tertiary" size="small" onClick={reserverOppgaveAction}>
+            <FormattedMessage id="Oppgavetabell.SettPåMeg" />
+          </Button>
+        </BodyLong>
       )}
     </div>
   );

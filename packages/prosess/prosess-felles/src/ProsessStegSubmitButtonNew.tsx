@@ -44,16 +44,18 @@ export const ProsessStegSubmitButton = ({
 }: Props) => {
   if (!isReadOnly) {
     return (
-      <Button
-        size="small"
-        variant="primary"
-        loading={isSubmitting}
-        disabled={isDisabled(isSubmitting, isSubmittable, isDirty, hasEmptyRequiredFields)}
-        onClick={onClick || ariaCheck}
-        type={onClick ? 'button' : 'submit'}
-      >
-        {text ?? intl.formatMessage({ id: 'SubmitButton.ConfirmInformation' })}
-      </Button>
+      <div>
+        <Button
+          size="small"
+          variant="primary"
+          loading={isSubmitting}
+          disabled={isDisabled(isSubmitting, isSubmittable, isDirty, hasEmptyRequiredFields)}
+          onClick={onClick || ariaCheck}
+          type={onClick ? 'button' : 'submit'}
+        >
+          {text ?? intl.formatMessage({ id: 'SubmitButton.ConfirmInformation' })}
+        </Button>
+      </div>
     );
   }
   return null;

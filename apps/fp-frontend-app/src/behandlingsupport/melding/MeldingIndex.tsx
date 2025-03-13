@@ -2,8 +2,7 @@ import { type ReactElement, useCallback, useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 
-import { Alert } from '@navikt/ds-react';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { Alert, VStack } from '@navikt/ds-react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { BehandlingType, DokumentMalType, KodeverkType, VenteArsakType } from '@navikt/fp-kodeverk';
@@ -17,8 +16,6 @@ import { type ForhandsvisFunksjon, useVisForhandsvisningAvMelding } from '../../
 import { FagsakData } from '../../fagsak/FagsakData';
 import { SupportHeaderAndContent } from '../SupportHeader';
 import { SettPaVentReadOnlyModal } from './SettPaVentReadOnlyModal';
-
-import styles from './MeldingIndex.module.css';
 
 const EMPTY_ARRAY = [] as KodeverkMedNavn[];
 
@@ -128,30 +125,28 @@ export const MeldingIndex = ({
         tekst={intl.formatMessage({ id: 'MeldingIndex.Meldinger' })}
         toggleVisUtvidetBehandlingSupportIndexKnapp={toggleVisUtvidetBehandlingSupportIndexKnapp}
       >
-        <VerticalSpacer sixteenPx />
-        {!kanSendeMelding && (
-          <div className={styles.textAlign}>
-            <VerticalSpacer fourtyPx />
+        <VStack gap="4">
+          {!kanSendeMelding && (
             <Alert variant="info">
               <FormattedMessage
                 id={finnKanIkkeLagreMeldingTekst(kanVeilede, behandlingTillatteOperasjoner?.behandlingKanSendeMelding)}
               />
             </Alert>
-          </div>
-        )}
-        {kanSendeMelding && (
-          <MeldingerSakIndex
-            submitCallback={submitCallback}
-            behandling={valgtBehandling}
-            previewCallback={previewCallback}
-            revurderingVarslingArsak={revurderingVarslingArsak}
-            fagsakYtelseType={fagsak.fagsakYtelseType}
-            kanVeilede={kanVeilede}
-            meldingFormData={meldingFormData}
-            setMeldingFormData={setMeldingFormData}
-            brukerManglerAdresse={fagsak.brukerManglerAdresse}
-          />
-        )}
+          )}
+          {kanSendeMelding && (
+            <MeldingerSakIndex
+              submitCallback={submitCallback}
+              behandling={valgtBehandling}
+              previewCallback={previewCallback}
+              revurderingVarslingArsak={revurderingVarslingArsak}
+              fagsakYtelseType={fagsak.fagsakYtelseType}
+              kanVeilede={kanVeilede}
+              meldingFormData={meldingFormData}
+              setMeldingFormData={setMeldingFormData}
+              brukerManglerAdresse={fagsak.brukerManglerAdresse}
+            />
+          )}
+        </VStack>
       </SupportHeaderAndContent>
       {submitFinished && showSettPaVentModal && (
         <SettPaVentReadOnlyModal

@@ -1,8 +1,8 @@
 import { type ReactElement, useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, Button, Label } from '@navikt/ds-react';
-import { AksjonspunktHelpTextHTML, DateLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { BodyShort, Button, Label, VStack } from '@navikt/ds-react';
+import { AksjonspunktHelpTextHTML, DateLabel } from '@navikt/ft-ui-komponenter';
 import { addDaysToDate, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
@@ -15,7 +15,7 @@ import type {
   OpptjeningAktivitet,
 } from '@navikt/fp-types';
 import type { AvklarAktivitetsPerioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { type FormValues, ValgtAktivitetForm } from './aktivitet/ValgtAktivitetForm';
 import { OpptjeningTidslinje } from './tidslinje/OpptjeningTidslinje';
@@ -109,14 +109,13 @@ export const OpptjeningFaktaPanel = ({
 
   const formValuesAktiviteter = filtrerteOgSorterteOpptjeningsaktiviteter.map(a => ({
     erGodkjent: a.erGodkjent,
-    begrunnelse: a.begrunnelse,
+    begrunnelse: a.begrunnelse ?? '',
   }));
 
-  const { formData, setFormData } = useFormData<FormValues[]>();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues[]>();
 
   const [formVerdierForAlleAktiviteter, setFormVerdierForAlleAktiviteter] = useState<FormValues[]>(
-    //@ts-expect-error
-    formData || formValuesAktiviteter,
+    mellomlagretFormData ?? formValuesAktiviteter,
   );
 
   const førsteAktivitetSomIkkeErGodkjent = filtrerteOgSorterteOpptjeningsaktiviteter.findIndex(
@@ -131,7 +130,7 @@ export const OpptjeningFaktaPanel = ({
 
   useEffect(
     () => () => {
-      setFormData(formVerdierForAlleAktiviteter);
+      setMellomlagretFormData(formVerdierForAlleAktiviteter);
     },
     [formVerdierForAlleAktiviteter],
   );
@@ -194,24 +193,20 @@ export const OpptjeningFaktaPanel = ({
   );
 
   return (
-    <div className={styles.container}>
-      {harAksjonspunkt && (
-        <>
-          {harÅpneAksjonspunkter && (
-            <AksjonspunktHelpTextHTML>
-              {getAksjonspunktHelpTexts(filtrerteOgSorterteOpptjeningsaktiviteter)}
-            </AksjonspunktHelpTextHTML>
-          )}
-          <VerticalSpacer twentyPx />
-        </>
+    <VStack gap="6" className={styles.container}>
+      {harÅpneAksjonspunkter && (
+        <AksjonspunktHelpTextHTML>
+          {getAksjonspunktHelpTexts(filtrerteOgSorterteOpptjeningsaktiviteter)}
+        </AksjonspunktHelpTextHTML>
       )}
-      <Label size="small">
-        <FormattedMessage id="OpptjeningFaktaForm.Skjaringstidspunkt" />
-      </Label>
-      <BodyShort size="small">
-        <DateLabel dateString={findSkjaringstidspunkt(fastsattOpptjening?.opptjeningTom)} />
-      </BodyShort>
-      <VerticalSpacer twentyPx />
+      <div>
+        <Label size="small">
+          <FormattedMessage id="OpptjeningFaktaForm.Skjaringstidspunkt" />
+        </Label>
+        <BodyShort size="small">
+          <DateLabel dateString={findSkjaringstidspunkt(fastsattOpptjening?.opptjeningTom)} />
+        </BodyShort>
+      </div>
       <OpptjeningTidslinje
         opptjeningPerioder={filtrerteOgSorterteOpptjeningsaktiviteter}
         formVerdierForAlleAktiviteter={formVerdierForAlleAktiviteter}
@@ -220,41 +215,39 @@ export const OpptjeningFaktaPanel = ({
         valgtAktivitetIndex={valgtAktivitetIndex}
         fastsattOpptjening={fastsattOpptjening}
       />
-      <VerticalSpacer fourtyPx />
       {valgtAktivitetIndex !== undefined && (
-        <>
-          <ValgtAktivitetForm
-            key={valgtAktivitetIndex}
-            valgtOpptjeningAktivitet={filtrerteOgSorterteOpptjeningsaktiviteter[valgtAktivitetIndex]}
-            valgteFormValues={formVerdierForAlleAktiviteter[valgtAktivitetIndex]}
-            readOnly={isReadOnly}
-            opptjeningAktivitetTyper={opptjeningAktivitetTypes}
-            avbrytAktivitet={avbrytAktivitet}
-            oppdaterAktivitet={oppdaterAktivitet}
-            fastsattOpptjening={fastsattOpptjening}
-            velgNesteAktivitet={velgNesteAktivitet}
-            velgForrigeAktivitet={velgForrigeAktivitet}
-            harAksjonspunkt={harAksjonspunkt}
-            alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-            arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-            ferdiglignetNæring={ferdiglignetNæring}
-            lukkPeriode={lukkPeriode}
-          />
-          <VerticalSpacer twentyPx />
-        </>
+        <ValgtAktivitetForm
+          key={valgtAktivitetIndex}
+          valgtOpptjeningAktivitet={filtrerteOgSorterteOpptjeningsaktiviteter[valgtAktivitetIndex]}
+          valgteFormValues={formVerdierForAlleAktiviteter[valgtAktivitetIndex]}
+          readOnly={isReadOnly}
+          opptjeningAktivitetTyper={opptjeningAktivitetTypes}
+          avbrytAktivitet={avbrytAktivitet}
+          oppdaterAktivitet={oppdaterAktivitet}
+          fastsattOpptjening={fastsattOpptjening}
+          velgNesteAktivitet={velgNesteAktivitet}
+          velgForrigeAktivitet={velgForrigeAktivitet}
+          harAksjonspunkt={harAksjonspunkt}
+          alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+          ferdiglignetNæring={ferdiglignetNæring}
+          lukkPeriode={lukkPeriode}
+        />
       )}
       {harAksjonspunkt && filtrerteOgSorterteOpptjeningsaktiviteter.length > 0 && (
-        <Button
-          size="small"
-          variant="primary"
-          onClick={bekreft}
-          disabled={valgtAktivitetIndex !== undefined || isSubmitting || isReadOnly || harIkkeBehandletAlle}
-          loading={isSubmitting}
-          type="button"
-        >
-          <FormattedMessage id="OpptjeningFaktaForm.Confirm" />
-        </Button>
+        <div>
+          <Button
+            size="small"
+            variant="primary"
+            onClick={bekreft}
+            disabled={valgtAktivitetIndex !== undefined || isSubmitting || isReadOnly || harIkkeBehandletAlle}
+            loading={isSubmitting}
+            type="button"
+          >
+            <FormattedMessage id="OpptjeningFaktaForm.Confirm" />
+          </Button>
+        </div>
       )}
-    </div>
+    </VStack>
   );
 };

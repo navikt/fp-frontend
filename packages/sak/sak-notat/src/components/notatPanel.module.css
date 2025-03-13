@@ -47,8 +47,7 @@
   background-color: var(--a-gray-50);
   border-top: 2px solid var(--a-grayalpha-300);
   margin-top: auto;
-  padding-left: 16px;
-  padding-right: 16px;
+  padding: 16px;
 }
 
 .alert {
@@ -56,6 +55,7 @@
 
   background-color: var(--a-surface-info-subtle);
   margin-top: auto;
+  padding-bottom: 16px;
 }
 
 .marginTop {

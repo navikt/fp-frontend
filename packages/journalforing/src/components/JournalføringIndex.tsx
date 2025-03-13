@@ -1,5 +1,3 @@
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-
 import type { NavAnsatt } from '@navikt/fp-types';
 
 import type { JournalførSubmitValue } from '../typer/ferdigstillJournalføringSubmit';
@@ -36,7 +34,6 @@ export const JournalføringIndex = ({
   flyttTilGosys,
 }: Props) => (
   <div className={styles.container}>
-    <VerticalSpacer sixteenPx />
     {!valgtJournalpost && (
       <div className={styles.sentrertInnhold}>
         <OppgaveTabell

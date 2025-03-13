@@ -3,7 +3,7 @@ import { useForm, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
-import { Alert, BodyShort, Button, HStack, Popover } from '@navikt/ds-react';
+import { Alert, BodyShort, Button, HStack, Popover, VStack } from '@navikt/ds-react';
 import { Datepicker, Form, InputField, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
@@ -16,7 +16,6 @@ import {
   minValue,
   required,
 } from '@navikt/ft-form-validators';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 import type { Inntektsmelding, ManglendeInntektsmeldingVurdering, ManueltArbeidsforhold } from '@navikt/fp-types';
@@ -174,66 +173,63 @@ export const ManglendeArbeidsforholdForm = ({
   const toggleHjelpetekst = useCallback(() => setOpenState(gammelVerdi => !gammelVerdi), []);
 
   return (
-    <>
+    <VStack gap="8">
       <InntektsmeldingOpplysningerPanel
         saksnummer={saksnummer}
         inntektsmelding={inntektsmelding}
         skalViseArbeidsforholdId={skalViseArbeidsforholdId}
         arbeidsgiverFødselsdato={arbeidsgiverFødselsdato}
       />
-      <VerticalSpacer fourtyPx />
       <div className={styles.alertStripe}>
         <Alert variant="info">
           <FormattedMessage id="ManglendeOpplysningerForm.ErMottattMenIkkeReg" />
         </Alert>
       </div>
-      <VerticalSpacer thirtyTwoPx />
       <Form formMethods={formMethods} onSubmit={lagre}>
-        <RadioGroupPanel
-          name="saksbehandlersVurdering"
-          label={
-            <HStack gap="2">
-              <FormattedMessage id="ManglendeOpplysningerForm.SkalBrukeInntekstmelding" />
-              <QuestionmarkDiamondIcon
-                className={styles.svg}
-                ref={buttonRef}
-                onClick={toggleHjelpetekst}
-                title={intl.formatMessage({ id: 'ManglendeOpplysningerForm.AltHjelpetekst' })}
-              />
-              <Popover
-                open={openState}
-                onClose={toggleHjelpetekst}
-                anchorEl={buttonRef.current}
-                className={styles.hjelpetekst}
-              >
-                <Popover.Content className={styles.hjelpetekstInnhold}>
-                  <BodyShort>
-                    <FormattedMessage id="ManglendeOpplysningerForm.Hjelpetekst" />
-                  </BodyShort>
-                </Popover.Content>
-              </Popover>
-            </HStack>
-          }
-          validate={[required]}
-          isReadOnly={isReadOnly}
-          radios={[
-            {
-              label: intl.formatMessage({ id: 'ManglendeOpplysningerForm.TarKontakt' }),
-              value: ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD,
-            },
-            {
-              label: intl.formatMessage({ id: 'ManglendeOpplysningerForm.GåVidere' }),
-              value: ArbeidsforholdKomplettVurderingType.IKKE_OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
-            },
-            {
-              label: intl.formatMessage({ id: 'ManglendeOpplysningerForm.OpprettArbeidsforhold' }),
-              value: ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
-            },
-          ]}
-        />
-        {saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING && (
-          <>
-            <VerticalSpacer eightPx />
+        <VStack gap="4">
+          <RadioGroupPanel
+            name="saksbehandlersVurdering"
+            label={
+              <HStack gap="2">
+                <FormattedMessage id="ManglendeOpplysningerForm.SkalBrukeInntekstmelding" />
+                <QuestionmarkDiamondIcon
+                  className={styles.svg}
+                  ref={buttonRef}
+                  onClick={toggleHjelpetekst}
+                  title={intl.formatMessage({ id: 'ManglendeOpplysningerForm.AltHjelpetekst' })}
+                />
+                <Popover
+                  open={openState}
+                  onClose={toggleHjelpetekst}
+                  anchorEl={buttonRef.current}
+                  className={styles.hjelpetekst}
+                >
+                  <Popover.Content className={styles.hjelpetekstInnhold}>
+                    <BodyShort>
+                      <FormattedMessage id="ManglendeOpplysningerForm.Hjelpetekst" />
+                    </BodyShort>
+                  </Popover.Content>
+                </Popover>
+              </HStack>
+            }
+            validate={[required]}
+            isReadOnly={isReadOnly}
+            radios={[
+              {
+                label: intl.formatMessage({ id: 'ManglendeOpplysningerForm.TarKontakt' }),
+                value: ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD,
+              },
+              {
+                label: intl.formatMessage({ id: 'ManglendeOpplysningerForm.GåVidere' }),
+                value: ArbeidsforholdKomplettVurderingType.IKKE_OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
+              },
+              {
+                label: intl.formatMessage({ id: 'ManglendeOpplysningerForm.OpprettArbeidsforhold' }),
+                value: ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
+              },
+            ]}
+          />
+          {saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING && (
             <HStack gap="4">
               <Datepicker
                 name="fom"
@@ -259,42 +255,38 @@ export const ManglendeArbeidsforholdForm = ({
                 maxLength={3}
               />
             </HStack>
-            <VerticalSpacer fourPx />
-          </>
-        )}
-        <VerticalSpacer sixteenPx />
-        <TextAreaField
-          label={<FormattedMessage id="ManglendeOpplysningerForm.Begrunn" />}
-          name="begrunnelse"
-          validate={[required, minLength3, maxLength1500, hasValidText]}
-          maxLength={1500}
-          readOnly={isReadOnly}
-        />
-        <VerticalSpacer twentyPx />
-        {!isReadOnly && (
-          <HStack gap="4">
-            <Button
-              size="small"
-              variant="secondary"
-              loading={formMethods.formState.isSubmitting}
-              disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
-            >
-              <FormattedMessage id="ManglendeOpplysningerForm.Lagre" />
-            </Button>
-            <Button
-              size="small"
-              variant="tertiary"
-              loading={false}
-              disabled={formMethods.formState.isSubmitting}
-              onClick={avbryt}
-              type="button"
-            >
-              <FormattedMessage id="ManglendeOpplysningerForm.Avbryt" />
-            </Button>
-          </HStack>
-        )}
-        <VerticalSpacer fourtyPx />
+          )}
+          <TextAreaField
+            label={<FormattedMessage id="ManglendeOpplysningerForm.Begrunn" />}
+            name="begrunnelse"
+            validate={[required, minLength3, maxLength1500, hasValidText]}
+            maxLength={1500}
+            readOnly={isReadOnly}
+          />
+          {!isReadOnly && (
+            <HStack gap="4">
+              <Button
+                size="small"
+                variant="secondary"
+                loading={formMethods.formState.isSubmitting}
+                disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
+              >
+                <FormattedMessage id="ManglendeOpplysningerForm.Lagre" />
+              </Button>
+              <Button
+                size="small"
+                variant="tertiary"
+                loading={false}
+                disabled={formMethods.formState.isSubmitting}
+                onClick={avbryt}
+                type="button"
+              >
+                <FormattedMessage id="ManglendeOpplysningerForm.Avbryt" />
+              </Button>
+            </HStack>
+          )}
+        </VStack>
       </Form>
-    </>
+    </VStack>
   );
 };

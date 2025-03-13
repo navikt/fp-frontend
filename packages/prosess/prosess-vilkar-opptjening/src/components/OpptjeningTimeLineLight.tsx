@@ -1,9 +1,9 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { CheckmarkCircleIcon, DoorOpenIcon, XMarkOctagonIcon } from '@navikt/aksel-icons';
 import { BodyShort, Label, Timeline } from '@navikt/ds-react';
-import { DateLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { DateLabel } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
 
 import type { FastsattOpptjeningAktivitet } from '@navikt/fp-types';
@@ -66,11 +66,9 @@ interface Props {
 export const OpptjeningTimeLineLight = ({ opptjeningPeriods, opptjeningFomDate, opptjeningTomDate }: Props) => {
   const intl = useIntl();
 
-  const sorterteOpptjeningsperioder = useMemo(
-    () => [...opptjeningPeriods].sort((a, b) => dayjs(a.fom).diff(dayjs(b.fom))),
-    [opptjeningPeriods],
-  );
-  const perioder = useMemo(() => lagTidslinjePerioder(sorterteOpptjeningsperioder), [sorterteOpptjeningsperioder]);
+  const sorterteOpptjeningsperioder = opptjeningPeriods.toSorted((a, b) => dayjs(a.fom).diff(dayjs(b.fom)));
+
+  const perioder = lagTidslinjePerioder(sorterteOpptjeningsperioder);
 
   const [valgtPeriod, setValgtPeriod] = useState<Periode>();
 
@@ -81,31 +79,30 @@ export const OpptjeningTimeLineLight = ({ opptjeningPeriods, opptjeningFomDate, 
     }
   };
 
-  const lukkPeriode = useCallback((): void => {
+  const lukkPeriode = (): void => {
     setValgtPeriod(undefined);
-  }, []);
+  };
 
-  const velgNestePeriode = useCallback((): void => {
+  const velgNestePeriode = (): void => {
     if (perioder) {
       const nyIndex = perioder.findIndex(oa => oa.opptjeningsperiode?.fom === valgtPeriod?.opptjeningsperiode?.fom) + 1;
       if (nyIndex < perioder.length) {
         setValgtPeriod(perioder[nyIndex]);
       }
     }
-  }, [perioder, valgtPeriod, setValgtPeriod]);
+  };
 
-  const velgForrigePeriode = useCallback((): void => {
+  const velgForrigePeriode = (): void => {
     if (perioder) {
       const nyIndex = perioder.findIndex(oa => oa.opptjeningsperiode?.fom === valgtPeriod?.opptjeningsperiode?.fom) - 1;
       if (nyIndex >= 0) {
         setValgtPeriod(perioder[nyIndex]);
       }
     }
-  }, [perioder, valgtPeriod, setValgtPeriod]);
+  };
 
   return (
     <>
-      <VerticalSpacer twentyPx />
       <Timeline
         startDate={dayjs(opptjeningFomDate).subtract(1, 'months').toDate()}
         endDate={dayjs(opptjeningTomDate).add(10, 'days').toDate()}
@@ -141,7 +138,6 @@ export const OpptjeningTimeLineLight = ({ opptjeningPeriods, opptjeningFomDate, 
           ))}
         </Timeline.Row>
       </Timeline>
-      <VerticalSpacer sixteenPx />
       {valgtPeriod?.opptjeningsperiode && (
         <TimeLineData
           fastsattOpptjeningAktivitet={valgtPeriod.opptjeningsperiode}

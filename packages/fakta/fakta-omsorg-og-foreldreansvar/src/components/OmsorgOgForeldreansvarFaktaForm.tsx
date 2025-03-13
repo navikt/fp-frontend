@@ -5,7 +5,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { BodyShort, HGrid, Label, VStack } from '@navikt/ds-react';
 import { SelectField } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import { EditedIcon, FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { EditedIcon, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
 import { type FieldEditedInfo, isFieldEdited } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, KodeverkType, VilkarType } from '@navikt/fp-kodeverk';
@@ -103,32 +103,33 @@ export const OmsorgOgForeldreansvarFaktaForm = ({
           title={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.VelgVilkaarSomSkalAnvendes' })}
           merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OMSORGSOVERTAKELSE]}
         >
-          {!readOnly && (
-            <SelectField
-              name="vilkarType"
-              validate={[required]}
-              hideLabel
-              label=""
-              selectValues={vilkarTypes.map(d => (
-                <option key={d.kode} value={d.kode}>
-                  {d.navn}
-                </option>
-              ))}
-              className={styles.breddeSelect}
-              readOnly={readOnly}
-              disabled={readOnly}
-            />
-          )}
-          {readOnly && vilkarType && (
-            <div className={styles.vilkarTypeReadOnly}>
-              <Label size="small" as="span">
-                {vilkarTypes.find(d => d.kode === vilkarType)?.navn}
-              </Label>
-              {editedStatus.vilkarType && <EditedIcon />}
-            </div>
-          )}
-          <VerticalSpacer eightPx />
-          <BodyShort size="small">{getDescriptionText(vilkarType)}</BodyShort>
+          <VStack gap="4">
+            {!readOnly && (
+              <SelectField
+                name="vilkarType"
+                validate={[required]}
+                hideLabel
+                label=""
+                selectValues={vilkarTypes.map(d => (
+                  <option key={d.kode} value={d.kode}>
+                    {d.navn}
+                  </option>
+                ))}
+                className={styles.breddeSelect}
+                readOnly={readOnly}
+                disabled={readOnly}
+              />
+            )}
+            {readOnly && vilkarType && (
+              <div className={styles.vilkarTypeReadOnly}>
+                <Label size="small" as="span">
+                  {vilkarTypes.find(d => d.kode === vilkarType)?.navn}
+                </Label>
+                {editedStatus.vilkarType && <EditedIcon />}
+              </div>
+            )}
+            <BodyShort size="small">{getDescriptionText(vilkarType)}</BodyShort>
+          </VStack>
         </FaktaGruppe>
       )}
     </VStack>

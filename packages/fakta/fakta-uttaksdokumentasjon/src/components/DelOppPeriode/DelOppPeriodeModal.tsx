@@ -57,7 +57,7 @@ export const DelOppPeriodeModal = ({ periode, cancel, submit }: Props) => {
             <BodyShort>
               <FormattedMessage id="DelOppPeriodeModal.Beskrivelse" />
             </BodyShort>
-            <VStack>
+            <VStack gap="1">
               <Label>
                 <FormattedMessage id="DelOppPeriodeModal.PeriodeLabel" />
               </Label>

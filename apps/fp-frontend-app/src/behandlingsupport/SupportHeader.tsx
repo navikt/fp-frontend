@@ -1,8 +1,7 @@
 import type { ReactElement, ReactNode } from 'react';
 import { useIntl } from 'react-intl';
 
-import { Heading } from '@navikt/ds-react';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
+import { Heading, HStack, VStack } from '@navikt/ds-react';
 
 import { ErrorBoundary } from '../app/ErrorBoundary';
 import { useRestApiErrorDispatcher } from '../data/error/RestApiErrorContext';
@@ -28,22 +27,14 @@ export const SupportHeaderAndContent = ({
   const { addErrorMessage } = useRestApiErrorDispatcher();
 
   return (
-    <>
+    <VStack gap="4">
       <div className={styles.header}>
-        <FlexContainer>
-          <FlexRow spaceBetween>
-            <FlexColumn>
-              <Heading size="small">
-                {tekst} {toggleVisUtvidetBehandlingSupportIndexKnapp}
-              </Heading>
-            </FlexColumn>
-            {!!antall && antall > 0 && (
-              <FlexColumn>
-                <div className={styles.circle}>{antall}</div>
-              </FlexColumn>
-            )}
-          </FlexRow>
-        </FlexContainer>
+        <HStack justify="space-between">
+          <Heading size="small">
+            {tekst} {toggleVisUtvidetBehandlingSupportIndexKnapp}
+          </Heading>
+          {!!antall && antall > 0 && <div className={styles.circle}>{antall}</div>}
+        </HStack>
       </div>
       <div className={brukPadding ? styles.container : undefined}>
         <ErrorBoundary
@@ -53,6 +44,6 @@ export const SupportHeaderAndContent = ({
           {children}
         </ErrorBoundary>
       </div>
-    </>
+    </VStack>
   );
 };

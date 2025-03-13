@@ -3,8 +3,8 @@ import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, OpptjeningAktivitetType } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import type { Opptjening } from '@navikt/fp-types';
+import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import type { ArbeidsgiverOpplysningerPerId, Opptjening } from '@navikt/fp-types';
 
 import { OpptjeningFaktaIndex } from './OpptjeningFaktaIndex';
 
@@ -12,10 +12,11 @@ const merknaderFraBeslutter = {
   notAccepted: false,
 };
 
-const arbeidsgiverOpplysningerPerId = {
+const arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId = {
   1: {
     erPrivatPerson: false,
     identifikator: '973861778',
+    referanse: '973861778',
     navn: 'EQUINOR ASA AVD STATOIL SOKKELVIRKSOMHET',
   },
 };
@@ -23,7 +24,7 @@ const arbeidsgiverOpplysningerPerId = {
 const meta = {
   title: 'fakta/fakta-opptjening',
   component: OpptjeningFaktaIndex,
-  decorators: [withFormData, withPanelData],
+  decorators: [withMellomlagretFormData, withPanelData],
   args: {
     arbeidsgiverOpplysningerPerId,
     alleMerknaderFraBeslutter: {
@@ -42,7 +43,7 @@ export const MedAksjonspunkt: Story = {
       {
         definisjon: AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
+        begrunnelse: null,
         kanLoses: true,
       },
     ],
@@ -183,7 +184,7 @@ export const MedToLikePerioderForSammeAktivitetstype: Story = {
       {
         definisjon: AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
+        begrunnelse: null,
         kanLoses: true,
       },
     ],
@@ -244,7 +245,7 @@ export const MedAlleOpptjeningsaktiviteterFiltrertBort: Story = {
       {
         definisjon: AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
+        begrunnelse: null,
         kanLoses: true,
       },
     ],

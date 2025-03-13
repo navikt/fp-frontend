@@ -2,10 +2,6 @@
   padding-left: 14px;
 }
 
-.colWidthLeft {
-  width: 40%;
-}
-
-.colWidthRight {
-  width: 60%;
+.col {
+  width: 45%;
 }

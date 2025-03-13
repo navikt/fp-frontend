@@ -103,7 +103,7 @@ export const FeriepengerPrAar = ({
   }
 
   return (
-    <>
+    <div>
       <Label size="small">
         <FormattedMessage id="TilkjentYtelse.Feriepenger.Opptjeningsår" values={{ år: opptjeningsår }} />
       </Label>
@@ -137,6 +137,6 @@ export const FeriepengerPrAar = ({
           ))}
         </Table.Body>
       </Table>
-    </>
+    </div>
   );
 };

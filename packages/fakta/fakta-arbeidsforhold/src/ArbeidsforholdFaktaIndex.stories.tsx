@@ -3,8 +3,8 @@ import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import { AksjonspunktÅrsak } from '@navikt/fp-types';
+import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { AksjonspunktÅrsak, type ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
 import { ArbeidsforholdFaktaIndex } from './ArbeidsforholdFaktaIndex';
 import { BekreftetPermisjonStatus } from './kodeverk/bekreftetPermisjonStatus';
@@ -24,20 +24,23 @@ const fellesInntektsmeldingFelter = {
   aktiveNaturalytelser: [],
 };
 
-const arbeidsgiverOpplysningerPerId = {
+const arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId = {
   11212: {
     erPrivatPerson: false,
     identifikator: '23232',
+    referanse: '11212',
     navn: 'Vy',
   },
   999999999: {
     erPrivatPerson: false,
     identifikator: '999999999',
+    referanse: '999999999',
     navn: 'KIWI',
   },
   999999998: {
     erPrivatPerson: false,
     identifikator: '999999998',
+    referanse: '999999998',
     navn: 'REMA 1000',
   },
 };
@@ -45,7 +48,7 @@ const arbeidsgiverOpplysningerPerId = {
 const meta = {
   title: 'fakta/fakta-arbeidsforhold',
   component: ArbeidsforholdFaktaIndex,
-  decorators: [withFormData, withPanelData],
+  decorators: [withMellomlagretFormData, withPanelData],
   args: {
     arbeidsgiverOpplysningerPerId,
     isReadOnly: true,

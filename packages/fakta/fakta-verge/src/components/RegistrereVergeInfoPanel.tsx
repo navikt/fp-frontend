@@ -2,14 +2,15 @@ import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
+import { VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
-import { AksjonspunktHelpTextHTML, FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { AksjonspunktHelpTextHTML, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, KodeverkType } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, AlleKodeverk, AlleKodeverkTilbakekreving, Verge } from '@navikt/fp-types';
 import type { AvklarVergeAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { RegistrereVergeForm, type VergeFormValues } from './RegistrereVergeForm';
 
@@ -45,10 +46,10 @@ export const RegistrereVergeInfoPanel = ({ submittable, verge, alleKodeverk }: P
   const { aksjonspunkterForPanel, submitCallback, alleMerknaderFraBeslutter, harÅpneAksjonspunkter, isReadOnly } =
     usePanelDataContext<AvklarVergeAp>();
 
-  const { formData, setFormData } = useFormData<FormValues>();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || buildInitialValues(verge, aksjonspunkterForPanel),
+    defaultValues: mellomlagretFormData || buildInitialValues(verge, aksjonspunkterForPanel),
     shouldUnregister: true,
   });
 
@@ -70,32 +71,32 @@ export const RegistrereVergeInfoPanel = ({ submittable, verge, alleKodeverk }: P
       <Form
         formMethods={formMethods}
         onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
-        setDataOnUnmount={setFormData}
+        setDataOnUnmount={setMellomlagretFormData}
       >
-        <FaktaGruppe merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.AVKLAR_VERGE]}>
-          <RegistrereVergeForm
-            readOnly={isReadOnly || aksjonspunkterForPanel.length === 0}
-            vergetyper={vergetyper}
-            valgtVergeType={valgtVergeType}
-          />
-        </FaktaGruppe>
-        {aksjonspunkterForPanel.length !== 0 && (
-          <>
-            <VerticalSpacer twentyPx />
-            <FaktaBegrunnelseTextField
-              isSubmittable={submittable}
-              isReadOnly={isReadOnly}
-              hasBegrunnelse={!!begrunnelse}
+        <VStack gap="6">
+          <FaktaGruppe merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.AVKLAR_VERGE]}>
+            <RegistrereVergeForm
+              readOnly={isReadOnly || aksjonspunkterForPanel.length === 0}
+              vergetyper={vergetyper}
+              valgtVergeType={valgtVergeType}
             />
-            <VerticalSpacer twentyPx />
-            <FaktaSubmitButton
-              isSubmittable={submittable && !!valgtVergeType}
-              isReadOnly={isReadOnly}
-              isSubmitting={formMethods.formState.isSubmitting}
-              isDirty={formMethods.formState.isDirty}
-            />
-          </>
-        )}
+          </FaktaGruppe>
+          {aksjonspunkterForPanel.length !== 0 && (
+            <>
+              <FaktaBegrunnelseTextField
+                isSubmittable={submittable}
+                isReadOnly={isReadOnly}
+                hasBegrunnelse={!!begrunnelse}
+              />
+              <FaktaSubmitButton
+                isSubmittable={submittable && !!valgtVergeType}
+                isReadOnly={isReadOnly}
+                isSubmitting={formMethods.formState.isSubmitting}
+                isDirty={formMethods.formState.isDirty}
+              />
+            </>
+          )}
+        </VStack>
       </Form>
     </>
   );

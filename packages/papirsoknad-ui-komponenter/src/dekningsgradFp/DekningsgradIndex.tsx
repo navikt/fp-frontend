@@ -1,7 +1,7 @@
-import { Heading } from '@navikt/ds-react';
+import { Heading, VStack } from '@navikt/ds-react';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { BorderBox } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 
 import messages from '../../i18n/nb_NO.json';
@@ -21,24 +21,25 @@ interface Props {
  */
 export const DekningsgradIndex = ({ readOnly }: Props) => (
   <BorderBox>
-    <Heading size="small">{intl.formatMessage({ id: 'Registrering.Dekningsgrad.Title' })}</Heading>
-    <VerticalSpacer sixteenPx />
-    <RadioGroupPanel
-      name="dekningsgrad"
-      validate={[required]}
-      isReadOnly={readOnly}
-      isHorizontal
-      radios={[
-        {
-          label: intl.formatMessage({ id: 'Registrering.Dekningsgrad.prosent.80' }),
-          value: '80_PROSENT',
-        },
-        {
-          label: intl.formatMessage({ id: 'Registrering.Dekningsgrad.prosent.100' }),
-          value: '100_PROSENT',
-        },
-      ]}
-    />
+    <VStack gap="4">
+      <Heading size="small">{intl.formatMessage({ id: 'Registrering.Dekningsgrad.Title' })}</Heading>
+      <RadioGroupPanel
+        name="dekningsgrad"
+        validate={[required]}
+        isReadOnly={readOnly}
+        isHorizontal
+        radios={[
+          {
+            label: intl.formatMessage({ id: 'Registrering.Dekningsgrad.prosent.80' }),
+            value: '80_PROSENT',
+          },
+          {
+            label: intl.formatMessage({ id: 'Registrering.Dekningsgrad.prosent.100' }),
+            value: '100_PROSENT',
+          },
+        ]}
+      />
+    </VStack>
   </BorderBox>
 );
 

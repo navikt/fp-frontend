@@ -10,9 +10,10 @@ import {
   NavBrukerKjonn,
   UtsettelseArsakCode,
 } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type {
   Aksjonspunkt,
+  ArbeidsgiverOpplysningerPerId,
   Behandling,
   FamilieHendelseSamling,
   Personoversikt,
@@ -138,34 +139,31 @@ const soknad = {
   },
 } as Soknad;
 
-const arbeidsgiverOpplysningerPerId = {
+const arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId = {
   342352362: {
+    erPrivatPerson: false,
     referanse: '342352362',
     identifikator: '342352362',
     navn: 'Lagt til av saksbehandler',
-    fødselsdato: undefined,
-    erPrivatPerson: false,
   },
   910909088: {
+    erPrivatPerson: false,
     referanse: '910909088',
     identifikator: '910909088',
     navn: 'BEDRIFT AS',
-    fødselsdato: undefined,
-    erPrivatPerson: false,
   },
   994884174: {
+    erPrivatPerson: false,
     referanse: '994884174',
     identifikator: '994884174',
     navn: 'Nav',
-    fødselsdato: undefined,
-    erPrivatPerson: false,
   },
 };
 
 const meta = {
   title: 'prosess/prosess-uttak',
   component: UttakProsessIndex,
-  decorators: [withFormData, withPanelData],
+  decorators: [withMellomlagretFormData, withPanelData],
   args: {
     behandling,
     uttakStonadskontoer,

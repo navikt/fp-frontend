@@ -2,10 +2,10 @@ import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
-import { Button } from '@navikt/ds-react';
+import { Button, HStack, Link, VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 import { ariaCheck } from '@navikt/ft-form-validators';
-import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 import { type Location } from 'history';
 
@@ -21,8 +21,6 @@ import {
   type AksjonspunktGodkjenningData,
   AksjonspunktGodkjenningFieldArray,
 } from './AksjonspunktGodkjenningFieldArray';
-
-import styles from './totrinnskontrollBeslutterForm.module.css';
 
 const erAlleGodkjent = (formState: TotrinnskontrollAksjonspunkt[] = []) =>
   formState.every(ap => ap.totrinnskontrollGodkjent);
@@ -143,65 +141,56 @@ export const TotrinnskontrollBeslutterForm = ({
   }
 
   return (
-    <Form
-      formMethods={formMethods}
-      onSubmit={onSubmit}
-      className={styles.container}
-      setDataOnUnmount={setBeslutterFormData}
-    >
-      {!readOnly && (
-        <>
+    <Form formMethods={formMethods} onSubmit={onSubmit} setDataOnUnmount={setBeslutterFormData}>
+      <VStack gap="6">
+        {!readOnly && (
           <AksjonspunktHelpTextHTML>
             {[<FormattedMessage key={1} id="HelpText.ToTrinnsKontroll" />]}
           </AksjonspunktHelpTextHTML>
-          <VerticalSpacer sixteenPx />
-        </>
-      )}
-      <AksjonspunktGodkjenningFieldArray
-        behandling={behandling}
-        erForeldrepengerFagsak={erForeldrepengerFagsak}
-        erTilbakekreving={erTilbakekreving}
-        readOnly={readOnly}
-        totrinnskontrollSkjermlenkeContext={totrinnskontrollSkjermlenkeContext}
-        skjemalenkeTyper={skjemalenkeTyper}
-        faktaOmBeregningTilfeller={faktaOmBeregningTilfeller}
-        lagLenke={lagLenke}
-      />
-      <div className={styles.buttonRow}>
-        <Button
-          variant="primary"
-          size="small"
-          disabled={
-            !erAlleGodkjent(aksjonspunktGodkjenning) ||
-            !erAlleGodkjentEllerAvvist(aksjonspunktGodkjenning) ||
-            formMethods.formState.isSubmitting
-          }
-          loading={formMethods.formState.isSubmitting}
-        >
-          <FormattedMessage id="ToTrinnsForm.Godkjenn" />
-        </Button>
-        <Button
-          variant="primary"
-          size="small"
-          disabled={
-            erAlleGodkjent(aksjonspunktGodkjenning) ||
-            !erAlleGodkjentEllerAvvist(aksjonspunktGodkjenning) ||
-            formMethods.formState.isSubmitting
-          }
-          loading={formMethods.formState.isSubmitting}
-          onClick={ariaCheck}
-        >
-          <FormattedMessage id="ToTrinnsForm.SendTilbake" />
-        </Button>
-        {!erKlage && !erBehandlingEtterKlage && !erAnke && !erTilbakekreving && harIkkeKonsekvensForYtelse && (
-          <>
-            <VerticalSpacer eightPx />
-            <button type="button" className={styles.buttonLink} onClick={forhandsvisVedtaksbrev}>
-              <FormattedMessage id="ToTrinnsForm.ForhandvisBrev" />
-            </button>
-          </>
         )}
-      </div>
+        <AksjonspunktGodkjenningFieldArray
+          behandling={behandling}
+          erForeldrepengerFagsak={erForeldrepengerFagsak}
+          erTilbakekreving={erTilbakekreving}
+          readOnly={readOnly}
+          totrinnskontrollSkjermlenkeContext={totrinnskontrollSkjermlenkeContext}
+          skjemalenkeTyper={skjemalenkeTyper}
+          faktaOmBeregningTilfeller={faktaOmBeregningTilfeller}
+          lagLenke={lagLenke}
+        />
+        <HStack gap="4">
+          <Button
+            variant="primary"
+            size="small"
+            disabled={
+              !erAlleGodkjent(aksjonspunktGodkjenning) ||
+              !erAlleGodkjentEllerAvvist(aksjonspunktGodkjenning) ||
+              formMethods.formState.isSubmitting
+            }
+            loading={formMethods.formState.isSubmitting}
+          >
+            <FormattedMessage id="ToTrinnsForm.Godkjenn" />
+          </Button>
+          <Button
+            variant="primary"
+            size="small"
+            disabled={
+              erAlleGodkjent(aksjonspunktGodkjenning) ||
+              !erAlleGodkjentEllerAvvist(aksjonspunktGodkjenning) ||
+              formMethods.formState.isSubmitting
+            }
+            loading={formMethods.formState.isSubmitting}
+            onClick={ariaCheck}
+          >
+            <FormattedMessage id="ToTrinnsForm.SendTilbake" />
+          </Button>
+          {!erKlage && !erBehandlingEtterKlage && !erAnke && !erTilbakekreving && harIkkeKonsekvensForYtelse && (
+            <Link href="#" onClick={forhandsvisVedtaksbrev}>
+              <FormattedMessage id="ToTrinnsForm.ForhandvisBrev" />
+            </Link>
+          )}
+        </HStack>
+      </VStack>
     </Form>
   );
 };

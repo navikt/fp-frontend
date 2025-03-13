@@ -152,7 +152,7 @@ export const DekningradApForm = ({
               maxLength={1500}
               readOnly={readOnly}
             />
-            <HStack>
+            <div>
               <Button
                 variant="primary"
                 size="small"
@@ -161,7 +161,7 @@ export const DekningradApForm = ({
               >
                 <FormattedMessage id="DekningradApForm.Bekreft" />
               </Button>
-            </HStack>
+            </div>
           </VStack>
         </Form>
       </AksjonspunktBox>
