@@ -261,14 +261,14 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
         {
           definisjon: AksjonspunktKode.VURDERE_ANNEN_YTELSE,
           status: AksjonspunktStatus.OPPRETTET,
-          begrunnelse: undefined,
+          begrunnelse: 'Dette er en begrunnelse',
           kanLoses: false,
           toTrinnsBehandling: true,
         },
         {
           definisjon: AksjonspunktKode.VURDERE_DOKUMENT,
           status: AksjonspunktStatus.OPPRETTET,
-          begrunnelse: undefined,
+          begrunnelse: 'Dette er en begrunnelse',
           kanLoses: false,
         },
       ],
