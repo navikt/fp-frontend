@@ -10,14 +10,20 @@ import {
   TilbakekrevingVidereBehandling,
 } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt, SimuleringResultat, TilbakekrevingValg } from '@navikt/fp-types';
+import type {
+  Aksjonspunkt,
+  ArbeidsgiverOpplysningerPerId,
+  SimuleringResultat,
+  TilbakekrevingValg,
+} from '@navikt/fp-types';
 
 import { SimuleringProsessIndex } from './SimuleringProsessIndex';
 
-const arbeidsgiverOpplysningerPerId = {
+const arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId = {
   123: {
     erPrivatPerson: false,
     identifikator: '123',
+    referanse: '123',
     navn: 'test',
   },
 };
