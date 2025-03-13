@@ -57,7 +57,7 @@
     "@types/css-tree": "2.3.10",
     "@types/lodash.debounce": "4.0.9",
     "cross-env": "7.0.3",
-    "eslint": "9.21.0",
+    "eslint": "9.22.0",
     "storybook": "8.6.4",
     "stylelint": "16.15.0",
     "typescript": "5.8.2",
