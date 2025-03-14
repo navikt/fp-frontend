@@ -2,10 +2,9 @@ import { type ReactElement } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
-import { Alert, BodyShort, Button, HStack } from '@navikt/ds-react';
+import { Alert, BodyShort, Button, HStack, VStack } from '@navikt/ds-react';
 import { RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { FagsakYtelseType } from '@navikt/fp-kodeverk';
 
@@ -151,33 +150,28 @@ export const VelgSakForm = ({
   const sakValg = formMethods.watch(radioFieldName);
 
   return (
-    <>
+    <VStack gap="4">
       {!finnesSaker && erKlarForJournalføring && (
         <BodyShort>
           <FormattedMessage id="Journal.Sak.Ingen" />
         </BodyShort>
       )}
       {erEndeligJournalført(journalpost.tilstand) && (
-        <>
-          <VerticalSpacer eightPx />
-          <Alert variant="info">
-            <FormattedMessage id="Journalpost.Søk.Forklaring" />
-          </Alert>
-          <VerticalSpacer eightPx />
-        </>
+        <Alert variant="info">
+          <FormattedMessage id="Journalpost.Søk.Forklaring" />
+        </Alert>
       )}
-      <>
-        <RadioGroupPanel
-          disabled={!erKlarForJournalføring}
-          name={radioFieldName}
-          hideLegend
-          label={intl.formatMessage({ id: 'ValgtOppgave.RelaterteSaker' })}
-          validate={[required]}
-          radios={lagRadioOptions(journalpost, intl, fetTekst)}
-        />
-        {sakValg === LAG_NY_SAK && (
-          <>
-            <VerticalSpacer eightPx />
+      <VStack gap="8">
+        <VStack gap="4">
+          <RadioGroupPanel
+            disabled={!erKlarForJournalføring}
+            name={radioFieldName}
+            hideLegend
+            label={intl.formatMessage({ id: 'ValgtOppgave.RelaterteSaker' })}
+            validate={[required]}
+            radios={lagRadioOptions(journalpost, intl, fetTekst)}
+          />
+          {sakValg === LAG_NY_SAK && (
             <SelectField
               className={styles.ytelseSelect}
               name={selectFieldName}
@@ -189,18 +183,13 @@ export const VelgSakForm = ({
                 </option>
               ))}
             />
-            <VerticalSpacer twentyPx />
-          </>
-        )}
-        {sakValg === LAG_GENERELL_SAK && (
-          <>
-            <VerticalSpacer eightPx />
+          )}
+          {sakValg === LAG_GENERELL_SAK && (
             <Alert variant="info">
               <FormattedMessage id="Journal.Sak.Generell.Info" />
             </Alert>
-          </>
-        )}
-        <VerticalSpacer fourtyPx />
+          )}
+        </VStack>
         <HStack className={styles.knappRad} gap="4">
           <Button size="small" variant="primary" disabled={!isSubmittable} type="submit">
             <FormattedMessage
@@ -225,7 +214,7 @@ export const VelgSakForm = ({
             </div>
           )}
         </HStack>
-      </>
-    </>
+      </VStack>
+    </VStack>
   );
 };

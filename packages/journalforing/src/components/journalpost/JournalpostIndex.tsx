@@ -1,4 +1,3 @@
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { useMutation } from '@tanstack/react-query';
 
 import type { NavAnsatt } from '@navikt/fp-types';
@@ -54,7 +53,6 @@ export const JournalpostIndex = ({
   return (
     <div className={styles.container}>
       <div className={styles.oppgaveKolonne}>
-        <VerticalSpacer sixteenPx />
         <JournalpostDetaljer
           avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
           journalpost={journalpostOppdatertMedSøker || journalpost}
@@ -73,7 +71,6 @@ export const JournalpostIndex = ({
       </div>
       {valgtDokument && (
         <div className={styles.pdfKolonne}>
-          <VerticalSpacer sixteenPx />
           <DokumentIndex dokumenter={journalpost.dokumenter} />
         </div>
       )}

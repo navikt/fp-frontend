@@ -1,8 +1,7 @@
-import { useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, HStack, Label, Modal } from '@navikt/ds-react';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { BodyShort, Button, HStack, Label, Modal, VStack } from '@navikt/ds-react';
 
 import styles from './fatterVedtakStatusModal.module.css';
 
@@ -15,23 +14,23 @@ interface Props {
 /**
  * FatterVedtakStatusModal
  *
- * Presentasjonskomponent. Denne modalen viser en lightbox etter at en saksbehandler har sendt et forslag på vedtak til beslutter
+ * Denne modalen viser en modal etter at en saksbehandler har sendt et forslag på vedtak til beslutter
  * ved totrinnskontroll. Ved å trykke på knapp blir saksbehandler tatt tilbake til søkesiden.
  */
 export const FatterVedtakStatusModal = ({ visModal = false, lukkModal, tekst }: Props) => {
-  const intl = useIntl();
   return (
     <Modal width="small" open={visModal} aria-label={tekst} onClose={lukkModal}>
       <Modal.Body>
         <HStack gap="6">
           <CheckmarkCircleFillIcon className={styles.image} />
-          <div>
+          <VStack gap="1">
             <Label size="small">{tekst}</Label>
-            <VerticalSpacer fourPx />
-            <BodyShort size="small">{intl.formatMessage({ id: 'FatterVedtakStatusModal.GoToSearchPage' })}</BodyShort>
-          </div>
+            <BodyShort size="small">
+              <FormattedMessage id="FatterVedtakStatusModal.GoToSearchPage" />
+            </BodyShort>
+          </VStack>
           <Button size="small" variant="primary" onClick={lukkModal} autoFocus type="button">
-            {intl.formatMessage({ id: 'FatterVedtakStatusModal.Ok' })}
+            <FormattedMessage id="FatterVedtakStatusModal.Ok" />
           </Button>
         </HStack>
       </Modal.Body>

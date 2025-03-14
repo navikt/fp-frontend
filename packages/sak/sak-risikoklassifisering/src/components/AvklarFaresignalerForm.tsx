@@ -2,10 +2,10 @@ import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
-import { Button } from '@navikt/ds-react';
+import { Button, VStack } from '@navikt/ds-react';
 import { Form, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
 import { ariaCheck, hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
-import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, KodeverkMedNavn, Risikoklassifisering } from '@navikt/fp-types';
@@ -107,29 +107,27 @@ export const AvklarFaresignalerForm = ({
       formMethods={formMethods}
       onSubmit={(values: Values) => submitCallback && submitCallback(transformValues(values))}
     >
-      <TextAreaField
-        name={begrunnelseFieldName}
-        label={<FormattedMessage id="Risikopanel.Forms.Vurdering" />}
-        validate={[required, maxLength1500, minLength3, hasValidText]}
-        maxLength={1500}
-        readOnly={readOnly}
-      />
-      <VerticalSpacer sixteenPx />
-      <RadioGroupPanel
-        name={VURDERING_HOVEDKATEGORI}
-        label={<FormattedMessage id="Risikopanel.Form.Resultat" />}
-        validate={[required]}
-        isReadOnly={readOnly}
-        radios={[
-          {
-            value: FaresignalVurdering.INNVIRKNING,
-            label:
-              faresignalVurderinger.find(vurdering => vurdering.kode === FaresignalVurdering.INNVIRKNING)?.navn || '',
-            element: (
-              <div>
-                {harValgtReelle && (
-                  <>
-                    <VerticalSpacer eightPx />
+      <VStack gap="4">
+        <TextAreaField
+          name={begrunnelseFieldName}
+          label={<FormattedMessage id="Risikopanel.Forms.Vurdering" />}
+          validate={[required, maxLength1500, minLength3, hasValidText]}
+          maxLength={1500}
+          readOnly={readOnly}
+        />
+        <RadioGroupPanel
+          name={VURDERING_HOVEDKATEGORI}
+          label={<FormattedMessage id="Risikopanel.Form.Resultat" />}
+          validate={[required]}
+          isReadOnly={readOnly}
+          radios={[
+            {
+              value: FaresignalVurdering.INNVIRKNING,
+              label:
+                faresignalVurderinger.find(vurdering => vurdering.kode === FaresignalVurdering.INNVIRKNING)?.navn || '',
+              element: (
+                <div style={{ paddingTop: '15px' }}>
+                  {harValgtReelle && (
                     <ArrowBox alignOffset={20}>
                       <RadioGroupPanel
                         name={IKKE_REELLE_VURDERINGER_UNDERKATEGORI}
@@ -141,29 +139,30 @@ export const AvklarFaresignalerForm = ({
                         }))}
                       />
                     </ArrowBox>
-                  </>
-                )}
-              </div>
-            ),
-          },
-          {
-            value: FaresignalVurdering.INGEN_INNVIRKNING,
-            label:
-              faresignalVurderinger.find(vurdering => vurdering.kode === FaresignalVurdering.INGEN_INNVIRKNING)?.navn ||
-              '',
-          },
-        ]}
-      />
-      <VerticalSpacer sixteenPx />
-      <Button
-        size="small"
-        variant="primary"
-        loading={formMethods.formState.isSubmitting}
-        disabled={!formMethods.formState.isDirty || readOnly || formMethods.formState.isSubmitting}
-        onClick={ariaCheck}
-      >
-        <FormattedMessage id="Risikopanel.Form.Bekreft" />
-      </Button>
+                  )}
+                </div>
+              ),
+            },
+            {
+              value: FaresignalVurdering.INGEN_INNVIRKNING,
+              label:
+                faresignalVurderinger.find(vurdering => vurdering.kode === FaresignalVurdering.INGEN_INNVIRKNING)
+                  ?.navn || '',
+            },
+          ]}
+        />
+        <div>
+          <Button
+            size="small"
+            variant="primary"
+            loading={formMethods.formState.isSubmitting}
+            disabled={!formMethods.formState.isDirty || readOnly || formMethods.formState.isSubmitting}
+            onClick={ariaCheck}
+          >
+            <FormattedMessage id="Risikopanel.Form.Bekreft" />
+          </Button>
+        </div>
+      </VStack>
     </Form>
   );
 };

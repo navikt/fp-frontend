@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BodyShort, Button, Heading, Modal } from '@navikt/ds-react';
+import { BodyShort, Button, Heading, Modal, VStack } from '@navikt/ds-react';
 import { Datepicker, Form, SelectField } from '@navikt/ft-form-hooks';
 import {
   ariaCheck,
@@ -10,7 +10,6 @@ import {
   hasValidDate,
   required,
 } from '@navikt/ft-form-validators';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
@@ -132,57 +131,54 @@ export const SettPaVentModal = ({
           </Heading>
         </Modal.Header>
         <Modal.Body>
-          {(hasManualPaVent || fristFraFelt) && (
-            <>
+          <VStack gap="4">
+            {(hasManualPaVent || fristFraFelt) && (
               <Datepicker
                 label={<FormattedMessage id="SettPaVentModal.Frist" />}
                 name="frist"
                 validate={[required, hasValidDate, dateAfterOrEqualToToday]}
               />
-              <VerticalSpacer sixteenPx />
-            </>
-          )}
-          <SelectField
-            name="ventearsak"
-            className={styles.select}
-            label={<FormattedMessage id="SettPaVentModal.Arsak" />}
-            validate={[required]}
-            selectValues={ventearsaker
-              .filter(
-                va =>
-                  !hasManualPaVent ||
-                  (erTilbakekreving
-                    ? inkluderVentearsak(va, ventearsakFraFelt)
-                    : manuelleVenteArsaker.some(mva => mva === va.kode)),
-              )
-              .sort((v1, v2) => v1.navn.localeCompare(v2.navn))
-              .map(va => (
-                <option key={va.kode} value={va.kode}>
-                  {va.navn}
-                </option>
-              ))}
-            readOnly={!hasManualPaVent}
-          />
-          <VerticalSpacer sixteenPx />
-          {visBrevErBestilt && (
-            <BodyShort size="small">
-              <FormattedMessage id="SettPaVentModal.BrevBlirBestilt" />
-            </BodyShort>
-          )}
-          {hasManualPaVent && (
-            <BodyShort size="small">{intl.formatMessage({ id: 'SettPaVentModal.EndreFrist' })}</BodyShort>
-          )}
-          {!hasManualPaVent && showFristenTekst && (
-            <>
+            )}
+            <SelectField
+              name="ventearsak"
+              className={styles.select}
+              label={<FormattedMessage id="SettPaVentModal.Arsak" />}
+              validate={[required]}
+              selectValues={ventearsaker
+                .filter(
+                  va =>
+                    !hasManualPaVent ||
+                    (erTilbakekreving
+                      ? inkluderVentearsak(va, ventearsakFraFelt)
+                      : manuelleVenteArsaker.some(mva => mva === va.kode)),
+                )
+                .sort((v1, v2) => v1.navn.localeCompare(v2.navn))
+                .map(va => (
+                  <option key={va.kode} value={va.kode}>
+                    {va.navn}
+                  </option>
+                ))}
+              readOnly={!hasManualPaVent}
+            />
+            {visBrevErBestilt && (
               <BodyShort size="small">
-                <FormattedMessage id="SettPaVentModal.UtløptFrist" />
+                <FormattedMessage id="SettPaVentModal.BrevBlirBestilt" />
               </BodyShort>
-              <VerticalSpacer eightPx />
-              <BodyShort size="small">
-                <FormattedMessage id="SettPaVentModal.HenleggeSaken" />
-              </BodyShort>
-            </>
-          )}
+            )}
+            {hasManualPaVent && (
+              <BodyShort size="small">{intl.formatMessage({ id: 'SettPaVentModal.EndreFrist' })}</BodyShort>
+            )}
+            {!hasManualPaVent && showFristenTekst && (
+              <>
+                <BodyShort size="small">
+                  <FormattedMessage id="SettPaVentModal.UtløptFrist" />
+                </BodyShort>
+                <BodyShort size="small">
+                  <FormattedMessage id="SettPaVentModal.HenleggeSaken" />
+                </BodyShort>
+              </>
+            )}
+          </VStack>
         </Modal.Body>
         <Modal.Footer>
           <Button

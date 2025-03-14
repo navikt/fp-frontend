@@ -272,7 +272,7 @@ export const VedtakRevurderingForm = ({
   const overskrift = formMethods.watch('overskrift');
   const brødtekst = formMethods.watch('brødtekst');
 
-  const { behandlingsresultat, sprakkode, behandlingÅrsaker } = behandling;
+  const { behandlingsresultat, språkkode, behandlingÅrsaker } = behandling;
 
   const erBehandlingEtterKlage = useMemo(
     () => erÅrsakTypeBehandlingEtterKlage(behandling.behandlingÅrsaker),
@@ -356,7 +356,7 @@ export const VedtakRevurderingForm = ({
                 revurderingsÅrsakString={revurderingsÅrsakString}
                 isReadOnly={isReadOnly}
                 beregningsresultat={beregningsresultat}
-                språkKode={sprakkode}
+                språkkode={språkkode}
                 behandlingsresultat={behandlingsresultat}
                 beregningErManueltFastsatt={beregningErManueltFastsatt}
                 skalBrukeOverstyrendeFritekstBrev={skalBrukeOverstyrendeFritekstBrev}
@@ -369,7 +369,7 @@ export const VedtakRevurderingForm = ({
               <VedtakAvslagArsakOgBegrunnelsePanel
                 vilkar={vilkar}
                 behandlingsresultat={behandlingsresultat}
-                språkKode={sprakkode}
+                språkkode={språkkode}
                 erReadOnly={isReadOnly}
                 alleKodeverk={alleKodeverk}
                 skalBrukeOverstyrendeFritekstBrev={skalBrukeOverstyrendeFritekstBrev}
@@ -382,7 +382,7 @@ export const VedtakRevurderingForm = ({
               revurderingsÅrsakString={revurderingsÅrsakString}
               isReadOnly={isReadOnly}
               behandlingsresultat={behandlingsresultat}
-              språkKode={sprakkode}
+              språkkode={språkkode}
               beregningErManueltFastsatt={beregningErManueltFastsatt}
               skalBrukeOverstyrendeFritekstBrev={skalBrukeOverstyrendeFritekstBrev}
             />

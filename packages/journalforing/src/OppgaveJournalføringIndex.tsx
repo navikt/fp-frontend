@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
-import { Heading } from '@navikt/ds-react';
+import { Heading, VStack } from '@navikt/ds-react';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
@@ -143,7 +143,7 @@ export const JournalforingIndex = ({ navAnsatt }: Props) => {
   }
 
   return (
-    <>
+    <VStack gap="4">
       <JournalføringHeader
         avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
         harHentetFerdigJournalpost={hentJournalpostStatus === 'success'}
@@ -171,6 +171,6 @@ export const JournalforingIndex = ({ navAnsatt }: Props) => {
         reserverOppgave={reserverCallback}
         flyttTilGosys={flyttTilGosys}
       />
-    </>
+    </VStack>
   );
 };

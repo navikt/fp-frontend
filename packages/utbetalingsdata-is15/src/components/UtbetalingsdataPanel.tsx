@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ExpansionCard, Heading, HStack, Search, VStack } from '@navikt/ds-react';
-import { DateLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { isValidFodselsnummer } from '@navikt/ft-utils';
 
 import type { InfotrygdVedtak } from '@navikt/fp-types';
@@ -56,7 +56,6 @@ export const UtbetalingsdataPanel = ({ søkInfotrygdVedtak, isPending, isSuccess
       </div>
       {isSuccess && infotrygdVedtak && !error && (
         <>
-          <VerticalSpacer sixteenPx />
           <Heading size="small">
             {infotrygdVedtak.saker.length > 0 || infotrygdVedtak.vedtakKjeder.length > 0 ? (
               <FormattedMessage id="UtbetalingsdataPanel.Resultat" />

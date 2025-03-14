@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { Heading } from '@navikt/ds-react';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { Heading, VStack } from '@navikt/ds-react';
 
 import type { JournalDokument } from '../../../typer/journalDokumentTsType';
 import { DokumentVelger } from './DokumentVelger';
@@ -20,19 +19,16 @@ export const DokumentIndex = ({ dokumenter }: Props) => {
 
   if (!valgtDokument || !dokumenter) {
     return (
-      <div>
-        <Heading size="small">
-          <FormattedMessage id="ValgtOppgave.Dokumenter.Tom" />
-        </Heading>
-      </div>
+      <Heading size="small">
+        <FormattedMessage id="ValgtOppgave.Dokumenter.Tom" />
+      </Heading>
     );
   }
 
   return (
-    <div className={styles.pdfContainer}>
+    <VStack gap="4" className={styles.pdfContainer}>
       <DokumentVelger setValgtDokument={setValgtDokument} valgtDokument={valgtDokument} dokumenter={dokumenter} />
-      <VerticalSpacer sixteenPx />
       <PDFVisning dokument={valgtDokument} />
-    </div>
+    </VStack>
   );
 };

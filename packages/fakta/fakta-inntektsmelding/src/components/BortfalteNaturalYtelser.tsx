@@ -86,9 +86,9 @@ export const BortfalteNaturalYtelser = ({
           <FormattedMessage id="InntektsmeldingFaktaPanel.bortfalteNaturalytelser.ingen" />
         </span>
       ) : (
-        <VStack>
+        <VStack gap="1">
           {Object.entries(bortfalteNaturalytelser).map(([key, value]) => (
-            <VStack key={key}>
+            <div key={key}>
               <span>
                 {alleKodeverk[KodeverkType.NATURAL_YTELSE_TYPE].find(kodeverk => kodeverk.kode === key)?.navn}
               </span>
@@ -112,7 +112,7 @@ export const BortfalteNaturalYtelser = ({
                   </React.Fragment>
                 ))}
               </ul>
-            </VStack>
+            </div>
           ))}
         </VStack>
       )}

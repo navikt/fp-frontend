@@ -173,7 +173,7 @@ export const InnsynVedtakForm = ({
             badges={[
               {
                 type: 'info',
-                titleText: getLanguageFromSprakkode(behandling.sprakkode),
+                titleText: getLanguageFromSprakkode(behandling.språkkode),
               },
             ]}
           />

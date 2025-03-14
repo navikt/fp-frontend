@@ -119,7 +119,7 @@ export const BehandleKlageFormNfp = ({
           readOnly={isReadOnly}
           text={intl.formatMessage({ id: 'BehandleKlageFormNfp.BegrunnelseForKlage' })}
         />
-        <FritekstBrevTextField sprakkode={behandling.sprakkode} readOnly={isReadOnly} />
+        <FritekstBrevTextField språkkode={behandling.språkkode} readOnly={isReadOnly} />
         <HStack justify="space-between">
           <HStack gap="4">
             {formValues.klageVurdering === klageVurderingType.STADFESTE_YTELSESVEDTAK && (

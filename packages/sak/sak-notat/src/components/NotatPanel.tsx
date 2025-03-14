@@ -2,10 +2,9 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
-import { Alert, BodyShort, Button, Chat, HStack } from '@navikt/ds-react';
+import { Alert, BodyShort, Button, Chat, HStack, VStack } from '@navikt/ds-react';
 import { Form, TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, required } from '@navikt/ft-form-validators';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
 
 import type { Saksnotat } from '@navikt/fp-types';
@@ -95,26 +94,26 @@ export const NotatPanel = ({ saksnummer, notater, lagreNotat, saksbehandlerNavn,
     >
       {sorterteNotater.length > 0 && (
         <div className={styles.thechats} ref={bottomEl}>
-          {sorterteNotater.map((notat, index) => (
-            <div key={notat.opprettetTidspunkt} className={index === 0 ? styles.marginTop : undefined}>
-              <Chat
-                className={styles.chat}
-                name={
-                  saksbehandlerNavn === notat.opprettetAv
-                    ? intl.formatMessage({ id: 'NotatPanel.Du' })
-                    : notat.opprettetAv
-                }
-                timestamp={formatTimestamp(intl, notat.opprettetTidspunkt)}
-                position={saksbehandlerNavn === notat.opprettetAv ? 'right' : 'left'}
-              >
-                <Chat.Bubble className={saksbehandlerNavn === notat.opprettetAv ? styles.bubbleSelf : styles.bubble}>
-                  {notat.notat}
-                </Chat.Bubble>
-                {index < sorterteNotater.length - 1 && <VerticalSpacer fourPx />}
-                {index === sorterteNotater.length - 1 && <VerticalSpacer eightPx />}
-              </Chat>
-            </div>
-          ))}
+          <VStack gap="2">
+            {sorterteNotater.map((notat, index) => (
+              <div key={notat.opprettetTidspunkt} className={index === 0 ? styles.marginTop : undefined}>
+                <Chat
+                  className={styles.chat}
+                  name={
+                    saksbehandlerNavn === notat.opprettetAv
+                      ? intl.formatMessage({ id: 'NotatPanel.Du' })
+                      : notat.opprettetAv
+                  }
+                  timestamp={formatTimestamp(intl, notat.opprettetTidspunkt)}
+                  position={saksbehandlerNavn === notat.opprettetAv ? 'right' : 'left'}
+                >
+                  <Chat.Bubble className={saksbehandlerNavn === notat.opprettetAv ? styles.bubbleSelf : styles.bubble}>
+                    {notat.notat}
+                  </Chat.Bubble>
+                </Chat>
+              </div>
+            ))}
+          </VStack>
         </div>
       )}
       {sorterteNotater.length === 0 && (
@@ -124,28 +123,26 @@ export const NotatPanel = ({ saksnummer, notater, lagreNotat, saksbehandlerNavn,
           </BodyShort>
         </div>
       )}
-
       {kanSaksbehandle && (
         <div className={styles.form}>
           <Form formMethods={formMethods} onSubmit={lagre}>
-            <VerticalSpacer sixteenPx />
-            <TextAreaField
-              name="beskrivelse"
-              label=""
-              maxLength={1000}
-              validate={[required, maxLength1000, hasValidText]}
-            />
-            <VerticalSpacer sixteenPx />
-            <HStack justify="space-between">
-              <BodyShort>
-                <FormattedMessage id="NotatPanel.KunForSaksbehandler" />
-              </BodyShort>
-              <Button size="small">
-                <FormattedMessage id="NotatPanel.Send" />
-              </Button>
-            </HStack>
+            <VStack gap="4">
+              <TextAreaField
+                name="beskrivelse"
+                label=""
+                maxLength={1000}
+                validate={[required, maxLength1000, hasValidText]}
+              />
+              <HStack justify="space-between">
+                <BodyShort>
+                  <FormattedMessage id="NotatPanel.KunForSaksbehandler" />
+                </BodyShort>
+                <Button size="small">
+                  <FormattedMessage id="NotatPanel.Send" />
+                </Button>
+              </HStack>
+            </VStack>
           </Form>
-          <VerticalSpacer thirtyTwoPx />
         </div>
       )}
       {!kanSaksbehandle && (

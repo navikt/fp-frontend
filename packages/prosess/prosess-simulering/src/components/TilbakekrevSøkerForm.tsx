@@ -62,13 +62,13 @@ export const buildInitialValues = (
 
 interface Props {
   fagsak: Fagsak;
-  sprakkode: string;
+  språkkode: string;
   aksjonspunkt?: Aksjonspunkt;
   readOnly: boolean;
   previewCallback: (params: { mottaker: string; fritekst: string }) => void;
 }
 
-export const TilbakekrevSøkerForm = ({ readOnly, sprakkode, previewCallback, aksjonspunkt, fagsak }: Props) => {
+export const TilbakekrevSøkerForm = ({ readOnly, språkkode, previewCallback, aksjonspunkt, fagsak }: Props) => {
   const intl = useIntl();
 
   const { watch } = useFormContext<FormValues>();
@@ -135,7 +135,7 @@ export const TilbakekrevSøkerForm = ({ readOnly, sprakkode, previewCallback, ak
                       badges={[
                         {
                           type: 'info',
-                          titleText: getLanguageFromSprakkode(sprakkode),
+                          titleText: getLanguageFromSprakkode(språkkode),
                         },
                       ]}
                     />

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Table, VStack } from '@navikt/ds-react';
-import { DateLabel, PeriodLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
 
 import type { Vedtak } from '@navikt/fp-types';
 
@@ -78,7 +78,6 @@ export const VedtakPanel = ({ alleVedtak, erForeldrepenger }: Props) => {
         </Table.Body>
       </Table>
       {valgtVedtak && <VedtakDetaljerPanel key={valgtVedtak.identdato} vedtak={valgtVedtak} />}
-      <VerticalSpacer thirtyTwoPx />
     </VStack>
   );
 };
