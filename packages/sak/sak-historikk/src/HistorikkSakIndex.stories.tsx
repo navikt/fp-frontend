@@ -1,3 +1,5 @@
+import { ExpandVerticalIcon } from '@navikt/aksel-icons';
+import { Button, Tooltip } from '@navikt/ds-react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { HistorikkAktor } from '@navikt/fp-kodeverk';
@@ -8,6 +10,17 @@ import type { Historikkinnslag } from '@navikt/fp-types';
 import { HistorikkSakIndex } from './HistorikkSakIndex';
 
 const locationMock = { key: 'test', pathname: 'test', search: 'test', state: {}, hash: 'test' };
+
+const utvidKnapp = (
+  <Tooltip content="Utvid" placement="bottom">
+    <Button
+      icon={<ExpandVerticalIcon fontSize="1.4rem" aria-hidden />}
+      aria-label="Utvid historikk vindu"
+      variant="tertiary-neutral"
+      size="xsmall"
+    />
+  </Tooltip>
+);
 
 const historikkInnslag: Historikkinnslag[] = [
   {
@@ -229,6 +242,13 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const BehandlingIkkeErValgt: Story = {};
+export const BehandlingIkkeErValgt: Story = {
+  args: { utvidEllerMinskBehandlingSupportIndexKnapp: utvidKnapp },
+};
 
-export const BehandlingErValgt: Story = { args: { valgtBehandlingUuid: '999951' } };
+export const BehandlingErValgt: Story = {
+  args: {
+    valgtBehandlingUuid: '999951',
+    utvidEllerMinskBehandlingSupportIndexKnapp: utvidKnapp,
+  },
+};

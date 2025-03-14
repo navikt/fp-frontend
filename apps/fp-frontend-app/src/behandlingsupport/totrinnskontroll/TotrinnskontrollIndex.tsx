@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { type ReactElement, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -29,6 +29,7 @@ interface Props {
   valgtBehandlingUuid: string;
   beslutterFormData?: any;
   setBeslutterFormData: (data?: any) => void;
+  toggleVisUtvidetBehandlingSupportIndexKnapp: ReactElement;
 }
 
 /**
@@ -41,6 +42,7 @@ export const TotrinnskontrollIndex = ({
   valgtBehandlingUuid,
   beslutterFormData,
   setBeslutterFormData,
+  toggleVisUtvidetBehandlingSupportIndexKnapp,
 }: Props) => {
   const intl = useIntl();
   const [visBeslutterModal, setVisBeslutterModal] = useState(false);
@@ -96,6 +98,7 @@ export const TotrinnskontrollIndex = ({
         tekst={intl.formatMessage({
           id: erStatusFatterVedtak ? 'TotrinnskontrollIndex.Godkjenning' : 'TotrinnskontrollIndex.FraBeslutter',
         })}
+        toggleVisUtvidetBehandlingSupportIndexKnapp={toggleVisUtvidetBehandlingSupportIndexKnapp}
       >
         <TotrinnskontrollSakIndex
           behandling={valgtBehandling}

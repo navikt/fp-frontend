@@ -121,7 +121,7 @@ export type {
 } from './src/opptjeningTsType';
 export type { TilbakekrevingValg } from './src/tilbakekrevingValgTsType';
 export type { TotrinnskontrollAksjonspunkt, OpptjeningAktiviteter } from './src/totrinnskontrollAksjonspunktTsType';
-export type { Historikkinnslag, HistorikkInnslagDokumentLink } from './src/historikkinnslagTsType';
+export type { Historikkinnslag, HistorikkInnslagDokumentLink, Linje } from './src/historikkinnslagTsType';
 export type {
   ArbeidsgiverOpplysningerPerId,
   ArbeidsgiverOpplysningerWrapper,
@@ -171,5 +171,5 @@ export { SvpTilretteleggingFomKilde } from './src/fodselOgTilretteleggingTsType'
 export type { InfotrygdVedtak, Vedtak, VedtakArbeidsforhold, VedtakUtbetaling, Sak } from './src/infotrygdVedtakTsType';
 export type { Vilkarperiode } from './src/vilkarperiodeTsType';
 export type { ApiLink } from './src/apiLink';
-export type { Oppgave } from './src/oppgaveTsType.tsx'
+export type { Oppgave } from './src/oppgaveTsType.tsx';
 export type { OneOf } from './src/oneOf';

@@ -15,6 +15,7 @@ describe('TotrinnskontrollIndex', () => {
     render(<Default />);
 
     expect(await screen.findByText('Kontroller endrede opplysninger og faglige vurderinger')).toBeInTheDocument();
+    expect(screen.getByLabelText('Utvid historikk vindu')).toBeInTheDocument();
 
     const alleGodkjentRadios = screen.getAllByText('Godkjent');
     expect(alleGodkjentRadios).toHaveLength(7);

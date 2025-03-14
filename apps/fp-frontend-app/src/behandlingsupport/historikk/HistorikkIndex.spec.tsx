@@ -12,5 +12,6 @@ describe('HistorikkIndex', () => {
     render(<Default />);
     expect(await screen.findByText('Historikk')).toBeInTheDocument();
     expect(await screen.findByText('Filtrer på behandling')).toBeInTheDocument();
+    expect(screen.getByLabelText('Utvid historikk vindu')).toBeInTheDocument();
   });
 });

@@ -1,4 +1,5 @@
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
+import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
@@ -8,6 +9,7 @@ import { getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { FagsakRel, FagsakUrl, initFetchOptions, wrapUrl } from '../../data/fagsakApi';
+import { UtvidEllerMinskKnapp } from '../UtvidEllerMinskKnapp.tsx';
 import { DokumentIndex } from './DokumentIndex';
 
 import initFetchData from '../../../.storybook/testdata/initFetch.json';
@@ -16,6 +18,15 @@ import messages from '../../../i18n/nb_NO.json';
 const withIntl = getIntlDecorator(messages);
 
 const getHref = (rel: string) => wrapUrl(notEmpty(initFetchData.sakLinks.find(link => link.rel === rel)).href);
+
+const ToggleUtvidetHistorikkButton = () => {
+  return (
+    <UtvidEllerMinskKnapp
+      toggleVisUtvidetBehandlingSupportIndexPanel={action('button-click')}
+      visUtvidetBehandlingSupportIndexPanel={false}
+    />
+  );
+};
 
 const meta = {
   title: 'fagsak/DokumentIndex',
@@ -71,6 +82,7 @@ export const DetFinnesDokumenterPåSak: Story = {
   args: {
     behandlingUuid: '11212',
     behandlingVersjon: 1,
+    toggleVisUtvidetBehandlingSupportIndexKnapp: <ToggleUtvidetHistorikkButton />,
   },
 };
 
@@ -83,5 +95,7 @@ export const DetFinnesIngenDokumenterPåSak: Story = {
       ],
     },
   },
-  args: {},
+  args: {
+    toggleVisUtvidetBehandlingSupportIndexKnapp: <ToggleUtvidetHistorikkButton />,
+  },
 };

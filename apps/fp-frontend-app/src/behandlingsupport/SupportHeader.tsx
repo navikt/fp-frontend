@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import type { ReactElement, ReactNode } from 'react';
 import { useIntl } from 'react-intl';
 
 import { Heading, HStack, VStack } from '@navikt/ds-react';
@@ -13,9 +13,16 @@ type Props = {
   antall?: number;
   children: ReactNode;
   brukPadding?: boolean;
+  toggleVisUtvidetBehandlingSupportIndexKnapp: ReactElement;
 };
 
-export const SupportHeaderAndContent = ({ tekst, antall, children, brukPadding = true }: Props) => {
+export const SupportHeaderAndContent = ({
+  tekst,
+  antall,
+  children,
+  brukPadding = true,
+  toggleVisUtvidetBehandlingSupportIndexKnapp,
+}: Props) => {
   const intl = useIntl();
   const { addErrorMessage } = useRestApiErrorDispatcher();
 
@@ -23,7 +30,9 @@ export const SupportHeaderAndContent = ({ tekst, antall, children, brukPadding =
     <VStack gap="4">
       <div className={styles.header}>
         <HStack justify="space-between">
-          <Heading size="small">{tekst}</Heading>
+          <Heading size="small">
+            {tekst} {toggleVisUtvidetBehandlingSupportIndexKnapp}
+          </Heading>
           {!!antall && antall > 0 && <div className={styles.circle}>{antall}</div>}
         </HStack>
       </div>

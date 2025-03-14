@@ -1,3 +1,18 @@
 .panelPadding {
   padding: 20px;
 }
+
+/* hidden */
+.historikkPanelUtvid {
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* show */
+.historikkPanelMinsk {
+  opacity: 1;
+  transition: opacity 0.8s ease-in-out;
+}
+

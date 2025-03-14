@@ -1,8 +1,11 @@
-import { BodyLong, BodyShort, Box, type BoxProps, Detail, HStack, VStack } from '@navikt/ds-react';
+import { useState } from 'react';
+import { useIntl } from 'react-intl';
+
+import { BodyLong, BodyShort, Box, type BoxProps, Button, Detail, HStack, VStack } from '@navikt/ds-react';
 import { type Location } from 'history';
 
 import { HistorikkAktor, KodeverkType } from '@navikt/fp-kodeverk';
-import type { Historikkinnslag } from '@navikt/fp-types';
+import type { Historikkinnslag, Linje } from '@navikt/fp-types';
 
 import { Avatar } from './Avatar';
 import { HistorikkDokumentLenke } from './HistorikkDokumentLenke';
@@ -32,10 +35,25 @@ export const HistorikkInnslag = ({
   historikkInnslag: { aktør, opprettetTidspunkt, tittel, linjer, dokumenter, skjermlenke },
   saksnummer,
 }: Props) => {
+  const intl = useIntl();
   const rolleNavn = getKodeverknavn(aktør.type, KodeverkType.HISTORIKK_AKTOER);
 
-  const name = `${rolleNavn} ${aktør.ident || ''}`;
+  const name = `${rolleNavn} ${aktør.ident ?? ''}`;
   const timestamp = formatDateTime(opprettetTidspunkt);
+  const MAX_LINES = 2;
+  const MIN_LINES = 3;
+
+  const initialVisMer = linjer && linjer.length === 3;
+  const [visMer, setVisMer] = useState(initialVisMer);
+
+  const toggleVisMer = () => {
+    setVisMer(!visMer);
+  };
+
+  let linjerSomSkalVises: Linje[] = [];
+  if (linjer) {
+    linjerSomSkalVises = visMer || linjer.length === MIN_LINES ? linjer : linjer.slice(0, MAX_LINES);
+  }
 
   return (
     <HStack data-testid="historikkinnslag" wrap={false} gap="5" justify="end" align="center">
@@ -59,14 +77,21 @@ export const HistorikkInnslag = ({
 
           {linjer && linjer.length > 0 && (
             <div>
-              {linjer.map((linje, index) =>
+              {linjerSomSkalVises.map((linje, index) =>
                 linje.type === 'TEKST' ? (
-                  <BodyLong key={`tekstlinje-${index}`} size="medium">
+                  <BodyLong key={`${linje.tekst}-${index}`} size="medium">
                     {parseBoldText(linje.tekst)}
                   </BodyLong>
                 ) : (
-                  <br key={`linjeskift-${index}`} />
+                  <br key={`${linje.type}-${index}`} />
                 ),
+              )}
+              {linjer.length > MAX_LINES && linjer.length !== MIN_LINES && (
+                <Button variant="tertiary" size="small" onClick={toggleVisMer}>
+                  {visMer
+                    ? intl.formatMessage({ id: 'Historikkinnslag.VisMindre' })
+                    : intl.formatMessage({ id: 'Historikkinnslag.VisMer' })}
+                </Button>
               )}
             </div>
           )}

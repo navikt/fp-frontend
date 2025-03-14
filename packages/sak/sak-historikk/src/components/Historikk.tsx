@@ -1,3 +1,4 @@
+import type { ReactElement } from 'react';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useIntl } from 'react-intl';
 
@@ -21,6 +22,7 @@ interface Props {
   saksnummer: string;
   getBehandlingLocation: (behandlingUuid: string) => Location;
   createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location | undefined;
+  utvidEllerMinskBehandlingSupportIndexKnapp: ReactElement;
 }
 
 /**
@@ -37,6 +39,7 @@ export const Historikk = ({
   saksnummer,
   getBehandlingLocation,
   createLocationForSkjermlenke,
+  utvidEllerMinskBehandlingSupportIndexKnapp,
 }: Props) => {
   const intl = useIntl();
 
@@ -75,7 +78,10 @@ export const Historikk = ({
     <>
       <Box background="bg-subtle" borderColor="border-divider" borderWidth="0 0 2 0" padding="5">
         <HStack justify="space-between">
-          <Heading size="small">{intl.formatMessage({ id: 'History.Historikk' })}</Heading>
+          <Heading size="small">
+            {intl.formatMessage({ id: 'History.Historikk' })}
+            {utvidEllerMinskBehandlingSupportIndexKnapp}
+          </Heading>
           <HStack gap="8">
             {valgtBehandlingUuid && (
               <Checkbox size="small" onChange={() => setSkalSortertePaValgtBehandling(!skalSortertePaValgtBehandling)}>
@@ -89,8 +95,11 @@ export const Historikk = ({
       <div
         style={{ height: `calc(100vh - ${top}px)` }}
         className={styles.overflow}
-        //@ts-expect-error Fix denne
-        ref={el => el && setTop(el.getBoundingClientRect().top)}
+        ref={el => {
+          if (el) {
+            setTop(el.getBoundingClientRect().top);
+          }
+        }}
       >
         <VStack gap="2" padding="4">
           {filtrerteInnslag.map(historikkinnslag => {
