@@ -41,6 +41,11 @@ describe('<UttakDokumentasjonFaktaIndex>', () => {
     await waitFor(() => expect(screen.getByText('Oppdater').closest('button')).toBeDisabled());
 
     expect(screen.getByText('18.11.2022 – 03.12.2022')).toBeInTheDocument();
+    //Mors aktivitet tabell
+    expect(screen.getByText('40% Utdanning')).toBeInTheDocument();
+    expect(screen.getByText('Nei')).toBeInTheDocument();
+    expect(screen.getByText('60%')).toBeInTheDocument();
+    expect(screen.getByText('50%')).toBeInTheDocument();
     await userEvent.click(screen.getByLabelText('Godkjent - Mor jobber mindre enn 75%'));
     await userEvent.type(screen.getByLabelText('Hvor mange prosent jobber mor?'), '60');
     await userEvent.click(screen.getByText('Oppdater'));
@@ -61,6 +66,7 @@ describe('<UttakDokumentasjonFaktaIndex>', () => {
           type: UttakType.OVERFØRING,
           årsak: UttakÅrsak.SYKDOM_ANNEN_FORELDER,
           vurdering: UttakVurdering.GODKJENT,
+          aktivitetskravGrunnlag: [],
         },
         {
           fom: '2022-11-01',
@@ -69,6 +75,7 @@ describe('<UttakDokumentasjonFaktaIndex>', () => {
           type: UttakType.UTSETTELSE,
           årsak: UttakÅrsak.INNLEGGELSE_SØKER,
           vurdering: UttakVurdering.IKKE_GODKJENT,
+          aktivitetskravGrunnlag: [],
         },
         {
           fom: '2022-11-15',
@@ -77,6 +84,7 @@ describe('<UttakDokumentasjonFaktaIndex>', () => {
           type: UttakType.UTTAK,
           årsak: UttakÅrsak.TIDLIG_OPPSTART_FAR,
           vurdering: UttakVurdering.GODKJENT,
+          aktivitetskravGrunnlag: [],
         },
         {
           fom: '2022-11-18',
@@ -85,6 +93,24 @@ describe('<UttakDokumentasjonFaktaIndex>', () => {
           årsak: UttakÅrsak.AKTIVITETSKRAV_ARBEID,
           vurdering: UttakVurdering.GODKJENT,
           morsStillingsprosent: '60',
+          aktivitetskravGrunnlag: [
+            {
+              orgNummer: '123456789',
+              stillingsprosent: 60,
+              permisjon: {
+                prosent: 40,
+                type: 'UTDANNING',
+              },
+            },
+            {
+              orgNummer: '987654321',
+              stillingsprosent: 50,
+              permisjon: {
+                prosent: 0,
+                type: '-',
+              },
+            },
+          ],
         },
       ],
     });
@@ -130,6 +156,7 @@ describe('<UttakDokumentasjonFaktaIndex>', () => {
           type: 'UTTAK',
           vurdering: 'IKKE_GODKJENT',
           årsak: 'HV_ØVELSE',
+          aktivitetskravGrunnlag: [],
         },
       ],
     });

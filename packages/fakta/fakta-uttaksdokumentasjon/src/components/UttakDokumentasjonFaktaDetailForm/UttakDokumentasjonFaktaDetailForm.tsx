@@ -2,15 +2,16 @@ import { type ReactNode, useCallback, useState } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BodyShort, Button, HStack, Label, Link, ReadMore, VStack } from '@navikt/ds-react';
+import { BodyShort, Button, HStack, Label, Link, ReadMore, Table, VStack } from '@navikt/ds-react';
 import { Form, NumberField, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { maxValue, minValue, required } from '@navikt/ft-form-validators';
 import { calcDaysAndWeeks, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import { Boks } from '@navikt/fp-fakta-felles';
+import { KodeverkType } from '@navikt/fp-kodeverk';
 import { FOLKETRYGDLOVEN_KAP14_13_URL } from '@navikt/fp-konstanter';
-import type { DokumentasjonVurderingBehov } from '@navikt/fp-types';
+import { type AlleKodeverk, type DokumentasjonVurderingBehov } from '@navikt/fp-types';
 
 import { type FormValues, VurderingsAlternativ } from '../../types/FormValues';
 import { getFormatertPeriode, periodeErMerEnnEnDag } from '../../utils/periodeUtils';
@@ -30,14 +31,21 @@ const ReadMoreLink = (msg: ReactNode[]) => (
   </Link>
 );
 
+const HEADER_TEXT_CODES = [
+  'UttakDokumentasjonFaktaDetailForm.AktivitetskravGrunnlagArbeid',
+  'UttakDokumentasjonFaktaDetailForm.AktivitetskravGrunnlagStillingsprosent',
+  'UttakDokumentasjonFaktaDetailForm.AktivitetskravGrunnlagPermisjon',
+];
+
 interface Props {
   behov: DokumentasjonVurderingBehov;
   readOnly: boolean;
   submit: (dokBehov: { perioder: DokumentasjonVurderingBehov[] }) => void;
   cancel: () => void;
+  alleKodeverk: AlleKodeverk;
 }
 
-export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, submit }: Props) => {
+export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, submit, alleKodeverk }: Props) => {
   const intl = useIntl();
 
   const [valgtPeriodeIndex, setValgtPeriodeIndex] = useState<number | undefined>();
@@ -82,6 +90,7 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
 
   const handleSubmit = (formvalues: FormValues): void => submit(fraFormValues(formvalues));
 
+  const morsArbeid = behov.aktivitetskravGrunnlag.toSorted((a, b) => a.orgNummer.localeCompare(b.orgNummer));
   return (
     <Boks harBorderLeft={!behov.vurdering && fields.length === 1}>
       <Form formMethods={formMethods} onSubmit={handleSubmit}>
@@ -94,6 +103,51 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
                   onClick={() => setValgtPeriodeIndex(0)}
                 />
               </div>
+              {behov.aktivitetskravGrunnlag.length > 0 && (
+                <Table size="small">
+                  <Table.Header>
+                    <Table.Row>
+                      {HEADER_TEXT_CODES.map(headerId => (
+                        <Table.HeaderCell key={headerId} scope="col" textSize="small">
+                          <FormattedMessage id={headerId} />
+                        </Table.HeaderCell>
+                      ))}
+                      <Table.HeaderCell key="empty-header-cell" />
+                    </Table.Row>
+                  </Table.Header>
+
+                  <Table.Body>
+                    {morsArbeid.map(ag => {
+                      return (
+                        <Table.Row key={ag.orgNummer}>
+                          <Table.DataCell>{ag.orgNummer}</Table.DataCell>
+                          <Table.DataCell>
+                            <FormattedMessage
+                              id="UttakDokumentasjonFaktaDetailForm.AktivitetskravGrunnlagProsent"
+                              values={{ value: ag.stillingsprosent }}
+                            />
+                          </Table.DataCell>
+                          <Table.DataCell>
+                            {ag.permisjon.prosent > 0 ? (
+                              <FormattedMessage
+                                id="UttakDokumentasjonFaktaDetailForm.PermisjonsprosentJa"
+                                values={{
+                                  prosent: ag.permisjon.prosent,
+                                  type: alleKodeverk[KodeverkType.AKTIVITETSKRAV_PERMISJON_TYPE].find(
+                                    o => o.kode === ag.permisjon.type,
+                                  )?.navn,
+                                }}
+                              />
+                            ) : (
+                              <FormattedMessage id="UttakDokumentasjonFaktaDetailForm.PermisjonsprosentNei" />
+                            )}
+                          </Table.DataCell>
+                        </Table.Row>
+                      );
+                    })}
+                  </Table.Body>
+                </Table>
+              )}
               <RadioGroupPanel
                 name={`perioder.${0}.vurdering`}
                 label={<FormattedMessage id="UttakDokumentasjonFaktaDetailForm.Vurdering" />}

@@ -6,6 +6,7 @@ export enum UttakType {
 
 export enum UttakVurdering {
   GODKJENT = 'GODKJENT',
+  GODKJENT_AUTOMATISK = 'GODKJENT_AUTOMATISK',
   IKKE_GODKJENT = 'IKKE_GODKJENT',
   IKKE_DOKUMENTERT = 'IKKE_DOKUMENTERT',
 }
@@ -38,4 +39,16 @@ export type DokumentasjonVurderingBehov = Readonly<{
   årsak: UttakÅrsak;
   vurdering?: UttakVurdering | null;
   morsStillingsprosent?: number;
+  aktivitetskravGrunnlag: AktivitetskravGrunnlagArbeid[];
+}>;
+
+export type AktivitetskravGrunnlagArbeid = Readonly<{
+  orgNummer: string;
+  stillingsprosent: number;
+  permisjon: Permisjon;
+}>;
+
+export type Permisjon = Readonly<{
+  prosent: number;
+  type: string;
 }>;

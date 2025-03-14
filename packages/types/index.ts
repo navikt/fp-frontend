@@ -144,7 +144,10 @@ export type { Verge, OpprettVergeParams } from './src/vergeTsType';
 export type { ForhåndsvisMeldingParams } from './src/forhåndsvisMeldingParamsTsType';
 export type { ManueltArbeidsforhold } from './src/manueltArbeidsforholdTsType';
 export type { ManglendeInntektsmeldingVurdering } from './src/manglendeInntektsmeldingVurderingTsType';
-export type { DokumentasjonVurderingBehov } from './src/dokumentasjonVurderingBehovTsType';
+export type {
+  DokumentasjonVurderingBehov,
+  AktivitetskravGrunnlagArbeid,
+} from './src/dokumentasjonVurderingBehovTsType';
 export { UttakType, UttakVurdering, UttakÅrsak } from './src/dokumentasjonVurderingBehovTsType';
 export type {
   VilkarsVurdertePerioderWrapper,
@@ -171,5 +174,5 @@ export { SvpTilretteleggingFomKilde } from './src/fodselOgTilretteleggingTsType'
 export type { InfotrygdVedtak, Vedtak, VedtakArbeidsforhold, VedtakUtbetaling, Sak } from './src/infotrygdVedtakTsType';
 export type { Vilkarperiode } from './src/vilkarperiodeTsType';
 export type { ApiLink } from './src/apiLink';
-export type { Oppgave } from './src/oppgaveTsType.tsx'
+export type { Oppgave } from './src/oppgaveTsType.tsx';
 export type { OneOf } from './src/oneOf';
