@@ -45,5 +45,10 @@ export type DokumentasjonVurderingBehov = Readonly<{
 export type AktivitetskravGrunnlagArbeid = Readonly<{
   orgNummer: string;
   stillingsprosent: number;
-  permisjonsprosent: number;
+  permisjon: Permisjon;
+}>;
+
+export type Permisjon = Readonly<{
+  prosent: number;
+  type: string;
 }>;

@@ -42,7 +42,7 @@ describe('<UttakDokumentasjonFaktaIndex>', () => {
 
     expect(screen.getByText('18.11.2022 – 03.12.2022')).toBeInTheDocument();
     //Mors aktivitet tabell
-    expect(screen.getByText('Ja')).toBeInTheDocument();
+    expect(screen.getByText('40% Utdanning')).toBeInTheDocument();
     expect(screen.getByText('Nei')).toBeInTheDocument();
     expect(screen.getByText('60%')).toBeInTheDocument();
     expect(screen.getByText('50%')).toBeInTheDocument();
@@ -97,12 +97,18 @@ describe('<UttakDokumentasjonFaktaIndex>', () => {
             {
               orgNummer: '123456789',
               stillingsprosent: 60,
-              permisjonsprosent: 40,
+              permisjon: {
+                prosent: 40,
+                type: 'UTDANNING',
+              },
             },
             {
               orgNummer: '987654321',
               stillingsprosent: 50,
-              permisjonsprosent: 0,
+              permisjon: {
+                prosent: 0,
+                type: '-',
+              },
             },
           ],
         },

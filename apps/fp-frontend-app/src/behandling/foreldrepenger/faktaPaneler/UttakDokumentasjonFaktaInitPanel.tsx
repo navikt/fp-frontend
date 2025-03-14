@@ -34,6 +34,7 @@ export const UttakDokumentasjonFaktaInitPanel = () => {
         <UttakDokumentasjonFaktaIndex
           dokumentasjonVurderingBehov={dokumentasjonVurderingBehov}
           submittable={standardPanelProps.submittable}
+          alleKodeverk={standardPanelProps.alleKodeverk}
         />
       ) : (
         <LoadingPanel />

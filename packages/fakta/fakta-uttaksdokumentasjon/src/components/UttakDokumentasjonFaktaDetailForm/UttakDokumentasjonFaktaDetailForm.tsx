@@ -9,8 +9,9 @@ import { calcDaysAndWeeks, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import { Boks } from '@navikt/fp-fakta-felles';
+import { KodeverkType } from '@navikt/fp-kodeverk';
 import { FOLKETRYGDLOVEN_KAP14_13_URL } from '@navikt/fp-konstanter';
-import { type DokumentasjonVurderingBehov } from '@navikt/fp-types';
+import { type AlleKodeverk, type DokumentasjonVurderingBehov } from '@navikt/fp-types';
 
 import { type FormValues, VurderingsAlternativ } from '../../types/FormValues';
 import { getFormatertPeriode, periodeErMerEnnEnDag } from '../../utils/periodeUtils';
@@ -41,9 +42,10 @@ interface Props {
   readOnly: boolean;
   submit: (dokBehov: { perioder: DokumentasjonVurderingBehov[] }) => void;
   cancel: () => void;
+  alleKodeverk: AlleKodeverk;
 }
 
-export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, submit }: Props) => {
+export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, submit, alleKodeverk }: Props) => {
   const intl = useIntl();
 
   const [valgtPeriodeIndex, setValgtPeriodeIndex] = useState<number | undefined>();
@@ -117,7 +119,7 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
                   <Table.Body>
                     {morsArbeid.map(ag => {
                       return (
-                        <Table.Row key="orgNummer">
+                        <Table.Row key={ag.orgNummer}>
                           <Table.DataCell>{ag.orgNummer}</Table.DataCell>
                           <Table.DataCell>
                             <FormattedMessage
@@ -126,10 +128,18 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
                             />
                           </Table.DataCell>
                           <Table.DataCell>
-                            {ag.permisjonsprosent > 0 ? (
-                              <FormattedMessage id="UttakDokumentasjonFaktaDetailForm.Ja" />
+                            {ag.permisjon.prosent > 0 ? (
+                              <FormattedMessage
+                                id="UttakDokumentasjonFaktaDetailForm.PermisjonsprosentJa"
+                                values={{
+                                  prosent: ag.permisjon.prosent,
+                                  type: alleKodeverk[KodeverkType.AKTIVITETSKRAV_PERMISJON_TYPE].find(
+                                    o => o.kode === ag.permisjon.type,
+                                  )?.navn,
+                                }}
+                              />
                             ) : (
-                              <FormattedMessage id="UttakDokumentasjonFaktaDetailForm.Nei" />
+                              <FormattedMessage id="UttakDokumentasjonFaktaDetailForm.PermisjonsprosentNei" />
                             )}
                           </Table.DataCell>
                         </Table.Row>
