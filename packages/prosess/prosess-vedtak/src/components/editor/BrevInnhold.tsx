@@ -5,12 +5,7 @@ import { Alert, Button, HStack, VStack } from '@navikt/ds-react';
 
 import { usePanelDataContext } from '@navikt/fp-utils';
 
-import {
-  utledPrefiksInnhold,
-  utledSeksjonerSomKanRedigeres,
-  utledStiler,
-  utledSuffiksInnhold,
-} from './redigeringsUtils';
+import { utledReadonlyInnhold, utledStiler } from './redigeringsUtils';
 
 import styles from './brevInnhold.module.css';
 
@@ -34,23 +29,20 @@ export const BrevInnhold = ({
   const { isReadOnly } = usePanelDataContext();
 
   const brevStiler = utledStiler(htmlMal);
-
-  const seksjonerSomKanRedigeres = utledSeksjonerSomKanRedigeres(htmlMal);
-  const prefiksInnhold = utledPrefiksInnhold(seksjonerSomKanRedigeres);
-  const suffiksInnhold = utledSuffiksInnhold(seksjonerSomKanRedigeres);
+  const readonlyInnhold = utledReadonlyInnhold(htmlMal);
 
   return (
     <>
-      <div className={styles.papir}>
-        <div className={styles.nullstillCss}>
-          <div className="brev-wrapper">
-            <style>{` ${brevStiler} `}</style>
-            <div className={styles.ikkeRedigerbartInnhold} dangerouslySetInnerHTML={{ __html: prefiksInnhold }} />
-            <div id="content">
-              <div id={EDITOR_HOLDER_ID} className={styles.redigerbartInnhold} style={{ width: '100%' }} />
-            </div>
-            <div className={styles.ikkeRedigerbartInnhold} dangerouslySetInnerHTML={{ __html: suffiksInnhold }} />
+      <div className={styles.dokument}>
+        <div className="brev-wrapper">
+          <style>{` ${brevStiler} `}</style>
+          <div className={styles.logo} dangerouslySetInnerHTML={{ __html: readonlyInnhold.navLogo }} />
+          <div className={styles.header} dangerouslySetInnerHTML={{ __html: readonlyInnhold.header }} />
+          <div className={styles.header} dangerouslySetInnerHTML={{ __html: readonlyInnhold.red }} />
+          <div id="content">
+            <div id={EDITOR_HOLDER_ID} className={styles.redigerbartInnhold} />
           </div>
+          <div className={styles.footer} dangerouslySetInnerHTML={{ __html: readonlyInnhold.footer }} />
         </div>
       </div>
       <footer>

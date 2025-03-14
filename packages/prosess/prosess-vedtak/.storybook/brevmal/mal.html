@@ -3,98 +3,104 @@
     <meta charset="UTF-8" />
     <style>
       /* WARNING: Uses CSS 2.1 */
+
       * {
         font-family: 'Source Sans Pro', sans-serif !important;
         color: #000000;
         border-spacing: 0;
       }
+
+      @page {
+        size: 595px 842px;
+        margin: 64px 64px 74px 64px;
+
+        @bottom-right {
+          content: 'side ' counter(page) ' av ' counter(pages);
+          font-family: 'Source Sans Pro', sans-serif !important;
+          font-size: 9px;
+          line-height: 16px;
+          color: #555;
+          padding-bottom: 10mm;
+        }
+      }
+
       html {
         height: 100%;
       }
-      body {
-        padding: 10mm;
-        margin: 0;
-        position: relative;
+
+      #ny_nav_logo {
+        height: 16px;
+        width: auto;
       }
+
+      /* Content er alt under logo og til og med siste side, ikke hver enkel side. Se @page */
       #content {
-        padding-top: 20mm;
-        padding-bottom: 0;
-        margin: 1rem;
+        margin-top: 48px;
       }
-      #header {
-        margin-bottom: 0;
+
+      h1 {
+        font-size: 16px;
+        line-height: 20px;
+        font-weight: bold;
+        letter-spacing: 0.3px;
+        margin-top: 48px;
+        margin-bottom: 26px;
       }
-      #footer {
-        position: fixed;
-        margin-right: 5mm;
-        bottom: -19mm;
+
+      h2 {
+        font-size: 13px;
+        line-height: 16px;
+        font-weight: bold;
+        letter-spacing: 0.25px;
+        margin-top: 26px;
+        margin-bottom: 6px;
+      }
+
+      h3 {
+        font-size: 12px;
+        line-height: 16px;
+        font-weight: bold;
+        letter-spacing: 0.2px;
+        margin-top: 26px;
+        margin-bottom: 6px;
+      }
+
+      h4 {
+        font-size: 11px;
+        line-height: 16px;
+        font-weight: bold;
+        letter-spacing: 0.1px;
+        margin-top: 26px;
+        margin-bottom: 6px;
+      }
+
+      p,
+      li,
+      td,
+      th {
+        font-size: 11px;
+        line-height: 16px;
+        font-weight: normal;
+        margin-top: 0;
+      }
+
+      table {
         width: 100%;
-        height: 25mm;
-        text-align: right;
-        font-size: 10px;
       }
-      #nav_logo {
-        width: 30mm;
-        height: 23.1mm;
-        margin: auto;
-        padding: 0 0 10mm 0;
-        position: absolute;
-        right: 10mm;
-      }
-      #pagenumber:before {
-        content: counter(page);
-      }
-      #pagecount:before {
-        content: counter(pages);
-      }
+
       .block {
         width: 100%;
         margin-top: 0;
       }
+
       .inline {
         display: inline-block;
       }
-      h1 {
-        font-size: 25px;
-        font-weight: 700;
-      }
-      h2 {
-        font-size: 22px;
-        margin: 10mm 0 1.5mm 0;
-      }
-      h3 {
-        font-size: 18px;
-        margin: 10mm 0 1.5mm 0;
-      }
-      h5 {
-        margin-bottom: -2.5mm;
-      }
-      p {
-        font-size: 14px;
-        margin: 3mm 0 2mm 0;
-      }
-      tr {
-        font-size: 14px;
-      }
-      table {
-        width: 100%;
-      }
-      .td01 {
-        width: 110px;
-        font-size: 12px;
-      }
-      .td02 {
-        width: 150px;
-      }
-      .bold {
-        font-weight: 700;
-      }
+
       .new_page {
         page-break-before: always;
       }
-      li {
-        font-size: 14px;
-      }
+
       .draft_text {
         transform: rotate(45deg);
         transform-origin: right top;
@@ -106,78 +112,57 @@
       }
     </style>
   </head>
+
   <body>
-    <div id="header">
+    <div id="logo">
       <!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
-      <svg
-        xmlns:dc="http://purl.org/dc/elements/1.1/"
-        xmlns:cc="http://creativecommons.org/ns#"
-        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 704 443.10666"
-        height="444"
-        width="704"
-        xml:space="preserve"
-        id="nav_logo"
-        version="1.1"
-      >
-        <metadata id="metadata8">
-          <rdf:RDF>
-            <cc:Work rdf:about="">
-              <dc:format> image/svg+xml </dc:format>
-              <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-            </cc:Work>
-          </rdf:RDF>
-        </metadata>
-        <defs id="defs6"></defs>
-        <g transform="matrix(1.3333333,0,0,-1.3333333,0,443.10667)" id="g10">
-          <g transform="scale(0.1)" id="g12">
-            <path
-              id="path14"
-              style="fill: #cf181f; fill-opacity: 1; fill-rule: nonzero; stroke: none"
-              d="M 4126.87,1661.53 C 4126.87,743.93 3382.81,-0.0117188 2465,-0.0117188 1547.56,-0.0117188 803.555,743.93 803.555,1661.53 c 0,917.69 744.005,1661.73 1661.445,1661.73 917.81,0 1661.87,-744.04 1661.87,-1661.73"
-            ></path>
-            <path
-              id="path16"
-              style="fill: #cf181f; fill-opacity: 1; fill-rule: nonzero; stroke: none"
-              d="M 0,935.949 339.617,1776.57 H 665.938 L 326.762,935.949 H 0"
-            ></path>
-            <path
-              id="path18"
-              style="fill: #cf181f; fill-opacity: 1; fill-rule: nonzero; stroke: none"
-              d="m 4190.89,935.949 335.29,840.621 h 177.94 l -335.3,-840.621 h -177.93"
-            ></path>
-            <path
-              id="path20"
-              style="fill: #cf181f; fill-opacity: 1; fill-rule: nonzero; stroke: none"
-              d="m 4850.25,935.949 335.24,840.621 H 5280 L 4944.7,935.949 h -94.45"
-            ></path>
-            <path
-              id="path22"
-              style="fill: #ffffff; fill-opacity: 1; fill-rule: nonzero; stroke: none"
-              d="m 2614.38,1239.79 h -171.15 c -68.09,0 -123.51,55.18 -123.51,123.34 0,68.15 55.42,123.58 123.51,123.58 h 47.87 c 67.98,0 123.28,-55.43 123.28,-123.58 z m 1267.96,536.78 h -295.37 c 0,0 -20.31,0 -27.5,-18 l -163.49,-500.36 -163.32,500.36 c -7.22,18 -27.72,18 -27.72,18 H 2637 c -12.3,0 -22.62,-10.32 -22.62,-22.56 v -169.88 c 0,134.79 -143.42,192.44 -227.4,192.44 -188.15,0 -314.06,-123.93 -353.23,-312.24 -2.17,124.88 -12.54,169.64 -46.18,215.52 -15.5,22.45 -37.8,41.41 -62.15,57.01 -50.1,29.34 -95.08,39.71 -191.8,39.71 h -113.49 c 0,0 -20.53,0 -27.78,-18 v 0 l -103.3,-255.91 v 251.35 c 0,12.24 -10.19,22.56 -22.48,22.56 h -262.69 c 0,0 -20.29,0 -27.66,-18 l -107.39,-266.23 c 0,0 -10.74,-26.62 13.81,-26.62 h 100.95 V 958.559 c 0,-12.59 9.9,-22.61 22.56,-22.61 h 260.42 c 12.29,0 22.48,10.02 22.48,22.61 v 507.161 h 101.5 c 58.26,0 70.61,-1.57 93.28,-12.13 13.63,-5.16 25.92,-15.48 32.64,-27.61 13.74,-25.84 17.15,-56.87 17.15,-148.46 V 958.559 c 0,-12.59 10.15,-22.61 22.62,-22.61 h 249.62 c 0,0 28.21,0 39.33,27.891 l 55.34,136.77 c 73.53,-103.051 194.59,-164.661 345.04,-164.661 h 32.89 c 0,0 28.36,0 39.58,27.891 l 96.34,238.64 V 958.559 c 0,-12.59 10.32,-22.61 22.62,-22.61 h 254.76 c 0,0 28.13,0 39.4,27.891 0,0 101.98,253.02 102.3,254.96 h 0.17 v 0 c 3.91,20.99 -22.67,20.99 -22.67,20.99 h -90.92 v 434.14 l 286.07,-710.09 c 11.19,-27.891 39.33,-27.891 39.33,-27.891 h 301.04 c 0,0 28.34,0 39.48,27.891 l 317.19,785.49 c 11.03,27.24 -20.81,27.24 -20.81,27.24"
-            ></path>
-          </g>
-        </g>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="#cf181f" viewBox="0 0 64 20" id="ny_nav_logo">
+        <path
+          fill-rule="evenodd"
+          d="M63.4793 0.520905H56.8203C56.8203 0.520905 56.3613 0.520905 56.199 0.926432L52.5139 12.2133L48.8318 0.926432C48.6695 0.520905 48.2079 0.520905 48.2079 0.520905H35.4043C35.1271 0.520905 34.8948 0.752508 34.8948 1.02804V4.86102C34.8948 1.82046 31.6611 0.520905 29.7675 0.520905C25.5271 0.520905 22.6886 3.31523 21.8047 7.5635C21.7568 4.74522 21.5227 3.7354 20.7639 2.70117C20.4154 2.19448 19.9116 1.76854 19.3631 1.41626C18.2336 0.754282 17.2194 0.520905 15.0398 0.520905H12.4806C12.4806 0.520905 12.018 0.520905 11.8548 0.926432L9.52624 6.70009V1.02804C9.52624 0.752508 9.29564 0.520905 9.01892 0.520905H3.09697C3.09697 0.520905 2.63976 0.520905 2.47346 0.926432L0.0526208 6.92992C0.0526208 6.92992 -0.189065 7.53023 0.363486 7.53023H2.63976V18.9702C2.63976 19.2541 2.86327 19.4791 3.14841 19.4791H9.01892C9.29564 19.4791 9.52624 19.2541 9.52624 18.9702V7.53023H11.8145C13.1276 7.53023 13.4056 7.56616 13.9165 7.80442C14.2242 7.92067 14.5014 8.15582 14.6526 8.42691C14.9622 9.00991 15.0398 9.71005 15.0398 11.7745V18.9702C15.0398 19.2541 15.2677 19.4791 15.5493 19.4791H21.1759C21.1759 19.4791 21.8118 19.4791 22.0633 18.8508L23.3103 15.7672C24.9684 18.0908 27.6974 19.4791 31.089 19.4791H31.83C31.83 19.4791 32.4699 19.4791 32.7231 18.8508L34.8948 13.4698V18.9702C34.8948 19.2541 35.1271 19.4791 35.4043 19.4791H41.148C41.148 19.4791 41.7817 19.4791 42.0362 18.8508C42.0362 18.8508 44.3334 13.1446 44.3422 13.1016H44.3458C44.434 12.6268 43.8345 12.6268 43.8345 12.6268H41.7844V2.8356L48.2345 18.8508C48.4864 19.4791 49.1214 19.4791 49.1214 19.4791H55.9068C55.9068 19.4791 56.5453 19.4791 56.7972 18.8508L63.948 1.13496C64.1955 0.520905 63.4793 0.520905 63.4793 0.520905ZM34.8941 12.6268H31.036C29.5003 12.6268 28.251 11.3827 28.251 9.84442C28.251 8.30883 29.5003 7.05675 31.036 7.05675H32.1149C33.6466 7.05675 34.8941 8.30883 34.8941 9.84442V12.6268Z"
+          fill="#cf181f"
+        ></path>
       </svg>
     </div>
     <div id="content">
-      <p align="right">Dato: 10. mars 2025</p>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <h1 data-editable="redigerbart-innhold-header">Nav har innvilget søknaden din om 100 prosent foreldrepenger</h1>
-      <p style="color: gray">
-        Saksnummer i Nav: 1 <br />
-        Navn: SIGVE BOXER <br />
-        Fødselsnummer: 274284 49784 <br />
-      </p>
-      <div data-editable="redigerbart-innhold-body">
+      <div id="header">
+        <table style="color: gray; width: 100%; border-collapse: collapse">
+          <tbody>
+            <tr>
+              <td style="text-align: left; width: 150px">Navn:</td>
+              <td style="text-align: left">ØISTEIN SALAMANDER</td>
+              <td style="text-align: left"></td>
+              <!-- Empty column -->
+              <td></td>
+              <!-- Keeping alignment -->
+            </tr>
+            <tr>
+              <td style="text-align: left; width: 150px">Fødselsnummer:</td>
+              <td style="text-align: left">284486 31577</td>
+              <td></td>
+              <!-- Empty column -->
+              <td></td>
+              <!-- Keeping alignment -->
+            </tr>
+            <tr>
+              <td style="text-align: left; width: 150px">Saksnummer:</td>
+              <td style="text-align: left">1</td>
+              <td></td>
+              <!-- Empty column -->
+              <td style="text-align: right">13. mars 2025</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!--
+innhold i denne div'en definerer hva som kan redigeres via frontend.
+NB: Tagg attributter vil ikke bli med tilbake fra frontend.
+-->
+      <div data-editable="data-editable">
+        <h1>Nav har innvilget søknaden din om 100 prosent foreldrepenger</h1>
         <p>
-          Du får 1&nbsp;846 kroner per dag før skatt fra og med 2. april 2025. Dette er i gjennomsnitt 39&nbsp;996
-          kroner i måneden. Den siste dagen du får foreldrepenger er 13. mai 2025.
+          Du får 1 846 kroner per dag før skatt fra og med 7. april 2025. Dette er i gjennomsnitt 39 996 kroner i
+          måneden. Den siste dagen du får foreldrepenger er 16. mai 2025.
         </p>
         <p>
           Foreldrepengene blir utbetalt for alle dager, unntatt lørdag og søndag. Fordi det ikke er like mange dager i
@@ -193,11 +178,10 @@
           barnet fyller tre år eller innen en ny foreldrepengeperiode for et nytt barn starter.
         </p>
         <p>Vedtaket er gjort etter folketrygdloven § 14-12.</p>
-        <br />
-        <h5>Inntekt vi har brukt i beregningen</h5>
+        <h2>Inntekt vi har brukt i beregningen</h2>
         <p>
-          Inntekten din hos NAV KLAGEINSTANS MIDT-NORGE er 40&nbsp;000 kroner i måneden. Arbeidsgiveren din har gitt oss
-          disse opplysningene.
+          Inntekten din hos NAV FAMILIE- OG PENSJONSYTELSER OSLO er 40 000 kroner i måneden. Arbeidsgiveren din har gitt
+          oss disse opplysningene.
         </p>
         <p>
           Dette er gjennomsnittet av inntekten din fra de siste tre månedene. Hvis du nettopp har begynt å arbeide,
@@ -205,35 +189,36 @@
           skjedde.
         </p>
         <p>Beregningen er gjort etter folketrygdloven §§ 14-7 og 8-30.</p>
-        <br />
-        <h5>Du må melde fra om endringer</h5>
+        <h2>Du må melde fra om endringer</h2>
         <p>
           Dersom det skjer endringer som kan ha betydning for stønaden du får utbetalt, må du straks melde fra til Nav.
-          Du finner mer informasjon på <a href="https://nav.no/rettogplikt">nav.no/rettogplikt</a>. <br /><br />
+          Du finner mer informasjon på <a href="https://nav.no/rettogplikt">nav.no/rettogplikt</a>.
         </p>
-        <h5>Du har rett til å klage</h5>
+        <h2>Du har rett til å klage</h2>
         <p>
           Du kan klage innen 6 uker fra den datoen du mottok vedtaket. Du finner skjema og informasjon på
-          <a href="https://nav.no/klage">nav.no/klage</a>. <br /><br />
+          <a href="https://nav.no/klage">nav.no/klage</a>.
         </p>
       </div>
-      <h5>Du har rett til innsyn</h5>
-      <p>
-        For å se dokumentene i saken din, logg inn på
-        <a href="https://foreldrepenger.nav.no/">foreldrepenger.nav.no</a>. <br /><br />
-      </p>
-      <div style="break-inside: avoid; page-break-inside: avoid">
-        <h5>Har du spørsmål?</h5>
-        <p>Du finner mer informasjon på <a href="https://nav.no/barn">nav.no/barn</a>.</p>
-        <p>På <a href="https://nav.no/kontakt">nav.no/kontakt</a> kan du chatte eller skrive til oss.</p>
+      <div id="footer">
+        <h2>Du har rett til innsyn</h2>
         <p>
-          Hvis du ikke finner svar på nav.no kan du ringe oss på telefon 55 55 33 33, hverdager 09.00-15.00.
-          <br /><br /><br />
-          Med vennlig hilsen <br />
-          Nav Familie- og pensjonsytelser
+          For å se dokumentene i saken din, logg inn på
+          <a href="https://foreldrepenger.nav.no/">foreldrepenger.nav.no</a>.
         </p>
+        <div style="break-inside: avoid; page-break-inside: avoid">
+          <h2>Har du spørsmål?</h2>
+          <p>Du finner mer informasjon på <a href="https://nav.no/barn">nav.no/barn</a>.</p>
+          <p>På <a href="https://nav.no/kontakt">nav.no/kontakt</a> kan du chatte eller skrive til oss.</p>
+          <p>
+            Hvis du ikke finner svar på nav.no kan du ringe oss på telefon 55 55 33 33, hverdager 09.00-15.00.
+            <br /><br /><br />
+            Med vennlig hilsen <br />
+            Nav Familie- og pensjonsytelser
+          </p>
+        </div>
       </div>
     </div>
-    <div id="footer">Side <span id="pagenumber"></span> av <span id="pagecount"></span></div>
+    <!-- sidetall i footers vises i .css fil. Dokgen støtter ikke tom fil så beholder denne tom -->
   </body>
 </html>

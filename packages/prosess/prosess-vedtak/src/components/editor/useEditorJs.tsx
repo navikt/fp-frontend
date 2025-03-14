@@ -26,6 +26,7 @@ export const useEditorJs = (
   useEffect(() => {
     if (!ref.current) {
       const editor = new EditorJS({
+        minHeight: 50,
         holder: editorHolderId,
         onReady: async () => {
           ref.current = editor;
