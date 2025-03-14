@@ -53,13 +53,13 @@
     "@testing-library/user-event": "14.6.1",
     "@types/lodash.debounce": "4.0.9",
     "cross-env": "7.0.3",
-    "eslint": "9.21.0",
+    "eslint": "9.22.0",
     "msw": "2.7.3",
     "msw-storybook-addon": "^2.0.4",
     "storybook": "8.6.4",
     "stylelint": "16.15.0",
     "typescript": "5.8.2",
-    "vite": "6.2.1",
+    "vite": "6.2.2",
     "vitest": "3.0.8"
   }
 }
