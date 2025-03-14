@@ -6,7 +6,7 @@ import { Datepicker, Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML, ArrowBox } from '@navikt/ft-ui-komponenter';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import {
   AksjonspunktKode,
@@ -49,7 +49,7 @@ const getDefaultValues = (
 ): FormValues => ({
   mottattDato: innsyn?.innsynMottattDato,
   innsynResultatType: innsyn?.innsynResultatType,
-  fristDato: fristBehandlingPåVent ?? moment().add(3, 'days').format(ISO_DATE_FORMAT),
+  fristDato: fristBehandlingPåVent ?? dayjs().add(3, 'days').format(ISO_DATE_FORMAT),
   sattPaVent: aksjonspunkter[0].status === AksjonspunktStatus.OPPRETTET ? undefined : !!fristBehandlingPåVent,
   ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
   ...hentDokumenterMedNavnOgFikkInnsyn(innsyn?.dokumenter || []),

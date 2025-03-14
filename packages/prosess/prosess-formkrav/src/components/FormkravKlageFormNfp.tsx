@@ -7,7 +7,7 @@ import { Form, RadioGroupPanel, SelectField, TextAreaField } from '@navikt/ft-fo
 import { hasValidText, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { DATE_TIME_FORMAT, formaterFritekst } from '@navikt/ft-utils';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import { AksjonspunktKode, getKodeverknavnFn, KodeverkType } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
@@ -42,10 +42,10 @@ const getKlagBareVedtak = (
   ];
   return klagBareVedtak.concat(
     [...avsluttedeBehandlinger]
-      .sort((b1, b2) => moment(b1.avsluttet).diff(moment(b2.avsluttet)))
+      .sort((b1, b2) => dayjs(b1.avsluttet).diff(dayjs(b2.avsluttet)))
       .map(behandling => (
         <option key={behandling.uuid} value={`${behandling.uuid}`}>
-          {`${getKodeverknavn(behandling.type, KodeverkType.BEHANDLING_TYPE)} ${moment(behandling.avsluttet).format(
+          {`${getKodeverknavn(behandling.type, KodeverkType.BEHANDLING_TYPE)} ${dayjs(behandling.avsluttet).format(
             DATE_TIME_FORMAT,
           )}`}
         </option>

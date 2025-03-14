@@ -2,7 +2,7 @@ import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { composeStories } from '@storybook/react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import * as stories from './VarselOmRevurderingProsessIndex.stories';
 
@@ -77,7 +77,7 @@ describe('<VarselOmRevurderingProsessIndex>', () => {
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
       begrunnelse: 'Dette er en begrunnelse',
-      frist: moment().add(28, 'days').format(ISO_DATE_FORMAT),
+      frist: dayjs().add(28, 'days').format(ISO_DATE_FORMAT),
       fritekst: 'Dette er en fritekst',
       kode: '5026',
       sendVarsel: true,

@@ -4,7 +4,7 @@ import { createIntl } from '@navikt/ft-utils';
 
 import type { KodeverkMedNavn } from '@navikt/fp-types';
 
-import { type FormValues,SettPaVentModal } from './components/SettPaVentModal';
+import { type FormValues, SettPaVentModal } from './components/SettPaVentModal';
 
 import messages from '../i18n/nb_NO.json';
 

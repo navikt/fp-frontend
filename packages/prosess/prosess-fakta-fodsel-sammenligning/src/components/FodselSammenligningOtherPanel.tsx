@@ -2,11 +2,11 @@ import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Heading, HStack, Label, VStack } from '@navikt/ds-react';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import type { Soknad } from '@navikt/fp-types';
 
-const formatDate = (date: string): string => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
+const formatDate = (date: string): string => (date ? dayjs(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
 
 interface Props {
   soknad: Soknad;

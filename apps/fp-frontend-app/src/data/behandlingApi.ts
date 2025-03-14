@@ -1,4 +1,4 @@
-import type { FeilutbetalingÅrsak,FeilutbetalingFakta } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
+import type { FeilutbetalingÅrsak, FeilutbetalingFakta } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
 import type {
   DetaljerteFeilutbetalingsperioder,
   FeilutbetalingPerioderWrapper,
