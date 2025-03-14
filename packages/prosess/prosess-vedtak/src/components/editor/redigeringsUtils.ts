@@ -38,34 +38,22 @@ export const utledStiler = (html: string) => {
   return generate(styleAst);
 };
 
-export const utledSeksjonerSomKanRedigeres = (html: string) => {
+export const utledReadonlyInnhold = (html: string) => {
+  // Bruker application/xhtml+xml som datatype, da backend bruker en xhtml parser som
+  // ikke støtter feks. <br> som ikke er self-closing (<br/>)
   const heleBrevet = new DOMParser().parseFromString(html, 'application/xhtml+xml');
-  return Array.from(heleBrevet.querySelectorAll('body > *, section > *'));
+  const navLogo = heleBrevet.getElementById('logo')?.innerHTML ?? '';
+  const header = heleBrevet.getElementById('header')?.innerHTML ?? '';
+  const footer = heleBrevet.getElementById('footer')?.innerHTML ?? '';
+  const red = heleBrevet.querySelector('[data-editable]')?.innerHTML;
+  return { navLogo, header, footer, red };
 };
-
-export const utledPrefiksInnhold = (seksjoner: Element[]) => htmlForRedigerbartFelt(seksjoner).join('');
-
-export const utledSuffiksInnhold = (seksjoner: Element[]) =>
-  htmlForRedigerbartFelt(seksjoner.toReversed()).toReversed().join('');
 
 export const utledRedigerbartInnhold = (html: string) => {
   // Bruker application/xhtml+xml som datatype, da backend bruker en xhtml parser som
   // ikke støtter feks. <br> som ikke er self-closing (<br/>)
   const heleBrevet = new DOMParser().parseFromString(html, 'application/xhtml+xml');
-  return heleBrevet?.querySelector('[data-editable]')?.innerHTML;
-};
-
-const htmlForRedigerbartFelt = (elementer: Element[]) => {
-  let funnetRedigerbartInnhold = false;
-  const prefiks = new Array<string>();
-  elementer.forEach(el => {
-    if (el.hasAttribute('data-editable')) {
-      funnetRedigerbartInnhold = true;
-    } else if (!funnetRedigerbartInnhold && !el.hasAttribute('data-hidden')) {
-      prefiks.push(el.outerHTML);
-    }
-  });
-  return prefiks;
+  return heleBrevet.querySelector('[data-editable]')?.innerHTML;
 };
 
 export const erRedigertHtmlGyldig = (html: string) => {
