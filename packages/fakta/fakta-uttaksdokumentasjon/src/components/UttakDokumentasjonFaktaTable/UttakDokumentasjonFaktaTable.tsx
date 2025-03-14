@@ -36,7 +36,6 @@ interface Props {
   oppdaterDokBehov: (dokBehov: DokumentasjonVurderingBehov[]) => void;
   readOnly: boolean;
   setDirty: (isDirty: boolean) => void;
-  harAksjonspunkt: boolean;
 }
 
 export const UttakDokumentasjonFaktaTable = ({
@@ -44,7 +43,6 @@ export const UttakDokumentasjonFaktaTable = ({
   oppdaterDokBehov,
   readOnly,
   setDirty,
-  harAksjonspunkt,
 }: Props) => {
   const [valgtDokBehovFomDatoer, setValgtDokBehovFomDatoer] = useState<string[]>([]);
 
@@ -117,35 +115,32 @@ export const UttakDokumentasjonFaktaTable = ({
             </>
           );
 
-          if (harAksjonspunkt && (!readOnly || !behov.vurdering)) {
-            return (
-              <Table.ExpandableRow
-                key={behov.fom + behov.tom}
-                open={valgtDokBehovFomDatoer.includes(behov.fom)}
-                onOpenChange={() => velgDokBehovFomDato(behov.fom)}
-                expandOnRowClick
-                shadeOnHover
-                togglePlacement="right"
-                className={styles.expansionContentOuter}
-                content={
-                  valgtDokBehovFomDatoer.includes(behov.fom) && (
-                    <div className={styles.expansionContentInner}>
-                      <UttakDokumentasjonFaktaDetailForm
-                        key={behov.fom}
-                        behov={behov}
-                        readOnly={readOnly}
-                        submit={oppdaterPeriode}
-                        cancel={() => velgDokBehovFomDato(behov.fom)}
-                      />
-                    </div>
-                  )
-                }
-              >
-                {kolonner}
-              </Table.ExpandableRow>
-            );
-          }
-          return <Table.Row key={behov.fom + behov.tom}>{kolonner}</Table.Row>;
+          return (
+            <Table.ExpandableRow
+              key={behov.fom + behov.tom}
+              open={valgtDokBehovFomDatoer.includes(behov.fom)}
+              onOpenChange={() => velgDokBehovFomDato(behov.fom)}
+              expandOnRowClick
+              shadeOnHover
+              togglePlacement="right"
+              className={styles.expansionContentOuter}
+              content={
+                valgtDokBehovFomDatoer.includes(behov.fom) && (
+                  <div className={styles.expansionContentInner}>
+                    <UttakDokumentasjonFaktaDetailForm
+                      key={behov.fom}
+                      behov={behov}
+                      readOnly={readOnly}
+                      submit={oppdaterPeriode}
+                      cancel={() => velgDokBehovFomDato(behov.fom)}
+                    />
+                  </div>
+                )
+              }
+            >
+              {kolonner}
+            </Table.ExpandableRow>
+          );
         })}
       </Table.Body>
     </Table>

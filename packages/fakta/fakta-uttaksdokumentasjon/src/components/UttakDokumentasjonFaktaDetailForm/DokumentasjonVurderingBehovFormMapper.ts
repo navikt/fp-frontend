@@ -28,6 +28,7 @@ function mapUttakVurderingTilVurderingsAlternativ(
 ): VurderingsAlternativ {
   const vurdering = dokumentasjonVurderingBehov.vurdering!;
   switch (vurdering) {
+    case UttakVurdering.GODKJENT_AUTOMATISK:
     case UttakVurdering.GODKJENT: {
       if (erUttaksperiodeMedAktivitetskravArbeid(dokumentasjonVurderingBehov.type, dokumentasjonVurderingBehov.årsak)) {
         return dokumentasjonVurderingBehov.morsStillingsprosent
@@ -61,7 +62,10 @@ export const tilFormValues = (value: DokumentasjonVurderingBehov): FormValues =>
   perioder: [
     {
       ...value,
-      vurdering: value.vurdering ? mapUttakVurderingTilVurderingsAlternativ(value) : undefined,
+      vurdering:
+        value.vurdering && value.vurdering !== UttakVurdering.GODKJENT_AUTOMATISK
+          ? mapUttakVurderingTilVurderingsAlternativ(value)
+          : undefined,
       morsStillingsprosent: erUttaksperiodeMedAktivitetskravArbeid(value.type, value.årsak)
         ? value.morsStillingsprosent
         : undefined,
