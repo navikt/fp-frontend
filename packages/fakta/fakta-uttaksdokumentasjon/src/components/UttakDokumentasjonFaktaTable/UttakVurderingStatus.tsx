@@ -48,6 +48,13 @@ export const UttakVurderingStatus = ({ vurdering, morsStillingsprosent }: Props)
           formattedMessageId="UttakDokumentasjonFaktaTable.ManglerDok"
         />
       );
+    case UttakVurdering.GODKJENT_AUTOMATISK:
+      return (
+        <IconLabel
+          icon={<CheckmarkCircleFillIcon color="var(--a-icon-success)" />}
+          formattedMessageId="UttakDokumentasjonFaktaTable.GodkjentAutomatisk"
+        />
+      );
     default:
       return assertUnreachable(vurdering);
   }

@@ -144,7 +144,10 @@ export type { Verge, OpprettVergeParams } from './src/vergeTsType';
 export type { ForhåndsvisMeldingParams } from './src/forhåndsvisMeldingParamsTsType';
 export type { ManueltArbeidsforhold } from './src/manueltArbeidsforholdTsType';
 export type { ManglendeInntektsmeldingVurdering } from './src/manglendeInntektsmeldingVurderingTsType';
-export type { DokumentasjonVurderingBehov } from './src/dokumentasjonVurderingBehovTsType';
+export type {
+  DokumentasjonVurderingBehov,
+  AktivitetskravGrunnlagArbeid,
+} from './src/dokumentasjonVurderingBehovTsType';
 export { UttakType, UttakVurdering, UttakÅrsak } from './src/dokumentasjonVurderingBehovTsType';
 export type {
   VilkarsVurdertePerioderWrapper,
