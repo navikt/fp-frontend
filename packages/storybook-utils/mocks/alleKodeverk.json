@@ -7205,5 +7205,17 @@
       "kodeverk": "FAGSAK_MARKERING",
       "navn": "Praksis utsettelse"
     }
+  ],
+  "AktivitetskravPermisjonType": [
+    {
+      "kode": "UTDANNING",
+      "kodeverk": "AKTIVITETSKRAV_PERMISJON_TYPE",
+      "navn": "Utdanning"
+    },
+    {
+      "kode": "-",
+      "kodeverk": "AKTIVITETSKRAV_PERMISJON_TYPE",
+      "navn": "Ikke definert"
+    }
   ]
 }

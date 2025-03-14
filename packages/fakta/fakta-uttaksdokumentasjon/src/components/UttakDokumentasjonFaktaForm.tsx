@@ -7,7 +7,7 @@ import { Form } from '@navikt/ft-form-hooks';
 
 import { FaktaBegrunnelseTextField } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
-import type { DokumentasjonVurderingBehov } from '@navikt/fp-types';
+import type { AlleKodeverk, DokumentasjonVurderingBehov } from '@navikt/fp-types';
 import type { VurderDokumentasjonAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
@@ -16,9 +16,10 @@ import { UttakDokumentasjonFaktaTable } from './UttakDokumentasjonFaktaTable/Utt
 interface Props {
   dokumentasjonVurderingBehov: DokumentasjonVurderingBehov[];
   submittable: boolean;
+  alleKodeverk: AlleKodeverk;
 }
 
-export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov, submittable }: Props) => {
+export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov, submittable, alleKodeverk }: Props) => {
   const intl = useIntl();
 
   const { submitCallback, aksjonspunkterForPanel, isReadOnly } = usePanelDataContext<VurderDokumentasjonAp>();
@@ -82,6 +83,7 @@ export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov, submi
         oppdaterDokBehov={setDokBehov}
         setDirty={setIsDirty}
         readOnly={readOnly}
+        alleKodeverk={alleKodeverk}
       />
       <Form formMethods={formMethods} onSubmit={(values: { begrunnelse: string }) => bekreft(values.begrunnelse)}>
         <VStack gap="4">

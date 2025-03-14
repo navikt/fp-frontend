@@ -3,7 +3,7 @@ import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { alleKodeverk, type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import {
   type AktivitetskravGrunnlagArbeid,
   type DokumentasjonVurderingBehov,
@@ -22,12 +22,18 @@ const aktivitetskravGrunnlagListe = [
   {
     orgNummer: '123456789',
     stillingsprosent: 60,
-    permisjonsprosent: 40,
+    permisjon: {
+      prosent: 40,
+      type: 'UTDANNING',
+    },
   },
   {
     orgNummer: '987654321',
     stillingsprosent: 50,
-    permisjonsprosent: 0,
+    permisjon: {
+      prosent: 0,
+      type: '-',
+    },
   },
 ] as AktivitetskravGrunnlagArbeid[];
 
@@ -73,7 +79,10 @@ const automatiskAvklartBehovListe = [
       {
         orgNummer: '123456789',
         stillingsprosent: 100,
-        permisjonsprosent: 0,
+        permisjon: {
+          prosent: 0,
+          type: '-',
+        },
       },
     ],
   },
@@ -101,6 +110,7 @@ export const AksjonspunktMedUavklartePerioder: Story = {
     ],
     dokumentasjonVurderingBehov: opprettetDokumentasjonVurderingBehovListe,
     submittable: true,
+    alleKodeverk: alleKodeverk as any,
   },
 };
 
@@ -109,6 +119,7 @@ export const ReadonlyAutomatiskAvklartPeriodeAAReg: Story = {
     aksjonspunkterForPanel: [],
     dokumentasjonVurderingBehov: automatiskAvklartBehovListe,
     submittable: true,
+    alleKodeverk: alleKodeverk as any,
   },
 };
 
@@ -161,6 +172,7 @@ export const AksjonspunktSomErBekreftetOgBehandlingAvsluttet: Story = {
     dokumentasjonVurderingBehov: utfortDokumentasjonVurderingBehovListe,
     isReadOnly: true,
     submittable: false,
+    alleKodeverk: alleKodeverk as any,
   },
 };
 
@@ -185,6 +197,7 @@ export const AksjonspunktErBekreftetMenBehandlingErÅpen: Story = {
       },
     ],
     submittable: true,
+    alleKodeverk: alleKodeverk as any,
   },
 };
 
@@ -193,5 +206,6 @@ export const UavklartePerioderMenIkkeAksjonspunktEnnå: Story = {
     aksjonspunkterForPanel: [],
     dokumentasjonVurderingBehov: opprettetDokumentasjonVurderingBehovListe,
     submittable: true,
+    alleKodeverk: alleKodeverk as any,
   },
 };

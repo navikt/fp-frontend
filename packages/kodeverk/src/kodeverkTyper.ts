@@ -57,4 +57,5 @@ export enum KodeverkType {
   ADRESSE_TYPE = 'AdresseType',
   NATURAL_YTELSE_TYPE = 'NaturalYtelseType',
   OPPGAVE_TYPE = 'OppgaveType',
+  AKTIVITETSKRAV_PERMISJON_TYPE = 'AktivitetskravPermisjonType',
 }
