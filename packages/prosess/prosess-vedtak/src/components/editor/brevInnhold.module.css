@@ -1,16 +1,23 @@
-.nullstillCss {
-  all: unset;
-}
-
-.papir {
+.dokument {
   background: white;
   box-shadow: 0 0 20px rgb(0 0 0 / 50%);
   display: block;
   margin: 20px auto 20px;
-  padding-bottom: 50px;
+  padding-top: 50px;
 }
 
-.ikkeRedigerbartInnhold {
+.logo {
+  margin: 0 auto;
+  max-width: 650px;
+  padding-bottom: 30px;
+}
+
+.header {
+  margin: 0 auto;
+  max-width: 650px;
+}
+
+.footer {
   margin: 0 auto;
   max-width: 650px;
 }
@@ -19,6 +26,4 @@
   border-left: 15px solid var(--a-orange-300);
   border-right: 15px solid var(--a-orange-300);
   box-sizing: content-box;
-  margin: 0 -38px;
-  min-width: 766px;
 }
