@@ -126,7 +126,7 @@ const ResultatAvvise = ({ ankeVurderingResultat }: Props): ReactElement => (
   </VStack>
 );
 
-const hentSprakKode = (ankeOmgjoerArsak?: string): string => {
+const hentSpråkkode = (ankeOmgjoerArsak?: string): string => {
   switch (ankeOmgjoerArsak) {
     case AnkeVurderingOmgjoer.ANKE_TIL_UGUNST:
       return 'Ankebehandling.Resultat.Innstilling.Omgjores.TilUgunst';
@@ -145,7 +145,7 @@ const ResultatOmgjores = ({
 }: Props & { alleKodeverk: AlleKodeverk }): ReactElement => (
   <VStack gap="4">
     <Detail>
-      <FormattedMessage id={hentSprakKode(ankeVurderingResultat?.ankeVurderingOmgjoer)} />
+      <FormattedMessage id={hentSpråkkode(ankeVurderingResultat?.ankeVurderingOmgjoer)} />
     </Detail>
     {ankeVurderingResultat?.ankeOmgjoerArsak && (
       <>

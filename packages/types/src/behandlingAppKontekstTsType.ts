@@ -19,7 +19,7 @@ export type BehandlingFellesData = Readonly<{
   avsluttet?: string;
   erAktivPapirsoknad: boolean;
   gjeldendeVedtak: boolean;
-  sprakkode: string;
+  språkkode: string;
   behandlendeEnhetId: string;
   behandlendeEnhetNavn: string;
   behandlingKoet: boolean;

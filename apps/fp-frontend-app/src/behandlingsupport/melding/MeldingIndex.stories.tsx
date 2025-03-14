@@ -68,7 +68,7 @@ const ALLE_BEHANDLINGER = [
     erAktivPapirsoknad: false,
     behandlingTillatteOperasjoner: BEHANDLING_TILLATTE_OPERASJONER,
     brevmaler: MALER,
-    sprakkode: 'NO',
+    språkkode: 'NB',
     links: [
       {
         href: '/fpsak/bestill',

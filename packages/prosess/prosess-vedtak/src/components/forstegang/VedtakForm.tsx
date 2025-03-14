@@ -226,7 +226,7 @@ export const VedtakForm = ({
 
   const { trigger } = formMethods;
 
-  const { behandlingsresultat, sprakkode } = behandling;
+  const { behandlingsresultat, språkkode } = behandling;
 
   const erBehandlingEtterKlage = useMemo(
     () => erÅrsakTypeBehandlingEtterKlage(behandling.behandlingÅrsaker),
@@ -279,7 +279,7 @@ export const VedtakForm = ({
                 isReadOnly={isReadOnly}
                 skalBrukeOverstyrendeFritekstBrev={skalBrukeOverstyrendeFritekstBrev}
                 ytelseTypeKode={ytelseTypeKode}
-                språkKode={sprakkode}
+                språkkode={språkkode}
                 beregningsresultat={beregningsresultat}
                 beregningErManueltFastsatt={beregningErManueltFastsatt}
               />
@@ -290,7 +290,7 @@ export const VedtakForm = ({
             <VedtakAvslagPanel
               behandlingsresultat={behandlingsresultat}
               isReadOnly={isReadOnly}
-              språkKode={sprakkode}
+              språkkode={språkkode}
               alleKodeverk={alleKodeverk}
               vilkar={vilkar}
               beregningErManueltFastsatt={beregningErManueltFastsatt}

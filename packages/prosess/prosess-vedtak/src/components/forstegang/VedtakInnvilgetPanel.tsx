@@ -13,7 +13,7 @@ interface Props {
   beregningsresultat?: BeregningsresultatDagytelse | BeregningsresultatEs;
   behandlingsresultat?: Behandlingsresultat;
   ytelseTypeKode: string;
-  språkKode: string;
+  språkkode: string;
   isReadOnly: boolean;
   skalBrukeOverstyrendeFritekstBrev: boolean;
   beregningErManueltFastsatt: boolean;
@@ -22,7 +22,7 @@ interface Props {
 export const VedtakInnvilgetPanel = ({
   behandlingsresultat,
   ytelseTypeKode,
-  språkKode,
+  språkkode,
   isReadOnly,
   skalBrukeOverstyrendeFritekstBrev,
   beregningErManueltFastsatt,
@@ -53,7 +53,7 @@ export const VedtakInnvilgetPanel = ({
       {beregningErManueltFastsatt && !skalBrukeOverstyrendeFritekstBrev && (
         <VedtakFritekstPanel
           isReadOnly={isReadOnly}
-          språkKode={språkKode}
+          språkkode={språkkode}
           behandlingsresultat={behandlingsresultat}
           labelTextCode="VedtakForm.Fritekst.Beregningsgrunnlag"
         />

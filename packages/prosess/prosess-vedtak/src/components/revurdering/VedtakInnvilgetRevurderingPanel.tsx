@@ -14,7 +14,7 @@ interface Props {
   revurderingsÅrsakString?: string;
   isReadOnly: boolean;
   beregningsresultat?: BeregningsresultatDagytelse | BeregningsresultatEs;
-  språkKode: string;
+  språkkode: string;
   behandlingsresultat?: Behandlingsresultat;
   beregningErManueltFastsatt: boolean;
   skalBrukeOverstyrendeFritekstBrev: boolean;
@@ -25,7 +25,7 @@ export const VedtakInnvilgetRevurderingPanel = ({
   revurderingsÅrsakString,
   isReadOnly,
   beregningsresultat,
-  språkKode,
+  språkkode,
   behandlingsresultat,
   beregningErManueltFastsatt,
   skalBrukeOverstyrendeFritekstBrev,
@@ -65,7 +65,7 @@ export const VedtakInnvilgetRevurderingPanel = ({
         {!skalBrukeOverstyrendeFritekstBrev && beregningErManueltFastsatt && (
           <VedtakFritekstPanel
             isReadOnly={isReadOnly}
-            språkKode={språkKode}
+            språkkode={språkkode}
             behandlingsresultat={behandlingsresultat}
             labelTextCode="VedtakForm.Fritekst.Beregningsgrunnlag"
           />
