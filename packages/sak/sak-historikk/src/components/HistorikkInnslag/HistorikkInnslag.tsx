@@ -1,10 +1,11 @@
 import { useState } from 'react';
+import { useIntl } from 'react-intl';
 
 import { BodyLong, BodyShort, Box, type BoxProps, Button, Detail, HStack, VStack } from '@navikt/ds-react';
 import { type Location } from 'history';
 
 import { HistorikkAktor, KodeverkType } from '@navikt/fp-kodeverk';
-import type { Historikkinnslag } from '@navikt/fp-types';
+import type { Historikkinnslag, Linje } from '@navikt/fp-types';
 
 import { Avatar } from './Avatar';
 import { HistorikkDokumentLenke } from './HistorikkDokumentLenke';
@@ -34,22 +35,24 @@ export const HistorikkInnslag = ({
   historikkInnslag: { aktør, opprettetTidspunkt, tittel, linjer, dokumenter, skjermlenke },
   saksnummer,
 }: Props) => {
+  const intl = useIntl();
   const rolleNavn = getKodeverknavn(aktør.type, KodeverkType.HISTORIKK_AKTOER);
 
-  const name = `${rolleNavn} ${aktør.ident || ''}`;
+  const name = `${rolleNavn} ${aktør.ident ?? ''}`;
   const timestamp = formatDateTime(opprettetTidspunkt);
   const MAX_LINES = 2;
   const MIN_LINES = 3;
 
-  const [visMer, setVisMer] = useState(false);
+  const initialVisMer = linjer && linjer.length === 3;
+  const [visMer, setVisMer] = useState(initialVisMer);
 
   const toggleVisMer = () => {
     setVisMer(!visMer);
   };
 
-  let linjerSomSkalVises = [];
+  let linjerSomSkalVises: Linje[] = [];
   if (linjer) {
-    linjerSomSkalVises = visMer ? linjer : linjer.slice(0, MAX_LINES);
+    linjerSomSkalVises = visMer || linjer.length === MIN_LINES ? linjer : linjer.slice(0, MAX_LINES);
   }
 
   return (
@@ -85,7 +88,9 @@ export const HistorikkInnslag = ({
               )}
               {linjer.length > MAX_LINES && linjer.length !== MIN_LINES && (
                 <Button variant="tertiary" size="small" onClick={toggleVisMer}>
-                  {visMer ? 'Vis mindre' : 'Vis mer...'}
+                  {visMer
+                    ? intl.formatMessage({ id: 'Historikkinnslag.VisMindre' })
+                    : intl.formatMessage({ id: 'Historikkinnslag.VisMer' })}
                 </Button>
               )}
             </div>
