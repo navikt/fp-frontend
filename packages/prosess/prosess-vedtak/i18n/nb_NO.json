@@ -69,8 +69,5 @@
 
   "OppgaveTabell.Header": "Åpne oppgaver fra Gosys",
   "OppgaveTabell.Type": "Type",
-  "OppgaveTabell.Beskrivelse": "Beskrivelse",
-
-  "LesMer.LesMer": "Les mer",
-  "LesMer.Skjul": "Skjul"
+  "OppgaveTabell.Beskrivelse": "Beskrivelse"
 }
