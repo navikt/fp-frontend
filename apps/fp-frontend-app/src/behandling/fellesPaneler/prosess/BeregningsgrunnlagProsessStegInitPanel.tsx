@@ -1,11 +1,11 @@
 import { type ComponentProps, use } from 'react';
 import { useIntl } from 'react-intl';
 
+import type { FtVilkar } from '@navikt/ft-fakta-beregning';
 import {
   type BeregningAksjonspunktSubmitType,
   BeregningsgrunnlagProsessIndex,
   type FtBeregningsgrunnlag,
-  type FtVilkar,
   ProsessBeregningsgrunnlagAvklaringsbehovCode,
 } from '@navikt/ft-prosess-beregningsgrunnlag';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -14,12 +14,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import type {
-  ArbeidsgiverOpplysningerPerId,
-  Beregningsgrunnlag,
-  Vilkar as FpVilkar,
-  Vilkarperiode,
-} from '@navikt/fp-types';
+import type { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkar } from '@navikt/fp-types';
 import { useMellomlagretFormData } from '@navikt/fp-utils';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
@@ -58,28 +53,27 @@ const lagModifisertCallback =
     return submitCallback(transformerteData);
   };
 
-const lagStandardPeriode = (beregningsgrunnlag: Beregningsgrunnlag, bgVilkar: FpVilkar): Vilkarperiode => ({
-  avslagKode: bgVilkar.avslagKode,
-  vurderesIBehandlingen: true,
-  merknadParametere: {},
-  periode: {
-    fom: beregningsgrunnlag ? beregningsgrunnlag.skjaeringstidspunktBeregning : '',
-    tom: TIDENES_ENDE,
-  },
-  vilkarStatus: bgVilkar.vilkarStatus,
-});
-
-const lagBGVilkar = (vilkar: FpVilkar[], beregningsgrunnlag?: Beregningsgrunnlag): FtVilkar => {
+const lagBGVilkar = (vilkar: Vilkar[], beregningsgrunnlag?: Beregningsgrunnlag): FtVilkar => {
   const bgVilkar = vilkar.find(v => v.vilkarType && v.vilkarType === VilkarType.BEREGNINGSGRUNNLAGVILKARET);
   if (!bgVilkar || !beregningsgrunnlag) {
     // @ts-expect-error Fiks BeregningsgrunnlagProsessIndex så den kan håndtera null
     return null;
   }
-  const nyVK = {
+  return {
     ...bgVilkar,
-    perioder: [lagStandardPeriode(beregningsgrunnlag, bgVilkar)],
+    perioder: [
+      {
+        avslagKode: bgVilkar.avslagKode ?? undefined,
+        vurderesIBehandlingen: true,
+        merknadParametere: {},
+        periode: {
+          fom: beregningsgrunnlag ? beregningsgrunnlag.skjaeringstidspunktBeregning : '',
+          tom: TIDENES_ENDE,
+        },
+        vilkarStatus: bgVilkar.vilkarStatus,
+      },
+    ],
   };
-  return nyVK;
 };
 
 const lagFormatertBG = (beregningsgrunnlag?: Beregningsgrunnlag): FtBeregningsgrunnlag[] => {

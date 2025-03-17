@@ -1,6 +1,6 @@
 export type Avklaring = {
-  saksbehandlersVurdering?: string;
-  begrunnelse?: string;
+  saksbehandlersVurdering: string | null;
+  begrunnelse: string | null;
   arbeidsgiverNavn?: string;
   fom?: string;
   tom?: string;

@@ -50,7 +50,7 @@ const buildInitialValues = (aksjonspunkter: Aksjonspunkt[]): FormValues => ({
   sendVarsel: undefined,
 });
 
-const nullSafe = (value: FamilieHendelse): FamilieHendelse => value || ({} as FamilieHendelse);
+const nullSafe = (value: FamilieHendelse | null): FamilieHendelse => value || ({} as FamilieHendelse);
 
 const EMPTY_ARRAY = [] as KodeverkMedNavn[];
 
