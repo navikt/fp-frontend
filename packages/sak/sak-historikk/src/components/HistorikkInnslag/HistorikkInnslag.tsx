@@ -75,7 +75,7 @@ export const HistorikkInnslag = ({
             <div>
               {dokumenter.map(dokumentLenke => (
                 <HistorikkDokumentLenke
-                  key={`${dokumentLenke.tag}@${dokumentLenke.url}`}
+                  key={`${dokumentLenke.journalpostId}.${dokumentLenke.dokumentId}`}
                   dokumentLenke={dokumentLenke}
                   saksnummer={saksnummer}
                 />

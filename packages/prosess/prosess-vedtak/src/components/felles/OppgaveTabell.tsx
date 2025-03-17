@@ -1,12 +1,11 @@
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Heading, Table, VStack } from '@navikt/ds-react';
+import { UtvidbarTekst } from '@navikt/ft-ui-komponenter';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
 import type { Oppgave } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
-
-import { LesMer } from './LesMer.tsx';
 
 import styles from './oppgaveTabell.module.css';
 
@@ -15,8 +14,6 @@ interface Props {
 }
 
 export const OppgaveTabell = ({ oppgaver }: Props) => {
-  const maksLengde = 120;
-
   const { alleKodeverk } = usePanelDataContext();
 
   return (
@@ -44,11 +41,7 @@ export const OppgaveTabell = ({ oppgaver }: Props) => {
                 </BodyShort>
               </Table.DataCell>
               <Table.DataCell>
-                {oppgave.beskrivelse.length < maksLengde ? (
-                  <BodyShort size="small">{oppgave.beskrivelse}</BodyShort>
-                ) : (
-                  <LesMer tekst={oppgave.beskrivelse} maksLengde={maksLengde} />
-                )}
+                <UtvidbarTekst tekst={oppgave.beskrivelse} />
               </Table.DataCell>
             </Table.Row>
           ))}
