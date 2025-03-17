@@ -1,9 +1,8 @@
 import { FileIcon } from '@navikt/aksel-icons';
 import { BodyShort, HStack } from '@navikt/ds-react';
 
+import { hentDokumentLenke } from '@navikt/fp-konstanter';
 import type { HistorikkInnslagDokumentLink } from '@navikt/fp-types';
-
-const DOCUMENT_SERVER_URL = '/fpsak/api/dokument/hent-dokument';
 
 interface Props {
   dokumentLenke: HistorikkInnslagDokumentLink;
@@ -27,7 +26,7 @@ export const HistorikkDokumentLenke = ({
       as="a"
       align="center"
       gap="1"
-      href={`${DOCUMENT_SERVER_URL}?saksnummer=${saksnummer}&journalpostId=${journalpostId}&dokumentId=${dokumentId}`}
+      href={hentDokumentLenke(saksnummer, journalpostId, dokumentId)}
       target="_blank"
       rel="noopener noreferrer"
     >
