@@ -40,5 +40,5 @@ export type Uttaksresultat = Readonly<{
   perioderSøker: PeriodeSoker[];
   perioderAnnenpart: PeriodeSoker[];
   årsakFilter: AarsakFilter;
-  endringsdato: string
+  endringsdato: string;
 }>;

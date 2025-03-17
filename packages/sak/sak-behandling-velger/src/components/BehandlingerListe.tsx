@@ -2,7 +2,7 @@ import { type ReactElement, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Box, Label } from '@navikt/ds-react';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
 import type { BehandlingAppKontekst, KodeverkMedNavn } from '@navikt/fp-types';
@@ -20,9 +20,9 @@ const sorterBehandlinger = (behandlinger: BehandlingAppKontekst[]): BehandlingAp
       return -1;
     }
     if (b1.avsluttet && b2.avsluttet) {
-      return moment(b2.avsluttet).diff(moment(b1.avsluttet));
+      return dayjs(b2.avsluttet).diff(dayjs(b1.avsluttet));
     }
-    return moment(b2.opprettet).diff(moment(b1.opprettet));
+    return dayjs(b2.opprettet).diff(dayjs(b1.opprettet));
   });
 
 interface Props {

@@ -2,7 +2,7 @@ import { type ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import {
   AksjonspunktKode,
@@ -19,7 +19,7 @@ import {
 } from '../../totrinnskontrollaksjonspunktTextCodes';
 import { OpptjeningTotrinnText } from './OpptjeningTotrinnText';
 
-const formatDate = (date?: string): string => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
+const formatDate = (date?: string): string => (date ? dayjs(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
 
 const buildVarigEndringBeregningText = (beregningDto?: TotrinnskontrollAksjonspunkt['beregningDto']): ReactElement =>
   beregningDto?.fastsattVarigEndringNaering ? (

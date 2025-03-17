@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 import { Heading } from '@navikt/ds-react';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import type {
   AoIArbeidsforhold,
@@ -36,7 +36,7 @@ const getSortArbeidsforholdFn =
     if (a1HarInntektsmelding && a2HarInntektsmelding) {
       const a1MottattDato = inntektsmeldinger.find(im => erMatch(a1, im))?.motattDato;
       const a2MottattDato = inntektsmeldinger.find(im => erMatch(a2, im))?.motattDato;
-      return moment(a2MottattDato, ISO_DATE_FORMAT).diff(moment(a1MottattDato, ISO_DATE_FORMAT));
+      return dayjs(a2MottattDato, ISO_DATE_FORMAT).diff(dayjs(a1MottattDato, ISO_DATE_FORMAT));
     }
     if (a1HarInntektsmelding) {
       return -1;
