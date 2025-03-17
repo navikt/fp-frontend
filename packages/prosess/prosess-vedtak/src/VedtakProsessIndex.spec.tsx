@@ -279,11 +279,10 @@ describe('<VedtakProsessIndex>', () => {
     expect(screen.getByText('Se sto mottatt 24.02.25')).toBeInTheDocument();
     expect(
       screen.getByText(
-        'Fullmektig tar kontakt. Ber om fristutsettelse 4 uker, ettersom bruker først mottok brevet i dag. ' +
-          'Jeg har utsatt 14 dage...',
+        'Fullmektig tar kontakt. Ber om fristutsettelse 4 uker, ettersom bruker først mottok brevet i dag. Je...',
       ),
     ).toBeInTheDocument();
-    expect(screen.getByText('Les mer')).toBeInTheDocument();
+    expect(screen.getByText('Vis mer')).toBeInTheDocument();
     expect(screen.getByText('Søknad om foreldrepenger ved fødsel')).toBeInTheDocument();
     expect(screen.getByText('Bekreftelse fra arbeidsgiver')).toBeInTheDocument();
 
