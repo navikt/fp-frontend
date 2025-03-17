@@ -1,11 +1,11 @@
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Heading, Table, VStack } from '@navikt/ds-react';
+import { UtvidbarTekst } from '@navikt/ft-ui-komponenter';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
 import type { Oppgave } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
-import { UtvidbarTekst } from '@navikt/ft-ui-komponenter';
 
 import styles from './oppgaveTabell.module.css';
 
