@@ -1,0 +1,9 @@
+import{P as j,n as v,e as y,m as x,a as t}from"./nb_NO-ClOySWCw.js";import{j as a}from"./jsx-runtime-D_zvdyIk.js";import"./v4-CtRu48qb.js";import"./index-Dxs5m6lS.js";import"./_commonjsHelpers-Cpj98o6Y.js";import"./dayjs.min-Cke173X9.js";import"./index-DMeSseuw.js";import"./index-DrFkskS4.js";const i=v(x),l=({fjernVerge:V,opprettVerge:n,lukkModal:o})=>{const f=()=>{o();const s=n||V;if(!s)throw Error("Skal alltid ha enten opprettVerge eller fjernVerge");s()};return a.jsx(j,{value:i,children:a.jsx(y,{text:i.formatMessage({id:n?"MenyVergeIndex.OpprettVergeSporsmal":"MenyVergeIndex.FjernVergeSporsmal"}),showModal:!0,submit:f,cancel:o})})};l.__docgenInfo={description:"",methods:[],displayName:"MenyVergeIndex",props:{fjernVerge:{required:!1,tsType:{name:"signature",type:"function",raw:"() => void",signature:{arguments:[],return:{name:"void"}}},description:""},opprettVerge:{required:!1,tsType:{name:"signature",type:"function",raw:"() => void",signature:{arguments:[],return:{name:"void"}}},description:""},lukkModal:{required:!0,tsType:{name:"signature",type:"function",raw:"() => void",signature:{arguments:[],return:{name:"void"}}},description:""}}};const P={title:"sak-meny/verge-v1",component:l,args:{lukkModal:t("button-click")}},e={args:{opprettVerge:t("button-click")}},r={args:{fjernVerge:t("button-click")}};var c,p,m;e.parameters={...e.parameters,docs:{...(c=e.parameters)==null?void 0:c.docs,source:{originalSource:`{
+  args: {
+    opprettVerge: action('button-click') as () => Promise<void>
+  }
+}`,...(m=(p=e.parameters)==null?void 0:p.docs)==null?void 0:m.source}}};var g,d,u;r.parameters={...r.parameters,docs:{...(g=r.parameters)==null?void 0:g.docs,source:{originalSource:`{
+  args: {
+    fjernVerge: action('button-click') as () => Promise<void>
+  }
+}`,...(u=(d=r.parameters)==null?void 0:d.docs)==null?void 0:u.source}}};const _=["LeggeTilVerge","FjerneVerge"];export{r as FjerneVerge,e as LeggeTilVerge,_ as __namedExportsOrder,P as default};

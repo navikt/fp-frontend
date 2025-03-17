@@ -1,0 +1,16 @@
+import{j as l}from"./jsx-runtime-D_zvdyIk.js";import{u as I,e as y}from"./index.es-EkFgSLCo.js";import{h as e,L as r,H as t}from"./fplosAvdelingslederApi-BTtM1VYi.js";import{w as R,B as a,m as A}from"./nb_NO-P-9xxbrg.js";import{g as K}from"./withIntl-sgZp41ih.js";import{a as h}from"./useLosKodeverk-CR2Z3KI6.js";import{K as v}from"./KoSortering-BHrQm0Td.js";import{S as m}from"./SorteringVelger-CKDG5zuN.js";import"./index-Dxs5m6lS.js";import"./_commonjsHelpers-Cpj98o6Y.js";import"./index.es-CgWGJ4J_.js";import"./dayjs.min-Cke173X9.js";import"./Modal-DvNaG-tA.js";import"./index-DMeSseuw.js";import"./index-DrFkskS4.js";import"./decorators-Bnaor6Ku.js";import"./BasePrimitive-CdFI3fZt.js";import"./v4-CtRu48qb.js";import"./entry-preview-alwCLkhx.js";import"./iframe-Co3lLfye.js";import"./chunk-XP5HYGXS-BpfKkqn7.js";import"./entry-preview-docs-duuaId12.js";import"./index-CXQShRbs.js";import"./useQuery-B-XwLmaJ.js";import"./useMutation-CCt5NjLO.js";import"./index.es-BUup-gEi.js";import"./useDebounce-TMO1886J.js";const O=K(A),re={title:"los/avdelingsleder/behandlingskoer/SorteringVelger",component:m,decorators:[O,R],parameters:{msw:{handlers:[e.get(r.KODEVERK_LOS,()=>t.json(h)),e.post(r.LAGRE_SAKSLISTE_SORTERING,()=>new t(null,{status:200})),e.post(r.LAGRE_SAKSLISTE_SORTERING_INTERVALL,()=>new t(null,{status:200})),e.post(r.LAGRE_SAKSLISTE_SORTERING_DYNAMISK_PERIDE,()=>new t(null,{status:200})),e.post(r.LAGRE_SAKSLISTE_SORTERING_TIDSINTERVALL_DATO,()=>new t(null,{status:200}))]}},args:{valgtSakslisteId:1,valgtAvdelingEnhet:"Nav Vikafossen"},render:i=>{const D=I({defaultValues:{sortering:v.BEHANDLINGSFRIST,fra:2,til:3,fomDato:"2020-01-10",tomDato:"2020-10-01",erDynamiskPeriode:i.erDynamiskPeriode}});return l.jsx(y,{formMethods:D,children:l.jsx(m,{...i})})}},s={args:{valgteBehandlingtyper:[a.FORSTEGANGSSOKNAD,a.DOKUMENTINNSYN],erDynamiskPeriode:!1}},o={args:{valgteBehandlingtyper:[a.FORSTEGANGSSOKNAD,a.DOKUMENTINNSYN],erDynamiskPeriode:!0}},n={args:{valgteBehandlingtyper:[a.TILBAKEKREVING],erDynamiskPeriode:!1}};var g,p,S;s.parameters={...s.parameters,docs:{...(g=s.parameters)==null?void 0:g.docs,source:{originalSource:`{
+  args: {
+    valgteBehandlingtyper: [BehandlingType.FORSTEGANGSSOKNAD, BehandlingType.DOKUMENTINNSYN],
+    erDynamiskPeriode: false
+  }
+}`,...(S=(p=s.parameters)==null?void 0:p.docs)==null?void 0:S.source}}};var d,N,E;o.parameters={...o.parameters,docs:{...(d=o.parameters)==null?void 0:d.docs,source:{originalSource:`{
+  args: {
+    valgteBehandlingtyper: [BehandlingType.FORSTEGANGSSOKNAD, BehandlingType.DOKUMENTINNSYN],
+    erDynamiskPeriode: true
+  }
+}`,...(E=(N=o.parameters)==null?void 0:N.docs)==null?void 0:E.source}}};var T,c,u;n.parameters={...n.parameters,docs:{...(T=n.parameters)==null?void 0:T.docs,source:{originalSource:`{
+  args: {
+    valgteBehandlingtyper: [BehandlingType.TILBAKEKREVING],
+    erDynamiskPeriode: false
+  }
+}`,...(u=(c=n.parameters)==null?void 0:c.docs)==null?void 0:u.source}}};const te=["SorteringsvelgerNårMangeBehandlingstyperErValgt","SorteringsvelgerNårDynamiskPeriodeErValgt","SorteringsvelgerNårKunTilbakekrevingErValgt"];export{o as SorteringsvelgerNårDynamiskPeriodeErValgt,n as SorteringsvelgerNårKunTilbakekrevingErValgt,s as SorteringsvelgerNårMangeBehandlingstyperErValgt,te as __namedExportsOrder,re as default};
