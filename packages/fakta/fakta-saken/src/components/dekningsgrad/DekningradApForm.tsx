@@ -110,7 +110,7 @@ export const DekningradApForm = ({
                           <FormattedMessage
                             id="DekningradApForm.SøknadSendt"
                             values={{
-                              dato: dayjs(søknad.oppgittFordeling.dekningsgrader.annenPart.søknadsdato).format(
+                              dato: dayjs(søknad.oppgittFordeling.dekningsgrader.annenPart?.søknadsdato).format(
                                 'D MMMM YYYY',
                               ),
                             }}
@@ -121,7 +121,7 @@ export const DekningradApForm = ({
                     <Heading size="xsmall">
                       <FormattedMessage
                         id="DekningradApForm.HarValgt"
-                        values={{ dekningsgrad: søknad.oppgittFordeling.dekningsgrader.annenPart.dekningsgrad }}
+                        values={{ dekningsgrad: søknad.oppgittFordeling.dekningsgrader.annenPart?.dekningsgrad }}
                       />
                     </Heading>
                   </VStack>

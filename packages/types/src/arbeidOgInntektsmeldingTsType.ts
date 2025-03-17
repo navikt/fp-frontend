@@ -21,7 +21,7 @@ export type Inntektsmelding = Readonly<{
   kontaktpersonNavn: string;
   kontaktpersonNummer: string;
   journalpostId: string;
-  dokumentId: string | null;
+  dokumentId: string;
   motattDato: string;
   innsendingstidspunkt: string;
   årsak?: AksjonspunktÅrsak | null;
@@ -67,8 +67,8 @@ export type Arbeidsforhold = Readonly<{
   stillingsprosent: number;
   årsak?: AksjonspunktÅrsak | null;
   permisjonOgMangel?: PermisjonOgMangel | null;
-  saksbehandlersVurdering?: string | null;
-  begrunnelse?: string | null;
+  saksbehandlersVurdering: string | null;
+  begrunnelse: string | null;
 }>;
 
 export type Inntektspost = Readonly<{

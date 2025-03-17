@@ -26,16 +26,18 @@ const getOppdragsgiverIntlId = (valgtAktivitetstype?: string): string =>
     : 'ActivityPanel.Arbeidsgiver';
 
 const finnArbeidsgivertekst = (
-  arbeidsgiverReferanse: string,
+  arbeidsgiverReferanse: string | null,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 ): string => {
-  const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse];
+  const arbeidsgiverOpplysninger = arbeidsgiverReferanse
+    ? arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse]
+    : undefined;
 
-  if (!arbeidsgiverReferanse || !arbeidsgiverOpplysninger) {
+  if (!arbeidsgiverOpplysninger) {
     return '-';
   }
 
-  if (arbeidsgiverOpplysninger.erPrivatPerson && arbeidsgiverOpplysninger.fødselsdato) {
+  if (arbeidsgiverOpplysninger.erPrivatPerson) {
     const fodselsdato = formatDato(arbeidsgiverOpplysninger.fødselsdato);
     return `${arbeidsgiverOpplysninger.navn} (${fodselsdato})`;
   }
@@ -50,10 +52,10 @@ const finnNæringLabel = (ferdiglignetNæring: FerdiglignetNæring[]): string =>
 
 interface Props {
   valgtAktivitetstype?: string;
-  arbeidsgiverReferanse: string;
+  arbeidsgiverReferanse: string | null;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   stillingsandel: number;
-  naringRegistreringsdato: string;
+  naringRegistreringsdato: string | null;
   ferdiglignetNæring: FerdiglignetNæring[];
 }
 
