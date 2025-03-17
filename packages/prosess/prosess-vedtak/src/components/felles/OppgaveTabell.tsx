@@ -41,7 +41,7 @@ export const OppgaveTabell = ({ oppgaver }: Props) => {
                 </BodyShort>
               </Table.DataCell>
               <Table.DataCell>
-                <UtvidbarTekst tekst={oppgave.beskrivelse}></UtvidbarTekst>
+                <UtvidbarTekst tekst={oppgave.beskrivelse} />
               </Table.DataCell>
             </Table.Row>
           ))}
