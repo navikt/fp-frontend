@@ -12,7 +12,7 @@ describe('BehandlingSupportIndex', () => {
     render(<NårBehandlingErValgt />);
 
     expect(await screen.findAllByText('Historikk')).toHaveLength(2);
-    expect(screen.getByLabelText('Utvid historikk vindu')).toBeInTheDocument();
+    expect(screen.getByLabelText('Utvid behandling detaljer panel')).toBeInTheDocument();
     expect(screen.getByText('Filtrer på behandling')).toBeInTheDocument();
 
     expect(screen.getByText('Send melding')).toBeInTheDocument();

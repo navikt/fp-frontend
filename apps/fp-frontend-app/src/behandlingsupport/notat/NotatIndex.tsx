@@ -11,10 +11,10 @@ import { SupportHeaderAndContent } from '../SupportHeader';
 
 interface Props {
   fagsak: Fagsak;
-  toggleVisUtvidetBehandlingSupportIndexKnapp: React.ReactElement;
+  toggleVisUtvidetBehandlingDetaljerKnapp: React.ReactElement;
 }
 
-export const NotatIndex = ({ fagsak, toggleVisUtvidetBehandlingSupportIndexKnapp }: Props) => {
+export const NotatIndex = ({ fagsak, toggleVisUtvidetBehandlingDetaljerKnapp }: Props) => {
   const queryClient = useQueryClient();
   const api = useFagsakApi();
   const intl = useIntl();
@@ -37,7 +37,7 @@ export const NotatIndex = ({ fagsak, toggleVisUtvidetBehandlingSupportIndexKnapp
       tekst={intl.formatMessage({ id: 'NotatIndex.Notatblokk' })}
       antall={fagsak.notater.length}
       brukPadding={false}
-      toggleVisUtvidetBehandlingSupportIndexKnapp={toggleVisUtvidetBehandlingSupportIndexKnapp}
+      toggleVisUtvidetBehandlingDetaljerKnapp={toggleVisUtvidetBehandlingDetaljerKnapp}
     >
       <NotatSakIndex
         saksnummer={fagsak.saksnummer}

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useIntl } from 'react-intl';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -41,7 +41,7 @@ interface Props {
   saksnummer: string;
   behandlingUuid?: string;
   behandlingVersjon?: number;
-  toggleVisUtvidetBehandlingSupportIndexKnapp: React.ReactElement;
+  toggleVisUtvidetBehandlingDetaljerKnapp: React.ReactElement;
 }
 
 const EMPTY_ARRAY = [] as Dokument[];
@@ -55,7 +55,7 @@ export const DokumentIndex = ({
   behandlingUuid,
   behandlingVersjon,
   saksnummer,
-  toggleVisUtvidetBehandlingSupportIndexKnapp,
+  toggleVisUtvidetBehandlingDetaljerKnapp,
 }: Props) => {
   const api = useFagsakApi();
   const intl = useIntl();
@@ -65,15 +65,6 @@ export const DokumentIndex = ({
   );
 
   const [top, setTop] = useState<number>();
-
-  const scrollReset = useCallback(() => setTop(0), []);
-
-  useEffect(() => {
-    window.addEventListener('scroll', scrollReset);
-    return () => {
-      window.removeEventListener('scroll', scrollReset);
-    };
-  }, []);
 
   if (status === 'pending') {
     return <LoadingPanel />;
@@ -94,7 +85,7 @@ export const DokumentIndex = ({
       <SupportHeaderAndContent
         tekst={intl.formatMessage({ id: 'DokumentIndex.Dokumenter' })}
         antall={sorterteDokumenter.length}
-        toggleVisUtvidetBehandlingSupportIndexKnapp={toggleVisUtvidetBehandlingSupportIndexKnapp}
+        toggleVisUtvidetBehandlingDetaljerKnapp={toggleVisUtvidetBehandlingDetaljerKnapp}
       >
         <DokumenterSakIndex
           documents={sorterteDokumenter}

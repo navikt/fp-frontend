@@ -50,7 +50,7 @@ interface Props {
   hentOgSettBehandling: () => void;
   visSideMeny: boolean;
   toggleSideMeny: () => void;
-  visUtvidetHistorikk: boolean;
+  visUtvidetInnhold: boolean;
 }
 
 export const FagsakProfileIndex = ({
@@ -61,7 +61,7 @@ export const FagsakProfileIndex = ({
   hentOgSettBehandling,
   visSideMeny,
   toggleSideMeny,
-  visUtvidetHistorikk,
+  visUtvidetInnhold,
 }: Props) => {
   const intl = useIntl();
   const [showAll, setShowAll] = useState(!behandlingUuid);
@@ -131,8 +131,8 @@ export const FagsakProfileIndex = ({
           </HStack>
         )}
 
-        <VStack gap="6" className={`${visUtvidetHistorikk ? styles.historikkPanelUtvid : styles.historikkPanelMinsk}`}>
-          {!shouldRedirectToBehandlinger && !visUtvidetHistorikk && (
+        <VStack gap="6" className={`${visUtvidetInnhold ? styles.skjulFagsakInfo : styles.visFagsakInfo}`}>
+          {!shouldRedirectToBehandlinger && (
             <div>
               <ErrorBoundary
                 errorMessageCallback={addErrorMessage}

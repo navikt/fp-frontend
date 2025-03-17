@@ -60,10 +60,10 @@ export const FagsakIndex = () => {
 
   const { hentOgSettBehandling } = useHentBehandling(erTilbakekreving, setBehandling, behandlingUuidFraUrl);
   const [visSideMeny, setVisSideMeny] = useState(true);
-  const [visUtvidetBehandlingSupportIndexPanel, setVisUtvidetBehandlingSupportIndexPanel] = useState(false);
+  const [visUtvidetBehandlingDetaljerPanel, setVisUtvidetBehandlingDetaljerPanel] = useState(false);
 
-  const toggleVisUtvidetBehandlingSupportIndexPanel = () => {
-    setVisUtvidetBehandlingSupportIndexPanel(!visUtvidetBehandlingSupportIndexPanel);
+  const toggleVisUtvidetBehandlingDetaljerPanel = () => {
+    setVisUtvidetBehandlingDetaljerPanel(!visUtvidetBehandlingDetaljerPanel);
   };
 
   const toggleSideMeny = () => {
@@ -122,7 +122,7 @@ export const FagsakIndex = () => {
             behandling={behandling}
             visSideMeny={visSideMeny}
             toggleSideMeny={toggleSideMeny}
-            visUtvidetHistorikk={visUtvidetBehandlingSupportIndexPanel}
+            visUtvidetInnhold={visUtvidetBehandlingDetaljerPanel}
           />
         }
         supportContent={
@@ -131,8 +131,8 @@ export const FagsakIndex = () => {
             behandlingUuid={behandlingUuidFraUrl}
             behandlingVersjon={behandling?.versjon}
             hentOgSettBehandling={hentOgSettBehandling}
-            toggleVisUtvidetBehandlingSupportIndexPanel={toggleVisUtvidetBehandlingSupportIndexPanel}
-            visUtvidetBehandlingSupportIndexPanel={visUtvidetBehandlingSupportIndexPanel}
+            toggleVisUtvidetBehandlingDetaljerPanel={toggleVisUtvidetBehandlingDetaljerPanel}
+            visUtvidetBehandlingDetaljerPanel={visUtvidetBehandlingDetaljerPanel}
           />
         }
         visittkortContent={() => {

@@ -46,6 +46,12 @@ const meta = {
   },
   args: {
     saksnummer: '1',
+    toggleVisUtvidetBehandlingDetaljerKnapp: (
+      <UtvidEllerMinskKnapp
+        toggleVisUtvidetBehandlingDetaljerPanel={action('button-click')}
+        visUtvidetBehandlingDetaljerPanel={false}
+      />
+    ),
   },
   render: props => {
     //Må hente data til cache før testa komponent blir kalla
@@ -63,11 +69,5 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     behandlingUuid: '11212',
-    toggleVisUtvidetBehandlingSupportIndexKnapp: (
-      <UtvidEllerMinskKnapp
-        toggleVisUtvidetBehandlingSupportIndexPanel={action('button-click')}
-        visUtvidetBehandlingSupportIndexPanel={false}
-      />
-    ),
   },
 };

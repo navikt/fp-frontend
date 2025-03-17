@@ -132,6 +132,8 @@ const meta = {
     setBehandling: action('button-click'),
     hentOgSettBehandling: action('button-click'),
     toggleSideMeny: action('button-click'),
+    visSideMeny: true,
+    visUtvidetInnhold: false,
   },
   render: props => {
     //Må hente data til cache før testa komponent blir kalla
@@ -154,15 +156,11 @@ export const BehandlingErValgt: Story = {
     behandling: {
       versjon: 1,
     } as Behandling,
-    visSideMeny: true,
-    visUtvidetHistorikk: false,
   },
 };
 
 export const BehandlingErIkkeValgt: Story = {
   args: {
     fagsakData: new FagsakData(FAGSAK),
-    visSideMeny: true,
-    visUtvidetHistorikk: false,
   },
 };

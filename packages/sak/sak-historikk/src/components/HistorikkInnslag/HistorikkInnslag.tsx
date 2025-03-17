@@ -5,7 +5,7 @@ import { BodyLong, BodyShort, Box, type BoxProps, Button, Detail, HStack, VStack
 import { type Location } from 'history';
 
 import { HistorikkAktor, KodeverkType } from '@navikt/fp-kodeverk';
-import type { Historikkinnslag, Linje } from '@navikt/fp-types';
+import type { Historikkinnslag } from '@navikt/fp-types';
 
 import { Avatar } from './Avatar';
 import { HistorikkDokumentLenke } from './HistorikkDokumentLenke';
@@ -40,20 +40,12 @@ export const HistorikkInnslag = ({
 
   const name = `${rolleNavn} ${aktør.ident ?? ''}`;
   const timestamp = formatDateTime(opprettetTidspunkt);
-  const MAX_LINES = 2;
-  const MIN_LINES = 3;
 
-  const initialVisMer = linjer && linjer.length === 3;
-  const [visMer, setVisMer] = useState(initialVisMer);
-
-  const toggleVisMer = () => {
-    setVisMer(!visMer);
-  };
-
-  let linjerSomSkalVises: Linje[] = [];
-  if (linjer) {
-    linjerSomSkalVises = visMer || linjer.length === MIN_LINES ? linjer : linjer.slice(0, MAX_LINES);
-  }
+  const erMerEnnToLinjer = linjer.length > 2;
+  const erAkkuratTreLinjer = linjer.length === 3;
+  const [erLinjerSkjult, setErLinjerSkjult] = useState(erMerEnnToLinjer);
+  // Hvis linjer ikke er skjult eller det er kun 3 linjer, så vises alle linjene uansett. Ellers vises kun de to første linjene.
+  const linjerSomSkalVises = erLinjerSkjult || erAkkuratTreLinjer ? linjer : linjer.slice(0, 2);
 
   return (
     <HStack data-testid="historikkinnslag" wrap={false} gap="5" justify="end" align="center">
@@ -75,7 +67,7 @@ export const HistorikkInnslag = ({
             />
           )}
 
-          {linjer && linjer.length > 0 && (
+          {linjer.length > 0 && (
             <div>
               {linjerSomSkalVises.map((linje, index) =>
                 linje.type === 'TEKST' ? (
@@ -86,9 +78,9 @@ export const HistorikkInnslag = ({
                   <br key={`${linje.type}-${index}`} />
                 ),
               )}
-              {linjer.length > MAX_LINES && linjer.length !== MIN_LINES && (
-                <Button variant="tertiary" size="small" onClick={toggleVisMer}>
-                  {visMer
+              {erMerEnnToLinjer && !erAkkuratTreLinjer && (
+                <Button variant="tertiary" size="small" onClick={() => setErLinjerSkjult(!erLinjerSkjult)}>
+                  {erLinjerSkjult
                     ? intl.formatMessage({ id: 'Historikkinnslag.VisMindre' })
                     : intl.formatMessage({ id: 'Historikkinnslag.VisMer' })}
                 </Button>

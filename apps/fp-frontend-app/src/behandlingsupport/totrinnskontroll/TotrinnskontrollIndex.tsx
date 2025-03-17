@@ -29,7 +29,7 @@ interface Props {
   valgtBehandlingUuid: string;
   beslutterFormData?: any;
   setBeslutterFormData: (data?: any) => void;
-  toggleVisUtvidetBehandlingSupportIndexKnapp: ReactElement;
+  toggleVisUtvidetBehandlingDetaljerKnapp: ReactElement;
 }
 
 /**
@@ -42,7 +42,7 @@ export const TotrinnskontrollIndex = ({
   valgtBehandlingUuid,
   beslutterFormData,
   setBeslutterFormData,
-  toggleVisUtvidetBehandlingSupportIndexKnapp,
+  toggleVisUtvidetBehandlingDetaljerKnapp,
 }: Props) => {
   const intl = useIntl();
   const [visBeslutterModal, setVisBeslutterModal] = useState(false);
@@ -98,7 +98,7 @@ export const TotrinnskontrollIndex = ({
         tekst={intl.formatMessage({
           id: erStatusFatterVedtak ? 'TotrinnskontrollIndex.Godkjenning' : 'TotrinnskontrollIndex.FraBeslutter',
         })}
-        toggleVisUtvidetBehandlingSupportIndexKnapp={toggleVisUtvidetBehandlingSupportIndexKnapp}
+        toggleVisUtvidetBehandlingDetaljerKnapp={toggleVisUtvidetBehandlingDetaljerKnapp}
       >
         <TotrinnskontrollSakIndex
           behandling={valgtBehandling}

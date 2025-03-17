@@ -16,7 +16,7 @@ describe('<MeldingIndex>', () => {
     expect(await screen.findByText('Mal 1')).toBeInTheDocument();
     expect(screen.getByText('Mal 2')).toBeInTheDocument();
     expect(screen.getByText('Mal 3')).toBeInTheDocument();
-    expect(screen.getByLabelText('Utvid historikk vindu')).toBeInTheDocument();
+    expect(screen.getByLabelText('Utvid behandling detaljer panel')).toBeInTheDocument();
   });
 
   it('skal sende melding og så lukke modal', async () => {
@@ -24,7 +24,7 @@ describe('<MeldingIndex>', () => {
     render(<Default />);
 
     expect(await screen.findByText('Meldinger')).toBeInTheDocument();
-    expect(screen.getByLabelText('Utvid historikk vindu')).toBeInTheDocument();
+    expect(screen.getByLabelText('Utvid behandling detaljer panel')).toBeInTheDocument();
 
     await userEvent.selectOptions(screen.getByLabelText('Mal'), 'Mal1');
 
@@ -40,7 +40,7 @@ describe('<MeldingIndex>', () => {
     render(<Default />);
 
     expect(await screen.findByText('Meldinger')).toBeInTheDocument();
-    expect(screen.getByLabelText('Utvid historikk vindu')).toBeInTheDocument();
+    expect(screen.getByLabelText('Utvid behandling detaljer panel')).toBeInTheDocument();
 
     await userEvent.selectOptions(screen.getByLabelText('Mal'), DokumentMalType.INNHENTE_OPPLYSNINGER);
 

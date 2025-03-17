@@ -19,21 +19,18 @@ const withIntl = getIntlDecorator(messages);
 
 const getHref = (rel: string) => wrapUrl(notEmpty(initFetchData.sakLinks.find(link => link.rel === rel)).href);
 
-const ToggleUtvidetHistorikkButton = () => {
-  return (
-    <UtvidEllerMinskKnapp
-      toggleVisUtvidetBehandlingSupportIndexPanel={action('button-click')}
-      visUtvidetBehandlingSupportIndexPanel={false}
-    />
-  );
-};
-
 const meta = {
   title: 'fagsak/DokumentIndex',
   decorators: [withIntl, withQueryClient],
   component: DokumentIndex,
   args: {
     saksnummer: '1',
+    toggleVisUtvidetBehandlingDetaljerKnapp: (
+      <UtvidEllerMinskKnapp
+        toggleVisUtvidetBehandlingDetaljerPanel={action('button-click')}
+        visUtvidetBehandlingDetaljerPanel={false}
+      />
+    ),
   },
   render: props => {
     //Må hente data til cache før testa komponent blir kalla
@@ -82,7 +79,6 @@ export const DetFinnesDokumenterPåSak: Story = {
   args: {
     behandlingUuid: '11212',
     behandlingVersjon: 1,
-    toggleVisUtvidetBehandlingSupportIndexKnapp: <ToggleUtvidetHistorikkButton />,
   },
 };
 
@@ -95,7 +91,5 @@ export const DetFinnesIngenDokumenterPåSak: Story = {
       ],
     },
   },
-  args: {
-    toggleVisUtvidetBehandlingSupportIndexKnapp: <ToggleUtvidetHistorikkButton />,
-  },
+  args: {},
 };

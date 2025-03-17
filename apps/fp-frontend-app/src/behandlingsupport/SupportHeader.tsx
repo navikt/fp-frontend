@@ -13,7 +13,7 @@ type Props = {
   antall?: number;
   children: ReactNode;
   brukPadding?: boolean;
-  toggleVisUtvidetBehandlingSupportIndexKnapp: ReactElement;
+  toggleVisUtvidetBehandlingDetaljerKnapp: ReactElement;
 };
 
 export const SupportHeaderAndContent = ({
@@ -21,7 +21,7 @@ export const SupportHeaderAndContent = ({
   antall,
   children,
   brukPadding = true,
-  toggleVisUtvidetBehandlingSupportIndexKnapp,
+  toggleVisUtvidetBehandlingDetaljerKnapp,
 }: Props) => {
   const intl = useIntl();
   const { addErrorMessage } = useRestApiErrorDispatcher();
@@ -30,9 +30,10 @@ export const SupportHeaderAndContent = ({
     <VStack gap="4">
       <div className={styles.header}>
         <HStack justify="space-between">
-          <Heading size="small">
-            {tekst} {toggleVisUtvidetBehandlingSupportIndexKnapp}
-          </Heading>
+          <HStack gap="1" align="center">
+            <Heading size="small">{tekst}</Heading>
+            {toggleVisUtvidetBehandlingDetaljerKnapp}
+          </HStack>
           {!!antall && antall > 0 && <div className={styles.circle}>{antall}</div>}
         </HStack>
       </div>

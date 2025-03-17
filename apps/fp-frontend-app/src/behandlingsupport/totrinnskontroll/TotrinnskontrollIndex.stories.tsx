@@ -147,10 +147,10 @@ const meta = {
     fagsakData: new FagsakData(FAGSAK),
     valgtBehandlingUuid: '1',
     setBeslutterFormData: action('button-click'),
-    toggleVisUtvidetBehandlingSupportIndexKnapp: (
+    toggleVisUtvidetBehandlingDetaljerKnapp: (
       <UtvidEllerMinskKnapp
-        toggleVisUtvidetBehandlingSupportIndexPanel={action('button-click')}
-        visUtvidetBehandlingSupportIndexPanel={false}
+        toggleVisUtvidetBehandlingDetaljerPanel={action('button-click')}
+        visUtvidetBehandlingDetaljerPanel={false}
       />
     ),
   },

@@ -108,10 +108,10 @@ const meta = {
     valgtBehandlingUuid: '1',
     setMeldingFormData: action('button-click'),
     hentOgSettBehandling: action('button-click'),
-    toggleVisUtvidetBehandlingSupportIndexKnapp: (
+    toggleVisUtvidetBehandlingDetaljerKnapp: (
       <UtvidEllerMinskKnapp
-        toggleVisUtvidetBehandlingSupportIndexPanel={action('button-click')}
-        visUtvidetBehandlingSupportIndexPanel={false}
+        toggleVisUtvidetBehandlingDetaljerPanel={action('button-click')}
+        visUtvidetBehandlingDetaljerPanel={false}
       />
     ),
   },

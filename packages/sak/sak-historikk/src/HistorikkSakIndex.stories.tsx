@@ -15,7 +15,7 @@ const utvidKnapp = (
   <Tooltip content="Utvid" placement="bottom">
     <Button
       icon={<ExpandVerticalIcon fontSize="1.4rem" aria-hidden />}
-      aria-label="Utvid historikk vindu"
+      aria-label="Utvid behandling detaljer panel"
       variant="tertiary-neutral"
       size="xsmall"
     />
@@ -233,6 +233,7 @@ const meta = {
     saksnummer: '2',
     getBehandlingLocation: () => locationMock,
     createLocationForSkjermlenke: () => locationMock,
+    utvidEllerMinskBehandlingDetaljerKnapp: utvidKnapp,
   },
 } satisfies Meta<typeof HistorikkSakIndex>;
 
@@ -241,12 +242,11 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const BehandlingIkkeErValgt: Story = {
-  args: { utvidEllerMinskBehandlingSupportIndexKnapp: utvidKnapp },
+  args: {},
 };
 
 export const BehandlingErValgt: Story = {
   args: {
     valgtBehandlingUuid: '999951',
-    utvidEllerMinskBehandlingSupportIndexKnapp: utvidKnapp,
   },
 };

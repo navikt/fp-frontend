@@ -15,7 +15,7 @@ interface Props {
   behandlingUuid?: string;
   historikkinnslagFpSak?: Historikkinnslag[];
   historikkinnslagFpTilbake?: Historikkinnslag[];
-  toggleVisUtvidetBehandlingSupportIndexKnapp: ReactElement;
+  toggleVisUtvidetBehandlingDetaljerKnapp: ReactElement;
 }
 
 export const HistorikkIndex = ({
@@ -23,7 +23,7 @@ export const HistorikkIndex = ({
   behandlingUuid,
   historikkinnslagFpSak,
   historikkinnslagFpTilbake,
-  toggleVisUtvidetBehandlingSupportIndexKnapp,
+  toggleVisUtvidetBehandlingDetaljerKnapp,
 }: Props) => {
   const {
     kodeverkOptions,
@@ -48,7 +48,7 @@ export const HistorikkIndex = ({
       getBehandlingLocation={getBehandlingLocation}
       createLocationForSkjermlenke={createLocationForSkjermlenke}
       valgtBehandlingUuid={behandlingUuid}
-      utvidEllerMinskBehandlingSupportIndexKnapp={toggleVisUtvidetBehandlingSupportIndexKnapp}
+      utvidEllerMinskBehandlingDetaljerKnapp={toggleVisUtvidetBehandlingDetaljerKnapp}
     />
   );
 };

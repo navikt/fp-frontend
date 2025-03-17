@@ -97,6 +97,8 @@ const meta = {
   },
   args: {
     hentOgSettBehandling: action('button-click'),
+    toggleVisUtvidetBehandlingDetaljerPanel: action('button-click'),
+    visUtvidetBehandlingDetaljerPanel: false,
   },
   render: props => {
     //Må hente data til cache før testa komponent blir kalla
@@ -117,8 +119,6 @@ export const NårBehandlingErValgt: Story = {
     fagsakData: new FagsakData(FAGSAK),
     behandlingUuid: '1',
     behandlingVersjon: 1,
-    toggleVisUtvidetBehandlingSupportIndexPanel: action('button-click'),
-    visUtvidetBehandlingSupportIndexPanel: false,
   },
 };
 
@@ -138,8 +138,6 @@ export const SkalViseFraBeslutter: Story = {
     }),
     behandlingUuid: '1',
     behandlingVersjon: 1,
-    toggleVisUtvidetBehandlingSupportIndexPanel: action('button-click'),
-    visUtvidetBehandlingSupportIndexPanel: false,
   },
 };
 
@@ -159,15 +157,11 @@ export const SkalViseFraGodkjenning: Story = {
     }),
     behandlingUuid: '1',
     behandlingVersjon: 1,
-    toggleVisUtvidetBehandlingSupportIndexPanel: action('button-click'),
-    visUtvidetBehandlingSupportIndexPanel: false,
   },
 };
 
 export const NårBehandlingIkkeErValgt: Story = {
   args: {
     fagsakData: new FagsakData(FAGSAK),
-    toggleVisUtvidetBehandlingSupportIndexPanel: action('button-click'),
-    visUtvidetBehandlingSupportIndexPanel: false,
   },
 };

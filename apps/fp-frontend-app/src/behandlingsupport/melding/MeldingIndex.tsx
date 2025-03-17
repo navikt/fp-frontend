@@ -1,4 +1,4 @@
-import { type ReactElement, useCallback, useEffect, useState } from 'react';
+import { type ReactElement, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 
@@ -27,7 +27,7 @@ interface Props {
   meldingFormData?: any;
   setMeldingFormData: (data?: any) => void;
   hentOgSettBehandling: () => void;
-  toggleVisUtvidetBehandlingSupportIndexKnapp: ReactElement;
+  toggleVisUtvidetBehandlingDetaljerKnapp: ReactElement;
 }
 
 const finnFristFraBehandling = (behandling: BehandlingAppKontekst) =>
@@ -44,7 +44,7 @@ export const MeldingIndex = ({
   meldingFormData,
   setMeldingFormData,
   hentOgSettBehandling,
-  toggleVisUtvidetBehandlingSupportIndexKnapp,
+  toggleVisUtvidetBehandlingDetaljerKnapp,
 }: Props) => {
   const intl = useIntl();
   const [showSettPaVentModal, setShowSettPaVentModal] = useState(false);
@@ -52,15 +52,6 @@ export const MeldingIndex = ({
 
   const navigate = useNavigate();
   const [top, setTop] = useState<number>();
-
-  const scrollReset = useCallback(() => setTop(0), []);
-
-  useEffect(() => {
-    window.addEventListener('scroll', scrollReset);
-    return () => {
-      window.removeEventListener('scroll', scrollReset);
-    };
-  }, []);
 
   const fagsak = fagsakData.getFagsak();
   const valgtBehandling = notEmpty(fagsakData.getBehandling(valgtBehandlingUuid));
@@ -125,7 +116,7 @@ export const MeldingIndex = ({
 
       <SupportHeaderAndContent
         tekst={intl.formatMessage({ id: 'MeldingIndex.Meldinger' })}
-        toggleVisUtvidetBehandlingSupportIndexKnapp={toggleVisUtvidetBehandlingSupportIndexKnapp}
+        toggleVisUtvidetBehandlingDetaljerKnapp={toggleVisUtvidetBehandlingDetaljerKnapp}
       >
         <VStack gap="4">
           {!kanSendeMelding && (
