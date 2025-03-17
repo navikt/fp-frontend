@@ -7,7 +7,7 @@ import { Form, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML, ArrowBox } from '@navikt/ft-ui-komponenter';
 import { formaterFritekst, getLanguageFromSprakkode, ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import {
   AksjonspunktKode,
@@ -214,7 +214,7 @@ export const VarselOmRevurderingForm = ({
       </Form>
       <SettPaVentModalIndex
         showModal={skalVisePåVentModal}
-        frist={moment().add(28, 'days').format(ISO_DATE_FORMAT)}
+        frist={dayjs().add(28, 'days').format(ISO_DATE_FORMAT)}
         cancelEvent={lukkModal}
         submitCallback={håndterSubmitFraModal}
         ventearsaker={ventearsaker}

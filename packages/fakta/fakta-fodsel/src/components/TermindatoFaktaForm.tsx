@@ -5,7 +5,7 @@ import { Alert, BodyShort, HStack, Label, VStack } from '@navikt/ds-react';
 import { Datepicker, InputField } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidInteger, maxValue, minValue, required } from '@navikt/ft-form-validators';
 import { DateLabel, FaktaGruppe } from '@navikt/ft-ui-komponenter';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import { FaktaBegrunnelseTextField, isFieldEdited } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
@@ -20,7 +20,7 @@ const maxValue9 = maxValue(9);
 const erTerminbekreftelseUtstedtForTidlig = (utstedtdato?: string, termindato?: string): boolean =>
   !!utstedtdato &&
   !!termindato &&
-  !moment(utstedtdato).isAfter(moment(termindato).subtract(18, 'weeks').subtract(4, 'days'));
+  !dayjs(utstedtdato).isAfter(dayjs(termindato).subtract(18, 'weeks').subtract(4, 'days'));
 
 export type FormValues = {
   utstedtdato?: string;

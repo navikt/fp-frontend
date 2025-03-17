@@ -81,8 +81,8 @@ const historikkInnslag: Historikkinnslag[] = [
     skjermlenke: null,
     linjer: [],
     dokumenter: [
-      { dokumentId: '1', journalpostId: '2', tag: 'Søknad foreldrepenger', url: 'www.test.no', utgått: false },
-      { dokumentId: '1', journalpostId: '2', tag: 'Vedlegg', url: 'www.test.no', utgått: true },
+      { dokumentId: '1', journalpostId: '2', tag: 'Søknad foreldrepenger', utgått: false },
+      { dokumentId: '1', journalpostId: '2', tag: 'Vedlegg', utgått: true },
     ],
   },
   {
@@ -194,7 +194,6 @@ const historikkInnslag: Historikkinnslag[] = [
     dokumenter: [
       {
         tag: 'Inntektsmelding',
-        url: 'https://192.168.26.220:8080/fpsak/api/dokument/hent-dokument?journalpostId=453877951&dokumentId=454273800',
         journalpostId: '453877951',
         dokumentId: '454273800',
         utgått: false,
@@ -211,7 +210,6 @@ const historikkInnslag: Historikkinnslag[] = [
     dokumenter: [
       {
         tag: 'Søknad',
-        url: 'www.test.no',
         journalpostId: '0',
         dokumentId: '1',
         utgått: false,

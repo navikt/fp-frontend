@@ -26,7 +26,7 @@ export const LastNedPdfKnapp = ({ inntektsmelding, fagsak }: { fagsak: Fagsak; i
   );
 };
 // TODO: denne skal taes i bruk når all info fra PDF er tilgjengelig i GUI.
- 
+
 export const LastNedPdfModalKnapp = ({
   inntektsmelding,
   fagsak,

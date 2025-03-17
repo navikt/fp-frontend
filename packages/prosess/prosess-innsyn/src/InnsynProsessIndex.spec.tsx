@@ -2,7 +2,7 @@ import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { composeStories } from '@storybook/react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import * as stories from './InnsynProsessIndex.stories';
 
@@ -37,7 +37,7 @@ describe('<InnsynProsessIndex>', () => {
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
       begrunnelse: 'Dette er en vurdering',
-      fristDato: moment().add(3, 'days').format(ISO_DATE_FORMAT),
+      fristDato: dayjs().add(3, 'days').format(ISO_DATE_FORMAT),
       innsynDokumenter: [
         {
           dokumentId: '3',

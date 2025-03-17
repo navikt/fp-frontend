@@ -21,7 +21,7 @@
   "dependencies": {
     "@navikt/ds-react": "7.17.0",
     "@navikt/fp-types": "workspace:*",
-    "@navikt/ft-ui-komponenter": "3.1.8",
+    "@navikt/ft-ui-komponenter": "3.1.9",
     "@navikt/ft-utils": "3.1.7",
     "react": "19.0.0",
     "react-intl": "7.1.6"
