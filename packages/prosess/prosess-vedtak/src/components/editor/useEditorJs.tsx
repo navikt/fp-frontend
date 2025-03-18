@@ -11,7 +11,7 @@ import { DokumentMalType } from '@navikt/fp-kodeverk';
 import type { OverstyrtDokument } from '@navikt/fp-types';
 
 import type { ForhandsvisData } from '../forstegang/VedtakForm';
-import { erRedigertHtmlGyldig, utledRedigerbartInnhold } from './redigeringsUtils';
+import { erRedigertHtmlGyldig, utledReadonlyInnhold, utledRedigerbartInnhold } from './redigeringsUtils';
 
 const SPACE_REGEX = /\s*(<[^>]+>)\s*/g; // Fjerne mellomrom rundt html-tags
 
@@ -23,6 +23,8 @@ export const useEditorJs = (
 ) => {
   const ref = useRef<EditorJS>(null);
   const refInitialRender = useRef<boolean>(true);
+
+  const readonlyInnhold = utledReadonlyInnhold(htmlMal.opprinneligHtml);
 
   const lagreBrev = useLagreBrev();
 
@@ -44,7 +46,9 @@ export const useEditorJs = (
           const lagreWrapper = async () => {
             const innhold = await editor.saver.save();
             const html = edjsHTML().parse(innhold);
-            lagreManueltBrev(html);
+            lagreManueltBrev(
+              `<div id="redigerbart-innhold" data-editable="data-editable">${html}</div><div id="readonly-innhold">${readonlyInnhold.footer}</div>`,
+            );
           };
 
           //Forhindrer at lagring blir gjort ved initialisering
@@ -81,7 +85,9 @@ export const useEditorJs = (
       if (ref.current) {
         const innhold = await ref.current.save();
         const html = edjsHTML().parse(innhold);
-        lagreManueltBrev(html);
+        lagreManueltBrev(
+          `<div id="redigerbart-innhold" data-editable="data-editable">${html}</div><div id="readonly-innhold">${readonlyInnhold.footer}</div>`,
+        );
       } else {
         throw new Error('Editor er ikke initialisert');
       }
