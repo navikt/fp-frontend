@@ -112,7 +112,7 @@ export const useEditorJs = (
         automatiskVedtaksbrev: true,
         dokumentMal: DokumentMalType.FRITEKST_HTML,
         gjelderVedtak: true,
-        fritekst: html,
+        fritekst: `<div id="redigerbart-innhold" data-editable="data-editable">${html}</div><div id="readonly-innhold">${readonlyInnhold.footer}</div>`,
       });
     } else {
       throw new Error('Editor er ikke initialisert');
