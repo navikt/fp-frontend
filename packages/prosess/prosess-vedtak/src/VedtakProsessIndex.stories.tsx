@@ -17,7 +17,7 @@ import {
   VilkarType,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { type PanelDataArgs, withMellomlagretFormData, withPanelData, withRouter } from '@navikt/fp-storybook-utils';
 import type {
   Aksjonspunkt,
   Behandling,
@@ -75,13 +75,13 @@ const defaultberegningresultatDagytelse = {
 const meta = {
   title: 'prosess/prosess-vedtak',
   component: VedtakProsessIndex,
-  decorators: [withMellomlagretFormData, withPanelData],
+  decorators: [withMellomlagretFormData, withPanelData, withRouter],
   args: {
     vilkar: defaultVilkar,
     previewCallback: action('button-click'),
     hentBrevHtml: args => {
       action('button-click')(args);
-      return Promise.resolve(mal);
+      return Promise.resolve({ opprinneligHtml: mal, redigertHtml: null });
     },
     forkastManueltBrev: action('button-click') as () => Promise<void>,
     lagreManueltBrev: action('button-click') as (html: string) => Promise<void>,

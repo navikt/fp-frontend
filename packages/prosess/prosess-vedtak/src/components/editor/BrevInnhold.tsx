@@ -29,9 +29,8 @@ export const BrevInnhold = ({
 }: Props) => {
   const { isReadOnly } = usePanelDataContext();
 
-  const html = htmlMal.redigertHtml ?? htmlMal.opprinneligHtml;
-  const brevStiler = utledStiler(html);
-  const readonlyInnhold = utledReadonlyInnhold(html);
+  const brevStiler = utledStiler(htmlMal.opprinneligHtml);
+  const readonlyInnhold = utledReadonlyInnhold(htmlMal.opprinneligHtml);
 
   return (
     <>
