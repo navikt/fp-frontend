@@ -78,8 +78,7 @@ interface Props {
   vedtakstatusTekst?: string;
   oppgaver?: Oppgave[];
   hentBrevHtml: (params: GenererHtmlDokument) => Promise<OverstyrtDokument>;
-  lagreManueltBrev: (html: string) => Promise<void>;
-  forkastManueltBrev: () => Promise<void>;
+  lagreManueltBrev: (html: string | null) => Promise<void>;
   setHarOverstyrtVedtaksbrev: (harOverstyrtVedtaksbrev: boolean) => void;
 }
 
@@ -93,7 +92,6 @@ export const VedtakFellesPanel = ({
   oppgaver,
   hentBrevHtml,
   lagreManueltBrev,
-  forkastManueltBrev,
   setHarOverstyrtVedtaksbrev,
 }: Props) => {
   const intl = useIntl();
@@ -116,6 +114,15 @@ export const VedtakFellesPanel = ({
       }).then(html => setBrevHtml(html));
     }
   }, []);
+
+  const forhånadsvisBrev = () => {
+    previewCallback({
+      automatiskVedtaksbrev: true,
+      dokumentMal: DokumentMalType.FRITEKST_HTML,
+      gjelderVedtak: true,
+      fritekst: brevHtml?.redigertHtml ?? '',
+    });
+  };
 
   const {
     formState: { isSubmitting },
@@ -152,7 +159,7 @@ export const VedtakFellesPanel = ({
     setHarOverstyrtVedtaksbrev(false);
     setSkalViseModal(false);
 
-    forkastManueltBrev();
+    lagreManueltBrev(null);
   };
 
   const erInnvilget = isInnvilget(behandlingsresultat.type);
@@ -249,33 +256,54 @@ export const VedtakFellesPanel = ({
       {skalBrukeManueltBrev && (
         <div className={styles.brevRedigering}>
           <VStack gap="4">
-            <Alert variant="info" size="small">
-              <FormattedMessage id="VedtakFellesPanel.KanRedigeres" />
-            </Alert>
+            {!isReadOnly && (
+              <Alert variant="info" size="small">
+                <FormattedMessage id="VedtakFellesPanel.KanRedigeres" />
+              </Alert>
+            )}
             <Box padding="4" borderRadius="medium" background="surface-subtle">
-              <VStack gap="2">
-                <Heading size="small">
-                  <FormattedMessage id="VedtakFellesPanel.RedigerBrevOverskrift" />
-                </Heading>
-                <HStack>
-                  <Button
-                    variant="secondary"
-                    type="button"
-                    onClick={() => setVisRedigering(true)}
-                    size="small"
-                    disabled={isReadOnly}
-                  >
-                    <FormattedMessage id="VedtakFellesPanel.RedigerVedtaksbrev" />
-                  </Button>
-                </HStack>
-              </VStack>
+              {!isReadOnly && (
+                <VStack gap="2">
+                  <Heading size="small">
+                    <FormattedMessage id="VedtakFellesPanel.RedigerBrevOverskrift" />
+                  </Heading>
+                  <HStack>
+                    <Button
+                      variant="secondary"
+                      type="button"
+                      onClick={() => setVisRedigering(true)}
+                      size="small"
+                      disabled={isReadOnly}
+                    >
+                      <FormattedMessage id="VedtakFellesPanel.RedigerVedtaksbrev" />
+                    </Button>
+                  </HStack>
+                </VStack>
+              )}
+              {isReadOnly && (
+                <VStack gap="2">
+                  <Alert variant="info" size="small">
+                    <FormattedMessage id="VedtakFellesPanel.ErOverstyrt" />
+                  </Alert>
+                  <div>
+                    <Button
+                      variant="tertiary"
+                      size="small"
+                      onClick={() => forhånadsvisBrev()}
+                      onKeyDown={e => (e.key === 'Enter' ? forhånadsvisBrev() : null)}
+                      type="button"
+                    >
+                      <FormattedMessage id="VedtakForm.ForhandvisBrev" />
+                    </Button>
+                  </div>
+                </VStack>
+              )}
             </Box>
           </VStack>
           {brevHtml && visRedigering && (
             <FritekstRedigeringModal
               setVisRedigering={setVisRedigering}
               brevHtml={brevHtml}
-              forkastManueltBrev={forkastManueltBrev}
               forhåndsvisBrev={previewCallback}
               lagreManueltBrev={lagreManueltBrev}
             />

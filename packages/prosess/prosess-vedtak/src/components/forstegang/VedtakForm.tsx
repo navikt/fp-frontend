@@ -180,8 +180,7 @@ interface Props {
   beregningErManueltFastsatt: boolean;
   oppgaver?: Oppgave[];
   hentBrevHtml: (params: GenererHtmlDokument) => Promise<OverstyrtDokument>;
-  forkastManueltBrev: () => Promise<void>;
-  lagreManueltBrev: (html: string) => Promise<void>;
+  lagreManueltBrev: (html: string | null) => Promise<void>;
 }
 
 export const VedtakForm = ({
@@ -193,7 +192,6 @@ export const VedtakForm = ({
   beregningErManueltFastsatt,
   oppgaver,
   hentBrevHtml,
-  forkastManueltBrev,
   lagreManueltBrev,
 }: Props) => {
   const { behandling, fagsak, alleKodeverk, submitCallback, isReadOnly } =
@@ -238,7 +236,6 @@ export const VedtakForm = ({
         erBehandlingEtterKlage={erBehandlingEtterKlage}
         oppgaver={oppgaver}
         hentBrevHtml={hentBrevHtml}
-        forkastManueltBrev={forkastManueltBrev}
         lagreManueltBrev={lagreManueltBrev}
         setHarOverstyrtVedtaksbrev={setHarOverstyrtVedtaksbrev}
         renderPanel={(skalBrukeOverstyrendeFritekstBrev, erInnvilget, erAvslatt) => {

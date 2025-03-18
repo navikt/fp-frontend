@@ -48,6 +48,7 @@
   "VedtakFellesPanel.ForkastManueltBrev": "Forkast manuelt brev",
   "VedtakFellesPanel.Forkast": "Dersom du forkaster det manuelle brevet, vil det erstattes av det automatisk genererte brevet",
   "VedtakFellesPanel.Ok": "Forkast manuelt brev",
+  "VedtakFellesPanel.ErOverstyrt": "Brev er overstyrt",
 
   "VedtakHelpTextPanel.Vurder": "Vurder følgende før du sender til godkjenning:",
 

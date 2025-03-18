@@ -85,12 +85,8 @@ export const VedtakFpProsessStegInitPanel = () => {
     mutationFn: (values: GenererHtmlDokument) => api.getBrevHtml(values),
   });
 
-  const { mutateAsync: forkastManueltBrev } = useMutation({
-    mutationFn: () => api.forkastManueltBrev({ behandlingUuid: behandling.uuid }),
-  });
-
   const { mutateAsync: lagreManueltBrev } = useMutation({
-    mutationFn: (html: string) => api.lagreBrevHtml({ behandlingUuid: behandling.uuid, html }),
+    mutationFn: (html: string | null) => api.lagreBrevHtml({ behandlingUuid: behandling.uuid, html }),
   });
 
   const { mutate: forhandsvis } = useMutation({
@@ -148,7 +144,6 @@ export const VedtakFpProsessStegInitPanel = () => {
             oppgaver={oppgaver}
             hentBrevHtml={hentBrevHtml}
             lagreManueltBrev={lagreManueltBrev}
-            forkastManueltBrev={forkastManueltBrev}
           />
         ) : (
           <LoadingPanel />

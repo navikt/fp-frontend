@@ -228,7 +228,6 @@ interface Props {
   beregningsresultatOriginalBehandling?: BeregningsresultatDagytelse | BeregningsresultatEs;
   oppgaver?: Oppgave[];
   hentBrevHtml: (params: GenererHtmlDokument) => Promise<OverstyrtDokument>;
-  forkastManueltBrev: () => Promise<void>;
   lagreManueltBrev: (html: string) => Promise<void>;
 }
 
@@ -242,7 +241,6 @@ export const VedtakRevurderingForm = ({
   beregningsresultatOriginalBehandling,
   oppgaver,
   hentBrevHtml,
-  forkastManueltBrev,
   lagreManueltBrev,
 }: Props) => {
   const intl = useIntl();
@@ -318,7 +316,6 @@ export const VedtakRevurderingForm = ({
         erBehandlingEtterKlage={erBehandlingEtterKlage}
         oppgaver={oppgaver}
         hentBrevHtml={hentBrevHtml}
-        forkastManueltBrev={forkastManueltBrev}
         lagreManueltBrev={lagreManueltBrev}
         setHarOverstyrtVedtaksbrev={setHarOverstyrtVedtaksbrev}
         renderPanel={(skalBrukeOverstyrendeFritekstBrev, erInnvilget, erAvslatt, erOpphor) => {

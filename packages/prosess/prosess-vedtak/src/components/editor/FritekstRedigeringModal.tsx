@@ -13,19 +13,12 @@ import { useEditorJs } from './useEditorJs';
 
 interface Props {
   brevHtml: OverstyrtDokument;
-  lagreManueltBrev: (html: string) => Promise<void>;
-  forkastManueltBrev: () => Promise<void>;
+  lagreManueltBrev: (html: string | null) => Promise<void>;
   forhåndsvisBrev: (data: ForhandsvisData) => void;
   setVisRedigering: (visRedigering: boolean) => void;
 }
 
-export const FritekstRedigeringModal = ({
-  brevHtml,
-  lagreManueltBrev,
-  setVisRedigering,
-  forkastManueltBrev,
-  forhåndsvisBrev,
-}: Props) => {
+export const FritekstRedigeringModal = ({ brevHtml, lagreManueltBrev, setVisRedigering, forhåndsvisBrev }: Props) => {
   const intl = useIntl();
 
   const [visTilbakestillAdvarsel, setVisTilbakestillAdvarsel] = useState(false);
@@ -57,7 +50,7 @@ export const FritekstRedigeringModal = ({
   };
 
   const tilbakestill = () => {
-    forkastManueltBrev();
+    lagreManueltBrev(null);
     tilbakestillEndringer();
     setVisTilbakestillAdvarsel(false);
   };

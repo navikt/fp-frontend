@@ -83,8 +83,7 @@ const meta = {
       action('button-click')(args);
       return Promise.resolve({ opprinneligHtml: mal, redigertHtml: null });
     },
-    forkastManueltBrev: action('button-click') as () => Promise<void>,
-    lagreManueltBrev: action('button-click') as (html: string) => Promise<void>,
+    lagreManueltBrev: action('button-click') as (html: string | null) => Promise<void>,
   },
   render: args => <VedtakProsessIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof VedtakProsessIndex>>;
