@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { BodyShort, Table } from '@navikt/ds-react';
 import { calcDaysAndWeeks } from '@navikt/ft-utils';
 
-import { type AlleKodeverk, type DokumentasjonVurderingBehov, UttakType } from '@navikt/fp-types';
+import { type DokumentasjonVurderingBehov, UttakType } from '@navikt/fp-types';
 
 import { getFormatertPeriode } from '../../utils/periodeUtils';
 import { UttakDokumentasjonFaktaDetailForm } from '../UttakDokumentasjonFaktaDetailForm';
@@ -36,7 +36,6 @@ interface Props {
   oppdaterDokBehov: (dokBehov: DokumentasjonVurderingBehov[]) => void;
   readOnly: boolean;
   setDirty: (isDirty: boolean) => void;
-  alleKodeverk: AlleKodeverk;
 }
 
 export const UttakDokumentasjonFaktaTable = ({
@@ -44,7 +43,6 @@ export const UttakDokumentasjonFaktaTable = ({
   oppdaterDokBehov,
   readOnly,
   setDirty,
-  alleKodeverk,
 }: Props) => {
   const [valgtDokBehovFomDatoer, setValgtDokBehovFomDatoer] = useState<string[]>([]);
 
@@ -135,7 +133,6 @@ export const UttakDokumentasjonFaktaTable = ({
                       readOnly={readOnly}
                       submit={oppdaterPeriode}
                       cancel={() => velgDokBehovFomDato(behov.fom)}
-                      alleKodeverk={alleKodeverk}
                     />
                   </div>
                 )

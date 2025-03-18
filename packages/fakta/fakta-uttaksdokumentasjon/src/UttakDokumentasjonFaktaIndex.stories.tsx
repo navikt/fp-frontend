@@ -3,7 +3,7 @@ import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
-import { alleKodeverk, type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import {
   type AktivitetskravGrunnlagArbeid,
   type DokumentasjonVurderingBehov,
@@ -110,7 +110,6 @@ export const AksjonspunktMedUavklartePerioder: Story = {
     ],
     dokumentasjonVurderingBehov: opprettetDokumentasjonVurderingBehovListe,
     submittable: true,
-    alleKodeverk: alleKodeverk as any,
   },
 };
 
@@ -119,7 +118,6 @@ export const ReadonlyAutomatiskAvklartPeriodeAAReg: Story = {
     aksjonspunkterForPanel: [],
     dokumentasjonVurderingBehov: automatiskAvklartBehovListe,
     submittable: true,
-    alleKodeverk: alleKodeverk as any,
   },
 };
 
@@ -172,7 +170,6 @@ export const AksjonspunktSomErBekreftetOgBehandlingAvsluttet: Story = {
     dokumentasjonVurderingBehov: utfortDokumentasjonVurderingBehovListe,
     isReadOnly: true,
     submittable: false,
-    alleKodeverk: alleKodeverk as any,
   },
 };
 
@@ -197,7 +194,6 @@ export const AksjonspunktErBekreftetMenBehandlingErÅpen: Story = {
       },
     ],
     submittable: true,
-    alleKodeverk: alleKodeverk as any,
   },
 };
 
@@ -206,6 +202,5 @@ export const UavklartePerioderMenIkkeAksjonspunktEnnå: Story = {
     aksjonspunkterForPanel: [],
     dokumentasjonVurderingBehov: opprettetDokumentasjonVurderingBehovListe,
     submittable: true,
-    alleKodeverk: alleKodeverk as any,
   },
 };

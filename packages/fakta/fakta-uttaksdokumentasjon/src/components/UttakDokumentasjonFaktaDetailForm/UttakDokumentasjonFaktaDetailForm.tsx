@@ -11,7 +11,8 @@ import dayjs from 'dayjs';
 import { Boks } from '@navikt/fp-fakta-felles';
 import { KodeverkType } from '@navikt/fp-kodeverk';
 import { FOLKETRYGDLOVEN_KAP14_13_URL } from '@navikt/fp-konstanter';
-import { type AlleKodeverk, type DokumentasjonVurderingBehov } from '@navikt/fp-types';
+import { type DokumentasjonVurderingBehov } from '@navikt/fp-types';
+import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { type FormValues, VurderingsAlternativ } from '../../types/FormValues';
 import { getFormatertPeriode, periodeErMerEnnEnDag } from '../../utils/periodeUtils';
@@ -42,10 +43,9 @@ interface Props {
   readOnly: boolean;
   submit: (dokBehov: { perioder: DokumentasjonVurderingBehov[] }) => void;
   cancel: () => void;
-  alleKodeverk: AlleKodeverk;
 }
 
-export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, submit, alleKodeverk }: Props) => {
+export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, submit }: Props) => {
   const intl = useIntl();
 
   const [valgtPeriodeIndex, setValgtPeriodeIndex] = useState<number | undefined>();
@@ -58,6 +58,8 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
     control: formMethods.control,
     name: 'perioder',
   });
+
+  const { alleKodeverk } = usePanelDataContext();
 
   const lagNyPeriode = useCallback(
     (currentIndex: number, dato: string) => {
