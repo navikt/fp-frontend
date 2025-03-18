@@ -27,8 +27,8 @@ const meta = {
     saksnummer: '1',
     toggleVisUtvidetBehandlingDetaljerKnapp: (
       <UtvidEllerMinskKnapp
-        toggleVisUtvidetBehandlingDetaljerPanel={action('button-click')}
-        visUtvidetBehandlingDetaljerPanel={false}
+        toggleVisUtvidetBehandlingDetaljer={action('button-click')}
+        visUtvidetBehandlingDetaljer={false}
       />
     ),
   },

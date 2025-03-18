@@ -10,7 +10,7 @@ export type Historikkinnslag = Readonly<{
   linjer: Linje[];
 }>;
 
-export type Linje =
+type Linje =
   | {
       type: 'TEKST';
       tekst: string;

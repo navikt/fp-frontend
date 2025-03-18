@@ -97,8 +97,8 @@ const meta = {
   },
   args: {
     hentOgSettBehandling: action('button-click'),
-    toggleVisUtvidetBehandlingDetaljerPanel: action('button-click'),
-    visUtvidetBehandlingDetaljerPanel: false,
+    toggleVisUtvidetBehandlingDetaljer: action('button-click'),
+    visUtvidetBehandlingDetaljer: false,
   },
   render: props => {
     //Må hente data til cache før testa komponent blir kalla

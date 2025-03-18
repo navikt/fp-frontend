@@ -30,8 +30,8 @@ interface Props {
   behandlingUuid?: string;
   behandlingVersjon?: number;
   hentOgSettBehandling: () => void;
-  toggleVisUtvidetBehandlingDetaljerPanel: () => void;
-  visUtvidetBehandlingDetaljerPanel: boolean;
+  toggleVisUtvidetBehandlingDetaljer: () => void;
+  visUtvidetBehandlingDetaljer: boolean;
 }
 
 /**
@@ -45,8 +45,8 @@ export const BehandlingSupportIndex = ({
   behandlingUuid,
   behandlingVersjon,
   hentOgSettBehandling,
-  toggleVisUtvidetBehandlingDetaljerPanel,
-  visUtvidetBehandlingDetaljerPanel,
+  toggleVisUtvidetBehandlingDetaljer,
+  visUtvidetBehandlingDetaljer,
 }: Props) => {
   const intl = useIntl();
 
@@ -63,8 +63,8 @@ export const BehandlingSupportIndex = ({
 
   const utvidEllerMinskBehandlingDetaljerKnapp = (
     <UtvidEllerMinskKnapp
-      toggleVisUtvidetBehandlingDetaljerPanel={toggleVisUtvidetBehandlingDetaljerPanel}
-      visUtvidetBehandlingDetaljerPanel={visUtvidetBehandlingDetaljerPanel}
+      toggleVisUtvidetBehandlingDetaljer={toggleVisUtvidetBehandlingDetaljer}
+      visUtvidetBehandlingDetaljer={visUtvidetBehandlingDetaljer}
     />
   );
 

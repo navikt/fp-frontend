@@ -133,7 +133,7 @@ const meta = {
     hentOgSettBehandling: action('button-click'),
     toggleSideMeny: action('button-click'),
     visSideMeny: true,
-    visUtvidetInnhold: false,
+    visUtvidetBehandlingDetaljer: false,
   },
   render: props => {
     //Må hente data til cache før testa komponent blir kalla

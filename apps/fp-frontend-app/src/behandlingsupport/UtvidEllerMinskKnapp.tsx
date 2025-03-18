@@ -4,20 +4,17 @@ import { ExpandVerticalIcon, ShrinkIcon } from '@navikt/aksel-icons';
 import { Button, Tooltip } from '@navikt/ds-react';
 
 interface Props {
-  toggleVisUtvidetBehandlingDetaljerPanel: () => void;
-  visUtvidetBehandlingDetaljerPanel: boolean;
+  toggleVisUtvidetBehandlingDetaljer: () => void;
+  visUtvidetBehandlingDetaljer: boolean;
 }
 
-export const UtvidEllerMinskKnapp = ({
-  toggleVisUtvidetBehandlingDetaljerPanel,
-  visUtvidetBehandlingDetaljerPanel,
-}: Props) => {
+export const UtvidEllerMinskKnapp = ({ toggleVisUtvidetBehandlingDetaljer, visUtvidetBehandlingDetaljer }: Props) => {
   const intl = useIntl();
 
   return (
     <Tooltip
       content={
-        visUtvidetBehandlingDetaljerPanel
+        visUtvidetBehandlingDetaljer
           ? intl.formatMessage({ id: 'BehandlingSupportIndex.Minsk' })
           : intl.formatMessage({ id: 'BehandlingSupportIndex.Utvid' })
       }
@@ -25,7 +22,7 @@ export const UtvidEllerMinskKnapp = ({
     >
       <Button
         icon={
-          visUtvidetBehandlingDetaljerPanel ? (
+          visUtvidetBehandlingDetaljer ? (
             <ShrinkIcon fontSize="1.4rem" aria-hidden />
           ) : (
             <ExpandVerticalIcon fontSize="1.4rem" aria-hidden />
@@ -34,7 +31,7 @@ export const UtvidEllerMinskKnapp = ({
         aria-label="Utvid behandling detaljer panel"
         variant="tertiary-neutral"
         size="xsmall"
-        onClick={toggleVisUtvidetBehandlingDetaljerPanel}
+        onClick={toggleVisUtvidetBehandlingDetaljer}
       />
     </Tooltip>
   );
