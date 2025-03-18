@@ -1,18 +1,9 @@
-import { AksjonspunktKode, AksjonspunktStatus, BehandlingStatus, BehandlingType } from '@navikt/fp-kodeverk';
-import type { Aksjonspunkt, Behandling } from '@navikt/fp-types';
+import { AksjonspunktKode, AksjonspunktStatus, BehandlingStatus } from '@navikt/fp-kodeverk';
+import type { Aksjonspunkt } from '@navikt/fp-types';
 
 import { getAlleMerknaderFraBeslutter } from './getAlleMerknaderFraBeslutter';
 
-describe('<getAlleMerknaderFraBeslutter>', () => {
-  const behandling = {
-    uuid: '1',
-    versjon: 1,
-    status: BehandlingStatus.BEHANDLING_UTREDES,
-    type: BehandlingType.FORSTEGANGSSOKNAD,
-    behandlingPaaVent: false,
-    behandlingHenlagt: false,
-  };
-
+describe('getAlleMerknaderFraBeslutter', () => {
   const aksjonspunkter: Aksjonspunkt[] = [
     {
       status: AksjonspunktStatus.OPPRETTET,
@@ -25,7 +16,7 @@ describe('<getAlleMerknaderFraBeslutter>', () => {
   ];
 
   it('skal hente alle merknader fra beslutter når behandlingstatus er BEHANDLING_UTREDER', () => {
-    const merknader = getAlleMerknaderFraBeslutter(behandling as Behandling, aksjonspunkter);
+    const merknader = getAlleMerknaderFraBeslutter(BehandlingStatus.BEHANDLING_UTREDES, aksjonspunkter);
 
     expect(merknader).toEqual({
       [aksjonspunkter[0].definisjon]: {
@@ -35,11 +26,7 @@ describe('<getAlleMerknaderFraBeslutter>', () => {
   });
 
   it('skal ikke hente merknader  behandlingstatus er ulik BEHANDLING_UTREDER', () => {
-    const behandlingMedAnnenStatus = {
-      ...behandling,
-      status: BehandlingStatus.AVSLUTTET,
-    };
-    const merknader = getAlleMerknaderFraBeslutter(behandlingMedAnnenStatus as Behandling, aksjonspunkter);
+    const merknader = getAlleMerknaderFraBeslutter(BehandlingStatus.AVSLUTTET, aksjonspunkter);
 
     expect(merknader).toEqual({});
   });
