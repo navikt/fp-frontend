@@ -17,7 +17,7 @@ const meta = {
   component: FritekstRedigeringModal,
   decorators: [withIntl, withPanelData, withRouter],
   args: {
-    brevHtml: mal,
+    brevHtml: { opprinneligHtml: mal, redigertHtml: null },
     lagreManueltBrev: action('button-click') as (html: string) => Promise<void>,
     setVisRedigering: action('button-click'),
     forkastManueltBrev: action('button-click') as () => Promise<void>,
