@@ -229,7 +229,7 @@ interface Props {
   beregningsresultatOriginalBehandling?: BeregningsresultatDagytelse | BeregningsresultatEs;
   oppgaver?: Oppgave[];
   hentBrevHtml: (params: GenererHtmlDokument) => Promise<OverstyrtDokument>;
-  lagreManueltBrev: (html: string) => Promise<void>;
+  lagreManueltBrev: (html: string | null) => Promise<void>;
 }
 
 export const VedtakRevurderingForm = ({

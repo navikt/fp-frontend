@@ -19,7 +19,7 @@ const meta = {
   decorators: [withIntl, withPanelData, withRouter],
   args: {
     brevHtml: { opprinneligHtml: mal, redigertHtml: redigertInnhold },
-    lagreManueltBrev: action('button-click') as (html: string) => Promise<void>,
+    lagreManueltBrev: action('button-click') as (html: string | null) => Promise<void>,
     setVisRedigering: action('button-click'),
     forkastManueltBrev: action('button-click') as () => Promise<void>,
     forhåndsvisBrev: action('button-click'),

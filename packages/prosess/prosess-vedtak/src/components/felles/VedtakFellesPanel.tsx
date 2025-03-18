@@ -104,18 +104,36 @@ export const VedtakFellesPanel = ({
   const [visRedigering, setVisRedigering] = useState(false);
   const [brevHtml, setBrevHtml] = useState<OverstyrtDokument>();
 
+  if (!behandlingsresultat) {
+    throw new Error(`behandlingsresultat finnes ikke på behandling ${uuid}`);
+  }
+
+  const [skalBrukeManueltBrev, setSkalBrukeManueltBrev] = useState(
+    behandlingsresultat.vedtaksbrev === DokumentMalType.FRITEKST ||
+      behandlingsresultat.vedtaksbrev === DokumentMalType.FRITEKST_HTML,
+  );
+
+  const hentBrev = async () => {
+    const html = await hentBrevHtml({
+      behandlingUuid: behandling.uuid,
+      dokumentMal: DokumentMalType.FRITEKST_HTML,
+      automatiskVedtaksbrev: false,
+      // FIXME Kor finn eg denne?
+      arsakskode: '',
+    });
+
+    setBrevHtml(html);
+    setSkalBrukeManueltBrev(!!html.redigertHtml);
+  };
+
   useEffect(() => {
-    if (behandling.behandlingsresultat?.vedtaksbrev === DokumentMalType.FRITEKST_HTML) {
-      hentBrevHtml({
-        behandlingUuid: behandling.uuid,
-        dokumentMal: DokumentMalType.FRITEKST_HTML,
-        automatiskVedtaksbrev: false,
-        arsakskode: '',
-      }).then(html => setBrevHtml(html));
+    //Ikkje hent opp brev-mal for gamle saker
+    if (behandling.behandlingsresultat?.vedtaksbrev !== DokumentMalType.FRITEKST) {
+      hentBrev();
     }
   }, []);
 
-  const forhånadsvisBrev = () => {
+  const forhåndsvisBrev = () => {
     previewCallback({
       automatiskVedtaksbrev: true,
       dokumentMal: DokumentMalType.FRITEKST_HTML,
@@ -128,28 +146,11 @@ export const VedtakFellesPanel = ({
     formState: { isSubmitting },
   } = useFormContext();
 
-  if (!behandlingsresultat) {
-    throw new Error(`behandlingsresultat finnes ikke på behandling ${uuid}`);
-  }
-
-  const [skalBrukeManueltBrev, setSkalBrukeManueltBrev] = useState(
-    behandlingsresultat.vedtaksbrev === DokumentMalType.FRITEKST ||
-      behandlingsresultat.vedtaksbrev === DokumentMalType.FRITEKST_HTML,
-  );
-
   const [skalViseModal, setSkalViseModal] = useState(false);
 
   const onToggleOverstyring = async (e: React.MouseEvent) => {
     setSkalBrukeManueltBrev(true);
     setHarOverstyrtVedtaksbrev(true);
-
-    const html = await hentBrevHtml({
-      behandlingUuid: behandling.uuid,
-      dokumentMal: DokumentMalType.FRITEKST_HTML,
-      automatiskVedtaksbrev: false,
-      arsakskode: '',
-    });
-    setBrevHtml(html);
 
     e.preventDefault();
   };
@@ -289,8 +290,8 @@ export const VedtakFellesPanel = ({
                     <Button
                       variant="tertiary"
                       size="small"
-                      onClick={() => forhånadsvisBrev()}
-                      onKeyDown={e => (e.key === 'Enter' ? forhånadsvisBrev() : null)}
+                      onClick={() => forhåndsvisBrev()}
+                      onKeyDown={e => (e.key === 'Enter' ? forhåndsvisBrev() : null)}
                       type="button"
                     >
                       <FormattedMessage id="VedtakForm.ForhandvisBrev" />
@@ -304,6 +305,7 @@ export const VedtakFellesPanel = ({
             <FritekstRedigeringModal
               setVisRedigering={setVisRedigering}
               brevHtml={brevHtml}
+              hentBrev={hentBrev}
               forhåndsvisBrev={previewCallback}
               lagreManueltBrev={lagreManueltBrev}
             />
