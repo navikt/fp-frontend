@@ -11,14 +11,14 @@
       }
 
       @page {
-        size: 595px 842px;
-        margin: 64px 64px 74px 64px;
+        size: 595pt 842pt;
+        margin: 64pt 64pt 74pt 64pt;
 
         @bottom-right {
           content: 'side ' counter(page) ' av ' counter(pages);
           font-family: 'Source Sans Pro', sans-serif !important;
-          font-size: 9px;
-          line-height: 16px;
+          font-size: 9pt;
+          line-height: 16pt;
           color: #555;
           padding-bottom: 10mm;
         }
@@ -29,57 +29,57 @@
       }
 
       #ny_nav_logo {
-        height: 16px;
+        height: 16pt;
         width: auto;
       }
 
       /* Content er alt under logo og til og med siste side, ikke hver enkel side. Se @page */
       #content {
-        margin-top: 48px;
+        margin-top: 48pt;
       }
 
       h1 {
-        font-size: 16px;
-        line-height: 20px;
+        font-size: 16pt;
+        line-height: 20pt;
         font-weight: bold;
-        letter-spacing: 0.3px;
-        margin-top: 48px;
-        margin-bottom: 26px;
+        letter-spacing: 0.3pt;
+        margin-top: 48pt;
+        margin-bottom: 26pt;
       }
 
       h2 {
-        font-size: 13px;
-        line-height: 16px;
+        font-size: 13pt;
+        line-height: 16pt;
         font-weight: bold;
-        letter-spacing: 0.25px;
-        margin-top: 26px;
-        margin-bottom: 6px;
+        letter-spacing: 0.25pt;
+        margin-top: 26pt;
+        margin-bottom: 6pt;
       }
 
       h3 {
-        font-size: 12px;
-        line-height: 16px;
+        font-size: 12pt;
+        line-height: 16pt;
         font-weight: bold;
-        letter-spacing: 0.2px;
-        margin-top: 26px;
-        margin-bottom: 6px;
+        letter-spacing: 0.2pt;
+        margin-top: 26pt;
+        margin-bottom: 6pt;
       }
 
       h4 {
-        font-size: 11px;
-        line-height: 16px;
+        font-size: 11pt;
+        line-height: 16pt;
         font-weight: bold;
-        letter-spacing: 0.1px;
-        margin-top: 26px;
-        margin-bottom: 6px;
+        letter-spacing: 0.1pt;
+        margin-top: 26pt;
+        margin-bottom: 6pt;
       }
 
-      p,
-      li,
+      body,
+      p li,
       td,
       th {
-        font-size: 11px;
-        line-height: 16px;
+        font-size: 11pt;
+        line-height: 16pt;
         font-weight: normal;
         margin-top: 0;
       }
@@ -105,9 +105,9 @@
         transform: rotate(45deg);
         transform-origin: right top;
         position: absolute;
-        top: 600px;
+        top: 600pt;
         color: #dcdcdc;
-        font-size: 200px;
+        font-size: 200pt;
         z-index: -1;
       }
     </style>
@@ -129,7 +129,7 @@
         <table style="color: gray; width: 100%; border-collapse: collapse">
           <tbody>
             <tr>
-              <td style="text-align: left; width: 150px">Navn:</td>
+              <td style="text-align: left; width: 150pt">Navn:</td>
               <td style="text-align: left">ØISTEIN SALAMANDER</td>
               <td style="text-align: left"></td>
               <!-- Empty column -->
@@ -137,7 +137,7 @@
               <!-- Keeping alignment -->
             </tr>
             <tr>
-              <td style="text-align: left; width: 150px">Fødselsnummer:</td>
+              <td style="text-align: left; width: 150pt">Fødselsnummer:</td>
               <td style="text-align: left">284486 31577</td>
               <td></td>
               <!-- Empty column -->
@@ -145,7 +145,7 @@
               <!-- Keeping alignment -->
             </tr>
             <tr>
-              <td style="text-align: left; width: 150px">Saksnummer:</td>
+              <td style="text-align: left; width: 150pt">Saksnummer:</td>
               <td style="text-align: left">1</td>
               <td></td>
               <!-- Empty column -->
@@ -154,15 +154,11 @@
           </tbody>
         </table>
       </div>
-      <!--
-innhold i denne div'en definerer hva som kan redigeres via frontend.
-NB: Tagg attributter vil ikke bli med tilbake fra frontend.
--->
-      <div data-editable="data-editable">
+      <div id="redigerbart-innhold" data-editable="data-editable">
         <h1>Nav har innvilget søknaden din om 100 prosent foreldrepenger</h1>
         <p>
-          Du får 1 846 kroner per dag før skatt fra og med 7. april 2025. Dette er i gjennomsnitt 39 996 kroner i
-          måneden. Den siste dagen du får foreldrepenger er 16. mai 2025.
+          Du får 1&nbsp;846 kroner per dag før skatt fra og med 7. april 2025. Dette er i gjennomsnitt 39&nbsp;996
+          kroner i måneden. Den siste dagen du får foreldrepenger er 16. mai 2025.
         </p>
         <p>
           Foreldrepengene blir utbetalt for alle dager, unntatt lørdag og søndag. Fordi det ikke er like mange dager i
@@ -200,7 +196,7 @@ NB: Tagg attributter vil ikke bli med tilbake fra frontend.
           <a href="https://nav.no/klage">nav.no/klage</a>.
         </p>
       </div>
-      <div id="footer">
+      <div id="readonly-innhold">
         <h2>Du har rett til innsyn</h2>
         <p>
           For å se dokumentene i saken din, logg inn på
@@ -211,7 +207,8 @@ NB: Tagg attributter vil ikke bli med tilbake fra frontend.
           <p>Du finner mer informasjon på <a href="https://nav.no/barn">nav.no/barn</a>.</p>
           <p>På <a href="https://nav.no/kontakt">nav.no/kontakt</a> kan du chatte eller skrive til oss.</p>
           <p>
-            Hvis du ikke finner svar på nav.no kan du ringe oss på telefon 55 55 33 33, hverdager 09.00-15.00.
+            Hvis du ikke finner svar på nav.no kan du ringe oss på telefon 55&nbsp;55&nbsp;33&nbsp;33, hverdager
+            09.00-15.00.
             <br /><br /><br />
             Med vennlig hilsen <br />
             Nav Familie- og pensjonsytelser

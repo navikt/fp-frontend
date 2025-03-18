@@ -38,7 +38,6 @@ export const BrevInnhold = ({
           <style>{` ${brevStiler} `}</style>
           <div className={styles.logo} dangerouslySetInnerHTML={{ __html: readonlyInnhold.navLogo }} />
           <div className={styles.header} dangerouslySetInnerHTML={{ __html: readonlyInnhold.header }} />
-          <div className={styles.header} dangerouslySetInnerHTML={{ __html: readonlyInnhold.red }} />
           <div id="content">
             <div id={EDITOR_HOLDER_ID} className={styles.redigerbartInnhold} />
           </div>
@@ -53,15 +52,17 @@ export const BrevInnhold = ({
               <Alert variant="error">TODO</Alert>
             </>
           )}
-          <Button
-            variant="tertiary"
-            size="small"
-            onClick={() => forhåndsvis()}
-            onKeyDown={e => (e.key === 'Enter' ? forhåndsvis() : null)}
-            type="button"
-          >
-            <FormattedMessage id="VedtakForm.ForhandvisBrev" />
-          </Button>
+          <HStack justify="center">
+            <Button
+              variant="tertiary"
+              size="small"
+              onClick={() => forhåndsvis()}
+              onKeyDown={e => (e.key === 'Enter' ? forhåndsvis() : null)}
+              type="button"
+            >
+              <FormattedMessage id="VedtakForm.ForhandvisBrev" />
+            </Button>
+          </HStack>
           <HStack justify="space-between">
             <Button type="button" variant="primary" onClick={lagreOgLukk} disabled={isReadOnly} size="small">
               <FormattedMessage id="BrevInnhold.Lagre" />
