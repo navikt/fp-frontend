@@ -24,6 +24,7 @@ import type {
   BeregningsresultatEs,
   GenererHtmlDokument,
   Oppgave,
+  OverstyrtDokument,
   SimuleringResultat,
   TilbakekrevingValg,
   Vilkar,
@@ -226,7 +227,7 @@ interface Props {
   beregningErManueltFastsatt: boolean;
   beregningsresultatOriginalBehandling?: BeregningsresultatDagytelse | BeregningsresultatEs;
   oppgaver?: Oppgave[];
-  hentBrevHtml: (params: GenererHtmlDokument) => Promise<string>;
+  hentBrevHtml: (params: GenererHtmlDokument) => Promise<OverstyrtDokument>;
   forkastManueltBrev: () => Promise<void>;
   lagreManueltBrev: (html: string) => Promise<void>;
 }

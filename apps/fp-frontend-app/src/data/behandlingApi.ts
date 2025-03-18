@@ -41,6 +41,7 @@ import type {
   Oppgave,
   OpprettVergeParams,
   Opptjening,
+  OverstyrtDokument,
   PeriodeSoker,
   Personoversikt,
   SimuleringResultat,
@@ -529,7 +530,7 @@ const getBrevHtml = (links: ApiLink[]) => (params: GenererHtmlDokument) =>
     .get(getUrlFromRel('BREV_GENERER_HTML', links), {
       json: params,
     })
-    .json<string>();
+    .json<OverstyrtDokument>();
 
 export const hentBehandling = (behandlingUuid: string) =>
   kyExtended.post<Behandling>(BehandlingUrl.BEHANDLING, {
