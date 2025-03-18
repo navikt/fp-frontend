@@ -12,6 +12,8 @@ import { DokumentMalType } from '@navikt/fp-kodeverk';
 import type { ForhandsvisData } from '../forstegang/VedtakForm';
 import { erRedigertHtmlGyldig, utledRedigerbartInnhold } from './redigeringsUtils';
 
+const SPACE_REGEX = /\s*(<[^>]+>)\s*/g; // Fjerne mellomrom rundt html-tags
+
 export const useEditorJs = (
   editorHolderId: string,
   htmlMal: string,
@@ -26,14 +28,14 @@ export const useEditorJs = (
   useEffect(() => {
     if (!ref.current) {
       const editor = new EditorJS({
-        minHeight: 50,
+        minHeight: 0,
         holder: editorHolderId,
         onReady: async () => {
           ref.current = editor;
 
           const originalHtmlStreng = utledRedigerbartInnhold(htmlMal);
           if (originalHtmlStreng) {
-            await editor.blocks.renderFromHTML(originalHtmlStreng);
+            await editor.blocks.renderFromHTML(originalHtmlStreng.replace(SPACE_REGEX, '$1'));
           }
         },
         tools: TOOLS,
@@ -65,7 +67,7 @@ export const useEditorJs = (
     if (ref.current) {
       const originalHtmlStreng = utledRedigerbartInnhold(htmlMal);
       if (originalHtmlStreng) {
-        ref.current.blocks.renderFromHTML(originalHtmlStreng);
+        ref.current.blocks.renderFromHTML(originalHtmlStreng.replace(SPACE_REGEX, '$1'));
         //FIXME Sjekk om onChange blir trigget
       }
     } else {

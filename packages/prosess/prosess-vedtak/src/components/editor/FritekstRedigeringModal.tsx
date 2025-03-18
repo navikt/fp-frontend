@@ -1,6 +1,8 @@
 import { useState } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { useHref, useLocation } from 'react-router-dom';
 
+import { ExternalLinkIcon } from '@navikt/aksel-icons';
 import { Alert, Button, Heading, Modal, VStack } from '@navikt/ds-react';
 
 import type { ForhandsvisData } from '../forstegang/VedtakForm';
@@ -22,8 +24,13 @@ export const FritekstRedigeringModal = ({
   forkastManueltBrev,
   forhåndsvisBrev,
 }: Props) => {
+  const intl = useIntl();
+
   const [visTilbakestillAdvarsel, setVisTilbakestillAdvarsel] = useState(false);
   const [visForhåndsvisValideringsFeil, setVisForhåndsvisValideringsFeil] = useState(false);
+
+  const { pathname } = useLocation();
+  const href = useHref(pathname);
 
   const { lagreEndringer, validerEndringer, tilbakestillEndringer, forhåndsvis } = useEditorJs(
     EDITOR_HOLDER_ID,
@@ -63,6 +70,17 @@ export const FritekstRedigeringModal = ({
             </Heading>
             <Alert variant="info" size="small">
               <FormattedMessage id="FritekstRedigeringModal.Infotekst" />
+              <Button
+                variant="tertiary"
+                onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+                  e.preventDefault();
+                  window.open(href, '_blank');
+                }}
+                icon={<ExternalLinkIcon aria-hidden />}
+                size="small"
+              >
+                <FormattedMessage id="FritekstRedigeringModal.ApneINyFane" />
+              </Button>
             </Alert>
           </VStack>
         </Modal.Header>
@@ -79,7 +97,7 @@ export const FritekstRedigeringModal = ({
       <Modal
         open={visTilbakestillAdvarsel}
         onClose={() => setVisTilbakestillAdvarsel(false)}
-        aria-label="Tilbakestill brev"
+        aria-label={intl.formatMessage({ id: 'FritekstRedigeringModal.TilbakestillLabel' })}
       >
         <Modal.Header>
           <Heading as="h3" size="medium">

@@ -39,20 +39,15 @@ export const utledStiler = (html: string) => {
 };
 
 export const utledReadonlyInnhold = (html: string) => {
-  // Bruker application/xhtml+xml som datatype, da backend bruker en xhtml parser som
-  // ikke støtter feks. <br> som ikke er self-closing (<br/>)
-  const heleBrevet = new DOMParser().parseFromString(html, 'application/xhtml+xml');
+  const heleBrevet = new DOMParser().parseFromString(html, 'text/html');
   const navLogo = heleBrevet.getElementById('logo')?.innerHTML ?? '';
   const header = heleBrevet.getElementById('header')?.innerHTML ?? '';
-  const footer = heleBrevet.getElementById('footer')?.innerHTML ?? '';
-  const red = heleBrevet.querySelector('[data-editable]')?.innerHTML;
-  return { navLogo, header, footer, red };
+  const footer = heleBrevet.getElementById('readonly-innhold')?.innerHTML ?? '';
+  return { navLogo, header, footer };
 };
 
 export const utledRedigerbartInnhold = (html: string) => {
-  // Bruker application/xhtml+xml som datatype, da backend bruker en xhtml parser som
-  // ikke støtter feks. <br> som ikke er self-closing (<br/>)
-  const heleBrevet = new DOMParser().parseFromString(html, 'application/xhtml+xml');
+  const heleBrevet = new DOMParser().parseFromString(html, 'text/html');
   return heleBrevet.querySelector('[data-editable]')?.innerHTML;
 };
 
