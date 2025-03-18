@@ -202,7 +202,6 @@ export const BehandlingRel = {
   HENT_OPPGAVER: 'hent-oppgaver',
   BREV_GENERER_HTML: 'brev-generer-html',
   BREV_LAGRE_HTML: 'brev-lagre-html',
-  BREV_NULLSTILL_OVERSTYRING: 'brev-nullstill-overstyring',
 };
 
 const getArbeidsgiverOversiktOptions =
@@ -620,16 +619,9 @@ const getFjernVergeV1 = (links: ApiLink[]) => (params: { behandlingUuid: string;
     json: params,
   });
 
-const getLagreBrevHtml = (links: ApiLink[]) => (params: { behandlingUuid: string; html: string }) =>
+const getLagreBrevHtml = (links: ApiLink[]) => (params: { behandlingUuid: string; html: string | null }) =>
   kyExtended
     .post<string>(getUrlFromRel('BREV_LAGRE_HTML', links), {
-      json: params,
-    })
-    .json<void>();
-
-const getForkastManueltBrev = (links: ApiLink[]) => (params: { behandlingUuid: string }) =>
-  kyExtended
-    .post(getUrlFromRel('BREV_NULLSTILL_OVERSTYRING', links), {
       json: params,
     })
     .json<void>();
@@ -750,7 +742,6 @@ export const useBehandlingApi = (behandling: Behandling) => {
     vergeOptions: getVergeOptions(links),
     getBrevHtml: getBrevHtml(links),
     lagreBrevHtml: getLagreBrevHtml(links),
-    forkastManueltBrev: getForkastManueltBrev(links),
     verge: {
       hent: getVerge(links),
       opprettVergeV2: getOpprettVergeV2(links),

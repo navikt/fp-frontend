@@ -38,8 +38,7 @@ interface Props {
   previewCallback: (data: ForhandsvisData) => void;
   oppgaver?: Oppgave[];
   hentBrevHtml: (params: GenererHtmlDokument) => Promise<OverstyrtDokument>;
-  lagreManueltBrev: (html: string) => Promise<void>;
-  forkastManueltBrev: () => Promise<void>;
+  lagreManueltBrev: (html: string | null) => Promise<void>;
 }
 
 export const VedtakProsessIndex = ({
@@ -54,7 +53,6 @@ export const VedtakProsessIndex = ({
   oppgaver,
   hentBrevHtml,
   lagreManueltBrev,
-  forkastManueltBrev,
 }: Props) => {
   const { behandling, fagsak } = usePanelDataContext();
 
@@ -86,7 +84,6 @@ export const VedtakProsessIndex = ({
           beregningErManueltFastsatt={beregningErManueltFastsatt}
           oppgaver={oppgaver}
           hentBrevHtml={hentBrevHtml}
-          forkastManueltBrev={forkastManueltBrev}
           lagreManueltBrev={lagreManueltBrev}
         />
       )}
@@ -101,7 +98,6 @@ export const VedtakProsessIndex = ({
           beregningsresultatOriginalBehandling={originaltBeregningsresultat}
           oppgaver={oppgaver}
           hentBrevHtml={hentBrevHtml}
-          forkastManueltBrev={forkastManueltBrev}
           lagreManueltBrev={lagreManueltBrev}
         />
       )}
