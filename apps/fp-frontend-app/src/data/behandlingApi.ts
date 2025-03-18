@@ -526,11 +526,7 @@ const getOppgaverOptions = (links: ApiLink[]) => (behandling: Behandling) =>
     staleTime: Infinity,
   });
 const getBrevHtml = (links: ApiLink[]) => (params: GenererHtmlDokument) =>
-  kyExtended
-    .get(getUrlFromRel('BREV_GENERER_HTML', links), {
-      json: params,
-    })
-    .json<OverstyrtDokument>();
+  kyExtended.get(getUrlFromRel('BREV_GENERER_HTML', links), { searchParams: params }).json<OverstyrtDokument>();
 
 export const hentBehandling = (behandlingUuid: string) =>
   kyExtended.post<Behandling>(BehandlingUrl.BEHANDLING, {
