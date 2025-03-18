@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { XMarkIcon } from '@navikt/aksel-icons';
 import { Alert, Button, HStack, VStack } from '@navikt/ds-react';
 
+import type { OverstyrtDokument } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { utledReadonlyInnhold, utledStiler } from './redigeringsUtils';
@@ -12,7 +13,7 @@ import styles from './brevInnhold.module.css';
 export const EDITOR_HOLDER_ID = 'rediger-brev';
 
 interface Props {
-  htmlMal: string;
+  htmlMal: OverstyrtDokument;
   setVisTilbakestillAdvarsel: (skalVise: boolean) => void;
   lagreOgLukk: () => void;
   forhåndsvis: () => void;
@@ -28,8 +29,9 @@ export const BrevInnhold = ({
 }: Props) => {
   const { isReadOnly } = usePanelDataContext();
 
-  const brevStiler = utledStiler(htmlMal);
-  const readonlyInnhold = utledReadonlyInnhold(htmlMal);
+  const html = htmlMal.redigertHtml ?? htmlMal.opprinneligHtml;
+  const brevStiler = utledStiler(html);
+  const readonlyInnhold = utledReadonlyInnhold(html);
 
   return (
     <>

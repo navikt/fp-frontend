@@ -17,7 +17,14 @@ import {
   KonsekvensForYtelsen,
 } from '@navikt/fp-kodeverk';
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
-import type { Aksjonspunkt, Behandling, Behandlingsresultat, GenererHtmlDokument, Oppgave } from '@navikt/fp-types';
+import type {
+  Aksjonspunkt,
+  Behandling,
+  Behandlingsresultat,
+  GenererHtmlDokument,
+  Oppgave,
+  OverstyrtDokument,
+} from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { FritekstRedigeringModal } from '../editor/FritekstRedigeringModal';
@@ -70,7 +77,7 @@ interface Props {
   tilbakekrevingtekst?: string;
   vedtakstatusTekst?: string;
   oppgaver?: Oppgave[];
-  hentBrevHtml: (params: GenererHtmlDokument) => Promise<string>;
+  hentBrevHtml: (params: GenererHtmlDokument) => Promise<OverstyrtDokument>;
   lagreManueltBrev: (html: string) => Promise<void>;
   forkastManueltBrev: () => Promise<void>;
   setHarOverstyrtVedtaksbrev: (harOverstyrtVedtaksbrev: boolean) => void;
@@ -97,7 +104,7 @@ export const VedtakFellesPanel = ({
     behandling;
 
   const [visRedigering, setVisRedigering] = useState(false);
-  const [brevHtml, setBrevHtml] = useState<string>();
+  const [brevHtml, setBrevHtml] = useState<OverstyrtDokument>();
 
   useEffect(() => {
     if (behandling.behandlingsresultat?.vedtaksbrev === DokumentMalType.FRITEKST_HTML) {
@@ -106,7 +113,7 @@ export const VedtakFellesPanel = ({
         dokumentMal: DokumentMalType.FRITEKST_HTML,
         automatiskVedtaksbrev: false,
         arsakskode: '',
-      }).then((html: string) => setBrevHtml(html));
+      }).then(html => setBrevHtml(html));
     }
   }, []);
 

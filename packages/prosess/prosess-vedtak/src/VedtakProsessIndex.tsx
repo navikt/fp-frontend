@@ -10,6 +10,7 @@ import type {
   BeregningsresultatEs,
   GenererHtmlDokument,
   Oppgave,
+  OverstyrtDokument,
   SimuleringResultat,
   TilbakekrevingValg,
   Vilkar,
@@ -36,7 +37,7 @@ interface Props {
   vilkar: Vilkar[];
   previewCallback: (data: ForhandsvisData) => void;
   oppgaver?: Oppgave[];
-  hentBrevHtml: (params: GenererHtmlDokument) => Promise<string>;
+  hentBrevHtml: (params: GenererHtmlDokument) => Promise<OverstyrtDokument>;
   lagreManueltBrev: (html: string) => Promise<void>;
   forkastManueltBrev: () => Promise<void>;
 }

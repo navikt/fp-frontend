@@ -5,12 +5,14 @@ import { useHref, useLocation } from 'react-router-dom';
 import { ExternalLinkIcon } from '@navikt/aksel-icons';
 import { Alert, Button, Heading, Modal, VStack } from '@navikt/ds-react';
 
+import type { OverstyrtDokument } from '@navikt/fp-types';
+
 import type { ForhandsvisData } from '../forstegang/VedtakForm';
 import { BrevInnhold, EDITOR_HOLDER_ID } from './BrevInnhold';
 import { useEditorJs } from './useEditorJs';
 
 interface Props {
-  brevHtml: string;
+  brevHtml: OverstyrtDokument;
   lagreManueltBrev: (html: string) => Promise<void>;
   forkastManueltBrev: () => Promise<void>;
   forhåndsvisBrev: (data: ForhandsvisData) => void;

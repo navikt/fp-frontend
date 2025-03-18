@@ -8,6 +8,7 @@ import edjsHTML from 'editorjs-html';
 import debounce from 'lodash.debounce';
 
 import { DokumentMalType } from '@navikt/fp-kodeverk';
+import type { OverstyrtDokument } from '@navikt/fp-types';
 
 import type { ForhandsvisData } from '../forstegang/VedtakForm';
 import { erRedigertHtmlGyldig, utledRedigerbartInnhold } from './redigeringsUtils';
@@ -16,7 +17,7 @@ const SPACE_REGEX = /\s*(<[^>]+>)\s*/g; // Fjerne mellomrom rundt html-tags
 
 export const useEditorJs = (
   editorHolderId: string,
-  htmlMal: string,
+  htmlMal: OverstyrtDokument,
   forhåndsvisBrev: (data: ForhandsvisData) => void,
   lagreManueltBrev: (html: string) => Promise<void>,
 ) => {
@@ -33,7 +34,7 @@ export const useEditorJs = (
         onReady: async () => {
           ref.current = editor;
 
-          const originalHtmlStreng = utledRedigerbartInnhold(htmlMal);
+          const originalHtmlStreng = utledRedigerbartInnhold(htmlMal.redigertHtml ?? htmlMal.opprinneligHtml);
           if (originalHtmlStreng) {
             await editor.blocks.renderFromHTML(originalHtmlStreng.replace(SPACE_REGEX, '$1'));
           }
@@ -65,7 +66,7 @@ export const useEditorJs = (
 
   const tilbakestillEndringer = () => {
     if (ref.current) {
-      const originalHtmlStreng = utledRedigerbartInnhold(htmlMal);
+      const originalHtmlStreng = utledRedigerbartInnhold(htmlMal.redigertHtml ?? htmlMal.opprinneligHtml);
       if (originalHtmlStreng) {
         ref.current.blocks.renderFromHTML(originalHtmlStreng.replace(SPACE_REGEX, '$1'));
         //FIXME Sjekk om onChange blir trigget

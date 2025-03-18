@@ -4,3 +4,8 @@ export type GenererHtmlDokument = Readonly<{
   arsakskode: string;
   automatiskVedtaksbrev: boolean;
 }>;
+
+export type OverstyrtDokument = Readonly<{
+  opprinneligHtml: string;
+  redigertHtml: string | null;
+}>;
