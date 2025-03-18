@@ -13,12 +13,19 @@ import { useEditorJs } from './useEditorJs';
 
 interface Props {
   brevHtml: OverstyrtDokument;
+  hentBrev: () => Promise<void>;
   lagreManueltBrev: (html: string | null) => Promise<void>;
   forhåndsvisBrev: (data: ForhandsvisData) => void;
   setVisRedigering: (visRedigering: boolean) => void;
 }
 
-export const FritekstRedigeringModal = ({ brevHtml, lagreManueltBrev, setVisRedigering, forhåndsvisBrev }: Props) => {
+export const FritekstRedigeringModal = ({
+  brevHtml,
+  hentBrev,
+  lagreManueltBrev,
+  setVisRedigering,
+  forhåndsvisBrev,
+}: Props) => {
   const intl = useIntl();
 
   const [visTilbakestillAdvarsel, setVisTilbakestillAdvarsel] = useState(false);
@@ -36,6 +43,11 @@ export const FritekstRedigeringModal = ({ brevHtml, lagreManueltBrev, setVisRedi
 
   const lagreOgLukk = () => {
     lagreEndringer();
+    hentBrev();
+    // TODO Ta inn att gammal kode
+    // TODO Sjekk at alle stories er korrekt
+    //årsak : varsel om revurdering
+    // Ikkje kunne senda til godkjenning uten endring
     setVisRedigering(false);
   };
 
