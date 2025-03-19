@@ -120,12 +120,12 @@ export const VedtakFellesPanel = ({
     });
 
     setBrevHtml(html);
-    setSkalBrukeManueltBrev(!!html.redigertHtml || behandlingsresultat.vedtaksbrev === DokumentMalType.FRITEKST_HTML);
+    setSkalBrukeManueltBrev(!!html.redigertHtml);
   };
 
   useEffect(() => {
-    //Ikkje hent opp brev-mal for gamle saker
-    if (behandling.behandlingsresultat?.vedtaksbrev !== DokumentMalType.FRITEKST) {
+    //Ikkje hent opp brev-mal for lagacy-saker
+    if (!behandling.behandlingsresultat?.overskrift) {
       hentBrev();
     }
   }, []);
@@ -251,10 +251,9 @@ export const VedtakFellesPanel = ({
       <VedtakHelpTextPanel aksjonspunkter={aksjonspunkt} isReadOnly={isReadOnly} />
       {oppgaver && oppgaver.length > 0 && <OppgaveTabell oppgaver={oppgaver} />}
       {renderPanel(skalBrukeManueltBrev, erInnvilget, erAvslatt, erOpphor)}
-      {behandling.status === BehandlingStatus.AVSLUTTET &&
-        behandlingsresultat.vedtaksbrev === DokumentMalType.FRITEKST && (
-          <LegacyOverstyrtVedtaksbrev forhåndsvisOverstyrtBrev={forhåndsvisBrev} behandling={behandling} />
-        )}
+      {behandling.status === BehandlingStatus.AVSLUTTET && behandlingsresultat.vedtaksbrev === 'FRITEKST' && (
+        <LegacyOverstyrtVedtaksbrev forhåndsvisOverstyrtBrev={forhåndsvisBrev} behandling={behandling} />
+      )}
       {skalBrukeManueltBrev && (
         <div className={styles.brevRedigering}>
           <VStack gap="4">
