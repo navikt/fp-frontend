@@ -197,7 +197,7 @@ export const VedtakForm = ({
   const { behandling, fagsak, alleKodeverk, submitCallback, isReadOnly } =
     usePanelDataContext<VedtakAksjonspunkter[]>();
 
-  const { aksjonspunkt, behandlingsresultat, sprakkode } = behandling;
+  const { aksjonspunkt, behandlingsresultat, språkkode } = behandling;
 
   const intl = useIntl();
 
@@ -246,7 +246,7 @@ export const VedtakForm = ({
                 isReadOnly={isReadOnly}
                 skalBrukeOverstyrendeFritekstBrev={skalBrukeOverstyrendeFritekstBrev}
                 ytelseTypeKode={fagsak.fagsakYtelseType}
-                språkKode={sprakkode}
+                språkkode={språkkode}
                 beregningsresultat={beregningsresultat}
                 beregningErManueltFastsatt={beregningErManueltFastsatt}
               />
