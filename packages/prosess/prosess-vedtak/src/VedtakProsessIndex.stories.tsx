@@ -799,3 +799,27 @@ export const OpphørForRevurderingForeldrepengerDerBeregningErManueltFastsatt: S
     },
   },
 };
+
+export const LegacyOverstyring: Story = {
+  args: {
+    behandling: {
+      ...defaultBehandling,
+      status: BehandlingStatus.AVSLUTTET,
+      behandlingsresultat: {
+        vedtaksbrev: DokumentMalType.FRITEKST,
+        type: BehandlingResultatType.INNVILGET,
+        overskrift: 'Dette er en overskrift',
+        fritekstbrev: 'Dette er en fritekst',
+      },
+    } as Behandling,
+    beregningresultatDagytelse: defaultberegningresultatDagytelse,
+    fagsak: {
+      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    } as Fagsak,
+    isReadOnly: true,
+    hentBrevHtml: args => {
+      action('button-click')(args);
+      return Promise.resolve({ opprinneligHtml: mal, redigertHtml: null });
+    },
+  },
+};
