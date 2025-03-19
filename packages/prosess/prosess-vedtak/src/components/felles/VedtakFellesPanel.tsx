@@ -113,7 +113,10 @@ export const VedtakFellesPanel = ({
 
   useEffect(() => {
     //Ikkje hent opp brev-mal for lagacy-saker
-    if (!behandling.behandlingsresultat?.overskrift) {
+    const erAvsluttetLegacyOverstyring =
+      !!behandling.behandlingsresultat?.overskrift && behandling.status === behandlingStatusCode.AVSLUTTET;
+
+    if (!erAvsluttetLegacyOverstyring) {
       hentBrev();
     }
   }, []);
