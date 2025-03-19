@@ -9,7 +9,6 @@ import { OkAvbrytModal } from '@navikt/ft-ui-komponenter';
 import {
   AksjonspunktKode,
   Avslagsarsak,
-  BehandlingStatus,
   BehandlingStatus as behandlingStatusCode,
   DokumentMalType,
   isAvslag,
@@ -18,14 +17,7 @@ import {
   KonsekvensForYtelsen,
 } from '@navikt/fp-kodeverk';
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
-import type {
-  Aksjonspunkt,
-  Behandling,
-  Behandlingsresultat,
-  GenererHtmlDokument,
-  Oppgave,
-  OverstyrtDokument,
-} from '@navikt/fp-types';
+import type { Aksjonspunkt, Behandling, Behandlingsresultat, Oppgave, OverstyrtDokument } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { FritekstRedigeringModal } from '../editor/FritekstRedigeringModal';
@@ -79,7 +71,7 @@ interface Props {
   tilbakekrevingtekst?: string;
   vedtakstatusTekst?: string;
   oppgaver?: Oppgave[];
-  hentBrevHtml: (params: GenererHtmlDokument) => Promise<OverstyrtDokument>;
+  hentBrevHtml: () => Promise<OverstyrtDokument>;
   lagreManueltBrev: (html: string | null) => Promise<void>;
   setHarOverstyrtVedtaksbrev: (harOverstyrtVedtaksbrev: boolean) => void;
 }
@@ -113,11 +105,7 @@ export const VedtakFellesPanel = ({
   const [skalBrukeManueltBrev, setSkalBrukeManueltBrev] = useState(false);
 
   const hentBrev = async () => {
-    const html = await hentBrevHtml({
-      behandlingUuid: behandling.uuid,
-      dokumentMal: DokumentMalType.FRITEKST_HTML,
-      automatiskVedtaksbrev: false,
-    });
+    const html = await hentBrevHtml();
 
     setBrevHtml(html);
     setSkalBrukeManueltBrev(!!html.redigertHtml);
@@ -251,7 +239,7 @@ export const VedtakFellesPanel = ({
       <VedtakHelpTextPanel aksjonspunkter={aksjonspunkt} isReadOnly={isReadOnly} />
       {oppgaver && oppgaver.length > 0 && <OppgaveTabell oppgaver={oppgaver} />}
       {renderPanel(skalBrukeManueltBrev, erInnvilget, erAvslatt, erOpphor)}
-      {behandling.status === BehandlingStatus.AVSLUTTET && behandlingsresultat.vedtaksbrev === 'FRITEKST' && (
+      {behandling.behandlingsresultat?.overskrift && (
         <LegacyOverstyrtVedtaksbrev forhåndsvisOverstyrtBrev={forhåndsvisBrev} behandling={behandling} />
       )}
       {skalBrukeManueltBrev && (

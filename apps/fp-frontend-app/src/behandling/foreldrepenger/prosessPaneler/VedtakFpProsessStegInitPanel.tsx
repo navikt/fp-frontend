@@ -9,13 +9,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { AksjonspunktKode, AksjonspunktStatus, isAvslag, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { VedtakProsessIndex } from '@navikt/fp-prosess-vedtak';
-import type {
-  Aksjonspunkt,
-  Behandlingsresultat,
-  ForhåndsvisMeldingParams,
-  GenererHtmlDokument,
-  Vilkar,
-} from '@navikt/fp-types';
+import type { Aksjonspunkt, Behandlingsresultat, ForhåndsvisMeldingParams, Vilkar } from '@navikt/fp-types';
 import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingApi';
@@ -82,7 +76,7 @@ export const VedtakFpProsessStegInitPanel = () => {
     !isBdFetching && !isTvFetching && !isBgFetching && !isSrFetching && !isBdobFetching && !isOFetching;
 
   const { mutateAsync: hentBrevHtml } = useMutation({
-    mutationFn: (values: GenererHtmlDokument) => api.getBrevHtml(values),
+    mutationFn: () => api.getBrevHtml(behandling.uuid),
   });
 
   const { mutateAsync: lagreManueltBrev } = useMutation({
