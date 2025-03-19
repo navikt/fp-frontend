@@ -10,7 +10,6 @@ import {
   BehandlingResultatType,
   BehandlingStatus,
   BehandlingType,
-  DokumentMalType,
   FagsakYtelseType,
   KonsekvensForYtelsen,
   OppgaveType,
@@ -130,7 +129,7 @@ export const GodkjentForeldrepengerMedManueltBrevForSaksbehandlerMedOverstyring:
       ...defaultBehandling,
       status: BehandlingStatus.AVSLUTTET,
       behandlingsresultat: {
-        vedtaksbrev: DokumentMalType.FRITEKST_HTML,
+        vedtaksbrev: 'FRITEKST',
         type: BehandlingResultatType.INNVILGET,
       },
     } as Behandling,
@@ -162,7 +161,7 @@ export const AvslåttForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyring:
     isReadOnly: false,
     hentBrevHtml: args => {
       action('button-click')(args);
-      return Promise.resolve({ opprinneligHtml: mal, redigertHtml: redigertInnhold });
+      return Promise.resolve({ opprinneligHtml: mal, redigertHtml: null });
     },
   },
 };
@@ -183,7 +182,7 @@ export const GodkjentAvslagForForeldrepengerForSaksbehandlerMedOverstyring: Stor
     isReadOnly: true,
     hentBrevHtml: args => {
       action('button-click')(args);
-      return Promise.resolve({ opprinneligHtml: mal, redigertHtml: redigertInnhold });
+      return Promise.resolve({ opprinneligHtml: mal, redigertHtml: null });
     },
   },
 };
@@ -601,7 +600,7 @@ export const GodkjentRevurderingForeldrepengerMedManueltBrevForSaksbehandlerMedO
       type: BehandlingType.REVURDERING,
       status: BehandlingStatus.AVSLUTTET,
       behandlingsresultat: {
-        vedtaksbrev: DokumentMalType.FRITEKST_HTML,
+        vedtaksbrev: 'FRITEKST',
         type: BehandlingResultatType.INNVILGET,
         konsekvenserForYtelsen: [KonsekvensForYtelsen.FORELDREPENGER_OPPHORER],
       },
@@ -806,7 +805,7 @@ export const LegacyOverstyring: Story = {
       ...defaultBehandling,
       status: BehandlingStatus.AVSLUTTET,
       behandlingsresultat: {
-        vedtaksbrev: DokumentMalType.FRITEKST,
+        vedtaksbrev: 'FRITEKST',
         type: BehandlingResultatType.INNVILGET,
         overskrift: 'Dette er en overskrift',
         fritekstbrev: 'Dette er en fritekst',
