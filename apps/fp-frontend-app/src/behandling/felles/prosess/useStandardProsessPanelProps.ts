@@ -118,7 +118,7 @@ export const useStandardProsessPanelProps = (
 
   const isReadOnly = erReadOnly(behandling, vilkarForSteg, rettigheter, false);
 
-  const alleMerknaderFraBeslutter = getAlleMerknaderFraBeslutter(behandling, aksjonspunkterForSteg);
+  const alleMerknaderFraBeslutter = getAlleMerknaderFraBeslutter(behandling.status, aksjonspunkterForSteg);
 
   const harApneAksjonspunkter = aksjonspunkterForSteg.some(
     ap => ap.status === AksjonspunktStatus.OPPRETTET && ap.kanLoses,

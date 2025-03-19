@@ -4815,7 +4815,7 @@
     {
       "kode": "BASERT_PÅ_INNTEKTSMELDING",
       "kodeverk": "ARBEIDSFORHOLD_HANDLING_TYPE",
-      "navn": "Arbeidsforholdet som ikke ligger i AA-reg er basert på inntektsmelding"
+      "navn": "Arbeidsforholdet som ikke ligger i Aa-reg er basert på inntektsmelding"
     },
     {
       "kode": "BRUK_MED_OVERSTYRT_PERIODE",

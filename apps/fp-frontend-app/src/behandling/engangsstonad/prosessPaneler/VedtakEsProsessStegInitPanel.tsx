@@ -76,7 +76,7 @@ export const VedtakEsProsessStegInitPanel = () => {
   const { data: tilbakekrevingValg, isFetching: isTvFetching } = useQuery(api.tilbakekrevingValgOptions(behandling));
   const { data: oppgaver, isFetching: isOFetching } = useQuery(api.oppgaverOptions(behandling));
 
-  const isNotFetching = !isBogFetching && !isBeFetching && !isSrFetching && !isTvFetching  && !isOFetching;
+  const isNotFetching = !isBogFetching && !isBeFetching && !isSrFetching && !isTvFetching && !isOFetching;
 
   const { mutate: forhåndsvis } = useMutation({
     mutationFn: (values: ForhåndsvisMeldingParams) =>

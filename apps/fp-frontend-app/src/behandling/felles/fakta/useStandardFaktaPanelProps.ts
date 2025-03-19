@@ -73,7 +73,7 @@ export const useStandardFaktaPanelProps = (
     aksjonspunkt && aksjonspunktKoder ? aksjonspunkt.filter(ap => aksjonspunktKoder.includes(ap.definisjon)) : [];
 
   const readOnly = erReadOnly(behandling, [], rettigheter, false);
-  const alleMerknaderFraBeslutter = getAlleMerknaderFraBeslutter(behandling, aksjonspunkterForSteg);
+  const alleMerknaderFraBeslutter = getAlleMerknaderFraBeslutter(behandling.status, aksjonspunkterForSteg);
 
   const submitCallback = getBekreftAksjonspunktFaktaCallback(
     fagsak,

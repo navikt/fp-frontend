@@ -14,7 +14,7 @@
   "ArbeidsforholdFieldArray.Inntektsmelding": "Inntektsmelding",
   "ArbeidsforholdFieldArray.Aksjonspunkt": "Åpent aksjonspunkt",
   "ArbeidsforholdFieldArray.Ok": "Arbeidsforhold er OK",
-  "ArbeidsforholdFieldArray.HjelpetekstDel1": "Søker er registrert med permisjon eller permittering uten sluttdato fra arbeidsforholdet sitt i AA-reg. Vurder om dette arbeidsforholdet skal være med i beregningen. Dersom det fjernes vil det bli borte fra beregningen og eventuell mottatt inntektsmelding vil ikke brukes. Tas det med, vil det brukes i beregningen og bli med videre i behandlingen.",
+  "ArbeidsforholdFieldArray.HjelpetekstDel1": "Søker er registrert med permisjon eller permittering uten sluttdato fra arbeidsforholdet sitt i Aa-reg. Vurder om dette arbeidsforholdet skal være med i beregningen. Dersom det fjernes vil det bli borte fra beregningen og eventuell mottatt inntektsmelding vil ikke brukes. Tas det med, vil det brukes i beregningen og bli med videre i behandlingen.",
   "ArbeidsforholdFieldArray.HjelpetekstDel2": "Dersom arbeidsforholdet tas med og det trengs inntektsmelding, må dette innhentes.",
   "ArbeidsforholdFieldArray.HjelpetekstDel3": "Permisjoner eller permitteringer med en sluttdato tas automatisk med. Du trenger ikke etterspørre inntektsmeldinger.",
   "ArbeidsforholdFieldArray.HjelpetekstDel4": "Mottas det inntektsmelding med refusjonskrav vil denne brukes i behandlingen.",

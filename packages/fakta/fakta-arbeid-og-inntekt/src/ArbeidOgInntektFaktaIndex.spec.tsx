@@ -386,7 +386,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
       screen.getByText(
         'Ingen arbeidsforhold eller inntektsmeldinger registrert på bruker. Det er kun unntaksvis at det skal ' +
           'opprettes manuelle arbeidsforhold. Det kan være i saker søker er ambassadepersonell, utenlandske ' +
-          'ansatte eller fisker. Hvis det er andre arbeidsforhold må du kontakte arbeidsgiver eller søker for riktig registrering i AA-reg.',
+          'ansatte eller fisker. Hvis det er andre arbeidsforhold må du kontakte arbeidsgiver eller søker for riktig registrering i Aa-reg.',
       ),
     ).toBeInTheDocument();
     expect(screen.queryByText('Legg til arbeidsforhold')).not.toBeInTheDocument();
