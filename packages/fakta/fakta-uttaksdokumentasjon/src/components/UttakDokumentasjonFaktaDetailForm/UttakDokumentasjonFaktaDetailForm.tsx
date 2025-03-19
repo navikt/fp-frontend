@@ -92,7 +92,8 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
 
   const handleSubmit = (formvalues: FormValues): void => submit(fraFormValues(formvalues));
 
-  const morsArbeid = behov.aktivitetskravGrunnlag.toSorted((a, b) => a.orgNummer.localeCompare(b.orgNummer));
+  const aktivitetskravGrunnlagArbeids = behov.aktivitetskravGrunnlag ?? [];
+  const morsArbeid = aktivitetskravGrunnlagArbeids.toSorted((a, b) => a.orgNummer.localeCompare(b.orgNummer));
   return (
     <Boks harBorderLeft={!behov.vurdering && fields.length === 1}>
       <Form formMethods={formMethods} onSubmit={handleSubmit}>
@@ -105,7 +106,7 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
                   onClick={() => setValgtPeriodeIndex(0)}
                 />
               </div>
-              {behov.aktivitetskravGrunnlag.length > 0 && (
+              {aktivitetskravGrunnlagArbeids.length > 0 && (
                 <Table size="small">
                   <Table.Header>
                     <Table.Row>
