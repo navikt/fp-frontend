@@ -78,7 +78,6 @@ export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov, submi
         </Alert>
       )}
       <UttakDokumentasjonFaktaTable
-        harAksjonspunkt={aksjonspunkterForPanel.length > 0}
         dokumentasjonVurderingBehov={dokBehov}
         oppdaterDokBehov={setDokBehov}
         setDirty={setIsDirty}

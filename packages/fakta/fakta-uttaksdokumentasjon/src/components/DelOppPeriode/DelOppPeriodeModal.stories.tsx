@@ -22,6 +22,7 @@ const meta = {
       tom: '2022-11-23',
       type: UttakType.UTSETTELSE,
       årsak: UttakÅrsak.INNLEGGELSE_SØKER,
+      aktivitetskravGrunnlag: [],
     },
   },
 } satisfies Meta<typeof DelOppPeriodeModal>;
