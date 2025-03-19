@@ -4,7 +4,7 @@ import { type IntlShape, useIntl } from 'react-intl';
 
 import { Form } from '@navikt/ft-form-hooks';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import {
   AksjonspunktKode,

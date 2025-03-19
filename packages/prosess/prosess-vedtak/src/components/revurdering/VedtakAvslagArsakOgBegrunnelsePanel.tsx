@@ -83,7 +83,7 @@ export const VedtakAvslagArsakOgBegrunnelsePanel = ({
           badges={[
             {
               type: 'info',
-              titleText: getLanguageFromSprakkode(språkKode),
+              titleText: getLanguageFromSprakkode(språkkode),
             },
           ]}
         />

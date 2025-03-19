@@ -35,7 +35,7 @@ export const VedtakFritekstPanel = ({ behandlingsresultat, språkkode, isReadOnl
           badges={[
             {
               type: 'info',
-              titleText: getLanguageFromSprakkode(språkKode),
+              titleText: getLanguageFromSprakkode(språkkode),
             },
           ]}
         />
