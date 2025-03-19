@@ -9,10 +9,12 @@ import debounce from 'lodash.debounce';
 
 import { DokumentMalType } from '@navikt/fp-kodeverk';
 import type { OverstyrtDokument } from '@navikt/fp-types';
+import { notEmpty } from '@navikt/fp-utils';
 
 import type { ForhandsvisData } from '../forstegang/VedtakForm';
 import { erRedigertHtmlGyldig, utledReadonlyInnhold, utledRedigerbartInnhold } from './redigeringsUtils';
 
+const EDITOR_IKKE_INITIALISERT = 'Editor er ikke initialisert';
 const SPACE_REGEX = /\s*(<[^>]+>)\s*/g; // Fjerne mellomrom rundt html-tags
 
 export const useEditorJs = (
@@ -26,7 +28,7 @@ export const useEditorJs = (
 
   const readonlyInnhold = utledReadonlyInnhold(htmlMal.opprinneligHtml);
 
-  const lagreBrev = useLagreBrev();
+  const lagreBrevDebouncer = useLagreBrevDebouncer();
 
   useEffect(() => {
     if (!ref.current) {
@@ -34,28 +36,23 @@ export const useEditorJs = (
         minHeight: 0,
         holder: editorHolderId,
         onReady: async () => {
-          ref.current = editor;
+          // Må ha denne sjekken for å unngå to køyringar grunna React.StrictMode
+          if (ref.current === null) {
+            ref.current = editor;
 
-          const originalHtmlStreng = utledRedigerbartInnhold(htmlMal.redigertHtml ?? htmlMal.opprinneligHtml);
-          if (originalHtmlStreng) {
-            await editor.blocks.renderFromHTML(originalHtmlStreng.replace(SPACE_REGEX, '$1'));
+            const originalHtmlStreng = utledRedigerbartInnhold(htmlMal.redigertHtml ?? htmlMal.opprinneligHtml);
+            if (originalHtmlStreng) {
+              await editor.blocks.renderFromHTML(originalHtmlStreng.replace(SPACE_REGEX, '$1'));
+            }
           }
         },
         tools: TOOLS,
-        onChange: async () => {
-          const lagreWrapper = async () => {
-            const innhold = await editor.saver.save();
-            const html = edjsHTML().parse(innhold);
-            lagreManueltBrev(
-              `<div id="redigerbart-innhold" data-editable="data-editable">${html}</div><div id="readonly-innhold">${readonlyInnhold.footer}</div>`,
-            );
-          };
-
+        onChange: () => {
           //Forhindrer at lagring blir gjort ved initialisering
           if (refInitialRender.current) {
             refInitialRender.current = false;
           } else {
-            lagreBrev(lagreWrapper);
+            lagreBrevDebouncer(lagreEndringer);
           }
         },
       });
@@ -69,60 +66,50 @@ export const useEditorJs = (
   }, []);
 
   const tilbakestillEndringer = () => {
-    if (ref.current) {
-      const originalHtmlStreng = utledRedigerbartInnhold(htmlMal.redigertHtml ?? htmlMal.opprinneligHtml);
-      if (originalHtmlStreng) {
-        ref.current.blocks.renderFromHTML(originalHtmlStreng.replace(SPACE_REGEX, '$1'));
-        //FIXME Sjekk om onChange blir trigget
-      }
-    } else {
-      throw new Error('Editor er ikke initialisert');
+    const editor = notEmpty(ref.current, EDITOR_IKKE_INITIALISERT);
+    const originalHtmlStreng = utledRedigerbartInnhold(htmlMal.redigertHtml ?? htmlMal.opprinneligHtml);
+    if (originalHtmlStreng) {
+      editor.blocks.renderFromHTML(originalHtmlStreng.replace(SPACE_REGEX, '$1'));
     }
   };
 
   const lagreEndringer = async () => {
-    if (ref.current) {
-      const innhold = await ref.current.save();
-      const html = edjsHTML().parse(innhold);
-      lagreManueltBrev(
-        `<div id="redigerbart-innhold" data-editable="data-editable">${html}</div><div id="readonly-innhold">${readonlyInnhold.footer}</div>`,
-      );
-    } else {
-      throw new Error('Editor er ikke initialisert');
-    }
+    const editor = notEmpty(ref.current, EDITOR_IKKE_INITIALISERT);
+    const innhold = await editor.save();
+    const html = edjsHTML().parse(innhold);
+
+    lagreManueltBrev(
+      `<div id="redigerbart-innhold" data-editable="data-editable">${html}</div><div id="readonly-innhold">${readonlyInnhold.footer}</div>`,
+    );
   };
 
   const validerEndringer = async () => {
-    if (ref.current) {
-      const innhold = await ref.current.save();
-      const html = edjsHTML().parse(innhold);
-      return erRedigertHtmlGyldig(html);
-    } else {
-      throw new Error('Editor er ikke initialisert');
-    }
+    const editor = notEmpty(ref.current, EDITOR_IKKE_INITIALISERT);
+    const innhold = await editor.save();
+    const html = edjsHTML().parse(innhold);
+
+    return erRedigertHtmlGyldig(html);
   };
 
   const forhåndsvis = async () => {
-    if (ref.current) {
-      const innhold = await ref.current.save();
-      const html = edjsHTML().parse(innhold);
-      forhåndsvisBrev({
-        automatiskVedtaksbrev: true,
-        dokumentMal: DokumentMalType.FRITEKST_HTML,
-        gjelderVedtak: true,
-        fritekst: `<div id="redigerbart-innhold" data-editable="data-editable">${html}</div><div id="readonly-innhold">${readonlyInnhold.footer}</div>`,
-      });
-    } else {
-      throw new Error('Editor er ikke initialisert');
-    }
+    const editor = notEmpty(ref.current, EDITOR_IKKE_INITIALISERT);
+    const innhold = await editor.save();
+    const html = edjsHTML().parse(innhold);
+
+    forhåndsvisBrev({
+      automatiskVedtaksbrev: true,
+      dokumentMal: DokumentMalType.FRITEKST_HTML,
+      gjelderVedtak: true,
+      fritekst: `<div id="redigerbart-innhold" data-editable="data-editable">${html}</div><div id="readonly-innhold">${readonlyInnhold.footer}</div>`,
+    });
   };
 
   return { tilbakestillEndringer, lagreEndringer, validerEndringer, forhåndsvis };
 };
 
-const getTimeoutValue = () => (import.meta.env.MODE === 'test' ? 0 : 5000);
+const getTimeoutValue = () => (import.meta.env.MODE === 'test' ? 0 : 1000);
 
-const useLagreBrev = () => {
+const useLagreBrevDebouncer = () => {
   const lagre = debounce((lagreFn: () => void) => {
     lagreFn();
   }, getTimeoutValue());
