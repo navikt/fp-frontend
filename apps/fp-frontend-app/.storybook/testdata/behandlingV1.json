@@ -245,6 +245,12 @@
       "type": "GET"
     },
     {
+      "href": "/fpsak/api/behandling/person/omsorg-og-rett?uuid=7d198233-b499-4aaf-a01b-be97958e20ce",
+      "rel": "omsorg-og-rett",
+      "requestPayload": null,
+      "type": "GET"
+    },
+    {
       "href": "/fpsak/api/behandling/kontrollresultat/resultat?uuid=7d198233-b499-4aaf-a01b-be97958e20ce",
       "rel": "kontrollresultat",
       "requestPayload": null,

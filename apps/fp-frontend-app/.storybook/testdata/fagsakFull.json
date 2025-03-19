@@ -258,7 +258,8 @@
         "Dette er ein lang begrunnelsestekst",
         "Personopplysning"
       ],
-      "dokumenter": []
+      "dokumenter": [],
+      "linjer": []
     },
     {
       "behandlingUuid": "7d198233-b499-4aaf-a01b-be97958e20ce",
@@ -270,7 +271,8 @@
       "tittel": "Dette er en inntektsmelding",
       "skjermlenke": null,
       "body": [],
-      "dokumenter": []
+      "dokumenter": [],
+      "linjer": []
     }
   ]
 }

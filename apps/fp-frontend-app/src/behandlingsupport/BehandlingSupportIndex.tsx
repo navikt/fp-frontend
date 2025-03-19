@@ -21,6 +21,7 @@ import { MeldingIndex } from './melding/MeldingIndex';
 import { NotatIndex } from './notat/NotatIndex';
 import { SupportTabs } from './supportTabs';
 import { TotrinnskontrollIndex } from './totrinnskontroll/TotrinnskontrollIndex';
+import { UtvidEllerMinskKnapp } from './UtvidEllerMinskKnapp.tsx';
 
 import styles from './behandlingSupportIndex.module.css';
 
@@ -29,6 +30,8 @@ interface Props {
   behandlingUuid?: string;
   behandlingVersjon?: number;
   hentOgSettBehandling: () => void;
+  toggleVisUtvidetBehandlingDetaljer: () => void;
+  visUtvidetBehandlingDetaljer: boolean;
 }
 
 /**
@@ -42,6 +45,8 @@ export const BehandlingSupportIndex = ({
   behandlingUuid,
   behandlingVersjon,
   hentOgSettBehandling,
+  toggleVisUtvidetBehandlingDetaljer,
+  visUtvidetBehandlingDetaljer,
 }: Props) => {
   const intl = useIntl();
 
@@ -55,6 +60,13 @@ export const BehandlingSupportIndex = ({
 
   const fagsak = fagsakData.getFagsak();
   const behandling = fagsakData.getBehandling(behandlingUuid);
+
+  const utvidEllerMinskBehandlingDetaljerKnapp = (
+    <UtvidEllerMinskKnapp
+      toggleVisUtvidetBehandlingDetaljer={toggleVisUtvidetBehandlingDetaljer}
+      visUtvidetBehandlingDetaljer={visUtvidetBehandlingDetaljer}
+    />
+  );
 
   const navigate = useNavigate();
 
@@ -120,6 +132,7 @@ export const BehandlingSupportIndex = ({
             valgtBehandlingUuid={behandling.uuid}
             beslutterFormData={beslutterFormData}
             setBeslutterFormData={setBeslutterFormData}
+            toggleVisUtvidetBehandlingDetaljerKnapp={utvidEllerMinskBehandlingDetaljerKnapp}
           />
         )}
       </Tabs.Panel>
@@ -130,6 +143,7 @@ export const BehandlingSupportIndex = ({
             valgtBehandlingUuid={behandling.uuid}
             beslutterFormData={beslutterFormData}
             setBeslutterFormData={setBeslutterFormData}
+            toggleVisUtvidetBehandlingDetaljerKnapp={utvidEllerMinskBehandlingDetaljerKnapp}
           />
         )}
       </Tabs.Panel>
@@ -139,6 +153,7 @@ export const BehandlingSupportIndex = ({
           behandlingUuid={behandlingUuid}
           historikkinnslagFpSak={fagsakData.getHistorikkFpSak()}
           historikkinnslagFpTilbake={fagsakData.getHistorikkFpTilbake()}
+          toggleVisUtvidetBehandlingDetaljerKnapp={utvidEllerMinskBehandlingDetaljerKnapp}
         />
       </Tabs.Panel>
       <Tabs.Panel value={SupportTabs.MELDINGER}>
@@ -149,6 +164,7 @@ export const BehandlingSupportIndex = ({
             meldingFormData={meldingFormData}
             setMeldingFormData={setMeldingFormData}
             hentOgSettBehandling={hentOgSettBehandling}
+            toggleVisUtvidetBehandlingDetaljerKnapp={utvidEllerMinskBehandlingDetaljerKnapp}
           />
         )}
       </Tabs.Panel>
@@ -157,10 +173,11 @@ export const BehandlingSupportIndex = ({
           saksnummer={fagsak.saksnummer}
           behandlingUuid={behandlingUuid}
           behandlingVersjon={behandlingVersjon}
+          toggleVisUtvidetBehandlingDetaljerKnapp={utvidEllerMinskBehandlingDetaljerKnapp}
         />
       </Tabs.Panel>
       <Tabs.Panel value={SupportTabs.NOTATER}>
-        <NotatIndex fagsak={fagsak} />
+        <NotatIndex fagsak={fagsak} toggleVisUtvidetBehandlingDetaljerKnapp={utvidEllerMinskBehandlingDetaljerKnapp} />
       </Tabs.Panel>
     </Tabs>
   );

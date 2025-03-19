@@ -1,3 +1,4 @@
+import type { ReactElement } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
@@ -20,6 +21,7 @@ interface Props {
   getBehandlingLocation: (behandlingUuid: string) => Location;
   createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location | undefined;
   valgtBehandlingUuid?: string;
+  utvidEllerMinskBehandlingDetaljerKnapp: ReactElement;
 }
 
 export const HistorikkSakIndex = ({
@@ -31,6 +33,7 @@ export const HistorikkSakIndex = ({
   getBehandlingLocation,
   createLocationForSkjermlenke,
   valgtBehandlingUuid,
+  utvidEllerMinskBehandlingDetaljerKnapp,
 }: Props) => (
   <RawIntlProvider value={intl}>
     <Historikk
@@ -42,6 +45,7 @@ export const HistorikkSakIndex = ({
       saksnummer={saksnummer}
       getBehandlingLocation={getBehandlingLocation}
       createLocationForSkjermlenke={createLocationForSkjermlenke}
+      utvidEllerMinskBehandlingDetaljerKnapp={utvidEllerMinskBehandlingDetaljerKnapp}
     />
   </RawIntlProvider>
 );

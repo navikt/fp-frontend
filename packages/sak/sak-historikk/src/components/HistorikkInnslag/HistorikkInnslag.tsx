@@ -1,4 +1,7 @@
-import { BodyLong, BodyShort, Box, type BoxProps, Detail, HStack, VStack } from '@navikt/ds-react';
+import { useState } from 'react';
+import { useIntl } from 'react-intl';
+
+import { BodyLong, BodyShort, Box, type BoxProps, Button, Detail, HStack, VStack } from '@navikt/ds-react';
 import { type Location } from 'history';
 
 import { HistorikkAktor, KodeverkType } from '@navikt/fp-kodeverk';
@@ -32,10 +35,15 @@ export const HistorikkInnslag = ({
   historikkInnslag: { aktør, opprettetTidspunkt, tittel, linjer, dokumenter, skjermlenke },
   saksnummer,
 }: Props) => {
+  const intl = useIntl();
   const rolleNavn = getKodeverknavn(aktør.type, KodeverkType.HISTORIKK_AKTOER);
 
-  const name = `${rolleNavn} ${aktør.ident || ''}`;
+  const name = `${rolleNavn} ${aktør.ident ?? ''}`;
   const timestamp = formatDateTime(opprettetTidspunkt);
+
+  const erMerEnnToLinjer = linjer.length > 3;
+  const [erLinjerSkjult, setErLinjerSkjult] = useState(erMerEnnToLinjer);
+  const linjerSomSkalVises = linjer.slice(0, erLinjerSkjult ? 3 : linjer.length);
 
   return (
     <HStack data-testid="historikkinnslag" wrap={false} gap="5" justify="end" align="center">
@@ -57,16 +65,23 @@ export const HistorikkInnslag = ({
             />
           )}
 
-          {linjer && linjer.length > 0 && (
+          {linjer.length > 0 && (
             <div>
-              {linjer.map((linje, index) =>
+              {linjerSomSkalVises.map((linje, index) =>
                 linje.type === 'TEKST' ? (
-                  <BodyLong key={`tekstlinje-${index}`} size="medium">
+                  <BodyLong key={`${linje.tekst}-${index}`} size="medium">
                     {parseBoldText(linje.tekst)}
                   </BodyLong>
                 ) : (
-                  <br key={`linjeskift-${index}`} />
+                  <br key={`${linje.type}-${index}`} />
                 ),
+              )}
+              {erMerEnnToLinjer && (
+                <Button variant="tertiary" size="small" onClick={() => setErLinjerSkjult(!erLinjerSkjult)}>
+                  {erLinjerSkjult
+                    ? intl.formatMessage({ id: 'Historikkinnslag.VisMer' })
+                    : intl.formatMessage({ id: 'Historikkinnslag.VisMindre' })}
+                </Button>
               )}
             </div>
           )}

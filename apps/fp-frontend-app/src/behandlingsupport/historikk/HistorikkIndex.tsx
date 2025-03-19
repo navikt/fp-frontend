@@ -1,3 +1,4 @@
+import type { ReactElement } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { useQuery } from '@tanstack/react-query';
@@ -14,6 +15,7 @@ interface Props {
   behandlingUuid?: string;
   historikkinnslagFpSak?: Historikkinnslag[];
   historikkinnslagFpTilbake?: Historikkinnslag[];
+  toggleVisUtvidetBehandlingDetaljerKnapp: ReactElement;
 }
 
 export const HistorikkIndex = ({
@@ -21,6 +23,7 @@ export const HistorikkIndex = ({
   behandlingUuid,
   historikkinnslagFpSak,
   historikkinnslagFpTilbake,
+  toggleVisUtvidetBehandlingDetaljerKnapp,
 }: Props) => {
   const {
     kodeverkOptions,
@@ -45,6 +48,7 @@ export const HistorikkIndex = ({
       getBehandlingLocation={getBehandlingLocation}
       createLocationForSkjermlenke={createLocationForSkjermlenke}
       valgtBehandlingUuid={behandlingUuid}
+      utvidEllerMinskBehandlingDetaljerKnapp={toggleVisUtvidetBehandlingDetaljerKnapp}
     />
   );
 };

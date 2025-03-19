@@ -50,6 +50,7 @@ interface Props {
   hentOgSettBehandling: () => void;
   visSideMeny: boolean;
   toggleSideMeny: () => void;
+  visUtvidetBehandlingDetaljer: boolean;
 }
 
 export const FagsakProfileIndex = ({
@@ -60,6 +61,7 @@ export const FagsakProfileIndex = ({
   hentOgSettBehandling,
   visSideMeny,
   toggleSideMeny,
+  visUtvidetBehandlingDetaljer,
 }: Props) => {
   const intl = useIntl();
   const [showAll, setShowAll] = useState(!behandlingUuid);
@@ -102,58 +104,69 @@ export const FagsakProfileIndex = ({
       )}
       <VStack gap="5">
         {!shouldRedirectToBehandlinger && (
-          <>
-            <HStack justify="space-between" align="start">
-              <div>
-                <FagsakProfilSakIndex
-                  saksnummer={fagsak.saksnummer}
-                  fagsakYtelseType={fagsakYtelseTypeMedNavn}
-                  fagsakStatus={fagsakStatusMedNavn}
-                  dekningsgrad={fagsak.dekningsgrad}
-                  fagsakMarkeringTekster={finnFagsakMarkeringTekst(fagsak)}
-                  visSideMeny={visSideMeny}
-                  toggleSideMeny={toggleSideMeny}
-                />
-              </div>
-              <ErrorBoundary
-                errorMessageCallback={addErrorMessage}
-                errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Meny' })}
-              >
-                <BehandlingMenuIndex
-                  fagsakData={fagsakData}
-                  behandlingUuid={behandlingUuid}
-                  setBehandling={setBehandling}
-                  hentOgSettBehandling={hentOgSettBehandling}
-                  behandling={behandling}
-                />
-              </ErrorBoundary>
-            </HStack>
+          <HStack justify="space-between" align="start">
+            <div>
+              <FagsakProfilSakIndex
+                saksnummer={fagsak.saksnummer}
+                fagsakYtelseType={fagsakYtelseTypeMedNavn}
+                fagsakStatus={fagsakStatusMedNavn}
+                dekningsgrad={fagsak.dekningsgrad}
+                fagsakMarkeringTekster={finnFagsakMarkeringTekst(fagsak)}
+                visSideMeny={visSideMeny}
+                toggleSideMeny={toggleSideMeny}
+              />
+            </div>
             <ErrorBoundary
               errorMessageCallback={addErrorMessage}
-              errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Behandlingsvelger' })}
+              errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Meny' })}
             >
-              <BehandlingVelgerSakIndex
-                behandlinger={fagsakData.getAlleBehandlinger()}
+              <BehandlingMenuIndex
+                fagsakData={fagsakData}
                 behandlingUuid={behandlingUuid}
-                skalViseAlleBehandlinger={showAll}
-                toggleVisAlleBehandlinger={toggleShowAll}
-                renderRadSomLenke={(className, behandlingInfoKomponent, uuid) => (
-                  <NavLink className={className} to={getBehandlingLocation(uuid)} onClick={toggleShowAll}>
-                    {behandlingInfoKomponent}
-                  </NavLink>
-                )}
-                getKodeverkMedNavn={getKodeverkFn}
+                setBehandling={setBehandling}
+                hentOgSettBehandling={hentOgSettBehandling}
+                behandling={behandling}
               />
             </ErrorBoundary>
-          </>
+          </HStack>
         )}
-        <ErrorBoundary
-          errorMessageCallback={addErrorMessage}
-          errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Risikoklassifisering' })}
+
+        <VStack
+          gap="6"
+          className={
+            visUtvidetBehandlingDetaljer ? styles.skjulUtvidetBehandlingDetaljer : styles.visUtvidetBehandlingDetaljer
+          }
         >
-          <RisikoklassifiseringIndex fagsakData={fagsakData} behandling={behandling} setBehandling={setBehandling} />
-        </ErrorBoundary>
-        <EksterneRessurser fagsak={fagsak} ainntektHref={ainntektHref} arbeidstakerHref={arbeidstakerHref} />
+          {!shouldRedirectToBehandlinger && (
+            <div>
+              <ErrorBoundary
+                errorMessageCallback={addErrorMessage}
+                errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Behandlingsvelger' })}
+              >
+                <BehandlingVelgerSakIndex
+                  behandlinger={fagsakData.getAlleBehandlinger()}
+                  behandlingUuid={behandlingUuid}
+                  skalViseAlleBehandlinger={showAll}
+                  toggleVisAlleBehandlinger={toggleShowAll}
+                  renderRadSomLenke={(className, behandlingInfoKomponent, uuid) => (
+                    <NavLink className={className} to={getBehandlingLocation(uuid)} onClick={toggleShowAll}>
+                      {behandlingInfoKomponent}
+                    </NavLink>
+                  )}
+                  getKodeverkMedNavn={getKodeverkFn}
+                />
+              </ErrorBoundary>
+            </div>
+          )}
+
+          <ErrorBoundary
+            errorMessageCallback={addErrorMessage}
+            errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Risikoklassifisering' })}
+          >
+            <RisikoklassifiseringIndex fagsakData={fagsakData} behandling={behandling} setBehandling={setBehandling} />
+          </ErrorBoundary>
+          <EksterneRessurser fagsak={fagsak} ainntektHref={ainntektHref} arbeidstakerHref={arbeidstakerHref} />
+        </VStack>
       </VStack>
     </div>
   );

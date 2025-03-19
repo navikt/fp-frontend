@@ -60,6 +60,11 @@ export const FagsakIndex = () => {
 
   const { hentOgSettBehandling } = useHentBehandling(erTilbakekreving, setBehandling, behandlingUuidFraUrl);
   const [visSideMeny, setVisSideMeny] = useState(true);
+  const [visUtvidetBehandlingDetaljer, setVisUtvidetBehandlingDetaljer] = useState(false);
+
+  const toggleVisUtvidetBehandlingDetaljer = () => {
+    setVisUtvidetBehandlingDetaljer(!visUtvidetBehandlingDetaljer);
+  };
 
   const toggleSideMeny = () => {
     setVisSideMeny(!visSideMeny);
@@ -117,6 +122,7 @@ export const FagsakIndex = () => {
             behandling={behandling}
             visSideMeny={visSideMeny}
             toggleSideMeny={toggleSideMeny}
+            visUtvidetBehandlingDetaljer={visUtvidetBehandlingDetaljer}
           />
         }
         supportContent={
@@ -125,6 +131,8 @@ export const FagsakIndex = () => {
             behandlingUuid={behandlingUuidFraUrl}
             behandlingVersjon={behandling?.versjon}
             hentOgSettBehandling={hentOgSettBehandling}
+            toggleVisUtvidetBehandlingDetaljer={toggleVisUtvidetBehandlingDetaljer}
+            visUtvidetBehandlingDetaljer={visUtvidetBehandlingDetaljer}
           />
         }
         visittkortContent={() => {

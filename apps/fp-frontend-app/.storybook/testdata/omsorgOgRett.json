@@ -1,0 +1,20 @@
+{
+  "søknad": {
+    "søkerHarAleneomsorg": "NEI",
+    "annenpartIdent": null,
+    "annenpartBostedsland": null,
+    "annenpartRettighet": {
+      "harRettNorge": "IKKE_RELEVANT",
+      "harOppholdEØS": "IKKE_RELEVANT",
+      "harRettEØS": "IKKE_RELEVANT",
+      "harUføretrygd": "IKKE_RELEVANT"
+    },
+    "registerdata": {
+      "harAnnenpartUføretrygd": "IKKE_RELEVANT",
+      "harAnnenpartForeldrepenger": "NEI",
+      "harAnnenpartEngangsstønad": "NEI"
+    },
+    "manuellBehandlingResultat": null,
+    "relasjonsRolleType": "MORA"
+  }
+}

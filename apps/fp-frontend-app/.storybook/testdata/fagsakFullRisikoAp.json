@@ -239,7 +239,9 @@
         "kontrollresultat": "HOY",
         "iayFaresignaler": null,
         "medlFaresignaler": {
-          "faresignaler": ["Dette er et faresignal"]
+          "faresignaler": [
+            "Dette er et faresignal"
+          ]
         },
         "faresignalVurdering": null
       },
@@ -257,10 +259,13 @@
       "opprettetTidspunkt": "2023-06-09T10:49:30.395",
       "tittel": "Bytt enhet",
       "skjermlenke": null,
-      "body": ["__Behandlende enhet__ endret fra 4867 NAV Familie- og pensjonsytelser Foreldrepenger til __4806 NAV Familie- og pensjonsytelser Drammen__",
+      "body": [
+        "__Behandlende enhet__ endret fra 4867 NAV Familie- og pensjonsytelser Foreldrepenger til __4806 NAV Familie- og pensjonsytelser Drammen__",
         "Dette er ein lang begrunnelsestekst",
-        "Personopplysning"],
-      "dokumenter": []
+        "Personopplysning"
+      ],
+      "dokumenter": [],
+      "linjer": []
     },
     {
       "behandlingUuid": "7d198233-b499-4aaf-a01b-be97958e20ce",
@@ -272,7 +277,8 @@
       "tittel": "Dette er en inntektsmelding",
       "skjermlenke": null,
       "body": [],
-      "dokumenter": []
+      "dokumenter": [],
+      "linjer": []
     }
   ]
 }

@@ -28,6 +28,7 @@ import initFetchData from '../../.storybook/testdata/initFetch.json';
 import initFetchTilbakeData from '../../.storybook/testdata/initFetchTilbake.json';
 import inntektArbeidYtelseData from '../../.storybook/testdata/inntektArbeidYtelse.json';
 import medlemskapData from '../../.storybook/testdata/medlemskap.json';
+import omsorgOgRettData from '../../.storybook/testdata/omsorgOgRett.json';
 import personoversiktData from '../../.storybook/testdata/personoversikt.json';
 import soknadData from '../../.storybook/testdata/soknad.json';
 
@@ -127,6 +128,7 @@ export const BekreftAdopsjon: Story = {
         ),
         http.get('http://www.test.com/api/result', () => HttpResponse.json(behandlingV2Data), { once: true }),
         http.get(getHrefBehandling(BehandlingRel.MEDLEMSKAP), () => HttpResponse.json(medlemskapData)),
+        http.get(getHrefBehandling(BehandlingRel.OMSORG_OG_RETT), () => HttpResponse.json(omsorgOgRettData)),
       ]),
     },
   },
@@ -142,6 +144,7 @@ export const RisikoAksjonspunkt: Story = {
         http.get(getHrefSak(FagsakRel.FETCH_FAGSAK), () => HttpResponse.json(fagsakFullRisikoApData)),
         http.get(getHrefBehandling(BehandlingRel.MEDLEMSKAP), () => HttpResponse.json(medlemskapData)),
         http.get(getHrefBehandling(BehandlingRel.INNTEKTSMELDINGER), () => HttpResponse.json(alleInntektsmeldinger)),
+        http.get(getHrefBehandling(BehandlingRel.OMSORG_OG_RETT), () => HttpResponse.json(omsorgOgRettData)),
       ]),
     },
   },

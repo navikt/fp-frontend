@@ -2,9 +2,17 @@
   "History.FiltrerPaBehandling": "Filtrer på behandling",
   "History.Historikk": "Historikk",
 
+  "BubbleText.LukkeTekstfelt": "Lukke tekstfelt",
+  "BubbleText.ApneTekstfelt": "Åpne tekstfelt",
+
+  "BehandlingSupportIndex.Utvid": "Utvid",
+  "BehandlingSupportIndex.Minsk": "Minsk",
+
   "Historikkinnslag.Soker": "Søker",
   "Historikkinnslag.Saksbehandler": "Saksbehandler",
   "Historikkinnslag.Beslutter": "Beslutter",
   "Historikkinnslag.Vedtakslosninger": "Vedtaksløsningen",
-  "Historikkinnslag.Arbeidsgiver": "Arbeidsgiver"
+  "Historikkinnslag.Arbeidsgiver": "Arbeidsgiver",
+  "Historikkinnslag.VisMer": "Vis mer...",
+  "Historikkinnslag.VisMindre": "Vis mindre"
 }

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { type ReactElement, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 
@@ -17,6 +17,8 @@ import { FagsakData } from '../../fagsak/FagsakData';
 import { SupportHeaderAndContent } from '../SupportHeader';
 import { SettPaVentReadOnlyModal } from './SettPaVentReadOnlyModal';
 
+import styles from './MeldingIndex.module.css';
+
 const EMPTY_ARRAY = [] as KodeverkMedNavn[];
 
 interface Props {
@@ -25,6 +27,7 @@ interface Props {
   meldingFormData?: any;
   setMeldingFormData: (data?: any) => void;
   hentOgSettBehandling: () => void;
+  toggleVisUtvidetBehandlingDetaljerKnapp: ReactElement;
 }
 
 const finnFristFraBehandling = (behandling: BehandlingAppKontekst) =>
@@ -41,12 +44,14 @@ export const MeldingIndex = ({
   meldingFormData,
   setMeldingFormData,
   hentOgSettBehandling,
+  toggleVisUtvidetBehandlingDetaljerKnapp,
 }: Props) => {
   const intl = useIntl();
   const [showSettPaVentModal, setShowSettPaVentModal] = useState(false);
   const [showMessagesModal, setShowMessageModal] = useState(false);
 
   const navigate = useNavigate();
+  const [top, setTop] = useState<number>();
 
   const fagsak = fagsakData.getFagsak();
   const valgtBehandling = notEmpty(fagsakData.getBehandling(valgtBehandlingUuid));
@@ -96,12 +101,23 @@ export const MeldingIndex = ({
     behandlingTillatteOperasjoner?.behandlingKanSendeMelding;
 
   return (
-    <>
+    <div
+      className={styles.container}
+      style={{ height: `calc(100vh - ${top}px)` }}
+      ref={el => {
+        if (el) {
+          setTop(el.getBoundingClientRect().top);
+        }
+      }}
+    >
       {showMessagesModal && (
         <MessagesModalSakIndex showModal={submitFinished && showMessagesModal} closeEvent={afterSubmit} />
       )}
 
-      <SupportHeaderAndContent tekst={intl.formatMessage({ id: 'MeldingIndex.Meldinger' })}>
+      <SupportHeaderAndContent
+        tekst={intl.formatMessage({ id: 'MeldingIndex.Meldinger' })}
+        toggleVisUtvidetBehandlingDetaljerKnapp={toggleVisUtvidetBehandlingDetaljerKnapp}
+      >
         <VStack gap="4">
           {!kanSendeMelding && (
             <Alert variant="info">
@@ -133,7 +149,7 @@ export const MeldingIndex = ({
           frist={finnFristFraBehandling(valgtBehandling)}
         />
       )}
-    </>
+    </div>
   );
 };
 

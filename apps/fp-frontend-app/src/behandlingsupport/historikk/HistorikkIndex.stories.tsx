@@ -1,4 +1,5 @@
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
+import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
@@ -13,6 +14,7 @@ import {
 import { notEmpty } from '@navikt/fp-utils';
 
 import { FagsakRel, FagsakUrl, initFetchOptions, useFagsakApi, wrapUrl } from '../../data/fagsakApi';
+import { UtvidEllerMinskKnapp } from '../UtvidEllerMinskKnapp.tsx';
 import { HistorikkIndex } from './HistorikkIndex';
 
 import initFetchData from '../../../.storybook/testdata/initFetch.json';
@@ -44,6 +46,12 @@ const meta = {
   },
   args: {
     saksnummer: '1',
+    toggleVisUtvidetBehandlingDetaljerKnapp: (
+      <UtvidEllerMinskKnapp
+        toggleVisUtvidetBehandlingDetaljer={action('button-click')}
+        visUtvidetBehandlingDetaljer={false}
+      />
+    ),
   },
   render: props => {
     //Må hente data til cache før testa komponent blir kalla

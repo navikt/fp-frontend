@@ -29,6 +29,7 @@ import { notEmpty } from '@navikt/fp-utils';
 
 import { FagsakRel, FagsakUrl, initFetchOptions, useFagsakApi, wrapUrl } from '../../data/fagsakApi';
 import { FagsakData } from '../../fagsak/FagsakData';
+import { UtvidEllerMinskKnapp } from '../UtvidEllerMinskKnapp.tsx';
 import { TotrinnskontrollIndex } from './TotrinnskontrollIndex';
 
 import initFetchData from '../../../.storybook/testdata/initFetch.json';
@@ -146,6 +147,12 @@ const meta = {
     fagsakData: new FagsakData(FAGSAK),
     valgtBehandlingUuid: '1',
     setBeslutterFormData: action('button-click'),
+    toggleVisUtvidetBehandlingDetaljerKnapp: (
+      <UtvidEllerMinskKnapp
+        toggleVisUtvidetBehandlingDetaljer={action('button-click')}
+        visUtvidetBehandlingDetaljer={false}
+      />
+    ),
   },
   render: props => {
     //Må hente data til cache før testa komponent blir kalla
