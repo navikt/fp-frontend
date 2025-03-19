@@ -133,7 +133,9 @@ export const FagsakProfileIndex = ({
 
         <VStack
           gap="6"
-          className={`${visUtvidetBehandlingDetaljer ? styles.skjulUtvidetBehandlingDetaljer : styles.visUtvidetBehandlingDetaljer}`}
+          className={
+            visUtvidetBehandlingDetaljer ? styles.skjulUtvidetBehandlingDetaljer : styles.visUtvidetBehandlingDetaljer
+          }
         >
           {!shouldRedirectToBehandlinger && (
             <div>
