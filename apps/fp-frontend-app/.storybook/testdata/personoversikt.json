@@ -16,7 +16,9 @@
         "adresselinje3": null,
         "postNummer": "2500",
         "poststed": "Ukjent",
-        "land": "Norge"
+        "land": "Norge",
+        "fom": "1992-09-18",
+        "tom": "9999-12-31"
       }
     ]
   },
@@ -37,7 +39,9 @@
         "adresselinje3": null,
         "postNummer": "2500",
         "poststed": "Ukjent",
-        "land": "Norge"
+        "land": "Norge",
+        "fom": "2013-10-07",
+        "tom": "9999-12-31"
       }
     ]
   },
@@ -59,7 +63,9 @@
           "adresselinje3": null,
           "postNummer": "2500",
           "poststed": "Ukjent",
-          "land": "Norge"
+          "land": "Norge",
+          "fom": "2025-02-05",
+          "tom": "9999-12-31"
         }
       ]
     }
