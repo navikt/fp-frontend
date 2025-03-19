@@ -63,15 +63,20 @@ export const FritekstRedigeringModal = ({
     }
   };
 
-  const tilbakestill = () => {
+  const tilbakestill = async () => {
     lagreManueltBrev(null);
     tilbakestillEndringer();
     setVisTilbakestillAdvarsel(false);
   };
 
+  const lukkModalOgHentBrevPåNytt = () => {
+    setVisRedigering(false);
+    hentBrev();
+  };
+
   return (
     <>
-      <Modal open onClose={() => setVisRedigering(false)} width="53.75rem" aria-label="Rediger brev">
+      <Modal open onClose={lukkModalOgHentBrevPåNytt} width="53.75rem" aria-label="Rediger brev">
         <Modal.Header>
           <VStack gap="4">
             <Heading level="3" size="small">

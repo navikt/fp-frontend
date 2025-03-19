@@ -143,12 +143,13 @@ export const VedtakFellesPanel = ({
     e.preventDefault();
   };
 
-  const avsluttRedigering = () => {
+  const avsluttRedigering = async () => {
     setSkalBrukeManueltBrev(false);
     setHarOverstyrtVedtaksbrev(false);
     setSkalViseModal(false);
 
-    lagreManueltBrev(null);
+    await lagreManueltBrev(null);
+    hentBrev();
   };
 
   const erInnvilget = isInnvilget(behandlingsresultat.type);
