@@ -46,7 +46,7 @@ export const EksterneRessurser = ({
             rel="noreferrer"
           >
             <Button as="span" size="xsmall" variant="primary-neutral">
-              <FormattedMessage id="EksterneRessurser.AAreg" />
+              <FormattedMessage id="EksterneRessurser.AaReg" />
             </Button>
           </a>
         </HStack>
