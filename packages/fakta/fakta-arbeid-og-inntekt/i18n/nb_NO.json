@@ -6,7 +6,7 @@
   "ArbeidOgInntektFaktaPanel.InntektsmeldingMottatt": "Inntektsmelding",
   "ArbeidOgInntektFaktaPanel.InnhentManglendeInntektsmelding": "Innhent manglende inntektsmeldinger.",
   "ArbeidOgInntektFaktaPanel.AvklarManglendeOpplysninger": "Avklar manglende opplysninger.",
-  "ArbeidOgInntektFaktaPanel.IngenArbeidsforhold": "Ingen arbeidsforhold eller inntektsmeldinger registrert på bruker. Det er kun unntaksvis at det skal opprettes manuelle arbeidsforhold. Det kan være i saker søker er ambassadepersonell, utenlandske ansatte eller fisker. Hvis det er andre arbeidsforhold må du kontakte arbeidsgiver eller søker for riktig registrering i AA-reg.",
+  "ArbeidOgInntektFaktaPanel.IngenArbeidsforhold": "Ingen arbeidsforhold eller inntektsmeldinger registrert på bruker. Det er kun unntaksvis at det skal opprettes manuelle arbeidsforhold. Det kan være i saker søker er ambassadepersonell, utenlandske ansatte eller fisker. Hvis det er andre arbeidsforhold må du kontakte arbeidsgiver eller søker for riktig registrering i Aa-reg.",
   "ArbeidOgInntektFaktaPanel.Skjaringstidspunkt": "Skjæringstidspunkt for opptjening: {skjæringspunktDato}",
   "ArbeidOgInntektFaktaPanel.SettPaVent": "Sett på vent",
   "ArbeidOgInntektFaktaPanel.Bekreft": "Bekreft og fortsett",
@@ -59,7 +59,7 @@
   "ManglendeOpplysningerForm.Lagre": "Lagre",
   "ManglendeOpplysningerForm.Avbryt": "Avbryt",
   "ManglendeOpplysningerForm.AltHjelpetekst": "Hjelpetekst",
-  "ManglendeOpplysningerForm.Hjelpetekst": "Det er kun unntaksvis at det skal opprettes manuelle arbeidsforhold basert på en inntektsmelding. Det kan være i saker hvor søker er ambassadepersonell, utenlandske ansatte eller fisker. Hvis det er andre arbeidsforhold må du kontakte arbeidsgiver eller søker for riktig registrering i AA-reg.",
+  "ManglendeOpplysningerForm.Hjelpetekst": "Det er kun unntaksvis at det skal opprettes manuelle arbeidsforhold basert på en inntektsmelding. Det kan være i saker hvor søker er ambassadepersonell, utenlandske ansatte eller fisker. Hvis det er andre arbeidsforhold må du kontakte arbeidsgiver eller søker for riktig registrering i Aa-reg.",
 
   "ArbeidsforholdInformasjonPanel.ArbeidsforholdId": "ID",
   "ArbeidsforholdInformasjonPanel.Stillingsprosent": "Stillingsprosent",
