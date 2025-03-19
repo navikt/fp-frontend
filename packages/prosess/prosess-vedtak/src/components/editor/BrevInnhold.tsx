@@ -48,10 +48,9 @@ export const BrevInnhold = ({
       <footer>
         <VStack gap="4">
           {visForhåndsvisValideringsFeil && (
-            <>
-              {/* TODO */}
-              <Alert variant="error">TODO</Alert>
-            </>
+            <Alert variant="error">
+              <FormattedMessage id="BrevInnhold.InnholdMangler" />
+            </Alert>
           )}
           <HStack justify="center">
             <Button

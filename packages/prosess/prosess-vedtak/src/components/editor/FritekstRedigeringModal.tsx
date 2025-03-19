@@ -41,14 +41,16 @@ export const FritekstRedigeringModal = ({
     lagreManueltBrev,
   );
 
-  const lagreOgLukk = () => {
-    lagreEndringer();
-    hentBrev();
-    // TODO Ta inn att gammal kode
-    // TODO Sjekk at alle stories er korrekt
-    //årsak : varsel om revurdering
-    // Ikkje kunne senda til godkjenning uten endring
-    setVisRedigering(false);
+  const lagreOgLukk = async () => {
+    const erValidertOk = await validerEndringer();
+    if (erValidertOk) {
+      setVisForhåndsvisValideringsFeil(false);
+      setVisRedigering(false);
+      await lagreEndringer();
+      hentBrev();
+    } else {
+      setVisForhåndsvisValideringsFeil(true);
+    }
   };
 
   const forhåndsvisEditertBrev = async () => {

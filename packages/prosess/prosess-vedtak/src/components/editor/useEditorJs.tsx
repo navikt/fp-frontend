@@ -80,18 +80,16 @@ export const useEditorJs = (
     }
   };
 
-  const lagreEndringer = () => {
-    lagreBrev(async () => {
-      if (ref.current) {
-        const innhold = await ref.current.save();
-        const html = edjsHTML().parse(innhold);
-        lagreManueltBrev(
-          `<div id="redigerbart-innhold" data-editable="data-editable">${html}</div><div id="readonly-innhold">${readonlyInnhold.footer}</div>`,
-        );
-      } else {
-        throw new Error('Editor er ikke initialisert');
-      }
-    });
+  const lagreEndringer = async () => {
+    if (ref.current) {
+      const innhold = await ref.current.save();
+      const html = edjsHTML().parse(innhold);
+      lagreManueltBrev(
+        `<div id="redigerbart-innhold" data-editable="data-editable">${html}</div><div id="readonly-innhold">${readonlyInnhold.footer}</div>`,
+      );
+    } else {
+      throw new Error('Editor er ikke initialisert');
+    }
   };
 
   const validerEndringer = async () => {

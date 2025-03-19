@@ -52,11 +52,10 @@ export const utledRedigerbartInnhold = (html: string) => {
 };
 
 export const erRedigertHtmlGyldig = (html: string) => {
-  const innholdet = document.createElement('div');
-  innholdet.innerHTML = html;
-  const tekst = innholdet.textContent ?? innholdet.innerText ?? '';
-  //FIXME Feiltekster
-  const malInnholdStrenger = ['Fyll inn overskrift', 'Fyll inn brevtekst'];
-  const regex = new RegExp(malInnholdStrenger.join('|'), 'gi');
-  return !regex.test(tekst);
+  if (html.trim() === '' && html.trim().length < 50) {
+    return false;
+  }
+  const doc = document.createElement('div');
+  doc.innerHTML = html;
+  return doc.innerHTML === html;
 };

@@ -55,6 +55,7 @@
   "Malform.Beskrivelse": "Foretrukket språk",
 
   "BrevInnhold.Lagre": "Lagre og lukk",
+  "BrevInnhold.InnholdMangler": "Brev må ha innhold",
   "BrevInnhold.Tilbakestill": "Tilbakestill",
   "FritekstRedigeringModal.Rediger": "Rediger brev",
   "FritekstRedigeringModal.Infotekst": "Gjør nødvendige endringer i brevet nedenfor. Redigering er begrenset til området markert i oransje. Vil du se saken samtidig som du redigerer kan du åpne en kopi av saken i ny fane:",
@@ -67,5 +68,9 @@
 
   "OppgaveTabell.Header": "Åpne oppgaver fra Gosys",
   "OppgaveTabell.Type": "Type",
-  "OppgaveTabell.Beskrivelse": "Beskrivelse"
+  "OppgaveTabell.Beskrivelse": "Beskrivelse",
+
+  "LegacyOverstyrtVedtaksbrev.ForhandsvisManueltVedtaksbrev": "Vis manuelt brev",
+  "LegacyOverstyrtVedtaksbrev.Overskrift": "Overskrift",
+  "LegacyOverstyrtVedtaksbrev.Innhold": "Innhold i brev til søker"
 }
