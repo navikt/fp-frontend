@@ -22,7 +22,6 @@ import type {
   Behandlingsresultat,
   BeregningsresultatDagytelse,
   BeregningsresultatEs,
-  GenererHtmlDokument,
   Oppgave,
   OverstyrtDokument,
   SimuleringResultat,
@@ -179,7 +178,7 @@ interface Props {
   vilkar?: Vilkar[];
   beregningErManueltFastsatt: boolean;
   oppgaver?: Oppgave[];
-  hentBrevHtml: (params: GenererHtmlDokument) => Promise<OverstyrtDokument>;
+  hentBrevHtml: () => Promise<OverstyrtDokument>;
   lagreManueltBrev: (html: string | null) => Promise<void>;
 }
 

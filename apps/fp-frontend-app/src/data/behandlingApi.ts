@@ -28,7 +28,6 @@ import type {
   Feriepengegrunnlag,
   FodselOgTilrettelegging,
   ForhåndsvisMeldingParams,
-  GenererHtmlDokument,
   Innsyn,
   InntektArbeidYtelse,
   Inntektsmelding,
@@ -524,8 +523,10 @@ const getOppgaverOptions = (links: ApiLink[]) => (behandling: Behandling) =>
     enabled: harLenke(behandling, 'HENT_OPPGAVER'),
     staleTime: Infinity,
   });
-const getBrevHtml = (links: ApiLink[]) => (params: GenererHtmlDokument) =>
-  kyExtended.get(getUrlFromRel('BREV_GENERER_HTML', links), { searchParams: params }).json<OverstyrtDokument>();
+const getBrevHtml = (links: ApiLink[]) => (behandlingUuid: string) =>
+  kyExtended
+    .get(getUrlFromRel('BREV_GENERER_HTML', links), { searchParams: { behandlingUuid } })
+    .json<OverstyrtDokument>();
 
 export const hentBehandling = (behandlingUuid: string) =>
   kyExtended.post<Behandling>(BehandlingUrl.BEHANDLING, {
