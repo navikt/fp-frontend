@@ -8,8 +8,8 @@ import type {
   Beregningsgrunnlag,
   BeregningsresultatDagytelse,
   BeregningsresultatEs,
+  BrevOverstyring,
   Oppgave,
-  OverstyrtDokument,
   SimuleringResultat,
   TilbakekrevingValg,
   Vilkar,
@@ -36,8 +36,9 @@ interface Props {
   vilkar: Vilkar[];
   previewCallback: (data: ForhandsvisData) => void;
   oppgaver?: Oppgave[];
-  hentBrevHtml: () => Promise<OverstyrtDokument>;
-  lagreManueltBrev: (html: string | null) => Promise<void>;
+  brevOverstyring?: BrevOverstyring;
+  refetchBrevOverstyring: () => void;
+  mellomlagreBrevOverstyring: (html: string | null) => Promise<void>;
 }
 
 export const VedtakProsessIndex = ({
@@ -50,8 +51,9 @@ export const VedtakProsessIndex = ({
   beregningsresultatOriginalBehandling,
   previewCallback,
   oppgaver,
-  hentBrevHtml,
-  lagreManueltBrev,
+  brevOverstyring,
+  refetchBrevOverstyring,
+  mellomlagreBrevOverstyring,
 }: Props) => {
   const { behandling, fagsak } = usePanelDataContext();
 
@@ -82,8 +84,9 @@ export const VedtakProsessIndex = ({
           vilkar={vilkar}
           beregningErManueltFastsatt={beregningErManueltFastsatt}
           oppgaver={oppgaver}
-          hentBrevHtml={hentBrevHtml}
-          lagreManueltBrev={lagreManueltBrev}
+          brevOverstyring={brevOverstyring}
+          refetchBrevOverstyring={refetchBrevOverstyring}
+          mellomlagreBrevOverstyring={mellomlagreBrevOverstyring}
         />
       )}
       {behandling.type === BehandlingType.REVURDERING && (
@@ -96,8 +99,9 @@ export const VedtakProsessIndex = ({
           beregningErManueltFastsatt={beregningErManueltFastsatt}
           beregningsresultatOriginalBehandling={originaltBeregningsresultat}
           oppgaver={oppgaver}
-          hentBrevHtml={hentBrevHtml}
-          lagreManueltBrev={lagreManueltBrev}
+          brevOverstyring={brevOverstyring}
+          refetchBrevOverstyring={refetchBrevOverstyring}
+          mellomlagreBrevOverstyring={mellomlagreBrevOverstyring}
         />
       )}
     </RawIntlProvider>

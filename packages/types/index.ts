@@ -176,4 +176,4 @@ export type { Vilkarperiode } from './src/vilkarperiodeTsType';
 export type { ApiLink } from './src/apiLink';
 export type { Oppgave } from './src/oppgaveTsType.tsx';
 export type { OneOf } from './src/oneOf';
-export type { GenererHtmlDokument, OverstyrtDokument } from './src/genererHtmlDokument';
+export type { BrevOverstyring } from './src/brevOverstyring';

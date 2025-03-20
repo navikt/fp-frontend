@@ -6,7 +6,13 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode, AksjonspunktStatus, isAvslag, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import {
+  AksjonspunktKode,
+  AksjonspunktStatus,
+  BehandlingStatus,
+  isAvslag,
+  VilkarUtfallType,
+} from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { VedtakProsessIndex } from '@navikt/fp-prosess-vedtak';
 import type { Aksjonspunkt, Behandlingsresultat, ForhåndsvisMeldingParams, Vilkar } from '@navikt/fp-types';
@@ -72,15 +78,17 @@ export const VedtakSvpProsessStegInitPanel = () => {
   );
   const { data: oppgaver, isFetching: isOFetching } = useQuery(api.oppgaverOptions(behandling));
 
-  const isNotFetching =
-    !isBdFetching && !isTvFetching && !isBgFetching && !isSrFetching && !isBdobFetching && !isOFetching;
+  const erAvsluttetLegacyOverstyring =
+    !!behandling.behandlingsresultat?.overskrift && behandling.status === BehandlingStatus.AVSLUTTET;
 
-  const { mutateAsync: hentBrevHtml } = useMutation({
-    mutationFn: () => api.getBrevHtml(behandling.uuid),
-  });
+  const {
+    data: brevOverstyring,
+    refetch: refetchBrevOverstyring,
+    isFetching: isBoFetching,
+  } = useQuery(api.hentBrevOverstyringOptions(behandling, !erAvsluttetLegacyOverstyring));
 
-  const { mutateAsync: lagreManueltBrev } = useMutation({
-    mutationFn: (html: string | null) => api.lagreBrevHtml({ behandlingUuid: behandling.uuid, html }),
+  const { mutateAsync: mellomlagreBrevOverstyring } = useMutation({
+    mutationFn: (html: string | null) => api.mellomlagreBrevOverstyring({ behandlingUuid: behandling.uuid, html }),
   });
 
   const { mutate: forhåndsvis } = useMutation({
@@ -92,6 +100,15 @@ export const VedtakSvpProsessStegInitPanel = () => {
       }),
     onSuccess: forhandsvisDokument,
   });
+
+  const isNotFetching =
+    !isBdFetching &&
+    !isTvFetching &&
+    !isBgFetching &&
+    !isSrFetching &&
+    !isBdobFetching &&
+    !isOFetching &&
+    !isBoFetching;
 
   return (
     <ProsessDefaultInitPanel
@@ -136,8 +153,9 @@ export const VedtakSvpProsessStegInitPanel = () => {
             beregningsresultatOriginalBehandling={beregingDagytelseOriginalBehandling}
             vilkar={vilkår}
             oppgaver={oppgaver}
-            hentBrevHtml={hentBrevHtml}
-            lagreManueltBrev={lagreManueltBrev}
+            brevOverstyring={brevOverstyring}
+            refetchBrevOverstyring={refetchBrevOverstyring}
+            mellomlagreBrevOverstyring={mellomlagreBrevOverstyring}
           />
         ) : (
           <LoadingPanel />

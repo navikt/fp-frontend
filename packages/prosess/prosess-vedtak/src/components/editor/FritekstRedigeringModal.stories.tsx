@@ -20,7 +20,7 @@ const meta = {
   args: {
     brevHtml: { opprinneligHtml: mal, redigertHtml: redigertInnhold },
     lagreManueltBrev: action('button-click') as (html: string | null) => Promise<void>,
-    setVisRedigering: action('button-click'),
+    setVisEditorModal: action('button-click'),
     forkastManueltBrev: action('button-click') as () => Promise<void>,
     forhåndsvisBrev: action('button-click'),
   },

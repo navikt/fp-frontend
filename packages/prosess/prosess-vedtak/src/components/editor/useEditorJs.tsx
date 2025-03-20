@@ -8,7 +8,7 @@ import edjsHTML from 'editorjs-html';
 import debounce from 'lodash.debounce';
 
 import { DokumentMalType } from '@navikt/fp-kodeverk';
-import type { OverstyrtDokument } from '@navikt/fp-types';
+import type { BrevOverstyring } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import type { ForhandsvisData } from '../forstegang/VedtakForm';
@@ -17,38 +17,40 @@ import { erRedigertHtmlGyldig, utledReadonlyInnhold, utledRedigerbartInnhold } f
 const EDITOR_IKKE_INITIALISERT = 'Editor er ikke initialisert';
 const SPACE_REGEX = /\s*(<[^>]+>)\s*/g; // Fjerne mellomrom rundt html-tags
 
+const lagRedigerbartInnholdHtml = (redigerbartInnhold: string, readonlyFooter: string) =>
+  `<div id="redigerbart-innhold" data-editable="data-editable">${redigerbartInnhold}</div><div id="readonly-innhold">${readonlyFooter}</div>`;
+
 export const useEditorJs = (
   editorHolderId: string,
-  htmlMal: OverstyrtDokument,
+  brevOverstyring: BrevOverstyring,
+  mellomlagreBrevOverstyring: (html: string | null) => Promise<void>,
   forhåndsvisBrev: (data: ForhandsvisData) => void,
-  lagreManueltBrev: (html: string | null) => Promise<void>,
 ) => {
-  const ref = useRef<EditorJS>(null);
+  const refEditorJs = useRef<EditorJS>(null);
   const refCurrentHtml = useRef('');
 
-  const readonlyInnhold = utledReadonlyInnhold(htmlMal.opprinneligHtml);
-  const originalHtmlStreng = notEmpty(
-    utledRedigerbartInnhold(htmlMal.redigertHtml ?? htmlMal.opprinneligHtml),
-    'Redigerbart innhold finnes ikke i mal',
-  );
+  const { opprinneligHtml, redigertHtml } = brevOverstyring;
+
+  const readonlyInnhold = utledReadonlyInnhold(opprinneligHtml);
+  const redigerbartInnhold = utledRedigerbartInnhold(redigertHtml ?? opprinneligHtml);
 
   const lagreBrevDebouncer = useLagreBrevDebouncer();
 
   useEffect(() => {
-    if (!ref.current) {
+    if (!refEditorJs.current) {
       const editor = new EditorJS({
         minHeight: 0,
         holder: editorHolderId,
         onReady: async () => {
-          // Må ha denne sjekken for å unngå to køyringar grunna React.StrictMode
-          if (ref.current === null) {
-            ref.current = editor;
-            await editor.blocks.renderFromHTML(originalHtmlStreng.replace(SPACE_REGEX, '$1'));
+          // Må ha denne sjekken for å unngå to like blocks (React.StrictMode i DEV gir to renders)
+          if (refEditorJs.current === null) {
+            refEditorJs.current = editor;
+            await editor.blocks.renderFromHTML(redigerbartInnhold.replace(SPACE_REGEX, '$1'));
           }
         },
         tools: TOOLS,
         onChange: async () => {
-          //Forhindrer at lagring blir gjort ved initialisering
+          //Forhindrer at lagring blir gjort ved initialisering og etter tilbakestilling
           if (refCurrentHtml.current === '') {
             // Dette er for å seinare kunne finna ut om innhaldet er endra
             const innhold = await editor.save();
@@ -61,8 +63,8 @@ export const useEditorJs = (
     }
 
     return () => {
-      if (ref.current?.destroy) {
-        ref.current.destroy();
+      if (refEditorJs.current?.destroy) {
+        refEditorJs.current.destroy();
       }
     };
   }, []);
@@ -70,28 +72,26 @@ export const useEditorJs = (
   const tilbakestillEndringer = async () => {
     refCurrentHtml.current = '';
 
-    const editor = notEmpty(ref.current, EDITOR_IKKE_INITIALISERT);
+    const editor = notEmpty(refEditorJs.current, EDITOR_IKKE_INITIALISERT);
     await editor.blocks.clear();
-    const opprinnelig = notEmpty(utledRedigerbartInnhold(htmlMal.opprinneligHtml));
-    editor.blocks.renderFromHTML(opprinnelig.replace(SPACE_REGEX, '$1'));
+    const opprinneligRedigerbartInnhold = utledRedigerbartInnhold(opprinneligHtml);
+    editor.blocks.renderFromHTML(opprinneligRedigerbartInnhold.replace(SPACE_REGEX, '$1'));
 
-    lagreManueltBrev(null);
+    mellomlagreBrevOverstyring(null);
   };
 
   const lagreEndringer = async () => {
-    const editor = notEmpty(ref.current, EDITOR_IKKE_INITIALISERT);
+    const editor = notEmpty(refEditorJs.current, EDITOR_IKKE_INITIALISERT);
     const innhold = await editor.save();
     const html = edjsHTML().parse(innhold);
 
     if (refCurrentHtml.current !== html) {
-      lagreManueltBrev(
-        `<div id="redigerbart-innhold" data-editable="data-editable">${html}</div><div id="readonly-innhold">${readonlyInnhold.footer}</div>`,
-      );
+      mellomlagreBrevOverstyring(lagRedigerbartInnholdHtml(html, readonlyInnhold.footer));
     }
   };
 
   const validerEndringer = async () => {
-    const editor = notEmpty(ref.current, EDITOR_IKKE_INITIALISERT);
+    const editor = notEmpty(refEditorJs.current, EDITOR_IKKE_INITIALISERT);
     const innhold = await editor.save();
     const html = edjsHTML().parse(innhold);
 
@@ -99,15 +99,15 @@ export const useEditorJs = (
   };
 
   const forhåndsvis = async () => {
-    const editor = notEmpty(ref.current, EDITOR_IKKE_INITIALISERT);
+    const editor = notEmpty(refEditorJs.current, EDITOR_IKKE_INITIALISERT);
     const innhold = await editor.save();
     const html = edjsHTML().parse(innhold);
 
     forhåndsvisBrev({
-      automatiskVedtaksbrev: true,
+      automatiskVedtaksbrev: false,
       dokumentMal: DokumentMalType.FRITEKST_HTML,
       gjelderVedtak: true,
-      fritekst: `<div id="redigerbart-innhold" data-editable="data-editable">${html}</div><div id="readonly-innhold">${readonlyInnhold.footer}</div>`,
+      fritekst: lagRedigerbartInnholdHtml(html, readonlyInnhold.footer),
     });
   };
 
