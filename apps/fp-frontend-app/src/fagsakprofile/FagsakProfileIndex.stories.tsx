@@ -24,12 +24,12 @@ import type { Behandling, BehandlingAppKontekst, BehandlingOppretting, Fagsak } 
 import { VergeBehandlingmenyValg } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
+import { initFetchFpsak } from '../../.storybook/testdata/initFetchFpsak';
+import { initFetchFptilbake } from '../../.storybook/testdata/initFetchFptilbake';
 import { FagsakRel, FagsakUrl, initFetchOptions, useFagsakApi, wrapUrl } from '../data/fagsakApi';
 import { FagsakData } from '../fagsak/FagsakData';
 import { FagsakProfileIndex } from './FagsakProfileIndex';
 
-import initFetchData from '../../.storybook/testdata/initFetch.json';
-import initFetchTilbake from '../../.storybook/testdata/initFetchTilbake.json';
 import messages from '../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
@@ -37,10 +37,10 @@ const withIntl = getIntlDecorator(messages);
 const getHref = (rel: string) =>
   wrapUrl(
     notEmpty(
-      initFetchData.links.find(link => link.rel === rel) ??
-        initFetchData.sakLinks.find(link => link.rel === rel) ??
-        initFetchTilbake.links.find(link => link.rel === rel) ??
-        initFetchTilbake.sakLinks.find(link => link.rel === rel),
+      initFetchFpsak.links.find(link => link.rel === rel) ??
+        initFetchFpsak.sakLinks.find(link => link.rel === rel) ??
+        initFetchFptilbake.links.find(link => link.rel === rel) ??
+        initFetchFptilbake.sakLinks.find(link => link.rel === rel),
     ).href,
   );
 
@@ -60,8 +60,8 @@ const ALLE_BEHANDLINGER = [
   {
     uuid: '1',
     versjon: 1,
-    behandlingKoet: false,
-    behandlingPaaVent: false,
+    behandlingKøet: false,
+    behandlingPåVent: false,
     kanHenleggeBehandling: true,
     type: BehandlingType.FORSTEGANGSSOKNAD,
     status: BehandlingStatus.AVSLUTTET,
@@ -74,8 +74,8 @@ const ALLE_BEHANDLINGER = [
   {
     uuid: '2',
     versjon: 1,
-    behandlingKoet: false,
-    behandlingPaaVent: false,
+    behandlingKøet: false,
+    behandlingPåVent: false,
     kanHenleggeBehandling: true,
     type: BehandlingType.REVURDERING,
     status: BehandlingStatus.BEHANDLING_UTREDES,
@@ -118,8 +118,8 @@ const meta = {
   parameters: {
     msw: {
       handlers: [
-        http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchData)),
-        http.get(FagsakUrl.INIT_FETCH_FPTILBAKE, () => HttpResponse.json(initFetchTilbake)),
+        http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak)),
+        http.get(FagsakUrl.INIT_FETCH_FPTILBAKE, () => HttpResponse.json(initFetchFptilbake)),
         http.get(getHref(FagsakRel.KODEVERK), () => HttpResponse.json(alleKodeverk)),
         http.get(getHref(FagsakRel.KODEVERK_FPTILBAKE), () => HttpResponse.json(alleKodeverkTilbakekreving)),
         http.get(getHref(FagsakRel.KAN_TILBAKEKREVING_OPPRETTES), () => HttpResponse.json(false)),

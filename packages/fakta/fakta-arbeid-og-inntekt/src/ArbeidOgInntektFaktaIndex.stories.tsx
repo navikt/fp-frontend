@@ -78,6 +78,8 @@ export const InnhentInntektsmelding: Story = {
             permisjonTom: '2022-12-01',
             type: 'VELFERDSPERMISJON',
           },
+          saksbehandlersVurdering: null,
+          begrunnelse: null,
         },
       ],
       inntektsmeldinger: [],
@@ -149,6 +151,8 @@ export const InnhentInntektsmeldingDerEnIkkeHarInntekterFraAAregisteret: Story =
           tom: '9999-12-31',
           stillingsprosent: 100,
           årsak: AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING,
+          saksbehandlersVurdering: null,
+          begrunnelse: null,
         },
       ],
       inntektsmeldinger: [],
@@ -362,6 +366,8 @@ export const IngenAksjonspunktMenTilbakehoppMuligForOverstyrer: Story = {
           fom: '2021-10-06',
           tom: '2021-12-12',
           stillingsprosent: 100,
+          saksbehandlersVurdering: null,
+          begrunnelse: null,
         },
       ],
       inntektsmeldinger: [
@@ -508,6 +514,8 @@ export const ArbeidsforholdErOK: Story = {
             permisjonTom: '2022-12-01',
             type: 'VELFERDSPERMISJON',
           },
+          saksbehandlersVurdering: null,
+          begrunnelse: null,
         },
       ],
       inntektsmeldinger: [
@@ -586,6 +594,8 @@ export const ArbeidsforholdErOKDerDetErToArbeidsforholdFraSammeVirksomhet: Story
           internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
           stillingsprosent: 100,
           tom: '9999-12-31',
+          saksbehandlersVurdering: null,
+          begrunnelse: null,
         },
         {
           arbeidsgiverIdent: '910909088',
@@ -594,6 +604,8 @@ export const ArbeidsforholdErOKDerDetErToArbeidsforholdFraSammeVirksomhet: Story
           internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa85',
           stillingsprosent: 80,
           tom: '9999-12-31',
+          saksbehandlersVurdering: null,
+          begrunnelse: null,
         },
       ],
       inntektsmeldinger: [
@@ -703,6 +715,8 @@ export const FlereArbeidsforholdOgInntekstemeldinger: Story = {
           internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
           stillingsprosent: 100,
           tom: '9999-12-31',
+          saksbehandlersVurdering: null,
+          begrunnelse: null,
         },
         {
           arbeidsgiverIdent: '910909090',
@@ -712,6 +726,8 @@ export const FlereArbeidsforholdOgInntekstemeldinger: Story = {
           stillingsprosent: 80,
           tom: '2021-12-31',
           årsak: AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING,
+          saksbehandlersVurdering: null,
+          begrunnelse: null,
         },
       ],
       inntektsmeldinger: [
@@ -853,6 +869,8 @@ export const ArbeidsforholdMedSammeOrgNr: Story = {
           stillingsprosent: 100,
           tom: '9999-12-31',
           årsak: AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING,
+          saksbehandlersVurdering: null,
+          begrunnelse: null,
         },
         {
           arbeidsgiverIdent: '910909088',
@@ -863,6 +881,8 @@ export const ArbeidsforholdMedSammeOrgNr: Story = {
           stillingsprosent: 80,
           tom: '2021-12-31',
           årsak: AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING,
+          saksbehandlersVurdering: null,
+          begrunnelse: null,
         },
       ],
       inntektsmeldinger: [
@@ -974,6 +994,8 @@ export const ArbeidsforholdMedSammeOrgNrDerEnManglerInntektsmeldingMenIkkeDetAnd
             permisjonFom: '2022-10-01',
             type: 'PERMITTERING',
           },
+          saksbehandlersVurdering: null,
+          begrunnelse: null,
         },
         {
           arbeidsgiverIdent: '910909088',
@@ -989,6 +1011,8 @@ export const ArbeidsforholdMedSammeOrgNrDerEnManglerInntektsmeldingMenIkkeDetAnd
             permisjonTom: '2022-12-01',
             type: 'VELFERDSPERMISJON',
           },
+          saksbehandlersVurdering: null,
+          begrunnelse: null,
         },
       ],
       inntektsmeldinger: [
@@ -1111,8 +1135,8 @@ export const AutomatiskIgnorertInntektsmelding: Story = {
           tom: '9999-12-31',
           stillingsprosent: 20.0,
           årsak: undefined,
-          saksbehandlersVurdering: undefined,
-          begrunnelse: undefined,
+          saksbehandlersVurdering: null,
+          begrunnelse: null,
         },
       ],
       inntekter: [],
@@ -1189,6 +1213,8 @@ export const EtterAtEtterspurtInntektsmeldingErKommet: Story = {
           tom: '9999-12-31',
           stillingsprosent: 100.0,
           årsak: undefined,
+          saksbehandlersVurdering: null,
+          begrunnelse: null,
         },
       ],
       inntekter: [
@@ -1245,6 +1271,8 @@ export const SkalViseFødselsnummerForPrivatperson: Story = {
             permisjonTom: '2022-12-01',
             type: 'VELFERDSPERMISJON',
           },
+          saksbehandlersVurdering: null,
+          begrunnelse: null,
         },
       ],
       inntektsmeldinger: [

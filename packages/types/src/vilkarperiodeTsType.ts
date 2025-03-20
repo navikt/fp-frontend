@@ -3,8 +3,6 @@ export type Vilkarperiode = Readonly<{
   begrunnelse?: string;
   vurderesIBehandlingen: boolean;
   erForlengelse?: boolean;
-  merknad?: string;
-  merknadParametere: { [name: string]: string };
   periode: { fom: string; tom: string };
   vilkarStatus: string;
 }>;

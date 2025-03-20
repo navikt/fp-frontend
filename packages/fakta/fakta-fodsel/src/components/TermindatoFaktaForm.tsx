@@ -137,10 +137,11 @@ TermindatoFaktaForm.buildInitialValues = (
   aksjonspunkt: Aksjonspunkt,
 ): FormValues => {
   const antallBarn = soknad.antallBarn ? soknad.antallBarn : NaN;
+  const soknadUtstedtdato = soknad.utstedtdato ?? undefined;
   return {
-    utstedtdato: familiehendelse.utstedtdato ? familiehendelse.utstedtdato : soknad.utstedtdato,
-    termindato: familiehendelse.termindato ? familiehendelse.termindato : soknad.termindato,
-    antallBarn: familiehendelse.antallBarnTermin ? familiehendelse.antallBarnTermin : antallBarn,
+    utstedtdato: familiehendelse.utstedtdato ?? soknadUtstedtdato,
+    termindato: familiehendelse.termindato ?? soknad.termindato,
+    antallBarn: familiehendelse.antallBarnTermin ?? antallBarn,
     ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
   };
 };

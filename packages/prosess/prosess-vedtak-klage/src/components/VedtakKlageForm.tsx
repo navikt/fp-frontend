@@ -165,7 +165,7 @@ export const VedtakKlageForm = ({ klageVurdering, previewVedtakCallback, behandl
         <VedtakKlageSubmitPanel
           previewVedtakCallback={previewVedtakCallback}
           readOnly={isReadOnly}
-          behandlingPaaVent={behandling.behandlingPaaVent}
+          behandlingPåVent={behandling.behandlingPåVent}
           lagreVedtak={lagreVedtak}
           isSubmitting={isSubmitting}
         />

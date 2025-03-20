@@ -52,7 +52,7 @@ export const VisUttaksperiodeUtenAksjonspunkt: Story = {
   args: {
     aksjonspunkterForPanel: [],
     ytelsefordeling: {
-      overstyrtOmsorg: undefined,
+      overstyrtOmsorg: null,
       førsteUttaksdato: '2022-01-31',
     },
     uttakKontrollerFaktaPerioder: [
@@ -73,7 +73,7 @@ export const VisUttaksperiodeUtenAksjonspunktKanOverstyre: Story = {
   args: {
     aksjonspunkterForPanel: [],
     ytelsefordeling: {
-      overstyrtOmsorg: undefined,
+      overstyrtOmsorg: null,
       førsteUttaksdato: '2022-01-31',
     },
     uttakKontrollerFaktaPerioder: [
@@ -101,7 +101,7 @@ export const VisUttaksperiodeMedAksjonspunkt: Story = {
       },
     ],
     ytelsefordeling: {
-      overstyrtOmsorg: undefined,
+      overstyrtOmsorg: null,
       førsteUttaksdato: '2022-01-31',
     },
     uttakKontrollerFaktaPerioder: [
@@ -158,7 +158,7 @@ export const VisUtsettelseperiodeMedAksjonspunkt: Story = {
       },
     ],
     ytelsefordeling: {
-      overstyrtOmsorg: undefined,
+      overstyrtOmsorg: null,
       førsteUttaksdato: '2022-01-31',
     },
     uttakKontrollerFaktaPerioder: [
@@ -184,7 +184,7 @@ export const VisOverføringsperiodeMedAksjonspunkt: Story = {
       },
     ],
     ytelsefordeling: {
-      overstyrtOmsorg: undefined,
+      overstyrtOmsorg: null,
       førsteUttaksdato: '2022-01-31',
     },
     uttakKontrollerFaktaPerioder: [
@@ -211,7 +211,7 @@ export const VisAksjonspunktDerIngenPerioderFinnes: Story = {
       },
     ],
     ytelsefordeling: {
-      overstyrtOmsorg: undefined,
+      overstyrtOmsorg: null,
       førsteUttaksdato: '2022-01-31',
     },
     uttakKontrollerFaktaPerioder: [],
@@ -230,7 +230,7 @@ export const VisAksjonspunktDerArbeidsfoholdErUkjentVedGradering: Story = {
       },
     ],
     ytelsefordeling: {
-      overstyrtOmsorg: undefined,
+      overstyrtOmsorg: null,
       førsteUttaksdato: '2022-01-31',
     },
     uttakKontrollerFaktaPerioder: [
@@ -262,7 +262,7 @@ export const VisAksjonspunktDerEnIkkeHarBeregningsgrunnlagVedGradering: Story = 
       },
     ],
     ytelsefordeling: {
-      overstyrtOmsorg: undefined,
+      overstyrtOmsorg: null,
       førsteUttaksdato: '2022-01-31',
     },
     uttakKontrollerFaktaPerioder: [
@@ -294,7 +294,7 @@ export const VisPanelDerAksjonspunktErLøstOgBehandlingAvsluttet: Story = {
       },
     ],
     ytelsefordeling: {
-      overstyrtOmsorg: undefined,
+      overstyrtOmsorg: null,
       førsteUttaksdato: '2022-01-31',
     },
     uttakKontrollerFaktaPerioder: [
@@ -329,7 +329,7 @@ export const VisBegrunnelseFraTidligereUtgaveAvPanel: Story = {
       },
     ],
     ytelsefordeling: {
-      overstyrtOmsorg: undefined,
+      overstyrtOmsorg: null,
       førsteUttaksdato: '2022-01-31',
     },
     uttakKontrollerFaktaPerioder: [
@@ -365,7 +365,7 @@ export const VisUttaksperiodeMedAksjonspunktForFar: Story = {
       },
     ],
     ytelsefordeling: {
-      overstyrtOmsorg: undefined,
+      overstyrtOmsorg: null,
       førsteUttaksdato: '2022-01-31',
     },
     uttakKontrollerFaktaPerioder: [

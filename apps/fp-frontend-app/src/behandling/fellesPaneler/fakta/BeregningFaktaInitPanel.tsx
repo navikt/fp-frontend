@@ -13,7 +13,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import type { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkar, Vilkarperiode } from '@navikt/fp-types';
+import type { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkar } from '@navikt/fp-types';
 import { useMellomlagretFormData } from '@navikt/fp-utils';
 
 import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
@@ -108,17 +108,6 @@ const lagModifisertCallback =
     return submitCallback(transformerteData);
   };
 
-const lagStandardPeriode = (beregningsgrunnlag: Beregningsgrunnlag, bgVilkar: Vilkar): Vilkarperiode => ({
-  avslagKode: bgVilkar.avslagKode,
-  vurderesIBehandlingen: true,
-  merknadParametere: {},
-  periode: {
-    fom: beregningsgrunnlag ? beregningsgrunnlag.skjaeringstidspunktBeregning : '',
-    tom: TIDENES_ENDE,
-  },
-  vilkarStatus: bgVilkar.vilkarStatus,
-});
-
 const lagBGVilkar = (vilkar?: Vilkar[], beregningsgrunnlag?: Beregningsgrunnlag): FtVilkar => {
   if (!vilkar) {
     // @ts-expect-error BeregningFaktaIndex må kunna ta i mot null
@@ -129,9 +118,20 @@ const lagBGVilkar = (vilkar?: Vilkar[], beregningsgrunnlag?: Beregningsgrunnlag)
     // @ts-expect-error BeregningFaktaIndex må kunna ta i mot null
     return null;
   }
-  const nyVK = {
+  const nyVK: FtVilkar = {
     ...bgVilkar,
-    perioder: [lagStandardPeriode(beregningsgrunnlag, bgVilkar)],
+    perioder: [
+      {
+        avslagKode: bgVilkar.avslagKode ?? undefined,
+        vurderesIBehandlingen: true,
+        periode: {
+          fom: beregningsgrunnlag ? beregningsgrunnlag.skjaeringstidspunktBeregning : '',
+          tom: TIDENES_ENDE,
+        },
+        merknadParametere: {},
+        vilkarStatus: bgVilkar.vilkarStatus,
+      },
+    ],
   };
   return nyVK;
 };

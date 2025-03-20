@@ -167,7 +167,7 @@ export const AdopsjonInfoPanel = ({ submittable, isForeldrepengerFagsak, soknad,
             )}
             {hasAksjonspunkt(OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE, aksjonspunkterForPanel) && (
               <MannAdoptererAleneFaktaForm
-                farSokerType={soknad.farSokerType}
+                farSokerType={soknad.farSokerType ?? undefined}
                 readOnly={isReadOnly}
                 mannAdoptererAlene={editedStatus.mannAdoptererAlene}
                 alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}

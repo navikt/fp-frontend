@@ -45,23 +45,24 @@ const erMatch = (arbeidsforhold: AoIArbeidsforhold, inntektsmelding: Inntektsmel
   inntektsmelding.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent;
 
 const lagAvklaring = (arbeidsforhold: AoIArbeidsforhold, arbeidsgiverNavn: string): Avklaring => {
-  const avklaring = {
-    saksbehandlersVurdering: arbeidsforhold.saksbehandlersVurdering,
-    begrunnelse: arbeidsforhold.begrunnelse,
-  };
+  const { fom, tom, saksbehandlersVurdering, stillingsprosent, begrunnelse } = arbeidsforhold;
   if (
     arbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER ||
     arbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING
   ) {
     return {
-      ...avklaring,
       arbeidsgiverNavn,
-      fom: arbeidsforhold.fom,
-      tom: arbeidsforhold.tom,
-      stillingsprosent: arbeidsforhold.stillingsprosent,
+      fom,
+      tom,
+      stillingsprosent,
+      saksbehandlersVurdering: saksbehandlersVurdering ?? undefined,
+      begrunnelse: begrunnelse ?? undefined,
     };
   }
-  return avklaring;
+  return {
+    saksbehandlersVurdering: saksbehandlersVurdering ?? undefined,
+    begrunnelse: begrunnelse ?? undefined,
+  };
 };
 
 const sorterGittÅrsak = (arbeidsforhold1: AoIArbeidsforhold) => (arbeidsforhold1.årsak ? -1 : 1);
@@ -81,17 +82,17 @@ const byggTabellStruktur = (
       }
       const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[af.arbeidsgiverIdent];
       const arbeidsgiverNavn = arbeidsgiverOpplysninger.navn;
-      const årsak = af.årsak ? af.årsak : inntektsmeldinger.find(i => erMatch(af, i))?.årsak;
-
-      return acc.concat({
+      const årsak = af.årsak ?? inntektsmeldinger.find(i => erMatch(af, i))?.årsak;
+      const ne: ArbeidsforholdOgInntektRadData = {
         arbeidsgiverIdent: af.arbeidsgiverIdent,
         arbeidsgiverNavn,
         arbeidsgiverFødselsdato: arbeidsgiverOpplysninger.erPrivatPerson
           ? arbeidsgiverOpplysninger.fødselsdato
           : undefined,
-        årsak,
+        årsak: årsak ?? undefined,
         avklaring: af.saksbehandlersVurdering ? lagAvklaring(af, arbeidsgiverNavn) : undefined,
-      });
+      };
+      return acc.concat(ne);
     },
     [],
   );
@@ -107,11 +108,11 @@ const byggTabellStruktur = (
         arbeidsgiverFødselsdato: arbeidgiverOpplysninger.erPrivatPerson
           ? arbeidgiverOpplysninger.fødselsdato
           : undefined,
-        årsak: im.årsak,
+        årsak: im.årsak ?? undefined,
         avklaring: im.saksbehandlersVurdering
           ? {
               saksbehandlersVurdering: im.saksbehandlersVurdering,
-              begrunnelse: im.begrunnelse,
+              begrunnelse: im.begrunnelse ?? undefined,
             }
           : undefined,
       };
@@ -301,6 +302,7 @@ export const ArbeidOgInntektFaktaPanel = ({
             ventearsaker={alleKodeverk[KodeverkType.VENT_AARSAK]}
             erTilbakekreving={false}
             showModal={visSettPåVentModal}
+            frist={null}
           />
         </div>
       )}

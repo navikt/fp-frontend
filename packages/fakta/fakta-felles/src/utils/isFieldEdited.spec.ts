@@ -5,7 +5,7 @@ import { isFieldEdited } from './isFieldEdited';
 const soknad = {
   soknadType: 'ST-001',
   mottattDato: '2018-07-05',
-  begrunnelseForSenInnsending: undefined,
+  begrunnelseForSenInnsending: null,
   antallBarn: 1,
   oppgittTilknytning: {
     oppholdNorgeNa: true,

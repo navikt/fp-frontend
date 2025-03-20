@@ -22,7 +22,7 @@ import type { KodeverkMedNavn, Opptjening, OpptjeningAktivitet } from '@navikt/f
 import { finnOpptjeningFom, finnOpptjeningTom } from '../../utils/opptjeningDatoUtil';
 import { type FormValues } from '../aktivitet/ValgtAktivitetForm';
 
-const finnStatus = (erGodkjent: boolean): 'success' | 'warning' | 'danger' => {
+const finnStatus = (erGodkjent: boolean | undefined): 'success' | 'warning' | 'danger' => {
   if (erGodkjent === false) {
     return 'danger';
   }
@@ -59,8 +59,8 @@ interface Rad {
   id: number;
   label: string;
   aktivitetTypeKode: string;
-  arbeidsforholdRef: string;
-  arbeidsgiverReferanse: string;
+  arbeidsforholdRef: string | null;
+  arbeidsgiverReferanse: string | null;
 }
 
 const lagPerioder = (
@@ -98,7 +98,7 @@ const lagRader = (
     if (!hasPeriod) accPeriods.push(period);
     return accPeriods;
   }, []);
-  return duplicatesRemoved.map((activity: OpptjeningAktivitet, index: number) => {
+  return duplicatesRemoved.map<Rad>((activity: OpptjeningAktivitet, index: number) => {
     const type = opptjeningAktivitetTypes.find(oat => oat.kode === activity.aktivitetType);
     const label =
       type?.kode === OpptjeningAktivitetType.AAP ? intl.formatMessage({ id: 'OpptjeningTidslinje.Aap' }) : type?.navn;
