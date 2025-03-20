@@ -82,7 +82,7 @@ const historikkInnslag: Historikkinnslag[] = [
     linjer: [],
     dokumenter: [
       { dokumentId: '1', journalpostId: '2', tag: 'Søknad foreldrepenger', utgått: false },
-      { dokumentId: '1', journalpostId: '2', tag: 'Vedlegg', utgått: true },
+      { dokumentId: '2', journalpostId: '2', tag: 'Vedlegg', utgått: true },
     ],
   },
   {
