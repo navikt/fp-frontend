@@ -49,7 +49,7 @@ export const SettPaVentModal = ({
   const intl = useIntl();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: buildInitialValues(hasManualPaVent, frist, ventearsak || defaultVenteårsak),
+    defaultValues: buildInitialValues(hasManualPaVent, frist, ventearsak ?? defaultVenteårsak),
   });
 
   const fristFraFelt = formMethods.watch('frist');
