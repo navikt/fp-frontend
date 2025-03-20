@@ -2,8 +2,3 @@
   margin: auto;
   width: 500px;
 }
-
-.overflow {
-  min-height: 250px;
-  overflow-y: auto;
-}
