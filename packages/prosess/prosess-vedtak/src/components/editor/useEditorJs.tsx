@@ -24,9 +24,10 @@ export const useEditorJs = (
   lagreManueltBrev: (html: string) => Promise<void>,
 ) => {
   const ref = useRef<EditorJS>(null);
-  const refInitialRender = useRef<boolean>(true);
+  const refCurrentHtml = useRef('');
 
   const readonlyInnhold = utledReadonlyInnhold(htmlMal.opprinneligHtml);
+  const originalHtmlStreng = notEmpty(utledRedigerbartInnhold(htmlMal.redigertHtml ?? htmlMal.opprinneligHtml));
 
   const lagreBrevDebouncer = useLagreBrevDebouncer();
 
@@ -39,18 +40,16 @@ export const useEditorJs = (
           // Må ha denne sjekken for å unngå to køyringar grunna React.StrictMode
           if (ref.current === null) {
             ref.current = editor;
-
-            const originalHtmlStreng = utledRedigerbartInnhold(htmlMal.redigertHtml ?? htmlMal.opprinneligHtml);
-            if (originalHtmlStreng) {
-              await editor.blocks.renderFromHTML(originalHtmlStreng.replace(SPACE_REGEX, '$1'));
-            }
+            await editor.blocks.renderFromHTML(originalHtmlStreng.replace(SPACE_REGEX, '$1'));
           }
         },
         tools: TOOLS,
-        onChange: () => {
+        onChange: async () => {
           //Forhindrer at lagring blir gjort ved initialisering
-          if (refInitialRender.current) {
-            refInitialRender.current = false;
+          if (refCurrentHtml.current === '') {
+            // Dette er for å seinare kunne finna ut om innhaldet er endra
+            const innhold = await editor.save();
+            refCurrentHtml.current = edjsHTML().parse(innhold);
           } else {
             lagreBrevDebouncer(lagreEndringer);
           }
@@ -65,12 +64,10 @@ export const useEditorJs = (
     };
   }, []);
 
-  const tilbakestillEndringer = () => {
+  const tilbakestillEndringer = async () => {
     const editor = notEmpty(ref.current, EDITOR_IKKE_INITIALISERT);
-    const originalHtmlStreng = utledRedigerbartInnhold(htmlMal.redigertHtml ?? htmlMal.opprinneligHtml);
-    if (originalHtmlStreng) {
-      editor.blocks.renderFromHTML(originalHtmlStreng.replace(SPACE_REGEX, '$1'));
-    }
+    await editor.blocks.clear();
+    editor.blocks.renderFromHTML(originalHtmlStreng.replace(SPACE_REGEX, '$1'));
   };
 
   const lagreEndringer = async () => {
@@ -78,9 +75,11 @@ export const useEditorJs = (
     const innhold = await editor.save();
     const html = edjsHTML().parse(innhold);
 
-    lagreManueltBrev(
-      `<div id="redigerbart-innhold" data-editable="data-editable">${html}</div><div id="readonly-innhold">${readonlyInnhold.footer}</div>`,
-    );
+    if (refCurrentHtml.current !== html) {
+      lagreManueltBrev(
+        `<div id="redigerbart-innhold" data-editable="data-editable">${html}</div><div id="readonly-innhold">${readonlyInnhold.footer}</div>`,
+      );
+    }
   };
 
   const validerEndringer = async () => {
