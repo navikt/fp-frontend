@@ -104,11 +104,13 @@ export const VedtakFellesPanel = ({
 
   const [skalBrukeManueltBrev, setSkalBrukeManueltBrev] = useState(false);
 
-  const hentBrev = async () => {
+  const hentBrev = async (skalSetteBrukManueltBrev = false) => {
     const html = await hentBrevHtml();
 
     setBrevHtml(html);
-    setSkalBrukeManueltBrev(!!html.redigertHtml);
+    if (skalSetteBrukManueltBrev) {
+      setSkalBrukeManueltBrev(!!html.redigertHtml);
+    }
   };
 
   useEffect(() => {
@@ -117,7 +119,7 @@ export const VedtakFellesPanel = ({
       !!behandling.behandlingsresultat?.overskrift && behandling.status === behandlingStatusCode.AVSLUTTET;
 
     if (!erAvsluttetLegacyOverstyring) {
-      hentBrev();
+      hentBrev(true);
     }
   }, []);
 
@@ -249,15 +251,20 @@ export const VedtakFellesPanel = ({
       {skalBrukeManueltBrev && (
         <div className={styles.brevRedigering}>
           <VStack gap="4">
-            {!isReadOnly && (
+            {!isReadOnly && !brevHtml?.redigertHtml && (
               <Alert variant="info" size="small">
                 <FormattedMessage id="VedtakFellesPanel.KanRedigeres" />
               </Alert>
             )}
+            {!!brevHtml?.redigertHtml && (
+              <Alert variant="info" size="small">
+                <FormattedMessage id="VedtakFellesPanel.ErOverstyrt" />
+              </Alert>
+            )}
             <Box padding="4" borderRadius="medium" background="surface-subtle">
-              <VStack gap="6">
+              <HStack gap="2" align="end">
                 {!isReadOnly && (
-                  <VStack gap="2">
+                  <VStack gap="4">
                     <Heading size="small">
                       <FormattedMessage id="VedtakFellesPanel.RedigerBrevOverskrift" />
                     </Heading>
@@ -275,24 +282,19 @@ export const VedtakFellesPanel = ({
                   </VStack>
                 )}
                 {(isReadOnly || !!brevHtml?.redigertHtml) && (
-                  <VStack gap="2">
-                    <Alert variant="info" size="small">
-                      <FormattedMessage id="VedtakFellesPanel.ErOverstyrt" />
-                    </Alert>
-                    <div>
-                      <Button
-                        variant="tertiary"
-                        size="small"
-                        onClick={() => forhåndsvisBrev()}
-                        onKeyDown={e => (e.key === 'Enter' ? forhåndsvisBrev() : null)}
-                        type="button"
-                      >
-                        <FormattedMessage id="VedtakForm.ForhandvisBrev" />
-                      </Button>
-                    </div>
-                  </VStack>
+                  <div>
+                    <Button
+                      variant="tertiary"
+                      size="small"
+                      onClick={() => forhåndsvisBrev()}
+                      onKeyDown={e => (e.key === 'Enter' ? forhåndsvisBrev() : null)}
+                      type="button"
+                    >
+                      <FormattedMessage id="VedtakForm.ForhandvisBrev" />
+                    </Button>
+                  </div>
                 )}
-              </VStack>
+              </HStack>
             </Box>
           </VStack>
           {brevHtml && visRedigering && (
