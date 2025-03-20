@@ -9,7 +9,6 @@ export const initFetchFpsak: InitDataFpSak = {
     kanOverstyre: false,
     kanOppgavestyre: false,
     kanBehandleKode6: false,
-    funksjonellTid: '2025-03-05T16:43:48.713947839',
   },
   behandlendeEnheter: [
     {

@@ -220,6 +220,7 @@ export const VarselOmRevurderingForm = ({
         ventearsaker={ventearsaker}
         visBrevErBestilt
         hasManualPaVent
+        ventearsak={null}
         erTilbakekreving={
           behandling.type === BehandlingType.TILBAKEKREVING ||
           behandling.type === BehandlingType.TILBAKEKREVING_REVURDERING

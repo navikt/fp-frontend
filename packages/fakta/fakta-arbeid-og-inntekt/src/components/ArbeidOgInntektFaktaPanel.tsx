@@ -55,13 +55,13 @@ const lagAvklaring = (arbeidsforhold: AoIArbeidsforhold, arbeidsgiverNavn: strin
       fom,
       tom,
       stillingsprosent,
-      saksbehandlersVurdering,
-      begrunnelse,
+      saksbehandlersVurdering: saksbehandlersVurdering ?? undefined,
+      begrunnelse: begrunnelse ?? undefined,
     };
   }
   return {
-    saksbehandlersVurdering,
-    begrunnelse,
+    saksbehandlersVurdering: saksbehandlersVurdering ?? undefined,
+    begrunnelse: begrunnelse ?? undefined,
   };
 };
 
@@ -112,7 +112,7 @@ const byggTabellStruktur = (
         avklaring: im.saksbehandlersVurdering
           ? {
               saksbehandlersVurdering: im.saksbehandlersVurdering,
-              begrunnelse: im.begrunnelse ?? null,
+              begrunnelse: im.begrunnelse ?? undefined,
             }
           : undefined,
       };
@@ -302,6 +302,7 @@ export const ArbeidOgInntektFaktaPanel = ({
             ventearsaker={alleKodeverk[KodeverkType.VENT_AARSAK]}
             erTilbakekreving={false}
             showModal={visSettPåVentModal}
+            frist={null}
           />
         </div>
       )}

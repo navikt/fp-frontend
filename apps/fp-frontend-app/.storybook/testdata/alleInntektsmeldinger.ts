@@ -10,7 +10,7 @@ export const alleInntektsmeldinger: Inntektsmelding[] = [
     kontaktpersonNavn: 'Corpolarsen',
     kontaktpersonNummer: '41925090',
     journalpostId: '35164102',
-    dokumentId: null,
+    dokumentId: '12345678',
     motattDato: '2025-03-05',
     innsendingstidspunkt: '2025-03-05T16:43:02.948918',
     årsak: null,
