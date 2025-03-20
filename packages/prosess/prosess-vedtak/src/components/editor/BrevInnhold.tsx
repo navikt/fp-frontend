@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { XMarkIcon } from '@navikt/aksel-icons';
 import { Alert, Button, HStack, VStack } from '@navikt/ds-react';
 
-import type { OverstyrtDokument } from '@navikt/fp-types';
+import type { BrevOverstyring } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { utledReadonlyInnhold, utledStiler } from './redigeringsUtils';
@@ -13,24 +13,24 @@ import styles from './brevInnhold.module.css';
 export const EDITOR_HOLDER_ID = 'rediger-brev';
 
 interface Props {
-  htmlMal: OverstyrtDokument;
-  setVisTilbakestillAdvarsel: (skalVise: boolean) => void;
+  brevOverstyring: BrevOverstyring;
+  setVisTilbakestillAdvarselModal: (skalVise: boolean) => void;
   lagreOgLukk: () => void;
   forhåndsvis: () => void;
   visForhåndsvisValideringsFeil: boolean;
 }
 
 export const BrevInnhold = ({
-  htmlMal,
-  setVisTilbakestillAdvarsel,
+  brevOverstyring,
+  setVisTilbakestillAdvarselModal,
   visForhåndsvisValideringsFeil,
   forhåndsvis,
   lagreOgLukk,
 }: Props) => {
   const { isReadOnly } = usePanelDataContext();
 
-  const brevStiler = utledStiler(htmlMal.opprinneligHtml);
-  const readonlyInnhold = utledReadonlyInnhold(htmlMal.opprinneligHtml);
+  const brevStiler = utledStiler(brevOverstyring.opprinneligHtml);
+  const readonlyInnhold = utledReadonlyInnhold(brevOverstyring.opprinneligHtml);
 
   return (
     <>
@@ -71,7 +71,7 @@ export const BrevInnhold = ({
               variant="tertiary"
               icon={<XMarkIcon aria-hidden />}
               type="button"
-              onClick={() => setVisTilbakestillAdvarsel(true)}
+              onClick={() => setVisTilbakestillAdvarselModal(true)}
               disabled={isReadOnly}
               size="small"
             >

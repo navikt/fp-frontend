@@ -20,6 +20,7 @@ import type {
   BeregningsresultatDagytelse,
   BeregningsresultatEs,
   BeregningsresultatTilbakekreving,
+  BrevOverstyring,
   Dokument,
   DokumentasjonVurderingBehov,
   FaktaArbeidsforhold,
@@ -40,7 +41,6 @@ import type {
   Oppgave,
   OpprettVergeParams,
   Opptjening,
-  OverstyrtDokument,
   PeriodeSoker,
   Personoversikt,
   SimuleringResultat,
@@ -199,8 +199,8 @@ export const BehandlingRel = {
   VERGE: 'soeker-verge',
   UPDATE_ON_HOLD: 'endre-pa-vent',
   HENT_OPPGAVER: 'hent-oppgaver',
-  BREV_GENERER_HTML: 'brev-generer-html',
-  BREV_LAGRE_HTML: 'brev-lagre-html',
+  HENT_BREV_OVERSTYRING: 'hent-brev-overstyring',
+  MELLOMLAGRE_BREV_OVERSTYRING: 'mellomlagre-brev-overstyring',
 };
 
 const getArbeidsgiverOversiktOptions =
@@ -523,10 +523,14 @@ const getOppgaverOptions = (links: ApiLink[]) => (behandling: Behandling) =>
     enabled: harLenke(behandling, 'HENT_OPPGAVER'),
     staleTime: Infinity,
   });
-const getBrevHtml = (links: ApiLink[]) => (behandlingUuid: string) =>
-  kyExtended
-    .get(getUrlFromRel('BREV_GENERER_HTML', links), { searchParams: { behandlingUuid } })
-    .json<OverstyrtDokument>();
+
+const getHentBrevOverstyringOptions = (links: ApiLink[]) => (behandling: Behandling, isEnabled: boolean) =>
+  queryOptions({
+    queryKey: [BehandlingRel.HENT_BREV_OVERSTYRING, behandling.uuid, behandling.versjon],
+    queryFn: () => kyExtended.get(getUrlFromRel('HENT_BREV_OVERSTYRING', links)).json<BrevOverstyring>(),
+    enabled: harLenke(behandling, 'HENT_BREV_OVERSTYRING') && isEnabled,
+    staleTime: Infinity,
+  });
 
 export const hentBehandling = (behandlingUuid: string) =>
   kyExtended.post<Behandling>(BehandlingUrl.BEHANDLING, {
@@ -620,9 +624,9 @@ const getFjernVergeV1 = (links: ApiLink[]) => (params: { behandlingUuid: string;
     json: params,
   });
 
-const getLagreBrevHtml = (links: ApiLink[]) => (params: { behandlingUuid: string; html: string | null }) =>
+const getMellomlagreBrevOverstyring = (links: ApiLink[]) => (params: { behandlingUuid: string; html: string | null }) =>
   kyExtended
-    .post<string>(getUrlFromRel('BREV_LAGRE_HTML', links), {
+    .post<string>(getUrlFromRel('MELLOMLAGRE_BREV_OVERSTYRING', links), {
       json: params,
     })
     .json<void>();
@@ -741,8 +745,8 @@ export const useBehandlingApi = (behandling: Behandling) => {
     inntektArbeidYtelseOptions: getInntektArbeidYtelseOptions(links),
     utlandDokStatusOptions: getUtlandDokStatusOptions(links),
     vergeOptions: getVergeOptions(links),
-    getBrevHtml: getBrevHtml(links),
-    lagreBrevHtml: getLagreBrevHtml(links),
+    hentBrevOverstyringOptions: getHentBrevOverstyringOptions(links),
+    mellomlagreBrevOverstyring: getMellomlagreBrevOverstyring(links),
     verge: {
       hent: getVerge(links),
       opprettVergeV2: getOpprettVergeV2(links),

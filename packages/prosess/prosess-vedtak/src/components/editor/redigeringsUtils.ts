@@ -1,5 +1,7 @@
 import { generate, parse, walk } from 'css-tree';
 
+import { notEmpty } from '@navikt/fp-utils';
+
 export const utledStiler = (html: string) => {
   const heleBrevet = new DOMParser().parseFromString(html, 'text/html');
   const stiler = heleBrevet.querySelector('style')?.innerHTML;
@@ -40,18 +42,22 @@ export const utledStiler = (html: string) => {
 
 export const utledReadonlyInnhold = (html: string) => {
   const heleBrevet = new DOMParser().parseFromString(html, 'text/html');
-  const navLogo = heleBrevet.getElementById('logo')?.innerHTML ?? '';
-  const header = heleBrevet.getElementById('header')?.innerHTML ?? '';
-  const footer = heleBrevet.getElementById('readonly-innhold')?.innerHTML ?? '';
+  const navLogo = notEmpty(heleBrevet.getElementById('logo')?.innerHTML, 'Nav-logo finnes ikke i mal');
+  const header = notEmpty(heleBrevet.getElementById('header')?.innerHTML, 'Header finnes ikke i mal');
+  const footer = notEmpty(
+    heleBrevet.getElementById('readonly-innhold')?.innerHTML,
+    'Readonly-innhold finnes ikke i mal',
+  );
+
   return { navLogo, header, footer };
 };
 
-export const utledRedigerbartInnhold = (html: string) => {
+export const utledRedigerbartInnhold = (html: string): string => {
   const heleBrevet = new DOMParser().parseFromString(html, 'text/html');
-  return heleBrevet.querySelector('[data-editable]')?.innerHTML;
+  return notEmpty(heleBrevet.querySelector('[data-editable]')?.innerHTML, 'Redigerbart innhold finnes ikke i mal');
 };
 
-export const erRedigertHtmlGyldig = (html: string) => {
+export const erRedigertHtmlGyldig = (html: string): boolean => {
   if (html.trim() === '' && html.trim().length < 50) {
     return false;
   }

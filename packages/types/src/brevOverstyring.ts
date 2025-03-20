@@ -1,4 +1,4 @@
-export type OverstyrtDokument = Readonly<{
+export type BrevOverstyring = Readonly<{
   opprinneligHtml: string;
   redigertHtml: string | null;
 }>;

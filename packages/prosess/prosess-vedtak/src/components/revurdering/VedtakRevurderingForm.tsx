@@ -23,8 +23,8 @@ import type {
   Behandling,
   BeregningsresultatDagytelse,
   BeregningsresultatEs,
+  BrevOverstyring,
   Oppgave,
-  OverstyrtDokument,
   SimuleringResultat,
   TilbakekrevingValg,
   Vilkar,
@@ -43,6 +43,7 @@ import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 import { VedtakResultType } from '../../kodeverk/vedtakResultType';
 import { VedtakFellesPanel } from '../felles/VedtakFellesPanel';
 import { getTilbakekrevingText } from '../felles/VedtakHelper';
+import { buildInitialValues } from '../forstegang/VedtakForm';
 import { VedtakAvslagArsakOgBegrunnelsePanel } from './VedtakAvslagArsakOgBegrunnelsePanel';
 import { VedtakInnvilgetRevurderingPanel } from './VedtakInnvilgetRevurderingPanel';
 import { VedtakOpphorRevurderingPanel } from './VedtakOpphorRevurderingPanel';
@@ -227,8 +228,9 @@ interface Props {
   beregningErManueltFastsatt: boolean;
   beregningsresultatOriginalBehandling?: BeregningsresultatDagytelse | BeregningsresultatEs;
   oppgaver?: Oppgave[];
-  hentBrevHtml: () => Promise<OverstyrtDokument>;
-  lagreManueltBrev: (html: string | null) => Promise<void>;
+  brevOverstyring?: BrevOverstyring;
+  refetchBrevOverstyring: () => void;
+  mellomlagreBrevOverstyring: (html: string | null) => Promise<void>;
 }
 
 export const VedtakRevurderingForm = ({
@@ -240,8 +242,9 @@ export const VedtakRevurderingForm = ({
   beregningErManueltFastsatt,
   beregningsresultatOriginalBehandling,
   oppgaver,
-  hentBrevHtml,
-  lagreManueltBrev,
+  brevOverstyring,
+  refetchBrevOverstyring,
+  mellomlagreBrevOverstyring,
 }: Props) => {
   const intl = useIntl();
 
@@ -249,22 +252,20 @@ export const VedtakRevurderingForm = ({
     usePanelDataContext<RevurderingVedtakAksjonspunkter[]>();
 
   const [harOverstyrtVedtaksbrev, setHarOverstyrtVedtaksbrev] = useState(
-    behandling.behandlingsresultat?.vedtaksbrev === DokumentMalType.FRITEKST_HTML ||
-      behandling.behandlingsresultat?.vedtaksbrev === DokumentMalType.FRITEKST,
+    !!brevOverstyring?.redigertHtml || behandling.behandlingsresultat?.vedtaksbrev === DokumentMalType.FRITEKST,
   );
 
-  const { aksjonspunkt } = behandling;
+  const { behandlingsresultat, språkkode, aksjonspunkt, behandlingÅrsaker } = behandling;
 
-  //FIXME bruk mellomlagret data
-  const { setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
-  const formMethods = useForm<FormValues>();
+  const formMethods = useForm<FormValues>({
+    defaultValues: mellomlagretFormData || buildInitialValues(behandling, beregningErManueltFastsatt),
+  });
 
   const begrunnelse = formMethods.watch('begrunnelse');
 
-  const { behandlingsresultat, språkkode, behandlingÅrsaker } = behandling;
-
-  const erBehandlingEtterKlage = erÅrsakTypeBehandlingEtterKlage(behandling.behandlingÅrsaker);
+  const erBehandlingEtterKlage = erÅrsakTypeBehandlingEtterKlage(behandlingÅrsaker);
   const revurderingsÅrsakString = lagÅrsakString(
     behandlingÅrsaker.map(arsak => arsak.behandlingArsakType),
     getKodeverknavnFn(alleKodeverk),
@@ -315,9 +316,11 @@ export const VedtakRevurderingForm = ({
         tilbakekrevingtekst={tilbakekrevingtekst}
         erBehandlingEtterKlage={erBehandlingEtterKlage}
         oppgaver={oppgaver}
-        hentBrevHtml={hentBrevHtml}
-        lagreManueltBrev={lagreManueltBrev}
+        brevOverstyring={brevOverstyring}
+        refetchBrevOverstyring={refetchBrevOverstyring}
+        mellomlagreBrevOverstyring={mellomlagreBrevOverstyring}
         setHarOverstyrtVedtaksbrev={setHarOverstyrtVedtaksbrev}
+        harOverstyrtVedtaksbrev={harOverstyrtVedtaksbrev}
         renderPanel={(skalBrukeOverstyrendeFritekstBrev, erInnvilget, erAvslatt, erOpphor) => {
           if (erInnvilget) {
             return (
