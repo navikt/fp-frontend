@@ -52,8 +52,8 @@ const ALLE_BEHANDLINGER = [
   {
     versjon: 2,
     uuid: '1',
-    behandlingKoet: false,
-    behandlingPaaVent: false,
+    behandlingKøet: false,
+    behandlingPåVent: false,
     kanHenleggeBehandling: true,
     type: BehandlingType.REVURDERING,
     status: BehandlingStatus.BEHANDLING_UTREDES,

@@ -94,8 +94,8 @@ const BEHANDLING_TILLATTE_OPERASJONER = {
 const BEHANDLING = {
   versjon: 2,
   uuid: '1',
-  behandlingKoet: false,
-  behandlingPaaVent: false,
+  behandlingKøet: false,
+  behandlingPåVent: false,
   kanHenleggeBehandling: true,
   type: BehandlingType.FORSTEGANGSSOKNAD,
   status: BehandlingStatus.FATTER_VEDTAK,

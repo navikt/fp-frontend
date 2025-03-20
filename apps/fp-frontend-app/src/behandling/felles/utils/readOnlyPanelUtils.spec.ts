@@ -9,7 +9,7 @@ describe('<readOnlyUtils>', () => {
     versjon: 1,
     status: BehandlingStatus.BEHANDLING_UTREDES,
     type: BehandlingType.FORSTEGANGSSOKNAD,
-    behandlingPaaVent: false,
+    behandlingPåVent: false,
     behandlingHenlagt: false,
   };
 

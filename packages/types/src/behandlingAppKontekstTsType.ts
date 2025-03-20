@@ -9,9 +9,9 @@ export type BehandlingFellesData = Readonly<{
   uuid: string;
   status: string;
   type: string;
-  fristBehandlingPåVent?: string;
-  venteArsakKode?: string;
-  behandlingPaaVent: boolean;
+  fristBehandlingPåVent: string | null;
+  venteÅrsakKode: string | null;
+  behandlingPåVent: boolean;
   behandlingHenlagt: boolean;
   behandlingsresultat?: Behandlingsresultat;
   links: ApiLink[];
@@ -22,13 +22,12 @@ export type BehandlingFellesData = Readonly<{
   språkkode: string;
   behandlendeEnhetId: string;
   behandlendeEnhetNavn: string;
-  behandlingKoet: boolean;
+  behandlingKøet: boolean;
   toTrinnsBehandling: boolean;
   behandlingÅrsaker: BehandlingÅrsak[];
   ansvarligSaksbehandler?: string;
   kanHenleggeBehandling?: boolean;
   førsteÅrsak?: BehandlingÅrsak;
-  fristBehandlingPaaVent?: string;
 }>;
 
 export type BehandlingÅrsak = {

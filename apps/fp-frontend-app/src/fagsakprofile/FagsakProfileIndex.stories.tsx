@@ -60,8 +60,8 @@ const ALLE_BEHANDLINGER = [
   {
     uuid: '1',
     versjon: 1,
-    behandlingKoet: false,
-    behandlingPaaVent: false,
+    behandlingKøet: false,
+    behandlingPåVent: false,
     kanHenleggeBehandling: true,
     type: BehandlingType.FORSTEGANGSSOKNAD,
     status: BehandlingStatus.AVSLUTTET,
@@ -74,8 +74,8 @@ const ALLE_BEHANDLINGER = [
   {
     uuid: '2',
     versjon: 1,
-    behandlingKoet: false,
-    behandlingPaaVent: false,
+    behandlingKøet: false,
+    behandlingPåVent: false,
     kanHenleggeBehandling: true,
     type: BehandlingType.REVURDERING,
     status: BehandlingStatus.BEHANDLING_UTREDES,

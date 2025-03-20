@@ -36,7 +36,7 @@ const DEFAULT_BEHANDLING = {
   språkkode: 'NB',
   type: BehandlingType.FORSTEGANGSSOKNAD,
   status: BehandlingStatus.BEHANDLING_UTREDES,
-  behandlingPaaVent: false,
+  behandlingPåVent: false,
   behandlingHenlagt: false,
 } as Behandling;
 

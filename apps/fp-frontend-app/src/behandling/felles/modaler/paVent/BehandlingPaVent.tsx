@@ -23,7 +23,7 @@ export const BehandlingPaVent = ({
   erTilbakekreving = false,
   skalIkkeViseModal = false,
 }: Props) => {
-  const [skalViseModal, setVisModal] = useState(!skalIkkeViseModal && behandling.behandlingPaaVent);
+  const [skalViseModal, setVisModal] = useState(!skalIkkeViseModal && behandling.behandlingPåVent);
   const skjulModal = () => setVisModal(false);
 
   const behandlingApi = useBehandlingApi(behandling);
@@ -40,7 +40,7 @@ export const BehandlingPaVent = ({
 
   useEffect(() => {
     if (!skalIkkeViseModal) {
-      setVisModal(behandling.behandlingPaaVent);
+      setVisModal(behandling.behandlingPåVent);
     }
   }, [behandling.versjon, skalIkkeViseModal]);
 
@@ -52,8 +52,8 @@ export const BehandlingPaVent = ({
     <SettPaVentModalIndex
       submitCallback={endrePaVent}
       cancelEvent={skjulModal}
-      frist={behandling.fristBehandlingPåVent || behandling.fristBehandlingPaaVent}
-      ventearsak={behandling.venteArsakKode}
+      frist={behandling.fristBehandlingPåVent}
+      ventearsak={behandling.venteÅrsakKode}
       hasManualPaVent={erManueltSattPaVent}
       ventearsaker={kodeverk[KodeverkType.VENT_AARSAK]}
       erTilbakekreving={erTilbakekreving}

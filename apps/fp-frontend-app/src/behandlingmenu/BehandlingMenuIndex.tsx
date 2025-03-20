@@ -151,7 +151,7 @@ export const BehandlingMenuIndex = ({
 };
 
 const hentMenyData = (behandling: BehandlingAppKontekst | undefined, fagsak: Fagsak) => {
-  const erPaVent = behandling ? behandling.behandlingPaaVent : false;
+  const erPaVent = behandling ? behandling.behandlingPåVent : false;
   const behandlingTillatteOperasjoner = behandling?.behandlingTillatteOperasjoner;
 
   const vergeMenyvalg = behandlingTillatteOperasjoner?.vergeBehandlingsmeny;
