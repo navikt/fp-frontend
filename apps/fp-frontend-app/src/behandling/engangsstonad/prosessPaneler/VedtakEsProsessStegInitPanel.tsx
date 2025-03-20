@@ -18,7 +18,7 @@ import { VedtakProsessIndex } from '@navikt/fp-prosess-vedtak';
 import type { Aksjonspunkt, Behandlingsresultat, ForhåndsvisMeldingParams, Vilkar } from '@navikt/fp-types';
 import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingApi';
+import { forhåndsvisMelding, harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
 import { IverksetterVedtakStatusModal } from '../../felles/modaler/vedtak/IverksetterVedtakStatusModal';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
@@ -99,9 +99,11 @@ export const VedtakEsProsessStegInitPanel = () => {
 
   const { aksjonspunkter } = standardPanelProps;
 
-  const harHentetBreveOverstyring = !erAvsluttetLegacyOverstyring && !!brevOverstyring;
+  const harHentetBrevOverstyring = harLenke(behandling, 'HENT_BREV_OVERSTYRING')
+    ? !erAvsluttetLegacyOverstyring && !!brevOverstyring
+    : true;
   const isNotFetching =
-    !isBogFetching && !isBeFetching && !isSrFetching && !isTvFetching && !isOFetching && harHentetBreveOverstyring;
+    !isBogFetching && !isBeFetching && !isSrFetching && !isTvFetching && !isOFetching && harHentetBrevOverstyring;
 
   return (
     <ProsessDefaultInitPanel

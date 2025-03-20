@@ -18,10 +18,9 @@ const meta = {
   component: FritekstRedigeringModal,
   decorators: [withIntl, withPanelData, withRouter],
   args: {
-    brevHtml: { opprinneligHtml: mal, redigertHtml: redigertInnhold },
-    lagreManueltBrev: action('button-click') as (html: string | null) => Promise<void>,
-    setVisEditorModal: action('button-click'),
-    forkastManueltBrev: action('button-click') as () => Promise<void>,
+    refetchBrevOverstyring: action('button-click'),
+    mellomlagreBrevOverstyring: action('button-click') as (html: string | null) => Promise<void>,
+    setVisFritekstRedigeringModal: action('button-click'),
     forhåndsvisBrev: action('button-click'),
   },
   render: args => <FritekstRedigeringModal {...args} />,
@@ -30,4 +29,14 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const MedOpprinneligHtml: Story = {
+  args: {
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
+  },
+};
+
+export const MedRedigertHtml: Story = {
+  args: {
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: redigertInnhold },
+  },
+};
