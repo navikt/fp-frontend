@@ -11,7 +11,7 @@ import type { Dokument } from '@navikt/fp-types';
 import { useFagsakApi } from '../../data/fagsakApi';
 import { SupportHeaderAndContent } from '../SupportHeader';
 
-import styles from '../dokument/DokumentIndex.module.css';
+import styles from './DokumentIndex.module.css';
 
 const selectDocument =
   (saksNr: string) =>
