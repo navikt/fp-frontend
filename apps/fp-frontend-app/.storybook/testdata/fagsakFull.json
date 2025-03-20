@@ -74,6 +74,11 @@
       "opprettetTidspunkt": "2022-02-04",
       "opprettetAv": "Espen Utvikler",
       "notat": "Dette er et annet notat"
+    },
+    {
+      "opprettetTidspunkt": "2022-02-04",
+      "opprettetAv": "Espen Utvikler",
+      "notat": "Dette er et tredje notat"
     }
   ],
   "behandlinger": [
@@ -271,6 +276,37 @@
       "tittel": "Dette er en inntektsmelding",
       "skjermlenke": null,
       "body": [],
+      "dokumenter": [],
+      "linjer": []
+    },
+    {
+      "behandlingUuid": "7d198233-b499-4aaf-a01b-be97958e20ce",
+      "aktør": {
+        "type": "VL",
+        "ident": null
+      },
+      "opprettetTidspunkt": "2023-06-09T10:50:30.395",
+      "tittel": "Vedtak",
+      "skjermlenke": null,
+      "body": [
+        "Vedtak er foreslått og sendt til beslutter: Innvilget."
+      ],
+      "dokumenter": [],
+      "linjer": []
+    },
+    {
+      "behandlingUuid": "7d198233-b499-4aaf-a01b-be97958e20ce",
+      "aktør": {
+        "type": "VL",
+        "ident": null
+      },
+      "opprettetTidspunkt": "2023-06-09T10:51:30.395",
+      "tittel": "Svangerskapspenger",
+      "skjermlenke": null,
+      "body": [
+        "__Svangerskapsvilkåret__ er satt til __Vilkåret er oppfylt.__",
+        "Ok."
+      ],
       "dokumenter": [],
       "linjer": []
     }

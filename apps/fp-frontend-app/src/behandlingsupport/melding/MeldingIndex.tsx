@@ -17,8 +17,6 @@ import { FagsakData } from '../../fagsak/FagsakData';
 import { SupportHeaderAndContent } from '../SupportHeader';
 import { SettPaVentReadOnlyModal } from './SettPaVentReadOnlyModal';
 
-import styles from './MeldingIndex.module.css';
-
 const EMPTY_ARRAY = [] as KodeverkMedNavn[];
 
 interface Props {
@@ -51,7 +49,6 @@ export const MeldingIndex = ({
   const [showMessagesModal, setShowMessageModal] = useState(false);
 
   const navigate = useNavigate();
-  const [top, setTop] = useState<number>();
 
   const fagsak = fagsakData.getFagsak();
   const valgtBehandling = notEmpty(fagsakData.getBehandling(valgtBehandlingUuid));
@@ -101,15 +98,7 @@ export const MeldingIndex = ({
     behandlingTillatteOperasjoner?.behandlingKanSendeMelding;
 
   return (
-    <div
-      className={styles.container}
-      style={{ height: `calc(100vh - ${top}px)` }}
-      ref={el => {
-        if (el) {
-          setTop(el.getBoundingClientRect().top);
-        }
-      }}
-    >
+    <>
       {showMessagesModal && (
         <MessagesModalSakIndex showModal={submitFinished && showMessagesModal} closeEvent={afterSubmit} />
       )}
@@ -149,7 +138,7 @@ export const MeldingIndex = ({
           frist={finnFristFraBehandling(valgtBehandling)}
         />
       )}
-    </div>
+    </>
   );
 };
 
