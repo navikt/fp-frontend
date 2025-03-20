@@ -21,13 +21,16 @@ export const useEditorJs = (
   editorHolderId: string,
   htmlMal: OverstyrtDokument,
   forhåndsvisBrev: (data: ForhandsvisData) => void,
-  lagreManueltBrev: (html: string) => Promise<void>,
+  lagreManueltBrev: (html: string | null) => Promise<void>,
 ) => {
   const ref = useRef<EditorJS>(null);
   const refCurrentHtml = useRef('');
 
   const readonlyInnhold = utledReadonlyInnhold(htmlMal.opprinneligHtml);
-  const originalHtmlStreng = notEmpty(utledRedigerbartInnhold(htmlMal.redigertHtml ?? htmlMal.opprinneligHtml));
+  const originalHtmlStreng = notEmpty(
+    utledRedigerbartInnhold(htmlMal.redigertHtml ?? htmlMal.opprinneligHtml),
+    'Redigerbart innhold finnes ikke i mal',
+  );
 
   const lagreBrevDebouncer = useLagreBrevDebouncer();
 
@@ -65,9 +68,14 @@ export const useEditorJs = (
   }, []);
 
   const tilbakestillEndringer = async () => {
+    refCurrentHtml.current = '';
+
     const editor = notEmpty(ref.current, EDITOR_IKKE_INITIALISERT);
     await editor.blocks.clear();
-    editor.blocks.renderFromHTML(originalHtmlStreng.replace(SPACE_REGEX, '$1'));
+    const opprinnelig = notEmpty(utledRedigerbartInnhold(htmlMal.opprinneligHtml));
+    editor.blocks.renderFromHTML(opprinnelig.replace(SPACE_REGEX, '$1'));
+
+    lagreManueltBrev(null);
   };
 
   const lagreEndringer = async () => {

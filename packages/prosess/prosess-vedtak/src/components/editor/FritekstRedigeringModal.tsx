@@ -64,7 +64,6 @@ export const FritekstRedigeringModal = ({
   };
 
   const tilbakestill = async () => {
-    lagreManueltBrev(null);
     tilbakestillEndringer();
     setVisTilbakestillAdvarsel(false);
   };
