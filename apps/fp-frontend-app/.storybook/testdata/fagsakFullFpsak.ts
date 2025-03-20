@@ -110,25 +110,21 @@ export const fagsakFullFpsak: Fagsak = {
         {
           href: '/fpsak/api/behandling/person/personoversikt?uuid=a47091ce-638c-403a-8ef9-b4419b4d4313',
           rel: 'behandling-personoversikt',
-          requestPayload: null,
           type: 'GET',
         },
         {
           href: '/fpsak/api/behandling/familiehendelse/v2?uuid=a47091ce-638c-403a-8ef9-b4419b4d4313',
           rel: 'familiehendelse-v2',
-          requestPayload: null,
           type: 'GET',
         },
         {
           href: '/fpsak/api/brev/bestill',
           rel: 'brev-bestill',
-          requestPayload: null,
           type: 'POST',
         },
         {
           href: '/fpsak/api/brev/forhandsvis',
           rel: 'brev-vis',
-          requestPayload: null,
           type: 'POST',
         },
       ],

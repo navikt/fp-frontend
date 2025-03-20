@@ -14,7 +14,7 @@ import type {
   Opptjening,
   OpptjeningAktivitet,
 } from '@navikt/fp-types';
-import type { AvklarAktivitetsPerioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { AvklarAktivitetsPerioderAp, OpptjeningAktivitetAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { type FormValues, ValgtAktivitetForm } from './aktivitet/ValgtAktivitetForm';
@@ -139,13 +139,13 @@ export const OpptjeningFaktaPanel = ({
     setIsSubmitting(true);
 
     const opptjeningsaktiviteterSomSkallagres = filtrerteOgSorterteOpptjeningsaktiviteter
-      .map((a, index) => ({
+      .map<OpptjeningAktivitetAp>((a, index) => ({
         arbeidsforholdRef: a.arbeidsforholdRef,
         arbeidsgiverReferanse: a.arbeidsgiverReferanse,
         opptjeningFom: a.opptjeningFom,
         opptjeningTom: a.opptjeningTom,
         aktivitetType: a.aktivitetType,
-        erGodkjent: formVerdierForAlleAktiviteter[index].erGodkjent,
+        erGodkjent: formVerdierForAlleAktiviteter[index].erGodkjent!,
         begrunnelse: formVerdierForAlleAktiviteter[index].begrunnelse,
       }))
       .filter(b => b.begrunnelse);

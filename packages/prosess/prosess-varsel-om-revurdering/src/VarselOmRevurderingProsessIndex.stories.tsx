@@ -26,7 +26,6 @@ const familieHendelse = {
     avklartBarn: [
       {
         fodselsdato: '2019-01-10',
-        dodsdato: undefined,
       },
     ],
   },
@@ -51,6 +50,7 @@ const familiehendelseOriginalBehandling = {
   avklartBarn: [
     {
       fodselsdato: '2019-01-10',
+      dodsdato: null,
     },
   ],
   termindato: '2019-01-01',

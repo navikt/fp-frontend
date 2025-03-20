@@ -27,7 +27,12 @@ export const FormKravFamOgPensjonProsessStegInitPanel = () => {
       b =>
         (b.type !== BehandlingType.KLAGE || isKlageAvvist(b.behandlingsresultat?.type)) &&
         b.type !== BehandlingType.ANKE,
-    );
+    )
+    .map(b => ({
+      uuid: b.uuid,
+      type: b.type,
+      avsluttet: b.avsluttet ?? undefined,
+    }));
 
   const api = useBehandlingApi(behandling);
 

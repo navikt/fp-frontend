@@ -10,7 +10,7 @@ export type BehandlingFellesData = Readonly<{
   status: string;
   type: string;
   fristBehandlingPåVent: string | null;
-  venteÅrsakKode?: string | null;
+  venteÅrsakKode: string | null;
   behandlingPåVent: boolean;
   behandlingHenlagt: boolean;
   behandlingsresultat?: Behandlingsresultat;
