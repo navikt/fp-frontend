@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -10,8 +10,6 @@ import type { Dokument } from '@navikt/fp-types';
 
 import { useFagsakApi } from '../../data/fagsakApi';
 import { SupportHeaderAndContent } from '../SupportHeader';
-
-import styles from './DokumentIndex.module.css';
 
 const selectDocument =
   (saksNr: string) =>
@@ -64,8 +62,6 @@ export const DokumentIndex = ({
     api.hentDokumenter(saksnummer, behandlingUuid, behandlingVersjon),
   );
 
-  const [top, setTop] = useState<number>();
-
   if (status === 'pending') {
     return <LoadingPanel />;
   }
@@ -73,26 +69,16 @@ export const DokumentIndex = ({
   const sorterteDokumenter = alleDokumenter.toSorted(sorterDokumenter);
 
   return (
-    <div
-      className={styles.overflow}
-      style={{ height: `calc(100vh - ${top}px)` }}
-      ref={el => {
-        if (el) {
-          setTop(el.getBoundingClientRect().top);
-        }
-      }}
+    <SupportHeaderAndContent
+      tekst={intl.formatMessage({ id: 'DokumentIndex.Dokumenter' })}
+      antall={sorterteDokumenter.length}
+      toggleVisUtvidetBehandlingDetaljerKnapp={toggleVisUtvidetBehandlingDetaljerKnapp}
     >
-      <SupportHeaderAndContent
-        tekst={intl.formatMessage({ id: 'DokumentIndex.Dokumenter' })}
-        antall={sorterteDokumenter.length}
-        toggleVisUtvidetBehandlingDetaljerKnapp={toggleVisUtvidetBehandlingDetaljerKnapp}
-      >
-        <DokumenterSakIndex
-          documents={sorterteDokumenter}
-          selectDocumentCallback={selectDocument(saksnummer)}
-          behandlingUuid={behandlingUuid}
-        />
-      </SupportHeaderAndContent>
-    </div>
+      <DokumenterSakIndex
+        documents={sorterteDokumenter}
+        selectDocumentCallback={selectDocument(saksnummer)}
+        behandlingUuid={behandlingUuid}
+      />
+    </SupportHeaderAndContent>
   );
 };
