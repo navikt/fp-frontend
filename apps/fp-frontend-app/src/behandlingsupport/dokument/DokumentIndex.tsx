@@ -11,7 +11,7 @@ import type { Dokument } from '@navikt/fp-types';
 import { useFagsakApi } from '../../data/fagsakApi';
 import { SupportHeaderAndContent } from '../SupportHeader';
 
-import styles from '../melding/MeldingIndex.module.css';
+import styles from '../dokument/DokumentIndex.module.css';
 
 const selectDocument =
   (saksNr: string) =>
@@ -74,7 +74,7 @@ export const DokumentIndex = ({
 
   return (
     <div
-      className={styles.container}
+      className={styles.overflow}
       style={{ height: `calc(100vh - ${top}px)` }}
       ref={el => {
         if (el) {

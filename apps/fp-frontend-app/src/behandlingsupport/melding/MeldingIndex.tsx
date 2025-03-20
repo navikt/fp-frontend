@@ -102,7 +102,7 @@ export const MeldingIndex = ({
 
   return (
     <div
-      className={styles.container}
+      className={styles.overflow}
       style={{ height: `calc(100vh - ${top}px)` }}
       ref={el => {
         if (el) {
