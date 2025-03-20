@@ -9,33 +9,32 @@ import { http, HttpResponse } from 'msw';
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
 import { alleKodeverk, alleKodeverkTilbakekreving } from '@navikt/fp-storybook-utils';
 
-import { alleInntektsmeldinger } from '../../.storybook/testdata/alleInntektsmeldinger.ts';
-import { arbeidInntektsmelding } from '../../.storybook/testdata/arbeidInntektsmelding.ts';
-import { arbeidsgiverOpplysninger } from '../../.storybook/testdata/arbeidsgiverOpplysninger.ts';
-import { behandling } from '../../.storybook/testdata/behandling.ts';
-import { beregningresultatDagytelse } from '../../.storybook/testdata/beregningresultatDagytelse.ts';
-import { beregningsgrunnlag } from '../../.storybook/testdata/beregningsgrunnlag.ts';
-import { dokumenter } from '../../.storybook/testdata/dokumenter.ts';
-import { fagsakFullFpsak } from '../../.storybook/testdata/fagsakFullFpsak.ts';
-import { fagsakFullTilbake } from '../../.storybook/testdata/fagsakFullTilbake.ts';
-import { faktaArbeidsforhold } from '../../.storybook/testdata/faktaArbeidsforhold.ts';
-import { familiehendelse } from '../../.storybook/testdata/familiehendelse.ts';
-import { feriepengeGrunnlag } from '../../.storybook/testdata/feriepengeGrunnlag.ts';
+import { alleInntektsmeldinger } from '../../.storybook/testdata/alleInntektsmeldinger';
+import { arbeidInntektsmelding } from '../../.storybook/testdata/arbeidInntektsmelding';
+import { arbeidsgiverOpplysninger } from '../../.storybook/testdata/arbeidsgiverOpplysninger';
+import { behandling } from '../../.storybook/testdata/behandling';
+import { beregningresultatDagytelse } from '../../.storybook/testdata/beregningresultatDagytelse';
+import { beregningsgrunnlag } from '../../.storybook/testdata/beregningsgrunnlag';
+import { dokumenter } from '../../.storybook/testdata/dokumenter';
+import { fagsakFullFpsak } from '../../.storybook/testdata/fagsakFullFpsak';
+import { fagsakFullTilbake } from '../../.storybook/testdata/fagsakFullTilbake';
+import { faktaArbeidsforhold } from '../../.storybook/testdata/faktaArbeidsforhold';
+import { familiehendelse } from '../../.storybook/testdata/familiehendelse';
+import { feriepengeGrunnlag } from '../../.storybook/testdata/feriepengeGrunnlag';
 import { initFetchFpsak } from '../../.storybook/testdata/initFetchFpsak';
 import { initFetchFptilbake } from '../../.storybook/testdata/initFetchFptilbake';
-import { inntektArbeidYtelse } from '../../.storybook/testdata/inntektArbeidYtelse.ts';
-import { kontrollerFaktaPeriode } from '../../.storybook/testdata/kontrollerFaktaPeriode.ts';
-import { medlemskap } from '../../.storybook/testdata/medlemskap.ts';
-import { opptjening } from '../../.storybook/testdata/opptjening.ts';
-import { personoversikt } from '../../.storybook/testdata/personoversikt.ts';
-import { soknad } from '../../.storybook/testdata/soknad.ts';
-import { ytelseFordeling } from '../../.storybook/testdata/ytelseFordeling.ts';
+import { inntektArbeidYtelse } from '../../.storybook/testdata/inntektArbeidYtelse';
+import { kontrollerFaktaPeriode } from '../../.storybook/testdata/kontrollerFaktaPeriode';
+import { medlemskap } from '../../.storybook/testdata/medlemskap';
+import { omsorgOgRett } from '../../.storybook/testdata/omsorgOgRett';
+import { opptjening } from '../../.storybook/testdata/opptjening';
+import { personoversikt } from '../../.storybook/testdata/personoversikt';
+import { soknad } from '../../.storybook/testdata/soknad';
+import { ytelseFordeling } from '../../.storybook/testdata/ytelseFordeling';
 import { BehandlingRel, BehandlingUrl } from '../data/behandlingApi';
 import { RestApiErrorProvider } from '../data/error/RestApiErrorContext';
 import { FagsakRel, FagsakUrl, wrapUrl } from '../data/fagsakApi';
 import { AppIndexWrapper } from './AppIndex';
-
-import omsorgOgRettData from '../../.storybook/testdata/omsorgOgRett.json';
 
 const ressursMap = {
   [FagsakUrl.INIT_FETCH]: initFetchFpsak,
@@ -63,8 +62,7 @@ const ressursMap = {
   [BehandlingRel.BEREGNINGSGRUNNLAG]: beregningsgrunnlag,
   [BehandlingRel.BEREGNINGRESULTAT_DAGYTELSE]: beregningresultatDagytelse,
   [BehandlingRel.FAKTA_ARBEIDSFORHOLD]: faktaArbeidsforhold,
-  [BehandlingRel.OMSORG_OG_RETT]: omsorgOgRettData,
-
+  [BehandlingRel.OMSORG_OG_RETT]: omsorgOgRett,
   [BehandlingRel.FAMILIEHENDELSE]: familiehendelse,
   [BehandlingRel.SAVE_AKSJONSPUNKT]: new HttpResponse(null, {
     status: 202,
