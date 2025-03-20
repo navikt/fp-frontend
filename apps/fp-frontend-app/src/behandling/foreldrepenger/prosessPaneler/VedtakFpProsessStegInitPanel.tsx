@@ -81,11 +81,9 @@ export const VedtakFpProsessStegInitPanel = () => {
   const erAvsluttetLegacyOverstyring =
     !!behandling.behandlingsresultat?.overskrift && behandling.status === BehandlingStatus.AVSLUTTET;
 
-  const {
-    data: brevOverstyring,
-    refetch: refetchBrevOverstyring,
-    isFetching: isBoFetching,
-  } = useQuery(api.hentBrevOverstyringOptions(behandling, !erAvsluttetLegacyOverstyring));
+  const { data: brevOverstyring, refetch: refetchBrevOverstyring } = useQuery(
+    api.hentBrevOverstyringOptions(behandling, !erAvsluttetLegacyOverstyring),
+  );
 
   const { mutateAsync: mellomlagreBrevOverstyring } = useMutation({
     mutationFn: (html: string | null) => api.mellomlagreBrevOverstyring({ behandlingUuid: behandling.uuid, html }),
@@ -101,6 +99,7 @@ export const VedtakFpProsessStegInitPanel = () => {
     onSuccess: forhandsvisDokument,
   });
 
+  const harHentetBreveOverstyring = !erAvsluttetLegacyOverstyring && !!brevOverstyring;
   const isNotFetching =
     !isBdFetching &&
     !isTvFetching &&
@@ -108,7 +107,7 @@ export const VedtakFpProsessStegInitPanel = () => {
     !isSrFetching &&
     !isBdobFetching &&
     !isOFetching &&
-    !isBoFetching;
+    harHentetBreveOverstyring;
 
   return (
     <ProsessDefaultInitPanel
