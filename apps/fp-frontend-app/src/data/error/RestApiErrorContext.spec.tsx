@@ -9,7 +9,7 @@ const TestErrorMessage = ({ skalFjerne = false }) => {
   const { addErrorMessage, removeErrorMessages } = useRestApiErrorDispatcher();
   useEffect(() => {
     addErrorMessage({ type: ErrorType.GENERAL_ERROR, message: 'Feilmeldingstest 1' });
-    addErrorMessage({ type: ErrorType.GENERAL_ERROR, message: 'Feilmeldingstest 2' });
+    addErrorMessage({ type: ErrorType.REQUEST_FORBIDDEN, message: 'Feilmeldingstest 2' });
 
     if (skalFjerne) {
       removeErrorMessages();
@@ -21,13 +21,13 @@ const TestErrorMessage = ({ skalFjerne = false }) => {
     <>
       Feilmeldinger:
       {feilmeldinger.map(feil => (
-        <span key={feil.type}>{feil.type === ErrorType.GENERAL_ERROR ? feil.message : ''}</span>
+        <span key={feil.type}>{'message' in feil ? feil.message : ''}</span>
       ))}
     </>
   );
 };
 
-describe('<RestApiErrorContext>', () => {
+describe('RestApiErrorContext', () => {
   it('skal legge til feilmelding og så hente alle i kontekst', async () => {
     render(
       <RestApiErrorProvider>
