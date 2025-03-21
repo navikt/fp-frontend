@@ -12,7 +12,7 @@ const {
   VisAdvarselNårUtbetalingsgradOgProsentArbeidOverstiger100Prosent,
 } = composeStories(stories);
 
-describe('<UttakProsessIndex>', () => {
+describe('UttakProsessIndex', () => {
   it('skal vise periode med gradering', async () => {
     const lagre = vi.fn();
 

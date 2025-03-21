@@ -30,6 +30,8 @@ const OppholdArsakKontoNavn = {
   UDEFINERT: '-',
 } as Record<string, string>;
 
+const bTag = (...chunks: any) => <b key="bold">{chunks}</b>;
+
 const periodeStatusClassName = (valgtPeriode: PeriodeSoker, erTilknyttetStortinget: boolean): string => {
   if (valgtPeriode.periodeResultatType === PeriodeResultatType.INNVILGET && !erTilknyttetStortinget) {
     return styles.greenDetailsPeriod;
@@ -98,7 +100,7 @@ const isInnvilgetText = (valgtPeriode: PeriodeSoker, alleKodeverk: AlleKodeverk)
           innvilgelseAarsak: alleKodeverk[KodeverkType.PERIODE_RESULTAT_AARSAK].find(
             k => k.kode === valgtPeriode.periodeResultatÅrsak,
           )?.navn,
-          b: (chunks: any) => <b>{chunks}</b>,
+          b: bTag,
         }}
       />
     );
@@ -110,7 +112,7 @@ const isInnvilgetText = (valgtPeriode: PeriodeSoker, alleKodeverk: AlleKodeverk)
         avslagAarsak: alleKodeverk[KodeverkType.PERIODE_RESULTAT_AARSAK].find(
           k => k.kode === valgtPeriode.periodeResultatÅrsak,
         )?.navn,
-        b: (chunks: any) => <b>{chunks}</b>,
+        b: bTag,
       }}
     />
   );
@@ -257,9 +259,7 @@ export const UttakPeriodeInfo = ({
         </div>
         {visGraderingIkkeInnvilget(valgtPeriode, isReadOnly, graderingInnvilget) && (
           <div>
-            <b>
-              <FormattedMessage id="UttakActivity.GraderingIkkeOppfylt" />:
-            </b>
+            <FormattedMessage id="UttakActivity.GraderingIkkeOppfylt" tagName="b" />:
             {
               alleKodeverk[KodeverkType.GRADERING_AVSLAG_AARSAK].find(k => k.kode === valgtPeriode.graderingAvslagÅrsak)
                 ?.navn

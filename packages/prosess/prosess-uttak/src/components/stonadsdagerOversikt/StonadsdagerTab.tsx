@@ -57,8 +57,6 @@ export const StonadsdagerTab = ({ stønadskonto, visDagerForKonto, aktiv = false
 
   const velgKonto = useCallback(() => visDagerForKonto(stønadskonto.stonadskontotype), [stønadskonto]);
 
-  const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
-
   const uker = Math.floor(stønadskonto.maxDager / 5);
 
   return (
@@ -87,10 +85,10 @@ export const StonadsdagerTab = ({ stønadskonto, visDagerForKonto, aktiv = false
             <BodyShort size="small">
               <FormattedMessage
                 id="TimeLineTab.Stonadinfo.UkerDager"
+                tagName="b"
                 values={{
                   ukerVerdi: fordelteDager.uker,
                   dagerVerdi: fordelteDager.dager,
-                  b: bTag,
                 }}
               />
             </BodyShort>

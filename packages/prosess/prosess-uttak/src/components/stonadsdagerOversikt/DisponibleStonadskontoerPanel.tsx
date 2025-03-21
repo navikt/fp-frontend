@@ -126,7 +126,7 @@ export const DisponibleStonadskontoerPanel = ({ stønadskontoer, arbeidsgiverOpp
     return aktiviteterMedNavn.sort((akt1, akt2) => akt1.navn.localeCompare(akt2.navn));
   }, [valgtKontoType, stønadskontoerMedNavn]);
 
-  const bTag = useCallback((chunks: any) => <b>{chunks}</b>, []);
+  const bTag = (...chunks: any) => <b key="bold">{chunks}</b>;
 
   return (
     <div className={styles.disponibeltUttak}>
@@ -179,10 +179,10 @@ export const DisponibleStonadskontoerPanel = ({ stønadskontoer, arbeidsgiverOpp
                         {arbforhold.saldo && (
                           <FormattedMessage
                             id="TimeLineInfo.Stonadinfo.UkerDager"
+                            tagName="b"
                             values={{
                               ukerVerdi: ukerOgDager.uker,
                               dagerVerdi: ukerOgDager.dager,
-                              b: bTag,
                             }}
                           />
                         )}
