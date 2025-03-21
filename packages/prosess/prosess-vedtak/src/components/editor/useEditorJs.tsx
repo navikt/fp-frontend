@@ -15,7 +15,7 @@ import type { ForhandsvisData } from '../forstegang/VedtakForm';
 import { erRedigertHtmlGyldig, utledReadonlyInnhold, utledRedigerbartInnhold } from './redigeringsUtils';
 
 const EDITOR_IKKE_INITIALISERT = 'Editor er ikke initialisert';
-const SPACE_REGEX = /\s*(<[^>]+>)\s*/g; // Fjerne mellomrom rundt html-tags
+const SPACE_REGEX = /\s*(<(?!a\s+href)[^>]+>)\s*/g; // Fjerne mellomrom rundt html-tags (utanom framfor <a href)
 
 const lagRedigerbartInnholdHtml = (redigerbartInnhold: string, readonlyFooter: string) =>
   `<div id="redigerbart-innhold" data-editable="data-editable">${redigerbartInnhold}</div><div id="readonly-innhold">${readonlyFooter}</div>`;
