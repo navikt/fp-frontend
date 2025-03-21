@@ -88,7 +88,7 @@ const RisikoklassifiseringBehandling = ({
   toggleRiskPanel,
   isRiskPanelOpen,
 }: RisikoBehandlingProps) => {
-  const { behandlingPaaVent, status, type, risikoAksjonspunkt, kontrollResultat } = behandlingAppKontekst;
+  const { behandlingPåVent, status, type, risikoAksjonspunkt, kontrollResultat } = behandlingAppKontekst;
 
   const { kodeverkOptions } = useFagsakApi();
   const initFetchQuery = useQuery(initFetchOptions());
@@ -96,7 +96,7 @@ const RisikoklassifiseringBehandling = ({
 
   const navAnsatt = notEmpty(initFetchQuery.data).innloggetBruker;
   const rettigheter = getAccessRights(navAnsatt, fagsak.status, status, type);
-  const readOnly = getReadOnly(navAnsatt, rettigheter, behandlingPaaVent);
+  const readOnly = getReadOnly(navAnsatt, rettigheter, behandlingPåVent);
 
   const navigate = useNavigate();
   const location = useLocation();

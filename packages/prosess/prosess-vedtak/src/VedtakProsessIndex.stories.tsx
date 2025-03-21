@@ -45,7 +45,7 @@ const defaultBehandling = {
   behandlingsresultat: {
     type: BehandlingResultatType.INNVILGET,
   },
-  behandlingPaaVent: false,
+  behandlingPåVent: false,
   behandlingHenlagt: false,
   aksjonspunkt: defaultAksjonspunkter,
   behandlingÅrsaker: [

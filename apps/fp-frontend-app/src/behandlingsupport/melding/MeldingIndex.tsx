@@ -29,7 +29,7 @@ interface Props {
 }
 
 const finnFristFraBehandling = (behandling: BehandlingAppKontekst) =>
-  behandling.behandlingPaaVent ? behandling.fristBehandlingPåVent || behandling.fristBehandlingPaaVent : undefined;
+  behandling.behandlingPåVent ? behandling.fristBehandlingPåVent : null;
 
 /**
  * MeldingIndex

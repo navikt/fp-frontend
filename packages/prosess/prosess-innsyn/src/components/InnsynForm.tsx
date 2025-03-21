@@ -44,7 +44,7 @@ const hentDokumenterMedNavnOgFikkInnsyn = (dokumenter: InnsynDokument[]): Record
 
 const getDefaultValues = (
   aksjonspunkter: Aksjonspunkt[],
-  fristBehandlingPåVent?: string,
+  fristBehandlingPåVent: string | null,
   innsyn?: Innsyn,
 ): FormValues => ({
   mottattDato: innsyn?.innsynMottattDato,

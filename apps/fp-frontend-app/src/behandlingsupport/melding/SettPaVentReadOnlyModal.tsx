@@ -7,19 +7,11 @@ import dayjs from 'dayjs';
 
 import type { KodeverkMedNavn } from '@navikt/fp-types';
 
-import styles from './settPaVentReadOnlyModal.module.css';
-
-const lagFramtidigFrist = (): string => {
-  const date = dayjs().toDate();
-  date.setDate(date.getDate() + 28);
-  return dayjs(date).format(ISO_DATE_FORMAT);
-};
-
 interface Props {
   lukkCallback: () => void;
   ventearsaker: KodeverkMedNavn[];
   ventearsak?: string;
-  frist?: string;
+  frist: string | null;
 }
 
 export const SettPaVentReadOnlyModal = ({ lukkCallback, ventearsaker, ventearsak, frist }: Props) => {
@@ -27,8 +19,8 @@ export const SettPaVentReadOnlyModal = ({ lukkCallback, ventearsaker, ventearsak
 
   return (
     <Modal
-      className={styles.modal}
       open
+      width="small"
       aria-label={intl.formatMessage({
         id: 'SettPaVentReadOnlyModal.ModalDescriptionErPaVent',
       })}
@@ -64,4 +56,10 @@ export const SettPaVentReadOnlyModal = ({ lukkCallback, ventearsaker, ventearsak
       </Modal.Footer>
     </Modal>
   );
+};
+
+const lagFramtidigFrist = (): string => {
+  const date = dayjs().toDate();
+  date.setDate(date.getDate() + 28);
+  return dayjs(date).format(ISO_DATE_FORMAT);
 };

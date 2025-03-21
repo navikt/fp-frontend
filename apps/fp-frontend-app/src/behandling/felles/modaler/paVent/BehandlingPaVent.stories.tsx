@@ -36,12 +36,12 @@ export const BehandlingSattPåVent: Story = {
     behandling: {
       uuid: '121212',
       versjon: 1,
-      behandlingPaaVent: true,
+      behandlingPåVent: true,
       status: BehandlingStatus.BEHANDLING_UTREDES,
       type: BehandlingType.FORSTEGANGSSOKNAD,
       behandlingHenlagt: false,
       fristBehandlingPåVent: '2030-10-10',
-      venteArsakKode: 'AVV_FODSEL',
+      venteÅrsakKode: 'AVV_FODSEL',
       aksjonspunkt: [
         {
           status: AksjonspunktStatus.OPPRETTET,
@@ -58,12 +58,12 @@ export const BehandlingSattManueltPåVent: Story = {
     behandling: {
       uuid: '121212',
       versjon: 1,
-      behandlingPaaVent: true,
+      behandlingPåVent: true,
       status: BehandlingStatus.BEHANDLING_UTREDES,
       type: BehandlingType.FORSTEGANGSSOKNAD,
       behandlingHenlagt: false,
       fristBehandlingPåVent: '2030-10-10',
-      venteArsakKode: 'AVV_FODSEL',
+      venteÅrsakKode: 'AVV_FODSEL',
       aksjonspunkt: [
         {
           status: AksjonspunktStatus.OPPRETTET,

@@ -31,5 +31,6 @@ export const Default: Story = {
     ventearsaker: VENTEARSAKER,
     ventearsak: 'test',
     lukkCallback: action('button-click'),
+    frist: null,
   },
 };

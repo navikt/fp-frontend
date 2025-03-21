@@ -19,7 +19,7 @@ const BehandlingPapirsoknadIndex = () => {
   const { alleKodeverk, behandling, rettigheter, fagsak, setSkalOppdatereEtterBekreftelseAvAp } =
     use(BehandlingDataContext);
 
-  const isReadOnly = !rettigheter.writeAccess.isEnabled || behandling.behandlingPaaVent;
+  const isReadOnly = !rettigheter.writeAccess.isEnabled || behandling.behandlingPåVent;
 
   const lagrePapirsøknad = useLagrePapirsøknad(setErAksjonspunktLagret, setSkalOppdatereEtterBekreftelseAvAp);
 

@@ -8,9 +8,9 @@ export const erReadOnly = (
   rettigheter: AksessRettigheter,
   hasFetchError: boolean,
 ) => {
-  const { behandlingPaaVent } = behandling;
+  const { behandlingPåVent } = behandling;
   const isBehandlingReadOnly = hasFetchError || harBehandlingReadOnlyStatus(behandling);
   const hasNonOverstyrbar = vilkarlisteForPunkt.some(v => !v.overstyrbar);
 
-  return !rettigheter.writeAccess.isEnabled || behandlingPaaVent || isBehandlingReadOnly || hasNonOverstyrbar;
+  return !rettigheter.writeAccess.isEnabled || behandlingPåVent || isBehandlingReadOnly || hasNonOverstyrbar;
 };
