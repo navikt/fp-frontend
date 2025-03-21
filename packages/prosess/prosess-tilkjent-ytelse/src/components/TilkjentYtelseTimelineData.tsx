@@ -1,4 +1,4 @@
-import { type ReactElement, useCallback } from 'react';
+import { type ReactElement } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ArrowLeftIcon, ArrowRightIcon, XMarkIcon } from '@navikt/aksel-icons';
@@ -110,7 +110,7 @@ export const TilkjentYtelseTimelineData = ({
   const intl = useIntl();
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
 
-  const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
+  const bTag = (...chunks: any) => <b key="bold">{chunks}</b>;
 
   return (
     <Box borderWidth="1" padding="4">
