@@ -7,94 +7,116 @@ import Paragraph from '@editorjs/paragraph';
 import edjsHTML from 'editorjs-html';
 import debounce from 'lodash.debounce';
 
-import { erRedigertHtmlGyldig, utledRedigerbartInnhold } from './redigeringsUtils';
+import { DokumentMalType } from '@navikt/fp-kodeverk';
+import type { BrevOverstyring } from '@navikt/fp-types';
+import { notEmpty } from '@navikt/fp-utils';
 
-export const useEditorJs = (editorHolderId: string, htmlMal: string) => {
-  const ref = useRef<EditorJS>(null);
-  const refInitialRender = useRef<boolean>(true);
+import type { ForhandsvisData } from '../forstegang/VedtakForm';
+import { erRedigertHtmlGyldig, utledReadonlyInnhold, utledRedigerbartInnhold } from './redigeringsUtils';
 
-  const lagreBrev = useLagreBrev();
+const EDITOR_IKKE_INITIALISERT = 'Editor er ikke initialisert';
+const SPACE_REGEX = /\s*(<(?!a\s+href)[^>]+>)\s*/g; // Fjerne mellomrom rundt html-tags (utanom framfor <a href)
+
+const lagRedigerbartInnholdHtml = (redigerbartInnhold: string, readonlyFooter: string) =>
+  `<div id="redigerbart-innhold" data-editable="data-editable">${redigerbartInnhold}</div><div id="readonly-innhold">${readonlyFooter}</div>`;
+
+export const useEditorJs = (
+  editorHolderId: string,
+  brevOverstyring: BrevOverstyring,
+  mellomlagreBrevOverstyring: (html: string | null) => Promise<void>,
+  forhåndsvisBrev: (data: ForhandsvisData) => void,
+) => {
+  const refEditorJs = useRef<EditorJS>(null);
+  const refCurrentHtml = useRef('');
+
+  const { opprinneligHtml, redigertHtml } = brevOverstyring;
+
+  const readonlyInnhold = utledReadonlyInnhold(opprinneligHtml);
+  const redigerbartInnhold = utledRedigerbartInnhold(redigertHtml ?? opprinneligHtml);
+
+  const lagreBrevDebouncer = useLagreBrevDebouncer();
 
   useEffect(() => {
-    if (!ref.current) {
+    if (!refEditorJs.current) {
       const editor = new EditorJS({
+        minHeight: 0,
         holder: editorHolderId,
         onReady: async () => {
-          ref.current = editor;
-
-          const originalHtmlStreng = utledRedigerbartInnhold(htmlMal);
-          if (originalHtmlStreng) {
-            await editor.blocks.renderFromHTML(originalHtmlStreng);
+          // Må ha denne sjekken for å unngå to like blocks (React.StrictMode i DEV gir to renders)
+          if (refEditorJs.current === null) {
+            refEditorJs.current = editor;
+            await editor.blocks.renderFromHTML(redigerbartInnhold.replace(SPACE_REGEX, '$1'));
           }
         },
         tools: TOOLS,
         onChange: async () => {
-          const lagreWrapper = async () => {
-            const innhold = await editor.saver.save();
-            const html = edjsHTML().parse(innhold);
-
-            console.log(html);
-            // submit(html);  // FIXME Lagre til server
-          };
-
-          //Forhindrer at lagring blir gjort ved initialisering
-          if (refInitialRender.current) {
-            refInitialRender.current = false;
+          //Forhindrer at lagring blir gjort ved initialisering og etter tilbakestilling
+          if (refCurrentHtml.current === '') {
+            // Dette er for å seinare kunne finna ut om innhaldet er endra
+            const innhold = await editor.save();
+            refCurrentHtml.current = edjsHTML().parse(innhold);
           } else {
-            lagreBrev(lagreWrapper);
+            lagreBrevDebouncer(lagreEndringer);
           }
         },
       });
     }
 
     return () => {
-      if (ref.current?.destroy) {
-        ref.current.destroy();
+      if (refEditorJs.current?.destroy) {
+        refEditorJs.current.destroy();
       }
     };
   }, []);
 
-  const tilbakestillEndringer = () => {
-    if (ref.current) {
-      const originalHtmlStreng = utledRedigerbartInnhold(htmlMal);
-      if (originalHtmlStreng) {
-        ref.current.blocks.renderFromHTML(originalHtmlStreng);
-        //FIXME Sjekk om onChange blir trigget
-      }
-    } else {
-      throw new Error('Editor er ikke initialisert');
-    }
+  const tilbakestillEndringer = async () => {
+    refCurrentHtml.current = '';
+
+    const editor = notEmpty(refEditorJs.current, EDITOR_IKKE_INITIALISERT);
+    await editor.blocks.clear();
+    const opprinneligRedigerbartInnhold = utledRedigerbartInnhold(opprinneligHtml);
+    editor.blocks.renderFromHTML(opprinneligRedigerbartInnhold.replace(SPACE_REGEX, '$1'));
+
+    mellomlagreBrevOverstyring(null);
   };
 
-  const lagreEndringer = () => {
-    lagreBrev(async () => {
-      if (ref.current) {
-        const innhold = await ref.current.save();
-        const html = edjsHTML().parse(innhold);
-        console.log(html);
-        // submit(html);  // FIXME Lagre til server
-      } else {
-        throw new Error('Editor er ikke initialisert');
-      }
-    });
+  const lagreEndringer = async () => {
+    const editor = notEmpty(refEditorJs.current, EDITOR_IKKE_INITIALISERT);
+    const innhold = await editor.save();
+    const html = edjsHTML().parse(innhold);
+
+    if (refCurrentHtml.current !== html) {
+      mellomlagreBrevOverstyring(lagRedigerbartInnholdHtml(html, readonlyInnhold.footer));
+    }
   };
 
   const validerEndringer = async () => {
-    if (ref.current) {
-      const innhold = await ref.current.save();
-      const html = edjsHTML().parse(innhold);
-      return erRedigertHtmlGyldig(html);
-    } else {
-      throw new Error('Editor er ikke initialisert');
-    }
+    const editor = notEmpty(refEditorJs.current, EDITOR_IKKE_INITIALISERT);
+    const innhold = await editor.save();
+    const html = edjsHTML().parse(innhold);
+
+    return erRedigertHtmlGyldig(html);
   };
 
-  return { tilbakestillEndringer, lagreEndringer, validerEndringer };
+  const forhåndsvis = async () => {
+    const editor = notEmpty(refEditorJs.current, EDITOR_IKKE_INITIALISERT);
+    const innhold = await editor.save();
+    const html = edjsHTML().parse(innhold);
+
+    forhåndsvisBrev({
+      automatiskVedtaksbrev: false,
+      dokumentMal: DokumentMalType.FRITEKST_HTML,
+      gjelderVedtak: true,
+      fritekst: lagRedigerbartInnholdHtml(html, readonlyInnhold.footer),
+    });
+  };
+
+  return { tilbakestillEndringer, lagreEndringer, validerEndringer, forhåndsvis };
 };
 
-const getTimeoutValue = () => (import.meta.env.MODE === 'test' ? 0 : 5000);
+const getTimeoutValue = () => (import.meta.env.MODE === 'test' ? 0 : 1000);
 
-const useLagreBrev = () => {
+const useLagreBrevDebouncer = () => {
   const lagre = debounce((lagreFn: () => void) => {
     lagreFn();
   }, getTimeoutValue());

@@ -35,33 +35,32 @@
   "VedtakForm.Revurdering.Aarsak": "Årsak til revurdering",
   "VedtakForm.Revurdering.Opphoerer": "Ytelsen opphører f.o.m. {dato}",
   "VedtakForm.ManuellOverstyring": "Overstyr automatisk brev",
-  "VedtakForm.Overskrift": "Overskrift",
-  "VedtakForm.Innhold": "Innhold i brev til søker",
   "VedtakForm.SvpFritektsBrevModal.Ok": "Ok",
   "VedtakForm.SvpFritektsBrevModal.IngenAutomatiskVedtaksbrev": "I denne behandlingen er det ikke automatisk vedtaksbrev. Du må velge 'Overstyr automatisk brev' og skrive fritekstbrev.",
   "VedtakForm.SvpFritektsBrevModal.IngenAutomatiskVedtaksbrevImage": "Ingen automatisk vedtaksbrev.",
   "VedtakForm.SvpFritektsBrevModal.ModalDescription": "Informasjonsboks om ingen automatisk vedtaksbrev. Fritekstbrev er nødvendig.",
 
   "VedtakFellesPanel.RedigerVedtaksbrev": "Rediger vedtaksbrev",
+  "VedtakFellesPanel.KanRedigeres": "Innholdet fra det automatiske brevet kan nå redigeres",
+  "VedtakFellesPanel.RedigerBrevOverskrift": "Rediger brev til søker",
   "VedtakFellesPanel.AutomatiskVedtaksbrev": "Automatisk vedtaksbrev",
   "VedtakFellesPanel.UtkastVedtaksbrev": "Utkast vedtaksbrev",
   "VedtakFellesPanel.ForkastManueltBrev": "Forkast manuelt brev",
-  "VedtakFellesPanel.Forklaring": "Tekst fra det automatisk genererte brevet kan kopieres og limes inn i det manuelle brevet",
   "VedtakFellesPanel.Forkast": "Dersom du forkaster det manuelle brevet, vil det erstattes av det automatisk genererte brevet",
   "VedtakFellesPanel.Ok": "Forkast manuelt brev",
-
-  "FritekstBrevPanel.Endret": "Endret av saksbehandler",
-  "FritekstBrevPanel.ManueltVedtaksbrev": "Manuelt vedtaksbrev",
-  "FritekstBrevPanel.ForhandsvisManueltVedtaksbrev": "Forhåndsvis manuelt brev",
+  "VedtakFellesPanel.ErOverstyrt": "Brev er overstyrt",
 
   "VedtakHelpTextPanel.Vurder": "Vurder følgende før du sender til godkjenning:",
 
   "Malform.Beskrivelse": "Foretrukket språk",
 
   "BrevInnhold.Lagre": "Lagre og lukk",
+  "BrevInnhold.InnholdMangler": "Brev må ha innhold",
   "BrevInnhold.Tilbakestill": "Tilbakestill",
   "FritekstRedigeringModal.Rediger": "Rediger brev",
   "FritekstRedigeringModal.Infotekst": "Gjør nødvendige endringer i brevet nedenfor. Redigering er begrenset til området markert i oransje. Vil du se saken samtidig som du redigerer kan du åpne en kopi av saken i ny fane:",
+  "FritekstRedigeringModal.ApneINyFane": "Åpne sak i ny fane",
+  "FritekstRedigeringModal.TilbakestillLabel": "Tilbakestill brev",
   "FritekstRedigeringModal.BekreftTilbakestillTittel": "Tilbakestill brev",
   "FritekstRedigeringModal.BekreftTilbakestill": "Alle endringer gjort i brevet vil nå bli slettet. Er du sikker på at du vil tilbakestille brevet?",
   "FritekstRedigeringModal.Tilbakestill": "Tilbakestill",
@@ -69,5 +68,9 @@
 
   "OppgaveTabell.Header": "Åpne oppgaver fra Gosys",
   "OppgaveTabell.Type": "Type",
-  "OppgaveTabell.Beskrivelse": "Beskrivelse"
+  "OppgaveTabell.Beskrivelse": "Beskrivelse",
+
+  "LegacyOverstyrtVedtaksbrev.ForhandsvisManueltVedtaksbrev": "Vis manuelt brev",
+  "LegacyOverstyrtVedtaksbrev.Overskrift": "Overskrift",
+  "LegacyOverstyrtVedtaksbrev.Innhold": "Innhold i brev til søker"
 }

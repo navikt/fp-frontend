@@ -1,7 +1,6 @@
 import { useIntl } from 'react-intl';
 
-import { Detail, Label } from '@navikt/ds-react';
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { Detail, HStack, Label, VStack } from '@navikt/ds-react';
 import { formatCurrencyWithKr } from '@navikt/ft-utils';
 
 import { FagsakYtelseType } from '@navikt/fp-kodeverk';
@@ -34,21 +33,18 @@ export const VedtakInnvilgetPanel = ({
       {ytelseTypeKode === FagsakYtelseType.ENGANGSSTONAD &&
         beregningsresultat &&
         'antallBarn' in beregningsresultat && (
-          <FlexContainer>
-            <FlexRow>
-              <FlexColumn>
-                <Detail>{intl.formatMessage({ id: 'VedtakForm.beregnetTilkjentYtelse' })}</Detail>
-                <Label size="small">
-                  {formatCurrencyWithKr((beregningsresultat as BeregningsresultatEs).beregnetTilkjentYtelse)}
-                </Label>
-              </FlexColumn>
-              <FlexColumn>
-                <Detail>{intl.formatMessage({ id: 'VedtakForm.AntallBarn' })}</Detail>
-                <Label size="small">{beregningsresultat.antallBarn}</Label>
-              </FlexColumn>
-            </FlexRow>
-            <VerticalSpacer sixteenPx />
-          </FlexContainer>
+          <HStack gap="2">
+            <VStack gap="1">
+              <Detail>{intl.formatMessage({ id: 'VedtakForm.beregnetTilkjentYtelse' })}</Detail>
+              <Label size="small">
+                {formatCurrencyWithKr((beregningsresultat as BeregningsresultatEs).beregnetTilkjentYtelse)}
+              </Label>
+            </VStack>
+            <VStack gap="1">
+              <Detail>{intl.formatMessage({ id: 'VedtakForm.AntallBarn' })}</Detail>
+              <Label size="small">{beregningsresultat.antallBarn}</Label>
+            </VStack>
+          </HStack>
         )}
       {beregningErManueltFastsatt && !skalBrukeOverstyrendeFritekstBrev && (
         <VedtakFritekstPanel
