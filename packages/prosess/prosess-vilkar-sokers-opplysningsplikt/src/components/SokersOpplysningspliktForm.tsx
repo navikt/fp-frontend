@@ -1,6 +1,5 @@
-import { type ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
-import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Table, VStack } from '@navikt/ds-react';
 import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
@@ -33,22 +32,6 @@ import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 const orgPrefix = 'org_';
 const aktørPrefix = 'aktør_';
 
-const findRadioButtonTextCode = (erVilkarOk: boolean): string =>
-  erVilkarOk ? 'SokersOpplysningspliktForm.VilkarOppfylt' : 'SokersOpplysningspliktForm.VilkarIkkeOppfylt';
-
-const getLabel = (intl: IntlShape): ReactElement => (
-  <div>
-    <div>
-      <FormattedMessage
-        id={findRadioButtonTextCode(false)}
-        values={{
-          b: (chunks: any) => <b>{chunks}</b>,
-        }}
-      />
-    </div>
-    <div>{intl.formatMessage({ id: 'SokersOpplysningspliktForm.VilkarIkkeOppfyltMerInfo' })}</div>
-  </div>
-);
 const capitalizeFirstLetters = (navn: string): string =>
   navn
     .toLowerCase()
@@ -283,12 +266,20 @@ export const SokersOpplysningspliktForm = ({
             radios={[
               {
                 value: 'true',
-                label: <FormattedMessage id={findRadioButtonTextCode(true)} />,
+                label: <FormattedMessage id="SokersOpplysningspliktForm.VilkarOppfylt" />,
                 disabled: !hasSoknad,
               },
               {
                 value: 'false',
-                label: getLabel(intl),
+                label: (
+                  <FormattedMessage
+                    id="SokersOpplysningspliktForm.VilkarIkkeOppfylt"
+                    values={{
+                      b: (chunks: any) => <b key="bold">{chunks}</b>,
+                      br: <br key="break-line" />,
+                    }}
+                  />
+                ),
               },
             ]}
           />

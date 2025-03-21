@@ -6,7 +6,7 @@ import * as stories from './SokersOpplysningspliktVilkarProsessIndex.stories';
 
 const { ÅpentAksjonspunkt, OppfyltVilkår, AvslåttVilkår } = composeStories(stories);
 
-describe('<SokersOpplysningspliktVilkarProsessIndex>', () => {
+describe('SokersOpplysningspliktVilkarProsessIndex', () => {
   it('skal bestemme at vilkåret er oppfylt og så løse aksjonspunkt', async () => {
     const lagre = vi.fn();
 

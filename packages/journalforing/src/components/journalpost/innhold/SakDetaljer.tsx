@@ -9,7 +9,6 @@ import dayjs from 'dayjs';
 import { FagsakStatus, FamilieHendelseType } from '@navikt/fp-kodeverk';
 
 import type { FamilieHendelse, JournalFagsak } from '../../../typer/journalFagsakTsType';
-import { finnYtelseTekst } from './VelgSakForm';
 
 import styles from './sakDetaljer.module.css';
 
@@ -79,7 +78,7 @@ export const SakDetaljer = ({ sak }: Props) => {
         <VStack gap="1">
           <HStack gap="3" className={styles.sakRad}>
             <Label>
-              <FormattedMessage id={finnYtelseTekst(sak.ytelseType)} />
+              <FormattedMessage id="Journal.Sak.Ytelse" values={{ ytelseType: sak.ytelseType }} />
             </Label>
             <Label>{sak.saksnummer}</Label>
             <div className={styles.clipBoard}>

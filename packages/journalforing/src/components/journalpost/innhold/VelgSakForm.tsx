@@ -1,6 +1,6 @@
 import { type ReactElement } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Alert, BodyShort, Button, HStack, VStack } from '@navikt/ds-react';
 import { RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
@@ -24,42 +24,15 @@ const LAG_GENERELL_SAK = 'LAG_GENERELL_SAK';
 const radioFieldName = 'saksnummerValg';
 const selectFieldName = 'ytelsetypeValg';
 
-export const finnYtelseTekst = (ytelseKode: string): string => {
-  switch (ytelseKode) {
-    case FagsakYtelseType.ENGANGSSTONAD:
-      return 'Journal.Sak.Ytelse.Engangsstønad';
-    case FagsakYtelseType.FORELDREPENGER:
-      return 'Journal.Sak.Ytelse.Foreldrepenger';
-    case FagsakYtelseType.SVANGERSKAPSPENGER:
-      return 'Journal.Sak.Ytelse.Svangerskapspenger';
-    default:
-      return 'Journal.Sak.Ytelse.Ukjent';
-  }
-};
-
-type YtelseSelectValg = {
-  ytelse: string;
-  beskrivelsekode: string;
-};
-
 type RadioOption = {
   label: ReactElement;
   value: string;
 };
 
-const ytelseSelectValg: YtelseSelectValg[] = [
-  {
-    ytelse: FagsakYtelseType.ENGANGSSTONAD,
-    beskrivelsekode: finnYtelseTekst(FagsakYtelseType.ENGANGSSTONAD),
-  },
-  {
-    ytelse: FagsakYtelseType.FORELDREPENGER,
-    beskrivelsekode: finnYtelseTekst(FagsakYtelseType.FORELDREPENGER),
-  },
-  {
-    ytelse: FagsakYtelseType.SVANGERSKAPSPENGER,
-    beskrivelsekode: finnYtelseTekst(FagsakYtelseType.SVANGERSKAPSPENGER),
-  },
+const ytelseSelectValg: FagsakYtelseType[] = [
+  FagsakYtelseType.ENGANGSSTONAD,
+  FagsakYtelseType.FORELDREPENGER,
+  FagsakYtelseType.SVANGERSKAPSPENGER,
 ];
 
 export const transformValues = (
@@ -93,18 +66,14 @@ export const transformValues = (
   };
 };
 
-const lagRadioOptions = (journalpost: Journalpost, intl: IntlShape, fetTekst: any): RadioOption[] => {
+const lagRadioOptions = (journalpost: Journalpost): RadioOption[] => {
   const saker = journalpost.fagsaker || TOM_ARRAY;
   const radioOptions = saker.map(sak => ({
     label: (
-      <FormattedMessage
-        id="Journal.Sak.Beskrivelse"
-        values={{
-          b: fetTekst,
-          saksnummer: sak.saksnummer,
-          ytelse: intl.formatMessage({ id: finnYtelseTekst(sak.ytelseType) }),
-        }}
-      />
+      <>
+        {sak.saksnummer}{' '}
+        <FormattedMessage id="Journal.Sak.Ytelse" tagName="b" values={{ ytelseType: sak.ytelseType }} />
+      </>
     ),
     disabled: sak.saksnummer === journalpost.eksisterendeSaksnummer,
     value: sak.saksnummer,
@@ -144,8 +113,6 @@ export const VelgSakForm = ({
   const intl = useIntl();
 
   const finnesSaker = journalpost.fagsaker && journalpost.fagsaker.length > 0;
-  const fetTekst = (chunks: any) => <b>{chunks}</b>;
-
   const formMethods = useFormContext<JournalføringFormValues>();
   const sakValg = formMethods.watch(radioFieldName);
 
@@ -166,10 +133,8 @@ export const VelgSakForm = ({
           <RadioGroupPanel
             disabled={!erKlarForJournalføring}
             name={radioFieldName}
-            hideLegend
-            label={intl.formatMessage({ id: 'ValgtOppgave.RelaterteSaker' })}
             validate={[required]}
-            radios={lagRadioOptions(journalpost, intl, fetTekst)}
+            radios={lagRadioOptions(journalpost)}
           />
           {sakValg === LAG_NY_SAK && (
             <SelectField
@@ -177,9 +142,9 @@ export const VelgSakForm = ({
               name={selectFieldName}
               validate={[required]}
               label={intl.formatMessage({ id: 'Journal.Sak.VelgYtelse' })}
-              selectValues={ytelseSelectValg.map(valg => (
-                <option key={valg.ytelse} value={valg.ytelse}>
-                  <FormattedMessage id={valg.beskrivelsekode} />
+              selectValues={ytelseSelectValg.map(ytelseType => (
+                <option key={ytelseType} value={ytelseType}>
+                  <FormattedMessage id="Journal.Sak.Ytelse" values={{ ytelseType }} />
                 </option>
               ))}
             />

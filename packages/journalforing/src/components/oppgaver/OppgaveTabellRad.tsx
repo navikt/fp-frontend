@@ -9,7 +9,6 @@ import type { NavAnsatt } from '@navikt/fp-types';
 
 import type { Oppgave } from '../../typer/oppgaveTsType';
 import type { ReserverOppgaveType } from '../../typer/reserverOppgaveType';
-import { finnYtelseTekst } from '../journalpost/innhold/VelgSakForm';
 
 import styles from './oppgaveTabellRad.module.css';
 
@@ -33,7 +32,7 @@ export const OppgaveTabellRad = ({ oppgave, velgOppgaveOgHentJournalpost, navAns
         <DateLabel dateString={oppgave.opprettetDato} />
       </Table.DataCell>
       <Table.DataCell>
-        <FormattedMessage id={finnYtelseTekst(oppgave.ytelseType)} />
+        <FormattedMessage id="Journal.Sak.Ytelse" values={{ ytelseType: oppgave.ytelseType }} />
       </Table.DataCell>
       <Table.DataCell>{oppgave.beskrivelse}</Table.DataCell>
       <Table.DataCell>
