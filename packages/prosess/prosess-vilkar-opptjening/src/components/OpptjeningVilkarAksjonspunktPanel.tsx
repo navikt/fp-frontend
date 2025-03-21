@@ -84,7 +84,7 @@ export const OpptjeningVilkarAksjonspunktPanel = ({
 
   const onSubmit = (values: FormValues) => submitCallback(transformValues(values));
 
-  const bTag = (...chunks: any) => <b>{chunks}</b>;
+  const bTag = (...chunks: any) => <b key="bold">{chunks}</b>;
 
   const validerAtEnKunKanVelgeOppfyltNårEnHarPerioder = (verdi: boolean) => {
     if (fastsattOpptjening.fastsattOpptjeningAktivitetList?.length === 0 && verdi === true) {
