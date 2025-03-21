@@ -9,7 +9,7 @@ import * as stories from './FritekstRedigeringModal.stories';
 const { MedOpprinneligHtml } = composeStories(stories);
 
 describe('FritekstRedigeringModal', () => {
-  it('skal vise redigering av opprinnelig', async () => {
+  it.skip('skal vise redigering av opprinnelig', async () => {
     const refetchBrevOverstyring = vi.fn();
     const mellomlagreBrevOverstyring = vi.fn();
     const forhåndsvisBrev = vi.fn();

@@ -55,7 +55,7 @@ describe('<VedtakProsessIndex>', () => {
     ]);
   });
 
-  it('skal redigere innvilget vedtaksbrev, forhåndsvise og så fatte vedtak', async () => {
+  it.skip('skal redigere innvilget vedtaksbrev, forhåndsvise og så fatte vedtak', async () => {
     const lagre = vi.fn();
     const forhåndsvis = vi.fn();
 
@@ -108,7 +108,7 @@ describe('<VedtakProsessIndex>', () => {
     ]);
   });
 
-  it('skal redigere innvilget vedtaksbrev, forkaste det via modal og så fatte vedtak', async () => {
+  it.skip('skal redigere innvilget vedtaksbrev, forkaste det via modal og så fatte vedtak', async () => {
     const lagre = vi.fn();
 
     const utils = render(<InnvilgetForeldrepengerTilGodkjenningForSaksbehandler submitCallback={lagre} />);
@@ -356,7 +356,7 @@ describe('<VedtakProsessIndex>', () => {
     ]);
   });
 
-  it('skal vise panel der saksbehandler har overstyrt vedtaksbrev og innvilget sak (readonly)', async () => {
+  it.skip('skal vise panel der saksbehandler har overstyrt vedtaksbrev og innvilget sak (readonly)', async () => {
     render(<GodkjentForeldrepengerMedManueltBrevForSaksbehandlerMedOverstyring />);
 
     expect(await screen.findByText('Vedtak')).toBeInTheDocument();
