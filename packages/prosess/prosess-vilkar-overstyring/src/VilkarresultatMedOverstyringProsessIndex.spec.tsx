@@ -7,7 +7,7 @@ import * as stories from './VilkarresultatMedOverstyringProsessIndex.stories';
 const { OverstyringspanelForFødsel, OverstyringspanelForMedlemskap, OverstyrtAksjonspunktSomErBekreftet } =
   composeStories(stories);
 
-describe('<VilkarresultatMedOverstyringProsessIndex>', () => {
+describe('VilkarresultatMedOverstyringProsessIndex', () => {
   it('skal overstyre og fylle ut fødselsvilkåret ikke er oppfylt og så lagre', async () => {
     const lagre = vi.fn();
 

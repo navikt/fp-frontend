@@ -171,7 +171,7 @@ export const VilkarresultatMedOverstyringForm = ({
   const erOppfylt = VilkarUtfallType.OPPFYLT === status;
   const originalErVilkarOk = VilkarUtfallType.IKKE_VURDERT !== status ? erOppfylt : undefined;
 
-  const bTag = (...chunks: any) => <b>{chunks}</b>;
+  const bTag = (...chunks: any) => <b key="bold">{chunks}</b>;
 
   return (
     <Form
