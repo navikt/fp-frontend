@@ -79,7 +79,8 @@ const meta = {
   args: {
     vilkar: defaultVilkar,
     previewCallback: action('button-click'),
-    lagreManueltBrev: action('button-click') as (html: string | null) => Promise<void>,
+    refetchBrevOverstyring: action('button-click'),
+    mellomlagreBrevOverstyring: action('button-click') as (html: string | null) => Promise<void>,
   },
   render: args => <VedtakProsessIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof VedtakProsessIndex>>;
@@ -98,10 +99,7 @@ export const InnvilgetForeldrepengerTilGodkjenningForSaksbehandler: Story = {
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
-    hentBrevHtml: () => {
-      action('button-click')();
-      return Promise.resolve({ opprinneligHtml: mal, redigertHtml: null });
-    },
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -116,10 +114,7 @@ export const GodkjentForeldrepengerForSaksbehandler: Story = {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
     isReadOnly: true,
-    hentBrevHtml: () => {
-      action('button-click')();
-      return Promise.resolve({ opprinneligHtml: mal, redigertHtml: null });
-    },
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -138,10 +133,7 @@ export const GodkjentForeldrepengerMedManueltBrevForSaksbehandlerMedOverstyring:
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
     isReadOnly: true,
-    hentBrevHtml: () => {
-      action('button-click')();
-      return Promise.resolve({ opprinneligHtml: mal, redigertHtml: redigertInnhold });
-    },
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: redigertInnhold },
   },
 };
 
@@ -159,10 +151,7 @@ export const AvslåttForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyring:
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
     isReadOnly: false,
-    hentBrevHtml: () => {
-      action('button-click')();
-      return Promise.resolve({ opprinneligHtml: mal, redigertHtml: null });
-    },
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -180,10 +169,7 @@ export const GodkjentAvslagForForeldrepengerForSaksbehandlerMedOverstyring: Stor
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
     isReadOnly: true,
-    hentBrevHtml: () => {
-      action('button-click')();
-      return Promise.resolve({ opprinneligHtml: mal, redigertHtml: null });
-    },
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -206,10 +192,7 @@ export const InnvilgetForeldrepengerDerBeregningErManueltFastsatt: Story = {
       ],
     } as Beregningsgrunnlag,
     isReadOnly: false,
-    hentBrevHtml: () => {
-      action('button-click')();
-      return Promise.resolve({ opprinneligHtml: mal, redigertHtml: null });
-    },
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -238,10 +221,7 @@ export const AvslåttForeldrepengerDerBeregningErManueltFastsatt: Story = {
       ],
     } as Beregningsgrunnlag,
     isReadOnly: false,
-    hentBrevHtml: () => {
-      action('button-click')();
-      return Promise.resolve({ opprinneligHtml: mal, redigertHtml: null });
-    },
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -295,10 +275,7 @@ export const TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = {
       ],
     } as Beregningsgrunnlag,
     isReadOnly: false,
-    hentBrevHtml: () => {
-      action('button-click')();
-      return Promise.resolve({ opprinneligHtml: mal, redigertHtml: null });
-    },
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -348,10 +325,7 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
     isReadOnly: false,
-    hentBrevHtml: () => {
-      action('button-click')();
-      return Promise.resolve({ opprinneligHtml: mal, redigertHtml: null });
-    },
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -370,10 +344,7 @@ export const InnvilgetEngangsstønadTilGodkjenningForSaksbehandlerUtenOverstyrin
       fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
     } as Fagsak,
     isReadOnly: false,
-    hentBrevHtml: () => {
-      action('button-click')();
-      return Promise.resolve({ opprinneligHtml: mal, redigertHtml: null });
-    },
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -391,10 +362,7 @@ export const GodkjentEngangsstønadForSaksbehandlerUtenOverstyring: Story = {
       fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
     } as Fagsak,
     isReadOnly: true,
-    hentBrevHtml: () => {
-      action('button-click')();
-      return Promise.resolve({ opprinneligHtml: mal, redigertHtml: null });
-    },
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -409,10 +377,7 @@ export const InnvilgetEngangsstønadTilGodkjenningForSaksbehandlerMedOverstyring
       fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
     } as Fagsak,
     isReadOnly: false,
-    hentBrevHtml: () => {
-      action('button-click')();
-      return Promise.resolve({ opprinneligHtml: mal, redigertHtml: null });
-    },
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -438,10 +403,7 @@ export const InnvilgetEngangsstønadDerBeregningErManueltFastsatt: Story = {
       ],
     } as Beregningsgrunnlag,
     isReadOnly: false,
-    hentBrevHtml: () => {
-      action('button-click')();
-      return Promise.resolve({ opprinneligHtml: mal, redigertHtml: null });
-    },
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -462,10 +424,7 @@ export const AvslåttEngangsstønadDerBeregningErManueltFastsatt: Story = {
       fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
     } as Fagsak,
     isReadOnly: false,
-    hentBrevHtml: () => {
-      action('button-click')();
-      return Promise.resolve({ opprinneligHtml: mal, redigertHtml: null });
-    },
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -480,10 +439,7 @@ export const InnvilgetSvangerskapspengerTilGodkjenningForSaksbehandlerMedOversty
       fagsakYtelseType: FagsakYtelseType.SVANGERSKAPSPENGER,
     } as Fagsak,
     isReadOnly: false,
-    hentBrevHtml: () => {
-      action('button-click')();
-      return Promise.resolve({ opprinneligHtml: mal, redigertHtml: null });
-    },
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -509,10 +465,7 @@ export const InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerUte
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
     isReadOnly: false,
-    hentBrevHtml: () => {
-      action('button-click')();
-      return Promise.resolve({ opprinneligHtml: mal, redigertHtml: null });
-    },
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -535,10 +488,7 @@ export const GodkjentRevurderingForeldrepengerForSaksbehandlerUtenOverstyring: S
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
     isReadOnly: false,
-    hentBrevHtml: () => {
-      action('button-click')();
-      return Promise.resolve({ opprinneligHtml: mal, redigertHtml: null });
-    },
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -560,10 +510,7 @@ export const InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerMed
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
     isReadOnly: false,
-    hentBrevHtml: () => {
-      action('button-click')();
-      return Promise.resolve({ opprinneligHtml: mal, redigertHtml: null });
-    },
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -586,10 +533,7 @@ export const GodkjentRevurderingForeldrepengerForSaksbehandlerMedOverstyring: St
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
     isReadOnly: true,
-    hentBrevHtml: () => {
-      action('button-click')();
-      return Promise.resolve({ opprinneligHtml: mal, redigertHtml: null });
-    },
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -610,10 +554,7 @@ export const GodkjentRevurderingForeldrepengerMedManueltBrevForSaksbehandlerMedO
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
     isReadOnly: true,
-    hentBrevHtml: () => {
-      action('button-click')();
-      return Promise.resolve({ opprinneligHtml: mal, redigertHtml: redigertInnhold });
-    },
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -636,10 +577,7 @@ export const AvslåttRevurderingForeldrepengerTilGodkjenningForSaksbehandlerMedO
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
     isReadOnly: false,
-    hentBrevHtml: () => {
-      action('button-click')();
-      return Promise.resolve({ opprinneligHtml: mal, redigertHtml: null });
-    },
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -662,10 +600,7 @@ export const GodkjentRevurderingAvslagForForeldrepengerForSaksbehandlerMedOverst
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
     isReadOnly: true,
-    hentBrevHtml: () => {
-      action('button-click')();
-      return Promise.resolve({ opprinneligHtml: mal, redigertHtml: null });
-    },
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -684,10 +619,7 @@ export const OpphørForRevurderingForeldrepengerForSaksbehandlerMedOverstyring: 
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
     isReadOnly: true,
-    hentBrevHtml: () => {
-      action('button-click')();
-      return Promise.resolve({ opprinneligHtml: mal, redigertHtml: null });
-    },
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -717,10 +649,7 @@ export const InnvilgetForRevurderingForeldrepengerDerBeregningErManueltFastsatt:
       ],
     } as Beregningsgrunnlag,
     isReadOnly: false,
-    hentBrevHtml: () => {
-      action('button-click')();
-      return Promise.resolve({ opprinneligHtml: mal, redigertHtml: null });
-    },
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -759,10 +688,7 @@ export const AvslåttForRevurderingForeldrepengerDerSøknadsfristvilkåretIkkeEr
       },
     ],
     isReadOnly: false,
-    hentBrevHtml: () => {
-      action('button-click')();
-      return Promise.resolve({ opprinneligHtml: mal, redigertHtml: null });
-    },
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -792,10 +718,7 @@ export const OpphørForRevurderingForeldrepengerDerBeregningErManueltFastsatt: S
       ],
     } as Beregningsgrunnlag,
     isReadOnly: false,
-    hentBrevHtml: () => {
-      action('button-click')();
-      return Promise.resolve({ opprinneligHtml: mal, redigertHtml: null });
-    },
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -816,10 +739,7 @@ export const LegacyOverstyring: Story = {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
     isReadOnly: true,
-    hentBrevHtml: () => {
-      action('button-click')();
-      return Promise.resolve({ opprinneligHtml: mal, redigertHtml: null });
-    },
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -840,9 +760,6 @@ export const LegacyOverstyringHarSendtTilbakeFraBeslutter: Story = {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
     isReadOnly: false,
-    hentBrevHtml: () => {
-      action('button-click')();
-      return Promise.resolve({ opprinneligHtml: mal, redigertHtml: null });
-    },
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
