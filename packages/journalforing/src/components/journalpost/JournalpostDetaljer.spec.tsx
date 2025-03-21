@@ -7,7 +7,7 @@ import * as stories from './JournalpostDetaljer.stories';
 
 const { VisOppgaveForSubmitReservertAvMeg, VisFlyttTilGosysOmKildeGosys } = composeStories(stories);
 
-describe('<JournalforingIndex>', () => {
+describe('JournalpostDetaljer', () => {
   it('skal kunne journalføre på eksisterende sak', async () => {
     const journalfør = vi.fn();
 

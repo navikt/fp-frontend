@@ -189,10 +189,7 @@ export const JournalpostDetaljer = ({
             <Heading size="small">
               <FormattedMessage id="ValgtOppgave.TilknyttetSak" />
             </Heading>
-            <SakDetaljer
-              sak={finnSakMedSaksnummer(journalpost.eksisterendeSaksnummer, saker)}
-              key={journalpost.eksisterendeSaksnummer}
-            />
+            <SakDetaljer sak={finnSakMedSaksnummer(journalpost.eksisterendeSaksnummer, saker)} />
           </div>
         )}
         <div>
