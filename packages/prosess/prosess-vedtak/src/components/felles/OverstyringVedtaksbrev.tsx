@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
+import { FileSearchIcon } from '@navikt/aksel-icons';
 import { Alert, Box, Button, Heading, HStack, VStack } from '@navikt/ds-react';
 
 import { DokumentMalType } from '@navikt/fp-kodeverk';
@@ -74,6 +75,7 @@ export const OverstyringVedtaksbrev = ({
                 <Button
                   variant="tertiary"
                   size="small"
+                  icon={<FileSearchIcon aria-hidden />}
                   onClick={() => forhåndsvisOverstyrtHtmlBrev()}
                   onKeyDown={e => (e.key === 'Enter' ? forhåndsvisOverstyrtHtmlBrev() : null)}
                   type="button"
