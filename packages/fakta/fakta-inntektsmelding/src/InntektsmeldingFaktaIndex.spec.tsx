@@ -6,7 +6,7 @@ import * as stories from './InntektsmeldingFaktaIndex.stories';
 
 const { InntektsmeldingDefault } = composeStories(stories);
 
-describe('<InntektsmeldingDefault>', () => {
+describe('InntektsmeldingDefault', () => {
   // eslint-disable-next-line vitest/expect-expect -- assertes i hjelpefunksjon
   it('Skal kunne sortere tabellen', async () => {
     render(<InntektsmeldingDefault />);
@@ -14,9 +14,9 @@ describe('<InntektsmeldingDefault>', () => {
     // "Innsendt" er standard sortering. Derfor tester vi å sortere arbeidsgiver først
     await verifiserKolonneSortering('Arbeidsgiver', 1, ['Kiwi', 'Meny', 'Rema 1000']);
     await verifiserKolonneSortering('Innsendt', 0, [
-      '20.07.2024 kl.00:00',
-      '01.08.2024 kl.00:00',
-      '10.09.2024 kl.00:00',
+      '20.07.2024 kl. 00:00',
+      '01.08.2024 kl. 00:00',
+      '10.09.2024 kl. 00:00',
     ]);
     await verifiserKolonneSortering('Startdato', 2, ['-', '10.10.2024', '11.11.2024']);
     await verifiserKolonneSortering('Månedsi.', 3, ['10 001', '20 000', '30 000']);
