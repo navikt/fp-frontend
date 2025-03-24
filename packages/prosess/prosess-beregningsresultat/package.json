@@ -20,15 +20,15 @@
     "storybook": "storybook dev --quiet -p 7034"
   },
   "dependencies": {
-    "@navikt/ds-react": "7.17.0",
+    "@navikt/ds-react": "7.17.4",
     "@navikt/fp-types": "workspace:*",
-    "@navikt/ft-ui-komponenter": "3.1.9",
-    "@navikt/ft-utils": "3.1.7",
+    "@navikt/ft-ui-komponenter": "3.2.1",
+    "@navikt/ft-utils": "3.2.1",
     "react": "19.0.0",
     "react-intl": "7.1.6"
   },
   "devDependencies": {
-    "@navikt/ds-css": "7.17.0",
+    "@navikt/ds-css": "7.17.4",
     "@storybook/addon-actions": "8.6.4",
     "@storybook/react": "8.6.4",
     "@storybook/react-vite": "8.6.4",

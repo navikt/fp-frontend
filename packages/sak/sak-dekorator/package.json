@@ -21,15 +21,15 @@
     "storybook": "storybook dev --quiet -p 7013"
   },
   "dependencies": {
-    "@navikt/aksel-icons": "7.17.0",
-    "@navikt/ds-css": "7.17.0",
-    "@navikt/ds-react": "7.17.0",
+    "@navikt/aksel-icons": "7.17.4",
+    "@navikt/ds-css": "7.17.4",
+    "@navikt/ds-react": "7.17.4",
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/ft-konstanter": "3.1.4",
-    "@navikt/ft-plattform-komponenter": "7.2.9",
-    "@navikt/ft-ui-komponenter": "3.1.9",
-    "@navikt/ft-utils": "3.1.7",
+    "@navikt/ft-plattform-komponenter": "7.2.11",
+    "@navikt/ft-ui-komponenter": "3.2.1",
+    "@navikt/ft-utils": "3.2.1",
     "classnames": "2.5.1",
     "react": "19.0.0",
     "react-intl": "7.1.6"

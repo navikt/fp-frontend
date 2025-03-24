@@ -21,13 +21,13 @@
     "storybook": "storybook dev --quiet -p 7014"
   },
   "dependencies": {
-    "@navikt/aksel-icons": "7.17.0",
-    "@navikt/ds-css": "7.17.0",
-    "@navikt/ds-react": "7.17.0",
+    "@navikt/aksel-icons": "7.17.4",
+    "@navikt/ds-css": "7.17.4",
+    "@navikt/ds-react": "7.17.4",
     "@navikt/fp-kodeverk": "workspace:^",
     "@navikt/fp-types": "workspace:^",
-    "@navikt/ft-plattform-komponenter": "7.2.9",
-    "@navikt/ft-utils": "3.1.7",
+    "@navikt/ft-plattform-komponenter": "7.2.11",
+    "@navikt/ft-utils": "3.2.1",
     "dayjs": "1.11.13",
     "react": "19.0.0",
     "react-intl": "7.1.6"

@@ -19,21 +19,21 @@
     "storybook": "storybook dev --quiet -p 7049"
   },
   "dependencies": {
-    "@navikt/ds-react": "7.17.0",
+    "@navikt/ds-react": "7.17.4",
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-prosess-felles": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*",
     "@navikt/fp-utils": "workspace:*",
-    "@navikt/ft-form-hooks": "6.2.5",
-    "@navikt/ft-ui-komponenter": "3.1.9",
-    "@navikt/ft-utils": "3.1.7",
+    "@navikt/ft-form-hooks": "6.2.7",
+    "@navikt/ft-ui-komponenter": "3.2.1",
+    "@navikt/ft-utils": "3.2.1",
     "react": "19.0.0",
     "react-hook-form": "7.54.2",
     "react-intl": "7.1.6"
   },
   "devDependencies": {
-    "@navikt/ds-css": "7.17.0",
+    "@navikt/ds-css": "7.17.4",
     "@navikt/fp-storybook-utils": "workspace:*",
     "@storybook/addon-actions": "8.6.4",
     "@storybook/react": "8.6.4",
