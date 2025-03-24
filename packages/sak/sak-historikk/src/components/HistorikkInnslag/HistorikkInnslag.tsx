@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useIntl } from 'react-intl';
 
 import { BodyLong, BodyShort, Box, type BoxProps, Button, Detail, HStack, VStack } from '@navikt/ds-react';
+import { dateTimeFormat } from '@navikt/ft-utils';
 import { type Location } from 'history';
 
 import { HistorikkAktor, KodeverkType } from '@navikt/fp-kodeverk';
@@ -9,7 +10,7 @@ import type { Historikkinnslag } from '@navikt/fp-types';
 
 import { Avatar } from './Avatar';
 import { HistorikkDokumentLenke } from './HistorikkDokumentLenke';
-import { formatDateTime, parseBoldText } from './historikkInnslagUtils';
+import { parseBoldText } from './historikkInnslagUtils';
 import { Skjermlenke } from './Skjermlenke';
 
 interface Props {
@@ -39,7 +40,7 @@ export const HistorikkInnslag = ({
   const rolleNavn = getKodeverknavn(aktør.type, KodeverkType.HISTORIKK_AKTOER);
 
   const name = `${rolleNavn} ${aktør.ident ?? ''}`;
-  const timestamp = formatDateTime(opprettetTidspunkt);
+  const timestamp = dateTimeFormat(opprettetTidspunkt, { separator: 'kl', month: 'long', day: 'numeric' });
 
   const erMerEnnToLinjer = linjer.length > 3;
   const [erLinjerSkjult, setErLinjerSkjult] = useState(erMerEnnToLinjer);
