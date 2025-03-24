@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, Heading, Table, VStack } from '@navikt/ds-react';
+import { BodyShort, Label, Table, VStack } from '@navikt/ds-react';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
 import type { Oppgave } from '@navikt/fp-types';
@@ -20,9 +20,9 @@ export const OppgaveTabell = ({ oppgaver }: Props) => {
 
   return (
     <VStack gap="2">
-      <Heading size="xsmall">
+      <Label size="small">
         <FormattedMessage id="OppgaveTabell.Header" />
-      </Heading>
+      </Label>
       <Table>
         <Table.Header>
           <Table.Row>
