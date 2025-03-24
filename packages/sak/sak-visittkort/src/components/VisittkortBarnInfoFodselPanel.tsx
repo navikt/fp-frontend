@@ -68,7 +68,10 @@ export const VisittkortBarnInfoFodselPanel = ({ familiehendelse }: Props) => {
           <FormattedMessage id="VisittkortBarnInfoFodselPanel.ManglerFodselOpplysninger" />
         )}
         {!visFødselsdato && (
-          <FormattedMessage id="VisittkortBarnInfoFodselPanel.Termin" values={{ dato: dateFormat(hendelseDato) }} />
+          <FormattedMessage
+            id="VisittkortBarnInfoFodselPanel.Termin"
+            values={{ dato: hendelseDato ? dateFormat(hendelseDato) : '-' }}
+          />
         )}
       </BodyShort>
       {dødfødsel && (
