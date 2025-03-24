@@ -6,6 +6,8 @@ import Header from '@editorjs/header';
 import EditorjsList from '@editorjs/list';
 import Paragraph from '@editorjs/paragraph';
 import edjsHTML from 'editorjs-html';
+// @ts-expect-error Bør laga ein typefil for denne, men funkar ikkje å legga den under @types
+import Undo from 'editorjs-undo';
 import debounce from 'lodash.debounce';
 
 import { DokumentMalType } from '@navikt/fp-kodeverk';
@@ -50,6 +52,8 @@ export const useEditorJs = (
         holder: editorHolderId,
         i18n: lagEditorJsI18n(intl),
         onReady: async () => {
+          new Undo({ editor });
+
           refEditorJs.current = editor;
           await editor.blocks.renderFromHTML(redigerbartInnhold.replace(SPACE_REGEX, '$1'));
         },
