@@ -5,12 +5,15 @@ import { notEmpty } from '@navikt/fp-utils';
 export const utledStiler = (html: string) => {
   const heleBrevet = new DOMParser().parseFromString(html, 'text/html');
   const stiler = heleBrevet.querySelector('style')?.innerHTML;
+  const stilerMedJustertHeader = stiler
+    ?.replaceAll('margin-top: 48pt', 'margin-top: 0pt')
+    .replaceAll('margin-top: 26pt', 'margin-top: 0pt');
 
-  if (!stiler) {
+  if (!stilerMedJustertHeader) {
     throw new Error('Fant ikke stiler i brevet');
   }
 
-  const styleAst = parse(stiler);
+  const styleAst = parse(stilerMedJustertHeader);
 
   walk(styleAst, (nodeRef, item, list) => {
     const node = nodeRef;
