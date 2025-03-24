@@ -65,7 +65,7 @@ export const useEditorJs = (
             const innhold = await editor.save();
             refCurrentHtml.current = edjsHTML().parse(innhold);
           } else {
-            lagreBrevDebouncer(lagreEndringer);
+            lagreBrevDebouncer(validerOgLagre);
           }
         },
       });
@@ -77,6 +77,16 @@ export const useEditorJs = (
       }
     };
   }, []);
+
+  const validerOgLagre = async () => {
+    const editor = notEmpty(refEditorJs.current, EDITOR_IKKE_INITIALISERT);
+    const innhold = await editor.save();
+    const html = edjsHTML().parse(innhold);
+
+    if (refCurrentHtml.current !== html && erRedigertHtmlGyldig(html)) {
+      mellomlagreBrevOverstyring(lagRedigerbartInnholdHtml(html, readonlyInnhold.footer));
+    }
+  };
 
   const tilbakestillEndringer = async () => {
     refCurrentHtml.current = '';

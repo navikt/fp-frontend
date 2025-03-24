@@ -27,4 +27,6 @@
   border-left: 15px solid var(--a-orange-300);
   border-right: 15px solid var(--a-orange-300);
   box-sizing: content-box;
+  margin-bottom: 40px;
+  margin-top: 40px;
 }
