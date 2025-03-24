@@ -3,13 +3,14 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { expect } from 'vitest';
 
-import redigertInnhold from '../../../.storybook/brevmal/redigertInnhold.html?raw';
+import { DokumentMalType } from '@navikt/fp-kodeverk';
+
 import * as stories from './FritekstRedigeringModal.stories';
 
 const { MedOpprinneligHtml } = composeStories(stories);
 
 describe('FritekstRedigeringModal', () => {
-  it.skip('skal vise redigering av opprinnelig', async () => {
+  it('skal vise redigering av opprinnelig', async () => {
     const refetchBrevOverstyring = vi.fn();
     const mellomlagreBrevOverstyring = vi.fn();
     const forhåndsvisBrev = vi.fn();
@@ -30,8 +31,9 @@ describe('FritekstRedigeringModal', () => {
     await waitFor(() => expect(forhåndsvisBrev).toHaveBeenCalledTimes(1));
     expect(forhåndsvisBrev).toHaveBeenNthCalledWith(1, {
       automatiskVedtaksbrev: false,
-      dokumentMal: 'FRIHTM',
-      fritekst: redigertInnhold,
+      gjelderVedtak: true,
+      dokumentMal: DokumentMalType.FRITEKST_HTML,
+      fritekst: expect.stringContaining('Nav har innvilget søknaden din om 100 prosent foreldrepenger'),
     });
   });
 });

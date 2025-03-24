@@ -108,39 +108,22 @@ describe('<VedtakProsessIndex>', () => {
     ]);
   });
 
-  it.skip('skal redigere innvilget vedtaksbrev, forkaste det via modal og så fatte vedtak', async () => {
+  it.skip('skal redigere innvilget vedtaksbrev, åpne redigeringsmodal, forkaste overstyring og så fatte vedtak', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<InnvilgetForeldrepengerTilGodkjenningForSaksbehandler submitCallback={lagre} />);
+    render(<InnvilgetForeldrepengerTilGodkjenningForSaksbehandler submitCallback={lagre} />);
 
     expect(await screen.findByText('Vedtak')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Rediger vedtaksbrev'));
 
-    expect(await screen.findByText('Manuelt vedtaksbrev')).toBeInTheDocument();
-    expect(
-      screen.getByText('Tekst fra det automatisk genererte brevet kan kopieres og limes inn i det manuelle brevet'),
-    ).toBeInTheDocument();
+    expect(await screen.findByText('Innholdet fra det automatiske brevet kan nå redigeres')).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('Til godkjenning'));
+    await userEvent.click(screen.getAllByText('Rediger vedtaksbrev')[1]);
 
-    expect(await screen.findAllByText('Feltet må fylles ut')).toHaveLength(2);
+    expect(await screen.findByText('Rediger brev')).toBeInTheDocument();
 
-    const overskriftInput = utils.getByLabelText('Overskrift');
-    await userEvent.type(overskriftInput, 'Dette er en overskrift');
-
-    const innholdInput = utils.getByLabelText('Innhold i brev til søker');
-    await userEvent.type(innholdInput, 'Dette er innhold');
-
-    await waitFor(() => expect(screen.queryByText('Feltet må fylles ut')).not.toBeInTheDocument());
-
-    await userEvent.click(screen.getAllByText('Forkast manuelt brev')[0]);
-
-    expect(
-      await screen.findByText(
-        'Dersom du forkaster det manuelle brevet, vil det erstattes av det automatisk genererte brevet',
-      ),
-    ).toBeInTheDocument();
+    await userEvent.click(screen.getByText('Lagre og lukk'));
 
     await userEvent.click(screen.getAllByText('Forkast manuelt brev')[1]);
 
@@ -356,16 +339,14 @@ describe('<VedtakProsessIndex>', () => {
     ]);
   });
 
-  it.skip('skal vise panel der saksbehandler har overstyrt vedtaksbrev og innvilget sak (readonly)', async () => {
+  it('skal vise panel der saksbehandler har overstyrt vedtaksbrev og innvilget sak (readonly)', async () => {
     render(<GodkjentForeldrepengerMedManueltBrevForSaksbehandlerMedOverstyring />);
 
     expect(await screen.findByText('Vedtak')).toBeInTheDocument();
-    expect(screen.getByText('Manuelt vedtaksbrev')).toBeInTheDocument();
-    expect(screen.getByText('Overskrift')).toBeInTheDocument();
-    expect(screen.getByText('Dette er en overskrift')).toBeInTheDocument();
+    expect(screen.getByText('Automatisk vedtaksbrev')).toBeInTheDocument();
+    expect(screen.getByText('Rediger vedtaksbrev')).toBeInTheDocument();
 
-    expect(screen.getByText('Innhold i brev til søker')).toBeInTheDocument();
-    expect(screen.getByText('Dette er innholdet i brevet')).toBeInTheDocument();
-    expect(screen.getByText('Endret av saksbehandler')).toBeInTheDocument();
+    expect(screen.getByText('Brev er overstyrt')).toBeInTheDocument();
+    expect(screen.getByText('Forhåndsvis brev')).toBeInTheDocument();
   });
 });
