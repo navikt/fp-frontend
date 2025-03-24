@@ -1,4 +1,4 @@
-import { BodyShort } from '@navikt/ds-react';
+import { BodyShort, VStack } from '@navikt/ds-react';
 
 interface Props {
   header?: string;
@@ -7,9 +7,9 @@ interface Props {
 
 export const BeskrivelseVisning = ({ header, kommentar }: Props) => {
   return (
-    <div>
+    <VStack gap="1">
       {header && <BodyShort size="small">{header}</BodyShort>}
       <BodyShort size="small">{kommentar}</BodyShort>
-    </div>
+    </VStack>
   );
 };
