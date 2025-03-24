@@ -27,10 +27,10 @@
   "dependencies": {
     "@formatjs/intl-datetimeformat": "6.17.3",
     "@formatjs/intl-numberformat": "8.15.3",
-    "@navikt/aksel-icons": "7.17.4",
-    "@navikt/ds-css": "7.17.4",
+    "@navikt/aksel-icons": "7.17.0",
+    "@navikt/ds-css": "7.17.0",
     "@navikt/ds-css-internal": "^3.4.3",
-    "@navikt/ds-react": "7.17.4",
+    "@navikt/ds-react": "7.17.0",
     "@navikt/ds-react-internal": "^3.4.3",
     "@navikt/fp-fakta-adopsjon": "workspace:*",
     "@navikt/fp-fakta-arbeid-og-inntekt": "workspace:*",

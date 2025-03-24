@@ -20,8 +20,8 @@
     "storybook": "storybook dev --quiet -p 7018"
   },
   "dependencies": {
-    "@navikt/ds-css": "7.17.4",
-    "@navikt/ds-react": "7.17.4",
+    "@navikt/ds-css": "7.17.0",
+    "@navikt/ds-react": "7.17.0",
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/ft-ui-komponenter": "3.2.1",
