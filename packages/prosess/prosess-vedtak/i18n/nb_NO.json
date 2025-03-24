@@ -72,5 +72,18 @@
 
   "LegacyOverstyrtVedtaksbrev.ForhandsvisManueltVedtaksbrev": "Vis manuelt brev",
   "LegacyOverstyrtVedtaksbrev.Overskrift": "Overskrift",
-  "LegacyOverstyrtVedtaksbrev.Innhold": "Innhold i brev til søker"
+  "LegacyOverstyrtVedtaksbrev.Innhold": "Innhold i brev til søker",
+
+  "useEditorJs.Text": "Tekst",
+  "useEditorJs.Heading": "Overskrift",
+  "useEditorJs.UnorderedList": "Punktliste",
+  "useEditorJs.OrderedList": "Nummerert liste",
+  "useEditorJs.AddALink": "Legg til en lenke",
+  "useEditorJs.Unordered": "Punkt",
+  "useEditorJs.Ordered": "Nummerert",
+  "useEditorJs.NothingFound": "Ingenting funnet",
+  "useEditorJs.ConvertTo": "Endre til",
+  "useEditorJs.Delete": "Fjern",
+  "useEditorJs.MoveUp": "Flytt opp",
+  "useEditorJs.MoveDown": "Flytt ned"
 }

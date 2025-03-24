@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl';
 
-import { XMarkIcon } from '@navikt/aksel-icons';
+import { ArrowUndoIcon, FileSearchIcon } from '@navikt/aksel-icons';
 import { Alert, Button, HStack, VStack } from '@navikt/ds-react';
 
 import type { BrevOverstyring } from '@navikt/fp-types';
@@ -55,6 +55,7 @@ export const BrevInnhold = ({
           <HStack justify="center">
             <Button
               variant="tertiary"
+              icon={<FileSearchIcon aria-hidden />}
               size="small"
               onClick={() => forhåndsvis()}
               onKeyDown={e => (e.key === 'Enter' ? forhåndsvis() : null)}
@@ -69,7 +70,7 @@ export const BrevInnhold = ({
             </Button>
             <Button
               variant="tertiary"
-              icon={<XMarkIcon aria-hidden />}
+              icon={<ArrowUndoIcon aria-hidden />}
               type="button"
               onClick={() => setVisTilbakestillAdvarselModal(true)}
               disabled={isReadOnly}

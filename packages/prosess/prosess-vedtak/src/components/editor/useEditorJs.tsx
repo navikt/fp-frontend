@@ -1,8 +1,9 @@
 import { useEffect, useRef } from 'react';
+import { type IntlShape, useIntl } from 'react-intl';
 
-import EditorJS, { type EditorConfig, type ToolConstructable } from '@editorjs/editorjs';
+import EditorJS, { type EditorConfig, type I18nConfig, type ToolConstructable } from '@editorjs/editorjs';
 import Header from '@editorjs/header';
-import List from '@editorjs/list';
+import EditorjsList from '@editorjs/list';
 import Paragraph from '@editorjs/paragraph';
 import edjsHTML from 'editorjs-html';
 import debounce from 'lodash.debounce';
@@ -26,6 +27,11 @@ export const useEditorJs = (
   mellomlagreBrevOverstyring: (html: string | null) => Promise<void>,
   forhåndsvisBrev: (data: ForhandsvisData) => void,
 ) => {
+  const intl = useIntl();
+
+  //Denne blir kun brukt for å hindre tullball grunna to renders i DEV => React.StrictMode
+  const refMounted = useRef<boolean>(false);
+
   const refEditorJs = useRef<EditorJS>(null);
   const refCurrentHtml = useRef('');
 
@@ -37,16 +43,15 @@ export const useEditorJs = (
   const lagreBrevDebouncer = useLagreBrevDebouncer();
 
   useEffect(() => {
-    if (!refEditorJs.current) {
+    if (!refEditorJs.current && !refMounted.current) {
+      refMounted.current = true;
       const editor = new EditorJS({
         minHeight: 0,
         holder: editorHolderId,
+        i18n: lagEditorJsI18n(intl),
         onReady: async () => {
-          // Må ha denne sjekken for å unngå to like blocks (React.StrictMode i DEV gir to renders)
-          if (refEditorJs.current === null) {
-            refEditorJs.current = editor;
-            await editor.blocks.renderFromHTML(redigerbartInnhold.replace(SPACE_REGEX, '$1'));
-          }
+          refEditorJs.current = editor;
+          await editor.blocks.renderFromHTML(redigerbartInnhold.replace(SPACE_REGEX, '$1'));
         },
         tools: TOOLS,
         onChange: async () => {
@@ -126,6 +131,35 @@ const useLagreBrevDebouncer = () => {
   return lagre;
 };
 
+class CustomList extends EditorjsList {
+  override renderSettings() {
+    return super
+      .renderSettings()
+      .filter(item =>
+        // https://github.com/editor-js/list/issues/119
+        // @ts-expect-error
+        ['Unordered', 'Ordered'].includes(item.label),
+      )
+      .map(item => ({
+        ...item,
+        // @ts-expect-error
+        label: item.label === 'Unordered' ? 'Punktliste' : 'Nummerert liste',
+      }));
+  }
+}
+
+//TODO (TOR) Hacka det til for å få endra til norsk tekst. Burde kunne legga til i18n-messages?
+
+class CustomHeader extends Header {
+  override renderSettings() {
+    return super.renderSettings().map(item => ({
+      ...item,
+      // @ts-expect-error
+      label: item.label === 'Heading 1' ? 'Overskrift 1' : 'Overskrift 2',
+    }));
+  }
+}
+
 const TOOLS: EditorConfig['tools'] = {
   paragraph: {
     class: Paragraph as unknown as ToolConstructable,
@@ -135,7 +169,7 @@ const TOOLS: EditorConfig['tools'] = {
     },
   },
   header: {
-    class: Header as unknown as ToolConstructable,
+    class: CustomHeader as unknown as ToolConstructable,
     inlineToolbar: true,
     config: {
       levels: [2, 1],
@@ -144,11 +178,57 @@ const TOOLS: EditorConfig['tools'] = {
     },
   },
   list: {
-    class: List as unknown as ToolConstructable,
+    class: CustomList as unknown as ToolConstructable,
     inlineToolbar: true,
     config: {
       defaultStyle: 'unordered',
       preservedBlank: true,
+      maxLevel: 1,
     },
+    toolbox: [
+      {
+        data: [{ style: 'ordered' }],
+      },
+      {
+        data: { style: 'unordered' },
+      },
+    ],
   },
 };
+
+const lagEditorJsI18n = (intl: IntlShape): I18nConfig => ({
+  messages: {
+    toolNames: {
+      Text: intl.formatMessage({ id: 'useEditorJs.Text' }),
+      Heading: intl.formatMessage({ id: 'useEditorJs.Heading' }),
+      'Unordered List': intl.formatMessage({ id: 'useEditorJs.UnorderedList' }),
+      'Ordered List': intl.formatMessage({ id: 'useEditorJs.OrderedList' }),
+    },
+    tools: {
+      link: {
+        'Add a link': intl.formatMessage({ id: 'useEditorJs.AddALink' }),
+      },
+      List: {
+        Unordered: intl.formatMessage({ id: 'useEditorJs.Unordered' }),
+        Ordered: intl.formatMessage({ id: 'useEditorJs.Ordered' }),
+      },
+    },
+    ui: {
+      popover: {
+        'Nothing found': intl.formatMessage({ id: 'useEditorJs.NothingFound' }),
+        'Convert to': intl.formatMessage({ id: 'useEditorJs.ConvertTo' }),
+      },
+    },
+    blockTunes: {
+      delete: {
+        Delete: intl.formatMessage({ id: 'useEditorJs.Delete' }),
+      },
+      moveUp: {
+        'Move up': intl.formatMessage({ id: 'useEditorJs.MoveUp' }),
+      },
+      moveDown: {
+        'Move down': intl.formatMessage({ id: 'useEditorJs.MoveDown' }),
+      },
+    },
+  },
+});
