@@ -276,22 +276,82 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
     oppgaver: [
       {
         oppgavetype: OppgaveType.VUR_KONSEKVENS,
-        beskrivelse: 'Se sto mottatt 24.02.25',
+        nyesteBeskrivelse: {
+          kommentar: 'VL: Se sto mottatt 24.02.25',
+        },
+        eldreBeskrivelser: [],
+        andreDokumenter: [],
       },
       {
         oppgavetype: OppgaveType.VUR_KONSEKVENS,
-        beskrivelse:
-          'Fullmektig tar kontakt. Ber om fristutsettelse 4 uker, ettersom bruker først mottok brevet i dag. ' +
-          'Jeg har utsatt 14 dager, men han ønsker ytterligere 2 uker utover det, altså 28.09.24. ' +
-          'Kan dere gi tilbakemelding på dette?',
+        nyesteBeskrivelse: {
+          header: '--- 19.03.2025 11:24 F_Z990245 E_Z990245 (Z990245, 0219) ---',
+          kommentar:
+            'Fullmektig tar kontakt. Ber om fristutsettelse 4 uker, ettersom bruker først mottok brevet i dag. ' +
+            'Jeg har utsatt 14 dager, men han ønsker ytterligere 2 uker utover det, altså 28.09.24. ' +
+            'Kan dere gi tilbakemelding på dette?',
+        },
+        eldreBeskrivelser: [
+          {
+            kommentar: 'VL: Se sto mottatt 20.02.25',
+          },
+        ],
+        andreDokumenter: [],
       },
       {
         oppgavetype: OppgaveType.VUR_DOKUMENT,
-        beskrivelse: 'Bekreftelse fra arbeidsgiver',
+        nyesteBeskrivelse: { kommentar: 'VL: Bekreftelse fra arbeidsgiver' },
+        eldreBeskrivelser: [],
+        hovedDokument: {
+          journalpostId: '123',
+          dokumentId: '456',
+          tittel: 'Dokumentasjon på at mor studerer på heltid',
+          kommunikasjonsretning: 'INN',
+        },
+        andreDokumenter: [
+          {
+            journalpostId: '123',
+            dokumentId: '678',
+            tittel: 'Ettersendelse til søknad om foreldrepenger ved fødsel',
+            kommunikasjonsretning: 'INN',
+          },
+          {
+            journalpostId: '123',
+            dokumentId: '987',
+            tittel: 'Dokumentasjon på reiser til og fra Norge',
+            kommunikasjonsretning: 'INN',
+          },
+        ],
       },
       {
         oppgavetype: OppgaveType.VUR_DOKUMENT,
-        beskrivelse: 'Søknad om foreldrepenger ved fødsel',
+        nyesteBeskrivelse: {
+          header: '--- 19.01.2025 11:24 F_Z990245 E_Z990245 (Z990245, 0219) ---',
+          kommentar:
+            'Bruker sier at han har søkt Foreldrepenger, han er i permisjon nå. Han har ikke fått svar, han skriver at saksnr er: 12341234. ' +
+            'Han har AAP, så det er greit å vite om han får Foreldrepenger før man evt stanser denne ytelsen.',
+        },
+        eldreBeskrivelser: [
+          {
+            header: '--- 19.02.2025 11:24 F_Z990245 E_Z990245 (Z990245, 0219) ---',
+            kommentar: 'Må ringe bruker for å avklare AAP og Foreldrepenger',
+          },
+          { kommentar: 'VL: Søknad om foreldrepenger ved fødsel' },
+        ],
+        hovedDokument: {
+          journalpostId: '321',
+          dokumentId: '456',
+          tittel: 'Dokumentasjon av termindato (lev. kun av mor), fødsel eller dato for omsorgsovertakelse',
+          kommunikasjonsretning: 'INN',
+        },
+        andreDokumenter: [
+          {
+            journalpostId: '321',
+            dokumentId: '678',
+            tittel: 'Ettersendelse til søknad om svangerskapspenger til selvstendig næringsdrivende og frilanser',
+            kommunikasjonsretning: 'INN',
+          },
+        ],
       },
     ],
     ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,

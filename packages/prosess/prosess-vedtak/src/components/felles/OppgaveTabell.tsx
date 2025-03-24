@@ -1,11 +1,13 @@
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Heading, Table, VStack } from '@navikt/ds-react';
-import { UtvidbarTekst } from '@navikt/ft-ui-komponenter';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
 import type { Oppgave } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
+
+import { Beskrivelser } from './Beskrivelser.tsx';
+import { Dokumenter } from './Dokumenter.tsx';
 
 import styles from './oppgaveTabell.module.css';
 
@@ -27,21 +29,27 @@ export const OppgaveTabell = ({ oppgaver }: Props) => {
             <Table.HeaderCell className={styles.headerType} textSize="small">
               <FormattedMessage id="OppgaveTabell.Type" />
             </Table.HeaderCell>
-            <Table.HeaderCell className={styles.headerBeskrivelse} textSize="small">
+            <Table.HeaderCell textSize="small">
               <FormattedMessage id="OppgaveTabell.Beskrivelse" />
             </Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
           {oppgaver.map(oppgave => (
-            <Table.Row key={oppgave.oppgavetype + '-' + oppgave.beskrivelse} className={styles.row}>
+            <Table.Row key={oppgave.oppgavetype + '-' + oppgave.nyesteBeskrivelse?.kommentar} className={styles.row}>
               <Table.DataCell>
                 <BodyShort size="small">
                   {alleKodeverk[KodeverkType.OPPGAVE_TYPE].find(o => o.kode === oppgave.oppgavetype)?.navn}
                 </BodyShort>
               </Table.DataCell>
               <Table.DataCell>
-                <UtvidbarTekst tekst={oppgave.beskrivelse} />
+                <VStack gap="2">
+                  <Beskrivelser
+                    nyesteBeskrivelse={oppgave.nyesteBeskrivelse}
+                    eldreBeskrivelser={oppgave.eldreBeskrivelser}
+                  />
+                  <Dokumenter hovedDokument={oppgave.hovedDokument} andreDokumenter={oppgave.andreDokumenter} />
+                </VStack>
               </Table.DataCell>
             </Table.Row>
           ))}

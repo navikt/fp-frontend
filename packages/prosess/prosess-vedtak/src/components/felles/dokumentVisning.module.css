@@ -1,0 +1,10 @@
+.dokument {
+  align-items: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.dokumentTittel {
+  flex: 1;
+  min-width: 0;
+}
