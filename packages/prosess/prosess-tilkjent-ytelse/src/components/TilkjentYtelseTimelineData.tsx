@@ -3,7 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ArrowLeftIcon, ArrowRightIcon, XMarkIcon } from '@navikt/aksel-icons';
 import { BodyShort, Box, Button, HStack, Label, Table, VStack } from '@navikt/ds-react';
-import { calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
+import { BTag, calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import { AktivitetStatus, getKodeverknavnFn, KodeverkType } from '@navikt/fp-kodeverk';
@@ -110,8 +110,6 @@ export const TilkjentYtelseTimelineData = ({
   const intl = useIntl();
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
 
-  const bTag = (...chunks: any) => <b key="bold">{chunks}</b>;
-
   return (
     <Box borderWidth="1" padding="4">
       <VStack gap="4">
@@ -170,7 +168,7 @@ export const TilkjentYtelseTimelineData = ({
             <HStack gap="2">
               <FormattedMessage
                 id="TilkjentYtelse.PeriodeData.Dagsats"
-                values={{ dagsatsVerdi: selectedItemData.dagsats, b: bTag }}
+                values={{ dagsatsVerdi: selectedItemData.dagsats, b: BTag }}
               />
             </HStack>
           </VStack>

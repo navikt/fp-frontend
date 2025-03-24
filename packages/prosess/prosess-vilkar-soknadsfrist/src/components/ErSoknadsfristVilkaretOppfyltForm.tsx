@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -6,7 +6,7 @@ import { BodyShort, Box, Detail, Heading, HStack, VStack } from '@navikt/ds-reac
 import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
-import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { BTag, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import {
@@ -25,7 +25,7 @@ import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import styles from './erSoknadsfristVilkaretOppfyltForm.module.css';
 
-const findRadioButtonTextCode = (erVilkarOk?: boolean): string =>
+const findRadioButtonTextCode = (erVilkarOk: boolean): string =>
   erVilkarOk
     ? 'ErSoknadsfristVilkaretOppfyltForm.VilkarOppfylt'
     : 'ErSoknadsfristVilkaretOppfyltForm.VilkarIkkeOppfylt';
@@ -116,8 +116,6 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({
   const dato = useMemo(() => findDate(soknad, gjeldendeFamiliehendelse), [soknad, gjeldendeFamiliehendelse]);
   const textCode = useMemo(() => findTextCode(soknad, gjeldendeFamiliehendelse), [soknad, gjeldendeFamiliehendelse]);
 
-  const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
-
   const erVilkarOk = formMethods.watch('erVilkarOk');
 
   const antallDagerSoknadLevertForSent = soknad?.søknadsfrist?.dagerOversittetFrist;
@@ -186,11 +184,11 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({
           radios={[
             {
               value: 'true',
-              label: <FormattedMessage id={findRadioButtonTextCode(true)} values={{ b: bTag }} />,
+              label: <FormattedMessage id={findRadioButtonTextCode(true)} values={{ b: BTag }} />,
             },
             {
               value: 'false',
-              label: <FormattedMessage id={findRadioButtonTextCode(false)} values={{ b: bTag }} />,
+              label: <FormattedMessage id={findRadioButtonTextCode(false)} values={{ b: BTag }} />,
             },
           ]}
         />

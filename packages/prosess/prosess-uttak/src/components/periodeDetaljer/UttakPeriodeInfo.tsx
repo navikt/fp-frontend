@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { BodyShort, Detail, HStack, Label, VStack } from '@navikt/ds-react';
 import { CheckboxField, NumberField, SelectField } from '@navikt/ft-form-hooks';
 import { hasValidDecimal, maxValue, notDash, required } from '@navikt/ft-form-validators';
-import { calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
+import { BTag, calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import {
@@ -29,8 +29,6 @@ const OppholdArsakKontoNavn = {
   UTTAK_FORELDREPENGER_ANNEN_FORELDER: 'Foreldrepenger',
   UDEFINERT: '-',
 } as Record<string, string>;
-
-const bTag = (...chunks: any) => <b key="bold">{chunks}</b>;
 
 const periodeStatusClassName = (valgtPeriode: PeriodeSoker, erTilknyttetStortinget: boolean): string => {
   if (valgtPeriode.periodeResultatType === PeriodeResultatType.INNVILGET && !erTilknyttetStortinget) {
@@ -100,7 +98,7 @@ const isInnvilgetText = (valgtPeriode: PeriodeSoker, alleKodeverk: AlleKodeverk)
           innvilgelseAarsak: alleKodeverk[KodeverkType.PERIODE_RESULTAT_AARSAK].find(
             k => k.kode === valgtPeriode.periodeResultatÅrsak,
           )?.navn,
-          b: bTag,
+          b: BTag,
         }}
       />
     );
@@ -112,7 +110,7 @@ const isInnvilgetText = (valgtPeriode: PeriodeSoker, alleKodeverk: AlleKodeverk)
         avslagAarsak: alleKodeverk[KodeverkType.PERIODE_RESULTAT_AARSAK].find(
           k => k.kode === valgtPeriode.periodeResultatÅrsak,
         )?.navn,
-        b: bTag,
+        b: BTag,
       }}
     />
   );

@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -6,6 +5,7 @@ import { Heading, VStack } from '@navikt/ds-react';
 import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { AksjonspunktBox } from '@navikt/ft-ui-komponenter';
+import { BTag } from '@navikt/ft-utils';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
@@ -62,8 +62,6 @@ export const InnhentDokOpptjeningUtlandPanel = ({
 
   const begrunnelse = formMethods.watch('begrunnelse');
 
-  const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
-
   return (
     <Form
       formMethods={formMethods}
@@ -91,7 +89,7 @@ export const InnhentDokOpptjeningUtlandPanel = ({
                   value: OpptjeningIUtlandDokStatus.DOKUMENTASJON_VIL_BLI_INNHENTET,
                 },
                 {
-                  label: <FormattedMessage id="InnhentDokOpptjeningUtlandPanel.InnhentesIkke" values={{ b: bTag }} />,
+                  label: <FormattedMessage id="InnhentDokOpptjeningUtlandPanel.InnhentesIkke" values={{ b: BTag }} />,
                   value: OpptjeningIUtlandDokStatus.DOKUMENTASJON_VIL_IKKE_BLI_INNHENTET,
                 },
               ]}

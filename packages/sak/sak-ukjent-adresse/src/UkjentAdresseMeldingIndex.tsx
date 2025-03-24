@@ -20,7 +20,7 @@ export const UkjentAdresseMeldingIndex = () => (
     <div className={styles.ukjentAdresseMargins}>
       <AksjonspunktHelpTextHTML>
         <b>
-          <FormattedMessage id="UkjentAdresse.Text" />
+          <FormattedMessage tagName="b" id="UkjentAdresse.Text" />
         </b>
       </AksjonspunktHelpTextHTML>
     </div>

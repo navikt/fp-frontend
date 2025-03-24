@@ -1,5 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 
+import { BTag } from '@navikt/ft-utils';
+
 import type { OpptjeningAktiviteter } from '@navikt/fp-types';
 
 const mapAktivitetTextEndring = (aktivitetType?: string, arbeidsgiverNavn?: string, orgnr?: string) => {
@@ -28,7 +30,7 @@ const mapAktivitetTextUnderkjenning = (aktivitetType?: string, arbeidsgiverNavn?
           a: aktivitetType,
           bb: arbeidsgiverNavn,
           c: orgnr,
-          b: (chunks: any) => <b>{chunks}</b>,
+          b: BTag,
         }}
       />
     );
@@ -37,15 +39,12 @@ const mapAktivitetTextUnderkjenning = (aktivitetType?: string, arbeidsgiverNavn?
     return (
       <FormattedMessage
         id="ToTrinnsForm.Opptjening.UnderkjenningArbeidUtenNavn"
-        values={{ a: aktivitetType, bb: orgnr, b: (chunks: any) => <b>{chunks}</b> }}
+        values={{ a: aktivitetType, bb: orgnr, b: BTag }}
       />
     );
   }
   return (
-    <FormattedMessage
-      id="ToTrinnsForm.Opptjening.UnderkjenningAktivitet"
-      values={{ a: aktivitetType, b: (chunks: any) => <b>{chunks}</b> }}
-    />
+    <FormattedMessage id="ToTrinnsForm.Opptjening.UnderkjenningAktivitet" values={{ a: aktivitetType, b: BTag }} />
   );
 };
 

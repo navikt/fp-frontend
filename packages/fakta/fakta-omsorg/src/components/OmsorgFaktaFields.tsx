@@ -1,7 +1,7 @@
-import { useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
+import { BTag } from '@navikt/ft-utils';
 
 import { TrueFalseInput } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
@@ -19,24 +19,20 @@ interface Props {
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
 }
 
-export const OmsorgFaktaFields = ({ readOnly, alleMerknaderFraBeslutter }: Props) => {
-  const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
-
-  return (
-    <FaktaGruppe
-      withoutBorder
-      merknaderFraBeslutter={alleMerknaderFraBeslutter[MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG]}
-    >
-      <TrueFalseInput
-        name="omsorg"
-        label={<FormattedMessage id="OmsorgFaktaFields.OppgittOmsorg" />}
-        readOnly={readOnly}
-        trueLabel={<FormattedMessage id="OmsorgFaktaFields.HarOmsorg" />}
-        falseLabel={<FormattedMessage id="OmsorgFaktaFields.HarIkkeOmsorg" values={{ b: bTag }} />}
-      />
-    </FaktaGruppe>
-  );
-};
+export const OmsorgFaktaFields = ({ readOnly, alleMerknaderFraBeslutter }: Props) => (
+  <FaktaGruppe
+    withoutBorder
+    merknaderFraBeslutter={alleMerknaderFraBeslutter[MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG]}
+  >
+    <TrueFalseInput
+      name="omsorg"
+      label={<FormattedMessage id="OmsorgFaktaFields.OppgittOmsorg" />}
+      readOnly={readOnly}
+      trueLabel={<FormattedMessage id="OmsorgFaktaFields.HarOmsorg" />}
+      falseLabel={<FormattedMessage id="OmsorgFaktaFields.HarIkkeOmsorg" values={{ b: BTag }} />}
+    />
+  </FaktaGruppe>
+);
 
 OmsorgFaktaFields.initialValues = (ytelsefordeling: Ytelsefordeling, omsorgAp: Aksjonspunkt[]): FormValues => ({
   omsorg:

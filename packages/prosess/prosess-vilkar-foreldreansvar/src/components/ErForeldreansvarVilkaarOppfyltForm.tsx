@@ -1,9 +1,9 @@
-import { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Label } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
+import { BTag } from '@navikt/ft-utils';
 
 import { AksjonspunktKode, KodeverkType, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import {
@@ -104,8 +104,6 @@ export const ErForeldreansvarVilkaarOppfyltForm = ({
 
   const originalErVilkarOk = harÅpneAksjonspunkter ? undefined : VilkarUtfallType.OPPFYLT === status;
 
-  const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
-
   return (
     <Form
       formMethods={formMethods}
@@ -134,7 +132,7 @@ export const ErForeldreansvarVilkaarOppfyltForm = ({
           customVilkarIkkeOppfyltText={
             <FormattedMessage
               id={isEngangsstonad ? 'FodselVilkarForm.IkkeOppfyltEs' : 'FodselVilkarForm.IkkeOppfyltFp'}
-              values={{ b: bTag }}
+              values={{ b: BTag }}
             />
           }
         />
