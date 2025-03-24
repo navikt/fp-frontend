@@ -16,6 +16,7 @@ interface Props {
   brevOverstyring?: BrevOverstyring;
   refetchBrevOverstyring: () => void;
   mellomlagreBrevOverstyring: (html: string | null) => Promise<void>;
+  setVisForkastOverstyringModal: (visForkastOverstyring: boolean) => void;
 }
 
 export const OverstyringVedtaksbrev = ({
@@ -23,6 +24,7 @@ export const OverstyringVedtaksbrev = ({
   brevOverstyring,
   refetchBrevOverstyring,
   mellomlagreBrevOverstyring,
+  setVisForkastOverstyringModal,
 }: Props) => {
   const { isReadOnly } = usePanelDataContext();
 
@@ -40,24 +42,24 @@ export const OverstyringVedtaksbrev = ({
   return (
     <div style={{ maxWidth: '500px' }}>
       <VStack gap="4">
-        {!isReadOnly && !brevOverstyring?.redigertHtml && (
-          <Alert variant="info" size="small">
-            <FormattedMessage id="VedtakFellesPanel.KanRedigeres" />
-          </Alert>
-        )}
-        {!!brevOverstyring?.redigertHtml && (
-          <Alert variant="info" size="small">
-            <FormattedMessage id="VedtakFellesPanel.ErOverstyrt" />
-          </Alert>
-        )}
         <Box padding="4" borderRadius="medium" background="surface-subtle">
-          <HStack gap="2" align="end">
+          <VStack gap="4">
+            {!isReadOnly && !brevOverstyring?.redigertHtml && (
+              <Alert variant="info" size="small">
+                <FormattedMessage id="VedtakFellesPanel.KanRedigeres" />
+              </Alert>
+            )}
+            {!!brevOverstyring?.redigertHtml && (
+              <Alert variant="success" size="small">
+                <FormattedMessage id="VedtakFellesPanel.ErOverstyrt" />
+              </Alert>
+            )}
             {!isReadOnly && (
-              <VStack gap="4">
+              <>
                 <Heading size="small">
                   <FormattedMessage id="VedtakFellesPanel.RedigerBrevOverskrift" />
                 </Heading>
-                <HStack>
+                <HStack gap="4">
                   <Button
                     variant="secondary"
                     type="button"
@@ -67,8 +69,16 @@ export const OverstyringVedtaksbrev = ({
                   >
                     <FormattedMessage id="VedtakFellesPanel.RedigerVedtaksbrev" />
                   </Button>
+                  <Button
+                    size="small"
+                    variant="secondary"
+                    onClick={() => setVisForkastOverstyringModal(true)}
+                    type="button"
+                  >
+                    <FormattedMessage id="VedtakFellesPanel.ForkastManueltBrev" />
+                  </Button>
                 </HStack>
-              </VStack>
+              </>
             )}
             {(isReadOnly || !!brevOverstyring?.redigertHtml) && (
               <div>
@@ -80,11 +90,15 @@ export const OverstyringVedtaksbrev = ({
                   onKeyDown={e => (e.key === 'Enter' ? forhåndsvisOverstyrtHtmlBrev() : null)}
                   type="button"
                 >
-                  <FormattedMessage id="VedtakForm.ForhandvisBrev" />
+                  {isReadOnly ? (
+                    <FormattedMessage id="VedtakForm.VisBrev" />
+                  ) : (
+                    <FormattedMessage id="VedtakForm.ForhandvisBrev" />
+                  )}
                 </Button>
               </div>
             )}
-          </HStack>
+          </VStack>
         </Box>
       </VStack>
       {brevOverstyring && visFritekstRedigeringModal && (

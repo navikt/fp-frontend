@@ -212,41 +212,28 @@ export const VedtakFellesPanel = ({
       </HStack>
       <VedtakHelpTextPanel aksjonspunkter={aksjonspunkt} isReadOnly={isReadOnly} />
       {oppgaver && oppgaver.length > 0 && <OppgaveTabell oppgaver={oppgaver} />}
-      {renderPanel(harOverstyrtVedtaksbrev, erInnvilget, erAvslatt, erOpphor)}
-      {behandling.behandlingsresultat?.overskrift && (
-        <LegacyOverstyrtVedtaksbrev forhåndsvisOverstyrtBrev={previewCallback} behandling={behandling} />
-      )}
-      {harOverstyrtVedtaksbrev && (
-        <OverstyringVedtaksbrev
-          forhåndsvisBrev={previewCallback}
-          brevOverstyring={brevOverstyring}
-          refetchBrevOverstyring={refetchBrevOverstyring}
-          mellomlagreBrevOverstyring={mellomlagreBrevOverstyring}
-        />
-      )}
-      {kanSendesTilGodkjenning(status) && (
-        <HStack gap="2">
-          {!isReadOnly && (
-            <div>
-              <Button variant="primary" size="small" disabled={behandlingPåVent || isSubmitting} loading={isSubmitting}>
-                <FormattedMessage id={finnKnappetekstkode(aksjonspunkt, harOverstyrtVedtaksbrev)} />
-              </Button>
-            </div>
-          )}
-          {harOverstyrtVedtaksbrev && (
-            <div>
-              <Button
-                size="small"
-                variant="secondary"
-                onClick={() => setVisForkastOverstyringModal(true)}
-                type="button"
-              >
-                <FormattedMessage id="VedtakFellesPanel.ForkastManueltBrev" />
-              </Button>
-            </div>
-          )}
-        </HStack>
-      )}
+      <VStack gap="8">
+        {renderPanel(harOverstyrtVedtaksbrev, erInnvilget, erAvslatt, erOpphor)}
+        {behandling.behandlingsresultat?.overskrift && (
+          <LegacyOverstyrtVedtaksbrev forhåndsvisOverstyrtBrev={previewCallback} behandling={behandling} />
+        )}
+        {harOverstyrtVedtaksbrev && (
+          <OverstyringVedtaksbrev
+            forhåndsvisBrev={previewCallback}
+            brevOverstyring={brevOverstyring}
+            refetchBrevOverstyring={refetchBrevOverstyring}
+            mellomlagreBrevOverstyring={mellomlagreBrevOverstyring}
+            setVisForkastOverstyringModal={setVisForkastOverstyringModal}
+          />
+        )}
+        {!isReadOnly && kanSendesTilGodkjenning(status) && (
+          <div>
+            <Button variant="primary" size="small" disabled={behandlingPåVent || isSubmitting} loading={isSubmitting}>
+              <FormattedMessage id={finnKnappetekstkode(aksjonspunkt, harOverstyrtVedtaksbrev)} />
+            </Button>
+          </div>
+        )}
+      </VStack>
     </VStack>
   );
 };

@@ -152,18 +152,16 @@ class CustomList extends EditorjsList {
       .filter(item =>
         // https://github.com/editor-js/list/issues/119
         // @ts-expect-error
-        ['Unordered', 'Ordered'].includes(item.label),
+        ['Unordered'].includes(item.label),
       )
       .map(item => ({
         ...item,
-        // @ts-expect-error
-        label: item.label === 'Unordered' ? 'Punktliste' : 'Nummerert liste',
+        label: 'Punktliste',
       }));
   }
 }
 
 //TODO (TOR) Hacka det til for å få endra til norsk tekst. Burde kunne legga til i18n-messages?
-
 class CustomHeader extends Header {
   override renderSettings() {
     return super.renderSettings().map(item => ({
@@ -195,16 +193,14 @@ const TOOLS: EditorConfig['tools'] = {
     class: CustomList as unknown as ToolConstructable,
     inlineToolbar: true,
     config: {
-      defaultStyle: 'unordered',
       preservedBlank: true,
       maxLevel: 1,
     },
     toolbox: [
       {
-        data: [{ style: 'ordered' }],
-      },
-      {
-        data: { style: 'unordered' },
+        data: {
+          style: 'unordered',
+        },
       },
     ],
   },
@@ -216,7 +212,6 @@ const lagEditorJsI18n = (intl: IntlShape): I18nConfig => ({
       Text: intl.formatMessage({ id: 'useEditorJs.Text' }),
       Heading: intl.formatMessage({ id: 'useEditorJs.Heading' }),
       'Unordered List': intl.formatMessage({ id: 'useEditorJs.UnorderedList' }),
-      'Ordered List': intl.formatMessage({ id: 'useEditorJs.OrderedList' }),
     },
     tools: {
       link: {
@@ -224,7 +219,6 @@ const lagEditorJsI18n = (intl: IntlShape): I18nConfig => ({
       },
       List: {
         Unordered: intl.formatMessage({ id: 'useEditorJs.Unordered' }),
-        Ordered: intl.formatMessage({ id: 'useEditorJs.Ordered' }),
       },
     },
     ui: {
@@ -236,6 +230,7 @@ const lagEditorJsI18n = (intl: IntlShape): I18nConfig => ({
     blockTunes: {
       delete: {
         Delete: intl.formatMessage({ id: 'useEditorJs.Delete' }),
+        'Click to delete': intl.formatMessage({ id: 'useEditorJs.KlikkForFjern' }),
       },
       moveUp: {
         'Move up': intl.formatMessage({ id: 'useEditorJs.MoveUp' }),

@@ -91,6 +91,7 @@ export const FritekstRedigeringModal = ({
                   e.preventDefault();
                   window.open(href, '_blank');
                 }}
+                iconPosition="right"
                 icon={<ExternalLinkIcon aria-hidden />}
                 size="small"
               >
