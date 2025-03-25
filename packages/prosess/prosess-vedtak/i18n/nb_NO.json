@@ -15,8 +15,6 @@
   "VedtakForm.OpprettTilbakekrOgInntrekk": "Feilutbetaling med tilbakekreving hvor beløp er redusert med inntrekk",
   "VedtakForm.TilGodkjenning": "Til godkjenning",
   "VedtakForm.FattVedtak": "Fatt vedtak",
-  "VedtakForm.ForhandvisBrev": "Forhåndsvis brev",
-  "VedtakForm.VisBrev": "Vis brev",
   "VedtakForm.beregnetTilkjentYtelse": "Beregnet engangsstønad",
   "VedtakForm.AntallBarn": "Antall barn",
   "VedtakForm.vedtak": "Vedtak",
@@ -41,16 +39,11 @@
   "VedtakForm.SvpFritektsBrevModal.IngenAutomatiskVedtaksbrevImage": "Ingen automatisk vedtaksbrev.",
   "VedtakForm.SvpFritektsBrevModal.ModalDescription": "Informasjonsboks om ingen automatisk vedtaksbrev. Fritekstbrev er nødvendig.",
 
-  "VedtakFellesPanel.RedigerVedtaksbrev": "Rediger brev",
-  "VedtakFellesPanel.KanRedigeres": "Innholdet fra det automatiske brevet kan nå redigeres",
-  "VedtakFellesPanel.RedigerBrevOverskrift": "Rediger brev til søker",
+  "VedtakFellesPanel.RedigerVedtaksbrev": "Rediger vedtaksbrev",
   "VedtakFellesPanel.AutomatiskVedtaksbrev": "Automatisk vedtaksbrev",
   "VedtakFellesPanel.UtkastVedtaksbrev": "Utkast vedtaksbrev",
-  "VedtakFellesPanel.ForkastManueltBrev": "Forkast redigert brev",
   "VedtakFellesPanel.Forkast": "Dersom du forkaster det redigerte brevet, vil det erstattes av det automatisk genererte brevet",
   "VedtakFellesPanel.Ok": "Forkast redigert brev",
-  "VedtakFellesPanel.ErOverstyrt": "Brev er redigert",
-  "VedtakFellesPanel.SkjeddEndringIBehandling": "Hvis det er skjedd en endring i saken må du kontrollere at innholdet i det redigerte brevet stemmer med den gjeldende informasjonen",
 
   "VedtakHelpTextPanel.Vurder": "Vurder følgende før du sender til godkjenning:",
 
@@ -59,6 +52,8 @@
   "BrevInnhold.Lagre": "Lagre og lukk",
   "BrevInnhold.InnholdMangler": "Brev må ha innhold",
   "BrevInnhold.Tilbakestill": "Tilbakestill",
+  "BrevInnhold.ForhandvisBrev": "Forhåndsvis brev",
+
   "FritekstRedigeringModal.Rediger": "Rediger brev",
   "FritekstRedigeringModal.Infotekst": "Gjør nødvendige endringer i brevet nedenfor. Redigering er begrenset til området markert i oransje. Endringer vil automatisk bli mellomlagret. Vil du se saken samtidig som du redigerer kan du åpne en kopi av saken i ny fane:",
   "FritekstRedigeringModal.ApneINyFane": "Åpne sak i ny fane",
@@ -86,5 +81,14 @@
   "useEditorJs.Delete": "Fjern",
   "useEditorJs.KlikkForFjern": "Klikk for å fjerne",
   "useEditorJs.MoveUp": "Flytt opp",
-  "useEditorJs.MoveDown": "Flytt ned"
+  "useEditorJs.MoveDown": "Flytt ned",
+
+  "OverstyringVedtaksbrev.SkjeddEndringIBehandling": "Hvis det er skjedd en endring i saken må du kontrollere at innholdet i det redigerte brevet stemmer med den gjeldende informasjonen",
+  "OverstyringVedtaksbrev.ForhandvisBrev": "Forhåndsvis brev",
+  "OverstyringVedtaksbrev.VisBrev": "Vis brev",
+  "OverstyringVedtaksbrev.ForkastManueltBrev": "Forkast redigert brev",
+  "OverstyringVedtaksbrev.RedigerVedtaksbrev": "Rediger brev",
+  "OverstyringVedtaksbrev.KanRedigeres": "Innholdet fra det automatiske brevet kan nå redigeres",
+  "OverstyringVedtaksbrev.ErOverstyrt": "Brev er redigert",
+  "OverstyringVedtaksbrev.RedigerBrevOverskrift": "Rediger brev til søker"
 }

@@ -52,18 +52,18 @@ export const OverstyringVedtaksbrev = ({
           <VStack gap="4">
             {!isReadOnly && !brevOverstyring?.redigertHtml && (
               <Alert variant="info" size="small">
-                <FormattedMessage id="VedtakFellesPanel.KanRedigeres" />
+                <FormattedMessage id="OverstyringVedtaksbrev.KanRedigeres" />
               </Alert>
             )}
             {!!brevOverstyring?.redigertHtml && (
               <Alert variant="success" size="small">
-                <FormattedMessage id="VedtakFellesPanel.ErOverstyrt" />
+                <FormattedMessage id="OverstyringVedtaksbrev.ErOverstyrt" />
               </Alert>
             )}
             {!isReadOnly && (
               <>
                 <Heading size="small">
-                  <FormattedMessage id="VedtakFellesPanel.RedigerBrevOverskrift" />
+                  <FormattedMessage id="OverstyringVedtaksbrev.RedigerBrevOverskrift" />
                 </Heading>
                 <HStack gap="4">
                   <Button
@@ -73,7 +73,7 @@ export const OverstyringVedtaksbrev = ({
                     size="small"
                     disabled={isReadOnly}
                   >
-                    <FormattedMessage id="VedtakFellesPanel.RedigerVedtaksbrev" />
+                    <FormattedMessage id="OverstyringVedtaksbrev.RedigerVedtaksbrev" />
                   </Button>
                   <Button
                     size="small"
@@ -81,7 +81,7 @@ export const OverstyringVedtaksbrev = ({
                     onClick={() => setVisForkastOverstyringModal(true)}
                     type="button"
                   >
-                    <FormattedMessage id="VedtakFellesPanel.ForkastManueltBrev" />
+                    <FormattedMessage id="OverstyringVedtaksbrev.ForkastManueltBrev" />
                   </Button>
                 </HStack>
               </>
@@ -97,16 +97,16 @@ export const OverstyringVedtaksbrev = ({
                   type="button"
                 >
                   {isReadOnly ? (
-                    <FormattedMessage id="VedtakForm.VisBrev" />
+                    <FormattedMessage id="OverstyringVedtaksbrev.VisBrev" />
                   ) : (
-                    <FormattedMessage id="VedtakForm.ForhandvisBrev" />
+                    <FormattedMessage id="OverstyringVedtaksbrev.ForhandvisBrev" />
                   )}
                 </Button>
               </div>
             )}
             {!isReadOnly && !!brevOverstyring?.redigertHtml && !harRedigertBrev && (
               <Alert variant="info" size="small">
-                <FormattedMessage id="VedtakFellesPanel.SkjeddEndringIBehandling" />
+                <FormattedMessage id="OverstyringVedtaksbrev.SkjeddEndringIBehandling" />
               </Alert>
             )}
           </VStack>

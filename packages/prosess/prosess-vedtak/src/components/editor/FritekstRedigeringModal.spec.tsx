@@ -10,7 +10,29 @@ import * as stories from './FritekstRedigeringModal.stories';
 const { MedOpprinneligHtml } = composeStories(stories);
 
 describe('FritekstRedigeringModal', () => {
-  it.skip('skal vise redigering av opprinnelig', async () => {
+  const oldWindowMatchMedia = window.matchMedia;
+
+  beforeAll(() => {
+    Object.defineProperty(window, 'matchMedia', {
+      writable: true,
+      value: vi.fn().mockImplementation(query => ({
+        matches: false,
+        media: query,
+        onchange: null,
+        addListener: vi.fn(), // Deprecated
+        removeListener: vi.fn(), // Deprecated
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+        dispatchEvent: vi.fn(),
+      })),
+    });
+  });
+
+  afterAll(() => {
+    window.matchMedia = oldWindowMatchMedia;
+  });
+
+  it('skal vise redigering av opprinnelig brev', async () => {
     const refetchBrevOverstyring = vi.fn();
     const mellomlagreBrevOverstyring = vi.fn();
     const forhåndsvisBrev = vi.fn();

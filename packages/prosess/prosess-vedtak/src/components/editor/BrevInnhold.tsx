@@ -61,7 +61,7 @@ export const BrevInnhold = ({
               onKeyDown={e => (e.key === 'Enter' ? forhåndsvis() : null)}
               type="button"
             >
-              <FormattedMessage id="VedtakForm.ForhandvisBrev" />
+              <FormattedMessage id="BrevInnhold.ForhandvisBrev" />
             </Button>
           </HStack>
           <HStack justify="space-between">

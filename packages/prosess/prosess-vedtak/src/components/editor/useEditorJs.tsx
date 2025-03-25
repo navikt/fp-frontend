@@ -61,9 +61,12 @@ export const useEditorJs = (
         onChange: async () => {
           //Forhindrer at lagring blir gjort ved initialisering og etter tilbakestilling
           if (refCurrentHtml.current === '') {
-            // Dette er for å seinare kunne finna ut om innhaldet er endra
-            const innhold = await editor.save();
-            refCurrentHtml.current = edjsHTML().parse(innhold);
+            //Sjekk om save eksisterar for å unngå warning i test
+            if (editor.save) {
+              // Dette er for å seinare kunne finna ut om innhaldet er endra
+              const innhold = await editor.save();
+              refCurrentHtml.current = edjsHTML().parse(innhold);
+            }
           } else {
             lagreBrevDebouncer(validerOgLagre);
           }
