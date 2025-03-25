@@ -29,6 +29,12 @@ export const OverstyringVedtaksbrev = ({
   const { isReadOnly } = usePanelDataContext();
 
   const [visFritekstRedigeringModal, setVisFritekstRedigeringModal] = useState(false);
+  const [harRedigertBrev, setHarRedigertBrev] = useState(false);
+
+  const mellomlagre = (html: string | null) => {
+    setHarRedigertBrev(true);
+    return mellomlagreBrevOverstyring(html);
+  };
 
   const forhåndsvisOverstyrtHtmlBrev = () => {
     forhåndsvisBrev({
@@ -98,6 +104,11 @@ export const OverstyringVedtaksbrev = ({
                 </Button>
               </div>
             )}
+            {!isReadOnly && !!brevOverstyring?.redigertHtml && !harRedigertBrev && (
+              <Alert variant="info" size="small">
+                <FormattedMessage id="VedtakFellesPanel.SkjeddEndringIBehandling" />
+              </Alert>
+            )}
           </VStack>
         </Box>
       </VStack>
@@ -107,7 +118,7 @@ export const OverstyringVedtaksbrev = ({
           brevOverstyring={brevOverstyring}
           refetchBrevOverstyring={refetchBrevOverstyring}
           forhåndsvisBrev={forhåndsvisBrev}
-          mellomlagreBrevOverstyring={mellomlagreBrevOverstyring}
+          mellomlagreBrevOverstyring={mellomlagre}
         />
       )}
     </div>

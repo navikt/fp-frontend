@@ -50,6 +50,7 @@
   "VedtakFellesPanel.Forkast": "Dersom du forkaster det redigerte brevet, vil det erstattes av det automatisk genererte brevet",
   "VedtakFellesPanel.Ok": "Forkast redigert brev",
   "VedtakFellesPanel.ErOverstyrt": "Brev er redigert",
+  "VedtakFellesPanel.SkjeddEndringIBehandling": "Hvis det er skjedd en endring i saken må du kontrollere at innholdet i det redigerte brevet stemmer med den gjeldende informasjonen",
 
   "VedtakHelpTextPanel.Vurder": "Vurder følgende før du sender til godkjenning:",
 

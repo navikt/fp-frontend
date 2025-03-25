@@ -175,14 +175,14 @@ class CustomHeader extends Header {
 const TOOLS: EditorConfig['tools'] = {
   paragraph: {
     class: Paragraph as unknown as ToolConstructable,
-    inlineToolbar: true,
+    inlineToolbar: ['bold'],
     config: {
       preservedBlank: true,
     },
   },
   header: {
     class: CustomHeader as unknown as ToolConstructable,
-    inlineToolbar: true,
+    inlineToolbar: false,
     config: {
       levels: [2, 1],
       defaultLevel: 1,
@@ -191,7 +191,7 @@ const TOOLS: EditorConfig['tools'] = {
   },
   list: {
     class: CustomList as unknown as ToolConstructable,
-    inlineToolbar: true,
+    inlineToolbar: ['bold'],
     config: {
       preservedBlank: true,
       maxLevel: 1,
