@@ -24,8 +24,8 @@
     "@navikt/fp-prosess-felles": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*",
-    "@navikt/ft-ui-komponenter": "3.2.1",
-    "@navikt/ft-utils": "3.2.1",
+    "@navikt/ft-ui-komponenter": "3.2.2",
+    "@navikt/ft-utils": "3.3.0",
     "classnames": "2.5.1",
     "react": "19.0.0",
     "react-intl": "7.1.6"
