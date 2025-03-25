@@ -5,8 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { Alert, HStack } from '@navikt/ds-react';
 import { CheckboxField, NumberField, SelectField } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import { DDMMYYYY_DATE_FORMAT, guid } from '@navikt/ft-utils';
-import dayjs from 'dayjs';
+import { dateFormat, guid } from '@navikt/ft-utils';
 
 import { KodeverkType, UttakArbeidType } from '@navikt/fp-kodeverk';
 import type {
@@ -34,11 +33,10 @@ export type FormValues = KontrollerFaktaPeriodeMedApMarkering & {
 };
 
 // Todo: gjør dette til delt kode delt kode
-const formatDate = (dato: string) => dayjs(dato).format(DDMMYYYY_DATE_FORMAT);
 const getEndCharFromId = (id: string | undefined) => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
 const lagVisningsNavn = (ago: ArbeidsgiverOpplysninger, eksternArbeidsforholdId?: string): string => {
   if (ago.erPrivatPerson) {
-    return `${ago.navn.substring(0, 5)}...(${ago.fødselsdato ? formatDate(ago.fødselsdato) : '-'})`;
+    return `${ago.navn.substring(0, 5)}...(${dateFormat(ago.fødselsdato)})`;
   } else {
     return `${ago.navn} (${ago.identifikator})${getEndCharFromId(eksternArbeidsforholdId)}`;
   }

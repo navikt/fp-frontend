@@ -5,8 +5,7 @@ import { BodyShort, Box, Detail, Heading, HStack, Label, VStack } from '@navikt/
 import { Datepicker, Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { dateBeforeOrEqualToToday, hasValidDate, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML, ArrowBox } from '@navikt/ft-ui-komponenter';
-import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
-import dayjs from 'dayjs';
+import { dateFormat, periodFormat } from '@navikt/ft-utils';
 
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
@@ -91,7 +90,7 @@ export const VurderSoknadsfristForeldrepengerForm = ({ readOnlySubmitButton, mot
               id="VurderSoknadsfristForeldrepengerForm.AksjonspunktHelpText"
               values={{
                 numberOfDays: søknadsfrist?.dagerOversittetFrist,
-                soknadsfristdato: soknadsfristdato ? dayjs(soknadsfristdato).format(DDMMYYYY_DATE_FORMAT) : '',
+                soknadsfristdato: soknadsfristdato ? dateFormat(soknadsfristdato) : '',
               }}
             />
           </AksjonspunktHelpTextHTML>
@@ -117,18 +116,14 @@ export const VurderSoknadsfristForeldrepengerForm = ({ readOnlySubmitButton, mot
             <Detail>
               <FormattedMessage id="VurderSoknadsfristForeldrepengerForm.SoknadMottatt" />
             </Detail>
-            {mottattDato && <BodyShort size="small">{dayjs(mottattDato).format(DDMMYYYY_DATE_FORMAT)}</BodyShort>}
+            {mottattDato && <BodyShort size="small">{dateFormat(mottattDato)}</BodyShort>}
           </div>
           {soknadsperiodeStart && soknadsperiodeSlutt && (
             <div>
               <Detail>
                 <FormattedMessage id="VurderSoknadsfristForeldrepengerForm.SoknadPeriode" />
               </Detail>
-              <BodyShort size="small">
-                {`${dayjs(soknadsperiodeStart).format(DDMMYYYY_DATE_FORMAT)} - ${dayjs(soknadsperiodeSlutt).format(
-                  DDMMYYYY_DATE_FORMAT,
-                )}`}
-              </BodyShort>
+              <BodyShort size="small">{periodFormat(soknadsperiodeStart, soknadsperiodeSlutt)}</BodyShort>
             </div>
           )}
         </HStack>

@@ -1,8 +1,7 @@
 import { type ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import dayjs from 'dayjs';
+import { dateFormat } from '@navikt/ft-utils';
 
 import {
   AksjonspunktKode,
@@ -19,8 +18,6 @@ import {
 } from '../../totrinnskontrollaksjonspunktTextCodes';
 import { OpptjeningTotrinnText } from './OpptjeningTotrinnText';
 
-const formatDate = (date?: string): string => (date ? dayjs(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
-
 const buildVarigEndringBeregningText = (beregningDto?: TotrinnskontrollAksjonspunkt['beregningDto']): ReactElement =>
   beregningDto?.fastsattVarigEndringNaering ? (
     <FormattedMessage id="ToTrinnsForm.Beregning.VarigEndring" />
@@ -31,8 +28,8 @@ const buildVarigEndringBeregningText = (beregningDto?: TotrinnskontrollAksjonspu
 const buildUttakText = (aksjonspunkt: TotrinnskontrollAksjonspunkt): ReactElement[] =>
   aksjonspunkt.uttakPerioder
     ? aksjonspunkt.uttakPerioder.map((uttakperiode): ReactElement => {
-        const fom = formatDate(uttakperiode.fom);
-        const tom = formatDate(uttakperiode.tom);
+        const fom = dateFormat(uttakperiode.fom);
+        const tom = dateFormat(uttakperiode.tom);
         let id;
 
         if (uttakperiode.erSlettet) {

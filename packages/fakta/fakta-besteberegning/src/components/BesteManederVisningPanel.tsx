@@ -2,23 +2,22 @@ import { type ReactElement, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, HStack, Label, Table, VStack } from '@navikt/ds-react';
-import { DDMMYYYY_DATE_FORMAT, formatCurrencyNoKr, ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { dateFormat, formatCurrencyNoKr } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
-import norskFormat from 'dayjs/locale/nb';
+
+import 'dayjs/locale/nb';
+
+dayjs.locale('nb');
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
 import type { ArbeidsgiverOpplysningerPerId, BesteberegningInntekt, Månedsgrunnlag } from '@navikt/fp-types';
 
 import styles from './besteManederVisningPanel.module.css';
 
-const lagMånedVisning = (dato: dayjs.Dayjs): string => {
-  const år = dato.year();
-  const maanedNavn = dato.locale(norskFormat).format('MMMM');
-  const formattedMaaned = maanedNavn.charAt(0).toUpperCase() + maanedNavn.slice(1);
-  return `${formattedMaaned} - ${år}`;
+const formaterMånedOgÅr = (date: string): string => {
+  const formatertString = dayjs(date).format('MMMM - YYYY');
+  return formatertString.charAt(0).toUpperCase() + formatertString.slice(1);
 };
-
-const formatDate = (date: string): string => (date ? lagMånedVisning(dayjs(date, ISO_DATE_FORMAT)) : '-');
 
 interface Props {
   besteMåneder: Månedsgrunnlag[];
@@ -43,7 +42,7 @@ const lagVisningsNavn = (
   }
   if (agOpplysning.erPrivatPerson) {
     return agOpplysning.fødselsdato
-      ? `${agOpplysning.navn} (${dayjs(agOpplysning.fødselsdato).format(DDMMYYYY_DATE_FORMAT)})`
+      ? `${agOpplysning.navn} (${dateFormat(agOpplysning.fødselsdato)})`
       : agOpplysning.navn;
   }
   return `${agOpplysning.navn} (${agOpplysning.identifikator})`;
@@ -117,7 +116,7 @@ const lagRadMedMåneder = (
       const key = månedsgrunnlag.fom;
       return (
         <div className={styles.colWidth} key={key}>
-          <BodyShort size="small">{formatDate(månedsgrunnlag.fom)}</BodyShort>
+          <BodyShort size="small">{formaterMånedOgÅr(månedsgrunnlag.fom)}</BodyShort>
           <Inntekttabell
             inntekter={månedsgrunnlag.inntekter}
             arbeidsgiverOpplysninger={arbeidsgiverOpplysninger}

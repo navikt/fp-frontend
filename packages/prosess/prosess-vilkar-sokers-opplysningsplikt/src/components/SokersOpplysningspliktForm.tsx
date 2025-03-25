@@ -4,8 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { BodyShort, Table, VStack } from '@navikt/ds-react';
 import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import { DDMMYYYY_DATE_FORMAT, isObject } from '@navikt/ft-utils';
-import dayjs from 'dayjs';
+import { dateFormat, isObject } from '@navikt/ft-utils';
 
 import {
   AksjonspunktKode,
@@ -39,8 +38,8 @@ const capitalizeFirstLetters = (navn: string): string =>
     .map((w: string) => w.charAt(0).toUpperCase() + w.substring(1))
     .join(' ');
 
-const lagArbeidsgiverNavnOgFødselsdatoTekst = (navn: string, fodselsdato?: string): string =>
-  `${capitalizeFirstLetters(navn)} (${dayjs(fodselsdato).format(DDMMYYYY_DATE_FORMAT)})`;
+const lagArbeidsgiverNavnOgFødselsdatoTekst = (navn: string, fodselsdato: string): string =>
+  `${capitalizeFirstLetters(navn)} (${dateFormat(fodselsdato)})`;
 
 const lagArbeidsgiverNavnOgOrgnrTekst = (navn: string, organisasjonsnummer: string): string =>
   `${capitalizeFirstLetters(navn)} (${organisasjonsnummer})`;

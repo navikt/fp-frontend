@@ -7,8 +7,7 @@ import { BodyShort, Button, Heading, HStack, Label, VStack } from '@navikt/ds-re
 import { Form, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
-import { DDMMYYYY_DATE_FORMAT, findDifferenceInMonthsAndDays } from '@navikt/ft-utils';
-import dayjs from 'dayjs';
+import { calcDaysAndWeeks, findDifferenceInMonthsAndDays, periodFormat } from '@navikt/ft-utils';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type {
@@ -174,12 +173,9 @@ export const ValgtAktivitetForm = ({
                 </Label>
                 {opptjeningFom && opptjeningTom && (
                   <HStack gap="2">
-                    <BodyShort size="small">
-                      {`${dayjs(opptjeningFom).format(DDMMYYYY_DATE_FORMAT)} - ${dayjs(opptjeningTom).format(
-                        DDMMYYYY_DATE_FORMAT,
-                      )}`}
-                    </BodyShort>
+                    <BodyShort size="small">{periodFormat(opptjeningFom, opptjeningTom)}</BodyShort>
                     <BodyShort size="small">{finnMånederOgDager(opptjeningFom, opptjeningTom)}</BodyShort>
+                    <BodyShort size="small">{calcDaysAndWeeks(opptjeningFom, opptjeningTom).formattedString}</BodyShort>
                   </HStack>
                 )}
               </div>

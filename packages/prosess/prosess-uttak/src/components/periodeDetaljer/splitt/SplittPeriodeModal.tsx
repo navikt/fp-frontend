@@ -4,25 +4,11 @@ import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 import { BodyShort, Button, Detail, Heading, HStack, Modal, VStack } from '@navikt/ds-react';
 import { Datepicker, Form } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
-import { calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
+import { PeriodLabel } from '@navikt/ft-ui-komponenter';
+import { calcDaysAndWeeks } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import styles from './splittPeriodeModal.module.css';
-
-export type DeltPeriodeData = {
-  periodeId: number;
-  hovedsoker: boolean;
-  gradertProsentandelArbeid?: number;
-  gradertTrekkdager?: number;
-  forstePeriode: {
-    fom: string;
-    tom: string;
-  };
-  andrePeriode: {
-    fom: string;
-    tom: string;
-  };
-};
 
 const validerInnenforIntervall = (fom: string, tom: string, intl: IntlShape) => (dato: string) => {
   if (!dayjs(dato).isBefore(fom) && dayjs(dato).isBefore(tom)) {
@@ -66,11 +52,7 @@ export const SplittPeriodeModal = ({ fomDato, tomDato, submit, cancel }: Props) 
               <Detail>
                 <FormattedMessage id="DelOppPeriodeModalImpl.Periode" />
               </Detail>
-              <BodyShort size="small">
-                {`${dayjs(fomDato.toString()).format(DDMMYYYY_DATE_FORMAT)} - ${dayjs(tomDato.toString()).format(
-                  DDMMYYYY_DATE_FORMAT,
-                )}`}
-              </BodyShort>
+              <PeriodLabel size="small" dateStringFom={fomDato} dateStringTom={tomDato} />
             </VStack>
             <HStack justify="space-between">
               <Datepicker
@@ -81,7 +63,11 @@ export const SplittPeriodeModal = ({ fomDato, tomDato, submit, cancel }: Props) 
                 fromDate={dayjs(fomDato).toDate()}
                 toDate={dayjs(tomDato).toDate()}
               />
-              {dato && <div className={styles.dager}>{numberOfDaysAndWeeks.formattedString}</div>}
+              {dato && (
+                <BodyShort size="small" className={styles.dager}>
+                  {numberOfDaysAndWeeks.formattedString}
+                </BodyShort>
+              )}
             </HStack>
           </VStack>
         </Modal.Body>

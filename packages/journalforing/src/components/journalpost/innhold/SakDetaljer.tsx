@@ -3,8 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 import { TabsAddIcon } from '@navikt/aksel-icons';
 import { Button, CopyButton, Detail, HStack, Label, Tag, type TagProps, VStack } from '@navikt/ds-react';
-import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
-import dayjs from 'dayjs';
+import { dateFormat } from '@navikt/ft-utils';
 
 import { FagsakStatus, FamilieHendelseType } from '@navikt/fp-kodeverk';
 
@@ -49,12 +48,7 @@ const utledFamileihendelsetekst = (familieHendelseJf?: FamilieHendelse): ReactEl
     return null;
   }
   const tekstKode = finnFamilieHendelseTekstKode(familieHendelseJf.familihendelseType);
-  return (
-    <FormattedMessage
-      id={tekstKode}
-      values={{ famDato: dayjs(familieHendelseJf.familiehHendelseDato).format(DDMMYYYY_DATE_FORMAT) }}
-    />
-  );
+  return <FormattedMessage id={tekstKode} values={{ famDato: dateFormat(familieHendelseJf.familiehHendelseDato) }} />;
 };
 
 const lagEtikett = (fagsakStatus: string): ReactElement | null => {
@@ -91,7 +85,7 @@ export const SakDetaljer = ({ sak }: Props) => {
                 <Detail>
                   <FormattedMessage
                     id="Journal.Sak.OpprettetDato"
-                    values={{ opprettetDato: dayjs(sak.opprettetDato).format(DDMMYYYY_DATE_FORMAT) }}
+                    values={{ opprettetDato: dateFormat(sak.opprettetDato) }}
                   />
                 </Detail>
               </div>
@@ -100,7 +94,7 @@ export const SakDetaljer = ({ sak }: Props) => {
                   <Detail>
                     <FormattedMessage
                       id="Journal.Sak.FørsteUttak"
-                      values={{ førsteUttak: dayjs(sak.førsteUttaksdato).format(DDMMYYYY_DATE_FORMAT) }}
+                      values={{ førsteUttak: dateFormat(sak.førsteUttaksdato) }}
                     />
                   </Detail>
                 </div>

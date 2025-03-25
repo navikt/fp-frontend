@@ -1,8 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, HStack, Label, VStack } from '@navikt/ds-react';
-import { DDMMYYYY_DATE_FORMAT, formatCurrencyNoKr } from '@navikt/ft-utils';
-import dayjs from 'dayjs';
+import { formatCurrencyNoKr, periodFormat } from '@navikt/ft-utils';
 
 import styles from './simuleringSummary.module.css';
 
@@ -38,9 +37,7 @@ export const SimuleringSummary = ({
       )}
       {!ingenPerioderMedAvvik && (
         <VStack gap="4">
-          <Label size="small">
-            {`${dayjs(fom).format(DDMMYYYY_DATE_FORMAT)} - ${dayjs(tom).format(DDMMYYYY_DATE_FORMAT)}`}
-          </Label>
+          <Label size="small">{periodFormat(fom, tom)}</Label>
           <HStack gap="4">
             <BodyShort size="small">
               <FormattedMessage id="Simulering.etterbetaling" />:

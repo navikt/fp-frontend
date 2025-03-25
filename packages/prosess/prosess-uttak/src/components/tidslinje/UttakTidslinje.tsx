@@ -18,7 +18,7 @@ import {
 } from '@navikt/aksel-icons';
 import { BodyShort, Button, HStack, Label, Timeline, VStack } from '@navikt/ds-react';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
-import { calcDaysAndWeeks, DDMMYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { calcDaysAndWeeks, ISO_DATE_FORMAT, periodFormat } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import {
@@ -224,13 +224,8 @@ const finnLabelForPeriode = (
   behandlingStatusKode: string,
   intl: IntlShape,
 ): ReactElement => {
-  const periodeString = `${dayjs(periode.start).format(DDMMYY_DATE_FORMAT)} - ${dayjs(periode.end).format(
-    DDMMYY_DATE_FORMAT,
-  )}`;
-  const dager = calcDaysAndWeeks(
-    dayjs(periode.start).format(ISO_DATE_FORMAT),
-    dayjs(periode.end).format(ISO_DATE_FORMAT),
-  ).formattedString;
+  const periodeString = periodFormat(periode.start, periode.end);
+  const dager = calcDaysAndWeeks(periode.start, periode.end).formattedString;
 
   let periodeType = '';
   if (periode.periodeType !== '-' && periode.periodeType !== '') {

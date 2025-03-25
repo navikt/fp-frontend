@@ -1,8 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort } from '@navikt/ds-react';
-import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
-import dayjs from 'dayjs';
+import { dateFormat } from '@navikt/ft-utils';
 
 import { FamilieHendelseType } from '@navikt/fp-kodeverk';
 import type { FagsakHendelse } from '@navikt/fp-types';
@@ -27,7 +26,7 @@ export const VisittkortBarnInfoOmsorgPanel = ({ familiehendelse }: Props) => {
     <BodyShort>
       <FormattedMessage
         id={erAdopsjon ? adopsjonTekstkode : foreldreansvarTekstkode}
-        values={{ antall: antallBarn, dato: dayjs(hendelseDato).format(DDMMYYYY_DATE_FORMAT) }}
+        values={{ antall: antallBarn, dato: hendelseDato ? dateFormat(hendelseDato) : '-' }}
       />
     </BodyShort>
   );
