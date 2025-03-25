@@ -16,7 +16,7 @@ const {
   ArbeidsforholdetSkalBenyttesUtenInntektsmelding,
 } = composeStories(stories);
 
-describe('<ArbeidsforholdFaktaIndex>', () => {
+describe('ArbeidsforholdFaktaIndex', () => {
   it('skal vise at arbeidsforholdet er oppdatert og behandlingen har fortsatt uten IM', async () => {
     render(<ArbeidsforholdetSkalBenyttesUtenInntektsmelding />);
 
