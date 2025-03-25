@@ -84,7 +84,8 @@ export const VedtakEsProsessStegInitPanel = () => {
   );
 
   const { mutateAsync: mellomlagreBrevOverstyring } = useMutation({
-    mutationFn: (html: string | null) => api.mellomlagreBrevOverstyring({ behandlingUuid: behandling.uuid, html }),
+    mutationFn: (redigertInnhold: string | null) =>
+      api.mellomlagreBrevOverstyring({ behandlingUuid: behandling.uuid, redigertInnhold }),
   });
 
   const { mutate: forhåndsvis } = useMutation({

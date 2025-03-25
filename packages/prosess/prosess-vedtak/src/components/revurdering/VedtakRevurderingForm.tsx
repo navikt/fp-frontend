@@ -229,7 +229,7 @@ interface Props {
   oppgaver?: Oppgave[];
   brevOverstyring?: BrevOverstyring;
   refetchBrevOverstyring: () => void;
-  mellomlagreBrevOverstyring: (html: string | null) => Promise<void>;
+  mellomlagreBrevOverstyring: (redigertInnhold: string | null) => Promise<void>;
 }
 
 export const VedtakRevurderingForm = ({

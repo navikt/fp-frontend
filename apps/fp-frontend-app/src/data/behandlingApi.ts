@@ -624,12 +624,13 @@ const getFjernVergeV1 = (links: ApiLink[]) => (params: { behandlingUuid: string;
     json: params,
   });
 
-const getMellomlagreBrevOverstyring = (links: ApiLink[]) => (params: { behandlingUuid: string; html: string | null }) =>
-  kyExtended
-    .post<string>(getUrlFromRel('MELLOMLAGRE_BREV_OVERSTYRING', links), {
-      json: params,
-    })
-    .json<void>();
+const getMellomlagreBrevOverstyring =
+  (links: ApiLink[]) => (params: { behandlingUuid: string; redigertInnhold: string | null }) =>
+    kyExtended
+      .post<string>(getUrlFromRel('MELLOMLAGRE_BREV_OVERSTYRING', links), {
+        json: params,
+      })
+      .json<void>();
 
 const getFjernVergeV2 = (links: ApiLink[]) => () => kyExtended.post(getUrlFromRel('VERGE_FJERN_V2', links));
 

@@ -14,7 +14,7 @@ import { useEditorJs } from './useEditorJs';
 interface Props {
   brevOverstyring: BrevOverstyring;
   refetchBrevOverstyring: () => void;
-  mellomlagreBrevOverstyring: (html: string | null) => Promise<void>;
+  mellomlagreBrevOverstyring: (redigertInnhold: string | null) => Promise<void>;
   forhåndsvisBrev: (data: ForhandsvisData) => void;
   setVisFritekstRedigeringModal: (visRedigering: boolean) => void;
 }

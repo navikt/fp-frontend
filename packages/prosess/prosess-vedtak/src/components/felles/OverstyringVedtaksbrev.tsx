@@ -15,7 +15,7 @@ interface Props {
   forhåndsvisBrev: (data: ForhandsvisData) => void;
   brevOverstyring?: BrevOverstyring;
   refetchBrevOverstyring: () => void;
-  mellomlagreBrevOverstyring: (html: string | null) => Promise<void>;
+  mellomlagreBrevOverstyring: (redigertInnhold: string | null) => Promise<void>;
   setVisForkastOverstyringModal: (visForkastOverstyring: boolean) => void;
 }
 

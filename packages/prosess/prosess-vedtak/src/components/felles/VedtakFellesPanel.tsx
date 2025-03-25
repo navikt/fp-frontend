@@ -72,7 +72,7 @@ interface Props {
   oppgaver?: Oppgave[];
   brevOverstyring?: BrevOverstyring;
   refetchBrevOverstyring: () => void;
-  mellomlagreBrevOverstyring: (html: string | null) => Promise<void>;
+  mellomlagreBrevOverstyring: (redigertInnhold: string | null) => Promise<void>;
   setHarOverstyrtVedtaksbrev: (harOverstyrtVedtaksbrev: boolean) => void;
   harOverstyrtVedtaksbrev: boolean;
 }

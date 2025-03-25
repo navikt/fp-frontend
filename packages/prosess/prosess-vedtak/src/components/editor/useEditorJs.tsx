@@ -26,7 +26,7 @@ const lagRedigerbartInnholdHtml = (redigerbartInnhold: string, readonlyFooter: s
 export const useEditorJs = (
   editorHolderId: string,
   brevOverstyring: BrevOverstyring,
-  mellomlagreBrevOverstyring: (html: string | null) => Promise<void>,
+  mellomlagreBrevOverstyring: (redigertInnhold: string | null) => Promise<void>,
   forhåndsvisBrev: (data: ForhandsvisData) => void,
 ) => {
   const intl = useIntl();
