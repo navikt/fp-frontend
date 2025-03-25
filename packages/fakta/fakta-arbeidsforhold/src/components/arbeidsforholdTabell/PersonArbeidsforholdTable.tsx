@@ -79,34 +79,31 @@ export const PersonArbeidsforholdTable = ({
 }: Props) => {
   const intl = useIntl();
 
-  if (alleArbeidsforhold.length === 0) {
-    return <IngenArbeidsforholdRegistrert />;
-  }
-
   return (
     <Table>
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell scope="col">
-            <FormattedMessage key={1} id="PersonArbeidsforholdTable.Arbeidsforhold" values={{ br: <br /> }} />
+            <FormattedMessage key={1} id="PersonArbeidsforholdTable.Arbeidsforhold" values={{ br: Br }} />
           </Table.HeaderCell>
           <Table.HeaderCell scope="col">
-            <FormattedMessage key={2} id="PersonArbeidsforholdTable.Periode" values={{ br: <br /> }} />
+            <FormattedMessage key={2} id="PersonArbeidsforholdTable.Periode" values={{ br: Br }} />
           </Table.HeaderCell>
           <Table.HeaderCell scope="col">
-            <FormattedMessage key={3} id="PersonArbeidsforholdTable.Kilde" values={{ br: <br /> }} />
+            <FormattedMessage key={3} id="PersonArbeidsforholdTable.Kilde" values={{ br: Br }} />
           </Table.HeaderCell>
           <Table.HeaderCell scope="col">
-            <FormattedMessage key={4} id="PersonArbeidsforholdTable.Stillingsprosent" values={{ br: <br /> }} />
+            <FormattedMessage key={4} id="PersonArbeidsforholdTable.Stillingsprosent" values={{ br: Br }} />
           </Table.HeaderCell>
           <Table.HeaderCell scope="col">
-            <FormattedMessage key={5} id="PersonArbeidsforholdTable.MottattDato" values={{ br: <br /> }} />
+            <FormattedMessage key={5} id="PersonArbeidsforholdTable.MottattDato" values={{ br: Br }} />
           </Table.HeaderCell>
           <Table.HeaderCell scope="col" />
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {alleArbeidsforhold?.map(a => {
+        {alleArbeidsforhold.length === 0 && <IngenArbeidsforholdRegistrert />}
+        {alleArbeidsforhold.map(a => {
           const stillingsprosent =
             a.stillingsprosent !== undefined && a.stillingsprosent !== null ? `${a.stillingsprosent.toFixed(2)} %` : '';
           const navn = utledNavn(a, alleArbeidsforhold, arbeidsgiverOpplysningerPerId);
@@ -123,6 +120,7 @@ export const PersonArbeidsforholdTable = ({
               </Table.DataCell>
               <Table.DataCell>
                 <BodyShort size="small">
+                  formaterPeriode(a.fom, a.tom)
                   <PeriodLabel dateStringFom={a.fom} dateStringTom={a.tom !== TIDENES_ENDE ? a.tom : undefined} />
                 </BodyShort>
               </Table.DataCell>
@@ -155,3 +153,5 @@ export const PersonArbeidsforholdTable = ({
     </Table>
   );
 };
+
+const Br = <br key="break-line" />;
