@@ -9,27 +9,6 @@ import type { AoIArbeidsforhold } from '@navikt/fp-types';
 import { BekreftetPermisjonStatus } from '../../kodeverk/bekreftetPermisjonStatus';
 import { PermisjonPeriode } from './PermisjonPeriode';
 
-const finnOverstyrtTom = (arbeidsforhold: AoIArbeidsforhold): string | undefined => {
-  if (arbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.BRUK_MED_OVERSTYRT_PERIODE) {
-    return arbeidsforhold.tom;
-  }
-  const skalBrukeMedJustertPeriode =
-    arbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.BRUK_MED_OVERSTYRT_PERIODE;
-  return skalBrukeMedJustertPeriode ? arbeidsforhold.tom : undefined;
-};
-
-const utledAktivtArbeidsforholdLabel = (arbeidsforhold: AoIArbeidsforhold): string => {
-  if (arbeidsforhold.permisjonOgMangel) {
-    return 'ArbeidsforholdDetail.ArbeidsforholdErAktivtOgHarPermisjonMenSoekerErIkkePermisjon';
-  }
-  if (
-    arbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER
-  ) {
-    return 'ArbeidsforholdDetail.OppdaterArbeidsforhold';
-  }
-  return 'ArbeidsforholdDetail.ArbeidsforholdErAktivt';
-};
-
 interface Props {
   valgtArbeidsforhold: AoIArbeidsforhold;
 }
@@ -74,10 +53,7 @@ export const ArbeidsforholdDetail = ({ valgtArbeidsforhold }: Props) => {
               <Label size="small">
                 <FormattedMessage id="ArbeidsforholdDetail.ArbeidsforholdetAktivTomDato" />
               </Label>
-              <BodyShort size="small">
-                {overstyrtTom && <DateLabel dateString={overstyrtTom} />}
-                {!overstyrtTom && '-'}
-              </BodyShort>
+              <BodyShort size="small">{overstyrtTom ? <DateLabel dateString={overstyrtTom} /> : '-'}</BodyShort>
             </div>
           </>
         )}
@@ -131,4 +107,25 @@ export const ArbeidsforholdDetail = ({ valgtArbeidsforhold }: Props) => {
       </VStack>
     </FaktaGruppe>
   );
+};
+
+const finnOverstyrtTom = (arbeidsforhold: AoIArbeidsforhold): string | undefined => {
+  if (arbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.BRUK_MED_OVERSTYRT_PERIODE) {
+    return arbeidsforhold.tom;
+  }
+  const skalBrukeMedJustertPeriode =
+    arbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.BRUK_MED_OVERSTYRT_PERIODE;
+  return skalBrukeMedJustertPeriode ? arbeidsforhold.tom : undefined;
+};
+
+const utledAktivtArbeidsforholdLabel = (arbeidsforhold: AoIArbeidsforhold): string => {
+  if (arbeidsforhold.permisjonOgMangel) {
+    return 'ArbeidsforholdDetail.ArbeidsforholdErAktivtOgHarPermisjonMenSoekerErIkkePermisjon';
+  }
+  if (
+    arbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER
+  ) {
+    return 'ArbeidsforholdDetail.OppdaterArbeidsforhold';
+  }
+  return 'ArbeidsforholdDetail.ArbeidsforholdErAktivt';
 };

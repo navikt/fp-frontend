@@ -12,17 +12,108 @@ import { IngenArbeidsforholdRegistrert } from './IngenArbeidsforholdRegistrert';
 
 import styles from './personArbeidsforholdTable.module.css';
 
+interface Props {
+  alleArbeidsforhold: AoIArbeidsforhold[];
+  selectedId?: string;
+  selectArbeidsforholdCallback: (arbeidsforhold: AoIArbeidsforhold) => void;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  inntektsmeldinger: Inntektsmelding[];
+}
+
+export const PersonArbeidsforholdTable = ({
+  alleArbeidsforhold,
+  selectedId,
+  selectArbeidsforholdCallback,
+  arbeidsgiverOpplysningerPerId,
+  inntektsmeldinger,
+}: Props) => {
+  const intl = useIntl();
+
+  return (
+    <Table>
+      <Table.Header>
+        <Table.Row>
+          <Table.HeaderCell scope="col">
+            <FormattedMessage id="PersonArbeidsforholdTable.Arbeidsforhold" values={{ br: Br }} />
+          </Table.HeaderCell>
+          <Table.HeaderCell scope="col">
+            <FormattedMessage id="PersonArbeidsforholdTable.Periode" values={{ br: Br }} />
+          </Table.HeaderCell>
+          <Table.HeaderCell scope="col">
+            <FormattedMessage id="PersonArbeidsforholdTable.Kilde" values={{ br: Br }} />
+          </Table.HeaderCell>
+          <Table.HeaderCell scope="col">
+            <FormattedMessage id="PersonArbeidsforholdTable.Stillingsprosent" values={{ br: Br }} />
+          </Table.HeaderCell>
+          <Table.HeaderCell scope="col">
+            <FormattedMessage id="PersonArbeidsforholdTable.MottattDato" values={{ br: Br }} />
+          </Table.HeaderCell>
+          <Table.HeaderCell scope="col" />
+        </Table.Row>
+      </Table.Header>
+      <Table.Body>
+        {alleArbeidsforhold.length === 0 && <IngenArbeidsforholdRegistrert />}
+        {alleArbeidsforhold.map(a => {
+          const stillingsprosent =
+            a.stillingsprosent !== undefined && a.stillingsprosent !== null ? `${a.stillingsprosent.toFixed(2)} %` : '';
+          const navn = utledNavn(a, alleArbeidsforhold, arbeidsgiverOpplysningerPerId);
+          const mottattDato = inntektsmeldinger.find(im => erMatch(a, im))?.motattDato;
+          return (
+            <Table.Row
+              key={utledNøkkel(a, arbeidsgiverOpplysningerPerId)}
+              onMouseDown={() => selectArbeidsforholdCallback(a)}
+              onKeyDown={() => selectArbeidsforholdCallback(a)}
+              selected={a.arbeidsgiverIdent === selectedId}
+            >
+              <Table.DataCell>
+                <BodyShort size="small">{decodeHtmlEntity(navn)}</BodyShort>
+              </Table.DataCell>
+              <Table.DataCell>
+                <PeriodLabel
+                  size="small"
+                  dateStringFom={a.fom}
+                  dateStringTom={a.tom !== TIDENES_ENDE ? a.tom : undefined}
+                />
+              </Table.DataCell>
+              <Table.DataCell>
+                <BodyShort size="small">{finnKilde(a, intl)}</BodyShort>
+              </Table.DataCell>
+              <Table.DataCell>
+                <BodyShort size="small">{stillingsprosent}</BodyShort>
+              </Table.DataCell>
+              <Table.DataCell>
+                {mottattDato && (
+                  <BodyShort size="small">
+                    <DateLabel dateString={mottattDato} />
+                  </BodyShort>
+                )}
+              </Table.DataCell>
+              <Table.DataCell>
+                {(a.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.BRUK ||
+                  a.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING) && (
+                  <StarFillIcon
+                    className={styles.image}
+                    title={intl.formatMessage({ id: 'PersonArbeidsforholdTable.ErIBruk' })}
+                  />
+                )}
+              </Table.DataCell>
+            </Table.Row>
+          );
+        })}
+      </Table.Body>
+    </Table>
+  );
+};
+
+const Br = <br key="break-line" />;
+
 const finnKilde = (arbeidsforhold: AoIArbeidsforhold, intl: IntlShape) => {
-  if (
-    arbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING
-  ) {
+  if (arbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING)
     return intl.formatMessage({ id: 'PersonArbeidsforholdTable.Inntektsmelding' });
-  }
-  if (
-    arbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER
-  ) {
+
+  if (arbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER)
     return intl.formatMessage({ id: 'PersonArbeidsforholdTable.Saksbehandler' });
-  }
+
   return intl.formatMessage({ id: 'PersonArbeidsforholdTable.AaRegisteret' });
 };
 
@@ -54,104 +145,10 @@ const utledNavn = (
     : `${navn}(${arbeidsgiverOpplysninger.identifikator})`;
 };
 
-export const utledNøkkel = (
+const utledNøkkel = (
   arbeidsforhold: AoIArbeidsforhold,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 ): string => {
   const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverIdent];
   return `${arbeidsforhold.eksternArbeidsforholdId}${arbeidsforhold.arbeidsgiverIdent}${arbeidsgiverOpplysninger.identifikator}`;
-};
-
-interface Props {
-  alleArbeidsforhold: AoIArbeidsforhold[];
-  selectedId?: string;
-  selectArbeidsforholdCallback: (arbeidsforhold: AoIArbeidsforhold) => void;
-  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  inntektsmeldinger: Inntektsmelding[];
-}
-
-export const PersonArbeidsforholdTable = ({
-  alleArbeidsforhold,
-  selectedId,
-  selectArbeidsforholdCallback,
-  arbeidsgiverOpplysningerPerId,
-  inntektsmeldinger,
-}: Props) => {
-  const intl = useIntl();
-
-  if (alleArbeidsforhold.length === 0) {
-    return <IngenArbeidsforholdRegistrert />;
-  }
-
-  return (
-    <Table>
-      <Table.Header>
-        <Table.Row>
-          <Table.HeaderCell scope="col">
-            <FormattedMessage key={1} id="PersonArbeidsforholdTable.Arbeidsforhold" values={{ br: <br /> }} />
-          </Table.HeaderCell>
-          <Table.HeaderCell scope="col">
-            <FormattedMessage key={2} id="PersonArbeidsforholdTable.Periode" values={{ br: <br /> }} />
-          </Table.HeaderCell>
-          <Table.HeaderCell scope="col">
-            <FormattedMessage key={3} id="PersonArbeidsforholdTable.Kilde" values={{ br: <br /> }} />
-          </Table.HeaderCell>
-          <Table.HeaderCell scope="col">
-            <FormattedMessage key={4} id="PersonArbeidsforholdTable.Stillingsprosent" values={{ br: <br /> }} />
-          </Table.HeaderCell>
-          <Table.HeaderCell scope="col">
-            <FormattedMessage key={5} id="PersonArbeidsforholdTable.MottattDato" values={{ br: <br /> }} />
-          </Table.HeaderCell>
-          <Table.HeaderCell scope="col" />
-        </Table.Row>
-      </Table.Header>
-      <Table.Body>
-        {alleArbeidsforhold?.map(a => {
-          const stillingsprosent =
-            a.stillingsprosent !== undefined && a.stillingsprosent !== null ? `${a.stillingsprosent.toFixed(2)} %` : '';
-          const navn = utledNavn(a, alleArbeidsforhold, arbeidsgiverOpplysningerPerId);
-          const mottattDato = inntektsmeldinger.find(im => erMatch(a, im))?.motattDato;
-          return (
-            <Table.Row
-              key={utledNøkkel(a, arbeidsgiverOpplysningerPerId)}
-              onMouseDown={() => selectArbeidsforholdCallback(a)}
-              onKeyDown={() => selectArbeidsforholdCallback(a)}
-              selected={a.arbeidsgiverIdent === selectedId}
-            >
-              <Table.DataCell>
-                <BodyShort size="small">{decodeHtmlEntity(navn)}</BodyShort>
-              </Table.DataCell>
-              <Table.DataCell>
-                <BodyShort size="small">
-                  <PeriodLabel dateStringFom={a.fom} dateStringTom={a.tom !== TIDENES_ENDE ? a.tom : undefined} />
-                </BodyShort>
-              </Table.DataCell>
-              <Table.DataCell>
-                <BodyShort size="small">{finnKilde(a, intl)}</BodyShort>
-              </Table.DataCell>
-              <Table.DataCell>
-                <BodyShort size="small">{stillingsprosent}</BodyShort>
-              </Table.DataCell>
-              <Table.DataCell>
-                {mottattDato && (
-                  <BodyShort size="small">
-                    <DateLabel dateString={mottattDato} />
-                  </BodyShort>
-                )}
-              </Table.DataCell>
-              <Table.DataCell>
-                {(a.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.BRUK ||
-                  a.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING) && (
-                  <StarFillIcon
-                    className={styles.image}
-                    title={intl.formatMessage({ id: 'PersonArbeidsforholdTable.ErIBruk' })}
-                  />
-                )}
-              </Table.DataCell>
-            </Table.Row>
-          );
-        })}
-      </Table.Body>
-    </Table>
-  );
 };
