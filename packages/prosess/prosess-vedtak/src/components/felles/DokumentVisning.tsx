@@ -4,16 +4,17 @@ import { FileIcon } from '@navikt/aksel-icons';
 import { BodyShort, HStack, Link } from '@navikt/ds-react';
 
 import { hentDokumentLenke } from '@navikt/fp-konstanter';
-import type { Fagsak, OppgaveDokument } from '@navikt/fp-types';
+import type { OppgaveDokument } from '@navikt/fp-types';
+import { usePanelDataContext } from '@navikt/fp-utils';
 
 import styles from './dokumentVisning.module.css';
 
 interface Props {
   dokument: OppgaveDokument;
-  fagsak: Fagsak;
 }
 
-export const DokumentVisning = ({ dokument, fagsak }: Props) => {
+export const DokumentVisning = ({ dokument }: Props) => {
+  const { fagsak } = usePanelDataContext();
   const intl = useIntl();
 
   return (

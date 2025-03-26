@@ -3,6 +3,7 @@ export type Oppgave = {
   nyesteBeskrivelse?: Beskrivelse;
   eldreBeskrivelser: Beskrivelse[];
   dokumenter: OppgaveDokument[];
+  beskrivelse?: string;
 };
 
 export type Beskrivelse = {

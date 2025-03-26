@@ -5,7 +5,6 @@ import { ChevronDownIcon, ChevronUpIcon } from '@navikt/aksel-icons';
 import { Button, VStack } from '@navikt/ds-react';
 
 import type { OppgaveDokument } from '@navikt/fp-types';
-import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { DokumentVisning } from './DokumentVisning.tsx';
 
@@ -17,11 +16,12 @@ interface Props {
 
 export const Dokumenter = ({ dokumenter }: Props) => {
   const intl = useIntl();
-  const { fagsak } = usePanelDataContext();
 
   const [erDokumenterSkjult, setErDokumenterSkjult] = useState(true);
 
-  return (
+  return dokumenter.length == 1 ? (
+    <DokumentVisning dokument={dokumenter[0]} />
+  ) : (
     <VStack gap="2">
       <Button
         className={styles.button}
@@ -37,9 +37,7 @@ export const Dokumenter = ({ dokumenter }: Props) => {
       </Button>
       {!erDokumenterSkjult && (
         <VStack gap="1" className={styles.andreDokumenter}>
-          {dokumenter?.map(dokument => (
-            <DokumentVisning key={dokument.dokumentId} dokument={dokument} fagsak={fagsak} />
-          ))}
+          {dokumenter?.map(dokument => <DokumentVisning key={dokument.dokumentId} dokument={dokument} />)}
         </VStack>
       )}
     </VStack>

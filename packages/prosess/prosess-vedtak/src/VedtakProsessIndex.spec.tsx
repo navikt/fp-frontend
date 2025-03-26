@@ -275,7 +275,7 @@ describe('<VedtakProsessIndex>', () => {
     expect(screen.getByText('Type')).toBeInTheDocument();
     expect(screen.getByText('Beskrivelse')).toBeInTheDocument();
     expect(screen.getAllByText('Vurder konsekvens for ytelse')).toHaveLength(2);
-    expect(screen.getAllByText('Vurder dokument')).toHaveLength(2);
+    expect(screen.getAllByText('Vurder dokument')).toHaveLength(3);
     expect(screen.getByText('VL: Se sto mottatt 24.02.25')).toBeInTheDocument();
     expect(screen.getByText('--- 19.03.2025 11:24 F_Z990245 E_Z990245 (Z990245, 0219) ---')).toBeInTheDocument();
     expect(
@@ -293,9 +293,11 @@ describe('<VedtakProsessIndex>', () => {
     expect(screen.getByText('Vis dokumenter (3)')).toBeInTheDocument();
     await userEvent.click(screen.getByText('Vis dokumenter (3)'));
     expect(screen.getByText('Skjul dokumenter (3)')).toBeInTheDocument();
-    expect(screen.getByText('Dokumentasjon på at mor studerer på heltid')).toBeInTheDocument();
+    expect(screen.getByText('Dokumentasjon av mors deltakelse i kvalifiseringsprogrammet')).toBeInTheDocument();
     expect(screen.getByText('Dokumentasjon på reiser til og fra Norge')).toBeInTheDocument();
     expect(screen.getByText('Ettersendelse til søknad om foreldrepenger ved fødsel')).toBeInTheDocument();
+    expect(screen.getByText('VL: Bekreftelse fra studiested/skole')).toBeInTheDocument();
+    expect(screen.getByText('Dokumentasjon på at mor studerer på heltid')).toBeInTheDocument();
     expect(screen.getByText('--- 19.01.2025 11:24 F_Z990245 E_Z990245 (Z990245, 0219) ---')).toBeInTheDocument();
     expect(
       screen.getByText(
@@ -325,7 +327,7 @@ describe('<VedtakProsessIndex>', () => {
     ).toBeInTheDocument();
 
     const filIkoner = screen.getAllByLabelText('Åpne dokument');
-    expect(filIkoner).toHaveLength(5);
+    expect(filIkoner).toHaveLength(6);
 
     await userEvent.click(screen.getByText('Til godkjenning'));
 

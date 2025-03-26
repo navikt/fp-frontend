@@ -305,18 +305,30 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
         dokumenter: [
           {
             journalpostId: '123',
-            dokumentId: '456',
-            tittel: 'Dokumentasjon på at mor studerer på heltid',
+            dokumentId: '321',
+            tittel: 'Dokumentasjon av mors deltakelse i kvalifiseringsprogrammet',
+          },
+          {
+            journalpostId: '123',
+            dokumentId: '987',
+            tittel: 'Dokumentasjon på reiser til og fra Norge',
           },
           {
             journalpostId: '123',
             dokumentId: '678',
             tittel: 'Ettersendelse til søknad om foreldrepenger ved fødsel',
           },
+        ],
+      },
+      {
+        oppgavetype: OppgaveType.VUR_DOKUMENT,
+        nyesteBeskrivelse: { kommentarer: ['VL: Bekreftelse fra studiested/skole' ]},
+        eldreBeskrivelser: [],
+        dokumenter: [
           {
             journalpostId: '123',
-            dokumentId: '987',
-            tittel: 'Dokumentasjon på reiser til og fra Norge',
+            dokumentId: '456',
+            tittel: 'Dokumentasjon på at mor studerer på heltid',
           },
         ],
       },
