@@ -10,7 +10,7 @@ const {
   FormkravPanelForAksjonspunktKaValgtBehandling,
 } = composeStories(stories);
 
-describe('<FormkravProsessIndex>', () => {
+describe('FormkravProsessIndex', () => {
   it('skal fylle ut og bekrefte skjema for NFP', async () => {
     const lagre = vi.fn();
 
@@ -115,7 +115,7 @@ describe('<FormkravProsessIndex>', () => {
     expect(await screen.findByText('Vurder formkrav')).toBeInTheDocument();
 
     expect(screen.getByText('Vedtaket som er påklagd')).toBeInTheDocument();
-    expect(screen.getByText('Førstegangsbehandling 02.08.17 00:54')).toBeInTheDocument();
+    expect(screen.getByText('Førstegangsbehandling 02.08.2017 - 00:54')).toBeInTheDocument();
 
     expect(screen.getByText('Er klager part i saken?')).toBeInTheDocument();
     expect(screen.getAllByText('Ja')).toHaveLength(2);

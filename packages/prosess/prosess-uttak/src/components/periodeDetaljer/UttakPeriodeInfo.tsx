@@ -4,8 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { BodyShort, Detail, HStack, Label, VStack } from '@navikt/ds-react';
 import { CheckboxField, NumberField, SelectField } from '@navikt/ft-form-hooks';
 import { hasValidDecimal, maxValue, notDash, required } from '@navikt/ft-form-validators';
-import { calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
-import dayjs from 'dayjs';
+import { calcDaysAndWeeks, dateFormat, periodFormat } from '@navikt/ft-utils';
 
 import {
   KodeverkType,
@@ -231,15 +230,7 @@ export const UttakPeriodeInfo = ({
       )}
       <HStack gap="10">
         <div>
-          <Label size="small">
-            <FormattedMessage
-              id="UttakActivity.PeriodeData.Periode"
-              values={{
-                fomVerdi: dayjs(valgtPeriode.fom.toString()).format(DDMMYYYY_DATE_FORMAT),
-                tomVerdi: dayjs(valgtPeriode.tom.toString()).format(DDMMYYYY_DATE_FORMAT),
-              }}
-            />
-          </Label>
+          <Label size="small">{periodFormat(valgtPeriode.fom, valgtPeriode.tom)}</Label>
           {valgtPeriode.oppholdÅrsak === '-' && (
             <BodyShort>{calcDaysAndWeeks(valgtPeriode.fom, valgtPeriode.tom).formattedString}</BodyShort>
           )}
@@ -284,10 +275,7 @@ export const UttakPeriodeInfo = ({
       )}
       {valgtPeriode.mottattDato && (
         <BodyShort>
-          <FormattedMessage
-            id="UttakInfo.MottattDato"
-            values={{ dato: dayjs(valgtPeriode.mottattDato).format(DDMMYYYY_DATE_FORMAT) }}
-          />
+          <FormattedMessage id="UttakInfo.MottattDato" values={{ dato: dateFormat(valgtPeriode.mottattDato) }} />
         </BodyShort>
       )}
     </VStack>

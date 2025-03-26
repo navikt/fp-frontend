@@ -1,19 +1,13 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Link, Table } from '@navikt/ds-react';
-import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import dayjs from 'dayjs';
+import { periodFormat } from '@navikt/ft-utils';
 
 import type { RelatertTilgrensedYtelse } from '@navikt/fp-types';
 
 interface Props {
   ytelser?: RelatertTilgrensedYtelse[];
 }
-
-const formatDateToDDMMYYYY = (date: string): string => {
-  const parsedDate = dayjs(date, ISO_DATE_FORMAT, true);
-  return parsedDate.isValid() ? parsedDate.format(DDMMYYYY_DATE_FORMAT) : date;
-};
 
 /**
  * PersonYtelserTable
@@ -44,18 +38,17 @@ export const PersonYtelserTable = ({ ytelser }: Props) => {
         ];
       }
 
-      return ytelse.tilgrensendeYtelserListe.map((ytelseInfo, innerIndex) => {
-        const tilDato = formatDateToDDMMYYYY(ytelseInfo.periodeTilDato) || '';
-        const fraDato = formatDateToDDMMYYYY(ytelseInfo.periodeFraDato) || '';
-
-        return {
-          navn: innerIndex === 0 ? ytelseNavn : '',
-          periode: `${fraDato} - ${tilDato}`,
-          status: ytelseInfo.statusNavn,
-          saksnummer: ytelseInfo.saksNummer,
-          skalViseLenke,
-        };
-      });
+      return ytelse.tilgrensendeYtelserListe.map(
+        ({ statusNavn, saksNummer, periodeFraDato, periodeTilDato }, innerIndex) => {
+          return {
+            navn: innerIndex === 0 ? ytelseNavn : '',
+            periode: periodFormat(periodeFraDato, periodeTilDato),
+            status: statusNavn,
+            saksnummer: saksNummer,
+            skalViseLenke,
+          };
+        },
+      );
     })
     .reduce((allRows, rows) => allRows.concat(rows), []);
 

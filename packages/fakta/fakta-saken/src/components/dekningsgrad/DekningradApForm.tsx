@@ -5,7 +5,7 @@ import { BodyShort, Box, Button, Heading, HStack, VStack } from '@navikt/ds-reac
 import { Form, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { AksjonspunktBox } from '@navikt/ft-ui-komponenter';
-import dayjs from 'dayjs';
+import { dateFormat } from '@navikt/ft-utils';
 
 import { AksjonspunktKode, AksjonspunktStatus, NavBrukerKjonn } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Fagsak, Soknad } from '@navikt/fp-types';
@@ -56,6 +56,7 @@ export const DekningradApForm = ({
       begrunnelse: aksjonspunkt.begrunnelse ?? '',
     },
   });
+  const { annenPart: dgAnnenpart, søker: dgSøker } = søknad.oppgittFordeling.dekningsgrader;
 
   const erAksjonspunktApent = aksjonspunkt.status === AksjonspunktStatus.OPPRETTET;
   const erIkkeGodkjentAvBeslutter = !!alleMerknaderFraBeslutter[aksjonspunkt.definisjon]?.notAccepted;
@@ -85,17 +86,16 @@ export const DekningradApForm = ({
                         <FormattedMessage
                           id="DekningradApForm.SøknadSendt"
                           values={{
-                            dato: dayjs(søknad.oppgittFordeling.dekningsgrader.søker.søknadsdato).format('D MMMM YYYY'),
+                            dato: dateFormat(dgSøker.søknadsdato, {
+                              month: 'long',
+                            }),
                           }}
                         />
                       </BodyShort>
                     </VStack>
                   </HStack>
                   <Heading size="xsmall">
-                    <FormattedMessage
-                      id="DekningradApForm.HarValgt"
-                      values={{ dekningsgrad: søknad.oppgittFordeling.dekningsgrader.søker.dekningsgrad }}
-                    />
+                    <FormattedMessage id="DekningradApForm.HarValgt" values={{ dekningsgrad: dgSøker.dekningsgrad }} />
                   </Heading>
                 </VStack>
               </Box>
@@ -105,14 +105,14 @@ export const DekningradApForm = ({
                     <HStack gap="4" align="center">
                       {finnIkonForKjønn(fagsak.annenPart.kjønn)}
                       <VStack gap="0">
-                        <BodyShort size="medium">{fagsak.annenPart?.navn} </BodyShort>
+                        <BodyShort size="medium">{fagsak.annenPart.navn} </BodyShort>
                         <BodyShort size="small">
                           <FormattedMessage
                             id="DekningradApForm.SøknadSendt"
                             values={{
-                              dato: dayjs(søknad.oppgittFordeling.dekningsgrader.annenPart.søknadsdato).format(
-                                'D MMMM YYYY',
-                              ),
+                              dato: dateFormat(dgAnnenpart.søknadsdato, {
+                                month: 'long',
+                              }),
                             }}
                           />
                         </BodyShort>
@@ -121,7 +121,7 @@ export const DekningradApForm = ({
                     <Heading size="xsmall">
                       <FormattedMessage
                         id="DekningradApForm.HarValgt"
-                        values={{ dekningsgrad: søknad.oppgittFordeling.dekningsgrader.annenPart.dekningsgrad }}
+                        values={{ dekningsgrad: dgAnnenpart.dekningsgrad }}
                       />
                     </Heading>
                   </VStack>

@@ -22,7 +22,7 @@ const meta = {
       setArgs(oldArgs => ({
         ...oldArgs,
         notater: oldArgs.notater.concat({
-          opprettetTidspunkt: dayjs().format('YYYY-MM-DD HH:mm'),
+          opprettetTidspunkt: dayjs().format(),
           opprettetAv: 'Saksbehandler Espen',
           notat: params.notat,
         }),

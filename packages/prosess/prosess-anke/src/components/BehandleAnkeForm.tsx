@@ -1,14 +1,11 @@
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Heading, Label, VStack } from '@navikt/ds-react';
-import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import dayjs from 'dayjs';
+import { dateFormat } from '@navikt/ft-utils';
 
 import { AnkeVurdering as AnkeVurderingKodeverk, AnkeVurderingOmgjoer, KodeverkType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, AnkeVurdering, BehandlingAppKontekst } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
-
-const formatDate = (date: string): string => (date ? dayjs(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
 
 const IKKE_PAA_ANKET_BEHANDLING_ID = '0';
 
@@ -29,7 +26,7 @@ const formatBehandlingId = (
   const behandlingStatuser = alleKodeverk[KodeverkType.BEHANDLING_STATUS];
 
   return info
-    ? `${formatDate(info.opprettet)} - ${behandlingTyper.find(bt => bt.kode === info.type)?.navn} ` +
+    ? `${dateFormat(info.opprettet)} - ${behandlingTyper.find(bt => bt.kode === info.type)?.navn} ` +
         `- ${behandlingStatuser.find(bs => bs.kode === info.status)?.navn}`
     : '';
 };

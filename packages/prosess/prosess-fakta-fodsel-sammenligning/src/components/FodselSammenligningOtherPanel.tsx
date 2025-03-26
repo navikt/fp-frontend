@@ -1,12 +1,9 @@
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Heading, HStack, Label, VStack } from '@navikt/ds-react';
-import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import dayjs from 'dayjs';
+import { dateFormat } from '@navikt/ft-utils';
 
 import type { Soknad } from '@navikt/fp-types';
-
-const formatDate = (date: string): string => (date ? dayjs(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
 
 interface Props {
   soknad: Soknad;
@@ -20,15 +17,15 @@ export const getTerminEllerFodselsdato = (
   termindato?: string,
 ): string | null => {
   if (hasSoknad && Object.keys(fødselsdatoerSoknad).length > 0) {
-    return formatDate(Object.values(fødselsdatoerSoknad)[0]);
+    return dateFormat(Object.values(fødselsdatoerSoknad)[0]);
   }
   if (termindato) {
-    return formatDate(termindato);
+    return dateFormat(termindato);
   }
   if (!hasSoknad) {
     return null;
   }
-  return termindatoSoknad ? formatDate(termindatoSoknad) : '-';
+  return termindatoSoknad ? dateFormat(termindatoSoknad) : '-';
 };
 
 /**
@@ -61,7 +58,7 @@ export const FodselSammenligningOtherPanel = ({ soknad, termindato }: Props) => 
             <Label size="small">
               <FormattedMessage id="FodselsammenligningPanel.UstedtDato" />
             </Label>
-            <BodyShort size="small">{formatDate(soknad.utstedtdato)}</BodyShort>
+            <BodyShort size="small">{dateFormat(soknad.utstedtdato)}</BodyShort>
           </div>
         )}
         <div>
