@@ -1,6 +1,6 @@
-export const notEmpty = <T>(data: T): NonNullable<T> => {
+export const notEmpty = <T>(data: T, errorMessage?: string): NonNullable<T> => {
   if (data === undefined || data === null) {
-    throw Error('Data er ikke oppgitt');
+    throw Error(errorMessage ?? 'Data er ikke oppgitt');
   }
   return data;
 };

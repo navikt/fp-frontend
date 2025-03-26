@@ -15,9 +15,27 @@ const {
   InnvilgetEngangsstønadTilGodkjenningForSaksbehandlerUtenOverstyring,
   InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerUtenOverstyring,
   GodkjentForeldrepengerMedManueltBrevForSaksbehandlerMedOverstyring,
+  LegacyOverstyring,
+  LegacyOverstyringHarSendtTilbakeFraBeslutter,
 } = composeStories(stories);
 
 describe('<VedtakProsessIndex>', () => {
+  vi.hoisted(() => {
+    Object.defineProperty(window, 'matchMedia', {
+      writable: true,
+      value: vi.fn().mockImplementation(query => ({
+        matches: false,
+        media: query,
+        onchange: null,
+        addListener: vi.fn(), // Deprecated
+        removeListener: vi.fn(), // Deprecated
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+        dispatchEvent: vi.fn(),
+      })),
+    });
+  });
+
   it('skal forhåndsvise innvilget vedtaksbrev og så fatte vedtak', async () => {
     const lagre = vi.fn();
     const forhåndsvis = vi.fn();
@@ -57,94 +75,79 @@ describe('<VedtakProsessIndex>', () => {
 
   it('skal redigere innvilget vedtaksbrev, forhåndsvise og så fatte vedtak', async () => {
     const lagre = vi.fn();
+    const mellomlagreBrev = vi.fn();
     const forhåndsvis = vi.fn();
 
-    const utils = render(
-      <InnvilgetForeldrepengerTilGodkjenningForSaksbehandler submitCallback={lagre} previewCallback={forhåndsvis} />,
+    render(
+      <InnvilgetForeldrepengerTilGodkjenningForSaksbehandler
+        submitCallback={lagre}
+        mellomlagreBrevOverstyring={mellomlagreBrev}
+        previewCallback={forhåndsvis}
+      />,
     );
 
     expect(await screen.findByText('Vedtak')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Rediger vedtaksbrev'));
 
-    expect(await screen.findByText('Manuelt vedtaksbrev')).toBeInTheDocument();
-    expect(
-      screen.getByText('Tekst fra det automatisk genererte brevet kan kopieres og limes inn i det manuelle brevet'),
-    ).toBeInTheDocument();
+    expect(screen.getByText('Innholdet fra det automatiske brevet kan nå redigeres')).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('Til godkjenning'));
+    await userEvent.click(screen.getAllByText('Rediger brev')[0]);
 
-    expect(await screen.findAllByText('Feltet må fylles ut')).toHaveLength(2);
+    expect(screen.getByText(/Gjør nødvendige endringer i brevet nedenfor/)).toBeInTheDocument();
 
-    const overskriftInput = utils.getByLabelText('Overskrift');
-    await userEvent.type(overskriftInput, 'Dette er en overskrift');
-
-    const innholdInput = utils.getByLabelText('Innhold i brev til søker');
-    await userEvent.type(innholdInput, 'Dette er innhold');
-
-    await waitFor(() => expect(screen.queryByText('Feltet må fylles ut')).not.toBeInTheDocument());
-
-    await userEvent.click(screen.getByText('Forhåndsvis manuelt brev'));
+    await userEvent.click(screen.getByText('Forhåndsvis brev'));
 
     await waitFor(() => expect(forhåndsvis).toHaveBeenCalledTimes(1));
     expect(forhåndsvis).toHaveBeenNthCalledWith(1, {
-      dokumentMal: DokumentMalType.FRITEKST,
-      fritekst: 'Dette er innhold',
+      automatiskVedtaksbrev: false,
       gjelderVedtak: true,
-      tittel: 'Dette er en overskrift',
-      automatiskVedtaksbrev: undefined,
+      dokumentMal: DokumentMalType.FRITEKST_HTML,
+      fritekst: expect.stringContaining('Nav har innvilget søknaden din om 100 prosent foreldrepenger'),
     });
 
+    await userEvent.click(screen.getByText('Lagre og lukk'));
+
+    await waitFor(() => expect(mellomlagreBrev).toHaveBeenCalledTimes(1));
+    expect(mellomlagreBrev).toHaveBeenNthCalledWith(
+      1,
+      expect.stringContaining('Nav har innvilget søknaden din om 100 prosent foreldrepenger'),
+    );
+
     await userEvent.click(screen.getByText('Til godkjenning'));
+
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, [
       {
         begrunnelse: undefined,
-        fritekstBrev: 'Dette er innhold',
         kode: '5015',
-        overskrift: 'Dette er en overskrift',
         skalBrukeOverstyrendeFritekstBrev: true,
       },
     ]);
   });
 
-  it('skal redigere innvilget vedtaksbrev, forkaste det via modal og så fatte vedtak', async () => {
+  it('skal redigere innvilget vedtaksbrev, åpne redigeringsmodal, forkaste overstyring og så fatte vedtak', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<InnvilgetForeldrepengerTilGodkjenningForSaksbehandler submitCallback={lagre} />);
+    render(<InnvilgetForeldrepengerTilGodkjenningForSaksbehandler submitCallback={lagre} />);
 
     expect(await screen.findByText('Vedtak')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Rediger vedtaksbrev'));
 
-    expect(await screen.findByText('Manuelt vedtaksbrev')).toBeInTheDocument();
-    expect(
-      screen.getByText('Tekst fra det automatisk genererte brevet kan kopieres og limes inn i det manuelle brevet'),
-    ).toBeInTheDocument();
+    expect(await screen.findByText('Innholdet fra det automatiske brevet kan nå redigeres')).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('Til godkjenning'));
+    await userEvent.click(screen.getByText('Rediger brev'));
 
-    expect(await screen.findAllByText('Feltet må fylles ut')).toHaveLength(2);
+    expect(screen.getByText(/Gjør nødvendige endringer i brevet nedenfor/)).toBeInTheDocument();
 
-    const overskriftInput = utils.getByLabelText('Overskrift');
-    await userEvent.type(overskriftInput, 'Dette er en overskrift');
+    await userEvent.click(screen.getByText('Lagre og lukk'));
 
-    const innholdInput = utils.getByLabelText('Innhold i brev til søker');
-    await userEvent.type(innholdInput, 'Dette er innhold');
+    await userEvent.click(screen.getAllByText('Forkast redigert brev')[0]);
 
-    await waitFor(() => expect(screen.queryByText('Feltet må fylles ut')).not.toBeInTheDocument());
-
-    await userEvent.click(screen.getAllByText('Forkast manuelt brev')[0]);
-
-    expect(
-      await screen.findByText(
-        'Dersom du forkaster det manuelle brevet, vil det erstattes av det automatisk genererte brevet',
-      ),
-    ).toBeInTheDocument();
-
-    await userEvent.click(screen.getAllByText('Forkast manuelt brev')[1]);
-
-    await waitFor(() => expect(screen.queryByText('Manuelt vedtaksbrev')).not.toBeInTheDocument());
+    await waitFor(() =>
+      expect(screen.queryByText('Innholdet fra det automatiske brevet kan nå redigeres')).not.toBeInTheDocument(),
+    );
 
     await userEvent.click(screen.getByText('Til godkjenning'));
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
@@ -360,12 +363,44 @@ describe('<VedtakProsessIndex>', () => {
     render(<GodkjentForeldrepengerMedManueltBrevForSaksbehandlerMedOverstyring />);
 
     expect(await screen.findByText('Vedtak')).toBeInTheDocument();
-    expect(screen.getByText('Manuelt vedtaksbrev')).toBeInTheDocument();
+    expect(screen.getByText('Automatisk vedtaksbrev')).toBeInTheDocument();
+    expect(screen.getByText('Rediger vedtaksbrev')).toBeInTheDocument();
+
+    expect(screen.getByText('Brev er redigert')).toBeInTheDocument();
+    expect(screen.getByText('Vis brev')).toBeInTheDocument();
+  });
+
+  it('skal vise panel der saksbehandler har redigert brev i gammel løsning og behandling er avsluttet', async () => {
+    render(<LegacyOverstyring />);
+
+    expect(await screen.findByText('Vedtak')).toBeInTheDocument();
+    expect(screen.getByText('Vis manuelt brev')).toBeInTheDocument();
+
     expect(screen.getByText('Overskrift')).toBeInTheDocument();
     expect(screen.getByText('Dette er en overskrift')).toBeInTheDocument();
 
     expect(screen.getByText('Innhold i brev til søker')).toBeInTheDocument();
-    expect(screen.getByText('Dette er innholdet i brevet')).toBeInTheDocument();
-    expect(screen.getByText('Endret av saksbehandler')).toBeInTheDocument();
+    expect(screen.getByText('Dette er en fritekst')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Rediger vedtaksbrev'));
+
+    expect(screen.queryByText('Innholdet fra det automatiske brevet kan nå redigeres')).not.toBeInTheDocument();
+  });
+
+  it('skal vise panel der saskbehandler har redigert brev i gammel løsning og fått tilbake frå beslutter i ny løsning', async () => {
+    render(<LegacyOverstyringHarSendtTilbakeFraBeslutter />);
+
+    expect(await screen.findByText('Vedtak')).toBeInTheDocument();
+    expect(screen.getByText('Vis manuelt brev')).toBeInTheDocument();
+
+    expect(screen.getByText('Overskrift')).toBeInTheDocument();
+    expect(screen.getByText('Dette er en overskrift')).toBeInTheDocument();
+
+    expect(screen.getByText('Innhold i brev til søker')).toBeInTheDocument();
+    expect(screen.getByText('Dette er en fritekst')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Rediger vedtaksbrev'));
+
+    expect(screen.getByText('Innholdet fra det automatiske brevet kan nå redigeres')).toBeInTheDocument();
   });
 });

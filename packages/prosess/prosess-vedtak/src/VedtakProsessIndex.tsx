@@ -8,6 +8,7 @@ import type {
   Beregningsgrunnlag,
   BeregningsresultatDagytelse,
   BeregningsresultatEs,
+  BrevOverstyring,
   Oppgave,
   SimuleringResultat,
   TilbakekrevingValg,
@@ -21,6 +22,91 @@ import { VedtakRevurderingForm } from './components/revurdering/VedtakRevurderin
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
+
+interface Props {
+  beregningresultatDagytelse?: BeregningsresultatDagytelse;
+  beregningresultatEngangsstonad?: BeregningsresultatEs;
+  tilbakekrevingvalg?: TilbakekrevingValg;
+  simuleringResultat?: SimuleringResultat;
+  beregningsgrunnlag?: Beregningsgrunnlag;
+  beregningsresultatOriginalBehandling?: {
+    'beregningsresultat-engangsstonad'?: BeregningsresultatEs;
+    'beregningsresultat-foreldrepenger'?: BeregningsresultatDagytelse;
+  };
+  vilkar: Vilkar[];
+  previewCallback: (data: ForhandsvisData) => void;
+  oppgaver?: Oppgave[];
+  brevOverstyring?: BrevOverstyring;
+  refetchBrevOverstyring: () => void;
+  mellomlagreBrevOverstyring: (redigertInnhold: string | null) => Promise<void>;
+}
+
+export const VedtakProsessIndex = ({
+  beregningresultatDagytelse,
+  beregningresultatEngangsstonad,
+  tilbakekrevingvalg,
+  simuleringResultat,
+  beregningsgrunnlag,
+  vilkar,
+  beregningsresultatOriginalBehandling,
+  previewCallback,
+  oppgaver,
+  brevOverstyring,
+  refetchBrevOverstyring,
+  mellomlagreBrevOverstyring,
+}: Props) => {
+  const { behandling, fagsak } = usePanelDataContext();
+
+  const { aksjonspunkt } = behandling;
+
+  const beregningErManueltFastsatt = skalSkriveFritekstGrunnetFastsettingAvBeregning(aksjonspunkt, beregningsgrunnlag);
+  const beregningsresultat =
+    fagsak.fagsakYtelseType === FagsakYtelseType.ENGANGSSTONAD
+      ? beregningresultatEngangsstonad
+      : beregningresultatDagytelse;
+
+  let originaltBeregningsresultat;
+  if (beregningsresultatOriginalBehandling) {
+    originaltBeregningsresultat =
+      fagsak.fagsakYtelseType === FagsakYtelseType.ENGANGSSTONAD
+        ? beregningsresultatOriginalBehandling['beregningsresultat-engangsstonad']
+        : beregningsresultatOriginalBehandling['beregningsresultat-foreldrepenger'];
+  }
+
+  return (
+    <RawIntlProvider value={intl}>
+      {behandling.type !== BehandlingType.REVURDERING && (
+        <VedtakForm
+          previewCallback={previewCallback}
+          tilbakekrevingvalg={tilbakekrevingvalg}
+          simuleringResultat={simuleringResultat}
+          beregningsresultat={beregningsresultat}
+          vilkar={vilkar}
+          beregningErManueltFastsatt={beregningErManueltFastsatt}
+          oppgaver={oppgaver}
+          brevOverstyring={brevOverstyring}
+          refetchBrevOverstyring={refetchBrevOverstyring}
+          mellomlagreBrevOverstyring={mellomlagreBrevOverstyring}
+        />
+      )}
+      {behandling.type === BehandlingType.REVURDERING && (
+        <VedtakRevurderingForm
+          previewCallback={previewCallback}
+          tilbakekrevingvalg={tilbakekrevingvalg}
+          simuleringResultat={simuleringResultat}
+          beregningsresultat={beregningsresultat}
+          vilkar={vilkar}
+          beregningErManueltFastsatt={beregningErManueltFastsatt}
+          beregningsresultatOriginalBehandling={originaltBeregningsresultat}
+          oppgaver={oppgaver}
+          brevOverstyring={brevOverstyring}
+          refetchBrevOverstyring={refetchBrevOverstyring}
+          mellomlagreBrevOverstyring={mellomlagreBrevOverstyring}
+        />
+      )}
+    </RawIntlProvider>
+  );
+};
 
 const BEREGNINGSGRUNNLAG_FRITEKSTFELT_I_VEDTAK_AKSJONSPUNKT = [
   AksjonspunktKode.FASTSETT_BRUTTO_BEREGNINGSGRUNNLAG_SELVSTENDIG_NAERINGSDRIVENDE,
@@ -45,79 +131,4 @@ const skalSkriveFritekstGrunnetFastsettingAvBeregning = (
     andel => andel.overstyrtPrAar || andel.overstyrtPrAar === 0,
   );
   return !!behandlingHarLøstBGAP || !!andelSomErManueltFastsatt;
-};
-
-interface Props {
-  beregningresultatDagytelse?: BeregningsresultatDagytelse;
-  beregningresultatEngangsstonad?: BeregningsresultatEs;
-  tilbakekrevingvalg?: TilbakekrevingValg;
-  simuleringResultat?: SimuleringResultat;
-  beregningsgrunnlag?: Beregningsgrunnlag;
-  beregningsresultatOriginalBehandling?: {
-    'beregningsresultat-engangsstonad'?: BeregningsresultatEs;
-    'beregningsresultat-foreldrepenger'?: BeregningsresultatDagytelse;
-  };
-  vilkar: Vilkar[];
-  previewCallback: (data: ForhandsvisData) => void;
-  ytelseTypeKode: string;
-  oppgaver?: Oppgave[];
-}
-
-export const VedtakProsessIndex = ({
-  beregningresultatDagytelse,
-  beregningresultatEngangsstonad,
-  tilbakekrevingvalg,
-  simuleringResultat,
-  beregningsgrunnlag,
-  vilkar,
-  beregningsresultatOriginalBehandling,
-  previewCallback,
-  ytelseTypeKode,
-  oppgaver,
-}: Props) => {
-  const { behandling } = usePanelDataContext();
-
-  const { aksjonspunkt } = behandling;
-
-  const beregningErManueltFastsatt = skalSkriveFritekstGrunnetFastsettingAvBeregning(aksjonspunkt, beregningsgrunnlag);
-  const beregningsresultat =
-    ytelseTypeKode === FagsakYtelseType.ENGANGSSTONAD ? beregningresultatEngangsstonad : beregningresultatDagytelse;
-
-  let originaltBeregningsresultat;
-  if (beregningsresultatOriginalBehandling) {
-    originaltBeregningsresultat =
-      ytelseTypeKode === FagsakYtelseType.ENGANGSSTONAD
-        ? beregningsresultatOriginalBehandling['beregningsresultat-engangsstonad']
-        : beregningsresultatOriginalBehandling['beregningsresultat-foreldrepenger'];
-  }
-
-  return (
-    <RawIntlProvider value={intl}>
-      {behandling.type !== BehandlingType.REVURDERING && (
-        <VedtakForm
-          previewCallback={previewCallback}
-          tilbakekrevingvalg={tilbakekrevingvalg}
-          simuleringResultat={simuleringResultat}
-          beregningsresultat={beregningsresultat}
-          ytelseTypeKode={ytelseTypeKode}
-          vilkar={vilkar}
-          beregningErManueltFastsatt={beregningErManueltFastsatt}
-          oppgaver={oppgaver}
-        />
-      )}
-      {behandling.type === BehandlingType.REVURDERING && (
-        <VedtakRevurderingForm
-          previewCallback={previewCallback}
-          tilbakekrevingvalg={tilbakekrevingvalg}
-          simuleringResultat={simuleringResultat}
-          beregningsresultat={beregningsresultat}
-          ytelseTypeKode={ytelseTypeKode}
-          vilkar={vilkar}
-          beregningErManueltFastsatt={beregningErManueltFastsatt}
-          beregningsresultatOriginalBehandling={originaltBeregningsresultat}
-          oppgaver={oppgaver}
-        />
-      )}
-    </RawIntlProvider>
-  );
 };

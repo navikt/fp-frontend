@@ -1,50 +1,83 @@
 import { useState } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { useHref, useLocation } from 'react-router-dom';
 
+import { ExternalLinkIcon } from '@navikt/aksel-icons';
 import { Alert, Button, Heading, Modal, VStack } from '@navikt/ds-react';
 
-import type { Vedtaksbrev } from '../../types/Vedtaksbrev';
+import type { BrevOverstyring } from '@navikt/fp-types';
+
+import type { ForhandsvisData } from '../forstegang/VedtakForm';
 import { BrevInnhold, EDITOR_HOLDER_ID } from './BrevInnhold';
 import { useEditorJs } from './useEditorJs';
 
 interface Props {
-  htmlMal: string;
-  vedtaksbrev: Vedtaksbrev;
+  brevOverstyring: BrevOverstyring;
+  refetchBrevOverstyring: () => void;
+  mellomlagreBrevOverstyring: (redigertInnhold: string | null) => Promise<void>;
+  forhåndsvisBrev: (data: ForhandsvisData) => void;
+  setVisFritekstRedigeringModal: (visRedigering: boolean) => void;
 }
 
-export const FritekstRedigeringModal = ({ htmlMal }: Props) => {
-  const [visRedigering, setVisRedigering] = useState(false);
-  const [visTilbakestillAdvarsel, setVisTilbakestillAdvarsel] = useState(false);
-  const [visForhåndsvisValideringsFeil, setVisForhåndsvisValideringsFeil] = useState(false);
+export const FritekstRedigeringModal = ({
+  brevOverstyring,
+  refetchBrevOverstyring,
+  mellomlagreBrevOverstyring,
+  setVisFritekstRedigeringModal,
+  forhåndsvisBrev,
+}: Props) => {
+  const intl = useIntl();
 
-  const { lagreEndringer, validerEndringer, tilbakestillEndringer } = useEditorJs(EDITOR_HOLDER_ID, htmlMal);
+  const [visTilbakestillAdvarselModal, setVisTilbakestillAdvarselModal] = useState(false);
+  const [visValideringsFeil, setVisValideringsFeil] = useState(false);
 
-  const lagreOgLukk = () => {
-    lagreEndringer();
-    setVisRedigering(false);
-  };
+  const { pathname } = useLocation();
+  const href = useHref(pathname);
 
-  const forhåndsvis = async () => {
+  const { lagreEndringer, validerEndringer, tilbakestillEndringer, forhåndsvis } = useEditorJs(
+    EDITOR_HOLDER_ID,
+    brevOverstyring,
+    mellomlagreBrevOverstyring,
+    forhåndsvisBrev,
+  );
+
+  const lagreOgLukk = async () => {
     const erValidertOk = await validerEndringer();
-    if (!erValidertOk) {
-      setVisForhåndsvisValideringsFeil(true);
+    if (erValidertOk) {
+      setVisValideringsFeil(false);
+
+      await lagreEndringer();
+      refetchBrevOverstyring();
+
+      setVisFritekstRedigeringModal(false);
     } else {
-      setVisForhåndsvisValideringsFeil(false);
-      // FIXME: previewCallback
+      setVisValideringsFeil(true);
     }
   };
 
-  const tilbakestill = () => {
+  const forhåndsvisEditertBrev = async () => {
+    const erValidertOk = await validerEndringer();
+    if (erValidertOk) {
+      setVisValideringsFeil(false);
+      forhåndsvis();
+    } else {
+      setVisValideringsFeil(true);
+    }
+  };
+
+  const tilbakestill = async () => {
     tilbakestillEndringer();
-    setVisTilbakestillAdvarsel(false);
+    setVisTilbakestillAdvarselModal(false);
+  };
+
+  const lukkModalOgHentBrevPåNytt = () => {
+    setVisFritekstRedigeringModal(false);
+    refetchBrevOverstyring();
   };
 
   return (
     <>
-      <Button variant="secondary" type="button" onClick={() => setVisRedigering(true)} size="small">
-        Rediger
-      </Button>
-      <Modal open={visRedigering} onClose={() => setVisRedigering(false)} width="53.75rem" aria-label="Rediger brev">
+      <Modal open onClose={lukkModalOgHentBrevPåNytt} width="53.75rem" aria-label="Rediger brev">
         <Modal.Header>
           <VStack gap="4">
             <Heading level="3" size="small">
@@ -52,23 +85,35 @@ export const FritekstRedigeringModal = ({ htmlMal }: Props) => {
             </Heading>
             <Alert variant="info" size="small">
               <FormattedMessage id="FritekstRedigeringModal.Infotekst" />
+              <Button
+                variant="tertiary"
+                onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+                  e.preventDefault();
+                  window.open(href, '_blank');
+                }}
+                iconPosition="right"
+                icon={<ExternalLinkIcon aria-hidden />}
+                size="small"
+              >
+                <FormattedMessage id="FritekstRedigeringModal.ApneINyFane" />
+              </Button>
             </Alert>
           </VStack>
         </Modal.Header>
         <Modal.Body>
           <BrevInnhold
-            htmlMal={htmlMal}
-            setVisTilbakestillAdvarsel={setVisTilbakestillAdvarsel}
+            brevOverstyring={brevOverstyring}
+            setVisTilbakestillAdvarselModal={setVisTilbakestillAdvarselModal}
             lagreOgLukk={lagreOgLukk}
-            forhåndsvis={forhåndsvis}
-            visForhåndsvisValideringsFeil={visForhåndsvisValideringsFeil}
+            forhåndsvis={forhåndsvisEditertBrev}
+            visForhåndsvisValideringsFeil={visValideringsFeil}
           />
         </Modal.Body>
       </Modal>
       <Modal
-        open={visTilbakestillAdvarsel}
-        onClose={() => setVisTilbakestillAdvarsel(false)}
-        aria-label="Tilbakestill brev"
+        open={visTilbakestillAdvarselModal}
+        onClose={() => setVisTilbakestillAdvarselModal(false)}
+        aria-label={intl.formatMessage({ id: 'FritekstRedigeringModal.TilbakestillLabel' })}
       >
         <Modal.Header>
           <Heading as="h3" size="medium">
@@ -81,7 +126,7 @@ export const FritekstRedigeringModal = ({ htmlMal }: Props) => {
           </Alert>
         </Modal.Body>
         <Modal.Footer>
-          <Button size="small" type="button" variant="tertiary" onClick={() => setVisTilbakestillAdvarsel(false)}>
+          <Button size="small" type="button" variant="tertiary" onClick={() => setVisTilbakestillAdvarselModal(false)}>
             <FormattedMessage id="FritekstRedigeringModal.IkkeTilbakestill" />
           </Button>
           <Button size="small" type="button" variant="primary" onClick={tilbakestill}>

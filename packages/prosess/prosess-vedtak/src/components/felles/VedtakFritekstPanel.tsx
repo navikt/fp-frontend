@@ -1,9 +1,8 @@
 import { useIntl } from 'react-intl';
 
-import { Detail } from '@navikt/ds-react';
+import { Detail, VStack } from '@navikt/ds-react';
 import { TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength } from '@navikt/ft-form-validators';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { decodeHtmlEntity, formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
 import type { Behandlingsresultat } from '@navikt/fp-types';
@@ -26,31 +25,26 @@ export const VedtakFritekstPanel = ({ behandlingsresultat, språkkode, isReadOnl
   return (
     <>
       {!isReadOnly && (
-        <>
-          <VerticalSpacer sixteenPx />
-          <TextAreaField
-            name="begrunnelse"
-            label={intl.formatMessage({ id: labelTextCode })}
-            validate={[minLength3, maxLength1500, hasValidText]}
-            maxLength={1500}
-            readOnly={isReadOnly}
-            parse={formaterFritekst}
-            badges={[
-              {
-                type: 'info',
-                titleText: getLanguageFromSprakkode(språkkode),
-              },
-            ]}
-          />
-        </>
+        <TextAreaField
+          name="begrunnelse"
+          label={intl.formatMessage({ id: labelTextCode })}
+          validate={[minLength3, maxLength1500, hasValidText]}
+          maxLength={1500}
+          readOnly={isReadOnly}
+          parse={formaterFritekst}
+          badges={[
+            {
+              type: 'info',
+              titleText: getLanguageFromSprakkode(språkkode),
+            },
+          ]}
+        />
       )}
       {isReadOnly && behandlingsresultat?.avslagsarsakFritekst && (
-        <span>
-          <VerticalSpacer twentyPx />
+        <VStack gap="4">
           <Detail>{intl.formatMessage({ id: labelTextCode })}</Detail>
-          <VerticalSpacer eightPx />
           <div className={styles.fritekstItem}>{decodeHtmlEntity(behandlingsresultat.avslagsarsakFritekst)}</div>
-        </span>
+        </VStack>
       )}
     </>
   );
