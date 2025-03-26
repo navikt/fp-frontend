@@ -1,8 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Heading, HStack, Table, Tag } from '@navikt/ds-react';
-import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import dayjs from 'dayjs';
+import { dateFormat } from '@navikt/ft-utils';
 
 import { BehandlingType } from '@navikt/fp-kodeverk';
 import type { AvklartBarn, FamilieHendelse, Soknad } from '@navikt/fp-types';
@@ -11,8 +10,6 @@ import { FodselSammenligningOtherPanel } from './FodselSammenligningOtherPanel';
 import { FodselSammenligningRevurderingPanel } from './FodselSammenligningRevurderingPanel';
 
 import styles from './fodselSammenligningPanel.module.css';
-
-const formatDate = (date: string): string => (date ? dayjs(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
 
 interface Props {
   behandlingsTypeKode: string;
@@ -83,10 +80,10 @@ export const FodselSammenligningPanel = ({
               return (
                 <Table.Row key={key} id={key}>
                   <Table.DataCell>
-                    <BodyShort size="small">{formatDate(barn.fodselsdato)}</BodyShort>
+                    <BodyShort size="small">{dateFormat(barn.fodselsdato)}</BodyShort>
                   </Table.DataCell>
                   <Table.DataCell>
-                    <BodyShort size="small">{barn.dodsdato ? formatDate(barn.dodsdato) : '-'}</BodyShort>
+                    <BodyShort size="small">{barn.dodsdato ? dateFormat(barn.dodsdato) : '-'}</BodyShort>
                   </Table.DataCell>
                   <Table.DataCell>
                     {barn.dodsdato && (

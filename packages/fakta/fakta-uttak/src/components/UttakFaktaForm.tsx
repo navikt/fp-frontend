@@ -6,7 +6,7 @@ import { ErrorSummary, Heading, HStack, VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 import { dateRangesNotOverlapping } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
-import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
+import { dateFormat } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton, validerApKodeOgHentApEnum } from '@navikt/fp-fakta-felles';
@@ -40,7 +40,7 @@ const finnAksjonspunktTekster = (aksjonspunkter: Aksjonspunkt[], ytelsefordeling
     .map(ap => {
       const førsteUttaksdato = ytelsefordeling?.førsteUttaksdato ?? undefined;
       const førsteUttak = {
-        value: dayjs(førsteUttaksdato).format(DDMMYYYY_DATE_FORMAT),
+        value: dateFormat(førsteUttaksdato),
       };
 
       return (
@@ -100,7 +100,7 @@ const valider = (
           ? 'UttakFaktaDetailForm.ErFørFørsteUttaktsdato'
           : 'UttakFaktaDetailForm.ErFørFødselsdato',
       },
-      { dato: dayjs(dato).format(DDMMYYYY_DATE_FORMAT) },
+      { dato: dateFormat(dato) },
     );
   }
 
@@ -133,7 +133,7 @@ const validerPerioder = (
       {
         id: 'UttakFaktaDetailForm.ErIkkeLikForsteUttaksdato',
       },
-      { dato: dayjs(førsteUttaksdato).format(DDMMYYYY_DATE_FORMAT) },
+      { dato: dateFormat(førsteUttaksdato) },
     );
   }
 

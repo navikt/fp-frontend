@@ -1,12 +1,9 @@
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Heading, HStack, Label, VStack } from '@navikt/ds-react';
-import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import dayjs from 'dayjs';
+import { dateFormat } from '@navikt/ft-utils';
 
 import type { FamilieHendelse, Soknad } from '@navikt/fp-types';
-
-const formatDate = (date: string): string => (date ? dayjs(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
 
 const getTermindatoEllerFodselsdato = (
   isTermin: boolean,
@@ -21,16 +18,16 @@ const getTermindatoEllerFodselsdato = (
 
   if (isTermin) {
     const termDato = famHendelse.termindato ? famHendelse.termindato : originalSoknad?.termindato;
-    return termDato ? formatDate(termDato) : undefined;
+    return termDato ? dateFormat(termDato) : undefined;
   }
 
   if (famHendelse.avklartBarn && famHendelse.avklartBarn.length > 0) {
-    return formatDate(famHendelse.avklartBarn[0].fodselsdato);
+    return dateFormat(famHendelse.avklartBarn[0].fodselsdato);
   }
   if (!originalSoknad?.fodselsdatoer) {
     return '-';
   }
-  return formatDate(Object.values(originalSoknad.fodselsdatoer)[0]);
+  return dateFormat(Object.values(originalSoknad.fodselsdatoer)[0]);
 };
 
 const getAntallBarn = (

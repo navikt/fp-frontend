@@ -3,8 +3,7 @@ import { useForm } from 'react-hook-form';
 import { type IntlShape, useIntl } from 'react-intl';
 
 import { Form } from '@navikt/ft-form-hooks';
-import { DDMMYYYY_DATE_FORMAT, decodeHtmlEntity } from '@navikt/ft-utils';
-import dayjs from 'dayjs';
+import { dateFormat, decodeHtmlEntity } from '@navikt/ft-utils';
 
 import {
   AksjonspunktKode,
@@ -315,7 +314,7 @@ export const VedtakRevurderingForm = ({
         id: 'VedtakForm.Revurdering.Opphoerer',
       },
       {
-        dato: dayjs(behandlingsresultat.opphørsdato).format(DDMMYYYY_DATE_FORMAT),
+        dato: dateFormat(behandlingsresultat.opphørsdato),
       },
     );
   }

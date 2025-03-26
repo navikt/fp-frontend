@@ -14,7 +14,7 @@ import {
 } from '@navikt/aksel-icons';
 import { BodyShort, Box, Button, Heading, HStack, Label, VStack } from '@navikt/ds-react';
 import { Form, SelectField } from '@navikt/ft-form-hooks';
-import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
+import { dateFormat, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { useMutation } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 
@@ -122,8 +122,8 @@ const getSorteringsnavnForPeriode = (
 
   const values = {
     navn: køSorteringTyper.find(kst => kst.kode === sorteringType)?.navn ?? '',
-    fomDato: fomDato ? dayjs(fomDato).format(DDMMYYYY_DATE_FORMAT) : undefined,
-    tomDato: tomDato ? dayjs(tomDato).format(DDMMYYYY_DATE_FORMAT) : undefined,
+    fomDato: fomDato ? dateFormat(fomDato) : undefined,
+    tomDato: tomDato ? dateFormat(tomDato) : undefined,
     br: <br />,
   };
   return getNavn(values, intl);

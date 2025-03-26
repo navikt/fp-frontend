@@ -15,7 +15,7 @@ const erTilbakekreving = false;
 const behandlingStatus = BehandlingStatus.OPPRETTET;
 const faktaOmBeregningTilfeller = {} as KodeverkMedNavn[];
 
-describe('<aksjonspunktTekstUtleder>', () => {
+describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5004', () => {
     const aksjonspunkt = {
       aksjonspunktKode: AksjonspunktKode.ADOPSJONSDOKUMENTAJON,
@@ -445,8 +445,8 @@ describe('<aksjonspunktTekstUtleder>', () => {
 
   it('skal vise korrekt tekst for aksjonspunkt 6008 slettet', () => {
     const uttakPeriode = {
-      fom: '-',
-      tom: '-',
+      fom: '2024-05-01',
+      tom: '2025-01-20',
       erSlettet: true,
       erAvklart: false,
       erLagtTil: false,
@@ -472,8 +472,8 @@ describe('<aksjonspunktTekstUtleder>', () => {
   });
   it('skal vise korrekt tekst for aksjonspunkt 5071 slettet', () => {
     const uttakPeriode = {
-      fom: '-',
-      tom: '-',
+      fom: '2024-05-01',
+      tom: '2025-01-20',
       erSlettet: true,
       erAvklart: false,
       erLagtTil: false,
@@ -500,8 +500,8 @@ describe('<aksjonspunktTekstUtleder>', () => {
 
   it('skal vise korrekt tekst for aksjonspunkt 6008 lagt til', () => {
     const uttakPeriode = {
-      fom: '-',
-      tom: '-',
+      fom: '2024-05-01',
+      tom: '2025-01-20',
       erSlettet: false,
       erAvklart: false,
       erLagtTil: true,
@@ -527,8 +527,8 @@ describe('<aksjonspunktTekstUtleder>', () => {
   });
   it('skal vise korrekt tekst for aksjonspunkt 5071 lagt til', () => {
     const uttakPeriode = {
-      fom: '-',
-      tom: '-',
+      fom: '2024-05-01',
+      tom: '2025-01-20',
       erSlettet: false,
       erAvklart: false,
       erLagtTil: true,
@@ -555,8 +555,8 @@ describe('<aksjonspunktTekstUtleder>', () => {
 
   it('skal vise korrekt tekst for aksjonspunkt 6008 endret', () => {
     const uttakPeriode = {
-      fom: '-',
-      tom: '-',
+      fom: '2024-05-01',
+      tom: '2025-01-20',
       erSlettet: false,
       erAvklart: false,
       erLagtTil: false,
@@ -582,8 +582,8 @@ describe('<aksjonspunktTekstUtleder>', () => {
   });
   it('skal vise korrekt tekst for aksjonspunkt 5071 endret', () => {
     const uttakPeriode = {
-      fom: '-',
-      tom: '-',
+      fom: '2024-05-01',
+      tom: '2025-01-20',
       erSlettet: false,
       erAvklart: false,
       erLagtTil: false,
@@ -610,8 +610,8 @@ describe('<aksjonspunktTekstUtleder>', () => {
 
   it('skal vise korrekt tekst for aksjonspunkt 6008 avklart', () => {
     const uttakPeriode = {
-      fom: '-',
-      tom: '-',
+      fom: '2024-05-01',
+      tom: '2025-01-20',
       erSlettet: false,
       erAvklart: true,
       erLagtTil: false,
@@ -637,8 +637,8 @@ describe('<aksjonspunktTekstUtleder>', () => {
   });
   it('skal vise korrekt tekst for aksjonspunkt 5071 avklart', () => {
     const uttakPeriode = {
-      fom: '-',
-      tom: '-',
+      fom: '2024-05-01',
+      tom: '2025-01-20',
       erSlettet: false,
       erAvklart: true,
       erLagtTil: false,

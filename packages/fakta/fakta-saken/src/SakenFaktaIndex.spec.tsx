@@ -13,7 +13,7 @@ const {
   HarFåttDekningsgradAksjonspunkt,
 } = composeStories(stories);
 
-describe('<SakenFaktaIndex>', () => {
+describe('SakenFaktaIndex', () => {
   it('skal få aksjonspunkt om innehenting av dokumentasjon, svar at vil bli innhentet og bekreft', async () => {
     const lagre = vi.fn();
 
@@ -94,7 +94,7 @@ describe('<SakenFaktaIndex>', () => {
     });
   });
 
-  it('skal lagre ny dekningsgrad', async () => {
+  it('skal endre dekningsgrad', async () => {
     const lagre = vi.fn(() => Promise.resolve());
 
     render(<StartdatoForForeldrepengerOgDekningsgrad submitCallback={lagre} />);
@@ -142,7 +142,7 @@ describe('<SakenFaktaIndex>', () => {
     expect(screen.getByText('Er endret til 80 fordi...')).toBeInTheDocument();
   });
 
-  it('skal lagre ny dekningsgrad (samme tekst som annen test - FIX)', async () => {
+  it('skal løse dekningsgrad AP', async () => {
     const lagre = vi.fn(() => Promise.resolve());
 
     render(<HarFåttDekningsgradAksjonspunkt submitCallback={lagre} />);
@@ -152,11 +152,11 @@ describe('<SakenFaktaIndex>', () => {
     ).toBeInTheDocument();
 
     expect(screen.getByText('Helga Utvikler')).toBeInTheDocument();
-    expect(screen.getByText('Søknad sendt 2 januar 2019')).toBeInTheDocument();
+    expect(screen.getByText('Søknad sendt 02. januar 2019')).toBeInTheDocument();
     expect(screen.getByText('Har valgt 100% foreldrepenger')).toBeInTheDocument();
 
     expect(screen.getByText('Espen Utvikler')).toBeInTheDocument();
-    expect(screen.getByText('Søknad sendt 1 januar 2019')).toBeInTheDocument();
+    expect(screen.getByText('Søknad sendt 01. januar 2019')).toBeInTheDocument();
     expect(screen.getByText('Har valgt 80% foreldrepenger')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('80'));

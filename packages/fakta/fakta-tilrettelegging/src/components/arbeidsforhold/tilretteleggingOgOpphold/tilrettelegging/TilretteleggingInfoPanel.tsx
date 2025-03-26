@@ -2,7 +2,7 @@ import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { BranchingIcon, CalendarIcon, PersonPregnantIcon } from '@navikt/aksel-icons';
 import { BodyShort, Detail, HStack } from '@navikt/ds-react';
-import { calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
+import { calcDaysAndWeeks, dateFormat } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import { TilretteleggingType } from '@navikt/fp-kodeverk';
@@ -121,9 +121,7 @@ export const TilretteleggingInfoPanel = ({
                   <FormattedMessage
                     id="TilretteleggingInfoPanel.Sendt"
                     values={{
-                      dato: tilrettelegging.mottattDato
-                        ? dayjs(tilrettelegging.mottattDato).format(DDMMYYYY_DATE_FORMAT)
-                        : '',
+                      dato: dateFormat(tilrettelegging.mottattDato),
                     }}
                   />
                 )}

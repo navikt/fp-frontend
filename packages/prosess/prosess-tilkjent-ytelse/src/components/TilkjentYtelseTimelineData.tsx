@@ -3,8 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ArrowLeftIcon, ArrowRightIcon, XMarkIcon } from '@navikt/aksel-icons';
 import { BodyShort, Box, Button, HStack, Label, Table, VStack } from '@navikt/ds-react';
-import { calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
-import dayjs from 'dayjs';
+import { calcDaysAndWeeks, dateFormat } from '@navikt/ft-utils';
 
 import { AktivitetStatus, getKodeverknavnFn, KodeverkType } from '@navikt/fp-kodeverk';
 import type {
@@ -160,8 +159,8 @@ export const TilkjentYtelseTimelineData = ({
                 <FormattedMessage
                   id="TilkjentYtelse.PeriodeData.Periode"
                   values={{
-                    fomVerdi: dayjs(selectedItemData.fom).format(DDMMYYYY_DATE_FORMAT).toString(),
-                    tomVerdi: dayjs(selectedItemData.tom).format(DDMMYYYY_DATE_FORMAT).toString(),
+                    fomVerdi: dateFormat(selectedItemData.fom),
+                    tomVerdi: dateFormat(selectedItemData.tom),
                   }}
                 />
               </Label>
@@ -235,7 +234,7 @@ export const TilkjentYtelseTimelineData = ({
                   </Table.DataCell>
                   <Table.DataCell>
                     <BodyShort size="small">
-                      {andel.sisteUtbetalingsdato ? dayjs(andel.sisteUtbetalingsdato).format(DDMMYYYY_DATE_FORMAT) : ''}
+                      {andel.sisteUtbetalingsdato ? dateFormat(andel.sisteUtbetalingsdato) : ''}
                     </BodyShort>
                   </Table.DataCell>
                 </Table.Row>

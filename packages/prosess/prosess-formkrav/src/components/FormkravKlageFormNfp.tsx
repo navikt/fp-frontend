@@ -6,7 +6,7 @@ import { Detail, Heading, HStack, VStack } from '@navikt/ds-react';
 import { Form, RadioGroupPanel, SelectField, TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
-import { DATE_TIME_FORMAT, formaterFritekst } from '@navikt/ft-utils';
+import { dateTimeFormat, formaterFritekst } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import { AksjonspunktKode, getKodeverknavnFn, KodeverkType } from '@navikt/fp-kodeverk';
@@ -43,11 +43,9 @@ const getKlagBareVedtak = (
   return klagBareVedtak.concat(
     [...avsluttedeBehandlinger]
       .sort((b1, b2) => dayjs(b1.avsluttet).diff(dayjs(b2.avsluttet)))
-      .map(behandling => (
-        <option key={behandling.uuid} value={`${behandling.uuid}`}>
-          {`${getKodeverknavn(behandling.type, KodeverkType.BEHANDLING_TYPE)} ${dayjs(behandling.avsluttet).format(
-            DATE_TIME_FORMAT,
-          )}`}
+      .map(({ uuid, type, avsluttet }) => (
+        <option key={uuid} value={`${uuid}`}>
+          {`${getKodeverknavn(type, KodeverkType.BEHANDLING_TYPE)} ${avsluttet ? dateTimeFormat(avsluttet) : ''}`}
         </option>
       )),
   );

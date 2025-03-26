@@ -2,8 +2,7 @@ import { useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Label, Table } from '@navikt/ds-react';
-import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
-import dayjs from 'dayjs';
+import { dateFormat } from '@navikt/ft-utils';
 
 import { getKodeverknavnFn, KodeverkType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, ArbeidsgiverOpplysningerPerId, FeriepengegrunnlagAndel } from '@navikt/fp-types';
@@ -23,9 +22,7 @@ const lagVisningsnavn = (
   const agOpplysning = ferieAndel.arbeidsgiverId ? arbeidsgiverOpplysningerPerId[ferieAndel.arbeidsgiverId] : undefined;
   if (agOpplysning) {
     if (agOpplysning.erPrivatPerson) {
-      return agOpplysning.fødselsdato
-        ? `${agOpplysning.navn} (${dayjs(agOpplysning.fødselsdato).format(DDMMYYYY_DATE_FORMAT)})`
-        : agOpplysning.navn;
+      return `${agOpplysning.navn} (${dateFormat(agOpplysning.fødselsdato)})`;
     }
     return agOpplysning.identifikator ? `${agOpplysning.navn} (${agOpplysning.identifikator})` : agOpplysning.navn;
   }

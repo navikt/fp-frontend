@@ -1,8 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, HStack, Label, VStack } from '@navikt/ds-react';
-import { DDMMYYYY_DATE_FORMAT, formatCurrencyNoKr, ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import dayjs from 'dayjs';
+import { dateFormat, formatCurrencyNoKr } from '@navikt/ft-utils';
 
 import { OpptjeningAktivitetType } from '@navikt/fp-kodeverk';
 import type { ArbeidsgiverOpplysningerPerId, FerdiglignetNæring } from '@navikt/fp-types';
@@ -17,8 +16,6 @@ const YTELSE_TYPER = [
 
 const erAvType = (valgtAktivitetstype?: string, ...opptjeningAktivitetType: string[]): boolean =>
   !!valgtAktivitetstype && opptjeningAktivitetType.includes(valgtAktivitetstype);
-
-const formatDato = (dato: string): string => (dato ? dayjs(dato, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
 
 const getOppdragsgiverIntlId = (valgtAktivitetstype?: string): string =>
   erAvType(valgtAktivitetstype, OpptjeningAktivitetType.FRILANS)
@@ -36,8 +33,7 @@ const finnArbeidsgivertekst = (
   }
 
   if (arbeidsgiverOpplysninger.erPrivatPerson && arbeidsgiverOpplysninger.fødselsdato) {
-    const fodselsdato = formatDato(arbeidsgiverOpplysninger.fødselsdato);
-    return `${arbeidsgiverOpplysninger.navn} (${fodselsdato})`;
+    return `${arbeidsgiverOpplysninger.navn} (${dateFormat(arbeidsgiverOpplysninger.fødselsdato)})`;
   }
 
   return arbeidsgiverOpplysninger.identifikator
@@ -100,9 +96,7 @@ export const ValgtAktivitetSubForm = ({
           <Label size="small">
             <FormattedMessage id="ActivityPanel.Registreringsdato" />
           </Label>
-          <BodyShort size="small">
-            {naringRegistreringsdato ? dayjs(naringRegistreringsdato).format(DDMMYYYY_DATE_FORMAT) : '-'}
-          </BodyShort>
+          <BodyShort size="small">{naringRegistreringsdato ? dateFormat(naringRegistreringsdato) : '-'}</BodyShort>
         </div>
         <div>
           <Label size="small">
