@@ -20,9 +20,7 @@ const {
 } = composeStories(stories);
 
 describe('<VedtakProsessIndex>', () => {
-  const oldWindowMatchMedia = window.matchMedia;
-
-  beforeAll(() => {
+  vi.hoisted(() => {
     Object.defineProperty(window, 'matchMedia', {
       writable: true,
       value: vi.fn().mockImplementation(query => ({
@@ -36,10 +34,6 @@ describe('<VedtakProsessIndex>', () => {
         dispatchEvent: vi.fn(),
       })),
     });
-  });
-
-  afterAll(() => {
-    window.matchMedia = oldWindowMatchMedia;
   });
 
   it('skal forhåndsvise innvilget vedtaksbrev og så fatte vedtak', async () => {

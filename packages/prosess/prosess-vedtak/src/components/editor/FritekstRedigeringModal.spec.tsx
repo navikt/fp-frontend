@@ -10,9 +10,7 @@ import * as stories from './FritekstRedigeringModal.stories';
 const { MedOpprinneligHtml } = composeStories(stories);
 
 describe('FritekstRedigeringModal', () => {
-  const oldWindowMatchMedia = window.matchMedia;
-
-  beforeAll(() => {
+  vi.hoisted(() => {
     Object.defineProperty(window, 'matchMedia', {
       writable: true,
       value: vi.fn().mockImplementation(query => ({
@@ -26,10 +24,6 @@ describe('FritekstRedigeringModal', () => {
         dispatchEvent: vi.fn(),
       })),
     });
-  });
-
-  afterAll(() => {
-    window.matchMedia = oldWindowMatchMedia;
   });
 
   it('skal vise redigering av opprinnelig brev', async () => {

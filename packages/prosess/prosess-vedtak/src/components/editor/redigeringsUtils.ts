@@ -61,7 +61,7 @@ export const utledRedigerbartInnhold = (html: string): string => {
 };
 
 export const erRedigertHtmlGyldig = (html: string): boolean => {
-  if (html.trim() === '' && html.trim().length < 50) {
+  if (html.trim().length < 50) {
     return false;
   }
   const doc = document.createElement('div');
