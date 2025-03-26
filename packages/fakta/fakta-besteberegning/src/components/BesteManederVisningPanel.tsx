@@ -5,10 +5,6 @@ import { BodyShort, HStack, Label, Table, VStack } from '@navikt/ds-react';
 import { dateFormat, formatCurrencyNoKr } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import 'dayjs/locale/nb';
-
-dayjs.locale('nb');
-
 import { KodeverkType } from '@navikt/fp-kodeverk';
 import type { ArbeidsgiverOpplysningerPerId, BesteberegningInntekt, Månedsgrunnlag } from '@navikt/fp-types';
 
