@@ -36,7 +36,10 @@ export const OppgaveTabell = ({ oppgaver }: Props) => {
         </Table.Header>
         <Table.Body>
           {oppgaver.map(oppgave => (
-            <Table.Row key={oppgave.oppgavetype + '-' + oppgave.nyesteBeskrivelse?.kommentar} className={styles.row}>
+            <Table.Row
+              key={oppgave.nyesteBeskrivelse?.header || oppgave.nyesteBeskrivelse?.kommentarer[0]}
+              className={styles.row}
+            >
               <Table.DataCell>
                 <BodyShort size="small">
                   {alleKodeverk[KodeverkType.OPPGAVE_TYPE].find(o => o.kode === oppgave.oppgavetype)?.navn}
@@ -48,7 +51,7 @@ export const OppgaveTabell = ({ oppgaver }: Props) => {
                     nyesteBeskrivelse={oppgave.nyesteBeskrivelse}
                     eldreBeskrivelser={oppgave.eldreBeskrivelser}
                   />
-                  <Dokumenter hovedDokument={oppgave.hovedDokument} andreDokumenter={oppgave.andreDokumenter} />
+                  {oppgave.dokumenter.length > 0 && <Dokumenter dokumenter={oppgave.dokumenter} />}
                 </VStack>
               </Table.DataCell>
             </Table.Row>

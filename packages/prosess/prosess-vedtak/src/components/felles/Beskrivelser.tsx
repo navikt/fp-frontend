@@ -24,7 +24,7 @@ export const Beskrivelser = ({ nyesteBeskrivelse, eldreBeskrivelser }: Props) =>
   return (
     <VStack gap="1">
       {nyesteBeskrivelse && (
-        <BeskrivelseVisning header={nyesteBeskrivelse.header} kommentar={nyesteBeskrivelse.kommentar} />
+        <BeskrivelseVisning header={nyesteBeskrivelse.header} kommentarer={nyesteBeskrivelse.kommentarer} />
       )}
       {harEldreBeskrivelser && (
         <Button
@@ -45,9 +45,9 @@ export const Beskrivelser = ({ nyesteBeskrivelse, eldreBeskrivelser }: Props) =>
         <VStack gap="3" className={styles.eldreBeskrivelser}>
           {eldreBeskrivelser.map(beskrivelse => (
             <BeskrivelseVisning
-              key={beskrivelse.kommentar}
+              key={beskrivelse.header}
               header={beskrivelse.header}
-              kommentar={beskrivelse.kommentar}
+              kommentarer={beskrivelse.kommentarer}
             />
           ))}
         </VStack>

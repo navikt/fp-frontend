@@ -1,14 +1,17 @@
-import type { Dokument } from './dokumentTsType.ts';
-
 export type Oppgave = {
   oppgavetype: string;
   nyesteBeskrivelse?: Beskrivelse;
   eldreBeskrivelser: Beskrivelse[];
-  hovedDokument?: Dokument;
-  andreDokumenter: Dokument[];
+  dokumenter: OppgaveDokument[];
 };
 
 export type Beskrivelse = {
   header?: string;
-  kommentar: string;
+  kommentarer: string[];
+};
+
+export type OppgaveDokument = {
+  journalpostId: string;
+  dokumentId: string;
+  tittel?: string;
 };

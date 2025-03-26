@@ -4,12 +4,12 @@ import { FileIcon } from '@navikt/aksel-icons';
 import { BodyShort, HStack, Link } from '@navikt/ds-react';
 
 import { hentDokumentLenke } from '@navikt/fp-konstanter';
-import type { Dokument, Fagsak } from '@navikt/fp-types';
+import type { Fagsak, OppgaveDokument } from '@navikt/fp-types';
 
 import styles from './dokumentVisning.module.css';
 
 interface Props {
-  dokument: Dokument;
+  dokument: OppgaveDokument;
   fagsak: Fagsak;
 }
 

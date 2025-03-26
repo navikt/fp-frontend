@@ -77,6 +77,6 @@
   "DokumentVisning.FilIkon": "Åpne dokument",
   "DokumentVisning.UkjentTittel": "Ukjent tittel",
 
-  "Dokumenter.VisAndreDokumenter": "Vis andre dokumenter ({antall})",
-  "Dokumenter.SkjulAndreDokumenter": "Skjul andre dokumenter ({antall})"
+  "Dokumenter.VisDokumenter": "Vis dokumenter ({antall})",
+  "Dokumenter.SkjulDokumenter": "Skjul dokumenter ({antall})"
 }
