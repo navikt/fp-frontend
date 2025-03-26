@@ -1,8 +1,6 @@
-import { useEffect } from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
-import type { Meta, ReactRenderer, StoryObj } from '@storybook/react';
-import type { DecoratorFunction } from '@storybook/types';
+import type { Meta, StoryObj } from '@storybook/react';
 import type { JsonBodyType, StrictResponse } from 'msw';
 import { http, HttpResponse } from 'msw';
 
@@ -109,15 +107,9 @@ const HANDLERS = [
   }),
 ];
 
-const withStoryReload: DecoratorFunction<ReactRenderer> = Story => {
-  useEffect(() => () => window.location.reload(), []);
-  return <Story />;
-};
-
 const meta = {
   title: 'app/AppIndex',
   component: AppIndexWrapper,
-  decorators: [withStoryReload],
   render: () => {
     const fagsakId = '1';
     return (

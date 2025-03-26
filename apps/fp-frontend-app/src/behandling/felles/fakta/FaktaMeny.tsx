@@ -31,7 +31,7 @@ export const FaktaMeny = ({ valgtFaktaSteg, valgtProsessSteg, setFaktaPanelMedÅ
   return (
     <HStack className={styles.container} wrap={false}>
       {harFaktapaneler && (
-        <div className={styles.sideMenu}>
+        <div className={styles.sideMenu} data-testid="fakta-meny">
           <SideMenu
             heading={intl.formatMessage({ id: 'FaktaMeny.FaktaOm' })}
             links={faktaPanelMenyData.map(data => ({
