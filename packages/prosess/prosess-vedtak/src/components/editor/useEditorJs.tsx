@@ -10,18 +10,20 @@ import edjsHTML from 'editorjs-html';
 import Undo from 'editorjs-undo';
 import debounce from 'lodash.debounce';
 
-import { DokumentMalType } from '@navikt/fp-kodeverk';
+import { DokumentMalType, FagsakMarkeringKode } from '@navikt/fp-kodeverk';
 import type { BrevOverstyring } from '@navikt/fp-types';
-import { notEmpty } from '@navikt/fp-utils';
+import { notEmpty, usePanelDataContext } from '@navikt/fp-utils';
 
 import type { ForhandsvisData } from '../forstegang/VedtakForm';
-import { erRedigertHtmlGyldig, utledReadonlyInnhold, utledRedigerbartInnhold } from './redigeringsUtils';
+import {
+  erRedigertHtmlGyldig,
+  lagRedigerbartInnholdWrapper,
+  utledDelerFraBrev,
+  utledRedigerbartInnhold,
+} from './redigeringsUtils';
 
 const EDITOR_IKKE_INITIALISERT = 'Editor er ikke initialisert';
 const SPACE_REGEX = /\s*(<(?!a\s+href)[^>]+>)\s*/g; // Fjerne mellomrom rundt html-tags (utanom framfor <a href)
-
-const lagRedigerbartInnholdHtml = (redigerbartInnhold: string, readonlyFooter: string) =>
-  `<div id="redigerbart-innhold" data-editable="data-editable">${redigerbartInnhold}</div><div id="readonly-innhold">${readonlyFooter}</div>`;
 
 export const useEditorJs = (
   editorHolderId: string,
@@ -31,6 +33,11 @@ export const useEditorJs = (
 ) => {
   const intl = useIntl();
 
+  const { fagsak } = usePanelDataContext();
+  const harPraksisUtsettelse = !!fagsak.fagsakMarkeringer?.some(
+    markering => markering.kortNavn === FagsakMarkeringKode.PRAKSIS_UTSETTELSE,
+  );
+
   //Denne blir kun brukt for å hindre tullball grunna to renders i DEV => React.StrictMode
   const refMounted = useRef<boolean>(false);
 
@@ -39,8 +46,8 @@ export const useEditorJs = (
 
   const { opprinneligHtml, redigertHtml } = brevOverstyring;
 
-  const readonlyInnhold = utledReadonlyInnhold(opprinneligHtml);
-  const redigerbartInnhold = utledRedigerbartInnhold(redigertHtml ?? opprinneligHtml);
+  const { footer } = utledDelerFraBrev(opprinneligHtml);
+  const redigerbartInnhold = utledRedigerbartInnhold(redigertHtml ?? opprinneligHtml, harPraksisUtsettelse);
 
   const lagreBrevDebouncer = useLagreBrevDebouncer();
 
@@ -48,7 +55,7 @@ export const useEditorJs = (
     if (!refEditorJs.current && !refMounted.current) {
       refMounted.current = true;
       const editor = new EditorJS({
-        minHeight: 0,
+        minHeight: 20,
         holder: editorHolderId,
         i18n: lagEditorJsI18n(intl),
         onReady: async () => {
@@ -87,7 +94,7 @@ export const useEditorJs = (
     const html = edjsHTML().parse(innhold);
 
     if (refCurrentHtml.current !== html && erRedigertHtmlGyldig(html)) {
-      mellomlagreBrevOverstyring(lagRedigerbartInnholdHtml(html, readonlyInnhold.footer));
+      mellomlagreBrevOverstyring(harPraksisUtsettelse ? html : lagRedigerbartInnholdWrapper(html, footer));
     }
   };
 
@@ -96,7 +103,7 @@ export const useEditorJs = (
 
     const editor = notEmpty(refEditorJs.current, EDITOR_IKKE_INITIALISERT);
     await editor.blocks.clear();
-    const opprinneligRedigerbartInnhold = utledRedigerbartInnhold(opprinneligHtml);
+    const opprinneligRedigerbartInnhold = utledRedigerbartInnhold(opprinneligHtml, harPraksisUtsettelse);
     editor.blocks.renderFromHTML(opprinneligRedigerbartInnhold.replace(SPACE_REGEX, '$1'));
 
     mellomlagreBrevOverstyring(null);
@@ -108,7 +115,7 @@ export const useEditorJs = (
     const html = edjsHTML().parse(innhold);
 
     if (refCurrentHtml.current !== html) {
-      mellomlagreBrevOverstyring(lagRedigerbartInnholdHtml(html, readonlyInnhold.footer));
+      mellomlagreBrevOverstyring(harPraksisUtsettelse ? html : lagRedigerbartInnholdWrapper(html, footer));
     }
   };
 
@@ -129,7 +136,7 @@ export const useEditorJs = (
       automatiskVedtaksbrev: false,
       dokumentMal: DokumentMalType.FRITEKST_HTML,
       gjelderVedtak: true,
-      fritekst: lagRedigerbartInnholdHtml(html, readonlyInnhold.footer),
+      fritekst: harPraksisUtsettelse ? html : lagRedigerbartInnholdWrapper(html, footer),
     });
   };
 

@@ -2,6 +2,9 @@ import { generate, parse, walk } from 'css-tree';
 
 import { notEmpty } from '@navikt/fp-utils';
 
+export const lagRedigerbartInnholdWrapper = (redigerbartInnhold: string, readonlyFooter: string) =>
+  `<div id="redigerbart-innhold" data-editable="data-editable">${redigerbartInnhold}</div><div id="readonly-innhold">${readonlyFooter}</div>`;
+
 export const utledStiler = (html: string) => {
   const heleBrevet = new DOMParser().parseFromString(html, 'text/html');
   const stiler = heleBrevet.querySelector('style')?.innerHTML;
@@ -43,7 +46,7 @@ export const utledStiler = (html: string) => {
   return generate(styleAst);
 };
 
-export const utledReadonlyInnhold = (html: string) => {
+export const utledDelerFraBrev = (html: string) => {
   const heleBrevet = new DOMParser().parseFromString(html, 'text/html');
   const navLogo = notEmpty(heleBrevet.getElementById('logo')?.innerHTML, 'Nav-logo finnes ikke i mal');
   const header = notEmpty(heleBrevet.getElementById('header')?.innerHTML, 'Header finnes ikke i mal');
@@ -55,9 +58,22 @@ export const utledReadonlyInnhold = (html: string) => {
   return { navLogo, header, footer };
 };
 
-export const utledRedigerbartInnhold = (html: string): string => {
+export const utledRedigerbartInnhold = (html: string, harPraksisUtsettelse: boolean): string => {
   const heleBrevet = new DOMParser().parseFromString(html, 'text/html');
-  return notEmpty(heleBrevet.querySelector('[data-editable]')?.innerHTML, 'Redigerbart innhold finnes ikke i mal');
+
+  const editertbartInnhold = notEmpty(
+    heleBrevet.querySelector('[data-editable]')?.innerHTML,
+    'Redigerbart innhold finnes ikke i mal',
+  );
+
+  if (harPraksisUtsettelse) {
+    return (
+      editertbartInnhold +
+      notEmpty(heleBrevet.getElementById('readonly-innhold')?.innerHTML, 'Readonly-innhold finnes ikke i mal')
+    );
+  }
+
+  return editertbartInnhold;
 };
 
 export const erRedigertHtmlGyldig = (html: string): boolean => {

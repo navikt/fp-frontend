@@ -1,4 +1,4 @@
-import { type ComponentProps } from 'react';
+import { type ComponentProps, useState } from 'react';
 
 import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
@@ -10,9 +10,11 @@ import {
   BehandlingResultatType,
   BehandlingStatus,
   BehandlingType,
+  FagsakMarkeringKode,
   FagsakYtelseType,
   KonsekvensForYtelsen,
   OppgaveType,
+  RelasjonsRolleType,
   VilkarType,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
@@ -82,7 +84,29 @@ const meta = {
     refetchBrevOverstyring: action('button-click'),
     mellomlagreBrevOverstyring: action('button-click') as (html: string | null) => Promise<void>,
   },
-  render: args => <VedtakProsessIndex {...args} />,
+  render: args => {
+    const [redigertHtml, setRedigertHtml] = useState<string | null>(null);
+
+    const mellomlagreBrevOverstyring = (redigert: string | null) => {
+      setRedigertHtml(redigert);
+      return args.mellomlagreBrevOverstyring(redigert);
+    };
+
+    return (
+      <VedtakProsessIndex
+        {...args}
+        mellomlagreBrevOverstyring={mellomlagreBrevOverstyring}
+        brevOverstyring={
+          redigertHtml && args.brevOverstyring
+            ? {
+                opprinneligHtml: args.brevOverstyring.opprinneligHtml,
+                redigertHtml,
+              }
+            : args.brevOverstyring
+        }
+      />
+    );
+  },
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof VedtakProsessIndex>>;
 export default meta;
 
@@ -758,6 +782,31 @@ export const LegacyOverstyringHarSendtTilbakeFraBeslutter: Story = {
     beregningresultatDagytelse: defaultberegningresultatDagytelse,
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    } as Fagsak,
+    isReadOnly: false,
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
+  },
+};
+
+export const SkalKunneRedigereFooterNårEnHarFagsakmarkeringPraksisUtsettelse: Story = {
+  args: {
+    behandling: defaultBehandling,
+    beregningresultatDagytelse: defaultberegningresultatDagytelse,
+    fagsak: {
+      saksnummer: '1234567',
+      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+      bruker: { navn: 'Kari Nordmann' },
+      annenPart: { navn: 'Ola Nordmann' },
+      relasjonsRolleType: RelasjonsRolleType.MOR,
+      annenpartBehandling: {
+        relasjonsRolleType: RelasjonsRolleType.FAR,
+      },
+      fagsakMarkeringer: [
+        {
+          fagsakMarkering: FagsakMarkeringKode.PRAKSIS_UTSETTELSE,
+          kortNavn: FagsakMarkeringKode.PRAKSIS_UTSETTELSE,
+        },
+      ],
     } as Fagsak,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },

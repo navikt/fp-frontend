@@ -3,10 +3,11 @@ import { FormattedMessage } from 'react-intl';
 import { ArrowUndoIcon, FileSearchIcon } from '@navikt/aksel-icons';
 import { Alert, Button, HStack, VStack } from '@navikt/ds-react';
 
+import { FagsakMarkeringKode } from '@navikt/fp-kodeverk';
 import type { BrevOverstyring } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
-import { utledReadonlyInnhold, utledStiler } from './redigeringsUtils';
+import { utledDelerFraBrev, utledStiler } from './redigeringsUtils';
 
 import styles from './brevInnhold.module.css';
 
@@ -27,22 +28,26 @@ export const BrevInnhold = ({
   forhåndsvis,
   lagreOgLukk,
 }: Props) => {
-  const { isReadOnly } = usePanelDataContext();
+  const { isReadOnly, fagsak } = usePanelDataContext();
+
+  const harPraksisUtsettelse = !!fagsak.fagsakMarkeringer?.some(
+    markering => markering.kortNavn === FagsakMarkeringKode.PRAKSIS_UTSETTELSE,
+  );
 
   const brevStiler = utledStiler(brevOverstyring.opprinneligHtml);
-  const readonlyInnhold = utledReadonlyInnhold(brevOverstyring.opprinneligHtml);
+  const { navLogo, header, footer } = utledDelerFraBrev(brevOverstyring.opprinneligHtml);
 
   return (
     <>
       <div className={styles.dokument}>
         <div className="brev-wrapper">
           <style>{` ${brevStiler} `}</style>
-          <div className={styles.logo} dangerouslySetInnerHTML={{ __html: readonlyInnhold.navLogo }} />
-          <div className={styles.header} dangerouslySetInnerHTML={{ __html: readonlyInnhold.header }} />
+          <div className={styles.logo} dangerouslySetInnerHTML={{ __html: navLogo }} />
+          <div className={styles.header} dangerouslySetInnerHTML={{ __html: header }} />
           <div id="content">
             <div id={EDITOR_HOLDER_ID} className={styles.redigerbartInnhold} />
           </div>
-          <div className={styles.footer} dangerouslySetInnerHTML={{ __html: readonlyInnhold.footer }} />
+          {!harPraksisUtsettelse && <div className={styles.footer} dangerouslySetInnerHTML={{ __html: footer }} />}
         </div>
       </div>
       <footer>
