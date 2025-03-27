@@ -130,6 +130,8 @@ export const VedtakFellesPanel = ({
     behandlingsresultat,
   );
 
+  const harValgtÅOverstyreMenIkkeOverstyrt = harOverstyrtVedtaksbrev && !brevOverstyring?.redigertHtml;
+
   return (
     <VStack gap="4">
       <OkAvbrytModal
@@ -228,7 +230,12 @@ export const VedtakFellesPanel = ({
         )}
         {!isReadOnly && kanSendesTilGodkjenning(status) && (
           <div>
-            <Button variant="primary" size="small" disabled={behandlingPåVent || isSubmitting} loading={isSubmitting}>
+            <Button
+              variant="primary"
+              size="small"
+              disabled={behandlingPåVent || isSubmitting || harValgtÅOverstyreMenIkkeOverstyrt}
+              loading={isSubmitting}
+            >
               <FormattedMessage id={finnKnappetekstkode(aksjonspunkt, harOverstyrtVedtaksbrev)} />
             </Button>
           </div>
