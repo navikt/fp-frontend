@@ -13,8 +13,7 @@ import {
 } from '@navikt/fp-storybook-utils';
 import { notEmpty } from '@navikt/fp-utils';
 
-import { initFetchFpsak } from '../../../.storybook/testdata/initFetchFpsak';
-import { initFetchFptilbake } from '../../../.storybook/testdata/initFetchFptilbake';
+import { initFetchFpsak, initFetchFptilbake } from '../../../.storybook/testdata';
 import { FagsakRel, FagsakUrl, initFetchOptions, useFagsakApi, wrapUrl } from '../../data/fagsakApi';
 import { UtvidEllerMinskKnapp } from '../UtvidEllerMinskKnapp.tsx';
 import { HistorikkIndex } from './HistorikkIndex';

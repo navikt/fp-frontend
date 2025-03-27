@@ -17,9 +17,7 @@ import type { BehandlingAppKontekst, BehandlingOppretting, Fagsak } from '@navik
 import { VergeBehandlingmenyValg } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
-import { behandling } from '../../.storybook/testdata/behandling.ts';
-import { initFetchFpsak } from '../../.storybook/testdata/initFetchFpsak';
-import { initFetchFptilbake } from '../../.storybook/testdata/initFetchFptilbake';
+import { behandling, initFetchFpsak, initFetchFptilbake } from '../../.storybook/testdata';
 import { BehandlingUrl } from '../data/behandlingApi';
 import { FagsakRel, FagsakUrl, initFetchOptions, useFagsakApi, wrapUrl } from '../data/fagsakApi';
 import { RequestPendingProvider } from '../data/polling/RequestPendingContext';

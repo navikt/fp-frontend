@@ -5,7 +5,7 @@ import { http, HttpResponse } from 'msw';
 
 import { getIntlDecorator, withQueryClient, withRouter } from '@navikt/fp-storybook-utils';
 
-import { initFetchFpsak } from '../../../.storybook/testdata/initFetchFpsak';
+import { initFetchFpsak } from '../../../.storybook/testdata';
 import { FagsakUrl, initFetchOptions } from '../../data/fagsakApi';
 import { Dekorator } from './Dekorator';
 

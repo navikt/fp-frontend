@@ -16,8 +16,7 @@ import type { BehandlingAppKontekst, BehandlingOppretting, Fagsak } from '@navik
 import { VergeBehandlingmenyValg } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
-import { initFetchFpsak } from '../../../.storybook/testdata/initFetchFpsak';
-import { initFetchFptilbake } from '../../../.storybook/testdata/initFetchFptilbake';
+import { initFetchFpsak, initFetchFptilbake } from '../../../.storybook/testdata';
 import { FagsakRel, FagsakUrl, initFetchOptions, useFagsakApi, wrapUrl } from '../../data/fagsakApi';
 import { FagsakData } from '../../fagsak/FagsakData';
 import { UtvidEllerMinskKnapp } from '../UtvidEllerMinskKnapp.tsx';

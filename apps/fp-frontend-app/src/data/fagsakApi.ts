@@ -72,10 +72,7 @@ const kyExtended = ky.extend({
 
 //MÅ være en gyldig URL for at KY skal fungere i test
 const isTest = import.meta.env.MODE === 'test';
-export const wrapUrl = (url: string): string => {
-  const urlWithoutSearchParams = url.split('?')[0];
-  return isTest ? `http://www.test.com${urlWithoutSearchParams}` : urlWithoutSearchParams;
-};
+export const wrapUrl = (url: string): string => (isTest ? `http://www.test.com${url}` : url);
 
 const getUrlFromRel = (rel: keyof typeof FagsakRel, links: ApiLink[] = []): string => {
   const link = links.find(l => l.rel === FagsakRel[rel]);
