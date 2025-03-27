@@ -40,6 +40,7 @@ const meta = {
         tittel: 'Dette er et dokument',
         tidspunkt: '2017-08-02T00:54:25.455',
         kommunikasjonsretning: Kommunikasjonsretning.INN,
+        gjelderFor: null,
       },
     ],
   },
