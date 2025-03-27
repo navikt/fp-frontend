@@ -7,28 +7,30 @@ import { http, HttpResponse } from 'msw';
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
 import { alleKodeverk, alleKodeverkTilbakekreving } from '@navikt/fp-storybook-utils';
 
-import { alleInntektsmeldinger } from '../../.storybook/testdata/alleInntektsmeldinger';
-import { arbeidInntektsmelding } from '../../.storybook/testdata/arbeidInntektsmelding';
-import { arbeidsgiverOpplysninger } from '../../.storybook/testdata/arbeidsgiverOpplysninger';
-import { behandling } from '../../.storybook/testdata/behandling';
-import { beregningresultatDagytelse } from '../../.storybook/testdata/beregningresultatDagytelse';
-import { beregningsgrunnlag } from '../../.storybook/testdata/beregningsgrunnlag';
-import { dokumenter } from '../../.storybook/testdata/dokumenter';
-import { fagsakFullFpsak } from '../../.storybook/testdata/fagsakFullFpsak';
-import { fagsakFullTilbake } from '../../.storybook/testdata/fagsakFullTilbake';
-import { faktaArbeidsforhold } from '../../.storybook/testdata/faktaArbeidsforhold';
-import { familiehendelse } from '../../.storybook/testdata/familiehendelse';
-import { feriepengeGrunnlag } from '../../.storybook/testdata/feriepengeGrunnlag';
-import { initFetchFpsak } from '../../.storybook/testdata/initFetchFpsak';
-import { initFetchFptilbake } from '../../.storybook/testdata/initFetchFptilbake';
-import { inntektArbeidYtelse } from '../../.storybook/testdata/inntektArbeidYtelse';
-import { kontrollerFaktaPeriode } from '../../.storybook/testdata/kontrollerFaktaPeriode';
-import { medlemskap } from '../../.storybook/testdata/medlemskap';
-import { omsorgOgRett } from '../../.storybook/testdata/omsorgOgRett';
-import { opptjening } from '../../.storybook/testdata/opptjening';
-import { personoversikt } from '../../.storybook/testdata/personoversikt';
-import { soknad } from '../../.storybook/testdata/soknad';
-import { ytelseFordeling } from '../../.storybook/testdata/ytelseFordeling';
+import {
+  alleInntektsmeldinger,
+  arbeidInntektsmelding,
+  arbeidsgiverOpplysninger,
+  behandling,
+  beregningresultatDagytelse,
+  beregningsgrunnlag,
+  dokumenter,
+  fagsakFullFpsak,
+  fagsakFullTilbake,
+  faktaArbeidsforhold,
+  familiehendelse,
+  feriepengeGrunnlag,
+  initFetchFpsak,
+  initFetchFptilbake,
+  inntektArbeidYtelse,
+  kontrollerFaktaPeriode,
+  medlemskap,
+  omsorgOgRett,
+  opptjening,
+  personoversikt,
+  soknad,
+  ytelseFordeling,
+} from '../../.storybook/testdata';
 import { BehandlingRel, BehandlingUrl } from '../data/behandlingApi';
 import { RestApiErrorProvider } from '../data/error/RestApiErrorContext';
 import { FagsakRel, FagsakUrl, wrapUrl } from '../data/fagsakApi';
