@@ -25,7 +25,7 @@ const FAGSAK_MED_MARKERING_PRAKSIS_UTSETTELSE = {
   fagsakMarkeringer: [
     {
       fagsakMarkering: FagsakMarkeringKode.PRAKSIS_UTSETTELSE,
-      kortNavn: FagsakMarkeringKode.PRAKSIS_UTSETTELSE,
+      kortNavn: 'Utsettelse',
     },
   ],
 } as Fagsak;

@@ -804,7 +804,7 @@ export const SkalKunneRedigereFooterNårEnHarFagsakmarkeringPraksisUtsettelse: S
       fagsakMarkeringer: [
         {
           fagsakMarkering: FagsakMarkeringKode.PRAKSIS_UTSETTELSE,
-          kortNavn: FagsakMarkeringKode.PRAKSIS_UTSETTELSE,
+          kortNavn: 'Utsettelse',
         },
       ],
     } as Fagsak,

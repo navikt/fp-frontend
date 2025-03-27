@@ -35,7 +35,7 @@ export const useEditorJs = (
 
   const { fagsak } = usePanelDataContext();
   const harPraksisUtsettelse = !!fagsak.fagsakMarkeringer?.some(
-    markering => markering.kortNavn === FagsakMarkeringKode.PRAKSIS_UTSETTELSE,
+    markering => markering.fagsakMarkering === FagsakMarkeringKode.PRAKSIS_UTSETTELSE,
   );
 
   //Denne blir kun brukt for å hindre tullball grunna to renders i DEV => React.StrictMode

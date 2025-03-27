@@ -31,7 +31,7 @@ export const BrevInnhold = ({
   const { isReadOnly, fagsak } = usePanelDataContext();
 
   const harPraksisUtsettelse = !!fagsak.fagsakMarkeringer?.some(
-    markering => markering.kortNavn === FagsakMarkeringKode.PRAKSIS_UTSETTELSE,
+    markering => markering.fagsakMarkering === FagsakMarkeringKode.PRAKSIS_UTSETTELSE,
   );
 
   const brevStiler = utledStiler(brevOverstyring.opprinneligHtml);
