@@ -7,8 +7,6 @@ import { hentDokumentLenke } from '@navikt/fp-konstanter';
 import type { OppgaveDokument } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
-import styles from './dokumentVisning.module.css';
-
 interface Props {
   dokument: OppgaveDokument;
 }
@@ -21,7 +19,7 @@ export const DokumentVisning = ({ dokument }: Props) => {
     <Link href={hentDokumentLenke(fagsak.saksnummer, dokument.journalpostId, dokument.dokumentId)} target="_blank">
       <HStack gap="1">
         <FileIcon width="20" height="20" aria-label={intl.formatMessage({ id: 'DokumentVisning.FilIkon' })} />
-        <BodyShort size="small" className={styles.dokumentTittel}>
+        <BodyShort size="small">
           {dokument.tittel ? dokument.tittel : intl.formatMessage({ id: 'DokumentVisning.UkjentTittel' })}
         </BodyShort>
       </HStack>

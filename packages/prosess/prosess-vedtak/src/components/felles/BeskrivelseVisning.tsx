@@ -1,15 +1,16 @@
 import { BodyShort, VStack } from '@navikt/ds-react';
 
+import type { Beskrivelse } from '@navikt/fp-types';
+
 interface Props {
-  header: string | null;
-  kommentarer: string[];
+  beskrivelse: Beskrivelse;
 }
 
-export const BeskrivelseVisning = ({ header, kommentarer }: Props) => {
+export const BeskrivelseVisning = ({ beskrivelse }: Props) => {
   return (
     <VStack gap="1">
-      {header && <BodyShort size="small">{header}</BodyShort>}
-      {kommentarer.map(kommentar => (
+      {beskrivelse.header && <BodyShort size="small">{beskrivelse.header}</BodyShort>}
+      {beskrivelse.kommentarer.map(kommentar => (
         <BodyShort key={kommentar} size="small">
           {kommentar}
         </BodyShort>
