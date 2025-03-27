@@ -2,8 +2,8 @@ import { generate, parse, walk } from 'css-tree';
 
 import { notEmpty } from '@navikt/fp-utils';
 
-export const lagRedigerbartInnholdWrapper = (redigerbartInnhold: string, readonlyFooter: string) =>
-  `<div id="redigerbart-innhold" data-editable="data-editable">${redigerbartInnhold}</div><div id="readonly-innhold">${readonlyFooter}</div>`;
+export const lagRedigerbartInnholdWrapper = (redigerbartInnhold: string, readonlyFooter: string | undefined) =>
+  `<div id="redigerbart-innhold" data-editable="data-editable">${redigerbartInnhold}</div><div id="readonly-innhold">${readonlyFooter ?? ''}</div>`;
 
 export const utledStiler = (html: string) => {
   const heleBrevet = new DOMParser().parseFromString(html, 'text/html');

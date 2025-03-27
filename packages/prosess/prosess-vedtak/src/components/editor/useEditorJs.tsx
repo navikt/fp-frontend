@@ -94,7 +94,10 @@ export const useEditorJs = (
     const html = edjsHTML().parse(innhold);
 
     if (refCurrentHtml.current !== html && erRedigertHtmlGyldig(html)) {
-      mellomlagreBrevOverstyring(harPraksisUtsettelse ? html : lagRedigerbartInnholdWrapper(html, footer));
+      const redigertTekst = harPraksisUtsettelse
+        ? lagRedigerbartInnholdWrapper(html, undefined)
+        : lagRedigerbartInnholdWrapper(html, footer);
+      mellomlagreBrevOverstyring(redigertTekst);
     }
   };
 
@@ -115,7 +118,10 @@ export const useEditorJs = (
     const html = edjsHTML().parse(innhold);
 
     if (refCurrentHtml.current !== html) {
-      mellomlagreBrevOverstyring(harPraksisUtsettelse ? html : lagRedigerbartInnholdWrapper(html, footer));
+      const redigertTekst = harPraksisUtsettelse
+        ? lagRedigerbartInnholdWrapper(html, undefined)
+        : lagRedigerbartInnholdWrapper(html, footer);
+      mellomlagreBrevOverstyring(redigertTekst);
     }
   };
 
