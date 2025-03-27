@@ -1,17 +1,17 @@
 export type Oppgave = {
   oppgavetype: string;
-  nyesteBeskrivelse?: Beskrivelse;
+  nyesteBeskrivelse: Beskrivelse | null;
   eldreBeskrivelser: Beskrivelse[];
   dokumenter: OppgaveDokument[];
 };
 
 export type Beskrivelse = {
-  header?: string;
+  header: string | null;
   kommentarer: string[];
 };
 
 export type OppgaveDokument = {
   journalpostId: string;
   dokumentId: string;
-  tittel?: string;
+  tittel: string | null;
 };

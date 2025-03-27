@@ -11,7 +11,7 @@ import { BeskrivelseVisning } from './BeskrivelseVisning';
 import styles from './beskrivelser.module.css';
 
 interface Props {
-  nyesteBeskrivelse?: Beskrivelse;
+  nyesteBeskrivelse: Beskrivelse;
   eldreBeskrivelser: Beskrivelse[];
 }
 

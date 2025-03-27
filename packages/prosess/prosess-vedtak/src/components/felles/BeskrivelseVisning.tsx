@@ -1,7 +1,7 @@
 import { BodyShort, VStack } from '@navikt/ds-react';
 
 interface Props {
-  header?: string;
+  header: string | null;
   kommentarer: string[];
 }
 
