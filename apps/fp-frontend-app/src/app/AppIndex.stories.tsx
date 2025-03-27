@@ -108,7 +108,7 @@ const HANDLERS = [
 ];
 
 const meta = {
-  title: 'app/AppIndex',
+  title: 'AppIndex',
   component: AppIndexWrapper,
   render: () => {
     const fagsakId = '1';

@@ -50,7 +50,9 @@ describe('AppIndex', () => {
     expect(screen.getByText(/Født 05.03.2025/)).toBeInTheDocument();
 
     // Vent til prosesspanel er ferdig lastet
-    await waitFor(() => expect(screen.queryByText(/Venter…/)).not.toBeInTheDocument());
+    await waitFor(() => {
+      expect(screen.queryByText('Venter…')).not.toBeInTheDocument();
+    });
 
     const prosessMeny = within(await screen.findByTestId('prosess-meny'));
     expect(prosessMeny.getByText('Opplysningsplikt')).toBeInTheDocument();
