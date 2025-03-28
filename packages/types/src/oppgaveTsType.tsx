@@ -1,7 +1,6 @@
 export type Oppgave = {
   oppgavetype: string;
-  nyesteBeskrivelse: Beskrivelse | null;
-  eldreBeskrivelser: Beskrivelse[];
+  beskrivelser: Beskrivelse[];
   dokumenter: OppgaveDokument[];
 };
 
